@@ -1,0 +1,314 @@
+[
+  {
+    "id": "data-question-grain-1",
+    "lessonId": "data-question-grain",
+    "question": "What is the grain of touches?",
+    "options": [
+      "One interaction per touch identifier",
+      "One queue",
+      "One current-state ticket",
+      "One reporting month"
+    ],
+    "answer": 0,
+    "why": "Each touch is an interaction and several can belong to one ticket."
+  },
+  {
+    "id": "data-question-grain-2",
+    "lessonId": "data-question-grain",
+    "question": "What does the 5/7 closed share mean here?",
+    "options": [
+      "Five tickets necessarily closed during November 1–2",
+      "Five of seven tickets opened in the interval are closed in the frozen snapshot",
+      "Every queue met an SLA",
+      "The average resolution time is known"
+    ],
+    "answer": 1,
+    "why": "The filter selects an opening cohort; the status field comes from the snapshot, not a closure timestamp."
+  },
+  {
+    "id": "data-question-grain-3",
+    "lessonId": "data-question-grain",
+    "question": "Both tickets and touches contain nine rows. What follows?",
+    "options": [
+      "Their relationship must be one-to-one",
+      "All tickets have exactly one touch",
+      "Nothing about cardinality without examining keys and matches",
+      "The data is duplicated"
+    ],
+    "answer": 2,
+    "why": "Total row counts alone do not reveal how records relate."
+  },
+  {
+    "id": "data-csv-types-1",
+    "lessonId": "data-csv-types",
+    "question": "How is an empty work_minutes field interpreted by this pack?",
+    "options": [
+      "As zero",
+      "As the text NULL",
+      "As proof no work occurred",
+      "As a missing value, stored as SQL NULL"
+    ],
+    "answer": 3,
+    "why": "The ingestion contract distinguishes absence from a recorded numeric zero."
+  },
+  {
+    "id": "data-csv-types-2",
+    "lessonId": "data-csv-types",
+    "question": "Why use a CSV parser instead of splitting on commas?",
+    "options": [
+      "It correctly handles quoted commas inside a field",
+      "It invents missing data",
+      "It removes all schema validation needs",
+      "It makes every value numeric"
+    ],
+    "answer": 0,
+    "why": "The supplied summary contains a quoted comma that belongs inside one field."
+  },
+  {
+    "id": "data-csv-types-3",
+    "lessonId": "data-csv-types",
+    "question": "What do bound SQL parameters do?",
+    "options": [
+      "Make the business question automatically correct",
+      "Keep supplied values separate from SQL statement syntax",
+      "Choose any table name safely",
+      "Replace foreign-key checks"
+    ],
+    "answer": 1,
+    "why": "Parameter binding controls value insertion; it does not define semantics or replace schema rules."
+  },
+  {
+    "id": "data-filter-population-1",
+    "lessonId": "data-filter-population",
+    "question": "Which interval includes the start but excludes the end?",
+    "options": [
+      "opened_at > start AND opened_at <= end",
+      "opened_at = end only",
+      "opened_at >= start AND opened_at < end",
+      "Any LIMIT clause"
+    ],
+    "answer": 2,
+    "why": "The half-open interval prevents overlap at a shared adjacent-period boundary."
+  },
+  {
+    "id": "data-filter-population-2",
+    "lessonId": "data-filter-population",
+    "question": "Does T-007 at exactly 2026-11-03T00:00:00Z belong in the main cohort?",
+    "options": [
+      "Yes",
+      "Only if sorted first",
+      "Its status decides the timestamp boundary",
+      "No, it is exactly the excluded end"
+    ],
+    "answer": 3,
+    "why": "The main interval ends immediately before that timestamp."
+  },
+  {
+    "id": "data-filter-population-3",
+    "lessonId": "data-filter-population",
+    "question": "Why specify ticket_id after opened_at in ORDER BY?",
+    "options": [
+      "To make ties deterministic",
+      "To change the filter population",
+      "To prove random sampling",
+      "To remove NULL values"
+    ],
+    "answer": 0,
+    "why": "A stable tie-breaker makes repeated presentation and tests reproducible."
+  },
+  {
+    "id": "data-null-metrics-1",
+    "lessonId": "data-null-metrics",
+    "question": "Why is COUNT(work_minutes) four while COUNT(*) is seven?",
+    "options": [
+      "SQLite lost three rows",
+      "Three work values are NULL",
+      "Zero is excluded from COUNT(column)",
+      "Every closed ticket is excluded"
+    ],
+    "answer": 1,
+    "why": "COUNT(column) counts non-NULL values, including a recorded zero."
+  },
+  {
+    "id": "data-null-metrics-2",
+    "lessonId": "data-null-metrics",
+    "question": "What is the mean of the observed work values?",
+    "options": [
+      "15",
+      "105",
+      "26.25",
+      "0"
+    ],
+    "answer": 2,
+    "why": "The observed values sum to 105 across four measurements, giving 26.25."
+  },
+  {
+    "id": "data-null-metrics-3",
+    "lessonId": "data-null-metrics",
+    "question": "What should an empty cohort’s closed share represent?",
+    "options": [
+      "A guaranteed zero-percent service outcome",
+      "One hundred percent",
+      "The previous cohort’s result",
+      "An undefined rate, represented as NULL"
+    ],
+    "answer": 3,
+    "why": "There is no denominator, so a meaningful rate cannot be computed for that population."
+  },
+  {
+    "id": "data-join-cardinality-1",
+    "lessonId": "data-join-cardinality",
+    "question": "Why does the naive join inflate ticket work?",
+    "options": [
+      "Multiple touches repeat the ticket-level measure",
+      "NULL always doubles data",
+      "The CSV reader changes 30 to 60",
+      "All joins are invalid"
+    ],
+    "answer": 0,
+    "why": "The one-to-many relationship changes the result grain before aggregation."
+  },
+  {
+    "id": "data-join-cardinality-2",
+    "lessonId": "data-join-cardinality",
+    "question": "Why is SUM(DISTINCT work_minutes) wrong here?",
+    "options": [
+      "It retains every ticket identity",
+      "It removes one of two legitimate equal 30-minute measurements",
+      "It always gives 105",
+      "It only removes missing values"
+    ],
+    "answer": 1,
+    "why": "Distinct values are not distinct business records; equal measurements can belong to different tickets."
+  },
+  {
+    "id": "data-join-cardinality-3",
+    "lessonId": "data-join-cardinality",
+    "question": "How does the corrected query preserve ticket grain?",
+    "options": [
+      "By dropping tickets with no touches",
+      "By removing all keys",
+      "By grouping touches to one row per ticket before joining",
+      "By sorting the inflated total"
+    ],
+    "answer": 2,
+    "why": "Preaggregation makes the detail-side relationship at most one matching row per ticket."
+  },
+  {
+    "id": "data-time-series-1",
+    "lessonId": "data-time-series",
+    "question": "Why does November 4 appear with zero tickets?",
+    "options": [
+      "The query invents a ticket",
+      "NULL always means zero activity",
+      "The main cohort includes every future day",
+      "The calendar preserves the date and no ticket matches it"
+    ],
+    "answer": 3,
+    "why": "The known calendar date survives the left join; zero is meaningful under the fixture’s complete synthetic coverage."
+  },
+  {
+    "id": "data-time-series-2",
+    "lessonId": "data-time-series",
+    "question": "Why does the dates command total eight rather than seven?",
+    "options": [
+      "It uses a wider interval that includes T-007",
+      "A join bug necessarily occurred",
+      "The average was rounded",
+      "The snapshot changed during execution"
+    ],
+    "answer": 0,
+    "why": "The daily exercise ends at November 5, while the main cohort ends at November 3."
+  },
+  {
+    "id": "data-time-series-3",
+    "lessonId": "data-time-series",
+    "question": "What does the running window SUM preserve?",
+    "options": [
+      "Only one final row",
+      "One output row per day with a cumulative value",
+      "A random row order",
+      "A causal forecast"
+    ],
+    "answer": 1,
+    "why": "A window function calculates across related rows while retaining the daily result rows."
+  },
+  {
+    "id": "data-quality-transactions-1",
+    "lessonId": "data-quality-transactions",
+    "question": "Why does the lab check PRAGMA foreign_keys?",
+    "options": [
+      "A schema declaration alone is enough in every SQLite connection",
+      "It counts NULL values",
+      "Enforcement must be enabled and verified for the connection",
+      "It deploys a server"
+    ],
+    "answer": 2,
+    "why": "The lab verifies that the actual connection enforces the declared relationship."
+  },
+  {
+    "id": "data-quality-transactions-2",
+    "lessonId": "data-quality-transactions",
+    "question": "After the second insert fails and the whole batch is rolled back, should T-900 remain?",
+    "options": [
+      "Yes, because it was valid",
+      "Only if sorted first",
+      "It becomes a NULL row",
+      "No, the transaction rollback removes the batch’s earlier insert too"
+    ],
+    "answer": 3,
+    "why": "The intended atomic batch returns to the pre-transaction state."
+  },
+  {
+    "id": "data-quality-transactions-3",
+    "lessonId": "data-quality-transactions",
+    "question": "What does integrity_check=ok fail to prove?",
+    "options": [
+      "All business facts and measurement definitions are correct",
+      "The check ran",
+      "The local database passed that structural check",
+      "A result was returned"
+    ],
+    "answer": 0,
+    "why": "Structural database checks cannot establish the truth or suitability of business data."
+  },
+  {
+    "id": "data-explain-deliver-1",
+    "lessonId": "data-explain-deliver",
+    "question": "What does Training’s empty exported mean field represent?",
+    "options": [
+      "A recorded zero-minute mean",
+      "SQL NULL under the documented CSV convention",
+      "A deleted queue",
+      "A guaranteed spreadsheet error"
+    ],
+    "answer": 1,
+    "why": "The queue has no cohort observations, so its mean is absent, not zero."
+  },
+  {
+    "id": "data-explain-deliver-2",
+    "lessonId": "data-explain-deliver",
+    "question": "Which conclusion is supported?",
+    "options": [
+      "A real team is faster than another",
+      "The SQL pass guarantees PL-300 readiness",
+      "The synthetic cohort has five closed snapshot statuses among seven tickets, with stated measurement gaps",
+      "Missing values can be ignored without disclosure"
+    ],
+    "answer": 2,
+    "why": "The statement stays within the actual population, snapshot and available evidence."
+  },
+  {
+    "id": "data-explain-deliver-3",
+    "lessonId": "data-explain-deliver",
+    "question": "Does this pack complete PL-300 preparation?",
+    "options": [
+      "Yes, SQL is the whole exam",
+      "Yes, because it exports CSV",
+      "Only the artifact filename matters",
+      "No; Power BI-specific work and broader objectives remain unexecuted or uncovered"
+    ],
+    "answer": 3,
+    "why": "This is a data/SQL foundation, not full Power BI implementation practice or an exam-readiness assessment."
+  }
+]

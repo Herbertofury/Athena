@@ -9,4 +9,4 @@ Learning, engineering Research, Media workbench and the local R&D Lab share one 
 - [Local evidence engine: startup, capabilities and limits](Engineering-Athena-Local-Runtime)
 - [The Packet Trail](Packet-Trail)
 
-Feature Foundry is private and remains excluded pending approval for public publication. No live deployment or native-browser parity is claimed without its own verified run evidence. Original source/history remains preserved; it is not a substitute for functional integration.
+Feature Foundry integration and verification are in progress; it is not included in this build. No live deployment or native-browser parity is claimed without its own verified run evidence. Original source/history remains preserved; it is not a substitute for functional integration.

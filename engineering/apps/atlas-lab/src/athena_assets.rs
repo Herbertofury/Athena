@@ -34,6 +34,7 @@ fn content_type(path: &str) -> Option<&'static str> {
         "js" | "mjs" => "text/javascript; charset=utf-8",
         "css" => "text/css; charset=utf-8",
         "json" => "application/json",
+        "zip" => "application/zip",
         "txt" => "text/plain; charset=utf-8",
         "svg" => "image/svg+xml",
         "png" => "image/png",
@@ -201,6 +202,136 @@ mod tests {
         )
         .unwrap();
         root
+    }
+    // A complete, deterministic stored ZIP with one README entry. Loading is
+    // byte serving only: the runtime neither extracts nor executes its contents.
+    const ZIP_BYTES: &[u8] = b"PK\x03\x04\x14\x00\x00\x00\x00\x00\x00\x00g]\xdd\x0b6M\x17\x00\x00\x00\x17\x00\x00\x00\x0a\x00\x00\x00README.txtOffline practice only.\x0aPK\x01\x02\x14\x03\x14\x00\x00\x00\x00\x00\x00\x00g]\xdd\x0b6M\x17\x00\x00\x00\x17\x00\x00\x00\x0a\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x80\x01\x00\x00\x00\x00README.txtPK\x05\x06\x00\x00\x00\x00\x01\x00\x01\x008\x00\x00\x00?\x00\x00\x00\x00\x00";
+    const ZIP_PATH: &str = "workshops/security/learner-pack.zip";
+
+    fn zip_fixture() -> std::path::PathBuf {
+        let root = fixture();
+        std::fs::create_dir_all(root.join("workshops/security")).unwrap();
+        std::fs::write(root.join(ZIP_PATH), ZIP_BYTES).unwrap();
+        let manifest = root.join("athena-runtime-manifest.json");
+        let mut value: serde_json::Value =
+            serde_json::from_slice(&std::fs::read(&manifest).unwrap()).unwrap();
+        value["files"]
+            .as_array_mut()
+            .unwrap()
+            .push(serde_json::json!({
+                "path": ZIP_PATH,
+                "bytes": ZIP_BYTES.len(),
+                "sha256": sha256_hex(ZIP_BYTES)
+            }));
+        std::fs::write(manifest, serde_json::to_vec(&value).unwrap()).unwrap();
+        root
+    }
+
+    #[test]
+    fn reviewed_zip_serves_exact_frozen_bytes_and_mime() {
+        let root = zip_fixture();
+        std::fs::write(root.join("workshops/security/unlisted.zip"), ZIP_BYTES).unwrap();
+        let loaded = RuntimeAssets::load(&root).unwrap();
+        let zip = loaded.get(&format!("/{ZIP_PATH}")).unwrap();
+        assert_eq!(zip.content_type, "application/zip");
+        assert_eq!(zip.sha256, sha256_hex(ZIP_BYTES));
+        assert_eq!(&*zip.bytes, ZIP_BYTES);
+        assert!(loaded.get("/workshops/security/unlisted.zip").is_none());
+        assert!(
+            loaded
+                .get("/workshops/security/../security/learner-pack.zip")
+                .is_none()
+        );
+        assert!(
+            loaded
+                .get("/workshops/security/%6cearner-pack.zip")
+                .is_none()
+        );
+        // Same-length tampering must fail hashing on reload; the already-loaded
+        // response remains the exact reviewed bytes instead of rereading disk.
+        let mut changed = ZIP_BYTES.to_vec();
+        changed[0] ^= 1;
+        std::fs::write(root.join(ZIP_PATH), changed).unwrap();
+        assert_eq!(&*zip.bytes, ZIP_BYTES);
+        assert_eq!(
+            RuntimeAssets::load(&root).err().as_deref(),
+            Some("Runtime asset hash or size mismatch")
+        );
+        std::fs::remove_dir_all(root).unwrap();
+    }
+
+    #[test]
+    fn zip_extension_does_not_bypass_manifest_path_hash_or_size_guards() {
+        for replacement in [
+            "../learner-pack.zip",
+            "/learner-pack.zip",
+            "workshops/.private/learner-pack.zip",
+            "workshops/security/../learner-pack.zip",
+            "api/learner-pack.zip",
+            "workshops\\security\\learner-pack.zip",
+        ] {
+            let root = zip_fixture();
+            let manifest = root.join("athena-runtime-manifest.json");
+            let mut value: serde_json::Value =
+                serde_json::from_slice(&std::fs::read(&manifest).unwrap()).unwrap();
+            value["files"].as_array_mut().unwrap().last_mut().unwrap()["path"] = replacement.into();
+            std::fs::write(manifest, serde_json::to_vec(&value).unwrap()).unwrap();
+            assert_eq!(
+                RuntimeAssets::load(&root).err().as_deref(),
+                Some("Invalid runtime asset declaration"),
+                "{replacement}"
+            );
+            std::fs::remove_dir_all(root).unwrap();
+        }
+        for (field, replacement, expected) in [
+            (
+                "sha256",
+                serde_json::json!("0".repeat(64)),
+                "Runtime asset hash or size mismatch",
+            ),
+            (
+                "sha256",
+                serde_json::json!("invalid"),
+                "Invalid runtime asset declaration",
+            ),
+            (
+                "bytes",
+                serde_json::json!(ZIP_BYTES.len() + 1),
+                "Runtime asset hash or size mismatch",
+            ),
+            (
+                "bytes",
+                serde_json::json!(MAX_FILE + 1),
+                "Invalid runtime asset declaration",
+            ),
+        ] {
+            let root = zip_fixture();
+            let manifest = root.join("athena-runtime-manifest.json");
+            let mut value: serde_json::Value =
+                serde_json::from_slice(&std::fs::read(&manifest).unwrap()).unwrap();
+            value["files"].as_array_mut().unwrap().last_mut().unwrap()[field] = replacement;
+            std::fs::write(manifest, serde_json::to_vec(&value).unwrap()).unwrap();
+            assert_eq!(
+                RuntimeAssets::load(&root).err().as_deref(),
+                Some(expected),
+                "{field}"
+            );
+            std::fs::remove_dir_all(root).unwrap();
+        }
+    }
+
+    #[cfg(unix)]
+    #[test]
+    fn zip_symlinks_remain_rejected() {
+        let root = zip_fixture();
+        let zip = root.join(ZIP_PATH);
+        std::fs::rename(&zip, root.join("source.zip")).unwrap();
+        std::os::unix::fs::symlink(root.join("source.zip"), zip).unwrap();
+        assert_eq!(
+            RuntimeAssets::load(&root).err().as_deref(),
+            Some("Runtime symlinks are not accepted")
+        );
+        std::fs::remove_dir_all(root).unwrap();
     }
     #[test]
     fn frozen_allowlist_never_serves_unlisted_files_or_later_changes() {

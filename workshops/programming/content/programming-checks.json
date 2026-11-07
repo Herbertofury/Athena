@@ -1,0 +1,314 @@
+[
+  {
+    "id": "prog-values-contract-1",
+    "lessonId": "prog-values-contract",
+    "question": "Which value is the quote project’s internal representation of a 12.50 unit price?",
+    "options": [
+      "The integer 1250 with the unit cents",
+      "The string \"12.50\"",
+      "A currency symbol alone",
+      "The boolean True"
+    ],
+    "answer": 0,
+    "why": "The contract uses integer cents for arithmetic and a separate formatting function for display."
+  },
+  {
+    "id": "prog-values-contract-2",
+    "lessonId": "prog-values-contract",
+    "question": "Why is quantity=true rejected?",
+    "options": [
+      "Booleans cannot exist in Python",
+      "The contract requires an exact integer count, not a truth value",
+      "Every quantity must be text",
+      "It prevents all possible financial errors"
+    ],
+    "answer": 1,
+    "why": "Explicit type requirements prevent accidental coercion. This is a narrow input rule, not a complete financial control."
+  },
+  {
+    "id": "prog-values-contract-3",
+    "lessonId": "prog-values-contract",
+    "question": "What should format_cents(5) return?",
+    "options": [
+      "\"5.00\"",
+      "\"0.5\"",
+      "\"0.05\"",
+      "The integer 5"
+    ],
+    "answer": 2,
+    "why": "Five cents needs two fractional display digits. Internal and presentation values are separate."
+  },
+  {
+    "id": "prog-trace-control-1",
+    "lessonId": "prog-trace-control",
+    "question": "After two fixture lines, what is the subtotal?",
+    "options": [
+      "1497",
+      "2500",
+      "4997",
+      "3997"
+    ],
+    "answer": 3,
+    "why": "The first two line amounts are 2500 and 1497, so their sum is 3997."
+  },
+  {
+    "id": "prog-trace-control-2",
+    "lessonId": "prog-trace-control",
+    "question": "What does resetting subtotal inside every iteration usually do in this algorithm?",
+    "options": [
+      "Discard earlier accumulated work",
+      "Preserve every previous line",
+      "Validate all input",
+      "Sort the rows"
+    ],
+    "answer": 0,
+    "why": "The running total must survive from one iteration to the next."
+  },
+  {
+    "id": "prog-trace-control-3",
+    "lessonId": "prog-trace-control",
+    "question": "Why test the empty quote?",
+    "options": [
+      "It proves all large inputs are fast",
+      "It defines the zero-work path without entering the loop",
+      "It removes the need for bounds",
+      "It makes every empty metric equal zero"
+    ],
+    "answer": 1,
+    "why": "Empty behavior is part of the contract and can expose initialization or return mistakes."
+  },
+  {
+    "id": "prog-functions-state-1",
+    "lessonId": "prog-functions-state",
+    "question": "Why do project functions return data instead of only printing it?",
+    "options": [
+      "Because printing never works",
+      "To guarantee zero memory use",
+      "So callers and tests can inspect and reuse the result",
+      "To avoid defining an output contract"
+    ],
+    "answer": 2,
+    "why": "Returning separates calculation from presentation and makes composition easier."
+  },
+  {
+    "id": "prog-functions-state-2",
+    "lessonId": "prog-functions-state",
+    "question": "After shallow = list(original), are nested dictionaries necessarily independent?",
+    "options": [
+      "Yes, every copy is deep",
+      "Only their values are always encrypted",
+      "Lists cannot contain dictionaries",
+      "No, nested objects may still be shared"
+    ],
+    "answer": 3,
+    "why": "A new outer list does not automatically duplicate its nested items."
+  },
+  {
+    "id": "prog-functions-state-3",
+    "lessonId": "prog-functions-state",
+    "question": "Which design best avoids one summary leaking into the next?",
+    "options": [
+      "A fresh accumulator created for each call",
+      "A shared mutable global accumulator",
+      "An unexplained cache of old results",
+      "Returning before every loop"
+    ],
+    "answer": 0,
+    "why": "Local per-call state keeps independent calculations separate under this project’s contract."
+  },
+  {
+    "id": "prog-collections-identity-1",
+    "lessonId": "prog-collections-identity",
+    "question": "Two FILTER quote lines have different unit prices. What does this contract require?",
+    "options": [
+      "Keep only the last line",
+      "Add their quantities and line subtotals without inventing one price",
+      "Reject all repetition",
+      "Count the group as one unit"
+    ],
+    "answer": 1,
+    "why": "Repeated quote lines are legitimate input under this contract; the group reports totals."
+  },
+  {
+    "id": "prog-collections-identity-2",
+    "lessonId": "prog-collections-identity",
+    "question": "The same event ID arrives with a different duration. What should happen?",
+    "options": [
+      "Silently overwrite the old event",
+      "Count it as an identical duplicate",
+      "Reject the conflicting identity",
+      "Delete every event"
+    ],
+    "answer": 2,
+    "why": "Conflicting content under one logical identity must not disappear silently."
+  },
+  {
+    "id": "prog-collections-identity-3",
+    "lessonId": "prog-collections-identity",
+    "question": "Why specify an event-ID tie-breaker for equal durations?",
+    "options": [
+      "To prove the service is fast",
+      "To hide failed events",
+      "To change duration units",
+      "To make output deterministic independent of input order"
+    ],
+    "answer": 3,
+    "why": "Explicit tie rules make repeated results and tests stable."
+  },
+  {
+    "id": "prog-validation-errors-1",
+    "lessonId": "prog-validation-errors",
+    "question": "A JSON document parses but contains quantity=-1. Which layer rejects it?",
+    "options": [
+      "Domain/schema validation",
+      "DNS",
+      "Only text encoding",
+      "No layer can reject parsed JSON"
+    ],
+    "answer": 0,
+    "why": "Representation syntax and allowed business values are separate checks."
+  },
+  {
+    "id": "prog-validation-errors-2",
+    "lessonId": "prog-validation-errors",
+    "question": "An invalid late row is encountered. What does the quote contract require?",
+    "options": [
+      "Return a partial subtotal as if complete",
+      "Reject the input with a defined error",
+      "Ignore the row silently",
+      "Change the quantity to zero"
+    ],
+    "answer": 1,
+    "why": "A partial success-shaped answer would hide missing work."
+  },
+  {
+    "id": "prog-validation-errors-3",
+    "lessonId": "prog-validation-errors",
+    "question": "Why avoid catching every exception and returning an empty report?",
+    "options": [
+      "Because empty reports are always illegal",
+      "Because Python cannot catch errors",
+      "Because it can hide programming defects and misstate failure as success",
+      "Because errors should be sent to strangers"
+    ],
+    "answer": 2,
+    "why": "Expected input errors can be handled clearly while unexpected defects remain visible during development."
+  },
+  {
+    "id": "prog-files-cli-1",
+    "lessonId": "prog-files-cli",
+    "question": "How many fields are in the CSV row \"repair, detail\",200?",
+    "options": [
+      "Three because there are two commas",
+      "One because all text is quoted",
+      "It must be executed to know",
+      "Two under the quoted CSV grammar"
+    ],
+    "answer": 3,
+    "why": "The comma inside the quoted label belongs to that field."
+  },
+  {
+    "id": "prog-files-cli-2",
+    "lessonId": "prog-files-cli",
+    "question": "What does selecting --implementation reference prove?",
+    "options": [
+      "The supplied reference’s behavior on that fixture",
+      "Your starter is complete",
+      "Every future input is valid",
+      "The project was published"
+    ],
+    "answer": 0,
+    "why": "Reference execution and learner implementation are different evidence."
+  },
+  {
+    "id": "prog-files-cli-3",
+    "lessonId": "prog-files-cli",
+    "question": "Why is the empty event mean None/null instead of zero?",
+    "options": [
+      "JSON cannot represent zero",
+      "There are no observations from which to compute a mean",
+      "All missing data should be a string",
+      "It means the program crashed"
+    ],
+    "answer": 1,
+    "why": "Absence of a measurement differs from a measured value of zero."
+  },
+  {
+    "id": "prog-tests-debug-1",
+    "lessonId": "prog-tests-debug",
+    "question": "Which input exposes truncation in a mean calculated with //?",
+    "options": [
+      "[2, 2]",
+      "[] alone",
+      "[1, 2]",
+      "Any filename"
+    ],
+    "answer": 2,
+    "why": "Its correct mean is fractional, so floor division produces a distinguishable wrong result."
+  },
+  {
+    "id": "prog-tests-debug-2",
+    "lessonId": "prog-tests-debug",
+    "question": "A test fails because the implementation disagrees with the contract. What is the best first response?",
+    "options": [
+      "Change the expected value immediately",
+      "Delete the test",
+      "Hide the exception",
+      "Reproduce the small case and examine the contract and implementation"
+    ],
+    "answer": 3,
+    "why": "Debugging starts by understanding the discrepancy, not removing the evidence."
+  },
+  {
+    "id": "prog-tests-debug-3",
+    "lessonId": "prog-tests-debug",
+    "question": "A bounded property test passes on 25 cases. What does it establish?",
+    "options": [
+      "Evidence for those cases and the tested property",
+      "A proof over every possible input",
+      "Guaranteed production safety",
+      "That no more tests are useful"
+    ],
+    "answer": 0,
+    "why": "Finite checks are valuable evidence with a defined scope, not universal proof."
+  },
+  {
+    "id": "prog-project-delivery-1",
+    "lessonId": "prog-project-delivery",
+    "question": "Which portfolio claim is most trustworthy?",
+    "options": [
+      "Production-ready because the reference passed",
+      "Exact tested behavior, commands and known limits for your own implementation",
+      "A list of frameworks not used",
+      "A guarantee that all inputs are safe"
+    ],
+    "answer": 1,
+    "why": "Precise evidence lets another person evaluate the work without inflated claims."
+  },
+  {
+    "id": "prog-project-delivery-2",
+    "lessonId": "prog-project-delivery",
+    "question": "When should a new extension’s acceptance criteria be written?",
+    "options": [
+      "Only after it breaks existing behavior",
+      "Never for small programs",
+      "Before implementation, alongside the existing invariants to preserve",
+      "Only if a cloud service is used"
+    ],
+    "answer": 2,
+    "why": "Explicit criteria make the change reviewable and testable."
+  },
+  {
+    "id": "prog-project-delivery-3",
+    "lessonId": "prog-project-delivery",
+    "question": "The distributed starter tests fail with NotImplementedError. What does that mean?",
+    "options": [
+      "The reference tests necessarily failed",
+      "The operating system must be reinstalled",
+      "The tests should be deleted",
+      "The learning placeholders still need implementation"
+    ],
+    "answer": 3,
+    "why": "The starter is deliberately unfinished so the learner has real work to implement."
+  }
+]

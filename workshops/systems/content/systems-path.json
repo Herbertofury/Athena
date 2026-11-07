@@ -1,0 +1,23 @@
+{
+  "id": "systems-workshop",
+  "title": "Systems Workshop: Observe, Change, Recover",
+  "summary": "Eight applied lessons connect system state, files, owned processes, capacity, safe configuration, dependencies, durable records and troubleshooting.",
+  "lessonIds": [
+    "sys-baseline-contract",
+    "sys-paths-bytes",
+    "sys-process-readiness",
+    "sys-capacity-headroom",
+    "sys-config-transactions",
+    "sys-dependencies-retries",
+    "sys-durable-database",
+    "sys-diagnose-evidence"
+  ],
+  "prerequisites": [
+    "os-processes",
+    "files-permissions",
+    "shell-data",
+    "databases"
+  ],
+  "caseIds": [],
+  "limits": "An applied computing foundation, not complete A+, RHCSA or professional administration readiness. Actual exercises touch only newly created temporary files, a temporary SQLite database and fixed child processes owned by the lab. No real system configuration is changed."
+}

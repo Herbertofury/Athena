@@ -1,0 +1,73 @@
+{
+  "checked": "2026-11-07",
+  "method": "Opened official documentation; no accounts, private datasets or external databases accessed.",
+  "versions": "Python docs identify 3.12.16; executed 3.12.14 with SQLite 3.53.1. Used stable APIs and SQLite 3.37+ STRICT tables.",
+  "sources": [
+    {
+      "id": "select",
+      "url": "https://www.sqlite.org/lang_select.html",
+      "status": "opened",
+      "supports": "SELECT, joins, filtering, grouping, ordering and query structure."
+    },
+    {
+      "id": "aggregates",
+      "url": "https://www.sqlite.org/lang_aggfunc.html",
+      "status": "opened",
+      "supports": "COUNT, SUM, AVG and their non-NULL semantics."
+    },
+    {
+      "id": "nulls",
+      "url": "https://www.sqlite.org/nulls.html",
+      "status": "opened",
+      "supports": "NULL behavior; used narrowly for missingness distinctions, not a current cross-vendor comparison."
+    },
+    {
+      "id": "python_sql",
+      "url": "https://docs.python.org/3.12/library/sqlite3.html",
+      "status": "opened",
+      "supports": "In-memory SQLite connections, bound parameters and explicit driver/transaction handling."
+    },
+    {
+      "id": "csv",
+      "url": "https://docs.python.org/3.12/library/csv.html",
+      "status": "opened",
+      "supports": "Quoted CSV fields, string inputs and None-to-empty writer convention."
+    },
+    {
+      "id": "foreign",
+      "url": "https://www.sqlite.org/foreignkeys.html",
+      "status": "opened",
+      "supports": "Foreign-key declarations and per-connection enforcement."
+    },
+    {
+      "id": "transaction",
+      "url": "https://www.sqlite.org/lang_transaction.html",
+      "status": "opened",
+      "supports": "Explicit transaction, commit and rollback behavior."
+    },
+    {
+      "id": "dates",
+      "url": "https://www.sqlite.org/lang_datefunc.html",
+      "status": "opened",
+      "supports": "SQLite time representation/functions and the need for explicit formats."
+    },
+    {
+      "id": "strict",
+      "url": "https://www.sqlite.org/stricttables.html",
+      "status": "opened",
+      "supports": "STRICT tables introduced in SQLite 3.37; permitted conversions still exist."
+    },
+    {
+      "id": "star",
+      "url": "https://learn.microsoft.com/en-us/power-bi/guidance/star-schema",
+      "status": "opened",
+      "supports": "Dimensions, observations and consistent grain; not full Power BI modeling implementation."
+    },
+    {
+      "id": "pl300",
+      "url": "https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/pl-300",
+      "status": "opened",
+      "supports": "Broader Power BI exam skill areas and gaps; no complete coverage or readiness claim."
+    }
+  ]
+}

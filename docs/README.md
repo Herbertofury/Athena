@@ -2,7 +2,7 @@
 
 Learn once. Apply across credentials. Build proof, not just badges.
 
-All 13 requested credentials are organized. This release contains 48 original lessons and checks, including an eight-lesson applied networking foundation, three synthetic diagnosis cases, a route-selection tool, guided lab plans and a local HTTP fixture. It does not yet teach every official subobjective or replace practical training. Domain roadmaps are not counted as completed instruction.
+All 13 requested credentials are organized. This release contains 90 original lessons: the existing 48 foundations and Packet Trail lessons plus 42 applied lessons across five workshops. The workshops include 126 original checks (42 primary and 84 supplemental), worked examples, safe offline exercises and evidence worksheets. All 74 credential-domain rows remain roadmaps, not completed exam coverage. Real-cloud labs and Power BI workflows are unexecuted; read marks, XP and reference tests do not establish practical mastery or exam readiness.
 
 ## Start here
 
@@ -30,3 +30,14 @@ Start with [The Packet Trail](paths/packet-trail.md) for a coherent applied netw
 - [Red Hat Certified System Administrator](certificates/rhcsa.md) — EX200; Red Hat Enterprise Linux 10
 - [Certified Kubernetes Administrator](certificates/cka.md) — Rolling Kubernetes version; provider page reports v1.37 on review date
 
+
+
+## Applied workshops
+
+- [Security Foundations: Evidence Before Assumptions](paths/security-foundations.md)
+- [Systems Workshop: Observe, Change, Recover](paths/systems-workshop.md)
+- [Programming Workshop: Small Programs, Clear Contracts](paths/programming-workshop.md)
+- [Cloud Workshop: Reason Locally, Verify Honestly](paths/cloud-workshop.md)
+- [Data & SQL Workshop: From Rows to Reliable Answers](paths/data-workshop.md)
+
+- [Keyboard access and verification limits](accessibility.md)

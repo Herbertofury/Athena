@@ -29,6 +29,14 @@ export function createBlockedEventLogView(element) {
   element.replaceChildren(opening,closing);
   let count=0, segment=null, segmentEntries=0;
   return {
+    attachTo(target) {
+      if(!target||target.ownerDocument!==doc||typeof target.replaceChildren!=='function')throw new TypeError('Event log target must share its document');
+      if(target===element)return;
+      // Transfer the rendered nodes and only then rebind future insertions.
+      // If replacement fails, the existing writer/target remains unchanged.
+      target.replaceChildren(...element.childNodes);
+      element=target;
+    },
     append(value) {
       const chunk=formatEventChunk(value,count);
       if(!segment||segmentEntries===64||segment.data.length+chunk.length>16384){

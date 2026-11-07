@@ -87,7 +87,7 @@ def package(source, output, allowlist=None, profile="complete"):
             data=(staged/generated).read_bytes()
             entries.append({'path':generated,'bytes':len(data),'sha256':hashlib.sha256(data).hexdigest(),'origin':'generated'})
         manifest={'application':'Athena','entry':'index.html','profile':profile,'workspaces':['learning','research','media','lab']+(['build'] if profile=='complete' else []),
-                  'pending':[] if profile=='complete' else ['Feature Foundry public-publication approval and integration'],
+                  'pending':[] if profile=='complete' else ['Feature Foundry integration and verification; not included in this build'],
                   'verification':'Packaging and file hashes only; functional/browser parity is a separate gate.', 'files':entries}
         (staged/'athena-runtime-manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')
         staged.rename(output)

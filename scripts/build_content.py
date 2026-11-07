@@ -285,6 +285,8 @@ lesson('databases','Databases, transactions and durable data','Coding','Model da
 'Why use parameterized SQL?',['It guarantees every query is fast','It keeps input data separate from SQL syntax','It removes the need for permissions','It automatically creates backups'],1,'Parameters reduce injection risk by avoiding unsafe construction of query syntax from input.',['coding','pl-300','aws-saa'],['https://www.sqlite.org/lang_transaction.html','https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html'])
 from network_content import LESSONS
 modules.extend(LESSONS)
+from workshop_content import LESSONS as WORKSHOP_LESSONS
+modules.extend(WORKSHOP_LESSONS)
 # Balance answer positions deterministically; choices retain their meaning.
 for i, item in enumerate(modules):
     correct=item['options'].pop(item['answer'])

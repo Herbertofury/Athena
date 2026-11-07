@@ -4,7 +4,7 @@ Welcome to the Athena wiki!
 
 Learn once. Apply across credentials. Build proof, not just badges.
 
-All 13 requested credentials are organized. This release contains 48 original lessons and checks, including an eight-lesson applied networking foundation, three synthetic diagnosis cases, a route-selection tool, guided lab plans and a local HTTP fixture. It does not yet teach every official subobjective or replace practical training. Domain roadmaps are not counted as completed instruction.
+All 13 requested credentials are organized. This release contains 90 original lessons: the existing 48 foundations and Packet Trail lessons plus 42 applied lessons across five workshops. The workshops include 126 original checks (42 primary and 84 supplemental), worked examples, safe offline exercises and evidence worksheets. All 74 credential-domain rows remain roadmaps, not completed exam coverage. Real-cloud labs and Power BI workflows are unexecuted; read marks, XP and reference tests do not establish practical mastery or exam readiness.
 
 ## Start here
 
@@ -34,5 +34,16 @@ Start with [The Packet Trail](Packet-Trail) for a coherent applied networking fo
 
 ## Engineering research
 
-The engineering source is preserved under `engineering/`, with native wiki pages prefixed `Engineering-`. [Unified Athena](Unified-Athena) describes the one-app learning, research and media integration and its remaining gates. Feature Foundry remains excluded pending private-to-public approval. See [Engineering research](Engineering-Home) and the migration inventory for evidence.
+The engineering source is preserved under `engineering/`, with native wiki pages prefixed `Engineering-`. [Unified Athena](Unified-Athena) describes the one-app learning, research and media integration and its remaining gates. Feature Foundry integration and verification are in progress; it is not included in this build. See [Engineering research](Engineering-Home) and the migration inventory for evidence.
 
+
+
+## Applied workshops
+
+- [Security Foundations: Evidence Before Assumptions](Workshop-security-foundations)
+- [Systems Workshop: Observe, Change, Recover](Workshop-systems-workshop)
+- [Programming Workshop: Small Programs, Clear Contracts](Workshop-programming-workshop)
+- [Cloud Workshop: Reason Locally, Verify Honestly](Workshop-cloud-workshop)
+- [Data & SQL Workshop: From Rows to Reliable Answers](Workshop-data-workshop)
+
+- [Keyboard access and verification limits](Accessibility)

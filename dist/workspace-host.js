@@ -56,7 +56,7 @@ function createHost({load,context={},onError=()=>{}}){
 function isEditingEvent(event,doc){
  const path=typeof event.composedPath==='function'?event.composedPath():[event.target];
  let active=doc?.activeElement;while(active){path.push(active);active=active.shadowRoot?.activeElement;}
- return path.some(node=>node&&(['INPUT','TEXTAREA','SELECT'].includes(node.tagName)||node.isContentEditable||node.getAttribute?.('contenteditable')==='true'||(node.tagName==='DIALOG'&&node.open)));
+ return path.some(node=>node&&(['INPUT','TEXTAREA','SELECT'].includes(node.tagName)||node.isContentEditable||(node.hasAttribute?.('contenteditable')&&node.getAttribute('contenteditable')!=='false')||['textbox','searchbox','combobox','spinbutton'].includes(node.getAttribute?.('role'))||(node.tagName==='DIALOG'&&node.open)));
 }
 root.AthenaWorkspaceHost={createHost,isEditingEvent};if(typeof module!=='undefined'&&module.exports)module.exports=root.AthenaWorkspaceHost;
 })(typeof globalThis!=='undefined'?globalThis:this);

@@ -1,3 +1,5 @@
+> Combined workshop staging note (2026-11-07): the five workshops add new runtime bytes and ZIP assets. Historical acceptance below applies to its identified earlier revisions, not this combined build. Workshop browser acceptance is prepared but unrun; see the workshop staging handoff and current receipts.
+
 # One Athena: public-preview integration
 
 ## Implemented
@@ -21,7 +23,7 @@ The local-engine extension passed [CI run 42360535804](https://github.com/Herber
 
 ## Still pending
 
-- Feature Foundry is private while Athena is public. Its source and data are not in this release, pending informed public-publication approval and actual adapter parity work.
+- Feature Foundry integration and verification are in progress. Its source and data are not included in this build; full adapter parity remains unverified.
 - GitHub Pages site setup remains blocked. [Run 42360535726](https://github.com/Herbertofury/Athena/actions/runs/42360535726) passed the test and package steps, then `configure-pages` returned `Get Pages site failed` / `Not Found`. The workflow uses `enablement: false`; no Pages settings were changed and no served URL is claimed.
 - Full source/runtime parity, live provider collection, Windows acceptance and crash/power-loss durability remain unproven. The native Lab retains actual Rust/SQLite behavior; browser simulations do not replace those gates.
 - Full educational coverage, all exam subobjectives, hands-on assessment and larger original practice banks remain open.

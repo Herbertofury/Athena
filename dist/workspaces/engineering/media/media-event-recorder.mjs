@@ -12,7 +12,7 @@ export function createMediaEventRecorder(element, events, mode='baseline') {
       const staging=element.ownerDocument.createElement('pre');
       const candidate=createBlockedEventLogView(staging);
       for(const value of events)candidate.append(value);
-      element.replaceChildren(...staging.childNodes);
+      candidate.attachTo(element);
       view=candidate;
     }else element.textContent=JSON.stringify(events,null,2);
     state.rendered_events=events.length;state.display_current=true;

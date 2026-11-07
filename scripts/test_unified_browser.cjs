@@ -10,7 +10,10 @@ function plan(root,temporary,env=process.env){
   return [
     {name:'research-media-reproducibility',command:env.PYTHON||'python3',args:['scripts/build_engineering_workspaces.py','--check'],cwd:root,env,timeout:60000},
     {name:'lab-reproducibility',command:env.PYTHON||'python3',args:['scripts/build_lab_workspace.py','--check'],cwd:root,env,timeout:60000},
+    {name:'standalone-media-reproducibility',command:env.PYTHON||'python3',args:['engineering/scripts/build_media_lab.py','--check'],cwd:root,env,timeout:60000},
     {name:'static-browser',command:process.execPath,args:['scripts/test_browser.cjs'],cwd:root,env,timeout:180000},
+    {name:'workshop-browser',command:process.execPath,args:['scripts/test_workshops_browser.cjs'],cwd:root,env:{...env,ATHENA_WORKSHOPS_BROWSER_OUTPUT:path.join(output,'workshops')},timeout:300000},
+    {name:'accessibility-browser',command:process.execPath,args:['scripts/test_accessibility_browser.cjs'],cwd:root,env:{...env,ATHENA_ACCESSIBILITY_BROWSER_OUTPUT:path.join(output,'accessibility')},timeout:300000},
     {name:'rust-tests',command:'cargo',args:['test','--locked','--all-targets','--target-dir',target],cwd:lab,env:cargoEnv,timeout:900000},
     {name:'rust-clippy',command:'cargo',args:['clippy','--locked','--all-targets','--target-dir',target,'--','-D','warnings'],cwd:lab,env:cargoEnv,timeout:900000},
     {name:'rust-build',command:'cargo',args:['build','--locked','--bin','atlas-lab','--target-dir',target],cwd:lab,env:cargoEnv,timeout:900000},

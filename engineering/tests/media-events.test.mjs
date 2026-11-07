@@ -29,15 +29,18 @@ test('actual HLS callback: generated fatal fixture preserves both names and igno
  const callback=source.slice(start,source.indexOf(');hls.loadSource',start));
  const baseline=readFileSync(new URL('../experiments/media-event-identity-lab/baseline-handler.txt',import.meta.url),'utf8');
  const fixture={fatal:true,type:'networkError',details:'manifestLoadError'};
- function invoke(code,record,current=1,generation=1,data=fixture){
-  const records=[],state={};const event=(type,details)=>records.push(record(type,1,details));
-  const fn=Function('generation','current','state','event','card','readyTimer','clearTimeout','return ('+code+')')(generation,current,state,event,{id:'steam:620'},null,()=>{});
-  fn(null,data);return {records,state};
+ function invoke(code,record,current=1,generation=1,data=fixture,playerFailed=false){
+  let terminalFailures=0;const records=[],state={};const event=(type,details)=>records.push(record(type,1,details));
+  const fn=Function('generation','current','state','event','card','readyTimer','clearTimeout','playerFailed','failPlayer','return ('+code+')')(generation,current,state,event,{id:'steam:620'},null,()=>{},playerFailed,()=>{terminalFailures++;});
+  fn(null,data);return {records,state,terminalFailures};
  }
  const old=invoke(baseline,(type,time,details)=>({type,at_ms:time,...details}));
  assert.equal(old.records[0].type,'networkError','known-bad control loses hls_error identity');
  const fixed=invoke(callback,createMediaEvent);
  assert.deepEqual(fixed.records,[{type:'hls_error',at_ms:1,card_id:'steam:620',error_type:'networkError',details:'manifestLoadError'}]);
+ assert.equal(fixed.terminalFailures,1);
+ assert.equal(invoke(callback,createMediaEvent,1,1,fixture,true).records.length,0);
+ assert.equal(invoke(callback,createMediaEvent,1,2).terminalFailures,0);
  assert.equal(invoke(callback,createMediaEvent,1,2).records.length,0);
  assert.equal(invoke(callback,createMediaEvent,1,1,{...fixture,fatal:false}).records.length,0);
 });

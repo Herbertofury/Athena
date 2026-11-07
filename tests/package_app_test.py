@@ -113,7 +113,7 @@ class PackageTests(unittest.TestCase):
             (source/'workspaces/foundry/index.js').unlink()
             manifest=pack.package(source,root/'public',self.approved(source),profile='public-preview')
             self.assertEqual(manifest['workspaces'],['learning','research','media','lab'])
-            self.assertIn('approval',manifest['pending'][0])
+            self.assertEqual(manifest['pending'], ['Feature Foundry integration and verification; not included in this build'])
             self.assertFalse((root/'public/workspaces/foundry/index.js').exists())
 
     def test_public_preview_refuses_foundry_even_if_allowlisted(self):
