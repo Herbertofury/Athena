@@ -50391,7 +50391,7 @@ void main() {
   }
   signal?.addEventListener('abort',unmount,{once:true});
   const stats=()=>({dead,timers:timers.size,intervals:intervals.size,frames:frames.size,observers:observers.size,listeners:listeners.length,audio:audio.size,objectURLs:urls.size});
-  try{boot();if(signal?.aborted)await unmount()}catch(error){await unmount();throw error}
+  try{boot();root.dataset.selftestChecks=JSON.stringify(overlay.__ffPrototypeTest||{});if(signal?.aborted)await unmount()}catch(error){await unmount();throw error}
   function setSearch(query){if(dead)return;if(query)overlay.ffPremium?.themeDirector?.open();const input=root.querySelector('[data-theme-atlas-search]');if(input){input.value=query;input.dispatchEvent(new Event('input',{bubbles:true}))}}
   setSearch(search);
   return {unmount,setSearch,setTheme:theme=>host.dataset.hostTheme=theme,exportState:()=>({schema:1,theme:root.dataset.premiumTheme,nativeRuntime:false,accountAuthorization:false}),diagnostics:()=>({resources:stats(),cleanupErrors:[...cleanupErrors],runtime:overlay.ffPremium?.diagnostics?.(),selftest:overlay.__ffPrototypeTest}),host};
