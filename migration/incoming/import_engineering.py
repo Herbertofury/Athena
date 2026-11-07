@@ -11,6 +11,7 @@ def run(root=ROOT, archive=ARCHIVE, expected=ARCHIVE_SHA256):
     payload=archive.read_bytes()
     if hashlib.sha256(payload).hexdigest()!=expected:raise ValueError('Archive digest mismatch')
     plans=[]
+    skipped_workflow='.github/workflows/athena-engineering-checks.yml'
     with zipfile.ZipFile(archive) as z:
         manifest=json.loads(z.read('IMPORT-MANIFEST.json'))
         if manifest.get('format')!='athena-engineering-import-v1':raise ValueError('Unknown import format')
@@ -26,6 +27,8 @@ def run(root=ROOT, archive=ARCHIVE, expected=ARCHIVE_SHA256):
             data=z.read(name)
             if len(data)!=r['bytes'] or hashlib.sha256(data).hexdigest()!=r['sha256']:raise ValueError('Entry digest mismatch')
             if hashlib.sha1(f'blob {len(data)}\0'.encode()+data).hexdigest()!=r['sha']:raise ValueError('Git blob digest mismatch')
+            if name == skipped_workflow:
+                continue  # Preserve in the archive; this token may not publish workflow files.
             dest=root/name
             for ancestor in [dest,*dest.parents]:
                 if ancestor==root.parent:break
@@ -42,6 +45,6 @@ def run(root=ROOT, archive=ARCHIVE, expected=ARCHIVE_SHA256):
         p.parent.mkdir(parents=True,exist_ok=True)
         with p.open('xb') as f:f.write(data)
         p.chmod(0o755 if mode=='100755' else 0o644);added+=1
-    print(json.dumps({'verified_entries':len(plans),'added':added,'archive_sha256':expected}))
+    print(json.dumps({'verified_entries':len(plans),'added':added,'workflow_not_published':skipped_workflow,'archive_sha256':expected}))
     return len(plans),added
 if __name__=='__main__':run()
