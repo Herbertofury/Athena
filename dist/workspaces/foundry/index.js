@@ -6285,7 +6285,15 @@ export async function mount({container,signal,search='',notify=()=>{}}) {
 			const objectKey = String(s.id || s.asset?.id || "selected");
 			if (hud.dataset.objectKey !== objectKey) hud.dataset.objectKey = objectKey;
 			if (objectHudFrozen && !force) return;
-			const r = s.el.getBoundingClientRect();
+			const screen = s.el.getBoundingClientRect(), origin = document.body.getBoundingClientRect();
+			const r = {
+				left: screen.left - origin.left,
+				top: screen.top - origin.top,
+				right: screen.right - origin.left,
+				bottom: screen.bottom - origin.top,
+				width: screen.width,
+				height: screen.height
+			};
 			if (r.width < 1 || r.height < 1) return;
 			const w = hud.offsetWidth || 214, h = hud.offsetHeight || 30, margin = 4, gap = 4;
 			let x = clamp(r.left + r.width / 2 - w / 2, margin, Math.max(margin, innerWidth - w - margin));

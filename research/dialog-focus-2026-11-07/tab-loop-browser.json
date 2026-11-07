@@ -1,0 +1,489 @@
+{
+  "schema": 1,
+  "kind": "actual Chromium accessibility behavior acceptance",
+  "result": "failed",
+  "started": "2026-11-07T19:23:59.370Z",
+  "root": "/home/runner/work/Athena/Athena/dist",
+  "output": "/home/runner/work/Athena/Athena/browser-results/accessibility",
+  "browser": "151.0.7922.34",
+  "checks": [
+    {
+      "name": "served file identity",
+      "result": "pass"
+    },
+    {
+      "name": "keyboard navigation and skip link",
+      "result": "pass"
+    },
+    {
+      "name": "slash shortcut guards and opt-out",
+      "result": "pass"
+    },
+    {
+      "name": "dialog focus containment and return",
+      "result": "failed",
+      "error": "Expected values to be strictly equal:\n\nfalse !== true\n"
+    }
+  ],
+  "files": [
+    {
+      "name": "index.html",
+      "sha256": "9f0cd9affdcad4760f01b6f78e4a150ab003ac5ad28110e5b4dd63e78ddec521",
+      "loadedSHA256": "9f0cd9affdcad4760f01b6f78e4a150ab003ac5ad28110e5b4dd63e78ddec521"
+    },
+    {
+      "name": "app.js",
+      "sha256": "548b9ee7202bc1a05a4d587be9e92b4d166be9f86c85bb7b28279a3b3d49e6c9",
+      "loadedSHA256": "548b9ee7202bc1a05a4d587be9e92b4d166be9f86c85bb7b28279a3b3d49e6c9"
+    },
+    {
+      "name": "catalog.js",
+      "sha256": "97ce633e23cd9bbfa3d980acb7da640b9eacb40fb704a8f429e04cee68dadd5f",
+      "loadedSHA256": "97ce633e23cd9bbfa3d980acb7da640b9eacb40fb704a8f429e04cee68dadd5f"
+    },
+    {
+      "name": "core.js",
+      "sha256": "1fbbb46ff7134ff968a8543aaa967d78b39fd955fcf5b810882039aa61e29803",
+      "loadedSHA256": "1fbbb46ff7134ff968a8543aaa967d78b39fd955fcf5b810882039aa61e29803"
+    },
+    {
+      "name": "workspace-host.js",
+      "sha256": "8a14dec17d4d816de53d325a94ee0dd00ac0bc8a0a26a756af58998173157cdb",
+      "loadedSHA256": "8a14dec17d4d816de53d325a94ee0dd00ac0bc8a0a26a756af58998173157cdb"
+    },
+    {
+      "name": "styles.css",
+      "sha256": "bf7fb56b9403fe8a865771cd7b3cd766a52aeea5460541ec29d145fcfd8f7107",
+      "loadedSHA256": "bf7fb56b9403fe8a865771cd7b3cd766a52aeea5460541ec29d145fcfd8f7107"
+    }
+  ],
+  "screenshots": [
+    {
+      "name": "failure.png",
+      "sha256": "149abec185242aad47efcadda7bc5ff865b114fcb2bb5d470876a03e558a178a"
+    }
+  ],
+  "errors": [],
+  "outsideRequests": [],
+  "failedResponses": [],
+  "cspViolations": [],
+  "workshopIds": [],
+  "sources": [
+    "https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/",
+    "https://www.w3.org/WAI/WCAG22/Understanding/character-key-shortcuts.html",
+    "https://www.w3.org/WAI/WCAG22/Understanding/status-messages.html",
+    "https://www.w3.org/WAI/WCAG22/Understanding/focus-order.html",
+    "https://www.w3.org/WAI/WCAG22/Understanding/resize-text.html",
+    "https://www.w3.org/WAI/WCAG22/Understanding/reflow.html"
+  ],
+  "limits": [
+    "No screen-reader, speech-input, OS high-contrast, or WCAG conformance certification",
+    "Synthetic composition/modifier events test handler guards, not an actual IME",
+    "Enlargement is a 200%-equivalent CSS layout test, not native browser zoom",
+    "Static contract tests are not browser evidence; manual assistive-technology review remains required"
+  ],
+  "origin": "http://127.0.0.1:46563",
+  "currentCheck": "dialog focus containment and return",
+  "keyboardOnlyNavigation": true,
+  "shortcutGuards": 11,
+  "dialogFocusTrace": [
+    {
+      "key": "Tab",
+      "index": 0,
+      "inside": true,
+      "tag": "BUTTON",
+      "id": "close-lesson",
+      "open": true,
+      "modal": true
+    },
+    {
+      "key": "Tab",
+      "index": 1,
+      "inside": true,
+      "tag": "BUTTON",
+      "id": "",
+      "open": true,
+      "modal": true
+    },
+    {
+      "key": "Tab",
+      "index": 2,
+      "inside": true,
+      "tag": "BUTTON",
+      "id": "",
+      "open": true,
+      "modal": true
+    },
+    {
+      "key": "Tab",
+      "index": 3,
+      "inside": true,
+      "tag": "BUTTON",
+      "id": "",
+      "open": true,
+      "modal": true
+    },
+    {
+      "key": "Tab",
+      "index": 4,
+      "inside": true,
+      "tag": "BUTTON",
+      "id": "",
+      "open": true,
+      "modal": true
+    },
+    {
+      "key": "Tab",
+      "index": 5,
+      "inside": true,
+      "tag": "BUTTON",
+      "id": "",
+      "open": true,
+      "modal": true
+    },
+    {
+      "key": "Tab",
+      "index": 6,
+      "inside": true,
+      "tag": "BUTTON",
+      "id": "",
+      "open": true,
+      "modal": true
+    },
+    {
+      "key": "Tab",
+      "index": 7,
+      "inside": true,
+      "tag": "BUTTON",
+      "id": "",
+      "open": true,
+      "modal": true
+    },
+    {
+      "key": "Tab",
+      "index": 8,
+      "inside": true,
+      "tag": "BUTTON",
+      "id": "",
+      "open": true,
+      "modal": true
+    },
+    {
+      "key": "Tab",
+      "index": 9,
+      "inside": true,
+      "tag": "BUTTON",
+      "id": "",
+      "open": true,
+      "modal": true
+    },
+    {
+      "key": "Tab",
+      "index": 10,
+      "inside": true,
+      "tag": "BUTTON",
+      "id": "",
+      "open": true,
+      "modal": true
+    },
+    {
+      "key": "Tab",
+      "index": 11,
+      "inside": true,
+      "tag": "BUTTON",
+      "id": "",
+      "open": true,
+      "modal": true
+    },
+    {
+      "key": "Tab",
+      "index": 12,
+      "inside": true,
+      "tag": "BUTTON",
+      "id": "",
+      "open": true,
+      "modal": true
+    },
+    {
+      "key": "Tab",
+      "index": 13,
+      "inside": true,
+      "tag": "BUTTON",
+      "id": "",
+      "open": true,
+      "modal": true
+    },
+    {
+      "key": "Tab",
+      "index": 14,
+      "inside": true,
+      "tag": "BUTTON",
+      "id": "",
+      "open": true,
+      "modal": true
+    },
+    {
+      "key": "Tab",
+      "index": 15,
+      "inside": true,
+      "tag": "INPUT",
+      "id": "read-check",
+      "open": true,
+      "modal": true
+    },
+    {
+      "key": "Tab",
+      "index": 16,
+      "inside": true,
+      "tag": "TEXTAREA",
+      "id": "lesson-note",
+      "open": true,
+      "modal": true
+    },
+    {
+      "key": "Tab",
+      "index": 17,
+      "inside": true,
+      "tag": "A",
+      "id": "",
+      "open": true,
+      "modal": true
+    },
+    {
+      "key": "Tab",
+      "index": 18,
+      "inside": true,
+      "tag": "A",
+      "id": "",
+      "open": true,
+      "modal": true
+    },
+    {
+      "key": "Tab",
+      "index": 19,
+      "inside": true,
+      "tag": "BUTTON",
+      "id": "close-lesson",
+      "open": true,
+      "modal": true
+    },
+    {
+      "key": "Tab",
+      "index": 20,
+      "inside": true,
+      "tag": "BUTTON",
+      "id": "",
+      "open": true,
+      "modal": true
+    },
+    {
+      "key": "Tab",
+      "index": 21,
+      "inside": true,
+      "tag": "BUTTON",
+      "id": "",
+      "open": true,
+      "modal": true
+    },
+    {
+      "key": "Shift+Tab",
+      "index": 0,
+      "inside": true,
+      "tag": "BUTTON",
+      "id": "",
+      "open": true,
+      "modal": true
+    },
+    {
+      "key": "Shift+Tab",
+      "index": 1,
+      "inside": true,
+      "tag": "BUTTON",
+      "id": "close-lesson",
+      "open": true,
+      "modal": true
+    },
+    {
+      "key": "Shift+Tab",
+      "index": 2,
+      "inside": true,
+      "tag": "A",
+      "id": "",
+      "open": true,
+      "modal": true
+    },
+    {
+      "key": "Shift+Tab",
+      "index": 3,
+      "inside": true,
+      "tag": "A",
+      "id": "",
+      "open": true,
+      "modal": true
+    },
+    {
+      "key": "Shift+Tab",
+      "index": 4,
+      "inside": true,
+      "tag": "TEXTAREA",
+      "id": "lesson-note",
+      "open": true,
+      "modal": true
+    },
+    {
+      "key": "Shift+Tab",
+      "index": 5,
+      "inside": true,
+      "tag": "INPUT",
+      "id": "read-check",
+      "open": true,
+      "modal": true
+    },
+    {
+      "key": "Shift+Tab",
+      "index": 6,
+      "inside": true,
+      "tag": "BUTTON",
+      "id": "",
+      "open": true,
+      "modal": true
+    },
+    {
+      "key": "Shift+Tab",
+      "index": 7,
+      "inside": true,
+      "tag": "BUTTON",
+      "id": "",
+      "open": true,
+      "modal": true
+    },
+    {
+      "key": "Shift+Tab",
+      "index": 8,
+      "inside": true,
+      "tag": "BUTTON",
+      "id": "",
+      "open": true,
+      "modal": true
+    },
+    {
+      "key": "Shift+Tab",
+      "index": 9,
+      "inside": true,
+      "tag": "BUTTON",
+      "id": "",
+      "open": true,
+      "modal": true
+    },
+    {
+      "key": "Shift+Tab",
+      "index": 10,
+      "inside": true,
+      "tag": "BUTTON",
+      "id": "",
+      "open": true,
+      "modal": true
+    },
+    {
+      "key": "Shift+Tab",
+      "index": 11,
+      "inside": true,
+      "tag": "BUTTON",
+      "id": "",
+      "open": true,
+      "modal": true
+    },
+    {
+      "key": "Shift+Tab",
+      "index": 12,
+      "inside": true,
+      "tag": "BUTTON",
+      "id": "",
+      "open": true,
+      "modal": true
+    },
+    {
+      "key": "Shift+Tab",
+      "index": 13,
+      "inside": true,
+      "tag": "BUTTON",
+      "id": "",
+      "open": true,
+      "modal": true
+    },
+    {
+      "key": "Shift+Tab",
+      "index": 14,
+      "inside": true,
+      "tag": "BUTTON",
+      "id": "",
+      "open": true,
+      "modal": true
+    },
+    {
+      "key": "Shift+Tab",
+      "index": 15,
+      "inside": true,
+      "tag": "BUTTON",
+      "id": "",
+      "open": true,
+      "modal": true
+    },
+    {
+      "key": "Shift+Tab",
+      "index": 16,
+      "inside": true,
+      "tag": "BUTTON",
+      "id": "",
+      "open": true,
+      "modal": true
+    },
+    {
+      "key": "Shift+Tab",
+      "index": 17,
+      "inside": true,
+      "tag": "BUTTON",
+      "id": "",
+      "open": true,
+      "modal": true
+    },
+    {
+      "key": "Shift+Tab",
+      "index": 18,
+      "inside": true,
+      "tag": "BUTTON",
+      "id": "",
+      "open": true,
+      "modal": true
+    },
+    {
+      "key": "Shift+Tab",
+      "index": 19,
+      "inside": true,
+      "tag": "BUTTON",
+      "id": "",
+      "open": true,
+      "modal": true
+    },
+    {
+      "key": "Shift+Tab",
+      "index": 20,
+      "inside": true,
+      "tag": "BUTTON",
+      "id": "close-lesson",
+      "open": true,
+      "modal": true
+    },
+    {
+      "key": "Shift+Tab",
+      "index": 21,
+      "inside": true,
+      "tag": "A",
+      "id": "",
+      "open": true,
+      "modal": true
+    }
+  ],
+  "failure": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\nfalse !== true\n\n    at /home/runner/work/Athena/Athena/scripts/test_accessibility_browser.cjs:56:1271\n    at async check (/home/runner/work/Athena/Athena/scripts/test_accessibility_browser.cjs:23:61)\n    at async run (/home/runner/work/Athena/Athena/scripts/test_accessibility_browser.cjs:56:3)",
+  "finished": "2026-11-07T19:24:03.223Z"
+}

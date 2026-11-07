@@ -70,3 +70,37 @@ test('learning controls keep labels, referenced IDs, button names and unique IDs
 test('new CSS has forced-color, reduced-motion and non-color-only focus affordances',()=>{
  const css=fs.readFileSync('dist/styles.css','utf8');for(const token of ['@media(forced-colors:active)','CanvasText','Highlight','@media(prefers-reduced-motion:reduce)','#lesson-title:focus-visible','.feedback-host:focus-visible','.keyboard-options summary'])assert.ok(css.includes(token),token);assert.equal(/outline\s*:\s*(?:none|0)\s*[;}]/.test(css.replace('.feedback-host:empty{outline:none}','')),false);assert.equal(/forced-color-adjust\s*:\s*none/.test(css),false);
 });
+
+// Synthetic focus-order model for the explicit boundary handler. Real rendering
+// and tab traversal still require the unchanged Chromium acceptance suite.
+function modelTabStops(s){
+ s.window.getComputedStyle=el=>({visibility:el.dataset.testVisibility||'visible'});
+ s.window.HTMLElement.prototype.getClientRects=function(){return this.dataset.testRects==='none'?[]:[{}];};
+ const controls=[...s.dialog.querySelectorAll('button,a[href],input,select,textarea,[tabindex]')];
+ for(const el of controls)Object.defineProperty(el,'tabIndex',{configurable:true,get(){const a=this.getAttribute('tabindex');return a===null?0:Number(a);}});
+ return controls.filter(el=>el.tabIndex>=0&&!el.matches(':disabled')&&!el.closest('[hidden],[inert]')&&el.getClientRects().length&&s.window.getComputedStyle(el).visibility==='visible');
+}
+test('lesson Tab and Shift+Tab wrap at visible enabled boundaries',()=>{
+ const s=setup();s.go('#workshops/security-foundations');open(s,'sec-risk-story');const items=modelTabStops(s),first=items[0],last=items.at(-1);
+ last.focus();assert.equal(s.key(last,'Tab').defaultPrevented,true);assert.equal(s.focus()===first,true);
+ first.focus();assert.equal(s.key(first,'Tab',{shiftKey:true}).defaultPrevented,true);assert.equal(s.focus()===last,true);
+ const middle=items[1];middle.focus();assert.equal(s.key(middle,'Tab').defaultPrevented,false);assert.equal(s.focus()===middle,true);
+});
+test('title and feedback focus enter the modal tab order without escaping',()=>{
+ const s=setup();s.go('#workshops/security-foundations');open(s,'sec-risk-story');let items=modelTabStops(s),title=s.doc.querySelector('#lesson-title');
+ title.focus();assert.equal(s.key(title,'Tab').defaultPrevented,true);assert.equal(s.focus()===items[0],true);
+ title.focus();assert.equal(s.key(title,'Tab',{shiftKey:true}).defaultPrevented,true);assert.equal(s.focus()===items.at(-1),true);
+ s.click(s.doc.querySelector('[data-answer="0"]'));items=modelTabStops(s);const feedback=s.doc.querySelector('#lesson-feedback');assert.equal(s.focus()===feedback,true);s.key(feedback,'Tab');assert.equal(s.focus()===items[0],true);
+});
+test('modal boundaries exclude hidden inert disabled and nonsequential controls',()=>{
+ const s=setup();s.go('#workshops/security-foundations');open(s,'sec-risk-story');let items=modelTabStops(s);const first=items[0],last=items.at(-1);
+ const extras=s.doc.createElement('div');extras.innerHTML='<button disabled>disabled</button><button hidden>hidden</button><div inert><button>inert</button></div><button tabindex="-1">negative</button><input type="hidden"><button data-test-rects="none">display none</button><button data-test-visibility="hidden">visibility hidden</button><button data-test-visibility="collapse">visibility collapse</button>';s.dialog.append(extras);modelTabStops(s);
+ last.focus();s.key(last,'Tab');assert.equal(s.focus()===first,true);first.focus();s.key(first,'Tab',{shiftKey:true});assert.equal(s.focus()===last,true);
+ for(const el of s.dialog.querySelectorAll('button,a[href],input,select,textarea,[tabindex]'))el.dataset.testRects='none';const title=s.doc.querySelector('#lesson-title');title.focus();assert.equal(s.key(title,'Tab').defaultPrevented,true);assert.equal(s.focus()===title,true);
+});
+test('boundary handler respects Escape modifiers prevented events and closed dialogs',()=>{
+ const s=setup();s.go('#workshops/security-foundations');open(s,'sec-risk-story');const items=modelTabStops(s),last=items.at(-1);
+ for(const flags of [{ctrlKey:true},{metaKey:true},{altKey:true},{isComposing:true},{keyCode:229}]){last.focus();assert.equal(s.key(last,'Tab',flags).defaultPrevented,false);assert.equal(s.focus()===last,true);}
+ last.focus();s.key(last,'Tab',{prePrevented:true});assert.equal(s.focus()===last,true);assert.equal(s.key(last,'Escape').defaultPrevented,false);
+ s.dialog.close();last.focus();assert.equal(s.key(last,'Tab').defaultPrevented,false);assert.equal(s.focus()===last,true);
+});
