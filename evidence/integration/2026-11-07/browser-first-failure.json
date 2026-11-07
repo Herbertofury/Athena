@@ -1,0 +1,32 @@
+{
+  "kind": "actual Chromium, localhost static app",
+  "started": "2026-11-07T08:49:03.652Z",
+  "checks": [
+    {
+      "name": "Learning opens real lesson, retains read state and notes",
+      "result": "pass"
+    },
+    {
+      "name": "Research loads actual catalog within the same document",
+      "result": "pass"
+    },
+    {
+      "name": "Research filters, shortlist and saved query survive workspace switch",
+      "result": "pass"
+    }
+  ],
+  "limitations": [
+    "No actual provider playback or authenticated API tests",
+    "Feature Foundry intentionally excluded pending publication approval",
+    "No runtime speedup or complete parity claim"
+  ],
+  "errors": [],
+  "outsideRequests": [],
+  "browser": "151.0.7922.34",
+  "loadedAppSHA256": "b57a980f563665bff64b151a3d92c16100f025dcaaebf274683db62aa2f8c7a2",
+  "result": "failed",
+  "failure": "AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:\n\n  assert.ok(await page.locator('.workspace-container article.card').count()>0)\n\n    at /home/runner/work/Athena/Athena/scripts/test_browser.cjs:17:239\n    at async check (/home/runner/work/Athena/Athena/scripts/test_browser.cjs:8:31)\n    at async /home/runner/work/Athena/Athena/scripts/test_browser.cjs:17:2",
+  "finished": "2026-11-07T08:49:05.567Z",
+  "source_run": "https://github.com/Herbertofury/Athena/actions/runs/42357039605",
+  "artifact_sha256": "6d65154ebb02ccb40bdcc8ca1159c8262c6e581369b3a59431cc46476090465c"
+}

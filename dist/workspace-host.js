@@ -36,7 +36,7 @@ function createHost({load,context={},onError=()=>{}}){
    await enqueue('setTheme',theme);
    if(token!==generation)return false;
    if(route!==mountedRoute)await enqueue('setRoute',route);
-   return token===generation;
+   return token===generation&&instance.ready!==false;
   }catch(error){
    if(token!==generation||controller.signal.aborted)return false;
    controller.abort();if(pending===controller)pending=null;
