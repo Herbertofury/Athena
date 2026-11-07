@@ -48,7 +48,7 @@ Primary background for these experiments: [UI01], [UI02], [DB06], [DB07]. Docume
 
 ## Full-result serialization: isolated Atlas evidence
 
-The [checked JSON forwarding experiment](https://github.com/Herbertofury/Engineering-Atlas/blob/main/experiments/overview-serialization-lab/README.md) removes repeated result-tree allocation without dropping fields or relying on a result cache. Naive raw forwarding weakened number, Unicode and depth checks; the repaired streaming validator retained those checks. Complete-output comparisons and qualified Linux memory readings are published. This is component evidence, not a universal method or an accepted replacement for the normal HTTP route.
+The [checked JSON forwarding experiment](https://github.com/Herbertofury/Athena/blob/main/engineering/experiments/overview-serialization-lab/README.md) removes repeated result-tree allocation without dropping fields or relying on a result cache. Naive raw forwarding weakened number, Unicode and depth checks; the repaired streaming validator retained those checks. Complete-output comparisons and qualified Linux memory readings are published. This is component evidence, not a universal method or an accepted replacement for the normal HTTP route.
 
 ## Apply current methods at the measured bottleneck
 

@@ -8,7 +8,7 @@ Prepared append-only blocks; inspect current navigation and avoid duplicate inse
 
 ## Learn from apps: article toolkit
 
-[Movez article guide](https://github.com/Herbertofury/Engineering-Atlas/wiki/App-Study) · [All tools](https://github.com/Herbertofury/Engineering-Atlas/wiki/App-Study-Tools) · [Practical steps](https://github.com/Herbertofury/Engineering-Atlas/wiki/App-Study-Workflows) · [Examples and references](https://github.com/Herbertofury/Engineering-Atlas/wiki/App-Study-References)
+[Movez article guide](https://github.com/Herbertofury/Athena/wiki/Engineering-App-Study) · [All tools](https://github.com/Herbertofury/Athena/wiki/Engineering-App-Study-Tools) · [Practical steps](https://github.com/Herbertofury/Athena/wiki/Engineering-App-Study-Workflows) · [Examples and references](https://github.com/Herbertofury/Athena/wiki/Engineering-App-Study-References)
 ```
 
 ## _Sidebar.md addition
@@ -17,8 +17,8 @@ Prepared append-only blocks; inspect current navigation and avoid duplicate inse
 
 ### App study toolkit
 
-- [Study guide](https://github.com/Herbertofury/Engineering-Atlas/wiki/App-Study)
-- [Tools and primary links](https://github.com/Herbertofury/Engineering-Atlas/wiki/App-Study-Tools)
-- [Practical workflows](https://github.com/Herbertofury/Engineering-Atlas/wiki/App-Study-Workflows)
-- [Examples and references](https://github.com/Herbertofury/Engineering-Atlas/wiki/App-Study-References)
+- [Study guide](https://github.com/Herbertofury/Athena/wiki/Engineering-App-Study)
+- [Tools and primary links](https://github.com/Herbertofury/Athena/wiki/Engineering-App-Study-Tools)
+- [Practical workflows](https://github.com/Herbertofury/Athena/wiki/Engineering-App-Study-Workflows)
+- [Examples and references](https://github.com/Herbertofury/Athena/wiki/Engineering-App-Study-References)
 ```

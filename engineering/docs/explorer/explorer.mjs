@@ -3,7 +3,7 @@ import {parseState, encodeState, queryCatalog, repositorySignal, communityScore,
   testPlanFor, plansForCandidate, buildTestPlanProposal} from './__CORE__';
 
 const $ = id => document.getElementById(id);
-const REPO = 'https://github.com/Herbertofury/Engineering-Atlas';
+const REPO = 'https://github.com/Herbertofury/Athena';
 let catalog;
 let state = parseState(location.search);
 let shortlist = [];
@@ -248,7 +248,7 @@ function renderRankingNote() {
   if (state.sort === 'community') {
     content.append(catalog.community.last_completed_at ? ' Last complete collection: ' + dateLabel(catalog.community.last_completed_at) + ' UTC.' : ' No complete community collection has been recorded.');
     if (catalog.community.errors.length) content.append(' Refresh history contains ' + catalog.community.errors.length + ' rejected reports or retrieval errors. A failed refresh retains the previous complete collection.');
-    content.append(' ', link('Inspect the community snapshot ↗', REPO + '/blob/main/data/research-community.json'));
+    content.append(' ', link('Inspect the community snapshot ↗', REPO + '/blob/main/engineering/data/research-community.json'));
   }
   $('ranking-note').replaceChildren(element('span', {class: 'note-icon', 'aria-hidden': 'true'}, 'i'), content);
 }
@@ -353,7 +353,7 @@ async function main() {
     $('result-count').textContent = 'Catalog could not be loaded.';
     $('results').replaceChildren(element('div', {class: 'empty'}, element('h3', {}, 'The catalog is temporarily unavailable'),
       element('p', {}, error.message + '. Reload the page or browse the Markdown catalog.'),
-      link('Open the complete catalog ↗', REPO + '/blob/main/docs/research-catalog.md', 'button secondary')));
+      link('Open the complete catalog ↗', REPO + '/blob/main/engineering/docs/research-catalog.md', 'button secondary')));
   }
 }
 main();

@@ -2,15 +2,15 @@
 
 **Curiosity becomes capability.** An organized home for learning computers, security, coding, infrastructure, data and beyond.
 
-Athena joins a learning academy with an evidence-led engineering research library. Its purpose is deep understanding and demonstrable practical skill, not collecting badges or claiming mastery from a progress bar.
+Athena joins a learning academy with an evidence-led engineering research library. Learning, Research and Media workbench now mount in one Athena document, with shared navigation, search and theme. Feature Foundry is explicitly pending permission to publish its private source. Its purpose is deep understanding and demonstrable practical skill, not collecting badges or claiming mastery from a progress bar.
 
 ## Start here
 
 - [Learning library](docs/README.md): 13 certificate pathways, shared lessons and guided capstones.
-- [Interactive app source](dist/index.html): open this file from a downloaded checkout, or serve `dist/` locally. No build or account is required.
+- [Interactive app source](dist/index.html): serve `dist/` locally so workspace modules and JSON assets load. No account is required.
 - [GitHub wiki](https://github.com/Herbertofury/Athena/wiki): publication status must be checked separately from repository files.
 - [Broader knowledge map](docs/KNOWLEDGE-MAP.md): computers, coding, security and future schools.
-- [Engineering research](engineering/README.md): preserved Atlas research and application work when its migration lands.
+- [Engineering research](engineering/README.md): preserved Atlas research, source history and native Research/Media workspaces.
 - [Coverage and quality](docs/quality/COVERAGE.md): what exists, what is verified and what remains.
 
 ## Start with The Packet Trail
@@ -30,7 +30,7 @@ The [eight-stage networking foundation](docs/paths/packet-trail.md) connects add
 
 ## Run locally
 
-Open `dist/index.html` directly, or run a local static server if your browser restricts file-origin storage. Progress is browser-local and may behave differently for file URLs. Export a backup.
+Serve the app from the repository root with `python3 -m http.server 8000 --bind 127.0.0.1 --directory dist`, then open http://127.0.0.1:8000. Workspace modules fetch local JSON assets and require HTTP; opening a file URL is only a limited learning preview. Progress is browser-local. Export a backup.
 
 For development:
 
@@ -40,12 +40,12 @@ npm run build
 npm test
 ```
 
-The production app has no package dependencies, external fonts, analytics, accounts or backend. The development-only DOM tests use pinned LinkeDOM; they are not real-browser tests.
+The public static app has no account, analytics or external font dependency. Learning and research work locally. Media provider requests remain explicit and autoplay stays off; preserved Rust backend capabilities are not implemented by the static workspace adapters. DOM tests use pinned LinkeDOM. `npm run test:browser` uses pinned Playwright and actual Chromium, with external requests blocked; see its run receipt rather than treating DOM tests as browser evidence.
 
 ## Organization
 
 ```text
-dist/                   Static interactive learning app
+dist/                   One Athena shell and native workspace modules
 src/                    Generated curriculum catalog and lesson data
 research/               Official-source certification register
 scripts/                Reproducible content generation and validation
@@ -55,7 +55,7 @@ docs/shared/            Shared original lessons
 docs/quality/           Coverage, verification and release limitations
 wiki/                   Prepared native GitHub wiki pages
 labs/                   Disposable local exercises and synthetic data
-engineering/            Engineering Atlas migration (separate workstream)
+engineering/            Preserved Engineering Atlas source and evidence
 migration/              Migration inventory and preservation evidence
 ```
 
@@ -64,3 +64,7 @@ migration/              Migration inventory and preservation evidence
 Use only authorized disposable lab systems. Do not attack third-party systems, use real customer records, publish secrets or create paid cloud resources without an explicit budget decision. Notes/progress are stored locally, not encrypted by this app; export files can contain private notes. Import validates known fields and replaces progress only after confirmation.
 
 Certification and vendor names belong to their owners. Athena is independent and not endorsed by the issuers. All practice is original; no exam dumps, leaked items or copied paid courseware are included. Official objective links are a source of truth, and exam versions/prices must be rechecked before booking.
+
+## Unified integration status
+
+Read [the workspace contract](docs/integration/WORKSPACE-CONTRACT.md) and [current integration evidence](docs/integration/STATUS.md). The public-preview package includes learning, research and media only. It does not include private Feature Foundry material or claim full backend/game parity. `scripts/package_app.py` packages only the reviewed runtime hashes in `config/runtime-public-preview.json`; `complete` mode still refuses a missing Foundry module.

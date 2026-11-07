@@ -1,0 +1,212 @@
+   Compiling proc-macro2 v1.0.107
+   Compiling quote v1.0.47
+   Compiling unicode-ident v1.0.27
+   Compiling libc v0.2.191
+   Compiling syn v3.0.9
+   Compiling jobserver v0.1.35
+   Compiling shlex v2.0.1
+   Compiling find-msvc-tools v0.1.15
+   Compiling cc v1.10.0
+   Compiling pkg-config v0.3.34
+   Compiling stable_deref_trait v1.2.1
+   Compiling pin-project-lite v0.2.17
+   Compiling bytes v1.12.1
+   Compiling synstructure v0.14.0
+   Compiling itoa v1.0.18
+   Compiling cmake v0.1.58
+   Compiling fs_extra v1.3.0
+   Compiling futures-core v0.3.34
+   Compiling zerofrom-derive v0.1.8
+   Compiling yoke-derive v0.8.4
+   Compiling zerovec-derive v0.11.7
+   Compiling zerofrom v0.1.8
+   Compiling yoke v0.8.4
+   Compiling displaydoc v0.2.7
+   Compiling dunce v1.0.5
+   Compiling once_cell v1.21.4
+   Compiling zerovec v0.11.9
+   Compiling aws-lc-sys v0.46.0
+   Compiling smallvec v1.16.4
+   Compiling errno v0.3.14
+   Compiling signal-hook-registry v1.4.8
+   Compiling tinystr v0.8.5
+   Compiling tokio-macros v2.7.2
+   Compiling http v1.5.0
+   Compiling mio v1.2.4
+   Compiling socket2 v0.6.5
+   Compiling writeable v0.6.4
+   Compiling aws-lc-rs v1.18.2
+   Compiling log v0.4.34
+   Compiling litemap v0.8.3
+   Compiling zeroize v1.9.1
+   Compiling icu_locale_core v2.4.0
+   Compiling tokio v1.54.1
+   Compiling http-body v1.1.0
+   Compiling potential_utf v0.1.6
+   Compiling tracing-core v0.1.36
+   Compiling zerotrie v0.2.5
+   Compiling memchr v2.8.3
+   Compiling utf8_iter v1.0.4
+   Compiling icu_properties_data v2.4.0
+   Compiling futures-sink v0.3.34
+   Compiling percent-encoding v2.3.2
+   Compiling icu_normalizer_data v2.4.0
+   Compiling icu_collections v2.4.0
+   Compiling icu_provider v2.4.0
+   Compiling tracing v0.1.44
+   Compiling rustls-pki-types v1.15.1
+   Compiling tower-service v0.3.3
+   Compiling httparse v1.10.1
+   Compiling slab v0.4.12
+   Compiling futures-task v0.3.34
+   Compiling serde_core v1.0.229
+   Compiling typenum v1.20.1
+   Compiling futures-io v0.3.34
+   Compiling futures-util v0.3.34
+   Compiling hybrid-array v0.4.15
+   Compiling rustls v0.23.46
+   Compiling try-lock v0.2.5
+   Compiling untrusted v0.9.0
+   Compiling want v0.3.2
+   Compiling icu_normalizer v2.4.0
+   Compiling icu_properties v2.4.0
+   Compiling form_urlencoded v1.2.2
+   Compiling sync_wrapper v1.0.2
+   Compiling tower-layer v0.3.3
+   Compiling httpdate v1.0.3
+   Compiling atomic-waker v1.1.2
+   Compiling subtle v2.6.1
+   Compiling hyper v1.12.0
+   Compiling idna_adapter v1.2.2
+   Compiling crypto-common v0.2.2
+   Compiling block-buffer v0.12.1
+   Compiling futures-channel v0.3.34
+   Compiling ipnet v2.12.2
+   Compiling zmij v1.0.23
+   Compiling vcpkg v0.2.15
+   Compiling serde v1.0.229
+   Compiling cfg-if v1.0.5
+   Compiling base64 v0.23.1
+   Compiling hyper-util v0.1.21
+   Compiling libsqlite3-sys v0.39.1
+   Compiling digest v0.11.3
+   Compiling idna v1.1.0
+   Compiling tower v0.5.3
+   Compiling http-body-util v0.1.5
+   Compiling serde_derive v1.0.229
+   Compiling foldhash v0.2.0
+   Compiling cpufeatures v0.3.1
+   Compiling openssl-probe v0.2.2
+   Compiling serde_json v1.0.154
+   Compiling bitflags v2.13.2
+   Compiling rustls-native-certs v0.8.5
+   Compiling sha2 v0.11.1
+   Compiling hashbrown v0.17.1
+   Compiling url v2.5.8
+   Compiling rustls-webpki v0.103.16
+   Compiling tokio-rustls v0.26.6
+   Compiling mime v0.3.17
+   Compiling ryu v1.0.23
+   Compiling getrandom v0.4.3
+   Compiling serde_urlencoded v0.7.1
+   Compiling hyper-rustls v0.27.10
+   Compiling axum-core v0.5.6
+   Compiling rustls-platform-verifier v0.7.1
+   Compiling tower-http v0.6.11
+   Compiling hashlink v0.12.2
+   Compiling atlas-lab v0.1.0 (<workspace>/athena-migration/cutover/engineering/apps/atlas-lab)
+   Compiling serde_path_to_error v0.1.20
+   Compiling fallible-streaming-iterator v0.1.9
+   Compiling fallible-iterator v0.3.0
+   Compiling matchit v0.8.4
+   Compiling rusqlite v0.41.0
+   Compiling axum v0.8.9
+   Compiling reqwest v0.13.5
+    Finished `test` profile [unoptimized] target(s) in 38.78s
+     Running unittests examples/version_validation_lab.rs (target/debug/examples/version_validation_lab-2e1ee70b029f3f83)
+
+running 4 tests
+test tests::field_errors_do_not_echo_fixture_payloads ... ok
+test tests::known_and_unknown_validation_and_duplicate_semantics ... ok
+test tests::field_types_missing_fields_escaped_keys_and_depth_match ... ok
+test tests::deterministic_complete_payload_stress ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.58s
+
+   Compiling atlas-lab v0.1.0 (<workspace>/athena-migration/cutover/engineering/apps/atlas-lab)
+    Finished `test` profile [unoptimized] target(s) in 0.33s
+     Running unittests examples/upstream_validation_lab.rs (target/debug/examples/upstream_validation_lab-440e06e466a018a6)
+
+running 5 tests
+test tests::commit_contract_matches ... ok
+test tests::schema_binding_duplicates_and_invalid_unicode ... ok
+test tests::complete_bytes_and_numeric_boundaries ... ok
+test tests::recursive_depth_and_size_guard ... ok
+test tests::generated_single_escape_differential_stress ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 1.44s
+
+   Compiling atlas-lab v0.1.0 (<workspace>/athena-migration/cutover/engineering/apps/atlas-lab)
+    Finished `test` profile [unoptimized] target(s) in 0.30s
+     Running unittests examples/project_process_memory_lab.rs (target/debug/examples/project_process_memory_lab-689781386332c2f2)
+
+running 2 tests
+test linux_memory::tests::missing_duplicate_invalid_units_and_values_fail_closed ... ok
+test linux_memory::tests::parses_only_requested_field_and_converts_kib ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Compiling atlas-lab v0.1.0 (<workspace>/athena-migration/cutover/engineering/apps/atlas-lab)
+    Finished `test` profile [unoptimized] target(s) in 0.24s
+     Running unittests examples/dedup_process_probe.rs (target/debug/examples/dedup_process_probe-6e0f5e7bf0555ac7)
+
+running 2 tests
+test linux_memory::tests::parses_only_requested_field_and_converts_kib ... ok
+test linux_memory::tests::missing_duplicate_invalid_units_and_values_fail_closed ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Compiling atlas-lab v0.1.0 (<workspace>/athena-migration/cutover/engineering/apps/atlas-lab)
+    Finished `test` profile [unoptimized] target(s) in 0.30s
+     Running unittests examples/addressed_snapshot_lab.rs (target/debug/examples/addressed_snapshot_lab-5a650a752506d246)
+
+running 2 tests
+test tests::reserved_fields_and_invalid_bounds_fail_closed ... ok
+test tests::duplicate_and_unique_controls_preserve_original_wire_content ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Compiling atlas-lab v0.1.0 (<workspace>/athena-migration/cutover/engineering/apps/atlas-lab)
+    Finished `test` profile [unoptimized] target(s) in 0.30s
+     Running unittests examples/compact_addressed_lab.rs (target/debug/examples/compact_addressed_lab-3d40be1514f4458c)
+
+running 2 tests
+test tests::reserved_fields_and_invalid_bounds_fail_closed ... ok
+test tests::duplicate_and_unique_controls_preserve_original_wire_content ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Compiling atlas-lab v0.1.0 (<workspace>/athena-migration/cutover/engineering/apps/atlas-lab)
+    Finished `test` profile [unoptimized] target(s) in 0.28s
+     Running unittests examples/body_reader_allocations.rs (target/debug/examples/body_reader_allocations-6ef125809ae196cc)
+
+running 3 tests
+test reader::tests::impossible_budget_rejected_before_reading ... ok
+test reader::tests::interrupted_first_read_and_misleading_empty_hint_preserve_data ... ok
+test reader::tests::full_bytes_and_bounds_match_across_hints ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+   Compiling atlas-lab v0.1.0 (<workspace>/athena-migration/cutover/engineering/apps/atlas-lab)
+    Finished `test` profile [unoptimized] target(s) in 0.32s
+     Running unittests examples/body_reader_http.rs (target/debug/examples/body_reader_http-5e4a0b239f8a6ef0)
+
+running 5 tests
+test reader::tests::impossible_budget_rejected_before_reading ... ok
+test reader::tests::interrupted_first_read_and_misleading_empty_hint_preserve_data ... ok
+test reader::tests::full_bytes_and_bounds_match_across_hints ... ok
+test budget_tests::impossible_budget_is_rejected_without_empty_success ... ok
+test budget_tests::accepted_nonblocking_socket_waits_for_delayed_request_bytes ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.05s
+

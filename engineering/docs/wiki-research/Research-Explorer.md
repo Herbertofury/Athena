@@ -1,10 +1,10 @@
 # Research Explorer: discovery, rankings and reproducible tests
 
-[Explorer guide](https://github.com/Herbertofury/Engineering-Atlas/wiki/Research-Explorer) · [2026 research radar](https://github.com/Herbertofury/Engineering-Atlas/wiki/Research-Radar-2026) · [Planned test queue](https://github.com/Herbertofury/Engineering-Atlas/wiki/Research-Test-Queue) · [Community reports](https://github.com/Herbertofury/Engineering-Atlas/wiki/Research-Community)
+[Explorer guide](https://github.com/Herbertofury/Athena/wiki/Engineering-Research-Explorer) · [2026 research radar](https://github.com/Herbertofury/Athena/wiki/Engineering-Research-Radar-2026) · [Planned test queue](https://github.com/Herbertofury/Athena/wiki/Engineering-Research-Test-Queue) · [Community reports](https://github.com/Herbertofury/Athena/wiki/Engineering-Research-Community)
 
-**Canonical repository page:** [docs/research-explorer.md](https://github.com/Herbertofury/Engineering-Atlas/blob/main/docs/research-explorer.md). This wiki edition preserves the documented evidence boundaries; repository commands below run from a project checkout.
+**Canonical repository page:** [docs/research-explorer.md](https://github.com/Herbertofury/Athena/blob/main/engineering/docs/research-explorer.md). This wiki edition preserves the documented evidence boundaries; repository commands below run from a project checkout.
 
-[Open the Explorer](https://herbertofury.github.io/Engineering-Atlas/explorer/) · [Full catalog](https://github.com/Herbertofury/Engineering-Atlas/blob/main/docs/research-catalog.md) · [Test queue](https://github.com/Herbertofury/Engineering-Atlas/blob/main/docs/research-test-queue.md) · [Community reports](https://github.com/Herbertofury/Engineering-Atlas/blob/main/docs/research-community.md)
+[Open the Explorer](https://herbertofury.github.io/Athena/engineering/docs/explorer/) · [Full catalog](https://github.com/Herbertofury/Athena/blob/main/engineering/docs/research-catalog.md) · [Test queue](https://github.com/Herbertofury/Athena/blob/main/engineering/docs/research-test-queue.md) · [Community reports](https://github.com/Herbertofury/Athena/blob/main/engineering/docs/research-community.md)
 
 The Explorer turns the Atlas source register into a searchable research queue. It covers repositories, languages, frameworks, tools, papers, methods, benchmarks and complete evaluated configurations. The consolidated catalog now contains **283 candidates across 20 stack layers and 18 research fields**, including **36 papers**, with **38 structured planned comparisons**. The latest expansion is dated **October 31, 2026 in America/Denver**, with primary sources checked **October 31 UTC**. Earlier dated observations remain preserved. This is a substantial reviewed snapshot, not an exhaustive claim about every field or a guarantee that an upstream project has not changed.
 
@@ -27,7 +27,7 @@ The **Stack layer** filter groups the same candidate records by the job they per
 
 Each layer has a compact decision guide. **Reference choices** are controls or complementary components worth establishing first. **Compare next** identifies alternatives with a tractable experiment. **Research watchlist** preserves previews, prototypes, documentation conflicts or reproduction gaps. These editorial roles do not override an entry's maturity, turn a source claim into a result, or make different roles comparable in one benchmark. The actual target's current implementation remains the first baseline.
 
-The [existing stack-selection guide](https://github.com/Herbertofury/Engineering-Atlas/blob/main/docs/stack-selection.md#stack-layer-comparison-map) is generated from this same layer map. The field/category remains a discovery axis; the evaluation track remains the boundary for community or measured comparisons. Selecting a layer does not create a new evidence cohort. Layer selection is included in shared URLs, CSV membership, and exported proposed test plans.
+The [existing stack-selection guide](https://github.com/Herbertofury/Athena/blob/main/engineering/docs/stack-selection.md#stack-layer-comparison-map) is generated from this same layer map. The field/category remains a discovery axis; the evaluation track remains the boundary for community or measured comparisons. Selecting a layer does not create a new evidence cohort. Layer selection is included in shared URLs, CSV membership, and exported proposed test plans.
 
 **Organization rule:** extend the existing candidate, layer map, research radar and test queue when a release or paper changes a decision. Keep dated source observations and failed comparisons. Create a separate candidate only when identity or a complete evaluated configuration requires it; do not create a new wiki page for each version, stack layer, source or repeated topic. The four existing research wiki pages mirror the canonical guides rather than becoming a second catalog.
 
@@ -35,9 +35,9 @@ The October 28 extension adds **61 candidates**, updates **22 existing records**
 
 ## October 31 expansion and structured plans
 
-The [current research synthesis](https://github.com/Herbertofury/Engineering-Atlas/blob/main/research/2026-10-31-stack-expansion.md) adds 68 candidates, refreshes 15 existing entries and records 164 primary-source observations. Fourteen additional paper records comprise twelve full-text reviews and two explicitly limited reviews. Stable releases, previews, historical paper configurations and older useful controls keep their own context.
+The [current research synthesis](https://github.com/Herbertofury/Athena/blob/main/engineering/research/2026-10-31-stack-expansion.md) adds 68 candidates, refreshes 15 existing entries and records 164 primary-source observations. Fourteen additional paper records comprise twelve full-text reviews and two explicitly limited reviews. Stable releases, previews, historical paper configurations and older useful controls keep their own context.
 
-The [test-plan registry](https://github.com/Herbertofury/Engineering-Atlas/blob/main/data/research-test-plans.json) holds 38 proposals. Selecting a **Planned comparison** shows its decision, controls, gates, metrics and protocol alongside the candidate results. The **Export complete plan** action includes every registered candidate even when a search or another filter hides some of them. The export is a proposal with unfilled execution metadata; no benchmark, acceptance or performance ranking is manufactured. CSV records plan membership, and shared URLs retain the plan ID.
+The [test-plan registry](https://github.com/Herbertofury/Athena/blob/main/engineering/data/research-test-plans.json) holds 38 proposals. Selecting a **Planned comparison** shows its decision, controls, gates, metrics and protocol alongside the candidate results. The **Export complete plan** action includes every registered candidate even when a search or another filter hides some of them. The export is a proposal with unfilled execution metadata; no benchmark, acceptance or performance ranking is manufactured. CSV records plan membership, and shared URLs retain the plan ID.
 
 The popularity snapshot now contains 231 repository observations, including 58 new records checked October 31. Earlier timestamps and the existing retrieval error remain intact. Result cohorts and community evidence have not changed: 11 retained cohorts, 35 observations, and zero approved reports in this snapshot.
 
@@ -72,7 +72,7 @@ At least **three distinct accounts** are required for ranking. The adjusted scor
 
 The site shows the count and links the public reports. Raw mean remains visible in the entry details. The prior reduces the effect of a single enthusiastic report; it does not prevent coordinated accounts, selection bias, conflicts of interest or dishonest claims. A reviewed report means the submission passed the documented moderation boundary, not that Atlas reproduced it. No reports are preseeded.
 
-See [community contribution and moderation](https://github.com/Herbertofury/Engineering-Atlas/blob/main/docs/research-community.md) for the exact approval, edit invalidation, removal and refresh process. Closing an approved issue or removing approval removes it at the next complete refresh. Partial network failures keep the previous snapshot and its original observation dates rather than manufacturing a new consensus.
+See [community contribution and moderation](https://github.com/Herbertofury/Athena/blob/main/engineering/docs/research-community.md) for the exact approval, edit invalidation, removal and refresh process. Closing an approved issue or removing approval removes it at the next complete refresh. Partial network failures keep the previous snapshot and its original observation dates rather than manufacturing a new consensus.
 
 ### Published benchmarks
 
@@ -84,7 +84,7 @@ Only one cohort can be selected at a time. The displayed positions apply to the 
 
 ### Retained Atlas measurements
 
-The existing [Python JSON experiment](https://github.com/Herbertofury/Engineering-Atlas/blob/main/experiments/json-lab/README.md) supplies three parsers, three generated workloads and three operations: **27 observations in nine cohorts**. The builder derives medians directly from retained samples, checks their recorded values, attaches workload and raw-file hashes, and links the immutable source revision. It rejects an unexpected change to that historical evidence file.
+The existing [Python JSON experiment](https://github.com/Herbertofury/Athena/blob/main/engineering/experiments/json-lab/README.md) supplies three parsers, three generated workloads and three operations: **27 observations in nine cohorts**. The builder derives medians directly from retained samples, checks their recorded values, attaches workload and raw-file hashes, and links the immutable source revision. It rejects an unexpected change to that historical evidence file.
 
 These are **existing measurements from October 26**, not new executions in this contribution. They used CPython 3.12.14 on one Linux x86_64 host, with warmed in-process timings and randomized library order. No cold-start, peak-memory, controlled-hardware, confidence-interval or production-acceptance result is implied. Numeric and duplicate-key behavior can disqualify the faster path. The Explorer preserves that context beside the numbers.
 
@@ -92,14 +92,14 @@ These are **existing measurements from October 26**, not new executions in this 
 
 | File | Responsibility |
 |---|---|
-| [research-catalog.json](https://github.com/Herbertofury/Engineering-Atlas/blob/main/data/research-catalog.json) | Stable candidate IDs, stack layers/roles, categories, kinds, source IDs, maturity, editorial priority and proposed tests |
-| [source-index.json](https://github.com/Herbertofury/Engineering-Atlas/blob/main/data/source-index.json) | Complete dated primary-source register: preserved sources.json plus every indexed sources.d fragment |
-| [research-test-plans.json](https://github.com/Herbertofury/Engineering-Atlas/blob/main/data/research-test-plans.json) | Planned-only comparisons with candidate/layer membership, controls, gates, metrics and protocols |
-| [research-signals.json](https://github.com/Herbertofury/Engineering-Atlas/blob/main/data/research-signals.json) | Dated public GitHub counts, repository state, license metadata and retrieval errors |
-| [research-community.json](https://github.com/Herbertofury/Engineering-Atlas/blob/main/data/research-community.json) | Reviewed public experience records; initially empty |
-| [research-results.json](https://github.com/Herbertofury/Engineering-Atlas/blob/main/data/research-results.json) | Versioned external cohorts and source-reported observations |
-| [build_research_explorer.py](https://github.com/Herbertofury/Engineering-Atlas/blob/main/scripts/build_research_explorer.py) | Validation, retained-result import, generated Markdown and fingerprinted web assets |
-| [refresh_research_signals.py](https://github.com/Herbertofury/Engineering-Atlas/blob/main/scripts/refresh_research_signals.py) | Bounded, read-only GitHub retrieval and reviewed-rating ingestion |
+| [research-catalog.json](https://github.com/Herbertofury/Athena/blob/main/engineering/data/research-catalog.json) | Stable candidate IDs, stack layers/roles, categories, kinds, source IDs, maturity, editorial priority and proposed tests |
+| [source-index.json](https://github.com/Herbertofury/Athena/blob/main/engineering/data/source-index.json) | Complete dated primary-source register: preserved sources.json plus every indexed sources.d fragment |
+| [research-test-plans.json](https://github.com/Herbertofury/Athena/blob/main/engineering/data/research-test-plans.json) | Planned-only comparisons with candidate/layer membership, controls, gates, metrics and protocols |
+| [research-signals.json](https://github.com/Herbertofury/Athena/blob/main/engineering/data/research-signals.json) | Dated public GitHub counts, repository state, license metadata and retrieval errors |
+| [research-community.json](https://github.com/Herbertofury/Athena/blob/main/engineering/data/research-community.json) | Reviewed public experience records; initially empty |
+| [research-results.json](https://github.com/Herbertofury/Athena/blob/main/engineering/data/research-results.json) | Versioned external cohorts and source-reported observations |
+| [build_research_explorer.py](https://github.com/Herbertofury/Athena/blob/main/engineering/scripts/build_research_explorer.py) | Validation, retained-result import, generated Markdown and fingerprinted web assets |
+| [refresh_research_signals.py](https://github.com/Herbertofury/Athena/blob/main/engineering/scripts/refresh_research_signals.py) | Bounded, read-only GitHub retrieval and reviewed-rating ingestion |
 
 Every candidate needs primary sources, an explicit test proposal, metrics and caveats. Publication date and check date are separate. Papers may record a primary-supported publication year when the day is unknown; year filters include these, while exact-date sorting leaves them undated. A candidate cannot acquire an accepted status through source review. Cohorts require an explicit metric, unit, direction, evaluation track, protocol, source, observation date and limitations. Candidates must match the cohort's track, and observations cannot override the cohort's evidence type. Multiple configurations require separate identities rather than silently replacing or averaging results.
 
@@ -115,7 +115,7 @@ Layer validation requires known candidate IDs, membership in the selected layer,
 
 The static app has no package install or runtime dependency. GitHub Pages serves the existing docs directory. The build fingerprints the catalog, JavaScript and styles together, and checks generated content against its inputs before publication.
 
-The [retained implementation-validation record](https://github.com/Herbertofury/Engineering-Atlas/blob/main/experiments/research-explorer-validation/README.md) documents executable tests, inspected browser states and the remaining saved-download verification limit. These are software checks, not new candidate benchmarks. [Prepared wiki pages](https://github.com/Herbertofury/Engineering-Atlas/blob/main/docs/wiki-research/README.md) preserve complete publishable wiki content alongside its canonical repository sources.
+The [retained implementation-validation record](https://github.com/Herbertofury/Athena/blob/main/engineering/experiments/research-explorer-validation/README.md) documents executable tests, inspected browser states and the remaining saved-download verification limit. These are software checks, not new candidate benchmarks. [Prepared wiki pages](https://github.com/Herbertofury/Athena/blob/main/engineering/docs/wiki-research/README.md) preserve complete publishable wiki content alongside its canonical repository sources.
 
 ### Refresh data
 
@@ -127,7 +127,7 @@ Use a read-scoped GitHub credential through the documented environment variable 
 
 ## What makes a future test eligible
 
-Use the [experiment template](https://github.com/Herbertofury/Engineering-Atlas/blob/main/templates/experiment.md). State the decision, baseline and candidate revisions, target hardware/OS, dependency locks, workload hashes, required outputs, validation/error semantics, budgets, seeds, trial order and failure policy **before running**. Compare complete outcomes. Retain raw observations, negative results and disqualifiers. Separate cold start, warm steady state and changed-input behavior.
+Use the [experiment template](https://github.com/Herbertofury/Athena/blob/main/engineering/templates/experiment.md). State the decision, baseline and candidate revisions, target hardware/OS, dependency locks, workload hashes, required outputs, validation/error semantics, budgets, seeds, trial order and failure policy **before running**. Compare complete outcomes. Retain raw observations, negative results and disqualifiers. Separate cold start, warm steady state and changed-input behavior.
 
 A claimed improvement needs to clear correctness, security, feature, resource and user-experience gates in the named target. Smaller output, omitted warnings, weaker validation, warmed caches presented as cold results, or a different workload do not establish a win. A paper or source leaderboard earns a place in the queue; adoption requires the target's own evidence.
 

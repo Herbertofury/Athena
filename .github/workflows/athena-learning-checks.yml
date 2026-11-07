@@ -23,3 +23,13 @@ jobs:
       - run: npm test
       - name: Generated curriculum is current
         run: git diff --exit-code -- src dist/catalog.js docs/certificates docs/shared docs/paths docs/README.md wiki
+      - name: Install browser for actual runtime checks
+        run: npx playwright install --with-deps chromium
+      - name: Test unified public app in Chromium
+        run: npm run test:browser
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: athena-browser-evidence
+          path: browser-results
+          if-no-files-found: ignore

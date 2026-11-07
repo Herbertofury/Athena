@@ -11,7 +11,7 @@ import re
 from urllib.parse import unquote, urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
-REPO = 'https://github.com/Herbertofury/Engineering-Atlas'
+REPO = 'https://github.com/Herbertofury/Athena'
 
 
 def project(source, mapping):
@@ -27,7 +27,7 @@ def project(source, mapping):
         if not resolved.is_relative_to(ROOT) or not resolved.exists():
             raise ValueError(f'{source}: unsafe or missing local link {target}')
         relative = resolved.relative_to(ROOT).as_posix()
-        url = REPO + '/wiki/' + mapping[relative] if relative in mapping else REPO + '/blob/main/' + relative
+        url = REPO + '/wiki/' + mapping[relative] if relative in mapping else REPO + '/blob/main/engineering/' + relative
         if parsed.query:
             url += '?' + parsed.query
         if parsed.fragment:
@@ -35,7 +35,7 @@ def project(source, mapping):
         return f'[{label}]({url})'
 
     body = re.sub(r'\[([^\]]*)\]\(([^)]+)\)', link, text)
-    return f'[← Atlas home]({REPO}/wiki/Home) · [Canonical source]({REPO}/blob/main/{source})\n\n' + body.rstrip() + '\n'
+    return f'[← Athena engineering]({REPO}/wiki/Engineering-Home) · [Canonical source]({REPO}/blob/main/engineering/{source})\n\n' + body.rstrip() + '\n'
 
 
 def main():
@@ -43,7 +43,7 @@ def main():
     parser.add_argument('wiki_directory', type=Path)
     parser.add_argument('--check', action='store_true', help='Compare without writing')
     args = parser.parse_args()
-    mapping = json.loads((ROOT / 'data/wiki-adapter-pages.json').read_text())
+    mapping = {source: 'Engineering-' + page for source, page in json.loads((ROOT / 'data/wiki-adapter-pages.json').read_text()).items()}
     if len(mapping.values()) != len(set(mapping.values())):
         raise ValueError('Duplicate wiki page names')
     if not args.wiki_directory.is_dir():

@@ -26,14 +26,15 @@ jobs:
           python-version: '3.13'
       - run: npm ci --ignore-scripts
       - run: npm test
-      - name: Package learning and engineering together
+      - name: Verify runtime in actual Chromium
         run: |
-          mkdir -p public/learn
-          cp -R dist/. public/learn/
-          if [ -d engineering ]; then cp -R engineering public/engineering; fi
-          printf '<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="refresh" content="0;url=learn/"><title>Athena</title><a href="learn/">Open Athena learning</a></html>' > public/index.html
-          touch public/.nojekyll
+          npx playwright install --with-deps chromium
+          npm run test:browser
+      - name: Package one public Athena app
+        run: python3 scripts/package_app.py --profile public-preview --allowlist config/runtime-public-preview.json --output public
       - uses: actions/configure-pages@v5
+        with:
+          enablement: false
       - uses: actions/upload-pages-artifact@v3
         with:
           path: public

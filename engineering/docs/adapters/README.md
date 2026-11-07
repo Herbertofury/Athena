@@ -90,7 +90,7 @@ General results stay here. Only verified improvement against a target project's 
 
 ## Real-media workbench
 
-[Open the public media laboratory](https://herbertofury.github.io/Engineering-Atlas/media-lab/) for real source snapshots, image decode and explicit player states. [Retained browser evidence](../../experiments/real-media-lab/README.md) distinguishes working Steam playback, delayed YouTube playback with a failed thumbnail, and unknown gallery coverage.
+[Open the public media laboratory](https://herbertofury.github.io/Athena/engineering/docs/media-lab/) for real source snapshots, image decode and explicit player states. [Retained browser evidence](../../experiments/real-media-lab/README.md) distinguishes working Steam playback, delayed YouTube playback with a failed thumbnail, and unknown gallery coverage.
 
 ## Round-three communities and executable social normalization
 

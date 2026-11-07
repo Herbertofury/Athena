@@ -176,7 +176,7 @@ export function exportCSV(entries, catalog, state = null) {
 }
 
 export function ratingURL(entry) {
-  const url = new URL('https://github.com/Herbertofury/Engineering-Atlas/issues/new');
+  const url = new URL('https://github.com/Herbertofury/Athena/issues/new');
   url.searchParams.set('template', 'research-rating.yml');
   url.searchParams.set('title', '[Research rating] ' + entry.name);
   url.searchParams.set('candidate_id', entry.id);

@@ -12,10 +12,10 @@ The four pages contain complete research documentation, dated snapshot context, 
 
 | Wiki page | Published content copy | Canonical repository document |
 |---|---|---|
-| [Research-Explorer](https://github.com/Herbertofury/Engineering-Atlas/wiki/Research-Explorer) | [Research-Explorer.md](https://github.com/Herbertofury/Engineering-Atlas/blob/main/docs/wiki-research/Research-Explorer.md) | [docs/research-explorer.md](https://github.com/Herbertofury/Engineering-Atlas/blob/main/docs/research-explorer.md) |
-| [Research-Test-Queue](https://github.com/Herbertofury/Engineering-Atlas/wiki/Research-Test-Queue) | [Research-Test-Queue.md](https://github.com/Herbertofury/Engineering-Atlas/blob/main/docs/wiki-research/Research-Test-Queue.md) | [docs/research-test-queue.md](https://github.com/Herbertofury/Engineering-Atlas/blob/main/docs/research-test-queue.md) |
-| [Research-Radar-2026](https://github.com/Herbertofury/Engineering-Atlas/wiki/Research-Radar-2026) | [Research-Radar-2026.md](https://github.com/Herbertofury/Engineering-Atlas/blob/main/docs/wiki-research/Research-Radar-2026.md) | [October 31 review](https://github.com/Herbertofury/Engineering-Atlas/blob/main/research/2026-10-31-stack-expansion.md), with the October 27–28 record retained |
-| [Research-Community](https://github.com/Herbertofury/Engineering-Atlas/wiki/Research-Community) | [Research-Community.md](https://github.com/Herbertofury/Engineering-Atlas/blob/main/docs/wiki-research/Research-Community.md) | [docs/research-community.md](https://github.com/Herbertofury/Engineering-Atlas/blob/main/docs/research-community.md) |
+| [Research-Explorer](https://github.com/Herbertofury/Athena/wiki/Engineering-Research-Explorer) | [Research-Explorer.md](https://github.com/Herbertofury/Athena/blob/main/engineering/docs/wiki-research/Research-Explorer.md) | [docs/research-explorer.md](https://github.com/Herbertofury/Athena/blob/main/engineering/docs/research-explorer.md) |
+| [Research-Test-Queue](https://github.com/Herbertofury/Athena/wiki/Engineering-Research-Test-Queue) | [Research-Test-Queue.md](https://github.com/Herbertofury/Athena/blob/main/engineering/docs/wiki-research/Research-Test-Queue.md) | [docs/research-test-queue.md](https://github.com/Herbertofury/Athena/blob/main/engineering/docs/research-test-queue.md) |
+| [Research-Radar-2026](https://github.com/Herbertofury/Athena/wiki/Engineering-Research-Radar-2026) | [Research-Radar-2026.md](https://github.com/Herbertofury/Athena/blob/main/engineering/docs/wiki-research/Research-Radar-2026.md) | [October 31 review](https://github.com/Herbertofury/Athena/blob/main/engineering/research/2026-10-31-stack-expansion.md), with the October 27–28 record retained |
+| [Research-Community](https://github.com/Herbertofury/Athena/wiki/Engineering-Research-Community) | [Research-Community.md](https://github.com/Herbertofury/Athena/blob/main/engineering/docs/wiki-research/Research-Community.md) | [docs/research-community.md](https://github.com/Herbertofury/Athena/blob/main/engineering/docs/research-community.md) |
 
 ## Maintain the wiki copies
 
@@ -29,9 +29,9 @@ These are the exact append-only blocks published against the original navigation
 
 ## Research Explorer and the 2026 test queue
 
-[Search and filter the research catalog](https://herbertofury.github.io/Engineering-Atlas/explorer/): 154 entries across 18 fields, dated source evidence, separate popularity and benchmark views, comparisons, and CSV export. The expansion carries 16 planned test cohorts and zero approved community reports in its initial reviewed snapshot.
+[Search and filter the research catalog](https://herbertofury.github.io/Athena/engineering/docs/explorer/): 154 entries across 18 fields, dated source evidence, separate popularity and benchmark views, comparisons, and CSV export. The expansion carries 16 planned test cohorts and zero approved community reports in its initial reviewed snapshot.
 
-[Explorer guide](https://github.com/Herbertofury/Engineering-Atlas/wiki/Research-Explorer) · [2026 research radar](https://github.com/Herbertofury/Engineering-Atlas/wiki/Research-Radar-2026) · [Planned test queue](https://github.com/Herbertofury/Engineering-Atlas/wiki/Research-Test-Queue) · [Community reports](https://github.com/Herbertofury/Engineering-Atlas/wiki/Research-Community)
+[Explorer guide](https://github.com/Herbertofury/Athena/wiki/Engineering-Research-Explorer) · [2026 research radar](https://github.com/Herbertofury/Athena/wiki/Engineering-Research-Radar-2026) · [Planned test queue](https://github.com/Herbertofury/Athena/wiki/Engineering-Research-Test-Queue) · [Community reports](https://github.com/Herbertofury/Athena/wiki/Engineering-Research-Community)
 ```
 
 ### Append to _Sidebar.md
@@ -40,8 +40,8 @@ These are the exact append-only blocks published against the original navigation
 
 ### Research Explorer
 
-- [Explorer guide](https://github.com/Herbertofury/Engineering-Atlas/wiki/Research-Explorer)
-- [2026 research radar](https://github.com/Herbertofury/Engineering-Atlas/wiki/Research-Radar-2026)
-- [Planned test queue](https://github.com/Herbertofury/Engineering-Atlas/wiki/Research-Test-Queue)
-- [Community reports](https://github.com/Herbertofury/Engineering-Atlas/wiki/Research-Community)
+- [Explorer guide](https://github.com/Herbertofury/Athena/wiki/Engineering-Research-Explorer)
+- [2026 research radar](https://github.com/Herbertofury/Athena/wiki/Engineering-Research-Radar-2026)
+- [Planned test queue](https://github.com/Herbertofury/Athena/wiki/Engineering-Research-Test-Queue)
+- [Community reports](https://github.com/Herbertofury/Athena/wiki/Engineering-Research-Community)
 ```

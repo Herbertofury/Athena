@@ -6,9 +6,9 @@ not a general recommendation or approval to change another project.
 
 ## Interactive laboratories
 
-- [Card density laboratory](https://herbertofury.github.io/Engineering-Atlas/card-lab/): generated records, complete-field comparisons and separately measured preparation/rendering. Not a target application's performance test.
-- [Real media laboratory](https://herbertofury.github.io/Engineering-Atlas/media-lab/): dated public-source cards, explicit image/player loading, autoplay off. Player-ready and actually playing are separate evidence states.
-- [Verified-byte audio laboratory](https://herbertofury.github.io/Engineering-Atlas/audio-lab/): one public Commons clip, manual full-file verification, native controls and autoplay off. Served assets are verified; actual browser playing and UI acceptance remain open.
+- [Card density laboratory](https://herbertofury.github.io/Athena/engineering/docs/card-lab/): generated records, complete-field comparisons and separately measured preparation/rendering. Not a target application's performance test.
+- [Real media laboratory](https://herbertofury.github.io/Athena/engineering/docs/media-lab/): dated public-source cards, explicit image/player loading, autoplay off. Player-ready and actually playing are separate evidence states.
+- [Verified-byte audio laboratory](https://herbertofury.github.io/Athena/engineering/docs/audio-lab/): one public Commons clip, manual full-file verification, native controls and autoplay off. Served assets are verified; actual browser playing and UI acceptance remain open.
 - [Rust application prototype](../apps/atlas-lab/README.md): local-only collection queue, durable snapshots and bounded experiments. This link is source/documentation, not a hosted authenticated service or finished installer.
 
 ## Collection and complete records

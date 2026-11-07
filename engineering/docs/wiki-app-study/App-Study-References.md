@@ -1,6 +1,6 @@
 # Article references, examples and claims to keep separate
 
-[Study guide](https://github.com/Herbertofury/Engineering-Atlas/wiki/App-Study) · [Tool inventory](https://github.com/Herbertofury/Engineering-Atlas/wiki/App-Study-Tools) · [Practical workflows](https://github.com/Herbertofury/Engineering-Atlas/wiki/App-Study-Workflows)
+[Study guide](https://github.com/Herbertofury/Athena/wiki/Engineering-App-Study) · [Tool inventory](https://github.com/Herbertofury/Athena/wiki/Engineering-App-Study-Tools) · [Practical workflows](https://github.com/Herbertofury/Athena/wiki/Engineering-App-Study-Workflows)
 
 The article blends tools, inspiration, products being studied and launch anecdotes. Keep those roles separate: a popular example is not a dependency, a gallery is not an asset license, and a vendor result is not a local benchmark.
 
@@ -75,4 +75,4 @@ These are **unverified secondary examples**, not primary evidence for a capabili
 
 ---
 
-Canonical source: [docs/app-study/references.md](https://github.com/Herbertofury/Engineering-Atlas/blob/main/docs/app-study/references.md). Prepared November 6, 2026; separate wiki publication must be verified.
+Canonical source: [docs/app-study/references.md](https://github.com/Herbertofury/Athena/blob/main/engineering/docs/app-study/references.md). Prepared November 6, 2026; separate wiki publication must be verified.

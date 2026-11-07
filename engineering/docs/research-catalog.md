@@ -2,7 +2,7 @@
 
 **Snapshot: 2026-10-31 (America/Denver).** Source checks use UTC dates.
 
-[Interactive Explorer](https://herbertofury.github.io/Engineering-Atlas/explorer/) · [Ranking methodology](research-explorer.md) · [Test queue](research-test-queue.md)
+[Interactive Explorer](https://herbertofury.github.io/Athena/engineering/docs/explorer/) · [Ranking methodology](research-explorer.md) · [Test queue](research-test-queue.md)
 
 Every entry below is a research candidate. Priority is an editorial test queue, not a performance score. Existing local measurements are exposed separately by exact cohort. No universal winner is implied.
 

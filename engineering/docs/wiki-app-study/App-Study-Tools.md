@@ -1,6 +1,6 @@
 # Article tool inventory
 
-[Study guide](https://github.com/Herbertofury/Engineering-Atlas/wiki/App-Study) · [Practical workflows](https://github.com/Herbertofury/Engineering-Atlas/wiki/App-Study-Workflows) · [References and corrections](https://github.com/Herbertofury/Engineering-Atlas/wiki/App-Study-References)
+[Study guide](https://github.com/Herbertofury/Athena/wiki/Engineering-App-Study) · [Practical workflows](https://github.com/Herbertofury/Athena/wiki/Engineering-App-Study-Workflows) · [References and corrections](https://github.com/Herbertofury/Athena/wiki/Engineering-App-Study-References)
 
 Scope: names in the article's prose, commands, examples and relevant tool diagrams. A row can group tightly related commands or components. These are **candidates and links**, not installed or accepted tools. Tool licenses do not grant rights to a target app or its assets. Check the pinned release and all bundled/dependency notices before redistribution.
 
@@ -76,7 +76,7 @@ The article explicitly does **not** use [Google Analytics](https://developers.go
 
 `tools/ipc-map.mjs`, `tools/capture.mjs`, `tools/nocopy.py`, `ListFunctions.java`, `track.js`, `download.js`, `dashboard.js`, `timeline.ts`, `video-voiceover`, and the `agent()` / `parallel()` / `pipeline()` orchestration example are sample filenames/functions or proposed artifacts. The article does not provide a complete, versioned runnable package for all of them. Do not install a package with a matching name and assume it is the author's tool.
 
-The same applies to `MAP.md`, `FEATURE.md`, `FORK.md`, `BINARY.md`, `STYLE-REF.md`, `STYLE.md`, `MATRIX.md`, `MINIMAL.md`, `CONTRACT.md`, `KEEP.md`, `PROTOCOL.md` and `shared/types.ts`: these are useful deliverables to author, not external products. [Workflows](https://github.com/Herbertofury/Engineering-Atlas/wiki/App-Study-Workflows) explains what each should prove.
+The same applies to `MAP.md`, `FEATURE.md`, `FORK.md`, `BINARY.md`, `STYLE-REF.md`, `STYLE.md`, `MATRIX.md`, `MINIMAL.md`, `CONTRACT.md`, `KEEP.md`, `PROTOCOL.md` and `shared/types.ts`: these are useful deliverables to author, not external products. [Workflows](https://github.com/Herbertofury/Athena/wiki/Engineering-App-Study-Workflows) explains what each should prove.
 
 ## Named tool calls inside the two engines
 
@@ -110,4 +110,4 @@ CLI entry points in the article are `doctor`, `commands`, `mcp`, `rebuild`, with
 
 ---
 
-Canonical source: [docs/app-study/tools.md](https://github.com/Herbertofury/Engineering-Atlas/blob/main/docs/app-study/tools.md). Prepared November 6, 2026; separate wiki publication must be verified.
+Canonical source: [docs/app-study/tools.md](https://github.com/Herbertofury/Athena/blob/main/engineering/docs/app-study/tools.md). Prepared November 6, 2026; separate wiki publication must be verified.

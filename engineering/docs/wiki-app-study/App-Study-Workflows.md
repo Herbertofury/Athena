@@ -1,6 +1,6 @@
 # Practical steps: from observation to an original implementation
 
-[Study guide](https://github.com/Herbertofury/Engineering-Atlas/wiki/App-Study) · [Tool inventory](https://github.com/Herbertofury/Engineering-Atlas/wiki/App-Study-Tools) · [References and corrections](https://github.com/Herbertofury/Engineering-Atlas/wiki/App-Study-References)
+[Study guide](https://github.com/Herbertofury/Athena/wiki/Engineering-App-Study) · [Tool inventory](https://github.com/Herbertofury/Athena/wiki/Engineering-App-Study-Tools) · [References and corrections](https://github.com/Herbertofury/Athena/wiki/Engineering-App-Study-References)
 
 **Documentation only, not executed in this review.** Commands below are deliberately small examples for a separately authorized workspace. Replace placeholders and verify each installed tool's help/version first. Tool installation, persistent MCP registration, runtime control, uploads, paid services and public releases are separate decisions. Nothing here authorizes bypassing access controls or running an unfamiliar binary.
 
@@ -138,4 +138,4 @@ craft-anything-cli rebuild - 'Build an original demo from the approved behavior 
 
 ---
 
-Canonical source: [docs/app-study/workflows.md](https://github.com/Herbertofury/Engineering-Atlas/blob/main/docs/app-study/workflows.md). Prepared November 6, 2026; separate wiki publication must be verified.
+Canonical source: [docs/app-study/workflows.md](https://github.com/Herbertofury/Athena/blob/main/engineering/docs/app-study/workflows.md). Prepared November 6, 2026; separate wiki publication must be verified.

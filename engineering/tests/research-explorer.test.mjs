@@ -153,7 +153,7 @@ function ratings(candidate, count, score) {
     track: candidate.evaluation.track, score, author_id: i + 1,
     author: 'synthetic-account-' + (i + 1), review_state: 'approved',
     experience: 'Synthetic account fixture.', version: 'synthetic-version',
-    issue_url: 'https://github.com/Herbertofury/Engineering-Atlas/issues/' + (i + 1),
+    issue_url: 'https://github.com/Herbertofury/Athena/issues/' + (i + 1),
     updated_at: CHECKED + 'T12:00:00Z'}));
 }
 
@@ -483,7 +483,7 @@ test('rating links retain the intended repository and encode entry names without
   const candidate = entry('rating', {name: 'Synthetic <script> &labels=accepted#fragment'});
   const url = new URL(ratingURL(candidate));
   assert.equal(url.origin, 'https://github.com');
-  assert.equal(url.pathname, '/Herbertofury/Engineering-Atlas/issues/new');
+  assert.equal(url.pathname, '/Herbertofury/Athena/issues/new');
   assert.equal(url.searchParams.get('template'), 'research-rating.yml');
   assert.equal(url.searchParams.get('candidate_id'), candidate.id);
   assert.equal(url.searchParams.get('track'), TRACK);

@@ -1,6 +1,6 @@
 # Research Explorer: discovery, rankings and reproducible tests
 
-[Open the Explorer](https://herbertofury.github.io/Engineering-Atlas/explorer/) · [Full catalog](research-catalog.md) · [Test queue](research-test-queue.md) · [Community reports](research-community.md)
+[Open the Explorer](https://herbertofury.github.io/Athena/engineering/docs/explorer/) · [Full catalog](research-catalog.md) · [Test queue](research-test-queue.md) · [Community reports](research-community.md)
 
 The Explorer turns the Atlas source register into a searchable research queue. It covers repositories, languages, frameworks, tools, papers, methods, benchmarks and complete evaluated configurations. The consolidated catalog now contains **283 candidates across 20 stack layers and 18 research fields**, including **36 papers**, with **38 structured planned comparisons**. The latest expansion is dated **October 31, 2026 in America/Denver**, with primary sources checked **October 31 UTC**. Earlier dated observations remain preserved. This is a substantial reviewed snapshot, not an exhaustive claim about every field or a guarantee that an upstream project has not changed.
 

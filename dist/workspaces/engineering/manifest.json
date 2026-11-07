@@ -1,0 +1,104 @@
+{
+  "schema_version": 1,
+  "kind": "native Athena workspace adapters",
+  "source_modules": [
+    {
+      "destination": "research/index.mjs",
+      "source": "engineering/docs/explorer/explorer.mjs",
+      "source_sha256": "e8f875746a3d42102558952da2c53d32250dc3295dd451838a9ac510fee3c85c",
+      "output_sha256": "e0a15bea7bc82047da0c3f901797f13871cddc728914564bf13df7b2069f11c9"
+    },
+    {
+      "destination": "research/explorer-core.mjs",
+      "source": "engineering/docs/explorer/explorer-core.mjs",
+      "source_sha256": "06f94ed2ef4259729f6fa956672095f8560b7e04289276c2601e0b24c7d62811",
+      "output_sha256": "06f94ed2ef4259729f6fa956672095f8560b7e04289276c2601e0b24c7d62811"
+    },
+    {
+      "destination": "research/catalog.json",
+      "source": "engineering/docs/explorer/catalog.656d184801be688c.json",
+      "source_sha256": "656d184801be688cea150ca45791f96cf79e9448cf3ff3f2c767db7063cad442",
+      "output_sha256": "656d184801be688cea150ca45791f96cf79e9448cf3ff3f2c767db7063cad442"
+    },
+    {
+      "destination": "media/index.mjs",
+      "source": "engineering/docs/media-lab/media.js",
+      "source_sha256": "16fb57473d1aac2db55e0a6bc18ac076dbafd39d4deb3cc14addabdcad072ad1",
+      "output_sha256": "e3a3b4a619cc5a4a5bc92fc91823341cb68183637b54e5231c6b158e6ef5af77"
+    },
+    {
+      "destination": "media/media-event-recorder.mjs",
+      "source": "engineering/docs/media-lab/media-event-recorder.mjs",
+      "source_sha256": "9231740ac738ffb68c9e3334b935b440437007e28f51eea7c0ab63017d8742f4",
+      "output_sha256": "9231740ac738ffb68c9e3334b935b440437007e28f51eea7c0ab63017d8742f4"
+    },
+    {
+      "destination": "media/media-events.mjs",
+      "source": "engineering/docs/media-lab/media-events.mjs",
+      "source_sha256": "e336b2c509ca803072cb2d56c65a0b111fa4a6402b85c69f823e6f5f117a98cf",
+      "output_sha256": "e336b2c509ca803072cb2d56c65a0b111fa4a6402b85c69f823e6f5f117a98cf"
+    },
+    {
+      "destination": "media/bilibili-player.mjs",
+      "source": "engineering/docs/media-lab/bilibili-player.mjs",
+      "source_sha256": "4f893473b3fc38d20e38ee709f305137bfa3b48290dba1c42fbdb01c8f763444",
+      "output_sha256": "4f893473b3fc38d20e38ee709f305137bfa3b48290dba1c42fbdb01c8f763444"
+    },
+    {
+      "destination": "media/resource-loader.mjs",
+      "source": "engineering/docs/media-lab/resource-loader.mjs",
+      "source_sha256": "f95053a1d56a85330314efe88ca6c26b45ac1c3abb530639b770601e03608c06",
+      "output_sha256": "f95053a1d56a85330314efe88ca6c26b45ac1c3abb530639b770601e03608c06"
+    },
+    {
+      "destination": "media/media-core.mjs",
+      "source": "engineering/docs/media-lab/media-core.mjs",
+      "source_sha256": "55e38161c841a4204392c7ffce01fc8697ac78200ae80a04ae4cc53e884a57a2",
+      "output_sha256": "55e38161c841a4204392c7ffce01fc8697ac78200ae80a04ae4cc53e884a57a2"
+    },
+    {
+      "destination": "media/event-log-view.mjs",
+      "source": "engineering/docs/media-lab/event-log-view.mjs",
+      "source_sha256": "8da785a48d10552f8920214f4c83067a3de646eb6228549b138d8e4d9b383ecd",
+      "output_sha256": "8da785a48d10552f8920214f4c83067a3de646eb6228549b138d8e4d9b383ecd"
+    },
+    {
+      "destination": "media/public-fixtures.json",
+      "source": "engineering/docs/media-lab/public-fixtures.json",
+      "source_sha256": "2aa0668aba0eb29c69faf368fab206369718335be7f47bc0c6592236e79d1aba",
+      "output_sha256": "2aa0668aba0eb29c69faf368fab206369718335be7f47bc0c6592236e79d1aba"
+    },
+    {
+      "destination": "media/vendor/hls-1.7.3.min.js",
+      "source": "engineering/docs/media-lab/vendor/hls-1.7.3.min.js",
+      "source_sha256": "a12e7ee1cd64a69dcdb314157e45dafcba705bfb0b1440b7935cb265d374423e",
+      "output_sha256": "a12e7ee1cd64a69dcdb314157e45dafcba705bfb0b1440b7935cb265d374423e"
+    },
+    {
+      "destination": "media/vendor/HLS-LICENSE.txt",
+      "source": "engineering/docs/media-lab/vendor/HLS-LICENSE.txt",
+      "source_sha256": "ca8773cf798c7ed997d4dd7c8e23c348699f8d5b7462636694cc14de6cda12db",
+      "output_sha256": "ca8773cf798c7ed997d4dd7c8e23c348699f8d5b7462636694cc14de6cda12db"
+    },
+    {
+      "destination": "media/vendor/provenance.json",
+      "source": "engineering/docs/media-lab/vendor/provenance.json",
+      "source_sha256": "15fcfeb0546007b06f104cc7419dadfc697b7858e3436c4753113cb43b5a4885",
+      "output_sha256": "15fcfeb0546007b06f104cc7419dadfc697b7858e3436c4753113cb43b5a4885"
+    },
+    {
+      "destination": "media/preview-loader.mjs",
+      "source": "engineering/docs/media-lab/preview-loader.mjs",
+      "source_sha256": "2eff415295af840549bf271e0dc328550f94578f30aa5d28daefd0df418ee945",
+      "output_sha256": "e48c8a20660c787bb364899937d3b38c22ff69a2a623e80136210c5be0a34eef"
+    }
+  ],
+  "boundaries": [
+    "No iframe app wrapper or runtime eval",
+    "No automatic provider requests or autoplay",
+    "Research pure query/comparison module copied unchanged",
+    "Media lifecycle adds abort/cleanup; source player behavior and completeness states retained",
+    "Rust local API workspace is not mounted by these static modules",
+    "Real-browser visual/input and actual player acceptance remain separate gates"
+  ]
+}

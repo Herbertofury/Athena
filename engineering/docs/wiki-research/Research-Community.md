@@ -1,12 +1,12 @@
 # Community reports and GitHub signals
 
-[Explorer guide](https://github.com/Herbertofury/Engineering-Atlas/wiki/Research-Explorer) · [2026 research radar](https://github.com/Herbertofury/Engineering-Atlas/wiki/Research-Radar-2026) · [Planned test queue](https://github.com/Herbertofury/Engineering-Atlas/wiki/Research-Test-Queue) · [Community reports](https://github.com/Herbertofury/Engineering-Atlas/wiki/Research-Community)
+[Explorer guide](https://github.com/Herbertofury/Athena/wiki/Engineering-Research-Explorer) · [2026 research radar](https://github.com/Herbertofury/Athena/wiki/Engineering-Research-Radar-2026) · [Planned test queue](https://github.com/Herbertofury/Athena/wiki/Engineering-Research-Test-Queue) · [Community reports](https://github.com/Herbertofury/Athena/wiki/Engineering-Research-Community)
 
-**Canonical repository page:** [docs/research-community.md](https://github.com/Herbertofury/Engineering-Atlas/blob/main/docs/research-community.md). This wiki edition preserves the documented evidence boundaries; repository commands below run from a project checkout.
+**Canonical repository page:** [docs/research-community.md](https://github.com/Herbertofury/Athena/blob/main/engineering/docs/research-community.md). This wiki edition preserves the documented evidence boundaries; repository commands below run from a project checkout.
 
-**Current checked-in community snapshot:** [0 eligible approved reports](https://github.com/Herbertofury/Engineering-Atlas/blob/main/data/research-community.json); the most recent complete collection finished at **2026-10-28 04:53:19 UTC**. No candidate yet meets the three-account threshold for community ranking. An empty successful collection is distinct from an unattempted or failed refresh; no ratings or example votes are preseeded as evidence.
+**Current checked-in community snapshot:** [0 eligible approved reports](https://github.com/Herbertofury/Athena/blob/main/engineering/data/research-community.json); the most recent complete collection finished at **2026-10-28 04:53:19 UTC**. No candidate yet meets the three-account threshold for community ranking. An empty successful collection is distinct from an unattempted or failed refresh; no ratings or example votes are preseeded as evidence.
 
-The [research explorer](https://herbertofury.github.io/Engineering-Atlas/explorer/) keeps three kinds of comparison separate: dated GitHub popularity, moderated community experience, and benchmark observations within a named comparable cohort. A community rating describes one account's experience with one candidate in one evaluation track. It does not establish a universal winner or promote a candidate to an Atlas-measured result. The [research method](https://github.com/Herbertofury/Engineering-Atlas/blob/main/docs/research-method.md) and [benchmark format](https://github.com/Herbertofury/Engineering-Atlas/blob/main/docs/benchmark-format.md) define the stronger evidence needed for that promotion.
+The [research explorer](https://herbertofury.github.io/Athena/engineering/docs/explorer/) keeps three kinds of comparison separate: dated GitHub popularity, moderated community experience, and benchmark observations within a named comparable cohort. A community rating describes one account's experience with one candidate in one evaluation track. It does not establish a universal winner or promote a candidate to an Atlas-measured result. The [research method](https://github.com/Herbertofury/Athena/blob/main/engineering/docs/research-method.md) and [benchmark format](https://github.com/Herbertofury/Athena/blob/main/engineering/docs/benchmark-format.md) define the stronger evidence needed for that promotion.
 
 ## Submit an experience report
 
@@ -61,7 +61,7 @@ Rank within the selected evaluation track. Version and environment remain visibl
 
 ## Refresh public signals manually
 
-The Python standard-library script [refresh_research_signals.py](https://github.com/Herbertofury/Engineering-Atlas/blob/main/scripts/refresh_research_signals.py) makes **GET requests only**. It reads the checked-in catalog, updates local JSON, and prints a small status summary. It does not post, label, comment, commit, publish, run retrieved content, or schedule future work.
+The Python standard-library script [refresh_research_signals.py](https://github.com/Herbertofury/Athena/blob/main/engineering/scripts/refresh_research_signals.py) makes **GET requests only**. It reads the checked-in catalog, updates local JSON, and prints a small status summary. It does not post, label, comment, commit, publish, run retrieved content, or schedule future work.
 
 ```sh
 python scripts/refresh_research_signals.py --only repositories --max-repos 25
@@ -94,7 +94,7 @@ Exit code `0` means the selected refreshes completed without new operational err
 
 ## Verification
 
-The mocked-network tests in [test_research_signals.py](https://github.com/Herbertofury/Engineering-Atlas/blob/main/tests/test_research_signals.py) exercise missing data, rate limits, secret-safe errors, complete pagination, moderation identity, body edits, deduplication, and full snapshot preservation. Their synthetic accounts and counts are test fixtures, never research evidence.
+The mocked-network tests in [test_research_signals.py](https://github.com/Herbertofury/Athena/blob/main/engineering/tests/test_research_signals.py) exercise missing data, rate limits, secret-safe errors, complete pagination, moderation identity, body edits, deduplication, and full snapshot preservation. Their synthetic accounts and counts are test fixtures, never research evidence.
 
 ```sh
 python -m unittest discover -s tests -p 'test_research_signals.py' -v

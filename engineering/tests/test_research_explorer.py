@@ -139,7 +139,7 @@ def community_fixture():
             "score": 4, "author_id": 123456, "author": "synthetic-account",
             "experience": "Synthetic fixture, not a real user report.",
             "version": "synthetic-1", "review_state": "approved",
-            "issue_url": "https://github.com/Herbertofury/Engineering-Atlas/issues/1",
+            "issue_url": "https://github.com/Herbertofury/Athena/issues/1",
             "updated_at": "2026-10-27T18:00:00Z",
         }],
         "errors": [],
@@ -690,7 +690,7 @@ class SignalAndCommunityTests(unittest.TestCase):
     def test_one_account_cannot_vote_twice_under_different_display_names(self):
         duplicate = copy.deepcopy(self.community["ratings"][0])
         duplicate["author"] = "renamed-synthetic-account"
-        duplicate["issue_url"] = "https://github.com/Herbertofury/Engineering-Atlas/issues/2"
+        duplicate["issue_url"] = "https://github.com/Herbertofury/Athena/issues/2"
         self.community["ratings"].append(duplicate)
         with self.assertRaisesRegex(ValueError, "Duplicate account"):
             self.validate()
@@ -701,7 +701,7 @@ class SignalAndCommunityTests(unittest.TestCase):
         self.catalog["entries"].append(other)
         review = copy.deepcopy(self.community["ratings"][0])
         review["candidate_id"] = other["id"]
-        review["issue_url"] = "https://github.com/Herbertofury/Engineering-Atlas/issues/2"
+        review["issue_url"] = "https://github.com/Herbertofury/Athena/issues/2"
         self.community["ratings"].append(review)
         self.validate()
 

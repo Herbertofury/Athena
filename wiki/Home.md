@@ -34,5 +34,5 @@ Start with [The Packet Trail](Packet-Trail) for a coherent applied networking fo
 
 ## Engineering research
 
-The engineering collection is being migrated under `engineering/`, with its native wiki pages prefixed `Engineering-`. See the repository migration inventory for verification status.
+The engineering source is preserved under `engineering/`, with native wiki pages prefixed `Engineering-`. [Unified Athena](Unified-Athena) describes the one-app learning, research and media integration and its remaining gates. Feature Foundry remains excluded pending private-to-public approval. See [Engineering research](Engineering-Home) and the migration inventory for evidence.
 

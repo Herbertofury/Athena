@@ -1,8 +1,8 @@
-[← Atlas home](https://github.com/Herbertofury/Engineering-Atlas/wiki/Home) · [Canonical source](https://github.com/Herbertofury/Engineering-Atlas/blob/main/docs/adapters/discord.md)
+[← Atlas home](https://github.com/Herbertofury/Athena/wiki/Engineering-Home) · [Canonical source](https://github.com/Herbertofury/Athena/blob/main/engineering/docs/adapters/discord.md)
 
 # Discord adapter research
 
-[Adapter laboratory](https://github.com/Herbertofury/Engineering-Atlas/wiki/Site-Adapters) · Reviewed October 26, 2026
+[Adapter laboratory](https://github.com/Herbertofury/Athena/wiki/Engineering-Site-Adapters) · Reviewed October 26, 2026
 
 ## Current route
 
@@ -20,11 +20,11 @@ Guild/channel/message identity; attachments versus embeds; spoilers; edit/delete
 
 Message schema reviewed; no bot grant or private-message collection configured. No recommendation transfers to a project until it beats that project's actual baseline without sacrificing requirements.
 
-[Primary platform reference](https://docs.discord.com/developers/resources/message) · [Shared collection contract](https://github.com/Herbertofury/Engineering-Atlas/wiki/Collection-and-Media-Contract)
+[Primary platform reference](https://docs.discord.com/developers/resources/message) · [Shared collection contract](https://github.com/Herbertofury/Athena/wiki/Engineering-Collection-and-Media-Contract)
 
 ## October 28 research expansion
 
-[Current platform-family research](https://github.com/Herbertofury/Engineering-Atlas/wiki/Social-and-Publishing-Adapters) adds author/avatar attribution, full body/media/files, follow/import distinctions and current interface limits. [Coverage catalog](https://github.com/Herbertofury/Engineering-Atlas/wiki/Site-Adapter-Coverage) and [authenticated fixtures](https://github.com/Herbertofury/Engineering-Atlas/wiki/Adapter-Login-and-Authenticated-Research) describe the remaining work. This update preserves the evidence status above; it does not broaden an earlier narrow success or erase a failure.
+[Current platform-family research](https://github.com/Herbertofury/Athena/wiki/Engineering-Social-and-Publishing-Adapters) adds author/avatar attribution, full body/media/files, follow/import distinctions and current interface limits. [Coverage catalog](https://github.com/Herbertofury/Athena/wiki/Engineering-Site-Adapter-Coverage) and [authenticated fixtures](https://github.com/Herbertofury/Athena/wiki/Engineering-Adapter-Login-and-Authenticated-Research) describe the remaining work. This update preserves the evidence status above; it does not broaden an earlier narrow success or erase a failure.
 
 ## October 30: completeness and expiring attachments
 

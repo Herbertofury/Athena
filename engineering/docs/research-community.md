@@ -4,7 +4,7 @@ The [research explorer](explorer/index.html) keeps three kinds of comparison sep
 
 ## Submit an experience report
 
-Open the **Research experience report** issue form from the explorer's contribution link or the [issue chooser](https://github.com/Herbertofury/Engineering-Atlas/issues/new/choose). Use the exact candidate ID and evaluation track ID in the catalog. Record the version or revision used, workload, environment, relevant costs, failures, and public evidence. Disclose affiliation with the project when relevant. Select your own score; the form has no preselected rating.
+Open the **Research experience report** issue form from the explorer's contribution link or the [issue chooser](https://github.com/Herbertofury/Athena/issues/new/choose). Use the exact candidate ID and evaluation track ID in the catalog. Record the version or revision used, workload, environment, relevant costs, failures, and public evidence. Disclose affiliation with the project when relevant. Select your own score; the form has no preselected rating.
 
 | Score | Meaning for the stated workload |
 | --- | --- |

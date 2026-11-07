@@ -23,7 +23,7 @@ from email.utils import parsedate_to_datetime
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-REPOSITORY = 'Herbertofury/Engineering-Atlas'
+REPOSITORY = 'Herbertofury/Athena'
 API = 'https://api.github.com'
 API_VERSION = '2026-03-10'
 APPROVAL_LABEL = 'research-rating-approved'
@@ -130,7 +130,7 @@ class GitHubClient:
         now = self.clock()
         if self.blocked_until is not None:
             raise ApiError('rate_limit', 'Requests stopped for this refresh after an API limit or access error', retry_at=iso(self.blocked_until))
-        headers = {'Accept': 'application/vnd.github.raw+json', 'User-Agent': 'Engineering-Atlas-Research/1',
+        headers = {'Accept': 'application/vnd.github.raw+json', 'User-Agent': 'Athena-Engineering-Research/1',
                    'X-GitHub-Api-Version': API_VERSION}
         if self._token:
             headers['Authorization'] = 'Bearer ' + self._token

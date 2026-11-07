@@ -2,10 +2,10 @@
 
 Reviewed **November 6, 2026 UTC**. This guide inventories the tools and practical workflow in [Movez's article](https://x.com/0xMovez/status/2118736658006769893), including its embedded tool diagrams, from the user-provided saved HTML and companion images. The supplied PDF is the same article capture. It is not an endorsement of the article's sales claims or an authorization to inspect a particular app.
 
-- [All named tools and supporting components](https://github.com/Herbertofury/Engineering-Atlas/wiki/App-Study-Tools)
-- [Practical, bounded steps by target](https://github.com/Herbertofury/Engineering-Atlas/wiki/App-Study-Workflows)
-- [Example projects, reference galleries and article corrections](https://github.com/Herbertofury/Engineering-Atlas/wiki/App-Study-References)
-- [Dated review and verification scope](https://github.com/Herbertofury/Engineering-Atlas/blob/main/research/2026-11-06-app-study-tools.md)
+- [All named tools and supporting components](https://github.com/Herbertofury/Athena/wiki/Engineering-App-Study-Tools)
+- [Practical, bounded steps by target](https://github.com/Herbertofury/Athena/wiki/Engineering-App-Study-Workflows)
+- [Example projects, reference galleries and article corrections](https://github.com/Herbertofury/Athena/wiki/Engineering-App-Study-References)
+- [Dated review and verification scope](https://github.com/Herbertofury/Athena/blob/main/engineering/research/2026-11-06-app-study-tools.md)
 
 ## Choose the smallest route
 
@@ -54,4 +54,4 @@ This pass read the article, inspected its tool diagrams, checked selected primar
 
 ---
 
-Canonical source: [docs/app-study/README.md](https://github.com/Herbertofury/Engineering-Atlas/blob/main/docs/app-study/README.md). Prepared November 6, 2026; separate wiki publication must be verified.
+Canonical source: [docs/app-study/README.md](https://github.com/Herbertofury/Athena/blob/main/engineering/docs/app-study/README.md). Prepared November 6, 2026; separate wiki publication must be verified.

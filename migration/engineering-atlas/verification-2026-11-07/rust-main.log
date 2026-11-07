@@ -1,0 +1,22 @@
+Diff in <workspace>/athena-migration/cutover/engineering/apps/atlas-lab/src/modrinth.rs:192:
+ }
+ impl PublicClient {
+     pub fn new() -> Result<Self, reqwest::Error> {
+-        Ok(Self {client: reqwest::blocking::Client::builder()
+-            .user_agent("Herbertofury/Athena/0.1.0 (https://github.com/Herbertofury/Athena)")
+-            .https_only(true).redirect(reqwest::redirect::Policy::none())
+-            .connect_timeout(Duration::from_secs(10)).timeout(Duration::from_secs(30))
+-            .build()?, next_request: Instant::now()})
++        Ok(Self {
++            client: reqwest::blocking::Client::builder()
++                .user_agent("Herbertofury/Athena/0.1.0 (https://github.com/Herbertofury/Athena)")
++                .https_only(true)
++                .redirect(reqwest::redirect::Policy::none())
++                .connect_timeout(Duration::from_secs(10))
++                .timeout(Duration::from_secs(30))
++                .build()?,
++            next_request: Instant::now(),
++        })
+     }
+     pub fn project(&mut self, id: &str) -> Result<Project, Box<dyn std::error::Error>> {
+         let url = project_url(id)?;
