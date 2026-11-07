@@ -31,6 +31,7 @@ Expected shell entry modules:
 
 - `dist/workspaces/engineering/research/index.mjs` for `#research`
 - `dist/workspaces/engineering/media/index.mjs` for `#media`
+- `dist/workspaces/engineering/lab/index.mjs` for `#lab` (same-origin loopback Rust runtime required)
 - `dist/workspaces/foundry/index.js` for `#build`
 
 Module code must resolve internal assets relative to `import.meta.url` (or an equivalent explicit module base), not the page's current URL. This supports a repository subpath, static local server and the combined deployment. User/provider links remain explicit and permission-aware.
@@ -54,3 +55,13 @@ A workspace with URL-based filters implements `setRoute(fullHash)` so same-works
 `scripts/package_app.py` refuses to package missing modules, unexpected files, changed hashes, symlinks, hidden files, generated-path collisions or an existing output directory. Its `--allowlist` is an explicitly reviewed JSON object with `schema: 1` and `files: [{path, sha256}]` covering every runtime input byte. The allowlist is not permission: private source must receive the required public-publication approval before it enters any public package. Do not generate an allowlist blindly from a private tree.
 
 Saved workspace state is read after previous export/cleanup completes, so quick navigation back does not resurrect an older snapshot. Failure cleanup uses the same serialized disposal barrier as normal navigation and never clears a newer active workspace. Learning handlers are scoped to learning controls and the lesson dialog; light-DOM adapters may safely use their own action attributes.
+
+## Privileged local runtime
+
+The Lab is available only from the verified local engine origin; a public static app must not probe localhost or submit jobs. Its shared search covers visible recent jobs, not the durable database. Shared state contains panel selection and uncertain-submission warnings, never complete provider responses or database bytes.
+
+Keep write controls unavailable until module initialization is complete. Navigating away may cancel a browser wait but must not imply that an accepted or uncertain backend job was cancelled; retain that warning and require inspecting Overview before a retry. Explicit URL panel choices take precedence over saved panel state.
+
+The Rust engine serves a frozen, manifest-verified runtime package under strict same-origin script/style/connect policies. Workspace CSS is a local external stylesheet, not injected inline styles. Third-party Media preview and player code stays disabled on this database-privileged origin. This boundary must not be weakened to obtain a passing browser test.
+
+`npm run test:browser` now verifies both generated adapters, runs static-app Chromium acceptance, runs locked Rust tests/clippy/build using the pinned project toolchain, packages the reviewed public asset allowlist, and runs full compiled-engine Chromium acceptance. Logs and reports are retained under `browser-results`. `npm run test:browser:static` is explicitly the smaller static-only check. Neither command deploys or changes repository settings.

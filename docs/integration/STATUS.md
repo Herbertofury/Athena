@@ -2,9 +2,10 @@
 
 ## Implemented
 
-- One HTML document, sidebar, theme and contextual search control. Learning, engineering Research and Media workbench mount as native modules, without app-wrapper iframes. Official media player embeds remain explicit.
+- One HTML document, sidebar, theme and contextual search control. Learning, engineering Research, Media workbench and the local R&D Lab mount as native modules, without app-wrapper iframes. Official media player embeds remain explicit.
 - Actual 283-entry Research catalog and original pure comparison/query algorithms, filters, shortlist, CSV/test-plan exports and same-document routes.
 - Media source records and completeness states, explicit provider/player loading, autoplay off, scoped cleanup, fixture-bound retained receipts and bounded-event candidate isolation.
+- Native `#lab` retains the Rust queue, SQLite journal, exact saved-JSON inspector and bounded experiments through the loopback same-origin API. Static pages never probe localhost. External media is disabled on the privileged local origin. [Startup and detailed evidence](../athena-local-runtime.md).
 - Serialized async lifecycle: cancelled loads cannot replace current views; state is restored after previous export finishes; failed cleanup cannot orphan the next mount. Learning handlers do not consume workspace actions.
 - Exact runtime-file allowlist, staged-byte hash verification, no symlink/hidden/unreviewed inputs, no overwriting existing package directories.
 
@@ -14,11 +15,13 @@ The local JS suite covers algorithms and DOM-emulated interactions. It is not na
 
 The final theme repair at `1482382fa5c6f6eb33276503b956992c6a069629` passed all eight checks in [CI run 42358027074](https://github.com/Herbertofury/Athena/actions/runs/42358027074), including sampled computed text contrast in both themes and the dark placeholder gradient endpoints. Research and Media screenshots were also visually reviewed in both themes and at mobile width. The raw final report is retained at `evidence/integration/2026-11-07/browser-theme-pass.json`. Use that run for the screenshots and loaded-app SHA-256. This limited functional pass does not certify all accessibility or media behavior. The script blocks external requests and does not claim real provider playback, private account tests, native Rust backend or game testing.
 
+The local-engine extension has separate [runtime evidence](../../research/runtime-integration-2026-11-07/README.md). It uses generated archive/workload fixtures and distinguishes actual HTTP checks from native-browser acceptance. Earlier static-app browser results above are not evidence for the new engine-backed module; its new CI receipt must pass before that claim is made.
+
 ## Still pending
 
 - Feature Foundry is private while Athena is public. Its source and data are not in this release, pending informed public-publication approval and actual adapter parity work.
 - GitHub Pages site setup remains blocked. [Run 42358027089](https://github.com/Herbertofury/Athena/actions/runs/42358027089) passed the test and package steps, then `configure-pages` returned `Get Pages site failed` / `Not Found`. The workflow uses `enablement: false`; no Pages settings were changed and no served URL is claimed.
-- Rust/local API and source runtime features are preserved, not silently replaced by browser controls.
+- Full source/runtime parity, live provider collection, Windows acceptance and crash/power-loss durability remain unproven. The native Lab retains actual Rust/SQLite behavior; browser simulations do not replace those gates.
 - Full educational coverage, all exam subobjectives, hands-on assessment and larger original practice banks remain open.
 - Source repositories are not deleted. Preservation and cutover gates remain separate.
 

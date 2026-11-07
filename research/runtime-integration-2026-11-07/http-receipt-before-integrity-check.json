@@ -1,0 +1,202 @@
+{
+  "kind": "Actual Rust loopback HTTP and controlled restart only; browser untested",
+  "started": "2026-11-07T09:22:33.031Z",
+  "checks": [
+    {
+      "name": "Served shell and every allowlisted runtime file match package bytes",
+      "result": "pass"
+    },
+    {
+      "name": "Loopback API keeps strict Host, Origin, custom-header and no-CORS protections",
+      "result": "pass"
+    },
+    {
+      "name": "Exact generated archive reads and bounded experiment persist across restart",
+      "result": "pass"
+    }
+  ],
+  "errors": [],
+  "cspViolations": [],
+  "outsideRequests": [],
+  "limitations": [
+    "Generated snapshots, not live provider collection",
+    "Controlled restart persistence, not power-loss certification",
+    "No Windows acceptance",
+    "External media disabled in privileged local engine mode"
+  ],
+  "binarySHA256": "b1a5ef673ebc18307236def72d3bb0557a10734570f0f0381e5f0e919b5d4c1e",
+  "harnessSHA256": "9af8defe55dd800f48f1639b7556ad1047d92e54db57da47c6b7829c368cf5aa",
+  "packageSHA256": "ab5939f225a08619a94564e3ae0fb6320f6ca8571456481161e7067a17aff7ce",
+  "firstEngine": "13815d48c7ec0d9b9c1f0e803529456e",
+  "currentCheck": "Exact generated archive reads and bounded experiment persist across restart",
+  "verifiedAssets": 31,
+  "job": {
+    "attempt": 1,
+    "id": 1,
+    "id_text": "1",
+    "job": "DedupExperiment",
+    "result": {
+      "acceptance_policy": {
+        "evaluator_version": 1,
+        "memory_budget_bytes_decimal": "67108864",
+        "minimum_pairs_decimal": "15",
+        "minimum_speedup_bits_hex": "3ff199999999999a",
+        "minimum_speedup_text": "1.1",
+        "minimum_stress_cases_decimal": "10000",
+        "schema_version": 1
+      },
+      "experiment": {
+        "completed": true,
+        "decision": {
+          "Incomplete": "Missing repeated timing, stress or memory measurements"
+        },
+        "elapsed_ms": 1693,
+        "evidence": {
+          "baseline_revision": "linear-unique-v1",
+          "candidate_revision": "indexed-unique-v1",
+          "environment_id": "linux-x86_64; atlas-lab 0.1.0; rustc 1.99.1 (58cf8f9c3 2026-10-13); target:x86_64-unknown-linux-gnu; profile:debug; opt:0; flags-sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855; lock-sha256:4185f6275edcfb8060e621f8d68a7ae9950332ec81dc760a7e9839552397edb3; bounded shared-process worker; runner:d867b34457220f892fe8a057f7a74b7f18506dbffc47ce8c7c97211a9fabaa36",
+          "stress_cases": 10000,
+          "stress_failures": 0,
+          "trials": [
+            {
+              "baseline_ns": 70463146,
+              "cancelled_cleanly": null,
+              "candidate_ns": 2221663,
+              "equal_complete_output": true,
+              "peak_bytes": 0
+            },
+            {
+              "baseline_ns": 72848045,
+              "cancelled_cleanly": null,
+              "candidate_ns": 1515738,
+              "equal_complete_output": true,
+              "peak_bytes": 0
+            },
+            {
+              "baseline_ns": 73022105,
+              "cancelled_cleanly": null,
+              "candidate_ns": 1828565,
+              "equal_complete_output": true,
+              "peak_bytes": 0
+            },
+            {
+              "baseline_ns": 74890400,
+              "cancelled_cleanly": null,
+              "candidate_ns": 1635176,
+              "equal_complete_output": true,
+              "peak_bytes": 0
+            },
+            {
+              "baseline_ns": 79412265,
+              "cancelled_cleanly": null,
+              "candidate_ns": 2079691,
+              "equal_complete_output": true,
+              "peak_bytes": 0
+            },
+            {
+              "baseline_ns": 77953743,
+              "cancelled_cleanly": null,
+              "candidate_ns": 1686933,
+              "equal_complete_output": true,
+              "peak_bytes": 0
+            },
+            {
+              "baseline_ns": 76703632,
+              "cancelled_cleanly": null,
+              "candidate_ns": 1772341,
+              "equal_complete_output": true,
+              "peak_bytes": 0
+            },
+            {
+              "baseline_ns": 74651873,
+              "cancelled_cleanly": null,
+              "candidate_ns": 1668096,
+              "equal_complete_output": true,
+              "peak_bytes": 0
+            },
+            {
+              "baseline_ns": 76784944,
+              "cancelled_cleanly": null,
+              "candidate_ns": 1905150,
+              "equal_complete_output": true,
+              "peak_bytes": 0
+            },
+            {
+              "baseline_ns": 74819503,
+              "cancelled_cleanly": null,
+              "candidate_ns": 1568286,
+              "equal_complete_output": true,
+              "peak_bytes": 0
+            },
+            {
+              "baseline_ns": 75527203,
+              "cancelled_cleanly": null,
+              "candidate_ns": 1925040,
+              "equal_complete_output": true,
+              "peak_bytes": 0
+            },
+            {
+              "baseline_ns": 78121164,
+              "cancelled_cleanly": null,
+              "candidate_ns": 1608376,
+              "equal_complete_output": true,
+              "peak_bytes": 0
+            },
+            {
+              "baseline_ns": 75390588,
+              "cancelled_cleanly": null,
+              "candidate_ns": 1812712,
+              "equal_complete_output": true,
+              "peak_bytes": 0
+            },
+            {
+              "baseline_ns": 75742264,
+              "cancelled_cleanly": null,
+              "candidate_ns": 1526043,
+              "equal_complete_output": true,
+              "peak_bytes": 0
+            },
+            {
+              "baseline_ns": 75927891,
+              "cancelled_cleanly": null,
+              "candidate_ns": 1801796,
+              "equal_complete_output": true,
+              "peak_bytes": 0
+            }
+          ],
+          "workload_id": "generated-6000-ids-mod-4001-v1"
+        },
+        "first_failure": null,
+        "limitations": [
+          "Generated identifiers, not a target application corpus",
+          "Peak memory is unmeasured; review eligibility remains blocked",
+          "Cooperative runner cancellation is tested separately, not asserted as per-strategy acceptance",
+          "Timing shares a local service process; no isolated-host or whole-app speed claim",
+          "Only built-in strategies run; no source rewriting, external candidates or deployment"
+        ],
+        "reason": "Completed",
+        "warmup_trials": [
+          {
+            "baseline_ns": 70710777,
+            "cancelled_cleanly": null,
+            "candidate_ns": 1607906,
+            "equal_complete_output": true,
+            "peak_bytes": 0
+          },
+          {
+            "baseline_ns": 72317641,
+            "cancelled_cleanly": null,
+            "candidate_ns": 1541136,
+            "equal_complete_output": true,
+            "peak_bytes": 0
+          }
+        ]
+      },
+      "experiment_id": 1
+    },
+    "state": "succeeded"
+  },
+  "secondEngine": "72dbe7a062544cd4dcfc9b0c0e7befbb",
+  "result": "pass",
+  "finished": "2026-11-07T09:22:35.188Z"
+}

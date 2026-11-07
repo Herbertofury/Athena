@@ -22,6 +22,7 @@ const ORIGIN: &str = "http://127.0.0.1:41379";
 #[derive(Clone)]
 struct App {
     engine_instance: String,
+    runtime_assets: Option<Arc<crate::athena_assets::RuntimeAssets>>,
     path: PathBuf,
     db_slots: Arc<tokio::sync::Semaphore>,
     worker_status: Arc<AtomicU8>,
@@ -61,6 +62,38 @@ async fn guard(request: Request, next: Next) -> Response {
     h.insert(header::X_CONTENT_TYPE_OPTIONS, "nosniff".parse().unwrap());
     h.insert(header::REFERRER_POLICY, "no-referrer".parse().unwrap());
     response
+}
+async fn runtime_info(State(app): State<App>) -> Json<serde_json::Value> {
+    Json(serde_json::json!({"application":"Athena", "api_version":1,
+        "engine_instance":app.engine_instance,"loopback_only":true,"same_origin_only":true,
+        "external_media":false,"overview_strategy":if app.overview_candidate {"validated-raw-candidate"} else {"baseline"},
+        "runtime_manifest_sha256":app.runtime_assets.as_ref().map(|assets|assets.manifest_sha256.as_str())}))
+}
+async fn runtime_asset(State(app): State<App>, request: Request) -> Response {
+    if request.method() != axum::http::Method::GET {
+        return StatusCode::METHOD_NOT_ALLOWED.into_response();
+    }
+    let Some(assets) = &app.runtime_assets else {
+        return StatusCode::NOT_FOUND.into_response();
+    };
+    let Some(asset) = assets.get(request.uri().path()) else {
+        return StatusCode::NOT_FOUND.into_response();
+    };
+    (
+        [
+            (header::CONTENT_TYPE, asset.content_type),
+            (
+                header::HeaderName::from_static("x-athena-asset-sha256"),
+                asset.sha256.as_str(),
+            ),
+            (
+                header::HeaderName::from_static("x-athena-runtime-sha256"),
+                assets.manifest_sha256.as_str(),
+            ),
+        ],
+        axum::body::Bytes::from_owner(asset.bytes.clone()),
+    )
+        .into_response()
 }
 async fn overview(State(app): State<App>) -> Result<Response, StatusCode> {
     let permit = app
@@ -456,14 +489,23 @@ fn worker(path: PathBuf, stop: Arc<AtomicBool>, status: Arc<AtomicU8>, wake: Rec
     }
 }
 pub async fn serve(path: PathBuf) -> Result<(), Box<dyn std::error::Error>> {
-    serve_strategy(path, false).await
+    serve_strategy(path, false, None).await
 }
 pub async fn serve_candidate(path: PathBuf) -> Result<(), Box<dyn std::error::Error>> {
-    serve_strategy(path, true).await
+    serve_strategy(path, true, None).await
+}
+pub async fn serve_athena(
+    path: PathBuf,
+    public: PathBuf,
+) -> Result<(), Box<dyn std::error::Error>> {
+    let assets =
+        crate::athena_assets::RuntimeAssets::load(&public).map_err(std::io::Error::other)?;
+    serve_strategy(path, false, Some(Arc::new(assets))).await
 }
 async fn serve_strategy(
     path: PathBuf,
     overview_candidate: bool,
+    runtime_assets: Option<Arc<crate::athena_assets::RuntimeAssets>>,
 ) -> Result<(), Box<dyn std::error::Error>> {
     let engine_instance = new_engine_instance()?;
     Queue::open(&path)?;
@@ -478,53 +520,59 @@ async fn serve_strategy(
     let worker_handle = std::thread::spawn(move || {
         worker(worker_path, worker_stop, status_for_thread, wake_receiver)
     });
-    let app = Router::new()
-        .route("/", get(index))
-        .route(
-            "/app.js",
-            get(|| async {
-                (
-                    [(header::CONTENT_TYPE, "text/javascript")],
-                    include_str!("../ui/app.js"),
-                )
-            }),
-        )
-        .route(
-            "/style.css",
-            get(|| async {
-                (
-                    [(header::CONTENT_TYPE, "text/css")],
-                    include_str!("../ui/style.css"),
-                )
-            }),
-        )
-        .route(
-            "/collection-input.mjs",
-            get(|| async {
-                (
-                    [(header::CONTENT_TYPE, "text/javascript")],
-                    include_str!("../ui/collection-input.mjs"),
-                )
-            }),
-        )
-        .route(
-            "/archive-view.mjs",
-            get(|| async {
-                (
-                    [(header::CONTENT_TYPE, "text/javascript")],
-                    include_str!("../ui/archive-view.mjs"),
-                )
-            }),
-        )
-        .route(
-            "/job-submit.mjs",
-            get(|| async {
-                (
-                    [(header::CONTENT_TYPE, "text/javascript; charset=utf-8")],
-                    include_str!("../ui/job-submit.mjs"),
-                )
-            }),
-        )
+    let static_router = if runtime_assets.is_some() {
+        Router::new().fallback(runtime_asset)
+    } else {
+        Router::new()
+            .route("/", get(index))
+            .route(
+                "/app.js",
+                get(|| async {
+                    (
+                        [(header::CONTENT_TYPE, "text/javascript")],
+                        include_str!("../ui/app.js"),
+                    )
+                }),
+            )
+            .route(
+                "/style.css",
+                get(|| async {
+                    (
+                        [(header::CONTENT_TYPE, "text/css")],
+                        include_str!("../ui/style.css"),
+                    )
+                }),
+            )
+            .route(
+                "/collection-input.mjs",
+                get(|| async {
+                    (
+                        [(header::CONTENT_TYPE, "text/javascript")],
+                        include_str!("../ui/collection-input.mjs"),
+                    )
+                }),
+            )
+            .route(
+                "/archive-view.mjs",
+                get(|| async {
+                    (
+                        [(header::CONTENT_TYPE, "text/javascript")],
+                        include_str!("../ui/archive-view.mjs"),
+                    )
+                }),
+            )
+            .route(
+                "/job-submit.mjs",
+                get(|| async {
+                    (
+                        [(header::CONTENT_TYPE, "text/javascript; charset=utf-8")],
+                        include_str!("../ui/job-submit.mjs"),
+                    )
+                }),
+            )
+    };
+    let app = static_router
+        .route("/api/runtime", get(runtime_info))
         .route("/api/project-archive/{id}", get(saved_project_response))
         .route("/api/version-archive/{id}", get(saved_version_response))
         .route("/api/upstream-archive/{id}", get(saved_upstream_response))
@@ -534,6 +582,7 @@ async fn serve_strategy(
         .layer(middleware::from_fn(guard))
         .with_state(App {
             engine_instance,
+            runtime_assets,
             path,
             worker_status,
             wake,
@@ -598,6 +647,7 @@ mod tests {
         let (wake, _receiver) = std::sync::mpsc::sync_channel(1);
         let app = App {
             engine_instance: "0".repeat(32),
+            runtime_assets: None,
             path: path.clone(),
             worker_status: Arc::new(AtomicU8::new(1)),
             wake,
@@ -700,6 +750,7 @@ mod tests {
         let (wake, _receiver) = std::sync::mpsc::sync_channel(1);
         let app = App {
             engine_instance: "0".repeat(32),
+            runtime_assets: None,
             path: path.clone(),
             worker_status: Arc::new(AtomicU8::new(1)),
             wake,

@@ -8,8 +8,11 @@ import shutil
 import tempfile
 
 REQUIRED = ('index.html', 'app.js', 'core.js', 'catalog.js', 'styles.css', 'workspace-host.js',
-            'workspaces/engineering/research/index.mjs', 'workspaces/engineering/media/index.mjs',
-            'workspaces/foundry/index.js')
+            'workspaces/engineering/research/index.mjs', 'workspaces/engineering/research/style.css',
+            'workspaces/engineering/media/index.mjs', 'workspaces/engineering/media/style.css',
+            'workspaces/engineering/lab/index.mjs', 'workspaces/engineering/lab/style.css',
+            'workspaces/engineering/lab/archive-view.mjs', 'workspaces/engineering/lab/collection-input.mjs',
+            'workspaces/engineering/lab/job-submit.mjs', 'workspaces/foundry/index.js')
 
 
 def package(source, output, allowlist=None, profile="complete"):
@@ -83,7 +86,7 @@ def package(source, output, allowlist=None, profile="complete"):
         for generated in ('learn/index.html', '.nojekyll'):
             data=(staged/generated).read_bytes()
             entries.append({'path':generated,'bytes':len(data),'sha256':hashlib.sha256(data).hexdigest(),'origin':'generated'})
-        manifest={'application':'Athena','entry':'index.html','profile':profile,'workspaces':['learning','research','media']+(['build'] if profile=='complete' else []),
+        manifest={'application':'Athena','entry':'index.html','profile':profile,'workspaces':['learning','research','media','lab']+(['build'] if profile=='complete' else []),
                   'pending':[] if profile=='complete' else ['Feature Foundry public-publication approval and integration'],
                   'verification':'Packaging and file hashes only; functional/browser parity is a separate gate.', 'files':entries}
         (staged/'athena-runtime-manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')

@@ -36,6 +36,16 @@ class PackageTests(unittest.TestCase):
             self.assertEqual(len(manifest['files']),len(pack.REQUIRED)+2)
             self.assertTrue((root/'public/athena-runtime-manifest.json').exists())
 
+    def test_lab_dependencies_required_before_output(self):
+        for name in ('index.mjs', 'style.css', 'archive-view.mjs', 'collection-input.mjs', 'job-submit.mjs'):
+            with self.subTest(name=name), tempfile.TemporaryDirectory() as temp:
+                root=pathlib.Path(temp);source=self.source(root)
+                (source/'workspaces/foundry/index.js').unlink()
+                (source/'workspaces/engineering/lab'/name).unlink()
+                with self.assertRaisesRegex(ValueError, 'missing'):
+                    pack.package(source,root/'public',self.approved(source),profile='public-preview')
+                self.assertFalse((root/'public').exists())
+
     def test_existing_output_preserved(self):
         with tempfile.TemporaryDirectory() as temp:
             root=pathlib.Path(temp);source=self.source(root);output=root/'public';output.mkdir();(output/'mine').write_text('preserve')
@@ -102,7 +112,7 @@ class PackageTests(unittest.TestCase):
             root=pathlib.Path(temp);source=self.source(root)
             (source/'workspaces/foundry/index.js').unlink()
             manifest=pack.package(source,root/'public',self.approved(source),profile='public-preview')
-            self.assertEqual(manifest['workspaces'],['learning','research','media'])
+            self.assertEqual(manifest['workspaces'],['learning','research','media','lab'])
             self.assertIn('approval',manifest['pending'][0])
             self.assertFalse((root/'public/workspaces/foundry/index.js').exists())
 

@@ -183,3 +183,9 @@ Overview prepares every card before committing its keyed cache and summary metri
 ### Scope Overview reuse to an engine instance · October 30, 2026
 
 Overview responses carry a public ephemeral instance label. A newly started engine cannot reuse the previous engine's cached job cards merely because job IDs, states and attempts collide. Missing labels disable reuse; malformed labels retain the last-good view. No database path or credential is exposed. [Restart evidence and limits](../../experiments/overview-engine-identity-lab/README.md).
+
+## Unified Athena shell · November 7, 2026
+
+`cargo run --locked -- serve-athena OUTPUT.sqlite VERIFIED_PACKAGE_DIRECTORY` serves the reviewed Athena shell and the native R&D Lab over the existing loopback-only origin. It preserves the original queue, journal, archive validation and baseline overview rather than promoting an isolated candidate. Assets are hash-verified and frozen at startup; arbitrary directory files are not served. Research and Media styles are local external files under the original strict CSP. External media is intentionally disabled in this database-privileged mode.
+
+See [startup, scope and acceptance evidence](../../../docs/athena-local-runtime.md). The retained `serve` and `serve-candidate` commands remain for historical reproduction. The public static app does not connect to localhost. Native-browser acceptance and other parity gaps are explicit in the integration evidence rather than inferred from unit tests.

@@ -71,3 +71,10 @@ test('Native workspace build reproduces every published module and fixture byte'
 test('Preview cancellation settles even if a detached image rejects cleanup',async()=>{
  const {createPreviewLoader}=await import(pathToFileURL(path.join(base,'media/preview-loader.mjs')).href);const abort=new AbortController();const events=[];const image={dataset:{source:'https://example.test/image'},classList:{add(){},remove(){}},removeAttribute(){throw Error('detached');},decode(){return new Promise(()=>{});}};const loader=createPreviewLoader([image],{signal:abort.signal,report:(type)=>events.push(type)});const work=loader.run();abort.abort();await work;assert.equal(loader.counts().failed,1);assert.ok(events.includes('image_abort_cleanup_failed'));
 });
+
+
+test('Privileged loopback Media retains metadata but disables all external media controls',async()=>{
+ const env=setup();let controller;
+ try{globalThis.location=new URL('http://127.0.0.1:41379/#media');controller=await(await component('media')).mount({container:env.container});const root=env.container.shadowRoot;assert.equal(controller.ready,true);assert.ok(root.querySelectorAll('article.card').length>0);assert.equal(root.getElementById('load-media').disabled,true);assert.ok([...root.querySelectorAll('.player-controls button,.player-controls select')].every(control=>control.disabled));assert.match(root.getElementById('status').textContent,/third-party code away from local data/);assert.ok(controller.exportState().receipt.events.some(event=>event.type==='local_runtime_restriction'));assert.equal(env.calls.length,1);}
+ finally{controller?.unmount();env.restore();}
+});

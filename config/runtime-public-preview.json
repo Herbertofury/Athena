@@ -1,10 +1,10 @@
 {
   "schema": 1,
-  "review": "Learning shell plus public Engineering adapter assets only; private Foundry excluded.",
+  "review": "Reviewed learning shell, public Engineering Research/Media adapters and same-origin local R&D lab assets only; private Foundry excluded.",
   "files": [
     {
       "path": "app.js",
-      "sha256": "b7048e50aa12748a4e250724b8e187fa9e4234ca5057ec78e4261184e6d74ad8"
+      "sha256": "0d12940166d5d10ee8b5544f197e6bd34d8d8083ff7dbae318ae0ea655fb66b9"
     },
     {
       "path": "catalog.js",
@@ -16,19 +16,43 @@
     },
     {
       "path": "index.html",
-      "sha256": "47e1e0bc2a70f16cfe46d8f4ab3fdfa9de9485e0360a0fe6dd2091cceea028be"
+      "sha256": "60a0ecadf22a40d65c85edcde9cba06b14e35c7f76f95584257d7d1456b4e4d4"
     },
     {
       "path": "styles.css",
-      "sha256": "3855cb428f56f7930c357d479cfa4242a91ead2458f2920cd653cce6f265662a"
+      "sha256": "032885e47cb4ef85b58c7c4d02bca6b91952dba453f894f6fb28ce6586a7ddde"
     },
     {
       "path": "workspace-host.js",
       "sha256": "d8ccd104f92bc931c97f63e7725c561df1288a4602cece8adb829de6449098aa"
     },
     {
+      "path": "workspaces/engineering/lab/archive-view.mjs",
+      "sha256": "de52a075043aee965b579e3259ed852dc64a9ba60cceb300d9acefd4c6223228"
+    },
+    {
+      "path": "workspaces/engineering/lab/collection-input.mjs",
+      "sha256": "741a0aeb30465b19391358a488a0e019dc9a6aa300088c9addb7388ec23c7ffe"
+    },
+    {
+      "path": "workspaces/engineering/lab/index.mjs",
+      "sha256": "9bbd5156e14243fcf87e1a37d29625bfa7e20ec32706e321b509f7fc9ffd76d7"
+    },
+    {
+      "path": "workspaces/engineering/lab/job-submit.mjs",
+      "sha256": "06f5785d9ebbab16cd208712183e7fa317ac707d96a48325929b728ba26a2f9f"
+    },
+    {
+      "path": "workspaces/engineering/lab/manifest.json",
+      "sha256": "0b47faa7ad5ed7b78a60a63dc003d89cb9a1224ea0bca6f5b6083092dc2c60b8"
+    },
+    {
+      "path": "workspaces/engineering/lab/style.css",
+      "sha256": "08575c8f16deb59545a6d8fad8bc0eb234cfb963a65bf5e47a14ce91097bf251"
+    },
+    {
       "path": "workspaces/engineering/manifest.json",
-      "sha256": "19dd61e85e4f2576e02dafe67d21e56063286a75a486591e14de2b17ca0a6fb2"
+      "sha256": "d985bc05d92086f92caab689192c5b8b933389b6d705afd18aad09db7632faaf"
     },
     {
       "path": "workspaces/engineering/media/bilibili-player.mjs",
@@ -40,7 +64,7 @@
     },
     {
       "path": "workspaces/engineering/media/index.mjs",
-      "sha256": "db888970d2d204b01523db7a38c5099e6b14d827e4e28540a16a09bd52c792a3"
+      "sha256": "b6ffc5d30801ab44f383dc8c3f21128b509d1fcf8c6b67d559018aa99f23cd91"
     },
     {
       "path": "workspaces/engineering/media/media-core.mjs",
@@ -67,6 +91,10 @@
       "sha256": "f95053a1d56a85330314efe88ca6c26b45ac1c3abb530639b770601e03608c06"
     },
     {
+      "path": "workspaces/engineering/media/style.css",
+      "sha256": "b3557cd4ae93e35fd9daa5a5cfc781126f525cd3c884259057781b82eb554e83"
+    },
+    {
       "path": "workspaces/engineering/media/vendor/HLS-LICENSE.txt",
       "sha256": "ca8773cf798c7ed997d4dd7c8e23c348699f8d5b7462636694cc14de6cda12db"
     },
@@ -88,7 +116,11 @@
     },
     {
       "path": "workspaces/engineering/research/index.mjs",
-      "sha256": "c54cf63dcf104b4e3e7523a43f8cf601145f1dfb90fc21b77e01816ac7f87034"
+      "sha256": "4097520df69f512ec756f14920c3cf5d168c58fc64b963636a1fbdebf2a2b58d"
+    },
+    {
+      "path": "workspaces/engineering/research/style.css",
+      "sha256": "be0489093bebf2ea49801a71f5779364533e844918f05573bc4fc425b8aae744"
     }
   ]
 }

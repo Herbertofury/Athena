@@ -1,5 +1,6 @@
 //! Evidence gates for bounded implementation experiments, not a general self-rewriting AI.
 extern crate self as atlas_lab;
+pub mod athena_assets;
 pub mod collection_failure;
 mod storage_connection;
 use serde::{Deserialize, Serialize};

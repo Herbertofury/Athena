@@ -1,7 +1,7 @@
 // Fast palette/selector guards supplement the real Chromium computed-style tests.
 // They are not a substitute for browser rendering, opacity or visual acceptance.
 const test=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path');
-function stylesheet(kind){const source=fs.readFileSync(path.join(__dirname,'../dist/workspaces/engineering',kind,'index.mjs'),'utf8');const encoded=source.match(/root\.innerHTML=("(?:\\.|[^"\\])*");setTheme/);assert.ok(encoded,'Generated static workspace markup');return JSON.parse(encoded[1]).split('<style>')[1].split('</style>')[0];}
+function stylesheet(kind){return fs.readFileSync(path.join(__dirname,'../dist/workspaces/engineering',kind,'style.css'),'utf8');}
 function rule(css,selector){let found;for(const match of css.matchAll(/([^{}]+)\{([^{}]*)\}/g)){if(match[1].trim().split(',').map(s=>s.trim()).includes(selector))found=Object.fromEntries(match[2].split(';').filter(Boolean).map(x=>{const i=x.indexOf(':');return[x.slice(0,i).trim(),x.slice(i+1).trim()];}));}assert.ok(found,selector+' rule exists');return found;}
 function luminance(hex){assert.match(hex,/^#[a-f0-9]{3}(?:[a-f0-9]{3})?$/i);if(hex.length===4)hex='#'+[...hex.slice(1)].map(x=>x+x).join('');const rgb=[1,3,5].map(i=>parseInt(hex.slice(i,i+2),16)/255).map(x=>x<=.04045?x/12.92:((x+.055)/1.055)**2.4);return rgb[0]*.2126+rgb[1]*.7152+rgb[2]*.0722;}
 function contrast(fg,bg){const a=luminance(fg),b=luminance(bg);return(Math.max(a,b)+.05)/(Math.min(a,b)+.05);}

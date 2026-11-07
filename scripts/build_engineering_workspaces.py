@@ -127,7 +127,8 @@ def build():
     html=body(r/'index.template.html').replace('__CATALOG__','catalog.json').replace('<label class="search-field">','<label class="search-field" hidden>')
     css=scoped_css(r/'explorer.css','research')
     pre=imports+'\nexport async function mount({container,search,theme="dark",notify:hostNotify,navigate,state:initialState,route="",signal:outerSignal}={}){\n'+LIFECYCLE
-    pre+='  root.innerHTML='+json.dumps('<style>'+css+'</style>'+html)+';setTheme(theme);\n'
+    emit(Path('research/style.css'),css,r/'explorer.css')
+    pre+='  root.innerHTML='+json.dumps(html)+';const sheet=document.createElement("link");sheet.rel="stylesheet";sheet.href=new URL("./style.css",import.meta.url).href;root.prepend(sheet);setTheme(theme);\n'
     pre+='  function shareURL(){const url=new URL(globalThis.location.href);url.hash="research?"+(encodeState(state)||"q=");return url.href;}\n'
     pre+='  root.addEventListener("click",e=>{const a=e.target.closest?.("a[href]");if(!a)return;const href=a.getAttribute("href");if(href.startsWith("?")){e.preventDefault();state=parseState(href.split("#")[0]);render();}else if(href.startsWith("#")){e.preventDefault();root.getElementById(href.slice(1))?.scrollIntoView?.({block:"start"});}});\n'
     post='''
@@ -170,12 +171,18 @@ def build():
     html=html.replace('<a href="?event_view=baseline">Baseline event view</a>','<button type="button" data-event-mode="baseline">Baseline event view</button>').replace('<a href="?event_view=bounded">Test bounded event view</a>','<button type="button" data-event-mode="bounded">Test bounded event view</button>')
     html=html.replace('<section id="cards"','<p id="search-status" role="status"></p><section id="cards"')
     pre=imports+'\nexport async function mount({container,search="",theme="dark",notify,navigate,state:initialState,route="",signal:outerSignal}={}){\n'+LIFECYCLE
-    pre+='  root.innerHTML='+json.dumps('<style>'+scoped_css(m/'media.css','media')+'</style>'+html)+';setTheme(theme);\n'
+    emit(Path('media/style.css'),scoped_css(m/'media.css','media'),m/'media.css')
+    pre+='  root.innerHTML='+json.dumps(html)+';const sheet=document.createElement("link");sheet.rel="stylesheet";sheet.href=new URL("./style.css",import.meta.url).href;root.prepend(sheet);setTheme(theme);\n'
     pre+='  let blockedReceipt=null;const savedReceipt=initialState?.receipt?.schema_version===1 && Array.isArray(initialState.receipt.events)?JSON.parse(JSON.stringify(initialState.receipt)):null;\n'
     pre+='  root.addEventListener("click",e=>{const button=e.target.closest?.("[data-event-mode]");if(button)navigate?.("#media?event_view="+button.dataset.eventMode);});\n'
     post='''
   function setSearch(value){if(disposed)return;search=String(value??'').slice(0,300);const terms=search.toLocaleLowerCase().split(/\\s+/).filter(Boolean);let visible=0;for(const card of root.querySelectorAll('article.card')){card.hidden=!terms.every(term=>card.textContent.toLocaleLowerCase().includes(term));if(!card.hidden)visible++;}root.getElementById('search-status').textContent=visible+' of '+(dataset?.cards.length||0)+' source records shown';}
   setSearch(search);
+  if(mediaReady&&globalThis.location?.origin==='http://127.0.0.1:41379'){
+    for(const control of root.querySelectorAll('#load-media,#retry-media,.player-controls button,.player-controls select')){control.disabled=true;control.title='External media is disabled in the local database runtime.';}
+    $('status').textContent='Local database runtime: metadata and receipts are available. External previews and players are disabled to keep third-party code away from local data. Use the separately served public package to test media.';
+    event('local_runtime_restriction',{external_media:false,reason:'same-origin database protection'});
+  }
   return {unmount,setTheme,setSearch,setRoute(value){if(disposed)return;const query=new URLSearchParams(value.includes('?')?value.slice(value.indexOf('?')+1):'');setSearch(query.get('q')||'');const mode=query.get('event_view')==='bounded'?'bounded':'baseline';if(mode!==eventMode){const prior=[...receipt.events];receipt.events=[];eventMode=mode;eventRecorder=createMediaEventRecorder($('events'),receipt.events,eventMode);receipt.event_view=eventRecorder.state;for(const item of prior)eventRecorder.record(item);$('event-mode').textContent=mode==='bounded'?'Bounded event renderer: isolated integration candidate.':'Full-history event renderer: baseline.';event('event_view_changed',{mode});}},ready:mediaReady&&!disposed,exportState(){return {search,event_view:eventMode,receipt:JSON.parse(JSON.stringify(blockedReceipt||receipt))};}};
 }
 '''

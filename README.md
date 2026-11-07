@@ -2,11 +2,12 @@
 
 **Curiosity becomes capability.** An organized home for learning computers, security, coding, infrastructure, data and beyond.
 
-Athena joins a learning academy with an evidence-led engineering research library. Learning, Research and Media workbench now mount in one Athena document, with shared navigation, search and theme. Feature Foundry is explicitly pending permission to publish its private source. Its purpose is deep understanding and demonstrable practical skill, not collecting badges or claiming mastery from a progress bar.
+Athena joins a learning academy with an evidence-led engineering research library. Learning, Research, Media workbench and the local R&D Lab now mount in one Athena document, with shared navigation, search and theme. Feature Foundry is explicitly pending permission to publish its private source. Its purpose is deep understanding and demonstrable practical skill, not collecting badges or claiming mastery from a progress bar.
 
 ## Start here
 
 - [Learning library](docs/README.md): 13 certificate pathways, shared lessons and guided capstones.
+- [Local Rust/SQLite evidence engine](docs/athena-local-runtime.md): native collection, archives and bounded experiments in the same shell.
 - [Interactive app source](dist/index.html): serve `dist/` locally so workspace modules and JSON assets load. No account is required.
 - [GitHub wiki](https://github.com/Herbertofury/Athena/wiki): publication status must be checked separately from repository files.
 - [Broader knowledge map](docs/KNOWLEDGE-MAP.md): computers, coding, security and future schools.
@@ -40,7 +41,7 @@ npm run build
 npm test
 ```
 
-The public static app has no account, analytics or external font dependency. Learning and research work locally. Media provider requests remain explicit and autoplay stays off; preserved Rust backend capabilities are not implemented by the static workspace adapters. DOM tests use pinned LinkeDOM. `npm run test:browser` uses pinned Playwright and actual Chromium, with external requests blocked; see its run receipt rather than treating DOM tests as browser evidence.
+The public static app has no account, analytics or external font dependency. Learning and research work locally. Media provider requests remain explicit and autoplay stays off; the R&D Lab connects only when this same shell is served by the verified local Rust engine. The public page never probes localhost. See the local-engine instructions above. DOM tests use pinned LinkeDOM. `npm run test:browser` verifies generated adapters, runs static Chromium checks, builds/tests the pinned Rust engine and runs full engine-backed Chromium acceptance with external requests blocked. `npm run test:browser:static` is the smaller static-only check. Read the exact run receipts rather than treating DOM tests as browser evidence.
 
 ## Organization
 
@@ -67,4 +68,4 @@ Certification and vendor names belong to their owners. Athena is independent and
 
 ## Unified integration status
 
-Read [the workspace contract](docs/integration/WORKSPACE-CONTRACT.md) and [current integration evidence](docs/integration/STATUS.md). The public-preview package includes learning, research and media only. It does not include private Feature Foundry material or claim full backend/game parity. `scripts/package_app.py` packages only the reviewed runtime hashes in `config/runtime-public-preview.json`; `complete` mode still refuses a missing Foundry module.
+Read [the workspace contract](docs/integration/WORKSPACE-CONTRACT.md) and [current integration evidence](docs/integration/STATUS.md). The public-preview package includes learning, research, media and the local-engine Lab module. The Lab requires `serve-athena`; it is visibly unavailable on a static web host. It does not include private Feature Foundry material or claim full backend/game parity. `scripts/package_app.py` packages only the reviewed runtime hashes in `config/runtime-public-preview.json`; `complete` mode still refuses a missing Foundry module.

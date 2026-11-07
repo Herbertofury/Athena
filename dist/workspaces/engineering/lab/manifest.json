@@ -1,0 +1,36 @@
+{
+  "schema": 1,
+  "kind": "native loopback Athena lab adapter",
+  "source_files": [
+    {
+      "path": "engineering/apps/atlas-lab/ui/index.html",
+      "sha256": "cc52cb0e7ca9a229a2fab05c03b07a99ac4f3e84d39ac83954b0f7a66e4c9a29"
+    },
+    {
+      "path": "engineering/apps/atlas-lab/ui/style.css",
+      "sha256": "6477abc25ea2c5c5ce3f11ad4f56cad403791449c0562c1fadfe9925db76522c"
+    },
+    {
+      "path": "engineering/apps/atlas-lab/ui/app.js",
+      "sha256": "b2d5e1307be1f66d152d8350b3d9dff9846936f891fff11abd3fecbfd9d6042d"
+    },
+    {
+      "path": "engineering/apps/atlas-lab/ui/collection-input.mjs",
+      "sha256": "741a0aeb30465b19391358a488a0e019dc9a6aa300088c9addb7388ec23c7ffe"
+    },
+    {
+      "path": "engineering/apps/atlas-lab/ui/archive-view.mjs",
+      "sha256": "de52a075043aee965b579e3259ed852dc64a9ba60cceb300d9acefd4c6223228"
+    },
+    {
+      "path": "engineering/apps/atlas-lab/ui/job-submit.mjs",
+      "sha256": "06f5785d9ebbab16cd208712183e7fa317ac707d96a48325929b728ba26a2f9f"
+    }
+  ],
+  "limits": [
+    "Same-origin loopback runtime only; public static app never probes localhost.",
+    "Generated source UI with retained job/archive validation; no automatic provider collection.",
+    "Switching workspaces cancels receipt/read waits, not durable jobs; unknown submission outcomes require checking Overview.",
+    "Shared shell retains only panel and uncertain submission warning, not archived provider JSON."
+  ]
+}

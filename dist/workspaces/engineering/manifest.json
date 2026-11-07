@@ -3,10 +3,16 @@
   "kind": "native Athena workspace adapters",
   "source_modules": [
     {
+      "destination": "research/style.css",
+      "source": "engineering/docs/explorer/explorer.css",
+      "source_sha256": "3c4c931f11046f27ae45ba34b9d76a7c568379c73156f873224f8d49f3551250",
+      "output_sha256": "be0489093bebf2ea49801a71f5779364533e844918f05573bc4fc425b8aae744"
+    },
+    {
       "destination": "research/index.mjs",
       "source": "engineering/docs/explorer/explorer.mjs",
       "source_sha256": "e8f875746a3d42102558952da2c53d32250dc3295dd451838a9ac510fee3c85c",
-      "output_sha256": "c54cf63dcf104b4e3e7523a43f8cf601145f1dfb90fc21b77e01816ac7f87034"
+      "output_sha256": "4097520df69f512ec756f14920c3cf5d168c58fc64b963636a1fbdebf2a2b58d"
     },
     {
       "destination": "research/explorer-core.mjs",
@@ -21,10 +27,16 @@
       "output_sha256": "656d184801be688cea150ca45791f96cf79e9448cf3ff3f2c767db7063cad442"
     },
     {
+      "destination": "media/style.css",
+      "source": "engineering/docs/media-lab/media.css",
+      "source_sha256": "6d66277c4a909ad66dd32dfd66659fcb00de143ce2f4bc535a5a182e3916cd02",
+      "output_sha256": "b3557cd4ae93e35fd9daa5a5cfc781126f525cd3c884259057781b82eb554e83"
+    },
+    {
       "destination": "media/index.mjs",
       "source": "engineering/docs/media-lab/media.js",
       "source_sha256": "16fb57473d1aac2db55e0a6bc18ac076dbafd39d4deb3cc14addabdcad072ad1",
-      "output_sha256": "db888970d2d204b01523db7a38c5099e6b14d827e4e28540a16a09bd52c792a3"
+      "output_sha256": "b6ffc5d30801ab44f383dc8c3f21128b509d1fcf8c6b67d559018aa99f23cd91"
     },
     {
       "destination": "media/media-event-recorder.mjs",
