@@ -62,7 +62,7 @@ export async function mount({container,signal,search='',notify=()=>{}}) {
     if(key==='addEventListener')return on;if(key==='removeEventListener')return off;if(key==='dispatchEvent')return event=>targetFor(event.type).dispatchEvent(event);
     const overrides={setTimeout,clearTimeout,setInterval,clearInterval,requestAnimationFrame,cancelAnimationFrame,ResizeObserver,MutationObserver,PerformanceObserver,AudioContext,webkitAudioContext:AudioContext,URL};if(key in overrides)return overrides[key];
     const v=Native.window[key];return typeof v==='function'&&!/^[A-Z]/.test(String(key))?v.bind(Native.window):v;
-  },set(target,key,value){target[key]=value;return true}});
+  },set(target,key,value){target[key]=value;if(key==='__ffPrototypeTest')root.dataset.selftestChecks=JSON.stringify(value);return true}});
   const resize=new ResizeObserver(()=>{innerWidth=Math.max(root.clientWidth,320);innerHeight=Math.max(root.clientHeight,600)});resize.observe(root);
   function boot(){
 (function() {
