@@ -28,3 +28,21 @@ test('fragmented receipt bytes and bounded empty chunks are handled without chun
 test('transport failure is unconfirmed and does not expose its private diagnostic',async()=>{
  let calls=0;await assert.rejects(submitJob('DedupExperiment',{fetchImpl:async()=>{calls++;throw Error('https://private.invalid/?token=fixture-secret');}}),error=>error.message.includes('unconfirmed')&&!error.message.includes('fixture-secret'));assert.equal(calls,1);
 });
+test('unconfirmed result does not hang on an uncooperative body cancellation',async()=>{
+ const stream=new ReadableStream({cancel(){return new Promise(()=>{});}});
+ const response=new Response(stream,{status:500});
+ const outcome=await Promise.race([submitJob('DedupExperiment',{fetchImpl:async()=>response,timeoutMs:50}).then(()=> 'accepted',()=> 'unconfirmed'),new Promise(resolve=>setTimeout(()=>resolve('hung'),200))]);
+ assert.equal(outcome,'unconfirmed');
+});
+test('unconfirmed result does not wait for stalled reader cancellation',async()=>{
+ const stream=new ReadableStream({start(c){c.enqueue(new Uint8Array(MAX_JOB_RECEIPT_BYTES+1));},cancel(){return new Promise(()=>{});}});
+ const outcome=await Promise.race([submitJob('DedupExperiment',{fetchImpl:async()=>reply(stream),timeoutMs:50}).then(()=> 'accepted',()=> 'unconfirmed'),new Promise(resolve=>setTimeout(()=>resolve('hung'),200))]);
+ assert.equal(outcome,'unconfirmed');
+});
+test('cleanup throws and rejections preserve uncertainty, abort transport and release the lock without retry',async()=>{
+ for(const cancel of [()=>{throw Error('private cleanup detail');},()=>Promise.reject(Error('private cleanup detail'))]){
+  let calls=0,released=0,signal;const response={ok:true,headers:new Headers({'content-type':'application/json'}),body:{getReader(){return {read:async()=>({done:false,value:'invalid chunk'}),cancel,releaseLock(){released++;}};}}};
+  await assert.rejects(submitJob('DedupExperiment',{fetchImpl:async(_url,options)=>{calls++;signal=options.signal;return response;}}),error=>error.message.includes('unconfirmed')&&!error.message.includes('private cleanup'));
+  assert.equal(calls,1);assert.equal(released,1);assert.equal(signal.aborted,true);
+ }
+});

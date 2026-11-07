@@ -4,7 +4,8 @@ async function readSavedArchive(kind,id,{signal,fetchImpl}) {
  else if(typeof id!=='string'||!/^[A-Za-z0-9]{8}$/.test(id))throw new Error('Enter one saved canonical eight-character ID.');
  if(!globalThis.crypto?.subtle)throw new Error('Integrity verification is unavailable; no unchecked archive accepted.');
  const response=await fetchImpl('/api/'+kind+'-archive/'+id,{signal,cache:'no-store',redirect:'error',credentials:'same-origin'});
- const reject=async message=>{try{await response.body?.cancel();}catch{}throw new Error(message);};
+ const cancelQuietly=target=>{try{Promise.resolve(target?.cancel()).catch(()=>{});}catch{}};
+ const reject=message=>{cancelQuietly(response.body);throw new Error(message);};
  if(!response.ok)return reject(response.status===404?'No archived response exists for that canonical ID.':'Saved response could not be verified ('+response.status+').');
  if(!/^application\/json(?:\s*;\s*charset=utf-8)?$/i.test(response.headers.get('content-type')||''))return reject('Unexpected saved-response content type.');
  if(response.headers.get('x-atlas-archive-kind')!==kind)return reject('Saved-response kind mismatch.');
@@ -19,7 +20,7 @@ async function readSavedArchive(kind,id,{signal,fetchImpl}) {
  // not turn the two-MiB byte budget into unbounded retained chunk metadata.
  const reader=response.body.getReader();let buffer=new Uint8Array(0),size=0;
  try{for(;;){const {done,value}=await reader.read();if(done)break;if(!(value instanceof Uint8Array))throw new Error('Unexpected response byte stream.');const next=size+value.byteLength;if(next>MAX_ARCHIVE_BYTES)throw new Error('Saved response exceeds the size budget.');if(next>buffer.length){const grown=new Uint8Array(Math.min(MAX_ARCHIVE_BYTES,Math.max(next,16384,buffer.length*2)));grown.set(buffer.subarray(0,size));buffer=grown;}buffer.set(value,size);size=next;}}
- catch(error){try{await reader.cancel();}catch{}throw error;}
+ catch(error){cancelQuietly(reader);throw error;}
  finally{reader.releaseLock();}
  if(size===0)throw new Error('An empty saved response is not accepted.');
  if(length!==null&&BigInt(size)!==BigInt(length))throw new Error('Saved-response length mismatch.');

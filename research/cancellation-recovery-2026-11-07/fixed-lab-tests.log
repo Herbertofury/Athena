@@ -1,0 +1,16 @@
+✔ Public Lab does not probe localhost or send any API request (6.448009ms)
+✔ Native Lab uses original job protocol, routes panels locally and cancels polling (33.351314ms)
+✔ Lab preserves uncertain submission warning and never retries a cancelled receipt (4.120943ms)
+✔ Lab retains last-good overview after a malformed later refresh (4.514702ms)
+✔ Lab copies the exact retained validation modules and reproduces output (35.919254ms)
+✔ Pending initialization disables every write and guards even programmatic submission before abort (7.123107ms)
+✔ Lab unlocks a failed submission despite stalled stream cleanup and retains an unconfirmed warning (4.07867ms)
+✔ Lab releases archive loading after stalled cleanup and preserves the last verified record (7.380752ms)
+ℹ tests 8
+ℹ suites 0
+ℹ pass 8
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 292.517367
