@@ -1,0 +1,49 @@
+name: Import verified engineering migration
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'migration/incoming/engineering-atlas-files.zip'
+      - 'migration/incoming/import_engineering.py'
+      - '.github/workflows/athena-import-engineering.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: athena-engineering-import
+  cancel-in-progress: false
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          ref: main
+          fetch-depth: 0
+      - name: Verify archive and refuse conflicting paths
+        run: python migration/incoming/import_engineering.py
+      - name: Install pinned parser dependency for existing tests
+        run: python -m pip install -r engineering/experiments/site-extraction-lab/requirements.txt
+      - name: Validate complete migrated source and content-addressed assets
+        working-directory: engineering
+        run: |
+          python scripts/check_research.py
+          python scripts/build_research_explorer.py --check
+          python scripts/build_card_lab.py --check
+          python scripts/build_media_lab.py --check
+          python -m unittest discover -s tests -v
+          node --test tests/*.test.mjs
+      - name: Commit only the verified reserved import paths
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -- engineering migration/engineering-atlas wiki/Engineering-*.md .github/workflows/athena-engineering-checks.yml
+          if git diff --cached --quiet; then
+            echo 'Exact import already present; nothing to duplicate.'
+          else
+            git commit -m 'Import verified Engineering Atlas source and wiki into Athena'
+            git push origin HEAD:main
+          fi
