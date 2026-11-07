@@ -12,12 +12,12 @@
 
 The local JS suite covers algorithms and DOM-emulated interactions. It is not native rendering evidence. An installed Chromium 155 launch was attempted; it stopped before loading any page with `socket() failed: Operation not permitted`. One approved escalation attempt returned the same restriction. No bypass was attempted. The same test subsequently ran in CI using Chromium 151.0.7922.34. At commit `2f802e4b`, all six functional checks passed: learning persistence, real research catalog, research filters/shortlist/navigation, media metadata without provider requests, explicit pending Foundry state, and mobile width checks. The first failing receipt is retained; its generic view wait was replaced by route-specific waits. Screenshot review then caught a Research dark-theme contrast defect, addressed and tested separately.
 
-Use the [CI browser report](https://github.com/Herbertofury/Athena/actions/runs/42357294641) for loaded-app SHA-256, screenshots and actual result. This limited functional pass does not certify all accessibility or media behavior. The script blocks external requests and does not claim real provider playback, private account tests, native Rust backend or game testing.
+The final theme repair at `1482382fa5c6f6eb33276503b956992c6a069629` passed all eight checks in [CI run 42358027074](https://github.com/Herbertofury/Athena/actions/runs/42358027074), including sampled computed text contrast in both themes and the dark placeholder gradient endpoints. Research and Media screenshots were also visually reviewed in both themes and at mobile width. The raw final report is retained at `evidence/integration/2026-11-07/browser-theme-pass.json`. Use that run for the screenshots and loaded-app SHA-256. This limited functional pass does not certify all accessibility or media behavior. The script blocks external requests and does not claim real provider playback, private account tests, native Rust backend or game testing.
 
 ## Still pending
 
 - Feature Foundry is private while Athena is public. Its source and data are not in this release, pending informed public-publication approval and actual adapter parity work.
-- GitHub Pages site setup is not enabled by this change. The workflow uses `enablement: false`; a passing build does not prove a served URL.
+- GitHub Pages site setup remains blocked. [Run 42358027089](https://github.com/Herbertofury/Athena/actions/runs/42358027089) passed the test and package steps, then `configure-pages` returned `Get Pages site failed` / `Not Found`. The workflow uses `enablement: false`; no Pages settings were changed and no served URL is claimed.
 - Rust/local API and source runtime features are preserved, not silently replaced by browser controls.
 - Full educational coverage, all exam subobjectives, hands-on assessment and larger original practice banks remain open.
 - Source repositories are not deleted. Preservation and cutover gates remain separate.
