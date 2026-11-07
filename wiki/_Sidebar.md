@@ -2,6 +2,7 @@
 
 - [Home](Home)
 - [Knowledge map](Knowledge-Map)
+- [The Packet Trail](Packet-Trail)
 - [Coverage and quality](Coverage-and-Quality)
 - [Engineering research](Engineering-Home)
 
@@ -63,3 +64,11 @@
 - [The web: HTML, CSS, JavaScript and HTTP](shared-web)
 - [Testing, debugging and release evidence](shared-testing)
 - [Databases, transactions and durable data](shared-databases)
+- [Follow one request, end to end](shared-net-packet-journey)
+- [Build an address plan that fits](shared-net-subnet-planning)
+- [Choose the next hop, then the frame](shared-net-route-arp)
+- [Read DNS evidence without guessing](shared-net-dns-evidence)
+- [Diagnose configuration and lease failures](shared-net-dhcp-evidence)
+- [Distinguish transport, TLS and HTTP failures](shared-net-transport-trust)
+- [Run a loopback HTTP experiment](shared-net-local-http)
+- [Write an evidence-led incident report](shared-net-incident-proof)

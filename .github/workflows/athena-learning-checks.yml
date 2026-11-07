@@ -22,4 +22,4 @@ jobs:
       - run: npm run build
       - run: npm test
       - name: Generated curriculum is current
-        run: git diff --exit-code -- src dist/catalog.js docs/certificates docs/shared wiki
+        run: git diff --exit-code -- src dist/catalog.js docs/certificates docs/shared docs/paths docs/README.md wiki

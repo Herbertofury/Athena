@@ -1,4 +1,5 @@
 import json,pathlib,re
+from network_content import PATH, CASES
 R=pathlib.Path(__file__).resolve().parents[1]
 cat=json.loads((R/'research/certifications.json').read_text()); lessons=json.loads((R/'src/lessons.json').read_text())
 ids={'google-it-support':'google-it','comptia-a-plus':'a-plus','comptia-network-plus':'network-plus','comptia-security-plus':'security-plus','cisco-ccna':'ccna','aws-cloud-practitioner':'aws-clf','aws-solutions-architect-associate':'aws-saa','azure-fundamentals':'az-900','azure-administrator':'az-104','terraform-associate':'terraform','power-bi-data-analyst':'pl-300','rhcsa':'rhcsa','cka':'cka'}
@@ -40,18 +41,23 @@ for c in cat['certifications']:
     c['lab']['steps']=steps
     c['lab']['acceptance']=acceptance
 cat['lessons']=lessons
-cat['release']='0.1.0'
-cat['coverageStatement']='All 13 requested credentials are organized. This release contains 40 original introductory lessons, 40 original concept checks, guided lab plans and three local learning tools. It does not yet teach every official subobjective or replace practical training. Domain roadmaps are not counted as completed instruction.'
+for cluster in cat['sharedKnowledge']:
+ cluster['sourceTrackIds']=cluster['tracks'][:]
+ cluster['tracks']=[ids[track] for track in cluster['tracks']]
+cat['release']='0.2.0'
+cat['learningPaths']=[PATH]
+cat['diagnosisCases']=CASES
+cat['coverageStatement']='All 13 requested credentials are organized. This release contains 48 original lessons and checks, including an eight-lesson applied networking foundation, three synthetic diagnosis cases, a route-selection tool, guided lab plans and a local HTTP fixture. It does not yet teach every official subobjective or replace practical training. Domain roadmaps are not counted as completed instruction.'
 (R/'src/catalog.json').write_text(json.dumps(cat,indent=2,ensure_ascii=False)+'\n')
 (R/'dist/catalog.js').write_text('globalThis.ATHENA_DATA = '+json.dumps(cat,ensure_ascii=False)+';\n')
 # Repository-native documentation and ready-to-publish wiki, both generated from the same catalog.
 def write(path,text): path.parent.mkdir(parents=True,exist_ok=True);path.write_text(text+'\n')
-home='# Athena\n\nLearn once. Apply across credentials. Build proof, not just badges.\n\n'+cat['coverageStatement']+'\n\n## Start here\n\n1. Choose a career route in the app.\n2. Complete shared foundations, then credential-specific lessons.\n3. Run labs only on disposable authorized systems.\n4. Compare your work to the current official blueprint and record gaps.\n5. Book an exam only when you can independently perform its required tasks.\n\n## Certificate library\n\n'
+home='# Athena\n\nLearn once. Apply across credentials. Build proof, not just badges.\n\n'+cat['coverageStatement']+'\n\n## Start here\n\nStart with [The Packet Trail](paths/packet-trail.md) for a coherent applied networking foundation.\n\n1. Choose a career route in the app.\n2. Complete shared foundations, then credential-specific lessons.\n3. Run labs only on disposable authorized systems.\n4. Compare your work to the current official blueprint and record gaps.\n5. Book an exam only when you can independently perform its required tasks.\n\n## Certificate library\n\n'
 for c in cat['certifications']:
  home+=f"- [{c['name']}](certificates/{c['id']}.md) — {c['version']}\n"
 write(R/'docs/README.md',home)
 home+='\n## Engineering research\n\nThe engineering collection is being migrated under `engineering/`, with its native wiki pages prefixed `Engineering-`. See the repository migration inventory for verification status.\n'
-wiki_home=home.replace('(certificates/','(').replace('.md)',')')
+wiki_home=home.replace('(paths/packet-trail.md)', '(Packet-Trail)').replace('(certificates/','(').replace('.md)',')')
 write(R/'wiki/Home.md','Welcome to the Athena wiki!\n\n'+wiki_home)
 for c in cat['certifications']:
  s=f"# {c['name']}\n\n**Blueprint:** {c['version']}\n\n**Reviewed:** {cat['reviewedAt']}\n\n**Verification:** {c['verification']}\n\n**Coverage:** {c['coverage']}\n\n## Ordered study path\n\n"
@@ -66,5 +72,11 @@ for c in cat['certifications']:
 for l in lessons:
  s='# '+l['title']+'\n\n'+l['summary']+'\n\n## Learn\n\n'+'\n\n'.join(l['explain'])+'\n\n## Worked example\n\n'+l['example']+'\n\n## Practice safely\n\n'+'\n'.join(f'{i}. {v}' for i,v in enumerate(l['lab'],1))+'\n\n## Check your understanding\n\n'+l['question']+'\n\n'+'\n'.join(f'- {o}' for o in l['options'])+'\n\n<details><summary>Answer and explanation</summary>\n\n'+l['options'][l['answer']]+'. '+l['why']+'\n\n</details>\n\n## Further study\n\n'+'\n'.join('- '+u for u in l['sources'])+'\n\n**Depth:** Introductory teaching with a concept check; this is not evidence of full-domain mastery.\n'
  write(R/f'docs/shared/{l["id"]}.md',s);write(R/f'wiki/shared-{l["id"]}.md',s)
-write(R/'wiki/_Sidebar.md','# Athena\n\n- [Home](Home)\n- [Knowledge map](Knowledge-Map)\n- [Coverage and quality](Coverage-and-Quality)\n- [Engineering research](Engineering-Home)\n\n## Credentials\n\n'+'\n'.join(f'- [{c["name"]}]({c["id"]})' for c in cat['certifications'])+'\n\n## Shared foundations\n\n'+'\n'.join(f'- [{l["title"]}](shared-{l["id"]})' for l in lessons))
+write(R/'wiki/_Sidebar.md','# Athena\n\n- [Home](Home)\n- [Knowledge map](Knowledge-Map)\n- [The Packet Trail](Packet-Trail)\n- [Coverage and quality](Coverage-and-Quality)\n- [Engineering research](Engineering-Home)\n\n## Credentials\n\n'+'\n'.join(f'- [{c["name"]}]({c["id"]})' for c in cat['certifications'])+'\n\n## Shared foundations\n\n'+'\n'.join(f'- [{l["title"]}](shared-{l["id"]})' for l in lessons))
 print('Built',len(cat['certifications']),'tracks,',sum(len(c['domains']) for c in cat['certifications']),'domain roadmaps,',len(lessons),'lessons')
+
+path_doc='# The Packet Trail\n\n'+PATH['summary']+'\n\n'+PATH['limits']+'\n\n## Before you start\n\n'+ '\n'.join('- ['+next(l['title'] for l in lessons if l['id']==i)+'](../shared/'+i+'.md)' for i in PATH['prerequisites'])+'\n\n## Eight applied lessons\n\n'+ '\n'.join(str(n)+'. ['+next(l['title'] for l in lessons if l['id']==i)+'](../shared/'+i+'.md)' for n,i in enumerate(PATH['lessonIds'],1))+'\n\n## Practice and evidence\n\nThe app includes three synthetic diagnosis cases and a fixed-table route detective. They do not access your network or grant practical mastery.\n\nRun the [loopback HTTP lab](../../labs/network/README.md) on an authorized machine and retain actual test results. Complete the evidence template, explain what each test proves, and preserve unrun or failed checks.\n'
+for c in CASES:
+ path_doc+='\n## Case: '+c['title']+'\n\n'+c['brief']+'\n\n'+ '\n'.join('- '+x for x in c['evidence'])+'\n\n'+c['question']+'\n\n'+ '\n'.join('- '+x for x in c['options'])+'\n\n<details><summary>Reasoning and validation</summary>\n\n'+c['options'][c['answer']]+'. '+c['why']+'\n\n'+c['verify']+'\n\n</details>\n'
+write(R/'docs/paths/packet-trail.md',path_doc)
+write(R/'wiki/Packet-Trail.md',path_doc.replace('../shared/','shared-').replace('.md)',')').replace('(../../labs/network/README)', '(https://github.com/Herbertofury/Athena/blob/main/labs/network/README.md)'))

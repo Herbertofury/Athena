@@ -7,3 +7,7 @@ These are original local exercises, not official exam questions. Never target pr
 - `terraform/main.tf`: a local `terraform_data` example. It calls no cloud provider. Review state handling even in local labs. Installing Terraform is optional and not done by the app.
 
 Practice receipts should state versions, exact commands, outputs, failures, recovery and remaining limits.
+
+## Packet Trail networking
+
+[Local-only HTTP fixture and evidence guide](network/README.md): predict HTTP responses, execute pure and real loopback checks, and retain the scope/cleanup evidence. No third-party traffic, credentials or paid resources.

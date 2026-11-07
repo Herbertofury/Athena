@@ -1194,6 +1194,11 @@
         "Hardware and operating-system basics"
       ],
       "tracks": [
+        "google-it",
+        "a-plus",
+        "network-plus"
+      ],
+      "sourceTrackIds": [
         "google-it-support",
         "comptia-a-plus",
         "comptia-network-plus"
@@ -1208,6 +1213,14 @@
         "TLS and network diagnosis"
       ],
       "tracks": [
+        "a-plus",
+        "network-plus",
+        "ccna",
+        "az-104",
+        "aws-saa",
+        "cka"
+      ],
+      "sourceTrackIds": [
         "comptia-a-plus",
         "comptia-network-plus",
         "cisco-ccna",
@@ -1226,6 +1239,19 @@
         "Audit evidence"
       ],
       "tracks": [
+        "google-it",
+        "security-plus",
+        "ccna",
+        "aws-clf",
+        "aws-saa",
+        "az-900",
+        "az-104",
+        "terraform",
+        "rhcsa",
+        "cka",
+        "pl-300"
+      ],
+      "sourceTrackIds": [
         "google-it-support",
         "comptia-security-plus",
         "cisco-ccna",
@@ -1248,6 +1274,13 @@
         "Cost controls and teardown"
       ],
       "tracks": [
+        "aws-clf",
+        "aws-saa",
+        "az-900",
+        "az-104",
+        "terraform"
+      ],
+      "sourceTrackIds": [
         "aws-cloud-practitioner",
         "aws-solutions-architect-associate",
         "azure-fundamentals",
@@ -1266,6 +1299,13 @@
       ],
       "tracks": [
         "rhcsa",
+        "terraform",
+        "cka",
+        "az-104",
+        "ccna"
+      ],
+      "sourceTrackIds": [
+        "rhcsa",
         "terraform-associate",
         "cka",
         "azure-administrator",
@@ -1281,6 +1321,11 @@
         "Access and privacy"
       ],
       "tracks": [
+        "pl-300",
+        "az-900",
+        "aws-clf"
+      ],
+      "sourceTrackIds": [
         "power-bi-data-analyst",
         "azure-fundamentals",
         "aws-cloud-practitioner"
@@ -1644,7 +1689,7 @@
         "az-104"
       ],
       "sources": [
-        "https://www.rfc-editor.org/rfc/rfc8446"
+        "https://www.rfc-editor.org/rfc/rfc9846"
       ],
       "depth": "introductory lesson + original check",
       "estimatedMinutes": 20
@@ -2822,8 +2867,468 @@
       ],
       "depth": "introductory lesson + original check",
       "estimatedMinutes": 20
+    },
+    {
+      "id": "net-packet-journey",
+      "title": "Follow one request, end to end",
+      "category": "Networking",
+      "summary": "Track names, routes, frames, transport, trust and the application without confusing their jobs.",
+      "explain": [
+        "A useful mental model starts with one concrete request: a browser asks for a page. Its URL supplies a scheme, host and resource path. The browser may reuse cached information or an existing connection, so the full sequence is a reasoning model, not a promise that every request produces every exchange.",
+        "The client obtains an address for the host, selects a route, and sends data through an appropriate local interface. On ordinary IPv4 Ethernet, resolving a local next hop to a MAC address is separate from resolving a website name to an IP address. A switch and a DNS resolver answer different questions.",
+        "For an HTTP/1.1 or HTTP/2 HTTPS connection using TCP, transport establishment and TLS setup happen before an encrypted HTTP exchange. HTTP/3 uses QUIC instead; do not claim every HTTPS request follows a TCP handshake. Multiple application requests can share a connection.",
+        "At each boundary ask what success actually proves. A DNS answer proves that a resolver supplied a record. A completed transport handshake proves that endpoints exchanged transport messages. Neither proves that the user can log in or that an order was saved correctly.",
+        "Write a small evidence ladder: name answer, selected route, next-hop reachability, expected transport, valid endpoint identity, application response and user outcome. You can investigate from the most informative observation instead of blindly running every test in order."
+      ],
+      "example": "In a synthetic incident, portal.example resolves to 192.0.2.20, a TCP connection succeeds, TLS validates the requested hostname, and HTTP returns 503. The evidence narrows the immediate failure toward the application or its dependencies. It does not establish that every network path is healthy. Replacing DNS is not supported by these observations.",
+      "lab": [
+        "Draw seven boxes for the evidence ladder on paper.",
+        "For each box write one observation and one thing it cannot prove.",
+        "Use only the supplied synthetic records; do not send traffic to documentation addresses.",
+        "Explain why a 503 response differs from a connection timeout.",
+        "Write what evidence you would ask the application owner for next."
+      ],
+      "question": "TLS succeeds and the requested application returns 503. Which conclusion is best supported?",
+      "options": [
+        "The application/dependency path needs investigation; basic connection and TLS worked for this request",
+        "The DNS server must be broken",
+        "Every network device is healthy",
+        "The browser should ignore certificate checks"
+      ],
+      "answer": 0,
+      "why": "The observed response is application-layer evidence. It narrows the investigation without proving every component healthy.",
+      "tags": [
+        "network-trail",
+        "google-it",
+        "a-plus",
+        "network-plus",
+        "ccna",
+        "aws-saa",
+        "az-104"
+      ],
+      "sources": [
+        "https://www.rfc-editor.org/rfc/rfc9110.html",
+        "https://www.rfc-editor.org/rfc/rfc9293"
+      ],
+      "depth": "applied foundation + worked evidence",
+      "estimatedMinutes": 30
+    },
+    {
+      "id": "net-subnet-planning",
+      "title": "Build an address plan that fits",
+      "category": "Networking",
+      "summary": "Move from memorized prefix tables to a checked, non-overlapping plan.",
+      "explain": [
+        "For conventional IPv4 LAN planning through /30, a prefix p leaves 32−p host bits. The address count is 2^(32−p); subtract two for conventional network and broadcast reservations. This shortcut does not describe /31 point-to-point links, /32 host routes, IPv6, or provider-specific reserved addresses.",
+        "Start with required hosts including gateways and infrastructure, add explicit growth assumptions, then choose the smallest suitable block. A requirement of 50 addresses fits a /26 with 62 conventional usable addresses. A requirement of 70 does not. Document why you selected the margin instead of hiding it.",
+        "Allocate the largest blocks first inside an assigned parent range. Blocks must begin at their natural boundaries and must not overlap. A /26 in 10.20.30.0/24 can start at .0, .64, .128 or .192. A proposed 10.20.30.80/26 contains host bits and is not a network boundary.",
+        "Keep mathematical capacity separate from operational policy. A cloud provider can reserve more addresses. A private range can still overlap a VPN peer. Being private does not authorize you to configure it on someone else’s network.",
+        "Validate the plan two ways: calculate by hand, then compare with a trusted address library or the learning calculator. Store required hosts, prefix, network, broadcast, usable range, gateway and remaining capacity. Tests should include the first and last usable address and one address just outside the block."
+      ],
+      "example": "A paper-only office needs 50 hosts in A and 20 in B, including gateways. Allocate A=10.20.30.0/26, usable .1–.62, broadcast .63; B=10.20.30.64/27, usable .65–.94, broadcast .95. A has 12 spare conventional slots and B has 10. The unused .96–.255 space is not one single CIDR block.",
+      "lab": [
+        "Recalculate both ranges before opening the subnet tool.",
+        "Check that every B address lies outside A.",
+        "Add a third department needing 10 hosts and propose 10.20.30.96/28.",
+        "Verify its usable range .97–.110 and broadcast .111.",
+        "Explain how a cloud reservation rule or VPN overlap would change your deployment decision."
+      ],
+      "question": "Which is the next aligned /28 block after 10.20.30.64/27?",
+      "options": [
+        "10.20.30.80/28",
+        "10.20.30.96/28",
+        "10.20.30.95/28",
+        "10.20.30.65/28"
+      ],
+      "answer": 1,
+      "why": "The /27 occupies .64–.95. A /28 has 16 addresses, so the next aligned block begins at .96 and ends at .111.",
+      "tags": [
+        "network-trail",
+        "google-it",
+        "a-plus",
+        "network-plus",
+        "ccna",
+        "aws-saa",
+        "az-104"
+      ],
+      "sources": [
+        "https://www.rfc-editor.org/rfc/rfc4632",
+        "https://docs.python.org/3/library/ipaddress.html",
+        "https://www.rfc-editor.org/rfc/rfc1918"
+      ],
+      "depth": "applied foundation + worked evidence",
+      "estimatedMinutes": 30
+    },
+    {
+      "id": "net-route-arp",
+      "title": "Choose the next hop, then the frame",
+      "category": "Networking",
+      "summary": "Separate the final destination from the local Ethernet recipient.",
+      "explain": [
+        "An IP packet has a destination address. A routing lookup chooses the next hop or connected interface. For ordinary IPv4 forwarding, the most specific matching prefix wins before comparisons among routes to the same prefix; this lesson does not model policy routing, VRFs or multipath selection.",
+        "On IPv4 Ethernet, ARP can resolve the selected on-link next hop to a MAC address. If the final destination is off-link and the selected route uses a gateway, the first frame normally targets the gateway’s MAC address, while the packet still targets the remote IP address. The router replaces link-layer framing on its next link.",
+        "A connected route can direct the host to resolve the destination itself. A bad local prefix can therefore make the host try to find a supposedly local destination that is actually beyond a router. A default route does not override a more specific connected route simply because it would work better.",
+        "Inspect actual interface, prefix, route and neighbor evidence before editing configuration. ARP cache entries are temporary observations, not proof of device identity or end-to-end application health. IPv6 uses Neighbor Discovery rather than ARP.",
+        "When two equally specific matching routes exist, preference, metric and implementation-specific rules matter. Our route detective intentionally avoids equal-prefix ties so the exercise teaches longest-prefix matching without inventing universal metric behavior."
+      ],
+      "example": "A host 10.20.30.10/24 has default gateway 10.20.30.1. To reach 203.0.113.9 it sends an Ethernet frame to the gateway’s MAC, containing an IP packet for 203.0.113.9. With routes 0.0.0.0/0, 10.0.0.0/8 and 10.20.0.0/16, destination 10.20.8.2 selects /16, not the default.",
+      "lab": [
+        "Label packet destination and frame destination separately on a drawing.",
+        "Use the route detective with 10.20.8.2, 10.9.8.2 and 203.0.113.9.",
+        "Predict the selected prefix before revealing the answer.",
+        "Write why a wrong /16 on a host intended for /24 can change neighbor resolution.",
+        "Do not change your real adapter prefix, routes or ARP cache for this exercise."
+      ],
+      "question": "With a normal off-link IPv4 destination and an on-link gateway, whose MAC is in the first outgoing Ethernet frame?",
+      "options": [
+        "The remote web server’s MAC across the internet",
+        "A MAC derived from the DNS name",
+        "The selected local gateway’s MAC",
+        "Every router’s MAC at once"
+      ],
+      "answer": 2,
+      "why": "The frame reaches the local next hop; the IP packet continues to name the ultimate destination. Layer 2 addresses are not an end-to-end internet route.",
+      "tags": [
+        "network-trail",
+        "google-it",
+        "a-plus",
+        "network-plus",
+        "ccna",
+        "aws-saa",
+        "az-104"
+      ],
+      "sources": [
+        "https://www.rfc-editor.org/rfc/rfc826",
+        "https://www.rfc-editor.org/rfc/rfc4632"
+      ],
+      "depth": "applied foundation + worked evidence",
+      "estimatedMinutes": 30
+    },
+    {
+      "id": "net-dns-evidence",
+      "title": "Read DNS evidence without guessing",
+      "category": "Networking",
+      "summary": "Interpret records, negative answers, caches and resolver differences.",
+      "explain": [
+        "A DNS question includes a name, record type and class. An A answer supplies an IPv4 address; AAAA supplies IPv6. CNAME aliases a name. An application can ask several questions, and the machine or browser may use a different resolver path than a command-line diagnostic.",
+        "Distinguish failure kinds. NXDOMAIN says the queried name does not exist according to the response. A successful response with no requested record can mean the name exists but lacks that type. SERVFAIL signals that the resolver could not complete the resolution successfully; a timeout means no usable answer arrived before the client’s deadline.",
+        "Cached records have time limits, and negative results can also be cached. A changed authoritative answer does not instantly replace every cached answer. DNS TTL is not the same thing as IP TTL, and neither is a promise about application processing time.",
+        "Compare like with like: exact name, type, resolver, network, time and response. Split DNS may intentionally differ. A public resolver is not a universal replacement for an organization’s internal resolver. Changing it can break internal names and leak query information.",
+        "Preserve the name when testing HTTPS. Substituting an IP in a URL can change hostname verification and virtual-host selection. An IP connection that fails TLS is not enough to conclude DNS was the only problem. Use approved tools and documented test methods rather than bypassing verification."
+      ],
+      "example": "Synthetic records: at 09:00 a resolver caches app.example A=192.0.2.10 with TTL 300. At 09:01 the authoritative value changes to 192.0.2.20. Under a simple ordinary cache model, the original positive answer can remain until around 09:05. Real resolvers may apply additional cache policies; record what was actually returned.",
+      "lab": [
+        "Write the query name, type and resolver beside each sample answer.",
+        "Classify NXDOMAIN, SERVFAIL, timeout and NOERROR-with-no-A-record as distinct observations.",
+        "Compute the simple expiry time in the example.",
+        "Explain why an authoritative comparison is useful but does not prove a client’s actual resolver behavior.",
+        "Keep internal names and account data out of public tickets or lab notes."
+      ],
+      "question": "What does a DNS timeout establish by itself?",
+      "options": [
+        "The authoritative zone was deleted",
+        "The hostname definitely does not exist",
+        "The user is unauthorized",
+        "The client did not receive a usable answer before its deadline"
+      ],
+      "answer": 3,
+      "why": "A timeout is an observation about the exchange and deadline, not a definitive statement about the name’s existence or the root cause.",
+      "tags": [
+        "network-trail",
+        "google-it",
+        "a-plus",
+        "network-plus",
+        "ccna",
+        "aws-saa",
+        "az-104"
+      ],
+      "sources": [
+        "https://www.rfc-editor.org/rfc/rfc1034",
+        "https://www.rfc-editor.org/rfc/rfc2308"
+      ],
+      "depth": "applied foundation + worked evidence",
+      "estimatedMinutes": 30
+    },
+    {
+      "id": "net-dhcp-evidence",
+      "title": "Diagnose configuration and lease failures",
+      "category": "Networking",
+      "summary": "Read an address configuration as a set of linked claims.",
+      "explain": [
+        "An IPv4 client needs appropriate configuration, not merely any address. The address, prefix, route/gateway and resolver must be suitable for the intended network. DHCP can supply configuration through a lease; static configuration can be valid too.",
+        "For a new DHCPv4 lease, the familiar Discover, Offer, Request and Acknowledgment sequence is a useful starting model. Renewal and rebinding follow different paths. The server’s acknowledgment is not proof that a remote application is available.",
+        "A relay can carry DHCP traffic between client and server networks. If one segment fails while others work, the local VLAN, relay, pool and path are useful places to compare. Do not immediately restart every DHCP service or release a working lease on a machine you rely on for remote access.",
+        "A self-assigned IPv4 link-local address is a clue about the current configuration process, not proof of one precise server failure. Possible causes include link issues, wrong network membership, policy, missing relay, exhausted pool or no usable response. Confirm the operating system’s actual behavior and logs.",
+        "Use a known-good comparison from the same intended segment. Record whether the interface is connected, the configuration source, address/prefix, default route, resolver and lease times when available. Never paste real hardware identifiers, internal topology or user data into a public learning repository."
+      ],
+      "example": "In a synthetic lab, device A has 10.20.30.10/24, gateway 10.20.30.1 and the expected resolver. Device B on the intended same segment reports 169.254.5.9/16 and no default route. Inspect link/VLAN and DHCP exchange evidence for B. The observation does not prove that the whole internet or all DHCP servers are down.",
+      "lab": [
+        "Compare the two synthetic configurations field by field.",
+        "List three distinct hypotheses that could produce B’s observation.",
+        "Choose a low-risk observation that distinguishes two hypotheses.",
+        "Write why lease release is a bad first action during a remote support session.",
+        "Draft a concise escalation containing time, scope and missing evidence."
+      ],
+      "question": "What is the safest useful next step for the synthetic device B?",
+      "options": [
+        "Inspect link, intended network membership and DHCP exchange evidence",
+        "Delete every DHCP lease",
+        "Turn off endpoint protection",
+        "Assume DNS alone caused the missing default route"
+      ],
+      "answer": 0,
+      "why": "The configuration difference warrants investigation of acquisition and local path. It does not justify destructive broad changes or establish a single cause.",
+      "tags": [
+        "network-trail",
+        "google-it",
+        "a-plus",
+        "network-plus",
+        "ccna",
+        "aws-saa",
+        "az-104"
+      ],
+      "sources": [
+        "https://www.rfc-editor.org/rfc/rfc2131",
+        "https://www.rfc-editor.org/rfc/rfc3927"
+      ],
+      "depth": "applied foundation + worked evidence",
+      "estimatedMinutes": 30
+    },
+    {
+      "id": "net-transport-trust",
+      "title": "Distinguish transport, TLS and HTTP failures",
+      "category": "Networking",
+      "summary": "Use the failure stage to choose a narrow, safe next investigation.",
+      "explain": [
+        "A TCP connection uses endpoint addresses and ports. Establishment, data transfer and closure have distinct states. Connection refused and connection timeout are different observations, but middleboxes and implementations can affect them; neither alone identifies the responsible program or device with certainty.",
+        "TLS adds authenticated protection for an application exchange. Normal HTTPS validation includes the requested identity and certificate trust/validity checks. A trust failure should lead to investigation of endpoint, certificate chain, name, clock or authorized proxy behavior, not a routine instruction to ignore the warning.",
+        "After a protected connection is established, HTTP status and response content carry application meaning. A 404 concerns resource handling; a 403 concerns refusal to fulfill the request; a 503 suggests temporary service unavailability. Applications and intermediaries can use status codes imperfectly, so correlate server evidence.",
+        "A service can have a healthy TCP listener while its database is unavailable. Conversely, a failed ping need not mean HTTPS is unavailable because ICMP policy differs from TCP/UDP policy. Test the user’s actual workflow and expected protocol, not a convenient proxy for it.",
+        "Keep your conclusion proportional. “This request reached an HTTP responder and got 503 at 10:02” is stronger evidence than “the server is broken.” Record exact origin, request method/path without secrets, timestamp, response and comparison. Never log passwords or authorization headers."
+      ],
+      "example": "Three synthetic observations lead to different next steps: timeout before connection → inspect path/listener evidence; hostname mismatch → investigate identity/endpoint configuration without bypassing trust; valid TLS plus 503 → inspect application/dependency health. The same user-facing phrase, “site does not work,” can describe all three.",
+      "lab": [
+        "Classify each of the three observations by the highest evidenced layer.",
+        "For each, write one safe next observation and one unsupported conclusion.",
+        "Explain why broadly disabling a firewall is risky and less informative than a targeted, authorized check.",
+        "Explain why a successful ping is not an end-to-end web application test.",
+        "Keep all examples synthetic or limited to a service you own."
+      ],
+      "question": "What should follow an unexpected HTTPS hostname mismatch?",
+      "options": [
+        "Disable certificate verification permanently",
+        "Investigate the requested name and endpoint certificate without bypassing validation",
+        "Increase every timeout",
+        "Treat a successful ping as proof of security"
+      ],
+      "answer": 1,
+      "why": "The name mismatch is an identity-validation issue that must be explained and corrected; ignoring it destroys the check you are investigating.",
+      "tags": [
+        "network-trail",
+        "google-it",
+        "a-plus",
+        "network-plus",
+        "ccna",
+        "aws-saa",
+        "az-104"
+      ],
+      "sources": [
+        "https://www.rfc-editor.org/rfc/rfc9846",
+        "https://www.rfc-editor.org/rfc/rfc9110.html",
+        "https://www.rfc-editor.org/rfc/rfc9293"
+      ],
+      "depth": "applied foundation + worked evidence",
+      "estimatedMinutes": 30
+    },
+    {
+      "id": "net-local-http",
+      "title": "Run a loopback HTTP experiment",
+      "category": "Networking",
+      "summary": "Observe real requests and status codes on a harmless local-only fixture.",
+      "explain": [
+        "A local experiment gives stronger evidence than memorizing a diagram. The included Python fixture binds only to 127.0.0.1, uses an operating-system-selected port, and serves fixed synthetic responses. It does not expose your files, scan a network or request cloud resources.",
+        "GET /health returns a small JSON body. HEAD requests the corresponding metadata without the response body. GET /missing returns 404, and GET /busy returns a deliberately synthetic 503. A 503 in this fixture is a lesson case, not an outage detection system.",
+        "The fixture is plain HTTP on loopback. It does not teach TLS negotiation, DNS infrastructure, multi-host routing or production hardening. No private credentials, tokens or personal data belong in requests to it. Local users and software can still connect while it runs.",
+        "The automated lab starts a fresh listener, uses real loopback TCP requests with short timeouts, checks status/body/header contracts, then shuts it down. Record a PermissionError as an environment limit if sockets are prohibited; do not claim network execution merely because pure response tests pass.",
+        "Reproducibility requires the Python version, source revision, command, output and cleanup result. Read the code before running it. Stop the manually started server with Ctrl+C. Do not change the bind address or publish this teaching server to the internet."
+      ],
+      "example": "For a successful GET /health the expected status is 200 and JSON includes status=\"ok\". HEAD /health also returns 200 and a Content-Length describing the GET representation, but no body. For /missing, the expected 404 is a passing negative test when that is the planned behavior.",
+      "lab": [
+        "Read labs/network/README.md and the fixture implementation.",
+        "Predict status and body behavior for /health, /missing and /busy.",
+        "Run the pure tests, then the optional loopback tests only on your authorized machine.",
+        "Compare predicted and actual results and retain the exact output.",
+        "Stop the server and verify the listener is closed; do not confuse this with a TLS or real-browser test."
+      ],
+      "question": "Which evidence proves the strongest claim about this lab?",
+      "options": [
+        "Reading the fixture proves actual TCP requests succeeded",
+        "A screenshot of the instructions proves cleanup",
+        "Passing loopback tests proves these local HTTP cases, not internet/TLS behavior",
+        "A 404 means the entire lab failed"
+      ],
+      "answer": 2,
+      "why": "The executed boundary and tested cases define the claim. Loopback HTTP does not establish DNS, TLS, internet routing, or graphical browser behavior.",
+      "tags": [
+        "network-trail",
+        "google-it",
+        "a-plus",
+        "network-plus",
+        "ccna",
+        "aws-saa",
+        "az-104"
+      ],
+      "sources": [
+        "https://docs.python.org/3/library/http.server.html",
+        "https://docs.python.org/3/library/http.client.html",
+        "https://docs.python.org/3/library/unittest.html"
+      ],
+      "depth": "applied foundation + worked evidence",
+      "estimatedMinutes": 30
+    },
+    {
+      "id": "net-incident-proof",
+      "title": "Write an evidence-led incident report",
+      "category": "Networking",
+      "summary": "Turn investigation into a reproducible explanation and validation plan.",
+      "explain": [
+        "A useful incident record separates observation, hypothesis, action and result. Observation is what was measured. A hypothesis explains it and can be tested. An action changes something or collects evidence. A result records what happened, including a failed or inconclusive attempt.",
+        "Bound the claim by time, scope and environment. One successful request from one machine does not prove global recovery. A report should say what original user workflow was repeated, how many times, over what interval and which adjacent functions were checked.",
+        "Choose tests that discriminate between plausible causes. If one machine fails and another succeeds, compare relevant configuration rather than reinstalling both. Change one bounded variable when repair is justified, keep a rollback and avoid destroying the evidence needed to explain the fault.",
+        "Security and privacy remain part of quality. Redact secrets, personal data and unnecessary internal names. Keep a private original if authorized and needed, and publish only synthetic or appropriately sanitized examples. Do not turn a lesson into a ticket containing real customer records.",
+        "A responsible conclusion can be uncertain. “The resolver timed out twice; server-side logs were unavailable” communicates a limitation. Escalation should include the exact missing observation that would distinguish the remaining hypotheses, not a claim that every possible fix has been tried."
+      ],
+      "example": "Synthetic report: 10:02, one client, GET /busy returned 503 from the loopback fixture; /health returned 200. Hypothesis: the deliberate busy route is working as designed. Test: inspect its fixed response and repeat both paths. Result: expected statuses repeat, with no configuration change. Conclusion: negative-case fixture verified, not a real service repaired.",
+      "lab": [
+        "Complete the supplied evidence template using only synthetic or your own lab data.",
+        "Put every sentence under observation, hypothesis, action or result.",
+        "Ask whether your root-cause claim exceeds your measurements.",
+        "Add a rollback and cleanup statement even when no repair was needed.",
+        "Have another learner reproduce the steps without asking you what you meant."
+      ],
+      "question": "Which report wording best preserves uncertainty?",
+      "options": [
+        "Everything is fixed everywhere",
+        "The network is definitely broken because one request failed",
+        "We tried absolutely everything",
+        "Two resolver timeouts were observed; server logs are needed to distinguish the remaining causes"
+      ],
+      "answer": 3,
+      "why": "The last statement describes measured evidence and the specific missing information rather than making an unsupported universal claim.",
+      "tags": [
+        "network-trail",
+        "google-it",
+        "a-plus",
+        "network-plus",
+        "ccna",
+        "aws-saa",
+        "az-104"
+      ],
+      "sources": [
+        "https://docs.python.org/3/library/unittest.html",
+        "https://www.rfc-editor.org/rfc/rfc9110.html"
+      ],
+      "depth": "applied foundation + worked evidence",
+      "estimatedMinutes": 30
     }
   ],
-  "release": "0.1.0",
-  "coverageStatement": "All 13 requested credentials are organized. This release contains 40 original introductory lessons, 40 original concept checks, guided lab plans and three local learning tools. It does not yet teach every official subobjective or replace practical training. Domain roadmaps are not counted as completed instruction."
+  "release": "0.2.0",
+  "learningPaths": [
+    {
+      "id": "packet-trail",
+      "title": "The Packet Trail",
+      "summary": "A focused networking foundation: predict a request, plan addresses, inspect evidence, diagnose synthetic incidents and prove a local HTTP contract.",
+      "prerequisites": [
+        "troubleshooting",
+        "ip-subnets",
+        "dns-dhcp",
+        "transport-tls"
+      ],
+      "lessonIds": [
+        "net-packet-journey",
+        "net-subnet-planning",
+        "net-route-arp",
+        "net-dns-evidence",
+        "net-dhcp-evidence",
+        "net-transport-trust",
+        "net-local-http",
+        "net-incident-proof"
+      ],
+      "caseIds": [
+        "dns",
+        "route",
+        "tls"
+      ],
+      "limits": "An applied beginner foundation, not full Network+ or CCNA coverage. IPv6, wireless, dynamic routing, packet capture and production operations need deeper separate work."
+    }
+  ],
+  "diagnosisCases": [
+    {
+      "id": "dns",
+      "title": "The missing name",
+      "brief": "A synthetic workstation can use another internal application but portal.example fails before a web connection is established. All names and addresses here are invented teaching data.",
+      "evidence": [
+        "Link and expected local address/prefix are present.",
+        "The selected configured resolver returns SERVFAIL for portal.example A at 10:02.",
+        "A comparison workstation on the same intended segment gets the expected A answer at 10:02.",
+        "No certificate or HTTP response has been observed for the failing request."
+      ],
+      "question": "Which investigation is best supported next?",
+      "options": [
+        "Replace the laptop immediately",
+        "Compare the actual resolver path and response details between clients",
+        "Disable TLS validation",
+        "Conclude that the public internet is down"
+      ],
+      "answer": 1,
+      "why": "The differing name-resolution observations justify comparing resolver selection and response details. They do not yet prove one server, cache, policy or client is the root cause.",
+      "verify": "After an authorized repair, repeat the exact name/type query through the actual client resolver, then repeat the original HTTPS workflow with normal verification. Retain both results.",
+      "lessonId": "net-dns-evidence"
+    },
+    {
+      "id": "route",
+      "title": "The route that swallowed a subnet",
+      "brief": "A synthetic host should use 10.20.30.10/24 and gateway 10.20.30.1, but its current interface has /16. The target 10.20.40.20 belongs to a different routed subnet.",
+      "evidence": [
+        "Current connected route is 10.20.0.0/16.",
+        "A default route through 10.20.30.1 also exists.",
+        "The host attempts local neighbor resolution for 10.20.40.20.",
+        "The approved address plan states 10.20.30.0/24 for this interface."
+      ],
+      "question": "Which explanation fits the supplied evidence?",
+      "options": [
+        "The more specific connected /16 makes the destination appear on-link",
+        "The default route always overrides connected routes",
+        "DNS changes the Ethernet prefix",
+        "Every /16 network is invalid"
+      ],
+      "answer": 0,
+      "why": "10.20.40.20 matches the current connected /16, which is more specific than /0. The approved /24 plan would put it off-link. Confirm configuration ownership and plan rollback before any real change.",
+      "verify": "In an authorized disposable reproduction, validate the corrected route selection, next-hop resolution and original application path. Do not alter your real adapter for this synthetic case.",
+      "lessonId": "net-route-arp"
+    },
+    {
+      "id": "tls",
+      "title": "The convincing wrong endpoint",
+      "brief": "A synthetic browser reaches a TCP listener for an HTTPS URL but rejects the certificate because its names do not match the requested hostname.",
+      "evidence": [
+        "A TCP connection to the intended service port completes.",
+        "The certificate is presented for another hostname.",
+        "Normal certificate verification stops the request.",
+        "No successful protected HTTP response has been observed."
+      ],
+      "question": "Which next step preserves the security property being tested?",
+      "options": [
+        "Treat port reachability as proof of a safe website",
+        "Use an insecure flag and call it repaired",
+        "Investigate endpoint/name/certificate configuration without bypassing validation",
+        "Publish the user’s session cookie for debugging"
+      ],
+      "answer": 2,
+      "why": "A reachable listener is not proof of the requested identity. Endpoint, proxy or certificate configuration must be explained while validation remains intact.",
+      "verify": "Repeat the original hostname with normal verification after an authorized fix, then validate the application response. Do not install an unexpected root certificate as a shortcut.",
+      "lessonId": "net-transport-trust"
+    }
+  ],
+  "coverageStatement": "All 13 requested credentials are organized. This release contains 48 original lessons and checks, including an eight-lesson applied networking foundation, three synthetic diagnosis cases, a route-selection tool, guided lab plans and a local HTTP fixture. It does not yet teach every official subobjective or replace practical training. Domain roadmaps are not counted as completed instruction."
 }

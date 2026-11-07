@@ -1,0 +1,51 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> athena-learning@0.2.0 test
+> node --test tests/*.test.cjs && python3 tests/wiki_test.py && python3 scripts/validate.py && python3 tests/network_fixture_test.py && python3 tests/network_loopback_test.py
+
+✔ IPv4 known /26 range (1.448627ms)
+✔ IPv4 boundary and prefix validation (0.371766ms)
+✔ IPv4 bounded property checks (8.235288ms)
+✔ policy truth table (0.225397ms)
+✔ data revenue uses row context after filtering (0.232988ms)
+✔ review scheduling, failed recovery and nonmutation (0.236284ms)
+✔ progress import is constrained and roundtrips (0.454901ms)
+✔ route selection handles default, specific and host prefixes without mutating input (0.306518ms)
+✔ route lookup rejects invalid addresses, prefixes and unaligned networks (0.302202ms)
+✔ route lookup includes exact network and last-address boundaries (0.249293ms)
+✔ all eight views and 13 tracks render without exception (51.202914ms)
+✔ lesson read, note and check survive close and reload (17.044465ms)
+✔ search filters and clears on navigation (5.667467ms)
+✔ certificate filters, selection and unknown route (8.327236ms)
+✔ malformed stored progress does not prevent learning (7.052128ms)
+✔ review grade disables double answers and advances (8.834445ms)
+✔ skip link focuses without changing app route (3.031985ms)
+✔ navigation exposes current page and selected filters (4.331289ms)
+✔ Packet Trail exposes eight lessons, case selection and honest feedback (7.724304ms)
+✔ route detective computes and validates without creating markup from input (5.614779ms)
+✔ new Packet Trail lesson uses persisted notes and read state (12.464715ms)
+✔ closing a case lesson restores its actual repeated opener (4.9941ms)
+ℹ tests 22
+ℹ suites 0
+ℹ pass 22
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 293.375258
+...
+----------------------------------------------------------------------
+Ran 3 tests in 0.002s
+
+OK
+Catalog, 13 paths, 74 roadmaps, 48 lessons, shared-lesson wiki parity and documentation links validated. Engineering links require combined-deployment verification.
+.......
+----------------------------------------------------------------------
+Ran 7 tests in 0.000s
+
+OK
+........
+----------------------------------------------------------------------
+Ran 8 tests in 0.154s
+
+OK

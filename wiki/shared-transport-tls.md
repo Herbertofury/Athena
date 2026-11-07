@@ -38,7 +38,7 @@ Investigate endpoint/name configuration and trust. TLS identity validation must 
 
 ## Further study
 
-- https://www.rfc-editor.org/rfc/rfc8446
+- https://www.rfc-editor.org/rfc/rfc9846
 
 **Depth:** Introductory teaching with a concept check; this is not evidence of full-domain mastery.
 

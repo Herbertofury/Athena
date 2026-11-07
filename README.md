@@ -13,12 +13,16 @@ Athena joins a learning academy with an evidence-led engineering research librar
 - [Engineering research](engineering/README.md): preserved Atlas research and application work when its migration lands.
 - [Coverage and quality](docs/quality/COVERAGE.md): what exists, what is verified and what remains.
 
+## Start with The Packet Trail
+
+The [eight-stage networking foundation](docs/paths/packet-trail.md) connects address planning, routes, DNS/DHCP, transport/trust, synthetic incident analysis and an actual loopback HTTP lab. Open **The Packet Trail** in the app. It is a focused applied foundation, not full Network+ or CCNA preparation.
+
 ## This release, honestly
 
 - 13 credential pathways with dated exam/version and source notes.
 - 74 **domain roadmaps**, not 74 completed courses or exhaustive objective maps.
-- 40 original introductory lessons, each with explanation, a worked example, a safe exercise and an original concept check.
-- Three local interactive learning tools: IPv4 subnetting, simplified policy decisions and filter-context arithmetic.
+- 48 original lessons (40 introductions plus eight applied networking foundations), each with explanation, a worked example, a safe exercise and an original concept check.
+- Four local interactive learning tools: fixed-table route selection, IPv4 subnetting, simplified policy decisions and filter-context arithmetic.
 - Search, pathway selection, read/check tracking, spaced review, local notes and validated progress export/import.
 - Matching repository documentation and prepared wiki pages generated from one catalog.
 

@@ -4,9 +4,11 @@ Welcome to the Athena wiki!
 
 Learn once. Apply across credentials. Build proof, not just badges.
 
-All 13 requested credentials are organized. This release contains 40 original introductory lessons, 40 original concept checks, guided lab plans and three local learning tools. It does not yet teach every official subobjective or replace practical training. Domain roadmaps are not counted as completed instruction.
+All 13 requested credentials are organized. This release contains 48 original lessons and checks, including an eight-lesson applied networking foundation, three synthetic diagnosis cases, a route-selection tool, guided lab plans and a local HTTP fixture. It does not yet teach every official subobjective or replace practical training. Domain roadmaps are not counted as completed instruction.
 
 ## Start here
+
+Start with [The Packet Trail](Packet-Trail) for a coherent applied networking foundation.
 
 1. Choose a career route in the app.
 2. Complete shared foundations, then credential-specific lessons.

@@ -65,7 +65,7 @@ lesson('transport-tls','Ports, transport and TLS','Networking','Connect applicat
 'TLS authenticates endpoints using certificates and protects traffic confidentiality/integrity. Validate the hostname, trust chain and validity period. Bypassing certificate warnings removes protection and is not a routine troubleshooting fix.'
 ],'A TCP connection to port 443 succeeds but HTTPS fails because the certificate name differs from the requested host. Network reachability and application trust are separate tests.',
 ['Use a browser’s certificate viewer for a trusted public site.','Record hostname, issuer and expiration without changing trust settings.','Draw TCP connection establishment and TLS negotiation as separate layers.','Explain why an open port does not prove application health.'],
-'What should you do with an unexpected certificate-name mismatch?',['Disable verification','Investigate endpoint/name configuration and trust','Assume encryption makes identity irrelevant','Change every firewall rule'],1,'TLS identity validation must remain meaningful.',['google-it','a-plus','network-plus','ccna','security-plus','aws-saa','az-104'],['https://www.rfc-editor.org/rfc/rfc8446'])
+'What should you do with an unexpected certificate-name mismatch?',['Disable verification','Investigate endpoint/name configuration and trust','Assume encryption makes identity irrelevant','Change every firewall rule'],1,'TLS identity validation must remain meaningful.',['google-it','a-plus','network-plus','ccna','security-plus','aws-saa','az-104'],['https://www.rfc-editor.org/rfc/rfc9846'])
 lesson('wireless','Wireless design and troubleshooting','Networking','Balance coverage, capacity, interference and authentication.',[
 'Coverage asks whether a client can hear a signal; capacity asks whether enough airtime is available. More transmit power or more access points can worsen contention without careful channel planning.',
 'Wi-Fi bands differ in propagation and spectrum availability. Channel width affects throughput and interference. Evaluate client capabilities, neighboring networks and physical obstacles before treating advertised link rate as application throughput.',
@@ -283,6 +283,8 @@ lesson('databases','Databases, transactions and durable data','Coding','Model da
 ],'Transferring a balance between two accounts requires both updates to succeed together. Independent updates can leave money duplicated or missing if the second step fails.',
 ['Create a disposable SQLite database with two related tables.','Add a foreign key and a unique constraint.','Run a transaction that deliberately rolls back.','Verify data after closing and reopening the database.'],
 'Why use parameterized SQL?',['It guarantees every query is fast','It keeps input data separate from SQL syntax','It removes the need for permissions','It automatically creates backups'],1,'Parameters reduce injection risk by avoiding unsafe construction of query syntax from input.',['coding','pl-300','aws-saa'],['https://www.sqlite.org/lang_transaction.html','https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html'])
+from network_content import LESSONS
+modules.extend(LESSONS)
 # Balance answer positions deterministically; choices retain their meaning.
 for i, item in enumerate(modules):
     correct=item['options'].pop(item['answer'])
