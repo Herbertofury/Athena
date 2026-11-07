@@ -34,8 +34,6 @@ jobs:
           printf '<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="refresh" content="0;url=learn/"><title>Athena</title><a href="learn/">Open Athena learning</a></html>' > public/index.html
           touch public/.nojekyll
       - uses: actions/configure-pages@v5
-        with:
-          enablement: true
       - uses: actions/upload-pages-artifact@v3
         with:
           path: public
