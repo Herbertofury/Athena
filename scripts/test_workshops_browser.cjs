@@ -24,6 +24,21 @@ function validateReceipt(report){
  return true;
 }
 function resolveAsset(root,url){const name=decodeURIComponent(new URL(url,'http://127.0.0.1').pathname);const file=path.resolve(root,'.'+(name==='/'?'/index.html':name));if(!file.startsWith(root+path.sep))throw Error('Path outside root');const real=fs.realpathSync(file);if(!real.startsWith(fs.realpathSync(root)+path.sep))throw Error('Symlink outside root');return file;}
+// A changed hash can precede hashchange rendering. Require the target DOM as
+// well, including after real clicks and history navigation. This function is
+// serialized by Playwright, so it intentionally has no module-scope captures.
+function workshopRouteReady(hash){
+ if(location.hash!==hash)return false;
+ const main=document.querySelector('#main'),paths=globalThis.ATHENA_DATA?.workshops;
+ if(main?.dataset.workspace!=='learning'||!Array.isArray(paths))return false;
+ if(hash==='#workshops')return paths.length===5&&main.querySelectorAll('[data-workshop]').length===5&&paths.every(p=>{
+  const links=[...main.querySelectorAll('[data-workshop]')].filter(a=>a.dataset.workshop===p.id);
+  return links.length===1&&links[0].getAttribute('href')==='#workshops/'+p.id;
+ });
+ const p=paths.find(p=>'#workshops/'+p.id===hash);
+ return !!p&&[...main.querySelectorAll('[data-lesson]')].some(el=>el.dataset.lesson===p.lessonIds[0]);
+}
+async function waitForWorkshopRoute(page,hash){await page.waitForFunction(workshopRouteReady,hash);}
 async function run(env=process.env){
  const root=path.resolve(env.ATHENA_BROWSER_ROOT||'dist'),out=path.resolve(env.ATHENA_WORKSHOPS_BROWSER_OUTPUT||'browser-results/workshops');
  const report=createReport(root,out);let browser,server,page;
@@ -46,7 +61,7 @@ async function run(env=process.env){
   context.on('page',p=>{p.on('pageerror',e=>report.errors.push(e.message));p.on('response',r=>{if(r.status()>=400)report.failedResponses.push({url:r.url(),status:r.status()});});});
   page=await context.newPage();await page.goto(origin,{waitUntil:'networkidle'});
   const dialog=page.locator('#lesson-dialog');
-  async function route(hash){await page.evaluate(h=>{location.hash=h;},hash);await page.waitForFunction(h=>location.hash===h,hash);await page.waitForFunction(h=>{const main=document.querySelector('#main');if(main?.dataset.workspace!=='learning')return false;if(h==='#workshops')return main.querySelectorAll('[data-workshop]').length===5;const p=globalThis.ATHENA_DATA.workshops.find(p=>'#workshops/'+p.id===h);return !!p&&!!main.querySelector('[data-lesson=\"'+p.lessonIds[0]+'\"]');},hash);}
+  async function route(hash){await page.evaluate(h=>{location.hash=h;},hash);await waitForWorkshopRoute(page,hash);}
   async function open(id){const button=page.locator(`#main [data-lesson="${id}"]`).first();await button.click();await dialog.waitFor({state:'visible'});await page.waitForFunction(id=>document.querySelector('#read-check')?.dataset.id===id,id);}
   async function close(){const id=await page.locator('#read-check').getAttribute('data-id');await page.locator('#close-lesson').click();await dialog.waitFor({state:'hidden'});await page.waitForFunction(id=>document.activeElement?.dataset.lesson===id,id);}
   async function snapshot(){return page.evaluate(()=>({xp:document.querySelector('#xp-label').textContent,progress:localStorage.getItem('athena-progress-v1')}));}
@@ -60,7 +75,7 @@ async function run(env=process.env){
    paths=data.workshops;assert.ok(Array.isArray(paths),'ATHENA_DATA.workshops must be an array');
    assert.deepEqual(paths.map(p=>p.id),WORKSHOP_IDS);report.workshopIds=paths.map(p=>p.id);
    const addedIds=[...new Set(paths.flatMap(p=>p.lessonIds))];assert.equal(addedIds.length,42);added=addedIds.map(id=>{const lesson=data.lessons.find(l=>l.id===id);assert.ok(lesson,`Missing ${id}`);return lesson;});report.addedLessons=added.length;
-   await page.locator('[data-nav="workshops"]').click();await page.waitForURL('**/#workshops');
+   await page.locator('[data-nav="workshops"]').click();await waitForWorkshopRoute(page,'#workshops');
    for(const id of WORKSHOP_IDS){const link=page.locator(`#main [data-workshop="${id}"]`);assert.equal(await link.count(),1);assert.equal(await link.getAttribute('href'),'#workshops/'+id);}
   });
   await check('workshop ZIP downloads',async()=>{
@@ -69,7 +84,7 @@ async function run(env=process.env){
   });
   await check('all workshop routes and lessons',async()=>{
    report.openedLessonIds=[];
-   for(const p of paths){await route('#workshops');await page.locator(`[data-workshop="${p.id}"]`).click();await page.waitForURL('**/#workshops/'+p.id);await page.locator(`#main [data-lesson="${p.lessonIds[0]}"]`).first().waitFor();
+   for(const p of paths){await route('#workshops');await page.locator(`[data-workshop="${p.id}"]`).click();await waitForWorkshopRoute(page,'#workshops/'+p.id);await page.locator(`#main [data-lesson="${p.lessonIds[0]}"]`).first().waitFor();
     for(const id of [...(p.prerequisites||[]),...p.lessonIds])assert.ok(await page.locator(`#main [data-lesson="${id}"]`).count()>0,`Missing route lesson ${id}`);
     for(const id of p.lessonIds){const lesson=added.find(l=>l.id===id);await open(id);assert.equal(await page.locator('#lesson-title').textContent(),lesson.title);const text=await page.locator('#lesson-content').textContent();for(const paragraph of lesson.explain)assert.ok(text.includes(paragraph),`Truncated explanation ${id}`);for(const step of lesson.lab)assert.ok(text.includes(step),`Missing lab step ${id}`);
      if(lesson.workedCode){const code=page.locator('pre.worked-code code');assert.equal(await code.textContent(),typeof lesson.workedCode==='string'?lesson.workedCode:lesson.workedCode.code);assert.equal(await code.locator('*').count(),0,'Worked code must not become executable markup');}
@@ -111,7 +126,7 @@ async function run(env=process.env){
    const id=paths[0].lessonIds[0];for(const how of ['button','Escape']){await open(id);if(how==='button')await close();else{await page.keyboard.press('Escape');await dialog.waitFor({state:'hidden'});await page.waitForFunction(id=>document.activeElement?.dataset.lesson===id,id);}assert.equal(await page.evaluate(()=>document.activeElement?.dataset.lesson),id);}
   });
   await check('history Back and Forward',async()=>{
-   await route('#workshops');await page.locator(`[data-workshop="${WORKSHOP_IDS[0]}"]`).click();await page.waitForURL('**/#workshops/'+WORKSHOP_IDS[0]);await page.goBack();await page.waitForURL('**/#workshops');await page.locator('#main [data-workshop]').first().waitFor();assert.equal(await page.locator('#main [data-workshop]').count(),5);await page.goForward();await page.waitForURL('**/#workshops/'+WORKSHOP_IDS[0]);await page.locator(`#main [data-lesson="${paths[0].lessonIds[0]}"]`).first().waitFor();
+   await route('#workshops');await page.locator(`[data-workshop="${WORKSHOP_IDS[0]}"]`).click();await waitForWorkshopRoute(page,'#workshops/'+WORKSHOP_IDS[0]);await page.goBack();await waitForWorkshopRoute(page,'#workshops');await page.locator('#main [data-workshop]').first().waitFor();assert.equal(await page.locator('#main [data-workshop]').count(),5);await page.goForward();await waitForWorkshopRoute(page,'#workshops/'+WORKSHOP_IDS[0]);await page.locator(`#main [data-lesson="${paths[0].lessonIds[0]}"]`).first().waitFor();
   });
   await check('desktop and mobile layout',async()=>{
    async function noOverflow(label){const sizes=await page.evaluate(()=>({width:document.documentElement.clientWidth,scroll:document.documentElement.scrollWidth,dialogWidth:document.querySelector('#lesson-dialog').clientWidth,dialogScroll:document.querySelector('#lesson-dialog').scrollWidth,open:document.querySelector('#lesson-dialog').open}));assert.ok(sizes.scroll<=sizes.width+1,JSON.stringify({label,...sizes}));if(sizes.open)assert.ok(sizes.dialogScroll<=sizes.dialogWidth+1,JSON.stringify({label,...sizes}));}
@@ -126,5 +141,5 @@ async function run(env=process.env){
  finally{try{await browser?.close();}catch(error){report.result='failed';report.cleanupFailure=error.message;}if(server?.listening)await new Promise(resolve=>server.close(resolve));report.finished=new Date().toISOString();fs.writeFileSync(path.join(out,'report.json'),JSON.stringify(report,null,2)+'\n');}
  return report;
 }
-module.exports={WORKSHOP_IDS,REQUIRED_CHECKS,CSP,sha256,createReport,validateReceipt,resolveAsset,run};
+module.exports={WORKSHOP_IDS,REQUIRED_CHECKS,CSP,sha256,createReport,validateReceipt,resolveAsset,workshopRouteReady,waitForWorkshopRoute,run};
 if(require.main===module)run().then(report=>{console.log(JSON.stringify(report,null,2));if(report.result!=='pass')process.exitCode=1;}).catch(error=>{console.error(error);process.exitCode=1;});
