@@ -33,9 +33,9 @@ async function check(name,fn){report.currentCheck=name;await fn();report.checks.
    await page.locator('[data-nav="build"]').click();await page.waitForFunction(()=>document.querySelector('#main').dataset.workspace==='build');await page.locator('.athena-foundry-workspace').waitFor();
    await page.waitForFunction(()=>['pass','fail'].includes(document.querySelector('.athena-foundry-workspace')?.shadowRoot?.querySelector('.ff-root')?.dataset.selftest));const selftest=await page.locator('.ff-root').evaluate(el=>({state:el.dataset.selftest,checks:JSON.parse(el.dataset.selftestChecks||'{}')}));assert.equal(selftest.state,'pass',JSON.stringify(selftest));
    assert.equal(await page.locator('.premium-ecology-actor').count(),5);
-   await search.fill('');await page.locator('#themeSelect').selectOption('world.frawgy.verdant-conservatory');
-   await page.waitForFunction(()=>document.querySelector('.athena-foundry-workspace')?.shadowRoot?.querySelector('.ff-root')?.dataset.premiumTheme==='world.frawgy.verdant-conservatory');
-   await page.locator('#editTheme').click();await page.locator('#themeAtlasStudio.open').waitFor();assert.equal(await page.locator('.theme-atlas-card').count(),27);await page.locator('.theme-atlas-header [data-theme-atlas-action=close]').click();
+   await search.fill('');await page.locator('#editTheme').click();await page.locator('#themeAtlasStudio.open').waitFor();assert.equal(await page.locator('.theme-atlas-card').count(),27);
+   await page.locator('.theme-atlas-card[data-theme-id="world.frawgy.verdant-conservatory"]').click();await page.locator('[data-theme-atlas-action=activate]').click();
+   await page.waitForFunction(()=>document.querySelector('.athena-foundry-workspace')?.shadowRoot?.querySelector('.ff-root')?.dataset.premiumTheme==='world.frawgy.verdant-conservatory');await page.locator('#themeAtlasStudio.open').waitFor({state:'hidden'});
    await page.screenshot({path:path.join(out,'foundry-integrated.png'),fullPage:true});
    await page.locator('[data-nav="home"]').click();await page.waitForFunction(()=>document.querySelector('#main').dataset.workspace==='learning');assert.equal(await page.locator('.athena-foundry-workspace').count(),0);
    await openWorkspace('research');assert.ok(await page.locator('.workspace-container').count());
