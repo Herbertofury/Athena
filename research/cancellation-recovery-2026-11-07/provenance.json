@@ -1,0 +1,148 @@
+{
+  "schema": 1,
+  "prepared_utc": "2026-11-07T09:59:03.318902+00:00",
+  "athena_base_commit": "ee911ee94acae88ee037885daba35a6723e5d7f2",
+  "status": "candidate prepared for destination draft PR; real-browser CI pending",
+  "source_draft": {
+    "url": "https://github.com/Herbertofury/Engineering-Atlas/pull/7",
+    "state": "open",
+    "draft": true,
+    "head": "1333c5dd7833573687966c32781ea87b68ec9a14",
+    "base": "de9481e07b31a12918fa2cd53909e706d207b225",
+    "implementation_modules_exact": true,
+    "excluded": "audio-player code, generated audio assets, unrelated historical evidence"
+  },
+  "verification": {
+    "baseline": {
+      "tests": 20,
+      "passed": 16,
+      "failed": 4
+    },
+    "fixed_protocol": {
+      "tests": 30,
+      "passed": 30
+    },
+    "lab_dom": {
+      "tests": 8,
+      "passed": 8
+    },
+    "aggregate_root_js": {
+      "tests": 70,
+      "passed": 70,
+      "includes_protocol_subprocess": true
+    },
+    "python_suites": [
+      3,
+      7,
+      8,
+      12
+    ],
+    "generators": "6 Lab files and 18 Engineering files reproduce",
+    "independent_review": "No blocking findings; final 30 protocol tests passed under strict unhandled-rejection mode and 9 focused wrapper/Lab tests passed",
+    "browser": "new native-stream check prepared; not run locally"
+  },
+  "files": [
+    {
+      "path": "engineering/apps/atlas-lab/ui/job-submit.mjs",
+      "base_blob_sha": "5a1fcbb2a63440e3a64a8f4526cdd43849eda440",
+      "blob_sha": "727ddb8d3be61ee21ac05f62f7b805be48ef4cea",
+      "sha256": "6fcf656f4c19610dfd9c64be8d1f66e068489cb6c213d45b6d22b93e091f59c2",
+      "bytes": 2636
+    },
+    {
+      "path": "engineering/apps/atlas-lab/ui/archive-view.mjs",
+      "base_blob_sha": "63454aa5da1fa81b0fed196e54b3bdda09ba638e",
+      "blob_sha": "07ede0967f238d65b6d77d62e101e81cf650f579",
+      "sha256": "8187862450e038d913c31a505eab116e59c7fc7fc0de4ce44adcba9b50442ee9",
+      "bytes": 5145
+    },
+    {
+      "path": "engineering/tests/job-submit.test.mjs",
+      "base_blob_sha": "1c2897d862e5e347628d3d7e85a9e2fa9d54d32c",
+      "blob_sha": "bb08f1b483a4b7b4c5cf813868a6aeb9d2b60983",
+      "sha256": "b3a9f629785fc8ae0e862f85bc3b94630de879faf5ec6347cc2f5d282a9795b9",
+      "bytes": 5241
+    },
+    {
+      "path": "engineering/tests/archive-view.test.mjs",
+      "base_blob_sha": "4cc3e5640ae2cb55bfb0d3983ac1b803c72eadb6",
+      "blob_sha": "2d299fd0c6b547cd7d7543233d6e243b257d1546",
+      "sha256": "df3b596debe9ab468c6d2850f152d445397542bb8c4686c6e8490e74f56cc400",
+      "bytes": 8198
+    },
+    {
+      "path": "dist/workspaces/engineering/lab/job-submit.mjs",
+      "base_blob_sha": "5a1fcbb2a63440e3a64a8f4526cdd43849eda440",
+      "blob_sha": "727ddb8d3be61ee21ac05f62f7b805be48ef4cea",
+      "sha256": "6fcf656f4c19610dfd9c64be8d1f66e068489cb6c213d45b6d22b93e091f59c2",
+      "bytes": 2636
+    },
+    {
+      "path": "dist/workspaces/engineering/lab/archive-view.mjs",
+      "base_blob_sha": "63454aa5da1fa81b0fed196e54b3bdda09ba638e",
+      "blob_sha": "07ede0967f238d65b6d77d62e101e81cf650f579",
+      "sha256": "8187862450e038d913c31a505eab116e59c7fc7fc0de4ce44adcba9b50442ee9",
+      "bytes": 5145
+    },
+    {
+      "path": "dist/workspaces/engineering/lab/manifest.json",
+      "base_blob_sha": "290ab316652c22c57139a4df4ff9fd98d2f085fb",
+      "blob_sha": "467a1b4eea5bea50010ca1ba19ed3028aa1e579e",
+      "sha256": "c02aa2bb3fb9542628af874de398c7279e59e10eb7a89f84880f646a0a10e93b",
+      "bytes": 1460
+    },
+    {
+      "path": "tests/lab_workspace.test.cjs",
+      "base_blob_sha": "2ce64a2352bff2123d097c8ac10ed94785bba55f",
+      "blob_sha": "f5d6046c6b2ddec2d558bb9529db51cf8cd8747c",
+      "sha256": "01c3c65aa1ed55eb303744fcb84a39fd8855cbdb2cef7acaa96d91c6c3ef651c",
+      "bytes": 10366
+    },
+    {
+      "path": "tests/lab_reader_protocol.test.cjs",
+      "base_blob_sha": null,
+      "blob_sha": "b30b50223dda219d499efed6de6ab1e81bfa5220",
+      "sha256": "33d0e5eca5c6a936e7290fdd22a14c39fb4d73d35e1e8b22c2840b72011445fc",
+      "bytes": 653
+    },
+    {
+      "path": "scripts/test_lab_runtime.cjs",
+      "base_blob_sha": "9f687c895127188bb7d7ad6e95f326b26f13de75",
+      "blob_sha": "f2752c51c6bfeb1fd5f68a20a6d55d8a350712ca",
+      "sha256": "66ba070162cb6b222a0b049cbbba2ce9db01eb4413d6616e9790ccec9c9658a6",
+      "bytes": 17601
+    }
+  ],
+  "logs": [
+    {
+      "path": "aggregate-tests.log",
+      "original_sha256": "8bf8c3f2c087e9a7dce6d6b0ada40be5ddf2048053fd44f57c8ff3b84b605281",
+      "retained_sha256": "8bf8c3f2c087e9a7dce6d6b0ada40be5ddf2048053fd44f57c8ff3b84b605281",
+      "bytes": 6890
+    },
+    {
+      "path": "baseline-tests.log",
+      "original_sha256": "e449616060fccaf2c55f3d7bb08625e2e24ec50a97dce1d6338b12c41b94853c",
+      "retained_sha256": "83f0de0c33a55bd897b3937c99d04931ea237f52cef09b27393d7d061ec9c7f2",
+      "bytes": 4662
+    },
+    {
+      "path": "fixed-lab-tests.log",
+      "original_sha256": "81fc28409747bedb07cbbe81f37afeec3e620248b773060e30170d2c1480c316",
+      "retained_sha256": "81fc28409747bedb07cbbe81f37afeec3e620248b773060e30170d2c1480c316",
+      "bytes": 893
+    },
+    {
+      "path": "fixed-reader-tests.log",
+      "original_sha256": "a536a027fe65a8d157549392357875ff8e63727dc4eaffe175433380c80c2a8e",
+      "retained_sha256": "a536a027fe65a8d157549392357875ff8e63727dc4eaffe175433380c80c2a8e",
+      "bytes": 2807
+    }
+  ],
+  "limits": [
+    "Error-path cleanup only, not an added hard deadline for injected transports that ignore abort",
+    "No live provider, Windows or power-loss acceptance",
+    "No source draft closing, broad acceptance or source deletion"
+  ],
+  "sanitization": "Only local repository path prefix replaced with <REPOSITORY> in logs"
+}

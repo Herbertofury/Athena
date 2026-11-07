@@ -57,3 +57,21 @@ test('fragmented stream accepts exact byte limit and cancels overflow',async()=>
   if(extra){await assert.rejects(pending,/size budget/);assert.equal(cancelled,true);}else{const result=await pending;assert.deepEqual(result.bytes,payload);assert.equal(result.bytes.buffer.byteLength,MAX_ARCHIVE_BYTES);}
  }
 });
+test('invalid archive headers reject promptly even if body cancellation never settles',async()=>{
+ const stream=new ReadableStream({cancel(){return new Promise(()=>{});}});
+ const result=await Promise.race([loadSavedProject(id,{fetchImpl:async()=>new Response(stream,{headers:{'content-type':'text/html'}})}).then(()=> 'accepted',e=>e.message),new Promise(resolve=>setTimeout(()=>resolve('hung'),100))]);
+ assert.match(result,/Unexpected saved-response content type/);
+});
+test('invalid body chunks reject promptly even when reader cancellation hangs',async()=>{
+ const headers=new Headers({'content-type':'application/json','x-atlas-archive-kind':'project','x-atlas-canonical-id':id,'x-atlas-generation':'1','x-atlas-payload-sha256':'0'.repeat(64)});
+ let released=false;const fake={ok:true,headers,body:{getReader(){return {read:async()=>({done:false,value:'not bytes'}),cancel:()=>new Promise(()=>{}),releaseLock(){released=true;}};}}};
+ const result=await Promise.race([loadSavedProject(id,{fetchImpl:async()=>fake}).then(()=> 'accepted',e=>e.message),new Promise(resolve=>setTimeout(()=>resolve('hung'),100))]);
+ assert.match(result,/Unexpected response byte stream/);assert.equal(released,true);
+});
+test('archive cleanup throws and rejections do not replace the validation error or retain a locked reader',async()=>{
+ for(const cancel of [()=>{throw Error('cleanup detail');},()=>Promise.reject(Error('cleanup detail'))]){
+  let released=0;const headers=new Headers({'content-type':'application/json','x-atlas-archive-kind':'project','x-atlas-canonical-id':id,'x-atlas-generation':'1','x-atlas-payload-sha256':'0'.repeat(64)});
+  const response={ok:true,headers,body:{getReader(){return {read:async()=>({done:false,value:'invalid chunk'}),cancel,releaseLock(){released++;}};}}};
+  await assert.rejects(loadSavedProject(id,{fetchImpl:async()=>response}),/Unexpected response byte stream/);assert.equal(released,1);
+ }
+});

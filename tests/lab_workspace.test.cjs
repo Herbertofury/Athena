@@ -24,3 +24,24 @@ test('Pending initialization disables every write and guards even programmatic s
   abort.abort();c=await pending;assert.equal(c.ready,false);assert.equal(c.exportState().submissionWarning,'');assert.equal(posts,0);assert.equal(root.childNodes.length,0);
  }finally{abort.abort();c?.unmount();e.restore();}
 });
+
+test('Lab unlocks a failed submission despite stalled stream cleanup and retains an unconfirmed warning',async()=>{
+ let posts=0,cancellations=0;const e=setup(undefined,(url,options)=>{if(url!=='/api/jobs')return;posts++;return new Response(new ReadableStream({cancel(){cancellations++;return new Promise(()=>{});}}),{status:500});});let c;
+ try{c=await(await import(moduleURL)).mount({container:e.container});const root=e.container.shadowRoot,button=root.getElementById('run-experiment');button.click();await tick();await tick();
+  assert.equal(posts,1);assert.equal(cancellations,1);assert.equal(button.disabled,false);assert.match(root.getElementById('experiment-status').textContent,/outcome is unconfirmed/);assert.match(c.exportState().submissionWarning,/outcome is unconfirmed/);
+  c.unmount();await tick();assert.equal(posts,1);assert.match(c.exportState().submissionWarning,/Check Overview/);
+ }finally{c?.unmount();e.restore();}
+});
+
+test('Lab releases archive loading after stalled cleanup and preserves the last verified record',async()=>{
+ const bytes=new TextEncoder().encode('{"id":"AANobbMI","unknown":18446744073709551617}'),digest=require('node:crypto').createHash('sha256').update(bytes).digest('hex');let failed=false,cancellations=0;
+ const e=setup(undefined,(url)=>{if(!String(url).startsWith('/api/project-archive/'))return;
+  if(failed)return new Response(new ReadableStream({cancel(){cancellations++;return new Promise(()=>{});}}),{headers:{'content-type':'text/html'}});
+  return new Response(bytes,{headers:{'content-type':'application/json','x-atlas-archive-kind':'project','x-atlas-canonical-id':'AANobbMI','x-atlas-generation':'9007199254740993','x-atlas-payload-sha256':digest}});
+ });let c;
+ try{c=await(await import(moduleURL)).mount({container:e.container});const root=e.container.shadowRoot,form=root.getElementById('saved-archive-form'),button=form.querySelector('button'),dialog=root.getElementById('saved-archive-dialog');dialog.showModal=function(){this.open=true;};dialog.close=function(){this.open=false;};Object.defineProperty(root.getElementById('saved-archive-kind'),'value',{value:'project',configurable:true});root.getElementById('saved-archive-id').value='AANobbMI';
+  form.dispatchEvent(new e.window.Event('submit',{bubbles:true,cancelable:true}));for(let i=0;i<40&&button.disabled;i++)await tick();assert.equal(button.disabled,false);assert.equal(root.getElementById('saved-archive-text').textContent,new TextDecoder().decode(bytes));dialog.close();failed=true;
+  form.dispatchEvent(new e.window.Event('submit',{bubbles:true,cancelable:true}));await tick();await tick();assert.equal(button.disabled,false);assert.equal(cancellations,1);assert.equal(root.getElementById('cancel-archive-load').disabled,true);assert.match(root.getElementById('saved-archive-status').textContent,/Unexpected saved-response content type/);
+  root.getElementById('show-last-archive').click();assert.equal(dialog.open,true);assert.equal(root.getElementById('saved-archive-text').textContent,new TextDecoder().decode(bytes));assert.match(root.getElementById('saved-archive-title').textContent,/9007199254740993/);
+ }finally{c?.unmount();e.restore();}
+});
