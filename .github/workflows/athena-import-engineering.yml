@@ -40,7 +40,16 @@ jobs:
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add -- engineering migration/engineering-atlas wiki/Engineering-*.md
+          python migration/incoming/import_engineering.py
+          python - <<'PYTHON'
+          import json, zipfile
+          with zipfile.ZipFile('migration/incoming/engineering-atlas-files.zip') as archive:
+              manifest = json.loads(archive.read('IMPORT-MANIFEST.json'))
+          paths = [row['path'] for row in manifest['files'] if row['path'] != '.github/workflows/athena-engineering-checks.yml']
+          with open('/tmp/athena-import-paths', 'wb') as output:
+              output.write(b''.join(path.encode() + b'\0' for path in paths))
+          PYTHON
+          git add --force --pathspec-from-file=/tmp/athena-import-paths --pathspec-file-nul
           if git diff --cached --quiet; then
             echo 'Exact import already present; nothing to duplicate.'
           else
