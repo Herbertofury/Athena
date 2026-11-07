@@ -1,0 +1,13 @@
+   Compiling atlas-lab v0.1.0 (<workspace>/engineering-atlas/apps/atlas-lab)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 2.03s
+     Running unittests examples/body_reader_http.rs (engineering-atlas/apps/atlas-lab/target/debug/examples/body_reader_http-560aa397cb02e603)
+
+running 5 tests
+test reader::tests::impossible_budget_rejected_before_reading ... ok
+test reader::tests::interrupted_first_read_and_misleading_empty_hint_preserve_data ... ok
+test reader::tests::full_bytes_and_bounds_match_across_hints ... ok
+test budget_tests::impossible_budget_is_rejected_without_empty_success ... ok
+test budget_tests::accepted_nonblocking_socket_waits_for_delayed_request_bytes ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.05s
+

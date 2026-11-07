@@ -1,0 +1,222 @@
+Publication copy: executor path replaced with <repo>; failures unchanged.
+.FFFFFFFFFFFFFFFFFFFFFFFF.
+======================================================================
+FAIL: test_rejects_incomplete_or_misbound_receipts (test_upstream_receipt_gate.ReceiptGateTests.test_rejects_incomplete_or_misbound_receipts) (kind='timing', mutation='empty samples')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<repo>/tests/test_upstream_receipt_gate.py", line 41, in test_rejects_incomplete_or_misbound_receipts
+    with self.assertRaises(ValueError):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_rejects_incomplete_or_misbound_receipts (test_upstream_receipt_gate.ReceiptGateTests.test_rejects_incomplete_or_misbound_receipts) (kind='timing', mutation='truncated samples')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<repo>/tests/test_upstream_receipt_gate.py", line 41, in test_rejects_incomplete_or_misbound_receipts
+    with self.assertRaises(ValueError):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_rejects_incomplete_or_misbound_receipts (test_upstream_receipt_gate.ReceiptGateTests.test_rejects_incomplete_or_misbound_receipts) (kind='timing', mutation='duplicate round')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<repo>/tests/test_upstream_receipt_gate.py", line 41, in test_rejects_incomplete_or_misbound_receipts
+    with self.assertRaises(ValueError):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_rejects_incomplete_or_misbound_receipts (test_upstream_receipt_gate.ReceiptGateTests.test_rejects_incomplete_or_misbound_receipts) (kind='timing', mutation='wrong source')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<repo>/tests/test_upstream_receipt_gate.py", line 41, in test_rejects_incomplete_or_misbound_receipts
+    with self.assertRaises(ValueError):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_rejects_incomplete_or_misbound_receipts (test_upstream_receipt_gate.ReceiptGateTests.test_rejects_incomplete_or_misbound_receipts) (kind='timing', mutation='wrong digest')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<repo>/tests/test_upstream_receipt_gate.py", line 41, in test_rejects_incomplete_or_misbound_receipts
+    with self.assertRaises(ValueError):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_rejects_incomplete_or_misbound_receipts (test_upstream_receipt_gate.ReceiptGateTests.test_rejects_incomplete_or_misbound_receipts) (kind='timing', mutation='wrong length')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<repo>/tests/test_upstream_receipt_gate.py", line 41, in test_rejects_incomplete_or_misbound_receipts
+    with self.assertRaises(ValueError):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_rejects_incomplete_or_misbound_receipts (test_upstream_receipt_gate.ReceiptGateTests.test_rejects_incomplete_or_misbound_receipts) (kind='timing', mutation='truthy parity')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<repo>/tests/test_upstream_receipt_gate.py", line 41, in test_rejects_incomplete_or_misbound_receipts
+    with self.assertRaises(ValueError):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_rejects_incomplete_or_misbound_receipts (test_upstream_receipt_gate.ReceiptGateTests.test_rejects_incomplete_or_misbound_receipts) (kind='timing', mutation='changed default')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<repo>/tests/test_upstream_receipt_gate.py", line 41, in test_rejects_incomplete_or_misbound_receipts
+    with self.assertRaises(ValueError):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_rejects_incomplete_or_misbound_receipts (test_upstream_receipt_gate.ReceiptGateTests.test_rejects_incomplete_or_misbound_receipts) (kind='allocation', mutation='empty samples')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<repo>/tests/test_upstream_receipt_gate.py", line 41, in test_rejects_incomplete_or_misbound_receipts
+    with self.assertRaises(ValueError):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_rejects_incomplete_or_misbound_receipts (test_upstream_receipt_gate.ReceiptGateTests.test_rejects_incomplete_or_misbound_receipts) (kind='allocation', mutation='truncated samples')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<repo>/tests/test_upstream_receipt_gate.py", line 41, in test_rejects_incomplete_or_misbound_receipts
+    with self.assertRaises(ValueError):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_rejects_incomplete_or_misbound_receipts (test_upstream_receipt_gate.ReceiptGateTests.test_rejects_incomplete_or_misbound_receipts) (kind='allocation', mutation='duplicate round')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<repo>/tests/test_upstream_receipt_gate.py", line 41, in test_rejects_incomplete_or_misbound_receipts
+    with self.assertRaises(ValueError):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_rejects_incomplete_or_misbound_receipts (test_upstream_receipt_gate.ReceiptGateTests.test_rejects_incomplete_or_misbound_receipts) (kind='allocation', mutation='wrong source')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<repo>/tests/test_upstream_receipt_gate.py", line 41, in test_rejects_incomplete_or_misbound_receipts
+    with self.assertRaises(ValueError):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_rejects_incomplete_or_misbound_receipts (test_upstream_receipt_gate.ReceiptGateTests.test_rejects_incomplete_or_misbound_receipts) (kind='allocation', mutation='wrong digest')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<repo>/tests/test_upstream_receipt_gate.py", line 41, in test_rejects_incomplete_or_misbound_receipts
+    with self.assertRaises(ValueError):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_rejects_incomplete_or_misbound_receipts (test_upstream_receipt_gate.ReceiptGateTests.test_rejects_incomplete_or_misbound_receipts) (kind='allocation', mutation='wrong length')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<repo>/tests/test_upstream_receipt_gate.py", line 41, in test_rejects_incomplete_or_misbound_receipts
+    with self.assertRaises(ValueError):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_rejects_incomplete_or_misbound_receipts (test_upstream_receipt_gate.ReceiptGateTests.test_rejects_incomplete_or_misbound_receipts) (kind='allocation', mutation='truthy parity')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<repo>/tests/test_upstream_receipt_gate.py", line 41, in test_rejects_incomplete_or_misbound_receipts
+    with self.assertRaises(ValueError):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_rejects_incomplete_or_misbound_receipts (test_upstream_receipt_gate.ReceiptGateTests.test_rejects_incomplete_or_misbound_receipts) (kind='allocation', mutation='changed default')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<repo>/tests/test_upstream_receipt_gate.py", line 41, in test_rejects_incomplete_or_misbound_receipts
+    with self.assertRaises(ValueError):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_rejects_invalid_allocation (test_upstream_receipt_gate.ReceiptGateTests.test_rejects_invalid_allocation) (field='allocation_calls', value=-1)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<repo>/tests/test_upstream_receipt_gate.py", line 58, in test_rejects_invalid_allocation
+    with self.assertRaises(ValueError): self.validate(d, 'allocation')
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_rejects_invalid_allocation (test_upstream_receipt_gate.ReceiptGateTests.test_rejects_invalid_allocation) (field='peak_requested_rust_bytes_above_start', value=True)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<repo>/tests/test_upstream_receipt_gate.py", line 58, in test_rejects_invalid_allocation
+    with self.assertRaises(ValueError): self.validate(d, 'allocation')
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_rejects_invalid_allocation (test_upstream_receipt_gate.ReceiptGateTests.test_rejects_invalid_allocation) (field='total_successfully_requested_bytes', value=0)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<repo>/tests/test_upstream_receipt_gate.py", line 58, in test_rejects_invalid_allocation
+    with self.assertRaises(ValueError): self.validate(d, 'allocation')
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_rejects_invalid_timing (test_upstream_receipt_gate.ReceiptGateTests.test_rejects_invalid_timing) (field='iterations', value=0)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<repo>/tests/test_upstream_receipt_gate.py", line 50, in test_rejects_invalid_timing
+    with self.assertRaises(ValueError): self.validate(d, 'timing')
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_rejects_invalid_timing (test_upstream_receipt_gate.ReceiptGateTests.test_rejects_invalid_timing) (field='iterations', value=1)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<repo>/tests/test_upstream_receipt_gate.py", line 50, in test_rejects_invalid_timing
+    with self.assertRaises(ValueError): self.validate(d, 'timing')
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_rejects_invalid_timing (test_upstream_receipt_gate.ReceiptGateTests.test_rejects_invalid_timing) (field='baseline_ns', value=-1)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<repo>/tests/test_upstream_receipt_gate.py", line 50, in test_rejects_invalid_timing
+    with self.assertRaises(ValueError): self.validate(d, 'timing')
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_rejects_invalid_timing (test_upstream_receipt_gate.ReceiptGateTests.test_rejects_invalid_timing) (field='candidate_ns', value=nan)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<repo>/tests/test_upstream_receipt_gate.py", line 50, in test_rejects_invalid_timing
+    with self.assertRaises(ValueError): self.validate(d, 'timing')
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_rejects_invalid_timing (test_upstream_receipt_gate.ReceiptGateTests.test_rejects_invalid_timing) (field='warmup', value='false')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<repo>/tests/test_upstream_receipt_gate.py", line 50, in test_rejects_invalid_timing
+    with self.assertRaises(ValueError): self.validate(d, 'timing')
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.009s
+
+FAILED (failures=24)

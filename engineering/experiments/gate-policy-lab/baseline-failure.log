@@ -1,0 +1,22 @@
+   Compiling atlas-lab v0.1.0 (<workspace>/engineering-atlas/apps/atlas-lab)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 3.62s
+     Running unittests src/lib.rs (engineering-atlas/apps/atlas-lab/target/debug/deps/atlas_lab-dd4e7b91c9921dd9)
+
+running 1 test
+test tests::repair_cannot_relax_acceptance_policy ... FAILED
+
+failures:
+
+---- tests::repair_cannot_relax_acceptance_policy stdout ----
+
+thread 'tests::repair_cannot_relax_acceptance_policy' (803) panicked at src/lib.rs:224:9:
+assertion failed: journal.record(&next, &relaxed, Some(parent)).is_err()
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+failures:
+    tests::repair_cannot_relax_acceptance_policy
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 98 filtered out; finished in 0.00s
+
+error: test failed, to rerun pass `--lib`
