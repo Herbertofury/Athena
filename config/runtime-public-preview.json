@@ -1,10 +1,10 @@
 {
   "schema": 1,
-  "review": "Reviewed learning shell, public Engineering Research/Media adapters and same-origin local R&D lab assets only; private Foundry excluded.",
+  "review": "Reviewed existing Athena public-preview assets plus user-approved Feature Foundry derived browser workspace. Native/account integrations remain unconnected. Original private-to-public material was explicitly approved.",
   "files": [
     {
       "path": "app.js",
-      "sha256": "d7989a8f18fa165a968603a4ee5bf2bd2443d96d987eadd0c47f70eb9602ad48"
+      "sha256": "7d0ba713cfddcc024ba3ed53f0a1bed23f0833705022c2ff7c46d54b97990b86"
     },
     {
       "path": "catalog.js",
@@ -141,6 +141,22 @@
     {
       "path": "workspaces/engineering/research/style.css",
       "sha256": "be0489093bebf2ea49801a71f5779364533e844918f05573bc4fc425b8aae744"
+    },
+    {
+      "path": "workspaces/foundry/style.css",
+      "sha256": "4ea3de2caff691ade8736eebe85f2bfe300c80241a11bb1dbd8d9500b59ff437"
+    },
+    {
+      "path": "workspaces/foundry/THIRD-PARTY-NOTICES.txt",
+      "sha256": "d249cfc4b221ea9f33a68375772b82fc4dcc0ff636ce452cb1cac2ff937dd785"
+    },
+    {
+      "path": "workspaces/foundry/identity.json",
+      "sha256": "2fea7568549ba3abd6002d8a6bcfbfb240bcde532a8353f796e14c06ed60ed72"
+    },
+    {
+      "path": "workspaces/foundry/index.js",
+      "sha256": "2a7fa37b76796b9bd8c744c01061a496e691d099ba1f97a2d23369656cb5457a"
     }
   ]
 }
