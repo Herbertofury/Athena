@@ -1,0 +1,31 @@
+{
+  "name": "feature-foundry-living-world",
+  "version": "24.0.0",
+  "private": true,
+  "description": "A cinematic, interactive living-world studio for Feature Foundry.",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "build": "vite build",
+    "desktop:dev": "tauri dev",
+    "desktop:build": "tauri build",
+    "typecheck": "tsc --noEmit",
+    "preview": "vite preview --host 127.0.0.1",
+    "test": "node tests/contract.test.ts && node tests/authority.test.ts",
+    "test:ui": "node tests/ui.test.ts",
+    "verify": "npm run test && npm run typecheck && npm run build && cargo check --manifest-path src-tauri/Cargo.toml && npm run test:ui",
+    "package": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/package-release.ps1"
+  },
+  "dependencies": {
+    "@tauri-apps/api": "2.11.1",
+    "@tauri-apps/plugin-opener": "^2.5.4",
+    "three": "0.185.1"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.62.1",
+    "@tauri-apps/cli": "2.11.4",
+    "@types/three": "0.185.4",
+    "typescript": "7.0.2",
+    "vite": "8.2.1"
+  }
+}
