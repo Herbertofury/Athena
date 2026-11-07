@@ -1,0 +1,64 @@
+{
+  "kind": "Static browser plus actual pinned Rust/browser acceptance",
+  "started": "2026-11-07T09:38:14.969Z",
+  "steps": [
+    {
+      "name": "research-media-reproducibility",
+      "exitCode": 0,
+      "signal": null,
+      "error": null,
+      "log": "research-media-reproducibility.log"
+    },
+    {
+      "name": "lab-reproducibility",
+      "exitCode": 0,
+      "signal": null,
+      "error": null,
+      "log": "lab-reproducibility.log"
+    },
+    {
+      "name": "static-browser",
+      "exitCode": 0,
+      "signal": null,
+      "error": null,
+      "log": "static-browser.log"
+    },
+    {
+      "name": "rust-tests",
+      "exitCode": 0,
+      "signal": null,
+      "error": null,
+      "log": "rust-tests.log"
+    },
+    {
+      "name": "rust-clippy",
+      "exitCode": 0,
+      "signal": null,
+      "error": null,
+      "log": "rust-clippy.log"
+    },
+    {
+      "name": "rust-build",
+      "exitCode": 0,
+      "signal": null,
+      "error": null,
+      "log": "rust-build.log"
+    },
+    {
+      "name": "verified-package",
+      "exitCode": 0,
+      "signal": null,
+      "error": null,
+      "log": "verified-package.log"
+    },
+    {
+      "name": "rust-browser",
+      "exitCode": 0,
+      "signal": null,
+      "error": null,
+      "log": "rust-browser.log"
+    }
+  ],
+  "result": "pass",
+  "finished": "2026-11-07T09:40:18.750Z"
+}

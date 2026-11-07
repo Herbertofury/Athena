@@ -1,0 +1,625 @@
+{
+  "kind": "actual Chromium, localhost static app",
+  "started": "2026-11-07T09:38:15.382Z",
+  "checks": [
+    {
+      "name": "Learning opens real lesson, retains read state and notes",
+      "result": "pass"
+    },
+    {
+      "name": "Research loads actual catalog within the same document",
+      "result": "pass"
+    },
+    {
+      "name": "Research filters, shortlist and saved query survive workspace switch",
+      "result": "pass"
+    },
+    {
+      "name": "Research sampled text remains readable in dark and light themes",
+      "result": "pass"
+    },
+    {
+      "name": "Media loads public source records without automatic provider requests",
+      "result": "pass"
+    },
+    {
+      "name": "Media sampled text remains readable in dark and light themes",
+      "result": "pass"
+    },
+    {
+      "name": "Static public lab explains the local engine without probing API or localhost",
+      "result": "pass"
+    },
+    {
+      "name": "Foundry is an explicit pending capability, not a missing private module",
+      "result": "pass"
+    },
+    {
+      "name": "Mobile learning and research fit viewport without page overflow",
+      "result": "pass"
+    }
+  ],
+  "limitations": [
+    "No actual provider playback or authenticated API tests",
+    "Feature Foundry intentionally excluded pending publication approval",
+    "No runtime speedup or complete parity claim"
+  ],
+  "errors": [],
+  "outsideRequests": [],
+  "browser": "151.0.7922.34",
+  "loadedAppSHA256": "0d12940166d5d10ee8b5544f197e6bd34d8d8083ff7dbae318ae0ea655fb66b9",
+  "currentCheck": "Mobile learning and research fit viewport without page overflow",
+  "contrast": [
+    {
+      "theme": "dark",
+      "samples": [
+        {
+          "selector": ".research-card h3 a",
+          "foreground": [
+            237,
+            244,
+            239
+          ],
+          "backgrounds": [
+            [
+              25,
+              43,
+              53
+            ]
+          ],
+          "ratio": 13.06240691680472,
+          "scope": "opaque sampled colors and gradient endpoints, not a complete accessibility audit"
+        },
+        {
+          "selector": ".research-card .card-summary",
+          "foreground": [
+            163,
+            183,
+            191
+          ],
+          "backgrounds": [
+            [
+              25,
+              43,
+              53
+            ]
+          ],
+          "ratio": 7.010402840759137,
+          "scope": "opaque sampled colors and gradient endpoints, not a complete accessibility audit"
+        },
+        {
+          "selector": ".research-card .card-meta .type",
+          "foreground": [
+            237,
+            244,
+            239
+          ],
+          "backgrounds": [
+            [
+              25,
+              43,
+              53
+            ]
+          ],
+          "ratio": 13.06240691680472,
+          "scope": "opaque sampled colors and gradient endpoints, not a complete accessibility audit"
+        },
+        {
+          "selector": "#category-list .nav-button",
+          "foreground": [
+            237,
+            244,
+            239
+          ],
+          "backgrounds": [
+            [
+              21,
+              37,
+              47
+            ]
+          ],
+          "ratio": 14.046154301996769,
+          "scope": "opaque sampled colors and gradient endpoints, not a complete accessibility audit"
+        },
+        {
+          "selector": "#reset",
+          "foreground": [
+            237,
+            244,
+            239
+          ],
+          "backgrounds": [
+            [
+              33,
+              60,
+              70
+            ]
+          ],
+          "ratio": 10.440736880531372,
+          "scope": "opaque sampled colors and gradient endpoints, not a complete accessibility audit"
+        },
+        {
+          "selector": "#compare-open",
+          "foreground": [
+            237,
+            244,
+            239
+          ],
+          "backgrounds": [
+            [
+              25,
+              43,
+              53
+            ]
+          ],
+          "ratio": 13.06240691680472,
+          "scope": "opaque sampled colors and gradient endpoints, not a complete accessibility audit"
+        }
+      ]
+    },
+    {
+      "theme": "light",
+      "samples": [
+        {
+          "selector": ".research-card h3 a",
+          "foreground": [
+            21,
+            46,
+            55
+          ],
+          "backgrounds": [
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "ratio": 14.209821938622017,
+          "scope": "opaque sampled colors and gradient endpoints, not a complete accessibility audit"
+        },
+        {
+          "selector": ".research-card .card-summary",
+          "foreground": [
+            82,
+            99,
+            106
+          ],
+          "backgrounds": [
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "ratio": 6.265616972362711,
+          "scope": "opaque sampled colors and gradient endpoints, not a complete accessibility audit"
+        },
+        {
+          "selector": ".research-card .card-meta .type",
+          "foreground": [
+            66,
+            89,
+            75
+          ],
+          "backgrounds": [
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "ratio": 7.60263138992586,
+          "scope": "opaque sampled colors and gradient endpoints, not a complete accessibility audit"
+        },
+        {
+          "selector": "#category-list .nav-button",
+          "foreground": [
+            21,
+            46,
+            55
+          ],
+          "backgrounds": [
+            [
+              237,
+              241,
+              237
+            ]
+          ],
+          "ratio": 12.454508815642734,
+          "scope": "opaque sampled colors and gradient endpoints, not a complete accessibility audit"
+        },
+        {
+          "selector": "#reset",
+          "foreground": [
+            21,
+            46,
+            55
+          ],
+          "backgrounds": [
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "ratio": 14.209821938622017,
+          "scope": "opaque sampled colors and gradient endpoints, not a complete accessibility audit"
+        },
+        {
+          "selector": "#compare-open",
+          "foreground": [
+            21,
+            46,
+            55
+          ],
+          "backgrounds": [
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "ratio": 14.209821938622017,
+          "scope": "opaque sampled colors and gradient endpoints, not a complete accessibility audit"
+        }
+      ]
+    },
+    {
+      "theme": "dark",
+      "samples": [
+        {
+          "selector": "article.card:not([hidden]) h2",
+          "foreground": [
+            237,
+            244,
+            239
+          ],
+          "backgrounds": [
+            [
+              23,
+              38,
+              48
+            ]
+          ],
+          "ratio": 13.85149854868722,
+          "scope": "opaque sampled colors and gradient endpoints, not a complete accessibility audit"
+        },
+        {
+          "selector": "article.card:not([hidden]) .summary",
+          "foreground": [
+            157,
+            175,
+            184
+          ],
+          "backgrounds": [
+            [
+              23,
+              38,
+              48
+            ]
+          ],
+          "ratio": 6.825449858059072,
+          "scope": "opaque sampled colors and gradient endpoints, not a complete accessibility audit"
+        },
+        {
+          "selector": "article.card:not([hidden]) .creator",
+          "foreground": [
+            157,
+            175,
+            184
+          ],
+          "backgrounds": [
+            [
+              23,
+              38,
+              48
+            ]
+          ],
+          "ratio": 6.825449858059072,
+          "scope": "opaque sampled colors and gradient endpoints, not a complete accessibility audit"
+        },
+        {
+          "selector": "article.card:not([hidden]) .provider",
+          "foreground": [
+            141,
+            213,
+            216
+          ],
+          "backgrounds": [
+            [
+              23,
+              38,
+              48
+            ]
+          ],
+          "ratio": 9.320420255196991,
+          "scope": "opaque sampled colors and gradient endpoints, not a complete accessibility audit"
+        },
+        {
+          "selector": "article.card:not([hidden]) .identity",
+          "foreground": [
+            187,
+            205,
+            201
+          ],
+          "backgrounds": [
+            [
+              23,
+              38,
+              48
+            ]
+          ],
+          "ratio": 9.355130465572042,
+          "scope": "opaque sampled colors and gradient endpoints, not a complete accessibility audit"
+        },
+        {
+          "selector": "article.card:not([hidden]) .cover-placeholder",
+          "foreground": [
+            237,
+            244,
+            239
+          ],
+          "backgrounds": [
+            [
+              45,
+              75,
+              80
+            ],
+            [
+              27,
+              48,
+              60
+            ]
+          ],
+          "ratio": 8.410417833252064,
+          "scope": "opaque sampled colors and gradient endpoints, not a complete accessibility audit"
+        },
+        {
+          "selector": "#load-media",
+          "foreground": [
+            24,
+            37,
+            28
+          ],
+          "backgrounds": [
+            [
+              182,
+              229,
+              174
+            ]
+          ],
+          "ratio": 11.216154270421036,
+          "scope": "opaque sampled colors and gradient endpoints, not a complete accessibility audit"
+        },
+        {
+          "selector": "article.card:not([hidden]) .scope",
+          "foreground": [
+            182,
+            198,
+            202
+          ],
+          "backgrounds": [
+            [
+              18,
+              33,
+              42
+            ]
+          ],
+          "ratio": 9.336213623116118,
+          "scope": "opaque sampled colors and gradient endpoints, not a complete accessibility audit"
+        },
+        {
+          "selector": "article.card:not([hidden]) .source",
+          "foreground": [
+            182,
+            229,
+            174
+          ],
+          "backgrounds": [
+            [
+              23,
+              38,
+              48
+            ]
+          ],
+          "ratio": 10.917435053592108,
+          "scope": "opaque sampled colors and gradient endpoints, not a complete accessibility audit"
+        },
+        {
+          "selector": "article.card:not([hidden]) button:not([disabled])",
+          "foreground": [
+            237,
+            244,
+            239
+          ],
+          "backgrounds": [
+            [
+              32,
+              52,
+              62
+            ]
+          ],
+          "ratio": 11.581742381473724,
+          "scope": "opaque sampled colors and gradient endpoints, not a complete accessibility audit"
+        }
+      ]
+    },
+    {
+      "theme": "light",
+      "samples": [
+        {
+          "selector": "article.card:not([hidden]) h2",
+          "foreground": [
+            23,
+            50,
+            55
+          ],
+          "backgrounds": [
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "ratio": 13.567296934503721,
+          "scope": "opaque sampled colors and gradient endpoints, not a complete accessibility audit"
+        },
+        {
+          "selector": "article.card:not([hidden]) .summary",
+          "foreground": [
+            81,
+            103,
+            108
+          ],
+          "backgrounds": [
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "ratio": 5.9888655788161715,
+          "scope": "opaque sampled colors and gradient endpoints, not a complete accessibility audit"
+        },
+        {
+          "selector": "article.card:not([hidden]) .creator",
+          "foreground": [
+            81,
+            103,
+            108
+          ],
+          "backgrounds": [
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "ratio": 5.9888655788161715,
+          "scope": "opaque sampled colors and gradient endpoints, not a complete accessibility audit"
+        },
+        {
+          "selector": "article.card:not([hidden]) .provider",
+          "foreground": [
+            23,
+            108,
+            83
+          ],
+          "backgrounds": [
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "ratio": 6.351389401417302,
+          "scope": "opaque sampled colors and gradient endpoints, not a complete accessibility audit"
+        },
+        {
+          "selector": "article.card:not([hidden]) .identity",
+          "foreground": [
+            81,
+            103,
+            108
+          ],
+          "backgrounds": [
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "ratio": 5.9888655788161715,
+          "scope": "opaque sampled colors and gradient endpoints, not a complete accessibility audit"
+        },
+        {
+          "selector": "article.card:not([hidden]) .cover-placeholder",
+          "foreground": [
+            81,
+            103,
+            108
+          ],
+          "backgrounds": [
+            [
+              225,
+              235,
+              229
+            ]
+          ],
+          "ratio": 4.909806378561537,
+          "scope": "opaque sampled colors and gradient endpoints, not a complete accessibility audit"
+        },
+        {
+          "selector": "#load-media",
+          "foreground": [
+            255,
+            255,
+            255
+          ],
+          "backgrounds": [
+            [
+              23,
+              108,
+              83
+            ]
+          ],
+          "ratio": 6.351389401417302,
+          "scope": "opaque sampled colors and gradient endpoints, not a complete accessibility audit"
+        },
+        {
+          "selector": "article.card:not([hidden]) .scope",
+          "foreground": [
+            23,
+            50,
+            55
+          ],
+          "backgrounds": [
+            [
+              233,
+              240,
+              236
+            ]
+          ],
+          "ratio": 11.71955298516572,
+          "scope": "opaque sampled colors and gradient endpoints, not a complete accessibility audit"
+        },
+        {
+          "selector": "article.card:not([hidden]) .source",
+          "foreground": [
+            23,
+            108,
+            83
+          ],
+          "backgrounds": [
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "ratio": 6.351389401417302,
+          "scope": "opaque sampled colors and gradient endpoints, not a complete accessibility audit"
+        },
+        {
+          "selector": "article.card:not([hidden]) button:not([disabled])",
+          "foreground": [
+            23,
+            50,
+            55
+          ],
+          "backgrounds": [
+            [
+              231,
+              238,
+              235
+            ]
+          ],
+          "ratio": 11.517492091848633,
+          "scope": "opaque sampled colors and gradient endpoints, not a complete accessibility audit"
+        }
+      ]
+    }
+  ],
+  "result": "pass",
+  "finished": "2026-11-07T09:38:19.926Z"
+}
