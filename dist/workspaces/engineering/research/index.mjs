@@ -46,6 +46,16 @@ function link(text, url, className = '') {
   return href ? element('a', {href, class: className, target: '_blank', rel: 'noopener noreferrer'}, text) : element('span', {}, text);
 }
 
+function evidenceLink(label, record) {
+  const anchor = link(label, record.source_url), provenance = record.source_provenance;
+  if (!provenance) return anchor;
+  anchor.setAttribute('title', 'Byte-identical preserved evidence. Original: ' + provenance.original_url + ' · SHA-256 ' + provenance.sha256);
+  anchor.setAttribute('data-preserved-sha256', provenance.sha256);
+  return element('span', {class: 'evidence-source'}, anchor,
+    element('small', {}, ' · Exact Athena copy; original Atlas evidence ' + provenance.original_revision.slice(0, 7)));
+}
+
+
 function dateLabel(date) {
   if (!date) return 'Date not reported';
   const d = new Date(date.length === 10 ? date + 'T12:00:00Z' : date);
@@ -214,7 +224,7 @@ function detail(entry) {
       'No repository snapshot is available. Missing data is not zero and does not imply poor quality.'));
   const observation = measurement(entry, catalog, state);
   if (observation) column1.append(element('h4', {}, 'Displayed measurement'),
-    element('p', {}, observation.subject), link('Inspect the recorded evidence ↗', observation.source_url),
+    element('p', {}, observation.subject), evidenceLink('Inspect the recorded evidence ↗', observation),
     element('p', {}, observation.note || ''));
   const votes = communityScore(entry, catalog, entry.evaluation.track);
   if (votes) column2.append(element('h4', {}, 'Reviewed community reports'),
@@ -263,7 +273,7 @@ function renderRankingNote() {
     measured: c ? c.description + ' ' + c.caveats.join(' ') : 'Choose a local experiment cohort. A measured result is specific to its retained workload and environment.'
   };
   const content = element('p', {}, messages[state.sort]);
-  if (c) content.append(' ', link('Method and source ↗', c.source_url));
+  if (c) content.append(' ', evidenceLink('Method and source ↗', c));
   if (state.sort === 'stars' && catalog.signals.errors.length) content.append(' Refresh history retains ' + catalog.signals.errors.length + ' retrieval errors, including resolved attempts; each successful snapshot keeps its actual observation date.');
   if (state.sort === 'community') {
     content.append(catalog.community.last_completed_at ? ' Last complete collection: ' + dateLabel(catalog.community.last_completed_at) + ' UTC.' : ' No complete community collection has been recorded.');

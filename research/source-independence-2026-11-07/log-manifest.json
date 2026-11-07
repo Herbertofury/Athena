@@ -1,0 +1,36 @@
+{
+  "sanitization": "Only local repository path replaced with <REPOSITORY> and temporary package output path with <PACKAGE>",
+  "files": [
+    {
+      "path": "focused-tests.log",
+      "original_sha256": "245701c49451191a1aa68e6e01899d1c7e96bb6306686ea2b893e128887056f8",
+      "retained_sha256": "245701c49451191a1aa68e6e01899d1c7e96bb6306686ea2b893e128887056f8"
+    },
+    {
+      "path": "generator-checks.log",
+      "original_sha256": "bbee6bdd6736da8a7d63a9c698a7afe2f15b2f30aff1406d4d1b65cf55093bf3",
+      "retained_sha256": "bbee6bdd6736da8a7d63a9c698a7afe2f15b2f30aff1406d4d1b65cf55093bf3"
+    },
+    {
+      "path": "importer-tests.log",
+      "original_sha256": "c979e49645796037b7c1b43a4c3415c5e1c4ce107464c8c416f61e399e7e0aa0",
+      "retained_sha256": "c979e49645796037b7c1b43a4c3415c5e1c4ce107464c8c416f61e399e7e0aa0"
+    },
+    {
+      "path": "main-only-aggregate-tests.log",
+      "original_sha256": "fc89161e0d86384e9ac7f6703dc9c84c9915ec248fe4cc4ec0466ba8e6839e87",
+      "retained_sha256": "fc89161e0d86384e9ac7f6703dc9c84c9915ec248fe4cc4ec0466ba8e6839e87"
+    },
+    {
+      "path": "research-checker-existing-failure.log",
+      "original_sha256": "b9c239da0d30cbf3736d70f4631c40602061f88a63f4d59942295b65c293e52a",
+      "retained_sha256": "b9c239da0d30cbf3736d70f4631c40602061f88a63f4d59942295b65c293e52a"
+    },
+    {
+      "path": "package-review.log",
+      "original_sha256": "10340a9d1bdfd2a056abb1b75364d760c9a67518ad4e5b011aa9d645dd9328bb",
+      "retained_sha256": "df30eba059c387d5d45e221458331ae593a90a01f51be0f0f57f7f10999d34ef",
+      "source": "Exact excerpts reported by coordinated packaging verification"
+    }
+  ]
+}

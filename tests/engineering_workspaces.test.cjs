@@ -78,3 +78,12 @@ test('Privileged loopback Media retains metadata but disables all external media
  try{globalThis.location=new URL('http://127.0.0.1:41379/#media');controller=await(await component('media')).mount({container:env.container});const root=env.container.shadowRoot;assert.equal(controller.ready,true);assert.ok(root.querySelectorAll('article.card').length>0);assert.equal(root.getElementById('load-media').disabled,true);assert.ok([...root.querySelectorAll('.player-controls button,.player-controls select')].every(control=>control.disabled));assert.match(root.getElementById('status').textContent,/third-party code away from local data/);assert.ok(controller.exportState().receipt.events.some(event=>event.type==='local_runtime_restriction'));assert.equal(env.calls.length,1);}
  finally{controller?.unmount();env.restore();}
 });
+
+test('Research renders preserved Athena evidence links while keeping original Atlas provenance visible',async()=>{
+ const env=setup();let controller;
+ try{controller=await(await component('research')).mount({container:env.container,route:'#research?sort=measured&cohort=json-catalog-2000-decode'});const root=env.container.shadowRoot;
+  assert.equal(controller.ready,true);const links=[...root.querySelectorAll('a[data-preserved-sha256]')];assert.equal(links.length,4);
+  for(const link of links){assert.match(link.href,/^https:\/\/github.com\/Herbertofury\/Athena\/blob\/af594fd2cdd5c00f01178ee353965a54b01b05d7\/engineering\/experiments\/json-lab\//);assert.match(link.title,/Original: https:\/\/github.com\/Herbertofury\/Engineering-Atlas\/blob\/4ed47c5c/);assert.match(link.title,/SHA-256 [a-f0-9]{64}/);assert.match(link.parentNode.textContent,/Exact Athena copy; original Atlas evidence/);assert.equal(link.getAttribute('rel'),'noopener noreferrer');}
+  assert.ok([...root.querySelectorAll('a[href]')].every(link=>!link.href.includes('Herbertofury/Engineering-Atlas')));assert.equal(env.calls.length,1);
+ }finally{controller?.unmount();env.restore();}
+});

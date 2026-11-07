@@ -250,7 +250,20 @@ def import_retained_json_lab(root, ids):
     require(set(mapping.values()) <= ids, 'Local JSON candidates missing')
     sha = hashlib.sha256(raw).hexdigest()
     revision = '4ed47c5c324231d65b81c3c846bd8fa3f880bee8'
-    base = 'https://github.com/Herbertofury/Engineering-Atlas/blob/' + revision + '/experiments/json-lab/'
+    original_base = 'https://github.com/Herbertofury/Engineering-Atlas/blob/' + revision + '/experiments/json-lab/'
+    preserved_revision = 'af594fd2cdd5c00f01178ee353965a54b01b05d7'
+    base = 'https://github.com/Herbertofury/Athena/blob/' + preserved_revision + '/engineering/experiments/json-lab/'
+    # Both blobs were independently compared with this immutable Athena import.
+    # A source URL changes only after exact bytes are retained, never to a newer
+    # measurement or to a movable branch. Keep original attribution separately.
+    readme = (root / 'experiments/json-lab/README.md').read_bytes()
+    readme_sha256 = '3b00d0870b61b5d0654bc570391b474ae9e0c4cec97d754622e29d8a84e92a7b'
+    require(hashlib.sha256(readme).hexdigest() == readme_sha256,
+            'Retained JSON method changed; review its immutable Athena mirror before publication')
+    def provenance(name, payload):
+        return {'original_url': original_base + name, 'original_revision': revision,
+                'preserved_revision': preserved_revision, 'sha256': hashlib.sha256(payload).hexdigest(),
+                'git_blob_sha': hashlib.sha1(b'blob ' + str(len(payload)).encode() + b'\0' + payload).hexdigest()}
     cohorts, observations = [], []
     workloads = sorted(data['workloads'], key=lambda x: (x != 'catalog_2000', x))
     for workload in workloads:
@@ -264,7 +277,7 @@ def import_retained_json_lab(root, ids):
                 'metric': 'median_elapsed_ms', 'unit': 'ms', 'direction': 'lower', 'evidence': 'atlas_measured',
                 'protocol': 'CPython 3.12.14 / Linux x86_64 / 15 randomized rounds / 30 iterations / warmed in process',
                 'description': 'Retained Atlas run from 26 Oct 2026; generated ' + workload + ' workload; ' + operation + '.',
-                'source_url': base + 'README.md', 'observed_at': data['date'],
+                'source_url': base + 'README.md', 'source_provenance': provenance('README.md', readme), 'observed_at': data['date'],
                 'caveats': ['Warmed generated inputs on one shared Linux host; not a new run or application acceptance.',
                     'No cold startup, memory or confidence interval claim. Required numeric and duplicate-key semantics can disqualify a faster parser.']})
             for library, values in op['libraries'].items():
@@ -276,6 +289,7 @@ def import_retained_json_lab(root, ids):
                 version = data['environment']['versions'].get(library, data['environment']['python'])
                 observations.append({'candidate_id': mapping[library], 'cohort_id': cohort, 'value': median,
                     'subject': library + ' ' + version, 'observed_at': data['date'], 'source_url': base + path.name,
+                    'source_provenance': provenance(path.name, raw),
                     'sample_count': len(samples), 'raw_sha256': sha, 'workload_sha256': record['input_sha256'],
                     'note': 'Imported from retained raw measurements. All three defaults collapse duplicate keys; orjson rounds the recorded integer above u64. Review all adversarial cases before adoption.'})
     return cohorts, observations

@@ -776,10 +776,30 @@ class RetainedJsonLabTests(unittest.TestCase):
                         self.assertEqual(observation["raw_sha256"], expected_digest)
                         self.assertEqual(observation["workload_sha256"], record["input_sha256"])
                         self.assertEqual(observation["observed_at"], raw["date"])
-                        self.assertIn("/blob/4ed47c5c324231d65b81c3c846bd8fa3f880bee8/", observation["source_url"])
+                        self.assertEqual(observation["source_url"], "https://github.com/Herbertofury/Athena/blob/af594fd2cdd5c00f01178ee353965a54b01b05d7/engineering/" + str(self.PATH))
+                        provenance = observation["source_provenance"]
+                        self.assertEqual(provenance["original_url"], "https://github.com/Herbertofury/Engineering-Atlas/blob/4ed47c5c324231d65b81c3c846bd8fa3f880bee8/" + str(self.PATH))
+                        self.assertEqual(provenance["sha256"], expected_digest)
+                        self.assertEqual(provenance["git_blob_sha"], "662fd9ed7b612b7aa3abe1b3c155006a38e7cae6")
+                        self.assertEqual(provenance["preserved_revision"], "af594fd2cdd5c00f01178ee353965a54b01b05d7")
         self.assertTrue(all("not a new run" in c["caveats"][0] for c in cohorts))
         self.assertTrue(all("duplicate keys" in o["note"] for o in observations))
         self.assertTrue(all("above u64" in o["note"] for o in observations))
+
+    def test_method_mirror_is_exact_and_rejects_changed_bytes(self):
+        cohorts, _ = explorer.import_retained_json_lab(ROOT, self.IDS)
+        for cohort in cohorts:
+            self.assertEqual(cohort["source_url"], "https://github.com/Herbertofury/Athena/blob/af594fd2cdd5c00f01178ee353965a54b01b05d7/engineering/experiments/json-lab/README.md")
+            self.assertEqual(cohort["source_provenance"]["git_blob_sha"], "2dd9df2193e5c3766b966be13f84cbe25b920c58")
+            self.assertEqual(cohort["source_provenance"]["sha256"], "3b00d0870b61b5d0654bc570391b474ae9e0c4cec97d754622e29d8a84e92a7b")
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            path = root / self.PATH
+            path.parent.mkdir(parents=True)
+            path.write_bytes((ROOT / self.PATH).read_bytes())
+            (path.parent / "README.md").write_bytes((ROOT / "experiments/json-lab/README.md").read_bytes() + b"\n")
+            with self.assertRaisesRegex(ValueError, "immutable Athena mirror"):
+                explorer.import_retained_json_lab(root, self.IDS)
 
     def test_rejects_missing_catalog_candidates(self):
         with self.assertRaisesRegex(ValueError, "candidates missing"):
@@ -989,7 +1009,7 @@ class DeterministicBuildTests(unittest.TestCase):
     INPUTS = (
         "data/research-catalog.json", "data/research-results.json", "data/research-signals.json",
         "data/research-community.json", "data/research-test-plans.json",
-        "experiments/json-lab/results-2026-10-26.json",
+        "experiments/json-lab/results-2026-10-26.json", "experiments/json-lab/README.md",
         "docs/explorer/explorer-core.mjs", "docs/explorer/explorer.mjs",
         "docs/explorer/explorer.css", "docs/explorer/index.template.html",
         "docs/stack-selection.md", "docs/research-test-queue.md",
