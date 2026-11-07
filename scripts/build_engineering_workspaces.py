@@ -42,9 +42,58 @@ def scoped_css(path,kind):
     s=path.read_text().replace('@charset "UTF-8";','').replace(':root',':host').replace('body{',':host{')
     s+='\n:host{display:block;min-width:0}.masthead{display:none}.shell{min-height:0}main{min-width:0}.skip{display:none}\n'
     if kind=='research':
-        s+=':host([data-theme="dark"]){color-scheme:dark;--ink:#edf4ef;--muted:#a3b7bf;--paper:#101b24;--white:#192b35;--line:#36505c;--teal:#8ee1c7;--teal-dark:#8ee1c7;--mint:#183b36;--orange:#f1ba8a;--amber:#3d3021;--nav:#101e28}.search-field,.filters select,.plan-control select,.sort-label select,dialog,.comparison-card{background:var(--white);color:var(--ink)}\n'
+        # The retained Explorer stylesheet was designed for a light canvas.
+        # Recolor every hardcoded text/surface family in the scoped adapter,
+        # rather than changing foreground variables over still-white cards.
+        s+=':host([data-theme="dark"]){color-scheme:dark;--ink:#edf4ef;--muted:#a3b7bf;--paper:#101b24;--white:#192b35;--line:#48616c;--teal:#8ee1c7;--teal-dark:#8ee1c7;--mint:#183b36;--orange:#f1ba8a;--amber:#3d3021;--nav:#244b43;--sidebar:#15252f;--hover:#213c46;--accent-ink:#102e36;--note:#18332b;--note-ink:#c1dbcd;--badge:#223830}\n'
+        dark_rules=[
+            ('.sidebar','background:var(--sidebar);color:var(--ink)'),
+            ('.nav-button','color:var(--ink)'),
+            ('.nav-button:hover','background:var(--hover)'),
+            ('.nav-button.active','background:var(--nav);color:var(--ink)'),
+            ('.sidebar-title,.snapshot','color:var(--muted)'),
+            ('.sidebar-note,.card-detail,.plan-protocol','border-color:var(--line)'),
+            ('.status-dot','box-shadow:0 0 0 5px var(--mint)'),
+            ('.research-card,.comparison-card,.layer-guide,.button.secondary,.search-field,.filters select,.cohort-control select,.plan-control select,.sort-label select,dialog','background:var(--white);color:var(--ink);border-color:var(--line)'),
+            ('.button.secondary:hover,.button.quiet:hover','background:var(--hover);color:var(--ink)'),
+            ('.button.primary','background:var(--teal);color:var(--accent-ink)'),
+            ('.button.primary:hover','background:#b1f2df;color:var(--accent-ink)'),
+            ('.search-field input::placeholder','color:var(--muted)'),
+            ('.evidence-note,.plan-guide','background:var(--note);color:var(--note-ink);border-color:var(--line)'),
+            ('.note-icon','border-color:var(--muted)'),
+            ('.entry-icon','background:var(--mint);color:var(--teal);border-color:var(--line)'),
+            ('.entry-icon.paper,.badge.experimental','background:var(--amber);color:var(--orange);border-color:var(--line)'),
+            ('.badge','background:var(--badge);color:var(--muted);border-color:var(--line)'),
+            ('.badge.measured','background:var(--mint);color:var(--teal);border-color:var(--line)'),
+            ('.card-meta','color:var(--muted)'),
+            ('.card-meta .type','color:var(--ink)'),
+            ('.card-meta .divider','color:var(--muted)'),
+            ('.empty','background:var(--sidebar);color:var(--ink);border-color:var(--line)'),
+            ('.toast','background:var(--hover);color:var(--ink)'),
+            ('.research-card:hover','border-color:var(--muted);box-shadow:0 2px 10px #00000030'),
+            ('button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible','outline-color:var(--orange)'),
+        ]
+        for selectors,declarations in dark_rules:
+            scoped=','.join(':host([data-theme="dark"]) '+part for part in selectors.split(','))
+            s+=scoped+'{'+declarations+'}\n'
     else:
-        s+=':host([data-theme="light"]){color-scheme:light;--bg:#f4f6f2;--panel:#fff;--edge:#c5d5cf;--ink:#173237;--muted:#51676c;--green:#176c53}:host([data-theme="light"]) .metrics div,:host([data-theme="light"]) .scope{background:#e9f0ec;color:#28484b}:host([data-theme="light"]) button,:host([data-theme="light"]) select{background:#e7eeeb;color:var(--ink)}\n'
+        # A gradient must pass at its brightest endpoint, not just the
+        # transparent computed background seen by simple browser checks.
+        s+=':host([data-theme="dark"]) .cover-placeholder{color:var(--ink)}\n'
+        s+=':host([data-theme="light"]){color-scheme:light;--bg:#f4f6f2;--panel:#fff;--edge:#a9bdb4;--ink:#173237;--muted:#51676c;--green:#176c53;--action-ink:#fff;--subtle:#e9f0ec;--control:#e7eeeb;--placeholder:#e1ebe5;--error:#9b341e}\n'
+        light_rules=[
+            ('.metrics div,.scope','background:var(--subtle);color:var(--ink)'),
+            ('button,select','background:var(--control);color:var(--ink)'),
+            ('#load-media','background:var(--green);color:var(--action-ink)'),
+            ('.provider,.eyebrow','color:var(--green)'),
+            ('.identity','color:var(--muted)'),
+            ('.cover-placeholder','background:var(--placeholder);color:var(--muted)'),
+            ('.error','color:var(--error)!important'),
+            ('.failed','outline-color:var(--error)'),
+        ]
+        for selectors,declarations in light_rules:
+            scoped=','.join(':host([data-theme="light"]) '+part for part in selectors.split(','))
+            s+=scoped+'{'+declarations+'}\n'
     return s
 
 

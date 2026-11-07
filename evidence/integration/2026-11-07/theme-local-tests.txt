@@ -1,0 +1,89 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> athena-learning@0.3.0 test
+> node --test tests/*.test.cjs && python3 tests/wiki_test.py && python3 scripts/validate.py && python3 tests/network_fixture_test.py && python3 tests/network_loopback_test.py && python3 tests/package_app_test.py
+
+✔ IPv4 known /26 range (2.052271ms)
+✔ IPv4 boundary and prefix validation (0.345515ms)
+✔ IPv4 bounded property checks (9.417916ms)
+✔ policy truth table (0.195682ms)
+✔ data revenue uses row context after filtering (0.241079ms)
+✔ review scheduling, failed recovery and nonmutation (0.422721ms)
+✔ progress import is constrained and roundtrips (0.44302ms)
+✔ route selection handles default, specific and host prefixes without mutating input (0.336512ms)
+✔ route lookup rejects invalid addresses, prefixes and unaligned networks (0.41543ms)
+✔ route lookup includes exact network and last-address boundaries (0.30803ms)
+✔ Research dark palette covers card, navigation, control and secondary text contrast (8.54977ms)
+✔ Media light palette keeps source identities, placeholders and load controls readable (0.809017ms)
+✔ Media dark placeholder text passes against both retained gradient endpoints (0.351474ms)
+✔ Research mounts actual catalog, filters, shortlist and exports without global routing (173.942419ms)
+✔ Research aborts pending mount without stale DOM writes (4.295486ms)
+✔ Media mounts source records without auto-loading providers, retains receipt on remount (42.062757ms)
+✔ Media official Bilibili frame stays autoplay-off and unloads on workspace exit (4.421244ms)
+✔ Abort stops preview decoding and does not start queued provider requests (0.959916ms)
+✔ Workspace output retains exact source algorithms and public fixture identity (0.797894ms)
+✔ YouTube player construction is explicit, autoplay-off and destroyed on unmount (4.295065ms)
+✔ Native workspace build reproduces every published module and fixture byte (51.756507ms)
+✔ Preview cancellation settles even if a detached image rejects cleanup (1.086515ms)
+✔ all eight views and 13 tracks render without exception (52.779662ms)
+✔ lesson read, note and check survive close and reload (19.586961ms)
+✔ search filters and clears on navigation (6.808033ms)
+✔ certificate filters, selection and unknown route (9.417184ms)
+✔ malformed stored progress does not prevent learning (8.246519ms)
+✔ review grade disables double answers and advances (4.008038ms)
+✔ skip link focuses without changing app route (3.181555ms)
+✔ navigation exposes current page and selected filters (4.615263ms)
+✔ Packet Trail exposes eight lessons, case selection and honest feedback (7.693714ms)
+✔ route detective computes and validates without creating markup from input (6.606382ms)
+✔ new Packet Trail lesson uses persisted notes and read state (8.668708ms)
+✔ closing a case lesson restores its actual repeated opener (6.324172ms)
+✔ unified routes mount inside the same document and preserve learning state (15.097325ms)
+✔ all unified workspaces use internal routes and independent modules (10.447831ms)
+✔ a missing workspace does not prevent returning to learning (3.834278ms)
+✔ workspace query navigation preserves one mount and restores search scope (4.610296ms)
+✔ learning document handlers ignore light-DOM workspace controls (4.665569ms)
+✔ rapid workspace return restores state after asynchronous export finishes (5.390519ms)
+✔ incomplete workspace shows recovery state instead of falsely claiming loaded (4.17754ms)
+✔ workspace host mounts once, forwards current search/theme and cleans up (2.117087ms)
+✔ navigating during module load never mounts the stale module (0.205096ms)
+✔ late mount completion is disposed and cannot replace a newer workspace (0.443261ms)
+✔ load failure is surfaced without a false mounted state (0.607756ms)
+✔ pending search and theme changes reach the completed mount (0.346977ms)
+✔ a new mount waits for previous asynchronous teardown (0.445885ms)
+✔ search shortcut respects shadow-root inputs and modal boundaries (0.238285ms)
+✔ workspace state exports before teardown and same-workspace routes forward (3.755301ms)
+✔ async workspace updates are serialized so older results cannot win (0.375109ms)
+✔ teardown waits for an in-flight update before exporting and unmounting (0.503151ms)
+✔ failed initial setter cleanup cannot orphan the next workspace (1.775038ms)
+✔ restored state is resolved after an earlier asynchronous export (0.371624ms)
+✔ synchronous adapter update errors become rejected promises without breaking the queue (0.600416ms)
+✔ workspace readiness failure stays mounted for recovery without a loaded claim (0.555589ms)
+ℹ tests 55
+ℹ suites 0
+ℹ pass 55
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 449.645592
+...
+----------------------------------------------------------------------
+Ran 3 tests in 0.002s
+
+OK
+Catalog, 13 paths, 74 roadmaps, 48 lessons, shared-lesson wiki parity and documentation links validated. Engineering links require combined-deployment verification.
+.......
+----------------------------------------------------------------------
+Ran 7 tests in 0.000s
+
+OK
+........
+----------------------------------------------------------------------
+Ran 8 tests in 0.134s
+
+OK
+...........
+----------------------------------------------------------------------
+Ran 11 tests in 0.021s
+
+OK

@@ -10,9 +10,9 @@
 
 ## Verification boundaries
 
-The local JS suite covers algorithms and DOM-emulated interactions. It is not native rendering evidence. An installed Chromium 155 launch was attempted; it stopped before loading any page with `socket() failed: Operation not permitted`. One approved escalation attempt returned the same restriction. No bypass was attempted. The actual-browser script is prepared for CI/another permitted runtime and must produce a passing receipt before native-browser verification is claimed.
+The local JS suite covers algorithms and DOM-emulated interactions. It is not native rendering evidence. An installed Chromium 155 launch was attempted; it stopped before loading any page with `socket() failed: Operation not permitted`. One approved escalation attempt returned the same restriction. No bypass was attempted. The same test subsequently ran in CI using Chromium 151.0.7922.34. At commit `2f802e4b`, all six functional checks passed: learning persistence, real research catalog, research filters/shortlist/navigation, media metadata without provider requests, explicit pending Foundry state, and mobile width checks. The first failing receipt is retained; its generic view wait was replaced by route-specific waits. Screenshot review then caught a Research dark-theme contrast defect, addressed and tested separately.
 
-Use the CI browser report for loaded-app SHA-256, screenshots and actual result. The script blocks external requests and does not claim real provider playback, private account tests, native Rust backend or game testing.
+Use the [CI browser report](https://github.com/Herbertofury/Athena/actions/runs/42357294641) for loaded-app SHA-256, screenshots and actual result. This limited functional pass does not certify all accessibility or media behavior. The script blocks external requests and does not claim real provider playback, private account tests, native Rust backend or game testing.
 
 ## Still pending
 

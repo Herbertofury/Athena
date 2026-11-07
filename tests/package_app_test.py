@@ -106,4 +106,11 @@ class PackageTests(unittest.TestCase):
             self.assertIn('approval',manifest['pending'][0])
             self.assertFalse((root/'public/workspaces/foundry/index.js').exists())
 
+    def test_public_preview_refuses_foundry_even_if_allowlisted(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root=pathlib.Path(temp);source=self.source(root)
+            with self.assertRaisesRegex(ValueError,'excludes Foundry'):
+                pack.package(source,root/'public',self.approved(source),profile='public-preview')
+            self.assertFalse((root/'public').exists())
+
 if __name__=='__main__':unittest.main()
