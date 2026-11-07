@@ -1,0 +1,177 @@
+{
+  "accounting_error": false,
+  "adapter_sha256": "71e34788c79a1a38ffff719035b6f5ea8a302cd228871209a308677545d10827",
+  "harness_sha256": "33205f71992c221abdbe9cf0649b61658025088adc2e8c0d5a1763b7edae6c2d",
+  "input_bytes": 6200,
+  "input_sha256": "70080299d623bcd6fa857d09243752e6131377b8fa9cd3fd4da89bb33175caaa",
+  "limitations": [
+    "Both inputs already owned before measurement; input creation excluded equally",
+    "Requested Rust allocations only; not RSS, native allocations or physical peak memory",
+    "No instrumented timing, network, durable-write or full-UI speed claim",
+    "Candidate not yet connected to production collectors at this measurement"
+  ],
+  "project_id": "gvQqBUqZ",
+  "samples": [
+    {
+      "baseline": {
+        "allocation_calls": 192,
+        "held_requested_rust_bytes_above_start": 16470,
+        "peak_requested_rust_bytes_above_start": 16470,
+        "reallocation_calls": 10,
+        "total_successfully_requested_bytes": 29203
+      },
+      "candidate": {
+        "allocation_calls": 191,
+        "held_requested_rust_bytes_above_start": 10270,
+        "peak_requested_rust_bytes_above_start": 13646,
+        "reallocation_calls": 10,
+        "total_successfully_requested_bytes": 23003
+      },
+      "candidate_reuses_owned_buffer": true,
+      "complete_record_equal": true,
+      "post_drop_live_requested_delta": 0,
+      "round": 0
+    },
+    {
+      "baseline": {
+        "allocation_calls": 192,
+        "held_requested_rust_bytes_above_start": 16470,
+        "peak_requested_rust_bytes_above_start": 16470,
+        "reallocation_calls": 10,
+        "total_successfully_requested_bytes": 29203
+      },
+      "candidate": {
+        "allocation_calls": 191,
+        "held_requested_rust_bytes_above_start": 10270,
+        "peak_requested_rust_bytes_above_start": 13646,
+        "reallocation_calls": 10,
+        "total_successfully_requested_bytes": 23003
+      },
+      "candidate_reuses_owned_buffer": true,
+      "complete_record_equal": true,
+      "post_drop_live_requested_delta": 0,
+      "round": 1
+    },
+    {
+      "baseline": {
+        "allocation_calls": 192,
+        "held_requested_rust_bytes_above_start": 16470,
+        "peak_requested_rust_bytes_above_start": 16470,
+        "reallocation_calls": 10,
+        "total_successfully_requested_bytes": 29203
+      },
+      "candidate": {
+        "allocation_calls": 191,
+        "held_requested_rust_bytes_above_start": 10270,
+        "peak_requested_rust_bytes_above_start": 13646,
+        "reallocation_calls": 10,
+        "total_successfully_requested_bytes": 23003
+      },
+      "candidate_reuses_owned_buffer": true,
+      "complete_record_equal": true,
+      "post_drop_live_requested_delta": 0,
+      "round": 2
+    },
+    {
+      "baseline": {
+        "allocation_calls": 192,
+        "held_requested_rust_bytes_above_start": 16470,
+        "peak_requested_rust_bytes_above_start": 16470,
+        "reallocation_calls": 10,
+        "total_successfully_requested_bytes": 29203
+      },
+      "candidate": {
+        "allocation_calls": 191,
+        "held_requested_rust_bytes_above_start": 10270,
+        "peak_requested_rust_bytes_above_start": 13646,
+        "reallocation_calls": 10,
+        "total_successfully_requested_bytes": 23003
+      },
+      "candidate_reuses_owned_buffer": true,
+      "complete_record_equal": true,
+      "post_drop_live_requested_delta": 0,
+      "round": 3
+    },
+    {
+      "baseline": {
+        "allocation_calls": 192,
+        "held_requested_rust_bytes_above_start": 16470,
+        "peak_requested_rust_bytes_above_start": 16470,
+        "reallocation_calls": 10,
+        "total_successfully_requested_bytes": 29203
+      },
+      "candidate": {
+        "allocation_calls": 191,
+        "held_requested_rust_bytes_above_start": 10270,
+        "peak_requested_rust_bytes_above_start": 13646,
+        "reallocation_calls": 10,
+        "total_successfully_requested_bytes": 23003
+      },
+      "candidate_reuses_owned_buffer": true,
+      "complete_record_equal": true,
+      "post_drop_live_requested_delta": 0,
+      "round": 4
+    },
+    {
+      "baseline": {
+        "allocation_calls": 192,
+        "held_requested_rust_bytes_above_start": 16470,
+        "peak_requested_rust_bytes_above_start": 16470,
+        "reallocation_calls": 10,
+        "total_successfully_requested_bytes": 29203
+      },
+      "candidate": {
+        "allocation_calls": 191,
+        "held_requested_rust_bytes_above_start": 10270,
+        "peak_requested_rust_bytes_above_start": 13646,
+        "reallocation_calls": 10,
+        "total_successfully_requested_bytes": 23003
+      },
+      "candidate_reuses_owned_buffer": true,
+      "complete_record_equal": true,
+      "post_drop_live_requested_delta": 0,
+      "round": 5
+    },
+    {
+      "baseline": {
+        "allocation_calls": 192,
+        "held_requested_rust_bytes_above_start": 16470,
+        "peak_requested_rust_bytes_above_start": 16470,
+        "reallocation_calls": 10,
+        "total_successfully_requested_bytes": 29203
+      },
+      "candidate": {
+        "allocation_calls": 191,
+        "held_requested_rust_bytes_above_start": 10270,
+        "peak_requested_rust_bytes_above_start": 13646,
+        "reallocation_calls": 10,
+        "total_successfully_requested_bytes": 23003
+      },
+      "candidate_reuses_owned_buffer": true,
+      "complete_record_equal": true,
+      "post_drop_live_requested_delta": 0,
+      "round": 6
+    },
+    {
+      "baseline": {
+        "allocation_calls": 192,
+        "held_requested_rust_bytes_above_start": 16470,
+        "peak_requested_rust_bytes_above_start": 16470,
+        "reallocation_calls": 10,
+        "total_successfully_requested_bytes": 29203
+      },
+      "candidate": {
+        "allocation_calls": 191,
+        "held_requested_rust_bytes_above_start": 10270,
+        "peak_requested_rust_bytes_above_start": 13646,
+        "reallocation_calls": 10,
+        "total_successfully_requested_bytes": 23003
+      },
+      "candidate_reuses_owned_buffer": true,
+      "complete_record_equal": true,
+      "post_drop_live_requested_delta": 0,
+      "round": 7
+    }
+  ],
+  "source_mode": "retained public response; no provider request"
+}

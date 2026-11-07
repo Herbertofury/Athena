@@ -1,0 +1,476 @@
+{
+  "checked_at": "2026-10-30T01:29:07.206210+00:00",
+  "scope": "Retained public version objects plus generated namespace/corruption fixtures; local reads only; no provider requests or browser acceptance",
+  "binary_sha256": "e2be7d53912a626424a2ac98513b8801a0bb9d6b5a10253f46c85164b074859d",
+  "harness_sha256": "025b54ed73be84c86b9ac37ef425176b5214fb426af7e356d318c5073a761919",
+  "checks": [
+    {
+      "name": "index.html status",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "index.html exact compiled bytes",
+      "actual": "e6d3557f8d85e37b0a1c1b90f4b4d87e38cf2d099e7fae6129db7626ecfe88c9",
+      "expected": "e6d3557f8d85e37b0a1c1b90f4b4d87e38cf2d099e7fae6129db7626ecfe88c9",
+      "passed": true
+    },
+    {
+      "name": "app.js status",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "app.js exact compiled bytes",
+      "actual": "8f5ac93506cf86cbd413aea52661ae08195ad7901f19e18660a1f544b1e72e70",
+      "expected": "8f5ac93506cf86cbd413aea52661ae08195ad7901f19e18660a1f544b1e72e70",
+      "passed": true
+    },
+    {
+      "name": "archive-view.mjs status",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "archive-view.mjs exact compiled bytes",
+      "actual": "8d12afe11c5cc1929c66106c5c3e7a966c09f05bdb7223824dbe9089c7c99489",
+      "expected": "8d12afe11c5cc1929c66106c5c3e7a966c09f05bdb7223824dbe9089c7c99489",
+      "passed": true
+    },
+    {
+      "name": "style.css status",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "style.css exact compiled bytes",
+      "actual": "6477abc25ea2c5c5ce3f11ad4f56cad403791449c0562c1fadfe9925db76522c",
+      "expected": "6477abc25ea2c5c5ce3f11ad4f56cad403791449c0562c1fadfe9925db76522c",
+      "passed": true
+    },
+    {
+      "name": "collection-input.mjs status",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "collection-input.mjs exact compiled bytes",
+      "actual": "0c5346c5b1fa3e3c1d17ecdcdab075b8437c341c1b1eea2c6cc502dcdc315b53",
+      "expected": "0c5346c5b1fa3e3c1d17ecdcdab075b8437c341c1b1eea2c6cc502dcdc315b53",
+      "passed": true
+    },
+    {
+      "name": "version 1rb9wI5K status",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "version 1rb9wI5K full bytes",
+      "actual": "02bd4cc2d6f1a73bda3ff5cc48bc65cec3cddbe8cc46b64cbc5586f8352eda1b",
+      "expected": "02bd4cc2d6f1a73bda3ff5cc48bc65cec3cddbe8cc46b64cbc5586f8352eda1b",
+      "passed": true
+    },
+    {
+      "name": "version 1rb9wI5K size",
+      "actual": 1600,
+      "expected": 1600,
+      "passed": true
+    },
+    {
+      "name": "version 1rb9wI5K kind",
+      "actual": "version",
+      "expected": "version",
+      "passed": true
+    },
+    {
+      "name": "version 1rb9wI5K id",
+      "actual": "1rb9wI5K",
+      "expected": "1rb9wI5K",
+      "passed": true
+    },
+    {
+      "name": "version 1rb9wI5K generation",
+      "actual": "3",
+      "expected": "3",
+      "passed": true
+    },
+    {
+      "name": "version 1rb9wI5K digest header",
+      "actual": "02bd4cc2d6f1a73bda3ff5cc48bc65cec3cddbe8cc46b64cbc5586f8352eda1b",
+      "expected": "02bd4cc2d6f1a73bda3ff5cc48bc65cec3cddbe8cc46b64cbc5586f8352eda1b",
+      "passed": true
+    },
+    {
+      "name": "version 1rb9wI5K no-store",
+      "actual": "no-store",
+      "expected": "no-store",
+      "passed": true
+    },
+    {
+      "name": "version 1rb9wI5K no CORS grant",
+      "actual": false,
+      "expected": false,
+      "passed": true
+    },
+    {
+      "name": "version 1rb9wI5K no sniff",
+      "actual": "nosniff",
+      "expected": "nosniff",
+      "passed": true
+    },
+    {
+      "name": "version Ag5S66CF status",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "version Ag5S66CF full bytes",
+      "actual": "907ed0a046ed9d2c96dafaa49c2b19df213ce86aa41d8cabc32af711a2df77f0",
+      "expected": "907ed0a046ed9d2c96dafaa49c2b19df213ce86aa41d8cabc32af711a2df77f0",
+      "passed": true
+    },
+    {
+      "name": "version Ag5S66CF size",
+      "actual": 962,
+      "expected": 962,
+      "passed": true
+    },
+    {
+      "name": "version Ag5S66CF kind",
+      "actual": "version",
+      "expected": "version",
+      "passed": true
+    },
+    {
+      "name": "version Ag5S66CF id",
+      "actual": "Ag5S66CF",
+      "expected": "Ag5S66CF",
+      "passed": true
+    },
+    {
+      "name": "version Ag5S66CF generation",
+      "actual": "2",
+      "expected": "2",
+      "passed": true
+    },
+    {
+      "name": "version Ag5S66CF digest header",
+      "actual": "907ed0a046ed9d2c96dafaa49c2b19df213ce86aa41d8cabc32af711a2df77f0",
+      "expected": "907ed0a046ed9d2c96dafaa49c2b19df213ce86aa41d8cabc32af711a2df77f0",
+      "passed": true
+    },
+    {
+      "name": "version Ag5S66CF no-store",
+      "actual": "no-store",
+      "expected": "no-store",
+      "passed": true
+    },
+    {
+      "name": "version Ag5S66CF no CORS grant",
+      "actual": false,
+      "expected": false,
+      "passed": true
+    },
+    {
+      "name": "version Ag5S66CF no sniff",
+      "actual": "nosniff",
+      "expected": "nosniff",
+      "passed": true
+    },
+    {
+      "name": "version SHARED01 status",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "version SHARED01 full bytes",
+      "actual": "1e739391b224742569f4a19c00dcd00d45fa23feabf86efc91afdf9288308e47",
+      "expected": "1e739391b224742569f4a19c00dcd00d45fa23feabf86efc91afdf9288308e47",
+      "passed": true
+    },
+    {
+      "name": "version SHARED01 size",
+      "actual": 407,
+      "expected": 407,
+      "passed": true
+    },
+    {
+      "name": "version SHARED01 kind",
+      "actual": "version",
+      "expected": "version",
+      "passed": true
+    },
+    {
+      "name": "version SHARED01 id",
+      "actual": "SHARED01",
+      "expected": "SHARED01",
+      "passed": true
+    },
+    {
+      "name": "version SHARED01 generation",
+      "actual": "9007199254740993",
+      "expected": "9007199254740993",
+      "passed": true
+    },
+    {
+      "name": "version SHARED01 digest header",
+      "actual": "1e739391b224742569f4a19c00dcd00d45fa23feabf86efc91afdf9288308e47",
+      "expected": "1e739391b224742569f4a19c00dcd00d45fa23feabf86efc91afdf9288308e47",
+      "passed": true
+    },
+    {
+      "name": "version SHARED01 no-store",
+      "actual": "no-store",
+      "expected": "no-store",
+      "passed": true
+    },
+    {
+      "name": "version SHARED01 no CORS grant",
+      "actual": false,
+      "expected": false,
+      "passed": true
+    },
+    {
+      "name": "version SHARED01 no sniff",
+      "actual": "nosniff",
+      "expected": "nosniff",
+      "passed": true
+    },
+    {
+      "name": "version g6ju16VJ status",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "version g6ju16VJ full bytes",
+      "actual": "5690d7ac80b7b2b3ab5359d9f5a2744aa58e1a8096cd9e25899fc56f4703b3b5",
+      "expected": "5690d7ac80b7b2b3ab5359d9f5a2744aa58e1a8096cd9e25899fc56f4703b3b5",
+      "passed": true
+    },
+    {
+      "name": "version g6ju16VJ size",
+      "actual": 1894,
+      "expected": 1894,
+      "passed": true
+    },
+    {
+      "name": "version g6ju16VJ kind",
+      "actual": "version",
+      "expected": "version",
+      "passed": true
+    },
+    {
+      "name": "version g6ju16VJ id",
+      "actual": "g6ju16VJ",
+      "expected": "g6ju16VJ",
+      "passed": true
+    },
+    {
+      "name": "version g6ju16VJ generation",
+      "actual": "4",
+      "expected": "4",
+      "passed": true
+    },
+    {
+      "name": "version g6ju16VJ digest header",
+      "actual": "5690d7ac80b7b2b3ab5359d9f5a2744aa58e1a8096cd9e25899fc56f4703b3b5",
+      "expected": "5690d7ac80b7b2b3ab5359d9f5a2744aa58e1a8096cd9e25899fc56f4703b3b5",
+      "passed": true
+    },
+    {
+      "name": "version g6ju16VJ no-store",
+      "actual": "no-store",
+      "expected": "no-store",
+      "passed": true
+    },
+    {
+      "name": "version g6ju16VJ no CORS grant",
+      "actual": false,
+      "expected": false,
+      "passed": true
+    },
+    {
+      "name": "version g6ju16VJ no sniff",
+      "actual": "nosniff",
+      "expected": "nosniff",
+      "passed": true
+    },
+    {
+      "name": "project SHARED01 status",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "project SHARED01 full bytes",
+      "actual": "43ba4aea8056219e10b3555e76f21788c820c7929322a17b067b7870a0529427",
+      "expected": "43ba4aea8056219e10b3555e76f21788c820c7929322a17b067b7870a0529427",
+      "passed": true
+    },
+    {
+      "name": "project SHARED01 size",
+      "actual": 173,
+      "expected": 173,
+      "passed": true
+    },
+    {
+      "name": "project SHARED01 kind",
+      "actual": "project",
+      "expected": "project",
+      "passed": true
+    },
+    {
+      "name": "project SHARED01 id",
+      "actual": "SHARED01",
+      "expected": "SHARED01",
+      "passed": true
+    },
+    {
+      "name": "project SHARED01 generation",
+      "actual": "9007199254740994",
+      "expected": "9007199254740994",
+      "passed": true
+    },
+    {
+      "name": "project SHARED01 digest header",
+      "actual": "43ba4aea8056219e10b3555e76f21788c820c7929322a17b067b7870a0529427",
+      "expected": "43ba4aea8056219e10b3555e76f21788c820c7929322a17b067b7870a0529427",
+      "passed": true
+    },
+    {
+      "name": "project SHARED01 no-store",
+      "actual": "no-store",
+      "expected": "no-store",
+      "passed": true
+    },
+    {
+      "name": "project SHARED01 no CORS grant",
+      "actual": false,
+      "expected": false,
+      "passed": true
+    },
+    {
+      "name": "project SHARED01 no sniff",
+      "actual": "nosniff",
+      "expected": "nosniff",
+      "passed": true
+    },
+    {
+      "name": "sodium rejection",
+      "actual": 400,
+      "expected": 400,
+      "passed": true
+    },
+    {
+      "name": "MISSING1 rejection",
+      "actual": 404,
+      "expected": 404,
+      "passed": true
+    },
+    {
+      "name": "CORRUPT1 rejection",
+      "actual": 422,
+      "expected": 422,
+      "passed": true
+    },
+    {
+      "name": "INVALID1 rejection",
+      "actual": 422,
+      "expected": 422,
+      "passed": true
+    },
+    {
+      "name": "BIG00001 rejection",
+      "actual": 422,
+      "expected": 422,
+      "passed": true
+    },
+    {
+      "name": "version Host guard",
+      "actual": 403,
+      "expected": 403,
+      "passed": true
+    },
+    {
+      "name": "project route cannot read version-only namespace",
+      "actual": 404,
+      "expected": 404,
+      "passed": true
+    },
+    {
+      "name": "snapshot rows unchanged",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "jobs unchanged",
+      "actual": 3,
+      "expected": 3,
+      "passed": true
+    },
+    {
+      "name": "integrity",
+      "actual": "ok",
+      "expected": "ok",
+      "passed": true
+    },
+    {
+      "name": "source database unchanged",
+      "actual": "d2d2ba48507cac89b6becb18c314f381535de33dc0ca1e2dedd2e8d5928759f8",
+      "expected": "d2d2ba48507cac89b6becb18c314f381535de33dc0ca1e2dedd2e8d5928759f8",
+      "passed": true
+    }
+  ],
+  "complete": true,
+  "javascript": {
+    "scope": "Actual JavaScript verifier against owned loopback server; not browser interaction",
+    "complete": true,
+    "records": [
+      {
+        "kind": "version",
+        "id": "1rb9wI5K",
+        "generation": "3",
+        "bytes": 1600,
+        "sha256": "02bd4cc2d6f1a73bda3ff5cc48bc65cec3cddbe8cc46b64cbc5586f8352eda1b"
+      },
+      {
+        "kind": "version",
+        "id": "Ag5S66CF",
+        "generation": "2",
+        "bytes": 962,
+        "sha256": "907ed0a046ed9d2c96dafaa49c2b19df213ce86aa41d8cabc32af711a2df77f0"
+      },
+      {
+        "kind": "version",
+        "id": "SHARED01",
+        "generation": "9007199254740993",
+        "bytes": 407,
+        "sha256": "1e739391b224742569f4a19c00dcd00d45fa23feabf86efc91afdf9288308e47"
+      },
+      {
+        "kind": "version",
+        "id": "g6ju16VJ",
+        "generation": "4",
+        "bytes": 1894,
+        "sha256": "5690d7ac80b7b2b3ab5359d9f5a2744aa58e1a8096cd9e25899fc56f4703b3b5"
+      },
+      {
+        "kind": "project",
+        "id": "SHARED01",
+        "generation": "9007199254740994",
+        "bytes": 173,
+        "sha256": "43ba4aea8056219e10b3555e76f21788c820c7929322a17b067b7870a0529427"
+      }
+    ]
+  }
+}

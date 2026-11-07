@@ -1,0 +1,212 @@
+{
+  "schema_version": 1,
+  "reviewed_at": "2026-10-29",
+  "scope": "Actual SnapshotStore and isolated addressed candidate; retained public inputs plus explicitly generated duplicate and all-unique controls",
+  "promotion": "not accepted",
+  "runs": [
+    {
+      "receipt": "unique-control-pass1.json",
+      "receipt_sha256": "f7222d2043a5f6f0b9e4ea155b413f1407af7d9dec46c54a144402f522531a3a",
+      "medians": [
+        {
+          "workload": "retained",
+          "lane": "baseline",
+          "samples": 7,
+          "unique_input_payloads": 4,
+          "setup_ns": 8714912,
+          "parse_write_commit_ns": 13696142,
+          "reopen_latest_verify_ns": 799518,
+          "database_bytes": 73728
+        },
+        {
+          "workload": "retained",
+          "lane": "addressed",
+          "samples": 7,
+          "unique_input_payloads": 4,
+          "setup_ns": 11689043,
+          "parse_write_commit_ns": 14817628,
+          "reopen_latest_verify_ns": 735594,
+          "database_bytes": 65536
+        },
+        {
+          "workload": "duplicate_replay",
+          "lane": "baseline",
+          "samples": 7,
+          "unique_input_payloads": 4,
+          "setup_ns": 7879927,
+          "parse_write_commit_ns": 213700984,
+          "reopen_latest_verify_ns": 643805,
+          "database_bytes": 880640
+        },
+        {
+          "workload": "duplicate_replay",
+          "lane": "addressed",
+          "samples": 7,
+          "unique_input_payloads": 4,
+          "setup_ns": 12163248,
+          "parse_write_commit_ns": 217780451,
+          "reopen_latest_verify_ns": 1026989,
+          "database_bytes": 86016
+        },
+        {
+          "workload": "unique_augmented_replay",
+          "lane": "baseline",
+          "samples": 7,
+          "unique_input_payloads": 80,
+          "setup_ns": 6418326,
+          "parse_write_commit_ns": 220607296,
+          "reopen_latest_verify_ns": 737280,
+          "database_bytes": 880640
+        },
+        {
+          "workload": "unique_augmented_replay",
+          "lane": "addressed",
+          "samples": 7,
+          "unique_input_payloads": 80,
+          "setup_ns": 11191973,
+          "parse_write_commit_ns": 220299445,
+          "reopen_latest_verify_ns": 632771,
+          "database_bytes": 909312
+        }
+      ]
+    },
+    {
+      "receipt": "unique-control-pass2.json",
+      "receipt_sha256": "9542fd286e5e426b4a5c0c68b1e4385fa4824aa4e11ce3e75c406cf81449c6b0",
+      "medians": [
+        {
+          "workload": "retained",
+          "lane": "baseline",
+          "samples": 7,
+          "unique_input_payloads": 4,
+          "setup_ns": 13564641,
+          "parse_write_commit_ns": 18144458,
+          "reopen_latest_verify_ns": 883840,
+          "database_bytes": 73728
+        },
+        {
+          "workload": "retained",
+          "lane": "addressed",
+          "samples": 7,
+          "unique_input_payloads": 4,
+          "setup_ns": 18534787,
+          "parse_write_commit_ns": 19492948,
+          "reopen_latest_verify_ns": 1225462,
+          "database_bytes": 65536
+        },
+        {
+          "workload": "duplicate_replay",
+          "lane": "baseline",
+          "samples": 7,
+          "unique_input_payloads": 4,
+          "setup_ns": 9545229,
+          "parse_write_commit_ns": 241194623,
+          "reopen_latest_verify_ns": 867047,
+          "database_bytes": 880640
+        },
+        {
+          "workload": "duplicate_replay",
+          "lane": "addressed",
+          "samples": 7,
+          "unique_input_payloads": 4,
+          "setup_ns": 17478240,
+          "parse_write_commit_ns": 294070031,
+          "reopen_latest_verify_ns": 685564,
+          "database_bytes": 86016
+        },
+        {
+          "workload": "unique_augmented_replay",
+          "lane": "baseline",
+          "samples": 7,
+          "unique_input_payloads": 80,
+          "setup_ns": 10498661,
+          "parse_write_commit_ns": 278796218,
+          "reopen_latest_verify_ns": 788144,
+          "database_bytes": 880640
+        },
+        {
+          "workload": "unique_augmented_replay",
+          "lane": "addressed",
+          "samples": 7,
+          "unique_input_payloads": 80,
+          "setup_ns": 16513864,
+          "parse_write_commit_ns": 290167873,
+          "reopen_latest_verify_ns": 866638,
+          "database_bytes": 909312
+        }
+      ]
+    },
+    {
+      "receipt": "unique-control-pass3.json",
+      "receipt_sha256": "08d1acb544d657b2d2d87ea4e84d84fc4461eaa126ac10b0bcac4a38b1d60b38",
+      "medians": [
+        {
+          "workload": "retained",
+          "lane": "baseline",
+          "samples": 7,
+          "unique_input_payloads": 4,
+          "setup_ns": 7511317,
+          "parse_write_commit_ns": 13588855,
+          "reopen_latest_verify_ns": 503411,
+          "database_bytes": 73728
+        },
+        {
+          "workload": "retained",
+          "lane": "addressed",
+          "samples": 7,
+          "unique_input_payloads": 4,
+          "setup_ns": 11204562,
+          "parse_write_commit_ns": 13815510,
+          "reopen_latest_verify_ns": 636533,
+          "database_bytes": 65536
+        },
+        {
+          "workload": "duplicate_replay",
+          "lane": "baseline",
+          "samples": 7,
+          "unique_input_payloads": 4,
+          "setup_ns": 10681042,
+          "parse_write_commit_ns": 303690904,
+          "reopen_latest_verify_ns": 794242,
+          "database_bytes": 880640
+        },
+        {
+          "workload": "duplicate_replay",
+          "lane": "addressed",
+          "samples": 7,
+          "unique_input_payloads": 4,
+          "setup_ns": 17418123,
+          "parse_write_commit_ns": 301036710,
+          "reopen_latest_verify_ns": 645394,
+          "database_bytes": 86016
+        },
+        {
+          "workload": "unique_augmented_replay",
+          "lane": "baseline",
+          "samples": 7,
+          "unique_input_payloads": 80,
+          "setup_ns": 10191069,
+          "parse_write_commit_ns": 237629973,
+          "reopen_latest_verify_ns": 569771,
+          "database_bytes": 880640
+        },
+        {
+          "workload": "unique_augmented_replay",
+          "lane": "addressed",
+          "samples": 7,
+          "unique_input_payloads": 80,
+          "setup_ns": 13368899,
+          "parse_write_commit_ns": 238436176,
+          "reopen_latest_verify_ns": 666656,
+          "database_bytes": 909312
+        }
+      ]
+    }
+  ],
+  "limitations": [
+    "Three sequential passes on shared cloud host; timings vary substantially",
+    "All-unique cases add one labeled generated metadata field, not 80 real network observations",
+    "No physical power-loss, cold-cache, browser, or target-project claim",
+    "Schema-v2 setup includes exclusive fixture-file reservation; do not pool timings with schema-v1 receipts"
+  ]
+}

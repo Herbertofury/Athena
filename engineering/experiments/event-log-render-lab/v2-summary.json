@@ -1,0 +1,44 @@
+{
+  "v2-real-34-events": {
+    "full_history": {
+      "synchronous_median_ms": 1.0999999940395355,
+      "frame_proxy_median_ms": 1199.800000011921,
+      "nodes": 1,
+      "all_equal": true
+    },
+    "append": {
+      "synchronous_median_ms": 1,
+      "frame_proxy_median_ms": 1199.5,
+      "nodes": 36,
+      "all_equal": true
+    },
+    "blocked": {
+      "synchronous_median_ms": 0.5999999940395355,
+      "frame_proxy_median_ms": 1200.0999999940395,
+      "nodes": 3,
+      "all_equal": true
+    },
+    "frame_cadence_unreliable": true
+  },
+  "v2-replay-1088-events": {
+    "full_history": {
+      "synchronous_median_ms": 725.6999999880791,
+      "frame_proxy_median_ms": 1383,
+      "nodes": 1,
+      "all_equal": true
+    },
+    "append": {
+      "synchronous_median_ms": 8.900000005960464,
+      "frame_proxy_median_ms": 1377.199999988079,
+      "nodes": 1090,
+      "all_equal": true
+    },
+    "blocked": {
+      "synchronous_median_ms": 18.5,
+      "frame_proxy_median_ms": 1372.699999988079,
+      "nodes": 19,
+      "all_equal": true
+    },
+    "frame_cadence_unreliable": true
+  }
+}

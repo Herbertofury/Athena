@@ -1,0 +1,457 @@
+{
+  "schema_version": 2,
+  "complete": true,
+  "scope": "Fresh Linux child writes 1001 repeated public-response observations; wait4 peak includes launcher overhead; use separately labeled post-exec self VmHWM/rollup observations; not browser, whole-app or cold-cache evidence",
+  "binary_sha256": "a9e0c13a95e583706a95e86defae3bc3ee77efe38f0e4a1d397c35c4e6e8630d",
+  "input_sha256": "75798037b3ea908200264e29a064392fc801c46b36db0b8f32d25454e7eeb356",
+  "sources": {
+    "apps/atlas-lab/examples/addressed_snapshot_crash_probe.rs": "22692942edebf0409f167a229662273bb74b2acbaab555f87a4fca693e9324c5",
+    "apps/atlas-lab/Cargo.lock": "4ba18f93c261a48a42ea595be3f8a37b6d9c419912d7e7875204ac0641e2dd85",
+    "experiments/content-addressed-snapshot-lab/store.rs": "13be9b95a14dc6690d0914acd735842f09cc731f894d81684b0099c8df7f09b6",
+    "experiments/process-memory-lab/snapshot_gate.py": "7fc6905e28dfffd90705812affa19b9e2da610bb24bba9d85f62df5cb7668012"
+  },
+  "observer_sha256": "db76bfc1672a90f8a933c2b4537d333548a5e15674de7a635250bcb81110de1b",
+  "runner_sha256": "e211576f95c4a4b3f354282370c7af10cc53cd3c3dff4704b9f00d4d661aa930",
+  "samples": [
+    {
+      "round": 0,
+      "lane": "baseline",
+      "peak_rss_kib": 11280,
+      "parent_observed_process_seconds": 2.216005796974059,
+      "database_bytes": 13139968,
+      "verification": {
+        "attempt_atomicity": true,
+        "committed_generations": 1001,
+        "complete_payload_history_equal": true,
+        "integrity_ok": true,
+        "lane": "baseline",
+        "schema_version": 1,
+        "scope": "Process kill recovery only; not physical power-loss durability",
+        "sqlite": "3.54.1"
+      },
+      "self_observation": {
+        "after_connection_drop": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 2535424,
+          "rollup_private_dirty_bytes": 2064384,
+          "rollup_pss_bytes": 4609024,
+          "rollup_rss_bytes": 5414912,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 5771264,
+          "status_rss_bytes": 5414912
+        },
+        "before_input": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 663552,
+          "rollup_private_dirty_bytes": 188416,
+          "rollup_pss_bytes": 860160,
+          "rollup_rss_bytes": 1646592,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1642496,
+          "status_rss_bytes": 1642496
+        },
+        "input_sha256": "75798037b3ea908200264e29a064392fc801c46b36db0b8f32d25454e7eeb356",
+        "lane": "baseline",
+        "observations": 1001,
+        "observer_sha256": "db76bfc1672a90f8a933c2b4537d333548a5e15674de7a635250bcb81110de1b",
+        "retained_connection": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 2535424,
+          "rollup_private_dirty_bytes": 2531328,
+          "rollup_pss_bytes": 5075968,
+          "rollup_rss_bytes": 5881856,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 5881856,
+          "status_rss_bytes": 5881856
+        },
+        "schema_version": 1,
+        "scope": "Linux self-observation after exec; status accounting is approximate; smaps_rollup is instantaneous, not peak"
+      }
+    },
+    {
+      "round": 0,
+      "lane": "addressed",
+      "peak_rss_kib": 11296,
+      "parent_observed_process_seconds": 2.774544603016693,
+      "database_bytes": 303104,
+      "verification": {
+        "attempt_atomicity": true,
+        "committed_generations": 1001,
+        "complete_payload_history_equal": true,
+        "integrity_ok": true,
+        "lane": "addressed",
+        "schema_version": 1,
+        "scope": "Process kill recovery only; not physical power-loss durability",
+        "sqlite": "3.54.1"
+      },
+      "self_observation": {
+        "after_connection_drop": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 2478080,
+          "rollup_private_dirty_bytes": 770048,
+          "rollup_pss_bytes": 3257344,
+          "rollup_rss_bytes": 4063232,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 4063232,
+          "status_rss_bytes": 4063232
+        },
+        "before_input": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 729088,
+          "rollup_private_dirty_bytes": 188416,
+          "rollup_pss_bytes": 925696,
+          "rollup_rss_bytes": 1712128,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1708032,
+          "status_rss_bytes": 1708032
+        },
+        "input_sha256": "75798037b3ea908200264e29a064392fc801c46b36db0b8f32d25454e7eeb356",
+        "lane": "addressed",
+        "observations": 1001,
+        "observer_sha256": "db76bfc1672a90f8a933c2b4537d333548a5e15674de7a635250bcb81110de1b",
+        "retained_connection": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 2478080,
+          "rollup_private_dirty_bytes": 770048,
+          "rollup_pss_bytes": 3257344,
+          "rollup_rss_bytes": 4063232,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 4063232,
+          "status_rss_bytes": 4063232
+        },
+        "schema_version": 1,
+        "scope": "Linux self-observation after exec; status accounting is approximate; smaps_rollup is instantaneous, not peak"
+      }
+    },
+    {
+      "round": 1,
+      "lane": "addressed",
+      "peak_rss_kib": 11300,
+      "parent_observed_process_seconds": 2.435154089005664,
+      "database_bytes": 303104,
+      "verification": {
+        "attempt_atomicity": true,
+        "committed_generations": 1001,
+        "complete_payload_history_equal": true,
+        "integrity_ok": true,
+        "lane": "addressed",
+        "schema_version": 1,
+        "scope": "Process kill recovery only; not physical power-loss durability",
+        "sqlite": "3.54.1"
+      },
+      "self_observation": {
+        "after_connection_drop": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 2527232,
+          "rollup_private_dirty_bytes": 770048,
+          "rollup_pss_bytes": 3306496,
+          "rollup_rss_bytes": 4112384,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 4112384,
+          "status_rss_bytes": 4112384
+        },
+        "before_input": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 598016,
+          "rollup_private_dirty_bytes": 188416,
+          "rollup_pss_bytes": 794624,
+          "rollup_rss_bytes": 1581056,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1576960,
+          "status_rss_bytes": 1576960
+        },
+        "input_sha256": "75798037b3ea908200264e29a064392fc801c46b36db0b8f32d25454e7eeb356",
+        "lane": "addressed",
+        "observations": 1001,
+        "observer_sha256": "db76bfc1672a90f8a933c2b4537d333548a5e15674de7a635250bcb81110de1b",
+        "retained_connection": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 2527232,
+          "rollup_private_dirty_bytes": 770048,
+          "rollup_pss_bytes": 3306496,
+          "rollup_rss_bytes": 4112384,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 4112384,
+          "status_rss_bytes": 4112384
+        },
+        "schema_version": 1,
+        "scope": "Linux self-observation after exec; status accounting is approximate; smaps_rollup is instantaneous, not peak"
+      }
+    },
+    {
+      "round": 1,
+      "lane": "baseline",
+      "peak_rss_kib": 11312,
+      "parent_observed_process_seconds": 2.7213380120228976,
+      "database_bytes": 13139968,
+      "verification": {
+        "attempt_atomicity": true,
+        "committed_generations": 1001,
+        "complete_payload_history_equal": true,
+        "integrity_ok": true,
+        "lane": "baseline",
+        "schema_version": 1,
+        "scope": "Process kill recovery only; not physical power-loss durability",
+        "sqlite": "3.54.1"
+      },
+      "self_observation": {
+        "after_connection_drop": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 2527232,
+          "rollup_private_dirty_bytes": 2064384,
+          "rollup_pss_bytes": 4600832,
+          "rollup_rss_bytes": 5406720,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 5763072,
+          "status_rss_bytes": 5406720
+        },
+        "before_input": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 598016,
+          "rollup_private_dirty_bytes": 184320,
+          "rollup_pss_bytes": 790528,
+          "rollup_rss_bytes": 1576960,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1572864,
+          "status_rss_bytes": 1572864
+        },
+        "input_sha256": "75798037b3ea908200264e29a064392fc801c46b36db0b8f32d25454e7eeb356",
+        "lane": "baseline",
+        "observations": 1001,
+        "observer_sha256": "db76bfc1672a90f8a933c2b4537d333548a5e15674de7a635250bcb81110de1b",
+        "retained_connection": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 2527232,
+          "rollup_private_dirty_bytes": 2531328,
+          "rollup_pss_bytes": 5067776,
+          "rollup_rss_bytes": 5873664,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 5873664,
+          "status_rss_bytes": 5873664
+        },
+        "schema_version": 1,
+        "scope": "Linux self-observation after exec; status accounting is approximate; smaps_rollup is instantaneous, not peak"
+      }
+    },
+    {
+      "round": 2,
+      "lane": "baseline",
+      "peak_rss_kib": 11320,
+      "parent_observed_process_seconds": 2.4530034600174986,
+      "database_bytes": 13139968,
+      "verification": {
+        "attempt_atomicity": true,
+        "committed_generations": 1001,
+        "complete_payload_history_equal": true,
+        "integrity_ok": true,
+        "lane": "baseline",
+        "schema_version": 1,
+        "scope": "Process kill recovery only; not physical power-loss durability",
+        "sqlite": "3.54.1"
+      },
+      "self_observation": {
+        "after_connection_drop": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 2539520,
+          "rollup_private_dirty_bytes": 2064384,
+          "rollup_pss_bytes": 4613120,
+          "rollup_rss_bytes": 5419008,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 5775360,
+          "status_rss_bytes": 5419008
+        },
+        "before_input": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 729088,
+          "rollup_private_dirty_bytes": 188416,
+          "rollup_pss_bytes": 925696,
+          "rollup_rss_bytes": 1712128,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1708032,
+          "status_rss_bytes": 1708032
+        },
+        "input_sha256": "75798037b3ea908200264e29a064392fc801c46b36db0b8f32d25454e7eeb356",
+        "lane": "baseline",
+        "observations": 1001,
+        "observer_sha256": "db76bfc1672a90f8a933c2b4537d333548a5e15674de7a635250bcb81110de1b",
+        "retained_connection": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 2539520,
+          "rollup_private_dirty_bytes": 2531328,
+          "rollup_pss_bytes": 5080064,
+          "rollup_rss_bytes": 5885952,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 5885952,
+          "status_rss_bytes": 5885952
+        },
+        "schema_version": 1,
+        "scope": "Linux self-observation after exec; status accounting is approximate; smaps_rollup is instantaneous, not peak"
+      }
+    },
+    {
+      "round": 2,
+      "lane": "addressed",
+      "peak_rss_kib": 11324,
+      "parent_observed_process_seconds": 3.1364264239673503,
+      "database_bytes": 303104,
+      "verification": {
+        "attempt_atomicity": true,
+        "committed_generations": 1001,
+        "complete_payload_history_equal": true,
+        "integrity_ok": true,
+        "lane": "addressed",
+        "schema_version": 1,
+        "scope": "Process kill recovery only; not physical power-loss durability",
+        "sqlite": "3.54.1"
+      },
+      "self_observation": {
+        "after_connection_drop": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 2510848,
+          "rollup_private_dirty_bytes": 765952,
+          "rollup_pss_bytes": 3286016,
+          "rollup_rss_bytes": 4091904,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 4091904,
+          "status_rss_bytes": 4091904
+        },
+        "before_input": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 663552,
+          "rollup_private_dirty_bytes": 184320,
+          "rollup_pss_bytes": 856064,
+          "rollup_rss_bytes": 1642496,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1638400,
+          "status_rss_bytes": 1638400
+        },
+        "input_sha256": "75798037b3ea908200264e29a064392fc801c46b36db0b8f32d25454e7eeb356",
+        "lane": "addressed",
+        "observations": 1001,
+        "observer_sha256": "db76bfc1672a90f8a933c2b4537d333548a5e15674de7a635250bcb81110de1b",
+        "retained_connection": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 2510848,
+          "rollup_private_dirty_bytes": 765952,
+          "rollup_pss_bytes": 3286016,
+          "rollup_rss_bytes": 4091904,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 4091904,
+          "status_rss_bytes": 4091904
+        },
+        "schema_version": 1,
+        "scope": "Linux self-observation after exec; status accounting is approximate; smaps_rollup is instantaneous, not peak"
+      }
+    },
+    {
+      "round": 3,
+      "lane": "addressed",
+      "peak_rss_kib": 11332,
+      "parent_observed_process_seconds": 3.142904002976138,
+      "database_bytes": 303104,
+      "verification": {
+        "attempt_atomicity": true,
+        "committed_generations": 1001,
+        "complete_payload_history_equal": true,
+        "integrity_ok": true,
+        "lane": "addressed",
+        "schema_version": 1,
+        "scope": "Process kill recovery only; not physical power-loss durability",
+        "sqlite": "3.54.1"
+      },
+      "self_observation": {
+        "after_connection_drop": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 2510848,
+          "rollup_private_dirty_bytes": 765952,
+          "rollup_pss_bytes": 3286016,
+          "rollup_rss_bytes": 4091904,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 4091904,
+          "status_rss_bytes": 4091904
+        },
+        "before_input": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 663552,
+          "rollup_private_dirty_bytes": 184320,
+          "rollup_pss_bytes": 856064,
+          "rollup_rss_bytes": 1642496,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1638400,
+          "status_rss_bytes": 1638400
+        },
+        "input_sha256": "75798037b3ea908200264e29a064392fc801c46b36db0b8f32d25454e7eeb356",
+        "lane": "addressed",
+        "observations": 1001,
+        "observer_sha256": "db76bfc1672a90f8a933c2b4537d333548a5e15674de7a635250bcb81110de1b",
+        "retained_connection": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 2510848,
+          "rollup_private_dirty_bytes": 765952,
+          "rollup_pss_bytes": 3286016,
+          "rollup_rss_bytes": 4091904,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 4091904,
+          "status_rss_bytes": 4091904
+        },
+        "schema_version": 1,
+        "scope": "Linux self-observation after exec; status accounting is approximate; smaps_rollup is instantaneous, not peak"
+      }
+    },
+    {
+      "round": 3,
+      "lane": "baseline",
+      "peak_rss_kib": 11352,
+      "parent_observed_process_seconds": 3.9527325019589625,
+      "database_bytes": 13139968,
+      "verification": {
+        "attempt_atomicity": true,
+        "committed_generations": 1001,
+        "complete_payload_history_equal": true,
+        "integrity_ok": true,
+        "lane": "baseline",
+        "schema_version": 1,
+        "scope": "Process kill recovery only; not physical power-loss durability",
+        "sqlite": "3.54.1"
+      },
+      "self_observation": {
+        "after_connection_drop": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 2551808,
+          "rollup_private_dirty_bytes": 2064384,
+          "rollup_pss_bytes": 4625408,
+          "rollup_rss_bytes": 5431296,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 5787648,
+          "status_rss_bytes": 5431296
+        },
+        "before_input": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 729088,
+          "rollup_private_dirty_bytes": 188416,
+          "rollup_pss_bytes": 925696,
+          "rollup_rss_bytes": 1712128,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1708032,
+          "status_rss_bytes": 1708032
+        },
+        "input_sha256": "75798037b3ea908200264e29a064392fc801c46b36db0b8f32d25454e7eeb356",
+        "lane": "baseline",
+        "observations": 1001,
+        "observer_sha256": "db76bfc1672a90f8a933c2b4537d333548a5e15674de7a635250bcb81110de1b",
+        "retained_connection": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 2486272,
+          "rollup_private_dirty_bytes": 2531328,
+          "rollup_pss_bytes": 5026816,
+          "rollup_rss_bytes": 5832704,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 5832704,
+          "status_rss_bytes": 5832704
+        },
+        "schema_version": 1,
+        "scope": "Linux self-observation after exec; status accounting is approximate; smaps_rollup is instantaneous, not peak"
+      }
+    }
+  ]
+}

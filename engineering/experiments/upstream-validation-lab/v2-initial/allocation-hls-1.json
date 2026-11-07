@@ -1,0 +1,124 @@
+{
+  "accounting_error": false,
+  "default_parser_changed": false,
+  "input_bytes": 4670,
+  "input_sha256": "2a3aa0f30e5d1789cd1a9f34ddce881bf7de74ae91acfc4af42516cd8dd1ff19",
+  "samples": [
+    {
+      "baseline": {
+        "allocation_calls": 163,
+        "held_requested_rust_bytes_above_start": 4751,
+        "peak_requested_rust_bytes_above_start": 14150,
+        "reallocation_calls": 8,
+        "total_successfully_requested_bytes": 20317
+      },
+      "candidate": {
+        "allocation_calls": 9,
+        "held_requested_rust_bytes_above_start": 4751,
+        "peak_requested_rust_bytes_above_start": 4751,
+        "reallocation_calls": 8,
+        "total_successfully_requested_bytes": 7495
+      },
+      "complete_record_equal": true,
+      "post_drop_live_requested_delta": 0,
+      "round": 0
+    },
+    {
+      "baseline": {
+        "allocation_calls": 163,
+        "held_requested_rust_bytes_above_start": 4751,
+        "peak_requested_rust_bytes_above_start": 14150,
+        "reallocation_calls": 8,
+        "total_successfully_requested_bytes": 20317
+      },
+      "candidate": {
+        "allocation_calls": 9,
+        "held_requested_rust_bytes_above_start": 4751,
+        "peak_requested_rust_bytes_above_start": 4751,
+        "reallocation_calls": 8,
+        "total_successfully_requested_bytes": 7495
+      },
+      "complete_record_equal": true,
+      "post_drop_live_requested_delta": 0,
+      "round": 1
+    },
+    {
+      "baseline": {
+        "allocation_calls": 163,
+        "held_requested_rust_bytes_above_start": 4751,
+        "peak_requested_rust_bytes_above_start": 14150,
+        "reallocation_calls": 8,
+        "total_successfully_requested_bytes": 20317
+      },
+      "candidate": {
+        "allocation_calls": 9,
+        "held_requested_rust_bytes_above_start": 4751,
+        "peak_requested_rust_bytes_above_start": 4751,
+        "reallocation_calls": 8,
+        "total_successfully_requested_bytes": 7495
+      },
+      "complete_record_equal": true,
+      "post_drop_live_requested_delta": 0,
+      "round": 2
+    },
+    {
+      "baseline": {
+        "allocation_calls": 163,
+        "held_requested_rust_bytes_above_start": 4751,
+        "peak_requested_rust_bytes_above_start": 14150,
+        "reallocation_calls": 8,
+        "total_successfully_requested_bytes": 20317
+      },
+      "candidate": {
+        "allocation_calls": 9,
+        "held_requested_rust_bytes_above_start": 4751,
+        "peak_requested_rust_bytes_above_start": 4751,
+        "reallocation_calls": 8,
+        "total_successfully_requested_bytes": 7495
+      },
+      "complete_record_equal": true,
+      "post_drop_live_requested_delta": 0,
+      "round": 3
+    },
+    {
+      "baseline": {
+        "allocation_calls": 163,
+        "held_requested_rust_bytes_above_start": 4751,
+        "peak_requested_rust_bytes_above_start": 14150,
+        "reallocation_calls": 8,
+        "total_successfully_requested_bytes": 20317
+      },
+      "candidate": {
+        "allocation_calls": 9,
+        "held_requested_rust_bytes_above_start": 4751,
+        "peak_requested_rust_bytes_above_start": 4751,
+        "reallocation_calls": 8,
+        "total_successfully_requested_bytes": 7495
+      },
+      "complete_record_equal": true,
+      "post_drop_live_requested_delta": 0,
+      "round": 4
+    },
+    {
+      "baseline": {
+        "allocation_calls": 163,
+        "held_requested_rust_bytes_above_start": 4751,
+        "peak_requested_rust_bytes_above_start": 14150,
+        "reallocation_calls": 8,
+        "total_successfully_requested_bytes": 20317
+      },
+      "candidate": {
+        "allocation_calls": 9,
+        "held_requested_rust_bytes_above_start": 4751,
+        "peak_requested_rust_bytes_above_start": 4751,
+        "reallocation_calls": 8,
+        "total_successfully_requested_bytes": 7495
+      },
+      "complete_record_equal": true,
+      "post_drop_live_requested_delta": 0,
+      "round": 5
+    }
+  ],
+  "scope": "Requested Rust allocations for actual upstream parser; not RSS, stack, native allocation or physical peak; no instrumented timing claims",
+  "source": "hls"
+}

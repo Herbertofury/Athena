@@ -1,0 +1,95 @@
+✔ all selected source galleries and trailers survive normalization (4.06952ms)
+✔ rejects active protocols, credentials and deceptive media hosts (0.311586ms)
+✔ original and preview URLs remain distinct (0.568909ms)
+✔ private fixture state cannot silently enter public demo (0.808355ms)
+✔ duplicate canonical identities are rejected (1.000689ms)
+✔ unavailable gallery coverage remains explicit (2.632293ms)
+✔ source links cannot execute script or leave the provider allowlist (0.435216ms)
+✔ media cannot be borrowed from an unrelated provider card (0.565641ms)
+✖ card source belongs to the declared provider (2.973755ms)
+✖ player kind cannot cross the provider boundary (2.225907ms)
+✖ unknown player kinds fail closed (1.482744ms)
+✖ optional trailer posters are provider-bound too (1.146407ms)
+✔ fixture validation is lossless and does not mutate input (1.464416ms)
+ℹ tests 13
+ℹ suites 0
+ℹ pass 9
+ℹ fail 4
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 239.963899
+
+✖ failing tests:
+
+test at tests/media-lab.test.mjs:14:1
+✖ card source belongs to the declared provider (2.973755ms)
+  AssertionError [ERR_ASSERTION]: Missing expected exception.
+      at TestContext.<anonymous> (file://<repo>/tests/media-lab.test.mjs:14:119)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: /source/i,
+    operator: 'throws',
+    diff: 'simple'
+  }
+
+test at tests/media-lab.test.mjs:15:1
+✖ player kind cannot cross the provider boundary (2.225907ms)
+  AssertionError [ERR_ASSERTION]: Missing expected exception.
+      at TestContext.<anonymous> (file://<repo>/tests/media-lab.test.mjs:15:139)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: /video|player/i,
+    operator: 'throws',
+    diff: 'simple'
+  }
+
+test at tests/media-lab.test.mjs:16:1
+✖ unknown player kinds fail closed (1.482744ms)
+  AssertionError [ERR_ASSERTION]: Missing expected exception.
+      at TestContext.<anonymous> (file://<repo>/tests/media-lab.test.mjs:16:117)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: /video|player/i,
+    operator: 'throws',
+    diff: 'simple'
+  }
+
+test at tests/media-lab.test.mjs:17:1
+✖ optional trailer posters are provider-bound too (1.146407ms)
+  AssertionError [ERR_ASSERTION]: Missing expected exception.
+      at TestContext.<anonymous> (file://<repo>/tests/media-lab.test.mjs:17:131)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: /poster/i,
+    operator: 'throws',
+    diff: 'simple'
+  }

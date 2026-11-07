@@ -1,0 +1,751 @@
+{
+  "schema_version": 1,
+  "harness": "atlas-card-density-v1",
+  "scope": "measured_browser_generated_workload",
+  "operation": "initial",
+  "performance_start_ms": 20337.5,
+  "started_at": "2026-10-26T21:32:37.036Z",
+  "environment": {
+    "user_agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36",
+    "viewport": [
+      1182,
+      757
+    ],
+    "device_pixel_ratio": 1,
+    "supported_entry_types": [
+      "element",
+      "event",
+      "first-input",
+      "interaction-contentful-paint",
+      "largest-contentful-paint",
+      "layout-shift",
+      "long-animation-frame",
+      "longtask",
+      "mark",
+      "measure",
+      "navigation",
+      "paint",
+      "resource",
+      "soft-navigation",
+      "visibility-state"
+    ],
+    "content_visibility_supported": true
+  },
+  "dataset": {
+    "count": 1000,
+    "metadata_bytes_per_record": 8192,
+    "serialized_bytes": 8340001,
+    "sha256": "987660c9b6b8fce029829d5c69632667bd41e173860c2e00e747ba237ad8655e",
+    "generation_ms": 29.099999994039536,
+    "hash_ms": 92.59999999403954
+  },
+  "samples": [
+    {
+      "round": 0,
+      "strategy": "full_dom",
+      "dom_creation_and_insertion_ms": 24.599999994039536,
+      "frame_ready_proxy_ms": 6678.9000000059605,
+      "scroll_frame_wait_ms": [
+        67.69999998807907,
+        68,
+        60.19999998807907,
+        56.30000001192093,
+        176.2999999821186,
+        67.5,
+        58.5,
+        36.39999997615814,
+        56.60000002384186,
+        40.69999998807907,
+        41.599999994039536,
+        19.400000005960464
+      ],
+      "scroll_frame_wait_max_ms": 176.2999999821186,
+      "complete_output_equal": true,
+      "dom_card_count": 1000,
+      "observations": {
+        "longtask": [
+          {
+            "start_ms": 27142.09999999404,
+            "duration_ms": 77
+          },
+          {
+            "start_ms": 27225.90000000596,
+            "duration_ms": 61
+          },
+          {
+            "start_ms": 27292.79999998212,
+            "duration_ms": 61
+          },
+          {
+            "start_ms": 27354.29999998212,
+            "duration_ms": 50
+          },
+          {
+            "start_ms": 27410.5,
+            "duration_ms": 176
+          },
+          {
+            "start_ms": 27587,
+            "duration_ms": 61
+          },
+          {
+            "start_ms": 27654.40000000596,
+            "duration_ms": 52
+          },
+          {
+            "start_ms": 27749.5,
+            "duration_ms": 56
+          }
+        ],
+        "long-animation-frame": [
+          {
+            "start_ms": 26142.40000000596,
+            "duration_ms": 991.6999999880791
+          }
+        ]
+      }
+    },
+    {
+      "round": 0,
+      "strategy": "containment",
+      "dom_creation_and_insertion_ms": 134.09999999403954,
+      "frame_ready_proxy_ms": 175.59999999403954,
+      "scroll_frame_wait_ms": [
+        8.699999988079071,
+        8.900000005960464,
+        14.099999994039536,
+        16.900000005960464,
+        17.099999994039536,
+        15.700000017881393,
+        16.799999982118607,
+        17,
+        16.600000023841858,
+        16.69999998807907,
+        16.900000005960464,
+        16.5
+      ],
+      "scroll_frame_wait_max_ms": 17.099999994039536,
+      "complete_output_equal": true,
+      "dom_card_count": 1000,
+      "observations": {
+        "longtask": [],
+        "long-animation-frame": []
+      }
+    },
+    {
+      "round": 1,
+      "strategy": "containment",
+      "dom_creation_and_insertion_ms": 32.10000002384186,
+      "frame_ready_proxy_ms": 73.7000000178814,
+      "scroll_frame_wait_ms": [
+        6.4000000059604645,
+        14.299999982118607,
+        16.700000017881393,
+        17.19999998807907,
+        16,
+        16.5,
+        16.599999994039536,
+        17.700000017881393,
+        16.599999994039536,
+        16,
+        16.5,
+        16.80000001192093
+      ],
+      "scroll_frame_wait_max_ms": 17.700000017881393,
+      "complete_output_equal": true,
+      "dom_card_count": 1000,
+      "observations": {
+        "longtask": [],
+        "long-animation-frame": []
+      }
+    },
+    {
+      "round": 1,
+      "strategy": "full_dom",
+      "dom_creation_and_insertion_ms": 38.89999997615814,
+      "frame_ready_proxy_ms": 9653.399999976158,
+      "scroll_frame_wait_ms": [
+        40.79999998211861,
+        44.5,
+        58.30000001192093,
+        47.400000005960464,
+        58,
+        44.89999997615814,
+        44.5,
+        39.20000001788139,
+        46.79999998211861,
+        44.69999998807907,
+        45.69999998807907,
+        27.30000001192093
+      ],
+      "scroll_frame_wait_max_ms": 58.30000001192093,
+      "complete_output_equal": true,
+      "dom_card_count": 1000,
+      "observations": {
+        "longtask": [],
+        "long-animation-frame": [
+          {
+            "start_ms": 33628.69999998808,
+            "duration_ms": 4777.5999999940395
+          }
+        ]
+      }
+    },
+    {
+      "round": 2,
+      "strategy": "full_dom",
+      "dom_creation_and_insertion_ms": 180.09999999403954,
+      "frame_ready_proxy_ms": 2896.5,
+      "scroll_frame_wait_ms": [
+        72.90000000596046,
+        48.80000001192093,
+        61.5,
+        68.2999999821186,
+        80.80000001192093,
+        66.19999998807907,
+        79,
+        77.69999998807907,
+        67.80000001192093,
+        76.7999999821186,
+        77.59999999403954,
+        36.19999998807907
+      ],
+      "scroll_frame_wait_max_ms": 80.80000001192093,
+      "complete_output_equal": true,
+      "dom_card_count": 1000,
+      "observations": {
+        "longtask": [
+          {
+            "start_ms": 41945,
+            "duration_ms": 79
+          },
+          {
+            "start_ms": 42073.69999998808,
+            "duration_ms": 61
+          },
+          {
+            "start_ms": 42135.19999998808,
+            "duration_ms": 68
+          },
+          {
+            "start_ms": 42203.59999999404,
+            "duration_ms": 80
+          },
+          {
+            "start_ms": 42284.19999998808,
+            "duration_ms": 66
+          },
+          {
+            "start_ms": 42350.5,
+            "duration_ms": 78
+          },
+          {
+            "start_ms": 42429.19999998808,
+            "duration_ms": 78
+          },
+          {
+            "start_ms": 42507.40000000596,
+            "duration_ms": 67
+          },
+          {
+            "start_ms": 42575.09999999404,
+            "duration_ms": 76
+          },
+          {
+            "start_ms": 42651.79999998212,
+            "duration_ms": 77
+          }
+        ],
+        "long-animation-frame": []
+      }
+    },
+    {
+      "round": 2,
+      "strategy": "containment",
+      "dom_creation_and_insertion_ms": 145.80000001192093,
+      "frame_ready_proxy_ms": 198.7000000178814,
+      "scroll_frame_wait_ms": [
+        8,
+        10.199999988079071,
+        16.100000023841858,
+        14.899999976158142,
+        16.600000023841858,
+        16.599999994039536,
+        18.5,
+        15.099999994039536,
+        17.69999998807907,
+        15.5,
+        18.100000023841858,
+        14.899999976158142
+      ],
+      "scroll_frame_wait_max_ms": 18.5,
+      "complete_output_equal": true,
+      "dom_card_count": 1000,
+      "observations": {
+        "longtask": [],
+        "long-animation-frame": []
+      }
+    },
+    {
+      "round": 3,
+      "strategy": "containment",
+      "dom_creation_and_insertion_ms": 22.900000005960464,
+      "frame_ready_proxy_ms": 59.19999998807907,
+      "scroll_frame_wait_ms": [
+        8.699999988079071,
+        10.599999994039536,
+        16.400000005960464,
+        17.099999994039536,
+        15.700000017881393,
+        16.599999994039536,
+        16.900000005960464,
+        16.69999998807907,
+        17.5,
+        15.5,
+        16.900000005960464,
+        16.599999994039536
+      ],
+      "scroll_frame_wait_max_ms": 17.5,
+      "complete_output_equal": true,
+      "dom_card_count": 1000,
+      "observations": {
+        "longtask": [],
+        "long-animation-frame": []
+      }
+    },
+    {
+      "round": 3,
+      "strategy": "full_dom",
+      "dom_creation_and_insertion_ms": 27,
+      "frame_ready_proxy_ms": 3940.800000011921,
+      "scroll_frame_wait_ms": [
+        76.59999999403954,
+        81,
+        102,
+        71.5,
+        77.40000000596046,
+        58,
+        62.5,
+        98.09999999403954,
+        110.19999998807907,
+        74.90000000596046,
+        66.40000000596046,
+        33.69999998807907
+      ],
+      "scroll_frame_wait_max_ms": 110.19999998807907,
+      "complete_output_equal": true,
+      "dom_card_count": 1000,
+      "observations": {
+        "longtask": [
+          {
+            "start_ms": 47566,
+            "duration_ms": 86
+          },
+          {
+            "start_ms": 47652.69999998808,
+            "duration_ms": 80
+          },
+          {
+            "start_ms": 47732.90000000596,
+            "duration_ms": 102
+          },
+          {
+            "start_ms": 47835.79999998212,
+            "duration_ms": 71
+          },
+          {
+            "start_ms": 47907.19999998808,
+            "duration_ms": 77
+          },
+          {
+            "start_ms": 47984.40000000596,
+            "duration_ms": 53
+          },
+          {
+            "start_ms": 48042.5,
+            "duration_ms": 62
+          },
+          {
+            "start_ms": 48105.19999998808,
+            "duration_ms": 95
+          },
+          {
+            "start_ms": 48200.69999998808,
+            "duration_ms": 112
+          },
+          {
+            "start_ms": 48313.29999998212,
+            "duration_ms": 74
+          },
+          {
+            "start_ms": 48388.19999998808,
+            "duration_ms": 66
+          }
+        ],
+        "long-animation-frame": []
+      }
+    },
+    {
+      "round": 4,
+      "strategy": "full_dom",
+      "dom_creation_and_insertion_ms": 163.89999997615814,
+      "frame_ready_proxy_ms": 5705.0999999940395,
+      "scroll_frame_wait_ms": [
+        90.59999999403954,
+        77.5,
+        90.30000001192093,
+        99.69999998807907,
+        87.5,
+        74.10000002384186,
+        82.2999999821186,
+        70.30000001192093,
+        65.19999998807907,
+        95,
+        74.80000001192093,
+        56.400000005960464
+      ],
+      "scroll_frame_wait_max_ms": 99.69999998807907,
+      "complete_output_equal": true,
+      "dom_card_count": 1000,
+      "observations": {
+        "longtask": [
+          {
+            "start_ms": 54281.90000000596,
+            "duration_ms": 104
+          },
+          {
+            "start_ms": 54386.5,
+            "duration_ms": 77
+          },
+          {
+            "start_ms": 54464.19999998808,
+            "duration_ms": 90
+          },
+          {
+            "start_ms": 54554.29999998212,
+            "duration_ms": 99
+          },
+          {
+            "start_ms": 54654.29999998212,
+            "duration_ms": 81
+          },
+          {
+            "start_ms": 54741.19999998808,
+            "duration_ms": 74
+          },
+          {
+            "start_ms": 54816.09999999404,
+            "duration_ms": 76
+          },
+          {
+            "start_ms": 54898.40000000596,
+            "duration_ms": 64
+          },
+          {
+            "start_ms": 54968.79999998212,
+            "duration_ms": 65
+          },
+          {
+            "start_ms": 55034,
+            "duration_ms": 89
+          },
+          {
+            "start_ms": 55128.90000000596,
+            "duration_ms": 74
+          },
+          {
+            "start_ms": 55203.59999999404,
+            "duration_ms": 51
+          }
+        ],
+        "long-animation-frame": []
+      }
+    },
+    {
+      "round": 4,
+      "strategy": "containment",
+      "dom_creation_and_insertion_ms": 168.30000001192093,
+      "frame_ready_proxy_ms": 234.09999999403954,
+      "scroll_frame_wait_ms": [
+        13.699999988079071,
+        6.4000000059604645,
+        43.80000001192093,
+        18.099999994039536,
+        14.099999994039536,
+        28.900000005960464,
+        24.400000005960464,
+        12.799999982118607,
+        16.30000001192093,
+        18.299999982118607,
+        18.700000017881393,
+        18.900000005960464
+      ],
+      "scroll_frame_wait_max_ms": 43.80000001192093,
+      "complete_output_equal": true,
+      "dom_card_count": 1000,
+      "observations": {
+        "longtask": [],
+        "long-animation-frame": []
+      }
+    },
+    {
+      "round": 5,
+      "strategy": "containment",
+      "dom_creation_and_insertion_ms": 17.80000001192093,
+      "frame_ready_proxy_ms": 58.400000005960464,
+      "scroll_frame_wait_ms": [
+        7.5,
+        17.5,
+        13.400000005960464,
+        19.5,
+        19.900000005960464,
+        16.099999994039536,
+        34.69999998807907,
+        8.599999994039536,
+        40.099999994039536,
+        7,
+        22.799999982118607,
+        7
+      ],
+      "scroll_frame_wait_max_ms": 40.099999994039536,
+      "complete_output_equal": true,
+      "dom_card_count": 1000,
+      "observations": {
+        "longtask": [],
+        "long-animation-frame": []
+      }
+    },
+    {
+      "round": 5,
+      "strategy": "full_dom",
+      "dom_creation_and_insertion_ms": 22.599999994039536,
+      "frame_ready_proxy_ms": 2695.7999999821186,
+      "scroll_frame_wait_ms": [
+        48.20000001788139,
+        68,
+        57.70000001788139,
+        48.099999994039536,
+        57.30000001192093,
+        35.39999997615814,
+        52.5,
+        64.2000000178814,
+        63.29999998211861,
+        46.80000001192093,
+        60.5,
+        34.69999998807907
+      ],
+      "scroll_frame_wait_max_ms": 68,
+      "complete_output_equal": true,
+      "dom_card_count": 1000,
+      "observations": {
+        "longtask": [
+          {
+            "start_ms": 58964.59999999404,
+            "duration_ms": 54
+          },
+          {
+            "start_ms": 59088.5,
+            "duration_ms": 57
+          },
+          {
+            "start_ms": 59339.59999999404,
+            "duration_ms": 64
+          },
+          {
+            "start_ms": 59403.79999998212,
+            "duration_ms": 57
+          },
+          {
+            "start_ms": 59513.79999998212,
+            "duration_ms": 60
+          }
+        ],
+        "long-animation-frame": []
+      }
+    },
+    {
+      "round": 6,
+      "strategy": "full_dom",
+      "dom_creation_and_insertion_ms": 110.5,
+      "frame_ready_proxy_ms": 3393,
+      "scroll_frame_wait_ms": [
+        117.2000000178814,
+        97.2999999821186,
+        114.09999999403954,
+        104.2000000178814,
+        98.40000000596046,
+        48,
+        88.5,
+        102.89999997615814,
+        109,
+        88.90000000596046,
+        112.30000001192093,
+        56.29999998211861
+      ],
+      "scroll_frame_wait_max_ms": 117.2000000178814,
+      "complete_output_equal": true,
+      "dom_card_count": 1000,
+      "observations": {
+        "longtask": [
+          {
+            "start_ms": 63092.5,
+            "duration_ms": 121
+          },
+          {
+            "start_ms": 63219.09999999404,
+            "duration_ms": 96
+          },
+          {
+            "start_ms": 63315.90000000596,
+            "duration_ms": 109
+          },
+          {
+            "start_ms": 63430.40000000596,
+            "duration_ms": 104
+          },
+          {
+            "start_ms": 63534.5,
+            "duration_ms": 92
+          },
+          {
+            "start_ms": 63681.09999999404,
+            "duration_ms": 82
+          },
+          {
+            "start_ms": 63769.5,
+            "duration_ms": 97
+          },
+          {
+            "start_ms": 63872.5,
+            "duration_ms": 108
+          },
+          {
+            "start_ms": 63981.59999999404,
+            "duration_ms": 83
+          },
+          {
+            "start_ms": 64070.40000000596,
+            "duration_ms": 112
+          },
+          {
+            "start_ms": 64182.79999998212,
+            "duration_ms": 50
+          }
+        ],
+        "long-animation-frame": []
+      }
+    },
+    {
+      "round": 6,
+      "strategy": "containment",
+      "dom_creation_and_insertion_ms": 132.40000000596046,
+      "frame_ready_proxy_ms": 175.59999999403954,
+      "scroll_frame_wait_ms": [
+        7.4000000059604645,
+        14.5,
+        24.099999994039536,
+        24.30000001192093,
+        30.900000005960464,
+        5.5999999940395355,
+        8.5,
+        20.69999998807907,
+        17.700000017881393,
+        16.69999998807907,
+        20.099999994039536,
+        9
+      ],
+      "scroll_frame_wait_max_ms": 30.900000005960464,
+      "complete_output_equal": true,
+      "dom_card_count": 1000,
+      "observations": {
+        "longtask": [],
+        "long-animation-frame": []
+      }
+    }
+  ],
+  "complete": true,
+  "limitations": [
+    "Double-rAF is a scheduling proxy, not direct physical-paint timing",
+    "Scroll frame wait is not INP; observed Event Timing entries are separate and thresholded at 16 ms, not a complete INP score",
+    "No images, networking or peak-memory measurements",
+    "Both variants retain all card fields in the DOM",
+    "No comparison to a target project baseline",
+    "Incremental update setup is outside its timer; initial rendering is a separate operation",
+    "Bounded generated workload; not universal best-method evidence"
+  ],
+  "observed_input_events": [
+    {
+      "name": "pointerout",
+      "start_ms": 82888.5,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 82888.5,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 82888.5,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerover",
+      "start_ms": 82888.5,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 82888.5,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseout",
+      "start_ms": 82888.5,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseover",
+      "start_ms": 82888.5,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerout",
+      "start_ms": 82937.29999998212,
+      "duration_ms": 16,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerover",
+      "start_ms": 82937.29999998212,
+      "duration_ms": 16,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 82937.29999998212,
+      "duration_ms": 16,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseout",
+      "start_ms": 82937.29999998212,
+      "duration_ms": 16,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseover",
+      "start_ms": 82937.29999998212,
+      "duration_ms": 16,
+      "interaction_id": 0
+    }
+  ],
+  "finished_at": "2026-10-26T21:33:21.398Z"
+}

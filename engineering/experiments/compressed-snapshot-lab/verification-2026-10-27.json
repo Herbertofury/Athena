@@ -1,0 +1,39 @@
+{
+  "checked_at": "2026-10-27T10:10:31.006806+00:00",
+  "rustc": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+  "environment": "Linux x86_64 shared executor; virtualized filesystem; not cold-cache",
+  "final_source_sha256": "7a974f7227c61b2f4b796b92d632bc3d6687329447bd01e4ecd9232aa305dea8",
+  "initial_source_sha256": "aef7b83cbed0f4a685928f45c7641b4098b787c0767494a22e6044966ba0cdaa",
+  "final_binary_sha256": "9d130988f2b5e0b7608df7d09b84e738559a13a36734c794860822f8874eb3fe",
+  "initial_binary_sha256": "81958498fe8617170292ea8bb20de3406fac8570978914df3bd81b4559c69f9b",
+  "lock_sha256": "969c4eee2770e82eb38aeb7c4dac6281996e76113e7be6b8b79a6b7513d73796",
+  "original_records": 6,
+  "original_bytes": 30763,
+  "replay_multiplier": 32,
+  "replay_records": 192,
+  "replay_bytes": 984416,
+  "sample_counts": [
+    28,
+    42,
+    42
+  ],
+  "full_readback_parity": true,
+  "rollback_and_integrity_checks": true,
+  "tests": {
+    "unit_functions": 3,
+    "generated_context_reuse_cases": 10000,
+    "fmt": true,
+    "clippy": true
+  },
+  "audit": {
+    "fresh_fetch": "failed: advisory git fetch IO error; no bypass or ignores",
+    "mode": "cached database with --no-fetch",
+    "database_commit": "3279c99911354c400e1d41e47c7d60e39258b147",
+    "advisories": 1378,
+    "known_vulnerabilities": 0,
+    "warnings": {},
+    "scope": "Known cached advisory matches, not complete security or fresh registry assurance"
+  },
+  "core_app_lock_unchanged": true,
+  "status": "isolated; no production schema migration or promotion"
+}

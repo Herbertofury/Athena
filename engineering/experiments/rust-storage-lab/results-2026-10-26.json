@@ -1,0 +1,443 @@
+{
+  "arch": "x86_64",
+  "journal_mode": "DELETE",
+  "limitations": [
+    "Not a comparison with any project's current implementation",
+    "Virtualized filesystem and host caches; no physical power-loss test",
+    "Reopening does not establish a cold OS cache",
+    "No memory or concurrent UI measurements",
+    "Same single transaction and exact input in both strategies; not a transaction-batching comparison"
+  ],
+  "os": "linux",
+  "rounds": 7,
+  "rows_per_transaction": 256,
+  "samples": [
+    {
+      "complete_output_equal": true,
+      "database_bytes": 159744,
+      "payload_bytes": 512,
+      "read_all_ns": 2123862,
+      "round": 0,
+      "rows": 256,
+      "strategy": "prepare_per_record",
+      "write_commit_ns": 3963792
+    },
+    {
+      "complete_output_equal": true,
+      "database_bytes": 159744,
+      "payload_bytes": 512,
+      "read_all_ns": 144158,
+      "round": 0,
+      "rows": 256,
+      "strategy": "prepare_once",
+      "write_commit_ns": 2315015
+    },
+    {
+      "complete_output_equal": true,
+      "database_bytes": 159744,
+      "payload_bytes": 512,
+      "read_all_ns": 167163,
+      "round": 1,
+      "rows": 256,
+      "strategy": "prepare_once",
+      "write_commit_ns": 2008987
+    },
+    {
+      "complete_output_equal": true,
+      "database_bytes": 159744,
+      "payload_bytes": 512,
+      "read_all_ns": 152788,
+      "round": 1,
+      "rows": 256,
+      "strategy": "prepare_per_record",
+      "write_commit_ns": 2941060
+    },
+    {
+      "complete_output_equal": true,
+      "database_bytes": 159744,
+      "payload_bytes": 512,
+      "read_all_ns": 153941,
+      "round": 2,
+      "rows": 256,
+      "strategy": "prepare_per_record",
+      "write_commit_ns": 2157988
+    },
+    {
+      "complete_output_equal": true,
+      "database_bytes": 159744,
+      "payload_bytes": 512,
+      "read_all_ns": 272927,
+      "round": 2,
+      "rows": 256,
+      "strategy": "prepare_once",
+      "write_commit_ns": 2118175
+    },
+    {
+      "complete_output_equal": true,
+      "database_bytes": 159744,
+      "payload_bytes": 512,
+      "read_all_ns": 134675,
+      "round": 3,
+      "rows": 256,
+      "strategy": "prepare_once",
+      "write_commit_ns": 2361788
+    },
+    {
+      "complete_output_equal": true,
+      "database_bytes": 159744,
+      "payload_bytes": 512,
+      "read_all_ns": 168706,
+      "round": 3,
+      "rows": 256,
+      "strategy": "prepare_per_record",
+      "write_commit_ns": 3544913
+    },
+    {
+      "complete_output_equal": true,
+      "database_bytes": 159744,
+      "payload_bytes": 512,
+      "read_all_ns": 151482,
+      "round": 4,
+      "rows": 256,
+      "strategy": "prepare_per_record",
+      "write_commit_ns": 2359387
+    },
+    {
+      "complete_output_equal": true,
+      "database_bytes": 159744,
+      "payload_bytes": 512,
+      "read_all_ns": 188480,
+      "round": 4,
+      "rows": 256,
+      "strategy": "prepare_once",
+      "write_commit_ns": 2357694
+    },
+    {
+      "complete_output_equal": true,
+      "database_bytes": 159744,
+      "payload_bytes": 512,
+      "read_all_ns": 165186,
+      "round": 5,
+      "rows": 256,
+      "strategy": "prepare_once",
+      "write_commit_ns": 2644603
+    },
+    {
+      "complete_output_equal": true,
+      "database_bytes": 159744,
+      "payload_bytes": 512,
+      "read_all_ns": 152104,
+      "round": 5,
+      "rows": 256,
+      "strategy": "prepare_per_record",
+      "write_commit_ns": 2242565
+    },
+    {
+      "complete_output_equal": true,
+      "database_bytes": 159744,
+      "payload_bytes": 512,
+      "read_all_ns": 149159,
+      "round": 6,
+      "rows": 256,
+      "strategy": "prepare_per_record",
+      "write_commit_ns": 2822794
+    },
+    {
+      "complete_output_equal": true,
+      "database_bytes": 159744,
+      "payload_bytes": 512,
+      "read_all_ns": 178861,
+      "round": 6,
+      "rows": 256,
+      "strategy": "prepare_once",
+      "write_commit_ns": 1935571
+    },
+    {
+      "complete_output_equal": true,
+      "database_bytes": 2236416,
+      "payload_bytes": 8192,
+      "read_all_ns": 1353734,
+      "round": 0,
+      "rows": 256,
+      "strategy": "prepare_per_record",
+      "write_commit_ns": 8944607
+    },
+    {
+      "complete_output_equal": true,
+      "database_bytes": 2236416,
+      "payload_bytes": 8192,
+      "read_all_ns": 1578816,
+      "round": 0,
+      "rows": 256,
+      "strategy": "prepare_once",
+      "write_commit_ns": 11226873
+    },
+    {
+      "complete_output_equal": true,
+      "database_bytes": 2236416,
+      "payload_bytes": 8192,
+      "read_all_ns": 1712024,
+      "round": 1,
+      "rows": 256,
+      "strategy": "prepare_once",
+      "write_commit_ns": 7243545
+    },
+    {
+      "complete_output_equal": true,
+      "database_bytes": 2236416,
+      "payload_bytes": 8192,
+      "read_all_ns": 1386225,
+      "round": 1,
+      "rows": 256,
+      "strategy": "prepare_per_record",
+      "write_commit_ns": 7016228
+    },
+    {
+      "complete_output_equal": true,
+      "database_bytes": 2236416,
+      "payload_bytes": 8192,
+      "read_all_ns": 2197033,
+      "round": 2,
+      "rows": 256,
+      "strategy": "prepare_per_record",
+      "write_commit_ns": 7430255
+    },
+    {
+      "complete_output_equal": true,
+      "database_bytes": 2236416,
+      "payload_bytes": 8192,
+      "read_all_ns": 1554969,
+      "round": 2,
+      "rows": 256,
+      "strategy": "prepare_once",
+      "write_commit_ns": 7557856
+    },
+    {
+      "complete_output_equal": true,
+      "database_bytes": 2236416,
+      "payload_bytes": 8192,
+      "read_all_ns": 1454929,
+      "round": 3,
+      "rows": 256,
+      "strategy": "prepare_once",
+      "write_commit_ns": 7521270
+    },
+    {
+      "complete_output_equal": true,
+      "database_bytes": 2236416,
+      "payload_bytes": 8192,
+      "read_all_ns": 3096819,
+      "round": 3,
+      "rows": 256,
+      "strategy": "prepare_per_record",
+      "write_commit_ns": 9386486
+    },
+    {
+      "complete_output_equal": true,
+      "database_bytes": 2236416,
+      "payload_bytes": 8192,
+      "read_all_ns": 1551397,
+      "round": 4,
+      "rows": 256,
+      "strategy": "prepare_per_record",
+      "write_commit_ns": 7640500
+    },
+    {
+      "complete_output_equal": true,
+      "database_bytes": 2236416,
+      "payload_bytes": 8192,
+      "read_all_ns": 1309401,
+      "round": 4,
+      "rows": 256,
+      "strategy": "prepare_once",
+      "write_commit_ns": 7177629
+    },
+    {
+      "complete_output_equal": true,
+      "database_bytes": 2236416,
+      "payload_bytes": 8192,
+      "read_all_ns": 1304191,
+      "round": 5,
+      "rows": 256,
+      "strategy": "prepare_once",
+      "write_commit_ns": 7276459
+    },
+    {
+      "complete_output_equal": true,
+      "database_bytes": 2236416,
+      "payload_bytes": 8192,
+      "read_all_ns": 1227942,
+      "round": 5,
+      "rows": 256,
+      "strategy": "prepare_per_record",
+      "write_commit_ns": 6254937
+    },
+    {
+      "complete_output_equal": true,
+      "database_bytes": 2236416,
+      "payload_bytes": 8192,
+      "read_all_ns": 1654578,
+      "round": 6,
+      "rows": 256,
+      "strategy": "prepare_per_record",
+      "write_commit_ns": 5958832
+    },
+    {
+      "complete_output_equal": true,
+      "database_bytes": 2236416,
+      "payload_bytes": 8192,
+      "read_all_ns": 1285728,
+      "round": 6,
+      "rows": 256,
+      "strategy": "prepare_once",
+      "write_commit_ns": 7224198
+    },
+    {
+      "complete_output_equal": true,
+      "database_bytes": 16916480,
+      "payload_bytes": 65536,
+      "read_all_ns": 17006497,
+      "round": 0,
+      "rows": 256,
+      "strategy": "prepare_per_record",
+      "write_commit_ns": 60933683
+    },
+    {
+      "complete_output_equal": true,
+      "database_bytes": 16916480,
+      "payload_bytes": 65536,
+      "read_all_ns": 20263733,
+      "round": 0,
+      "rows": 256,
+      "strategy": "prepare_once",
+      "write_commit_ns": 30199591
+    },
+    {
+      "complete_output_equal": true,
+      "database_bytes": 16916480,
+      "payload_bytes": 65536,
+      "read_all_ns": 17829704,
+      "round": 1,
+      "rows": 256,
+      "strategy": "prepare_once",
+      "write_commit_ns": 27226677
+    },
+    {
+      "complete_output_equal": true,
+      "database_bytes": 16916480,
+      "payload_bytes": 65536,
+      "read_all_ns": 20610042,
+      "round": 1,
+      "rows": 256,
+      "strategy": "prepare_per_record",
+      "write_commit_ns": 29952765
+    },
+    {
+      "complete_output_equal": true,
+      "database_bytes": 16916480,
+      "payload_bytes": 65536,
+      "read_all_ns": 16315217,
+      "round": 2,
+      "rows": 256,
+      "strategy": "prepare_per_record",
+      "write_commit_ns": 34469381
+    },
+    {
+      "complete_output_equal": true,
+      "database_bytes": 16916480,
+      "payload_bytes": 65536,
+      "read_all_ns": 15681417,
+      "round": 2,
+      "rows": 256,
+      "strategy": "prepare_once",
+      "write_commit_ns": 26116490
+    },
+    {
+      "complete_output_equal": true,
+      "database_bytes": 16916480,
+      "payload_bytes": 65536,
+      "read_all_ns": 17163796,
+      "round": 3,
+      "rows": 256,
+      "strategy": "prepare_once",
+      "write_commit_ns": 27681194
+    },
+    {
+      "complete_output_equal": true,
+      "database_bytes": 16916480,
+      "payload_bytes": 65536,
+      "read_all_ns": 24279248,
+      "round": 3,
+      "rows": 256,
+      "strategy": "prepare_per_record",
+      "write_commit_ns": 29328977
+    },
+    {
+      "complete_output_equal": true,
+      "database_bytes": 16916480,
+      "payload_bytes": 65536,
+      "read_all_ns": 36589641,
+      "round": 4,
+      "rows": 256,
+      "strategy": "prepare_per_record",
+      "write_commit_ns": 30970640
+    },
+    {
+      "complete_output_equal": true,
+      "database_bytes": 16916480,
+      "payload_bytes": 65536,
+      "read_all_ns": 19899909,
+      "round": 4,
+      "rows": 256,
+      "strategy": "prepare_once",
+      "write_commit_ns": 31133970
+    },
+    {
+      "complete_output_equal": true,
+      "database_bytes": 16916480,
+      "payload_bytes": 65536,
+      "read_all_ns": 20362086,
+      "round": 5,
+      "rows": 256,
+      "strategy": "prepare_once",
+      "write_commit_ns": 32521962
+    },
+    {
+      "complete_output_equal": true,
+      "database_bytes": 16916480,
+      "payload_bytes": 65536,
+      "read_all_ns": 22358060,
+      "round": 5,
+      "rows": 256,
+      "strategy": "prepare_per_record",
+      "write_commit_ns": 31373899
+    },
+    {
+      "complete_output_equal": true,
+      "database_bytes": 16916480,
+      "payload_bytes": 65536,
+      "read_all_ns": 46763248,
+      "round": 6,
+      "rows": 256,
+      "strategy": "prepare_per_record",
+      "write_commit_ns": 29236434
+    },
+    {
+      "complete_output_equal": true,
+      "database_bytes": 16916480,
+      "payload_bytes": 65536,
+      "read_all_ns": 29251996,
+      "round": 6,
+      "rows": 256,
+      "strategy": "prepare_once",
+      "write_commit_ns": 33311136
+    }
+  ],
+  "schema_version": 1,
+  "scope": "measured_local_generated_workload",
+  "sqlite_version": "3.54.1",
+  "synchronous": "FULL",
+  "harness_sha256": "b2c30e36296c3ba905c7ba1939d1df9f6796fee9b724e7d623e98886c0366cb4",
+  "rustc": "1.99.1 (58cf8f9c3 2026-10-13)",
+  "checked_at": "2026-10-26"
+}

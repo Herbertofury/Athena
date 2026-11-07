@@ -1,0 +1,99 @@
+{
+  "scope": "One retained public response replayed into 1001 generations per fresh process; no app-wide or five-real-generation memory claim",
+  "runs": [
+    {
+      "pass": 1,
+      "samples": 8,
+      "complete": true,
+      "self_observation_comparison_supported": false,
+      "lanes": {
+        "baseline": {
+          "wait4_peak_rss_kib": 7622.0
+        },
+        "addressed": {
+          "wait4_peak_rss_kib": 7624.0
+        }
+      }
+    },
+    {
+      "pass": 2,
+      "samples": 8,
+      "complete": true,
+      "self_observation_comparison_supported": true,
+      "lanes": {
+        "baseline": {
+          "wait4_peak_rss_kib": 7700.0,
+          "status_high_water_rss_bytes": 5885952.0,
+          "rollup_rss_bytes": 5885952.0,
+          "rollup_pss_bytes": 5080064.0
+        },
+        "addressed": {
+          "wait4_peak_rss_kib": 7696.0,
+          "status_high_water_rss_bytes": 4112384.0,
+          "rollup_rss_bytes": 4112384.0,
+          "rollup_pss_bytes": 3306496.0
+        }
+      }
+    },
+    {
+      "pass": 3,
+      "samples": 8,
+      "complete": true,
+      "self_observation_comparison_supported": true,
+      "lanes": {
+        "baseline": {
+          "wait4_peak_rss_kib": 11316.0,
+          "status_high_water_rss_bytes": 5877760.0,
+          "rollup_rss_bytes": 5877760.0,
+          "rollup_pss_bytes": 5071872.0
+        },
+        "addressed": {
+          "wait4_peak_rss_kib": 11312.0,
+          "status_high_water_rss_bytes": 4091904.0,
+          "rollup_rss_bytes": 4091904.0,
+          "rollup_pss_bytes": 3286016.0
+        }
+      }
+    },
+    {
+      "pass": 4,
+      "samples": 8,
+      "complete": true,
+      "self_observation_comparison_supported": true,
+      "lanes": {
+        "baseline": {
+          "wait4_peak_rss_kib": 8024.0,
+          "status_high_water_rss_bytes": 5871616.0,
+          "rollup_rss_bytes": 5871616.0,
+          "rollup_pss_bytes": 5065728.0
+        },
+        "addressed": {
+          "wait4_peak_rss_kib": 8024.0,
+          "status_high_water_rss_bytes": 4114432.0,
+          "rollup_rss_bytes": 4114432.0,
+          "rollup_pss_bytes": 3308544.0
+        }
+      }
+    },
+    {
+      "pass": 5,
+      "samples": 8,
+      "complete": true,
+      "self_observation_comparison_supported": true,
+      "lanes": {
+        "baseline": {
+          "wait4_peak_rss_kib": 7792.0,
+          "status_high_water_rss_bytes": 5869568.0,
+          "rollup_rss_bytes": 5869568.0,
+          "rollup_pss_bytes": 5063680.0
+        },
+        "addressed": {
+          "wait4_peak_rss_kib": 7790.0,
+          "status_high_water_rss_bytes": 4106240.0,
+          "rollup_rss_bytes": 4106240.0,
+          "rollup_pss_bytes": 3300352.0
+        }
+      }
+    }
+  ]
+}

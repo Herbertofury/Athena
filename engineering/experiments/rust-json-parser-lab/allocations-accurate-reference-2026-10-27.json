@@ -1,0 +1,770 @@
+{
+  "accounting_error": false,
+  "limitations": [
+    "No timing inference from this instrumented binary",
+    "Excludes stack, native allocations, allocator overhead, fragmentation and transient internal realloc copies",
+    "Retained input bytes are outside each delta; the candidate input copy is inside",
+    "Compiler optimization may remove or combine allocations; counts are observations, not correctness assumptions",
+    "Library first-use effects are retained; these are not separate cold-process samples",
+    "No application or cross-platform acceptance"
+  ],
+  "scope": "instrumented single-thread Rust allocation requests, not process peak memory",
+  "workloads": [
+    {
+      "fixture_index": 0,
+      "input_bytes": 12840,
+      "samples": [
+        {
+          "baseline": {
+            "allocation_calls": 474,
+            "held_requested_rust_bytes_above_start": 38786,
+            "peak_requested_rust_bytes_above_start": 48610,
+            "reallocation_calls": 17,
+            "total_successfully_requested_bytes": 76431
+          },
+          "candidate_with_copy": {
+            "allocation_calls": 479,
+            "held_requested_rust_bytes_above_start": 38786,
+            "peak_requested_rust_bytes_above_start": 92076,
+            "reallocation_calls": 14,
+            "total_successfully_requested_bytes": 151966
+          },
+          "full_value_equal": true,
+          "order": "baseline,candidate",
+          "post_drop_requested_live_delta": 0,
+          "round": 0
+        },
+        {
+          "baseline": {
+            "allocation_calls": 474,
+            "held_requested_rust_bytes_above_start": 38786,
+            "peak_requested_rust_bytes_above_start": 48610,
+            "reallocation_calls": 17,
+            "total_successfully_requested_bytes": 76431
+          },
+          "candidate_with_copy": {
+            "allocation_calls": 479,
+            "held_requested_rust_bytes_above_start": 38786,
+            "peak_requested_rust_bytes_above_start": 92076,
+            "reallocation_calls": 14,
+            "total_successfully_requested_bytes": 151966
+          },
+          "full_value_equal": true,
+          "order": "candidate,baseline",
+          "post_drop_requested_live_delta": 0,
+          "round": 1
+        },
+        {
+          "baseline": {
+            "allocation_calls": 474,
+            "held_requested_rust_bytes_above_start": 38786,
+            "peak_requested_rust_bytes_above_start": 48610,
+            "reallocation_calls": 17,
+            "total_successfully_requested_bytes": 76431
+          },
+          "candidate_with_copy": {
+            "allocation_calls": 479,
+            "held_requested_rust_bytes_above_start": 38786,
+            "peak_requested_rust_bytes_above_start": 92076,
+            "reallocation_calls": 14,
+            "total_successfully_requested_bytes": 151966
+          },
+          "full_value_equal": true,
+          "order": "baseline,candidate",
+          "post_drop_requested_live_delta": 0,
+          "round": 2
+        },
+        {
+          "baseline": {
+            "allocation_calls": 474,
+            "held_requested_rust_bytes_above_start": 38786,
+            "peak_requested_rust_bytes_above_start": 48610,
+            "reallocation_calls": 17,
+            "total_successfully_requested_bytes": 76431
+          },
+          "candidate_with_copy": {
+            "allocation_calls": 479,
+            "held_requested_rust_bytes_above_start": 38786,
+            "peak_requested_rust_bytes_above_start": 92076,
+            "reallocation_calls": 14,
+            "total_successfully_requested_bytes": 151966
+          },
+          "full_value_equal": true,
+          "order": "candidate,baseline",
+          "post_drop_requested_live_delta": 0,
+          "round": 3
+        },
+        {
+          "baseline": {
+            "allocation_calls": 474,
+            "held_requested_rust_bytes_above_start": 38786,
+            "peak_requested_rust_bytes_above_start": 48610,
+            "reallocation_calls": 17,
+            "total_successfully_requested_bytes": 76431
+          },
+          "candidate_with_copy": {
+            "allocation_calls": 479,
+            "held_requested_rust_bytes_above_start": 38786,
+            "peak_requested_rust_bytes_above_start": 92076,
+            "reallocation_calls": 14,
+            "total_successfully_requested_bytes": 151966
+          },
+          "full_value_equal": true,
+          "order": "baseline,candidate",
+          "post_drop_requested_live_delta": 0,
+          "round": 4
+        },
+        {
+          "baseline": {
+            "allocation_calls": 474,
+            "held_requested_rust_bytes_above_start": 38786,
+            "peak_requested_rust_bytes_above_start": 48610,
+            "reallocation_calls": 17,
+            "total_successfully_requested_bytes": 76431
+          },
+          "candidate_with_copy": {
+            "allocation_calls": 479,
+            "held_requested_rust_bytes_above_start": 38786,
+            "peak_requested_rust_bytes_above_start": 92076,
+            "reallocation_calls": 14,
+            "total_successfully_requested_bytes": 151966
+          },
+          "full_value_equal": true,
+          "order": "candidate,baseline",
+          "post_drop_requested_live_delta": 0,
+          "round": 5
+        }
+      ]
+    },
+    {
+      "fixture_index": 1,
+      "input_bytes": 6200,
+      "samples": [
+        {
+          "baseline": {
+            "allocation_calls": 307,
+            "held_requested_rust_bytes_above_start": 20466,
+            "peak_requested_rust_bytes_above_start": 23842,
+            "reallocation_calls": 14,
+            "total_successfully_requested_bytes": 36991
+          },
+          "candidate_with_copy": {
+            "allocation_calls": 312,
+            "held_requested_rust_bytes_above_start": 20466,
+            "peak_requested_rust_bytes_above_start": 51892,
+            "reallocation_calls": 12,
+            "total_successfully_requested_bytes": 83686
+          },
+          "full_value_equal": true,
+          "order": "baseline,candidate",
+          "post_drop_requested_live_delta": 0,
+          "round": 0
+        },
+        {
+          "baseline": {
+            "allocation_calls": 307,
+            "held_requested_rust_bytes_above_start": 20466,
+            "peak_requested_rust_bytes_above_start": 23842,
+            "reallocation_calls": 14,
+            "total_successfully_requested_bytes": 36991
+          },
+          "candidate_with_copy": {
+            "allocation_calls": 312,
+            "held_requested_rust_bytes_above_start": 20466,
+            "peak_requested_rust_bytes_above_start": 51892,
+            "reallocation_calls": 12,
+            "total_successfully_requested_bytes": 83686
+          },
+          "full_value_equal": true,
+          "order": "candidate,baseline",
+          "post_drop_requested_live_delta": 0,
+          "round": 1
+        },
+        {
+          "baseline": {
+            "allocation_calls": 307,
+            "held_requested_rust_bytes_above_start": 20466,
+            "peak_requested_rust_bytes_above_start": 23842,
+            "reallocation_calls": 14,
+            "total_successfully_requested_bytes": 36991
+          },
+          "candidate_with_copy": {
+            "allocation_calls": 312,
+            "held_requested_rust_bytes_above_start": 20466,
+            "peak_requested_rust_bytes_above_start": 51892,
+            "reallocation_calls": 12,
+            "total_successfully_requested_bytes": 83686
+          },
+          "full_value_equal": true,
+          "order": "baseline,candidate",
+          "post_drop_requested_live_delta": 0,
+          "round": 2
+        },
+        {
+          "baseline": {
+            "allocation_calls": 307,
+            "held_requested_rust_bytes_above_start": 20466,
+            "peak_requested_rust_bytes_above_start": 23842,
+            "reallocation_calls": 14,
+            "total_successfully_requested_bytes": 36991
+          },
+          "candidate_with_copy": {
+            "allocation_calls": 312,
+            "held_requested_rust_bytes_above_start": 20466,
+            "peak_requested_rust_bytes_above_start": 51892,
+            "reallocation_calls": 12,
+            "total_successfully_requested_bytes": 83686
+          },
+          "full_value_equal": true,
+          "order": "candidate,baseline",
+          "post_drop_requested_live_delta": 0,
+          "round": 3
+        },
+        {
+          "baseline": {
+            "allocation_calls": 307,
+            "held_requested_rust_bytes_above_start": 20466,
+            "peak_requested_rust_bytes_above_start": 23842,
+            "reallocation_calls": 14,
+            "total_successfully_requested_bytes": 36991
+          },
+          "candidate_with_copy": {
+            "allocation_calls": 312,
+            "held_requested_rust_bytes_above_start": 20466,
+            "peak_requested_rust_bytes_above_start": 51892,
+            "reallocation_calls": 12,
+            "total_successfully_requested_bytes": 83686
+          },
+          "full_value_equal": true,
+          "order": "baseline,candidate",
+          "post_drop_requested_live_delta": 0,
+          "round": 4
+        },
+        {
+          "baseline": {
+            "allocation_calls": 307,
+            "held_requested_rust_bytes_above_start": 20466,
+            "peak_requested_rust_bytes_above_start": 23842,
+            "reallocation_calls": 14,
+            "total_successfully_requested_bytes": 36991
+          },
+          "candidate_with_copy": {
+            "allocation_calls": 312,
+            "held_requested_rust_bytes_above_start": 20466,
+            "peak_requested_rust_bytes_above_start": 51892,
+            "reallocation_calls": 12,
+            "total_successfully_requested_bytes": 83686
+          },
+          "full_value_equal": true,
+          "order": "candidate,baseline",
+          "post_drop_requested_live_delta": 0,
+          "round": 5
+        }
+      ]
+    },
+    {
+      "fixture_index": 2,
+      "input_bytes": 7267,
+      "samples": [
+        {
+          "baseline": {
+            "allocation_calls": 427,
+            "held_requested_rust_bytes_above_start": 24464,
+            "peak_requested_rust_bytes_above_start": 27056,
+            "reallocation_calls": 14,
+            "total_successfully_requested_bytes": 39470
+          },
+          "candidate_with_copy": {
+            "allocation_calls": 432,
+            "held_requested_rust_bytes_above_start": 24464,
+            "peak_requested_rust_bytes_above_start": 71497,
+            "reallocation_calls": 13,
+            "total_successfully_requested_bytes": 111145
+          },
+          "full_value_equal": true,
+          "order": "baseline,candidate",
+          "post_drop_requested_live_delta": 0,
+          "round": 0
+        },
+        {
+          "baseline": {
+            "allocation_calls": 427,
+            "held_requested_rust_bytes_above_start": 24464,
+            "peak_requested_rust_bytes_above_start": 27056,
+            "reallocation_calls": 14,
+            "total_successfully_requested_bytes": 39470
+          },
+          "candidate_with_copy": {
+            "allocation_calls": 432,
+            "held_requested_rust_bytes_above_start": 24464,
+            "peak_requested_rust_bytes_above_start": 71497,
+            "reallocation_calls": 13,
+            "total_successfully_requested_bytes": 111145
+          },
+          "full_value_equal": true,
+          "order": "candidate,baseline",
+          "post_drop_requested_live_delta": 0,
+          "round": 1
+        },
+        {
+          "baseline": {
+            "allocation_calls": 427,
+            "held_requested_rust_bytes_above_start": 24464,
+            "peak_requested_rust_bytes_above_start": 27056,
+            "reallocation_calls": 14,
+            "total_successfully_requested_bytes": 39470
+          },
+          "candidate_with_copy": {
+            "allocation_calls": 432,
+            "held_requested_rust_bytes_above_start": 24464,
+            "peak_requested_rust_bytes_above_start": 71497,
+            "reallocation_calls": 13,
+            "total_successfully_requested_bytes": 111145
+          },
+          "full_value_equal": true,
+          "order": "baseline,candidate",
+          "post_drop_requested_live_delta": 0,
+          "round": 2
+        },
+        {
+          "baseline": {
+            "allocation_calls": 427,
+            "held_requested_rust_bytes_above_start": 24464,
+            "peak_requested_rust_bytes_above_start": 27056,
+            "reallocation_calls": 14,
+            "total_successfully_requested_bytes": 39470
+          },
+          "candidate_with_copy": {
+            "allocation_calls": 432,
+            "held_requested_rust_bytes_above_start": 24464,
+            "peak_requested_rust_bytes_above_start": 71497,
+            "reallocation_calls": 13,
+            "total_successfully_requested_bytes": 111145
+          },
+          "full_value_equal": true,
+          "order": "candidate,baseline",
+          "post_drop_requested_live_delta": 0,
+          "round": 3
+        },
+        {
+          "baseline": {
+            "allocation_calls": 427,
+            "held_requested_rust_bytes_above_start": 24464,
+            "peak_requested_rust_bytes_above_start": 27056,
+            "reallocation_calls": 14,
+            "total_successfully_requested_bytes": 39470
+          },
+          "candidate_with_copy": {
+            "allocation_calls": 432,
+            "held_requested_rust_bytes_above_start": 24464,
+            "peak_requested_rust_bytes_above_start": 71497,
+            "reallocation_calls": 13,
+            "total_successfully_requested_bytes": 111145
+          },
+          "full_value_equal": true,
+          "order": "baseline,candidate",
+          "post_drop_requested_live_delta": 0,
+          "round": 4
+        },
+        {
+          "baseline": {
+            "allocation_calls": 427,
+            "held_requested_rust_bytes_above_start": 24464,
+            "peak_requested_rust_bytes_above_start": 27056,
+            "reallocation_calls": 14,
+            "total_successfully_requested_bytes": 39470
+          },
+          "candidate_with_copy": {
+            "allocation_calls": 432,
+            "held_requested_rust_bytes_above_start": 24464,
+            "peak_requested_rust_bytes_above_start": 71497,
+            "reallocation_calls": 13,
+            "total_successfully_requested_bytes": 111145
+          },
+          "full_value_equal": true,
+          "order": "candidate,baseline",
+          "post_drop_requested_live_delta": 0,
+          "round": 5
+        }
+      ]
+    },
+    {
+      "fixture_index": 3,
+      "input_bytes": 962,
+      "samples": [
+        {
+          "baseline": {
+            "allocation_calls": 61,
+            "held_requested_rust_bytes_above_start": 5148,
+            "peak_requested_rust_bytes_above_start": 5148,
+            "reallocation_calls": 0,
+            "total_successfully_requested_bytes": 5148
+          },
+          "candidate_with_copy": {
+            "allocation_calls": 67,
+            "held_requested_rust_bytes_above_start": 5148,
+            "peak_requested_rust_bytes_above_start": 10326,
+            "reallocation_calls": 3,
+            "total_successfully_requested_bytes": 16150
+          },
+          "full_value_equal": true,
+          "order": "baseline,candidate",
+          "post_drop_requested_live_delta": 0,
+          "round": 0
+        },
+        {
+          "baseline": {
+            "allocation_calls": 61,
+            "held_requested_rust_bytes_above_start": 5148,
+            "peak_requested_rust_bytes_above_start": 5148,
+            "reallocation_calls": 0,
+            "total_successfully_requested_bytes": 5148
+          },
+          "candidate_with_copy": {
+            "allocation_calls": 67,
+            "held_requested_rust_bytes_above_start": 5148,
+            "peak_requested_rust_bytes_above_start": 10326,
+            "reallocation_calls": 3,
+            "total_successfully_requested_bytes": 16150
+          },
+          "full_value_equal": true,
+          "order": "candidate,baseline",
+          "post_drop_requested_live_delta": 0,
+          "round": 1
+        },
+        {
+          "baseline": {
+            "allocation_calls": 61,
+            "held_requested_rust_bytes_above_start": 5148,
+            "peak_requested_rust_bytes_above_start": 5148,
+            "reallocation_calls": 0,
+            "total_successfully_requested_bytes": 5148
+          },
+          "candidate_with_copy": {
+            "allocation_calls": 67,
+            "held_requested_rust_bytes_above_start": 5148,
+            "peak_requested_rust_bytes_above_start": 10326,
+            "reallocation_calls": 3,
+            "total_successfully_requested_bytes": 16150
+          },
+          "full_value_equal": true,
+          "order": "baseline,candidate",
+          "post_drop_requested_live_delta": 0,
+          "round": 2
+        },
+        {
+          "baseline": {
+            "allocation_calls": 61,
+            "held_requested_rust_bytes_above_start": 5148,
+            "peak_requested_rust_bytes_above_start": 5148,
+            "reallocation_calls": 0,
+            "total_successfully_requested_bytes": 5148
+          },
+          "candidate_with_copy": {
+            "allocation_calls": 67,
+            "held_requested_rust_bytes_above_start": 5148,
+            "peak_requested_rust_bytes_above_start": 10326,
+            "reallocation_calls": 3,
+            "total_successfully_requested_bytes": 16150
+          },
+          "full_value_equal": true,
+          "order": "candidate,baseline",
+          "post_drop_requested_live_delta": 0,
+          "round": 3
+        },
+        {
+          "baseline": {
+            "allocation_calls": 61,
+            "held_requested_rust_bytes_above_start": 5148,
+            "peak_requested_rust_bytes_above_start": 5148,
+            "reallocation_calls": 0,
+            "total_successfully_requested_bytes": 5148
+          },
+          "candidate_with_copy": {
+            "allocation_calls": 67,
+            "held_requested_rust_bytes_above_start": 5148,
+            "peak_requested_rust_bytes_above_start": 10326,
+            "reallocation_calls": 3,
+            "total_successfully_requested_bytes": 16150
+          },
+          "full_value_equal": true,
+          "order": "baseline,candidate",
+          "post_drop_requested_live_delta": 0,
+          "round": 4
+        },
+        {
+          "baseline": {
+            "allocation_calls": 61,
+            "held_requested_rust_bytes_above_start": 5148,
+            "peak_requested_rust_bytes_above_start": 5148,
+            "reallocation_calls": 0,
+            "total_successfully_requested_bytes": 5148
+          },
+          "candidate_with_copy": {
+            "allocation_calls": 67,
+            "held_requested_rust_bytes_above_start": 5148,
+            "peak_requested_rust_bytes_above_start": 10326,
+            "reallocation_calls": 3,
+            "total_successfully_requested_bytes": 16150
+          },
+          "full_value_equal": true,
+          "order": "candidate,baseline",
+          "post_drop_requested_live_delta": 0,
+          "round": 5
+        }
+      ]
+    },
+    {
+      "fixture_index": 4,
+      "input_bytes": 1894,
+      "samples": [
+        {
+          "baseline": {
+            "allocation_calls": 53,
+            "held_requested_rust_bytes_above_start": 5338,
+            "peak_requested_rust_bytes_above_start": 6554,
+            "reallocation_calls": 4,
+            "total_successfully_requested_bytes": 7694
+          },
+          "candidate_with_copy": {
+            "allocation_calls": 58,
+            "held_requested_rust_bytes_above_start": 5338,
+            "peak_requested_rust_bytes_above_start": 12290,
+            "reallocation_calls": 2,
+            "total_successfully_requested_bytes": 18020
+          },
+          "full_value_equal": true,
+          "order": "baseline,candidate",
+          "post_drop_requested_live_delta": 0,
+          "round": 0
+        },
+        {
+          "baseline": {
+            "allocation_calls": 53,
+            "held_requested_rust_bytes_above_start": 5338,
+            "peak_requested_rust_bytes_above_start": 6554,
+            "reallocation_calls": 4,
+            "total_successfully_requested_bytes": 7694
+          },
+          "candidate_with_copy": {
+            "allocation_calls": 58,
+            "held_requested_rust_bytes_above_start": 5338,
+            "peak_requested_rust_bytes_above_start": 12290,
+            "reallocation_calls": 2,
+            "total_successfully_requested_bytes": 18020
+          },
+          "full_value_equal": true,
+          "order": "candidate,baseline",
+          "post_drop_requested_live_delta": 0,
+          "round": 1
+        },
+        {
+          "baseline": {
+            "allocation_calls": 53,
+            "held_requested_rust_bytes_above_start": 5338,
+            "peak_requested_rust_bytes_above_start": 6554,
+            "reallocation_calls": 4,
+            "total_successfully_requested_bytes": 7694
+          },
+          "candidate_with_copy": {
+            "allocation_calls": 58,
+            "held_requested_rust_bytes_above_start": 5338,
+            "peak_requested_rust_bytes_above_start": 12290,
+            "reallocation_calls": 2,
+            "total_successfully_requested_bytes": 18020
+          },
+          "full_value_equal": true,
+          "order": "baseline,candidate",
+          "post_drop_requested_live_delta": 0,
+          "round": 2
+        },
+        {
+          "baseline": {
+            "allocation_calls": 53,
+            "held_requested_rust_bytes_above_start": 5338,
+            "peak_requested_rust_bytes_above_start": 6554,
+            "reallocation_calls": 4,
+            "total_successfully_requested_bytes": 7694
+          },
+          "candidate_with_copy": {
+            "allocation_calls": 58,
+            "held_requested_rust_bytes_above_start": 5338,
+            "peak_requested_rust_bytes_above_start": 12290,
+            "reallocation_calls": 2,
+            "total_successfully_requested_bytes": 18020
+          },
+          "full_value_equal": true,
+          "order": "candidate,baseline",
+          "post_drop_requested_live_delta": 0,
+          "round": 3
+        },
+        {
+          "baseline": {
+            "allocation_calls": 53,
+            "held_requested_rust_bytes_above_start": 5338,
+            "peak_requested_rust_bytes_above_start": 6554,
+            "reallocation_calls": 4,
+            "total_successfully_requested_bytes": 7694
+          },
+          "candidate_with_copy": {
+            "allocation_calls": 58,
+            "held_requested_rust_bytes_above_start": 5338,
+            "peak_requested_rust_bytes_above_start": 12290,
+            "reallocation_calls": 2,
+            "total_successfully_requested_bytes": 18020
+          },
+          "full_value_equal": true,
+          "order": "baseline,candidate",
+          "post_drop_requested_live_delta": 0,
+          "round": 4
+        },
+        {
+          "baseline": {
+            "allocation_calls": 53,
+            "held_requested_rust_bytes_above_start": 5338,
+            "peak_requested_rust_bytes_above_start": 6554,
+            "reallocation_calls": 4,
+            "total_successfully_requested_bytes": 7694
+          },
+          "candidate_with_copy": {
+            "allocation_calls": 58,
+            "held_requested_rust_bytes_above_start": 5338,
+            "peak_requested_rust_bytes_above_start": 12290,
+            "reallocation_calls": 2,
+            "total_successfully_requested_bytes": 18020
+          },
+          "full_value_equal": true,
+          "order": "candidate,baseline",
+          "post_drop_requested_live_delta": 0,
+          "round": 5
+        }
+      ]
+    },
+    {
+      "fixture_index": 5,
+      "input_bytes": 1600,
+      "samples": [
+        {
+          "baseline": {
+            "allocation_calls": 53,
+            "held_requested_rust_bytes_above_start": 5046,
+            "peak_requested_rust_bytes_above_start": 5924,
+            "reallocation_calls": 3,
+            "total_successfully_requested_bytes": 6534
+          },
+          "candidate_with_copy": {
+            "allocation_calls": 58,
+            "held_requested_rust_bytes_above_start": 5046,
+            "peak_requested_rust_bytes_above_start": 11264,
+            "reallocation_calls": 2,
+            "total_successfully_requested_bytes": 16646
+          },
+          "full_value_equal": true,
+          "order": "baseline,candidate",
+          "post_drop_requested_live_delta": 0,
+          "round": 0
+        },
+        {
+          "baseline": {
+            "allocation_calls": 53,
+            "held_requested_rust_bytes_above_start": 5046,
+            "peak_requested_rust_bytes_above_start": 5924,
+            "reallocation_calls": 3,
+            "total_successfully_requested_bytes": 6534
+          },
+          "candidate_with_copy": {
+            "allocation_calls": 58,
+            "held_requested_rust_bytes_above_start": 5046,
+            "peak_requested_rust_bytes_above_start": 11264,
+            "reallocation_calls": 2,
+            "total_successfully_requested_bytes": 16646
+          },
+          "full_value_equal": true,
+          "order": "candidate,baseline",
+          "post_drop_requested_live_delta": 0,
+          "round": 1
+        },
+        {
+          "baseline": {
+            "allocation_calls": 53,
+            "held_requested_rust_bytes_above_start": 5046,
+            "peak_requested_rust_bytes_above_start": 5924,
+            "reallocation_calls": 3,
+            "total_successfully_requested_bytes": 6534
+          },
+          "candidate_with_copy": {
+            "allocation_calls": 58,
+            "held_requested_rust_bytes_above_start": 5046,
+            "peak_requested_rust_bytes_above_start": 11264,
+            "reallocation_calls": 2,
+            "total_successfully_requested_bytes": 16646
+          },
+          "full_value_equal": true,
+          "order": "baseline,candidate",
+          "post_drop_requested_live_delta": 0,
+          "round": 2
+        },
+        {
+          "baseline": {
+            "allocation_calls": 53,
+            "held_requested_rust_bytes_above_start": 5046,
+            "peak_requested_rust_bytes_above_start": 5924,
+            "reallocation_calls": 3,
+            "total_successfully_requested_bytes": 6534
+          },
+          "candidate_with_copy": {
+            "allocation_calls": 58,
+            "held_requested_rust_bytes_above_start": 5046,
+            "peak_requested_rust_bytes_above_start": 11264,
+            "reallocation_calls": 2,
+            "total_successfully_requested_bytes": 16646
+          },
+          "full_value_equal": true,
+          "order": "candidate,baseline",
+          "post_drop_requested_live_delta": 0,
+          "round": 3
+        },
+        {
+          "baseline": {
+            "allocation_calls": 53,
+            "held_requested_rust_bytes_above_start": 5046,
+            "peak_requested_rust_bytes_above_start": 5924,
+            "reallocation_calls": 3,
+            "total_successfully_requested_bytes": 6534
+          },
+          "candidate_with_copy": {
+            "allocation_calls": 58,
+            "held_requested_rust_bytes_above_start": 5046,
+            "peak_requested_rust_bytes_above_start": 11264,
+            "reallocation_calls": 2,
+            "total_successfully_requested_bytes": 16646
+          },
+          "full_value_equal": true,
+          "order": "baseline,candidate",
+          "post_drop_requested_live_delta": 0,
+          "round": 4
+        },
+        {
+          "baseline": {
+            "allocation_calls": 53,
+            "held_requested_rust_bytes_above_start": 5046,
+            "peak_requested_rust_bytes_above_start": 5924,
+            "reallocation_calls": 3,
+            "total_successfully_requested_bytes": 6534
+          },
+          "candidate_with_copy": {
+            "allocation_calls": 58,
+            "held_requested_rust_bytes_above_start": 5046,
+            "peak_requested_rust_bytes_above_start": 11264,
+            "reallocation_calls": 2,
+            "total_successfully_requested_bytes": 16646
+          },
+          "full_value_equal": true,
+          "order": "candidate,baseline",
+          "post_drop_requested_live_delta": 0,
+          "round": 5
+        }
+      ]
+    }
+  ]
+}

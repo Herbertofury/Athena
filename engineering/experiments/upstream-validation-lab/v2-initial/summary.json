@@ -1,0 +1,119 @@
+{
+  "checked_at": "2026-10-27T12:50:01.809921+00:00",
+  "scope": "Actual parser component; real and generated records explicitly separated; no network/UI/durable-write speed claim",
+  "environment": {
+    "platform": "Linux-6.18.55-x86_64-with-glibc2.41",
+    "cpu_count": 9,
+    "cpu_affinity_count": 9
+  },
+  "timings": [
+    {
+      "case": "hls",
+      "kind": "real_public_record",
+      "repeat": 0,
+      "bytes": 4670,
+      "baseline_median_ns": 23018.465,
+      "candidate_median_ns": 8377.895,
+      "ratio_of_medians": 2.7475236918104127,
+      "candidate_pair_wins": 20,
+      "pairs": 20,
+      "baseline_sample_max_ns": 42881.83,
+      "candidate_sample_max_ns": 15386.64
+    },
+    {
+      "case": "rustsec",
+      "kind": "real_public_record",
+      "repeat": 0,
+      "bytes": 3155,
+      "baseline_median_ns": 19278.8,
+      "candidate_median_ns": 6524.719999999999,
+      "ratio_of_medians": 2.9547321570887335,
+      "candidate_pair_wins": 20,
+      "pairs": 20,
+      "baseline_sample_max_ns": 23239.16,
+      "candidate_sample_max_ns": 10207.1
+    },
+    {
+      "case": "serde-json",
+      "kind": "real_public_record",
+      "repeat": 0,
+      "bytes": 1976,
+      "baseline_median_ns": 12856.525,
+      "candidate_median_ns": 4564.82,
+      "ratio_of_medians": 2.8164363545550537,
+      "candidate_pair_wins": 17,
+      "pairs": 20,
+      "baseline_sample_max_ns": 84789.53,
+      "candidate_sample_max_ns": 100719.75
+    },
+    {
+      "case": "generated-hls-128k-whitespace",
+      "kind": "generated_augmentation",
+      "repeat": 0,
+      "bytes": 136966,
+      "baseline_median_ns": 110695.01000000001,
+      "candidate_median_ns": 82794.47,
+      "ratio_of_medians": 1.3369855498803243,
+      "candidate_pair_wins": 15,
+      "pairs": 20,
+      "baseline_sample_max_ns": 176925.27,
+      "candidate_sample_max_ns": 143232.32
+    },
+    {
+      "case": "hls",
+      "kind": "real_public_record",
+      "repeat": 1,
+      "bytes": 4670,
+      "baseline_median_ns": 33255.925,
+      "candidate_median_ns": 10342.3,
+      "ratio_of_medians": 3.2155250766270562,
+      "candidate_pair_wins": 20,
+      "pairs": 20,
+      "baseline_sample_max_ns": 232934.11,
+      "candidate_sample_max_ns": 125302.78
+    },
+    {
+      "case": "rustsec",
+      "kind": "real_public_record",
+      "repeat": 1,
+      "bytes": 3155,
+      "baseline_median_ns": 17518.78,
+      "candidate_median_ns": 6289.795,
+      "ratio_of_medians": 2.7852704261426644,
+      "candidate_pair_wins": 20,
+      "pairs": 20,
+      "baseline_sample_max_ns": 32184.56,
+      "candidate_sample_max_ns": 30748.6
+    },
+    {
+      "case": "serde-json",
+      "kind": "real_public_record",
+      "repeat": 1,
+      "bytes": 1976,
+      "baseline_median_ns": 10669.465,
+      "candidate_median_ns": 4284.715,
+      "ratio_of_medians": 2.490122446883865,
+      "candidate_pair_wins": 20,
+      "pairs": 20,
+      "baseline_sample_max_ns": 57765.59,
+      "candidate_sample_max_ns": 19119.89
+    },
+    {
+      "case": "generated-hls-128k-whitespace",
+      "kind": "generated_augmentation",
+      "repeat": 1,
+      "bytes": 136966,
+      "baseline_median_ns": 120242.145,
+      "candidate_median_ns": 92514.235,
+      "ratio_of_medians": 1.2997150654707355,
+      "candidate_pair_wins": 14,
+      "pairs": 20,
+      "baseline_sample_max_ns": 243047.47,
+      "candidate_sample_max_ns": 183398.58
+    }
+  ],
+  "binaries": {
+    "upstream_validation_lab": "982d004d63f4ecb7057f377278c28e5af7e46291522aa7b7ec3cd4e4470ba5c9",
+    "upstream_validation_allocations": "a4b38bd40257ab9c22a32b9f35db8ee3b793a3141f4a4c3d5ada7f40fda679fd"
+  }
+}

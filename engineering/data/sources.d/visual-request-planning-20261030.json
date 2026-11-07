@@ -1,0 +1,46 @@
+[
+  {
+    "id": "WEBVISE30",
+    "title": "WebViSE visual skill retrieval paper",
+    "url": "https://arxiv.org/html/2610.33929v1",
+    "observed_version": "arXiv2610.33929v1 submitted2026-10-24",
+    "topic": "candidate-evaluation",
+    "note": "Functional regressions, partial-credit metric and human-evaluation limits retained.",
+    "checked_at": "2026-10-30",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "WEBVISESRC30",
+    "title": "WebViSE paper-linked source checkpoint",
+    "url": "https://github.com/YifeiSun-0710/WebViSE/tree/4352970abc3afee5c1a775a876c65c7d2aa45b30",
+    "observed_version": "4352970abc3afee5c1a775a876c65c7d2aa45b30",
+    "topic": "candidate-evaluation",
+    "note": "Source structure and README reviewed; no detected root license, reuse terms unresolved; no execution.",
+    "checked_at": "2026-10-30",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "WARP30",
+    "title": "WaRP request planning paper",
+    "url": "https://arxiv.org/html/2610.29689v1",
+    "observed_version": "arXiv2610.29689v1 submitted2026-10-21",
+    "topic": "candidate-evaluation",
+    "note": "Remote ANN range-planning results; overfetch and cross-region cost tradeoff, not local SQLite evidence.",
+    "checked_at": "2026-10-30",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "WARPSRC30",
+    "title": "WaRP source checkpoint",
+    "url": "https://github.com/wrp-wrp/WaRP/tree/9850c5c1d67a0439ca1bb3e9fc011c7502ce15ff",
+    "observed_version": "9850c5c1d67a0439ca1bb3e9fc011c7502ce15ff",
+    "topic": "candidate-evaluation",
+    "note": "Reachability and checkpoint only; no executable, license-compatibility or benchmark acceptance.",
+    "checked_at": "2026-10-30",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  }
+]

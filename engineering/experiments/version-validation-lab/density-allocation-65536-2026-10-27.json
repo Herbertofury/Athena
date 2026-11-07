@@ -1,0 +1,128 @@
+{
+  "accounting_error": false,
+  "canonical_id": "g6ju16VJ",
+  "input_bytes": 67459,
+  "limits": [
+    "No time measurements from instrumented code",
+    "Not RSS, native allocator usage, stack or physical peak",
+    "Original input retained outside each delta; output raw JSON is retained identically",
+    "Default application parser is unchanged"
+  ],
+  "samples": [
+    {
+      "baseline": {
+        "allocation_calls": 62,
+        "held_requested_rust_bytes_above_start": 67475,
+        "peak_requested_rust_bytes_above_start": 138396,
+        "reallocation_calls": 4,
+        "total_successfully_requested_bytes": 140760
+      },
+      "candidate": {
+        "allocation_calls": 13,
+        "held_requested_rust_bytes_above_start": 67475,
+        "peak_requested_rust_bytes_above_start": 68675,
+        "reallocation_calls": 4,
+        "total_successfully_requested_bytes": 70237
+      },
+      "full_payload_and_binding_equal": true,
+      "post_drop_requested_live_delta": 0,
+      "round": 0
+    },
+    {
+      "baseline": {
+        "allocation_calls": 62,
+        "held_requested_rust_bytes_above_start": 67475,
+        "peak_requested_rust_bytes_above_start": 138396,
+        "reallocation_calls": 4,
+        "total_successfully_requested_bytes": 140760
+      },
+      "candidate": {
+        "allocation_calls": 13,
+        "held_requested_rust_bytes_above_start": 67475,
+        "peak_requested_rust_bytes_above_start": 68675,
+        "reallocation_calls": 4,
+        "total_successfully_requested_bytes": 70237
+      },
+      "full_payload_and_binding_equal": true,
+      "post_drop_requested_live_delta": 0,
+      "round": 1
+    },
+    {
+      "baseline": {
+        "allocation_calls": 62,
+        "held_requested_rust_bytes_above_start": 67475,
+        "peak_requested_rust_bytes_above_start": 138396,
+        "reallocation_calls": 4,
+        "total_successfully_requested_bytes": 140760
+      },
+      "candidate": {
+        "allocation_calls": 13,
+        "held_requested_rust_bytes_above_start": 67475,
+        "peak_requested_rust_bytes_above_start": 68675,
+        "reallocation_calls": 4,
+        "total_successfully_requested_bytes": 70237
+      },
+      "full_payload_and_binding_equal": true,
+      "post_drop_requested_live_delta": 0,
+      "round": 2
+    },
+    {
+      "baseline": {
+        "allocation_calls": 62,
+        "held_requested_rust_bytes_above_start": 67475,
+        "peak_requested_rust_bytes_above_start": 138396,
+        "reallocation_calls": 4,
+        "total_successfully_requested_bytes": 140760
+      },
+      "candidate": {
+        "allocation_calls": 13,
+        "held_requested_rust_bytes_above_start": 67475,
+        "peak_requested_rust_bytes_above_start": 68675,
+        "reallocation_calls": 4,
+        "total_successfully_requested_bytes": 70237
+      },
+      "full_payload_and_binding_equal": true,
+      "post_drop_requested_live_delta": 0,
+      "round": 3
+    },
+    {
+      "baseline": {
+        "allocation_calls": 62,
+        "held_requested_rust_bytes_above_start": 67475,
+        "peak_requested_rust_bytes_above_start": 138396,
+        "reallocation_calls": 4,
+        "total_successfully_requested_bytes": 140760
+      },
+      "candidate": {
+        "allocation_calls": 13,
+        "held_requested_rust_bytes_above_start": 67475,
+        "peak_requested_rust_bytes_above_start": 68675,
+        "reallocation_calls": 4,
+        "total_successfully_requested_bytes": 70237
+      },
+      "full_payload_and_binding_equal": true,
+      "post_drop_requested_live_delta": 0,
+      "round": 4
+    },
+    {
+      "baseline": {
+        "allocation_calls": 62,
+        "held_requested_rust_bytes_above_start": 67475,
+        "peak_requested_rust_bytes_above_start": 138396,
+        "reallocation_calls": 4,
+        "total_successfully_requested_bytes": 140760
+      },
+      "candidate": {
+        "allocation_calls": 13,
+        "held_requested_rust_bytes_above_start": 67475,
+        "peak_requested_rust_bytes_above_start": 68675,
+        "reallocation_calls": 4,
+        "total_successfully_requested_bytes": 70237
+      },
+      "full_payload_and_binding_equal": true,
+      "post_drop_requested_live_delta": 0,
+      "round": 5
+    }
+  ],
+  "scope": "actual Atlas version-parser component; requested Rust allocation counters only"
+}

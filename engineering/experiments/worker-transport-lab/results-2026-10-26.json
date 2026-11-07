@@ -1,0 +1,545 @@
+{
+  "schema": 1,
+  "date": "2026-10-26",
+  "evidence": "measured_local_generated_workload",
+  "environment": {
+    "node": "v24.22.1",
+    "v8": "13.6.233.17-node.58",
+    "platform": "linux",
+    "arch": "x64"
+  },
+  "harness_sha256": "779f408c2a11d9c79695fe86cb933f7aecdff06dbafd1ef506eb1ac9be919c79",
+  "protocol": {
+    "rounds": 15,
+    "seed": 20261026,
+    "warmups_per_method": 2,
+    "cold_start_measured": false,
+    "memory_measured": false,
+    "cpu_isolation_guaranteed": false
+  },
+  "workloads": {
+    "4096": {
+      "input_bytes": 4096,
+      "result_sha256": "9e9a6c0be5ea02411fd7dd13a0260398622a8f2b33f9cb6941187e66c9e5c832",
+      "round_orders": [
+        [
+          "clone",
+          "owned_transfer",
+          "json",
+          "copy_transfer"
+        ],
+        [
+          "json",
+          "owned_transfer",
+          "copy_transfer",
+          "clone"
+        ],
+        [
+          "owned_transfer",
+          "clone",
+          "copy_transfer",
+          "json"
+        ],
+        [
+          "json",
+          "copy_transfer",
+          "owned_transfer",
+          "clone"
+        ],
+        [
+          "clone",
+          "json",
+          "copy_transfer",
+          "owned_transfer"
+        ],
+        [
+          "copy_transfer",
+          "owned_transfer",
+          "clone",
+          "json"
+        ],
+        [
+          "owned_transfer",
+          "copy_transfer",
+          "clone",
+          "json"
+        ],
+        [
+          "json",
+          "owned_transfer",
+          "copy_transfer",
+          "clone"
+        ],
+        [
+          "owned_transfer",
+          "json",
+          "clone",
+          "copy_transfer"
+        ],
+        [
+          "clone",
+          "copy_transfer",
+          "json",
+          "owned_transfer"
+        ],
+        [
+          "json",
+          "owned_transfer",
+          "clone",
+          "copy_transfer"
+        ],
+        [
+          "json",
+          "clone",
+          "copy_transfer",
+          "owned_transfer"
+        ],
+        [
+          "json",
+          "copy_transfer",
+          "clone",
+          "owned_transfer"
+        ],
+        [
+          "copy_transfer",
+          "json",
+          "clone",
+          "owned_transfer"
+        ],
+        [
+          "copy_transfer",
+          "clone",
+          "json",
+          "owned_transfer"
+        ]
+      ],
+      "samples_ms": {
+        "clone": [
+          3.25152300000002,
+          0.4032000000000835,
+          0.19821000000001732,
+          1.1791210000000092,
+          1.392616999999973,
+          0.2701889999999594,
+          1.184712999999988,
+          0.305321000000049,
+          1.1156519999999546,
+          1.0996660000000702,
+          1.2496449999999868,
+          0.7534920000000511,
+          0.1299900000000207,
+          1.0420420000000377,
+          0.1341419999999971
+        ],
+        "copy_transfer": [
+          0.11725500000000011,
+          1.1597679999999855,
+          1.1811579999999822,
+          0.1875199999999495,
+          0.8723639999999477,
+          0.20676800000001094,
+          0.45080000000007203,
+          0.34806399999990845,
+          1.2710540000000492,
+          0.8644130000000132,
+          0.43980899999996836,
+          1.6486129999999548,
+          0.1766219999999521,
+          0.6340189999999666,
+          0.14500699999996414
+        ],
+        "owned_transfer": [
+          0.16787300000009964,
+          2.9372429999999667,
+          0.8286190000000033,
+          0.5191090000000713,
+          0.4431210000000192,
+          2.058226999999988,
+          0.5576260000000275,
+          0.48349499999994805,
+          0.9874320000000125,
+          0.5976770000000897,
+          2.1324039999999513,
+          3.0817859999999655,
+          0.5792319999999336,
+          1.5335210000000643,
+          0.8315079999999853
+        ],
+        "json": [
+          0.5519709999999804,
+          4.481027999999924,
+          0.7426259999999729,
+          0.6204150000000936,
+          2.283292999999958,
+          0.64559399999996,
+          2.5997670000000426,
+          2.2577989999999772,
+          1.4714009999999007,
+          2.1328750000000127,
+          6.053904999999986,
+          4.588004000000069,
+          1.4674210000000585,
+          0.5537199999999984,
+          0.42405199999996057
+        ]
+      },
+      "median_ms": {
+        "clone": 1.0420420000000377,
+        "copy_transfer": 0.45080000000007203,
+        "owned_transfer": 0.8286190000000033,
+        "json": 1.4714009999999007
+      }
+    },
+    "262144": {
+      "input_bytes": 262144,
+      "result_sha256": "fe3614533a46afdd639cf541915b0c5eb1a86e12b3a32eea813657daebeccdd9",
+      "round_orders": [
+        [
+          "json",
+          "owned_transfer",
+          "clone",
+          "copy_transfer"
+        ],
+        [
+          "clone",
+          "copy_transfer",
+          "json",
+          "owned_transfer"
+        ],
+        [
+          "clone",
+          "owned_transfer",
+          "json",
+          "copy_transfer"
+        ],
+        [
+          "owned_transfer",
+          "copy_transfer",
+          "clone",
+          "json"
+        ],
+        [
+          "json",
+          "owned_transfer",
+          "copy_transfer",
+          "clone"
+        ],
+        [
+          "copy_transfer",
+          "clone",
+          "owned_transfer",
+          "json"
+        ],
+        [
+          "json",
+          "copy_transfer",
+          "clone",
+          "owned_transfer"
+        ],
+        [
+          "copy_transfer",
+          "clone",
+          "owned_transfer",
+          "json"
+        ],
+        [
+          "clone",
+          "json",
+          "owned_transfer",
+          "copy_transfer"
+        ],
+        [
+          "owned_transfer",
+          "json",
+          "clone",
+          "copy_transfer"
+        ],
+        [
+          "clone",
+          "copy_transfer",
+          "owned_transfer",
+          "json"
+        ],
+        [
+          "json",
+          "owned_transfer",
+          "copy_transfer",
+          "clone"
+        ],
+        [
+          "copy_transfer",
+          "clone",
+          "owned_transfer",
+          "json"
+        ],
+        [
+          "owned_transfer",
+          "clone",
+          "copy_transfer",
+          "json"
+        ],
+        [
+          "owned_transfer",
+          "json",
+          "copy_transfer",
+          "clone"
+        ]
+      ],
+      "samples_ms": {
+        "clone": [
+          1.63785299999995,
+          4.9820700000000215,
+          6.364137000000028,
+          3.714714999999842,
+          5.660568999999896,
+          4.169767999999976,
+          6.520972999999913,
+          9.07560699999999,
+          1.3471479999998337,
+          8.210281000000123,
+          4.637170999999853,
+          2.8289859999999862,
+          2.834682000000157,
+          0.9382230000001073,
+          2.840770000000248
+        ],
+        "copy_transfer": [
+          1.1949509999999464,
+          2.4115679999999884,
+          3.016595000000052,
+          2.298628000000008,
+          7.052078000000165,
+          3.7613820000001397,
+          0.7190729999999803,
+          4.483883000000105,
+          1.3824099999999362,
+          2.0791509999999107,
+          4.3603760000000875,
+          2.6244400000000496,
+          2.7431649999998626,
+          0.4785059999999248,
+          1.562619000000268
+        ],
+        "owned_transfer": [
+          1.5696909999999207,
+          10.302403999999797,
+          0.8462930000000597,
+          1.1954769999999826,
+          2.5824149999998554,
+          1.7557030000000395,
+          3.1509770000000117,
+          4.277929000000086,
+          3.4861359999999877,
+          4.443144999999959,
+          2.003157999999985,
+          1.2106949999997596,
+          0.6005350000000362,
+          1.3331880000000638,
+          0.4734739999998965
+        ],
+        "json": [
+          104.04334300000005,
+          36.662483000000066,
+          49.75453100000004,
+          33.17062299999998,
+          29.89668800000004,
+          40.68452500000012,
+          58.34580099999994,
+          52.33039000000008,
+          37.84050900000011,
+          256.2374980000002,
+          58.70763299999999,
+          31.27663500000017,
+          19.219156000000112,
+          15.657932000000073,
+          20.536599000000024
+        ]
+      },
+      "median_ms": {
+        "clone": 4.169767999999976,
+        "copy_transfer": 2.4115679999999884,
+        "owned_transfer": 1.7557030000000395,
+        "json": 37.84050900000011
+      }
+    },
+    "4194304": {
+      "input_bytes": 4194304,
+      "result_sha256": "e3eb834e12e521efbfae4fea09196a65c8d4d04f878ad451d808150a6fcd9234",
+      "round_orders": [
+        [
+          "copy_transfer",
+          "owned_transfer",
+          "json",
+          "clone"
+        ],
+        [
+          "owned_transfer",
+          "copy_transfer",
+          "json",
+          "clone"
+        ],
+        [
+          "copy_transfer",
+          "clone",
+          "json",
+          "owned_transfer"
+        ],
+        [
+          "owned_transfer",
+          "clone",
+          "copy_transfer",
+          "json"
+        ],
+        [
+          "clone",
+          "json",
+          "owned_transfer",
+          "copy_transfer"
+        ],
+        [
+          "owned_transfer",
+          "clone",
+          "copy_transfer",
+          "json"
+        ],
+        [
+          "json",
+          "copy_transfer",
+          "owned_transfer",
+          "clone"
+        ],
+        [
+          "copy_transfer",
+          "owned_transfer",
+          "clone",
+          "json"
+        ],
+        [
+          "owned_transfer",
+          "copy_transfer",
+          "clone",
+          "json"
+        ],
+        [
+          "owned_transfer",
+          "json",
+          "copy_transfer",
+          "clone"
+        ],
+        [
+          "clone",
+          "json",
+          "copy_transfer",
+          "owned_transfer"
+        ],
+        [
+          "clone",
+          "owned_transfer",
+          "copy_transfer",
+          "json"
+        ],
+        [
+          "clone",
+          "copy_transfer",
+          "json",
+          "owned_transfer"
+        ],
+        [
+          "clone",
+          "copy_transfer",
+          "json",
+          "owned_transfer"
+        ],
+        [
+          "owned_transfer",
+          "copy_transfer",
+          "json",
+          "clone"
+        ]
+      ],
+      "samples_ms": {
+        "clone": [
+          94.21196200000031,
+          61.23004000000037,
+          27.313890999999785,
+          26.749829000000318,
+          47.14361300000019,
+          29.581718000001274,
+          51.113460999999006,
+          66.01176099999975,
+          30.06322799999907,
+          24.76239799999894,
+          32.18999199999962,
+          35.39060999999856,
+          57.792999999997846,
+          61.757917999999336,
+          214.86316699999952
+        ],
+        "copy_transfer": [
+          32.864722000000256,
+          85.42396999999983,
+          56.41530700000112,
+          29.001189000000522,
+          29.627301000000443,
+          27.987590999999156,
+          103.43224200000077,
+          75.18684699999903,
+          35.25055000000066,
+          38.62374000000091,
+          22.893513999999413,
+          36.59765399999742,
+          35.73167699999976,
+          70.47530099999858,
+          28.782429999999295
+        ],
+        "owned_transfer": [
+          21.817971000000398,
+          74.80379899999934,
+          33.031002000001536,
+          50.15341099999932,
+          38.50974900000074,
+          42.96708100000069,
+          68.33811099999912,
+          44.77907899999991,
+          32.384735000001456,
+          23.561131999998906,
+          31.395996000002924,
+          29.892837000003055,
+          64.0940300000002,
+          29.518815999999788,
+          43.128733000001375
+        ],
+        "json": [
+          1215.525141,
+          1051.6790880000008,
+          955.4662220000009,
+          420.025169999999,
+          383.63478399999985,
+          464.838033,
+          445.99794699999984,
+          755.4387119999992,
+          437.68412199999875,
+          1242.1918510000014,
+          426.98627000000124,
+          639.2576410000001,
+          747.9292749999986,
+          360.6166599999997,
+          452.42833800000153
+        ]
+      },
+      "median_ms": {
+        "clone": 47.14361300000019,
+        "copy_transfer": 35.73167699999976,
+        "owned_transfer": 38.50974900000074,
+        "json": 464.838033
+      }
+    }
+  },
+  "semantic_probes": {
+    "transfer_detaches_sender_and_alias": true,
+    "structured_clone_preserves_bigint": true,
+    "json_bigint_requires_explicit_codec": true,
+    "shared_array_buffer_not_transferable": true
+  },
+  "qualification": "Actual Node worker_threads, generated Uint32 payloads, sum and full roundtrip. owned_transfer excludes preparing exclusive input and changes sender lifetime; do not compare it as a drop-in sender-preserving path. No Electron utilityProcess, browser renderer, Rust IPC, application or memory acceptance."
+}

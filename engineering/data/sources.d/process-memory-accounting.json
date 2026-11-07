@@ -1,0 +1,35 @@
+[
+  {
+    "id": "LNXWAIT01",
+    "title": "Linux child-specific wait4 accounting",
+    "url": "https://man7.org/linux/man-pages/man2/wait4.2.html",
+    "observed_version": "Linux man-pages 6.19",
+    "topic": "performance-measurement",
+    "note": "wait4 returns resource accounting for a selected child; this Linux-specific experiment uses it for launcher-inclusive accounting, not an app-only peak.",
+    "checked_at": "2026-10-28",
+    "review_after_days": 90,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "LNXRSS01",
+    "title": "Linux resource usage and exec lifetime",
+    "url": "https://man7.org/linux/man-pages/man2/getrusage.2.html",
+    "observed_version": "Linux man-pages 6.19",
+    "topic": "performance-measurement",
+    "note": "ru_maxrss is KiB and process resource accounting survives exec; distinguish launcher-inclusive maxima from post-exec self observations.",
+    "checked_at": "2026-10-28",
+    "review_after_days": 90,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "PYWAIT01",
+    "title": "Python wait4 resource receipt",
+    "url": "https://docs.python.org/3.12/library/os.html#os.wait4",
+    "observed_version": "Python 3.12 documentation (page reports 3.12.16); test runtime recorded separately",
+    "topic": "performance-measurement",
+    "note": "Documents child PID/status/resource tuple; not a cross-platform native app memory API.",
+    "checked_at": "2026-10-28",
+    "review_after_days": 90,
+    "evidence": "primary_documented"
+  }
+]

@@ -1,0 +1,13 @@
+[
+  {
+    "id": "DOMREPL01",
+    "title": "WHATWG DOM replacement algorithms",
+    "url": "https://dom.spec.whatwg.org/#concept-node-replace",
+    "observed_version": "Living Standard updated 2026-10-19; checked 2026-10-28",
+    "topic": "browser-rendering",
+    "note": "Replace-child and replace-all have distinct mutation steps. The specification does not guarantee one is faster or preserve application listeners when a container is cloned.",
+    "checked_at": "2026-10-28",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  }
+]

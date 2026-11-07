@@ -1,0 +1,13 @@
+[
+  {
+    "id": "HYPERIDLE01",
+    "title": "Hyper 1.12.0 HTTP/1 idle connection read guard",
+    "url": "https://github.com/hyperium/hyper/blob/v1.12.0/src/proto/h1/conn.rs",
+    "observed_version": "v1.12.0; matches pinned dependency version",
+    "topic": "http-test-correctness",
+    "note": "Inspected idle-read UnexpectedMessage checks; source fact, not a claim of an upstream defect.",
+    "checked_at": "2026-10-29",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  }
+]

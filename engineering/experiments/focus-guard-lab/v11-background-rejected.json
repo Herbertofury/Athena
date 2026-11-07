@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "harness": "atlas-card-density-v11-cadence-guard",
+  "scope": "measured_browser_generated_workload",
+  "operation": "initial",
+  "preparation": {
+    "strategy": "main"
+  },
+  "performance_start_ms": 11078.40000000596,
+  "performance_end_ms": 19081.79999998212,
+  "started_at": "2026-10-28T04:32:23.229Z",
+  "dataset": {
+    "count": 200,
+    "metadata_bytes_per_record": 512
+  },
+  "samples": [],
+  "complete": false,
+  "calibration": {
+    "scope": "empty-frame scheduling check; not physical paint",
+    "waits_ms": [
+      1005.6999999880791,
+      1015.1999999880791,
+      1017.8000000119209,
+      1016.1999999880791,
+      1015.5,
+      1018.1000000238419,
+      1015.5999999940395
+    ],
+    "complete": false,
+    "reliable": false,
+    "slow_count": 7,
+    "threshold_ms": 200,
+    "reason": "Frame calibration exceeded eight-second budget"
+  },
+  "focus_state": {
+    "started_focused": true,
+    "focus_lost": false,
+    "focused_now": true
+  },
+  "error": "Frame calibration exceeded eight-second budget",
+  "observed_input_events": []
+}

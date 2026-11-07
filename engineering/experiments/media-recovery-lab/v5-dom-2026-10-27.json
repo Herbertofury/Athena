@@ -1,0 +1,28 @@
+{
+  "source_commit": "0ae897dfe082abb75d1e2f1c83de93abaae5938d",
+  "harness": "atlas-real-media-v5-playback-state",
+  "loaded_module": "media.a50519971a6bba6f.js",
+  "real_browser": true,
+  "pause_observation": {
+    "label": "Paused.",
+    "paused": true,
+    "current_time": 0.325789,
+    "autoplay": false
+  },
+  "selection_change": {
+    "video_count": 0,
+    "label": "Selection changed. Load this player when ready.",
+    "play_disabled": true,
+    "pause_disabled": true
+  },
+  "youtube_state": "player-ready; not played",
+  "ci_run": 40461046379,
+  "ci_conclusion": "success",
+  "pages_run": 40461045642,
+  "pages_conclusion": "success",
+  "limits": [
+    "Ended label is fixture-tested only",
+    "Network failure recovery is fixture-tested, not induced on real providers",
+    "No peak-memory or end-to-end performance claim"
+  ]
+}

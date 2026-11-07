@@ -1,0 +1,52 @@
+{
+  "v2-foreground-real-34-events": {
+    "frame_cadence_unreliable": false,
+    "receipt_sha256": "d5d01ab768f31da78bd6e29fac142c00302277742d5e45b2189001195d71ec26",
+    "full_history": {
+      "synchronous_median_ms": 0.5999999940395355,
+      "frame_proxy_median_ms": 33.5,
+      "scroll_wait_median_ms": 16.700000017881393,
+      "nodes": 1,
+      "all_equal": true
+    },
+    "append": {
+      "synchronous_median_ms": 0.20000001788139343,
+      "frame_proxy_median_ms": 33.5,
+      "scroll_wait_median_ms": 16.599999994039536,
+      "nodes": 36,
+      "all_equal": true
+    },
+    "blocked": {
+      "synchronous_median_ms": 0.4000000059604645,
+      "frame_proxy_median_ms": 33,
+      "scroll_wait_median_ms": 16.799999982118607,
+      "nodes": 3,
+      "all_equal": true
+    }
+  },
+  "v2-foreground-replay-1088-events": {
+    "frame_cadence_unreliable": false,
+    "receipt_sha256": "10ef25b691a0afa8dcde9ddf719e89ddb6b36747ab2bec2ab775a504227a98c2",
+    "full_history": {
+      "synchronous_median_ms": 599.4000000059605,
+      "frame_proxy_median_ms": 812.1999999880791,
+      "scroll_wait_median_ms": 16.5,
+      "nodes": 1,
+      "all_equal": true
+    },
+    "append": {
+      "synchronous_median_ms": 3.9000000059604645,
+      "frame_proxy_median_ms": 150.10000002384186,
+      "scroll_wait_median_ms": 16.400000005960464,
+      "nodes": 1090,
+      "all_equal": true
+    },
+    "blocked": {
+      "synchronous_median_ms": 9,
+      "frame_proxy_median_ms": 172.5,
+      "scroll_wait_median_ms": 16.400000005960464,
+      "nodes": 19,
+      "all_equal": true
+    }
+  }
+}

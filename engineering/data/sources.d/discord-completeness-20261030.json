@@ -1,0 +1,35 @@
+[
+  {
+    "id": "DISCORDMSG30",
+    "title": "Discord message resource: content access and attachment scope",
+    "url": "https://docs.discord.com/developers/resources/message",
+    "observed_version": "Living documentation checked 2026-10-30",
+    "topic": "adapters",
+    "note": "Current schema and history permissions reviewed; no authenticated collection.",
+    "checked_at": "2026-10-30",
+    "review_after_days": 14,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "DISCORDCDN30",
+    "title": "Discord signed attachment CDN URLs",
+    "url": "https://docs.discord.com/developers/reference#signed-attachment-cdn-urls",
+    "observed_version": "Living documentation checked 2026-10-30",
+    "topic": "adapters",
+    "note": "Expiry and documented API-field refresh behavior; no signature-stripping downloader.",
+    "checked_at": "2026-10-30",
+    "review_after_days": 14,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "DISCORDPY30",
+    "title": "discord.py raw message edit and delete events",
+    "url": "https://discordpy.readthedocs.io/en/stable/api.html#discord.on_raw_message_edit",
+    "observed_version": "Living documentation checked 2026-10-30",
+    "topic": "adapters",
+    "note": "Maintained library documentation candidate; partial edit and cache-independent event semantics, not installed or accepted.",
+    "checked_at": "2026-10-30",
+    "review_after_days": 14,
+    "evidence": "primary_documented"
+  }
+]

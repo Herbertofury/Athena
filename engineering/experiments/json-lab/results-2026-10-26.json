@@ -1,0 +1,1572 @@
+{
+  "schema": 1,
+  "evidence": "measured_local_generated_workload",
+  "date": "2026-10-26",
+  "harness_sha256": "e5bd3f4a9ce0d90d69d26d8c4881064ef94341a021f17cdaed7a4e7ac92b3e39",
+  "environment": {
+    "python": "3.12.14",
+    "system": "Linux",
+    "machine": "x86_64",
+    "kernel": "6.18.55",
+    "versions": {
+      "orjson": "3.13.0",
+      "ujson": "6.0.0"
+    }
+  },
+  "protocol": {
+    "rounds": 15,
+    "iterations_per_sample": 30,
+    "order_seed": 20261026,
+    "gc_enabled": true,
+    "timing": "perf_counter_ns; warmed in-process; randomized library order each round",
+    "memory_measured": false,
+    "cold_start_measured": false,
+    "hardware_isolation_guaranteed": false
+  },
+  "semantic_cases": {
+    "valid_unicode": {
+      "stdlib": {
+        "accepted": true,
+        "python_type": "dict",
+        "value_repr": "{'x': 'caf\\xe9'}"
+      },
+      "orjson": {
+        "accepted": true,
+        "python_type": "dict",
+        "value_repr": "{'x': 'caf\\xe9'}"
+      },
+      "ujson": {
+        "accepted": true,
+        "python_type": "dict",
+        "value_repr": "{'x': 'caf\\xe9'}"
+      }
+    },
+    "invalid_utf8": {
+      "stdlib": {
+        "accepted": false,
+        "error_type": "UnicodeDecodeError"
+      },
+      "orjson": {
+        "accepted": false,
+        "error_type": "JSONDecodeError"
+      },
+      "ujson": {
+        "accepted": false,
+        "error_type": "JSONDecodeError"
+      }
+    },
+    "nonfinite_nan": {
+      "stdlib": {
+        "accepted": true,
+        "python_type": "dict",
+        "value_repr": "{'x': nan}"
+      },
+      "orjson": {
+        "accepted": false,
+        "error_type": "JSONDecodeError"
+      },
+      "ujson": {
+        "accepted": true,
+        "python_type": "dict",
+        "value_repr": "{'x': nan}"
+      }
+    },
+    "nonfinite_infinity": {
+      "stdlib": {
+        "accepted": true,
+        "python_type": "dict",
+        "value_repr": "{'x': inf}"
+      },
+      "orjson": {
+        "accepted": false,
+        "error_type": "JSONDecodeError"
+      },
+      "ujson": {
+        "accepted": true,
+        "python_type": "dict",
+        "value_repr": "{'x': inf}"
+      }
+    },
+    "lone_surrogate": {
+      "stdlib": {
+        "accepted": true,
+        "python_type": "str",
+        "value_repr": "'\\ud800'"
+      },
+      "orjson": {
+        "accepted": false,
+        "error_type": "JSONDecodeError"
+      },
+      "ujson": {
+        "accepted": true,
+        "python_type": "str",
+        "value_repr": "'\\ud800'"
+      }
+    },
+    "duplicate_keys": {
+      "stdlib": {
+        "accepted": true,
+        "python_type": "dict",
+        "value_repr": "{'x': 2}"
+      },
+      "orjson": {
+        "accepted": true,
+        "python_type": "dict",
+        "value_repr": "{'x': 2}"
+      },
+      "ujson": {
+        "accepted": true,
+        "python_type": "dict",
+        "value_repr": "{'x': 2}"
+      }
+    },
+    "integer_above_u64": {
+      "stdlib": {
+        "accepted": true,
+        "python_type": "int",
+        "value_repr": "18446744073709551617"
+      },
+      "orjson": {
+        "accepted": true,
+        "python_type": "float",
+        "value_repr": "1.8446744073709552e+19"
+      },
+      "ujson": {
+        "accepted": true,
+        "python_type": "int",
+        "value_repr": "18446744073709551617"
+      }
+    },
+    "integer_53_plus_1": {
+      "stdlib": {
+        "accepted": true,
+        "python_type": "int",
+        "value_repr": "9007199254740993"
+      },
+      "orjson": {
+        "accepted": true,
+        "python_type": "int",
+        "value_repr": "9007199254740993"
+      },
+      "ujson": {
+        "accepted": true,
+        "python_type": "int",
+        "value_repr": "9007199254740993"
+      }
+    },
+    "trailing_comma": {
+      "stdlib": {
+        "accepted": false,
+        "error_type": "JSONDecodeError"
+      },
+      "orjson": {
+        "accepted": false,
+        "error_type": "JSONDecodeError"
+      },
+      "ujson": {
+        "accepted": false,
+        "error_type": "JSONDecodeError"
+      }
+    },
+    "leading_zero": {
+      "stdlib": {
+        "accepted": false,
+        "error_type": "JSONDecodeError"
+      },
+      "orjson": {
+        "accepted": false,
+        "error_type": "JSONDecodeError"
+      },
+      "ujson": {
+        "accepted": true,
+        "python_type": "int",
+        "value_repr": "1"
+      }
+    },
+    "trailing_document": {
+      "stdlib": {
+        "accepted": false,
+        "error_type": "JSONDecodeError"
+      },
+      "orjson": {
+        "accepted": false,
+        "error_type": "JSONDecodeError"
+      },
+      "ujson": {
+        "accepted": false,
+        "error_type": "JSONDecodeError"
+      }
+    },
+    "unescaped_control": {
+      "stdlib": {
+        "accepted": false,
+        "error_type": "JSONDecodeError"
+      },
+      "orjson": {
+        "accepted": false,
+        "error_type": "JSONDecodeError"
+      },
+      "ujson": {
+        "accepted": true,
+        "python_type": "str",
+        "value_repr": "'a\\x01b'"
+      }
+    }
+  },
+  "workloads": {
+    "small_manifest": {
+      "input_bytes": 163,
+      "input_sha256": "e236be5db43a99eb0592de969cee21c5ec60bb96c3bac02a51c1e8d253b5ac51",
+      "semantic_sha256": "7c77082ecd809048eeaf32c0a9993123755e5d4a5abe65bba6beb41d340e8b9d",
+      "operations": {
+        "decode": {
+          "units": "milliseconds per operation",
+          "round_orders": [
+            [
+              "orjson",
+              "ujson",
+              "stdlib"
+            ],
+            [
+              "orjson",
+              "stdlib",
+              "ujson"
+            ],
+            [
+              "stdlib",
+              "ujson",
+              "orjson"
+            ],
+            [
+              "orjson",
+              "stdlib",
+              "ujson"
+            ],
+            [
+              "ujson",
+              "orjson",
+              "stdlib"
+            ],
+            [
+              "stdlib",
+              "orjson",
+              "ujson"
+            ],
+            [
+              "stdlib",
+              "ujson",
+              "orjson"
+            ],
+            [
+              "ujson",
+              "orjson",
+              "stdlib"
+            ],
+            [
+              "stdlib",
+              "ujson",
+              "orjson"
+            ],
+            [
+              "stdlib",
+              "orjson",
+              "ujson"
+            ],
+            [
+              "orjson",
+              "ujson",
+              "stdlib"
+            ],
+            [
+              "stdlib",
+              "ujson",
+              "orjson"
+            ],
+            [
+              "orjson",
+              "stdlib",
+              "ujson"
+            ],
+            [
+              "ujson",
+              "stdlib",
+              "orjson"
+            ],
+            [
+              "stdlib",
+              "ujson",
+              "orjson"
+            ]
+          ],
+          "libraries": {
+            "stdlib": {
+              "samples_ms": [
+                0.004037833333333333,
+                0.0032731333333333333,
+                0.003249233333333333,
+                0.003274633333333333,
+                0.0032293333333333336,
+                0.0032022333333333332,
+                0.007838533333333333,
+                0.009445833333333334,
+                0.006157366666666666,
+                0.009624200000000001,
+                0.008826666666666667,
+                0.005220266666666667,
+                0.0053187,
+                0.0053495,
+                0.005401133333333333
+              ],
+              "median_ms": 0.0053187,
+              "sample_min_ms": 0.0032022333333333332,
+              "sample_max_ms": 0.009624200000000001
+            },
+            "orjson": {
+              "samples_ms": [
+                0.0031005,
+                0.0007494333333333332,
+                0.0007447333333333334,
+                0.0007245333333333333,
+                0.0007573333333333334,
+                0.0007392666666666667,
+                0.0013821333333333334,
+                0.0012246,
+                0.0013158,
+                0.0012362999999999999,
+                0.0013589333333333335,
+                0.0013623333333333332,
+                0.0012442,
+                0.0020917333333333333,
+                0.0013077666666666667
+              ],
+              "median_ms": 0.0012442,
+              "sample_min_ms": 0.0007245333333333333,
+              "sample_max_ms": 0.0031005
+            },
+            "ujson": {
+              "samples_ms": [
+                0.0009644333333333333,
+                0.0009189666666666667,
+                0.0008780666666666667,
+                0.0009137666666666666,
+                0.0008975333333333333,
+                0.0025748333333333335,
+                0.0016057333333333334,
+                0.0017380999999999998,
+                0.0017172333333333332,
+                0.0017019333333333335,
+                0.0015933,
+                0.001641,
+                0.0016864,
+                0.0017661666666666668,
+                0.0016667000000000001
+              ],
+              "median_ms": 0.001641,
+              "sample_min_ms": 0.0008780666666666667,
+              "sample_max_ms": 0.0025748333333333335
+            }
+          }
+        },
+        "encode_utf8": {
+          "units": "milliseconds per operation",
+          "round_orders": [
+            [
+              "ujson",
+              "stdlib",
+              "orjson"
+            ],
+            [
+              "stdlib",
+              "orjson",
+              "ujson"
+            ],
+            [
+              "stdlib",
+              "ujson",
+              "orjson"
+            ],
+            [
+              "ujson",
+              "stdlib",
+              "orjson"
+            ],
+            [
+              "stdlib",
+              "ujson",
+              "orjson"
+            ],
+            [
+              "ujson",
+              "orjson",
+              "stdlib"
+            ],
+            [
+              "stdlib",
+              "ujson",
+              "orjson"
+            ],
+            [
+              "stdlib",
+              "orjson",
+              "ujson"
+            ],
+            [
+              "stdlib",
+              "ujson",
+              "orjson"
+            ],
+            [
+              "ujson",
+              "stdlib",
+              "orjson"
+            ],
+            [
+              "orjson",
+              "ujson",
+              "stdlib"
+            ],
+            [
+              "orjson",
+              "stdlib",
+              "ujson"
+            ],
+            [
+              "orjson",
+              "stdlib",
+              "ujson"
+            ],
+            [
+              "ujson",
+              "orjson",
+              "stdlib"
+            ],
+            [
+              "orjson",
+              "stdlib",
+              "ujson"
+            ]
+          ],
+          "libraries": {
+            "stdlib": {
+              "samples_ms": [
+                0.0083211,
+                0.0103799,
+                0.0054907666666666665,
+                0.005201266666666667,
+                0.0054275,
+                0.008669766666666667,
+                0.0044722,
+                0.015100200000000001,
+                0.003517866666666667,
+                0.0051499,
+                0.004397600000000001,
+                0.005944333333333333,
+                0.0034238333333333334,
+                0.006971266666666667,
+                0.0049354333333333335
+              ],
+              "median_ms": 0.0054275,
+              "sample_min_ms": 0.0034238333333333334,
+              "sample_max_ms": 0.015100200000000001
+            },
+            "orjson": {
+              "samples_ms": [
+                0.00045743333333333336,
+                0.00045453333333333334,
+                0.0004568333333333333,
+                0.0005334666666666667,
+                0.0004505,
+                0.00041160000000000003,
+                0.0002897,
+                0.00029443333333333335,
+                0.00028933333333333334,
+                0.0002752333333333334,
+                0.00027489999999999996,
+                0.0002698,
+                0.00028826666666666666,
+                0.0002787,
+                0.00027006666666666665
+              ],
+              "median_ms": 0.0002897,
+              "sample_min_ms": 0.0002698,
+              "sample_max_ms": 0.0005334666666666667
+            },
+            "ujson": {
+              "samples_ms": [
+                0.0031024,
+                0.0030027666666666668,
+                0.020446066666666665,
+                0.0500789,
+                0.002884233333333333,
+                0.0176024,
+                0.0017787666666666667,
+                0.0018254666666666667,
+                0.004822566666666667,
+                0.0027844666666666665,
+                0.0082316,
+                0.0018072666666666666,
+                0.0018022333333333332,
+                0.0017823666666666666,
+                0.0017927333333333333
+              ],
+              "median_ms": 0.002884233333333333,
+              "sample_min_ms": 0.0017787666666666667,
+              "sample_max_ms": 0.0500789
+            }
+          }
+        },
+        "decode_encode_utf8": {
+          "units": "milliseconds per operation",
+          "round_orders": [
+            [
+              "ujson",
+              "orjson",
+              "stdlib"
+            ],
+            [
+              "stdlib",
+              "orjson",
+              "ujson"
+            ],
+            [
+              "ujson",
+              "orjson",
+              "stdlib"
+            ],
+            [
+              "ujson",
+              "stdlib",
+              "orjson"
+            ],
+            [
+              "orjson",
+              "stdlib",
+              "ujson"
+            ],
+            [
+              "ujson",
+              "orjson",
+              "stdlib"
+            ],
+            [
+              "orjson",
+              "stdlib",
+              "ujson"
+            ],
+            [
+              "ujson",
+              "stdlib",
+              "orjson"
+            ],
+            [
+              "ujson",
+              "orjson",
+              "stdlib"
+            ],
+            [
+              "stdlib",
+              "orjson",
+              "ujson"
+            ],
+            [
+              "orjson",
+              "stdlib",
+              "ujson"
+            ],
+            [
+              "ujson",
+              "stdlib",
+              "orjson"
+            ],
+            [
+              "stdlib",
+              "orjson",
+              "ujson"
+            ],
+            [
+              "stdlib",
+              "ujson",
+              "orjson"
+            ],
+            [
+              "orjson",
+              "stdlib",
+              "ujson"
+            ]
+          ],
+          "libraries": {
+            "stdlib": {
+              "samples_ms": [
+                0.007085033333333334,
+                0.018009366666666665,
+                0.007070399999999999,
+                0.006928333333333333,
+                0.007009166666666667,
+                0.009585799999999998,
+                0.009010533333333333,
+                0.007050733333333333,
+                0.0070321,
+                0.006957733333333334,
+                0.008111199999999999,
+                0.1251535,
+                0.1675488,
+                0.1268831,
+                0.0608003
+              ],
+              "median_ms": 0.008111199999999999,
+              "sample_min_ms": 0.006928333333333333,
+              "sample_max_ms": 0.1675488
+            },
+            "orjson": {
+              "samples_ms": [
+                0.0011475,
+                0.0011355666666666667,
+                0.0015278666666666667,
+                0.0011250333333333333,
+                0.0010761666666666667,
+                0.0011269000000000001,
+                0.0011207,
+                0.0011187999999999999,
+                0.024677366666666666,
+                0.0011305999999999998,
+                0.0011307333333333332,
+                0.0023254333333333336,
+                0.0025699333333333335,
+                0.0023278333333333337,
+                0.0022399333333333335
+              ],
+              "median_ms": 0.0011355666666666667,
+              "sample_min_ms": 0.0010761666666666667,
+              "sample_max_ms": 0.024677366666666666
+            },
+            "ujson": {
+              "samples_ms": [
+                0.0028958333333333336,
+                0.0037476999999999996,
+                0.0029059666666666666,
+                0.004114333333333333,
+                0.008825466666666667,
+                0.003841,
+                0.0029302,
+                0.004570266666666666,
+                0.028268733333333334,
+                0.0028862,
+                0.0029229666666666667,
+                0.0029152333333333333,
+                0.0047052,
+                0.013946866666666667,
+                0.006459233333333333
+              ],
+              "median_ms": 0.003841,
+              "sample_min_ms": 0.0028862,
+              "sample_max_ms": 0.028268733333333334
+            }
+          }
+        }
+      }
+    },
+    "catalog_2000": {
+      "input_bytes": 284332,
+      "input_sha256": "d0689663e2de345a09782dfef7822b8b0e7a66fb4f194f52497b287965368acc",
+      "semantic_sha256": "a8b53b478920970f5af69428a00617dbd02af49af91180768f2ec4186458fa19",
+      "operations": {
+        "decode": {
+          "units": "milliseconds per operation",
+          "round_orders": [
+            [
+              "ujson",
+              "stdlib",
+              "orjson"
+            ],
+            [
+              "ujson",
+              "stdlib",
+              "orjson"
+            ],
+            [
+              "stdlib",
+              "ujson",
+              "orjson"
+            ],
+            [
+              "ujson",
+              "orjson",
+              "stdlib"
+            ],
+            [
+              "orjson",
+              "stdlib",
+              "ujson"
+            ],
+            [
+              "orjson",
+              "ujson",
+              "stdlib"
+            ],
+            [
+              "ujson",
+              "orjson",
+              "stdlib"
+            ],
+            [
+              "orjson",
+              "stdlib",
+              "ujson"
+            ],
+            [
+              "stdlib",
+              "ujson",
+              "orjson"
+            ],
+            [
+              "stdlib",
+              "ujson",
+              "orjson"
+            ],
+            [
+              "orjson",
+              "ujson",
+              "stdlib"
+            ],
+            [
+              "ujson",
+              "orjson",
+              "stdlib"
+            ],
+            [
+              "stdlib",
+              "ujson",
+              "orjson"
+            ],
+            [
+              "stdlib",
+              "orjson",
+              "ujson"
+            ],
+            [
+              "ujson",
+              "stdlib",
+              "orjson"
+            ]
+          ],
+          "libraries": {
+            "stdlib": {
+              "samples_ms": [
+                5.396071333333333,
+                7.281269133333334,
+                5.181560599999999,
+                5.283218266666666,
+                5.446131566666667,
+                4.5171233,
+                10.878506766666668,
+                5.885494866666666,
+                5.223667,
+                11.169401933333333,
+                6.345957933333334,
+                5.302993566666666,
+                5.128497633333334,
+                5.5890075333333336,
+                7.880121099999999
+              ],
+              "median_ms": 5.446131566666667,
+              "sample_min_ms": 4.5171233,
+              "sample_max_ms": 11.169401933333333
+            },
+            "orjson": {
+              "samples_ms": [
+                2.9475637999999997,
+                2.4162581666666667,
+                2.180408433333333,
+                2.72855,
+                2.5477978666666665,
+                1.8729969,
+                1.7384349,
+                10.211359400000001,
+                2.358095733333333,
+                2.8883938,
+                2.824183366666667,
+                3.4183983,
+                2.7409227,
+                2.246655533333333,
+                6.5952999000000005
+              ],
+              "median_ms": 2.72855,
+              "sample_min_ms": 1.7384349,
+              "sample_max_ms": 10.211359400000001
+            },
+            "ujson": {
+              "samples_ms": [
+                16.910403833333334,
+                3.0722276,
+                3.3076293999999997,
+                3.0648711,
+                3.138827866666667,
+                3.1710536666666664,
+                3.8654224,
+                2.934977566666667,
+                2.6311396333333334,
+                2.734623066666667,
+                9.931843566666666,
+                2.628897433333333,
+                2.3761527,
+                2.947252933333333,
+                3.2604502
+              ],
+              "median_ms": 3.0722276,
+              "sample_min_ms": 2.3761527,
+              "sample_max_ms": 16.910403833333334
+            }
+          }
+        },
+        "encode_utf8": {
+          "units": "milliseconds per operation",
+          "round_orders": [
+            [
+              "stdlib",
+              "ujson",
+              "orjson"
+            ],
+            [
+              "stdlib",
+              "ujson",
+              "orjson"
+            ],
+            [
+              "stdlib",
+              "ujson",
+              "orjson"
+            ],
+            [
+              "stdlib",
+              "orjson",
+              "ujson"
+            ],
+            [
+              "orjson",
+              "ujson",
+              "stdlib"
+            ],
+            [
+              "stdlib",
+              "ujson",
+              "orjson"
+            ],
+            [
+              "orjson",
+              "ujson",
+              "stdlib"
+            ],
+            [
+              "stdlib",
+              "ujson",
+              "orjson"
+            ],
+            [
+              "stdlib",
+              "orjson",
+              "ujson"
+            ],
+            [
+              "ujson",
+              "orjson",
+              "stdlib"
+            ],
+            [
+              "stdlib",
+              "ujson",
+              "orjson"
+            ],
+            [
+              "stdlib",
+              "orjson",
+              "ujson"
+            ],
+            [
+              "ujson",
+              "orjson",
+              "stdlib"
+            ],
+            [
+              "stdlib",
+              "orjson",
+              "ujson"
+            ],
+            [
+              "stdlib",
+              "orjson",
+              "ujson"
+            ]
+          ],
+          "libraries": {
+            "stdlib": {
+              "samples_ms": [
+                3.6663729666666667,
+                3.7855763666666666,
+                3.9772322666666664,
+                3.4479352333333333,
+                6.110220333333333,
+                5.1013524666666665,
+                4.076096466666667,
+                3.7366507666666666,
+                3.3829912,
+                3.7838653,
+                3.502923366666667,
+                3.6329686666666663,
+                3.405273066666667,
+                3.4360952333333334,
+                4.455905266666667
+              ],
+              "median_ms": 3.7366507666666666,
+              "sample_min_ms": 3.3829912,
+              "sample_max_ms": 6.110220333333333
+            },
+            "orjson": {
+              "samples_ms": [
+                0.4333325,
+                0.4308533,
+                0.3739900333333333,
+                0.6597997,
+                0.3563776666666667,
+                0.5643112666666668,
+                0.44943013333333337,
+                0.4082092666666667,
+                0.35546516666666667,
+                0.39988583333333333,
+                0.5133528666666667,
+                0.5981377333333333,
+                0.42264846666666667,
+                0.4700280333333333,
+                0.6315936999999999
+              ],
+              "median_ms": 0.4333325,
+              "sample_min_ms": 0.35546516666666667,
+              "sample_max_ms": 0.6597997
+            },
+            "ujson": {
+              "samples_ms": [
+                3.1399779666666667,
+                3.195211366666667,
+                2.9402798999999997,
+                2.9640648333333335,
+                2.530325866666667,
+                2.7976226666666664,
+                2.3504372333333334,
+                2.7851052999999997,
+                2.6321801666666667,
+                2.851524866666667,
+                2.8426285,
+                2.4806386666666667,
+                2.5551947333333334,
+                3.1508740333333334,
+                2.7763631666666666
+              ],
+              "median_ms": 2.7976226666666664,
+              "sample_min_ms": 2.3504372333333334,
+              "sample_max_ms": 3.195211366666667
+            }
+          }
+        },
+        "decode_encode_utf8": {
+          "units": "milliseconds per operation",
+          "round_orders": [
+            [
+              "stdlib",
+              "orjson",
+              "ujson"
+            ],
+            [
+              "ujson",
+              "stdlib",
+              "orjson"
+            ],
+            [
+              "stdlib",
+              "orjson",
+              "ujson"
+            ],
+            [
+              "stdlib",
+              "ujson",
+              "orjson"
+            ],
+            [
+              "orjson",
+              "stdlib",
+              "ujson"
+            ],
+            [
+              "stdlib",
+              "orjson",
+              "ujson"
+            ],
+            [
+              "ujson",
+              "stdlib",
+              "orjson"
+            ],
+            [
+              "ujson",
+              "orjson",
+              "stdlib"
+            ],
+            [
+              "stdlib",
+              "orjson",
+              "ujson"
+            ],
+            [
+              "stdlib",
+              "orjson",
+              "ujson"
+            ],
+            [
+              "ujson",
+              "orjson",
+              "stdlib"
+            ],
+            [
+              "stdlib",
+              "ujson",
+              "orjson"
+            ],
+            [
+              "ujson",
+              "stdlib",
+              "orjson"
+            ],
+            [
+              "stdlib",
+              "orjson",
+              "ujson"
+            ],
+            [
+              "orjson",
+              "ujson",
+              "stdlib"
+            ]
+          ],
+          "libraries": {
+            "stdlib": {
+              "samples_ms": [
+                9.928328233333332,
+                9.141594300000001,
+                9.6947334,
+                11.115408966666667,
+                8.239545433333333,
+                8.052543133333334,
+                8.4158898,
+                9.063772133333332,
+                8.906211599999999,
+                9.197582166666667,
+                9.5203919,
+                8.243494966666667,
+                10.3320505,
+                15.8555671,
+                8.686926133333333
+              ],
+              "median_ms": 9.141594300000001,
+              "sample_min_ms": 8.052543133333334,
+              "sample_max_ms": 15.8555671
+            },
+            "orjson": {
+              "samples_ms": [
+                3.0087900333333333,
+                2.8317941666666666,
+                2.772076466666667,
+                3.5645322999999998,
+                3.6339426,
+                2.6961232,
+                2.749958433333333,
+                2.6821166333333335,
+                2.736249133333333,
+                2.6101139,
+                3.127067933333333,
+                2.9494223333333336,
+                2.765925766666667,
+                7.585213966666667,
+                6.627227666666667
+              ],
+              "median_ms": 2.8317941666666666,
+              "sample_min_ms": 2.6101139,
+              "sample_max_ms": 7.585213966666667
+            },
+            "ujson": {
+              "samples_ms": [
+                6.275893666666667,
+                6.038723366666666,
+                6.992095133333334,
+                6.412714533333333,
+                4.854442833333333,
+                6.5402666,
+                5.317732166666667,
+                6.0709588666666665,
+                5.417150599999999,
+                5.619333933333333,
+                5.222076666666667,
+                6.173737333333333,
+                5.257832033333333,
+                8.0430416,
+                9.705227066666666
+              ],
+              "median_ms": 6.0709588666666665,
+              "sample_min_ms": 4.854442833333333,
+              "sample_max_ms": 9.705227066666666
+            }
+          }
+        }
+      }
+    },
+    "numeric_10000": {
+      "input_bytes": 73621,
+      "input_sha256": "e068d1856bd145ca100c178f48392bb72438f08a9fbb4f1f92f15312248166f1",
+      "semantic_sha256": "e068d1856bd145ca100c178f48392bb72438f08a9fbb4f1f92f15312248166f1",
+      "operations": {
+        "decode": {
+          "units": "milliseconds per operation",
+          "round_orders": [
+            [
+              "ujson",
+              "orjson",
+              "stdlib"
+            ],
+            [
+              "stdlib",
+              "orjson",
+              "ujson"
+            ],
+            [
+              "orjson",
+              "ujson",
+              "stdlib"
+            ],
+            [
+              "stdlib",
+              "orjson",
+              "ujson"
+            ],
+            [
+              "stdlib",
+              "ujson",
+              "orjson"
+            ],
+            [
+              "stdlib",
+              "orjson",
+              "ujson"
+            ],
+            [
+              "ujson",
+              "stdlib",
+              "orjson"
+            ],
+            [
+              "orjson",
+              "stdlib",
+              "ujson"
+            ],
+            [
+              "stdlib",
+              "orjson",
+              "ujson"
+            ],
+            [
+              "ujson",
+              "orjson",
+              "stdlib"
+            ],
+            [
+              "stdlib",
+              "orjson",
+              "ujson"
+            ],
+            [
+              "orjson",
+              "stdlib",
+              "ujson"
+            ],
+            [
+              "ujson",
+              "orjson",
+              "stdlib"
+            ],
+            [
+              "orjson",
+              "stdlib",
+              "ujson"
+            ],
+            [
+              "orjson",
+              "stdlib",
+              "ujson"
+            ]
+          ],
+          "libraries": {
+            "stdlib": {
+              "samples_ms": [
+                0.9765395333333333,
+                0.8344220999999999,
+                0.9676872333333333,
+                0.9174961666666667,
+                0.8613541333333333,
+                0.9242207333333333,
+                1.0920231,
+                0.9456053000000001,
+                0.7437509666666666,
+                1.0026019,
+                0.9665838666666667,
+                0.8569118666666667,
+                0.8369872666666667,
+                1.0919141333333333,
+                0.9450618666666667
+              ],
+              "median_ms": 0.9450618666666667,
+              "sample_min_ms": 0.7437509666666666,
+              "sample_max_ms": 1.0920231
+            },
+            "orjson": {
+              "samples_ms": [
+                0.24534093333333332,
+                0.18728596666666666,
+                0.2206391,
+                0.268182,
+                0.3382951333333334,
+                0.3450353333333333,
+                0.7228190666666666,
+                0.36219066666666666,
+                0.22645303333333333,
+                0.233007,
+                0.247621,
+                0.2269785666666667,
+                0.21439603333333332,
+                0.2905753666666666,
+                0.20908283333333336
+              ],
+              "median_ms": 0.24534093333333332,
+              "sample_min_ms": 0.18728596666666666,
+              "sample_max_ms": 0.7228190666666666
+            },
+            "ujson": {
+              "samples_ms": [
+                0.8490572666666667,
+                0.5811096666666666,
+                0.5804828666666667,
+                0.6489949,
+                0.6265976,
+                0.5915012333333333,
+                1.0470554666666667,
+                0.6399005666666666,
+                0.6195802333333332,
+                0.5562442333333333,
+                0.8082085,
+                0.8011734333333334,
+                0.9469411333333333,
+                0.6447482333333333,
+                0.6316624666666667
+              ],
+              "median_ms": 0.6399005666666666,
+              "sample_min_ms": 0.5562442333333333,
+              "sample_max_ms": 1.0470554666666667
+            }
+          }
+        },
+        "encode_utf8": {
+          "units": "milliseconds per operation",
+          "round_orders": [
+            [
+              "orjson",
+              "ujson",
+              "stdlib"
+            ],
+            [
+              "ujson",
+              "stdlib",
+              "orjson"
+            ],
+            [
+              "ujson",
+              "stdlib",
+              "orjson"
+            ],
+            [
+              "ujson",
+              "orjson",
+              "stdlib"
+            ],
+            [
+              "stdlib",
+              "orjson",
+              "ujson"
+            ],
+            [
+              "orjson",
+              "ujson",
+              "stdlib"
+            ],
+            [
+              "orjson",
+              "stdlib",
+              "ujson"
+            ],
+            [
+              "orjson",
+              "stdlib",
+              "ujson"
+            ],
+            [
+              "orjson",
+              "stdlib",
+              "ujson"
+            ],
+            [
+              "orjson",
+              "ujson",
+              "stdlib"
+            ],
+            [
+              "stdlib",
+              "ujson",
+              "orjson"
+            ],
+            [
+              "orjson",
+              "ujson",
+              "stdlib"
+            ],
+            [
+              "ujson",
+              "orjson",
+              "stdlib"
+            ],
+            [
+              "stdlib",
+              "ujson",
+              "orjson"
+            ],
+            [
+              "stdlib",
+              "ujson",
+              "orjson"
+            ]
+          ],
+          "libraries": {
+            "stdlib": {
+              "samples_ms": [
+                2.6376617,
+                3.5603048999999998,
+                2.7870846,
+                2.418014133333333,
+                2.5983948333333333,
+                2.7055169,
+                2.4551592999999996,
+                2.5406927,
+                2.2977976666666664,
+                2.761330933333333,
+                2.5487059333333333,
+                2.420193433333333,
+                2.5564447666666665,
+                2.627916,
+                2.1173811000000002
+              ],
+              "median_ms": 2.5564447666666665,
+              "sample_min_ms": 2.1173811000000002,
+              "sample_max_ms": 3.5603048999999998
+            },
+            "orjson": {
+              "samples_ms": [
+                0.3310609666666667,
+                0.256222,
+                0.3140059333333334,
+                0.3022048,
+                0.27398646666666665,
+                0.2847593666666666,
+                0.23584106666666668,
+                0.22560746666666667,
+                0.31007143333333337,
+                0.26265143333333335,
+                0.2441577,
+                0.28894533333333333,
+                0.2904603333333333,
+                0.33027876666666667,
+                0.26897920000000003
+              ],
+              "median_ms": 0.2847593666666666,
+              "sample_min_ms": 0.22560746666666667,
+              "sample_max_ms": 0.3310609666666667
+            },
+            "ujson": {
+              "samples_ms": [
+                1.2508427333333334,
+                1.6448157333333333,
+                1.3695878333333333,
+                0.8280451,
+                1.0440799333333333,
+                0.918824,
+                0.7321717,
+                0.8563231333333333,
+                1.1609241000000001,
+                0.7663668,
+                0.8513651,
+                0.9906147,
+                0.9190114666666667,
+                0.930773,
+                0.9099708666666667
+              ],
+              "median_ms": 0.9190114666666667,
+              "sample_min_ms": 0.7321717,
+              "sample_max_ms": 1.6448157333333333
+            }
+          }
+        },
+        "decode_encode_utf8": {
+          "units": "milliseconds per operation",
+          "round_orders": [
+            [
+              "ujson",
+              "orjson",
+              "stdlib"
+            ],
+            [
+              "ujson",
+              "stdlib",
+              "orjson"
+            ],
+            [
+              "stdlib",
+              "ujson",
+              "orjson"
+            ],
+            [
+              "stdlib",
+              "ujson",
+              "orjson"
+            ],
+            [
+              "orjson",
+              "ujson",
+              "stdlib"
+            ],
+            [
+              "orjson",
+              "stdlib",
+              "ujson"
+            ],
+            [
+              "orjson",
+              "ujson",
+              "stdlib"
+            ],
+            [
+              "orjson",
+              "stdlib",
+              "ujson"
+            ],
+            [
+              "orjson",
+              "stdlib",
+              "ujson"
+            ],
+            [
+              "ujson",
+              "stdlib",
+              "orjson"
+            ],
+            [
+              "orjson",
+              "stdlib",
+              "ujson"
+            ],
+            [
+              "ujson",
+              "orjson",
+              "stdlib"
+            ],
+            [
+              "ujson",
+              "orjson",
+              "stdlib"
+            ],
+            [
+              "orjson",
+              "stdlib",
+              "ujson"
+            ],
+            [
+              "ujson",
+              "orjson",
+              "stdlib"
+            ]
+          ],
+          "libraries": {
+            "stdlib": {
+              "samples_ms": [
+                3.3480972666666666,
+                3.7299433333333334,
+                3.1310825,
+                3.3584357333333332,
+                3.1332498666666666,
+                3.7415302666666665,
+                3.786127866666667,
+                3.6274740666666667,
+                3.3352452666666665,
+                3.2145963333333336,
+                3.6251602333333333,
+                3.752059066666667,
+                3.5639251666666665,
+                3.6207433,
+                3.9083110333333333
+              ],
+              "median_ms": 3.6207433,
+              "sample_min_ms": 3.1310825,
+              "sample_max_ms": 3.9083110333333333
+            },
+            "orjson": {
+              "samples_ms": [
+                0.5296085666666667,
+                0.6230929000000001,
+                0.6344780666666666,
+                0.7201770666666667,
+                0.5103966666666667,
+                0.4847206333333334,
+                0.9447867333333333,
+                0.7167204,
+                0.6296062333333333,
+                0.6631884666666666,
+                0.5782257,
+                0.636285,
+                0.7299158666666667,
+                0.631562,
+                0.5095942
+              ],
+              "median_ms": 0.631562,
+              "sample_min_ms": 0.4847206333333334,
+              "sample_max_ms": 0.9447867333333333
+            },
+            "ujson": {
+              "samples_ms": [
+                1.4708542,
+                1.6812705333333335,
+                1.7801673333333332,
+                1.62787,
+                1.7253874,
+                1.7424570666666666,
+                2.2005173,
+                1.5581604666666666,
+                1.6089970666666666,
+                1.5768896000000001,
+                1.4209521333333333,
+                1.9810774,
+                1.6812575333333335,
+                1.6014441333333334,
+                1.6107272333333333
+              ],
+              "median_ms": 1.62787,
+              "sample_min_ms": 1.4209521333333333,
+              "sample_max_ms": 2.2005173
+            }
+          }
+        }
+      }
+    }
+  },
+  "qualification": "These are real local timings on three generated inputs, not vendor benchmark reproductions, production workload results, memory/security certification, or a universal ranking."
+}

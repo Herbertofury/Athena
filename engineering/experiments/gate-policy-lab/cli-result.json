@@ -1,0 +1,137 @@
+{
+  "acceptance_policy": {
+    "evaluator_version": 1,
+    "memory_budget_bytes_decimal": "67108864",
+    "minimum_pairs_decimal": "15",
+    "minimum_speedup_bits_hex": "3ff199999999999a",
+    "minimum_speedup_text": "1.1",
+    "minimum_stress_cases_decimal": "10000",
+    "schema_version": 1
+  },
+  "decision": {
+    "Incomplete": "Missing repeated timing, stress or memory measurements"
+  },
+  "evidence": {
+    "baseline_revision": "linear-unique-v1",
+    "candidate_revision": "indexed-unique-v1",
+    "environment_id": "linux-x86_64; atlas-lab 0.1.0; rustc 1.99.1 (58cf8f9c3 2026-10-13); target:x86_64-unknown-linux-gnu; profile:release; opt:3; flags-sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855; lock-sha256:4ba18f93c261a48a42ea595be3f8a37b6d9c419912d7e7875204ac0641e2dd85; standalone generated workload; runner:6ebaa3d418f3813811c7623f822f218b8c9e81f389e82a343d787d4f32be9b8f",
+    "stress_cases": 0,
+    "stress_failures": 0,
+    "trials": [
+      {
+        "baseline_ns": 39965286,
+        "cancelled_cleanly": null,
+        "candidate_ns": 386789,
+        "equal_complete_output": true,
+        "peak_bytes": 0
+      },
+      {
+        "baseline_ns": 39803519,
+        "cancelled_cleanly": null,
+        "candidate_ns": 185993,
+        "equal_complete_output": true,
+        "peak_bytes": 0
+      },
+      {
+        "baseline_ns": 41553832,
+        "cancelled_cleanly": null,
+        "candidate_ns": 595433,
+        "equal_complete_output": true,
+        "peak_bytes": 0
+      },
+      {
+        "baseline_ns": 40116369,
+        "cancelled_cleanly": null,
+        "candidate_ns": 132541,
+        "equal_complete_output": true,
+        "peak_bytes": 0
+      },
+      {
+        "baseline_ns": 39110185,
+        "cancelled_cleanly": null,
+        "candidate_ns": 214744,
+        "equal_complete_output": true,
+        "peak_bytes": 0
+      },
+      {
+        "baseline_ns": 43985576,
+        "cancelled_cleanly": null,
+        "candidate_ns": 165439,
+        "equal_complete_output": true,
+        "peak_bytes": 0
+      },
+      {
+        "baseline_ns": 37022936,
+        "cancelled_cleanly": null,
+        "candidate_ns": 211363,
+        "equal_complete_output": true,
+        "peak_bytes": 0
+      },
+      {
+        "baseline_ns": 42120167,
+        "cancelled_cleanly": null,
+        "candidate_ns": 155153,
+        "equal_complete_output": true,
+        "peak_bytes": 0
+      },
+      {
+        "baseline_ns": 38341397,
+        "cancelled_cleanly": null,
+        "candidate_ns": 254046,
+        "equal_complete_output": true,
+        "peak_bytes": 0
+      },
+      {
+        "baseline_ns": 43325277,
+        "cancelled_cleanly": null,
+        "candidate_ns": 132382,
+        "equal_complete_output": true,
+        "peak_bytes": 0
+      },
+      {
+        "baseline_ns": 41766045,
+        "cancelled_cleanly": null,
+        "candidate_ns": 213002,
+        "equal_complete_output": true,
+        "peak_bytes": 0
+      },
+      {
+        "baseline_ns": 41644365,
+        "cancelled_cleanly": null,
+        "candidate_ns": 130943,
+        "equal_complete_output": true,
+        "peak_bytes": 0
+      },
+      {
+        "baseline_ns": 38957323,
+        "cancelled_cleanly": null,
+        "candidate_ns": 215616,
+        "equal_complete_output": true,
+        "peak_bytes": 0
+      },
+      {
+        "baseline_ns": 37806673,
+        "cancelled_cleanly": null,
+        "candidate_ns": 378739,
+        "equal_complete_output": true,
+        "peak_bytes": 0
+      },
+      {
+        "baseline_ns": 39255918,
+        "cancelled_cleanly": null,
+        "candidate_ns": 205412,
+        "equal_complete_output": true,
+        "peak_bytes": 0
+      }
+    ],
+    "workload_id": "generated-6000-ids-4001-unique-v1"
+  },
+  "experiment_id": 1,
+  "limitations": [
+    "No peak memory measurement",
+    "Cancellation not implemented/tested",
+    "No production acceptance",
+    "Generated IDs, not a live platform collection",
+    "Unit stress cases are not counted as this run's evidence"
+  ]
+}

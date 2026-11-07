@@ -1,0 +1,141 @@
+{
+  "baseline_commit": "18542f81e26c84469d6cdc6ae9557318af6beefc",
+  "scope": "Requested Rust allocations during actual store save/compare/commit; fixture metadata, not new HTTP evidence; not total memory or speed",
+  "time_fields_compared_by_format_not_equal_wall_clock": [
+    "observed_at_utc"
+  ],
+  "pairs": [
+    {
+      "repetition": 0,
+      "generated_oversized_previous": false,
+      "before": {
+        "allocation_calls": 370,
+        "held_requested_rust_bytes_above_start": 3300,
+        "peak_requested_rust_bytes_above_start": 23571,
+        "reallocation_calls": 19,
+        "total_successfully_requested_bytes": 50677
+      },
+      "after": {
+        "allocation_calls": 370,
+        "held_requested_rust_bytes_above_start": 3300,
+        "peak_requested_rust_bytes_above_start": 23571,
+        "reallocation_calls": 19,
+        "total_successfully_requested_bytes": 50677
+      },
+      "complete_bytes_and_receipt_semantics_equal": true
+    },
+    {
+      "repetition": 0,
+      "generated_oversized_previous": true,
+      "before": {
+        "allocation_calls": 209,
+        "held_requested_rust_bytes_above_start": 3314,
+        "peak_requested_rust_bytes_above_start": 5248554,
+        "reallocation_calls": 11,
+        "total_successfully_requested_bytes": 5268636
+      },
+      "after": {
+        "allocation_calls": 206,
+        "held_requested_rust_bytes_above_start": 3314,
+        "peak_requested_rust_bytes_above_start": 14150,
+        "reallocation_calls": 11,
+        "total_successfully_requested_bytes": 25704
+      },
+      "complete_bytes_and_receipt_semantics_equal": true
+    },
+    {
+      "repetition": 1,
+      "generated_oversized_previous": false,
+      "before": {
+        "allocation_calls": 370,
+        "held_requested_rust_bytes_above_start": 3300,
+        "peak_requested_rust_bytes_above_start": 23571,
+        "reallocation_calls": 19,
+        "total_successfully_requested_bytes": 50677
+      },
+      "after": {
+        "allocation_calls": 370,
+        "held_requested_rust_bytes_above_start": 3300,
+        "peak_requested_rust_bytes_above_start": 23571,
+        "reallocation_calls": 19,
+        "total_successfully_requested_bytes": 50677
+      },
+      "complete_bytes_and_receipt_semantics_equal": true
+    },
+    {
+      "repetition": 1,
+      "generated_oversized_previous": true,
+      "before": {
+        "allocation_calls": 209,
+        "held_requested_rust_bytes_above_start": 3314,
+        "peak_requested_rust_bytes_above_start": 5248554,
+        "reallocation_calls": 11,
+        "total_successfully_requested_bytes": 5268636
+      },
+      "after": {
+        "allocation_calls": 206,
+        "held_requested_rust_bytes_above_start": 3314,
+        "peak_requested_rust_bytes_above_start": 14150,
+        "reallocation_calls": 11,
+        "total_successfully_requested_bytes": 25704
+      },
+      "complete_bytes_and_receipt_semantics_equal": true
+    },
+    {
+      "repetition": 2,
+      "generated_oversized_previous": false,
+      "before": {
+        "allocation_calls": 370,
+        "held_requested_rust_bytes_above_start": 3300,
+        "peak_requested_rust_bytes_above_start": 23571,
+        "reallocation_calls": 19,
+        "total_successfully_requested_bytes": 50677
+      },
+      "after": {
+        "allocation_calls": 370,
+        "held_requested_rust_bytes_above_start": 3300,
+        "peak_requested_rust_bytes_above_start": 23571,
+        "reallocation_calls": 19,
+        "total_successfully_requested_bytes": 50677
+      },
+      "complete_bytes_and_receipt_semantics_equal": true
+    },
+    {
+      "repetition": 2,
+      "generated_oversized_previous": true,
+      "before": {
+        "allocation_calls": 209,
+        "held_requested_rust_bytes_above_start": 3314,
+        "peak_requested_rust_bytes_above_start": 5248554,
+        "reallocation_calls": 11,
+        "total_successfully_requested_bytes": 5268636
+      },
+      "after": {
+        "allocation_calls": 206,
+        "held_requested_rust_bytes_above_start": 3314,
+        "peak_requested_rust_bytes_above_start": 14150,
+        "reallocation_calls": 11,
+        "total_successfully_requested_bytes": 25704
+      },
+      "complete_bytes_and_receipt_semantics_equal": true
+    }
+  ],
+  "baseline_read_budget_failures": 2,
+  "initial_fixture_construction_failure_retained": 1,
+  "utf16_complete_bytes": "passed",
+  "wrong_type_blob_failure_preserved": "passed",
+  "rust_unit": 138,
+  "rust_integration": 9,
+  "node_tests": 262,
+  "python_tests_normal": 237,
+  "python_tests_optimized": 237,
+  "clippy_all_targets": "passed",
+  "store_sha256": "75f4a12aaa60a8845e81279292efe0d28c2e1e3d911799a53de7d8935d18b346",
+  "environment": {
+    "system": "Linux",
+    "machine": "x86_64",
+    "profile": "debug",
+    "compiler": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+    "cargo_build_jobs": 2
+  }
+}

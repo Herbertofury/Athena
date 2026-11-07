@@ -1,0 +1,426 @@
+{
+  "schema": 1,
+  "date": "2026-10-26",
+  "evidence": "measured_local_generated_workload",
+  "environment": {
+    "python": "3.12.14",
+    "sqlite": "3.53.1",
+    "system": "Linux",
+    "machine": "x86_64"
+  },
+  "harness_sha256": "433c7b6e2ddcf2aeeb04ded487e0654a0b2a52859772b00fbab525d50ee78b09",
+  "input_sha256": "a41caeab53a189e3f33b3a5cd8c1c3d369cf3ec3ca269e02fd1db0ceea53d24c",
+  "rows": 100000,
+  "storage": "two independent in-memory databases; no disk durability benchmark",
+  "runs": {
+    "filtered_complete": {
+      "samples_ms": {
+        "baseline": [
+          3.637814,
+          3.990338,
+          7.268611,
+          4.428532,
+          4.575928,
+          4.053798,
+          4.65253,
+          4.478284,
+          6.457793,
+          6.910852,
+          3.640313,
+          6.066409,
+          4.237684,
+          10.853823,
+          4.906615,
+          6.988858,
+          7.849124,
+          10.158964,
+          9.536202,
+          6.647092,
+          6.6468
+        ],
+        "indexed": [
+          0.284669,
+          0.157176,
+          0.493079,
+          0.31142,
+          0.18481,
+          0.177403,
+          0.166551,
+          0.143196,
+          0.678353,
+          0.144111,
+          0.143984,
+          0.14597,
+          0.161945,
+          0.152828,
+          1.496223,
+          0.144226,
+          0.146934,
+          1.956263,
+          0.147916,
+          0.146131,
+          0.641636
+        ]
+      },
+      "median_ms": {
+        "baseline": 6.066409,
+        "indexed": 0.161945
+      },
+      "round_orders": [
+        [
+          "indexed",
+          "baseline"
+        ],
+        [
+          "indexed",
+          "baseline"
+        ],
+        [
+          "indexed",
+          "baseline"
+        ],
+        [
+          "baseline",
+          "indexed"
+        ],
+        [
+          "baseline",
+          "indexed"
+        ],
+        [
+          "indexed",
+          "baseline"
+        ],
+        [
+          "indexed",
+          "baseline"
+        ],
+        [
+          "baseline",
+          "indexed"
+        ],
+        [
+          "baseline",
+          "indexed"
+        ],
+        [
+          "baseline",
+          "indexed"
+        ],
+        [
+          "baseline",
+          "indexed"
+        ],
+        [
+          "indexed",
+          "baseline"
+        ],
+        [
+          "baseline",
+          "indexed"
+        ],
+        [
+          "baseline",
+          "indexed"
+        ],
+        [
+          "baseline",
+          "indexed"
+        ],
+        [
+          "baseline",
+          "indexed"
+        ],
+        [
+          "indexed",
+          "baseline"
+        ],
+        [
+          "indexed",
+          "baseline"
+        ],
+        [
+          "baseline",
+          "indexed"
+        ],
+        [
+          "baseline",
+          "indexed"
+        ],
+        [
+          "indexed",
+          "baseline"
+        ]
+      ],
+      "result_sha256": [
+        "a7b7966b1a4c3476cb2ee1660eeb3cc513e575b16dc2601b5ec383af87bea27c",
+        "4332c86004a7b6a85741315c174c1ab4e74329ce9a329c6c66cdbd9610b9f877",
+        "ce32aaf780b5c0782c03f1cab323719b3753d0bd827c81b1875871a8148470bc",
+        "7afbf9f6ca2fcfd6e3222df2f9f54a72bc14b33bde56a59df6eaf8974711141c",
+        "ddf8729aa9455a88cecf4f522ec7bfb99021c824fc065600c8b56fd4baafdab4",
+        "2565bbc7f642d1c583a7f2966382dd6fa224f62a9a8661e93644947b9abab017",
+        "132e9e9ab8fa722f4b2cb02794133e059ea8dc80d8ebb3c418aa102f95ed6447",
+        "37f006a15214035064daf051c32f2d9623f269f6a0dbedf97787cd7cdfe61b7a",
+        "310ff35bb22b32e7cb9093b312020f72108b2187609fb2388215433bc60b56d3",
+        "7673fb9273bb9f8287bbf202912fd8516ed95fb85d4c3bd1fb5ae49173f4c178",
+        "7eea25a56b2163cdb0e109da0102c1fb969e98ad7e510fa76f09f667ed7a03fe",
+        "cbf2fc7f7de83c7db0014b9664bd003db58c04b847fc2cb2fdea435064fecf45",
+        "6f10d8f6d724f40fd488a2ce5a1343ecbebb1248fd0ff556c00f5c1c38b8ac60",
+        "28f385e069356b2f2aa6f507b5925aefcb52ac59bf9886b20f9589ff851f8ece",
+        "ad8db371e50e2ac0ae6fd1ed4734a78f400c7493bc8004d46bd06584281ea0f6",
+        "490e9bf6e6be0d75b78e736b4c9c9e33454b462116aae734e0534cf1f7b26e12",
+        "d96b550a3654a7992df6349938d4c9dbd82e8f5ebed706da27c21833f5e86980",
+        "d342aa8ac72b6e8f36760de17d45695eb284a79a1f8d29e571d214ee82a8730d",
+        "a358f6680857e37ad45f9f65cb56ba6c792514a5ac0e4d0d0c599991a67e45bb",
+        "eb077717a8c21651060192072625ce502bb4edc8c36b4c8be3b08e1023db3f64",
+        "a7b7966b1a4c3476cb2ee1660eeb3cc513e575b16dc2601b5ec383af87bea27c"
+      ],
+      "result_counts": [
+        333,
+        333,
+        334,
+        333,
+        334,
+        333,
+        333,
+        333,
+        333,
+        334,
+        333,
+        334,
+        333,
+        333,
+        333,
+        333,
+        334,
+        333,
+        334,
+        333,
+        333
+      ]
+    },
+    "full_complete": {
+      "samples_ms": {
+        "baseline": [
+          249.556632,
+          121.374657,
+          114.539282,
+          120.003249,
+          127.966657,
+          139.834983,
+          113.533295,
+          115.215699,
+          162.044941
+        ],
+        "indexed": [
+          110.741231,
+          141.179694,
+          170.876073,
+          128.612526,
+          116.43477,
+          113.405217,
+          108.144209,
+          112.108801,
+          140.409571
+        ]
+      },
+      "median_ms": {
+        "baseline": 121.374657,
+        "indexed": 116.43477
+      },
+      "round_orders": [
+        [
+          "baseline",
+          "indexed"
+        ],
+        [
+          "indexed",
+          "baseline"
+        ],
+        [
+          "baseline",
+          "indexed"
+        ],
+        [
+          "baseline",
+          "indexed"
+        ],
+        [
+          "baseline",
+          "indexed"
+        ],
+        [
+          "indexed",
+          "baseline"
+        ],
+        [
+          "baseline",
+          "indexed"
+        ],
+        [
+          "baseline",
+          "indexed"
+        ],
+        [
+          "baseline",
+          "indexed"
+        ]
+      ],
+      "result_sha256": [
+        "a41caeab53a189e3f33b3a5cd8c1c3d369cf3ec3ca269e02fd1db0ceea53d24c",
+        "a41caeab53a189e3f33b3a5cd8c1c3d369cf3ec3ca269e02fd1db0ceea53d24c",
+        "a41caeab53a189e3f33b3a5cd8c1c3d369cf3ec3ca269e02fd1db0ceea53d24c",
+        "a41caeab53a189e3f33b3a5cd8c1c3d369cf3ec3ca269e02fd1db0ceea53d24c",
+        "a41caeab53a189e3f33b3a5cd8c1c3d369cf3ec3ca269e02fd1db0ceea53d24c",
+        "a41caeab53a189e3f33b3a5cd8c1c3d369cf3ec3ca269e02fd1db0ceea53d24c",
+        "a41caeab53a189e3f33b3a5cd8c1c3d369cf3ec3ca269e02fd1db0ceea53d24c",
+        "a41caeab53a189e3f33b3a5cd8c1c3d369cf3ec3ca269e02fd1db0ceea53d24c",
+        "a41caeab53a189e3f33b3a5cd8c1c3d369cf3ec3ca269e02fd1db0ceea53d24c"
+      ],
+      "result_counts": [
+        100000,
+        100000,
+        100000,
+        100000,
+        100000,
+        100000,
+        100000,
+        100000,
+        100000
+      ]
+    },
+    "update_1000_precommit": {
+      "samples_ms": {
+        "baseline": [
+          3.697563,
+          5.117955,
+          4.588235,
+          3.338254,
+          3.550436,
+          3.244463,
+          4.040906,
+          5.338969,
+          3.630542
+        ],
+        "indexed": [
+          8.197508,
+          9.809048,
+          9.924448,
+          11.934844,
+          9.409558,
+          14.962528,
+          10.752789,
+          10.645574,
+          13.080647
+        ]
+      },
+      "median_ms": {
+        "baseline": 3.697563,
+        "indexed": 10.645574
+      },
+      "round_orders": [
+        [
+          "baseline",
+          "indexed"
+        ],
+        [
+          "indexed",
+          "baseline"
+        ],
+        [
+          "baseline",
+          "indexed"
+        ],
+        [
+          "baseline",
+          "indexed"
+        ],
+        [
+          "indexed",
+          "baseline"
+        ],
+        [
+          "baseline",
+          "indexed"
+        ],
+        [
+          "baseline",
+          "indexed"
+        ],
+        [
+          "baseline",
+          "indexed"
+        ],
+        [
+          "baseline",
+          "indexed"
+        ]
+      ],
+      "all_updated_states_equal": true,
+      "all_rollbacks_restored_exact_state": true,
+      "commit_and_durability_timed": false
+    }
+  },
+  "query_plans": {
+    "baseline": {
+      "filtered": [
+        [
+          3,
+          0,
+          182,
+          "SCAN records"
+        ],
+        [
+          17,
+          0,
+          0,
+          "USE TEMP B-TREE FOR ORDER BY"
+        ]
+      ],
+      "full": [
+        [
+          3,
+          0,
+          182,
+          "SCAN records"
+        ]
+      ]
+    },
+    "indexed": {
+      "filtered": [
+        [
+          3,
+          0,
+          95,
+          "SEARCH records USING COVERING INDEX lookup_cover (scope=? AND kind=? AND active=?)"
+        ]
+      ],
+      "full": [
+        [
+          3,
+          0,
+          182,
+          "SCAN records"
+        ]
+      ]
+    }
+  },
+  "database_allocated_bytes": {
+    "baseline": 2174976,
+    "indexed": 4689920
+  },
+  "pragmas": {
+    "baseline": {
+      "journal_mode": "memory",
+      "synchronous": 2,
+      "cache_size": -2000
+    },
+    "indexed": {
+      "journal_mode": "memory",
+      "synchronous": 2,
+      "cache_size": -2000
+    }
+  },
+  "index_build_ms": 95.591025,
+  "qualification": "Generated data, version-recorded SQLite in-memory query/update experiment. Full fetches, no LIMIT. Index build separately timed. No disk IO, crash durability, concurrent writers, app latency, RSS or isolated CPU proof. EXPLAIN output retained for this version, not parsed as a stable API."
+}

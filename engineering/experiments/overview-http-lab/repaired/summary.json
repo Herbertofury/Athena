@@ -1,0 +1,65 @@
+{
+  "scope": "Actual one-job public batch and explicitly replay-expanded 10/50-job histories; full response parity, no source bodies published",
+  "seed_sha256": "aaee59c34b7736d1ca17bef89c7bb4905a963af3c27d4e4df25ba81f57e209f2",
+  "binary_sha256": {
+    "baseline": "2f8a18d4bc18c29b89cd389da601bd96659d80eb5387308fec8b1bd5a1994d57",
+    "candidate": "2f8a18d4bc18c29b89cd389da601bd96659d80eb5387308fec8b1bd5a1994d57"
+  },
+  "raw_samples": 300,
+  "results": [
+    {
+      "count": 1,
+      "strategy": "baseline",
+      "measured_samples": 40,
+      "median_ms": 1.640596,
+      "max_ms": 6.216127,
+      "bytes": 22487
+    },
+    {
+      "count": 1,
+      "strategy": "candidate",
+      "measured_samples": 40,
+      "median_ms": 1.08778,
+      "max_ms": 2.780299,
+      "bytes": 22487
+    },
+    {
+      "count": 10,
+      "strategy": "baseline",
+      "measured_samples": 40,
+      "median_ms": 6.0723505,
+      "max_ms": 14.302478,
+      "bytes": 224152
+    },
+    {
+      "count": 10,
+      "strategy": "candidate",
+      "measured_samples": 40,
+      "median_ms": 1.8308490000000002,
+      "max_ms": 15.314409,
+      "bytes": 224152
+    },
+    {
+      "count": 50,
+      "strategy": "baseline",
+      "measured_samples": 40,
+      "median_ms": 42.464710499999995,
+      "max_ms": 155.310126,
+      "bytes": 1120472
+    },
+    {
+      "count": 50,
+      "strategy": "candidate",
+      "measured_samples": 40,
+      "median_ms": 6.813923,
+      "max_ms": 31.913059,
+      "bytes": 1120472
+    }
+  ],
+  "limitations": [
+    "One Linux shared host; not a UI input/paint benchmark",
+    "VmHWM is approximate diagnostic only, not exact allocator peak",
+    "Replay workloads are not target-project evidence",
+    "Default server is not switched to the candidate"
+  ]
+}

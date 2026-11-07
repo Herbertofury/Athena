@@ -1,0 +1,82 @@
+{
+  "coordinator_sha256": "9bfe2454d310204acf2c7d69df1c61a84b4e7e4677449bd05665049b09d1fa80",
+  "harness_sha256": "f451d2a4214cef3735fae606fa20eb9f48e2ac858a26cf0e0b9497eeecc0d7e3",
+  "mode": "retained public bytes through actual queue and archival coordinator; fetch is fixture-supplied, no provider requests",
+  "queue_counts": {
+    "failed": 3,
+    "succeeded": 3
+  },
+  "queue_source_sha256": "be2f1ef28adf58a038433e5becba984b47145fca51609d5f92dc5e2ccc7f3d1d",
+  "results": [
+    {
+      "canonical_id": "AANobbMI",
+      "complete_typed_projection_equal": true,
+      "exact_original_json_reopened": true,
+      "failed_job_id": "2",
+      "failed_refresh_retained_last_good": true,
+      "job_output_bytes": 469,
+      "queue_job_id": "1",
+      "receipt": {
+        "project_archive": {
+          "canonical_id": "AANobbMI",
+          "coordinator_sha256": "9bfe2454d310204acf2c7d69df1c61a84b4e7e4677449bd05665049b09d1fa80",
+          "generation": "1",
+          "payload_bytes": 12840,
+          "payload_sha256": "80b9186e951352b4b265e20cf6e5f57c8646f11b09d6f3a1a8492046acfaf9c0",
+          "schema_version": 1,
+          "scope": "Receipt only; complete received public project JSON stays in local snapshots. No linked-media fetch, account access or complete-platform claim.",
+          "status": "complete_received_response"
+        }
+      },
+      "source_bytes": 12840,
+      "source_sha256": "80b9186e951352b4b265e20cf6e5f57c8646f11b09d6f3a1a8492046acfaf9c0"
+    },
+    {
+      "canonical_id": "YL57xq9U",
+      "complete_typed_projection_equal": true,
+      "exact_original_json_reopened": true,
+      "failed_job_id": "4",
+      "failed_refresh_retained_last_good": true,
+      "job_output_bytes": 468,
+      "queue_job_id": "3",
+      "receipt": {
+        "project_archive": {
+          "canonical_id": "YL57xq9U",
+          "coordinator_sha256": "9bfe2454d310204acf2c7d69df1c61a84b4e7e4677449bd05665049b09d1fa80",
+          "generation": "2",
+          "payload_bytes": 7267,
+          "payload_sha256": "8d9ae282ea19d854f9f0911fac320a4af8d873a3228173e37e5001341afe2996",
+          "schema_version": 1,
+          "scope": "Receipt only; complete received public project JSON stays in local snapshots. No linked-media fetch, account access or complete-platform claim.",
+          "status": "complete_received_response"
+        }
+      },
+      "source_bytes": 7267,
+      "source_sha256": "8d9ae282ea19d854f9f0911fac320a4af8d873a3228173e37e5001341afe2996"
+    },
+    {
+      "canonical_id": "gvQqBUqZ",
+      "complete_typed_projection_equal": true,
+      "exact_original_json_reopened": true,
+      "failed_job_id": "6",
+      "failed_refresh_retained_last_good": true,
+      "job_output_bytes": 468,
+      "queue_job_id": "5",
+      "receipt": {
+        "project_archive": {
+          "canonical_id": "gvQqBUqZ",
+          "coordinator_sha256": "9bfe2454d310204acf2c7d69df1c61a84b4e7e4677449bd05665049b09d1fa80",
+          "generation": "3",
+          "payload_bytes": 6200,
+          "payload_sha256": "70080299d623bcd6fa857d09243752e6131377b8fa9cd3fd4da89bb33175caaa",
+          "schema_version": 1,
+          "scope": "Receipt only; complete received public project JSON stays in local snapshots. No linked-media fetch, account access or complete-platform claim.",
+          "status": "complete_received_response"
+        }
+      },
+      "source_bytes": 6200,
+      "source_sha256": "70080299d623bcd6fa857d09243752e6131377b8fa9cd3fd4da89bb33175caaa"
+    }
+  ],
+  "scope": "not live HTTP-provider or native-browser acceptance; snapshot commit and job finalization are separate, not exactly-once"
+}

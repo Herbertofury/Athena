@@ -1,0 +1,147 @@
+{
+  "schema_version": 1,
+  "harness": "atlas-card-density-v7-worker-preparation",
+  "scope": "measured_browser_generated_workload",
+  "operation": "metadata",
+  "preparation": {
+    "strategy": "worker"
+  },
+  "performance_start_ms": 144294.09999999404,
+  "performance_end_ms": 144385,
+  "started_at": "2026-10-27T05:40:14.792Z",
+  "dataset": {
+    "count": 200,
+    "metadata_bytes_per_record": 65536
+  },
+  "samples": [],
+  "complete": false,
+  "observed_input_events": [
+    {
+      "name": "pointerout",
+      "start_ms": 144027.79999998212,
+      "duration_ms": 272,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 144027.79999998212,
+      "duration_ms": 272,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 144027.79999998212,
+      "duration_ms": 272,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 144027.79999998212,
+      "duration_ms": 272,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerover",
+      "start_ms": 144027.79999998212,
+      "duration_ms": 272,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 144027.79999998212,
+      "duration_ms": 272,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseout",
+      "start_ms": 144027.79999998212,
+      "duration_ms": 272,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseover",
+      "start_ms": 144027.79999998212,
+      "duration_ms": 272,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerup",
+      "start_ms": 144290.89999997616,
+      "duration_ms": 48,
+      "interaction_id": 6406
+    },
+    {
+      "name": "mouseup",
+      "start_ms": 144290.89999997616,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "click",
+      "start_ms": 144290.89999997616,
+      "duration_ms": 48,
+      "interaction_id": 6406
+    },
+    {
+      "name": "pointerout",
+      "start_ms": 144362.69999998808,
+      "duration_ms": 24,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerover",
+      "start_ms": 144362.69999998808,
+      "duration_ms": 24,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 144362.69999998808,
+      "duration_ms": 24,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseout",
+      "start_ms": 144362.69999998808,
+      "duration_ms": 24,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseover",
+      "start_ms": 144362.69999998808,
+      "duration_ms": 24,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerdown",
+      "start_ms": 144373.29999998212,
+      "duration_ms": 40,
+      "interaction_id": 6413
+    },
+    {
+      "name": "mousedown",
+      "start_ms": 144373.29999998212,
+      "duration_ms": 40,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerup",
+      "start_ms": 144383.5,
+      "duration_ms": 32,
+      "interaction_id": 6413
+    },
+    {
+      "name": "mouseup",
+      "start_ms": 144383.5,
+      "duration_ms": 32,
+      "interaction_id": 0
+    },
+    {
+      "name": "click",
+      "start_ms": 144383.5,
+      "duration_ms": 32,
+      "interaction_id": 6413
+    }
+  ],
+  "error": "Stopped during data preparation; previous workload and completed evidence retained."
+}

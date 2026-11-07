@@ -1,0 +1,35 @@
+{
+  "source_commit": "c00528de7295ab411e28e9d9c8e8ceff4dd44920",
+  "harness": "atlas-card-density-v7-worker-preparation",
+  "order": [
+    "main-200-8k-first",
+    "worker-200-8k-first",
+    "worker-200-8k-second",
+    "main-200-8k-second"
+  ],
+  "complete_data_parity": true,
+  "all_24_render_samples_equal": true,
+  "dataset_sha256": "b6fb077f6be7e0af3734bdde69d1a995e469574253cb55ffe72b99d148ec6344",
+  "preparation_request_to_ready_ms": [
+    71.2000000178814,
+    165.5,
+    61.19999998807907,
+    19.600000023841858
+  ],
+  "cancel_zero_sample_receipt_downloaded": true,
+  "last_completed_byte_identical": true,
+  "previous_inspected_record": {
+    "id": "card-000199",
+    "metadata_bytes": 8192
+  },
+  "limitations": [
+    "Only two preparation observations per lane; not a distribution or general ranking",
+    "No direct input-latency or peak-memory comparison of preparation lanes",
+    "Cold/warm effects visible; do not call the repeated run a code improvement",
+    "Timeout and hidden-tab path not exercised in browser"
+  ],
+  "ci_run": 40456268926,
+  "ci_conclusion": "success",
+  "pages_run": 40456268531,
+  "pages_conclusion": "success"
+}

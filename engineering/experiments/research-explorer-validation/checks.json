@@ -1,0 +1,102 @@
+{
+  "schema_version": 1,
+  "checked_at": "2026-10-28T04:56:54.481241Z",
+  "evidence": "implementation_validation_not_candidate_benchmark",
+  "catalog_entries": 154,
+  "catalog_primary_sources": 166,
+  "fields": 18,
+  "papers": 19,
+  "github_repository_snapshots": 123,
+  "approved_community_reports": 0,
+  "planned_experiment_cohorts": 16,
+  "retained_atlas_observations": 27,
+  "publisher_reported_observations": 8,
+  "tests": {
+    "python": {
+      "passed": 166,
+      "failed": 0,
+      "command": "python3 -m unittest discover -s tests -v"
+    },
+    "javascript": {
+      "passed": 145,
+      "failed": 0,
+      "command": "node --test --test-isolation=none tests/*.test.mjs"
+    }
+  },
+  "browser_checks": [
+    {
+      "check": "Search for orjson and compare shortlist",
+      "outcome": "pass",
+      "detail": "One candidate; proposal, metrics and constraints visible in comparison dialog."
+    },
+    {
+      "check": "Retained JSON ranking",
+      "outcome": "pass",
+      "detail": "One selected workload/operation cohort; orjson, UltraJSON and standard library ordered by the retained median with caveats."
+    },
+    {
+      "check": "Published ProgramBench ranking",
+      "outcome": "pass",
+      "detail": "Four imported configurations; 18.5, 9, 8.5 and 5.5 percent fully resolved, explicitly publisher reported."
+    },
+    {
+      "check": "Community track with no approved reports",
+      "outcome": "pass",
+      "detail": "JavaScript runtime track shows Bun, Deno and Node.js as unrated; collection timestamp and minimum-report rule shown."
+    },
+    {
+      "check": "Narrow responsive layout",
+      "outcome": "pass",
+      "detail": "390-pixel iframe, 375-pixel content viewport; scrollWidth 375 equals clientWidth 375. Screenshot inspected. This is layout QA, not physical-device testing."
+    },
+    {
+      "check": "Browser file download retention",
+      "outcome": "unverified",
+      "detail": "CSV and JSON controls triggered downloads, but the browser automation download provider reported failed downloads and no synchronized file was retained. CSV content/scope/formula-safety contracts pass unit tests; end-to-end saved-file verification remains open."
+    }
+  ],
+  "retained_validation_failures": [
+    {
+      "issue": "Search field accessible-name lookup was ambiguous",
+      "resolution": "Added explicit Search research aria-label; ID-based search and shortlist interaction verified."
+    },
+    {
+      "issue": "Adding required community error history exposed 35 outdated synthetic-fixture errors",
+      "resolution": "Aligned the valid synthetic fixture, added missing/malformed history and timestamp regressions, reran full suite: 166 pass."
+    },
+    {
+      "issue": "Historical result URL could drift and incompatible tracks could be admitted",
+      "resolution": "Pinned raw evidence to its source commit/hash and added cohort/track/evidence validation."
+    }
+  ],
+  "generated_assets": {
+    "docs/explorer/catalog.d0167fe3dd48d08a.json": "d0167fe3dd48d08a4796f928f2bdfaf1316aa5b3cd868a642738db5806d45717",
+    "docs/explorer/explorer-core.007ee0ee33db2820.mjs": "007ee0ee33db282024aa1425d9b990775569ace54afcd1447528c9b1a3f34926",
+    "docs/explorer/explorer.9153228d82b1b9df.css": "9153228d82b1b9df3a67fc5bf8dd9fdde19208d4589a7d63c639bad03f9ed343",
+    "docs/explorer/explorer.e1f7ce451ab9cf52.mjs": "e1f7ce451ab9cf5268a121eb57fd8939a779f4e3a0f65304d8323e9ccca9e874",
+    "docs/explorer/index.html": "261160af012e1b8271e9e0b77f88fb93b946ba3563d955f56988364d43c6b45f",
+    "docs/research-catalog.md": "92801a4dc8d6af4ef885b7e3ddd7a4f001ffb190435617b1551bed35122634e2"
+  },
+  "limitations": [
+    "No new candidate benchmark execution.",
+    "No new production acceptance.",
+    "No assertion of complete coverage of 2026 research.",
+    "Public data and source availability may change after observation.",
+    "Live publication and wiki authentication are verified separately from this local implementation record."
+  ],
+  "log_sha256": {
+    "python-tests.log": "797a42e3a9b5b6782d3d518f2c9960d99d86f895f18d63c9c51f73dc81f13733",
+    "javascript-tests.log": "66cf74d03bf531e55bd16df4b885a8d600af3bc7b96f712da85caef94fb7ad39"
+  },
+  "integration": {
+    "base_commit": "50aba7a38580924cf3df125b7ea10f97444c4af0",
+    "source_register_records": 525,
+    "upstream_sources_preserved": 351,
+    "research_source_additions": 174,
+    "source_id_merge": "Preserved all upstream records, including the concurrent project-ownership update; appended 174 nonconflicting research/governance records.",
+    "protected_paths_changed": [],
+    "post_integration_python_tests": 166,
+    "post_integration_node_test_files": 18,
+    "legacy_asset_checks": "card-lab and media-lab passed"
+  }
+}

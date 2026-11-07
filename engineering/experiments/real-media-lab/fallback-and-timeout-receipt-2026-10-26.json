@@ -1,0 +1,111 @@
+{
+  "schema_version": 1,
+  "harness": "atlas-real-media-v2-playback-states",
+  "source_module": "/Engineering-Atlas/media-lab/media.4a283838919d4460.js",
+  "started_at": "2026-10-26T22:41:32.985Z",
+  "user_agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36",
+  "source_mode": "dated public snapshots",
+  "events": [
+    {
+      "type": "fixture_parsed",
+      "at_ms": 447.2000000178814,
+      "elapsed_ms": 18.19999998807907,
+      "bytes": 20294
+    },
+    {
+      "type": "metadata_dom_ready",
+      "at_ms": 452.80000001192093,
+      "elapsed_ms": 4.9000000059604645,
+      "cards": 4,
+      "gallery_images": 19,
+      "video_entries": 18
+    },
+    {
+      "type": "playback_engine_selected",
+      "at_ms": 31199.80000001192,
+      "card_id": "steam:620",
+      "engine": "hlsjs"
+    },
+    {
+      "type": "hls_library_ready",
+      "at_ms": 31391.20000001788,
+      "version": "1.7.3",
+      "elapsed_ms": 191.30000001192093
+    },
+    {
+      "type": "video_loadedmetadata",
+      "at_ms": 31723.40000000596,
+      "card_id": "steam:620",
+      "video_id": "5787",
+      "current_time": 0,
+      "video_width": 940,
+      "video_height": 529,
+      "engine": "hlsjs",
+      "elapsed_ms": 526.5999999940395
+    },
+    {
+      "type": "video_canplay",
+      "at_ms": 31785.40000000596,
+      "card_id": "steam:620",
+      "video_id": "5787",
+      "current_time": 0,
+      "video_width": 940,
+      "video_height": 529,
+      "engine": "hlsjs",
+      "elapsed_ms": 588.5999999940395
+    },
+    {
+      "type": "video_playing",
+      "at_ms": 120045,
+      "card_id": "steam:620",
+      "video_id": "5787",
+      "current_time": 0,
+      "video_width": 940,
+      "video_height": 529,
+      "engine": "hlsjs",
+      "elapsed_ms": 88848.09999999404
+    },
+    {
+      "type": "youtube_ready",
+      "at_ms": 148155.59999999404,
+      "card_id": "youtube:M7lc1UVf-VE",
+      "video_id": "M7lc1UVf-VE",
+      "elapsed_ms": 868.5999999940395
+    },
+    {
+      "type": "youtube_play_requested",
+      "at_ms": 224187.80000001192,
+      "card_id": "youtube:M7lc1UVf-VE"
+    },
+    {
+      "type": "youtube_state",
+      "at_ms": 224242.70000001788,
+      "card_id": "youtube:M7lc1UVf-VE",
+      "state": -1
+    },
+    {
+      "type": "youtube_state",
+      "at_ms": 224298.5,
+      "card_id": "youtube:M7lc1UVf-VE",
+      "state": 3
+    },
+    {
+      "type": "youtube_playback_unverified_timeout",
+      "at_ms": 254192.09999999404,
+      "card_id": "youtube:M7lc1UVf-VE"
+    },
+    {
+      "type": "youtube_state",
+      "at_ms": 283609.7000000179,
+      "card_id": "youtube:M7lc1UVf-VE",
+      "state": -1
+    }
+  ],
+  "acceptance": "not a target-project performance comparison",
+  "fixture_sha256": "09bc53f20b0f552b6beae9c5c87c6662f94299ec4cb665b153d9e05196ef0348",
+  "fixture_counts": {
+    "cards": 4,
+    "gallery_images": 19,
+    "video_entries": 18
+  }
+}

@@ -1,0 +1,5 @@
+{
+  "returncode": 0,
+  "stdout": "{\n  \"kind\": \"synthetic\",\n  \"condition\": \"cold\",\n  \"pairs\": 5,\n  \"complete_output_equivalence\": true,\n  \"baseline_median_ms\": 120,\n  \"candidate_median_ms\": 60.0,\n  \"median_ms_saved\": 60.0,\n  \"median_elapsed_reduction_percent\": 50.0,\n  \"ratio_of_medians\": 2.0,\n  \"median_paired_speedup\": 2.0,\n  \"baseline_sample_p95_ms\": 140,\n  \"candidate_sample_p95_ms\": 70.0,\n  \"qualification\": \"Synthetic demonstration only; not a real performance result.\"\n}\n",
+  "stderr": ""
+}

@@ -1,0 +1,321 @@
+{
+  "schema_version": 1,
+  "harness": "atlas-real-media-v9-event-identity",
+  "source_module": "/Engineering-Atlas/media-lab/media.3679b53bf325f1a6.js",
+  "started_at": "2026-10-27T19:05:23.449Z",
+  "user_agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36",
+  "source_mode": "dated public snapshots",
+  "events": [
+    {
+      "type": "fixture_parsed",
+      "at_ms": 1809.5999999940395,
+      "elapsed_ms": 179.7999999821186,
+      "bytes": 21300
+    },
+    {
+      "type": "metadata_dom_ready",
+      "at_ms": 1823.199999988079,
+      "elapsed_ms": 9.899999976158142,
+      "cards": 5,
+      "gallery_images": 19,
+      "video_entries": 19
+    },
+    {
+      "type": "image_decoded",
+      "at_ms": 23090.59999999404,
+      "source": "https://cdn.modrinth.com/data/AANobbMI/images/6b0e58705156ba67a6d97a74b9f9ac05da69f502_350.webp",
+      "width": 350,
+      "height": 350,
+      "elapsed_ms": 107.30000001192093,
+      "attempt": 1
+    },
+    {
+      "type": "image_decoded",
+      "at_ms": 23091.19999998808,
+      "source": "https://cdn.modrinth.com/data/AANobbMI/295862f4724dc3f78df3447ad6072b2dcd3ef0c9_96.webp",
+      "width": 96,
+      "height": 96,
+      "elapsed_ms": 108.59999999403954,
+      "attempt": 1
+    },
+    {
+      "type": "image_decoded",
+      "at_ms": 23113.09999999404,
+      "source": "https://cdn.modrinth.com/data/AANobbMI/images/b681a9e87daa53a0e85336a894db70427007149b_350.webp",
+      "width": 350,
+      "height": 350,
+      "elapsed_ms": 129.7999999821186,
+      "attempt": 1
+    },
+    {
+      "type": "image_decoded",
+      "at_ms": 23228.30000001192,
+      "source": "https://cdn.modrinth.com/data/AANobbMI/images/c39debea7fc623306e9c45148084585399fc59ee.webp",
+      "width": 854,
+      "height": 583,
+      "elapsed_ms": 115,
+      "attempt": 1
+    },
+    {
+      "type": "image_decoded",
+      "at_ms": 23237.19999998808,
+      "source": "https://cdn.modrinth.com/data/AANobbMI/images/d84313e6f57dc9e7896961dbd2dfc2689d482758_350.webp",
+      "width": 350,
+      "height": 350,
+      "elapsed_ms": 254,
+      "attempt": 1
+    },
+    {
+      "type": "image_decoded",
+      "at_ms": 23258.19999998808,
+      "source": "https://cdn.modrinth.com/data/AANobbMI/images/56c4599efcb529a19aed0e118caad4178d7fd540.webp",
+      "width": 854,
+      "height": 960,
+      "elapsed_ms": 167.5,
+      "attempt": 1
+    },
+    {
+      "type": "image_decoded",
+      "at_ms": 23293.80000001192,
+      "source": "https://cdn.modrinth.com/data/AANobbMI/images/5ca2e8f6c72f3d543dd3dc95b706964c5678d80e_350.webp",
+      "width": 349,
+      "height": 197,
+      "elapsed_ms": 202.5,
+      "attempt": 1
+    },
+    {
+      "type": "image_decoded",
+      "at_ms": 23302.5,
+      "source": "https://staticdelivery.nexusmods.com/mods/1704/images/thumbnails/12604/12604-1774356382-945468655.png",
+      "width": 385,
+      "height": 216,
+      "elapsed_ms": 73.5,
+      "attempt": 1
+    },
+    {
+      "type": "image_decoded",
+      "at_ms": 23303.90000000596,
+      "source": "https://staticdelivery.nexusmods.com/mods/1704/images/thumbnails/12604/12604-1774356382-945468655.png",
+      "width": 385,
+      "height": 216,
+      "elapsed_ms": 65.80000001192093,
+      "attempt": 1
+    },
+    {
+      "type": "image_decoded",
+      "at_ms": 23360.90000000596,
+      "source": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/620/faffc0f560786e2f05104a8d2fac837c6969bf13/header.jpg?t=1790187113",
+      "width": 460,
+      "height": 215,
+      "elapsed_ms": 102.30000001192093,
+      "attempt": 1
+    },
+    {
+      "type": "image_decoded",
+      "at_ms": 23396.69999998808,
+      "source": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/620/ss_f3f6787d74739d3b2ec8a484b5c994b3d31ef325.600x338.jpg?t=1790187113",
+      "width": 600,
+      "height": 337,
+      "elapsed_ms": 101.89999997615814,
+      "attempt": 1
+    },
+    {
+      "type": "image_decoded",
+      "at_ms": 23401.09999999404,
+      "source": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/620/ss_6a4f5afdaa98402de9cf0b59fed27bab3256a6f4.600x338.jpg?t=1790187113",
+      "width": 600,
+      "height": 337,
+      "elapsed_ms": 98.09999999403954,
+      "attempt": 1
+    },
+    {
+      "type": "image_decoded",
+      "at_ms": 23440.40000000596,
+      "source": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/620/ss_0cdd90fafc160b52d08b303d205f9fd4e83cf164.600x338.jpg?t=1790187113",
+      "width": 600,
+      "height": 337,
+      "elapsed_ms": 136.5,
+      "attempt": 1
+    },
+    {
+      "type": "image_decoded",
+      "at_ms": 23445.19999998808,
+      "source": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/620/ss_ec35a739b4b33270eb170d9e561c5b016cba50a6.600x338.jpg?t=1790187113",
+      "width": 600,
+      "height": 337,
+      "elapsed_ms": 84,
+      "attempt": 1
+    },
+    {
+      "type": "image_decoded",
+      "at_ms": 23509.09999999404,
+      "source": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/620/ss_3d13161104a04603a0524536770c5f74626db4c0.600x338.jpg?t=1790187113",
+      "width": 600,
+      "height": 337,
+      "elapsed_ms": 111.59999999403954,
+      "attempt": 1
+    },
+    {
+      "type": "image_decoded",
+      "at_ms": 23512.30000001192,
+      "source": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/620/ss_8a772608d29ffd56ac013d2ac7c4388b96e87a21.600x338.jpg?t=1790187113",
+      "width": 600,
+      "height": 337,
+      "elapsed_ms": 111.10000002384186,
+      "attempt": 1
+    },
+    {
+      "type": "image_decoded",
+      "at_ms": 23544.69999998808,
+      "source": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/620/ss_358127df30a766a1516ad139083c2bcec3fe0975.600x338.jpg?t=1790187113",
+      "width": 600,
+      "height": 337,
+      "elapsed_ms": 104,
+      "attempt": 1
+    },
+    {
+      "type": "image_decoded",
+      "at_ms": 23545.40000000596,
+      "source": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/620/ss_410c7955c3cc8ca4a5e3c81daa214f534c9aabc8.600x338.jpg?t=1790187113",
+      "width": 600,
+      "height": 337,
+      "elapsed_ms": 100,
+      "attempt": 1
+    },
+    {
+      "type": "image_decoded",
+      "at_ms": 23565.80000001192,
+      "source": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/620/ss_0e16bceacb6616a5ca4bc4ba4d28c7a0d06b671c.600x338.jpg?t=1790187113",
+      "width": 600,
+      "height": 337,
+      "elapsed_ms": 55.20000001788139,
+      "attempt": 1
+    },
+    {
+      "type": "image_decoded",
+      "at_ms": 23568.69999998808,
+      "source": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/620/ss_d8f172249d6e89999c3692bf2c380921f197fd82.600x338.jpg?t=1790187113",
+      "width": 600,
+      "height": 337,
+      "elapsed_ms": 56.19999998807907,
+      "attempt": 1
+    },
+    {
+      "type": "image_decoded",
+      "at_ms": 23609.80000001192,
+      "source": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/620/ss_fe9782ea3b43ef7af37b18e0a5c5f7bdc9c21f12.600x338.jpg?t=1790187113",
+      "width": 600,
+      "height": 337,
+      "elapsed_ms": 64.7999999821186,
+      "attempt": 1
+    },
+    {
+      "type": "image_decoded",
+      "at_ms": 23619.09999999404,
+      "source": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/620/ss_3858536cbc0a07dfbe36e8f87b3f08bf3be45e54.600x338.jpg?t=1790187113",
+      "width": 600,
+      "height": 337,
+      "elapsed_ms": 73.69999998807907,
+      "attempt": 1
+    },
+    {
+      "type": "image_failed",
+      "at_ms": 23870,
+      "source": "https://i.ytimg.com/vi/M7lc1UVf-VE/hqdefault.jpg",
+      "attempt": 1
+    },
+    {
+      "type": "preview_batch_complete",
+      "at_ms": 23873.80000001192,
+      "total": 23,
+      "decoded": 22,
+      "failed": 1,
+      "unattempted": 0,
+      "report_errors": 0,
+      "attempted": 23,
+      "elapsed_ms": 891.0999999940395,
+      "unique_urls": 22
+    },
+    {
+      "type": "playback_engine_selected",
+      "at_ms": 51468.40000000596,
+      "card_id": "steam:620",
+      "engine": "hlsjs"
+    },
+    {
+      "type": "hls_library_ready",
+      "at_ms": 51671.09999999404,
+      "version": "1.7.3",
+      "elapsed_ms": 199.59999999403954
+    },
+    {
+      "type": "video_loadedmetadata",
+      "at_ms": 51933.40000000596,
+      "card_id": "steam:620",
+      "video_id": "5787",
+      "current_time": 0,
+      "video_width": 940,
+      "video_height": 529,
+      "engine": "hlsjs",
+      "elapsed_ms": 473.59999999403954
+    },
+    {
+      "type": "video_canplay",
+      "at_ms": 51975.30000001192,
+      "card_id": "steam:620",
+      "video_id": "5787",
+      "current_time": 0,
+      "video_width": 940,
+      "video_height": 529,
+      "engine": "hlsjs",
+      "elapsed_ms": 515.5
+    },
+    {
+      "type": "video_playing",
+      "at_ms": 79371.19999998808,
+      "card_id": "steam:620",
+      "video_id": "5787",
+      "current_time": 0,
+      "video_width": 940,
+      "video_height": 529,
+      "engine": "hlsjs",
+      "elapsed_ms": 27911.399999976158
+    },
+    {
+      "type": "video_pause",
+      "at_ms": 79703.5,
+      "card_id": "steam:620",
+      "video_id": "5787",
+      "current_time": 0.209739,
+      "video_width": 940,
+      "video_height": 529,
+      "engine": "hlsjs",
+      "elapsed_ms": 28243.59999999404
+    },
+    {
+      "type": "image_failed",
+      "at_ms": 109196.59999999404,
+      "source": "https://i.ytimg.com/vi/M7lc1UVf-VE/hqdefault.jpg",
+      "attempt": 2
+    },
+    {
+      "type": "preview_batch_complete",
+      "at_ms": 109199.30000001192,
+      "total": 23,
+      "decoded": 22,
+      "failed": 1,
+      "unattempted": 0,
+      "report_errors": 0,
+      "attempted": 1,
+      "elapsed_ms": 245,
+      "unique_urls": 22
+    }
+  ],
+  "acceptance": "not a target-project performance comparison",
+  "fixture_sha256": "2aa0668aba0eb29c69faf368fab206369718335be7f47bc0c6592236e79d1aba",
+  "fixture_counts": {
+    "cards": 5,
+    "gallery_images": 19,
+    "video_entries": 19
+  }
+}

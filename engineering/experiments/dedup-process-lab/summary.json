@@ -1,0 +1,133 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-29",
+  "completed_strategy_observations": 120,
+  "initial_incomplete_observations": 30,
+  "promoted": false,
+  "shared_runner_memory_integrated": false,
+  "runs": [
+    {
+      "summary": "pass1-summary.json",
+      "complete": false,
+      "failure": {
+        "type": "KeyError",
+        "message": "'correctness_failures'"
+      },
+      "sha256": "d1acae2a7e006e4234fdd3d577ee1c067db5264ccd8e86c9bbefbb1a646c527b",
+      "medians": [
+        {
+          "lane": "baseline",
+          "samples": 15,
+          "median_ns": 47412765,
+          "median_high_water_rss_bytes": 1921024,
+          "median_retained_rollup_rss_bytes": 1925120
+        },
+        {
+          "lane": "indexed",
+          "samples": 15,
+          "median_ns": 282507,
+          "median_high_water_rss_bytes": 2056192,
+          "median_retained_rollup_rss_bytes": 1986560
+        }
+      ]
+    },
+    {
+      "summary": "pass2-summary.json",
+      "complete": true,
+      "failure": null,
+      "sha256": "1d24205eed678b29f3d445525af88ad658f6fce285a05030191c26289c9e5b03",
+      "medians": [
+        {
+          "lane": "baseline",
+          "samples": 15,
+          "median_ns": 58103081,
+          "median_high_water_rss_bytes": 1921024,
+          "median_retained_rollup_rss_bytes": 1925120
+        },
+        {
+          "lane": "indexed",
+          "samples": 15,
+          "median_ns": 297658,
+          "median_high_water_rss_bytes": 1990656,
+          "median_retained_rollup_rss_bytes": 1957888
+        }
+      ]
+    },
+    {
+      "summary": "pass3-summary.json",
+      "complete": true,
+      "failure": null,
+      "sha256": "a40fa095e3adb9e7bdcada202e13b463aa5b3fe6e40e354e75c448c681515136",
+      "medians": [
+        {
+          "lane": "baseline",
+          "samples": 15,
+          "median_ns": 47781097,
+          "median_high_water_rss_bytes": 1921024,
+          "median_retained_rollup_rss_bytes": 1925120
+        },
+        {
+          "lane": "indexed",
+          "samples": 15,
+          "median_ns": 249347,
+          "median_high_water_rss_bytes": 1990656,
+          "median_retained_rollup_rss_bytes": 1941504
+        }
+      ]
+    },
+    {
+      "summary": "pass4-summary.json",
+      "complete": true,
+      "failure": null,
+      "sha256": "fea7690d6e010d75f963059b19007cc6f42a7faaeaa7e6ce6c43084c2ae6e910",
+      "medians": [
+        {
+          "lane": "baseline",
+          "samples": 15,
+          "median_ns": 41492372,
+          "median_high_water_rss_bytes": 1921024,
+          "median_retained_rollup_rss_bytes": 1925120
+        },
+        {
+          "lane": "indexed",
+          "samples": 15,
+          "median_ns": 410591,
+          "median_high_water_rss_bytes": 1990656,
+          "median_retained_rollup_rss_bytes": 1941504
+        }
+      ]
+    },
+    {
+      "summary": "pass5-summary.json",
+      "complete": true,
+      "failure": null,
+      "sha256": "3177743449778f2f567d47fe424b16d88dfeefc668e48b36293520e8f2db9e76",
+      "medians": [
+        {
+          "lane": "baseline",
+          "samples": 15,
+          "median_ns": 38769445,
+          "median_high_water_rss_bytes": 1921024,
+          "median_retained_rollup_rss_bytes": 1925120
+        },
+        {
+          "lane": "indexed",
+          "samples": 15,
+          "median_ns": 257627,
+          "median_high_water_rss_bytes": 1990656,
+          "median_retained_rollup_rss_bytes": 1986560
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "rust_units": 127,
+    "rust_integrations": 8,
+    "memory_observer_example_tests": 2,
+    "python_tests": 227,
+    "python_optimized_tests": 227,
+    "clippy": "all targets, warnings denied",
+    "source_registry": "checked",
+    "default_gate": "unchanged; review remains incomplete"
+  }
+}

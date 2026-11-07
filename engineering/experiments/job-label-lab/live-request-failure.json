@@ -1,0 +1,18 @@
+{
+  "scope": "one actual native-UI queue submission attempted the fixed public Modrinth request; connection failed, not collection acceptance",
+  "job_id": 7,
+  "state": "failed",
+  "job": {
+    "CollectModrinthRaw": {
+      "project": "AANobbMI"
+    }
+  },
+  "result": {
+    "error": "Collection connection failed; previous results are retained"
+  },
+  "retained_generation": "1",
+  "retained_sha256": "80b9186e951352b4b265e20cf6e5f57c8646f11b09d6f3a1a8492046acfaf9c0",
+  "native_browser": "cloud Chromium, real localhost app",
+  "binary_sha256": "fba2f96226f6c445d13ee02fc2e7af9e1a4eb0a85e6ba65275f455057f4cc862",
+  "browser_runtime_recovery": "initial click failed before queue submission; database confirmed latest id 6 before retry after runtime reset"
+}

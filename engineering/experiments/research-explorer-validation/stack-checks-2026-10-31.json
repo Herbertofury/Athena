@@ -1,0 +1,122 @@
+{
+  "checked_at": "2026-10-31T08:50:04+00:00",
+  "base_revision": "4d1603972b669abbe6142e9f32cc13f4af92b48d",
+  "scope": "Software and research-data validation; no new candidate performance experiment.",
+  "counts": {
+    "candidates": 283,
+    "new_candidates": 68,
+    "refreshed_candidates": 15,
+    "papers": 36,
+    "new_papers": 14,
+    "new_full_text_paper_reviews": 12,
+    "new_limited_paper_reviews": 2,
+    "layers": 20,
+    "categories": 18,
+    "plans": 38,
+    "complete_register_sources": 1364,
+    "new_source_records": 164,
+    "catalog_source_records": 528,
+    "catalog_distinct_primary_urls": 510,
+    "repository_observations": 231,
+    "new_repository_observations": 58,
+    "retained_cohorts": 11,
+    "retained_observations": 35,
+    "community_reports": 0
+  },
+  "refreshed_candidate_ids": [
+    "duckdb",
+    "vite",
+    "basis-universal",
+    "bevy",
+    "godot",
+    "meshoptimizer",
+    "wgpu",
+    "bun",
+    "nodejs",
+    "python",
+    "typescript-native",
+    "tantivy",
+    "sqlite",
+    "iroh-blobs",
+    "react"
+  ],
+  "checks": [
+    {
+      "command": "python3 scripts/check_research.py",
+      "result": "passed",
+      "source_records": 1364,
+      "stale_source_ids": []
+    },
+    {
+      "command": "python3 -m unittest discover -s tests -v",
+      "result": "passed",
+      "tests": 250,
+      "log": "stack-python-tests-2026-10-31.log"
+    },
+    {
+      "command": "node --test tests/*.test.mjs",
+      "result": "passed",
+      "test_files": 42,
+      "log": "stack-javascript-tests-2026-10-31.log"
+    },
+    {
+      "command": "git diff --check",
+      "result": "passed"
+    }
+  ],
+  "preservation": {
+    "original_source_files_byte_identical": [
+      "data/sources.json",
+      "data/sources.d/compact-layout.json",
+      "data/sources.d/constraint-index-papers-20261029.json",
+      "data/sources.d/discord-completeness-20261030.json",
+      "data/sources.d/dom-replacement.json",
+      "data/sources.d/hls-fragment-20261029.json",
+      "data/sources.d/hls-release-174.json",
+      "data/sources.d/http-fixture-order-20261029.json",
+      "data/sources.d/job-identity-20261030.json",
+      "data/sources.d/node-resource-usage.json",
+      "data/sources.d/process-memory-accounting.json",
+      "data/sources.d/provenance-review-20261030.json",
+      "data/sources.d/query-reuse-and-extraction.json",
+      "data/sources.d/rusqlite-patch-20261029.json",
+      "data/sources.d/security-20261029-evening.json",
+      "data/sources.d/sqlite-addressed-storage.json",
+      "data/sources.d/structured-evidence.json",
+      "data/sources.d/visual-request-planning-20261030.json",
+      "data/sources.d/wikimedia-audio-20261029.json",
+      "data/sources.d/windows-http-fixture-20261029.json"
+    ],
+    "original_repository_observations_unchanged": true,
+    "research_results_byte_identical": true,
+    "community_snapshot_byte_identical": true,
+    "historical_json_samples_unchanged": true
+  },
+  "review_repairs": [
+    "Preserved additive source loader while integrating planned-comparison implementation.",
+    "Deterministic-build fixture now copies and verifies every indexed additive source file; synthetic regression added.",
+    "JPEG paper description limits FPS claim to included interop overhead, without claiming physical presentation timing.",
+    "Added Bevy Solari default lighting-quality change to equivalent-work caveats."
+  ],
+  "generated_manifest": {
+    "cohorts": 11,
+    "entries": 283,
+    "files": {
+      "docs/explorer/catalog.656d184801be688c.json": "656d184801be688cea150ca45791f96cf79e9448cf3ff3f2c767db7063cad442",
+      "docs/explorer/explorer-core.659d5fdf9e79fc53.mjs": "659d5fdf9e79fc53be94b24fae9ad75f83c496c6134eefa18fe69068c9f225f5",
+      "docs/explorer/explorer.3c4c931f11046f27.css": "3c4c931f11046f27ae45ba34b9d76a7c568379c73156f873224f8d49f3551250",
+      "docs/explorer/explorer.74a96d35de2ccd73.mjs": "74a96d35de2ccd73239872a6f6efc456ab18be88317f2e8800de26bc19479069",
+      "docs/explorer/index.html": "ac97d5d9682fa4d564a3e9dfa39a9ea72a0d07c553f507a5180cf4bc0a0c210a",
+      "docs/research-catalog.md": "d9221f1c3855f08313b92789cc1312a7925cdf5c8ec527d398c076c9e0b12ced",
+      "docs/research-test-queue.md": "c12f912858756e918aca535206ea6a04bd0086dc6df34d53d5aa14c615df3579",
+      "docs/stack-selection.md": "0cc1297fa7a13164367a9496da9435b1c3d309af0255e78e3b3ebb0029e92b4c"
+    },
+    "observations": 35,
+    "schema_version": 1,
+    "test_plans": 38
+  },
+  "publication": {
+    "status": "pending",
+    "note": "Local checks completed. Deployment, browser and wiki publication are verified separately after publication."
+  }
+}

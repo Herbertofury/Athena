@@ -1,0 +1,28 @@
+{
+  "baseline_commit": "144868ae595d2faa18dbb865228785920a9bc2b7",
+  "fixture_sha256": "2aa0668aba0eb29c69faf368fab206369718335be7f47bc0c6592236e79d1aba",
+  "fixture_counts": {
+    "cards": 5,
+    "gallery_images": 19,
+    "video_entries": 19
+  },
+  "harness": "atlas-real-media-v10-video-identity",
+  "generated_bad_cases": 9,
+  "all_rejected": true,
+  "node_tests": 85,
+  "python_tests": 74,
+  "live_browser": "public official-player playing then paused; reload removed all players",
+  "provider_requests_for_failure_tests": 0,
+  "default_autoplay": false,
+  "implementation_commit": "d0f93a49d0e34af8f42da82c6e98c6c415b4d497",
+  "ci_run": 40590589701,
+  "ci_conclusion": "success",
+  "pages_run": 40590589792,
+  "pages_conclusion": "success",
+  "served_assets_hash_matched": 9,
+  "preview_decoded": 22,
+  "preview_failed": 1,
+  "play_request_to_playing_ms": 123536.4,
+  "playback_timeout_retained": true,
+  "players_after_cleanup": 0
+}

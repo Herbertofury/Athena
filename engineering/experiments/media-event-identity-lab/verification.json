@@ -1,0 +1,27 @@
+{
+  "baseline_commit": "beb354be5dd5321ab7931270329dfd37023ff3be",
+  "new_harness": "atlas-real-media-v9-event-identity",
+  "source_sha256": {
+    "docs/media-lab/media.js": "c4276490c21276988475db3e2a3aab289427d813b29ba51540154e82e2c6cfc6",
+    "docs/media-lab/media-events.mjs": "e336b2c509ca803072cb2d56c65a0b111fa4a6402b85c69f823e6f5f117a98cf",
+    "tests/media-events.test.mjs": "8981ac6702f62bab66ee6faff3e16861550127e736e1b2918ac876c135ef4a33"
+  },
+  "fixture_mode": "generated fatal HLS callback; no induced provider failure",
+  "browser_regression": {
+    "receipt": "browser-receipt.json",
+    "actual_source_media": true,
+    "cards": 5,
+    "gallery_images": 19,
+    "video_entries": 19,
+    "decoded": 22,
+    "failed": 1,
+    "failed_only_retry_attempted": 1,
+    "report_errors": 0,
+    "hls_version": "1.7.3",
+    "playing_then_paused_seconds": 0.209739,
+    "final_paused": true,
+    "fatal_error_test": "generated callback fixture only",
+    "served_assets_exact": 9
+  },
+  "native_or_other_project_claim": false
+}

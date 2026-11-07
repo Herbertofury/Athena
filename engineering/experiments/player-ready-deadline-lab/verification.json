@@ -1,0 +1,33 @@
+{
+  "baseline_revision": "acea8481b1345903fef43f28325a119de759ab8e",
+  "baseline_controlled_tests_failed": 3,
+  "current_controlled_tests_passed": 7,
+  "node_tests_passed": 221,
+  "python_tests_passed": 227,
+  "harness": "atlas-real-media-v13-player-ready-deadline",
+  "source_sha256": "16fb57473d1aac2db55e0a6bc18ac076dbafd39d4deb3cc14addabdcad072ad1",
+  "baseline_source_sha256": "ce5cd031c192c929c6ed7fdaf07c2ae191d22b6fa1278f3c8d9c079f85a43e73",
+  "unchanged_artifacts": [
+    "preview-timeout-check.143bcbd493e6bd6a.js",
+    "preview-timeout-check.html",
+    "media-event-recorder.9f2d0087c78ee632.mjs",
+    "event-log-recovery.b9f6a770f0d29c39.mjs",
+    "event-log-baseline.da5c8854c2b145b8.mjs",
+    "event-log-view.8da785a48d10552f.mjs",
+    "event-log-fixture.a52b151a701afbc7.json",
+    "event-log-benchmark.6b7f61be3311a983.js",
+    "event-log-benchmark.html",
+    "media-events.e336b2c509ca8030.mjs",
+    "preview-loader.2eff415295af8405.mjs",
+    "bilibili-player.4f893473b3fc38d2.mjs",
+    "media-core.b0bba33ec8a5b5c5.mjs",
+    "resource-loader.f95053a1d56a8533.mjs",
+    "public-fixtures.2aa0668aba0eb29c.json",
+    "media.6d66277c4a909ad6.css"
+  ],
+  "vendor_unchanged": true,
+  "fixture_unchanged": true,
+  "browser_loaded": false,
+  "actual_playback_verified_in_this_pass": false,
+  "scope": "Actual application function under controlled-clock DOM/player fixtures; not native browser acceptance"
+}

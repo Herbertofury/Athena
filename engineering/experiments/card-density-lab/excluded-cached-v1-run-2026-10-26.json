@@ -1,0 +1,554 @@
+{
+  "schema_version": 1,
+  "harness": "atlas-card-density-v1",
+  "scope": "measured_browser_generated_workload",
+  "operation": "initial",
+  "performance_start_ms": 12623,
+  "started_at": "2026-10-26T21:39:06.217Z",
+  "environment": {
+    "user_agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36",
+    "viewport": [
+      1182,
+      757
+    ],
+    "device_pixel_ratio": 1,
+    "supported_entry_types": [
+      "element",
+      "event",
+      "first-input",
+      "interaction-contentful-paint",
+      "largest-contentful-paint",
+      "layout-shift",
+      "long-animation-frame",
+      "longtask",
+      "mark",
+      "measure",
+      "navigation",
+      "paint",
+      "resource",
+      "soft-navigation",
+      "visibility-state"
+    ],
+    "content_visibility_supported": true
+  },
+  "dataset": {
+    "count": 1000,
+    "metadata_bytes_per_record": 8192,
+    "serialized_bytes": 8340001,
+    "sha256": "987660c9b6b8fce029829d5c69632667bd41e173860c2e00e747ba237ad8655e",
+    "generation_ms": 64.90000000596046,
+    "hash_ms": 211
+  },
+  "samples": [
+    {
+      "round": 0,
+      "strategy": "full_dom",
+      "dom_creation_and_insertion_ms": 25,
+      "frame_ready_proxy_ms": 4930.799999982119,
+      "scroll_frame_wait_ms": [
+        59.5,
+        49.599999994039536,
+        47.400000005960464,
+        47.79999998211861,
+        40.89999997615814,
+        41.70000001788139,
+        74.69999998807907,
+        41.5,
+        53.5,
+        59.10000002384186,
+        64.5,
+        20.69999998807907
+      ],
+      "scroll_frame_wait_max_ms": 74.69999998807907,
+      "complete_output_equal": true,
+      "dom_card_count": 1000,
+      "observations": {
+        "longtask": [
+          {
+            "start_ms": 17834.29999998212,
+            "duration_ms": 69
+          },
+          {
+            "start_ms": 18302,
+            "duration_ms": 55
+          },
+          {
+            "start_ms": 18360.90000000596,
+            "duration_ms": 57
+          }
+        ],
+        "long-animation-frame": []
+      }
+    },
+    {
+      "round": 0,
+      "strategy": "containment",
+      "dom_creation_and_insertion_ms": 31.200000017881393,
+      "frame_ready_proxy_ms": 67.09999999403954,
+      "scroll_frame_wait_ms": [
+        17.19999998807907,
+        17.100000023841858,
+        16.5,
+        16.799999982118607,
+        17.30000001192093,
+        25.799999982118607,
+        7.700000017881393,
+        18.799999982118607,
+        15.5,
+        15.700000017881393,
+        17.19999998807907,
+        15.099999994039536
+      ],
+      "scroll_frame_wait_max_ms": 25.799999982118607,
+      "complete_output_equal": true,
+      "dom_card_count": 1000,
+      "observations": {
+        "longtask": [],
+        "long-animation-frame": []
+      }
+    },
+    {
+      "round": 1,
+      "strategy": "containment",
+      "dom_creation_and_insertion_ms": 15.599999994039536,
+      "frame_ready_proxy_ms": 49.099999994039536,
+      "scroll_frame_wait_ms": [
+        7.0999999940395355,
+        16.30000001192093,
+        16.799999982118607,
+        16.599999994039536,
+        17.200000017881393,
+        15.900000005960464,
+        16.5,
+        16.599999994039536,
+        17.400000005960464,
+        17.099999994039536,
+        15.599999994039536,
+        16.80000001192093
+      ],
+      "scroll_frame_wait_max_ms": 17.400000005960464,
+      "complete_output_equal": true,
+      "dom_card_count": 1000,
+      "observations": {
+        "longtask": [],
+        "long-animation-frame": []
+      }
+    },
+    {
+      "round": 1,
+      "strategy": "full_dom",
+      "dom_creation_and_insertion_ms": 12.799999982118607,
+      "frame_ready_proxy_ms": 2136.899999976158,
+      "scroll_frame_wait_ms": [
+        55.19999998807907,
+        44.30000001192093,
+        47.599999994039536,
+        49.20000001788139,
+        45.099999994039536,
+        43,
+        44.69999998807907,
+        47.80000001192093,
+        42.900000005960464,
+        68.09999999403954,
+        50.099999994039536,
+        29.599999994039536
+      ],
+      "scroll_frame_wait_max_ms": 68.09999999403954,
+      "complete_output_equal": true,
+      "dom_card_count": 1000,
+      "observations": {
+        "longtask": [
+          {
+            "start_ms": 21337.79999998212,
+            "duration_ms": 61
+          },
+          {
+            "start_ms": 21764.09999999404,
+            "duration_ms": 68
+          }
+        ],
+        "long-animation-frame": []
+      }
+    },
+    {
+      "round": 2,
+      "strategy": "full_dom",
+      "dom_creation_and_insertion_ms": 41.400000005960464,
+      "frame_ready_proxy_ms": 2364,
+      "scroll_frame_wait_ms": [
+        55.599999994039536,
+        46.5,
+        43.5,
+        50.70000001788139,
+        45.69999998807907,
+        43.69999998807907,
+        42,
+        37.10000002384186,
+        39.099999994039536,
+        54.599999994039536,
+        41.099999994039536,
+        24.30000001192093
+      ],
+      "scroll_frame_wait_max_ms": 55.599999994039536,
+      "complete_output_equal": true,
+      "dom_card_count": 1000,
+      "observations": {
+        "longtask": [
+          {
+            "start_ms": 24359.40000000596,
+            "duration_ms": 71
+          },
+          {
+            "start_ms": 24521.5,
+            "duration_ms": 50
+          },
+          {
+            "start_ms": 24779.79999998212,
+            "duration_ms": 54
+          }
+        ],
+        "long-animation-frame": []
+      }
+    },
+    {
+      "round": 2,
+      "strategy": "containment",
+      "dom_creation_and_insertion_ms": 30.5,
+      "frame_ready_proxy_ms": 87.39999997615814,
+      "scroll_frame_wait_ms": [
+        6,
+        13.799999982118607,
+        20.30000001192093,
+        12,
+        16.599999994039536,
+        16.599999994039536,
+        16.5,
+        17.5,
+        16.799999982118607,
+        15.900000005960464,
+        17.5,
+        16.30000001192093
+      ],
+      "scroll_frame_wait_max_ms": 20.30000001192093,
+      "complete_output_equal": true,
+      "dom_card_count": 1000,
+      "observations": {
+        "longtask": [],
+        "long-animation-frame": []
+      }
+    },
+    {
+      "round": 3,
+      "strategy": "containment",
+      "dom_creation_and_insertion_ms": 17.299999982118607,
+      "frame_ready_proxy_ms": 50.79999998211861,
+      "scroll_frame_wait_ms": [
+        11.599999994039536,
+        15.599999994039536,
+        16.69999998807907,
+        16.69999998807907,
+        17.900000005960464,
+        15.5,
+        16.599999994039536,
+        16.700000017881393,
+        17.400000005960464,
+        20,
+        12.899999976158142,
+        16.200000017881393
+      ],
+      "scroll_frame_wait_max_ms": 20,
+      "complete_output_equal": true,
+      "dom_card_count": 1000,
+      "observations": {
+        "longtask": [],
+        "long-animation-frame": []
+      }
+    },
+    {
+      "round": 3,
+      "strategy": "full_dom",
+      "dom_creation_and_insertion_ms": 14.5,
+      "frame_ready_proxy_ms": 2668.5,
+      "scroll_frame_wait_ms": [
+        86.09999999403954,
+        74.40000000596046,
+        72.59999999403954,
+        74.80000001192093,
+        63.29999998211861,
+        46.30000001192093,
+        70.90000000596046,
+        49.79999998211861,
+        44.80000001192093,
+        52.099999994039536,
+        51,
+        30.5
+      ],
+      "scroll_frame_wait_max_ms": 86.09999999403954,
+      "complete_output_equal": true,
+      "dom_card_count": 1000,
+      "observations": {
+        "longtask": [
+          {
+            "start_ms": 28318.79999998212,
+            "duration_ms": 103
+          },
+          {
+            "start_ms": 28422.69999998808,
+            "duration_ms": 69
+          },
+          {
+            "start_ms": 28497.09999999404,
+            "duration_ms": 72
+          },
+          {
+            "start_ms": 28569.59999999404,
+            "duration_ms": 69
+          },
+          {
+            "start_ms": 28644.09999999404,
+            "duration_ms": 63
+          },
+          {
+            "start_ms": 28752.40000000596,
+            "duration_ms": 72
+          },
+          {
+            "start_ms": 28919.5,
+            "duration_ms": 52
+          }
+        ],
+        "long-animation-frame": []
+      }
+    },
+    {
+      "round": 4,
+      "strategy": "full_dom",
+      "dom_creation_and_insertion_ms": 34.5,
+      "frame_ready_proxy_ms": 2980.5,
+      "scroll_frame_wait_ms": [
+        46.400000005960464,
+        47.099999994039536,
+        37.60000002384186,
+        67.59999999403954,
+        55.70000001788139,
+        45,
+        47.79999998211861,
+        46.10000002384186,
+        48.29999998211861,
+        48.20000001788139,
+        56,
+        32.5
+      ],
+      "scroll_frame_wait_max_ms": 67.59999999403954,
+      "complete_output_equal": true,
+      "dom_card_count": 1000,
+      "observations": {
+        "longtask": [
+          {
+            "start_ms": 32154.19999998808,
+            "duration_ms": 51
+          },
+          {
+            "start_ms": 32290.59999999404,
+            "duration_ms": 67
+          },
+          {
+            "start_ms": 32358.19999998808,
+            "duration_ms": 50
+          },
+          {
+            "start_ms": 32649.79999998212,
+            "duration_ms": 50
+          }
+        ],
+        "long-animation-frame": []
+      }
+    },
+    {
+      "round": 4,
+      "strategy": "containment",
+      "dom_creation_and_insertion_ms": 35.30000001192093,
+      "frame_ready_proxy_ms": 90.90000000596046,
+      "scroll_frame_wait_ms": [
+        6.5999999940395355,
+        36.400000005960464,
+        18,
+        6.300000011920929,
+        26.899999976158142,
+        7.4000000059604645,
+        43.80000001192093,
+        7.0999999940395355,
+        18.30000001192093,
+        12.299999982118607,
+        21.599999994039536,
+        16
+      ],
+      "scroll_frame_wait_max_ms": 43.80000001192093,
+      "complete_output_equal": true,
+      "dom_card_count": 1000,
+      "observations": {
+        "longtask": [],
+        "long-animation-frame": []
+      }
+    },
+    {
+      "round": 5,
+      "strategy": "containment",
+      "dom_creation_and_insertion_ms": 16.299999982118607,
+      "frame_ready_proxy_ms": 45.19999998807907,
+      "scroll_frame_wait_ms": [
+        11,
+        14.300000011920929,
+        17.19999998807907,
+        17.19999998807907,
+        15.800000011920929,
+        17.5,
+        16.5,
+        16,
+        17.099999994039536,
+        16,
+        16.600000023841858,
+        17.299999982118607
+      ],
+      "scroll_frame_wait_max_ms": 17.5,
+      "complete_output_equal": true,
+      "dom_card_count": 1000,
+      "observations": {
+        "longtask": [],
+        "long-animation-frame": []
+      }
+    },
+    {
+      "round": 5,
+      "strategy": "full_dom",
+      "dom_creation_and_insertion_ms": 11,
+      "frame_ready_proxy_ms": 2466.0999999940395,
+      "scroll_frame_wait_ms": [
+        88,
+        69.2000000178814,
+        71.5,
+        57.5,
+        47.5,
+        43.5,
+        66.39999997615814,
+        63.900000005960464,
+        43,
+        67.7000000178814,
+        61.89999997615814,
+        24.600000023841858
+      ],
+      "scroll_frame_wait_max_ms": 88,
+      "complete_output_equal": true,
+      "dom_card_count": 1000,
+      "observations": {
+        "longtask": [
+          {
+            "start_ms": 36000.09999999404,
+            "duration_ms": 96
+          },
+          {
+            "start_ms": 36097.79999998212,
+            "duration_ms": 69
+          },
+          {
+            "start_ms": 36167,
+            "duration_ms": 71
+          },
+          {
+            "start_ms": 36238.59999999404,
+            "duration_ms": 51
+          }
+        ],
+        "long-animation-frame": []
+      }
+    },
+    {
+      "round": 6,
+      "strategy": "full_dom",
+      "dom_creation_and_insertion_ms": 33.900000005960464,
+      "frame_ready_proxy_ms": 2700.800000011921,
+      "scroll_frame_wait_ms": [
+        45.30000001192093,
+        68.09999999403954,
+        48.5,
+        52.79999998211861,
+        41.69999998807907,
+        50,
+        49.900000005960464,
+        53.400000005960464,
+        53.29999998211861,
+        50.400000005960464,
+        57.20000001788139,
+        45
+      ],
+      "scroll_frame_wait_max_ms": 68.09999999403954,
+      "complete_output_equal": true,
+      "dom_card_count": 1000,
+      "observations": {
+        "longtask": [
+          {
+            "start_ms": 39577,
+            "duration_ms": 68
+          },
+          {
+            "start_ms": 39693.79999998212,
+            "duration_ms": 52
+          },
+          {
+            "start_ms": 39994.69999998808,
+            "duration_ms": 50
+          },
+          {
+            "start_ms": 40045.5,
+            "duration_ms": 56
+          }
+        ],
+        "long-animation-frame": [
+          {
+            "start_ms": 39453.59999999404,
+            "duration_ms": 78.80000001192093
+          }
+        ]
+      }
+    },
+    {
+      "round": 6,
+      "strategy": "containment",
+      "dom_creation_and_insertion_ms": 31.599999994039536,
+      "frame_ready_proxy_ms": 59.900000005960464,
+      "scroll_frame_wait_ms": [
+        16.700000017881393,
+        9.400000005960464,
+        32.400000005960464,
+        37.89999997615814,
+        38.30000001192093,
+        32,
+        47.599999994039536,
+        34.10000002384186,
+        27.899999976158142,
+        33.60000002384186,
+        28.099999994039536,
+        33.400000005960464
+      ],
+      "scroll_frame_wait_max_ms": 47.599999994039536,
+      "complete_output_equal": true,
+      "dom_card_count": 1000,
+      "observations": {
+        "longtask": [],
+        "long-animation-frame": []
+      }
+    }
+  ],
+  "complete": true,
+  "limitations": [
+    "Double-rAF is a scheduling proxy, not direct physical-paint timing",
+    "Scroll frame wait is not INP; observed Event Timing entries are separate and thresholded at 16 ms, not a complete INP score",
+    "No images, networking or peak-memory measurements",
+    "Both variants retain all card fields in the DOM",
+    "No comparison to a target project baseline",
+    "Incremental update setup is outside its timer; initial rendering is a separate operation",
+    "Bounded generated workload; not universal best-method evidence"
+  ],
+  "observed_input_events": [],
+  "finished_at": "2026-10-26T21:39:34.056Z"
+}

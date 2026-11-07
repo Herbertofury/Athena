@@ -1,0 +1,3082 @@
+{
+  "scope": "48 fresh Linux processes; eight-record generated replay of each retained public or generated input",
+  "binary_sha256": "1b4586e8de9763d35f467b550cfbed77baff96953b28cafdf286259728761823",
+  "harness_sha256": "2f5864a6819a6606fb1b6581bdb454a2afb0626d7c3544a36077541cc93309ba",
+  "adapter_sha256": "abae12d1e4fdbeaa09b4df65ef3a0136d4503364a25f81e1e1560b498b7680d1",
+  "lock_sha256": "4ba18f93c261a48a42ea595be3f8a37b6d9c419912d7e7875204ac0641e2dd85",
+  "completed": true,
+  "samples": [
+    {
+      "case": "AANobbMI",
+      "source_mode": "retained public response repeated eight times",
+      "round": 0,
+      "result": {
+        "adapter_sha256": "abae12d1e4fdbeaa09b4df65ef3a0136d4503364a25f81e1e1560b498b7680d1",
+        "after_drop": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 602112,
+          "rollup_pss_bytes": 1222656,
+          "rollup_rss_bytes": 1875968,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1875968,
+          "status_rss_bytes": 1875968
+        },
+        "before_input": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 589824,
+          "rollup_private_dirty_bytes": 143360,
+          "rollup_pss_bytes": 743424,
+          "rollup_rss_bytes": 1392640,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1388544,
+          "status_rss_bytes": 1388544
+        },
+        "before_records": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 229376,
+          "rollup_pss_bytes": 849920,
+          "rollup_rss_bytes": 1503232,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1499136,
+          "status_rss_bytes": 1499136
+        },
+        "capacity_mode": "exact",
+        "complete_output_equal": true,
+        "harness_sha256": "2f5864a6819a6606fb1b6581bdb454a2afb0626d7c3544a36077541cc93309ba",
+        "lane": "baseline",
+        "limitations": [
+          "Eight repeats of one retained input; generated stress replay, not eight unique provider records",
+          "Whole fresh Linux process including runtime, input, validation and measurement overhead",
+          "OS accounting is page-granular and allocator-dependent; after-drop RSS need not fall",
+          "Not browser/GPU memory, Windows, shared-service RSS or a target-project adoption result",
+          "No elapsed-time or warm-cache speed claim"
+        ],
+        "project_id": "AANobbMI",
+        "repeated_records": 8,
+        "retained": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 602112,
+          "rollup_pss_bytes": 1222656,
+          "rollup_rss_bytes": 1875968,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1875968,
+          "status_rss_bytes": 1875968
+        },
+        "schema_version": 1,
+        "source_bytes": 12840,
+        "source_sha256": "80b9186e951352b4b265e20cf6e5f57c8646f11b09d6f3a1a8492046acfaf9c0"
+      }
+    },
+    {
+      "case": "AANobbMI",
+      "source_mode": "retained public response repeated eight times",
+      "round": 0,
+      "result": {
+        "adapter_sha256": "abae12d1e4fdbeaa09b4df65ef3a0136d4503364a25f81e1e1560b498b7680d1",
+        "after_drop": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 602112,
+          "rollup_pss_bytes": 1222656,
+          "rollup_rss_bytes": 1875968,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1875968,
+          "status_rss_bytes": 1875968
+        },
+        "before_input": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 139264,
+          "rollup_pss_bytes": 759808,
+          "rollup_rss_bytes": 1409024,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1404928,
+          "status_rss_bytes": 1404928
+        },
+        "before_records": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 225280,
+          "rollup_pss_bytes": 845824,
+          "rollup_rss_bytes": 1499136,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1495040,
+          "status_rss_bytes": 1495040
+        },
+        "capacity_mode": "exact",
+        "complete_output_equal": true,
+        "harness_sha256": "2f5864a6819a6606fb1b6581bdb454a2afb0626d7c3544a36077541cc93309ba",
+        "lane": "candidate",
+        "limitations": [
+          "Eight repeats of one retained input; generated stress replay, not eight unique provider records",
+          "Whole fresh Linux process including runtime, input, validation and measurement overhead",
+          "OS accounting is page-granular and allocator-dependent; after-drop RSS need not fall",
+          "Not browser/GPU memory, Windows, shared-service RSS or a target-project adoption result",
+          "No elapsed-time or warm-cache speed claim"
+        ],
+        "project_id": "AANobbMI",
+        "repeated_records": 8,
+        "retained": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 602112,
+          "rollup_pss_bytes": 1222656,
+          "rollup_rss_bytes": 1875968,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1875968,
+          "status_rss_bytes": 1875968
+        },
+        "schema_version": 1,
+        "source_bytes": 12840,
+        "source_sha256": "80b9186e951352b4b265e20cf6e5f57c8646f11b09d6f3a1a8492046acfaf9c0"
+      }
+    },
+    {
+      "case": "AANobbMI",
+      "source_mode": "retained public response repeated eight times",
+      "round": 1,
+      "result": {
+        "adapter_sha256": "abae12d1e4fdbeaa09b4df65ef3a0136d4503364a25f81e1e1560b498b7680d1",
+        "after_drop": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 655360,
+          "rollup_private_dirty_bytes": 602112,
+          "rollup_pss_bytes": 1271808,
+          "rollup_rss_bytes": 1929216,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1929216,
+          "status_rss_bytes": 1929216
+        },
+        "before_input": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 598016,
+          "rollup_private_dirty_bytes": 143360,
+          "rollup_pss_bytes": 751616,
+          "rollup_rss_bytes": 1400832,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1396736,
+          "status_rss_bytes": 1396736
+        },
+        "before_records": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 655360,
+          "rollup_private_dirty_bytes": 229376,
+          "rollup_pss_bytes": 899072,
+          "rollup_rss_bytes": 1556480,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1552384,
+          "status_rss_bytes": 1552384
+        },
+        "capacity_mode": "exact",
+        "complete_output_equal": true,
+        "harness_sha256": "2f5864a6819a6606fb1b6581bdb454a2afb0626d7c3544a36077541cc93309ba",
+        "lane": "candidate",
+        "limitations": [
+          "Eight repeats of one retained input; generated stress replay, not eight unique provider records",
+          "Whole fresh Linux process including runtime, input, validation and measurement overhead",
+          "OS accounting is page-granular and allocator-dependent; after-drop RSS need not fall",
+          "Not browser/GPU memory, Windows, shared-service RSS or a target-project adoption result",
+          "No elapsed-time or warm-cache speed claim"
+        ],
+        "project_id": "AANobbMI",
+        "repeated_records": 8,
+        "retained": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 655360,
+          "rollup_private_dirty_bytes": 602112,
+          "rollup_pss_bytes": 1271808,
+          "rollup_rss_bytes": 1929216,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1929216,
+          "status_rss_bytes": 1929216
+        },
+        "schema_version": 1,
+        "source_bytes": 12840,
+        "source_sha256": "80b9186e951352b4b265e20cf6e5f57c8646f11b09d6f3a1a8492046acfaf9c0"
+      }
+    },
+    {
+      "case": "AANobbMI",
+      "source_mode": "retained public response repeated eight times",
+      "round": 1,
+      "result": {
+        "adapter_sha256": "abae12d1e4fdbeaa09b4df65ef3a0136d4503364a25f81e1e1560b498b7680d1",
+        "after_drop": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 598016,
+          "rollup_pss_bytes": 1218560,
+          "rollup_rss_bytes": 1871872,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1871872,
+          "status_rss_bytes": 1871872
+        },
+        "before_input": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 544768,
+          "rollup_private_dirty_bytes": 139264,
+          "rollup_pss_bytes": 694272,
+          "rollup_rss_bytes": 1343488,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1339392,
+          "status_rss_bytes": 1339392
+        },
+        "before_records": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 225280,
+          "rollup_pss_bytes": 845824,
+          "rollup_rss_bytes": 1499136,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1495040,
+          "status_rss_bytes": 1495040
+        },
+        "capacity_mode": "exact",
+        "complete_output_equal": true,
+        "harness_sha256": "2f5864a6819a6606fb1b6581bdb454a2afb0626d7c3544a36077541cc93309ba",
+        "lane": "baseline",
+        "limitations": [
+          "Eight repeats of one retained input; generated stress replay, not eight unique provider records",
+          "Whole fresh Linux process including runtime, input, validation and measurement overhead",
+          "OS accounting is page-granular and allocator-dependent; after-drop RSS need not fall",
+          "Not browser/GPU memory, Windows, shared-service RSS or a target-project adoption result",
+          "No elapsed-time or warm-cache speed claim"
+        ],
+        "project_id": "AANobbMI",
+        "repeated_records": 8,
+        "retained": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 598016,
+          "rollup_pss_bytes": 1218560,
+          "rollup_rss_bytes": 1871872,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1871872,
+          "status_rss_bytes": 1871872
+        },
+        "schema_version": 1,
+        "source_bytes": 12840,
+        "source_sha256": "80b9186e951352b4b265e20cf6e5f57c8646f11b09d6f3a1a8492046acfaf9c0"
+      }
+    },
+    {
+      "case": "AANobbMI",
+      "source_mode": "retained public response repeated eight times",
+      "round": 2,
+      "result": {
+        "adapter_sha256": "abae12d1e4fdbeaa09b4df65ef3a0136d4503364a25f81e1e1560b498b7680d1",
+        "after_drop": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 655360,
+          "rollup_private_dirty_bytes": 602112,
+          "rollup_pss_bytes": 1271808,
+          "rollup_rss_bytes": 1929216,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1929216,
+          "status_rss_bytes": 1929216
+        },
+        "before_input": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 598016,
+          "rollup_private_dirty_bytes": 143360,
+          "rollup_pss_bytes": 751616,
+          "rollup_rss_bytes": 1400832,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1396736,
+          "status_rss_bytes": 1396736
+        },
+        "before_records": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 655360,
+          "rollup_private_dirty_bytes": 229376,
+          "rollup_pss_bytes": 899072,
+          "rollup_rss_bytes": 1556480,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1552384,
+          "status_rss_bytes": 1552384
+        },
+        "capacity_mode": "exact",
+        "complete_output_equal": true,
+        "harness_sha256": "2f5864a6819a6606fb1b6581bdb454a2afb0626d7c3544a36077541cc93309ba",
+        "lane": "baseline",
+        "limitations": [
+          "Eight repeats of one retained input; generated stress replay, not eight unique provider records",
+          "Whole fresh Linux process including runtime, input, validation and measurement overhead",
+          "OS accounting is page-granular and allocator-dependent; after-drop RSS need not fall",
+          "Not browser/GPU memory, Windows, shared-service RSS or a target-project adoption result",
+          "No elapsed-time or warm-cache speed claim"
+        ],
+        "project_id": "AANobbMI",
+        "repeated_records": 8,
+        "retained": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 655360,
+          "rollup_private_dirty_bytes": 602112,
+          "rollup_pss_bytes": 1271808,
+          "rollup_rss_bytes": 1929216,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1929216,
+          "status_rss_bytes": 1929216
+        },
+        "schema_version": 1,
+        "source_bytes": 12840,
+        "source_sha256": "80b9186e951352b4b265e20cf6e5f57c8646f11b09d6f3a1a8492046acfaf9c0"
+      }
+    },
+    {
+      "case": "AANobbMI",
+      "source_mode": "retained public response repeated eight times",
+      "round": 2,
+      "result": {
+        "adapter_sha256": "abae12d1e4fdbeaa09b4df65ef3a0136d4503364a25f81e1e1560b498b7680d1",
+        "after_drop": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 602112,
+          "rollup_pss_bytes": 1222656,
+          "rollup_rss_bytes": 1875968,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1875968,
+          "status_rss_bytes": 1875968
+        },
+        "before_input": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 593920,
+          "rollup_private_dirty_bytes": 143360,
+          "rollup_pss_bytes": 747520,
+          "rollup_rss_bytes": 1396736,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1392640,
+          "status_rss_bytes": 1392640
+        },
+        "before_records": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 229376,
+          "rollup_pss_bytes": 849920,
+          "rollup_rss_bytes": 1503232,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1499136,
+          "status_rss_bytes": 1499136
+        },
+        "capacity_mode": "exact",
+        "complete_output_equal": true,
+        "harness_sha256": "2f5864a6819a6606fb1b6581bdb454a2afb0626d7c3544a36077541cc93309ba",
+        "lane": "candidate",
+        "limitations": [
+          "Eight repeats of one retained input; generated stress replay, not eight unique provider records",
+          "Whole fresh Linux process including runtime, input, validation and measurement overhead",
+          "OS accounting is page-granular and allocator-dependent; after-drop RSS need not fall",
+          "Not browser/GPU memory, Windows, shared-service RSS or a target-project adoption result",
+          "No elapsed-time or warm-cache speed claim"
+        ],
+        "project_id": "AANobbMI",
+        "repeated_records": 8,
+        "retained": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 602112,
+          "rollup_pss_bytes": 1222656,
+          "rollup_rss_bytes": 1875968,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1875968,
+          "status_rss_bytes": 1875968
+        },
+        "schema_version": 1,
+        "source_bytes": 12840,
+        "source_sha256": "80b9186e951352b4b265e20cf6e5f57c8646f11b09d6f3a1a8492046acfaf9c0"
+      }
+    },
+    {
+      "case": "AANobbMI",
+      "source_mode": "retained public response repeated eight times",
+      "round": 0,
+      "result": {
+        "adapter_sha256": "abae12d1e4fdbeaa09b4df65ef3a0136d4503364a25f81e1e1560b498b7680d1",
+        "after_drop": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 663552,
+          "rollup_private_dirty_bytes": 618496,
+          "rollup_pss_bytes": 1296384,
+          "rollup_rss_bytes": 1953792,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1953792,
+          "status_rss_bytes": 1953792
+        },
+        "before_input": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 544768,
+          "rollup_private_dirty_bytes": 139264,
+          "rollup_pss_bytes": 694272,
+          "rollup_rss_bytes": 1343488,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1339392,
+          "status_rss_bytes": 1339392
+        },
+        "before_records": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 663552,
+          "rollup_private_dirty_bytes": 225280,
+          "rollup_pss_bytes": 903168,
+          "rollup_rss_bytes": 1560576,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1556480,
+          "status_rss_bytes": 1556480
+        },
+        "capacity_mode": "spare",
+        "complete_output_equal": true,
+        "harness_sha256": "2f5864a6819a6606fb1b6581bdb454a2afb0626d7c3544a36077541cc93309ba",
+        "lane": "baseline",
+        "limitations": [
+          "Eight repeats of one retained input; generated stress replay, not eight unique provider records",
+          "Whole fresh Linux process including runtime, input, validation and measurement overhead",
+          "OS accounting is page-granular and allocator-dependent; after-drop RSS need not fall",
+          "Not browser/GPU memory, Windows, shared-service RSS or a target-project adoption result",
+          "No elapsed-time or warm-cache speed claim"
+        ],
+        "project_id": "AANobbMI",
+        "repeated_records": 8,
+        "retained": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 663552,
+          "rollup_private_dirty_bytes": 618496,
+          "rollup_pss_bytes": 1296384,
+          "rollup_rss_bytes": 1953792,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1953792,
+          "status_rss_bytes": 1953792
+        },
+        "schema_version": 1,
+        "source_bytes": 12840,
+        "source_sha256": "80b9186e951352b4b265e20cf6e5f57c8646f11b09d6f3a1a8492046acfaf9c0"
+      }
+    },
+    {
+      "case": "AANobbMI",
+      "source_mode": "retained public response repeated eight times",
+      "round": 0,
+      "result": {
+        "adapter_sha256": "abae12d1e4fdbeaa09b4df65ef3a0136d4503364a25f81e1e1560b498b7680d1",
+        "after_drop": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 614400,
+          "rollup_pss_bytes": 1234944,
+          "rollup_rss_bytes": 1888256,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1888256,
+          "status_rss_bytes": 1888256
+        },
+        "before_input": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 139264,
+          "rollup_pss_bytes": 759808,
+          "rollup_rss_bytes": 1409024,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1404928,
+          "status_rss_bytes": 1404928
+        },
+        "before_records": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 225280,
+          "rollup_pss_bytes": 845824,
+          "rollup_rss_bytes": 1499136,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1495040,
+          "status_rss_bytes": 1495040
+        },
+        "capacity_mode": "spare",
+        "complete_output_equal": true,
+        "harness_sha256": "2f5864a6819a6606fb1b6581bdb454a2afb0626d7c3544a36077541cc93309ba",
+        "lane": "candidate",
+        "limitations": [
+          "Eight repeats of one retained input; generated stress replay, not eight unique provider records",
+          "Whole fresh Linux process including runtime, input, validation and measurement overhead",
+          "OS accounting is page-granular and allocator-dependent; after-drop RSS need not fall",
+          "Not browser/GPU memory, Windows, shared-service RSS or a target-project adoption result",
+          "No elapsed-time or warm-cache speed claim"
+        ],
+        "project_id": "AANobbMI",
+        "repeated_records": 8,
+        "retained": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 614400,
+          "rollup_pss_bytes": 1234944,
+          "rollup_rss_bytes": 1888256,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1888256,
+          "status_rss_bytes": 1888256
+        },
+        "schema_version": 1,
+        "source_bytes": 12840,
+        "source_sha256": "80b9186e951352b4b265e20cf6e5f57c8646f11b09d6f3a1a8492046acfaf9c0"
+      }
+    },
+    {
+      "case": "AANobbMI",
+      "source_mode": "retained public response repeated eight times",
+      "round": 1,
+      "result": {
+        "adapter_sha256": "abae12d1e4fdbeaa09b4df65ef3a0136d4503364a25f81e1e1560b498b7680d1",
+        "after_drop": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 614400,
+          "rollup_pss_bytes": 1234944,
+          "rollup_rss_bytes": 1888256,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1888256,
+          "status_rss_bytes": 1888256
+        },
+        "before_input": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 139264,
+          "rollup_pss_bytes": 759808,
+          "rollup_rss_bytes": 1409024,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1404928,
+          "status_rss_bytes": 1404928
+        },
+        "before_records": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 225280,
+          "rollup_pss_bytes": 845824,
+          "rollup_rss_bytes": 1499136,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1495040,
+          "status_rss_bytes": 1495040
+        },
+        "capacity_mode": "spare",
+        "complete_output_equal": true,
+        "harness_sha256": "2f5864a6819a6606fb1b6581bdb454a2afb0626d7c3544a36077541cc93309ba",
+        "lane": "candidate",
+        "limitations": [
+          "Eight repeats of one retained input; generated stress replay, not eight unique provider records",
+          "Whole fresh Linux process including runtime, input, validation and measurement overhead",
+          "OS accounting is page-granular and allocator-dependent; after-drop RSS need not fall",
+          "Not browser/GPU memory, Windows, shared-service RSS or a target-project adoption result",
+          "No elapsed-time or warm-cache speed claim"
+        ],
+        "project_id": "AANobbMI",
+        "repeated_records": 8,
+        "retained": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 614400,
+          "rollup_pss_bytes": 1234944,
+          "rollup_rss_bytes": 1888256,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1888256,
+          "status_rss_bytes": 1888256
+        },
+        "schema_version": 1,
+        "source_bytes": 12840,
+        "source_sha256": "80b9186e951352b4b265e20cf6e5f57c8646f11b09d6f3a1a8492046acfaf9c0"
+      }
+    },
+    {
+      "case": "AANobbMI",
+      "source_mode": "retained public response repeated eight times",
+      "round": 1,
+      "result": {
+        "adapter_sha256": "abae12d1e4fdbeaa09b4df65ef3a0136d4503364a25f81e1e1560b498b7680d1",
+        "after_drop": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 655360,
+          "rollup_private_dirty_bytes": 622592,
+          "rollup_pss_bytes": 1292288,
+          "rollup_rss_bytes": 1949696,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1949696,
+          "status_rss_bytes": 1949696
+        },
+        "before_input": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 598016,
+          "rollup_private_dirty_bytes": 143360,
+          "rollup_pss_bytes": 751616,
+          "rollup_rss_bytes": 1400832,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1396736,
+          "status_rss_bytes": 1396736
+        },
+        "before_records": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 655360,
+          "rollup_private_dirty_bytes": 229376,
+          "rollup_pss_bytes": 899072,
+          "rollup_rss_bytes": 1556480,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1552384,
+          "status_rss_bytes": 1552384
+        },
+        "capacity_mode": "spare",
+        "complete_output_equal": true,
+        "harness_sha256": "2f5864a6819a6606fb1b6581bdb454a2afb0626d7c3544a36077541cc93309ba",
+        "lane": "baseline",
+        "limitations": [
+          "Eight repeats of one retained input; generated stress replay, not eight unique provider records",
+          "Whole fresh Linux process including runtime, input, validation and measurement overhead",
+          "OS accounting is page-granular and allocator-dependent; after-drop RSS need not fall",
+          "Not browser/GPU memory, Windows, shared-service RSS or a target-project adoption result",
+          "No elapsed-time or warm-cache speed claim"
+        ],
+        "project_id": "AANobbMI",
+        "repeated_records": 8,
+        "retained": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 655360,
+          "rollup_private_dirty_bytes": 622592,
+          "rollup_pss_bytes": 1292288,
+          "rollup_rss_bytes": 1949696,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1949696,
+          "status_rss_bytes": 1949696
+        },
+        "schema_version": 1,
+        "source_bytes": 12840,
+        "source_sha256": "80b9186e951352b4b265e20cf6e5f57c8646f11b09d6f3a1a8492046acfaf9c0"
+      }
+    },
+    {
+      "case": "AANobbMI",
+      "source_mode": "retained public response repeated eight times",
+      "round": 2,
+      "result": {
+        "adapter_sha256": "abae12d1e4fdbeaa09b4df65ef3a0136d4503364a25f81e1e1560b498b7680d1",
+        "after_drop": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 602112,
+          "rollup_private_dirty_bytes": 618496,
+          "rollup_pss_bytes": 1234944,
+          "rollup_rss_bytes": 1892352,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1892352,
+          "status_rss_bytes": 1892352
+        },
+        "before_input": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 602112,
+          "rollup_private_dirty_bytes": 139264,
+          "rollup_pss_bytes": 755712,
+          "rollup_rss_bytes": 1409024,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1404928,
+          "status_rss_bytes": 1404928
+        },
+        "before_records": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 602112,
+          "rollup_private_dirty_bytes": 225280,
+          "rollup_pss_bytes": 841728,
+          "rollup_rss_bytes": 1499136,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1495040,
+          "status_rss_bytes": 1495040
+        },
+        "capacity_mode": "spare",
+        "complete_output_equal": true,
+        "harness_sha256": "2f5864a6819a6606fb1b6581bdb454a2afb0626d7c3544a36077541cc93309ba",
+        "lane": "baseline",
+        "limitations": [
+          "Eight repeats of one retained input; generated stress replay, not eight unique provider records",
+          "Whole fresh Linux process including runtime, input, validation and measurement overhead",
+          "OS accounting is page-granular and allocator-dependent; after-drop RSS need not fall",
+          "Not browser/GPU memory, Windows, shared-service RSS or a target-project adoption result",
+          "No elapsed-time or warm-cache speed claim"
+        ],
+        "project_id": "AANobbMI",
+        "repeated_records": 8,
+        "retained": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 602112,
+          "rollup_private_dirty_bytes": 618496,
+          "rollup_pss_bytes": 1234944,
+          "rollup_rss_bytes": 1892352,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1892352,
+          "status_rss_bytes": 1892352
+        },
+        "schema_version": 1,
+        "source_bytes": 12840,
+        "source_sha256": "80b9186e951352b4b265e20cf6e5f57c8646f11b09d6f3a1a8492046acfaf9c0"
+      }
+    },
+    {
+      "case": "AANobbMI",
+      "source_mode": "retained public response repeated eight times",
+      "round": 2,
+      "result": {
+        "adapter_sha256": "abae12d1e4fdbeaa09b4df65ef3a0136d4503364a25f81e1e1560b498b7680d1",
+        "after_drop": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 610304,
+          "rollup_pss_bytes": 1230848,
+          "rollup_rss_bytes": 1884160,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1884160,
+          "status_rss_bytes": 1884160
+        },
+        "before_input": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 544768,
+          "rollup_private_dirty_bytes": 139264,
+          "rollup_pss_bytes": 694272,
+          "rollup_rss_bytes": 1343488,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1339392,
+          "status_rss_bytes": 1339392
+        },
+        "before_records": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 225280,
+          "rollup_pss_bytes": 845824,
+          "rollup_rss_bytes": 1499136,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1495040,
+          "status_rss_bytes": 1495040
+        },
+        "capacity_mode": "spare",
+        "complete_output_equal": true,
+        "harness_sha256": "2f5864a6819a6606fb1b6581bdb454a2afb0626d7c3544a36077541cc93309ba",
+        "lane": "candidate",
+        "limitations": [
+          "Eight repeats of one retained input; generated stress replay, not eight unique provider records",
+          "Whole fresh Linux process including runtime, input, validation and measurement overhead",
+          "OS accounting is page-granular and allocator-dependent; after-drop RSS need not fall",
+          "Not browser/GPU memory, Windows, shared-service RSS or a target-project adoption result",
+          "No elapsed-time or warm-cache speed claim"
+        ],
+        "project_id": "AANobbMI",
+        "repeated_records": 8,
+        "retained": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 610304,
+          "rollup_pss_bytes": 1230848,
+          "rollup_rss_bytes": 1884160,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1884160,
+          "status_rss_bytes": 1884160
+        },
+        "schema_version": 1,
+        "source_bytes": 12840,
+        "source_sha256": "80b9186e951352b4b265e20cf6e5f57c8646f11b09d6f3a1a8492046acfaf9c0"
+      }
+    },
+    {
+      "case": "YL57xq9U",
+      "source_mode": "retained public response repeated eight times",
+      "round": 0,
+      "result": {
+        "adapter_sha256": "abae12d1e4fdbeaa09b4df65ef3a0136d4503364a25f81e1e1560b498b7680d1",
+        "after_drop": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 430080,
+          "rollup_pss_bytes": 1050624,
+          "rollup_rss_bytes": 1703936,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1703936,
+          "status_rss_bytes": 1703936
+        },
+        "before_input": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 544768,
+          "rollup_private_dirty_bytes": 139264,
+          "rollup_pss_bytes": 694272,
+          "rollup_rss_bytes": 1343488,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1339392,
+          "status_rss_bytes": 1339392
+        },
+        "before_records": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 192512,
+          "rollup_pss_bytes": 813056,
+          "rollup_rss_bytes": 1466368,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1466368,
+          "status_rss_bytes": 1466368
+        },
+        "capacity_mode": "exact",
+        "complete_output_equal": true,
+        "harness_sha256": "2f5864a6819a6606fb1b6581bdb454a2afb0626d7c3544a36077541cc93309ba",
+        "lane": "baseline",
+        "limitations": [
+          "Eight repeats of one retained input; generated stress replay, not eight unique provider records",
+          "Whole fresh Linux process including runtime, input, validation and measurement overhead",
+          "OS accounting is page-granular and allocator-dependent; after-drop RSS need not fall",
+          "Not browser/GPU memory, Windows, shared-service RSS or a target-project adoption result",
+          "No elapsed-time or warm-cache speed claim"
+        ],
+        "project_id": "YL57xq9U",
+        "repeated_records": 8,
+        "retained": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 430080,
+          "rollup_pss_bytes": 1050624,
+          "rollup_rss_bytes": 1703936,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1703936,
+          "status_rss_bytes": 1703936
+        },
+        "schema_version": 1,
+        "source_bytes": 7267,
+        "source_sha256": "8d9ae282ea19d854f9f0911fac320a4af8d873a3228173e37e5001341afe2996"
+      }
+    },
+    {
+      "case": "YL57xq9U",
+      "source_mode": "retained public response repeated eight times",
+      "round": 0,
+      "result": {
+        "adapter_sha256": "abae12d1e4fdbeaa09b4df65ef3a0136d4503364a25f81e1e1560b498b7680d1",
+        "after_drop": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 430080,
+          "rollup_pss_bytes": 1050624,
+          "rollup_rss_bytes": 1703936,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1703936,
+          "status_rss_bytes": 1703936
+        },
+        "before_input": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 544768,
+          "rollup_private_dirty_bytes": 143360,
+          "rollup_pss_bytes": 698368,
+          "rollup_rss_bytes": 1347584,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1343488,
+          "status_rss_bytes": 1343488
+        },
+        "before_records": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 196608,
+          "rollup_pss_bytes": 817152,
+          "rollup_rss_bytes": 1470464,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1470464,
+          "status_rss_bytes": 1470464
+        },
+        "capacity_mode": "exact",
+        "complete_output_equal": true,
+        "harness_sha256": "2f5864a6819a6606fb1b6581bdb454a2afb0626d7c3544a36077541cc93309ba",
+        "lane": "candidate",
+        "limitations": [
+          "Eight repeats of one retained input; generated stress replay, not eight unique provider records",
+          "Whole fresh Linux process including runtime, input, validation and measurement overhead",
+          "OS accounting is page-granular and allocator-dependent; after-drop RSS need not fall",
+          "Not browser/GPU memory, Windows, shared-service RSS or a target-project adoption result",
+          "No elapsed-time or warm-cache speed claim"
+        ],
+        "project_id": "YL57xq9U",
+        "repeated_records": 8,
+        "retained": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 430080,
+          "rollup_pss_bytes": 1050624,
+          "rollup_rss_bytes": 1703936,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1703936,
+          "status_rss_bytes": 1703936
+        },
+        "schema_version": 1,
+        "source_bytes": 7267,
+        "source_sha256": "8d9ae282ea19d854f9f0911fac320a4af8d873a3228173e37e5001341afe2996"
+      }
+    },
+    {
+      "case": "YL57xq9U",
+      "source_mode": "retained public response repeated eight times",
+      "round": 1,
+      "result": {
+        "adapter_sha256": "abae12d1e4fdbeaa09b4df65ef3a0136d4503364a25f81e1e1560b498b7680d1",
+        "after_drop": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 430080,
+          "rollup_pss_bytes": 1050624,
+          "rollup_rss_bytes": 1703936,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1703936,
+          "status_rss_bytes": 1703936
+        },
+        "before_input": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 143360,
+          "rollup_pss_bytes": 763904,
+          "rollup_rss_bytes": 1413120,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1409024,
+          "status_rss_bytes": 1409024
+        },
+        "before_records": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 196608,
+          "rollup_pss_bytes": 817152,
+          "rollup_rss_bytes": 1470464,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1470464,
+          "status_rss_bytes": 1470464
+        },
+        "capacity_mode": "exact",
+        "complete_output_equal": true,
+        "harness_sha256": "2f5864a6819a6606fb1b6581bdb454a2afb0626d7c3544a36077541cc93309ba",
+        "lane": "candidate",
+        "limitations": [
+          "Eight repeats of one retained input; generated stress replay, not eight unique provider records",
+          "Whole fresh Linux process including runtime, input, validation and measurement overhead",
+          "OS accounting is page-granular and allocator-dependent; after-drop RSS need not fall",
+          "Not browser/GPU memory, Windows, shared-service RSS or a target-project adoption result",
+          "No elapsed-time or warm-cache speed claim"
+        ],
+        "project_id": "YL57xq9U",
+        "repeated_records": 8,
+        "retained": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 430080,
+          "rollup_pss_bytes": 1050624,
+          "rollup_rss_bytes": 1703936,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1703936,
+          "status_rss_bytes": 1703936
+        },
+        "schema_version": 1,
+        "source_bytes": 7267,
+        "source_sha256": "8d9ae282ea19d854f9f0911fac320a4af8d873a3228173e37e5001341afe2996"
+      }
+    },
+    {
+      "case": "YL57xq9U",
+      "source_mode": "retained public response repeated eight times",
+      "round": 1,
+      "result": {
+        "adapter_sha256": "abae12d1e4fdbeaa09b4df65ef3a0136d4503364a25f81e1e1560b498b7680d1",
+        "after_drop": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 430080,
+          "rollup_pss_bytes": 1050624,
+          "rollup_rss_bytes": 1703936,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1703936,
+          "status_rss_bytes": 1703936
+        },
+        "before_input": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 544768,
+          "rollup_private_dirty_bytes": 143360,
+          "rollup_pss_bytes": 698368,
+          "rollup_rss_bytes": 1347584,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1343488,
+          "status_rss_bytes": 1343488
+        },
+        "before_records": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 196608,
+          "rollup_pss_bytes": 817152,
+          "rollup_rss_bytes": 1470464,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1470464,
+          "status_rss_bytes": 1470464
+        },
+        "capacity_mode": "exact",
+        "complete_output_equal": true,
+        "harness_sha256": "2f5864a6819a6606fb1b6581bdb454a2afb0626d7c3544a36077541cc93309ba",
+        "lane": "baseline",
+        "limitations": [
+          "Eight repeats of one retained input; generated stress replay, not eight unique provider records",
+          "Whole fresh Linux process including runtime, input, validation and measurement overhead",
+          "OS accounting is page-granular and allocator-dependent; after-drop RSS need not fall",
+          "Not browser/GPU memory, Windows, shared-service RSS or a target-project adoption result",
+          "No elapsed-time or warm-cache speed claim"
+        ],
+        "project_id": "YL57xq9U",
+        "repeated_records": 8,
+        "retained": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 430080,
+          "rollup_pss_bytes": 1050624,
+          "rollup_rss_bytes": 1703936,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1703936,
+          "status_rss_bytes": 1703936
+        },
+        "schema_version": 1,
+        "source_bytes": 7267,
+        "source_sha256": "8d9ae282ea19d854f9f0911fac320a4af8d873a3228173e37e5001341afe2996"
+      }
+    },
+    {
+      "case": "YL57xq9U",
+      "source_mode": "retained public response repeated eight times",
+      "round": 2,
+      "result": {
+        "adapter_sha256": "abae12d1e4fdbeaa09b4df65ef3a0136d4503364a25f81e1e1560b498b7680d1",
+        "after_drop": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 425984,
+          "rollup_pss_bytes": 1046528,
+          "rollup_rss_bytes": 1699840,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1699840,
+          "status_rss_bytes": 1699840
+        },
+        "before_input": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 139264,
+          "rollup_pss_bytes": 759808,
+          "rollup_rss_bytes": 1409024,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1404928,
+          "status_rss_bytes": 1404928
+        },
+        "before_records": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 192512,
+          "rollup_pss_bytes": 813056,
+          "rollup_rss_bytes": 1466368,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1466368,
+          "status_rss_bytes": 1466368
+        },
+        "capacity_mode": "exact",
+        "complete_output_equal": true,
+        "harness_sha256": "2f5864a6819a6606fb1b6581bdb454a2afb0626d7c3544a36077541cc93309ba",
+        "lane": "baseline",
+        "limitations": [
+          "Eight repeats of one retained input; generated stress replay, not eight unique provider records",
+          "Whole fresh Linux process including runtime, input, validation and measurement overhead",
+          "OS accounting is page-granular and allocator-dependent; after-drop RSS need not fall",
+          "Not browser/GPU memory, Windows, shared-service RSS or a target-project adoption result",
+          "No elapsed-time or warm-cache speed claim"
+        ],
+        "project_id": "YL57xq9U",
+        "repeated_records": 8,
+        "retained": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 425984,
+          "rollup_pss_bytes": 1046528,
+          "rollup_rss_bytes": 1699840,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1699840,
+          "status_rss_bytes": 1699840
+        },
+        "schema_version": 1,
+        "source_bytes": 7267,
+        "source_sha256": "8d9ae282ea19d854f9f0911fac320a4af8d873a3228173e37e5001341afe2996"
+      }
+    },
+    {
+      "case": "YL57xq9U",
+      "source_mode": "retained public response repeated eight times",
+      "round": 2,
+      "result": {
+        "adapter_sha256": "abae12d1e4fdbeaa09b4df65ef3a0136d4503364a25f81e1e1560b498b7680d1",
+        "after_drop": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 430080,
+          "rollup_pss_bytes": 1050624,
+          "rollup_rss_bytes": 1703936,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1703936,
+          "status_rss_bytes": 1703936
+        },
+        "before_input": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 544768,
+          "rollup_private_dirty_bytes": 143360,
+          "rollup_pss_bytes": 698368,
+          "rollup_rss_bytes": 1347584,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1343488,
+          "status_rss_bytes": 1343488
+        },
+        "before_records": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 196608,
+          "rollup_pss_bytes": 817152,
+          "rollup_rss_bytes": 1470464,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1470464,
+          "status_rss_bytes": 1470464
+        },
+        "capacity_mode": "exact",
+        "complete_output_equal": true,
+        "harness_sha256": "2f5864a6819a6606fb1b6581bdb454a2afb0626d7c3544a36077541cc93309ba",
+        "lane": "candidate",
+        "limitations": [
+          "Eight repeats of one retained input; generated stress replay, not eight unique provider records",
+          "Whole fresh Linux process including runtime, input, validation and measurement overhead",
+          "OS accounting is page-granular and allocator-dependent; after-drop RSS need not fall",
+          "Not browser/GPU memory, Windows, shared-service RSS or a target-project adoption result",
+          "No elapsed-time or warm-cache speed claim"
+        ],
+        "project_id": "YL57xq9U",
+        "repeated_records": 8,
+        "retained": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 430080,
+          "rollup_pss_bytes": 1050624,
+          "rollup_rss_bytes": 1703936,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1703936,
+          "status_rss_bytes": 1703936
+        },
+        "schema_version": 1,
+        "source_bytes": 7267,
+        "source_sha256": "8d9ae282ea19d854f9f0911fac320a4af8d873a3228173e37e5001341afe2996"
+      }
+    },
+    {
+      "case": "YL57xq9U",
+      "source_mode": "retained public response repeated eight times",
+      "round": 0,
+      "result": {
+        "adapter_sha256": "abae12d1e4fdbeaa09b4df65ef3a0136d4503364a25f81e1e1560b498b7680d1",
+        "after_drop": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 430080,
+          "rollup_pss_bytes": 1050624,
+          "rollup_rss_bytes": 1703936,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1703936,
+          "status_rss_bytes": 1703936
+        },
+        "before_input": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 540672,
+          "rollup_private_dirty_bytes": 143360,
+          "rollup_pss_bytes": 694272,
+          "rollup_rss_bytes": 1343488,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1339392,
+          "status_rss_bytes": 1339392
+        },
+        "before_records": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 196608,
+          "rollup_pss_bytes": 817152,
+          "rollup_rss_bytes": 1470464,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1470464,
+          "status_rss_bytes": 1470464
+        },
+        "capacity_mode": "spare",
+        "complete_output_equal": true,
+        "harness_sha256": "2f5864a6819a6606fb1b6581bdb454a2afb0626d7c3544a36077541cc93309ba",
+        "lane": "baseline",
+        "limitations": [
+          "Eight repeats of one retained input; generated stress replay, not eight unique provider records",
+          "Whole fresh Linux process including runtime, input, validation and measurement overhead",
+          "OS accounting is page-granular and allocator-dependent; after-drop RSS need not fall",
+          "Not browser/GPU memory, Windows, shared-service RSS or a target-project adoption result",
+          "No elapsed-time or warm-cache speed claim"
+        ],
+        "project_id": "YL57xq9U",
+        "repeated_records": 8,
+        "retained": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 430080,
+          "rollup_pss_bytes": 1050624,
+          "rollup_rss_bytes": 1703936,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1703936,
+          "status_rss_bytes": 1703936
+        },
+        "schema_version": 1,
+        "source_bytes": 7267,
+        "source_sha256": "8d9ae282ea19d854f9f0911fac320a4af8d873a3228173e37e5001341afe2996"
+      }
+    },
+    {
+      "case": "YL57xq9U",
+      "source_mode": "retained public response repeated eight times",
+      "round": 0,
+      "result": {
+        "adapter_sha256": "abae12d1e4fdbeaa09b4df65ef3a0136d4503364a25f81e1e1560b498b7680d1",
+        "after_drop": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 430080,
+          "rollup_pss_bytes": 1050624,
+          "rollup_rss_bytes": 1703936,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1703936,
+          "status_rss_bytes": 1703936
+        },
+        "before_input": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 544768,
+          "rollup_private_dirty_bytes": 143360,
+          "rollup_pss_bytes": 698368,
+          "rollup_rss_bytes": 1347584,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1343488,
+          "status_rss_bytes": 1343488
+        },
+        "before_records": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 196608,
+          "rollup_pss_bytes": 817152,
+          "rollup_rss_bytes": 1470464,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1470464,
+          "status_rss_bytes": 1470464
+        },
+        "capacity_mode": "spare",
+        "complete_output_equal": true,
+        "harness_sha256": "2f5864a6819a6606fb1b6581bdb454a2afb0626d7c3544a36077541cc93309ba",
+        "lane": "candidate",
+        "limitations": [
+          "Eight repeats of one retained input; generated stress replay, not eight unique provider records",
+          "Whole fresh Linux process including runtime, input, validation and measurement overhead",
+          "OS accounting is page-granular and allocator-dependent; after-drop RSS need not fall",
+          "Not browser/GPU memory, Windows, shared-service RSS or a target-project adoption result",
+          "No elapsed-time or warm-cache speed claim"
+        ],
+        "project_id": "YL57xq9U",
+        "repeated_records": 8,
+        "retained": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 430080,
+          "rollup_pss_bytes": 1050624,
+          "rollup_rss_bytes": 1703936,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1703936,
+          "status_rss_bytes": 1703936
+        },
+        "schema_version": 1,
+        "source_bytes": 7267,
+        "source_sha256": "8d9ae282ea19d854f9f0911fac320a4af8d873a3228173e37e5001341afe2996"
+      }
+    },
+    {
+      "case": "YL57xq9U",
+      "source_mode": "retained public response repeated eight times",
+      "round": 1,
+      "result": {
+        "adapter_sha256": "abae12d1e4fdbeaa09b4df65ef3a0136d4503364a25f81e1e1560b498b7680d1",
+        "after_drop": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 430080,
+          "rollup_pss_bytes": 1050624,
+          "rollup_rss_bytes": 1703936,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1703936,
+          "status_rss_bytes": 1703936
+        },
+        "before_input": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 544768,
+          "rollup_private_dirty_bytes": 143360,
+          "rollup_pss_bytes": 698368,
+          "rollup_rss_bytes": 1347584,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1343488,
+          "status_rss_bytes": 1343488
+        },
+        "before_records": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 196608,
+          "rollup_pss_bytes": 817152,
+          "rollup_rss_bytes": 1470464,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1470464,
+          "status_rss_bytes": 1470464
+        },
+        "capacity_mode": "spare",
+        "complete_output_equal": true,
+        "harness_sha256": "2f5864a6819a6606fb1b6581bdb454a2afb0626d7c3544a36077541cc93309ba",
+        "lane": "candidate",
+        "limitations": [
+          "Eight repeats of one retained input; generated stress replay, not eight unique provider records",
+          "Whole fresh Linux process including runtime, input, validation and measurement overhead",
+          "OS accounting is page-granular and allocator-dependent; after-drop RSS need not fall",
+          "Not browser/GPU memory, Windows, shared-service RSS or a target-project adoption result",
+          "No elapsed-time or warm-cache speed claim"
+        ],
+        "project_id": "YL57xq9U",
+        "repeated_records": 8,
+        "retained": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 430080,
+          "rollup_pss_bytes": 1050624,
+          "rollup_rss_bytes": 1703936,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1703936,
+          "status_rss_bytes": 1703936
+        },
+        "schema_version": 1,
+        "source_bytes": 7267,
+        "source_sha256": "8d9ae282ea19d854f9f0911fac320a4af8d873a3228173e37e5001341afe2996"
+      }
+    },
+    {
+      "case": "YL57xq9U",
+      "source_mode": "retained public response repeated eight times",
+      "round": 1,
+      "result": {
+        "adapter_sha256": "abae12d1e4fdbeaa09b4df65ef3a0136d4503364a25f81e1e1560b498b7680d1",
+        "after_drop": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 430080,
+          "rollup_pss_bytes": 1050624,
+          "rollup_rss_bytes": 1703936,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1703936,
+          "status_rss_bytes": 1703936
+        },
+        "before_input": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 589824,
+          "rollup_private_dirty_bytes": 143360,
+          "rollup_pss_bytes": 743424,
+          "rollup_rss_bytes": 1392640,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1388544,
+          "status_rss_bytes": 1388544
+        },
+        "before_records": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 196608,
+          "rollup_pss_bytes": 817152,
+          "rollup_rss_bytes": 1470464,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1470464,
+          "status_rss_bytes": 1470464
+        },
+        "capacity_mode": "spare",
+        "complete_output_equal": true,
+        "harness_sha256": "2f5864a6819a6606fb1b6581bdb454a2afb0626d7c3544a36077541cc93309ba",
+        "lane": "baseline",
+        "limitations": [
+          "Eight repeats of one retained input; generated stress replay, not eight unique provider records",
+          "Whole fresh Linux process including runtime, input, validation and measurement overhead",
+          "OS accounting is page-granular and allocator-dependent; after-drop RSS need not fall",
+          "Not browser/GPU memory, Windows, shared-service RSS or a target-project adoption result",
+          "No elapsed-time or warm-cache speed claim"
+        ],
+        "project_id": "YL57xq9U",
+        "repeated_records": 8,
+        "retained": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 430080,
+          "rollup_pss_bytes": 1050624,
+          "rollup_rss_bytes": 1703936,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1703936,
+          "status_rss_bytes": 1703936
+        },
+        "schema_version": 1,
+        "source_bytes": 7267,
+        "source_sha256": "8d9ae282ea19d854f9f0911fac320a4af8d873a3228173e37e5001341afe2996"
+      }
+    },
+    {
+      "case": "YL57xq9U",
+      "source_mode": "retained public response repeated eight times",
+      "round": 2,
+      "result": {
+        "adapter_sha256": "abae12d1e4fdbeaa09b4df65ef3a0136d4503364a25f81e1e1560b498b7680d1",
+        "after_drop": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 430080,
+          "rollup_pss_bytes": 1050624,
+          "rollup_rss_bytes": 1703936,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1703936,
+          "status_rss_bytes": 1703936
+        },
+        "before_input": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 602112,
+          "rollup_private_dirty_bytes": 143360,
+          "rollup_pss_bytes": 755712,
+          "rollup_rss_bytes": 1404928,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1400832,
+          "status_rss_bytes": 1400832
+        },
+        "before_records": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 196608,
+          "rollup_pss_bytes": 817152,
+          "rollup_rss_bytes": 1470464,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1470464,
+          "status_rss_bytes": 1470464
+        },
+        "capacity_mode": "spare",
+        "complete_output_equal": true,
+        "harness_sha256": "2f5864a6819a6606fb1b6581bdb454a2afb0626d7c3544a36077541cc93309ba",
+        "lane": "baseline",
+        "limitations": [
+          "Eight repeats of one retained input; generated stress replay, not eight unique provider records",
+          "Whole fresh Linux process including runtime, input, validation and measurement overhead",
+          "OS accounting is page-granular and allocator-dependent; after-drop RSS need not fall",
+          "Not browser/GPU memory, Windows, shared-service RSS or a target-project adoption result",
+          "No elapsed-time or warm-cache speed claim"
+        ],
+        "project_id": "YL57xq9U",
+        "repeated_records": 8,
+        "retained": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 430080,
+          "rollup_pss_bytes": 1050624,
+          "rollup_rss_bytes": 1703936,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1703936,
+          "status_rss_bytes": 1703936
+        },
+        "schema_version": 1,
+        "source_bytes": 7267,
+        "source_sha256": "8d9ae282ea19d854f9f0911fac320a4af8d873a3228173e37e5001341afe2996"
+      }
+    },
+    {
+      "case": "YL57xq9U",
+      "source_mode": "retained public response repeated eight times",
+      "round": 2,
+      "result": {
+        "adapter_sha256": "abae12d1e4fdbeaa09b4df65ef3a0136d4503364a25f81e1e1560b498b7680d1",
+        "after_drop": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 430080,
+          "rollup_pss_bytes": 1050624,
+          "rollup_rss_bytes": 1703936,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1703936,
+          "status_rss_bytes": 1703936
+        },
+        "before_input": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 544768,
+          "rollup_private_dirty_bytes": 143360,
+          "rollup_pss_bytes": 698368,
+          "rollup_rss_bytes": 1347584,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1343488,
+          "status_rss_bytes": 1343488
+        },
+        "before_records": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 196608,
+          "rollup_pss_bytes": 817152,
+          "rollup_rss_bytes": 1470464,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1470464,
+          "status_rss_bytes": 1470464
+        },
+        "capacity_mode": "spare",
+        "complete_output_equal": true,
+        "harness_sha256": "2f5864a6819a6606fb1b6581bdb454a2afb0626d7c3544a36077541cc93309ba",
+        "lane": "candidate",
+        "limitations": [
+          "Eight repeats of one retained input; generated stress replay, not eight unique provider records",
+          "Whole fresh Linux process including runtime, input, validation and measurement overhead",
+          "OS accounting is page-granular and allocator-dependent; after-drop RSS need not fall",
+          "Not browser/GPU memory, Windows, shared-service RSS or a target-project adoption result",
+          "No elapsed-time or warm-cache speed claim"
+        ],
+        "project_id": "YL57xq9U",
+        "repeated_records": 8,
+        "retained": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 430080,
+          "rollup_pss_bytes": 1050624,
+          "rollup_rss_bytes": 1703936,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1703936,
+          "status_rss_bytes": 1703936
+        },
+        "schema_version": 1,
+        "source_bytes": 7267,
+        "source_sha256": "8d9ae282ea19d854f9f0911fac320a4af8d873a3228173e37e5001341afe2996"
+      }
+    },
+    {
+      "case": "gvQqBUqZ",
+      "source_mode": "retained public response repeated eight times",
+      "round": 0,
+      "result": {
+        "adapter_sha256": "abae12d1e4fdbeaa09b4df65ef3a0136d4503364a25f81e1e1560b498b7680d1",
+        "after_drop": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 389120,
+          "rollup_pss_bytes": 1009664,
+          "rollup_rss_bytes": 1662976,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1662976,
+          "status_rss_bytes": 1662976
+        },
+        "before_input": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 544768,
+          "rollup_private_dirty_bytes": 143360,
+          "rollup_pss_bytes": 698368,
+          "rollup_rss_bytes": 1347584,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1343488,
+          "status_rss_bytes": 1343488
+        },
+        "before_records": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 188416,
+          "rollup_pss_bytes": 808960,
+          "rollup_rss_bytes": 1462272,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1458176,
+          "status_rss_bytes": 1458176
+        },
+        "capacity_mode": "exact",
+        "complete_output_equal": true,
+        "harness_sha256": "2f5864a6819a6606fb1b6581bdb454a2afb0626d7c3544a36077541cc93309ba",
+        "lane": "baseline",
+        "limitations": [
+          "Eight repeats of one retained input; generated stress replay, not eight unique provider records",
+          "Whole fresh Linux process including runtime, input, validation and measurement overhead",
+          "OS accounting is page-granular and allocator-dependent; after-drop RSS need not fall",
+          "Not browser/GPU memory, Windows, shared-service RSS or a target-project adoption result",
+          "No elapsed-time or warm-cache speed claim"
+        ],
+        "project_id": "gvQqBUqZ",
+        "repeated_records": 8,
+        "retained": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 389120,
+          "rollup_pss_bytes": 1009664,
+          "rollup_rss_bytes": 1662976,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1662976,
+          "status_rss_bytes": 1662976
+        },
+        "schema_version": 1,
+        "source_bytes": 6200,
+        "source_sha256": "70080299d623bcd6fa857d09243752e6131377b8fa9cd3fd4da89bb33175caaa"
+      }
+    },
+    {
+      "case": "gvQqBUqZ",
+      "source_mode": "retained public response repeated eight times",
+      "round": 0,
+      "result": {
+        "adapter_sha256": "abae12d1e4fdbeaa09b4df65ef3a0136d4503364a25f81e1e1560b498b7680d1",
+        "after_drop": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 389120,
+          "rollup_pss_bytes": 1009664,
+          "rollup_rss_bytes": 1662976,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1662976,
+          "status_rss_bytes": 1662976
+        },
+        "before_input": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 589824,
+          "rollup_private_dirty_bytes": 143360,
+          "rollup_pss_bytes": 743424,
+          "rollup_rss_bytes": 1392640,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1388544,
+          "status_rss_bytes": 1388544
+        },
+        "before_records": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 188416,
+          "rollup_pss_bytes": 808960,
+          "rollup_rss_bytes": 1462272,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1458176,
+          "status_rss_bytes": 1458176
+        },
+        "capacity_mode": "exact",
+        "complete_output_equal": true,
+        "harness_sha256": "2f5864a6819a6606fb1b6581bdb454a2afb0626d7c3544a36077541cc93309ba",
+        "lane": "candidate",
+        "limitations": [
+          "Eight repeats of one retained input; generated stress replay, not eight unique provider records",
+          "Whole fresh Linux process including runtime, input, validation and measurement overhead",
+          "OS accounting is page-granular and allocator-dependent; after-drop RSS need not fall",
+          "Not browser/GPU memory, Windows, shared-service RSS or a target-project adoption result",
+          "No elapsed-time or warm-cache speed claim"
+        ],
+        "project_id": "gvQqBUqZ",
+        "repeated_records": 8,
+        "retained": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 389120,
+          "rollup_pss_bytes": 1009664,
+          "rollup_rss_bytes": 1662976,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1662976,
+          "status_rss_bytes": 1662976
+        },
+        "schema_version": 1,
+        "source_bytes": 6200,
+        "source_sha256": "70080299d623bcd6fa857d09243752e6131377b8fa9cd3fd4da89bb33175caaa"
+      }
+    },
+    {
+      "case": "gvQqBUqZ",
+      "source_mode": "retained public response repeated eight times",
+      "round": 1,
+      "result": {
+        "adapter_sha256": "abae12d1e4fdbeaa09b4df65ef3a0136d4503364a25f81e1e1560b498b7680d1",
+        "after_drop": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 385024,
+          "rollup_pss_bytes": 1005568,
+          "rollup_rss_bytes": 1658880,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1658880,
+          "status_rss_bytes": 1658880
+        },
+        "before_input": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 544768,
+          "rollup_private_dirty_bytes": 139264,
+          "rollup_pss_bytes": 694272,
+          "rollup_rss_bytes": 1343488,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1339392,
+          "status_rss_bytes": 1339392
+        },
+        "before_records": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 184320,
+          "rollup_pss_bytes": 804864,
+          "rollup_rss_bytes": 1458176,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1454080,
+          "status_rss_bytes": 1454080
+        },
+        "capacity_mode": "exact",
+        "complete_output_equal": true,
+        "harness_sha256": "2f5864a6819a6606fb1b6581bdb454a2afb0626d7c3544a36077541cc93309ba",
+        "lane": "candidate",
+        "limitations": [
+          "Eight repeats of one retained input; generated stress replay, not eight unique provider records",
+          "Whole fresh Linux process including runtime, input, validation and measurement overhead",
+          "OS accounting is page-granular and allocator-dependent; after-drop RSS need not fall",
+          "Not browser/GPU memory, Windows, shared-service RSS or a target-project adoption result",
+          "No elapsed-time or warm-cache speed claim"
+        ],
+        "project_id": "gvQqBUqZ",
+        "repeated_records": 8,
+        "retained": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 385024,
+          "rollup_pss_bytes": 1005568,
+          "rollup_rss_bytes": 1658880,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1658880,
+          "status_rss_bytes": 1658880
+        },
+        "schema_version": 1,
+        "source_bytes": 6200,
+        "source_sha256": "70080299d623bcd6fa857d09243752e6131377b8fa9cd3fd4da89bb33175caaa"
+      }
+    },
+    {
+      "case": "gvQqBUqZ",
+      "source_mode": "retained public response repeated eight times",
+      "round": 1,
+      "result": {
+        "adapter_sha256": "abae12d1e4fdbeaa09b4df65ef3a0136d4503364a25f81e1e1560b498b7680d1",
+        "after_drop": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 389120,
+          "rollup_pss_bytes": 1009664,
+          "rollup_rss_bytes": 1662976,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1662976,
+          "status_rss_bytes": 1662976
+        },
+        "before_input": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 593920,
+          "rollup_private_dirty_bytes": 143360,
+          "rollup_pss_bytes": 747520,
+          "rollup_rss_bytes": 1396736,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1392640,
+          "status_rss_bytes": 1392640
+        },
+        "before_records": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 188416,
+          "rollup_pss_bytes": 808960,
+          "rollup_rss_bytes": 1462272,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1458176,
+          "status_rss_bytes": 1458176
+        },
+        "capacity_mode": "exact",
+        "complete_output_equal": true,
+        "harness_sha256": "2f5864a6819a6606fb1b6581bdb454a2afb0626d7c3544a36077541cc93309ba",
+        "lane": "baseline",
+        "limitations": [
+          "Eight repeats of one retained input; generated stress replay, not eight unique provider records",
+          "Whole fresh Linux process including runtime, input, validation and measurement overhead",
+          "OS accounting is page-granular and allocator-dependent; after-drop RSS need not fall",
+          "Not browser/GPU memory, Windows, shared-service RSS or a target-project adoption result",
+          "No elapsed-time or warm-cache speed claim"
+        ],
+        "project_id": "gvQqBUqZ",
+        "repeated_records": 8,
+        "retained": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 389120,
+          "rollup_pss_bytes": 1009664,
+          "rollup_rss_bytes": 1662976,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1662976,
+          "status_rss_bytes": 1662976
+        },
+        "schema_version": 1,
+        "source_bytes": 6200,
+        "source_sha256": "70080299d623bcd6fa857d09243752e6131377b8fa9cd3fd4da89bb33175caaa"
+      }
+    },
+    {
+      "case": "gvQqBUqZ",
+      "source_mode": "retained public response repeated eight times",
+      "round": 2,
+      "result": {
+        "adapter_sha256": "abae12d1e4fdbeaa09b4df65ef3a0136d4503364a25f81e1e1560b498b7680d1",
+        "after_drop": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 385024,
+          "rollup_pss_bytes": 1005568,
+          "rollup_rss_bytes": 1658880,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1658880,
+          "status_rss_bytes": 1658880
+        },
+        "before_input": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 589824,
+          "rollup_private_dirty_bytes": 139264,
+          "rollup_pss_bytes": 739328,
+          "rollup_rss_bytes": 1388544,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1384448,
+          "status_rss_bytes": 1384448
+        },
+        "before_records": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 184320,
+          "rollup_pss_bytes": 804864,
+          "rollup_rss_bytes": 1458176,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1454080,
+          "status_rss_bytes": 1454080
+        },
+        "capacity_mode": "exact",
+        "complete_output_equal": true,
+        "harness_sha256": "2f5864a6819a6606fb1b6581bdb454a2afb0626d7c3544a36077541cc93309ba",
+        "lane": "baseline",
+        "limitations": [
+          "Eight repeats of one retained input; generated stress replay, not eight unique provider records",
+          "Whole fresh Linux process including runtime, input, validation and measurement overhead",
+          "OS accounting is page-granular and allocator-dependent; after-drop RSS need not fall",
+          "Not browser/GPU memory, Windows, shared-service RSS or a target-project adoption result",
+          "No elapsed-time or warm-cache speed claim"
+        ],
+        "project_id": "gvQqBUqZ",
+        "repeated_records": 8,
+        "retained": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 385024,
+          "rollup_pss_bytes": 1005568,
+          "rollup_rss_bytes": 1658880,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1658880,
+          "status_rss_bytes": 1658880
+        },
+        "schema_version": 1,
+        "source_bytes": 6200,
+        "source_sha256": "70080299d623bcd6fa857d09243752e6131377b8fa9cd3fd4da89bb33175caaa"
+      }
+    },
+    {
+      "case": "gvQqBUqZ",
+      "source_mode": "retained public response repeated eight times",
+      "round": 2,
+      "result": {
+        "adapter_sha256": "abae12d1e4fdbeaa09b4df65ef3a0136d4503364a25f81e1e1560b498b7680d1",
+        "after_drop": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 385024,
+          "rollup_pss_bytes": 1005568,
+          "rollup_rss_bytes": 1658880,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1658880,
+          "status_rss_bytes": 1658880
+        },
+        "before_input": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 139264,
+          "rollup_pss_bytes": 759808,
+          "rollup_rss_bytes": 1409024,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1404928,
+          "status_rss_bytes": 1404928
+        },
+        "before_records": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 184320,
+          "rollup_pss_bytes": 804864,
+          "rollup_rss_bytes": 1458176,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1454080,
+          "status_rss_bytes": 1454080
+        },
+        "capacity_mode": "exact",
+        "complete_output_equal": true,
+        "harness_sha256": "2f5864a6819a6606fb1b6581bdb454a2afb0626d7c3544a36077541cc93309ba",
+        "lane": "candidate",
+        "limitations": [
+          "Eight repeats of one retained input; generated stress replay, not eight unique provider records",
+          "Whole fresh Linux process including runtime, input, validation and measurement overhead",
+          "OS accounting is page-granular and allocator-dependent; after-drop RSS need not fall",
+          "Not browser/GPU memory, Windows, shared-service RSS or a target-project adoption result",
+          "No elapsed-time or warm-cache speed claim"
+        ],
+        "project_id": "gvQqBUqZ",
+        "repeated_records": 8,
+        "retained": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 385024,
+          "rollup_pss_bytes": 1005568,
+          "rollup_rss_bytes": 1658880,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1658880,
+          "status_rss_bytes": 1658880
+        },
+        "schema_version": 1,
+        "source_bytes": 6200,
+        "source_sha256": "70080299d623bcd6fa857d09243752e6131377b8fa9cd3fd4da89bb33175caaa"
+      }
+    },
+    {
+      "case": "gvQqBUqZ",
+      "source_mode": "retained public response repeated eight times",
+      "round": 0,
+      "result": {
+        "adapter_sha256": "abae12d1e4fdbeaa09b4df65ef3a0136d4503364a25f81e1e1560b498b7680d1",
+        "after_drop": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 385024,
+          "rollup_pss_bytes": 1005568,
+          "rollup_rss_bytes": 1658880,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1658880,
+          "status_rss_bytes": 1658880
+        },
+        "before_input": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 544768,
+          "rollup_private_dirty_bytes": 139264,
+          "rollup_pss_bytes": 694272,
+          "rollup_rss_bytes": 1343488,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1339392,
+          "status_rss_bytes": 1339392
+        },
+        "before_records": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 184320,
+          "rollup_pss_bytes": 804864,
+          "rollup_rss_bytes": 1458176,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1454080,
+          "status_rss_bytes": 1454080
+        },
+        "capacity_mode": "spare",
+        "complete_output_equal": true,
+        "harness_sha256": "2f5864a6819a6606fb1b6581bdb454a2afb0626d7c3544a36077541cc93309ba",
+        "lane": "baseline",
+        "limitations": [
+          "Eight repeats of one retained input; generated stress replay, not eight unique provider records",
+          "Whole fresh Linux process including runtime, input, validation and measurement overhead",
+          "OS accounting is page-granular and allocator-dependent; after-drop RSS need not fall",
+          "Not browser/GPU memory, Windows, shared-service RSS or a target-project adoption result",
+          "No elapsed-time or warm-cache speed claim"
+        ],
+        "project_id": "gvQqBUqZ",
+        "repeated_records": 8,
+        "retained": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 385024,
+          "rollup_pss_bytes": 1005568,
+          "rollup_rss_bytes": 1658880,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1658880,
+          "status_rss_bytes": 1658880
+        },
+        "schema_version": 1,
+        "source_bytes": 6200,
+        "source_sha256": "70080299d623bcd6fa857d09243752e6131377b8fa9cd3fd4da89bb33175caaa"
+      }
+    },
+    {
+      "case": "gvQqBUqZ",
+      "source_mode": "retained public response repeated eight times",
+      "round": 0,
+      "result": {
+        "adapter_sha256": "abae12d1e4fdbeaa09b4df65ef3a0136d4503364a25f81e1e1560b498b7680d1",
+        "after_drop": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 389120,
+          "rollup_pss_bytes": 1009664,
+          "rollup_rss_bytes": 1662976,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1662976,
+          "status_rss_bytes": 1662976
+        },
+        "before_input": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 544768,
+          "rollup_private_dirty_bytes": 143360,
+          "rollup_pss_bytes": 698368,
+          "rollup_rss_bytes": 1347584,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1343488,
+          "status_rss_bytes": 1343488
+        },
+        "before_records": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 188416,
+          "rollup_pss_bytes": 808960,
+          "rollup_rss_bytes": 1462272,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1458176,
+          "status_rss_bytes": 1458176
+        },
+        "capacity_mode": "spare",
+        "complete_output_equal": true,
+        "harness_sha256": "2f5864a6819a6606fb1b6581bdb454a2afb0626d7c3544a36077541cc93309ba",
+        "lane": "candidate",
+        "limitations": [
+          "Eight repeats of one retained input; generated stress replay, not eight unique provider records",
+          "Whole fresh Linux process including runtime, input, validation and measurement overhead",
+          "OS accounting is page-granular and allocator-dependent; after-drop RSS need not fall",
+          "Not browser/GPU memory, Windows, shared-service RSS or a target-project adoption result",
+          "No elapsed-time or warm-cache speed claim"
+        ],
+        "project_id": "gvQqBUqZ",
+        "repeated_records": 8,
+        "retained": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 389120,
+          "rollup_pss_bytes": 1009664,
+          "rollup_rss_bytes": 1662976,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1662976,
+          "status_rss_bytes": 1662976
+        },
+        "schema_version": 1,
+        "source_bytes": 6200,
+        "source_sha256": "70080299d623bcd6fa857d09243752e6131377b8fa9cd3fd4da89bb33175caaa"
+      }
+    },
+    {
+      "case": "gvQqBUqZ",
+      "source_mode": "retained public response repeated eight times",
+      "round": 1,
+      "result": {
+        "adapter_sha256": "abae12d1e4fdbeaa09b4df65ef3a0136d4503364a25f81e1e1560b498b7680d1",
+        "after_drop": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 389120,
+          "rollup_pss_bytes": 1009664,
+          "rollup_rss_bytes": 1662976,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1662976,
+          "status_rss_bytes": 1662976
+        },
+        "before_input": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 598016,
+          "rollup_private_dirty_bytes": 143360,
+          "rollup_pss_bytes": 751616,
+          "rollup_rss_bytes": 1400832,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1396736,
+          "status_rss_bytes": 1396736
+        },
+        "before_records": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 188416,
+          "rollup_pss_bytes": 808960,
+          "rollup_rss_bytes": 1462272,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1458176,
+          "status_rss_bytes": 1458176
+        },
+        "capacity_mode": "spare",
+        "complete_output_equal": true,
+        "harness_sha256": "2f5864a6819a6606fb1b6581bdb454a2afb0626d7c3544a36077541cc93309ba",
+        "lane": "candidate",
+        "limitations": [
+          "Eight repeats of one retained input; generated stress replay, not eight unique provider records",
+          "Whole fresh Linux process including runtime, input, validation and measurement overhead",
+          "OS accounting is page-granular and allocator-dependent; after-drop RSS need not fall",
+          "Not browser/GPU memory, Windows, shared-service RSS or a target-project adoption result",
+          "No elapsed-time or warm-cache speed claim"
+        ],
+        "project_id": "gvQqBUqZ",
+        "repeated_records": 8,
+        "retained": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 389120,
+          "rollup_pss_bytes": 1009664,
+          "rollup_rss_bytes": 1662976,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1662976,
+          "status_rss_bytes": 1662976
+        },
+        "schema_version": 1,
+        "source_bytes": 6200,
+        "source_sha256": "70080299d623bcd6fa857d09243752e6131377b8fa9cd3fd4da89bb33175caaa"
+      }
+    },
+    {
+      "case": "gvQqBUqZ",
+      "source_mode": "retained public response repeated eight times",
+      "round": 1,
+      "result": {
+        "adapter_sha256": "abae12d1e4fdbeaa09b4df65ef3a0136d4503364a25f81e1e1560b498b7680d1",
+        "after_drop": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 389120,
+          "rollup_pss_bytes": 1009664,
+          "rollup_rss_bytes": 1662976,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1662976,
+          "status_rss_bytes": 1662976
+        },
+        "before_input": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 540672,
+          "rollup_private_dirty_bytes": 143360,
+          "rollup_pss_bytes": 694272,
+          "rollup_rss_bytes": 1343488,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1339392,
+          "status_rss_bytes": 1339392
+        },
+        "before_records": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 188416,
+          "rollup_pss_bytes": 808960,
+          "rollup_rss_bytes": 1462272,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1458176,
+          "status_rss_bytes": 1458176
+        },
+        "capacity_mode": "spare",
+        "complete_output_equal": true,
+        "harness_sha256": "2f5864a6819a6606fb1b6581bdb454a2afb0626d7c3544a36077541cc93309ba",
+        "lane": "baseline",
+        "limitations": [
+          "Eight repeats of one retained input; generated stress replay, not eight unique provider records",
+          "Whole fresh Linux process including runtime, input, validation and measurement overhead",
+          "OS accounting is page-granular and allocator-dependent; after-drop RSS need not fall",
+          "Not browser/GPU memory, Windows, shared-service RSS or a target-project adoption result",
+          "No elapsed-time or warm-cache speed claim"
+        ],
+        "project_id": "gvQqBUqZ",
+        "repeated_records": 8,
+        "retained": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 389120,
+          "rollup_pss_bytes": 1009664,
+          "rollup_rss_bytes": 1662976,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1662976,
+          "status_rss_bytes": 1662976
+        },
+        "schema_version": 1,
+        "source_bytes": 6200,
+        "source_sha256": "70080299d623bcd6fa857d09243752e6131377b8fa9cd3fd4da89bb33175caaa"
+      }
+    },
+    {
+      "case": "gvQqBUqZ",
+      "source_mode": "retained public response repeated eight times",
+      "round": 2,
+      "result": {
+        "adapter_sha256": "abae12d1e4fdbeaa09b4df65ef3a0136d4503364a25f81e1e1560b498b7680d1",
+        "after_drop": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 389120,
+          "rollup_pss_bytes": 1009664,
+          "rollup_rss_bytes": 1662976,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1662976,
+          "status_rss_bytes": 1662976
+        },
+        "before_input": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 602112,
+          "rollup_private_dirty_bytes": 143360,
+          "rollup_pss_bytes": 755712,
+          "rollup_rss_bytes": 1404928,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1400832,
+          "status_rss_bytes": 1400832
+        },
+        "before_records": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 188416,
+          "rollup_pss_bytes": 808960,
+          "rollup_rss_bytes": 1462272,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1458176,
+          "status_rss_bytes": 1458176
+        },
+        "capacity_mode": "spare",
+        "complete_output_equal": true,
+        "harness_sha256": "2f5864a6819a6606fb1b6581bdb454a2afb0626d7c3544a36077541cc93309ba",
+        "lane": "baseline",
+        "limitations": [
+          "Eight repeats of one retained input; generated stress replay, not eight unique provider records",
+          "Whole fresh Linux process including runtime, input, validation and measurement overhead",
+          "OS accounting is page-granular and allocator-dependent; after-drop RSS need not fall",
+          "Not browser/GPU memory, Windows, shared-service RSS or a target-project adoption result",
+          "No elapsed-time or warm-cache speed claim"
+        ],
+        "project_id": "gvQqBUqZ",
+        "repeated_records": 8,
+        "retained": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 389120,
+          "rollup_pss_bytes": 1009664,
+          "rollup_rss_bytes": 1662976,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1662976,
+          "status_rss_bytes": 1662976
+        },
+        "schema_version": 1,
+        "source_bytes": 6200,
+        "source_sha256": "70080299d623bcd6fa857d09243752e6131377b8fa9cd3fd4da89bb33175caaa"
+      }
+    },
+    {
+      "case": "gvQqBUqZ",
+      "source_mode": "retained public response repeated eight times",
+      "round": 2,
+      "result": {
+        "adapter_sha256": "abae12d1e4fdbeaa09b4df65ef3a0136d4503364a25f81e1e1560b498b7680d1",
+        "after_drop": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 389120,
+          "rollup_pss_bytes": 1009664,
+          "rollup_rss_bytes": 1662976,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1662976,
+          "status_rss_bytes": 1662976
+        },
+        "before_input": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 544768,
+          "rollup_private_dirty_bytes": 143360,
+          "rollup_pss_bytes": 698368,
+          "rollup_rss_bytes": 1347584,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1343488,
+          "status_rss_bytes": 1343488
+        },
+        "before_records": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 188416,
+          "rollup_pss_bytes": 808960,
+          "rollup_rss_bytes": 1462272,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1458176,
+          "status_rss_bytes": 1458176
+        },
+        "capacity_mode": "spare",
+        "complete_output_equal": true,
+        "harness_sha256": "2f5864a6819a6606fb1b6581bdb454a2afb0626d7c3544a36077541cc93309ba",
+        "lane": "candidate",
+        "limitations": [
+          "Eight repeats of one retained input; generated stress replay, not eight unique provider records",
+          "Whole fresh Linux process including runtime, input, validation and measurement overhead",
+          "OS accounting is page-granular and allocator-dependent; after-drop RSS need not fall",
+          "Not browser/GPU memory, Windows, shared-service RSS or a target-project adoption result",
+          "No elapsed-time or warm-cache speed claim"
+        ],
+        "project_id": "gvQqBUqZ",
+        "repeated_records": 8,
+        "retained": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 389120,
+          "rollup_pss_bytes": 1009664,
+          "rollup_rss_bytes": 1662976,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1662976,
+          "status_rss_bytes": 1662976
+        },
+        "schema_version": 1,
+        "source_bytes": 6200,
+        "source_sha256": "70080299d623bcd6fa857d09243752e6131377b8fa9cd3fd4da89bb33175caaa"
+      }
+    },
+    {
+      "case": "generated-large",
+      "source_mode": "generated augmentation",
+      "round": 0,
+      "result": {
+        "adapter_sha256": "abae12d1e4fdbeaa09b4df65ef3a0136d4503364a25f81e1e1560b498b7680d1",
+        "after_drop": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 13656064,
+          "rollup_pss_bytes": 14276608,
+          "rollup_rss_bytes": 14929920,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 16392192,
+          "status_rss_bytes": 14929920
+        },
+        "before_input": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 589824,
+          "rollup_private_dirty_bytes": 143360,
+          "rollup_pss_bytes": 743424,
+          "rollup_rss_bytes": 1392640,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1388544,
+          "status_rss_bytes": 1388544
+        },
+        "before_records": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 1712128,
+          "rollup_pss_bytes": 2332672,
+          "rollup_rss_bytes": 2985984,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 2985984,
+          "status_rss_bytes": 2985984
+        },
+        "capacity_mode": "exact",
+        "complete_output_equal": true,
+        "harness_sha256": "2f5864a6819a6606fb1b6581bdb454a2afb0626d7c3544a36077541cc93309ba",
+        "lane": "baseline",
+        "limitations": [
+          "Eight repeats of one retained input; generated stress replay, not eight unique provider records",
+          "Whole fresh Linux process including runtime, input, validation and measurement overhead",
+          "OS accounting is page-granular and allocator-dependent; after-drop RSS need not fall",
+          "Not browser/GPU memory, Windows, shared-service RSS or a target-project adoption result",
+          "No elapsed-time or warm-cache speed claim"
+        ],
+        "project_id": "TEST0001",
+        "repeated_records": 8,
+        "retained": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 15159296,
+          "rollup_pss_bytes": 15779840,
+          "rollup_rss_bytes": 16433152,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 16433152,
+          "status_rss_bytes": 16433152
+        },
+        "schema_version": 1,
+        "source_bytes": 1500188,
+        "source_sha256": "8c8a5591df4dd3d8f9dada982936707ca326ed6f69b191ac71ebc5ea08f1811d"
+      }
+    },
+    {
+      "case": "generated-large",
+      "source_mode": "generated augmentation",
+      "round": 0,
+      "result": {
+        "adapter_sha256": "abae12d1e4fdbeaa09b4df65ef3a0136d4503364a25f81e1e1560b498b7680d1",
+        "after_drop": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 1712128,
+          "rollup_pss_bytes": 2332672,
+          "rollup_rss_bytes": 2985984,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 14901248,
+          "status_rss_bytes": 2985984
+        },
+        "before_input": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 143360,
+          "rollup_pss_bytes": 763904,
+          "rollup_rss_bytes": 1413120,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1409024,
+          "status_rss_bytes": 1409024
+        },
+        "before_records": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 1712128,
+          "rollup_pss_bytes": 2332672,
+          "rollup_rss_bytes": 2985984,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 2985984,
+          "status_rss_bytes": 2985984
+        },
+        "capacity_mode": "exact",
+        "complete_output_equal": true,
+        "harness_sha256": "2f5864a6819a6606fb1b6581bdb454a2afb0626d7c3544a36077541cc93309ba",
+        "lane": "candidate",
+        "limitations": [
+          "Eight repeats of one retained input; generated stress replay, not eight unique provider records",
+          "Whole fresh Linux process including runtime, input, validation and measurement overhead",
+          "OS accounting is page-granular and allocator-dependent; after-drop RSS need not fall",
+          "Not browser/GPU memory, Windows, shared-service RSS or a target-project adoption result",
+          "No elapsed-time or warm-cache speed claim"
+        ],
+        "project_id": "TEST0001",
+        "repeated_records": 8,
+        "retained": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 13737984,
+          "rollup_pss_bytes": 14358528,
+          "rollup_rss_bytes": 15011840,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 15011840,
+          "status_rss_bytes": 15011840
+        },
+        "schema_version": 1,
+        "source_bytes": 1500188,
+        "source_sha256": "8c8a5591df4dd3d8f9dada982936707ca326ed6f69b191ac71ebc5ea08f1811d"
+      }
+    },
+    {
+      "case": "generated-large",
+      "source_mode": "generated augmentation",
+      "round": 1,
+      "result": {
+        "adapter_sha256": "abae12d1e4fdbeaa09b4df65ef3a0136d4503364a25f81e1e1560b498b7680d1",
+        "after_drop": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 1712128,
+          "rollup_pss_bytes": 2332672,
+          "rollup_rss_bytes": 2985984,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 14835712,
+          "status_rss_bytes": 2985984
+        },
+        "before_input": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 544768,
+          "rollup_private_dirty_bytes": 143360,
+          "rollup_pss_bytes": 698368,
+          "rollup_rss_bytes": 1347584,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1343488,
+          "status_rss_bytes": 1343488
+        },
+        "before_records": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 1712128,
+          "rollup_pss_bytes": 2332672,
+          "rollup_rss_bytes": 2985984,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 2985984,
+          "status_rss_bytes": 2985984
+        },
+        "capacity_mode": "exact",
+        "complete_output_equal": true,
+        "harness_sha256": "2f5864a6819a6606fb1b6581bdb454a2afb0626d7c3544a36077541cc93309ba",
+        "lane": "candidate",
+        "limitations": [
+          "Eight repeats of one retained input; generated stress replay, not eight unique provider records",
+          "Whole fresh Linux process including runtime, input, validation and measurement overhead",
+          "OS accounting is page-granular and allocator-dependent; after-drop RSS need not fall",
+          "Not browser/GPU memory, Windows, shared-service RSS or a target-project adoption result",
+          "No elapsed-time or warm-cache speed claim"
+        ],
+        "project_id": "TEST0001",
+        "repeated_records": 8,
+        "retained": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 13737984,
+          "rollup_pss_bytes": 14358528,
+          "rollup_rss_bytes": 15011840,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 15011840,
+          "status_rss_bytes": 15011840
+        },
+        "schema_version": 1,
+        "source_bytes": 1500188,
+        "source_sha256": "8c8a5591df4dd3d8f9dada982936707ca326ed6f69b191ac71ebc5ea08f1811d"
+      }
+    },
+    {
+      "case": "generated-large",
+      "source_mode": "generated augmentation",
+      "round": 1,
+      "result": {
+        "adapter_sha256": "abae12d1e4fdbeaa09b4df65ef3a0136d4503364a25f81e1e1560b498b7680d1",
+        "after_drop": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 13651968,
+          "rollup_pss_bytes": 14272512,
+          "rollup_rss_bytes": 14925824,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 16343040,
+          "status_rss_bytes": 14925824
+        },
+        "before_input": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 544768,
+          "rollup_private_dirty_bytes": 139264,
+          "rollup_pss_bytes": 694272,
+          "rollup_rss_bytes": 1343488,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1339392,
+          "status_rss_bytes": 1339392
+        },
+        "before_records": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 1708032,
+          "rollup_pss_bytes": 2328576,
+          "rollup_rss_bytes": 2981888,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 2981888,
+          "status_rss_bytes": 2981888
+        },
+        "capacity_mode": "exact",
+        "complete_output_equal": true,
+        "harness_sha256": "2f5864a6819a6606fb1b6581bdb454a2afb0626d7c3544a36077541cc93309ba",
+        "lane": "baseline",
+        "limitations": [
+          "Eight repeats of one retained input; generated stress replay, not eight unique provider records",
+          "Whole fresh Linux process including runtime, input, validation and measurement overhead",
+          "OS accounting is page-granular and allocator-dependent; after-drop RSS need not fall",
+          "Not browser/GPU memory, Windows, shared-service RSS or a target-project adoption result",
+          "No elapsed-time or warm-cache speed claim"
+        ],
+        "project_id": "TEST0001",
+        "repeated_records": 8,
+        "retained": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 15155200,
+          "rollup_pss_bytes": 15775744,
+          "rollup_rss_bytes": 16429056,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 16429056,
+          "status_rss_bytes": 16429056
+        },
+        "schema_version": 1,
+        "source_bytes": 1500188,
+        "source_sha256": "8c8a5591df4dd3d8f9dada982936707ca326ed6f69b191ac71ebc5ea08f1811d"
+      }
+    },
+    {
+      "case": "generated-large",
+      "source_mode": "generated augmentation",
+      "round": 2,
+      "result": {
+        "adapter_sha256": "abae12d1e4fdbeaa09b4df65ef3a0136d4503364a25f81e1e1560b498b7680d1",
+        "after_drop": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 13656064,
+          "rollup_pss_bytes": 14276608,
+          "rollup_rss_bytes": 14929920,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 16347136,
+          "status_rss_bytes": 14929920
+        },
+        "before_input": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 544768,
+          "rollup_private_dirty_bytes": 143360,
+          "rollup_pss_bytes": 698368,
+          "rollup_rss_bytes": 1347584,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1343488,
+          "status_rss_bytes": 1343488
+        },
+        "before_records": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 1712128,
+          "rollup_pss_bytes": 2332672,
+          "rollup_rss_bytes": 2985984,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 2985984,
+          "status_rss_bytes": 2985984
+        },
+        "capacity_mode": "exact",
+        "complete_output_equal": true,
+        "harness_sha256": "2f5864a6819a6606fb1b6581bdb454a2afb0626d7c3544a36077541cc93309ba",
+        "lane": "baseline",
+        "limitations": [
+          "Eight repeats of one retained input; generated stress replay, not eight unique provider records",
+          "Whole fresh Linux process including runtime, input, validation and measurement overhead",
+          "OS accounting is page-granular and allocator-dependent; after-drop RSS need not fall",
+          "Not browser/GPU memory, Windows, shared-service RSS or a target-project adoption result",
+          "No elapsed-time or warm-cache speed claim"
+        ],
+        "project_id": "TEST0001",
+        "repeated_records": 8,
+        "retained": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 15159296,
+          "rollup_pss_bytes": 15779840,
+          "rollup_rss_bytes": 16433152,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 16433152,
+          "status_rss_bytes": 16433152
+        },
+        "schema_version": 1,
+        "source_bytes": 1500188,
+        "source_sha256": "8c8a5591df4dd3d8f9dada982936707ca326ed6f69b191ac71ebc5ea08f1811d"
+      }
+    },
+    {
+      "case": "generated-large",
+      "source_mode": "generated augmentation",
+      "round": 2,
+      "result": {
+        "adapter_sha256": "abae12d1e4fdbeaa09b4df65ef3a0136d4503364a25f81e1e1560b498b7680d1",
+        "after_drop": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 1708032,
+          "rollup_pss_bytes": 2328576,
+          "rollup_rss_bytes": 2981888,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 14835712,
+          "status_rss_bytes": 2981888
+        },
+        "before_input": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 544768,
+          "rollup_private_dirty_bytes": 139264,
+          "rollup_pss_bytes": 694272,
+          "rollup_rss_bytes": 1343488,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1339392,
+          "status_rss_bytes": 1339392
+        },
+        "before_records": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 1708032,
+          "rollup_pss_bytes": 2328576,
+          "rollup_rss_bytes": 2981888,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 2981888,
+          "status_rss_bytes": 2981888
+        },
+        "capacity_mode": "exact",
+        "complete_output_equal": true,
+        "harness_sha256": "2f5864a6819a6606fb1b6581bdb454a2afb0626d7c3544a36077541cc93309ba",
+        "lane": "candidate",
+        "limitations": [
+          "Eight repeats of one retained input; generated stress replay, not eight unique provider records",
+          "Whole fresh Linux process including runtime, input, validation and measurement overhead",
+          "OS accounting is page-granular and allocator-dependent; after-drop RSS need not fall",
+          "Not browser/GPU memory, Windows, shared-service RSS or a target-project adoption result",
+          "No elapsed-time or warm-cache speed claim"
+        ],
+        "project_id": "TEST0001",
+        "repeated_records": 8,
+        "retained": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 13733888,
+          "rollup_pss_bytes": 14354432,
+          "rollup_rss_bytes": 15007744,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 15007744,
+          "status_rss_bytes": 15007744
+        },
+        "schema_version": 1,
+        "source_bytes": 1500188,
+        "source_sha256": "8c8a5591df4dd3d8f9dada982936707ca326ed6f69b191ac71ebc5ea08f1811d"
+      }
+    },
+    {
+      "case": "generated-large",
+      "source_mode": "generated augmentation",
+      "round": 0,
+      "result": {
+        "adapter_sha256": "abae12d1e4fdbeaa09b4df65ef3a0136d4503364a25f81e1e1560b498b7680d1",
+        "after_drop": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 602112,
+          "rollup_private_dirty_bytes": 13660160,
+          "rollup_pss_bytes": 14276608,
+          "rollup_rss_bytes": 14934016,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 16334848,
+          "status_rss_bytes": 14934016
+        },
+        "before_input": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 602112,
+          "rollup_private_dirty_bytes": 139264,
+          "rollup_pss_bytes": 755712,
+          "rollup_rss_bytes": 1409024,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1404928,
+          "status_rss_bytes": 1404928
+        },
+        "before_records": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 602112,
+          "rollup_private_dirty_bytes": 1708032,
+          "rollup_pss_bytes": 2324480,
+          "rollup_rss_bytes": 2981888,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 2981888,
+          "status_rss_bytes": 2981888
+        },
+        "capacity_mode": "spare",
+        "complete_output_equal": true,
+        "harness_sha256": "2f5864a6819a6606fb1b6581bdb454a2afb0626d7c3544a36077541cc93309ba",
+        "lane": "baseline",
+        "limitations": [
+          "Eight repeats of one retained input; generated stress replay, not eight unique provider records",
+          "Whole fresh Linux process including runtime, input, validation and measurement overhead",
+          "OS accounting is page-granular and allocator-dependent; after-drop RSS need not fall",
+          "Not browser/GPU memory, Windows, shared-service RSS or a target-project adoption result",
+          "No elapsed-time or warm-cache speed claim"
+        ],
+        "project_id": "TEST0001",
+        "repeated_records": 8,
+        "retained": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 602112,
+          "rollup_private_dirty_bytes": 15163392,
+          "rollup_pss_bytes": 15779840,
+          "rollup_rss_bytes": 16437248,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 16437248,
+          "status_rss_bytes": 16437248
+        },
+        "schema_version": 1,
+        "source_bytes": 1500188,
+        "source_sha256": "8c8a5591df4dd3d8f9dada982936707ca326ed6f69b191ac71ebc5ea08f1811d"
+      }
+    },
+    {
+      "case": "generated-large",
+      "source_mode": "generated augmentation",
+      "round": 0,
+      "result": {
+        "adapter_sha256": "abae12d1e4fdbeaa09b4df65ef3a0136d4503364a25f81e1e1560b498b7680d1",
+        "after_drop": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 1708032,
+          "rollup_pss_bytes": 2328576,
+          "rollup_rss_bytes": 2981888,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 14835712,
+          "status_rss_bytes": 2981888
+        },
+        "before_input": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 544768,
+          "rollup_private_dirty_bytes": 139264,
+          "rollup_pss_bytes": 694272,
+          "rollup_rss_bytes": 1343488,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1339392,
+          "status_rss_bytes": 1339392
+        },
+        "before_records": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 1708032,
+          "rollup_pss_bytes": 2328576,
+          "rollup_rss_bytes": 2981888,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 2981888,
+          "status_rss_bytes": 2981888
+        },
+        "capacity_mode": "spare",
+        "complete_output_equal": true,
+        "harness_sha256": "2f5864a6819a6606fb1b6581bdb454a2afb0626d7c3544a36077541cc93309ba",
+        "lane": "candidate",
+        "limitations": [
+          "Eight repeats of one retained input; generated stress replay, not eight unique provider records",
+          "Whole fresh Linux process including runtime, input, validation and measurement overhead",
+          "OS accounting is page-granular and allocator-dependent; after-drop RSS need not fall",
+          "Not browser/GPU memory, Windows, shared-service RSS or a target-project adoption result",
+          "No elapsed-time or warm-cache speed claim"
+        ],
+        "project_id": "TEST0001",
+        "repeated_records": 8,
+        "retained": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 13733888,
+          "rollup_pss_bytes": 14354432,
+          "rollup_rss_bytes": 15007744,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 15007744,
+          "status_rss_bytes": 15007744
+        },
+        "schema_version": 1,
+        "source_bytes": 1500188,
+        "source_sha256": "8c8a5591df4dd3d8f9dada982936707ca326ed6f69b191ac71ebc5ea08f1811d"
+      }
+    },
+    {
+      "case": "generated-large",
+      "source_mode": "generated augmentation",
+      "round": 1,
+      "result": {
+        "adapter_sha256": "abae12d1e4fdbeaa09b4df65ef3a0136d4503364a25f81e1e1560b498b7680d1",
+        "after_drop": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 1708032,
+          "rollup_pss_bytes": 2328576,
+          "rollup_rss_bytes": 2981888,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 14835712,
+          "status_rss_bytes": 2981888
+        },
+        "before_input": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 544768,
+          "rollup_private_dirty_bytes": 139264,
+          "rollup_pss_bytes": 694272,
+          "rollup_rss_bytes": 1343488,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1339392,
+          "status_rss_bytes": 1339392
+        },
+        "before_records": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 1708032,
+          "rollup_pss_bytes": 2328576,
+          "rollup_rss_bytes": 2981888,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 2981888,
+          "status_rss_bytes": 2981888
+        },
+        "capacity_mode": "spare",
+        "complete_output_equal": true,
+        "harness_sha256": "2f5864a6819a6606fb1b6581bdb454a2afb0626d7c3544a36077541cc93309ba",
+        "lane": "candidate",
+        "limitations": [
+          "Eight repeats of one retained input; generated stress replay, not eight unique provider records",
+          "Whole fresh Linux process including runtime, input, validation and measurement overhead",
+          "OS accounting is page-granular and allocator-dependent; after-drop RSS need not fall",
+          "Not browser/GPU memory, Windows, shared-service RSS or a target-project adoption result",
+          "No elapsed-time or warm-cache speed claim"
+        ],
+        "project_id": "TEST0001",
+        "repeated_records": 8,
+        "retained": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 13733888,
+          "rollup_pss_bytes": 14354432,
+          "rollup_rss_bytes": 15007744,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 15007744,
+          "status_rss_bytes": 15007744
+        },
+        "schema_version": 1,
+        "source_bytes": 1500188,
+        "source_sha256": "8c8a5591df4dd3d8f9dada982936707ca326ed6f69b191ac71ebc5ea08f1811d"
+      }
+    },
+    {
+      "case": "generated-large",
+      "source_mode": "generated augmentation",
+      "round": 1,
+      "result": {
+        "adapter_sha256": "abae12d1e4fdbeaa09b4df65ef3a0136d4503364a25f81e1e1560b498b7680d1",
+        "after_drop": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 13664256,
+          "rollup_pss_bytes": 14284800,
+          "rollup_rss_bytes": 14938112,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 16347136,
+          "status_rss_bytes": 14938112
+        },
+        "before_input": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 544768,
+          "rollup_private_dirty_bytes": 143360,
+          "rollup_pss_bytes": 698368,
+          "rollup_rss_bytes": 1347584,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1343488,
+          "status_rss_bytes": 1343488
+        },
+        "before_records": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 1712128,
+          "rollup_pss_bytes": 2332672,
+          "rollup_rss_bytes": 2985984,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 2985984,
+          "status_rss_bytes": 2985984
+        },
+        "capacity_mode": "spare",
+        "complete_output_equal": true,
+        "harness_sha256": "2f5864a6819a6606fb1b6581bdb454a2afb0626d7c3544a36077541cc93309ba",
+        "lane": "baseline",
+        "limitations": [
+          "Eight repeats of one retained input; generated stress replay, not eight unique provider records",
+          "Whole fresh Linux process including runtime, input, validation and measurement overhead",
+          "OS accounting is page-granular and allocator-dependent; after-drop RSS need not fall",
+          "Not browser/GPU memory, Windows, shared-service RSS or a target-project adoption result",
+          "No elapsed-time or warm-cache speed claim"
+        ],
+        "project_id": "TEST0001",
+        "repeated_records": 8,
+        "retained": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 15167488,
+          "rollup_pss_bytes": 15788032,
+          "rollup_rss_bytes": 16441344,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 16441344,
+          "status_rss_bytes": 16441344
+        },
+        "schema_version": 1,
+        "source_bytes": 1500188,
+        "source_sha256": "8c8a5591df4dd3d8f9dada982936707ca326ed6f69b191ac71ebc5ea08f1811d"
+      }
+    },
+    {
+      "case": "generated-large",
+      "source_mode": "generated augmentation",
+      "round": 2,
+      "result": {
+        "adapter_sha256": "abae12d1e4fdbeaa09b4df65ef3a0136d4503364a25f81e1e1560b498b7680d1",
+        "after_drop": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 602112,
+          "rollup_private_dirty_bytes": 13660160,
+          "rollup_pss_bytes": 14276608,
+          "rollup_rss_bytes": 14934016,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 16343040,
+          "status_rss_bytes": 14934016
+        },
+        "before_input": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 602112,
+          "rollup_private_dirty_bytes": 139264,
+          "rollup_pss_bytes": 755712,
+          "rollup_rss_bytes": 1409024,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1404928,
+          "status_rss_bytes": 1404928
+        },
+        "before_records": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 602112,
+          "rollup_private_dirty_bytes": 1708032,
+          "rollup_pss_bytes": 2324480,
+          "rollup_rss_bytes": 2981888,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 2981888,
+          "status_rss_bytes": 2981888
+        },
+        "capacity_mode": "spare",
+        "complete_output_equal": true,
+        "harness_sha256": "2f5864a6819a6606fb1b6581bdb454a2afb0626d7c3544a36077541cc93309ba",
+        "lane": "baseline",
+        "limitations": [
+          "Eight repeats of one retained input; generated stress replay, not eight unique provider records",
+          "Whole fresh Linux process including runtime, input, validation and measurement overhead",
+          "OS accounting is page-granular and allocator-dependent; after-drop RSS need not fall",
+          "Not browser/GPU memory, Windows, shared-service RSS or a target-project adoption result",
+          "No elapsed-time or warm-cache speed claim"
+        ],
+        "project_id": "TEST0001",
+        "repeated_records": 8,
+        "retained": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 602112,
+          "rollup_private_dirty_bytes": 15163392,
+          "rollup_pss_bytes": 15779840,
+          "rollup_rss_bytes": 16437248,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 16437248,
+          "status_rss_bytes": 16437248
+        },
+        "schema_version": 1,
+        "source_bytes": 1500188,
+        "source_sha256": "8c8a5591df4dd3d8f9dada982936707ca326ed6f69b191ac71ebc5ea08f1811d"
+      }
+    },
+    {
+      "case": "generated-large",
+      "source_mode": "generated augmentation",
+      "round": 2,
+      "result": {
+        "adapter_sha256": "abae12d1e4fdbeaa09b4df65ef3a0136d4503364a25f81e1e1560b498b7680d1",
+        "after_drop": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 1708032,
+          "rollup_pss_bytes": 2328576,
+          "rollup_rss_bytes": 2981888,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 14835712,
+          "status_rss_bytes": 2981888
+        },
+        "before_input": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 544768,
+          "rollup_private_dirty_bytes": 139264,
+          "rollup_pss_bytes": 694272,
+          "rollup_rss_bytes": 1343488,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 1339392,
+          "status_rss_bytes": 1339392
+        },
+        "before_records": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 1708032,
+          "rollup_pss_bytes": 2328576,
+          "rollup_rss_bytes": 2981888,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 2981888,
+          "status_rss_bytes": 2981888
+        },
+        "capacity_mode": "spare",
+        "complete_output_equal": true,
+        "harness_sha256": "2f5864a6819a6606fb1b6581bdb454a2afb0626d7c3544a36077541cc93309ba",
+        "lane": "candidate",
+        "limitations": [
+          "Eight repeats of one retained input; generated stress replay, not eight unique provider records",
+          "Whole fresh Linux process including runtime, input, validation and measurement overhead",
+          "OS accounting is page-granular and allocator-dependent; after-drop RSS need not fall",
+          "Not browser/GPU memory, Windows, shared-service RSS or a target-project adoption result",
+          "No elapsed-time or warm-cache speed claim"
+        ],
+        "project_id": "TEST0001",
+        "repeated_records": 8,
+        "retained": {
+          "limits": "Status RSS accounting can be asynchronous; rollup is a separate instantaneous snapshot, not a high-water value or joint atomic read",
+          "rollup_private_clean_bytes": 610304,
+          "rollup_private_dirty_bytes": 13733888,
+          "rollup_pss_bytes": 14354432,
+          "rollup_rss_bytes": 15007744,
+          "source": "Linux self status and smaps_rollup; whole isolated process, not allocation delta",
+          "status_high_water_rss_bytes": 15007744,
+          "status_rss_bytes": 15007744
+        },
+        "schema_version": 1,
+        "source_bytes": 1500188,
+        "source_sha256": "8c8a5591df4dd3d8f9dada982936707ca326ed6f69b191ac71ebc5ea08f1811d"
+      }
+    }
+  ]
+}

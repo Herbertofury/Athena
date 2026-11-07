@@ -1,0 +1,197 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-29",
+  "candidate": "Borrow full SQLite payload inside live row instead of allocating owned String for exact equality",
+  "promotion": "isolated candidate only",
+  "allocation_scope": "Rust requested allocations for SQLite comparison component only; native SQLite allocations, RSS and save latency excluded",
+  "allocation_samples": [
+    {
+      "receipt": "borrowed-allocation-1.json",
+      "input_bytes": 12840,
+      "input_sha256": "75798037b3ea908200264e29a064392fc801c46b36db0b8f32d25454e7eeb356",
+      "paired_rounds": 7,
+      "iterations_per_lane_round": 50,
+      "owned_allocations_per_comparison": 1,
+      "borrowed_allocations_per_comparison": 0
+    },
+    {
+      "receipt": "borrowed-allocation-2.json",
+      "input_bytes": 6200,
+      "input_sha256": "1fb6bacb935940e59d4da9b9e5cdc277653069f9b486e4faef0c08515ccb8fbf",
+      "paired_rounds": 7,
+      "iterations_per_lane_round": 50,
+      "owned_allocations_per_comparison": 1,
+      "borrowed_allocations_per_comparison": 0
+    },
+    {
+      "receipt": "borrowed-allocation-3.json",
+      "input_bytes": 7267,
+      "input_sha256": "6c2db07110400d22cc7940ab6ef2077595f415070ce6e87ef5e57a2d76a18f49",
+      "paired_rounds": 7,
+      "iterations_per_lane_round": 50,
+      "owned_allocations_per_comparison": 1,
+      "borrowed_allocations_per_comparison": 0
+    },
+    {
+      "receipt": "borrowed-allocation-4.json",
+      "input_bytes": 12840,
+      "input_sha256": "75798037b3ea908200264e29a064392fc801c46b36db0b8f32d25454e7eeb356",
+      "paired_rounds": 7,
+      "iterations_per_lane_round": 50,
+      "owned_allocations_per_comparison": 1,
+      "borrowed_allocations_per_comparison": 0
+    },
+    {
+      "receipt": "borrowed-allocation-5.json",
+      "input_bytes": 12840,
+      "input_sha256": "114df01da64c51abe5861543110bfbbf5cd7eb20896dc31f80acb21400a85e8d",
+      "paired_rounds": 7,
+      "iterations_per_lane_round": 50,
+      "owned_allocations_per_comparison": 1,
+      "borrowed_allocations_per_comparison": 0
+    }
+  ],
+  "timing_runs": [
+    {
+      "receipt": "borrowed-pass1.json",
+      "medians": [
+        {
+          "workload": "retained",
+          "lane": "baseline",
+          "parse_write_commit_ns": 21376683,
+          "reopen_latest_verify_ns": 583609,
+          "database_bytes": 73728
+        },
+        {
+          "workload": "retained",
+          "lane": "addressed",
+          "parse_write_commit_ns": 18646078,
+          "reopen_latest_verify_ns": 629748,
+          "database_bytes": 65536
+        },
+        {
+          "workload": "duplicate_replay",
+          "lane": "baseline",
+          "parse_write_commit_ns": 307478594,
+          "reopen_latest_verify_ns": 634293,
+          "database_bytes": 880640
+        },
+        {
+          "workload": "duplicate_replay",
+          "lane": "addressed",
+          "parse_write_commit_ns": 298571815,
+          "reopen_latest_verify_ns": 703148,
+          "database_bytes": 86016
+        },
+        {
+          "workload": "unique_augmented_replay",
+          "lane": "baseline",
+          "parse_write_commit_ns": 264284926,
+          "reopen_latest_verify_ns": 548109,
+          "database_bytes": 880640
+        },
+        {
+          "workload": "unique_augmented_replay",
+          "lane": "addressed",
+          "parse_write_commit_ns": 270932462,
+          "reopen_latest_verify_ns": 663345,
+          "database_bytes": 909312
+        }
+      ]
+    },
+    {
+      "receipt": "borrowed-pass2.json",
+      "medians": [
+        {
+          "workload": "retained",
+          "lane": "baseline",
+          "parse_write_commit_ns": 15136605,
+          "reopen_latest_verify_ns": 589580,
+          "database_bytes": 73728
+        },
+        {
+          "workload": "retained",
+          "lane": "addressed",
+          "parse_write_commit_ns": 14140052,
+          "reopen_latest_verify_ns": 713410,
+          "database_bytes": 65536
+        },
+        {
+          "workload": "duplicate_replay",
+          "lane": "baseline",
+          "parse_write_commit_ns": 286530666,
+          "reopen_latest_verify_ns": 831240,
+          "database_bytes": 880640
+        },
+        {
+          "workload": "duplicate_replay",
+          "lane": "addressed",
+          "parse_write_commit_ns": 286313859,
+          "reopen_latest_verify_ns": 752824,
+          "database_bytes": 86016
+        },
+        {
+          "workload": "unique_augmented_replay",
+          "lane": "baseline",
+          "parse_write_commit_ns": 287913120,
+          "reopen_latest_verify_ns": 802445,
+          "database_bytes": 880640
+        },
+        {
+          "workload": "unique_augmented_replay",
+          "lane": "addressed",
+          "parse_write_commit_ns": 366664389,
+          "reopen_latest_verify_ns": 1530100,
+          "database_bytes": 909312
+        }
+      ]
+    },
+    {
+      "receipt": "borrowed-pass3.json",
+      "medians": [
+        {
+          "workload": "retained",
+          "lane": "baseline",
+          "parse_write_commit_ns": 21841091,
+          "reopen_latest_verify_ns": 596410,
+          "database_bytes": 73728
+        },
+        {
+          "workload": "retained",
+          "lane": "addressed",
+          "parse_write_commit_ns": 16707529,
+          "reopen_latest_verify_ns": 625818,
+          "database_bytes": 65536
+        },
+        {
+          "workload": "duplicate_replay",
+          "lane": "baseline",
+          "parse_write_commit_ns": 282568347,
+          "reopen_latest_verify_ns": 554482,
+          "database_bytes": 880640
+        },
+        {
+          "workload": "duplicate_replay",
+          "lane": "addressed",
+          "parse_write_commit_ns": 252147674,
+          "reopen_latest_verify_ns": 640205,
+          "database_bytes": 86016
+        },
+        {
+          "workload": "unique_augmented_replay",
+          "lane": "baseline",
+          "parse_write_commit_ns": 333066279,
+          "reopen_latest_verify_ns": 657219,
+          "database_bytes": 880640
+        },
+        {
+          "workload": "unique_augmented_replay",
+          "lane": "addressed",
+          "parse_write_commit_ns": 300280873,
+          "reopen_latest_verify_ns": 942275,
+          "database_bytes": 909312
+        }
+      ]
+    }
+  ]
+}

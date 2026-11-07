@@ -1,0 +1,23 @@
+--- baseline/src/provider-media.js
++++ candidate/src/provider-media.js
+@@ -48,10 +48,19 @@
+   ]){const m=re.exec(html);if(m?.[1])return decodeHtml(m[1])}
+   return '';
+ }
++const ATTRIBUTE_REGEX_LIMIT=64;
++const attributeRegexCache=new Map();
+ function attrValue(tag,name) {
+-  const re=new RegExp(`\\b${String(name).replace(/[.*+?^${}()|[\]\\]/g,'\\$&')}\\s*=\\s*["']([^"']*)["']`,'i');
++  const key=String(name);
++  let re=attributeRegexCache.get(key);
++  if(!re){
++  re=new RegExp(`\\b${key.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')}\\s*=\\s*["']([^"']*)["']`,'i');
++    if(attributeRegexCache.size>=ATTRIBUTE_REGEX_LIMIT)attributeRegexCache.delete(attributeRegexCache.keys().next().value);
++    attributeRegexCache.set(key,re);
++  }
+   return decodeHtml(re.exec(String(tag||''))?.[1]||'');
+ }
++
+ function htmlTitle(html='') {
+   const h1=/<h1\b[^>]*>([\s\S]*?)<\/h1>/i.exec(html)?.[1];
+   if(h1)return stripTags(h1);

@@ -1,0 +1,78 @@
+{
+  "checked_at": "2026-10-27T12:28:54.597542+00:00",
+  "baseline_remote_commit": "a2d47438676b5589f12c0cccfe29e6b99d66e197",
+  "lock_sha256": "4ba18f93c261a48a42ea595be3f8a37b6d9c419912d7e7875204ac0641e2dd85",
+  "checks": {
+    "rust": {
+      "sha256": "a48884102a3e0ea1d93219700a1d1de50dee9cc9cc7503a05471719f0fb4fc71",
+      "summary": [
+        "    Finished `test` profile [unoptimized + debuginfo] target(s) in 3.88s",
+        "test result: ok. 83 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 1.17s",
+        "test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s",
+        "test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s",
+        "test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s"
+      ]
+    },
+    "clippy": {
+      "sha256": "ae0c29d341996e293f3b4adc58b8c7c4811ae5bc9f451ef76b7e275c3597db3b",
+      "summary": [
+        "    Finished `dev` profile [unoptimized + debuginfo] target(s) in 1.10s"
+      ]
+    },
+    "example": {
+      "sha256": "72b1742f216ace647df1b61b123688dcc82b9b331b674358d34b4100425e9a60",
+      "summary": [
+        "    Finished `test` profile [unoptimized + debuginfo] target(s) in 3.04s",
+        "test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.77s"
+      ]
+    },
+    "python": {
+      "sha256": "727442f9a366fefa79fd0686166850d9dd9373d4479daf4747500f9a051c4e81",
+      "summary": [
+        "Ran 62 tests in 0.359s",
+        "OK"
+      ]
+    },
+    "node": {
+      "sha256": "5a3b3c6f19ea0282f351c80219801c676db65c38a4cbdfb423615aafaf652dd5",
+      "summary": [
+        "\u2139 tests 73",
+        "\u2139 pass 73",
+        "\u2139 fail 0"
+      ]
+    }
+  },
+  "scope": "Actual local regression and public API evidence; local-browser QA not performed; no other project adoption",
+  "prepublication_failure": "First aggregate check ran before two linked receipt files were copied; missing links retained in log, then repaired and aggregate checks rerun. No application failure hidden.",
+  "source_hashes": {
+    "apps/atlas-lab/src/lib.rs": "d295ac9068eee513f0f2c2496d6a8218f543915f280e98f181739e864149ebbf",
+    "apps/atlas-lab/src/main.rs": "5fc89d42f7da95e5057a092622e06c96a0647f6b4e90a9045c3f28b4536ab67b",
+    "apps/atlas-lab/src/server.rs": "0f4c06fd6867f1cbb579649e35552ee07500157f17520a139cb995f96791d096",
+    "apps/atlas-lab/src/jobs.rs": "3c422cb2db4760ff5f1b6948164d2781a3b19f02d489d5a1ba5e0bc0c5457413",
+    "apps/atlas-lab/src/snapshots.rs": "ad706feccef9309439c0e41fef51eab94cc117867b68a6a6dcc615ddc97a9296",
+    "apps/atlas-lab/src/modrinth.rs": "5b88b66e912ecbd2b084417448c18be0c02fa9323b0b82e830a3a2b276fdf235",
+    "apps/atlas-lab/src/public_http.rs": "04c6b4888f69af849f67ecf39dfbc347352408392f7f448e8c75b6459fb03d7c",
+    "apps/atlas-lab/src/upstream_reviews.rs": "ce5b543bd21ee4549c4760bfa5bfb2a5d54195b9d8e685cb6db41351dc55993e",
+    "apps/atlas-lab/ui/app.js": "4ab3055b9d57e1e9072fe3d8cc0221bbad72012ade0728f72c03e359211b5286",
+    "apps/atlas-lab/ui/index.html": "8831a033e2916b6a4316b81b70cc19b60214408fde128576e85ec79bb0a83052",
+    "apps/atlas-lab/ui/collection-input.mjs": "df2b0779da3f45159817816293cea82d1d8ff3f366724593a7e4ee23c56ced61",
+    "apps/atlas-lab/ui/style.css": "52e404065e4ca824aaed3e8e34b407416656ddd0907aa14df0e5a2ed03bb8f35",
+    "apps/atlas-lab/README.md": "189212a04d5f55fc770768b8c3f9b626e14907f39a8f48fa8abaf59f99f7121d",
+    "tests/collection-input.test.mjs": "2226fd052aeecd50725753b20c373ef61ba72f5bf38eb2923d39be0a20c53eef",
+    "data/sources.json": "5d7996bb41e10be9072a10405859675338da3f80b75cd4af20674def05511691",
+    "docs/sources.md": "96ae90052bb0e64c8e56bcdf82fcfc74d5fa640c8a78e19be91b251fda8dd9c2",
+    "docs/experiment-evidence.md": "669aedd932520abbea8ecdaaa61d5bf61586e6e55e3cd7488f6502c3ecf1ae62",
+    "experiments/upstream-review-lab/prepublication-missing-links.log": "044e4a644e0b8555fc124ca56633b30b7deffad58f429e25ebdce8c764597d3b",
+    "experiments/upstream-review-lab/modrinth-regression.json": "ca8971bbe219aa5344785adb6ce277589d2a2fc0862913f8266516320eb5f4ca",
+    "experiments/upstream-review-lab/verify_http.py": "d297f32aaa24da36cd993862649fe604f68c1bfe89251c382ba8577e8b8cc799",
+    "experiments/upstream-review-lab/http-verification.json": "f0b732df34259c1c6fecc6f405d2962bbc9c7842ce17036be78181c36b70cb45",
+    "experiments/upstream-review-lab/saved-runner-regression.json": "a51365d6c5fed22afe34488b18a074ecd9957f944cf8b08a3972a6cc66de933a",
+    "experiments/upstream-review-lab/live-cli.json": "cacdbb879967aef144b071f6d43cc4fd2ad690e99838aa367e03a3213a104e89",
+    "experiments/upstream-review-lab/example-checks.log": "72b1742f216ace647df1b61b123688dcc82b9b331b674358d34b4100425e9a60",
+    "experiments/upstream-review-lab/rust-checks.log": "a48884102a3e0ea1d93219700a1d1de50dee9cc9cc7503a05471719f0fb4fc71",
+    "experiments/upstream-review-lab/README.md": "74e9bf03aa4f2eb653b1071d3d9b7e8f2d1270c14aaa89d3486d0b7710f6b70c",
+    "experiments/upstream-review-lab/node-checks.log": "5a3b3c6f19ea0282f351c80219801c676db65c38a4cbdfb423615aafaf652dd5",
+    "experiments/upstream-review-lab/python-checks.log": "727442f9a366fefa79fd0686166850d9dd9373d4479daf4747500f9a051c4e81",
+    "experiments/upstream-review-lab/clippy-checks.log": "ae0c29d341996e293f3b4adc58b8c7c4811ae5bc9f451ef76b7e275c3597db3b"
+  }
+}

@@ -1,0 +1,121 @@
+{
+  "scope": "Independent phase medians do not sum to the median total; startup is not pure network or CPU",
+  "request_minus_timeline_ms_range": [
+    -4.881620407104492e-05,
+    3.400048851966858
+  ],
+  "rows": [
+    {
+      "file": "phases-v7-receipt-64k-pass1.json",
+      "lane": "clone",
+      "request_median_ms": 178.60000002384186,
+      "phase_medians_ms": {
+        "startup_to_module_ready_ms": 81.89990234375,
+        "module_ready_to_receive_ms": 0.60009765625,
+        "worker_before_validation_ms": 17.800048828125,
+        "validation_ms": 74.89990234375,
+        "worker_after_validation_ms": 0.099853515625,
+        "response_delivery_ms": 43.900146484375,
+        "main_decode_and_binding_ms": 0
+      }
+    },
+    {
+      "file": "phases-v7-receipt-64k-pass1.json",
+      "lane": "receipt",
+      "request_median_ms": 153.60000002384186,
+      "phase_medians_ms": {
+        "startup_to_module_ready_ms": 63.400146484375,
+        "module_ready_to_receive_ms": 0.7001953125,
+        "worker_before_validation_ms": 11.89990234375,
+        "validation_ms": 65.89990234375,
+        "worker_after_validation_ms": 0.10009765625,
+        "response_delivery_ms": 0.199951171875,
+        "main_decode_and_binding_ms": 0.099853515625
+      }
+    },
+    {
+      "file": "phases-v7-receipt-64k-pass2.json",
+      "lane": "clone",
+      "request_median_ms": 167.19999998807907,
+      "phase_medians_ms": {
+        "startup_to_module_ready_ms": 55.10009765625,
+        "module_ready_to_receive_ms": 0.7001953125,
+        "worker_before_validation_ms": 12,
+        "validation_ms": 65.5,
+        "worker_after_validation_ms": 0.099853515625,
+        "response_delivery_ms": 41,
+        "main_decode_and_binding_ms": 0
+      }
+    },
+    {
+      "file": "phases-v7-receipt-64k-pass2.json",
+      "lane": "receipt",
+      "request_median_ms": 132.69999998807907,
+      "phase_medians_ms": {
+        "startup_to_module_ready_ms": 54.10009765625,
+        "module_ready_to_receive_ms": 0.5,
+        "worker_before_validation_ms": 11.39990234375,
+        "validation_ms": 65.300048828125,
+        "worker_after_validation_ms": 0,
+        "response_delivery_ms": 0.39990234375,
+        "main_decode_and_binding_ms": 0
+      }
+    },
+    {
+      "file": "phases-v7-receipt-8k-pass1.json",
+      "lane": "clone",
+      "request_median_ms": 60.80000001192093,
+      "phase_medians_ms": {
+        "startup_to_module_ready_ms": 41.7001953125,
+        "module_ready_to_receive_ms": 0.699951171875,
+        "worker_before_validation_ms": 1.800048828125,
+        "validation_ms": 10.199951171875,
+        "worker_after_validation_ms": 0.10009765625,
+        "response_delivery_ms": 3.900146484375,
+        "main_decode_and_binding_ms": 0
+      }
+    },
+    {
+      "file": "phases-v7-receipt-8k-pass1.json",
+      "lane": "receipt",
+      "request_median_ms": 72.59999996423721,
+      "phase_medians_ms": {
+        "startup_to_module_ready_ms": 57.10009765625,
+        "module_ready_to_receive_ms": 0.39990234375,
+        "worker_before_validation_ms": 1.900146484375,
+        "validation_ms": 13.39990234375,
+        "worker_after_validation_ms": 0.10009765625,
+        "response_delivery_ms": 0.099853515625,
+        "main_decode_and_binding_ms": 0
+      }
+    },
+    {
+      "file": "phases-v7-transfer-64k-pass1.json",
+      "lane": "clone",
+      "request_median_ms": 210.69999998807907,
+      "phase_medians_ms": {
+        "startup_to_module_ready_ms": 56.89990234375,
+        "module_ready_to_receive_ms": 0.5,
+        "worker_before_validation_ms": 15.89990234375,
+        "validation_ms": 90.900146484375,
+        "worker_after_validation_ms": 0,
+        "response_delivery_ms": 45.499755859375,
+        "main_decode_and_binding_ms": 0
+      }
+    },
+    {
+      "file": "phases-v7-transfer-64k-pass1.json",
+      "lane": "transfer",
+      "request_median_ms": 228.30000001192093,
+      "phase_medians_ms": {
+        "startup_to_module_ready_ms": 52.999755859375,
+        "module_ready_to_receive_ms": 2.300048828125,
+        "worker_before_validation_ms": 13,
+        "validation_ms": 108.5,
+        "worker_after_validation_ms": 0.10009765625,
+        "response_delivery_ms": 0.7998046875,
+        "main_decode_and_binding_ms": 38.2001953125
+      }
+    }
+  ]
+}

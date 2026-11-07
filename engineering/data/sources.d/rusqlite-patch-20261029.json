@@ -1,0 +1,35 @@
+[
+  {
+    "id": "RSQLPATCH29",
+    "title": "rusqlite 0.41.1 release",
+    "url": "https://github.com/rusqlite/rusqlite/releases/tag/v0.41.1",
+    "observed_version": "v0.41.1; published 2026-10-28",
+    "topic": "storage-correctness",
+    "note": "Official release notes; candidate only, not an application upgrade.",
+    "checked_at": "2026-10-29",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "RSQLDIFF29",
+    "title": "rusqlite 0.41.0 to 0.41.1 exact source comparison",
+    "url": "https://github.com/rusqlite/rusqlite/compare/a60e76b5e86ee60442213efe79758a6c2ca8cf3d...18ee76dbb976d5ef7e37ad5a8fffae678ca21a78",
+    "observed_version": "Exact release commit comparison",
+    "topic": "storage-correctness",
+    "note": "Inspected feature-dependent PRAGMA validation and shared zero-length slice handling.",
+    "checked_at": "2026-10-29",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "SQLHIST29",
+    "title": "SQLite official release history",
+    "url": "https://sqlite.org/changes.html",
+    "observed_version": "3.54.1 dated 2026-10-16 is latest listed at review",
+    "topic": "storage-correctness",
+    "note": "Official version observation, not proof of target performance or hardware durability.",
+    "checked_at": "2026-10-29",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  }
+]

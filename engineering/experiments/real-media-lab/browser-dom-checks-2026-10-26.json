@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "scope": "direct_browser_dom_observations_not_target_project_acceptance",
+  "date": "2026-10-26",
+  "page": "https://herbertofury.github.io/Engineering-Atlas/media-lab/",
+  "checks": [
+    {
+      "observed_at_utc": "22:34:22",
+      "path": "native HLS",
+      "current_time": 0.375795,
+      "paused": false,
+      "ready_state": 4,
+      "width": 640,
+      "height": 360
+    },
+    {
+      "observed_at_utc": "22:34:38",
+      "path": "native HLS",
+      "time_before_pause": 13.359684,
+      "paused_before": false,
+      "time_after_pause": 13.424443,
+      "paused_after": true
+    },
+    {
+      "observed_at_utc": "22:43:33",
+      "path": "HLS.js 1.7.3",
+      "current_time": 0.381318,
+      "paused": false,
+      "width": 940,
+      "height": 529
+    },
+    {
+      "observed_at_utc": "22:44:01",
+      "path": "HLS.js 1.7.3",
+      "time_before_selection_change": 26.69944,
+      "paused_before": false,
+      "video_elements_after_change": 0,
+      "load_enabled_after": true,
+      "play_enabled_after": false
+    },
+    {
+      "observed_at_utc": "22:46:16",
+      "path": "YouTube official player",
+      "state": "unverified after 30 seconds",
+      "playing_event_observed": false,
+      "buffering_event_observed": true
+    }
+  ],
+  "limits": [
+    "Different resolutions and conditions; no native-versus-HLS performance ranking",
+    "One selected Steam trailer exercised, not all 17",
+    "YouTube playback not accepted"
+  ]
+}

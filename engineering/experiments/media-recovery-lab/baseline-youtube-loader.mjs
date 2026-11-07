@@ -1,0 +1,2 @@
+let youtubePromise=null;
+function youtubeApi(){if(window.YT?.Player)return Promise.resolve();if(youtubePromise)return youtubePromise;youtubePromise=new Promise((resolve,reject)=>{const timeout=setTimeout(()=>reject(Error('YouTube API did not become ready')),20000);window.onYouTubeIframeAPIReady=()=>{clearTimeout(timeout);resolve();};const s=document.createElement('script');s.src='https://www.youtube.com/iframe_api';s.onerror=()=>{clearTimeout(timeout);reject(Error('YouTube API unavailable'));};document.head.append(s);});return youtubePromise;}

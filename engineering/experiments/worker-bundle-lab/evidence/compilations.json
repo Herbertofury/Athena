@@ -1,0 +1,197 @@
+{
+  "scope": "Six fresh compiler processes; first pair lacks external process timing; not browser performance",
+  "builds": [
+    {
+      "tool": "esbuild",
+      "version": "0.28.2",
+      "node": "v24.22.1",
+      "compilation_ms": 84.084386,
+      "output_bytes": 3966,
+      "sha256": "b1772614243c7c75f2df147a643b32c094ab27e07ebf20286241c488abe6b328",
+      "entry": "docs/card-receiver-lab/receiver-worker.2ddd526f33d730b2.mjs",
+      "inputs": {
+        "docs/card-receiver-lab/lab-core.07b69b8b7583dd03.mjs": "07b69b8b7583dd038b1b034afec3b61cf1766a456674d629ded5457ecbee77b8",
+        "docs/card-receiver-lab/baseline.293713d95cef8511.mjs": "293713d95cef8511a4130262daa4ccd9e86d080dfd514141fe9b125663573123",
+        "docs/card-receiver-lab/bounded-encoding.b3c034a08dcad316.mjs": "b3c034a08dcad3166e418464779b0bd690560fcdb07577375bb65270386615e2",
+        "docs/card-receiver-lab/verified-receiver.0b0bb67b4513ac91.mjs": "0b0bb67b4513ac913cc2585f4b362ae4e4033dd8b908385ea760e6914614b0f1",
+        "docs/card-receiver-lab/receiver-worker.2ddd526f33d730b2.mjs": "2ddd526f33d730b242d18aa29ba2885218029685bda10a5b98820ec88b562757"
+      },
+      "warnings": [],
+      "scope": "Fresh process compiler experiment; not browser startup or target performance"
+    },
+    {
+      "tool": "esbuild",
+      "version": "0.28.2",
+      "node": "v24.22.1",
+      "compilation_ms": 52.20765699999998,
+      "output_bytes": 3966,
+      "sha256": "b1772614243c7c75f2df147a643b32c094ab27e07ebf20286241c488abe6b328",
+      "entry": "docs/card-receiver-lab/receiver-worker.2ddd526f33d730b2.mjs",
+      "inputs": {
+        "docs/card-receiver-lab/lab-core.07b69b8b7583dd03.mjs": "07b69b8b7583dd038b1b034afec3b61cf1766a456674d629ded5457ecbee77b8",
+        "docs/card-receiver-lab/baseline.293713d95cef8511.mjs": "293713d95cef8511a4130262daa4ccd9e86d080dfd514141fe9b125663573123",
+        "docs/card-receiver-lab/bounded-encoding.b3c034a08dcad316.mjs": "b3c034a08dcad3166e418464779b0bd690560fcdb07577375bb65270386615e2",
+        "docs/card-receiver-lab/verified-receiver.0b0bb67b4513ac91.mjs": "0b0bb67b4513ac913cc2585f4b362ae4e4033dd8b908385ea760e6914614b0f1",
+        "docs/card-receiver-lab/receiver-worker.2ddd526f33d730b2.mjs": "2ddd526f33d730b242d18aa29ba2885218029685bda10a5b98820ec88b562757"
+      },
+      "warnings": [],
+      "scope": "Fresh process compiler experiment; not browser startup or target performance"
+    },
+    {
+      "tool": "esbuild",
+      "version": "0.28.2",
+      "node": "v24.22.1",
+      "compilation_ms": 42.383511,
+      "output_bytes": 3966,
+      "sha256": "b1772614243c7c75f2df147a643b32c094ab27e07ebf20286241c488abe6b328",
+      "entry": "docs/card-receiver-lab/receiver-worker.2ddd526f33d730b2.mjs",
+      "inputs": {
+        "docs/card-receiver-lab/lab-core.07b69b8b7583dd03.mjs": "07b69b8b7583dd038b1b034afec3b61cf1766a456674d629ded5457ecbee77b8",
+        "docs/card-receiver-lab/baseline.293713d95cef8511.mjs": "293713d95cef8511a4130262daa4ccd9e86d080dfd514141fe9b125663573123",
+        "docs/card-receiver-lab/bounded-encoding.b3c034a08dcad316.mjs": "b3c034a08dcad3166e418464779b0bd690560fcdb07577375bb65270386615e2",
+        "docs/card-receiver-lab/verified-receiver.0b0bb67b4513ac91.mjs": "0b0bb67b4513ac913cc2585f4b362ae4e4033dd8b908385ea760e6914614b0f1",
+        "docs/card-receiver-lab/receiver-worker.2ddd526f33d730b2.mjs": "2ddd526f33d730b242d18aa29ba2885218029685bda10a5b98820ec88b562757"
+      },
+      "warnings": [],
+      "scope": "Fresh process compiler experiment; not browser startup or target performance"
+    },
+    {
+      "tool": "rolldown",
+      "version": "1.2.15",
+      "node": "v24.22.1",
+      "compilation_ms": 243.553525,
+      "output_bytes": 3904,
+      "sha256": "0e9c42dd5c7472df20d8f61d8adc3b2110c9d587184c9f6ace0f3c337bc1cfe1",
+      "entry": "docs/card-receiver-lab/receiver-worker.2ddd526f33d730b2.mjs",
+      "inputs": {
+        "docs/card-receiver-lab/lab-core.07b69b8b7583dd03.mjs": "07b69b8b7583dd038b1b034afec3b61cf1766a456674d629ded5457ecbee77b8",
+        "docs/card-receiver-lab/baseline.293713d95cef8511.mjs": "293713d95cef8511a4130262daa4ccd9e86d080dfd514141fe9b125663573123",
+        "docs/card-receiver-lab/bounded-encoding.b3c034a08dcad316.mjs": "b3c034a08dcad3166e418464779b0bd690560fcdb07577375bb65270386615e2",
+        "docs/card-receiver-lab/verified-receiver.0b0bb67b4513ac91.mjs": "0b0bb67b4513ac913cc2585f4b362ae4e4033dd8b908385ea760e6914614b0f1",
+        "docs/card-receiver-lab/receiver-worker.2ddd526f33d730b2.mjs": "2ddd526f33d730b242d18aa29ba2885218029685bda10a5b98820ec88b562757"
+      },
+      "warnings": [],
+      "scope": "Fresh process compiler experiment; not browser startup or target performance"
+    },
+    {
+      "tool": "rolldown",
+      "version": "1.2.15",
+      "node": "v24.22.1",
+      "compilation_ms": 105.66415899999998,
+      "output_bytes": 3904,
+      "sha256": "0e9c42dd5c7472df20d8f61d8adc3b2110c9d587184c9f6ace0f3c337bc1cfe1",
+      "entry": "docs/card-receiver-lab/receiver-worker.2ddd526f33d730b2.mjs",
+      "inputs": {
+        "docs/card-receiver-lab/lab-core.07b69b8b7583dd03.mjs": "07b69b8b7583dd038b1b034afec3b61cf1766a456674d629ded5457ecbee77b8",
+        "docs/card-receiver-lab/baseline.293713d95cef8511.mjs": "293713d95cef8511a4130262daa4ccd9e86d080dfd514141fe9b125663573123",
+        "docs/card-receiver-lab/bounded-encoding.b3c034a08dcad316.mjs": "b3c034a08dcad3166e418464779b0bd690560fcdb07577375bb65270386615e2",
+        "docs/card-receiver-lab/verified-receiver.0b0bb67b4513ac91.mjs": "0b0bb67b4513ac913cc2585f4b362ae4e4033dd8b908385ea760e6914614b0f1",
+        "docs/card-receiver-lab/receiver-worker.2ddd526f33d730b2.mjs": "2ddd526f33d730b242d18aa29ba2885218029685bda10a5b98820ec88b562757"
+      },
+      "warnings": [],
+      "scope": "Fresh process compiler experiment; not browser startup or target performance"
+    },
+    {
+      "tool": "rolldown",
+      "version": "1.2.15",
+      "node": "v24.22.1",
+      "compilation_ms": 84.85833400000001,
+      "output_bytes": 3904,
+      "sha256": "0e9c42dd5c7472df20d8f61d8adc3b2110c9d587184c9f6ace0f3c337bc1cfe1",
+      "entry": "docs/card-receiver-lab/receiver-worker.2ddd526f33d730b2.mjs",
+      "inputs": {
+        "docs/card-receiver-lab/lab-core.07b69b8b7583dd03.mjs": "07b69b8b7583dd038b1b034afec3b61cf1766a456674d629ded5457ecbee77b8",
+        "docs/card-receiver-lab/baseline.293713d95cef8511.mjs": "293713d95cef8511a4130262daa4ccd9e86d080dfd514141fe9b125663573123",
+        "docs/card-receiver-lab/bounded-encoding.b3c034a08dcad316.mjs": "b3c034a08dcad3166e418464779b0bd690560fcdb07577375bb65270386615e2",
+        "docs/card-receiver-lab/verified-receiver.0b0bb67b4513ac91.mjs": "0b0bb67b4513ac913cc2585f4b362ae4e4033dd8b908385ea760e6914614b0f1",
+        "docs/card-receiver-lab/receiver-worker.2ddd526f33d730b2.mjs": "2ddd526f33d730b242d18aa29ba2885218029685bda10a5b98820ec88b562757"
+      },
+      "warnings": [],
+      "scope": "Fresh process compiler experiment; not browser startup or target performance"
+    }
+  ],
+  "later_external_process_timings": [
+    {
+      "tool": "rolldown",
+      "version": "1.2.15",
+      "node": "v24.22.1",
+      "compilation_ms": 105.66415899999998,
+      "output_bytes": 3904,
+      "sha256": "0e9c42dd5c7472df20d8f61d8adc3b2110c9d587184c9f6ace0f3c337bc1cfe1",
+      "entry": "docs/card-receiver-lab/receiver-worker.2ddd526f33d730b2.mjs",
+      "inputs": {
+        "docs/card-receiver-lab/lab-core.07b69b8b7583dd03.mjs": "07b69b8b7583dd038b1b034afec3b61cf1766a456674d629ded5457ecbee77b8",
+        "docs/card-receiver-lab/baseline.293713d95cef8511.mjs": "293713d95cef8511a4130262daa4ccd9e86d080dfd514141fe9b125663573123",
+        "docs/card-receiver-lab/bounded-encoding.b3c034a08dcad316.mjs": "b3c034a08dcad3166e418464779b0bd690560fcdb07577375bb65270386615e2",
+        "docs/card-receiver-lab/verified-receiver.0b0bb67b4513ac91.mjs": "0b0bb67b4513ac913cc2585f4b362ae4e4033dd8b908385ea760e6914614b0f1",
+        "docs/card-receiver-lab/receiver-worker.2ddd526f33d730b2.mjs": "2ddd526f33d730b242d18aa29ba2885218029685bda10a5b98820ec88b562757"
+      },
+      "warnings": [],
+      "scope": "Fresh process compiler experiment; not browser startup or target performance",
+      "whole_process_ms": 263.680097006727
+    },
+    {
+      "tool": "esbuild",
+      "version": "0.28.2",
+      "node": "v24.22.1",
+      "compilation_ms": 52.20765699999998,
+      "output_bytes": 3966,
+      "sha256": "b1772614243c7c75f2df147a643b32c094ab27e07ebf20286241c488abe6b328",
+      "entry": "docs/card-receiver-lab/receiver-worker.2ddd526f33d730b2.mjs",
+      "inputs": {
+        "docs/card-receiver-lab/lab-core.07b69b8b7583dd03.mjs": "07b69b8b7583dd038b1b034afec3b61cf1766a456674d629ded5457ecbee77b8",
+        "docs/card-receiver-lab/baseline.293713d95cef8511.mjs": "293713d95cef8511a4130262daa4ccd9e86d080dfd514141fe9b125663573123",
+        "docs/card-receiver-lab/bounded-encoding.b3c034a08dcad316.mjs": "b3c034a08dcad3166e418464779b0bd690560fcdb07577375bb65270386615e2",
+        "docs/card-receiver-lab/verified-receiver.0b0bb67b4513ac91.mjs": "0b0bb67b4513ac913cc2585f4b362ae4e4033dd8b908385ea760e6914614b0f1",
+        "docs/card-receiver-lab/receiver-worker.2ddd526f33d730b2.mjs": "2ddd526f33d730b242d18aa29ba2885218029685bda10a5b98820ec88b562757"
+      },
+      "warnings": [],
+      "scope": "Fresh process compiler experiment; not browser startup or target performance",
+      "whole_process_ms": 184.1332500334829
+    },
+    {
+      "tool": "esbuild",
+      "version": "0.28.2",
+      "node": "v24.22.1",
+      "compilation_ms": 42.383511,
+      "output_bytes": 3966,
+      "sha256": "b1772614243c7c75f2df147a643b32c094ab27e07ebf20286241c488abe6b328",
+      "entry": "docs/card-receiver-lab/receiver-worker.2ddd526f33d730b2.mjs",
+      "inputs": {
+        "docs/card-receiver-lab/lab-core.07b69b8b7583dd03.mjs": "07b69b8b7583dd038b1b034afec3b61cf1766a456674d629ded5457ecbee77b8",
+        "docs/card-receiver-lab/baseline.293713d95cef8511.mjs": "293713d95cef8511a4130262daa4ccd9e86d080dfd514141fe9b125663573123",
+        "docs/card-receiver-lab/bounded-encoding.b3c034a08dcad316.mjs": "b3c034a08dcad3166e418464779b0bd690560fcdb07577375bb65270386615e2",
+        "docs/card-receiver-lab/verified-receiver.0b0bb67b4513ac91.mjs": "0b0bb67b4513ac913cc2585f4b362ae4e4033dd8b908385ea760e6914614b0f1",
+        "docs/card-receiver-lab/receiver-worker.2ddd526f33d730b2.mjs": "2ddd526f33d730b242d18aa29ba2885218029685bda10a5b98820ec88b562757"
+      },
+      "warnings": [],
+      "scope": "Fresh process compiler experiment; not browser startup or target performance",
+      "whole_process_ms": 179.9935469753109
+    },
+    {
+      "tool": "rolldown",
+      "version": "1.2.15",
+      "node": "v24.22.1",
+      "compilation_ms": 84.85833400000001,
+      "output_bytes": 3904,
+      "sha256": "0e9c42dd5c7472df20d8f61d8adc3b2110c9d587184c9f6ace0f3c337bc1cfe1",
+      "entry": "docs/card-receiver-lab/receiver-worker.2ddd526f33d730b2.mjs",
+      "inputs": {
+        "docs/card-receiver-lab/lab-core.07b69b8b7583dd03.mjs": "07b69b8b7583dd038b1b034afec3b61cf1766a456674d629ded5457ecbee77b8",
+        "docs/card-receiver-lab/baseline.293713d95cef8511.mjs": "293713d95cef8511a4130262daa4ccd9e86d080dfd514141fe9b125663573123",
+        "docs/card-receiver-lab/bounded-encoding.b3c034a08dcad316.mjs": "b3c034a08dcad3166e418464779b0bd690560fcdb07577375bb65270386615e2",
+        "docs/card-receiver-lab/verified-receiver.0b0bb67b4513ac91.mjs": "0b0bb67b4513ac913cc2585f4b362ae4e4033dd8b908385ea760e6914614b0f1",
+        "docs/card-receiver-lab/receiver-worker.2ddd526f33d730b2.mjs": "2ddd526f33d730b242d18aa29ba2885218029685bda10a5b98820ec88b562757"
+      },
+      "warnings": [],
+      "scope": "Fresh process compiler experiment; not browser startup or target performance",
+      "whole_process_ms": 200.92971000121906
+    }
+  ],
+  "driver_recovery": {
+    "scope": "Compiler data recovery, no build rerun",
+    "driver_summary_error": "Loop variable round shadowed Python round only in final display; all build results and process-times.json had already been saved",
+    "all_six_output_hashes_verified": true,
+    "builds_reexecuted": false
+  }
+}

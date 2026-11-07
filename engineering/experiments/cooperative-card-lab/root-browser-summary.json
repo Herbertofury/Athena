@@ -1,0 +1,83 @@
+{
+  "scope": "sanitized aggregates; raw browser traces retained privately",
+  "commit": "6854383a442ab48c9c3d1eeb8c6a860eff1f53d2",
+  "harness": "atlas-card-density-v14-cooperative-commit",
+  "accepted_as_default": false,
+  "workloads": [
+    {
+      "name": "moderate",
+      "records": 1000,
+      "metadata_bytes_per_record": 8192,
+      "complete": true,
+      "samples": 14,
+      "all_output_equal": true,
+      "calibration_reliable": true,
+      "lanes": {
+        "metadata_baseline": {
+          "samples": 7,
+          "median_creation_insertion_elapsed_ms": 28.100000023841858,
+          "median_frame_ready_proxy_ms": 246.89999997615814,
+          "median_scroll_frame_wait_max_ms": 74
+        },
+        "cooperative_root": {
+          "samples": 7,
+          "median_creation_insertion_elapsed_ms": 24.5,
+          "median_frame_ready_proxy_ms": 230.4000000357628,
+          "median_scroll_frame_wait_max_ms": 94.79999995231628,
+          "max_creation_slice_ms": 10.399999976158142,
+          "max_dom_commit_ms": 23.5,
+          "median_dom_commit_ms": 11.300000011920929
+        }
+      }
+    },
+    {
+      "name": "dense",
+      "records": 1000,
+      "metadata_bytes_per_record": 65536,
+      "complete": true,
+      "samples": 14,
+      "all_output_equal": true,
+      "calibration_reliable": true,
+      "lanes": {
+        "metadata_baseline": {
+          "samples": 7,
+          "median_creation_insertion_elapsed_ms": 26,
+          "median_frame_ready_proxy_ms": 412.2999999523163,
+          "median_scroll_frame_wait_max_ms": 453
+        },
+        "cooperative_root": {
+          "samples": 7,
+          "median_creation_insertion_elapsed_ms": 30.599999964237213,
+          "median_frame_ready_proxy_ms": 375.5999999642372,
+          "median_scroll_frame_wait_max_ms": 358.89999997615814,
+          "max_creation_slice_ms": 10.700000047683716,
+          "max_dom_commit_ms": 22.5,
+          "median_dom_commit_ms": 14
+        }
+      }
+    }
+  ],
+  "keyboard_attempt": {
+    "status_read_timed_out": true,
+    "comparison_complete": true,
+    "samples": 6,
+    "keyboard_entries_inside_run_window": 0,
+    "input_latency_acceptance": false,
+    "reason": "Status wait timed out during dense work; tool completion alone does not establish keyboard latency or INP."
+  },
+  "decision": "Keep isolated. Frame-ready medians improved within these runs, but scrolling and input/peak-memory gates do not establish a general upgrade. Container replacement is restricted to an unmanaged listener-free host.",
+  "limitations": [
+    "Generated workload only",
+    "No comparison of v13 versus v14 under one randomized protocol",
+    "No complete INP, peak-memory or physical paint measurement",
+    "Private browser/device details and interaction identifiers are excluded"
+  ],
+  "inspector": {
+    "synthetic_id": "card-000999",
+    "metadata_bytes": 65536,
+    "complete_metadata_equal": true,
+    "dialog_open_and_close_verified": true
+  },
+  "served_assets_verified": 12,
+  "implementation_ci": "success"
+}

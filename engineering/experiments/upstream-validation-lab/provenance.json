@@ -1,0 +1,25 @@
+{
+  "checked_at": "2026-10-27T12:54:12.687589+00:00",
+  "baseline_remote_commit": "3af95c984d7fe9a50298a19604dfe4f96a400803",
+  "real_input_origins": {
+    "source": "../upstream-review-lab/live-cli.json",
+    "hashes": {
+      "rustsec": "de9b278c09422c0797c3bc46507259eb0bf96694b3d92544ce40ca849edb916b",
+      "hls": "2a3aa0f30e5d1789cd1a9f34ddce881bf7de74ae91acfc4af42516cd8dd1ff19",
+      "serde-json": "5f925df075cd26348137226615ad84fa6056430262db0a9d5fdba811c11b5697"
+    }
+  },
+  "generated_input": {
+    "description": "Parsed hls input with atlas_generated_density_probe containing131072 ASCII x characters, then JSON serialized with512 leading spaces and512 trailing newlines",
+    "sha256": "3fbb9989995e6b7ee497a243c9e40055fafe2d2147bee35814fd7b00137d582c",
+    "bytes": 136966
+  },
+  "legacy_receipt_label_correction": "The v1 and v2-initial timing binaries used a generic real-public scope label even for the explicitly generated density case. These raw receipts remain unchanged. Case identity in the manifests is authoritative; final binary wording is origin-neutral and includes its own source hash.",
+  "retained_failures": [
+    "Initial example failed to compile because sha2 output lacked LowerHex; repaired using existing build_identity helper",
+    "v1 generated density requested-allocation peak and latency regressed",
+    "v2-initial serde-json and final hls sample maximum regressed; no default promotion"
+  ],
+  "default_upstream_parser_changed": false,
+  "lock_sha256": "4ba18f93c261a48a42ea595be3f8a37b6d9c419912d7e7875204ac0641e2dd85"
+}

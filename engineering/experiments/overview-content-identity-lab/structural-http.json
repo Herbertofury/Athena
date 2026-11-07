@@ -1,0 +1,17 @@
+{
+  "checked_at": "2026-10-30T16:41:51.232963+00:00",
+  "binary_sha256": "e2d86ff74efb5aa07f75db931bb5925a0d8dbcc0aca54b56fe999c596bbcecdf",
+  "harness_sha256": "18fe2883c8581280d208fe08cbc7196502587bc12b3b21f1b785b577eea77f18",
+  "complete": true,
+  "scope": "Two actual local server processes, generated distinct results in owned copies of retained public fixture database",
+  "served_app_sha256": "0b55ed4f626019c7d8d5f72be313652be81e76669fd359954ead6da921c4b702",
+  "renderer": {
+    "scope": "Actual HTTP responses and served renderer; controlled DOM, not native browser",
+    "showsReplacement": true,
+    "staleResultAbsent": true,
+    "unchangedNodeReused": true,
+    "cardCount": 6
+  },
+  "correct": true,
+  "source_unchanged": true
+}

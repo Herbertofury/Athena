@@ -1,0 +1,135 @@
+{
+  "checked_at": "2026-10-30T01:51:49.098098+00:00",
+  "scope": "Generated large job id plus real local Rust enqueue/worker/receipt behavior; no provider collection or native browser claim",
+  "binary_sha256": "110bd688f584f20f9eecd22f40ef1cbf6b377828cc53f7cb954b194e4547924c",
+  "checks": [
+    {
+      "name": "app.js byte budget",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "app.js exact bytes",
+      "actual": "5f630461c6719913eff9966e3035499ea0480af4bd79ec9ba354dfa5e32c52ff",
+      "expected": "5f630461c6719913eff9966e3035499ea0480af4bd79ec9ba354dfa5e32c52ff",
+      "passed": true
+    },
+    {
+      "name": "app.js no-store",
+      "actual": "no-store",
+      "expected": "no-store",
+      "passed": true
+    },
+    {
+      "name": "app.js no sniff",
+      "actual": "nosniff",
+      "expected": "nosniff",
+      "passed": true
+    },
+    {
+      "name": "job-submit.mjs byte budget",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "job-submit.mjs exact bytes",
+      "actual": "06f5785d9ebbab16cd208712183e7fa317ac707d96a48325929b728ba26a2f9f",
+      "expected": "06f5785d9ebbab16cd208712183e7fa317ac707d96a48325929b728ba26a2f9f",
+      "passed": true
+    },
+    {
+      "name": "job-submit.mjs no-store",
+      "actual": "no-store",
+      "expected": "no-store",
+      "passed": true
+    },
+    {
+      "name": "job-submit.mjs no sniff",
+      "actual": "nosniff",
+      "expected": "nosniff",
+      "passed": true
+    },
+    {
+      "name": "transport completed",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "confirmed id retained exactly",
+      "actual": "9007199254740993",
+      "expected": "9007199254740993",
+      "passed": true
+    },
+    {
+      "name": "stalled call forwarded once",
+      "actual": 1,
+      "expected": 1,
+      "passed": true
+    },
+    {
+      "name": "backend accepted stalled call",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "accepted job exists 9007199254740993",
+      "actual": 1,
+      "expected": 1,
+      "passed": true
+    },
+    {
+      "name": "accepted job exists 9007199254740993",
+      "actual": 1,
+      "expected": 1,
+      "passed": true
+    },
+    {
+      "name": "at most two explicit jobs",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "existing snapshots unchanged",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "integrity",
+      "actual": "ok",
+      "expected": "ok",
+      "passed": true
+    },
+    {
+      "name": "source database unchanged",
+      "actual": "d2d2ba48507cac89b6becb18c314f381535de33dc0ca1e2dedd2e8d5928759f8",
+      "expected": "d2d2ba48507cac89b6becb18c314f381535de33dc0ca1e2dedd2e8d5928759f8",
+      "passed": true
+    }
+  ],
+  "complete": true,
+  "transport": {
+    "scope": "Actual JavaScript submitter and Rust queue over owned loopback HTTP; no provider requests; not a browser test",
+    "complete": true,
+    "confirmed": {
+      "id": "9007199254740993"
+    },
+    "forwarded_posts": 1,
+    "backend_status": 200,
+    "backend_receipt": "{\"id\":9007199254740993}",
+    "stalled_message": "Submission outcome is unconfirmed. Check Overview before submitting again; a job may already exist.",
+    "elapsed_ms": 15002.111433
+  },
+  "accepted_after_unconfirmed_id": "9007199254740993",
+  "new_jobs": [
+    [
+      "9007199254740993",
+      "succeeded"
+    ]
+  ]
+}

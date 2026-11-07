@@ -1,0 +1,208 @@
+{
+  "candidate_store_sha256": "cfc6c7d3c80bc18c56dcadafd4903cc41967205bc8565ef60b9ee4c401a6f680",
+  "complete": true,
+  "counter_sha256": "be6e4c674e4388763ffce5f273cf5aba80dfb06abf7b52502615025cd1c0ce3c",
+  "harness_sha256": "07fc8839bf23fb91c94d5c3740ee93439510a0f8211cfbaf2af129efb5d5872f",
+  "input_bytes": 12840,
+  "input_sha256": "114df01da64c51abe5861543110bfbbf5cd7eb20896dc31f80acb21400a85e8d",
+  "samples": [
+    {
+      "allocations": {
+        "allocation_calls": 50,
+        "held_requested_rust_bytes_above_start": 0,
+        "peak_requested_rust_bytes_above_start": 12840,
+        "reallocation_calls": 0,
+        "total_successfully_requested_bytes": 642000
+      },
+      "complete_bytes_equal": true,
+      "iterations": 50,
+      "lane": "owned",
+      "round": 0,
+      "start_live_requested_bytes": 17350
+    },
+    {
+      "allocations": {
+        "allocation_calls": 0,
+        "held_requested_rust_bytes_above_start": 0,
+        "peak_requested_rust_bytes_above_start": 0,
+        "reallocation_calls": 0,
+        "total_successfully_requested_bytes": 0
+      },
+      "complete_bytes_equal": true,
+      "iterations": 50,
+      "lane": "borrowed",
+      "round": 0,
+      "start_live_requested_bytes": 18965
+    },
+    {
+      "allocations": {
+        "allocation_calls": 0,
+        "held_requested_rust_bytes_above_start": 0,
+        "peak_requested_rust_bytes_above_start": 0,
+        "reallocation_calls": 0,
+        "total_successfully_requested_bytes": 0
+      },
+      "complete_bytes_equal": true,
+      "iterations": 50,
+      "lane": "borrowed",
+      "round": 1,
+      "start_live_requested_bytes": 20455
+    },
+    {
+      "allocations": {
+        "allocation_calls": 50,
+        "held_requested_rust_bytes_above_start": 0,
+        "peak_requested_rust_bytes_above_start": 12840,
+        "reallocation_calls": 0,
+        "total_successfully_requested_bytes": 642000
+      },
+      "complete_bytes_equal": true,
+      "iterations": 50,
+      "lane": "owned",
+      "round": 1,
+      "start_live_requested_bytes": 21945
+    },
+    {
+      "allocations": {
+        "allocation_calls": 50,
+        "held_requested_rust_bytes_above_start": 0,
+        "peak_requested_rust_bytes_above_start": 12840,
+        "reallocation_calls": 0,
+        "total_successfully_requested_bytes": 642000
+      },
+      "complete_bytes_equal": true,
+      "iterations": 50,
+      "lane": "owned",
+      "round": 2,
+      "start_live_requested_bytes": 23432
+    },
+    {
+      "allocations": {
+        "allocation_calls": 0,
+        "held_requested_rust_bytes_above_start": 0,
+        "peak_requested_rust_bytes_above_start": 0,
+        "reallocation_calls": 0,
+        "total_successfully_requested_bytes": 0
+      },
+      "complete_bytes_equal": true,
+      "iterations": 50,
+      "lane": "borrowed",
+      "round": 2,
+      "start_live_requested_bytes": 25047
+    },
+    {
+      "allocations": {
+        "allocation_calls": 0,
+        "held_requested_rust_bytes_above_start": 0,
+        "peak_requested_rust_bytes_above_start": 0,
+        "reallocation_calls": 0,
+        "total_successfully_requested_bytes": 0
+      },
+      "complete_bytes_equal": true,
+      "iterations": 50,
+      "lane": "borrowed",
+      "round": 3,
+      "start_live_requested_bytes": 26537
+    },
+    {
+      "allocations": {
+        "allocation_calls": 50,
+        "held_requested_rust_bytes_above_start": 0,
+        "peak_requested_rust_bytes_above_start": 12840,
+        "reallocation_calls": 0,
+        "total_successfully_requested_bytes": 642000
+      },
+      "complete_bytes_equal": true,
+      "iterations": 50,
+      "lane": "owned",
+      "round": 3,
+      "start_live_requested_bytes": 28027
+    },
+    {
+      "allocations": {
+        "allocation_calls": 50,
+        "held_requested_rust_bytes_above_start": 0,
+        "peak_requested_rust_bytes_above_start": 12840,
+        "reallocation_calls": 0,
+        "total_successfully_requested_bytes": 642000
+      },
+      "complete_bytes_equal": true,
+      "iterations": 50,
+      "lane": "owned",
+      "round": 4,
+      "start_live_requested_bytes": 29514
+    },
+    {
+      "allocations": {
+        "allocation_calls": 0,
+        "held_requested_rust_bytes_above_start": 0,
+        "peak_requested_rust_bytes_above_start": 0,
+        "reallocation_calls": 0,
+        "total_successfully_requested_bytes": 0
+      },
+      "complete_bytes_equal": true,
+      "iterations": 50,
+      "lane": "borrowed",
+      "round": 4,
+      "start_live_requested_bytes": 31257
+    },
+    {
+      "allocations": {
+        "allocation_calls": 0,
+        "held_requested_rust_bytes_above_start": 0,
+        "peak_requested_rust_bytes_above_start": 0,
+        "reallocation_calls": 0,
+        "total_successfully_requested_bytes": 0
+      },
+      "complete_bytes_equal": true,
+      "iterations": 50,
+      "lane": "borrowed",
+      "round": 5,
+      "start_live_requested_bytes": 32747
+    },
+    {
+      "allocations": {
+        "allocation_calls": 50,
+        "held_requested_rust_bytes_above_start": 0,
+        "peak_requested_rust_bytes_above_start": 12840,
+        "reallocation_calls": 0,
+        "total_successfully_requested_bytes": 642000
+      },
+      "complete_bytes_equal": true,
+      "iterations": 50,
+      "lane": "owned",
+      "round": 5,
+      "start_live_requested_bytes": 34237
+    },
+    {
+      "allocations": {
+        "allocation_calls": 50,
+        "held_requested_rust_bytes_above_start": 0,
+        "peak_requested_rust_bytes_above_start": 12840,
+        "reallocation_calls": 0,
+        "total_successfully_requested_bytes": 642000
+      },
+      "complete_bytes_equal": true,
+      "iterations": 50,
+      "lane": "owned",
+      "round": 6,
+      "start_live_requested_bytes": 35724
+    },
+    {
+      "allocations": {
+        "allocation_calls": 0,
+        "held_requested_rust_bytes_above_start": 0,
+        "peak_requested_rust_bytes_above_start": 0,
+        "reallocation_calls": 0,
+        "total_successfully_requested_bytes": 0
+      },
+      "complete_bytes_equal": true,
+      "iterations": 50,
+      "lane": "borrowed",
+      "round": 6,
+      "start_live_requested_bytes": 37211
+    }
+  ],
+  "schema_version": 1,
+  "scope": "Isolated existing SQLite payload comparison; requested Rust allocations only, excluding native SQLite allocations; not save latency, RSS, live collection or target-project adoption"
+}

@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "scope": "sanitized generated-workload integration result; raw trace retained privately",
+  "implementation_commit": "473b9a167ab82ced844aff121bd1eae19e99955d",
+  "harness": "atlas-card-density-v12-complete-preparation",
+  "preparation_lane": "main",
+  "record_count": 200,
+  "metadata_bytes_per_record": 8192,
+  "complete": true,
+  "sample_count": 6,
+  "all_complete_output_equal": true,
+  "complete_validation_ms": 34.30000001192093,
+  "request_to_ready_ms": 85.70000004768372,
+  "performance_ranking": false,
+  "redacted": [
+    "browser identity",
+    "viewport and device properties",
+    "timestamps",
+    "interaction identifiers and input observations",
+    "per-frame and per-event trace"
+  ]
+}

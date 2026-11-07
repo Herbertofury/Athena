@@ -1,0 +1,55 @@
+{
+  "implementation_commit": "0564c34532df49ba806d852b7f3493e8a18edc5f",
+  "scope": "foreground actual browser DOM with retained public event sequence and labeled generated replay; not full app acceptance",
+  "runs": {
+    "real-34-events.json": {
+      "sha256": "1ba035609cc2fb75e59024721f0fc3e99175239e591a7f21bf59b4d9467ff8ac",
+      "frame_cadence_unreliable": false,
+      "strategies": {
+        "full_history": {
+          "synchronous_median_ms": 0.800000011920929,
+          "frame_proxy_median_ms": 33.099999994039536,
+          "dom_text_nodes": 1,
+          "all_output_equal": true
+        },
+        "append": {
+          "synchronous_median_ms": 0.30000001192092896,
+          "frame_proxy_median_ms": 33.30000001192093,
+          "dom_text_nodes": 36,
+          "all_output_equal": true
+        },
+        "blocked": {
+          "synchronous_median_ms": 0.4000000059604645,
+          "frame_proxy_median_ms": 33.39999997615814,
+          "dom_text_nodes": 3,
+          "all_output_equal": true
+        }
+      }
+    },
+    "replay-1088-events.json": {
+      "sha256": "610dd8c94347a3e86307868f0017f3a87c07b39f560b08499d46246e2326f25c",
+      "frame_cadence_unreliable": false,
+      "strategies": {
+        "full_history": {
+          "synchronous_median_ms": 593.3000000119209,
+          "frame_proxy_median_ms": 800.6999999880791,
+          "dom_text_nodes": 1,
+          "all_output_equal": true
+        },
+        "append": {
+          "synchronous_median_ms": 4.200000017881393,
+          "frame_proxy_median_ms": 160.40000000596046,
+          "dom_text_nodes": 1090,
+          "all_output_equal": true
+        },
+        "blocked": {
+          "synchronous_median_ms": 9.099999994039536,
+          "frame_proxy_median_ms": 207.60000002384186,
+          "dom_text_nodes": 19,
+          "all_output_equal": true
+        }
+      }
+    }
+  },
+  "native_recovery_pass": true
+}

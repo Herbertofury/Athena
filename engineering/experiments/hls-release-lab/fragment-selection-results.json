@@ -1,0 +1,1180 @@
+{
+  "schema_version": 1,
+  "runtime": "v24.22.1",
+  "compiler": "esbuild 0.28.2",
+  "evaluator_sha256": "f3fe0fc3179086f70bf07590c42612821caa8ef9d17e8ec6c99934a7f0b078b7",
+  "source_dependencies": {
+    "src/controller/fragment-finders.ts": "02025291966397a3245fabde66b8e3dbde9ccbcfc224a89aa873b8cd01f38646",
+    "src/utils/binary-search.ts": "f5870cbde5e148b50f241122e7a17a3493e9ebb96d84b61e914623ecc783db29"
+  },
+  "scope": "Synthetic source-level fragment-selection observations; no playback, network, improvement or promotion claim",
+  "versions": [
+    {
+      "version": "1.7.3",
+      "source_sha256": "02025291966397a3245fabde66b8e3dbde9ccbcfc224a89aa873b8cd01f38646",
+      "bundle_sha256": "ddcfe77ecaa8740b12f6892dbf0412f3560678ecc939b01c0855b6fca0f6bd7f"
+    },
+    {
+      "version": "1.7.4",
+      "source_sha256": "02025291966397a3245fabde66b8e3dbde9ccbcfc224a89aa873b8cd01f38646",
+      "bundle_sha256": "3c493c383f6d6965bdf5730c47f4a4b3c0782323464079bc43d9e6531fe3d99e"
+    }
+  ],
+  "cases": [
+    {
+      "version": "1.7.3",
+      "previous_sn": 0,
+      "target_level": 0,
+      "buffer_shortfall": 0,
+      "tolerance": 0,
+      "selected_sn": 1,
+      "selected_level": 0
+    },
+    {
+      "version": "1.7.3",
+      "previous_sn": 0,
+      "target_level": 0,
+      "buffer_shortfall": 0,
+      "tolerance": 0.25,
+      "selected_sn": 1,
+      "selected_level": 0
+    },
+    {
+      "version": "1.7.3",
+      "previous_sn": 0,
+      "target_level": 0,
+      "buffer_shortfall": 0.1,
+      "tolerance": 0,
+      "selected_sn": 1,
+      "selected_level": 0
+    },
+    {
+      "version": "1.7.3",
+      "previous_sn": 0,
+      "target_level": 0,
+      "buffer_shortfall": 0.1,
+      "tolerance": 0.25,
+      "selected_sn": 1,
+      "selected_level": 0
+    },
+    {
+      "version": "1.7.3",
+      "previous_sn": 0,
+      "target_level": 0,
+      "buffer_shortfall": 0.3,
+      "tolerance": 0,
+      "selected_sn": 1,
+      "selected_level": 0
+    },
+    {
+      "version": "1.7.3",
+      "previous_sn": 0,
+      "target_level": 0,
+      "buffer_shortfall": 0.3,
+      "tolerance": 0.25,
+      "selected_sn": 1,
+      "selected_level": 0
+    },
+    {
+      "version": "1.7.3",
+      "previous_sn": 0,
+      "target_level": 0,
+      "buffer_shortfall": 1,
+      "tolerance": 0,
+      "selected_sn": 1,
+      "selected_level": 0
+    },
+    {
+      "version": "1.7.3",
+      "previous_sn": 0,
+      "target_level": 0,
+      "buffer_shortfall": 1,
+      "tolerance": 0.25,
+      "selected_sn": 1,
+      "selected_level": 0
+    },
+    {
+      "version": "1.7.3",
+      "previous_sn": 0,
+      "target_level": 1,
+      "buffer_shortfall": 0,
+      "tolerance": 0,
+      "selected_sn": 1,
+      "selected_level": 1
+    },
+    {
+      "version": "1.7.3",
+      "previous_sn": 0,
+      "target_level": 1,
+      "buffer_shortfall": 0,
+      "tolerance": 0.25,
+      "selected_sn": 1,
+      "selected_level": 1
+    },
+    {
+      "version": "1.7.3",
+      "previous_sn": 0,
+      "target_level": 1,
+      "buffer_shortfall": 0.1,
+      "tolerance": 0,
+      "selected_sn": 1,
+      "selected_level": 1
+    },
+    {
+      "version": "1.7.3",
+      "previous_sn": 0,
+      "target_level": 1,
+      "buffer_shortfall": 0.1,
+      "tolerance": 0.25,
+      "selected_sn": 1,
+      "selected_level": 1
+    },
+    {
+      "version": "1.7.3",
+      "previous_sn": 0,
+      "target_level": 1,
+      "buffer_shortfall": 0.3,
+      "tolerance": 0,
+      "selected_sn": 1,
+      "selected_level": 1
+    },
+    {
+      "version": "1.7.3",
+      "previous_sn": 0,
+      "target_level": 1,
+      "buffer_shortfall": 0.3,
+      "tolerance": 0.25,
+      "selected_sn": 1,
+      "selected_level": 1
+    },
+    {
+      "version": "1.7.3",
+      "previous_sn": 0,
+      "target_level": 1,
+      "buffer_shortfall": 1,
+      "tolerance": 0,
+      "selected_sn": 1,
+      "selected_level": 1
+    },
+    {
+      "version": "1.7.3",
+      "previous_sn": 0,
+      "target_level": 1,
+      "buffer_shortfall": 1,
+      "tolerance": 0.25,
+      "selected_sn": 1,
+      "selected_level": 1
+    },
+    {
+      "version": "1.7.3",
+      "previous_sn": 1,
+      "target_level": 0,
+      "buffer_shortfall": 0,
+      "tolerance": 0,
+      "selected_sn": 2,
+      "selected_level": 0
+    },
+    {
+      "version": "1.7.3",
+      "previous_sn": 1,
+      "target_level": 0,
+      "buffer_shortfall": 0,
+      "tolerance": 0.25,
+      "selected_sn": 2,
+      "selected_level": 0
+    },
+    {
+      "version": "1.7.3",
+      "previous_sn": 1,
+      "target_level": 0,
+      "buffer_shortfall": 0.1,
+      "tolerance": 0,
+      "selected_sn": 2,
+      "selected_level": 0
+    },
+    {
+      "version": "1.7.3",
+      "previous_sn": 1,
+      "target_level": 0,
+      "buffer_shortfall": 0.1,
+      "tolerance": 0.25,
+      "selected_sn": 2,
+      "selected_level": 0
+    },
+    {
+      "version": "1.7.3",
+      "previous_sn": 1,
+      "target_level": 0,
+      "buffer_shortfall": 0.3,
+      "tolerance": 0,
+      "selected_sn": 2,
+      "selected_level": 0
+    },
+    {
+      "version": "1.7.3",
+      "previous_sn": 1,
+      "target_level": 0,
+      "buffer_shortfall": 0.3,
+      "tolerance": 0.25,
+      "selected_sn": 2,
+      "selected_level": 0
+    },
+    {
+      "version": "1.7.3",
+      "previous_sn": 1,
+      "target_level": 0,
+      "buffer_shortfall": 1,
+      "tolerance": 0,
+      "selected_sn": 2,
+      "selected_level": 0
+    },
+    {
+      "version": "1.7.3",
+      "previous_sn": 1,
+      "target_level": 0,
+      "buffer_shortfall": 1,
+      "tolerance": 0.25,
+      "selected_sn": 2,
+      "selected_level": 0
+    },
+    {
+      "version": "1.7.3",
+      "previous_sn": 1,
+      "target_level": 1,
+      "buffer_shortfall": 0,
+      "tolerance": 0,
+      "selected_sn": 2,
+      "selected_level": 1
+    },
+    {
+      "version": "1.7.3",
+      "previous_sn": 1,
+      "target_level": 1,
+      "buffer_shortfall": 0,
+      "tolerance": 0.25,
+      "selected_sn": 2,
+      "selected_level": 1
+    },
+    {
+      "version": "1.7.3",
+      "previous_sn": 1,
+      "target_level": 1,
+      "buffer_shortfall": 0.1,
+      "tolerance": 0,
+      "selected_sn": 1,
+      "selected_level": 1
+    },
+    {
+      "version": "1.7.3",
+      "previous_sn": 1,
+      "target_level": 1,
+      "buffer_shortfall": 0.1,
+      "tolerance": 0.25,
+      "selected_sn": 2,
+      "selected_level": 1
+    },
+    {
+      "version": "1.7.3",
+      "previous_sn": 1,
+      "target_level": 1,
+      "buffer_shortfall": 0.3,
+      "tolerance": 0,
+      "selected_sn": 1,
+      "selected_level": 1
+    },
+    {
+      "version": "1.7.3",
+      "previous_sn": 1,
+      "target_level": 1,
+      "buffer_shortfall": 0.3,
+      "tolerance": 0.25,
+      "selected_sn": 1,
+      "selected_level": 1
+    },
+    {
+      "version": "1.7.3",
+      "previous_sn": 1,
+      "target_level": 1,
+      "buffer_shortfall": 1,
+      "tolerance": 0,
+      "selected_sn": 1,
+      "selected_level": 1
+    },
+    {
+      "version": "1.7.3",
+      "previous_sn": 1,
+      "target_level": 1,
+      "buffer_shortfall": 1,
+      "tolerance": 0.25,
+      "selected_sn": 1,
+      "selected_level": 1
+    },
+    {
+      "version": "1.7.3",
+      "previous_sn": 49,
+      "target_level": 0,
+      "buffer_shortfall": 0,
+      "tolerance": 0,
+      "selected_sn": 50,
+      "selected_level": 0
+    },
+    {
+      "version": "1.7.3",
+      "previous_sn": 49,
+      "target_level": 0,
+      "buffer_shortfall": 0,
+      "tolerance": 0.25,
+      "selected_sn": 50,
+      "selected_level": 0
+    },
+    {
+      "version": "1.7.3",
+      "previous_sn": 49,
+      "target_level": 0,
+      "buffer_shortfall": 0.1,
+      "tolerance": 0,
+      "selected_sn": 50,
+      "selected_level": 0
+    },
+    {
+      "version": "1.7.3",
+      "previous_sn": 49,
+      "target_level": 0,
+      "buffer_shortfall": 0.1,
+      "tolerance": 0.25,
+      "selected_sn": 50,
+      "selected_level": 0
+    },
+    {
+      "version": "1.7.3",
+      "previous_sn": 49,
+      "target_level": 0,
+      "buffer_shortfall": 0.3,
+      "tolerance": 0,
+      "selected_sn": 50,
+      "selected_level": 0
+    },
+    {
+      "version": "1.7.3",
+      "previous_sn": 49,
+      "target_level": 0,
+      "buffer_shortfall": 0.3,
+      "tolerance": 0.25,
+      "selected_sn": 50,
+      "selected_level": 0
+    },
+    {
+      "version": "1.7.3",
+      "previous_sn": 49,
+      "target_level": 0,
+      "buffer_shortfall": 1,
+      "tolerance": 0,
+      "selected_sn": 50,
+      "selected_level": 0
+    },
+    {
+      "version": "1.7.3",
+      "previous_sn": 49,
+      "target_level": 0,
+      "buffer_shortfall": 1,
+      "tolerance": 0.25,
+      "selected_sn": 50,
+      "selected_level": 0
+    },
+    {
+      "version": "1.7.3",
+      "previous_sn": 49,
+      "target_level": 1,
+      "buffer_shortfall": 0,
+      "tolerance": 0,
+      "selected_sn": 50,
+      "selected_level": 1
+    },
+    {
+      "version": "1.7.3",
+      "previous_sn": 49,
+      "target_level": 1,
+      "buffer_shortfall": 0,
+      "tolerance": 0.25,
+      "selected_sn": 50,
+      "selected_level": 1
+    },
+    {
+      "version": "1.7.3",
+      "previous_sn": 49,
+      "target_level": 1,
+      "buffer_shortfall": 0.1,
+      "tolerance": 0,
+      "selected_sn": 49,
+      "selected_level": 1
+    },
+    {
+      "version": "1.7.3",
+      "previous_sn": 49,
+      "target_level": 1,
+      "buffer_shortfall": 0.1,
+      "tolerance": 0.25,
+      "selected_sn": 49,
+      "selected_level": 1
+    },
+    {
+      "version": "1.7.3",
+      "previous_sn": 49,
+      "target_level": 1,
+      "buffer_shortfall": 0.3,
+      "tolerance": 0,
+      "selected_sn": 49,
+      "selected_level": 1
+    },
+    {
+      "version": "1.7.3",
+      "previous_sn": 49,
+      "target_level": 1,
+      "buffer_shortfall": 0.3,
+      "tolerance": 0.25,
+      "selected_sn": 49,
+      "selected_level": 1
+    },
+    {
+      "version": "1.7.3",
+      "previous_sn": 49,
+      "target_level": 1,
+      "buffer_shortfall": 1,
+      "tolerance": 0,
+      "selected_sn": 49,
+      "selected_level": 1
+    },
+    {
+      "version": "1.7.3",
+      "previous_sn": 49,
+      "target_level": 1,
+      "buffer_shortfall": 1,
+      "tolerance": 0.25,
+      "selected_sn": 49,
+      "selected_level": 1
+    },
+    {
+      "version": "1.7.3",
+      "previous_sn": 98,
+      "target_level": 0,
+      "buffer_shortfall": 0,
+      "tolerance": 0,
+      "selected_sn": 99,
+      "selected_level": 0
+    },
+    {
+      "version": "1.7.3",
+      "previous_sn": 98,
+      "target_level": 0,
+      "buffer_shortfall": 0,
+      "tolerance": 0.25,
+      "selected_sn": 99,
+      "selected_level": 0
+    },
+    {
+      "version": "1.7.3",
+      "previous_sn": 98,
+      "target_level": 0,
+      "buffer_shortfall": 0.1,
+      "tolerance": 0,
+      "selected_sn": 99,
+      "selected_level": 0
+    },
+    {
+      "version": "1.7.3",
+      "previous_sn": 98,
+      "target_level": 0,
+      "buffer_shortfall": 0.1,
+      "tolerance": 0.25,
+      "selected_sn": 99,
+      "selected_level": 0
+    },
+    {
+      "version": "1.7.3",
+      "previous_sn": 98,
+      "target_level": 0,
+      "buffer_shortfall": 0.3,
+      "tolerance": 0,
+      "selected_sn": 99,
+      "selected_level": 0
+    },
+    {
+      "version": "1.7.3",
+      "previous_sn": 98,
+      "target_level": 0,
+      "buffer_shortfall": 0.3,
+      "tolerance": 0.25,
+      "selected_sn": 99,
+      "selected_level": 0
+    },
+    {
+      "version": "1.7.3",
+      "previous_sn": 98,
+      "target_level": 0,
+      "buffer_shortfall": 1,
+      "tolerance": 0,
+      "selected_sn": 99,
+      "selected_level": 0
+    },
+    {
+      "version": "1.7.3",
+      "previous_sn": 98,
+      "target_level": 0,
+      "buffer_shortfall": 1,
+      "tolerance": 0.25,
+      "selected_sn": 99,
+      "selected_level": 0
+    },
+    {
+      "version": "1.7.3",
+      "previous_sn": 98,
+      "target_level": 1,
+      "buffer_shortfall": 0,
+      "tolerance": 0,
+      "selected_sn": 99,
+      "selected_level": 1
+    },
+    {
+      "version": "1.7.3",
+      "previous_sn": 98,
+      "target_level": 1,
+      "buffer_shortfall": 0,
+      "tolerance": 0.25,
+      "selected_sn": 99,
+      "selected_level": 1
+    },
+    {
+      "version": "1.7.3",
+      "previous_sn": 98,
+      "target_level": 1,
+      "buffer_shortfall": 0.1,
+      "tolerance": 0,
+      "selected_sn": 98,
+      "selected_level": 1
+    },
+    {
+      "version": "1.7.3",
+      "previous_sn": 98,
+      "target_level": 1,
+      "buffer_shortfall": 0.1,
+      "tolerance": 0.25,
+      "selected_sn": 98,
+      "selected_level": 1
+    },
+    {
+      "version": "1.7.3",
+      "previous_sn": 98,
+      "target_level": 1,
+      "buffer_shortfall": 0.3,
+      "tolerance": 0,
+      "selected_sn": 98,
+      "selected_level": 1
+    },
+    {
+      "version": "1.7.3",
+      "previous_sn": 98,
+      "target_level": 1,
+      "buffer_shortfall": 0.3,
+      "tolerance": 0.25,
+      "selected_sn": 98,
+      "selected_level": 1
+    },
+    {
+      "version": "1.7.3",
+      "previous_sn": 98,
+      "target_level": 1,
+      "buffer_shortfall": 1,
+      "tolerance": 0,
+      "selected_sn": 98,
+      "selected_level": 1
+    },
+    {
+      "version": "1.7.3",
+      "previous_sn": 98,
+      "target_level": 1,
+      "buffer_shortfall": 1,
+      "tolerance": 0.25,
+      "selected_sn": 98,
+      "selected_level": 1
+    },
+    {
+      "version": "1.7.4",
+      "previous_sn": 0,
+      "target_level": 0,
+      "buffer_shortfall": 0,
+      "tolerance": 0,
+      "selected_sn": 1,
+      "selected_level": 0
+    },
+    {
+      "version": "1.7.4",
+      "previous_sn": 0,
+      "target_level": 0,
+      "buffer_shortfall": 0,
+      "tolerance": 0.25,
+      "selected_sn": 1,
+      "selected_level": 0
+    },
+    {
+      "version": "1.7.4",
+      "previous_sn": 0,
+      "target_level": 0,
+      "buffer_shortfall": 0.1,
+      "tolerance": 0,
+      "selected_sn": 1,
+      "selected_level": 0
+    },
+    {
+      "version": "1.7.4",
+      "previous_sn": 0,
+      "target_level": 0,
+      "buffer_shortfall": 0.1,
+      "tolerance": 0.25,
+      "selected_sn": 1,
+      "selected_level": 0
+    },
+    {
+      "version": "1.7.4",
+      "previous_sn": 0,
+      "target_level": 0,
+      "buffer_shortfall": 0.3,
+      "tolerance": 0,
+      "selected_sn": 1,
+      "selected_level": 0
+    },
+    {
+      "version": "1.7.4",
+      "previous_sn": 0,
+      "target_level": 0,
+      "buffer_shortfall": 0.3,
+      "tolerance": 0.25,
+      "selected_sn": 1,
+      "selected_level": 0
+    },
+    {
+      "version": "1.7.4",
+      "previous_sn": 0,
+      "target_level": 0,
+      "buffer_shortfall": 1,
+      "tolerance": 0,
+      "selected_sn": 1,
+      "selected_level": 0
+    },
+    {
+      "version": "1.7.4",
+      "previous_sn": 0,
+      "target_level": 0,
+      "buffer_shortfall": 1,
+      "tolerance": 0.25,
+      "selected_sn": 1,
+      "selected_level": 0
+    },
+    {
+      "version": "1.7.4",
+      "previous_sn": 0,
+      "target_level": 1,
+      "buffer_shortfall": 0,
+      "tolerance": 0,
+      "selected_sn": 1,
+      "selected_level": 1
+    },
+    {
+      "version": "1.7.4",
+      "previous_sn": 0,
+      "target_level": 1,
+      "buffer_shortfall": 0,
+      "tolerance": 0.25,
+      "selected_sn": 1,
+      "selected_level": 1
+    },
+    {
+      "version": "1.7.4",
+      "previous_sn": 0,
+      "target_level": 1,
+      "buffer_shortfall": 0.1,
+      "tolerance": 0,
+      "selected_sn": 1,
+      "selected_level": 1
+    },
+    {
+      "version": "1.7.4",
+      "previous_sn": 0,
+      "target_level": 1,
+      "buffer_shortfall": 0.1,
+      "tolerance": 0.25,
+      "selected_sn": 1,
+      "selected_level": 1
+    },
+    {
+      "version": "1.7.4",
+      "previous_sn": 0,
+      "target_level": 1,
+      "buffer_shortfall": 0.3,
+      "tolerance": 0,
+      "selected_sn": 1,
+      "selected_level": 1
+    },
+    {
+      "version": "1.7.4",
+      "previous_sn": 0,
+      "target_level": 1,
+      "buffer_shortfall": 0.3,
+      "tolerance": 0.25,
+      "selected_sn": 1,
+      "selected_level": 1
+    },
+    {
+      "version": "1.7.4",
+      "previous_sn": 0,
+      "target_level": 1,
+      "buffer_shortfall": 1,
+      "tolerance": 0,
+      "selected_sn": 1,
+      "selected_level": 1
+    },
+    {
+      "version": "1.7.4",
+      "previous_sn": 0,
+      "target_level": 1,
+      "buffer_shortfall": 1,
+      "tolerance": 0.25,
+      "selected_sn": 1,
+      "selected_level": 1
+    },
+    {
+      "version": "1.7.4",
+      "previous_sn": 1,
+      "target_level": 0,
+      "buffer_shortfall": 0,
+      "tolerance": 0,
+      "selected_sn": 2,
+      "selected_level": 0
+    },
+    {
+      "version": "1.7.4",
+      "previous_sn": 1,
+      "target_level": 0,
+      "buffer_shortfall": 0,
+      "tolerance": 0.25,
+      "selected_sn": 2,
+      "selected_level": 0
+    },
+    {
+      "version": "1.7.4",
+      "previous_sn": 1,
+      "target_level": 0,
+      "buffer_shortfall": 0.1,
+      "tolerance": 0,
+      "selected_sn": 2,
+      "selected_level": 0
+    },
+    {
+      "version": "1.7.4",
+      "previous_sn": 1,
+      "target_level": 0,
+      "buffer_shortfall": 0.1,
+      "tolerance": 0.25,
+      "selected_sn": 2,
+      "selected_level": 0
+    },
+    {
+      "version": "1.7.4",
+      "previous_sn": 1,
+      "target_level": 0,
+      "buffer_shortfall": 0.3,
+      "tolerance": 0,
+      "selected_sn": 2,
+      "selected_level": 0
+    },
+    {
+      "version": "1.7.4",
+      "previous_sn": 1,
+      "target_level": 0,
+      "buffer_shortfall": 0.3,
+      "tolerance": 0.25,
+      "selected_sn": 2,
+      "selected_level": 0
+    },
+    {
+      "version": "1.7.4",
+      "previous_sn": 1,
+      "target_level": 0,
+      "buffer_shortfall": 1,
+      "tolerance": 0,
+      "selected_sn": 2,
+      "selected_level": 0
+    },
+    {
+      "version": "1.7.4",
+      "previous_sn": 1,
+      "target_level": 0,
+      "buffer_shortfall": 1,
+      "tolerance": 0.25,
+      "selected_sn": 2,
+      "selected_level": 0
+    },
+    {
+      "version": "1.7.4",
+      "previous_sn": 1,
+      "target_level": 1,
+      "buffer_shortfall": 0,
+      "tolerance": 0,
+      "selected_sn": 2,
+      "selected_level": 1
+    },
+    {
+      "version": "1.7.4",
+      "previous_sn": 1,
+      "target_level": 1,
+      "buffer_shortfall": 0,
+      "tolerance": 0.25,
+      "selected_sn": 2,
+      "selected_level": 1
+    },
+    {
+      "version": "1.7.4",
+      "previous_sn": 1,
+      "target_level": 1,
+      "buffer_shortfall": 0.1,
+      "tolerance": 0,
+      "selected_sn": 1,
+      "selected_level": 1
+    },
+    {
+      "version": "1.7.4",
+      "previous_sn": 1,
+      "target_level": 1,
+      "buffer_shortfall": 0.1,
+      "tolerance": 0.25,
+      "selected_sn": 2,
+      "selected_level": 1
+    },
+    {
+      "version": "1.7.4",
+      "previous_sn": 1,
+      "target_level": 1,
+      "buffer_shortfall": 0.3,
+      "tolerance": 0,
+      "selected_sn": 1,
+      "selected_level": 1
+    },
+    {
+      "version": "1.7.4",
+      "previous_sn": 1,
+      "target_level": 1,
+      "buffer_shortfall": 0.3,
+      "tolerance": 0.25,
+      "selected_sn": 1,
+      "selected_level": 1
+    },
+    {
+      "version": "1.7.4",
+      "previous_sn": 1,
+      "target_level": 1,
+      "buffer_shortfall": 1,
+      "tolerance": 0,
+      "selected_sn": 1,
+      "selected_level": 1
+    },
+    {
+      "version": "1.7.4",
+      "previous_sn": 1,
+      "target_level": 1,
+      "buffer_shortfall": 1,
+      "tolerance": 0.25,
+      "selected_sn": 1,
+      "selected_level": 1
+    },
+    {
+      "version": "1.7.4",
+      "previous_sn": 49,
+      "target_level": 0,
+      "buffer_shortfall": 0,
+      "tolerance": 0,
+      "selected_sn": 50,
+      "selected_level": 0
+    },
+    {
+      "version": "1.7.4",
+      "previous_sn": 49,
+      "target_level": 0,
+      "buffer_shortfall": 0,
+      "tolerance": 0.25,
+      "selected_sn": 50,
+      "selected_level": 0
+    },
+    {
+      "version": "1.7.4",
+      "previous_sn": 49,
+      "target_level": 0,
+      "buffer_shortfall": 0.1,
+      "tolerance": 0,
+      "selected_sn": 50,
+      "selected_level": 0
+    },
+    {
+      "version": "1.7.4",
+      "previous_sn": 49,
+      "target_level": 0,
+      "buffer_shortfall": 0.1,
+      "tolerance": 0.25,
+      "selected_sn": 50,
+      "selected_level": 0
+    },
+    {
+      "version": "1.7.4",
+      "previous_sn": 49,
+      "target_level": 0,
+      "buffer_shortfall": 0.3,
+      "tolerance": 0,
+      "selected_sn": 50,
+      "selected_level": 0
+    },
+    {
+      "version": "1.7.4",
+      "previous_sn": 49,
+      "target_level": 0,
+      "buffer_shortfall": 0.3,
+      "tolerance": 0.25,
+      "selected_sn": 50,
+      "selected_level": 0
+    },
+    {
+      "version": "1.7.4",
+      "previous_sn": 49,
+      "target_level": 0,
+      "buffer_shortfall": 1,
+      "tolerance": 0,
+      "selected_sn": 50,
+      "selected_level": 0
+    },
+    {
+      "version": "1.7.4",
+      "previous_sn": 49,
+      "target_level": 0,
+      "buffer_shortfall": 1,
+      "tolerance": 0.25,
+      "selected_sn": 50,
+      "selected_level": 0
+    },
+    {
+      "version": "1.7.4",
+      "previous_sn": 49,
+      "target_level": 1,
+      "buffer_shortfall": 0,
+      "tolerance": 0,
+      "selected_sn": 50,
+      "selected_level": 1
+    },
+    {
+      "version": "1.7.4",
+      "previous_sn": 49,
+      "target_level": 1,
+      "buffer_shortfall": 0,
+      "tolerance": 0.25,
+      "selected_sn": 50,
+      "selected_level": 1
+    },
+    {
+      "version": "1.7.4",
+      "previous_sn": 49,
+      "target_level": 1,
+      "buffer_shortfall": 0.1,
+      "tolerance": 0,
+      "selected_sn": 49,
+      "selected_level": 1
+    },
+    {
+      "version": "1.7.4",
+      "previous_sn": 49,
+      "target_level": 1,
+      "buffer_shortfall": 0.1,
+      "tolerance": 0.25,
+      "selected_sn": 49,
+      "selected_level": 1
+    },
+    {
+      "version": "1.7.4",
+      "previous_sn": 49,
+      "target_level": 1,
+      "buffer_shortfall": 0.3,
+      "tolerance": 0,
+      "selected_sn": 49,
+      "selected_level": 1
+    },
+    {
+      "version": "1.7.4",
+      "previous_sn": 49,
+      "target_level": 1,
+      "buffer_shortfall": 0.3,
+      "tolerance": 0.25,
+      "selected_sn": 49,
+      "selected_level": 1
+    },
+    {
+      "version": "1.7.4",
+      "previous_sn": 49,
+      "target_level": 1,
+      "buffer_shortfall": 1,
+      "tolerance": 0,
+      "selected_sn": 49,
+      "selected_level": 1
+    },
+    {
+      "version": "1.7.4",
+      "previous_sn": 49,
+      "target_level": 1,
+      "buffer_shortfall": 1,
+      "tolerance": 0.25,
+      "selected_sn": 49,
+      "selected_level": 1
+    },
+    {
+      "version": "1.7.4",
+      "previous_sn": 98,
+      "target_level": 0,
+      "buffer_shortfall": 0,
+      "tolerance": 0,
+      "selected_sn": 99,
+      "selected_level": 0
+    },
+    {
+      "version": "1.7.4",
+      "previous_sn": 98,
+      "target_level": 0,
+      "buffer_shortfall": 0,
+      "tolerance": 0.25,
+      "selected_sn": 99,
+      "selected_level": 0
+    },
+    {
+      "version": "1.7.4",
+      "previous_sn": 98,
+      "target_level": 0,
+      "buffer_shortfall": 0.1,
+      "tolerance": 0,
+      "selected_sn": 99,
+      "selected_level": 0
+    },
+    {
+      "version": "1.7.4",
+      "previous_sn": 98,
+      "target_level": 0,
+      "buffer_shortfall": 0.1,
+      "tolerance": 0.25,
+      "selected_sn": 99,
+      "selected_level": 0
+    },
+    {
+      "version": "1.7.4",
+      "previous_sn": 98,
+      "target_level": 0,
+      "buffer_shortfall": 0.3,
+      "tolerance": 0,
+      "selected_sn": 99,
+      "selected_level": 0
+    },
+    {
+      "version": "1.7.4",
+      "previous_sn": 98,
+      "target_level": 0,
+      "buffer_shortfall": 0.3,
+      "tolerance": 0.25,
+      "selected_sn": 99,
+      "selected_level": 0
+    },
+    {
+      "version": "1.7.4",
+      "previous_sn": 98,
+      "target_level": 0,
+      "buffer_shortfall": 1,
+      "tolerance": 0,
+      "selected_sn": 99,
+      "selected_level": 0
+    },
+    {
+      "version": "1.7.4",
+      "previous_sn": 98,
+      "target_level": 0,
+      "buffer_shortfall": 1,
+      "tolerance": 0.25,
+      "selected_sn": 99,
+      "selected_level": 0
+    },
+    {
+      "version": "1.7.4",
+      "previous_sn": 98,
+      "target_level": 1,
+      "buffer_shortfall": 0,
+      "tolerance": 0,
+      "selected_sn": 99,
+      "selected_level": 1
+    },
+    {
+      "version": "1.7.4",
+      "previous_sn": 98,
+      "target_level": 1,
+      "buffer_shortfall": 0,
+      "tolerance": 0.25,
+      "selected_sn": 99,
+      "selected_level": 1
+    },
+    {
+      "version": "1.7.4",
+      "previous_sn": 98,
+      "target_level": 1,
+      "buffer_shortfall": 0.1,
+      "tolerance": 0,
+      "selected_sn": 98,
+      "selected_level": 1
+    },
+    {
+      "version": "1.7.4",
+      "previous_sn": 98,
+      "target_level": 1,
+      "buffer_shortfall": 0.1,
+      "tolerance": 0.25,
+      "selected_sn": 98,
+      "selected_level": 1
+    },
+    {
+      "version": "1.7.4",
+      "previous_sn": 98,
+      "target_level": 1,
+      "buffer_shortfall": 0.3,
+      "tolerance": 0,
+      "selected_sn": 98,
+      "selected_level": 1
+    },
+    {
+      "version": "1.7.4",
+      "previous_sn": 98,
+      "target_level": 1,
+      "buffer_shortfall": 0.3,
+      "tolerance": 0.25,
+      "selected_sn": 98,
+      "selected_level": 1
+    },
+    {
+      "version": "1.7.4",
+      "previous_sn": 98,
+      "target_level": 1,
+      "buffer_shortfall": 1,
+      "tolerance": 0,
+      "selected_sn": 98,
+      "selected_level": 1
+    },
+    {
+      "version": "1.7.4",
+      "previous_sn": 98,
+      "target_level": 1,
+      "buffer_shortfall": 1,
+      "tolerance": 0.25,
+      "selected_sn": 98,
+      "selected_level": 1
+    }
+  ],
+  "promoted": false,
+  "complete": true,
+  "cross_version_same_selection": true
+}

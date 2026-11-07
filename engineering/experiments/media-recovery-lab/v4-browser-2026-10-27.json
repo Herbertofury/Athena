@@ -1,0 +1,101 @@
+{
+  "schema_version": 1,
+  "harness": "atlas-real-media-v4-retryable-player",
+  "source_module": "/Engineering-Atlas/media-lab/media.9aeb06c0a1ec1e4f.js",
+  "started_at": "2026-10-27T06:21:37.309Z",
+  "user_agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36",
+  "source_mode": "dated public snapshots",
+  "events": [
+    {
+      "type": "fixture_parsed",
+      "at_ms": 451.2999999821186,
+      "elapsed_ms": 100.69999998807907,
+      "bytes": 20294
+    },
+    {
+      "type": "metadata_dom_ready",
+      "at_ms": 455,
+      "elapsed_ms": 3.100000023841858,
+      "cards": 4,
+      "gallery_images": 19,
+      "video_entries": 18
+    },
+    {
+      "type": "youtube_ready",
+      "at_ms": 23979.09999999404,
+      "card_id": "youtube:M7lc1UVf-VE",
+      "video_id": "M7lc1UVf-VE",
+      "elapsed_ms": 710.5999999940395
+    },
+    {
+      "type": "youtube_ready",
+      "at_ms": 46716.79999998212,
+      "card_id": "youtube:M7lc1UVf-VE",
+      "video_id": "M7lc1UVf-VE",
+      "elapsed_ms": 487.59999999403954
+    },
+    {
+      "type": "playback_engine_selected",
+      "at_ms": 49428.59999999404,
+      "card_id": "steam:620",
+      "engine": "hlsjs"
+    },
+    {
+      "type": "hls_library_ready",
+      "at_ms": 49598.89999997616,
+      "version": "1.7.3",
+      "elapsed_ms": 169.69999998807907
+    },
+    {
+      "type": "video_loadedmetadata",
+      "at_ms": 49927.5,
+      "card_id": "steam:620",
+      "video_id": "5787",
+      "current_time": 0,
+      "video_width": 940,
+      "video_height": 529,
+      "engine": "hlsjs",
+      "elapsed_ms": 500.40000000596046
+    },
+    {
+      "type": "video_canplay",
+      "at_ms": 49950.39999997616,
+      "card_id": "steam:620",
+      "video_id": "5787",
+      "current_time": 0,
+      "video_width": 940,
+      "video_height": 529,
+      "engine": "hlsjs",
+      "elapsed_ms": 523.2999999821186
+    },
+    {
+      "type": "video_playing",
+      "at_ms": 75252.39999997616,
+      "card_id": "steam:620",
+      "video_id": "5787",
+      "current_time": 0,
+      "video_width": 940,
+      "video_height": 529,
+      "engine": "hlsjs",
+      "elapsed_ms": 25825.29999998212
+    },
+    {
+      "type": "video_pause",
+      "at_ms": 76099.79999998212,
+      "card_id": "steam:620",
+      "video_id": "5787",
+      "current_time": 0.518938,
+      "video_width": 940,
+      "video_height": 529,
+      "engine": "hlsjs",
+      "elapsed_ms": 26672.69999998808
+    }
+  ],
+  "acceptance": "not a target-project performance comparison",
+  "fixture_sha256": "09bc53f20b0f552b6beae9c5c87c6662f94299ec4cb665b153d9e05196ef0348",
+  "fixture_counts": {
+    "cards": 4,
+    "gallery_images": 19,
+    "video_entries": 18
+  }
+}

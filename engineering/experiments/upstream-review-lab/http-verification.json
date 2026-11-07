@@ -1,0 +1,268 @@
+{
+  "checked_at": "2026-10-27T12:26:03.718055+00:00",
+  "binary_sha256": "3dc74dbb716f0339c2072716564777da55f39b8e76951b924cf6cc850143fc9c",
+  "scope": "One actual public request using copied existing budget; then generated cooldown/interruption states, no further provider requests",
+  "checks": [
+    {
+      "name": "foreign origin rejected",
+      "observed": 403,
+      "expected": 403,
+      "passed": true
+    },
+    {
+      "name": "foreign host rejected",
+      "observed": 403,
+      "expected": 403,
+      "passed": true
+    },
+    {
+      "name": "unknown source rejected",
+      "observed": 400,
+      "expected": 400,
+      "passed": true
+    },
+    {
+      "name": "credential field rejected",
+      "observed": 422,
+      "expected": 422,
+      "passed": true
+    },
+    {
+      "name": "oversize body rejected",
+      "observed": 413,
+      "expected": 413,
+      "passed": true
+    },
+    {
+      "name": "asset status /",
+      "observed": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "asset exact /",
+      "observed": "8831a033e2916b6a4316b81b70cc19b60214408fde128576e85ec79bb0a83052",
+      "expected": "8831a033e2916b6a4316b81b70cc19b60214408fde128576e85ec79bb0a83052",
+      "passed": true
+    },
+    {
+      "name": "asset status /app.js",
+      "observed": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "asset exact /app.js",
+      "observed": "4ab3055b9d57e1e9072fe3d8cc0221bbad72012ade0728f72c03e359211b5286",
+      "expected": "4ab3055b9d57e1e9072fe3d8cc0221bbad72012ade0728f72c03e359211b5286",
+      "passed": true
+    },
+    {
+      "name": "asset status /collection-input.mjs",
+      "observed": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "asset exact /collection-input.mjs",
+      "observed": "df2b0779da3f45159817816293cea82d1d8ff3f366724593a7e4ee23c56ced61",
+      "expected": "df2b0779da3f45159817816293cea82d1d8ff3f366724593a7e4ee23c56ced61",
+      "passed": true
+    },
+    {
+      "name": "asset status /style.css",
+      "observed": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "asset exact /style.css",
+      "observed": "52e404065e4ca824aaed3e8e34b407416656ddd0907aa14df0e5a2ed03bb8f35",
+      "expected": "52e404065e4ca824aaed3e8e34b407416656ddd0907aa14df0e5a2ed03bb8f35",
+      "passed": true
+    },
+    {
+      "name": "fixed job queued",
+      "observed": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "public observation succeeds",
+      "observed": "succeeded",
+      "expected": "succeeded",
+      "passed": true
+    },
+    {
+      "name": "actual selected API version",
+      "observed": "2026-03-10",
+      "expected": "2026-03-10",
+      "passed": true
+    },
+    {
+      "name": "repeat unchanged",
+      "observed": "unchanged",
+      "expected": "unchanged",
+      "passed": true
+    },
+    {
+      "name": "clean server shutdown",
+      "observed": 0,
+      "expected": 0,
+      "passed": true
+    },
+    {
+      "name": "stored full payload hash",
+      "observed": "2a3aa0f30e5d1789cd1a9f34ddce881bf7de74ae91acfc4af42516cd8dd1ff19",
+      "expected": "2a3aa0f30e5d1789cd1a9f34ddce881bf7de74ae91acfc4af42516cd8dd1ff19",
+      "passed": true
+    },
+    {
+      "name": "stored bytes",
+      "observed": 4670,
+      "expected": 4670,
+      "passed": true
+    },
+    {
+      "name": "fixed job queued",
+      "observed": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "persisted cooldown fails without fetching",
+      "observed": "failed",
+      "expected": "failed",
+      "passed": true
+    },
+    {
+      "name": "cooldown state",
+      "observed": "cooldown",
+      "expected": "cooldown",
+      "passed": true
+    },
+    {
+      "name": "clean server shutdown",
+      "observed": 0,
+      "expected": 0,
+      "passed": true
+    },
+    {
+      "name": "cooldown adds no request",
+      "observed": 5,
+      "expected": 5,
+      "passed": true
+    },
+    {
+      "name": "fixed job queued",
+      "observed": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "interrupted reservation fails closed",
+      "observed": "failed",
+      "expected": "failed",
+      "passed": true
+    },
+    {
+      "name": "interruption actionable",
+      "observed": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "clean server shutdown",
+      "observed": 0,
+      "expected": 0,
+      "passed": true
+    },
+    {
+      "name": "gates retain prior snapshots",
+      "observed": 5,
+      "expected": 5,
+      "passed": true
+    },
+    {
+      "name": "interruption adds no request",
+      "observed": 5,
+      "expected": 5,
+      "passed": true
+    },
+    {
+      "name": "SQLite integrity",
+      "observed": "ok",
+      "expected": "ok",
+      "passed": true
+    }
+  ],
+  "completed": true,
+  "public_job": {
+    "attempt": 1,
+    "id": 1,
+    "job": {
+      "ReviewUpstream": {
+        "source": "hls"
+      }
+    },
+    "result": {
+      "upstream_review": {
+        "comparison": "unchanged",
+        "generation": "5",
+        "observed_at_utc": "2026-10-27 12:26:08",
+        "payload_bytes": 4670,
+        "payload_sha256": "2a3aa0f30e5d1789cd1a9f34ddce881bf7de74ae91acfc4af42516cd8dd1ff19",
+        "previous_generation": "4",
+        "provider_timestamp": "2026-09-11T17:40:05Z",
+        "repository": "video-dev/hls.js",
+        "response": {
+          "api_version_requested": "2026-03-10",
+          "api_version_selected": "2026-03-10",
+          "next_allowed_epoch": 1793103969,
+          "rate_limited": false,
+          "remaining": 59,
+          "status": 200
+        },
+        "revision": "v1.7.3",
+        "scope": "Fixed public upstream observation; not registry-newest, installed version, signature verification, security clearance or automatic adoption. Complete original JSON retained locally; no assets downloaded.",
+        "source_id": "hls",
+        "source_url": "https://github.com/video-dev/hls.js/releases/tag/v1.7.3",
+        "timestamp_kind": "release_published_at"
+      }
+    },
+    "state": "succeeded"
+  },
+  "generated_cooldown_job": {
+    "attempt": 1,
+    "id": 2,
+    "job": {
+      "ReviewUpstream": {
+        "source": "hls"
+      }
+    },
+    "result": {
+      "upstream_review": {
+        "error": "Upstream cooldown or local hourly budget active; no network request made",
+        "repository": "video-dev/hls.js",
+        "retry_after_seconds": "300",
+        "scope": "Previous observations retained; no fresh observation or adoption",
+        "source_id": "hls",
+        "state": "cooldown"
+      }
+    },
+    "state": "failed"
+  },
+  "generated_interrupted_job": {
+    "attempt": 1,
+    "id": 3,
+    "job": {
+      "ReviewUpstream": {
+        "source": "hls"
+      }
+    },
+    "result": {
+      "error": "Interrupted upstream request requires manual cooldown reconciliation; no network request made"
+    },
+    "state": "failed"
+  }
+}

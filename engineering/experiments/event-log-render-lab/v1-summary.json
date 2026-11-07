@@ -1,0 +1,38 @@
+{
+  "real-34-events": {
+    "full_history": {
+      "sync_median_ms": 1.7000000178813934,
+      "frame_proxy_median_ms": 1199.5999999940395,
+      "scroll_wait_median_ms": 599.7000000029802,
+      "text_written": 156267,
+      "nodes": 1,
+      "all_output_equal": true
+    },
+    "append": {
+      "sync_median_ms": 0.5999999940395355,
+      "frame_proxy_median_ms": 1216.3999999761581,
+      "scroll_wait_median_ms": 599.8000000119209,
+      "text_written": 8281,
+      "nodes": 36,
+      "all_output_equal": true
+    }
+  },
+  "replay-1088-events": {
+    "full_history": {
+      "sync_median_ms": 529.9000000059605,
+      "frame_proxy_median_ms": 1382.800000011921,
+      "scroll_wait_median_ms": 600.0,
+      "text_written": 144600736,
+      "nodes": 1,
+      "all_output_equal": true
+    },
+    "append": {
+      "sync_median_ms": 10.599999994039536,
+      "frame_proxy_median_ms": 1198.9000000059605,
+      "scroll_wait_median_ms": 599.6999999880791,
+      "text_written": 264899,
+      "nodes": 1090,
+      "all_output_equal": true
+    }
+  }
+}

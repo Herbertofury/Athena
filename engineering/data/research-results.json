@@ -1,0 +1,161 @@
+{
+  "schema_version": 1,
+  "cohorts": [
+    {
+      "id": "swe-bench-pro-v2-full-2026-10-27",
+      "label": "SWE-Bench Pro V2 · Full public",
+      "track": "coding-agent-configurations",
+      "metric": "resolve_rate",
+      "unit": "%",
+      "direction": "higher",
+      "evidence": "external_reported",
+      "description": "Publisher-reported resolve rate; These are complete model/harness/effort configurations. Do not assign their scores to the standalone harness or to the benchmark project.",
+      "protocol": "Network-locked agent phase; pristine-image patch regrading.",
+      "source_url": "https://labs.scale.com/leaderboard/swe_bench_pro_public_v2?tab=full",
+      "observed_at": "2026-10-28",
+      "caveats": [
+        "The source distinguishes budget categories by gray styling; text extraction did not preserve that styling. Budget-normalized comparisons are unavailable.",
+        "Public task exposure remains a limitation.",
+        "Source order is not statistical proof of superiority.",
+        "Not independently reproduced by Atlas. Costs and effort are configuration-specific."
+      ],
+      "benchmark_entry_id": "swe-bench-pro-v2",
+      "budget": null
+    },
+    {
+      "id": "programbench-2026-10-22-observed-2026-10-27",
+      "label": "ProgramBench · Official 200-task leaderboard",
+      "track": "coding-agent-configurations",
+      "metric": "fully_resolved",
+      "unit": "%",
+      "direction": "higher",
+      "evidence": "external_reported",
+      "description": "Publisher-reported fully resolved; All displayed rows use mini-SWE-agent, but model and reasoning configuration still belong to the observation.",
+      "protocol": "mini-SWE-agent; executable and documentation inputs; hidden behavioral tests; restricted source access and networking.",
+      "source_url": "https://programbench.com/",
+      "observed_at": "2026-10-28",
+      "caveats": [
+        "No confidence intervals are provided in the opened table.",
+        "Average API cost is reported, not an imposed common spend limit.",
+        "Exact model snapshots and harness commit must be recovered before Atlas replication.",
+        "Not independently reproduced by Atlas. Costs and effort are configuration-specific."
+      ],
+      "benchmark_entry_id": "programbench",
+      "budget": null
+    }
+  ],
+  "observations": [
+    {
+      "candidate_id": "config-opus-5-claude-code-xhigh",
+      "cohort_id": "swe-bench-pro-v2-full-2026-10-27",
+      "value": 99.4,
+      "subject": "Opus 5 / Claude Code / xhigh",
+      "observed_at": "2026-10-28",
+      "source_url": "https://labs.scale.com/leaderboard/swe_bench_pro_public_v2?tab=full",
+      "note": "Reported 99.4% on SWE-Bench Pro V2 (resolve rate). This scores the complete configuration, not the model or harness independently. Source displays ±0.4; confidence level not captured.",
+      "source_position": 1,
+      "reported_interval_half_width": 0.4,
+      "confidence_level": null,
+      "average_api_cost_usd": null,
+      "atlas_tested": false
+    },
+    {
+      "candidate_id": "config-gemini-4-argon-mini-swe-agent-high",
+      "cohort_id": "swe-bench-pro-v2-full-2026-10-27",
+      "value": 99.22,
+      "subject": "Gemini 4 Argon / mini-swe-agent / high",
+      "observed_at": "2026-10-28",
+      "source_url": "https://labs.scale.com/leaderboard/swe_bench_pro_public_v2?tab=full",
+      "note": "Reported 99.22% on SWE-Bench Pro V2 (resolve rate). This scores the complete configuration, not the model or harness independently. Source displays ±0.45; confidence level not captured.",
+      "source_position": 2,
+      "reported_interval_half_width": 0.45,
+      "confidence_level": null,
+      "average_api_cost_usd": null,
+      "atlas_tested": false
+    },
+    {
+      "candidate_id": "config-fable-5-1-claude-code-high",
+      "cohort_id": "swe-bench-pro-v2-full-2026-10-27",
+      "value": 99.1,
+      "subject": "Fable 5.1 / Claude Code / high",
+      "observed_at": "2026-10-28",
+      "source_url": "https://labs.scale.com/leaderboard/swe_bench_pro_public_v2?tab=full",
+      "note": "Reported 99.1% on SWE-Bench Pro V2 (resolve rate). This scores the complete configuration, not the model or harness independently. Source displays ±0.5; confidence level not captured.",
+      "source_position": 3,
+      "reported_interval_half_width": 0.5,
+      "confidence_level": null,
+      "average_api_cost_usd": null,
+      "atlas_tested": false
+    },
+    {
+      "candidate_id": "config-kimi-k3-mini-swe-agent-max",
+      "cohort_id": "swe-bench-pro-v2-full-2026-10-27",
+      "value": 97.7,
+      "subject": "Kimi-K3 / mini-swe-agent / max",
+      "observed_at": "2026-10-28",
+      "source_url": "https://labs.scale.com/leaderboard/swe_bench_pro_public_v2?tab=full",
+      "note": "Reported 97.7% on SWE-Bench Pro V2 (resolve rate). This scores the complete configuration, not the model or harness independently. Source displays ±0.9; confidence level not captured.",
+      "source_position": 4,
+      "reported_interval_half_width": 0.9,
+      "confidence_level": null,
+      "average_api_cost_usd": null,
+      "atlas_tested": false
+    },
+    {
+      "candidate_id": "config-claude-opus-5-5-mini-swe-agent-xhigh",
+      "cohort_id": "programbench-2026-10-22-observed-2026-10-27",
+      "value": 18.5,
+      "subject": "Claude Opus 5.5 / mini-SWE-agent / xhigh",
+      "observed_at": "2026-10-28",
+      "source_url": "https://programbench.com/",
+      "note": "Reported 18.5% on ProgramBench (fully resolved). This scores the complete configuration, not the model or harness independently. Reported mean API cost: $36.36 per task; not a common cost cap.",
+      "source_position": 1,
+      "reported_interval_half_width": null,
+      "confidence_level": null,
+      "average_api_cost_usd": 36.36,
+      "atlas_tested": false
+    },
+    {
+      "candidate_id": "config-claude-fable-5-1-mini-swe-agent-xhigh",
+      "cohort_id": "programbench-2026-10-22-observed-2026-10-27",
+      "value": 9.0,
+      "subject": "Claude Fable 5.1 / mini-SWE-agent / xhigh",
+      "observed_at": "2026-10-28",
+      "source_url": "https://programbench.com/",
+      "note": "Reported 9.0% on ProgramBench (fully resolved). This scores the complete configuration, not the model or harness independently. Reported mean API cost: $56.84 per task; not a common cost cap.",
+      "source_position": 2,
+      "reported_interval_half_width": null,
+      "confidence_level": null,
+      "average_api_cost_usd": 56.84,
+      "atlas_tested": false
+    },
+    {
+      "candidate_id": "config-muse-wonder-full-mini-swe-agent-unspecified",
+      "cohort_id": "programbench-2026-10-22-observed-2026-10-27",
+      "value": 8.5,
+      "subject": "Muse Wonder Full / mini-SWE-agent / effort unreported",
+      "observed_at": "2026-10-28",
+      "source_url": "https://programbench.com/",
+      "note": "Reported 8.5% on ProgramBench (fully resolved). This scores the complete configuration, not the model or harness independently.",
+      "source_position": 3,
+      "reported_interval_half_width": null,
+      "confidence_level": null,
+      "average_api_cost_usd": null,
+      "atlas_tested": false
+    },
+    {
+      "candidate_id": "config-muse-wonder-mini-swe-agent-xhigh",
+      "cohort_id": "programbench-2026-10-22-observed-2026-10-27",
+      "value": 5.5,
+      "subject": "Muse Wonder / mini-SWE-agent / xhigh",
+      "observed_at": "2026-10-28",
+      "source_url": "https://programbench.com/",
+      "note": "Reported 5.5% on ProgramBench (fully resolved). This scores the complete configuration, not the model or harness independently. Reported mean API cost: $36.53 per task; not a common cost cap.",
+      "source_position": 4,
+      "reported_interval_half_width": null,
+      "confidence_level": null,
+      "average_api_cost_usd": 36.53,
+      "atlas_tested": false
+    }
+  ]
+}

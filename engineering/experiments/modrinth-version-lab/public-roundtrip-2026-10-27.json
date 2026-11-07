@@ -1,0 +1,51 @@
+{
+  "observed_at": "2026-10-27T05:48:25.862972+00:00",
+  "scope": "real public API metadata; no file downloads, no authentication; not UI acceptance",
+  "versions": [
+    {
+      "id": "Ag5S66CF",
+      "project_id": "YL57xq9U",
+      "payload_bytes": 962,
+      "payload_sha256": "bff95882cb0e003ece9e007aaa2ac2af8a72a8e286f276326832f8f59ef87571",
+      "exact_serialized_payload_preserved": true,
+      "file_count": 1,
+      "dependency_count": 1,
+      "game_version_count": 1,
+      "loader_count": 1
+    },
+    {
+      "id": "g6ju16VJ",
+      "project_id": "AANobbMI",
+      "payload_bytes": 1894,
+      "payload_sha256": "14246a8756f2d70400a680ad2a4eaab4c92ffe42c644839702542857d55a7eb8",
+      "exact_serialized_payload_preserved": true,
+      "file_count": 1,
+      "dependency_count": 0,
+      "game_version_count": 1,
+      "loader_count": 1
+    },
+    {
+      "id": "1rb9wI5K",
+      "project_id": "gvQqBUqZ",
+      "payload_bytes": 1600,
+      "payload_sha256": "9c7011ca9a0ead246b4b9d37aa768e446ae8e35ea1cba68d96feb6e2f0994724",
+      "exact_serialized_payload_preserved": true,
+      "file_count": 1,
+      "dependency_count": 0,
+      "game_version_count": 1,
+      "loader_count": 1
+    }
+  ],
+  "missing_ids": [
+    "00000000"
+  ],
+  "previous_generations_retained": true,
+  "attempts": 4,
+  "integrity_check": "ok",
+  "binary_sha256": "1abb4383673fe2ba4a27a4bec64fc83e84e07a0dfbd7360154eb7cd326ca8f60",
+  "limitations": [
+    "No speed comparison to prior application: version metadata collection was absent",
+    "No file-content verification or media playback",
+    "No queue or browser form coverage for this CLI-only lane"
+  ]
+}

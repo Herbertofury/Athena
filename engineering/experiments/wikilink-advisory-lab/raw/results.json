@@ -1,0 +1,1034 @@
+{
+  "checked_at": "2026-10-28T09:09:42.039613+00:00",
+  "scope": "Local generated event-count regression; no service, memory-exhaustion attempt, general speed ranking or complete Markdown correctness claim",
+  "budgets": {
+    "address_space_bytes_per_child": 134217728,
+    "cpu_seconds_per_child": 2,
+    "wall_seconds_per_child": 3,
+    "maximum_events": 500000,
+    "maximum_input_bytes": 112
+  },
+  "samples": [
+    {
+      "repeat": 0,
+      "repetitions": 1,
+      "wikilinks": "off",
+      "version": "0.13.4",
+      "exit_code": 0,
+      "executable_sha256": "2485ee2e6f0d197ef5180de3fd784b5641ef1ee0cf26b0e68fe6fde8866a0634",
+      "raw_file": "0-1-off-before.stdout",
+      "result": {
+        "repetitions": 1,
+        "input_bytes": 7,
+        "wikilinks": false,
+        "event_count": 7,
+        "event_cap_reached": false,
+        "elapsed_ns": 74744
+      }
+    },
+    {
+      "repeat": 0,
+      "repetitions": 1,
+      "wikilinks": "off",
+      "version": "0.13.5",
+      "exit_code": 0,
+      "executable_sha256": "03b4bfa26f3da646b78fafc4eb4f2276e374036055645e06962d6208c4e1eb13",
+      "raw_file": "0-1-off-after.stdout",
+      "result": {
+        "repetitions": 1,
+        "input_bytes": 7,
+        "wikilinks": false,
+        "event_count": 7,
+        "event_cap_reached": false,
+        "elapsed_ns": 73655
+      }
+    },
+    {
+      "repeat": 0,
+      "repetitions": 1,
+      "wikilinks": "on",
+      "version": "0.13.4",
+      "exit_code": 0,
+      "executable_sha256": "2485ee2e6f0d197ef5180de3fd784b5641ef1ee0cf26b0e68fe6fde8866a0634",
+      "raw_file": "0-1-on-before.stdout",
+      "result": {
+        "repetitions": 1,
+        "input_bytes": 7,
+        "wikilinks": true,
+        "event_count": 6,
+        "event_cap_reached": false,
+        "elapsed_ns": 34685
+      }
+    },
+    {
+      "repeat": 0,
+      "repetitions": 1,
+      "wikilinks": "on",
+      "version": "0.13.5",
+      "exit_code": 0,
+      "executable_sha256": "03b4bfa26f3da646b78fafc4eb4f2276e374036055645e06962d6208c4e1eb13",
+      "raw_file": "0-1-on-after.stdout",
+      "result": {
+        "repetitions": 1,
+        "input_bytes": 7,
+        "wikilinks": true,
+        "event_count": 5,
+        "event_cap_reached": false,
+        "elapsed_ns": 59181
+      }
+    },
+    {
+      "repeat": 0,
+      "repetitions": 4,
+      "wikilinks": "off",
+      "version": "0.13.4",
+      "exit_code": 0,
+      "executable_sha256": "2485ee2e6f0d197ef5180de3fd784b5641ef1ee0cf26b0e68fe6fde8866a0634",
+      "raw_file": "0-4-off-before.stdout",
+      "result": {
+        "repetitions": 4,
+        "input_bytes": 28,
+        "wikilinks": false,
+        "event_count": 25,
+        "event_cap_reached": false,
+        "elapsed_ns": 32980
+      }
+    },
+    {
+      "repeat": 0,
+      "repetitions": 4,
+      "wikilinks": "off",
+      "version": "0.13.5",
+      "exit_code": 0,
+      "executable_sha256": "03b4bfa26f3da646b78fafc4eb4f2276e374036055645e06962d6208c4e1eb13",
+      "raw_file": "0-4-off-after.stdout",
+      "result": {
+        "repetitions": 4,
+        "input_bytes": 28,
+        "wikilinks": false,
+        "event_count": 25,
+        "event_cap_reached": false,
+        "elapsed_ns": 35327
+      }
+    },
+    {
+      "repeat": 0,
+      "repetitions": 4,
+      "wikilinks": "on",
+      "version": "0.13.4",
+      "exit_code": 0,
+      "executable_sha256": "2485ee2e6f0d197ef5180de3fd784b5641ef1ee0cf26b0e68fe6fde8866a0634",
+      "raw_file": "0-4-on-before.stdout",
+      "result": {
+        "repetitions": 4,
+        "input_bytes": 28,
+        "wikilinks": true,
+        "event_count": 76,
+        "event_cap_reached": false,
+        "elapsed_ns": 29659
+      }
+    },
+    {
+      "repeat": 0,
+      "repetitions": 4,
+      "wikilinks": "on",
+      "version": "0.13.5",
+      "exit_code": 0,
+      "executable_sha256": "03b4bfa26f3da646b78fafc4eb4f2276e374036055645e06962d6208c4e1eb13",
+      "raw_file": "0-4-on-after.stdout",
+      "result": {
+        "repetitions": 4,
+        "input_bytes": 28,
+        "wikilinks": true,
+        "event_count": 17,
+        "event_cap_reached": false,
+        "elapsed_ns": 99142
+      }
+    },
+    {
+      "repeat": 0,
+      "repetitions": 8,
+      "wikilinks": "off",
+      "version": "0.13.4",
+      "exit_code": 0,
+      "executable_sha256": "2485ee2e6f0d197ef5180de3fd784b5641ef1ee0cf26b0e68fe6fde8866a0634",
+      "raw_file": "0-8-off-before.stdout",
+      "result": {
+        "repetitions": 8,
+        "input_bytes": 56,
+        "wikilinks": false,
+        "event_count": 49,
+        "event_cap_reached": false,
+        "elapsed_ns": 31597
+      }
+    },
+    {
+      "repeat": 0,
+      "repetitions": 8,
+      "wikilinks": "off",
+      "version": "0.13.5",
+      "exit_code": 0,
+      "executable_sha256": "03b4bfa26f3da646b78fafc4eb4f2276e374036055645e06962d6208c4e1eb13",
+      "raw_file": "0-8-off-after.stdout",
+      "result": {
+        "repetitions": 8,
+        "input_bytes": 56,
+        "wikilinks": false,
+        "event_count": 49,
+        "event_cap_reached": false,
+        "elapsed_ns": 35206
+      }
+    },
+    {
+      "repeat": 0,
+      "repetitions": 8,
+      "wikilinks": "on",
+      "version": "0.13.4",
+      "exit_code": 0,
+      "executable_sha256": "2485ee2e6f0d197ef5180de3fd784b5641ef1ee0cf26b0e68fe6fde8866a0634",
+      "raw_file": "0-8-on-before.stdout",
+      "result": {
+        "repetitions": 8,
+        "input_bytes": 56,
+        "wikilinks": true,
+        "event_count": 1276,
+        "event_cap_reached": false,
+        "elapsed_ns": 55397
+      }
+    },
+    {
+      "repeat": 0,
+      "repetitions": 8,
+      "wikilinks": "on",
+      "version": "0.13.5",
+      "exit_code": 0,
+      "executable_sha256": "03b4bfa26f3da646b78fafc4eb4f2276e374036055645e06962d6208c4e1eb13",
+      "raw_file": "0-8-on-after.stdout",
+      "result": {
+        "repetitions": 8,
+        "input_bytes": 56,
+        "wikilinks": true,
+        "event_count": 33,
+        "event_cap_reached": false,
+        "elapsed_ns": 32341
+      }
+    },
+    {
+      "repeat": 0,
+      "repetitions": 12,
+      "wikilinks": "off",
+      "version": "0.13.4",
+      "exit_code": 0,
+      "executable_sha256": "2485ee2e6f0d197ef5180de3fd784b5641ef1ee0cf26b0e68fe6fde8866a0634",
+      "raw_file": "0-12-off-before.stdout",
+      "result": {
+        "repetitions": 12,
+        "input_bytes": 84,
+        "wikilinks": false,
+        "event_count": 73,
+        "event_cap_reached": false,
+        "elapsed_ns": 33573
+      }
+    },
+    {
+      "repeat": 0,
+      "repetitions": 12,
+      "wikilinks": "off",
+      "version": "0.13.5",
+      "exit_code": 0,
+      "executable_sha256": "03b4bfa26f3da646b78fafc4eb4f2276e374036055645e06962d6208c4e1eb13",
+      "raw_file": "0-12-off-after.stdout",
+      "result": {
+        "repetitions": 12,
+        "input_bytes": 84,
+        "wikilinks": false,
+        "event_count": 73,
+        "event_cap_reached": false,
+        "elapsed_ns": 33173
+      }
+    },
+    {
+      "repeat": 0,
+      "repetitions": 12,
+      "wikilinks": "on",
+      "version": "0.13.4",
+      "exit_code": 0,
+      "executable_sha256": "2485ee2e6f0d197ef5180de3fd784b5641ef1ee0cf26b0e68fe6fde8866a0634",
+      "raw_file": "0-12-on-before.stdout",
+      "result": {
+        "repetitions": 12,
+        "input_bytes": 84,
+        "wikilinks": true,
+        "event_count": 20476,
+        "event_cap_reached": false,
+        "elapsed_ns": 1355955
+      }
+    },
+    {
+      "repeat": 0,
+      "repetitions": 12,
+      "wikilinks": "on",
+      "version": "0.13.5",
+      "exit_code": 0,
+      "executable_sha256": "03b4bfa26f3da646b78fafc4eb4f2276e374036055645e06962d6208c4e1eb13",
+      "raw_file": "0-12-on-after.stdout",
+      "result": {
+        "repetitions": 12,
+        "input_bytes": 84,
+        "wikilinks": true,
+        "event_count": 49,
+        "event_cap_reached": false,
+        "elapsed_ns": 33027
+      }
+    },
+    {
+      "repeat": 0,
+      "repetitions": 16,
+      "wikilinks": "off",
+      "version": "0.13.4",
+      "exit_code": 0,
+      "executable_sha256": "2485ee2e6f0d197ef5180de3fd784b5641ef1ee0cf26b0e68fe6fde8866a0634",
+      "raw_file": "0-16-off-before.stdout",
+      "result": {
+        "repetitions": 16,
+        "input_bytes": 112,
+        "wikilinks": false,
+        "event_count": 97,
+        "event_cap_reached": false,
+        "elapsed_ns": 33811
+      }
+    },
+    {
+      "repeat": 0,
+      "repetitions": 16,
+      "wikilinks": "off",
+      "version": "0.13.5",
+      "exit_code": 0,
+      "executable_sha256": "03b4bfa26f3da646b78fafc4eb4f2276e374036055645e06962d6208c4e1eb13",
+      "raw_file": "0-16-off-after.stdout",
+      "result": {
+        "repetitions": 16,
+        "input_bytes": 112,
+        "wikilinks": false,
+        "event_count": 97,
+        "event_cap_reached": false,
+        "elapsed_ns": 130907
+      }
+    },
+    {
+      "repeat": 0,
+      "repetitions": 16,
+      "wikilinks": "on",
+      "version": "0.13.4",
+      "exit_code": 0,
+      "executable_sha256": "2485ee2e6f0d197ef5180de3fd784b5641ef1ee0cf26b0e68fe6fde8866a0634",
+      "raw_file": "0-16-on-before.stdout",
+      "result": {
+        "repetitions": 16,
+        "input_bytes": 112,
+        "wikilinks": true,
+        "event_count": 327676,
+        "event_cap_reached": false,
+        "elapsed_ns": 9755230
+      }
+    },
+    {
+      "repeat": 0,
+      "repetitions": 16,
+      "wikilinks": "on",
+      "version": "0.13.5",
+      "exit_code": 0,
+      "executable_sha256": "03b4bfa26f3da646b78fafc4eb4f2276e374036055645e06962d6208c4e1eb13",
+      "raw_file": "0-16-on-after.stdout",
+      "result": {
+        "repetitions": 16,
+        "input_bytes": 112,
+        "wikilinks": true,
+        "event_count": 65,
+        "event_cap_reached": false,
+        "elapsed_ns": 34205
+      }
+    },
+    {
+      "repeat": 1,
+      "repetitions": 1,
+      "wikilinks": "off",
+      "version": "0.13.5",
+      "exit_code": 0,
+      "executable_sha256": "03b4bfa26f3da646b78fafc4eb4f2276e374036055645e06962d6208c4e1eb13",
+      "raw_file": "1-1-off-after.stdout",
+      "result": {
+        "repetitions": 1,
+        "input_bytes": 7,
+        "wikilinks": false,
+        "event_count": 7,
+        "event_cap_reached": false,
+        "elapsed_ns": 29482
+      }
+    },
+    {
+      "repeat": 1,
+      "repetitions": 1,
+      "wikilinks": "off",
+      "version": "0.13.4",
+      "exit_code": 0,
+      "executable_sha256": "2485ee2e6f0d197ef5180de3fd784b5641ef1ee0cf26b0e68fe6fde8866a0634",
+      "raw_file": "1-1-off-before.stdout",
+      "result": {
+        "repetitions": 1,
+        "input_bytes": 7,
+        "wikilinks": false,
+        "event_count": 7,
+        "event_cap_reached": false,
+        "elapsed_ns": 29606
+      }
+    },
+    {
+      "repeat": 1,
+      "repetitions": 1,
+      "wikilinks": "on",
+      "version": "0.13.5",
+      "exit_code": 0,
+      "executable_sha256": "03b4bfa26f3da646b78fafc4eb4f2276e374036055645e06962d6208c4e1eb13",
+      "raw_file": "1-1-on-after.stdout",
+      "result": {
+        "repetitions": 1,
+        "input_bytes": 7,
+        "wikilinks": true,
+        "event_count": 5,
+        "event_cap_reached": false,
+        "elapsed_ns": 27369
+      }
+    },
+    {
+      "repeat": 1,
+      "repetitions": 1,
+      "wikilinks": "on",
+      "version": "0.13.4",
+      "exit_code": 0,
+      "executable_sha256": "2485ee2e6f0d197ef5180de3fd784b5641ef1ee0cf26b0e68fe6fde8866a0634",
+      "raw_file": "1-1-on-before.stdout",
+      "result": {
+        "repetitions": 1,
+        "input_bytes": 7,
+        "wikilinks": true,
+        "event_count": 6,
+        "event_cap_reached": false,
+        "elapsed_ns": 26389
+      }
+    },
+    {
+      "repeat": 1,
+      "repetitions": 4,
+      "wikilinks": "off",
+      "version": "0.13.5",
+      "exit_code": 0,
+      "executable_sha256": "03b4bfa26f3da646b78fafc4eb4f2276e374036055645e06962d6208c4e1eb13",
+      "raw_file": "1-4-off-after.stdout",
+      "result": {
+        "repetitions": 4,
+        "input_bytes": 28,
+        "wikilinks": false,
+        "event_count": 25,
+        "event_cap_reached": false,
+        "elapsed_ns": 31013
+      }
+    },
+    {
+      "repeat": 1,
+      "repetitions": 4,
+      "wikilinks": "off",
+      "version": "0.13.4",
+      "exit_code": 0,
+      "executable_sha256": "2485ee2e6f0d197ef5180de3fd784b5641ef1ee0cf26b0e68fe6fde8866a0634",
+      "raw_file": "1-4-off-before.stdout",
+      "result": {
+        "repetitions": 4,
+        "input_bytes": 28,
+        "wikilinks": false,
+        "event_count": 25,
+        "event_cap_reached": false,
+        "elapsed_ns": 370929
+      }
+    },
+    {
+      "repeat": 1,
+      "repetitions": 4,
+      "wikilinks": "on",
+      "version": "0.13.5",
+      "exit_code": 0,
+      "executable_sha256": "03b4bfa26f3da646b78fafc4eb4f2276e374036055645e06962d6208c4e1eb13",
+      "raw_file": "1-4-on-after.stdout",
+      "result": {
+        "repetitions": 4,
+        "input_bytes": 28,
+        "wikilinks": true,
+        "event_count": 17,
+        "event_cap_reached": false,
+        "elapsed_ns": 33710
+      }
+    },
+    {
+      "repeat": 1,
+      "repetitions": 4,
+      "wikilinks": "on",
+      "version": "0.13.4",
+      "exit_code": 0,
+      "executable_sha256": "2485ee2e6f0d197ef5180de3fd784b5641ef1ee0cf26b0e68fe6fde8866a0634",
+      "raw_file": "1-4-on-before.stdout",
+      "result": {
+        "repetitions": 4,
+        "input_bytes": 28,
+        "wikilinks": true,
+        "event_count": 76,
+        "event_cap_reached": false,
+        "elapsed_ns": 32767
+      }
+    },
+    {
+      "repeat": 1,
+      "repetitions": 8,
+      "wikilinks": "off",
+      "version": "0.13.5",
+      "exit_code": 0,
+      "executable_sha256": "03b4bfa26f3da646b78fafc4eb4f2276e374036055645e06962d6208c4e1eb13",
+      "raw_file": "1-8-off-after.stdout",
+      "result": {
+        "repetitions": 8,
+        "input_bytes": 56,
+        "wikilinks": false,
+        "event_count": 49,
+        "event_cap_reached": false,
+        "elapsed_ns": 428463
+      }
+    },
+    {
+      "repeat": 1,
+      "repetitions": 8,
+      "wikilinks": "off",
+      "version": "0.13.4",
+      "exit_code": 0,
+      "executable_sha256": "2485ee2e6f0d197ef5180de3fd784b5641ef1ee0cf26b0e68fe6fde8866a0634",
+      "raw_file": "1-8-off-before.stdout",
+      "result": {
+        "repetitions": 8,
+        "input_bytes": 56,
+        "wikilinks": false,
+        "event_count": 49,
+        "event_cap_reached": false,
+        "elapsed_ns": 31509
+      }
+    },
+    {
+      "repeat": 1,
+      "repetitions": 8,
+      "wikilinks": "on",
+      "version": "0.13.5",
+      "exit_code": 0,
+      "executable_sha256": "03b4bfa26f3da646b78fafc4eb4f2276e374036055645e06962d6208c4e1eb13",
+      "raw_file": "1-8-on-after.stdout",
+      "result": {
+        "repetitions": 8,
+        "input_bytes": 56,
+        "wikilinks": true,
+        "event_count": 33,
+        "event_cap_reached": false,
+        "elapsed_ns": 35530
+      }
+    },
+    {
+      "repeat": 1,
+      "repetitions": 8,
+      "wikilinks": "on",
+      "version": "0.13.4",
+      "exit_code": 0,
+      "executable_sha256": "2485ee2e6f0d197ef5180de3fd784b5641ef1ee0cf26b0e68fe6fde8866a0634",
+      "raw_file": "1-8-on-before.stdout",
+      "result": {
+        "repetitions": 8,
+        "input_bytes": 56,
+        "wikilinks": true,
+        "event_count": 1276,
+        "event_cap_reached": false,
+        "elapsed_ns": 56672
+      }
+    },
+    {
+      "repeat": 1,
+      "repetitions": 12,
+      "wikilinks": "off",
+      "version": "0.13.5",
+      "exit_code": 0,
+      "executable_sha256": "03b4bfa26f3da646b78fafc4eb4f2276e374036055645e06962d6208c4e1eb13",
+      "raw_file": "1-12-off-after.stdout",
+      "result": {
+        "repetitions": 12,
+        "input_bytes": 84,
+        "wikilinks": false,
+        "event_count": 73,
+        "event_cap_reached": false,
+        "elapsed_ns": 33908
+      }
+    },
+    {
+      "repeat": 1,
+      "repetitions": 12,
+      "wikilinks": "off",
+      "version": "0.13.4",
+      "exit_code": 0,
+      "executable_sha256": "2485ee2e6f0d197ef5180de3fd784b5641ef1ee0cf26b0e68fe6fde8866a0634",
+      "raw_file": "1-12-off-before.stdout",
+      "result": {
+        "repetitions": 12,
+        "input_bytes": 84,
+        "wikilinks": false,
+        "event_count": 73,
+        "event_cap_reached": false,
+        "elapsed_ns": 299663
+      }
+    },
+    {
+      "repeat": 1,
+      "repetitions": 12,
+      "wikilinks": "on",
+      "version": "0.13.5",
+      "exit_code": 0,
+      "executable_sha256": "03b4bfa26f3da646b78fafc4eb4f2276e374036055645e06962d6208c4e1eb13",
+      "raw_file": "1-12-on-after.stdout",
+      "result": {
+        "repetitions": 12,
+        "input_bytes": 84,
+        "wikilinks": true,
+        "event_count": 49,
+        "event_cap_reached": false,
+        "elapsed_ns": 33772
+      }
+    },
+    {
+      "repeat": 1,
+      "repetitions": 12,
+      "wikilinks": "on",
+      "version": "0.13.4",
+      "exit_code": 0,
+      "executable_sha256": "2485ee2e6f0d197ef5180de3fd784b5641ef1ee0cf26b0e68fe6fde8866a0634",
+      "raw_file": "1-12-on-before.stdout",
+      "result": {
+        "repetitions": 12,
+        "input_bytes": 84,
+        "wikilinks": true,
+        "event_count": 20476,
+        "event_cap_reached": false,
+        "elapsed_ns": 406680
+      }
+    },
+    {
+      "repeat": 1,
+      "repetitions": 16,
+      "wikilinks": "off",
+      "version": "0.13.5",
+      "exit_code": 0,
+      "executable_sha256": "03b4bfa26f3da646b78fafc4eb4f2276e374036055645e06962d6208c4e1eb13",
+      "raw_file": "1-16-off-after.stdout",
+      "result": {
+        "repetitions": 16,
+        "input_bytes": 112,
+        "wikilinks": false,
+        "event_count": 97,
+        "event_cap_reached": false,
+        "elapsed_ns": 34311
+      }
+    },
+    {
+      "repeat": 1,
+      "repetitions": 16,
+      "wikilinks": "off",
+      "version": "0.13.4",
+      "exit_code": 0,
+      "executable_sha256": "2485ee2e6f0d197ef5180de3fd784b5641ef1ee0cf26b0e68fe6fde8866a0634",
+      "raw_file": "1-16-off-before.stdout",
+      "result": {
+        "repetitions": 16,
+        "input_bytes": 112,
+        "wikilinks": false,
+        "event_count": 97,
+        "event_cap_reached": false,
+        "elapsed_ns": 36248
+      }
+    },
+    {
+      "repeat": 1,
+      "repetitions": 16,
+      "wikilinks": "on",
+      "version": "0.13.5",
+      "exit_code": 0,
+      "executable_sha256": "03b4bfa26f3da646b78fafc4eb4f2276e374036055645e06962d6208c4e1eb13",
+      "raw_file": "1-16-on-after.stdout",
+      "result": {
+        "repetitions": 16,
+        "input_bytes": 112,
+        "wikilinks": true,
+        "event_count": 65,
+        "event_cap_reached": false,
+        "elapsed_ns": 35791
+      }
+    },
+    {
+      "repeat": 1,
+      "repetitions": 16,
+      "wikilinks": "on",
+      "version": "0.13.4",
+      "exit_code": 0,
+      "executable_sha256": "2485ee2e6f0d197ef5180de3fd784b5641ef1ee0cf26b0e68fe6fde8866a0634",
+      "raw_file": "1-16-on-before.stdout",
+      "result": {
+        "repetitions": 16,
+        "input_bytes": 112,
+        "wikilinks": true,
+        "event_count": 327676,
+        "event_cap_reached": false,
+        "elapsed_ns": 10508395
+      }
+    },
+    {
+      "repeat": 2,
+      "repetitions": 1,
+      "wikilinks": "off",
+      "version": "0.13.4",
+      "exit_code": 0,
+      "executable_sha256": "2485ee2e6f0d197ef5180de3fd784b5641ef1ee0cf26b0e68fe6fde8866a0634",
+      "raw_file": "2-1-off-before.stdout",
+      "result": {
+        "repetitions": 1,
+        "input_bytes": 7,
+        "wikilinks": false,
+        "event_count": 7,
+        "event_cap_reached": false,
+        "elapsed_ns": 29656
+      }
+    },
+    {
+      "repeat": 2,
+      "repetitions": 1,
+      "wikilinks": "off",
+      "version": "0.13.5",
+      "exit_code": 0,
+      "executable_sha256": "03b4bfa26f3da646b78fafc4eb4f2276e374036055645e06962d6208c4e1eb13",
+      "raw_file": "2-1-off-after.stdout",
+      "result": {
+        "repetitions": 1,
+        "input_bytes": 7,
+        "wikilinks": false,
+        "event_count": 7,
+        "event_cap_reached": false,
+        "elapsed_ns": 635781
+      }
+    },
+    {
+      "repeat": 2,
+      "repetitions": 1,
+      "wikilinks": "on",
+      "version": "0.13.4",
+      "exit_code": 0,
+      "executable_sha256": "2485ee2e6f0d197ef5180de3fd784b5641ef1ee0cf26b0e68fe6fde8866a0634",
+      "raw_file": "2-1-on-before.stdout",
+      "result": {
+        "repetitions": 1,
+        "input_bytes": 7,
+        "wikilinks": true,
+        "event_count": 6,
+        "event_cap_reached": false,
+        "elapsed_ns": 31633
+      }
+    },
+    {
+      "repeat": 2,
+      "repetitions": 1,
+      "wikilinks": "on",
+      "version": "0.13.5",
+      "exit_code": 0,
+      "executable_sha256": "03b4bfa26f3da646b78fafc4eb4f2276e374036055645e06962d6208c4e1eb13",
+      "raw_file": "2-1-on-after.stdout",
+      "result": {
+        "repetitions": 1,
+        "input_bytes": 7,
+        "wikilinks": true,
+        "event_count": 5,
+        "event_cap_reached": false,
+        "elapsed_ns": 61549
+      }
+    },
+    {
+      "repeat": 2,
+      "repetitions": 4,
+      "wikilinks": "off",
+      "version": "0.13.4",
+      "exit_code": 0,
+      "executable_sha256": "2485ee2e6f0d197ef5180de3fd784b5641ef1ee0cf26b0e68fe6fde8866a0634",
+      "raw_file": "2-4-off-before.stdout",
+      "result": {
+        "repetitions": 4,
+        "input_bytes": 28,
+        "wikilinks": false,
+        "event_count": 25,
+        "event_cap_reached": false,
+        "elapsed_ns": 30620
+      }
+    },
+    {
+      "repeat": 2,
+      "repetitions": 4,
+      "wikilinks": "off",
+      "version": "0.13.5",
+      "exit_code": 0,
+      "executable_sha256": "03b4bfa26f3da646b78fafc4eb4f2276e374036055645e06962d6208c4e1eb13",
+      "raw_file": "2-4-off-after.stdout",
+      "result": {
+        "repetitions": 4,
+        "input_bytes": 28,
+        "wikilinks": false,
+        "event_count": 25,
+        "event_cap_reached": false,
+        "elapsed_ns": 32731
+      }
+    },
+    {
+      "repeat": 2,
+      "repetitions": 4,
+      "wikilinks": "on",
+      "version": "0.13.4",
+      "exit_code": 0,
+      "executable_sha256": "2485ee2e6f0d197ef5180de3fd784b5641ef1ee0cf26b0e68fe6fde8866a0634",
+      "raw_file": "2-4-on-before.stdout",
+      "result": {
+        "repetitions": 4,
+        "input_bytes": 28,
+        "wikilinks": true,
+        "event_count": 76,
+        "event_cap_reached": false,
+        "elapsed_ns": 30659
+      }
+    },
+    {
+      "repeat": 2,
+      "repetitions": 4,
+      "wikilinks": "on",
+      "version": "0.13.5",
+      "exit_code": 0,
+      "executable_sha256": "03b4bfa26f3da646b78fafc4eb4f2276e374036055645e06962d6208c4e1eb13",
+      "raw_file": "2-4-on-after.stdout",
+      "result": {
+        "repetitions": 4,
+        "input_bytes": 28,
+        "wikilinks": true,
+        "event_count": 17,
+        "event_cap_reached": false,
+        "elapsed_ns": 31156
+      }
+    },
+    {
+      "repeat": 2,
+      "repetitions": 8,
+      "wikilinks": "off",
+      "version": "0.13.4",
+      "exit_code": 0,
+      "executable_sha256": "2485ee2e6f0d197ef5180de3fd784b5641ef1ee0cf26b0e68fe6fde8866a0634",
+      "raw_file": "2-8-off-before.stdout",
+      "result": {
+        "repetitions": 8,
+        "input_bytes": 56,
+        "wikilinks": false,
+        "event_count": 49,
+        "event_cap_reached": false,
+        "elapsed_ns": 32571
+      }
+    },
+    {
+      "repeat": 2,
+      "repetitions": 8,
+      "wikilinks": "off",
+      "version": "0.13.5",
+      "exit_code": 0,
+      "executable_sha256": "03b4bfa26f3da646b78fafc4eb4f2276e374036055645e06962d6208c4e1eb13",
+      "raw_file": "2-8-off-after.stdout",
+      "result": {
+        "repetitions": 8,
+        "input_bytes": 56,
+        "wikilinks": false,
+        "event_count": 49,
+        "event_cap_reached": false,
+        "elapsed_ns": 34483
+      }
+    },
+    {
+      "repeat": 2,
+      "repetitions": 8,
+      "wikilinks": "on",
+      "version": "0.13.4",
+      "exit_code": 0,
+      "executable_sha256": "2485ee2e6f0d197ef5180de3fd784b5641ef1ee0cf26b0e68fe6fde8866a0634",
+      "raw_file": "2-8-on-before.stdout",
+      "result": {
+        "repetitions": 8,
+        "input_bytes": 56,
+        "wikilinks": true,
+        "event_count": 1276,
+        "event_cap_reached": false,
+        "elapsed_ns": 55788
+      }
+    },
+    {
+      "repeat": 2,
+      "repetitions": 8,
+      "wikilinks": "on",
+      "version": "0.13.5",
+      "exit_code": 0,
+      "executable_sha256": "03b4bfa26f3da646b78fafc4eb4f2276e374036055645e06962d6208c4e1eb13",
+      "raw_file": "2-8-on-after.stdout",
+      "result": {
+        "repetitions": 8,
+        "input_bytes": 56,
+        "wikilinks": true,
+        "event_count": 33,
+        "event_cap_reached": false,
+        "elapsed_ns": 34360
+      }
+    },
+    {
+      "repeat": 2,
+      "repetitions": 12,
+      "wikilinks": "off",
+      "version": "0.13.4",
+      "exit_code": 0,
+      "executable_sha256": "2485ee2e6f0d197ef5180de3fd784b5641ef1ee0cf26b0e68fe6fde8866a0634",
+      "raw_file": "2-12-off-before.stdout",
+      "result": {
+        "repetitions": 12,
+        "input_bytes": 84,
+        "wikilinks": false,
+        "event_count": 73,
+        "event_cap_reached": false,
+        "elapsed_ns": 38495
+      }
+    },
+    {
+      "repeat": 2,
+      "repetitions": 12,
+      "wikilinks": "off",
+      "version": "0.13.5",
+      "exit_code": 0,
+      "executable_sha256": "03b4bfa26f3da646b78fafc4eb4f2276e374036055645e06962d6208c4e1eb13",
+      "raw_file": "2-12-off-after.stdout",
+      "result": {
+        "repetitions": 12,
+        "input_bytes": 84,
+        "wikilinks": false,
+        "event_count": 73,
+        "event_cap_reached": false,
+        "elapsed_ns": 33168
+      }
+    },
+    {
+      "repeat": 2,
+      "repetitions": 12,
+      "wikilinks": "on",
+      "version": "0.13.4",
+      "exit_code": 0,
+      "executable_sha256": "2485ee2e6f0d197ef5180de3fd784b5641ef1ee0cf26b0e68fe6fde8866a0634",
+      "raw_file": "2-12-on-before.stdout",
+      "result": {
+        "repetitions": 12,
+        "input_bytes": 84,
+        "wikilinks": true,
+        "event_count": 20476,
+        "event_cap_reached": false,
+        "elapsed_ns": 403605
+      }
+    },
+    {
+      "repeat": 2,
+      "repetitions": 12,
+      "wikilinks": "on",
+      "version": "0.13.5",
+      "exit_code": 0,
+      "executable_sha256": "03b4bfa26f3da646b78fafc4eb4f2276e374036055645e06962d6208c4e1eb13",
+      "raw_file": "2-12-on-after.stdout",
+      "result": {
+        "repetitions": 12,
+        "input_bytes": 84,
+        "wikilinks": true,
+        "event_count": 49,
+        "event_cap_reached": false,
+        "elapsed_ns": 33862
+      }
+    },
+    {
+      "repeat": 2,
+      "repetitions": 16,
+      "wikilinks": "off",
+      "version": "0.13.4",
+      "exit_code": 0,
+      "executable_sha256": "2485ee2e6f0d197ef5180de3fd784b5641ef1ee0cf26b0e68fe6fde8866a0634",
+      "raw_file": "2-16-off-before.stdout",
+      "result": {
+        "repetitions": 16,
+        "input_bytes": 112,
+        "wikilinks": false,
+        "event_count": 97,
+        "event_cap_reached": false,
+        "elapsed_ns": 33226
+      }
+    },
+    {
+      "repeat": 2,
+      "repetitions": 16,
+      "wikilinks": "off",
+      "version": "0.13.5",
+      "exit_code": 0,
+      "executable_sha256": "03b4bfa26f3da646b78fafc4eb4f2276e374036055645e06962d6208c4e1eb13",
+      "raw_file": "2-16-off-after.stdout",
+      "result": {
+        "repetitions": 16,
+        "input_bytes": 112,
+        "wikilinks": false,
+        "event_count": 97,
+        "event_cap_reached": false,
+        "elapsed_ns": 35053
+      }
+    },
+    {
+      "repeat": 2,
+      "repetitions": 16,
+      "wikilinks": "on",
+      "version": "0.13.4",
+      "exit_code": 0,
+      "executable_sha256": "2485ee2e6f0d197ef5180de3fd784b5641ef1ee0cf26b0e68fe6fde8866a0634",
+      "raw_file": "2-16-on-before.stdout",
+      "result": {
+        "repetitions": 16,
+        "input_bytes": 112,
+        "wikilinks": true,
+        "event_count": 327676,
+        "event_cap_reached": false,
+        "elapsed_ns": 7437853
+      }
+    },
+    {
+      "repeat": 2,
+      "repetitions": 16,
+      "wikilinks": "on",
+      "version": "0.13.5",
+      "exit_code": 0,
+      "executable_sha256": "03b4bfa26f3da646b78fafc4eb4f2276e374036055645e06962d6208c4e1eb13",
+      "raw_file": "2-16-on-after.stdout",
+      "result": {
+        "repetitions": 16,
+        "input_bytes": 112,
+        "wikilinks": true,
+        "event_count": 65,
+        "event_cap_reached": false,
+        "elapsed_ns": 33685
+      }
+    }
+  ],
+  "public_export_note": "raw_file names refer to keys in wire-output.json; all original stdout/stderr are retained."
+}

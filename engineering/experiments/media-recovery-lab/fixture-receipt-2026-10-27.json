@@ -1,0 +1,21 @@
+{
+  "scope": "fixture-tested actual loader; no real-provider failure injection",
+  "baseline_source_commit": "ea547d3c58810c1ac1988be0d540c35ad238fa07",
+  "baseline_reproduced": "second explicit load returns identical rejected promise; one script attempt",
+  "repairs": [
+    "network error permits manual retry",
+    "timeout permits manual retry",
+    "script attachment exception permits manual retry",
+    "failed attempts leave no mock timers or owned callback",
+    "ready capability avoids redundant new load"
+  ],
+  "node_tests": 45,
+  "python_tests": 53,
+  "tests_sha256": "816d91ff643af3e0ba598744483f92e0e54729680cac764ebb0972686c0e1634",
+  "loader_sha256": "f95053a1d56a85330314efe88ca6c26b45ac1c3abb530639b770601e03608c06",
+  "limitations": [
+    "mocked network/timers",
+    "no new actual-playing assertion",
+    "stale-selection error guard inspected but not yet browser-race tested"
+  ]
+}

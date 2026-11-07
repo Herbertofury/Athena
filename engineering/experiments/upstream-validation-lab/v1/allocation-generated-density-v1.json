@@ -1,0 +1,124 @@
+{
+  "accounting_error": false,
+  "default_parser_changed": false,
+  "input_bytes": 136966,
+  "input_sha256": "3fbb9989995e6b7ee497a243c9e40055fafe2d2147bee35814fd7b00137d582c",
+  "samples": [
+    {
+      "baseline": {
+        "allocation_calls": 165,
+        "held_requested_rust_bytes_above_start": 137047,
+        "peak_requested_rust_bytes_above_start": 145251,
+        "reallocation_calls": 8,
+        "total_successfully_requested_bytes": 283714
+      },
+      "candidate": {
+        "allocation_calls": 12,
+        "held_requested_rust_bytes_above_start": 137047,
+        "peak_requested_rust_bytes_above_start": 272908,
+        "reallocation_calls": 8,
+        "total_successfully_requested_bytes": 412707
+      },
+      "complete_record_equal": true,
+      "post_drop_live_requested_delta": 0,
+      "round": 0
+    },
+    {
+      "baseline": {
+        "allocation_calls": 165,
+        "held_requested_rust_bytes_above_start": 137047,
+        "peak_requested_rust_bytes_above_start": 145251,
+        "reallocation_calls": 8,
+        "total_successfully_requested_bytes": 283714
+      },
+      "candidate": {
+        "allocation_calls": 12,
+        "held_requested_rust_bytes_above_start": 137047,
+        "peak_requested_rust_bytes_above_start": 272908,
+        "reallocation_calls": 8,
+        "total_successfully_requested_bytes": 412707
+      },
+      "complete_record_equal": true,
+      "post_drop_live_requested_delta": 0,
+      "round": 1
+    },
+    {
+      "baseline": {
+        "allocation_calls": 165,
+        "held_requested_rust_bytes_above_start": 137047,
+        "peak_requested_rust_bytes_above_start": 145251,
+        "reallocation_calls": 8,
+        "total_successfully_requested_bytes": 283714
+      },
+      "candidate": {
+        "allocation_calls": 12,
+        "held_requested_rust_bytes_above_start": 137047,
+        "peak_requested_rust_bytes_above_start": 272908,
+        "reallocation_calls": 8,
+        "total_successfully_requested_bytes": 412707
+      },
+      "complete_record_equal": true,
+      "post_drop_live_requested_delta": 0,
+      "round": 2
+    },
+    {
+      "baseline": {
+        "allocation_calls": 165,
+        "held_requested_rust_bytes_above_start": 137047,
+        "peak_requested_rust_bytes_above_start": 145251,
+        "reallocation_calls": 8,
+        "total_successfully_requested_bytes": 283714
+      },
+      "candidate": {
+        "allocation_calls": 12,
+        "held_requested_rust_bytes_above_start": 137047,
+        "peak_requested_rust_bytes_above_start": 272908,
+        "reallocation_calls": 8,
+        "total_successfully_requested_bytes": 412707
+      },
+      "complete_record_equal": true,
+      "post_drop_live_requested_delta": 0,
+      "round": 3
+    },
+    {
+      "baseline": {
+        "allocation_calls": 165,
+        "held_requested_rust_bytes_above_start": 137047,
+        "peak_requested_rust_bytes_above_start": 145251,
+        "reallocation_calls": 8,
+        "total_successfully_requested_bytes": 283714
+      },
+      "candidate": {
+        "allocation_calls": 12,
+        "held_requested_rust_bytes_above_start": 137047,
+        "peak_requested_rust_bytes_above_start": 272908,
+        "reallocation_calls": 8,
+        "total_successfully_requested_bytes": 412707
+      },
+      "complete_record_equal": true,
+      "post_drop_live_requested_delta": 0,
+      "round": 4
+    },
+    {
+      "baseline": {
+        "allocation_calls": 165,
+        "held_requested_rust_bytes_above_start": 137047,
+        "peak_requested_rust_bytes_above_start": 145251,
+        "reallocation_calls": 8,
+        "total_successfully_requested_bytes": 283714
+      },
+      "candidate": {
+        "allocation_calls": 12,
+        "held_requested_rust_bytes_above_start": 137047,
+        "peak_requested_rust_bytes_above_start": 272908,
+        "reallocation_calls": 8,
+        "total_successfully_requested_bytes": 412707
+      },
+      "complete_record_equal": true,
+      "post_drop_live_requested_delta": 0,
+      "round": 5
+    }
+  ],
+  "scope": "Requested Rust allocations for actual upstream parser; not RSS, stack, native allocation or physical peak; no instrumented timing claims",
+  "source": "hls"
+}

@@ -1,0 +1,79 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-10-28",
+  "evidence": "real_public_sample_scoped_offline_replay",
+  "networkUsed": false,
+  "syntheticFixturesUsedForRealReplay": false,
+  "fullSupportAccepted": false,
+  "replayCommand": "python3 experiments/site-extraction-lab/replay.py --manifest CALLER_SUPPLIED_MANIFEST.json --output experiments/site-extraction-lab/live-replay-receipt.json",
+  "replayReceiptSha256": "182d745d5758450d9234988e10c1b7cf61d9d4eacb3d2cc8812112be76ebdf69",
+  "implementationReceipts": {
+    "extractors.py": {
+      "sha256": "2ca3ff4b1645930709ca58eb37f742cca917df4c78dc93ab9c7008475659d188"
+    },
+    "replay.py": {
+      "sha256": "1aa9a05e49bad35f4c20d444e11070f2438e58899deb5d73b7554f21af486229"
+    }
+  },
+  "suppliedBrowserReceiptHashes": {
+    "simsfinds-browser-round2.json": "2b62c1b6069bc91c3251da0aa47a97f2ab251c3b5774e41b8722e254d6e8ffc2",
+    "subscribestar-browser-round2.json": "74fc10deea4338c85126487ee86501060e0e8f324c66609bafc5602639cd0499"
+  },
+  "checks": {
+    "nineCasesEightFamiliesPassed": true,
+    "dwemerMissingMainFileIdPreserved": true,
+    "dwemerBothFileLoginGatesPreserved": true,
+    "dwemerCreatorUploaderSeparate": true,
+    "dwemerUTF8Literal730": true,
+    "modpubDisabled1164Preserved": true,
+    "modpubLiteral3039Collapsed2922": true,
+    "subscribeStar701675Body416Images8": true,
+    "subscribeStarTextMatchesSuppliedBrowserReceipt": true,
+    "simsCreator1077254ProfileUsagi600": true,
+    "simsBody204NoteSeparate": true,
+    "simsPreviewSeparateFromAvatar": true,
+    "restFirstRSSLiteralTextEqual": true,
+    "restFirstRSSOrderedImagesEqual": true,
+    "restFirstRSSRawHTMLDifferent": true,
+    "deterministicSecondReplay": true
+  },
+  "normalization": {
+    "characters": "Literal Unicode text_content() including whitespace; UTF-8 HTML input.",
+    "whitespaceCollapsedCharacters": "len of Unicode text split on whitespace and joined with one space",
+    "bodyRawHash": "Selected HTML node serialization without outside tail; not original full-response bytes"
+  },
+  "retainedFailures": [
+    {
+      "assumption": "Every Dwemer file card exposes data-file-id",
+      "observed": "Main file card has no attribute; second file card is3187",
+      "resolution": "Keep absent main ID null; do not invent one"
+    },
+    {
+      "assumption": "Every heading inside ModPub gray box is its file title",
+      "observed": "A second nested h5 describes package contents",
+      "resolution": "Use scoped h5.mb-0; synthetic regression rejects broad heading assumption"
+    },
+    {
+      "assumption": "Implicit byte-to-HTML decoding preserves Dwemer Unicode text",
+      "observedCharactersBeforeCorrection": 734,
+      "correctedLiteralCharacters": 730,
+      "resolution": "Declare UTF-8 explicitly for observed fragment responses"
+    },
+    {
+      "assumption": "Empty profile schema should emit an empty person record",
+      "observed": "New truncated-schema synthetic regression failed before correction",
+      "resolution": "No person object without observed identity/name/profile; regression passes"
+    }
+  ],
+  "validation": {
+    "syntheticLabTests": 24,
+    "repositoryPythonTests": 208,
+    "researchStructureCheckPassed": true,
+    "sourceCount": 1523,
+    "markdownCount": 147
+  },
+  "environment": {
+    "python": "3.12.14",
+    "lxml": "6.1.1"
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "scope": "requested Rust heap allocation observations; not RSS, physical peak or speed",
+  "variants": {
+    "original": {
+      "binary_sha256": "b454a374293c22804c311e3e9e58940eb94b64edbf4608e417b939f1ba6b6fee",
+      "source_sha256": "5bdb0141ff5f450a8e6d8e966840c6303e041d8d9d20b21f9666bb13f2dbd2d5",
+      "lock_sha256": "bd2751918f9bb5e49e8f8b76194b962dea24e1dfc68e0c38d9d6c0ef72060ffb",
+      "pairs": 36,
+      "all_complete_values_equal": true,
+      "all_post_drop_requested_deltas_zero": true
+    },
+    "repaired": {
+      "binary_sha256": "a108102fb80cef192523e40405a8f2000cb031b4d017835983a1e6aab9379bd2",
+      "source_sha256": "5bdb0141ff5f450a8e6d8e966840c6303e041d8d9d20b21f9666bb13f2dbd2d5",
+      "lock_sha256": "3ce13f1c0408eaca2b2a50d65967f6a6492ca4a7e6b2b17c57011cbc2915454f",
+      "pairs": 36,
+      "all_complete_values_equal": true,
+      "all_post_drop_requested_deltas_zero": true
+    },
+    "accurate-reference": {
+      "binary_sha256": "a0e78e9b1b0f4a3179f9b734388bffffef1ed0b5d4ede5f3733b4a632b6e9f64",
+      "source_sha256": "5bdb0141ff5f450a8e6d8e966840c6303e041d8d9d20b21f9666bb13f2dbd2d5",
+      "lock_sha256": "3ce13f1c0408eaca2b2a50d65967f6a6492ca4a7e6b2b17c57011cbc2915454f",
+      "pairs": 36,
+      "all_complete_values_equal": true,
+      "all_post_drop_requested_deltas_zero": true
+    }
+  },
+  "fixture_manifest": "provenance-2026-10-27.json",
+  "baseline_and_candidate_input_sizes_identical": true,
+  "candidate_input_copy_included": true,
+  "app_dependencies_changed": false,
+  "limits": [
+    "System allocator overhead and internal realloc transient overlap excluded",
+    "Native memory and stack excluded",
+    "Compiler can remove or merge allocations",
+    "No cross-platform or production memory acceptance"
+  ]
+}

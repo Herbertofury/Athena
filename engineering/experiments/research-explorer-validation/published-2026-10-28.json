@@ -1,0 +1,94 @@
+{
+  "schema_version": 1,
+  "verified_at": "2026-10-28T05:25:12.000858Z",
+  "published_url": "https://herbertofury.github.io/Engineering-Atlas/explorer/",
+  "pull_request": "https://github.com/Herbertofury/Engineering-Atlas/pull/1",
+  "merged_commit": "efe9e99ead9ba31d85c2656e255c87631dce4e6a",
+  "ci": {
+    "head": "1a91a81ca39ab374a5be9c5de6877bfdd4626694",
+    "run_url": "https://github.com/Herbertofury/Engineering-Atlas/actions/runs/40635941957",
+    "research_check": "success",
+    "rust_linux": "success",
+    "rust_windows": "success"
+  },
+  "pages": {
+    "run_url": "https://github.com/Herbertofury/Engineering-Atlas/actions/runs/40636381112",
+    "build": "success",
+    "deploy": "success",
+    "report_build_status": "success"
+  },
+  "browser": {
+    "title": "Research Explorer \u00b7 Engineering Atlas",
+    "entries": 154,
+    "primary_sources": 166,
+    "entries_with_2026_publication_evidence": 71,
+    "measured_candidates": 3,
+    "search_duckdb_matches": 2,
+    "paper_and_2026_filter_matches": 16,
+    "reset_returns_all": true,
+    "selected_measurement_cohort": "json-catalog-2000-decode-encode-utf8",
+    "ordered_measurements_ms": [
+      {
+        "candidate": "orjson",
+        "value": 2.8318
+      },
+      {
+        "candidate": "ultrajson",
+        "value": 6.071
+      },
+      {
+        "candidate": "python-stdlib-json",
+        "value": 9.1416
+      }
+    ],
+    "measurement_provenance": "Retained October 26 experiment; not newly executed",
+    "csv_saved_file_verification": "Unverified: browser download interface reported failure on the deployed HTTPS site as well as local preview; no saved artifact was claimed.",
+    "community_report_form": {
+      "candidate_id": "orjson",
+      "evaluation_track": "json-serialization",
+      "candidate_and_track_prefilled": true,
+      "rating_initial_selection": "None",
+      "issue_submitted": false,
+      "observation_note": "An initial snapshot taken during GitHub rendering appeared incomplete. Settled UI values confirmed the candidate, track and unselected rating. No implementation change was needed."
+    }
+  },
+  "screenshot": {
+    "path": "live-explorer-2026-10-28.jpg",
+    "sha256": "fa1eeefed457f4d98f8fbaa15f971134b27f20048b3cc8ed4bb0b4fe5d620882"
+  },
+  "coordination": {
+    "integrated_main_commit": "50aba7a38580924cf3df125b7ea10f97444c4af0",
+    "upstream_source_records_preserved": 351,
+    "research_source_records_added": 174,
+    "source_register_records": 525,
+    "adapter_paths_changed_by_contribution": [],
+    "latest_concurrent_main_preserved": "0564c34532df49ba806d852b7f3493e8a18edc5f"
+  },
+  "wiki": {
+    "status": "published",
+    "verified_at": "2026-10-28T05:25:12.000858Z",
+    "wiki_commit": "85c50a22a4eb7761b144173f5b174b5b87a67be7",
+    "package": "docs/wiki-research/",
+    "receipt": "wiki-publication-2026-10-28.json",
+    "pages": [
+      "https://github.com/Herbertofury/Engineering-Atlas/wiki/Research-Explorer",
+      "https://github.com/Herbertofury/Engineering-Atlas/wiki/Research-Test-Queue",
+      "https://github.com/Herbertofury/Engineering-Atlas/wiki/Research-Radar-2026",
+      "https://github.com/Herbertofury/Engineering-Atlas/wiki/Research-Community"
+    ],
+    "home_and_sidebar_updated": true,
+    "protected_adapter_files_unchanged": 15,
+    "screenshot": {
+      "path": "live-wiki-2026-10-28.jpg",
+      "sha256": "616f0480a2d377a8bef51073d7dd19f6078aa4539b027fb715a72ce2190d5ee2"
+    }
+  },
+  "community_labels": {
+    "created": [
+      "research-rating",
+      "research-rating-approved"
+    ],
+    "reports_created": 0,
+    "approval_requirements_unchanged": true
+  }
+}

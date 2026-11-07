@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "checked_at": "2026-10-29",
+  "working_reader_changed": "checked budget arithmetic only; allocation strategy unchanged",
+  "accepted": false,
+  "allocation_receipts": [
+    {
+      "path": "allocations-1.json",
+      "sha256": "01ac8aa51e401da4fd6474d07d9f1b2f7784eace50fab763e46333f6f1275059",
+      "input_kind": "retained_public_generation"
+    },
+    {
+      "path": "allocations-2.json",
+      "sha256": "5ffcca4143f3b9ce6450e39c73d79c60d4cde56699c801c1685c9719017073d3",
+      "input_kind": "retained_public_generation"
+    },
+    {
+      "path": "allocations-3.json",
+      "sha256": "32c3a40e2365fb879564af94b59781dc760dfc019db3b50a67ccff782b180814",
+      "input_kind": "retained_public_generation"
+    },
+    {
+      "path": "allocations-4.json",
+      "sha256": "01ac8aa51e401da4fd6474d07d9f1b2f7784eace50fab763e46333f6f1275059",
+      "input_kind": "retained_public_generation"
+    },
+    {
+      "path": "allocations-5.json",
+      "sha256": "c09df01cdac9b7b84524b72d4e676774044f4d3c9b5dcf5e29feb47bfc22e238",
+      "input_kind": "retained_public_generation"
+    },
+    {
+      "path": "allocations-6.json",
+      "sha256": "d21839b0621338f238253e44ca531f244368732826e2de4884ebd7874cc2a6d1",
+      "input_kind": "generated_empty_control"
+    }
+  ],
+  "http_receipts": [
+    {
+      "path": "http-1.json",
+      "sha256": "4d90fbf0827191eb25f92d1e18d10f3c5ae2c9d84e7821f9cb53b2e7a39ba5f6"
+    },
+    {
+      "path": "http-2.json",
+      "sha256": "5f5095df26923445edeea790990a347335e57cb9d637854b8ba9ba162bc77ee0"
+    },
+    {
+      "path": "http-3.json",
+      "sha256": "5c4e63c2bafbe06476d66dbda75cc0d50c2a013dc423574359632c03b11a7dec"
+    },
+    {
+      "path": "http-4.json",
+      "sha256": "4d90fbf0827191eb25f92d1e18d10f3c5ae2c9d84e7821f9cb53b2e7a39ba5f6"
+    },
+    {
+      "path": "http-5.json",
+      "sha256": "08cc1b547a11414e04357b017a3191977700d553bd5b90d5911afa5793487e94"
+    }
+  ],
+  "remaining_gate": "Overstated nonempty length still increases retained capacity; real end-to-end latency and process memory remain unmeasured",
+  "binary_sha256": {
+    "allocations": "b616d07f915e4420e8f9274b8c595f287fc58f81bb62da674e3c9a7d3ea29e67",
+    "http": "d379384156540e80401fd319d5e1406bc7fd04ecc60299fe9f00a396cbb534c8"
+  },
+  "regression_tests": {
+    "candidate_example": 3,
+    "http_example": 4,
+    "actual_budget_release_test": 1,
+    "rust_units": 117,
+    "rust_integrations": 8,
+    "python": 215,
+    "clippy": "all targets, warnings denied"
+  }
+}

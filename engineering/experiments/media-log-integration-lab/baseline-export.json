@@ -1,0 +1,254 @@
+{
+  "schema_version": 1,
+  "harness": "atlas-real-media-v11-event-integration",
+  "source_module": "/Engineering-Atlas/media-lab/media.fa63434918664058.js",
+  "started_at": "2026-10-28T16:34:28.156Z",
+  "user_agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36",
+  "source_mode": "dated public snapshots",
+  "events": [
+    {
+      "type": "fixture_parsed",
+      "at_ms": 189.79999995231628,
+      "elapsed_ms": 37.40000003576279,
+      "bytes": 21300
+    },
+    {
+      "type": "metadata_dom_ready",
+      "at_ms": 192.0999999642372,
+      "elapsed_ms": 2,
+      "cards": 5,
+      "gallery_images": 19,
+      "video_entries": 19
+    },
+    {
+      "type": "image_decoded",
+      "at_ms": 292.19999998807907,
+      "source": "https://cdn.modrinth.com/data/AANobbMI/295862f4724dc3f78df3447ad6072b2dcd3ef0c9_96.webp",
+      "width": 96,
+      "height": 96,
+      "elapsed_ms": 4.100000023841858,
+      "attempt": 1
+    },
+    {
+      "type": "image_decoded",
+      "at_ms": 295,
+      "source": "https://cdn.modrinth.com/data/AANobbMI/images/d84313e6f57dc9e7896961dbd2dfc2689d482758_350.webp",
+      "width": 350,
+      "height": 350,
+      "elapsed_ms": 5.800000011920929,
+      "attempt": 1
+    },
+    {
+      "type": "image_decoded",
+      "at_ms": 302.69999998807907,
+      "source": "https://cdn.modrinth.com/data/AANobbMI/images/6b0e58705156ba67a6d97a74b9f9ac05da69f502_350.webp",
+      "width": 350,
+      "height": 350,
+      "elapsed_ms": 13.300000011920929,
+      "attempt": 1
+    },
+    {
+      "type": "image_decoded",
+      "at_ms": 305.7999999523163,
+      "source": "https://cdn.modrinth.com/data/AANobbMI/images/b681a9e87daa53a0e85336a894db70427007149b_350.webp",
+      "width": 350,
+      "height": 350,
+      "elapsed_ms": 16.299999952316284,
+      "attempt": 1
+    },
+    {
+      "type": "image_decoded",
+      "at_ms": 347,
+      "source": "https://cdn.modrinth.com/data/AANobbMI/images/c39debea7fc623306e9c45148084585399fc59ee.webp",
+      "width": 854,
+      "height": 583,
+      "elapsed_ms": 43.80000001192093,
+      "attempt": 1
+    },
+    {
+      "type": "image_decoded",
+      "at_ms": 350.19999998807907,
+      "source": "https://staticdelivery.nexusmods.com/mods/1704/images/thumbnails/12604/12604-1774356382-945468655.png",
+      "width": 385,
+      "height": 216,
+      "elapsed_ms": 43.69999998807907,
+      "attempt": 1
+    },
+    {
+      "type": "image_decoded",
+      "at_ms": 372.7999999523163,
+      "source": "https://cdn.modrinth.com/data/AANobbMI/images/56c4599efcb529a19aed0e118caad4178d7fd540.webp",
+      "width": 854,
+      "height": 960,
+      "elapsed_ms": 80.5,
+      "attempt": 1
+    },
+    {
+      "type": "image_decoded",
+      "at_ms": 378.7999999523163,
+      "source": "https://cdn.modrinth.com/data/AANobbMI/images/5ca2e8f6c72f3d543dd3dc95b706964c5678d80e_350.webp",
+      "width": 349,
+      "height": 197,
+      "elapsed_ms": 83.79999995231628,
+      "attempt": 1
+    },
+    {
+      "type": "image_decoded",
+      "at_ms": 379.2999999523163,
+      "source": "https://staticdelivery.nexusmods.com/mods/1704/images/thumbnails/12604/12604-1774356382-945468655.png",
+      "width": 385,
+      "height": 216,
+      "elapsed_ms": 32.09999996423721,
+      "attempt": 1
+    },
+    {
+      "type": "image_decoded",
+      "at_ms": 381.0999999642372,
+      "source": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/620/faffc0f560786e2f05104a8d2fac837c6969bf13/header.jpg?t=1790187113",
+      "width": 460,
+      "height": 215,
+      "elapsed_ms": 30.80000001192093,
+      "attempt": 1
+    },
+    {
+      "type": "image_decoded",
+      "at_ms": 386.89999997615814,
+      "source": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/620/ss_f3f6787d74739d3b2ec8a484b5c994b3d31ef325.600x338.jpg?t=1790187113",
+      "width": 600,
+      "height": 337,
+      "elapsed_ms": 14,
+      "attempt": 1
+    },
+    {
+      "type": "image_decoded",
+      "at_ms": 393.5999999642372,
+      "source": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/620/ss_6a4f5afdaa98402de9cf0b59fed27bab3256a6f4.600x338.jpg?t=1790187113",
+      "width": 600,
+      "height": 337,
+      "elapsed_ms": 14.699999988079071,
+      "attempt": 1
+    },
+    {
+      "type": "image_decoded",
+      "at_ms": 397.2999999523163,
+      "source": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/620/ss_0cdd90fafc160b52d08b303d205f9fd4e83cf164.600x338.jpg?t=1790187113",
+      "width": 600,
+      "height": 337,
+      "elapsed_ms": 17.899999976158142,
+      "attempt": 1
+    },
+    {
+      "type": "image_decoded",
+      "at_ms": 403,
+      "source": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/620/ss_ec35a739b4b33270eb170d9e561c5b016cba50a6.600x338.jpg?t=1790187113",
+      "width": 600,
+      "height": 337,
+      "elapsed_ms": 21.900000035762787,
+      "attempt": 1
+    },
+    {
+      "type": "image_decoded",
+      "at_ms": 413.19999998807907,
+      "source": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/620/ss_3d13161104a04603a0524536770c5f74626db4c0.600x338.jpg?t=1790187113",
+      "width": 600,
+      "height": 337,
+      "elapsed_ms": 25.80000001192093,
+      "attempt": 1
+    },
+    {
+      "type": "image_decoded",
+      "at_ms": 418.5,
+      "source": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/620/ss_8a772608d29ffd56ac013d2ac7c4388b96e87a21.600x338.jpg?t=1790187113",
+      "width": 600,
+      "height": 337,
+      "elapsed_ms": 24.80000001192093,
+      "attempt": 1
+    },
+    {
+      "type": "image_decoded",
+      "at_ms": 426.89999997615814,
+      "source": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/620/ss_358127df30a766a1516ad139083c2bcec3fe0975.600x338.jpg?t=1790187113",
+      "width": 600,
+      "height": 337,
+      "elapsed_ms": 28.80000001192093,
+      "attempt": 1
+    },
+    {
+      "type": "image_decoded",
+      "at_ms": 432.2999999523163,
+      "source": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/620/ss_410c7955c3cc8ca4a5e3c81daa214f534c9aabc8.600x338.jpg?t=1790187113",
+      "width": 600,
+      "height": 337,
+      "elapsed_ms": 29.099999964237213,
+      "attempt": 1
+    },
+    {
+      "type": "image_decoded",
+      "at_ms": 438,
+      "source": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/620/ss_0e16bceacb6616a5ca4bc4ba4d28c7a0d06b671c.600x338.jpg?t=1790187113",
+      "width": 600,
+      "height": 337,
+      "elapsed_ms": 24.700000047683716,
+      "attempt": 1
+    },
+    {
+      "type": "image_decoded",
+      "at_ms": 442.69999998807907,
+      "source": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/620/ss_d8f172249d6e89999c3692bf2c380921f197fd82.600x338.jpg?t=1790187113",
+      "width": 600,
+      "height": 337,
+      "elapsed_ms": 24.19999998807907,
+      "attempt": 1
+    },
+    {
+      "type": "image_decoded",
+      "at_ms": 447.89999997615814,
+      "source": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/620/ss_fe9782ea3b43ef7af37b18e0a5c5f7bdc9c21f12.600x338.jpg?t=1790187113",
+      "width": 600,
+      "height": 337,
+      "elapsed_ms": 20.69999998807907,
+      "attempt": 1
+    },
+    {
+      "type": "image_decoded",
+      "at_ms": 454,
+      "source": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/620/ss_3858536cbc0a07dfbe36e8f87b3f08bf3be45e54.600x338.jpg?t=1790187113",
+      "width": 600,
+      "height": 337,
+      "elapsed_ms": 21.700000047683716,
+      "attempt": 1
+    },
+    {
+      "type": "image_failed",
+      "at_ms": 512,
+      "source": "https://i.ytimg.com/vi/M7lc1UVf-VE/hqdefault.jpg",
+      "attempt": 1
+    },
+    {
+      "type": "preview_batch_complete",
+      "at_ms": 512.1999999880791,
+      "total": 23,
+      "decoded": 22,
+      "failed": 1,
+      "unattempted": 0,
+      "report_errors": 0,
+      "attempted": 23,
+      "elapsed_ms": 224.9000000357628,
+      "unique_urls": 22
+    }
+  ],
+  "acceptance": "not a target-project performance comparison",
+  "event_view": {
+    "mode": "baseline",
+    "rendered_events": 26,
+    "render_failures": 0,
+    "recovery_attempts": 0,
+    "display_current": true
+  },
+  "fixture_sha256": "2aa0668aba0eb29c69faf368fab206369718335be7f47bc0c6592236e79d1aba",
+  "fixture_counts": {
+    "cards": 5,
+    "gallery_images": 19,
+    "video_entries": 19
+  }
+}

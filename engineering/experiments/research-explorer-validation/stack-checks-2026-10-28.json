@@ -1,0 +1,145 @@
+{
+  "schema_version": 1,
+  "checked_at": "2026-10-28T05:47:12.067125+00:00",
+  "evidence": "implementation_validation_not_candidate_benchmark",
+  "integration_base_commit": "2b89fb1e285dc68234487617f7a5fd04b7503cd0",
+  "catalog": {
+    "entries": 215,
+    "new_entries": 61,
+    "updated_existing_entries": 22,
+    "layers": 20,
+    "fields": 18,
+    "tracks": 125,
+    "papers": 22,
+    "source_records": 364,
+    "unique_primary_urls": 355,
+    "shared_source_register_records": 726,
+    "previous_source_records_preserved": 525,
+    "additional_source_records": 201,
+    "github_repository_observations": 173,
+    "new_repository_observations": 50,
+    "previous_repository_observations_preserved": 123,
+    "approved_community_reports": 0,
+    "planned_comparisons": 20,
+    "retained_atlas_observations": 27,
+    "publisher_reported_observations": 8,
+    "new_candidate_benchmarks": 0
+  },
+  "tests": {
+    "python": {
+      "command": "python -m unittest discover -s tests -v",
+      "passed": 176,
+      "failed": 0
+    },
+    "javascript_cases": {
+      "command": "node --test --test-isolation=none tests/*.test.mjs",
+      "passed": 151,
+      "failed": 0
+    },
+    "javascript_standard": {
+      "command": "node --test tests/*.test.mjs",
+      "passed_files": 19,
+      "failed_files": 0
+    },
+    "deterministic_build_check": "passed",
+    "source_structure_check": "726 source records; no stale IDs; passed",
+    "whitespace_check": "passed"
+  },
+  "browser_checks": [
+    {
+      "check": "Layer decision map",
+      "outcome": "pass",
+      "detail": "Desktop layer shows seven assigned candidates, role-specific controls and adoption gate; dependencies layer shows libsolv and Resolvo."
+    },
+    {
+      "check": "Layer plus observed GitHub stars",
+      "outcome": "pass",
+      "detail": "Two dependency solvers ordered by actual observed counts; the UI states attention is not quality."
+    },
+    {
+      "check": "Internal role link and URL state",
+      "outcome": "pass",
+      "detail": "libsolv guide link opens ?q=libsolv&layer=dependency-solving#catalog and one matching record."
+    },
+    {
+      "check": "Reset filters",
+      "outcome": "pass",
+      "detail": "All 215 candidates return and the selected layer guide is hidden."
+    },
+    {
+      "check": "Mod compatibility scope",
+      "outcome": "pass",
+      "detail": "Seven assigned records; reference loaders explicitly tied to distinct game/runtime/modpack constraints."
+    },
+    {
+      "check": "Narrow responsive layout",
+      "outcome": "pass",
+      "detail": "390-pixel iframe with 375-pixel content width; document scrollWidth also 375; stacked decision guide screenshot inspected."
+    },
+    {
+      "check": "Copy view link on HTTP preview",
+      "outcome": "fallback_verified",
+      "detail": "Clipboard write unavailable; visible instruction correctly asks user to copy the address bar. Encoded layer/search URL verified."
+    },
+    {
+      "check": "Saved CSV/JSON downloads",
+      "outcome": "unverified",
+      "detail": "Previous browser download-provider failure remains documented. Payload/scope/formula-safety contracts pass; no new saved-file success is claimed."
+    }
+  ],
+  "review_repairs": [
+    {
+      "issue": "CSV exact-output fixture lacked the new stack_layers column",
+      "resolution": "Updated expected full CSV contract; all existing formula-safety and complete-output assertions retained."
+    },
+    {
+      "issue": "Legacy build could leave a stale generated layer map",
+      "resolution": "Clear existing generated region when layers are absent, keep it in --check, and preserve unmarked legacy guides; regression tests pass."
+    },
+    {
+      "issue": "Non-object layer rows raised an uncontrolled AttributeError",
+      "resolution": "Explicit object guard and malformed-row regression test."
+    },
+    {
+      "issue": "Automatic category assignment overstated DOMPurify and HARE roles",
+      "resolution": "Limited assignments to their documented functions; clarified complementary choices and TypeScript compiler scope."
+    },
+    {
+      "issue": "Repeated URL observations inflated the headline source count",
+      "resolution": "Headline counts355 distinct URLs; all364 catalog source records and previous IDs remain retained."
+    },
+    {
+      "issue": "Generated BLAKE3 link label collided with source-ID lint syntax",
+      "resolution": "Clarified the candidate display name as BLAKE3 hashing; retained source checker unchanged."
+    },
+    {
+      "issue": "Trailing blank line in radar source failed whitespace check",
+      "resolution": "Removed trailing empty line and reran check."
+    }
+  ],
+  "protected_project_paths_changed": [],
+  "wiki_base_commit": "0c8c5924ab5a9f9eed55e1698d2136024d549f69",
+  "concurrent_wiki_change_preserved": "Experiment-Evidence.md native bounded-log recovery update",
+  "new_topical_markdown_pages": 0,
+  "generated_assets": {
+    "docs/explorer/catalog.0f5082fc1d6d1c80.json": "0f5082fc1d6d1c803bc78247bb584d8ae19a8e2ebdac2955f96d521fed7e3c41",
+    "docs/explorer/explorer-core.a375751d296ae2da.mjs": "a375751d296ae2dabe5b6bde9ed93658c7b000135b153daf480b8de84654e668",
+    "docs/explorer/explorer.11a0ce9b7a735799.css": "11a0ce9b7a7357995ae4f761b56e7aaadb2295ad4f8655335998fdbf91a7e627",
+    "docs/explorer/explorer.c1f012c2f839827c.mjs": "c1f012c2f839827ce58a86c187909569e3a22e18ec3021122f4c6cfc82a75bfa",
+    "docs/explorer/index.html": "98503f17fedbe26aa476a3174cf536738061e586140090648f005848d50ddfeb",
+    "docs/research-catalog.md": "833023fcb9c835182361c92a985aab68e4bf4199754a8b9eec61093813bd05c9",
+    "docs/stack-selection.md": "f431a2f793a09d83d13f071b436e11b3727c39712208c1109bb0f2a7da21bf2c"
+  },
+  "logs": {
+    "stack-javascript-tests-2026-10-28.log": "6a3e4f4f03902e9ac55036976422b67fa94fc5993b876128fcc6f64a68983b85",
+    "stack-python-tests-2026-10-28.log": "b5ed9fa6dd6794c79f5d2579d96980488c399264b4f9780c4ce2a3b1ee76f1e4",
+    "stack-javascript-cases-2026-10-28.log": "03e3eac67a56caab81080ea5fa3845b69ebfc25391ad2924b093b4e5412a5a3b"
+  },
+  "limitations": [
+    "No new candidate performance benchmark or target adoption.",
+    "Not exhaustive coverage of every 2026 technical field.",
+    "Primary source availability, versions and popularity may change after observation.",
+    "Screenshot checks establish inspected layout, not physical-device compatibility.",
+    "Repository and wiki publication are verified separately after this local record."
+  ]
+}

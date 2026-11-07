@@ -1,0 +1,332 @@
+{
+  "checked_at": "2026-10-27",
+  "scope": "Real fixed local experiment job and cooperative process shutdown; no general self-modification or visual UI acceptance",
+  "binary_sha256": "1493acf0c20956ca0ed53ad0468b7f253e39a285c6025c6390bad4543e424163",
+  "checks": [
+    {
+      "name": "experiment requires same-origin guard",
+      "observed": 403,
+      "expected": 403,
+      "passed": true
+    },
+    {
+      "name": "arbitrary command remains rejected",
+      "observed": 422,
+      "expected": 422,
+      "passed": true
+    },
+    {
+      "name": "explicit run control served",
+      "observed": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "fixed experiment accepted",
+      "observed": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "active duplicate shares job",
+      "observed": 1,
+      "expected": 1,
+      "passed": true
+    },
+    {
+      "name": "execution succeeds",
+      "observed": "succeeded",
+      "expected": "succeeded",
+      "passed": true
+    },
+    {
+      "name": "run completed",
+      "observed": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "timed pairs",
+      "observed": 15,
+      "expected": 15,
+      "passed": true
+    },
+    {
+      "name": "warmups retained",
+      "observed": 2,
+      "expected": 2,
+      "passed": true
+    },
+    {
+      "name": "run-specific stress cases",
+      "observed": 10000,
+      "expected": 10000,
+      "passed": true
+    },
+    {
+      "name": "complete output parity",
+      "observed": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "missing evidence blocks promotion",
+      "observed": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "memory remains explicitly unmeasured",
+      "observed": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "journal ID present",
+      "observed": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "new completed-run history is append-only",
+      "observed": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "graceful cancellation shutdown",
+      "observed": 0,
+      "expected": 0,
+      "passed": true
+    },
+    {
+      "name": "cancelled job is not successful",
+      "observed": "failed",
+      "expected": "failed",
+      "passed": true
+    },
+    {
+      "name": "cancellation is explicit",
+      "observed": "Cancelled",
+      "expected": "Cancelled",
+      "passed": true
+    },
+    {
+      "name": "cancelled run not complete",
+      "observed": false,
+      "expected": false,
+      "passed": true
+    },
+    {
+      "name": "cancelled result has journal record",
+      "observed": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "prior good result retained",
+      "observed": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "both evidence records retained",
+      "observed": 2,
+      "expected": 2,
+      "passed": true
+    },
+    {
+      "name": "SQLite integrity",
+      "observed": "ok",
+      "expected": "ok",
+      "passed": true
+    }
+  ],
+  "completed_job": {
+    "experiment": {
+      "completed": true,
+      "decision": {
+        "Incomplete": "Missing repeated timing, stress or memory measurements"
+      },
+      "elapsed_ms": 833,
+      "evidence": {
+        "baseline_revision": "linear-unique-v1",
+        "candidate_revision": "indexed-unique-v1",
+        "environment_id": "linux-x86_64; atlas-lab 0.1.0; bounded shared-process worker",
+        "stress_cases": 10000,
+        "stress_failures": 0,
+        "trials": [
+          {
+            "baseline_ns": 45831775,
+            "cancelled_cleanly": null,
+            "candidate_ns": 376947,
+            "equal_complete_output": true,
+            "peak_bytes": 0
+          },
+          {
+            "baseline_ns": 56738447,
+            "cancelled_cleanly": null,
+            "candidate_ns": 123344,
+            "equal_complete_output": true,
+            "peak_bytes": 0
+          },
+          {
+            "baseline_ns": 31479361,
+            "cancelled_cleanly": null,
+            "candidate_ns": 170571,
+            "equal_complete_output": true,
+            "peak_bytes": 0
+          },
+          {
+            "baseline_ns": 28915884,
+            "cancelled_cleanly": null,
+            "candidate_ns": 234134,
+            "equal_complete_output": true,
+            "peak_bytes": 0
+          },
+          {
+            "baseline_ns": 36252451,
+            "cancelled_cleanly": null,
+            "candidate_ns": 235693,
+            "equal_complete_output": true,
+            "peak_bytes": 0
+          },
+          {
+            "baseline_ns": 36722429,
+            "cancelled_cleanly": null,
+            "candidate_ns": 128189,
+            "equal_complete_output": true,
+            "peak_bytes": 0
+          },
+          {
+            "baseline_ns": 31062801,
+            "cancelled_cleanly": null,
+            "candidate_ns": 178711,
+            "equal_complete_output": true,
+            "peak_bytes": 0
+          },
+          {
+            "baseline_ns": 41155899,
+            "cancelled_cleanly": null,
+            "candidate_ns": 120156,
+            "equal_complete_output": true,
+            "peak_bytes": 0
+          },
+          {
+            "baseline_ns": 36497387,
+            "cancelled_cleanly": null,
+            "candidate_ns": 228829,
+            "equal_complete_output": true,
+            "peak_bytes": 0
+          },
+          {
+            "baseline_ns": 32658940,
+            "cancelled_cleanly": null,
+            "candidate_ns": 122550,
+            "equal_complete_output": true,
+            "peak_bytes": 0
+          },
+          {
+            "baseline_ns": 32913031,
+            "cancelled_cleanly": null,
+            "candidate_ns": 176887,
+            "equal_complete_output": true,
+            "peak_bytes": 0
+          },
+          {
+            "baseline_ns": 31782254,
+            "cancelled_cleanly": null,
+            "candidate_ns": 189256,
+            "equal_complete_output": true,
+            "peak_bytes": 0
+          },
+          {
+            "baseline_ns": 31274483,
+            "cancelled_cleanly": null,
+            "candidate_ns": 207088,
+            "equal_complete_output": true,
+            "peak_bytes": 0
+          },
+          {
+            "baseline_ns": 28762636,
+            "cancelled_cleanly": null,
+            "candidate_ns": 120103,
+            "equal_complete_output": true,
+            "peak_bytes": 0
+          },
+          {
+            "baseline_ns": 31975429,
+            "cancelled_cleanly": null,
+            "candidate_ns": 178799,
+            "equal_complete_output": true,
+            "peak_bytes": 0
+          }
+        ],
+        "workload_id": "generated-6000-ids-mod-4001-v1"
+      },
+      "first_failure": null,
+      "limitations": [
+        "Generated identifiers, not a target application corpus",
+        "Peak memory is unmeasured; review eligibility remains blocked",
+        "Cooperative runner cancellation is tested separately, not asserted as per-strategy acceptance",
+        "Timing shares a local service process; no isolated-host or whole-app speed claim",
+        "Only built-in strategies run; no source rewriting, external candidates or deployment"
+      ],
+      "reason": "Completed",
+      "warmup_trials": [
+        {
+          "baseline_ns": 56553601,
+          "cancelled_cleanly": null,
+          "candidate_ns": 1105624,
+          "equal_complete_output": true,
+          "peak_bytes": 0
+        },
+        {
+          "baseline_ns": 58267607,
+          "cancelled_cleanly": null,
+          "candidate_ns": 222684,
+          "equal_complete_output": true,
+          "peak_bytes": 0
+        }
+      ]
+    },
+    "experiment_id": 1
+  },
+  "cancelled_job": {
+    "experiment": {
+      "completed": false,
+      "decision": {
+        "Incomplete": "Missing repeated timing, stress or memory measurements"
+      },
+      "elapsed_ms": 33,
+      "evidence": {
+        "baseline_revision": "linear-unique-v1",
+        "candidate_revision": "indexed-unique-v1",
+        "environment_id": "linux-x86_64; atlas-lab 0.1.0; bounded shared-process worker",
+        "stress_cases": 0,
+        "stress_failures": 0,
+        "trials": [],
+        "workload_id": "generated-6000-ids-mod-4001-v1"
+      },
+      "first_failure": null,
+      "limitations": [
+        "Generated identifiers, not a target application corpus",
+        "Peak memory is unmeasured; review eligibility remains blocked",
+        "Cooperative runner cancellation is tested separately, not asserted as per-strategy acceptance",
+        "Timing shares a local service process; no isolated-host or whole-app speed claim",
+        "Only built-in strategies run; no source rewriting, external candidates or deployment"
+      ],
+      "reason": "Cancelled",
+      "warmup_trials": [
+        {
+          "baseline_ns": 31046478,
+          "cancelled_cleanly": null,
+          "candidate_ns": 886082,
+          "equal_complete_output": true,
+          "peak_bytes": 0
+        }
+      ]
+    },
+    "experiment_id": 2
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-29",
+  "rust_unit_tests": 117,
+  "rust_integration_tests": 8,
+  "clippy": "all targets, warnings denied, passed",
+  "full_store_samples": 126,
+  "full_payload_and_history_parity": true,
+  "allocation_paired_rounds": 35,
+  "allocation_comparisons_per_lane": 1750,
+  "process_interruptions": 12,
+  "fresh_memory_children": 8,
+  "physical_power_loss_tested": false,
+  "working_application_store_changed": false,
+  "candidate_sha256": "cfc6c7d3c80bc18c56dcadafd4903cc41967205bc8565ef60b9ee4c401a6f680"
+}

@@ -1,0 +1,78 @@
+{
+  "checked_at": "2026-10-30T02:18:52.910490+00:00",
+  "scope": "Generated high IDs alongside retained public fixture jobs; actual Rust HTTP and served UI in controlled DOM, not native browser paint",
+  "mode": "serve",
+  "binary_sha256": "110bd688f584f20f9eecd22f40ef1cbf6b377828cc53f7cb954b194e4547924c",
+  "harness_sha256": "5b669ea2d1bfc94d2cab60f04bb56a8e45b92b4ada16cd08c2ceb7708dd72165",
+  "expected_ids": [
+    "9223372036854775807",
+    "9007199254740993",
+    "9007199254740992",
+    "3",
+    "2",
+    "1"
+  ],
+  "verification_complete": true,
+  "reported_strategy": "baseline",
+  "renderer": {
+    "scope": "Actual served application source and actual HTTP overview, executed in controlled DOM; not native browser paint",
+    "response_sha256": "f955076d90d87280bd858cd0b5538d59c1d993ae5767d709771396a27a8eec88",
+    "app_sha256": "5f630461c6719913eff9966e3035499ea0480af4bd79ec9ba354dfa5e32c52ff",
+    "input_sha256": "0c5346c5b1fa3e3c1d17ecdcdab075b8437c341c1b1eea2c6cc502dcdc315b53",
+    "server_job_count": 6,
+    "received_identities": [
+      {
+        "legacy_js_id": "9223372036854776000",
+        "exact": null
+      },
+      {
+        "legacy_js_id": "9007199254740992",
+        "exact": null
+      },
+      {
+        "legacy_js_id": "9007199254740992",
+        "exact": null
+      },
+      {
+        "legacy_js_id": "3",
+        "exact": null
+      },
+      {
+        "legacy_js_id": "2",
+        "exact": null
+      },
+      {
+        "legacy_js_id": "1",
+        "exact": null
+      }
+    ],
+    "rendered_card_count": 5,
+    "rendered_id_labels": [
+      "Job 9223372036854776000 \u00b7 attempt 0",
+      "Job 9007199254740992 \u00b7 attempt 0",
+      "Job 3 \u00b7 attempt 1",
+      "Job 2 \u00b7 attempt 1",
+      "Job 1 \u00b7 attempt 1"
+    ],
+    "error": null
+  },
+  "rendered_ids": [
+    "9223372036854776000",
+    "9007199254740992",
+    "3",
+    "2",
+    "1"
+  ],
+  "application_correct": false,
+  "exact_fields": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null
+  ],
+  "jobs_unchanged": true,
+  "integrity_ok": true,
+  "source_unchanged": true
+}

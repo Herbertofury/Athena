@@ -1,0 +1,98 @@
+{
+  "schema_version": 1,
+  "scope": "Local-only v15 browser integration; not promoted; single preparation per lane/workload, no speed ranking",
+  "runs": [
+    {
+      "receipt": "v15-budgeted-browser.json",
+      "operation": "metadata",
+      "count": 200,
+      "metadata_bytes": 8192,
+      "complete": true,
+      "samples": 6,
+      "complete_sample_parity": true,
+      "preparation": {
+        "strategy": "budgeted",
+        "complete_validation_ms": 25.5,
+        "request_to_ready_ms": 73.10000002384186,
+        "measured_preparation_ms": 45.30000001192093,
+        "unattributed_roundtrip_overhead_ms": 27.80000001192093
+      },
+      "error": null
+    },
+    {
+      "receipt": "v15-main-browser.json",
+      "operation": "metadata",
+      "count": 200,
+      "metadata_bytes": 8192,
+      "complete": true,
+      "samples": 6,
+      "complete_sample_parity": true,
+      "preparation": {
+        "strategy": "main",
+        "complete_validation_ms": 9.800000011920929,
+        "request_to_ready_ms": 40.30000001192093,
+        "measured_preparation_ms": 29.799999952316284,
+        "unattributed_roundtrip_overhead_ms": 10.500000059604645
+      },
+      "error": null
+    },
+    {
+      "receipt": "v15-dense-first-download.json",
+      "operation": "metadata",
+      "count": 1000,
+      "metadata_bytes": 65536,
+      "complete": false,
+      "samples": 1,
+      "complete_sample_parity": true,
+      "preparation": {
+        "strategy": "budgeted",
+        "complete_validation_ms": 792.8000000119209,
+        "request_to_ready_ms": 2320.2000000476837,
+        "measured_preparation_ms": 1527.1000000238419,
+        "unattributed_roundtrip_overhead_ms": 793.1000000238419
+      },
+      "error": "Workload viewport must be fully visible before measurement."
+    },
+    {
+      "receipt": "v15-dense-budgeted-isolated.json",
+      "operation": "cooperative-root",
+      "count": 1000,
+      "metadata_bytes": 65536,
+      "complete": true,
+      "samples": 6,
+      "complete_sample_parity": true,
+      "preparation": {
+        "strategy": "budgeted",
+        "complete_validation_ms": 301.10000002384186,
+        "request_to_ready_ms": 911.6000000238419,
+        "measured_preparation_ms": 609.7999999523163,
+        "unattributed_roundtrip_overhead_ms": 301.8000000715256
+      },
+      "error": null
+    },
+    {
+      "receipt": "v15-dense-main-isolated.json",
+      "operation": "cooperative-root",
+      "count": 1000,
+      "metadata_bytes": 65536,
+      "complete": true,
+      "samples": 6,
+      "complete_sample_parity": true,
+      "preparation": {
+        "strategy": "main",
+        "complete_validation_ms": 295.80000001192093,
+        "request_to_ready_ms": 1171.199999988079,
+        "measured_preparation_ms": 874.1000000238419,
+        "unattributed_roundtrip_overhead_ms": 297.0999999642372
+      },
+      "error": null
+    }
+  ],
+  "failure": {
+    "type": "browser_observation_failure",
+    "reason": "Dense first download incomplete: viewport not fully visible after one sample; retained. Subsequent status read timed out at 3000ms. No performance acceptance.",
+    "terminal_observation": "Native screenshot displayed Chromium Aw, Snap! Error code: 9 at local v15 page. The subsequent main-lane request was issued, but no terminal raw receipt was recoverable; exact active lane/operation at crash unverified.",
+    "diagnosis": "Unresolved. Memory pressure is a hypothesis, not a measured cause. Do not attribute crash to candidate without reproduction.",
+    "stabilization": "Keep v15 local and do not publish UI integration until failure is diagnosed. Preserve published v14 and Node-only candidate."
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "scope": "existing Rust application optimized-build regression; not a language ranking",
+  "checked_at": "2026-10-28",
+  "source_revision": "8eb4b38f86b0036e121b7c0b1068ea5f07f5b38f",
+  "command": "cargo +1.99.1 test --release --locked --offline",
+  "build_jobs": 2,
+  "wall_budget_seconds": 180,
+  "exit_code": 0,
+  "unit_tests_passed": 108,
+  "integration_tests_passed": 8,
+  "raw_log_retained_privately": true,
+  "new_dependencies_downloaded": false
+}

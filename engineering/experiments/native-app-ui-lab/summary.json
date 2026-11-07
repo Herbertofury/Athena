@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "scope": "Actual Rust app served in native cloud desktop; browser UI and exact saved public data verification",
+  "binary_sha256": "38629af7aa4c8b2463c1f8087f55da51e279ebcc858970c02a54ef733e3dcf5f",
+  "checks": {
+    "engine_connected": true,
+    "saved_archive_dialog_verified": true,
+    "download_equal_saved_bytes": true,
+    "missing_id_explicit_error": true,
+    "last_good_reopened_unchanged": true,
+    "five_prior_snapshots_unchanged": true,
+    "bounded_experiment_terminal_success": true,
+    "native_upstream_connection_failure_explicit": true
+  },
+  "archive_bytes": 12840,
+  "archive_sha256": "114df01da64c51abe5861543110bfbbf5cd7eb20896dc31f80acb21400a85e8d",
+  "experiment": {
+    "timed_pairs": 15,
+    "stress_cases": 10000,
+    "gate": "Incomplete"
+  },
+  "limitations": [
+    "Not a GUI latency or memory benchmark",
+    "No authenticated platform coverage",
+    "Incomplete acceptance gate does not promote code",
+    "Native desktop upstream RustSec request failed to connect; no live upstream success claimed"
+  ]
+}

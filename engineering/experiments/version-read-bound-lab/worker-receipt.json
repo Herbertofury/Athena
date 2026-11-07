@@ -1,0 +1,23 @@
+{
+  "completed": true,
+  "scope": "Actual local HTTP queue and worker; generated oversized and zero-generation records; no provider requests or browser acceptance",
+  "binary_sha256": "54560c637a01fd627505be2cbff00eb323bace0216b5258340564cbabfce98db",
+  "checks": [
+    {
+      "id": "BIGV0001",
+      "state": "failed",
+      "result": {
+        "error": "Saved version is invalid or its identity does not match"
+      }
+    },
+    {
+      "id": "ZEROV001",
+      "state": "failed",
+      "result": {
+        "error": "Saved version is invalid or its identity does not match"
+      }
+    }
+  ],
+  "snapshot_rows_unchanged": true,
+  "snapshot_rows_sha256": "6fff9c884241d6968a539c1f1c7c4015fba107b30f7eccaaf9add65a47540311"
+}

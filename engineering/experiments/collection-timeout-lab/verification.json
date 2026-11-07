@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "checked_at": "2026-10-29",
+  "baseline": "body timeout mislabeled as validation/provider failure",
+  "baseline_test": "failed as expected",
+  "repaired_timeout_repeats": 10,
+  "scoped_classifier_tests": 5,
+  "rust_unit_tests": 116,
+  "rust_integration_tests": 8,
+  "clippy_all_targets": "passed with warnings denied",
+  "external_provider_recovery": "not established",
+  "classifier_sha256": "7e104fcf04bc69bdf41ca60640bc21fc1c7a960734a2891721c6d5ffa071acae"
+}

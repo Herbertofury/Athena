@@ -1,0 +1,70 @@
+{
+  "cases": [
+    {
+      "accepted": true,
+      "attempts": 1,
+      "expected_accepted": true,
+      "requested": "AANobbMI",
+      "stored": true
+    },
+    {
+      "accepted": true,
+      "attempts": 1,
+      "expected_accepted": true,
+      "requested": "sodium",
+      "stored": true
+    },
+    {
+      "accepted": true,
+      "attempts": 1,
+      "expected_accepted": true,
+      "requested": "SODIUM",
+      "stored": true
+    },
+    {
+      "accepted": false,
+      "attempts": 0,
+      "expected_accepted": false,
+      "requested": "othermod",
+      "stored": false
+    },
+    {
+      "accepted": false,
+      "attempts": 0,
+      "expected_accepted": false,
+      "requested": "ZZZZZZZZ",
+      "stored": false
+    },
+    {
+      "accepted": false,
+      "attempts": 0,
+      "expected_accepted": false,
+      "requested": "aanobbmi",
+      "stored": false
+    }
+  ],
+  "mode": "offline generated fixtures; no provider requests",
+  "retained_public": [
+    {
+      "complete_existing_projection_equal": true,
+      "id": "AANobbMI",
+      "payload_sha256": "80b9186e951352b4b265e20cf6e5f57c8646f11b09d6f3a1a8492046acfaf9c0",
+      "request_forms_checked": 3,
+      "scope": "retained public bytes; in-memory snapshot roundtrip, not new live collection or power-loss test"
+    },
+    {
+      "complete_existing_projection_equal": true,
+      "id": "YL57xq9U",
+      "payload_sha256": "8d9ae282ea19d854f9f0911fac320a4af8d873a3228173e37e5001341afe2996",
+      "request_forms_checked": 3,
+      "scope": "retained public bytes; in-memory snapshot roundtrip, not new live collection or power-loss test"
+    },
+    {
+      "complete_existing_projection_equal": true,
+      "id": "gvQqBUqZ",
+      "payload_sha256": "70080299d623bcd6fa857d09243752e6131377b8fa9cd3fd4da89bb33175caaa",
+      "request_forms_checked": 3,
+      "scope": "retained public bytes; in-memory snapshot roundtrip, not new live collection or power-loss test"
+    }
+  ]
+}

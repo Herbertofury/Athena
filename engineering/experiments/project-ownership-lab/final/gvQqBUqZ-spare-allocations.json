@@ -1,0 +1,202 @@
+{
+  "accounting_error": false,
+  "adapter_sha256": "abae12d1e4fdbeaa09b4df65ef3a0136d4503364a25f81e1e1560b498b7680d1",
+  "harness_sha256": "b9a1b1d267a804c5ccf975f31dd6e8330a8a3acabe2a562f27151520140d18b9",
+  "input_bytes": 6200,
+  "input_capacity_mode": "double length",
+  "input_sha256": "70080299d623bcd6fa857d09243752e6131377b8fa9cd3fd4da89bb33175caaa",
+  "limitations": [
+    "Both inputs already owned before measurement; input creation excluded equally",
+    "Requested Rust allocations only; not RSS, native allocations or physical peak memory",
+    "No instrumented timing, network, durable-write or full-UI speed claim",
+    "Final checked implementation; spare capacity discarded, may reallocate"
+  ],
+  "project_id": "gvQqBUqZ",
+  "samples": [
+    {
+      "baseline": {
+        "allocation_calls": 192,
+        "held_requested_rust_bytes_above_start": 4070,
+        "peak_requested_rust_bytes_above_start": 16470,
+        "reallocation_calls": 10,
+        "total_successfully_requested_bytes": 29203
+      },
+      "baseline_retained_record_requested_bytes": 16470,
+      "candidate": {
+        "allocation_calls": 191,
+        "held_requested_rust_bytes_above_start": 4070,
+        "peak_requested_rust_bytes_above_start": 13646,
+        "reallocation_calls": 11,
+        "total_successfully_requested_bytes": 29203
+      },
+      "candidate_retained_record_requested_bytes": 16470,
+      "candidate_reuses_owned_buffer": true,
+      "complete_record_equal": true,
+      "input_capacity": 12400,
+      "post_drop_live_requested_delta": 0,
+      "round": 0
+    },
+    {
+      "baseline": {
+        "allocation_calls": 192,
+        "held_requested_rust_bytes_above_start": 4070,
+        "peak_requested_rust_bytes_above_start": 16470,
+        "reallocation_calls": 10,
+        "total_successfully_requested_bytes": 29203
+      },
+      "baseline_retained_record_requested_bytes": 16470,
+      "candidate": {
+        "allocation_calls": 191,
+        "held_requested_rust_bytes_above_start": 4070,
+        "peak_requested_rust_bytes_above_start": 13646,
+        "reallocation_calls": 11,
+        "total_successfully_requested_bytes": 29203
+      },
+      "candidate_retained_record_requested_bytes": 16470,
+      "candidate_reuses_owned_buffer": true,
+      "complete_record_equal": true,
+      "input_capacity": 12400,
+      "post_drop_live_requested_delta": 0,
+      "round": 1
+    },
+    {
+      "baseline": {
+        "allocation_calls": 192,
+        "held_requested_rust_bytes_above_start": 4070,
+        "peak_requested_rust_bytes_above_start": 16470,
+        "reallocation_calls": 10,
+        "total_successfully_requested_bytes": 29203
+      },
+      "baseline_retained_record_requested_bytes": 16470,
+      "candidate": {
+        "allocation_calls": 191,
+        "held_requested_rust_bytes_above_start": 4070,
+        "peak_requested_rust_bytes_above_start": 13646,
+        "reallocation_calls": 11,
+        "total_successfully_requested_bytes": 29203
+      },
+      "candidate_retained_record_requested_bytes": 16470,
+      "candidate_reuses_owned_buffer": true,
+      "complete_record_equal": true,
+      "input_capacity": 12400,
+      "post_drop_live_requested_delta": 0,
+      "round": 2
+    },
+    {
+      "baseline": {
+        "allocation_calls": 192,
+        "held_requested_rust_bytes_above_start": 4070,
+        "peak_requested_rust_bytes_above_start": 16470,
+        "reallocation_calls": 10,
+        "total_successfully_requested_bytes": 29203
+      },
+      "baseline_retained_record_requested_bytes": 16470,
+      "candidate": {
+        "allocation_calls": 191,
+        "held_requested_rust_bytes_above_start": 4070,
+        "peak_requested_rust_bytes_above_start": 13646,
+        "reallocation_calls": 11,
+        "total_successfully_requested_bytes": 29203
+      },
+      "candidate_retained_record_requested_bytes": 16470,
+      "candidate_reuses_owned_buffer": true,
+      "complete_record_equal": true,
+      "input_capacity": 12400,
+      "post_drop_live_requested_delta": 0,
+      "round": 3
+    },
+    {
+      "baseline": {
+        "allocation_calls": 192,
+        "held_requested_rust_bytes_above_start": 4070,
+        "peak_requested_rust_bytes_above_start": 16470,
+        "reallocation_calls": 10,
+        "total_successfully_requested_bytes": 29203
+      },
+      "baseline_retained_record_requested_bytes": 16470,
+      "candidate": {
+        "allocation_calls": 191,
+        "held_requested_rust_bytes_above_start": 4070,
+        "peak_requested_rust_bytes_above_start": 13646,
+        "reallocation_calls": 11,
+        "total_successfully_requested_bytes": 29203
+      },
+      "candidate_retained_record_requested_bytes": 16470,
+      "candidate_reuses_owned_buffer": true,
+      "complete_record_equal": true,
+      "input_capacity": 12400,
+      "post_drop_live_requested_delta": 0,
+      "round": 4
+    },
+    {
+      "baseline": {
+        "allocation_calls": 192,
+        "held_requested_rust_bytes_above_start": 4070,
+        "peak_requested_rust_bytes_above_start": 16470,
+        "reallocation_calls": 10,
+        "total_successfully_requested_bytes": 29203
+      },
+      "baseline_retained_record_requested_bytes": 16470,
+      "candidate": {
+        "allocation_calls": 191,
+        "held_requested_rust_bytes_above_start": 4070,
+        "peak_requested_rust_bytes_above_start": 13646,
+        "reallocation_calls": 11,
+        "total_successfully_requested_bytes": 29203
+      },
+      "candidate_retained_record_requested_bytes": 16470,
+      "candidate_reuses_owned_buffer": true,
+      "complete_record_equal": true,
+      "input_capacity": 12400,
+      "post_drop_live_requested_delta": 0,
+      "round": 5
+    },
+    {
+      "baseline": {
+        "allocation_calls": 192,
+        "held_requested_rust_bytes_above_start": 4070,
+        "peak_requested_rust_bytes_above_start": 16470,
+        "reallocation_calls": 10,
+        "total_successfully_requested_bytes": 29203
+      },
+      "baseline_retained_record_requested_bytes": 16470,
+      "candidate": {
+        "allocation_calls": 191,
+        "held_requested_rust_bytes_above_start": 4070,
+        "peak_requested_rust_bytes_above_start": 13646,
+        "reallocation_calls": 11,
+        "total_successfully_requested_bytes": 29203
+      },
+      "candidate_retained_record_requested_bytes": 16470,
+      "candidate_reuses_owned_buffer": true,
+      "complete_record_equal": true,
+      "input_capacity": 12400,
+      "post_drop_live_requested_delta": 0,
+      "round": 6
+    },
+    {
+      "baseline": {
+        "allocation_calls": 192,
+        "held_requested_rust_bytes_above_start": 4070,
+        "peak_requested_rust_bytes_above_start": 16470,
+        "reallocation_calls": 10,
+        "total_successfully_requested_bytes": 29203
+      },
+      "baseline_retained_record_requested_bytes": 16470,
+      "candidate": {
+        "allocation_calls": 191,
+        "held_requested_rust_bytes_above_start": 4070,
+        "peak_requested_rust_bytes_above_start": 13646,
+        "reallocation_calls": 11,
+        "total_successfully_requested_bytes": 29203
+      },
+      "candidate_retained_record_requested_bytes": 16470,
+      "candidate_reuses_owned_buffer": true,
+      "complete_record_equal": true,
+      "input_capacity": 12400,
+      "post_drop_live_requested_delta": 0,
+      "round": 7
+    }
+  ],
+  "source_mode": "retained public response; no provider request"
+}

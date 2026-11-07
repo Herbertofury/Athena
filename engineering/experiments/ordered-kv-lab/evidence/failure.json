@@ -1,0 +1,12 @@
+{
+  "original_run_completed": false,
+  "failure": "generated-0-redb-insert",
+  "returncode": -25,
+  "signal": "SIGXFSZ",
+  "file_limit_bytes": 67108864,
+  "database_length_after_failure": 33689600,
+  "retained_successful_samples": 18,
+  "diagnostic_run_separate": true,
+  "trace_status": "not run: ptrace denied; no attempt to bypass",
+  "cause_scope": "File-size limit signal verified; growth-path source suggests transient geometric allocation, exact failing syscall not observed."
+}

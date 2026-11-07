@@ -1,0 +1,35 @@
+[
+  {
+    "id": "HLS174",
+    "title": "HLS.js 1.7.4 release",
+    "url": "https://github.com/video-dev/hls.js/releases/tag/v1.7.4",
+    "observed_version": "v1.7.4, published 2026-10-28 18:52:16 UTC",
+    "topic": "media-playback",
+    "note": "New upstream candidate; live Atlas vendor stays 1.7.3 pending browser acceptance.",
+    "checked_at": "2026-10-28",
+    "review_after_days": 14,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "HLSPARSE174",
+    "title": "HLS trailing-decimal duration parser repair",
+    "url": "https://github.com/video-dev/hls.js/pull/8113",
+    "observed_version": "Included in HLS.js 1.7.4",
+    "topic": "media-playback",
+    "note": "Full parser fixtures confirm corrected segment identities; aggregate duration alone misses the old error.",
+    "checked_at": "2026-10-28",
+    "review_after_days": 14,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "HLSBUILD174",
+    "title": "HLS full feature build configuration",
+    "url": "https://github.com/video-dev/hls.js/blob/v1.7.4/build-config.js",
+    "observed_version": "v1.7.4 full-build defaults; also checked v1.7.3",
+    "topic": "media-playback",
+    "note": "Source fixture compilation retains full-build flags; it is not a shipped browser bundle acceptance test.",
+    "checked_at": "2026-10-28",
+    "review_after_days": 14,
+    "evidence": "primary_documented"
+  }
+]

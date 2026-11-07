@@ -1,0 +1,20 @@
+{
+  "code_commit": "383e1a1b7e072ed107fda8b098759721f32e090a",
+  "harness": "atlas-real-media-v8-preview-recovery",
+  "source_module_sha256": "ad06f6926358e93fdca81c5b1cc1bf92da92f42a27970c8f0477dbf268fe2363",
+  "focused_tests": 10,
+  "all_node_tests": 72,
+  "python_tests": 53,
+  "fixture_sha256": "2aa0668aba0eb29c69faf368fab206369718335be7f47bc0c6592236e79d1aba",
+  "source_fixture_unchanged": true,
+  "baseline_reproductions": [
+    "settled timeout handlers retained",
+    "failed image cannot be explicitly retried",
+    "early load before metadata prevents later image loading"
+  ],
+  "limitations": [
+    "VM lifecycle failures, not live network outage recovery",
+    "No exact heap or end-to-end speed measurement",
+    "Underlying browser network cancellation not guaranteed by timeout"
+  ]
+}

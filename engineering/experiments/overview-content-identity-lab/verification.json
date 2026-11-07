@@ -1,0 +1,15 @@
+{
+  "baseline_commit": "591f6c85eb28ea63d0dcb251eb4de2f2d362b5a3",
+  "default_source_restored_sha256": "54993055ab32dd01e77a84d7834c30c2f7254460802eaaffc1c377790c9837d8",
+  "restored_binary_sha256": "405aa5efca4ee8bea1aae597712b720cc5672a05327a041f7ef5d91f0c44bf1e",
+  "new_baseline_failures": 2,
+  "candidate_tests": 4,
+  "generated_replacements": 1000,
+  "full_node_passes": 273,
+  "python_passes": 237,
+  "rust_suite": "passed; no Rust code changed",
+  "browser_recheck": "Supported runtime reset and getState still failed on native credential-state resume at16:35 UTC",
+  "promoted": false,
+  "native_browser_accepted": false,
+  "performance_threshold_predeclared": false
+}

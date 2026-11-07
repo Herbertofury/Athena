@@ -1,0 +1,94 @@
+{
+  "scope": "actual official public requests through existing Rust CLI and queued worker; complete received JSON only",
+  "binary_sha256": "38629af7aa4c8b2463c1f8087f55da51e279ebcc858970c02a54ef733e3dcf5f",
+  "jobs": [
+    {
+      "attempt": 1,
+      "id": 1,
+      "job": {
+        "CollectModrinthRaw": {
+          "project": "AANobbMI"
+        }
+      },
+      "result": {
+        "project_archive": {
+          "canonical_id": "AANobbMI",
+          "coordinator_sha256": "9bfe2454d310204acf2c7d69df1c61a84b4e7e4677449bd05665049b09d1fa80",
+          "generation": "5",
+          "payload_bytes": 12840,
+          "payload_sha256": "114df01da64c51abe5861543110bfbbf5cd7eb20896dc31f80acb21400a85e8d",
+          "schema_version": 1,
+          "scope": "Receipt only; complete received public project JSON stays in local snapshots. No linked-media fetch, account access or complete-platform claim.",
+          "status": "complete_received_response"
+        }
+      },
+      "state": "succeeded"
+    },
+    {
+      "attempt": 1,
+      "id": 2,
+      "job": {
+        "CollectModrinthRaw": {
+          "project": "atlas-evidence-missing-project-20261028"
+        }
+      },
+      "result": {
+        "error": "Collection failed validation or provider checks; previous results are retained"
+      },
+      "state": "failed"
+    }
+  ],
+  "checks": [
+    {
+      "name": "enqueue accepted AANobbMI",
+      "passed": true
+    },
+    {
+      "name": "terminal state AANobbMI",
+      "passed": true
+    },
+    {
+      "name": "enqueue accepted atlas-evidence-missing-project-20261028",
+      "passed": true
+    },
+    {
+      "name": "terminal state atlas-evidence-missing-project-20261028",
+      "passed": true
+    },
+    {
+      "name": "all previous snapshot rows unchanged",
+      "passed": true
+    },
+    {
+      "name": "one new successful snapshot only",
+      "passed": true
+    },
+    {
+      "name": "database integrity",
+      "passed": true
+    },
+    {
+      "name": "saved response HTTP 200",
+      "passed": true
+    },
+    {
+      "name": "saved response exact bytes",
+      "passed": true
+    },
+    {
+      "name": "bounded worker receipt hash equals reopened payload",
+      "passed": true
+    },
+    {
+      "name": "bounded worker receipt length equals reopened payload",
+      "passed": true
+    },
+    {
+      "name": "raw prose absent from worker receipt",
+      "passed": true
+    }
+  ],
+  "completed": true,
+  "received_payload_bytes": 12840,
+  "received_payload_sha256": "114df01da64c51abe5861543110bfbbf5cd7eb20896dc31f80acb21400a85e8d"
+}

@@ -1,0 +1,13 @@
+{
+  "scope": "Generated late-message fixture using actual client function; prior differs only by absent settled guard",
+  "results": [
+    {
+      "lane": "prior",
+      "late_payload_reads": 1
+    },
+    {
+      "lane": "repaired",
+      "late_payload_reads": 0
+    }
+  ]
+}

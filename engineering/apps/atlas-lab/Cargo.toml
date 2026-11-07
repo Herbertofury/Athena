@@ -1,0 +1,20 @@
+[package]
+name = "atlas-lab"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.99"
+publish = false
+
+[dependencies]
+getrandom = "=0.4.3"
+rusqlite = { version = "=0.41.0", features = ["bundled"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = { version = "=1.0.154", features = ["raw_value"] }
+reqwest = { version = "=0.13.5", default-features = false, features = ["blocking", "rustls"] }
+axum = "=0.8.9"
+tokio = { version = "=1.54.1", features = ["rt-multi-thread", "net", "signal", "sync"] }
+
+sha2 = { version = "=0.11.1", default-features = false }
+
+[build-dependencies]
+sha2 = { version = "=0.11.1", default-features = false }

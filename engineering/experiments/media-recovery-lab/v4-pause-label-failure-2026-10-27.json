@@ -1,0 +1,17 @@
+{
+  "source_commit": "3925d629e8846ab9c550217f7869a72a20543d8e",
+  "harness": "atlas-real-media-v4-retryable-player",
+  "real_browser": true,
+  "provider": "Steam",
+  "card_id": "steam:620",
+  "engine": "hlsjs",
+  "observed_dom": {
+    "paused": true,
+    "current_time": 0.518938,
+    "autoplay": false,
+    "status_text": "Playing the selected source trailer."
+  },
+  "expected_status_text": "Paused.",
+  "outcome": "failed status coherence; native playback did pause",
+  "youtube": "two actual player-ready events; no play request and no playback claim"
+}

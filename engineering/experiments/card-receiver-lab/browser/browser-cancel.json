@@ -1,0 +1,52 @@
+{
+  "harness": "atlas-complete-receiver-v2-callback-clock",
+  "started_at": "2026-10-28T08:30:12.837Z",
+  "scope": "Generated browser receiver validation; no target acceptance",
+  "count": 200,
+  "bytes": 65536,
+  "execution": "worker",
+  "complete": false,
+  "samples": [],
+  "limitations": [
+    "Frame gaps are scheduling observations, not INP or physical paint",
+    "No heap/RSS or provider-media measurement",
+    "Worker request duration includes startup, full input clone and full returned-record clone",
+    "Preparation and post-validation parity check are outside sample timers",
+    "Main-thread synchronous serialization cannot be interrupted mid-call; cancellation is checked at the next boundary"
+  ],
+  "calibration": {
+    "scope": "empty-frame scheduling check; not physical paint",
+    "waits_ms": [
+      8.800000011920929,
+      17.69999998807907,
+      15.5,
+      17.600000023841858,
+      15.199999988079071,
+      17.19999998807907,
+      15.800000011920929,
+      17.600000023841858
+    ],
+    "complete": true,
+    "reliable": true,
+    "slow_count": 0,
+    "threshold_ms": 200,
+    "reason": null
+  },
+  "dataset": {
+    "count": 200,
+    "metadata_bytes_per_record": 65536,
+    "serialized_bytes": 13136801,
+    "sha256": "b5d35c377c1fccebd3a402772d80402d35114f776ddb9a68166c029497f90230",
+    "generation_ms": 46.700000047683716,
+    "serialization_ms": 107.59999996423721,
+    "encoding_ms": 145.9000000357628,
+    "digest_ms": 41.19999998807907,
+    "hash_ms": 294.69999998807907
+  },
+  "error": "Worker cancelled; partial evidence retained",
+  "focus_state": {
+    "started_focused": true,
+    "focus_lost": false,
+    "focused_now": true
+  }
+}

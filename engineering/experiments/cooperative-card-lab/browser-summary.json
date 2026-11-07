@@ -1,0 +1,68 @@
+{
+  "scope": "sanitized aggregate from one cloud-browser experiment; full traces retained privately",
+  "commit": "8eb4b38f86b0036e121b7c0b1068ea5f07f5b38f",
+  "harness": "atlas-card-density-v13-cooperative-creation",
+  "accepted": false,
+  "privacy": "No browser/device identity, viewport, absolute timestamps or interaction identifiers published",
+  "workloads": [
+    {
+      "name": "moderate",
+      "records": 1000,
+      "metadata_bytes_per_record": 8192,
+      "complete": true,
+      "samples": 14,
+      "all_output_equal": true,
+      "calibration_reliable": true,
+      "lanes": {
+        "metadata_baseline": {
+          "samples": 7,
+          "median_creation_insertion_elapsed_ms": 51.69999998807907,
+          "median_frame_ready_proxy_ms": 402.19999998807907,
+          "median_scroll_frame_wait_max_ms": 149.9000000357628
+        },
+        "cooperative_metadata": {
+          "samples": 7,
+          "median_creation_insertion_elapsed_ms": 68.80000001192093,
+          "median_frame_ready_proxy_ms": 334,
+          "median_scroll_frame_wait_max_ms": 163.5999999642372,
+          "max_creation_slice_ms": 41,
+          "max_dom_commit_ms": 699,
+          "median_yield_count": 4
+        }
+      }
+    },
+    {
+      "name": "dense",
+      "records": 1000,
+      "metadata_bytes_per_record": 65536,
+      "complete": true,
+      "samples": 6,
+      "all_output_equal": true,
+      "calibration_reliable": true,
+      "lanes": {
+        "metadata_baseline": {
+          "samples": 3,
+          "median_creation_insertion_elapsed_ms": 46.89999997615814,
+          "median_frame_ready_proxy_ms": 398.80000001192093,
+          "median_scroll_frame_wait_max_ms": 374
+        },
+        "cooperative_metadata": {
+          "samples": 3,
+          "median_creation_insertion_elapsed_ms": 65.09999996423721,
+          "median_frame_ready_proxy_ms": 582.5999999642372,
+          "median_scroll_frame_wait_max_ms": 339.80000001192093,
+          "max_creation_slice_ms": 5.300000011920929,
+          "max_dom_commit_ms": 51.19999998807907,
+          "median_yield_count": 5
+        }
+      }
+    }
+  ],
+  "decision": "Keep isolated: dense frame-ready regression and expensive final DOM commits remain. Splitting creation alone does not bound the complete main-thread operation.",
+  "limitations": [
+    "Generated data, not real provider cards or a target-project comparison",
+    "No peak-memory, INP or physical paint acceptance",
+    "Different sample counts and two workload sizes are not statistical confidence",
+    "One automation status read timed out during dense work; preserved separately without changing protocol settings"
+  ]
+}

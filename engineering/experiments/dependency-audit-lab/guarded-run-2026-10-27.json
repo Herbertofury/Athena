@@ -1,0 +1,49 @@
+{
+  "checked_at": "2026-10-27T11:32:05.803417+00:00",
+  "database_commit": "99670cfc0bc574433034b75876a4b791ccaa2efb",
+  "advisory_markdown_files": 1360,
+  "tool_sha256": "663251e833b2c8f94a912d04ad445bb1bfc5d15de951688eb492d15bd4e64877",
+  "scope": "Fixed Atlas lockfiles; expected revision currentness must be verified independently",
+  "runs": [
+    {
+      "lock": "apps/atlas-lab/Cargo.lock",
+      "tool_exit_code": 0,
+      "raw_result": "audit-0.json",
+      "known_matches": 0,
+      "warnings": {}
+    },
+    {
+      "lock": "experiments/compressed-snapshot-lab/Cargo.lock",
+      "tool_exit_code": 0,
+      "raw_result": "audit-1.json",
+      "known_matches": 0,
+      "warnings": {}
+    },
+    {
+      "lock": "experiments/rust-json-parser-lab/Cargo.lock",
+      "tool_exit_code": 0,
+      "raw_result": "audit-2.json",
+      "known_matches": 0,
+      "warnings": {}
+    }
+  ],
+  "completed": true,
+  "all_clear": true,
+  "locks": [
+    {
+      "path": "apps/atlas-lab/Cargo.lock",
+      "sha256": "4ba18f93c261a48a42ea595be3f8a37b6d9c419912d7e7875204ac0641e2dd85",
+      "input_file": "input-0.lock"
+    },
+    {
+      "path": "experiments/compressed-snapshot-lab/Cargo.lock",
+      "sha256": "4a57e69532dc4d11d80bd527b17d52a42b346fb5fca4fcaccb7d973c4e0c2dd3",
+      "input_file": "input-1.lock"
+    },
+    {
+      "path": "experiments/rust-json-parser-lab/Cargo.lock",
+      "sha256": "bd2751918f9bb5e49e8f8b76194b962dea24e1dfc68e0c38d9d6c0ef72060ffb",
+      "input_file": "input-2.lock"
+    }
+  ]
+}

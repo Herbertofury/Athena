@@ -1,0 +1,24 @@
+[
+  {
+    "id": "TESSERA01",
+    "title": "Tessera structured evidence delivery preprint",
+    "url": "https://arxiv.org/html/2610.37080v1",
+    "observed_version": "v1, submitted 2026-10-27",
+    "topic": "extraction-evaluation",
+    "note": "Research-only; aggregate QA gains include individual losses, not complete collector acceptance.",
+    "checked_at": "2026-10-29",
+    "review_after_days": 14,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "TESSERASOURCE01",
+    "title": "Tessera source and reuse boundary",
+    "url": "https://github.com/sarendis56/Tessera/tree/4404de3c077f5f768c308dc866985ae89cfd67bf",
+    "observed_version": "4404de3c077f5f768c308dc866985ae89cfd67bf, 2026-10-28",
+    "topic": "extraction-evaluation",
+    "note": "Source inspection only; no declared license found in tree or package metadata, no prototype execution.",
+    "checked_at": "2026-10-29",
+    "review_after_days": 14,
+    "evidence": "primary_documented"
+  }
+]

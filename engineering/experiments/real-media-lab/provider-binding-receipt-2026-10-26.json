@@ -1,0 +1,24 @@
+{
+  "checked_at": "2026-10-26T23:42:00Z",
+  "baseline_commit": "15381575ba1ebb978c4290efeb642c6e200e4f25",
+  "baseline_core_sha256": "cee08b579ccc422a58dfe7e1ed13e56cada03706b59e3b1de39e89511be4deb6",
+  "candidate_core_sha256": "be8652593af35f351b3ca2619a8aeb6a6ebfed29f3cbeb5873d554215cec4e01",
+  "fixture_sha256": "09bc53f20b0f552b6beae9c5c87c6662f94299ec4cb665b153d9e05196ef0348",
+  "red": {
+    "tests": 13,
+    "passed": 9,
+    "failed": 4
+  },
+  "green": {
+    "tests": 13,
+    "passed": 13,
+    "failed": 0
+  },
+  "scope": "Offline provider-binding correctness; not playback or performance acceptance",
+  "fixture_unchanged": true,
+  "counts": {
+    "cards": 4,
+    "gallery_images": 19,
+    "videos": 18
+  }
+}

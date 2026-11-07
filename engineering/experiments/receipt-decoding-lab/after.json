@@ -1,0 +1,20 @@
+[
+  {
+    "case": "duplicate_source",
+    "baseline_accepted": true,
+    "repaired_rejected": true,
+    "reason": "Duplicate JSON object key"
+  },
+  {
+    "case": "duplicate_nested_parity",
+    "baseline_accepted": true,
+    "repaired_rejected": true,
+    "reason": "Duplicate JSON object key"
+  },
+  {
+    "case": "nonfinite_unknown",
+    "baseline_accepted": true,
+    "repaired_rejected": true,
+    "reason": "Non-finite JSON number"
+  }
+]

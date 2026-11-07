@@ -1,0 +1,100 @@
+{
+  "baseline_reader_sha256": "c09668f695f8c79693ec9248abd2a9b1ca2e36bf612bc2a70df76be278e81941",
+  "compiler": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+  "complete": true,
+  "harness_sha256": "0b5b7353fff80cc29061321a8749b7b8828852abe969d27530b86256666b749f",
+  "input_bytes": 12840,
+  "input_sha256": "114df01da64c51abe5861543110bfbbf5cd7eb20896dc31f80acb21400a85e8d",
+  "lock_sha256": "4ba18f93c261a48a42ea595be3f8a37b6d9c419912d7e7875204ac0641e2dd85",
+  "profile": "debug",
+  "reader_sha256": "6a0d0ddd4ea83f7351d28de8205556bb71c0ed89204ca2b21f2f9997da57d171",
+  "samples": [
+    {
+      "accepted": true,
+      "complete_bytes_equal": true,
+      "lane": "baseline",
+      "mode": "known",
+      "safe_error": null
+    },
+    {
+      "accepted": true,
+      "complete_bytes_equal": true,
+      "lane": "adaptive",
+      "mode": "known",
+      "safe_error": null
+    },
+    {
+      "accepted": true,
+      "complete_bytes_equal": true,
+      "lane": "baseline",
+      "mode": "chunked",
+      "safe_error": null
+    },
+    {
+      "accepted": true,
+      "complete_bytes_equal": true,
+      "lane": "adaptive",
+      "mode": "chunked",
+      "safe_error": null
+    },
+    {
+      "accepted": false,
+      "complete_bytes_equal": false,
+      "lane": "baseline",
+      "mode": "truncated",
+      "safe_error": "Collection response transport failed; previous results are retained"
+    },
+    {
+      "accepted": false,
+      "complete_bytes_equal": false,
+      "lane": "adaptive",
+      "mode": "truncated",
+      "safe_error": "Collection response transport failed; previous results are retained"
+    },
+    {
+      "accepted": false,
+      "complete_bytes_equal": false,
+      "lane": "baseline",
+      "mode": "stalled",
+      "safe_error": "Collection request timed out; previous results are retained"
+    },
+    {
+      "accepted": false,
+      "complete_bytes_equal": false,
+      "lane": "adaptive",
+      "mode": "stalled",
+      "safe_error": "Collection request timed out; previous results are retained"
+    },
+    {
+      "accepted": false,
+      "complete_bytes_equal": false,
+      "lane": "baseline",
+      "mode": "wrong-type",
+      "safe_error": "Collection failed validation or provider checks; previous results are retained"
+    },
+    {
+      "accepted": false,
+      "complete_bytes_equal": false,
+      "lane": "adaptive",
+      "mode": "wrong-type",
+      "safe_error": "Collection failed validation or provider checks; previous results are retained"
+    },
+    {
+      "accepted": false,
+      "complete_bytes_equal": false,
+      "lane": "baseline",
+      "mode": "over-budget",
+      "safe_error": "Collection response exceeded its size budget; previous results are retained"
+    },
+    {
+      "accepted": false,
+      "complete_bytes_equal": false,
+      "lane": "adaptive",
+      "mode": "over-budget",
+      "safe_error": "Collection response exceeded its size budget; previous results are retained"
+    }
+  ],
+  "schema_version": 1,
+  "scope": "Actual reqwest blocking transport on owned loopback fixtures; baseline uses actual app shared JSON reader; not live provider, latency or API permission acceptance",
+  "target": "x86_64-unknown-linux-gnu"
+}

@@ -1,0 +1,13 @@
+import {readFileSync,writeFileSync} from 'node:fs';
+import {join} from 'node:path';
+import {mount} from '../job-identity-lab/render-harness.mjs';
+import * as input from '../../apps/atlas-lab/ui/collection-input.mjs';
+const dir=process.argv[2];
+const source=readFileSync(join(dir,'served-app.js'),'utf8').replace(/^import .*;\n/gm,'');
+const app=mount(source,input),data=name=>JSON.parse(readFileSync(join(dir,name+'.json'),'utf8'));
+app.render(data('first'));app.render(data('second'));
+const content=app.get('jobs').textContent,node=app.get('jobs').firstChild;
+app.render(data('second'));
+const receipt={scope:'Actual HTTP responses and served renderer; controlled DOM, not native browser',showsReplacement:content.includes('SECOND DATABASE RESULT'),staleResultAbsent:!content.includes('FIRST DATABASE RESULT'),unchangedNodeReused:node===app.get('jobs').firstChild,cardCount:app.get('jobs').children.length};
+writeFileSync(join(dir,'render-receipt.json'),JSON.stringify(receipt,null,2)+'\n');
+console.log(JSON.stringify(receipt));

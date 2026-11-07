@@ -1,0 +1,13 @@
+[
+  {
+    "id": "NODERSS01",
+    "title": "Node.js process resource usage",
+    "url": "https://github.com/nodejs/node/blob/v24.22.1/doc/api/process.md#processresourceusage",
+    "observed_version": "Node.js v24.22.1",
+    "topic": "performance-measurement",
+    "note": "maxRSS reports maximum process resident set in KiB. It includes the whole process and is not a browser or per-function memory measure.",
+    "checked_at": "2026-10-28",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  }
+]

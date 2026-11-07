@@ -1,0 +1,127 @@
+{
+  "checked_at": "2026-10-28",
+  "scope": "actual public CLI and queued collection; no complete-platform or speedup acceptance",
+  "cli_receipts": [
+    {
+      "generation": "1",
+      "payload_bytes": 12840,
+      "payload_sha256": "75798037b3ea908200264e29a064392fc801c46b36db0b8f32d25454e7eeb356",
+      "project_id": "AANobbMI",
+      "scope": "Complete received single public project JSON retained locally; not all project content. Optional CLI lane, no queued UI or account coverage."
+    },
+    {
+      "generation": "2",
+      "payload_bytes": 6200,
+      "payload_sha256": "1fb6bacb935940e59d4da9b9e5cdc277653069f9b486e4faef0c08515ccb8fbf",
+      "project_id": "gvQqBUqZ",
+      "scope": "Complete received single public project JSON retained locally; not all project content. Optional CLI lane, no queued UI or account coverage."
+    },
+    {
+      "generation": "3",
+      "payload_bytes": 7267,
+      "payload_sha256": "6c2db07110400d22cc7940ab6ef2077595f415070ce6e87ef5e57a2d76a18f49",
+      "project_id": "YL57xq9U",
+      "scope": "Complete received single public project JSON retained locally; not all project content. Optional CLI lane, no queued UI or account coverage."
+    },
+    {
+      "generation": "4",
+      "payload_bytes": 12840,
+      "payload_sha256": "75798037b3ea908200264e29a064392fc801c46b36db0b8f32d25454e7eeb356",
+      "project_id": "AANobbMI",
+      "scope": "Complete received single public project JSON retained locally; not all project content. Optional CLI lane, no queued UI or account coverage."
+    }
+  ],
+  "cli_readback": [
+    {
+      "generation": 1,
+      "provider": "modrinth-project-raw",
+      "id": "AANobbMI",
+      "bytes": 12840,
+      "sha256": "75798037b3ea908200264e29a064392fc801c46b36db0b8f32d25454e7eeb356",
+      "gallery_entries": 6,
+      "body_characters": 5414,
+      "team_id_present": true,
+      "top_level_fields": 38
+    },
+    {
+      "generation": 2,
+      "provider": "modrinth-project-raw",
+      "id": "gvQqBUqZ",
+      "bytes": 6200,
+      "sha256": "1fb6bacb935940e59d4da9b9e5cdc277653069f9b486e4faef0c08515ccb8fbf",
+      "gallery_entries": 0,
+      "body_characters": 2469,
+      "team_id_present": true,
+      "top_level_fields": 38
+    },
+    {
+      "generation": 3,
+      "provider": "modrinth-project-raw",
+      "id": "YL57xq9U",
+      "bytes": 7267,
+      "sha256": "6c2db07110400d22cc7940ab6ef2077595f415070ce6e87ef5e57a2d76a18f49",
+      "gallery_entries": 4,
+      "body_characters": 1394,
+      "team_id_present": true,
+      "top_level_fields": 38
+    },
+    {
+      "generation": 4,
+      "provider": "modrinth-project-raw",
+      "id": "AANobbMI",
+      "bytes": 12840,
+      "sha256": "75798037b3ea908200264e29a064392fc801c46b36db0b8f32d25454e7eeb356",
+      "gallery_entries": 6,
+      "body_characters": 5414,
+      "team_id_present": true,
+      "top_level_fields": 38
+    }
+  ],
+  "total_snapshot_generations_after_queue": 5,
+  "attempts": [
+    {
+      "requested_id": "modrinth-project-raw:AANobbMI",
+      "outcome": "success",
+      "generation": 1
+    },
+    {
+      "requested_id": "modrinth-project-raw:gvQqBUqZ",
+      "outcome": "success",
+      "generation": 2
+    },
+    {
+      "requested_id": "modrinth-project-raw:YL57xq9U",
+      "outcome": "success",
+      "generation": 3
+    },
+    {
+      "requested_id": "modrinth-project-raw:AANobbMI",
+      "outcome": "success",
+      "generation": 4
+    },
+    {
+      "requested_id": "modrinth-project-raw:atlas-evidence-missing-project-20261028",
+      "outcome": "failure",
+      "generation": null
+    },
+    {
+      "requested_id": "modrinth-project-raw:AANobbMI",
+      "outcome": "success",
+      "generation": 5
+    },
+    {
+      "requested_id": "modrinth-project-raw:atlas-evidence-missing-project-20261028",
+      "outcome": "failure",
+      "generation": null
+    }
+  ],
+  "all_four_prequeue_generations_retained": true,
+  "fresh_queue_http_checks": 12,
+  "native_browser": {
+    "attempted": true,
+    "result": "ERR_CONNECTION_REFUSED for cloud-browser localhost navigation; no GUI acceptance",
+    "owned_server_stopped": true
+  },
+  "raw_payloads": "retained privately in local database, not published",
+  "binary_sha256": "38629af7aa4c8b2463c1f8087f55da51e279ebcc858970c02a54ef733e3dcf5f"
+}

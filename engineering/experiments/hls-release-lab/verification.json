@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "local_source_fixture_cases": 63,
+  "ordinary_full_graph_controls": 13,
+  "targeted_trailing_decimal_cases": 50,
+  "baseline_target_successes": 0,
+  "candidate_target_successes": 50,
+  "independent_source_stage_rebuild": "passed exact artifact hashes",
+  "unknown_artifact_guard": "passed; rejected before import",
+  "invalid_archive_guards": 2,
+  "python_tests": 113,
+  "python_optimized_tests": 113,
+  "node_tests": 178,
+  "live_vendor": "1.7.3 unchanged",
+  "candidate_browser_playback": "not tested",
+  "source_fixture_scripts": {
+    "build.mjs": "9477dbc28b8c97a427a0058329c94e83a9c76b6922babbd1d67a954698d7e526",
+    "evaluate.mjs": "749db7ca595034b00302d977760076abf42bdfa051f0c73572a73ef984a8f6f5",
+    "stage_sources.py": "9c26b325d8ba7f39e6eedfacd93a4006648a06029f7e6792b4aa9647dea1559b"
+  }
+}

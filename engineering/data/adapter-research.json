@@ -1,0 +1,86 @@
+[
+  {
+    "slug": "patreon",
+    "name": "Patreon",
+    "source": "https://docs.patreon.com/",
+    "status": "Documentation reviewed; authenticated extraction and full-media parity not yet tested.",
+    "checked_at": "2026-10-26"
+  },
+  {
+    "slug": "afdian",
+    "name": "Afdian",
+    "source": "https://guide.afdian.com/creator/developer",
+    "status": "Developer documentation reviewed; no authenticated post-media acceptance.",
+    "checked_at": "2026-10-26"
+  },
+  {
+    "slug": "youtube",
+    "name": "YouTube",
+    "source": "https://developers.google.com/youtube/iframe_api_reference",
+    "status": "Public oEmbed metadata and official player integrated; player-ready and buffering observed, actual playback not verified after timeout. Thumbnail unavailable in the test browser.",
+    "checked_at": "2026-10-26"
+  },
+  {
+    "slug": "bilibili",
+    "name": "Bilibili",
+    "source": "https://openhome.bilibili.com/doc",
+    "status": "Research entry created; no live complete-media or authenticated acceptance.",
+    "checked_at": "2026-10-26"
+  },
+  {
+    "slug": "x",
+    "name": "X",
+    "source": "https://docs.x.com/x-api/introduction",
+    "status": "Documentation reviewed; no account grant, paid request or accepted live adapter.",
+    "checked_at": "2026-10-26"
+  },
+  {
+    "slug": "facebook",
+    "name": "Facebook",
+    "source": "https://developers.facebook.com/docs/graph-api/overview/",
+    "status": "Current-documentation review incomplete due to rate limiting; no accepted adapter.",
+    "checked_at": "2026-10-26"
+  },
+  {
+    "slug": "discord",
+    "name": "Discord",
+    "source": "https://docs.discord.com/developers/resources/message",
+    "status": "Official content-access, attachment expiry and partial-update semantics reviewed; no app grant, authenticated collection or playback acceptance.",
+    "checked_at": "2026-10-30"
+  },
+  {
+    "slug": "steam",
+    "name": "Steam",
+    "source": "https://partner.steamgames.com/doc/webapi_overview",
+    "status": "Public snapshot preserves 12 screenshots and 17 trailers. Native HLS and HLS.js playback verified for one selected trailer; no account credentials inherited.",
+    "checked_at": "2026-10-26"
+  },
+  {
+    "slug": "steamdb",
+    "name": "SteamDB",
+    "source": "https://steamdb.info/faq/",
+    "status": "Reference-only lane. No SteamDB crawler implemented or run.",
+    "checked_at": "2026-10-26"
+  },
+  {
+    "slug": "curseforge",
+    "name": "CurseForge",
+    "source": "https://docs.curseforge.com/rest-api/",
+    "status": "API documentation reviewed; no new key configured in Atlas.",
+    "checked_at": "2026-10-26"
+  },
+  {
+    "slug": "nexus-mods",
+    "name": "Nexus Mods",
+    "source": "https://graphql.nexusmods.com/",
+    "status": "Anonymous game identities and SkyUI metadata verified live; full gallery and authenticated downloads not accepted.",
+    "checked_at": "2026-10-26"
+  },
+  {
+    "slug": "modrinth",
+    "name": "Modrinth",
+    "source": "https://docs.modrinth.com/api/",
+    "status": "Rust public metadata/gallery collection, bounded canonical-ID batch CLI and local queue tested. Five complete projected-output comparisons matched; 22 loopback checks and durable reopen passed. Description-linked media and visual local UI acceptance remain incomplete.",
+    "checked_at": "2026-10-27"
+  }
+]

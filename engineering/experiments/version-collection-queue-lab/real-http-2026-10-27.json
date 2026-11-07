@@ -1,0 +1,302 @@
+{
+  "checked_at": "2026-10-27T09:36:52.322694+00:00",
+  "scope": "real official Modrinth public metadata through local queue; no browser interaction claim",
+  "binary_sha256": "de9e335da8eb8c1ab691c69fec20d33e97ba1fb1844f418ed11b1d3593bd4ade",
+  "checks": [
+    {
+      "name": "CSRF guard retained",
+      "observed": 403,
+      "expected": 403,
+      "passed": true
+    },
+    {
+      "name": "invalid ID batch rejected",
+      "observed": 400,
+      "expected": 400,
+      "passed": true
+    },
+    {
+      "name": "invalid ID batch rejected",
+      "observed": 400,
+      "expected": 400,
+      "passed": true
+    },
+    {
+      "name": "invalid ID batch rejected",
+      "observed": 400,
+      "expected": 400,
+      "passed": true
+    },
+    {
+      "name": "invalid ID batch rejected",
+      "observed": 400,
+      "expected": 400,
+      "passed": true
+    },
+    {
+      "name": "arbitrary URL field rejected",
+      "observed": 422,
+      "expected": 422,
+      "passed": true
+    },
+    {
+      "name": "queue accepted",
+      "observed": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "real public collection succeeds",
+      "observed": "succeeded",
+      "expected": "succeeded",
+      "passed": true
+    },
+    {
+      "name": "three records retained",
+      "observed": 3,
+      "expected": 3,
+      "passed": true
+    },
+    {
+      "name": "no missing IDs",
+      "observed": [],
+      "expected": [],
+      "passed": true
+    },
+    {
+      "name": "receipt generation exact g6ju16VJ",
+      "observed": "1",
+      "expected": "1",
+      "passed": true
+    },
+    {
+      "name": "receipt SHA matches complete stored bytes g6ju16VJ",
+      "observed": "5690d7ac80b7b2b3ab5359d9f5a2744aa58e1a8096cd9e25899fc56f4703b3b5",
+      "expected": "5690d7ac80b7b2b3ab5359d9f5a2744aa58e1a8096cd9e25899fc56f4703b3b5",
+      "passed": true
+    },
+    {
+      "name": "receipt length matches complete stored bytes g6ju16VJ",
+      "observed": 1894,
+      "expected": 1894,
+      "passed": true
+    },
+    {
+      "name": "stored canonical ID g6ju16VJ",
+      "observed": "g6ju16VJ",
+      "expected": "g6ju16VJ",
+      "passed": true
+    },
+    {
+      "name": "receipt generation exact Ag5S66CF",
+      "observed": "2",
+      "expected": "2",
+      "passed": true
+    },
+    {
+      "name": "receipt SHA matches complete stored bytes Ag5S66CF",
+      "observed": "907ed0a046ed9d2c96dafaa49c2b19df213ce86aa41d8cabc32af711a2df77f0",
+      "expected": "907ed0a046ed9d2c96dafaa49c2b19df213ce86aa41d8cabc32af711a2df77f0",
+      "passed": true
+    },
+    {
+      "name": "receipt length matches complete stored bytes Ag5S66CF",
+      "observed": 962,
+      "expected": 962,
+      "passed": true
+    },
+    {
+      "name": "stored canonical ID Ag5S66CF",
+      "observed": "Ag5S66CF",
+      "expected": "Ag5S66CF",
+      "passed": true
+    },
+    {
+      "name": "receipt generation exact 1rb9wI5K",
+      "observed": "3",
+      "expected": "3",
+      "passed": true
+    },
+    {
+      "name": "receipt SHA matches complete stored bytes 1rb9wI5K",
+      "observed": "02bd4cc2d6f1a73bda3ff5cc48bc65cec3cddbe8cc46b64cbc5586f8352eda1b",
+      "expected": "02bd4cc2d6f1a73bda3ff5cc48bc65cec3cddbe8cc46b64cbc5586f8352eda1b",
+      "passed": true
+    },
+    {
+      "name": "receipt length matches complete stored bytes 1rb9wI5K",
+      "observed": 1600,
+      "expected": 1600,
+      "passed": true
+    },
+    {
+      "name": "stored canonical ID 1rb9wI5K",
+      "observed": "1rb9wI5K",
+      "expected": "1rb9wI5K",
+      "passed": true
+    },
+    {
+      "name": "queue accepted",
+      "observed": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "partial is not success",
+      "observed": "failed",
+      "expected": "failed",
+      "passed": true
+    },
+    {
+      "name": "missing identity explicit",
+      "observed": [
+        "00000000"
+      ],
+      "expected": [
+        "00000000"
+      ],
+      "passed": true
+    },
+    {
+      "name": "previous generation retained",
+      "observed": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "queue accepted",
+      "observed": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "collected record usable by experiment",
+      "observed": "succeeded",
+      "expected": "succeeded",
+      "passed": true
+    },
+    {
+      "name": "experiment source matches receipt",
+      "observed": "5690d7ac80b7b2b3ab5359d9f5a2744aa58e1a8096cd9e25899fc56f4703b3b5",
+      "expected": "5690d7ac80b7b2b3ab5359d9f5a2744aa58e1a8096cd9e25899fc56f4703b3b5",
+      "passed": true
+    },
+    {
+      "name": "promotion still blocked",
+      "observed": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "full parity retained",
+      "observed": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "integrity check",
+      "observed": "ok",
+      "expected": "ok",
+      "passed": true
+    }
+  ],
+  "completed": true,
+  "collection_job": {
+    "attempt": 1,
+    "id": 1,
+    "job": {
+      "CollectModrinthVersions": {
+        "versions": [
+          "g6ju16VJ",
+          "Ag5S66CF",
+          "1rb9wI5K"
+        ]
+      }
+    },
+    "result": {
+      "version_collection": {
+        "missing_ids": [],
+        "records": [
+          {
+            "canonical_id": "g6ju16VJ",
+            "generation": "1",
+            "payload_bytes": 1894,
+            "payload_sha256": "5690d7ac80b7b2b3ab5359d9f5a2744aa58e1a8096cd9e25899fc56f4703b3b5",
+            "project_id": "AANobbMI"
+          },
+          {
+            "canonical_id": "Ag5S66CF",
+            "generation": "2",
+            "payload_bytes": 962,
+            "payload_sha256": "907ed0a046ed9d2c96dafaa49c2b19df213ce86aa41d8cabc32af711a2df77f0",
+            "project_id": "YL57xq9U"
+          },
+          {
+            "canonical_id": "1rb9wI5K",
+            "generation": "3",
+            "payload_bytes": 1600,
+            "payload_sha256": "02bd4cc2d6f1a73bda3ff5cc48bc65cec3cddbe8cc46b64cbc5586f8352eda1b",
+            "project_id": "gvQqBUqZ"
+          }
+        ],
+        "requested_ids": [
+          "g6ju16VJ",
+          "Ag5S66CF",
+          "1rb9wI5K"
+        ],
+        "scope": "Receipt only; complete original JSON retained in local version snapshots. File links are metadata, never downloaded or executed.",
+        "status": "complete"
+      }
+    },
+    "state": "succeeded"
+  },
+  "partial_job": {
+    "attempt": 1,
+    "id": 2,
+    "job": {
+      "CollectModrinthVersions": {
+        "versions": [
+          "g6ju16VJ",
+          "00000000"
+        ]
+      }
+    },
+    "result": {
+      "version_collection": {
+        "missing_ids": [
+          "00000000"
+        ],
+        "records": [
+          {
+            "canonical_id": "g6ju16VJ",
+            "generation": "4",
+            "payload_bytes": 1894,
+            "payload_sha256": "5690d7ac80b7b2b3ab5359d9f5a2744aa58e1a8096cd9e25899fc56f4703b3b5",
+            "project_id": "AANobbMI"
+          }
+        ],
+        "requested_ids": [
+          "g6ju16VJ",
+          "00000000"
+        ],
+        "scope": "Receipt only; complete original JSON retained in local version snapshots. File links are metadata, never downloaded or executed.",
+        "status": "partial"
+      }
+    },
+    "state": "failed"
+  },
+  "experiment_summary": {
+    "state": "succeeded",
+    "source": {
+      "canonical_id": "g6ju16VJ",
+      "generation": "4",
+      "payload_bytes": 1894,
+      "payload_sha256": "5690d7ac80b7b2b3ab5359d9f5a2744aa58e1a8096cd9e25899fc56f4703b3b5",
+      "project_id": "AANobbMI",
+      "provenance": "local stored Modrinth-version snapshot; selected once at worker start"
+    },
+    "decision": {
+      "Incomplete": "Missing repeated timing, stress or memory measurements"
+    }
+  }
+}

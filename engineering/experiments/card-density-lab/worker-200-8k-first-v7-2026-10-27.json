@@ -1,0 +1,4056 @@
+{
+  "schema_version": 1,
+  "harness": "atlas-card-density-v7-worker-preparation",
+  "scope": "measured_browser_generated_workload",
+  "operation": "metadata",
+  "performance_start_ms": 49170.5,
+  "performance_end_ms": 56891,
+  "started_at": "2026-10-27T05:38:39.668Z",
+  "environment": {
+    "user_agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36",
+    "viewport": [
+      1182,
+      757
+    ],
+    "device_pixel_ratio": 1,
+    "supported_entry_types": [
+      "element",
+      "event",
+      "first-input",
+      "interaction-contentful-paint",
+      "largest-contentful-paint",
+      "layout-shift",
+      "long-animation-frame",
+      "longtask",
+      "mark",
+      "measure",
+      "navigation",
+      "paint",
+      "resource",
+      "soft-navigation",
+      "visibility-state"
+    ],
+    "content_visibility_supported": true
+  },
+  "preparation": {
+    "strategy": "worker",
+    "request_to_ready_ms": 165.5,
+    "measured_preparation_ms": 19.799999982118607,
+    "unattributed_roundtrip_overhead_ms": 145.7000000178814
+  },
+  "dataset": {
+    "count": 200,
+    "metadata_bytes_per_record": 8192,
+    "serialized_bytes": 1668001,
+    "sha256": "b6fb077f6be7e0af3734bdde69d1a995e469574253cb55ffe72b99d148ec6344",
+    "generation_ms": 3.2999999821186066,
+    "serialization_ms": 5.100000023841858,
+    "encoding_ms": 8.899999976158142,
+    "digest_ms": 2.5,
+    "hash_ms": 16.5
+  },
+  "samples": [
+    {
+      "round": 0,
+      "strategy": "full_dom",
+      "dom_creation_and_insertion_ms": 40.89999997615814,
+      "frame_ready_proxy_ms": 958.1999999880791,
+      "scroll_frame_wait_ms": [
+        15,
+        23.700000017881393,
+        29.19999998807907,
+        25,
+        21.700000017881393,
+        23.799999982118607,
+        24.099999994039536,
+        1158.4000000059605,
+        19.599999994039536,
+        14.300000011920929,
+        12.400000005960464,
+        15.599999994039536
+      ],
+      "scroll_frame_wait_max_ms": 1158.4000000059605,
+      "complete_output_equal": true,
+      "dom_card_count": 200,
+      "dom_group_count": 0,
+      "visible_workload_bounds": {
+        "top": 78.71875,
+        "bottom": 678.71875,
+        "height": 600,
+        "window_height": 757
+      },
+      "observations": {
+        "longtask": [
+          {
+            "start_ms": 49349.89999997616,
+            "duration_ms": 823,
+            "render_start_ms": null,
+            "style_layout_start_ms": null,
+            "blocking_duration_ms": null,
+            "script_duration_ms": null
+          }
+        ],
+        "long-animation-frame": [
+          {
+            "start_ms": 49347.89999997616,
+            "duration_ms": 720.3000000119209,
+            "render_start_ms": 49349.89999997616,
+            "style_layout_start_ms": 49390.89999997616,
+            "blocking_duration_ms": 669.8,
+            "script_duration_ms": 40.89999997615814
+          },
+          {
+            "start_ms": 50173.79999998212,
+            "duration_ms": 130.2000000178814,
+            "render_start_ms": 50303.69999998808,
+            "style_layout_start_ms": 50304,
+            "blocking_duration_ms": 0,
+            "script_duration_ms": 0
+          },
+          {
+            "start_ms": 50503.19999998808,
+            "duration_ms": 1127.800000011921,
+            "render_start_ms": 51630.09999999404,
+            "style_layout_start_ms": 51630.89999997616,
+            "blocking_duration_ms": 0,
+            "script_duration_ms": 0
+          }
+        ]
+      }
+    },
+    {
+      "round": 0,
+      "strategy": "metadata_containment",
+      "dom_creation_and_insertion_ms": 36.400000005960464,
+      "frame_ready_proxy_ms": 110.2999999821186,
+      "scroll_frame_wait_ms": [
+        8.199999988079071,
+        41,
+        48.80000001192093,
+        36.099999994039536,
+        44.099999994039536,
+        51.20000001788139,
+        37.599999994039536,
+        49.599999994039536,
+        38.5,
+        45.30000001192093,
+        52.099999994039536,
+        42.69999998807907
+      ],
+      "scroll_frame_wait_max_ms": 52.099999994039536,
+      "complete_output_equal": true,
+      "dom_card_count": 200,
+      "dom_group_count": 0,
+      "visible_workload_bounds": {
+        "top": 78.71875,
+        "bottom": 678.71875,
+        "height": 600,
+        "window_height": 757
+      },
+      "observations": {
+        "longtask": [
+          {
+            "start_ms": 51804.09999999404,
+            "duration_ms": 107,
+            "render_start_ms": null,
+            "style_layout_start_ms": null,
+            "blocking_duration_ms": null,
+            "script_duration_ms": null
+          },
+          {
+            "start_ms": 52094.89999997616,
+            "duration_ms": 50,
+            "render_start_ms": null,
+            "style_layout_start_ms": null,
+            "blocking_duration_ms": null,
+            "script_duration_ms": null
+          },
+          {
+            "start_ms": 52316.39999997616,
+            "duration_ms": 52,
+            "render_start_ms": null,
+            "style_layout_start_ms": null,
+            "blocking_duration_ms": null,
+            "script_duration_ms": null
+          }
+        ],
+        "long-animation-frame": [
+          {
+            "start_ms": 51804.09999999404,
+            "duration_ms": 80.90000000596046,
+            "render_start_ms": 51804.09999999404,
+            "style_layout_start_ms": 51840.59999999404,
+            "blocking_duration_ms": 30.9,
+            "script_duration_ms": 36.5
+          }
+        ]
+      }
+    },
+    {
+      "round": 1,
+      "strategy": "metadata_containment",
+      "dom_creation_and_insertion_ms": 12.099999994039536,
+      "frame_ready_proxy_ms": 81.90000000596046,
+      "scroll_frame_wait_ms": [
+        17.799999982118607,
+        40,
+        78.90000000596046,
+        52.80000001192093,
+        43.79999998211861,
+        48.400000005960464,
+        45.70000001788139,
+        46.79999998211861,
+        44.099999994039536,
+        36.400000005960464,
+        47.60000002384186,
+        40.099999994039536
+      ],
+      "scroll_frame_wait_max_ms": 78.90000000596046,
+      "complete_output_equal": true,
+      "dom_card_count": 200,
+      "dom_group_count": 0,
+      "visible_workload_bounds": {
+        "top": 78.71875,
+        "bottom": 678.71875,
+        "height": 600,
+        "window_height": 757
+      },
+      "observations": {
+        "longtask": [
+          {
+            "start_ms": 52510.69999998808,
+            "duration_ms": 79,
+            "render_start_ms": null,
+            "style_layout_start_ms": null,
+            "blocking_duration_ms": null,
+            "script_duration_ms": null
+          },
+          {
+            "start_ms": 52651.59999999404,
+            "duration_ms": 72,
+            "render_start_ms": null,
+            "style_layout_start_ms": null,
+            "blocking_duration_ms": null,
+            "script_duration_ms": null
+          },
+          {
+            "start_ms": 52724.5,
+            "duration_ms": 57,
+            "render_start_ms": null,
+            "style_layout_start_ms": null,
+            "blocking_duration_ms": null,
+            "script_duration_ms": null
+          }
+        ],
+        "long-animation-frame": [
+          {
+            "start_ms": 52510.69999998808,
+            "duration_ms": 56.400000005960464,
+            "render_start_ms": 52510.69999998808,
+            "style_layout_start_ms": 52523.09999999404,
+            "blocking_duration_ms": 6.3,
+            "script_duration_ms": 12.200000017881393
+          }
+        ]
+      }
+    },
+    {
+      "round": 1,
+      "strategy": "full_dom",
+      "dom_creation_and_insertion_ms": 8,
+      "frame_ready_proxy_ms": 574.7000000178814,
+      "scroll_frame_wait_ms": [
+        20.399999976158142,
+        27.600000023841858,
+        28.5,
+        30.099999994039536,
+        19.299999982118607,
+        23.100000023841858,
+        23,
+        30.299999982118607,
+        17.099999994039536,
+        13,
+        12.300000011920929,
+        12.900000005960464
+      ],
+      "scroll_frame_wait_max_ms": 30.299999982118607,
+      "complete_output_equal": true,
+      "dom_card_count": 200,
+      "dom_group_count": 0,
+      "visible_workload_bounds": {
+        "top": 78.71875,
+        "bottom": 678.71875,
+        "height": 600,
+        "window_height": 757
+      },
+      "observations": {
+        "longtask": [
+          {
+            "start_ms": 53240.79999998212,
+            "duration_ms": 567,
+            "render_start_ms": null,
+            "style_layout_start_ms": null,
+            "blocking_duration_ms": null,
+            "script_duration_ms": null
+          }
+        ],
+        "long-animation-frame": [
+          {
+            "start_ms": 53240.79999998212,
+            "duration_ms": 482.2000000178814,
+            "render_start_ms": 53240.89999997616,
+            "style_layout_start_ms": 53248.89999997616,
+            "blocking_duration_ms": 432.2,
+            "script_duration_ms": 8
+          }
+        ]
+      }
+    },
+    {
+      "round": 2,
+      "strategy": "full_dom",
+      "dom_creation_and_insertion_ms": 16.5,
+      "frame_ready_proxy_ms": 508.80000001192093,
+      "scroll_frame_wait_ms": [
+        14.599999994039536,
+        17.600000023841858,
+        17.5,
+        17.899999976158142,
+        24.600000023841858,
+        28.599999994039536,
+        19.099999994039536,
+        620.5,
+        50.70000001788139,
+        27.799999982118607,
+        13.900000005960464,
+        11.400000005960464
+      ],
+      "scroll_frame_wait_max_ms": 620.5,
+      "complete_output_equal": true,
+      "dom_card_count": 200,
+      "dom_group_count": 0,
+      "visible_workload_bounds": {
+        "top": 78.71875,
+        "bottom": 678.71875,
+        "height": 600,
+        "window_height": 757
+      },
+      "observations": {
+        "longtask": [
+          {
+            "start_ms": 54198.69999998808,
+            "duration_ms": 507,
+            "render_start_ms": null,
+            "style_layout_start_ms": null,
+            "blocking_duration_ms": null,
+            "script_duration_ms": null
+          },
+          {
+            "start_ms": 54849.19999998808,
+            "duration_ms": 618,
+            "render_start_ms": null,
+            "style_layout_start_ms": null,
+            "blocking_duration_ms": null,
+            "script_duration_ms": null
+          }
+        ],
+        "long-animation-frame": [
+          {
+            "start_ms": 54198.59999999404,
+            "duration_ms": 415.69999998807907,
+            "render_start_ms": 54198.69999998808,
+            "style_layout_start_ms": 54215.39999997616,
+            "blocking_duration_ms": 365.6,
+            "script_duration_ms": 16.69999998807907
+          }
+        ]
+      }
+    },
+    {
+      "round": 2,
+      "strategy": "metadata_containment",
+      "dom_creation_and_insertion_ms": 22.400000005960464,
+      "frame_ready_proxy_ms": 87.90000000596046,
+      "scroll_frame_wait_ms": [
+        12.300000011920929,
+        47,
+        340.59999999403954,
+        45.400000005960464,
+        30.19999998807907,
+        48.5,
+        36,
+        57.20000001788139,
+        189.7000000178814,
+        101.69999998807907,
+        52.69999998807907,
+        60.900000005960464
+      ],
+      "scroll_frame_wait_max_ms": 340.59999999403954,
+      "complete_output_equal": true,
+      "dom_card_count": 200,
+      "dom_group_count": 0,
+      "visible_workload_bounds": {
+        "top": 78.71875,
+        "bottom": 678.71875,
+        "height": 600,
+        "window_height": 757
+      },
+      "observations": {
+        "longtask": [
+          {
+            "start_ms": 55712.79999998212,
+            "duration_ms": 83,
+            "render_start_ms": null,
+            "style_layout_start_ms": null,
+            "blocking_duration_ms": null,
+            "script_duration_ms": null
+          },
+          {
+            "start_ms": 55860.89999997616,
+            "duration_ms": 339,
+            "render_start_ms": null,
+            "style_layout_start_ms": null,
+            "blocking_duration_ms": null,
+            "script_duration_ms": null
+          },
+          {
+            "start_ms": 56361.59999999404,
+            "duration_ms": 55,
+            "render_start_ms": null,
+            "style_layout_start_ms": null,
+            "blocking_duration_ms": null,
+            "script_duration_ms": null
+          },
+          {
+            "start_ms": 56418.59999999404,
+            "duration_ms": 178,
+            "render_start_ms": null,
+            "style_layout_start_ms": null,
+            "blocking_duration_ms": null,
+            "script_duration_ms": null
+          },
+          {
+            "start_ms": 56607.79999998212,
+            "duration_ms": 91,
+            "render_start_ms": null,
+            "style_layout_start_ms": null,
+            "blocking_duration_ms": null,
+            "script_duration_ms": null
+          },
+          {
+            "start_ms": 56708.59999999404,
+            "duration_ms": 51,
+            "render_start_ms": null,
+            "style_layout_start_ms": null,
+            "blocking_duration_ms": null,
+            "script_duration_ms": null
+          },
+          {
+            "start_ms": 56762.39999997616,
+            "duration_ms": 61,
+            "render_start_ms": null,
+            "style_layout_start_ms": null,
+            "blocking_duration_ms": null,
+            "script_duration_ms": null
+          }
+        ],
+        "long-animation-frame": [
+          {
+            "start_ms": 55712.79999998212,
+            "duration_ms": 63,
+            "render_start_ms": 55712.79999998212,
+            "style_layout_start_ms": 55735.39999997616,
+            "blocking_duration_ms": 13.1,
+            "script_duration_ms": 22.400000005960464
+          },
+          {
+            "start_ms": 55860.79999998212,
+            "duration_ms": 311.30000001192093,
+            "render_start_ms": 55860.89999997616,
+            "style_layout_start_ms": 55861.29999998212,
+            "blocking_duration_ms": 261.2,
+            "script_duration_ms": 0
+          },
+          {
+            "start_ms": 56417.39999997616,
+            "duration_ms": 165.2000000178814,
+            "render_start_ms": 56418.59999999404,
+            "style_layout_start_ms": 56419.5,
+            "blocking_duration_ms": 114.4,
+            "script_duration_ms": 0
+          },
+          {
+            "start_ms": 56597.39999997616,
+            "duration_ms": 58.900000005960464,
+            "render_start_ms": 56607.79999998212,
+            "style_layout_start_ms": 56609.19999998808,
+            "blocking_duration_ms": 0,
+            "script_duration_ms": 0
+          }
+        ]
+      }
+    }
+  ],
+  "complete": true,
+  "limitations": [
+    "Double-rAF is a scheduling proxy, not direct physical-paint timing",
+    "Scroll frame wait is not INP; observed Event Timing entries are separate and thresholded at 16 ms, not a complete INP score",
+    "No images, networking or peak-memory measurements",
+    "Grouped and metadata-only candidates retain all fields; neither is virtualization or a proven improvement",
+    "Input observations are thresholded and bounded to the run window, not a complete INP result",
+    "Both variants retain all card fields in the DOM",
+    "No comparison to a target project baseline",
+    "Worker lane applies to initial data preparation; incremental per-sample reset still uses the original main-thread setup outside its timer",
+    "Structured clone, worker startup and validation are included in request-to-ready overhead; no transfer-only claim",
+    "Bounded generated workload; not universal best-method evidence"
+  ],
+  "observed_input_events": [
+    {
+      "name": "pointerout",
+      "start_ms": 49150.09999999404,
+      "duration_ms": 24,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 49150.09999999404,
+      "duration_ms": 24,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 49150.09999999404,
+      "duration_ms": 24,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 49150.09999999404,
+      "duration_ms": 24,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerover",
+      "start_ms": 49150.09999999404,
+      "duration_ms": 24,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 49150.09999999404,
+      "duration_ms": 24,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseout",
+      "start_ms": 49150.09999999404,
+      "duration_ms": 24,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseover",
+      "start_ms": 49150.09999999404,
+      "duration_ms": 24,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerdown",
+      "start_ms": 49160.29999998212,
+      "duration_ms": 32,
+      "interaction_id": 6364
+    },
+    {
+      "name": "mousedown",
+      "start_ms": 49160.29999998212,
+      "duration_ms": 32,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerup",
+      "start_ms": 49169.5,
+      "duration_ms": 24,
+      "interaction_id": 6364
+    },
+    {
+      "name": "mouseup",
+      "start_ms": 49169.5,
+      "duration_ms": 24,
+      "interaction_id": 0
+    },
+    {
+      "name": "click",
+      "start_ms": 49169.5,
+      "duration_ms": 24,
+      "interaction_id": 6364
+    },
+    {
+      "name": "pointerout",
+      "start_ms": 49337.89999997616,
+      "duration_ms": 32,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 49337.89999997616,
+      "duration_ms": 32,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 49337.89999997616,
+      "duration_ms": 32,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerover",
+      "start_ms": 49337.89999997616,
+      "duration_ms": 32,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 49337.89999997616,
+      "duration_ms": 32,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 49337.89999997616,
+      "duration_ms": 32,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 49337.89999997616,
+      "duration_ms": 32,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 49337.89999997616,
+      "duration_ms": 32,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseout",
+      "start_ms": 49337.89999997616,
+      "duration_ms": 32,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseover",
+      "start_ms": 49337.89999997616,
+      "duration_ms": 32,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerout",
+      "start_ms": 50324.5,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 50324.5,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 50324.5,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerover",
+      "start_ms": 50324.5,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 50324.5,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 50324.5,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseout",
+      "start_ms": 50324.5,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseover",
+      "start_ms": 50324.5,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerout",
+      "start_ms": 50348.09999999404,
+      "duration_ms": 40,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 50348.09999999404,
+      "duration_ms": 40,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 50348.09999999404,
+      "duration_ms": 40,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerover",
+      "start_ms": 50348.09999999404,
+      "duration_ms": 40,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 50348.09999999404,
+      "duration_ms": 40,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 50348.09999999404,
+      "duration_ms": 40,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseout",
+      "start_ms": 50348.09999999404,
+      "duration_ms": 40,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseover",
+      "start_ms": 50348.09999999404,
+      "duration_ms": 40,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerout",
+      "start_ms": 50377.39999997616,
+      "duration_ms": 40,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 50377.39999997616,
+      "duration_ms": 40,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 50377.39999997616,
+      "duration_ms": 40,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerover",
+      "start_ms": 50377.39999997616,
+      "duration_ms": 40,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 50377.39999997616,
+      "duration_ms": 40,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 50377.39999997616,
+      "duration_ms": 40,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseout",
+      "start_ms": 50377.39999997616,
+      "duration_ms": 40,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseover",
+      "start_ms": 50377.39999997616,
+      "duration_ms": 40,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerout",
+      "start_ms": 50402,
+      "duration_ms": 32,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 50402,
+      "duration_ms": 32,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 50402,
+      "duration_ms": 32,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerover",
+      "start_ms": 50402,
+      "duration_ms": 32,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 50402,
+      "duration_ms": 32,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 50402,
+      "duration_ms": 32,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseout",
+      "start_ms": 50402,
+      "duration_ms": 32,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseover",
+      "start_ms": 50402,
+      "duration_ms": 32,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerout",
+      "start_ms": 50424.19999998808,
+      "duration_ms": 40,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 50424.19999998808,
+      "duration_ms": 40,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 50424.19999998808,
+      "duration_ms": 40,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerover",
+      "start_ms": 50424.19999998808,
+      "duration_ms": 40,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 50424.19999998808,
+      "duration_ms": 40,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseout",
+      "start_ms": 50424.19999998808,
+      "duration_ms": 40,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseover",
+      "start_ms": 50424.19999998808,
+      "duration_ms": 40,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerout",
+      "start_ms": 50448.09999999404,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 50448.09999999404,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerover",
+      "start_ms": 50448.09999999404,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 50448.09999999404,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 50448.09999999404,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseout",
+      "start_ms": 50448.09999999404,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseover",
+      "start_ms": 50448.09999999404,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerout",
+      "start_ms": 50472.09999999404,
+      "duration_ms": 40,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 50472.09999999404,
+      "duration_ms": 40,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 50472.09999999404,
+      "duration_ms": 40,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerover",
+      "start_ms": 50472.09999999404,
+      "duration_ms": 40,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 50472.09999999404,
+      "duration_ms": 40,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 50472.09999999404,
+      "duration_ms": 40,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseout",
+      "start_ms": 50472.09999999404,
+      "duration_ms": 40,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseover",
+      "start_ms": 50472.09999999404,
+      "duration_ms": 40,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerout",
+      "start_ms": 51630.09999999404,
+      "duration_ms": 40,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 51630.09999999404,
+      "duration_ms": 40,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 51630.09999999404,
+      "duration_ms": 40,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerover",
+      "start_ms": 51630.09999999404,
+      "duration_ms": 40,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 51630.09999999404,
+      "duration_ms": 40,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 51630.09999999404,
+      "duration_ms": 40,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseout",
+      "start_ms": 51630.09999999404,
+      "duration_ms": 40,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseover",
+      "start_ms": 51630.09999999404,
+      "duration_ms": 40,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerout",
+      "start_ms": 51650.19999998808,
+      "duration_ms": 32,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 51650.19999998808,
+      "duration_ms": 32,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 51650.19999998808,
+      "duration_ms": 32,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerover",
+      "start_ms": 51650.19999998808,
+      "duration_ms": 32,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 51650.19999998808,
+      "duration_ms": 32,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 51650.19999998808,
+      "duration_ms": 32,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseout",
+      "start_ms": 51650.19999998808,
+      "duration_ms": 32,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseover",
+      "start_ms": 51650.19999998808,
+      "duration_ms": 32,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerout",
+      "start_ms": 51664.5,
+      "duration_ms": 32,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 51664.5,
+      "duration_ms": 32,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 51664.5,
+      "duration_ms": 32,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerover",
+      "start_ms": 51664.5,
+      "duration_ms": 32,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 51664.5,
+      "duration_ms": 32,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseout",
+      "start_ms": 51664.5,
+      "duration_ms": 32,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseover",
+      "start_ms": 51664.5,
+      "duration_ms": 32,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerout",
+      "start_ms": 51676.89999997616,
+      "duration_ms": 32,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 51676.89999997616,
+      "duration_ms": 32,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerover",
+      "start_ms": 51676.89999997616,
+      "duration_ms": 32,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 51676.89999997616,
+      "duration_ms": 32,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 51676.89999997616,
+      "duration_ms": 32,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseout",
+      "start_ms": 51676.89999997616,
+      "duration_ms": 32,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseover",
+      "start_ms": 51676.89999997616,
+      "duration_ms": 32,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerout",
+      "start_ms": 51766.59999999404,
+      "duration_ms": 72,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 51766.59999999404,
+      "duration_ms": 72,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 51766.59999999404,
+      "duration_ms": 72,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerover",
+      "start_ms": 51766.59999999404,
+      "duration_ms": 72,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 51766.59999999404,
+      "duration_ms": 72,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 51766.59999999404,
+      "duration_ms": 72,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseout",
+      "start_ms": 51766.59999999404,
+      "duration_ms": 72,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseover",
+      "start_ms": 51766.59999999404,
+      "duration_ms": 72,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerout",
+      "start_ms": 51924.59999999404,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 51924.59999999404,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 51924.59999999404,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerover",
+      "start_ms": 51924.59999999404,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 51924.59999999404,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 51924.59999999404,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseout",
+      "start_ms": 51924.59999999404,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseover",
+      "start_ms": 51924.59999999404,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerout",
+      "start_ms": 51965.69999998808,
+      "duration_ms": 56,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 51965.69999998808,
+      "duration_ms": 56,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 51965.69999998808,
+      "duration_ms": 56,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerover",
+      "start_ms": 51965.69999998808,
+      "duration_ms": 56,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 51965.69999998808,
+      "duration_ms": 56,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 51965.69999998808,
+      "duration_ms": 56,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseout",
+      "start_ms": 51965.69999998808,
+      "duration_ms": 56,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseover",
+      "start_ms": 51965.69999998808,
+      "duration_ms": 56,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerout",
+      "start_ms": 52014.69999998808,
+      "duration_ms": 40,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 52014.69999998808,
+      "duration_ms": 40,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 52014.69999998808,
+      "duration_ms": 40,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerover",
+      "start_ms": 52014.69999998808,
+      "duration_ms": 40,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 52014.69999998808,
+      "duration_ms": 40,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 52014.69999998808,
+      "duration_ms": 40,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseout",
+      "start_ms": 52014.69999998808,
+      "duration_ms": 40,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseover",
+      "start_ms": 52014.69999998808,
+      "duration_ms": 40,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerout",
+      "start_ms": 52050.79999998212,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 52050.79999998212,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 52050.79999998212,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerover",
+      "start_ms": 52050.79999998212,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 52050.79999998212,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 52050.79999998212,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseout",
+      "start_ms": 52050.79999998212,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseover",
+      "start_ms": 52050.79999998212,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerout",
+      "start_ms": 52094.89999997616,
+      "duration_ms": 56,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 52094.89999997616,
+      "duration_ms": 56,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 52094.89999997616,
+      "duration_ms": 56,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerover",
+      "start_ms": 52094.89999997616,
+      "duration_ms": 56,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 52094.89999997616,
+      "duration_ms": 56,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseout",
+      "start_ms": 52094.89999997616,
+      "duration_ms": 56,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseover",
+      "start_ms": 52094.89999997616,
+      "duration_ms": 56,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerout",
+      "start_ms": 52145.89999997616,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 52145.89999997616,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerover",
+      "start_ms": 52145.89999997616,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 52145.89999997616,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 52145.89999997616,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseout",
+      "start_ms": 52145.89999997616,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseover",
+      "start_ms": 52145.89999997616,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerout",
+      "start_ms": 52183.79999998212,
+      "duration_ms": 56,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 52183.79999998212,
+      "duration_ms": 56,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 52183.79999998212,
+      "duration_ms": 56,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerover",
+      "start_ms": 52183.79999998212,
+      "duration_ms": 56,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 52183.79999998212,
+      "duration_ms": 56,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 52183.79999998212,
+      "duration_ms": 56,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseout",
+      "start_ms": 52183.79999998212,
+      "duration_ms": 56,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseover",
+      "start_ms": 52183.79999998212,
+      "duration_ms": 56,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerout",
+      "start_ms": 52233.09999999404,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 52233.09999999404,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 52233.09999999404,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerover",
+      "start_ms": 52233.09999999404,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 52233.09999999404,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 52233.09999999404,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseout",
+      "start_ms": 52233.09999999404,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseover",
+      "start_ms": 52233.09999999404,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerout",
+      "start_ms": 52271.79999998212,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 52271.79999998212,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 52271.79999998212,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerover",
+      "start_ms": 52271.79999998212,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 52271.79999998212,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 52271.79999998212,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseout",
+      "start_ms": 52271.79999998212,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseover",
+      "start_ms": 52271.79999998212,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerout",
+      "start_ms": 52316.39999997616,
+      "duration_ms": 64,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 52316.39999997616,
+      "duration_ms": 64,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 52316.39999997616,
+      "duration_ms": 64,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerover",
+      "start_ms": 52316.39999997616,
+      "duration_ms": 64,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 52316.39999997616,
+      "duration_ms": 64,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseout",
+      "start_ms": 52316.39999997616,
+      "duration_ms": 64,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseover",
+      "start_ms": 52316.39999997616,
+      "duration_ms": 64,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerout",
+      "start_ms": 52368.89999997616,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 52368.89999997616,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerover",
+      "start_ms": 52368.89999997616,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 52368.89999997616,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 52368.89999997616,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseout",
+      "start_ms": 52368.89999997616,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseover",
+      "start_ms": 52368.89999997616,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerout",
+      "start_ms": 52411.89999997616,
+      "duration_ms": 40,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 52411.89999997616,
+      "duration_ms": 40,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 52411.89999997616,
+      "duration_ms": 40,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerover",
+      "start_ms": 52411.89999997616,
+      "duration_ms": 40,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 52411.89999997616,
+      "duration_ms": 40,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 52411.89999997616,
+      "duration_ms": 40,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseout",
+      "start_ms": 52411.89999997616,
+      "duration_ms": 40,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseover",
+      "start_ms": 52411.89999997616,
+      "duration_ms": 40,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerout",
+      "start_ms": 52488.19999998808,
+      "duration_ms": 24,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 52488.19999998808,
+      "duration_ms": 24,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 52488.19999998808,
+      "duration_ms": 24,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerover",
+      "start_ms": 52488.19999998808,
+      "duration_ms": 24,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 52488.19999998808,
+      "duration_ms": 24,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 52488.19999998808,
+      "duration_ms": 24,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseout",
+      "start_ms": 52488.19999998808,
+      "duration_ms": 24,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseover",
+      "start_ms": 52488.19999998808,
+      "duration_ms": 24,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerout",
+      "start_ms": 52611,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 52611,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 52611,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerover",
+      "start_ms": 52611,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 52611,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 52611,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseout",
+      "start_ms": 52611,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseover",
+      "start_ms": 52611,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerout",
+      "start_ms": 52651.59999999404,
+      "duration_ms": 72,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 52651.59999999404,
+      "duration_ms": 72,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 52651.59999999404,
+      "duration_ms": 72,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerover",
+      "start_ms": 52651.59999999404,
+      "duration_ms": 72,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 52651.59999999404,
+      "duration_ms": 72,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 52651.59999999404,
+      "duration_ms": 72,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseout",
+      "start_ms": 52651.59999999404,
+      "duration_ms": 72,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseover",
+      "start_ms": 52651.59999999404,
+      "duration_ms": 72,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerout",
+      "start_ms": 52724.5,
+      "duration_ms": 64,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 52724.5,
+      "duration_ms": 64,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 52724.5,
+      "duration_ms": 64,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerover",
+      "start_ms": 52724.5,
+      "duration_ms": 64,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 52724.5,
+      "duration_ms": 64,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 52724.5,
+      "duration_ms": 64,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseout",
+      "start_ms": 52724.5,
+      "duration_ms": 64,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseover",
+      "start_ms": 52724.5,
+      "duration_ms": 64,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerout",
+      "start_ms": 52783,
+      "duration_ms": 56,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 52783,
+      "duration_ms": 56,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 52783,
+      "duration_ms": 56,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerover",
+      "start_ms": 52783,
+      "duration_ms": 56,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 52783,
+      "duration_ms": 56,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 52783,
+      "duration_ms": 56,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseout",
+      "start_ms": 52783,
+      "duration_ms": 56,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseover",
+      "start_ms": 52783,
+      "duration_ms": 56,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerout",
+      "start_ms": 52826.59999999404,
+      "duration_ms": 56,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 52826.59999999404,
+      "duration_ms": 56,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 52826.59999999404,
+      "duration_ms": 56,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerover",
+      "start_ms": 52826.59999999404,
+      "duration_ms": 56,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 52826.59999999404,
+      "duration_ms": 56,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseout",
+      "start_ms": 52826.59999999404,
+      "duration_ms": 56,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseover",
+      "start_ms": 52826.59999999404,
+      "duration_ms": 56,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerout",
+      "start_ms": 52875.09999999404,
+      "duration_ms": 56,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 52875.09999999404,
+      "duration_ms": 56,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerover",
+      "start_ms": 52875.09999999404,
+      "duration_ms": 56,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 52875.09999999404,
+      "duration_ms": 56,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 52875.09999999404,
+      "duration_ms": 56,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseout",
+      "start_ms": 52875.09999999404,
+      "duration_ms": 56,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseover",
+      "start_ms": 52875.09999999404,
+      "duration_ms": 56,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerout",
+      "start_ms": 52921.29999998212,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 52921.29999998212,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 52921.29999998212,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerover",
+      "start_ms": 52921.29999998212,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 52921.29999998212,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 52921.29999998212,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseout",
+      "start_ms": 52921.29999998212,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseover",
+      "start_ms": 52921.29999998212,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerout",
+      "start_ms": 52967.89999997616,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 52967.89999997616,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 52967.89999997616,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerover",
+      "start_ms": 52967.89999997616,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 52967.89999997616,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 52967.89999997616,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseout",
+      "start_ms": 52967.89999997616,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseover",
+      "start_ms": 52967.89999997616,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerout",
+      "start_ms": 53011.59999999404,
+      "duration_ms": 40,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 53011.59999999404,
+      "duration_ms": 40,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 53011.59999999404,
+      "duration_ms": 40,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerover",
+      "start_ms": 53011.59999999404,
+      "duration_ms": 40,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 53011.59999999404,
+      "duration_ms": 40,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 53011.59999999404,
+      "duration_ms": 40,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseout",
+      "start_ms": 53011.59999999404,
+      "duration_ms": 40,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseover",
+      "start_ms": 53011.59999999404,
+      "duration_ms": 40,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerout",
+      "start_ms": 53048.39999997616,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 53048.39999997616,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 53048.39999997616,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerover",
+      "start_ms": 53048.39999997616,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 53048.39999997616,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseout",
+      "start_ms": 53048.39999997616,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseover",
+      "start_ms": 53048.39999997616,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerout",
+      "start_ms": 53095.89999997616,
+      "duration_ms": 56,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 53095.89999997616,
+      "duration_ms": 56,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerover",
+      "start_ms": 53095.89999997616,
+      "duration_ms": 56,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 53095.89999997616,
+      "duration_ms": 56,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 53095.89999997616,
+      "duration_ms": 56,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseout",
+      "start_ms": 53095.89999997616,
+      "duration_ms": 56,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseover",
+      "start_ms": 53095.89999997616,
+      "duration_ms": 56,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerout",
+      "start_ms": 53136,
+      "duration_ms": 40,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 53136,
+      "duration_ms": 40,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 53136,
+      "duration_ms": 40,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerover",
+      "start_ms": 53136,
+      "duration_ms": 40,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 53136,
+      "duration_ms": 40,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 53136,
+      "duration_ms": 40,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseout",
+      "start_ms": 53136,
+      "duration_ms": 40,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseover",
+      "start_ms": 53136,
+      "duration_ms": 40,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerout",
+      "start_ms": 53218.5,
+      "duration_ms": 24,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 53218.5,
+      "duration_ms": 24,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 53218.5,
+      "duration_ms": 24,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerover",
+      "start_ms": 53218.5,
+      "duration_ms": 24,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 53218.5,
+      "duration_ms": 24,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 53218.5,
+      "duration_ms": 24,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseout",
+      "start_ms": 53218.5,
+      "duration_ms": 24,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseover",
+      "start_ms": 53218.5,
+      "duration_ms": 24,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerout",
+      "start_ms": 53836.79999998212,
+      "duration_ms": 40,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 53836.79999998212,
+      "duration_ms": 40,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 53836.79999998212,
+      "duration_ms": 40,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerover",
+      "start_ms": 53836.79999998212,
+      "duration_ms": 40,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 53836.79999998212,
+      "duration_ms": 40,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 53836.79999998212,
+      "duration_ms": 40,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseout",
+      "start_ms": 53836.79999998212,
+      "duration_ms": 40,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseover",
+      "start_ms": 53836.79999998212,
+      "duration_ms": 40,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerout",
+      "start_ms": 53864.5,
+      "duration_ms": 40,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 53864.5,
+      "duration_ms": 40,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 53864.5,
+      "duration_ms": 40,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerover",
+      "start_ms": 53864.5,
+      "duration_ms": 40,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 53864.5,
+      "duration_ms": 40,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 53864.5,
+      "duration_ms": 40,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseout",
+      "start_ms": 53864.5,
+      "duration_ms": 40,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseover",
+      "start_ms": 53864.5,
+      "duration_ms": 40,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerout",
+      "start_ms": 53893.19999998808,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 53893.19999998808,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 53893.19999998808,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerover",
+      "start_ms": 53893.19999998808,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 53893.19999998808,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 53893.19999998808,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseout",
+      "start_ms": 53893.19999998808,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseover",
+      "start_ms": 53893.19999998808,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerout",
+      "start_ms": 53923.39999997616,
+      "duration_ms": 32,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 53923.39999997616,
+      "duration_ms": 32,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 53923.39999997616,
+      "duration_ms": 32,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerover",
+      "start_ms": 53923.39999997616,
+      "duration_ms": 32,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 53923.39999997616,
+      "duration_ms": 32,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 53923.39999997616,
+      "duration_ms": 32,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseout",
+      "start_ms": 53923.39999997616,
+      "duration_ms": 32,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseover",
+      "start_ms": 53923.39999997616,
+      "duration_ms": 32,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerout",
+      "start_ms": 53942.5,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 53942.5,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 53942.5,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerover",
+      "start_ms": 53942.5,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 53942.5,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseout",
+      "start_ms": 53942.5,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseover",
+      "start_ms": 53942.5,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerout",
+      "start_ms": 53965.69999998808,
+      "duration_ms": 40,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 53965.69999998808,
+      "duration_ms": 40,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerover",
+      "start_ms": 53965.69999998808,
+      "duration_ms": 40,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 53965.69999998808,
+      "duration_ms": 40,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 53965.69999998808,
+      "duration_ms": 40,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseout",
+      "start_ms": 53965.69999998808,
+      "duration_ms": 40,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseover",
+      "start_ms": 53965.69999998808,
+      "duration_ms": 40,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerout",
+      "start_ms": 53988.59999999404,
+      "duration_ms": 40,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 53988.59999999404,
+      "duration_ms": 40,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 53988.59999999404,
+      "duration_ms": 40,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerover",
+      "start_ms": 53988.59999999404,
+      "duration_ms": 40,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 53988.59999999404,
+      "duration_ms": 40,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 53988.59999999404,
+      "duration_ms": 40,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseout",
+      "start_ms": 53988.59999999404,
+      "duration_ms": 40,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseover",
+      "start_ms": 53988.59999999404,
+      "duration_ms": 40,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerout",
+      "start_ms": 54019,
+      "duration_ms": 32,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 54019,
+      "duration_ms": 32,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 54019,
+      "duration_ms": 32,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerover",
+      "start_ms": 54019,
+      "duration_ms": 32,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 54019,
+      "duration_ms": 32,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 54019,
+      "duration_ms": 32,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseout",
+      "start_ms": 54019,
+      "duration_ms": 32,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseover",
+      "start_ms": 54019,
+      "duration_ms": 32,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerout",
+      "start_ms": 54036.09999999404,
+      "duration_ms": 32,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 54036.09999999404,
+      "duration_ms": 32,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 54036.09999999404,
+      "duration_ms": 32,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerover",
+      "start_ms": 54036.09999999404,
+      "duration_ms": 32,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 54036.09999999404,
+      "duration_ms": 32,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 54036.09999999404,
+      "duration_ms": 32,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseout",
+      "start_ms": 54036.09999999404,
+      "duration_ms": 32,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseover",
+      "start_ms": 54036.09999999404,
+      "duration_ms": 32,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerout",
+      "start_ms": 54049.09999999404,
+      "duration_ms": 32,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 54049.09999999404,
+      "duration_ms": 32,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 54049.09999999404,
+      "duration_ms": 32,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerover",
+      "start_ms": 54049.09999999404,
+      "duration_ms": 32,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 54049.09999999404,
+      "duration_ms": 32,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseout",
+      "start_ms": 54049.09999999404,
+      "duration_ms": 32,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseover",
+      "start_ms": 54049.09999999404,
+      "duration_ms": 32,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerout",
+      "start_ms": 54061.5,
+      "duration_ms": 32,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 54061.5,
+      "duration_ms": 32,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerover",
+      "start_ms": 54061.5,
+      "duration_ms": 32,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 54061.5,
+      "duration_ms": 32,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 54061.5,
+      "duration_ms": 32,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseout",
+      "start_ms": 54061.5,
+      "duration_ms": 32,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseover",
+      "start_ms": 54061.5,
+      "duration_ms": 32,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerout",
+      "start_ms": 54156.59999999404,
+      "duration_ms": 56,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 54156.59999999404,
+      "duration_ms": 56,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 54156.59999999404,
+      "duration_ms": 56,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerover",
+      "start_ms": 54156.59999999404,
+      "duration_ms": 56,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 54156.59999999404,
+      "duration_ms": 56,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 54156.59999999404,
+      "duration_ms": 56,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseout",
+      "start_ms": 54156.59999999404,
+      "duration_ms": 56,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseover",
+      "start_ms": 54156.59999999404,
+      "duration_ms": 56,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerout",
+      "start_ms": 54724.09999999404,
+      "duration_ms": 32,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 54724.09999999404,
+      "duration_ms": 32,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 54724.09999999404,
+      "duration_ms": 32,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerover",
+      "start_ms": 54724.09999999404,
+      "duration_ms": 32,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 54724.09999999404,
+      "duration_ms": 32,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 54724.09999999404,
+      "duration_ms": 32,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseout",
+      "start_ms": 54724.09999999404,
+      "duration_ms": 32,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseover",
+      "start_ms": 54724.09999999404,
+      "duration_ms": 32,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerout",
+      "start_ms": 54741.89999997616,
+      "duration_ms": 32,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 54741.89999997616,
+      "duration_ms": 32,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 54741.89999997616,
+      "duration_ms": 32,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerover",
+      "start_ms": 54741.89999997616,
+      "duration_ms": 32,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 54741.89999997616,
+      "duration_ms": 32,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 54741.89999997616,
+      "duration_ms": 32,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseout",
+      "start_ms": 54741.89999997616,
+      "duration_ms": 32,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseover",
+      "start_ms": 54741.89999997616,
+      "duration_ms": 32,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerout",
+      "start_ms": 54759.19999998808,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 54759.19999998808,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 54759.19999998808,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerover",
+      "start_ms": 54759.19999998808,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 54759.19999998808,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 54759.19999998808,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseout",
+      "start_ms": 54759.19999998808,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseover",
+      "start_ms": 54759.19999998808,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerout",
+      "start_ms": 54776.19999998808,
+      "duration_ms": 40,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 54776.19999998808,
+      "duration_ms": 40,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 54776.19999998808,
+      "duration_ms": 40,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerover",
+      "start_ms": 54776.19999998808,
+      "duration_ms": 40,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 54776.19999998808,
+      "duration_ms": 40,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 54776.19999998808,
+      "duration_ms": 40,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseout",
+      "start_ms": 54776.19999998808,
+      "duration_ms": 40,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseover",
+      "start_ms": 54776.19999998808,
+      "duration_ms": 40,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerout",
+      "start_ms": 54801.59999999404,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 54801.59999999404,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 54801.59999999404,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerover",
+      "start_ms": 54801.59999999404,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 54801.59999999404,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseout",
+      "start_ms": 54801.59999999404,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseover",
+      "start_ms": 54801.59999999404,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerout",
+      "start_ms": 54830.39999997616,
+      "duration_ms": 32,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 54830.39999997616,
+      "duration_ms": 32,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerover",
+      "start_ms": 54830.39999997616,
+      "duration_ms": 32,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 54830.39999997616,
+      "duration_ms": 32,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 54830.39999997616,
+      "duration_ms": 32,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseout",
+      "start_ms": 54830.39999997616,
+      "duration_ms": 32,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseover",
+      "start_ms": 54830.39999997616,
+      "duration_ms": 32,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerout",
+      "start_ms": 54849.29999998212,
+      "duration_ms": 648,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 54849.29999998212,
+      "duration_ms": 648,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 54849.29999998212,
+      "duration_ms": 648,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerover",
+      "start_ms": 54849.29999998212,
+      "duration_ms": 648,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 54849.29999998212,
+      "duration_ms": 648,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 54849.29999998212,
+      "duration_ms": 648,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseout",
+      "start_ms": 54849.29999998212,
+      "duration_ms": 648,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseover",
+      "start_ms": 54849.29999998212,
+      "duration_ms": 648,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerout",
+      "start_ms": 55467.59999999404,
+      "duration_ms": 80,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 55467.59999999404,
+      "duration_ms": 80,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 55467.59999999404,
+      "duration_ms": 80,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerover",
+      "start_ms": 55467.59999999404,
+      "duration_ms": 80,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 55467.59999999404,
+      "duration_ms": 80,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 55467.59999999404,
+      "duration_ms": 80,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseout",
+      "start_ms": 55467.59999999404,
+      "duration_ms": 80,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseover",
+      "start_ms": 55467.59999999404,
+      "duration_ms": 80,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerout",
+      "start_ms": 55520.29999998212,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 55520.29999998212,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 55520.29999998212,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerover",
+      "start_ms": 55520.29999998212,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 55520.29999998212,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 55520.29999998212,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseout",
+      "start_ms": 55520.29999998212,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseover",
+      "start_ms": 55520.29999998212,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerout",
+      "start_ms": 55548.39999997616,
+      "duration_ms": 32,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 55548.39999997616,
+      "duration_ms": 32,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 55548.39999997616,
+      "duration_ms": 32,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerover",
+      "start_ms": 55548.39999997616,
+      "duration_ms": 32,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 55548.39999997616,
+      "duration_ms": 32,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseout",
+      "start_ms": 55548.39999997616,
+      "duration_ms": 32,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseover",
+      "start_ms": 55548.39999997616,
+      "duration_ms": 32,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerout",
+      "start_ms": 55562.39999997616,
+      "duration_ms": 32,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 55562.39999997616,
+      "duration_ms": 32,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerover",
+      "start_ms": 55562.39999997616,
+      "duration_ms": 32,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 55562.39999997616,
+      "duration_ms": 32,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 55562.39999997616,
+      "duration_ms": 32,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseout",
+      "start_ms": 55562.39999997616,
+      "duration_ms": 32,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseover",
+      "start_ms": 55562.39999997616,
+      "duration_ms": 32,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerout",
+      "start_ms": 55667.19999998808,
+      "duration_ms": 56,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 55667.19999998808,
+      "duration_ms": 56,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 55667.19999998808,
+      "duration_ms": 56,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerover",
+      "start_ms": 55667.19999998808,
+      "duration_ms": 56,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 55667.19999998808,
+      "duration_ms": 56,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 55667.19999998808,
+      "duration_ms": 56,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseout",
+      "start_ms": 55667.19999998808,
+      "duration_ms": 56,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseover",
+      "start_ms": 55667.19999998808,
+      "duration_ms": 56,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerout",
+      "start_ms": 55813.09999999404,
+      "duration_ms": 56,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 55813.09999999404,
+      "duration_ms": 56,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 55813.09999999404,
+      "duration_ms": 56,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerover",
+      "start_ms": 55813.09999999404,
+      "duration_ms": 56,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 55813.09999999404,
+      "duration_ms": 56,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 55813.09999999404,
+      "duration_ms": 56,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseout",
+      "start_ms": 55813.09999999404,
+      "duration_ms": 56,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseover",
+      "start_ms": 55813.09999999404,
+      "duration_ms": 56,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerout",
+      "start_ms": 55860.89999997616,
+      "duration_ms": 344,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 55860.89999997616,
+      "duration_ms": 344,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 55860.89999997616,
+      "duration_ms": 344,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerover",
+      "start_ms": 55860.89999997616,
+      "duration_ms": 344,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 55860.89999997616,
+      "duration_ms": 344,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 55860.89999997616,
+      "duration_ms": 344,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseout",
+      "start_ms": 55860.89999997616,
+      "duration_ms": 344,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseover",
+      "start_ms": 55860.89999997616,
+      "duration_ms": 344,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerout",
+      "start_ms": 56201.09999999404,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 56201.09999999404,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 56201.09999999404,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerover",
+      "start_ms": 56201.09999999404,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 56201.09999999404,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 56201.09999999404,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseout",
+      "start_ms": 56201.09999999404,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseover",
+      "start_ms": 56201.09999999404,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerout",
+      "start_ms": 56246.79999998212,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 56246.79999998212,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 56246.79999998212,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerover",
+      "start_ms": 56246.79999998212,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 56246.79999998212,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 56246.79999998212,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseout",
+      "start_ms": 56246.79999998212,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseover",
+      "start_ms": 56246.79999998212,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerout",
+      "start_ms": 56276.89999997616,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 56276.89999997616,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 56276.89999997616,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerover",
+      "start_ms": 56276.89999997616,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 56276.89999997616,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseout",
+      "start_ms": 56276.89999997616,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseover",
+      "start_ms": 56276.89999997616,
+      "duration_ms": 48,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerout",
+      "start_ms": 56325.39999997616,
+      "duration_ms": 40,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 56325.39999997616,
+      "duration_ms": 40,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerover",
+      "start_ms": 56325.39999997616,
+      "duration_ms": 40,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 56325.39999997616,
+      "duration_ms": 40,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 56325.39999997616,
+      "duration_ms": 40,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseout",
+      "start_ms": 56325.39999997616,
+      "duration_ms": 40,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseover",
+      "start_ms": 56325.39999997616,
+      "duration_ms": 40,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerout",
+      "start_ms": 56361.59999999404,
+      "duration_ms": 64,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 56361.59999999404,
+      "duration_ms": 64,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 56361.59999999404,
+      "duration_ms": 64,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerover",
+      "start_ms": 56361.59999999404,
+      "duration_ms": 64,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 56361.59999999404,
+      "duration_ms": 64,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 56361.59999999404,
+      "duration_ms": 64,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseout",
+      "start_ms": 56361.59999999404,
+      "duration_ms": 64,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseover",
+      "start_ms": 56361.59999999404,
+      "duration_ms": 64,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerout",
+      "start_ms": 56418.59999999404,
+      "duration_ms": 184,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 56418.59999999404,
+      "duration_ms": 184,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 56418.59999999404,
+      "duration_ms": 184,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerover",
+      "start_ms": 56418.59999999404,
+      "duration_ms": 184,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 56418.59999999404,
+      "duration_ms": 184,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 56418.59999999404,
+      "duration_ms": 184,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseout",
+      "start_ms": 56418.59999999404,
+      "duration_ms": 184,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseover",
+      "start_ms": 56418.59999999404,
+      "duration_ms": 184,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerout",
+      "start_ms": 56607.79999998212,
+      "duration_ms": 104,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 56607.79999998212,
+      "duration_ms": 104,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 56607.79999998212,
+      "duration_ms": 104,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerover",
+      "start_ms": 56607.79999998212,
+      "duration_ms": 104,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 56607.79999998212,
+      "duration_ms": 104,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 56607.79999998212,
+      "duration_ms": 104,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseout",
+      "start_ms": 56607.79999998212,
+      "duration_ms": 104,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseover",
+      "start_ms": 56607.79999998212,
+      "duration_ms": 104,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerout",
+      "start_ms": 56708.69999998808,
+      "duration_ms": 72,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 56708.69999998808,
+      "duration_ms": 72,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 56708.69999998808,
+      "duration_ms": 72,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerover",
+      "start_ms": 56708.69999998808,
+      "duration_ms": 72,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 56708.69999998808,
+      "duration_ms": 72,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseout",
+      "start_ms": 56708.69999998808,
+      "duration_ms": 72,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseover",
+      "start_ms": 56708.69999998808,
+      "duration_ms": 72,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerout",
+      "start_ms": 56762.39999997616,
+      "duration_ms": 64,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 56762.39999997616,
+      "duration_ms": 64,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerover",
+      "start_ms": 56762.39999997616,
+      "duration_ms": 64,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 56762.39999997616,
+      "duration_ms": 64,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 56762.39999997616,
+      "duration_ms": 64,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseout",
+      "start_ms": 56762.39999997616,
+      "duration_ms": 64,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseover",
+      "start_ms": 56762.39999997616,
+      "duration_ms": 64,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerout",
+      "start_ms": 56824.09999999404,
+      "duration_ms": 40,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 56824.09999999404,
+      "duration_ms": 40,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 56824.09999999404,
+      "duration_ms": 40,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerover",
+      "start_ms": 56824.09999999404,
+      "duration_ms": 40,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 56824.09999999404,
+      "duration_ms": 40,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 56824.09999999404,
+      "duration_ms": 40,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseout",
+      "start_ms": 56824.09999999404,
+      "duration_ms": 40,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseover",
+      "start_ms": 56824.09999999404,
+      "duration_ms": 40,
+      "interaction_id": 0
+    }
+  ],
+  "finished_at": "2026-10-27T05:38:47.389Z"
+}

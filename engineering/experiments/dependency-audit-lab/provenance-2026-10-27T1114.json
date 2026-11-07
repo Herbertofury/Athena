@@ -1,0 +1,59 @@
+{
+  "checked_at": "2026-10-27T11:17:19.675957+00:00",
+  "database_commit": "99670cfc0bc574433034b75876a4b791ccaa2efb",
+  "database_worktree_clean": true,
+  "upstream_head_independently_checked": "99670cfc0bc574433034b75876a4b791ccaa2efb",
+  "advisories": 1380,
+  "tool": "cargo-audit 0.22.2",
+  "tool_binary_sha256": "663251e833b2c8f94a912d04ad445bb1bfc5d15de951688eb492d15bd4e64877",
+  "locks": [
+    {
+      "path": "apps/atlas-lab/Cargo.lock",
+      "sha256": "4ba18f93c261a48a42ea595be3f8a37b6d9c419912d7e7875204ac0641e2dd85",
+      "git_blob": "17b0eb09ea20be8c700d9102dbdc207898caf216",
+      "rustls_ffi_present": false,
+      "cargo_nextest_present": false
+    },
+    {
+      "path": "experiments/compressed-snapshot-lab/Cargo.lock",
+      "sha256": "4a57e69532dc4d11d80bd527b17d52a42b346fb5fca4fcaccb7d973c4e0c2dd3",
+      "git_blob": "4f620b2e033f7515148f5a8cbab531ad140865ee",
+      "rustls_ffi_present": false,
+      "cargo_nextest_present": false
+    },
+    {
+      "path": "experiments/rust-json-parser-lab/Cargo.lock",
+      "sha256": "bd2751918f9bb5e49e8f8b76194b962dea24e1dfc68e0c38d9d6c0ef72060ffb",
+      "git_blob": "1e53b80bc3c71d204a8f6bb426d2135dc184a625",
+      "rustls_ffi_present": false,
+      "cargo_nextest_present": false
+    }
+  ],
+  "workflow": "Reviewed Atlas workflow uses cargo test, not cargo nextest portable recordings",
+  "results": {
+    "known_vulnerability_matches": 0,
+    "warnings": {},
+    "ignored_advisories": []
+  },
+  "freshness": "Fresh database fetch succeeded. Final three audits reused a separate clean worktree pinned to that verified revision, with --no-fetch. Earlier failed/cached audits remain retained.",
+  "hygiene_observation": {
+    "prior_checkout_untracked": [
+      "crates/cargo-nextest/RUSTSEC-0000-0000.md"
+    ],
+    "clean_assertion_initially_rejected": true,
+    "resolution": "Created a separate clean pinned worktree; no original file or backup was deleted",
+    "advisory_count_before_and_after": [
+      1380,
+      1380
+    ],
+    "effect_on_audit_results": "No difference observed; no causal claim about how the extra file was handled"
+  },
+  "limitations": [
+    "Not a system-wide installed-tool inventory",
+    "Not an audit of other projects",
+    "Not source, native binary, malicious package, zero-day or vendored patch analysis",
+    "No security-sensitive configuration or dependency upgrade performed"
+  ],
+  "remote_source_commit": "613d1ced5a9559954028cc7d6b79cfa56afd64a9",
+  "all_three_remote_lock_blobs_verified": true
+}

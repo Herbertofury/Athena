@@ -1,0 +1,142 @@
+{
+  "checked_at": "2026-10-27T12:17:33.951281+00:00",
+  "binary_sha256": "23e15d807fdbc4777a5502eca3aeb22efdb0810e3f9ce6321c81ba4ce5c7ac82",
+  "runs": [
+    {
+      "source": "hls",
+      "exit_code": 0,
+      "receipt": {
+        "comparison": "first_observation",
+        "generation": "1",
+        "observed_at_utc": "2026-10-27 12:17:21",
+        "payload_bytes": 4670,
+        "payload_sha256": "2a3aa0f30e5d1789cd1a9f34ddce881bf7de74ae91acfc4af42516cd8dd1ff19",
+        "previous_generation": null,
+        "provider_timestamp": "2026-09-11T17:40:05Z",
+        "repository": "video-dev/hls.js",
+        "response": {
+          "api_version_requested": "2026-03-10",
+          "api_version_selected": "2026-03-10",
+          "next_allowed_epoch": 1793103442,
+          "rate_limited": false,
+          "remaining": 58,
+          "status": 200
+        },
+        "revision": "v1.7.3",
+        "scope": "Fixed public upstream observation; not registry-newest, installed version, signature verification, security clearance or automatic adoption. Complete original JSON retained locally; no assets downloaded.",
+        "source_id": "hls",
+        "source_url": "https://github.com/video-dev/hls.js/releases/tag/v1.7.3",
+        "timestamp_kind": "release_published_at"
+      }
+    },
+    {
+      "source": "rustsec",
+      "exit_code": 0,
+      "receipt": {
+        "comparison": "first_observation",
+        "generation": "2",
+        "observed_at_utc": "2026-10-27 12:17:25",
+        "payload_bytes": 3155,
+        "payload_sha256": "de9b278c09422c0797c3bc46507259eb0bf96694b3d92544ce40ca849edb916b",
+        "previous_generation": null,
+        "provider_timestamp": "2026-10-27T10:02:42Z",
+        "repository": "RustSec/advisory-db",
+        "response": {
+          "api_version_requested": "2026-03-10",
+          "api_version_selected": "2026-03-10",
+          "next_allowed_epoch": 1793103446,
+          "rate_limited": false,
+          "remaining": 57,
+          "status": 200
+        },
+        "revision": "99670cfc0bc574433034b75876a4b791ccaa2efb",
+        "scope": "Fixed public upstream observation; not registry-newest, installed version, signature verification, security clearance or automatic adoption. Complete original JSON retained locally; no assets downloaded.",
+        "source_id": "rustsec",
+        "source_url": "https://github.com/rustsec/advisory-db/commit/99670cfc0bc574433034b75876a4b791ccaa2efb",
+        "timestamp_kind": "commit_committer_date"
+      }
+    },
+    {
+      "source": "serde-json",
+      "exit_code": 0,
+      "receipt": {
+        "comparison": "first_observation",
+        "generation": "3",
+        "observed_at_utc": "2026-10-27 12:17:29",
+        "payload_bytes": 1976,
+        "payload_sha256": "5f925df075cd26348137226615ad84fa6056430262db0a9d5fdba811c11b5697",
+        "previous_generation": null,
+        "provider_timestamp": "2026-10-11T15:32:13Z",
+        "repository": "serde-rs/json",
+        "response": {
+          "api_version_requested": "2026-03-10",
+          "api_version_selected": "2026-03-10",
+          "next_allowed_epoch": 1793103450,
+          "rate_limited": false,
+          "remaining": 56,
+          "status": 200
+        },
+        "revision": "v1.0.154",
+        "scope": "Fixed public upstream observation; not registry-newest, installed version, signature verification, security clearance or automatic adoption. Complete original JSON retained locally; no assets downloaded.",
+        "source_id": "serde-json",
+        "source_url": "https://github.com/serde-rs/json/releases/tag/v1.0.154",
+        "timestamp_kind": "release_published_at"
+      }
+    },
+    {
+      "source": "hls",
+      "exit_code": 0,
+      "receipt": {
+        "comparison": "unchanged",
+        "generation": "4",
+        "observed_at_utc": "2026-10-27 12:17:33",
+        "payload_bytes": 4670,
+        "payload_sha256": "2a3aa0f30e5d1789cd1a9f34ddce881bf7de74ae91acfc4af42516cd8dd1ff19",
+        "previous_generation": "1",
+        "provider_timestamp": "2026-09-11T17:40:05Z",
+        "repository": "video-dev/hls.js",
+        "response": {
+          "api_version_requested": "2026-03-10",
+          "api_version_selected": "2026-03-10",
+          "next_allowed_epoch": 1793103454,
+          "rate_limited": false,
+          "remaining": 55,
+          "status": 200
+        },
+        "revision": "v1.7.3",
+        "scope": "Fixed public upstream observation; not registry-newest, installed version, signature verification, security clearance or automatic adoption. Complete original JSON retained locally; no assets downloaded.",
+        "source_id": "hls",
+        "source_url": "https://github.com/video-dev/hls.js/releases/tag/v1.7.3",
+        "timestamp_kind": "release_published_at"
+      }
+    }
+  ],
+  "stored_byte_checks": [
+    {
+      "source": "hls",
+      "generation": "1",
+      "sha_matches": true,
+      "bytes_match": true
+    },
+    {
+      "source": "rustsec",
+      "generation": "2",
+      "sha_matches": true,
+      "bytes_match": true
+    },
+    {
+      "source": "serde-json",
+      "generation": "3",
+      "sha_matches": true,
+      "bytes_match": true
+    },
+    {
+      "source": "hls",
+      "generation": "4",
+      "sha_matches": true,
+      "bytes_match": true
+    }
+  ],
+  "sqlite_integrity": "ok",
+  "scope": "Actual anonymous official API requests; no credentials or asset downloads; stop on first non-success"
+}

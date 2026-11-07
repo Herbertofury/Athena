@@ -1,0 +1,154 @@
+{
+  "schema_version": 1,
+  "complete": true,
+  "python_version": "3.12.14",
+  "python_optimized": true,
+  "source_database_sha256": "9a9ae66a82366c50af0adef2be36150cae530681eb9edac080e38fe38202a7b0",
+  "existing_jobs": 2,
+  "retained_snapshots": 5,
+  "driver_sha256": "f5050b3f3b57584695774272e34611158db9d6162ecd0fad6dac549e6b079756",
+  "binary_sha256": "411e2d680b64163464430af50148180c536b6e0c5fff43416b45aebdd2193344",
+  "scope": "Owned current native service on loopback; complete public archives and built-in queue tested; not visual/browser/player or live provider acceptance; graceful reopen is not physical power-loss certification",
+  "checks": [
+    {
+      "check": "baseline serializer active",
+      "passed": true
+    },
+    {
+      "check": "historical terminal jobs retained",
+      "passed": true
+    },
+    {
+      "check": "exact embedded asset index.html",
+      "passed": true
+    },
+    {
+      "check": "restricted response headers index.html",
+      "passed": true
+    },
+    {
+      "check": "exact embedded asset app.js",
+      "passed": true
+    },
+    {
+      "check": "restricted response headers app.js",
+      "passed": true
+    },
+    {
+      "check": "exact embedded asset style.css",
+      "passed": true
+    },
+    {
+      "check": "restricted response headers style.css",
+      "passed": true
+    },
+    {
+      "check": "exact embedded asset collection-input.mjs",
+      "passed": true
+    },
+    {
+      "check": "restricted response headers collection-input.mjs",
+      "passed": true
+    },
+    {
+      "check": "exact embedded asset archive-view.mjs",
+      "passed": true
+    },
+    {
+      "check": "restricted response headers archive-view.mjs",
+      "passed": true
+    },
+    {
+      "check": "before complete archive AANobbMI",
+      "passed": true
+    },
+    {
+      "check": "before complete archive gvQqBUqZ",
+      "passed": true
+    },
+    {
+      "check": "before complete archive YL57xq9U",
+      "passed": true
+    },
+    {
+      "check": "missing archive is explicit",
+      "passed": true
+    },
+    {
+      "check": "wrong host rejected",
+      "passed": true
+    },
+    {
+      "check": "wrong origin rejected",
+      "passed": true
+    },
+    {
+      "check": "missing request marker rejected",
+      "passed": true
+    },
+    {
+      "check": "unknown job rejected",
+      "passed": true
+    },
+    {
+      "check": "oversized job rejected",
+      "passed": true
+    },
+    {
+      "check": "rejected writes changed no jobs",
+      "passed": true
+    },
+    {
+      "check": "built-in job accepted",
+      "passed": true
+    },
+    {
+      "check": "built-in comparison completed",
+      "passed": true
+    },
+    {
+      "check": "unmeasured memory still prevents promotion",
+      "passed": true
+    },
+    {
+      "check": "after complete archive AANobbMI",
+      "passed": true
+    },
+    {
+      "check": "after complete archive gvQqBUqZ",
+      "passed": true
+    },
+    {
+      "check": "after complete archive YL57xq9U",
+      "passed": true
+    },
+    {
+      "check": "all original snapshot and attempt rows preserved",
+      "passed": true
+    },
+    {
+      "check": "all historical jobs and events preserved",
+      "passed": true
+    },
+    {
+      "check": "terminal job and full result survive graceful shutdown and reopen",
+      "passed": true
+    },
+    {
+      "check": "reopened integrity and foreign keys pass",
+      "passed": true
+    },
+    {
+      "check": "binary identity matches after shutdown",
+      "passed": true
+    }
+  ],
+  "job_terminal_state": "succeeded",
+  "experiment_reason": "Completed",
+  "decision": {
+    "Incomplete": "Missing repeated timing, stress or memory measurements"
+  },
+  "process_exit": 0,
+  "original_database_unchanged": true,
+  "shutdown_checks_passed": true
+}

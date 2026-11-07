@@ -1,0 +1,9 @@
+'use strict';
+const modules={baseline:require('../enderloom-media/src/provider-media.js'),sax:require('./candidate/src/provider-media.js'),callback:require('./fast-candidate/src/provider-media.js'),streaming:require('./streaming-candidate/src/provider-media.js')};
+const title='Atlas Generated Fixture',source='https://www.nexusmods.com/skyrimspecialedition/mods/123456',url='https://staticdelivery.nexusmods.com/mods/1704/images/123456/fixture.png';
+const img=`<img class="gallery" src="${url}" alt="Hidden">`;
+const cases=[...['iframe','noembed','noframes','textarea','style'].map(tag=>({name:tag,markup:`<${tag}>${img}</${tag}>`,count:0,alt:null})),{name:'self-closing script in HTML',markup:`<script/>${img}</script>`,count:0,alt:null},{name:'null replacement',markup:`<img class="gallery" src="${url}" alt="a\u0000b">`,count:1,alt:'a\uFFFDb'},{name:'duplicate attribute keeps first',markup:`<img class="gallery" src="${url}" alt="First" alt="Second">`,count:1,alt:'First'},{name:'ambiguous named reference',markup:`<img class="gallery" src="${url}" alt="&notit;">`,count:1,alt:'&notit;'}];
+cases.push(...[['literal CRLF','a\r\nb','a\nb'],['literal CR','a\rb','a\nb'],['numeric CR','a&#13;b','a\rb'],['numeric NULL','a&#0;b','a\uFFFDb'],['mixed newline','a\r\n&#13;b','a\n\rb']].map(([name,value,alt])=>({name,markup:`<img class="gallery" src="${url}" alt="${value}">`,count:1,alt})));
+const rows=[];for(const c of cases){const html=`<html><head><title>${title}</title></head><body><h1>${title}</h1>${c.markup}</body></html>`;const outputs={};for(const [name,mod]of Object.entries(modules)){const out=mod.parseGenericProjectHtml(html,source,{title});outputs[name]={gallery:out.gallery,correct:out.gallery.length===c.count&&(c.count===0||out.gallery[0].alt===c.alt)};}rows.push({...c,outputs});}console.log(JSON.stringify(rows,null,2));
+
+if(rows.some(row=>["sax","callback","streaming"].some(name=>!row.outputs[name].correct)))process.exitCode=1;
