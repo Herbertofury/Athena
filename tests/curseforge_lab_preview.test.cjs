@@ -8,6 +8,10 @@ function setup(origin='http://127.0.0.1:41379',handler){
  return {window,document,requests,container:document.getElementById('host'),restore(){for(const[name,d]of saved){if(d)Object.defineProperty(globalThis,name,d);else delete globalThis[name];}}};
 }
 const tick=()=>new Promise(setImmediate);
+test('Synthetic preview provenance and no-site dependency boundary pass in normal root CI',()=>{
+ const result=require('node:child_process').spawnSync('python3',['-S',path.resolve(__dirname,'curseforge_preview_build_test.py')],{encoding:'utf8',timeout:60000});
+ assert.equal(result.status,0,result.stdout+result.stderr);
+});
 test('Local Lab presents disabled CurseForge state with no credential input or job',async()=>{
  const e=setup();let c;try{c=await(await import(moduleURL)).mount({container:e.container,route:'#lab?panel=collectors'});assert.equal(c.ready,true);const root=e.container.shadowRoot,card=root.getElementById('curseforge-offline-card');assert.ok(card);assert.match(card.textContent,/synthetic/i);assert.match(card.textContent,/no approved CurseForge credential configuration or transport/);assert.equal(card.querySelectorAll('input,textarea,form,iframe,img,a').length,0);const disabled=root.getElementById('curseforge-live-collect');assert.equal(disabled.disabled,true);disabled.disabled=false;disabled.click();await tick();assert.ok(e.requests.every(r=>r.method==='GET'&&['/api/runtime','/api/overview'].includes(r.url)));}finally{c?.unmount();e.restore();}
 });

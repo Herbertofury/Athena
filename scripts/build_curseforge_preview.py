@@ -19,7 +19,7 @@ SOURCES = ('scripts/build_curseforge_preview.py',
 
 
 def build():
-    # Requires the existing extraction lab's declared lxml dependency. No network.
+    # JSON-only projection uses shared helpers without loading HTML/XML parsers.
     sys.path.insert(0, str(LAB))
     try:
         spec = importlib.util.spec_from_file_location('athena_curseforge_preview_mapper', LAB / 'curseforge.py')

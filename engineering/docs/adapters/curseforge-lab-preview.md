@@ -20,7 +20,7 @@ The [official API](https://docs.curseforge.com/rest-api/#authentication) require
 
 ## Reproducible fixture pipeline
 
-1. Install the extraction lab's existing declared Python dependencies when preparing a build: `python3 -m pip install -r engineering/experiments/site-extraction-lab/requirements.txt`. This uses lxml; no provider credential is involved.
+1. The synthetic JSON preview and Lab generation use only the Python standard library. For actual HTML/XML extraction and the full provider regression suite, install the extraction lab's existing declared dependencies: `python3 -m pip install -r engineering/experiments/site-extraction-lab/requirements.txt`. Those paths still require lxml; no substitute parser or provider credential is introduced.
 2. Run `python3 scripts/build_curseforge_preview.py` to derive the sanitized synthetic receipt using the unchanged PR #9 mapper.
 3. Run `python3 scripts/build_lab_workspace.py` to generate the native component.
 4. Run both commands with `--check`. The Lab generator checks exact source identities and compares the complete artifact bytes to freshly generated mapper output before embedding anything. Edited nested live/credential claims or arbitrary receipt fields fail closed.
@@ -40,6 +40,10 @@ Native Chromium acceptance is prepared in `curseforge_preview_browser_checks.cjs
 
 ## Remaining gates
 
-The existing GitHub workflow does not explicitly install lxml, now required by this Lab generation check. Workflow/dependency preparation and remote CI remain unverified; no workflow settings or permissions were changed here. Existing unrelated CI/approval blockers are not bypassed.
+PR #10 at `83fb6aad8b68b434b33ca9e70f44989abffc01bd` reproduced an unnecessary eager lxml dependency in both [push](https://github.com/Herbertofury/Athena/actions/runs/42463234453) and [PR CI](https://github.com/Herbertofury/Athena/actions/runs/42463284482): 137/138 root JavaScript tests passed; Lab regeneration failed before browser/Rust acceptance. The follow-up defers the same lxml imports to actual HTML/XML entry points. It does not install a dependency, edit a workflow or substitute/relax parsing. Standard-library-only `python3 -S` checks exercise the entire synthetic provenance suite through the existing root JavaScript test command. HTML/XML requests still fail clearly when lxml is unavailable. Follow-up hosted CI must be evaluated separately; existing unrelated accessibility/approval gates remain intact.
 
 A future live integration still needs supported secure credential handling, explicitly authorized API access, request/response provenance binding, actual permitted records, complete pagination/distribution handling, durable last-good/failure storage and real browser acceptance. Do not present this preview as a working authenticated collector. Autoplay remains off and no media is played.
+
+## Dependency-boundary regression
+
+Three no-site regression cases reproduce the prior import failure and protect the fix: exact preview/Lab regeneration with `python3 -S`, shared JSON and URL safety without loading lxml, and clear missing-parser failure at every HTML/XML entry point. The complete eleven-test provenance suite also runs under `-S` from normal root CI. Parser settings, mapper output and generated Lab UI bytes are preserved; only source-provenance hashes change. The mapper from PR #9 is unchanged.
