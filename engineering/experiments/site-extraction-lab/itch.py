@@ -14,7 +14,9 @@ from extractors import (ExtractionError, base_record, cls, document, one,
 
 
 def same_url(a, b):
-    return (public_url(a) or '').rstrip('/') == (public_url(b) or '').rstrip('/')
+    """Compare validated references; two rejections never establish identity."""
+    left, right = public_url(a), public_url(b)
+    return left is not None and right is not None and left.rstrip('/') == right.rstrip('/')
 
 
 def capture_document(capture):
