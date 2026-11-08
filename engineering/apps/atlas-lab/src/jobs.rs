@@ -568,3 +568,7 @@ mod durability_contract_regression {
         );
     }
 }
+
+#[cfg(test)]
+#[path = "jobs_storage_fault_tests.rs"]
+mod storage_fault_regression;
