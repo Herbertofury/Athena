@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 """Offline source/structure checks; not external-link or factual validation."""
-from pathlib import Path
+from pathlib import Path, PureWindowsPath
 from urllib.parse import urlsplit,unquote
 import datetime as dt,json,re,sys
 ROOT=Path(__file__).resolve().parents[1]
 import importlib.util
-_registry_spec = importlib.util.spec_from_file_location('atlas_source_registry', Path(__file__).with_name('source_registry.py'))
+_registry_spec = importlib.util.spec_from_file_location('atlas_source_registry', Path(__file__).resolve().with_name('source_registry.py'))
 _registry_module = importlib.util.module_from_spec(_registry_spec)
 _registry_spec.loader.exec_module(_registry_module)
 load_sources = _registry_module.load_sources
@@ -35,18 +35,84 @@ def utc_today():
     """Source review dates use UTC, independent of executor local timezone."""
     return dt.datetime.now(dt.timezone.utc).date()
 
+
+def local_link_roots(root):
+    """Only this checker's own reviewed policy may grant sibling-doc access.
+
+    Custom check(root=...) trees never authorize themselves through a policy
+    file. The optional policy is intentionally limited to ../docs, not the
+    repository parent or arbitrary external directories.
+    """
+    roots = (root,)
+    if root != ROOT.resolve():
+        return roots
+    policy = root / 'local-link-policy.json'
+    if policy.is_symlink():
+        raise ValueError('Local-link policy must not be a symlink')
+    if not policy.exists():
+        return roots
+    if not policy.is_file() or policy.stat().st_size > 4096:
+        raise ValueError('Invalid local-link policy file')
+    data = json.loads(policy.read_text())
+    if (not isinstance(data, dict) or set(data) != {'schema', 'additional_roots'}
+            or type(data['schema']) is not int or data['schema'] != 1
+            or data['additional_roots'] != ['../docs']):
+        raise ValueError('Invalid local-link policy: only reviewed ../docs scope is supported')
+    docs = root.parent / 'docs'
+    if docs.is_symlink() or not docs.is_dir():
+        raise ValueError('Configured docs root must be an existing non-symlink directory')
+    resolved = docs.resolve()
+    if not resolved.is_relative_to(root.parent):
+        raise ValueError('Configured docs root escapes the repository')
+    return roots + (resolved,)
+
+
+def valid_local_link(source, url_path, allowed_roots):
+    """Resolve before existence checks; never inspect an escaped target."""
+    decoded = unquote(url_path)
+    if ('\\' in decoded or any(ord(c) < 32 or ord(c) == 127 for c in decoded)
+            or Path(decoded).is_absolute() or PureWindowsPath(decoded).drive):
+        return False
+    try:
+        target = (source.parent / decoded).resolve() if decoded else source
+        return any(target.is_relative_to(scope) for scope in allowed_roots) and target.exists()
+    except (OSError, RuntimeError, ValueError):
+        return False
+
+
 def check(root=ROOT,today=None):
+    root = Path(root)
+    if root.is_symlink():
+        raise ValueError('Research root must not be a symlink')
+    root = root.resolve()
+    allowed_roots = local_link_roots(root)
     ids,stale=validate_sources(load_sources(root),today or utc_today())
     failures=[];files=list(root.rglob('*.md'))
     for path in files:
-        text=path.read_text()
+        try:
+            source = path.resolve(strict=True)
+            if not source.is_relative_to(root):
+                raise ValueError('source escapes Engineering root')
+            text = source.read_text()
+        except (OSError, RuntimeError, ValueError) as error:
+            failures.append(f'{path.relative_to(root)}: unreadable or escaped Markdown source ({type(error).__name__})')
+            continue
         for ref in re.findall(r'\[([A-Z]+[0-9]+)\]',text):
             if ref not in ids:failures.append(f'{path.relative_to(root)}: unknown source {ref}')
         for link in re.findall(r'\[[^\]]*\]\(([^)]+)\)',text):
+            # urlsplit normalizes raw controls and treats Windows drives as
+            # schemes. Reject those local forms before either can be skipped.
+            if (any(ord(c) < 32 or ord(c) == 127 for c in link)
+                    or PureWindowsPath(link).drive):
+                failures.append(f'{path.relative_to(root)}: broken local link {link}')
+                continue
             u=urlsplit(link)
+            if u.scheme.lower() == 'file':
+                failures.append(f'{path.relative_to(root)}: broken local link {link}')
+                continue
             if u.scheme or link.startswith('#'):continue
-            target=(path.parent/unquote(u.path)).resolve()
-            if not target.is_relative_to(root.resolve()) or not target.exists():failures.append(f'{path.relative_to(root)}: broken local link {link}')
+            if u.netloc or not valid_local_link(path, u.path, allowed_roots):
+                failures.append(f'{path.relative_to(root)}: broken local link {link}')
     if failures:raise ValueError('\n'.join(failures))
     return {'sources':len(ids),'markdown_files':len(files),'stale_source_ids':stale,'scope':'Offline structure only; external availability and factual accuracy require review.'}
 if __name__=='__main__':
