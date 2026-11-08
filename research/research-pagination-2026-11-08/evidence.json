@@ -1,0 +1,59 @@
+{
+  "schema": 1,
+  "base_commit": "b1f82a9f1ac516848f6c95d4b9b87801e6090589",
+  "scope": "Native Athena Research adapter; unchanged retained catalog and shell host",
+  "baseline": {
+    "command": "node --test tests/research_pagination.test.cjs",
+    "pass": 1,
+    "fail": 4,
+    "observations": [
+      {
+        "case": "explicit deep link",
+        "expected_page": 2,
+        "actual_serialized_page": null,
+        "actual_effective_page": 1
+      },
+      {
+        "case": "sorted deep link",
+        "expected_page": 3,
+        "actual_serialized_page": null,
+        "actual_effective_page": 1
+      },
+      {
+        "case": "saved state on bare route",
+        "expected_page": 4,
+        "actual_serialized_page": null,
+        "actual_effective_page": 1
+      },
+      {
+        "case": "duplicate search setter",
+        "expected_page": 2,
+        "actual_serialized_page": null,
+        "actual_effective_page": 1
+      }
+    ]
+  },
+  "candidate": {
+    "focused_pass": 8,
+    "root_js_pass": 141,
+    "standalone_media_js_pass": 105,
+    "python_pass": 313,
+    "generated_workspaces_verified": 18,
+    "allowlisted_runtime_files": 37,
+    "research_index_sha256": "7ce7957702503be42ff7821e237404b157b7d9539e22d7b8051123ebf3b5cb5c",
+    "catalog_sha256": "9d2ab033df646fe0bf51b8a2eb9da68dbeb12c64b7d14e38fe441c4f6ad946e6"
+  },
+  "local_logs": {
+    "baseline-failure.log": "9c52b695f1c43a004743ae06708f0128267455019e8b8979bd819633e54e7645",
+    "focused-pass.log": "cabca6ddab5d84b8a9526a3283b11ca724e99fc5fdcae670575df64f7d61f410",
+    "aggregate-tests.log": "d9915c82bbefabf8339a002789c133e1dfcb2f78c88b975a486453d42f11169d",
+    "package.log": "916e832ed215584c1c8727fd3ce845aa767fe6125f628597788f29d5830cc61e",
+    "research-check.log": "b9c239da0d30cbf3736d70f4631c40602061f88a63f4d59942295b65c293e52a"
+  },
+  "limitations": [
+    "Actual browser acceptance pending existing CI; no local browser launch",
+    "No performance or cross-project adoption claim",
+    "Research checker retains pre-existing cross-root link error",
+    "Unrelated progress, accessibility and source-preservation actions untouched"
+  ]
+}

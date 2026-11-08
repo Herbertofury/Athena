@@ -389,5 +389,5 @@ async function main() {
 }
 await main();
 
-  return {unmount,setTheme,ready:loaded,setRoute(value){if(disposed||!catalog)return;const next=parseState(value.includes('?')?value.slice(value.indexOf('?')+1):'');if(encodeState(next)!==encodeState(state)){state=next;render();}},setSearch(q){if(disposed||!catalog)return;setState({q:String(q??'').slice(0,300)});},exportState(){return {query:encodeState(state),shortlist:[...shortlist],loaded};}};
+  return {unmount,setTheme,ready:loaded,setRoute(value){if(disposed||!catalog)return;const next=parseState(value.includes('?')?value.slice(value.indexOf('?')+1):'');if(encodeState(next)!==encodeState(state)){state=next;render();}},setSearch(q){if(disposed||!catalog)return;const next=String(q??'').slice(0,300);if(next===state.q)return;setState({q:next});},exportState(){return {query:encodeState(state),shortlist:[...shortlist],loaded};}};
 }
