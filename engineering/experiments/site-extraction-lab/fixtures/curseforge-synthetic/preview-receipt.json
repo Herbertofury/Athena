@@ -1,0 +1,103 @@
+{
+  "schema": 1,
+  "kind": "synthetic_curseforge_lab_preview",
+  "preview": {
+    "evidence": "synthetic_fixtures_only",
+    "liveAcceptance": false,
+    "access": {
+      "state": "missing_key",
+      "responseStatus": null,
+      "networkPerformedByMapper": false,
+      "keyValidityVerified": false,
+      "automaticRetryAllowed": false,
+      "fullSupportAccepted": false
+    },
+    "receipt": {
+      "kind": "curseforge_project",
+      "identity": {
+        "modId": 700001,
+        "gameId": 432
+      },
+      "authorIds": [
+        900001
+      ],
+      "galleryIds": [
+        3,
+        2
+      ],
+      "logoId": 1,
+      "distributionPermission": {
+        "state": "unknown",
+        "value": null
+      },
+      "projectSearchAvailability": {
+        "state": "provided",
+        "value": false
+      },
+      "providedFields": [
+        "authors",
+        "screenshots",
+        "logo",
+        "latestFiles",
+        "allowModDistribution",
+        "isAvailable"
+      ],
+      "descriptionPresent": true,
+      "descriptionOwnershipVerified": false,
+      "files": [
+        {
+          "id": 800001,
+          "fileLengthDecimal": "9007199254740993",
+          "availability": {
+            "state": "provided",
+            "value": false
+          },
+          "earlyAccess": {
+            "state": "provided",
+            "value": true
+          },
+          "downloadReferenceState": "not_provided",
+          "downloadVerified": false
+        }
+      ],
+      "pagination": {
+        "state": "complete_for_captured_query",
+        "index": 0,
+        "pageSize": 50,
+        "resultCount": 1,
+        "totalCount": 1,
+        "completeForQuery": true,
+        "completeImport": false
+      },
+      "latestFilesAreCompleteHistory": false,
+      "liveAcceptance": false,
+      "fullSupportAccepted": false
+    }
+  },
+  "source_files": [
+    {
+      "path": "scripts/build_curseforge_preview.py",
+      "sha256": "1eaf48194f71a06eb6fa2c172f471458686789190c6db39c894cb0da97181195"
+    },
+    {
+      "path": "engineering/experiments/site-extraction-lab/curseforge.py",
+      "sha256": "1dd9e55674fe380644cc80ba3dd6f3ae41e3c80e93f4b391ac2a4cd48c4fe142"
+    },
+    {
+      "path": "engineering/experiments/site-extraction-lab/extractors.py",
+      "sha256": "fbc177bb820d0f2f83f46a0ecb05e18b2b2c3f3d20c374a24925d981cbd8b9c8"
+    },
+    {
+      "path": "engineering/experiments/site-extraction-lab/fixtures/curseforge-synthetic/project.json",
+      "sha256": "bb705742069fe7b97a3ca538d9444012969ad5e8244ca4ad2b70454d22edf7c5"
+    },
+    {
+      "path": "engineering/experiments/site-extraction-lab/fixtures/curseforge-synthetic/files.json",
+      "sha256": "7c9e407efaf320a2efd3f4e111d64e8c9e4508c708e9bae2409abe11bc7d2ba5"
+    },
+    {
+      "path": "engineering/experiments/site-extraction-lab/fixtures/curseforge-synthetic/description.json",
+      "sha256": "caede8d7f9d0f4c0984a4dfa27fb0fd20f981b3599b199954586515661e6ccec"
+    }
+  ]
+}
