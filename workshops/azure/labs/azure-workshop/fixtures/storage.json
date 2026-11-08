@@ -1,0 +1,30 @@
+{
+  "requirements": [
+    "zone_resilience",
+    "secondary_read"
+  ],
+  "options": [
+    {
+      "id": "LRS",
+      "capabilities": [
+        "local_replicas"
+      ]
+    },
+    {
+      "id": "ZRS",
+      "capabilities": [
+        "local_replicas",
+        "zone_resilience"
+      ]
+    },
+    {
+      "id": "RA-GZRS",
+      "capabilities": [
+        "local_replicas",
+        "zone_resilience",
+        "geo_replication",
+        "secondary_read"
+      ]
+    }
+  ]
+}

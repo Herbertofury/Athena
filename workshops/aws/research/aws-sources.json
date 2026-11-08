@@ -1,0 +1,232 @@
+{
+  "reviewed": "2026-11-08",
+  "scope": "Official concepts, partial objectives; no exam readiness or AWS execution evidence.",
+  "sources": [
+    {
+      "key": "clf-guide",
+      "title": "AWS Certified Cloud Practitioner (CLF-C02)",
+      "url": "https://docs.aws.amazon.com/aws-certification/latest/cloud-practitioner-02/cloud-practitioner-02.html",
+      "reviewed": "2026-11-08",
+      "notes": "Supports current displayed code and domain weights: cloud concepts 24%, security/compliance 30%, technology/services 34%, billing/pricing/support 12%. Limits: outline expressly non-exhaustive; no readiness inference.",
+      "scope": "Supports current displayed code and domain weights: cloud concepts 24%, security/compliance 30%, technology/services 34%, billing/pricing/support 12%. Limits: outline expressly non-exhaustive; no readiness inference.",
+      "reviewedAt": "2026-11-08"
+    },
+    {
+      "key": "saa-guide",
+      "title": "AWS Certified Solutions Architect - Associate (SAA-C03)",
+      "url": "https://docs.aws.amazon.com/aws-certification/latest/solutions-architect-associate-03/solutions-architect-associate-03.html",
+      "reviewed": "2026-11-08",
+      "notes": "Supports displayed code and domain weights: secure 30%, resilient 26%, high-performing 24%, cost-optimized 20%. Limits: not a full curriculum; recommends at least a year of hands-on architecture experience.",
+      "scope": "Supports displayed code and domain weights: secure 30%, resilient 26%, high-performing 24%, cost-optimized 20%. Limits: not a full curriculum; recommends at least a year of hands-on architecture experience.",
+      "reviewedAt": "2026-11-08"
+    },
+    {
+      "key": "clf-revisions",
+      "title": "Revisions \u2014 Cloud Practitioner",
+      "url": "https://docs.aws.amazon.com/aws-certification/latest/cloud-practitioner-02/clf-02-revisions.html",
+      "reviewed": "2026-11-08",
+      "notes": "Visible publication dates: version 1.0 June 24, 2026; 1.1 August 28; 1.2 September 24; 1.3 October 29. Says guide updates precede exam changes by approximately one month. Limits: October 29 is a publication date, not an exact effective date; removing a service from an out-of-scope list does not prove it is now in scope.",
+      "scope": "Visible publication dates: version 1.0 June 24, 2026; 1.1 August 28; 1.2 September 24; 1.3 October 29. Says guide updates precede exam changes by approximately one month. Limits: October 29 is a publication date, not an exact effective date; removing a service from an out-of-scope list does not prove it is now in scope.",
+      "reviewedAt": "2026-11-08"
+    },
+    {
+      "key": "saa-revisions",
+      "title": "Revisions \u2014 Solutions Architect Associate",
+      "url": "https://docs.aws.amazon.com/aws-certification/latest/solutions-architect-associate-03/saa-03-revisions.html",
+      "reviewed": "2026-11-08",
+      "notes": "Visible dates: 1.0 August 28, 2026; 1.1 October 29. Lists Elastic Transcoder removal from in-scope services. Limits: approximately one-month lead, no precise effective date. Do not equate these HTML guide revisions with older static PDF version labels.",
+      "scope": "Visible dates: 1.0 August 28, 2026; 1.1 October 29. Lists Elastic Transcoder removal from in-scope services. Limits: approximately one-month lead, no precise effective date. Do not equate these HTML guide revisions with older static PDF version labels.",
+      "reviewedAt": "2026-11-08"
+    },
+    {
+      "key": "iam-evaluation",
+      "title": "Policy evaluation logic",
+      "url": "https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html",
+      "reviewed": "2026-11-08",
+      "notes": "Supports explicit deny overriding allow and intersections with limiting policies. Limits: identity/resource policy and principal-type nuances mean \u201cany allow wins\u201d is an unsafe generalization.",
+      "scope": "Supports explicit deny overriding allow and intersections with limiting policies. Limits: identity/resource policy and principal-type nuances mean \u201cany allow wins\u201d is an unsafe generalization.",
+      "reviewedAt": "2026-11-08"
+    },
+    {
+      "key": "shared-responsibility",
+      "title": "Shared Responsibility Model",
+      "url": "https://aws.amazon.com/compliance/shared-responsibility-model/",
+      "reviewed": "2026-11-08",
+      "notes": "Supports AWS infrastructure responsibilities and customer data/configuration responsibilities varying by service. Limits: managed services do not transfer all security or compliance obligations.",
+      "scope": "Supports AWS infrastructure responsibilities and customer data/configuration responsibilities varying by service. Limits: managed services do not transfer all security or compliance obligations.",
+      "reviewedAt": "2026-11-08"
+    },
+    {
+      "key": "vpc-route-tables",
+      "title": "Configure route tables",
+      "url": "https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Route_Tables.html",
+      "reviewed": "2026-11-08",
+      "notes": "Supports destination-to-target routing distinct from packet filtering. Limits: a route alone does not establish reachable, authorized application connectivity.",
+      "scope": "Supports destination-to-target routing distinct from packet filtering. Limits: a route alone does not establish reachable, authorized application connectivity.",
+      "reviewedAt": "2026-11-08"
+    },
+    {
+      "key": "vpc-nacls",
+      "title": "Control subnet traffic with network access control lists",
+      "url": "https://docs.aws.amazon.com/vpc/latest/userguide/vpc-network-acls.html",
+      "reviewed": "2026-11-08",
+      "notes": "Supports subnet-level allow/deny, lowest-numbered matching rule, stateless return-path rules versus stateful security groups. Limits: NACLs do not filter all traffic (including certain DNS/metadata paths).",
+      "scope": "Supports subnet-level allow/deny, lowest-numbered matching rule, stateless return-path rules versus stateful security groups. Limits: NACLs do not filter all traffic (including certain DNS/metadata paths).",
+      "reviewedAt": "2026-11-08"
+    },
+    {
+      "key": "nat-gateways",
+      "title": "NAT gateways",
+      "url": "https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html",
+      "reviewed": "2026-11-08",
+      "notes": "Supports private-subnet initiated outbound connectivity, public NAT + internet gateway, private NAT distinction, IPv6 egress-only alternative. Limits: NAT is not blanket permission or a content firewall; current page links regional NAT gateways, so avoid claiming all NAT gateways are inherently single-AZ.",
+      "scope": "Supports private-subnet initiated outbound connectivity, public NAT + internet gateway, private NAT distinction, IPv6 egress-only alternative. Limits: NAT is not blanket permission or a content firewall; current page links regional NAT gateways, so avoid claiming all NAT gateways are inherently single-AZ.",
+      "reviewedAt": "2026-11-08"
+    },
+    {
+      "key": "compute-choice",
+      "title": "Choosing an AWS compute service",
+      "url": "https://docs.aws.amazon.com/decision-guides/latest/decision-guides/choosing-aws-compute-service.html",
+      "reviewed": "2026-11-08",
+      "notes": "Visible update February 17, 2025. Supports EC2 VMs, ECS orchestration, Fargate managed container compute, Lambda functions, Auto Scaling. Limits: older broad comparison, not exhaustive current compute variants or quotas.",
+      "scope": "Visible update February 17, 2025. Supports EC2 VMs, ECS orchestration, Fargate managed container compute, Lambda functions, Auto Scaling. Limits: older broad comparison, not exhaustive current compute variants or quotas.",
+      "reviewedAt": "2026-11-08"
+    },
+    {
+      "key": "fargate-lambda",
+      "title": "AWS Fargate or AWS Lambda?",
+      "url": "https://docs.aws.amazon.com/decision-guides/latest/decision-guides/fargate-or-lambda.html",
+      "reviewed": "2026-11-08",
+      "notes": "Visible update August 21, 2026. Supports event/function versus persistent container-process selection. Limits: page now distinguishes durable functions, Lambda Managed Instances, MicroVMs, ECS Managed Instances/Express Mode. Avoid blanket \u201call Lambda work ends after 15 minutes\u201d; per-invocation limits and durable workflows differ. Do not bake its quota/pricing table into evergreen teaching.",
+      "scope": "Visible update August 21, 2026. Supports event/function versus persistent container-process selection. Limits: page now distinguishes durable functions, Lambda Managed Instances, MicroVMs, ECS Managed Instances/Express Mode. Avoid blanket \u201call Lambda work ends after 15 minutes\u201d; per-invocation limits and durable workflows differ. Do not bake its quota/pricing table into evergreen teaching.",
+      "reviewedAt": "2026-11-08"
+    },
+    {
+      "key": "storage-choice",
+      "title": "Choosing an AWS storage service",
+      "url": "https://docs.aws.amazon.com/decision-guides/latest/decision-guides/choosing-aws-storage-service.html",
+      "reviewed": "2026-11-08",
+      "notes": "Visible update October 5, 2026. Supports object/block/file choice, access patterns, lifecycle, backup, migration. Limits: current S3 portfolio includes Tables, Vectors and Files, so teach foundational S3 object APIs without claiming S3 has no file-access offerings; classes have different availability/cost constraints.",
+      "scope": "Visible update October 5, 2026. Supports object/block/file choice, access patterns, lifecycle, backup, migration. Limits: current S3 portfolio includes Tables, Vectors and Files, so teach foundational S3 object APIs without claiming S3 has no file-access offerings; classes have different availability/cost constraints.",
+      "reviewedAt": "2026-11-08"
+    },
+    {
+      "key": "integration-choice",
+      "title": "Amazon SQS, Amazon SNS, or Amazon EventBridge?",
+      "url": "https://docs.aws.amazon.com/decision-guides/latest/decision-guides/sns-or-sqs-or-eventbridge.html",
+      "reviewed": "2026-11-08",
+      "notes": "Supports queues/pull consumption, pub-sub fanout, event routing by rules and using services together. Limits: delivery, ordering, retries and price depend on specific service mode and integration. Do not adopt this broad decision guide\u2019s persistence or exactly-once comparison cells as end-to-end application guarantees; those claims were not used.",
+      "scope": "Supports queues/pull consumption, pub-sub fanout, event routing by rules and using services together. Limits: delivery, ordering, retries and price depend on specific service mode and integration. Do not adopt this broad decision guide\u2019s persistence or exactly-once comparison cells as end-to-end application guarantees; those claims were not used.",
+      "reviewedAt": "2026-11-08"
+    },
+    {
+      "key": "sqs-duplicates",
+      "title": "Amazon SQS at-least-once delivery",
+      "url": "https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/standard-queues-at-least-once-delivery.html",
+      "reviewed": "2026-11-08",
+      "notes": "Supports duplicate delivery and idempotent consumers for standard queues. Limits: not an end-to-end exactly-once guarantee for payments or other side effects.",
+      "scope": "Supports duplicate delivery and idempotent consumers for standard queues. Limits: not an end-to-end exactly-once guarantee for payments or other side effects.",
+      "reviewedAt": "2026-11-08"
+    },
+    {
+      "key": "rds-multiaz",
+      "title": "Configuring and managing a Multi-AZ deployment for Amazon RDS",
+      "url": "https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.MultiAZ.html",
+      "reviewed": "2026-11-08",
+      "notes": "Supports single standby in Multi-AZ DB instance deployment (not readable), versus two readable standby instances in Multi-AZ DB cluster. Limits: do not collapse all \u201cMulti-AZ\u201d into one behavior.",
+      "scope": "Supports single standby in Multi-AZ DB instance deployment (not readable), versus two readable standby instances in Multi-AZ DB cluster. Limits: do not collapse all \u201cMulti-AZ\u201d into one behavior.",
+      "reviewedAt": "2026-11-08"
+    },
+    {
+      "key": "rds-replicas",
+      "title": "Working with DB instance read replicas",
+      "url": "https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ReadRepl.html",
+      "reviewed": "2026-11-08",
+      "notes": "Supports asynchronous read replication and separating read scaling from synchronous standby failover. Limits: engine/mode differences, promotion, lag and regional support require detailed checks. Db2 standby-mode and Oracle mounted-mode replica exceptions do not serve read workloads.",
+      "scope": "Supports asynchronous read replication and separating read scaling from synchronous standby failover. Limits: engine/mode differences, promotion, lag and regional support require detailed checks. Db2 standby-mode and Oracle mounted-mode replica exceptions do not serve read workloads.",
+      "reviewedAt": "2026-11-08"
+    },
+    {
+      "key": "aurora-availability",
+      "title": "High availability for Amazon Aurora",
+      "url": "https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Concepts.AuroraHighAvailability.html",
+      "reviewed": "2026-11-08",
+      "notes": "Supports cluster storage replication and separate reader instances; storage redundancy does not equal an already-running failover reader. Limits: conventional Aurora MySQL/PostgreSQL architecture, not a universal description of every product using the Aurora brand.",
+      "scope": "Supports cluster storage replication and separate reader instances; storage redundancy does not equal an already-running failover reader. Limits: conventional Aurora MySQL/PostgreSQL architecture, not a universal description of every product using the Aurora brand.",
+      "reviewedAt": "2026-11-08"
+    },
+    {
+      "key": "dynamodb-introduction",
+      "title": "What is Amazon DynamoDB?",
+      "url": "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Introduction.html",
+      "reviewed": "2026-11-08",
+      "notes": "Supports managed key-value/document NoSQL, no relational JOIN operator, transactions and read consistency capabilities. Limits: do not promise every request's latency, automatic application correctness or unlimited throughput; access-pattern design still matters.",
+      "scope": "Supports managed key-value/document NoSQL, no relational JOIN operator, transactions and read consistency capabilities. Limits: do not promise every request's latency, automatic application correctness or unlimited throughput; access-pattern design still matters.",
+      "reviewedAt": "2026-11-08"
+    },
+    {
+      "key": "dr-objectives",
+      "title": "Disaster Recovery (DR) objectives",
+      "url": "https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/disaster-recovery-dr-objectives.html",
+      "reviewed": "2026-11-08",
+      "notes": "Supports RTO as acceptable outage interval and RPO as acceptable age of recoverable data, distinct from availability. Limits: objectives are targets, not measured capabilities or service guarantees.",
+      "scope": "Supports RTO as acceptable outage interval and RPO as acceptable age of recoverable data, distinct from availability. Limits: objectives are targets, not measured capabilities or service guarantees.",
+      "reviewedAt": "2026-11-08"
+    },
+    {
+      "key": "dr-strategies",
+      "title": "REL13-BP02 Use defined recovery strategies to meet the recovery objectives",
+      "url": "https://docs.aws.amazon.com/wellarchitected/latest/framework/rel_planning_for_recovery_disaster_recovery.html",
+      "reviewed": "2026-11-08",
+      "notes": "Supports recovery strategies and why replication alone may not protect from corruption/deletion without versioning or point-in-time recovery. Limits: a written plan needs restore tests, dependency and capacity validation.",
+      "scope": "Supports recovery strategies and why replication alone may not protect from corruption/deletion without versioning or point-in-time recovery. Limits: a written plan needs restore tests, dependency and capacity validation.",
+      "reviewedAt": "2026-11-08"
+    },
+    {
+      "key": "cloudwatch",
+      "title": "What is Amazon CloudWatch?",
+      "url": "https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/WhatIsCloudWatch.html",
+      "reviewed": "2026-11-08",
+      "notes": "Supports metrics/logs/alarms/dashboards and operational visibility. Limits: not all workload telemetry is collected automatically; instrument and configure deliberately.",
+      "scope": "Supports metrics/logs/alarms/dashboards and operational visibility. Limits: not all workload telemetry is collected automatically; instrument and configure deliberately.",
+      "reviewedAt": "2026-11-08"
+    },
+    {
+      "key": "cloudtrail",
+      "title": "What Is AWS CloudTrail?",
+      "url": "https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-user-guide.html",
+      "reviewed": "2026-11-08",
+      "notes": "Supports actor/action/time audit events and management-event history versus configured trails/data recording. Limits: do not claim it captures every application or data event by default.",
+      "scope": "Supports actor/action/time audit events and management-event history versus configured trails/data recording. Limits: do not claim it captures every application or data event by default.",
+      "reviewedAt": "2026-11-08"
+    },
+    {
+      "key": "config",
+      "title": "What Is AWS Config?",
+      "url": "https://docs.aws.amazon.com/config/latest/developerguide/WhatIsConfig.html",
+      "reviewed": "2026-11-08",
+      "notes": "Supports resource configuration history, relationships and rule evaluations. Limits: recording scope and supported resource types matter; compliance against a rule is not blanket regulatory compliance.",
+      "scope": "Supports resource configuration history, relationships and rule evaluations. Limits: recording scope and supported resource types matter; compliance against a rule is not blanket regulatory compliance.",
+      "reviewedAt": "2026-11-08"
+    },
+    {
+      "key": "budgets",
+      "title": "Managing your costs with AWS Budgets",
+      "url": "https://docs.aws.amazon.com/cost-management/latest/userguide/budgets-managing-costs.html",
+      "reviewed": "2026-11-08",
+      "notes": "Supports actual/forecast alerts, optional actions, billing/notification delays and possible overshoot. Limits: a budget is not a guaranteed hard spending cap; existing resources may keep incurring charges.",
+      "scope": "Supports actual/forecast alerts, optional actions, billing/notification delays and possible overshoot. Limits: a budget is not a guaranteed hard spending cap; existing resources may keep incurring charges.",
+      "reviewedAt": "2026-11-08"
+    },
+    {
+      "key": "pillars",
+      "title": "The pillars of the framework",
+      "url": "https://docs.aws.amazon.com/wellarchitected/latest/framework/the-pillars-of-the-framework.html",
+      "reviewed": "2026-11-08",
+      "notes": "Supports six pillars: operational excellence, security, reliability, performance efficiency, cost optimization, sustainability. Limits: listing pillars is not completing a Well-Architected review.",
+      "scope": "Supports six pillars: operational excellence, security, reliability, performance efficiency, cost optimization, sustainability. Limits: listing pillars is not completing a Well-Architected review.",
+      "reviewedAt": "2026-11-08"
+    }
+  ],
+  "reviewedAt": "2026-11-08"
+}

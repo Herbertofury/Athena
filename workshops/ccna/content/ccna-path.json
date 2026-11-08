@@ -1,0 +1,30 @@
+{
+  "id": "ccna-workshop",
+  "title": "CCNA Foundations: Network Decisions and Evidence",
+  "summary": "Ten original lessons extend Packet Trail into switching control, IPv6, route preference, OSPF, services, wireless and typed automation through fixed offline models.",
+  "lessonIds": [
+    "ccnaf-vlans",
+    "ccnaf-loop-control",
+    "ccnaf-bundles",
+    "ccnaf-ipv6",
+    "ccnaf-routing",
+    "ccnaf-ospf",
+    "ccnaf-services",
+    "ccnaf-wireless",
+    "ccnaf-automation",
+    "ccnaf-capstone"
+  ],
+  "prerequisites": [
+    "net-packet-journey",
+    "net-subnet-planning",
+    "net-route-arp",
+    "net-dns-evidence",
+    "net-dhcp-evidence",
+    "net-incident-proof"
+  ],
+  "certificationIds": [
+    "ccna"
+  ],
+  "caseIds": [],
+  "limits": "No equipment, emulator, network traffic, credentials, APIs or configuration changes are used. All device and service validations remain unperformed. Selected conceptual alignment to CCNA 200-301 v1.1 is partial; no complete coverage, exam readiness or production approval is claimed. Cisco states v1.1 through 2027-02-02 and v2.0 from 2027-02-03; this workshop does not map v2.0. Official indexed topics were reviewed, with direct page/PDF retrieval limitations explained in the coverage guide."
+}

@@ -1,0 +1,29 @@
+{
+  "client_security": [
+    "wpa2_aes"
+  ],
+  "minimum_security": "wpa2_aes",
+  "aps": [
+    {
+      "id": "lobby",
+      "band": "2.4",
+      "channel": 1,
+      "width_mhz": 20,
+      "security": "wpa2_aes"
+    },
+    {
+      "id": "office",
+      "band": "2.4",
+      "channel": 3,
+      "width_mhz": 20,
+      "security": "wpa3_sae"
+    },
+    {
+      "id": "guest",
+      "band": "2.4",
+      "channel": 6,
+      "width_mhz": 20,
+      "security": "open"
+    }
+  ]
+}

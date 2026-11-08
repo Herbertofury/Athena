@@ -1,0 +1,858 @@
+[
+  {
+    "id": "azf-hierarchy",
+    "title": "Place resources inside an accountable lifecycle",
+    "category": "Cloud & infrastructure",
+    "summary": "Use Azure scopes to reason about ownership, inherited controls and deletion consequences.",
+    "learningGoals": [
+      "Distinguish tenant, management group, subscription and resource group responsibilities.",
+      "Trace inherited scope without treating a hierarchy as a complete access decision.",
+      "Plan a resource lifecycle around dependencies and accountable owners."
+    ],
+    "explain": [
+      "An Azure resource rarely exists in isolation. A reporting application needs an administrative home, a funding boundary, an identity directory and a plan for retirement. Azure Resource Manager organizes resources under resource groups and subscriptions, while management groups organize subscriptions for governance. Microsoft Entra tenants provide the directory context. These concepts answer different questions, so placing all four labels in one diagram is only useful when you explain what each boundary controls and who maintains it.",
+      "A subscription is an important management and billing boundary; a resource group collects resources managed together through a lifecycle. A resource belongs to one resource group at a time, but resources in different groups can still depend on each other. Grouping by a shared retirement schedule can be more useful than grouping every resource of the same type together. Naming a group “temporary” does not ensure it can be removed safely or that its contents are inexpensive.",
+      "Management groups provide an organizing scope above subscriptions. Governance assignments can apply down a scope hierarchy, but inherited context is not a complete authorization verdict. A directory role is not automatically a resource-management permission, and the same display name can conceal different principals. An administrator needs identifiers, scope and assignment details. The local hierarchy exercise deliberately reports ancestry rather than claiming that a list of ancestors proves a person can create, modify or delete a resource.",
+      "Consider a fictional reporting service whose application and data storage have different retention needs. Deleting the application group might be appropriate after a pilot, while deleting the data group could violate the retention plan. Record dependencies across those groups before approving retirement. Moving resources also deserves review because not every resource supports every move scenario, and resource identifiers or dependent configuration can matter. A tidy hierarchy is not evidence that a proposed move will succeed without disruption.",
+      "Write a lifecycle record with owner, business purpose, environment, funding contact, retention requirement and an explicit disposal decision. Tags can help maintain this record but are not automatically inherited from a resource group by its resources. Check the actual tagging mechanism rather than assuming a visual parent passes down every attribute. Separate a documented ownership convention from an enforced policy. The distinction matters when a resource appears without the expected metadata or when a subscription changes organizational responsibility.",
+      "Run the fixed local hierarchy command to inspect ancestry in invented scopes, then compare that receipt with your diagram. Its result is evidence about supplied relationships, not a live subscription inventory or directory discovery. On paper, remove one imagined application group and list dependencies that would require investigation before real deletion. No deletion is performed here. Broader lifecycle administration is enrichment beyond AZ-900 recognition-level concepts, and neither this exercise nor its completion establishes AZ-104 implementation readiness."
+    ],
+    "example": "Build two ledgers for the fictional reporting service. The first records each scope and parent; the second records application-to-data dependencies that do not follow the parent tree. The command returns ancestors_by_scope for its fixed tree. Compare that actual tree with your prediction, without adding invented resource IDs to the receipt. In a separate paper alternative, the pilot ends but its reports must remain for a retention period. Recommend retiring only the application after dependency review and retaining the data owner and funding record. Label that proposal unexecuted.",
+    "workedCode": "# Offline synthetic model only; no Azure operations.\npython3 labs/azure-workshop/run_lab.py hierarchy",
+    "codeLanguage": "sh",
+    "lab": [
+      "Read the fixed hierarchy fixture and write your prediction before running anything.",
+      "Draw the decision boundary and list the Azure conditions this local model omits.",
+      "From the workshop directory run python3 labs/azure-workshop/run_lab.py hierarchy.",
+      "Compare the receipt with your prediction and retain disagreements rather than editing evidence.",
+      "Work the alternative in the example on paper only; label it unexecuted.",
+      "Save the receipt and the three evidence items, with a list of unperformed real Azure validations."
+    ],
+    "question": "What does a resource group primarily help organize?",
+    "options": [
+      "Resources managed together through a lifecycle",
+      "All identities in a tenant",
+      "Every organization on the internet",
+      "Only resources with identical prices"
+    ],
+    "answer": 0,
+    "why": "Resource groups are management containers; identity directories and price groupings answer different questions.",
+    "additionalChecks": [
+      {
+        "question": "What does the ancestry receipt prove?",
+        "options": [
+          "That deletion is approved",
+          "The relationships in the supplied synthetic hierarchy",
+          "That a principal has Owner access",
+          "That all Azure moves are supported"
+        ],
+        "answer": 1,
+        "why": "The model has no Azure inventory or authorization engine and evaluates only its provided tree."
+      },
+      {
+        "question": "A resource has no cost-center tag although its group has one. What should you check?",
+        "options": [
+          "Whether tags are always copied automatically",
+          "Whether deleting the subscription will fix it",
+          "Whether an explicit inheritance or tagging mechanism was configured",
+          "Whether the directory password expired"
+        ],
+        "answer": 2,
+        "why": "Resources do not automatically inherit resource-group tags; verify the actual policy or process."
+      }
+    ],
+    "tags": [
+      "azure",
+      "administration",
+      "evidence"
+    ],
+    "sourceKeys": [
+      "arm-overview",
+      "resource-groups"
+    ],
+    "sources": [
+      "https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/overview",
+      "https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/manage-resource-groups-portal"
+    ],
+    "depth": "Partial AZ-900 concepts; broader Azure administration is enrichment beyond AZ-900. Real Azure execution unperformed.",
+    "estimatedMinutes": 55,
+    "evidence": [
+      "An annotated scope tree and a separate dependency graph.",
+      "The observed ancestors_by_scope receipt with its scope limitations.",
+      "A paper retirement plan identifying retained data and unperformed move/deletion checks."
+    ],
+    "limitations": "No tenant discovery, subscription enumeration, resource move or deletion occurs. The ancestry graph is not Resource Manager, RBAC evaluation or a dependency inventory."
+  },
+  {
+    "id": "azf-access",
+    "title": "Separate directory identity from resource authorization",
+    "category": "Cloud & infrastructure",
+    "summary": "Reason about Microsoft Entra identities, Azure RBAC scopes and data-plane permissions independently.",
+    "learningGoals": [
+      "Separate authentication, directory roles and Azure RBAC.",
+      "Describe a least-privilege assignment using principal, role and scope.",
+      "Identify control-plane and data-plane validation gaps."
+    ],
+    "explain": [
+      "A successful sign-in establishes an identity context, not unlimited authority over Azure resources. Microsoft Entra ID manages identities and authentication for users and workloads. Azure role-based access control assigns permissions to principals at a resource-management scope. Administrators must connect those concepts without collapsing them. A user who can manage directory objects is not necessarily entitled to change an application server, and a subscription operator is not necessarily entitled to administer the directory that authenticates its users.",
+      "An Azure role assignment connects a security principal, role definition and scope. The principal might be a user, group, service principal or managed identity. Scope determines where the assignment applies, including inherited coverage below that point. Start with the task, then identify the narrowest suitable permissions and scope. Assigning a broad role because it makes an error disappear hides the original diagnosis and can create unrelated authority that persists after the immediate work is finished.",
+      "Control-plane permissions manage resources; data-plane permissions operate on service data. Their separation varies by service and authentication method, so a resource-management role name alone does not answer whether someone can read a blob. A managed identity avoids distributing an application secret for supported authentication flows, but it still needs appropriate authorization. Removing a stored password from code is a credential-handling improvement, not proof that the workload has minimal permissions or that every dependent service accepts that identity.",
+      "For a fictional analyst, distinguish reading a storage account configuration from downloading report contents. Put each requested operation in a ledger with its intended principal and scope. The local model matches explicit synthetic role assignments against requests. It does not implement every Azure RBAC behavior, deny assignment, conditional assignment, directory control or service-specific access mechanism. Read allowed as a model verdict only. A real access review would inspect effective assignments and test authorized operations in the intended environment.",
+      "Access also has a lifecycle. A temporary project role needs an owner, a reason, a review date and a removal decision. Group-based assignment can simplify administration, but group membership itself becomes a controlled input that needs review. Privileged access workflows and authentication requirements address different risks from role scope. Do not claim that multifactor authentication makes an excessive role acceptable, or that narrowing a role compensates for an untrusted sign-in. Each control should answer a specific threat or operational requirement.",
+      "Run the access command with no credentials and retain its decisions and matching assignment identifiers. Explain one matching request and one nonmatching request using only the fixed data. Then propose a narrower assignment on paper, without modifying a real directory or resource. Your evidence is a permission rationale plus a bounded matching result. Administrative implementation goes beyond the selected AZ-900 concepts, and the model cannot establish that access has been provisioned, revoked or safely validated in Azure."
+    ],
+    "example": "Create a two-column ledger headed manage configuration and read report data. Classify the fictional analyst operations before opening the receipt. For every returned decision, connect matching_assignment_ids to the provided assignment scope and action; an empty match must not be repaired by inventing an inherited Owner role. In the paper alternative, the analyst only needs reports in one container. Propose a suitable data-access role at the intended narrow scope and list the service-specific access checks still required. This proposal is not executed by the fixed command.",
+    "workedCode": "# Offline synthetic model only; no Azure operations.\npython3 labs/azure-workshop/run_lab.py access",
+    "codeLanguage": "sh",
+    "lab": [
+      "Read the fixed access fixture and write your prediction before running anything.",
+      "Draw the decision boundary and list the Azure conditions this local model omits.",
+      "From the workshop directory run python3 labs/azure-workshop/run_lab.py access.",
+      "Compare the receipt with your prediction and retain disagreements rather than editing evidence.",
+      "Work the alternative in the example on paper only; label it unexecuted.",
+      "Save the receipt and the three evidence items, with a list of unperformed real Azure validations."
+    ],
+    "question": "Which elements define an Azure role assignment?",
+    "options": [
+      "Password, region and invoice",
+      "Tenant logo, policy name and budget",
+      "Subscription name alone",
+      "Principal, role definition and scope"
+    ],
+    "answer": 3,
+    "why": "The assignment binds who receives which permissions at which resource scope.",
+    "additionalChecks": [
+      {
+        "question": "A workload uses managed identity. What still needs review?",
+        "options": [
+          "Its resource permissions and supported authentication path",
+          "Only its display color",
+          "Nothing because identity implies authorization",
+          "Whether it can share its password"
+        ],
+        "answer": 0,
+        "why": "Managed identity changes credential management, not the need for appropriate permissions."
+      },
+      {
+        "question": "Why separate reading configuration from reading stored reports?",
+        "options": [
+          "Data has no access controls",
+          "Control-plane and data-plane permissions can differ",
+          "Directory roles always grant both",
+          "Any Reader role grants every blob"
+        ],
+        "answer": 1,
+        "why": "Resource-management permissions alone do not establish data access for every service."
+      }
+    ],
+    "tags": [
+      "azure",
+      "administration",
+      "evidence"
+    ],
+    "sourceKeys": [
+      "role-systems",
+      "rbac"
+    ],
+    "sources": [
+      "https://learn.microsoft.com/en-us/azure/role-based-access-control/rbac-and-directory-admin-roles",
+      "https://learn.microsoft.com/en-us/azure/role-based-access-control/overview"
+    ],
+    "depth": "Partial AZ-900 concepts; broader Azure administration is enrichment beyond AZ-900. Real Azure execution unperformed.",
+    "estimatedMinutes": 55,
+    "evidence": [
+      "A principal/operation/scope ledger separating directory and resource authority.",
+      "A receipt interpretation tied to matching_assignment_ids.",
+      "A narrower paper access proposal and an explicit list of absent service checks."
+    ],
+    "limitations": "No sign-in, token acquisition, role assignment or access revocation occurs. Simplified assignment matching omits full RBAC evaluation, deny assignments, conditions and service authentication behavior."
+  },
+  {
+    "id": "azf-governance",
+    "title": "Distinguish compliant configuration from deletion protection",
+    "category": "Cloud & infrastructure",
+    "summary": "Treat Azure Policy, resource locks and role permissions as different decision mechanisms.",
+    "learningGoals": [
+      "Contrast policy evaluation with authorization and locks.",
+      "Explain why compliance findings require remediation decisions.",
+      "Assess a lock without assuming it protects all data operations."
+    ],
+    "explain": [
+      "A team can be authorized to create a resource yet propose a configuration that violates organizational standards. Azure Policy helps evaluate resource state and enforce selected organizational requirements. Azure RBAC answers who can perform actions, while Policy addresses properties and compliance requirements. Resource locks provide another layer for restricting selected management operations. These mechanisms overlap operationally but should not be treated as interchangeable labels for security. Each has its own scope, effect and exceptions that administrators must understand.",
+      "Policy definitions describe evaluation logic and an effect; assignments apply policy at a scope. An audit effect records noncompliance rather than blocking the action as a deny effect can. A compliance finding therefore needs interpretation before anyone claims prevention. An existing noncompliant resource may require deliberate remediation, depending on the policy effect and configuration. A dashboard with green or red counts also needs evaluation timing and scope context. It is not a substitute for reading what the assignment actually checks.",
+      "Resource locks address accidental changes at the management plane. CanNotDelete permits reading and modifying a resource while restricting deletion; ReadOnly restricts changes more broadly and can affect operations that look like reads but use management requests with other semantics. Locks do not universally protect service data-plane operations. A storage lock should not be described as an immutable backup or a guarantee that no blob can be deleted. Service data protection and recovery controls require their own assessment.",
+      "In the fictional service, the governance model reports policy findings separately from lock decisions. Keep those output lists separate in your review. A resource can have a missing required tag and still be protected from a modeled delete operation. Conversely, an apparently compliant resource can remain deletable if the relevant lock is absent. The exercise demonstrates why a single “secure” flag hides useful distinctions. It does not deploy a policy, invoke a remediation task or calculate actual Azure compliance.",
+      "An administrator should record the intent behind each control: prevent new configurations, detect existing drift, restrict accidental management deletion or constrain a principal. Select the mechanism that serves that intent and document exceptions. If an emergency change requires removing a lock, that is a consequential change to be authorized and audited, not a routine troubleshooting shortcut. If tags are mandatory for billing, record how newly created and existing resources receive them rather than assuming audit alone supplies missing metadata.",
+      "Run the governance command and explain each issue and blocked operation using the fixed teaching rules. Next, work a paper scenario in which a required tag is repaired but a deletion lock remains. State which concern is resolved and which restriction persists. The command does not perform that repair. Preserve both the original receipt and the separate proposal. Policy implementation and lock administration here are enrichment beyond AZ-900 overview concepts; real assignments, exemptions, remediation permissions and service behavior remain untested."
+    ],
+    "example": "Prepare a review table with one row for configuration compliance and another for accidental management deletion. Place policy_findings in the first row and lock_decisions in the second. A missing tag is evidence about the modeled requirement, not evidence that the resource is publicly accessible. A blocked delete says nothing about whether a report can be overwritten through its data API. On paper, add the missing ownership metadata and predict which modeled finding would disappear; keep that prediction separate from the unchanged fixed receipt.",
+    "workedCode": "# Offline synthetic model only; no Azure operations.\npython3 labs/azure-workshop/run_lab.py governance",
+    "codeLanguage": "sh",
+    "lab": [
+      "Read the fixed governance fixture and write your prediction before running anything.",
+      "Draw the decision boundary and list the Azure conditions this local model omits.",
+      "From the workshop directory run python3 labs/azure-workshop/run_lab.py governance.",
+      "Compare the receipt with your prediction and retain disagreements rather than editing evidence.",
+      "Work the alternative in the example on paper only; label it unexecuted.",
+      "Save the receipt and the three evidence items, with a list of unperformed real Azure validations."
+    ],
+    "question": "An audit policy finds a missing tag. What is justified?",
+    "options": [
+      "The resource creation was necessarily blocked",
+      "The missing tag was automatically repaired",
+      "The evaluated resource is noncompliant with that rule",
+      "All resource access was revoked"
+    ],
+    "answer": 2,
+    "why": "Audit detects noncompliance; it does not inherently deny or remediate.",
+    "additionalChecks": [
+      {
+        "question": "What does a management lock fail to guarantee?",
+        "options": [
+          "Restriction of selected management operations",
+          "A distinct purpose from role assignment",
+          "A possible obstacle to authorized maintenance",
+          "Protection against every data-plane deletion"
+        ],
+        "answer": 3,
+        "why": "Locks apply to the management plane, while service data protections need separate review."
+      },
+      {
+        "question": "Why retain policy and lock results separately?",
+        "options": [
+          "They answer different control questions",
+          "Only lock results can be evidence",
+          "Policy results replace all permissions",
+          "Both are the same authorization engine"
+        ],
+        "answer": 0,
+        "why": "Compliance requirements and restrictions on management changes are distinct."
+      }
+    ],
+    "tags": [
+      "azure",
+      "administration",
+      "evidence"
+    ],
+    "sourceKeys": [
+      "locks",
+      "policy",
+      "policy-evaluation",
+      "policy-remediation"
+    ],
+    "sources": [
+      "https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/lock-resources",
+      "https://learn.microsoft.com/en-us/azure/governance/policy/overview",
+      "https://learn.microsoft.com/en-us/azure/governance/policy/how-to/get-compliance-data",
+      "https://learn.microsoft.com/en-us/azure/governance/policy/how-to/remediate-resources"
+    ],
+    "depth": "Partial AZ-900 concepts; broader Azure administration is enrichment beyond AZ-900. Real Azure execution unperformed.",
+    "estimatedMinutes": 55,
+    "evidence": [
+      "A control-intent matrix for RBAC, Policy and locks.",
+      "Separate annotations for policy_findings and lock_decisions.",
+      "A paper remediation proposal that preserves unrelated restrictions."
+    ],
+    "limitations": "No Azure Policy evaluation, assignment, exemption, remediation or resource lock change occurs. The toy rules do not model every policy effect or lock/service interaction."
+  },
+  {
+    "id": "azf-storage",
+    "title": "Choose durability without confusing it with permission",
+    "category": "Cloud & infrastructure",
+    "summary": "Compare storage redundancy, access and recovery as separate requirements.",
+    "learningGoals": [
+      "Distinguish local, zonal and geographic redundancy.",
+      "Separate account access from object authorization.",
+      "Explain why replication does not replace recovery controls."
+    ],
+    "explain": [
+      "A reporting archive has several independent requirements: retain bytes during failures, restrict readers, serve authorized requests and recover from mistakes. Azure Storage redundancy choices primarily address the durability and availability of replicated data across specified failure boundaries. They do not decide who should read the reports. Access mechanisms, network controls and recovery features answer other questions. Start with a requirement ledger so that a strong answer about one dimension does not conceal an unanswered question about another dimension.",
+      "Locally redundant storage keeps copies within a single physical location in the primary region. Zone-redundant storage distributes copies across availability zones in a supported primary region. Geo-redundant options add replication to a secondary region, with differences in primary-region zone protection and whether secondary reads are available. These labels are not a universal ranking. Supported account types, regions, services and required operations affect the choice. A requirement for secondary reads should be explicit rather than inferred from the word “geo.”",
+      "Geographic replication is asynchronous, so a secondary copy can lag behind the primary. A regional failure can therefore involve data loss relative to the latest accepted writes, depending on service state and recovery procedure. Redundancy also replicates legitimate changes and may replicate unwanted changes. An accidentally overwritten report is not necessarily recovered by selecting a more geographically distributed option. Versioning, soft delete, backup or other service-specific protections should be evaluated against the deletion and corruption scenarios the archive actually faces.",
+      "Authentication and authorization need a separate decision. Microsoft recommends Microsoft Entra authorization where supported; shared keys and delegated tokens have different handling and exposure risks. A network path to a storage endpoint does not itself grant data access. Conversely, an authorized identity can still fail because network access or name resolution is incorrect. Record the expected principal, operation, endpoint and access mechanism. Avoid copying credentials into a classroom example or treating an account management role as blanket permission to read every object.",
+      "The fixed model compares a short list of fictional option capabilities against required features. It selects RA-GZRS for its secondary-read and zone-resilience requirements, while listing missing capabilities for alternatives. That result is not a recommendation for every archive or a guarantee that RA-GZRS is available for the intended account and region. Real selection would include service support, consistency implications, costs, failover behavior and data residency constraints. Those validations remain outside this local exercise and must not be silently assumed.",
+      "Run the storage command and explain each missing requirement in ordinary language. Then consider a paper-only archive whose retrieval deadline tolerates waiting for recovery and whose budget is constrained. Reassess requirements before choosing an alternative; do not simply select the cheapest label. Preserve the executed receipt separately from that discussion. This administrative trade-off analysis enriches AZ-900 storage concepts but does not configure a storage account, validate access, measure replication lag or demonstrate readiness to operate a real Azure archive."
+    ],
+    "example": "The actual fixture asks for secondary_read and zone_resilience. LRS misses both; ZRS misses secondary_read; matching_options contains RA-GZRS. Explain why satisfying those two model flags leaves permissions and accidental deletion unresolved. In the paper alternative, the owner removes the secondary-read requirement but still requires zone protection. ZRS becomes a candidate in the simplified comparison, not an automatically approved real deployment. Record that candidate and the region, service and recovery checks needed before selecting an actual account configuration.",
+    "workedCode": "# Offline synthetic model only; no Azure operations.\npython3 labs/azure-workshop/run_lab.py storage",
+    "codeLanguage": "sh",
+    "lab": [
+      "Read the fixed storage fixture and write your prediction before running anything.",
+      "Draw the decision boundary and list the Azure conditions this local model omits.",
+      "From the workshop directory run python3 labs/azure-workshop/run_lab.py storage.",
+      "Compare the receipt with your prediction and retain disagreements rather than editing evidence.",
+      "Work the alternative in the example on paper only; label it unexecuted.",
+      "Save the receipt and the three evidence items, with a list of unperformed real Azure validations."
+    ],
+    "question": "What does geographic redundancy fail to guarantee?",
+    "options": [
+      "Additional geographic copies",
+      "Recovery from every accidental overwrite",
+      "A distinction from local redundancy",
+      "A potential secondary recovery location"
+    ],
+    "answer": 1,
+    "why": "Replication and recovery from unwanted changes are different requirements.",
+    "additionalChecks": [
+      {
+        "question": "Why does the fixed comparison select RA-GZRS?",
+        "options": [
+          "It is always free",
+          "It automatically grants data access",
+          "It matches both supplied feature requirements",
+          "It is supported by every account type"
+        ],
+        "answer": 2,
+        "why": "The result follows the fixture flags, not universal availability or suitability."
+      },
+      {
+        "question": "An authorized reader cannot reach the endpoint. What else matters?",
+        "options": [
+          "Only the resource group name",
+          "Whether the budget is green",
+          "Whether replicas grant a password",
+          "Network path and name resolution"
+        ],
+        "answer": 3,
+        "why": "Authorization and connectivity are independent conditions for successful access."
+      }
+    ],
+    "tags": [
+      "azure",
+      "administration",
+      "evidence"
+    ],
+    "sourceKeys": [
+      "storage-redundancy",
+      "storage-auth",
+      "storage-private"
+    ],
+    "sources": [
+      "https://learn.microsoft.com/en-us/azure/storage/common/storage-redundancy",
+      "https://learn.microsoft.com/en-us/azure/storage/common/authorize-data-access",
+      "https://learn.microsoft.com/en-us/azure/storage/common/storage-private-endpoints"
+    ],
+    "depth": "Partial AZ-900 concepts; broader Azure administration is enrichment beyond AZ-900. Real Azure execution unperformed.",
+    "estimatedMinutes": 55,
+    "evidence": [
+      "A requirement ledger covering redundancy, access and recovery.",
+      "An annotated matching_options and missing_requirements comparison.",
+      "A paper alternative with explicit regional and service support gaps."
+    ],
+    "limitations": "No storage account, redundancy change, object read or replication measurement occurs. The capability table is simplified; availability, pricing, failover behavior and authentication remain unverified for any real account."
+  },
+  {
+    "id": "azf-network",
+    "title": "Trace routes, filters and private names independently",
+    "category": "Cloud & infrastructure",
+    "summary": "Avoid declaring connectivity from a route or private endpoint alone.",
+    "learningGoals": [
+      "Separate route selection from NSG permission.",
+      "Explain why private endpoints need suitable DNS resolution.",
+      "Preserve route ambiguity and incomplete flow evidence."
+    ],
+    "explain": [
+      "An application reaching a database needs more than an address. Its name must resolve to the intended endpoint, traffic must follow a suitable path, filtering must permit the flow and the service must accept the application request. Azure virtual networks provide private network boundaries, but their existence does not prove that every resource can communicate. Build a path explanation from source workload to destination service and identify the evidence needed at each step rather than treating connectivity as one configuration switch.",
+      "Routing chooses a next hop based on applicable routes. More specific destination prefixes matter, and Azure has additional route-source selection rules that a simple longest-prefix classroom exercise does not reproduce. If two equally specific teaching routes remain tied, report ambiguity instead of inventing a winner. Real diagnosis would inspect effective routes and route origin for the relevant interface. A route toward a firewall, gateway or virtual appliance also leaves that next hop's health and forwarding behavior to be checked separately.",
+      "Network security groups filter traffic through ordered rules with priorities and matching conditions. When NSGs apply at both subnet and network interface, both applicable layers need to allow the new flow. A subnet allow cannot cancel a NIC denial. NSGs are stateful, so observations about existing connections may differ from expectations for a newly initiated connection after rule changes. The local model deliberately uses synthetic match flags and new-flow decisions; it does not generate packets or demonstrate connection tracking behavior.",
+      "A private endpoint provides a private network interface for a supported service connection. Applications usually continue using the service hostname, making DNS resolution central to the design. Private DNS zones, links and forwarding paths must suit where clients run, including hybrid clients. Merely creating a private endpoint does not prove the client resolves the intended private address. Public endpoint exposure and service authentication must also be reviewed explicitly. Private addressing is a connectivity choice, not a replacement for data authorization.",
+      "For the fictional reporting client, keep a ledger of destination name, resolved address, selected route, subnet filtering, NIC filtering and application result. The fixed exercise covers only some of those columns. Its first route case deliberately has two equally specific candidates, and its new-flow NSG case is denied at the NIC after passing the subnet layer. These are independent findings. Resolving the route ambiguity would not by itself change the NIC result, and changing a filter would not establish correct DNS.",
+      "Run the network command and retain both the unresolved route selection and the denied flow. On paper, propose a DNS validation plan for a private endpoint without querying real infrastructure. Identify where the client would obtain its resolver and which hostname should be inspected. This is broader administration enrichment, not a complete AZ-900 requirement. No network changes, private endpoint approvals, packet tests or live effective-route checks occur, so the outcome must remain a bounded explanation rather than a claim of working Azure connectivity."
+    ],
+    "example": "The first route result retains selected_route_ids private-a and private-b with ambiguous true. Explain that the teaching engine intentionally does not resolve Azure route-source precedence. The web-new-flow case reports subnet permission but NIC denial, giving allowed false overall. On paper, imagine correcting only the route tie: the NSG denial remains. Next list the DNS evidence missing from both results, especially whether the service hostname resolves privately for the actual client. None of those alternatives is executed by the command.",
+    "workedCode": "# Offline synthetic model only; no Azure operations.\npython3 labs/azure-workshop/run_lab.py network",
+    "codeLanguage": "sh",
+    "lab": [
+      "Read the fixed network fixture and write your prediction before running anything.",
+      "Draw the decision boundary and list the Azure conditions this local model omits.",
+      "From the workshop directory run python3 labs/azure-workshop/run_lab.py network.",
+      "Compare the receipt with your prediction and retain disagreements rather than editing evidence.",
+      "Work the alternative in the example on paper only; label it unexecuted.",
+      "Save the receipt and the three evidence items, with a list of unperformed real Azure validations."
+    ],
+    "question": "The subnet allows a new flow but the NIC NSG denies it. What follows?",
+    "options": [
+      "The flow is not allowed through both layers",
+      "The subnet always wins",
+      "The lower-level rule is ignored",
+      "DNS converts the denial to an allow"
+    ],
+    "answer": 0,
+    "why": "All applicable filtering layers must permit the flow.",
+    "additionalChecks": [
+      {
+        "question": "A private endpoint exists. What still needs checking?",
+        "options": [
+          "Whether private IPs bypass authentication",
+          "The client hostname resolves through the intended DNS path",
+          "Whether NSGs become irrelevant",
+          "Whether all public access is necessarily disabled"
+        ],
+        "answer": 1,
+        "why": "A private endpoint does not alone prove client DNS behavior or public endpoint restrictions."
+      },
+      {
+        "question": "Why retain a route tie in this model?",
+        "options": [
+          "Azure never chooses routes",
+          "Both routes necessarily carry each packet",
+          "It omits Azure route-source precedence and cannot justify a winner",
+          "The shorter route name always wins"
+        ],
+        "answer": 2,
+        "why": "Explicit ambiguity is more accurate than an unsupported tie-breaker."
+      }
+    ],
+    "tags": [
+      "azure",
+      "administration",
+      "evidence"
+    ],
+    "sourceKeys": [
+      "vnet",
+      "routes",
+      "nsg",
+      "private-dns"
+    ],
+    "sources": [
+      "https://learn.microsoft.com/en-us/azure/virtual-network/virtual-networks-overview",
+      "https://learn.microsoft.com/en-us/azure/virtual-network/virtual-networks-udr-overview",
+      "https://learn.microsoft.com/en-us/azure/virtual-network/network-security-groups-overview",
+      "https://learn.microsoft.com/en-us/azure/private-link/private-endpoint-dns"
+    ],
+    "depth": "Partial AZ-900 concepts; broader Azure administration is enrichment beyond AZ-900. Real Azure execution unperformed.",
+    "estimatedMinutes": 55,
+    "evidence": [
+      "A path ledger marking DNS, routing, filtering and application checks separately.",
+      "A receipt preserving the route tie and the NIC-denied new flow.",
+      "An unexecuted private-DNS validation plan for the fictional client."
+    ],
+    "limitations": "No packets, DNS queries, effective routes, private endpoints or NSG changes are executed. Route-source precedence and stateful flow behavior are not simulated; match flags and fallback denial are teaching simplifications."
+  },
+  {
+    "id": "azf-compute",
+    "title": "Size capacity without promising application availability",
+    "category": "Cloud & infrastructure",
+    "summary": "Use demand arithmetic, scaling limits and operational responsibility to review compute choices.",
+    "learningGoals": [
+      "Compare VM and managed application responsibilities.",
+      "Compute required instances and expose maximum-capacity shortfalls.",
+      "Separate capacity from application health and resilience."
+    ],
+    "explain": [
+      "Choosing compute begins with workload behavior and operational responsibility. A virtual machine gives control over an operating system and its configuration, while managed application platforms reduce some infrastructure management work. Containers package an application with dependencies but do not erase responsibility for application security, image maintenance or service configuration. The right choice depends on runtime needs, deployment model, integration constraints and the team's ability to operate the workload. A familiar service name is not a substitute for those requirements.",
+      "Virtual Machine Scale Sets help manage groups of virtual machines, with orchestration and scaling capabilities that require deliberate configuration. Scaling is not simply multiplying an instance count. Images, networking, health evaluation, instance initialization and application state all affect whether additional instances can serve requests. A scale-out decision may be correct while new instances take time to become useful. Document the startup delay and the signal that indicates readiness rather than assuming a provisioned machine immediately contributes full productive capacity.",
+      "A first capacity estimate divides forecast demand by measured safe capacity per instance and rounds upward. That estimate depends on what was measured: request mix, response-time target, database behavior and background tasks can change the result. Maximum instance settings constrain the requested capacity. A budget, quota or regional limit can constrain it further, but those are separate mechanisms. Recording the gap between required and configured capacity is more informative than claiming that the presence of autoscale guarantees demand will be met.",
+      "Autoscale rules need appropriate signals, thresholds, time windows and cooldown behavior. CPU utilization can be useful for one workload while queue length or request pressure may be more relevant for another. Aggressive rules can oscillate or react to noise; slow rules may leave users waiting through a sustained surge. A bounded arithmetic model does not predict those dynamics. It can expose a capacity ceiling, but it cannot tell you whether a real scaling policy reacts in time or whether the application remains healthy.",
+      "The reporting fixture requires eight instances under its simplified demand assumption. Four current instances leave a shortfall of four, while the configured maximum permits only six. The model therefore reports insufficient capacity even after capping the scale target. This is a review finding, not a request to increase a quota or spend money. A team should investigate demand shaping, per-instance performance, architecture constraints and financial authorization before deciding whether a larger fleet is appropriate. Availability also requires attention to failure domains and dependencies.",
+      "Run the compute command and independently reproduce its rounding and ceiling comparison. Then propose a paper-only response to the shortfall with at least two options and their risks. Increasing the maximum is one option, not the only answer. State what measurements would distinguish the options. This administrative reasoning extends beyond foundational service recognition. No VM is created, no scale rule is configured and no load test is run; the receipt demonstrates arithmetic on supplied values rather than validated Azure application capacity."
+    ],
+    "example": "The receipt reports required_instances 8, shortfall 4, capped_instances 6 and capacity_sufficient false. Distinguish the current shortfall from the smaller remaining deficit after reaching the configured ceiling. A paper alternative increases measured per-instance throughput through application optimization; another raises the ceiling after authorization and quota review. Compare evidence needed for each rather than assuming either succeeds. The fixed run does not benchmark optimization, alter a scale set or charge for additional instances.",
+    "workedCode": "# Offline synthetic model only; no Azure operations.\npython3 labs/azure-workshop/run_lab.py compute",
+    "codeLanguage": "sh",
+    "lab": [
+      "Read the fixed compute fixture and write your prediction before running anything.",
+      "Draw the decision boundary and list the Azure conditions this local model omits.",
+      "From the workshop directory run python3 labs/azure-workshop/run_lab.py compute.",
+      "Compare the receipt with your prediction and retain disagreements rather than editing evidence.",
+      "Work the alternative in the example on paper only; label it unexecuted.",
+      "Save the receipt and the three evidence items, with a list of unperformed real Azure validations."
+    ],
+    "question": "Demand requires eight instances but the ceiling is six. What is justified?",
+    "options": [
+      "Autoscale guarantees eight anyway",
+      "The workload is proven highly available",
+      "The budget automatically approves more instances",
+      "The configured ceiling cannot satisfy the modeled demand"
+    ],
+    "answer": 3,
+    "why": "A maximum of six leaves a modeled capacity deficit when eight are required.",
+    "additionalChecks": [
+      {
+        "question": "What does a new VM instance count fail to prove?",
+        "options": [
+          "That the application is initialized and serving healthy requests",
+          "That a count can be recorded",
+          "That scaling has a configured ceiling",
+          "That demand can be estimated"
+        ],
+        "answer": 0,
+        "why": "Provisioned infrastructure and useful application readiness are different states."
+      },
+      {
+        "question": "Which input most strengthens capacity planning?",
+        "options": [
+          "The longest service name",
+          "Measured safe throughput under a representative workload",
+          "The cheapest region label alone",
+          "A universal instance count for all apps"
+        ],
+        "answer": 1,
+        "why": "Capacity estimates depend on workload and performance evidence."
+      }
+    ],
+    "tags": [
+      "azure",
+      "administration",
+      "evidence"
+    ],
+    "sourceKeys": [
+      "compute",
+      "vmss"
+    ],
+    "sources": [
+      "https://learn.microsoft.com/en-us/azure/architecture/guide/technology-choices/compute-decision-tree",
+      "https://learn.microsoft.com/en-us/azure/virtual-machine-scale-sets/overview"
+    ],
+    "depth": "Partial AZ-900 concepts; broader Azure administration is enrichment beyond AZ-900. Real Azure execution unperformed.",
+    "estimatedMinutes": 55,
+    "evidence": [
+      "An independently calculated required count, current shortfall and capped deficit.",
+      "A decision record comparing optimization with a higher ceiling.",
+      "A list of unperformed health, load, quota and scaling-delay validations."
+    ],
+    "limitations": "No compute deployment, autoscale, quota request, benchmark or health probe occurs. Deterministic arithmetic omits startup delay, noisy signals, dependency bottlenecks and real service limits."
+  },
+  {
+    "id": "azf-monitoring",
+    "title": "Treat missing telemetry as uncertainty, not health",
+    "category": "Cloud & infrastructure",
+    "summary": "Interpret metrics and logs with collection scope, time windows and missing-data limits.",
+    "learningGoals": [
+      "Distinguish platform activity from application telemetry.",
+      "Evaluate threshold equality and incomplete windows explicitly.",
+      "Build an investigation record that separates observation from inference."
+    ],
+    "explain": [
+      "A monitoring chart is evidence produced by a collection system, not a direct view of everything a workload experiences. Azure Monitor brings together monitoring capabilities for metrics, logs and related signals. Administrators still need to know what is collected, where it is stored and which time period a query describes. A quiet chart can mean low activity, a healthy service, a broken collection path or an incorrect query. Those explanations require different checks before the team can conclude that users are unaffected.",
+      "Metrics are numeric measurements over time; logs provide records that can contain richer event context. Traces help connect work across components when instrumentation supports them. The Azure Activity Log describes subscription-level platform events such as resource-management operations, not every application request or every data access. Resource logs often require diagnostic configuration for collection and routing. Do not assume that creating a resource automatically places all useful evidence in the intended workspace with the desired retention and permissions.",
+      "An alert depends on its scope, signal, aggregation, evaluation period and comparison operator. A threshold of greater than eighty-five differs from greater than or equal to eighty-five. Mean values can hide brief spikes, and different time windows can produce different interpretations of the same raw samples. State the exact rule before reporting a breach. An alert can notify or trigger configured actions, but the existence of a rule does not prove that recipients receive notifications or that a response procedure is effective.",
+      "Missing samples deserve their own state. If an exercise expects three observations and receives two, treating the two observed values as a complete window can produce unjustified reassurance. Retain the observed count and expected count along with any computed mean. Investigate collection and timing before interpreting an incomplete low average as healthy behavior. In real systems, signal-specific missing-data behavior varies; our explicit insufficient-data label is a teaching choice that makes uncertainty visible rather than a universal Azure alert implementation.",
+      "The fixed monitoring windows illustrate three distinct outcomes: a complete mean of ninety breaches a strict threshold of eighty-five, an incomplete window with mean twenty-five is insufficient data, and a complete mean of eighty-five stays within that strict threshold. These numbers do not measure an Azure service. They are deliberately chosen to require reasoning about completeness and boundary equality. A correct report preserves all three conclusions rather than selecting the reassuring values or treating every nonbreach result as operational success.",
+      "Run the monitoring command and create a brief incident note listing observations, possible causes and the next discriminating checks. On paper, consider what would change if the rule used an inclusive comparison, without claiming the fixed command executed that version. Include the missing collection context before offering a cause. This operational analysis is enrichment beyond foundational monitoring recognition. No diagnostic setting, workspace, query, alert or notification is created, and no real application health or service-level objective is validated by the resulting receipt."
+    ],
+    "example": "Read windows in the returned order: breach has mean 90; insufficient_data has mean 25 with observed_count 2 and expected_count 3; within_threshold has mean 85. Explain why the incomplete low average cannot be reported as healthy. In a paper alternative, change the comparison from strictly greater than 85 to greater than or equal to 85: the equality window would change classification, but the missing-sample problem would remain. Keep this counterfactual separate from the actual receipt.",
+    "workedCode": "# Offline synthetic model only; no Azure operations.\npython3 labs/azure-workshop/run_lab.py monitoring",
+    "codeLanguage": "sh",
+    "lab": [
+      "Read the fixed monitoring fixture and write your prediction before running anything.",
+      "Draw the decision boundary and list the Azure conditions this local model omits.",
+      "From the workshop directory run python3 labs/azure-workshop/run_lab.py monitoring.",
+      "Compare the receipt with your prediction and retain disagreements rather than editing evidence.",
+      "Work the alternative in the example on paper only; label it unexecuted.",
+      "Save the receipt and the three evidence items, with a list of unperformed real Azure validations."
+    ],
+    "question": "Two of three expected samples produce a low mean. What should the report say?",
+    "options": [
+      "The service is definitely healthy",
+      "The missing sample must be zero",
+      "The window is incomplete and cannot justify a complete-window health conclusion",
+      "The threshold should be silently lowered"
+    ],
+    "answer": 2,
+    "why": "Completeness is part of the evidence; missing values cannot be invented.",
+    "additionalChecks": [
+      {
+        "question": "What does the Azure Activity Log primarily describe?",
+        "options": [
+          "Every application trace automatically",
+          "All blob contents",
+          "Only CPU measurements",
+          "Platform-level resource-management activity"
+        ],
+        "answer": 3,
+        "why": "Activity records and application/data-plane telemetry are distinct sources."
+      },
+      {
+        "question": "A complete mean equals 85 under a strict greater-than-85 rule. What follows?",
+        "options": [
+          "It does not breach that exact comparison",
+          "It always breaches",
+          "The sample is missing",
+          "The threshold is irrelevant"
+        ],
+        "answer": 0,
+        "why": "Equality does not satisfy a strict greater-than comparison."
+      }
+    ],
+    "tags": [
+      "azure",
+      "administration",
+      "evidence"
+    ],
+    "sourceKeys": [
+      "monitor",
+      "activity-log",
+      "diagnostics"
+    ],
+    "sources": [
+      "https://learn.microsoft.com/en-us/azure/azure-monitor/fundamentals/overview",
+      "https://learn.microsoft.com/en-us/azure/azure-monitor/fundamentals/activity-log",
+      "https://learn.microsoft.com/en-us/azure/azure-monitor/data-collection/diagnostic-settings"
+    ],
+    "depth": "Partial AZ-900 concepts; broader Azure administration is enrichment beyond AZ-900. Real Azure execution unperformed.",
+    "estimatedMinutes": 55,
+    "evidence": [
+      "A window table retaining counts, mean and exact threshold semantics.",
+      "An incident note separating observations from hypotheses.",
+      "A paper inclusive-threshold alternative and unperformed collection checks."
+    ],
+    "limitations": "No Azure Monitor ingestion, diagnostic setting, alert delivery or live query occurs. Synthetic window labels do not reproduce every Azure alert missing-data or aggregation behavior."
+  },
+  {
+    "id": "azf-recovery",
+    "title": "Plan a restore around data loss and dependencies",
+    "category": "Cloud & infrastructure",
+    "summary": "Separate backup copies, disaster recovery and proof that a restored application works.",
+    "learningGoals": [
+      "Distinguish RPO from RTO and successful restore evidence.",
+      "Order recovery by dependencies and expose missing prerequisites.",
+      "Explain why a stored backup is not a completed recovery test."
+    ],
+    "explain": [
+      "Recovery planning begins with business tolerances rather than a product selection. Recovery point objective describes the acceptable amount of data loss measured in time; recovery time objective describes how long restoring service may take. A backup schedule can contribute to meeting those objectives, but it does not prove either one. Restore duration, application dependencies, access requirements and validation all matter. Ask what the business must be able to do after recovery, not merely whether a backup file or recovery point exists.",
+      "Azure Backup protects supported workloads through service-specific backup and restore capabilities. Azure Site Recovery supports disaster-recovery replication and orchestration for supported machines and scenarios. They are related but not interchangeable. A replicated workload can support continuity after an infrastructure failure, while recovering an earlier version after unwanted changes may require a suitable retained recovery point. Choose protections by failure scenario and supported workload rather than assuming any service with “recovery” in its name covers every outage, corruption or deletion.",
+      "Restore ordering exposes dependencies. A database may require network connectivity before it can be reached, and an application may require the database before its own health checks can pass. Identity, name resolution, certificates and external services can add further prerequisites. Draw a dependency graph and identify what must be ready before each component is useful. A valid topological order is planning evidence only; it does not measure startup duration or establish that the restored components communicate correctly with each other.",
+      "A recovery point older than the allowed data-loss interval misses the modeled RPO even if a restore command would otherwise succeed. That mismatch deserves a clear finding rather than a reassuring statement that backups exist. Conversely, meeting a freshness requirement says nothing about restore duration, application consistency or completeness of the selected data. Keep freshness, restorability and service validation as separate acceptance conditions. A real exercise would compare restored data with expected business records and document any reconciliation work needed before reopening service.",
+      "The fictional graph orders network before database before application and reports no missing dependencies in its supplied set. Its recovery-point age still exceeds the target, so rpo_met is false. Do not add an invented successful restore or a measured recovery time to this receipt. The model never creates backup copies or boots a recovered workload. Its useful finding is that a seemingly orderly plan can still violate the business data-loss requirement, leaving a concrete issue for the owner to resolve.",
+      "Run the recovery command and preserve both the dependency order and the failed freshness check. Then create a paper acceptance checklist for a future authorized restore test: identify the recovery point, validate representative records, confirm application behavior and measure service restoration time. No test is scheduled or executed here. Recovery administration is enrichment beyond selected foundational concepts. This workshop cannot establish an actual RPO, RTO, backup immutability guarantee, disaster-recovery capability or permission to perform failover in a real environment."
+    ],
+    "example": "The fixed receipt returns restore_order [network, database, app], missing_dependencies [] and rpo_met false. Explain why a complete dependency list does not rescue the failed freshness requirement. In the paper alternative, a newer recovery point would satisfy the age condition, but restoration and business validation would still be unperformed. Prepare acceptance criteria for a representative report, its database records and application access without inventing a measured recovery time or claiming a restore succeeded.",
+    "workedCode": "# Offline synthetic model only; no Azure operations.\npython3 labs/azure-workshop/run_lab.py recovery",
+    "codeLanguage": "sh",
+    "lab": [
+      "Read the fixed recovery fixture and write your prediction before running anything.",
+      "Draw the decision boundary and list the Azure conditions this local model omits.",
+      "From the workshop directory run python3 labs/azure-workshop/run_lab.py recovery.",
+      "Compare the receipt with your prediction and retain disagreements rather than editing evidence.",
+      "Work the alternative in the example on paper only; label it unexecuted.",
+      "Save the receipt and the three evidence items, with a list of unperformed real Azure validations."
+    ],
+    "question": "Which statement best describes RPO?",
+    "options": [
+      "The number of administrator accounts",
+      "The acceptable data-loss interval",
+      "The guaranteed uptime of a replica",
+      "The length of every restore command"
+    ],
+    "answer": 1,
+    "why": "RPO concerns tolerated data loss, while RTO concerns restoration time.",
+    "additionalChecks": [
+      {
+        "question": "A recovery point is fresh enough. What remains unproven?",
+        "options": [
+          "That its age can be compared",
+          "That an objective can be recorded",
+          "That restoration completes and the application works",
+          "That a plan can list dependencies"
+        ],
+        "answer": 2,
+        "why": "Freshness alone does not prove restorability, timing or application correctness."
+      },
+      {
+        "question": "Why restore network before database in this fixture?",
+        "options": [
+          "Every Azure database always has this exact graph",
+          "The model measured the fastest order",
+          "Application authentication is unnecessary",
+          "The supplied dependency graph requires that order"
+        ],
+        "answer": 3,
+        "why": "The ordering is derived from the fictional graph and is not a universal service sequence."
+      }
+    ],
+    "tags": [
+      "azure",
+      "administration",
+      "evidence"
+    ],
+    "sourceKeys": [
+      "backup",
+      "site-recovery"
+    ],
+    "sources": [
+      "https://learn.microsoft.com/en-us/azure/backup/backup-overview",
+      "https://learn.microsoft.com/en-us/azure/site-recovery/site-recovery-overview"
+    ],
+    "depth": "Partial AZ-900 concepts; broader Azure administration is enrichment beyond AZ-900. Real Azure execution unperformed.",
+    "estimatedMinutes": 55,
+    "evidence": [
+      "A dependency graph matching the fixed restore_order.",
+      "A retained failed RPO finding without an invented RTO.",
+      "A paper restore-acceptance checklist covering data and application behavior."
+    ],
+    "limitations": "No backup, replication, failover or restore occurs. The dependency model does not simulate Azure Backup or Site Recovery, application consistency or recovery duration."
+  },
+  {
+    "id": "azf-cost",
+    "title": "Allocate spending without mistaking a budget for a brake",
+    "category": "Cloud & infrastructure",
+    "summary": "Reconcile exact costs, missing ownership tags and budget signals before proposing action.",
+    "learningGoals": [
+      "Calculate allocations without dropping untagged spending.",
+      "Explain why Azure budgets do not automatically cap consumption.",
+      "Connect cost findings to ownership and authorized responses."
+    ],
+    "explain": [
+      "Cloud cost control is an operational responsibility, not just a monthly accounting exercise. A useful review connects resource consumption to a business purpose, an accountable owner and a planned response when spending diverges from expectations. Azure Cost Management supports analysis and budgeting, while resource tags can help organize reporting. Neither a tag nor a budget replaces a spending decision. Start with the scope, currency, time period and cost basis so that a comparison does not mix incompatible numbers or hide missing context.",
+      "Tags attach metadata such as environment or cost center to supported resources. They are organizational labels, not authoritative proof of ownership or automatic billing redistribution. Resources do not automatically inherit tags from their resource group, and not every resource or usage record behaves identically for cost reporting. Establish how metadata is applied, reviewed and corrected. Untagged spending should remain visible as unallocated rather than being excluded to produce a tidy chart. Someone must own the process for investigating that category.",
+      "Azure budgets compare spending or forecast information with thresholds and can trigger configured notifications or actions. A budget is not an automatic hard spending cap. Charges may continue after a threshold is exceeded, and reported cost data has processing timing that matters for response. Any action intended to stop resources needs separate design, permissions and risk review. Stopping an application may save money but disrupt service, while retained storage, reservations or other commitments can continue to create charges despite a compute shutdown.",
+      "Cost arithmetic should retain precision and reconcile totals. Binary floating-point shortcuts can produce confusing display differences, so the local exercise uses invented decimal amounts in consistent illustrative units rather than claiming a live invoice. Sum all allocations, including unallocated amounts, and compare the same total with the modeled budget. Keep estimates distinct from actual billed charges. Real billing also involves pricing tiers, discounts, taxes, currencies and time periods that this bounded example does not attempt to reproduce.",
+      "The fictional allocation assigns 14.35 to platform and 4.50 to unallocated, totaling 18.85 against a budget of 18.00. The total exceeds the threshold by 0.85, and budget_is_cap remains false. That result identifies both an ownership gap and a spending signal. It does not authorize deleting the untagged resource or switching off the service. A proportionate response is to identify its purpose, confirm the reporting period and ask the accountable owner to choose among justified options with service consequences visible.",
+      "Run the cost command and independently reconcile allocations to the total. Then write a paper response that distinguishes metadata repair from cost reduction: adding a tag changes attribution, not consumption. Compare one operational optimization with one service-impacting option and state the approval needed before implementation. Broader cost administration is enrichment beyond foundational pricing concepts. No billing account is accessed, no budget is configured and no resource is stopped; the synthetic receipt is not an invoice, a quote or evidence of savings."
+    ],
+    "example": "Add platform 14.35 and unallocated 4.50 to reproduce total 18.85. Compare that with budget 18.00 and calculate the 0.85 difference. Explain over_budget true alongside budget_is_cap false. In the paper alternative, an owner supplies the missing cost-center tag: attribution could improve, but the total does not fall merely because the label is repaired. Separately propose a usage review and keep any future stop, resize or purchase decision outside the fixed local exercise.",
+    "workedCode": "# Offline synthetic model only; no Azure operations.\npython3 labs/azure-workshop/run_lab.py cost",
+    "codeLanguage": "sh",
+    "lab": [
+      "Read the fixed cost fixture and write your prediction before running anything.",
+      "Draw the decision boundary and list the Azure conditions this local model omits.",
+      "From the workshop directory run python3 labs/azure-workshop/run_lab.py cost.",
+      "Compare the receipt with your prediction and retain disagreements rather than editing evidence.",
+      "Work the alternative in the example on paper only; label it unexecuted.",
+      "Save the receipt and the three evidence items, with a list of unperformed real Azure validations."
+    ],
+    "question": "What happens automatically when this modeled budget is exceeded?",
+    "options": [
+      "The model reports a threshold finding, not a spending stop",
+      "All Azure resources are deleted",
+      "All charges are refunded",
+      "The subscription becomes free"
+    ],
+    "answer": 0,
+    "why": "Budgets are monitoring and response inputs, not automatic universal hard caps.",
+    "additionalChecks": [
+      {
+        "question": "Where should untagged cost appear?",
+        "options": [
+          "Nowhere in the total",
+          "In a visible unallocated category pending investigation",
+          "Under a random owner",
+          "As negative spending"
+        ],
+        "answer": 1,
+        "why": "Keeping unallocated cost visible preserves reconciliation and accountability."
+      },
+      {
+        "question": "What does repairing a cost-center tag directly change?",
+        "options": [
+          "The bill necessarily becomes zero",
+          "The resource stops running",
+          "Attribution metadata, not the underlying consumption",
+          "The service automatically gains capacity"
+        ],
+        "answer": 2,
+        "why": "Metadata repair helps reporting; it does not itself reduce use."
+      }
+    ],
+    "tags": [
+      "azure",
+      "administration",
+      "evidence"
+    ],
+    "sourceKeys": [
+      "budgets",
+      "tags"
+    ],
+    "sources": [
+      "https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/tutorial-acm-create-budgets",
+      "https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/tag-resources"
+    ],
+    "depth": "Partial AZ-900 concepts; broader Azure administration is enrichment beyond AZ-900. Real Azure execution unperformed.",
+    "estimatedMinutes": 55,
+    "evidence": [
+      "An exact allocation reconciliation including unallocated spending.",
+      "A budget interpretation recording the threshold excess and absence of a cap.",
+      "A paper response separating ownership correction from authorized cost actions."
+    ],
+    "limitations": "No live price lookup, invoice, budget configuration, shutdown or payment occurs. Fixed decimal amounts omit real billing adjustments, timing, tax, discounts and currency conversion."
+  },
+  {
+    "id": "azf-capstone",
+    "title": "Review an Azure service without erasing unresolved risks",
+    "category": "Cloud & infrastructure",
+    "summary": "Integrate governance, access, networking, recovery and cost into one honest evidence packet.",
+    "learningGoals": [
+      "Connect findings across administrative boundaries.",
+      "Prioritize missing evidence without inventing execution.",
+      "Separate partial learning coverage from certification and practical readiness."
+    ],
+    "explain": [
+      "A credible service review combines several imperfect pieces of evidence without turning them into a claim stronger than their sources support. The fictional reporting service now has scope, access, governance, storage, network, compute, monitoring, recovery and cost discussions. Each lesson answered a bounded question. The capstone asks how those answers interact and what remains unknown. A collection of completed exercises is not equivalent to a deployed, secure or recoverable Azure service, even when every local command runs successfully.",
+      "Begin with a business description: intended users, important data, expected workload, acceptable interruption and financial constraints. Map each technical decision back to one of those needs. A private endpoint may support a connectivity requirement but still require DNS and access evidence. A redundancy option may address selected failure boundaries while leaving recovery from accidental changes unresolved. A well-tagged resource can still exceed its budget. These distinctions prevent a convincing architecture diagram from becoming a substitute for operational acceptance criteria.",
+      "Build an evidence ledger with claim, observed result, model boundary, missing real-world validation and accountable reviewer. Copy the actual finding rather than replacing it with a summary such as “passed.” If a local model preserves a route tie, the ledger must preserve that ambiguity. If telemetry is incomplete, the absence of a breach cannot support a health claim. If the recovery point misses its target, a valid dependency order cannot convert that failure into success. Evidence quality includes retaining inconvenient results.",
+      "Prioritize follow-up by consequence and dependency. A missing restore test can leave a serious continuity claim unsupported; regional feature availability can invalidate a storage or deployment choice before implementation begins. An incomplete telemetry window weakens operational conclusions. Some issues require a design decision, others require additional measurements, and others require authorized configuration or testing. Describe those next steps precisely without taking them. This workshop does not obtain credentials, provision resources, send notifications or authorize spending simply because a plan has been written.",
+      "The fixed capstone aggregates synthetic findings and names missing evidence for region availability review, restore testing and complete telemetry windows. Its conclusion deliberately refuses a readiness or approval verdict. Compare that aggregate with the individual receipts so a reader can trace every retained risk. Do not invent successful cloud operations, timestamps or examination outcomes to make the packet appear complete. A useful final recommendation can be “more evidence is required,” provided it identifies the specific claim that each missing check would resolve.",
+      "Finish with an objective gap map. This pack covers selected AZ-900 concepts and offers broader administrative enrichment relevant to stable AZ-104 domains, not full coverage of either exam. The official AZ-104 material retrieved during review exposed conflicting effective-date information, so current-version verification remains incomplete. No exam or practical readiness is claimed. Run the capstone locally, complete a paper review memo and state the remaining validations. The resulting artifact demonstrates structured reasoning about supplied fixtures, not a qualification to operate an actual Azure environment."
+    ],
+    "example": "The aggregate identifies five synthetic risks and missing_evidence [region_availability_review, restore_test, complete_telemetry_windows]. Preserve its literal conclusion: Review synthetic findings; no readiness or approval conclusion. Link each risk to the relevant individual receipt and separate design gaps from absent live evidence. In a paper change request, prioritize a region-support review before selecting a real deployment target and a restore test before asserting recoverability. These proposed actions remain unexecuted and require their own authorized environment and acceptance criteria.",
+    "workedCode": "# Offline synthetic model only; no Azure operations.\npython3 labs/azure-workshop/run_lab.py capstone",
+    "codeLanguage": "sh",
+    "lab": [
+      "Read the fixed capstone fixture and write your prediction before running anything.",
+      "Draw the decision boundary and list the Azure conditions this local model omits.",
+      "From the workshop directory run python3 labs/azure-workshop/run_lab.py capstone.",
+      "Compare the receipt with your prediction and retain disagreements rather than editing evidence.",
+      "Work the alternative in the example on paper only; label it unexecuted.",
+      "Save the receipt and the three evidence items, with a list of unperformed real Azure validations."
+    ],
+    "question": "Every local command exits successfully. What does that establish?",
+    "options": [
+      "A full AZ-104 qualification",
+      "Successful regional failover",
+      "Correct live role assignments",
+      "The local exercises ran, not that Azure is production-ready"
+    ],
+    "answer": 3,
+    "why": "Execution success is bounded by the local models and their synthetic inputs.",
+    "additionalChecks": [
+      {
+        "question": "What belongs beside a claim that the service is recoverable?",
+        "options": [
+          "A defined recovery objective and appropriate restore-test evidence",
+          "Only a storage service logo",
+          "Only a budget threshold",
+          "An invented restoration timestamp"
+        ],
+        "answer": 0,
+        "why": "Recoverability needs evidence tied to objectives rather than labels or fabricated results."
+      },
+      {
+        "question": "How should conflicting AZ-104 effective-date evidence be handled?",
+        "options": [
+          "Choose the newest date and claim certainty",
+          "Disclose incomplete version verification and retain a partial mapping",
+          "Claim complete examination coverage anyway",
+          "Remove all scope limits"
+        ],
+        "answer": 1,
+        "why": "Source uncertainty constrains coverage claims and should remain visible."
+      }
+    ],
+    "tags": [
+      "azure",
+      "administration",
+      "evidence"
+    ],
+    "sourceKeys": [
+      "az-900-guide",
+      "az-104-guide",
+      "az-104-certification",
+      "backup"
+    ],
+    "sources": [
+      "https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-900",
+      "https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104",
+      "https://learn.microsoft.com/en-us/credentials/certifications/azure-administrator/",
+      "https://learn.microsoft.com/en-us/azure/backup/backup-overview"
+    ],
+    "depth": "Partial AZ-900 concepts; broader Azure administration is enrichment beyond AZ-900. Real Azure execution unperformed.",
+    "estimatedMinutes": 55,
+    "evidence": [
+      "An evidence ledger preserving all five risks and their source receipts.",
+      "A prioritized unexecuted validation plan for the three named evidence gaps.",
+      "An objective gap map stating partial coverage and incomplete AZ-104 version verification."
+    ],
+    "limitations": "No Azure deployment, complete architecture review, exam-readiness assessment or operational approval occurs. AZ-104 effective-date verification is incomplete because official retrieved material conflicted; mappings use stable domains only."
+  }
+]

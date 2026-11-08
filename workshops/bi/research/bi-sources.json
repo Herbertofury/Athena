@@ -1,0 +1,129 @@
+{
+  "checkedOn": "2026-11-07",
+  "method": "Official public Microsoft Learn pages read with web tool; no vendor execution",
+  "objectiveGuide": {
+    "sourceId": "S01",
+    "effectiveDate": "2026-04-20",
+    "pageUpdated": "2026-10-30",
+    "scope": "Partial conceptual mapping only; not completeness or readiness evidence"
+  },
+  "sources": [
+    {
+      "id": "S01",
+      "title": "PL-300 study guide",
+      "url": "https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/pl-300",
+      "publisher": "Microsoft",
+      "verified": "2026-11-07",
+      "supports": "Dated PL-300 objective groups; a partial thematic comparison, not workshop coverage percentages."
+    },
+    {
+      "id": "S02",
+      "title": "Query folding basics",
+      "url": "https://learn.microsoft.com/en-us/power-query/query-folding-basics",
+      "publisher": "Microsoft",
+      "verified": "2026-11-07",
+      "supports": "Query folding depends on supported transformations, connector and source; local models do not verify it."
+    },
+    {
+      "id": "S03",
+      "title": "Star schema guidance",
+      "url": "https://learn.microsoft.com/en-us/power-bi/guidance/star-schema",
+      "publisher": "Microsoft",
+      "verified": "2026-11-07",
+      "supports": "Fact grain and dimension roles inform star-schema modeling."
+    },
+    {
+      "id": "S04",
+      "title": "Model relationships",
+      "url": "https://learn.microsoft.com/en-us/power-bi/transform-model/desktop-relationships-understand",
+      "publisher": "Microsoft",
+      "verified": "2026-11-07",
+      "supports": "Relationship cardinality and filter propagation differ from data-integrity enforcement."
+    },
+    {
+      "id": "S05",
+      "title": "Calculation options",
+      "url": "https://learn.microsoft.com/en-us/power-bi/transform-model/desktop-calculations-options",
+      "publisher": "Microsoft",
+      "verified": "2026-11-07",
+      "supports": "Stored row calculations and query-time measures have different evaluation contexts."
+    },
+    {
+      "id": "S06",
+      "title": "CALCULATE",
+      "url": "https://learn.microsoft.com/en-us/dax/calculate-function-dax",
+      "publisher": "Microsoft",
+      "verified": "2026-11-07",
+      "supports": "CALCULATE modifies filter context; KEEPFILTERS and context transition require precise scope."
+    },
+    {
+      "id": "S07",
+      "title": "Date table guidance",
+      "url": "https://learn.microsoft.com/en-us/power-bi/guidance/model-date-tables",
+      "publisher": "Microsoft",
+      "verified": "2026-11-07",
+      "supports": "Date-calendar guidance and distinctions between classic and calendar-based time intelligence."
+    },
+    {
+      "id": "S08",
+      "title": "Accessible report design",
+      "url": "https://learn.microsoft.com/en-us/power-bi/create-reports/desktop-accessibility-creating-reports",
+      "publisher": "Microsoft",
+      "verified": "2026-11-07",
+      "supports": "Accessible report authoring requires meaningful text, tab order and non-color cues plus actual testing."
+    },
+    {
+      "id": "S09",
+      "title": "Data refresh",
+      "url": "https://learn.microsoft.com/en-us/power-bi/connect-data/refresh-data",
+      "publisher": "Microsoft",
+      "verified": "2026-11-07",
+      "supports": "Import refresh, visual refresh and source access are distinct operations."
+    },
+    {
+      "id": "S10",
+      "title": "DirectQuery",
+      "url": "https://learn.microsoft.com/en-us/power-bi/connect-data/desktop-directquery-about",
+      "publisher": "Microsoft",
+      "verified": "2026-11-07",
+      "supports": "DirectQuery depends on supported sources and may involve caching; it is not a real-time guarantee."
+    },
+    {
+      "id": "S11",
+      "title": "Direct Lake overview",
+      "url": "https://learn.microsoft.com/en-us/fabric/fundamentals/direct-lake-overview",
+      "publisher": "Microsoft",
+      "verified": "2026-11-07",
+      "supports": "Direct Lake framing and variant-specific behavior cannot be inferred from a local snapshot model."
+    },
+    {
+      "id": "S12",
+      "title": "Fabric workspace roles",
+      "url": "https://learn.microsoft.com/en-us/fabric/fundamentals/roles-workspaces",
+      "publisher": "Microsoft",
+      "verified": "2026-11-07",
+      "supports": "Workspace roles determine capabilities and interact with other permissions."
+    },
+    {
+      "id": "S13",
+      "title": "Row-level security",
+      "url": "https://learn.microsoft.com/en-us/fabric/security/service-admin-row-level-security",
+      "publisher": "Microsoft",
+      "verified": "2026-11-07",
+      "supports": "Workspace RLS applies to Viewers, including Viewers with Build; multiple role filters can widen visible rows."
+    },
+    {
+      "id": "S14",
+      "title": "Power BI workspaces",
+      "url": "https://learn.microsoft.com/en-us/power-bi/collaborate-share/service-new-workspaces",
+      "publisher": "Microsoft",
+      "verified": "2026-11-07",
+      "supports": "Workspace collaboration roles and data access are distinct design concerns."
+    }
+  ],
+  "failedLookup": {
+    "url": "https://learn.microsoft.com/en-us/power-bi/fundamentals/service-admin-role",
+    "outcome": "Tool returned inaccessible; replaced with S12/S14 public documentation"
+  },
+  "reviewedAt": "2026-11-07"
+}

@@ -1,0 +1,28 @@
+{
+  "id": "azure-workshop",
+  "title": "Azure Foundations: Administrative Evidence and Boundaries",
+  "summary": "Ten original lessons connect Azure concepts to bounded local reasoning, accountable administration and explicit validation gaps.",
+  "lessonIds": [
+    "azf-hierarchy",
+    "azf-access",
+    "azf-governance",
+    "azf-storage",
+    "azf-network",
+    "azf-compute",
+    "azf-monitoring",
+    "azf-recovery",
+    "azf-cost",
+    "azf-capstone"
+  ],
+  "prerequisites": [
+    "cloud-models",
+    "identity",
+    "azure-governance"
+  ],
+  "certificationIds": [
+    "az-900",
+    "az-104"
+  ],
+  "caseIds": [],
+  "limits": "No Azure CLI, SDK, APIs, credentials, network access, provisioning or paid services are used. All real Azure operations are unexecuted. Partial AZ-900 concepts and broader administrative enrichment are not full AZ-900/AZ-104 coverage or practical readiness. AZ-104 effective-date verification remains incomplete because retrieved official material conflicted."
+}

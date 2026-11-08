@@ -1,0 +1,492 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CCNA Foundations Workbook</title><style>body{font:18px/1.65 system-ui,sans-serif;max-width:80ch;margin:2rem auto;padding:0 1rem;color:#17212b;background:#fff}a{color:#164c88}h1,h2,h3{line-height:1.25}section{margin:3rem 0}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#edf2f6;padding:1rem}summary{cursor:pointer}:focus-visible{outline:3px solid #a44400;outline-offset:3px}li{margin:.4rem 0}</style></head><body>
+<a href="#main">Skip to workbook</a><main id="main"><h1>CCNA Foundations: Network Decisions and Evidence</h1>
+<p>Ten original lessons extend Packet Trail into switching control, IPv6, route preference, OSPF, services, wireless and typed automation through fixed offline models.</p><p><strong>Local-only learning.</strong> No equipment, emulator, network traffic, credentials, APIs or configuration changes are used. All device and service validations remain unperformed. Selected conceptual alignment to CCNA 200-301 v1.1 is partial; no complete coverage, exam readiness or production approval is claimed. Cisco states v1.1 through 2027-02-02 and v2.0 from 2027-02-03; this workshop does not map v2.0. Official indexed topics were reviewed, with direct page/PDF retrieval limitations explained in the coverage guide.</p>
+<p>Predict first, run only the fixed Python commands, then compare observed receipts. Without Python, complete the paper work and label execution unperformed. Supplemental checks do not award additional XP or prove certification readiness.</p>
+<p><a href="docs/WORKBOOK.md">Workbook instructions</a> · <a href="labs/ccna-workshop/README.md">Lab guide</a> · <a href="labs/ccna-workshop/WORKSHEET.md">Worksheet</a> · <a href="labs/ccna-workshop/ANSWER-KEY.md">Answer key</a> · <a href="docs/CCNA-COVERAGE.md">Coverage and gaps</a></p>
+<nav aria-label="Workshop lessons"><ol>
+<li><a href="#ccnaf-vlans">Separate VLAN membership from successful delivery</a></li>
+<li><a href="#ccnaf-loop-control">Explain a loop-free tree without inventing convergence</a></li>
+<li><a href="#ccnaf-bundles">Check bundle compatibility before promising bandwidth</a></li>
+<li><a href="#ccnaf-ipv6">Separate IPv6 address meaning from neighbor discovery</a></li>
+<li><a href="#ccnaf-routing">Separate route installation from forwarding lookup</a></li>
+<li><a href="#ccnaf-ospf">Check adjacency prerequisites before trusting a path graph</a></li>
+<li><a href="#ccnaf-services">Keep ordered policy separate from address translation</a></li>
+<li><a href="#ccnaf-wireless">Check security compatibility without claiming an RF survey</a></li>
+<li><a href="#ccnaf-automation">Review a typed configuration diff before any API change</a></li>
+<li><a href="#ccnaf-capstone">Defend a network review with explicit evidence gaps</a></li>
+</ol></nav>
+<section id="ccnaf-vlans"><h2>Separate VLAN membership from successful delivery</h2><p>Follow VLAN-scoped MAC learning and allowed trunk membership without treating either as end-to-end connectivity.</p><h3>Learning goals</h3><ul>
+<li>Trace source learning and destination lookup within a VLAN.</li>
+<li>Compute effective trunk membership from both ends.</li>
+<li>Distinguish a switching decision from a delivered application request.</li>
+</ul>
+<p>A switch forwarding decision begins with the frame and its ingress context, not with the application name printed on a diagram. An access port places ordinary untagged endpoint traffic into its configured access VLAN. A trunk carries traffic for multiple VLANs, subject to its configuration. Before following a destination MAC address, establish which VLAN the frame belongs to and whether each candidate egress port participates in that VLAN. Otherwise a plausible-looking path can cross a boundary that does not exist.</p>
+<p>A learning bridge records the source MAC address against the ingress port in the relevant VLAN. It then looks up the destination within that same VLAN. A known unicast destination normally identifies one eligible egress port; an unknown unicast is flooded only through eligible forwarding ports in that VLAN, excluding ingress. Learning a source does not establish the destination&#x27;s presence. The same written MAC value in another VLAN must not silently satisfy a lookup in this VLAN&#x27;s forwarding context.</p>
+<p>Trunk availability is a relationship between endpoints. If one end permits VLANs 10 and 20 while the other permits 20 and 30, their allowed-list intersection contains only 20. That arithmetic is useful but incomplete: trunk operation, VLAN existence, native-VLAN agreement and spanning-tree forwarding state also matter. An intersection result is not evidence that frames were tagged correctly or received. Keep allowed membership separate from operational state, especially when a configuration excerpt is the only evidence available.</p>
+<p>Consider an office where engineering and visitors attach to the same physical switch but occupy different VLANs. A learned engineering MAC does not make the visitors&#x27; unknown destination known. Nor does sharing an uplink authorize communication between the VLANs. Inter-VLAN traffic requires a Layer 3 path and any applicable policy. Start your worksheet with VLAN, ingress, source, destination and eligible egress ports. This makes it possible to explain a flood without incorrectly describing it as a broadcast delivered to every physical port.</p>
+<p>When a laptop moves between ports, subsequent source frames can update the learned location. Real switches also age dynamic entries and may implement security features that change behavior. The supplied fixed model teaches selected forwarding decisions, not aging, actual frame reception, switch capacity or attack protection. A local list of egress ports is therefore a predicted action under stated assumptions. Real validation would need authorized observations of interface state, VLAN configuration, forwarding tables and the particular traffic under investigation.</p>
+<p>Run the fixed VLAN exercise and reconcile its learned entries and forwarding decisions with your worksheet. For a paper counterfactual, remove the required VLAN from one trunk endpoint and identify which membership result changes before considering higher layers. Do not repair the result by adding an imaginary route. Preserve whether the destination was known at each step, because event order matters. Completion demonstrates reasoning about a supplied switching trace; it does not demonstrate that a VLAN or trunk was configured on Cisco equipment.</p>
+<h3>Worked example</h3><p>Trace the four fixture events in order. Event 1 learns 02:00:00:00:00:01 on deskA in VLAN 10 and returns flood_unknown_unicast with egress [uplink]. Event 2 learns the other source on uplink in VLAN 10, then returns known_unicast with egress [deskA]. Event 3 learns the first MAC on uplink in VLAN 20, a separate entry, and floods toward deskB. Event 4 is drop_vlan with no egress because deskA does not admit VLAN 20. trunk_intersections.uplink is [10, 20], not every VLAN mentioned by either endpoint. The learned list has three entries, not two global MAC identities. On paper, remove VLAN 20 from one trunk allowed list: recompute that intersection and mark which later learning/forwarding assumptions fail. No real trunk is changed.</p><pre><code># Fixed offline reasoning model, not a router or emulator.
+python3 -B labs/ccna-workshop/run_lab.py vlans</code></pre><h3>Practice safely</h3><ol>
+<li>Read the vlans fixture and the model contract; write an input-by-input prediction before executing.</li>
+<li>Draw the decision sequence described in this lesson and mark the observations the model cannot supply.</li>
+<li>From the workshop directory, run python3 -B labs/ccna-workshop/run_lab.py vlans.</li>
+<li>Compare every worked-example field with the receipt. Preserve mismatches and explain them rather than editing the receipt.</li>
+<li>Work the named counterfactual on paper only. Record which input changes and which conclusion would need recomputing.</li>
+<li>Keep the three evidence items, your actual receipt and an explicit list of unperformed equipment checks.</li>
+</ol><h3>Evidence to keep</h3><ul>
+<li>A VLAN-scoped learning and forwarding ledger in event order.</li>
+<li>A two-ended trunk membership calculation with operational assumptions.</li>
+<li>A paper missing-VLAN counterfactual separating switching from routing.</li>
+</ul><h3>Original practice checks</h3>
+<p><strong>Which address is learned from an arriving frame?</strong></p><ol type="A">
+<li>The source MAC in its VLAN and ingress context</li>
+<li>The destination IP as a route</li>
+<li>Every MAC in every VLAN</li>
+<li>The DNS server address</li>
+</ol><details><summary>Answer and reasoning</summary><p>A. The source MAC in its VLAN and ingress context Source learning supplies the location used by later destination lookups; it is not IP routing.</p></details>
+<p><strong>What does an allowed-list intersection establish?</strong></p><ol type="A">
+<li>A successful application exchange</li>
+<li>Common permitted VLAN membership, with operational checks still missing</li>
+<li>Identical native VLAN settings</li>
+<li>A measured trunk throughput</li>
+</ol><details><summary>Answer and reasoning</summary><p>B. Common permitted VLAN membership, with operational checks still missing Common membership is necessary for the modeled path but cannot prove operational trunk behavior.</p></details>
+<p><strong>A destination exists only in VLAN 10. A VLAN 20 frame names it. What follows?</strong></p><ol type="A">
+<li>The switch automatically routes it</li>
+<li>All VLANs merge temporarily</li>
+<li>The VLAN 10 entry does not resolve the VLAN 20 lookup</li>
+<li>The frame must reach its application</li>
+</ol><details><summary>Answer and reasoning</summary><p>C. The VLAN 10 entry does not resolve the VLAN 20 lookup Forwarding context is VLAN-specific; another VLAN entry cannot establish this destination location.</p></details>
+<h3>Limits</h3><p>No frames, MAC-table queries, switch configuration or trunk negotiation occur. The model omits dynamic aging, native-VLAN tagging behavior, operational interfaces and hardware-specific forwarding.</p><h3>Official references</h3><ul>
+<li><a href="https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst9300/software/release/17-18/configuration_guide/vlan/b_1718_vlan_9300_cg/configuring_vlans.html">https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst9300/software/release/17-18/configuration_guide/vlan/b_1718_vlan_9300_cg/configuring_vlans.html</a></li>
+<li><a href="https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst9300/software/release/17-18/configuration_guide/vlan/b_1718_vlan_9300_cg/configuring_vlan_trunks.html">https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst9300/software/release/17-18/configuration_guide/vlan/b_1718_vlan_9300_cg/configuring_vlan_trunks.html</a></li>
+<li><a href="https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst2960/software/release/15-0_2_se/configuration/guide/scg2960/swadmin.html">https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst2960/software/release/15-0_2_se/configuration/guide/scg2960/swadmin.html</a></li>
+</ul><p><a href="#main">Back to workbook contents</a></p></section>
+<section id="ccnaf-loop-control"><h2>Explain a loop-free tree without inventing convergence</h2><p>Rank a root and least-cost paths while keeping real STP roles, states and timing outside the simplified model.</p><h3>Learning goals</h3><ul>
+<li>Explain why redundant Layer 2 paths need loop control.</li>
+<li>Compare bridge identity and cumulative root path cost.</li>
+<li>List tie-break and convergence evidence missing from a graph model.</li>
+</ul>
+<p>Redundant links improve the options available after a failure, but Ethernet forwarding cannot safely use every Layer 2 cycle without a loop-control mechanism. Broadcast and unknown-unicast frames can circulate and multiply when bridges keep flooding through a cycle. A frame has no IP-style hop limit that solves this bridging problem. Spanning Tree Protocol organizes a loop-free forwarding topology while retaining physical alternatives. The resulting logical tree should not be confused with removing redundant cables or proving that recovery will be fast enough.</p>
+<p>Root election uses bridge identifiers, with the lowest identifier winning the comparison. In relevant VLAN-aware implementations the identifier includes priority information and an extended system identifier as well as the bridge MAC address. A lower numeric priority is more preferred. The root is not selected because an administrator thinks its model number looks fastest. Record the compared identifiers and the scope of the instance before describing the result, since separate instances can make different forwarding decisions over the same physical topology.</p>
+<p>Nonroot bridges compare paths toward the root using accumulated path cost. A lower-cost indirect path can be preferable to an expensive direct link. Equal-cost cases need protocol tie-break rules involving bridge and port information rather than a convenient arbitrary choice. The workshop graph calculation intentionally stops short of reproducing every BPDU comparison. If the fixture does not provide the necessary tie-break inputs, do not claim it has calculated all operational root, designated and alternate ports on a real switch network.</p>
+<p>Traditional STP and rapid variants differ in state transitions and convergence mechanisms. Rapid PVST+ applies rapid spanning-tree behavior per VLAN in Cisco environments. An edge-port assumption can allow faster forwarding for an endpoint connection, while BPDU Guard addresses unexpected bridge participation on appropriately configured edge ports. These are not interchangeable settings and should not be enabled indiscriminately on links between switches. Their correct use depends on the intended topology, device behavior and an approved configuration, none of which this local graph establishes.</p>
+<p>Build a drawing with the root candidate identifiers beside nodes and costs beside links. Sum each candidate route to the root before choosing the least-cost path. Then draw the remaining physical links differently from the selected logical paths. This distinction keeps a redundancy discussion honest: an unused forwarding path can still be physically available. A graph result cannot tell you how many frames were lost during a failure, whether inconsistent configuration suspended a port, or whether a protection mechanism placed an interface into an error state.</p>
+<p>Run the fixed loop-control exercise and retain the root and cost evidence exactly as returned. In the paper counterfactual, increase the cost of one selected link and recompute the affected route rather than asserting an immediate switchover. List the BPDU, port-state and timing observations that a later authorized equipment exercise would need. The current output is a topology reasoning receipt, not an STP capture. It supplies no convergence measurement and no guarantee that the physical network is free of loops.</p>
+<h3>Worked example</h3><p>The selected root is named root. Both left and right have root_cost 4 with candidate_neighbors [root]. The edge switch has root_cost 8 and candidate_neighbors [left, right], so its status is equal_cost_not_fully_tiebroken. Do not choose left just because it sorts first: the model deliberately lacks complete protocol tie-break evidence. island has root_cost null and status unreachable. On paper, increase the edge-to-left cost from 4 to 7 while leaving edge-to-right at 4. The right-hand cost remains 8 while the left-hand alternative becomes 11; identify the unique least-cost candidate without inventing port roles or a convergence time. The model root is an identifier result, not a captured root-bridge announcement.</p><pre><code># Fixed offline reasoning model, not a router or emulator.
+python3 -B labs/ccna-workshop/run_lab.py loop-control</code></pre><h3>Practice safely</h3><ol>
+<li>Read the loop-control fixture and the model contract; write an input-by-input prediction before executing.</li>
+<li>Draw the decision sequence described in this lesson and mark the observations the model cannot supply.</li>
+<li>From the workshop directory, run python3 -B labs/ccna-workshop/run_lab.py loop-control.</li>
+<li>Compare every worked-example field with the receipt. Preserve mismatches and explain them rather than editing the receipt.</li>
+<li>Work the named counterfactual on paper only. Record which input changes and which conclusion would need recomputing.</li>
+<li>Keep the three evidence items, your actual receipt and an explicit list of unperformed equipment checks.</li>
+</ol><h3>Evidence to keep</h3><ul>
+<li>An annotated root election and cumulative-cost calculation.</li>
+<li>A drawing separating physical redundancy from selected paths.</li>
+<li>A paper cost-change analysis plus missing BPDU and convergence evidence.</li>
+</ul><h3>Original practice checks</h3>
+<p><strong>Why can flooding through a Layer 2 cycle be dangerous?</strong></p><ol type="A">
+<li>Every switch becomes a DNS server</li>
+<li>IP routes always disappear</li>
+<li>All links automatically shut down</li>
+<li>Frames can circulate and multiply without an IP-style hop limit</li>
+</ol><details><summary>Answer and reasoning</summary><p>D. Frames can circulate and multiply without an IP-style hop limit Loop control is needed because ordinary bridging does not decrement an IP TTL on each bridge hop.</p></details>
+<p><strong>An indirect root path costs less than a direct link. Which principle applies?</strong></p><ol type="A">
+<li>Compare cumulative root path cost, not cable count alone</li>
+<li>Always choose the direct cable</li>
+<li>Choose the highest bridge priority</li>
+<li>Ignore all costs on redundant links</li>
+</ol><details><summary>Answer and reasoning</summary><p>A. Compare cumulative root path cost, not cable count alone The preferred root path is based on protocol comparisons, including accumulated cost.</p></details>
+<p><strong>What does this graph exercise not measure?</strong></p><ol type="A">
+<li>The supplied link costs</li>
+<li>Actual spanning-tree convergence and packet loss</li>
+<li>The identifiers in its fixture</li>
+<li>The arithmetic sum of a modeled path</li>
+</ol><details><summary>Answer and reasoning</summary><p>B. Actual spanning-tree convergence and packet loss Graph calculations do not generate BPDUs or observe timed equipment behavior.</p></details>
+<h3>Limits</h3><p>No BPDUs, STP state machine, port configuration or failover timing are produced. Shortest paths are not a complete port-role calculation and omit full protocol tie-break and protection behavior.</p><h3>Official references</h3><ul>
+<li><a href="https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/lan-wan/b-lan-wan/m_lsw-span-tree-prot.html">https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/lan-wan/b-lan-wan/m_lsw-span-tree-prot.html</a></li>
+<li><a href="https://www.cisco.com/c/dam/en/us/td/docs/switches/lan/catalyst9300/software/release/17-1/configuration_guide/lyr2/configuring_optional_spanning_tree_features.html">https://www.cisco.com/c/dam/en/us/td/docs/switches/lan/catalyst9300/software/release/17-1/configuration_guide/lyr2/configuring_optional_spanning_tree_features.html</a></li>
+<li><a href="https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol-stp-8021d/218321-configure-stp-with-loop-guard-and-bpdu-s.html">https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol-stp-8021d/218321-configure-stp-with-loop-guard-and-bpdu-s.html</a></li>
+</ul><p><a href="#main">Back to workbook contents</a></p></section>
+<section id="ccnaf-bundles"><h2>Check bundle compatibility before promising bandwidth</h2><p>Reason about LACP participation and member consistency without treating a port channel as unlimited per-flow capacity.</p><h3>Learning goals</h3><ul>
+<li>Distinguish active, passive and static channel modes.</li>
+<li>Check member compatibility before accepting a bundle.</li>
+<li>Separate aggregate capacity from per-flow behavior and failure evidence.</li>
+</ul>
+<p>A bundle groups compatible physical links into one logical interface, reducing the number of independent links that higher-level features must consider. EtherChannel is Cisco terminology for this family of capabilities; LACP is a standards-based negotiation protocol used to establish suitable aggregation. A bundle is not simply a drawing with several lines between the same switches. Each member must satisfy the relevant local and peer requirements, and the resulting logical interface must be operational before it can carry the intended traffic.</p>
+<p>LACP active mode initiates negotiation and passive mode responds. Active with active or active with passive can negotiate, while two passive endpoints do not initiate the exchange needed to establish a channel. Static on mode does not use LACP negotiation and should not be described as another LACP participant. Mode compatibility alone is insufficient. Administrators must also examine the member attributes and platform rules, including appropriate speed, duplex and Layer 2 or Layer 3 configuration consistency for the particular bundle.</p>
+<p>For a trunk bundle, allowed VLANs and related trunk settings deserve careful comparison. A mismatch can make a member unsuitable or produce an operational problem depending on the platform and exact configuration. The workshop deliberately uses an explicit compatibility contract instead of promising one universal device response. Read the returned rejection reasons as model findings. Do not turn them into fabricated switch log messages or assume that every Cisco software release reports the same state for every mismatched attribute.</p>
+<p>Traffic distribution normally selects members using a hashing policy. A bundle of two links can offer more aggregate capacity across appropriate traffic patterns without doubling the speed available to one particular flow. Which packet fields feed the hash and how a platform handles failures are implementation details that must be checked. Counting cables is therefore not a performance test. Distinguish configured membership, negotiated membership, distribution behavior and measured application performance when explaining why a busy transfer may still be limited by one member link.</p>
+<p>Use a compatibility matrix with one row per endpoint pair and columns for negotiation mode and compared member settings. Mark a failed prerequisite before making any capacity estimate. A candidate that fails the mode test does not become a valid channel because its speeds match; a candidate that negotiates is not automatically acceptable if required member settings conflict. Preserve all reported reasons rather than stopping at the first attractive explanation. This gives the eventual operator a clear investigation order without suggesting a live corrective command.</p>
+<p>Run the fixed bundles exercise and compare its decisions with your matrix. For a paper counterfactual, replace one passive endpoint with active while leaving other mismatches untouched, then state which finding might change and which cannot. Do not claim a working bundle until every modeled requirement is satisfied, and even then label real negotiation unperformed. Future authorized validation would require actual port-channel state, peer details and failure observations. This exercise sends no LACP frames and measures neither bandwidth nor application continuity.</p>
+<h3>Worked example</h3><p>Use m1 as the reference member. It returns compatible true with no reasons. Member m2 is rejected with reasons [both_passive]; m3 is rejected with [speed_mismatch, vlan_mismatch]. Therefore all_compatible is false. Keep both m3 reasons in your matrix, since fixing speed alone cannot satisfy the supplied VLAN condition. In the paper alternative, change one of m2’s passive endpoints to active. That removes the both-passive obstacle under the model but does not repair m3 or prove that a real channel formed. Separately explain why two compatible physical links still would not guarantee twice the throughput for a single hashed flow. No speed or bandwidth value in this receipt is a measurement.</p><pre><code># Fixed offline reasoning model, not a router or emulator.
+python3 -B labs/ccna-workshop/run_lab.py bundles</code></pre><h3>Practice safely</h3><ol>
+<li>Read the bundles fixture and the model contract; write an input-by-input prediction before executing.</li>
+<li>Draw the decision sequence described in this lesson and mark the observations the model cannot supply.</li>
+<li>From the workshop directory, run python3 -B labs/ccna-workshop/run_lab.py bundles.</li>
+<li>Compare every worked-example field with the receipt. Preserve mismatches and explain them rather than editing the receipt.</li>
+<li>Work the named counterfactual on paper only. Record which input changes and which conclusion would need recomputing.</li>
+<li>Keep the three evidence items, your actual receipt and an explicit list of unperformed equipment checks.</li>
+</ol><h3>Evidence to keep</h3><ul>
+<li>A per-candidate LACP mode and member consistency matrix.</li>
+<li>An explanation of aggregate capacity versus one-flow limits.</li>
+<li>A paper mode-change analysis preserving remaining rejection reasons.</li>
+</ul><h3>Original practice checks</h3>
+<p><strong>Which mode pair can initiate LACP negotiation?</strong></p><ol type="A">
+<li>Passive and passive</li>
+<li>Static on and passive as equivalent LACP peers</li>
+<li>Active and passive</li>
+<li>Two disabled interfaces</li>
+</ol><details><summary>Answer and reasoning</summary><p>C. Active and passive An active endpoint initiates LACP; two passive endpoints do not initiate negotiation.</p></details>
+<p><strong>What does two-member aggregation guarantee for one flow?</strong></p><ol type="A">
+<li>Exactly twice the link speed</li>
+<li>Zero packet loss</li>
+<li>Identical hashing on every platform</li>
+<li>No automatic doubling of that flow’s throughput</li>
+</ol><details><summary>Answer and reasoning</summary><p>D. No automatic doubling of that flow’s throughput Hash-based distribution can keep one flow on one member even when aggregate capacity increases.</p></details>
+<p><strong>Changing passive to active removes one incompatibility. What next?</strong></p><ol type="A">
+<li>Recheck the remaining member settings and operational evidence</li>
+<li>Assume all VLAN mismatches disappeared</li>
+<li>Declare measured failover success</li>
+<li>Treat static on as negotiated LACP</li>
+</ol><details><summary>Answer and reasoning</summary><p>A. Recheck the remaining member settings and operational evidence Negotiation mode is only one prerequisite and cannot repair unrelated configuration differences.</p></details>
+<h3>Limits</h3><p>No LACP exchange, port-channel creation, hashing implementation or performance measurement occurs. Compatibility findings follow the explicit fixture contract, not every device or software release.</p><h3>Official references</h3><ul>
+<li><a href="https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst9300/software/release/17-9/configuration_guide/lyr2/b_179_lyr2_9300_cg/configuring_etherchannels.html">https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst9300/software/release/17-9/configuration_guide/lyr2/b_179_lyr2_9300_cg/configuring_etherchannels.html</a></li>
+<li><a href="https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst9300/software/release/17-18/configuration_guide/vlan/b_1718_vlan_9300_cg/configuring_vlan_trunks.html">https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst9300/software/release/17-18/configuration_guide/vlan/b_1718_vlan_9300_cg/configuring_vlan_trunks.html</a></li>
+</ul><p><a href="#main">Back to workbook contents</a></p></section>
+<section id="ccnaf-ipv6"><h2>Separate IPv6 address meaning from neighbor discovery</h2><p>Classify IPv6 addresses and membership while keeping reachability, ND and default-router evidence distinct.</p><h3>Learning goals</h3><ul>
+<li>Recognize link-local, unique-local, global and multicast roles.</li>
+<li>Calculate IPv6 prefix membership without assuming reachability.</li>
+<li>Explain what neighbor discovery and router advertisements add.</li>
+</ul>
+<p>IPv6 expands address space, but good troubleshooting still begins by asking what an address means in context. A host can hold several addresses with different scopes and lifetimes on one interface. A link-local address supports communication on its local link; a global-unicast-shaped address does not itself prove global connectivity. Unique-local addresses serve local communications under a different addressing plan. Multicast addresses identify groups rather than a single interface. Do not infer a usable application path merely from an address that parses successfully.</p>
+<p>Compressed hexadecimal notation changes presentation, not address identity. Leading zeroes can be omitted within a group and one consecutive run of zero groups can be represented with a double colon. Comparing strings is therefore a poor way to decide whether two addresses are equivalent or share a prefix. Parse the value and apply the prefix length. The workshop uses deterministic address arithmetic to classify fixed examples and test membership; it does not assign those addresses to interfaces or verify that any endpoint owns them.</p>
+<p>Link-local unicast belongs to the fe80::/10 range, while unique-local addresses are within fc00::/7 and multicast uses ff00::/8. The documentation prefix 2001:db8::/32 exists for examples rather than real public deployment. Scope classification is separate from a routing decision. A link-local next hop requires interface context because the same local-link address can appear on different links. A displayed address without that context may therefore be insufficient to identify the intended neighbor even when its syntax is valid.</p>
+<p>IPv6 Neighbor Discovery uses ICMPv6 for functions including neighbor address resolution, router discovery and reachability-related mechanisms. Neighbor Solicitation and Advertisement messages are not ARP packets with longer addresses. Router Advertisements can supply default-router and prefix information, while host address configuration can involve SLAAC, DHCPv6 or other arrangements. Receiving an address and learning a default router are related operational concerns but not interchangeable evidence. A worksheet should reserve separate fields for interface addresses, prefixes, router information and neighbor-cache observations.</p>
+<p>A common reasoning error is to treat same-prefix membership as proof that two endpoints can communicate. The endpoints still need appropriate interfaces, neighbor discovery, policy and functioning links. Likewise, accepting all ICMPv6 as irrelevant noise can break essential behavior; filtering decisions need to understand message purposes. The local model sends no solicitations and cannot detect duplicate addresses, stale neighbors or missing advertisements. It teaches address interpretation so that later observations can be framed accurately, rather than pretending arithmetic substitutes for those observations.</p>
+<p>Run the fixed IPv6 exercise and record each classification and prefix result before drawing a proposed communication path. In a paper counterfactual, keep the address unchanged but move it to a different link and explain why link-local neighbor context matters. Separately list the observations needed to distinguish missing router information from failed neighbor resolution. The result demonstrates bounded address reasoning only. No IPv6 stack is configured, no router advertisement is emitted and no real neighbor or default router has been discovered.</p>
+<h3>Worked example</h3><p>The supplied prefix is 2001:db8:42::/64 with prefix_length 64. Address 2001:db8:42::7 has in_prefix true, while 2001:db8:43::7 has in_prefix false. Both use category other_unicast in this model; neither is a claim of public routability, and 2001:db8::/32 is documentation space. fe80::1 is link_local, fd00::1 unique_local, ff02::1 multicast, :: unspecified and ::1 loopback. neighbor_observation is advertisement_seen, but reachability_proven stays false. Treat that string as invented fixture evidence rather than an observed packet. On paper, place fe80::1 on two distinct interfaces and explain why an outgoing interface is needed to identify the intended neighbor. Prefix arithmetic cannot resolve that operational ambiguity.</p><pre><code># Fixed offline reasoning model, not a router or emulator.
+python3 -B labs/ccna-workshop/run_lab.py ipv6</code></pre><h3>Practice safely</h3><ol>
+<li>Read the ipv6 fixture and the model contract; write an input-by-input prediction before executing.</li>
+<li>Draw the decision sequence described in this lesson and mark the observations the model cannot supply.</li>
+<li>From the workshop directory, run python3 -B labs/ccna-workshop/run_lab.py ipv6.</li>
+<li>Compare every worked-example field with the receipt. Preserve mismatches and explain them rather than editing the receipt.</li>
+<li>Work the named counterfactual on paper only. Record which input changes and which conclusion would need recomputing.</li>
+<li>Keep the three evidence items, your actual receipt and an explicit list of unperformed equipment checks.</li>
+</ol><h3>Evidence to keep</h3><ul>
+<li>An address-classification and prefix-membership ledger.</li>
+<li>A diagram separating address configuration, default-router discovery and neighbor resolution.</li>
+<li>A paper cross-link counterfactual with missing operational observations.</li>
+</ul><h3>Original practice checks</h3>
+<p><strong>What does same-prefix membership prove by itself?</strong></p><ol type="A">
+<li>Successful neighbor discovery</li>
+<li>Only the arithmetic membership relationship</li>
+<li>An active default router</li>
+<li>That all firewall policies permit traffic</li>
+</ol><details><summary>Answer and reasoning</summary><p>B. Only the arithmetic membership relationship Prefix arithmetic cannot establish operational links, successful neighbor discovery or permissive traffic policy.</p></details>
+<p><strong>Which mechanism handles IPv6 neighbor address resolution?</strong></p><ol type="A">
+<li>IPv4 ARP unchanged</li>
+<li>DNS zone transfers</li>
+<li>ICMPv6 Neighbor Discovery</li>
+<li>LACP negotiation</li>
+</ol><details><summary>Answer and reasoning</summary><p>C. ICMPv6 Neighbor Discovery Neighbor Solicitation and Advertisement are part of IPv6 ND, not IPv4 ARP.</p></details>
+<p><strong>Why may a link-local next hop need an interface identifier?</strong></p><ol type="A">
+<li>Link-local addresses are public DNS names</li>
+<li>IPv6 addresses cannot be compressed</li>
+<li>The interface identifier supplies a password</li>
+<li>Its meaning is limited to a link and may be ambiguous across interfaces</li>
+</ol><details><summary>Answer and reasoning</summary><p>D. Its meaning is limited to a link and may be ambiguous across interfaces Link scope makes the outgoing interface part of the context needed to identify a neighbor.</p></details>
+<h3>Limits</h3><p>No interface addressing, ICMPv6, ND cache, duplicate-address detection or router advertisements occur. Classification and membership are arithmetic, not real endpoint or application reachability tests.</p><h3>Official references</h3><ul>
+<li><a href="https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipv6_basic/configuration/xe-3s/ip6b-xe-3s-book/ip6-neighb-disc-xe.html">https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipv6_basic/configuration/xe-3s/ip6b-xe-3s-book/ip6-neighb-disc-xe.html</a></li>
+<li><a href="https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/iproute_pi/configuration/xe-16-11/iri-xe-16-11-book/ip6-route-static-xe.html">https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/iproute_pi/configuration/xe-16-11/iri-xe-16-11-book/ip6-route-static-xe.html</a></li>
+<li><a href="https://www.rfc-editor.org/rfc/rfc4861.html">https://www.rfc-editor.org/rfc/rfc4861.html</a></li>
+</ul><p><a href="#main">Back to workbook contents</a></p></section>
+<section id="ccnaf-routing"><h2>Separate route installation from forwarding lookup</h2><p>Keep longest-prefix matching, administrative distance and floating-route assumptions in the correct order.</p><h3>Learning goals</h3><ul>
+<li>Select the most specific matching destination prefix.</li>
+<li>Compare administrative distance only in the appropriate route-selection context.</li>
+<li>Explain when a floating static route can become useful.</li>
+</ul>
+<p>A forwarding problem starts with the destination address and the available routes. Several prefixes may match that destination, including a default route and a more specific subnet. Longest-prefix matching chooses the most specific matching installed prefix for forwarding. A route with a shorter prefix does not win just because its administrative distance is lower. Write the matching prefixes in order of specificity before discussing route preference, or the explanation can accidentally exchange two different stages of routing behavior.</p>
+<p>Administrative distance expresses local preference among route sources for the same destination prefix. It is not a measurement of latency, physical distance or path bandwidth. Different protocols also have their own metrics for selecting paths within their routing processes. Real routers build a routing information base using those processes and then populate forwarding structures. The fixed exercise simplifies these stages into explicit candidates, so its documented selection order is a teaching contract rather than a complete implementation of every Cisco routing process.</p>
+<p>A static route points toward a next hop or outgoing interface according to its configuration and platform rules. A floating static route uses a less preferred administrative distance than the route it is intended to back up. Its usefulness depends on the preferred route no longer being installed and on the backup next hop remaining resolvable. A failed application alone does not necessarily withdraw a preferred route. Health detection, tracking and failure scope need separate attention before describing a static backup as automatic service recovery.</p>
+<p>Consider a destination covered by both a /24 and a /16. The /24 is more specific, even if the /16 has a numerically lower administrative distance. Among candidates for the same /24, preference can matter. If the model finds equally preferred candidates and lacks an additional tie rule, it preserves ambiguity rather than choosing whichever appeared first in a file. That is a useful discipline: order in an input list is not evidence that a network device would choose that next hop.</p>
+<p>A route-selection receipt is only one part of a packet journey. The next hop must be reachable through an appropriate interface, link-layer resolution must succeed and policy can still block delivery. Return traffic may follow a different path and require its own analysis. The workshop does not emit packets or reconstruct live forwarding tables. Keep a route-choice ledger separate from an end-to-end test plan, and use exact prefixes and addresses rather than an informal statement that traffic goes toward the internet.</p>
+<p>Run the fixed routing exercise in two stages: select same-prefix candidates by preference, then perform longest-prefix lookup across those modeled installed routes. For a paper counterfactual, withdraw the preferred candidate rather than merely declaring its application unhealthy; recompute which backup becomes eligible. Preserve any unresolved tie and list the extra information required to resolve it. A later authorized equipment exercise would need actual installed-route, next-hop and failure-detection evidence. This command changes no routing table and does not demonstrate a floating route taking over on a real router.</p>
+<h3>Worked example</h3><p>First build the modeled installed candidates separately for each prefix. primary, the /24 candidate with AD 90, is inactive; floating therefore supplies the active /24 at AD 200. default supplies /0 at AD 1 and specific supplies 192.0.2.64/26 at AD 220. Next perform longest-prefix lookup for 192.0.2.77 across those candidates. The /26 wins, so selected is [specific], prefix_length is 26, admin_distance is 220 and decision is unique_route. Lower AD on the broader /24 or /0 does not defeat that more-specific match. On paper, withdraw specific; the floating /24 then wins while primary remains inactive. Reactivating primary would change same-prefix selection, not the longest-prefix rule. No failure detection or route installation is executed.</p><pre><code># Fixed offline reasoning model, not a router or emulator.
+python3 -B labs/ccna-workshop/run_lab.py routing</code></pre><h3>Practice safely</h3><ol>
+<li>Read the routing fixture and the model contract; write an input-by-input prediction before executing.</li>
+<li>Draw the decision sequence described in this lesson and mark the observations the model cannot supply.</li>
+<li>From the workshop directory, run python3 -B labs/ccna-workshop/run_lab.py routing.</li>
+<li>Compare every worked-example field with the receipt. Preserve mismatches and explain them rather than editing the receipt.</li>
+<li>Work the named counterfactual on paper only. Record which input changes and which conclusion would need recomputing.</li>
+<li>Keep the three evidence items, your actual receipt and an explicit list of unperformed equipment checks.</li>
+</ol><h3>Evidence to keep</h3><ul>
+<li>A destination-by-destination prefix and preference calculation.</li>
+<li>A paper preferred-route withdrawal and backup eligibility explanation.</li>
+<li>A ledger separating route choice, next-hop reachability and return-path evidence.</li>
+</ul><h3>Original practice checks</h3>
+<p><strong>A /24 and /16 both match. The /16 has lower administrative distance. Which forwarding principle applies?</strong></p><ol type="A">
+<li>The installed /24 is more specific</li>
+<li>The /16 always wins</li>
+<li>The first listed route wins</li>
+<li>Administrative distance measures prefix length</li>
+</ol><details><summary>Answer and reasoning</summary><p>A. The installed /24 is more specific Longest-prefix matching governs destination specificity; source preference does not make a shorter prefix more specific.</p></details>
+<p><strong>What makes a static route floating relative to a preferred route?</strong></p><ol type="A">
+<li>A larger physical interface</li>
+<li>A less preferred administrative distance for the intended backup prefix</li>
+<li>A DNS alias</li>
+<li>A requirement to use wireless</li>
+</ol><details><summary>Answer and reasoning</summary><p>B. A less preferred administrative distance for the intended backup prefix The backup is configured to be less preferred while the primary route remains available.</p></details>
+<p><strong>What should a model do with an unresolved equal preference?</strong></p><ol type="A">
+<li>Invent a successful failover</li>
+<li>Choose randomly and call it IOS behavior</li>
+<li>Preserve the tie and name missing decision information</li>
+<li>Treat list order as measured performance</li>
+</ol><details><summary>Answer and reasoning</summary><p>C. Preserve the tie and name missing decision information An explicit unresolved result is more defensible than an unsupported routing choice.</p></details>
+<h3>Limits</h3><p>No RIB/FIB access, next-hop resolution, dynamic protocol, tracking or forwarding occurs. Candidate ranking is deliberately simplified; unresolved ties are preserved rather than presented as device ECMP behavior.</p><h3>Official references</h3><ul>
+<li><a href="https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/15986-admin-distance.html">https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/15986-admin-distance.html</a></li>
+<li><a href="https://www.cisco.com/c/en/us/support/docs/ip/enhanced-interior-gateway-routing-protocol-eigrp/8651-21.html">https://www.cisco.com/c/en/us/support/docs/ip/enhanced-interior-gateway-routing-protocol-eigrp/8651-21.html</a></li>
+<li><a href="https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/iproute_pi/configuration/xe-16-11/iri-xe-16-11-book/ip6-route-static-xe.html">https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/iproute_pi/configuration/xe-16-11/iri-xe-16-11-book/ip6-route-static-xe.html</a></li>
+</ul><p><a href="#main">Back to workbook contents</a></p></section>
+<section id="ccnaf-ospf"><h2>Check adjacency prerequisites before trusting a path graph</h2><p>Separate single-area OSPF neighbor compatibility from shortest-path arithmetic and an actually formed adjacency.</p><h3>Learning goals</h3><ul>
+<li>Compare relevant OSPF neighbor prerequisites.</li>
+<li>Compute cumulative path cost within a supplied graph.</li>
+<li>Distinguish a compatible peer from a verified Full adjacency.</li>
+</ul>
+<p>OSPF is a link-state routing protocol, so understanding its path choices requires more than spotting a neighbor address. Routers establish neighbor relationships, exchange appropriate link-state information and calculate paths using a view of the topology. A graph with neatly labeled costs skips several operational steps. Before using it as an explanation, identify which assumptions establish that the routers can exchange information and whether the graph represents a synchronized link-state database or merely a teaching fixture supplied by the exercise author.</p>
+<p>For intended OSPF neighbors, relevant prerequisites include compatible area configuration, timers, authentication where configured and appropriate network relationships. Network type and addressing affect expectations, while mismatched MTU can interfere with adjacency progression. Router identifiers must be suitable and unique in the routing domain. A checklist that finds no modeled mismatch is not proof of Full state. Packets may still be blocked, an interface may be passive or a configuration detail outside the checklist may prevent the expected exchange.</p>
+<p>On multiaccess networks, designated and backup designated routers reduce the number of adjacencies needed for database exchange. Neighbor state expectations depend on the network type and router role, so a neighbor that is not Full with every other router is not automatically broken. Point-to-point relationships have different expectations. The workshop does not simulate this election or state machine. Keep the distinction between neighbors and adjacencies visible instead of treating every discovered router as an identical participant in a complete mesh.</p>
+<p>Once the supplied topology is accepted as an input, path calculation adds link costs along candidate routes and chooses the least total cost. A two-hop route can cost less than a direct edge. Costs are protocol values, not latency measurements, and their practical interpretation depends on configuration such as reference bandwidth. The local shortest-path result does not prove that a real router installed the corresponding route or that its database matches a peer. It demonstrates arithmetic over exactly the vertices and edges in the fixture.</p>
+<p>Troubleshooting should follow the dependency order. First inspect interface and neighbor compatibility evidence, then neighbor state, database agreement and installed routes, and finally application traffic in both directions. Skipping directly to a shortest-path diagram can hide an adjacency failure that prevents the assumed topology from existing. Record an unreachable graph vertex as unreachable under the supplied graph, not as a diagnosis of a powered-off router. Several physical or configuration conditions could explain missing topology in an actual network and would require separate observations.</p>
+<p>Run the fixed OSPF exercise and keep prerequisite findings separate from the distance map. In a paper counterfactual, align the mismatched MTU and state only that one modeled obstacle has been removed; do not upgrade that to a formed adjacency. Independently increase a link cost and recompute its downstream effect on shortest paths. List the neighbor-state and database evidence still needed for operational validation. The command exchanges no OSPF packets and establishes neither a real adjacency nor a converged routing domain.</p>
+<h3>Worked example</h3><p>peerA has failed_checks [mtu_match] and prerequisites_satisfied false. peerB has no failed checks and prerequisites_satisfied true. Both retain full_adjacency_proven false. Separately calculate the graph distances from A: A 0, C 3, B 5 and D 9, with island null. B is reached more cheaply through C than by its direct cost-10 edge; D follows that least-cost route through B. These numbers describe the supplied undirected positive-cost graph, not a learned LSDB. On paper, align peerA’s MTU flag and note that prerequisite checks can pass without observing Full state. Keep the neighbor worksheet independent of the graph worksheet rather than asserting the passed checklist produced the topology.</p><pre><code># Fixed offline reasoning model, not a router or emulator.
+python3 -B labs/ccna-workshop/run_lab.py ospf</code></pre><h3>Practice safely</h3><ol>
+<li>Read the ospf fixture and the model contract; write an input-by-input prediction before executing.</li>
+<li>Draw the decision sequence described in this lesson and mark the observations the model cannot supply.</li>
+<li>From the workshop directory, run python3 -B labs/ccna-workshop/run_lab.py ospf.</li>
+<li>Compare every worked-example field with the receipt. Preserve mismatches and explain them rather than editing the receipt.</li>
+<li>Work the named counterfactual on paper only. Record which input changes and which conclusion would need recomputing.</li>
+<li>Keep the three evidence items, your actual receipt and an explicit list of unperformed equipment checks.</li>
+</ol><h3>Evidence to keep</h3><ul>
+<li>A peer prerequisite matrix preserving each mismatch.</li>
+<li>An independently calculated shortest-path and unreachable-node map.</li>
+<li>A paper MTU correction distinguishing removed obstacles from observed adjacency.</li>
+</ul><h3>Original practice checks</h3>
+<p><strong>A peer passes all modeled prerequisite checks. What is justified?</strong></p><ol type="A">
+<li>Full adjacency is proven</li>
+<li>Every database is synchronized</li>
+<li>Application delivery is guaranteed</li>
+<li>No checked mismatch was found; adjacency still needs observation</li>
+</ol><details><summary>Answer and reasoning</summary><p>D. No checked mismatch was found; adjacency still needs observation A prerequisite checklist does not implement or observe the OSPF neighbor state machine.</p></details>
+<p><strong>What does an OSPF cost sum represent here?</strong></p><ol type="A">
+<li>A path metric over supplied edges</li>
+<li>Measured round-trip latency</li>
+<li>An administrative-distance total</li>
+<li>A certificate trust score</li>
+</ol><details><summary>Answer and reasoning</summary><p>A. A path metric over supplied edges OSPF path costs are protocol metrics, not measured latency or administrative distance.</p></details>
+<p><strong>After correcting a modeled MTU mismatch on paper, what remains unknown?</strong></p><ol type="A">
+<li>Whether the old input had a mismatch</li>
+<li>Whether the real neighbors would reach the expected state</li>
+<li>Whether integers can be added</li>
+<li>Whether the paper change was a real packet capture</li>
+</ol><details><summary>Answer and reasoning</summary><p>B. Whether the real neighbors would reach the expected state Removing one obstacle does not prove exchange, synchronization or operational convergence.</p></details>
+<h3>Limits</h3><p>No OSPF packets, DR/BDR election, neighbor state machine, LSDB exchange or installed routes are observed. Prerequisite checks and graph distances cannot establish adjacency or convergence.</p><h3>Official references</h3><ul>
+<li><a href="https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/13699-29.html">https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/13699-29.html</a></li>
+<li><a href="https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/iproute_ospf/command/iro-cr-book/m_ospf-s1.html">https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/iproute_ospf/command/iro-cr-book/m_ospf-s1.html</a></li>
+<li><a href="https://www.rfc-editor.org/rfc/rfc2328.html">https://www.rfc-editor.org/rfc/rfc2328.html</a></li>
+</ul><p><a href="#main">Back to workbook contents</a></p></section>
+<section id="ccnaf-services"><h2>Keep ordered policy separate from address translation</h2><p>Trace first-match ACL decisions and static NAT facts while distinguishing DNS, DHCP and time-service evidence.</p><h3>Learning goals</h3><ul>
+<li>Evaluate an ordered access list without skipping an earlier match.</li>
+<li>Separate static NAT address mapping from permission and delivery.</li>
+<li>Identify the distinct service evidence needed for names, leases and time.</li>
+</ul>
+<p>A network service can fail even when addressing and routes appear plausible. Policy, translation, names, dynamic configuration and time each answer different questions along the path. Combining them into a single statement such as “the network is working” hides important uncertainty. This exercise focuses its executable portion on two bounded decisions: an ordered packet-filter rule list and an independent static address mapping. The surrounding worksheet asks which DNS, DHCP and NTP evidence would still be needed before diagnosing an actual application failure.</p>
+<p>An access control list is evaluated in order. The first matching entry determines the action; a later permit cannot rescue traffic already matched by an earlier deny. Standard and extended IPv4 ACLs offer different matching capabilities, and placement and direction matter when applying policy. Real Cisco configuration also includes details such as wildcard-mask interpretation that the local explicit-network model does not reproduce. Write the packet&#x27;s source, destination, protocol and ports beside each candidate rule and stop at the first applicable match.</p>
+<p>A static NAT mapping associates addresses across a translation boundary. It is not an authorization rule and does not by itself prove that a connection can be established. The translated address may still be unreachable, policy may deny the traffic or a return path may be missing. Dynamic NAT and PAT introduce additional pool, port and state considerations outside this fixed exercise. Keep the packet-filter verdict and mapping evidence in different columns so a visible public address is not mistaken for a permit decision.</p>
+<p>DNS associates names with records and requires its own evidence, such as the queried name, record type, responding server and actual response. DHCP supplies leased configuration through a separate exchange; a relay forwards relevant messages between client and server networks when configured. A valid lease does not ensure correct DNS data or application service. NTP supports clock synchronization, which helps correlate logs and can matter for authentication. An unsynchronized timestamp can make two correct log entries appear to describe the wrong sequence.</p>
+<p>Consider a host explicitly denied before a broader HTTPS permit. The later permit looks reassuring when viewed alone, but ordered evaluation retains the deny. An independent static translation for that host does not contradict the policy result because the mechanisms answer different questions. A good investigation record identifies the exact matched rule, the mapping if present and the untested operational dependencies. It does not invent a DNS lookup, lease renewal or synchronized clock merely because the fixture contains recognizable addresses and service names.</p>
+<p>Run the fixed services exercise and explain both outputs without merging them into a delivery verdict. In the paper counterfactual, move the host-specific rule after the broad permit and recompute first-match behavior, marking the policy consequence clearly. Do not apply that change anywhere. Add a proposed evidence request for DNS, DHCP and time, each tied to a specific uncertainty. This bounded model sends no traffic, changes no ACL or NAT table and confirms neither a live lease nor a synchronized device clock.</p>
+<h3>Worked example</h3><p>The packet matches blockHost before the later HTTPS permit. The result is acl_decision deny, matched_rule blockHost and implicit_deny false: an explicit rule caused this result. source_mapping_if_applied is 203.0.113.9, while translation_executed is false. These outputs are independent evidence questions and do not specify a device’s NAT-versus-ACL processing order. On paper, put the broad HTTPS permit before blockHost and trace the resulting first match. That reordering changes the intended policy and is not executed or recommended without review. Identify the DNS response, lease configuration and clock evidence that an application investigation would additionally require. None is supplied by the address mapping.</p><pre><code># Fixed offline reasoning model, not a router or emulator.
+python3 -B labs/ccna-workshop/run_lab.py services</code></pre><h3>Practice safely</h3><ol>
+<li>Read the services fixture and the model contract; write an input-by-input prediction before executing.</li>
+<li>Draw the decision sequence described in this lesson and mark the observations the model cannot supply.</li>
+<li>From the workshop directory, run python3 -B labs/ccna-workshop/run_lab.py services.</li>
+<li>Compare every worked-example field with the receipt. Preserve mismatches and explain them rather than editing the receipt.</li>
+<li>Work the named counterfactual on paper only. Record which input changes and which conclusion would need recomputing.</li>
+<li>Keep the three evidence items, your actual receipt and an explicit list of unperformed equipment checks.</li>
+</ol><h3>Evidence to keep</h3><ul>
+<li>A first-match rule trace with the original packet fields.</li>
+<li>A separate static translation ledger and absent delivery checks.</li>
+<li>A paper rule-order counterfactual plus DNS, DHCP and time evidence requests.</li>
+</ul><h3>Original practice checks</h3>
+<p><strong>An earlier deny matches before a later HTTPS permit. What determines the result?</strong></p><ol type="A">
+<li>The last permit in the list</li>
+<li>The rule with the friendliest name</li>
+<li>The earlier matching deny</li>
+<li>The NAT address</li>
+</ol><details><summary>Answer and reasoning</summary><p>C. The earlier matching deny Ordered ACL evaluation stops at the first applicable entry; a later permit cannot override that earlier matching deny.</p></details>
+<p><strong>A static NAT mapping exists. What does that prove?</strong></p><ol type="A">
+<li>All ACLs permit traffic</li>
+<li>DNS is correct</li>
+<li>NTP is synchronized</li>
+<li>A modeled address association, not permission or delivery</li>
+</ol><details><summary>Answer and reasoning</summary><p>D. A modeled address association, not permission or delivery Translation, filtering and application success are separate mechanisms and evidence claims.</p></details>
+<p><strong>Why retain time synchronization evidence during troubleshooting?</strong></p><ol type="A">
+<li>Clock disagreement can distort event correlation</li>
+<li>NTP automatically rewrites ACLs</li>
+<li>DHCP leases are passwords</li>
+<li>DNS cannot work without a public NAT address</li>
+</ol><details><summary>Answer and reasoning</summary><p>A. Clock disagreement can distort event correlation Reliable timing helps compare logs, but it does not replace protocol-specific observations.</p></details>
+<h3>Limits</h3><p>No ACL, NAT, DNS, DHCP relay or NTP configuration occurs. The model uses explicit networks rather than IOS wildcard syntax, has no stateful NAT/PAT engine and provides no live service results.</p><h3>Official references</h3><ul>
+<li><a href="https://www.cisco.com/c/en/us/support/docs/security/ios-firewall/23602-confaccesslists.html">https://www.cisco.com/c/en/us/support/docs/security/ios-firewall/23602-confaccesslists.html</a></li>
+<li><a href="https://www.cisco.com/c/en/us/support/docs/ip/network-address-translation-nat/13772-12.html">https://www.cisco.com/c/en/us/support/docs/ip/network-address-translation-nat/13772-12.html</a></li>
+<li><a href="https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipaddr_dhcp/configuration/15-s/dhcp-15-s-book/dhcp-relay-agent.html">https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipaddr_dhcp/configuration/15-s/dhcp-15-s-book/dhcp-relay-agent.html</a></li>
+<li><a href="https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/time-sync/ntp-configuration-guide/m-network-time-protocol.html">https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/time-sync/ntp-configuration-guide/m-network-time-protocol.html</a></li>
+</ul><p><a href="#main">Back to workbook contents</a></p></section>
+<section id="ccnaf-wireless"><h2>Check security compatibility without claiming an RF survey</h2><p>Combine client capabilities, minimum security policy and a simple channel comparison while preserving RF uncertainty.</p><h3>Learning goals</h3><ul>
+<li>Separate SSID identity, authentication requirements and client capability.</li>
+<li>Evaluate a security minimum without downgrading it to make a match.</li>
+<li>Explain what a channel-overlap model cannot say about real RF performance.</li>
+</ul>
+<p>A wireless connection depends on several independent conditions: a suitable radio link, compatible capabilities, an allowed security method and a working network behind the access point. Seeing an SSID addresses only part of that problem. An SSID identifies a wireless service set, not the strength of its security or the correctness of its VLAN mapping. Record the intended service, client capability and organizational minimum before recommending a network, rather than treating the most visible or strongest-looking signal as automatically appropriate.</p>
+<p>WPA2 and WPA3 describe security families with different modes and requirements. Personal and enterprise deployments use different authentication arrangements; an enterprise design can involve 802.1X and an authentication server rather than a shared personal passphrase. WPA3-Personal uses SAE, while protected management frame requirements and transition behavior need careful platform-specific attention. A capability label in a fixture simplifies these details. It cannot prove that credentials, certificate validation, authentication-server policy or the client implementation would satisfy a real deployment&#x27;s requirements.</p>
+<p>Compatibility and acceptability are separate judgments. A client might support a network whose security falls below the required minimum, or a securely configured network might require capabilities absent from that client. Lowering the minimum solely to make the client connect changes the security decision rather than fixing compatibility. The worksheet should preserve both failure types. A defensible recommendation could be to use a different approved device or seek a reviewed design change, without inventing permission to weaken an actual wireless policy.</p>
+<p>Radio planning also requires more than selecting a channel number. In 2.4 GHz deployments, commonly used 20 MHz channel plans can reduce overlap by separating appropriate channel choices, subject to local regulations. Channel width, channel availability, transmit power, neighboring networks and physical conditions all matter. A simple frequency-spacing model can highlight potential overlap between selected channels, but it cannot measure signal-to-noise ratio, airtime contention, hidden nodes or the effect of walls and moving users on a real client.</p>
+<p>Access points and controllers divide responsibilities according to architecture. Controller-based, autonomous and cloud-managed designs differ in management and forwarding arrangements. Roaming decisions and authentication behavior also depend on clients and infrastructure. The local eligibility list does not create a WLAN, attach a client, verify a controller path or test roaming. Keep the architecture drawing separate from the fixture result, and label every proposed RF observation with the location, channel width and measurement conditions that would make it useful in a later authorized survey.</p>
+<p>Run the fixed wireless exercise and preserve why each candidate is eligible or rejected under its contract. In a paper counterfactual, replace the client with one supporting the stronger method while keeping the security minimum unchanged. Separately compare the modeled channel pairs and identify which real measurements remain absent. Never report channel separation as an interference-free guarantee. This exercise does not scan local networks, collect identifiers or contact an access point; it demonstrates bounded compatibility and planning reasoning rather than an operational wireless assessment.</p>
+<h3>Worked example</h3><p>lobby is eligible with no reasons. office is ineligible with unsupported_client_security. guest is ineligible with both unsupported_client_security and below_requested_security. Preserve both guest reasons instead of describing the result solely as a weak signal. lobby/office and office/guest return overlap_in_simplified_plan; lobby/guest returns separated_in_simplified_plan. The assumptions are 2.4 GHz channels 1 through 11 and 20 MHz only, and rf_measurements_available is false. On paper, give the client WPA3 capability while preserving its other capabilities and the minimum security requirement, then reconsider office. Do not infer improved RF conditions from that security change. A separated pair remains a planning result, not measured freedom from interference.</p><pre><code># Fixed offline reasoning model, not a router or emulator.
+python3 -B labs/ccna-workshop/run_lab.py wireless</code></pre><h3>Practice safely</h3><ol>
+<li>Read the wireless fixture and the model contract; write an input-by-input prediction before executing.</li>
+<li>Draw the decision sequence described in this lesson and mark the observations the model cannot supply.</li>
+<li>From the workshop directory, run python3 -B labs/ccna-workshop/run_lab.py wireless.</li>
+<li>Compare every worked-example field with the receipt. Preserve mismatches and explain them rather than editing the receipt.</li>
+<li>Work the named counterfactual on paper only. Record which input changes and which conclusion would need recomputing.</li>
+<li>Keep the three evidence items, your actual receipt and an explicit list of unperformed equipment checks.</li>
+</ol><h3>Evidence to keep</h3><ul>
+<li>A client capability and minimum-security decision matrix.</li>
+<li>A channel comparison with width assumptions and absent RF measurements.</li>
+<li>A paper client-upgrade counterfactual and an unexecuted survey plan.</li>
+</ul><h3>Original practice checks</h3>
+<p><strong>A client cannot meet the approved WLAN security requirement. What is a defensible next step?</strong></p><ol type="A">
+<li>Silently downgrade the security minimum</li>
+<li>Consider a compatible approved client while preserving the requirement</li>
+<li>Assume SSID visibility proves compatibility</li>
+<li>Disable authentication everywhere</li>
+</ol><details><summary>Answer and reasoning</summary><p>B. Consider a compatible approved client while preserving the requirement Compatibility should be resolved without silently changing the security decision; a capability mismatch does not authorize weakening the approved minimum.</p></details>
+<p><strong>What can a simple channel-spacing model establish?</strong></p><ol type="A">
+<li>Measured airtime contention</li>
+<li>A complete RF site survey</li>
+<li>A bounded comparison under its stated width assumptions</li>
+<li>Guaranteed roaming performance</li>
+</ol><details><summary>Answer and reasoning</summary><p>C. A bounded comparison under its stated width assumptions Channel arithmetic omits actual RF conditions, neighboring transmitters, client capabilities and deployment behavior that affect measured performance.</p></details>
+<p><strong>What does an SSID alone tell you?</strong></p><ol type="A">
+<li>That certificates are validated</li>
+<li>That all clients support WPA3</li>
+<li>That the uplink VLAN is correct</li>
+<li>The advertised service-set identity, not complete security assurance</li>
+</ol><details><summary>Answer and reasoning</summary><p>D. The advertised service-set identity, not complete security assurance A name does not establish authentication, client capability or wired-network configuration.</p></details>
+<h3>Limits</h3><p>No WLAN scan, credentials, association, controller configuration or RF measurement occurs. Security labels and channel spacing are simplified; enterprise authentication, regulatory domains, roaming and actual interference remain untested.</p><h3>Official references</h3><ul>
+<li><a href="https://www.cisco.com/c/en/us/td/docs/wireless/controller/9800/17-14/config-guide/b_wl_17_14_cg/m_wpa3.html">https://www.cisco.com/c/en/us/td/docs/wireless/controller/9800/17-14/config-guide/b_wl_17_14_cg/m_wpa3.html</a></li>
+<li><a href="https://www.cisco.com/en/US/docs/solutions/Enterprise/Mobility/emob30dg/RFDesign.html">https://www.cisco.com/en/US/docs/solutions/Enterprise/Mobility/emob30dg/RFDesign.html</a></li>
+</ul><p><a href="#main">Back to workbook contents</a></p></section>
+<section id="ccnaf-automation"><h2>Review a typed configuration diff before any API change</h2><p>Use JSON and desired-state reasoning to distinguish data validation, planned changes and real REST execution.</p><h3>Learning goals</h3><ul>
+<li>Preserve JSON types and reject misleading comparisons.</li>
+<li>Explain create, update and remove operations in a desired-state diff.</li>
+<li>Separate HTTP semantics and dependency planning from an executed transaction.</li>
+</ul>
+<p>Network automation begins with a precise description of state, not with a loop that sends commands quickly. Desired state records the intended values; observed state records what an observation reports. A diff compares them under a declared identity and type contract. Without that contract, a renamed interface can look like a deletion and creation, or a string containing digits can be accepted where a number was required. The local exercise reads fixed JSON-shaped data and produces a plan without contacting any device or controller.</p>
+<p>JSON distinguishes objects, arrays, strings, numbers, booleans and null. Object member names are strings, but their values need not be. The number 20 and the string “20” should not become equivalent merely because printing them looks similar. Likewise a boolean is not a VLAN number even if a programming language happens to allow arithmetic with it. Validation should reject invalid shapes and types before computing changes. Keep missing fields distinct from intentionally empty or null values when the contract assigns them different meanings.</p>
+<p>A desired-state comparison uses stable identifiers to match records. An identifier present only in desired state implies creation under this model; one present only in observed state implies removal; shared identifiers require field comparison. An unchanged field should not appear as an update simply because another field changed. This granularity makes review safer and explains the scope of each proposed action. Removal is a consequential real-world operation, so a printed plan must not be mistaken for permission to delete an actual interface or service.</p>
+<p>REST-oriented APIs expose resources and use HTTP methods with defined semantics. GET retrieves a representation, while other methods can create, replace, modify or remove resources according to the API contract. Idempotence describes the intended effect of repeating an identical request, not a guarantee of identical response codes or zero side effects in logging. Authentication, authorization, pagination, asynchronous completion and concurrency controls also matter. The fixed diff exercise sends no HTTP requests, obtains no tokens and does not validate a controller&#x27;s particular endpoint behavior.</p>
+<p>Dependencies constrain execution order even when individual changes look correct. A new upstream object may need to exist before a dependent object can reference it. A successful topological ordering only shows that the supplied dependency graph has a usable order; it does not ensure atomicity, rollback or idempotent recovery after partial failure. Good plans record preconditions, expected observations and failure handling. They also avoid blind retries after uncertain outcomes, because repeating a creation can produce duplicate resources when the service does not provide an appropriate idempotency mechanism.</p>
+<p>Run the fixed automation exercise and explain each create, update and remove entry using its stable identifier and exact changed fields. For a paper counterfactual, change a numeric VLAN to a string and state why validation should reject it instead of silently coercing it. Then sketch a dependency-aware review plan with explicit stop points for uncertain outcomes. Label all API actions unexecuted. The resulting receipt is a typed comparison of supplied records, not a device backup, a controller transaction or evidence that configuration drift has been repaired.</p>
+<h3>Worked example</h3><p>The changes list contains an update for desk with fields [vlan, description], a remove for retired and a create for uplink. desired_dependency_order is [uplink, desk], while applied is false. The change list is a diff, not an execution sequence; creation of the desired dependency belongs before a dependent update in a future reviewed plan. For desk, vlan changes from 10 to 20 and description changes from Old desk to New desk; enabled stays true. Stable identifiers show that retired is not a renamed uplink. On paper, replace a numeric VLAN with the string containing the same digits and identify the type violation before planning changes. No API request, deletion or repair is performed, and the dependency order supplies no atomic rollback guarantee.</p><pre><code># Fixed offline reasoning model, not a router or emulator.
+python3 -B labs/ccna-workshop/run_lab.py automation</code></pre><h3>Practice safely</h3><ol>
+<li>Read the automation fixture and the model contract; write an input-by-input prediction before executing.</li>
+<li>Draw the decision sequence described in this lesson and mark the observations the model cannot supply.</li>
+<li>From the workshop directory, run python3 -B labs/ccna-workshop/run_lab.py automation.</li>
+<li>Compare every worked-example field with the receipt. Preserve mismatches and explain them rather than editing the receipt.</li>
+<li>Work the named counterfactual on paper only. Record which input changes and which conclusion would need recomputing.</li>
+<li>Keep the three evidence items, your actual receipt and an explicit list of unperformed equipment checks.</li>
+</ol><h3>Evidence to keep</h3><ul>
+<li>A typed observed/desired diff tied to stable record identifiers.</li>
+<li>A dependency order with preconditions and unexecuted recovery steps.</li>
+<li>A paper wrong-type counterfactual and HTTP-method semantics explanation.</li>
+</ul><h3>Original practice checks</h3>
+<p><strong>Why distinguish numeric 20 from string “20” in a configuration contract?</strong></p><ol type="A">
+<li>They have different JSON types and may mean different valid inputs</li>
+<li>JSON has no types</li>
+<li>Strings always configure VLANs faster</li>
+<li>Any equal-looking text is automatically equivalent</li>
+</ol><details><summary>Answer and reasoning</summary><p>A. They have different JSON types and may mean different valid inputs Type validation prevents silent coercion from hiding invalid or unintended configuration.</p></details>
+<p><strong>A diff says remove retired. What has happened?</strong></p><ol type="A">
+<li>A switch port was deleted</li>
+<li>A removal was planned in the model, not executed on a device</li>
+<li>An HTTP DELETE succeeded</li>
+<li>A controller granted authorization</li>
+</ol><details><summary>Answer and reasoning</summary><p>B. A removal was planned in the model, not executed on a device The local comparison emits planned changes without contacting an API, so it provides no evidence of deletion or configuration repair.</p></details>
+<p><strong>What does idempotent HTTP semantics mean?</strong></p><ol type="A">
+<li>Every response is identical</li>
+<li>Every failed request can be retried blindly</li>
+<li>Repeating an identical request has the same intended effect as one request</li>
+<li>No server logs are written</li>
+</ol><details><summary>Answer and reasoning</summary><p>C. Repeating an identical request has the same intended effect as one request Idempotence concerns intended effect; uncertain outcomes and API-specific contracts still require care.</p></details>
+<h3>Limits</h3><p>No HTTP, controller access, credentials, configuration changes or retries occur. The diff omits platform schemas, transactions, authentication, concurrency and API-specific error or idempotency behavior.</p><h3>Official references</h3><ul>
+<li><a href="https://developer.cisco.com/docs/catalyst-center/2-3-7-9/getting-started/">https://developer.cisco.com/docs/catalyst-center/2-3-7-9/getting-started/</a></li>
+<li><a href="https://www.cisco.com/c/en/us/td/docs/routers/csr1000/software/restapi/restapi/RESTAPIintro.html">https://www.cisco.com/c/en/us/td/docs/routers/csr1000/software/restapi/restapi/RESTAPIintro.html</a></li>
+<li><a href="https://www.cisco.com/c/en/us/td/docs/routers/csr1000/software/restapi/restapi/RESTAPIclient.html">https://www.cisco.com/c/en/us/td/docs/routers/csr1000/software/restapi/restapi/RESTAPIclient.html</a></li>
+<li><a href="https://www.rfc-editor.org/rfc/rfc8259.html">https://www.rfc-editor.org/rfc/rfc8259.html</a></li>
+<li><a href="https://www.rfc-editor.org/rfc/rfc9110.html">https://www.rfc-editor.org/rfc/rfc9110.html</a></li>
+</ul><p><a href="#main">Back to workbook contents</a></p></section>
+<section id="ccnaf-capstone"><h2>Defend a network review with explicit evidence gaps</h2><p>Combine switching, routing, policy and automation reasoning without converting local receipts into deployment approval.</p><h3>Learning goals</h3><ul>
+<li>Trace a proposed service across multiple decision boundaries.</li>
+<li>Retain contradictions and distinguish them from missing observations.</li>
+<li>Prioritize unperformed validation without claiming full CCNA coverage.</li>
+</ul>
+<p>A network review needs a chain of defensible claims, not a folder containing ten successful command exits. A local receipt can establish that a fixed algorithm returned a result for a fixed input. It cannot establish that a campus network is configured, secure or ready for service. The capstone combines selected findings from this workshop so that you can practice deciding what each item supports, which conclusions conflict and what evidence would still be needed before an operational decision could be made.</p>
+<p>Begin with one intended service flow: an endpoint in a particular VLAN needs an application through a routed and filtered path. Record the endpoint assumptions, VLAN membership, trunk path, loop-control considerations, next hop, relevant policy and destination service. Put return traffic on the same worksheet as a separate direction rather than assuming symmetry. Wireless access, if involved, adds security and RF dependencies. The drawing is a reasoning aid whose edges remain hypotheses until suitable observations establish the corresponding operational facts.</p>
+<p>Classify evidence as a supplied configuration fact, a calculated model result or an actual observation from the authorized environment. This workshop produces only the first two categories for its synthetic network. If a route calculation selects a next hop, it supports a bounded routing conclusion; it does not prove neighbor resolution. If a NAT mapping exists, it supports an address association, not an ACL permit. A favorable finding in one category cannot erase an unfavorable or missing finding in another simply because both concern the same host.</p>
+<p>Contradictions and missing evidence call for different responses. An explicit deny that matches the intended service contradicts a claim that the modeled policy permits it. Missing neighbor and application observations leave other claims unknown. Preserve the contradiction as an actionable design or policy question, while requesting evidence for the unknowns. Do not smooth both into a vague warning or manufacture successful tests to make the review look complete. A recommendation can reasonably remain conditional when a necessary claim is unsupported or directly contradicted.</p>
+<p>Prioritize follow-up by dependency and consequence. Clarify whether the service should be permitted before planning a configuration change; then define the authorized validation needed for the route, neighbors, policy and application. A proposed change should name its intended effect, scope, rollback considerations and reviewer without claiming that the proposal has been applied. Automation plans add their own validation and uncertain-outcome concerns. The capstone runs no device commands and grants no new authority to test traffic, modify policies or publish internal network information.</p>
+<p>Finish with a concise evidence-led review and an objective gap map. The workshop extends earlier packet-journey learning into VLAN, loop-control, bundle, IPv6, route, OSPF, service, wireless and automation reasoning, but remains partial CCNA coverage. Actual configuration, protocol state inspection and timed troubleshooting are unperformed. Run the fixed capstone and preserve its missing-evidence list and cautious conclusion. Your final artifact should let another learner reproduce the same local findings while seeing exactly why those findings do not establish exam readiness, operational competence or production approval.</p>
+<h3>Worked example</h3><p>The capstone retains supporting [route_selection, vlan_membership], contradictions [acl_order] and gaps [application_response, neighbor_exchange]. end_to_end_success_proven remains false. Its next_step is “Resolve contradictions and collect missing independent evidence in an authorized environment.” Build a ledger assigning the positive route and membership findings to their bounded claims, then explain why neither overrides the ACL contradiction. Missing neighbor exchange and application response remain unknown rather than implicit failures or passes. On paper, propose resolving the intended policy before arranging authorized neighbor and application observations. Keep the proposal unexecuted. The final memo should preserve the exact two gaps and one contradiction, then link to the coverage map instead of claiming full exam or practical readiness.</p><pre><code># Fixed offline reasoning model, not a router or emulator.
+python3 -B labs/ccna-workshop/run_lab.py capstone</code></pre><h3>Practice safely</h3><ol>
+<li>Read the capstone fixture and the model contract; write an input-by-input prediction before executing.</li>
+<li>Draw the decision sequence described in this lesson and mark the observations the model cannot supply.</li>
+<li>From the workshop directory, run python3 -B labs/ccna-workshop/run_lab.py capstone.</li>
+<li>Compare every worked-example field with the receipt. Preserve mismatches and explain them rather than editing the receipt.</li>
+<li>Work the named counterfactual on paper only. Record which input changes and which conclusion would need recomputing.</li>
+<li>Keep the three evidence items, your actual receipt and an explicit list of unperformed equipment checks.</li>
+</ol><h3>Evidence to keep</h3><ul>
+<li>A service-flow evidence ledger linking claims to individual receipts.</li>
+<li>A prioritized review retaining the ACL contradiction and missing observations.</li>
+<li>A coverage-gap map and unexecuted validation plan without readiness claims.</li>
+</ul><h3>Original practice checks</h3>
+<p><strong>A route exists but the relevant ACL denies the service. What should the review say?</strong></p><ol type="A">
+<li>The route automatically overrides the ACL</li>
+<li>NAT guarantees success</li>
+<li>The application must be running</li>
+<li>Routing evidence does not erase the modeled policy contradiction</li>
+</ol><details><summary>Answer and reasoning</summary><p>D. Routing evidence does not erase the modeled policy contradiction Independent mechanisms answer different questions; a route does not authorize denied traffic.</p></details>
+<p><strong>How should absent neighbor evidence be represented?</strong></p><ol type="A">
+<li>As an unresolved claim requiring an appropriate observation</li>
+<li>As a successful ping</li>
+<li>As proof the router is broken</li>
+<li>As an irrelevant detail</li>
+</ol><details><summary>Answer and reasoning</summary><p>A. As an unresolved claim requiring an appropriate observation Missing evidence is uncertainty, not success or a specific failure diagnosis.</p></details>
+<p><strong>What does completing this workshop establish?</strong></p><ol type="A">
+<li>Complete CCNA coverage</li>
+<li>Practice with selected local models and explicit gaps</li>
+<li>Production network approval</li>
+<li>Real Cisco configuration proficiency</li>
+</ol><details><summary>Answer and reasoning</summary><p>B. Practice with selected local models and explicit gaps Bounded offline work cannot substitute for the omitted objectives and equipment-based validation.</p></details>
+<h3>Limits</h3><p>No operational acceptance, exam readiness, full CCNA coverage or live network validation is established. The capstone aggregates selected synthetic findings and does not discover an actual network.</p><h3>Official references</h3><ul>
+<li><a href="https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst2960/software/release/15-0_2_se/configuration/guide/scg2960/swadmin.html">https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst2960/software/release/15-0_2_se/configuration/guide/scg2960/swadmin.html</a></li>
+<li><a href="https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst9300/software/release/17-18/configuration_guide/vlan/b_1718_vlan_9300_cg/configuring_vlan_trunks.html">https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst9300/software/release/17-18/configuration_guide/vlan/b_1718_vlan_9300_cg/configuring_vlan_trunks.html</a></li>
+<li><a href="https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/15986-admin-distance.html">https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/15986-admin-distance.html</a></li>
+<li><a href="https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipaddr_dhcp/configuration/15-s/dhcp-15-s-book/dhcp-relay-agent.html">https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipaddr_dhcp/configuration/15-s/dhcp-15-s-book/dhcp-relay-agent.html</a></li>
+<li><a href="https://www.cisco.com/c/en/us/support/docs/security/ios-firewall/23602-confaccesslists.html">https://www.cisco.com/c/en/us/support/docs/security/ios-firewall/23602-confaccesslists.html</a></li>
+</ul><p><a href="#main">Back to workbook contents</a></p></section>
+</main></body></html>

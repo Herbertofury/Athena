@@ -1,0 +1,28 @@
+{
+  "id": "aws-workshop",
+  "title": "AWS Foundations: Evidence Before Architecture",
+  "summary": "Ten substantial lessons connect AWS service concepts to bounded local reasoning models, explicit evidence and honest gaps.",
+  "lessonIds": [
+    "awsf-identity",
+    "awsf-network",
+    "awsf-storage",
+    "awsf-compute",
+    "awsf-queues",
+    "awsf-database",
+    "awsf-resilience",
+    "awsf-operations",
+    "awsf-cost",
+    "awsf-capstone"
+  ],
+  "prerequisites": [
+    "cloud-model-contract",
+    "cloud-responsibility-scope",
+    "aws-design"
+  ],
+  "certificationIds": [
+    "aws-clf",
+    "aws-saa"
+  ],
+  "caseIds": [],
+  "limits": "No AWS APIs, console, CLI, SDK, credentials, network, provisioning, CloudFormation, Terraform or paid services are used. Local models are not AWS engines or real configurations. Partial conceptual coverage is not exam readiness or deployment approval."
+}

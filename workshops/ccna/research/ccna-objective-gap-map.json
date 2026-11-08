@@ -1,0 +1,283 @@
+{
+  "reviewedAt": "2026-11-08",
+  "exam": "200-301 CCNA",
+  "baseline": "v1.1",
+  "baselineEvidence": "ccna-v11-topics",
+  "currentLastTestDate": "2027-02-02",
+  "announcedNextVersion": {
+    "version": "v2.0",
+    "firstTestDate": "2027-02-03",
+    "objectiveMapping": "Not claimed; re-map against that version before using for its preparation."
+  },
+  "coverageMeaning": "Partial conceptual/task alignment only. Objective numbers are pointers, not completion claims. Configuration and verification verbs are not satisfied by synthetic exercises.",
+  "domains": [
+    {
+      "id": "1.0",
+      "name": "Network Fundamentals",
+      "examWeightPercent": 20,
+      "coverage": "partial"
+    },
+    {
+      "id": "2.0",
+      "name": "Network Access",
+      "examWeightPercent": 20,
+      "coverage": "partial"
+    },
+    {
+      "id": "3.0",
+      "name": "IP Connectivity",
+      "examWeightPercent": 25,
+      "coverage": "partial"
+    },
+    {
+      "id": "4.0",
+      "name": "IP Services",
+      "examWeightPercent": 10,
+      "coverage": "partial"
+    },
+    {
+      "id": "5.0",
+      "name": "Security Fundamentals",
+      "examWeightPercent": 15,
+      "coverage": "partial"
+    },
+    {
+      "id": "6.0",
+      "name": "Automation and Programmability",
+      "examWeightPercent": 10,
+      "coverage": "partial"
+    }
+  ],
+  "lessons": [
+    {
+      "lessonId": "ccnaf-vlans",
+      "command": "vlans",
+      "objectiveIds": [
+        "1.13",
+        "2.1",
+        "2.2"
+      ],
+      "alignment": "partial",
+      "taught": "Trace a frame against VLAN membership, source learning, allowed VLANs and a routing boundary.",
+      "remainingGap": "Voice VLAN behavior, actual multi-switch configuration and IOS verification remain untested.",
+      "sourceKeys": [
+        "vlan-basics",
+        "vlan-trunks",
+        "mac-learning"
+      ],
+      "localEvidence": "VLAN-scoped source learning, fixed unicast decisions and trunk allowed-list intersections only."
+    },
+    {
+      "lessonId": "ccnaf-loop-control",
+      "command": "loop-control",
+      "objectiveIds": [
+        "2.5"
+      ],
+      "alignment": "partial",
+      "taught": "Explain loop prevention, root identifiers and costs; discuss rapid/edge/protection concepts without calculating operational port roles.",
+      "remainingGap": "No forwarding-role/state computation, convergence timing, BPDUs, complete tie-break implementation or real guard behavior/recovery.",
+      "sourceKeys": [
+        "stp-basics",
+        "stp-guards",
+        "stp-loopguard"
+      ],
+      "localEvidence": "Lowest supplied priority/MAC identifier, cumulative root costs and explicit equal-cost ambiguity; no operational port roles."
+    },
+    {
+      "lessonId": "ccnaf-bundles",
+      "command": "bundles",
+      "objectiveIds": [
+        "2.4"
+      ],
+      "alignment": "partial",
+      "taught": "Reject incompatible members and passive/passive pairing; explain flow hashing.",
+      "remainingGap": "No L2/L3 EtherChannel configuration, actual hardware hash, member failure timing or throughput measurement.",
+      "sourceKeys": [
+        "lacp",
+        "vlan-trunks"
+      ],
+      "localEvidence": "Supplied active/passive pair and reference-member compatibility checks only; no negotiation or hash."
+    },
+    {
+      "lessonId": "ccnaf-ipv6",
+      "command": "ipv6",
+      "objectiveIds": [
+        "1.8",
+        "1.9.a",
+        "1.9.c"
+      ],
+      "alignment": "partial",
+      "taught": "Interpret addresses, prefixes, link-local scope and neighbor discovery evidence.",
+      "remainingGap": "Address configuration, client OS checks, SLAAC/DAD execution, anycast and modified EUI-64 need separate practice.",
+      "sourceKeys": [
+        "ipv6-nd",
+        "ipv6-static",
+        "rfc4861"
+      ],
+      "localEvidence": "Fixed address category, prefix membership and refusal to infer reachability from an invented observation."
+    },
+    {
+      "lessonId": "ccnaf-routing",
+      "command": "routing",
+      "objectiveIds": [
+        "3.1",
+        "3.2",
+        "3.3"
+      ],
+      "alignment": "partial",
+      "taught": "Separate candidate selection from installed-route lookup; reason about backup eligibility.",
+      "remainingGap": "No actual IPv4/IPv6 static-route installation, recursive resolution, tracked failover or forwarding-plane verification.",
+      "sourceKeys": [
+        "route-ad",
+        "route-selection",
+        "ipv6-static"
+      ],
+      "localEvidence": "Same-prefix candidate selection by supplied AD, then longest-prefix lookup; supplied active flags only."
+    },
+    {
+      "lessonId": "ccnaf-ospf",
+      "command": "ospf",
+      "objectiveIds": [
+        "3.4"
+      ],
+      "alignment": "partial",
+      "taught": "Discuss neighbor prerequisites, router-ID uniqueness and shared-segment roles; separately calculate supplied graph costs.",
+      "remainingGap": "No router-ID validation, neighbor state machine, adjacency formation, LSA exchange, actual OSPF SPF process, DR/BDR election or IOS configuration.",
+      "sourceKeys": [
+        "ospf-neighbors",
+        "ospf-show",
+        "rfc2328"
+      ],
+      "localEvidence": "Boolean prerequisite checks and shortest costs over a supplied graph; no router-ID comparison, roles or adjacency state."
+    },
+    {
+      "lessonId": "ccnaf-services",
+      "command": "services",
+      "objectiveIds": [
+        "4.1",
+        "4.2",
+        "4.3",
+        "4.6",
+        "5.6"
+      ],
+      "alignment": "partial",
+      "taught": "Separate ordered filtering, address translation, relay, names and time.",
+      "remainingGap": "No NAT pool allocation, packet-dependent translation order, real DHCP/DNS/NTP exchanges, ACL attachment or synchronized clock verification.",
+      "sourceKeys": [
+        "acl",
+        "nat",
+        "dhcp-relay",
+        "ntp"
+      ],
+      "localEvidence": "First-match explicit-network ACL and independent static source mapping; DNS, DHCP and NTP discussed only."
+    },
+    {
+      "lessonId": "ccnaf-wireless",
+      "command": "wireless",
+      "objectiveIds": [
+        "1.11",
+        "5.9"
+      ],
+      "alignment": "partial",
+      "taught": "Distinguish RF contention, association/authentication and downstream addressing.",
+      "remainingGap": "No RF survey, AP/WLC GUI, WLAN creation, WPA2-PSK verification, roaming or regional compliance test.",
+      "sourceKeys": [
+        "wpa3",
+        "wireless-rf"
+      ],
+      "localEvidence": "Capability/security-label eligibility and simple 2.4 GHz/20 MHz channel comparison; no architecture or RF test."
+    },
+    {
+      "lessonId": "ccnaf-automation",
+      "command": "automation",
+      "objectiveIds": [
+        "6.1",
+        "6.5",
+        "6.7"
+      ],
+      "alignment": "partial",
+      "taught": "Validate typed JSON-shaped records, review a desired-state diff and discuss HTTP method semantics; no response-code exercise.",
+      "remainingGap": "No controller access, credentials, HTTP requests, device writes, Ansible/Terraform execution or AI/ML competency assessment.",
+      "sourceKeys": [
+        "catalyst-api",
+        "rest-methods",
+        "rest-auth",
+        "rfc8259",
+        "rfc9110"
+      ],
+      "localEvidence": "Typed fixed-record diff and dependency order; HTTP methods discussed only."
+    },
+    {
+      "lessonId": "ccnaf-capstone",
+      "command": "capstone",
+      "objectiveIds": [
+        "1.13",
+        "2.1",
+        "2.2",
+        "3.1",
+        "3.2",
+        "4.3",
+        "5.6"
+      ],
+      "alignment": "partial",
+      "taught": "Build a causal diagnosis and smallest discriminating next check from synthetic cross-layer evidence.",
+      "remainingGap": "Integrated reasoning only; no new full-objective coverage or production/emulator readiness.",
+      "sourceKeys": [
+        "mac-learning",
+        "vlan-trunks",
+        "route-ad",
+        "dhcp-relay",
+        "acl"
+      ],
+      "localEvidence": "Aggregation of supplied supporting findings, one contradiction and two gaps; no new observations."
+    }
+  ],
+  "notClaimedObjectives": [
+    "1.1",
+    "1.2",
+    "1.3",
+    "1.4",
+    "1.5",
+    "1.6",
+    "1.7",
+    "1.9.b",
+    "1.9.d",
+    "1.10",
+    "1.12",
+    "2.3",
+    "2.6",
+    "2.7",
+    "2.8",
+    "2.9",
+    "3.5",
+    "4.4",
+    "4.5",
+    "4.7",
+    "4.8",
+    "4.9",
+    "5.1",
+    "5.2",
+    "5.3",
+    "5.4",
+    "5.5",
+    "5.7",
+    "5.8",
+    "5.10",
+    "6.2",
+    "6.3",
+    "6.4",
+    "6.6"
+  ],
+  "universalOperationalGaps": [
+    "Device or emulator configuration and verification",
+    "Real CLI navigation and command syntax recall",
+    "Packet capture and interface counters",
+    "Failure recovery, rollback and persistence",
+    "Independent timed assessment against complete blueprint"
+  ],
+  "notes": [
+    "A mention of a concept is not evidence of assessed coverage.",
+    "No scores, percentage coverage, pass probability, Cisco endorsement or certification readiness are inferred.",
+    "The Packet Trail prerequisite content is not counted toward this new workshop's coverage."
+  ]
+}

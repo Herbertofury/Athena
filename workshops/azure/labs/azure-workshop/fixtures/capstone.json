@@ -1,0 +1,89 @@
+{
+  "compute": {
+    "demand": 1050,
+    "capacity_per_instance": 200,
+    "target_utilization_percent": 70,
+    "min_instances": 2,
+    "max_instances": 6,
+    "current_instances": 4
+  },
+  "monitoring": {
+    "windows": [
+      {
+        "id": "complete-high",
+        "samples": [
+          80,
+          90,
+          100
+        ],
+        "expected_count": 3,
+        "threshold": 85
+      },
+      {
+        "id": "gap",
+        "samples": [
+          20,
+          null,
+          30
+        ],
+        "expected_count": 3,
+        "threshold": 85
+      },
+      {
+        "id": "boundary",
+        "samples": [
+          85,
+          85,
+          85
+        ],
+        "expected_count": 3,
+        "threshold": 85
+      }
+    ]
+  },
+  "recovery": {
+    "components": [
+      {
+        "id": "app",
+        "depends_on": [
+          "database"
+        ]
+      },
+      {
+        "id": "database",
+        "depends_on": [
+          "network"
+        ]
+      },
+      {
+        "id": "network",
+        "depends_on": []
+      }
+    ],
+    "recovery_point_age_minutes": 45,
+    "rpo_minutes": 30
+  },
+  "cost": {
+    "resources": [
+      {
+        "id": "vm-a",
+        "team": "platform",
+        "amount": "12.3450"
+      },
+      {
+        "id": "disk-a",
+        "team": "platform",
+        "amount": "2.0050"
+      },
+      {
+        "id": "storage-a",
+        "team": null,
+        "amount": "4.50"
+      }
+    ],
+    "budget": "18.00"
+  },
+  "evidence": [
+    "role_assignment_review"
+  ]
+}

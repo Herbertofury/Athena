@@ -1,0 +1,36 @@
+{
+  "actual": [
+    {
+      "id": "desk",
+      "vlan": 10,
+      "enabled": true,
+      "description": "Old desk"
+    },
+    {
+      "id": "retired",
+      "vlan": 20,
+      "enabled": false,
+      "description": ""
+    }
+  ],
+  "desired": [
+    {
+      "id": "desk",
+      "vlan": 20,
+      "enabled": true,
+      "description": "New desk"
+    },
+    {
+      "id": "uplink",
+      "vlan": 20,
+      "enabled": true,
+      "description": "Synthetic trunk placeholder"
+    }
+  ],
+  "dependencies": [
+    {
+      "before": "uplink",
+      "after": "desk"
+    }
+  ]
+}
