@@ -10,7 +10,7 @@
     "test:browser:static": "node scripts/test_browser.cjs",
     "test:browser:workshops": "node scripts/test_workshops_browser.cjs",
     "test:browser:accessibility": "node scripts/test_accessibility_browser.cjs",
-    "test:media": "python3 engineering/scripts/build_media_lab.py --check && node --test engineering/tests/bilibili-player.test.mjs engineering/tests/event-log-view.test.mjs engineering/tests/event-log-recovery.test.mjs engineering/tests/media-lab.test.mjs engineering/tests/preview-loader.test.mjs engineering/tests/resource-loader.test.mjs engineering/tests/media-event-recorder.test.mjs engineering/tests/media-events.test.mjs engineering/tests/media-recovery-dom.test.mjs engineering/tests/player-ready-timeout.test.mjs engineering/tests/hls-recovery.test.mjs engineering/tests/youtube-identity.test.mjs engineering/tests/youtube-recovery.test.mjs"
+    "test:media": "python3 engineering/scripts/build_media_lab.py --check && node --test engineering/tests/bilibili-player.test.mjs engineering/tests/event-log-view.test.mjs engineering/tests/event-log-recovery.test.mjs engineering/tests/media-lab.test.mjs engineering/tests/preview-loader.test.mjs engineering/tests/resource-loader.test.mjs engineering/tests/media-event-recorder.test.mjs engineering/tests/media-events.test.mjs engineering/tests/media-recovery-dom.test.mjs engineering/tests/player-ready-timeout.test.mjs engineering/tests/hls-recovery.test.mjs engineering/tests/youtube-identity.test.mjs engineering/tests/youtube-recovery.test.mjs engineering/tests/media-cover-state.test.mjs"
   },
   "devDependencies": {
     "linkedom": "0.18.12",
