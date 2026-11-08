@@ -21,3 +21,13 @@ test('native playback labels distinguish playing, paused, ended and failed',()=>
 
 test('the previous four real cards remain completely unchanged',()=>{const old=JSON.parse(readFileSync(new URL('../docs/media-lab/public-fixtures.09bc53f20b0f552b.json',import.meta.url)));assert.deepEqual(fixture().cards.slice(0,4),old.cards);});
 test('Bilibili source, provider, video ID and poster scope are bound together',()=>{const original=fixture();const index=original.cards.findIndex(c=>c.provider==='Bilibili');assert.equal(original.cards[index].cover,null);for(const change of [c=>c.videos[0].id='BV1B7411m7Lx',c=>c.source='https://www.bilibili.com/video/BV1B7411m7Lx/',c=>c.source+='?autoplay=1',c=>c.cover='https://i.ytimg.com/vi/M7lc1UVf-VE/hqdefault.jpg',c=>c.cover_status='complete',c=>c.videos[0].kind='youtube',c=>c.provider='YouTube']){const x=structuredClone(original);change(x.cards[index]);assert.throws(()=>validateFixture(x));}});
+
+
+test('Steam app identity cannot point the source action to another app or namespace',()=>{
+ for(const source of ['https://store.steampowered.com/app/730/','https://store.steampowered.com/sub/620/','https://store.steampowered.com/']){
+  const x=fixture();x.cards.find(c=>c.provider==='Steam').source=source;assert.throws(()=>validateFixture(x),/Mismatched Steam source and card identity/);
+ }
+});
+test('Steam app source display suffix and locale do not alter canonical identity',()=>{
+ const x=fixture();x.cards.find(c=>c.provider==='Steam').source='https://store.steampowered.com/app/620/Portal_2/?cc=us&l=english#app_reviews_hash';const before=JSON.stringify(x);assert.equal(validateFixture(x),x);assert.equal(JSON.stringify(x),before);
+});
