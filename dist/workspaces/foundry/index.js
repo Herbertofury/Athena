@@ -5279,13 +5279,16 @@ export async function mount({container,signal,search='',notify=()=>{}}) {
 				if (notify) toast(`${obj?.name || "This mesh"} stays bound to the room`);
 				return null;
 			}
-			if (obj.atlasId && assetById[obj.atlasId]) {
+			if (!test && obj.atlasId && assetById[obj.atlasId]) {
 				selectedAsset = assetById[obj.atlasId];
 				selectAsset(selectedAsset.id);
 				if (notify) toast(`${obj.name} is already in Object Atlas`);
 				return selectedAsset;
 			}
-			const id = `room-${obj.id}-${test ? "test" : Date.now()}`;
+			// Self-tests must not overwrite or persist a previously extracted room asset.
+			const baseId = `room-${obj.id}-${test ? "test" : Date.now()}`;
+			let id = baseId, suffix = 0;
+			while (assetById[id]) id = `${baseId}-${++suffix}`;
 			const asset = {
 				id,
 				theme: currentTheme,
@@ -5308,13 +5311,15 @@ export async function mount({container,signal,search='',notify=()=>{}}) {
 			assets.unshift(asset);
 			assetById[id] = asset;
 			obj.atlasId = id;
-			selectedAsset = asset;
-			renderAssetGrid($("#assetSearch")?.value || "");
-			renderFloatingAssetGrid($("#floatingAssetSearch")?.value || "");
-			selectAsset(id);
-			renderRoomIntelligence();
-			saveRoomSemanticState();
-			if (notify) {
+			if (!test) {
+				selectedAsset = asset;
+				renderAssetGrid($("#assetSearch")?.value || "");
+				renderFloatingAssetGrid($("#floatingAssetSearch")?.value || "");
+				selectAsset(id);
+				renderRoomIntelligence();
+				saveRoomSemanticState();
+			}
+			if (notify && !test) {
 				toast(`${obj.name} extracted into Object Atlas with room lineage`);
 				recordHistory(`Extracted ${obj.name} from Blender room`);
 			}
@@ -6142,14 +6147,17 @@ export async function mount({container,signal,search='',notify=()=>{}}) {
 				results.lampRoomAffordance = !$("[data-room-mesh=\"lamp\"]").classList.contains("on");
 				placeRoomAssetOnTable(assetById["aero-orb"], false);
 				results.tableSurfaceAffordance = $("#roomTableProp").innerHTML.length > 20;
-				const testRoomObj = roomObjectById("sofa"), priorAtlas = testRoomObj.atlasId, priorAssets = assets.length, extracted = extractRoomObjectToAtlas(testRoomObj, {
-					notify: false,
-					test: true
-				});
-				results.roomObjectAtlas = !!extracted && assets.length === priorAssets + 1 && extracted.sourceRoom === roomSemanticState.sourceName;
-				if (extracted) {
-					assets.splice(assets.indexOf(extracted), 1);
-					delete assetById[extracted.id];
+				const testRoomObj = roomObjectById("sofa"), priorAtlas = testRoomObj.atlasId, priorAssets = assets.length;
+				let extracted;
+				try {
+					extracted = extractRoomObjectToAtlas(testRoomObj, { notify: false, test: true });
+					results.roomObjectAtlas = !!extracted && assets.length === priorAssets + 1 && extracted.sourceRoom === roomSemanticState.sourceName;
+				} finally {
+					if (extracted) {
+						const index = assets.indexOf(extracted);
+						if (index >= 0) assets.splice(index, 1);
+						if (assetById[extracted.id] === extracted) delete assetById[extracted.id];
+					}
 					testRoomObj.atlasId = priorAtlas;
 				}
 				roomSemanticState.tableAssetId = null;

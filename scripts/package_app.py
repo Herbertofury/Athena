@@ -36,7 +36,7 @@ FOUNDRY_LIMITATIONS = [
     'Native SQLite/window callbacks and provider account authorization are unconnected.',
     'External/local-file media is unavailable on privileged loopback; actual playback is unverified.',
 ]
-FOUNDRY_ASSETS = {'workspaces/foundry/THIRD-PARTY-NOTICES.txt': {'sha256': 'd249cfc4b221ea9f33a68375772b82fc4dcc0ff636ce452cb1cac2ff937dd785', 'bytes': 4273}, 'workspaces/foundry/identity.json': {'sha256': 'de645c0f83a118c8e8547e6d66ea35039944992393caeb6752bdeda70d982dd3', 'bytes': 381}, 'workspaces/foundry/index.js': {'sha256': 'a2c582b79d7e271f3911a78a9161f95ccbbb068880e34f771b5a7e8f548aef5a', 'bytes': 2210196}, 'workspaces/foundry/style.css': {'sha256': '4ea3de2caff691ade8736eebe85f2bfe300c80241a11bb1dbd8d9500b59ff437', 'bytes': 274123}}
+FOUNDRY_ASSETS = {'workspaces/foundry/THIRD-PARTY-NOTICES.txt': {'sha256': 'd249cfc4b221ea9f33a68375772b82fc4dcc0ff636ce452cb1cac2ff937dd785', 'bytes': 4273}, 'workspaces/foundry/identity.json': {'sha256': '9b15b3330c37d9039c199d14ad9cc76ad12ad081228d75a588a08a88e1f3dab7', 'bytes': 415}, 'workspaces/foundry/index.js': {'sha256': '398b23e96706b75ce28967c08cd0b31fffd90fe3037275615a0aaaf3baa89a88', 'bytes': 2210547}, 'workspaces/foundry/style.css': {'sha256': '4ea3de2caff691ade8736eebe85f2bfe300c80241a11bb1dbd8d9500b59ff437', 'bytes': 274123}}
 
 
 def runtime_path(name):
