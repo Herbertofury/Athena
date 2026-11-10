@@ -1,0 +1,174 @@
+{
+  "schema": 1,
+  "review": "Reviewed existing Athena public-preview assets plus user-approved Feature Foundry derived browser workspace. Native/account integrations remain unconnected. Original private-to-public material was explicitly approved.",
+  "files": [
+    {
+      "path": "app.js",
+      "sha256": "69de5752b1676f9f662fb0d68acfea43becc9c923de7741224f4d2f0dfd5d0c4"
+    },
+    {
+      "path": "catalog.js",
+      "sha256": "97ce633e23cd9bbfa3d980acb7da640b9eacb40fb704a8f429e04cee68dadd5f"
+    },
+    {
+      "path": "core.js",
+      "sha256": "1fbbb46ff7134ff968a8543aaa967d78b39fd955fcf5b810882039aa61e29803"
+    },
+    {
+      "path": "index.html",
+      "sha256": "9f0cd9affdcad4760f01b6f78e4a150ab003ac5ad28110e5b4dd63e78ddec521"
+    },
+    {
+      "path": "styles.css",
+      "sha256": "bf7fb56b9403fe8a865771cd7b3cd766a52aeea5460541ec29d145fcfd8f7107"
+    },
+    {
+      "path": "workshops/cloud/learner-pack.zip",
+      "sha256": "2b9e9fa4922dc9352864b644861dcb95a8a4df56a0641ff7067f4a144cdd385d"
+    },
+    {
+      "path": "workshops/data/learner-pack.zip",
+      "sha256": "8d03fb99f97ae6324de1a4cbfcb874d725778f110cb634b1ed9578a6f4711731"
+    },
+    {
+      "path": "workshops/programming/learner-pack.zip",
+      "sha256": "93f83f0c2ae38854a118742ede3e21a2b696cd0b97d42749288654527dee5f0c"
+    },
+    {
+      "path": "workshops/security/learner-pack.zip",
+      "sha256": "f52dc91bdc691bbd9152e147c9db960007262a2807c491f8c872e6fe6b45fb3c"
+    },
+    {
+      "path": "workshops/systems/learner-pack.zip",
+      "sha256": "1be28f1630e72979cf090b3601d4d3249ecc6a686018fc003173490fd0b70a5f"
+    },
+    {
+      "path": "workspace-host.js",
+      "sha256": "8a14dec17d4d816de53d325a94ee0dd00ac0bc8a0a26a756af58998173157cdb"
+    },
+    {
+      "path": "workspaces/engineering/lab/archive-view.mjs",
+      "sha256": "de52a075043aee965b579e3259ed852dc64a9ba60cceb300d9acefd4c6223228"
+    },
+    {
+      "path": "workspaces/engineering/lab/collection-input.mjs",
+      "sha256": "741a0aeb30465b19391358a488a0e019dc9a6aa300088c9addb7388ec23c7ffe"
+    },
+    {
+      "path": "workspaces/engineering/lab/index.mjs",
+      "sha256": "9bbd5156e14243fcf87e1a37d29625bfa7e20ec32706e321b509f7fc9ffd76d7"
+    },
+    {
+      "path": "workspaces/engineering/lab/job-submit.mjs",
+      "sha256": "06f5785d9ebbab16cd208712183e7fa317ac707d96a48325929b728ba26a2f9f"
+    },
+    {
+      "path": "workspaces/engineering/lab/manifest.json",
+      "sha256": "0b47faa7ad5ed7b78a60a63dc003d89cb9a1224ea0bca6f5b6083092dc2c60b8"
+    },
+    {
+      "path": "workspaces/engineering/lab/style.css",
+      "sha256": "08575c8f16deb59545a6d8fad8bc0eb234cfb963a65bf5e47a14ce91097bf251"
+    },
+    {
+      "path": "workspaces/engineering/manifest.json",
+      "sha256": "93e2c1140c7164d1f73fab5e8bffb43e968b884804a7610ac390079e4747b183"
+    },
+    {
+      "path": "workspaces/engineering/media/bilibili-player.mjs",
+      "sha256": "4f893473b3fc38d20e38ee709f305137bfa3b48290dba1c42fbdb01c8f763444"
+    },
+    {
+      "path": "workspaces/engineering/media/event-log-view.mjs",
+      "sha256": "d335ed418d4f9b5619825fc89f30dd3ad3beffe158f8d49feb9bc9d9a08b77d5"
+    },
+    {
+      "path": "workspaces/engineering/media/index.mjs",
+      "sha256": "e88d09c9a254993257818e9683160699764723213daee065d6eb74e82f6c9705"
+    },
+    {
+      "path": "workspaces/engineering/media/media-core.mjs",
+      "sha256": "55e38161c841a4204392c7ffce01fc8697ac78200ae80a04ae4cc53e884a57a2"
+    },
+    {
+      "path": "workspaces/engineering/media/media-event-recorder.mjs",
+      "sha256": "ffec2c40be2e724c86fe228d60d250559bb856a1394a2ff8101c611e506318bf"
+    },
+    {
+      "path": "workspaces/engineering/media/media-events.mjs",
+      "sha256": "e336b2c509ca803072cb2d56c65a0b111fa4a6402b85c69f823e6f5f117a98cf"
+    },
+    {
+      "path": "workspaces/engineering/media/preview-loader.mjs",
+      "sha256": "e48c8a20660c787bb364899937d3b38c22ff69a2a623e80136210c5be0a34eef"
+    },
+    {
+      "path": "workspaces/engineering/media/public-fixtures.json",
+      "sha256": "2aa0668aba0eb29c69faf368fab206369718335be7f47bc0c6592236e79d1aba"
+    },
+    {
+      "path": "workspaces/engineering/media/resource-loader.mjs",
+      "sha256": "f95053a1d56a85330314efe88ca6c26b45ac1c3abb530639b770601e03608c06"
+    },
+    {
+      "path": "workspaces/engineering/media/style.css",
+      "sha256": "b3557cd4ae93e35fd9daa5a5cfc781126f525cd3c884259057781b82eb554e83"
+    },
+    {
+      "path": "workspaces/engineering/media/vendor/HLS-LICENSE.txt",
+      "sha256": "ca8773cf798c7ed997d4dd7c8e23c348699f8d5b7462636694cc14de6cda12db"
+    },
+    {
+      "path": "workspaces/engineering/media/vendor/hls-1.7.3.min.js",
+      "sha256": "a12e7ee1cd64a69dcdb314157e45dafcba705bfb0b1440b7935cb265d374423e"
+    },
+    {
+      "path": "workspaces/engineering/media/vendor/provenance.json",
+      "sha256": "15fcfeb0546007b06f104cc7419dadfc697b7858e3436c4753113cb43b5a4885"
+    },
+    {
+      "path": "workspaces/engineering/research/catalog.json",
+      "sha256": "9d2ab033df646fe0bf51b8a2eb9da68dbeb12c64b7d14e38fe441c4f6ad946e6"
+    },
+    {
+      "path": "workspaces/engineering/research/explorer-core.mjs",
+      "sha256": "06f94ed2ef4259729f6fa956672095f8560b7e04289276c2601e0b24c7d62811"
+    },
+    {
+      "path": "workspaces/engineering/research/index.mjs",
+      "sha256": "fda2961c11928ddf950c3de829560c068270d4886005a03999139b149cf1b78d"
+    },
+    {
+      "path": "workspaces/engineering/research/style.css",
+      "sha256": "be0489093bebf2ea49801a71f5779364533e844918f05573bc4fc425b8aae744"
+    },
+    {
+      "path": "workspaces/foundry/style.css",
+      "sha256": "4ea3de2caff691ade8736eebe85f2bfe300c80241a11bb1dbd8d9500b59ff437"
+    },
+    {
+      "path": "workspaces/foundry/THIRD-PARTY-NOTICES.txt",
+      "sha256": "d249cfc4b221ea9f33a68375772b82fc4dcc0ff636ce452cb1cac2ff937dd785"
+    },
+    {
+      "path": "workspaces/foundry/identity.json",
+      "sha256": "9b15b3330c37d9039c199d14ad9cc76ad12ad081228d75a588a08a88e1f3dab7"
+    },
+    {
+      "path": "workspaces/foundry/index.js",
+      "sha256": "398b23e96706b75ce28967c08cd0b31fffd90fe3037275615a0aaaf3baa89a88"
+    }
+  ],
+  "profile": "integration-candidate",
+  "candidate": {
+    "kind": "foundry-integration",
+    "repository": "Herbertofury/Feature-Foundry",
+    "sourceCommit": "e1ba080b5c7590f1c844a6ed13b3a471709920b9",
+    "integrationCommit": "141cdbb2b7d40d989213884c5ab772a6e05ed91a",
+    "native": false,
+    "accountAuthorization": false,
+    "verifiedPlayback": false,
+    "deployed": false
+  },
+  "purpose": "Isolated Foundry integration test package. Not a public-preview release or deployment approval."
+}
