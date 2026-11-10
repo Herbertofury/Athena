@@ -57,7 +57,7 @@ jobs:
         run: |
           cargo +1.99.1 fmt -- --check
           cargo +1.99.1 test --locked --target ${{ matrix.target }} --lib --bins
-          cargo +1.99.1 clippy --locked --target ${{ matrix.target }} --lib --bins -- -D warnings
+          cargo +1.99.1 clippy --locked --target ${{ matrix.target }} --lib --bins --tests -- -D warnings
           cargo +1.99.1 build --locked --release --target ${{ matrix.target }} --bin atlas-lab
       - name: Verify reviewed runtime package
         run: python scripts/package_app.py --profile public-preview --allowlist config/runtime-public-preview.json --output native-test-runtime
