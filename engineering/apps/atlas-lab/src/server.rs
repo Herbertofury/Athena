@@ -1,4 +1,5 @@
 //! Loopback-only interface. No remote hosting, external scripts, credentials or self-deployment.
+mod foundry_api;
 use crate::jobs::{Job, Queue};
 use axum::{
     Json, Router,
@@ -21,6 +22,7 @@ const HOST: &str = "127.0.0.1:41379";
 const ORIGIN: &str = "http://127.0.0.1:41379";
 #[derive(Clone)]
 struct App {
+    foundry_snapshot: Option<Arc<crate::foundry_snapshot::FoundrySnapshotStore>>,
     engine_instance: String,
     runtime_assets: Option<Arc<crate::athena_assets::RuntimeAssets>>,
     path: PathBuf,
@@ -489,26 +491,40 @@ fn worker(path: PathBuf, stop: Arc<AtomicBool>, status: Arc<AtomicU8>, wake: Rec
     }
 }
 pub async fn serve(path: PathBuf) -> Result<(), Box<dyn std::error::Error>> {
-    serve_strategy(path, false, None).await
+    serve_strategy(path, false, None, None).await
 }
 pub async fn serve_candidate(path: PathBuf) -> Result<(), Box<dyn std::error::Error>> {
-    serve_strategy(path, true, None).await
+    serve_strategy(path, true, None, None).await
 }
 pub async fn serve_athena(
     path: PathBuf,
     public: PathBuf,
 ) -> Result<(), Box<dyn std::error::Error>> {
+    serve_athena_with_foundry(path, public, None).await
+}
+pub async fn serve_athena_with_foundry(
+    path: PathBuf,
+    public: PathBuf,
+    snapshot_directory: Option<PathBuf>,
+) -> Result<(), Box<dyn std::error::Error>> {
+    let snapshot = snapshot_directory
+        .as_deref()
+        .map(crate::foundry_snapshot::FoundrySnapshotStore::open)
+        .transpose()?
+        .map(Arc::new);
     let assets =
         crate::athena_assets::RuntimeAssets::load(&public).map_err(std::io::Error::other)?;
-    serve_strategy(path, false, Some(Arc::new(assets))).await
+    serve_strategy(path, false, Some(Arc::new(assets)), snapshot).await
 }
 async fn serve_strategy(
     path: PathBuf,
     overview_candidate: bool,
     runtime_assets: Option<Arc<crate::athena_assets::RuntimeAssets>>,
+    foundry_snapshot: Option<Arc<crate::foundry_snapshot::FoundrySnapshotStore>>,
 ) -> Result<(), Box<dyn std::error::Error>> {
     let engine_instance = new_engine_instance()?;
     Queue::open(&path)?;
+    foundry_api::initialize(&path).map_err(std::io::Error::other)?;
     let listener = tokio::net::TcpListener::bind(HOST).await?;
     let stop = Arc::new(AtomicBool::new(false));
     let worker_stop = stop.clone();
@@ -571,7 +587,18 @@ async fn serve_strategy(
                 }),
             )
     };
+    let state = App {
+        foundry_snapshot,
+        engine_instance,
+        runtime_assets,
+        path,
+        worker_status,
+        wake,
+        overview_candidate,
+        db_slots: Arc::new(tokio::sync::Semaphore::new(4)),
+    };
     let app = static_router
+        .merge(foundry_api::routes(state.clone()))
         .route("/api/runtime", get(runtime_info))
         .route("/api/project-archive/{id}", get(saved_project_response))
         .route("/api/version-archive/{id}", get(saved_version_response))
@@ -580,15 +607,7 @@ async fn serve_strategy(
         .route("/api/jobs", post(enqueue))
         .layer(DefaultBodyLimit::max(4096))
         .layer(middleware::from_fn(guard))
-        .with_state(App {
-            engine_instance,
-            runtime_assets,
-            path,
-            worker_status,
-            wake,
-            overview_candidate,
-            db_slots: Arc::new(tokio::sync::Semaphore::new(4)),
-        });
+        .with_state(state);
     println!(
         "Athena Lab local interface: {ORIGIN}. Press Ctrl+C to stop. No remote access is enabled."
     );
@@ -646,6 +665,7 @@ mod tests {
         drop(store);
         let (wake, _receiver) = std::sync::mpsc::sync_channel(1);
         let app = App {
+            foundry_snapshot: None,
             engine_instance: "0".repeat(32),
             runtime_assets: None,
             path: path.clone(),
@@ -749,6 +769,7 @@ mod tests {
         drop(store);
         let (wake, _receiver) = std::sync::mpsc::sync_channel(1);
         let app = App {
+            foundry_snapshot: None,
             engine_instance: "0".repeat(32),
             runtime_assets: None,
             path: path.clone(),
