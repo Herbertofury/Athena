@@ -15,4 +15,4 @@ The original source archive has 98 file entries and two directory entries. All 9
 
 The Windows installers are historical release files. They were not run, rebuilt, signed, or modified. Static checks do not establish malware safety, runtime correctness, or native application acceptance. The original release describes the binaries as not Authenticode-signed.
 
-Source/history migration, application integration, runtime acceptance, and the remaining release files must be verified separately. **Do not delete Feature-Foundry based on this partial copy.**
+As of 2026-11-10, [PR #3](https://github.com/Herbertofury/Athena/pull/3) has merged the exact original source and recoverable Git history bundle into Athena main. The web ZIP and complete-release ZIP remain in the original private release and in a verified private recovery archive. Application integration, native runtime acceptance, deployment acceptance and complete release transfer remain incomplete. **Do not delete Feature-Foundry based on this partial copy.**

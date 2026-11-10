@@ -12,7 +12,11 @@
         "bytes": 11716663,
         "digest": "sha256:593b3e0be60ab694ddd8fbe9e3bc48c3b2c443a542d0eb41390b09596707f54b",
         "url": "https://github.com/Herbertofury/Feature-Foundry/releases/download/v24.0.0/Feature-Foundry-v24.0.0-complete-release.zip",
-        "preservationStatus": "not-downloaded"
+        "preservationStatus": "private-recovery-verified-not-copied-to-athena",
+        "preservationVerifiedOn": "2026-11-10",
+        "originalReleaseAssetPresent": true,
+        "verifiedPrivateRecoveryArchive": true,
+        "athenaRepositoryCopy": null
       },
       {
         "name": "Feature-Foundry-v24.0.0-source.zip",
@@ -20,7 +24,16 @@
         "bytes": 6998572,
         "digest": "sha256:b8701b37328277667820af9f6ea630f33d13d1c9ffaa9827b914328895fc97c2",
         "url": "https://github.com/Herbertofury/Feature-Foundry/releases/download/v24.0.0/Feature-Foundry-v24.0.0-source.zip",
-        "preservationStatus": "not-downloaded"
+        "preservationStatus": "repository-copy-verified",
+        "preservationVerifiedOn": "2026-11-10",
+        "originalReleaseAssetPresent": true,
+        "verifiedPrivateRecoveryArchive": true,
+        "athenaRepositoryCopy": {
+          "path": "migration/feature-foundry/releases/v24.0.0/Feature-Foundry-v24.0.0-source.zip",
+          "gitBlob": "3243321fe8ea0c78358c7768cdf220e761010a17",
+          "mergeCommit": "cd70050b4b2f21174a785d0bcc4b9e5e1353de70",
+          "pullRequest": "https://github.com/Herbertofury/Athena/pull/21"
+        }
       },
       {
         "name": "Feature-Foundry-v24.0.0-web.zip",
@@ -28,7 +41,11 @@
         "bytes": 328556,
         "digest": "sha256:99f3714e5cae72e726711ebed0821ed09dbc1cadd7ab470afa2c3ad5f9f48726",
         "url": "https://github.com/Herbertofury/Feature-Foundry/releases/download/v24.0.0/Feature-Foundry-v24.0.0-web.zip",
-        "preservationStatus": "not-downloaded"
+        "preservationStatus": "private-recovery-verified-not-copied-to-athena",
+        "preservationVerifiedOn": "2026-11-10",
+        "originalReleaseAssetPresent": true,
+        "verifiedPrivateRecoveryArchive": true,
+        "athenaRepositoryCopy": null
       },
       {
         "name": "Feature-Foundry-v24.0.0-windows-x64-setup.exe",
@@ -36,7 +53,16 @@
         "bytes": 2003721,
         "digest": "sha256:b4ac90edf1213f3e5a9a1a8724184ae2e97bc30da3f69f877aadfe71819dc49a",
         "url": "https://github.com/Herbertofury/Feature-Foundry/releases/download/v24.0.0/Feature-Foundry-v24.0.0-windows-x64-setup.exe",
-        "preservationStatus": "not-downloaded"
+        "preservationStatus": "repository-copy-verified",
+        "preservationVerifiedOn": "2026-11-10",
+        "originalReleaseAssetPresent": true,
+        "verifiedPrivateRecoveryArchive": true,
+        "athenaRepositoryCopy": {
+          "path": "migration/feature-foundry/releases/v24.0.0/Feature-Foundry-v24.0.0-windows-x64-setup.exe",
+          "gitBlob": "13345ca1f73ac00f406da6f818b657b34b71e8c5",
+          "mergeCommit": "cd70050b4b2f21174a785d0bcc4b9e5e1353de70",
+          "pullRequest": "https://github.com/Herbertofury/Athena/pull/21"
+        }
       },
       {
         "name": "Feature-Foundry-v24.0.0-windows-x64.msi",
@@ -44,7 +70,16 @@
         "bytes": 2633728,
         "digest": "sha256:29a42693cc630d3aec72d137297063eab8f7c08ec21828cb8efd3871e025b157",
         "url": "https://github.com/Herbertofury/Feature-Foundry/releases/download/v24.0.0/Feature-Foundry-v24.0.0-windows-x64.msi",
-        "preservationStatus": "not-downloaded"
+        "preservationStatus": "repository-copy-verified",
+        "preservationVerifiedOn": "2026-11-10",
+        "originalReleaseAssetPresent": true,
+        "verifiedPrivateRecoveryArchive": true,
+        "athenaRepositoryCopy": {
+          "path": "migration/feature-foundry/releases/v24.0.0/Feature-Foundry-v24.0.0-windows-x64.msi",
+          "gitBlob": "3c7f741221d2eff87298b8db9287cea27bd29a29",
+          "mergeCommit": "cd70050b4b2f21174a785d0bcc4b9e5e1353de70",
+          "pullRequest": "https://github.com/Herbertofury/Athena/pull/21"
+        }
       },
       {
         "name": "SHA256SUMS.txt",
@@ -52,8 +87,29 @@
         "bytes": 533,
         "digest": "sha256:7c936936de7f3cf0d4efb9e35a1d6229db31b9e140efd951f2dd70f0a4517686",
         "url": "https://github.com/Herbertofury/Feature-Foundry/releases/download/v24.0.0/SHA256SUMS.txt",
-        "preservationStatus": "not-downloaded"
+        "preservationStatus": "repository-copy-verified",
+        "preservationVerifiedOn": "2026-11-10",
+        "originalReleaseAssetPresent": true,
+        "verifiedPrivateRecoveryArchive": true,
+        "athenaRepositoryCopy": {
+          "path": "migration/feature-foundry/releases/v24.0.0/SHA256SUMS.txt",
+          "gitBlob": "340235e97ce8fcbf1cf2e1b4c258bcc20cf0ed4b",
+          "mergeCommit": "cd70050b4b2f21174a785d0bcc4b9e5e1353de70",
+          "pullRequest": "https://github.com/Herbertofury/Athena/pull/21"
+        }
       }
-    ]
+    ],
+    "currentTransferStatus": {
+      "verifiedOn": "2026-11-10",
+      "verifiedAthenaCommit": "44384b809c80e03adbd62f8be9617d01e6ad9922",
+      "originalAssetCount": 6,
+      "repositoryCopyCount": 4,
+      "githubReleaseRecreated": false,
+      "completeReleaseMigration": false,
+      "installersExecutedForTransfer": false,
+      "applicationAcceptanceComplete": false,
+      "deletionReady": false,
+      "scope": "Four unchanged original files are repository copies. The web ZIP and complete-release ZIP remain in the original private release and in a verified private recovery archive; neither is copied into public Athena."
+    }
   }
 ]
