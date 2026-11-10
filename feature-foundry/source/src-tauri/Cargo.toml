@@ -1,0 +1,29 @@
+[package]
+name = "feature-foundry"
+version = "24.0.0"
+description = "Feature Foundry cinematic living-world studio"
+authors = ["Feature Foundry"]
+edition = "2024"
+rust-version = "1.88"
+
+[lib]
+name = "feature_foundry_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2.6.3", features = [] }
+
+[dependencies]
+serde = { version = "1.0.229", features = ["derive"] }
+serde_json = "1.0.151"
+tauri = { version = "2.11.5", features = [] }
+tauri-plugin-opener = "2.5.4"
+rusqlite = { version = "0.40.2", features = ["bundled", "modern_sqlite"] }
+url = "2.5.8"
+
+[profile.release]
+codegen-units = 1
+lto = "thin"
+opt-level = "s"
+panic = "abort"
+strip = true
