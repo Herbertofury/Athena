@@ -1,7 +1,9 @@
 //! Isolated Foundry persistence candidate. No HTTP route, frontend bridge,
 //! provider request, credentials or desktop integration.
 //! Reuses Athena's connection contract; callers explicitly choose the database.
-use rusqlite::{Connection, OptionalExtension, TransactionBehavior, params};
+use rusqlite::{Connection, OptionalExtension, Transaction, TransactionBehavior, params};
+#[path = "foundry_admission.rs"]
+mod admission;
 use serde::{Deserialize, Serialize};
 use serde_json::value::RawValue;
 use std::{
@@ -99,41 +101,113 @@ pub struct HistoryEvent {
     pub created_at: i64,
 }
 
+// Test builds retain the first failing SQLite phase without retrying a write or
+// changing the public error type. Release builds evaluate the operation directly.
+#[cfg(test)]
+macro_rules! assignment_phase {
+    ($phase:literal, $operation:expr) => {{
+        let started = std::time::Instant::now();
+        let result = $operation;
+        if let Err(error) = &result {
+            eprintln!(
+                "Foundry assignment phase={} elapsed={:?} thread={:?} error={:?}",
+                $phase,
+                started.elapsed(),
+                std::thread::current().id(),
+                error
+            );
+        }
+        result
+    }};
+}
+#[cfg(not(test))]
+macro_rules! assignment_phase {
+    ($phase:literal, $operation:expr) => {
+        $operation
+    };
+}
+
 pub struct FoundryStore {
     connection: Connection,
+    gate: std::sync::Arc<admission::Gate>,
+    write_healthy: std::cell::Cell<bool>,
 }
 impl FoundryStore {
     pub fn open(path: &Path) -> Result<Self, Error> {
-        let mut connection = Connection::open(path)?;
-        crate::storage_connection::configure(&connection)?;
-        let tx = connection.transaction_with_behavior(TransactionBehavior::Immediate)?;
-        let existing: i64 = tx.query_row(
-            "SELECT count(*) FROM sqlite_schema WHERE name IN (?1,?2,?3)",
-            params![TABLES[0].0, TABLES[1].0, TABLES[2].0],
-            |row| row.get(0),
-        )?;
-        if existing == 0 {
-            for (_, definition) in TABLES {
-                tx.execute_batch(definition)?;
-            }
-            tx.execute(
-                "INSERT INTO foundry_storage_metadata(key,value) VALUES('schema_version',?1)",
-                [SCHEMA],
-            )?;
-        }
-        verify_schema(&tx)?;
-        let version: Option<String> = tx
-            .query_row(
-                "SELECT value FROM foundry_storage_metadata WHERE key='schema_version'",
-                [],
+        let connection = Connection::open(path)?;
+        let gate = admission::for_connection(&connection)?;
+        let mut store = Self {
+            connection,
+            gate,
+            write_healthy: std::cell::Cell::new(true),
+        };
+        // Configuration is connection-local; perform it under the same admission
+        // budget as schema initialization, before opening the transaction.
+        store.write(true, Error::from, |tx| {
+            let existing: i64 = tx.query_row(
+                "SELECT count(*) FROM sqlite_schema WHERE name IN (?1,?2,?3)",
+                params![TABLES[0].0, TABLES[1].0, TABLES[2].0],
                 |row| row.get(0),
-            )
-            .optional()?;
-        if version.as_deref() != Some(SCHEMA) {
-            return Err(Error::UnsupportedSchema);
+            )?;
+            if existing == 0 {
+                for (_, definition) in TABLES {
+                    tx.execute_batch(definition)?;
+                }
+                tx.execute(
+                    "INSERT INTO foundry_storage_metadata(key,value) VALUES('schema_version',?1)",
+                    [SCHEMA],
+                )?;
+            }
+            verify_schema(tx)?;
+            let version: Option<String> = tx
+                .query_row(
+                    "SELECT value FROM foundry_storage_metadata WHERE key='schema_version'",
+                    [],
+                    |row| row.get(0),
+                )
+                .optional()?;
+            if version.as_deref() != Some(SCHEMA) {
+                return Err(Error::UnsupportedSchema);
+            }
+            Ok(())
+        })?;
+        Ok(store)
+    }
+
+    fn write<T, E>(
+        &mut self,
+        initialize: bool,
+        map_error: impl Fn(rusqlite::Error) -> E,
+        action: impl FnOnce(&Transaction<'_>) -> Result<T, E>,
+    ) -> Result<T, E> {
+        let timeout = if initialize {
+            std::time::Duration::from_secs(5)
+        } else {
+            admission::timeout(&self.connection).map_err(&map_error)?
+        };
+        let deadline = std::time::Instant::now() + timeout;
+        let _permit = self.gate.enter(deadline).map_err(&map_error)?;
+        let busy = admission::BusyScope::install(
+            &mut self.connection,
+            &self.write_healthy,
+            timeout,
+            deadline,
+        )
+        .map_err(&map_error)?;
+        if initialize {
+            // configure() installs the fixed timeout; use its identical PRAGMAs
+            // and verifier without replacing this operation's deadline handler.
+            crate::storage_connection::configure_with_current_busy_handler(busy.connection())
+                .map_err(&map_error)?;
         }
-        tx.commit()?;
-        Ok(Self { connection })
+        let tx = assignment_phase!(
+            "begin_immediate",
+            Transaction::new_unchecked(busy.connection(), TransactionBehavior::Immediate)
+        )
+        .map_err(&map_error)?;
+        let result = action(&tx)?;
+        assignment_phase!("commit", tx.commit()).map_err(&map_error)?;
+        Ok(result)
     }
 
     /// Original command semantics: replace this room's mapping; no implicit audit event.
@@ -172,20 +246,22 @@ impl FoundryStore {
         } else {
             None
         };
-        let tx = self
-            .connection
-            .transaction_with_behavior(TransactionBehavior::Immediate)?;
-        tx.execute(
+        self.write(false, Error::from, |tx| {
+        assignment_phase!("upsert", tx.execute(
             "INSERT INTO foundry_room_soundtracks(theme_id,room_id,provider,url,label,status,source_id,updated_at)
              VALUES(?1,?2,?3,?4,?5,?6,?7,?8)
              ON CONFLICT(theme_id,room_id) DO UPDATE SET provider=excluded.provider,url=excluded.url,
              label=excluded.label,status=excluded.status,source_id=excluded.source_id,updated_at=excluded.updated_at",
             params![a.theme_id,a.room_id,a.provider,a.url,a.label,a.status,a.source_id,result.updated_at]
-        )?;
+        ))?;
         if let Some(payload) = payload {
-            insert_history(&tx, "room_soundtrack_assigned", &payload, updated_at)?;
+            assignment_phase!(
+                "append_history",
+                insert_history(tx, "room_soundtrack_assigned", &payload, updated_at)
+            )?;
         }
-        tx.commit()?;
+        Ok(())
+        })?;
         Ok(result)
     }
 
@@ -220,11 +296,9 @@ impl FoundryStore {
         serde_json::from_str::<Box<RawValue>>(payload_json)
             .map_err(|_| Error::Invalid("History payload is not valid JSON"))?;
         let created_at = now()?;
-        let tx = self
-            .connection
-            .transaction_with_behavior(TransactionBehavior::Immediate)?;
-        let id = insert_history(&tx, event_type, payload_json, created_at)?;
-        tx.commit()?;
+        let id = self.write(false, Error::from, |tx| {
+            insert_history(tx, event_type, payload_json, created_at)
+        })?;
         Ok(HistoryEvent {
             id_text: id.to_string(),
             event_type: event_type.into(),
@@ -372,6 +446,78 @@ mod tests {
         }
     }
     const RAW: &str = " \n{\"unknown\":18446744073709551617,\"zero\":-0,\"markup\":\"<script>inert</script> 雪\",\"duplicate\":1,\"duplicate\":2} \n";
+
+    #[test]
+    fn every_mutator_and_open_share_store_admission() {
+        let p = path("all-mutators-admission");
+        let mut store = FoundryStore::open(&p).unwrap();
+        store
+            .connection
+            .busy_timeout(std::time::Duration::ZERO)
+            .unwrap();
+        let gate = store.gate.clone();
+        let held = gate.enter(std::time::Instant::now()).unwrap();
+        assert_busy(store.assign_with_history(input()).unwrap_err());
+        assert_busy(store.assign_room_soundtrack(input()).unwrap_err());
+        assert_busy(store.record_native_history("rejected", "{}").unwrap_err());
+        assert!(
+            store
+                .seed_catalog("[]", "{}")
+                .unwrap_err()
+                .contains("admission timed out")
+        );
+        let worker = std::thread::spawn(move || FoundryStore::open(&p));
+        let until = std::time::Instant::now() + std::time::Duration::from_secs(5);
+        while gate.waiting() != 1 {
+            assert!(
+                std::time::Instant::now() < until,
+                "open did not join the shared gate"
+            );
+            std::thread::yield_now();
+        }
+        drop(held);
+        let reopened = worker.join().unwrap().unwrap();
+        assert!(std::sync::Arc::ptr_eq(&gate, &reopened.gate));
+        assert!(store.history_after(0, 200).unwrap().is_empty());
+        store.record_native_history("committed", "{}").unwrap();
+        assert_eq!(
+            admission::timeout(&store.connection).unwrap(),
+            std::time::Duration::ZERO
+        );
+    }
+
+    #[test]
+    fn write_scope_restores_timeout_and_rolls_back_before_unwind_release() {
+        let mut store = FoundryStore::open(&path("scope-unwind")).unwrap();
+        let timeout = std::time::Duration::from_millis(321);
+        store.connection.busy_timeout(timeout).unwrap();
+        let result = std::panic::catch_unwind(std::panic::AssertUnwindSafe(|| {
+            let _: Result<(), Error> = store.write(false, Error::from, |tx| {
+                insert_history(tx, "synthetic.uncommitted", "{}", 0)?;
+                panic!("synthetic write unwind");
+            });
+        }));
+        assert!(result.is_err());
+        assert!(store.connection.is_autocommit());
+        assert_eq!(admission::timeout(&store.connection).unwrap(), timeout);
+        assert!(store.history_after(0, 200).unwrap().is_empty());
+        store
+            .record_native_history("synthetic.committed", "{}")
+            .unwrap();
+        assert_eq!(admission::timeout(&store.connection).unwrap(), timeout);
+        assert_eq!(store.history_after(0, 200).unwrap().len(), 1);
+        let failed: Result<(), Error> = store.write(false, Error::from, |tx| {
+            insert_history(tx, "synthetic.rollback", "{}", 0)?;
+            Err(Error::Invalid("synthetic failure"))
+        });
+        assert!(failed.is_err());
+        assert_eq!(admission::timeout(&store.connection).unwrap(), timeout);
+        assert_eq!(store.history_after(0, 200).unwrap().len(), 1);
+        store.write_healthy.set(false);
+        assert!(store.record_native_history("rejected", "{}").is_err());
+        assert!(store.assign_with_history(input()).is_err());
+        assert!(store.seed_catalog("[]", "{}").is_err());
+    }
 
     #[test]
     fn colliding_history_without_metadata_is_not_adopted_or_stamped() {
@@ -604,6 +750,130 @@ mod tests {
         );
         assert_eq!(s.history_after(0, 200).unwrap(), before);
     }
+    fn assert_busy(error: Error) {
+        assert!(
+            matches!(
+                error,
+                Error::Database(rusqlite::Error::SqliteFailure(
+                    rusqlite::ffi::Error {
+                        code: rusqlite::ErrorCode::DatabaseBusy,
+                        ..
+                    },
+                    _
+                ))
+            ),
+            "expected SQLITE_BUSY, got {error:?}"
+        );
+    }
+
+    // Locks are held synchronously, not via sleeps or scheduler timing. Only
+    // these negative-test connections fail fast; production and stress-test
+    // connections retain the configured five-second busy timeout and EXTRA sync.
+    #[test]
+    fn busy_begin_preserves_assignment_and_history_then_explicit_retry_commits_once() {
+        let p = path("busy-begin");
+        let mut store = FoundryStore::open(&p).unwrap();
+        let original = store.assign_with_history(input()).unwrap();
+        let before = store.history_after(0, 200).unwrap();
+        assert_eq!(
+            store
+                .connection
+                .query_row("PRAGMA busy_timeout", [], |r| r.get::<_, i64>(0))
+                .unwrap(),
+            5000
+        );
+        store
+            .connection
+            .busy_timeout(std::time::Duration::ZERO)
+            .unwrap();
+        let blocker = Connection::open(&p).unwrap();
+        blocker.execute_batch("BEGIN IMMEDIATE;").unwrap();
+        let mut changed = input();
+        changed.label = "Explicit retry after known rollback".into();
+        assert_busy(store.assign_with_history(changed.clone()).unwrap_err());
+        assert!(store.connection.is_autocommit());
+        assert_eq!(
+            store
+                .room_soundtrack("synthetic.theme", "synthetic.room")
+                .unwrap(),
+            Some(original)
+        );
+        assert_eq!(store.history_after(0, 200).unwrap(), before);
+        blocker.execute_batch("ROLLBACK;").unwrap();
+        let saved = store.assign_with_history(changed).unwrap();
+        let events = store.history_after(0, 200).unwrap();
+        assert_eq!(events.len(), 2);
+        assert_eq!(events[0], before[0]);
+        assert_eq!(events[1].id_text, "2");
+        assert_eq!(
+            serde_json::from_str::<RoomSoundtrack>(&events[1].payload_json).unwrap(),
+            saved
+        );
+    }
+
+    #[test]
+    fn busy_commit_rolls_back_both_assignment_and_history() {
+        let p = path("busy-commit");
+        let mut store = FoundryStore::open(&p).unwrap();
+        assert_eq!(
+            store
+                .connection
+                .query_row("PRAGMA journal_mode", [], |r| r.get::<_, String>(0))
+                .unwrap(),
+            "delete"
+        );
+        let original = store.assign_with_history(input()).unwrap();
+        let before = store.history_after(0, 200).unwrap();
+        store
+            .connection
+            .busy_timeout(std::time::Duration::ZERO)
+            .unwrap();
+        let reader = Connection::open(&p).unwrap();
+        reader.execute_batch("BEGIN;").unwrap();
+        // Materialize a SHARED lock and retain it until ROLLBACK. BEGIN
+        // IMMEDIATE and these small writes can proceed, but COMMIT cannot
+        // acquire the EXCLUSIVE lock while this reader remains active.
+        let count: i64 = reader
+            .query_row("SELECT count(*) FROM foundry_history", [], |r| r.get(0))
+            .unwrap();
+        assert_eq!(count, 1);
+        let mut changed = input();
+        changed.label = "Must rollback at commit".into();
+        assert_busy(store.assign_with_history(changed.clone()).unwrap_err());
+        assert!(store.connection.is_autocommit());
+        reader.execute_batch("ROLLBACK;").unwrap();
+        assert_eq!(
+            store
+                .room_soundtrack("synthetic.theme", "synthetic.room")
+                .unwrap(),
+            Some(original)
+        );
+        assert_eq!(store.history_after(0, 200).unwrap(), before);
+        let saved = store.assign_with_history(changed).unwrap();
+        let events = store.history_after(0, 200).unwrap();
+        assert_eq!(events.len(), 2);
+        assert_eq!(events[0], before[0]);
+        assert_eq!(events[1].id_text, "2");
+        assert_eq!(
+            serde_json::from_str::<RoomSoundtrack>(&events[1].payload_json).unwrap(),
+            saved
+        );
+        assert_eq!(
+            store
+                .connection
+                .query_row("PRAGMA synchronous", [], |r| r.get::<_, i64>(0))
+                .unwrap(),
+            3
+        );
+        assert_eq!(
+            store
+                .connection
+                .query_row("PRAGMA integrity_check", [], |r| r.get::<_, String>(0))
+                .unwrap(),
+            "ok"
+        );
+    }
+
     #[test]
     fn unrelated_tables_and_existing_wal_mode_are_preserved() {
         let p = path("coexist");
@@ -704,7 +974,13 @@ mod tests {
                         let mut a = input();
                         a.theme_id = format!("synthetic.theme.{i}");
                         a.label = format!("synthetic update {iteration}");
-                        store.assign_with_history(a).unwrap();
+                        let started = std::time::Instant::now();
+                        store.assign_with_history(a).unwrap_or_else(|error| {
+                            panic!(
+                                "writer={i} iteration={iteration} elapsed={:?} error={error:?}",
+                                started.elapsed()
+                            )
+                        });
                     }
                 })
             })

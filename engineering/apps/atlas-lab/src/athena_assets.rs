@@ -174,14 +174,30 @@ impl RuntimeAssets {
 mod tests {
     use super::*;
     fn fixture() -> std::path::PathBuf {
-        let root = std::env::temp_dir().join(format!(
-            "athena-assets-{}-{}",
-            std::process::id(),
+        fixture_at(
             std::time::SystemTime::now()
                 .duration_since(std::time::UNIX_EPOCH)
                 .unwrap()
-                .as_nanos()
-        ));
+                .as_nanos(),
+        )
+    }
+
+    fn fixture_at(timestamp: u128) -> std::path::PathBuf {
+        static NEXT_FIXTURE: std::sync::atomic::AtomicU64 = std::sync::atomic::AtomicU64::new(0);
+        let root = loop {
+            let sequence = NEXT_FIXTURE.fetch_add(1, std::sync::atomic::Ordering::Relaxed);
+            let candidate = std::env::temp_dir().join(format!(
+                "athena-assets-{}-{timestamp}-{sequence}",
+                std::process::id(),
+            ));
+            // Reserve ownership before writing children; never adopt another
+            // fixture's directory, even with equal clock ticks or stale roots.
+            match std::fs::create_dir(&candidate) {
+                Ok(()) => break candidate,
+                Err(error) if error.kind() == std::io::ErrorKind::AlreadyExists => continue,
+                Err(error) => panic!("could not reserve runtime asset fixture: {error}"),
+            }
+        };
         std::fs::create_dir_all(root.join("workspaces/engineering/lab")).unwrap();
         let files = [
             ("index.html", "<title>Athena</title>"),
@@ -203,6 +219,49 @@ mod tests {
         .unwrap();
         root
     }
+    #[test]
+    fn concurrent_fixed_clock_fixtures_remain_isolated() {
+        const COUNT: usize = 8;
+        let barrier = std::sync::Arc::new(std::sync::Barrier::new(COUNT));
+        let workers: Vec<_> = (0..COUNT)
+            .map(|_| {
+                let barrier = barrier.clone();
+                std::thread::spawn(move || {
+                    barrier.wait();
+                    // Model a coarse clock: every concurrent caller sees one tick.
+                    fixture_at(123_456_789)
+                })
+            })
+            .collect();
+        let roots: Vec<_> = workers
+            .into_iter()
+            .map(|worker| worker.join().unwrap())
+            .collect();
+        let unique: std::collections::HashSet<_> = roots.iter().collect();
+        assert_eq!(
+            unique.len(),
+            COUNT,
+            "fixtures must own distinct directories"
+        );
+        for root in &roots {
+            RuntimeAssets::load(root).unwrap();
+        }
+        std::fs::write(roots[0].join("app.js"), b"corrupted").unwrap();
+        assert_eq!(
+            RuntimeAssets::load(&roots[0]).err().as_deref(),
+            Some("Runtime asset hash or size mismatch")
+        );
+        for root in &roots[1..] {
+            RuntimeAssets::load(root).unwrap();
+        }
+        std::fs::remove_dir_all(&roots[0]).unwrap();
+        for root in &roots[1..] {
+            let loaded = RuntimeAssets::load(root).unwrap();
+            assert_eq!(&*loaded.get("/app.js").unwrap().bytes, b"'use strict';");
+            std::fs::remove_dir_all(root).unwrap();
+        }
+    }
+
     // A complete, deterministic stored ZIP with one README entry. Loading is
     // byte serving only: the runtime neither extracts nor executes its contents.
     const ZIP_BYTES: &[u8] = b"PK\x03\x04\x14\x00\x00\x00\x00\x00\x00\x00g]\xdd\x0b6M\x17\x00\x00\x00\x17\x00\x00\x00\x0a\x00\x00\x00README.txtOffline practice only.\x0aPK\x01\x02\x14\x03\x14\x00\x00\x00\x00\x00\x00\x00g]\xdd\x0b6M\x17\x00\x00\x00\x17\x00\x00\x00\x0a\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x80\x01\x00\x00\x00\x00README.txtPK\x05\x06\x00\x00\x00\x00\x01\x00\x01\x008\x00\x00\x00?\x00\x00\x00\x00\x00";
