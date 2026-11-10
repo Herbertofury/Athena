@@ -21,6 +21,7 @@ export function validateFixture(data) {
     ids.add(card.id);
     const source = safeSourceUrl(card.source);
     if (!source || new URL(source).hostname !== SOURCE_HOSTS[card.provider]) throw Error('Disallowed provider source link');
+    if(card.provider==='Steam') validateSteamCardIdentity(card, source);
     if(card.provider==='YouTube') validateYouTubeCardIdentity(card, source);
     if(card.provider==='Bilibili'){if(card.cover!==null||card.cover_status!=='official-player-only'||card.gallery.length!==0||card.videos.length!==1)throw Error('Unverified Bilibili cover or media scope');}
     else if (!providerOwnsHost(card.cover, card.provider)) throw Error('Disallowed cover host');
@@ -72,4 +73,14 @@ function validateYouTubeCardIdentity(card, source) {
   for(const media of card.gallery)
     if(thumbnailId(media?.preview)!==video.id||thumbnailId(media?.original)!==video.id)
       throw Error('Mismatched YouTube gallery identity');
+}
+
+// App cards use the canonical Steam AppID namespace. A provider-owned host
+// alone does not bind an app card to its advertised source action. This does
+// not establish ownership of CDN assets, library access or playable trailers.
+function validateSteamCardIdentity(card, source) {
+  const identity=/^steam:([1-9][0-9]*)$/.exec(card.id);
+  const pathId=/^\/app\/([1-9][0-9]*)(?:\/|$)/.exec(new URL(source).pathname);
+  if(!identity||!pathId||identity[1]!==pathId[1])
+    throw Error('Mismatched Steam source and card identity');
 }
