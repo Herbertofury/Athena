@@ -1,6 +1,6 @@
 //! Local-only catalog parity. Original SQL projections and upserts, isolated namespace.
 use super::{Error, FoundryStore};
-use rusqlite::{Connection, OptionalExtension, TransactionBehavior, params};
+use rusqlite::{Connection, OptionalExtension, params};
 use serde::Serialize;
 use serde_json::Value;
 pub const MAX_CATALOG_BYTES: usize = 16 * 1024 * 1024;
@@ -96,11 +96,8 @@ impl FoundryStore {
         if packages_json.len() > MAX_CATALOG_BYTES || artists_json.len() > MAX_CATALOG_BYTES {
             return Err("Catalog exceeds 16 MiB per document".into());
         }
-        let transaction = self
-            .connection
-            .transaction_with_behavior(TransactionBehavior::Immediate)
-            .map_err(|e| e.to_string())?;
-        initialize_schema(&transaction).map_err(|e| e.to_string())?;
+        self.write(false, |e| e.to_string(), |transaction| {
+        initialize_schema(transaction).map_err(|e| e.to_string())?;
         let packages: Value = serde_json::from_str(packages_json)
             .map_err(|error| format!("Embedded V33 catalog is invalid: {error}"))?;
         for package in packages
@@ -177,7 +174,8 @@ impl FoundryStore {
         ).map_err(|error| format!("Unable to seed music route: {error}"))?;
         }
 
-        transaction.commit().map_err(|e| e.to_string())
+        Ok(())
+        })
     }
     pub fn catalog_summary(&self) -> Result<CatalogSummary, String> {
         let transaction = self
@@ -352,7 +350,11 @@ mod tests {
         )
         .unwrap();
         tx.commit().unwrap();
-        FoundryStore { connection }
+        FoundryStore {
+            gate: crate::foundry_storage::admission::for_connection(&connection).unwrap(),
+            connection,
+            write_healthy: std::cell::Cell::new(true),
+        }
     }
     fn packages() -> String {
         json!([{"id":"synthetic.theme", "name":"Synthetic 雪", "packageVersion":"1", "materialLanguage":"paper", "motion":"gentle", "rooms":[{"id":"room", "districtId":"district", "name":"Room"}], "objects":[{"id":"object", "name":"Object", "role":"test", "material":"paper", "shape":"box"}]}]).to_string()

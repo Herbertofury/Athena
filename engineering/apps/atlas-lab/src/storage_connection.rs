@@ -6,6 +6,14 @@ pub(crate) fn configure(c: &Connection) -> rusqlite::Result<()> {
         return Err(rusqlite::Error::InvalidQuery);
     }
     c.busy_timeout(std::time::Duration::from_secs(5))?;
+    configure_with_current_busy_handler(c)
+}
+
+// Foundry admission installs a scoped deadline handler before configuration.
+pub(crate) fn configure_with_current_busy_handler(c: &Connection) -> rusqlite::Result<()> {
+    if !c.is_autocommit() {
+        return Err(rusqlite::Error::InvalidQuery);
+    }
     // EXTRA additionally synchronizes the directory after DELETE-journal unlink.
     // Do not silently migrate an existing database's journal mode.
     c.execute_batch("PRAGMA foreign_keys=ON; PRAGMA synchronous=EXTRA;")?;
