@@ -1,0 +1,79 @@
+name: Athena native platform checks
+on:
+  push:
+    paths:
+      - 'engineering/apps/atlas-lab/**'
+      - 'scripts/test_native_platform.py'
+      - 'scripts/package_app.py'
+      - 'config/runtime-public-preview.json'
+      - 'dist/**'
+      - '.github/workflows/athena-native-platform.yml'
+  pull_request:
+    paths:
+      - 'engineering/apps/atlas-lab/**'
+      - 'scripts/test_native_platform.py'
+      - 'scripts/package_app.py'
+      - 'config/runtime-public-preview.json'
+      - 'dist/**'
+      - '.github/workflows/athena-native-platform.yml'
+permissions:
+  contents: read
+jobs:
+  native:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-latest
+            target: x86_64-unknown-linux-gnu
+            binary: atlas-lab
+          - os: windows-latest
+            target: x86_64-pc-windows-msvc
+            binary: atlas-lab.exe
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 25
+    defaults:
+      run:
+        shell: bash
+    env:
+      CARGO_TARGET_DIR: ${{ github.workspace }}/native-target
+    steps:
+      - name: Preserve exact repository bytes on every platform
+        run: |
+          git config --global core.autocrlf false
+          git config --global core.eol lf
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Install exact official Rust toolchain
+        run: |
+          rustup toolchain install 1.99.1 --profile minimal --component clippy --component rustfmt
+          rustup target add --toolchain 1.99.1 ${{ matrix.target }}
+          rustc +1.99.1 -Vv
+          cmake --version
+      - name: Validate and build real native backend
+        working-directory: engineering/apps/atlas-lab
+        run: |
+          cargo +1.99.1 fmt -- --check
+          cargo +1.99.1 test --locked --target ${{ matrix.target }} --lib --bins
+          cargo +1.99.1 clippy --locked --target ${{ matrix.target }} --lib --bins -- -D warnings
+          cargo +1.99.1 build --locked --release --target ${{ matrix.target }} --bin atlas-lab
+      - name: Verify reviewed runtime package
+        run: python scripts/package_app.py --profile public-preview --allowlist config/runtime-public-preview.json --output native-test-runtime
+      - name: Exercise native HTTP startup and persistence without browser
+        run: |
+          python scripts/test_native_platform.py \
+            --binary "native-target/${{ matrix.target }}/release/${{ matrix.binary }}" \
+            --package native-test-runtime \
+            --output native-platform-results \
+            --source-commit "$(git rev-parse HEAD)"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: native-platform-${{ matrix.target }}
+          path: |
+            native-platform-results/*.json
+            native-platform-results/*.log
+          if-no-files-found: warn
+          retention-days: 14
