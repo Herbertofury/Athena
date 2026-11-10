@@ -197,21 +197,56 @@ fn snapshot_windows_ambiguous_paths_rejected() {
     }
 }
 #[test]
-fn snapshot_windows_directory_renamed_remains_anchored() {
+fn snapshot_windows_live_directory_rename_denied_until_store_closes() {
     let f = Fixture::new();
     let store = f.store();
     store.save(RAW).unwrap();
+    let directory_identity = inspect(&store.directory, true).unwrap();
+    let lock_identity = inspect(&store.lock, false).unwrap();
+    let original_entries = names(&f);
     let renamed = f.0.with_extension("moved");
-    fs::rename(&f.0, &renamed).unwrap();
-    // Replacing the old pathname must not redirect an already-open store.
-    fs::create_dir(&f.0).unwrap();
+
+    // Windows refuses directory relocation while the permanent sidecar has an
+    // open handle. Preserve that protective refusal, rather than relaxing share
+    // flags to reproduce Linux's live-rename behavior. Error 5 was observed in
+    // both first native jobs; unrelated fixture failures must not pass this test.
+    let error = fs::rename(&f.0, &renamed).expect_err("Live directory relocation must be refused");
+    assert_eq!(error.raw_os_error(), Some(ERROR_ACCESS_DENIED as i32));
+    assert!(!renamed.exists());
+    assert_eq!(inspect(&store.directory, true).unwrap(), directory_identity);
+    assert_eq!(inspect(&store.lock, false).unwrap(), lock_identity);
+    assert_eq!(names(&f), original_entries);
+    assert_eq!(
+        fs::read(f.0.join(SNAPSHOT_FILENAME)).unwrap(),
+        RAW.as_bytes()
+    );
+    assert_eq!(store.load().unwrap().as_deref(), Some(RAW));
+
+    // Check the original pathname still resolves to those same objects, not
+    // merely that the already-held handles remain live.
+    let reopened = f.store();
+    assert_eq!(reopened.identity, directory_identity);
+    assert_eq!(reopened.lock_identity, lock_identity);
+    drop(reopened);
     store.save("null").unwrap();
     assert_eq!(store.load().unwrap().as_deref(), Some("null"));
-    assert!(!f.0.join(SNAPSHOT_FILENAME).exists());
-    assert_eq!(fs::read(renamed.join(SNAPSHOT_FILENAME)).unwrap(), b"null");
+    assert_eq!(fs::read(f.0.join(SNAPSHOT_FILENAME)).unwrap(), b"null");
+    assert!(!renamed.exists());
+
+    // Causal control: once every store handle closes, require the exact same
+    // rename to work. A general path/permission failure cannot satisfy the test.
     drop(store);
+    fs::rename(&f.0, &renamed).unwrap();
+    assert!(!f.0.exists());
+    let moved = Store::open(&renamed).unwrap();
+    assert_eq!(moved.identity, directory_identity);
+    assert_eq!(moved.lock_identity, lock_identity);
+    assert_eq!(moved.load().unwrap().as_deref(), Some("null"));
+    assert_eq!(fs::read(renamed.join(SNAPSHOT_FILENAME)).unwrap(), b"null");
+    drop(moved);
     fs::remove_dir_all(renamed).unwrap();
 }
+
 #[test]
 fn snapshot_windows_reparse_components_and_destination_rejected() {
     let outside = Fixture::new();

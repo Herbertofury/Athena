@@ -14,8 +14,11 @@ root must have an exact normalized GUID-volume-root name; nested SUBST mappings
 are refused. Every directory is opened one component at a time through
 `NtCreateFile` with `RootDirectory` and `FILE_OPEN_REPARSE_POINT`, then inspected
 by handle. Case-sensitive directories, unknown case flags, and unavailable
-inspection queries fail closed. The final handle anchors subsequent I/O even
-when its original pathname changes.
+inspection queries fail closed. Subsequent I/O uses the retained final handle,
+not a re-resolved directory pathname. Live directory relocation is unsupported:
+Windows refuses the ordinary rename while the permanent sidecar is open. Closing
+all stores before moving the directory, then reopening its new explicit path,
+is required. No share flags are relaxed to make live relocation succeed.
 
 The final directory and snapshot/lock objects require the current effective
 user's SID as owner and a protected valid non-null DACL containing exactly one
@@ -61,7 +64,8 @@ replacement does not follow destination reparse points to an outside target and
 rejects unsafe collisions it encounters before commit.
 
 Native tests are present for exact bytes and boundary, invalid/oversize data,
-partial write and precommit failure, directory rename anchoring, hardlinks,
+partial write and precommit failure, live-directory-rename refusal and
+close/rename/reopen recovery, hardlinks,
 junction/file-symlink/dangling-symlink collisions, strict ACL and foreign owner,
 permanent lock, actual child-process contention, two writers with readers,
 crash lock release and crash after staging flush. All writable fixtures are
@@ -79,6 +83,30 @@ Still required before any production proposal:
 - Testing on the intended Windows versions and token types, not just a CI host.
 - Explicit treatment of actual power loss; this prototype promises only an honest
   unconfirmed-directory-sync receipt.
+
+## First native result and corrected platform expectation
+
+Both initial Windows MSVC jobs at exact head
+`8c97c4219b9277f7d83ceca1af4ca56a49e2df5d` passed 205 of 206 library tests.
+The sole failure was the test expecting a live directory rename to succeed;
+Windows returned error 5, `ERROR_ACCESS_DENIED`, at that rename. Both original
+failed logs are retained. This was not evidence of snapshot corruption.
+
+The registered **WINNTRENAME10** documentation says a directory cannot be renamed
+when it or its subdirectories contains a file with open handles, except for the
+stated batch-oplock exception. The held permanent sidecar makes Linux's successful
+live-relocation expectation inappropriate here. The corrected test requires the
+observed error 5 specifically; it checks unchanged directory and lock identities,
+entries, last-good bytes and absent destination, then continued save/load. After
+all store handles close, the same rename must succeed and reopening must retain
+both identities and exact snapshot bytes. That causal control prevents unrelated
+fixture permission failures from passing as protective behavior.
+
+Only the test and this documentation change for the correction. The backend and
+its share flags stay byte-identical. This is a documented platform limitation,
+not a claim that every hostile same-owner or POSIX rename mechanism is blocked.
+A new exact-head native run is still required to validate the corrected test;
+the first failures are not relabeled as passes.
 
 ## Reproduce and interpret evidence
 
