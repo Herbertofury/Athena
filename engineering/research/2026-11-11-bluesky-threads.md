@@ -8,7 +8,7 @@ The current [Bluesky adapter](../docs/adapters/bluesky.md) already handles full 
 
 The [thread experiment](../experiments/bluesky-thread-lab/README.md) reuses normalize_post from the existing adapter and the existing strict JSON decoder. It only consumes bounded supplied bytes. Transport, identity discovery, authentication and application rendering remain the responsibility of established clients and the consuming application. This is a focused evidence layer, not a replacement Bluesky SDK or scraper.
 
-This contribution is separate from the unpublished GitHub release-asset candidate. It begins from the unchanged remote research head and contains none of that candidate's files. It does not include or publish any part of that candidate. Publication status belongs to this distinct draft and handoff; no alternate route around the denied operation is used.
+This contribution is isolated to Bluesky thread evidence. It preserves all earlier provider work and does not include unrelated pending changes.
 
 ## Current official contracts
 
