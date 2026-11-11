@@ -1,0 +1,235 @@
+{
+  "schema_version": 1,
+  "evidence": "plan_only",
+  "status": "not_run",
+  "purpose": "Target-specific UI acceptance record; this template is not a validator or conformance certificate.",
+  "baseline": {
+    "source_revision": null,
+    "artifact_sha256": null
+  },
+  "candidate": {
+    "source_revision": null,
+    "artifact_sha256": null
+  },
+  "environment": {
+    "os_version": null,
+    "browser_or_webview_version": null,
+    "hardware": null,
+    "input_devices": null,
+    "assistive_technology_version": null,
+    "viewport_css_pixels": null,
+    "zoom_percent": null,
+    "device_pixel_ratio": null,
+    "reduced_motion": null
+  },
+  "workload": {
+    "identity_sha256": null,
+    "record_count": null,
+    "bytes_and_field_distribution": null,
+    "expected_complete_result_sha256": null,
+    "expected_source_identities": null,
+    "media_state": null,
+    "cache_network_condition": null
+  },
+  "protocol": {
+    "run_order": null,
+    "independent_run_count": null,
+    "warmups_separate": true,
+    "completion_boundary": null,
+    "observer_delivery_boundary": null,
+    "measurement_overhead": null,
+    "budgets_fixed_before_runs": null,
+    "security_feature_output_parity": null
+  },
+  "metrics": {
+    "feedback_ms": null,
+    "complete_usable_result_ms": null,
+    "durable_result_ms": null,
+    "observed_interaction_summary": null,
+    "field_inp_ms": null,
+    "scroll_frame_trace": null,
+    "layout_shift_trace": null,
+    "memory_measurement": null
+  },
+  "scenarios": [
+    {
+      "id": "cold-open",
+      "procedure": "Open the actual packaged artifact; verify complete initial records and usable controls.",
+      "status": "not_run",
+      "observations": null,
+      "raw_evidence": [],
+      "failure_attempts": []
+    },
+    {
+      "id": "warm-revisit",
+      "procedure": "Return to the workspace; verify the cache/freshness contract and full data.",
+      "status": "not_run",
+      "observations": null,
+      "raw_evidence": [],
+      "failure_attempts": []
+    },
+    {
+      "id": "rapid-search",
+      "procedure": "Type, clear, change query during work; only the current generation publishes.",
+      "status": "not_run",
+      "observations": null,
+      "raw_evidence": [],
+      "failure_attempts": []
+    },
+    {
+      "id": "sort-filter-details",
+      "procedure": "Sort and filter; stable identities, complete search/details and warnings survive.",
+      "status": "not_run",
+      "observations": null,
+      "raw_evidence": [],
+      "failure_attempts": []
+    },
+    {
+      "id": "repeated-activation",
+      "procedure": "Double click and repeated keyboard activation retain the intended single/multiple-action contract.",
+      "status": "not_run",
+      "observations": null,
+      "raw_evidence": [],
+      "failure_attempts": []
+    },
+    {
+      "id": "modal-keyboard",
+      "procedure": "Open, Tab, Shift-Tab, Escape and close; inspect actual focus, labels and background inertness.",
+      "status": "not_run",
+      "observations": null,
+      "raw_evidence": [],
+      "failure_attempts": []
+    },
+    {
+      "id": "stale-close-route",
+      "procedure": "Navigate during close; old events cannot restore focus into the old route.",
+      "status": "not_run",
+      "observations": null,
+      "raw_evidence": [],
+      "failure_attempts": []
+    },
+    {
+      "id": "removed-invoker",
+      "procedure": "Filter away or remove the invoker; close returns to a logical current target.",
+      "status": "not_run",
+      "observations": null,
+      "raw_evidence": [],
+      "failure_attempts": []
+    },
+    {
+      "id": "history-navigation",
+      "procedure": "Back/Forward preserves intended route/search/selection without stale writes.",
+      "status": "not_run",
+      "observations": null,
+      "raw_evidence": [],
+      "failure_attempts": []
+    },
+    {
+      "id": "reflow-zoom",
+      "procedure": "Inspect 320 CSS-pixel width or equivalent zoom; preserve content and functionality.",
+      "status": "not_run",
+      "observations": null,
+      "raw_evidence": [],
+      "failure_attempts": []
+    },
+    {
+      "id": "target-and-focus-visibility",
+      "procedure": "Measure target size/justified exception and visible focus under sticky content.",
+      "status": "not_run",
+      "observations": null,
+      "raw_evidence": [],
+      "failure_attempts": []
+    },
+    {
+      "id": "status-and-screen-reader",
+      "procedure": "Use declared assistive technology; meaningful status is announced without disruptive focus changes.",
+      "status": "not_run",
+      "observations": null,
+      "raw_evidence": [],
+      "failure_attempts": []
+    },
+    {
+      "id": "reduced-motion",
+      "procedure": "Disable non-essential motion; progress and completion remain understandable.",
+      "status": "not_run",
+      "observations": null,
+      "raw_evidence": [],
+      "failure_attempts": []
+    },
+    {
+      "id": "image-error-and-decode",
+      "procedure": "Inspect unrequested, loaded, decoded, failed and missing image states separately.",
+      "status": "not_run",
+      "observations": null,
+      "raw_evidence": [],
+      "failure_attempts": []
+    },
+    {
+      "id": "media-play-and-block",
+      "procedure": "Inspect actual playback, policy denial, unsupported source, cancellation and explicit retry.",
+      "status": "not_run",
+      "observations": null,
+      "raw_evidence": [],
+      "failure_attempts": []
+    },
+    {
+      "id": "media-filter-and-switch",
+      "procedure": "Filter/switch while playing; apply promised preservation or cleanup and reject stale events.",
+      "status": "not_run",
+      "observations": null,
+      "raw_evidence": [],
+      "failure_attempts": []
+    },
+    {
+      "id": "network-before-activation",
+      "procedure": "Record actual requests; enforce the declared remote-media activation policy.",
+      "status": "not_run",
+      "observations": null,
+      "raw_evidence": [],
+      "failure_attempts": []
+    },
+    {
+      "id": "scroll-and-density",
+      "procedure": "Scroll all records and revisit; measure frames, state, full-data access and useful information density.",
+      "status": "not_run",
+      "observations": null,
+      "raw_evidence": [],
+      "failure_attempts": []
+    },
+    {
+      "id": "memory-and-sustained-use",
+      "procedure": "Repeat complete flows with declared data/media state; track process/browser memory and retained state.",
+      "status": "not_run",
+      "observations": null,
+      "raw_evidence": [],
+      "failure_attempts": []
+    },
+    {
+      "id": "cancel-error-restart",
+      "procedure": "Interrupt work and restore/restart; keep last-good results and truthful failure/persistence states.",
+      "status": "not_run",
+      "observations": null,
+      "raw_evidence": [],
+      "failure_attempts": []
+    }
+  ],
+  "status_vocabulary": [
+    "not_run",
+    "blocked",
+    "unsupported",
+    "passed",
+    "failed"
+  ],
+  "acceptance": {
+    "decision": "not_evaluated",
+    "reviewer": null,
+    "remaining_gates": [
+      "Real browser input and observation",
+      "Manual accessibility and assistive technology",
+      "Complete card/media correctness",
+      "Equivalent-work target comparison",
+      "Installed artifact verification"
+    ],
+    "note": "No null metric means zero. An unsupported or blocked check is not a pass. Preserve every failed attempt."
+  }
+}
