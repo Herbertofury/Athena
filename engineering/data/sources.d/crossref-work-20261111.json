@@ -1,0 +1,112 @@
+[
+  {
+    "id": "CRF11001",
+    "title": "Crossref REST API scope",
+    "url": "https://www.crossref.org/documentation/retrieve-metadata/rest-api/",
+    "observed_version": "Current documentation checked 2026-11-11",
+    "topic": "crossref-work-evidence",
+    "note": "Public scholarly metadata is deposited by members and trusted sources. Singleton DOI records are metadata, not retrieved full text. Some abstracts can have separate copyright restrictions.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 60,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "CRF11002",
+    "title": "Crossref API access and authentication",
+    "url": "https://www.crossref.org/documentation/retrieve-metadata/rest-api/access-and-authentication/",
+    "observed_version": "Current page checked 2026-11-11; displayed update 2025-10-16",
+    "topic": "crossref-work-evidence",
+    "note": "Anonymous public access requires no registration. Public limit shown as five requests per second with concurrency one; actual captures advertise those values. No email address, token or private identity supplied.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 60,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "CRF11003",
+    "title": "Crossref API retrieval tips and date semantics",
+    "url": "https://www.crossref.org/documentation/retrieve-metadata/rest-api/tips-for-using-the-crossref-rest-api/",
+    "observed_version": "Current page checked 2026-11-11; displayed update 2025-10-24",
+    "topic": "crossref-work-evidence",
+    "note": "Created, updated/deposited and indexed activity differ from publication. Indexing may include relation/citation changes. Cache observations. Crossref-developed crossref-commons is an existing client option for future transport work, not installed here.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 60,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "CRF11004",
+    "title": "Crossref post-publication updates",
+    "url": "https://www.crossref.org/documentation/register-maintain-records/maintaining-your-metadata/registering-updates/",
+    "observed_version": "Current documentation checked 2026-11-11",
+    "topic": "crossref-work-evidence",
+    "note": "Updates link notices to the affected work with a specific type. Correction, retraction and other updates are not interchangeable. Actual API pair separately verifies reciprocal update-to and updated-by fields.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 60,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "CRF11005",
+    "title": "Crossref typed relationships",
+    "url": "https://www.crossref.org/documentation/schema-library/markup-guide-metadata-segments/relationships/",
+    "observed_version": "Current documentation checked 2026-11-11",
+    "topic": "crossref-work-evidence",
+    "note": "Relationship type, identifier type and assertion provenance are separate. Relations can link data, software, reviews, preprints and other works; preserve the deposited direction and claim rather than infer ownership or article structure.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 60,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "CRF11006",
+    "title": "Crossref staff clarification of JATS and other markup",
+    "url": "https://community.crossref.org/t/jats-elements-in-abstract-is-this-the-expected-behaviour/6069",
+    "observed_version": "Staff responses 2024-06 and 2025-09; checked 2026-11-11",
+    "topic": "crossref-work-evidence",
+    "note": "Abstracts can carry JATS; MathML and simple formatting can survive in other metadata strings. Source errors can also pass through. Preserve exact strings and keep diagnostic text projection separate from source fidelity.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 60,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "CRF11007",
+    "title": "Historical Crossref metadata format",
+    "url": "https://github.com/CrossRef/rest-api-doc/blob/00b1cc2c90e62d49c82f5381710590a6d9ca53ff/api_format.md",
+    "observed_version": "Deprecated repository pinned at 00b1cc2c90e62d49c82f5381710590a6d9ca53ff dated 2024-09-25",
+    "topic": "crossref-work-evidence",
+    "note": "Historical nested-field reference only. Its required-field and timestamp-unit descriptions are not treated as current guarantees. Current docs and actual captured field shapes constrain this experiment.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 60,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "CRF11008",
+    "title": "Crossref public observation: software-citation",
+    "url": "https://api.crossref.org/works/10.7717/peerj-cs.86",
+    "observed_version": "Anonymous bounded HTTP 200 capture 2026-11-11",
+    "topic": "crossref-work-evidence",
+    "note": "15425 response bytes; SHA256 134cc65c0df3f8e66537466033da40b5c81f615a70ec77ba1b62e610a7129ca6. Metadata-only acquisition; no referenced document, DOI landing page, resource link, license page or media followed from the response.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 60,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "CRF11009",
+    "title": "Crossref public observation: scipy-original",
+    "url": "https://api.crossref.org/works/10.1038/s41592-019-0686-2",
+    "observed_version": "Anonymous bounded HTTP 200 capture 2026-11-11",
+    "topic": "crossref-work-evidence",
+    "note": "52592 response bytes; SHA256 d194699ee731c4f18a616bbc1d5cfbeb9499b6d2df609cbd23824fafb52903c9. Metadata-only acquisition; no referenced document, DOI landing page, resource link, license page or media followed from the response.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 60,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "CRF11010",
+    "title": "Crossref public observation: scipy-correction",
+    "url": "https://api.crossref.org/works/10.1038/s41592-020-0772-5",
+    "observed_version": "Anonymous bounded HTTP 200 capture 2026-11-11",
+    "topic": "crossref-work-evidence",
+    "note": "8419 response bytes; SHA256 424c2300fdbabba642cb191abab5d3bd5f1568eb4cbbcee179915c66753dcaae. Metadata-only acquisition; no referenced document, DOI landing page, resource link, license page or media followed from the response.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 60,
+    "evidence": "primary_documented"
+  }
+]

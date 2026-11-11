@@ -1,0 +1,591 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-11-11",
+  "sourceBaseCommit": "7ba88d30229f3073c9aa738f087b9199ffae16ae",
+  "classification": "actual anonymous public Crossref singleton metadata captures and offline typed-card replay",
+  "python": "3.12.14",
+  "sourceIds": [
+    "CRF11001",
+    "CRF11002",
+    "CRF11003",
+    "CRF11004",
+    "CRF11005",
+    "CRF11006",
+    "CRF11007",
+    "CRF11008",
+    "CRF11009",
+    "CRF11010"
+  ],
+  "historicalReference": {
+    "commit": "00b1cc2c90e62d49c82f5381710590a6d9ca53ff",
+    "commitDate": "2024-09-25",
+    "deprecated": true,
+    "currentDocumentationCheckedAt": "2026-11-11"
+  },
+  "implementationSha256": {
+    "work.py": "4c4f34fe32a79e77d39e39ecb836d58aefc222e440c3babec95802e5686e5fe6",
+    "extractors.py": "2ca3ff4b1645930709ca58eb37f742cca917df4c78dc93ab9c7008475659d188"
+  },
+  "captureCount": 3,
+  "capturedBytes": 76436,
+  "captures": [
+    {
+      "captureName": "software-citation",
+      "capturedAt": "2026-11-11T09:49:34.261790+00:00",
+      "status": 200,
+      "bytes": 15425,
+      "sha256": "134cc65c0df3f8e66537466033da40b5c81f615a70ec77ba1b62e610a7129ca6",
+      "complete": true
+    },
+    {
+      "captureName": "scipy-original",
+      "capturedAt": "2026-11-11T09:50:48.481743+00:00",
+      "status": 200,
+      "bytes": 52592,
+      "sha256": "d194699ee731c4f18a616bbc1d5cfbeb9499b6d2df609cbd23824fafb52903c9",
+      "complete": true
+    },
+    {
+      "captureName": "scipy-correction",
+      "capturedAt": "2026-11-11T09:50:53.885638+00:00",
+      "status": 200,
+      "bytes": 8419,
+      "sha256": "424c2300fdbabba642cb191abab5d3bd5f1568eb4cbbcee179915c66753dcaae",
+      "complete": true
+    }
+  ],
+  "cases": [
+    {
+      "case": "software-citation",
+      "replay": {
+        "schema": "crossref-work-receipt-v1",
+        "selectedDoiSha256": "0535b9a457b5866478d6a3b10ba19b6f7c84d9bb86fc55ac3ecabc50fce15add",
+        "observations": [
+          {
+            "index": 0,
+            "bodySha256": "134cc65c0df3f8e66537466033da40b5c81f615a70ec77ba1b62e610a7129ca6",
+            "bodyBytes": 15425,
+            "error": null,
+            "acceptedSingleton": true,
+            "httpStatus": 200,
+            "captureComplete": true,
+            "requestUrlSha256": "622ac3fd429f4d9be4f12d3e663f8712a1908b85b9a6e097d7899821ee9a8002",
+            "finalUrlSha256": "622ac3fd429f4d9be4f12d3e663f8712a1908b85b9a6e097d7899821ee9a8002",
+            "titles": {
+              "title": {
+                "state": "present",
+                "count": 1
+              },
+              "subtitle": {
+                "state": "empty",
+                "count": 0
+              },
+              "original-title": {
+                "state": "empty",
+                "count": 0
+              },
+              "short-title": {
+                "state": "empty",
+                "count": 0
+              },
+              "container-title": {
+                "state": "present",
+                "count": 1
+              },
+              "short-container-title": {
+                "state": "empty",
+                "count": 0
+              }
+            },
+            "authors": {
+              "state": "present",
+              "count": 4
+            },
+            "abstract": {
+              "state": "present",
+              "sha256": "b5824231d33ac38b140c46c8427a9f336128944515da852eb61ef04d68905666",
+              "bytes": 1039,
+              "projectionState": "xml_diagnostic",
+              "projectionComplete": false,
+              "safeRender": false
+            },
+            "dates": {
+              "published": {
+                "state": "present",
+                "dateParts": {
+                  "state": "present",
+                  "count": 1
+                },
+                "precisions": [
+                  "day"
+                ],
+                "dateTimeState": "missing",
+                "timestampState": "missing"
+              },
+              "issued": {
+                "state": "present",
+                "dateParts": {
+                  "state": "present",
+                  "count": 1
+                },
+                "precisions": [
+                  "day"
+                ],
+                "dateTimeState": "missing",
+                "timestampState": "missing"
+              },
+              "published-online": {
+                "state": "present",
+                "dateParts": {
+                  "state": "present",
+                  "count": 1
+                },
+                "precisions": [
+                  "day"
+                ],
+                "dateTimeState": "missing",
+                "timestampState": "missing"
+              },
+              "published-print": {
+                "state": "missing"
+              },
+              "created": {
+                "state": "present",
+                "dateParts": {
+                  "state": "present",
+                  "count": 1
+                },
+                "precisions": [
+                  "day"
+                ],
+                "dateTimeState": "present",
+                "timestampState": "present"
+              },
+              "deposited": {
+                "state": "present",
+                "dateParts": {
+                  "state": "present",
+                  "count": 1
+                },
+                "precisions": [
+                  "day"
+                ],
+                "dateTimeState": "present",
+                "timestampState": "present"
+              },
+              "indexed": {
+                "state": "present",
+                "dateParts": {
+                  "state": "present",
+                  "count": 1
+                },
+                "precisions": [
+                  "day"
+                ],
+                "dateTimeState": "present",
+                "timestampState": "present"
+              }
+            },
+            "updateTo": {
+              "state": "missing"
+            },
+            "updatedBy": {
+              "state": "missing"
+            },
+            "relations": {
+              "state": "present",
+              "count": 4
+            },
+            "licenses": {
+              "state": "present",
+              "count": 1
+            },
+            "links": {
+              "state": "present",
+              "count": 4
+            }
+          }
+        ],
+        "conflictingObservations": false,
+        "gates": {
+          "authorIdentityVerified": false,
+          "fullTextRetrieved": false,
+          "licenseRightsVerified": false,
+          "publicationRecencyVerified": false,
+          "safeRenderingAccepted": false,
+          "completeMediaAccepted": false,
+          "targetAccepted": false
+        }
+      },
+      "abstractEventCount": 3,
+      "abstractSourcePreserved": true
+    },
+    {
+      "case": "scipy-original",
+      "replay": {
+        "schema": "crossref-work-receipt-v1",
+        "selectedDoiSha256": "ffd3f311ccd65c79973edc93c80d945d4ab28c42c9a83c9abdad6ca17e6bd069",
+        "observations": [
+          {
+            "index": 0,
+            "bodySha256": "d194699ee731c4f18a616bbc1d5cfbeb9499b6d2df609cbd23824fafb52903c9",
+            "bodyBytes": 52592,
+            "error": null,
+            "acceptedSingleton": true,
+            "httpStatus": 200,
+            "captureComplete": true,
+            "requestUrlSha256": "428f3f48ad742d70ee7ee805bf51d7f40efae94961fc5289f3f2484122aa66db",
+            "finalUrlSha256": "428f3f48ad742d70ee7ee805bf51d7f40efae94961fc5289f3f2484122aa66db",
+            "titles": {
+              "title": {
+                "state": "present",
+                "count": 1
+              },
+              "subtitle": {
+                "state": "empty",
+                "count": 0
+              },
+              "original-title": {
+                "state": "empty",
+                "count": 0
+              },
+              "short-title": {
+                "state": "empty",
+                "count": 0
+              },
+              "container-title": {
+                "state": "present",
+                "count": 1
+              },
+              "short-container-title": {
+                "state": "present",
+                "count": 1
+              }
+            },
+            "authors": {
+              "state": "present",
+              "count": 112
+            },
+            "abstract": {
+              "state": "present",
+              "sha256": "fa03b0db6e2f2b81264b0fccb6fa37badeab8fcc901d5cbb610dffaacd3d8438",
+              "bytes": 569,
+              "projectionState": "xml_diagnostic",
+              "projectionComplete": false,
+              "safeRender": false
+            },
+            "dates": {
+              "published": {
+                "state": "present",
+                "dateParts": {
+                  "state": "present",
+                  "count": 1
+                },
+                "precisions": [
+                  "day"
+                ],
+                "dateTimeState": "missing",
+                "timestampState": "missing"
+              },
+              "issued": {
+                "state": "present",
+                "dateParts": {
+                  "state": "present",
+                  "count": 1
+                },
+                "precisions": [
+                  "day"
+                ],
+                "dateTimeState": "missing",
+                "timestampState": "missing"
+              },
+              "published-online": {
+                "state": "present",
+                "dateParts": {
+                  "state": "present",
+                  "count": 1
+                },
+                "precisions": [
+                  "day"
+                ],
+                "dateTimeState": "missing",
+                "timestampState": "missing"
+              },
+              "published-print": {
+                "state": "present",
+                "dateParts": {
+                  "state": "present",
+                  "count": 1
+                },
+                "precisions": [
+                  "day"
+                ],
+                "dateTimeState": "missing",
+                "timestampState": "missing"
+              },
+              "created": {
+                "state": "present",
+                "dateParts": {
+                  "state": "present",
+                  "count": 1
+                },
+                "precisions": [
+                  "day"
+                ],
+                "dateTimeState": "present",
+                "timestampState": "present"
+              },
+              "deposited": {
+                "state": "present",
+                "dateParts": {
+                  "state": "present",
+                  "count": 1
+                },
+                "precisions": [
+                  "day"
+                ],
+                "dateTimeState": "present",
+                "timestampState": "present"
+              },
+              "indexed": {
+                "state": "present",
+                "dateParts": {
+                  "state": "present",
+                  "count": 1
+                },
+                "precisions": [
+                  "day"
+                ],
+                "dateTimeState": "present",
+                "timestampState": "present"
+              }
+            },
+            "updateTo": {
+              "state": "missing"
+            },
+            "updatedBy": {
+              "state": "present",
+              "count": 1
+            },
+            "relations": {
+              "state": "present",
+              "count": 6
+            },
+            "licenses": {
+              "state": "present",
+              "count": 2
+            },
+            "links": {
+              "state": "present",
+              "count": 3
+            }
+          }
+        ],
+        "conflictingObservations": false,
+        "gates": {
+          "authorIdentityVerified": false,
+          "fullTextRetrieved": false,
+          "licenseRightsVerified": false,
+          "publicationRecencyVerified": false,
+          "safeRenderingAccepted": false,
+          "completeMediaAccepted": false,
+          "targetAccepted": false
+        }
+      },
+      "abstractEventCount": 7,
+      "abstractSourcePreserved": true
+    },
+    {
+      "case": "scipy-correction",
+      "replay": {
+        "schema": "crossref-work-receipt-v1",
+        "selectedDoiSha256": "f4fc0079c054282abeebd87f7f641649312a0bd8d16de33db9d9ea667f3a6633",
+        "observations": [
+          {
+            "index": 0,
+            "bodySha256": "424c2300fdbabba642cb191abab5d3bd5f1568eb4cbbcee179915c66753dcaae",
+            "bodyBytes": 8419,
+            "error": null,
+            "acceptedSingleton": true,
+            "httpStatus": 200,
+            "captureComplete": true,
+            "requestUrlSha256": "eb9677c5520090ccb0c3e7dcb498d43181f3425d76d7fca84bb9382663876c09",
+            "finalUrlSha256": "eb9677c5520090ccb0c3e7dcb498d43181f3425d76d7fca84bb9382663876c09",
+            "titles": {
+              "title": {
+                "state": "present",
+                "count": 1
+              },
+              "subtitle": {
+                "state": "empty",
+                "count": 0
+              },
+              "original-title": {
+                "state": "empty",
+                "count": 0
+              },
+              "short-title": {
+                "state": "empty",
+                "count": 0
+              },
+              "container-title": {
+                "state": "present",
+                "count": 1
+              },
+              "short-container-title": {
+                "state": "present",
+                "count": 1
+              }
+            },
+            "authors": {
+              "state": "present",
+              "count": 35
+            },
+            "abstract": {
+              "state": "present",
+              "sha256": "5668a99134ec69dc840cd9ff70726b23d87084a02c443c8bcffc1b4ab9bd0cbe",
+              "bytes": 118,
+              "projectionState": "xml_diagnostic",
+              "projectionComplete": false,
+              "safeRender": false
+            },
+            "dates": {
+              "published": {
+                "state": "present",
+                "dateParts": {
+                  "state": "present",
+                  "count": 1
+                },
+                "precisions": [
+                  "day"
+                ],
+                "dateTimeState": "missing",
+                "timestampState": "missing"
+              },
+              "issued": {
+                "state": "present",
+                "dateParts": {
+                  "state": "present",
+                  "count": 1
+                },
+                "precisions": [
+                  "day"
+                ],
+                "dateTimeState": "missing",
+                "timestampState": "missing"
+              },
+              "published-online": {
+                "state": "present",
+                "dateParts": {
+                  "state": "present",
+                  "count": 1
+                },
+                "precisions": [
+                  "day"
+                ],
+                "dateTimeState": "missing",
+                "timestampState": "missing"
+              },
+              "published-print": {
+                "state": "present",
+                "dateParts": {
+                  "state": "present",
+                  "count": 1
+                },
+                "precisions": [
+                  "month"
+                ],
+                "dateTimeState": "missing",
+                "timestampState": "missing"
+              },
+              "created": {
+                "state": "present",
+                "dateParts": {
+                  "state": "present",
+                  "count": 1
+                },
+                "precisions": [
+                  "day"
+                ],
+                "dateTimeState": "present",
+                "timestampState": "present"
+              },
+              "deposited": {
+                "state": "present",
+                "dateParts": {
+                  "state": "present",
+                  "count": 1
+                },
+                "precisions": [
+                  "day"
+                ],
+                "dateTimeState": "present",
+                "timestampState": "present"
+              },
+              "indexed": {
+                "state": "present",
+                "dateParts": {
+                  "state": "present",
+                  "count": 1
+                },
+                "precisions": [
+                  "day"
+                ],
+                "dateTimeState": "present",
+                "timestampState": "present"
+              }
+            },
+            "updateTo": {
+              "state": "present",
+              "count": 1
+            },
+            "updatedBy": {
+              "state": "missing"
+            },
+            "relations": {
+              "state": "present",
+              "count": 1
+            },
+            "licenses": {
+              "state": "present",
+              "count": 2
+            },
+            "links": {
+              "state": "present",
+              "count": 3
+            }
+          }
+        ],
+        "conflictingObservations": false,
+        "gates": {
+          "authorIdentityVerified": false,
+          "fullTextRetrieved": false,
+          "licenseRightsVerified": false,
+          "publicationRecencyVerified": false,
+          "safeRenderingAccepted": false,
+          "completeMediaAccepted": false,
+          "targetAccepted": false
+        }
+      },
+      "abstractEventCount": 3,
+      "abstractSourcePreserved": true
+    }
+  ],
+  "actualComparisons": {
+    "reciprocalCorrectionPointersMatch": true,
+    "bothUpdateTypesCorrection": true,
+    "bothUpdateSourcesPublisher": true,
+    "originalAndCorrectionAuthorsKeptSeparate": true,
+    "correctionPrintPrecision": "month",
+    "correctionOnlinePrecision": "day",
+    "publicationAndIndexDatesDifferInEveryRecord": true,
+    "timestampValuesPreservedWithoutUnitConversion": true
+  },
+  "networkUsedByNormalizer": false,
+  "credentialsUsed": false,
+  "emailIdentityShared": false,
+  "fullTextRequests": 0,
+  "resourceLinkRequests": 0,
+  "mediaBytesFetched": 0,
+  "liveRestrictedAccessObserved": false
+}

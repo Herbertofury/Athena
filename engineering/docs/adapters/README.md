@@ -45,6 +45,8 @@ The [author, post, media and follow contract](author-post-media-contract.md) def
 
 ## Existing platform workbenches and retained evidence
 
+- [Crossref research cards](crossref.md): DOI-bound metadata, abstract fidelity, precise dates and directional update/relation evidence from three real public records.
+
 - [Patreon](patreon.md)
 - [Afdian](afdian.md)
 - [YouTube](youtube.md)
