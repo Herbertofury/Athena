@@ -1,0 +1,68 @@
+[
+  {
+    "id": "WPC11001",
+    "title": "WordPress Pagination",
+    "url": "https://developer.wordpress.org/rest-api/using-the-rest-api/pagination/",
+    "observed_version": "Handbook last updated 2026-10-14",
+    "topic": "wordpress-collection-evidence",
+    "note": "Page size limits and collection total headers; no stable-snapshot promise.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 60,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "WPC11002",
+    "title": "WordPress Posts reference",
+    "url": "https://developer.wordpress.org/rest-api/reference/posts/",
+    "observed_version": "Served reference inspected 2026-11-11",
+    "topic": "wordpress-collection-evidence",
+    "note": "Post schema, public collection filters and view context.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 60,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "WPC11003",
+    "title": "WordPress Linking and embedding",
+    "url": "https://developer.wordpress.org/rest-api/using-the-rest-api/linking-and-embedding/",
+    "observed_version": "Handbook last updated 2026-10-14",
+    "topic": "wordpress-collection-evidence",
+    "note": "Embedded resources, placeholders and embedded collection limits.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 60,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "WPC11004",
+    "title": "WordPress Global parameters",
+    "url": "https://developer.wordpress.org/rest-api/using-the-rest-api/global-parameters/",
+    "observed_version": "Handbook last updated 2026-10-14",
+    "topic": "wordpress-collection-evidence",
+    "note": "Field projection, relation-limited embedding and unsupported envelope/method modes.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 60,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "WPC11005",
+    "title": "WordPress Posts controller get_items source",
+    "url": "https://developer.wordpress.org/reference/classes/wp_rest_posts_controller/get_items/",
+    "observed_version": "Served source reference inspected 2026-11-11; introduced in 4.7.0",
+    "topic": "wordpress-collection-evidence",
+    "note": "Out-of-range page 400 and count/header construction; not a pinned installed-site version.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 60,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "WPC11006",
+    "title": "WordPress WordPress News public posts endpoint",
+    "url": "https://wordpress.org/news/wp-json/wp/v2/posts",
+    "observed_version": "Four anonymous responses captured 2026-11-11; site software version not inferred",
+    "topic": "wordpress-collection-evidence",
+    "note": "Actual pages 1 and 2 for broad and include=1,2 scopes; full bodies retained privately and omitted from publication.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 60,
+    "evidence": "primary_documented"
+  }
+]

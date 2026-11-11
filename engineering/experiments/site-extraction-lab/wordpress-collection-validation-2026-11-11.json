@@ -1,0 +1,371 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-11-11",
+  "sourceBaseCommit": "e7eb88a3d93d027ffd589a877244dfc81a24c32a",
+  "classification": "actual public captures; offline replay",
+  "environment": {
+    "python": "3.12.14",
+    "lxml": "6.1.1.0"
+  },
+  "implementationSha256": {
+    "wordpress_collection.py": "7e426fabc90a0293e5a93c64b30a2ecfe32ac829d69d6b03233abdb82df7b207",
+    "extractors.py": "2ca3ff4b1645930709ca58eb37f742cca917df4c78dc93ab9c7008475659d188"
+  },
+  "captureCount": 4,
+  "distinctPosts": 2,
+  "capturedAt": [
+    "2026-11-11T05:23:13.613231+00:00",
+    "2026-11-11T05:23:19.991378+00:00",
+    "2026-11-11T05:23:24.406993+00:00",
+    "2026-11-11T05:23:28.171046+00:00"
+  ],
+  "sourceIds": [
+    "WPC11001",
+    "WPC11002",
+    "WPC11003",
+    "WPC11004",
+    "WPC11005",
+    "WPC11006"
+  ],
+  "cases": [
+    {
+      "label": "broad-public-collection",
+      "receipt": {
+        "family": "wordpress_collection",
+        "endpoint": "https://wordpress.org/news/wp-json/wp/v2/posts",
+        "scopeSha256": "acc7e4cbcf5c5f6807007d6cc49e2fc36fa0a01b5c01659cf451a79f80f872a8",
+        "perPage": 1,
+        "access": {
+          "callerCaptureContext": "public",
+          "grantVerifiedByParser": false,
+          "privateDataApprovedForPublication": false
+        },
+        "attempts": [
+          {
+            "page": 1,
+            "status": 200,
+            "inputBytes": 3744,
+            "inputSha256": "0d4f7c362b1436308b46d9ec7913159d4b00c6d673b310287f5b294dafb2a053",
+            "recordIds": [
+              1
+            ],
+            "errors": [],
+            "declaredTotal": 1117,
+            "declaredPages": 1117,
+            "outcome": "parsed"
+          },
+          {
+            "page": 2,
+            "status": 200,
+            "inputBytes": 4522,
+            "inputSha256": "5ba77a8cc88b3b1e0140c87de8c88a0013b262768b4a10154df874d014bc7e8c",
+            "recordIds": [
+              2
+            ],
+            "errors": [],
+            "declaredTotal": 1117,
+            "declaredPages": 1117,
+            "outcome": "parsed"
+          }
+        ],
+        "coverage": {
+          "declaredTotal": 1117,
+          "declaredPages": 1117,
+          "capturedPages": [
+            1,
+            2
+          ],
+          "uniquePostCount": 2,
+          "missingPageCount": 1115,
+          "missingPageSample": [
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22
+          ],
+          "missingPageSampleTruncated": true,
+          "capturedScopeCovered": false,
+          "snapshotConsistency": "unproven",
+          "completeHistory": false
+        },
+        "warnings": [],
+        "media": {
+          "discovery": "source_projection_only",
+          "completeMediaAccepted": false,
+          "delivery": "not_attempted",
+          "decode": "not_attempted",
+          "playback": "not_attempted"
+        },
+        "networkRequestsPerformed": 0,
+        "fullSupportAccepted": false,
+        "records": [
+          {
+            "id": 1,
+            "page": 1,
+            "bodyState": "rendered",
+            "sourcePostSha256": "ee527e8055b4327289e3784a6a4f6a051ddb2239a9fa3d39af4958bf36e3e383",
+            "normalization": "parsed",
+            "body": {
+              "format": "html",
+              "completeness": "selected_scope",
+              "characters": 189,
+              "utf8Bytes": 211,
+              "whitespaceCollapsedCharacters": 188,
+              "rawSha256": "c05bbfb42b1375c0df1e17358309abcde420ad195560acfee2966c30d8ff158b",
+              "textSha256": "fb5a824a48588f9d92e1098d0f6767c38bd78ed5ad21c19c4560b796f2d2c4a7",
+              "orderedEventCount": 2,
+              "orderedEventTypes": [
+                "text",
+                "text"
+              ],
+              "media": [],
+              "links": [],
+              "projectionComplete": true
+            },
+            "authorIds": [
+              1
+            ],
+            "authorResolved": true,
+            "featuredMedia": [],
+            "gates": []
+          },
+          {
+            "id": 2,
+            "page": 2,
+            "bodyState": "rendered",
+            "sourcePostSha256": "929d344f0006e670b816d26f061df63afaea1382131923142b17d85600867a9c",
+            "normalization": "parsed",
+            "body": {
+              "format": "html",
+              "completeness": "selected_scope",
+              "characters": 754,
+              "utf8Bytes": 822,
+              "whitespaceCollapsedCharacters": 753,
+              "rawSha256": "65990809c7b24f048c94dcc3167924ad111ad56098d32c9d74fc5bfcb38d3138",
+              "textSha256": "fe983a0f80de20aa9ad7a3bd4fbc5226d339de6cda9ef1a5f00318ab41d6e6f8",
+              "orderedEventCount": 10,
+              "orderedEventTypes": [
+                "text",
+                "text",
+                "text",
+                "text",
+                "text",
+                "text",
+                "text",
+                "text",
+                "text",
+                "text"
+              ],
+              "media": [],
+              "links": [],
+              "projectionComplete": true
+            },
+            "authorIds": [
+              1
+            ],
+            "authorResolved": true,
+            "featuredMedia": [],
+            "gates": []
+          }
+        ]
+      }
+    },
+    {
+      "label": "selected-ids-1-and-2",
+      "receipt": {
+        "family": "wordpress_collection",
+        "endpoint": "https://wordpress.org/news/wp-json/wp/v2/posts",
+        "scopeSha256": "f8f86a903a9496582140b6b45ff85401eadbc096380aa90f9a8f2579fb267057",
+        "perPage": 1,
+        "access": {
+          "callerCaptureContext": "public",
+          "grantVerifiedByParser": false,
+          "privateDataApprovedForPublication": false
+        },
+        "attempts": [
+          {
+            "page": 1,
+            "status": 200,
+            "inputBytes": 3744,
+            "inputSha256": "0d4f7c362b1436308b46d9ec7913159d4b00c6d673b310287f5b294dafb2a053",
+            "recordIds": [
+              1
+            ],
+            "errors": [],
+            "declaredTotal": 2,
+            "declaredPages": 2,
+            "outcome": "parsed"
+          },
+          {
+            "page": 2,
+            "status": 200,
+            "inputBytes": 4522,
+            "inputSha256": "5ba77a8cc88b3b1e0140c87de8c88a0013b262768b4a10154df874d014bc7e8c",
+            "recordIds": [
+              2
+            ],
+            "errors": [],
+            "declaredTotal": 2,
+            "declaredPages": 2,
+            "outcome": "parsed"
+          }
+        ],
+        "coverage": {
+          "declaredTotal": 2,
+          "declaredPages": 2,
+          "capturedPages": [
+            1,
+            2
+          ],
+          "uniquePostCount": 2,
+          "missingPageCount": 0,
+          "missingPageSample": [],
+          "missingPageSampleTruncated": false,
+          "capturedScopeCovered": true,
+          "snapshotConsistency": "unproven",
+          "completeHistory": false
+        },
+        "warnings": [],
+        "media": {
+          "discovery": "source_projection_only",
+          "completeMediaAccepted": false,
+          "delivery": "not_attempted",
+          "decode": "not_attempted",
+          "playback": "not_attempted"
+        },
+        "networkRequestsPerformed": 0,
+        "fullSupportAccepted": false,
+        "records": [
+          {
+            "id": 1,
+            "page": 1,
+            "bodyState": "rendered",
+            "sourcePostSha256": "ee527e8055b4327289e3784a6a4f6a051ddb2239a9fa3d39af4958bf36e3e383",
+            "normalization": "parsed",
+            "body": {
+              "format": "html",
+              "completeness": "selected_scope",
+              "characters": 189,
+              "utf8Bytes": 211,
+              "whitespaceCollapsedCharacters": 188,
+              "rawSha256": "c05bbfb42b1375c0df1e17358309abcde420ad195560acfee2966c30d8ff158b",
+              "textSha256": "fb5a824a48588f9d92e1098d0f6767c38bd78ed5ad21c19c4560b796f2d2c4a7",
+              "orderedEventCount": 2,
+              "orderedEventTypes": [
+                "text",
+                "text"
+              ],
+              "media": [],
+              "links": [],
+              "projectionComplete": true
+            },
+            "authorIds": [
+              1
+            ],
+            "authorResolved": true,
+            "featuredMedia": [],
+            "gates": []
+          },
+          {
+            "id": 2,
+            "page": 2,
+            "bodyState": "rendered",
+            "sourcePostSha256": "929d344f0006e670b816d26f061df63afaea1382131923142b17d85600867a9c",
+            "normalization": "parsed",
+            "body": {
+              "format": "html",
+              "completeness": "selected_scope",
+              "characters": 754,
+              "utf8Bytes": 822,
+              "whitespaceCollapsedCharacters": 753,
+              "rawSha256": "65990809c7b24f048c94dcc3167924ad111ad56098d32c9d74fc5bfcb38d3138",
+              "textSha256": "fe983a0f80de20aa9ad7a3bd4fbc5226d339de6cda9ef1a5f00318ab41d6e6f8",
+              "orderedEventCount": 10,
+              "orderedEventTypes": [
+                "text",
+                "text",
+                "text",
+                "text",
+                "text",
+                "text",
+                "text",
+                "text",
+                "text",
+                "text"
+              ],
+              "media": [],
+              "links": [],
+              "projectionComplete": true
+            },
+            "authorIds": [
+              1
+            ],
+            "authorResolved": true,
+            "featuredMedia": [],
+            "gates": []
+          }
+        ]
+      }
+    }
+  ],
+  "retainedFailures": [
+    {
+      "case": "malformed_srcset",
+      "fixture": "synthetic independent review",
+      "before": "Uncaught IndexError from inherited projection.",
+      "repair": "Retain failed per-post normalization."
+    },
+    {
+      "case": "escaped_lone_surrogate",
+      "fixture": "synthetic independent review",
+      "before": "Uncaught UnicodeEncodeError in canonical hashing.",
+      "repair": "Reject unsupported Unicode in JSON keys and values before hashing."
+    },
+    {
+      "case": "arbitrary_mime_hint",
+      "fixture": "synthetic independent review",
+      "before": "Arbitrary HTML type attribute entered public receipt.",
+      "repair": "Omit mimeHint at new receipt boundary."
+    },
+    {
+      "case": "relative_media_base",
+      "fixture": "synthetic independent review",
+      "before": "Relative body reference resolved against REST route.",
+      "repair": "Use validated post permalink or leave unresolved."
+    },
+    {
+      "case": "boolean_featured_media",
+      "fixture": "synthetic independent review",
+      "before": "True compared equal to numeric identity 1.",
+      "repair": "Require exact integer media identity."
+    },
+    {
+      "case": "replayed_conflicting_variant",
+      "fixture": "synthetic independent review",
+      "before": "A, B, B page variants created three records.",
+      "repair": "Deduplicate every distinct page fingerprint while preserving all attempts."
+    }
+  ],
+  "limits": [
+    "Raw response bodies and headers stay outside the repository.",
+    "Scope coverage does not establish a stable snapshot, complete history, complete fields or complete media.",
+    "No media requests, decoding, playback, authentication, native follow, target integration or performance comparison.",
+    "One preliminary successful endpoint probe was not retained byte-for-byte and is excluded from this four-capture replay."
+  ]
+}
