@@ -1,0 +1,241 @@
+{
+  "schema": 1,
+  "base": {
+    "pr": 56,
+    "head": "9590843fad1ac5e35858d5424e944604278ff178",
+    "tree": "e5b018b25a3da2de6fed3bd9ef3d712fc32a5699"
+  },
+  "donor": {
+    "pr": 55,
+    "head": "388cd5f8ad6de8329bc4f87b1620a73180eaa62d",
+    "tree": "c7c728727db89cf48d4cfea308ce5c26034f2fb7"
+  },
+  "common": {
+    "pr": 43,
+    "head": "7ba88d30229f3073c9aa738f087b9199ffae16ae"
+  },
+  "exactImportedPaths": [
+    {
+      "path": "engineering/data/sources.d/discord-component-embeds-20261111.json",
+      "gitBlob": "7bead05fd836e4157e2618be6eec7e843892f2b3",
+      "sha256": "9f32d8412041dc6e9a35730e47b2b2339553d27b41b5444aea92b064cb4ace05"
+    },
+    {
+      "path": "engineering/data/sources.d/discord-media-states-20261111.json",
+      "gitBlob": "5ba123b9e2b908387b8c45640b6eea2f56186655",
+      "sha256": "f4c3783c118f3d404a6c887317493c42ce1bd68c0a09ce85972071d387002c7c"
+    },
+    {
+      "path": "engineering/docs/adapters/discord.md",
+      "gitBlob": "b5a30cae93f6fd471379d639c269f0eeda803a6d",
+      "sha256": "2412674754966f8b247dad27ca4d158d7793d037ae9c4c28ec567b8443228111"
+    },
+    {
+      "path": "engineering/experiments/discord-component-embed-lab/README.md",
+      "gitBlob": "15e715c6245a3dde0f86ef52d22951b6df82328a",
+      "sha256": "f8428e9470c4c0e714e86ad2e2b5a1e0e6c2e82b6c667bb21ba0ccc237084509"
+    },
+    {
+      "path": "engineering/experiments/discord-component-embed-lab/after.json",
+      "gitBlob": "683affbba4c6f46cf10fa6bdd576f3a63bacac72",
+      "sha256": "04c75f2737fd498c5f2007a996dd63d06c0c5bf96599e1c82bb57baad8fd244e"
+    },
+    {
+      "path": "engineering/experiments/discord-component-embed-lab/before.json",
+      "gitBlob": "aed1b0b3103a7664444d4143ce69b13c4d9ca65e",
+      "sha256": "99f48be17f47f288bb0215b14e6dba1f76dc0e1b6034449ceb96026d5f4dd70e"
+    },
+    {
+      "path": "engineering/experiments/discord-component-embed-lab/current-after.json",
+      "gitBlob": "8e257b7d61031496db639115a1041e88f6a985f7",
+      "sha256": "131e3d9134e8fe65662b60cc6f64a5a2b1318c02cc49678da816ba5a4e9014ca"
+    },
+    {
+      "path": "engineering/experiments/discord-component-embed-lab/fixtures/LICENSE-CODE",
+      "gitBlob": "3569941d8ddc7869f355774f563116474c0488d9",
+      "sha256": "ef75c87c20a645242bc8316055d642105b3e93f5aad95a66e734169728661c72"
+    },
+    {
+      "path": "engineering/experiments/discord-component-embed-lab/fixtures/official-component-example.json",
+      "gitBlob": "10dcfe24f04688879197a213816ab6f3639476e4",
+      "sha256": "d2a3a025a50184b5b1309c9246d2d698eaeab3fb18405249b32f79d16e068153"
+    },
+    {
+      "path": "engineering/experiments/discord-component-embed-lab/media-state-reconciliation.json",
+      "gitBlob": "ddeba20d215a5a378ab5205a9d88d4df69535097",
+      "sha256": "68dfc13c2f89aedbed67fc63e83469b0391a7f814bdb742f389684e3d27a85e6"
+    },
+    {
+      "path": "engineering/experiments/discord-component-embed-lab/probe.py",
+      "gitBlob": "8af9b1ac2775d42dc5b253bc517bcfaf6759d6e9",
+      "sha256": "80cb5cf8626d0dfeb524e0874afae550fdb5748cf494c74ba02699f67591c33f"
+    },
+    {
+      "path": "engineering/experiments/discord-component-embed-lab/public-validation-2026-11-11.json",
+      "gitBlob": "6f41830c819d91e3c93ff8ab6dd6389cda761abf",
+      "sha256": "df45af71c23388f3532edcccd0c82918757e8d66bd9a9b36cbb69e36b09915fd"
+    },
+    {
+      "path": "engineering/experiments/discord-media-state-lab/README.md",
+      "gitBlob": "f01aaa49c8ed8216de7b9bfb72f488aed8b1d355",
+      "sha256": "e7b8059b084c5727127d3160351677722ff5fb8842656bb28bebf5bd6cdda313"
+    },
+    {
+      "path": "engineering/experiments/discord-media-state-lab/compare_records.py",
+      "gitBlob": "a88f5624673593c22cbe393e1f13f716ec5031c8",
+      "sha256": "f1fcdcb609ba17ea9925a5518dd7ff812978902eb2bf265353d448b9231e6744"
+    },
+    {
+      "path": "engineering/experiments/discord-media-state-lab/preservation-result.json",
+      "gitBlob": "73a9cf779aaf2403be93deff33c88033af98d5e6",
+      "sha256": "82a418a7cf284d6dcd209367d50c4f7c6516dc5a2d7f308e365731d03ce567a6"
+    },
+    {
+      "path": "engineering/experiments/discord-media-state-lab/schema-evidence.json",
+      "gitBlob": "a32065cfe960c55b1304d752f92b1688eb06dd45",
+      "sha256": "b825dda5588e11f0454d57503aef05a7f3ba43eaad8cc3b3165cb878ab296f7f"
+    },
+    {
+      "path": "engineering/experiments/site-extraction-lab/discord_message.py",
+      "gitBlob": "d5d766cea9e6cc7c312e6304773a67eec4cda753",
+      "sha256": "a4d690e7b129e86fe44dbfe042afdfdc3f407608854653d5070ec1d360e9859b"
+    },
+    {
+      "path": "engineering/research/2026-11-11-discord-component-embeds.md",
+      "gitBlob": "70637aae685e8143c5a9559cd1dcec550945e77d",
+      "sha256": "455307a1b593a904882c9fbb45fd3c9c4da9f4c4d67b2b2db921401fca5398fa"
+    },
+    {
+      "path": "engineering/research/2026-11-11-discord-media-states.md",
+      "gitBlob": "903ba7c8473164100d2ad2cf2b92006fda53296d",
+      "sha256": "a4650333579a3c3eb7de2d8589cf08a723c219b8b24f8f041a7dc31e53d48798"
+    },
+    {
+      "path": "engineering/tests/test_discord_component_embeds.py",
+      "gitBlob": "35916fd3bcb45f010a3acab57c1f6eae05e76c65",
+      "sha256": "458499ffa4718b1242976108824c72374017546d6fd0f7dda70472b729415caf"
+    },
+    {
+      "path": "engineering/tests/test_discord_component_receipt.py",
+      "gitBlob": "2506397faa01677a59c8d735aadc31235969df13",
+      "sha256": "36479e71873027950d3f3151a2d90862f38a0aaf2b9010f6e3f1a4074fdec3d5"
+    },
+    {
+      "path": "engineering/tests/test_discord_media_preservation.py",
+      "gitBlob": "f765b1c355fbfb5d51d88c68b104f993e452548f",
+      "sha256": "1073cf1df56a49f459bee940e8d516320e2566d3dba143a9f6dc855d9348dfd4"
+    },
+    {
+      "path": "engineering/tests/test_discord_media_states.py",
+      "gitBlob": "88e404a04e340db7ba33c15713f646d2e953ff75",
+      "sha256": "0c5ccc5cb51236946022db1b319509c5f0c74644c9eb0e238fe9df1b3550790b"
+    }
+  ],
+  "unionPaths": [
+    "engineering/data/source-index.json",
+    "engineering/docs/experiment-evidence.md"
+  ],
+  "noFileDeletions": true,
+  "sourceDraftsPreserved": true,
+  "implementationChangedBeyondPublishedDonor": false,
+  "newProviderRequests": 0,
+  "runtimeIntegration": false,
+  "targetAcceptance": false,
+  "preservedBasePaths": [
+    {
+      "path": "engineering/experiments/bluesky-thread-lab/README.md",
+      "gitBlob": "b72807539c38fb6d7df8bc8c4e1b1359034f4586",
+      "sha256": "5f16428872011bce3739083ed183ce923d05362974261bf505de32a65845de3c"
+    },
+    {
+      "path": "engineering/experiments/bluesky-thread-lab/public-validation-2026-11-11.json",
+      "gitBlob": "644702c495700fe63d3195999268beb064ae5a85",
+      "sha256": "af2a2b8a1d66923ec42106ae47b4ee1ddf2835a37c92e344c149ee6b6f34e9ff"
+    },
+    {
+      "path": "engineering/experiments/bluesky-thread-lab/threads.py",
+      "gitBlob": "bcc48e45fc4bf4098255f4df04e209de09bd96b1",
+      "sha256": "047edc3ac872e0b4a8613b23941391f5b2131fea37c7204061006c3a80df0375"
+    },
+    {
+      "path": "engineering/experiments/rss-integration-lab/README.md",
+      "gitBlob": "217f15ab2dc100dc44bccc8eb3ffd1ee77b34bfc",
+      "sha256": "e9a9a7a30a6c8601d86a14bad688d2193466cbfe9e82fdaf5e2900d2ab06a640"
+    },
+    {
+      "path": "engineering/experiments/rss-integration-lab/compare.py",
+      "gitBlob": "fdbe610dddc1c445935bc023cc5a888242cb0623",
+      "sha256": "f1d019ea6b6881ca078defa4ccb2ec453d085499f5299388ee31bd3aea68e390"
+    },
+    {
+      "path": "engineering/experiments/rss-integration-lab/pr53-receipts/bluesky-thread-lab/public-validation-2026-11-11.json",
+      "gitBlob": "74530b5f5677de51ae63d019f80840ab2c0760a1",
+      "sha256": "8e10eaee03701d7d7a037a2917c2cfc1aa51e7cee10941127705c013e5551718"
+    },
+    {
+      "path": "engineering/experiments/rss-integration-lab/pr53-receipts/manifest.json",
+      "gitBlob": "2322c3101d4f3264975e391570f1d9cd1aeae87f",
+      "sha256": "6bb9d450d1bb3939566b8cbb077b9eea14043d22fd251a4810f54433d50631e6"
+    },
+    {
+      "path": "engineering/experiments/rss-integration-lab/pr53-receipts/site-extraction-lab/wordpress-collection-validation-2026-11-11.json",
+      "gitBlob": "2e02e958dcfca7e4b7f1bbb0096bea1cc3c54966",
+      "sha256": "7a2ec85b74523b1a8c036185091cd9e53872b29c7900f8910e83f4a680372fa6"
+    },
+    {
+      "path": "engineering/experiments/rss-integration-lab/pr53-receipts/youtube-topic-gate-lab/after.json",
+      "gitBlob": "cb4d0275376fafbbc260a6fb5ea1b1169476b78f",
+      "sha256": "457ac9bf03ed29ca63cfdac46e526eef141a27bce48b0d6334ba2622104aa508"
+    },
+    {
+      "path": "engineering/experiments/rss-integration-lab/validation-2026-11-11.json",
+      "gitBlob": "f20e30b497257f79cf4fa1bbe2fa873dd624b142",
+      "sha256": "8b82725c9605be70fa80bc6c6e85f6ade42e2fbba12577a672210138c3c7398f"
+    },
+    {
+      "path": "engineering/experiments/site-extraction-lab/extractors.py",
+      "gitBlob": "6a2e464c2012fd037e4555c1aaa393f2af272a7f",
+      "sha256": "7f475d108786cd3c6263324afb0b13fa8066a970932576f13cacf1e67454b647"
+    },
+    {
+      "path": "engineering/experiments/site-extraction-lab/rss-publication-date-validation-20261108.json",
+      "gitBlob": "b466e9aab4cb65c8380012affaa4cb0d84970af2",
+      "sha256": "7a4cfc3ace52e410940e150f64b22f5eb5bebdba53da5dd3a7be8b59beb47f2a"
+    },
+    {
+      "path": "engineering/experiments/site-extraction-lab/wordpress-collection-validation-2026-11-11.json",
+      "gitBlob": "101efe98795c278724427ed189b3c60db1bfecfc",
+      "sha256": "edc239811983900753b6c2fb8852097f12449f81daf8cc70086fb9608bde9b9c"
+    },
+    {
+      "path": "engineering/experiments/youtube-topic-gate-lab/README.md",
+      "gitBlob": "d789d18025b4e039ac0c8f17495550012986d7fc",
+      "sha256": "e6edbc441c199905d9dba16f81a24feee5db777c77c609ddcbb87183b3ab638d"
+    },
+    {
+      "path": "engineering/experiments/youtube-topic-gate-lab/after.json",
+      "gitBlob": "edc0832eabeb575fb1504576056dc030a383f8cb",
+      "sha256": "a3358c26b5f860f21a34b4b3a7c70d8e2a5ff9e4099038c2cbad97dfaa3567be"
+    },
+    {
+      "path": "engineering/experiments/youtube-topic-gate-lab/before.json",
+      "gitBlob": "778a6ea7f02a789d527b9b835db007b4f09fd16c",
+      "sha256": "a446f32c20a4b2c60a720427675c4e06a4d632b0434825f6a5a09059209ee0e8"
+    },
+    {
+      "path": "engineering/experiments/youtube-topic-gate-lab/compare_retained_receipts.py",
+      "gitBlob": "ef3e245a6eb1c1ab814ebb3d2959aabaa237fa23",
+      "sha256": "9f9811d355c69c9c4633f20ca779601c62b8b81059ee7ab8d6a2c0d9fbf3b1d3"
+    },
+    {
+      "path": "engineering/experiments/youtube-topic-gate-lab/probe.py",
+      "gitBlob": "08877819eb8630401f32cd2499183e91cc030bf5",
+      "sha256": "16c1e2118f32693b81f12a990c4765dce086a0942d0587eb47102bbf9200a7d5"
+    },
+    {
+      "path": "engineering/experiments/youtube-topic-gate-lab/public-validation-2026-11-11.json",
+      "gitBlob": "feafe3ea721e31753cbc21c3900066d7e5398ec4",
+      "sha256": "5009b90de5cf3eeeb92bb4a029a97e089c5f9198c8fc21da28df1de678e0621b"
+    }
+  ]
+}
