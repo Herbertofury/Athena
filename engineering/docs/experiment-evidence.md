@@ -206,3 +206,7 @@ not a general recommendation or approval to change another project.
 ## Overview engine-instance reuse boundary · October 30
 
 [Engine-scoped repair](../experiments/overview-engine-identity-lab/README.md) fixes stale cards after a local server/database restart without full-result comparison on each poll. Actual two-process HTTP evidence and fifty-card replacement stress preserve complete output. Broader mutable-content candidates remain isolated, and native-browser acceptance remains open.
+
+## Discord component previews, November 11
+
+The [component-embed projection experiment](../experiments/discord-component-embed-lab/README.md) compares the existing normalizer against an exact official documentation code sample, distributed with its MIT notice. It restores scoped text and media references without claiming a live-message fixture, renderer, playback, channel access or full support.

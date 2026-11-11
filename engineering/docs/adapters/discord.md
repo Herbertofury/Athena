@@ -53,13 +53,15 @@ The earlier no-implementation statement above describes the October30 checkout. 
 ```python
 from discord_message import normalize_message, discord_receipt
 
-record = normalize_message(payload, access="complete")
-updated = normalize_message(partial_event, access="complete",
+record = normalize_message(payload, access="available")
+updated = normalize_message(partial_event, access="available",
                             partial=True, previous=record)
 safe_evidence = discord_receipt(updated)
 ```
 
-The caller must supply truthful access state; `complete` describes the supplied access context, not a claim that the normalizer supports every Discord feature. The default state is unknown. Use the previous runtime record for partial updates, not its sanitized receipt. The module does not implement transport, event ordering, account permissions or persistence.
+Argument correction, November 11: the earlier example incorrectly used `complete`; the supported state is `available`. This documentation correction does not change the API.
+
+The caller must supply truthful access state; `available` describes the supplied access context, not a claim that the normalizer supports every Discord feature. The default state is unknown. Use the previous runtime record for partial updates, not its sanitized receipt. The module does not implement transport, event ordering, account permissions or persistence.
 
 ### Identities, body and media
 
@@ -80,3 +82,9 @@ The test suite also covers malformed/rounded IDs, webhook/user separation, compo
 Actual public Discord discovery pages were inspected for [Cyberpunk2077 Modding Community](https://discord.com/servers/cyberpunk-2077-modding-community-717692382849663036), [Modding Guild](https://discord.com/servers/872252014002843658), and [Skywind](https://discord.com/servers/skywind-145539675577122816). The pages expose stable guild identifiers, descriptions, separate server icons/splashes and community routes. They expose no member-post history or author avatars for private messages. Skywind states it publishes news there first. [RDSOC31005] [RDSOC31006] [RDSOC31007]
 
 Keep named guilds under the Discord platform adapter. A local channel/thread watch can filter by stable poster identity after the app has a permitted read route. It is not a global author-following feed. Native announcement following, membership, notifications and an installed bot's permissions remain separate operations. Source login alone does not authorize self-bot collection or create an app grant.
+
+## November 11: component-preview projection repair
+
+The existing message normalizer now walks component trees inside embeds as well as top-level message components. The [reproducible official-example experiment](../../experiments/discord-component-embed-lab/README.md) retains before/after evidence and a small MIT-licensed code fixture. It is an offline source-document replay, not a real Discord message, account read, rendered preview or complete-provider acceptance. Raw source data was already retained; this repair restores the missing text/media projection.
+
+The [dated review](../../research/2026-11-11-discord-component-embeds.md) also records Discord's documented November 16 guild-channel visibility change. Athena has no channel collector in this scope; absence after permission filtering is not a verified deletion.

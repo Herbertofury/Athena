@@ -98,11 +98,14 @@ def _body(data, warnings, depth=0):
             raise ExtractionError('Duplicate attachment identity')
         attachments[ident] = item
 
-    def media(item, scope, role='media', wrapper=None):
+    def media(item, scope, role='media', wrapper=None, *, embed_component=False):
         _object(item)
         wrapper = wrapper or {}
         raw = item.get('url')
         attachment = None
+        if embed_component and ('attachment_id' in item or
+                (isinstance(raw, str) and raw.startswith('attachment://'))):
+            raise ExtractionError('Embed media cannot reference message attachments')
         attachment_id = snowflake(item['attachment_id']) if 'attachment_id' in item else None
         if attachment_id:
             attachment = attachments.get(attachment_id)
@@ -142,25 +145,7 @@ def _body(data, warnings, depth=0):
         if role == 'file':
             files.append(deepcopy(e))
 
-    emit_text(data.get('content'), 'content')
-    for index, embed in enumerate(_array(data.get('embeds', []))):
-        _object(embed)
-        scope = f'embeds/{index}'
-        events.append(dict(type='embed_start', source=scope, embedType=embed.get('type'), url=_delivery(embed.get('url'))))
-        emit_text(_object(embed.get('author', {})).get('name'), scope + '/author')
-        for key in ('title', 'description'):
-            emit_text(embed.get(key), scope + '/' + key)
-        for i, field in enumerate(_array(embed.get('fields', []))):
-            _object(field)
-            emit_text(field.get('name'), f'{scope}/fields/{i}/name')
-            emit_text(field.get('value'), f'{scope}/fields/{i}/value')
-        for key in ('image', 'thumbnail', 'video'):
-            if key in embed:
-                media(embed[key], scope + '/' + key, key)
-        emit_text(_object(embed.get('footer', {})).get('text'), scope + '/footer')
-        events.append(dict(type='embed_end', source=scope))
-
-    def component(item, scope, level=0):
+    def component(item, scope, level=0, *, embed_component=False):
         if level > 16:
             raise ExtractionError('Component nesting limit')
         _object(item)
@@ -170,19 +155,19 @@ def _body(data, warnings, depth=0):
         events.append(dict(type='component_start', source=scope, componentType=typ, componentId=item.get('id')))
         if typ in (1, 9, 17):
             for i, child in enumerate(_array(item.get('components', []))):
-                component(child, f'{scope}/components/{i}', level + 1)
+                component(child, f'{scope}/components/{i}', level + 1, embed_component=embed_component)
             if typ == 9 and 'accessory' in item:
-                component(item['accessory'], scope + '/accessory', level + 1)
+                component(item['accessory'], scope + '/accessory', level + 1, embed_component=embed_component)
         elif typ == 10:
             emit_text(item.get('content'), scope + '/content')
         elif typ == 11:
-            media(_object(item.get('media')), scope + '/media', 'thumbnail', item)
+            media(_object(item.get('media')), scope + '/media', 'thumbnail', item, embed_component=embed_component)
         elif typ == 12:
             for i, entry in enumerate(_array(item.get('items', []))):
                 _object(entry)
-                media(_object(entry.get('media')), f'{scope}/items/{i}', wrapper=entry)
+                media(_object(entry.get('media')), f'{scope}/items/{i}', wrapper=entry, embed_component=embed_component)
         elif typ == 13:
-            media(_object(item.get('file')), scope + '/file', 'file', item)
+            media(_object(item.get('file')), scope + '/file', 'file', item, embed_component=embed_component)
         elif typ == 2:
             emit_text(item.get('label'), scope + '/label')
             if 'url' in item:
@@ -200,6 +185,34 @@ def _body(data, warnings, depth=0):
             warnings.append('Unsupported message component type ' + str(typ))
             events.append(dict(type='unsupported_component', source=scope, componentType=typ))
         events.append(dict(type='component_end', source=scope))
+
+    emit_text(data.get('content'), 'content')
+    for index, embed in enumerate(_array(data.get('embeds', []))):
+        _object(embed)
+        scope = f'embeds/{index}'
+        events.append(dict(type='embed_start', source=scope, embedType=embed.get('type'), url=_delivery(embed.get('url'))))
+        emit_text(_object(embed.get('author', {})).get('name'), scope + '/author')
+        for key in ('title', 'description'):
+            emit_text(embed.get(key), scope + '/' + key)
+        for i, field in enumerate(_array(embed.get('fields', []))):
+            _object(field)
+            emit_text(field.get('name'), f'{scope}/fields/{i}/name')
+            emit_text(field.get('value'), f'{scope}/fields/{i}/value')
+        for key in ('image', 'thumbnail', 'video'):
+            if key in embed:
+                media(embed[key], scope + '/' + key, key)
+        emit_text(_object(embed.get('footer', {})).get('text'), scope + '/footer')
+        if 'components' in embed or embed.get('type') == 'components':
+            # Preserve the supplied tree even for a mismatched discriminator,
+            # but do not imply that such a payload is a supported embed shape.
+            if embed.get('type') != 'components':
+                warnings.append('Embed components with non-components embed type')
+            children = _array(embed.get('components'))
+            if not children:
+                warnings.append('Empty component embed tree; no supported content projected')
+            for i, child in enumerate(children):
+                component(child, f'{scope}/components/{i}', embed_component=True)
+        events.append(dict(type='embed_end', source=scope))
 
     for index, item in enumerate(_array(data.get('components', []))):
         component(item, f'components/{index}')
