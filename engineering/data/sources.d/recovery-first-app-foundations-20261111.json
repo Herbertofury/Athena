@@ -163,5 +163,60 @@
     "checked_at": "2026-11-11",
     "review_after_days": 60,
     "evidence": "primary_documented"
+  },
+  {
+    "id": "AF26016",
+    "title": "SQLite authorizer callback",
+    "url": "https://www.sqlite.org/c3ref/set_authorizer.html",
+    "observed_version": "Living C API reference checked 2026-11-11; local tests use SQLite 3.53.1",
+    "topic": "bounded-sqlite-query-boundary",
+    "note": "Preparation-time policy; nullable arguments, empty-column counts and generated-column schema caveat.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 60,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "AF26017",
+    "title": "SQLite progress handler",
+    "url": "https://www.sqlite.org/c3ref/progress_handler.html",
+    "observed_version": "Living C API reference checked 2026-11-11; local tests use SQLite 3.53.1",
+    "topic": "bounded-sqlite-query-boundary",
+    "note": "Approximate VM-instruction callbacks and cooperative interruption; not a hard wall-clock limit.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 60,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "AF26018",
+    "title": "SQLite runtime limits",
+    "url": "https://www.sqlite.org/c3ref/limit.html",
+    "observed_version": "Living C API reference checked 2026-11-11; local tests use SQLite 3.53.1",
+    "topic": "bounded-sqlite-query-boundary",
+    "note": "Per-connection controls; setter returns prior value and may be capped by compiled limits.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 60,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "AF26019",
+    "title": "SQLite implementation limits",
+    "url": "https://www.sqlite.org/limits.html",
+    "observed_version": "Living C API reference checked 2026-11-11; local tests use SQLite 3.53.1",
+    "topic": "bounded-sqlite-query-boundary",
+    "note": "Row/value, expression, column and parameter limits constrain distinct resources, not total process RSS.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 60,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "AF26020",
+    "title": "SQLite database configuration options",
+    "url": "https://www.sqlite.org/c3ref/c_dbconfig_defensive.html",
+    "observed_version": "Living C API reference checked 2026-11-11; local tests use SQLite 3.53.1",
+    "topic": "bounded-sqlite-query-boundary",
+    "note": "Defensive/schema-trust/extension configuration is verified against the linked engine; no OS sandbox claim.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 60,
+    "evidence": "primary_documented"
   }
 ]

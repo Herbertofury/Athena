@@ -12,7 +12,7 @@ Active Foundry/native integration drafts were inspected for scope only. This con
 
 - [Recovery-first application architecture](../docs/recovery-first-app-foundations.md): operation ownership, bounded work, cancellation/retry ambiguity, backup/restore, schema evolution, privileged boundaries and release evidence.
 - [Runnable SQLite drill](../experiments/sqlite-recovery-drill/README.md): source, reproducible invocation, tests and retained synthetic evidence.
-- [Fifteen source observations](../data/sources.d/recovery-first-app-foundations-20261111.json), all primary documentation reviewed on 2026-11-11. Documentation versions and local executed versions are separate.
+- [Fifteen initial source observations](../data/sources.d/recovery-first-app-foundations-20261111.json), all primary documentation reviewed on 2026-11-11. Documentation versions and local executed versions are separate. The later [bounded-query follow-up](2026-11-11-bounded-query-foundations.md) appends five additional observations and records its newer aggregate counts.
 
 No existing technology rating, measured comparison cohort, active application behavior or performance recommendation was promoted.
 

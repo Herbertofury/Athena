@@ -87,3 +87,7 @@ Record exact source commit, locked dependencies, compiler/runtime, build flags, 
 ## Measured here, and still unmeasured
 
 The [20-test drill](../experiments/sqlite-recovery-drill/README.md) and its retained log exercise generated SQLite fixtures on one Linux/Python/SQLite combination. They establish the reported component behaviors only. No production restore, real user corpus, hostile-filesystem boundary, installed desktop shell, cross-platform result, disk-fault simulator, hardware power-loss test or comparative speedup has been established. Those remain explicit target gates.
+
+## Follow-up: bounded read queries
+
+The [bounded SQLite query reference](../experiments/sqlite-query-boundary-lab/README.md) adds 32 synthetic policy tests for authorized table/function access, interruption and complete-result byte/row budgets. It complements recovery with resource and read-authority controls over a trusted generated schema. It is not an arbitrary-SQL or malicious-database sandbox. Source observations [AF26016]–[AF26020] document the exact SQLite callback/configuration limits.
