@@ -21,3 +21,7 @@ For Sims and other proprietary games, record the exact supported scripting/runti
 ## Native proof
 
 Use the actual target runtime, normal installed launch path, real assets, both successful and failing scenarios, multiplayer authority where relevant, and long-lived save compatibility. A successful compile, JSON validator or pretty render is only one gate.
+
+## Resource packaging evidence
+
+Use [resource packaging acceptance](mod-resource-packaging.md) and the [offline Gradle laboratory](../experiments/resource-packaging-lab/README.md) to separate repeatable archive bytes from complete, unique resource payloads. The lab builds original synthetic resources, not a game mod. [Dated findings](../research/2026-11-11-mod-resource-packaging.md) retain duplicate failures and source-scoped limitations.
