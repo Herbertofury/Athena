@@ -1,6 +1,6 @@
 # App, mod and asset foundations
 
-This is the shared entry point for Athena's November 11 foundation research. It connects sixteen separately reviewed contributions into a usable sequence while preserving their original guides, sources, experiments, failures and evidence limits. It is a research integration candidate, not a production release or approval to change another project.
+This is the shared entry point for Athena's November 11 foundation research. It connects seventeen separately reviewed contributions into a usable sequence while preserving their original guides, sources, experiments, failures and evidence limits. It is a research integration candidate, not a production release or approval to change another project.
 
 ## Start with the outcome
 
@@ -36,7 +36,8 @@ The [mod development overview](mods.md) retains earlier research and links every
 
 1. [Asset import acceptance](asset-import-acceptance.md) records the original visual/semantic contract and the actual target importer, renderer, packaged build and required extensions.
 2. [glTF validation boundaries](gltf-validation-boundaries.md) demonstrates why zero reported validator errors can coexist with changed animation, missing animation or unsupported required behavior. The original fixture-data gate is narrower than arbitrary glTF fidelity.
-3. Run the target import, animation, materials, lighting and packaged-runtime checks in the [asset receipt](../templates/asset-compatibility-receipt.md). Structural evidence does not establish visual equivalence or complete animation playback.
+3. [Texture semantics](texture-semantics.md) separates linear-light color filtering, scalar data, alpha association and cutout coverage. The [pinned CPU resampling lab](../experiments/texture-resampling-lab/README.md) preserves actual numeric results and deliberately wrong semantic controls. These two-sample CPU results do not establish GPU filtering, mip quality, normal-map correctness or game acceptance.
+4. Run the target import, animation, materials, lighting and packaged-runtime checks in the [asset receipt](../templates/asset-compatibility-receipt.md). Structural evidence does not establish visual equivalence or complete animation playback. Use the [texture acceptance receipt](../templates/texture-acceptance-receipt.md) for texture roles, alpha mode, mip/compression behavior and actual renderer evidence.
 
 The [game and asset overview](game-assets.md) connects these additions to existing asset-pipeline research.
 
@@ -54,7 +55,7 @@ Source observations, stored receipt validation, fresh execution and target accep
 
 ## Integration and reproducibility
 
-The [integration record](../research/2026-11-11-foundations-integration.md) identifies every originating PR and frozen head, the shared-file union, aggregate checks and remaining gaps. All existing source records and sixteen additive fragments remain in the [complete source index](../data/source-index.json). The Research Explorer's existing catalog and rankings are unchanged; these new guides and experiments are navigated here rather than represented as new ranked catalog entries.
+The [integration record](../research/2026-11-11-foundations-integration.md) identifies every originating PR and frozen head, the shared-file union, aggregate checks and remaining gaps. All existing source records and seventeen additive fragments remain in the [complete source index](../data/source-index.json). The Research Explorer's existing catalog and rankings are unchanged; these new guides and experiments are navigated here rather than represented as new ranked catalog entries.
 
 The inherited cross-root documentation checker error remains visible. There is no hosted-CI or native-app acceptance claim, and no active runtime, workflow, merge or deployment change. Read each experiment's requirements before executing it: dependency-backed runs require its exact pinned local dependency, while offline receipt tests are a different verification stage.
 

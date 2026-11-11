@@ -1885,6 +1885,120 @@
         }
       ],
       "tree": "d54b9b1e5e011bdc5e34a2ad789abbd61d9c8d16"
+    },
+    {
+      "number": 44,
+      "title": "Add measured texture semantics foundations",
+      "head": "5ad47fd4634e0e73c651bd40077463cb746c3b33",
+      "url": "https://github.com/Herbertofury/Athena/pull/44",
+      "files": [
+        {
+          "path": "engineering/data/source-index.json",
+          "status": "modified",
+          "sha": "c2c23a46c7a095488a98ee826be136165a99822c",
+          "changes": 1,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/data/sources.d/texture-semantics-20261111.json",
+          "status": "added",
+          "sha": "e705cc6b24a7c7792ba294a91e25a7fa8c7b524f",
+          "changes": 112,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/docs/game-assets.md",
+          "status": "modified",
+          "sha": "4b67a5d7e1642507c3f2ca5bdd3d31b722cc1fd2",
+          "changes": 4,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/docs/texture-semantics.md",
+          "status": "added",
+          "sha": "8b1bf8e0ecde67a0c2cd23e92b2440f02457b106",
+          "changes": 68,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/texture-resampling-lab/README.md",
+          "status": "added",
+          "sha": "b3ffba79b2c97a36b06b46653e53f53a2fd8aab8",
+          "changes": 34,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/texture-resampling-lab/dependency.json",
+          "status": "added",
+          "sha": "20febf58368cee89b237cae62d9a84b9aebf5514",
+          "changes": 11,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/texture-resampling-lab/driver.c",
+          "status": "added",
+          "sha": "fdf64a343fa1e6d7253a921cc7d1eb54ff837d71",
+          "changes": 31,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/texture-resampling-lab/fixtures.json",
+          "status": "added",
+          "sha": "4e286beb8efc1d29eda12bcde69a47f3bed38d3f",
+          "changes": 382,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/texture-resampling-lab/independent-replay-2026-11-11.json",
+          "status": "added",
+          "sha": "d99883c4ff526aab9e8001025dc6542aaef4f941",
+          "changes": 496,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/texture-resampling-lab/independent-review-results.json",
+          "status": "added",
+          "sha": "cf85d2478f0d034b7496f65ba5fa40354ff8121e",
+          "changes": 304,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/texture-resampling-lab/observed-2026-11-11.json",
+          "status": "added",
+          "sha": "d48e6f65e5bc46cf9ed9913570452ec2ba6c7f60",
+          "changes": 496,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/texture-resampling-lab/run.py",
+          "status": "added",
+          "sha": "64914853f2476b3552bcf9f19d8cf0e5ef60cb21",
+          "changes": 167,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/research/2026-11-11-texture-semantics.md",
+          "status": "added",
+          "sha": "47ff540de8b4289099299b00311288060fb526d9",
+          "changes": 37,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/templates/texture-acceptance-receipt.md",
+          "status": "added",
+          "sha": "08d494fc692e6e1b952236d9fea6dc27e85103d2",
+          "changes": 40,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/tests/test_texture_resampling_lab.py",
+          "status": "added",
+          "sha": "ed19f08225c2928cd024ea70afc47fab5f0440d2",
+          "changes": 157,
+          "mode": "100644"
+        }
+      ],
+      "tree": "b87f7b667b92b091105d7f81a8df63378e9b5280"
     }
   ]
 }

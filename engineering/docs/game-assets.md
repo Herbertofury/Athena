@@ -26,3 +26,7 @@ Engine-specific import/export compatibility, material/texture budgets, mesh comp
 ## Structural validity versus retained asset intent
 
 [glTF validation boundaries](gltf-validation-boundaries.md) and the [official-validator fixture lab](../experiments/gltf-validation-lab/README.md) separate validator errors, resource access, extension coverage and retained animation data. Zero errors do not establish the intended motion, a complete animation set or native import. See the [dated evidence](../research/2026-11-11-gltf-validation.md).
+
+## Texture meaning and filtering
+
+[Texture semantics](texture-semantics.md) separates color transfer, scalar data, alpha association and mask coverage with a pinned CPU resampling lab. File decoding, material validity and actual renderer appearance remain separate gates. Use the [texture acceptance receipt](../templates/texture-acceptance-receipt.md) before changing a target pipeline.

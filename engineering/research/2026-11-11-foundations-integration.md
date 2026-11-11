@@ -2,13 +2,15 @@
 
 ## Purpose and scope
 
-This candidate joins sixteen independently published foundation drafts into one navigable research collection on Athena main `44384b809c80e03adbd62f8be9617d01e6ad9922`. Start with the [app, mod and asset foundation routes](../docs/app-mod-foundations.md). No runtime, target configuration, active integrated release, workflow, merge or deployment is changed. Other drafts and unpublished/private material are outside this assembly.
+The initial assembly joined sixteen independently published foundation drafts into one navigable research collection on Athena main `44384b809c80e03adbd62f8be9617d01e6ad9922`. Start with the [app, mod and asset foundation routes](../docs/app-mod-foundations.md). No runtime, target configuration, active integrated release, workflow, merge or deployment is changed. Other drafts and unpublished/private material are outside this assembly.
 
 This is a compatibility and preservation check of existing research, not a new benchmark or a comprehensive re-audit of every original scientific claim. Original guides distinguish documented behavior, synthetic observations, receipt checks, fresh execution and target acceptance. Those distinctions remain in force.
 
-## Frozen inputs
+The later texture extension includes #44 and is recorded below; initial assembly counts and diagnostics remain historical results, not the current aggregate. The frozen-input manifest now contains all seventeen contributions.
 
-All sixteen source PRs were open drafts at the integration snapshot. The [machine-readable input manifest](foundations-integration-inputs-20261111.json) records their heads, trees and every contribution path/blob/mode. Commit pins below identify source snapshots even if a draft advances later. Existing drafts remain unchanged and open; this combined candidate does not silently accept or close them.
+## Initial #27–42 inputs
+
+All sixteen initial source PRs were open drafts at the first integration snapshot. The [machine-readable input manifest](foundations-integration-inputs-20261111.json) records their heads, trees and every contribution path/blob/mode. Commit pins below identify source snapshots even if a draft advances later. Existing drafts remain unchanged and open; this combined candidate does not silently accept or close them.
 
 | Source | Contribution | Frozen head |
 |---|---|---|
@@ -29,7 +31,7 @@ All sixteen source PRs were open drafts at the integration snapshot. The [machin
 | [#41](https://github.com/Herbertofury/Athena/pull/41) | glTF asset validation boundaries | `4cb5db53585f21068bbfb24ec052de64675105dd` |
 | [#42](https://github.com/Herbertofury/Athena/pull/42) | dependency graph and verification foundations | `8e4b9f1ccf4254eabc0be6086b47dc1b28618c44` |
 
-## Conflict resolution and preservation
+## Initial #27–42 conflict resolution and preservation
 
 There are 248 source contribution file instances across the sixteen drafts and 227 unique paths. Exactly 224 independent added files remain byte-for-byte equal to their published Git blobs; there are no conflicting independently added paths.
 
@@ -43,7 +45,7 @@ Repeated URLs are not blindly deduplicated: different observations, versions or 
 
 Integration-only additions are the routes page, its README entry, this record and the frozen-input manifest. The existing Research Explorer catalog, generated assets, rankings, source observations and historical evidence are unchanged.
 
-## Aggregate verification
+## Initial #27–42 aggregate verification
 
 Final integration commands run from `engineering`, except where explicitly indicated:
 
@@ -68,6 +70,29 @@ The remaining failure is `test_tools.ResearchTests.test_register_and_links`. Mai
 Initial local runs omitted the repository-root research issue template and therefore skipped one test; final baseline and candidate runs include its exact main bytes. A temporary missing integration-record link while composing the route page was corrected before final validation. The initial partial Node glob and these unfinished-state logs remain retained separately rather than relabeled as final passes.
 
 Existing draft [#4](https://github.com/Herbertofury/Athena/pull/4) at `22d05b4ae663128821f106958cc99a7991ed5d2e` addresses the checker boundary separately and is not incorporated here. In an isolated diagnostic copy, applying its four exact published blobs yields 819/819 Python tests, 38/38 containment tests, both root Node bridge checks and the complete research check passing. These overlapping suites must not be summed into a unique-test count. This diagnoses the inherited boundary mismatch; it is not the status of this unpatched candidate, a change to #4 or hosted CI evidence.
+
+## Texture extension: #44 added to #43
+
+The integration branch is extended from `54aa54fc20daa404564da3d0dffa1205afdac7f7`, preserving the original sixteen contributions, with published draft [#44](https://github.com/Herbertofury/Athena/pull/44) frozen at `5ad47fd4634e0e73c651bd40077463cb746c3b33` (tree `b87f7b667b92b091105d7f81a8df63378e9b5280`). Both drafts and main were rechecked before assembly; main remains `44384b809c80e03adbd62f8be9617d01e6ad9922`. The [input manifest](foundations-integration-inputs-20261111.json) retains all original entries and adds the fifteen exact #44 file records. No existing source draft is changed or closed.
+
+The extension adds [texture semantics](../docs/texture-semantics.md), its [pinned CPU resampling experiment](../experiments/texture-resampling-lab/README.md), retained original and independent execution receipts, 38 offline contract tests and a [target acceptance template](../templates/texture-acceptance-receipt.md). The route page now connects color/scalar interpretation, alpha association and cutout sample coverage to actual renderer acceptance. No source is promoted to a performance ranking or production result.
+
+Preservation checks distinguish original contributions from integration-only navigation:
+
+- All 237 independent contribution files across seventeen source drafts match their published Git blobs byte-for-byte, including all 224 originals and thirteen additions from #44.
+- All 263 source-file instances are retained in the manifest. The shared source index now has 46 files and 2,394 unique source records: 2,206 baseline records plus 188 additions across seventeen fragments. The original 2,384 records remain unchanged. Source freshness validation still flags the same 135 baseline records as overdue for review on November 11; they are not silently refreshed, hidden or claimed current.
+- The game-assets overview retains every prior byte and appends only #44's four-line navigation tail. The mods overview remains unchanged. No conflicting independently added path was found.
+- The README entry, foundation route, integration record and manifest are the only integration-authored changes. Source guides, lab code, source observations and receipts remain exact copies. Generated assets and the Research Explorer catalog/rankings remain unchanged.
+
+The same aggregate command set above was rerun on the extended candidate:
+
+- Complete Engineering Python: **857 tests, 856 pass and one inherited error, no skips**. The 38-test increase is #44's offline suite; it is not a new C execution.
+- Complete Engineering Node, including the separately located glTF suite: **420/420 pass, no skips**.
+- All five generated-output checks pass; Research Explorer still reports 283 entries, 528 catalog sources, 11 cohorts, 35 observations and 38 plans.
+- The current original texture receipt passes verification against the preserved inputs. The fresh C replays remain the two executions documented in #44; this integration did not repeat dependency-backed experiments.
+- The exact-main Python baseline was rerun and still reports **326 tests, 325 pass and the same inherited error, no skips**. The unchanged complete research checker fails only for the existing cross-root Lab README link described above. No warning, link or test is removed or weakened.
+
+The earlier #4 diagnostic applies only to the initial 819-test assembly and was not rerun or incorporated for this extension. It must not be presented as a green result for these 857 tests. Hosted CI must be checked against the exact updated remote head; local results do not establish hosted CI, root-app, Rust, browser, native-game or renderer acceptance. The expanded candidate remains draft, with no merge, deployment, active release changes, denied/held content or target-project adoption.
 
 ## Source refresh and acceptance limits
 
