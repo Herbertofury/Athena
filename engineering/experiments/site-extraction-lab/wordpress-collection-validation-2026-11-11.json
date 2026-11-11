@@ -8,8 +8,8 @@
     "lxml": "6.1.1.0"
   },
   "implementationSha256": {
-    "wordpress_collection.py": "7e426fabc90a0293e5a93c64b30a2ecfe32ac829d69d6b03233abdb82df7b207",
-    "extractors.py": "2ca3ff4b1645930709ca58eb37f742cca917df4c78dc93ab9c7008475659d188"
+    "extractors.py": "a18a749f9fcffa6d2a43842ca3a350aebb4320d05ed10a211790efb05a41ed0b",
+    "wordpress_collection.py": "7e426fabc90a0293e5a93c64b30a2ecfe32ac829d69d6b03233abdb82df7b207"
   },
   "captureCount": 4,
   "distinctPosts": 2,
@@ -367,5 +367,62 @@
     "Scope coverage does not establish a stable snapshot, complete history, complete fields or complete media.",
     "No media requests, decoding, playback, authentication, native follow, target integration or performance comparison.",
     "One preliminary successful endpoint probe was not retained byte-for-byte and is excluded from this four-capture replay."
-  ]
+  ],
+  "originalImplementationSha256": {
+    "wordpress_collection.py": "7e426fabc90a0293e5a93c64b30a2ecfe32ac829d69d6b03233abdb82df7b207",
+    "extractors.py": "2ca3ff4b1645930709ca58eb37f742cca917df4c78dc93ab9c7008475659d188"
+  },
+  "offlineReplayReconciliation": {
+    "baselineCommit": "7ba88d30229f3073c9aa738f087b9199ffae16ae",
+    "baselineSourceBlobs": {
+      "engineering/experiments/site-extraction-lab/wordpress_collection.py": "aff2b48b518a690ffe3dba5ee54d6aed549722bc",
+      "engineering/experiments/site-extraction-lab/extractors.py": "6a0088eea8316d8f406f91405a5ab28d7cd7b173"
+    },
+    "classification": "retained exact-byte offline replay; no new source capture",
+    "networkUsed": false,
+    "captureCount": 4,
+    "captures": [
+      {
+        "bytes": 3744,
+        "capturedAt": "2026-11-11T05:23:13.613231+00:00",
+        "sha256": "0d4f7c362b1436308b46d9ec7913159d4b00c6d673b310287f5b294dafb2a053"
+      },
+      {
+        "bytes": 4522,
+        "capturedAt": "2026-11-11T05:23:19.991378+00:00",
+        "sha256": "5ba77a8cc88b3b1e0140c87de8c88a0013b262768b4a10154df874d014bc7e8c"
+      },
+      {
+        "bytes": 3744,
+        "capturedAt": "2026-11-11T05:23:24.406993+00:00",
+        "sha256": "0d4f7c362b1436308b46d9ec7913159d4b00c6d673b310287f5b294dafb2a053"
+      },
+      {
+        "bytes": 4522,
+        "capturedAt": "2026-11-11T05:23:28.171046+00:00",
+        "sha256": "5ba77a8cc88b3b1e0140c87de8c88a0013b262768b4a10154df874d014bc7e8c"
+      }
+    ],
+    "baselineImplementationSha256": {
+      "extractors.py": "2ca3ff4b1645930709ca58eb37f742cca917df4c78dc93ab9c7008475659d188",
+      "wordpress_collection.py": "7e426fabc90a0293e5a93c64b30a2ecfe32ac829d69d6b03233abdb82df7b207"
+    },
+    "candidateImplementationSha256": {
+      "extractors.py": "a18a749f9fcffa6d2a43842ca3a350aebb4320d05ed10a211790efb05a41ed0b",
+      "wordpress_collection.py": "7e426fabc90a0293e5a93c64b30a2ecfe32ac829d69d6b03233abdb82df7b207"
+    },
+    "completeNormalizedOutputEqual": true,
+    "historicalSanitizedReceiptsEqual": true,
+    "normalizedOutputSha256": "852a12ba39d4302dcbb4e85dd3db0991346e475dd8bbd3d62461885321a52a6f",
+    "sanitizedReceiptsSha256": "ba50d69732734b181834f4e7e2828eb1e883d3be210e88aba901c7b441ad26e3",
+    "digestEncoding": "UTF-8 sorted compact ASCII JSON; bytes represented as __bytes_hex__ objects",
+    "limits": [
+      "Retained captures only; no new transfer or expanded provider acceptance.",
+      "Full normalized output compared before sanitized projection. Raw output not published."
+    ],
+    "replayedAt": "2026-11-11T10:51:54.511180+00:00",
+    "comparisonScript": "youtube-topic-gate-lab/compare_retained_receipts.py",
+    "comparisonScriptSha256": "9f9811d355c69c9c4633f20ca779601c62b8b81059ee7ab8d6a2c0d9fbf3b1d3",
+    "reason": "Shared extractor RSS envelope changed; unrelated retained provider captures were replayed without network access."
+  }
 }

@@ -29,3 +29,9 @@ The single-watch-video workbench binds source, canonical card, player and thumbn
 ## October 28 research expansion
 
 [Current platform-family research](social-platforms.md) adds author/avatar attribution, full body/media/files, follow/import distinctions and current interface limits. [Coverage catalog](coverage-catalog.md) and [authenticated fixtures](authenticated-research.md) describe the remaining work. This update preserves the evidence status above; it does not broaden an earlier narrow success or erase a failure.
+
+## November 11 topic-format boundary
+
+One GET of the official documented push-notification topic returned HTTP 200 with a 463-byte Atom subscription descriptor, zero entries and no channel ID. It was not an uploads listing. The existing RSS extractor silently returned an empty success for these unsupported bytes; the [narrow envelope gate](../../experiments/youtube-topic-gate-lab/README.md) now rejects them explicitly while preserving valid empty RSS channels.
+
+The [dated investigation](../../research/2026-11-11-youtube-topic-format.md) and [sanitized actual receipt](../../experiments/youtube-topic-gate-lab/public-validation-2026-11-11.json) preserve the baseline result and its limits. No Atom collector, hub subscription, polling, grant, watch-page scraping or runtime integration was added. No evidence here broadens earlier metadata, media playback or collection acceptance.

@@ -1,0 +1,57 @@
+[
+  {
+    "id": "YTG11001",
+    "title": "YouTube push notification guide",
+    "url": "https://developers.google.com/youtube/data/guides/push_notifications",
+    "observed_version": "Guide last updated 2026-11-10 UTC",
+    "topic": "youtube-topic-format-evidence",
+    "note": "Documents the channel topic URL and Atom notifications. A subscription topic is not a promise that a direct GET lists current uploads.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 60,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "YTG11002",
+    "title": "YouTube channel ID guide",
+    "url": "https://developers.google.com/youtube/data/guides/working_with_channel_ids",
+    "observed_version": "Historical June 2013 article, served page updated 2026-11-03 UTC",
+    "topic": "youtube-topic-format-evidence",
+    "note": "Official example supplies GoogleDevelopers channel ID UC_x5XG1OV2P6uZZ5FSM9Ttw. Historical identity reference only; no current channel contents or obsolete v2 routes accepted.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 60,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "YTG11003",
+    "title": "RSS Advisory Board specification",
+    "url": "https://www.rssboard.org/rss-specification",
+    "observed_version": "RSS 2.0 specification 2.0.11, March 30, 2009",
+    "topic": "youtube-topic-format-evidence",
+    "note": "Unnamespaced rss/channel/item structure, one channel, zero or more items and namespaced extensions. This repair is not a full version/schema validator.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 60,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "YTG11004",
+    "title": "YouTube documented public topic observation",
+    "url": "https://www.youtube.com/xml/feeds/videos.xml?channel_id=UC_x5XG1OV2P6uZZ5FSM9Ttw",
+    "observed_version": "One HTTP 200 response observed 2026-11-11",
+    "topic": "youtube-topic-format-evidence",
+    "note": "Actual 463-byte Atom subscription-topic stub with zero entries and no channel ID. Retained digest and parser rejection do not establish channel emptiness, usable uploads, or media support.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 60,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "YTG11005",
+    "title": "YouTube API developer policies",
+    "url": "https://developers.google.com/youtube/terms/developer-policies",
+    "observed_version": "Current policy reviewed 2026-11-11",
+    "topic": "youtube-topic-format-evidence",
+    "note": "No watch-page scraping, account access, grant, hub subscription, polling, media download or indefinite response cache added. Metadata/identity/playback and completeness remain distinct.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 60,
+    "evidence": "primary_documented"
+  }
+]
