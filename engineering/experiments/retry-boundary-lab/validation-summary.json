@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "synthetic_only": true,
+  "checked_at": "2026-11-11",
+  "base_commit": "44384b809c80e03adbd62f8be9617d01e6ad9922",
+  "environment": {
+    "system": "Linux",
+    "machine": "x86_64",
+    "python": "3.12.14",
+    "sqlite": "3.53.1"
+  },
+  "checks": {
+    "focused_initial": {
+      "tests": 35,
+      "passed": 35
+    },
+    "focused_final": {
+      "tests": 38,
+      "passed": 38
+    },
+    "focused_optimized": {
+      "tests": 38,
+      "passed": 38
+    },
+    "engineering_python": {
+      "tests": 364,
+      "passed": 363,
+      "errors": 1,
+      "skipped": 0,
+      "error": "Inherited apps/atlas-lab/README.md link ../../../docs/athena-local-runtime.md fails cross-root containment check"
+    },
+    "pristine_main_python": {
+      "tests": 326,
+      "passed": 325,
+      "errors": 1,
+      "same_inherited_error": true
+    },
+    "engineering_javascript": {
+      "tests": 303,
+      "passed": 303,
+      "skipped": 0
+    },
+    "research_check": "same inherited cross-root link error; no other error",
+    "generated_explorer": "passed",
+    "generated_card_lab": "passed",
+    "generated_media_lab": "passed",
+    "native_browser_runtime_target_acceptance": "not_run",
+    "hosted_ci": "Check exact publication head separately; existing workflow excludes engineering-only changes."
+  },
+  "sha256": {
+    "experiments/retry-boundary-lab/retry_boundary.py": "a9b9bf3f714bf0062f5e9a79178db4c25228fd1570ff56479ff95e4cec8485ae",
+    "experiments/retry-boundary-lab/run_demo.py": "5e47fb717ba6038cc221874612e4a7fea3112e505bb8be7b7af910a7c8dd42b9",
+    "tests/test_retry_boundary.py": "6113f1a6846d5d7109b4ba4e0bd7b00d1846c136c90461b6bd2b2cb8b27163cd",
+    "experiments/retry-boundary-lab/demo-receipt.json": "8bbdebcadf23cd76be5353469780549ed7039ae7f1cd23facd476ce8b283b75d",
+    "experiments/retry-boundary-lab/retry-tests-initial.log": "e3d625074eb4067e3472f166ab4c1c9fa5fddf51d777214463ae6b61de6b61eb",
+    "experiments/retry-boundary-lab/retry-tests-final.log": "9cea7a61315119c1e6f38e031ae33af31862bfbb7e9c6040561cf7880a4568ba",
+    "experiments/retry-boundary-lab/retry-tests-optimized.log": "d87719bdb05a65ee6f19a45f8b081304ca6aafae1600081842c2c9e2e9a41449"
+  },
+  "independent_review": "38 final tests, demo claims and source identities reviewed independently; no blocking contribution finding.",
+  "limitations": [
+    "No network or external service execution.",
+    "No production app or mod adoption.",
+    "No power loss or physical storage fault certification.",
+    "No Windows or macOS execution.",
+    "No automatic delivery liveness, global ordering, bounded backlog, retention policy or receiver authentication."
+  ]
+}
