@@ -51,3 +51,10 @@ Production work still needs SDK integration, rate/backoff behavior, account-spec
 Raw public bodies and API captures are external inputs, not committed fixtures. Sanitized receipts retain implementation/input hashes, body hashes and counts, safe identity references and operation results. They exclude raw body prose, full private/signed query URLs and account tokens. A sanitized URL is a source reference, not a replacement transport URL.
 
 See the [extraction lab](../../experiments/site-extraction-lab/README.md) for tests and replay evidence. The [source register](../../data/sources.d/adapter-communities-round3-20261031.json) preserves documented, observed and failed-source states without promoting them to universal acceptance.
+
+
+## Scoped thread context · November 11, 2026
+
+The [offline thread evidence layer](../../experiments/bluesky-thread-lab/README.md) reuses the existing post/facet/embed normalizer for selected parent and reply trees. Three real anonymous captures show why replyCount, absent replies and returned context must stay separate: depth zero omitted six counted replies; depth two returned six children and two grandchildren; a selected reply returned its parent without that parent's other children. No complete-history, deletion, account-specific moderation or playback claim follows.
+
+[Current official schemas, source-route changes and evidence boundaries](../../research/2026-11-11-bluesky-threads.md) retain the unreadable older documentation route and distinguish structural CID/URI agreement from authenticated provenance. Raw prose/viewer metadata stays external, blocked/notFound/unknown variants remain explicit, and no native social mutation or target-app integration is added.
