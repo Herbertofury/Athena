@@ -1,0 +1,145 @@
+[
+  {
+    "id": "TEXT26001",
+    "title": "Unicode Normalization Forms 18",
+    "url": "https://www.unicode.org/reports/tr15/tr15-58.html",
+    "observed_version": "Unicode 18.0.0 revision 58, 2026-08-12",
+    "topic": "unicode-search-and-text-input",
+    "note": "Canonical and compatibility normalization have different equivalence and information-loss boundaries.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 90,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "TEXT26002",
+    "title": "Unicode Text Segmentation 18",
+    "url": "https://www.unicode.org/reports/tr29/tr29-49.html",
+    "observed_version": "Unicode 18.0.0 revision 49, 2026-09-01",
+    "topic": "unicode-search-and-text-input",
+    "note": "Grapheme boundaries differ from code-unit and code-point counts; language and script applicability matter.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 90,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "TEXT26003",
+    "title": "ICU Case Mappings",
+    "url": "https://unicode-org.github.io/icu/userguide/transforms/casemappings.html",
+    "observed_version": "Current official guide checked 2026-11-11",
+    "topic": "unicode-search-and-text-input",
+    "note": "Lowercase conversion and full case folding are separate; locale/context and mapping length matter.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 90,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "TEXT26004",
+    "title": "ECMAScript text operations",
+    "url": "https://tc39.es/ecma262/multipage/text-processing.html#sec-string.prototype.normalize",
+    "observed_version": "Current 2027 editor specification checked 2026-11-11",
+    "topic": "unicode-search-and-text-input",
+    "note": "Named normalization forms and UTF-16/code-point operations do not establish installed-runtime Unicode support.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 90,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "TEXT26005",
+    "title": "ECMA-402 Segmenter",
+    "url": "https://tc39.es/ecma402/#sec-intl.segmenter",
+    "observed_version": "Current 2027 editor specification checked 2026-11-11",
+    "topic": "unicode-search-and-text-input",
+    "note": "Segmentation granularity and resolved locale must be explicit; unavailable support is not a code-point fallback.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 90,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "TEXT26006",
+    "title": "UI Events composition and input",
+    "url": "https://www.w3.org/TR/2026/WD-uievents-20260221/",
+    "observed_version": "W3C Working Draft 2026-02-21",
+    "topic": "unicode-search-and-text-input",
+    "note": "Input is not limited to keyboard events; composition lifecycle needs exact target testing.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 90,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "TEXT26007",
+    "title": "Input Events Level 2",
+    "url": "https://www.w3.org/TR/2026/WD-input-events-2-20261015/",
+    "observed_version": "W3C Working Draft 2026-10-15",
+    "topic": "unicode-search-and-text-input",
+    "note": "Composition event order/cancelability remains draft guidance with incomplete implementation/test work.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 90,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "TEXT26008",
+    "title": "Understanding Label in Name",
+    "url": "https://www.w3.org/WAI/WCAG22/Understanding/label-in-name.html",
+    "observed_version": "WCAG 2.2 informative guidance checked 2026-11-11",
+    "topic": "unicode-search-and-text-input",
+    "note": "Visible control labels need to be included in accessible names for speech and other input users.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 90,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "TEXT26009",
+    "title": "Understanding Character Key Shortcuts",
+    "url": "https://www.w3.org/WAI/WCAG22/Understanding/character-key-shortcuts.html",
+    "observed_version": "WCAG 2.2 informative guidance checked 2026-11-11",
+    "topic": "unicode-search-and-text-input",
+    "note": "Character shortcuts require off, remap or focus-only behavior under the criterion.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 90,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "TEXT26010",
+    "title": "Inline bidirectional text markup",
+    "url": "https://www.w3.org/International/articles/inline-bidi-markup/",
+    "observed_version": "W3C Internationalization article checked 2026-11-11",
+    "topic": "unicode-search-and-text-input",
+    "note": "Unknown-direction inline text can be isolated using appropriate markup; this is not identity normalization.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 90,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "TEXT26011",
+    "title": "Unicode Security Mechanisms 18",
+    "url": "https://www.unicode.org/reports/tr39/tr39-34.html",
+    "observed_version": "Unicode 18.0.0 revision 34, 2026-08-27",
+    "topic": "unicode-search-and-text-input",
+    "note": "Confusable representations are not display strings and require version-aware persisted-index migration.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 90,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "TEXT26012",
+    "title": "Unicode Normalization Forms 17",
+    "url": "https://www.unicode.org/reports/tr15/tr15-57.html",
+    "observed_version": "Unicode 17.0.0 revision 57, 2025-07-30",
+    "topic": "unicode-search-and-text-input",
+    "note": "Historical normalization reference matching the lab runtime Unicode data major version.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 90,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "TEXT26013",
+    "title": "Unicode Text Segmentation 17",
+    "url": "https://www.unicode.org/reports/tr29/tr29-47.html",
+    "observed_version": "Unicode 17.0.0 revision 47, 2025-08-17",
+    "topic": "unicode-search-and-text-input",
+    "note": "Historical segmentation reference; a small synthetic corpus is not full conformance evidence.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 90,
+    "evidence": "primary_documented"
+  }
+]

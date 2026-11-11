@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "evidence": "synthetic",
+  "pairs": [
+    {"id":"canonical-accent","left":"Café","right":"Café"},
+    {"id":"compatibility-width","left":"ＡＢＣ","right":"ABC"},
+    {"id":"compatibility-ligature","left":"ﬁle","right":"file"},
+    {"id":"compatibility-circled","left":"①","right":"1"},
+    {"id":"compatibility-superscript","left":"x²","right":"x2"},
+    {"id":"default-case","left":"Title","right":"title"},
+    {"id":"turkish-dotless","left":"I","right":"ı"},
+    {"id":"turkish-dotted","left":"İ","right":"i"},
+    {"id":"lower-not-full-fold","left":"Straße","right":"STRASSE"},
+    {"id":"script-lookalike","left":"a","right":"а"},
+    {"id":"accent-distinction","left":"résumé","right":"resume"},
+    {"id":"empty","left":"","right":""}
+  ],
+  "units": ["", "Café", "Café", "😀", "👨‍👩‍👧‍👦", "🇺🇳", "👍🏽", "日本語"]
+}
