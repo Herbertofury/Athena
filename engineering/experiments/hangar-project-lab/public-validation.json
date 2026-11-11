@@ -1,0 +1,303 @@
+{
+  "schema_version": 1,
+  "evidence": "actual_public_official_Hangar_responses_replayed_offline",
+  "provider": "hangar",
+  "base_sha": "7ba88d30229f3073c9aa738f087b9199ffae16ae",
+  "module_sha256": "e684e30670ecad9dc76a4431f35c56aea9a67aa7be9ff0c58b00289ebaf64d72",
+  "captures": [
+    {
+      "captureName": "openapi",
+      "requestUrl": "https://hangar.papermc.io/v3/api-docs/public",
+      "finalUrl": "https://hangar.papermc.io/v3/api-docs/public",
+      "capturedAt": "2026-11-11T10:24:11.591794+00:00",
+      "status": 200,
+      "complete": true,
+      "bytes": 71721,
+      "sha256": "e6475be6c009afe9be8557cf4b38b61b50682a240f736a9c31760619d3223334",
+      "headers": {
+        "content-type": "application/json",
+        "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+        "date": "Wed, 11 Nov 2026 10:24:15 GMT",
+        "etag": "\"0c34e71c4599662f6a07a3753032f8dea\"",
+        "cf-cache-status": "DYNAMIC"
+      }
+    },
+    {
+      "captureName": "terms",
+      "requestUrl": "https://hangar.papermc.io/terms",
+      "finalUrl": "https://hangar.papermc.io/terms",
+      "capturedAt": "2026-11-11T10:24:23.542634+00:00",
+      "status": 200,
+      "complete": true,
+      "bytes": 44634,
+      "sha256": "3786dfde8b7f0cc3fc142fd37baf52377143f451cb035c1dcba028d39aee7285",
+      "headers": {
+        "content-type": "text/html;charset=utf-8",
+        "date": "Wed, 11 Nov 2026 10:24:26 GMT",
+        "cf-cache-status": "DYNAMIC"
+      }
+    },
+    {
+      "captureName": "project-search",
+      "requestUrl": "https://hangar.papermc.io/api/v1/projects?query=Geyser&limit=1&offset=0",
+      "finalUrl": "https://hangar.papermc.io/api/v1/projects?query=Geyser&limit=1&offset=0",
+      "capturedAt": "2026-11-11T10:24:52.652603+00:00",
+      "status": 200,
+      "complete": true,
+      "bytes": 5023,
+      "sha256": "c46299f4fd0bf255b7b449d84804935880b018e5332701a75e1fa7ccb3ce3d96",
+      "headers": {
+        "content-type": "application/json",
+        "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+        "date": "Wed, 11 Nov 2026 10:24:55 GMT",
+        "etag": "\"024ae90ecfe3efdbb550773abeeb7eb9d\"",
+        "cf-cache-status": "DYNAMIC"
+      }
+    },
+    {
+      "captureName": "project",
+      "requestUrl": "https://hangar.papermc.io/api/v1/projects/14",
+      "finalUrl": "https://hangar.papermc.io/api/v1/projects/14",
+      "capturedAt": "2026-11-11T10:25:04.301388+00:00",
+      "status": 200,
+      "complete": true,
+      "bytes": 2012,
+      "sha256": "a9d940bdf6d55dcbc1912689eaefe8eb9f42aa32008189bec81fa1cb6c19f25f",
+      "headers": {
+        "content-type": "application/json",
+        "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+        "date": "Wed, 11 Nov 2026 10:25:07 GMT",
+        "etag": "\"0bda0a7cf94678f8ed832b276ccfd046e\"",
+        "cf-cache-status": "DYNAMIC"
+      }
+    },
+    {
+      "captureName": "versions",
+      "requestUrl": "https://hangar.papermc.io/api/v1/projects/14/versions?limit=1&offset=0&includeHiddenChannels=false",
+      "finalUrl": "https://hangar.papermc.io/api/v1/projects/14/versions?limit=1&offset=0&includeHiddenChannels=false",
+      "capturedAt": "2026-11-11T10:25:08.354677+00:00",
+      "status": 200,
+      "complete": true,
+      "bytes": 1566,
+      "sha256": "fe97086c8829b5a942a5f9b1b3203916199211822169c5cc9f4223f457c50568",
+      "headers": {
+        "content-type": "application/json",
+        "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+        "date": "Wed, 11 Nov 2026 10:25:10 GMT",
+        "etag": "\"08b0c9f54d291f2cdb7d13efe94c45f31\"",
+        "cf-cache-status": "DYNAMIC"
+      }
+    },
+    {
+      "captureName": "selected-version",
+      "requestUrl": "https://hangar.papermc.io/api/v1/projects/14/versions/238",
+      "finalUrl": "https://hangar.papermc.io/api/v1/projects/14/versions/238",
+      "capturedAt": "2026-11-11T10:25:28.499287+00:00",
+      "status": 200,
+      "complete": true,
+      "bytes": 1450,
+      "sha256": "b4c077cae75a9b2595054ff6c025686ea6165b3b399aef1a4f5db9aa26658ae2",
+      "headers": {
+        "content-type": "application/json",
+        "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+        "date": "Wed, 11 Nov 2026 10:25:37 GMT",
+        "etag": "\"0f08cd745e50ae81ce2452df5ac01a543\"",
+        "cf-cache-status": "DYNAMIC"
+      }
+    },
+    {
+      "captureName": "main-page",
+      "requestUrl": "https://hangar.papermc.io/api/v1/pages/main/14",
+      "finalUrl": "https://hangar.papermc.io/api/v1/pages/main/14",
+      "capturedAt": "2026-11-11T10:25:38.636418+00:00",
+      "status": 200,
+      "complete": true,
+      "bytes": 2906,
+      "sha256": "7204c3945201bb7a8184dbb530bb6a5a1a4cad969c02110cbaadb50eedc016ec",
+      "headers": {
+        "content-type": "text/plain;charset=UTF-8",
+        "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+        "date": "Wed, 11 Nov 2026 10:25:41 GMT",
+        "etag": "\"0e7afdbb8171b5432eeb55d46d4e74039\"",
+        "cf-cache-status": "DYNAMIC"
+      }
+    }
+  ],
+  "normalized": [
+    {
+      "provider": "hangar",
+      "kind": "project",
+      "outcome": "accepted",
+      "reason": null,
+      "scope": "selected_object_only",
+      "rawRetained": true,
+      "observedBytes": 2012,
+      "bodySha256": "a9d940bdf6d55dcbc1912689eaefe8eb9f42aa32008189bec81fa1cb6c19f25f",
+      "projectId": 14,
+      "requestUrl": "https://hangar.papermc.io/api/v1/projects/14",
+      "finalUrl": "https://hangar.papermc.io/api/v1/projects/14",
+      "capturedAt": "2026-11-11T10:25:04.301388+00:00",
+      "status": 200,
+      "complete": true,
+      "contentType": "application/json"
+    },
+    {
+      "provider": "hangar",
+      "kind": "version",
+      "outcome": "accepted",
+      "reason": null,
+      "scope": "selected_object_only",
+      "rawRetained": true,
+      "observedBytes": 1450,
+      "bodySha256": "b4c077cae75a9b2595054ff6c025686ea6165b3b399aef1a4f5db9aa26658ae2",
+      "projectId": 14,
+      "versionId": 238,
+      "requestUrl": "https://hangar.papermc.io/api/v1/projects/14/versions/238",
+      "finalUrl": "https://hangar.papermc.io/api/v1/projects/14/versions/238",
+      "capturedAt": "2026-11-11T10:25:28.499287+00:00",
+      "status": 200,
+      "complete": true,
+      "contentType": "application/json"
+    },
+    {
+      "provider": "hangar",
+      "kind": "main_page",
+      "outcome": "accepted",
+      "reason": null,
+      "scope": "selected_object_only",
+      "rawRetained": true,
+      "observedBytes": 2906,
+      "bodySha256": "7204c3945201bb7a8184dbb530bb6a5a1a4cad969c02110cbaadb50eedc016ec",
+      "projectId": 14,
+      "requestUrl": "https://hangar.papermc.io/api/v1/pages/main/14",
+      "finalUrl": "https://hangar.papermc.io/api/v1/pages/main/14",
+      "capturedAt": "2026-11-11T10:25:38.636418+00:00",
+      "status": 200,
+      "complete": true,
+      "contentType": "text/plain"
+    }
+  ],
+  "project": {
+    "id": 14,
+    "namespace": {
+      "owner": "GeyserMC",
+      "slug": "Geyser"
+    },
+    "visibility": "public",
+    "owner_identity": "namespace_only_not_verified_person_or_organization",
+    "project_icon_state": "present",
+    "project_icon_fetched": false,
+    "detail_main_page_state": "null",
+    "search_main_page_state": "present",
+    "independent_page_bytes": 2906,
+    "independent_page_sha256": "7204c3945201bb7a8184dbb530bb6a5a1a4cad969c02110cbaadb50eedc016ec",
+    "page_equals_search_body_bytes": true,
+    "page_does_not_fill_detail_null": true,
+    "detail_member_names_state": "null",
+    "search_member_names_state": "present"
+  },
+  "selected_version": {
+    "id": 238,
+    "project_id": 14,
+    "name": "Geyser",
+    "name_semantics": "provider_label_not_semantic_version",
+    "created_at": "2023-03-19T20:49:50.933106Z",
+    "visibility": "public",
+    "review_state": "reviewed",
+    "review_semantics": "provider_status_not_security_acceptance",
+    "channel_name": "Release",
+    "platform_dependency_counts": {
+      "PAPER": 23,
+      "WATERFALL": 2,
+      "VELOCITY": 6
+    },
+    "plugin_dependencies_state": "empty",
+    "download_platforms": [
+      "PAPER",
+      "WATERFALL",
+      "VELOCITY"
+    ],
+    "downloads": {
+      "PAPER": {
+        "file_info_state": "null",
+        "download_url_state": "null",
+        "external_url_state": "present",
+        "external_hostname": "download.geysermc.org",
+        "mutable_latest_path": true,
+        "bytes_fetched": false,
+        "size_hash_verified": false
+      },
+      "WATERFALL": {
+        "file_info_state": "null",
+        "download_url_state": "null",
+        "external_url_state": "present",
+        "external_hostname": "download.geysermc.org",
+        "mutable_latest_path": true,
+        "bytes_fetched": false,
+        "size_hash_verified": false
+      },
+      "VELOCITY": {
+        "file_info_state": "null",
+        "download_url_state": "null",
+        "external_url_state": "present",
+        "external_hostname": "download.geysermc.org",
+        "mutable_latest_path": true,
+        "bytes_fetched": false,
+        "size_hash_verified": false
+      }
+    },
+    "list_detail_stats_equal": false,
+    "list_member_names_state": "present",
+    "detail_member_names_state": "null"
+  },
+  "body_projection": {
+    "raw_text_characters": 2906,
+    "projection_complete": false,
+    "event_kinds": {
+      "media": 1,
+      "text": 15,
+      "link_start": 7,
+      "link_end": 7
+    },
+    "media_reference_count": 1,
+    "rejected_reference_count": 0,
+    "media_fetched": false,
+    "gallery_completeness": "unknown",
+    "playback": "not_attempted"
+  },
+  "discovery_context": {
+    "implemented_collector": false,
+    "search_pagination": {
+      "count": 147,
+      "limit": 1,
+      "offset": 0
+    },
+    "search_received": 1,
+    "version_pagination": {
+      "count": 1,
+      "limit": 1,
+      "offset": 0
+    },
+    "version_received": 1,
+    "version_filter": "includeHiddenChannels=false",
+    "atomic_snapshot": false,
+    "complete_search": false,
+    "complete_history": false
+  },
+  "historical_failure": {
+    "observed_at": "2026-10-28",
+    "url": "https://hangar.papermc.io/api/v1/projects/ViaVersion/ViaVersion",
+    "state": "retrieval_failed_not_http_status_known",
+    "retried": false,
+    "resolved_by_this_sample": false
+  },
+  "limits": [
+    "No credentials, cookies, private records, account/member routes, media downloads or binaries used.",
+    "Transport/body SHA-256 receipts do not independently establish provider authenticity.",
+    "All supplied data remain untrusted; normalization is not permission to execute, fetch, render markup or install.",
+    "Current Cache-Control includes no-store; this offline research receipt is not a reusable HTTP cache.",
+    "Raw response headers including Set-Cookie stay private; no cookie values included here.",
+    "No actual HTTP errors induced; failure fixtures are synthetic.",
+    "Complete history, creator joins, media decode/playback, artifact verification and target adoption remain unaccepted."
+  ]
+}

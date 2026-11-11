@@ -57,6 +57,7 @@ The [author, post, media and follow contract](author-post-media-contract.md) def
 - [CurseForge](curseforge.md)
 - [Nexus Mods](nexus-mods.md)
 - [Modrinth](modrinth.md)
+- [Hangar](hangar.md) · public project, separately received body and selected-version evidence; external artifacts remain unverified
 - [GitHub](github.md) · selected public upstream metadata, not release-asset coverage
 - [Wikimedia Commons](wikimedia-commons.md) · selected audio verification and scoped upload-revision chains; not browser playback or full-platform coverage
 
