@@ -1,0 +1,631 @@
+{
+  "schema_version": 1,
+  "kind": "original_synthetic_jvm_fixtures",
+  "scope": "OpenJDK class loading, reflection and initialization, not a mod-loader or native-game test.",
+  "sources": [
+    "fixtures/client/ClientApi.java",
+    "fixtures/lab/BodyReference.java",
+    "fixtures/lab/ConstantConsumer.java",
+    "fixtures/lab/Constants.java",
+    "fixtures/lab/DescriptorReference.java",
+    "fixtures/lab/Exploding.java",
+    "fixtures/lab/SafeCommon.java",
+    "fixtures/lab/StaticReference.java",
+    "fixtures/lab/Trace.java"
+  ],
+  "profiles": {
+    "complete": [
+      "client/ClientApi.class",
+      "lab/BodyReference.class",
+      "lab/ConstantConsumer.class",
+      "lab/Constants.class",
+      "lab/DescriptorReference.class",
+      "lab/Exploding.class",
+      "lab/SafeCommon.class",
+      "lab/StaticReference.class",
+      "lab/Trace.class"
+    ],
+    "without_client": [
+      "lab/BodyReference.class",
+      "lab/ConstantConsumer.class",
+      "lab/Constants.class",
+      "lab/DescriptorReference.class",
+      "lab/Exploding.class",
+      "lab/SafeCommon.class",
+      "lab/StaticReference.class",
+      "lab/Trace.class"
+    ]
+  },
+  "cases": [
+    {
+      "id": "presence_complete:1",
+      "scenario": "presence_complete",
+      "profile": "complete",
+      "operation": "discover",
+      "class_name": "client.ClientApi",
+      "loader_generation": 1,
+      "expected": {
+        "success": true,
+        "result": "class:client.ClientApi",
+        "exception_chain": [],
+        "events": []
+      }
+    },
+    {
+      "id": "safe_complete:1",
+      "scenario": "safe_complete",
+      "profile": "complete",
+      "operation": "discover",
+      "class_name": "lab.SafeCommon",
+      "loader_generation": 1,
+      "expected": {
+        "success": true,
+        "result": "class:lab.SafeCommon",
+        "exception_chain": [],
+        "events": []
+      }
+    },
+    {
+      "id": "safe_complete:2",
+      "scenario": "safe_complete",
+      "profile": "complete",
+      "operation": "initialize",
+      "class_name": "lab.SafeCommon",
+      "loader_generation": 1,
+      "expected": {
+        "success": true,
+        "result": "class:lab.SafeCommon",
+        "exception_chain": [],
+        "events": [
+          "SafeCommon"
+        ]
+      }
+    },
+    {
+      "id": "safe_complete:3",
+      "scenario": "safe_complete",
+      "profile": "complete",
+      "operation": "initialize",
+      "class_name": "lab.SafeCommon",
+      "loader_generation": 1,
+      "expected": {
+        "success": true,
+        "result": "class:lab.SafeCommon",
+        "exception_chain": [],
+        "events": [
+          "SafeCommon"
+        ]
+      }
+    },
+    {
+      "id": "safe_complete:4",
+      "scenario": "safe_complete",
+      "profile": "complete",
+      "operation": "invoke:value",
+      "class_name": "lab.SafeCommon",
+      "loader_generation": 1,
+      "expected": {
+        "success": true,
+        "result": "common",
+        "exception_chain": [],
+        "events": [
+          "SafeCommon"
+        ]
+      }
+    },
+    {
+      "id": "body_complete:1",
+      "scenario": "body_complete",
+      "profile": "complete",
+      "operation": "discover",
+      "class_name": "lab.BodyReference",
+      "loader_generation": 1,
+      "expected": {
+        "success": true,
+        "result": "class:lab.BodyReference",
+        "exception_chain": [],
+        "events": []
+      }
+    },
+    {
+      "id": "body_complete:2",
+      "scenario": "body_complete",
+      "profile": "complete",
+      "operation": "invoke:run:false",
+      "class_name": "lab.BodyReference",
+      "loader_generation": 1,
+      "expected": {
+        "success": true,
+        "result": "common",
+        "exception_chain": [],
+        "events": [
+          "BodyReference"
+        ]
+      }
+    },
+    {
+      "id": "body_complete:3",
+      "scenario": "body_complete",
+      "profile": "complete",
+      "operation": "invoke:run:true",
+      "class_name": "lab.BodyReference",
+      "loader_generation": 1,
+      "expected": {
+        "success": true,
+        "result": "client",
+        "exception_chain": [],
+        "events": [
+          "BodyReference",
+          "ClientApi"
+        ]
+      }
+    },
+    {
+      "id": "descriptor_complete:1",
+      "scenario": "descriptor_complete",
+      "profile": "complete",
+      "operation": "discover",
+      "class_name": "lab.DescriptorReference",
+      "loader_generation": 1,
+      "expected": {
+        "success": true,
+        "result": "class:lab.DescriptorReference",
+        "exception_chain": [],
+        "events": []
+      }
+    },
+    {
+      "id": "descriptor_complete:2",
+      "scenario": "descriptor_complete",
+      "profile": "complete",
+      "operation": "methods",
+      "class_name": "lab.DescriptorReference",
+      "loader_generation": 1,
+      "expected": {
+        "success": true,
+        "result": "methods:passthrough,ping",
+        "exception_chain": [],
+        "events": []
+      }
+    },
+    {
+      "id": "descriptor_complete:3",
+      "scenario": "descriptor_complete",
+      "profile": "complete",
+      "operation": "initialize",
+      "class_name": "lab.DescriptorReference",
+      "loader_generation": 1,
+      "expected": {
+        "success": true,
+        "result": "class:lab.DescriptorReference",
+        "exception_chain": [],
+        "events": [
+          "DescriptorReference"
+        ]
+      }
+    },
+    {
+      "id": "static_complete:1",
+      "scenario": "static_complete",
+      "profile": "complete",
+      "operation": "discover",
+      "class_name": "lab.StaticReference",
+      "loader_generation": 1,
+      "expected": {
+        "success": true,
+        "result": "class:lab.StaticReference",
+        "exception_chain": [],
+        "events": []
+      }
+    },
+    {
+      "id": "static_complete:2",
+      "scenario": "static_complete",
+      "profile": "complete",
+      "operation": "initialize",
+      "class_name": "lab.StaticReference",
+      "loader_generation": 1,
+      "expected": {
+        "success": true,
+        "result": "class:lab.StaticReference",
+        "exception_chain": [],
+        "events": [
+          "StaticReference",
+          "ClientApi"
+        ]
+      }
+    },
+    {
+      "id": "static_complete:3",
+      "scenario": "static_complete",
+      "profile": "complete",
+      "operation": "initialize",
+      "class_name": "lab.StaticReference",
+      "loader_generation": 1,
+      "expected": {
+        "success": true,
+        "result": "class:lab.StaticReference",
+        "exception_chain": [],
+        "events": [
+          "StaticReference",
+          "ClientApi"
+        ]
+      }
+    },
+    {
+      "id": "presence_without_client:1",
+      "scenario": "presence_without_client",
+      "profile": "without_client",
+      "operation": "discover",
+      "class_name": "client.ClientApi",
+      "loader_generation": 1,
+      "expected": {
+        "success": false,
+        "result": null,
+        "exception_chain": [
+          "java.lang.ClassNotFoundException"
+        ],
+        "events": []
+      }
+    },
+    {
+      "id": "safe_without_client:1",
+      "scenario": "safe_without_client",
+      "profile": "without_client",
+      "operation": "discover",
+      "class_name": "lab.SafeCommon",
+      "loader_generation": 1,
+      "expected": {
+        "success": true,
+        "result": "class:lab.SafeCommon",
+        "exception_chain": [],
+        "events": []
+      }
+    },
+    {
+      "id": "safe_without_client:2",
+      "scenario": "safe_without_client",
+      "profile": "without_client",
+      "operation": "initialize",
+      "class_name": "lab.SafeCommon",
+      "loader_generation": 1,
+      "expected": {
+        "success": true,
+        "result": "class:lab.SafeCommon",
+        "exception_chain": [],
+        "events": [
+          "SafeCommon"
+        ]
+      }
+    },
+    {
+      "id": "safe_without_client:3",
+      "scenario": "safe_without_client",
+      "profile": "without_client",
+      "operation": "initialize",
+      "class_name": "lab.SafeCommon",
+      "loader_generation": 1,
+      "expected": {
+        "success": true,
+        "result": "class:lab.SafeCommon",
+        "exception_chain": [],
+        "events": [
+          "SafeCommon"
+        ]
+      }
+    },
+    {
+      "id": "safe_without_client:4",
+      "scenario": "safe_without_client",
+      "profile": "without_client",
+      "operation": "invoke:value",
+      "class_name": "lab.SafeCommon",
+      "loader_generation": 1,
+      "expected": {
+        "success": true,
+        "result": "common",
+        "exception_chain": [],
+        "events": [
+          "SafeCommon"
+        ]
+      }
+    },
+    {
+      "id": "body_without_client:1",
+      "scenario": "body_without_client",
+      "profile": "without_client",
+      "operation": "discover",
+      "class_name": "lab.BodyReference",
+      "loader_generation": 1,
+      "expected": {
+        "success": true,
+        "result": "class:lab.BodyReference",
+        "exception_chain": [],
+        "events": []
+      }
+    },
+    {
+      "id": "body_without_client:2",
+      "scenario": "body_without_client",
+      "profile": "without_client",
+      "operation": "invoke:run:false",
+      "class_name": "lab.BodyReference",
+      "loader_generation": 1,
+      "expected": {
+        "success": true,
+        "result": "common",
+        "exception_chain": [],
+        "events": [
+          "BodyReference"
+        ]
+      }
+    },
+    {
+      "id": "body_without_client:3",
+      "scenario": "body_without_client",
+      "profile": "without_client",
+      "operation": "invoke:run:true",
+      "class_name": "lab.BodyReference",
+      "loader_generation": 1,
+      "expected": {
+        "success": false,
+        "result": null,
+        "exception_chain": [
+          "java.lang.reflect.InvocationTargetException",
+          "java.lang.NoClassDefFoundError",
+          "java.lang.ClassNotFoundException"
+        ],
+        "events": [
+          "BodyReference"
+        ]
+      }
+    },
+    {
+      "id": "body_without_client:4",
+      "scenario": "body_without_client",
+      "profile": "without_client",
+      "operation": "invoke:run:false",
+      "class_name": "lab.BodyReference",
+      "loader_generation": 1,
+      "expected": {
+        "success": true,
+        "result": "common",
+        "exception_chain": [],
+        "events": [
+          "BodyReference"
+        ]
+      }
+    },
+    {
+      "id": "descriptor_without_client:1",
+      "scenario": "descriptor_without_client",
+      "profile": "without_client",
+      "operation": "discover",
+      "class_name": "lab.DescriptorReference",
+      "loader_generation": 1,
+      "expected": {
+        "success": true,
+        "result": "class:lab.DescriptorReference",
+        "exception_chain": [],
+        "events": []
+      }
+    },
+    {
+      "id": "descriptor_without_client:2",
+      "scenario": "descriptor_without_client",
+      "profile": "without_client",
+      "operation": "methods",
+      "class_name": "lab.DescriptorReference",
+      "loader_generation": 1,
+      "expected": {
+        "success": false,
+        "result": null,
+        "exception_chain": [
+          "java.lang.NoClassDefFoundError",
+          "java.lang.ClassNotFoundException"
+        ],
+        "events": []
+      }
+    },
+    {
+      "id": "descriptor_without_client:3",
+      "scenario": "descriptor_without_client",
+      "profile": "without_client",
+      "operation": "initialize",
+      "class_name": "lab.DescriptorReference",
+      "loader_generation": 1,
+      "expected": {
+        "success": true,
+        "result": "class:lab.DescriptorReference",
+        "exception_chain": [],
+        "events": [
+          "DescriptorReference"
+        ]
+      }
+    },
+    {
+      "id": "static_without_client:1",
+      "scenario": "static_without_client",
+      "profile": "without_client",
+      "operation": "discover",
+      "class_name": "lab.StaticReference",
+      "loader_generation": 1,
+      "expected": {
+        "success": true,
+        "result": "class:lab.StaticReference",
+        "exception_chain": [],
+        "events": []
+      }
+    },
+    {
+      "id": "static_without_client:2",
+      "scenario": "static_without_client",
+      "profile": "without_client",
+      "operation": "initialize",
+      "class_name": "lab.StaticReference",
+      "loader_generation": 1,
+      "expected": {
+        "success": false,
+        "result": null,
+        "exception_chain": [
+          "java.lang.NoClassDefFoundError",
+          "java.lang.ClassNotFoundException"
+        ],
+        "events": [
+          "StaticReference"
+        ]
+      }
+    },
+    {
+      "id": "static_without_client:3",
+      "scenario": "static_without_client",
+      "profile": "without_client",
+      "operation": "initialize",
+      "class_name": "lab.StaticReference",
+      "loader_generation": 1,
+      "expected": {
+        "success": false,
+        "result": null,
+        "exception_chain": [
+          "java.lang.NoClassDefFoundError",
+          "java.lang.ExceptionInInitializerError"
+        ],
+        "events": [
+          "StaticReference"
+        ]
+      }
+    },
+    {
+      "id": "initializer_retry:1",
+      "scenario": "initializer_retry",
+      "profile": "complete",
+      "operation": "discover",
+      "class_name": "lab.Exploding",
+      "loader_generation": 1,
+      "expected": {
+        "success": true,
+        "result": "class:lab.Exploding",
+        "exception_chain": [],
+        "events": []
+      }
+    },
+    {
+      "id": "initializer_retry:2",
+      "scenario": "initializer_retry",
+      "profile": "complete",
+      "operation": "initialize",
+      "class_name": "lab.Exploding",
+      "loader_generation": 1,
+      "expected": {
+        "success": false,
+        "result": null,
+        "exception_chain": [
+          "java.lang.ExceptionInInitializerError",
+          "java.lang.IllegalStateException"
+        ],
+        "events": [
+          "Exploding"
+        ]
+      }
+    },
+    {
+      "id": "initializer_retry:3",
+      "scenario": "initializer_retry",
+      "profile": "complete",
+      "operation": "initialize",
+      "class_name": "lab.Exploding",
+      "loader_generation": 1,
+      "expected": {
+        "success": false,
+        "result": null,
+        "exception_chain": [
+          "java.lang.NoClassDefFoundError",
+          "java.lang.ExceptionInInitializerError"
+        ],
+        "events": [
+          "Exploding"
+        ]
+      }
+    },
+    {
+      "id": "initializer_retry:4",
+      "scenario": "initializer_retry",
+      "profile": "complete",
+      "operation": "clear_failure_then_initialize",
+      "class_name": "lab.Exploding",
+      "loader_generation": 1,
+      "expected": {
+        "success": false,
+        "result": null,
+        "exception_chain": [
+          "java.lang.NoClassDefFoundError",
+          "java.lang.ExceptionInInitializerError"
+        ],
+        "events": [
+          "Exploding"
+        ]
+      }
+    },
+    {
+      "id": "initializer_retry:5",
+      "scenario": "initializer_retry",
+      "profile": "complete",
+      "operation": "fresh_loader_then_initialize",
+      "class_name": "lab.Exploding",
+      "loader_generation": 2,
+      "expected": {
+        "success": true,
+        "result": "class:lab.Exploding",
+        "exception_chain": [],
+        "events": [
+          "Exploding",
+          "Exploding"
+        ]
+      }
+    },
+    {
+      "id": "constants:1",
+      "scenario": "constants",
+      "profile": "complete",
+      "operation": "discover",
+      "class_name": "lab.ConstantConsumer",
+      "loader_generation": 1,
+      "expected": {
+        "success": true,
+        "result": "class:lab.ConstantConsumer",
+        "exception_chain": [],
+        "events": []
+      }
+    },
+    {
+      "id": "constants:2",
+      "scenario": "constants",
+      "profile": "complete",
+      "operation": "invoke:literal",
+      "class_name": "lab.ConstantConsumer",
+      "loader_generation": 1,
+      "expected": {
+        "success": true,
+        "result": "7",
+        "exception_chain": [],
+        "events": []
+      }
+    },
+    {
+      "id": "constants:3",
+      "scenario": "constants",
+      "profile": "complete",
+      "operation": "invoke:boxed",
+      "class_name": "lab.ConstantConsumer",
+      "loader_generation": 1,
+      "expected": {
+        "success": true,
+        "result": "9",
+        "exception_chain": [],
+        "events": [
+          "Constants"
+        ]
+      }
+    }
+  ]
+}

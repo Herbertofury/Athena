@@ -21,3 +21,7 @@ For Sims and other proprietary games, record the exact supported scripting/runti
 ## Native proof
 
 Use the actual target runtime, normal installed launch path, real assets, both successful and failing scenarios, multiplayer authority where relevant, and long-lived save compatibility. A successful compile, JSON validator or pretty render is only one gate.
+
+## Class loading and environment boundaries
+
+[Class-loading acceptance](mod-classloading-boundaries.md) separates compilation, discovery, reflection, initialization and invocation. The [original JVM fixture lab](../experiments/classloading-boundary-lab/README.md) demonstrates absent-dependency and initializer failures without claiming a native dedicated-server test. See the [dated evidence](../research/2026-11-11-mod-classloading.md).

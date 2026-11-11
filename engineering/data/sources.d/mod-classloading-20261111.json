@@ -1,0 +1,134 @@
+[
+  {
+    "id": "CL11001",
+    "title": "OpenJDK Class loading and reflection API source",
+    "url": "https://github.com/openjdk/jdk21u/blob/ba94eace682733f66e623c089bcafcf4a1b8e39c/src/java.base/share/classes/java/lang/Class.java",
+    "observed_version": "OpenJDK jdk-21.0.13+9; commit ba94eace682733f66e623c089bcafcf4a1b8e39c",
+    "topic": "mod-classloading-boundaries",
+    "note": "Class.forName initialize control, linking/error documentation and reflected method enumeration.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "CL11002",
+    "title": "OpenJDK ClassLoader delegation source",
+    "url": "https://github.com/openjdk/jdk21u/blob/ba94eace682733f66e623c089bcafcf4a1b8e39c/src/java.base/share/classes/java/lang/ClassLoader.java",
+    "observed_version": "OpenJDK jdk-21.0.13+9",
+    "topic": "mod-classloading-boundaries",
+    "note": "Default delegation and load/resolve distinction; fixture parent is the platform loader.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "CL11003",
+    "title": "OpenJDK URLClassLoader lifecycle source",
+    "url": "https://github.com/openjdk/jdk21u/blob/ba94eace682733f66e623c089bcafcf4a1b8e39c/src/java.base/share/classes/java/net/URLClassLoader.java",
+    "observed_version": "OpenJDK jdk-21.0.13+9",
+    "topic": "mod-classloading-boundaries",
+    "note": "Closing stops new local loads but does not invalidate already loaded classes; a fresh fixture loader is not game hot reload.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "CL11004",
+    "title": "OpenJDK class initialization state machine",
+    "url": "https://github.com/openjdk/jdk21u/blob/ba94eace682733f66e623c089bcafcf4a1b8e39c/src/hotspot/share/oops/instanceKlass.cpp",
+    "observed_version": "OpenJDK jdk-21.0.13+9",
+    "topic": "mod-classloading-boundaries",
+    "note": "Erroneous initialization state, subsequent NoClassDefFoundError and original Error versus wrapped exception handling.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "CL11005",
+    "title": "OpenJDK reflected method type resolution",
+    "url": "https://github.com/openjdk/jdk21u/blob/ba94eace682733f66e623c089bcafcf4a1b8e39c/src/hotspot/share/runtime/reflection.cpp",
+    "observed_version": "OpenJDK jdk-21.0.13+9",
+    "topic": "mod-classloading-boundaries",
+    "note": "Reflective method creation resolves parameter and return type mirrors from the signature.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "CL11006",
+    "title": "OpenJDK javac expression generation",
+    "url": "https://github.com/openjdk/jdk21u/blob/ba94eace682733f66e623c089bcafcf4a1b8e39c/src/jdk.compiler/share/classes/com/sun/tools/javac/jvm/Gen.java",
+    "observed_version": "OpenJDK jdk-21.0.13+9",
+    "topic": "mod-classloading-boundaries",
+    "note": "Constant-valued expressions use immediate items; matches the original constant-access control.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "CL11007",
+    "title": "Fabric client entrypoint interface",
+    "url": "https://github.com/FabricMC/fabric-loader/blob/cb9523bc29ef775c50b6aef5e43bc56927cd8e67/src/main/java/net/fabricmc/api/ClientModInitializer.java",
+    "observed_version": "Fabric Loader 0.20.1; commit cb9523bc29ef775c50b6aef5e43bc56927cd8e67",
+    "topic": "mod-classloading-boundaries",
+    "note": "Client entrypoint is environment-specific and uses the client metadata key; interface not executed by the lab.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "CL11008",
+    "title": "Fabric Environment annotation contract",
+    "url": "https://github.com/FabricMC/fabric-loader/blob/cb9523bc29ef775c50b6aef5e43bc56927cd8e67/src/main/java/net/fabricmc/api/Environment.java",
+    "observed_version": "Fabric Loader 0.20.1",
+    "topic": "mod-classloading-boundaries",
+    "note": "Removal warning: related initializer bytecode is not automatically removed with the annotated element.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "CL11009",
+    "title": "Fabric environment type contract",
+    "url": "https://github.com/FabricMC/fabric-loader/blob/cb9523bc29ef775c50b6aef5e43bc56927cd8e67/src/main/java/net/fabricmc/api/EnvType.java",
+    "observed_version": "Fabric Loader 0.20.1",
+    "topic": "mod-classloading-boundaries",
+    "note": "Client environment includes integrated server logic; process environment does not establish logical gameplay authority.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "CL11010",
+    "title": "Fabric common entrypoint interface",
+    "url": "https://github.com/FabricMC/fabric-loader/blob/cb9523bc29ef775c50b6aef5e43bc56927cd8e67/src/main/java/net/fabricmc/api/ModInitializer.java",
+    "observed_version": "Fabric Loader 0.20.1",
+    "topic": "mod-classloading-boundaries",
+    "note": "Main entrypoint metadata key and common initializer contract.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "CL11011",
+    "title": "Fabric dedicated server entrypoint interface",
+    "url": "https://github.com/FabricMC/fabric-loader/blob/cb9523bc29ef775c50b6aef5e43bc56927cd8e67/src/main/java/net/fabricmc/api/DedicatedServerModInitializer.java",
+    "observed_version": "Fabric Loader 0.20.1",
+    "topic": "mod-classloading-boundaries",
+    "note": "Server entrypoint uses server metadata key and runs on the SERVER environment.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "CL11012",
+    "title": "Fabric Loader overview",
+    "url": "https://docs.fabricmc.net/develop/loader/",
+    "observed_version": "Page heading 26.2 observed 2026-11-11; separate from pinned source",
+    "topic": "mod-classloading-boundaries",
+    "note": "Loader, game-specific API hooks and class transformation responsibilities differ; lab does not exercise any of them.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  }
+]
