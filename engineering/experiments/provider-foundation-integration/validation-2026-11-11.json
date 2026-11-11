@@ -1,0 +1,151 @@
+{
+  "schema": 1,
+  "classification": "retained exact-byte offline composition replay",
+  "newProviderRequests": 0,
+  "socketOperationsProhibited": true,
+  "historicalReceiptsRewritten": false,
+  "originalProsePublished": false,
+  "replays": [
+    {
+      "family": "rss",
+      "retainedSource": "nasa",
+      "inputBytes": 48533,
+      "inputSha256": "d4ff818e6af5d5d9a89c0ce6d8428f326967dfcebfb87cefa4c42ce25d285d05",
+      "records": 60,
+      "completeNormalizedEquality": true,
+      "completeReceiptEquality": true,
+      "titlesPreserved": 60,
+      "datesPreserved": 60
+    },
+    {
+      "family": "rss",
+      "retainedSource": "rre36",
+      "inputBytes": 184524,
+      "inputSha256": "7a57453ae3eaa5b8fe87c18cc6a8d6256b9fe30dbda2504031372da365d1c94e",
+      "records": 10,
+      "completeNormalizedEquality": true,
+      "completeReceiptEquality": true,
+      "titlesPreserved": 10,
+      "datesPreserved": 10
+    },
+    {
+      "family": "wordpress",
+      "baselineCommit": "7ba88d30229f3073c9aa738f087b9199ffae16ae",
+      "baselineSourceBlobs": {
+        "engineering/experiments/site-extraction-lab/wordpress_collection.py": "aff2b48b518a690ffe3dba5ee54d6aed549722bc",
+        "engineering/experiments/site-extraction-lab/extractors.py": "6a0088eea8316d8f406f91405a5ab28d7cd7b173"
+      },
+      "classification": "retained exact-byte offline replay; no new source capture",
+      "networkUsed": false,
+      "captureCount": 4,
+      "captures": [
+        {
+          "bytes": 3744,
+          "capturedAt": "2026-11-11T05:23:13.613231+00:00",
+          "sha256": "0d4f7c362b1436308b46d9ec7913159d4b00c6d673b310287f5b294dafb2a053"
+        },
+        {
+          "bytes": 4522,
+          "capturedAt": "2026-11-11T05:23:19.991378+00:00",
+          "sha256": "5ba77a8cc88b3b1e0140c87de8c88a0013b262768b4a10154df874d014bc7e8c"
+        },
+        {
+          "bytes": 3744,
+          "capturedAt": "2026-11-11T05:23:24.406993+00:00",
+          "sha256": "0d4f7c362b1436308b46d9ec7913159d4b00c6d673b310287f5b294dafb2a053"
+        },
+        {
+          "bytes": 4522,
+          "capturedAt": "2026-11-11T05:23:28.171046+00:00",
+          "sha256": "5ba77a8cc88b3b1e0140c87de8c88a0013b262768b4a10154df874d014bc7e8c"
+        }
+      ],
+      "baselineImplementationSha256": {
+        "extractors.py": "2ca3ff4b1645930709ca58eb37f742cca917df4c78dc93ab9c7008475659d188",
+        "wordpress_collection.py": "7e426fabc90a0293e5a93c64b30a2ecfe32ac829d69d6b03233abdb82df7b207"
+      },
+      "candidateImplementationSha256": {
+        "extractors.py": "7f475d108786cd3c6263324afb0b13fa8066a970932576f13cacf1e67454b647",
+        "wordpress_collection.py": "7e426fabc90a0293e5a93c64b30a2ecfe32ac829d69d6b03233abdb82df7b207"
+      },
+      "completeNormalizedOutputEqual": true,
+      "historicalSanitizedReceiptsEqual": true,
+      "normalizedOutputSha256": "852a12ba39d4302dcbb4e85dd3db0991346e475dd8bbd3d62461885321a52a6f",
+      "sanitizedReceiptsSha256": "ba50d69732734b181834f4e7e2828eb1e883d3be210e88aba901c7b441ad26e3",
+      "digestEncoding": "UTF-8 sorted compact ASCII JSON; bytes represented as __bytes_hex__ objects",
+      "limits": [
+        "Retained captures only; no new transfer or expanded provider acceptance.",
+        "Full normalized output compared before sanitized projection. Raw output not published."
+      ]
+    },
+    {
+      "family": "bluesky",
+      "baselineCommit": "7ba88d30229f3073c9aa738f087b9199ffae16ae",
+      "baselineSourceBlobs": {
+        "engineering/experiments/bluesky-thread-lab/threads.py": "bcc48e45fc4bf4098255f4df04e209de09bd96b1",
+        "engineering/experiments/site-extraction-lab/bluesky.py": "559f7aa02049ff8230f7e5eb9b2d24f206becf91",
+        "engineering/experiments/site-extraction-lab/extractors.py": "6a0088eea8316d8f406f91405a5ab28d7cd7b173"
+      },
+      "classification": "retained exact-byte offline replay; no new source capture",
+      "networkUsed": false,
+      "captureCount": 3,
+      "captures": [
+        {
+          "bytes": 1993,
+          "capturedAt": "2026-11-11T06:47:09.841631+00:00",
+          "sha256": "be858322f12ca67bb4d98ae93ba12813eba55f9d2dc872e1f947b9c61953ab8c"
+        },
+        {
+          "bytes": 12829,
+          "capturedAt": "2026-11-11T06:47:13.795820+00:00",
+          "sha256": "e8ffe2b5d87a4e7c9f70224e0355531223258715fe8e945b914e974ae31433b4"
+        },
+        {
+          "bytes": 3276,
+          "capturedAt": "2026-11-11T06:47:21.003329+00:00",
+          "sha256": "1792a77f76c75432e908814c517b317a32161e5f7b46f1fda5acc4dcdca11bd0"
+        }
+      ],
+      "baselineImplementationSha256": {
+        "bluesky.py": "0dec0c1a733cbbd76cb74c81ddca0befe8d9df89fcfc9a7ded1d66abe6e7f8f8",
+        "extractors.py": "2ca3ff4b1645930709ca58eb37f742cca917df4c78dc93ab9c7008475659d188",
+        "threads.py": "047edc3ac872e0b4a8613b23941391f5b2131fea37c7204061006c3a80df0375"
+      },
+      "candidateImplementationSha256": {
+        "bluesky.py": "0dec0c1a733cbbd76cb74c81ddca0befe8d9df89fcfc9a7ded1d66abe6e7f8f8",
+        "extractors.py": "7f475d108786cd3c6263324afb0b13fa8066a970932576f13cacf1e67454b647",
+        "threads.py": "047edc3ac872e0b4a8613b23941391f5b2131fea37c7204061006c3a80df0375"
+      },
+      "completeNormalizedOutputEqual": true,
+      "historicalSanitizedReceiptsEqual": true,
+      "normalizedOutputSha256": "8e493e5017c73f4d2a202753f347118199beb55ef7fe567d27e915d1348fd656",
+      "sanitizedReceiptsSha256": "6c6dda5565262e6693231f4e7dd59a835c2dbe6f836eb8c65bcc10c8f0f6f8c4",
+      "digestEncoding": "UTF-8 sorted compact ASCII JSON; bytes represented as __bytes_hex__ objects",
+      "limits": [
+        "Retained captures only; no new transfer or expanded provider acceptance.",
+        "Full normalized output compared before sanitized projection. Raw output not published."
+      ]
+    },
+    {
+      "family": "youtube-topic-format",
+      "inputBytes": 463,
+      "inputSha256": "f43e820f3c928fae60e93e1feeb5cb36d2c852849a760e85dd929471faefd6be",
+      "baselineRejected": true,
+      "integratedRejected": true
+    },
+    {
+      "family": "discord",
+      "classification": "official code example in a synthetic envelope, not a live message",
+      "exactHistoricalReceiptEquality": true,
+      "fixtureSha256": "d2a3a025a50184b5b1309c9246d2d698eaeab3fb18405249b32f79d16e068153",
+      "componentCount": 15,
+      "eventCount": 50,
+      "mediaReferenceCount": 4,
+      "allMediaUnfetched": true
+    }
+  ],
+  "limits": [
+    "No source freshness, complete-history, live Discord API or media acceptance.",
+    "No runtime, browser, Rust, native-target or performance acceptance."
+  ]
+}
