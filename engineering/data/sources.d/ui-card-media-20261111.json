@@ -1,0 +1,156 @@
+[
+  {
+    "id": "UIAC26001",
+    "title": "INP interaction response and field aggregation",
+    "url": "https://web.dev/articles/inp",
+    "observed_version": "Updated 2025-09-02",
+    "topic": "ui-card-media-acceptance",
+    "note": "INP differs from full asynchronous task completion and observed local interaction percentiles.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 90,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "UIAC26002",
+    "title": "Event Timing API",
+    "url": "https://w3c.github.io/event-timing/",
+    "observed_version": "Current editor document checked 2026-11-11",
+    "topic": "ui-card-media-acceptance",
+    "note": "Event grouping, rounded durations and observation thresholds constrain diagnostic interpretation.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 90,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "UIAC26003",
+    "title": "Web Content Accessibility Guidelines 2.2",
+    "url": "https://www.w3.org/TR/WCAG22/",
+    "observed_version": "W3C Recommendation 2024-12-12",
+    "topic": "ui-card-media-acceptance",
+    "note": "Normative conformance reference; partial automated or synthetic tests do not prove conformance.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 90,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "UIAC26004",
+    "title": "Understanding Reflow",
+    "url": "https://www.w3.org/WAI/WCAG22/Understanding/reflow.html",
+    "observed_version": "WCAG 2.2 informative guidance checked 2026-11-11",
+    "topic": "ui-card-media-acceptance",
+    "note": "Ordinary horizontal text reflows at 320 CSS-pixel width; necessary two-dimensional regions have bounded exceptions.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 90,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "UIAC26005",
+    "title": "Understanding Target Size Minimum",
+    "url": "https://www.w3.org/WAI/WCAG22/Understanding/target-size-minimum.html",
+    "observed_version": "WCAG 2.2 informative guidance checked 2026-11-11",
+    "topic": "ui-card-media-acceptance",
+    "note": "AA minimum is 24 by 24 CSS pixels with specified exceptions, distinct from enhanced AAA.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 90,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "UIAC26006",
+    "title": "APG Modal Dialog Pattern",
+    "url": "https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/",
+    "observed_version": "Current informative pattern checked 2026-11-11",
+    "topic": "ui-card-media-acceptance",
+    "note": "Contained focus, Escape and logical focus return need behavior testing.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 90,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "UIAC26007",
+    "title": "Understanding Focus Not Obscured Minimum",
+    "url": "https://www.w3.org/WAI/WCAG22/Understanding/focus-not-obscured-minimum.html",
+    "observed_version": "WCAG 2.2 informative guidance checked 2026-11-11",
+    "topic": "ui-card-media-acceptance",
+    "note": "Author-created overlays must not entirely hide a component when keyboard-focused under the criterion.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 90,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "UIAC26008",
+    "title": "Understanding Status Messages",
+    "url": "https://www.w3.org/WAI/WCAG22/Understanding/status-messages.html",
+    "observed_version": "WCAG 2.2 informative guidance checked 2026-11-11",
+    "topic": "ui-card-media-acceptance",
+    "note": "Status updates can be conveyed without taking focus; result content and status messages differ.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 90,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "UIAC26009",
+    "title": "Understanding Animation from Interactions",
+    "url": "https://www.w3.org/WAI/WCAG22/Understanding/animation-from-interactions.html",
+    "observed_version": "WCAG 2.2 informative guidance checked 2026-11-11",
+    "topic": "ui-card-media-acceptance",
+    "note": "AAA criterion supports disabling non-essential interaction animation; automatic animation is a separate case.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 90,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "UIAC26010",
+    "title": "HTML image element",
+    "url": "https://html.spec.whatwg.org/multipage/embedded-content.html#the-img-element",
+    "observed_version": "Living Standard dated 2026-11-09",
+    "topic": "ui-card-media-acceptance",
+    "note": "Source selection, reserved dimensions, loading deferral and decoding are distinct concerns.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 90,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "UIAC26011",
+    "title": "WAI Image Alt Decision Tree",
+    "url": "https://www.w3.org/WAI/tutorials/images/decision-tree/",
+    "observed_version": "Current tutorial checked 2026-11-11",
+    "topic": "ui-card-media-acceptance",
+    "note": "Alternative text depends on informative, functional, redundant or decorative purpose.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 90,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "UIAC26012",
+    "title": "HTML media elements",
+    "url": "https://html.spec.whatwg.org/multipage/media.html#media-elements",
+    "observed_version": "Living Standard dated 2026-11-09",
+    "topic": "ui-card-media-acceptance",
+    "note": "Play promises can reject and preload is a hint, not proof of playback or zero traffic.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 90,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "UIAC26013",
+    "title": "APG Grid Pattern",
+    "url": "https://www.w3.org/WAI/ARIA/apg/patterns/grid/",
+    "observed_version": "Current informative pattern checked 2026-11-11",
+    "topic": "ui-card-media-acceptance",
+    "note": "Composite grids have directional keyboard and focus responsibilities beyond visual CSS layout.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 90,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "UIAC26014",
+    "title": "Optimize Cumulative Layout Shift",
+    "url": "https://web.dev/articles/optimize-cls",
+    "observed_version": "Current article checked 2026-11-11",
+    "topic": "ui-card-media-acceptance",
+    "note": "Reserve media space and inspect post-load changes; frame observation can be incomplete.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 90,
+    "evidence": "primary_documented"
+  }
+]
