@@ -88,3 +88,9 @@ Keep named guilds under the Discord platform adapter. A local channel/thread wat
 The existing message normalizer now walks component trees inside embeds as well as top-level message components. The [reproducible official-example experiment](../../experiments/discord-component-embed-lab/README.md) retains before/after evidence and a small MIT-licensed code fixture. It is an offline source-document replay, not a real Discord message, account read, rendered preview or complete-provider acceptance. Raw source data was already retained; this repair restores the missing text/media projection.
 
 The [dated review](../../research/2026-11-11-discord-component-embeds.md) also records Discord's documented November 16 guild-channel visibility change. Athena has no channel collector in this scope; absence after permission filtering is not a verified deletion.
+
+## November 11 follow-up: scoped media states
+
+[Offline media-state research](../../research/2026-11-11-discord-media-states.md) preserves enclosing container spoilers and distinguishes attachment, embed, embed-media and unfurled-media flags. Provider scan hints retain their source and unknown bits; absent metadata is unknown, never a clean verdict. Container visibility is carried on descendant events, while the full flattened text and raw source remain preserved data, not display-safe previews. [DMS11001] [DMS11002]
+
+This is stacked on the component-preview draft, not deployed support. The original licensed official example is unchanged and replayed for preservation; all positive new flag/spoiler cases are synthetic. No private message, API grant, download, moderation action or rendering acceptance is implied. Existing access, partial-array replacement, signed-URL and public-receipt limits remain.

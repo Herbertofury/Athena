@@ -31,7 +31,7 @@ class DiscordComponentReceiptTests(unittest.TestCase):
     def test_replay_is_reproducible_without_network(self):
         with patch('socket.socket', side_effect=AssertionError('Unexpected socket use')):
             actual = probe.replay(MODULE, FIXTURE)
-        expected = json.loads((LAB / 'after.json').read_text())
+        expected = json.loads((LAB / 'current-after.json').read_text())
         self.assertEqual(actual, expected)
         self.assertEqual(actual['implementation_sha256'], hashlib.sha256(MODULE.read_bytes()).hexdigest())
         self.assertEqual((actual['component_count'], actual['text_event_count'], actual['media_reference_count'], actual['link_event_count']), (15, 7, 4, 4))

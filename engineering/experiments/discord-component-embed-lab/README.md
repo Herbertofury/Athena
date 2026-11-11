@@ -61,3 +61,7 @@ The adjacent adapter example's unsupported `access="complete"` argument was
 corrected to the existing `access="available"` state; no API changed. Browser,
 Rust, hosted CI, live account access and target adoption remain separately
 unverified. Local checks do not authorize integration, merge or deployment.
+
+## Follow-up receipt reconciliation
+
+The separate [media-state follow-up](../discord-media-state-lab/README.md) changes the shared module's hash. The exact historical PR54 result is preserved as [after.json](after.json); [current-after.json](current-after.json) is the current offline replay. The original sample, license, before result and capture provenance remain unchanged. The limits and test totals above describe the original repair, not the later module. No example flags were fabricated to support a live-data claim.

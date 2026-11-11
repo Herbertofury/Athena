@@ -35,6 +35,32 @@ def _array(value):
     return value
 
 
+def _flags(item):
+    value = item.get('flags')
+    if 'flags' in item and (type(value) is not int or value < 0):
+        raise ExtractionError('Expected nonnegative integer flags')
+    return value
+
+
+def _spoiler(item):
+    value = item.get('spoiler', False)
+    if type(value) is not bool:
+        raise ExtractionError('Expected boolean spoiler')
+    return value
+
+
+def _scan_hint(item, scope):
+    # These are provider hints, not a clean verdict or permission to display.
+    # Omitted hint fields mean unknown. A zero bit is only "not_flagged".
+    flags = _flags(item)
+    bits = (1, 2, 4) if scope == 'unfurled_media' else (16, 64, 128)
+    known = 7 if scope == 'unfurled_media' else 255 if scope == 'attachment' else 240
+    return dict(scope=scope, state='unknown' if flags is None else 'reported',
+                flags=flags, unknownBits=None if flags is None else flags & ~known,
+                **{key: 'unknown' if flags is None else 'flagged' if flags & bit else 'not_flagged'
+                   for key, bit in zip(('explicit', 'gore', 'selfHarm'), bits)})
+
+
 def _merge(old, new, depth=0):
     if depth > 32:
         raise ExtractionError('Payload nesting limit')
@@ -98,7 +124,7 @@ def _body(data, warnings, depth=0):
             raise ExtractionError('Duplicate attachment identity')
         attachments[ident] = item
 
-    def media(item, scope, role='media', wrapper=None, *, embed_component=False):
+    def media(item, scope, role='media', wrapper=None, *, embed_component=False, flag_scope='embed_media'):
         _object(item)
         wrapper = wrapper or {}
         raw = item.get('url')
@@ -120,6 +146,16 @@ def _body(data, warnings, depth=0):
                 attachment_id = attachment['id']
             else:
                 warnings.append('Unresolved or ambiguous component attachment reference')
+        # Read each namespace before merging ordinary metadata. In particular,
+        # attachment bit 0 is a clip, not unfurled-media animation.
+        own_flags = _flags(item)
+        attachment_flags = _flags(attachment) if attachment else None
+        wrapper_spoiler = _spoiler(wrapper)
+        animated = bool((own_flags or 0) & (1 if flag_scope == 'unfurled_media' else 32))
+        animated |= bool((attachment_flags or 0) & 32)
+        attachment_spoiler = bool((attachment_flags or 0) & 8)
+        if flag_scope == 'attachment':
+            attachment_spoiler |= bool((own_flags or 0) & 8)
         info = dict(attachment or {})
         info.update(item)
         # An attachment:// reference is not a remote delivery URL.
@@ -135,12 +171,35 @@ def _body(data, warnings, depth=0):
                  reference=raw if isinstance(raw, str) and raw.startswith('attachment://') else None,
                  referenceRejected=bool(raw) and not url and not (isinstance(raw, str) and raw.startswith('attachment://')),
                  mimeHint=mime, mediaKind=kind, description=wrapper.get('description', info.get('description')),
-                 spoiler=bool(wrapper.get('spoiler', False)) or str(info.get('filename', '')).startswith('SPOILER_'),
-                 animatedHint=True if mime == 'image/gif' or (isinstance(info.get('flags'), int) and info['flags'] & 1 and scope.startswith('components')) else None,
+                 spoiler=wrapper_spoiler or attachment_spoiler or str(info.get('filename', '')).startswith('SPOILER_'),
+                 animatedHint=True if mime == 'image/gif' or animated else None,
                  downloaded=False, playbackVerified=False)
         for key in ('width', 'height', 'size', 'duration_secs', 'waveform', 'filename', 'title', 'flags'):
             if key in info:
                 e[key] = info[key]
+        # Keep both sources when a component/rich image binds an attachment.
+        # Legacy `flags` remains the merged raw value, not a shared namespace.
+        flag_sources = []
+        if own_flags is not None:
+            flag_sources.append(dict(scope=flag_scope, flags=own_flags))
+        if attachment and flag_scope != 'attachment' and attachment_flags is not None:
+            flag_sources.append(dict(scope='attachment', flags=attachment_flags))
+        if flag_sources:
+            e['flagSources'] = flag_sources
+        scans = []
+        if flag_scope == 'attachment':
+            scans.append(_scan_hint(item, 'attachment'))
+        elif attachment:
+            scans.append(_scan_hint(attachment, 'attachment'))
+        if flag_scope == 'unfurled_media':
+            metadata = _object(item['content_scan_metadata']) if 'content_scan_metadata' in item else {}
+            if 'content_scan_metadata' in item and 'flags' not in metadata:
+                raise ExtractionError('Expected content scan flags')
+            scans.append(_scan_hint(metadata, 'unfurled_media'))
+        # Absence is represented by omission to preserve ordinary projections.
+        # A supplied flags value (including zero) is still only a provider hint.
+        if any(hint['state'] != 'unknown' for hint in scans):
+            e['contentScanHints'] = scans
         events.append(e)
         if role == 'file':
             files.append(deepcopy(e))
@@ -152,6 +211,8 @@ def _body(data, warnings, depth=0):
         typ = item.get('type')
         if not isinstance(typ, int) or isinstance(typ, bool):
             raise ExtractionError('Expected integer component type')
+        start, file_start = len(events), len(files)
+        local_spoiler = _spoiler(item)
         events.append(dict(type='component_start', source=scope, componentType=typ, componentId=item.get('id')))
         if typ in (1, 9, 17):
             for i, child in enumerate(_array(item.get('components', []))):
@@ -161,13 +222,13 @@ def _body(data, warnings, depth=0):
         elif typ == 10:
             emit_text(item.get('content'), scope + '/content')
         elif typ == 11:
-            media(_object(item.get('media')), scope + '/media', 'thumbnail', item, embed_component=embed_component)
+            media(_object(item.get('media')), scope + '/media', 'thumbnail', item, embed_component=embed_component, flag_scope='unfurled_media')
         elif typ == 12:
             for i, entry in enumerate(_array(item.get('items', []))):
                 _object(entry)
-                media(_object(entry.get('media')), f'{scope}/items/{i}', wrapper=entry, embed_component=embed_component)
+                media(_object(entry.get('media')), f'{scope}/items/{i}', wrapper=entry, embed_component=embed_component, flag_scope='unfurled_media')
         elif typ == 13:
-            media(_object(item.get('file')), scope + '/file', 'file', item, embed_component=embed_component)
+            media(_object(item.get('file')), scope + '/file', 'file', item, embed_component=embed_component, flag_scope='unfurled_media')
         elif typ == 2:
             emit_text(item.get('label'), scope + '/label')
             if 'url' in item:
@@ -185,12 +246,21 @@ def _body(data, warnings, depth=0):
             warnings.append('Unsupported message component type ' + str(typ))
             events.append(dict(type='unsupported_component', source=scope, componentType=typ))
         events.append(dict(type='component_end', source=scope))
+        # Apply the container's visibility to its completed contiguous subtree.
+        # Descendant false cannot unhide it; siblings and snapshots stay separate.
+        if typ == 17 and local_spoiler:
+            for event in events[start:]:
+                event['spoiler'] = True
+            for file in files[file_start:]:
+                file['spoiler'] = True
 
     emit_text(data.get('content'), 'content')
     for index, embed in enumerate(_array(data.get('embeds', []))):
         _object(embed)
         scope = f'embeds/{index}'
         events.append(dict(type='embed_start', source=scope, embedType=embed.get('type'), url=_delivery(embed.get('url'))))
+        if _flags(embed) is not None:
+            events[-1]['contentScanHints'] = [_scan_hint(embed, 'embed')]
         emit_text(_object(embed.get('author', {})).get('name'), scope + '/author')
         for key in ('title', 'description'):
             emit_text(embed.get(key), scope + '/' + key)
@@ -217,7 +287,7 @@ def _body(data, warnings, depth=0):
     for index, item in enumerate(_array(data.get('components', []))):
         component(item, f'components/{index}')
     for ident, item in attachments.items():
-        media(dict(item, attachment_id=ident), 'attachments/' + ident, 'file')
+        media(dict(item, attachment_id=ident), 'attachments/' + ident, 'file', flag_scope='attachment')
     snapshots = []
     for snapshot in _array(data.get('message_snapshots', [])):
         message = _object(_object(snapshot).get('message'))
