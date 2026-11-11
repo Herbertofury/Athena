@@ -1,6 +1,6 @@
 # Offline Bluesky thread evidence
 
-November 11, 2026. [Research and official contracts](../../research/2026-11-11-bluesky-threads.md) · [local public-form receipt](public-validation-2026-11-11.json) · [synthetic defensive tests](../../tests/test_bluesky_threads.py).
+November 11, 2026. [Research and official contracts](../../research/2026-11-11-bluesky-threads.md) · [public-form receipt](public-validation-2026-11-11.json) · [synthetic defensive tests](../../tests/test_bluesky_threads.py).
 
 [threads.py](threads.py) normalizes supplied getPostThread JSON bytes for an explicitly selected DID post URI, descendant depth and ancestor height. It reuses the existing Bluesky post normalizer and strict JSON decoder. It makes no HTTP requests, reads no account, grants no access, changes no native social state and fetches no media.
 
@@ -8,7 +8,7 @@ November 11, 2026. [Research and official contracts](../../research/2026-11-11-b
 
 Three anonymous official AppView captures returned twelve post representations across nine distinct identities. At depth zero, the selected post had replyCount=6 with replies absent. At depth two, six immediate replies and two grandchildren were returned. A selected reply returned its parent without that parent's other children. These are different request scopes, not complete imports or evidence that absent arrays are empty histories.
 
-Raw captures, response headers, text, handles, URLs and viewer metadata stay external. The committed-form receipt is only a prepared local artifact. No publication is implied. No blocked/notFound live fixture was encountered; tests for those cases are synthetic.
+Raw captures, response headers, text, handles, URLs and viewer metadata stay external. The public receipt contains bounded provenance and replay states, never the raw source body. No blocked/notFound live fixture was encountered; tests for those cases are synthetic.
 
 ## API and private evidence
 

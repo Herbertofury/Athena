@@ -8,7 +8,7 @@ The current [Bluesky adapter](../docs/adapters/bluesky.md) already handles full 
 
 The [thread experiment](../experiments/bluesky-thread-lab/README.md) reuses normalize_post from the existing adapter and the existing strict JSON decoder. It only consumes bounded supplied bytes. Transport, identity discovery, authentication and application rendering remain the responsibility of established clients and the consuming application. This is a focused evidence layer, not a replacement Bluesky SDK or scraper.
 
-This contribution is separate from the unpublished GitHub release-asset candidate. It begins from the unchanged remote research head and contains none of that candidate's files. No publication or alternate route around the denied commit is attempted.
+This contribution is separate from the unpublished GitHub release-asset candidate. It begins from the unchanged remote research head and contains none of that candidate's files. It does not include or publish any part of that candidate. Publication status belongs to this distinct draft and handoff; no alternate route around the denied operation is used.
 
 ## Current official contracts
 
@@ -40,7 +40,7 @@ The receipt retains exact input hashes, lengths, capture times, request geometry
 - Direct PDS/repository traversal is a different synchronization and identity-verification problem. This pass neither crawls repositories nor signs in to broaden visibility.
 - CID/DID and reference agreement is structural consistency, not authenticated authorship. Public receipts minimize disclosure but do not anonymize linkable hashes.
 
-No target baseline comparison, performance benchmark, browser rendering, media decode/playback, exhaustive collection or account-specific moderation test was performed. No target compatibility or adoption recommendation follows. Independent review, synthetic failures and final local test outcomes are retained with the handoff; hosted acceptance cannot be claimed for an unpublished candidate.
+No target baseline comparison, performance benchmark, browser rendering, media decode/playback, exhaustive collection or account-specific moderation test was performed. No target compatibility or adoption recommendation follows. Independent review, synthetic failures and final local test outcomes are retained with the handoff; hosted acceptance requires separate exact-head evidence.
 
 ## Retained implementation checks
 
@@ -48,4 +48,4 @@ A composing-state aggregate ran 975 tests with one research-link error because t
 
 ## Sources and reproduction
 
-Sources BST11001 through BST11008 are in the additive [source fragment](../data/sources.d/bluesky-threads-20261111.json). Prior sources and dated evidence are unchanged. The [experiment guide](../experiments/bluesky-thread-lab/README.md) describes the actual API, limits and tests. The [public-form receipt](../experiments/bluesky-thread-lab/public-validation-2026-11-11.json) is prepared locally; it is not a statement that anything was published.
+Sources BST11001 through BST11008 are in the additive [source fragment](../data/sources.d/bluesky-threads-20261111.json). Prior sources and dated evidence are unchanged. The [experiment guide](../experiments/bluesky-thread-lab/README.md) describes the actual API, limits and tests. The [public-form receipt](../experiments/bluesky-thread-lab/public-validation-2026-11-11.json) records scoped offline replay; it is not a live API test or hosted acceptance.
