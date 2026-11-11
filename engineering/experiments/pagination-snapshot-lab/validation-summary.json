@@ -1,0 +1,46 @@
+{
+  "checked_at": "2026-11-11",
+  "status": "local checks complete; inherited aggregate link error remains",
+  "base": "44384b809c80e03adbd62f8be9617d01e6ad9922",
+  "focused": {
+    "tests": 29,
+    "passed": 29
+  },
+  "focused_optimized": {
+    "tests": 29,
+    "passed": 29
+  },
+  "independent_adversarial": {
+    "tests": 11,
+    "passed": 11
+  },
+  "demo": {
+    "scenarios": 9,
+    "checks": 19,
+    "all_passed": true,
+    "independent_replay_equal": true
+  },
+  "python_aggregate": {
+    "tests": 355,
+    "passed": 354,
+    "errors": 1,
+    "skipped": 0
+  },
+  "javascript": {
+    "tests": 303,
+    "passed": 303
+  },
+  "build_checks": {
+    "research_explorer": "passed",
+    "card_lab": "passed",
+    "media_lab": "passed"
+  },
+  "source_register": {
+    "entries": 2212,
+    "new_entries": 6,
+    "baseline_rows_preserved": true
+  },
+  "inherited_error": "test_tools.ResearchTests.test_register_and_links: apps/atlas-lab/README.md: broken local link ../../../docs/athena-local-runtime.md",
+  "hosted_ci": "Must be checked separately for any exact published head. Local checks are not hosted CI.",
+  "scope": "Original owned fixtures only; no target performance, security, delivery or durability acceptance."
+}

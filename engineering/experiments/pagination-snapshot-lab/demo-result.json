@@ -1,0 +1,1128 @@
+{
+  "schema_version": 1,
+  "environment": {
+    "python": "3.12.14",
+    "sqlite": "3.53.1",
+    "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
+    "sqlite_source_id": "2026-05-05 10:34:17 c88b22011a54b4f6fbd149e9f8e4de77658ce58143a1af0e3785e4e6475127e9",
+    "compile_options": [
+      "ATOMIC_INTRINSICS=1",
+      "COMPILER=clang-22.1.3",
+      "DEFAULT_AUTOVACUUM",
+      "DEFAULT_CACHE_SIZE=-2000",
+      "DEFAULT_FILE_FORMAT=4",
+      "DEFAULT_JOURNAL_SIZE_LIMIT=-1",
+      "DEFAULT_MMAP_SIZE=0",
+      "DEFAULT_PAGE_SIZE=4096",
+      "DEFAULT_PCACHE_INITSZ=20",
+      "DEFAULT_RECURSIVE_TRIGGERS",
+      "DEFAULT_SECTOR_SIZE=4096",
+      "DEFAULT_SYNCHRONOUS=2",
+      "DEFAULT_WAL_AUTOCHECKPOINT=1000",
+      "DEFAULT_WAL_SYNCHRONOUS=2",
+      "DEFAULT_WORKER_THREADS=0",
+      "DIRECT_OVERFLOW_READ",
+      "ENABLE_DBSTAT_VTAB",
+      "ENABLE_FTS3",
+      "ENABLE_FTS3_PARENTHESIS",
+      "ENABLE_FTS4",
+      "ENABLE_FTS5",
+      "ENABLE_GEOPOLY",
+      "ENABLE_MATH_FUNCTIONS",
+      "ENABLE_PERCENTILE",
+      "ENABLE_RTREE",
+      "MALLOC_SOFT_LIMIT=1024",
+      "MAX_ATTACHED=10",
+      "MAX_COLUMN=2000",
+      "MAX_COMPOUND_SELECT=500",
+      "MAX_DEFAULT_PAGE_SIZE=8192",
+      "MAX_EXPR_DEPTH=1000",
+      "MAX_FUNCTION_ARG=1000",
+      "MAX_LENGTH=1000000000",
+      "MAX_LIKE_PATTERN_LENGTH=50000",
+      "MAX_MMAP_SIZE=0x7fff0000",
+      "MAX_PAGE_COUNT=0xfffffffe",
+      "MAX_PAGE_SIZE=65536",
+      "MAX_SQL_LENGTH=1000000000",
+      "MAX_TRIGGER_DEPTH=1000",
+      "MAX_VARIABLE_NUMBER=32766",
+      "MAX_VDBE_OP=250000000",
+      "MAX_WORKER_THREADS=8",
+      "MUTEX_PTHREADS",
+      "SYSTEM_MALLOC",
+      "TEMP_STORE=1",
+      "THREADSAFE=1"
+    ],
+    "journal_mode": "delete",
+    "synchronous": 2
+  },
+  "source_sha256": {
+    "paging.py": "9f16ebdac06cdd6ad0f753fd1d3810cc05542421eb31249a6775791ab514fbc4",
+    "run_demo.py": "3fda722deb243df1563b81fa63e0461a3a6a7c0889e49a5653df7aa6467cb67d"
+  },
+  "deterministic_identity_note": "Demo replaces each fresh random identity with a unique public fixture value for exact replay. Cursors are unsigned and never authorization.",
+  "scenarios": [
+    {
+      "name": "offset_insertion",
+      "observations": {
+        "initial": [
+          {
+            "id": 1,
+            "sort_value": 1,
+            "bucket": "mods",
+            "payload": "{ \"id\": 1, \"warning\": \"kept\", \"extra\": null }"
+          },
+          {
+            "id": 2,
+            "sort_value": 2,
+            "bucket": "mods",
+            "payload": "{ \"id\": 2, \"warning\": \"kept\", \"extra\": null }"
+          },
+          {
+            "id": 3,
+            "sort_value": 3,
+            "bucket": "mods",
+            "payload": "{ \"id\": 3, \"warning\": \"kept\", \"extra\": null }"
+          },
+          {
+            "id": 4,
+            "sort_value": 4,
+            "bucket": "mods",
+            "payload": "{ \"id\": 4, \"warning\": \"kept\", \"extra\": null }"
+          },
+          {
+            "id": 5,
+            "sort_value": 5,
+            "bucket": "mods",
+            "payload": "{ \"id\": 5, \"warning\": \"kept\", \"extra\": null }"
+          },
+          {
+            "id": 6,
+            "sort_value": 6,
+            "bucket": "mods",
+            "payload": "{ \"id\": 6, \"warning\": \"kept\", \"extra\": null }"
+          }
+        ],
+        "first": [
+          {
+            "id": 1,
+            "sort_value": 1,
+            "bucket": "mods",
+            "payload": "{ \"id\": 1, \"warning\": \"kept\", \"extra\": null }"
+          },
+          {
+            "id": 2,
+            "sort_value": 2,
+            "bucket": "mods",
+            "payload": "{ \"id\": 2, \"warning\": \"kept\", \"extra\": null }"
+          }
+        ],
+        "second": [
+          {
+            "id": 2,
+            "sort_value": 2,
+            "bucket": "mods",
+            "payload": "{ \"id\": 2, \"warning\": \"kept\", \"extra\": null }"
+          },
+          {
+            "id": 3,
+            "sort_value": 3,
+            "bucket": "mods",
+            "payload": "{ \"id\": 3, \"warning\": \"kept\", \"extra\": null }"
+          }
+        ],
+        "live_after": [
+          {
+            "id": 99,
+            "sort_value": 0,
+            "bucket": "mods",
+            "payload": "inserted"
+          },
+          {
+            "id": 1,
+            "sort_value": 1,
+            "bucket": "mods",
+            "payload": "{ \"id\": 1, \"warning\": \"kept\", \"extra\": null }"
+          },
+          {
+            "id": 2,
+            "sort_value": 2,
+            "bucket": "mods",
+            "payload": "{ \"id\": 2, \"warning\": \"kept\", \"extra\": null }"
+          },
+          {
+            "id": 3,
+            "sort_value": 3,
+            "bucket": "mods",
+            "payload": "{ \"id\": 3, \"warning\": \"kept\", \"extra\": null }"
+          },
+          {
+            "id": 4,
+            "sort_value": 4,
+            "bucket": "mods",
+            "payload": "{ \"id\": 4, \"warning\": \"kept\", \"extra\": null }"
+          },
+          {
+            "id": 5,
+            "sort_value": 5,
+            "bucket": "mods",
+            "payload": "{ \"id\": 5, \"warning\": \"kept\", \"extra\": null }"
+          },
+          {
+            "id": 6,
+            "sort_value": 6,
+            "bucket": "mods",
+            "payload": "{ \"id\": 6, \"warning\": \"kept\", \"extra\": null }"
+          }
+        ]
+      },
+      "checks": {
+        "seen_row_duplicated": true
+      }
+    },
+    {
+      "name": "offset_deletion",
+      "observations": {
+        "initial": [
+          {
+            "id": 1,
+            "sort_value": 1,
+            "bucket": "mods",
+            "payload": "{ \"id\": 1, \"warning\": \"kept\", \"extra\": null }"
+          },
+          {
+            "id": 2,
+            "sort_value": 2,
+            "bucket": "mods",
+            "payload": "{ \"id\": 2, \"warning\": \"kept\", \"extra\": null }"
+          },
+          {
+            "id": 3,
+            "sort_value": 3,
+            "bucket": "mods",
+            "payload": "{ \"id\": 3, \"warning\": \"kept\", \"extra\": null }"
+          },
+          {
+            "id": 4,
+            "sort_value": 4,
+            "bucket": "mods",
+            "payload": "{ \"id\": 4, \"warning\": \"kept\", \"extra\": null }"
+          },
+          {
+            "id": 5,
+            "sort_value": 5,
+            "bucket": "mods",
+            "payload": "{ \"id\": 5, \"warning\": \"kept\", \"extra\": null }"
+          },
+          {
+            "id": 6,
+            "sort_value": 6,
+            "bucket": "mods",
+            "payload": "{ \"id\": 6, \"warning\": \"kept\", \"extra\": null }"
+          }
+        ],
+        "first": [
+          {
+            "id": 1,
+            "sort_value": 1,
+            "bucket": "mods",
+            "payload": "{ \"id\": 1, \"warning\": \"kept\", \"extra\": null }"
+          },
+          {
+            "id": 2,
+            "sort_value": 2,
+            "bucket": "mods",
+            "payload": "{ \"id\": 2, \"warning\": \"kept\", \"extra\": null }"
+          }
+        ],
+        "rest": [
+          {
+            "id": 4,
+            "sort_value": 4,
+            "bucket": "mods",
+            "payload": "{ \"id\": 4, \"warning\": \"kept\", \"extra\": null }"
+          },
+          {
+            "id": 5,
+            "sort_value": 5,
+            "bucket": "mods",
+            "payload": "{ \"id\": 5, \"warning\": \"kept\", \"extra\": null }"
+          },
+          {
+            "id": 6,
+            "sort_value": 6,
+            "bucket": "mods",
+            "payload": "{ \"id\": 6, \"warning\": \"kept\", \"extra\": null }"
+          }
+        ],
+        "live_after": [
+          {
+            "id": 2,
+            "sort_value": 2,
+            "bucket": "mods",
+            "payload": "{ \"id\": 2, \"warning\": \"kept\", \"extra\": null }"
+          },
+          {
+            "id": 3,
+            "sort_value": 3,
+            "bucket": "mods",
+            "payload": "{ \"id\": 3, \"warning\": \"kept\", \"extra\": null }"
+          },
+          {
+            "id": 4,
+            "sort_value": 4,
+            "bucket": "mods",
+            "payload": "{ \"id\": 4, \"warning\": \"kept\", \"extra\": null }"
+          },
+          {
+            "id": 5,
+            "sort_value": 5,
+            "bucket": "mods",
+            "payload": "{ \"id\": 5, \"warning\": \"kept\", \"extra\": null }"
+          },
+          {
+            "id": 6,
+            "sort_value": 6,
+            "bucket": "mods",
+            "payload": "{ \"id\": 6, \"warning\": \"kept\", \"extra\": null }"
+          }
+        ]
+      },
+      "checks": {
+        "unseen_row_omitted": true
+      }
+    },
+    {
+      "name": "live_keyset_moves",
+      "observations": {
+        "initial": [
+          {
+            "id": 1,
+            "sort_value": 1,
+            "bucket": "mods",
+            "payload": "{ \"id\": 1, \"warning\": \"kept\", \"extra\": null }"
+          },
+          {
+            "id": 2,
+            "sort_value": 2,
+            "bucket": "mods",
+            "payload": "{ \"id\": 2, \"warning\": \"kept\", \"extra\": null }"
+          },
+          {
+            "id": 3,
+            "sort_value": 3,
+            "bucket": "mods",
+            "payload": "{ \"id\": 3, \"warning\": \"kept\", \"extra\": null }"
+          },
+          {
+            "id": 4,
+            "sort_value": 4,
+            "bucket": "mods",
+            "payload": "{ \"id\": 4, \"warning\": \"kept\", \"extra\": null }"
+          },
+          {
+            "id": 5,
+            "sort_value": 5,
+            "bucket": "mods",
+            "payload": "{ \"id\": 5, \"warning\": \"kept\", \"extra\": null }"
+          },
+          {
+            "id": 6,
+            "sort_value": 6,
+            "bucket": "mods",
+            "payload": "{ \"id\": 6, \"warning\": \"kept\", \"extra\": null }"
+          }
+        ],
+        "first": [
+          {
+            "id": 1,
+            "sort_value": 1,
+            "bucket": "mods",
+            "payload": "{ \"id\": 1, \"warning\": \"kept\", \"extra\": null }"
+          },
+          {
+            "id": 2,
+            "sort_value": 2,
+            "bucket": "mods",
+            "payload": "{ \"id\": 2, \"warning\": \"kept\", \"extra\": null }"
+          }
+        ],
+        "rest": [
+          {
+            "id": 4,
+            "sort_value": 4,
+            "bucket": "mods",
+            "payload": "{ \"id\": 4, \"warning\": \"kept\", \"extra\": null }"
+          },
+          {
+            "id": 5,
+            "sort_value": 5,
+            "bucket": "mods",
+            "payload": "{ \"id\": 5, \"warning\": \"kept\", \"extra\": null }"
+          },
+          {
+            "id": 6,
+            "sort_value": 6,
+            "bucket": "mods",
+            "payload": "{ \"id\": 6, \"warning\": \"kept\", \"extra\": null }"
+          },
+          {
+            "id": 1,
+            "sort_value": 100,
+            "bucket": "mods",
+            "payload": "moved after cursor"
+          }
+        ],
+        "live_after": [
+          {
+            "id": 3,
+            "sort_value": -100,
+            "bucket": "mods",
+            "payload": "moved before cursor"
+          },
+          {
+            "id": 2,
+            "sort_value": 2,
+            "bucket": "mods",
+            "payload": "{ \"id\": 2, \"warning\": \"kept\", \"extra\": null }"
+          },
+          {
+            "id": 4,
+            "sort_value": 4,
+            "bucket": "mods",
+            "payload": "{ \"id\": 4, \"warning\": \"kept\", \"extra\": null }"
+          },
+          {
+            "id": 5,
+            "sort_value": 5,
+            "bucket": "mods",
+            "payload": "{ \"id\": 5, \"warning\": \"kept\", \"extra\": null }"
+          },
+          {
+            "id": 6,
+            "sort_value": 6,
+            "bucket": "mods",
+            "payload": "{ \"id\": 6, \"warning\": \"kept\", \"extra\": null }"
+          },
+          {
+            "id": 1,
+            "sort_value": 100,
+            "bucket": "mods",
+            "payload": "moved after cursor"
+          }
+        ]
+      },
+      "checks": {
+        "already_seen_id_repeated": true,
+        "unseen_id_moved_behind_boundary": true
+      }
+    },
+    {
+      "name": "id_high_water",
+      "observations": {
+        "initial": [
+          {
+            "id": 1,
+            "sort_value": 1,
+            "bucket": "mods",
+            "payload": "{ \"id\": 1, \"warning\": \"kept\", \"extra\": null }"
+          },
+          {
+            "id": 2,
+            "sort_value": 2,
+            "bucket": "mods",
+            "payload": "{ \"id\": 2, \"warning\": \"kept\", \"extra\": null }"
+          },
+          {
+            "id": 3,
+            "sort_value": 3,
+            "bucket": "mods",
+            "payload": "{ \"id\": 3, \"warning\": \"kept\", \"extra\": null }"
+          },
+          {
+            "id": 4,
+            "sort_value": 4,
+            "bucket": "mods",
+            "payload": "{ \"id\": 4, \"warning\": \"kept\", \"extra\": null }"
+          },
+          {
+            "id": 5,
+            "sort_value": 5,
+            "bucket": "mods",
+            "payload": "{ \"id\": 5, \"warning\": \"kept\", \"extra\": null }"
+          },
+          {
+            "id": 6,
+            "sort_value": 6,
+            "bucket": "mods",
+            "payload": "{ \"id\": 6, \"warning\": \"kept\", \"extra\": null }"
+          }
+        ],
+        "high_water": 6,
+        "first": [
+          {
+            "id": 1,
+            "sort_value": 1,
+            "bucket": "mods",
+            "payload": "{ \"id\": 1, \"warning\": \"kept\", \"extra\": null }"
+          },
+          {
+            "id": 2,
+            "sort_value": 2,
+            "bucket": "mods",
+            "payload": "{ \"id\": 2, \"warning\": \"kept\", \"extra\": null }"
+          }
+        ],
+        "rest": [
+          {
+            "id": 3,
+            "sort_value": 3,
+            "bucket": "mods",
+            "payload": "new payload after first page"
+          },
+          {
+            "id": 4,
+            "sort_value": 4,
+            "bucket": "mods",
+            "payload": "{ \"id\": 4, \"warning\": \"kept\", \"extra\": null }"
+          },
+          {
+            "id": 5,
+            "sort_value": 5,
+            "bucket": "mods",
+            "payload": "{ \"id\": 5, \"warning\": \"kept\", \"extra\": null }"
+          },
+          {
+            "id": 6,
+            "sort_value": 6,
+            "bucket": "mods",
+            "payload": "{ \"id\": 6, \"warning\": \"kept\", \"extra\": null }"
+          }
+        ]
+      },
+      "checks": {
+        "ids_match_but_payload_does_not": true
+      }
+    },
+    {
+      "name": "frozen_complete_records",
+      "observations": {
+        "initial": [
+          {
+            "id": 1,
+            "sort_value": 0,
+            "bucket": "mods",
+            "payload": "{ \"id\": 1, \"warning\": \"kept\", \"extra\": null }"
+          },
+          {
+            "id": 2,
+            "sort_value": 1,
+            "bucket": "mods",
+            "payload": "{ \"id\": 2, \"warning\": \"kept\", \"extra\": null }"
+          },
+          {
+            "id": 3,
+            "sort_value": 1,
+            "bucket": "mods",
+            "payload": "{ \"id\": 3, \"warning\": \"kept\", \"extra\": null }"
+          },
+          {
+            "id": 4,
+            "sort_value": 2,
+            "bucket": "mods",
+            "payload": "{ \"id\": 4, \"warning\": \"kept\", \"extra\": null }"
+          },
+          {
+            "id": 5,
+            "sort_value": 2,
+            "bucket": "mods",
+            "payload": "{ \"id\": 5, \"warning\": \"kept\", \"extra\": null }"
+          },
+          {
+            "id": 6,
+            "sort_value": 3,
+            "bucket": "mods",
+            "payload": "{ \"id\": 6, \"warning\": \"kept\", \"extra\": null }"
+          }
+        ],
+        "generation": 1,
+        "pages": [
+          {
+            "generation": 1,
+            "bucket": "mods",
+            "order": "sort_value,id:ascending:v1",
+            "rows": [
+              {
+                "id": 1,
+                "sort_value": 0,
+                "bucket": "mods",
+                "payload": "{ \"id\": 1, \"warning\": \"kept\", \"extra\": null }"
+              },
+              {
+                "id": 2,
+                "sort_value": 1,
+                "bucket": "mods",
+                "payload": "{ \"id\": 2, \"warning\": \"kept\", \"extra\": null }"
+              }
+            ],
+            "next_cursor": "{\"after\":[1,2],\"bucket\":\"mods\",\"database\":\"00000000000000000000000000000005\",\"generation\":1,\"order\":\"sort_value,id:ascending:v1\",\"seen\":2,\"size\":2,\"v\":1}",
+            "complete": false,
+            "seen": 2,
+            "total": 6
+          },
+          {
+            "generation": 1,
+            "bucket": "mods",
+            "order": "sort_value,id:ascending:v1",
+            "rows": [
+              {
+                "id": 3,
+                "sort_value": 1,
+                "bucket": "mods",
+                "payload": "{ \"id\": 3, \"warning\": \"kept\", \"extra\": null }"
+              },
+              {
+                "id": 4,
+                "sort_value": 2,
+                "bucket": "mods",
+                "payload": "{ \"id\": 4, \"warning\": \"kept\", \"extra\": null }"
+              }
+            ],
+            "next_cursor": "{\"after\":[2,4],\"bucket\":\"mods\",\"database\":\"00000000000000000000000000000005\",\"generation\":1,\"order\":\"sort_value,id:ascending:v1\",\"seen\":4,\"size\":2,\"v\":1}",
+            "complete": false,
+            "seen": 4,
+            "total": 6
+          },
+          {
+            "generation": 1,
+            "bucket": "mods",
+            "order": "sort_value,id:ascending:v1",
+            "rows": [
+              {
+                "id": 5,
+                "sort_value": 2,
+                "bucket": "mods",
+                "payload": "{ \"id\": 5, \"warning\": \"kept\", \"extra\": null }"
+              },
+              {
+                "id": 6,
+                "sort_value": 3,
+                "bucket": "mods",
+                "payload": "{ \"id\": 6, \"warning\": \"kept\", \"extra\": null }"
+              }
+            ],
+            "next_cursor": null,
+            "complete": true,
+            "seen": 6,
+            "total": 6
+          }
+        ],
+        "live_after": [
+          {
+            "id": 99,
+            "sort_value": -100,
+            "bucket": "mods",
+            "payload": "new"
+          },
+          {
+            "id": 2,
+            "sort_value": 1,
+            "bucket": "mods",
+            "payload": "{ \"id\": 2, \"warning\": \"kept\", \"extra\": null }"
+          },
+          {
+            "id": 4,
+            "sort_value": 2,
+            "bucket": "mods",
+            "payload": "{ \"id\": 4, \"warning\": \"kept\", \"extra\": null }"
+          },
+          {
+            "id": 5,
+            "sort_value": 2,
+            "bucket": "mods",
+            "payload": "{ \"id\": 5, \"warning\": \"kept\", \"extra\": null }"
+          },
+          {
+            "id": 6,
+            "sort_value": 3,
+            "bucket": "mods",
+            "payload": "{ \"id\": 6, \"warning\": \"kept\", \"extra\": null }"
+          }
+        ],
+        "replay_of_second": {
+          "generation": 1,
+          "bucket": "mods",
+          "order": "sort_value,id:ascending:v1",
+          "rows": [
+            {
+              "id": 3,
+              "sort_value": 1,
+              "bucket": "mods",
+              "payload": "{ \"id\": 3, \"warning\": \"kept\", \"extra\": null }"
+            },
+            {
+              "id": 4,
+              "sort_value": 2,
+              "bucket": "mods",
+              "payload": "{ \"id\": 4, \"warning\": \"kept\", \"extra\": null }"
+            }
+          ],
+          "next_cursor": "{\"after\":[2,4],\"bucket\":\"mods\",\"database\":\"00000000000000000000000000000005\",\"generation\":1,\"order\":\"sort_value,id:ascending:v1\",\"seen\":4,\"size\":2,\"v\":1}",
+          "complete": false,
+          "seen": 4,
+          "total": 6
+        }
+      },
+      "checks": {
+        "all_original_rows_and_fields_preserved": true,
+        "unique_ids": true,
+        "same_cursor_same_result": true,
+        "final_complete": true
+      }
+    },
+    {
+      "name": "capture_rollback",
+      "observations": {
+        "initial": [
+          {
+            "id": 1,
+            "sort_value": 1,
+            "bucket": "mods",
+            "payload": "{ \"id\": 1, \"warning\": \"kept\", \"extra\": null }"
+          },
+          {
+            "id": 2,
+            "sort_value": 2,
+            "bucket": "mods",
+            "payload": "{ \"id\": 2, \"warning\": \"kept\", \"extra\": null }"
+          },
+          {
+            "id": 3,
+            "sort_value": 3,
+            "bucket": "mods",
+            "payload": "{ \"id\": 3, \"warning\": \"kept\", \"extra\": null }"
+          },
+          {
+            "id": 4,
+            "sort_value": 4,
+            "bucket": "mods",
+            "payload": "{ \"id\": 4, \"warning\": \"kept\", \"extra\": null }"
+          },
+          {
+            "id": 5,
+            "sort_value": 5,
+            "bucket": "mods",
+            "payload": "{ \"id\": 5, \"warning\": \"kept\", \"extra\": null }"
+          },
+          {
+            "id": 6,
+            "sort_value": 6,
+            "bucket": "mods",
+            "payload": "{ \"id\": 6, \"warning\": \"kept\", \"extra\": null }"
+          }
+        ],
+        "errors": [
+          {
+            "type": "SnapshotLimit",
+            "message": "whole snapshot refused: row limit"
+          },
+          {
+            "type": "RuntimeError",
+            "message": "owned fault after complete copy"
+          }
+        ],
+        "counts": {
+          "generations": 0,
+          "frozen": 0
+        },
+        "live_after": [
+          {
+            "id": 1,
+            "sort_value": 1,
+            "bucket": "mods",
+            "payload": "{ \"id\": 1, \"warning\": \"kept\", \"extra\": null }"
+          },
+          {
+            "id": 2,
+            "sort_value": 2,
+            "bucket": "mods",
+            "payload": "{ \"id\": 2, \"warning\": \"kept\", \"extra\": null }"
+          },
+          {
+            "id": 3,
+            "sort_value": 3,
+            "bucket": "mods",
+            "payload": "{ \"id\": 3, \"warning\": \"kept\", \"extra\": null }"
+          },
+          {
+            "id": 4,
+            "sort_value": 4,
+            "bucket": "mods",
+            "payload": "{ \"id\": 4, \"warning\": \"kept\", \"extra\": null }"
+          },
+          {
+            "id": 5,
+            "sort_value": 5,
+            "bucket": "mods",
+            "payload": "{ \"id\": 5, \"warning\": \"kept\", \"extra\": null }"
+          },
+          {
+            "id": 6,
+            "sort_value": 6,
+            "bucket": "mods",
+            "payload": "{ \"id\": 6, \"warning\": \"kept\", \"extra\": null }"
+          }
+        ]
+      },
+      "checks": {
+        "both_failures_retained": true,
+        "no_partial_generation": true,
+        "live_rows_unchanged": true
+      }
+    },
+    {
+      "name": "retired_generation",
+      "observations": {
+        "old_page": {
+          "generation": 1,
+          "bucket": "mods",
+          "order": "sort_value,id:ascending:v1",
+          "rows": [
+            {
+              "id": 1,
+              "sort_value": 1,
+              "bucket": "mods",
+              "payload": "{ \"id\": 1, \"warning\": \"kept\", \"extra\": null }"
+            },
+            {
+              "id": 2,
+              "sort_value": 2,
+              "bucket": "mods",
+              "payload": "{ \"id\": 2, \"warning\": \"kept\", \"extra\": null }"
+            }
+          ],
+          "next_cursor": "{\"after\":[2,2],\"bucket\":\"mods\",\"database\":\"00000000000000000000000000000007\",\"generation\":1,\"order\":\"sort_value,id:ascending:v1\",\"seen\":2,\"size\":2,\"v\":1}",
+          "complete": false,
+          "seen": 2,
+          "total": 6
+        },
+        "error": {
+          "type": "GenerationUnavailable",
+          "message": "generation missing or retired; restart explicitly"
+        },
+        "fresh_generation": 2,
+        "fresh_pages": [
+          {
+            "generation": 2,
+            "bucket": "mods",
+            "order": "sort_value,id:ascending:v1",
+            "rows": [
+              {
+                "id": 99,
+                "sort_value": 0,
+                "bucket": "mods",
+                "payload": "new"
+              },
+              {
+                "id": 1,
+                "sort_value": 1,
+                "bucket": "mods",
+                "payload": "{ \"id\": 1, \"warning\": \"kept\", \"extra\": null }"
+              }
+            ],
+            "next_cursor": "{\"after\":[1,1],\"bucket\":\"mods\",\"database\":\"00000000000000000000000000000007\",\"generation\":2,\"order\":\"sort_value,id:ascending:v1\",\"seen\":2,\"size\":2,\"v\":1}",
+            "complete": false,
+            "seen": 2,
+            "total": 7
+          },
+          {
+            "generation": 2,
+            "bucket": "mods",
+            "order": "sort_value,id:ascending:v1",
+            "rows": [
+              {
+                "id": 2,
+                "sort_value": 2,
+                "bucket": "mods",
+                "payload": "{ \"id\": 2, \"warning\": \"kept\", \"extra\": null }"
+              },
+              {
+                "id": 3,
+                "sort_value": 3,
+                "bucket": "mods",
+                "payload": "{ \"id\": 3, \"warning\": \"kept\", \"extra\": null }"
+              }
+            ],
+            "next_cursor": "{\"after\":[3,3],\"bucket\":\"mods\",\"database\":\"00000000000000000000000000000007\",\"generation\":2,\"order\":\"sort_value,id:ascending:v1\",\"seen\":4,\"size\":2,\"v\":1}",
+            "complete": false,
+            "seen": 4,
+            "total": 7
+          },
+          {
+            "generation": 2,
+            "bucket": "mods",
+            "order": "sort_value,id:ascending:v1",
+            "rows": [
+              {
+                "id": 4,
+                "sort_value": 4,
+                "bucket": "mods",
+                "payload": "{ \"id\": 4, \"warning\": \"kept\", \"extra\": null }"
+              },
+              {
+                "id": 5,
+                "sort_value": 5,
+                "bucket": "mods",
+                "payload": "{ \"id\": 5, \"warning\": \"kept\", \"extra\": null }"
+              }
+            ],
+            "next_cursor": "{\"after\":[5,5],\"bucket\":\"mods\",\"database\":\"00000000000000000000000000000007\",\"generation\":2,\"order\":\"sort_value,id:ascending:v1\",\"seen\":6,\"size\":2,\"v\":1}",
+            "complete": false,
+            "seen": 6,
+            "total": 7
+          },
+          {
+            "generation": 2,
+            "bucket": "mods",
+            "order": "sort_value,id:ascending:v1",
+            "rows": [
+              {
+                "id": 6,
+                "sort_value": 6,
+                "bucket": "mods",
+                "payload": "{ \"id\": 6, \"warning\": \"kept\", \"extra\": null }"
+              }
+            ],
+            "next_cursor": null,
+            "complete": true,
+            "seen": 7,
+            "total": 7
+          }
+        ]
+      },
+      "checks": {
+        "old_cursor_refused": true,
+        "explicit_restart_includes_new_row": true,
+        "new_generation_distinct": true
+      }
+    },
+    {
+      "name": "tie_breaker",
+      "observations": {
+        "initial": [
+          {
+            "id": 1,
+            "sort_value": 0,
+            "bucket": "mods",
+            "payload": "{ \"id\": 1, \"warning\": \"kept\", \"extra\": null }"
+          },
+          {
+            "id": 2,
+            "sort_value": 1,
+            "bucket": "mods",
+            "payload": "{ \"id\": 2, \"warning\": \"kept\", \"extra\": null }"
+          },
+          {
+            "id": 3,
+            "sort_value": 1,
+            "bucket": "mods",
+            "payload": "{ \"id\": 3, \"warning\": \"kept\", \"extra\": null }"
+          },
+          {
+            "id": 4,
+            "sort_value": 2,
+            "bucket": "mods",
+            "payload": "{ \"id\": 4, \"warning\": \"kept\", \"extra\": null }"
+          },
+          {
+            "id": 5,
+            "sort_value": 2,
+            "bucket": "mods",
+            "payload": "{ \"id\": 5, \"warning\": \"kept\", \"extra\": null }"
+          },
+          {
+            "id": 6,
+            "sort_value": 3,
+            "bucket": "mods",
+            "payload": "{ \"id\": 6, \"warning\": \"kept\", \"extra\": null }"
+          }
+        ],
+        "rank_only_first": [
+          {
+            "id": 1,
+            "sort_value": 0,
+            "bucket": "mods",
+            "payload": "{ \"id\": 1, \"warning\": \"kept\", \"extra\": null }"
+          },
+          {
+            "id": 2,
+            "sort_value": 1,
+            "bucket": "mods",
+            "payload": "{ \"id\": 2, \"warning\": \"kept\", \"extra\": null }"
+          }
+        ],
+        "rank_only_rest": [
+          {
+            "id": 4,
+            "sort_value": 2,
+            "bucket": "mods",
+            "payload": "{ \"id\": 4, \"warning\": \"kept\", \"extra\": null }"
+          },
+          {
+            "id": 5,
+            "sort_value": 2,
+            "bucket": "mods",
+            "payload": "{ \"id\": 5, \"warning\": \"kept\", \"extra\": null }"
+          },
+          {
+            "id": 6,
+            "sort_value": 3,
+            "bucket": "mods",
+            "payload": "{ \"id\": 6, \"warning\": \"kept\", \"extra\": null }"
+          }
+        ],
+        "tuple_pages": [
+          {
+            "generation": 1,
+            "bucket": "mods",
+            "order": "sort_value,id:ascending:v1",
+            "rows": [
+              {
+                "id": 1,
+                "sort_value": 0,
+                "bucket": "mods",
+                "payload": "{ \"id\": 1, \"warning\": \"kept\", \"extra\": null }"
+              },
+              {
+                "id": 2,
+                "sort_value": 1,
+                "bucket": "mods",
+                "payload": "{ \"id\": 2, \"warning\": \"kept\", \"extra\": null }"
+              }
+            ],
+            "next_cursor": "{\"after\":[1,2],\"bucket\":\"mods\",\"database\":\"00000000000000000000000000000008\",\"generation\":1,\"order\":\"sort_value,id:ascending:v1\",\"seen\":2,\"size\":2,\"v\":1}",
+            "complete": false,
+            "seen": 2,
+            "total": 6
+          },
+          {
+            "generation": 1,
+            "bucket": "mods",
+            "order": "sort_value,id:ascending:v1",
+            "rows": [
+              {
+                "id": 3,
+                "sort_value": 1,
+                "bucket": "mods",
+                "payload": "{ \"id\": 3, \"warning\": \"kept\", \"extra\": null }"
+              },
+              {
+                "id": 4,
+                "sort_value": 2,
+                "bucket": "mods",
+                "payload": "{ \"id\": 4, \"warning\": \"kept\", \"extra\": null }"
+              }
+            ],
+            "next_cursor": "{\"after\":[2,4],\"bucket\":\"mods\",\"database\":\"00000000000000000000000000000008\",\"generation\":1,\"order\":\"sort_value,id:ascending:v1\",\"seen\":4,\"size\":2,\"v\":1}",
+            "complete": false,
+            "seen": 4,
+            "total": 6
+          },
+          {
+            "generation": 1,
+            "bucket": "mods",
+            "order": "sort_value,id:ascending:v1",
+            "rows": [
+              {
+                "id": 5,
+                "sort_value": 2,
+                "bucket": "mods",
+                "payload": "{ \"id\": 5, \"warning\": \"kept\", \"extra\": null }"
+              },
+              {
+                "id": 6,
+                "sort_value": 3,
+                "bucket": "mods",
+                "payload": "{ \"id\": 6, \"warning\": \"kept\", \"extra\": null }"
+              }
+            ],
+            "next_cursor": null,
+            "complete": true,
+            "seen": 6,
+            "total": 6
+          }
+        ]
+      },
+      "checks": {
+        "rank_only_skips_unseen_tie": true,
+        "tuple_order_preserves_all": true
+      }
+    },
+    {
+      "name": "unsigned_cursor_control",
+      "observations": {
+        "issued": {
+          "generation": 1,
+          "bucket": "mods",
+          "order": "sort_value,id:ascending:v1",
+          "rows": [
+            {
+              "id": 1,
+              "sort_value": 1,
+              "bucket": "mods",
+              "payload": "{ \"id\": 1, \"warning\": \"kept\", \"extra\": null }"
+            },
+            {
+              "id": 2,
+              "sort_value": 2,
+              "bucket": "mods",
+              "payload": "{ \"id\": 2, \"warning\": \"kept\", \"extra\": null }"
+            }
+          ],
+          "next_cursor": "{\"after\":[2,2],\"bucket\":\"mods\",\"database\":\"00000000000000000000000000000009\",\"generation\":1,\"order\":\"sort_value,id:ascending:v1\",\"seen\":2,\"size\":2,\"v\":1}",
+          "complete": false,
+          "seen": 2,
+          "total": 6
+        },
+        "coherently_altered_cursor": "{\"after\": [4, 4], \"bucket\": \"mods\", \"database\": \"00000000000000000000000000000009\", \"generation\": 1, \"order\": \"sort_value,id:ascending:v1\", \"seen\": 4, \"size\": 2, \"v\": 1}",
+        "accepted_result": {
+          "generation": 1,
+          "bucket": "mods",
+          "order": "sort_value,id:ascending:v1",
+          "rows": [
+            {
+              "id": 5,
+              "sort_value": 5,
+              "bucket": "mods",
+              "payload": "{ \"id\": 5, \"warning\": \"kept\", \"extra\": null }"
+            },
+            {
+              "id": 6,
+              "sort_value": 6,
+              "bucket": "mods",
+              "payload": "{ \"id\": 6, \"warning\": \"kept\", \"extra\": null }"
+            }
+          ],
+          "next_cursor": null,
+          "complete": true,
+          "seen": 6,
+          "total": 6
+        }
+      },
+      "checks": {
+        "coherent_edit_can_skip": true,
+        "not_authentication": true
+      }
+    }
+  ],
+  "check_count": 19,
+  "all_checks_passed": true,
+  "not_claimed": [
+    "performance improvement",
+    "malicious database safety",
+    "cursor authentication",
+    "authorization snapshots",
+    "power-loss durability",
+    "target adoption"
+  ]
+}

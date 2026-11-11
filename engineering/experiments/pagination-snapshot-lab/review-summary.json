@@ -1,0 +1,26 @@
+{
+  "checked_at": "2026-11-11",
+  "status": "Final independent source/code/documentation review complete; no in-scope defect found",
+  "focused_tests": 29,
+  "focused_optimized_tests": 29,
+  "adversarial_probes": 11,
+  "official_sources_opened": 6,
+  "demo_scenarios": 9,
+  "demo_checks": 19,
+  "full_parsed_receipt_replay_equal": true,
+  "source_hashes": {
+    "paging.py": "9f16ebdac06cdd6ad0f753fd1d3810cc05542421eb31249a6775791ab514fbc4",
+    "run_demo.py": "3fda722deb243df1563b81fa63e0461a3a6a7c0889e49a5653df7aa6467cb67d"
+  },
+  "scope_findings": [
+    "Coherent unsigned cursor edits can claim end position without prefix delivery.",
+    "Backup clones preserve database identity.",
+    "Prefix validation scans earlier rows; no constant-time performance claim.",
+    "Immutability is an API discipline, not hostile database protection.",
+    "Retirement is not immediate revocation of an in-flight snapshot.",
+    "Payload limits exclude database/index/memory overhead."
+  ],
+  "coverage_added": "COMMIT-time SQLITE_BUSY rollback and explicit retry added to main suite.",
+  "replay": "python3 -B experiments/pagination-snapshot-lab/review_probes.py",
+  "packaged_probe_note": "Independent review script copied with only ROOT path adapted; all 11 probes rerun."
+}

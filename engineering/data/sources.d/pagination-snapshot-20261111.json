@@ -1,0 +1,68 @@
+[
+  {
+    "id": "PG26001",
+    "title": "SQLite row values and scrolling windows",
+    "url": "https://www.sqlite.org/rowvalue.html",
+    "observed_version": "Rolling SQLite documentation checked 2026-11-11",
+    "topic": "storage",
+    "note": "Lexicographic tuple boundaries; no cross-request snapshot or speed result inferred.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 180,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "PG26002",
+    "title": "SQLite ORDER BY and LIMIT semantics",
+    "url": "https://www.sqlite.org/lang_select.html",
+    "observed_version": "Rolling SQLite documentation checked 2026-11-11",
+    "topic": "storage",
+    "note": "Undefined ordering for full ties; limits bound returned rows, not all query work.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 180,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "PG26003",
+    "title": "SQLite connection and transaction isolation",
+    "url": "https://www.sqlite.org/isolation.html",
+    "observed_version": "Rolling SQLite documentation checked 2026-11-11",
+    "topic": "storage",
+    "note": "Committed-state visibility and stable read snapshots on separate connections.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 180,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "PG26004",
+    "title": "SQLite WAL reader and checkpoint tradeoffs",
+    "url": "https://www.sqlite.org/wal.html",
+    "observed_version": "Rolling SQLite documentation checked 2026-11-11",
+    "topic": "storage",
+    "note": "Long readers can obstruct checkpoint progress; no such performance measurement here.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 180,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "PG26005",
+    "title": "Python JSON duplicate names and non-finite decoding",
+    "url": "https://docs.python.org/3.12/library/json.html",
+    "observed_version": "Python 3.12 documentation rendered 3.12.16",
+    "topic": "storage",
+    "note": "Current 3.12 page rendered 3.12.16; runtime 3.12.14. Input bounds and strict hooks are separate from authentication.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 180,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "PG26006",
+    "title": "SQLite explicit transactions",
+    "url": "https://www.sqlite.org/lang_transaction.html",
+    "observed_version": "Rolling SQLite documentation checked 2026-11-11",
+    "topic": "storage",
+    "note": "One-writer boundary and commit/rollback behavior for owned snapshot publication.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 180,
+    "evidence": "primary_documented"
+  }
+]
