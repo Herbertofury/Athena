@@ -6,7 +6,7 @@ The initial assembly joined sixteen independently published foundation drafts in
 
 This is a compatibility and preservation check of existing research, not a new benchmark or a comprehensive re-audit of every original scientific claim. Original guides distinguish documented behavior, synthetic observations, receipt checks, fresh execution and target acceptance. Those distinctions remain in force.
 
-The later texture extension includes #44 and is recorded below; initial assembly counts and diagnostics remain historical results, not the current aggregate. The frozen-input manifest now contains all seventeen contributions.
+The later texture extension includes #44; the final checker integration below incorporates the exact published #4 repair. Earlier assembly counts, diagnostics and exclusions remain historical, not the current aggregate. The frozen-input manifest contains all seventeen research contributions plus the separately identified supporting checker fix.
 
 ## Initial #27–42 inputs
 
@@ -71,7 +71,7 @@ Initial local runs omitted the repository-root research issue template and there
 
 Existing draft [#4](https://github.com/Herbertofury/Athena/pull/4) at `22d05b4ae663128821f106958cc99a7991ed5d2e` addresses the checker boundary separately and is not incorporated here. In an isolated diagnostic copy, applying its four exact published blobs yields 819/819 Python tests, 38/38 containment tests, both root Node bridge checks and the complete research check passing. These overlapping suites must not be summed into a unique-test count. This diagnoses the inherited boundary mismatch; it is not the status of this unpatched candidate, a change to #4 or hosted CI evidence.
 
-## Texture extension: #44 added to #43
+## Historical texture extension: #44 added to #43
 
 The integration branch is extended from `54aa54fc20daa404564da3d0dffa1205afdac7f7`, preserving the original sixteen contributions, with published draft [#44](https://github.com/Herbertofury/Athena/pull/44) frozen at `5ad47fd4634e0e73c651bd40077463cb746c3b33` (tree `b87f7b667b92b091105d7f81a8df63378e9b5280`). Both drafts and main were rechecked before assembly; main remains `44384b809c80e03adbd62f8be9617d01e6ad9922`. The [input manifest](foundations-integration-inputs-20261111.json) retains all original entries and adds the fifteen exact #44 file records. No existing source draft is changed or closed.
 
@@ -94,8 +94,30 @@ The same aggregate command set above was rerun on the extended candidate:
 
 The earlier #4 diagnostic applies only to the initial 819-test assembly and was not rerun or incorporated for this extension. It must not be presented as a green result for these 857 tests. Hosted CI must be checked against the exact updated remote head; local results do not establish hosted CI, root-app, Rust, browser, native-game or renderer acceptance. The expanded candidate remains draft, with no merge, deployment, active release changes, denied/held content or target-project adoption.
 
-## Source refresh and acceptance limits
+## Historical source refresh and acceptance limits
 
 Independent live sampling confirmed official Forge Java 17/64-bit prerequisites, Fabric's current 26.2 heading versus Minecraft 26.1/JDK 25 body, and SQLite single-writer/transaction boundaries. The pinned Gradle 9.2.1 compatibility page was unavailable through that review tool and was not bypassed. The original source notes keep their prior version/date/retrieval qualifications. No claim of a complete fresh external-link or factual audit follows from this sample.
 
 These research-only paths are ignored by the existing root push/PR learning workflow; nested Engineering workflows are not root workflows. Zero hosted runs/checks/statuses is absent evidence, never a CI pass. Root application builds, Rust/browser/installed-platform tests, real mod loaders/games, renderers and target performance acceptance were not rerun for this assembly. No merge, deployment, target adoption or full-release readiness is claimed.
+
+## Current checker integration: exact published #4 repair
+
+The next extension starts at `6ee44840e0f4871d7474b5d4809e0d2cab465c63` and incorporates the four exact published files from [draft #4](https://github.com/Herbertofury/Athena/pull/4), frozen at `22d05b4ae663128821f106958cc99a7991ed5d2e` (tree `a151109d1daa5809bd5e17fbd13348b397671933`). The [manifest](foundations-integration-inputs-20261111.json) records this as a supporting fix, not an eighteenth research fragment. Both draft heads and main were rechecked before assembly. Main remains `44384b809c80e03adbd62f8be9617d01e6ad9922`.
+
+The fix is copied without modification: `local-link-policy.json`, `scripts/check_research.py`, repository-root `tests/research_link_test.py` and `tests/research_links.test.cjs`. The previous checker matched current main exactly, and the three added paths had no collision. All 2,631 input blobs were materialized and hash-verified; all seventeen research contributions, source fragments, independent files and earlier receipts remain intact. The only other changes are this dated record, the foundation route’s current validation description and the additive supporting-fix manifest entry. No root app, release implementation, workflow or target configuration changes.
+
+The policy allows only the canonical checker’s explicit `../docs` directory. Custom roots cannot grant themselves access. Traversal outside allowed roots, escaping symlinks, absolute/Windows paths, file URLs and malformed controls remain rejected. Escaping Markdown sources are rejected before reading. This is an offline documentation checker, not race-safe isolation against concurrent hostile filesystem mutation, external-URL validation or exhaustive Markdown/fragment parsing.
+
+Current local validation on the combined candidate:
+
+- Complete Engineering Python: **857/857 pass, no skips**. This fixes the inherited cross-root failure rather than suppressing it.
+- Complete Engineering Node, including the separate glTF suite: **420/420 pass, no skips**.
+- Dedicated containment suite: **38/38 pass**. Both root Node bridge tests pass. These rerun overlapping checks and must not be added to a unique-test total.
+- Root `npm run build` passes with 90 lessons. Root `npm test` passes: 135 root Node tests, 105 media tests and 313 downstream Python tests across their separate suites. These scopes overlap other checks above and are not a single distinct-test count.
+- Complete research check passes: **281 Markdown files and 2,394 sources**. The same **135 overdue baseline source-review warnings** remain visible; a structural pass is not factual freshness.
+- All five Engineering generated-output checks pass. The root Research/Media and Lab reproducibility checks pass. Root curriculum build preserves the tracked generated bytes; no generated changes are included.
+- Independent review verifies exact checker/input preservation and custom-root containment. Its additional 55 adversarial path/policy probes pass, including checks that escaped targets are not inspected for existence. This is additional bounded evidence, not a formal security proof.
+
+Local `npm run test:browser` passes its three initial reproducibility stages, then stops before any static browser check because the required Chromium executable is absent. One official Playwright install attempt returns invalid/truncated ZIP data and fails; no alternate browser, version substitution or bypass is used. Workshop/accessibility browser, Rust test/clippy/build and engine-backed browser stages therefore remain **not run**, not passed. The original #4 PR and push runs at its older head passed build, npm tests, static and workshop browser checks but failed the unchanged accessibility focus-return harness. Those historical results are not acceptance of this combined head.
+
+Unlike the earlier Engineering-only extension, the new root containment tests make this change eligible for the existing root CI workflow. Exact-head hosted status must be read after publication and reported separately; local success is not hosted-CI completion. No workflow is edited, no historical failure is erased, and no runtime/browser behavior is changed to get green checks. This remains a draft research foundation with no merge, deployment, held/private additions or target-project adoption.

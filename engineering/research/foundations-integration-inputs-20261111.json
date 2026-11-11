@@ -2000,5 +2000,49 @@
       ],
       "tree": "b87f7b667b92b091105d7f81a8df63378e9b5280"
     }
+  ],
+  "supporting_fixes": [
+    {
+      "number": 4,
+      "title": "Fix Research link containment for Athena docs",
+      "head": "22d05b4ae663128821f106958cc99a7991ed5d2e",
+      "tree": "a151109d1daa5809bd5e17fbd13348b397671933",
+      "url": "https://github.com/Herbertofury/Athena/pull/4",
+      "role": "Supporting checker compatibility fix; not an additional research-source fragment.",
+      "files": [
+        {
+          "path": "engineering/local-link-policy.json",
+          "sha": "e9f4f5ed5bb891a14587cd4178767c459826b757",
+          "mode": "100644",
+          "type": "blob",
+          "status": "added",
+          "changes": 4
+        },
+        {
+          "path": "engineering/scripts/check_research.py",
+          "sha": "081df5f3a3e9972fa0c6117a0c3f895b98a47864",
+          "mode": "100644",
+          "type": "blob",
+          "status": "modified",
+          "changes": 76
+        },
+        {
+          "path": "tests/research_link_test.py",
+          "sha": "e0e34bc268e45e3c42ba0680b4b71006ba7bd092",
+          "mode": "100644",
+          "type": "blob",
+          "status": "added",
+          "changes": 263
+        },
+        {
+          "path": "tests/research_links.test.cjs",
+          "sha": "ce05b13c75a0776bfc00f0d2644830019f48a9ee",
+          "mode": "100644",
+          "type": "blob",
+          "status": "added",
+          "changes": 22
+        }
+      ]
+    }
   ]
 }
