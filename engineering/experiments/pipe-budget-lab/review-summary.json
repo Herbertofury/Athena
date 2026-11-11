@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "checked_at": "2026-11-11",
+  "review_type": "independent read-only code, fault-injection, evidence, documentation and primary-source review",
+  "result": "no remaining blocker in scoped fixed-helper Linux experiment",
+  "final_source_sha256": {
+    "pipe_runner.py": "9bc9153c717ab4263b558726a190e9bec76a26de0cd83e2cc1bd1e957fcf37cf",
+    "owned_helper.py": "ca7936406ad1b2c27f71906f9b1aefeda43b019f9882a49fe134893cd84dbfd6",
+    "run_demo.py": "90848aca56806af15fe8b0113dec7b4a19f145d5c85fc1a82bcc1c2603fa9a06"
+  },
+  "repaired_findings": [
+    "Close/wait failures could escape before reaping or returning process ownership",
+    "Demo failed to serialize the retained CleanupPending receipt before re-raising"
+  ],
+  "final_checks": [
+    "31 focused tests independently passed",
+    "All ten packaged cases and finite one-MiB control verified with complete capture bytes, counts and hashes",
+    "All three packaged demo source hashes match current files",
+    "CleanupPending same-exception and retained-receipt regression reviewed",
+    "All five primary sources reopened; documented versions match register; runtime version separately scoped",
+    "Guide, README and dated research have no hard-time, RSS, sandbox, descendant or target-performance overclaim"
+  ],
+  "additional_repaired_controller_probes": [
+    "All 19 fixed helper modes",
+    "Eight cleanup fault injections, including close/wait/terminate/kill/poll errors",
+    "Full dual-pipe 262144-byte-per-stream capture",
+    "40 repeated successes and 25 failure cases preserved parent FD count 4 to 4"
+  ],
+  "probe_scope_note": "Eight cleanup fault injections were rerun on the final runner. Earlier fixed-mode/descriptor repeat probes cover the repaired capture behavior; final focused suite and source/evidence review cover the final files. Fault sampling is not exhaustive OS failure proof.",
+  "limits": [
+    "No arbitrary executable, subprocess tree, sandbox, Windows/macOS or production acceptance",
+    "Aggregate checker and remote publication outcomes are author evidence rather than independent review results"
+  ]
+}

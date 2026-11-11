@@ -1,0 +1,127 @@
+{
+  "schema_version": 1,
+  "evidence": "plan_only",
+  "status": "not_run",
+  "target": {
+    "source_revision": null,
+    "artifact_sha256": null,
+    "os_version": null,
+    "browser_webview_version": null,
+    "ime_version": null,
+    "keyboard_layout": null,
+    "locale": null,
+    "unicode_icu_versions": null,
+    "assistive_technology": null
+  },
+  "protocol": {
+    "authorized_fixture_identity": null,
+    "discovery_policy_version": null,
+    "expected_full_results": null,
+    "exact_identity_action_binding": null,
+    "timing_budgets": null,
+    "privacy_scope": "Use synthetic or specifically authorized text. Do not record private user keystrokes by default."
+  },
+  "scenarios": [
+    {
+      "id": "canonical-and-compatibility",
+      "procedure": "Check known equivalent/distinct titles under the declared discovery policy; keep exact provider IDs and every collision.",
+      "status": "not_run",
+      "raw_evidence": [],
+      "observations": null,
+      "failed_attempts": []
+    },
+    {
+      "id": "composition-order",
+      "procedure": "Record actual IME updates/end/final input; assert complete final query and no stale publication.",
+      "status": "not_run",
+      "raw_evidence": [],
+      "observations": null,
+      "failed_attempts": []
+    },
+    {
+      "id": "composition-cancel-blur",
+      "procedure": "Cancel or blur during composition; inspect actual field/caret state and request outcome.",
+      "status": "not_run",
+      "raw_evidence": [],
+      "observations": null,
+      "failed_attempts": []
+    },
+    {
+      "id": "rapid-query-remount",
+      "procedure": "Change query, route and field mount before results arrive; old callbacks cannot publish or steal focus.",
+      "status": "not_run",
+      "raw_evidence": [],
+      "observations": null,
+      "failed_attempts": []
+    },
+    {
+      "id": "paste-and-dictation",
+      "procedure": "Paste and use intended speech input; value comes from the control, not reconstructed key events.",
+      "status": "not_run",
+      "raw_evidence": [],
+      "observations": null,
+      "failed_attempts": []
+    },
+    {
+      "id": "dead-keys-and-layouts",
+      "procedure": "Exercise supported dead keys and keyboard layouts without shortcut interference.",
+      "status": "not_run",
+      "raw_evidence": [],
+      "observations": null,
+      "failed_attempts": []
+    },
+    {
+      "id": "selection-and-undo",
+      "procedure": "Replace selected text and use undo/redo through composition and asynchronous results.",
+      "status": "not_run",
+      "raw_evidence": [],
+      "observations": null,
+      "failed_attempts": []
+    },
+    {
+      "id": "grapheme-display",
+      "procedure": "Inspect truncation/highlights/caret around combining marks, emoji sequences and supported scripts.",
+      "status": "not_run",
+      "raw_evidence": [],
+      "observations": null,
+      "failed_attempts": []
+    },
+    {
+      "id": "bidirectional-labels",
+      "procedure": "Inspect mixed-direction labels with surrounding counts/punctuation and actionable source identity.",
+      "status": "not_run",
+      "raw_evidence": [],
+      "observations": null,
+      "failed_attempts": []
+    },
+    {
+      "id": "voice-label-and-shortcuts",
+      "procedure": "Activate controls using visible names; verify character shortcut off/remap/focus-only behavior.",
+      "status": "not_run",
+      "raw_evidence": [],
+      "observations": null,
+      "failed_attempts": []
+    },
+    {
+      "id": "assistive-status",
+      "procedure": "Use declared screen reader/browser to inspect labels, changing status and preserved editing focus.",
+      "status": "not_run",
+      "raw_evidence": [],
+      "observations": null,
+      "failed_attempts": []
+    },
+    {
+      "id": "runtime-index-migration",
+      "procedure": "Compare installed runtime/data versions; rebuild derived indexes when policy/data changes without changing originals.",
+      "status": "not_run",
+      "raw_evidence": [],
+      "observations": null,
+      "failed_attempts": []
+    }
+  ],
+  "acceptance": {
+    "decision": "not_evaluated",
+    "reviewer": null,
+    "note": "Synthetic model tests do not establish browser, IME, accessible-input, Unicode conformance, search-quality or performance acceptance."
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "checked_at": "2026-11-11",
+  "kind": "retained independent-review observation; original suite passed",
+  "fixture": "Generated raw DEFLATE of three bytes abc followed by one extra compressed-span byte !",
+  "original_result": "partial/trailing_compressed_bytes; decoded_bytes_observed=0; max_output_chunk=0 although zlib had returned 3 bytes",
+  "repair": "Count every returned chunk before checking trailing-stream rejection; regression requires observed and maximum chunk counts of 3",
+  "additional_scope_hardening": [
+    "Refuse DOS volume label attribute",
+    "Enforce minimum declared feature version for STORE, DEFLATE and directory entries"
+  ],
+  "initial_tests": 35,
+  "final_tests": 37,
+  "does_not_claim": "This written record is not a raw log or a failing initial unit suite."
+}

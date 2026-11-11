@@ -18,3 +18,11 @@ Profile CPU, GPU and IO separately. Godot's optimization guidance distinguishes 
 ## Research backlog
 
 Engine-specific import/export compatibility, material/texture budgets, mesh compression, animation retargeting, GPU-driven rendering and accessibility-aware effects require separate dated experiments. Do not mark them solved because a tool advertises support.
+
+## Operational acceptance guide
+
+[Asset import acceptance](asset-import-acceptance.md) adds capability, resource, fidelity and packaged-runtime gates. Use the [asset compatibility receipt](../templates/asset-compatibility-receipt.md) to keep each evidence state separate.
+
+## Structural validity versus retained asset intent
+
+[glTF validation boundaries](gltf-validation-boundaries.md) and the [official-validator fixture lab](../experiments/gltf-validation-lab/README.md) separate validator errors, resource access, extension coverage and retained animation data. Zero errors do not establish the intended motion, a complete animation set or native import. See the [dated evidence](../research/2026-11-11-gltf-validation.md).

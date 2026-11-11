@@ -1,0 +1,33 @@
+test_abrupt_process_exit_before_and_after_commit (test_fts_consistency.FtsConsistencyTests.test_abrupt_process_exit_before_and_after_commit) ... ok
+test_commit_busy_rolls_back_rows_and_postings (test_fts_consistency.FtsConsistencyTests.test_commit_busy_rolls_back_rows_and_postings) ... ok
+test_empty_and_punctuation_query_distinct (test_fts_consistency.FtsConsistencyTests.test_empty_and_punctuation_query_distinct) ... ok
+test_exact_identifier_not_discovery_tokenization (test_fts_consistency.FtsConsistencyTests.test_exact_identifier_not_discovery_tokenization) ... ok
+test_existing_path_refused (test_fts_consistency.FtsConsistencyTests.test_existing_path_refused) ... ok
+test_healthy_audit_and_rebuild_do_not_restore_triggers (test_fts_consistency.FtsConsistencyTests.test_healthy_audit_and_rebuild_do_not_restore_triggers) ... ok
+test_initial_backfill_complete (test_fts_consistency.FtsConsistencyTests.test_initial_backfill_complete) ... ok
+test_insert_update_delete_preserve_complete_metadata (test_fts_consistency.FtsConsistencyTests.test_insert_update_delete_preserve_complete_metadata) ... ok
+test_interrupted_rebuild_resets_handler_then_keeps_previous_state (test_fts_consistency.FtsConsistencyTests.test_interrupted_rebuild_resets_handler_then_keeps_previous_state) ... ok
+test_invalid_record_fails_before_transaction (test_fts_consistency.FtsConsistencyTests.test_invalid_record_fails_before_transaction) ... ok
+test_metadata_only_update_remains_consistent (test_fts_consistency.FtsConsistencyTests.test_metadata_only_update_remains_consistent) ... ok
+test_nested_transaction_refused_not_committed (test_fts_consistency.FtsConsistencyTests.test_nested_transaction_refused_not_committed) ... ok
+test_no_accent_folding_policy (test_fts_consistency.FtsConsistencyTests.test_no_accent_folding_policy) ... ok
+test_no_backfill_counts_and_internal_check_hide_missing_postings (test_fts_consistency.FtsConsistencyTests.test_no_backfill_counts_and_internal_check_hide_missing_postings) ... ok
+test_orphan_is_not_silently_filtered (test_fts_consistency.FtsConsistencyTests.test_orphan_is_not_silently_filtered) ... ok
+test_other_writer_busy_is_not_empty_success (test_fts_consistency.FtsConsistencyTests.test_other_writer_busy_is_not_empty_success) ... ok
+test_phrase_quotes_fts_grammar_separate_from_sql_binding (test_fts_consistency.FtsConsistencyTests.test_phrase_quotes_fts_grammar_separate_from_sql_binding) ... ok
+test_query_bytes_and_result_limits (test_fts_consistency.FtsConsistencyTests.test_query_bytes_and_result_limits) ... ok
+test_rebuild_fault_rolls_back_postings_and_canonical_data (test_fts_consistency.FtsConsistencyTests.test_rebuild_fault_rolls_back_postings_and_canonical_data) ... ok
+test_rebuild_rejects_canonical_mutation_hook (test_fts_consistency.FtsConsistencyTests.test_rebuild_rejects_canonical_mutation_hook) ... ok
+test_repeated_rebuild_preserves_results_and_metadata (test_fts_consistency.FtsConsistencyTests.test_repeated_rebuild_preserves_results_and_metadata) ... ok
+test_replace_negative_control_can_leave_stale_terms (test_fts_consistency.FtsConsistencyTests.test_replace_negative_control_can_leave_stale_terms) ... ok
+test_rollback_restores_canonical_and_postings (test_fts_consistency.FtsConsistencyTests.test_rollback_restores_canonical_and_postings) ... ok
+test_rowid_update_moves_postings (test_fts_consistency.FtsConsistencyTests.test_rowid_update_moves_postings) ... ok
+test_seeded_mutations_against_ascii_token_oracle (test_fts_consistency.FtsConsistencyTests.test_seeded_mutations_against_ascii_token_oracle) ... ok
+test_stale_terms_join_to_new_metadata_and_audit_detects (test_fts_consistency.FtsConsistencyTests.test_stale_terms_join_to_new_metadata_and_audit_detects) ... ok
+test_triggers_added_after_rows_only_capture_later_rows (test_fts_consistency.FtsConsistencyTests.test_triggers_added_after_rows_only_capture_later_rows) ... ok
+test_wal_reader_pins_consistent_old_then_new_view (test_fts_consistency.FtsConsistencyTests.test_wal_reader_pins_consistent_old_then_new_view) ... ok
+
+----------------------------------------------------------------------
+Ran 28 tests in 0.538s
+
+OK

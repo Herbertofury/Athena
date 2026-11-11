@@ -1,0 +1,741 @@
+{
+  "schema_version": 1,
+  "evidence": "measured_synthetic_owned_loopback",
+  "checked_at": "2026-11-11T01:53:42.863512+00:00",
+  "environment": {
+    "python": "3.12.14",
+    "sqlite": "3.53.1",
+    "os": "Linux",
+    "machine": "x86_64",
+    "http_server": "synchronous HTTP/1.0; ephemeral 127.0.0.1"
+  },
+  "source_sha256": {
+    "conditional_edit.py": "69fdcaab830ca96396e0fb8da1e3e0c2840061ca5b1caccd47db41443a790cdc",
+    "run_demo.py": "15588673581a5dc93db798ba0a9752bd869bf6a9666a6fa043cecf10934c79b1"
+  },
+  "cases": [
+    {
+      "name": "stale_editor_refused",
+      "initial_state": {
+        "epoch": "3e1387cee73c4fecbfa62d67288fe876",
+        "revision": 0,
+        "body_hex": "7b227469746c65223a226f726967696e616c222c22656e61626c6564223a66616c73657d",
+        "history": [
+          {
+            "revision": 0,
+            "etag": "\"3e1387cee73c4fecbfa62d67288fe876-0-997bc8b6fc7e38e1ec1073426daa9e55abb1577ec00bd5293cee9f0eec1651f5\"",
+            "body_hex": "7b227469746c65223a226f726967696e616c222c22656e61626c6564223a66616c73657d"
+          }
+        ],
+        "integrity_check": [
+          [
+            "ok"
+          ]
+        ]
+      },
+      "exchanges": [
+        {
+          "method": "GET",
+          "path": "/document",
+          "request_headers": {
+            "Host": "127.0.0.1:42201",
+            "Connection": "close"
+          },
+          "request_body_hex": "",
+          "status": 200,
+          "response_headers": {
+            "Server": "AthenaSyntheticConditionalLab/1 ",
+            "Date": "Wed, 11 Nov 2026 01:53:42 GMT",
+            "Connection": "close",
+            "Cache-Control": "private, no-cache",
+            "X-Content-Type-Options": "nosniff",
+            "ETag": "\"3e1387cee73c4fecbfa62d67288fe876-0-997bc8b6fc7e38e1ec1073426daa9e55abb1577ec00bd5293cee9f0eec1651f5\"",
+            "Content-Type": "application/json",
+            "Content-Length": "36"
+          },
+          "response_body_hex": "7b227469746c65223a226f726967696e616c222c22656e61626c6564223a66616c73657d"
+        },
+        {
+          "method": "GET",
+          "path": "/document",
+          "request_headers": {
+            "Host": "127.0.0.1:42201",
+            "Connection": "close"
+          },
+          "request_body_hex": "",
+          "status": 200,
+          "response_headers": {
+            "Server": "AthenaSyntheticConditionalLab/1 ",
+            "Date": "Wed, 11 Nov 2026 01:53:42 GMT",
+            "Connection": "close",
+            "Cache-Control": "private, no-cache",
+            "X-Content-Type-Options": "nosniff",
+            "ETag": "\"3e1387cee73c4fecbfa62d67288fe876-0-997bc8b6fc7e38e1ec1073426daa9e55abb1577ec00bd5293cee9f0eec1651f5\"",
+            "Content-Type": "application/json",
+            "Content-Length": "36"
+          },
+          "response_body_hex": "7b227469746c65223a226f726967696e616c222c22656e61626c6564223a66616c73657d"
+        },
+        {
+          "method": "PUT",
+          "path": "/document",
+          "request_headers": {
+            "Host": "127.0.0.1:42201",
+            "Connection": "close",
+            "Content-Type": "application/json",
+            "X-Lab-Intent": "conditional-write",
+            "Content-Length": "36",
+            "If-Match": "\"3e1387cee73c4fecbfa62d67288fe876-0-997bc8b6fc7e38e1ec1073426daa9e55abb1577ec00bd5293cee9f0eec1651f5\""
+          },
+          "request_body_hex": "7b227469746c65223a22636c69656e742041222c22656e61626c6564223a66616c73657d",
+          "status": 200,
+          "response_headers": {
+            "Server": "AthenaSyntheticConditionalLab/1 ",
+            "Date": "Wed, 11 Nov 2026 01:53:42 GMT",
+            "Connection": "close",
+            "Cache-Control": "private, no-cache",
+            "X-Content-Type-Options": "nosniff",
+            "ETag": "\"3e1387cee73c4fecbfa62d67288fe876-1-1dc8c834b2f10fa3f6b326ef8f3b946476ed15f1e10c2459410f10b3ec52c882\"",
+            "Content-Type": "application/json",
+            "Content-Length": "36"
+          },
+          "response_body_hex": "7b227469746c65223a22636c69656e742041222c22656e61626c6564223a66616c73657d"
+        },
+        {
+          "method": "PUT",
+          "path": "/document",
+          "request_headers": {
+            "Host": "127.0.0.1:42201",
+            "Connection": "close",
+            "Content-Type": "application/json",
+            "X-Lab-Intent": "conditional-write",
+            "Content-Length": "35",
+            "If-Match": "\"3e1387cee73c4fecbfa62d67288fe876-0-997bc8b6fc7e38e1ec1073426daa9e55abb1577ec00bd5293cee9f0eec1651f5\""
+          },
+          "request_body_hex": "7b227469746c65223a226f726967696e616c222c22656e61626c6564223a747275657d",
+          "status": 412,
+          "response_headers": {
+            "Server": "AthenaSyntheticConditionalLab/1 ",
+            "Date": "Wed, 11 Nov 2026 01:53:42 GMT",
+            "Connection": "close",
+            "Cache-Control": "no-store",
+            "X-Content-Type-Options": "nosniff",
+            "ETag": "\"3e1387cee73c4fecbfa62d67288fe876-1-1dc8c834b2f10fa3f6b326ef8f3b946476ed15f1e10c2459410f10b3ec52c882\"",
+            "Content-Type": "application/json",
+            "Content-Length": "31"
+          },
+          "response_body_hex": "7b226572726f72223a22707265636f6e646974696f6e5f6661696c6564227d"
+        },
+        {
+          "method": "GET",
+          "path": "/document",
+          "request_headers": {
+            "Host": "127.0.0.1:42201",
+            "Connection": "close"
+          },
+          "request_body_hex": "",
+          "status": 200,
+          "response_headers": {
+            "Server": "AthenaSyntheticConditionalLab/1 ",
+            "Date": "Wed, 11 Nov 2026 01:53:42 GMT",
+            "Connection": "close",
+            "Cache-Control": "private, no-cache",
+            "X-Content-Type-Options": "nosniff",
+            "ETag": "\"3e1387cee73c4fecbfa62d67288fe876-1-1dc8c834b2f10fa3f6b326ef8f3b946476ed15f1e10c2459410f10b3ec52c882\"",
+            "Content-Type": "application/json",
+            "Content-Length": "36"
+          },
+          "response_body_hex": "7b227469746c65223a22636c69656e742041222c22656e61626c6564223a66616c73657d"
+        }
+      ],
+      "passed": true,
+      "final_state": {
+        "epoch": "3e1387cee73c4fecbfa62d67288fe876",
+        "revision": 1,
+        "body_hex": "7b227469746c65223a22636c69656e742041222c22656e61626c6564223a66616c73657d",
+        "history": [
+          {
+            "revision": 0,
+            "etag": "\"3e1387cee73c4fecbfa62d67288fe876-0-997bc8b6fc7e38e1ec1073426daa9e55abb1577ec00bd5293cee9f0eec1651f5\"",
+            "body_hex": "7b227469746c65223a226f726967696e616c222c22656e61626c6564223a66616c73657d"
+          },
+          {
+            "revision": 1,
+            "etag": "\"3e1387cee73c4fecbfa62d67288fe876-1-1dc8c834b2f10fa3f6b326ef8f3b946476ed15f1e10c2459410f10b3ec52c882\"",
+            "body_hex": "7b227469746c65223a22636c69656e742041222c22656e61626c6564223a66616c73657d"
+          }
+        ],
+        "integrity_check": [
+          [
+            "ok"
+          ]
+        ]
+      }
+    },
+    {
+      "name": "wildcard_overwrite_control",
+      "initial_state": {
+        "epoch": "8498080c3ee6452fb5a53bfeefbe3aba",
+        "revision": 0,
+        "body_hex": "7b227469746c65223a226f726967696e616c222c22656e61626c6564223a66616c73657d",
+        "history": [
+          {
+            "revision": 0,
+            "etag": "\"8498080c3ee6452fb5a53bfeefbe3aba-0-997bc8b6fc7e38e1ec1073426daa9e55abb1577ec00bd5293cee9f0eec1651f5\"",
+            "body_hex": "7b227469746c65223a226f726967696e616c222c22656e61626c6564223a66616c73657d"
+          }
+        ],
+        "integrity_check": [
+          [
+            "ok"
+          ]
+        ]
+      },
+      "exchanges": [
+        {
+          "method": "PUT",
+          "path": "/document",
+          "request_headers": {
+            "Host": "127.0.0.1:41481",
+            "Connection": "close",
+            "Content-Type": "application/json",
+            "X-Lab-Intent": "conditional-write",
+            "Content-Length": "36",
+            "If-Match": "*"
+          },
+          "request_body_hex": "7b227469746c65223a22636c69656e742041222c22656e61626c6564223a66616c73657d",
+          "status": 200,
+          "response_headers": {
+            "Server": "AthenaSyntheticConditionalLab/1 ",
+            "Date": "Wed, 11 Nov 2026 01:53:42 GMT",
+            "Connection": "close",
+            "Cache-Control": "private, no-cache",
+            "X-Content-Type-Options": "nosniff",
+            "ETag": "\"8498080c3ee6452fb5a53bfeefbe3aba-1-1dc8c834b2f10fa3f6b326ef8f3b946476ed15f1e10c2459410f10b3ec52c882\"",
+            "Content-Type": "application/json",
+            "Content-Length": "36"
+          },
+          "response_body_hex": "7b227469746c65223a22636c69656e742041222c22656e61626c6564223a66616c73657d"
+        },
+        {
+          "method": "PUT",
+          "path": "/document",
+          "request_headers": {
+            "Host": "127.0.0.1:41481",
+            "Connection": "close",
+            "Content-Type": "application/json",
+            "X-Lab-Intent": "conditional-write",
+            "Content-Length": "35",
+            "If-Match": "*"
+          },
+          "request_body_hex": "7b227469746c65223a226f726967696e616c222c22656e61626c6564223a747275657d",
+          "status": 200,
+          "response_headers": {
+            "Server": "AthenaSyntheticConditionalLab/1 ",
+            "Date": "Wed, 11 Nov 2026 01:53:42 GMT",
+            "Connection": "close",
+            "Cache-Control": "private, no-cache",
+            "X-Content-Type-Options": "nosniff",
+            "ETag": "\"8498080c3ee6452fb5a53bfeefbe3aba-2-33035153944ae835ae2f5783f6785ccd8be736816c45d5a106555127a5cb4209\"",
+            "Content-Type": "application/json",
+            "Content-Length": "35"
+          },
+          "response_body_hex": "7b227469746c65223a226f726967696e616c222c22656e61626c6564223a747275657d"
+        },
+        {
+          "method": "GET",
+          "path": "/document",
+          "request_headers": {
+            "Host": "127.0.0.1:41481",
+            "Connection": "close"
+          },
+          "request_body_hex": "",
+          "status": 200,
+          "response_headers": {
+            "Server": "AthenaSyntheticConditionalLab/1 ",
+            "Date": "Wed, 11 Nov 2026 01:53:42 GMT",
+            "Connection": "close",
+            "Cache-Control": "private, no-cache",
+            "X-Content-Type-Options": "nosniff",
+            "ETag": "\"8498080c3ee6452fb5a53bfeefbe3aba-2-33035153944ae835ae2f5783f6785ccd8be736816c45d5a106555127a5cb4209\"",
+            "Content-Type": "application/json",
+            "Content-Length": "35"
+          },
+          "response_body_hex": "7b227469746c65223a226f726967696e616c222c22656e61626c6564223a747275657d"
+        }
+      ],
+      "passed": true,
+      "final_state": {
+        "epoch": "8498080c3ee6452fb5a53bfeefbe3aba",
+        "revision": 2,
+        "body_hex": "7b227469746c65223a226f726967696e616c222c22656e61626c6564223a747275657d",
+        "history": [
+          {
+            "revision": 0,
+            "etag": "\"8498080c3ee6452fb5a53bfeefbe3aba-0-997bc8b6fc7e38e1ec1073426daa9e55abb1577ec00bd5293cee9f0eec1651f5\"",
+            "body_hex": "7b227469746c65223a226f726967696e616c222c22656e61626c6564223a66616c73657d"
+          },
+          {
+            "revision": 1,
+            "etag": "\"8498080c3ee6452fb5a53bfeefbe3aba-1-1dc8c834b2f10fa3f6b326ef8f3b946476ed15f1e10c2459410f10b3ec52c882\"",
+            "body_hex": "7b227469746c65223a22636c69656e742041222c22656e61626c6564223a66616c73657d"
+          },
+          {
+            "revision": 2,
+            "etag": "\"8498080c3ee6452fb5a53bfeefbe3aba-2-33035153944ae835ae2f5783f6785ccd8be736816c45d5a106555127a5cb4209\"",
+            "body_hex": "7b227469746c65223a226f726967696e616c222c22656e61626c6564223a747275657d"
+          }
+        ],
+        "integrity_check": [
+          [
+            "ok"
+          ]
+        ]
+      }
+    },
+    {
+      "name": "weak_write_refused",
+      "initial_state": {
+        "epoch": "7bfbd6b831cb4c5da8f1bcf6de8e5016",
+        "revision": 0,
+        "body_hex": "7b227469746c65223a226f726967696e616c222c22656e61626c6564223a66616c73657d",
+        "history": [
+          {
+            "revision": 0,
+            "etag": "\"7bfbd6b831cb4c5da8f1bcf6de8e5016-0-997bc8b6fc7e38e1ec1073426daa9e55abb1577ec00bd5293cee9f0eec1651f5\"",
+            "body_hex": "7b227469746c65223a226f726967696e616c222c22656e61626c6564223a66616c73657d"
+          }
+        ],
+        "integrity_check": [
+          [
+            "ok"
+          ]
+        ]
+      },
+      "exchanges": [
+        {
+          "method": "GET",
+          "path": "/document",
+          "request_headers": {
+            "Host": "127.0.0.1:33031",
+            "Connection": "close"
+          },
+          "request_body_hex": "",
+          "status": 200,
+          "response_headers": {
+            "Server": "AthenaSyntheticConditionalLab/1 ",
+            "Date": "Wed, 11 Nov 2026 01:53:42 GMT",
+            "Connection": "close",
+            "Cache-Control": "private, no-cache",
+            "X-Content-Type-Options": "nosniff",
+            "ETag": "\"7bfbd6b831cb4c5da8f1bcf6de8e5016-0-997bc8b6fc7e38e1ec1073426daa9e55abb1577ec00bd5293cee9f0eec1651f5\"",
+            "Content-Type": "application/json",
+            "Content-Length": "36"
+          },
+          "response_body_hex": "7b227469746c65223a226f726967696e616c222c22656e61626c6564223a66616c73657d"
+        },
+        {
+          "method": "PUT",
+          "path": "/document",
+          "request_headers": {
+            "Host": "127.0.0.1:33031",
+            "Connection": "close",
+            "Content-Type": "application/json",
+            "X-Lab-Intent": "conditional-write",
+            "Content-Length": "36",
+            "If-Match": "W/\"7bfbd6b831cb4c5da8f1bcf6de8e5016-0-997bc8b6fc7e38e1ec1073426daa9e55abb1577ec00bd5293cee9f0eec1651f5\""
+          },
+          "request_body_hex": "7b227469746c65223a22636c69656e742041222c22656e61626c6564223a66616c73657d",
+          "status": 412,
+          "response_headers": {
+            "Server": "AthenaSyntheticConditionalLab/1 ",
+            "Date": "Wed, 11 Nov 2026 01:53:42 GMT",
+            "Connection": "close",
+            "Cache-Control": "no-store",
+            "X-Content-Type-Options": "nosniff",
+            "ETag": "\"7bfbd6b831cb4c5da8f1bcf6de8e5016-0-997bc8b6fc7e38e1ec1073426daa9e55abb1577ec00bd5293cee9f0eec1651f5\"",
+            "Content-Type": "application/json",
+            "Content-Length": "31"
+          },
+          "response_body_hex": "7b226572726f72223a22707265636f6e646974696f6e5f6661696c6564227d"
+        },
+        {
+          "method": "GET",
+          "path": "/document",
+          "request_headers": {
+            "Host": "127.0.0.1:33031",
+            "Connection": "close"
+          },
+          "request_body_hex": "",
+          "status": 200,
+          "response_headers": {
+            "Server": "AthenaSyntheticConditionalLab/1 ",
+            "Date": "Wed, 11 Nov 2026 01:53:42 GMT",
+            "Connection": "close",
+            "Cache-Control": "private, no-cache",
+            "X-Content-Type-Options": "nosniff",
+            "ETag": "\"7bfbd6b831cb4c5da8f1bcf6de8e5016-0-997bc8b6fc7e38e1ec1073426daa9e55abb1577ec00bd5293cee9f0eec1651f5\"",
+            "Content-Type": "application/json",
+            "Content-Length": "36"
+          },
+          "response_body_hex": "7b227469746c65223a226f726967696e616c222c22656e61626c6564223a66616c73657d"
+        }
+      ],
+      "passed": true,
+      "final_state": {
+        "epoch": "7bfbd6b831cb4c5da8f1bcf6de8e5016",
+        "revision": 0,
+        "body_hex": "7b227469746c65223a226f726967696e616c222c22656e61626c6564223a66616c73657d",
+        "history": [
+          {
+            "revision": 0,
+            "etag": "\"7bfbd6b831cb4c5da8f1bcf6de8e5016-0-997bc8b6fc7e38e1ec1073426daa9e55abb1577ec00bd5293cee9f0eec1651f5\"",
+            "body_hex": "7b227469746c65223a226f726967696e616c222c22656e61626c6564223a66616c73657d"
+          }
+        ],
+        "integrity_check": [
+          [
+            "ok"
+          ]
+        ]
+      }
+    },
+    {
+      "name": "missing_condition_explained",
+      "initial_state": {
+        "epoch": "8c2695d993a34c169c67185dbad84764",
+        "revision": 0,
+        "body_hex": "7b227469746c65223a226f726967696e616c222c22656e61626c6564223a66616c73657d",
+        "history": [
+          {
+            "revision": 0,
+            "etag": "\"8c2695d993a34c169c67185dbad84764-0-997bc8b6fc7e38e1ec1073426daa9e55abb1577ec00bd5293cee9f0eec1651f5\"",
+            "body_hex": "7b227469746c65223a226f726967696e616c222c22656e61626c6564223a66616c73657d"
+          }
+        ],
+        "integrity_check": [
+          [
+            "ok"
+          ]
+        ]
+      },
+      "exchanges": [
+        {
+          "method": "PUT",
+          "path": "/document",
+          "request_headers": {
+            "Host": "127.0.0.1:42829",
+            "Connection": "close",
+            "Content-Type": "application/json",
+            "X-Lab-Intent": "conditional-write",
+            "Content-Length": "36"
+          },
+          "request_body_hex": "7b227469746c65223a22636c69656e742041222c22656e61626c6564223a66616c73657d",
+          "status": 428,
+          "response_headers": {
+            "Server": "AthenaSyntheticConditionalLab/1 ",
+            "Date": "Wed, 11 Nov 2026 01:53:42 GMT",
+            "Connection": "close",
+            "Cache-Control": "no-store",
+            "X-Content-Type-Options": "nosniff",
+            "Content-Type": "application/json",
+            "Content-Length": "44"
+          },
+          "response_body_hex": "7b226572726f72223a22726561645f646f63756d656e745f7468656e5f73656e645f49665f4d61746368227d"
+        }
+      ],
+      "passed": true,
+      "final_state": {
+        "epoch": "8c2695d993a34c169c67185dbad84764",
+        "revision": 0,
+        "body_hex": "7b227469746c65223a226f726967696e616c222c22656e61626c6564223a66616c73657d",
+        "history": [
+          {
+            "revision": 0,
+            "etag": "\"8c2695d993a34c169c67185dbad84764-0-997bc8b6fc7e38e1ec1073426daa9e55abb1577ec00bd5293cee9f0eec1651f5\"",
+            "body_hex": "7b227469746c65223a226f726967696e616c222c22656e61626c6564223a66616c73657d"
+          }
+        ],
+        "integrity_check": [
+          [
+            "ok"
+          ]
+        ]
+      }
+    },
+    {
+      "name": "cache_revalidation_model",
+      "initial_state": {
+        "epoch": "784fbeb8376f4e478e08cc7158984315",
+        "revision": 0,
+        "body_hex": "7b227469746c65223a226f726967696e616c222c22656e61626c6564223a66616c73657d",
+        "history": [
+          {
+            "revision": 0,
+            "etag": "\"784fbeb8376f4e478e08cc7158984315-0-997bc8b6fc7e38e1ec1073426daa9e55abb1577ec00bd5293cee9f0eec1651f5\"",
+            "body_hex": "7b227469746c65223a226f726967696e616c222c22656e61626c6564223a66616c73657d"
+          }
+        ],
+        "integrity_check": [
+          [
+            "ok"
+          ]
+        ]
+      },
+      "exchanges": [
+        {
+          "method": "GET",
+          "path": "/document",
+          "request_headers": {
+            "Host": "127.0.0.1:33383",
+            "Connection": "close"
+          },
+          "request_body_hex": "",
+          "status": 200,
+          "response_headers": {
+            "Server": "AthenaSyntheticConditionalLab/1 ",
+            "Date": "Wed, 11 Nov 2026 01:53:42 GMT",
+            "Connection": "close",
+            "Cache-Control": "private, no-cache",
+            "X-Content-Type-Options": "nosniff",
+            "ETag": "\"784fbeb8376f4e478e08cc7158984315-0-997bc8b6fc7e38e1ec1073426daa9e55abb1577ec00bd5293cee9f0eec1651f5\"",
+            "Content-Type": "application/json",
+            "Content-Length": "36"
+          },
+          "response_body_hex": "7b227469746c65223a226f726967696e616c222c22656e61626c6564223a66616c73657d"
+        },
+        {
+          "method": "GET",
+          "path": "/document",
+          "request_headers": {
+            "Host": "127.0.0.1:33383",
+            "Connection": "close",
+            "If-None-Match": "W/\"784fbeb8376f4e478e08cc7158984315-0-997bc8b6fc7e38e1ec1073426daa9e55abb1577ec00bd5293cee9f0eec1651f5\""
+          },
+          "request_body_hex": "",
+          "status": 304,
+          "response_headers": {
+            "Server": "AthenaSyntheticConditionalLab/1 ",
+            "Date": "Wed, 11 Nov 2026 01:53:42 GMT",
+            "Connection": "close",
+            "Cache-Control": "private, no-cache",
+            "X-Content-Type-Options": "nosniff",
+            "ETag": "\"784fbeb8376f4e478e08cc7158984315-0-997bc8b6fc7e38e1ec1073426daa9e55abb1577ec00bd5293cee9f0eec1651f5\""
+          },
+          "response_body_hex": ""
+        },
+        {
+          "method": "PUT",
+          "path": "/document",
+          "request_headers": {
+            "Host": "127.0.0.1:33383",
+            "Connection": "close",
+            "Content-Type": "application/json",
+            "X-Lab-Intent": "conditional-write",
+            "Content-Length": "36",
+            "If-Match": "\"784fbeb8376f4e478e08cc7158984315-0-997bc8b6fc7e38e1ec1073426daa9e55abb1577ec00bd5293cee9f0eec1651f5\""
+          },
+          "request_body_hex": "7b227469746c65223a22636c69656e742041222c22656e61626c6564223a66616c73657d",
+          "status": 200,
+          "response_headers": {
+            "Server": "AthenaSyntheticConditionalLab/1 ",
+            "Date": "Wed, 11 Nov 2026 01:53:42 GMT",
+            "Connection": "close",
+            "Cache-Control": "private, no-cache",
+            "X-Content-Type-Options": "nosniff",
+            "ETag": "\"784fbeb8376f4e478e08cc7158984315-1-1dc8c834b2f10fa3f6b326ef8f3b946476ed15f1e10c2459410f10b3ec52c882\"",
+            "Content-Type": "application/json",
+            "Content-Length": "36"
+          },
+          "response_body_hex": "7b227469746c65223a22636c69656e742041222c22656e61626c6564223a66616c73657d"
+        },
+        {
+          "method": "GET",
+          "path": "/document",
+          "request_headers": {
+            "Host": "127.0.0.1:33383",
+            "Connection": "close",
+            "If-None-Match": "\"784fbeb8376f4e478e08cc7158984315-0-997bc8b6fc7e38e1ec1073426daa9e55abb1577ec00bd5293cee9f0eec1651f5\""
+          },
+          "request_body_hex": "",
+          "status": 200,
+          "response_headers": {
+            "Server": "AthenaSyntheticConditionalLab/1 ",
+            "Date": "Wed, 11 Nov 2026 01:53:42 GMT",
+            "Connection": "close",
+            "Cache-Control": "private, no-cache",
+            "X-Content-Type-Options": "nosniff",
+            "ETag": "\"784fbeb8376f4e478e08cc7158984315-1-1dc8c834b2f10fa3f6b326ef8f3b946476ed15f1e10c2459410f10b3ec52c882\"",
+            "Content-Type": "application/json",
+            "Content-Length": "36"
+          },
+          "response_body_hex": "7b227469746c65223a22636c69656e742041222c22656e61626c6564223a66616c73657d"
+        }
+      ],
+      "passed": true,
+      "final_state": {
+        "epoch": "784fbeb8376f4e478e08cc7158984315",
+        "revision": 1,
+        "body_hex": "7b227469746c65223a22636c69656e742041222c22656e61626c6564223a66616c73657d",
+        "history": [
+          {
+            "revision": 0,
+            "etag": "\"784fbeb8376f4e478e08cc7158984315-0-997bc8b6fc7e38e1ec1073426daa9e55abb1577ec00bd5293cee9f0eec1651f5\"",
+            "body_hex": "7b227469746c65223a226f726967696e616c222c22656e61626c6564223a66616c73657d"
+          },
+          {
+            "revision": 1,
+            "etag": "\"784fbeb8376f4e478e08cc7158984315-1-1dc8c834b2f10fa3f6b326ef8f3b946476ed15f1e10c2459410f10b3ec52c882\"",
+            "body_hex": "7b227469746c65223a22636c69656e742041222c22656e61626c6564223a66616c73657d"
+          }
+        ],
+        "integrity_check": [
+          [
+            "ok"
+          ]
+        ]
+      }
+    },
+    {
+      "name": "exact_representation_bytes",
+      "initial_state": {
+        "epoch": "442a0270d59748dbbc20788bbc13c33e",
+        "revision": 0,
+        "body_hex": "7b227469746c65223a226f726967696e616c222c22656e61626c6564223a66616c73657d",
+        "history": [
+          {
+            "revision": 0,
+            "etag": "\"442a0270d59748dbbc20788bbc13c33e-0-997bc8b6fc7e38e1ec1073426daa9e55abb1577ec00bd5293cee9f0eec1651f5\"",
+            "body_hex": "7b227469746c65223a226f726967696e616c222c22656e61626c6564223a66616c73657d"
+          }
+        ],
+        "integrity_check": [
+          [
+            "ok"
+          ]
+        ]
+      },
+      "exchanges": [
+        {
+          "method": "GET",
+          "path": "/document",
+          "request_headers": {
+            "Host": "127.0.0.1:35731",
+            "Connection": "close"
+          },
+          "request_body_hex": "",
+          "status": 200,
+          "response_headers": {
+            "Server": "AthenaSyntheticConditionalLab/1 ",
+            "Date": "Wed, 11 Nov 2026 01:53:42 GMT",
+            "Connection": "close",
+            "Cache-Control": "private, no-cache",
+            "X-Content-Type-Options": "nosniff",
+            "ETag": "\"442a0270d59748dbbc20788bbc13c33e-0-997bc8b6fc7e38e1ec1073426daa9e55abb1577ec00bd5293cee9f0eec1651f5\"",
+            "Content-Type": "application/json",
+            "Content-Length": "36"
+          },
+          "response_body_hex": "7b227469746c65223a226f726967696e616c222c22656e61626c6564223a66616c73657d"
+        },
+        {
+          "method": "PUT",
+          "path": "/document",
+          "request_headers": {
+            "Host": "127.0.0.1:35731",
+            "Connection": "close",
+            "Content-Type": "application/json",
+            "X-Lab-Intent": "conditional-write",
+            "Content-Length": "38",
+            "If-Match": "\"442a0270d59748dbbc20788bbc13c33e-0-997bc8b6fc7e38e1ec1073426daa9e55abb1577ec00bd5293cee9f0eec1651f5\""
+          },
+          "request_body_hex": "207b2022656e61626c656422203a20747275652c20227469746c6522203a2022c3a922207d0a",
+          "status": 200,
+          "response_headers": {
+            "Server": "AthenaSyntheticConditionalLab/1 ",
+            "Date": "Wed, 11 Nov 2026 01:53:42 GMT",
+            "Connection": "close",
+            "Cache-Control": "private, no-cache",
+            "X-Content-Type-Options": "nosniff",
+            "ETag": "\"442a0270d59748dbbc20788bbc13c33e-1-16d9330bf83dd00c82c9bc35edb83308a1f9a07f9c664b17df5339dbddad62d6\"",
+            "Content-Type": "application/json",
+            "Content-Length": "38"
+          },
+          "response_body_hex": "207b2022656e61626c656422203a20747275652c20227469746c6522203a2022c3a922207d0a"
+        },
+        {
+          "method": "GET",
+          "path": "/document",
+          "request_headers": {
+            "Host": "127.0.0.1:35731",
+            "Connection": "close"
+          },
+          "request_body_hex": "",
+          "status": 200,
+          "response_headers": {
+            "Server": "AthenaSyntheticConditionalLab/1 ",
+            "Date": "Wed, 11 Nov 2026 01:53:42 GMT",
+            "Connection": "close",
+            "Cache-Control": "private, no-cache",
+            "X-Content-Type-Options": "nosniff",
+            "ETag": "\"442a0270d59748dbbc20788bbc13c33e-1-16d9330bf83dd00c82c9bc35edb83308a1f9a07f9c664b17df5339dbddad62d6\"",
+            "Content-Type": "application/json",
+            "Content-Length": "38"
+          },
+          "response_body_hex": "207b2022656e61626c656422203a20747275652c20227469746c6522203a2022c3a922207d0a"
+        },
+        {
+          "method": "HEAD",
+          "path": "/document",
+          "request_headers": {
+            "Host": "127.0.0.1:35731",
+            "Connection": "close"
+          },
+          "request_body_hex": "",
+          "status": 200,
+          "response_headers": {
+            "Server": "AthenaSyntheticConditionalLab/1 ",
+            "Date": "Wed, 11 Nov 2026 01:53:42 GMT",
+            "Connection": "close",
+            "Cache-Control": "private, no-cache",
+            "X-Content-Type-Options": "nosniff",
+            "ETag": "\"442a0270d59748dbbc20788bbc13c33e-1-16d9330bf83dd00c82c9bc35edb83308a1f9a07f9c664b17df5339dbddad62d6\"",
+            "Content-Type": "application/json",
+            "Content-Length": "38"
+          },
+          "response_body_hex": ""
+        }
+      ],
+      "passed": true,
+      "final_state": {
+        "epoch": "442a0270d59748dbbc20788bbc13c33e",
+        "revision": 1,
+        "body_hex": "207b2022656e61626c656422203a20747275652c20227469746c6522203a2022c3a922207d0a",
+        "history": [
+          {
+            "revision": 0,
+            "etag": "\"442a0270d59748dbbc20788bbc13c33e-0-997bc8b6fc7e38e1ec1073426daa9e55abb1577ec00bd5293cee9f0eec1651f5\"",
+            "body_hex": "7b227469746c65223a226f726967696e616c222c22656e61626c6564223a66616c73657d"
+          },
+          {
+            "revision": 1,
+            "etag": "\"442a0270d59748dbbc20788bbc13c33e-1-16d9330bf83dd00c82c9bc35edb83308a1f9a07f9c664b17df5339dbddad62d6\"",
+            "body_hex": "207b2022656e61626c656422203a20747275652c20227469746c6522203a2022c3a922207d0a"
+          }
+        ],
+        "integrity_check": [
+          [
+            "ok"
+          ]
+        ]
+      }
+    }
+  ],
+  "passed": true,
+  "not_established": [
+    "browser or proxy cache behavior",
+    "production authentication or TLS",
+    "crash or power-loss durability",
+    "target integration",
+    "performance improvement"
+  ]
+}

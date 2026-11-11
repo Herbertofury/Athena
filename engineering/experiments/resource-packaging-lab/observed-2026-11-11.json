@@ -1,0 +1,1848 @@
+{
+  "schema_version": 1,
+  "scope": "Measured resource-only Gradle packaging on original synthetic inputs. No game, loader, resource import, remapping, signing, target build, or native compatibility acceptance.",
+  "recorded_at_utc": "2026-11-11T02:09:24+00:00",
+  "environment": {
+    "python": "3.12.14",
+    "system": "Linux",
+    "machine": "x86_64"
+  },
+  "dependency": {
+    "schema_version": 1,
+    "name": "gradle-9.2.1-bin.zip",
+    "url": "https://downloads.gradle.org/distributions/gradle-9.2.1-bin.zip",
+    "bytes": 135535598,
+    "sha256": "72f44c9f8ebcb1af43838f45ee5c4aa9c5444898b3468ab3f4af7b6076c5bc3f",
+    "checksum_url": "https://downloads.gradle.org/distributions/gradle-9.2.1-bin.zip.sha256",
+    "version": "9.2.1",
+    "revision": "30ecdc708db275e8f8769ea0620f6dd919a58f76"
+  },
+  "input_sha256": {
+    "run.py": "6872e8da6e1c14e6519ca4aa8b8842547e8e18699be895d300b0516c234c3df7",
+    "build.gradle": "13f0d446adb76681c3572b438b5dc7721a283d6e0742fbeeed4aa45906abdd26",
+    "settings.gradle": "485bb9fcfaa23619ac66c5625789b43f0b042407ef32a05b036acabed1079940",
+    "fixtures.json": "dbdf33380288afaeef1675ea6f21a54f28c2c7983018ad81119a793ce2a5f9d6",
+    "dependencies.json": "40254f5418693b74e97dc3bc3d531b5a823c553251165aca67bebca6b1044904",
+    "setup-attempts.json": "0e9887c64fc302bbf687c2570ccc6f26df89492157e6c33ce2d7e782e5dc6ccc"
+  },
+  "flags": [
+    "--offline",
+    "--no-daemon",
+    "--console=plain",
+    "--max-workers=1",
+    "--rerun-tasks",
+    "--no-build-cache",
+    "--no-configuration-cache",
+    "-Duser.timezone=UTC"
+  ],
+  "gradle_version_stdout": "\nWelcome to Gradle 9.2.1!\n\nHere are the highlights of this release:\n - Windows ARM support\n - Improved publishing APIs\n - Better guidance for dependency verification failures\n\nFor more details see https://docs.gradle.org/9.2.1/release-notes.html\n\n\n------------------------------------------------------------\nGradle 9.2.1\n------------------------------------------------------------\n\nBuild time:    2025-11-17 13:40:48 UTC\nRevision:      30ecdc708db275e8f8769ea0620f6dd919a58f76\n\nKotlin:        2.2.20\nGroovy:        4.0.28\nAnt:           Apache Ant(TM) version 1.10.15 compiled on August 25 2024\nLauncher JVM:  21.0.13 (Debian 21.0.13+9-1-deb13u2-Debian)\nDaemon JVM:    /usr/lib/jvm/java-21-openjdk-amd64 (no JDK specified, using current Java home)\nOS:            Linux 6.18.57 amd64\n\n",
+  "runs": [
+    {
+      "id": "a:success",
+      "returncode": 0,
+      "stdout": "To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.2.1/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.\nDaemon will be stopped at the end of the build \n> Task :defaultJar\n> Task :timestampJar\n> Task :missingJar\n> Task :excludeJar\n> Task :includeJar\n\nBUILD SUCCESSFUL in 4s\n5 actionable tasks: 5 executed\n",
+      "stderr": ""
+    },
+    {
+      "id": "b:success",
+      "returncode": 0,
+      "stdout": "To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.2.1/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.\nDaemon will be stopped at the end of the build \n> Task :defaultJar\n> Task :timestampJar\n> Task :missingJar\n> Task :excludeJar\n> Task :includeJar\n\nBUILD SUCCESSFUL in 3s\n5 actionable tasks: 5 executed\n",
+      "stderr": ""
+    },
+    {
+      "id": "a:failDifferent",
+      "returncode": 1,
+      "stdout": "To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.2.1/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.\nDaemon will be stopped at the end of the build \n> Task :failDifferent FAILED\n1 actionable task: 1 executed\n",
+      "stderr": "\nFAILURE: Build failed with an exception.\n\n* What went wrong:\nExecution failed for task ':failDifferent'.\n> Cannot copy file '<RUN>/project-a/alternate/assets/atlas_lab/data/message.txt' to 'assets/atlas_lab/data/message.txt' because file '<RUN>/project-a/primary/assets/atlas_lab/data/message.txt' has already been copied there.\n\n* Try:\n> Run with --stacktrace option to get the stack trace.\n> Run with --info or --debug option to get more log output.\n> Run with --scan to generate a Build Scan (powered by Develocity).\n> Get more help at https://help.gradle.org.\n\nBUILD FAILED in 3s\n"
+    },
+    {
+      "id": "a:failIdentical",
+      "returncode": 1,
+      "stdout": "To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.2.1/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.\nDaemon will be stopped at the end of the build \n> Task :failIdentical FAILED\n1 actionable task: 1 executed\n",
+      "stderr": "\nFAILURE: Build failed with an exception.\n\n* What went wrong:\nExecution failed for task ':failIdentical'.\n> Cannot copy file '<RUN>/project-a/identical/assets/atlas_lab/data/message.txt' to 'assets/atlas_lab/data/message.txt' because file '<RUN>/project-a/primary/assets/atlas_lab/data/message.txt' has already been copied there.\n\n* Try:\n> Run with --stacktrace option to get the stack trace.\n> Run with --info or --debug option to get more log output.\n> Run with --scan to generate a Build Scan (powered by Develocity).\n> Get more help at https://help.gradle.org.\n\nBUILD FAILED in 3s\n"
+    }
+  ],
+  "artifacts": [
+    {
+      "id": "a:defaultJar",
+      "base64": "UEsDBBQAAAgIAAAAQQAAAAAAAgAAAAAAAAAJAAAATUVUQS1JTkYvAwBQSwMEFAAACAgAAABBALJ/Au4bAAAAGQAAABQAAABNRVRBLUlORi9NQU5JRkVTVC5NRvNNzMtMSy0u0Q1LLSrOzM+zUjDUM+Dl4uUCAFBLAwQUAAAICAAAAEEAZSNQ/TMAAAAyAAAADgAAAGF0bGFzLWxhYi5qc29uq1bKTFGyUkosyUksji9KLc4vLUpOjU/LrCgpLUpV0lEqSy0qzszPAyox1DPQM1Cq5QIAUEsDBBQAAAgIAAAAQQAAAAAAAgAAAAAAAAAHAAAAYXNzZXRzLwMAUEsDBBQAAAgIAAAAQQAAAAAAAgAAAAAAAAARAAAAYXNzZXRzL2F0bGFzX2xhYi8DAFBLAwQUAAAICAAAAEEAAAAAAAIAAAAAAAAAFgAAAGFzc2V0cy9hdGxhc19sYWIvZGF0YS8DAFBLAwQUAAAICAAAAEEAc4wFKQUBAAAAAQAAHwAAAGFzc2V0cy9hdGxhc19sYWIvZGF0YS9ieXRlcy5iaW4BAAH//gABAgMEBQYHCAkKCwwNDg8QERITFBUWFxgZGhscHR4fICEiIyQlJicoKSorLC0uLzAxMjM0NTY3ODk6Ozw9Pj9AQUJDREVGR0hJSktMTU5PUFFSU1RVVldYWVpbXF1eX2BhYmNkZWZnaGlqa2xtbm9wcXJzdHV2d3h5ent8fX5/gIGCg4SFhoeIiYqLjI2Oj5CRkpOUlZaXmJmam5ydnp+goaKjpKWmp6ipqqusra6vsLGys7S1tre4ubq7vL2+v8DBwsPExcbHyMnKy8zNzs/Q0dLT1NXW19jZ2tvc3d7f4OHi4+Tl5ufo6err7O3u7/Dx8vP09fb3+Pn6+/z9/v9QSwMEFAAACAgAAABBAMRBZgsTAAAAEQAAACEAAABhc3NldHMvYXRsYXNfbGFiL2RhdGEvbWVzc2FnZS50eHQrKMrMTSyqVChKLc4vLUpO5QIAUEsBAhQDFAAACAgAAABBAAAAAAACAAAAAAAAAAkAAAAAAAAAAAAQAO1BAAAAAE1FVEEtSU5GL1BLAQIUAxQAAAgIAAAAQQCyfwLuGwAAABkAAAAUAAAAAAAAAAAAAACkgSkAAABNRVRBLUlORi9NQU5JRkVTVC5NRlBLAQIUAxQAAAgIAAAAQQBlI1D9MwAAADIAAAAOAAAAAAAAAAAAAACkgXYAAABhdGxhcy1sYWIuanNvblBLAQIUAxQAAAgIAAAAQQAAAAAAAgAAAAAAAAAHAAAAAAAAAAAAEADtQdUAAABhc3NldHMvUEsBAhQDFAAACAgAAABBAAAAAAACAAAAAAAAABEAAAAAAAAAAAAQAO1B/AAAAGFzc2V0cy9hdGxhc19sYWIvUEsBAhQDFAAACAgAAABBAAAAAAACAAAAAAAAABYAAAAAAAAAAAAQAO1BLQEAAGFzc2V0cy9hdGxhc19sYWIvZGF0YS9QSwECFAMUAAAICAAAAEEAc4wFKQUBAAAAAQAAHwAAAAAAAAAAAAAApIFjAQAAYXNzZXRzL2F0bGFzX2xhYi9kYXRhL2J5dGVzLmJpblBLAQIUAxQAAAgIAAAAQQDEQWYLEwAAABEAAAAhAAAAAAAAAAAAAACkgaUCAABhc3NldHMvYXRsYXNfbGFiL2RhdGEvbWVzc2FnZS50eHRQSwUGAAAAAAgACAAJAgAA9wIAAAAA"
+    },
+    {
+      "id": "a:timestampJar",
+      "base64": "UEsDBBQAAAgIACYRa10AAAAAAgAAAAAAAAAJAAAATUVUQS1JTkYvAwBQSwMEFAAACAgAJhFrXbJ/Au4bAAAAGQAAABQAAABNRVRBLUlORi9NQU5JRkVTVC5NRvNNzMtMSy0u0Q1LLSrOzM+zUjDUM+Dl4uUCAFBLAwQUAAAICAAAACFQZSNQ/TMAAAAyAAAADgAAAGF0bGFzLWxhYi5qc29uq1bKTFGyUkosyUksji9KLc4vLUpOjU/LrCgpLUpV0lEqSy0qzszPAyox1DPQM1Cq5QIAUEsDBBQAAAgIACMRa10AAAAAAgAAAAAAAAAHAAAAYXNzZXRzLwMAUEsDBBQAAAgIACMRa10AAAAAAgAAAAAAAAARAAAAYXNzZXRzL2F0bGFzX2xhYi8DAFBLAwQUAAAICAAjEWtdAAAAAAIAAAAAAAAAFgAAAGFzc2V0cy9hdGxhc19sYWIvZGF0YS8DAFBLAwQUAAAICAAAACFQc4wFKQUBAAAAAQAAHwAAAGFzc2V0cy9hdGxhc19sYWIvZGF0YS9ieXRlcy5iaW4BAAH//gABAgMEBQYHCAkKCwwNDg8QERITFBUWFxgZGhscHR4fICEiIyQlJicoKSorLC0uLzAxMjM0NTY3ODk6Ozw9Pj9AQUJDREVGR0hJSktMTU5PUFFSU1RVVldYWVpbXF1eX2BhYmNkZWZnaGlqa2xtbm9wcXJzdHV2d3h5ent8fX5/gIGCg4SFhoeIiYqLjI2Oj5CRkpOUlZaXmJmam5ydnp+goaKjpKWmp6ipqqusra6vsLGys7S1tre4ubq7vL2+v8DBwsPExcbHyMnKy8zNzs/Q0dLT1NXW19jZ2tvc3d7f4OHi4+Tl5ufo6err7O3u7/Dx8vP09fb3+Pn6+/z9/v9QSwMEFAAACAgAAAAhUMRBZgsTAAAAEQAAACEAAABhc3NldHMvYXRsYXNfbGFiL2RhdGEvbWVzc2FnZS50eHQrKMrMTSyqVChKLc4vLUpO5QIAUEsBAhQDFAAACAgAJhFrXQAAAAACAAAAAAAAAAkAAAAAAAAAAAAQAO1BAAAAAE1FVEEtSU5GL1BLAQIUAxQAAAgIACYRa12yfwLuGwAAABkAAAAUAAAAAAAAAAAAAACkgSkAAABNRVRBLUlORi9NQU5JRkVTVC5NRlBLAQIUAxQAAAgIAAAAIVBlI1D9MwAAADIAAAAOAAAAAAAAAAAAAACkgXYAAABhdGxhcy1sYWIuanNvblBLAQIUAxQAAAgIACMRa10AAAAAAgAAAAAAAAAHAAAAAAAAAAAAEADtQdUAAABhc3NldHMvUEsBAhQDFAAACAgAIxFrXQAAAAACAAAAAAAAABEAAAAAAAAAAAAQAO1B/AAAAGFzc2V0cy9hdGxhc19sYWIvUEsBAhQDFAAACAgAIxFrXQAAAAACAAAAAAAAABYAAAAAAAAAAAAQAO1BLQEAAGFzc2V0cy9hdGxhc19sYWIvZGF0YS9QSwECFAMUAAAICAAAACFQc4wFKQUBAAAAAQAAHwAAAAAAAAAAAAAApIFjAQAAYXNzZXRzL2F0bGFzX2xhYi9kYXRhL2J5dGVzLmJpblBLAQIUAxQAAAgIAAAAIVDEQWYLEwAAABEAAAAhAAAAAAAAAAAAAACkgaUCAABhc3NldHMvYXRsYXNfbGFiL2RhdGEvbWVzc2FnZS50eHRQSwUGAAAAAAgACAAJAgAA9wIAAAAA"
+    },
+    {
+      "id": "a:missingJar",
+      "base64": "UEsDBBQAAAgIAAAAQQAAAAAAAgAAAAAAAAAJAAAATUVUQS1JTkYvAwBQSwMEFAAACAgAAABBALJ/Au4bAAAAGQAAABQAAABNRVRBLUlORi9NQU5JRkVTVC5NRvNNzMtMSy0u0Q1LLSrOzM+zUjDUM+Dl4uUCAFBLAwQUAAAICAAAAEEAZSNQ/TMAAAAyAAAADgAAAGF0bGFzLWxhYi5qc29uq1bKTFGyUkosyUksji9KLc4vLUpOjU/LrCgpLUpV0lEqSy0qzszPAyox1DPQM1Cq5QIAUEsDBBQAAAgIAAAAQQAAAAAAAgAAAAAAAAAHAAAAYXNzZXRzLwMAUEsDBBQAAAgIAAAAQQAAAAAAAgAAAAAAAAARAAAAYXNzZXRzL2F0bGFzX2xhYi8DAFBLAwQUAAAICAAAAEEAAAAAAAIAAAAAAAAAFgAAAGFzc2V0cy9hdGxhc19sYWIvZGF0YS8DAFBLAwQUAAAICAAAAEEAxEFmCxMAAAARAAAAIQAAAGFzc2V0cy9hdGxhc19sYWIvZGF0YS9tZXNzYWdlLnR4dCsoysxNLKpUKEotzi8tSk7lAgBQSwECFAMUAAAICAAAAEEAAAAAAAIAAAAAAAAACQAAAAAAAAAAABAA7UEAAAAATUVUQS1JTkYvUEsBAhQDFAAACAgAAABBALJ/Au4bAAAAGQAAABQAAAAAAAAAAAAAAKSBKQAAAE1FVEEtSU5GL01BTklGRVNULk1GUEsBAhQDFAAACAgAAABBAGUjUP0zAAAAMgAAAA4AAAAAAAAAAAAAAKSBdgAAAGF0bGFzLWxhYi5qc29uUEsBAhQDFAAACAgAAABBAAAAAAACAAAAAAAAAAcAAAAAAAAAAAAQAO1B1QAAAGFzc2V0cy9QSwECFAMUAAAICAAAAEEAAAAAAAIAAAAAAAAAEQAAAAAAAAAAABAA7UH8AAAAYXNzZXRzL2F0bGFzX2xhYi9QSwECFAMUAAAICAAAAEEAAAAAAAIAAAAAAAAAFgAAAAAAAAAAABAA7UEtAQAAYXNzZXRzL2F0bGFzX2xhYi9kYXRhL1BLAQIUAxQAAAgIAAAAQQDEQWYLEwAAABEAAAAhAAAAAAAAAAAAAACkgWMBAABhc3NldHMvYXRsYXNfbGFiL2RhdGEvbWVzc2FnZS50eHRQSwUGAAAAAAcABwC8AQAAtQEAAAAA"
+    },
+    {
+      "id": "a:excludeJar",
+      "base64": "UEsDBBQAAAgIAAAAQQAAAAAAAgAAAAAAAAAJAAAATUVUQS1JTkYvAwBQSwMEFAAACAgAAABBALJ/Au4bAAAAGQAAABQAAABNRVRBLUlORi9NQU5JRkVTVC5NRvNNzMtMSy0u0Q1LLSrOzM+zUjDUM+Dl4uUCAFBLAwQUAAAICAAAAEEAZSNQ/TMAAAAyAAAADgAAAGF0bGFzLWxhYi5qc29uq1bKTFGyUkosyUksji9KLc4vLUpOjU/LrCgpLUpV0lEqSy0qzszPAyox1DPQM1Cq5QIAUEsDBBQAAAgIAAAAQQAAAAAAAgAAAAAAAAAHAAAAYXNzZXRzLwMAUEsDBBQAAAgIAAAAQQAAAAAAAgAAAAAAAAARAAAAYXNzZXRzL2F0bGFzX2xhYi8DAFBLAwQUAAAICAAAAEEAAAAAAAIAAAAAAAAAFgAAAGFzc2V0cy9hdGxhc19sYWIvZGF0YS8DAFBLAwQUAAAICAAAAEEAc4wFKQUBAAAAAQAAHwAAAGFzc2V0cy9hdGxhc19sYWIvZGF0YS9ieXRlcy5iaW4BAAH//gABAgMEBQYHCAkKCwwNDg8QERITFBUWFxgZGhscHR4fICEiIyQlJicoKSorLC0uLzAxMjM0NTY3ODk6Ozw9Pj9AQUJDREVGR0hJSktMTU5PUFFSU1RVVldYWVpbXF1eX2BhYmNkZWZnaGlqa2xtbm9wcXJzdHV2d3h5ent8fX5/gIGCg4SFhoeIiYqLjI2Oj5CRkpOUlZaXmJmam5ydnp+goaKjpKWmp6ipqqusra6vsLGys7S1tre4ubq7vL2+v8DBwsPExcbHyMnKy8zNzs/Q0dLT1NXW19jZ2tvc3d7f4OHi4+Tl5ufo6err7O3u7/Dx8vP09fb3+Pn6+/z9/v9QSwMEFAAACAgAAABBAMRBZgsTAAAAEQAAACEAAABhc3NldHMvYXRsYXNfbGFiL2RhdGEvbWVzc2FnZS50eHQrKMrMTSyqVChKLc4vLUpO5QIAUEsBAhQDFAAACAgAAABBAAAAAAACAAAAAAAAAAkAAAAAAAAAAAAQAO1BAAAAAE1FVEEtSU5GL1BLAQIUAxQAAAgIAAAAQQCyfwLuGwAAABkAAAAUAAAAAAAAAAAAAACkgSkAAABNRVRBLUlORi9NQU5JRkVTVC5NRlBLAQIUAxQAAAgIAAAAQQBlI1D9MwAAADIAAAAOAAAAAAAAAAAAAACkgXYAAABhdGxhcy1sYWIuanNvblBLAQIUAxQAAAgIAAAAQQAAAAAAAgAAAAAAAAAHAAAAAAAAAAAAEADtQdUAAABhc3NldHMvUEsBAhQDFAAACAgAAABBAAAAAAACAAAAAAAAABEAAAAAAAAAAAAQAO1B/AAAAGFzc2V0cy9hdGxhc19sYWIvUEsBAhQDFAAACAgAAABBAAAAAAACAAAAAAAAABYAAAAAAAAAAAAQAO1BLQEAAGFzc2V0cy9hdGxhc19sYWIvZGF0YS9QSwECFAMUAAAICAAAAEEAc4wFKQUBAAAAAQAAHwAAAAAAAAAAAAAApIFjAQAAYXNzZXRzL2F0bGFzX2xhYi9kYXRhL2J5dGVzLmJpblBLAQIUAxQAAAgIAAAAQQDEQWYLEwAAABEAAAAhAAAAAAAAAAAAAACkgaUCAABhc3NldHMvYXRsYXNfbGFiL2RhdGEvbWVzc2FnZS50eHRQSwUGAAAAAAgACAAJAgAA9wIAAAAA"
+    },
+    {
+      "id": "a:includeJar",
+      "base64": "UEsDBBQAAAgIAAAAQQAAAAAAAgAAAAAAAAAJAAAATUVUQS1JTkYvAwBQSwMEFAAACAgAAABBALJ/Au4bAAAAGQAAABQAAABNRVRBLUlORi9NQU5JRkVTVC5NRvNNzMtMSy0u0Q1LLSrOzM+zUjDUM+Dl4uUCAFBLAwQUAAAICAAAAEEAZSNQ/TMAAAAyAAAADgAAAGF0bGFzLWxhYi5qc29uq1bKTFGyUkosyUksji9KLc4vLUpOjU/LrCgpLUpV0lEqSy0qzszPAyox1DPQM1Cq5QIAUEsDBBQAAAgIAAAAQQAAAAAAAgAAAAAAAAAHAAAAYXNzZXRzLwMAUEsDBBQAAAgIAAAAQQAAAAAAAgAAAAAAAAARAAAAYXNzZXRzL2F0bGFzX2xhYi8DAFBLAwQUAAAICAAAAEEAAAAAAAIAAAAAAAAAFgAAAGFzc2V0cy9hdGxhc19sYWIvZGF0YS8DAFBLAwQUAAAICAAAAEEAc4wFKQUBAAAAAQAAHwAAAGFzc2V0cy9hdGxhc19sYWIvZGF0YS9ieXRlcy5iaW4BAAH//gABAgMEBQYHCAkKCwwNDg8QERITFBUWFxgZGhscHR4fICEiIyQlJicoKSorLC0uLzAxMjM0NTY3ODk6Ozw9Pj9AQUJDREVGR0hJSktMTU5PUFFSU1RVVldYWVpbXF1eX2BhYmNkZWZnaGlqa2xtbm9wcXJzdHV2d3h5ent8fX5/gIGCg4SFhoeIiYqLjI2Oj5CRkpOUlZaXmJmam5ydnp+goaKjpKWmp6ipqqusra6vsLGys7S1tre4ubq7vL2+v8DBwsPExcbHyMnKy8zNzs/Q0dLT1NXW19jZ2tvc3d7f4OHi4+Tl5ufo6err7O3u7/Dx8vP09fb3+Pn6+/z9/v9QSwMEFAAACAgAAABBAMRBZgsTAAAAEQAAACEAAABhc3NldHMvYXRsYXNfbGFiL2RhdGEvbWVzc2FnZS50eHQrKMrMTSyqVChKLc4vLUpO5QIAUEsDBBQAAAgIAAAAQQCK3C2aFQAAABMAAAAhAAAAYXNzZXRzL2F0bGFzX2xhYi9kYXRhL21lc3NhZ2UudHh0S8wpSS3KSyxJVShKLc4vLUpO5QIAUEsBAhQDFAAACAgAAABBAAAAAAACAAAAAAAAAAkAAAAAAAAAAAAQAO1BAAAAAE1FVEEtSU5GL1BLAQIUAxQAAAgIAAAAQQCyfwLuGwAAABkAAAAUAAAAAAAAAAAAAACkgSkAAABNRVRBLUlORi9NQU5JRkVTVC5NRlBLAQIUAxQAAAgIAAAAQQBlI1D9MwAAADIAAAAOAAAAAAAAAAAAAACkgXYAAABhdGxhcy1sYWIuanNvblBLAQIUAxQAAAgIAAAAQQAAAAAAAgAAAAAAAAAHAAAAAAAAAAAAEADtQdUAAABhc3NldHMvUEsBAhQDFAAACAgAAABBAAAAAAACAAAAAAAAABEAAAAAAAAAAAAQAO1B/AAAAGFzc2V0cy9hdGxhc19sYWIvUEsBAhQDFAAACAgAAABBAAAAAAACAAAAAAAAABYAAAAAAAAAAAAQAO1BLQEAAGFzc2V0cy9hdGxhc19sYWIvZGF0YS9QSwECFAMUAAAICAAAAEEAc4wFKQUBAAAAAQAAHwAAAAAAAAAAAAAApIFjAQAAYXNzZXRzL2F0bGFzX2xhYi9kYXRhL2J5dGVzLmJpblBLAQIUAxQAAAgIAAAAQQDEQWYLEwAAABEAAAAhAAAAAAAAAAAAAACkgaUCAABhc3NldHMvYXRsYXNfbGFiL2RhdGEvbWVzc2FnZS50eHRQSwECFAMUAAAICAAAAEEAitwtmhUAAAATAAAAIQAAAAAAAAAAAAAApIH3AgAAYXNzZXRzL2F0bGFzX2xhYi9kYXRhL21lc3NhZ2UudHh0UEsFBgAAAAAJAAkAWAIAAEsDAAAAAA=="
+    },
+    {
+      "id": "b:defaultJar",
+      "base64": "UEsDBBQAAAgIAAAAQQAAAAAAAgAAAAAAAAAJAAAATUVUQS1JTkYvAwBQSwMEFAAACAgAAABBALJ/Au4bAAAAGQAAABQAAABNRVRBLUlORi9NQU5JRkVTVC5NRvNNzMtMSy0u0Q1LLSrOzM+zUjDUM+Dl4uUCAFBLAwQUAAAICAAAAEEAZSNQ/TMAAAAyAAAADgAAAGF0bGFzLWxhYi5qc29uq1bKTFGyUkosyUksji9KLc4vLUpOjU/LrCgpLUpV0lEqSy0qzszPAyox1DPQM1Cq5QIAUEsDBBQAAAgIAAAAQQAAAAAAAgAAAAAAAAAHAAAAYXNzZXRzLwMAUEsDBBQAAAgIAAAAQQAAAAAAAgAAAAAAAAARAAAAYXNzZXRzL2F0bGFzX2xhYi8DAFBLAwQUAAAICAAAAEEAAAAAAAIAAAAAAAAAFgAAAGFzc2V0cy9hdGxhc19sYWIvZGF0YS8DAFBLAwQUAAAICAAAAEEAc4wFKQUBAAAAAQAAHwAAAGFzc2V0cy9hdGxhc19sYWIvZGF0YS9ieXRlcy5iaW4BAAH//gABAgMEBQYHCAkKCwwNDg8QERITFBUWFxgZGhscHR4fICEiIyQlJicoKSorLC0uLzAxMjM0NTY3ODk6Ozw9Pj9AQUJDREVGR0hJSktMTU5PUFFSU1RVVldYWVpbXF1eX2BhYmNkZWZnaGlqa2xtbm9wcXJzdHV2d3h5ent8fX5/gIGCg4SFhoeIiYqLjI2Oj5CRkpOUlZaXmJmam5ydnp+goaKjpKWmp6ipqqusra6vsLGys7S1tre4ubq7vL2+v8DBwsPExcbHyMnKy8zNzs/Q0dLT1NXW19jZ2tvc3d7f4OHi4+Tl5ufo6err7O3u7/Dx8vP09fb3+Pn6+/z9/v9QSwMEFAAACAgAAABBAMRBZgsTAAAAEQAAACEAAABhc3NldHMvYXRsYXNfbGFiL2RhdGEvbWVzc2FnZS50eHQrKMrMTSyqVChKLc4vLUpO5QIAUEsBAhQDFAAACAgAAABBAAAAAAACAAAAAAAAAAkAAAAAAAAAAAAQAO1BAAAAAE1FVEEtSU5GL1BLAQIUAxQAAAgIAAAAQQCyfwLuGwAAABkAAAAUAAAAAAAAAAAAAACkgSkAAABNRVRBLUlORi9NQU5JRkVTVC5NRlBLAQIUAxQAAAgIAAAAQQBlI1D9MwAAADIAAAAOAAAAAAAAAAAAAACkgXYAAABhdGxhcy1sYWIuanNvblBLAQIUAxQAAAgIAAAAQQAAAAAAAgAAAAAAAAAHAAAAAAAAAAAAEADtQdUAAABhc3NldHMvUEsBAhQDFAAACAgAAABBAAAAAAACAAAAAAAAABEAAAAAAAAAAAAQAO1B/AAAAGFzc2V0cy9hdGxhc19sYWIvUEsBAhQDFAAACAgAAABBAAAAAAACAAAAAAAAABYAAAAAAAAAAAAQAO1BLQEAAGFzc2V0cy9hdGxhc19sYWIvZGF0YS9QSwECFAMUAAAICAAAAEEAc4wFKQUBAAAAAQAAHwAAAAAAAAAAAAAApIFjAQAAYXNzZXRzL2F0bGFzX2xhYi9kYXRhL2J5dGVzLmJpblBLAQIUAxQAAAgIAAAAQQDEQWYLEwAAABEAAAAhAAAAAAAAAAAAAACkgaUCAABhc3NldHMvYXRsYXNfbGFiL2RhdGEvbWVzc2FnZS50eHRQSwUGAAAAAAgACAAJAgAA9wIAAAAA"
+    },
+    {
+      "id": "b:timestampJar",
+      "base64": "UEsDBBQAAAgIACgRa10AAAAAAgAAAAAAAAAJAAAATUVUQS1JTkYvAwBQSwMEFAAACAgAKBFrXbJ/Au4bAAAAGQAAABQAAABNRVRBLUlORi9NQU5JRkVTVC5NRvNNzMtMSy0u0Q1LLSrOzM+zUjDUM+Dl4uUCAFBLAwQUAAAICAAAACFYZSNQ/TMAAAAyAAAADgAAAGF0bGFzLWxhYi5qc29uq1bKTFGyUkosyUksji9KLc4vLUpOjU/LrCgpLUpV0lEqSy0qzszPAyox1DPQM1Cq5QIAUEsDBBQAAAgIACYRa10AAAAAAgAAAAAAAAAHAAAAYXNzZXRzLwMAUEsDBBQAAAgIACYRa10AAAAAAgAAAAAAAAARAAAAYXNzZXRzL2F0bGFzX2xhYi8DAFBLAwQUAAAICAAmEWtdAAAAAAIAAAAAAAAAFgAAAGFzc2V0cy9hdGxhc19sYWIvZGF0YS8DAFBLAwQUAAAICAAAACFYc4wFKQUBAAAAAQAAHwAAAGFzc2V0cy9hdGxhc19sYWIvZGF0YS9ieXRlcy5iaW4BAAH//gABAgMEBQYHCAkKCwwNDg8QERITFBUWFxgZGhscHR4fICEiIyQlJicoKSorLC0uLzAxMjM0NTY3ODk6Ozw9Pj9AQUJDREVGR0hJSktMTU5PUFFSU1RVVldYWVpbXF1eX2BhYmNkZWZnaGlqa2xtbm9wcXJzdHV2d3h5ent8fX5/gIGCg4SFhoeIiYqLjI2Oj5CRkpOUlZaXmJmam5ydnp+goaKjpKWmp6ipqqusra6vsLGys7S1tre4ubq7vL2+v8DBwsPExcbHyMnKy8zNzs/Q0dLT1NXW19jZ2tvc3d7f4OHi4+Tl5ufo6err7O3u7/Dx8vP09fb3+Pn6+/z9/v9QSwMEFAAACAgAAAAhWMRBZgsTAAAAEQAAACEAAABhc3NldHMvYXRsYXNfbGFiL2RhdGEvbWVzc2FnZS50eHQrKMrMTSyqVChKLc4vLUpO5QIAUEsBAhQDFAAACAgAKBFrXQAAAAACAAAAAAAAAAkAAAAAAAAAAAAQAO1BAAAAAE1FVEEtSU5GL1BLAQIUAxQAAAgIACgRa12yfwLuGwAAABkAAAAUAAAAAAAAAAAAAACkgSkAAABNRVRBLUlORi9NQU5JRkVTVC5NRlBLAQIUAxQAAAgIAAAAIVhlI1D9MwAAADIAAAAOAAAAAAAAAAAAAACkgXYAAABhdGxhcy1sYWIuanNvblBLAQIUAxQAAAgIACYRa10AAAAAAgAAAAAAAAAHAAAAAAAAAAAAEADtQdUAAABhc3NldHMvUEsBAhQDFAAACAgAJhFrXQAAAAACAAAAAAAAABEAAAAAAAAAAAAQAO1B/AAAAGFzc2V0cy9hdGxhc19sYWIvUEsBAhQDFAAACAgAJhFrXQAAAAACAAAAAAAAABYAAAAAAAAAAAAQAO1BLQEAAGFzc2V0cy9hdGxhc19sYWIvZGF0YS9QSwECFAMUAAAICAAAACFYc4wFKQUBAAAAAQAAHwAAAAAAAAAAAAAApIFjAQAAYXNzZXRzL2F0bGFzX2xhYi9kYXRhL2J5dGVzLmJpblBLAQIUAxQAAAgIAAAAIVjEQWYLEwAAABEAAAAhAAAAAAAAAAAAAACkgaUCAABhc3NldHMvYXRsYXNfbGFiL2RhdGEvbWVzc2FnZS50eHRQSwUGAAAAAAgACAAJAgAA9wIAAAAA"
+    },
+    {
+      "id": "b:missingJar",
+      "base64": "UEsDBBQAAAgIAAAAQQAAAAAAAgAAAAAAAAAJAAAATUVUQS1JTkYvAwBQSwMEFAAACAgAAABBALJ/Au4bAAAAGQAAABQAAABNRVRBLUlORi9NQU5JRkVTVC5NRvNNzMtMSy0u0Q1LLSrOzM+zUjDUM+Dl4uUCAFBLAwQUAAAICAAAAEEAZSNQ/TMAAAAyAAAADgAAAGF0bGFzLWxhYi5qc29uq1bKTFGyUkosyUksji9KLc4vLUpOjU/LrCgpLUpV0lEqSy0qzszPAyox1DPQM1Cq5QIAUEsDBBQAAAgIAAAAQQAAAAAAAgAAAAAAAAAHAAAAYXNzZXRzLwMAUEsDBBQAAAgIAAAAQQAAAAAAAgAAAAAAAAARAAAAYXNzZXRzL2F0bGFzX2xhYi8DAFBLAwQUAAAICAAAAEEAAAAAAAIAAAAAAAAAFgAAAGFzc2V0cy9hdGxhc19sYWIvZGF0YS8DAFBLAwQUAAAICAAAAEEAxEFmCxMAAAARAAAAIQAAAGFzc2V0cy9hdGxhc19sYWIvZGF0YS9tZXNzYWdlLnR4dCsoysxNLKpUKEotzi8tSk7lAgBQSwECFAMUAAAICAAAAEEAAAAAAAIAAAAAAAAACQAAAAAAAAAAABAA7UEAAAAATUVUQS1JTkYvUEsBAhQDFAAACAgAAABBALJ/Au4bAAAAGQAAABQAAAAAAAAAAAAAAKSBKQAAAE1FVEEtSU5GL01BTklGRVNULk1GUEsBAhQDFAAACAgAAABBAGUjUP0zAAAAMgAAAA4AAAAAAAAAAAAAAKSBdgAAAGF0bGFzLWxhYi5qc29uUEsBAhQDFAAACAgAAABBAAAAAAACAAAAAAAAAAcAAAAAAAAAAAAQAO1B1QAAAGFzc2V0cy9QSwECFAMUAAAICAAAAEEAAAAAAAIAAAAAAAAAEQAAAAAAAAAAABAA7UH8AAAAYXNzZXRzL2F0bGFzX2xhYi9QSwECFAMUAAAICAAAAEEAAAAAAAIAAAAAAAAAFgAAAAAAAAAAABAA7UEtAQAAYXNzZXRzL2F0bGFzX2xhYi9kYXRhL1BLAQIUAxQAAAgIAAAAQQDEQWYLEwAAABEAAAAhAAAAAAAAAAAAAACkgWMBAABhc3NldHMvYXRsYXNfbGFiL2RhdGEvbWVzc2FnZS50eHRQSwUGAAAAAAcABwC8AQAAtQEAAAAA"
+    },
+    {
+      "id": "b:excludeJar",
+      "base64": "UEsDBBQAAAgIAAAAQQAAAAAAAgAAAAAAAAAJAAAATUVUQS1JTkYvAwBQSwMEFAAACAgAAABBALJ/Au4bAAAAGQAAABQAAABNRVRBLUlORi9NQU5JRkVTVC5NRvNNzMtMSy0u0Q1LLSrOzM+zUjDUM+Dl4uUCAFBLAwQUAAAICAAAAEEAAAAAAAIAAAAAAAAABwAAAGFzc2V0cy8DAFBLAwQUAAAICAAAAEEAAAAAAAIAAAAAAAAAEQAAAGFzc2V0cy9hdGxhc19sYWIvAwBQSwMEFAAACAgAAABBAAAAAAACAAAAAAAAABYAAABhc3NldHMvYXRsYXNfbGFiL2RhdGEvAwBQSwMEFAAACAgAAABBAIrcLZoVAAAAEwAAACEAAABhc3NldHMvYXRsYXNfbGFiL2RhdGEvbWVzc2FnZS50eHRLzClJLcpLLElVKEotzi8tSk7lAgBQSwMEFAAACAgAAABBAGUjUP0zAAAAMgAAAA4AAABhdGxhcy1sYWIuanNvbqtWykxRslJKLMlJLI4vSi3OLy1KTo1Py6woKS1KVdJRKkstKs7MzwMqMdQz0DNQquUCAFBLAwQUAAAICAAAAEEAc4wFKQUBAAAAAQAAHwAAAGFzc2V0cy9hdGxhc19sYWIvZGF0YS9ieXRlcy5iaW4BAAH//gABAgMEBQYHCAkKCwwNDg8QERITFBUWFxgZGhscHR4fICEiIyQlJicoKSorLC0uLzAxMjM0NTY3ODk6Ozw9Pj9AQUJDREVGR0hJSktMTU5PUFFSU1RVVldYWVpbXF1eX2BhYmNkZWZnaGlqa2xtbm9wcXJzdHV2d3h5ent8fX5/gIGCg4SFhoeIiYqLjI2Oj5CRkpOUlZaXmJmam5ydnp+goaKjpKWmp6ipqqusra6vsLGys7S1tre4ubq7vL2+v8DBwsPExcbHyMnKy8zNzs/Q0dLT1NXW19jZ2tvc3d7f4OHi4+Tl5ufo6err7O3u7/Dx8vP09fb3+Pn6+/z9/v9QSwECFAMUAAAICAAAAEEAAAAAAAIAAAAAAAAACQAAAAAAAAAAABAA7UEAAAAATUVUQS1JTkYvUEsBAhQDFAAACAgAAABBALJ/Au4bAAAAGQAAABQAAAAAAAAAAAAAAKSBKQAAAE1FVEEtSU5GL01BTklGRVNULk1GUEsBAhQDFAAACAgAAABBAAAAAAACAAAAAAAAAAcAAAAAAAAAAAAQAO1BdgAAAGFzc2V0cy9QSwECFAMUAAAICAAAAEEAAAAAAAIAAAAAAAAAEQAAAAAAAAAAABAA7UGdAAAAYXNzZXRzL2F0bGFzX2xhYi9QSwECFAMUAAAICAAAAEEAAAAAAAIAAAAAAAAAFgAAAAAAAAAAABAA7UHOAAAAYXNzZXRzL2F0bGFzX2xhYi9kYXRhL1BLAQIUAxQAAAgIAAAAQQCK3C2aFQAAABMAAAAhAAAAAAAAAAAAAACkgQQBAABhc3NldHMvYXRsYXNfbGFiL2RhdGEvbWVzc2FnZS50eHRQSwECFAMUAAAICAAAAEEAZSNQ/TMAAAAyAAAADgAAAAAAAAAAAAAApIFYAQAAYXRsYXMtbGFiLmpzb25QSwECFAMUAAAICAAAAEEAc4wFKQUBAAAAAQAAHwAAAAAAAAAAAAAApIG3AQAAYXNzZXRzL2F0bGFzX2xhYi9kYXRhL2J5dGVzLmJpblBLBQYAAAAACAAIAAkCAAD5AgAAAAA="
+    },
+    {
+      "id": "b:includeJar",
+      "base64": "UEsDBBQAAAgIAAAAQQAAAAAAAgAAAAAAAAAJAAAATUVUQS1JTkYvAwBQSwMEFAAACAgAAABBALJ/Au4bAAAAGQAAABQAAABNRVRBLUlORi9NQU5JRkVTVC5NRvNNzMtMSy0u0Q1LLSrOzM+zUjDUM+Dl4uUCAFBLAwQUAAAICAAAAEEAAAAAAAIAAAAAAAAABwAAAGFzc2V0cy8DAFBLAwQUAAAICAAAAEEAAAAAAAIAAAAAAAAAEQAAAGFzc2V0cy9hdGxhc19sYWIvAwBQSwMEFAAACAgAAABBAAAAAAACAAAAAAAAABYAAABhc3NldHMvYXRsYXNfbGFiL2RhdGEvAwBQSwMEFAAACAgAAABBAIrcLZoVAAAAEwAAACEAAABhc3NldHMvYXRsYXNfbGFiL2RhdGEvbWVzc2FnZS50eHRLzClJLcpLLElVKEotzi8tSk7lAgBQSwMEFAAACAgAAABBAGUjUP0zAAAAMgAAAA4AAABhdGxhcy1sYWIuanNvbqtWykxRslJKLMlJLI4vSi3OLy1KTo1Py6woKS1KVdJRKkstKs7MzwMqMdQz0DNQquUCAFBLAwQUAAAICAAAAEEAc4wFKQUBAAAAAQAAHwAAAGFzc2V0cy9hdGxhc19sYWIvZGF0YS9ieXRlcy5iaW4BAAH//gABAgMEBQYHCAkKCwwNDg8QERITFBUWFxgZGhscHR4fICEiIyQlJicoKSorLC0uLzAxMjM0NTY3ODk6Ozw9Pj9AQUJDREVGR0hJSktMTU5PUFFSU1RVVldYWVpbXF1eX2BhYmNkZWZnaGlqa2xtbm9wcXJzdHV2d3h5ent8fX5/gIGCg4SFhoeIiYqLjI2Oj5CRkpOUlZaXmJmam5ydnp+goaKjpKWmp6ipqqusra6vsLGys7S1tre4ubq7vL2+v8DBwsPExcbHyMnKy8zNzs/Q0dLT1NXW19jZ2tvc3d7f4OHi4+Tl5ufo6err7O3u7/Dx8vP09fb3+Pn6+/z9/v9QSwMEFAAACAgAAABBAMRBZgsTAAAAEQAAACEAAABhc3NldHMvYXRsYXNfbGFiL2RhdGEvbWVzc2FnZS50eHQrKMrMTSyqVChKLc4vLUpO5QIAUEsBAhQDFAAACAgAAABBAAAAAAACAAAAAAAAAAkAAAAAAAAAAAAQAO1BAAAAAE1FVEEtSU5GL1BLAQIUAxQAAAgIAAAAQQCyfwLuGwAAABkAAAAUAAAAAAAAAAAAAACkgSkAAABNRVRBLUlORi9NQU5JRkVTVC5NRlBLAQIUAxQAAAgIAAAAQQAAAAAAAgAAAAAAAAAHAAAAAAAAAAAAEADtQXYAAABhc3NldHMvUEsBAhQDFAAACAgAAABBAAAAAAACAAAAAAAAABEAAAAAAAAAAAAQAO1BnQAAAGFzc2V0cy9hdGxhc19sYWIvUEsBAhQDFAAACAgAAABBAAAAAAACAAAAAAAAABYAAAAAAAAAAAAQAO1BzgAAAGFzc2V0cy9hdGxhc19sYWIvZGF0YS9QSwECFAMUAAAICAAAAEEAitwtmhUAAAATAAAAIQAAAAAAAAAAAAAApIEEAQAAYXNzZXRzL2F0bGFzX2xhYi9kYXRhL21lc3NhZ2UudHh0UEsBAhQDFAAACAgAAABBAGUjUP0zAAAAMgAAAA4AAAAAAAAAAAAAAKSBWAEAAGF0bGFzLWxhYi5qc29uUEsBAhQDFAAACAgAAABBAHOMBSkFAQAAAAEAAB8AAAAAAAAAAAAAAKSBtwEAAGFzc2V0cy9hdGxhc19sYWIvZGF0YS9ieXRlcy5iaW5QSwECFAMUAAAICAAAAEEAxEFmCxMAAAARAAAAIQAAAAAAAAAAAAAApIH5AgAAYXNzZXRzL2F0bGFzX2xhYi9kYXRhL21lc3NhZ2UudHh0UEsFBgAAAAAJAAkAWAIAAEsDAAAAAA=="
+    }
+  ],
+  "observations": [
+    {
+      "id": "a:defaultJar",
+      "archive": {
+        "bytes": 1302,
+        "sha256": "b7e4326986c4873666ee5c6d8c9991eafd63be7f04d255d616a03afa3c2c9738",
+        "entries": [
+          {
+            "index": 0,
+            "path": "META-INF/",
+            "directory": true,
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "date_time": [
+              1980,
+              2,
+              1,
+              0,
+              0,
+              0
+            ],
+            "unix_mode": 16877,
+            "compression": 8,
+            "crc32": 0
+          },
+          {
+            "index": 1,
+            "path": "META-INF/MANIFEST.MF",
+            "directory": false,
+            "bytes": 25,
+            "sha256": "566ad1a80220026d05099562645ce968ff0e7c36cde22634332605bb34cc3eff",
+            "date_time": [
+              1980,
+              2,
+              1,
+              0,
+              0,
+              0
+            ],
+            "unix_mode": 33188,
+            "compression": 8,
+            "crc32": 3993141170
+          },
+          {
+            "index": 2,
+            "path": "atlas-lab.json",
+            "directory": false,
+            "bytes": 50,
+            "sha256": "14fa573f5f1ffcbaf6bf05775ea13af0a928ab87bb30eca32459d3262e80b69b",
+            "date_time": [
+              1980,
+              2,
+              1,
+              0,
+              0,
+              0
+            ],
+            "unix_mode": 33188,
+            "compression": 8,
+            "crc32": 4249887589
+          },
+          {
+            "index": 3,
+            "path": "assets/",
+            "directory": true,
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "date_time": [
+              1980,
+              2,
+              1,
+              0,
+              0,
+              0
+            ],
+            "unix_mode": 16877,
+            "compression": 8,
+            "crc32": 0
+          },
+          {
+            "index": 4,
+            "path": "assets/atlas_lab/",
+            "directory": true,
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "date_time": [
+              1980,
+              2,
+              1,
+              0,
+              0,
+              0
+            ],
+            "unix_mode": 16877,
+            "compression": 8,
+            "crc32": 0
+          },
+          {
+            "index": 5,
+            "path": "assets/atlas_lab/data/",
+            "directory": true,
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "date_time": [
+              1980,
+              2,
+              1,
+              0,
+              0,
+              0
+            ],
+            "unix_mode": 16877,
+            "compression": 8,
+            "crc32": 0
+          },
+          {
+            "index": 6,
+            "path": "assets/atlas_lab/data/bytes.bin",
+            "directory": false,
+            "bytes": 256,
+            "sha256": "40aff2e9d2d8922e47afd4648e6967497158785fbd1da870e7110266bf944880",
+            "date_time": [
+              1980,
+              2,
+              1,
+              0,
+              0,
+              0
+            ],
+            "unix_mode": 33188,
+            "compression": 8,
+            "crc32": 688229491
+          },
+          {
+            "index": 7,
+            "path": "assets/atlas_lab/data/message.txt",
+            "directory": false,
+            "bytes": 17,
+            "sha256": "b7e94925a605af24c1b035c5c9fefc98aaecb01e7227d103e7863c937c62740b",
+            "date_time": [
+              1980,
+              2,
+              1,
+              0,
+              0,
+              0
+            ],
+            "unix_mode": 33188,
+            "compression": 8,
+            "crc32": 191250884
+          }
+        ]
+      },
+      "resource_entries": [
+        {
+          "path": "atlas-lab.json",
+          "sha256": "14fa573f5f1ffcbaf6bf05775ea13af0a928ab87bb30eca32459d3262e80b69b"
+        },
+        {
+          "path": "assets/atlas_lab/data/bytes.bin",
+          "sha256": "40aff2e9d2d8922e47afd4648e6967497158785fbd1da870e7110266bf944880"
+        },
+        {
+          "path": "assets/atlas_lab/data/message.txt",
+          "sha256": "b7e94925a605af24c1b035c5c9fefc98aaecb01e7227d103e7863c937c62740b"
+        }
+      ],
+      "duplicate_paths": [],
+      "complete_primary_resources": true,
+      "matches_expected": true
+    },
+    {
+      "id": "a:timestampJar",
+      "archive": {
+        "bytes": 1302,
+        "sha256": "daf3554ad587a953562e904340c61178f0eac57d5f4f689c8246f857a19cd5b0",
+        "entries": [
+          {
+            "index": 0,
+            "path": "META-INF/",
+            "directory": true,
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "date_time": [
+              2026,
+              11,
+              11,
+              2,
+              9,
+              12
+            ],
+            "unix_mode": 16877,
+            "compression": 8,
+            "crc32": 0
+          },
+          {
+            "index": 1,
+            "path": "META-INF/MANIFEST.MF",
+            "directory": false,
+            "bytes": 25,
+            "sha256": "566ad1a80220026d05099562645ce968ff0e7c36cde22634332605bb34cc3eff",
+            "date_time": [
+              2026,
+              11,
+              11,
+              2,
+              9,
+              12
+            ],
+            "unix_mode": 33188,
+            "compression": 8,
+            "crc32": 3993141170
+          },
+          {
+            "index": 2,
+            "path": "atlas-lab.json",
+            "directory": false,
+            "bytes": 50,
+            "sha256": "14fa573f5f1ffcbaf6bf05775ea13af0a928ab87bb30eca32459d3262e80b69b",
+            "date_time": [
+              2020,
+              1,
+              1,
+              0,
+              0,
+              0
+            ],
+            "unix_mode": 33188,
+            "compression": 8,
+            "crc32": 4249887589
+          },
+          {
+            "index": 3,
+            "path": "assets/",
+            "directory": true,
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "date_time": [
+              2026,
+              11,
+              11,
+              2,
+              9,
+              6
+            ],
+            "unix_mode": 16877,
+            "compression": 8,
+            "crc32": 0
+          },
+          {
+            "index": 4,
+            "path": "assets/atlas_lab/",
+            "directory": true,
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "date_time": [
+              2026,
+              11,
+              11,
+              2,
+              9,
+              6
+            ],
+            "unix_mode": 16877,
+            "compression": 8,
+            "crc32": 0
+          },
+          {
+            "index": 5,
+            "path": "assets/atlas_lab/data/",
+            "directory": true,
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "date_time": [
+              2026,
+              11,
+              11,
+              2,
+              9,
+              6
+            ],
+            "unix_mode": 16877,
+            "compression": 8,
+            "crc32": 0
+          },
+          {
+            "index": 6,
+            "path": "assets/atlas_lab/data/bytes.bin",
+            "directory": false,
+            "bytes": 256,
+            "sha256": "40aff2e9d2d8922e47afd4648e6967497158785fbd1da870e7110266bf944880",
+            "date_time": [
+              2020,
+              1,
+              1,
+              0,
+              0,
+              0
+            ],
+            "unix_mode": 33188,
+            "compression": 8,
+            "crc32": 688229491
+          },
+          {
+            "index": 7,
+            "path": "assets/atlas_lab/data/message.txt",
+            "directory": false,
+            "bytes": 17,
+            "sha256": "b7e94925a605af24c1b035c5c9fefc98aaecb01e7227d103e7863c937c62740b",
+            "date_time": [
+              2020,
+              1,
+              1,
+              0,
+              0,
+              0
+            ],
+            "unix_mode": 33188,
+            "compression": 8,
+            "crc32": 191250884
+          }
+        ]
+      },
+      "resource_entries": [
+        {
+          "path": "atlas-lab.json",
+          "sha256": "14fa573f5f1ffcbaf6bf05775ea13af0a928ab87bb30eca32459d3262e80b69b"
+        },
+        {
+          "path": "assets/atlas_lab/data/bytes.bin",
+          "sha256": "40aff2e9d2d8922e47afd4648e6967497158785fbd1da870e7110266bf944880"
+        },
+        {
+          "path": "assets/atlas_lab/data/message.txt",
+          "sha256": "b7e94925a605af24c1b035c5c9fefc98aaecb01e7227d103e7863c937c62740b"
+        }
+      ],
+      "duplicate_paths": [],
+      "complete_primary_resources": true,
+      "matches_expected": true
+    },
+    {
+      "id": "a:missingJar",
+      "archive": {
+        "bytes": 903,
+        "sha256": "585d02380058bf2ca3dbfacba758ff87f7ccfa8b346e9f8ff694a66cda0ee815",
+        "entries": [
+          {
+            "index": 0,
+            "path": "META-INF/",
+            "directory": true,
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "date_time": [
+              1980,
+              2,
+              1,
+              0,
+              0,
+              0
+            ],
+            "unix_mode": 16877,
+            "compression": 8,
+            "crc32": 0
+          },
+          {
+            "index": 1,
+            "path": "META-INF/MANIFEST.MF",
+            "directory": false,
+            "bytes": 25,
+            "sha256": "566ad1a80220026d05099562645ce968ff0e7c36cde22634332605bb34cc3eff",
+            "date_time": [
+              1980,
+              2,
+              1,
+              0,
+              0,
+              0
+            ],
+            "unix_mode": 33188,
+            "compression": 8,
+            "crc32": 3993141170
+          },
+          {
+            "index": 2,
+            "path": "atlas-lab.json",
+            "directory": false,
+            "bytes": 50,
+            "sha256": "14fa573f5f1ffcbaf6bf05775ea13af0a928ab87bb30eca32459d3262e80b69b",
+            "date_time": [
+              1980,
+              2,
+              1,
+              0,
+              0,
+              0
+            ],
+            "unix_mode": 33188,
+            "compression": 8,
+            "crc32": 4249887589
+          },
+          {
+            "index": 3,
+            "path": "assets/",
+            "directory": true,
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "date_time": [
+              1980,
+              2,
+              1,
+              0,
+              0,
+              0
+            ],
+            "unix_mode": 16877,
+            "compression": 8,
+            "crc32": 0
+          },
+          {
+            "index": 4,
+            "path": "assets/atlas_lab/",
+            "directory": true,
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "date_time": [
+              1980,
+              2,
+              1,
+              0,
+              0,
+              0
+            ],
+            "unix_mode": 16877,
+            "compression": 8,
+            "crc32": 0
+          },
+          {
+            "index": 5,
+            "path": "assets/atlas_lab/data/",
+            "directory": true,
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "date_time": [
+              1980,
+              2,
+              1,
+              0,
+              0,
+              0
+            ],
+            "unix_mode": 16877,
+            "compression": 8,
+            "crc32": 0
+          },
+          {
+            "index": 6,
+            "path": "assets/atlas_lab/data/message.txt",
+            "directory": false,
+            "bytes": 17,
+            "sha256": "b7e94925a605af24c1b035c5c9fefc98aaecb01e7227d103e7863c937c62740b",
+            "date_time": [
+              1980,
+              2,
+              1,
+              0,
+              0,
+              0
+            ],
+            "unix_mode": 33188,
+            "compression": 8,
+            "crc32": 191250884
+          }
+        ]
+      },
+      "resource_entries": [
+        {
+          "path": "atlas-lab.json",
+          "sha256": "14fa573f5f1ffcbaf6bf05775ea13af0a928ab87bb30eca32459d3262e80b69b"
+        },
+        {
+          "path": "assets/atlas_lab/data/message.txt",
+          "sha256": "b7e94925a605af24c1b035c5c9fefc98aaecb01e7227d103e7863c937c62740b"
+        }
+      ],
+      "duplicate_paths": [],
+      "complete_primary_resources": false,
+      "matches_expected": true
+    },
+    {
+      "id": "a:excludeJar",
+      "archive": {
+        "bytes": 1302,
+        "sha256": "b7e4326986c4873666ee5c6d8c9991eafd63be7f04d255d616a03afa3c2c9738",
+        "entries": [
+          {
+            "index": 0,
+            "path": "META-INF/",
+            "directory": true,
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "date_time": [
+              1980,
+              2,
+              1,
+              0,
+              0,
+              0
+            ],
+            "unix_mode": 16877,
+            "compression": 8,
+            "crc32": 0
+          },
+          {
+            "index": 1,
+            "path": "META-INF/MANIFEST.MF",
+            "directory": false,
+            "bytes": 25,
+            "sha256": "566ad1a80220026d05099562645ce968ff0e7c36cde22634332605bb34cc3eff",
+            "date_time": [
+              1980,
+              2,
+              1,
+              0,
+              0,
+              0
+            ],
+            "unix_mode": 33188,
+            "compression": 8,
+            "crc32": 3993141170
+          },
+          {
+            "index": 2,
+            "path": "atlas-lab.json",
+            "directory": false,
+            "bytes": 50,
+            "sha256": "14fa573f5f1ffcbaf6bf05775ea13af0a928ab87bb30eca32459d3262e80b69b",
+            "date_time": [
+              1980,
+              2,
+              1,
+              0,
+              0,
+              0
+            ],
+            "unix_mode": 33188,
+            "compression": 8,
+            "crc32": 4249887589
+          },
+          {
+            "index": 3,
+            "path": "assets/",
+            "directory": true,
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "date_time": [
+              1980,
+              2,
+              1,
+              0,
+              0,
+              0
+            ],
+            "unix_mode": 16877,
+            "compression": 8,
+            "crc32": 0
+          },
+          {
+            "index": 4,
+            "path": "assets/atlas_lab/",
+            "directory": true,
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "date_time": [
+              1980,
+              2,
+              1,
+              0,
+              0,
+              0
+            ],
+            "unix_mode": 16877,
+            "compression": 8,
+            "crc32": 0
+          },
+          {
+            "index": 5,
+            "path": "assets/atlas_lab/data/",
+            "directory": true,
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "date_time": [
+              1980,
+              2,
+              1,
+              0,
+              0,
+              0
+            ],
+            "unix_mode": 16877,
+            "compression": 8,
+            "crc32": 0
+          },
+          {
+            "index": 6,
+            "path": "assets/atlas_lab/data/bytes.bin",
+            "directory": false,
+            "bytes": 256,
+            "sha256": "40aff2e9d2d8922e47afd4648e6967497158785fbd1da870e7110266bf944880",
+            "date_time": [
+              1980,
+              2,
+              1,
+              0,
+              0,
+              0
+            ],
+            "unix_mode": 33188,
+            "compression": 8,
+            "crc32": 688229491
+          },
+          {
+            "index": 7,
+            "path": "assets/atlas_lab/data/message.txt",
+            "directory": false,
+            "bytes": 17,
+            "sha256": "b7e94925a605af24c1b035c5c9fefc98aaecb01e7227d103e7863c937c62740b",
+            "date_time": [
+              1980,
+              2,
+              1,
+              0,
+              0,
+              0
+            ],
+            "unix_mode": 33188,
+            "compression": 8,
+            "crc32": 191250884
+          }
+        ]
+      },
+      "resource_entries": [
+        {
+          "path": "atlas-lab.json",
+          "sha256": "14fa573f5f1ffcbaf6bf05775ea13af0a928ab87bb30eca32459d3262e80b69b"
+        },
+        {
+          "path": "assets/atlas_lab/data/bytes.bin",
+          "sha256": "40aff2e9d2d8922e47afd4648e6967497158785fbd1da870e7110266bf944880"
+        },
+        {
+          "path": "assets/atlas_lab/data/message.txt",
+          "sha256": "b7e94925a605af24c1b035c5c9fefc98aaecb01e7227d103e7863c937c62740b"
+        }
+      ],
+      "duplicate_paths": [],
+      "complete_primary_resources": true,
+      "matches_expected": true
+    },
+    {
+      "id": "a:includeJar",
+      "archive": {
+        "bytes": 1465,
+        "sha256": "cfadfa56269663f94e6140eac4d86939da8ce4e1f8659b7d87ffc52bc2dbd407",
+        "entries": [
+          {
+            "index": 0,
+            "path": "META-INF/",
+            "directory": true,
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "date_time": [
+              1980,
+              2,
+              1,
+              0,
+              0,
+              0
+            ],
+            "unix_mode": 16877,
+            "compression": 8,
+            "crc32": 0
+          },
+          {
+            "index": 1,
+            "path": "META-INF/MANIFEST.MF",
+            "directory": false,
+            "bytes": 25,
+            "sha256": "566ad1a80220026d05099562645ce968ff0e7c36cde22634332605bb34cc3eff",
+            "date_time": [
+              1980,
+              2,
+              1,
+              0,
+              0,
+              0
+            ],
+            "unix_mode": 33188,
+            "compression": 8,
+            "crc32": 3993141170
+          },
+          {
+            "index": 2,
+            "path": "atlas-lab.json",
+            "directory": false,
+            "bytes": 50,
+            "sha256": "14fa573f5f1ffcbaf6bf05775ea13af0a928ab87bb30eca32459d3262e80b69b",
+            "date_time": [
+              1980,
+              2,
+              1,
+              0,
+              0,
+              0
+            ],
+            "unix_mode": 33188,
+            "compression": 8,
+            "crc32": 4249887589
+          },
+          {
+            "index": 3,
+            "path": "assets/",
+            "directory": true,
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "date_time": [
+              1980,
+              2,
+              1,
+              0,
+              0,
+              0
+            ],
+            "unix_mode": 16877,
+            "compression": 8,
+            "crc32": 0
+          },
+          {
+            "index": 4,
+            "path": "assets/atlas_lab/",
+            "directory": true,
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "date_time": [
+              1980,
+              2,
+              1,
+              0,
+              0,
+              0
+            ],
+            "unix_mode": 16877,
+            "compression": 8,
+            "crc32": 0
+          },
+          {
+            "index": 5,
+            "path": "assets/atlas_lab/data/",
+            "directory": true,
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "date_time": [
+              1980,
+              2,
+              1,
+              0,
+              0,
+              0
+            ],
+            "unix_mode": 16877,
+            "compression": 8,
+            "crc32": 0
+          },
+          {
+            "index": 6,
+            "path": "assets/atlas_lab/data/bytes.bin",
+            "directory": false,
+            "bytes": 256,
+            "sha256": "40aff2e9d2d8922e47afd4648e6967497158785fbd1da870e7110266bf944880",
+            "date_time": [
+              1980,
+              2,
+              1,
+              0,
+              0,
+              0
+            ],
+            "unix_mode": 33188,
+            "compression": 8,
+            "crc32": 688229491
+          },
+          {
+            "index": 7,
+            "path": "assets/atlas_lab/data/message.txt",
+            "directory": false,
+            "bytes": 17,
+            "sha256": "b7e94925a605af24c1b035c5c9fefc98aaecb01e7227d103e7863c937c62740b",
+            "date_time": [
+              1980,
+              2,
+              1,
+              0,
+              0,
+              0
+            ],
+            "unix_mode": 33188,
+            "compression": 8,
+            "crc32": 191250884
+          },
+          {
+            "index": 8,
+            "path": "assets/atlas_lab/data/message.txt",
+            "directory": false,
+            "bytes": 19,
+            "sha256": "9cd6cd5e4b3614b8afcdf9c87650f8e61428d605c4363665fbc990dc400f8426",
+            "date_time": [
+              1980,
+              2,
+              1,
+              0,
+              0,
+              0
+            ],
+            "unix_mode": 33188,
+            "compression": 8,
+            "crc32": 2586696842
+          }
+        ]
+      },
+      "resource_entries": [
+        {
+          "path": "atlas-lab.json",
+          "sha256": "14fa573f5f1ffcbaf6bf05775ea13af0a928ab87bb30eca32459d3262e80b69b"
+        },
+        {
+          "path": "assets/atlas_lab/data/bytes.bin",
+          "sha256": "40aff2e9d2d8922e47afd4648e6967497158785fbd1da870e7110266bf944880"
+        },
+        {
+          "path": "assets/atlas_lab/data/message.txt",
+          "sha256": "b7e94925a605af24c1b035c5c9fefc98aaecb01e7227d103e7863c937c62740b"
+        },
+        {
+          "path": "assets/atlas_lab/data/message.txt",
+          "sha256": "9cd6cd5e4b3614b8afcdf9c87650f8e61428d605c4363665fbc990dc400f8426"
+        }
+      ],
+      "duplicate_paths": [
+        "assets/atlas_lab/data/message.txt"
+      ],
+      "complete_primary_resources": false,
+      "matches_expected": true
+    },
+    {
+      "id": "b:defaultJar",
+      "archive": {
+        "bytes": 1302,
+        "sha256": "b7e4326986c4873666ee5c6d8c9991eafd63be7f04d255d616a03afa3c2c9738",
+        "entries": [
+          {
+            "index": 0,
+            "path": "META-INF/",
+            "directory": true,
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "date_time": [
+              1980,
+              2,
+              1,
+              0,
+              0,
+              0
+            ],
+            "unix_mode": 16877,
+            "compression": 8,
+            "crc32": 0
+          },
+          {
+            "index": 1,
+            "path": "META-INF/MANIFEST.MF",
+            "directory": false,
+            "bytes": 25,
+            "sha256": "566ad1a80220026d05099562645ce968ff0e7c36cde22634332605bb34cc3eff",
+            "date_time": [
+              1980,
+              2,
+              1,
+              0,
+              0,
+              0
+            ],
+            "unix_mode": 33188,
+            "compression": 8,
+            "crc32": 3993141170
+          },
+          {
+            "index": 2,
+            "path": "atlas-lab.json",
+            "directory": false,
+            "bytes": 50,
+            "sha256": "14fa573f5f1ffcbaf6bf05775ea13af0a928ab87bb30eca32459d3262e80b69b",
+            "date_time": [
+              1980,
+              2,
+              1,
+              0,
+              0,
+              0
+            ],
+            "unix_mode": 33188,
+            "compression": 8,
+            "crc32": 4249887589
+          },
+          {
+            "index": 3,
+            "path": "assets/",
+            "directory": true,
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "date_time": [
+              1980,
+              2,
+              1,
+              0,
+              0,
+              0
+            ],
+            "unix_mode": 16877,
+            "compression": 8,
+            "crc32": 0
+          },
+          {
+            "index": 4,
+            "path": "assets/atlas_lab/",
+            "directory": true,
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "date_time": [
+              1980,
+              2,
+              1,
+              0,
+              0,
+              0
+            ],
+            "unix_mode": 16877,
+            "compression": 8,
+            "crc32": 0
+          },
+          {
+            "index": 5,
+            "path": "assets/atlas_lab/data/",
+            "directory": true,
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "date_time": [
+              1980,
+              2,
+              1,
+              0,
+              0,
+              0
+            ],
+            "unix_mode": 16877,
+            "compression": 8,
+            "crc32": 0
+          },
+          {
+            "index": 6,
+            "path": "assets/atlas_lab/data/bytes.bin",
+            "directory": false,
+            "bytes": 256,
+            "sha256": "40aff2e9d2d8922e47afd4648e6967497158785fbd1da870e7110266bf944880",
+            "date_time": [
+              1980,
+              2,
+              1,
+              0,
+              0,
+              0
+            ],
+            "unix_mode": 33188,
+            "compression": 8,
+            "crc32": 688229491
+          },
+          {
+            "index": 7,
+            "path": "assets/atlas_lab/data/message.txt",
+            "directory": false,
+            "bytes": 17,
+            "sha256": "b7e94925a605af24c1b035c5c9fefc98aaecb01e7227d103e7863c937c62740b",
+            "date_time": [
+              1980,
+              2,
+              1,
+              0,
+              0,
+              0
+            ],
+            "unix_mode": 33188,
+            "compression": 8,
+            "crc32": 191250884
+          }
+        ]
+      },
+      "resource_entries": [
+        {
+          "path": "atlas-lab.json",
+          "sha256": "14fa573f5f1ffcbaf6bf05775ea13af0a928ab87bb30eca32459d3262e80b69b"
+        },
+        {
+          "path": "assets/atlas_lab/data/bytes.bin",
+          "sha256": "40aff2e9d2d8922e47afd4648e6967497158785fbd1da870e7110266bf944880"
+        },
+        {
+          "path": "assets/atlas_lab/data/message.txt",
+          "sha256": "b7e94925a605af24c1b035c5c9fefc98aaecb01e7227d103e7863c937c62740b"
+        }
+      ],
+      "duplicate_paths": [],
+      "complete_primary_resources": true,
+      "matches_expected": true
+    },
+    {
+      "id": "b:timestampJar",
+      "archive": {
+        "bytes": 1302,
+        "sha256": "e1c0e24ad87fe02fbf8dbb794d0192441e841fc896d6f7384df2662ea2164d1d",
+        "entries": [
+          {
+            "index": 0,
+            "path": "META-INF/",
+            "directory": true,
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "date_time": [
+              2026,
+              11,
+              11,
+              2,
+              9,
+              16
+            ],
+            "unix_mode": 16877,
+            "compression": 8,
+            "crc32": 0
+          },
+          {
+            "index": 1,
+            "path": "META-INF/MANIFEST.MF",
+            "directory": false,
+            "bytes": 25,
+            "sha256": "566ad1a80220026d05099562645ce968ff0e7c36cde22634332605bb34cc3eff",
+            "date_time": [
+              2026,
+              11,
+              11,
+              2,
+              9,
+              16
+            ],
+            "unix_mode": 33188,
+            "compression": 8,
+            "crc32": 3993141170
+          },
+          {
+            "index": 2,
+            "path": "atlas-lab.json",
+            "directory": false,
+            "bytes": 50,
+            "sha256": "14fa573f5f1ffcbaf6bf05775ea13af0a928ab87bb30eca32459d3262e80b69b",
+            "date_time": [
+              2024,
+              1,
+              1,
+              0,
+              0,
+              0
+            ],
+            "unix_mode": 33188,
+            "compression": 8,
+            "crc32": 4249887589
+          },
+          {
+            "index": 3,
+            "path": "assets/",
+            "directory": true,
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "date_time": [
+              2026,
+              11,
+              11,
+              2,
+              9,
+              12
+            ],
+            "unix_mode": 16877,
+            "compression": 8,
+            "crc32": 0
+          },
+          {
+            "index": 4,
+            "path": "assets/atlas_lab/",
+            "directory": true,
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "date_time": [
+              2026,
+              11,
+              11,
+              2,
+              9,
+              12
+            ],
+            "unix_mode": 16877,
+            "compression": 8,
+            "crc32": 0
+          },
+          {
+            "index": 5,
+            "path": "assets/atlas_lab/data/",
+            "directory": true,
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "date_time": [
+              2026,
+              11,
+              11,
+              2,
+              9,
+              12
+            ],
+            "unix_mode": 16877,
+            "compression": 8,
+            "crc32": 0
+          },
+          {
+            "index": 6,
+            "path": "assets/atlas_lab/data/bytes.bin",
+            "directory": false,
+            "bytes": 256,
+            "sha256": "40aff2e9d2d8922e47afd4648e6967497158785fbd1da870e7110266bf944880",
+            "date_time": [
+              2024,
+              1,
+              1,
+              0,
+              0,
+              0
+            ],
+            "unix_mode": 33188,
+            "compression": 8,
+            "crc32": 688229491
+          },
+          {
+            "index": 7,
+            "path": "assets/atlas_lab/data/message.txt",
+            "directory": false,
+            "bytes": 17,
+            "sha256": "b7e94925a605af24c1b035c5c9fefc98aaecb01e7227d103e7863c937c62740b",
+            "date_time": [
+              2024,
+              1,
+              1,
+              0,
+              0,
+              0
+            ],
+            "unix_mode": 33188,
+            "compression": 8,
+            "crc32": 191250884
+          }
+        ]
+      },
+      "resource_entries": [
+        {
+          "path": "atlas-lab.json",
+          "sha256": "14fa573f5f1ffcbaf6bf05775ea13af0a928ab87bb30eca32459d3262e80b69b"
+        },
+        {
+          "path": "assets/atlas_lab/data/bytes.bin",
+          "sha256": "40aff2e9d2d8922e47afd4648e6967497158785fbd1da870e7110266bf944880"
+        },
+        {
+          "path": "assets/atlas_lab/data/message.txt",
+          "sha256": "b7e94925a605af24c1b035c5c9fefc98aaecb01e7227d103e7863c937c62740b"
+        }
+      ],
+      "duplicate_paths": [],
+      "complete_primary_resources": true,
+      "matches_expected": true
+    },
+    {
+      "id": "b:missingJar",
+      "archive": {
+        "bytes": 903,
+        "sha256": "585d02380058bf2ca3dbfacba758ff87f7ccfa8b346e9f8ff694a66cda0ee815",
+        "entries": [
+          {
+            "index": 0,
+            "path": "META-INF/",
+            "directory": true,
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "date_time": [
+              1980,
+              2,
+              1,
+              0,
+              0,
+              0
+            ],
+            "unix_mode": 16877,
+            "compression": 8,
+            "crc32": 0
+          },
+          {
+            "index": 1,
+            "path": "META-INF/MANIFEST.MF",
+            "directory": false,
+            "bytes": 25,
+            "sha256": "566ad1a80220026d05099562645ce968ff0e7c36cde22634332605bb34cc3eff",
+            "date_time": [
+              1980,
+              2,
+              1,
+              0,
+              0,
+              0
+            ],
+            "unix_mode": 33188,
+            "compression": 8,
+            "crc32": 3993141170
+          },
+          {
+            "index": 2,
+            "path": "atlas-lab.json",
+            "directory": false,
+            "bytes": 50,
+            "sha256": "14fa573f5f1ffcbaf6bf05775ea13af0a928ab87bb30eca32459d3262e80b69b",
+            "date_time": [
+              1980,
+              2,
+              1,
+              0,
+              0,
+              0
+            ],
+            "unix_mode": 33188,
+            "compression": 8,
+            "crc32": 4249887589
+          },
+          {
+            "index": 3,
+            "path": "assets/",
+            "directory": true,
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "date_time": [
+              1980,
+              2,
+              1,
+              0,
+              0,
+              0
+            ],
+            "unix_mode": 16877,
+            "compression": 8,
+            "crc32": 0
+          },
+          {
+            "index": 4,
+            "path": "assets/atlas_lab/",
+            "directory": true,
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "date_time": [
+              1980,
+              2,
+              1,
+              0,
+              0,
+              0
+            ],
+            "unix_mode": 16877,
+            "compression": 8,
+            "crc32": 0
+          },
+          {
+            "index": 5,
+            "path": "assets/atlas_lab/data/",
+            "directory": true,
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "date_time": [
+              1980,
+              2,
+              1,
+              0,
+              0,
+              0
+            ],
+            "unix_mode": 16877,
+            "compression": 8,
+            "crc32": 0
+          },
+          {
+            "index": 6,
+            "path": "assets/atlas_lab/data/message.txt",
+            "directory": false,
+            "bytes": 17,
+            "sha256": "b7e94925a605af24c1b035c5c9fefc98aaecb01e7227d103e7863c937c62740b",
+            "date_time": [
+              1980,
+              2,
+              1,
+              0,
+              0,
+              0
+            ],
+            "unix_mode": 33188,
+            "compression": 8,
+            "crc32": 191250884
+          }
+        ]
+      },
+      "resource_entries": [
+        {
+          "path": "atlas-lab.json",
+          "sha256": "14fa573f5f1ffcbaf6bf05775ea13af0a928ab87bb30eca32459d3262e80b69b"
+        },
+        {
+          "path": "assets/atlas_lab/data/message.txt",
+          "sha256": "b7e94925a605af24c1b035c5c9fefc98aaecb01e7227d103e7863c937c62740b"
+        }
+      ],
+      "duplicate_paths": [],
+      "complete_primary_resources": false,
+      "matches_expected": true
+    },
+    {
+      "id": "b:excludeJar",
+      "archive": {
+        "bytes": 1304,
+        "sha256": "804250e8491975dff9ef135891526351a3cdde66dbd40eb030dc38892e2ffba5",
+        "entries": [
+          {
+            "index": 0,
+            "path": "META-INF/",
+            "directory": true,
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "date_time": [
+              1980,
+              2,
+              1,
+              0,
+              0,
+              0
+            ],
+            "unix_mode": 16877,
+            "compression": 8,
+            "crc32": 0
+          },
+          {
+            "index": 1,
+            "path": "META-INF/MANIFEST.MF",
+            "directory": false,
+            "bytes": 25,
+            "sha256": "566ad1a80220026d05099562645ce968ff0e7c36cde22634332605bb34cc3eff",
+            "date_time": [
+              1980,
+              2,
+              1,
+              0,
+              0,
+              0
+            ],
+            "unix_mode": 33188,
+            "compression": 8,
+            "crc32": 3993141170
+          },
+          {
+            "index": 2,
+            "path": "assets/",
+            "directory": true,
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "date_time": [
+              1980,
+              2,
+              1,
+              0,
+              0,
+              0
+            ],
+            "unix_mode": 16877,
+            "compression": 8,
+            "crc32": 0
+          },
+          {
+            "index": 3,
+            "path": "assets/atlas_lab/",
+            "directory": true,
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "date_time": [
+              1980,
+              2,
+              1,
+              0,
+              0,
+              0
+            ],
+            "unix_mode": 16877,
+            "compression": 8,
+            "crc32": 0
+          },
+          {
+            "index": 4,
+            "path": "assets/atlas_lab/data/",
+            "directory": true,
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "date_time": [
+              1980,
+              2,
+              1,
+              0,
+              0,
+              0
+            ],
+            "unix_mode": 16877,
+            "compression": 8,
+            "crc32": 0
+          },
+          {
+            "index": 5,
+            "path": "assets/atlas_lab/data/message.txt",
+            "directory": false,
+            "bytes": 19,
+            "sha256": "9cd6cd5e4b3614b8afcdf9c87650f8e61428d605c4363665fbc990dc400f8426",
+            "date_time": [
+              1980,
+              2,
+              1,
+              0,
+              0,
+              0
+            ],
+            "unix_mode": 33188,
+            "compression": 8,
+            "crc32": 2586696842
+          },
+          {
+            "index": 6,
+            "path": "atlas-lab.json",
+            "directory": false,
+            "bytes": 50,
+            "sha256": "14fa573f5f1ffcbaf6bf05775ea13af0a928ab87bb30eca32459d3262e80b69b",
+            "date_time": [
+              1980,
+              2,
+              1,
+              0,
+              0,
+              0
+            ],
+            "unix_mode": 33188,
+            "compression": 8,
+            "crc32": 4249887589
+          },
+          {
+            "index": 7,
+            "path": "assets/atlas_lab/data/bytes.bin",
+            "directory": false,
+            "bytes": 256,
+            "sha256": "40aff2e9d2d8922e47afd4648e6967497158785fbd1da870e7110266bf944880",
+            "date_time": [
+              1980,
+              2,
+              1,
+              0,
+              0,
+              0
+            ],
+            "unix_mode": 33188,
+            "compression": 8,
+            "crc32": 688229491
+          }
+        ]
+      },
+      "resource_entries": [
+        {
+          "path": "assets/atlas_lab/data/message.txt",
+          "sha256": "9cd6cd5e4b3614b8afcdf9c87650f8e61428d605c4363665fbc990dc400f8426"
+        },
+        {
+          "path": "atlas-lab.json",
+          "sha256": "14fa573f5f1ffcbaf6bf05775ea13af0a928ab87bb30eca32459d3262e80b69b"
+        },
+        {
+          "path": "assets/atlas_lab/data/bytes.bin",
+          "sha256": "40aff2e9d2d8922e47afd4648e6967497158785fbd1da870e7110266bf944880"
+        }
+      ],
+      "duplicate_paths": [],
+      "complete_primary_resources": false,
+      "matches_expected": true
+    },
+    {
+      "id": "b:includeJar",
+      "archive": {
+        "bytes": 1465,
+        "sha256": "51462b31e994a7fa5166027d570756c318d6464ded204ca826612110f8cbe00a",
+        "entries": [
+          {
+            "index": 0,
+            "path": "META-INF/",
+            "directory": true,
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "date_time": [
+              1980,
+              2,
+              1,
+              0,
+              0,
+              0
+            ],
+            "unix_mode": 16877,
+            "compression": 8,
+            "crc32": 0
+          },
+          {
+            "index": 1,
+            "path": "META-INF/MANIFEST.MF",
+            "directory": false,
+            "bytes": 25,
+            "sha256": "566ad1a80220026d05099562645ce968ff0e7c36cde22634332605bb34cc3eff",
+            "date_time": [
+              1980,
+              2,
+              1,
+              0,
+              0,
+              0
+            ],
+            "unix_mode": 33188,
+            "compression": 8,
+            "crc32": 3993141170
+          },
+          {
+            "index": 2,
+            "path": "assets/",
+            "directory": true,
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "date_time": [
+              1980,
+              2,
+              1,
+              0,
+              0,
+              0
+            ],
+            "unix_mode": 16877,
+            "compression": 8,
+            "crc32": 0
+          },
+          {
+            "index": 3,
+            "path": "assets/atlas_lab/",
+            "directory": true,
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "date_time": [
+              1980,
+              2,
+              1,
+              0,
+              0,
+              0
+            ],
+            "unix_mode": 16877,
+            "compression": 8,
+            "crc32": 0
+          },
+          {
+            "index": 4,
+            "path": "assets/atlas_lab/data/",
+            "directory": true,
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "date_time": [
+              1980,
+              2,
+              1,
+              0,
+              0,
+              0
+            ],
+            "unix_mode": 16877,
+            "compression": 8,
+            "crc32": 0
+          },
+          {
+            "index": 5,
+            "path": "assets/atlas_lab/data/message.txt",
+            "directory": false,
+            "bytes": 19,
+            "sha256": "9cd6cd5e4b3614b8afcdf9c87650f8e61428d605c4363665fbc990dc400f8426",
+            "date_time": [
+              1980,
+              2,
+              1,
+              0,
+              0,
+              0
+            ],
+            "unix_mode": 33188,
+            "compression": 8,
+            "crc32": 2586696842
+          },
+          {
+            "index": 6,
+            "path": "atlas-lab.json",
+            "directory": false,
+            "bytes": 50,
+            "sha256": "14fa573f5f1ffcbaf6bf05775ea13af0a928ab87bb30eca32459d3262e80b69b",
+            "date_time": [
+              1980,
+              2,
+              1,
+              0,
+              0,
+              0
+            ],
+            "unix_mode": 33188,
+            "compression": 8,
+            "crc32": 4249887589
+          },
+          {
+            "index": 7,
+            "path": "assets/atlas_lab/data/bytes.bin",
+            "directory": false,
+            "bytes": 256,
+            "sha256": "40aff2e9d2d8922e47afd4648e6967497158785fbd1da870e7110266bf944880",
+            "date_time": [
+              1980,
+              2,
+              1,
+              0,
+              0,
+              0
+            ],
+            "unix_mode": 33188,
+            "compression": 8,
+            "crc32": 688229491
+          },
+          {
+            "index": 8,
+            "path": "assets/atlas_lab/data/message.txt",
+            "directory": false,
+            "bytes": 17,
+            "sha256": "b7e94925a605af24c1b035c5c9fefc98aaecb01e7227d103e7863c937c62740b",
+            "date_time": [
+              1980,
+              2,
+              1,
+              0,
+              0,
+              0
+            ],
+            "unix_mode": 33188,
+            "compression": 8,
+            "crc32": 191250884
+          }
+        ]
+      },
+      "resource_entries": [
+        {
+          "path": "assets/atlas_lab/data/message.txt",
+          "sha256": "9cd6cd5e4b3614b8afcdf9c87650f8e61428d605c4363665fbc990dc400f8426"
+        },
+        {
+          "path": "atlas-lab.json",
+          "sha256": "14fa573f5f1ffcbaf6bf05775ea13af0a928ab87bb30eca32459d3262e80b69b"
+        },
+        {
+          "path": "assets/atlas_lab/data/bytes.bin",
+          "sha256": "40aff2e9d2d8922e47afd4648e6967497158785fbd1da870e7110266bf944880"
+        },
+        {
+          "path": "assets/atlas_lab/data/message.txt",
+          "sha256": "b7e94925a605af24c1b035c5c9fefc98aaecb01e7227d103e7863c937c62740b"
+        }
+      ],
+      "duplicate_paths": [
+        "assets/atlas_lab/data/message.txt"
+      ],
+      "complete_primary_resources": false,
+      "matches_expected": true
+    }
+  ],
+  "comparisons": [
+    {
+      "task": "defaultJar",
+      "archive_bytes_equal": true,
+      "expected_equal": true,
+      "matches_expected": true
+    },
+    {
+      "task": "timestampJar",
+      "archive_bytes_equal": false,
+      "expected_equal": false,
+      "matches_expected": true
+    },
+    {
+      "task": "missingJar",
+      "archive_bytes_equal": true,
+      "expected_equal": true,
+      "matches_expected": true
+    },
+    {
+      "task": "excludeJar",
+      "archive_bytes_equal": false,
+      "expected_equal": false,
+      "matches_expected": true
+    },
+    {
+      "task": "includeJar",
+      "archive_bytes_equal": false,
+      "expected_equal": false,
+      "matches_expected": true
+    }
+  ],
+  "all_expected": true,
+  "successful_archives": 10,
+  "expected_failed_builds": 2
+}

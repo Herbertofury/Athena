@@ -1,0 +1,145 @@
+[
+  {
+    "id": "DR11001",
+    "title": "Gradle dependency locking",
+    "url": "https://docs.gradle.org/9.2.1/userguide/dependency_locking.html",
+    "observed_version": "Gradle 9.2.1",
+    "topic": "mod-dependency-resolution-evidence",
+    "note": "Version locks constrain resolution; changing content and source dependencies have separate limits.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "DR11002",
+    "title": "Gradle dependency verification",
+    "url": "https://docs.gradle.org/9.2.1/userguide/dependency_verification.html",
+    "observed_version": "Gradle 9.2.1",
+    "topic": "mod-dependency-resolution-evidence",
+    "note": "Checksum and metadata verification, bootstrap trust, and unverified changing/locally produced artifact limits.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "DR11003",
+    "title": "Gradle dependency constraints",
+    "url": "https://docs.gradle.org/9.2.1/userguide/dependency_constraints.html",
+    "observed_version": "Gradle 9.2.1",
+    "topic": "mod-dependency-resolution-evidence",
+    "note": "A constraint does not add an otherwise absent module; stronger rich versions are distinct.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "DR11004",
+    "title": "Gradle resolution rules",
+    "url": "https://docs.gradle.org/9.2.1/userguide/resolution_rules.html",
+    "observed_version": "Gradle 9.2.1",
+    "topic": "mod-dependency-resolution-evidence",
+    "note": "Force can change transitive selection and must not be mistaken for binary compatibility.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "DR11005",
+    "title": "Gradle rich dependency versions",
+    "url": "https://docs.gradle.org/9.2.1/userguide/dependency_versions.html",
+    "observed_version": "Gradle 9.2.1",
+    "topic": "mod-dependency-resolution-evidence",
+    "note": "Strict requirements can downgrade; ordinary and strict requirements are not interchangeable.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "DR11006",
+    "title": "Gradle dependency diagnostics",
+    "url": "https://docs.gradle.org/9.2.1/userguide/viewing_debugging_dependencies.html",
+    "observed_version": "Gradle 9.2.1",
+    "topic": "mod-dependency-resolution-evidence",
+    "note": "Requested and selected versions, constraint/ancestor/force reasons, and dependencyInsight.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "DR11007",
+    "title": "Gradle ResolvedConfiguration API",
+    "url": "https://docs.gradle.org/9.2.1/javadoc/org/gradle/api/artifacts/ResolvedConfiguration.html",
+    "observed_version": "Gradle 9.2.1",
+    "topic": "mod-dependency-resolution-evidence",
+    "note": "Legacy API guidance is distinct from the exact measured verification path.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "DR11008",
+    "title": "Gradle legacy artifact collection source",
+    "url": "https://github.com/gradle/gradle/blob/30ecdc708db275e8f8769ea0620f6dd919a58f76/platforms/software/dependency-management/src/main/java/org/gradle/api/internal/artifacts/ivyservice/DefaultResolvedConfiguration.java",
+    "observed_version": "Gradle 9.2.1; source 30ecdc708db275e8f8769ea0620f6dd919a58f76",
+    "topic": "mod-dependency-resolution-evidence",
+    "note": "Pinned getResolvedArtifacts visits selected artifacts and reports visitor failures.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "DR11009",
+    "title": "Gradle file resolution source",
+    "url": "https://github.com/gradle/gradle/blob/30ecdc708db275e8f8769ea0620f6dd919a58f76/platforms/software/dependency-management/src/main/java/org/gradle/api/internal/artifacts/ivyservice/resolveengine/artifact/ResolvedArtifactSetResolver.java",
+    "observed_version": "Gradle 9.2.1; source 30ecdc708db275e8f8769ea0620f6dd919a58f76",
+    "topic": "mod-dependency-resolution-evidence",
+    "note": "Pinned file traversal calls dependencyVerificationOverride.artifactsAccessed.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "DR11010",
+    "title": "Gradle checksum verification source",
+    "url": "https://github.com/gradle/gradle/blob/30ecdc708db275e8f8769ea0620f6dd919a58f76/platforms/software/dependency-management/src/main/java/org/gradle/api/internal/artifacts/ivyservice/ivyresolve/verification/ChecksumAndSignatureVerificationOverride.java",
+    "observed_version": "Gradle 9.2.1; source 30ecdc708db275e8f8769ea0620f6dd919a58f76",
+    "topic": "mod-dependency-resolution-evidence",
+    "note": "Pinned artifactsAccessed verifies queued events and throws on fatal strict-mode failures.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "DR11011",
+    "title": "Gradle 9.2.1 binary checksum",
+    "url": "https://downloads.gradle.org/distributions/gradle-9.2.1-bin.zip.sha256",
+    "observed_version": "Gradle 9.2.1",
+    "topic": "mod-dependency-resolution-evidence",
+    "note": "Exact historical binary distribution SHA-256, not signature or reproducible-source-build evidence.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "DR11012",
+    "title": "Gradle 9.2.1 source tag",
+    "url": "https://github.com/gradle/gradle/tree/v9.2.1",
+    "observed_version": "Gradle 9.2.1; source 30ecdc708db275e8f8769ea0620f6dd919a58f76",
+    "topic": "mod-dependency-resolution-evidence",
+    "note": "Tag resolves to 30ecdc708db275e8f8769ea0620f6dd919a58f76; installed --version reports the same revision.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "DR11013",
+    "title": "Gradle execution compatibility",
+    "url": "https://docs.gradle.org/9.2.1/userguide/compatibility.html",
+    "observed_version": "Gradle 9.2.1",
+    "topic": "mod-dependency-resolution-evidence",
+    "note": "Execution JVM support does not establish a game, loader, API or bytecode target.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  }
+]

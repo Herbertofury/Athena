@@ -1,0 +1,101 @@
+[
+  {
+    "id": "FI26001",
+    "title": "Linux open/openat",
+    "url": "https://man7.org/linux/man-pages/man2/open.2.html",
+    "observed_version": "Living primary reference checked 2026-11-11",
+    "topic": "bounded-file-ingestion-foundations",
+    "note": "Open-file identity persists independently of pathname replacement; O_NOFOLLOW applies to the trailing path component.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 60,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "FI26002",
+    "title": "Linux stat/fstat",
+    "url": "https://man7.org/linux/man-pages/man2/stat.2.html",
+    "observed_version": "Living primary reference checked 2026-11-11",
+    "topic": "bounded-file-ingestion-foundations",
+    "note": "Metadata fields can describe different moments; repeated metadata checks are not snapshot proof.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 60,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "FI26003",
+    "title": "Linux read",
+    "url": "https://man7.org/linux/man-pages/man2/read.2.html",
+    "observed_version": "Living primary reference checked 2026-11-11",
+    "topic": "bounded-file-ingestion-foundations",
+    "note": "Successful short reads are permitted; only zero returned bytes denotes EOF for the tested regular-file reads.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 60,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "FI26004",
+    "title": "Linux close",
+    "url": "https://man7.org/linux/man-pages/man2/close.2.html",
+    "observed_version": "Linux man-pages 6.19; manual page dated 2026-02-08; HTML obtained from tarball fetched 2026-09-09",
+    "topic": "bounded-file-ingestion-foundations",
+    "note": "Capture close errors without retrying a descriptor number that may already have been released and reused.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 60,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "FI26005",
+    "title": "Python concurrent.futures",
+    "url": "https://docs.python.org/3.12/library/concurrent.futures.html",
+    "observed_version": "Documentation 3.12.16; tested Python 3.12.14",
+    "topic": "bounded-file-ingestion-foundations",
+    "note": "Python 3.12 map eagerly collects iterables; cancellation does not stop running futures and shutdown can wait.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 60,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "FI26006",
+    "title": "Python os interfaces",
+    "url": "https://docs.python.org/3.12/library/os.html",
+    "observed_version": "Documentation 3.12.16; tested Python 3.12.14",
+    "topic": "bounded-file-ingestion-foundations",
+    "note": "DirEntry metadata can be cached; descriptor-relative calls and lossless filename-byte handling have platform limits.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 60,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "FI26007",
+    "title": "Linux openat2",
+    "url": "https://man7.org/linux/man-pages/man2/openat2.2.html",
+    "observed_version": "Living primary reference checked 2026-11-11",
+    "topic": "bounded-file-ingestion-foundations",
+    "note": "Resolution restrictions are separate mechanisms for a containment design; this experiment does not invoke them.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 60,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "FI26008",
+    "title": "Windows CreateFileW",
+    "url": "https://learn.microsoft.com/en-us/windows/win32/api/fileapi/nf-fileapi-createfilew",
+    "observed_version": "Living primary reference checked 2026-11-11",
+    "topic": "bounded-file-ingestion-foundations",
+    "note": "Windows sharing, device and reparse semantics require a separate tested implementation, not copied POSIX flags.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 60,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "FI26009",
+    "title": "Linux inotify",
+    "url": "https://man7.org/linux/man-pages/man7/inotify.7.html",
+    "observed_version": "Living primary reference checked 2026-11-11",
+    "topic": "bounded-file-ingestion-foundations",
+    "note": "Overflow and race handling require application reconciliation; this experiment does not implement a watcher.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 60,
+    "evidence": "primary_documented"
+  }
+]

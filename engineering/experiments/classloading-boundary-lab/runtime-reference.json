@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "jdk_source_repo": "openjdk/jdk21u",
+  "jdk_source_tag": "jdk-21.0.13+9",
+  "jdk_source_commit": "ba94eace682733f66e623c089bcafcf4a1b8e39c",
+  "compiler_options": [
+    "-source",
+    "21",
+    "-target",
+    "21",
+    "-proc:none",
+    "-g:none",
+    "-encoding",
+    "UTF-8"
+  ],
+  "scope": "Source revision reference, not an assertion that the local Debian runtime was built reproducibly from these sources. No external runtime is downloaded."
+}

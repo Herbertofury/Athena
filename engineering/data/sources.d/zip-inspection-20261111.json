@@ -1,0 +1,79 @@
+[
+  {
+    "id": "ZI26001",
+    "title": "Python ZIP member APIs and decompression pitfalls",
+    "url": "https://docs.python.org/3.12/library/zipfile.html",
+    "observed_version": "Python 3.12 documentation, rendered 3.12.16",
+    "topic": "archives",
+    "note": "Duplicate-member APIs and resource/interruption caveats; generated controls are separately scoped.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 180,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "ZI26002",
+    "title": "Python zlib bounded decompression state",
+    "url": "https://docs.python.org/3.12/library/zlib.html",
+    "observed_version": "Python 3.12 documentation, rendered 3.12.16",
+    "topic": "archives",
+    "note": "Output max_length, unconsumed input, EOF and unused-data distinctions; flush length is not an output budget.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 180,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "ZI26003",
+    "title": "ZIP file format specification",
+    "url": "https://pkware.cachefly.net/webdocs/casestudies/APPNOTE.TXT",
+    "observed_version": "PKWARE APPNOTE 6.3.10 FINAL, revised 2022-11-01",
+    "topic": "archives",
+    "note": "Referenced format fields, feature versions and encoding flags; original restrictive subset code, no reproduced specification.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 180,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "ZI26004",
+    "title": "Windows file and namespace naming",
+    "url": "https://learn.microsoft.com/en-us/windows/win32/fileio/naming-a-file",
+    "observed_version": "Official live documentation checked 2026-11-11",
+    "topic": "files",
+    "note": "Reserved naming and case caveats; fixture policy is not a Windows filesystem emulator.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 180,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "ZI26005",
+    "title": "Unicode normalization forms",
+    "url": "https://unicode.org/reports/tr15/",
+    "observed_version": "UAX 15 revision 58, Unicode 18.0.0, dated 2026-08-12",
+    "topic": "files",
+    "note": "Canonical equivalence informs a separate comparison key; not filesystem identity or runtime-version evidence.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 180,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "ZI26006",
+    "title": "Python Unicode database version and normalization",
+    "url": "https://docs.python.org/3.12/library/unicodedata.html",
+    "observed_version": "Python 3.12 documentation, rendered 3.12.16; UCD 15.0.0",
+    "topic": "files",
+    "note": "Record actual runtime Unicode data separately from newer annex documentation.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 180,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "ZI26007",
+    "title": "Windows console handles and device names",
+    "url": "https://learn.microsoft.com/en-us/windows/console/console-handles",
+    "observed_version": "Official live documentation checked 2026-11-11",
+    "topic": "files",
+    "note": "CONIN$ and CONOUT$ are console-device names; included in conservative name refusal, without claiming full Windows path equivalence.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 180,
+    "evidence": "primary_documented"
+  }
+]

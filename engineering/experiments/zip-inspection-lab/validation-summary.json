@@ -1,0 +1,81 @@
+{
+  "schema_version": 1,
+  "synthetic_only": true,
+  "checked_at": "2026-11-11",
+  "base_commit": "44384b809c80e03adbd62f8be9617d01e6ad9922",
+  "environment": {
+    "python": "3.12.14",
+    "zlib_runtime": "1.3.2",
+    "zlib_build": "1.3.2",
+    "unicode_data": "15.0.0",
+    "system": "Linux",
+    "machine": "x86_64"
+  },
+  "checks": {
+    "focused_initial": {
+      "tests": 35,
+      "passed": 35
+    },
+    "focused_final": {
+      "tests": 37,
+      "passed": 37,
+      "skipped": 0
+    },
+    "focused_optimized": {
+      "tests": 37,
+      "passed": 37,
+      "skipped": 0
+    },
+    "demo": {
+      "cases": 9,
+      "passed": 9,
+      "scope": "generated immutable archive bytes only"
+    },
+    "engineering_python": {
+      "tests": 363,
+      "passed": 362,
+      "errors": 1,
+      "skipped": 0
+    },
+    "pristine_main_python": {
+      "tests": 326,
+      "passed": 325,
+      "errors": 1,
+      "same_error": true,
+      "evidence": "Separate exact-main replay retained by this research task before this contribution"
+    },
+    "engineering_javascript": {
+      "tests": 303,
+      "passed": 303,
+      "skipped": 0
+    },
+    "generated_explorer": "passed",
+    "generated_card_lab": "passed",
+    "generated_media_lab": "passed",
+    "research_check": "Inherited cross-root README link error only",
+    "native_platform_real_mod_target_acceptance": "not_run",
+    "hosted_ci": "Verify exact publication head separately; existing root workflow excludes engineering-only changes"
+  },
+  "inherited_error": "apps/atlas-lab/README.md: broken local link ../../../docs/athena-local-runtime.md",
+  "not_established": [
+    "general ZIP compatibility",
+    "safe extraction or installation",
+    "publisher authenticity",
+    "CPU deadline or process RSS limit",
+    "Windows/macOS execution",
+    "target adoption or performance improvement"
+  ],
+  "sha256": {
+    "experiments/zip-inspection-lab/README.md": "0819b2e5963c9cd81174b3ad42a4d6b73f7189ceae5850fbabe69e5173fd155c",
+    "experiments/zip-inspection-lab/demo-result.json": "b292da4601fab7d3c2371e67bcd2509040f4fdcc7f29b4f13a345b59d8a86611",
+    "experiments/zip-inspection-lab/fixtures.py": "72a589d9c23fc2b227e3ae6cdda74ad14196c14e29a59ae8fb19a917256309d6",
+    "experiments/zip-inspection-lab/focused-tests.log": "29c6f7cf5488584996406935e2e4f4546f40a18b880f0edb9bec217b633abf0d",
+    "experiments/zip-inspection-lab/initial-review-finding.json": "e33e81e6ca1bb048debfab69324519e462f641e3814c3c8c4f83ef2a9af835aa",
+    "experiments/zip-inspection-lab/initial-tests.log": "07be98dbfb3dd7d9cf04e0057605658061a6427185bf542919a346f01a8cf41e",
+    "experiments/zip-inspection-lab/inspect_zip.py": "cc3db7fc6e280e34bd05cecf8106804186a21aee6a045f9871ae7628423b145c",
+    "experiments/zip-inspection-lab/optimized-tests.log": "2307480c35aafe57d265d69af1c1f2af061902d0ea7603e9d252fce6b58133c4",
+    "experiments/zip-inspection-lab/run_demo.py": "f777abdf6e431b6a9f1cc296cfcaf49d1d64679a0bdacd7928ffb9478b1d2234",
+    "tests/test_zip_inspection.py": "daf6a321d9a8622b0bdcbaed0f5eb71e80fde6dec36ccd62bbb2d8e3072407ad",
+    "experiments/zip-inspection-lab/review-summary.json": "ff2a314c8d9de3207e19318c9c3b0620bc64b425f044df291da08dd998c8e2b6"
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "evidence": "synthetic",
+  "collection_state": "unknown",
+  "collection": null,
+  "coverage_note": "Entry-only input has no collector metadata; coverage is unknown. No completeness or INP claim.",
+  "summary": {
+    "metric": "observed_interaction_duration",
+    "method": "Maximum event duration per nonzero interactionId; nearest-rank observed-sample percentiles",
+    "scope": "One document and one collector run; thresholded, possibly incomplete samples, not INP",
+    "event_count": 6,
+    "zero_id_event_count": 1,
+    "observed_interaction_count": 3,
+    "observed_p50_ms": 48,
+    "observed_p95_ms": 80,
+    "observed_max_ms": 80,
+    "interactions": [
+      {
+        "interaction_id": 7,
+        "event_count": 2,
+        "duration_ms": 48
+      },
+      {
+        "interaction_id": 14,
+        "event_count": 2,
+        "duration_ms": 24
+      },
+      {
+        "interaction_id": 21,
+        "event_count": 1,
+        "duration_ms": 80
+      }
+    ]
+  }
+}

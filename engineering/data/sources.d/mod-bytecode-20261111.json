@@ -1,0 +1,178 @@
+[
+  {
+    "id": "BI11001",
+    "title": "Mixin callback injector guide",
+    "url": "https://github.com/SpongePowered/Mixin/wiki/Advanced-Mixin-Usage---Callback-Injectors",
+    "observed_version": "Wiki page last edited 2016-06-15",
+    "topic": "mod-bytecode-injection-acceptance",
+    "note": "Historical conceptual guide; current applicability checked against pinned source. Counts alone do not establish behavior.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "BI11002",
+    "title": "Mixin injection point reference",
+    "url": "https://github.com/SpongePowered/Mixin/wiki/Injection-Point-Reference",
+    "observed_version": "Wiki page last edited 2017-12-30",
+    "topic": "mod-bytecode-injection-acceptance",
+    "note": "Matching before ordinal selection; historical return-count wording is not a universal guarantee.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "BI11003",
+    "title": "Mixin Inject annotation",
+    "url": "https://github.com/SpongePowered/Mixin/blob/4053421aa10aaac6127d969028a29c94fe3054f6/src/main/java/org/spongepowered/asm/mixin/injection/Inject.java",
+    "observed_version": "Upstream source commit 4053421aa10aaac6127d969028a29c94fe3054f6",
+    "topic": "mod-bytecode-injection-acceptance",
+    "note": "Minimum require, debug-gated expect, maximum sanity check allow, cancellation and local capture; not a tested loader fork.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "BI11004",
+    "title": "Mixin At annotation",
+    "url": "https://github.com/SpongePowered/Mixin/blob/4053421aa10aaac6127d969028a29c94fe3054f6/src/main/java/org/spongepowered/asm/mixin/injection/At.java",
+    "observed_version": "Upstream source commit 4053421aa10aaac6127d969028a29c94fe3054f6",
+    "topic": "mod-bytecode-injection-acceptance",
+    "note": "Target identity, ordinal and shift semantics; checked independently from older wiki prose.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "BI11005",
+    "title": "Mixin environment debug options",
+    "url": "https://github.com/SpongePowered/Mixin/blob/4053421aa10aaac6127d969028a29c94fe3054f6/src/main/java/org/spongepowered/asm/mixin/MixinEnvironment.java",
+    "observed_version": "Upstream source commit 4053421aa10aaac6127d969028a29c94fe3054f6",
+    "topic": "mod-bytecode-injection-acceptance",
+    "note": "Class export, failed-target dump and injection counting are distinct diagnostics.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "BI11006",
+    "title": "Mixin return injection point",
+    "url": "https://github.com/SpongePowered/Mixin/blob/4053421aa10aaac6127d969028a29c94fe3054f6/src/main/java/org/spongepowered/asm/mixin/injection/points/BeforeReturn.java",
+    "observed_version": "Upstream source commit 4053421aa10aaac6127d969028a29c94fe3054f6",
+    "topic": "mod-bytecode-injection-acceptance",
+    "note": "Matches typed return opcodes; does not establish exceptional-exit coverage.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "BI11007",
+    "title": "Fabric Loader architecture",
+    "url": "https://docs.fabricmc.net/develop/loader/",
+    "observed_version": "Live documentation heading Minecraft 26.2",
+    "topic": "mod-bytecode-injection-acceptance",
+    "note": "Fabric uses a modified Mixin fork; named/obfuscated target lanes must not be assumed interchangeable.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "BI11008",
+    "title": "ASM release history",
+    "url": "https://asm.ow2.io/versions.html",
+    "observed_version": "9.11.1 released 2026-10-17; reviewed 2026-11-11",
+    "topic": "mod-bytecode-injection-acceptance",
+    "note": "Pinned experiment uses 9.11.1; release notes retain fixes and do not justify target-project upgrades.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "BI11009",
+    "title": "ASM ClassReader API",
+    "url": "https://asm.ow2.io/javadoc/org/objectweb/asm/ClassReader.html",
+    "observed_version": "Javadoc heading ASM 9.11.1",
+    "topic": "mod-bytecode-injection-acceptance",
+    "note": "ClassReader visits classfile structures; options determine the inspected surface.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "BI11010",
+    "title": "ASM MethodVisitor API",
+    "url": "https://asm.ow2.io/javadoc/org/objectweb/asm/MethodVisitor.html",
+    "observed_version": "Javadoc heading ASM 9.11.1",
+    "topic": "mod-bytecode-injection-acceptance",
+    "note": "Instruction callbacks and debug/frame callbacks are separate. Probe is a deliberately partial inventory.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "BI11011",
+    "title": "ASM official Maven artifact",
+    "url": "https://repo.maven.apache.org/maven2/org/ow2/asm/asm/9.11.1/asm-9.11.1.jar",
+    "observed_version": "org.ow2.asm:asm:9.11.1",
+    "topic": "mod-bytecode-injection-acceptance",
+    "note": "Official-registry bytes observed and SHA-256 pinned; no binary redistributed or independent signature verification claimed.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "BI11012",
+    "title": "JVM classfile method descriptors",
+    "url": "https://docs.oracle.com/javase/specs/jvms/se21/html/jvms-4.html#jvms-4.3.3",
+    "observed_version": "Java Virtual Machine Specification, Java SE 21",
+    "topic": "mod-bytecode-injection-acceptance",
+    "note": "Method identity includes a descriptor with parameter and return types; separate from source-level names.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "BI11013",
+    "title": "JavaCompiler API",
+    "url": "https://docs.oracle.com/en/java/javase/21/docs/api/java.compiler/javax/tools/JavaCompiler.html",
+    "observed_version": "Java SE 21 API",
+    "topic": "mod-bytecode-injection-acceptance",
+    "note": "Programmatic compilation of original fixtures; targets are not loaded or executed by the probe.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "BI11014",
+    "title": "javac options",
+    "url": "https://docs.oracle.com/en/java/javase/21/docs/specs/man/javac.html",
+    "observed_version": "JDK 21 tool specification",
+    "topic": "mod-bytecode-injection-acceptance",
+    "note": "Source/target, release, debug metadata and annotation processing controls are not interchangeable.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "BI11015",
+    "title": "Fabric events",
+    "url": "https://docs.fabricmc.net/develop/events/",
+    "observed_version": "Live documentation heading Minecraft 26.2",
+    "topic": "mod-bytecode-injection-acceptance",
+    "note": "Public callbacks can substitute for mixins when their timing and behavior meet the actual requirement.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "BI11016",
+    "title": "ASM official source artifact",
+    "url": "https://repo.maven.apache.org/maven2/org/ow2/asm/asm/9.11.1/asm-9.11.1-sources.jar",
+    "observed_version": "org.ow2.asm:asm:9.11.1 sources",
+    "topic": "mod-bytecode-injection-acceptance",
+    "note": "ClassReader and MethodVisitor source inspected; original probe contains no copied upstream implementation.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  }
+]

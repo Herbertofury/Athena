@@ -1,0 +1,40 @@
+test_actual_output_budget_stops_with_one_sentinel_byte (test_zip_inspection.ZipInspectionTests.test_actual_output_budget_stops_with_one_sentinel_byte) ... ok
+test_actual_total_budget_uses_sentinel (test_zip_inspection.ZipInspectionTests.test_actual_total_budget_uses_sentinel) ... ok
+test_archive_comment_and_appended_bytes_are_explicitly_unsupported (test_zip_inspection.ZipInspectionTests.test_archive_comment_and_appended_bytes_are_explicitly_unsupported) ... ok
+test_backslash_and_nul_names (test_zip_inspection.ZipInspectionTests.test_backslash_and_nul_names) ... ok
+test_cancel_before_inventory_and_during_decode (test_zip_inspection.ZipInspectionTests.test_cancel_before_inventory_and_during_decode) ... ok
+test_case_and_canonical_equivalence_collisions (test_zip_inspection.ZipInspectionTests.test_case_and_canonical_equivalence_collisions) ... ok
+test_central_and_local_extra_fields_refused (test_zip_inspection.ZipInspectionTests.test_central_and_local_extra_fields_refused) ... ok
+test_crc_failure_retains_verified_prefix_and_unattempted_suffix (test_zip_inspection.ZipInspectionTests.test_crc_failure_retains_verified_prefix_and_unattempted_suffix) ... ok
+test_declared_member_and_total_budgets (test_zip_inspection.ZipInspectionTests.test_declared_member_and_total_budgets) ... ok
+test_dishonest_entry_count_does_not_hide_extra_record (test_zip_inspection.ZipInspectionTests.test_dishonest_entry_count_does_not_hide_extra_record) ... ok
+test_duplicate_names_are_not_silently_selected (test_zip_inspection.ZipInspectionTests.test_duplicate_names_are_not_silently_selected) ... ok
+test_empty_archive_and_directory (test_zip_inspection.ZipInspectionTests.test_empty_archive_and_directory) ... ok
+test_empty_deflate_member (test_zip_inspection.ZipInspectionTests.test_empty_deflate_member) ... ok
+test_entry_count_cap_before_zipfile_construction (test_zip_inspection.ZipInspectionTests.test_entry_count_cap_before_zipfile_construction) ... ok
+test_exact_output_limits (test_zip_inspection.ZipInspectionTests.test_exact_output_limits) ... ok
+test_file_directory_conflict_both_orders (test_zip_inspection.ZipInspectionTests.test_file_directory_conflict_both_orders) ... ok
+test_forged_small_size_is_not_complete_library_read (test_zip_inspection.ZipInspectionTests.test_forged_small_size_is_not_complete_library_read) ... ok
+test_implicit_directory_can_have_explicit_record (test_zip_inspection.ZipInspectionTests.test_implicit_directory_can_have_explicit_record) ... ok
+test_inspection_does_not_write_files_or_mutate_input (test_zip_inspection.ZipInspectionTests.test_inspection_does_not_write_files_or_mutate_input) ... ok
+test_invalid_deflate_stream_has_explicit_partial_result (test_zip_inspection.ZipInspectionTests.test_invalid_deflate_stream_has_explicit_partial_result) ... ok
+test_invalid_limits_and_mutable_input (test_zip_inspection.ZipInspectionTests.test_invalid_limits_and_mutable_input) ... ok
+test_invalid_utf8_name (test_zip_inspection.ZipInspectionTests.test_invalid_utf8_name) ... ok
+test_link_special_type_and_directory_payload (test_zip_inspection.ZipInspectionTests.test_link_special_type_and_directory_payload) ... ok
+test_local_name_and_metadata_disagreement (test_zip_inspection.ZipInspectionTests.test_local_name_and_metadata_disagreement) ... ok
+test_name_and_depth_budgets (test_zip_inspection.ZipInspectionTests.test_name_and_depth_budgets) ... ok
+test_nested_zip_is_opaque_and_not_recursed (test_zip_inspection.ZipInspectionTests.test_nested_zip_is_opaque_and_not_recursed) ... ok
+test_prefix_central_overlap_and_multipart_are_refused (test_zip_inspection.ZipInspectionTests.test_prefix_central_overlap_and_multipart_are_refused) ... ok
+test_raw_archive_cap_precedes_metadata_parser (test_zip_inspection.ZipInspectionTests.test_raw_archive_cap_precedes_metadata_parser) ... ok
+test_reserved_devices_streams_controls_and_trailing_names (test_zip_inspection.ZipInspectionTests.test_reserved_devices_streams_controls_and_trailing_names) ... ok
+test_trailing_compressed_bytes_and_concatenated_stream_refused (test_zip_inspection.ZipInspectionTests.test_trailing_compressed_bytes_and_concatenated_stream_refused) ... ok
+test_traversal_absolute_and_empty_components (test_zip_inspection.ZipInspectionTests.test_traversal_absolute_and_empty_components) ... ok
+test_truncated_deflate_stream (test_zip_inspection.ZipInspectionTests.test_truncated_deflate_stream) ... ok
+test_unsupported_flags_methods_and_versions (test_zip_inspection.ZipInspectionTests.test_unsupported_flags_methods_and_versions) ... ok
+test_valid_store_and_deflate_preserve_complete_hashes (test_zip_inspection.ZipInspectionTests.test_valid_store_and_deflate_preserve_complete_hashes) ... ok
+test_valid_utf8_and_cp437_names_remain_original (test_zip_inspection.ZipInspectionTests.test_valid_utf8_and_cp437_names_remain_original) ... ok
+
+----------------------------------------------------------------------
+Ran 35 tests in 0.014s
+
+OK

@@ -1,0 +1,43 @@
+{
+  "base_commit": "44384b809c80e03adbd62f8be9617d01e6ad9922",
+  "platform": "Linux",
+  "python": "3.12.14",
+  "sqlite": "3.53.1",
+  "new_recovery_tests": {
+    "run": 20,
+    "passed": 20
+  },
+  "engineering_python": {
+    "run": 346,
+    "passed": 345,
+    "errors": 1,
+    "skipped": 0,
+    "error": "Existing apps/atlas-lab/README.md link ../../../docs/athena-local-runtime.md escapes engineering checker root"
+  },
+  "pristine_main_python": {
+    "run": 326,
+    "passed": 325,
+    "errors": 1,
+    "same_error": true
+  },
+  "engineering_javascript": {
+    "run": 303,
+    "passed": 303
+  },
+  "generated_checks": {
+    "research_explorer": "passed",
+    "card_assets": "passed",
+    "media_assets": "passed"
+  },
+  "not_run": [
+    "Production restore",
+    "Windows/macOS",
+    "Hostile-path isolation",
+    "Disk-full or IO fault injection",
+    "Power-loss testing",
+    "Performance comparison"
+  ],
+  "source_sha256": "f40554ef7054c46042b91cd032fc6e63c3f713e1ee4745b1f4be899da5a2c5c3",
+  "test_sha256": "893d0129939abe4541f4d8b88265fea5f6ba9bce643f810d0ff5f3971caa726e",
+  "independent_review": "Initial completeness finding corrected; final 20 tests independently replayed, no remaining substantive findings within synthetic scope"
+}
