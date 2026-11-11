@@ -1,0 +1,317 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-11-11",
+  "sourceBaseCommit": "7ba88d30229f3073c9aa738f087b9199ffae16ae",
+  "classification": "actual anonymous public API captures; offline npm packument metadata replay",
+  "python": "3.12.14",
+  "sourceIds": [
+    "NPM11001",
+    "NPM11002",
+    "NPM11003",
+    "NPM11004",
+    "NPM11005",
+    "NPM11006",
+    "NPM11007",
+    "NPM11008"
+  ],
+  "officialContract": {
+    "repositoryCommit": "ae49abf1bac0ec1a3f3f1fceea1cca6fe2dc00e1",
+    "repositoryCommitDate": "2024-05-07",
+    "documentationCheckedAt": "2026-11-11"
+  },
+  "implementationSha256": {
+    "metadata.py": "c4a805ef5f59695ffdf9a300c9add30cd9fafa84d440169a4171940edc0147d7",
+    "extractors.py": "2ca3ff4b1645930709ca58eb37f742cca917df4c78dc93ab9c7008475659d188"
+  },
+  "captureCount": 3,
+  "capturedBytes": 48345,
+  "captures": [
+    {
+      "captureName": "package-full",
+      "capturedAt": "2026-11-11T09:37:25.364909+00:00",
+      "status": 200,
+      "bytes": 36183,
+      "sha256": "8fdfbca6f95aa058e4e228ec3a4dc76b5b0a9f53354f06681a3effb2fca7ef92",
+      "complete": true
+    },
+    {
+      "captureName": "package-abbreviated",
+      "capturedAt": "2026-11-11T09:37:31.395264+00:00",
+      "status": 200,
+      "bytes": 9995,
+      "sha256": "6349bc63a22af726dda304587581b3446abf1abd094e4700bbfa522f0a707300",
+      "complete": true
+    },
+    {
+      "captureName": "selected-version",
+      "capturedAt": "2026-11-11T09:37:34.775582+00:00",
+      "status": 200,
+      "bytes": 2167,
+      "sha256": "13a030af24dcf7e91b59b5106a6d023df294010be3e930eea1c676e006548246",
+      "complete": true
+    }
+  ],
+  "selectedVersionReplay": {
+    "schema": "npm-metadata-evidence-v1",
+    "packageSha256": "5e0e83b199ec12ae85d3c691c0a190df0417d959642b5ac011d384b2aee53fda",
+    "selectorSha256": "c5df4831ff0e3dfb12be95826735740dafc2007f3c19a7461603208fe404494a",
+    "captureCount": 3,
+    "conflictCount": 0,
+    "observations": [
+      {
+        "state": "metadata_observed",
+        "bodySha256": "8fdfbca6f95aa058e4e228ec3a4dc76b5b0a9f53354f06681a3effb2fca7ef92",
+        "bodyBytes": 36183,
+        "representation": "full",
+        "rootFields": {
+          "description": "present",
+          "license": "present",
+          "deprecated": "missing",
+          "dependencies": "missing",
+          "devDependencies": "missing",
+          "peerDependencies": "missing",
+          "optionalDependencies": "missing",
+          "author": "present",
+          "maintainers": "present",
+          "_npmUser": "missing",
+          "readme": "present"
+        },
+        "selectedFields": {
+          "description": "present",
+          "license": "present",
+          "deprecated": "missing",
+          "dependencies": "missing",
+          "devDependencies": "present",
+          "peerDependencies": "missing",
+          "optionalDependencies": "missing",
+          "author": "present",
+          "maintainers": "present",
+          "_npmUser": "present",
+          "readme": "missing"
+        },
+        "versionCount": 15,
+        "selectedVersionSha256": "7ce8481fafecf269393af8cf13fb7bce77c72366ce117732740f411b96107ee2",
+        "rootReadme": {
+          "state": "present",
+          "bytes": 6514,
+          "sha256": "8e676a0587ba350889df0a5fb883aeab26609ee36432e29441f55af3a0cb16ba",
+          "projectionState": "incomplete_projection",
+          "mediaCount": 0
+        },
+        "selectedReadme": {
+          "state": "missing",
+          "bytes": 0,
+          "sha256": null,
+          "projectionState": "not_projected",
+          "mediaCount": 0
+        }
+      },
+      {
+        "state": "metadata_observed",
+        "bodySha256": "6349bc63a22af726dda304587581b3446abf1abd094e4700bbfa522f0a707300",
+        "bodyBytes": 9995,
+        "representation": "abbreviated",
+        "rootFields": {
+          "description": "missing",
+          "license": "missing",
+          "deprecated": "missing",
+          "dependencies": "missing",
+          "devDependencies": "missing",
+          "peerDependencies": "missing",
+          "optionalDependencies": "missing",
+          "author": "missing",
+          "maintainers": "missing",
+          "_npmUser": "missing",
+          "readme": "missing"
+        },
+        "selectedFields": {
+          "description": "missing",
+          "license": "missing",
+          "deprecated": "missing",
+          "dependencies": "missing",
+          "devDependencies": "present",
+          "peerDependencies": "missing",
+          "optionalDependencies": "missing",
+          "author": "missing",
+          "maintainers": "missing",
+          "_npmUser": "missing",
+          "readme": "missing"
+        },
+        "versionCount": 15,
+        "selectedVersionSha256": "7ce8481fafecf269393af8cf13fb7bce77c72366ce117732740f411b96107ee2",
+        "rootReadme": {
+          "state": "missing",
+          "bytes": 0,
+          "sha256": null,
+          "projectionState": "not_projected",
+          "mediaCount": 0
+        },
+        "selectedReadme": {
+          "state": "missing",
+          "bytes": 0,
+          "sha256": null,
+          "projectionState": "not_projected",
+          "mediaCount": 0
+        }
+      },
+      {
+        "state": "provenance_mismatch",
+        "bodySha256": "13a030af24dcf7e91b59b5106a6d023df294010be3e930eea1c676e006548246",
+        "bodyBytes": 2167,
+        "representation": "unknown",
+        "rootFields": {},
+        "selectedFields": {},
+        "versionCount": 0,
+        "selectedVersionSha256": null,
+        "rootReadme": {
+          "state": "unobserved",
+          "bytes": 0,
+          "sha256": null,
+          "projectionState": "not_projected",
+          "mediaCount": 0
+        },
+        "selectedReadme": {
+          "state": "unobserved",
+          "bytes": 0,
+          "sha256": null,
+          "projectionState": "not_projected",
+          "mediaCount": 0
+        }
+      }
+    ],
+    "archiveVerified": false,
+    "authenticityVerified": false,
+    "installAccepted": false,
+    "compatibilityAccepted": false,
+    "playbackAccepted": false,
+    "targetAccepted": false
+  },
+  "explicitTagReplay": {
+    "schema": "npm-metadata-evidence-v1",
+    "packageSha256": "5e0e83b199ec12ae85d3c691c0a190df0417d959642b5ac011d384b2aee53fda",
+    "selectorSha256": "e728866ed5809f29ae82a8110bc792ec60ce095bb3fd0dffd94810f2a5b4dd92",
+    "captureCount": 2,
+    "conflictCount": 0,
+    "observations": [
+      {
+        "state": "metadata_observed",
+        "bodySha256": "8fdfbca6f95aa058e4e228ec3a4dc76b5b0a9f53354f06681a3effb2fca7ef92",
+        "bodyBytes": 36183,
+        "representation": "full",
+        "rootFields": {
+          "description": "present",
+          "license": "present",
+          "deprecated": "missing",
+          "dependencies": "missing",
+          "devDependencies": "missing",
+          "peerDependencies": "missing",
+          "optionalDependencies": "missing",
+          "author": "present",
+          "maintainers": "present",
+          "_npmUser": "missing",
+          "readme": "present"
+        },
+        "selectedFields": {
+          "description": "present",
+          "license": "present",
+          "deprecated": "missing",
+          "dependencies": "missing",
+          "devDependencies": "present",
+          "peerDependencies": "missing",
+          "optionalDependencies": "missing",
+          "author": "present",
+          "maintainers": "present",
+          "_npmUser": "present",
+          "readme": "missing"
+        },
+        "versionCount": 15,
+        "selectedVersionSha256": "ed3b89f186cf610a92d0d5db03cf327dca05cf7f2be7a576ef2c20c73eba4788",
+        "rootReadme": {
+          "state": "present",
+          "bytes": 6514,
+          "sha256": "8e676a0587ba350889df0a5fb883aeab26609ee36432e29441f55af3a0cb16ba",
+          "projectionState": "incomplete_projection",
+          "mediaCount": 0
+        },
+        "selectedReadme": {
+          "state": "missing",
+          "bytes": 0,
+          "sha256": null,
+          "projectionState": "not_projected",
+          "mediaCount": 0
+        }
+      },
+      {
+        "state": "metadata_observed",
+        "bodySha256": "6349bc63a22af726dda304587581b3446abf1abd094e4700bbfa522f0a707300",
+        "bodyBytes": 9995,
+        "representation": "abbreviated",
+        "rootFields": {
+          "description": "missing",
+          "license": "missing",
+          "deprecated": "missing",
+          "dependencies": "missing",
+          "devDependencies": "missing",
+          "peerDependencies": "missing",
+          "optionalDependencies": "missing",
+          "author": "missing",
+          "maintainers": "missing",
+          "_npmUser": "missing",
+          "readme": "missing"
+        },
+        "selectedFields": {
+          "description": "missing",
+          "license": "missing",
+          "deprecated": "missing",
+          "dependencies": "missing",
+          "devDependencies": "present",
+          "peerDependencies": "missing",
+          "optionalDependencies": "missing",
+          "author": "missing",
+          "maintainers": "missing",
+          "_npmUser": "missing",
+          "readme": "missing"
+        },
+        "versionCount": 15,
+        "selectedVersionSha256": "ed3b89f186cf610a92d0d5db03cf327dca05cf7f2be7a576ef2c20c73eba4788",
+        "rootReadme": {
+          "state": "missing",
+          "bytes": 0,
+          "sha256": null,
+          "projectionState": "not_projected",
+          "mediaCount": 0
+        },
+        "selectedReadme": {
+          "state": "missing",
+          "bytes": 0,
+          "sha256": null,
+          "projectionState": "not_projected",
+          "mediaCount": 0
+        }
+      }
+    ],
+    "archiveVerified": false,
+    "authenticityVerified": false,
+    "installAccepted": false,
+    "compatibilityAccepted": false,
+    "playbackAccepted": false,
+    "targetAccepted": false
+  },
+  "actualComparisons": {
+    "sameVersionKeySet": true,
+    "sameTagMap": true,
+    "standaloneObjectEqualsSelectedVersion": true,
+    "abbreviatedSharedFieldsEqualFull": true,
+    "rootAndSelectedDescriptionDiffer": true,
+    "versionObjectsWithReadme": 0,
+    "sourceReadmeImageMarkers": 4,
+    "projectedMediaReferences": 0,
+    "projectionComplete": false
+  },
+  "networkUsedByNormalizer": false,
+  "credentialsUsed": false,
+  "packageArchivesFetched": 0,
+  "mediaBytesFetched": 0,
+  "packageCodeExecuted": false,
+  "liveRestrictedAccessObserved": false
+}
