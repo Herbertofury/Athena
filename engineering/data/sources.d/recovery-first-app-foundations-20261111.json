@@ -1,0 +1,167 @@
+[
+  {
+    "id": "AF26001",
+    "title": "Tokio bounded MPSC channel",
+    "url": "https://docs.rs/tokio/latest/tokio/sync/mpsc/fn.channel.html",
+    "observed_version": "1.54.1",
+    "topic": "recovery-first-app-foundations",
+    "note": "Buffer capacity counts messages; caller must separately budget payload bytes.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 60,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "AF26002",
+    "title": "Tokio spawn_blocking",
+    "url": "https://docs.rs/tokio/latest/tokio/task/fn.spawn_blocking.html",
+    "observed_version": "1.54.1",
+    "topic": "recovery-first-app-foundations",
+    "note": "Started blocking closures cannot be aborted; concurrency and cooperative cancellation require explicit design.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 60,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "AF26003",
+    "title": "AWS timeouts, retries and jitter",
+    "url": "https://aws.amazon.com/builders-library/timeouts-retries-and-backoff-with-jitter/",
+    "observed_version": "2019-12-05; current page redirects to AWS Builder Center",
+    "topic": "recovery-first-app-foundations",
+    "note": "A timeout does not prove side effects absent; retry policy must consider idempotency and overload.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 60,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "AF26004",
+    "title": "SQLite write-ahead logging",
+    "url": "https://www.sqlite.org/wal.html",
+    "observed_version": "Living reference; WAL-reset fix documented as 3.51.3 and backports",
+    "topic": "recovery-first-app-foundations",
+    "note": "Committed pages may reside in WAL; actual installed engine version and documented applicability must be checked.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 60,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "AF26005",
+    "title": "SQLite online backup C API",
+    "url": "https://www.sqlite.org/c3ref/backup_finish.html",
+    "observed_version": "Living C API reference, checked 2026-11-11",
+    "topic": "recovery-first-app-foundations",
+    "note": "Incremental copies restart after other-connection mutations; cleanup success is not completed-copy proof.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 60,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "AF26006",
+    "title": "SQLite PRAGMA reference",
+    "url": "https://www.sqlite.org/pragma.html",
+    "observed_version": "Living reference, checked 2026-11-11",
+    "topic": "recovery-first-app-foundations",
+    "note": "Integrity check excludes foreign-key violations; application identity, schema and semantics are separate checks.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 60,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "AF26007",
+    "title": "SQLite VACUUM INTO",
+    "url": "https://www.sqlite.org/lang_vacuum.html",
+    "observed_version": "Page last updated 2025-07-12; checked 2026-11-11",
+    "topic": "recovery-first-app-foundations",
+    "note": "Compact logical copy is an alternative, not an incremental byte-equivalent backup; implicit rowids can change.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 60,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "AF26008",
+    "title": "SQLite transaction control",
+    "url": "https://www.sqlite.org/lang_transaction.html",
+    "observed_version": "Living reference, checked 2026-11-11",
+    "topic": "recovery-first-app-foundations",
+    "note": "One concurrent writer; BEGIN/COMMIT and error cleanup need explicit ownership and retry semantics.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 60,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "AF26009",
+    "title": "SQLite ALTER TABLE",
+    "url": "https://www.sqlite.org/lang_altertable.html",
+    "observed_version": "Living reference, checked 2026-11-11",
+    "topic": "recovery-first-app-foundations",
+    "note": "Complex rebuilds require the documented schema-change procedure including dependent objects and foreign keys.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 60,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "AF26010",
+    "title": "Python sqlite3 interface",
+    "url": "https://docs.python.org/3.12/library/sqlite3.html",
+    "observed_version": "Documentation 3.12.16; local tested interpreter 3.12.14 with SQLite 3.53.1",
+    "topic": "recovery-first-app-foundations",
+    "note": "Backup page/progress options and explicit transaction-control semantics; documentation and executed versions are distinct.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 60,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "AF26011",
+    "title": "SQLite defensive security",
+    "url": "https://sqlite.org/security.html",
+    "observed_version": "Living reference, checked 2026-11-11",
+    "topic": "recovery-first-app-foundations",
+    "note": "Defensive settings, limits, schema trust and progress controls are threat-model dependent; read-only is not a complete sandbox.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 60,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "AF26012",
+    "title": "Electron security recommendations",
+    "url": "https://www.electronjs.org/docs/latest/tutorial/security",
+    "observed_version": "Living latest guide, checked 2026-11-11; no shell installed/tested",
+    "topic": "recovery-first-app-foundations",
+    "note": "Constrain privileged APIs, preserve isolation, validate IPC senders and restrict remote content.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 60,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "AF26013",
+    "title": "Tauri capabilities",
+    "url": "https://v2.tauri.app/security/capabilities/",
+    "observed_version": "Tauri v2 documentation; page updated 2026-11-05",
+    "topic": "recovery-first-app-foundations",
+    "note": "Capabilities combine for applicable windows; they do not sandbox arbitrary Rust code or repair incorrect scope checks.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 60,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "AF26014",
+    "title": "WCAG 2.2",
+    "url": "https://www.w3.org/TR/2024/REC-WCAG22-20241212/",
+    "observed_version": "W3C Recommendation 2024-12-12",
+    "topic": "recovery-first-app-foundations",
+    "note": "Keyboard, focus and status criteria are acceptance inputs, not evidence this application conforms.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 60,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "AF26015",
+    "title": "SLSA specification",
+    "url": "https://slsa.dev/spec/v1.2/",
+    "observed_version": "Approved version 1.2",
+    "topic": "recovery-first-app-foundations",
+    "note": "Source/build provenance describes scoped guarantees; no compliance level claimed by this contribution.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 60,
+    "evidence": "primary_documented"
+  }
+]
