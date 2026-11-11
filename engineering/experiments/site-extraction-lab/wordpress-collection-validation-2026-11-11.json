@@ -8,7 +8,7 @@
     "lxml": "6.1.1.0"
   },
   "implementationSha256": {
-    "extractors.py": "a18a749f9fcffa6d2a43842ca3a350aebb4320d05ed10a211790efb05a41ed0b",
+    "extractors.py": "7f475d108786cd3c6263324afb0b13fa8066a970932576f13cacf1e67454b647",
     "wordpress_collection.py": "7e426fabc90a0293e5a93c64b30a2ecfe32ac829d69d6b03233abdb82df7b207"
   },
   "captureCount": 4,
@@ -408,7 +408,7 @@
       "wordpress_collection.py": "7e426fabc90a0293e5a93c64b30a2ecfe32ac829d69d6b03233abdb82df7b207"
     },
     "candidateImplementationSha256": {
-      "extractors.py": "a18a749f9fcffa6d2a43842ca3a350aebb4320d05ed10a211790efb05a41ed0b",
+      "extractors.py": "7f475d108786cd3c6263324afb0b13fa8066a970932576f13cacf1e67454b647",
       "wordpress_collection.py": "7e426fabc90a0293e5a93c64b30a2ecfe32ac829d69d6b03233abdb82df7b207"
     },
     "completeNormalizedOutputEqual": true,
@@ -420,9 +420,6 @@
       "Retained captures only; no new transfer or expanded provider acceptance.",
       "Full normalized output compared before sanitized projection. Raw output not published."
     ],
-    "replayedAt": "2026-11-11T10:51:54.511180+00:00",
-    "comparisonScript": "youtube-topic-gate-lab/compare_retained_receipts.py",
-    "comparisonScriptSha256": "9f9811d355c69c9c4633f20ca779601c62b8b81059ee7ab8d6a2c0d9fbf3b1d3",
-    "reason": "Shared extractor RSS envelope changed; unrelated retained provider captures were replayed without network access."
+    "comparisonScriptSha256": "9f9811d355c69c9c4633f20ca779601c62b8b81059ee7ab8d6a2c0d9fbf3b1d3"
   }
 }

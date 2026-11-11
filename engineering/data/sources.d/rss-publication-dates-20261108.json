@@ -1,0 +1,35 @@
+[
+  {
+    "id": "RSSDATE1",
+    "title": "RSS 2.0 specification",
+    "url": "https://www.rssboard.org/rss-specification",
+    "topic": "site-adapters",
+    "observed_version": "RSS 2.0.11, March 30 2009",
+    "checked_at": "2026-11-08",
+    "review_after_days": 365,
+    "evidence": "primary_documented",
+    "note": "Item pubDate is the item publication date. RSS date-times follow RFC822 with two- or four-digit years; channel dates are not an item fallback."
+  },
+  {
+    "id": "RSSDATE2",
+    "title": "RFC 5322 date and time semantics",
+    "url": "https://www.rfc-editor.org/rfc/rfc5322.html",
+    "topic": "site-adapters",
+    "observed_version": "RFC 5322, October 2008, sections 3.3 and 4.3",
+    "checked_at": "2026-11-08",
+    "review_after_days": 365,
+    "evidence": "primary_documented",
+    "note": "Date validation and explicit offsets; negative zero indicates UTC with unknown source timezone; two-digit years use 00-49 plus 2000 and 50-99 plus 1900. This adapter implements only a bounded subset."
+  },
+  {
+    "id": "RSSDATE3",
+    "title": "NASA official Image of the Day RSS feed",
+    "url": "https://www.nasa.gov/feeds/iotd-feed/",
+    "topic": "site-adapters",
+    "observed_version": "Captured 2026-11-08, 60 item window",
+    "checked_at": "2026-11-08",
+    "review_after_days": 30,
+    "evidence": "primary_documented",
+    "note": "One retained public capture has 60 publication dates at minute precision and explicit GMT. Offline replay only; no complete history or UI acceptance."
+  }
+]

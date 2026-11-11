@@ -1,0 +1,77 @@
+{
+  "scope": "Offline replay of one previously captured official NASA Image of the Day RSS window; no new network request",
+  "base_commit": "11b361cf092c068135da68d608255e14e5a94bd0",
+  "main_commit": "b1f82a9f1ac516848f6c95d4b9b87801e6090589",
+  "input": {
+    "url": "https://www.nasa.gov/feeds/iotd-feed/",
+    "bytes": 48533,
+    "sha256": "d4ff818e6af5d5d9a89c0ce6d8428f326967dfcebfb87cefa4c42ce25d285d05",
+    "items": 60,
+    "captured_at": "2026-11-08T12:50:13.671395+00:00"
+  },
+  "baseline_dates_preserved": 0,
+  "candidate_dates_preserved": 60,
+  "candidate_dates_normalized": 60,
+  "checks": [
+    {
+      "name": "baseline drops all 60 supplied publication dates",
+      "result": "pass"
+    },
+    {
+      "name": "candidate preserves all 60 exact XML-decoded pubDate values",
+      "result": "pass"
+    },
+    {
+      "name": "all captured dates independently parse as GMT and match candidate UTC",
+      "result": "pass"
+    },
+    {
+      "name": "all dates valid with known timezone",
+      "result": "pass"
+    },
+    {
+      "name": "all other in-memory fields byte-value equal, including titles and manifest states",
+      "result": "pass"
+    },
+    {
+      "name": "public receipts expose UTC/state but no raw pubDate",
+      "result": "pass"
+    },
+    {
+      "name": "all unrelated public receipt fields unchanged",
+      "result": "pass"
+    },
+    {
+      "name": "capture bytes unchanged",
+      "result": "pass"
+    }
+  ],
+  "limits": [
+    "Common RFC-style subset only; comments, nested markup and leap seconds remain raw unsupported values.",
+    "Unknown/missing zones produce no UTC instant. Explicit -0000 means UTC with unknown source timezone.",
+    "No runtime collector, UI date presentation, ordering, complete-history or playback acceptance.",
+    "No browser/CI assertion. Prior title PR remains required and unmerged."
+  ],
+  "local_tests": {
+    "all_engineering": 239,
+    "site_extraction": 95,
+    "new_date_methods": 19
+  },
+  "source_ids": [
+    "RSSDATE1",
+    "RSSDATE2",
+    "RSSDATE3"
+  ],
+  "retained_failures": [
+    "Initial replay harness incorrectly required seconds; the actual feed uses HH:MM GMT. Corrected only the independent expected-value format, retained failure, and replayed identical captured bytes.",
+    "Independent review found Python Unicode IGNORECASE accepted long-s as ASCII S in named zones. Added ASCII regex flag and regression before publication.",
+    "Initial source index sort moved the baseline register after fragments. Restored required baseline-first ordering; final source loader and tests pass."
+  ],
+  "research_check": {
+    "baseline": "fails",
+    "candidate": "same failure",
+    "error": "apps/atlas-lab/README.md: broken local link ../../../docs/athena-local-runtime.md"
+  },
+  "implementation_sha256": "6e9cca7ca150b0365a84229c72c1ce402ae016ce5bb9d6d9573614754271afab",
+  "tests_sha256": "6761675c603720e7484732fb388f17073c342482bfeea37e533c564901c7a22b"
+}
