@@ -104,3 +104,7 @@ General results stay here. Only verified improvement against a target project's 
 ## Bluesky thread context
 
 [Scoped thread evidence](bluesky.md#scoped-thread-context--november-11-2026) extends the existing offline post normalizer with ancestor/reply relationships and explicit unavailable context. Three anonymous captures demonstrate that reply counts and omitted arrays are not complete conversation history. No target integration or playback acceptance is implied.
+
+## NASA selected-media evidence
+
+[NASA metadata and reference roles](nasa.md) keeps search descriptions, preview links, asset manifests and metadata/caption pointers distinct. Actual public captures retain an empty selected video search alongside an available manifest and caption location, without claiming deletion or playback.

@@ -1,0 +1,90 @@
+[
+  {
+    "id": "NSM11001",
+    "title": "NASA Image and Video Library API reference",
+    "url": "https://images.nasa.gov/docs/images.nasa.gov_api_docs.pdf",
+    "observed_version": "Release v1.22.0 dated 2023-01-06; checked 2026-11-11",
+    "topic": "nasa-media-evidence",
+    "note": "Search Collection+JSON, ordered asset manifests and separate metadata/caption location responses. PDF SHA256 768f5ee932ff0a3a9195970221b4b2d64ef07971d283d2a34faf0769a2f70ac1.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 60,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "NSM11002",
+    "title": "NASA images and media usage guidelines",
+    "url": "https://www.nasa.gov/nasa-brand-center/images-and-media/",
+    "observed_version": "Current official guidance checked 2026-11-11",
+    "topic": "nasa-media-evidence",
+    "note": "Attribution, endorsement, third-party content, persons and branding boundaries; an API reference is not blanket reuse permission.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 60,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "NSM11003",
+    "title": "NASA selected image search observation",
+    "url": "https://images-api.nasa.gov/search?nasa_id=as11-40-5874&media_type=image&page=1&page_size=1",
+    "observed_version": "Anonymous public capture 2026-11-11; returned collection version 1.1",
+    "topic": "nasa-media-evidence",
+    "note": "One selected image metadata row and total one, 723 UTF-8 description bytes and five link references with distinct preview/alternate/canonical roles.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 60,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "NSM11004",
+    "title": "NASA selected image asset manifest",
+    "url": "https://images-api.nasa.gov/asset/as11-40-5874",
+    "observed_version": "Anonymous public capture 2026-11-11",
+    "topic": "nasa-media-evidence",
+    "note": "Six ordered manifest references; no referenced asset, image or metadata file was retrieved.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 60,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "NSM11005",
+    "title": "NASA selected image metadata location",
+    "url": "https://images-api.nasa.gov/metadata/as11-40-5874",
+    "observed_version": "Anonymous public capture 2026-11-11",
+    "topic": "nasa-media-evidence",
+    "note": "Response is a location pointer, not the metadata body. The pointed-to JSON was not retrieved.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 60,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "NSM11006",
+    "title": "NASA selected video search observation",
+    "url": "https://images-api.nasa.gov/search?nasa_id=172_ISS-Slosh&media_type=video&page=1&page_size=1",
+    "observed_version": "Anonymous public capture 2026-11-11; returned collection version 1.1",
+    "topic": "nasa-media-evidence",
+    "note": "Empty items and total zero in this exact filtered search; the separate manifest and caption-location routes still returned data. Absence is not treated as deletion.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 60,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "NSM11007",
+    "title": "NASA selected video asset manifest",
+    "url": "https://images-api.nasa.gov/asset/172_ISS-Slosh",
+    "observed_version": "Anonymous public capture 2026-11-11",
+    "topic": "nasa-media-evidence",
+    "note": "Fifty-two ordered manifest references despite absent search metadata; no media or manifest-linked file retrieved.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 60,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "NSM11008",
+    "title": "NASA selected video caption location",
+    "url": "https://images-api.nasa.gov/captions/172_ISS-Slosh",
+    "observed_version": "Anonymous public capture 2026-11-11",
+    "topic": "nasa-media-evidence",
+    "note": "Caption-location pointer only; no caption body, timing, completeness, accessibility or playback acceptance.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 60,
+    "evidence": "primary_documented"
+  }
+]

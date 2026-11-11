@@ -1,0 +1,224 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-11-11",
+  "sourceBaseCommit": "7ba88d30229f3073c9aa738f087b9199ffae16ae",
+  "classification": "actual anonymous public JSON captures; offline selected-media replay",
+  "python": "3.12.14",
+  "sourceIds": [
+    "NSM11001",
+    "NSM11002",
+    "NSM11003",
+    "NSM11004",
+    "NSM11005",
+    "NSM11006",
+    "NSM11007",
+    "NSM11008"
+  ],
+  "officialContract": {
+    "documentRelease": "1.22.0",
+    "documentReleaseDate": "2023-01-06",
+    "bytes": 417364,
+    "sha256": "768f5ee932ff0a3a9195970221b4b2d64ef07971d283d2a34faf0769a2f70ac1"
+  },
+  "observedCollectionVersions": [
+    "1.1"
+  ],
+  "liveDeploymentVersionVerified": false,
+  "implementationSha256": {
+    "media.py": "bf0f0dfb77d3c109142cf1e4f448e5b8c8798c0896d1f90566035b106af86feb",
+    "extractors.py": "2ca3ff4b1645930709ca58eb37f742cca917df4c78dc93ab9c7008475659d188"
+  },
+  "captureCount": 6,
+  "capturedBytes": 7827,
+  "captures": [
+    {
+      "captureName": "image-search",
+      "capturedAt": "2026-11-11T07:55:49.494462+00:00",
+      "role": "search",
+      "status": 200,
+      "bytes": 2101,
+      "sha256": "41ca093e8a944963b626cd8b530b873c61dc17e4c699eb8bad6d3f5a9ff09b05",
+      "complete": true
+    },
+    {
+      "captureName": "image-asset",
+      "capturedAt": "2026-11-11T07:55:55.646838+00:00",
+      "role": "asset",
+      "status": 200,
+      "bytes": 586,
+      "sha256": "f1ea49b7f15f7b46ac9c0b795b1853fecb6dee82f70dbd99e930fa938bfb8b1e",
+      "complete": true
+    },
+    {
+      "captureName": "image-metadata",
+      "capturedAt": "2026-11-11T07:55:58.921897+00:00",
+      "role": "metadata",
+      "status": 200,
+      "bytes": 78,
+      "sha256": "98fce6c1e62f4d80d5ed54eb26414b78a2c41bde7cf862e45ece868428070701",
+      "complete": true
+    },
+    {
+      "captureName": "video-search",
+      "capturedAt": "2026-11-11T07:56:02.320576+00:00",
+      "role": "search",
+      "status": 200,
+      "bytes": 172,
+      "sha256": "83fab59423d481d58903360d37d211d43142aebce1be62f8bb6da9259012dc00",
+      "complete": true
+    },
+    {
+      "captureName": "video-asset",
+      "capturedAt": "2026-11-11T07:56:05.863733+00:00",
+      "role": "asset",
+      "status": 200,
+      "bytes": 4807,
+      "sha256": "07f7822bc680b7fba1b44d2b3a14a8b301ba81a6ef10a37ad3b4ebe54eda28a5",
+      "complete": true
+    },
+    {
+      "captureName": "video-captions",
+      "capturedAt": "2026-11-11T07:56:09.685995+00:00",
+      "role": "captions",
+      "status": 200,
+      "bytes": 83,
+      "sha256": "1050e0bbef20c50f9c54d5368eb1952b2a10684ba7329d97e7b9682aa289ab5c",
+      "complete": true
+    }
+  ],
+  "cases": [
+    {
+      "case": "image",
+      "replay": {
+        "schema": 1,
+        "attempts": [
+          {
+            "role": "search",
+            "state": "exact-selection",
+            "bytes": 2101,
+            "retained_bytes": 2101,
+            "sha256": "41ca093e8a944963b626cd8b530b873c61dc17e4c699eb8bad6d3f5a9ff09b05",
+            "contradictory": false,
+            "matched_records": 1,
+            "mismatched_records": 0,
+            "duplicate_records": 0,
+            "items_count": 1,
+            "query_total_hits": 1,
+            "references_count": 6,
+            "issues_count": 0
+          },
+          {
+            "role": "asset",
+            "state": "observed",
+            "bytes": 586,
+            "retained_bytes": 586,
+            "sha256": "f1ea49b7f15f7b46ac9c0b795b1853fecb6dee82f70dbd99e930fa938bfb8b1e",
+            "contradictory": false,
+            "matched_records": 0,
+            "mismatched_records": 0,
+            "duplicate_records": 0,
+            "items_count": 6,
+            "references_count": 6,
+            "issues_count": 0
+          },
+          {
+            "role": "metadata-location",
+            "state": "observed",
+            "bytes": 78,
+            "retained_bytes": 78,
+            "sha256": "98fce6c1e62f4d80d5ed54eb26414b78a2c41bde7cf862e45ece868428070701",
+            "contradictory": false,
+            "matched_records": 0,
+            "mismatched_records": 0,
+            "duplicate_records": 0,
+            "references_count": 1,
+            "issues_count": 0
+          }
+        ],
+        "omitted_attempts": 0,
+        "retained_body_bytes": 2765,
+        "acceptance": {
+          "full_provider": false,
+          "playback": false,
+          "download": false,
+          "metadata_contents": false,
+          "complete_transcript": false,
+          "license": false,
+          "endorsement": false,
+          "deletion": false,
+          "catalog_complete": false,
+          "target_recommendation": false
+        }
+      }
+    },
+    {
+      "case": "video",
+      "replay": {
+        "schema": 1,
+        "attempts": [
+          {
+            "role": "search",
+            "state": "empty-selection",
+            "bytes": 172,
+            "retained_bytes": 172,
+            "sha256": "83fab59423d481d58903360d37d211d43142aebce1be62f8bb6da9259012dc00",
+            "contradictory": false,
+            "matched_records": 0,
+            "mismatched_records": 0,
+            "duplicate_records": 0,
+            "items_count": 0,
+            "query_total_hits": 0,
+            "references_count": 0,
+            "issues_count": 0
+          },
+          {
+            "role": "asset",
+            "state": "observed",
+            "bytes": 4807,
+            "retained_bytes": 4807,
+            "sha256": "07f7822bc680b7fba1b44d2b3a14a8b301ba81a6ef10a37ad3b4ebe54eda28a5",
+            "contradictory": false,
+            "matched_records": 0,
+            "mismatched_records": 0,
+            "duplicate_records": 0,
+            "items_count": 52,
+            "references_count": 52,
+            "issues_count": 0
+          },
+          {
+            "role": "caption-location",
+            "state": "observed",
+            "bytes": 83,
+            "retained_bytes": 83,
+            "sha256": "1050e0bbef20c50f9c54d5368eb1952b2a10684ba7329d97e7b9682aa289ab5c",
+            "contradictory": false,
+            "matched_records": 0,
+            "mismatched_records": 0,
+            "duplicate_records": 0,
+            "references_count": 1,
+            "issues_count": 0
+          }
+        ],
+        "omitted_attempts": 0,
+        "retained_body_bytes": 5062,
+        "acceptance": {
+          "full_provider": false,
+          "playback": false,
+          "download": false,
+          "metadata_contents": false,
+          "complete_transcript": false,
+          "license": false,
+          "endorsement": false,
+          "deletion": false,
+          "catalog_complete": false,
+          "target_recommendation": false
+        }
+      }
+    }
+  ],
+  "networkUsedByNormalizer": false,
+  "liveRestrictedAccessObserved": false,
+  "mediaBytesFetched": 0,
+  "captionContentsFetched": false,
+  "metadataContentsFetched": false
+}
