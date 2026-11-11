@@ -1,0 +1,68 @@
+[
+  {
+    "id": "STN11001",
+    "title": "Steamworks ISteamNews interface",
+    "url": "https://partner.steamgames.com/doc/webapi/ISteamNews",
+    "observed_version": "Current public v2 contract checked 2026-11-11",
+    "topic": "steam-news-evidence",
+    "note": "GetNewsForApp public method: AppID, count, maxlength, enddate and feeds. maxlength=0 returns full API content; a positive limit requests a generated blurb. The separate Authed method requires a publisher key.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 60,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "STN11002",
+    "title": "Steamworks API authentication",
+    "url": "https://partner.steamgames.com/doc/webapi_overview/auth",
+    "observed_version": "Current guidance checked 2026-11-11",
+    "topic": "steam-news-evidence",
+    "note": "Some methods expose public data without authorization; user keys, publisher keys and protected operations are separate. No credentials or key registration used here.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 60,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "STN11003",
+    "title": "Steam Web API terms",
+    "url": "https://steamcommunity.com/dev/apiterms",
+    "observed_version": "Page states last updated July 2010; checked 2026-11-11",
+    "topic": "steam-news-evidence",
+    "note": "API access and attribution, rate and usage limits, no implied Valve endorsement. Data is supplied as-is; these captures do not establish reuse rights for linked publisher content.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 60,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "STN11004",
+    "title": "Steam public news observation: portal-full",
+    "url": "https://api.steampowered.com/ISteamNews/GetNewsForApp/v2/?appid=620&count=3&maxlength=0&enddate=1794355200&format=json",
+    "observed_version": "Anonymous bounded HTTP 200 capture 2026-11-11",
+    "topic": "steam-news-evidence",
+    "note": "Three selected news rows, including two HTML bodies with image references and one plaintext body. Response count is 800, not three returned records. Response SHA256 ed977b337d64c5ad9cd6045b7fe212cd2ecee233f1fbaf1852bf0ab91a7b38f3.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 60,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "STN11005",
+    "title": "Steam public news observation: portal-blurb",
+    "url": "https://api.steampowered.com/ISteamNews/GetNewsForApp/v2/?appid=620&count=3&maxlength=160&enddate=1794355200&format=json",
+    "observed_version": "Anonymous bounded HTTP 200 capture 2026-11-11",
+    "topic": "steam-news-evidence",
+    "note": "Same three news IDs under maxlength=160 return generated plaintext blurbs. Images and markup absent; content bytes are not capped at 160 UTF-8 bytes. Response SHA256 ab5225354a669b9dbf6289a462f7b0b927d90555db4a81933b828f7eb68e1dce.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 60,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "STN11006",
+    "title": "Steam public news observation: tf2-announcements",
+    "url": "https://api.steampowered.com/ISteamNews/GetNewsForApp/v2/?appid=440&count=2&maxlength=0&enddate=1794355200&format=json&feeds=steam_community_announcements",
+    "observed_version": "Anonymous bounded HTTP 200 capture 2026-11-11",
+    "topic": "steam-news-evidence",
+    "note": "Two feed-filtered announcement rows contain BBCode lists; response count is 740. Both carry is_external_url=true, so that flag alone does not identify an external publisher. Response SHA256 bc55ac51813c3533654ed00182bab5894348b198b424f31c816fc2e36cab8356.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 60,
+    "evidence": "primary_documented"
+  }
+]

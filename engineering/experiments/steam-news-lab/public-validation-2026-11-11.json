@@ -1,0 +1,380 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-11-11",
+  "sourceBaseCommit": "7ba88d30229f3073c9aa738f087b9199ffae16ae",
+  "classification": "actual anonymous public API captures; offline selected-AppID news replay",
+  "python": "3.12.14",
+  "sourceIds": [
+    "STN11001",
+    "STN11002",
+    "STN11003",
+    "STN11004",
+    "STN11005",
+    "STN11006"
+  ],
+  "officialContract": {
+    "interface": "ISteamNews",
+    "method": "GetNewsForApp",
+    "version": 2,
+    "documentationCheckedAt": "2026-11-11"
+  },
+  "implementationSha256": {
+    "news.py": "259bde6e31c22015518e2eb38fb79a12ecd3aa34d0270962b6f605c263f126a4",
+    "extractors.py": "2ca3ff4b1645930709ca58eb37f742cca917df4c78dc93ab9c7008475659d188"
+  },
+  "captureCount": 3,
+  "capturedBytes": 13719,
+  "captures": [
+    {
+      "captureName": "portal-full",
+      "capturedAt": "2026-11-11T09:13:31.418401+00:00",
+      "status": 200,
+      "bytes": 8903,
+      "sha256": "ed977b337d64c5ad9cd6045b7fe212cd2ecee233f1fbaf1852bf0ab91a7b38f3",
+      "complete": true
+    },
+    {
+      "captureName": "portal-blurb",
+      "capturedAt": "2026-11-11T09:13:36.307248+00:00",
+      "status": 200,
+      "bytes": 2235,
+      "sha256": "ab5225354a669b9dbf6289a462f7b0b927d90555db4a81933b828f7eb68e1dce",
+      "complete": true
+    },
+    {
+      "captureName": "tf2-announcements",
+      "capturedAt": "2026-11-11T09:13:39.590962+00:00",
+      "status": 200,
+      "bytes": 2581,
+      "sha256": "bc55ac51813c3533654ed00182bab5894348b198b424f31c816fc2e36cab8356",
+      "complete": true
+    }
+  ],
+  "cases": [
+    {
+      "case": "paired-full-and-blurb",
+      "replay": {
+        "schemaVersion": 1,
+        "attemptCount": 2,
+        "recordCount": 3,
+        "sameScopeConflictCount": 0,
+        "attempts": [
+          {
+            "state": "observed",
+            "bodyBytes": 8903,
+            "bodySha256": "ed977b337d64c5ad9cd6045b7fe212cd2ecee233f1fbaf1852bf0ab91a7b38f3",
+            "returnedCount": 3,
+            "rows": [
+              {
+                "state": "observed",
+                "fieldStates": {
+                  "appid": "present",
+                  "gid": "present",
+                  "title": "present",
+                  "author": "empty",
+                  "feedlabel": "present",
+                  "feedname": "present",
+                  "date": "present",
+                  "contents": "present",
+                  "url": "present",
+                  "is_external_url": "present",
+                  "feed_type": "present",
+                  "tags": "missing"
+                },
+                "provenance": "full_api_field",
+                "contentsBytes": 2964,
+                "contentsSha256": "61f45bd3aaa5c2762eb9df31836be759167705ef67be0f15b519d3ab27483a27",
+                "projection": {
+                  "format": "html",
+                  "state": "partial_html",
+                  "projectionComplete": false,
+                  "mediaCount": 1,
+                  "eventCount": 11,
+                  "unresolvedReferenceCount": 0
+                }
+              },
+              {
+                "state": "observed",
+                "fieldStates": {
+                  "appid": "present",
+                  "gid": "present",
+                  "title": "present",
+                  "author": "empty",
+                  "feedlabel": "present",
+                  "feedname": "present",
+                  "date": "present",
+                  "contents": "present",
+                  "url": "present",
+                  "is_external_url": "present",
+                  "feed_type": "present",
+                  "tags": "missing"
+                },
+                "provenance": "full_api_field",
+                "contentsBytes": 4253,
+                "contentsSha256": "f167a755f8b5bae2d2aaf39ec4fb4f969dcffb2a846781e4449b000a6589f283",
+                "projection": {
+                  "format": "html",
+                  "state": "partial_html",
+                  "projectionComplete": false,
+                  "mediaCount": 1,
+                  "eventCount": 13,
+                  "unresolvedReferenceCount": 0
+                }
+              },
+              {
+                "state": "observed",
+                "fieldStates": {
+                  "appid": "present",
+                  "gid": "present",
+                  "title": "present",
+                  "author": "present",
+                  "feedlabel": "present",
+                  "feedname": "present",
+                  "date": "present",
+                  "contents": "present",
+                  "url": "present",
+                  "is_external_url": "present",
+                  "feed_type": "present",
+                  "tags": "present"
+                },
+                "provenance": "full_api_field",
+                "contentsBytes": 147,
+                "contentsSha256": "8cc3b4aa19e07d677d97fc75756e8d5559bf1cea1f0e50f1fcc1ff2c562dd3bc",
+                "projection": {
+                  "format": "plain",
+                  "state": "plain_preserved",
+                  "projectionComplete": false,
+                  "mediaCount": 0,
+                  "eventCount": 0,
+                  "unresolvedReferenceCount": 0
+                }
+              }
+            ],
+            "appnewsState": "present",
+            "responseFieldStates": {
+              "appid": "present",
+              "count": "present",
+              "newsitems": "present"
+            },
+            "responseCount": 800
+          },
+          {
+            "state": "observed",
+            "bodyBytes": 2235,
+            "bodySha256": "ab5225354a669b9dbf6289a462f7b0b927d90555db4a81933b828f7eb68e1dce",
+            "returnedCount": 3,
+            "rows": [
+              {
+                "state": "observed",
+                "fieldStates": {
+                  "appid": "present",
+                  "gid": "present",
+                  "title": "present",
+                  "author": "empty",
+                  "feedlabel": "present",
+                  "feedname": "present",
+                  "date": "present",
+                  "contents": "present",
+                  "url": "present",
+                  "is_external_url": "present",
+                  "feed_type": "present",
+                  "tags": "missing"
+                },
+                "provenance": "generated_blurb",
+                "contentsBytes": 272,
+                "contentsSha256": "5692699abe8ffd5c9325e8f95b68c9872367d8469defd0787ad18850013a752e",
+                "projection": {
+                  "format": "plain",
+                  "state": "plain_preserved",
+                  "projectionComplete": false,
+                  "mediaCount": 0,
+                  "eventCount": 0,
+                  "unresolvedReferenceCount": 0
+                }
+              },
+              {
+                "state": "observed",
+                "fieldStates": {
+                  "appid": "present",
+                  "gid": "present",
+                  "title": "present",
+                  "author": "empty",
+                  "feedlabel": "present",
+                  "feedname": "present",
+                  "date": "present",
+                  "contents": "present",
+                  "url": "present",
+                  "is_external_url": "present",
+                  "feed_type": "present",
+                  "tags": "missing"
+                },
+                "provenance": "generated_blurb",
+                "contentsBytes": 290,
+                "contentsSha256": "806144c86344c026956357b152cb18a1c895a66e2a4d9026b90a9ab5f5207fd3",
+                "projection": {
+                  "format": "plain",
+                  "state": "plain_preserved",
+                  "projectionComplete": false,
+                  "mediaCount": 0,
+                  "eventCount": 0,
+                  "unresolvedReferenceCount": 0
+                }
+              },
+              {
+                "state": "observed",
+                "fieldStates": {
+                  "appid": "present",
+                  "gid": "present",
+                  "title": "present",
+                  "author": "present",
+                  "feedlabel": "present",
+                  "feedname": "present",
+                  "date": "present",
+                  "contents": "present",
+                  "url": "present",
+                  "is_external_url": "present",
+                  "feed_type": "present",
+                  "tags": "present"
+                },
+                "provenance": "generated_blurb",
+                "contentsBytes": 146,
+                "contentsSha256": "54280d04a8fee1f4e588675443d7bcf928f626cfc9cddd9d0cb0811cdca68f0c",
+                "projection": {
+                  "format": "plain",
+                  "state": "plain_preserved",
+                  "projectionComplete": false,
+                  "mediaCount": 0,
+                  "eventCount": 0,
+                  "unresolvedReferenceCount": 0
+                }
+              }
+            ],
+            "appnewsState": "present",
+            "responseFieldStates": {
+              "appid": "present",
+              "count": "present",
+              "newsitems": "present"
+            },
+            "responseCount": 800
+          }
+        ],
+        "acceptance": {
+          "wholeHistoryAccepted": false,
+          "deletionAccepted": false,
+          "paginationComplete": false,
+          "externalArticleComplete": false,
+          "mediaDecoded": false,
+          "mediaPlayed": false,
+          "publisherIdentityAccepted": false,
+          "recommendationAccepted": false,
+          "runtimeReady": false,
+          "fullSupportAccepted": false
+        }
+      },
+      "preferredFullFieldRecords": 3,
+      "everyPairedIdentityMatched": true
+    },
+    {
+      "case": "feed-filtered-bbcode",
+      "replay": {
+        "schemaVersion": 1,
+        "attemptCount": 1,
+        "recordCount": 2,
+        "sameScopeConflictCount": 0,
+        "attempts": [
+          {
+            "state": "observed",
+            "bodyBytes": 2581,
+            "bodySha256": "bc55ac51813c3533654ed00182bab5894348b198b424f31c816fc2e36cab8356",
+            "returnedCount": 2,
+            "rows": [
+              {
+                "state": "observed",
+                "fieldStates": {
+                  "appid": "present",
+                  "gid": "present",
+                  "title": "present",
+                  "author": "present",
+                  "feedlabel": "present",
+                  "feedname": "present",
+                  "date": "present",
+                  "contents": "present",
+                  "url": "present",
+                  "is_external_url": "present",
+                  "feed_type": "present",
+                  "tags": "present"
+                },
+                "provenance": "full_api_field",
+                "contentsBytes": 288,
+                "contentsSha256": "b10fa65b0db775d5e5ab8df55cbf48f36a6d51bad73e86db033e84bdc5d32c3a",
+                "projection": {
+                  "format": "bbcode",
+                  "state": "unsupported_bbcode",
+                  "projectionComplete": false,
+                  "mediaCount": 0,
+                  "eventCount": 0,
+                  "unresolvedReferenceCount": 0
+                }
+              },
+              {
+                "state": "observed",
+                "fieldStates": {
+                  "appid": "present",
+                  "gid": "present",
+                  "title": "present",
+                  "author": "present",
+                  "feedlabel": "present",
+                  "feedname": "present",
+                  "date": "present",
+                  "contents": "present",
+                  "url": "present",
+                  "is_external_url": "present",
+                  "feed_type": "present",
+                  "tags": "present"
+                },
+                "provenance": "full_api_field",
+                "contentsBytes": 1459,
+                "contentsSha256": "c1c4693a2d3f1b1a49c64b33f618ad73a5071f2e041e96e489d27033ef75c97b",
+                "projection": {
+                  "format": "bbcode",
+                  "state": "unsupported_bbcode",
+                  "projectionComplete": false,
+                  "mediaCount": 0,
+                  "eventCount": 0,
+                  "unresolvedReferenceCount": 0
+                }
+              }
+            ],
+            "appnewsState": "present",
+            "responseFieldStates": {
+              "appid": "present",
+              "count": "present",
+              "newsitems": "present"
+            },
+            "responseCount": 740
+          }
+        ],
+        "acceptance": {
+          "wholeHistoryAccepted": false,
+          "deletionAccepted": false,
+          "paginationComplete": false,
+          "externalArticleComplete": false,
+          "mediaDecoded": false,
+          "mediaPlayed": false,
+          "publisherIdentityAccepted": false,
+          "recommendationAccepted": false,
+          "runtimeReady": false,
+          "fullSupportAccepted": false
+        }
+      },
+      "preferredFullFieldRecords": 2,
+      "everyPairedIdentityMatched": null
+    }
+  ],
+  "networkUsedByNormalizer": false,
+  "credentialsUsed": false,
+  "linkedArticleRequests": 0,
+  "mediaBytesFetched": 0,
+  "mediaDecoded": false,
+  "liveRestrictedAccessObserved": false
+}

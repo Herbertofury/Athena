@@ -104,3 +104,7 @@ General results stay here. Only verified improvement against a target project's 
 ## Bluesky thread context
 
 [Scoped thread evidence](bluesky.md#scoped-thread-context--november-11-2026) extends the existing offline post normalizer with ancestor/reply relationships and explicit unavailable context. Three anonymous captures demonstrate that reply counts and omitted arrays are not complete conversation history. No target integration or playback acceptance is implied.
+
+## Steam news content variants
+
+The [public Steam news experiment](../../experiments/steam-news-lab/README.md) preserves full API contents, generated blurbs and unsupported source markup separately, with three actual anonymous captures and no media downloads. [Research and retained completeness limits](../../research/2026-11-11-steam-news.md).
