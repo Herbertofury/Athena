@@ -1,0 +1,57 @@
+[
+  {
+    "id": "PP26001",
+    "title": "Python subprocess capture, wait and cleanup",
+    "url": "https://docs.python.org/3.12/library/subprocess.html",
+    "observed_version": "Python 3.12 documentation, rendered 3.12.16",
+    "topic": "concurrency",
+    "note": "Pipe wait/capture and timeout/termination semantics; no arbitrary command or cross-platform acceptance.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 180,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "PP26002",
+    "title": "Python selectors and platform-specific pipe support",
+    "url": "https://docs.python.org/3.12/library/selectors.html",
+    "observed_version": "Python 3.12 documentation, rendered 3.12.16",
+    "topic": "concurrency",
+    "note": "Multiplex readiness on supported platforms; Windows selector pipes not supported.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 180,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "PP26003",
+    "title": "Python nonblocking file descriptors",
+    "url": "https://docs.python.org/3.12/library/os.html#os.set_blocking",
+    "observed_version": "Python 3.12 documentation, rendered 3.12.16",
+    "topic": "runtime",
+    "note": "set_blocking used on owned pipe descriptors; not a process security boundary.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 180,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "PP26004",
+    "title": "Python monotonic clocks",
+    "url": "https://docs.python.org/3.12/library/time.html#time.monotonic",
+    "observed_version": "Python 3.12 documentation, rendered 3.12.16",
+    "topic": "runtime",
+    "note": "Monotonic elapsed-time budgets; scheduling and process creation remain outside hard real-time guarantees.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 180,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "PP26005",
+    "title": "Linux pipe capacity, EOF and broken pipes",
+    "url": "https://man7.org/linux/man-pages/man7/pipe.7.html",
+    "observed_version": "Linux man-pages 6.19 page, checked 2026-11-11",
+    "topic": "concurrency",
+    "note": "Finite pipe capacity and write-end/reader ownership; direct-child fixture is not descendant cleanup.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 180,
+    "evidence": "primary_documented"
+  }
+]

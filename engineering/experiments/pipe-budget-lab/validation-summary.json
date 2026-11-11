@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "synthetic_only": true,
+  "checked_at": "2026-11-11",
+  "base_commit": "44384b809c80e03adbd62f8be9617d01e6ad9922",
+  "environment": {
+    "python": "3.12.14",
+    "system": "Linux",
+    "machine": "x86_64",
+    "kernel": "6.18.57"
+  },
+  "checks": {
+    "focused_initial": {
+      "tests": 27,
+      "passed": 27
+    },
+    "focused_final": {
+      "tests": 31,
+      "passed": 31,
+      "skipped": 0
+    },
+    "focused_optimized": {
+      "tests": 31,
+      "passed": 31,
+      "skipped": 0
+    },
+    "demo": {
+      "cases": 10,
+      "passed": 10,
+      "additional_control": "finite one-MiB ordinary post-capture size check"
+    },
+    "engineering_python": {
+      "tests": 357,
+      "passed": 356,
+      "errors": 1,
+      "skipped": 0
+    },
+    "pristine_main_python": {
+      "tests": 326,
+      "passed": 325,
+      "errors": 1,
+      "same_error": true,
+      "evidence": "Separate exact-main replay retained by the same research task before this contribution"
+    },
+    "engineering_javascript": {
+      "tests": 303,
+      "passed": 303,
+      "skipped": 0
+    },
+    "generated_explorer": "passed",
+    "generated_card_lab": "passed",
+    "generated_media_lab": "passed",
+    "research_check": "Inherited cross-root README link error only",
+    "windows_macos_real_target_acceptance": "not_run",
+    "hosted_ci": "Verify exact publication head separately; existing root workflow excludes engineering-only changes"
+  },
+  "inherited_error": "apps/atlas-lab/README.md: broken local link ../../../docs/athena-local-runtime.md",
+  "not_established": [
+    "arbitrary executable safety",
+    "subprocess descendant cleanup",
+    "child CPU/RSS or filesystem quota",
+    "hard real-time deadline",
+    "Windows/macOS execution",
+    "target adoption or performance improvement"
+  ],
+  "sha256": {
+    "experiments/pipe-budget-lab/README.md": "ed89fb3f8e6b532681dd2320c356adc1935325511462a334ad0830c708e6ec0a",
+    "experiments/pipe-budget-lab/demo-result.json": "ce6e78e0585a05ff33fbcc6ee4ec263ab29487a599d7f49ad86f13b9d82b2f45",
+    "experiments/pipe-budget-lab/focused-tests.log": "924f257d753344e684ed4db1d9bca657f7bbbee8e46351905a488fb8c5d3f27b",
+    "experiments/pipe-budget-lab/initial-close-failure-probe.json": "57b050750b9f3be1a7d9b04f60fa619f37b2a681b20cead4480b121594db5a93",
+    "experiments/pipe-budget-lab/initial-tests.log": "0f4641c13a7fc4f77e731ae0bffda2170dddeae1825f3d37c1da1054fe15a6c4",
+    "experiments/pipe-budget-lab/optimized-tests.log": "7e7a795712009bebbe67c42c5575094e2b6758c26bf6d6c5192f8062cbdaba9a",
+    "experiments/pipe-budget-lab/owned_helper.py": "ca7936406ad1b2c27f71906f9b1aefeda43b019f9882a49fe134893cd84dbfd6",
+    "experiments/pipe-budget-lab/pipe_runner.py": "9bc9153c717ab4263b558726a190e9bec76a26de0cd83e2cc1bd1e957fcf37cf",
+    "experiments/pipe-budget-lab/run_demo.py": "90848aca56806af15fe8b0113dec7b4a19f145d5c85fc1a82bcc1c2603fa9a06",
+    "tests/test_pipe_budget.py": "b60093dacc598f265029c66748ea73cecbf39748d795f31af4242d68358a3d17",
+    "experiments/pipe-budget-lab/review-summary.json": "9082d777fb599f2262029047e8e978945e85332e1ef7cde58b5107505a2e24c2"
+  }
+}
