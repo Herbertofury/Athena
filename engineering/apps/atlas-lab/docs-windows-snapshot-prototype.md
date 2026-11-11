@@ -128,9 +128,50 @@ and cleanup code still runs. Ordinary saves supply a no-op seam.
 
 These tests are expected to expose a limitation, not to manufacture a passing
 prototype result. An observed replacement must remain a failed contract test.
-Neither test is skipped or changed to accept replacement. Native evidence for
-this new source is pending. Production Windows snapshots remain disabled; no
+Neither test is skipped or changed to accept replacement. The native evidence
+is recorded below. Production Windows snapshots remain disabled; no
 security requirement is waived by the earlier threat-boundary discussion.
+
+Both first native Windows attempts at `a9016ff4037cf739ebacb73f58943578c05fb178`
+confirmed that limitation: 206 tests passed and the two strict collision tests
+failed. In both tests the hook ran, save returned success, and the collision was
+replaced. Outside bytes and the synthetic prior-snapshot backup stayed unchanged.
+See [push run 42956043313](https://github.com/Herbertofury/Athena/actions/runs/42956043313)
+and [PR run 42956050753](https://github.com/Herbertofury/Athena/actions/runs/42956050753).
+These failures remain failures, not acceptance results.
+
+The next candidate makes one narrow repair: if final validation finds no existing
+destination, the real rename uses `ReplaceIfExists=false`. A late name collision
+must therefore fail rather than be replaced. Existing-file atomic overwrite is
+not claimed repaired; its strict test remains unchanged.
+
+### Separate transaction-lock discriminator
+
+Microsoft's **WINTXFBASIC11** documents transactional writer locking independently
+of normal sharing modes. Before attempting a transaction-based backend, two
+additional native tests examine that specific primitive on fresh synthetic files.
+They use **WINTXFCREATE11** `CreateTransaction(TRANSACTION_DO_NOT_PROMOTE)` and
+**WINTXFOPEN11** `CreateFileTransactedW` with `OPEN_EXISTING`, final-component
+reparse-open semantics and all three sharing flags. They do not configure a
+transaction/resource manager, enable a service, alter ACLs, or change privileges.
+
+Independent child processes attempt ordinary rename and hardlink creation while
+the transacted writer is open, then after it closes but before rollback. Both
+phases require an exact documented sharing/transaction conflict, unchanged file
+identity, one link and unchanged bytes. After successful rollback, the identical
+operations must succeed as causal controls with the same identity and bytes.
+Each child has a bounded fail-on-timeout wait, not retries. Unavailable transaction
+support is a visible failure, not a skip. **WINTXFUSE11** documents closing file
+handles before transaction completion, which makes the middle phase material.
+
+This tests lock lifetime and two mutations only. Even favorable results do not
+establish owner/DACL isolation, pre-open hostile handles, final-directory/sidecar
+protection, abort races, or production-safe acquisition of transaction-bound
+handles. The documented `CreateFileTransactedW` interface accepts a pathname, not
+the already-validated `RootDirectory` handle; its reserved extended parameter
+cannot be assumed to supply one. No undocumented ambient transaction API is used.
+Microsoft discourages new TxF dependencies and warns of future availability.
+Native results for this repair and primitive experiment remain pending.
 
 On a permitted native Windows NTFS test host, from `engineering/apps/atlas-lab`:
 
@@ -149,13 +190,17 @@ and exact-head CI results belong in the release evidence, not inferred here.
 
 ## Primary sources
 
-Sources were read on 2026-11-10 and registered in
+Sources were read on 2026-11-10 and 2026-11-11 and registered in
 [`windows-snapshot-prototype-20261110.json`](../../data/sources.d/windows-snapshot-prototype-20261110.json).
 
 - **WINNTCREATEFILE10**: [NtCreateFile](https://learn.microsoft.com/en-us/windows/win32/api/winternl/nf-winternl-ntcreatefile), relative root handles and reparse-open behavior.
 - **WINNTRENAME10**: [FILE_RENAME_INFORMATION](https://learn.microsoft.com/en-us/windows-hardware/drivers/ddi/ntifs/ns-ntifs-_file_rename_information), generated layout, relative basename and replacement restrictions.
 - **WINGETSECURITY10**: [GetSecurityInfo](https://learn.microsoft.com/en-us/windows/win32/api/aclapi/nf-aclapi-getsecurityinfo), opened-handle owner/DACL inspection and allocation ownership.
 - **WINSYSSNAP0612**: [windows-sys 0.61.2](https://crates.io/crates/windows-sys/0.61.2), pinned generated bindings inspected rather than handwritten ABI.
+- **WINTXFBASIC11**: [Basic TxF concepts](https://learn.microsoft.com/en-us/windows/win32/fileio/txf-basic-concepts), transactional writer locks and independent sharing rules.
+- **WINTXFCREATE11**: [CreateTransaction](https://learn.microsoft.com/en-us/windows/win32/api/ktmw32/nf-ktmw32-createtransaction), local transaction creation without promotion.
+- **WINTXFOPEN11**: [CreateFileTransactedW](https://learn.microsoft.com/en-us/windows/win32/api/winbase/nf-winbase-createfiletransactedw), explicit transaction parameter, path-based acquisition and support warning.
+- **WINTXFUSE11**: [How to use TxF](https://learn.microsoft.com/en-us/windows/win32/fileio/how-to-use-transactional-ntfs), transacted handles and completion ordering.
 
 These documented primitives motivate the prototype; they do not establish its
 native correctness, security acceptance or production readiness.

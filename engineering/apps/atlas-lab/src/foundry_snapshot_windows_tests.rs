@@ -273,7 +273,7 @@ fn snapshot_windows_rename_primitive_never_follows_destination_junction() {
     let h = create(&store, "synthetic-stage", b"null");
     // Models a collision arriving after the last check: either rename refuses
     // the directory collision or replaces that entry; it must not traverse it.
-    let result = rename(&h, &store.directory, SNAPSHOT_FILENAME);
+    let result = rename(&h, &store.directory, SNAPSHOT_FILENAME, true);
     assert_eq!(fs::read(outside.0.join("sentinel")).unwrap(), b"untouched");
     assert_eq!(fs::read_dir(&outside.0).unwrap().count(), 1);
     if result.is_err() {
@@ -456,6 +456,21 @@ fn snapshot_windows_child() {
                 }
             }
         }
+        "txf-rename" | "txf-hardlink" => {
+            let source = Path::new(&path).join(SNAPSHOT_FILENAME);
+            let target = Path::new(&path).join("txf-probe-target");
+            let mode = std::env::var("ATHENA_SYNTHETIC_SNAPSHOT_MODE").unwrap();
+            let result = if mode == "txf-rename" {
+                fs::rename(source, target)
+            } else {
+                fs::hard_link(source, target)
+            };
+            let code = match result {
+                Ok(()) => 0,
+                Err(error) => error.raw_os_error().expect("native filesystem error code"),
+            };
+            fs::write(Path::new(&path).join("txf-probe-result"), code.to_string()).unwrap();
+        }
         _ => panic!("Unknown synthetic child mode"),
     }
 }
@@ -592,7 +607,7 @@ fn snapshot_windows_rename_primitive_never_follows_file_symlink() {
     fs::write(&target, b"untouched").unwrap();
     file_symlink(&f.0.join(SNAPSHOT_FILENAME), &target);
     let h = create(&store, "synthetic-stage", b"null");
-    let result = rename(&h, &store.directory, SNAPSHOT_FILENAME);
+    let result = rename(&h, &store.directory, SNAPSHOT_FILENAME, true);
     assert_eq!(fs::read(&target).unwrap(), b"untouched");
     if result.is_ok() {
         assert_eq!(fs::read(f.0.join(SNAPSHOT_FILENAME)).unwrap(), b"null");
@@ -669,6 +684,190 @@ fn snapshot_windows_contract_rejects_symlink_after_existing_destination_validati
 #[test]
 fn snapshot_windows_contract_rejects_symlink_after_absent_destination_validation() {
     assert_late_symlink_is_rejected(false);
+}
+
+// A separate primitive experiment, not a backend or production acceptance.
+// Every pathname is a newly created synthetic fixture. No transaction manager,
+// service, resource manager, privilege or system setting is configured here.
+struct SyntheticTransaction {
+    handle: Handle,
+    active: bool,
+}
+impl SyntheticTransaction {
+    fn new() -> Self {
+        let handle = unsafe {
+            CreateTransaction(
+                null_mut(),
+                null_mut(),
+                TRANSACTION_DO_NOT_PROMOTE,
+                0,
+                0,
+                0,
+                null(),
+            )
+        };
+        assert_ne!(
+            handle,
+            INVALID_HANDLE_VALUE,
+            "TxF primitive unavailable: {:?}",
+            io::Error::last_os_error()
+        );
+        Self {
+            handle: Handle(handle),
+            active: true,
+        }
+    }
+    fn writer(&self, path: &Path) -> Handle {
+        let path: Vec<u16> = path
+            .to_str()
+            .unwrap()
+            .encode_utf16()
+            .chain(Some(0))
+            .collect();
+        let handle = unsafe {
+            CreateFileTransactedW(
+                path.as_ptr(),
+                GENERIC_READ | GENERIC_WRITE,
+                FILE_SHARE_READ | FILE_SHARE_WRITE | FILE_SHARE_DELETE,
+                null(),
+                OPEN_EXISTING,
+                FILE_FLAG_OPEN_REPARSE_POINT,
+                null_mut(),
+                self.handle.0,
+                null(),
+                null(),
+            )
+        };
+        assert_ne!(
+            handle,
+            INVALID_HANDLE_VALUE,
+            "share-all transacted writer open failed: {:?}",
+            io::Error::last_os_error()
+        );
+        Handle(handle)
+    }
+    fn rollback(&mut self) {
+        win(unsafe { RollbackTransaction(self.handle.0) }).unwrap();
+        self.active = false;
+    }
+}
+impl Drop for SyntheticTransaction {
+    fn drop(&mut self) {
+        if self.active {
+            unsafe {
+                RollbackTransaction(self.handle.0);
+            }
+        }
+    }
+}
+fn txf_child_probe(f: &Fixture, mode: &str) -> i32 {
+    assert!(!f.0.join("txf-probe-result").exists());
+    let mut child = child(f, mode);
+    let deadline = Instant::now() + Duration::from_secs(15);
+    loop {
+        if let Some(status) = child.try_wait().unwrap() {
+            assert!(status.success(), "TxF probe process failed");
+            break;
+        }
+        if Instant::now() >= deadline {
+            let _ = child.kill();
+            let _ = child.wait();
+            panic!("TxF conflicting operation did not complete within 15 seconds");
+        }
+        std::thread::sleep(Duration::from_millis(10));
+    }
+    let result = fs::read_to_string(f.0.join("txf-probe-result"))
+        .unwrap()
+        .parse()
+        .unwrap();
+    fs::remove_file(f.0.join("txf-probe-result")).unwrap();
+    result
+}
+fn assert_txf_writer_lock_lifetime(mode: &str) {
+    let f = Fixture::new();
+    let store = f.store();
+    store.save(RAW).unwrap();
+    let snapshot_identity = || {
+        let user = User::current().unwrap();
+        let h = store.existing(&user).unwrap().unwrap();
+        inspect(&h, false).unwrap()
+    };
+    let before = snapshot_identity();
+    let mut transaction = SyntheticTransaction::new();
+    let writer = transaction.writer(&f.0.join(SNAPSHOT_FILENAME));
+    assert_eq!(inspect(&writer, false).unwrap(), before);
+    let while_open = txf_child_probe(&f, mode);
+    eprintln!("TxF primitive: {mode}; writer_open; conflict_code={while_open}");
+    assert!(
+        [
+            ERROR_TRANSACTIONAL_CONFLICT as i32,
+            ERROR_SHARING_VIOLATION as i32
+        ]
+        .contains(&while_open),
+        "expected documented transaction/sharing conflict, got {while_open}"
+    );
+    assert!(!f.0.join("txf-probe-target").exists());
+    assert_eq!(snapshot_identity(), before);
+    assert_eq!(
+        fs::read(f.0.join(SNAPSHOT_FILENAME)).unwrap(),
+        RAW.as_bytes()
+    );
+    drop(writer);
+    let after_close = txf_child_probe(&f, mode);
+    eprintln!(
+        "TxF primitive: {mode}; writer_closed_transaction_active; conflict_code={after_close}"
+    );
+    assert!(
+        [
+            ERROR_TRANSACTIONAL_CONFLICT as i32,
+            ERROR_SHARING_VIOLATION as i32
+        ]
+        .contains(&after_close),
+        "expected documented transaction/sharing conflict, got {after_close}"
+    );
+    assert!(!f.0.join("txf-probe-target").exists());
+    assert_eq!(snapshot_identity(), before);
+    assert_eq!(
+        fs::read(f.0.join(SNAPSHOT_FILENAME)).unwrap(),
+        RAW.as_bytes()
+    );
+    transaction.rollback();
+    let after_rollback = txf_child_probe(&f, mode);
+    eprintln!("TxF primitive: {mode}; rolled_back; result_code={after_rollback}");
+    assert_eq!(
+        after_rollback, 0,
+        "identical operation must succeed after rollback"
+    );
+    assert_eq!(
+        fs::read(f.0.join("txf-probe-target")).unwrap(),
+        RAW.as_bytes()
+    );
+    let h = open_at(
+        store.directory.0,
+        "txf-probe-target",
+        FILE_READ_ATTRIBUTES,
+        FILE_SHARE_READ | FILE_SHARE_WRITE | FILE_SHARE_DELETE,
+        nt::FILE_OPEN,
+        false,
+        null_mut(),
+    )
+    .unwrap();
+    let id: FILE_ID_INFO = information(&h, FileIdInfo).unwrap();
+    let standard: FILE_STANDARD_INFO = information(&h, FileStandardInfo).unwrap();
+    assert_eq!(id.VolumeSerialNumber, before.volume);
+    assert_eq!(id.FileId.Identifier, before.id);
+    assert_eq!(
+        standard.NumberOfLinks,
+        if mode == "txf-hardlink" { 2 } else { 1 }
+    );
+}
+#[test]
+fn snapshot_windows_txf_writer_lock_retains_rename_exclusion_after_handle_close() {
+    assert_txf_writer_lock_lifetime("txf-rename");
+}
+#[test]
+fn snapshot_windows_txf_writer_lock_retains_hardlink_exclusion_after_handle_close() {
+    assert_txf_writer_lock_lifetime("txf-hardlink");
 }
 
 #[test]

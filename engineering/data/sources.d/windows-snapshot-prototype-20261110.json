@@ -42,5 +42,49 @@
     "checked_at": "2026-11-10",
     "review_after_days": 90,
     "evidence": "primary_documented"
+  },
+  {
+    "id": "WINTXFBASIC11",
+    "title": "Microsoft Basic TxF concepts",
+    "url": "https://learn.microsoft.com/en-us/windows/win32/fileio/txf-basic-concepts",
+    "observed_version": "Official documentation inspected 2026-11-11; applicability tested separately on native Windows",
+    "topic": "windows-snapshot-security-prototype",
+    "note": "Transacted writer locking and independent ordinary sharing rules; motivates separate native lock-lifetime experiments, not backend acceptance.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 90,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "WINTXFCREATE11",
+    "title": "Microsoft CreateTransaction",
+    "url": "https://learn.microsoft.com/en-us/windows/win32/api/ktmw32/nf-ktmw32-createtransaction",
+    "observed_version": "Official documentation inspected 2026-11-11; applicability tested separately on native Windows",
+    "topic": "windows-snapshot-security-prototype",
+    "note": "Explicit local transaction creation with TRANSACTION_DO_NOT_PROMOTE; no resource-manager, service or privilege configuration is performed.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 90,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "WINTXFOPEN11",
+    "title": "Microsoft CreateFileTransactedW",
+    "url": "https://learn.microsoft.com/en-us/windows/win32/api/winbase/nf-winbase-createfiletransactedw",
+    "observed_version": "Official documentation inspected 2026-11-11; applicability tested separately on native Windows",
+    "topic": "windows-snapshot-security-prototype",
+    "note": "Path-based transaction-enlisted open, reparse and sharing flags, reserved extended parameter and warning against new TxF dependencies. Not proof of handle-relative acquisition.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 90,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "WINTXFUSE11",
+    "title": "Microsoft How to use Transactional NTFS",
+    "url": "https://learn.microsoft.com/en-us/windows/win32/fileio/how-to-use-transactional-ntfs",
+    "observed_version": "Official documentation inspected 2026-11-11; applicability tested separately on native Windows",
+    "topic": "windows-snapshot-security-prototype",
+    "note": "Transacted-handle behavior and closing file handles before completion; motivates checking protection after the writer handle closes.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 90,
+    "evidence": "primary_documented"
   }
 ]

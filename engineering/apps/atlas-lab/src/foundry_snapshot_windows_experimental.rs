@@ -659,14 +659,19 @@ impl Store {
         write_all(&staged.h, state.as_bytes())?;
         win(unsafe { FlushFileBuffers(staged.h.0) })?;
         before_replace()?;
-        self.existing(&user)?;
+        let replace_existing = self.existing(&user)?.is_some();
         self.check(&user)?;
         if inspect(&staged.h, false)?.volume != self.identity.volume {
             return Err(invalid("Staging volume changed"));
         }
         private(&staged.h, &user)?;
         after_validation()?;
-        rename(&staged.h, &self.directory, SNAPSHOT_FILENAME)?;
+        rename(
+            &staged.h,
+            &self.directory,
+            SNAPSHOT_FILENAME,
+            replace_existing,
+        )?;
         staged.committed = true;
         // Rename succeeded: never turn a later durability observation into a
         // precommit failure. No unsupported directory/privileged volume flush.
@@ -759,7 +764,12 @@ impl Drop for Staging {
         }
     }
 }
-fn rename(file: &Handle, directory: &Handle, name: &str) -> Result<(), Error> {
+fn rename(
+    file: &Handle,
+    directory: &Handle,
+    name: &str,
+    replace_existing: bool,
+) -> Result<(), Error> {
     let name: Vec<u16> = name.encode_utf16().collect();
     let bytes = offset_of!(nt::FILE_RENAME_INFORMATION, FileName) + name.len() * 2;
     // usize allocation provides alignment required by the generated struct;
@@ -772,7 +782,7 @@ fn rename(file: &Handle, directory: &Handle, name: &str) -> Result<(), Error> {
     ];
     let info = storage.as_mut_ptr().cast::<nt::FILE_RENAME_INFORMATION>();
     unsafe {
-        (*info).Anonymous.ReplaceIfExists = true;
+        (*info).Anonymous.ReplaceIfExists = replace_existing;
         (*info).RootDirectory = directory.0;
         (*info).FileNameLength = (name.len() * 2) as u32;
         std::ptr::copy_nonoverlapping(
