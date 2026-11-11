@@ -1,0 +1,33 @@
+{
+  "reviewed_at": "2026-11-11",
+  "status": "independent review completed; no implementation defect found in the declared fixture scope",
+  "focused_tests": 28,
+  "independent_adversarial_tests": 13,
+  "demo_replay_scenarios": 9,
+  "demo_replay_checks": 34,
+  "full_replay_receipt_equal": true,
+  "source_hashes": {
+    "experiments/fts-consistency-lab/catalog.py": "ab86c7be410391c95801529fbfd0d790f34e2aa622c215441bc8e4481c20d2ed",
+    "experiments/fts-consistency-lab/exit_writer.py": "45dcdf809f7ab99d410a390f775b68d892c73976dc50fea35c1194fbc96ec7c1",
+    "experiments/fts-consistency-lab/run_demo.py": "2f3dd37b8fd3270272260642e8c9905531d4f3ddc665266bc3458bdf275f91c0",
+    "tests/test_fts_consistency.py": "f083e31819a87d9c8e062e9ff81091e2863b6cc0a0349fbcfb8d59a3f21a1b0a",
+    "experiments/fts-consistency-lab/README.md": "4bafb4ece3360faeef1328c41654adb043fffce2e1eb8f52db238487bd24f7dc",
+    "docs/fts-consistency-foundations.md": "a750608be67c008f5cf997a198e12b6cba6dea2e713270e7f19c5fc317f0e4ab",
+    "research/2026-11-11-fts-consistency-foundations.md": "dce950e9eb3af0e72c71aa887c1e9236a2483bff983fd97deb0ad71d6a655642",
+    "data/sources.d/fts-consistency-20261111.json": "78cac6e16ff687925a8c6f6777c031732d3d85d69f2c4586c94a9a02ec636f25"
+  },
+  "important_limits": [
+    "Audit and rebuild do not verify or restore maintenance triggers.",
+    "BEGIN and COMMIT contention differ; both require truthful failed outcomes.",
+    "Busy checks are not evidence of corruption.",
+    "Explicit SQL COMMIT/ROLLBACK are required by this fixture autocommit=True API choice; DB-API methods are no-ops in this mode.",
+    "Query/result bounds do not establish total CPU or memory bounds.",
+    "Abrupt process exit is not power-loss or corrupt-storage testing."
+  ],
+  "replay": "python3 -B experiments/fts-consistency-lab/review_probes.py",
+  "probe_copy_note": "Independent script copied with only LAB path adapted for repository-local replay; rerun result retained.",
+  "official_sources_opened": 7,
+  "sqlite_source_id_matches_release_page": true,
+  "packaged_review_probes_passed": 13,
+  "publication_wording_note": "Publication-status wording in the research note and validation receipt was clarified after review; executable sources and demonstration receipt are unchanged."
+}

@@ -1,0 +1,49 @@
+{
+  "status": "final local checks complete; one inherited aggregate error remains",
+  "focused_tests": {
+    "run": 28,
+    "passed": 28
+  },
+  "optimized_focused_tests": {
+    "run": 28,
+    "passed": 28
+  },
+  "demo": {
+    "scenarios": 9,
+    "checks": 34,
+    "all_passed": true
+  },
+  "javascript": {
+    "run": 303,
+    "passed": 303
+  },
+  "build_checks": {
+    "research_explorer": "passed",
+    "card_lab": "passed",
+    "media_lab": "passed"
+  },
+  "initial_aggregate_failures_preserved": [
+    "Initial source-index order was wrong; corrected to baseline file first, then sorted fragments.",
+    "Next aggregate ran before validation/review summary files existed; final check follows."
+  ],
+  "baseline_failure": "apps/atlas-lab/README.md: broken local link ../../../docs/athena-local-runtime.md",
+  "publication": "Local evidence receipt. Subsequent draft publication and exact remote verification are recorded separately in the pull request; no merge or deployment.",
+  "python_aggregate": {
+    "run": 354,
+    "passed": 353,
+    "errors": 1,
+    "skipped": 0,
+    "error": "test_tools.ResearchTests.test_register_and_links: inherited cross-root link"
+  },
+  "source_register": {
+    "entries": 2213,
+    "new_sources": 7,
+    "baseline_rows_preserved": true
+  },
+  "independent_review": {
+    "focused_tests": 28,
+    "adversarial_tests": 13,
+    "all_passed": true
+  },
+  "no_hosted_ci": "No hosted checks were run during this local validation. Later exact-head CI must be checked independently."
+}
