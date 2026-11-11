@@ -2043,6 +2043,40 @@
           "changes": 22
         }
       ]
+    },
+    {
+      "number": 24,
+      "title": "Preserve new-route focus and Review state after lesson close",
+      "head": "4e13efecff1a657e9ac41a3225848431ab9b59a6",
+      "tree": "ed13d45b489d1e7aedb463a330fe23db48e2c76c",
+      "url": "https://github.com/Herbertofury/Athena/pull/24",
+      "role": "Supporting host navigation ownership fix; not a research-source fragment or browser-harness change.",
+      "files": [
+        {
+          "path": "config/runtime-public-preview.json",
+          "sha": "cf9770acff9624e451aeb6cb3685ad424366859d",
+          "status": "modified",
+          "changes": 2,
+          "mode": "100644",
+          "type": "blob"
+        },
+        {
+          "path": "dist/app.js",
+          "sha": "537e5617d861a6df30a183ce58ad46fa7fbae907",
+          "status": "modified",
+          "changes": 2,
+          "mode": "100644",
+          "type": "blob"
+        },
+        {
+          "path": "tests/navigation_close_ownership.test.cjs",
+          "sha": "a0f3b27b596d4a914943439f7f5fa94a056ea02d",
+          "status": "added",
+          "changes": 48,
+          "mode": "100644",
+          "type": "blob"
+        }
+      ]
     }
   ]
 }

@@ -6,7 +6,7 @@ The initial assembly joined sixteen independently published foundation drafts in
 
 This is a compatibility and preservation check of existing research, not a new benchmark or a comprehensive re-audit of every original scientific claim. Original guides distinguish documented behavior, synthetic observations, receipt checks, fresh execution and target acceptance. Those distinctions remain in force.
 
-The later texture extension includes #44; the final checker integration below incorporates the exact published #4 repair. Earlier assembly counts, diagnostics and exclusions remain historical, not the current aggregate. The frozen-input manifest contains all seventeen research contributions plus the separately identified supporting checker fix.
+The later texture extension includes #44; the subsequent checker and host-navigation integrations below incorporate the exact published #4 and #24 repairs. Earlier assembly counts, diagnostics and exclusions remain historical, not the current aggregate. The frozen-input manifest contains all seventeen research contributions plus the separately identified supporting fixes.
 
 ## Initial #27–42 inputs
 
@@ -100,7 +100,7 @@ Independent live sampling confirmed official Forge Java 17/64-bit prerequisites,
 
 These research-only paths are ignored by the existing root push/PR learning workflow; nested Engineering workflows are not root workflows. Zero hosted runs/checks/statuses is absent evidence, never a CI pass. Root application builds, Rust/browser/installed-platform tests, real mod loaders/games, renderers and target performance acceptance were not rerun for this assembly. No merge, deployment, target adoption or full-release readiness is claimed.
 
-## Current checker integration: exact published #4 repair
+## Historical checker integration: exact published #4 repair
 
 The next extension starts at `6ee44840e0f4871d7474b5d4809e0d2cab465c63` and incorporates the four exact published files from [draft #4](https://github.com/Herbertofury/Athena/pull/4), frozen at `22d05b4ae663128821f106958cc99a7991ed5d2e` (tree `a151109d1daa5809bd5e17fbd13348b397671933`). The [manifest](foundations-integration-inputs-20261111.json) records this as a supporting fix, not an eighteenth research fragment. Both draft heads and main were rechecked before assembly. Main remains `44384b809c80e03adbd62f8be9617d01e6ad9922`.
 
@@ -121,3 +121,31 @@ Current local validation on the combined candidate:
 Local `npm run test:browser` passes its three initial reproducibility stages, then stops before any static browser check because the required Chromium executable is absent. One official Playwright install attempt returns invalid/truncated ZIP data and fails; no alternate browser, version substitution or bypass is used. Workshop/accessibility browser, Rust test/clippy/build and engine-backed browser stages therefore remain **not run**, not passed. The original #4 PR and push runs at its older head passed build, npm tests, static and workshop browser checks but failed the unchanged accessibility focus-return harness. Those historical results are not acceptance of this combined head.
 
 Unlike the earlier Engineering-only extension, the new root containment tests make this change eligible for the existing root CI workflow. Exact-head hosted status must be read after publication and reported separately; local success is not hosted-CI completion. No workflow is edited, no historical failure is erased, and no runtime/browser behavior is changed to get green checks. This remains a draft research foundation with no merge, deployment, held/private additions or target-project adoption.
+
+## Current host-navigation integration: exact published #24 repair
+
+This extension starts at `4d9542b955869ede6b5e0df132ce1643b1a7ceb7` and adds the three exact published files from [draft #24](https://github.com/Herbertofury/Athena/pull/24), frozen at `4e13efecff1a657e9ac41a3225848431ab9b59a6` (tree `ed13d45b489d1e7aedb463a330fe23db48e2c76c`). The [manifest](foundations-integration-inputs-20261111.json) preserves the seventeen research inputs and checker fix and records #24 separately as a supporting host repair. No additional source fragment or research ranking is implied.
+
+The preceding checker-integrated head passed the full local research/build/test checks, but its exact [PR run](https://github.com/Herbertofury/Athena/actions/runs/42963204850) and [push run](https://github.com/Herbertofury/Athena/actions/runs/42963200265) both failed the unchanged accessibility harness’s stale/repeated-close check at `scripts/test_accessibility_browser.cjs:64:334`. Static and workshop Chromium passed in both runs. The timeout occurs while waiting for Search focus after a stale lesson-close event is dispatched on the new route. Those failures and complete browser artifacts remain preserved; they are not overwritten by this extension.
+
+Published #24 addresses the corresponding runtime ownership defect: hash navigation clears pending lesson-close ownership before closing an open dialog. The obsolete event cannot rerender the new screen, steal focus or erase newly submitted Review feedback. Normal closes and newer reopened lessons retain their separate control cases. This is the published runtime repair, not a browser timing workaround.
+
+Exact scope and preservation:
+
+- `dist/app.js`: exact #24 runtime blob, with the one navigation-ownership assignment.
+- `config/runtime-public-preview.json`: exact matching #24 app hash; no unrelated allowlist entries change.
+- `tests/navigation_close_ownership.test.cjs`: exact published six-case regression suite.
+- The only integration-authored edits are this record, the foundation route and the additive supporting-fix manifest. All 2,634 incoming blobs were materialized and hash-verified before overlay. The original app and allowlist matched main, so no independent runtime edit was overwritten; the regression file had no collision.
+- All 237 independent research files, 2,394 sources and four #4 checker blobs remain exact. Existing browser harness, harness-contract tests and related original focus-evidence files keep their previous bytes/presence. No workflow, backend, progress schema, provider or Foundry change is included.
+
+Validation on this combined candidate:
+
+- The exact new six-case regression suite reproduces **four failures and two passing controls** on the preceding `4d9542b` implementation, then **passes all six** with #24. Synchronous and queued repeated navigation and newer-lesson cases remain included. These are DOM/event-order checks, not graphical-browser acceptance.
+- Complete Engineering Python **857/857** and Engineering Node including the glTF suite **420/420** pass, without skips. Complete research validation passes with **281 Markdown files, 2,394 sources and the same 135 overdue baseline source-review warnings**.
+- Root build passes with 90 lessons. Complete root npm tests pass: **141 root Node, 105 media and 313 downstream Python tests**, with no failures or skips. Counts overlap other recorded suites and must not be summed into one unique total.
+- All five Engineering generated-output checks, root Research/Media and Lab reproducibility checks, and exact public-preview packaging pass. The package contains **37 allowlisted runtime files** with their expected hashes. Packaging is not deployment or delivery acceptance.
+- The dedicated 38 containment tests and both checker bridge tests remain passing. No test, warning, assertion or publication boundary is removed to make the candidate pass.
+
+No new local graphical-browser launch is attempted in this extension. The earlier local browser setup failure remains in the preceding evidence. New hosted acceptance must be read for this exact combined head after publication. Published #24’s historical [PR run](https://github.com/Herbertofury/Athena/actions/runs/42893451920) passed all stages, including actual Rust-backed Chromium, while its separate [push run](https://github.com/Herbertofury/Athena/actions/runs/42893400661) failed a later ordinary-close focus wait in the workshop loop at line 68. Neither historical outcome guarantees the new head, and one pass does not erase a separate failure. No reruns for a favorable result or harness corrections are included.
+
+The new candidate remains draft and unmerged. It is a coherent research foundation with a narrowly scoped host repair, not evidence of universal source freshness, target-project adoption, complete accessibility reliability or production-release readiness. No merge or deployment.
