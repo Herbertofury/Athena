@@ -1,0 +1,79 @@
+[
+  {
+    "id": "PTV11001",
+    "title": "PeerTube pinned OpenAPI contract",
+    "url": "https://github.com/Chocobozzz/PeerTube/blob/53928dd6242afb8f0d5cdd48ac20b3608342ab24/support/doc/api/openapi.yaml",
+    "observed_version": "OpenAPI info.version 8.3.0 at upstream commit 53928dd6242afb8f0d5cdd48ac20b3608342ab24",
+    "topic": "peertube-video-evidence",
+    "note": "Selected video and captions GET operations; full versus truncated description, local and UUID identities, account/channel roles, HLS files, thumbnails, captions, error and rate-limit contracts.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 60,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "PTV11002",
+    "title": "PeerTube REST API quick start",
+    "url": "https://docs.joinpeertube.org/api/rest-getting-started",
+    "observed_version": "Current official documentation checked 2026-11-11",
+    "topic": "peertube-video-evidence",
+    "note": "Public instance detection via NodeInfo and API headers; separate authentication requirements for protected operations. No auth route used.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 60,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "PTV11003",
+    "title": "PeerTube watch and download guide",
+    "url": "https://docs.joinpeertube.org/use/watch-video",
+    "observed_version": "Current official documentation checked 2026-11-11",
+    "topic": "peertube-video-evidence",
+    "note": "Official selected public video URL, caption/transcription UI, direct versus torrent download, licensing and peer-sharing privacy boundaries.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 60,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "PTV11004",
+    "title": "PeerTube remote storage",
+    "url": "https://docs.joinpeertube.org/maintain/remote-storage",
+    "observed_version": "Current official documentation checked 2026-11-11; version-specific sections kept distinct",
+    "topic": "peertube-video-evidence",
+    "note": "Object-storage delivery can differ from instance-host paths; storage and derived file roles must not become creator identity or transfer proof.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 60,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "PTV11005",
+    "title": "PeerTube ActivityPub federation",
+    "url": "https://docs.joinpeertube.org/api/activitypub",
+    "observed_version": "Current official documentation checked 2026-11-11",
+    "topic": "peertube-video-evidence",
+    "note": "Federated video and actor attribution use distinct identities; origin and queried API instance are not interchangeable.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 60,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "PTV11006",
+    "title": "PeerTube publishing and privacy guide",
+    "url": "https://docs.joinpeertube.org/use/create-upload-video",
+    "observed_version": "Current official documentation checked 2026-11-11",
+    "topic": "peertube-video-evidence",
+    "note": "Description/support Markdown, channel and privacy roles, license choices and separate live/video workflow. No publishing action performed.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 60,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "PTV11007",
+    "title": "PeerTube official documentation sample video",
+    "url": "https://framatube.org/videos/watch/9db9f3f1-9b54-44ed-9e91-461d262d2205",
+    "observed_version": "Anonymous API observation 2026-11-11; NodeInfo reports PeerTube 8.3.2",
+    "topic": "peertube-video-evidence",
+    "note": "Actual public metadata: full and truncated description, no root files but six HLS representations, five thumbnails and one automatically generated caption reference; no media transferred.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 60,
+    "evidence": "primary_documented"
+  }
+]

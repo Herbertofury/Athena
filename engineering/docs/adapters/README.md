@@ -104,3 +104,7 @@ General results stay here. Only verified improvement against a target project's 
 ## Bluesky thread context
 
 [Scoped thread evidence](bluesky.md#scoped-thread-context--november-11-2026) extends the existing offline post normalizer with ancestor/reply relationships and explicit unavailable context. Three anonymous captures demonstrate that reply counts and omitted arrays are not complete conversation history. No target integration or playback acceptance is implied.
+
+## PeerTube video metadata
+
+[Selected-video evidence](peertube.md) distinguishes full descriptions from summaries, channel/account attribution, top-level files from HLS representations, and caption metadata from a usable transcript. Actual bounded public observations demonstrate the HLS-only case. Media transfer, rendering and playback remain separate gates.
