@@ -1,0 +1,707 @@
+{
+  "sourceRepository": "Herbertofury/Feature-Foundry",
+  "sourceHead": "e1ba080b5c7590f1c844a6ed13b3a471709920b9",
+  "files": [
+    {
+      "path": ".gitattributes",
+      "gitBlob": "6435553f5997ca858b66dbe369ccad7f66434f35",
+      "sha256": "191dc6ac87b68e9944dc4e06866652ac15489ac8ec27528347922d9ddc55e7f7",
+      "bytes": 377,
+      "mode": "100644"
+    },
+    {
+      "path": ".gitignore",
+      "gitBlob": "b115945fcbebdf2b6b6731346ac1ee518f182129",
+      "sha256": "70a2223b7cf20162a3218ad866d7d2815fdb155b4d30ec6c79a22b1f399ee01f",
+      "bytes": 108,
+      "mode": "100644"
+    },
+    {
+      "path": "LICENSE",
+      "gitBlob": "887fa9de3326359f5021538cb5d7e42c990230f4",
+      "sha256": "d59d2cb7bda078bc472e5c2c1b68350509b31523cb63318647c05704878743b5",
+      "bytes": 1072,
+      "mode": "100644"
+    },
+    {
+      "path": "README.md",
+      "gitBlob": "88ef33a62191701b1c6e017cfc064ffac464a33f",
+      "sha256": "5f423c868031344381399b3aa4425b15136ab481b0474da088a3fe27928d0bdc",
+      "bytes": 4393,
+      "mode": "100644"
+    },
+    {
+      "path": "index.html",
+      "gitBlob": "2f2c484a8134bca29881d6971d536ced02eb288a",
+      "sha256": "81ede0d5df2453c616cf7e7ad42bcfb46c199711a2a624d55a74b301d7e35d09",
+      "bytes": 75454,
+      "mode": "100644"
+    },
+    {
+      "path": "package-lock.json",
+      "gitBlob": "75c4ad99fec213edf2bda009009e2f56bf0ff6ea",
+      "sha256": "2a9a39bedc75e82ab111b9d753db81b0d4e40a4fb42b18199ceaba1f4c0880d4",
+      "bytes": 50632,
+      "mode": "100644"
+    },
+    {
+      "path": "package.json",
+      "gitBlob": "46e0a282f5e65d87b456e12a0cab90e1ac967947",
+      "sha256": "e4200ffd46c99b6644c9b897bf1966033ad8a845da4289122733a0017f7ab2ee",
+      "bytes": 1073,
+      "mode": "100644"
+    },
+    {
+      "path": "progress.md",
+      "gitBlob": "5e9a64659d3afa21fb71bc666db843f9df7eba23",
+      "sha256": "029abf1d3e5c410a7248ec32a74b2f0f7ff1ebd083871e645d2a3476ce4386f9",
+      "bytes": 2848,
+      "mode": "100644"
+    },
+    {
+      "path": "reference/authority/V33-SOURCE.json",
+      "gitBlob": "323a55bb42f74b9c88e5d85e610738b90ec89b6d",
+      "sha256": "955e22484020864cdffc8fc50648afbe80181759395203b30877f6afc4f97c78",
+      "bytes": 480,
+      "mode": "100644"
+    },
+    {
+      "path": "reference/feature-foundry-living-world-prototype-v24.html",
+      "gitBlob": "46f6d84bea46ff6ae1e49c07c3756d9537185032",
+      "sha256": "353e39446238f5ad4a3006fc8eaa91b9a3e0138eb190c7de715ca267c7449403",
+      "bytes": 561462,
+      "mode": "100644"
+    },
+    {
+      "path": "reference/images/frawgy-reference.png",
+      "gitBlob": "6c56cd7fb52e4c7240fa699a249300a36c57d9db",
+      "sha256": "7e041d83187b16279ae6010a5e589f791f097c0b786fde6cdc450f01d7d12d4b",
+      "bytes": 2445257,
+      "mode": "100644"
+    },
+    {
+      "path": "reference/images/frutiger-aero-reference.png",
+      "gitBlob": "98f0f312d763f2091c97640e7052b5514dc65461",
+      "sha256": "93081092de90bd7c3aeeacdde06069b51c2e61b8dfe3c215e0fb43e31994d2d8",
+      "bytes": 3164592,
+      "mode": "100644"
+    },
+    {
+      "path": "scripts/package-release.ps1",
+      "gitBlob": "5153c3f9a1abb6c8f3a15aa37c0c38bd0449495b",
+      "sha256": "6e168f6d23ea57d411d936b8e4ee2d3def6bf1eafa7273b36f7f70cc2515f217",
+      "bytes": 5019,
+      "mode": "100644"
+    },
+    {
+      "path": "src-tauri/Cargo.lock",
+      "gitBlob": "3a829d0112ea459b4b7a72b1a043a6f01c03453b",
+      "sha256": "3f65ada6d8e678b4b12d19c43b9d62442fb6c4c688709dedb464ca2e58e564f8",
+      "bytes": 123788,
+      "mode": "100644"
+    },
+    {
+      "path": "src-tauri/Cargo.toml",
+      "gitBlob": "f849c4a0d1ddd6e98bb0884f6a2c4b7eb4c6124c",
+      "sha256": "3ab15a294ca84b31584381e4694638f07d5a4e19093dfc32c392804a848b2dde",
+      "bytes": 693,
+      "mode": "100644"
+    },
+    {
+      "path": "src-tauri/build.rs",
+      "gitBlob": "d860e1e6a7cac333c3cc0bc9cb67faf286b07d69",
+      "sha256": "487059eaf8a947b80f20a9aacac038a5047b2ad69d2401b827376c67d6fe847f",
+      "bytes": 39,
+      "mode": "100644"
+    },
+    {
+      "path": "src-tauri/capabilities/default.json",
+      "gitBlob": "7b737ad3bd2f958c6fb133bc4d78f745c65bcb2a",
+      "sha256": "44565de3b8445b0f35d2a36e8eb835292a4c2a0e18122a24a40d81a3c692e275",
+      "bytes": 645,
+      "mode": "100644"
+    },
+    {
+      "path": "src-tauri/gen/schemas/acl-manifests.json",
+      "gitBlob": "e090e7b85996b19f0736491e45d09b4e19fa19ec",
+      "sha256": "4d93885b464518dae2a2ed75ec63efc2c9d5a8991f51c26e6764dcb4264623c5",
+      "bytes": 69499,
+      "mode": "100644"
+    },
+    {
+      "path": "src-tauri/gen/schemas/capabilities.json",
+      "gitBlob": "da4c3d48b1557149c619571df73c7cee047493e7",
+      "sha256": "028e5ae547bd8a7c3a3879e60a0280c3f3c145680d6be272ac11f62ad1d52663",
+      "bytes": 476,
+      "mode": "100644"
+    },
+    {
+      "path": "src-tauri/gen/schemas/desktop-schema.json",
+      "gitBlob": "ff1f5f24550ad7d57e8895960f0e7acc4754c979",
+      "sha256": "623c82e1cf0b1093b61b4b0900f8e2f06fbef272b8e5c24cc90dde35b063da97",
+      "bytes": 129129,
+      "mode": "100644"
+    },
+    {
+      "path": "src-tauri/gen/schemas/windows-schema.json",
+      "gitBlob": "ff1f5f24550ad7d57e8895960f0e7acc4754c979",
+      "sha256": "623c82e1cf0b1093b61b4b0900f8e2f06fbef272b8e5c24cc90dde35b063da97",
+      "bytes": 129129,
+      "mode": "100644"
+    },
+    {
+      "path": "src-tauri/icons/128x128.png",
+      "gitBlob": "e80ffd2877d6629eb36a2e0e113711b9068c80a8",
+      "sha256": "8dd4acfb56d09ac351966bf2e7f931323d495839a7a3bf7e9b58011ccd96c625",
+      "bytes": 9856,
+      "mode": "100644"
+    },
+    {
+      "path": "src-tauri/icons/128x128@2x.png",
+      "gitBlob": "b96830d4a97fa18083b9c3b5a22fa01e0194d2f1",
+      "sha256": "3417f1f8adb6536aa7fde7e2bf45e46935665b5e5deb8735846ac53b739ade82",
+      "bytes": 21793,
+      "mode": "100644"
+    },
+    {
+      "path": "src-tauri/icons/32x32.png",
+      "gitBlob": "e68acb6b8226c692ab9aaa7140b28de933441c79",
+      "sha256": "508ec86ac1aa04dacc0629584b3158532816cda5306e48249e7a7c2375d3648f",
+      "bytes": 1820,
+      "mode": "100644"
+    },
+    {
+      "path": "src-tauri/icons/64x64.png",
+      "gitBlob": "158bd75050cdb9e6c636c555a1441bf3c60004da",
+      "sha256": "63a75896cbda2448235b20e01aae67570586d7801125314e383b2409b91cc415",
+      "bytes": 4332,
+      "mode": "100644"
+    },
+    {
+      "path": "src-tauri/icons/Square107x107Logo.png",
+      "gitBlob": "3e75da56ad85492f083bbc9219eeaf63d6d1d3f8",
+      "sha256": "c3f8b8c47121bb11631de9b92bb2e576c0fa14cdc9b3cff0ef07c3eb3ccc076e",
+      "bytes": 8059,
+      "mode": "100644"
+    },
+    {
+      "path": "src-tauri/icons/Square142x142Logo.png",
+      "gitBlob": "c33a7d2d376aae77d61274103cc26743d74057c9",
+      "sha256": "6cd67888c4a2a9a484dabe1a376fd0e7e684a1e43af23c5d810cc8a18fc95682",
+      "bytes": 11120,
+      "mode": "100644"
+    },
+    {
+      "path": "src-tauri/icons/Square150x150Logo.png",
+      "gitBlob": "63b7aaeee53258f5bdbe58b4703caa11d78c16fc",
+      "sha256": "5b340de47f1fed256417d588beb36b015f85f8dc7073e56e11c46c11cae960ba",
+      "bytes": 11992,
+      "mode": "100644"
+    },
+    {
+      "path": "src-tauri/icons/Square284x284Logo.png",
+      "gitBlob": "750ab49f5753bfdc21ae59155495245078e26a8c",
+      "sha256": "d135edb6004e3c7f77c418e7ad9cffa2b25d56003f4569ac7a8807ee3e8f66de",
+      "bytes": 25202,
+      "mode": "100644"
+    },
+    {
+      "path": "src-tauri/icons/Square30x30Logo.png",
+      "gitBlob": "ece92e97eff28c4e2b358602959478e1b13ebc12",
+      "sha256": "096c93d8f9caf5c72629ac613e658353d546b66d9978836ebcb6fe232a7815ec",
+      "bytes": 1692,
+      "mode": "100644"
+    },
+    {
+      "path": "src-tauri/icons/Square310x310Logo.png",
+      "gitBlob": "8ea5647c247ab3918c182a7b7cc6d7a456f7427f",
+      "sha256": "4d7eed43f0508b0f20a074ec0ea9d8e0c1baf1af7d807ba7e63aa31f23b6da49",
+      "bytes": 28173,
+      "mode": "100644"
+    },
+    {
+      "path": "src-tauri/icons/Square44x44Logo.png",
+      "gitBlob": "62f975643669d9f80ae31add2c1c37c81bcf38d6",
+      "sha256": "a830f8b27e0e582501703735b36ff6b00d2df20eeeffaf0abb0a0e2c768e6626",
+      "bytes": 2750,
+      "mode": "100644"
+    },
+    {
+      "path": "src-tauri/icons/Square71x71Logo.png",
+      "gitBlob": "741863a02ab00ef84045992c80ffaa52955ea276",
+      "sha256": "d0b0a4c5f5b883533188da89542384939f586ed32a7be0d80a353746d9733781",
+      "bytes": 4965,
+      "mode": "100644"
+    },
+    {
+      "path": "src-tauri/icons/Square89x89Logo.png",
+      "gitBlob": "426774bcfc99aaeab8542121f77a683df3db0436",
+      "sha256": "8b8e21d79b3beac46a1ae3bf9e2b42b6006cdd309097ff6e1807370c9916674d",
+      "bytes": 6434,
+      "mode": "100644"
+    },
+    {
+      "path": "src-tauri/icons/StoreLogo.png",
+      "gitBlob": "a3c9d402a0c998a416ec75222d83afe63809b13a",
+      "sha256": "79d5d40cf067d4912c3ee8fdad4bafc1ba932b4e3517b9f361f187dea59bed5d",
+      "bytes": 3180,
+      "mode": "100644"
+    },
+    {
+      "path": "src-tauri/icons/android/mipmap-anydpi-v26/ic_launcher.xml",
+      "gitBlob": "2ffbf24b68988bd935f5c695a59753fcb1a5de0e",
+      "sha256": "760d4b8a06bf7163dd010c33ad2cac9e4a75fa0177afaba042f83e311eef0c3e",
+      "bytes": 261,
+      "mode": "100644"
+    },
+    {
+      "path": "src-tauri/icons/android/mipmap-hdpi/ic_launcher.png",
+      "gitBlob": "55569aec946aac967872883aedb437559618d952",
+      "sha256": "afca72bdcf6133879312ebc47822739332b7fdfe8dd7227a81bab786a3588640",
+      "bytes": 3570,
+      "mode": "100644"
+    },
+    {
+      "path": "src-tauri/icons/android/mipmap-hdpi/ic_launcher_foreground.png",
+      "gitBlob": "60be3b1475ec992984826bb414723c11a63e1fac",
+      "sha256": "84ac65b24e250b64b6788e01e46509eec84066706255f68dfffdfa93947a5884",
+      "bytes": 13235,
+      "mode": "100644"
+    },
+    {
+      "path": "src-tauri/icons/android/mipmap-hdpi/ic_launcher_round.png",
+      "gitBlob": "be04d4b4b6ca624e402036155c1b699639f2986b",
+      "sha256": "7f333810cbd0efcfd56a43766306a21e794f27b759c8d1da3eb005141a4d1875",
+      "bytes": 3524,
+      "mode": "100644"
+    },
+    {
+      "path": "src-tauri/icons/android/mipmap-mdpi/ic_launcher.png",
+      "gitBlob": "4799ffae42d1093763d109a2d8e50d8219d72173",
+      "sha256": "fce91e6554ec0034c1902ecbede6b4f24dad7b38c3664954a46b590ddbbec3ab",
+      "bytes": 3338,
+      "mode": "100644"
+    },
+    {
+      "path": "src-tauri/icons/android/mipmap-mdpi/ic_launcher_foreground.png",
+      "gitBlob": "c5f058a441c6a0c118d48d170142ddeea69dc551",
+      "sha256": "4c0ac2b7b17805e34313cacd87c17d7f237911338b77730a8a49855f235c7830",
+      "bytes": 8222,
+      "mode": "100644"
+    },
+    {
+      "path": "src-tauri/icons/android/mipmap-mdpi/ic_launcher_round.png",
+      "gitBlob": "6699131175d78f7a3ce42f854158d0f0db8acc2e",
+      "sha256": "d500a27868bf92562989967b6ce8b0ac16c52e53819c7a6d3ddfc38e0ef067d7",
+      "bytes": 3378,
+      "mode": "100644"
+    },
+    {
+      "path": "src-tauri/icons/android/mipmap-xhdpi/ic_launcher.png",
+      "gitBlob": "6e9ee3dfa5577c5a9fc8baf4c712a29ff1aeb0e6",
+      "sha256": "8adcc5ed45e69a4f5272b534ddb0d580c34f356eacd112c6966f11b9ecdf091e",
+      "bytes": 8994,
+      "mode": "100644"
+    },
+    {
+      "path": "src-tauri/icons/android/mipmap-xhdpi/ic_launcher_foreground.png",
+      "gitBlob": "c2c95c2fbd8a39c94fafbbcf43936b6fda50f253",
+      "sha256": "194353cfe05bc31d5aff05bf99099aeb15b089d3a800703c88811c4731c7289d",
+      "bytes": 18004,
+      "mode": "100644"
+    },
+    {
+      "path": "src-tauri/icons/android/mipmap-xhdpi/ic_launcher_round.png",
+      "gitBlob": "738dc7de2440c66e0532264bd6067afd9f877c3e",
+      "sha256": "07f01b31777845aee6fcbe2803da8664b281116f014678de9bc23342457ed937",
+      "bytes": 8936,
+      "mode": "100644"
+    },
+    {
+      "path": "src-tauri/icons/android/mipmap-xxhdpi/ic_launcher.png",
+      "gitBlob": "ffaf252256eaa649ec1dbf2bde3209fdec133ca4",
+      "sha256": "c34af4f21db3012cc7ad00f8c39d522422bcdf86b706d412dd864986ff7fc2f4",
+      "bytes": 15675,
+      "mode": "100644"
+    },
+    {
+      "path": "src-tauri/icons/android/mipmap-xxhdpi/ic_launcher_foreground.png",
+      "gitBlob": "1a43bd9ee8ab5c9d14471989b7dc2e3390c19283",
+      "sha256": "6a37d2394325d9224bfbb9aa86d1924488d7b9537f40674338a38252772367e1",
+      "bytes": 29680,
+      "mode": "100644"
+    },
+    {
+      "path": "src-tauri/icons/android/mipmap-xxhdpi/ic_launcher_round.png",
+      "gitBlob": "a93fa77c5fa506966b48c754e3ce020583498a36",
+      "sha256": "3640e1a50f4f94cd0d0f6f08c44e517765fabb152b0ae07d2303ba20f2564e9f",
+      "bytes": 16036,
+      "mode": "100644"
+    },
+    {
+      "path": "src-tauri/icons/android/mipmap-xxxhdpi/ic_launcher.png",
+      "gitBlob": "07ef6835ef717304444e696dd1331b15e37f94b7",
+      "sha256": "5eee8afa3c1520a7669ee8d712c96c6966a7bf967db39e573664390899e6c0fb",
+      "bytes": 23054,
+      "mode": "100644"
+    },
+    {
+      "path": "src-tauri/icons/android/mipmap-xxxhdpi/ic_launcher_foreground.png",
+      "gitBlob": "44df671de7124e209788e519d26c0d81d9ce4370",
+      "sha256": "df7a201d0d52875ea7cbb4369f86867e8d0caa515436b2701e2a68b705a0b740",
+      "bytes": 41527,
+      "mode": "100644"
+    },
+    {
+      "path": "src-tauri/icons/android/mipmap-xxxhdpi/ic_launcher_round.png",
+      "gitBlob": "0bc971638047cdc12243464ff9b5ea55684a49d1",
+      "sha256": "16c03d7cf03672bd52f1385b59b4c233d061ffd7f509a569db5547d92a9808fc",
+      "bytes": 23026,
+      "mode": "100644"
+    },
+    {
+      "path": "src-tauri/icons/android/values/ic_launcher_background.xml",
+      "gitBlob": "ea9c223a6cbab0465000584a9d5dd052adffe3c2",
+      "sha256": "0687336f0ccc6f7ee09c7c95110667c63b75931238df779a21af401fb864cd34",
+      "bytes": 115,
+      "mode": "100644"
+    },
+    {
+      "path": "src-tauri/icons/app-icon.svg",
+      "gitBlob": "1bbd1e0e549f37c895f79d07fb5880800b843242",
+      "sha256": "aca7bee4bd4b1fa53533076cec322898dfc74c177bf22bae3adf77d6af324c76",
+      "bytes": 1408,
+      "mode": "100644"
+    },
+    {
+      "path": "src-tauri/icons/icon.icns",
+      "gitBlob": "3e6680f426016ec371baa871242080d03866ba23",
+      "sha256": "5d4b8c9999e48181710c28385ebc901d44f5a376681ec0e0caf98c534d8612cb",
+      "bytes": 286195,
+      "mode": "100644"
+    },
+    {
+      "path": "src-tauri/icons/icon.ico",
+      "gitBlob": "87e1af3b5d1cdf661f99ae50056c3c1caf792b80",
+      "sha256": "110b0c0b301b35fe15707e9044795ec75158b776e66a753a7243181cbf98d0c9",
+      "bytes": 34816,
+      "mode": "100644"
+    },
+    {
+      "path": "src-tauri/icons/icon.png",
+      "gitBlob": "5884d143ca0b1b32a65d382d1a90b852709fa68f",
+      "sha256": "5bbab5ca276249cab0f9584d9ac94c31a2be2710506c34e3e365a87a78d5e0b1",
+      "bytes": 50775,
+      "mode": "100644"
+    },
+    {
+      "path": "src-tauri/icons/ios/AppIcon-20x20@1x.png",
+      "gitBlob": "50c37a11803bb85cca41e4aa3c08ec9740d225c2",
+      "sha256": "c6f9bc4930f14aaf5a265abccea7916a14e966a9f55842e1826b6ab4858b49ac",
+      "bytes": 1011,
+      "mode": "100644"
+    },
+    {
+      "path": "src-tauri/icons/ios/AppIcon-20x20@2x-1.png",
+      "gitBlob": "1b884d50182633c71999cd528f745c53c70393cb",
+      "sha256": "ab723c3a3d7f8af453c2b0487e2cdc4eb8616e031df0f952d9dbf2f04e9d239e",
+      "bytes": 2514,
+      "mode": "100644"
+    },
+    {
+      "path": "src-tauri/icons/ios/AppIcon-20x20@2x.png",
+      "gitBlob": "1b884d50182633c71999cd528f745c53c70393cb",
+      "sha256": "ab723c3a3d7f8af453c2b0487e2cdc4eb8616e031df0f952d9dbf2f04e9d239e",
+      "bytes": 2514,
+      "mode": "100644"
+    },
+    {
+      "path": "src-tauri/icons/ios/AppIcon-20x20@3x.png",
+      "gitBlob": "7854bdb10e0c6a970fc3ea609ee0f337c72b09cf",
+      "sha256": "80985a19789e633725298b7c540d5e105896ba4b03ac8778b540b5b02de9985e",
+      "bytes": 4161,
+      "mode": "100644"
+    },
+    {
+      "path": "src-tauri/icons/ios/AppIcon-29x29@1x.png",
+      "gitBlob": "22a6918b2635c6bc193da8ab2e54f4af2f966495",
+      "sha256": "0c499d39a4b779aea112a07dcaf4949ff04c637111c6ce3be95cb2e4525be188",
+      "bytes": 1653,
+      "mode": "100644"
+    },
+    {
+      "path": "src-tauri/icons/ios/AppIcon-29x29@2x-1.png",
+      "gitBlob": "3193e9bd1b43a18f1710bdad791c8575452a3e86",
+      "sha256": "4d39dc461912f9140402d3850f27af0521903927e06ddc749746d574ce019fdc",
+      "bytes": 3931,
+      "mode": "100644"
+    },
+    {
+      "path": "src-tauri/icons/ios/AppIcon-29x29@2x.png",
+      "gitBlob": "3193e9bd1b43a18f1710bdad791c8575452a3e86",
+      "sha256": "4d39dc461912f9140402d3850f27af0521903927e06ddc749746d574ce019fdc",
+      "bytes": 3931,
+      "mode": "100644"
+    },
+    {
+      "path": "src-tauri/icons/ios/AppIcon-29x29@3x.png",
+      "gitBlob": "22e62e193ab9915438959bb517faff56d2584295",
+      "sha256": "a5bcfd5a611cb7dd39641493a958f8463e6c2c93ddfe2ad98046392b7b9ceba7",
+      "bytes": 6300,
+      "mode": "100644"
+    },
+    {
+      "path": "src-tauri/icons/ios/AppIcon-40x40@1x.png",
+      "gitBlob": "1b884d50182633c71999cd528f745c53c70393cb",
+      "sha256": "ab723c3a3d7f8af453c2b0487e2cdc4eb8616e031df0f952d9dbf2f04e9d239e",
+      "bytes": 2514,
+      "mode": "100644"
+    },
+    {
+      "path": "src-tauri/icons/ios/AppIcon-40x40@2x-1.png",
+      "gitBlob": "2a12c9e9940d4de9c43e2cceeee854827ad7b4d0",
+      "sha256": "fd8b6eca3741d57433e4fbd145fe1002a1b81150ddf3fd506364cfe436854603",
+      "bytes": 5777,
+      "mode": "100644"
+    },
+    {
+      "path": "src-tauri/icons/ios/AppIcon-40x40@2x.png",
+      "gitBlob": "2a12c9e9940d4de9c43e2cceeee854827ad7b4d0",
+      "sha256": "fd8b6eca3741d57433e4fbd145fe1002a1b81150ddf3fd506364cfe436854603",
+      "bytes": 5777,
+      "mode": "100644"
+    },
+    {
+      "path": "src-tauri/icons/ios/AppIcon-40x40@3x.png",
+      "gitBlob": "ee70240b99ebbf1497c4ea7d11a730453353349a",
+      "sha256": "cc618285928a78e995db9dd26d7e72ac75f59410a7ccbea6cde84b27ccc17680",
+      "bytes": 9171,
+      "mode": "100644"
+    },
+    {
+      "path": "src-tauri/icons/ios/AppIcon-512@2x.png",
+      "gitBlob": "5478a79c0cbe01ec2c96491b32c0ee44b7855e15",
+      "sha256": "99729b9dcf30c644b24dfd6822d427cdece929408829a5aa5dd99c7fb035c4f2",
+      "bytes": 119579,
+      "mode": "100644"
+    },
+    {
+      "path": "src-tauri/icons/ios/AppIcon-60x60@2x.png",
+      "gitBlob": "ee70240b99ebbf1497c4ea7d11a730453353349a",
+      "sha256": "cc618285928a78e995db9dd26d7e72ac75f59410a7ccbea6cde84b27ccc17680",
+      "bytes": 9171,
+      "mode": "100644"
+    },
+    {
+      "path": "src-tauri/icons/ios/AppIcon-60x60@3x.png",
+      "gitBlob": "2ab1279338a263c13b23269206947bac57877196",
+      "sha256": "a226c97837db8ad7f0205579c167cf5ee4603068c33d530a9fa8a6ec9caee9e4",
+      "bytes": 14804,
+      "mode": "100644"
+    },
+    {
+      "path": "src-tauri/icons/ios/AppIcon-76x76@1x.png",
+      "gitBlob": "bf206c71af18179f956e28d080ab86b89a9c048c",
+      "sha256": "d3754bb09706d41a12368bab17550ca99a04c6a4372e1b7f63681154a2e772c6",
+      "bytes": 5352,
+      "mode": "100644"
+    },
+    {
+      "path": "src-tauri/icons/ios/AppIcon-76x76@2x.png",
+      "gitBlob": "cd89fe2a2346bc8cfa708f281453ad642803acfc",
+      "sha256": "86a2e0576a1d21f66c316db4e9bc2404727ec5c72244a904fb76fb0ebf7c2a4f",
+      "bytes": 12137,
+      "mode": "100644"
+    },
+    {
+      "path": "src-tauri/icons/ios/AppIcon-83.5x83.5@2x.png",
+      "gitBlob": "fefb87001ffa387cd255432db5426d2da4c6e780",
+      "sha256": "148bd6ae841716ae85370251e6d8c40909b1eb9d71c7ac49e5581b3a1648dfb1",
+      "bytes": 13677,
+      "mode": "100644"
+    },
+    {
+      "path": "src-tauri/src/database.rs",
+      "gitBlob": "2725d35a606722ec4c444d4b07208ebd379382a4",
+      "sha256": "8342644b25e497e1c834cc1a36c23c7dd8b9ce99f9d99689b72401acdd33b460",
+      "bytes": 19782,
+      "mode": "100644"
+    },
+    {
+      "path": "src-tauri/src/lib.rs",
+      "gitBlob": "2ece40e40cde1a6542a81e2d391f9596197c1caf",
+      "sha256": "9d0fe39fbe0e817a89435eb56cdf23a9e6a167a7b4a475f8ced3efbec1e0f498",
+      "bytes": 5674,
+      "mode": "100644"
+    },
+    {
+      "path": "src-tauri/src/main.rs",
+      "gitBlob": "93cf3f0312a0b3233f433fc5f2da202ac816547e",
+      "sha256": "6133d23ab04246f25a960de31472c63a423f4d2e5166c96c2f4b2902119a4b41",
+      "bytes": 114,
+      "mode": "100644"
+    },
+    {
+      "path": "src-tauri/tauri.conf.json",
+      "gitBlob": "952a68c19d6895ad6f13c8a8b6af2c14079ac03c",
+      "sha256": "721ec91a6dd2a4b1cff933148dbd2f774c570280cec0e2c1a60af5417f8ea120",
+      "bytes": 1702,
+      "mode": "100644"
+    },
+    {
+      "path": "src/data/artist-worlds-v4.0.1.json",
+      "gitBlob": "aeb91447df265ae816b82a37ea1ea31bf3b76997",
+      "sha256": "474f3e14c57539e86afb9d9352674e9ee4d4b652c9a9e7cab961f8e651f8b920",
+      "bytes": 137346,
+      "mode": "100644"
+    },
+    {
+      "path": "src/data/theme-world-packages.json",
+      "gitBlob": "da43ce2483302d9d7b0760747eef0f1cf2fa3356",
+      "sha256": "6572f898628ba9b4819b6bcaae99984cdaa858ed7a535e8b0743f8d5fbd574e3",
+      "bytes": 198107,
+      "mode": "100644"
+    },
+    {
+      "path": "src/main.css",
+      "gitBlob": "4a7764574e3516efbb758468daa3cf7d3a6f6717",
+      "sha256": "d6de58878994c2dc40ec38bbe2f293b6d7bd48b6c0f76df751b500042ec69ef0",
+      "bytes": 70,
+      "mode": "100644"
+    },
+    {
+      "path": "src/main.ts",
+      "gitBlob": "eb475eb240e41126026dba6407fe315efbedd61e",
+      "sha256": "fc71a690475500553f2dd71eb9f37ac9c94d4b51beabe3f397db9de0c476de9b",
+      "bytes": 46,
+      "mode": "100644"
+    },
+    {
+      "path": "src/media/MediaSurfaceController.ts",
+      "gitBlob": "989622219735921f2c1a80771abc70d13d587579",
+      "sha256": "8af8a725ce3c0dd8bb55b7a852c65bc1749645829984ae549c7bb532c488c7be",
+      "bytes": 13276,
+      "mode": "100644"
+    },
+    {
+      "path": "src/music/MusicHub.ts",
+      "gitBlob": "53beae0464c44c947c8009bd9fc71456403486b3",
+      "sha256": "f9dfb240ab2a306f7a64dc7310ce01872fb03d09a63d198346c5bef752978be5",
+      "bytes": 52578,
+      "mode": "100644"
+    },
+    {
+      "path": "src/music/providerCatalog.ts",
+      "gitBlob": "97cca97b5debff94fc5d2bea99af006de4ce0efb",
+      "sha256": "d6a652e8389a112cf07b1a612a283b39d308c943ca1af3c35cc2afe546da2faa",
+      "bytes": 4338,
+      "mode": "100644"
+    },
+    {
+      "path": "src/premium.ts",
+      "gitBlob": "1eea4ac5a638325f37bdb7aebf425b300e5aca4f",
+      "sha256": "dc5f84c1e7dea7df6593b8169aa29a379d6b7284cbc5fa52fb56a1239b6a85a4",
+      "bytes": 9032,
+      "mode": "100644"
+    },
+    {
+      "path": "src/prototype-v24.ts",
+      "gitBlob": "e08803fb56dbeee8f7289d01497e971aad95cbbe",
+      "sha256": "ac40b9b2da130658fcc12804b0d9fdc87f709f39df7bed6a3d69c67970d244eb",
+      "bytes": 298347,
+      "mode": "100644"
+    },
+    {
+      "path": "src/styles/premium.css",
+      "gitBlob": "be5bfe58b0647b7594006f40d64a2dd1e49f9497",
+      "sha256": "ec0fe31815a9a7fd950aa9aa13ae56f2a00b03a09e9c2ec22eac5909a03efcb8",
+      "bytes": 44461,
+      "mode": "100644"
+    },
+    {
+      "path": "src/styles/prototype-v24.css",
+      "gitBlob": "1ba190379e8c0040278362bc25641cea308e335f",
+      "sha256": "9cff726eaad6a9e9e13407397189d3b7d8a46052aed18fc1eee26a54ed067ba0",
+      "bytes": 187824,
+      "mode": "100644"
+    },
+    {
+      "path": "src/types/global.d.ts",
+      "gitBlob": "8901beae16e308aaeabab3331e3faaaa85566961",
+      "sha256": "cc97b65172a0636284775b6f19454b9b2b51a85c40eed71f4a754cb0342f05c9",
+      "bytes": 1627,
+      "mode": "100644"
+    },
+    {
+      "path": "src/world/CinematicWorld.ts",
+      "gitBlob": "07ca29c3ec86eac97728fadb76f0d28e072db986",
+      "sha256": "01d86f06d5c300bfdaedc5b13c476f9fab846b750ecbd00fa918a89dd80443a1",
+      "bytes": 31116,
+      "mode": "100644"
+    },
+    {
+      "path": "src/world/ObjectEcologyLayer.ts",
+      "gitBlob": "7d82613b1c9de104413c9eef4911f4564663039a",
+      "sha256": "b00ff849dcbb9bbd6ea9116af41e6992975a3eaf68725cf3eaf747230e8cd6ee",
+      "bytes": 8711,
+      "mode": "100644"
+    },
+    {
+      "path": "src/world/ThemeDirector.ts",
+      "gitBlob": "9240ad0caa4e56119c9dde343117117a7000e368",
+      "sha256": "aaf863256d72a884674e6756bf71cbd052bbd84e7e821d1c2d40f8c527efb962",
+      "bytes": 14359,
+      "mode": "100644"
+    },
+    {
+      "path": "src/world/themeCatalog.ts",
+      "gitBlob": "390fd02419bde0abe07618b9003dfaec21ebdf78",
+      "sha256": "eab4d209a6591d53a0c5aa7ad6ed656dc19acadf97e26b6915934bdbd6be00ab",
+      "bytes": 10643,
+      "mode": "100644"
+    },
+    {
+      "path": "tests/actions/baseline.json",
+      "gitBlob": "7e7b57169e2b3808e10f7859ac3b10e8369f684f",
+      "sha256": "868b3d1f28130b13b180cadf27bcc70b6287a4633dc6e855b734719a8f08f992",
+      "bytes": 56,
+      "mode": "100644"
+    },
+    {
+      "path": "tests/authority.test.ts",
+      "gitBlob": "7e53258e065239fc5351d6d0d842eac6940eb95b",
+      "sha256": "4179f25872491ef5b51a58ae9901d3beb28057a951b40b2067d6fe03e284bc99",
+      "bytes": 2890,
+      "mode": "100644"
+    },
+    {
+      "path": "tests/contract.test.ts",
+      "gitBlob": "c49c23812516011f432cf9f2bead7397d42d941c",
+      "sha256": "5db190cfe277f5acf2c5919795d432624936dfeff99525de316c9dc868a52c5c",
+      "bytes": 2116,
+      "mode": "100644"
+    },
+    {
+      "path": "tests/ui.test.ts",
+      "gitBlob": "7eaace90ec9bc5f475a32b4f0a39d97cd88ea2bc",
+      "sha256": "1ca6c5931b186ae2c5a8e7b1183c7a34e1c3ae81d0d7ad1a7e22abf4de8134db",
+      "bytes": 4185,
+      "mode": "100644"
+    },
+    {
+      "path": "tsconfig.json",
+      "gitBlob": "bbfc8db777e4ee1496210718e299857521314f8b",
+      "sha256": "0cb125acf606aa9b6ff13f59ac4cbd76f4e3a79d0b4fc2513f0165e9a25138e8",
+      "bytes": 595,
+      "mode": "100644"
+    },
+    {
+      "path": "vite.config.ts",
+      "gitBlob": "5b6371aa5eda749ad27b15c02d8618d57edce637",
+      "sha256": "a744ff22f642257e7b093bf00598f594bcb21802a8580140423420486c53c1f5",
+      "bytes": 591,
+      "mode": "100644"
+    }
+  ],
+  "count": 100
+}

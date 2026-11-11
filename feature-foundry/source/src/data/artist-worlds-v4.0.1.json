@@ -1,0 +1,2751 @@
+{
+  "authority": {
+    "title": "Feature Foundry Favorite Artist Worlds",
+    "lineage": "feature-foundry-favorite-artist-worlds-v4.0.1",
+    "sourceDriveFileId": "1BLxXdbNN0hJggKDJ16fBFv86OOep1Q40",
+    "sourceFile": "feature-foundry-favorite-artist-worlds-CURRENT.xlsx",
+    "workbookSha256": "fbed5880cc3440e983ad7d418b36258c824808454a8109c52470238ec393b60e",
+    "canonicalJsonSha256": "9865ef491c5baeec39702a0a6724df1bf9c9a29ed062a30e6bb6af270dd6b00a",
+    "canonicalSqliteSha256": "a825ad348280342a92b713146375999ab18d3e8067dcac531d177c7636deac78",
+    "extractedAt": "2026-08-19",
+    "status": "CURATION_AUTHORITY",
+    "promotionRule": "CANDIDATE and SEARCH_ROUTE music entries require Bert's explicit listening approval before APPROVED."
+  },
+  "counts": {
+    "artists": 5,
+    "worlds": 10,
+    "districts": 20,
+    "aesthetic_dna": 25,
+    "weather": 20,
+    "timeflow": 20,
+    "interactions": 25,
+    "music_routes": 21,
+    "discovery_links": 75,
+    "provenance": 50,
+    "glossary": 9
+  },
+  "artists": [
+    {
+      "order": "1",
+      "artist_id": "artist.frawgy006",
+      "display_name": "Frawgy",
+      "handle": "@frawgy006",
+      "status": "FOUNDING_FAVORITE",
+      "theme_readiness": "READY_FOR_ARTIST_WORLD",
+      "theme_family": "Playful bioluminescent creature fantasy",
+      "curator_summary": "Whimsical surreal bio-fantasy with frogs, mushrooms, candy-organic forms, lilypad habitats, playful creatures and luminous dream ecology.",
+      "tiktok": "https://www.tiktok.com/@frawgy006?lang=en",
+      "instagram": "",
+      "rights_release_gate": "Reference/curation only until artist permission or license is recorded",
+      "reviewed": "2026-08-04",
+      "evidence_note": "Curator interpretation based on the user-supplied profile and prior Feature Foundry Frawgy dashboard references."
+    },
+    {
+      "order": "2",
+      "artist_id": "artist.lightweaverart",
+      "display_name": "Lightweaverart",
+      "handle": "@lightweaverart",
+      "status": "FAVORITE",
+      "theme_readiness": "READY_FOR_ARTIST_WORLD",
+      "theme_family": "Neon sigil cyber-portrait futurism",
+      "curator_summary": "Hyper-detailed neon portrait worlds combining luminous eyes, painted sigils, tattoos, synthetic fashion, blue-magenta lighting, cyberpunk beauty and ritualistic futurism.",
+      "tiktok": "https://www.tiktok.com/@lightweaverart?lang=en",
+      "instagram": "https://www.instagram.com/lightweaverart",
+      "rights_release_gate": "Reference/curation only until artist permission or license is recorded",
+      "reviewed": "2026-08-04",
+      "evidence_note": "Curator interpretation based on the user-supplied profile links and two supplied visual references."
+    },
+    {
+      "order": "3",
+      "artist_id": "artist.dreamrelicc",
+      "display_name": "Dreamrelicc",
+      "handle": "@dreamrelicc",
+      "status": "FAVORITE",
+      "theme_readiness": "READY_FOR_ARTIST_WORLD",
+      "theme_family": "Divine machinery / sacred retrospace futurism",
+      "curator_summary": "Divine machinery retrofuturism blending rhinestone fashion, sacred symbolism, glittering spacecraft, cathedral atmospheres, devotional animals, cosmic glamour and VHS-soft space mysticism.",
+      "tiktok": "https://www.tiktok.com/@dreamrelicc?lang=en",
+      "instagram": "",
+      "rights_release_gate": "Reference/curation only until artist permission or license is recorded",
+      "reviewed": "2026-08-04",
+      "evidence_note": "Curator interpretation based on the user-supplied TikTok profile link and eight supplied visual references showing sacred-space glamour, jeweled spacecraft, ritual animals and cosmic interiors."
+    },
+    {
+      "order": "4",
+      "artist_id": "artist.karoline-georges",
+      "display_name": "Karoline Georges",
+      "handle": "@karoline_georges",
+      "status": "FAVORITE",
+      "theme_readiness": "READY_FOR_ARTIST_WORLD",
+      "theme_family": "Post-organic rococo metamorphosis / embroidered algorithmic menagerie",
+      "curator_summary": "Speculative post-organic metamorphosis combining embroidered creatures, botanical anatomy, porcelain and textile bodies, hybrid consciousness, algorithmic animals and museum-like macro detail.",
+      "tiktok": "https://www.tiktok.com/@karoline_georges",
+      "instagram": "https://www.instagram.com/karolinegeorges.art",
+      "rights_release_gate": "Reference/curation only until artist permission or license is recorded",
+      "reviewed": "2026-08-04",
+      "evidence_note": "Curator interpretation grounded in seven user-supplied references plus the artist’s official About, Artworks, PHYSIS, MIRABILIA, POIESIS and NanoFictions materials."
+    },
+    {
+      "order": "5",
+      "artist_id": "artist.saveroom",
+      "display_name": "saveroom",
+      "handle": "@saveroomlofi",
+      "status": "FAVORITE",
+      "theme_readiness": "READY_FOR_ARTIST_WORLD",
+      "theme_family": "Nostalgia-wave PS2/Dreamcast paradise fantasy",
+      "curator_summary": "Music-native nostalgia-wave fantasy built from luminous PS2/Dreamcast-era 3D worlds: aquamarine island sanctuaries, violet-haired navigators, floating gothic citadels, angelic save points, waterfalls, moons, starfall and ambient electronic memory.",
+      "tiktok": "https://www.tiktok.com/@saveroomlofi?lang=en",
+      "instagram": "",
+      "rights_release_gate": "Reference/curation only until artist permission or license is recorded",
+      "reviewed": "2026-08-04",
+      "evidence_note": "Curator interpretation grounded in the user-provided TikTok and Spotify profiles, official public music pages, and fourteen supplied visual references. One supplied screenshot is an exact duplicate and remains separately recorded."
+    }
+  ],
+  "worlds": [
+    {
+      "world_id": "world.frawgy.verdant-conservatory",
+      "artist_id": "artist.frawgy006",
+      "world_name": "Verdant Conservatory",
+      "variant": "Green / daylight",
+      "world_thesis": "A living indoor wetland laboratory where playful frog-folk, fruiting mushrooms and soft gelatinous architecture coexist with a dense professional interface.",
+      "emotional_experience": "Curious, joyful, lush, safe, mischievous",
+      "palette": "frog green; moss; aqua dew; cream; coral fruit; warm sunlight",
+      "material_language": "wet leaf; translucent gel; soft rubber; glazed ceramic; moss; mushroom velvet",
+      "shape_language": "lilypads; bulbous caps; rounded habitat pods; vines; eye-like apertures",
+      "lighting": "soft canopy sun, watery caustics, dew glints, warm terrarium pools",
+      "ui_language": "soft living membranes, leaf-tab rails, glazed lilypad cards, dew focus rings",
+      "mascot_buddy": "Realistic human Frawgy buddy adapted with green bio-fashion, frog-inspired accessories and environmental reactions",
+      "do_not_reduce_to": "Never reduce to generic cottagecore, frog stickers or green glass cards."
+    },
+    {
+      "world_id": "world.frawgy.lilypad-nocturne",
+      "artist_id": "artist.frawgy006",
+      "world_name": "Lilypad Nocturne",
+      "variant": "Purple / night",
+      "world_thesis": "A violet moon-marsh where bioluminescent flowers, nocturnal frogs and ultraviolet fungi turn the application into a calm dream habitat.",
+      "emotional_experience": "Dreamy, intimate, magical, quietly strange",
+      "palette": "deep violet; electric lavender; moon blue; pink bioluminescence; silver dew",
+      "material_language": "velvet petals; translucent lilypad gel; wet obsidian; luminous spores; satin skin",
+      "shape_language": "moon pools; curled petals; floating islands; soft tendrils; starry eyes",
+      "lighting": "moon shafts, ultraviolet bloom, rim-lit mist, glowing eyes and pollen",
+      "ui_language": "petal-fold menus, moonwater ripples, violet membrane panels, silver pollen focus",
+      "mascot_buddy": "Purple nocturne Frawgy human with luminous markings and slow night-creature behavior",
+      "do_not_reduce_to": "Never become generic purple fantasy, fairy wallpaper or a recolor of Verdant Conservatory."
+    },
+    {
+      "world_id": "world.lightweaver.sigil-neon-atelier",
+      "artist_id": "artist.lightweaverart",
+      "world_name": "Sigil Neon Atelier",
+      "variant": "Blue-magenta portrait studio",
+      "world_thesis": "A precision portrait atelier where skin, hair, tattoos, UI glyphs and reflective equipment are woven together by controllable strands of colored light.",
+      "emotional_experience": "Intense, luxurious, futuristic, intimate, editorial",
+      "palette": "cobalt blue; hot magenta; ultraviolet; porcelain skin; ink black; chrome silver",
+      "material_language": "wet skin sheen; fiber-optic hair; glossy lacquer; black ink; pierced metal; holographic glass",
+      "shape_language": "eyes; lashes; facial contours; runic strokes; ribbons; needles; articulated light frames",
+      "lighting": "extreme close-up rim light, magenta ocular glow, cobalt hair light, selective specular highlights",
+      "ui_language": "sigil-etched glass, eye-shaped focus apertures, filament borders, editorial portrait crops",
+      "mascot_buddy": "Realistic cyber-portrait human who can weave light glyphs into panels and environmental props",
+      "do_not_reduce_to": "Never reduce to ordinary cyberpunk neon, anime HUD overlays or a Blade Runner imitation."
+    },
+    {
+      "world_id": "world.lightweaver.chromatic-rain-alley",
+      "artist_id": "artist.lightweaverart",
+      "world_name": "Chromatic Rain Alley",
+      "variant": "Rain / street",
+      "world_thesis": "A rain-dark fashion district where every droplet carries blue, green and magenta signal light across skin, glass and reflective pavement.",
+      "emotional_experience": "Nocturnal, cinematic, dangerous, contemplative",
+      "palette": "ink black; electric blue; acid green; saturated violet; wet silver; skin warmth",
+      "material_language": "rain-slick glass; coated fabric; chrome piercings; wet concrete; luminous pigment",
+      "shape_language": "vertical rain; fractured signs; facial masks; cable braids; long hair strands",
+      "lighting": "moving sign spill, passing green-blue sweeps, eye-level magenta points, deep negative space",
+      "ui_language": "rain-sliced panels, refracted status lights, glossy dark menus, chromatic scan focus",
+      "mascot_buddy": "Street sentinel with dynamic luminous eyes and markings that react to system state",
+      "do_not_reduce_to": "No generic neon city skyline, stock rain loop or unreadable black-on-purple UI."
+    },
+    {
+      "world_id": "world.dreamrelicc.cathedral-orbit",
+      "artist_id": "artist.dreamrelicc",
+      "world_name": "Cathedral Orbit",
+      "variant": "Silver / orbital basilica",
+      "world_thesis": "An orbital cathedral-city where jeweled interfaces, astronaut saints, chapel consoles and star-window machinery transform work into a reverent cosmic ritual.",
+      "emotional_experience": "Reverent, grand, glittering, contemplative, cosmic",
+      "palette": "starlight silver; obsidian black; chapel white; gilded gold; ember red; distant blue",
+      "material_language": "rhinestones; mirrored chrome; velvet void; CRT glass; enamel crosses; brushed aluminum; polished marble",
+      "shape_language": "halos; crosses; domes; reliquaries; orbital rings; chapel arches; control panels",
+      "lighting": "star-glint sparkle, chapel spotlights, red ocular flares, soft city haze, holy rim light",
+      "ui_language": "halo focus rings, reliquary cards, vaulted panel frames, starfield work surfaces, icon-shrine toggles",
+      "mascot_buddy": "Astronaut acolyte buddy with glitter armor, devotional tools and measured ceremonial movement",
+      "do_not_reduce_to": "Never reduce to generic synthwave space, plain glitter fashion or a simple Christian icon pack."
+    },
+    {
+      "world_id": "world.dreamrelicc.astral-relic-market",
+      "artist_id": "artist.dreamrelicc",
+      "world_name": "Astral Relic Market",
+      "variant": "Night / processional bazaar",
+      "world_thesis": "A nocturnal sacred market of hovering jeweled saucers, alley chapels, ritual guardians and sparkling commerce where devotional futurism meets urban mystery.",
+      "emotional_experience": "Mysterious, ceremonial, urban, luxurious, alive",
+      "palette": "coal night; tungsten orange; incense gray; polished silver; plasma red; antique ivory",
+      "material_language": "wet stone; sequined metal; chain drapery; incense fog; lacquered leather; star velvet",
+      "shape_language": "flying saucers; lantern chains; processional lines; canopies; sentinel silhouettes; halo discs",
+      "lighting": "market sodium haze, jewel reflections, red eye glows, silver sparkle drift, shrine-candle accents",
+      "ui_language": "processional rails, market stall drawers, jewel indicators, shrine-backed inspectors, floating saucer alerts",
+      "mascot_buddy": "Night-market oracle with glitter robes, pocket relics and observant guardian animals",
+      "do_not_reduce_to": "Never become stock cyberpunk market, UFO novelty art or a random gothic skin."
+    },
+    {
+      "world_id": "world.karoline.entomorphosis-cabinet",
+      "artist_id": "artist.karoline-georges",
+      "world_name": "Entomorphosis Cabinet",
+      "variant": "Ivory / embroidered entomology",
+      "world_thesis": "A living specimen museum where porcelain insects, embroidered carapaces, cameo memories and gold-thread anatomy turn every workspace into a meticulous cabinet of algorithmic life.",
+      "emotional_experience": "Exquisite, uncanny, scholarly, tender, alive",
+      "palette": "bone ivory; antique gold; moss green; dusty rose; powder blue; velvet black; amber resin",
+      "material_language": "embroidered silk; cracked porcelain; translucent chitin; pearl; velvet; gold cord; lacquered bone; botanical fiber",
+      "shape_language": "segmented limbs; honeycomb eyes; cameo ovals; stitched seams; wings; carapaces; petals; antennae",
+      "lighting": "clean museum daylight, warm gold glints, macro focus falloff, pearl translucency and soft specimen shadows",
+      "ui_language": "specimen-drawer panels, cameo tabs, gold-thread connectors, honeycomb status cells, macro-lens focus apertures",
+      "mascot_buddy": "An embroidered insect curator whose portrait medallions store memories and whose antennae react to system signals",
+      "do_not_reduce_to": "Never reduce to bug stickers, generic cottagecore, ordinary rococo decoration or shock-value body horror."
+    },
+    {
+      "world_id": "world.karoline.physis-metamorphosis-atelier",
+      "artist_id": "artist.karoline-georges",
+      "world_name": "PHYSIS Metamorphosis Atelier",
+      "variant": "Textile / post-organic body",
+      "world_thesis": "A speculative atelier where mesh skin, botanical organs, feathers, stitched masks and algorithmic bodies continuously become new forms without losing their memories or functional identity.",
+      "emotional_experience": "Intimate, unsettling, compassionate, philosophical, metamorphic",
+      "palette": "translucent white; tissue pink; oxidized gold; sage; burgundy; powder blue; ink black",
+      "material_language": "tulle mesh; embroidery; flesh-like resin; feathers; satin; gold wire; patchwork brocade; porcelain",
+      "shape_language": "cocoons; organs; beaks; wings; masks; stitches; roots; ribbing; veils; moulting shells",
+      "lighting": "soft laboratory daylight, pale museum gray, warm internal glow and side-lit textile relief",
+      "ui_language": "mesh membranes, stitched panels, corseted layouts, anatomy inspectors, cocoon modals and reversible mutation histories",
+      "mascot_buddy": "A liminal avian-humanoid familiar that can molt, embroider, reveal internal state and safely return to earlier forms",
+      "do_not_reduce_to": "Never become gore, generic steampunk, a Victorian embroidery skin or a simple “creepy creature” theme."
+    },
+    {
+      "world_id": "world.saveroom.paradise-zero-archipelago",
+      "artist_id": "artist.saveroom",
+      "world_name": "Paradise Zero Archipelago",
+      "variant": "Cobalt / high-sun voyage",
+      "world_thesis": "A playable-looking archipelago suspended between a crystalline tropical sea and monumental cloud architecture, where sailboats, floating citadels and a violet-haired navigator turn everyday workflows into a tranquil late-1990s-to-2000s fantasy-game voyage.",
+      "emotional_experience": "Free, nostalgic, adventurous, serene, luminous",
+      "palette": "cobalt blue; aquamarine; cloud white; violet hair; royal blue; antique gold; palm green",
+      "material_language": "clear shallow water; sun-bleached wood; aged brass; low-poly stone; woven sails; polished fantasy leather; glossy early-CGI hair",
+      "shape_language": "floating spires; sail silhouettes; circular save seals; island cliffs; long boots; moon discs; pointed crystal towers",
+      "lighting": "hard tropical sun, brilliant cloud bounce, water caustics, cobalt shadow and dreamlike early-CGI bloom",
+      "ui_language": "ornate save medallions, map-island tabs, brass-edged panels, waterline progress bars and memory-card confirmations",
+      "mascot_buddy": "A fully human violet-haired navigator who sails between workspaces, reads environmental state and physically tends nearby boats, maps and save shrines.",
+      "do_not_reduce_to": "Never reduce to generic anime fantasy, a stock tropical wallpaper, ordinary Frutiger Aero or a modern photoreal game HUD."
+    },
+    {
+      "world_id": "world.saveroom.last-island-starcaster-sanctuary",
+      "artist_id": "artist.saveroom",
+      "world_name": "The Last Island: Starcaller Sanctuary",
+      "variant": "Lavender / moonlit save room",
+      "world_thesis": "A quiet final-island refuge of angel statues, waterfall platforms, moonlit cities, pink flower coves and chained sapphire monoliths where the interface feels like reaching a safe checkpoint after a long journey.",
+      "emotional_experience": "Protected, wistful, sacred, restorative, otherworldly",
+      "palette": "lavender dusk; moon silver; sapphire blue; blush pink; waterfall cyan; moss gray; warm window gold",
+      "material_language": "weathered angel stone; crystalline water; sapphire glass; flower petals; star particles; moss; soft sky haze",
+      "shape_language": "angel wings; waterfalls; chained crystals; meteor threads; flower banks; celestial clock discs; city overlooks",
+      "lighting": "lavender sunset, full-moon fill, starfall glints, underwater shafts and soft bloom around sanctuary objects",
+      "ui_language": "save-point sanctums, halo focus circles, waterfall drawers, star-map histories and sapphire checkpoint markers",
+      "mascot_buddy": "A fully human starcaller companion who rests at save shrines, plays gentle instruments and guides attention through weather and constellation cues.",
+      "do_not_reduce_to": "Never become generic angelcore, vaporwave purple, lofi wallpaper, Kingdom Hearts imitation or a recolor of Paradise Zero."
+    }
+  ],
+  "districts": [
+    {
+      "district_id": "district.frawgy.sporelight-marsh",
+      "artist_id": "artist.frawgy006",
+      "district": "Sporelight Marsh",
+      "thesis": "Bioluminescent mushroom wetlands",
+      "environment_weather": "mist, soft spores, wet moss, hidden frog calls",
+      "best_use_mode": "calm exploration"
+    },
+    {
+      "district_id": "district.frawgy.candy-bog-arcade",
+      "artist_id": "artist.frawgy006",
+      "district": "Candy Bog Arcade",
+      "thesis": "Playful saturated frog arcade made of fruit-gel machines",
+      "environment_weather": "soda bubbles, candy rain, elastic vegetation",
+      "best_use_mode": "high-energy play"
+    },
+    {
+      "district_id": "district.frawgy.lilypad-village",
+      "artist_id": "artist.frawgy006",
+      "district": "Lilypad Village",
+      "thesis": "Cozy social habitat on connected floating pads",
+      "environment_weather": "warm drizzle, firefly pollen, pond ripples",
+      "best_use_mode": "daily work and social"
+    },
+    {
+      "district_id": "district.frawgy.moon-orchid-grotto",
+      "artist_id": "artist.frawgy006",
+      "district": "Moon Orchid Grotto",
+      "thesis": "Purple subterranean sanctuary of giant luminous petals",
+      "environment_weather": "silver mist, violet dew, slow flower breathing",
+      "best_use_mode": "deep focus"
+    },
+    {
+      "district_id": "district.lightweaver.electric-shrine",
+      "artist_id": "artist.lightweaverart",
+      "district": "Electric Shrine District",
+      "thesis": "Ritual-futurist chambers where painted glyphs behave like circuitry",
+      "environment_weather": "ion haze, sigil sparks, low thunder",
+      "best_use_mode": "ceremonial actions"
+    },
+    {
+      "district_id": "district.lightweaver.chromatic-rain",
+      "artist_id": "artist.lightweaverart",
+      "district": "Chromatic Rain Alley",
+      "thesis": "Rain-dark neon portrait streets and reflective fashion vitrines",
+      "environment_weather": "neon rain, glass condensation, sign flicker",
+      "best_use_mode": "night browsing"
+    },
+    {
+      "district_id": "district.lightweaver.deco-cyborg-salon",
+      "artist_id": "artist.lightweaverart",
+      "district": "Deco Cyborg Salon",
+      "thesis": "Art-deco beauty laboratory with chrome instruments and luminous makeup",
+      "environment_weather": "perfume mist, velvet dust, warm spotlights",
+      "best_use_mode": "customization and editing"
+    },
+    {
+      "district_id": "district.lightweaver.iris-signal-lab",
+      "artist_id": "artist.lightweaverart",
+      "district": "Iris Signal Lab",
+      "thesis": "Close-focus ocular interface laboratory centered on living light patterns",
+      "environment_weather": "lens flare pulses, scan haze, spectral afterimages",
+      "best_use_mode": "diagnostics and analysis"
+    },
+    {
+      "district_id": "district.dreamrelicc.halo-console-sanctum",
+      "artist_id": "artist.dreamrelicc",
+      "district": "Halo Console Sanctum",
+      "thesis": "Orbital cockpit and control chapel for focused work",
+      "environment_weather": "star windows, silver consoles, quiet glints, pilot-chair rituals",
+      "best_use_mode": "deep focus / command"
+    },
+    {
+      "district_id": "district.dreamrelicc.processional-night-market",
+      "artist_id": "artist.dreamrelicc",
+      "district": "Processional Night Market",
+      "thesis": "Dense city lane beneath hovering reliquary craft",
+      "environment_weather": "incense haze, street warmth, floating saucers, soft crowd motion",
+      "best_use_mode": "browsing / discovery"
+    },
+    {
+      "district_id": "district.dreamrelicc.moss-reliquary-grotto",
+      "artist_id": "artist.dreamrelicc",
+      "district": "Moss Reliquary Grotto",
+      "thesis": "Biomorphic sacred garden where living moss meets falling starlight",
+      "environment_weather": "moss mounds, glitterfall, still air, devotional quiet",
+      "best_use_mode": "calm reflection"
+    },
+    {
+      "district_id": "district.dreamrelicc.guardian-vault",
+      "artist_id": "artist.dreamrelicc",
+      "district": "Guardian Vault",
+      "thesis": "Sentinel chamber watched by jeweled animal protectors",
+      "environment_weather": "dark stone, red eyes, chain gleams, ceremonial security",
+      "best_use_mode": "privacy / warnings"
+    },
+    {
+      "district_id": "district.karoline.mirabilia-specimen-hall",
+      "artist_id": "artist.karoline-georges",
+      "district": "MIRABILIA Specimen Hall",
+      "thesis": "Macro-scale gallery for exquisite algorithmic insects and animal hybrids",
+      "environment_weather": "white museum air, gold glints, glass cabinets, quiet wing movement",
+      "best_use_mode": "inspection / asset browsing"
+    },
+    {
+      "district_id": "district.karoline.physis-cocoon-studio",
+      "artist_id": "artist.karoline-georges",
+      "district": "PHYSIS Cocoon Studio",
+      "thesis": "Reversible transformation chamber for bodies, objects and living interface forms",
+      "environment_weather": "translucent mesh, breathing textiles, warm internal light, soft sutures",
+      "best_use_mode": "editing / transformation"
+    },
+    {
+      "district_id": "district.karoline.self-menagerie-aviary",
+      "artist_id": "artist.karoline-georges",
+      "district": "Self-Menagerie Aviary",
+      "thesis": "Mythic aviary where memory, narrative and algorithmic imagination become companion creatures",
+      "environment_weather": "feather dust, embroidered plumage, patchwork nests, watchful eyes",
+      "best_use_mode": "mascots / storytelling"
+    },
+    {
+      "district_id": "district.karoline.poiesis-anatomy-loom",
+      "artist_id": "artist.karoline-georges",
+      "district": "POIESIS Anatomy Loom",
+      "thesis": "Creation floor where text, image, sound, 3D form and living thread are woven together",
+      "environment_weather": "gold cords, suspended patterns, quiet machinery, virtual sculpture bays",
+      "best_use_mode": "authoring / synthesis"
+    },
+    {
+      "district_id": "district.saveroom.mooncastle-anchorage",
+      "artist_id": "artist.saveroom",
+      "district": "Mooncastle Anchorage",
+      "thesis": "Sailboat workspace beneath a moon-attached floating citadel",
+      "environment_weather": "clear water, moving sails, cloud towers, brass navigation fittings",
+      "best_use_mode": "navigation / project switching"
+    },
+    {
+      "district_id": "district.saveroom.paradise-zero-lagoon",
+      "artist_id": "artist.saveroom",
+      "district": "Azure Save Coast",
+      "thesis": "High-sun tropical shallows for bright low-pressure work",
+      "environment_weather": "aquamarine caustics, palms, sandbars, tiny islands and distant spires",
+      "best_use_mode": "productive calm / creation"
+    },
+    {
+      "district_id": "district.saveroom.sapphire-chain-obelisk",
+      "artist_id": "artist.saveroom",
+      "district": "Sapphire Chain Obelisk",
+      "thesis": "Locked memory and archival district centered on a monumental chained crystal",
+      "environment_weather": "floating rock, blue mineral glow, chain tension, deep ocean drop",
+      "best_use_mode": "vault / archive / protected state"
+    },
+    {
+      "district_id": "district.saveroom.angelhold-waterfall-garden",
+      "artist_id": "artist.saveroom",
+      "district": "Angelhold Waterfall Garden",
+      "thesis": "Restorative save sanctuary of flower-wing statues and celestial platforms",
+      "environment_weather": "waterfalls, angel stone, soft flowers, fish, star motes and music",
+      "best_use_mode": "save / recovery / deep focus"
+    }
+  ],
+  "aesthetic_dna": [
+    {
+      "artist_id": "artist.frawgy006",
+      "category": "Motifs",
+      "curated_dna": "frogs; mushrooms; lilypads; expressive eyes; fruit; flowers; soft creatures; organic rooms"
+    },
+    {
+      "artist_id": "artist.frawgy006",
+      "category": "Motion verbs",
+      "curated_dna": "squish; hop; bob; bloom; ripple; sprout; wobble; drink; stretch; settle"
+    },
+    {
+      "artist_id": "artist.frawgy006",
+      "category": "Typography direction",
+      "curated_dna": "friendly sculpted display lettering paired with highly readable rounded UI sans"
+    },
+    {
+      "artist_id": "artist.frawgy006",
+      "category": "Sound language",
+      "curated_dna": "dew plinks; rubbery pops; pond droplets; frog chirps; leaf rustle; soft bass bubbles"
+    },
+    {
+      "artist_id": "artist.frawgy006",
+      "category": "Search vocabulary",
+      "curated_dna": "surreal frog art; bioluminescent mushroom forest; playful alien swamp; candy bog; lilypad fantasy; organic toy architecture"
+    },
+    {
+      "artist_id": "artist.lightweaverart",
+      "category": "Motifs",
+      "curated_dna": "glowing eyes; blue runes; facial tattoos; freckles; piercings; synthetic hair; wet skin; neon ribbons"
+    },
+    {
+      "artist_id": "artist.lightweaverart",
+      "category": "Motion verbs",
+      "curated_dna": "ignite; trace; scan; weave; refract; flare; pulse; pierce; braid; dissolve"
+    },
+    {
+      "artist_id": "artist.lightweaverart",
+      "category": "Typography direction",
+      "curated_dna": "high-fashion condensed grotesk, technical microtext and custom runic accent glyphs"
+    },
+    {
+      "artist_id": "artist.lightweaverart",
+      "category": "Sound language",
+      "curated_dna": "glass ticks; iris hums; electric filament snaps; distant rain; low synth pressure; jeweled chimes"
+    },
+    {
+      "artist_id": "artist.lightweaverart",
+      "category": "Search vocabulary",
+      "curated_dna": "neon sigil portrait; cyberpunk face paint; luminous eye art; futuristic tattoo beauty; blue magenta editorial; cyber goth portrait"
+    },
+    {
+      "artist_id": "artist.dreamrelicc",
+      "category": "Motifs",
+      "curated_dna": "crosses; halos; glitter armor; saucers; stars; astronaut saints; ritual animals; cosmic windows; relics"
+    },
+    {
+      "artist_id": "artist.dreamrelicc",
+      "category": "Motion verbs",
+      "curated_dna": "ascend; hover; glint; bless; drift; process; align; consecrate; shimmer; orbit"
+    },
+    {
+      "artist_id": "artist.dreamrelicc",
+      "category": "Typography direction",
+      "curated_dna": "elegant liturgical display lettering paired with highly readable retro-futurist sans and instrument-grade data type"
+    },
+    {
+      "artist_id": "artist.dreamrelicc",
+      "category": "Sound language",
+      "curated_dna": "choir haze; tape-soft ambience; star chimes; chapel reverb; radio hiss; jeweled clicks; distant engines"
+    },
+    {
+      "artist_id": "artist.dreamrelicc",
+      "category": "Search vocabulary",
+      "curated_dna": "divine machinery art; sacred retrofuturism; religious sci fi; sparkly astronaut fashion; cathedral space art; jeweled flying saucer"
+    },
+    {
+      "artist_id": "artist.karoline-georges",
+      "category": "Motifs",
+      "curated_dna": "embroidered insects; porcelain anatomy; cameo portraits; hybrid birds; textile organs; gold sutures; cocoons; mutating bodies; algorithmic creatures"
+    },
+    {
+      "artist_id": "artist.karoline-georges",
+      "category": "Motion verbs",
+      "curated_dna": "molt; stitch; unfurl; pupate; breathe; articulate; reveal; graft; weave; emerge; remember; transfigure"
+    },
+    {
+      "artist_id": "artist.karoline-georges",
+      "category": "Typography direction",
+      "curated_dna": "museum-catalog serif and specimen labels paired with a clean scientific sans; optional embroidered display initials for world titles"
+    },
+    {
+      "artist_id": "artist.karoline-georges",
+      "category": "Sound language",
+      "curated_dna": "silk friction; wing tremor; porcelain ticks; loom movement; tiny gold chimes; breath; chamber strings; granular organic ambience"
+    },
+    {
+      "artist_id": "artist.karoline-georges",
+      "category": "Search vocabulary",
+      "curated_dna": "embroidered insect sculpture; rococo entomology art; post-organic textile anatomy; porcelain botanical creature; algorithmic metamorphosis art"
+    },
+    {
+      "artist_id": "artist.saveroom",
+      "category": "Motifs",
+      "curated_dna": "violet-haired navigator; floating gothic citadels; tropical shallows; sailboats; angel statues; moons; waterfalls; sapphire monoliths; starfall; flower coves"
+    },
+    {
+      "artist_id": "artist.saveroom",
+      "category": "Motion verbs",
+      "curated_dna": "sail; glide; ripple; save; ascend; drift; cascade; shimmer; orbit; remember; respawn; arrive"
+    },
+    {
+      "artist_id": "artist.saveroom",
+      "category": "Typography direction",
+      "curated_dna": "ornate fantasy-game display serif paired with clean PS2-era menu sans and small memory-card status labels"
+    },
+    {
+      "artist_id": "artist.saveroom",
+      "category": "Sound language",
+      "curated_dna": "aquatic ambient pads; gentle breakbeats; memory-card chimes; wave wash; distant choir; waterfall noise; soft FM bells; nostalgic game-console texture"
+    },
+    {
+      "artist_id": "artist.saveroom",
+      "category": "Search vocabulary",
+      "curated_dna": "PS2 fantasy island aesthetic; Dreamcast tropical fantasy; Y2K 3D CGI ocean castle; Frutiger Aero fantasy game; 2000s fantasy game ambience"
+    }
+  ],
+  "weather": [
+    {
+      "weather_id": "weather.frawgy.dew-bloom",
+      "artist_id": "artist.frawgy006",
+      "weather_state": "Dew Bloom",
+      "intensity": "gentle",
+      "behavior": "Large droplets gather on leaves and panels, then release tiny blossoms after successful actions.",
+      "triggers_routing": "success, morning, calm work",
+      "performance_accessibility_guardrails": "No text obstruction; reduced-motion uses static dew highlights."
+    },
+    {
+      "weather_id": "weather.frawgy.spore-shower",
+      "artist_id": "artist.frawgy006",
+      "weather_state": "Spore Shower",
+      "intensity": "medium",
+      "behavior": "Soft luminous spores drift in bounded currents and settle on nearby world objects.",
+      "triggers_routing": "night, idle, discovery",
+      "performance_accessibility_guardrails": "Low density near controls; no constant GPU-heavy fog."
+    },
+    {
+      "weather_id": "weather.frawgy.candy-rain",
+      "artist_id": "artist.frawgy006",
+      "weather_state": "Candy Rain",
+      "intensity": "playful",
+      "behavior": "Short rare shower of translucent candy beads that bounce only in side-world lanes.",
+      "triggers_routing": "reward, arcade district",
+      "performance_accessibility_guardrails": "Never cover the work corridor; fully interruptible."
+    },
+    {
+      "weather_id": "weather.frawgy.moon-mist",
+      "artist_id": "artist.frawgy006",
+      "weather_state": "Lilypad Moon Mist",
+      "intensity": "gentle",
+      "behavior": "Violet low fog curls around lilypad edges with slow silver pollen.",
+      "triggers_routing": "purple variant, deep focus",
+      "performance_accessibility_guardrails": "Reduced-motion becomes a still layered gradient."
+    },
+    {
+      "weather_id": "weather.lightweaver.neon-rain",
+      "artist_id": "artist.lightweaverart",
+      "weather_state": "Chromatic Neon Rain",
+      "intensity": "medium",
+      "behavior": "Thin rain filaments refract magenta, cobalt and green signage into moving highlights.",
+      "triggers_routing": "night, browsing, transitions",
+      "performance_accessibility_guardrails": "Keep central text contrast stable; muted mode removes flashes."
+    },
+    {
+      "weather_id": "weather.lightweaver.sigil-storm",
+      "artist_id": "artist.lightweaverart",
+      "weather_state": "Electric Sigil Storm",
+      "intensity": "dramatic",
+      "behavior": "Rare glyph lightning briefly traces a valid causal path through related UI and scenery.",
+      "triggers_routing": "major build, warning, rare event",
+      "performance_accessibility_guardrails": "No random strobe; photosensitivity-safe alternate is a slow glow trace."
+    },
+    {
+      "weather_id": "weather.lightweaver.iris-haze",
+      "artist_id": "artist.lightweaverart",
+      "weather_state": "Iris Signal Haze",
+      "intensity": "gentle",
+      "behavior": "Lens-like spectral haze sharpens around the currently selected entity.",
+      "triggers_routing": "analysis, selection",
+      "performance_accessibility_guardrails": "Never blur actual text or controls."
+    },
+    {
+      "weather_id": "weather.lightweaver.glass-condensation",
+      "artist_id": "artist.lightweaverart",
+      "weather_state": "Glass-Skin Condensation",
+      "intensity": "subtle",
+      "behavior": "Condensation forms on world glass and clears where the pointer passes.",
+      "triggers_routing": "rain, idle",
+      "performance_accessibility_guardrails": "Pointer clearing is decorative and never changes hit testing."
+    },
+    {
+      "weather_id": "weather.dreamrelicc.star-incense",
+      "artist_id": "artist.dreamrelicc",
+      "weather_state": "Star Incense",
+      "intensity": "gentle",
+      "behavior": "Fine silver particles descend like incense ash and become tiny stars before fading near the workspace edges.",
+      "triggers_routing": "idle, reading, calm focus",
+      "performance_accessibility_guardrails": "Never pass over primary text; reduced-motion becomes a slow static sparkle field."
+    },
+    {
+      "weather_id": "weather.dreamrelicc.halo-flare",
+      "artist_id": "artist.dreamrelicc",
+      "weather_state": "Halo Flare",
+      "intensity": "medium",
+      "behavior": "Selected objects receive a soft ring of sanctified light that expands once and settles into a crisp halo.",
+      "triggers_routing": "selection, confirmation, spotlighting",
+      "performance_accessibility_guardrails": "One pulse only; no strobing or repeated bloom."
+    },
+    {
+      "weather_id": "weather.dreamrelicc.relic-drift",
+      "artist_id": "artist.dreamrelicc",
+      "weather_state": "Relic Drift",
+      "intensity": "playful",
+      "behavior": "Tiny jewel sparks and micro-stars drift sideways as if guided by a passing orbital current.",
+      "triggers_routing": "transitions, browsing, market district",
+      "performance_accessibility_guardrails": "Bounded side-lane only; no obstruction of controls."
+    },
+    {
+      "weather_id": "weather.dreamrelicc.red-eye-omen",
+      "artist_id": "artist.dreamrelicc",
+      "weather_state": "Red-Eye Omen",
+      "intensity": "dramatic",
+      "behavior": "For high-priority warnings, sentinel red eye-lines wake briefly across relevant guardians and alerts.",
+      "triggers_routing": "errors, conflicts, security states",
+      "performance_accessibility_guardrails": "Short duration, low frequency, photosensitivity-safe alternate is a static red accent."
+    },
+    {
+      "weather_id": "weather.karoline.gold-threadfall",
+      "artist_id": "artist.karoline-georges",
+      "weather_state": "Gold Threadfall",
+      "intensity": "gentle",
+      "behavior": "Hair-fine golden threads descend through side-world space and briefly stitch related panels into a visible causal constellation.",
+      "triggers_routing": "successful synthesis, related selections, quiet focus",
+      "performance_accessibility_guardrails": "Never cross primary text; reduced-motion uses static gold-thread connectors."
+    },
+    {
+      "weather_id": "weather.karoline.wing-pollen",
+      "artist_id": "artist.karoline-georges",
+      "weather_state": "Wing Pollen",
+      "intensity": "playful",
+      "behavior": "Soft dust from embroidered wings drifts toward newly discovered objects and settles as tiny botanical marks.",
+      "triggers_routing": "discovery, browsing, mascot activity",
+      "performance_accessibility_guardrails": "Bounded density, no respiratory realism, no control obstruction."
+    },
+    {
+      "weather_id": "weather.karoline.silk-veil",
+      "artist_id": "artist.karoline-georges",
+      "weather_state": "Silk Veil",
+      "intensity": "calm",
+      "behavior": "A translucent textile haze passes behind the work plane, revealing stitched patterns only where attention lingers.",
+      "triggers_routing": "reading, deep focus, night states",
+      "performance_accessibility_guardrails": "Background-only; reduced-motion becomes a still layered textile."
+    },
+    {
+      "weather_id": "weather.karoline.porcelain-hairline",
+      "artist_id": "artist.karoline-georges",
+      "weather_state": "Porcelain Hairline",
+      "intensity": "dramatic",
+      "behavior": "Warnings create one fine crack of light across the affected object, exposing a warm inner glow rather than shattering it.",
+      "triggers_routing": "conflict, invalid state, integrity warning",
+      "performance_accessibility_guardrails": "Single non-flashing trace; no screen-wide cracking; repair animation begins immediately after resolution."
+    },
+    {
+      "weather_id": "weather.saveroom.sunshower-bloom",
+      "artist_id": "artist.saveroom",
+      "weather_state": "Sunshower Bloom",
+      "intensity": "gentle",
+      "behavior": "Bright droplets cross sunlit shallows while water caustics climb nearby island panels and tiny flowers open after successful actions.",
+      "triggers_routing": "morning, success, Azure Save Coast",
+      "performance_accessibility_guardrails": "No glare over text; reduced-motion uses static caustic highlights and a single flower state change."
+    },
+    {
+      "weather_id": "weather.saveroom.moonfall-threads",
+      "artist_id": "artist.saveroom",
+      "weather_state": "Moonfall Threads",
+      "intensity": "medium",
+      "behavior": "Lavender meteor strands descend over distant skyline layers and briefly connect related navigation points as constellations.",
+      "triggers_routing": "night, discovery, cross-workspace relationships",
+      "performance_accessibility_guardrails": "No strobe or rapid flashes; central work corridor remains clear."
+    },
+    {
+      "weather_id": "weather.saveroom.sapphire-tide",
+      "artist_id": "artist.saveroom",
+      "weather_state": "Sapphire Tide",
+      "intensity": "playful",
+      "behavior": "A slow translucent tide raises and lowers side-world water, floating loose scenery and revealing submerged save glyphs.",
+      "triggers_routing": "browsing, idle, archive transitions",
+      "performance_accessibility_guardrails": "Never moves functional controls or changes hit targets; effects remain decorative outside the work plane."
+    },
+    {
+      "weather_id": "weather.saveroom.lavender-afterglow",
+      "artist_id": "artist.saveroom",
+      "weather_state": "Lavender Afterglow",
+      "intensity": "gentle",
+      "behavior": "Clouds turn violet and peach, window lights awaken and shoreline flowers softly reflect the current project mood.",
+      "triggers_routing": "evening, completion, sanctuary mode",
+      "performance_accessibility_guardrails": "Preserve contrast and color-independent state indicators; low-effects mode uses a static accessible gradient."
+    }
+  ],
+  "timeflow": [
+    {
+      "timeflow_id": "time.frawgy.dawn",
+      "artist_id": "artist.frawgy006",
+      "phase": "Dawn",
+      "visual_state": "Mossy blue-green light, opening flowers, dew-heavy surfaces",
+      "use_mode": "quiet ambient, gentle wake-up"
+    },
+    {
+      "timeflow_id": "time.frawgy.day",
+      "artist_id": "artist.frawgy006",
+      "phase": "Day",
+      "visual_state": "Warm canopy shafts, active frogs, saturated greens and coral accents",
+      "use_mode": "productive, playful"
+    },
+    {
+      "timeflow_id": "time.frawgy.dusk",
+      "artist_id": "artist.frawgy006",
+      "phase": "Dusk",
+      "visual_state": "Peach pond reflections, firefly pollen, slower creature movement",
+      "use_mode": "social, transition"
+    },
+    {
+      "timeflow_id": "time.frawgy.night",
+      "artist_id": "artist.frawgy006",
+      "phase": "Night",
+      "visual_state": "Violet moonwater, glowing fungi and nocturnal eye highlights",
+      "use_mode": "deep focus, dreamlike"
+    },
+    {
+      "timeflow_id": "time.lightweaver.silver-noon",
+      "artist_id": "artist.lightweaverart",
+      "phase": "Silver Studio Noon",
+      "visual_state": "Controlled white-silver portrait light with crisp ink and chrome",
+      "use_mode": "editing, inspection"
+    },
+    {
+      "timeflow_id": "time.lightweaver.blue-hour",
+      "artist_id": "artist.lightweaverart",
+      "phase": "Cobalt Blue Hour",
+      "visual_state": "Blue hair and black markings dominate while magenta begins to ignite",
+      "use_mode": "browsing, setup"
+    },
+    {
+      "timeflow_id": "time.lightweaver.magenta-midnight",
+      "artist_id": "artist.lightweaverart",
+      "phase": "Magenta Midnight",
+      "visual_state": "Dark negative space, luminous eyes, saturated pink and violet accents",
+      "use_mode": "cinematic focus"
+    },
+    {
+      "timeflow_id": "time.lightweaver.signal-dawn",
+      "artist_id": "artist.lightweaverart",
+      "phase": "Acid Signal Dawn",
+      "visual_state": "Green-blue signal sweeps break through the night palette",
+      "use_mode": "completion, system recovery"
+    },
+    {
+      "timeflow_id": "time.dreamrelicc.matins",
+      "artist_id": "artist.dreamrelicc",
+      "phase": "Orbit Matins",
+      "visual_state": "Pale silver dawn across stations and domes; cool star residue on glass",
+      "use_mode": "quiet setup"
+    },
+    {
+      "timeflow_id": "time.dreamrelicc.zenith",
+      "artist_id": "artist.dreamrelicc",
+      "phase": "Solar Mass",
+      "visual_state": "Bright chapel-white highlight state with gold accents and crisp instrument visibility",
+      "use_mode": "structured productivity"
+    },
+    {
+      "timeflow_id": "time.dreamrelicc.vespers",
+      "artist_id": "artist.dreamrelicc",
+      "phase": "Vesper Procession",
+      "visual_state": "Warm market lamps, incense haze and stronger jewel sparkle across night architecture",
+      "use_mode": "browsing / social"
+    },
+    {
+      "timeflow_id": "time.dreamrelicc.midnight",
+      "artist_id": "artist.dreamrelicc",
+      "phase": "Midnight Apotheosis",
+      "visual_state": "Black velvet cosmos, radiant stars, red eye sentinels and devotional glitter in deep contrast",
+      "use_mode": "deep focus / ritual"
+    },
+    {
+      "timeflow_id": "time.karoline.cabinet-morning",
+      "artist_id": "artist.karoline-georges",
+      "phase": "Cabinet Morning",
+      "visual_state": "Ivory museum light, pale blue textiles, dew-bright gold thread and slowly waking antennae",
+      "use_mode": "setup / inspection"
+    },
+    {
+      "timeflow_id": "time.karoline.botanical-noon",
+      "artist_id": "artist.karoline-georges",
+      "phase": "Botanical Noon",
+      "visual_state": "Sage and tissue-pink relief, clear specimen detail and active loom movement",
+      "use_mode": "authoring / transformation"
+    },
+    {
+      "timeflow_id": "time.karoline.imago-dusk",
+      "artist_id": "artist.karoline-georges",
+      "phase": "Imago Dusk",
+      "visual_state": "Amber resin light, long embroidered shadows and slow wing emergence",
+      "use_mode": "review / storytelling"
+    },
+    {
+      "timeflow_id": "time.karoline.menagerie-night",
+      "artist_id": "artist.karoline-georges",
+      "phase": "Menagerie Night",
+      "visual_state": "Velvet black, burgundy brocade, reflective eyes and softly luminous internal anatomy",
+      "use_mode": "deep focus / contemplative"
+    },
+    {
+      "timeflow_id": "time.saveroom.paradise-noon",
+      "artist_id": "artist.saveroom",
+      "phase": "Paradise Noon",
+      "visual_state": "Cobalt sky, brilliant aquamarine shallows, hard cloud edges and active sail traffic",
+      "use_mode": "creation / energetic calm"
+    },
+    {
+      "timeflow_id": "time.saveroom.blue-hour-voyage",
+      "artist_id": "artist.saveroom",
+      "phase": "Blue-Hour Voyage",
+      "visual_state": "Citadel windows begin to glow while water deepens and moon structures emerge through clouds",
+      "use_mode": "navigation / review"
+    },
+    {
+      "timeflow_id": "time.saveroom.lavender-sunset",
+      "artist_id": "artist.saveroom",
+      "phase": "Lavender Sunset",
+      "visual_state": "Peach-gold horizon, purple clouds, reflected flowers and slow shoreline water",
+      "use_mode": "wind-down / social"
+    },
+    {
+      "timeflow_id": "time.saveroom.starcaller-midnight",
+      "artist_id": "artist.saveroom",
+      "phase": "Starcaller Midnight",
+      "visual_state": "Full moon, meteor threads, blue city lights, waterfall mist and luminous sanctuary glyphs",
+      "use_mode": "deep focus / restoration"
+    }
+  ],
+  "interactions": [
+    {
+      "artist_id": "artist.frawgy006",
+      "interaction": "Press",
+      "theme_native_response": "Surface compresses like leaf-gel; nearby dew shifts toward contact point.",
+      "input_sovereignty_guardrails": "Immediate state change; effect follows and can be cancelled."
+    },
+    {
+      "artist_id": "artist.frawgy006",
+      "interaction": "Drag",
+      "theme_native_response": "Object stretches a soft vine tether and tilts by apparent mass.",
+      "input_sovereignty_guardrails": "No pointer capture loss; tether snaps back cleanly on cancel."
+    },
+    {
+      "artist_id": "artist.frawgy006",
+      "interaction": "Drop",
+      "theme_native_response": "Lilypad ripple propagates only to nearby relevant objects.",
+      "input_sovereignty_guardrails": "Bounded radius and attention budget."
+    },
+    {
+      "artist_id": "artist.frawgy006",
+      "interaction": "Delete",
+      "theme_native_response": "Object is gently swallowed by a flower or dissolves into spores; nearby light warms briefly red-coral.",
+      "input_sovereignty_guardrails": "Undo restores from the same flower with no delay."
+    },
+    {
+      "artist_id": "artist.frawgy006",
+      "interaction": "Add",
+      "theme_native_response": "New item sprouts, unfolds or hatches; environment responds with a faint green glow.",
+      "input_sovereignty_guardrails": "No blocking flourish."
+    },
+    {
+      "artist_id": "artist.lightweaverart",
+      "interaction": "Hover",
+      "theme_native_response": "A thin iris scan and filament edge reveal depth without brightening all content.",
+      "input_sovereignty_guardrails": "No flashing; preserve contrast."
+    },
+    {
+      "artist_id": "artist.lightweaverart",
+      "interaction": "Press",
+      "theme_native_response": "A sigil ignites under contact, then resolves into the real selected state.",
+      "input_sovereignty_guardrails": "State is authoritative and instantaneous."
+    },
+    {
+      "artist_id": "artist.lightweaverart",
+      "interaction": "Drag",
+      "theme_native_response": "Light fibers braid behind the object according to direction and velocity.",
+      "input_sovereignty_guardrails": "Fibers are renderer-only and never alter layout geometry."
+    },
+    {
+      "artist_id": "artist.lightweaverart",
+      "interaction": "Drop",
+      "theme_native_response": "Filaments tighten into a clean glyph and emit a jeweled click.",
+      "input_sovereignty_guardrails": "Bounded to target region."
+    },
+    {
+      "artist_id": "artist.lightweaverart",
+      "interaction": "Error",
+      "theme_native_response": "Blue glyph fractures into a readable red-magenta diagnostic seam.",
+      "input_sovereignty_guardrails": "No vague glitch effect; error text remains explicit."
+    },
+    {
+      "artist_id": "artist.dreamrelicc",
+      "interaction": "Hover",
+      "theme_native_response": "A precise halo tracer appears around the active object, with a faint star-ping at valid points of focus.",
+      "input_sovereignty_guardrails": "No blur over text; ring remains thin and high-contrast."
+    },
+    {
+      "artist_id": "artist.dreamrelicc",
+      "interaction": "Focus",
+      "theme_native_response": "The active panel is treated like a reliquary, gaining a chapel spotlight and slightly dimmed surroundings.",
+      "input_sovereignty_guardrails": "Dim only nonessential zones; keyboard focus remains explicit."
+    },
+    {
+      "artist_id": "artist.dreamrelicc",
+      "interaction": "Add",
+      "theme_native_response": "New items descend as consecrated modules, locking into place with a silver sparkle and soft choir shimmer.",
+      "input_sovereignty_guardrails": "Zero blocking delay; can be disabled in low-effects mode."
+    },
+    {
+      "artist_id": "artist.dreamrelicc",
+      "interaction": "Delete",
+      "theme_native_response": "Removed items dissolve into star ash while nearby gold accents briefly warm to ember red.",
+      "input_sovereignty_guardrails": "Undo restores instantly from the same location."
+    },
+    {
+      "artist_id": "artist.dreamrelicc",
+      "interaction": "Warning / Conflict",
+      "theme_native_response": "Guardian eyes awaken, a red line passes once through the affected route, and related shrine indicators open.",
+      "input_sovereignty_guardrails": "Single pass only; never global full-screen flashing."
+    },
+    {
+      "artist_id": "artist.karoline-georges",
+      "interaction": "Hover",
+      "theme_native_response": "A macro lens reveals stitch direction, material grain and internal layers around the pointed object.",
+      "input_sovereignty_guardrails": "No magnification jump under the cursor; text remains stable and readable."
+    },
+    {
+      "artist_id": "artist.karoline-georges",
+      "interaction": "Press",
+      "theme_native_response": "Textile surfaces compress while porcelain edges hold rigid; nearby gold thread tightens toward the contact point.",
+      "input_sovereignty_guardrails": "State changes immediately; no interaction delay or sticky pointer capture."
+    },
+    {
+      "artist_id": "artist.karoline-georges",
+      "interaction": "Drag",
+      "theme_native_response": "A gold suture tether flexes according to apparent mass while feathers, wings or cloth trail by direction and velocity.",
+      "input_sovereignty_guardrails": "Tether is visual only, fully interruptible and never changes hit testing."
+    },
+    {
+      "artist_id": "artist.karoline-georges",
+      "interaction": "Add",
+      "theme_native_response": "A small cocoon opens, the new item unfolds from mesh and embroidery, then settles into its functional form.",
+      "input_sovereignty_guardrails": "No blocking flourish; low-effects mode uses a single stitched outline."
+    },
+    {
+      "artist_id": "artist.karoline-georges",
+      "interaction": "Delete / Undo",
+      "theme_native_response": "The item molts into a translucent exuvia that remains as the undo anchor; undo rehydrates the original from the same shell.",
+      "input_sovereignty_guardrails": "Undo is immediate and preserves exact state, position and selection."
+    },
+    {
+      "artist_id": "artist.saveroom",
+      "interaction": "Hover / Focus",
+      "theme_native_response": "A thin celestial save-ring aligns beneath the target while a distant map marker and nearby water reflection acknowledge the same focus cause.",
+      "input_sovereignty_guardrails": "No focus delay, no bloom over labels and full keyboard-visible fallback."
+    },
+    {
+      "artist_id": "artist.saveroom",
+      "interaction": "Press / Activate",
+      "theme_native_response": "The control depresses like a brass memory-card seal, sends one circular water ripple outward and resolves with a small checkpoint chime.",
+      "input_sovereignty_guardrails": "State changes immediately on activation; audio is optional and the ripple can be interrupted."
+    },
+    {
+      "artist_id": "artist.saveroom",
+      "interaction": "Drag / Reorder",
+      "theme_native_response": "The dragged item becomes a tiny navigable island or boat, leaving a wake whose width and curve reflect velocity and direction.",
+      "input_sovereignty_guardrails": "Pointer capture remains authoritative; wake never affects hit testing and cancels cleanly."
+    },
+    {
+      "artist_id": "artist.saveroom",
+      "interaction": "Add / Spawn",
+      "theme_native_response": "A new item rises from beneath the water as a mapped island, sheds droplets and lights one citadel window when persistence succeeds.",
+      "input_sovereignty_guardrails": "No blocking reveal; persistence failure prevents the success light and reports truthfully."
+    },
+    {
+      "artist_id": "artist.saveroom",
+      "interaction": "Delete / Undo",
+      "theme_native_response": "The item dissolves into blue map pixels and bubbles that flow toward the nearest save shrine; undo reverses the tide and restores exact state and position.",
+      "input_sovereignty_guardrails": "Undo is immediate, deterministic and available before the visual trail finishes."
+    }
+  ],
+  "music_routes": [
+    {
+      "playlist_id": "pl.frawgy.psyforest",
+      "artist_id": "artist.frawgy006",
+      "playlist": "Psychedelic Forest Ambience",
+      "suggested_routing": "ambient world bed",
+      "spotify_uri": "spotify:playlist:67Q776MrKW5Snr3niR2DDo",
+      "open_in_spotify": "https://open.spotify.com/playlist/67Q776MrKW5Snr3niR2DDo?utm_source=openai&utm_medium=chatgpt&go=1&nap_web=1&request_id=12071323-50fd-489c-93af-602adf97a2ed&nl=spotify%3Anl%3ACAASEBIHEyNQ%2FUick69gKt%2BXou0aGDk6NjdRNzc2TXJLVzVTbnIzbmlSMkREbyADMAPgAzXoA6O5yej8M%2FADoAQ%3D&redirect_uri=com.openai.chat%3A%2F%2F",
+      "approval_status": "CANDIDATE",
+      "curator_notes": "Best match for nocturnal marsh and spore districts; review track-by-track before approval."
+    },
+    {
+      "playlist_id": "pl.frawgy.goblin",
+      "artist_id": "artist.frawgy006",
+      "playlist": "🍄Goblincore Vibes🍄",
+      "suggested_routing": "playful forest district",
+      "spotify_uri": "spotify:playlist:32QmG5PzFV9GyWaTqOKba5",
+      "open_in_spotify": "https://open.spotify.com/playlist/32QmG5PzFV9GyWaTqOKba5?utm_source=openai&utm_medium=chatgpt&go=1&nap_web=1&request_id=0ae56953-edf5-4552-a5c4-3cc03e32da1c&nl=spotify%3Anl%3ACAASEArlaVPt9UVSpcQ8wD4y2hwaGDk6MzJRbUc1UHpGVjlHeVdhVHFPS2JhNSADMAPgAzXoA4mwyuj8M%2FADIA%3D%3D&redirect_uri=com.openai.chat%3A%2F%2F",
+      "approval_status": "CANDIDATE",
+      "curator_notes": "Potentially useful for village and creature-social states."
+    },
+    {
+      "playlist_id": "pl.frawgy.instrumental",
+      "artist_id": "artist.frawgy006",
+      "playlist": "🪲Instrumental goblincore🍄",
+      "suggested_routing": "focus / instrumental",
+      "spotify_uri": "spotify:playlist:5yFzKvFIaSsDfiWW2QzFpX",
+      "open_in_spotify": "https://open.spotify.com/playlist/5yFzKvFIaSsDfiWW2QzFpX?utm_source=openai&utm_medium=chatgpt&go=1&nap_web=1&request_id=0ae56953-edf5-4552-a5c4-3cc03e32da1c&nl=spotify%3Anl%3ACAASEArlaVPt9UVSpcQ8wD4y2hwaGDk6NXlGekt2RklhU3NEZmlXVzJRekZwWCADMAPgAzXoA4mwyuj8M%2FADIA%3D%3D&redirect_uri=com.openai.chat%3A%2F%2F",
+      "approval_status": "CANDIDATE",
+      "curator_notes": "Likely better for work sessions than vocal-heavy novelty playlists."
+    },
+    {
+      "playlist_id": "pl.frawgy.fairy",
+      "artist_id": "artist.frawgy006",
+      "playlist": "Fairycore lofi | lofi for fairies | fayri vibes",
+      "suggested_routing": "soft purple focus",
+      "spotify_uri": "spotify:playlist:2gHqkw2Wec430eooQio4K9",
+      "open_in_spotify": "https://open.spotify.com/playlist/2gHqkw2Wec430eooQio4K9?utm_source=openai&utm_medium=chatgpt&go=1&nap_web=1&request_id=0ae56953-edf5-4552-a5c4-3cc03e32da1c&nl=spotify%3Anl%3ACAASEArlaVPt9UVSpcQ8wD4y2hwaGDk6MmdIcWt3MldlYzQzMGVvb1FpbzRLOSADMAPgAzXoA4mwyuj8M%2FADIA%3D%3D&redirect_uri=com.openai.chat%3A%2F%2F",
+      "approval_status": "CANDIDATE",
+      "curator_notes": "Candidate for Lilypad Nocturne; avoid generic fairy drift if tracks lack Frawgy playfulness."
+    },
+    {
+      "playlist_id": "pl.lightweaver.japan",
+      "artist_id": "artist.lightweaverart",
+      "playlist": "japanese synthwave cyberpunk",
+      "suggested_routing": "neon portrait / street",
+      "spotify_uri": "spotify:playlist:3cjPGFYaJO7uBCUYtnXnN4",
+      "open_in_spotify": "https://open.spotify.com/playlist/3cjPGFYaJO7uBCUYtnXnN4?utm_source=openai&utm_medium=chatgpt&go=1&nap_web=1&request_id=99ea5ec5-2a45-41d4-96b0-6c35fca2f496&nl=spotify%3Anl%3ACAASEJnqXsUqRUHUlrBsNfyi9JYaGDk6M2NqUEdGWWFKTzd1QkNVWXRuWG5ONCADMAPgAzXoA77syuj8M%2FADIA%3D%3D&redirect_uri=com.openai.chat%3A%2F%2F",
+      "approval_status": "CANDIDATE",
+      "curator_notes": "Strong for chromatic portrait motion and neon alley states."
+    },
+    {
+      "playlist_id": "pl.lightweaver.dark2026",
+      "artist_id": "artist.lightweaverart",
+      "playlist": "Dark Synthwave 2026",
+      "suggested_routing": "high-energy night",
+      "spotify_uri": "spotify:playlist:3gmpLUPjxqgEAyeT793OpE",
+      "open_in_spotify": "https://open.spotify.com/playlist/3gmpLUPjxqgEAyeT793OpE?utm_source=openai&utm_medium=chatgpt&go=1&nap_web=1&request_id=99ea5ec5-2a45-41d4-96b0-6c35fca2f496&nl=spotify%3Anl%3ACAASEJnqXsUqRUHUlrBsNfyi9JYaGDk6M2dtcExVUGp4cWdFQXllVDc5M09wRSADMAPgAzXoA77syuj8M%2FADIA%3D%3D&redirect_uri=com.openai.chat%3A%2F%2F",
+      "approval_status": "CANDIDATE",
+      "curator_notes": "Candidate for dramatic interactions; likely too aggressive for default work mode."
+    },
+    {
+      "playlist_id": "pl.lightweaver.bladerunner",
+      "artist_id": "artist.lightweaverart",
+      "playlist": "Blade Runner Vibes / Synth wave / Night Driving",
+      "suggested_routing": "rain ambience / night drive",
+      "spotify_uri": "spotify:playlist:2CiqzE8dKtmgpWAR6TbTIF",
+      "open_in_spotify": "https://open.spotify.com/playlist/2CiqzE8dKtmgpWAR6TbTIF?utm_source=openai&utm_medium=chatgpt&go=1&nap_web=1&request_id=99ea5ec5-2a45-41d4-96b0-6c35fca2f496&nl=spotify%3Anl%3ACAASEJnqXsUqRUHUlrBsNfyi9JYaGDk6MkNpcXpFOGRLdG1ncFdBUjZUYlRJRiADMAPgAzXoA77syuj8M%2FADIA%3D%3D&redirect_uri=com.openai.chat%3A%2F%2F",
+      "approval_status": "CANDIDATE",
+      "curator_notes": "Useful mood reference, but theme must not become a Blade Runner imitation."
+    },
+    {
+      "playlist_id": "pl.lightweaver.ambient",
+      "artist_id": "artist.lightweaverart",
+      "playlist": "Ambient Cyberpunk Aesthetic",
+      "suggested_routing": "deep focus ambience",
+      "spotify_uri": "spotify:playlist:5YaENkqeE9CnQJYwztoxfX",
+      "open_in_spotify": "https://open.spotify.com/playlist/5YaENkqeE9CnQJYwztoxfX?utm_source=openai&utm_medium=chatgpt&go=1&nap_web=1&request_id=8f5f2390-27ac-4cbb-97d7-476afbb5316b&nl=spotify%3Anl%3ACAASEI9fI5AnrEy7l9dHavu1MWsaGDk6NVlhRU5rcWVFOUNuUUpZd3p0b3hmWCADMAPgAzXoA7D%2BxOj8M%2FADIA%3D%3D&redirect_uri=com.openai.chat%3A%2F%2F",
+      "approval_status": "CANDIDATE",
+      "curator_notes": "Likely best default work-mode candidate pending track review."
+    },
+    {
+      "playlist_id": "pl.dreamrelicc.search.cosmic-spiritual-ambient",
+      "artist_id": "artist.dreamrelicc",
+      "playlist": "Spotify search: cosmic spiritual ambient",
+      "suggested_routing": "ambient world bed / grotto",
+      "spotify_uri": "",
+      "open_in_spotify": "https://open.spotify.com/search/cosmic%20spiritual%20ambient/playlists",
+      "approval_status": "SEARCH_ROUTE",
+      "curator_notes": "Use to find spacious reverent ambience for Cathedral Orbit and Moss Reliquary Grotto."
+    },
+    {
+      "playlist_id": "pl.dreamrelicc.search.space-age-lounge",
+      "artist_id": "artist.dreamrelicc",
+      "playlist": "Spotify search: space age lounge",
+      "suggested_routing": "cockpit / browsing / retrofuturist lounge",
+      "spotify_uri": "",
+      "open_in_spotify": "https://open.spotify.com/search/space%20age%20lounge/playlists",
+      "approval_status": "SEARCH_ROUTE",
+      "curator_notes": "Good starting route for silver-console glamour and orbital lounge states."
+    },
+    {
+      "playlist_id": "pl.dreamrelicc.search.dark-sacred-synth",
+      "artist_id": "artist.dreamrelicc",
+      "playlist": "Spotify search: dark sacred synth",
+      "suggested_routing": "warning / guardian / dramatic build",
+      "spotify_uri": "",
+      "open_in_spotify": "https://open.spotify.com/search/dark%20sacred%20synth/playlists",
+      "approval_status": "SEARCH_ROUTE",
+      "curator_notes": "Use for Guardian Vault, Red-Eye Omen and dramatic processional moods."
+    },
+    {
+      "playlist_id": "pl.dreamrelicc.search.celestial-choir-electronic",
+      "artist_id": "artist.dreamrelicc",
+      "playlist": "Spotify search: celestial choir electronic",
+      "suggested_routing": "reverent focus / celestial climax",
+      "spotify_uri": "",
+      "open_in_spotify": "https://open.spotify.com/search/celestial%20choir%20electronic/playlists",
+      "approval_status": "SEARCH_ROUTE",
+      "curator_notes": "Useful route when you want devotional choral texture fused with electronic space atmospheres."
+    },
+    {
+      "playlist_id": "pl.karoline.inspired",
+      "artist_id": "artist.karoline-georges",
+      "playlist": "Karoline Georges Inspired",
+      "suggested_routing": "whole-world exploratory bed",
+      "spotify_uri": "spotify:playlist:4L1f6YRSBUWhBetr5khTQF",
+      "open_in_spotify": "https://open.spotify.com/playlist/4L1f6YRSBUWhBetr5khTQF?utm_source=openai&utm_medium=chatgpt&go=1&nap_web=1&request_id=6bc87818-2e19-4ce7-a95f-7d4c4ad2ec5d&nl=spotify%3Anl%3ACAASEGvIeBguGUznqV99TErS7F0aGDk6NEwxZjZZUlNCVVdoQmV0cjVraFRRRiADMAPgAzXoA7zwj%2Br8M%2FADoAQ%3D&redirect_uri=com.openai.chat%3A%2F%2F",
+      "approval_status": "GENERATIVE_CANDIDATE",
+      "curator_notes": "Personalized Spotify-generated starting point; listen and approve track-by-track before release routing."
+    },
+    {
+      "playlist_id": "pl.karoline.baroque-electro",
+      "artist_id": "artist.karoline-georges",
+      "playlist": "Baroque Electro / Neo Classical / Medieval Electronic / \" Artcore \"",
+      "suggested_routing": "Entomorphosis Cabinet / active creation",
+      "spotify_uri": "spotify:playlist:53zw4kcDOaZHUzj2sIgL7h",
+      "open_in_spotify": "https://open.spotify.com/playlist/53zw4kcDOaZHUzj2sIgL7h?utm_source=openai&utm_medium=chatgpt&go=1&nap_web=1&request_id=51011f47-1150-4a57-bbf4-53f5618df5ff&nl=spotify%3Anl%3ACAASEFEBH0cRUEpXu%2FRT9WGN9f8aGDk6NTN6dzRrY0RPYVpIVXpqMnNJZ0w3aCADMAPgAzXoA5ubk%2Br8M%2FADIA%3D%3D&redirect_uri=com.openai.chat%3A%2F%2F",
+      "approval_status": "CANDIDATE",
+      "curator_notes": "Potential fit for ornate specimen machinery and museum-scale motion."
+    },
+    {
+      "playlist_id": "pl.karoline.dark-neoclassical",
+      "artist_id": "artist.karoline-georges",
+      "playlist": "Dark Ambient, Neoclassical, Darkwave & Ethereal Gothic",
+      "suggested_routing": "Menagerie Night / contemplative states",
+      "spotify_uri": "spotify:playlist:7IKu1ZDqlELKxF6uK8Rn2T",
+      "open_in_spotify": "https://open.spotify.com/playlist/7IKu1ZDqlELKxF6uK8Rn2T?utm_source=openai&utm_medium=chatgpt&go=1&nap_web=1&request_id=51011f47-1150-4a57-bbf4-53f5618df5ff&nl=spotify%3Anl%3ACAASEFEBH0cRUEpXu%2FRT9WGN9f8aGDk6N0lLdTFaRHFsRUxLeEY2dUs4Um4yVCADMAPgAzXoA5ubk%2Br8M%2FADIA%3D%3D&redirect_uri=com.openai.chat%3A%2F%2F",
+      "approval_status": "CANDIDATE",
+      "curator_notes": "Useful for darker transformation, memory and liminal creature states."
+    },
+    {
+      "playlist_id": "pl.karoline.classical-electronic",
+      "artist_id": "artist.karoline-georges",
+      "playlist": "Classical and electronic Atmospheres",
+      "suggested_routing": "PHYSIS / POIESIS synthesis and deep work",
+      "spotify_uri": "spotify:playlist:25WiDkLwLORIHPe4cUIpFw",
+      "open_in_spotify": "https://open.spotify.com/playlist/25WiDkLwLORIHPe4cUIpFw?utm_source=openai&utm_medium=chatgpt&go=1&nap_web=1&request_id=51011f47-1150-4a57-bbf4-53f5618df5ff&nl=spotify%3Anl%3ACAASEFEBH0cRUEpXu%2FRT9WGN9f8aGDk6MjVXaURrTHdMT1JJSFBlNGNVSXBGdyADMAPgAzXoA5ubk%2Br8M%2FADIA%3D%3D&redirect_uri=com.openai.chat%3A%2F%2F",
+      "approval_status": "CANDIDATE",
+      "curator_notes": "Balanced route for chamber texture plus digital atmosphere."
+    },
+    {
+      "playlist_id": "music.saveroom.artist",
+      "artist_id": "artist.saveroom",
+      "playlist": "saveroom",
+      "suggested_routing": "official artist source / complete world soundtrack pool",
+      "spotify_uri": "spotify:artist:3HU6PVCUQFeAUbnFgMQPz8",
+      "open_in_spotify": "https://open.spotify.com/artist/3HU6PVCUQFeAUbnFgMQPz8",
+      "approval_status": "OFFICIAL_SOURCE",
+      "curator_notes": "User-provided official Spotify artist profile. Use artist-owned releases as the primary theme soundtrack source."
+    },
+    {
+      "playlist_id": "music.saveroom.last-island",
+      "artist_id": "artist.saveroom",
+      "playlist": "The Last Island",
+      "suggested_routing": "Starcaller Sanctuary / full-album ambient sequence",
+      "spotify_uri": "spotify:album:4JWcQCKWoGxqxgNm2CRXAR",
+      "open_in_spotify": "https://open.spotify.com/album/4JWcQCKWoGxqxgNm2CRXAR?utm_source=openai&utm_medium=chatgpt&go=1&nap_web=1&request_id=5fb7b78d-9504-4364-b16e-bf23b2b14519&nl=spotify%3Anl%3ACAASEF%2B3t42VBENksW6%2FI7KxRRkaGDM6NEpXY1FDS1dvR3hxeGdObTJDUlhBUiADMAPgAzXoA47y%2Fer8M%2FADIA%3D%3D&redirect_uri=com.openai.chat%3A%2F%2F",
+      "approval_status": "OFFICIAL_SOUNDTRACK",
+      "curator_notes": "Official saveroom album route; appropriate for long sanctuary sessions and timeflow sequencing."
+    },
+    {
+      "playlist_id": "music.saveroom.paradise-zero",
+      "artist_id": "artist.saveroom",
+      "playlist": "Paradise Zero",
+      "suggested_routing": "Paradise Zero Archipelago / bright voyage state",
+      "spotify_uri": "spotify:track:5ZjSukBYBTHYSzRnwsSS8H",
+      "open_in_spotify": "https://open.spotify.com/track/5ZjSukBYBTHYSzRnwsSS8H?utm_source=openai&utm_medium=chatgpt&go=1&nap_web=1&request_id=5fb7b78d-9504-4364-b16e-bf23b2b14519&nl=spotify%3Anl%3ACAASEF%2B3t42VBENksW6%2FI7KxRRkaGDU6NVpqU3VrQllCVEhZU3pSbndzU1M4SCADMAPgAzXoA47y%2Fer8M%2FADIA%3D%3D&redirect_uri=com.openai.chat%3A%2F%2F",
+      "approval_status": "OFFICIAL_SOUNDTRACK",
+      "curator_notes": "Official saveroom track and direct naming anchor for the bright archipelago world."
+    },
+    {
+      "playlist_id": "music.saveroom.casino-dimension",
+      "artist_id": "artist.saveroom",
+      "playlist": "Casino Dimension",
+      "suggested_routing": "optional arcade / liminal side district",
+      "spotify_uri": "spotify:track:7d2j4iWmBeLV2Uytnrz7ie",
+      "open_in_spotify": "https://open.spotify.com/track/7d2j4iWmBeLV2Uytnrz7ie?utm_source=openai&utm_medium=chatgpt&go=1&nap_web=1&request_id=5fb7b78d-9504-4364-b16e-bf23b2b14519&nl=spotify%3Anl%3ACAASEF%2B3t42VBENksW6%2FI7KxRRkaGDU6N2QyajRpV21CZUxWMlV5dG5yejdpZSADMAPgAzXoA47y%2Fer8M%2FADIA%3D%3D&redirect_uri=com.openai.chat%3A%2F%2F",
+      "approval_status": "OFFICIAL_SOUNDTRACK",
+      "curator_notes": "Official saveroom track retained as a possible higher-energy alternate route."
+    },
+    {
+      "playlist_id": "music.saveroom.save-room-vibes",
+      "artist_id": "artist.saveroom",
+      "playlist": "Save Room Vibes/Ambient Video Game Music",
+      "suggested_routing": "third-party contextual comparison / calm save-room listening",
+      "spotify_uri": "spotify:playlist:0ssZnzx10zXpAdYmrMkOsk",
+      "open_in_spotify": "https://open.spotify.com/playlist/0ssZnzx10zXpAdYmrMkOsk?utm_source=openai&utm_medium=chatgpt&go=1&nap_web=1&request_id=0ee43e8e-0cb6-407b-bc92-f14de5237599&nl=spotify%3Anl%3ACAASEA7kPo4MtkB7vJLxTeUjdZkaGDk6MHNzWm56eDEwelhwQWRZbXJNa09zayADMAPgAzXoA66f%2Fer8M%2FADIA%3D%3D&redirect_uri=com.openai.chat%3A%2F%2F",
+      "approval_status": "CANDIDATE",
+      "curator_notes": "Public playlist candidate. Review track-by-track; it is not artist-authored and must not replace saveroom’s official catalog."
+    }
+  ],
+  "discovery_links": [
+    {
+      "artist_id": "artist.frawgy006",
+      "source": "Google Images",
+      "search_label": "surreal frog art",
+      "query": "surreal frog art",
+      "open_search": "https://www.google.com/search?tbm=isch&q=surreal+frog+art",
+      "status": "DISCOVERY_QUERY",
+      "curation_rule": "Review and curate; preserve source provenance for chosen assets."
+    },
+    {
+      "artist_id": "artist.frawgy006",
+      "source": "Pinterest",
+      "search_label": "surreal frog art",
+      "query": "surreal frog art",
+      "open_search": "https://www.pinterest.com/search/pins/?q=surreal+frog+art",
+      "status": "DISCOVERY_QUERY",
+      "curation_rule": "Review and curate; preserve source provenance for chosen assets."
+    },
+    {
+      "artist_id": "artist.frawgy006",
+      "source": "YouTube",
+      "search_label": "surreal frog art motion reference",
+      "query": "surreal frog art",
+      "open_search": "https://www.youtube.com/results?search_query=surreal+frog+art",
+      "status": "DISCOVERY_QUERY",
+      "curation_rule": "Review and curate; preserve source provenance for chosen assets."
+    },
+    {
+      "artist_id": "artist.frawgy006",
+      "source": "Google Images",
+      "search_label": "bioluminescent mushroom forest",
+      "query": "bioluminescent mushroom forest",
+      "open_search": "https://www.google.com/search?tbm=isch&q=bioluminescent+mushroom+forest",
+      "status": "DISCOVERY_QUERY",
+      "curation_rule": "Review and curate; preserve source provenance for chosen assets."
+    },
+    {
+      "artist_id": "artist.frawgy006",
+      "source": "Pinterest",
+      "search_label": "bioluminescent mushroom forest",
+      "query": "bioluminescent mushroom forest",
+      "open_search": "https://www.pinterest.com/search/pins/?q=bioluminescent+mushroom+forest",
+      "status": "DISCOVERY_QUERY",
+      "curation_rule": "Review and curate; preserve source provenance for chosen assets."
+    },
+    {
+      "artist_id": "artist.frawgy006",
+      "source": "YouTube",
+      "search_label": "bioluminescent mushroom forest motion reference",
+      "query": "bioluminescent mushroom forest",
+      "open_search": "https://www.youtube.com/results?search_query=bioluminescent+mushroom+forest",
+      "status": "DISCOVERY_QUERY",
+      "curation_rule": "Review and curate; preserve source provenance for chosen assets."
+    },
+    {
+      "artist_id": "artist.frawgy006",
+      "source": "Google Images",
+      "search_label": "playful alien swamp",
+      "query": "playful alien swamp",
+      "open_search": "https://www.google.com/search?tbm=isch&q=playful+alien+swamp",
+      "status": "DISCOVERY_QUERY",
+      "curation_rule": "Review and curate; preserve source provenance for chosen assets."
+    },
+    {
+      "artist_id": "artist.frawgy006",
+      "source": "Pinterest",
+      "search_label": "playful alien swamp",
+      "query": "playful alien swamp",
+      "open_search": "https://www.pinterest.com/search/pins/?q=playful+alien+swamp",
+      "status": "DISCOVERY_QUERY",
+      "curation_rule": "Review and curate; preserve source provenance for chosen assets."
+    },
+    {
+      "artist_id": "artist.frawgy006",
+      "source": "YouTube",
+      "search_label": "playful alien swamp motion reference",
+      "query": "playful alien swamp",
+      "open_search": "https://www.youtube.com/results?search_query=playful+alien+swamp",
+      "status": "DISCOVERY_QUERY",
+      "curation_rule": "Review and curate; preserve source provenance for chosen assets."
+    },
+    {
+      "artist_id": "artist.frawgy006",
+      "source": "Google Images",
+      "search_label": "lilypad fantasy world",
+      "query": "lilypad fantasy world",
+      "open_search": "https://www.google.com/search?tbm=isch&q=lilypad+fantasy+world",
+      "status": "DISCOVERY_QUERY",
+      "curation_rule": "Review and curate; preserve source provenance for chosen assets."
+    },
+    {
+      "artist_id": "artist.frawgy006",
+      "source": "Pinterest",
+      "search_label": "lilypad fantasy world",
+      "query": "lilypad fantasy world",
+      "open_search": "https://www.pinterest.com/search/pins/?q=lilypad+fantasy+world",
+      "status": "DISCOVERY_QUERY",
+      "curation_rule": "Review and curate; preserve source provenance for chosen assets."
+    },
+    {
+      "artist_id": "artist.frawgy006",
+      "source": "YouTube",
+      "search_label": "lilypad fantasy world motion reference",
+      "query": "lilypad fantasy world",
+      "open_search": "https://www.youtube.com/results?search_query=lilypad+fantasy+world",
+      "status": "DISCOVERY_QUERY",
+      "curation_rule": "Review and curate; preserve source provenance for chosen assets."
+    },
+    {
+      "artist_id": "artist.frawgy006",
+      "source": "Google Images",
+      "search_label": "organic toy architecture",
+      "query": "organic toy architecture",
+      "open_search": "https://www.google.com/search?tbm=isch&q=organic+toy+architecture",
+      "status": "DISCOVERY_QUERY",
+      "curation_rule": "Review and curate; preserve source provenance for chosen assets."
+    },
+    {
+      "artist_id": "artist.frawgy006",
+      "source": "Pinterest",
+      "search_label": "organic toy architecture",
+      "query": "organic toy architecture",
+      "open_search": "https://www.pinterest.com/search/pins/?q=organic+toy+architecture",
+      "status": "DISCOVERY_QUERY",
+      "curation_rule": "Review and curate; preserve source provenance for chosen assets."
+    },
+    {
+      "artist_id": "artist.frawgy006",
+      "source": "YouTube",
+      "search_label": "organic toy architecture motion reference",
+      "query": "organic toy architecture",
+      "open_search": "https://www.youtube.com/results?search_query=organic+toy+architecture",
+      "status": "DISCOVERY_QUERY",
+      "curation_rule": "Review and curate; preserve source provenance for chosen assets."
+    },
+    {
+      "artist_id": "artist.lightweaverart",
+      "source": "Google Images",
+      "search_label": "neon sigil portrait",
+      "query": "neon sigil portrait",
+      "open_search": "https://www.google.com/search?tbm=isch&q=neon+sigil+portrait",
+      "status": "DISCOVERY_QUERY",
+      "curation_rule": "Review and curate; preserve source provenance for chosen assets."
+    },
+    {
+      "artist_id": "artist.lightweaverart",
+      "source": "Pinterest",
+      "search_label": "neon sigil portrait",
+      "query": "neon sigil portrait",
+      "open_search": "https://www.pinterest.com/search/pins/?q=neon+sigil+portrait",
+      "status": "DISCOVERY_QUERY",
+      "curation_rule": "Review and curate; preserve source provenance for chosen assets."
+    },
+    {
+      "artist_id": "artist.lightweaverart",
+      "source": "YouTube",
+      "search_label": "neon sigil portrait motion reference",
+      "query": "neon sigil portrait",
+      "open_search": "https://www.youtube.com/results?search_query=neon+sigil+portrait",
+      "status": "DISCOVERY_QUERY",
+      "curation_rule": "Review and curate; preserve source provenance for chosen assets."
+    },
+    {
+      "artist_id": "artist.lightweaverart",
+      "source": "Google Images",
+      "search_label": "cyberpunk face paint portrait",
+      "query": "cyberpunk face paint portrait",
+      "open_search": "https://www.google.com/search?tbm=isch&q=cyberpunk+face+paint+portrait",
+      "status": "DISCOVERY_QUERY",
+      "curation_rule": "Review and curate; preserve source provenance for chosen assets."
+    },
+    {
+      "artist_id": "artist.lightweaverart",
+      "source": "Pinterest",
+      "search_label": "cyberpunk face paint portrait",
+      "query": "cyberpunk face paint portrait",
+      "open_search": "https://www.pinterest.com/search/pins/?q=cyberpunk+face+paint+portrait",
+      "status": "DISCOVERY_QUERY",
+      "curation_rule": "Review and curate; preserve source provenance for chosen assets."
+    },
+    {
+      "artist_id": "artist.lightweaverart",
+      "source": "YouTube",
+      "search_label": "cyberpunk face paint portrait motion reference",
+      "query": "cyberpunk face paint portrait",
+      "open_search": "https://www.youtube.com/results?search_query=cyberpunk+face+paint+portrait",
+      "status": "DISCOVERY_QUERY",
+      "curation_rule": "Review and curate; preserve source provenance for chosen assets."
+    },
+    {
+      "artist_id": "artist.lightweaverart",
+      "source": "Google Images",
+      "search_label": "luminous eye art",
+      "query": "luminous eye art",
+      "open_search": "https://www.google.com/search?tbm=isch&q=luminous+eye+art",
+      "status": "DISCOVERY_QUERY",
+      "curation_rule": "Review and curate; preserve source provenance for chosen assets."
+    },
+    {
+      "artist_id": "artist.lightweaverart",
+      "source": "Pinterest",
+      "search_label": "luminous eye art",
+      "query": "luminous eye art",
+      "open_search": "https://www.pinterest.com/search/pins/?q=luminous+eye+art",
+      "status": "DISCOVERY_QUERY",
+      "curation_rule": "Review and curate; preserve source provenance for chosen assets."
+    },
+    {
+      "artist_id": "artist.lightweaverart",
+      "source": "YouTube",
+      "search_label": "luminous eye art motion reference",
+      "query": "luminous eye art",
+      "open_search": "https://www.youtube.com/results?search_query=luminous+eye+art",
+      "status": "DISCOVERY_QUERY",
+      "curation_rule": "Review and curate; preserve source provenance for chosen assets."
+    },
+    {
+      "artist_id": "artist.lightweaverart",
+      "source": "Google Images",
+      "search_label": "futuristic tattoo beauty",
+      "query": "futuristic tattoo beauty",
+      "open_search": "https://www.google.com/search?tbm=isch&q=futuristic+tattoo+beauty",
+      "status": "DISCOVERY_QUERY",
+      "curation_rule": "Review and curate; preserve source provenance for chosen assets."
+    },
+    {
+      "artist_id": "artist.lightweaverart",
+      "source": "Pinterest",
+      "search_label": "futuristic tattoo beauty",
+      "query": "futuristic tattoo beauty",
+      "open_search": "https://www.pinterest.com/search/pins/?q=futuristic+tattoo+beauty",
+      "status": "DISCOVERY_QUERY",
+      "curation_rule": "Review and curate; preserve source provenance for chosen assets."
+    },
+    {
+      "artist_id": "artist.lightweaverart",
+      "source": "YouTube",
+      "search_label": "futuristic tattoo beauty motion reference",
+      "query": "futuristic tattoo beauty",
+      "open_search": "https://www.youtube.com/results?search_query=futuristic+tattoo+beauty",
+      "status": "DISCOVERY_QUERY",
+      "curation_rule": "Review and curate; preserve source provenance for chosen assets."
+    },
+    {
+      "artist_id": "artist.lightweaverart",
+      "source": "Google Images",
+      "search_label": "blue magenta cyber fashion",
+      "query": "blue magenta cyber fashion",
+      "open_search": "https://www.google.com/search?tbm=isch&q=blue+magenta+cyber+fashion",
+      "status": "DISCOVERY_QUERY",
+      "curation_rule": "Review and curate; preserve source provenance for chosen assets."
+    },
+    {
+      "artist_id": "artist.lightweaverart",
+      "source": "Pinterest",
+      "search_label": "blue magenta cyber fashion",
+      "query": "blue magenta cyber fashion",
+      "open_search": "https://www.pinterest.com/search/pins/?q=blue+magenta+cyber+fashion",
+      "status": "DISCOVERY_QUERY",
+      "curation_rule": "Review and curate; preserve source provenance for chosen assets."
+    },
+    {
+      "artist_id": "artist.lightweaverart",
+      "source": "YouTube",
+      "search_label": "blue magenta cyber fashion motion reference",
+      "query": "blue magenta cyber fashion",
+      "open_search": "https://www.youtube.com/results?search_query=blue+magenta+cyber+fashion",
+      "status": "DISCOVERY_QUERY",
+      "curation_rule": "Review and curate; preserve source provenance for chosen assets."
+    },
+    {
+      "artist_id": "artist.dreamrelicc",
+      "source": "Google Images",
+      "search_label": "divine machinery art",
+      "query": "divine machinery art",
+      "open_search": "https://www.google.com/search?tbm=isch&q=divine+machinery+art",
+      "status": "DISCOVERY_QUERY",
+      "curation_rule": "Review and curate; preserve source provenance for chosen assets."
+    },
+    {
+      "artist_id": "artist.dreamrelicc",
+      "source": "Pinterest",
+      "search_label": "divine machinery art",
+      "query": "divine machinery art",
+      "open_search": "https://www.pinterest.com/search/pins/?q=divine+machinery+art",
+      "status": "DISCOVERY_QUERY",
+      "curation_rule": "Review and curate; preserve source provenance for chosen assets."
+    },
+    {
+      "artist_id": "artist.dreamrelicc",
+      "source": "YouTube",
+      "search_label": "divine machinery art motion reference",
+      "query": "divine machinery art",
+      "open_search": "https://www.youtube.com/results?search_query=divine+machinery+art",
+      "status": "DISCOVERY_QUERY",
+      "curation_rule": "Review motion, fashion and mood; preserve source provenance for chosen assets."
+    },
+    {
+      "artist_id": "artist.dreamrelicc",
+      "source": "Google Images",
+      "search_label": "sacred retrofuturism",
+      "query": "sacred retrofuturism",
+      "open_search": "https://www.google.com/search?tbm=isch&q=sacred+retrofuturism",
+      "status": "DISCOVERY_QUERY",
+      "curation_rule": "Review and curate; preserve source provenance for chosen assets."
+    },
+    {
+      "artist_id": "artist.dreamrelicc",
+      "source": "Pinterest",
+      "search_label": "sacred retrofuturism",
+      "query": "sacred retrofuturism",
+      "open_search": "https://www.pinterest.com/search/pins/?q=sacred+retrofuturism",
+      "status": "DISCOVERY_QUERY",
+      "curation_rule": "Review and curate; preserve source provenance for chosen assets."
+    },
+    {
+      "artist_id": "artist.dreamrelicc",
+      "source": "YouTube",
+      "search_label": "sacred retrofuturism motion reference",
+      "query": "sacred retrofuturism",
+      "open_search": "https://www.youtube.com/results?search_query=sacred+retrofuturism",
+      "status": "DISCOVERY_QUERY",
+      "curation_rule": "Review motion, fashion and mood; preserve source provenance for chosen assets."
+    },
+    {
+      "artist_id": "artist.dreamrelicc",
+      "source": "Google Images",
+      "search_label": "cathedral space art",
+      "query": "cathedral space art",
+      "open_search": "https://www.google.com/search?tbm=isch&q=cathedral+space+art",
+      "status": "DISCOVERY_QUERY",
+      "curation_rule": "Review and curate; preserve source provenance for chosen assets."
+    },
+    {
+      "artist_id": "artist.dreamrelicc",
+      "source": "Pinterest",
+      "search_label": "cathedral space art",
+      "query": "cathedral space art",
+      "open_search": "https://www.pinterest.com/search/pins/?q=cathedral+space+art",
+      "status": "DISCOVERY_QUERY",
+      "curation_rule": "Review and curate; preserve source provenance for chosen assets."
+    },
+    {
+      "artist_id": "artist.dreamrelicc",
+      "source": "YouTube",
+      "search_label": "cathedral space art motion reference",
+      "query": "cathedral space art",
+      "open_search": "https://www.youtube.com/results?search_query=cathedral+space+art",
+      "status": "DISCOVERY_QUERY",
+      "curation_rule": "Review motion, fashion and mood; preserve source provenance for chosen assets."
+    },
+    {
+      "artist_id": "artist.dreamrelicc",
+      "source": "Google Images",
+      "search_label": "sparkly astronaut fashion",
+      "query": "sparkly astronaut fashion",
+      "open_search": "https://www.google.com/search?tbm=isch&q=sparkly+astronaut+fashion",
+      "status": "DISCOVERY_QUERY",
+      "curation_rule": "Review and curate; preserve source provenance for chosen assets."
+    },
+    {
+      "artist_id": "artist.dreamrelicc",
+      "source": "Pinterest",
+      "search_label": "sparkly astronaut fashion",
+      "query": "sparkly astronaut fashion",
+      "open_search": "https://www.pinterest.com/search/pins/?q=sparkly+astronaut+fashion",
+      "status": "DISCOVERY_QUERY",
+      "curation_rule": "Review and curate; preserve source provenance for chosen assets."
+    },
+    {
+      "artist_id": "artist.dreamrelicc",
+      "source": "YouTube",
+      "search_label": "sparkly astronaut fashion motion reference",
+      "query": "sparkly astronaut fashion",
+      "open_search": "https://www.youtube.com/results?search_query=sparkly+astronaut+fashion",
+      "status": "DISCOVERY_QUERY",
+      "curation_rule": "Review motion, fashion and mood; preserve source provenance for chosen assets."
+    },
+    {
+      "artist_id": "artist.dreamrelicc",
+      "source": "Google Images",
+      "search_label": "religious sci fi art",
+      "query": "religious sci fi art",
+      "open_search": "https://www.google.com/search?tbm=isch&q=religious+sci+fi+art",
+      "status": "DISCOVERY_QUERY",
+      "curation_rule": "Review and curate; preserve source provenance for chosen assets."
+    },
+    {
+      "artist_id": "artist.dreamrelicc",
+      "source": "Pinterest",
+      "search_label": "religious sci fi art",
+      "query": "religious sci fi art",
+      "open_search": "https://www.pinterest.com/search/pins/?q=religious+sci+fi+art",
+      "status": "DISCOVERY_QUERY",
+      "curation_rule": "Review and curate; preserve source provenance for chosen assets."
+    },
+    {
+      "artist_id": "artist.dreamrelicc",
+      "source": "YouTube",
+      "search_label": "religious sci fi art motion reference",
+      "query": "religious sci fi art",
+      "open_search": "https://www.youtube.com/results?search_query=religious+sci+fi+art",
+      "status": "DISCOVERY_QUERY",
+      "curation_rule": "Review motion, fashion and mood; preserve source provenance for chosen assets."
+    },
+    {
+      "artist_id": "artist.karoline-georges",
+      "source": "Google Images",
+      "search_label": "embroidered insect sculpture",
+      "query": "embroidered insect sculpture",
+      "open_search": "https://www.google.com/search?tbm=isch&q=embroidered+insect+sculpture",
+      "status": "DISCOVERY_QUERY",
+      "curation_rule": "Curate references only; preserve creator, source URL, rights and derivation metadata."
+    },
+    {
+      "artist_id": "artist.karoline-georges",
+      "source": "Pinterest",
+      "search_label": "embroidered insect sculpture",
+      "query": "embroidered insect sculpture",
+      "open_search": "https://www.pinterest.com/search/pins/?q=embroidered+insect+sculpture",
+      "status": "DISCOVERY_QUERY",
+      "curation_rule": "Use for discovery, not provenance; follow every selected item to its original creator/source."
+    },
+    {
+      "artist_id": "artist.karoline-georges",
+      "source": "YouTube",
+      "search_label": "embroidered insect sculpture motion reference",
+      "query": "embroidered insect sculpture",
+      "open_search": "https://www.youtube.com/results?search_query=embroidered+insect+sculpture",
+      "status": "DISCOVERY_QUERY",
+      "curation_rule": "Review material movement and metamorphosis; preserve original video attribution."
+    },
+    {
+      "artist_id": "artist.karoline-georges",
+      "source": "Google Images",
+      "search_label": "rococo entomology art",
+      "query": "rococo entomology art",
+      "open_search": "https://www.google.com/search?tbm=isch&q=rococo+entomology+art",
+      "status": "DISCOVERY_QUERY",
+      "curation_rule": "Curate references only; preserve creator, source URL, rights and derivation metadata."
+    },
+    {
+      "artist_id": "artist.karoline-georges",
+      "source": "Pinterest",
+      "search_label": "rococo entomology art",
+      "query": "rococo entomology art",
+      "open_search": "https://www.pinterest.com/search/pins/?q=rococo+entomology+art",
+      "status": "DISCOVERY_QUERY",
+      "curation_rule": "Use for discovery, not provenance; follow every selected item to its original creator/source."
+    },
+    {
+      "artist_id": "artist.karoline-georges",
+      "source": "YouTube",
+      "search_label": "rococo entomology art motion reference",
+      "query": "rococo entomology art",
+      "open_search": "https://www.youtube.com/results?search_query=rococo+entomology+art",
+      "status": "DISCOVERY_QUERY",
+      "curation_rule": "Review material movement and metamorphosis; preserve original video attribution."
+    },
+    {
+      "artist_id": "artist.karoline-georges",
+      "source": "Google Images",
+      "search_label": "post-organic textile anatomy",
+      "query": "post-organic textile anatomy",
+      "open_search": "https://www.google.com/search?tbm=isch&q=post-organic+textile+anatomy",
+      "status": "DISCOVERY_QUERY",
+      "curation_rule": "Curate references only; preserve creator, source URL, rights and derivation metadata."
+    },
+    {
+      "artist_id": "artist.karoline-georges",
+      "source": "Pinterest",
+      "search_label": "post-organic textile anatomy",
+      "query": "post-organic textile anatomy",
+      "open_search": "https://www.pinterest.com/search/pins/?q=post-organic+textile+anatomy",
+      "status": "DISCOVERY_QUERY",
+      "curation_rule": "Use for discovery, not provenance; follow every selected item to its original creator/source."
+    },
+    {
+      "artist_id": "artist.karoline-georges",
+      "source": "YouTube",
+      "search_label": "post-organic textile anatomy motion reference",
+      "query": "post-organic textile anatomy",
+      "open_search": "https://www.youtube.com/results?search_query=post-organic+textile+anatomy",
+      "status": "DISCOVERY_QUERY",
+      "curation_rule": "Review material movement and metamorphosis; preserve original video attribution."
+    },
+    {
+      "artist_id": "artist.karoline-georges",
+      "source": "Google Images",
+      "search_label": "porcelain botanical creature",
+      "query": "porcelain botanical creature",
+      "open_search": "https://www.google.com/search?tbm=isch&q=porcelain+botanical+creature",
+      "status": "DISCOVERY_QUERY",
+      "curation_rule": "Curate references only; preserve creator, source URL, rights and derivation metadata."
+    },
+    {
+      "artist_id": "artist.karoline-georges",
+      "source": "Pinterest",
+      "search_label": "porcelain botanical creature",
+      "query": "porcelain botanical creature",
+      "open_search": "https://www.pinterest.com/search/pins/?q=porcelain+botanical+creature",
+      "status": "DISCOVERY_QUERY",
+      "curation_rule": "Use for discovery, not provenance; follow every selected item to its original creator/source."
+    },
+    {
+      "artist_id": "artist.karoline-georges",
+      "source": "YouTube",
+      "search_label": "porcelain botanical creature motion reference",
+      "query": "porcelain botanical creature",
+      "open_search": "https://www.youtube.com/results?search_query=porcelain+botanical+creature",
+      "status": "DISCOVERY_QUERY",
+      "curation_rule": "Review material movement and metamorphosis; preserve original video attribution."
+    },
+    {
+      "artist_id": "artist.karoline-georges",
+      "source": "Google Images",
+      "search_label": "algorithmic metamorphosis art",
+      "query": "algorithmic metamorphosis art",
+      "open_search": "https://www.google.com/search?tbm=isch&q=algorithmic+metamorphosis+art",
+      "status": "DISCOVERY_QUERY",
+      "curation_rule": "Curate references only; preserve creator, source URL, rights and derivation metadata."
+    },
+    {
+      "artist_id": "artist.karoline-georges",
+      "source": "Pinterest",
+      "search_label": "algorithmic metamorphosis art",
+      "query": "algorithmic metamorphosis art",
+      "open_search": "https://www.pinterest.com/search/pins/?q=algorithmic+metamorphosis+art",
+      "status": "DISCOVERY_QUERY",
+      "curation_rule": "Use for discovery, not provenance; follow every selected item to its original creator/source."
+    },
+    {
+      "artist_id": "artist.karoline-georges",
+      "source": "YouTube",
+      "search_label": "algorithmic metamorphosis art motion reference",
+      "query": "algorithmic metamorphosis art",
+      "open_search": "https://www.youtube.com/results?search_query=algorithmic+metamorphosis+art",
+      "status": "DISCOVERY_QUERY",
+      "curation_rule": "Review material movement and metamorphosis; preserve original video attribution."
+    },
+    {
+      "artist_id": "artist.saveroom",
+      "source": "Google Images",
+      "search_label": "PS2 fantasy island aesthetic",
+      "query": "PS2 fantasy island aesthetic",
+      "open_search": "https://www.google.com/search?tbm=isch&q=PS2+fantasy+island+aesthetic",
+      "status": "DISCOVERY_QUERY",
+      "curation_rule": "Curate composition, material and environment references; preserve complete source provenance."
+    },
+    {
+      "artist_id": "artist.saveroom",
+      "source": "Pinterest",
+      "search_label": "PS2 fantasy island aesthetic",
+      "query": "PS2 fantasy island aesthetic",
+      "open_search": "https://www.pinterest.com/search/pins/?q=PS2+fantasy+island+aesthetic",
+      "status": "DISCOVERY_QUERY",
+      "curation_rule": "Discovery only; do not treat pins as asset licenses or authoritative originals."
+    },
+    {
+      "artist_id": "artist.saveroom",
+      "source": "YouTube",
+      "search_label": "PS2 fantasy island aesthetic motion reference",
+      "query": "PS2 fantasy island aesthetic",
+      "open_search": "https://www.youtube.com/results?search_query=PS2+fantasy+island+aesthetic",
+      "status": "DISCOVERY_QUERY",
+      "curation_rule": "Study camera, water, weather and period motion language; preserve original creator attribution."
+    },
+    {
+      "artist_id": "artist.saveroom",
+      "source": "Google Images",
+      "search_label": "Dreamcast tropical fantasy",
+      "query": "Dreamcast tropical fantasy",
+      "open_search": "https://www.google.com/search?tbm=isch&q=Dreamcast+tropical+fantasy",
+      "status": "DISCOVERY_QUERY",
+      "curation_rule": "Curate composition, material and environment references; preserve complete source provenance."
+    },
+    {
+      "artist_id": "artist.saveroom",
+      "source": "Pinterest",
+      "search_label": "Dreamcast tropical fantasy",
+      "query": "Dreamcast tropical fantasy",
+      "open_search": "https://www.pinterest.com/search/pins/?q=Dreamcast+tropical+fantasy",
+      "status": "DISCOVERY_QUERY",
+      "curation_rule": "Discovery only; do not treat pins as asset licenses or authoritative originals."
+    },
+    {
+      "artist_id": "artist.saveroom",
+      "source": "YouTube",
+      "search_label": "Dreamcast tropical fantasy motion reference",
+      "query": "Dreamcast tropical fantasy",
+      "open_search": "https://www.youtube.com/results?search_query=Dreamcast+tropical+fantasy",
+      "status": "DISCOVERY_QUERY",
+      "curation_rule": "Study camera, water, weather and period motion language; preserve original creator attribution."
+    },
+    {
+      "artist_id": "artist.saveroom",
+      "source": "Google Images",
+      "search_label": "Y2K 3D CGI ocean castle",
+      "query": "Y2K 3D CGI ocean castle",
+      "open_search": "https://www.google.com/search?tbm=isch&q=Y2K+3D+CGI+ocean+castle",
+      "status": "DISCOVERY_QUERY",
+      "curation_rule": "Curate composition, material and environment references; preserve complete source provenance."
+    },
+    {
+      "artist_id": "artist.saveroom",
+      "source": "Pinterest",
+      "search_label": "Y2K 3D CGI ocean castle",
+      "query": "Y2K 3D CGI ocean castle",
+      "open_search": "https://www.pinterest.com/search/pins/?q=Y2K+3D+CGI+ocean+castle",
+      "status": "DISCOVERY_QUERY",
+      "curation_rule": "Discovery only; do not treat pins as asset licenses or authoritative originals."
+    },
+    {
+      "artist_id": "artist.saveroom",
+      "source": "YouTube",
+      "search_label": "Y2K 3D CGI ocean castle motion reference",
+      "query": "Y2K 3D CGI ocean castle",
+      "open_search": "https://www.youtube.com/results?search_query=Y2K+3D+CGI+ocean+castle",
+      "status": "DISCOVERY_QUERY",
+      "curation_rule": "Study camera, water, weather and period motion language; preserve original creator attribution."
+    },
+    {
+      "artist_id": "artist.saveroom",
+      "source": "Google Images",
+      "search_label": "Frutiger Aero fantasy game",
+      "query": "Frutiger Aero fantasy game",
+      "open_search": "https://www.google.com/search?tbm=isch&q=Frutiger+Aero+fantasy+game",
+      "status": "DISCOVERY_QUERY",
+      "curation_rule": "Curate composition, material and environment references; preserve complete source provenance."
+    },
+    {
+      "artist_id": "artist.saveroom",
+      "source": "Pinterest",
+      "search_label": "Frutiger Aero fantasy game",
+      "query": "Frutiger Aero fantasy game",
+      "open_search": "https://www.pinterest.com/search/pins/?q=Frutiger+Aero+fantasy+game",
+      "status": "DISCOVERY_QUERY",
+      "curation_rule": "Discovery only; do not treat pins as asset licenses or authoritative originals."
+    },
+    {
+      "artist_id": "artist.saveroom",
+      "source": "YouTube",
+      "search_label": "Frutiger Aero fantasy game motion reference",
+      "query": "Frutiger Aero fantasy game",
+      "open_search": "https://www.youtube.com/results?search_query=Frutiger+Aero+fantasy+game",
+      "status": "DISCOVERY_QUERY",
+      "curation_rule": "Study camera, water, weather and period motion language; preserve original creator attribution."
+    },
+    {
+      "artist_id": "artist.saveroom",
+      "source": "Google Images",
+      "search_label": "2000s fantasy game ambience",
+      "query": "2000s fantasy game ambience",
+      "open_search": "https://www.google.com/search?tbm=isch&q=2000s+fantasy+game+ambience",
+      "status": "DISCOVERY_QUERY",
+      "curation_rule": "Curate composition, material and environment references; preserve complete source provenance."
+    },
+    {
+      "artist_id": "artist.saveroom",
+      "source": "Pinterest",
+      "search_label": "2000s fantasy game ambience",
+      "query": "2000s fantasy game ambience",
+      "open_search": "https://www.pinterest.com/search/pins/?q=2000s+fantasy+game+ambience",
+      "status": "DISCOVERY_QUERY",
+      "curation_rule": "Discovery only; do not treat pins as asset licenses or authoritative originals."
+    },
+    {
+      "artist_id": "artist.saveroom",
+      "source": "YouTube",
+      "search_label": "2000s fantasy game ambience motion reference",
+      "query": "2000s fantasy game ambience",
+      "open_search": "https://www.youtube.com/results?search_query=2000s+fantasy+game+ambience",
+      "status": "DISCOVERY_QUERY",
+      "curation_rule": "Study camera, water, weather and period motion language; preserve original creator attribution."
+    }
+  ],
+  "provenance": [
+    {
+      "source_id": "source.lightweaver.ref1",
+      "artist_id": "artist.lightweaverart",
+      "source_type": "USER_SUPPLIED_REFERENCE_IMAGE",
+      "source_page": "",
+      "local_filename": "cc2a196c-8ff5-4c18-b2ef-201698e025f3.png",
+      "captured": "2026-08-04",
+      "capture_method": "uploaded in current ChatGPT conversation",
+      "mime": "image/png",
+      "width": "713",
+      "height": "1298",
+      "bytes": "1595264",
+      "sha_256": "16fc58a00dc4495b27651115dc97bfb368f56f32e9b693d8ad9f12aa85d5462f",
+      "rights_status": "User-supplied reference; retain provenance; do not assume commercial reuse rights",
+      "notes": "Close-up blue-haired portrait with cobalt markings and a vivid pink luminous eye."
+    },
+    {
+      "source_id": "source.lightweaver.ref2",
+      "artist_id": "artist.lightweaverart",
+      "source_type": "USER_SUPPLIED_REFERENCE_IMAGE",
+      "source_page": "",
+      "local_filename": "494cd262-291b-4094-88ee-bbb83f89ee40.png",
+      "captured": "2026-08-04",
+      "capture_method": "uploaded in current ChatGPT conversation",
+      "mime": "image/png",
+      "width": "723",
+      "height": "1298",
+      "bytes": "1335516",
+      "sha_256": "b7ca234305453fd7427fdbabadfa9a9c4a34b6a6c026690737a42112dd0401fc",
+      "rights_status": "User-supplied reference; retain provenance; do not assume commercial reuse rights",
+      "notes": "Neon cyber-portrait with black facial marks, piercings, purple hair and multicolor lighting."
+    },
+    {
+      "source_id": "source.frawgy.tiktok",
+      "artist_id": "artist.frawgy006",
+      "source_type": "ARTIST_PROFILE",
+      "source_page": "https://www.tiktok.com/@frawgy006?lang=en",
+      "local_filename": "",
+      "captured": "2026-08-04",
+      "capture_method": "user-supplied URL",
+      "mime": "",
+      "width": "",
+      "height": "",
+      "bytes": "",
+      "sha_256": "",
+      "rights_status": "Profile link only; permission required for asset reuse",
+      "notes": "Primary artist discovery profile."
+    },
+    {
+      "source_id": "source.lightweaver.instagram",
+      "artist_id": "artist.lightweaverart",
+      "source_type": "ARTIST_PROFILE",
+      "source_page": "https://www.instagram.com/lightweaverart",
+      "local_filename": "",
+      "captured": "2026-08-04",
+      "capture_method": "user-supplied URL",
+      "mime": "",
+      "width": "",
+      "height": "",
+      "bytes": "",
+      "sha_256": "",
+      "rights_status": "Profile link only; permission required for asset reuse",
+      "notes": "Primary Instagram profile."
+    },
+    {
+      "source_id": "source.lightweaver.tiktok",
+      "artist_id": "artist.lightweaverart",
+      "source_type": "ARTIST_PROFILE",
+      "source_page": "https://www.tiktok.com/@lightweaverart?lang=en",
+      "local_filename": "",
+      "captured": "2026-08-04",
+      "capture_method": "user-supplied URL",
+      "mime": "",
+      "width": "",
+      "height": "",
+      "bytes": "",
+      "sha_256": "",
+      "rights_status": "Profile link only; permission required for asset reuse",
+      "notes": "Primary TikTok profile."
+    },
+    {
+      "source_id": "source.dreamrelicc.ref1",
+      "artist_id": "artist.dreamrelicc",
+      "source_type": "USER_SUPPLIED_REFERENCE_IMAGE",
+      "source_page": "",
+      "local_filename": "e9c0343e-023c-5edc-9e55-8fab8ead244e.png",
+      "captured": "2026-08-04",
+      "capture_method": "uploaded in current ChatGPT conversation",
+      "mime": "image/png",
+      "width": "1026",
+      "height": "1297",
+      "bytes": "1728170",
+      "sha_256": "208844a6cde7c1dd4284e12af5d94b7206ce6aa2eec25d35498e18c83c8752fd",
+      "rights_status": "User-supplied reference; retain provenance; do not assume commercial reuse rights",
+      "notes": "Cockpit glamour portrait with red curls, crystal halterwear and soft-console starship background."
+    },
+    {
+      "source_id": "source.dreamrelicc.ref2",
+      "artist_id": "artist.dreamrelicc",
+      "source_type": "USER_SUPPLIED_REFERENCE_IMAGE",
+      "source_page": "",
+      "local_filename": "dbf4af9a-9bfe-5c7e-b1df-3046eb694cd5.png",
+      "captured": "2026-08-04",
+      "capture_method": "uploaded in current ChatGPT conversation",
+      "mime": "image/png",
+      "width": "987",
+      "height": "1302",
+      "bytes": "1503582",
+      "sha_256": "24a602958c51224a77921ad521d7e22c7c792a3cbf6f1e3d5a2f7266b5210874",
+      "rights_status": "User-supplied reference; retain provenance; do not assume commercial reuse rights",
+      "notes": "Night street scene with hovering jeweled saucers above a crowded market lane."
+    },
+    {
+      "source_id": "source.dreamrelicc.ref3",
+      "artist_id": "artist.dreamrelicc",
+      "source_type": "USER_SUPPLIED_REFERENCE_IMAGE",
+      "source_page": "",
+      "local_filename": "aaf03dad-fa60-5619-81af-d917c207b320.png",
+      "captured": "2026-08-04",
+      "capture_method": "uploaded in current ChatGPT conversation",
+      "mime": "image/png",
+      "width": "1030",
+      "height": "1275",
+      "bytes": "1715231",
+      "sha_256": "43641d05201908e8ffe906b8d641d902ef13976013d8b418ca8e190fc98e2dbc",
+      "rights_status": "User-supplied reference; retain provenance; do not assume commercial reuse rights",
+      "notes": "Portrait with glitter-sky face, luminous cross, red eyes and silver chainmail futurist attire."
+    },
+    {
+      "source_id": "source.dreamrelicc.ref4",
+      "artist_id": "artist.dreamrelicc",
+      "source_type": "USER_SUPPLIED_REFERENCE_IMAGE",
+      "source_page": "",
+      "local_filename": "07af1af9-b915-5974-bb36-febe288e0557.png",
+      "captured": "2026-08-04",
+      "capture_method": "uploaded in current ChatGPT conversation",
+      "mime": "image/png",
+      "width": "1124",
+      "height": "1966",
+      "bytes": "2826823",
+      "sha_256": "858c97bb83214176bba186c63eb55ce53bda16fee7894cb51308bcc980f46ed3",
+      "rights_status": "User-supplied reference; retain provenance; do not assume commercial reuse rights",
+      "notes": "Moss reliquary vision with sparkling body sheen and falling star particles."
+    },
+    {
+      "source_id": "source.dreamrelicc.ref5",
+      "artist_id": "artist.dreamrelicc",
+      "source_type": "USER_SUPPLIED_REFERENCE_IMAGE",
+      "source_page": "",
+      "local_filename": "116d6970-ac40-5524-ac96-4f074c17f52a.png",
+      "captured": "2026-08-04",
+      "capture_method": "uploaded in current ChatGPT conversation",
+      "mime": "image/png",
+      "width": "716",
+      "height": "1283",
+      "bytes": "865221",
+      "sha_256": "2ae99ac63532b718874b1d832b6cb1eccd1a546ef8acdc62db0e160aea4f949c",
+      "rights_status": "User-supplied reference; retain provenance; do not assume commercial reuse rights",
+      "notes": "Silver astronaut-saint seated with a book against a distant city at night."
+    },
+    {
+      "source_id": "source.dreamrelicc.ref6",
+      "artist_id": "artist.dreamrelicc",
+      "source_type": "USER_SUPPLIED_REFERENCE_IMAGE",
+      "source_page": "",
+      "local_filename": "47ed40d4-c459-5f19-bc4d-81dc87a4ab6a.png",
+      "captured": "2026-08-04",
+      "capture_method": "uploaded in current ChatGPT conversation",
+      "mime": "image/png",
+      "width": "761",
+      "height": "1300",
+      "bytes": "855977",
+      "sha_256": "3ad42ac05234f02d75e71258d913fdcb38d103d704d52ef9e867f28c59ec3b66",
+      "rights_status": "User-supplied reference; retain provenance; do not assume commercial reuse rights",
+      "notes": "Doberman-like guardian in jeweled regalia with red ocular glow."
+    },
+    {
+      "source_id": "source.dreamrelicc.ref7",
+      "artist_id": "artist.dreamrelicc",
+      "source_type": "USER_SUPPLIED_REFERENCE_IMAGE",
+      "source_page": "",
+      "local_filename": "592ebd26-1965-547b-ad70-33f4b6243d1f.png",
+      "captured": "2026-08-04",
+      "capture_method": "uploaded in current ChatGPT conversation",
+      "mime": "image/png",
+      "width": "751",
+      "height": "1270",
+      "bytes": "930973",
+      "sha_256": "ecaa65da5979f7f9ee9a0cf0b072c0a95257b4736b7efd9ccc482ea82590c465",
+      "rights_status": "User-supplied reference; retain provenance; do not assume commercial reuse rights",
+      "notes": "Blonde figure in a full sparkle outfit beneath a galaxy motif, mixing glamour and cosmic iconography."
+    },
+    {
+      "source_id": "source.dreamrelicc.ref8",
+      "artist_id": "artist.dreamrelicc",
+      "source_type": "USER_SUPPLIED_REFERENCE_IMAGE",
+      "source_page": "",
+      "local_filename": "030f6c8a-03ac-528b-8c7a-04dc6cf60485.png",
+      "captured": "2026-08-04",
+      "capture_method": "uploaded in current ChatGPT conversation",
+      "mime": "image/png",
+      "width": "765",
+      "height": "1308",
+      "bytes": "1602424",
+      "sha_256": "aef11addeae051630f5ce3331fbb195f3408c744dc0f6d0e18c065ed9c20d031",
+      "rights_status": "User-supplied reference; retain provenance; do not assume commercial reuse rights",
+      "notes": "Red-and-white sequined pilot operating a starship console beneath a dense starfield."
+    },
+    {
+      "source_id": "source.karoline.ref1",
+      "artist_id": "artist.karoline-georges",
+      "source_type": "USER_SUPPLIED_REFERENCE_IMAGE",
+      "source_page": "",
+      "local_filename": "d72e8d52-cad7-4063-9d21-1dac0275c8c5.png",
+      "captured": "2026-08-04",
+      "capture_method": "uploaded in current ChatGPT conversation",
+      "mime": "image/png",
+      "width": "723",
+      "height": "1295",
+      "bytes": "1259653",
+      "sha_256": "2436f49dde334778a1e8bb0977c89084d32b792b04b420040f29cfc7fd95cb26",
+      "rights_status": "User-supplied reference; retain provenance; do not assume commercial reuse rights",
+      "notes": "Embroidered mantis-like profile with cameo portrait, floral needlework, gold trim, translucent wings and cracked porcelain surfaces."
+    },
+    {
+      "source_id": "source.karoline.ref2",
+      "artist_id": "artist.karoline-georges",
+      "source_type": "USER_SUPPLIED_REFERENCE_IMAGE",
+      "source_page": "",
+      "local_filename": "8713ebb0-5e19-4733-afec-08c99ee48d94.png",
+      "captured": "2026-08-04",
+      "capture_method": "uploaded in current ChatGPT conversation",
+      "mime": "image/png",
+      "width": "730",
+      "height": "1287",
+      "bytes": "1630432",
+      "sha_256": "d647a25091009a270e5c7cb9f6a410e3e58d10c226e0e4bb7c019d1b9278ed2c",
+      "rights_status": "User-supplied reference; retain provenance; do not assume commercial reuse rights",
+      "notes": "Front-facing ornate insect with honeycomb eyes, pearl-like mouthparts, gold filigree and botanical portrait medallions."
+    },
+    {
+      "source_id": "source.karoline.ref3",
+      "artist_id": "artist.karoline-georges",
+      "source_type": "USER_SUPPLIED_REFERENCE_IMAGE",
+      "source_page": "",
+      "local_filename": "41776dd2-63a5-4cd5-8a5d-2c1a1aafe240.png",
+      "captured": "2026-08-04",
+      "capture_method": "uploaded in current ChatGPT conversation",
+      "mime": "image/png",
+      "width": "743",
+      "height": "1299",
+      "bytes": "1294582",
+      "sha_256": "06819d5cb3d52b981b796aaf289327bff7917ac9b49151e20f16e0ba20cc8759",
+      "rights_status": "User-supplied reference; retain provenance; do not assume commercial reuse rights",
+      "notes": "Alternate profile view of the embroidered mantis form showing segmented anatomy and ornamental limb work."
+    },
+    {
+      "source_id": "source.karoline.ref4",
+      "artist_id": "artist.karoline-georges",
+      "source_type": "USER_SUPPLIED_REFERENCE_IMAGE",
+      "source_page": "",
+      "local_filename": "ff242005-4762-487b-9770-93377293e275.png",
+      "captured": "2026-08-04",
+      "capture_method": "uploaded in current ChatGPT conversation",
+      "mime": "image/png",
+      "width": "739",
+      "height": "1292",
+      "bytes": "717519",
+      "sha_256": "656958a0b0994be98a9a541d7f9c8de69883a4c4c2374ceb27315b163664b212",
+      "rights_status": "User-supplied reference; retain provenance; do not assume commercial reuse rights",
+      "notes": "Bat-like hybrid with velvet wings, sculpted ears, mosaic eyes, tassel and ceremonial textile mask."
+    },
+    {
+      "source_id": "source.karoline.ref5",
+      "artist_id": "artist.karoline-georges",
+      "source_type": "USER_SUPPLIED_REFERENCE_IMAGE",
+      "source_page": "",
+      "local_filename": "6858eee8-af67-42fb-9eab-94cc44327177.png",
+      "captured": "2026-08-04",
+      "capture_method": "uploaded in current ChatGPT conversation",
+      "mime": "image/png",
+      "width": "730",
+      "height": "1302",
+      "bytes": "1002925",
+      "sha_256": "e18d31894ecb8b82baca549687477bd790bf49b13e7c4458e5593a14c9dac6b1",
+      "rights_status": "User-supplied reference; retain provenance; do not assume commercial reuse rights",
+      "notes": "Translucent mesh humanoid body with exposed textile anatomy, gold wire pathways and pastel stitched organs."
+    },
+    {
+      "source_id": "source.karoline.ref6",
+      "artist_id": "artist.karoline-georges",
+      "source_type": "USER_SUPPLIED_REFERENCE_IMAGE",
+      "source_page": "",
+      "local_filename": "0c4a2f30-8b01-4c98-9796-e20efdbc896a.png",
+      "captured": "2026-08-04",
+      "capture_method": "uploaded in current ChatGPT conversation",
+      "mime": "image/png",
+      "width": "761",
+      "height": "1319",
+      "bytes": "1646574",
+      "sha_256": "32c9a33aeb0b8b837d6a0a2616528fd8b7cee9cf848de61f62bd54c43cce65ec",
+      "rights_status": "User-supplied reference; retain provenance; do not assume commercial reuse rights",
+      "notes": "Patchwork humanoid-creature bust with mesh opening, visible organic forms, feathers and floral textile panels."
+    },
+    {
+      "source_id": "source.karoline.ref7",
+      "artist_id": "artist.karoline-georges",
+      "source_type": "USER_SUPPLIED_REFERENCE_IMAGE",
+      "source_page": "",
+      "local_filename": "43ede2b4-e14e-4731-bf27-0d3bdcfe5875.png",
+      "captured": "2026-08-04",
+      "capture_method": "uploaded in current ChatGPT conversation",
+      "mime": "image/png",
+      "width": "734",
+      "height": "1289",
+      "bytes": "1735448",
+      "sha_256": "b9c93ff283721272f185f3dc6ccaf64e91b7dfe3d7be5907c366f5784e55511d",
+      "rights_status": "User-supplied reference; retain provenance; do not assume commercial reuse rights",
+      "notes": "Close portrait of an avian hybrid with embroidered plumage, botanical motifs, sculpted beak and intensely reflective eye."
+    },
+    {
+      "source_id": "source.karoline.tiktok",
+      "artist_id": "artist.karoline-georges",
+      "source_type": "ARTIST_PROFILE",
+      "source_page": "https://www.tiktok.com/@karoline_georges",
+      "local_filename": "",
+      "captured": "2026-08-04",
+      "capture_method": "direct public web research",
+      "mime": "text/html",
+      "width": "",
+      "height": "",
+      "bytes": "",
+      "sha_256": "",
+      "rights_status": "Reference metadata only; no asset license inferred",
+      "notes": "TikTok profile supplied by the user."
+    },
+    {
+      "source_id": "source.karoline.linktree",
+      "artist_id": "artist.karoline-georges",
+      "source_type": "OFFICIAL_LINK_HUB",
+      "source_page": "https://linktr.ee/karolinegeorges",
+      "local_filename": "",
+      "captured": "2026-08-04",
+      "capture_method": "direct public web research",
+      "mime": "text/html",
+      "width": "",
+      "height": "",
+      "bytes": "",
+      "sha_256": "",
+      "rights_status": "Reference metadata only; no asset license inferred",
+      "notes": "Official link hub listing website and professional profiles."
+    },
+    {
+      "source_id": "source.karoline.website",
+      "artist_id": "artist.karoline-georges",
+      "source_type": "OFFICIAL_WEBSITE",
+      "source_page": "https://www.karolinegeorges.com/",
+      "local_filename": "",
+      "captured": "2026-08-04",
+      "capture_method": "direct public web research",
+      "mime": "text/html",
+      "width": "",
+      "height": "",
+      "bytes": "",
+      "sha_256": "",
+      "rights_status": "Reference metadata only; no asset license inferred",
+      "notes": "Official artist and writer website."
+    },
+    {
+      "source_id": "source.karoline.about",
+      "artist_id": "artist.karoline-georges",
+      "source_type": "OFFICIAL_ABOUT",
+      "source_page": "https://www.karolinegeorges.com/%C3%A0-propos-about",
+      "local_filename": "",
+      "captured": "2026-08-04",
+      "capture_method": "direct public web research",
+      "mime": "text/html",
+      "width": "",
+      "height": "",
+      "bytes": "",
+      "sha_256": "",
+      "rights_status": "Reference metadata only; no asset license inferred",
+      "notes": "Official description of hybrid figures, mutating textures, speculative narratives and the mutation of living systems."
+    },
+    {
+      "source_id": "source.karoline.artworks",
+      "artist_id": "artist.karoline-georges",
+      "source_type": "OFFICIAL_ARTWORK_INDEX",
+      "source_page": "https://www.karolinegeorges.com/oeuvres-artworks",
+      "local_filename": "",
+      "captured": "2026-08-04",
+      "capture_method": "direct public web research",
+      "mime": "text/html",
+      "width": "",
+      "height": "",
+      "bytes": "",
+      "sha_256": "",
+      "rights_status": "Reference metadata only; no asset license inferred",
+      "notes": "Official works index including PHYSIS, Evolving Creatures, Entomorphosis, Mirabilia, POIESIS and other projects."
+    },
+    {
+      "source_id": "source.karoline.mirabilia",
+      "artist_id": "artist.karoline-georges",
+      "source_type": "OFFICIAL_PROJECT_PAGE",
+      "source_page": "https://www.karolinegeorges.com/art/mirabilia",
+      "local_filename": "",
+      "captured": "2026-08-04",
+      "capture_method": "direct public web research",
+      "mime": "text/html",
+      "width": "",
+      "height": "",
+      "bytes": "",
+      "sha_256": "",
+      "rights_status": "Reference metadata only; no asset license inferred",
+      "notes": "Official MIRABILIA project page."
+    },
+    {
+      "source_id": "source.karoline.poiesis",
+      "artist_id": "artist.karoline-georges",
+      "source_type": "OFFICIAL_PROJECT_PAGE",
+      "source_page": "https://www.karolinegeorges.com/poiesis",
+      "local_filename": "",
+      "captured": "2026-08-04",
+      "capture_method": "direct public web research",
+      "mime": "text/html",
+      "width": "",
+      "height": "",
+      "bytes": "",
+      "sha_256": "",
+      "rights_status": "Reference metadata only; no asset license inferred",
+      "notes": "Official POIESIS web work and process materials."
+    },
+    {
+      "source_id": "source.karoline.nanofictions",
+      "artist_id": "artist.karoline-georges",
+      "source_type": "OFFICIAL_PROJECT_PAGE",
+      "source_page": "https://www.karolinegeorges.com/nanofictions",
+      "local_filename": "",
+      "captured": "2026-08-04",
+      "capture_method": "direct public web research",
+      "mime": "text/html",
+      "width": "",
+      "height": "",
+      "bytes": "",
+      "sha_256": "",
+      "rights_status": "Reference metadata only; no asset license inferred",
+      "notes": "Official NanoFictions project page describing transformation, metamorphosis and algorithmic creatures."
+    },
+    {
+      "source_id": "source.karoline.escape",
+      "artist_id": "artist.karoline-georges",
+      "source_type": "INDUSTRY_PROFILE",
+      "source_page": "https://escape.ai/profile/karolinegeorges",
+      "local_filename": "",
+      "captured": "2026-08-04",
+      "capture_method": "direct public web research",
+      "mime": "text/html",
+      "width": "",
+      "height": "",
+      "bytes": "",
+      "sha_256": "",
+      "rights_status": "Reference metadata only; no asset license inferred",
+      "notes": "Profile describing hybrid consciousness and post-organic aesthetics."
+    },
+    {
+      "source_id": "source.karoline.runway",
+      "artist_id": "artist.karoline-georges",
+      "source_type": "INDUSTRY_PROFILE",
+      "source_page": "https://talent.runwayml.com/karoline-georges",
+      "local_filename": "",
+      "captured": "2026-08-04",
+      "capture_method": "direct public web research",
+      "mime": "text/html",
+      "width": "",
+      "height": "",
+      "bytes": "",
+      "sha_256": "",
+      "rights_status": "Reference metadata only; no asset license inferred",
+      "notes": "Runway Talent Network profile."
+    },
+    {
+      "source_id": "source.karoline.instagram",
+      "artist_id": "artist.karoline-georges",
+      "source_type": "ARTIST_PROFILE",
+      "source_page": "https://www.instagram.com/karolinegeorges.art",
+      "local_filename": "",
+      "captured": "2026-08-04",
+      "capture_method": "direct public web research",
+      "mime": "text/html",
+      "width": "",
+      "height": "",
+      "bytes": "",
+      "sha_256": "",
+      "rights_status": "Reference metadata only; no asset license inferred",
+      "notes": "Instagram profile listed by current public artist profiles."
+    },
+    {
+      "source_id": "source.saveroom.ref1",
+      "artist_id": "artist.saveroom",
+      "source_type": "USER_SUPPLIED_REFERENCE_SCREENSHOT",
+      "source_page": "",
+      "local_filename": "e0b0c2c3-d6fe-43dc-b16b-d6a4252806de.png",
+      "captured": "2026-08-04",
+      "capture_method": "uploaded in current ChatGPT conversation",
+      "mime": "image/png",
+      "width": "745",
+      "height": "1284",
+      "bytes": "1664394",
+      "sha_256": "aefcd3da1badf8d4eac2b30804f224bd792dfa7aba4aa4dd27af3d55db2d976b",
+      "rights_status": "User-supplied visual reference; retain provenance; no commercial reuse rights inferred",
+      "notes": "Violet-haired navigator seated on a sailboat with a distant moonlit gothic citadel."
+    },
+    {
+      "source_id": "source.saveroom.ref2",
+      "artist_id": "artist.saveroom",
+      "source_type": "USER_SUPPLIED_REFERENCE_SCREENSHOT",
+      "source_page": "",
+      "local_filename": "00bde6ab-d7b4-486f-804b-fc561a299514.png",
+      "captured": "2026-08-04",
+      "capture_method": "uploaded in current ChatGPT conversation",
+      "mime": "image/png",
+      "width": "743",
+      "height": "1298",
+      "bytes": "1661415",
+      "sha_256": "113b0f9d981f6c5b9fbd4f9c3565773115848535f6bd9b22d3f0e3db3f20718f",
+      "rights_status": "User-supplied visual reference; retain provenance; no commercial reuse rights inferred",
+      "notes": "Side-view navigator before a colossal moon-attached sea citadel."
+    },
+    {
+      "source_id": "source.saveroom.ref3",
+      "artist_id": "artist.saveroom",
+      "source_type": "USER_SUPPLIED_REFERENCE_SCREENSHOT",
+      "source_page": "",
+      "local_filename": "94074617-fe00-4435-86b1-3c36218f3e70.png",
+      "captured": "2026-08-04",
+      "capture_method": "uploaded in current ChatGPT conversation",
+      "mime": "image/png",
+      "width": "699",
+      "height": "1290",
+      "bytes": "1947315",
+      "sha_256": "861a697eaeedd63ad212c62b96f291917f186f114d8aa44637a0f9942168cf4d",
+      "rights_status": "User-supplied visual reference; retain provenance; no commercial reuse rights inferred",
+      "notes": "Winged figure overlooking a blue-violet city beneath a full moon and meteor rain."
+    },
+    {
+      "source_id": "source.saveroom.ref4",
+      "artist_id": "artist.saveroom",
+      "source_type": "USER_SUPPLIED_REFERENCE_SCREENSHOT",
+      "source_page": "",
+      "local_filename": "ac0bb34e-44ab-44f2-9778-0e2a3db930fb.png",
+      "captured": "2026-08-04",
+      "capture_method": "uploaded in current ChatGPT conversation",
+      "mime": "image/png",
+      "width": "728",
+      "height": "1288",
+      "bytes": "1359225",
+      "sha_256": "542263130625a5bf5a0da416b9ba596ac86a12f72984d5459e99a0c379abeb4b",
+      "rights_status": "User-supplied visual reference; retain provenance; no commercial reuse rights inferred",
+      "notes": "Bright tropical paradise shoreline with cobalt water, palms and high sun."
+    },
+    {
+      "source_id": "source.saveroom.ref5",
+      "artist_id": "artist.saveroom",
+      "source_type": "USER_SUPPLIED_REFERENCE_SCREENSHOT",
+      "source_page": "",
+      "local_filename": "13c9a8b3-3219-4746-b8f6-746fcdaf1792.png",
+      "captured": "2026-08-04",
+      "capture_method": "uploaded in current ChatGPT conversation",
+      "mime": "image/png",
+      "width": "720",
+      "height": "1282",
+      "bytes": "1529494",
+      "sha_256": "186cbdcc471488d7431aad0dfce4a01c8675640d31aeb0eda666f35296dc01ba",
+      "rights_status": "User-supplied visual reference; retain provenance; no commercial reuse rights inferred",
+      "notes": "Lavender-gold sunset cove with rounded stones, tropical foliage and shoreline flowers."
+    },
+    {
+      "source_id": "source.saveroom.ref6",
+      "artist_id": "artist.saveroom",
+      "source_type": "USER_SUPPLIED_REFERENCE_SCREENSHOT",
+      "source_page": "",
+      "local_filename": "9317322a-84fb-4623-b6de-20499c62a41f.png",
+      "captured": "2026-08-04",
+      "capture_method": "uploaded in current ChatGPT conversation",
+      "mime": "image/png",
+      "width": "763",
+      "height": "1296",
+      "bytes": "1589713",
+      "sha_256": "f6f95270a0ae98c24d39b96580b2c91bce19862d78f3562418e4d395bcad4f56",
+      "rights_status": "User-supplied visual reference; retain provenance; no commercial reuse rights inferred",
+      "notes": "Chained sapphire obelisk standing on a tiny floating tropical island."
+    },
+    {
+      "source_id": "source.saveroom.ref7",
+      "artist_id": "artist.saveroom",
+      "source_type": "USER_SUPPLIED_REFERENCE_SCREENSHOT",
+      "source_page": "",
+      "local_filename": "5c744014-dcad-4327-a6d6-3effd0844b12.png",
+      "captured": "2026-08-04",
+      "capture_method": "uploaded in current ChatGPT conversation",
+      "mime": "image/png",
+      "width": "766",
+      "height": "1275",
+      "bytes": "1690397",
+      "sha_256": "f8aad505988021361bd0f8cb57e85e1e962c779c2c3dd1d77f71b67fe03ec18c",
+      "rights_status": "User-supplied visual reference; retain provenance; no commercial reuse rights inferred",
+      "notes": "Underwater angel statue with crystalline flower wings, fish and shafts of light."
+    },
+    {
+      "source_id": "source.saveroom.ref8",
+      "artist_id": "artist.saveroom",
+      "source_type": "USER_SUPPLIED_REFERENCE_SCREENSHOT",
+      "source_page": "",
+      "local_filename": "793474b8-c5e4-4ea9-b01b-72a6717cd96b.png",
+      "captured": "2026-08-04",
+      "capture_method": "uploaded in current ChatGPT conversation",
+      "mime": "image/png",
+      "width": "735",
+      "height": "1289",
+      "bytes": "1495264",
+      "sha_256": "d769da245790f0b050130bc0329df4353b800e07f369c4057c9ef6e36992e9ae",
+      "rights_status": "User-supplied visual reference; retain provenance; no commercial reuse rights inferred",
+      "notes": "Angel musician statue in a luminous tropical sanctuary surrounded by floating flowers."
+    },
+    {
+      "source_id": "source.saveroom.ref9",
+      "artist_id": "artist.saveroom",
+      "source_type": "USER_SUPPLIED_REFERENCE_SCREENSHOT",
+      "source_page": "",
+      "local_filename": "9c9cbedd-55ff-4151-b661-e9af6b77e701.png",
+      "captured": "2026-08-04",
+      "capture_method": "uploaded in current ChatGPT conversation",
+      "mime": "image/png",
+      "width": "721",
+      "height": "1297",
+      "bytes": "1625455",
+      "sha_256": "9c88c4ddad7113f9522402e5181cd72c92323e938d18e429e60c19afde633dde",
+      "rights_status": "User-supplied visual reference; retain provenance; no commercial reuse rights inferred",
+      "notes": "Navigator walking through shallow aquamarine water toward a sail-citadel."
+    },
+    {
+      "source_id": "source.saveroom.ref10",
+      "artist_id": "artist.saveroom",
+      "source_type": "USER_SUPPLIED_REFERENCE_SCREENSHOT",
+      "source_page": "",
+      "local_filename": "dd7b1df9-460f-42e4-bb84-303f836e1321.png",
+      "captured": "2026-08-04",
+      "capture_method": "uploaded in current ChatGPT conversation",
+      "mime": "image/png",
+      "width": "719",
+      "height": "1308",
+      "bytes": "1777910",
+      "sha_256": "631f594bf2fb3358d0abd9dc7b5bc6016272f2021ae47af33e0e499d2557c691",
+      "rights_status": "User-supplied visual reference; retain provenance; no commercial reuse rights inferred",
+      "notes": "Starfall flower beach at blue-pink twilight with calm water and silhouetted trees."
+    },
+    {
+      "source_id": "source.saveroom.ref11",
+      "artist_id": "artist.saveroom",
+      "source_type": "USER_SUPPLIED_REFERENCE_SCREENSHOT",
+      "source_page": "",
+      "local_filename": "d6d80762-f05d-4c9c-a610-c233c90c2c42.png",
+      "captured": "2026-08-04",
+      "capture_method": "uploaded in current ChatGPT conversation",
+      "mime": "image/png",
+      "width": "737",
+      "height": "1289",
+      "bytes": "1879718",
+      "sha_256": "b6aa792ed747f215af9335a8c35a25335b9a99926b27247ee0f9c205c38ab1ca",
+      "rights_status": "User-supplied visual reference; retain provenance; no commercial reuse rights inferred",
+      "notes": "Navigator on an ornate celestial clock platform before a broad blue waterfall."
+    },
+    {
+      "source_id": "source.saveroom.ref12",
+      "artist_id": "artist.saveroom",
+      "source_type": "USER_SUPPLIED_REFERENCE_SCREENSHOT",
+      "source_page": "",
+      "local_filename": "309b1104-979b-4ea3-8ecc-6e039d0113eb.png",
+      "captured": "2026-08-04",
+      "capture_method": "uploaded in current ChatGPT conversation",
+      "mime": "image/png",
+      "width": "737",
+      "height": "1282",
+      "bytes": "1773746",
+      "sha_256": "dc0cfc668f69d5999e400eee0e19a80c03ffa85e0fd2d5369e59a65794119a07",
+      "rights_status": "User-supplied visual reference; retain provenance; no commercial reuse rights inferred",
+      "notes": "Seated navigator in a boat with a floating gothic citadel above crystal-clear shallows."
+    },
+    {
+      "source_id": "source.saveroom.ref13",
+      "artist_id": "artist.saveroom",
+      "source_type": "USER_SUPPLIED_REFERENCE_SCREENSHOT",
+      "source_page": "",
+      "local_filename": "0e513764-0794-4eb5-aaa1-968bbf26be06.png",
+      "captured": "2026-08-04",
+      "capture_method": "uploaded in current ChatGPT conversation",
+      "mime": "image/png",
+      "width": "740",
+      "height": "1228",
+      "bytes": "1674810",
+      "sha_256": "cf01a4413047a3971e938c14b34e8baf6c854356d4a42ef80a74a5bfe8b4f762",
+      "rights_status": "User-supplied visual reference; retain provenance; no commercial reuse rights inferred",
+      "notes": "Navigator seated on an ornate sailboat beneath a cobalt sky with a floating citadel."
+    },
+    {
+      "source_id": "source.saveroom.ref14",
+      "artist_id": "artist.saveroom",
+      "source_type": "USER_SUPPLIED_REFERENCE_SCREENSHOT",
+      "source_page": "",
+      "local_filename": "c62da193-3768-44e8-b7f3-95de9663e1db.png",
+      "captured": "2026-08-04",
+      "capture_method": "uploaded in current ChatGPT conversation",
+      "mime": "image/png",
+      "width": "740",
+      "height": "1228",
+      "bytes": "1674810",
+      "sha_256": "cf01a4413047a3971e938c14b34e8baf6c854356d4a42ef80a74a5bfe8b4f762",
+      "rights_status": "User-supplied visual reference; retain provenance; no commercial reuse rights inferred",
+      "notes": "Exact duplicate screenshot of reference 13, retained as a separate supplied source record. Exact byte duplicate of source.saveroom.ref13; separate user-supplied occurrence retained for provenance."
+    },
+    {
+      "source_id": "source.saveroom.tiktok",
+      "artist_id": "artist.saveroom",
+      "source_type": "ARTIST_PROFILE",
+      "source_page": "https://www.tiktok.com/@saveroomlofi?lang=en",
+      "local_filename": "",
+      "captured": "2026-08-04",
+      "capture_method": "user-provided public profile URL",
+      "mime": "text/html",
+      "width": "",
+      "height": "",
+      "bytes": "",
+      "sha_256": "",
+      "rights_status": "Reference metadata only; no asset license inferred",
+      "notes": "Primary visual profile supplied by the user."
+    },
+    {
+      "source_id": "source.saveroom.spotify",
+      "artist_id": "artist.saveroom",
+      "source_type": "OFFICIAL_MUSIC_PROFILE",
+      "source_page": "https://open.spotify.com/artist/3HU6PVCUQFeAUbnFgMQPz8",
+      "local_filename": "",
+      "captured": "2026-08-04",
+      "capture_method": "user-provided URL verified through connected Spotify search",
+      "mime": "text/html",
+      "width": "",
+      "height": "",
+      "bytes": "",
+      "sha_256": "",
+      "rights_status": "Reference and playback link only; music rights remain with their owners",
+      "notes": "Verified Spotify entity name saveroom and exact artist URI."
+    },
+    {
+      "source_id": "source.saveroom.bandcamp",
+      "artist_id": "artist.saveroom",
+      "source_type": "OFFICIAL_MUSIC_PROFILE",
+      "source_page": "https://saveroomlofi.bandcamp.com/",
+      "local_filename": "",
+      "captured": "2026-08-04",
+      "capture_method": "direct public web research",
+      "mime": "text/html",
+      "width": "",
+      "height": "",
+      "bytes": "",
+      "sha_256": "",
+      "rights_status": "Reference and playback metadata only; no asset license inferred",
+      "notes": "Official public Bandcamp presence used to corroborate the music-native theme direction."
+    },
+    {
+      "source_id": "source.saveroom.soundcloud",
+      "artist_id": "artist.saveroom",
+      "source_type": "OFFICIAL_MUSIC_PROFILE",
+      "source_page": "https://soundcloud.com/saveroomlofi",
+      "local_filename": "",
+      "captured": "2026-08-04",
+      "capture_method": "direct public web research",
+      "mime": "text/html",
+      "width": "",
+      "height": "",
+      "bytes": "",
+      "sha_256": "",
+      "rights_status": "Reference and playback metadata only; no asset license inferred",
+      "notes": "Public saveroom music profile."
+    },
+    {
+      "source_id": "source.saveroom.apple-music",
+      "artist_id": "artist.saveroom",
+      "source_type": "MUSIC_CATALOG_PROFILE",
+      "source_page": "https://music.apple.com/us/artist/saveroom/1720344723",
+      "local_filename": "",
+      "captured": "2026-08-04",
+      "capture_method": "direct public web research",
+      "mime": "text/html",
+      "width": "",
+      "height": "",
+      "bytes": "",
+      "sha_256": "",
+      "rights_status": "Reference and playback metadata only; no asset license inferred",
+      "notes": "Public catalog page used as independent release-catalog corroboration."
+    }
+  ],
+  "glossary": [
+    {
+      "term": "Artist World",
+      "meaning": "A complete Feature Foundry theme package dedicated to a favorite artist’s coherent visual universe."
+    },
+    {
+      "term": "World",
+      "meaning": "A major variant with distinct visual and interaction identity, such as Frawgy green daylight versus purple nocturne."
+    },
+    {
+      "term": "District",
+      "meaning": "An authored sub-reality inside a world with its own environment, weather, routing and use mode."
+    },
+    {
+      "term": "Candidate playlist",
+      "meaning": "A discovered playlist awaiting listening review. It is not approved merely because its title matches."
+    },
+    {
+      "term": "Provenance",
+      "meaning": "The source page, capture method, file identity, hash, rights note and derivative lineage for every reference or asset."
+    },
+    {
+      "term": "Anti-generic guardrail",
+      "meaning": "A rule preventing the artist theme from collapsing into a common broad aesthetic or recycled template."
+    },
+    {
+      "term": "Divine machinery",
+      "meaning": "A theme family where sacred ritual, ceremonial symbolism and futuristic machinery are fused into one coherent living UI world."
+    },
+    {
+      "term": "Post-organic metamorphosis",
+      "meaning": "A theme family examining bodies, consciousness and living systems as mutable hybrids of biological, textile, virtual and intelligent processes."
+    },
+    {
+      "term": "Nostalgia-wave paradise fantasy",
+      "meaning": "A music-native world family drawing on late-1990s and 2000s console-era 3D fantasy, tropical sanctuary spaces, game-save symbolism and emotionally restorative ambient memory."
+    }
+  ]
+}
+
