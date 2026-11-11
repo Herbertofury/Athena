@@ -1,6 +1,6 @@
 # App, mod and asset foundations
 
-This is the shared entry point for Athena's November 11 foundation research. It connects seventeen separately reviewed contributions into a usable sequence while preserving their original guides, sources, experiments, failures and evidence limits. It is a research integration candidate, not a production release or approval to change another project.
+This is the shared entry point for Athena's November 11 foundation research. It connects eighteen separately reviewed contributions into a usable sequence while preserving their original guides, sources, experiments, failures and evidence limits. It is a research integration candidate, not a production release or approval to change another project.
 
 ## Start with the outcome
 
@@ -40,6 +40,12 @@ The [mod development overview](mods.md) retains earlier research and links every
 4. Run the target import, animation, materials, lighting and packaged-runtime checks in the [asset receipt](../templates/asset-compatibility-receipt.md). Structural evidence does not establish visual equivalence or complete animation playback. Use the [texture acceptance receipt](../templates/texture-acceptance-receipt.md) for texture roles, alpha mode, mip/compression behavior and actual renderer evidence.
 
 The [game and asset overview](game-assets.md) connects these additions to existing asset-pipeline research.
+
+### Collect provider data without overstating coverage
+
+1. [WordPress collection evidence](adapters/wordpress-collections.md) reuses the existing single-post parser while reconciling supplied REST pages. The real broad collection has 1,115 missing pages after two captures; a separate two-ID query covers its selected scope. Neither is a stable snapshot or complete history.
+2. Keep request failures, conflicting records, protected/null bodies, author joins and featured-media identity separate. Media discovery is not delivery, decoding or playback. The offline [collection experiment](../experiments/site-extraction-lab/wordpress_collection.py) performs no network or account action.
+3. Use the [provider adoption contract](adapters/validation-and-adoption.md) before recommending a target integration. Actual transport, permissions, complete required fields/media and interrupted user flows still need an equivalent-work comparison against that target's current implementation.
 
 ## A shared evidence contract
 

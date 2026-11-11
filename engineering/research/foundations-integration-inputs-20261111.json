@@ -1999,6 +1999,85 @@
         }
       ],
       "tree": "b87f7b667b92b091105d7f81a8df63378e9b5280"
+    },
+    {
+      "number": 45,
+      "title": "Preserve WordPress collection evidence",
+      "head": "737b814c048a74dae13a502c699425daf904158f",
+      "url": "https://github.com/Herbertofury/Athena/pull/45",
+      "files": [
+        {
+          "path": "engineering/data/source-index.json",
+          "status": "modified",
+          "sha": "712e65a0d91f879364667c90bdaf7ba1de5fcb4b",
+          "changes": 1,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/data/sources.d/wordpress-collections-20261111.json",
+          "status": "added",
+          "sha": "04be8a2862669c44455b5092740ca09fc8ff158f",
+          "changes": 68,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/docs/adapters/README.md",
+          "status": "modified",
+          "sha": "8c47ace4300d723e87884022090e3f2e26bdce73",
+          "changes": 4,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/docs/adapters/wordpress-collections.md",
+          "status": "added",
+          "sha": "02d8951b8c8f8e713b0def80a8cb80204074201e",
+          "changes": 64,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/site-extraction-lab/README.md",
+          "status": "modified",
+          "sha": "8824a926359f7b3f2312ce8029261ea6f6eacf29",
+          "changes": 4,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/site-extraction-lab/wordpress-collection-validation-2026-11-11.json",
+          "status": "added",
+          "sha": "a946fadf5b7b5800c6ae1d585e65a27b9d91865e",
+          "changes": 371,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/site-extraction-lab/wordpress_collection.py",
+          "status": "added",
+          "sha": "aff2b48b518a690ffe3dba5ee54d6aed549722bc",
+          "changes": 355,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/research/2026-11-11-wordpress-collections.md",
+          "status": "added",
+          "sha": "ebc2a46e8b6605dba28299ecfe4fd46603d90237",
+          "changes": 40,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/tests/test_wordpress_collection.py",
+          "status": "added",
+          "sha": "7e6bf43d5715b808aed2e2a367973d95f25146de",
+          "changes": 317,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/tests/test_wordpress_collection_receipt.py",
+          "status": "added",
+          "sha": "c26d399381f372f1d07129e5092b95a1a39b1f28",
+          "changes": 46,
+          "mode": "100644"
+        }
+      ],
+      "tree": "fd28232c7a1c4955eb55036845ee4793854a567b"
     }
   ],
   "supporting_fixes": [
