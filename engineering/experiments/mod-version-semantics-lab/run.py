@@ -181,6 +181,16 @@ def run(directory, cases_path=None):
             'mismatches': mismatches, 'observations': observations, 'raw_stdout': result.stdout}
 
 
+def same_value(left, right):
+    """Preserve JSON types; bool/int/float coercion is not evidence equality."""
+    if type(left) is not type(right): return False
+    if isinstance(left, dict):
+        return left.keys() == right.keys() and all(same_value(left[k], right[k]) for k in left)
+    if isinstance(left, list):
+        return len(left) == len(right) and all(same_value(a, b) for a, b in zip(left, right))
+    return left == right
+
+
 def validate_retained_receipt(receipt):
     """Check retained evidence identity and internal consistency, not authenticity."""
     case_doc, case_bytes = strict_json(ROOT / 'cases.json')
@@ -198,10 +208,10 @@ def validate_retained_receipt(receipt):
     expected_inputs = {'cases_sha256': digest(case_bytes), 'dependency_manifest_sha256': digest(manifest_bytes),
                        'driver_sha256': digest((ROOT / 'VersionProbe.java').read_bytes()),
                        'runner_sha256': digest(Path(__file__).read_bytes())}
-    if receipt.get('inputs') != expected_inputs or receipt.get('dependencies') != manifest['artifacts']:
+    if not same_value(receipt.get('inputs'), expected_inputs) or not same_value(receipt.get('dependencies'), manifest['artifacts']):
         raise ValueError('Retained input identity mismatch')
     observations, mismatches = decode_observations(receipt['raw_stdout'], cases)
-    if receipt.get('observations') != observations or receipt.get('mismatches') != mismatches:
+    if not same_value(receipt.get('observations'), observations) or not same_value(receipt.get('mismatches'), mismatches):
         raise ValueError('Retained observations differ from raw output')
     if type(receipt.get('case_count')) is not int or receipt['case_count'] != len(cases):
         raise ValueError('Incorrect retained case count')

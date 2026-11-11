@@ -20,9 +20,11 @@ The useful differences are semantic rather than performance rankings: suffix nor
 
 ## Reproducibility and preserved failures
 
-The initial fixture assembly reused comparison/match IDs, and the harness rejected the duplicate before running Java. IDs were corrected before the measured run; no API mismatch was discarded. No third-party library implementation is copied into the repository, and no JAR binary is published. The retained output includes every result and complete stdout. Thirty-four standard-library tests exercise the offline harness and evidence invariants; Java replay is a separate explicit command. Independent review reproduced the results and prompted explicit scope-label validation plus rejection of impossible result shapes; both hardenings have mutation tests and a fresh retained replay.
+The initial fixture assembly reused comparison/match IDs, and the harness rejected the duplicate before running Java. IDs were corrected before the measured run; no API mismatch was discarded. No third-party library implementation is copied into the repository, and no JAR binary is published. The retained output includes every result and complete stdout. Thirty-seven standard-library tests exercise the offline harness and evidence invariants; Java replay is a separate explicit command. Independent review reproduced the results and prompted explicit scope-label validation plus rejection of impossible result shapes; both hardenings have mutation tests and a fresh retained replay.
 
 Main's full research checker already rejects the `apps/atlas-lab/README.md` link to the repository-root `docs/athena-local-runtime.md` because the checker confines links to `engineering/`. This contribution does not weaken that rule or repair unrelated code. Focused passing checks must not be reported as a full repository pass. Full baseline/candidate test counts and remote checks are reported in the draft PR.
+
+A focused follow-up reproduced a Python equality loophole: integer `1` could substitute for an observation boolean, and a numerically equal float could substitute for a dependency byte count. The retained upstream results were correct; the evidence validator was too permissive. Recursive type-strict comparison and three regression tests now reject those substitutions. A fresh API replay retains identical raw output, and prior evidence remains in Git history.
 
 ## Alternatives and remaining work
 

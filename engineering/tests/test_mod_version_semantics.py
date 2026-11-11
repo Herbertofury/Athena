@@ -161,6 +161,21 @@ class VersionSemanticsTests(unittest.TestCase):
                 raw = self.mutate_result(ident, 'parse_error', value, detail)
                 with self.assertRaisesRegex(ValueError, 'Impossible'): probe.decode_observations(raw, self.fixture['cases'])
 
+    def test_receipt_match_integer_is_not_boolean(self):
+        self.receipt['observations'][0]['matches_expected'] = 1
+        with self.assertRaises(ValueError): probe.validate_retained_receipt(self.receipt)
+
+    def test_receipt_dependency_float_is_not_integer(self):
+        size = self.receipt['dependencies'][0]['bytes']
+        self.receipt['dependencies'][0]['bytes'] = float(size)
+        with self.assertRaises(ValueError): probe.validate_retained_receipt(self.receipt)
+
+    def test_nested_evidence_equality_preserves_types(self):
+        self.assertTrue(probe.same_value({'x': [1, True, 1.0]}, {'x': [1, True, 1.0]}))
+        for other in [{'x': [True, True, 1.0]}, {'x': [1, 1, 1.0]}, {'x': [1, True, 1]}]:
+            with self.subTest(other=other):
+                self.assertFalse(probe.same_value({'x': [1, True, 1.0]}, other))
+
     def fake_manifest(self):
         return {'schema_version': 1, 'scope': 'test', 'artifacts': [
             {'name': name, 'url': 'https://example.invalid/' + name, 'bytes': 1, 'sha256': probe.digest(b'x')}

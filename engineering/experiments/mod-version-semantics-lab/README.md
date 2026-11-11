@@ -57,7 +57,7 @@ python3 -m unittest discover -s tests -p 'test_mod_version_semantics.py' -v
 
 Use a new output file for each run. Exit codes: `0` complete observations match expectations, `1` complete observations contain mismatches, `2` harness/dependency/process failure. On exit 1, the JSON includes every observation and all mismatch IDs. On exit 2, stderr identifies the failure and no successful receipt is issued. Preserve that failed attempt too. Timing and memory are not benchmarked.
 
-The 34 offline tests validate fixture structure, dependency integrity checks, result ordering/completeness, known-bad rows and retained receipt consistency, including its fixed scope label and legal result shapes. They **do not rerun Java** or establish that an upstream artifact is trustworthy. A local hash pins the observed bytes; it is not a signature or independent proof of supply-chain authenticity.
+The 37 offline tests validate fixture structure, dependency integrity checks, result ordering/completeness, known-bad rows and retained receipt consistency, including its fixed scope label, legal result shapes and type-strict nested comparisons. They **do not rerun Java** or establish that an upstream artifact is trustworthy. A local hash pins the observed bytes; it is not a signature or independent proof of supply-chain authenticity.
 
 ## Evidence contract and boundaries
 
