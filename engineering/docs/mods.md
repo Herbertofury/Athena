@@ -21,3 +21,7 @@ For Sims and other proprietary games, record the exact supported scripting/runti
 ## Native proof
 
 Use the actual target runtime, normal installed launch path, real assets, both successful and failing scenarios, multiplayer authority where relevant, and long-lived save compatibility. A successful compile, JSON validator or pretty render is only one gate.
+
+## Dependency meaning and diagnostics
+
+[Dependency semantics](mod-dependency-semantics.md) separates loader metadata, version grammar, physical-side filtering and ordering. The [version API laboratory](../experiments/mod-version-semantics-lab/README.md) retains 60 measured upstream-API observations on synthetic inputs, not native mod compatibility or a universal resolver.

@@ -1,0 +1,638 @@
+{
+  "schema_version": 1,
+  "kind": "measured_api_behavior_on_synthetic_inputs",
+  "observed_at_utc": "2026-11-11T01:09:08.773107+00:00",
+  "scope": "Only named upstream APIs. No game, Forge/NeoForge wrappers, full mod solver, performance, or production acceptance.",
+  "environment": {
+    "java_version": "openjdk version \"21.0.13\" 2026-10-20\nOpenJDK Runtime Environment (build 21.0.13+9-1-deb13u2-Debian)\nOpenJDK 64-Bit Server VM (build 21.0.13+9-1-deb13u2-Debian, mixed mode, sharing)",
+    "platform": "Linux",
+    "architecture": "x86_64",
+    "python": "3.12.14"
+  },
+  "inputs": {
+    "cases_sha256": "33c2df6529e63c91aa4ce57a0501eefac071401bdb2bc9aa5809bc5aaf4a1a66",
+    "dependency_manifest_sha256": "00fcd480d621ff4d28ae0fb4569f939ea0c9b0ea50bbb0a55c54a3e23d09522c",
+    "driver_sha256": "e04ba2cb3994cddfc16fa867f6ed02938c59a6ab8ab7bc7a78014270d7fdf765",
+    "runner_sha256": "39b50c711934892fa507587f1872cd737acf689a0f6e2be58b9728079029f71d"
+  },
+  "dependencies": [
+    {
+      "name": "fabric-loader-0.20.1.jar",
+      "url": "https://maven.fabricmc.net/net/fabricmc/fabric-loader/0.20.1/fabric-loader-0.20.1.jar",
+      "bytes": 1988880,
+      "sha256": "d0c5a082e07410aaff9de7ab196aa6b4236002870f9ba3ad5c1260fcce5110ad"
+    },
+    {
+      "name": "maven-artifact-3.9.9.jar",
+      "url": "https://repo.maven.apache.org/maven2/org/apache/maven/maven-artifact/3.9.9/maven-artifact-3.9.9.jar",
+      "bytes": 58819,
+      "sha256": "30f015d1c1a393e19c18cd4f43532089c36d4ca328608ce3dda78b74d3d31515"
+    }
+  ],
+  "case_count": 60,
+  "all_expected": true,
+  "mismatches": [],
+  "observations": [
+    {
+      "id": "fc-build-metadata",
+      "operation": "fabric_compare",
+      "left": "1.0.0+one",
+      "right": "1.0.0+two",
+      "status": "ok",
+      "value": "0",
+      "detail": "",
+      "matches_expected": true
+    },
+    {
+      "id": "mc-build-metadata",
+      "operation": "maven_compare",
+      "left": "1.0.0+one",
+      "right": "1.0.0+two",
+      "status": "ok",
+      "value": "-1",
+      "detail": "",
+      "matches_expected": true
+    },
+    {
+      "id": "fc-prerelease-case",
+      "operation": "fabric_compare",
+      "left": "1.0.0-ALPHA",
+      "right": "1.0.0-alpha",
+      "status": "ok",
+      "value": "-1",
+      "detail": "",
+      "matches_expected": true
+    },
+    {
+      "id": "mc-prerelease-case",
+      "operation": "maven_compare",
+      "left": "1.0.0-ALPHA",
+      "right": "1.0.0-alpha",
+      "status": "ok",
+      "value": "0",
+      "detail": "",
+      "matches_expected": true
+    },
+    {
+      "id": "fc-final-alias",
+      "operation": "fabric_compare",
+      "left": "1.0.0-final",
+      "right": "1.0.0",
+      "status": "ok",
+      "value": "-1",
+      "detail": "",
+      "matches_expected": true
+    },
+    {
+      "id": "mc-final-alias",
+      "operation": "maven_compare",
+      "left": "1.0.0-final",
+      "right": "1.0.0",
+      "status": "ok",
+      "value": "0",
+      "detail": "",
+      "matches_expected": true
+    },
+    {
+      "id": "fc-service-pack",
+      "operation": "fabric_compare",
+      "left": "1.0.0-sp",
+      "right": "1.0.0",
+      "status": "ok",
+      "value": "-1",
+      "detail": "",
+      "matches_expected": true
+    },
+    {
+      "id": "mc-service-pack",
+      "operation": "maven_compare",
+      "left": "1.0.0-sp",
+      "right": "1.0.0",
+      "status": "ok",
+      "value": "1",
+      "detail": "",
+      "matches_expected": true
+    },
+    {
+      "id": "fc-numeric-components",
+      "operation": "fabric_compare",
+      "left": "1.2.10",
+      "right": "1.2.9",
+      "status": "ok",
+      "value": "1",
+      "detail": "",
+      "matches_expected": true
+    },
+    {
+      "id": "mc-numeric-components",
+      "operation": "maven_compare",
+      "left": "1.2.10",
+      "right": "1.2.9",
+      "status": "ok",
+      "value": "1",
+      "detail": "",
+      "matches_expected": true
+    },
+    {
+      "id": "fc-padding",
+      "operation": "fabric_compare",
+      "left": "1.2",
+      "right": "1.2.0",
+      "status": "ok",
+      "value": "0",
+      "detail": "",
+      "matches_expected": true
+    },
+    {
+      "id": "mc-padding",
+      "operation": "maven_compare",
+      "left": "1.2",
+      "right": "1.2.0",
+      "status": "ok",
+      "value": "0",
+      "detail": "",
+      "matches_expected": true
+    },
+    {
+      "id": "fc-four-components",
+      "operation": "fabric_compare",
+      "left": "1.2.3.4",
+      "right": "1.2.3",
+      "status": "ok",
+      "value": "1",
+      "detail": "",
+      "matches_expected": true
+    },
+    {
+      "id": "mc-four-components",
+      "operation": "maven_compare",
+      "left": "1.2.3.4",
+      "right": "1.2.3",
+      "status": "ok",
+      "value": "1",
+      "detail": "",
+      "matches_expected": true
+    },
+    {
+      "id": "fc-release-after-rc",
+      "operation": "fabric_compare",
+      "left": "2.0.0",
+      "right": "2.0.0-rc.1",
+      "status": "ok",
+      "value": "1",
+      "detail": "",
+      "matches_expected": true
+    },
+    {
+      "id": "mc-release-after-rc",
+      "operation": "maven_compare",
+      "left": "2.0.0",
+      "right": "2.0.0-rc.1",
+      "status": "ok",
+      "value": "1",
+      "detail": "",
+      "matches_expected": true
+    },
+    {
+      "id": "fc-prerelease-numeric",
+      "operation": "fabric_compare",
+      "left": "1.0.0-beta.10",
+      "right": "1.0.0-beta.2",
+      "status": "ok",
+      "value": "1",
+      "detail": "",
+      "matches_expected": true
+    },
+    {
+      "id": "mc-prerelease-numeric",
+      "operation": "maven_compare",
+      "left": "1.0.0-beta.10",
+      "right": "1.0.0-beta.2",
+      "status": "ok",
+      "value": "1",
+      "detail": "",
+      "matches_expected": true
+    },
+    {
+      "id": "fc-leading-zero",
+      "operation": "fabric_compare",
+      "left": "1.02.0",
+      "right": "1.2.0",
+      "status": "ok",
+      "value": "0",
+      "detail": "",
+      "matches_expected": true
+    },
+    {
+      "id": "mc-leading-zero",
+      "operation": "maven_compare",
+      "left": "1.02.0",
+      "right": "1.2.0",
+      "status": "ok",
+      "value": "0",
+      "detail": "",
+      "matches_expected": true
+    },
+    {
+      "id": "f-exact-hit",
+      "operation": "fabric_match",
+      "left": "1.2.3",
+      "right": "1.2.3",
+      "status": "ok",
+      "value": "true",
+      "detail": "",
+      "matches_expected": true
+    },
+    {
+      "id": "f-exact-miss",
+      "operation": "fabric_match",
+      "left": "1.2.3",
+      "right": "1.2.4",
+      "status": "ok",
+      "value": "false",
+      "detail": "",
+      "matches_expected": true
+    },
+    {
+      "id": "f-bounded-hit",
+      "operation": "fabric_match",
+      "left": ">=1.0 <2.0",
+      "right": "1.5",
+      "status": "ok",
+      "value": "true",
+      "detail": "",
+      "matches_expected": true
+    },
+    {
+      "id": "f-bounded-upper",
+      "operation": "fabric_match",
+      "left": ">=1.0 <2.0",
+      "right": "2.0",
+      "status": "ok",
+      "value": "false",
+      "detail": "",
+      "matches_expected": true
+    },
+    {
+      "id": "f-bounded-prerelease",
+      "operation": "fabric_match",
+      "left": ">=1.0 <2.0",
+      "right": "2.0-rc.1",
+      "status": "ok",
+      "value": "true",
+      "detail": "",
+      "matches_expected": true
+    },
+    {
+      "id": "f-wildcard-hit",
+      "operation": "fabric_match",
+      "left": "1.2.x",
+      "right": "1.2.9",
+      "status": "ok",
+      "value": "true",
+      "detail": "",
+      "matches_expected": true
+    },
+    {
+      "id": "f-wildcard-miss",
+      "operation": "fabric_match",
+      "left": "1.2.x",
+      "right": "1.3.0",
+      "status": "ok",
+      "value": "false",
+      "detail": "",
+      "matches_expected": true
+    },
+    {
+      "id": "f-caret-hit",
+      "operation": "fabric_match",
+      "left": "^1.2.3",
+      "right": "1.9.0",
+      "status": "ok",
+      "value": "true",
+      "detail": "",
+      "matches_expected": true
+    },
+    {
+      "id": "f-caret-miss",
+      "operation": "fabric_match",
+      "left": "^1.2.3",
+      "right": "2.0.0",
+      "status": "ok",
+      "value": "false",
+      "detail": "",
+      "matches_expected": true
+    },
+    {
+      "id": "f-tilde-hit",
+      "operation": "fabric_match",
+      "left": "~1.2.3",
+      "right": "1.2.9",
+      "status": "ok",
+      "value": "true",
+      "detail": "",
+      "matches_expected": true
+    },
+    {
+      "id": "f-tilde-miss",
+      "operation": "fabric_match",
+      "left": "~1.2.3",
+      "right": "1.3.0",
+      "status": "ok",
+      "value": "false",
+      "detail": "",
+      "matches_expected": true
+    },
+    {
+      "id": "f-any",
+      "operation": "fabric_match",
+      "left": "*",
+      "right": "nightly",
+      "status": "ok",
+      "value": "true",
+      "detail": "",
+      "matches_expected": true
+    },
+    {
+      "id": "f-empty",
+      "operation": "fabric_match",
+      "left": "",
+      "right": "1.2.3",
+      "status": "ok",
+      "value": "true",
+      "detail": "",
+      "matches_expected": true
+    },
+    {
+      "id": "f-string-hit",
+      "operation": "fabric_match",
+      "left": "nightly",
+      "right": "nightly",
+      "status": "ok",
+      "value": "true",
+      "detail": "",
+      "matches_expected": true
+    },
+    {
+      "id": "f-string-miss",
+      "operation": "fabric_match",
+      "left": "nightly",
+      "right": "release",
+      "status": "ok",
+      "value": "false",
+      "detail": "",
+      "matches_expected": true
+    },
+    {
+      "id": "f-string-inclusive",
+      "operation": "fabric_match",
+      "left": ">=nightly",
+      "right": "nightly",
+      "status": "ok",
+      "value": "true",
+      "detail": "",
+      "matches_expected": true
+    },
+    {
+      "id": "f-string-exclusive",
+      "operation": "fabric_match",
+      "left": ">nightly",
+      "right": "nightly",
+      "status": "parse_error",
+      "value": "",
+      "detail": "VersionParsingException",
+      "matches_expected": true
+    },
+    {
+      "id": "f-wildcard-exclusive",
+      "operation": "fabric_match",
+      "left": ">1.2.x",
+      "right": "1.2.9",
+      "status": "parse_error",
+      "value": "",
+      "detail": "VersionParsingException",
+      "matches_expected": true
+    },
+    {
+      "id": "f-maven-syntax",
+      "operation": "fabric_match",
+      "left": "[1.0,2.0)",
+      "right": "1.5",
+      "status": "ok",
+      "value": "false",
+      "detail": "",
+      "matches_expected": true
+    },
+    {
+      "id": "f-maven-union",
+      "operation": "fabric_match",
+      "left": "(,1.0],[1.2,)",
+      "right": "1.3",
+      "status": "ok",
+      "value": "false",
+      "detail": "",
+      "matches_expected": true
+    },
+    {
+      "id": "m-exact-hit",
+      "operation": "maven_match",
+      "left": "[1.2.3]",
+      "right": "1.2.3",
+      "status": "ok",
+      "value": "true",
+      "detail": "recommended=;restrictions=1;hard=true",
+      "matches_expected": true
+    },
+    {
+      "id": "m-exact-miss",
+      "operation": "maven_match",
+      "left": "[1.2.3]",
+      "right": "1.2.4",
+      "status": "ok",
+      "value": "false",
+      "detail": "recommended=;restrictions=1;hard=true",
+      "matches_expected": true
+    },
+    {
+      "id": "m-bare-miss",
+      "operation": "maven_match",
+      "left": "1.2.3",
+      "right": "9.0",
+      "status": "ok",
+      "value": "true",
+      "detail": "recommended=1.2.3;restrictions=1;hard=false",
+      "matches_expected": true
+    },
+    {
+      "id": "m-bounded-hit",
+      "operation": "maven_match",
+      "left": "[1.0,2.0)",
+      "right": "1.5",
+      "status": "ok",
+      "value": "true",
+      "detail": "recommended=;restrictions=1;hard=true",
+      "matches_expected": true
+    },
+    {
+      "id": "m-bounded-upper",
+      "operation": "maven_match",
+      "left": "[1.0,2.0)",
+      "right": "2.0",
+      "status": "ok",
+      "value": "false",
+      "detail": "recommended=;restrictions=1;hard=true",
+      "matches_expected": true
+    },
+    {
+      "id": "m-bounded-prerelease",
+      "operation": "maven_match",
+      "left": "[1.0,2.0)",
+      "right": "2.0-rc.1",
+      "status": "ok",
+      "value": "true",
+      "detail": "recommended=;restrictions=1;hard=true",
+      "matches_expected": true
+    },
+    {
+      "id": "m-union-hit",
+      "operation": "maven_match",
+      "left": "(,1.0],[1.2,)",
+      "right": "1.3",
+      "status": "ok",
+      "value": "true",
+      "detail": "recommended=;restrictions=2;hard=true",
+      "matches_expected": true
+    },
+    {
+      "id": "m-union-gap",
+      "operation": "maven_match",
+      "left": "(,1.0],[1.2,)",
+      "right": "1.1",
+      "status": "ok",
+      "value": "false",
+      "detail": "recommended=;restrictions=2;hard=true",
+      "matches_expected": true
+    },
+    {
+      "id": "m-empty",
+      "operation": "maven_match",
+      "left": "",
+      "right": "1.2.3",
+      "status": "ok",
+      "value": "false",
+      "detail": "recommended=;restrictions=0;hard=false",
+      "matches_expected": true
+    },
+    {
+      "id": "m-star",
+      "operation": "maven_match",
+      "left": "*",
+      "right": "nightly",
+      "status": "ok",
+      "value": "true",
+      "detail": "recommended=*;restrictions=1;hard=false",
+      "matches_expected": true
+    },
+    {
+      "id": "m-fabric-caret",
+      "operation": "maven_match",
+      "left": "^1.2.3",
+      "right": "9.0",
+      "status": "ok",
+      "value": "true",
+      "detail": "recommended=^1.2.3;restrictions=1;hard=false",
+      "matches_expected": true
+    },
+    {
+      "id": "m-fabric-relational",
+      "operation": "maven_match",
+      "left": ">=1.0 <2.0",
+      "right": "9.0",
+      "status": "ok",
+      "value": "true",
+      "detail": "recommended=>=1.0 <2.0;restrictions=1;hard=false",
+      "matches_expected": true
+    },
+    {
+      "id": "m-unbounded",
+      "operation": "maven_match",
+      "left": "[1.0",
+      "right": "1.2",
+      "status": "parse_error",
+      "value": "",
+      "detail": "InvalidVersionSpecificationException",
+      "matches_expected": true
+    },
+    {
+      "id": "m-backwards",
+      "operation": "maven_match",
+      "left": "[2.0,1.0]",
+      "right": "1.5",
+      "status": "parse_error",
+      "value": "",
+      "detail": "InvalidVersionSpecificationException",
+      "matches_expected": true
+    },
+    {
+      "id": "m-exclusive-single",
+      "operation": "maven_match",
+      "left": "(1.0)",
+      "right": "1.0",
+      "status": "parse_error",
+      "value": "",
+      "detail": "InvalidVersionSpecificationException",
+      "matches_expected": true
+    },
+    {
+      "id": "m-empty-exclusive",
+      "operation": "maven_match",
+      "left": "[1.0,1.0)",
+      "right": "1.0",
+      "status": "parse_error",
+      "value": "",
+      "detail": "InvalidVersionSpecificationException",
+      "matches_expected": true
+    },
+    {
+      "id": "m-overlap",
+      "operation": "maven_match",
+      "left": "[1.0,2.0],[1.5,3.0]",
+      "right": "1.8",
+      "status": "parse_error",
+      "value": "",
+      "detail": "InvalidVersionSpecificationException",
+      "matches_expected": true
+    },
+    {
+      "id": "m-qualifier-equal",
+      "operation": "maven_match",
+      "left": "[1.0]",
+      "right": "1.0-final",
+      "status": "ok",
+      "value": "true",
+      "detail": "recommended=;restrictions=1;hard=true",
+      "matches_expected": true
+    },
+    {
+      "id": "m-build-metadata",
+      "operation": "maven_match",
+      "left": "[1.0.0+one]",
+      "right": "1.0.0+two",
+      "status": "ok",
+      "value": "false",
+      "detail": "recommended=;restrictions=1;hard=true",
+      "matches_expected": true
+    },
+    {
+      "id": "m-case-equal",
+      "operation": "maven_match",
+      "left": "[1.0.0-ALPHA]",
+      "right": "1.0.0-alpha",
+      "status": "ok",
+      "value": "true",
+      "detail": "recommended=;restrictions=1;hard=true",
+      "matches_expected": true
+    }
+  ],
+  "raw_stdout": "fc-build-metadata\tok\t0\t\nmc-build-metadata\tok\t-1\t\nfc-prerelease-case\tok\t-1\t\nmc-prerelease-case\tok\t0\t\nfc-final-alias\tok\t-1\t\nmc-final-alias\tok\t0\t\nfc-service-pack\tok\t-1\t\nmc-service-pack\tok\t1\t\nfc-numeric-components\tok\t1\t\nmc-numeric-components\tok\t1\t\nfc-padding\tok\t0\t\nmc-padding\tok\t0\t\nfc-four-components\tok\t1\t\nmc-four-components\tok\t1\t\nfc-release-after-rc\tok\t1\t\nmc-release-after-rc\tok\t1\t\nfc-prerelease-numeric\tok\t1\t\nmc-prerelease-numeric\tok\t1\t\nfc-leading-zero\tok\t0\t\nmc-leading-zero\tok\t0\t\nf-exact-hit\tok\ttrue\t\nf-exact-miss\tok\tfalse\t\nf-bounded-hit\tok\ttrue\t\nf-bounded-upper\tok\tfalse\t\nf-bounded-prerelease\tok\ttrue\t\nf-wildcard-hit\tok\ttrue\t\nf-wildcard-miss\tok\tfalse\t\nf-caret-hit\tok\ttrue\t\nf-caret-miss\tok\tfalse\t\nf-tilde-hit\tok\ttrue\t\nf-tilde-miss\tok\tfalse\t\nf-any\tok\ttrue\t\nf-empty\tok\ttrue\t\nf-string-hit\tok\ttrue\t\nf-string-miss\tok\tfalse\t\nf-string-inclusive\tok\ttrue\t\nf-string-exclusive\tparse_error\t\tVersionParsingException\nf-wildcard-exclusive\tparse_error\t\tVersionParsingException\nf-maven-syntax\tok\tfalse\t\nf-maven-union\tok\tfalse\t\nm-exact-hit\tok\ttrue\trecommended=;restrictions=1;hard=true\nm-exact-miss\tok\tfalse\trecommended=;restrictions=1;hard=true\nm-bare-miss\tok\ttrue\trecommended=1.2.3;restrictions=1;hard=false\nm-bounded-hit\tok\ttrue\trecommended=;restrictions=1;hard=true\nm-bounded-upper\tok\tfalse\trecommended=;restrictions=1;hard=true\nm-bounded-prerelease\tok\ttrue\trecommended=;restrictions=1;hard=true\nm-union-hit\tok\ttrue\trecommended=;restrictions=2;hard=true\nm-union-gap\tok\tfalse\trecommended=;restrictions=2;hard=true\nm-empty\tok\tfalse\trecommended=;restrictions=0;hard=false\nm-star\tok\ttrue\trecommended=*;restrictions=1;hard=false\nm-fabric-caret\tok\ttrue\trecommended=^1.2.3;restrictions=1;hard=false\nm-fabric-relational\tok\ttrue\trecommended=>=1.0 <2.0;restrictions=1;hard=false\nm-unbounded\tparse_error\t\tInvalidVersionSpecificationException\nm-backwards\tparse_error\t\tInvalidVersionSpecificationException\nm-exclusive-single\tparse_error\t\tInvalidVersionSpecificationException\nm-empty-exclusive\tparse_error\t\tInvalidVersionSpecificationException\nm-overlap\tparse_error\t\tInvalidVersionSpecificationException\nm-qualifier-equal\tok\ttrue\trecommended=;restrictions=1;hard=true\nm-build-metadata\tok\tfalse\trecommended=;restrictions=1;hard=true\nm-case-equal\tok\ttrue\trecommended=;restrictions=1;hard=true\n"
+}

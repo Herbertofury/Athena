@@ -1,0 +1,607 @@
+{
+  "schema_version": 1,
+  "kind": "synthetic",
+  "purpose": "Pinned upstream version API differential observations; not a mod compatibility solver.",
+  "cases": [
+    {
+      "id": "fc-build-metadata",
+      "operation": "fabric_compare",
+      "left": "1.0.0+one",
+      "right": "1.0.0+two",
+      "expected_status": "ok",
+      "expected_value": "0",
+      "reason": "Build metadata is not a universal ignored suffix.",
+      "expected_detail": ""
+    },
+    {
+      "id": "mc-build-metadata",
+      "operation": "maven_compare",
+      "left": "1.0.0+one",
+      "right": "1.0.0+two",
+      "expected_status": "ok",
+      "expected_value": "-1",
+      "reason": "Build metadata is not a universal ignored suffix.",
+      "expected_detail": ""
+    },
+    {
+      "id": "fc-prerelease-case",
+      "operation": "fabric_compare",
+      "left": "1.0.0-ALPHA",
+      "right": "1.0.0-alpha",
+      "expected_status": "ok",
+      "expected_value": "-1",
+      "reason": "Prerelease case rules differ.",
+      "expected_detail": ""
+    },
+    {
+      "id": "mc-prerelease-case",
+      "operation": "maven_compare",
+      "left": "1.0.0-ALPHA",
+      "right": "1.0.0-alpha",
+      "expected_status": "ok",
+      "expected_value": "0",
+      "reason": "Prerelease case rules differ.",
+      "expected_detail": ""
+    },
+    {
+      "id": "fc-final-alias",
+      "operation": "fabric_compare",
+      "left": "1.0.0-final",
+      "right": "1.0.0",
+      "expected_status": "ok",
+      "expected_value": "-1",
+      "reason": "Maven release aliases are not SemVer prerelease equality.",
+      "expected_detail": ""
+    },
+    {
+      "id": "mc-final-alias",
+      "operation": "maven_compare",
+      "left": "1.0.0-final",
+      "right": "1.0.0",
+      "expected_status": "ok",
+      "expected_value": "0",
+      "reason": "Maven release aliases are not SemVer prerelease equality.",
+      "expected_detail": ""
+    },
+    {
+      "id": "fc-service-pack",
+      "operation": "fabric_compare",
+      "left": "1.0.0-sp",
+      "right": "1.0.0",
+      "expected_status": "ok",
+      "expected_value": "-1",
+      "reason": "Maven service-pack qualifier sorts after release.",
+      "expected_detail": ""
+    },
+    {
+      "id": "mc-service-pack",
+      "operation": "maven_compare",
+      "left": "1.0.0-sp",
+      "right": "1.0.0",
+      "expected_status": "ok",
+      "expected_value": "1",
+      "reason": "Maven service-pack qualifier sorts after release.",
+      "expected_detail": ""
+    },
+    {
+      "id": "fc-numeric-components",
+      "operation": "fabric_compare",
+      "left": "1.2.10",
+      "right": "1.2.9",
+      "expected_status": "ok",
+      "expected_value": "1",
+      "reason": "Compare numeric components rather than string order.",
+      "expected_detail": ""
+    },
+    {
+      "id": "mc-numeric-components",
+      "operation": "maven_compare",
+      "left": "1.2.10",
+      "right": "1.2.9",
+      "expected_status": "ok",
+      "expected_value": "1",
+      "reason": "Compare numeric components rather than string order.",
+      "expected_detail": ""
+    },
+    {
+      "id": "fc-padding",
+      "operation": "fabric_compare",
+      "left": "1.2",
+      "right": "1.2.0",
+      "expected_status": "ok",
+      "expected_value": "0",
+      "reason": "Both observed APIs allow component padding.",
+      "expected_detail": ""
+    },
+    {
+      "id": "mc-padding",
+      "operation": "maven_compare",
+      "left": "1.2",
+      "right": "1.2.0",
+      "expected_status": "ok",
+      "expected_value": "0",
+      "reason": "Both observed APIs allow component padding.",
+      "expected_detail": ""
+    },
+    {
+      "id": "fc-four-components",
+      "operation": "fabric_compare",
+      "left": "1.2.3.4",
+      "right": "1.2.3",
+      "expected_status": "ok",
+      "expected_value": "1",
+      "reason": "Do not truncate additional components.",
+      "expected_detail": ""
+    },
+    {
+      "id": "mc-four-components",
+      "operation": "maven_compare",
+      "left": "1.2.3.4",
+      "right": "1.2.3",
+      "expected_status": "ok",
+      "expected_value": "1",
+      "reason": "Do not truncate additional components.",
+      "expected_detail": ""
+    },
+    {
+      "id": "fc-release-after-rc",
+      "operation": "fabric_compare",
+      "left": "2.0.0",
+      "right": "2.0.0-rc.1",
+      "expected_status": "ok",
+      "expected_value": "1",
+      "reason": "Release versus prerelease baseline.",
+      "expected_detail": ""
+    },
+    {
+      "id": "mc-release-after-rc",
+      "operation": "maven_compare",
+      "left": "2.0.0",
+      "right": "2.0.0-rc.1",
+      "expected_status": "ok",
+      "expected_value": "1",
+      "reason": "Release versus prerelease baseline.",
+      "expected_detail": ""
+    },
+    {
+      "id": "fc-prerelease-numeric",
+      "operation": "fabric_compare",
+      "left": "1.0.0-beta.10",
+      "right": "1.0.0-beta.2",
+      "expected_status": "ok",
+      "expected_value": "1",
+      "reason": "Numeric prerelease components need numeric comparison.",
+      "expected_detail": ""
+    },
+    {
+      "id": "mc-prerelease-numeric",
+      "operation": "maven_compare",
+      "left": "1.0.0-beta.10",
+      "right": "1.0.0-beta.2",
+      "expected_status": "ok",
+      "expected_value": "1",
+      "reason": "Numeric prerelease components need numeric comparison.",
+      "expected_detail": ""
+    },
+    {
+      "id": "fc-leading-zero",
+      "operation": "fabric_compare",
+      "left": "1.02.0",
+      "right": "1.2.0",
+      "expected_status": "ok",
+      "expected_value": "0",
+      "reason": "Record actual permissive-parser behavior; not strict SemVer validation.",
+      "expected_detail": ""
+    },
+    {
+      "id": "mc-leading-zero",
+      "operation": "maven_compare",
+      "left": "1.02.0",
+      "right": "1.2.0",
+      "expected_status": "ok",
+      "expected_value": "0",
+      "reason": "Record actual permissive-parser behavior; not strict SemVer validation.",
+      "expected_detail": ""
+    },
+    {
+      "id": "f-exact-hit",
+      "operation": "fabric_match",
+      "left": "1.2.3",
+      "right": "1.2.3",
+      "expected_status": "ok",
+      "expected_value": "true",
+      "reason": "Fabric predicate API result; no whole-mod solver claim.",
+      "expected_detail": ""
+    },
+    {
+      "id": "f-exact-miss",
+      "operation": "fabric_match",
+      "left": "1.2.3",
+      "right": "1.2.4",
+      "expected_status": "ok",
+      "expected_value": "false",
+      "reason": "Fabric predicate API result; no whole-mod solver claim.",
+      "expected_detail": ""
+    },
+    {
+      "id": "f-bounded-hit",
+      "operation": "fabric_match",
+      "left": ">=1.0 <2.0",
+      "right": "1.5",
+      "expected_status": "ok",
+      "expected_value": "true",
+      "reason": "Fabric predicate API result; no whole-mod solver claim.",
+      "expected_detail": ""
+    },
+    {
+      "id": "f-bounded-upper",
+      "operation": "fabric_match",
+      "left": ">=1.0 <2.0",
+      "right": "2.0",
+      "expected_status": "ok",
+      "expected_value": "false",
+      "reason": "Fabric predicate API result; no whole-mod solver claim.",
+      "expected_detail": ""
+    },
+    {
+      "id": "f-bounded-prerelease",
+      "operation": "fabric_match",
+      "left": ">=1.0 <2.0",
+      "right": "2.0-rc.1",
+      "expected_status": "ok",
+      "expected_value": "true",
+      "reason": "Fabric predicate API result; no whole-mod solver claim.",
+      "expected_detail": ""
+    },
+    {
+      "id": "f-wildcard-hit",
+      "operation": "fabric_match",
+      "left": "1.2.x",
+      "right": "1.2.9",
+      "expected_status": "ok",
+      "expected_value": "true",
+      "reason": "Fabric predicate API result; no whole-mod solver claim.",
+      "expected_detail": ""
+    },
+    {
+      "id": "f-wildcard-miss",
+      "operation": "fabric_match",
+      "left": "1.2.x",
+      "right": "1.3.0",
+      "expected_status": "ok",
+      "expected_value": "false",
+      "reason": "Fabric predicate API result; no whole-mod solver claim.",
+      "expected_detail": ""
+    },
+    {
+      "id": "f-caret-hit",
+      "operation": "fabric_match",
+      "left": "^1.2.3",
+      "right": "1.9.0",
+      "expected_status": "ok",
+      "expected_value": "true",
+      "reason": "Fabric predicate API result; no whole-mod solver claim.",
+      "expected_detail": ""
+    },
+    {
+      "id": "f-caret-miss",
+      "operation": "fabric_match",
+      "left": "^1.2.3",
+      "right": "2.0.0",
+      "expected_status": "ok",
+      "expected_value": "false",
+      "reason": "Fabric predicate API result; no whole-mod solver claim.",
+      "expected_detail": ""
+    },
+    {
+      "id": "f-tilde-hit",
+      "operation": "fabric_match",
+      "left": "~1.2.3",
+      "right": "1.2.9",
+      "expected_status": "ok",
+      "expected_value": "true",
+      "reason": "Fabric predicate API result; no whole-mod solver claim.",
+      "expected_detail": ""
+    },
+    {
+      "id": "f-tilde-miss",
+      "operation": "fabric_match",
+      "left": "~1.2.3",
+      "right": "1.3.0",
+      "expected_status": "ok",
+      "expected_value": "false",
+      "reason": "Fabric predicate API result; no whole-mod solver claim.",
+      "expected_detail": ""
+    },
+    {
+      "id": "f-any",
+      "operation": "fabric_match",
+      "left": "*",
+      "right": "nightly",
+      "expected_status": "ok",
+      "expected_value": "true",
+      "reason": "Fabric predicate API result; no whole-mod solver claim.",
+      "expected_detail": ""
+    },
+    {
+      "id": "f-empty",
+      "operation": "fabric_match",
+      "left": "",
+      "right": "1.2.3",
+      "expected_status": "ok",
+      "expected_value": "true",
+      "reason": "Fabric predicate API result; no whole-mod solver claim.",
+      "expected_detail": ""
+    },
+    {
+      "id": "f-string-hit",
+      "operation": "fabric_match",
+      "left": "nightly",
+      "right": "nightly",
+      "expected_status": "ok",
+      "expected_value": "true",
+      "reason": "Fabric predicate API result; no whole-mod solver claim.",
+      "expected_detail": ""
+    },
+    {
+      "id": "f-string-miss",
+      "operation": "fabric_match",
+      "left": "nightly",
+      "right": "release",
+      "expected_status": "ok",
+      "expected_value": "false",
+      "reason": "Fabric predicate API result; no whole-mod solver claim.",
+      "expected_detail": ""
+    },
+    {
+      "id": "f-string-inclusive",
+      "operation": "fabric_match",
+      "left": ">=nightly",
+      "right": "nightly",
+      "expected_status": "ok",
+      "expected_value": "true",
+      "reason": "Fabric predicate API result; no whole-mod solver claim.",
+      "expected_detail": ""
+    },
+    {
+      "id": "f-string-exclusive",
+      "operation": "fabric_match",
+      "left": ">nightly",
+      "right": "nightly",
+      "expected_status": "parse_error",
+      "expected_value": "",
+      "reason": "Fabric predicate API result; no whole-mod solver claim.",
+      "expected_detail": "VersionParsingException"
+    },
+    {
+      "id": "f-wildcard-exclusive",
+      "operation": "fabric_match",
+      "left": ">1.2.x",
+      "right": "1.2.9",
+      "expected_status": "parse_error",
+      "expected_value": "",
+      "reason": "Fabric predicate API result; no whole-mod solver claim.",
+      "expected_detail": "VersionParsingException"
+    },
+    {
+      "id": "f-maven-syntax",
+      "operation": "fabric_match",
+      "left": "[1.0,2.0)",
+      "right": "1.5",
+      "expected_status": "ok",
+      "expected_value": "false",
+      "reason": "Fabric predicate API result; no whole-mod solver claim.",
+      "expected_detail": ""
+    },
+    {
+      "id": "f-maven-union",
+      "operation": "fabric_match",
+      "left": "(,1.0],[1.2,)",
+      "right": "1.3",
+      "expected_status": "ok",
+      "expected_value": "false",
+      "reason": "Fabric predicate API result; no whole-mod solver claim.",
+      "expected_detail": ""
+    },
+    {
+      "id": "m-exact-hit",
+      "operation": "maven_match",
+      "left": "[1.2.3]",
+      "right": "1.2.3",
+      "expected_status": "ok",
+      "expected_value": "true",
+      "reason": "Maven Artifact API result, not the Forge/NeoForge wrapper or dependency resolver.",
+      "expected_detail": "recommended=;restrictions=1;hard=true"
+    },
+    {
+      "id": "m-exact-miss",
+      "operation": "maven_match",
+      "left": "[1.2.3]",
+      "right": "1.2.4",
+      "expected_status": "ok",
+      "expected_value": "false",
+      "reason": "Maven Artifact API result, not the Forge/NeoForge wrapper or dependency resolver.",
+      "expected_detail": "recommended=;restrictions=1;hard=true"
+    },
+    {
+      "id": "m-bare-miss",
+      "operation": "maven_match",
+      "left": "1.2.3",
+      "right": "9.0",
+      "expected_status": "ok",
+      "expected_value": "true",
+      "reason": "Maven Artifact API result, not the Forge/NeoForge wrapper or dependency resolver.",
+      "expected_detail": "recommended=1.2.3;restrictions=1;hard=false"
+    },
+    {
+      "id": "m-bounded-hit",
+      "operation": "maven_match",
+      "left": "[1.0,2.0)",
+      "right": "1.5",
+      "expected_status": "ok",
+      "expected_value": "true",
+      "reason": "Maven Artifact API result, not the Forge/NeoForge wrapper or dependency resolver.",
+      "expected_detail": "recommended=;restrictions=1;hard=true"
+    },
+    {
+      "id": "m-bounded-upper",
+      "operation": "maven_match",
+      "left": "[1.0,2.0)",
+      "right": "2.0",
+      "expected_status": "ok",
+      "expected_value": "false",
+      "reason": "Maven Artifact API result, not the Forge/NeoForge wrapper or dependency resolver.",
+      "expected_detail": "recommended=;restrictions=1;hard=true"
+    },
+    {
+      "id": "m-bounded-prerelease",
+      "operation": "maven_match",
+      "left": "[1.0,2.0)",
+      "right": "2.0-rc.1",
+      "expected_status": "ok",
+      "expected_value": "true",
+      "reason": "Maven Artifact API result, not the Forge/NeoForge wrapper or dependency resolver.",
+      "expected_detail": "recommended=;restrictions=1;hard=true"
+    },
+    {
+      "id": "m-union-hit",
+      "operation": "maven_match",
+      "left": "(,1.0],[1.2,)",
+      "right": "1.3",
+      "expected_status": "ok",
+      "expected_value": "true",
+      "reason": "Maven Artifact API result, not the Forge/NeoForge wrapper or dependency resolver.",
+      "expected_detail": "recommended=;restrictions=2;hard=true"
+    },
+    {
+      "id": "m-union-gap",
+      "operation": "maven_match",
+      "left": "(,1.0],[1.2,)",
+      "right": "1.1",
+      "expected_status": "ok",
+      "expected_value": "false",
+      "reason": "Maven Artifact API result, not the Forge/NeoForge wrapper or dependency resolver.",
+      "expected_detail": "recommended=;restrictions=2;hard=true"
+    },
+    {
+      "id": "m-empty",
+      "operation": "maven_match",
+      "left": "",
+      "right": "1.2.3",
+      "expected_status": "ok",
+      "expected_value": "false",
+      "reason": "Maven Artifact API result, not the Forge/NeoForge wrapper or dependency resolver.",
+      "expected_detail": "recommended=;restrictions=0;hard=false"
+    },
+    {
+      "id": "m-star",
+      "operation": "maven_match",
+      "left": "*",
+      "right": "nightly",
+      "expected_status": "ok",
+      "expected_value": "true",
+      "reason": "Maven Artifact API result, not the Forge/NeoForge wrapper or dependency resolver.",
+      "expected_detail": "recommended=*;restrictions=1;hard=false"
+    },
+    {
+      "id": "m-fabric-caret",
+      "operation": "maven_match",
+      "left": "^1.2.3",
+      "right": "9.0",
+      "expected_status": "ok",
+      "expected_value": "true",
+      "reason": "Maven Artifact API result, not the Forge/NeoForge wrapper or dependency resolver.",
+      "expected_detail": "recommended=^1.2.3;restrictions=1;hard=false"
+    },
+    {
+      "id": "m-fabric-relational",
+      "operation": "maven_match",
+      "left": ">=1.0 <2.0",
+      "right": "9.0",
+      "expected_status": "ok",
+      "expected_value": "true",
+      "reason": "Maven Artifact API result, not the Forge/NeoForge wrapper or dependency resolver.",
+      "expected_detail": "recommended=>=1.0 <2.0;restrictions=1;hard=false"
+    },
+    {
+      "id": "m-unbounded",
+      "operation": "maven_match",
+      "left": "[1.0",
+      "right": "1.2",
+      "expected_status": "parse_error",
+      "expected_value": "",
+      "reason": "Maven Artifact API result, not the Forge/NeoForge wrapper or dependency resolver.",
+      "expected_detail": "InvalidVersionSpecificationException"
+    },
+    {
+      "id": "m-backwards",
+      "operation": "maven_match",
+      "left": "[2.0,1.0]",
+      "right": "1.5",
+      "expected_status": "parse_error",
+      "expected_value": "",
+      "reason": "Maven Artifact API result, not the Forge/NeoForge wrapper or dependency resolver.",
+      "expected_detail": "InvalidVersionSpecificationException"
+    },
+    {
+      "id": "m-exclusive-single",
+      "operation": "maven_match",
+      "left": "(1.0)",
+      "right": "1.0",
+      "expected_status": "parse_error",
+      "expected_value": "",
+      "reason": "Maven Artifact API result, not the Forge/NeoForge wrapper or dependency resolver.",
+      "expected_detail": "InvalidVersionSpecificationException"
+    },
+    {
+      "id": "m-empty-exclusive",
+      "operation": "maven_match",
+      "left": "[1.0,1.0)",
+      "right": "1.0",
+      "expected_status": "parse_error",
+      "expected_value": "",
+      "reason": "Maven Artifact API result, not the Forge/NeoForge wrapper or dependency resolver.",
+      "expected_detail": "InvalidVersionSpecificationException"
+    },
+    {
+      "id": "m-overlap",
+      "operation": "maven_match",
+      "left": "[1.0,2.0],[1.5,3.0]",
+      "right": "1.8",
+      "expected_status": "parse_error",
+      "expected_value": "",
+      "reason": "Maven Artifact API result, not the Forge/NeoForge wrapper or dependency resolver.",
+      "expected_detail": "InvalidVersionSpecificationException"
+    },
+    {
+      "id": "m-qualifier-equal",
+      "operation": "maven_match",
+      "left": "[1.0]",
+      "right": "1.0-final",
+      "expected_status": "ok",
+      "expected_value": "true",
+      "reason": "Maven Artifact API result, not the Forge/NeoForge wrapper or dependency resolver.",
+      "expected_detail": "recommended=;restrictions=1;hard=true"
+    },
+    {
+      "id": "m-build-metadata",
+      "operation": "maven_match",
+      "left": "[1.0.0+one]",
+      "right": "1.0.0+two",
+      "expected_status": "ok",
+      "expected_value": "false",
+      "reason": "Maven Artifact API result, not the Forge/NeoForge wrapper or dependency resolver.",
+      "expected_detail": "recommended=;restrictions=1;hard=true"
+    },
+    {
+      "id": "m-case-equal",
+      "operation": "maven_match",
+      "left": "[1.0.0-ALPHA]",
+      "right": "1.0.0-alpha",
+      "expected_status": "ok",
+      "expected_value": "true",
+      "reason": "Maven Artifact API result, not the Forge/NeoForge wrapper or dependency resolver.",
+      "expected_detail": "recommended=;restrictions=1;hard=true"
+    }
+  ]
+}
