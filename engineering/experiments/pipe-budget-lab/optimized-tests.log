@@ -1,0 +1,36 @@
+test_aggregate_budget_prevents_two_separate_caps_adding_up (test_pipe_budget.PipeBudgetTests.test_aggregate_budget_prevents_two_separate_caps_adding_up) ... ok
+test_both_pipe_pressure_drained_without_wait_first (test_pipe_budget.PipeBudgetTests.test_both_pipe_pressure_drained_without_wait_first) ... ok
+test_cancel_after_ready_terminates_and_reaps_direct_child (test_pipe_budget.PipeBudgetTests.test_cancel_after_ready_terminates_and_reaps_direct_child) ... ok
+test_cancel_before_launch_spawns_nothing (test_pipe_budget.PipeBudgetTests.test_cancel_before_launch_spawns_nothing) ... ok
+test_closed_stdout_does_not_discard_stderr (test_pipe_budget.PipeBudgetTests.test_closed_stdout_does_not_discard_stderr) ... ok
+test_demo_retains_cleanup_pending_receipt_and_same_exception (test_pipe_budget.PipeBudgetTests.test_demo_retains_cleanup_pending_receipt_and_same_exception) ... ok
+test_duplicate_json_is_not_last_key_wins (test_pipe_budget.PipeBudgetTests.test_duplicate_json_is_not_last_key_wins) ... ok
+test_eof_is_not_process_completion (test_pipe_budget.PipeBudgetTests.test_eof_is_not_process_completion) ... ok
+test_exact_limits_accept_and_eof_needs_no_extra_byte (test_pipe_budget.PipeBudgetTests.test_exact_limits_accept_and_eof_needs_no_extra_byte) ... ok
+test_false_complete_flag_is_not_success (test_pipe_budget.PipeBudgetTests.test_false_complete_flag_is_not_success) ... ok
+test_first_wait_error_still_attempts_bounded_kill_reap (test_pipe_budget.PipeBudgetTests.test_first_wait_error_still_attempts_bounded_kill_reap) ... ok
+test_ignored_terminate_escalates_to_kill_and_reaps (test_pipe_budget.PipeBudgetTests.test_ignored_terminate_escalates_to_kill_and_reaps) ... ok
+test_invalid_utf8_is_explicit_not_replacement_decoded (test_pipe_budget.PipeBudgetTests.test_invalid_utf8_is_explicit_not_replacement_decoded) ... ok
+test_launch_error_is_recorded_without_claiming_a_child (test_pipe_budget.PipeBudgetTests.test_launch_error_is_recorded_without_claiming_a_child) ... ok
+test_multiple_json_documents_are_not_first_record_success (test_pipe_budget.PipeBudgetTests.test_multiple_json_documents_are_not_first_record_success) ... ok
+test_no_arbitrary_command_or_invalid_limits (test_pipe_budget.PipeBudgetTests.test_no_arbitrary_command_or_invalid_limits) ... ok
+test_observer_error_still_cleans_up_and_retains_prefix (test_pipe_budget.PipeBudgetTests.test_observer_error_still_cleans_up_and_retains_prefix) ... ok
+test_parent_environment_is_not_inherited (test_pipe_budget.PipeBudgetTests.test_parent_environment_is_not_inherited) ... ok
+test_partial_json_is_not_success (test_pipe_budget.PipeBudgetTests.test_partial_json_is_not_success) ... ok
+test_pending_cleanup_carries_ownership_and_never_accepts (test_pipe_budget.PipeBudgetTests.test_pending_cleanup_carries_ownership_and_never_accepts) ... ok
+test_repeated_success_does_not_leak_parent_descriptors (test_pipe_budget.PipeBudgetTests.test_repeated_success_does_not_leak_parent_descriptors) ... ok
+test_selector_close_error_does_not_skip_child_cleanup (test_pipe_budget.PipeBudgetTests.test_selector_close_error_does_not_skip_child_cleanup) ... ok
+test_signal_exit_is_retained (test_pipe_budget.PipeBudgetTests.test_signal_exit_is_retained) ... ok
+test_split_utf8_is_not_decoded_per_chunk (test_pipe_budget.PipeBudgetTests.test_split_utf8_is_not_decoded_per_chunk) ... ok
+test_stderr_budget_stops_at_one_sentinel (test_pipe_budget.PipeBudgetTests.test_stderr_budget_stops_at_one_sentinel) ... ok
+test_stdin_is_devnull_not_inherited_interactive_input (test_pipe_budget.PipeBudgetTests.test_stdin_is_devnull_not_inherited_interactive_input) ... ok
+test_stdout_budget_stops_at_one_sentinel (test_pipe_budget.PipeBudgetTests.test_stdout_budget_stops_at_one_sentinel) ... ok
+test_stream_close_error_does_not_skip_child_cleanup (test_pipe_budget.PipeBudgetTests.test_stream_close_error_does_not_skip_child_cleanup) ... ok
+test_success_bytes_before_hang_are_not_published (test_pipe_budget.PipeBudgetTests.test_success_bytes_before_hang_are_not_published) ... ok
+test_success_requires_exit_eof_and_valid_document (test_pipe_budget.PipeBudgetTests.test_success_requires_exit_eof_and_valid_document) ... ok
+test_valid_document_with_nonzero_exit_is_not_accepted (test_pipe_budget.PipeBudgetTests.test_valid_document_with_nonzero_exit_is_not_accepted) ... ok
+
+----------------------------------------------------------------------
+Ran 31 tests in 2.067s
+
+OK
