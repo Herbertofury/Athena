@@ -1,0 +1,51 @@
+{
+  "sourceDrafts": {
+    "5": "11b361cf092c068135da68d608255e14e5a94bd0",
+    "14": "08a1b912303f9133904506035481efa4886ab43a",
+    "53": "027d44702ac5300ed67c2cd88cec5c184870d4ff"
+  },
+  "replays": [
+    {
+      "classification": "retained exact-byte offline integration replay",
+      "networkUsed": false,
+      "inputBytes": 48533,
+      "inputSha256": "d4ff818e6af5d5d9a89c0ce6d8428f326967dfcebfb87cefa4c42ce25d285d05",
+      "baselineSha256": "a18a749f9fcffa6d2a43842ca3a350aebb4320d05ed10a211790efb05a41ed0b",
+      "candidateSha256": "7f475d108786cd3c6263324afb0b13fa8066a970932576f13cacf1e67454b647",
+      "records": 60,
+      "titlesPreserved": 60,
+      "datesPreserved": 60,
+      "datesIndependentlyNormalized": 60,
+      "allPreexistingNormalizedFieldsEqual": true,
+      "allPreexistingReceiptFieldsEqual": true,
+      "rawDateExcludedFromReceipt": true,
+      "limits": [
+        "No new provider request or freshness claim.",
+        "No complete history, media access, runtime integration or target acceptance."
+      ],
+      "retainedSource": "nasa"
+    },
+    {
+      "classification": "retained exact-byte offline integration replay",
+      "networkUsed": false,
+      "inputBytes": 184524,
+      "inputSha256": "7a57453ae3eaa5b8fe87c18cc6a8d6256b9fe30dbda2504031372da365d1c94e",
+      "baselineSha256": "a18a749f9fcffa6d2a43842ca3a350aebb4320d05ed10a211790efb05a41ed0b",
+      "candidateSha256": "7f475d108786cd3c6263324afb0b13fa8066a970932576f13cacf1e67454b647",
+      "records": 10,
+      "titlesPreserved": 10,
+      "datesPreserved": 10,
+      "datesIndependentlyNormalized": 10,
+      "allPreexistingNormalizedFieldsEqual": true,
+      "allPreexistingReceiptFieldsEqual": true,
+      "rawDateExcludedFromReceipt": true,
+      "limits": [
+        "No new provider request or freshness claim.",
+        "No complete history, media access, runtime integration or target acceptance."
+      ],
+      "retainedSource": "rre36"
+    }
+  ],
+  "newProviderRequests": 0,
+  "rawSourcePublished": false
+}

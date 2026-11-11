@@ -1,0 +1,578 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-11-11",
+  "sourceBaseCommit": "950f73e50cf66ae69493eb1f4d92fb06cee9865f",
+  "classification": "actual anonymous public AppView observations; offline replay",
+  "python": "3.12.14",
+  "sourceIds": [
+    "BST11001",
+    "BST11002",
+    "BST11003",
+    "BST11004",
+    "BST11005",
+    "BST11006",
+    "BST11007",
+    "BST11008"
+  ],
+  "canonicalSchemaHead": "19fb7b03e1096ee88376ca403103804c3e5856ce",
+  "implementationSha256": {
+    "bluesky.py": "0dec0c1a733cbbd76cb74c81ddca0befe8d9df89fcfc9a7ded1d66abe6e7f8f8",
+    "extractors.py": "a18a749f9fcffa6d2a43842ca3a350aebb4320d05ed10a211790efb05a41ed0b",
+    "threads.py": "047edc3ac872e0b4a8613b23941391f5b2131fea37c7204061006c3a80df0375"
+  },
+  "captureCount": 3,
+  "captures": [
+    {
+      "captureName": "root-depth0",
+      "capturedAt": "2026-11-11T06:47:09.841631+00:00",
+      "replay": {
+        "schemaVersion": 1,
+        "status": "normalized_capture",
+        "bytes": 1993,
+        "sha256": "be858322f12ca67bb4d98ae93ba12813eba55f9d2dc872e1f947b9c61953ab8c",
+        "httpStatus": 200,
+        "failure": null,
+        "request": {
+          "uriSha256": "3edd2e5e00ef83467b58d2ca852d714748d1cb12d8f1aad50dc3ce7f6a663405",
+          "depth": 0,
+          "parentHeight": 0
+        },
+        "networkUsed": false,
+        "completeHistory": false,
+        "fullSupportAccepted": false,
+        "cryptographicIdentityVerified": false,
+        "playbackVerified": false,
+        "decodeVerified": false,
+        "moderationVerified": false,
+        "accountComplete": false,
+        "thread": {
+          "state": "available",
+          "parentPresent": false,
+          "repliesPresent": false,
+          "replyCount": 6,
+          "uriSha256": "3edd2e5e00ef83467b58d2ca852d714748d1cb12d8f1aad50dc3ce7f6a663405",
+          "body": {
+            "sha256": "b203799ce77e2eb41e799af474a74827cb197106df60bdbebfe55985abd03ac3",
+            "characters": 117,
+            "utf8Bytes": 117,
+            "facetCount": 2
+          },
+          "media": {
+            "images": 1,
+            "videos": 0,
+            "externalCards": 0,
+            "quotes": 0,
+            "unknownOrLimited": 0,
+            "incompleteReferences": 0,
+            "quoteStates": {
+              "available": 0,
+              "not_found": 0,
+              "blocked": 0,
+              "detached": 0,
+              "unknown": 0,
+              "non_post": 0,
+              "depth_limit": 0
+            }
+          },
+          "warningCount": 0
+        },
+        "nodeCount": 1,
+        "identityBound": true,
+        "threadgatePresent": false
+      }
+    },
+    {
+      "captureName": "root-depth2",
+      "capturedAt": "2026-11-11T06:47:13.795820+00:00",
+      "replay": {
+        "schemaVersion": 1,
+        "status": "normalized_capture",
+        "bytes": 12829,
+        "sha256": "e8ffe2b5d87a4e7c9f70224e0355531223258715fe8e945b914e974ae31433b4",
+        "httpStatus": 200,
+        "failure": null,
+        "request": {
+          "uriSha256": "3edd2e5e00ef83467b58d2ca852d714748d1cb12d8f1aad50dc3ce7f6a663405",
+          "depth": 2,
+          "parentHeight": 2
+        },
+        "networkUsed": false,
+        "completeHistory": false,
+        "fullSupportAccepted": false,
+        "cryptographicIdentityVerified": false,
+        "playbackVerified": false,
+        "decodeVerified": false,
+        "moderationVerified": false,
+        "accountComplete": false,
+        "thread": {
+          "state": "available",
+          "parentPresent": false,
+          "repliesPresent": true,
+          "replyCount": 6,
+          "observedDirectReplyCount": 6,
+          "uriSha256": "3edd2e5e00ef83467b58d2ca852d714748d1cb12d8f1aad50dc3ce7f6a663405",
+          "body": {
+            "sha256": "b203799ce77e2eb41e799af474a74827cb197106df60bdbebfe55985abd03ac3",
+            "characters": 117,
+            "utf8Bytes": 117,
+            "facetCount": 2
+          },
+          "media": {
+            "images": 1,
+            "videos": 0,
+            "externalCards": 0,
+            "quotes": 0,
+            "unknownOrLimited": 0,
+            "incompleteReferences": 0,
+            "quoteStates": {
+              "available": 0,
+              "not_found": 0,
+              "blocked": 0,
+              "detached": 0,
+              "unknown": 0,
+              "non_post": 0,
+              "depth_limit": 0
+            }
+          },
+          "warningCount": 0,
+          "replies": [
+            {
+              "state": "available",
+              "parentPresent": false,
+              "repliesPresent": true,
+              "replyCount": 0,
+              "observedDirectReplyCount": 0,
+              "uriSha256": "3268159bdef632c23c290f2674eb0c3d77d8b6c9ce5216889406203dedf1f03a",
+              "body": {
+                "sha256": "c70f633f5299331328dd0c9aedc8601184003ed6816dec9020674fa5e2652537",
+                "characters": 107,
+                "utf8Bytes": 107,
+                "facetCount": 0
+              },
+              "media": {
+                "images": 0,
+                "videos": 0,
+                "externalCards": 0,
+                "quotes": 0,
+                "unknownOrLimited": 0,
+                "incompleteReferences": 0,
+                "quoteStates": {
+                  "available": 0,
+                  "not_found": 0,
+                  "blocked": 0,
+                  "detached": 0,
+                  "unknown": 0,
+                  "non_post": 0,
+                  "depth_limit": 0
+                }
+              },
+              "warningCount": 0,
+              "replies": []
+            },
+            {
+              "state": "available",
+              "parentPresent": false,
+              "repliesPresent": true,
+              "replyCount": 1,
+              "observedDirectReplyCount": 1,
+              "uriSha256": "0889eb62a0f961628f4c89eb40b31391dc20d190722fdbfdb72d1b0e8a463835",
+              "body": {
+                "sha256": "a6511de5ea20516ff45e9c6a31a861abbe395e56b2307c7129c8119dd35f0263",
+                "characters": 65,
+                "utf8Bytes": 65,
+                "facetCount": 1
+              },
+              "media": {
+                "images": 0,
+                "videos": 0,
+                "externalCards": 1,
+                "quotes": 0,
+                "unknownOrLimited": 0,
+                "incompleteReferences": 0,
+                "quoteStates": {
+                  "available": 0,
+                  "not_found": 0,
+                  "blocked": 0,
+                  "detached": 0,
+                  "unknown": 0,
+                  "non_post": 0,
+                  "depth_limit": 0
+                }
+              },
+              "warningCount": 0,
+              "replies": [
+                {
+                  "state": "available",
+                  "parentPresent": false,
+                  "repliesPresent": false,
+                  "replyCount": 0,
+                  "uriSha256": "79f0b96075d0762315b11a9c00a35e587feb189f3813c78c1596f925cf43a5a3",
+                  "body": {
+                    "sha256": "3ce635f223b92918075c7f21f8145bae2b094cd81a8800fb2f4ae2d5041b18ba",
+                    "characters": 75,
+                    "utf8Bytes": 75,
+                    "facetCount": 0
+                  },
+                  "media": {
+                    "images": 0,
+                    "videos": 0,
+                    "externalCards": 0,
+                    "quotes": 0,
+                    "unknownOrLimited": 0,
+                    "incompleteReferences": 0,
+                    "quoteStates": {
+                      "available": 0,
+                      "not_found": 0,
+                      "blocked": 0,
+                      "detached": 0,
+                      "unknown": 0,
+                      "non_post": 0,
+                      "depth_limit": 0
+                    }
+                  },
+                  "warningCount": 0
+                }
+              ]
+            },
+            {
+              "state": "available",
+              "parentPresent": false,
+              "repliesPresent": true,
+              "replyCount": 0,
+              "observedDirectReplyCount": 0,
+              "uriSha256": "98ac369aeacd1fd1f404085b3109904386058e32a6601ddf39ff75c7022945a9",
+              "body": {
+                "sha256": "aef425e4b40d3e3e18e7bed2196523705e99e40ff094fcf456b6ecbf0c633fd5",
+                "characters": 12,
+                "utf8Bytes": 12,
+                "facetCount": 0
+              },
+              "media": {
+                "images": 0,
+                "videos": 0,
+                "externalCards": 0,
+                "quotes": 0,
+                "unknownOrLimited": 0,
+                "incompleteReferences": 0,
+                "quoteStates": {
+                  "available": 0,
+                  "not_found": 0,
+                  "blocked": 0,
+                  "detached": 0,
+                  "unknown": 0,
+                  "non_post": 0,
+                  "depth_limit": 0
+                }
+              },
+              "warningCount": 0,
+              "replies": []
+            },
+            {
+              "state": "available",
+              "parentPresent": false,
+              "repliesPresent": true,
+              "replyCount": 0,
+              "observedDirectReplyCount": 0,
+              "uriSha256": "ca6207e8e84dc587e3f812c5cf24f6037b701d8ad66f8f4f0fabdbbc860efb7c",
+              "body": {
+                "sha256": "fd8a7ea2483ecb9aa8adce51f4c6c12edc56ad2a4959d80f878c7abd5166f383",
+                "characters": 17,
+                "utf8Bytes": 17,
+                "facetCount": 0
+              },
+              "media": {
+                "images": 0,
+                "videos": 0,
+                "externalCards": 0,
+                "quotes": 0,
+                "unknownOrLimited": 0,
+                "incompleteReferences": 0,
+                "quoteStates": {
+                  "available": 0,
+                  "not_found": 0,
+                  "blocked": 0,
+                  "detached": 0,
+                  "unknown": 0,
+                  "non_post": 0,
+                  "depth_limit": 0
+                }
+              },
+              "warningCount": 0,
+              "replies": []
+            },
+            {
+              "state": "available",
+              "parentPresent": false,
+              "repliesPresent": true,
+              "replyCount": 1,
+              "observedDirectReplyCount": 1,
+              "uriSha256": "9e0cc5fe245953e800ea93d9eaa04c6b8986cd1c8deeb30710e9aa60af026c4f",
+              "body": {
+                "sha256": "a61f0e749de0ba7acc2e66c5d039e2cfd9f710ca17a8b6b1fd10916a5f03edb0",
+                "characters": 140,
+                "utf8Bytes": 142,
+                "facetCount": 0
+              },
+              "media": {
+                "images": 0,
+                "videos": 0,
+                "externalCards": 0,
+                "quotes": 0,
+                "unknownOrLimited": 0,
+                "incompleteReferences": 0,
+                "quoteStates": {
+                  "available": 0,
+                  "not_found": 0,
+                  "blocked": 0,
+                  "detached": 0,
+                  "unknown": 0,
+                  "non_post": 0,
+                  "depth_limit": 0
+                }
+              },
+              "warningCount": 0,
+              "replies": [
+                {
+                  "state": "available",
+                  "parentPresent": false,
+                  "repliesPresent": false,
+                  "replyCount": 0,
+                  "uriSha256": "2e1a2efe93c0334d68f11a513fd5256857dd1a5bf8886a28364371af5451afd4",
+                  "body": {
+                    "sha256": "aca2be77dbb09a68e5a061df784434ec2366e054c0ce8c51c7de79904fb6bba7",
+                    "characters": 26,
+                    "utf8Bytes": 26,
+                    "facetCount": 0
+                  },
+                  "media": {
+                    "images": 0,
+                    "videos": 0,
+                    "externalCards": 0,
+                    "quotes": 0,
+                    "unknownOrLimited": 0,
+                    "incompleteReferences": 0,
+                    "quoteStates": {
+                      "available": 0,
+                      "not_found": 0,
+                      "blocked": 0,
+                      "detached": 0,
+                      "unknown": 0,
+                      "non_post": 0,
+                      "depth_limit": 0
+                    }
+                  },
+                  "warningCount": 0
+                }
+              ]
+            },
+            {
+              "state": "available",
+              "parentPresent": false,
+              "repliesPresent": true,
+              "replyCount": 0,
+              "observedDirectReplyCount": 0,
+              "uriSha256": "3b0a606d7fc7887017c3c28292e39995ef1045ea41e2a11e4bb2c4587b6def08",
+              "body": {
+                "sha256": "7efe53e1501fcd20648b9f63dc25bdcf3ff01dd65ad2ef30dd7f42bdf9317029",
+                "characters": 19,
+                "utf8Bytes": 19,
+                "facetCount": 0
+              },
+              "media": {
+                "images": 0,
+                "videos": 0,
+                "externalCards": 0,
+                "quotes": 0,
+                "unknownOrLimited": 0,
+                "incompleteReferences": 0,
+                "quoteStates": {
+                  "available": 0,
+                  "not_found": 0,
+                  "blocked": 0,
+                  "detached": 0,
+                  "unknown": 0,
+                  "non_post": 0,
+                  "depth_limit": 0
+                }
+              },
+              "warningCount": 0,
+              "replies": []
+            }
+          ]
+        },
+        "nodeCount": 9,
+        "identityBound": true,
+        "threadgatePresent": false
+      }
+    },
+    {
+      "captureName": "reply-context",
+      "capturedAt": "2026-11-11T06:47:21.003329+00:00",
+      "replay": {
+        "schemaVersion": 1,
+        "status": "normalized_capture",
+        "bytes": 3276,
+        "sha256": "1792a77f76c75432e908814c517b317a32161e5f7b46f1fda5acc4dcdca11bd0",
+        "httpStatus": 200,
+        "failure": null,
+        "request": {
+          "uriSha256": "3268159bdef632c23c290f2674eb0c3d77d8b6c9ce5216889406203dedf1f03a",
+          "depth": 1,
+          "parentHeight": 2
+        },
+        "networkUsed": false,
+        "completeHistory": false,
+        "fullSupportAccepted": false,
+        "cryptographicIdentityVerified": false,
+        "playbackVerified": false,
+        "decodeVerified": false,
+        "moderationVerified": false,
+        "accountComplete": false,
+        "thread": {
+          "state": "available",
+          "parentPresent": true,
+          "repliesPresent": true,
+          "replyCount": 0,
+          "observedDirectReplyCount": 0,
+          "uriSha256": "3268159bdef632c23c290f2674eb0c3d77d8b6c9ce5216889406203dedf1f03a",
+          "body": {
+            "sha256": "c70f633f5299331328dd0c9aedc8601184003ed6816dec9020674fa5e2652537",
+            "characters": 107,
+            "utf8Bytes": 107,
+            "facetCount": 0
+          },
+          "media": {
+            "images": 0,
+            "videos": 0,
+            "externalCards": 0,
+            "quotes": 0,
+            "unknownOrLimited": 0,
+            "incompleteReferences": 0,
+            "quoteStates": {
+              "available": 0,
+              "not_found": 0,
+              "blocked": 0,
+              "detached": 0,
+              "unknown": 0,
+              "non_post": 0,
+              "depth_limit": 0
+            }
+          },
+          "warningCount": 0,
+          "parent": {
+            "state": "available",
+            "parentPresent": false,
+            "repliesPresent": false,
+            "replyCount": 6,
+            "uriSha256": "3edd2e5e00ef83467b58d2ca852d714748d1cb12d8f1aad50dc3ce7f6a663405",
+            "body": {
+              "sha256": "b203799ce77e2eb41e799af474a74827cb197106df60bdbebfe55985abd03ac3",
+              "characters": 117,
+              "utf8Bytes": 117,
+              "facetCount": 2
+            },
+            "media": {
+              "images": 1,
+              "videos": 0,
+              "externalCards": 0,
+              "quotes": 0,
+              "unknownOrLimited": 0,
+              "incompleteReferences": 0,
+              "quoteStates": {
+                "available": 0,
+                "not_found": 0,
+                "blocked": 0,
+                "detached": 0,
+                "unknown": 0,
+                "non_post": 0,
+                "depth_limit": 0
+              }
+            },
+            "warningCount": 0
+          },
+          "replies": []
+        },
+        "nodeCount": 2,
+        "identityBound": true,
+        "threadgatePresent": false
+      }
+    }
+  ],
+  "uniqueObservedPostIdentities": 9,
+  "totalVisibleRepresentations": 12,
+  "anonymous": true,
+  "mediaFetched": false,
+  "credentialsUsed": false,
+  "nativeMutations": false,
+  "rawCapturesPublished": false,
+  "headersOrViewerMetadataPublished": false,
+  "retainedRetrievalLimits": [
+    "Old API reference redirected to an endpoint shell without readable lines.",
+    "Old advanced-guides API-directory route had no readable body; current navigation resolved the working public-host guide."
+  ],
+  "retainedImplementationFailures": [
+    "Composing-state full suite ran975 tests with one missing-link error before README and receipt existed; not counted as a passing aggregate."
+  ],
+  "limits": [
+    "No full history, authenticated moderation or deletion attribution.",
+    "URI/CID agreement is structural, not cryptographic identity verification.",
+    "No media transfer, decode, playback or target adoption.",
+    "Raw captures are external unpublished inputs; committed-form receipt tests do not rerun a live transfer."
+  ],
+  "originalImplementationSha256": {
+    "threads.py": "047edc3ac872e0b4a8613b23941391f5b2131fea37c7204061006c3a80df0375",
+    "bluesky.py": "0dec0c1a733cbbd76cb74c81ddca0befe8d9df89fcfc9a7ded1d66abe6e7f8f8",
+    "extractors.py": "2ca3ff4b1645930709ca58eb37f742cca917df4c78dc93ab9c7008475659d188"
+  },
+  "offlineReplayReconciliation": {
+    "baselineCommit": "7ba88d30229f3073c9aa738f087b9199ffae16ae",
+    "baselineSourceBlobs": {
+      "engineering/experiments/bluesky-thread-lab/threads.py": "bcc48e45fc4bf4098255f4df04e209de09bd96b1",
+      "engineering/experiments/site-extraction-lab/bluesky.py": "559f7aa02049ff8230f7e5eb9b2d24f206becf91",
+      "engineering/experiments/site-extraction-lab/extractors.py": "6a0088eea8316d8f406f91405a5ab28d7cd7b173"
+    },
+    "classification": "retained exact-byte offline replay; no new source capture",
+    "networkUsed": false,
+    "captureCount": 3,
+    "captures": [
+      {
+        "bytes": 1993,
+        "capturedAt": "2026-11-11T06:47:09.841631+00:00",
+        "sha256": "be858322f12ca67bb4d98ae93ba12813eba55f9d2dc872e1f947b9c61953ab8c"
+      },
+      {
+        "bytes": 12829,
+        "capturedAt": "2026-11-11T06:47:13.795820+00:00",
+        "sha256": "e8ffe2b5d87a4e7c9f70224e0355531223258715fe8e945b914e974ae31433b4"
+      },
+      {
+        "bytes": 3276,
+        "capturedAt": "2026-11-11T06:47:21.003329+00:00",
+        "sha256": "1792a77f76c75432e908814c517b317a32161e5f7b46f1fda5acc4dcdca11bd0"
+      }
+    ],
+    "baselineImplementationSha256": {
+      "bluesky.py": "0dec0c1a733cbbd76cb74c81ddca0befe8d9df89fcfc9a7ded1d66abe6e7f8f8",
+      "extractors.py": "2ca3ff4b1645930709ca58eb37f742cca917df4c78dc93ab9c7008475659d188",
+      "threads.py": "047edc3ac872e0b4a8613b23941391f5b2131fea37c7204061006c3a80df0375"
+    },
+    "candidateImplementationSha256": {
+      "bluesky.py": "0dec0c1a733cbbd76cb74c81ddca0befe8d9df89fcfc9a7ded1d66abe6e7f8f8",
+      "extractors.py": "a18a749f9fcffa6d2a43842ca3a350aebb4320d05ed10a211790efb05a41ed0b",
+      "threads.py": "047edc3ac872e0b4a8613b23941391f5b2131fea37c7204061006c3a80df0375"
+    },
+    "completeNormalizedOutputEqual": true,
+    "historicalSanitizedReceiptsEqual": true,
+    "normalizedOutputSha256": "8e493e5017c73f4d2a202753f347118199beb55ef7fe567d27e915d1348fd656",
+    "sanitizedReceiptsSha256": "6c6dda5565262e6693231f4e7dd59a835c2dbe6f836eb8c65bcc10c8f0f6f8c4",
+    "digestEncoding": "UTF-8 sorted compact ASCII JSON; bytes represented as __bytes_hex__ objects",
+    "limits": [
+      "Retained captures only; no new transfer or expanded provider acceptance.",
+      "Full normalized output compared before sanitized projection. Raw output not published."
+    ],
+    "replayedAt": "2026-11-11T10:51:54.512254+00:00",
+    "comparisonScript": "youtube-topic-gate-lab/compare_retained_receipts.py",
+    "comparisonScriptSha256": "9f9811d355c69c9c4633f20ca779601c62b8b81059ee7ab8d6a2c0d9fbf3b1d3",
+    "reason": "Shared extractor RSS envelope changed; unrelated retained provider captures were replayed without network access."
+  }
+}

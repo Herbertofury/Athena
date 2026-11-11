@@ -82,3 +82,7 @@ Research context: [research method](../../docs/research-method.md), [Minecraft m
 ## November 11 WordPress collections
 
 [wordpress_collection.py](wordpress_collection.py) adds bounded, offline reconciliation of supplied public REST pages without changing the eight-family parser. See the [guide](../../docs/adapters/wordpress-collections.md), [real capture receipt](wordpress-collection-validation-2026-11-11.json) and [synthetic tests](../../tests/test_wordpress_collection.py). Captured scope coverage, complete history, media decoding and playback remain separate.
+
+## Combined RSS title, date and format integration (November 11, 2026)
+
+[The combined offline integration](../rss-integration-lab/README.md) preserves the public #5/#14 title and date projections alongside #53's RSS envelope gate. All 70 titles/dates from the two retained feed samples survive, with unchanged prior fields. Unknown dates remain explicit and arbitrary raw date text stays out of receipts. Historical replay reports remain preserved; no current-provider, runtime, media or full-history acceptance follows.
