@@ -1,0 +1,202 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-11-11",
+  "sourceBaseCommit": "7ba88d30229f3073c9aa738f087b9199ffae16ae",
+  "classification": "actual anonymous public status/profile captures; offline replay",
+  "python": "3.12.14",
+  "sourceIds": [
+    "MST11001",
+    "MST11002",
+    "MST11003",
+    "MST11004",
+    "MST11005",
+    "MST11006",
+    "MST11007",
+    "MST11008"
+  ],
+  "implementationSha256": {
+    "statuses.py": "76ad308bcdea60b80a7dd06c5860c8844e6c2418a72cbe76f933a2e7c205c71c",
+    "extractors.py": "2ca3ff4b1645930709ca58eb37f742cca917df4c78dc93ab9c7008475659d188"
+  },
+  "captureCount": 3,
+  "capturedBytes": 12867,
+  "captures": [
+    {
+      "captureName": "release-status",
+      "capturedAt": "2026-11-11T07:14:57.826157+00:00",
+      "role": "status",
+      "httpStatus": 200,
+      "bytes": 4116,
+      "sha256": "427804f4b62914501c754c8df241382dba460f76eba4fc23eaa0b765653ca23a"
+    },
+    {
+      "captureName": "media-status",
+      "capturedAt": "2026-11-11T07:15:01.857206+00:00",
+      "role": "status",
+      "httpStatus": 200,
+      "bytes": 7286,
+      "sha256": "db570f7d37bc6559650daabbe1b2a896b07b4a558c8c92086923ae2359dd7e1d"
+    },
+    {
+      "captureName": "release-author",
+      "capturedAt": "2026-11-11T07:15:05.795530+00:00",
+      "role": "profile",
+      "httpStatus": 200,
+      "bytes": 1465,
+      "sha256": "73563d852a168ee587f630b1cdb365f819ec25d7e58fa9aff8dcd96ca6a6fdcc"
+    }
+  ],
+  "cases": [
+    {
+      "case": "selected_status_with_author",
+      "replay": {
+        "scope": "local_capture_only",
+        "join_state": "matched",
+        "statuses_state": "consistent",
+        "profiles_state": "consistent",
+        "observations": [
+          {
+            "role": "status",
+            "sha256": "427804f4b62914501c754c8df241382dba460f76eba4fc23eaa0b765653ca23a",
+            "length": 4116,
+            "retained_length": 4116,
+            "state": "normalized"
+          },
+          {
+            "role": "profile",
+            "sha256": "73563d852a168ee587f630b1cdb365f819ec25d7e58fa9aff8dcd96ca6a6fdcc",
+            "length": 1465,
+            "retained_length": 1465,
+            "state": "normalized"
+          }
+        ],
+        "statuses": [
+          {
+            "identity_sha256": "cbff77e654f49ea2d6424f9df343e7650ebcd0b85740c96b23edf774719b2499",
+            "html_sha256": "72380d26e1a10f0cb6f5f379a04c8e5d054ef444cdb6b99219fe447fa3929637",
+            "html_length": 724,
+            "projection_state": "inert_projection",
+            "field_states": {
+              "content": "declared",
+              "media_attachments": "empty",
+              "reblog": "null",
+              "spoiler_text": "empty",
+              "sensitive": "declared",
+              "visibility": "declared",
+              "edited_at": "null",
+              "in_reply_to_id": "null",
+              "in_reply_to_account_id": "null"
+            },
+            "actor_role": "status_author",
+            "attachments": [],
+            "extensions": {
+              "quote": "null",
+              "poll": "null",
+              "card": "preserved_unsupported",
+              "emojis": "preserved_unsupported"
+            },
+            "reblog": null
+          }
+        ]
+      }
+    },
+    {
+      "case": "selected_status_with_four_images",
+      "replay": {
+        "scope": "local_capture_only",
+        "join_state": "not_requested",
+        "statuses_state": "consistent",
+        "profiles_state": "unavailable",
+        "observations": [
+          {
+            "role": "status",
+            "sha256": "db570f7d37bc6559650daabbe1b2a896b07b4a558c8c92086923ae2359dd7e1d",
+            "length": 7286,
+            "retained_length": 7286,
+            "state": "normalized"
+          }
+        ],
+        "statuses": [
+          {
+            "identity_sha256": "915a661e029613df03336e015efff6f6ff03c3f71fe8dee483ab16d09e8f7abc",
+            "html_sha256": "edeb6c356d337b657dc5b3d1ae024b67fb7614eb78a30a74499af660c1661b36",
+            "html_length": 567,
+            "projection_state": "inert_projection",
+            "field_states": {
+              "content": "declared",
+              "media_attachments": "declared",
+              "reblog": "null",
+              "spoiler_text": "empty",
+              "sensitive": "declared",
+              "visibility": "declared",
+              "edited_at": "null",
+              "in_reply_to_id": "declared",
+              "in_reply_to_account_id": "declared"
+            },
+            "actor_role": "status_author",
+            "attachments": [
+              {
+                "order": 0,
+                "kind": "image",
+                "roles": {
+                  "url": "declared",
+                  "preview_url": "declared",
+                  "remote_url": "null"
+                }
+              },
+              {
+                "order": 1,
+                "kind": "image",
+                "roles": {
+                  "url": "declared",
+                  "preview_url": "declared",
+                  "remote_url": "null"
+                }
+              },
+              {
+                "order": 2,
+                "kind": "image",
+                "roles": {
+                  "url": "declared",
+                  "preview_url": "declared",
+                  "remote_url": "null"
+                }
+              },
+              {
+                "order": 3,
+                "kind": "image",
+                "roles": {
+                  "url": "declared",
+                  "preview_url": "declared",
+                  "remote_url": "null"
+                }
+              }
+            ],
+            "extensions": {
+              "quote": "null",
+              "poll": "null",
+              "card": "null",
+              "emojis": "preserved_unsupported"
+            },
+            "reblog": null
+          }
+        ]
+      }
+    }
+  ],
+  "acceptance": {
+    "networkUsedByNormalizer": false,
+    "mediaTransferred": false,
+    "decodeVerified": false,
+    "playbackVerified": false,
+    "rendererSafetyVerified": false,
+    "accountOwnershipVerified": false,
+    "federationIdentityVerified": false,
+    "completeHistory": false,
+    "fullProviderSupport": false,
+    "targetAccepted": false,
+    "liveBoostObserved": false,
+    "liveRestrictedAccessObserved": false,
+    "liveEditObserved": false
+  }
+}

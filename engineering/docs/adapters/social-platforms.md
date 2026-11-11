@@ -240,3 +240,9 @@ These regional candidates complement the core platform families. Their evidence 
 ## October 31 executable and community expansion
 
 The [Bluesky guide](bluesky.md) adds actual public mod-author post/feed/profile and follow-page captures, ordered embed normalization and explicit repost/quote attribution. The [Discord guide](discord.md) adds an offline message normalizer with synthetic defensive tests, component media, partial-update/access states and privacy-safe receipts. Public guild directories establish community discovery only. Pillowfort is now a source-backed candidate through Julie J’s actual Sims creator profile; subsequent retrieval failed, and complete posts/media/following remain unverified. [RDSIM31063] [Round-three details](methods-round3.md).
+
+## Mastodon selected-status evidence · November 11, 2026
+
+The [offline Mastodon status experiment](../../experiments/mastodon-status-lab/README.md) adds executable evidence beneath the earlier recipe. It reuses existing JSON/HTML helpers, scopes opaque IDs to an instance, preserves boost/original attribution and keeps original, preview and remote media roles separate. Two real public statuses plus one author profile retain exact input hashes, 724/567 UTF-8 body bytes, one card and four ordered image metadata records. No media bytes or native social actions were fetched or performed.
+
+[Current sources, observations and limitations](../../research/2026-11-11-mastodon-statuses.md) distinguish actual public captures from synthetic boost/access cases. Raw HTML is inert source material, not renderer-safe output; completeness, authentication, moderation and playback remain unaccepted. No existing parser or target runtime is replaced.
