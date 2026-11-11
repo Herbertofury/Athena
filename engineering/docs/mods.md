@@ -21,3 +21,7 @@ For Sims and other proprietary games, record the exact supported scripting/runti
 ## Native proof
 
 Use the actual target runtime, normal installed launch path, real assets, both successful and failing scenarios, multiplayer authority where relevant, and long-lived save compatibility. A successful compile, JSON validator or pretty render is only one gate.
+
+## Operational acceptance guide
+
+[Mod build acceptance](mod-build-acceptance.md) separates version lanes, Java toolchains, dependency identity, packaging and native-game evidence. Use the [compatibility receipt](../templates/mod-compatibility-receipt.md) before a target-specific comparison.

@@ -18,3 +18,7 @@ Profile CPU, GPU and IO separately. Godot's optimization guidance distinguishes 
 ## Research backlog
 
 Engine-specific import/export compatibility, material/texture budgets, mesh compression, animation retargeting, GPU-driven rendering and accessibility-aware effects require separate dated experiments. Do not mark them solved because a tool advertises support.
+
+## Operational acceptance guide
+
+[Asset import acceptance](asset-import-acceptance.md) adds capability, resource, fidelity and packaged-runtime gates. Use the [asset compatibility receipt](../templates/asset-compatibility-receipt.md) to keep each evidence state separate.
