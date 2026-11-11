@@ -325,3 +325,9 @@ mod linux {
         include!("foundry_snapshot_tests.rs");
     }
 }
+
+// Intentionally not connected to FoundrySnapshotStore. Native acceptance and
+// independent review are required before changing the production platform gate.
+#[cfg(all(windows, test))]
+#[path = "foundry_snapshot_windows_experimental.rs"]
+mod windows_experimental;

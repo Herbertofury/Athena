@@ -1,0 +1,90 @@
+[
+  {
+    "id": "WINNTCREATEFILE10",
+    "title": "Microsoft NtCreateFile",
+    "url": "https://learn.microsoft.com/en-us/windows/win32/api/winternl/nf-winternl-ntcreatefile",
+    "observed_version": "Official documentation and windows-sys 0.61.2 inspected 2026-11-10",
+    "topic": "windows-snapshot-security-prototype",
+    "note": "RootDirectory makes names handle-relative; FILE_OPEN_REPARSE_POINT bypasses final-component reparse processing. This is not proof of the complete prototype.",
+    "checked_at": "2026-11-10",
+    "review_after_days": 90,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "WINNTRENAME10",
+    "title": "Microsoft FILE_RENAME_INFORMATION",
+    "url": "https://learn.microsoft.com/en-us/windows-hardware/drivers/ddi/ntifs/ns-ntifs-_file_rename_information",
+    "observed_version": "Official documentation and windows-sys 0.61.2 inspected 2026-11-10",
+    "topic": "windows-snapshot-security-prototype",
+    "note": "Generated flexible layout, RootDirectory relative simple basename, replacement and refusal rules. No POSIX or readonly override fallback is used.",
+    "checked_at": "2026-11-10",
+    "review_after_days": 90,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "WINGETSECURITY10",
+    "title": "Microsoft GetSecurityInfo",
+    "url": "https://learn.microsoft.com/en-us/windows/win32/api/aclapi/nf-aclapi-getsecurityinfo",
+    "observed_version": "Official documentation and windows-sys 0.61.2 inspected 2026-11-10",
+    "topic": "windows-snapshot-security-prototype",
+    "note": "Read owner and DACL from opened handles with READ_CONTROL; returned descriptor allocation is released with LocalFree.",
+    "checked_at": "2026-11-10",
+    "review_after_days": 90,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "WINSYSSNAP0612",
+    "title": "windows-sys 0.61.2 generated bindings",
+    "url": "https://crates.io/crates/windows-sys/0.61.2",
+    "observed_version": "Official documentation and windows-sys 0.61.2 inspected 2026-11-10",
+    "topic": "windows-snapshot-security-prototype",
+    "note": "Exact pinned generated NT/Win32 declarations inspected and typechecked for x86_64-pc-windows-gnu. No handwritten Windows ABI.",
+    "checked_at": "2026-11-10",
+    "review_after_days": 90,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "WINTXFBASIC11",
+    "title": "Microsoft Basic TxF concepts",
+    "url": "https://learn.microsoft.com/en-us/windows/win32/fileio/txf-basic-concepts",
+    "observed_version": "Official documentation inspected 2026-11-11; applicability tested separately on native Windows",
+    "topic": "windows-snapshot-security-prototype",
+    "note": "Transacted writer locking and independent ordinary sharing rules; motivates separate native lock-lifetime experiments, not backend acceptance.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 90,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "WINTXFCREATE11",
+    "title": "Microsoft CreateTransaction",
+    "url": "https://learn.microsoft.com/en-us/windows/win32/api/ktmw32/nf-ktmw32-createtransaction",
+    "observed_version": "Official documentation inspected 2026-11-11; applicability tested separately on native Windows",
+    "topic": "windows-snapshot-security-prototype",
+    "note": "Explicit local transaction creation with TRANSACTION_DO_NOT_PROMOTE; no resource-manager, service or privilege configuration is performed.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 90,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "WINTXFOPEN11",
+    "title": "Microsoft CreateFileTransactedW",
+    "url": "https://learn.microsoft.com/en-us/windows/win32/api/winbase/nf-winbase-createfiletransactedw",
+    "observed_version": "Official documentation inspected 2026-11-11; applicability tested separately on native Windows",
+    "topic": "windows-snapshot-security-prototype",
+    "note": "Path-based transaction-enlisted open, reparse and sharing flags, reserved extended parameter and warning against new TxF dependencies. Not proof of handle-relative acquisition.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 90,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "WINTXFUSE11",
+    "title": "Microsoft How to use Transactional NTFS",
+    "url": "https://learn.microsoft.com/en-us/windows/win32/fileio/how-to-use-transactional-ntfs",
+    "observed_version": "Official documentation inspected 2026-11-11; applicability tested separately on native Windows",
+    "topic": "windows-snapshot-security-prototype",
+    "note": "Transacted-handle behavior and closing file handles before completion; motivates checking protection after the writer handle closes.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 90,
+    "evidence": "primary_documented"
+  }
+]
