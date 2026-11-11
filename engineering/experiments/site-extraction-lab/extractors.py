@@ -317,6 +317,25 @@ def rss(inputs, origin):
     if re.search(br"<!\s*(?:DOCTYPE|ENTITY)", raw, re.I):
         raise ExtractionError("RSS DTD/entity declarations are not supported")
     root = etree.fromstring(raw, parser=etree.XMLParser(resolve_entities=False, load_dtd=False, no_network=True))
+    # Validate the core envelope, not RSS version conformance or extensions.
+    if root.tag != "rss":
+        raise ExtractionError("Unsupported RSS format: expected unnamespaced rss root")
+    # Foreign-namespace extension subtrees are opaque, including unqualified
+    # payload elements. Traverse only core/unqualified paths; skip comments/PIs.
+    core_nodes = []
+    pending = list(root)
+    while pending:
+        node = pending.pop()
+        if not isinstance(node.tag, str) or node.tag.startswith("{"):
+            continue
+        core_nodes.append(node)
+        pending.extend(node)
+    channels = [node for node in core_nodes if node.tag == "channel"]
+    if len(channels) != 1 or channels[0].getparent() is not root:
+        raise ExtractionError("Malformed RSS envelope: expected exactly one direct unnamespaced channel")
+    channel = channels[0]
+    if any(item.getparent() is not channel for item in core_nodes if item.tag == "item"):
+        raise ExtractionError("Unsupported RSS item placement: expected direct unnamespaced channel items")
     output = []
     for item in root.findall("./channel/item"):
         record = base_record("rss", origin)

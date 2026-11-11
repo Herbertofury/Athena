@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "checked_at": "2026-11-11",
+  "source_base_commit": "7ba88d30229f3073c9aa738f087b9199ffae16ae",
+  "classification": "Actual anonymous public topic response; offline existing-parser comparison, not a YouTube uploads collection",
+  "source_ids": [
+    "YTG11001",
+    "YTG11002",
+    "YTG11003",
+    "YTG11004",
+    "YTG11005"
+  ],
+  "capture": {
+    "request": {
+      "method": "GET",
+      "url": "https://www.youtube.com/xml/feeds/videos.xml?channel_id=UC_x5XG1OV2P6uZZ5FSM9Ttw",
+      "headers": {
+        "User-Agent": "Athena-public-adapter-research/1.0 (bounded read-only feed validation)",
+        "Accept": "application/atom+xml, application/xml"
+      },
+      "timeout_seconds": 30,
+      "automatic_redirects": false,
+      "max_response_bytes": 1048577
+    },
+    "started_at": "2026-11-11T10:41:26.482606+00:00",
+    "status": 200,
+    "final_url": "https://www.youtube.com/xml/feeds/videos.xml?channel_id=UC_x5XG1OV2P6uZZ5FSM9Ttw",
+    "response_headers": {
+      "content-type": "text/xml",
+      "content-length": "463",
+      "date": "Wed, 11 Nov 2026 10:41:30 GMT",
+      "cache-control": "public, max-age=0",
+      "last-modified": "Tue, 03 Mar 2020 20:15:00 GMT"
+    },
+    "captured_bytes": 463,
+    "sha256": "f43e820f3c928fae60e93e1feeb5cb36d2c852849a760e85dd929471faefd6be",
+    "limit_exceeded": false,
+    "finished_at": "2026-11-11T10:41:30.794479+00:00"
+  },
+  "inspection": {
+    "root_tag": "{http://www.w3.org/2005/Atom}feed",
+    "feed_channel_ids": [],
+    "feed_id": null,
+    "entry_count": 0,
+    "entries": [],
+    "xml_dtd_or_entities": false,
+    "limits": "Single point-in-time response only. Empty entries do not establish absence of videos, usable entry mappings, historical completeness, pagination, or current upload coverage.",
+    "self_link": "https://www.youtube.com/xml/feeds/videos.xml",
+    "self_link_preserves_requested_channel": false,
+    "subscription_hub_link_present": true
+  },
+  "access": {
+    "anonymous_get": true,
+    "credential_used": false,
+    "grant_requested": false,
+    "hub_subscription_created": false,
+    "raw_response_published": false,
+    "watch_page_scraped": false,
+    "alternate_route_attempted": false,
+    "request_count": 1,
+    "retry_count": 0
+  },
+  "acceptance": {
+    "rss_input_accepted": false,
+    "atom_adapter_implemented": false,
+    "channel_binding_verified": false,
+    "video_binding_verified": false,
+    "channel_is_empty": "unknown",
+    "current_uploads_covered": false,
+    "history_complete": false,
+    "entry_mapping_verified": false,
+    "body_available": false,
+    "media_downloaded": false,
+    "media_decode_verified": false,
+    "playback_verified": false,
+    "target_adoption_accepted": false
+  },
+  "comparison": {
+    "before": "before.json",
+    "after": "after.json",
+    "same_input_bytes": true,
+    "baseline_returned_records": 0,
+    "candidate_outcome": "explicit_extraction_rejection"
+  },
+  "limits": [
+    "HTTP 200 is transport evidence, not supported-format or collection acceptance.",
+    "Zero Atom entries in a topic descriptor do not mean zero channel videos.",
+    "The historical documented example identifies the selected ID; this response does not bind a current channel.",
+    "Header Last-Modified is a server representation timestamp, not a video or channel freshness timestamp.",
+    "The digest identifies captured bytes; it does not authenticate authorship or grant reuse rights.",
+    "The public receipt contains no source response prose, cookies, credentials, raw media or private capture paths."
+  ]
+}
