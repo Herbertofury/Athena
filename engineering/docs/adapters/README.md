@@ -104,3 +104,7 @@ General results stay here. Only verified improvement against a target project's 
 ## Bluesky thread context
 
 [Scoped thread evidence](bluesky.md#scoped-thread-context--november-11-2026) extends the existing offline post normalizer with ancestor/reply relationships and explicit unavailable context. Three anonymous captures demonstrate that reply counts and omitted arrays are not complete conversation history. No target integration or playback acceptance is implied.
+
+## Mastodon status attribution
+
+[Selected-status evidence](social-platforms.md#mastodon-selected-status-evidence--november-11-2026) adds a bounded offline normalizer using the existing JSON/HTML helpers. It preserves instance-qualified IDs, boost authorship and media roles, with two real public statuses and one profile. No complete history, authenticated access, media transfer or playback is implied.

@@ -1,0 +1,90 @@
+[
+  {
+    "id": "MST11001",
+    "title": "Mastodon Status entity",
+    "url": "https://docs.joinmastodon.org/entities/Status/",
+    "observed_version": "Current official documentation checked 2026-11-11; deployed server version not inferred",
+    "topic": "mastodon-status-evidence",
+    "note": "HTML content, visibility, content warnings, nested reblog authorship, reply references and nullable media metadata.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 60,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "MST11002",
+    "title": "Mastodon Account entity",
+    "url": "https://docs.joinmastodon.org/entities/Account/",
+    "observed_version": "Current official documentation checked 2026-11-11; deployed server version not inferred",
+    "topic": "mastodon-status-evidence",
+    "note": "Instance-local identity and canonical profile references; avatar versus static avatar, moved/suspended and optional visibility controls.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 60,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "MST11003",
+    "title": "Mastodon MediaAttachment entity",
+    "url": "https://docs.joinmastodon.org/entities/MediaAttachment/",
+    "observed_version": "Current official documentation checked 2026-11-11; deployed server version not inferred",
+    "topic": "mastodon-status-evidence",
+    "note": "Ordered attachment identity; nullable full-size, preview and remote-original roles, descriptions and declared types.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 60,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "MST11004",
+    "title": "Mastodon API guidelines",
+    "url": "https://docs.joinmastodon.org/api/guidelines/",
+    "observed_version": "Current official documentation checked 2026-11-11; deployed server version not inferred",
+    "topic": "mastodon-status-evidence",
+    "note": "Treat IDs as opaque strings, retain instance context, use returned Link pagination for collections and handle provider HTML as source content.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 60,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "MST11005",
+    "title": "Mastodon status API methods",
+    "url": "https://docs.joinmastodon.org/methods/statuses/",
+    "observed_version": "Current official documentation checked 2026-11-11; deployed server version not inferred",
+    "topic": "mastodon-status-evidence",
+    "note": "Selected public statuses can be read without a token; authorized-fetch may require authentication and 404 can mean missing or private.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 60,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "MST11006",
+    "title": "Mastodon accounts API methods",
+    "url": "https://docs.joinmastodon.org/methods/accounts/",
+    "observed_version": "Current official documentation checked 2026-11-11; deployed server version not inferred",
+    "topic": "mastodon-status-evidence",
+    "note": "Selected profile GET is public; lookup and other operations have distinct authorization contracts.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 60,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "MST11007",
+    "title": "Super Productivity public release announcement",
+    "url": "https://mastodon.social/@superproductivity/117192733475238885",
+    "observed_version": "Anonymous public API captures on 2026-11-11",
+    "topic": "mastodon-status-evidence",
+    "note": "Actual anonymous selected-status response and separately fetched author profile; 724 UTF-8 HTML bytes and a link card, no attachments.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 60,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "MST11008",
+    "title": "Public game screenshot status",
+    "url": "https://mastodon.social/@lashman/117270553071094821",
+    "observed_version": "Anonymous public API captures on 2026-11-11",
+    "topic": "mastodon-status-evidence",
+    "note": "Actual anonymous selected-status response; 567 UTF-8 HTML bytes and four ordered image metadata entries. No image transfer or decode.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 60,
+    "evidence": "primary_documented"
+  }
+]
