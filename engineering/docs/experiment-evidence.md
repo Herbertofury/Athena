@@ -210,3 +210,7 @@ not a general recommendation or approval to change another project.
 ## Discord component previews, November 11
 
 The [component-embed projection experiment](../experiments/discord-component-embed-lab/README.md) compares the existing normalizer against an exact official documentation code sample, distributed with its MIT notice. It restores scoped text and media references without claiming a live-message fixture, renderer, playback, channel access or full support.
+
+## Discord media visibility and flag namespaces
+
+[Media-state lab](../experiments/discord-media-state-lab/README.md) separates source-documented masks, synthetic regressions and preservation replay of the unchanged official code example. It corrects offline event metadata without opening a live Discord route or claiming a clean scan, playback, runtime or target acceptance. [Dated results](../research/2026-11-11-discord-media-states.md).

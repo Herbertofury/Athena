@@ -1,0 +1,110 @@
+{
+  "evidence_level": "primary-documented, not live message/media evidence",
+  "repository": "https://github.com/discord/discord-api-docs",
+  "commit": "36adecb2e0bbbf500c430147ef4acbe9aa1a389e",
+  "tree": "e6a57205463c6dbb6d200443cde0e3f4fc1a5215",
+  "commit_timestamp": "2026-11-10T22:37:35Z",
+  "transport": "GitHub connector fetch, official Git blob URLs; connector returned decoded UTF-8 body. Saved bytes verified against Git tree blob SHA-1 and byte size.",
+  "status": "success; isError=false; HTTP status not exposed by connector",
+  "sources": [
+    {
+      "path": "developers/resources/message.mdx",
+      "captured_at_utc": "2026-11-11T11:22:03.324Z",
+      "bytes": 129413,
+      "git_blob_sha1": "0181ed1489e1c609146d4ce0751db9f128983611",
+      "sha256": "e4e2f2abb242096896b152e9c9d0d7e8b19e9ff07d4c337f0af580bd2d6d9a71",
+      "public_docs": "https://docs.discord.com/developers/resources/message",
+      "sections": {
+        "embed_flags": [
+          524,
+          540
+        ],
+        "embed_media_flags": [
+          570,
+          575
+        ],
+        "attachment_flags": [
+          700,
+          720
+        ]
+      }
+    },
+    {
+      "path": "developers/components/reference.mdx",
+      "captured_at_utc": "2026-11-11T11:22:03.734Z",
+      "bytes": 144181,
+      "git_blob_sha1": "decbee70432678e7e0a2fbaf79215252230498a3",
+      "sha256": "193faf3b0c57f4eabcb7a07382af92f2a3de8a13a73daa86ea319ee7511c12df",
+      "public_docs": "https://docs.discord.com/developers/components/reference",
+      "sections": {
+        "thumbnail_spoiler": [
+          1684,
+          1684
+        ],
+        "gallery_item_spoiler": [
+          1752,
+          1752
+        ],
+        "file_spoiler": [
+          1815,
+          1815
+        ],
+        "container_spoiler": [
+          1927,
+          1927
+        ],
+        "interaction_upload_scan_exception": [
+          2129,
+          2131
+        ],
+        "unfurled_media": [
+          2507,
+          2554
+        ]
+      }
+    }
+  ],
+  "derived_schema": {
+    "attachment_flags": {
+      "IS_SPOILER": 8,
+      "IS_ANIMATED": 32,
+      "CONTAINS_EXPLICIT_CONTENT": 16,
+      "CONTAINS_GORE_CONTENT": 64,
+      "CONTAINS_SELF_HARM_CONTENT": 128
+    },
+    "embed_flags": {
+      "IS_CONTENT_INVENTORY_ENTRY": 32,
+      "CONTAINS_EXPLICIT_CONTENT": 16,
+      "CONTAINS_GORE_CONTENT": 64,
+      "CONTAINS_SELF_HARM_CONTENT": 128
+    },
+    "embed_media_flags": {
+      "IS_ANIMATED": 32
+    },
+    "unfurled_media_flags": {
+      "IS_ANIMATED": 1
+    },
+    "unfurled_content_scan_metadata_flags": {
+      "IS_EXPLICIT_CONTENT": 1,
+      "IS_GORE_CONTENT": 2,
+      "IS_SELF_HARM_CONTENT": 4
+    },
+    "component_spoiler": {
+      "thumbnail": "optional boolean, defaults false",
+      "gallery_item": "optional boolean, defaults false",
+      "file": "optional boolean, defaults false",
+      "container": "optional boolean, defaults false"
+    }
+  },
+  "limits": [
+    "Metadata absence or absence of positive scan bits is not evidence that content is safe or clean.",
+    "Scanning may finish after send; later Message Update may add flags or content_scan_metadata.",
+    "Interaction resolved attachments do not include content-scanning flags until media is sent in a message; this is not a claim that all non-scan flag bits are absent.",
+    "Container spoiler is a separate enclosing scope from local thumbnail/file/gallery item spoiler.",
+    "Existing PR54 MIT sample with no positive flags and container false is preserved and is not live positive evidence for these schema fields.",
+    "No media fetched, no message/channel API endpoints requested, no source code executed, no publication or candidate edits.",
+    "Only this derived receipt is intended as publishable; retained raw MDX and API response bodies remain private provenance."
+  ],
+  "schema_version": 1,
+  "capture_scope": "Public official documentation only; no live message or media response."
+}
