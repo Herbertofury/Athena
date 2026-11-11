@@ -1,0 +1,145 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-11-11",
+  "sourceBaseCommit": "7ba88d30229f3073c9aa738f087b9199ffae16ae",
+  "classification": "actual anonymous public JSON captures; offline selected-video replay",
+  "python": "3.12.14",
+  "sourceIds": [
+    "PTV11001",
+    "PTV11002",
+    "PTV11003",
+    "PTV11004",
+    "PTV11005",
+    "PTV11006",
+    "PTV11007"
+  ],
+  "upstreamContract": {
+    "commit": "53928dd6242afb8f0d5cdd48ac20b3608342ab24",
+    "infoVersion": "8.3.0",
+    "sha256": "759bf8dbe368c39b1436c1771755b5ac234cf86b92f4f644a403506e748a96ec"
+  },
+  "instanceReportedVersion": "8.3.2",
+  "instanceSoftwareAuthenticated": false,
+  "implementationSha256": {
+    "videos.py": "31598b823ad13e34981bd1451a97ddc8f9d0d5127b8b342e1f09eb62de960692",
+    "extractors.py": "2ca3ff4b1645930709ca58eb37f742cca917df4c78dc93ab9c7008475659d188"
+  },
+  "captureCount": 3,
+  "capturedBytes": 21083,
+  "captures": [
+    {
+      "captureName": "nodeinfo",
+      "capturedAt": "2026-11-11T07:37:23.320460+00:00",
+      "role": "instance",
+      "status": 200,
+      "bytes": 3169,
+      "sha256": "0cd0dab99b8e8888b999cfc04e5b59bd5162516ba9f4ab1dc1ba3f20e398e97d",
+      "complete": true
+    },
+    {
+      "captureName": "video-details",
+      "capturedAt": "2026-11-11T07:37:29.025612+00:00",
+      "role": "video",
+      "status": 200,
+      "bytes": 17442,
+      "sha256": "3a92d9c346f0ac26f6e586c0b3902cffe3c84372ba3a8fd76121fe4bf6ca5734",
+      "complete": true
+    },
+    {
+      "captureName": "video-captions",
+      "capturedAt": "2026-11-11T07:37:33.195288+00:00",
+      "role": "captions",
+      "status": 200,
+      "bytes": 472,
+      "sha256": "b7071738c08e2c76db066a08c35eddf2ba9bf24ad37d2434772ed2f0081fcc6a",
+      "complete": true
+    }
+  ],
+  "replay": {
+    "schema": "peertube-video-evidence-v1",
+    "observations": [
+      {
+        "state": "metadata_observed",
+        "bytes": 17442,
+        "sha256": "3a92d9c346f0ac26f6e586c0b3902cffe3c84372ba3a8fd76121fe4bf6ca5734",
+        "kind": "video",
+        "contradiction": false,
+        "counts": {
+          "directFiles": 0,
+          "playlists": 1,
+          "representations": 6,
+          "thumbnails": 5
+        },
+        "descriptionContract": "full_field_contract",
+        "mediaPresence": {
+          "files": "empty",
+          "streamingPlaylists": "present",
+          "thumbnails": "present",
+          "thumbnailPath": "present",
+          "previewPath": "present",
+          "nestedFiles": [
+            "present"
+          ]
+        },
+        "playlistTypes": [
+          "hls"
+        ],
+        "textFields": {
+          "description": {
+            "state": "present",
+            "bytes": 890,
+            "sha256": "cc50cd3378beb4af8d8f1927ca8d956bbfa655c25b096c55b1f2d9a496631490"
+          },
+          "truncatedDescription": {
+            "state": "present",
+            "bytes": 255,
+            "sha256": "68f3d0bebb704115cdae4d27191bbba96ecd70c7a128439bd4a09e1ddf59129e"
+          },
+          "support": {
+            "state": "null"
+          }
+        }
+      },
+      {
+        "state": "metadata_observed",
+        "bytes": 472,
+        "sha256": "b7071738c08e2c76db066a08c35eddf2ba9bf24ad37d2434772ed2f0081fcc6a",
+        "kind": "captions",
+        "contradiction": false,
+        "observed": 1,
+        "countState": "count_matches"
+      }
+    ],
+    "roles": [
+      "uploader_account",
+      "publisher_channel",
+      "channel_owner_account",
+      "original_author_not_established"
+    ],
+    "mediaRoles": [
+      "direct_file_metadata",
+      "download_link_metadata",
+      "hls_manifest_metadata",
+      "nested_representation_metadata",
+      "torrent_metadata",
+      "magnet_metadata",
+      "thumbnail_metadata",
+      "caption_metadata"
+    ],
+    "acceptance": {
+      "mediaTransferred": false,
+      "playlistFetched": false,
+      "captionFileFetched": false,
+      "decoded": false,
+      "playbackVerified": false,
+      "transcriptComplete": false,
+      "captionPlaybackVerified": false,
+      "licenceVerified": false,
+      "retrievalGuaranteed": false,
+      "productionAccepted": false
+    }
+  },
+  "networkUsedByNormalizer": false,
+  "liveRestrictedAccessObserved": false,
+  "liveVideoObserved": false
+}
