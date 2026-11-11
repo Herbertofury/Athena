@@ -2167,6 +2167,95 @@
         }
       ],
       "tree": "ea45bd041d74260cae33a2a1d034fcb7a7023d66"
+    },
+    {
+      "number": 47,
+      "title": "Preserve scoped Bluesky thread context",
+      "head": "97e7b6d38646485cec577d5c4721843e5ef898f6",
+      "tree": "73c338d87a5504364aa605e13cd8667c85e92c9e",
+      "url": "https://github.com/Herbertofury/Athena/pull/47",
+      "files": [
+        {
+          "path": "engineering/data/source-index.json",
+          "status": "modified",
+          "sha": "2f1b6f068d3313519eeaa145a9b36c98bf8a7083",
+          "changes": 1,
+          "mode": "100644",
+          "type": "blob"
+        },
+        {
+          "path": "engineering/data/sources.d/bluesky-threads-20261111.json",
+          "status": "added",
+          "sha": "3aba025ac7f9831b60434ab62771727a0de31ae4",
+          "changes": 90,
+          "mode": "100644",
+          "type": "blob"
+        },
+        {
+          "path": "engineering/docs/adapters/README.md",
+          "status": "modified",
+          "sha": "f10b128937b87f34ee946687cc14e8e098858438",
+          "changes": 5,
+          "mode": "100644",
+          "type": "blob"
+        },
+        {
+          "path": "engineering/docs/adapters/bluesky.md",
+          "status": "modified",
+          "sha": "e76032481ba307c670882a1428436da32745657b",
+          "changes": 7,
+          "mode": "100644",
+          "type": "blob"
+        },
+        {
+          "path": "engineering/experiments/bluesky-thread-lab/README.md",
+          "status": "added",
+          "sha": "b72807539c38fb6d7df8bc8c4e1b1359034f4586",
+          "changes": 54,
+          "mode": "100644",
+          "type": "blob"
+        },
+        {
+          "path": "engineering/experiments/bluesky-thread-lab/public-validation-2026-11-11.json",
+          "status": "added",
+          "sha": "cf5e1b3264d910c00f7e4b900df8115931379f76",
+          "changes": 522,
+          "mode": "100644",
+          "type": "blob"
+        },
+        {
+          "path": "engineering/experiments/bluesky-thread-lab/threads.py",
+          "status": "added",
+          "sha": "bcc48e45fc4bf4098255f4df04e209de09bd96b1",
+          "changes": 317,
+          "mode": "100644",
+          "type": "blob"
+        },
+        {
+          "path": "engineering/research/2026-11-11-bluesky-threads.md",
+          "status": "added",
+          "sha": "70aead8cc96ad2edb933b28466f42bee37a152ed",
+          "changes": 51,
+          "mode": "100644",
+          "type": "blob"
+        },
+        {
+          "path": "engineering/tests/test_bluesky_thread_receipt.py",
+          "status": "added",
+          "sha": "31c34c40ba4c6a5d553b0061b39a74aa656b227a",
+          "changes": 74,
+          "mode": "100644",
+          "type": "blob"
+        },
+        {
+          "path": "engineering/tests/test_bluesky_threads.py",
+          "status": "added",
+          "sha": "3afff34621e306308618d85a93bb767b297589dd",
+          "changes": 293,
+          "mode": "100644",
+          "type": "blob"
+        }
+      ]
     }
   ],
   "supporting_fixes": [
