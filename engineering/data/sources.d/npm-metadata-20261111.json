@@ -1,0 +1,90 @@
+[
+  {
+    "id": "NPM11001",
+    "title": "npm registry API reference",
+    "url": "https://github.com/npm/registry/blob/ae49abf1bac0ec1a3f3f1fceea1cca6fe2dc00e1/docs/REGISTRY-API.md",
+    "observed_version": "Pinned upstream repository commit ae49abf1bac0ec1a3f3f1fceea1cca6fe2dc00e1; dated 2024-05-07",
+    "topic": "npm-metadata-evidence",
+    "note": "Official package and selected-version metadata routes. This experiment reads three fixed public metadata responses only; no search, install, package download or mutation.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 60,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "NPM11002",
+    "title": "npm full and abbreviated package metadata",
+    "url": "https://github.com/npm/registry/blob/ae49abf1bac0ec1a3f3f1fceea1cca6fe2dc00e1/docs/responses/package-metadata.md",
+    "observed_version": "Pinned upstream repository commit ae49abf1bac0ec1a3f3f1fceea1cca6fe2dc00e1; dated 2024-05-07",
+    "topic": "npm-metadata-evidence",
+    "note": "Full JSON and install-v1 vendor representation have different field sets. Detailed README contract is a bounded field from the most recently published version; do not attribute it to an arbitrary selected version. Maintainers are informational, not verified authorization.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 60,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "NPM11003",
+    "title": "npm package README guidance",
+    "url": "https://docs.npmjs.com/about-package-readme-files/",
+    "observed_version": "Page last edited 2025-11-04; checked 2026-11-11",
+    "topic": "npm-metadata-evidence",
+    "note": "README is source Markdown for the package page; a new publication updates that page. Preserving Markdown does not prove complete rendering, image retrieval, image decoding or licensing.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 60,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "NPM11004",
+    "title": "npm distribution tag guidance",
+    "url": "https://docs.npmjs.com/adding-dist-tags-to-packages/",
+    "observed_version": "Page last edited 2026-09-30; checked 2026-11-11",
+    "topic": "npm-metadata-evidence",
+    "note": "Publisher-managed dist-tags label versions. A supplied latest pointer is not a semver maximum, stable recommendation, compatibility result or acceptance gate.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 60,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "NPM11005",
+    "title": "npm crawler policy",
+    "url": "https://docs.npmjs.com/policies/crawlers/",
+    "observed_version": "Current policy checked 2026-11-11",
+    "topic": "npm-metadata-evidence",
+    "note": "Official public metadata access is distinct from high-velocity website crawling. This test uses three fixed registry API requests, spaced by at least one second, with bounded response reads and no website crawling or replication.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 60,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "NPM11006",
+    "title": "npm public metadata observation: package-full",
+    "url": "https://registry.npmjs.org/is-number",
+    "observed_version": "Anonymous bounded HTTP 200 capture 2026-11-11",
+    "topic": "npm-metadata-evidence",
+    "note": "Accept application/json; 36183 bytes; response SHA256 8fdfbca6f95aa058e4e228ec3a4dc76b5b0a9f53354f06681a3effb2fca7ef92. Metadata only; no linked URL, tarball, media or package code fetched or executed.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 60,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "NPM11007",
+    "title": "npm public metadata observation: package-abbreviated",
+    "url": "https://registry.npmjs.org/is-number",
+    "observed_version": "Anonymous bounded HTTP 200 capture 2026-11-11",
+    "topic": "npm-metadata-evidence",
+    "note": "Accept application/vnd.npm.install-v1+json; 9995 bytes; response SHA256 6349bc63a22af726dda304587581b3446abf1abd094e4700bbfa522f0a707300. Metadata only; no linked URL, tarball, media or package code fetched or executed.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 60,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "NPM11008",
+    "title": "npm public metadata observation: selected-version",
+    "url": "https://registry.npmjs.org/is-number/6.0.0",
+    "observed_version": "Anonymous bounded HTTP 200 capture 2026-11-11",
+    "topic": "npm-metadata-evidence",
+    "note": "Accept application/json; 2167 bytes; response SHA256 13a030af24dcf7e91b59b5106a6d023df294010be3e930eea1c676e006548246. Metadata only; no linked URL, tarball, media or package code fetched or executed.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 60,
+    "evidence": "primary_documented"
+  }
+]

@@ -45,6 +45,8 @@ The [author, post, media and follow contract](author-post-media-contract.md) def
 
 ## Existing platform workbenches and retained evidence
 
+- [npm package metadata](npm.md): exact version/tag scope, full versus abbreviated fields and README provenance from actual public responses. Metadata evidence only.
+
 - [Patreon](patreon.md)
 - [Afdian](afdian.md)
 - [YouTube](youtube.md)
