@@ -58,7 +58,7 @@ The [author, post, media and follow contract](author-post-media-contract.md) def
 - [Nexus Mods](nexus-mods.md)
 - [Modrinth](modrinth.md)
 - [GitHub](github.md) · selected public upstream metadata, not release-asset coverage
-- [Wikimedia Commons](wikimedia-commons.md) · selected public audio metadata/file verification, not browser playback or full-platform coverage
+- [Wikimedia Commons](wikimedia-commons.md) · selected audio verification and scoped upload-revision chains; not browser playback or full-platform coverage
 
 Nexus Mods groups Skyrim Special Edition, Fallout 4 and Starfield with distinct game-domain fixtures.
 
