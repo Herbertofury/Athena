@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "checked_at": "2026-11-11",
+  "review_type": "independent read-only code, generated-case and documentation review",
+  "result": "no blocking claim mismatch",
+  "source_sha256": "cc3db7fc6e280e34bd05cecf8106804186a21aee6a045f9871ae7628423b145c",
+  "repaired_findings": [
+    "Count output returned by inflater before a trailing-stream rejection",
+    "Refuse DOS volume-label records",
+    "Refuse feature versions below the supported method/directory requirement"
+  ],
+  "additional_hardening": "CONIN$ and CONOUT$ refused after official console-device source check",
+  "independently_executed": {
+    "focused_tests": 37,
+    "optimized_tests": 37,
+    "stream_parity_cases": 378,
+    "deterministic_generated_mutations": 5000,
+    "uncaught_mutation_exceptions": 0
+  },
+  "verified_artifacts": [
+    "All nine final demo archive bytes match recorded sizes/hashes",
+    "All three final demo source hashes match",
+    "Guide, README, research note and source records properly separate primary facts, own policy, synthetic evidence and target gates"
+  ],
+  "review_limits": [
+    "Mutation sampling is not exhaustive fuzzing or proof of hostile-input security",
+    "No general ZIP compatibility, extraction-safety, whole-process RSS/CPU or production acceptance",
+    "Aggregate checker outcomes and remote publication verification are author evidence, not independently reproduced by reviewer"
+  ],
+  "initial_finding_record": "initial-review-finding.json"
+}
