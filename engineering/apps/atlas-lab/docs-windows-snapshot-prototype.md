@@ -110,6 +110,28 @@ the first failures are not relabeled as passes.
 
 ## Reproduce and interpret evidence
 
+### Destination-race contract investigation, 2026-11-11
+
+The previous raw-rename tests permitted either success or refusal. They prove
+that their sampled outside-target bytes were not followed, not that a collision
+arriving after validation is rejected. They do not satisfy the stronger security
+contract and are not a reason to narrow it.
+
+Two additional strict tests now exercise the actual save path with a deterministic
+test-only seam immediately after the final validation and before the real rename
+system call. One moves an existing validated snapshot to a synthetic backup and
+places a file symlink at its former name; the other inserts the symlink after an
+absent destination was checked. Both require save refusal, preservation of the
+collision and outside bytes, preservation of prior bytes where present, and no
+temporary-file residue. All previous validation, locking, staging, flush, rename
+and cleanup code still runs. Ordinary saves supply a no-op seam.
+
+These tests are expected to expose a limitation, not to manufacture a passing
+prototype result. An observed replacement must remain a failed contract test.
+Neither test is skipped or changed to accept replacement. Native evidence for
+this new source is pending. Production Windows snapshots remain disabled; no
+security requirement is waived by the earlier threat-boundary discussion.
+
 On a permitted native Windows NTFS test host, from `engineering/apps/atlas-lab`:
 
 ```powershell

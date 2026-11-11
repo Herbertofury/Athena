@@ -608,6 +608,24 @@ impl Store {
         W: FnOnce(&Handle) -> Result<(), Error>,
         B: FnOnce() -> Result<(), Error>,
     {
+        self.save_impl_at_commit(state, before_write, before_replace, || Ok(()))
+    }
+    // This entire module is Windows-test-only. The additional seam lets tests
+    // deterministically interleave a hostile namespace mutation after every
+    // validation and immediately before the real rename system call. Normal
+    // saves use the no-op closure above; no validation or commit step is skipped.
+    fn save_impl_at_commit<W, B, C>(
+        &self,
+        state: &str,
+        before_write: W,
+        before_replace: B,
+        after_validation: C,
+    ) -> Result<SnapshotReceipt, Error>
+    where
+        W: FnOnce(&Handle) -> Result<(), Error>,
+        B: FnOnce() -> Result<(), Error>,
+        C: FnOnce() -> Result<(), Error>,
+    {
         validate(state)?;
         let user = User::current()?;
         self.check(&user)?;
@@ -647,6 +665,7 @@ impl Store {
             return Err(invalid("Staging volume changed"));
         }
         private(&staged.h, &user)?;
+        after_validation()?;
         rename(&staged.h, &self.directory, SNAPSHOT_FILENAME)?;
         staged.committed = true;
         // Rename succeeded: never turn a later durability observation into a

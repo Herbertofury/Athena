@@ -601,6 +601,76 @@ fn snapshot_windows_rename_primitive_never_follows_file_symlink() {
         fs::remove_file(f.0.join(SNAPSHOT_FILENAME)).unwrap();
     }
 }
+
+fn assert_late_symlink_is_rejected(had_snapshot: bool) {
+    let f = Fixture::new();
+    let outside = Fixture::new();
+    let store = f.store();
+    let destination = f.0.join(SNAPSHOT_FILENAME);
+    let backup = f.0.join("synthetic-prior-snapshot");
+    let target = outside.0.join("outside-sentinel");
+    fs::write(&target, b"untouched").unwrap();
+    if had_snapshot {
+        store.save(RAW).unwrap();
+    } else {
+        assert_eq!(store.load().unwrap(), None);
+    }
+    let interleaved = std::cell::Cell::new(false);
+    let result = store.save_impl_at_commit(
+        "null",
+        |_| Ok(()),
+        || Ok(()),
+        || {
+            assert!(!interleaved.replace(true));
+            // These are ordinary filesystem operations on synthetic fixtures,
+            // modeling another same-owner process without privilege changes.
+            if had_snapshot {
+                fs::rename(&destination, &backup)?;
+            }
+            file_symlink(&destination, &target);
+            assert!(fs::symlink_metadata(&destination)?.file_type().is_symlink());
+            assert_eq!(fs::read_link(&destination)?, target);
+            Ok(())
+        },
+    );
+    let rejected = result.is_err();
+    let collision_preserved = fs::symlink_metadata(&destination)
+        .unwrap()
+        .file_type()
+        .is_symlink()
+        && fs::read_link(&destination).is_ok_and(|path| path == target);
+    let outside_preserved = fs::read(&target).unwrap() == b"untouched";
+    let prior_preserved = !had_snapshot || fs::read(&backup).unwrap() == RAW.as_bytes();
+    eprintln!(
+        "late destination contract: had_snapshot={had_snapshot}; hook_ran={}; rejected={rejected}; collision_preserved={collision_preserved}; outside_preserved={outside_preserved}; prior_preserved={prior_preserved}",
+        interleaved.get()
+    );
+    assert!(interleaved.get(), "mutation seam must execute exactly once");
+    assert!(
+        outside_preserved,
+        "outside target bytes must remain unchanged"
+    );
+    assert!(
+        prior_preserved,
+        "previous snapshot bytes must remain unchanged"
+    );
+    assert!(
+        rejected && collision_preserved,
+        "full contract requires refusing, not replacing, a late unsafe destination; rejected={rejected}; collision_preserved={collision_preserved}"
+    );
+    assert!(names(&f).iter().all(|name| !name.ends_with(".tmp")));
+}
+
+#[test]
+fn snapshot_windows_contract_rejects_symlink_after_existing_destination_validation() {
+    assert_late_symlink_is_rejected(true);
+}
+
+#[test]
+fn snapshot_windows_contract_rejects_symlink_after_absent_destination_validation() {
+    assert_late_symlink_is_rejected(false);
+}
+
 #[test]
 fn snapshot_windows_foreign_owner_rejected_without_privilege_changes() {
     let f = Fixture::new();
