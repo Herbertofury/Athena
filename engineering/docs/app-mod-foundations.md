@@ -1,6 +1,6 @@
 # App, mod and asset foundations
 
-This is the shared entry point for Athena's November 11 foundation research. It connects eighteen separately reviewed contributions into a usable sequence while preserving their original guides, sources, experiments, failures and evidence limits. It is a research integration candidate, not a production release or approval to change another project.
+This is the shared entry point for Athena's November 11 foundation research. It connects nineteen separately reviewed contributions into a usable sequence while preserving their original guides, sources, experiments, failures and evidence limits. It is a research integration candidate, not a production release or approval to change another project.
 
 ## Start with the outcome
 
@@ -45,7 +45,8 @@ The [game and asset overview](game-assets.md) connects these additions to existi
 
 1. [WordPress collection evidence](adapters/wordpress-collections.md) reuses the existing single-post parser while reconciling supplied REST pages. The real broad collection has 1,115 missing pages after two captures; a separate two-ID query covers its selected scope. Neither is a stable snapshot or complete history.
 2. Keep request failures, conflicting records, protected/null bodies, author joins and featured-media identity separate. Media discovery is not delivery, decoding or playback. The offline [collection experiment](../experiments/site-extraction-lab/wordpress_collection.py) performs no network or account action.
-3. Use the [provider adoption contract](adapters/validation-and-adoption.md) before recommending a target integration. Actual transport, permissions, complete required fields/media and interrupted user flows still need an equivalent-work comparison against that target's current implementation.
+3. [Commons upload revisions](adapters/wikimedia-commons.md#november-11-scoped-revision-evidence) preserve two upload events that share a SHA-1, exact returned continuation fields and the difference between incomplete broad history and an exhausted filtered window. The [offline replay](../experiments/commons-audio-lab/README.md#november-11-scoped-upload-revision-chains) keeps hidden/missing metadata, request failures and conflicting variants explicit; no stable snapshot or media playback is inferred.
+4. Use the [provider adoption contract](adapters/validation-and-adoption.md) before recommending a target integration. Actual transport, permissions, complete required fields/media and interrupted user flows still need an equivalent-work comparison against that target's current implementation.
 
 ## A shared evidence contract
 
@@ -61,7 +62,7 @@ Source observations, stored receipt validation, fresh execution and target accep
 
 ## Integration and reproducibility
 
-The [integration record](../research/2026-11-11-foundations-integration.md) identifies every originating PR and frozen head, the shared-file union, aggregate checks and remaining gaps. All existing source records and eighteen additive fragments remain in the [complete source index](../data/source-index.json). The Research Explorer's existing catalog and rankings are unchanged; these new guides and experiments are navigated here rather than represented as new ranked catalog entries.
+The [integration record](../research/2026-11-11-foundations-integration.md) identifies every originating PR and frozen head, the shared-file union, aggregate checks and remaining gaps. All existing source records and nineteen additive fragments remain in the [complete source index](../data/source-index.json). The Research Explorer's existing catalog and rankings are unchanged; these new guides and experiments are navigated here rather than represented as new ranked catalog entries.
 
 The published checker fix now permits the canonical repository’s reviewed sibling docs directory while retaining custom-root confinement, traversal and symlink protections. The complete research check and Engineering aggregate tests pass locally; this does not establish hosted-CI or native-app acceptance. The exact published host-navigation repair also prevents an obsolete lesson-close event from rerendering a newly selected route; its browser acceptance is reported separately for the combined head. No workflow, merge or deployment change is included. Read each experiment's requirements before executing it: dependency-backed runs require its exact pinned local dependency, while offline receipt tests are a different verification stage.
 

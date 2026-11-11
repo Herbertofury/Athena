@@ -2078,6 +2078,95 @@
         }
       ],
       "tree": "fd28232c7a1c4955eb55036845ee4793854a567b"
+    },
+    {
+      "number": 46,
+      "title": "Preserve Commons upload revision evidence",
+      "head": "24df69f92b8ff7dc797768e692a66cb671567927",
+      "url": "https://github.com/Herbertofury/Athena/pull/46",
+      "files": [
+        {
+          "path": "engineering/data/source-index.json",
+          "status": "modified",
+          "sha": "178fdbf3e31d79a5d886a3dca7805b97ca05dd5f",
+          "changes": 1,
+          "mode": "100644",
+          "type": "blob"
+        },
+        {
+          "path": "engineering/data/sources.d/commons-revisions-20261111.json",
+          "status": "added",
+          "sha": "ddd997463ea46ab96ea9954e39a17133f9bb90aa",
+          "changes": 68,
+          "mode": "100644",
+          "type": "blob"
+        },
+        {
+          "path": "engineering/docs/adapters/README.md",
+          "status": "modified",
+          "sha": "9e8377610f06656f99260f5662011994ed85fdea",
+          "changes": 2,
+          "mode": "100644",
+          "type": "blob"
+        },
+        {
+          "path": "engineering/docs/adapters/wikimedia-commons.md",
+          "status": "modified",
+          "sha": "130e2ef622ca6a95b1f0696a605d6ac4269ba34c",
+          "changes": 6,
+          "mode": "100644",
+          "type": "blob"
+        },
+        {
+          "path": "engineering/experiments/commons-audio-lab/README.md",
+          "status": "modified",
+          "sha": "7b91e38cb63c7148ba0d8ef70108784e4b141be9",
+          "changes": 17,
+          "mode": "100644",
+          "type": "blob"
+        },
+        {
+          "path": "engineering/experiments/commons-audio-lab/revision-validation-2026-11-11.json",
+          "status": "added",
+          "sha": "8d87c8c2e5b2bd7a05d9ee7f8a1606fcc059ba08",
+          "changes": 195,
+          "mode": "100644",
+          "type": "blob"
+        },
+        {
+          "path": "engineering/experiments/commons-audio-lab/revisions.py",
+          "status": "added",
+          "sha": "f9fcbb643698610b3ac721a05a95054dc748413b",
+          "changes": 377,
+          "mode": "100644",
+          "type": "blob"
+        },
+        {
+          "path": "engineering/research/2026-11-11-commons-revisions.md",
+          "status": "added",
+          "sha": "3ec1d6b76421a140a27318f60eea67e47c42538b",
+          "changes": 64,
+          "mode": "100644",
+          "type": "blob"
+        },
+        {
+          "path": "engineering/tests/test_commons_revision_receipt.py",
+          "status": "added",
+          "sha": "5334bd3e0d7718f0f4831433d5f9257b6673e3f3",
+          "changes": 38,
+          "mode": "100644",
+          "type": "blob"
+        },
+        {
+          "path": "engineering/tests/test_commons_revisions.py",
+          "status": "added",
+          "sha": "fa9476f9511129678c378f796e8bc00d6d052fc9",
+          "changes": 290,
+          "mode": "100644",
+          "type": "blob"
+        }
+      ],
+      "tree": "ea45bd041d74260cae33a2a1d034fcb7a7023d66"
     }
   ],
   "supporting_fixes": [

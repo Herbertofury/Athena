@@ -24,3 +24,20 @@ Inventory found no existing Commons/audio adapter in Atlas; the existing author/
 Run `python3 -m unittest discover -s tests -p test_commons_audio.py` from the repository root. No upstream executable was installed, no codec was replaced, and no broad platform-completeness claim is made. See [dedicated provider research](../../docs/adapters/wikimedia-commons.md).
 
 An [isolated verified-byte browser test page](../audio-player-lab/README.md) is now implemented separately. It does not close the browser-playing or main-application integration gates above.
+
+## November 11: scoped upload-revision chains
+
+[revisions.py](revisions.py) adds offline reconciliation of supplied Imageinfo capture attempts. The current audio projection above is unchanged. Four real anonymous metadata responses distinguish an unfinished broad history from an exhausted two-revision window. Two distinct upload timestamps have the same content hash, so upload history cannot be deduplicated by SHA-1 alone. [Research and retained review failures](../../research/2026-11-11-commons-revisions.md) · [sanitized public receipt](revision-validation-2026-11-11.json).
+
+Programmatic entry points are reconcile(initial_url, captures, access='unknown') and public_receipt(result). Captures contain requestUrl, status and body bytes, optionally finalUrl. The result retains exact response bodies and normalized rows in memory; arbitrary caller headers/extras are not copied. This function makes no requests. Access is a caller label, creator/license are unknown, and complete history, stable snapshot, file transfer, decode and playback remain separate gates.
+
+The CLI reads a caller-provided local manifest and emits only the public receipt:
+
+```sh
+python engineering/experiments/commons-audio-lab/revisions.py --manifest /your/captures/manifest.json --output /your/results/receipt.json
+python -m unittest discover -s engineering/tests -p 'test_commons_revision*.py' -v
+```
+
+Manifest shape: an object with initialUrl, optional access, and a nonempty captures array. Each capture has requestUrl, status and bodyFile, with optional finalUrl. bodyFile must name a regular single-link sibling file in the manifest directory; absolute paths, subdirectories, symlinks, hardlinks and special files are rejected. Use the exact initial request URL and exact returned continuation fields for subsequent captured URLs; do not guess a cursor. The caller supplies bytes already captured through a permitted route. A later rejected/failed attempt remains visible after success, and warnings or conflicting successes block exhaustion. The CLI uses bounded descriptor-relative reads and static failure codes without local paths. Its file gate requires POSIX capabilities and fails explicitly elsewhere; the in-memory bytes API does not require that file gate. File checks do not provide an atomic multi-file snapshot or prove input authenticity.
+
+This first scope deliberately accepts only the official Commons endpoint, one canonical File title, JSON version 2, timestamp/user/url/size/sha1/mime/mediatype properties, page size at most 50, maxlag 1–10 and optional timestamp window. Other API features require separate tests. Public receipts omit titles, names, URLs, cursors, raw prose and headers, but their hashes/identifiers are linkable: inspect publication suitability before sharing. No raw source files or media binaries are distributed here.

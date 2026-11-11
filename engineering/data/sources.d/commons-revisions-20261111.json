@@ -1,0 +1,68 @@
+[
+  {
+    "id": "CMR11001",
+    "title": "MediaWiki Imageinfo API",
+    "url": "https://www.mediawiki.org/wiki/API:Imageinfo",
+    "observed_version": "Served reference checked 2026-11-11; installed Commons version not inferred",
+    "topic": "commons-revision-evidence",
+    "note": "Upload revisions, iilimit, timestamp windows, hidden metadata and expensive extended metadata.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 60,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "CMR11002",
+    "title": "MediaWiki API continuation",
+    "url": "https://www.mediawiki.org/wiki/API:Continue",
+    "observed_version": "Current documentation checked 2026-11-11",
+    "topic": "commons-revision-evidence",
+    "note": "Replay returned continuation fields; batchcomplete alone is not collection exhaustion.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 60,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "CMR11003",
+    "title": "Wikimedia API usage guidelines",
+    "url": "https://foundation.wikimedia.org/wiki/Policy:Wikimedia_Foundation_API_Usage_Guidelines/en",
+    "observed_version": "Version 1.0 dated 2024-08-26; checked 2026-11-11",
+    "topic": "commons-revision-evidence",
+    "note": "Identify clients, honor throttling and licenses, do not evade limits.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 60,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "CMR11004",
+    "title": "Wikimedia User-Agent policy",
+    "url": "https://foundation.wikimedia.org/wiki/Policy:Wikimedia_Foundation_User-Agent_Policy",
+    "observed_version": "Current policy checked 2026-11-11",
+    "topic": "commons-revision-evidence",
+    "note": "Descriptive research agent with a project contact link; no browser impersonation.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 60,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "CMR11005",
+    "title": "MediaWiki Imageinfo implementation",
+    "url": "https://github.com/wikimedia/mediawiki/blob/168162057d028ec6cf1eb8c4a559c6e42b76a28e/includes/Api/ApiQueryImageInfo.php",
+    "observed_version": "Upstream source commit 168162057d028ec6cf1eb8c4a559c6e42b76a28e, 2026-10-06",
+    "topic": "commons-revision-evidence",
+    "note": "Single-title upload history returns iistart continuation; upload timestamp and archive filename timestamp are different identities.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 60,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "CMR11006",
+    "title": "Commons Example.jpg public file metadata",
+    "url": "https://commons.wikimedia.org/wiki/File:Example.jpg",
+    "observed_version": "Four anonymous Imageinfo responses captured 2026-11-11",
+    "topic": "commons-revision-evidence",
+    "note": "Two selected upload revisions share a SHA-1; broad history continues while iiend window exhausts. Media bytes not fetched.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 60,
+    "evidence": "primary_documented"
+  }
+]
