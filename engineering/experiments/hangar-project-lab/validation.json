@@ -1,0 +1,122 @@
+{
+  "evidence": "Final offline checks and independent review, not hosted CI or target acceptance",
+  "module_sha256": "e684e30670ecad9dc76a4431f35c56aea9a67aa7be9ff0c58b00289ebaf64d72",
+  "checks": [
+    {
+      "check": "focused",
+      "exit_code": 0,
+      "log_sha256": "53e801b9d8225dedf4e8fba572cf0f40e01af5283215f7a5fa6f2df4f41dca67",
+      "log_bytes": 3098
+    },
+    {
+      "check": "python",
+      "exit_code": 0,
+      "log_sha256": "38d4910f815dd6dd5b4d3213ecedd8274ac3ce22a161eac029451885c12a2076",
+      "log_bytes": 1146
+    },
+    {
+      "check": "node",
+      "exit_code": 0,
+      "log_sha256": "c4c063f0e0058fca8adab06db1118b262db2b80e98422c3e4a1345bb996135ce",
+      "log_bytes": 34316
+    },
+    {
+      "check": "research",
+      "exit_code": 0,
+      "log_sha256": "02dd2ea1ae07ec639037eb0654d40505877710814f45bb77c505784b20a2217b",
+      "log_bytes": 1959
+    },
+    {
+      "check": "generator-audio",
+      "exit_code": 0,
+      "log_sha256": "3d3f4e32e2e58acf15bd7b8c9d7193af21206c93976835c9dc56083fdda2f2a8",
+      "log_bytes": 22
+    },
+    {
+      "check": "generator-card",
+      "exit_code": 0,
+      "log_sha256": "6c4c292ec56fa900b16c4962c3726257cfc941779ec5f3ea5c8541636182a5a1",
+      "log_bytes": 35
+    },
+    {
+      "check": "generator-media",
+      "exit_code": 0,
+      "log_sha256": "408c38018c1667ac795bc273851f280350ce1a4eb39083896ba57156bf3768a9",
+      "log_bytes": 32
+    },
+    {
+      "check": "generator-receiver",
+      "exit_code": 0,
+      "log_sha256": "367ea3d9299140d88dd6a2c806b052f83489ce481bbc42ba4f320f342b77bcd7",
+      "log_bytes": 35
+    },
+    {
+      "check": "generator-explorer",
+      "exit_code": 0,
+      "log_sha256": "de66735dd370cc495dc6932274907bd8e1fd554ae342def5ab469ac33363fd2a",
+      "log_bytes": 143
+    },
+    {
+      "check": "root-build",
+      "exit_code": 0,
+      "log_sha256": "75d3fee51c2d1c4326cfd20ac7f38744d12767a9da90b57b2d20b0d566fa368c",
+      "log_bytes": 462
+    },
+    {
+      "check": "root-test",
+      "exit_code": 0,
+      "log_sha256": "1ba5d0d880219148c9d91ddc50bd6bc2e7d49461422c9543b56fac436ccceab9",
+      "log_bytes": 54795
+    },
+    {
+      "check": "workshop",
+      "exit_code": 0,
+      "log_sha256": "ff1f368658a68fb28947713f98566465800231e4c26ae7e11cea3b8433b5296b",
+      "log_bytes": 148
+    },
+    {
+      "check": "catalog",
+      "exit_code": 0,
+      "log_sha256": "77e8f17c868c08d1ee4a469f49d2056eb86a6b136e15e2a142f594bc8302ffa3",
+      "log_bytes": 48
+    }
+  ],
+  "passed": {
+    "focused_synthetic": 21,
+    "actual_receipt_consistency": 3,
+    "actual_offline_replays": 3,
+    "engineering_python": 1003,
+    "engineering_node_and_gltf": 420,
+    "root_node": 141,
+    "focused_media_node": 105,
+    "root_python": 313,
+    "independent_tests": 13
+  },
+  "research": {
+    "sources": 2418,
+    "markdown_files": 289,
+    "stale_source_notices": 135
+  },
+  "retained_findings": [
+    {
+      "finding": "Lone-surrogate JSON key accepted, despite UTF-8 invariant",
+      "before_sha256": "ef3ab91d536ba551c2acbb3c433067270e2daef1c1b4fb7cd815f8739797885c",
+      "before": "independent 13-test suite had one failure; invalid key accepted",
+      "correction": "Validate UTF-8 for dictionary keys; valid unknown Unicode keys retained",
+      "after": "Rejected with raw failure bytes retained; independent 13-test suite passed"
+    },
+    {
+      "finding": "Receipt hash became stale while builder still changed code",
+      "before": "Initial focused and aggregate Python checks failed provenance assertion",
+      "correction": "Wait for source freeze, replay same original public bytes and regenerate receipt against corrected module",
+      "after": "Provenance assertion unchanged and final focused/full aggregate passed"
+    }
+  ],
+  "limits": [
+    "No network error deliberately induced; transport rejection tests are synthetic.",
+    "Historical ViaVersion failed retrieval remains unknown and was not retried.",
+    "No hosted branch, PR, integration, merge or deployment attempted for this isolated candidate.",
+    "No native browser, runtime integration, binary/media transfer, installation or target performance acceptance.",
+    "Raw original bodies and private headers stay outside repository; sanitized receipts do not authenticate source or files."
+  ]
+}
