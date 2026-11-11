@@ -95,3 +95,7 @@ General results stay here. Only verified improvement against a target project's 
 ## Round-three communities and executable social normalization
 
 [Round-three methods](methods-round3.md) expands the catalog to426 canonical service/scope entries with367 new dated source/outcome records. It combines six game passes, [other game communities](games/other-games.md), [Discord normalization](discord.md) and [actual Bluesky public API extraction](bluesky.md). Independent alias review keeps hosted project scopes under their existing service. The previous349-scope snapshot and earlier workbench results remain dated evidence.
+
+## WordPress multi-page evidence
+
+[WordPress collection reconciliation](wordpress-collections.md) reuses the existing single-post parser and distinguishes a two-post filtered scope from an incomplete 1,117-page public collection. Failures, missing pages, contradictory snapshots, protected/null bodies and unattempted media gates remain explicit. It is an offline experiment, not an application integration.
