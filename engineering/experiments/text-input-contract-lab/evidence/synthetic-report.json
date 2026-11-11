@@ -1,0 +1,269 @@
+{
+  "environment": {
+    "node": "24.22.1",
+    "v8": "13.6.233.17-node.58",
+    "unicode": "17.0",
+    "icu": "78.3",
+    "cldr": "48.0",
+    "platform": "linux",
+    "arch": "x64"
+  },
+  "schema_version": 1,
+  "evidence": "synthetic",
+  "scope": "Runtime primitive and pure ownership-model observations only; no browser, IME, accessibility, security, search-quality or performance acceptance.",
+  "pairs": [
+    {
+      "id": "canonical-accent",
+      "left": "Café",
+      "right": "Café",
+      "raw_equal": false,
+      "nfc_equal": true,
+      "nfkc_equal": true,
+      "default_lower_equal": false,
+      "turkish_lower_equal": false
+    },
+    {
+      "id": "compatibility-width",
+      "left": "ＡＢＣ",
+      "right": "ABC",
+      "raw_equal": false,
+      "nfc_equal": false,
+      "nfkc_equal": true,
+      "default_lower_equal": false,
+      "turkish_lower_equal": false
+    },
+    {
+      "id": "compatibility-ligature",
+      "left": "ﬁle",
+      "right": "file",
+      "raw_equal": false,
+      "nfc_equal": false,
+      "nfkc_equal": true,
+      "default_lower_equal": false,
+      "turkish_lower_equal": false
+    },
+    {
+      "id": "compatibility-circled",
+      "left": "①",
+      "right": "1",
+      "raw_equal": false,
+      "nfc_equal": false,
+      "nfkc_equal": true,
+      "default_lower_equal": false,
+      "turkish_lower_equal": false
+    },
+    {
+      "id": "compatibility-superscript",
+      "left": "x²",
+      "right": "x2",
+      "raw_equal": false,
+      "nfc_equal": false,
+      "nfkc_equal": true,
+      "default_lower_equal": false,
+      "turkish_lower_equal": false
+    },
+    {
+      "id": "default-case",
+      "left": "Title",
+      "right": "title",
+      "raw_equal": false,
+      "nfc_equal": false,
+      "nfkc_equal": false,
+      "default_lower_equal": true,
+      "turkish_lower_equal": true
+    },
+    {
+      "id": "turkish-dotless",
+      "left": "I",
+      "right": "ı",
+      "raw_equal": false,
+      "nfc_equal": false,
+      "nfkc_equal": false,
+      "default_lower_equal": false,
+      "turkish_lower_equal": true
+    },
+    {
+      "id": "turkish-dotted",
+      "left": "İ",
+      "right": "i",
+      "raw_equal": false,
+      "nfc_equal": false,
+      "nfkc_equal": false,
+      "default_lower_equal": false,
+      "turkish_lower_equal": true
+    },
+    {
+      "id": "lower-not-full-fold",
+      "left": "Straße",
+      "right": "STRASSE",
+      "raw_equal": false,
+      "nfc_equal": false,
+      "nfkc_equal": false,
+      "default_lower_equal": false,
+      "turkish_lower_equal": false
+    },
+    {
+      "id": "script-lookalike",
+      "left": "a",
+      "right": "а",
+      "raw_equal": false,
+      "nfc_equal": false,
+      "nfkc_equal": false,
+      "default_lower_equal": false,
+      "turkish_lower_equal": false
+    },
+    {
+      "id": "accent-distinction",
+      "left": "résumé",
+      "right": "resume",
+      "raw_equal": false,
+      "nfc_equal": false,
+      "nfkc_equal": false,
+      "default_lower_equal": false,
+      "turkish_lower_equal": false
+    },
+    {
+      "id": "empty",
+      "left": "",
+      "right": "",
+      "raw_equal": true,
+      "nfc_equal": true,
+      "nfkc_equal": true,
+      "default_lower_equal": true,
+      "turkish_lower_equal": true
+    }
+  ],
+  "units": [
+    {
+      "text": "",
+      "utf16_units": 0,
+      "code_points": 0,
+      "segmentation": "observed",
+      "graphemes": [],
+      "resolved_locale": "en"
+    },
+    {
+      "text": "Café",
+      "utf16_units": 4,
+      "code_points": 4,
+      "segmentation": "observed",
+      "graphemes": [
+        "C",
+        "a",
+        "f",
+        "é"
+      ],
+      "resolved_locale": "en"
+    },
+    {
+      "text": "Café",
+      "utf16_units": 5,
+      "code_points": 5,
+      "segmentation": "observed",
+      "graphemes": [
+        "C",
+        "a",
+        "f",
+        "é"
+      ],
+      "resolved_locale": "en"
+    },
+    {
+      "text": "😀",
+      "utf16_units": 2,
+      "code_points": 1,
+      "segmentation": "observed",
+      "graphemes": [
+        "😀"
+      ],
+      "resolved_locale": "en"
+    },
+    {
+      "text": "👨‍👩‍👧‍👦",
+      "utf16_units": 11,
+      "code_points": 7,
+      "segmentation": "observed",
+      "graphemes": [
+        "👨‍👩‍👧‍👦"
+      ],
+      "resolved_locale": "en"
+    },
+    {
+      "text": "🇺🇳",
+      "utf16_units": 4,
+      "code_points": 2,
+      "segmentation": "observed",
+      "graphemes": [
+        "🇺🇳"
+      ],
+      "resolved_locale": "en"
+    },
+    {
+      "text": "👍🏽",
+      "utf16_units": 4,
+      "code_points": 2,
+      "segmentation": "observed",
+      "graphemes": [
+        "👍🏽"
+      ],
+      "resolved_locale": "en"
+    },
+    {
+      "text": "日本語",
+      "utf16_units": 3,
+      "code_points": 3,
+      "segmentation": "observed",
+      "graphemes": [
+        "日",
+        "本",
+        "語"
+      ],
+      "resolved_locale": "en"
+    }
+  ],
+  "projection": {
+    "source": {
+      "provider": "synthetic-provider",
+      "id": "CaseSensitive-ID",
+      "title": "ＡＢＣ",
+      "retained_body": "Original body remains with caller"
+    },
+    "nfc": {
+      "provider": "synthetic-provider",
+      "id": "CaseSensitive-ID",
+      "title": "ＡＢＣ",
+      "discovery_key": "ＡＢＣ",
+      "form": "NFC"
+    },
+    "nfkc": {
+      "provider": "synthetic-provider",
+      "id": "CaseSensitive-ID",
+      "title": "ＡＢＣ",
+      "discovery_key": "ABC",
+      "form": "NFKC"
+    }
+  },
+  "ownership": {
+    "old": {
+      "sequence": 1,
+      "query": "ca"
+    },
+    "during": null,
+    "old_accepted_during_composition": false,
+    "committed": {
+      "sequence": 2,
+      "query": "かな"
+    },
+    "duplicate": null,
+    "committed_accepted": true,
+    "duplicate_complete": false,
+    "final_state": {
+      "disposed": true,
+      "composing": false,
+      "value": "かな",
+      "submitted": null,
+      "pending": false,
+      "sequence": 2
+    }
+  }
+}
