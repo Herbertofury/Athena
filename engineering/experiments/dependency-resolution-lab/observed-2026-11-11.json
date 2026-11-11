@@ -1,0 +1,2863 @@
+{
+  "schema_version": 1,
+  "scope": "Synthetic local-Maven Gradle graph, lock and checksum observations. No compilation, binary/API compatibility, mod solver, game loading, target change or performance acceptance.",
+  "recorded_at": "2026-11-11T03:25:09Z",
+  "inputs": {
+    "run.py": "eac1269c79f4315332195553a8c141215de5ba6102c94b656d66264175eedafc",
+    "build.gradle": "8515793648adf180b686b8b0f5c447723e40b1226e20066c9a129ec33e730ea7",
+    "settings.gradle": "4518eaa921eee029de0321094d4e65ac5307057138eda53b1ffc97bbd536c176",
+    "fixtures.json": "6b03737347f41a0f3e0548edafa6ee7386654bc33f4f842a0d14a6aab183598d",
+    "dependencies.json": "40254f5418693b74e97dc3bc3d531b5a823c553251165aca67bebca6b1044904",
+    "initial-build.gradle": "9e55ab7ca96b387936461b11eefc5213352a9665c17ca6d88cda24e30aec5bca",
+    "initial-observations.json": "a81fa29e43bced833c910e4196af283d613cb7fd24ce33a1cf85e30a7f1b9689"
+  },
+  "dependency": {
+    "schema_version": 1,
+    "name": "gradle-9.2.1-bin.zip",
+    "url": "https://downloads.gradle.org/distributions/gradle-9.2.1-bin.zip",
+    "bytes": 135535598,
+    "sha256": "72f44c9f8ebcb1af43838f45ee5c4aa9c5444898b3468ab3f4af7b6076c5bc3f",
+    "checksum_url": "https://downloads.gradle.org/distributions/gradle-9.2.1-bin.zip.sha256",
+    "version": "9.2.1",
+    "revision": "30ecdc708db275e8f8769ea0620f6dd919a58f76"
+  },
+  "environment": {
+    "python": "3.12.14",
+    "system": "Linux",
+    "machine": "x86_64",
+    "gradle_version_output": "\nWelcome to Gradle 9.2.1!\n\nHere are the highlights of this release:\n - Windows ARM support\n - Improved publishing APIs\n - Better guidance for dependency verification failures\n\nFor more details see https://docs.gradle.org/9.2.1/release-notes.html\n\n\n------------------------------------------------------------\nGradle 9.2.1\n------------------------------------------------------------\n\nBuild time:    2025-11-17 13:40:48 UTC\nRevision:      30ecdc708db275e8f8769ea0620f6dd919a58f76\n\nKotlin:        2.2.20\nGroovy:        4.0.28\nAnt:           Apache Ant(TM) version 1.10.15 compiled on August 25 2024\nLauncher JVM:  21.0.13 (Debian 21.0.13+9-1-deb13u2-Debian)\nDaemon JVM:    /usr/lib/jvm/java-21-openjdk-amd64 (no JDK specified, using current Java home)\nOS:            Linux 6.18.57 amd64\n\n"
+  },
+  "runs": [
+    {
+      "id": "default_conflict",
+      "command": [
+        "gradle",
+        "--offline",
+        "--no-daemon",
+        "--console=plain",
+        "--max-workers=1",
+        "--no-build-cache",
+        "--no-configuration-cache",
+        "--rerun-tasks",
+        "-Duser.timezone=UTC",
+        "-Porg.gradle.dependency.verification.console=verbose",
+        "-Pmode=conflict",
+        "observe"
+      ],
+      "returncode": 0,
+      "stdout": "\nWelcome to Gradle 9.2.1!\n\nHere are the highlights of this release:\n - Windows ARM support\n - Improved publishing APIs\n - Better guidance for dependency verification failures\n\nFor more details see https://docs.gradle.org/9.2.1/release-notes.html\n\nTo honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.2.1/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.\nDaemon will be stopped at the end of the build \n\n> Task :observe\nATLAS_OBSERVATION={\"graph\":{\"components\":[{\"id\":\"atlas.synthetic:addon:1.0\",\"reasons\":[{\"cause\":\"REQUESTED\",\"description\":\"requested\"}]},{\"id\":\"atlas.synthetic:core:2.0\",\"reasons\":[{\"cause\":\"REQUESTED\",\"description\":\"requested\"},{\"cause\":\"CONFLICT_RESOLUTION\",\"description\":\"between versions 2.0 and 1.0\"}]},{\"id\":\"root project :\",\"reasons\":[{\"cause\":\"ROOT\",\"description\":\"root\"}]}],\"edges\":[{\"from\":\"atlas.synthetic:addon:1.0\",\"requested\":\"atlas.synthetic:core:2.0\",\"constraint\":false,\"resolved\":true,\"selected\":\"atlas.synthetic:core:2.0\"},{\"from\":\"root project :\",\"requested\":\"atlas.synthetic:addon:1.0\",\"constraint\":false,\"resolved\":true,\"selected\":\"atlas.synthetic:addon:1.0\"},{\"from\":\"root project :\",\"requested\":\"atlas.synthetic:core:1.0\",\"constraint\":false,\"resolved\":true,\"selected\":\"atlas.synthetic:core:2.0\"}]},\"artifacts\":[{\"module\":\"atlas.synthetic:addon:1.0\",\"name\":\"addon-1.0.jar\",\"bytes\":167,\"base64\":\"UEsDBBQAAAAAAAAAIVAvcGIWHQAAAB0AAAAUAAAAb3JpZ2luYWwtZml4dHVyZS50eHRvcmlnaW5hbCBzeW50aGV0aWMgYWRkb24gMS4wClBLAQIUAxQAAAAAAAAAIVAvcGIWHQAAAB0AAAAUAAAAAAAAAAAAAACkgQAAAABvcmlnaW5hbC1maXh0dXJlLnR4dFBLBQYAAAAAAQABAEIAAABPAAAAAAA=\",\"sha256\":\"b3438930ecb6335432080d0089b228e16f1744714753d8a2353a089f24e0ee41\"},{\"module\":\"atlas.synthetic:core:2.0\",\"name\":\"core-2.0.jar\",\"bytes\":166,\"base64\":\"UEsDBBQAAAAAAAAAIVCt3zjPHAAAABwAAAAUAAAAb3JpZ2luYWwtZml4dHVyZS50eHRvcmlnaW5hbCBzeW50aGV0aWMgY29yZSAyLjAKUEsBAhQDFAAAAAAAAAAhUK3fOM8cAAAAHAAAABQAAAAAAAAAAAAAAKSBAAAAAG9yaWdpbmFsLWZpeHR1cmUudHh0UEsFBgAAAAABAAEAQgAAAE4AAAAAAA==\",\"sha256\":\"fd277fe2fa243a8caeb9d7bcfad7cde83166c825d7ce45e36d92542a1cfb2925\"}]}\n\nBUILD SUCCESSFUL in 4s\n1 actionable task: 1 executed\n",
+      "stderr": "",
+      "repository": [
+        {
+          "path": "atlas/synthetic/addon/1.0/addon-1.0.jar",
+          "bytes": 167,
+          "sha256": "b3438930ecb6335432080d0089b228e16f1744714753d8a2353a089f24e0ee41",
+          "base64": "UEsDBBQAAAAAAAAAIVAvcGIWHQAAAB0AAAAUAAAAb3JpZ2luYWwtZml4dHVyZS50eHRvcmlnaW5hbCBzeW50aGV0aWMgYWRkb24gMS4wClBLAQIUAxQAAAAAAAAAIVAvcGIWHQAAAB0AAAAUAAAAAAAAAAAAAACkgQAAAABvcmlnaW5hbC1maXh0dXJlLnR4dFBLBQYAAAAAAQABAEIAAABPAAAAAAA="
+        },
+        {
+          "path": "atlas/synthetic/addon/1.0/addon-1.0.pom",
+          "bytes": 279,
+          "sha256": "5f11223a73854b4c987d5618be19c1d9668f095ee16a01de99430e8d49b77939",
+          "base64": "PHByb2plY3Q+PG1vZGVsVmVyc2lvbj40LjAuMDwvbW9kZWxWZXJzaW9uPjxncm91cElkPmF0bGFzLnN5bnRoZXRpYzwvZ3JvdXBJZD48YXJ0aWZhY3RJZD5hZGRvbjwvYXJ0aWZhY3RJZD48dmVyc2lvbj4xLjA8L3ZlcnNpb24+PGRlcGVuZGVuY2llcz48ZGVwZW5kZW5jeT48Z3JvdXBJZD5hdGxhcy5zeW50aGV0aWM8L2dyb3VwSWQ+PGFydGlmYWN0SWQ+Y29yZTwvYXJ0aWZhY3RJZD48dmVyc2lvbj4yLjA8L3ZlcnNpb24+PC9kZXBlbmRlbmN5PjwvZGVwZW5kZW5jaWVzPjwvcHJvamVjdD4K"
+        },
+        {
+          "path": "atlas/synthetic/addon/maven-metadata.xml",
+          "bytes": 237,
+          "sha256": "c4d944711412e0d1c7ec9f7e3d6bcdf795463c10b6d9ba06bd48d9e890050c4c",
+          "base64": "PG1ldGFkYXRhPjxncm91cElkPmF0bGFzLnN5bnRoZXRpYzwvZ3JvdXBJZD48YXJ0aWZhY3RJZD5hZGRvbjwvYXJ0aWZhY3RJZD48dmVyc2lvbmluZz48bGF0ZXN0PjEuMDwvbGF0ZXN0PjxyZWxlYXNlPjEuMDwvcmVsZWFzZT48dmVyc2lvbnM+PHZlcnNpb24+MS4wPC92ZXJzaW9uPjwvdmVyc2lvbnM+PGxhc3RVcGRhdGVkPjIwMjYxMTExMDAwMDAwPC9sYXN0VXBkYXRlZD48L3ZlcnNpb25pbmc+PC9tZXRhZGF0YT4K"
+        },
+        {
+          "path": "atlas/synthetic/core/1.0/core-1.0.jar",
+          "bytes": 166,
+          "sha256": "f5d496cf77425dd163303e0ea6d718baa133d6443816ee0539a50d254026593e",
+          "base64": "UEsDBBQAAAAAAAAAIVBDcI3dHAAAABwAAAAUAAAAb3JpZ2luYWwtZml4dHVyZS50eHRvcmlnaW5hbCBzeW50aGV0aWMgY29yZSAxLjAKUEsBAhQDFAAAAAAAAAAhUENwjd0cAAAAHAAAABQAAAAAAAAAAAAAAKSBAAAAAG9yaWdpbmFsLWZpeHR1cmUudHh0UEsFBgAAAAABAAEAQgAAAE4AAAAAAA=="
+        },
+        {
+          "path": "atlas/synthetic/core/1.0/core-1.0.pom",
+          "bytes": 139,
+          "sha256": "066bd0cd95f9e2de0bc07f89f4d7df626b9eab5a0e85811c307fa5c4d0295973",
+          "base64": "PHByb2plY3Q+PG1vZGVsVmVyc2lvbj40LjAuMDwvbW9kZWxWZXJzaW9uPjxncm91cElkPmF0bGFzLnN5bnRoZXRpYzwvZ3JvdXBJZD48YXJ0aWZhY3RJZD5jb3JlPC9hcnRpZmFjdElkPjx2ZXJzaW9uPjEuMDwvdmVyc2lvbj48L3Byb2plY3Q+Cg=="
+        },
+        {
+          "path": "atlas/synthetic/core/1.1/core-1.1.jar",
+          "bytes": 166,
+          "sha256": "ba0cc6e4210adfb4076c8ee96b4722f4af3ef10006ac5214383c0bd98da831cc",
+          "base64": "UEsDBBQAAAAAAAAAIVACQZbEHAAAABwAAAAUAAAAb3JpZ2luYWwtZml4dHVyZS50eHRvcmlnaW5hbCBzeW50aGV0aWMgY29yZSAxLjEKUEsBAhQDFAAAAAAAAAAhUAJBlsQcAAAAHAAAABQAAAAAAAAAAAAAAKSBAAAAAG9yaWdpbmFsLWZpeHR1cmUudHh0UEsFBgAAAAABAAEAQgAAAE4AAAAAAA=="
+        },
+        {
+          "path": "atlas/synthetic/core/1.1/core-1.1.pom",
+          "bytes": 139,
+          "sha256": "31b251049089a75b0c9bc395ca47c219e143473227eff0bf40da6336cb84cec7",
+          "base64": "PHByb2plY3Q+PG1vZGVsVmVyc2lvbj40LjAuMDwvbW9kZWxWZXJzaW9uPjxncm91cElkPmF0bGFzLnN5bnRoZXRpYzwvZ3JvdXBJZD48YXJ0aWZhY3RJZD5jb3JlPC9hcnRpZmFjdElkPjx2ZXJzaW9uPjEuMTwvdmVyc2lvbj48L3Byb2plY3Q+Cg=="
+        },
+        {
+          "path": "atlas/synthetic/core/2.0/core-2.0.jar",
+          "bytes": 166,
+          "sha256": "fd277fe2fa243a8caeb9d7bcfad7cde83166c825d7ce45e36d92542a1cfb2925",
+          "base64": "UEsDBBQAAAAAAAAAIVCt3zjPHAAAABwAAAAUAAAAb3JpZ2luYWwtZml4dHVyZS50eHRvcmlnaW5hbCBzeW50aGV0aWMgY29yZSAyLjAKUEsBAhQDFAAAAAAAAAAhUK3fOM8cAAAAHAAAABQAAAAAAAAAAAAAAKSBAAAAAG9yaWdpbmFsLWZpeHR1cmUudHh0UEsFBgAAAAABAAEAQgAAAE4AAAAAAA=="
+        },
+        {
+          "path": "atlas/synthetic/core/2.0/core-2.0.pom",
+          "bytes": 139,
+          "sha256": "5aec571182961b81636542e6deb4cf6ce0a3e1a1d8638e6ad309cc9108debfb1",
+          "base64": "PHByb2plY3Q+PG1vZGVsVmVyc2lvbj40LjAuMDwvbW9kZWxWZXJzaW9uPjxncm91cElkPmF0bGFzLnN5bnRoZXRpYzwvZ3JvdXBJZD48YXJ0aWZhY3RJZD5jb3JlPC9hcnRpZmFjdElkPjx2ZXJzaW9uPjIuMDwvdmVyc2lvbj48L3Byb2plY3Q+Cg=="
+        },
+        {
+          "path": "atlas/synthetic/core/maven-metadata.xml",
+          "bytes": 280,
+          "sha256": "6080081089f98ff2610b953efc7480359e1daa062814eaa86f80ed4633de8eed",
+          "base64": "PG1ldGFkYXRhPjxncm91cElkPmF0bGFzLnN5bnRoZXRpYzwvZ3JvdXBJZD48YXJ0aWZhY3RJZD5jb3JlPC9hcnRpZmFjdElkPjx2ZXJzaW9uaW5nPjxsYXRlc3Q+Mi4wPC9sYXRlc3Q+PHJlbGVhc2U+Mi4wPC9yZWxlYXNlPjx2ZXJzaW9ucz48dmVyc2lvbj4xLjA8L3ZlcnNpb24+PHZlcnNpb24+MS4xPC92ZXJzaW9uPjx2ZXJzaW9uPjIuMDwvdmVyc2lvbj48L3ZlcnNpb25zPjxsYXN0VXBkYXRlZD4yMDI2MTExMTAwMDAwMDwvbGFzdFVwZGF0ZWQ+PC92ZXJzaW9uaW5nPjwvbWV0YWRhdGE+Cg=="
+        }
+      ],
+      "graph": {
+        "components": [
+          {
+            "id": "atlas.synthetic:addon:1.0",
+            "reasons": [
+              {
+                "cause": "REQUESTED",
+                "description": "requested"
+              }
+            ]
+          },
+          {
+            "id": "atlas.synthetic:core:2.0",
+            "reasons": [
+              {
+                "cause": "REQUESTED",
+                "description": "requested"
+              },
+              {
+                "cause": "CONFLICT_RESOLUTION",
+                "description": "between versions 2.0 and 1.0"
+              }
+            ]
+          },
+          {
+            "id": "root project :",
+            "reasons": [
+              {
+                "cause": "ROOT",
+                "description": "root"
+              }
+            ]
+          }
+        ],
+        "edges": [
+          {
+            "from": "atlas.synthetic:addon:1.0",
+            "requested": "atlas.synthetic:core:2.0",
+            "constraint": false,
+            "resolved": true,
+            "selected": "atlas.synthetic:core:2.0"
+          },
+          {
+            "from": "root project :",
+            "requested": "atlas.synthetic:addon:1.0",
+            "constraint": false,
+            "resolved": true,
+            "selected": "atlas.synthetic:addon:1.0"
+          },
+          {
+            "from": "root project :",
+            "requested": "atlas.synthetic:core:1.0",
+            "constraint": false,
+            "resolved": true,
+            "selected": "atlas.synthetic:core:2.0"
+          }
+        ]
+      },
+      "observation": {
+        "graph": {
+          "components": [
+            {
+              "id": "atlas.synthetic:addon:1.0",
+              "reasons": [
+                {
+                  "cause": "REQUESTED",
+                  "description": "requested"
+                }
+              ]
+            },
+            {
+              "id": "atlas.synthetic:core:2.0",
+              "reasons": [
+                {
+                  "cause": "REQUESTED",
+                  "description": "requested"
+                },
+                {
+                  "cause": "CONFLICT_RESOLUTION",
+                  "description": "between versions 2.0 and 1.0"
+                }
+              ]
+            },
+            {
+              "id": "root project :",
+              "reasons": [
+                {
+                  "cause": "ROOT",
+                  "description": "root"
+                }
+              ]
+            }
+          ],
+          "edges": [
+            {
+              "from": "atlas.synthetic:addon:1.0",
+              "requested": "atlas.synthetic:core:2.0",
+              "constraint": false,
+              "resolved": true,
+              "selected": "atlas.synthetic:core:2.0"
+            },
+            {
+              "from": "root project :",
+              "requested": "atlas.synthetic:addon:1.0",
+              "constraint": false,
+              "resolved": true,
+              "selected": "atlas.synthetic:addon:1.0"
+            },
+            {
+              "from": "root project :",
+              "requested": "atlas.synthetic:core:1.0",
+              "constraint": false,
+              "resolved": true,
+              "selected": "atlas.synthetic:core:2.0"
+            }
+          ]
+        },
+        "artifacts": [
+          {
+            "module": "atlas.synthetic:addon:1.0",
+            "name": "addon-1.0.jar",
+            "bytes": 167,
+            "base64": "UEsDBBQAAAAAAAAAIVAvcGIWHQAAAB0AAAAUAAAAb3JpZ2luYWwtZml4dHVyZS50eHRvcmlnaW5hbCBzeW50aGV0aWMgYWRkb24gMS4wClBLAQIUAxQAAAAAAAAAIVAvcGIWHQAAAB0AAAAUAAAAAAAAAAAAAACkgQAAAABvcmlnaW5hbC1maXh0dXJlLnR4dFBLBQYAAAAAAQABAEIAAABPAAAAAAA=",
+            "sha256": "b3438930ecb6335432080d0089b228e16f1744714753d8a2353a089f24e0ee41"
+          },
+          {
+            "module": "atlas.synthetic:core:2.0",
+            "name": "core-2.0.jar",
+            "bytes": 166,
+            "base64": "UEsDBBQAAAAAAAAAIVCt3zjPHAAAABwAAAAUAAAAb3JpZ2luYWwtZml4dHVyZS50eHRvcmlnaW5hbCBzeW50aGV0aWMgY29yZSAyLjAKUEsBAhQDFAAAAAAAAAAhUK3fOM8cAAAAHAAAABQAAAAAAAAAAAAAAKSBAAAAAG9yaWdpbmFsLWZpeHR1cmUudHh0UEsFBgAAAAABAAEAQgAAAE4AAAAAAA==",
+            "sha256": "fd277fe2fa243a8caeb9d7bcfad7cde83166c825d7ce45e36d92542a1cfb2925"
+          }
+        ]
+      },
+      "lock": null,
+      "verification": null
+    },
+    {
+      "id": "strict_transitive",
+      "command": [
+        "gradle",
+        "--offline",
+        "--no-daemon",
+        "--console=plain",
+        "--max-workers=1",
+        "--no-build-cache",
+        "--no-configuration-cache",
+        "--rerun-tasks",
+        "-Duser.timezone=UTC",
+        "-Porg.gradle.dependency.verification.console=verbose",
+        "-Pmode=strict",
+        "observe"
+      ],
+      "returncode": 0,
+      "stdout": "\nWelcome to Gradle 9.2.1!\n\nHere are the highlights of this release:\n - Windows ARM support\n - Improved publishing APIs\n - Better guidance for dependency verification failures\n\nFor more details see https://docs.gradle.org/9.2.1/release-notes.html\n\nTo honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.2.1/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.\nDaemon will be stopped at the end of the build \n\n> Task :observe\nATLAS_OBSERVATION={\"graph\":{\"components\":[{\"id\":\"atlas.synthetic:addon:1.0\",\"reasons\":[{\"cause\":\"REQUESTED\",\"description\":\"requested\"}]},{\"id\":\"atlas.synthetic:core:1.0\",\"reasons\":[{\"cause\":\"REQUESTED\",\"description\":\"requested\"},{\"cause\":\"CONSTRAINT\",\"description\":\"constraint\"},{\"cause\":\"BY_ANCESTOR\",\"description\":\"by ancestor\"}]},{\"id\":\"root project :\",\"reasons\":[{\"cause\":\"ROOT\",\"description\":\"root\"}]}],\"edges\":[{\"from\":\"atlas.synthetic:addon:1.0\",\"requested\":\"atlas.synthetic:core:2.0\",\"constraint\":false,\"resolved\":true,\"selected\":\"atlas.synthetic:core:1.0\"},{\"from\":\"root project :\",\"requested\":\"atlas.synthetic:addon:1.0\",\"constraint\":false,\"resolved\":true,\"selected\":\"atlas.synthetic:addon:1.0\"},{\"from\":\"root project :\",\"requested\":\"atlas.synthetic:core:1.0\",\"constraint\":false,\"resolved\":true,\"selected\":\"atlas.synthetic:core:1.0\"},{\"from\":\"root project :\",\"requested\":\"atlas.synthetic:core:{strictly 1.0}\",\"constraint\":true,\"resolved\":true,\"selected\":\"atlas.synthetic:core:1.0\"}]},\"artifacts\":[{\"module\":\"atlas.synthetic:addon:1.0\",\"name\":\"addon-1.0.jar\",\"bytes\":167,\"base64\":\"UEsDBBQAAAAAAAAAIVAvcGIWHQAAAB0AAAAUAAAAb3JpZ2luYWwtZml4dHVyZS50eHRvcmlnaW5hbCBzeW50aGV0aWMgYWRkb24gMS4wClBLAQIUAxQAAAAAAAAAIVAvcGIWHQAAAB0AAAAUAAAAAAAAAAAAAACkgQAAAABvcmlnaW5hbC1maXh0dXJlLnR4dFBLBQYAAAAAAQABAEIAAABPAAAAAAA=\",\"sha256\":\"b3438930ecb6335432080d0089b228e16f1744714753d8a2353a089f24e0ee41\"},{\"module\":\"atlas.synthetic:core:1.0\",\"name\":\"core-1.0.jar\",\"bytes\":166,\"base64\":\"UEsDBBQAAAAAAAAAIVBDcI3dHAAAABwAAAAUAAAAb3JpZ2luYWwtZml4dHVyZS50eHRvcmlnaW5hbCBzeW50aGV0aWMgY29yZSAxLjAKUEsBAhQDFAAAAAAAAAAhUENwjd0cAAAAHAAAABQAAAAAAAAAAAAAAKSBAAAAAG9yaWdpbmFsLWZpeHR1cmUudHh0UEsFBgAAAAABAAEAQgAAAE4AAAAAAA==\",\"sha256\":\"f5d496cf77425dd163303e0ea6d718baa133d6443816ee0539a50d254026593e\"}]}\n\nBUILD SUCCESSFUL in 5s\n1 actionable task: 1 executed\n",
+      "stderr": "",
+      "repository": [
+        {
+          "path": "atlas/synthetic/addon/1.0/addon-1.0.jar",
+          "bytes": 167,
+          "sha256": "b3438930ecb6335432080d0089b228e16f1744714753d8a2353a089f24e0ee41",
+          "base64": "UEsDBBQAAAAAAAAAIVAvcGIWHQAAAB0AAAAUAAAAb3JpZ2luYWwtZml4dHVyZS50eHRvcmlnaW5hbCBzeW50aGV0aWMgYWRkb24gMS4wClBLAQIUAxQAAAAAAAAAIVAvcGIWHQAAAB0AAAAUAAAAAAAAAAAAAACkgQAAAABvcmlnaW5hbC1maXh0dXJlLnR4dFBLBQYAAAAAAQABAEIAAABPAAAAAAA="
+        },
+        {
+          "path": "atlas/synthetic/addon/1.0/addon-1.0.pom",
+          "bytes": 279,
+          "sha256": "5f11223a73854b4c987d5618be19c1d9668f095ee16a01de99430e8d49b77939",
+          "base64": "PHByb2plY3Q+PG1vZGVsVmVyc2lvbj40LjAuMDwvbW9kZWxWZXJzaW9uPjxncm91cElkPmF0bGFzLnN5bnRoZXRpYzwvZ3JvdXBJZD48YXJ0aWZhY3RJZD5hZGRvbjwvYXJ0aWZhY3RJZD48dmVyc2lvbj4xLjA8L3ZlcnNpb24+PGRlcGVuZGVuY2llcz48ZGVwZW5kZW5jeT48Z3JvdXBJZD5hdGxhcy5zeW50aGV0aWM8L2dyb3VwSWQ+PGFydGlmYWN0SWQ+Y29yZTwvYXJ0aWZhY3RJZD48dmVyc2lvbj4yLjA8L3ZlcnNpb24+PC9kZXBlbmRlbmN5PjwvZGVwZW5kZW5jaWVzPjwvcHJvamVjdD4K"
+        },
+        {
+          "path": "atlas/synthetic/addon/maven-metadata.xml",
+          "bytes": 237,
+          "sha256": "c4d944711412e0d1c7ec9f7e3d6bcdf795463c10b6d9ba06bd48d9e890050c4c",
+          "base64": "PG1ldGFkYXRhPjxncm91cElkPmF0bGFzLnN5bnRoZXRpYzwvZ3JvdXBJZD48YXJ0aWZhY3RJZD5hZGRvbjwvYXJ0aWZhY3RJZD48dmVyc2lvbmluZz48bGF0ZXN0PjEuMDwvbGF0ZXN0PjxyZWxlYXNlPjEuMDwvcmVsZWFzZT48dmVyc2lvbnM+PHZlcnNpb24+MS4wPC92ZXJzaW9uPjwvdmVyc2lvbnM+PGxhc3RVcGRhdGVkPjIwMjYxMTExMDAwMDAwPC9sYXN0VXBkYXRlZD48L3ZlcnNpb25pbmc+PC9tZXRhZGF0YT4K"
+        },
+        {
+          "path": "atlas/synthetic/core/1.0/core-1.0.jar",
+          "bytes": 166,
+          "sha256": "f5d496cf77425dd163303e0ea6d718baa133d6443816ee0539a50d254026593e",
+          "base64": "UEsDBBQAAAAAAAAAIVBDcI3dHAAAABwAAAAUAAAAb3JpZ2luYWwtZml4dHVyZS50eHRvcmlnaW5hbCBzeW50aGV0aWMgY29yZSAxLjAKUEsBAhQDFAAAAAAAAAAhUENwjd0cAAAAHAAAABQAAAAAAAAAAAAAAKSBAAAAAG9yaWdpbmFsLWZpeHR1cmUudHh0UEsFBgAAAAABAAEAQgAAAE4AAAAAAA=="
+        },
+        {
+          "path": "atlas/synthetic/core/1.0/core-1.0.pom",
+          "bytes": 139,
+          "sha256": "066bd0cd95f9e2de0bc07f89f4d7df626b9eab5a0e85811c307fa5c4d0295973",
+          "base64": "PHByb2plY3Q+PG1vZGVsVmVyc2lvbj40LjAuMDwvbW9kZWxWZXJzaW9uPjxncm91cElkPmF0bGFzLnN5bnRoZXRpYzwvZ3JvdXBJZD48YXJ0aWZhY3RJZD5jb3JlPC9hcnRpZmFjdElkPjx2ZXJzaW9uPjEuMDwvdmVyc2lvbj48L3Byb2plY3Q+Cg=="
+        },
+        {
+          "path": "atlas/synthetic/core/1.1/core-1.1.jar",
+          "bytes": 166,
+          "sha256": "ba0cc6e4210adfb4076c8ee96b4722f4af3ef10006ac5214383c0bd98da831cc",
+          "base64": "UEsDBBQAAAAAAAAAIVACQZbEHAAAABwAAAAUAAAAb3JpZ2luYWwtZml4dHVyZS50eHRvcmlnaW5hbCBzeW50aGV0aWMgY29yZSAxLjEKUEsBAhQDFAAAAAAAAAAhUAJBlsQcAAAAHAAAABQAAAAAAAAAAAAAAKSBAAAAAG9yaWdpbmFsLWZpeHR1cmUudHh0UEsFBgAAAAABAAEAQgAAAE4AAAAAAA=="
+        },
+        {
+          "path": "atlas/synthetic/core/1.1/core-1.1.pom",
+          "bytes": 139,
+          "sha256": "31b251049089a75b0c9bc395ca47c219e143473227eff0bf40da6336cb84cec7",
+          "base64": "PHByb2plY3Q+PG1vZGVsVmVyc2lvbj40LjAuMDwvbW9kZWxWZXJzaW9uPjxncm91cElkPmF0bGFzLnN5bnRoZXRpYzwvZ3JvdXBJZD48YXJ0aWZhY3RJZD5jb3JlPC9hcnRpZmFjdElkPjx2ZXJzaW9uPjEuMTwvdmVyc2lvbj48L3Byb2plY3Q+Cg=="
+        },
+        {
+          "path": "atlas/synthetic/core/2.0/core-2.0.jar",
+          "bytes": 166,
+          "sha256": "fd277fe2fa243a8caeb9d7bcfad7cde83166c825d7ce45e36d92542a1cfb2925",
+          "base64": "UEsDBBQAAAAAAAAAIVCt3zjPHAAAABwAAAAUAAAAb3JpZ2luYWwtZml4dHVyZS50eHRvcmlnaW5hbCBzeW50aGV0aWMgY29yZSAyLjAKUEsBAhQDFAAAAAAAAAAhUK3fOM8cAAAAHAAAABQAAAAAAAAAAAAAAKSBAAAAAG9yaWdpbmFsLWZpeHR1cmUudHh0UEsFBgAAAAABAAEAQgAAAE4AAAAAAA=="
+        },
+        {
+          "path": "atlas/synthetic/core/2.0/core-2.0.pom",
+          "bytes": 139,
+          "sha256": "5aec571182961b81636542e6deb4cf6ce0a3e1a1d8638e6ad309cc9108debfb1",
+          "base64": "PHByb2plY3Q+PG1vZGVsVmVyc2lvbj40LjAuMDwvbW9kZWxWZXJzaW9uPjxncm91cElkPmF0bGFzLnN5bnRoZXRpYzwvZ3JvdXBJZD48YXJ0aWZhY3RJZD5jb3JlPC9hcnRpZmFjdElkPjx2ZXJzaW9uPjIuMDwvdmVyc2lvbj48L3Byb2plY3Q+Cg=="
+        },
+        {
+          "path": "atlas/synthetic/core/maven-metadata.xml",
+          "bytes": 280,
+          "sha256": "6080081089f98ff2610b953efc7480359e1daa062814eaa86f80ed4633de8eed",
+          "base64": "PG1ldGFkYXRhPjxncm91cElkPmF0bGFzLnN5bnRoZXRpYzwvZ3JvdXBJZD48YXJ0aWZhY3RJZD5jb3JlPC9hcnRpZmFjdElkPjx2ZXJzaW9uaW5nPjxsYXRlc3Q+Mi4wPC9sYXRlc3Q+PHJlbGVhc2U+Mi4wPC9yZWxlYXNlPjx2ZXJzaW9ucz48dmVyc2lvbj4xLjA8L3ZlcnNpb24+PHZlcnNpb24+MS4xPC92ZXJzaW9uPjx2ZXJzaW9uPjIuMDwvdmVyc2lvbj48L3ZlcnNpb25zPjxsYXN0VXBkYXRlZD4yMDI2MTExMTAwMDAwMDwvbGFzdFVwZGF0ZWQ+PC92ZXJzaW9uaW5nPjwvbWV0YWRhdGE+Cg=="
+        }
+      ],
+      "graph": {
+        "components": [
+          {
+            "id": "atlas.synthetic:addon:1.0",
+            "reasons": [
+              {
+                "cause": "REQUESTED",
+                "description": "requested"
+              }
+            ]
+          },
+          {
+            "id": "atlas.synthetic:core:1.0",
+            "reasons": [
+              {
+                "cause": "REQUESTED",
+                "description": "requested"
+              },
+              {
+                "cause": "CONSTRAINT",
+                "description": "constraint"
+              },
+              {
+                "cause": "BY_ANCESTOR",
+                "description": "by ancestor"
+              }
+            ]
+          },
+          {
+            "id": "root project :",
+            "reasons": [
+              {
+                "cause": "ROOT",
+                "description": "root"
+              }
+            ]
+          }
+        ],
+        "edges": [
+          {
+            "from": "atlas.synthetic:addon:1.0",
+            "requested": "atlas.synthetic:core:2.0",
+            "constraint": false,
+            "resolved": true,
+            "selected": "atlas.synthetic:core:1.0"
+          },
+          {
+            "from": "root project :",
+            "requested": "atlas.synthetic:addon:1.0",
+            "constraint": false,
+            "resolved": true,
+            "selected": "atlas.synthetic:addon:1.0"
+          },
+          {
+            "from": "root project :",
+            "requested": "atlas.synthetic:core:1.0",
+            "constraint": false,
+            "resolved": true,
+            "selected": "atlas.synthetic:core:1.0"
+          },
+          {
+            "from": "root project :",
+            "requested": "atlas.synthetic:core:{strictly 1.0}",
+            "constraint": true,
+            "resolved": true,
+            "selected": "atlas.synthetic:core:1.0"
+          }
+        ]
+      },
+      "observation": {
+        "graph": {
+          "components": [
+            {
+              "id": "atlas.synthetic:addon:1.0",
+              "reasons": [
+                {
+                  "cause": "REQUESTED",
+                  "description": "requested"
+                }
+              ]
+            },
+            {
+              "id": "atlas.synthetic:core:1.0",
+              "reasons": [
+                {
+                  "cause": "REQUESTED",
+                  "description": "requested"
+                },
+                {
+                  "cause": "CONSTRAINT",
+                  "description": "constraint"
+                },
+                {
+                  "cause": "BY_ANCESTOR",
+                  "description": "by ancestor"
+                }
+              ]
+            },
+            {
+              "id": "root project :",
+              "reasons": [
+                {
+                  "cause": "ROOT",
+                  "description": "root"
+                }
+              ]
+            }
+          ],
+          "edges": [
+            {
+              "from": "atlas.synthetic:addon:1.0",
+              "requested": "atlas.synthetic:core:2.0",
+              "constraint": false,
+              "resolved": true,
+              "selected": "atlas.synthetic:core:1.0"
+            },
+            {
+              "from": "root project :",
+              "requested": "atlas.synthetic:addon:1.0",
+              "constraint": false,
+              "resolved": true,
+              "selected": "atlas.synthetic:addon:1.0"
+            },
+            {
+              "from": "root project :",
+              "requested": "atlas.synthetic:core:1.0",
+              "constraint": false,
+              "resolved": true,
+              "selected": "atlas.synthetic:core:1.0"
+            },
+            {
+              "from": "root project :",
+              "requested": "atlas.synthetic:core:{strictly 1.0}",
+              "constraint": true,
+              "resolved": true,
+              "selected": "atlas.synthetic:core:1.0"
+            }
+          ]
+        },
+        "artifacts": [
+          {
+            "module": "atlas.synthetic:addon:1.0",
+            "name": "addon-1.0.jar",
+            "bytes": 167,
+            "base64": "UEsDBBQAAAAAAAAAIVAvcGIWHQAAAB0AAAAUAAAAb3JpZ2luYWwtZml4dHVyZS50eHRvcmlnaW5hbCBzeW50aGV0aWMgYWRkb24gMS4wClBLAQIUAxQAAAAAAAAAIVAvcGIWHQAAAB0AAAAUAAAAAAAAAAAAAACkgQAAAABvcmlnaW5hbC1maXh0dXJlLnR4dFBLBQYAAAAAAQABAEIAAABPAAAAAAA=",
+            "sha256": "b3438930ecb6335432080d0089b228e16f1744714753d8a2353a089f24e0ee41"
+          },
+          {
+            "module": "atlas.synthetic:core:1.0",
+            "name": "core-1.0.jar",
+            "bytes": 166,
+            "base64": "UEsDBBQAAAAAAAAAIVBDcI3dHAAAABwAAAAUAAAAb3JpZ2luYWwtZml4dHVyZS50eHRvcmlnaW5hbCBzeW50aGV0aWMgY29yZSAxLjAKUEsBAhQDFAAAAAAAAAAhUENwjd0cAAAAHAAAABQAAAAAAAAAAAAAAKSBAAAAAG9yaWdpbmFsLWZpeHR1cmUudHh0UEsFBgAAAAABAAEAQgAAAE4AAAAAAA==",
+            "sha256": "f5d496cf77425dd163303e0ea6d718baa133d6443816ee0539a50d254026593e"
+          }
+        ]
+      },
+      "lock": null,
+      "verification": null
+    },
+    {
+      "id": "incompatible_stricts",
+      "command": [
+        "gradle",
+        "--offline",
+        "--no-daemon",
+        "--console=plain",
+        "--max-workers=1",
+        "--no-build-cache",
+        "--no-configuration-cache",
+        "--rerun-tasks",
+        "-Duser.timezone=UTC",
+        "-Porg.gradle.dependency.verification.console=verbose",
+        "-Pmode=impossible",
+        "observe"
+      ],
+      "returncode": 1,
+      "stdout": "\nWelcome to Gradle 9.2.1!\n\nHere are the highlights of this release:\n - Windows ARM support\n - Improved publishing APIs\n - Better guidance for dependency verification failures\n\nFor more details see https://docs.gradle.org/9.2.1/release-notes.html\n\nTo honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.2.1/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.\nDaemon will be stopped at the end of the build \n> Task :observe FAILED\n\n[Incubating] Problems report is available at: file://<run>/build/reports/problems/problems-report.html\n1 actionable task: 1 executed\n",
+      "stderr": "\nFAILURE: Build failed with an exception.\n\n* Where:\nBuild file '<run>/build.gradle' line: 43\n\n* What went wrong:\nExecution failed for task ':observe'.\n> Could not resolve all files for configuration ':atlas'.\n   > Could not resolve atlas.synthetic:core:1.+.\n     Required by:\n         root project 'atlas-dependency-lab'\n      > Cannot find a version of 'atlas.synthetic:core' that satisfies the version constraints:\n           Dependency path: 'root project :' (atlas) --> 'atlas.synthetic:core:1.+'\n           Dependency path: 'root project :' (atlas) --> 'atlas.synthetic:core:{strictly 1.0}'\n           Dependency path: 'root project :' (atlas) --> 'atlas.synthetic:core:{strictly 2.0}'\n\n> There are 2 more failures with identical causes.\n\n* Try:\n> Run with --stacktrace option to get the stack trace.\n> Run with --info or --debug option to get more log output.\n> Run with --scan to generate a Build Scan (powered by Develocity).\n> Get more help at https://help.gradle.org.\n\nBUILD FAILED in 5s\n",
+      "repository": [
+        {
+          "path": "atlas/synthetic/addon/1.0/addon-1.0.jar",
+          "bytes": 167,
+          "sha256": "b3438930ecb6335432080d0089b228e16f1744714753d8a2353a089f24e0ee41",
+          "base64": "UEsDBBQAAAAAAAAAIVAvcGIWHQAAAB0AAAAUAAAAb3JpZ2luYWwtZml4dHVyZS50eHRvcmlnaW5hbCBzeW50aGV0aWMgYWRkb24gMS4wClBLAQIUAxQAAAAAAAAAIVAvcGIWHQAAAB0AAAAUAAAAAAAAAAAAAACkgQAAAABvcmlnaW5hbC1maXh0dXJlLnR4dFBLBQYAAAAAAQABAEIAAABPAAAAAAA="
+        },
+        {
+          "path": "atlas/synthetic/addon/1.0/addon-1.0.pom",
+          "bytes": 279,
+          "sha256": "5f11223a73854b4c987d5618be19c1d9668f095ee16a01de99430e8d49b77939",
+          "base64": "PHByb2plY3Q+PG1vZGVsVmVyc2lvbj40LjAuMDwvbW9kZWxWZXJzaW9uPjxncm91cElkPmF0bGFzLnN5bnRoZXRpYzwvZ3JvdXBJZD48YXJ0aWZhY3RJZD5hZGRvbjwvYXJ0aWZhY3RJZD48dmVyc2lvbj4xLjA8L3ZlcnNpb24+PGRlcGVuZGVuY2llcz48ZGVwZW5kZW5jeT48Z3JvdXBJZD5hdGxhcy5zeW50aGV0aWM8L2dyb3VwSWQ+PGFydGlmYWN0SWQ+Y29yZTwvYXJ0aWZhY3RJZD48dmVyc2lvbj4yLjA8L3ZlcnNpb24+PC9kZXBlbmRlbmN5PjwvZGVwZW5kZW5jaWVzPjwvcHJvamVjdD4K"
+        },
+        {
+          "path": "atlas/synthetic/addon/maven-metadata.xml",
+          "bytes": 237,
+          "sha256": "c4d944711412e0d1c7ec9f7e3d6bcdf795463c10b6d9ba06bd48d9e890050c4c",
+          "base64": "PG1ldGFkYXRhPjxncm91cElkPmF0bGFzLnN5bnRoZXRpYzwvZ3JvdXBJZD48YXJ0aWZhY3RJZD5hZGRvbjwvYXJ0aWZhY3RJZD48dmVyc2lvbmluZz48bGF0ZXN0PjEuMDwvbGF0ZXN0PjxyZWxlYXNlPjEuMDwvcmVsZWFzZT48dmVyc2lvbnM+PHZlcnNpb24+MS4wPC92ZXJzaW9uPjwvdmVyc2lvbnM+PGxhc3RVcGRhdGVkPjIwMjYxMTExMDAwMDAwPC9sYXN0VXBkYXRlZD48L3ZlcnNpb25pbmc+PC9tZXRhZGF0YT4K"
+        },
+        {
+          "path": "atlas/synthetic/core/1.0/core-1.0.jar",
+          "bytes": 166,
+          "sha256": "f5d496cf77425dd163303e0ea6d718baa133d6443816ee0539a50d254026593e",
+          "base64": "UEsDBBQAAAAAAAAAIVBDcI3dHAAAABwAAAAUAAAAb3JpZ2luYWwtZml4dHVyZS50eHRvcmlnaW5hbCBzeW50aGV0aWMgY29yZSAxLjAKUEsBAhQDFAAAAAAAAAAhUENwjd0cAAAAHAAAABQAAAAAAAAAAAAAAKSBAAAAAG9yaWdpbmFsLWZpeHR1cmUudHh0UEsFBgAAAAABAAEAQgAAAE4AAAAAAA=="
+        },
+        {
+          "path": "atlas/synthetic/core/1.0/core-1.0.pom",
+          "bytes": 139,
+          "sha256": "066bd0cd95f9e2de0bc07f89f4d7df626b9eab5a0e85811c307fa5c4d0295973",
+          "base64": "PHByb2plY3Q+PG1vZGVsVmVyc2lvbj40LjAuMDwvbW9kZWxWZXJzaW9uPjxncm91cElkPmF0bGFzLnN5bnRoZXRpYzwvZ3JvdXBJZD48YXJ0aWZhY3RJZD5jb3JlPC9hcnRpZmFjdElkPjx2ZXJzaW9uPjEuMDwvdmVyc2lvbj48L3Byb2plY3Q+Cg=="
+        },
+        {
+          "path": "atlas/synthetic/core/1.1/core-1.1.jar",
+          "bytes": 166,
+          "sha256": "ba0cc6e4210adfb4076c8ee96b4722f4af3ef10006ac5214383c0bd98da831cc",
+          "base64": "UEsDBBQAAAAAAAAAIVACQZbEHAAAABwAAAAUAAAAb3JpZ2luYWwtZml4dHVyZS50eHRvcmlnaW5hbCBzeW50aGV0aWMgY29yZSAxLjEKUEsBAhQDFAAAAAAAAAAhUAJBlsQcAAAAHAAAABQAAAAAAAAAAAAAAKSBAAAAAG9yaWdpbmFsLWZpeHR1cmUudHh0UEsFBgAAAAABAAEAQgAAAE4AAAAAAA=="
+        },
+        {
+          "path": "atlas/synthetic/core/1.1/core-1.1.pom",
+          "bytes": 139,
+          "sha256": "31b251049089a75b0c9bc395ca47c219e143473227eff0bf40da6336cb84cec7",
+          "base64": "PHByb2plY3Q+PG1vZGVsVmVyc2lvbj40LjAuMDwvbW9kZWxWZXJzaW9uPjxncm91cElkPmF0bGFzLnN5bnRoZXRpYzwvZ3JvdXBJZD48YXJ0aWZhY3RJZD5jb3JlPC9hcnRpZmFjdElkPjx2ZXJzaW9uPjEuMTwvdmVyc2lvbj48L3Byb2plY3Q+Cg=="
+        },
+        {
+          "path": "atlas/synthetic/core/2.0/core-2.0.jar",
+          "bytes": 166,
+          "sha256": "fd277fe2fa243a8caeb9d7bcfad7cde83166c825d7ce45e36d92542a1cfb2925",
+          "base64": "UEsDBBQAAAAAAAAAIVCt3zjPHAAAABwAAAAUAAAAb3JpZ2luYWwtZml4dHVyZS50eHRvcmlnaW5hbCBzeW50aGV0aWMgY29yZSAyLjAKUEsBAhQDFAAAAAAAAAAhUK3fOM8cAAAAHAAAABQAAAAAAAAAAAAAAKSBAAAAAG9yaWdpbmFsLWZpeHR1cmUudHh0UEsFBgAAAAABAAEAQgAAAE4AAAAAAA=="
+        },
+        {
+          "path": "atlas/synthetic/core/2.0/core-2.0.pom",
+          "bytes": 139,
+          "sha256": "5aec571182961b81636542e6deb4cf6ce0a3e1a1d8638e6ad309cc9108debfb1",
+          "base64": "PHByb2plY3Q+PG1vZGVsVmVyc2lvbj40LjAuMDwvbW9kZWxWZXJzaW9uPjxncm91cElkPmF0bGFzLnN5bnRoZXRpYzwvZ3JvdXBJZD48YXJ0aWZhY3RJZD5jb3JlPC9hcnRpZmFjdElkPjx2ZXJzaW9uPjIuMDwvdmVyc2lvbj48L3Byb2plY3Q+Cg=="
+        },
+        {
+          "path": "atlas/synthetic/core/maven-metadata.xml",
+          "bytes": 280,
+          "sha256": "6080081089f98ff2610b953efc7480359e1daa062814eaa86f80ed4633de8eed",
+          "base64": "PG1ldGFkYXRhPjxncm91cElkPmF0bGFzLnN5bnRoZXRpYzwvZ3JvdXBJZD48YXJ0aWZhY3RJZD5jb3JlPC9hcnRpZmFjdElkPjx2ZXJzaW9uaW5nPjxsYXRlc3Q+Mi4wPC9sYXRlc3Q+PHJlbGVhc2U+Mi4wPC9yZWxlYXNlPjx2ZXJzaW9ucz48dmVyc2lvbj4xLjA8L3ZlcnNpb24+PHZlcnNpb24+MS4xPC92ZXJzaW9uPjx2ZXJzaW9uPjIuMDwvdmVyc2lvbj48L3ZlcnNpb25zPjxsYXN0VXBkYXRlZD4yMDI2MTExMTAwMDAwMDwvbGFzdFVwZGF0ZWQ+PC92ZXJzaW9uaW5nPjwvbWV0YWRhdGE+Cg=="
+        }
+      ],
+      "graph": {
+        "components": [
+          {
+            "id": "root project :",
+            "reasons": [
+              {
+                "cause": "ROOT",
+                "description": "root"
+              }
+            ]
+          }
+        ],
+        "edges": [
+          {
+            "from": "root project :",
+            "requested": "atlas.synthetic:core:1.+",
+            "constraint": false,
+            "resolved": false,
+            "failure": "Could not resolve atlas.synthetic:core:1.+."
+          },
+          {
+            "from": "root project :",
+            "requested": "atlas.synthetic:core:{strictly 1.0}",
+            "constraint": false,
+            "resolved": false,
+            "failure": "Could not resolve atlas.synthetic:core:{strictly 1.0}."
+          },
+          {
+            "from": "root project :",
+            "requested": "atlas.synthetic:core:{strictly 2.0}",
+            "constraint": false,
+            "resolved": false,
+            "failure": "Could not resolve atlas.synthetic:core:{strictly 2.0}."
+          }
+        ]
+      },
+      "observation": null,
+      "lock": null,
+      "verification": null
+    },
+    {
+      "id": "forced_downgrade",
+      "command": [
+        "gradle",
+        "--offline",
+        "--no-daemon",
+        "--console=plain",
+        "--max-workers=1",
+        "--no-build-cache",
+        "--no-configuration-cache",
+        "--rerun-tasks",
+        "-Duser.timezone=UTC",
+        "-Porg.gradle.dependency.verification.console=verbose",
+        "-Pmode=force",
+        "observe"
+      ],
+      "returncode": 0,
+      "stdout": "\nWelcome to Gradle 9.2.1!\n\nHere are the highlights of this release:\n - Windows ARM support\n - Improved publishing APIs\n - Better guidance for dependency verification failures\n\nFor more details see https://docs.gradle.org/9.2.1/release-notes.html\n\nTo honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.2.1/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.\nDaemon will be stopped at the end of the build \n\n> Task :observe\nATLAS_OBSERVATION={\"graph\":{\"components\":[{\"id\":\"atlas.synthetic:addon:1.0\",\"reasons\":[{\"cause\":\"REQUESTED\",\"description\":\"requested\"}]},{\"id\":\"atlas.synthetic:core:1.0\",\"reasons\":[{\"cause\":\"REQUESTED\",\"description\":\"requested\"},{\"cause\":\"FORCED\",\"description\":\"forced\"}]},{\"id\":\"root project :\",\"reasons\":[{\"cause\":\"ROOT\",\"description\":\"root\"}]}],\"edges\":[{\"from\":\"atlas.synthetic:addon:1.0\",\"requested\":\"atlas.synthetic:core:2.0\",\"constraint\":false,\"resolved\":true,\"selected\":\"atlas.synthetic:core:1.0\"},{\"from\":\"root project :\",\"requested\":\"atlas.synthetic:addon:1.0\",\"constraint\":false,\"resolved\":true,\"selected\":\"atlas.synthetic:addon:1.0\"},{\"from\":\"root project :\",\"requested\":\"atlas.synthetic:core:1.0\",\"constraint\":false,\"resolved\":true,\"selected\":\"atlas.synthetic:core:1.0\"}]},\"artifacts\":[{\"module\":\"atlas.synthetic:addon:1.0\",\"name\":\"addon-1.0.jar\",\"bytes\":167,\"base64\":\"UEsDBBQAAAAAAAAAIVAvcGIWHQAAAB0AAAAUAAAAb3JpZ2luYWwtZml4dHVyZS50eHRvcmlnaW5hbCBzeW50aGV0aWMgYWRkb24gMS4wClBLAQIUAxQAAAAAAAAAIVAvcGIWHQAAAB0AAAAUAAAAAAAAAAAAAACkgQAAAABvcmlnaW5hbC1maXh0dXJlLnR4dFBLBQYAAAAAAQABAEIAAABPAAAAAAA=\",\"sha256\":\"b3438930ecb6335432080d0089b228e16f1744714753d8a2353a089f24e0ee41\"},{\"module\":\"atlas.synthetic:core:1.0\",\"name\":\"core-1.0.jar\",\"bytes\":166,\"base64\":\"UEsDBBQAAAAAAAAAIVBDcI3dHAAAABwAAAAUAAAAb3JpZ2luYWwtZml4dHVyZS50eHRvcmlnaW5hbCBzeW50aGV0aWMgY29yZSAxLjAKUEsBAhQDFAAAAAAAAAAhUENwjd0cAAAAHAAAABQAAAAAAAAAAAAAAKSBAAAAAG9yaWdpbmFsLWZpeHR1cmUudHh0UEsFBgAAAAABAAEAQgAAAE4AAAAAAA==\",\"sha256\":\"f5d496cf77425dd163303e0ea6d718baa133d6443816ee0539a50d254026593e\"}]}\n\nBUILD SUCCESSFUL in 5s\n1 actionable task: 1 executed\n",
+      "stderr": "",
+      "repository": [
+        {
+          "path": "atlas/synthetic/addon/1.0/addon-1.0.jar",
+          "bytes": 167,
+          "sha256": "b3438930ecb6335432080d0089b228e16f1744714753d8a2353a089f24e0ee41",
+          "base64": "UEsDBBQAAAAAAAAAIVAvcGIWHQAAAB0AAAAUAAAAb3JpZ2luYWwtZml4dHVyZS50eHRvcmlnaW5hbCBzeW50aGV0aWMgYWRkb24gMS4wClBLAQIUAxQAAAAAAAAAIVAvcGIWHQAAAB0AAAAUAAAAAAAAAAAAAACkgQAAAABvcmlnaW5hbC1maXh0dXJlLnR4dFBLBQYAAAAAAQABAEIAAABPAAAAAAA="
+        },
+        {
+          "path": "atlas/synthetic/addon/1.0/addon-1.0.pom",
+          "bytes": 279,
+          "sha256": "5f11223a73854b4c987d5618be19c1d9668f095ee16a01de99430e8d49b77939",
+          "base64": "PHByb2plY3Q+PG1vZGVsVmVyc2lvbj40LjAuMDwvbW9kZWxWZXJzaW9uPjxncm91cElkPmF0bGFzLnN5bnRoZXRpYzwvZ3JvdXBJZD48YXJ0aWZhY3RJZD5hZGRvbjwvYXJ0aWZhY3RJZD48dmVyc2lvbj4xLjA8L3ZlcnNpb24+PGRlcGVuZGVuY2llcz48ZGVwZW5kZW5jeT48Z3JvdXBJZD5hdGxhcy5zeW50aGV0aWM8L2dyb3VwSWQ+PGFydGlmYWN0SWQ+Y29yZTwvYXJ0aWZhY3RJZD48dmVyc2lvbj4yLjA8L3ZlcnNpb24+PC9kZXBlbmRlbmN5PjwvZGVwZW5kZW5jaWVzPjwvcHJvamVjdD4K"
+        },
+        {
+          "path": "atlas/synthetic/addon/maven-metadata.xml",
+          "bytes": 237,
+          "sha256": "c4d944711412e0d1c7ec9f7e3d6bcdf795463c10b6d9ba06bd48d9e890050c4c",
+          "base64": "PG1ldGFkYXRhPjxncm91cElkPmF0bGFzLnN5bnRoZXRpYzwvZ3JvdXBJZD48YXJ0aWZhY3RJZD5hZGRvbjwvYXJ0aWZhY3RJZD48dmVyc2lvbmluZz48bGF0ZXN0PjEuMDwvbGF0ZXN0PjxyZWxlYXNlPjEuMDwvcmVsZWFzZT48dmVyc2lvbnM+PHZlcnNpb24+MS4wPC92ZXJzaW9uPjwvdmVyc2lvbnM+PGxhc3RVcGRhdGVkPjIwMjYxMTExMDAwMDAwPC9sYXN0VXBkYXRlZD48L3ZlcnNpb25pbmc+PC9tZXRhZGF0YT4K"
+        },
+        {
+          "path": "atlas/synthetic/core/1.0/core-1.0.jar",
+          "bytes": 166,
+          "sha256": "f5d496cf77425dd163303e0ea6d718baa133d6443816ee0539a50d254026593e",
+          "base64": "UEsDBBQAAAAAAAAAIVBDcI3dHAAAABwAAAAUAAAAb3JpZ2luYWwtZml4dHVyZS50eHRvcmlnaW5hbCBzeW50aGV0aWMgY29yZSAxLjAKUEsBAhQDFAAAAAAAAAAhUENwjd0cAAAAHAAAABQAAAAAAAAAAAAAAKSBAAAAAG9yaWdpbmFsLWZpeHR1cmUudHh0UEsFBgAAAAABAAEAQgAAAE4AAAAAAA=="
+        },
+        {
+          "path": "atlas/synthetic/core/1.0/core-1.0.pom",
+          "bytes": 139,
+          "sha256": "066bd0cd95f9e2de0bc07f89f4d7df626b9eab5a0e85811c307fa5c4d0295973",
+          "base64": "PHByb2plY3Q+PG1vZGVsVmVyc2lvbj40LjAuMDwvbW9kZWxWZXJzaW9uPjxncm91cElkPmF0bGFzLnN5bnRoZXRpYzwvZ3JvdXBJZD48YXJ0aWZhY3RJZD5jb3JlPC9hcnRpZmFjdElkPjx2ZXJzaW9uPjEuMDwvdmVyc2lvbj48L3Byb2plY3Q+Cg=="
+        },
+        {
+          "path": "atlas/synthetic/core/1.1/core-1.1.jar",
+          "bytes": 166,
+          "sha256": "ba0cc6e4210adfb4076c8ee96b4722f4af3ef10006ac5214383c0bd98da831cc",
+          "base64": "UEsDBBQAAAAAAAAAIVACQZbEHAAAABwAAAAUAAAAb3JpZ2luYWwtZml4dHVyZS50eHRvcmlnaW5hbCBzeW50aGV0aWMgY29yZSAxLjEKUEsBAhQDFAAAAAAAAAAhUAJBlsQcAAAAHAAAABQAAAAAAAAAAAAAAKSBAAAAAG9yaWdpbmFsLWZpeHR1cmUudHh0UEsFBgAAAAABAAEAQgAAAE4AAAAAAA=="
+        },
+        {
+          "path": "atlas/synthetic/core/1.1/core-1.1.pom",
+          "bytes": 139,
+          "sha256": "31b251049089a75b0c9bc395ca47c219e143473227eff0bf40da6336cb84cec7",
+          "base64": "PHByb2plY3Q+PG1vZGVsVmVyc2lvbj40LjAuMDwvbW9kZWxWZXJzaW9uPjxncm91cElkPmF0bGFzLnN5bnRoZXRpYzwvZ3JvdXBJZD48YXJ0aWZhY3RJZD5jb3JlPC9hcnRpZmFjdElkPjx2ZXJzaW9uPjEuMTwvdmVyc2lvbj48L3Byb2plY3Q+Cg=="
+        },
+        {
+          "path": "atlas/synthetic/core/2.0/core-2.0.jar",
+          "bytes": 166,
+          "sha256": "fd277fe2fa243a8caeb9d7bcfad7cde83166c825d7ce45e36d92542a1cfb2925",
+          "base64": "UEsDBBQAAAAAAAAAIVCt3zjPHAAAABwAAAAUAAAAb3JpZ2luYWwtZml4dHVyZS50eHRvcmlnaW5hbCBzeW50aGV0aWMgY29yZSAyLjAKUEsBAhQDFAAAAAAAAAAhUK3fOM8cAAAAHAAAABQAAAAAAAAAAAAAAKSBAAAAAG9yaWdpbmFsLWZpeHR1cmUudHh0UEsFBgAAAAABAAEAQgAAAE4AAAAAAA=="
+        },
+        {
+          "path": "atlas/synthetic/core/2.0/core-2.0.pom",
+          "bytes": 139,
+          "sha256": "5aec571182961b81636542e6deb4cf6ce0a3e1a1d8638e6ad309cc9108debfb1",
+          "base64": "PHByb2plY3Q+PG1vZGVsVmVyc2lvbj40LjAuMDwvbW9kZWxWZXJzaW9uPjxncm91cElkPmF0bGFzLnN5bnRoZXRpYzwvZ3JvdXBJZD48YXJ0aWZhY3RJZD5jb3JlPC9hcnRpZmFjdElkPjx2ZXJzaW9uPjIuMDwvdmVyc2lvbj48L3Byb2plY3Q+Cg=="
+        },
+        {
+          "path": "atlas/synthetic/core/maven-metadata.xml",
+          "bytes": 280,
+          "sha256": "6080081089f98ff2610b953efc7480359e1daa062814eaa86f80ed4633de8eed",
+          "base64": "PG1ldGFkYXRhPjxncm91cElkPmF0bGFzLnN5bnRoZXRpYzwvZ3JvdXBJZD48YXJ0aWZhY3RJZD5jb3JlPC9hcnRpZmFjdElkPjx2ZXJzaW9uaW5nPjxsYXRlc3Q+Mi4wPC9sYXRlc3Q+PHJlbGVhc2U+Mi4wPC9yZWxlYXNlPjx2ZXJzaW9ucz48dmVyc2lvbj4xLjA8L3ZlcnNpb24+PHZlcnNpb24+MS4xPC92ZXJzaW9uPjx2ZXJzaW9uPjIuMDwvdmVyc2lvbj48L3ZlcnNpb25zPjxsYXN0VXBkYXRlZD4yMDI2MTExMTAwMDAwMDwvbGFzdFVwZGF0ZWQ+PC92ZXJzaW9uaW5nPjwvbWV0YWRhdGE+Cg=="
+        }
+      ],
+      "graph": {
+        "components": [
+          {
+            "id": "atlas.synthetic:addon:1.0",
+            "reasons": [
+              {
+                "cause": "REQUESTED",
+                "description": "requested"
+              }
+            ]
+          },
+          {
+            "id": "atlas.synthetic:core:1.0",
+            "reasons": [
+              {
+                "cause": "REQUESTED",
+                "description": "requested"
+              },
+              {
+                "cause": "FORCED",
+                "description": "forced"
+              }
+            ]
+          },
+          {
+            "id": "root project :",
+            "reasons": [
+              {
+                "cause": "ROOT",
+                "description": "root"
+              }
+            ]
+          }
+        ],
+        "edges": [
+          {
+            "from": "atlas.synthetic:addon:1.0",
+            "requested": "atlas.synthetic:core:2.0",
+            "constraint": false,
+            "resolved": true,
+            "selected": "atlas.synthetic:core:1.0"
+          },
+          {
+            "from": "root project :",
+            "requested": "atlas.synthetic:addon:1.0",
+            "constraint": false,
+            "resolved": true,
+            "selected": "atlas.synthetic:addon:1.0"
+          },
+          {
+            "from": "root project :",
+            "requested": "atlas.synthetic:core:1.0",
+            "constraint": false,
+            "resolved": true,
+            "selected": "atlas.synthetic:core:1.0"
+          }
+        ]
+      },
+      "observation": {
+        "graph": {
+          "components": [
+            {
+              "id": "atlas.synthetic:addon:1.0",
+              "reasons": [
+                {
+                  "cause": "REQUESTED",
+                  "description": "requested"
+                }
+              ]
+            },
+            {
+              "id": "atlas.synthetic:core:1.0",
+              "reasons": [
+                {
+                  "cause": "REQUESTED",
+                  "description": "requested"
+                },
+                {
+                  "cause": "FORCED",
+                  "description": "forced"
+                }
+              ]
+            },
+            {
+              "id": "root project :",
+              "reasons": [
+                {
+                  "cause": "ROOT",
+                  "description": "root"
+                }
+              ]
+            }
+          ],
+          "edges": [
+            {
+              "from": "atlas.synthetic:addon:1.0",
+              "requested": "atlas.synthetic:core:2.0",
+              "constraint": false,
+              "resolved": true,
+              "selected": "atlas.synthetic:core:1.0"
+            },
+            {
+              "from": "root project :",
+              "requested": "atlas.synthetic:addon:1.0",
+              "constraint": false,
+              "resolved": true,
+              "selected": "atlas.synthetic:addon:1.0"
+            },
+            {
+              "from": "root project :",
+              "requested": "atlas.synthetic:core:1.0",
+              "constraint": false,
+              "resolved": true,
+              "selected": "atlas.synthetic:core:1.0"
+            }
+          ]
+        },
+        "artifacts": [
+          {
+            "module": "atlas.synthetic:addon:1.0",
+            "name": "addon-1.0.jar",
+            "bytes": 167,
+            "base64": "UEsDBBQAAAAAAAAAIVAvcGIWHQAAAB0AAAAUAAAAb3JpZ2luYWwtZml4dHVyZS50eHRvcmlnaW5hbCBzeW50aGV0aWMgYWRkb24gMS4wClBLAQIUAxQAAAAAAAAAIVAvcGIWHQAAAB0AAAAUAAAAAAAAAAAAAACkgQAAAABvcmlnaW5hbC1maXh0dXJlLnR4dFBLBQYAAAAAAQABAEIAAABPAAAAAAA=",
+            "sha256": "b3438930ecb6335432080d0089b228e16f1744714753d8a2353a089f24e0ee41"
+          },
+          {
+            "module": "atlas.synthetic:core:1.0",
+            "name": "core-1.0.jar",
+            "bytes": 166,
+            "base64": "UEsDBBQAAAAAAAAAIVBDcI3dHAAAABwAAAAUAAAAb3JpZ2luYWwtZml4dHVyZS50eHRvcmlnaW5hbCBzeW50aGV0aWMgY29yZSAxLjAKUEsBAhQDFAAAAAAAAAAhUENwjd0cAAAAHAAAABQAAAAAAAAAAAAAAKSBAAAAAG9yaWdpbmFsLWZpeHR1cmUudHh0UEsFBgAAAAABAAEAQgAAAE4AAAAAAA==",
+            "sha256": "f5d496cf77425dd163303e0ea6d718baa133d6443816ee0539a50d254026593e"
+          }
+        ]
+      },
+      "lock": null,
+      "verification": null
+    },
+    {
+      "id": "unused_constraint",
+      "command": [
+        "gradle",
+        "--offline",
+        "--no-daemon",
+        "--console=plain",
+        "--max-workers=1",
+        "--no-build-cache",
+        "--no-configuration-cache",
+        "--rerun-tasks",
+        "-Duser.timezone=UTC",
+        "-Porg.gradle.dependency.verification.console=verbose",
+        "-Pmode=constraint",
+        "observe"
+      ],
+      "returncode": 0,
+      "stdout": "\nWelcome to Gradle 9.2.1!\n\nHere are the highlights of this release:\n - Windows ARM support\n - Improved publishing APIs\n - Better guidance for dependency verification failures\n\nFor more details see https://docs.gradle.org/9.2.1/release-notes.html\n\nTo honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.2.1/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.\nDaemon will be stopped at the end of the build \n\n> Task :observe\nATLAS_OBSERVATION={\"graph\":{\"components\":[{\"id\":\"atlas.synthetic:core:1.0\",\"reasons\":[{\"cause\":\"REQUESTED\",\"description\":\"requested\"}]},{\"id\":\"root project :\",\"reasons\":[{\"cause\":\"ROOT\",\"description\":\"root\"}]}],\"edges\":[{\"from\":\"root project :\",\"requested\":\"atlas.synthetic:core:1.0\",\"constraint\":false,\"resolved\":true,\"selected\":\"atlas.synthetic:core:1.0\"}]},\"artifacts\":[{\"module\":\"atlas.synthetic:core:1.0\",\"name\":\"core-1.0.jar\",\"bytes\":166,\"base64\":\"UEsDBBQAAAAAAAAAIVBDcI3dHAAAABwAAAAUAAAAb3JpZ2luYWwtZml4dHVyZS50eHRvcmlnaW5hbCBzeW50aGV0aWMgY29yZSAxLjAKUEsBAhQDFAAAAAAAAAAhUENwjd0cAAAAHAAAABQAAAAAAAAAAAAAAKSBAAAAAG9yaWdpbmFsLWZpeHR1cmUudHh0UEsFBgAAAAABAAEAQgAAAE4AAAAAAA==\",\"sha256\":\"f5d496cf77425dd163303e0ea6d718baa133d6443816ee0539a50d254026593e\"}]}\n\nBUILD SUCCESSFUL in 5s\n1 actionable task: 1 executed\n",
+      "stderr": "",
+      "repository": [
+        {
+          "path": "atlas/synthetic/addon/1.0/addon-1.0.jar",
+          "bytes": 167,
+          "sha256": "b3438930ecb6335432080d0089b228e16f1744714753d8a2353a089f24e0ee41",
+          "base64": "UEsDBBQAAAAAAAAAIVAvcGIWHQAAAB0AAAAUAAAAb3JpZ2luYWwtZml4dHVyZS50eHRvcmlnaW5hbCBzeW50aGV0aWMgYWRkb24gMS4wClBLAQIUAxQAAAAAAAAAIVAvcGIWHQAAAB0AAAAUAAAAAAAAAAAAAACkgQAAAABvcmlnaW5hbC1maXh0dXJlLnR4dFBLBQYAAAAAAQABAEIAAABPAAAAAAA="
+        },
+        {
+          "path": "atlas/synthetic/addon/1.0/addon-1.0.pom",
+          "bytes": 279,
+          "sha256": "5f11223a73854b4c987d5618be19c1d9668f095ee16a01de99430e8d49b77939",
+          "base64": "PHByb2plY3Q+PG1vZGVsVmVyc2lvbj40LjAuMDwvbW9kZWxWZXJzaW9uPjxncm91cElkPmF0bGFzLnN5bnRoZXRpYzwvZ3JvdXBJZD48YXJ0aWZhY3RJZD5hZGRvbjwvYXJ0aWZhY3RJZD48dmVyc2lvbj4xLjA8L3ZlcnNpb24+PGRlcGVuZGVuY2llcz48ZGVwZW5kZW5jeT48Z3JvdXBJZD5hdGxhcy5zeW50aGV0aWM8L2dyb3VwSWQ+PGFydGlmYWN0SWQ+Y29yZTwvYXJ0aWZhY3RJZD48dmVyc2lvbj4yLjA8L3ZlcnNpb24+PC9kZXBlbmRlbmN5PjwvZGVwZW5kZW5jaWVzPjwvcHJvamVjdD4K"
+        },
+        {
+          "path": "atlas/synthetic/addon/maven-metadata.xml",
+          "bytes": 237,
+          "sha256": "c4d944711412e0d1c7ec9f7e3d6bcdf795463c10b6d9ba06bd48d9e890050c4c",
+          "base64": "PG1ldGFkYXRhPjxncm91cElkPmF0bGFzLnN5bnRoZXRpYzwvZ3JvdXBJZD48YXJ0aWZhY3RJZD5hZGRvbjwvYXJ0aWZhY3RJZD48dmVyc2lvbmluZz48bGF0ZXN0PjEuMDwvbGF0ZXN0PjxyZWxlYXNlPjEuMDwvcmVsZWFzZT48dmVyc2lvbnM+PHZlcnNpb24+MS4wPC92ZXJzaW9uPjwvdmVyc2lvbnM+PGxhc3RVcGRhdGVkPjIwMjYxMTExMDAwMDAwPC9sYXN0VXBkYXRlZD48L3ZlcnNpb25pbmc+PC9tZXRhZGF0YT4K"
+        },
+        {
+          "path": "atlas/synthetic/core/1.0/core-1.0.jar",
+          "bytes": 166,
+          "sha256": "f5d496cf77425dd163303e0ea6d718baa133d6443816ee0539a50d254026593e",
+          "base64": "UEsDBBQAAAAAAAAAIVBDcI3dHAAAABwAAAAUAAAAb3JpZ2luYWwtZml4dHVyZS50eHRvcmlnaW5hbCBzeW50aGV0aWMgY29yZSAxLjAKUEsBAhQDFAAAAAAAAAAhUENwjd0cAAAAHAAAABQAAAAAAAAAAAAAAKSBAAAAAG9yaWdpbmFsLWZpeHR1cmUudHh0UEsFBgAAAAABAAEAQgAAAE4AAAAAAA=="
+        },
+        {
+          "path": "atlas/synthetic/core/1.0/core-1.0.pom",
+          "bytes": 139,
+          "sha256": "066bd0cd95f9e2de0bc07f89f4d7df626b9eab5a0e85811c307fa5c4d0295973",
+          "base64": "PHByb2plY3Q+PG1vZGVsVmVyc2lvbj40LjAuMDwvbW9kZWxWZXJzaW9uPjxncm91cElkPmF0bGFzLnN5bnRoZXRpYzwvZ3JvdXBJZD48YXJ0aWZhY3RJZD5jb3JlPC9hcnRpZmFjdElkPjx2ZXJzaW9uPjEuMDwvdmVyc2lvbj48L3Byb2plY3Q+Cg=="
+        },
+        {
+          "path": "atlas/synthetic/core/1.1/core-1.1.jar",
+          "bytes": 166,
+          "sha256": "ba0cc6e4210adfb4076c8ee96b4722f4af3ef10006ac5214383c0bd98da831cc",
+          "base64": "UEsDBBQAAAAAAAAAIVACQZbEHAAAABwAAAAUAAAAb3JpZ2luYWwtZml4dHVyZS50eHRvcmlnaW5hbCBzeW50aGV0aWMgY29yZSAxLjEKUEsBAhQDFAAAAAAAAAAhUAJBlsQcAAAAHAAAABQAAAAAAAAAAAAAAKSBAAAAAG9yaWdpbmFsLWZpeHR1cmUudHh0UEsFBgAAAAABAAEAQgAAAE4AAAAAAA=="
+        },
+        {
+          "path": "atlas/synthetic/core/1.1/core-1.1.pom",
+          "bytes": 139,
+          "sha256": "31b251049089a75b0c9bc395ca47c219e143473227eff0bf40da6336cb84cec7",
+          "base64": "PHByb2plY3Q+PG1vZGVsVmVyc2lvbj40LjAuMDwvbW9kZWxWZXJzaW9uPjxncm91cElkPmF0bGFzLnN5bnRoZXRpYzwvZ3JvdXBJZD48YXJ0aWZhY3RJZD5jb3JlPC9hcnRpZmFjdElkPjx2ZXJzaW9uPjEuMTwvdmVyc2lvbj48L3Byb2plY3Q+Cg=="
+        },
+        {
+          "path": "atlas/synthetic/core/2.0/core-2.0.jar",
+          "bytes": 166,
+          "sha256": "fd277fe2fa243a8caeb9d7bcfad7cde83166c825d7ce45e36d92542a1cfb2925",
+          "base64": "UEsDBBQAAAAAAAAAIVCt3zjPHAAAABwAAAAUAAAAb3JpZ2luYWwtZml4dHVyZS50eHRvcmlnaW5hbCBzeW50aGV0aWMgY29yZSAyLjAKUEsBAhQDFAAAAAAAAAAhUK3fOM8cAAAAHAAAABQAAAAAAAAAAAAAAKSBAAAAAG9yaWdpbmFsLWZpeHR1cmUudHh0UEsFBgAAAAABAAEAQgAAAE4AAAAAAA=="
+        },
+        {
+          "path": "atlas/synthetic/core/2.0/core-2.0.pom",
+          "bytes": 139,
+          "sha256": "5aec571182961b81636542e6deb4cf6ce0a3e1a1d8638e6ad309cc9108debfb1",
+          "base64": "PHByb2plY3Q+PG1vZGVsVmVyc2lvbj40LjAuMDwvbW9kZWxWZXJzaW9uPjxncm91cElkPmF0bGFzLnN5bnRoZXRpYzwvZ3JvdXBJZD48YXJ0aWZhY3RJZD5jb3JlPC9hcnRpZmFjdElkPjx2ZXJzaW9uPjIuMDwvdmVyc2lvbj48L3Byb2plY3Q+Cg=="
+        },
+        {
+          "path": "atlas/synthetic/core/maven-metadata.xml",
+          "bytes": 280,
+          "sha256": "6080081089f98ff2610b953efc7480359e1daa062814eaa86f80ed4633de8eed",
+          "base64": "PG1ldGFkYXRhPjxncm91cElkPmF0bGFzLnN5bnRoZXRpYzwvZ3JvdXBJZD48YXJ0aWZhY3RJZD5jb3JlPC9hcnRpZmFjdElkPjx2ZXJzaW9uaW5nPjxsYXRlc3Q+Mi4wPC9sYXRlc3Q+PHJlbGVhc2U+Mi4wPC9yZWxlYXNlPjx2ZXJzaW9ucz48dmVyc2lvbj4xLjA8L3ZlcnNpb24+PHZlcnNpb24+MS4xPC92ZXJzaW9uPjx2ZXJzaW9uPjIuMDwvdmVyc2lvbj48L3ZlcnNpb25zPjxsYXN0VXBkYXRlZD4yMDI2MTExMTAwMDAwMDwvbGFzdFVwZGF0ZWQ+PC92ZXJzaW9uaW5nPjwvbWV0YWRhdGE+Cg=="
+        }
+      ],
+      "graph": {
+        "components": [
+          {
+            "id": "atlas.synthetic:core:1.0",
+            "reasons": [
+              {
+                "cause": "REQUESTED",
+                "description": "requested"
+              }
+            ]
+          },
+          {
+            "id": "root project :",
+            "reasons": [
+              {
+                "cause": "ROOT",
+                "description": "root"
+              }
+            ]
+          }
+        ],
+        "edges": [
+          {
+            "from": "root project :",
+            "requested": "atlas.synthetic:core:1.0",
+            "constraint": false,
+            "resolved": true,
+            "selected": "atlas.synthetic:core:1.0"
+          }
+        ]
+      },
+      "observation": {
+        "graph": {
+          "components": [
+            {
+              "id": "atlas.synthetic:core:1.0",
+              "reasons": [
+                {
+                  "cause": "REQUESTED",
+                  "description": "requested"
+                }
+              ]
+            },
+            {
+              "id": "root project :",
+              "reasons": [
+                {
+                  "cause": "ROOT",
+                  "description": "root"
+                }
+              ]
+            }
+          ],
+          "edges": [
+            {
+              "from": "root project :",
+              "requested": "atlas.synthetic:core:1.0",
+              "constraint": false,
+              "resolved": true,
+              "selected": "atlas.synthetic:core:1.0"
+            }
+          ]
+        },
+        "artifacts": [
+          {
+            "module": "atlas.synthetic:core:1.0",
+            "name": "core-1.0.jar",
+            "bytes": 166,
+            "base64": "UEsDBBQAAAAAAAAAIVBDcI3dHAAAABwAAAAUAAAAb3JpZ2luYWwtZml4dHVyZS50eHRvcmlnaW5hbCBzeW50aGV0aWMgY29yZSAxLjAKUEsBAhQDFAAAAAAAAAAhUENwjd0cAAAAHAAAABQAAAAAAAAAAAAAAKSBAAAAAG9yaWdpbmFsLWZpeHR1cmUudHh0UEsFBgAAAAABAAEAQgAAAE4AAAAAAA==",
+            "sha256": "f5d496cf77425dd163303e0ea6d718baa133d6443816ee0539a50d254026593e"
+          }
+        ]
+      },
+      "lock": null,
+      "verification": null
+    },
+    {
+      "id": "write_lock",
+      "command": [
+        "gradle",
+        "--offline",
+        "--no-daemon",
+        "--console=plain",
+        "--max-workers=1",
+        "--no-build-cache",
+        "--no-configuration-cache",
+        "--rerun-tasks",
+        "-Duser.timezone=UTC",
+        "-Porg.gradle.dependency.verification.console=verbose",
+        "-Pmode=locked",
+        "--write-locks",
+        "observe"
+      ],
+      "returncode": 0,
+      "stdout": "\nWelcome to Gradle 9.2.1!\n\nHere are the highlights of this release:\n - Windows ARM support\n - Improved publishing APIs\n - Better guidance for dependency verification failures\n\nFor more details see https://docs.gradle.org/9.2.1/release-notes.html\n\nTo honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.2.1/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.\nDaemon will be stopped at the end of the build \n\n> Task :observe\nATLAS_OBSERVATION={\"graph\":{\"components\":[{\"id\":\"atlas.synthetic:core:1.1\",\"reasons\":[{\"cause\":\"REQUESTED\",\"description\":\"didn't match version 2.0\"}]},{\"id\":\"root project :\",\"reasons\":[{\"cause\":\"ROOT\",\"description\":\"root\"}]}],\"edges\":[{\"from\":\"root project :\",\"requested\":\"atlas.synthetic:core:1.+\",\"constraint\":false,\"resolved\":true,\"selected\":\"atlas.synthetic:core:1.1\"}]},\"artifacts\":[{\"module\":\"atlas.synthetic:core:1.1\",\"name\":\"core-1.1.jar\",\"bytes\":166,\"base64\":\"UEsDBBQAAAAAAAAAIVACQZbEHAAAABwAAAAUAAAAb3JpZ2luYWwtZml4dHVyZS50eHRvcmlnaW5hbCBzeW50aGV0aWMgY29yZSAxLjEKUEsBAhQDFAAAAAAAAAAhUAJBlsQcAAAAHAAAABQAAAAAAAAAAAAAAKSBAAAAAG9yaWdpbmFsLWZpeHR1cmUudHh0UEsFBgAAAAABAAEAQgAAAE4AAAAAAA==\",\"sha256\":\"ba0cc6e4210adfb4076c8ee96b4722f4af3ef10006ac5214383c0bd98da831cc\"}]}\nPersisted dependency lock state for root project 'atlas-dependency-lab'\n\nBUILD SUCCESSFUL in 5s\n1 actionable task: 1 executed\n",
+      "stderr": "",
+      "repository": [
+        {
+          "path": "atlas/synthetic/addon/1.0/addon-1.0.jar",
+          "bytes": 167,
+          "sha256": "b3438930ecb6335432080d0089b228e16f1744714753d8a2353a089f24e0ee41",
+          "base64": "UEsDBBQAAAAAAAAAIVAvcGIWHQAAAB0AAAAUAAAAb3JpZ2luYWwtZml4dHVyZS50eHRvcmlnaW5hbCBzeW50aGV0aWMgYWRkb24gMS4wClBLAQIUAxQAAAAAAAAAIVAvcGIWHQAAAB0AAAAUAAAAAAAAAAAAAACkgQAAAABvcmlnaW5hbC1maXh0dXJlLnR4dFBLBQYAAAAAAQABAEIAAABPAAAAAAA="
+        },
+        {
+          "path": "atlas/synthetic/addon/1.0/addon-1.0.pom",
+          "bytes": 279,
+          "sha256": "5f11223a73854b4c987d5618be19c1d9668f095ee16a01de99430e8d49b77939",
+          "base64": "PHByb2plY3Q+PG1vZGVsVmVyc2lvbj40LjAuMDwvbW9kZWxWZXJzaW9uPjxncm91cElkPmF0bGFzLnN5bnRoZXRpYzwvZ3JvdXBJZD48YXJ0aWZhY3RJZD5hZGRvbjwvYXJ0aWZhY3RJZD48dmVyc2lvbj4xLjA8L3ZlcnNpb24+PGRlcGVuZGVuY2llcz48ZGVwZW5kZW5jeT48Z3JvdXBJZD5hdGxhcy5zeW50aGV0aWM8L2dyb3VwSWQ+PGFydGlmYWN0SWQ+Y29yZTwvYXJ0aWZhY3RJZD48dmVyc2lvbj4yLjA8L3ZlcnNpb24+PC9kZXBlbmRlbmN5PjwvZGVwZW5kZW5jaWVzPjwvcHJvamVjdD4K"
+        },
+        {
+          "path": "atlas/synthetic/addon/maven-metadata.xml",
+          "bytes": 237,
+          "sha256": "c4d944711412e0d1c7ec9f7e3d6bcdf795463c10b6d9ba06bd48d9e890050c4c",
+          "base64": "PG1ldGFkYXRhPjxncm91cElkPmF0bGFzLnN5bnRoZXRpYzwvZ3JvdXBJZD48YXJ0aWZhY3RJZD5hZGRvbjwvYXJ0aWZhY3RJZD48dmVyc2lvbmluZz48bGF0ZXN0PjEuMDwvbGF0ZXN0PjxyZWxlYXNlPjEuMDwvcmVsZWFzZT48dmVyc2lvbnM+PHZlcnNpb24+MS4wPC92ZXJzaW9uPjwvdmVyc2lvbnM+PGxhc3RVcGRhdGVkPjIwMjYxMTExMDAwMDAwPC9sYXN0VXBkYXRlZD48L3ZlcnNpb25pbmc+PC9tZXRhZGF0YT4K"
+        },
+        {
+          "path": "atlas/synthetic/core/1.0/core-1.0.jar",
+          "bytes": 166,
+          "sha256": "f5d496cf77425dd163303e0ea6d718baa133d6443816ee0539a50d254026593e",
+          "base64": "UEsDBBQAAAAAAAAAIVBDcI3dHAAAABwAAAAUAAAAb3JpZ2luYWwtZml4dHVyZS50eHRvcmlnaW5hbCBzeW50aGV0aWMgY29yZSAxLjAKUEsBAhQDFAAAAAAAAAAhUENwjd0cAAAAHAAAABQAAAAAAAAAAAAAAKSBAAAAAG9yaWdpbmFsLWZpeHR1cmUudHh0UEsFBgAAAAABAAEAQgAAAE4AAAAAAA=="
+        },
+        {
+          "path": "atlas/synthetic/core/1.0/core-1.0.pom",
+          "bytes": 139,
+          "sha256": "066bd0cd95f9e2de0bc07f89f4d7df626b9eab5a0e85811c307fa5c4d0295973",
+          "base64": "PHByb2plY3Q+PG1vZGVsVmVyc2lvbj40LjAuMDwvbW9kZWxWZXJzaW9uPjxncm91cElkPmF0bGFzLnN5bnRoZXRpYzwvZ3JvdXBJZD48YXJ0aWZhY3RJZD5jb3JlPC9hcnRpZmFjdElkPjx2ZXJzaW9uPjEuMDwvdmVyc2lvbj48L3Byb2plY3Q+Cg=="
+        },
+        {
+          "path": "atlas/synthetic/core/1.1/core-1.1.jar",
+          "bytes": 166,
+          "sha256": "ba0cc6e4210adfb4076c8ee96b4722f4af3ef10006ac5214383c0bd98da831cc",
+          "base64": "UEsDBBQAAAAAAAAAIVACQZbEHAAAABwAAAAUAAAAb3JpZ2luYWwtZml4dHVyZS50eHRvcmlnaW5hbCBzeW50aGV0aWMgY29yZSAxLjEKUEsBAhQDFAAAAAAAAAAhUAJBlsQcAAAAHAAAABQAAAAAAAAAAAAAAKSBAAAAAG9yaWdpbmFsLWZpeHR1cmUudHh0UEsFBgAAAAABAAEAQgAAAE4AAAAAAA=="
+        },
+        {
+          "path": "atlas/synthetic/core/1.1/core-1.1.pom",
+          "bytes": 139,
+          "sha256": "31b251049089a75b0c9bc395ca47c219e143473227eff0bf40da6336cb84cec7",
+          "base64": "PHByb2plY3Q+PG1vZGVsVmVyc2lvbj40LjAuMDwvbW9kZWxWZXJzaW9uPjxncm91cElkPmF0bGFzLnN5bnRoZXRpYzwvZ3JvdXBJZD48YXJ0aWZhY3RJZD5jb3JlPC9hcnRpZmFjdElkPjx2ZXJzaW9uPjEuMTwvdmVyc2lvbj48L3Byb2plY3Q+Cg=="
+        },
+        {
+          "path": "atlas/synthetic/core/2.0/core-2.0.jar",
+          "bytes": 166,
+          "sha256": "fd277fe2fa243a8caeb9d7bcfad7cde83166c825d7ce45e36d92542a1cfb2925",
+          "base64": "UEsDBBQAAAAAAAAAIVCt3zjPHAAAABwAAAAUAAAAb3JpZ2luYWwtZml4dHVyZS50eHRvcmlnaW5hbCBzeW50aGV0aWMgY29yZSAyLjAKUEsBAhQDFAAAAAAAAAAhUK3fOM8cAAAAHAAAABQAAAAAAAAAAAAAAKSBAAAAAG9yaWdpbmFsLWZpeHR1cmUudHh0UEsFBgAAAAABAAEAQgAAAE4AAAAAAA=="
+        },
+        {
+          "path": "atlas/synthetic/core/2.0/core-2.0.pom",
+          "bytes": 139,
+          "sha256": "5aec571182961b81636542e6deb4cf6ce0a3e1a1d8638e6ad309cc9108debfb1",
+          "base64": "PHByb2plY3Q+PG1vZGVsVmVyc2lvbj40LjAuMDwvbW9kZWxWZXJzaW9uPjxncm91cElkPmF0bGFzLnN5bnRoZXRpYzwvZ3JvdXBJZD48YXJ0aWZhY3RJZD5jb3JlPC9hcnRpZmFjdElkPjx2ZXJzaW9uPjIuMDwvdmVyc2lvbj48L3Byb2plY3Q+Cg=="
+        },
+        {
+          "path": "atlas/synthetic/core/maven-metadata.xml",
+          "bytes": 280,
+          "sha256": "6080081089f98ff2610b953efc7480359e1daa062814eaa86f80ed4633de8eed",
+          "base64": "PG1ldGFkYXRhPjxncm91cElkPmF0bGFzLnN5bnRoZXRpYzwvZ3JvdXBJZD48YXJ0aWZhY3RJZD5jb3JlPC9hcnRpZmFjdElkPjx2ZXJzaW9uaW5nPjxsYXRlc3Q+Mi4wPC9sYXRlc3Q+PHJlbGVhc2U+Mi4wPC9yZWxlYXNlPjx2ZXJzaW9ucz48dmVyc2lvbj4xLjA8L3ZlcnNpb24+PHZlcnNpb24+MS4xPC92ZXJzaW9uPjx2ZXJzaW9uPjIuMDwvdmVyc2lvbj48L3ZlcnNpb25zPjxsYXN0VXBkYXRlZD4yMDI2MTExMTAwMDAwMDwvbGFzdFVwZGF0ZWQ+PC92ZXJzaW9uaW5nPjwvbWV0YWRhdGE+Cg=="
+        }
+      ],
+      "graph": {
+        "components": [
+          {
+            "id": "atlas.synthetic:core:1.1",
+            "reasons": [
+              {
+                "cause": "REQUESTED",
+                "description": "didn't match version 2.0"
+              }
+            ]
+          },
+          {
+            "id": "root project :",
+            "reasons": [
+              {
+                "cause": "ROOT",
+                "description": "root"
+              }
+            ]
+          }
+        ],
+        "edges": [
+          {
+            "from": "root project :",
+            "requested": "atlas.synthetic:core:1.+",
+            "constraint": false,
+            "resolved": true,
+            "selected": "atlas.synthetic:core:1.1"
+          }
+        ]
+      },
+      "observation": {
+        "graph": {
+          "components": [
+            {
+              "id": "atlas.synthetic:core:1.1",
+              "reasons": [
+                {
+                  "cause": "REQUESTED",
+                  "description": "didn't match version 2.0"
+                }
+              ]
+            },
+            {
+              "id": "root project :",
+              "reasons": [
+                {
+                  "cause": "ROOT",
+                  "description": "root"
+                }
+              ]
+            }
+          ],
+          "edges": [
+            {
+              "from": "root project :",
+              "requested": "atlas.synthetic:core:1.+",
+              "constraint": false,
+              "resolved": true,
+              "selected": "atlas.synthetic:core:1.1"
+            }
+          ]
+        },
+        "artifacts": [
+          {
+            "module": "atlas.synthetic:core:1.1",
+            "name": "core-1.1.jar",
+            "bytes": 166,
+            "base64": "UEsDBBQAAAAAAAAAIVACQZbEHAAAABwAAAAUAAAAb3JpZ2luYWwtZml4dHVyZS50eHRvcmlnaW5hbCBzeW50aGV0aWMgY29yZSAxLjEKUEsBAhQDFAAAAAAAAAAhUAJBlsQcAAAAHAAAABQAAAAAAAAAAAAAAKSBAAAAAG9yaWdpbmFsLWZpeHR1cmUudHh0UEsFBgAAAAABAAEAQgAAAE4AAAAAAA==",
+            "sha256": "ba0cc6e4210adfb4076c8ee96b4722f4af3ef10006ac5214383c0bd98da831cc"
+          }
+        ]
+      },
+      "lock": "# This is a Gradle generated file for dependency locking.\n# Manual edits can break the build and are not advised.\n# This file is expected to be part of source control.\natlas.synthetic:core:1.1=atlas\nempty=\n",
+      "verification": null
+    },
+    {
+      "id": "unlocked_added_version",
+      "command": [
+        "gradle",
+        "--offline",
+        "--no-daemon",
+        "--console=plain",
+        "--max-workers=1",
+        "--no-build-cache",
+        "--no-configuration-cache",
+        "--rerun-tasks",
+        "-Duser.timezone=UTC",
+        "-Porg.gradle.dependency.verification.console=verbose",
+        "-Pmode=dynamic",
+        "observe"
+      ],
+      "returncode": 0,
+      "stdout": "\nWelcome to Gradle 9.2.1!\n\nHere are the highlights of this release:\n - Windows ARM support\n - Improved publishing APIs\n - Better guidance for dependency verification failures\n\nFor more details see https://docs.gradle.org/9.2.1/release-notes.html\n\nTo honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.2.1/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.\nDaemon will be stopped at the end of the build \n\n> Task :observe\nATLAS_OBSERVATION={\"graph\":{\"components\":[{\"id\":\"atlas.synthetic:core:1.2\",\"reasons\":[{\"cause\":\"REQUESTED\",\"description\":\"didn't match version 2.0\"}]},{\"id\":\"root project :\",\"reasons\":[{\"cause\":\"ROOT\",\"description\":\"root\"}]}],\"edges\":[{\"from\":\"root project :\",\"requested\":\"atlas.synthetic:core:1.+\",\"constraint\":false,\"resolved\":true,\"selected\":\"atlas.synthetic:core:1.2\"}]},\"artifacts\":[{\"module\":\"atlas.synthetic:core:1.2\",\"name\":\"core-1.2.jar\",\"bytes\":166,\"base64\":\"UEsDBBQAAAAAAAAAIVDBErvvHAAAABwAAAAUAAAAb3JpZ2luYWwtZml4dHVyZS50eHRvcmlnaW5hbCBzeW50aGV0aWMgY29yZSAxLjIKUEsBAhQDFAAAAAAAAAAhUMESu+8cAAAAHAAAABQAAAAAAAAAAAAAAKSBAAAAAG9yaWdpbmFsLWZpeHR1cmUudHh0UEsFBgAAAAABAAEAQgAAAE4AAAAAAA==\",\"sha256\":\"b149e45ab9256687a076c443b3c50caf41983f7cd550e08becd6ebc61e770fec\"}]}\n\nBUILD SUCCESSFUL in 5s\n1 actionable task: 1 executed\n",
+      "stderr": "",
+      "repository": [
+        {
+          "path": "atlas/synthetic/addon/1.0/addon-1.0.jar",
+          "bytes": 167,
+          "sha256": "b3438930ecb6335432080d0089b228e16f1744714753d8a2353a089f24e0ee41",
+          "base64": "UEsDBBQAAAAAAAAAIVAvcGIWHQAAAB0AAAAUAAAAb3JpZ2luYWwtZml4dHVyZS50eHRvcmlnaW5hbCBzeW50aGV0aWMgYWRkb24gMS4wClBLAQIUAxQAAAAAAAAAIVAvcGIWHQAAAB0AAAAUAAAAAAAAAAAAAACkgQAAAABvcmlnaW5hbC1maXh0dXJlLnR4dFBLBQYAAAAAAQABAEIAAABPAAAAAAA="
+        },
+        {
+          "path": "atlas/synthetic/addon/1.0/addon-1.0.pom",
+          "bytes": 279,
+          "sha256": "5f11223a73854b4c987d5618be19c1d9668f095ee16a01de99430e8d49b77939",
+          "base64": "PHByb2plY3Q+PG1vZGVsVmVyc2lvbj40LjAuMDwvbW9kZWxWZXJzaW9uPjxncm91cElkPmF0bGFzLnN5bnRoZXRpYzwvZ3JvdXBJZD48YXJ0aWZhY3RJZD5hZGRvbjwvYXJ0aWZhY3RJZD48dmVyc2lvbj4xLjA8L3ZlcnNpb24+PGRlcGVuZGVuY2llcz48ZGVwZW5kZW5jeT48Z3JvdXBJZD5hdGxhcy5zeW50aGV0aWM8L2dyb3VwSWQ+PGFydGlmYWN0SWQ+Y29yZTwvYXJ0aWZhY3RJZD48dmVyc2lvbj4yLjA8L3ZlcnNpb24+PC9kZXBlbmRlbmN5PjwvZGVwZW5kZW5jaWVzPjwvcHJvamVjdD4K"
+        },
+        {
+          "path": "atlas/synthetic/addon/maven-metadata.xml",
+          "bytes": 237,
+          "sha256": "c4d944711412e0d1c7ec9f7e3d6bcdf795463c10b6d9ba06bd48d9e890050c4c",
+          "base64": "PG1ldGFkYXRhPjxncm91cElkPmF0bGFzLnN5bnRoZXRpYzwvZ3JvdXBJZD48YXJ0aWZhY3RJZD5hZGRvbjwvYXJ0aWZhY3RJZD48dmVyc2lvbmluZz48bGF0ZXN0PjEuMDwvbGF0ZXN0PjxyZWxlYXNlPjEuMDwvcmVsZWFzZT48dmVyc2lvbnM+PHZlcnNpb24+MS4wPC92ZXJzaW9uPjwvdmVyc2lvbnM+PGxhc3RVcGRhdGVkPjIwMjYxMTExMDAwMDAwPC9sYXN0VXBkYXRlZD48L3ZlcnNpb25pbmc+PC9tZXRhZGF0YT4K"
+        },
+        {
+          "path": "atlas/synthetic/core/1.0/core-1.0.jar",
+          "bytes": 166,
+          "sha256": "f5d496cf77425dd163303e0ea6d718baa133d6443816ee0539a50d254026593e",
+          "base64": "UEsDBBQAAAAAAAAAIVBDcI3dHAAAABwAAAAUAAAAb3JpZ2luYWwtZml4dHVyZS50eHRvcmlnaW5hbCBzeW50aGV0aWMgY29yZSAxLjAKUEsBAhQDFAAAAAAAAAAhUENwjd0cAAAAHAAAABQAAAAAAAAAAAAAAKSBAAAAAG9yaWdpbmFsLWZpeHR1cmUudHh0UEsFBgAAAAABAAEAQgAAAE4AAAAAAA=="
+        },
+        {
+          "path": "atlas/synthetic/core/1.0/core-1.0.pom",
+          "bytes": 139,
+          "sha256": "066bd0cd95f9e2de0bc07f89f4d7df626b9eab5a0e85811c307fa5c4d0295973",
+          "base64": "PHByb2plY3Q+PG1vZGVsVmVyc2lvbj40LjAuMDwvbW9kZWxWZXJzaW9uPjxncm91cElkPmF0bGFzLnN5bnRoZXRpYzwvZ3JvdXBJZD48YXJ0aWZhY3RJZD5jb3JlPC9hcnRpZmFjdElkPjx2ZXJzaW9uPjEuMDwvdmVyc2lvbj48L3Byb2plY3Q+Cg=="
+        },
+        {
+          "path": "atlas/synthetic/core/1.1/core-1.1.jar",
+          "bytes": 166,
+          "sha256": "ba0cc6e4210adfb4076c8ee96b4722f4af3ef10006ac5214383c0bd98da831cc",
+          "base64": "UEsDBBQAAAAAAAAAIVACQZbEHAAAABwAAAAUAAAAb3JpZ2luYWwtZml4dHVyZS50eHRvcmlnaW5hbCBzeW50aGV0aWMgY29yZSAxLjEKUEsBAhQDFAAAAAAAAAAhUAJBlsQcAAAAHAAAABQAAAAAAAAAAAAAAKSBAAAAAG9yaWdpbmFsLWZpeHR1cmUudHh0UEsFBgAAAAABAAEAQgAAAE4AAAAAAA=="
+        },
+        {
+          "path": "atlas/synthetic/core/1.1/core-1.1.pom",
+          "bytes": 139,
+          "sha256": "31b251049089a75b0c9bc395ca47c219e143473227eff0bf40da6336cb84cec7",
+          "base64": "PHByb2plY3Q+PG1vZGVsVmVyc2lvbj40LjAuMDwvbW9kZWxWZXJzaW9uPjxncm91cElkPmF0bGFzLnN5bnRoZXRpYzwvZ3JvdXBJZD48YXJ0aWZhY3RJZD5jb3JlPC9hcnRpZmFjdElkPjx2ZXJzaW9uPjEuMTwvdmVyc2lvbj48L3Byb2plY3Q+Cg=="
+        },
+        {
+          "path": "atlas/synthetic/core/1.2/core-1.2.jar",
+          "bytes": 166,
+          "sha256": "b149e45ab9256687a076c443b3c50caf41983f7cd550e08becd6ebc61e770fec",
+          "base64": "UEsDBBQAAAAAAAAAIVDBErvvHAAAABwAAAAUAAAAb3JpZ2luYWwtZml4dHVyZS50eHRvcmlnaW5hbCBzeW50aGV0aWMgY29yZSAxLjIKUEsBAhQDFAAAAAAAAAAhUMESu+8cAAAAHAAAABQAAAAAAAAAAAAAAKSBAAAAAG9yaWdpbmFsLWZpeHR1cmUudHh0UEsFBgAAAAABAAEAQgAAAE4AAAAAAA=="
+        },
+        {
+          "path": "atlas/synthetic/core/1.2/core-1.2.pom",
+          "bytes": 139,
+          "sha256": "739b9e7d01ab6415b3148289f0279a5ea89f01a7c81407c3561868ca3a61ab68",
+          "base64": "PHByb2plY3Q+PG1vZGVsVmVyc2lvbj40LjAuMDwvbW9kZWxWZXJzaW9uPjxncm91cElkPmF0bGFzLnN5bnRoZXRpYzwvZ3JvdXBJZD48YXJ0aWZhY3RJZD5jb3JlPC9hcnRpZmFjdElkPjx2ZXJzaW9uPjEuMjwvdmVyc2lvbj48L3Byb2plY3Q+Cg=="
+        },
+        {
+          "path": "atlas/synthetic/core/2.0/core-2.0.jar",
+          "bytes": 166,
+          "sha256": "fd277fe2fa243a8caeb9d7bcfad7cde83166c825d7ce45e36d92542a1cfb2925",
+          "base64": "UEsDBBQAAAAAAAAAIVCt3zjPHAAAABwAAAAUAAAAb3JpZ2luYWwtZml4dHVyZS50eHRvcmlnaW5hbCBzeW50aGV0aWMgY29yZSAyLjAKUEsBAhQDFAAAAAAAAAAhUK3fOM8cAAAAHAAAABQAAAAAAAAAAAAAAKSBAAAAAG9yaWdpbmFsLWZpeHR1cmUudHh0UEsFBgAAAAABAAEAQgAAAE4AAAAAAA=="
+        },
+        {
+          "path": "atlas/synthetic/core/2.0/core-2.0.pom",
+          "bytes": 139,
+          "sha256": "5aec571182961b81636542e6deb4cf6ce0a3e1a1d8638e6ad309cc9108debfb1",
+          "base64": "PHByb2plY3Q+PG1vZGVsVmVyc2lvbj40LjAuMDwvbW9kZWxWZXJzaW9uPjxncm91cElkPmF0bGFzLnN5bnRoZXRpYzwvZ3JvdXBJZD48YXJ0aWZhY3RJZD5jb3JlPC9hcnRpZmFjdElkPjx2ZXJzaW9uPjIuMDwvdmVyc2lvbj48L3Byb2plY3Q+Cg=="
+        },
+        {
+          "path": "atlas/synthetic/core/maven-metadata.xml",
+          "bytes": 302,
+          "sha256": "31962740e8f15c6f14ac07d1b43554f502f3642ea3944b0ce28f136abc4c296b",
+          "base64": "PG1ldGFkYXRhPjxncm91cElkPmF0bGFzLnN5bnRoZXRpYzwvZ3JvdXBJZD48YXJ0aWZhY3RJZD5jb3JlPC9hcnRpZmFjdElkPjx2ZXJzaW9uaW5nPjxsYXRlc3Q+Mi4wPC9sYXRlc3Q+PHJlbGVhc2U+Mi4wPC9yZWxlYXNlPjx2ZXJzaW9ucz48dmVyc2lvbj4xLjA8L3ZlcnNpb24+PHZlcnNpb24+MS4xPC92ZXJzaW9uPjx2ZXJzaW9uPjEuMjwvdmVyc2lvbj48dmVyc2lvbj4yLjA8L3ZlcnNpb24+PC92ZXJzaW9ucz48bGFzdFVwZGF0ZWQ+MjAyNjExMTEwMDAwMDA8L2xhc3RVcGRhdGVkPjwvdmVyc2lvbmluZz48L21ldGFkYXRhPgo="
+        }
+      ],
+      "graph": {
+        "components": [
+          {
+            "id": "atlas.synthetic:core:1.2",
+            "reasons": [
+              {
+                "cause": "REQUESTED",
+                "description": "didn't match version 2.0"
+              }
+            ]
+          },
+          {
+            "id": "root project :",
+            "reasons": [
+              {
+                "cause": "ROOT",
+                "description": "root"
+              }
+            ]
+          }
+        ],
+        "edges": [
+          {
+            "from": "root project :",
+            "requested": "atlas.synthetic:core:1.+",
+            "constraint": false,
+            "resolved": true,
+            "selected": "atlas.synthetic:core:1.2"
+          }
+        ]
+      },
+      "observation": {
+        "graph": {
+          "components": [
+            {
+              "id": "atlas.synthetic:core:1.2",
+              "reasons": [
+                {
+                  "cause": "REQUESTED",
+                  "description": "didn't match version 2.0"
+                }
+              ]
+            },
+            {
+              "id": "root project :",
+              "reasons": [
+                {
+                  "cause": "ROOT",
+                  "description": "root"
+                }
+              ]
+            }
+          ],
+          "edges": [
+            {
+              "from": "root project :",
+              "requested": "atlas.synthetic:core:1.+",
+              "constraint": false,
+              "resolved": true,
+              "selected": "atlas.synthetic:core:1.2"
+            }
+          ]
+        },
+        "artifacts": [
+          {
+            "module": "atlas.synthetic:core:1.2",
+            "name": "core-1.2.jar",
+            "bytes": 166,
+            "base64": "UEsDBBQAAAAAAAAAIVDBErvvHAAAABwAAAAUAAAAb3JpZ2luYWwtZml4dHVyZS50eHRvcmlnaW5hbCBzeW50aGV0aWMgY29yZSAxLjIKUEsBAhQDFAAAAAAAAAAhUMESu+8cAAAAHAAAABQAAAAAAAAAAAAAAKSBAAAAAG9yaWdpbmFsLWZpeHR1cmUudHh0UEsFBgAAAAABAAEAQgAAAE4AAAAAAA==",
+            "sha256": "b149e45ab9256687a076c443b3c50caf41983f7cd550e08becd6ebc61e770fec"
+          }
+        ]
+      },
+      "lock": null,
+      "verification": null
+    },
+    {
+      "id": "locked_added_version",
+      "command": [
+        "gradle",
+        "--offline",
+        "--no-daemon",
+        "--console=plain",
+        "--max-workers=1",
+        "--no-build-cache",
+        "--no-configuration-cache",
+        "--rerun-tasks",
+        "-Duser.timezone=UTC",
+        "-Porg.gradle.dependency.verification.console=verbose",
+        "-Pmode=locked",
+        "observe"
+      ],
+      "returncode": 0,
+      "stdout": "\nWelcome to Gradle 9.2.1!\n\nHere are the highlights of this release:\n - Windows ARM support\n - Improved publishing APIs\n - Better guidance for dependency verification failures\n\nFor more details see https://docs.gradle.org/9.2.1/release-notes.html\n\nTo honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.2.1/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.\nDaemon will be stopped at the end of the build \n\n> Task :observe\nATLAS_OBSERVATION={\"graph\":{\"components\":[{\"id\":\"atlas.synthetic:core:1.1\",\"reasons\":[{\"cause\":\"CONSTRAINT\",\"description\":\"Dependency version enforced by Dependency Locking\"},{\"cause\":\"REQUESTED\",\"description\":\"requested\"}]},{\"id\":\"root project :\",\"reasons\":[{\"cause\":\"ROOT\",\"description\":\"root\"}]}],\"edges\":[{\"from\":\"root project :\",\"requested\":\"atlas.synthetic:core:1.+\",\"constraint\":false,\"resolved\":true,\"selected\":\"atlas.synthetic:core:1.1\"},{\"from\":\"root project :\",\"requested\":\"atlas.synthetic:core:{strictly 1.1}\",\"constraint\":true,\"resolved\":true,\"selected\":\"atlas.synthetic:core:1.1\"}]},\"artifacts\":[{\"module\":\"atlas.synthetic:core:1.1\",\"name\":\"core-1.1.jar\",\"bytes\":166,\"base64\":\"UEsDBBQAAAAAAAAAIVACQZbEHAAAABwAAAAUAAAAb3JpZ2luYWwtZml4dHVyZS50eHRvcmlnaW5hbCBzeW50aGV0aWMgY29yZSAxLjEKUEsBAhQDFAAAAAAAAAAhUAJBlsQcAAAAHAAAABQAAAAAAAAAAAAAAKSBAAAAAG9yaWdpbmFsLWZpeHR1cmUudHh0UEsFBgAAAAABAAEAQgAAAE4AAAAAAA==\",\"sha256\":\"ba0cc6e4210adfb4076c8ee96b4722f4af3ef10006ac5214383c0bd98da831cc\"}]}\n\nBUILD SUCCESSFUL in 4s\n1 actionable task: 1 executed\n",
+      "stderr": "",
+      "repository": [
+        {
+          "path": "atlas/synthetic/addon/1.0/addon-1.0.jar",
+          "bytes": 167,
+          "sha256": "b3438930ecb6335432080d0089b228e16f1744714753d8a2353a089f24e0ee41",
+          "base64": "UEsDBBQAAAAAAAAAIVAvcGIWHQAAAB0AAAAUAAAAb3JpZ2luYWwtZml4dHVyZS50eHRvcmlnaW5hbCBzeW50aGV0aWMgYWRkb24gMS4wClBLAQIUAxQAAAAAAAAAIVAvcGIWHQAAAB0AAAAUAAAAAAAAAAAAAACkgQAAAABvcmlnaW5hbC1maXh0dXJlLnR4dFBLBQYAAAAAAQABAEIAAABPAAAAAAA="
+        },
+        {
+          "path": "atlas/synthetic/addon/1.0/addon-1.0.pom",
+          "bytes": 279,
+          "sha256": "5f11223a73854b4c987d5618be19c1d9668f095ee16a01de99430e8d49b77939",
+          "base64": "PHByb2plY3Q+PG1vZGVsVmVyc2lvbj40LjAuMDwvbW9kZWxWZXJzaW9uPjxncm91cElkPmF0bGFzLnN5bnRoZXRpYzwvZ3JvdXBJZD48YXJ0aWZhY3RJZD5hZGRvbjwvYXJ0aWZhY3RJZD48dmVyc2lvbj4xLjA8L3ZlcnNpb24+PGRlcGVuZGVuY2llcz48ZGVwZW5kZW5jeT48Z3JvdXBJZD5hdGxhcy5zeW50aGV0aWM8L2dyb3VwSWQ+PGFydGlmYWN0SWQ+Y29yZTwvYXJ0aWZhY3RJZD48dmVyc2lvbj4yLjA8L3ZlcnNpb24+PC9kZXBlbmRlbmN5PjwvZGVwZW5kZW5jaWVzPjwvcHJvamVjdD4K"
+        },
+        {
+          "path": "atlas/synthetic/addon/maven-metadata.xml",
+          "bytes": 237,
+          "sha256": "c4d944711412e0d1c7ec9f7e3d6bcdf795463c10b6d9ba06bd48d9e890050c4c",
+          "base64": "PG1ldGFkYXRhPjxncm91cElkPmF0bGFzLnN5bnRoZXRpYzwvZ3JvdXBJZD48YXJ0aWZhY3RJZD5hZGRvbjwvYXJ0aWZhY3RJZD48dmVyc2lvbmluZz48bGF0ZXN0PjEuMDwvbGF0ZXN0PjxyZWxlYXNlPjEuMDwvcmVsZWFzZT48dmVyc2lvbnM+PHZlcnNpb24+MS4wPC92ZXJzaW9uPjwvdmVyc2lvbnM+PGxhc3RVcGRhdGVkPjIwMjYxMTExMDAwMDAwPC9sYXN0VXBkYXRlZD48L3ZlcnNpb25pbmc+PC9tZXRhZGF0YT4K"
+        },
+        {
+          "path": "atlas/synthetic/core/1.0/core-1.0.jar",
+          "bytes": 166,
+          "sha256": "f5d496cf77425dd163303e0ea6d718baa133d6443816ee0539a50d254026593e",
+          "base64": "UEsDBBQAAAAAAAAAIVBDcI3dHAAAABwAAAAUAAAAb3JpZ2luYWwtZml4dHVyZS50eHRvcmlnaW5hbCBzeW50aGV0aWMgY29yZSAxLjAKUEsBAhQDFAAAAAAAAAAhUENwjd0cAAAAHAAAABQAAAAAAAAAAAAAAKSBAAAAAG9yaWdpbmFsLWZpeHR1cmUudHh0UEsFBgAAAAABAAEAQgAAAE4AAAAAAA=="
+        },
+        {
+          "path": "atlas/synthetic/core/1.0/core-1.0.pom",
+          "bytes": 139,
+          "sha256": "066bd0cd95f9e2de0bc07f89f4d7df626b9eab5a0e85811c307fa5c4d0295973",
+          "base64": "PHByb2plY3Q+PG1vZGVsVmVyc2lvbj40LjAuMDwvbW9kZWxWZXJzaW9uPjxncm91cElkPmF0bGFzLnN5bnRoZXRpYzwvZ3JvdXBJZD48YXJ0aWZhY3RJZD5jb3JlPC9hcnRpZmFjdElkPjx2ZXJzaW9uPjEuMDwvdmVyc2lvbj48L3Byb2plY3Q+Cg=="
+        },
+        {
+          "path": "atlas/synthetic/core/1.1/core-1.1.jar",
+          "bytes": 166,
+          "sha256": "ba0cc6e4210adfb4076c8ee96b4722f4af3ef10006ac5214383c0bd98da831cc",
+          "base64": "UEsDBBQAAAAAAAAAIVACQZbEHAAAABwAAAAUAAAAb3JpZ2luYWwtZml4dHVyZS50eHRvcmlnaW5hbCBzeW50aGV0aWMgY29yZSAxLjEKUEsBAhQDFAAAAAAAAAAhUAJBlsQcAAAAHAAAABQAAAAAAAAAAAAAAKSBAAAAAG9yaWdpbmFsLWZpeHR1cmUudHh0UEsFBgAAAAABAAEAQgAAAE4AAAAAAA=="
+        },
+        {
+          "path": "atlas/synthetic/core/1.1/core-1.1.pom",
+          "bytes": 139,
+          "sha256": "31b251049089a75b0c9bc395ca47c219e143473227eff0bf40da6336cb84cec7",
+          "base64": "PHByb2plY3Q+PG1vZGVsVmVyc2lvbj40LjAuMDwvbW9kZWxWZXJzaW9uPjxncm91cElkPmF0bGFzLnN5bnRoZXRpYzwvZ3JvdXBJZD48YXJ0aWZhY3RJZD5jb3JlPC9hcnRpZmFjdElkPjx2ZXJzaW9uPjEuMTwvdmVyc2lvbj48L3Byb2plY3Q+Cg=="
+        },
+        {
+          "path": "atlas/synthetic/core/1.2/core-1.2.jar",
+          "bytes": 166,
+          "sha256": "b149e45ab9256687a076c443b3c50caf41983f7cd550e08becd6ebc61e770fec",
+          "base64": "UEsDBBQAAAAAAAAAIVDBErvvHAAAABwAAAAUAAAAb3JpZ2luYWwtZml4dHVyZS50eHRvcmlnaW5hbCBzeW50aGV0aWMgY29yZSAxLjIKUEsBAhQDFAAAAAAAAAAhUMESu+8cAAAAHAAAABQAAAAAAAAAAAAAAKSBAAAAAG9yaWdpbmFsLWZpeHR1cmUudHh0UEsFBgAAAAABAAEAQgAAAE4AAAAAAA=="
+        },
+        {
+          "path": "atlas/synthetic/core/1.2/core-1.2.pom",
+          "bytes": 139,
+          "sha256": "739b9e7d01ab6415b3148289f0279a5ea89f01a7c81407c3561868ca3a61ab68",
+          "base64": "PHByb2plY3Q+PG1vZGVsVmVyc2lvbj40LjAuMDwvbW9kZWxWZXJzaW9uPjxncm91cElkPmF0bGFzLnN5bnRoZXRpYzwvZ3JvdXBJZD48YXJ0aWZhY3RJZD5jb3JlPC9hcnRpZmFjdElkPjx2ZXJzaW9uPjEuMjwvdmVyc2lvbj48L3Byb2plY3Q+Cg=="
+        },
+        {
+          "path": "atlas/synthetic/core/2.0/core-2.0.jar",
+          "bytes": 166,
+          "sha256": "fd277fe2fa243a8caeb9d7bcfad7cde83166c825d7ce45e36d92542a1cfb2925",
+          "base64": "UEsDBBQAAAAAAAAAIVCt3zjPHAAAABwAAAAUAAAAb3JpZ2luYWwtZml4dHVyZS50eHRvcmlnaW5hbCBzeW50aGV0aWMgY29yZSAyLjAKUEsBAhQDFAAAAAAAAAAhUK3fOM8cAAAAHAAAABQAAAAAAAAAAAAAAKSBAAAAAG9yaWdpbmFsLWZpeHR1cmUudHh0UEsFBgAAAAABAAEAQgAAAE4AAAAAAA=="
+        },
+        {
+          "path": "atlas/synthetic/core/2.0/core-2.0.pom",
+          "bytes": 139,
+          "sha256": "5aec571182961b81636542e6deb4cf6ce0a3e1a1d8638e6ad309cc9108debfb1",
+          "base64": "PHByb2plY3Q+PG1vZGVsVmVyc2lvbj40LjAuMDwvbW9kZWxWZXJzaW9uPjxncm91cElkPmF0bGFzLnN5bnRoZXRpYzwvZ3JvdXBJZD48YXJ0aWZhY3RJZD5jb3JlPC9hcnRpZmFjdElkPjx2ZXJzaW9uPjIuMDwvdmVyc2lvbj48L3Byb2plY3Q+Cg=="
+        },
+        {
+          "path": "atlas/synthetic/core/maven-metadata.xml",
+          "bytes": 302,
+          "sha256": "31962740e8f15c6f14ac07d1b43554f502f3642ea3944b0ce28f136abc4c296b",
+          "base64": "PG1ldGFkYXRhPjxncm91cElkPmF0bGFzLnN5bnRoZXRpYzwvZ3JvdXBJZD48YXJ0aWZhY3RJZD5jb3JlPC9hcnRpZmFjdElkPjx2ZXJzaW9uaW5nPjxsYXRlc3Q+Mi4wPC9sYXRlc3Q+PHJlbGVhc2U+Mi4wPC9yZWxlYXNlPjx2ZXJzaW9ucz48dmVyc2lvbj4xLjA8L3ZlcnNpb24+PHZlcnNpb24+MS4xPC92ZXJzaW9uPjx2ZXJzaW9uPjEuMjwvdmVyc2lvbj48dmVyc2lvbj4yLjA8L3ZlcnNpb24+PC92ZXJzaW9ucz48bGFzdFVwZGF0ZWQ+MjAyNjExMTEwMDAwMDA8L2xhc3RVcGRhdGVkPjwvdmVyc2lvbmluZz48L21ldGFkYXRhPgo="
+        }
+      ],
+      "graph": {
+        "components": [
+          {
+            "id": "atlas.synthetic:core:1.1",
+            "reasons": [
+              {
+                "cause": "CONSTRAINT",
+                "description": "Dependency version enforced by Dependency Locking"
+              },
+              {
+                "cause": "REQUESTED",
+                "description": "requested"
+              }
+            ]
+          },
+          {
+            "id": "root project :",
+            "reasons": [
+              {
+                "cause": "ROOT",
+                "description": "root"
+              }
+            ]
+          }
+        ],
+        "edges": [
+          {
+            "from": "root project :",
+            "requested": "atlas.synthetic:core:1.+",
+            "constraint": false,
+            "resolved": true,
+            "selected": "atlas.synthetic:core:1.1"
+          },
+          {
+            "from": "root project :",
+            "requested": "atlas.synthetic:core:{strictly 1.1}",
+            "constraint": true,
+            "resolved": true,
+            "selected": "atlas.synthetic:core:1.1"
+          }
+        ]
+      },
+      "observation": {
+        "graph": {
+          "components": [
+            {
+              "id": "atlas.synthetic:core:1.1",
+              "reasons": [
+                {
+                  "cause": "CONSTRAINT",
+                  "description": "Dependency version enforced by Dependency Locking"
+                },
+                {
+                  "cause": "REQUESTED",
+                  "description": "requested"
+                }
+              ]
+            },
+            {
+              "id": "root project :",
+              "reasons": [
+                {
+                  "cause": "ROOT",
+                  "description": "root"
+                }
+              ]
+            }
+          ],
+          "edges": [
+            {
+              "from": "root project :",
+              "requested": "atlas.synthetic:core:1.+",
+              "constraint": false,
+              "resolved": true,
+              "selected": "atlas.synthetic:core:1.1"
+            },
+            {
+              "from": "root project :",
+              "requested": "atlas.synthetic:core:{strictly 1.1}",
+              "constraint": true,
+              "resolved": true,
+              "selected": "atlas.synthetic:core:1.1"
+            }
+          ]
+        },
+        "artifacts": [
+          {
+            "module": "atlas.synthetic:core:1.1",
+            "name": "core-1.1.jar",
+            "bytes": 166,
+            "base64": "UEsDBBQAAAAAAAAAIVACQZbEHAAAABwAAAAUAAAAb3JpZ2luYWwtZml4dHVyZS50eHRvcmlnaW5hbCBzeW50aGV0aWMgY29yZSAxLjEKUEsBAhQDFAAAAAAAAAAhUAJBlsQcAAAAHAAAABQAAAAAAAAAAAAAAKSBAAAAAG9yaWdpbmFsLWZpeHR1cmUudHh0UEsFBgAAAAABAAEAQgAAAE4AAAAAAA==",
+            "sha256": "ba0cc6e4210adfb4076c8ee96b4722f4af3ef10006ac5214383c0bd98da831cc"
+          }
+        ]
+      },
+      "lock": "# This is a Gradle generated file for dependency locking.\n# Manual edits can break the build and are not advised.\n# This file is expected to be part of source control.\natlas.synthetic:core:1.1=atlas\nempty=\n",
+      "verification": null
+    },
+    {
+      "id": "locked_missing_version",
+      "command": [
+        "gradle",
+        "--offline",
+        "--no-daemon",
+        "--console=plain",
+        "--max-workers=1",
+        "--no-build-cache",
+        "--no-configuration-cache",
+        "--rerun-tasks",
+        "-Duser.timezone=UTC",
+        "-Porg.gradle.dependency.verification.console=verbose",
+        "-Pmode=locked",
+        "observe"
+      ],
+      "returncode": 1,
+      "stdout": "\nWelcome to Gradle 9.2.1!\n\nHere are the highlights of this release:\n - Windows ARM support\n - Improved publishing APIs\n - Better guidance for dependency verification failures\n\nFor more details see https://docs.gradle.org/9.2.1/release-notes.html\n\nTo honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.2.1/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.\nDaemon will be stopped at the end of the build \n> Task :observe FAILED\n1 actionable task: 1 executed\n",
+      "stderr": "\nFAILURE: Build failed with an exception.\n\n* Where:\nBuild file '<run>/build.gradle' line: 43\n\n* What went wrong:\nExecution failed for task ':observe'.\n> Could not resolve all files for configuration ':atlas'.\n   > Did not resolve 'atlas.synthetic:core:1.1' which is part of the dependency lock state\n   > Could not find atlas.synthetic:core:1.1.\n     Searched in the following locations:\n       - file:<run>/repo/atlas/synthetic/core/1.1/core-1.1.pom\n       - file:<run>/repo/atlas/synthetic/core/1.1/core-1.1.jar\n     Required by:\n         root project 'atlas-dependency-lab'\n   > Could not find atlas.synthetic:core:1.1.\n     Searched in the following locations:\n       - file:<run>/repo/atlas/synthetic/core/1.1/core-1.1.pom\n       - file:<run>/repo/atlas/synthetic/core/1.1/core-1.1.jar\n     Required by:\n         root project 'atlas-dependency-lab'\n\n* Try:\n> Run with --stacktrace option to get the stack trace.\n> Run with --info or --debug option to get more log output.\n> Run with --scan to generate a Build Scan (powered by Develocity).\n> Get more help at https://help.gradle.org.\n\nBUILD FAILED in 5s\n",
+      "repository": [
+        {
+          "path": "atlas/synthetic/addon/1.0/addon-1.0.jar",
+          "bytes": 167,
+          "sha256": "b3438930ecb6335432080d0089b228e16f1744714753d8a2353a089f24e0ee41",
+          "base64": "UEsDBBQAAAAAAAAAIVAvcGIWHQAAAB0AAAAUAAAAb3JpZ2luYWwtZml4dHVyZS50eHRvcmlnaW5hbCBzeW50aGV0aWMgYWRkb24gMS4wClBLAQIUAxQAAAAAAAAAIVAvcGIWHQAAAB0AAAAUAAAAAAAAAAAAAACkgQAAAABvcmlnaW5hbC1maXh0dXJlLnR4dFBLBQYAAAAAAQABAEIAAABPAAAAAAA="
+        },
+        {
+          "path": "atlas/synthetic/addon/1.0/addon-1.0.pom",
+          "bytes": 279,
+          "sha256": "5f11223a73854b4c987d5618be19c1d9668f095ee16a01de99430e8d49b77939",
+          "base64": "PHByb2plY3Q+PG1vZGVsVmVyc2lvbj40LjAuMDwvbW9kZWxWZXJzaW9uPjxncm91cElkPmF0bGFzLnN5bnRoZXRpYzwvZ3JvdXBJZD48YXJ0aWZhY3RJZD5hZGRvbjwvYXJ0aWZhY3RJZD48dmVyc2lvbj4xLjA8L3ZlcnNpb24+PGRlcGVuZGVuY2llcz48ZGVwZW5kZW5jeT48Z3JvdXBJZD5hdGxhcy5zeW50aGV0aWM8L2dyb3VwSWQ+PGFydGlmYWN0SWQ+Y29yZTwvYXJ0aWZhY3RJZD48dmVyc2lvbj4yLjA8L3ZlcnNpb24+PC9kZXBlbmRlbmN5PjwvZGVwZW5kZW5jaWVzPjwvcHJvamVjdD4K"
+        },
+        {
+          "path": "atlas/synthetic/addon/maven-metadata.xml",
+          "bytes": 237,
+          "sha256": "c4d944711412e0d1c7ec9f7e3d6bcdf795463c10b6d9ba06bd48d9e890050c4c",
+          "base64": "PG1ldGFkYXRhPjxncm91cElkPmF0bGFzLnN5bnRoZXRpYzwvZ3JvdXBJZD48YXJ0aWZhY3RJZD5hZGRvbjwvYXJ0aWZhY3RJZD48dmVyc2lvbmluZz48bGF0ZXN0PjEuMDwvbGF0ZXN0PjxyZWxlYXNlPjEuMDwvcmVsZWFzZT48dmVyc2lvbnM+PHZlcnNpb24+MS4wPC92ZXJzaW9uPjwvdmVyc2lvbnM+PGxhc3RVcGRhdGVkPjIwMjYxMTExMDAwMDAwPC9sYXN0VXBkYXRlZD48L3ZlcnNpb25pbmc+PC9tZXRhZGF0YT4K"
+        },
+        {
+          "path": "atlas/synthetic/core/1.0/core-1.0.jar",
+          "bytes": 166,
+          "sha256": "f5d496cf77425dd163303e0ea6d718baa133d6443816ee0539a50d254026593e",
+          "base64": "UEsDBBQAAAAAAAAAIVBDcI3dHAAAABwAAAAUAAAAb3JpZ2luYWwtZml4dHVyZS50eHRvcmlnaW5hbCBzeW50aGV0aWMgY29yZSAxLjAKUEsBAhQDFAAAAAAAAAAhUENwjd0cAAAAHAAAABQAAAAAAAAAAAAAAKSBAAAAAG9yaWdpbmFsLWZpeHR1cmUudHh0UEsFBgAAAAABAAEAQgAAAE4AAAAAAA=="
+        },
+        {
+          "path": "atlas/synthetic/core/1.0/core-1.0.pom",
+          "bytes": 139,
+          "sha256": "066bd0cd95f9e2de0bc07f89f4d7df626b9eab5a0e85811c307fa5c4d0295973",
+          "base64": "PHByb2plY3Q+PG1vZGVsVmVyc2lvbj40LjAuMDwvbW9kZWxWZXJzaW9uPjxncm91cElkPmF0bGFzLnN5bnRoZXRpYzwvZ3JvdXBJZD48YXJ0aWZhY3RJZD5jb3JlPC9hcnRpZmFjdElkPjx2ZXJzaW9uPjEuMDwvdmVyc2lvbj48L3Byb2plY3Q+Cg=="
+        },
+        {
+          "path": "atlas/synthetic/core/1.2/core-1.2.jar",
+          "bytes": 166,
+          "sha256": "b149e45ab9256687a076c443b3c50caf41983f7cd550e08becd6ebc61e770fec",
+          "base64": "UEsDBBQAAAAAAAAAIVDBErvvHAAAABwAAAAUAAAAb3JpZ2luYWwtZml4dHVyZS50eHRvcmlnaW5hbCBzeW50aGV0aWMgY29yZSAxLjIKUEsBAhQDFAAAAAAAAAAhUMESu+8cAAAAHAAAABQAAAAAAAAAAAAAAKSBAAAAAG9yaWdpbmFsLWZpeHR1cmUudHh0UEsFBgAAAAABAAEAQgAAAE4AAAAAAA=="
+        },
+        {
+          "path": "atlas/synthetic/core/1.2/core-1.2.pom",
+          "bytes": 139,
+          "sha256": "739b9e7d01ab6415b3148289f0279a5ea89f01a7c81407c3561868ca3a61ab68",
+          "base64": "PHByb2plY3Q+PG1vZGVsVmVyc2lvbj40LjAuMDwvbW9kZWxWZXJzaW9uPjxncm91cElkPmF0bGFzLnN5bnRoZXRpYzwvZ3JvdXBJZD48YXJ0aWZhY3RJZD5jb3JlPC9hcnRpZmFjdElkPjx2ZXJzaW9uPjEuMjwvdmVyc2lvbj48L3Byb2plY3Q+Cg=="
+        },
+        {
+          "path": "atlas/synthetic/core/2.0/core-2.0.jar",
+          "bytes": 166,
+          "sha256": "fd277fe2fa243a8caeb9d7bcfad7cde83166c825d7ce45e36d92542a1cfb2925",
+          "base64": "UEsDBBQAAAAAAAAAIVCt3zjPHAAAABwAAAAUAAAAb3JpZ2luYWwtZml4dHVyZS50eHRvcmlnaW5hbCBzeW50aGV0aWMgY29yZSAyLjAKUEsBAhQDFAAAAAAAAAAhUK3fOM8cAAAAHAAAABQAAAAAAAAAAAAAAKSBAAAAAG9yaWdpbmFsLWZpeHR1cmUudHh0UEsFBgAAAAABAAEAQgAAAE4AAAAAAA=="
+        },
+        {
+          "path": "atlas/synthetic/core/2.0/core-2.0.pom",
+          "bytes": 139,
+          "sha256": "5aec571182961b81636542e6deb4cf6ce0a3e1a1d8638e6ad309cc9108debfb1",
+          "base64": "PHByb2plY3Q+PG1vZGVsVmVyc2lvbj40LjAuMDwvbW9kZWxWZXJzaW9uPjxncm91cElkPmF0bGFzLnN5bnRoZXRpYzwvZ3JvdXBJZD48YXJ0aWZhY3RJZD5jb3JlPC9hcnRpZmFjdElkPjx2ZXJzaW9uPjIuMDwvdmVyc2lvbj48L3Byb2plY3Q+Cg=="
+        },
+        {
+          "path": "atlas/synthetic/core/maven-metadata.xml",
+          "bytes": 280,
+          "sha256": "0cde638293f6ef035a5e2b23586d806e2f48f5a57aa783c6ab7a48ed1628eb3a",
+          "base64": "PG1ldGFkYXRhPjxncm91cElkPmF0bGFzLnN5bnRoZXRpYzwvZ3JvdXBJZD48YXJ0aWZhY3RJZD5jb3JlPC9hcnRpZmFjdElkPjx2ZXJzaW9uaW5nPjxsYXRlc3Q+Mi4wPC9sYXRlc3Q+PHJlbGVhc2U+Mi4wPC9yZWxlYXNlPjx2ZXJzaW9ucz48dmVyc2lvbj4xLjA8L3ZlcnNpb24+PHZlcnNpb24+MS4yPC92ZXJzaW9uPjx2ZXJzaW9uPjIuMDwvdmVyc2lvbj48L3ZlcnNpb25zPjxsYXN0VXBkYXRlZD4yMDI2MTExMTAwMDAwMDwvbGFzdFVwZGF0ZWQ+PC92ZXJzaW9uaW5nPjwvbWV0YWRhdGE+Cg=="
+        }
+      ],
+      "graph": {
+        "components": [
+          {
+            "id": "root project :",
+            "reasons": [
+              {
+                "cause": "ROOT",
+                "description": "root"
+              }
+            ]
+          }
+        ],
+        "edges": [
+          {
+            "from": "root project :",
+            "requested": "atlas.synthetic:core:1.+",
+            "constraint": false,
+            "resolved": false,
+            "failure": "Could not find atlas.synthetic:core:1.1.\nSearched in the following locations:\n  - file:<run>/repo/atlas/synthetic/core/1.1/core-1.1.pom\n  - file:<run>/repo/atlas/synthetic/core/1.1/core-1.1.jar"
+          },
+          {
+            "from": "root project :",
+            "requested": "atlas.synthetic:core:1.1",
+            "constraint": true,
+            "resolved": false,
+            "failure": "Dependency lock state out of date"
+          },
+          {
+            "from": "root project :",
+            "requested": "atlas.synthetic:core:{strictly 1.1}",
+            "constraint": true,
+            "resolved": false,
+            "failure": "Could not find atlas.synthetic:core:1.1.\nSearched in the following locations:\n  - file:<run>/repo/atlas/synthetic/core/1.1/core-1.1.pom\n  - file:<run>/repo/atlas/synthetic/core/1.1/core-1.1.jar"
+          }
+        ]
+      },
+      "observation": null,
+      "lock": "# This is a Gradle generated file for dependency locking.\n# Manual edits can break the build and are not advised.\n# This file is expected to be part of source control.\natlas.synthetic:core:1.1=atlas\nempty=\n",
+      "verification": null
+    },
+    {
+      "id": "locked_changed_jar",
+      "command": [
+        "gradle",
+        "--offline",
+        "--no-daemon",
+        "--console=plain",
+        "--max-workers=1",
+        "--no-build-cache",
+        "--no-configuration-cache",
+        "--rerun-tasks",
+        "-Duser.timezone=UTC",
+        "-Porg.gradle.dependency.verification.console=verbose",
+        "-Pmode=locked",
+        "observe"
+      ],
+      "returncode": 0,
+      "stdout": "\nWelcome to Gradle 9.2.1!\n\nHere are the highlights of this release:\n - Windows ARM support\n - Improved publishing APIs\n - Better guidance for dependency verification failures\n\nFor more details see https://docs.gradle.org/9.2.1/release-notes.html\n\nTo honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.2.1/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.\nDaemon will be stopped at the end of the build \n\n> Task :observe\nATLAS_OBSERVATION={\"graph\":{\"components\":[{\"id\":\"atlas.synthetic:core:1.1\",\"reasons\":[{\"cause\":\"CONSTRAINT\",\"description\":\"Dependency version enforced by Dependency Locking\"},{\"cause\":\"REQUESTED\",\"description\":\"requested\"}]},{\"id\":\"root project :\",\"reasons\":[{\"cause\":\"ROOT\",\"description\":\"root\"}]}],\"edges\":[{\"from\":\"root project :\",\"requested\":\"atlas.synthetic:core:1.+\",\"constraint\":false,\"resolved\":true,\"selected\":\"atlas.synthetic:core:1.1\"},{\"from\":\"root project :\",\"requested\":\"atlas.synthetic:core:{strictly 1.1}\",\"constraint\":true,\"resolved\":true,\"selected\":\"atlas.synthetic:core:1.1\"}]},\"artifacts\":[{\"module\":\"atlas.synthetic:core:1.1\",\"name\":\"core-1.1.jar\",\"bytes\":175,\"base64\":\"UEsDBBQAAAAAAAAAIVCT7earJQAAACUAAAAUAAAAb3JpZ2luYWwtZml4dHVyZS50eHRvcmlnaW5hbCBzeW50aGV0aWMgY29yZSAxLjEKbXV0YXRpb24KUEsBAhQDFAAAAAAAAAAhUJPt5qslAAAAJQAAABQAAAAAAAAAAAAAAKSBAAAAAG9yaWdpbmFsLWZpeHR1cmUudHh0UEsFBgAAAAABAAEAQgAAAFcAAAAAAA==\",\"sha256\":\"d1037bef7ddcb7b95c2dd27809682f7e5f11fb3d58f944c4b84d499fcc1ec845\"}]}\n\nBUILD SUCCESSFUL in 5s\n1 actionable task: 1 executed\n",
+      "stderr": "",
+      "repository": [
+        {
+          "path": "atlas/synthetic/addon/1.0/addon-1.0.jar",
+          "bytes": 167,
+          "sha256": "b3438930ecb6335432080d0089b228e16f1744714753d8a2353a089f24e0ee41",
+          "base64": "UEsDBBQAAAAAAAAAIVAvcGIWHQAAAB0AAAAUAAAAb3JpZ2luYWwtZml4dHVyZS50eHRvcmlnaW5hbCBzeW50aGV0aWMgYWRkb24gMS4wClBLAQIUAxQAAAAAAAAAIVAvcGIWHQAAAB0AAAAUAAAAAAAAAAAAAACkgQAAAABvcmlnaW5hbC1maXh0dXJlLnR4dFBLBQYAAAAAAQABAEIAAABPAAAAAAA="
+        },
+        {
+          "path": "atlas/synthetic/addon/1.0/addon-1.0.pom",
+          "bytes": 279,
+          "sha256": "5f11223a73854b4c987d5618be19c1d9668f095ee16a01de99430e8d49b77939",
+          "base64": "PHByb2plY3Q+PG1vZGVsVmVyc2lvbj40LjAuMDwvbW9kZWxWZXJzaW9uPjxncm91cElkPmF0bGFzLnN5bnRoZXRpYzwvZ3JvdXBJZD48YXJ0aWZhY3RJZD5hZGRvbjwvYXJ0aWZhY3RJZD48dmVyc2lvbj4xLjA8L3ZlcnNpb24+PGRlcGVuZGVuY2llcz48ZGVwZW5kZW5jeT48Z3JvdXBJZD5hdGxhcy5zeW50aGV0aWM8L2dyb3VwSWQ+PGFydGlmYWN0SWQ+Y29yZTwvYXJ0aWZhY3RJZD48dmVyc2lvbj4yLjA8L3ZlcnNpb24+PC9kZXBlbmRlbmN5PjwvZGVwZW5kZW5jaWVzPjwvcHJvamVjdD4K"
+        },
+        {
+          "path": "atlas/synthetic/addon/maven-metadata.xml",
+          "bytes": 237,
+          "sha256": "c4d944711412e0d1c7ec9f7e3d6bcdf795463c10b6d9ba06bd48d9e890050c4c",
+          "base64": "PG1ldGFkYXRhPjxncm91cElkPmF0bGFzLnN5bnRoZXRpYzwvZ3JvdXBJZD48YXJ0aWZhY3RJZD5hZGRvbjwvYXJ0aWZhY3RJZD48dmVyc2lvbmluZz48bGF0ZXN0PjEuMDwvbGF0ZXN0PjxyZWxlYXNlPjEuMDwvcmVsZWFzZT48dmVyc2lvbnM+PHZlcnNpb24+MS4wPC92ZXJzaW9uPjwvdmVyc2lvbnM+PGxhc3RVcGRhdGVkPjIwMjYxMTExMDAwMDAwPC9sYXN0VXBkYXRlZD48L3ZlcnNpb25pbmc+PC9tZXRhZGF0YT4K"
+        },
+        {
+          "path": "atlas/synthetic/core/1.0/core-1.0.jar",
+          "bytes": 166,
+          "sha256": "f5d496cf77425dd163303e0ea6d718baa133d6443816ee0539a50d254026593e",
+          "base64": "UEsDBBQAAAAAAAAAIVBDcI3dHAAAABwAAAAUAAAAb3JpZ2luYWwtZml4dHVyZS50eHRvcmlnaW5hbCBzeW50aGV0aWMgY29yZSAxLjAKUEsBAhQDFAAAAAAAAAAhUENwjd0cAAAAHAAAABQAAAAAAAAAAAAAAKSBAAAAAG9yaWdpbmFsLWZpeHR1cmUudHh0UEsFBgAAAAABAAEAQgAAAE4AAAAAAA=="
+        },
+        {
+          "path": "atlas/synthetic/core/1.0/core-1.0.pom",
+          "bytes": 139,
+          "sha256": "066bd0cd95f9e2de0bc07f89f4d7df626b9eab5a0e85811c307fa5c4d0295973",
+          "base64": "PHByb2plY3Q+PG1vZGVsVmVyc2lvbj40LjAuMDwvbW9kZWxWZXJzaW9uPjxncm91cElkPmF0bGFzLnN5bnRoZXRpYzwvZ3JvdXBJZD48YXJ0aWZhY3RJZD5jb3JlPC9hcnRpZmFjdElkPjx2ZXJzaW9uPjEuMDwvdmVyc2lvbj48L3Byb2plY3Q+Cg=="
+        },
+        {
+          "path": "atlas/synthetic/core/1.1/core-1.1.jar",
+          "bytes": 175,
+          "sha256": "d1037bef7ddcb7b95c2dd27809682f7e5f11fb3d58f944c4b84d499fcc1ec845",
+          "base64": "UEsDBBQAAAAAAAAAIVCT7earJQAAACUAAAAUAAAAb3JpZ2luYWwtZml4dHVyZS50eHRvcmlnaW5hbCBzeW50aGV0aWMgY29yZSAxLjEKbXV0YXRpb24KUEsBAhQDFAAAAAAAAAAhUJPt5qslAAAAJQAAABQAAAAAAAAAAAAAAKSBAAAAAG9yaWdpbmFsLWZpeHR1cmUudHh0UEsFBgAAAAABAAEAQgAAAFcAAAAAAA=="
+        },
+        {
+          "path": "atlas/synthetic/core/1.1/core-1.1.pom",
+          "bytes": 139,
+          "sha256": "31b251049089a75b0c9bc395ca47c219e143473227eff0bf40da6336cb84cec7",
+          "base64": "PHByb2plY3Q+PG1vZGVsVmVyc2lvbj40LjAuMDwvbW9kZWxWZXJzaW9uPjxncm91cElkPmF0bGFzLnN5bnRoZXRpYzwvZ3JvdXBJZD48YXJ0aWZhY3RJZD5jb3JlPC9hcnRpZmFjdElkPjx2ZXJzaW9uPjEuMTwvdmVyc2lvbj48L3Byb2plY3Q+Cg=="
+        },
+        {
+          "path": "atlas/synthetic/core/2.0/core-2.0.jar",
+          "bytes": 166,
+          "sha256": "fd277fe2fa243a8caeb9d7bcfad7cde83166c825d7ce45e36d92542a1cfb2925",
+          "base64": "UEsDBBQAAAAAAAAAIVCt3zjPHAAAABwAAAAUAAAAb3JpZ2luYWwtZml4dHVyZS50eHRvcmlnaW5hbCBzeW50aGV0aWMgY29yZSAyLjAKUEsBAhQDFAAAAAAAAAAhUK3fOM8cAAAAHAAAABQAAAAAAAAAAAAAAKSBAAAAAG9yaWdpbmFsLWZpeHR1cmUudHh0UEsFBgAAAAABAAEAQgAAAE4AAAAAAA=="
+        },
+        {
+          "path": "atlas/synthetic/core/2.0/core-2.0.pom",
+          "bytes": 139,
+          "sha256": "5aec571182961b81636542e6deb4cf6ce0a3e1a1d8638e6ad309cc9108debfb1",
+          "base64": "PHByb2plY3Q+PG1vZGVsVmVyc2lvbj40LjAuMDwvbW9kZWxWZXJzaW9uPjxncm91cElkPmF0bGFzLnN5bnRoZXRpYzwvZ3JvdXBJZD48YXJ0aWZhY3RJZD5jb3JlPC9hcnRpZmFjdElkPjx2ZXJzaW9uPjIuMDwvdmVyc2lvbj48L3Byb2plY3Q+Cg=="
+        },
+        {
+          "path": "atlas/synthetic/core/maven-metadata.xml",
+          "bytes": 280,
+          "sha256": "6080081089f98ff2610b953efc7480359e1daa062814eaa86f80ed4633de8eed",
+          "base64": "PG1ldGFkYXRhPjxncm91cElkPmF0bGFzLnN5bnRoZXRpYzwvZ3JvdXBJZD48YXJ0aWZhY3RJZD5jb3JlPC9hcnRpZmFjdElkPjx2ZXJzaW9uaW5nPjxsYXRlc3Q+Mi4wPC9sYXRlc3Q+PHJlbGVhc2U+Mi4wPC9yZWxlYXNlPjx2ZXJzaW9ucz48dmVyc2lvbj4xLjA8L3ZlcnNpb24+PHZlcnNpb24+MS4xPC92ZXJzaW9uPjx2ZXJzaW9uPjIuMDwvdmVyc2lvbj48L3ZlcnNpb25zPjxsYXN0VXBkYXRlZD4yMDI2MTExMTAwMDAwMDwvbGFzdFVwZGF0ZWQ+PC92ZXJzaW9uaW5nPjwvbWV0YWRhdGE+Cg=="
+        }
+      ],
+      "graph": {
+        "components": [
+          {
+            "id": "atlas.synthetic:core:1.1",
+            "reasons": [
+              {
+                "cause": "CONSTRAINT",
+                "description": "Dependency version enforced by Dependency Locking"
+              },
+              {
+                "cause": "REQUESTED",
+                "description": "requested"
+              }
+            ]
+          },
+          {
+            "id": "root project :",
+            "reasons": [
+              {
+                "cause": "ROOT",
+                "description": "root"
+              }
+            ]
+          }
+        ],
+        "edges": [
+          {
+            "from": "root project :",
+            "requested": "atlas.synthetic:core:1.+",
+            "constraint": false,
+            "resolved": true,
+            "selected": "atlas.synthetic:core:1.1"
+          },
+          {
+            "from": "root project :",
+            "requested": "atlas.synthetic:core:{strictly 1.1}",
+            "constraint": true,
+            "resolved": true,
+            "selected": "atlas.synthetic:core:1.1"
+          }
+        ]
+      },
+      "observation": {
+        "graph": {
+          "components": [
+            {
+              "id": "atlas.synthetic:core:1.1",
+              "reasons": [
+                {
+                  "cause": "CONSTRAINT",
+                  "description": "Dependency version enforced by Dependency Locking"
+                },
+                {
+                  "cause": "REQUESTED",
+                  "description": "requested"
+                }
+              ]
+            },
+            {
+              "id": "root project :",
+              "reasons": [
+                {
+                  "cause": "ROOT",
+                  "description": "root"
+                }
+              ]
+            }
+          ],
+          "edges": [
+            {
+              "from": "root project :",
+              "requested": "atlas.synthetic:core:1.+",
+              "constraint": false,
+              "resolved": true,
+              "selected": "atlas.synthetic:core:1.1"
+            },
+            {
+              "from": "root project :",
+              "requested": "atlas.synthetic:core:{strictly 1.1}",
+              "constraint": true,
+              "resolved": true,
+              "selected": "atlas.synthetic:core:1.1"
+            }
+          ]
+        },
+        "artifacts": [
+          {
+            "module": "atlas.synthetic:core:1.1",
+            "name": "core-1.1.jar",
+            "bytes": 175,
+            "base64": "UEsDBBQAAAAAAAAAIVCT7earJQAAACUAAAAUAAAAb3JpZ2luYWwtZml4dHVyZS50eHRvcmlnaW5hbCBzeW50aGV0aWMgY29yZSAxLjEKbXV0YXRpb24KUEsBAhQDFAAAAAAAAAAhUJPt5qslAAAAJQAAABQAAAAAAAAAAAAAAKSBAAAAAG9yaWdpbmFsLWZpeHR1cmUudHh0UEsFBgAAAAABAAEAQgAAAFcAAAAAAA==",
+            "sha256": "d1037bef7ddcb7b95c2dd27809682f7e5f11fb3d58f944c4b84d499fcc1ec845"
+          }
+        ]
+      },
+      "lock": "# This is a Gradle generated file for dependency locking.\n# Manual edits can break the build and are not advised.\n# This file is expected to be part of source control.\natlas.synthetic:core:1.1=atlas\nempty=\n",
+      "verification": null
+    },
+    {
+      "id": "write_verification",
+      "command": [
+        "gradle",
+        "--offline",
+        "--no-daemon",
+        "--console=plain",
+        "--max-workers=1",
+        "--no-build-cache",
+        "--no-configuration-cache",
+        "--rerun-tasks",
+        "-Duser.timezone=UTC",
+        "-Porg.gradle.dependency.verification.console=verbose",
+        "-Pmode=locked",
+        "--write-verification-metadata",
+        "sha256",
+        "observe"
+      ],
+      "returncode": 0,
+      "stdout": "\nWelcome to Gradle 9.2.1!\n\nHere are the highlights of this release:\n - Windows ARM support\n - Improved publishing APIs\n - Better guidance for dependency verification failures\n\nFor more details see https://docs.gradle.org/9.2.1/release-notes.html\n\nTo honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.2.1/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.\nDaemon will be stopped at the end of the build \n\n> Task :observe\nATLAS_OBSERVATION={\"graph\":{\"components\":[{\"id\":\"atlas.synthetic:core:1.1\",\"reasons\":[{\"cause\":\"CONSTRAINT\",\"description\":\"Dependency version enforced by Dependency Locking\"},{\"cause\":\"REQUESTED\",\"description\":\"requested\"}]},{\"id\":\"root project :\",\"reasons\":[{\"cause\":\"ROOT\",\"description\":\"root\"}]}],\"edges\":[{\"from\":\"root project :\",\"requested\":\"atlas.synthetic:core:1.+\",\"constraint\":false,\"resolved\":true,\"selected\":\"atlas.synthetic:core:1.1\"},{\"from\":\"root project :\",\"requested\":\"atlas.synthetic:core:{strictly 1.1}\",\"constraint\":true,\"resolved\":true,\"selected\":\"atlas.synthetic:core:1.1\"}]},\"artifacts\":[{\"module\":\"atlas.synthetic:core:1.1\",\"name\":\"core-1.1.jar\",\"bytes\":166,\"base64\":\"UEsDBBQAAAAAAAAAIVACQZbEHAAAABwAAAAUAAAAb3JpZ2luYWwtZml4dHVyZS50eHRvcmlnaW5hbCBzeW50aGV0aWMgY29yZSAxLjEKUEsBAhQDFAAAAAAAAAAhUAJBlsQcAAAAHAAAABQAAAAAAAAAAAAAAKSBAAAAAG9yaWdpbmFsLWZpeHR1cmUudHh0UEsFBgAAAAABAAEAQgAAAE4AAAAAAA==\",\"sha256\":\"ba0cc6e4210adfb4076c8ee96b4722f4af3ef10006ac5214383c0bd98da831cc\"}]}\n\nBUILD SUCCESSFUL in 5s\n1 actionable task: 1 executed\n",
+      "stderr": "",
+      "repository": [
+        {
+          "path": "atlas/synthetic/addon/1.0/addon-1.0.jar",
+          "bytes": 167,
+          "sha256": "b3438930ecb6335432080d0089b228e16f1744714753d8a2353a089f24e0ee41",
+          "base64": "UEsDBBQAAAAAAAAAIVAvcGIWHQAAAB0AAAAUAAAAb3JpZ2luYWwtZml4dHVyZS50eHRvcmlnaW5hbCBzeW50aGV0aWMgYWRkb24gMS4wClBLAQIUAxQAAAAAAAAAIVAvcGIWHQAAAB0AAAAUAAAAAAAAAAAAAACkgQAAAABvcmlnaW5hbC1maXh0dXJlLnR4dFBLBQYAAAAAAQABAEIAAABPAAAAAAA="
+        },
+        {
+          "path": "atlas/synthetic/addon/1.0/addon-1.0.pom",
+          "bytes": 279,
+          "sha256": "5f11223a73854b4c987d5618be19c1d9668f095ee16a01de99430e8d49b77939",
+          "base64": "PHByb2plY3Q+PG1vZGVsVmVyc2lvbj40LjAuMDwvbW9kZWxWZXJzaW9uPjxncm91cElkPmF0bGFzLnN5bnRoZXRpYzwvZ3JvdXBJZD48YXJ0aWZhY3RJZD5hZGRvbjwvYXJ0aWZhY3RJZD48dmVyc2lvbj4xLjA8L3ZlcnNpb24+PGRlcGVuZGVuY2llcz48ZGVwZW5kZW5jeT48Z3JvdXBJZD5hdGxhcy5zeW50aGV0aWM8L2dyb3VwSWQ+PGFydGlmYWN0SWQ+Y29yZTwvYXJ0aWZhY3RJZD48dmVyc2lvbj4yLjA8L3ZlcnNpb24+PC9kZXBlbmRlbmN5PjwvZGVwZW5kZW5jaWVzPjwvcHJvamVjdD4K"
+        },
+        {
+          "path": "atlas/synthetic/addon/maven-metadata.xml",
+          "bytes": 237,
+          "sha256": "c4d944711412e0d1c7ec9f7e3d6bcdf795463c10b6d9ba06bd48d9e890050c4c",
+          "base64": "PG1ldGFkYXRhPjxncm91cElkPmF0bGFzLnN5bnRoZXRpYzwvZ3JvdXBJZD48YXJ0aWZhY3RJZD5hZGRvbjwvYXJ0aWZhY3RJZD48dmVyc2lvbmluZz48bGF0ZXN0PjEuMDwvbGF0ZXN0PjxyZWxlYXNlPjEuMDwvcmVsZWFzZT48dmVyc2lvbnM+PHZlcnNpb24+MS4wPC92ZXJzaW9uPjwvdmVyc2lvbnM+PGxhc3RVcGRhdGVkPjIwMjYxMTExMDAwMDAwPC9sYXN0VXBkYXRlZD48L3ZlcnNpb25pbmc+PC9tZXRhZGF0YT4K"
+        },
+        {
+          "path": "atlas/synthetic/core/1.0/core-1.0.jar",
+          "bytes": 166,
+          "sha256": "f5d496cf77425dd163303e0ea6d718baa133d6443816ee0539a50d254026593e",
+          "base64": "UEsDBBQAAAAAAAAAIVBDcI3dHAAAABwAAAAUAAAAb3JpZ2luYWwtZml4dHVyZS50eHRvcmlnaW5hbCBzeW50aGV0aWMgY29yZSAxLjAKUEsBAhQDFAAAAAAAAAAhUENwjd0cAAAAHAAAABQAAAAAAAAAAAAAAKSBAAAAAG9yaWdpbmFsLWZpeHR1cmUudHh0UEsFBgAAAAABAAEAQgAAAE4AAAAAAA=="
+        },
+        {
+          "path": "atlas/synthetic/core/1.0/core-1.0.pom",
+          "bytes": 139,
+          "sha256": "066bd0cd95f9e2de0bc07f89f4d7df626b9eab5a0e85811c307fa5c4d0295973",
+          "base64": "PHByb2plY3Q+PG1vZGVsVmVyc2lvbj40LjAuMDwvbW9kZWxWZXJzaW9uPjxncm91cElkPmF0bGFzLnN5bnRoZXRpYzwvZ3JvdXBJZD48YXJ0aWZhY3RJZD5jb3JlPC9hcnRpZmFjdElkPjx2ZXJzaW9uPjEuMDwvdmVyc2lvbj48L3Byb2plY3Q+Cg=="
+        },
+        {
+          "path": "atlas/synthetic/core/1.1/core-1.1.jar",
+          "bytes": 166,
+          "sha256": "ba0cc6e4210adfb4076c8ee96b4722f4af3ef10006ac5214383c0bd98da831cc",
+          "base64": "UEsDBBQAAAAAAAAAIVACQZbEHAAAABwAAAAUAAAAb3JpZ2luYWwtZml4dHVyZS50eHRvcmlnaW5hbCBzeW50aGV0aWMgY29yZSAxLjEKUEsBAhQDFAAAAAAAAAAhUAJBlsQcAAAAHAAAABQAAAAAAAAAAAAAAKSBAAAAAG9yaWdpbmFsLWZpeHR1cmUudHh0UEsFBgAAAAABAAEAQgAAAE4AAAAAAA=="
+        },
+        {
+          "path": "atlas/synthetic/core/1.1/core-1.1.pom",
+          "bytes": 139,
+          "sha256": "31b251049089a75b0c9bc395ca47c219e143473227eff0bf40da6336cb84cec7",
+          "base64": "PHByb2plY3Q+PG1vZGVsVmVyc2lvbj40LjAuMDwvbW9kZWxWZXJzaW9uPjxncm91cElkPmF0bGFzLnN5bnRoZXRpYzwvZ3JvdXBJZD48YXJ0aWZhY3RJZD5jb3JlPC9hcnRpZmFjdElkPjx2ZXJzaW9uPjEuMTwvdmVyc2lvbj48L3Byb2plY3Q+Cg=="
+        },
+        {
+          "path": "atlas/synthetic/core/2.0/core-2.0.jar",
+          "bytes": 166,
+          "sha256": "fd277fe2fa243a8caeb9d7bcfad7cde83166c825d7ce45e36d92542a1cfb2925",
+          "base64": "UEsDBBQAAAAAAAAAIVCt3zjPHAAAABwAAAAUAAAAb3JpZ2luYWwtZml4dHVyZS50eHRvcmlnaW5hbCBzeW50aGV0aWMgY29yZSAyLjAKUEsBAhQDFAAAAAAAAAAhUK3fOM8cAAAAHAAAABQAAAAAAAAAAAAAAKSBAAAAAG9yaWdpbmFsLWZpeHR1cmUudHh0UEsFBgAAAAABAAEAQgAAAE4AAAAAAA=="
+        },
+        {
+          "path": "atlas/synthetic/core/2.0/core-2.0.pom",
+          "bytes": 139,
+          "sha256": "5aec571182961b81636542e6deb4cf6ce0a3e1a1d8638e6ad309cc9108debfb1",
+          "base64": "PHByb2plY3Q+PG1vZGVsVmVyc2lvbj40LjAuMDwvbW9kZWxWZXJzaW9uPjxncm91cElkPmF0bGFzLnN5bnRoZXRpYzwvZ3JvdXBJZD48YXJ0aWZhY3RJZD5jb3JlPC9hcnRpZmFjdElkPjx2ZXJzaW9uPjIuMDwvdmVyc2lvbj48L3Byb2plY3Q+Cg=="
+        },
+        {
+          "path": "atlas/synthetic/core/maven-metadata.xml",
+          "bytes": 280,
+          "sha256": "6080081089f98ff2610b953efc7480359e1daa062814eaa86f80ed4633de8eed",
+          "base64": "PG1ldGFkYXRhPjxncm91cElkPmF0bGFzLnN5bnRoZXRpYzwvZ3JvdXBJZD48YXJ0aWZhY3RJZD5jb3JlPC9hcnRpZmFjdElkPjx2ZXJzaW9uaW5nPjxsYXRlc3Q+Mi4wPC9sYXRlc3Q+PHJlbGVhc2U+Mi4wPC9yZWxlYXNlPjx2ZXJzaW9ucz48dmVyc2lvbj4xLjA8L3ZlcnNpb24+PHZlcnNpb24+MS4xPC92ZXJzaW9uPjx2ZXJzaW9uPjIuMDwvdmVyc2lvbj48L3ZlcnNpb25zPjxsYXN0VXBkYXRlZD4yMDI2MTExMTAwMDAwMDwvbGFzdFVwZGF0ZWQ+PC92ZXJzaW9uaW5nPjwvbWV0YWRhdGE+Cg=="
+        }
+      ],
+      "graph": {
+        "components": [
+          {
+            "id": "atlas.synthetic:core:1.1",
+            "reasons": [
+              {
+                "cause": "CONSTRAINT",
+                "description": "Dependency version enforced by Dependency Locking"
+              },
+              {
+                "cause": "REQUESTED",
+                "description": "requested"
+              }
+            ]
+          },
+          {
+            "id": "root project :",
+            "reasons": [
+              {
+                "cause": "ROOT",
+                "description": "root"
+              }
+            ]
+          }
+        ],
+        "edges": [
+          {
+            "from": "root project :",
+            "requested": "atlas.synthetic:core:1.+",
+            "constraint": false,
+            "resolved": true,
+            "selected": "atlas.synthetic:core:1.1"
+          },
+          {
+            "from": "root project :",
+            "requested": "atlas.synthetic:core:{strictly 1.1}",
+            "constraint": true,
+            "resolved": true,
+            "selected": "atlas.synthetic:core:1.1"
+          }
+        ]
+      },
+      "observation": {
+        "graph": {
+          "components": [
+            {
+              "id": "atlas.synthetic:core:1.1",
+              "reasons": [
+                {
+                  "cause": "CONSTRAINT",
+                  "description": "Dependency version enforced by Dependency Locking"
+                },
+                {
+                  "cause": "REQUESTED",
+                  "description": "requested"
+                }
+              ]
+            },
+            {
+              "id": "root project :",
+              "reasons": [
+                {
+                  "cause": "ROOT",
+                  "description": "root"
+                }
+              ]
+            }
+          ],
+          "edges": [
+            {
+              "from": "root project :",
+              "requested": "atlas.synthetic:core:1.+",
+              "constraint": false,
+              "resolved": true,
+              "selected": "atlas.synthetic:core:1.1"
+            },
+            {
+              "from": "root project :",
+              "requested": "atlas.synthetic:core:{strictly 1.1}",
+              "constraint": true,
+              "resolved": true,
+              "selected": "atlas.synthetic:core:1.1"
+            }
+          ]
+        },
+        "artifacts": [
+          {
+            "module": "atlas.synthetic:core:1.1",
+            "name": "core-1.1.jar",
+            "bytes": 166,
+            "base64": "UEsDBBQAAAAAAAAAIVACQZbEHAAAABwAAAAUAAAAb3JpZ2luYWwtZml4dHVyZS50eHRvcmlnaW5hbCBzeW50aGV0aWMgY29yZSAxLjEKUEsBAhQDFAAAAAAAAAAhUAJBlsQcAAAAHAAAABQAAAAAAAAAAAAAAKSBAAAAAG9yaWdpbmFsLWZpeHR1cmUudHh0UEsFBgAAAAABAAEAQgAAAE4AAAAAAA==",
+            "sha256": "ba0cc6e4210adfb4076c8ee96b4722f4af3ef10006ac5214383c0bd98da831cc"
+          }
+        ]
+      },
+      "lock": "# This is a Gradle generated file for dependency locking.\n# Manual edits can break the build and are not advised.\n# This file is expected to be part of source control.\natlas.synthetic:core:1.1=atlas\nempty=\n",
+      "verification": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<verification-metadata xmlns=\"https://schema.gradle.org/dependency-verification\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"https://schema.gradle.org/dependency-verification https://schema.gradle.org/dependency-verification/dependency-verification-1.3.xsd\">\n   <configuration>\n      <verify-metadata>true</verify-metadata>\n      <verify-signatures>false</verify-signatures>\n   </configuration>\n   <components>\n      <component group=\"atlas.synthetic\" name=\"core\" version=\"1.1\">\n         <artifact name=\"core-1.1.jar\">\n            <sha256 value=\"ba0cc6e4210adfb4076c8ee96b4722f4af3ef10006ac5214383c0bd98da831cc\" origin=\"Generated by Gradle\"/>\n         </artifact>\n         <artifact name=\"core-1.1.pom\">\n            <sha256 value=\"31b251049089a75b0c9bc395ca47c219e143473227eff0bf40da6336cb84cec7\" origin=\"Generated by Gradle\"/>\n         </artifact>\n      </component>\n   </components>\n</verification-metadata>\n"
+    },
+    {
+      "id": "verified_original",
+      "command": [
+        "gradle",
+        "--offline",
+        "--no-daemon",
+        "--console=plain",
+        "--max-workers=1",
+        "--no-build-cache",
+        "--no-configuration-cache",
+        "--rerun-tasks",
+        "-Duser.timezone=UTC",
+        "-Porg.gradle.dependency.verification.console=verbose",
+        "-Pmode=locked",
+        "observe"
+      ],
+      "returncode": 0,
+      "stdout": "\nWelcome to Gradle 9.2.1!\n\nHere are the highlights of this release:\n - Windows ARM support\n - Improved publishing APIs\n - Better guidance for dependency verification failures\n\nFor more details see https://docs.gradle.org/9.2.1/release-notes.html\n\nTo honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.2.1/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.\nDaemon will be stopped at the end of the build \n\n> Task :observe\nATLAS_OBSERVATION={\"graph\":{\"components\":[{\"id\":\"atlas.synthetic:core:1.1\",\"reasons\":[{\"cause\":\"CONSTRAINT\",\"description\":\"Dependency version enforced by Dependency Locking\"},{\"cause\":\"REQUESTED\",\"description\":\"requested\"}]},{\"id\":\"root project :\",\"reasons\":[{\"cause\":\"ROOT\",\"description\":\"root\"}]}],\"edges\":[{\"from\":\"root project :\",\"requested\":\"atlas.synthetic:core:1.+\",\"constraint\":false,\"resolved\":true,\"selected\":\"atlas.synthetic:core:1.1\"},{\"from\":\"root project :\",\"requested\":\"atlas.synthetic:core:{strictly 1.1}\",\"constraint\":true,\"resolved\":true,\"selected\":\"atlas.synthetic:core:1.1\"}]},\"artifacts\":[{\"module\":\"atlas.synthetic:core:1.1\",\"name\":\"core-1.1.jar\",\"bytes\":166,\"base64\":\"UEsDBBQAAAAAAAAAIVACQZbEHAAAABwAAAAUAAAAb3JpZ2luYWwtZml4dHVyZS50eHRvcmlnaW5hbCBzeW50aGV0aWMgY29yZSAxLjEKUEsBAhQDFAAAAAAAAAAhUAJBlsQcAAAAHAAAABQAAAAAAAAAAAAAAKSBAAAAAG9yaWdpbmFsLWZpeHR1cmUudHh0UEsFBgAAAAABAAEAQgAAAE4AAAAAAA==\",\"sha256\":\"ba0cc6e4210adfb4076c8ee96b4722f4af3ef10006ac5214383c0bd98da831cc\"}]}\n\nBUILD SUCCESSFUL in 5s\n1 actionable task: 1 executed\n",
+      "stderr": "",
+      "repository": [
+        {
+          "path": "atlas/synthetic/addon/1.0/addon-1.0.jar",
+          "bytes": 167,
+          "sha256": "b3438930ecb6335432080d0089b228e16f1744714753d8a2353a089f24e0ee41",
+          "base64": "UEsDBBQAAAAAAAAAIVAvcGIWHQAAAB0AAAAUAAAAb3JpZ2luYWwtZml4dHVyZS50eHRvcmlnaW5hbCBzeW50aGV0aWMgYWRkb24gMS4wClBLAQIUAxQAAAAAAAAAIVAvcGIWHQAAAB0AAAAUAAAAAAAAAAAAAACkgQAAAABvcmlnaW5hbC1maXh0dXJlLnR4dFBLBQYAAAAAAQABAEIAAABPAAAAAAA="
+        },
+        {
+          "path": "atlas/synthetic/addon/1.0/addon-1.0.pom",
+          "bytes": 279,
+          "sha256": "5f11223a73854b4c987d5618be19c1d9668f095ee16a01de99430e8d49b77939",
+          "base64": "PHByb2plY3Q+PG1vZGVsVmVyc2lvbj40LjAuMDwvbW9kZWxWZXJzaW9uPjxncm91cElkPmF0bGFzLnN5bnRoZXRpYzwvZ3JvdXBJZD48YXJ0aWZhY3RJZD5hZGRvbjwvYXJ0aWZhY3RJZD48dmVyc2lvbj4xLjA8L3ZlcnNpb24+PGRlcGVuZGVuY2llcz48ZGVwZW5kZW5jeT48Z3JvdXBJZD5hdGxhcy5zeW50aGV0aWM8L2dyb3VwSWQ+PGFydGlmYWN0SWQ+Y29yZTwvYXJ0aWZhY3RJZD48dmVyc2lvbj4yLjA8L3ZlcnNpb24+PC9kZXBlbmRlbmN5PjwvZGVwZW5kZW5jaWVzPjwvcHJvamVjdD4K"
+        },
+        {
+          "path": "atlas/synthetic/addon/maven-metadata.xml",
+          "bytes": 237,
+          "sha256": "c4d944711412e0d1c7ec9f7e3d6bcdf795463c10b6d9ba06bd48d9e890050c4c",
+          "base64": "PG1ldGFkYXRhPjxncm91cElkPmF0bGFzLnN5bnRoZXRpYzwvZ3JvdXBJZD48YXJ0aWZhY3RJZD5hZGRvbjwvYXJ0aWZhY3RJZD48dmVyc2lvbmluZz48bGF0ZXN0PjEuMDwvbGF0ZXN0PjxyZWxlYXNlPjEuMDwvcmVsZWFzZT48dmVyc2lvbnM+PHZlcnNpb24+MS4wPC92ZXJzaW9uPjwvdmVyc2lvbnM+PGxhc3RVcGRhdGVkPjIwMjYxMTExMDAwMDAwPC9sYXN0VXBkYXRlZD48L3ZlcnNpb25pbmc+PC9tZXRhZGF0YT4K"
+        },
+        {
+          "path": "atlas/synthetic/core/1.0/core-1.0.jar",
+          "bytes": 166,
+          "sha256": "f5d496cf77425dd163303e0ea6d718baa133d6443816ee0539a50d254026593e",
+          "base64": "UEsDBBQAAAAAAAAAIVBDcI3dHAAAABwAAAAUAAAAb3JpZ2luYWwtZml4dHVyZS50eHRvcmlnaW5hbCBzeW50aGV0aWMgY29yZSAxLjAKUEsBAhQDFAAAAAAAAAAhUENwjd0cAAAAHAAAABQAAAAAAAAAAAAAAKSBAAAAAG9yaWdpbmFsLWZpeHR1cmUudHh0UEsFBgAAAAABAAEAQgAAAE4AAAAAAA=="
+        },
+        {
+          "path": "atlas/synthetic/core/1.0/core-1.0.pom",
+          "bytes": 139,
+          "sha256": "066bd0cd95f9e2de0bc07f89f4d7df626b9eab5a0e85811c307fa5c4d0295973",
+          "base64": "PHByb2plY3Q+PG1vZGVsVmVyc2lvbj40LjAuMDwvbW9kZWxWZXJzaW9uPjxncm91cElkPmF0bGFzLnN5bnRoZXRpYzwvZ3JvdXBJZD48YXJ0aWZhY3RJZD5jb3JlPC9hcnRpZmFjdElkPjx2ZXJzaW9uPjEuMDwvdmVyc2lvbj48L3Byb2plY3Q+Cg=="
+        },
+        {
+          "path": "atlas/synthetic/core/1.1/core-1.1.jar",
+          "bytes": 166,
+          "sha256": "ba0cc6e4210adfb4076c8ee96b4722f4af3ef10006ac5214383c0bd98da831cc",
+          "base64": "UEsDBBQAAAAAAAAAIVACQZbEHAAAABwAAAAUAAAAb3JpZ2luYWwtZml4dHVyZS50eHRvcmlnaW5hbCBzeW50aGV0aWMgY29yZSAxLjEKUEsBAhQDFAAAAAAAAAAhUAJBlsQcAAAAHAAAABQAAAAAAAAAAAAAAKSBAAAAAG9yaWdpbmFsLWZpeHR1cmUudHh0UEsFBgAAAAABAAEAQgAAAE4AAAAAAA=="
+        },
+        {
+          "path": "atlas/synthetic/core/1.1/core-1.1.pom",
+          "bytes": 139,
+          "sha256": "31b251049089a75b0c9bc395ca47c219e143473227eff0bf40da6336cb84cec7",
+          "base64": "PHByb2plY3Q+PG1vZGVsVmVyc2lvbj40LjAuMDwvbW9kZWxWZXJzaW9uPjxncm91cElkPmF0bGFzLnN5bnRoZXRpYzwvZ3JvdXBJZD48YXJ0aWZhY3RJZD5jb3JlPC9hcnRpZmFjdElkPjx2ZXJzaW9uPjEuMTwvdmVyc2lvbj48L3Byb2plY3Q+Cg=="
+        },
+        {
+          "path": "atlas/synthetic/core/2.0/core-2.0.jar",
+          "bytes": 166,
+          "sha256": "fd277fe2fa243a8caeb9d7bcfad7cde83166c825d7ce45e36d92542a1cfb2925",
+          "base64": "UEsDBBQAAAAAAAAAIVCt3zjPHAAAABwAAAAUAAAAb3JpZ2luYWwtZml4dHVyZS50eHRvcmlnaW5hbCBzeW50aGV0aWMgY29yZSAyLjAKUEsBAhQDFAAAAAAAAAAhUK3fOM8cAAAAHAAAABQAAAAAAAAAAAAAAKSBAAAAAG9yaWdpbmFsLWZpeHR1cmUudHh0UEsFBgAAAAABAAEAQgAAAE4AAAAAAA=="
+        },
+        {
+          "path": "atlas/synthetic/core/2.0/core-2.0.pom",
+          "bytes": 139,
+          "sha256": "5aec571182961b81636542e6deb4cf6ce0a3e1a1d8638e6ad309cc9108debfb1",
+          "base64": "PHByb2plY3Q+PG1vZGVsVmVyc2lvbj40LjAuMDwvbW9kZWxWZXJzaW9uPjxncm91cElkPmF0bGFzLnN5bnRoZXRpYzwvZ3JvdXBJZD48YXJ0aWZhY3RJZD5jb3JlPC9hcnRpZmFjdElkPjx2ZXJzaW9uPjIuMDwvdmVyc2lvbj48L3Byb2plY3Q+Cg=="
+        },
+        {
+          "path": "atlas/synthetic/core/maven-metadata.xml",
+          "bytes": 280,
+          "sha256": "6080081089f98ff2610b953efc7480359e1daa062814eaa86f80ed4633de8eed",
+          "base64": "PG1ldGFkYXRhPjxncm91cElkPmF0bGFzLnN5bnRoZXRpYzwvZ3JvdXBJZD48YXJ0aWZhY3RJZD5jb3JlPC9hcnRpZmFjdElkPjx2ZXJzaW9uaW5nPjxsYXRlc3Q+Mi4wPC9sYXRlc3Q+PHJlbGVhc2U+Mi4wPC9yZWxlYXNlPjx2ZXJzaW9ucz48dmVyc2lvbj4xLjA8L3ZlcnNpb24+PHZlcnNpb24+MS4xPC92ZXJzaW9uPjx2ZXJzaW9uPjIuMDwvdmVyc2lvbj48L3ZlcnNpb25zPjxsYXN0VXBkYXRlZD4yMDI2MTExMTAwMDAwMDwvbGFzdFVwZGF0ZWQ+PC92ZXJzaW9uaW5nPjwvbWV0YWRhdGE+Cg=="
+        }
+      ],
+      "graph": {
+        "components": [
+          {
+            "id": "atlas.synthetic:core:1.1",
+            "reasons": [
+              {
+                "cause": "CONSTRAINT",
+                "description": "Dependency version enforced by Dependency Locking"
+              },
+              {
+                "cause": "REQUESTED",
+                "description": "requested"
+              }
+            ]
+          },
+          {
+            "id": "root project :",
+            "reasons": [
+              {
+                "cause": "ROOT",
+                "description": "root"
+              }
+            ]
+          }
+        ],
+        "edges": [
+          {
+            "from": "root project :",
+            "requested": "atlas.synthetic:core:1.+",
+            "constraint": false,
+            "resolved": true,
+            "selected": "atlas.synthetic:core:1.1"
+          },
+          {
+            "from": "root project :",
+            "requested": "atlas.synthetic:core:{strictly 1.1}",
+            "constraint": true,
+            "resolved": true,
+            "selected": "atlas.synthetic:core:1.1"
+          }
+        ]
+      },
+      "observation": {
+        "graph": {
+          "components": [
+            {
+              "id": "atlas.synthetic:core:1.1",
+              "reasons": [
+                {
+                  "cause": "CONSTRAINT",
+                  "description": "Dependency version enforced by Dependency Locking"
+                },
+                {
+                  "cause": "REQUESTED",
+                  "description": "requested"
+                }
+              ]
+            },
+            {
+              "id": "root project :",
+              "reasons": [
+                {
+                  "cause": "ROOT",
+                  "description": "root"
+                }
+              ]
+            }
+          ],
+          "edges": [
+            {
+              "from": "root project :",
+              "requested": "atlas.synthetic:core:1.+",
+              "constraint": false,
+              "resolved": true,
+              "selected": "atlas.synthetic:core:1.1"
+            },
+            {
+              "from": "root project :",
+              "requested": "atlas.synthetic:core:{strictly 1.1}",
+              "constraint": true,
+              "resolved": true,
+              "selected": "atlas.synthetic:core:1.1"
+            }
+          ]
+        },
+        "artifacts": [
+          {
+            "module": "atlas.synthetic:core:1.1",
+            "name": "core-1.1.jar",
+            "bytes": 166,
+            "base64": "UEsDBBQAAAAAAAAAIVACQZbEHAAAABwAAAAUAAAAb3JpZ2luYWwtZml4dHVyZS50eHRvcmlnaW5hbCBzeW50aGV0aWMgY29yZSAxLjEKUEsBAhQDFAAAAAAAAAAhUAJBlsQcAAAAHAAAABQAAAAAAAAAAAAAAKSBAAAAAG9yaWdpbmFsLWZpeHR1cmUudHh0UEsFBgAAAAABAAEAQgAAAE4AAAAAAA==",
+            "sha256": "ba0cc6e4210adfb4076c8ee96b4722f4af3ef10006ac5214383c0bd98da831cc"
+          }
+        ]
+      },
+      "lock": "# This is a Gradle generated file for dependency locking.\n# Manual edits can break the build and are not advised.\n# This file is expected to be part of source control.\natlas.synthetic:core:1.1=atlas\nempty=\n",
+      "verification": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<verification-metadata xmlns=\"https://schema.gradle.org/dependency-verification\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"https://schema.gradle.org/dependency-verification https://schema.gradle.org/dependency-verification/dependency-verification-1.3.xsd\">\n   <configuration>\n      <verify-metadata>true</verify-metadata>\n      <verify-signatures>false</verify-signatures>\n   </configuration>\n   <components>\n      <component group=\"atlas.synthetic\" name=\"core\" version=\"1.1\">\n         <artifact name=\"core-1.1.jar\">\n            <sha256 value=\"ba0cc6e4210adfb4076c8ee96b4722f4af3ef10006ac5214383c0bd98da831cc\" origin=\"Generated by Gradle\"/>\n         </artifact>\n         <artifact name=\"core-1.1.pom\">\n            <sha256 value=\"31b251049089a75b0c9bc395ca47c219e143473227eff0bf40da6336cb84cec7\" origin=\"Generated by Gradle\"/>\n         </artifact>\n      </component>\n   </components>\n</verification-metadata>\n"
+    },
+    {
+      "id": "legacy_changed_jar",
+      "command": [
+        "gradle",
+        "--offline",
+        "--no-daemon",
+        "--console=plain",
+        "--max-workers=1",
+        "--no-build-cache",
+        "--no-configuration-cache",
+        "--rerun-tasks",
+        "-Duser.timezone=UTC",
+        "-Porg.gradle.dependency.verification.console=verbose",
+        "-Pmode=locked",
+        "-PlegacyOnly=true",
+        "observe"
+      ],
+      "returncode": 0,
+      "stdout": "\nWelcome to Gradle 9.2.1!\n\nHere are the highlights of this release:\n - Windows ARM support\n - Improved publishing APIs\n - Better guidance for dependency verification failures\n\nFor more details see https://docs.gradle.org/9.2.1/release-notes.html\n\nTo honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.2.1/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.\nDaemon will be stopped at the end of the build \n\n> Task :observe\nATLAS_OBSERVATION={\"graph\":{\"components\":[{\"id\":\"atlas.synthetic:core:1.1\",\"reasons\":[{\"cause\":\"CONSTRAINT\",\"description\":\"Dependency version enforced by Dependency Locking\"},{\"cause\":\"REQUESTED\",\"description\":\"requested\"}]},{\"id\":\"root project :\",\"reasons\":[{\"cause\":\"ROOT\",\"description\":\"root\"}]}],\"edges\":[{\"from\":\"root project :\",\"requested\":\"atlas.synthetic:core:1.+\",\"constraint\":false,\"resolved\":true,\"selected\":\"atlas.synthetic:core:1.1\"},{\"from\":\"root project :\",\"requested\":\"atlas.synthetic:core:{strictly 1.1}\",\"constraint\":true,\"resolved\":true,\"selected\":\"atlas.synthetic:core:1.1\"}]},\"artifacts\":[{\"module\":\"atlas.synthetic:core:1.1\",\"name\":\"core-1.1.jar\",\"bytes\":175,\"base64\":\"UEsDBBQAAAAAAAAAIVCT7earJQAAACUAAAAUAAAAb3JpZ2luYWwtZml4dHVyZS50eHRvcmlnaW5hbCBzeW50aGV0aWMgY29yZSAxLjEKbXV0YXRpb24KUEsBAhQDFAAAAAAAAAAhUJPt5qslAAAAJQAAABQAAAAAAAAAAAAAAKSBAAAAAG9yaWdpbmFsLWZpeHR1cmUudHh0UEsFBgAAAAABAAEAQgAAAFcAAAAAAA==\",\"sha256\":\"d1037bef7ddcb7b95c2dd27809682f7e5f11fb3d58f944c4b84d499fcc1ec845\"}]}\n\nBUILD SUCCESSFUL in 5s\n1 actionable task: 1 executed\n",
+      "stderr": "",
+      "repository": [
+        {
+          "path": "atlas/synthetic/addon/1.0/addon-1.0.jar",
+          "bytes": 167,
+          "sha256": "b3438930ecb6335432080d0089b228e16f1744714753d8a2353a089f24e0ee41",
+          "base64": "UEsDBBQAAAAAAAAAIVAvcGIWHQAAAB0AAAAUAAAAb3JpZ2luYWwtZml4dHVyZS50eHRvcmlnaW5hbCBzeW50aGV0aWMgYWRkb24gMS4wClBLAQIUAxQAAAAAAAAAIVAvcGIWHQAAAB0AAAAUAAAAAAAAAAAAAACkgQAAAABvcmlnaW5hbC1maXh0dXJlLnR4dFBLBQYAAAAAAQABAEIAAABPAAAAAAA="
+        },
+        {
+          "path": "atlas/synthetic/addon/1.0/addon-1.0.pom",
+          "bytes": 279,
+          "sha256": "5f11223a73854b4c987d5618be19c1d9668f095ee16a01de99430e8d49b77939",
+          "base64": "PHByb2plY3Q+PG1vZGVsVmVyc2lvbj40LjAuMDwvbW9kZWxWZXJzaW9uPjxncm91cElkPmF0bGFzLnN5bnRoZXRpYzwvZ3JvdXBJZD48YXJ0aWZhY3RJZD5hZGRvbjwvYXJ0aWZhY3RJZD48dmVyc2lvbj4xLjA8L3ZlcnNpb24+PGRlcGVuZGVuY2llcz48ZGVwZW5kZW5jeT48Z3JvdXBJZD5hdGxhcy5zeW50aGV0aWM8L2dyb3VwSWQ+PGFydGlmYWN0SWQ+Y29yZTwvYXJ0aWZhY3RJZD48dmVyc2lvbj4yLjA8L3ZlcnNpb24+PC9kZXBlbmRlbmN5PjwvZGVwZW5kZW5jaWVzPjwvcHJvamVjdD4K"
+        },
+        {
+          "path": "atlas/synthetic/addon/maven-metadata.xml",
+          "bytes": 237,
+          "sha256": "c4d944711412e0d1c7ec9f7e3d6bcdf795463c10b6d9ba06bd48d9e890050c4c",
+          "base64": "PG1ldGFkYXRhPjxncm91cElkPmF0bGFzLnN5bnRoZXRpYzwvZ3JvdXBJZD48YXJ0aWZhY3RJZD5hZGRvbjwvYXJ0aWZhY3RJZD48dmVyc2lvbmluZz48bGF0ZXN0PjEuMDwvbGF0ZXN0PjxyZWxlYXNlPjEuMDwvcmVsZWFzZT48dmVyc2lvbnM+PHZlcnNpb24+MS4wPC92ZXJzaW9uPjwvdmVyc2lvbnM+PGxhc3RVcGRhdGVkPjIwMjYxMTExMDAwMDAwPC9sYXN0VXBkYXRlZD48L3ZlcnNpb25pbmc+PC9tZXRhZGF0YT4K"
+        },
+        {
+          "path": "atlas/synthetic/core/1.0/core-1.0.jar",
+          "bytes": 166,
+          "sha256": "f5d496cf77425dd163303e0ea6d718baa133d6443816ee0539a50d254026593e",
+          "base64": "UEsDBBQAAAAAAAAAIVBDcI3dHAAAABwAAAAUAAAAb3JpZ2luYWwtZml4dHVyZS50eHRvcmlnaW5hbCBzeW50aGV0aWMgY29yZSAxLjAKUEsBAhQDFAAAAAAAAAAhUENwjd0cAAAAHAAAABQAAAAAAAAAAAAAAKSBAAAAAG9yaWdpbmFsLWZpeHR1cmUudHh0UEsFBgAAAAABAAEAQgAAAE4AAAAAAA=="
+        },
+        {
+          "path": "atlas/synthetic/core/1.0/core-1.0.pom",
+          "bytes": 139,
+          "sha256": "066bd0cd95f9e2de0bc07f89f4d7df626b9eab5a0e85811c307fa5c4d0295973",
+          "base64": "PHByb2plY3Q+PG1vZGVsVmVyc2lvbj40LjAuMDwvbW9kZWxWZXJzaW9uPjxncm91cElkPmF0bGFzLnN5bnRoZXRpYzwvZ3JvdXBJZD48YXJ0aWZhY3RJZD5jb3JlPC9hcnRpZmFjdElkPjx2ZXJzaW9uPjEuMDwvdmVyc2lvbj48L3Byb2plY3Q+Cg=="
+        },
+        {
+          "path": "atlas/synthetic/core/1.1/core-1.1.jar",
+          "bytes": 175,
+          "sha256": "d1037bef7ddcb7b95c2dd27809682f7e5f11fb3d58f944c4b84d499fcc1ec845",
+          "base64": "UEsDBBQAAAAAAAAAIVCT7earJQAAACUAAAAUAAAAb3JpZ2luYWwtZml4dHVyZS50eHRvcmlnaW5hbCBzeW50aGV0aWMgY29yZSAxLjEKbXV0YXRpb24KUEsBAhQDFAAAAAAAAAAhUJPt5qslAAAAJQAAABQAAAAAAAAAAAAAAKSBAAAAAG9yaWdpbmFsLWZpeHR1cmUudHh0UEsFBgAAAAABAAEAQgAAAFcAAAAAAA=="
+        },
+        {
+          "path": "atlas/synthetic/core/1.1/core-1.1.pom",
+          "bytes": 139,
+          "sha256": "31b251049089a75b0c9bc395ca47c219e143473227eff0bf40da6336cb84cec7",
+          "base64": "PHByb2plY3Q+PG1vZGVsVmVyc2lvbj40LjAuMDwvbW9kZWxWZXJzaW9uPjxncm91cElkPmF0bGFzLnN5bnRoZXRpYzwvZ3JvdXBJZD48YXJ0aWZhY3RJZD5jb3JlPC9hcnRpZmFjdElkPjx2ZXJzaW9uPjEuMTwvdmVyc2lvbj48L3Byb2plY3Q+Cg=="
+        },
+        {
+          "path": "atlas/synthetic/core/2.0/core-2.0.jar",
+          "bytes": 166,
+          "sha256": "fd277fe2fa243a8caeb9d7bcfad7cde83166c825d7ce45e36d92542a1cfb2925",
+          "base64": "UEsDBBQAAAAAAAAAIVCt3zjPHAAAABwAAAAUAAAAb3JpZ2luYWwtZml4dHVyZS50eHRvcmlnaW5hbCBzeW50aGV0aWMgY29yZSAyLjAKUEsBAhQDFAAAAAAAAAAhUK3fOM8cAAAAHAAAABQAAAAAAAAAAAAAAKSBAAAAAG9yaWdpbmFsLWZpeHR1cmUudHh0UEsFBgAAAAABAAEAQgAAAE4AAAAAAA=="
+        },
+        {
+          "path": "atlas/synthetic/core/2.0/core-2.0.pom",
+          "bytes": 139,
+          "sha256": "5aec571182961b81636542e6deb4cf6ce0a3e1a1d8638e6ad309cc9108debfb1",
+          "base64": "PHByb2plY3Q+PG1vZGVsVmVyc2lvbj40LjAuMDwvbW9kZWxWZXJzaW9uPjxncm91cElkPmF0bGFzLnN5bnRoZXRpYzwvZ3JvdXBJZD48YXJ0aWZhY3RJZD5jb3JlPC9hcnRpZmFjdElkPjx2ZXJzaW9uPjIuMDwvdmVyc2lvbj48L3Byb2plY3Q+Cg=="
+        },
+        {
+          "path": "atlas/synthetic/core/maven-metadata.xml",
+          "bytes": 280,
+          "sha256": "6080081089f98ff2610b953efc7480359e1daa062814eaa86f80ed4633de8eed",
+          "base64": "PG1ldGFkYXRhPjxncm91cElkPmF0bGFzLnN5bnRoZXRpYzwvZ3JvdXBJZD48YXJ0aWZhY3RJZD5jb3JlPC9hcnRpZmFjdElkPjx2ZXJzaW9uaW5nPjxsYXRlc3Q+Mi4wPC9sYXRlc3Q+PHJlbGVhc2U+Mi4wPC9yZWxlYXNlPjx2ZXJzaW9ucz48dmVyc2lvbj4xLjA8L3ZlcnNpb24+PHZlcnNpb24+MS4xPC92ZXJzaW9uPjx2ZXJzaW9uPjIuMDwvdmVyc2lvbj48L3ZlcnNpb25zPjxsYXN0VXBkYXRlZD4yMDI2MTExMTAwMDAwMDwvbGFzdFVwZGF0ZWQ+PC92ZXJzaW9uaW5nPjwvbWV0YWRhdGE+Cg=="
+        }
+      ],
+      "graph": {
+        "components": [
+          {
+            "id": "atlas.synthetic:core:1.1",
+            "reasons": [
+              {
+                "cause": "CONSTRAINT",
+                "description": "Dependency version enforced by Dependency Locking"
+              },
+              {
+                "cause": "REQUESTED",
+                "description": "requested"
+              }
+            ]
+          },
+          {
+            "id": "root project :",
+            "reasons": [
+              {
+                "cause": "ROOT",
+                "description": "root"
+              }
+            ]
+          }
+        ],
+        "edges": [
+          {
+            "from": "root project :",
+            "requested": "atlas.synthetic:core:1.+",
+            "constraint": false,
+            "resolved": true,
+            "selected": "atlas.synthetic:core:1.1"
+          },
+          {
+            "from": "root project :",
+            "requested": "atlas.synthetic:core:{strictly 1.1}",
+            "constraint": true,
+            "resolved": true,
+            "selected": "atlas.synthetic:core:1.1"
+          }
+        ]
+      },
+      "observation": {
+        "graph": {
+          "components": [
+            {
+              "id": "atlas.synthetic:core:1.1",
+              "reasons": [
+                {
+                  "cause": "CONSTRAINT",
+                  "description": "Dependency version enforced by Dependency Locking"
+                },
+                {
+                  "cause": "REQUESTED",
+                  "description": "requested"
+                }
+              ]
+            },
+            {
+              "id": "root project :",
+              "reasons": [
+                {
+                  "cause": "ROOT",
+                  "description": "root"
+                }
+              ]
+            }
+          ],
+          "edges": [
+            {
+              "from": "root project :",
+              "requested": "atlas.synthetic:core:1.+",
+              "constraint": false,
+              "resolved": true,
+              "selected": "atlas.synthetic:core:1.1"
+            },
+            {
+              "from": "root project :",
+              "requested": "atlas.synthetic:core:{strictly 1.1}",
+              "constraint": true,
+              "resolved": true,
+              "selected": "atlas.synthetic:core:1.1"
+            }
+          ]
+        },
+        "artifacts": [
+          {
+            "module": "atlas.synthetic:core:1.1",
+            "name": "core-1.1.jar",
+            "bytes": 175,
+            "base64": "UEsDBBQAAAAAAAAAIVCT7earJQAAACUAAAAUAAAAb3JpZ2luYWwtZml4dHVyZS50eHRvcmlnaW5hbCBzeW50aGV0aWMgY29yZSAxLjEKbXV0YXRpb24KUEsBAhQDFAAAAAAAAAAhUJPt5qslAAAAJQAAABQAAAAAAAAAAAAAAKSBAAAAAG9yaWdpbmFsLWZpeHR1cmUudHh0UEsFBgAAAAABAAEAQgAAAFcAAAAAAA==",
+            "sha256": "d1037bef7ddcb7b95c2dd27809682f7e5f11fb3d58f944c4b84d499fcc1ec845"
+          }
+        ]
+      },
+      "lock": "# This is a Gradle generated file for dependency locking.\n# Manual edits can break the build and are not advised.\n# This file is expected to be part of source control.\natlas.synthetic:core:1.1=atlas\nempty=\n",
+      "verification": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<verification-metadata xmlns=\"https://schema.gradle.org/dependency-verification\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"https://schema.gradle.org/dependency-verification https://schema.gradle.org/dependency-verification/dependency-verification-1.3.xsd\">\n   <configuration>\n      <verify-metadata>true</verify-metadata>\n      <verify-signatures>false</verify-signatures>\n   </configuration>\n   <components>\n      <component group=\"atlas.synthetic\" name=\"core\" version=\"1.1\">\n         <artifact name=\"core-1.1.jar\">\n            <sha256 value=\"ba0cc6e4210adfb4076c8ee96b4722f4af3ef10006ac5214383c0bd98da831cc\" origin=\"Generated by Gradle\"/>\n         </artifact>\n         <artifact name=\"core-1.1.pom\">\n            <sha256 value=\"31b251049089a75b0c9bc395ca47c219e143473227eff0bf40da6336cb84cec7\" origin=\"Generated by Gradle\"/>\n         </artifact>\n      </component>\n   </components>\n</verification-metadata>\n"
+    },
+    {
+      "id": "verified_changed_jar",
+      "command": [
+        "gradle",
+        "--offline",
+        "--no-daemon",
+        "--console=plain",
+        "--max-workers=1",
+        "--no-build-cache",
+        "--no-configuration-cache",
+        "--rerun-tasks",
+        "-Duser.timezone=UTC",
+        "-Porg.gradle.dependency.verification.console=verbose",
+        "-Pmode=locked",
+        "observe"
+      ],
+      "returncode": 1,
+      "stdout": "\nWelcome to Gradle 9.2.1!\n\nHere are the highlights of this release:\n - Windows ARM support\n - Improved publishing APIs\n - Better guidance for dependency verification failures\n\nFor more details see https://docs.gradle.org/9.2.1/release-notes.html\n\nTo honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.2.1/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.\nDaemon will be stopped at the end of the build \n> Task :observe FAILED\n1 actionable task: 1 executed\n",
+      "stderr": "\nFAILURE: Build failed with an exception.\n\n* Where:\nBuild file '<run>/build.gradle' line: 58\n\n* What went wrong:\nExecution failed for task ':observe'.\n> Dependency verification failed for configuration ':atlas':\n    - On artifact core-1.1.jar (atlas.synthetic:core:1.1) in repository 'maven': expected a 'sha256' checksum of 'ba0cc6e4210adfb4076c8ee96b4722f4af3ef10006ac5214383c0bd98da831cc' but was 'd1037bef7ddcb7b95c2dd27809682f7e5f11fb3d58f944c4b84d499fcc1ec845'\n  \n  This can indicate that a dependency has been compromised. Please carefully verify the checksums.\n  \n  These files failed verification:\n    - GRADLE_USER_HOME/../repo/atlas/synthetic/core/1.1/core-1.1.jar\n  \n  GRADLE_USER_HOME = <run>/home\n  \n  These files failed verification:\n    - GRADLE_USER_HOME/../repo/atlas/synthetic/core/1.1/core-1.1.jar\n  \n  GRADLE_USER_HOME = <run>/home\n  \n  Open this report for more details: file://<run>/build/reports/dependency-verification/at-1794367499447/dependency-verification-report.html\n\n* Try:\n> Run with --stacktrace option to get the stack trace.\n> Run with --info or --debug option to get more log output.\n> Run with --scan to generate a Build Scan (powered by Develocity).\n> Get more help at https://help.gradle.org.\n\nBUILD FAILED in 5s\n",
+      "repository": [
+        {
+          "path": "atlas/synthetic/addon/1.0/addon-1.0.jar",
+          "bytes": 167,
+          "sha256": "b3438930ecb6335432080d0089b228e16f1744714753d8a2353a089f24e0ee41",
+          "base64": "UEsDBBQAAAAAAAAAIVAvcGIWHQAAAB0AAAAUAAAAb3JpZ2luYWwtZml4dHVyZS50eHRvcmlnaW5hbCBzeW50aGV0aWMgYWRkb24gMS4wClBLAQIUAxQAAAAAAAAAIVAvcGIWHQAAAB0AAAAUAAAAAAAAAAAAAACkgQAAAABvcmlnaW5hbC1maXh0dXJlLnR4dFBLBQYAAAAAAQABAEIAAABPAAAAAAA="
+        },
+        {
+          "path": "atlas/synthetic/addon/1.0/addon-1.0.pom",
+          "bytes": 279,
+          "sha256": "5f11223a73854b4c987d5618be19c1d9668f095ee16a01de99430e8d49b77939",
+          "base64": "PHByb2plY3Q+PG1vZGVsVmVyc2lvbj40LjAuMDwvbW9kZWxWZXJzaW9uPjxncm91cElkPmF0bGFzLnN5bnRoZXRpYzwvZ3JvdXBJZD48YXJ0aWZhY3RJZD5hZGRvbjwvYXJ0aWZhY3RJZD48dmVyc2lvbj4xLjA8L3ZlcnNpb24+PGRlcGVuZGVuY2llcz48ZGVwZW5kZW5jeT48Z3JvdXBJZD5hdGxhcy5zeW50aGV0aWM8L2dyb3VwSWQ+PGFydGlmYWN0SWQ+Y29yZTwvYXJ0aWZhY3RJZD48dmVyc2lvbj4yLjA8L3ZlcnNpb24+PC9kZXBlbmRlbmN5PjwvZGVwZW5kZW5jaWVzPjwvcHJvamVjdD4K"
+        },
+        {
+          "path": "atlas/synthetic/addon/maven-metadata.xml",
+          "bytes": 237,
+          "sha256": "c4d944711412e0d1c7ec9f7e3d6bcdf795463c10b6d9ba06bd48d9e890050c4c",
+          "base64": "PG1ldGFkYXRhPjxncm91cElkPmF0bGFzLnN5bnRoZXRpYzwvZ3JvdXBJZD48YXJ0aWZhY3RJZD5hZGRvbjwvYXJ0aWZhY3RJZD48dmVyc2lvbmluZz48bGF0ZXN0PjEuMDwvbGF0ZXN0PjxyZWxlYXNlPjEuMDwvcmVsZWFzZT48dmVyc2lvbnM+PHZlcnNpb24+MS4wPC92ZXJzaW9uPjwvdmVyc2lvbnM+PGxhc3RVcGRhdGVkPjIwMjYxMTExMDAwMDAwPC9sYXN0VXBkYXRlZD48L3ZlcnNpb25pbmc+PC9tZXRhZGF0YT4K"
+        },
+        {
+          "path": "atlas/synthetic/core/1.0/core-1.0.jar",
+          "bytes": 166,
+          "sha256": "f5d496cf77425dd163303e0ea6d718baa133d6443816ee0539a50d254026593e",
+          "base64": "UEsDBBQAAAAAAAAAIVBDcI3dHAAAABwAAAAUAAAAb3JpZ2luYWwtZml4dHVyZS50eHRvcmlnaW5hbCBzeW50aGV0aWMgY29yZSAxLjAKUEsBAhQDFAAAAAAAAAAhUENwjd0cAAAAHAAAABQAAAAAAAAAAAAAAKSBAAAAAG9yaWdpbmFsLWZpeHR1cmUudHh0UEsFBgAAAAABAAEAQgAAAE4AAAAAAA=="
+        },
+        {
+          "path": "atlas/synthetic/core/1.0/core-1.0.pom",
+          "bytes": 139,
+          "sha256": "066bd0cd95f9e2de0bc07f89f4d7df626b9eab5a0e85811c307fa5c4d0295973",
+          "base64": "PHByb2plY3Q+PG1vZGVsVmVyc2lvbj40LjAuMDwvbW9kZWxWZXJzaW9uPjxncm91cElkPmF0bGFzLnN5bnRoZXRpYzwvZ3JvdXBJZD48YXJ0aWZhY3RJZD5jb3JlPC9hcnRpZmFjdElkPjx2ZXJzaW9uPjEuMDwvdmVyc2lvbj48L3Byb2plY3Q+Cg=="
+        },
+        {
+          "path": "atlas/synthetic/core/1.1/core-1.1.jar",
+          "bytes": 175,
+          "sha256": "d1037bef7ddcb7b95c2dd27809682f7e5f11fb3d58f944c4b84d499fcc1ec845",
+          "base64": "UEsDBBQAAAAAAAAAIVCT7earJQAAACUAAAAUAAAAb3JpZ2luYWwtZml4dHVyZS50eHRvcmlnaW5hbCBzeW50aGV0aWMgY29yZSAxLjEKbXV0YXRpb24KUEsBAhQDFAAAAAAAAAAhUJPt5qslAAAAJQAAABQAAAAAAAAAAAAAAKSBAAAAAG9yaWdpbmFsLWZpeHR1cmUudHh0UEsFBgAAAAABAAEAQgAAAFcAAAAAAA=="
+        },
+        {
+          "path": "atlas/synthetic/core/1.1/core-1.1.pom",
+          "bytes": 139,
+          "sha256": "31b251049089a75b0c9bc395ca47c219e143473227eff0bf40da6336cb84cec7",
+          "base64": "PHByb2plY3Q+PG1vZGVsVmVyc2lvbj40LjAuMDwvbW9kZWxWZXJzaW9uPjxncm91cElkPmF0bGFzLnN5bnRoZXRpYzwvZ3JvdXBJZD48YXJ0aWZhY3RJZD5jb3JlPC9hcnRpZmFjdElkPjx2ZXJzaW9uPjEuMTwvdmVyc2lvbj48L3Byb2plY3Q+Cg=="
+        },
+        {
+          "path": "atlas/synthetic/core/2.0/core-2.0.jar",
+          "bytes": 166,
+          "sha256": "fd277fe2fa243a8caeb9d7bcfad7cde83166c825d7ce45e36d92542a1cfb2925",
+          "base64": "UEsDBBQAAAAAAAAAIVCt3zjPHAAAABwAAAAUAAAAb3JpZ2luYWwtZml4dHVyZS50eHRvcmlnaW5hbCBzeW50aGV0aWMgY29yZSAyLjAKUEsBAhQDFAAAAAAAAAAhUK3fOM8cAAAAHAAAABQAAAAAAAAAAAAAAKSBAAAAAG9yaWdpbmFsLWZpeHR1cmUudHh0UEsFBgAAAAABAAEAQgAAAE4AAAAAAA=="
+        },
+        {
+          "path": "atlas/synthetic/core/2.0/core-2.0.pom",
+          "bytes": 139,
+          "sha256": "5aec571182961b81636542e6deb4cf6ce0a3e1a1d8638e6ad309cc9108debfb1",
+          "base64": "PHByb2plY3Q+PG1vZGVsVmVyc2lvbj40LjAuMDwvbW9kZWxWZXJzaW9uPjxncm91cElkPmF0bGFzLnN5bnRoZXRpYzwvZ3JvdXBJZD48YXJ0aWZhY3RJZD5jb3JlPC9hcnRpZmFjdElkPjx2ZXJzaW9uPjIuMDwvdmVyc2lvbj48L3Byb2plY3Q+Cg=="
+        },
+        {
+          "path": "atlas/synthetic/core/maven-metadata.xml",
+          "bytes": 280,
+          "sha256": "6080081089f98ff2610b953efc7480359e1daa062814eaa86f80ed4633de8eed",
+          "base64": "PG1ldGFkYXRhPjxncm91cElkPmF0bGFzLnN5bnRoZXRpYzwvZ3JvdXBJZD48YXJ0aWZhY3RJZD5jb3JlPC9hcnRpZmFjdElkPjx2ZXJzaW9uaW5nPjxsYXRlc3Q+Mi4wPC9sYXRlc3Q+PHJlbGVhc2U+Mi4wPC9yZWxlYXNlPjx2ZXJzaW9ucz48dmVyc2lvbj4xLjA8L3ZlcnNpb24+PHZlcnNpb24+MS4xPC92ZXJzaW9uPjx2ZXJzaW9uPjIuMDwvdmVyc2lvbj48L3ZlcnNpb25zPjxsYXN0VXBkYXRlZD4yMDI2MTExMTAwMDAwMDwvbGFzdFVwZGF0ZWQ+PC92ZXJzaW9uaW5nPjwvbWV0YWRhdGE+Cg=="
+        }
+      ],
+      "graph": {
+        "components": [
+          {
+            "id": "atlas.synthetic:core:1.1",
+            "reasons": [
+              {
+                "cause": "CONSTRAINT",
+                "description": "Dependency version enforced by Dependency Locking"
+              },
+              {
+                "cause": "REQUESTED",
+                "description": "requested"
+              }
+            ]
+          },
+          {
+            "id": "root project :",
+            "reasons": [
+              {
+                "cause": "ROOT",
+                "description": "root"
+              }
+            ]
+          }
+        ],
+        "edges": [
+          {
+            "from": "root project :",
+            "requested": "atlas.synthetic:core:1.+",
+            "constraint": false,
+            "resolved": true,
+            "selected": "atlas.synthetic:core:1.1"
+          },
+          {
+            "from": "root project :",
+            "requested": "atlas.synthetic:core:{strictly 1.1}",
+            "constraint": true,
+            "resolved": true,
+            "selected": "atlas.synthetic:core:1.1"
+          }
+        ]
+      },
+      "observation": null,
+      "lock": "# This is a Gradle generated file for dependency locking.\n# Manual edits can break the build and are not advised.\n# This file is expected to be part of source control.\natlas.synthetic:core:1.1=atlas\nempty=\n",
+      "verification": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<verification-metadata xmlns=\"https://schema.gradle.org/dependency-verification\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"https://schema.gradle.org/dependency-verification https://schema.gradle.org/dependency-verification/dependency-verification-1.3.xsd\">\n   <configuration>\n      <verify-metadata>true</verify-metadata>\n      <verify-signatures>false</verify-signatures>\n   </configuration>\n   <components>\n      <component group=\"atlas.synthetic\" name=\"core\" version=\"1.1\">\n         <artifact name=\"core-1.1.jar\">\n            <sha256 value=\"ba0cc6e4210adfb4076c8ee96b4722f4af3ef10006ac5214383c0bd98da831cc\" origin=\"Generated by Gradle\"/>\n         </artifact>\n         <artifact name=\"core-1.1.pom\">\n            <sha256 value=\"31b251049089a75b0c9bc395ca47c219e143473227eff0bf40da6336cb84cec7\" origin=\"Generated by Gradle\"/>\n         </artifact>\n      </component>\n   </components>\n</verification-metadata>\n"
+    },
+    {
+      "id": "verified_changed_pom",
+      "command": [
+        "gradle",
+        "--offline",
+        "--no-daemon",
+        "--console=plain",
+        "--max-workers=1",
+        "--no-build-cache",
+        "--no-configuration-cache",
+        "--rerun-tasks",
+        "-Duser.timezone=UTC",
+        "-Porg.gradle.dependency.verification.console=verbose",
+        "-Pmode=locked",
+        "observe"
+      ],
+      "returncode": 1,
+      "stdout": "\nWelcome to Gradle 9.2.1!\n\nHere are the highlights of this release:\n - Windows ARM support\n - Improved publishing APIs\n - Better guidance for dependency verification failures\n\nFor more details see https://docs.gradle.org/9.2.1/release-notes.html\n\nTo honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.2.1/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.\nDaemon will be stopped at the end of the build \n> Task :observe FAILED\n1 actionable task: 1 executed\n",
+      "stderr": "\nFAILURE: Build failed with an exception.\n\n* Where:\nBuild file '<run>/build.gradle' line: 58\n\n* What went wrong:\nExecution failed for task ':observe'.\n> Dependency verification failed for configuration ':atlas':\n    - On artifact core-1.1.pom (atlas.synthetic:core:1.1) in repository 'maven': expected a 'sha256' checksum of '31b251049089a75b0c9bc395ca47c219e143473227eff0bf40da6336cb84cec7' but was 'f4e8f67c56ce6045fbcbc3e99d56cbcacebab082deb4c384211e9c5031ada553'\n  \n  This can indicate that a dependency has been compromised. Please carefully verify the checksums.\n  \n  These files failed verification:\n    - GRADLE_USER_HOME/../repo/atlas/synthetic/core/1.1/core-1.1.pom\n  \n  GRADLE_USER_HOME = <run>/home\n  \n  These files failed verification:\n    - GRADLE_USER_HOME/../repo/atlas/synthetic/core/1.1/core-1.1.pom\n  \n  GRADLE_USER_HOME = <run>/home\n  \n  Open this report for more details: file://<run>/build/reports/dependency-verification/at-1794367505526/dependency-verification-report.html\n\n* Try:\n> Run with --stacktrace option to get the stack trace.\n> Run with --info or --debug option to get more log output.\n> Run with --scan to generate a Build Scan (powered by Develocity).\n> Get more help at https://help.gradle.org.\n\nBUILD FAILED in 5s\n",
+      "repository": [
+        {
+          "path": "atlas/synthetic/addon/1.0/addon-1.0.jar",
+          "bytes": 167,
+          "sha256": "b3438930ecb6335432080d0089b228e16f1744714753d8a2353a089f24e0ee41",
+          "base64": "UEsDBBQAAAAAAAAAIVAvcGIWHQAAAB0AAAAUAAAAb3JpZ2luYWwtZml4dHVyZS50eHRvcmlnaW5hbCBzeW50aGV0aWMgYWRkb24gMS4wClBLAQIUAxQAAAAAAAAAIVAvcGIWHQAAAB0AAAAUAAAAAAAAAAAAAACkgQAAAABvcmlnaW5hbC1maXh0dXJlLnR4dFBLBQYAAAAAAQABAEIAAABPAAAAAAA="
+        },
+        {
+          "path": "atlas/synthetic/addon/1.0/addon-1.0.pom",
+          "bytes": 279,
+          "sha256": "5f11223a73854b4c987d5618be19c1d9668f095ee16a01de99430e8d49b77939",
+          "base64": "PHByb2plY3Q+PG1vZGVsVmVyc2lvbj40LjAuMDwvbW9kZWxWZXJzaW9uPjxncm91cElkPmF0bGFzLnN5bnRoZXRpYzwvZ3JvdXBJZD48YXJ0aWZhY3RJZD5hZGRvbjwvYXJ0aWZhY3RJZD48dmVyc2lvbj4xLjA8L3ZlcnNpb24+PGRlcGVuZGVuY2llcz48ZGVwZW5kZW5jeT48Z3JvdXBJZD5hdGxhcy5zeW50aGV0aWM8L2dyb3VwSWQ+PGFydGlmYWN0SWQ+Y29yZTwvYXJ0aWZhY3RJZD48dmVyc2lvbj4yLjA8L3ZlcnNpb24+PC9kZXBlbmRlbmN5PjwvZGVwZW5kZW5jaWVzPjwvcHJvamVjdD4K"
+        },
+        {
+          "path": "atlas/synthetic/addon/maven-metadata.xml",
+          "bytes": 237,
+          "sha256": "c4d944711412e0d1c7ec9f7e3d6bcdf795463c10b6d9ba06bd48d9e890050c4c",
+          "base64": "PG1ldGFkYXRhPjxncm91cElkPmF0bGFzLnN5bnRoZXRpYzwvZ3JvdXBJZD48YXJ0aWZhY3RJZD5hZGRvbjwvYXJ0aWZhY3RJZD48dmVyc2lvbmluZz48bGF0ZXN0PjEuMDwvbGF0ZXN0PjxyZWxlYXNlPjEuMDwvcmVsZWFzZT48dmVyc2lvbnM+PHZlcnNpb24+MS4wPC92ZXJzaW9uPjwvdmVyc2lvbnM+PGxhc3RVcGRhdGVkPjIwMjYxMTExMDAwMDAwPC9sYXN0VXBkYXRlZD48L3ZlcnNpb25pbmc+PC9tZXRhZGF0YT4K"
+        },
+        {
+          "path": "atlas/synthetic/core/1.0/core-1.0.jar",
+          "bytes": 166,
+          "sha256": "f5d496cf77425dd163303e0ea6d718baa133d6443816ee0539a50d254026593e",
+          "base64": "UEsDBBQAAAAAAAAAIVBDcI3dHAAAABwAAAAUAAAAb3JpZ2luYWwtZml4dHVyZS50eHRvcmlnaW5hbCBzeW50aGV0aWMgY29yZSAxLjAKUEsBAhQDFAAAAAAAAAAhUENwjd0cAAAAHAAAABQAAAAAAAAAAAAAAKSBAAAAAG9yaWdpbmFsLWZpeHR1cmUudHh0UEsFBgAAAAABAAEAQgAAAE4AAAAAAA=="
+        },
+        {
+          "path": "atlas/synthetic/core/1.0/core-1.0.pom",
+          "bytes": 139,
+          "sha256": "066bd0cd95f9e2de0bc07f89f4d7df626b9eab5a0e85811c307fa5c4d0295973",
+          "base64": "PHByb2plY3Q+PG1vZGVsVmVyc2lvbj40LjAuMDwvbW9kZWxWZXJzaW9uPjxncm91cElkPmF0bGFzLnN5bnRoZXRpYzwvZ3JvdXBJZD48YXJ0aWZhY3RJZD5jb3JlPC9hcnRpZmFjdElkPjx2ZXJzaW9uPjEuMDwvdmVyc2lvbj48L3Byb2plY3Q+Cg=="
+        },
+        {
+          "path": "atlas/synthetic/core/1.1/core-1.1.jar",
+          "bytes": 166,
+          "sha256": "ba0cc6e4210adfb4076c8ee96b4722f4af3ef10006ac5214383c0bd98da831cc",
+          "base64": "UEsDBBQAAAAAAAAAIVACQZbEHAAAABwAAAAUAAAAb3JpZ2luYWwtZml4dHVyZS50eHRvcmlnaW5hbCBzeW50aGV0aWMgY29yZSAxLjEKUEsBAhQDFAAAAAAAAAAhUAJBlsQcAAAAHAAAABQAAAAAAAAAAAAAAKSBAAAAAG9yaWdpbmFsLWZpeHR1cmUudHh0UEsFBgAAAAABAAEAQgAAAE4AAAAAAA=="
+        },
+        {
+          "path": "atlas/synthetic/core/1.1/core-1.1.pom",
+          "bytes": 182,
+          "sha256": "f4e8f67c56ce6045fbcbc3e99d56cbcacebab082deb4c384211e9c5031ada553",
+          "base64": "PHByb2plY3Q+PG1vZGVsVmVyc2lvbj40LjAuMDwvbW9kZWxWZXJzaW9uPjxncm91cElkPmF0bGFzLnN5bnRoZXRpYzwvZ3JvdXBJZD48YXJ0aWZhY3RJZD5jb3JlPC9hcnRpZmFjdElkPjx2ZXJzaW9uPjEuMTwvdmVyc2lvbj48ZGVzY3JpcHRpb24+bXV0YXRlZCBtZXRhZGF0YTwvZGVzY3JpcHRpb24+PC9wcm9qZWN0Pgo="
+        },
+        {
+          "path": "atlas/synthetic/core/2.0/core-2.0.jar",
+          "bytes": 166,
+          "sha256": "fd277fe2fa243a8caeb9d7bcfad7cde83166c825d7ce45e36d92542a1cfb2925",
+          "base64": "UEsDBBQAAAAAAAAAIVCt3zjPHAAAABwAAAAUAAAAb3JpZ2luYWwtZml4dHVyZS50eHRvcmlnaW5hbCBzeW50aGV0aWMgY29yZSAyLjAKUEsBAhQDFAAAAAAAAAAhUK3fOM8cAAAAHAAAABQAAAAAAAAAAAAAAKSBAAAAAG9yaWdpbmFsLWZpeHR1cmUudHh0UEsFBgAAAAABAAEAQgAAAE4AAAAAAA=="
+        },
+        {
+          "path": "atlas/synthetic/core/2.0/core-2.0.pom",
+          "bytes": 139,
+          "sha256": "5aec571182961b81636542e6deb4cf6ce0a3e1a1d8638e6ad309cc9108debfb1",
+          "base64": "PHByb2plY3Q+PG1vZGVsVmVyc2lvbj40LjAuMDwvbW9kZWxWZXJzaW9uPjxncm91cElkPmF0bGFzLnN5bnRoZXRpYzwvZ3JvdXBJZD48YXJ0aWZhY3RJZD5jb3JlPC9hcnRpZmFjdElkPjx2ZXJzaW9uPjIuMDwvdmVyc2lvbj48L3Byb2plY3Q+Cg=="
+        },
+        {
+          "path": "atlas/synthetic/core/maven-metadata.xml",
+          "bytes": 280,
+          "sha256": "6080081089f98ff2610b953efc7480359e1daa062814eaa86f80ed4633de8eed",
+          "base64": "PG1ldGFkYXRhPjxncm91cElkPmF0bGFzLnN5bnRoZXRpYzwvZ3JvdXBJZD48YXJ0aWZhY3RJZD5jb3JlPC9hcnRpZmFjdElkPjx2ZXJzaW9uaW5nPjxsYXRlc3Q+Mi4wPC9sYXRlc3Q+PHJlbGVhc2U+Mi4wPC9yZWxlYXNlPjx2ZXJzaW9ucz48dmVyc2lvbj4xLjA8L3ZlcnNpb24+PHZlcnNpb24+MS4xPC92ZXJzaW9uPjx2ZXJzaW9uPjIuMDwvdmVyc2lvbj48L3ZlcnNpb25zPjxsYXN0VXBkYXRlZD4yMDI2MTExMTAwMDAwMDwvbGFzdFVwZGF0ZWQ+PC92ZXJzaW9uaW5nPjwvbWV0YWRhdGE+Cg=="
+        }
+      ],
+      "graph": {
+        "components": [
+          {
+            "id": "atlas.synthetic:core:1.1",
+            "reasons": [
+              {
+                "cause": "CONSTRAINT",
+                "description": "Dependency version enforced by Dependency Locking"
+              },
+              {
+                "cause": "REQUESTED",
+                "description": "requested"
+              }
+            ]
+          },
+          {
+            "id": "root project :",
+            "reasons": [
+              {
+                "cause": "ROOT",
+                "description": "root"
+              }
+            ]
+          }
+        ],
+        "edges": [
+          {
+            "from": "root project :",
+            "requested": "atlas.synthetic:core:1.+",
+            "constraint": false,
+            "resolved": true,
+            "selected": "atlas.synthetic:core:1.1"
+          },
+          {
+            "from": "root project :",
+            "requested": "atlas.synthetic:core:{strictly 1.1}",
+            "constraint": true,
+            "resolved": true,
+            "selected": "atlas.synthetic:core:1.1"
+          }
+        ]
+      },
+      "observation": null,
+      "lock": "# This is a Gradle generated file for dependency locking.\n# Manual edits can break the build and are not advised.\n# This file is expected to be part of source control.\natlas.synthetic:core:1.1=atlas\nempty=\n",
+      "verification": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<verification-metadata xmlns=\"https://schema.gradle.org/dependency-verification\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"https://schema.gradle.org/dependency-verification https://schema.gradle.org/dependency-verification/dependency-verification-1.3.xsd\">\n   <configuration>\n      <verify-metadata>true</verify-metadata>\n      <verify-signatures>false</verify-signatures>\n   </configuration>\n   <components>\n      <component group=\"atlas.synthetic\" name=\"core\" version=\"1.1\">\n         <artifact name=\"core-1.1.jar\">\n            <sha256 value=\"ba0cc6e4210adfb4076c8ee96b4722f4af3ef10006ac5214383c0bd98da831cc\" origin=\"Generated by Gradle\"/>\n         </artifact>\n         <artifact name=\"core-1.1.pom\">\n            <sha256 value=\"31b251049089a75b0c9bc395ca47c219e143473227eff0bf40da6336cb84cec7\" origin=\"Generated by Gradle\"/>\n         </artifact>\n      </component>\n   </components>\n</verification-metadata>\n"
+    }
+  ],
+  "observations": [
+    {
+      "id": "default_conflict",
+      "success": true,
+      "selected_modules": [
+        "atlas.synthetic:addon:1.0",
+        "atlas.synthetic:core:2.0"
+      ],
+      "artifact_hashes": {
+        "atlas.synthetic:addon:1.0": "b3438930ecb6335432080d0089b228e16f1744714753d8a2353a089f24e0ee41",
+        "atlas.synthetic:core:2.0": "fd277fe2fa243a8caeb9d7bcfad7cde83166c825d7ce45e36d92542a1cfb2925"
+      },
+      "checks": {
+        "graph_topology": true,
+        "exit": true,
+        "selected_modules": true,
+        "reason": true,
+        "diagnostic": true
+      },
+      "matches_expected": true
+    },
+    {
+      "id": "strict_transitive",
+      "success": true,
+      "selected_modules": [
+        "atlas.synthetic:addon:1.0",
+        "atlas.synthetic:core:1.0"
+      ],
+      "artifact_hashes": {
+        "atlas.synthetic:addon:1.0": "b3438930ecb6335432080d0089b228e16f1744714753d8a2353a089f24e0ee41",
+        "atlas.synthetic:core:1.0": "f5d496cf77425dd163303e0ea6d718baa133d6443816ee0539a50d254026593e"
+      },
+      "checks": {
+        "graph_topology": true,
+        "exit": true,
+        "selected_modules": true,
+        "reason": true,
+        "diagnostic": true
+      },
+      "matches_expected": true
+    },
+    {
+      "id": "incompatible_stricts",
+      "success": false,
+      "selected_modules": [],
+      "artifact_hashes": {},
+      "checks": {
+        "graph_topology": true,
+        "exit": true,
+        "selected_modules": true,
+        "reason": true,
+        "diagnostic": true
+      },
+      "matches_expected": true
+    },
+    {
+      "id": "forced_downgrade",
+      "success": true,
+      "selected_modules": [
+        "atlas.synthetic:addon:1.0",
+        "atlas.synthetic:core:1.0"
+      ],
+      "artifact_hashes": {
+        "atlas.synthetic:addon:1.0": "b3438930ecb6335432080d0089b228e16f1744714753d8a2353a089f24e0ee41",
+        "atlas.synthetic:core:1.0": "f5d496cf77425dd163303e0ea6d718baa133d6443816ee0539a50d254026593e"
+      },
+      "checks": {
+        "graph_topology": true,
+        "exit": true,
+        "selected_modules": true,
+        "reason": true,
+        "diagnostic": true
+      },
+      "matches_expected": true
+    },
+    {
+      "id": "unused_constraint",
+      "success": true,
+      "selected_modules": [
+        "atlas.synthetic:core:1.0"
+      ],
+      "artifact_hashes": {
+        "atlas.synthetic:core:1.0": "f5d496cf77425dd163303e0ea6d718baa133d6443816ee0539a50d254026593e"
+      },
+      "checks": {
+        "graph_topology": true,
+        "exit": true,
+        "selected_modules": true,
+        "reason": true,
+        "diagnostic": true
+      },
+      "matches_expected": true
+    },
+    {
+      "id": "write_lock",
+      "success": true,
+      "selected_modules": [
+        "atlas.synthetic:core:1.1"
+      ],
+      "artifact_hashes": {
+        "atlas.synthetic:core:1.1": "ba0cc6e4210adfb4076c8ee96b4722f4af3ef10006ac5214383c0bd98da831cc"
+      },
+      "checks": {
+        "graph_topology": true,
+        "exit": true,
+        "selected_modules": true,
+        "reason": true,
+        "diagnostic": true
+      },
+      "matches_expected": true
+    },
+    {
+      "id": "unlocked_added_version",
+      "success": true,
+      "selected_modules": [
+        "atlas.synthetic:core:1.2"
+      ],
+      "artifact_hashes": {
+        "atlas.synthetic:core:1.2": "b149e45ab9256687a076c443b3c50caf41983f7cd550e08becd6ebc61e770fec"
+      },
+      "checks": {
+        "graph_topology": true,
+        "exit": true,
+        "selected_modules": true,
+        "reason": true,
+        "diagnostic": true
+      },
+      "matches_expected": true
+    },
+    {
+      "id": "locked_added_version",
+      "success": true,
+      "selected_modules": [
+        "atlas.synthetic:core:1.1"
+      ],
+      "artifact_hashes": {
+        "atlas.synthetic:core:1.1": "ba0cc6e4210adfb4076c8ee96b4722f4af3ef10006ac5214383c0bd98da831cc"
+      },
+      "checks": {
+        "graph_topology": true,
+        "exit": true,
+        "selected_modules": true,
+        "reason": true,
+        "diagnostic": true
+      },
+      "matches_expected": true
+    },
+    {
+      "id": "locked_missing_version",
+      "success": false,
+      "selected_modules": [],
+      "artifact_hashes": {},
+      "checks": {
+        "graph_topology": true,
+        "exit": true,
+        "selected_modules": true,
+        "reason": true,
+        "diagnostic": true
+      },
+      "matches_expected": true
+    },
+    {
+      "id": "locked_changed_jar",
+      "success": true,
+      "selected_modules": [
+        "atlas.synthetic:core:1.1"
+      ],
+      "artifact_hashes": {
+        "atlas.synthetic:core:1.1": "d1037bef7ddcb7b95c2dd27809682f7e5f11fb3d58f944c4b84d499fcc1ec845"
+      },
+      "checks": {
+        "graph_topology": true,
+        "exit": true,
+        "selected_modules": true,
+        "reason": true,
+        "diagnostic": true
+      },
+      "matches_expected": true
+    },
+    {
+      "id": "write_verification",
+      "success": true,
+      "selected_modules": [
+        "atlas.synthetic:core:1.1"
+      ],
+      "artifact_hashes": {
+        "atlas.synthetic:core:1.1": "ba0cc6e4210adfb4076c8ee96b4722f4af3ef10006ac5214383c0bd98da831cc"
+      },
+      "checks": {
+        "graph_topology": true,
+        "exit": true,
+        "selected_modules": true,
+        "reason": true,
+        "diagnostic": true
+      },
+      "matches_expected": true
+    },
+    {
+      "id": "verified_original",
+      "success": true,
+      "selected_modules": [
+        "atlas.synthetic:core:1.1"
+      ],
+      "artifact_hashes": {
+        "atlas.synthetic:core:1.1": "ba0cc6e4210adfb4076c8ee96b4722f4af3ef10006ac5214383c0bd98da831cc"
+      },
+      "checks": {
+        "graph_topology": true,
+        "exit": true,
+        "selected_modules": true,
+        "reason": true,
+        "diagnostic": true
+      },
+      "matches_expected": true
+    },
+    {
+      "id": "legacy_changed_jar",
+      "success": true,
+      "selected_modules": [
+        "atlas.synthetic:core:1.1"
+      ],
+      "artifact_hashes": {
+        "atlas.synthetic:core:1.1": "d1037bef7ddcb7b95c2dd27809682f7e5f11fb3d58f944c4b84d499fcc1ec845"
+      },
+      "checks": {
+        "graph_topology": true,
+        "exit": true,
+        "selected_modules": true,
+        "reason": true,
+        "diagnostic": true
+      },
+      "matches_expected": true
+    },
+    {
+      "id": "verified_changed_jar",
+      "success": false,
+      "selected_modules": [],
+      "artifact_hashes": {},
+      "checks": {
+        "graph_topology": true,
+        "exit": true,
+        "selected_modules": true,
+        "reason": true,
+        "diagnostic": true,
+        "verification_failure": true
+      },
+      "matches_expected": true
+    },
+    {
+      "id": "verified_changed_pom",
+      "success": false,
+      "selected_modules": [],
+      "artifact_hashes": {},
+      "checks": {
+        "graph_topology": true,
+        "exit": true,
+        "selected_modules": true,
+        "reason": true,
+        "diagnostic": true,
+        "verification_failure": true
+      },
+      "matches_expected": true
+    }
+  ],
+  "all_expected": true
+}
