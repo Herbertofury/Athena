@@ -18,6 +18,23 @@ Athena combines learning pathways, original practical exercises and an evidence-
 
 Private Feature Foundry integration is outside this comparison document; no private source or migration is published by this addition.
 
+
+## Potential foundations and improvement opportunities
+
+| Foundation / reference | What specifically could be reused | What Athena should improve | Integration and proof required |
+|---|---|---|---|
+| Athena's existing lesson/catalog generator | One original content model for app, repository guides and wiki-ready pages | Prevent coverage, prerequisites and verification claims drifting between surfaces | Validate generated equality and run the complete learner journey; do not copy competitor course text into the generator. |
+| Microsoft Learn pathway design | Study module-sized outcomes and explicit progression as design references | Make practical prerequisites and evidence of skill clearer than a completion checkbox | Write original tasks. Compare task completion and misconception recovery with a fixed learner brief; credentials remain external. |
+| Odin project-based workflow | Study project-first sequencing, not wholesale curriculum reuse | Connect each lesson to a working artifact with reviewable acceptance criteria | Test build/debug/explain tasks independently, with permitted sources and no copied paid material. |
+| PortSwigger practical-lab model | Study explanation-to-exercise feedback and safe lab boundaries | Show why an answer fails and make practical limits explicit | Use authorized disposable systems only; browser-only practice must not claim equivalent real-system competence. |
+| Existing public Atlas integration | Existing source provenance and comparison receipts, not a second research database | Let a learner trace a technical choice to uncertainty and raw public evidence | Preserve module identity, offline availability, progress export and search. Private Foundry material is excluded. |
+
+**Licensing/compatibility:** competitor platforms are references, not automatically reusable content or code foundations. Check exact licenses and terms before any reuse; do not reproduce exam items, premium curricula, branding or protected assets. Local exercises must declare runtime versions and offline/external requirements.
+
+**Empirical gate:** establish current Athena baseline revision, representative learner tasks, keyboard/accessibility flows, progress round trips, complete page-load cost and memory. Evaluate original improvements without reducing learning scope or hiding unavailable labs. These are proposed comparisons, not evidence that Athena outperforms a specialist academy.
+
+**Decision log:** retain adopt/adapt/reference-only/reject/unresolved decisions with source, exact scope, reason and receipt. No architecture replacement or cross-project performance recommendation is made here.
+
 ## Review and evidence rules
 
 Review date: **2026-11-12**. This is a comparison agenda, not a benchmark result or proof of superiority. Official-source capability descriptions and our proposed experiments are separate. Pin actual versions and licenses before reuse; record publication date separately from the date checked. Retain failed comparisons and rejected candidates.
