@@ -22,6 +22,8 @@ A practical, evolving research library for desktop apps, web services, Minecraft
 
 ## Start here
 
+[App, mod and asset foundations](docs/app-mod-foundations.md) connects the November 11 recovery, query/search, UI/input, file/archive/process, dependency, bytecode, packaging, class-loading, asset-validation and texture-semantics research into practical routes. These component experiments preserve their evidence limits; target-project acceptance remains separate.
+
 [Experiment evidence directory](docs/experiment-evidence.md) organizes real-source tests, generated workloads, failures, repairs and remaining acceptance gates.
 
 | Need | Guide |

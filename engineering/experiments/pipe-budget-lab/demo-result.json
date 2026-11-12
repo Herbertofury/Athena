@@ -1,0 +1,524 @@
+{
+  "schema_version": 1,
+  "evidence": "measured_owned_fixed_child_processes",
+  "checked_at": "2026-11-11T02:24:57.891307+00:00",
+  "environment": {
+    "python": "3.12.14",
+    "os": "Linux",
+    "machine": "x86_64",
+    "selector": "EpollSelector"
+  },
+  "source_sha256": {
+    "pipe_runner.py": "9bc9153c717ab4263b558726a190e9bec76a26de0cd83e2cc1bd1e957fcf37cf",
+    "owned_helper.py": "ca7936406ad1b2c27f71906f9b1aefeda43b019f9882a49fe134893cd84dbfd6",
+    "run_demo.py": "90848aca56806af15fe8b0113dec7b4a19f145d5c85fc1a82bcc1c2603fa9a06"
+  },
+  "cases": [
+    {
+      "mode": "success",
+      "expected_reason": null,
+      "passed": true,
+      "result": {
+        "schema_version": 1,
+        "mode": "success",
+        "limits": {
+          "stdout_bytes": 4096,
+          "stderr_bytes": 4096,
+          "total_bytes": 8192,
+          "chunk_bytes": 1024,
+          "timeout_seconds": 2.0,
+          "terminate_seconds": 0.15,
+          "kill_seconds": 1.0
+        },
+        "status": "accepted",
+        "accepted": true,
+        "reason": null,
+        "controller_error": null,
+        "pid": 82,
+        "returncode": 0,
+        "direct_child_reaped": true,
+        "cleanup_actions": [],
+        "cleanup_errors": [],
+        "streams": {
+          "stdout": {
+            "eof": true,
+            "bytes_observed": 34,
+            "hex": "7b2276616c7565223a22636166c3a9222c22636f6d706c657465223a747275657d0a",
+            "sha256": "c3909f3287d730f2cc4aa0176cbe5382f038ac190b5d255c6b0fa52f6fe773ef"
+          },
+          "stderr": {
+            "eof": true,
+            "bytes_observed": 19,
+            "hex": "6669787475726520646961676e6f737469630a",
+            "sha256": "1a51da39484fad0b0b93e2df6b864cfae3879caf0b1a5db421b001f06bdb980d"
+          }
+        },
+        "total_bytes_observed": 53,
+        "max_read_chunk": 34,
+        "capture_complete": true,
+        "document": {
+          "value": "caf\u00e9",
+          "complete": true
+        },
+        "helper_sha256": "ca7936406ad1b2c27f71906f9b1aefeda43b019f9882a49fe134893cd84dbfd6",
+        "elapsed_seconds": 0.016809794993605465
+      }
+    },
+    {
+      "mode": "split_utf8",
+      "expected_reason": null,
+      "passed": true,
+      "result": {
+        "schema_version": 1,
+        "mode": "split_utf8",
+        "limits": {
+          "stdout_bytes": 4096,
+          "stderr_bytes": 4096,
+          "total_bytes": 8192,
+          "chunk_bytes": 1,
+          "timeout_seconds": 2.0,
+          "terminate_seconds": 0.15,
+          "kill_seconds": 1.0
+        },
+        "status": "accepted",
+        "accepted": true,
+        "reason": null,
+        "controller_error": null,
+        "pid": 83,
+        "returncode": 0,
+        "direct_child_reaped": true,
+        "cleanup_actions": [],
+        "cleanup_errors": [],
+        "streams": {
+          "stdout": {
+            "eof": true,
+            "bytes_observed": 34,
+            "hex": "7b2276616c7565223a22636166c3a9222c22636f6d706c657465223a747275657d0a",
+            "sha256": "c3909f3287d730f2cc4aa0176cbe5382f038ac190b5d255c6b0fa52f6fe773ef"
+          },
+          "stderr": {
+            "eof": true,
+            "bytes_observed": 0,
+            "hex": "",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        },
+        "total_bytes_observed": 34,
+        "max_read_chunk": 1,
+        "capture_complete": true,
+        "document": {
+          "value": "caf\u00e9",
+          "complete": true
+        },
+        "helper_sha256": "ca7936406ad1b2c27f71906f9b1aefeda43b019f9882a49fe134893cd84dbfd6",
+        "elapsed_seconds": 0.05378508096328005
+      }
+    },
+    {
+      "mode": "dual_pressure",
+      "expected_reason": "invalid_document",
+      "passed": true,
+      "result": {
+        "schema_version": 1,
+        "mode": "dual_pressure",
+        "limits": {
+          "stdout_bytes": 262144,
+          "stderr_bytes": 262144,
+          "total_bytes": 524288,
+          "chunk_bytes": 1024,
+          "timeout_seconds": 5,
+          "terminate_seconds": 0.15,
+          "kill_seconds": 1.0
+        },
+        "status": "failed",
+        "accepted": false,
+        "reason": "invalid_document",
+        "controller_error": null,
+        "pid": 84,
+        "returncode": 0,
+        "direct_child_reaped": true,
+        "cleanup_actions": [],
+        "cleanup_errors": [],
+        "streams": {
+          "stdout": {
+            "eof": true,
+            "bytes_observed": 262144,
+            "sha256": "4480ce8e19e155ff39079e3379eafd8f369c739e24931ddc684994c2cd12ca91",
+            "bytes_zlib_base64": "eJztwTEBAAAAwqCI69/G2w5AAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAC8ATUUEoU="
+          },
+          "stderr": {
+            "eof": true,
+            "bytes_observed": 262144,
+            "sha256": "caf546901c2a1966d4530a5a6d0323691f474ee2d6b44286799c440458c7b77f",
+            "bytes_zlib_base64": "eJztwTEBAAAAwqB061/J2w5AAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAC8Ae2JEC0="
+          }
+        },
+        "total_bytes_observed": 524288,
+        "max_read_chunk": 1024,
+        "capture_complete": true,
+        "document": null,
+        "helper_sha256": "ca7936406ad1b2c27f71906f9b1aefeda43b019f9882a49fe134893cd84dbfd6",
+        "elapsed_seconds": 0.0198025309946388
+      }
+    },
+    {
+      "mode": "stdout_flood",
+      "expected_reason": "stdout_budget",
+      "passed": true,
+      "result": {
+        "schema_version": 1,
+        "mode": "stdout_flood",
+        "limits": {
+          "stdout_bytes": 32,
+          "stderr_bytes": 4096,
+          "total_bytes": 8192,
+          "chunk_bytes": 7,
+          "timeout_seconds": 2.0,
+          "terminate_seconds": 0.15,
+          "kill_seconds": 1.0
+        },
+        "status": "failed",
+        "accepted": false,
+        "reason": "stdout_budget",
+        "controller_error": null,
+        "pid": 86,
+        "returncode": -15,
+        "direct_child_reaped": true,
+        "cleanup_actions": [
+          "terminate"
+        ],
+        "cleanup_errors": [],
+        "streams": {
+          "stdout": {
+            "eof": false,
+            "bytes_observed": 33,
+            "hex": "464646464646464646464646464646464646464646464646464646464646464646",
+            "sha256": "607cdff9f81262b3b918f9396d14729c1e097cec1d179de8c4e5256c17e86b59"
+          },
+          "stderr": {
+            "eof": false,
+            "bytes_observed": 0,
+            "hex": "",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        },
+        "total_bytes_observed": 33,
+        "max_read_chunk": 7,
+        "capture_complete": false,
+        "document": null,
+        "helper_sha256": "ca7936406ad1b2c27f71906f9b1aefeda43b019f9882a49fe134893cd84dbfd6",
+        "elapsed_seconds": 0.0169659880339168
+      }
+    },
+    {
+      "mode": "stderr_flood",
+      "expected_reason": "stderr_budget",
+      "passed": true,
+      "result": {
+        "schema_version": 1,
+        "mode": "stderr_flood",
+        "limits": {
+          "stdout_bytes": 4096,
+          "stderr_bytes": 32,
+          "total_bytes": 8192,
+          "chunk_bytes": 7,
+          "timeout_seconds": 2.0,
+          "terminate_seconds": 0.15,
+          "kill_seconds": 1.0
+        },
+        "status": "failed",
+        "accepted": false,
+        "reason": "stderr_budget",
+        "controller_error": null,
+        "pid": 87,
+        "returncode": -15,
+        "direct_child_reaped": true,
+        "cleanup_actions": [
+          "terminate"
+        ],
+        "cleanup_errors": [],
+        "streams": {
+          "stdout": {
+            "eof": false,
+            "bytes_observed": 0,
+            "hex": "",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "stderr": {
+            "eof": false,
+            "bytes_observed": 33,
+            "hex": "464646464646464646464646464646464646464646464646464646464646464646",
+            "sha256": "607cdff9f81262b3b918f9396d14729c1e097cec1d179de8c4e5256c17e86b59"
+          }
+        },
+        "total_bytes_observed": 33,
+        "max_read_chunk": 7,
+        "capture_complete": false,
+        "document": null,
+        "helper_sha256": "ca7936406ad1b2c27f71906f9b1aefeda43b019f9882a49fe134893cd84dbfd6",
+        "elapsed_seconds": 0.015117582981474698
+      }
+    },
+    {
+      "mode": "nonzero",
+      "expected_reason": "nonzero_exit",
+      "passed": true,
+      "result": {
+        "schema_version": 1,
+        "mode": "nonzero",
+        "limits": {
+          "stdout_bytes": 4096,
+          "stderr_bytes": 4096,
+          "total_bytes": 8192,
+          "chunk_bytes": 1024,
+          "timeout_seconds": 2.0,
+          "terminate_seconds": 0.15,
+          "kill_seconds": 1.0
+        },
+        "status": "failed",
+        "accepted": false,
+        "reason": "nonzero_exit",
+        "controller_error": null,
+        "pid": 88,
+        "returncode": 7,
+        "direct_child_reaped": true,
+        "cleanup_actions": [],
+        "cleanup_errors": [],
+        "streams": {
+          "stdout": {
+            "eof": true,
+            "bytes_observed": 34,
+            "hex": "7b2276616c7565223a22636166c3a9222c22636f6d706c657465223a747275657d0a",
+            "sha256": "c3909f3287d730f2cc4aa0176cbe5382f038ac190b5d255c6b0fa52f6fe773ef"
+          },
+          "stderr": {
+            "eof": true,
+            "bytes_observed": 14,
+            "hex": "6f776e6564206661696c7572650a",
+            "sha256": "9d9451d16c0d537f3b77cc0ff97611186c0e5603707e0861ca8ae9a36cc0770c"
+          }
+        },
+        "total_bytes_observed": 48,
+        "max_read_chunk": 34,
+        "capture_complete": true,
+        "document": null,
+        "helper_sha256": "ca7936406ad1b2c27f71906f9b1aefeda43b019f9882a49fe134893cd84dbfd6",
+        "elapsed_seconds": 0.015202801034320146
+      }
+    },
+    {
+      "mode": "duplicate_json",
+      "expected_reason": "invalid_document",
+      "passed": true,
+      "result": {
+        "schema_version": 1,
+        "mode": "duplicate_json",
+        "limits": {
+          "stdout_bytes": 4096,
+          "stderr_bytes": 4096,
+          "total_bytes": 8192,
+          "chunk_bytes": 1024,
+          "timeout_seconds": 2.0,
+          "terminate_seconds": 0.15,
+          "kill_seconds": 1.0
+        },
+        "status": "failed",
+        "accepted": false,
+        "reason": "invalid_document",
+        "controller_error": null,
+        "pid": 89,
+        "returncode": 0,
+        "direct_child_reaped": true,
+        "cleanup_actions": [],
+        "cleanup_errors": [],
+        "streams": {
+          "stdout": {
+            "eof": true,
+            "bytes_observed": 51,
+            "hex": "7b2276616c7565223a226669727374222c2276616c7565223a227365636f6e64222c22636f6d706c657465223a747275657d0a",
+            "sha256": "84a1b68e2f469058d901040c8e8dd713ddfa84d1ca40d8d54b9e8caa99dd6768"
+          },
+          "stderr": {
+            "eof": true,
+            "bytes_observed": 0,
+            "hex": "",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        },
+        "total_bytes_observed": 51,
+        "max_read_chunk": 51,
+        "capture_complete": true,
+        "document": null,
+        "helper_sha256": "ca7936406ad1b2c27f71906f9b1aefeda43b019f9882a49fe134893cd84dbfd6",
+        "elapsed_seconds": 0.016704606998246163
+      }
+    },
+    {
+      "mode": "eof_then_hang",
+      "expected_reason": "deadline",
+      "passed": true,
+      "result": {
+        "schema_version": 1,
+        "mode": "eof_then_hang",
+        "limits": {
+          "stdout_bytes": 4096,
+          "stderr_bytes": 4096,
+          "total_bytes": 8192,
+          "chunk_bytes": 1024,
+          "timeout_seconds": 0.5,
+          "terminate_seconds": 0.15,
+          "kill_seconds": 1.0
+        },
+        "status": "failed",
+        "accepted": false,
+        "reason": "deadline",
+        "controller_error": null,
+        "pid": 90,
+        "returncode": -15,
+        "direct_child_reaped": true,
+        "cleanup_actions": [
+          "terminate"
+        ],
+        "cleanup_errors": [],
+        "streams": {
+          "stdout": {
+            "eof": true,
+            "bytes_observed": 0,
+            "hex": "",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "stderr": {
+            "eof": true,
+            "bytes_observed": 6,
+            "hex": "72656164790a",
+            "sha256": "ed1a545bb85e55816bbf9566b028b2a0bc456b88f49f6f266c0401048824194b"
+          }
+        },
+        "total_bytes_observed": 6,
+        "max_read_chunk": 6,
+        "capture_complete": true,
+        "document": null,
+        "helper_sha256": "ca7936406ad1b2c27f71906f9b1aefeda43b019f9882a49fe134893cd84dbfd6",
+        "elapsed_seconds": 0.5018592389533296
+      }
+    },
+    {
+      "mode": "success_then_hang",
+      "expected_reason": "deadline",
+      "passed": true,
+      "result": {
+        "schema_version": 1,
+        "mode": "success_then_hang",
+        "limits": {
+          "stdout_bytes": 4096,
+          "stderr_bytes": 4096,
+          "total_bytes": 8192,
+          "chunk_bytes": 1024,
+          "timeout_seconds": 0.5,
+          "terminate_seconds": 0.15,
+          "kill_seconds": 1.0
+        },
+        "status": "failed",
+        "accepted": false,
+        "reason": "deadline",
+        "controller_error": null,
+        "pid": 91,
+        "returncode": -15,
+        "direct_child_reaped": true,
+        "cleanup_actions": [
+          "terminate"
+        ],
+        "cleanup_errors": [],
+        "streams": {
+          "stdout": {
+            "eof": false,
+            "bytes_observed": 34,
+            "hex": "7b2276616c7565223a22636166c3a9222c22636f6d706c657465223a747275657d0a",
+            "sha256": "c3909f3287d730f2cc4aa0176cbe5382f038ac190b5d255c6b0fa52f6fe773ef"
+          },
+          "stderr": {
+            "eof": false,
+            "bytes_observed": 6,
+            "hex": "72656164790a",
+            "sha256": "ed1a545bb85e55816bbf9566b028b2a0bc456b88f49f6f266c0401048824194b"
+          }
+        },
+        "total_bytes_observed": 40,
+        "max_read_chunk": 34,
+        "capture_complete": false,
+        "document": null,
+        "helper_sha256": "ca7936406ad1b2c27f71906f9b1aefeda43b019f9882a49fe134893cd84dbfd6",
+        "elapsed_seconds": 0.5021331190364435
+      }
+    },
+    {
+      "mode": "ignore_term",
+      "expected_reason": "cancelled",
+      "passed": true,
+      "result": {
+        "schema_version": 1,
+        "mode": "ignore_term",
+        "limits": {
+          "stdout_bytes": 4096,
+          "stderr_bytes": 4096,
+          "total_bytes": 8192,
+          "chunk_bytes": 1024,
+          "timeout_seconds": 2.0,
+          "terminate_seconds": 0.05,
+          "kill_seconds": 1.0
+        },
+        "status": "failed",
+        "accepted": false,
+        "reason": "cancelled",
+        "controller_error": null,
+        "pid": 92,
+        "returncode": -9,
+        "direct_child_reaped": true,
+        "cleanup_actions": [
+          "terminate",
+          "kill"
+        ],
+        "cleanup_errors": [],
+        "streams": {
+          "stdout": {
+            "eof": false,
+            "bytes_observed": 0,
+            "hex": "",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "stderr": {
+            "eof": false,
+            "bytes_observed": 6,
+            "hex": "72656164790a",
+            "sha256": "ed1a545bb85e55816bbf9566b028b2a0bc456b88f49f6f266c0401048824194b"
+          }
+        },
+        "total_bytes_observed": 6,
+        "max_read_chunk": 6,
+        "capture_complete": false,
+        "document": null,
+        "helper_sha256": "ca7936406ad1b2c27f71906f9b1aefeda43b019f9882a49fe134893cd84dbfd6",
+        "elapsed_seconds": 0.06809069798327982
+      }
+    }
+  ],
+  "passed": true,
+  "not_established": [
+    "subprocess tree cleanup",
+    "security sandbox",
+    "child CPU/RSS or filesystem quota",
+    "hard real-time deadline",
+    "Windows/macOS execution",
+    "target adoption or performance improvement"
+  ],
+  "post_capture_control": {
+    "mode": "post_capture_size_check",
+    "returncode": 0,
+    "intended_stdout_budget": 32,
+    "bytes_captured_before_check": 1048576,
+    "exceeded_budget": true,
+    "stdout_sha256": "cb6f0d17c72c68cb346435a9334ff613ae00008704f82599fe8e90d230598ef1",
+    "stdout_zlib_base64": "eJztwTEBAAAAwqB26x/JEL5AAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB8BuaCQaE=",
+    "stderr_hex": ""
+  }
+}

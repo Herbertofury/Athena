@@ -1,0 +1,195 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-11-11",
+  "sourceBaseCommit": "7cbeb2c993a2bb53d8f914c4880ff2f6aeaea15d",
+  "classification": "actual public metadata captures; offline replay",
+  "python": "3.12.14",
+  "sourceIds": [
+    "CMR11001",
+    "CMR11002",
+    "CMR11003",
+    "CMR11004",
+    "CMR11005",
+    "CMR11006"
+  ],
+  "implementationSha256": {
+    "revisions.py": "e6f23b3c5e45fcbbeb5d4c95c8c47989b615f85046a56ac40612eebb5c72f9cd",
+    "receipt_gate.py": "585664716c71be16f7f797b4bdf15c7d6ff8b5524ca508ae03ab3500f2d56e60"
+  },
+  "captureCount": 4,
+  "distinctUploadEvents": 2,
+  "distinctDeclaredContentHashes": 1,
+  "capturedAt": [
+    "2026-11-11T05:57:54.629223+00:00",
+    "2026-11-11T05:57:59.352479+00:00",
+    "2026-11-11T05:58:02.690017+00:00",
+    "2026-11-11T05:58:05.890525+00:00"
+  ],
+  "cases": [
+    {
+      "label": "broad-history",
+      "receipt": {
+        "provider": "Wikimedia Commons",
+        "scopeSha256": "8b383d00524084c771bd32fd00f3431012a58624ed2e9afb064455c1e2b33d9d",
+        "accessLabel": "public",
+        "attempts": [
+          {
+            "status": 200,
+            "inputBytes": 654,
+            "inputSha256": "6c7cdf3e8b6f83b7826e1f7e3ae5528900ba423e10f8748521bc79570724a23a",
+            "outcome": "success",
+            "errors": [],
+            "revisionKeys": [
+              "50f773c78b21a3a1646690c7eff62e0a9e64eddbc5967d16b28687e80ea14f66"
+            ],
+            "requestSha256": "8b383d00524084c771bd32fd00f3431012a58624ed2e9afb064455c1e2b33d9d",
+            "continuationPresent": true
+          },
+          {
+            "status": 200,
+            "inputBytes": 684,
+            "inputSha256": "777838e1c2293b3f03c24e79ae9b59c7fab7be373a91523aabedd117ca7cf2ac",
+            "outcome": "success",
+            "errors": [],
+            "revisionKeys": [
+              "fe4ae2fe13c66cccecc0e8bf1cab6a3b570dcf1e0719506636bb982b245e7daa"
+            ],
+            "requestSha256": "b477f6b417e782402b3aed613bb9537d9dca90da9110589eba2981cbe629db32",
+            "continuationPresent": true
+          }
+        ],
+        "orderedRevisionKeys": [
+          "50f773c78b21a3a1646690c7eff62e0a9e64eddbc5967d16b28687e80ea14f66",
+          "fe4ae2fe13c66cccecc0e8bf1cab6a3b570dcf1e0719506636bb982b245e7daa"
+        ],
+        "warnings": [
+          "missing_chain_response"
+        ],
+        "scopeExhausted": false,
+        "snapshotConsistency": "unproven",
+        "completeHistory": false,
+        "fullSupportAccepted": false,
+        "transfer": "not_attempted",
+        "decode": "not_attempted",
+        "playback": "not_attempted",
+        "records": [
+          {
+            "pageId": "6428847",
+            "uploadedAt": "2010-03-14T17:20:20Z",
+            "revisionKey": "50f773c78b21a3a1646690c7eff62e0a9e64eddbc5967d16b28687e80ea14f66",
+            "uploaderState": "present",
+            "fileState": "present",
+            "bytes": 9022,
+            "sha1": "d01b79a6781c72ac9bfff93e5e2cfbeef4efc840",
+            "metadataComplete": true,
+            "sourceSha256": "7bc669addde8ad362f7748120d0dc4abcdd551e87f9b5db138227c4dcc617618"
+          },
+          {
+            "pageId": "6428847",
+            "uploadedAt": "2006-03-07T15:51:32Z",
+            "revisionKey": "fe4ae2fe13c66cccecc0e8bf1cab6a3b570dcf1e0719506636bb982b245e7daa",
+            "uploaderState": "present",
+            "fileState": "present",
+            "bytes": 9022,
+            "sha1": "d01b79a6781c72ac9bfff93e5e2cfbeef4efc840",
+            "metadataComplete": true,
+            "sourceSha256": "dfce4807310f97149014d932b1cc82b310fa29b64c263c59728d6f3afaaff429"
+          }
+        ]
+      }
+    },
+    {
+      "label": "selected-window",
+      "receipt": {
+        "provider": "Wikimedia Commons",
+        "scopeSha256": "153348a7c58bcc63d352c29fd5dffccd5c45dde62af0076fa5832386db7ca1f9",
+        "accessLabel": "public",
+        "attempts": [
+          {
+            "status": 200,
+            "inputBytes": 654,
+            "inputSha256": "6c7cdf3e8b6f83b7826e1f7e3ae5528900ba423e10f8748521bc79570724a23a",
+            "outcome": "success",
+            "errors": [],
+            "revisionKeys": [
+              "50f773c78b21a3a1646690c7eff62e0a9e64eddbc5967d16b28687e80ea14f66"
+            ],
+            "requestSha256": "153348a7c58bcc63d352c29fd5dffccd5c45dde62af0076fa5832386db7ca1f9",
+            "continuationPresent": true
+          },
+          {
+            "status": 200,
+            "inputBytes": 643,
+            "inputSha256": "39226f9bc033be1a6c666e3549e3bb81efe0cae326086181886d5aa52a62ba80",
+            "outcome": "success",
+            "errors": [],
+            "revisionKeys": [
+              "fe4ae2fe13c66cccecc0e8bf1cab6a3b570dcf1e0719506636bb982b245e7daa"
+            ],
+            "requestSha256": "45e4a8368a1be0d5515f61b138e4a5daad400222d0b9af61f913751ba8b2771b",
+            "continuationPresent": false
+          }
+        ],
+        "orderedRevisionKeys": [
+          "50f773c78b21a3a1646690c7eff62e0a9e64eddbc5967d16b28687e80ea14f66",
+          "fe4ae2fe13c66cccecc0e8bf1cab6a3b570dcf1e0719506636bb982b245e7daa"
+        ],
+        "warnings": [],
+        "scopeExhausted": true,
+        "snapshotConsistency": "unproven",
+        "completeHistory": false,
+        "fullSupportAccepted": false,
+        "transfer": "not_attempted",
+        "decode": "not_attempted",
+        "playback": "not_attempted",
+        "records": [
+          {
+            "pageId": "6428847",
+            "uploadedAt": "2010-03-14T17:20:20Z",
+            "revisionKey": "50f773c78b21a3a1646690c7eff62e0a9e64eddbc5967d16b28687e80ea14f66",
+            "uploaderState": "present",
+            "fileState": "present",
+            "bytes": 9022,
+            "sha1": "d01b79a6781c72ac9bfff93e5e2cfbeef4efc840",
+            "metadataComplete": true,
+            "sourceSha256": "7bc669addde8ad362f7748120d0dc4abcdd551e87f9b5db138227c4dcc617618"
+          },
+          {
+            "pageId": "6428847",
+            "uploadedAt": "2006-03-07T15:51:32Z",
+            "revisionKey": "fe4ae2fe13c66cccecc0e8bf1cab6a3b570dcf1e0719506636bb982b245e7daa",
+            "uploaderState": "present",
+            "fileState": "present",
+            "bytes": 9022,
+            "sha1": "d01b79a6781c72ac9bfff93e5e2cfbeef4efc840",
+            "metadataComplete": true,
+            "sourceSha256": "dfce4807310f97149014d932b1cc82b310fa29b64c263c59728d6f3afaaff429"
+          }
+        ]
+      }
+    }
+  ],
+  "retainedSyntheticReviewFailures": [
+    "initial window escape after empty page",
+    "unbounded arbitrary capture metadata copy",
+    "dot-segment filename accepted",
+    "malformed uploader treated as missing",
+    "manifest body paths escaped sibling directory",
+    "FIFO manifest/body could block local replay"
+  ],
+  "focusedSyntheticTests": 48,
+  "publication": {
+    "rawBodiesPublished": false,
+    "rawHeadersPublished": false,
+    "actorNamesPublished": false,
+    "tokensPublished": false,
+    "privateFixturesUsed": false,
+    "identifiersAndHashesRemainLinkable": true
+  },
+  "limits": [
+    "No media request, file byte verification, decoding or playback in this pass.",
+    "Actual hidden/deleted revisions not captured.",
+    "No stable snapshot, complete history, full adapter acceptance or target adoption.",
+    "Raw public capture bodies are external; committed receipt checks cannot replay missing external inputs."
+  ]
+}

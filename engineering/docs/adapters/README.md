@@ -58,7 +58,7 @@ The [author, post, media and follow contract](author-post-media-contract.md) def
 - [Nexus Mods](nexus-mods.md)
 - [Modrinth](modrinth.md)
 - [GitHub](github.md) · selected public upstream metadata, not release-asset coverage
-- [Wikimedia Commons](wikimedia-commons.md) · selected public audio metadata/file verification, not browser playback or full-platform coverage
+- [Wikimedia Commons](wikimedia-commons.md) · selected audio verification and scoped upload-revision chains; not browser playback or full-platform coverage
 
 Nexus Mods groups Skyrim Special Edition, Fallout 4 and Starfield with distinct game-domain fixtures.
 
@@ -95,3 +95,12 @@ General results stay here. Only verified improvement against a target project's 
 ## Round-three communities and executable social normalization
 
 [Round-three methods](methods-round3.md) expands the catalog to426 canonical service/scope entries with367 new dated source/outcome records. It combines six game passes, [other game communities](games/other-games.md), [Discord normalization](discord.md) and [actual Bluesky public API extraction](bluesky.md). Independent alias review keeps hosted project scopes under their existing service. The previous349-scope snapshot and earlier workbench results remain dated evidence.
+
+## WordPress multi-page evidence
+
+[WordPress collection reconciliation](wordpress-collections.md) reuses the existing single-post parser and distinguishes a two-post filtered scope from an incomplete 1,117-page public collection. Failures, missing pages, contradictory snapshots, protected/null bodies and unattempted media gates remain explicit. It is an offline experiment, not an application integration.
+
+
+## Bluesky thread context
+
+[Scoped thread evidence](bluesky.md#scoped-thread-context--november-11-2026) extends the existing offline post normalizer with ancestor/reply relationships and explicit unavailable context. Three anonymous captures demonstrate that reply counts and omitted arrays are not complete conversation history. No target integration or playback acceptance is implied.

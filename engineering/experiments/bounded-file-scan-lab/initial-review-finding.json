@@ -1,0 +1,15 @@
+{
+  "kind": "independent_review_reproduction_record",
+  "synthetic": true,
+  "checked_at": "2026-11-11",
+  "provenance": "Verbatim outcome and procedure reported by independent reviewer; this JSON is a research record, not a captured raw process log.",
+  "input_hex": "616263",
+  "procedure": "Patch module os.close: determine whether fstat(fd) is regular, call original close(fd), then raise OSError(EIO) only for regular input descriptors. Call scan on an owned generated fixture. Never retry close.",
+  "observed_initial_output": "close_error_escaped 5 injected_count 1",
+  "initial_consequence": "No scan manifest returned. Reader close exception escaped the worker finally.",
+  "repair": "Record reader/root close failures, invalidate success, preserve accounting and complete results, and do not retry close.",
+  "regressions": [
+    "test_injected_reader_close_failure_retains_complete_failed_result",
+    "test_injected_root_close_failure_invalidates_other_successes"
+  ]
+}

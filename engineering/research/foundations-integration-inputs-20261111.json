@@ -1,0 +1,2339 @@
+{
+  "schema_version": 1,
+  "kind": "frozen_research_integration_inputs",
+  "checked_at": "2026-11-11",
+  "repository": "Herbertofury/Athena",
+  "base_commit": "44384b809c80e03adbd62f8be9617d01e6ad9922",
+  "preservation": "All independent contribution files are copied exactly. The source index and two navigation documents are additive unions. This manifest records original input identities, not perpetual immutability of future research.",
+  "sources": [
+    {
+      "number": 27,
+      "title": "Document mod build and asset acceptance foundations",
+      "head": "8b0b9b8f1005b7d0ba816d6453e415211a8d9082",
+      "url": "https://github.com/Herbertofury/Athena/pull/27",
+      "files": [
+        {
+          "path": "engineering/data/source-index.json",
+          "sha": "f58e567a70f720da14061cf1d71d8023272a4dfc",
+          "status": "modified",
+          "changes": 1,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/data/sources.d/mod-build-assets-20261111.json",
+          "sha": "01396996434124c0bb6f90d1fb9a48a6c8afc336",
+          "status": "added",
+          "changes": 167,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/docs/asset-import-acceptance.md",
+          "sha": "6775c26edc0ec96b1f43898441d897caa2437a44",
+          "status": "added",
+          "changes": 70,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/docs/game-assets.md",
+          "sha": "c7521dfa1d276fcefecc2f6b0992b5844633d12e",
+          "status": "modified",
+          "changes": 4,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/docs/mod-build-acceptance.md",
+          "sha": "010bace7067c362bdf990bcd45907f8946d3fbfc",
+          "status": "added",
+          "changes": 78,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/docs/mods.md",
+          "sha": "12b67899022b5ff2a8d5bbcaac63ad3bfb1e5ff6",
+          "status": "modified",
+          "changes": 4,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/research/2026-11-11-mod-build-assets.md",
+          "sha": "3c85b81bdb06e91a2ea729677c930a3eac5eb5ef",
+          "status": "added",
+          "changes": 37,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/templates/asset-compatibility-receipt.md",
+          "sha": "708538ba2d3cc85c4fe3bc72f538314f07cb98b1",
+          "status": "added",
+          "changes": 49,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/templates/mod-compatibility-receipt.md",
+          "sha": "5ad796827c9a33eae4df514d676a5e0e698ec55e",
+          "status": "added",
+          "changes": 51,
+          "mode": "100644"
+        }
+      ],
+      "tree": "b9fb367a8cb1cdf0b868ab6700234bebcf115e74"
+    },
+    {
+      "number": 28,
+      "title": "Add recovery-first app foundations and SQLite recovery drill",
+      "head": "b2677431598a8d5a696c6d1e5b36d67657964594",
+      "url": "https://github.com/Herbertofury/Athena/pull/28",
+      "files": [
+        {
+          "path": "engineering/data/source-index.json",
+          "sha": "35d16725484242716ca9087922aea3af6de0680e",
+          "status": "modified",
+          "changes": 1,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/data/sources.d/recovery-first-app-foundations-20261111.json",
+          "sha": "e3bc7cbe2fdcfa7a36f2abb5e869f4f71eecec3d",
+          "status": "added",
+          "changes": 222,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/docs/recovery-first-app-foundations.md",
+          "sha": "3165d1399ebfbd8d60731713e6aa50dd4a1ad905",
+          "status": "added",
+          "changes": 93,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/sqlite-query-boundary-lab/README.md",
+          "sha": "a2febdf444a3e983d9878932d1d4468854634a59",
+          "status": "added",
+          "changes": 61,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/sqlite-query-boundary-lab/query_boundary.py",
+          "sha": "7ee6d898bea3ede2a59d7f01a8db7aaa753c72ba",
+          "status": "added",
+          "changes": 175,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/sqlite-query-boundary-lab/tests-final.log",
+          "sha": "8bfea9dc52145f66781bea980289c772df40884b",
+          "status": "added",
+          "changes": 37,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/sqlite-query-boundary-lab/tests-first.log",
+          "sha": "2d210fcee13cd3b3a821283e2f1f780cbd535069",
+          "status": "added",
+          "changes": 142,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/sqlite-query-boundary-lab/validation-summary.json",
+          "sha": "247ae790a4cecd44064f82193b36463fd2dabf5b",
+          "status": "added",
+          "changes": 22,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/sqlite-recovery-drill/README.md",
+          "sha": "f6c0f93a1ffeaf44eab7a471dc047ddaf11dbd7c",
+          "status": "added",
+          "changes": 38,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/sqlite-recovery-drill/demo-initial-receipt.json",
+          "sha": "0e3a9bc68a0840dd40abbf602f2698986f845036",
+          "status": "added",
+          "changes": 263,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/sqlite-recovery-drill/demo-receipt.json",
+          "sha": "56f6c4f0ffcf239b959b3dc03f373d16b0e1e0ba",
+          "status": "added",
+          "changes": 272,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/sqlite-recovery-drill/recovery-tests-final.log",
+          "sha": "a21902e01187105dac2e886a34b455b65e592bc9",
+          "status": "added",
+          "changes": 25,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/sqlite-recovery-drill/recovery-tests-first.log",
+          "sha": "a64e93c0f1e24853e14a5b30af897188edd16123",
+          "status": "added",
+          "changes": 22,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/sqlite-recovery-drill/recovery_drill.py",
+          "sha": "83488ff166f75d5899597c2bf1df84f40484313b",
+          "status": "added",
+          "changes": 188,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/sqlite-recovery-drill/validation-summary.json",
+          "sha": "38fb07180832e61b6a17f29dd78686f35dc4321d",
+          "status": "added",
+          "changes": 43,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/research/2026-11-11-bounded-query-foundations.md",
+          "sha": "2e47aa4de94a3920f2cb9a7605d262915241061f",
+          "status": "added",
+          "changes": 29,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/research/2026-11-11-recovery-first-foundations.md",
+          "sha": "7d658e95a68da49dc757acf21b3d490c05c6cb7b",
+          "status": "added",
+          "changes": 44,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/tests/test_sqlite_query_boundary.py",
+          "sha": "c21a497172e7c1f5a3cbb2df4f8a9cc917fef0bc",
+          "status": "added",
+          "changes": 208,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/tests/test_sqlite_recovery_drill.py",
+          "sha": "23cebdd1cd4c799321b3bca918584669862ce13a",
+          "status": "added",
+          "changes": 195,
+          "mode": "100644"
+        }
+      ],
+      "tree": "f2391d4645cb7fb42b1f25bf0f02fcaa14ff6331"
+    },
+    {
+      "number": 29,
+      "title": "Add accessible UI and card media acceptance foundations",
+      "head": "6be2b3a1aead088312e929282305d130d5873f5a",
+      "url": "https://github.com/Herbertofury/Athena/pull/29",
+      "files": [
+        {
+          "path": "engineering/data/source-index.json",
+          "sha": "098f100252deca590adee6216483644a3a9a08d3",
+          "status": "modified",
+          "changes": 1,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/data/sources.d/ui-card-media-20261111.json",
+          "sha": "dfc3ae677774bcc577d72f0277201f947ce56ea4",
+          "status": "added",
+          "changes": 156,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/docs/ui-card-media-acceptance.md",
+          "sha": "3f0ba178f074196bcf6f5a241671a38e83bdc700",
+          "status": "added",
+          "changes": 97,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/ui-interaction-evidence/README.md",
+          "sha": "34f36a0f8643ab870c78b060e291bac4addd1a7b",
+          "status": "added",
+          "changes": 40,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/ui-interaction-evidence/event-timing.mjs",
+          "sha": "5c2e471367f2edb4dfe6575b9343317c0a03ec2d",
+          "status": "added",
+          "changes": 142,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/ui-interaction-evidence/evidence/synthetic-summary.json",
+          "sha": "7768a92a50d51db309e54187d0a5ee6989ef5c93",
+          "status": "added",
+          "changes": 35,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/ui-interaction-evidence/fixtures/synthetic-events.json",
+          "sha": "d2a51655adeb3ff44425329f7ac4447566ac46e0",
+          "status": "added",
+          "changes": 12,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/ui-interaction-evidence/summarize.mjs",
+          "sha": "93ab146711b0d17bfe239c6371b1ecf0d61360a2",
+          "status": "added",
+          "changes": 11,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/research/2026-11-11-ui-card-media-foundations.md",
+          "sha": "6f138a4fe0a88604f5f54189b08ff50ca1f88a69",
+          "status": "added",
+          "changes": 52,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/templates/ui-acceptance-receipt.json",
+          "sha": "c7d6714eead96b7ed0a9c8ae0fb063bf0a26347f",
+          "status": "added",
+          "changes": 235,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/tests/ui-interaction-evidence.test.mjs",
+          "sha": "9eb46ef261331ac8bd5d2ef7687f84e6702711e9",
+          "status": "added",
+          "changes": 165,
+          "mode": "100644"
+        }
+      ],
+      "tree": "24ac576ea9f806cbfe6ab1d5dfede51dd70944af"
+    },
+    {
+      "number": 30,
+      "title": "Add executable mod dependency semantics lab",
+      "head": "e7a42bc5a041841c6ed0999d90185df3af33d4ba",
+      "url": "https://github.com/Herbertofury/Athena/pull/30",
+      "files": [
+        {
+          "path": "engineering/data/source-index.json",
+          "sha": "cddf34e10aded96f0f1fe07bea89d53f1782d84f",
+          "status": "modified",
+          "changes": 1,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/data/sources.d/mod-version-semantics-20261111.json",
+          "sha": "c90b0e37fa1ae856ebe817ba224856fb672157bf",
+          "status": "added",
+          "changes": 145,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/docs/mod-dependency-semantics.md",
+          "sha": "65193008f2d8665d2b42e21d1ceb1eff4472ebc6",
+          "status": "added",
+          "changes": 55,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/docs/mods.md",
+          "sha": "03b566ce9c037b7707cb4523ef1effa3fc0549bf",
+          "status": "modified",
+          "changes": 4,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/mod-version-semantics-lab/README.md",
+          "sha": "8e7b1252f1dc7652a0853a85c5c29499193724a4",
+          "status": "added",
+          "changes": 70,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/mod-version-semantics-lab/VersionProbe.java",
+          "sha": "c5927e1e24a525d8510e81b94f160809c3c63eda",
+          "status": "added",
+          "changes": 54,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/mod-version-semantics-lab/cases.json",
+          "sha": "3f0c69626b334052115ca3543aaa8dd55c756d57",
+          "status": "added",
+          "changes": 607,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/mod-version-semantics-lab/dependencies.json",
+          "sha": "288019856b7df7d5083d306b4c1d837455149ed0",
+          "status": "added",
+          "changes": 18,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/mod-version-semantics-lab/observed-2026-11-11.json",
+          "sha": "e014f3c13240eab2da3b61213d380f813034c9a7",
+          "status": "added",
+          "changes": 638,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/mod-version-semantics-lab/run.py",
+          "sha": "585fff66006aa0e83439869d384d098684bf9653",
+          "status": "added",
+          "changes": 241,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/research/2026-11-11-mod-version-semantics.md",
+          "sha": "899a7809cf7311f45d1f718e01efb367f5b9ea32",
+          "status": "added",
+          "changes": 39,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/templates/mod-dependency-diagnostic.md",
+          "sha": "97a44cbea8601d64903995bacb90aea6febd79d1",
+          "status": "added",
+          "changes": 49,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/tests/test_mod_version_semantics.py",
+          "sha": "e16709daa374b9c95d67e8a78bfa82f6d5dfdc5f",
+          "status": "added",
+          "changes": 204,
+          "mode": "100644"
+        }
+      ],
+      "tree": "d0ad2a8a52927a215a2b7a9c675e593790184f15"
+    },
+    {
+      "number": 31,
+      "title": "Add Unicode discovery and composition input foundations",
+      "head": "1d6a84739484436dced41a73890705284a82be1b",
+      "url": "https://github.com/Herbertofury/Athena/pull/31",
+      "files": [
+        {
+          "path": "engineering/data/source-index.json",
+          "sha": "1e90404bd1fd3eb6e8fd2aed4e89cbac35623d35",
+          "status": "modified",
+          "changes": 1,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/data/sources.d/unicode-search-input-20261111.json",
+          "sha": "e13ae16c6f78ee2ada5ce90578b3478816b1b352",
+          "status": "added",
+          "changes": 145,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/docs/unicode-search-and-text-input.md",
+          "sha": "c8f10b1461a4b17133405a34a96a5041eab880f0",
+          "status": "added",
+          "changes": 82,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/text-input-contract-lab/README.md",
+          "sha": "5ef68b35487b04db9b9130382c267040906ee8d5",
+          "status": "added",
+          "changes": 43,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/text-input-contract-lab/demo.mjs",
+          "sha": "3759dae6fed7700658ca4a2f24992eaf77791252",
+          "status": "added",
+          "changes": 31,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/text-input-contract-lab/evidence/synthetic-report.json",
+          "sha": "e9d5b74c45fcd8b58d33686fa64043cf35be56a9",
+          "status": "added",
+          "changes": 269,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/text-input-contract-lab/fixture.json",
+          "sha": "837301895a07a544a3233971a2d062e24f57142b",
+          "status": "added",
+          "changes": 19,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/text-input-contract-lab/text-contract.mjs",
+          "sha": "e8b49a9cc968c1aecc7fa18a5b18029f995e2b70",
+          "status": "added",
+          "changes": 96,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/research/2026-11-11-unicode-search-input-foundations.md",
+          "sha": "526cc1eb67d5a44360055d9184d6e45f5f50d11a",
+          "status": "added",
+          "changes": 47,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/templates/text-input-acceptance.json",
+          "sha": "18383cbb9c9a207256497028bbe2d12f2f549b59",
+          "status": "added",
+          "changes": 127,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/tests/text-input-contract.test.mjs",
+          "sha": "3e0a4170799b2fceb2271d3f2f8ac2e56c4f52bc",
+          "status": "added",
+          "changes": 114,
+          "mode": "100644"
+        }
+      ],
+      "tree": "de485ba9488769a96dc82870093d84d0ae7e497b"
+    },
+    {
+      "number": 32,
+      "title": "Add retry and idempotency boundary foundations",
+      "head": "00cd01ee133dc49d6a836a2efff2a10fa11fdea2",
+      "url": "https://github.com/Herbertofury/Athena/pull/32",
+      "files": [
+        {
+          "path": "engineering/data/source-index.json",
+          "sha": "2cc25ee7e953b84f22e5acdab703b79275d54b3e",
+          "status": "modified",
+          "changes": 1,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/data/sources.d/retry-boundary-foundations-20261111.json",
+          "sha": "7f9c8ffd040b79c34323e78cd946dd9b39849f89",
+          "status": "added",
+          "changes": 90,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/docs/retry-and-idempotency-foundations.md",
+          "sha": "555179430a74349bf4e99bc678f3e0bc5475b19e",
+          "status": "added",
+          "changes": 81,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/retry-boundary-lab/README.md",
+          "sha": "5154bd3213628b787ee727625a6bb1762a24fb06",
+          "status": "added",
+          "changes": 52,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/retry-boundary-lab/demo-receipt.json",
+          "sha": "a643845432f14acbd8dfcb26d7f4069ecb932258",
+          "status": "added",
+          "changes": 662,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/retry-boundary-lab/retry-tests-final.log",
+          "sha": "dcfd97af09b858a1c71664ef5173a297bc07f428",
+          "status": "added",
+          "changes": 43,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/retry-boundary-lab/retry-tests-initial.log",
+          "sha": "d3482a07ffd95d09f6562a9ac21a9b8bca828362",
+          "status": "added",
+          "changes": 40,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/retry-boundary-lab/retry-tests-optimized.log",
+          "sha": "03faa2a97f286a80b1815c840313d7151f25633e",
+          "status": "added",
+          "changes": 43,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/retry-boundary-lab/retry_boundary.py",
+          "sha": "65913973819172002ce26a67b11dd4d12257af39",
+          "status": "added",
+          "changes": 232,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/retry-boundary-lab/run_demo.py",
+          "sha": "42810571f56e958335bc0f9c9696a7c6e6602804",
+          "status": "added",
+          "changes": 131,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/retry-boundary-lab/validation-summary.json",
+          "sha": "3b35cab060643d0d67abf605f8ee1b9e27859c01",
+          "status": "added",
+          "changes": 67,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/research/2026-11-11-retry-boundary-foundations.md",
+          "sha": "a22bcfbb8552a8113e43cf206fbda8caf4200ca9",
+          "status": "added",
+          "changes": 33,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/tests/test_retry_boundary.py",
+          "sha": "f17326d27fde4aaf119c6cbd5eae7600f9b97368",
+          "status": "added",
+          "changes": 337,
+          "mode": "100644"
+        }
+      ],
+      "tree": "b633a90f18cd0db3e06bb7a1de934a8c38f409cb"
+    },
+    {
+      "number": 33,
+      "title": "Add bounded file ingestion foundations",
+      "head": "282e05a1af717e8888c59ae8caac0541426f057d",
+      "url": "https://github.com/Herbertofury/Athena/pull/33",
+      "files": [
+        {
+          "path": "engineering/data/source-index.json",
+          "sha": "e262637fe9ccd24d123c43b6dca1eec7da6730d0",
+          "status": "modified",
+          "changes": 1,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/data/sources.d/bounded-file-ingestion-20261111.json",
+          "sha": "cb7760367c35bfa162f14d17c2cb2d2460ec6866",
+          "status": "added",
+          "changes": 101,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/docs/bounded-file-ingestion-foundations.md",
+          "sha": "cd87dc57c8b4743b9c4f521d90def50d63d8d05a",
+          "status": "added",
+          "changes": 84,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/bounded-file-scan-lab/README.md",
+          "sha": "dcbb3ae7edb960502fb196b9c29e24b6b147f914",
+          "status": "added",
+          "changes": 43,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/bounded-file-scan-lab/demo-receipt.json",
+          "sha": "e30732bdb4a1c2d87700ca838b85b3c2b21c871f",
+          "status": "added",
+          "changes": 986,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/bounded-file-scan-lab/file_scan.py",
+          "sha": "c074adf633eee454bd9861e76866f08d2ab91602",
+          "status": "added",
+          "changes": 234,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/bounded-file-scan-lab/initial-review-finding.json",
+          "sha": "dc5e0f0e7566abde7b6ad86ef4e433c7c4bc0069",
+          "status": "added",
+          "changes": 15,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/bounded-file-scan-lab/run_demo.py",
+          "sha": "60c7407d0d62d806d7e8b6cf4e7a33d241ace93c",
+          "status": "added",
+          "changes": 100,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/bounded-file-scan-lab/tests-final.log",
+          "sha": "192b7eacdbd5b883470c34c1afc5c7d46be9658f",
+          "status": "added",
+          "changes": 37,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/bounded-file-scan-lab/tests-initial.log",
+          "sha": "1e8ca8262897a02f69b0bdec8a6ff2d20c0ef682",
+          "status": "added",
+          "changes": 35,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/bounded-file-scan-lab/tests-optimized.log",
+          "sha": "9e04491b8c0f39638dc67900ed95a28afb7d51f0",
+          "status": "added",
+          "changes": 37,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/bounded-file-scan-lab/validation-summary.json",
+          "sha": "ef914d895cc07a17d1e38a290e78d2a6eb550968",
+          "status": "added",
+          "changes": 70,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/research/2026-11-11-bounded-file-ingestion.md",
+          "sha": "596d423a8308db4d58daeba4df3d0eb9999e40be",
+          "status": "added",
+          "changes": 33,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/tests/test_bounded_file_scan.py",
+          "sha": "3f749e6895e6293ffe0a3342a92d543c0f3412da",
+          "status": "added",
+          "changes": 282,
+          "mode": "100644"
+        }
+      ],
+      "tree": "a21cadcbd9dc5db0099fbdc2a910e9dd8060cdf3"
+    },
+    {
+      "number": 34,
+      "title": "Add bytecode injection acceptance foundation",
+      "head": "8a51ddef8b4a2eab3a43e0d481b13f4d5779e132",
+      "url": "https://github.com/Herbertofury/Athena/pull/34",
+      "files": [
+        {
+          "path": "engineering/data/source-index.json",
+          "sha": "36aaba8e19147a3872898a0d34d2fbcb72c27242",
+          "status": "modified",
+          "changes": 1,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/data/sources.d/mod-bytecode-20261111.json",
+          "sha": "989b4ebf7a5a5c588d5ed052720df4551640d741",
+          "status": "added",
+          "changes": 178,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/docs/mod-bytecode-acceptance.md",
+          "sha": "8ad79f03b308f3d584d2acd1ac59745faafe1406",
+          "status": "added",
+          "changes": 69,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/docs/mods.md",
+          "sha": "9587b41e686cb74030fe37d5bd00992d62ad4f0e",
+          "status": "modified",
+          "changes": 4,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/bytecode-selector-lab/BytecodeProbe.java",
+          "sha": "96a687bac6045afb5c2f3e2260bfee2098a6e1e1",
+          "status": "added",
+          "changes": 96,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/bytecode-selector-lab/README.md",
+          "sha": "ba8b6a67db830e810ce617821556822e959e6ac7",
+          "status": "added",
+          "changes": 62,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/bytecode-selector-lab/cases.json",
+          "sha": "82e97931d06a798bd9b11a00d60c94d6577143fe",
+          "status": "added",
+          "changes": 157,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/bytecode-selector-lab/dependencies.json",
+          "sha": "9ebbd6bfb9003520105ae535bb9daeaf0ca285c2",
+          "status": "added",
+          "changes": 11,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/bytecode-selector-lab/fixtures/always_throw/Target.java",
+          "sha": "0b278488582f6af1b2f00ed9eb6f777da0c9402a",
+          "status": "added",
+          "changes": 9,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/bytecode-selector-lab/fixtures/baseline/Target.java",
+          "sha": "344fbc2311d463ee81fcb9f3769d2ceeb6f08bcc",
+          "status": "added",
+          "changes": 9,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/bytecode-selector-lab/fixtures/descriptor_drift/Target.java",
+          "sha": "bbde3a53146105d39677c2ec38461eeadeb3dc51",
+          "status": "added",
+          "changes": 9,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/bytecode-selector-lab/fixtures/different_owner/Target.java",
+          "sha": "e821b0e0b4e2f9da1e03f3e11b77c6f866fc2e84",
+          "status": "added",
+          "changes": 9,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/bytecode-selector-lab/fixtures/extra_call/Target.java",
+          "sha": "a9430a42ac4ff6ede0ea4b510892a172c4baee8d",
+          "status": "added",
+          "changes": 9,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/bytecode-selector-lab/fixtures/extra_return/Target.java",
+          "sha": "f4d1b28336c3e2428ce052e3dd7cfc130ed645b6",
+          "status": "added",
+          "changes": 9,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/bytecode-selector-lab/fixtures/nested_call/Target.java",
+          "sha": "3e245d38a707eb2afbbc843cb2814518349fa15e",
+          "status": "added",
+          "changes": 9,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/bytecode-selector-lab/fixtures/overload/Target.java",
+          "sha": "df525ab21305844cd205bfeace22ef23c30506eb",
+          "status": "added",
+          "changes": 9,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/bytecode-selector-lab/fixtures/same_count_drift/Target.java",
+          "sha": "f61c15d82ba7ccc7fea1d16df34852409aa24506",
+          "status": "added",
+          "changes": 9,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/bytecode-selector-lab/fixtures/throw_path/Target.java",
+          "sha": "249d2256374a245b13ac65110dc056bb9cf3c27b",
+          "status": "added",
+          "changes": 9,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/bytecode-selector-lab/fixtures/unrelated_call/Target.java",
+          "sha": "ea34b80bc754c58db1a9b74b87d0cc7168d878d5",
+          "status": "added",
+          "changes": 9,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/bytecode-selector-lab/observed-2026-11-11.json",
+          "sha": "f1a239608ccd18441ec7ab6e5fd2b91ef3f24aae",
+          "status": "added",
+          "changes": 3512,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/bytecode-selector-lab/run.py",
+          "sha": "24dff2436a05b7e434d1575606cc025e5a19f759",
+          "status": "added",
+          "changes": 217,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/bytecode-selector-lab/setup-attempts.json",
+          "sha": "00d221499ac42d1692a64ef2bd73dca6f8eff143",
+          "status": "added",
+          "changes": 38,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/research/2026-11-11-mod-bytecode.md",
+          "sha": "73cb26293db96f9724cec5233e2d91ee7bd4ef15",
+          "status": "added",
+          "changes": 39,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/templates/mod-injection-receipt.md",
+          "sha": "cb2b91fca3429581dfb8a1549ed16d528f12d36b",
+          "status": "added",
+          "changes": 50,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/tests/test_bytecode_selector.py",
+          "sha": "b8283e577d208bee4f8c950d859a0bea5918495c",
+          "status": "added",
+          "changes": 218,
+          "mode": "100644"
+        }
+      ],
+      "tree": "75a3559edf2a2400576106eea547b7a1e4ca48aa"
+    },
+    {
+      "number": 35,
+      "title": "Add conditional edit and revalidation foundations",
+      "head": "f8d4932c05e37b87391d902ecdd3601f29c1a275",
+      "url": "https://github.com/Herbertofury/Athena/pull/35",
+      "files": [
+        {
+          "path": "engineering/data/source-index.json",
+          "sha": "4a9daaeb63ec59261a2f1eac8b25883d288c431d",
+          "status": "modified",
+          "changes": 1,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/data/sources.d/conditional-edit-20261111.json",
+          "sha": "81952079009dc13e59958625b24acad918b672a8",
+          "status": "added",
+          "changes": 57,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/docs/conditional-edit-foundations.md",
+          "sha": "3222a82089b6ec04c070f408dbd2360476ed79ed",
+          "status": "added",
+          "changes": 64,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/conditional-edit-lab/README.md",
+          "sha": "856993feba94fef721b5fe2046550437b19bc4cd",
+          "status": "added",
+          "changes": 32,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/conditional-edit-lab/conditional_edit.py",
+          "sha": "b7724522824850ea452faaa747e6cd874c84f348",
+          "status": "added",
+          "changes": 275,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/conditional-edit-lab/demo-result.json",
+          "sha": "9849e51c39c3318c4fad935365e866912dadd20a",
+          "status": "added",
+          "changes": 741,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/conditional-edit-lab/focused-tests.log",
+          "sha": "ad9eb042f9856dd216776451d97ab211d1d64abb",
+          "status": "added",
+          "changes": 42,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/conditional-edit-lab/initial-aggregate-failure.log",
+          "sha": "978c366f157d49bc66bd64bfe4de25c2dd0e82bd",
+          "status": "added",
+          "changes": 18,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/conditional-edit-lab/initial-tests.log",
+          "sha": "ec09c05203c62358c86618f5f806d6bc94249f43",
+          "status": "added",
+          "changes": 41,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/conditional-edit-lab/optimized-tests.log",
+          "sha": "603250fa51f8249880f43ebe3826cc6121bb62ad",
+          "status": "added",
+          "changes": 42,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/conditional-edit-lab/review-summary.json",
+          "sha": "52e33d99b86474d69d415358e561c0d918692eb8",
+          "status": "added",
+          "changes": 23,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/conditional-edit-lab/run_demo.py",
+          "sha": "85f7780efc975c7582c2dc5f4684f75fa00ed5e0",
+          "status": "added",
+          "changes": 115,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/conditional-edit-lab/validation-summary.json",
+          "sha": "d0ac239ed2fb0ee0729f538d43569c5c0f791685",
+          "status": "added",
+          "changes": 84,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/research/2026-11-11-conditional-edit-foundations.md",
+          "sha": "468848be975bba4511f83419234cc52790a34c71",
+          "status": "added",
+          "changes": 29,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/tests/test_conditional_edit.py",
+          "sha": "c056c5b9bf11de95507c4511d426a8667d8d4098",
+          "status": "added",
+          "changes": 278,
+          "mode": "100644"
+        }
+      ],
+      "tree": "0a20bb12bc852f5954c9211324999ef9f07a4a24"
+    },
+    {
+      "number": 36,
+      "title": "Add resource packaging acceptance lab",
+      "head": "bd995cf264baf18232bae5fefde88c419dc597cd",
+      "url": "https://github.com/Herbertofury/Athena/pull/36",
+      "files": [
+        {
+          "path": "engineering/data/source-index.json",
+          "sha": "c695acc5c65281f05b7e881286864ac1db9258fd",
+          "status": "modified",
+          "changes": 1,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/data/sources.d/mod-resource-packaging-20261111.json",
+          "sha": "d4c36f50107a7d4b5f04fd921da33f076c220bf1",
+          "status": "added",
+          "changes": 123,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/docs/mod-resource-packaging.md",
+          "sha": "6eb7eea6459d8b9d4a3f58c300ff973e04fc3d5d",
+          "status": "added",
+          "changes": 51,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/docs/mods.md",
+          "sha": "dbda07807ce9aa0642657fbbe36e4769cf56a05c",
+          "status": "modified",
+          "changes": 4,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/resource-packaging-lab/README.md",
+          "sha": "3458728945584b8c6b12fe49ae85378d59104b78",
+          "status": "added",
+          "changes": 58,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/resource-packaging-lab/build.gradle",
+          "sha": "4e12b27520c4a7931cc79b42486f8e75c6bac63e",
+          "status": "added",
+          "changes": 32,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/resource-packaging-lab/dependencies.json",
+          "sha": "86d94735b214803cba377fc7d319edc36f094313",
+          "status": "added",
+          "changes": 10,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/resource-packaging-lab/fixtures.json",
+          "sha": "2921dd631cbc2cae26612edcb4bbda44fbd6c33a",
+          "status": "added",
+          "changes": 32,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/resource-packaging-lab/observed-2026-11-11.json",
+          "sha": "5076f3cba9e3eb1c672560ad3f3783d07f71f130",
+          "status": "added",
+          "changes": 1848,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/resource-packaging-lab/run.py",
+          "sha": "9706ebc726b04c8198658150280e3bf3d41df2eb",
+          "status": "added",
+          "changes": 270,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/resource-packaging-lab/settings.gradle",
+          "sha": "0262301e4c8937e777b2e1fcc4fce5375a884897",
+          "status": "added",
+          "changes": 1,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/resource-packaging-lab/setup-attempts.json",
+          "sha": "2ad3aa90c03311f1f9bae07183029f21864012bf",
+          "status": "added",
+          "changes": 56,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/research/2026-11-11-mod-resource-packaging.md",
+          "sha": "b650cb96acf198dff6adadad6ca732fd6cf230b9",
+          "status": "added",
+          "changes": 33,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/templates/resource-packaging-receipt.md",
+          "sha": "f0bef27f273818d2969d43465c210a383ead868e",
+          "status": "added",
+          "changes": 20,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/tests/test_resource_packaging_lab.py",
+          "sha": "7177f50bcf037353861ea1e84771e12fbf2bd6dd",
+          "status": "added",
+          "changes": 181,
+          "mode": "100644"
+        }
+      ],
+      "tree": "21585a76e1c33282fc9f6579574bd87babba331c"
+    },
+    {
+      "number": 37,
+      "title": "Add bounded ZIP inspection foundations",
+      "head": "b2703e87c24e636bea23241d6caf85608d97066d",
+      "url": "https://github.com/Herbertofury/Athena/pull/37",
+      "files": [
+        {
+          "path": "engineering/data/source-index.json",
+          "sha": "ac7b967464a4068af0aa708dd953f1110a6de81a",
+          "status": "modified",
+          "changes": 3,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/data/sources.d/zip-inspection-20261111.json",
+          "sha": "de680cd2bca35fffda0ccaa821e5f5dca510ed18",
+          "status": "added",
+          "changes": 79,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/docs/zip-inspection-foundations.md",
+          "sha": "15b2f2e10333bf06ac81f2bf55114df1c3b80b51",
+          "status": "added",
+          "changes": 66,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/zip-inspection-lab/README.md",
+          "sha": "09ae3bedbb1c51c29bfc6528b40f344aac38d270",
+          "status": "added",
+          "changes": 30,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/zip-inspection-lab/demo-result.json",
+          "sha": "7ecd994a2579bd5ddaee51153bc8f14df5502239",
+          "status": "added",
+          "changes": 414,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/zip-inspection-lab/fixtures.py",
+          "sha": "09dc6bb542d2eb6ca81a1ed75c876367c9beba3e",
+          "status": "added",
+          "changes": 40,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/zip-inspection-lab/focused-tests.log",
+          "sha": "72061661c3a967adfc311bac76516155421e5d0c",
+          "status": "added",
+          "changes": 42,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/zip-inspection-lab/initial-review-finding.json",
+          "sha": "436df5b61c4e3fe6f6f049d994171e01e9ada847",
+          "status": "added",
+          "changes": 15,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/zip-inspection-lab/initial-tests.log",
+          "sha": "91b1647f92f81a3f9ea6f5463ea6246e42d1eddd",
+          "status": "added",
+          "changes": 40,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/zip-inspection-lab/inspect_zip.py",
+          "sha": "79875ee8f03fc8d5bfb8ba3366be3af743f6aef7",
+          "status": "added",
+          "changes": 167,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/zip-inspection-lab/optimized-tests.log",
+          "sha": "cd6bbe25590d59d1303398969c168027a2b41c67",
+          "status": "added",
+          "changes": 42,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/zip-inspection-lab/review-summary.json",
+          "sha": "91eccdb2febdc1679784ed7a63a6cf6a62fdd140",
+          "status": "added",
+          "changes": 31,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/zip-inspection-lab/run_demo.py",
+          "sha": "13563efa814f5023cd6c6f45cc1db711006015d4",
+          "status": "added",
+          "changes": 69,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/zip-inspection-lab/validation-summary.json",
+          "sha": "4f6eecc96a37c2d03225cbb84e71b68baafbc948",
+          "status": "added",
+          "changes": 81,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/research/2026-11-11-zip-inspection-foundations.md",
+          "sha": "22cf3453f08ec87e5539ca9080291312a42850b8",
+          "status": "added",
+          "changes": 27,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/tests/test_zip_inspection.py",
+          "sha": "a69567481316de49457e466878894bb9a1cf44e7",
+          "status": "added",
+          "changes": 207,
+          "mode": "100644"
+        }
+      ],
+      "tree": "1a8304eb521a5e8df1a113b8e0506a9b3536785a"
+    },
+    {
+      "number": 38,
+      "title": "Add JVM class-loading boundary lab",
+      "head": "08ac777bdd80225e2e583e8f26bd8a25d7004cec",
+      "url": "https://github.com/Herbertofury/Athena/pull/38",
+      "files": [
+        {
+          "path": "engineering/data/source-index.json",
+          "sha": "f10222e7c5d4f9ed28610e745f8785fdead5887b",
+          "status": "modified",
+          "changes": 1,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/data/sources.d/mod-classloading-20261111.json",
+          "sha": "b68dd8986f41c4ea22587409251f6f1b9b25f7dc",
+          "status": "added",
+          "changes": 134,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/docs/mod-classloading-boundaries.md",
+          "sha": "0a17218b1d6231cb2a8c495465819842b37dafa2",
+          "status": "added",
+          "changes": 48,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/docs/mods.md",
+          "sha": "4fbd2a3d2590e316f4a49b6196d5ef6423b398ec",
+          "status": "modified",
+          "changes": 4,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/classloading-boundary-lab/ClassloadingProbe.java",
+          "sha": "7f6f322871678ccfc267351bfe50b24dac3e249e",
+          "status": "added",
+          "changes": 124,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/classloading-boundary-lab/README.md",
+          "sha": "49203c46ce3f36e03c965b853804dc3c6dc779b7",
+          "status": "added",
+          "changes": 47,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/classloading-boundary-lab/cases.json",
+          "sha": "f45273445e99fa64d78acabc413d01352aa94468",
+          "status": "added",
+          "changes": 631,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/classloading-boundary-lab/fixtures/client/ClientApi.java",
+          "sha": "c0a109d7e188aa0a70233251cdc3b1faa97a81e3",
+          "status": "added",
+          "changes": 5,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/classloading-boundary-lab/fixtures/lab/BodyReference.java",
+          "sha": "eee278afe0faf5541c15b803d166cabb2f8b0c42",
+          "status": "added",
+          "changes": 8,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/classloading-boundary-lab/fixtures/lab/ConstantConsumer.java",
+          "sha": "efb43a6d81367b6d4c6c1eb272ece3ced2116911",
+          "status": "added",
+          "changes": 5,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/classloading-boundary-lab/fixtures/lab/Constants.java",
+          "sha": "e8b4aa5ee1300aa03b7ffc5a881b225737a1596e",
+          "status": "added",
+          "changes": 6,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/classloading-boundary-lab/fixtures/lab/DescriptorReference.java",
+          "sha": "c663ae2e65eab7c4ab7295a9bc2c7507393e960c",
+          "status": "added",
+          "changes": 6,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/classloading-boundary-lab/fixtures/lab/Exploding.java",
+          "sha": "15f3ce0a50fff09650703f254fe32ba11b5aff0f",
+          "status": "added",
+          "changes": 9,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/classloading-boundary-lab/fixtures/lab/SafeCommon.java",
+          "sha": "e2197d3a4d077479e3d3ab7a2e172e1fc07bf4ec",
+          "status": "added",
+          "changes": 5,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/classloading-boundary-lab/fixtures/lab/StaticReference.java",
+          "sha": "7f0877d289500205764c6f7ed25f5d158340dde6",
+          "status": "added",
+          "changes": 6,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/classloading-boundary-lab/fixtures/lab/Trace.java",
+          "sha": "e90cea5a8ec8a1e7fd8e893e061bb2449ba659eb",
+          "status": "added",
+          "changes": 7,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/classloading-boundary-lab/observed-2026-11-11.json",
+          "sha": "830ff1d8dc00e3eb0d3baccb16a394c32b65d4ec",
+          "status": "added",
+          "changes": 1057,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/classloading-boundary-lab/run.py",
+          "sha": "79d7c9e341eeb20963bdc5027b811416bf73ba74",
+          "status": "added",
+          "changes": 194,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/classloading-boundary-lab/runtime-reference.json",
+          "sha": "9277d134fdca067fbbc2d35ea79636911eb7241a",
+          "status": "added",
+          "changes": 17,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/research/2026-11-11-mod-classloading.md",
+          "sha": "b2d544403194eb221f020ab0397e407f8138900b",
+          "status": "added",
+          "changes": 31,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/templates/classloading-boundary-receipt.md",
+          "sha": "fd0c67cfeb73e40b1f1daf4a3dd3a5a11e4370ce",
+          "status": "added",
+          "changes": 19,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/tests/test_classloading_boundary_lab.py",
+          "sha": "0e248a4d6f699643982d85f4c46cd2f854a5c4be",
+          "status": "added",
+          "changes": 174,
+          "mode": "100644"
+        }
+      ],
+      "tree": "2724d49a0c4a71b64c997260be76958eb6d008a9"
+    },
+    {
+      "number": 39,
+      "title": "Add FTS5 consistency and rebuild foundations",
+      "head": "0dce3870b6027076af4ff17c868104038074fff3",
+      "url": "https://github.com/Herbertofury/Athena/pull/39",
+      "files": [
+        {
+          "path": "engineering/data/source-index.json",
+          "sha": "3321f954764967e042013f2157db10c22093a02c",
+          "status": "modified",
+          "changes": 1,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/data/sources.d/fts-consistency-20261111.json",
+          "sha": "0bf0e1f4c51e24a09af1b19bb91dfa0c32e4f32c",
+          "status": "added",
+          "changes": 79,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/docs/fts-consistency-foundations.md",
+          "sha": "be680c104ced202a1911ba1969fbc18ca858d526",
+          "status": "added",
+          "changes": 56,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/fts-consistency-lab/README.md",
+          "sha": "d27b6de77a5a85d9af0d537d6edb4ee182024c2d",
+          "status": "added",
+          "changes": 39,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/fts-consistency-lab/aggregate-tests.log",
+          "sha": "23dbf4cc09bc80009ae315b5f15dbfead30d205a",
+          "status": "added",
+          "changes": 371,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/fts-consistency-lab/catalog.py",
+          "sha": "b820c683ff80f151cbdf3d16181ce30f15ebdb67",
+          "status": "added",
+          "changes": 205,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/fts-consistency-lab/demo-result.json",
+          "sha": "d1f16ea9a36e8d4e7e846b17f11d5dcef1a12d54",
+          "status": "added",
+          "changes": 7963,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/fts-consistency-lab/exit_writer.py",
+          "sha": "1b15776c7fbc5a193083a9dd751f5b7397f9a0d9",
+          "status": "added",
+          "changes": 20,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/fts-consistency-lab/focused-tests.log",
+          "sha": "c8616e10247da1ebd24176fda10dad7e898714b0",
+          "status": "added",
+          "changes": 33,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/fts-consistency-lab/initial-aggregate.log",
+          "sha": "f4302e1f434051690e64f1b4c94d9091f876215a",
+          "status": "added",
+          "changes": 397,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/fts-consistency-lab/initial-tests.log",
+          "sha": "4ec76afc331a8d84695073ef5a866b051ae14e18",
+          "status": "added",
+          "changes": 31,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/fts-consistency-lab/optimized-tests.log",
+          "sha": "1d14b5aa5c4eef99096212675ddf23db9b9fcef9",
+          "status": "added",
+          "changes": 33,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/fts-consistency-lab/review-probes.log",
+          "sha": "91ed13ed846c131005840a491e2a7a88745c5e31",
+          "status": "added",
+          "changes": 18,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/fts-consistency-lab/review-summary.json",
+          "sha": "6170e247ca53ce1bebf9b8e2b008bc757f3436bf",
+          "status": "added",
+          "changes": 33,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/fts-consistency-lab/review_probes.py",
+          "sha": "1aa08f9f2dad2dc6e7d8aea1df4f863d2d3ae0f2",
+          "status": "added",
+          "changes": 202,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/fts-consistency-lab/run_demo.py",
+          "sha": "425afec95585b9fd026bda54bba5adba8cf90ca9",
+          "status": "added",
+          "changes": 172,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/fts-consistency-lab/unfinished-receipts-aggregate.log",
+          "sha": "df3751fae4ad1a8f69283b17872b645c2e1e0d23",
+          "status": "added",
+          "changes": 374,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/fts-consistency-lab/validation-summary.json",
+          "sha": "b783dfe734f8311afe83dd5332dbe713012bddda",
+          "status": "added",
+          "changes": 49,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/research/2026-11-11-fts-consistency-foundations.md",
+          "sha": "91b918cb8770ea0d3fe16750c502222ea302a607",
+          "status": "added",
+          "changes": 37,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/tests/test_fts_consistency.py",
+          "sha": "d47765a17dfe1aa17c54ff0136d0bcb9fcb02199",
+          "status": "added",
+          "changes": 294,
+          "mode": "100644"
+        }
+      ],
+      "tree": "83c0eb7fda78eee0943c26fb990823073838fa39"
+    },
+    {
+      "number": 40,
+      "title": "Add subprocess pipe and cleanup foundations",
+      "head": "28ad9eba5cd3b06259256620689d655b0aea61ab",
+      "url": "https://github.com/Herbertofury/Athena/pull/40",
+      "files": [
+        {
+          "path": "engineering/data/source-index.json",
+          "sha": "a9c934c748efcf0b107fee1e99d1a4f39c387216",
+          "status": "modified",
+          "changes": 1,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/data/sources.d/subprocess-pipes-20261111.json",
+          "sha": "ad6bb878a263c968b4ff7e6bbe8ca185ed35008a",
+          "status": "added",
+          "changes": 57,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/docs/subprocess-pipe-foundations.md",
+          "sha": "f7797d9af98bf0bede3d1361faef861af1890683",
+          "status": "added",
+          "changes": 60,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/pipe-budget-lab/README.md",
+          "sha": "22a9cc392523db627507a9f2a2a61b7507347a6e",
+          "status": "added",
+          "changes": 27,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/pipe-budget-lab/demo-result.json",
+          "sha": "5dffed6715b2c781025afd1251fa585713e29f2a",
+          "status": "added",
+          "changes": 524,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/pipe-budget-lab/focused-tests.log",
+          "sha": "3715ea7f2dcb221762f1d635598e084818dcc701",
+          "status": "added",
+          "changes": 36,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/pipe-budget-lab/initial-close-failure-probe.json",
+          "sha": "e7fb8077a8f5e40d09cb591a74b36545dc54323b",
+          "status": "added",
+          "changes": 7,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/pipe-budget-lab/initial-tests.log",
+          "sha": "c47755dc3c282930f5c1b0cd1cc5b462e4cd2c8c",
+          "status": "added",
+          "changes": 32,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/pipe-budget-lab/optimized-tests.log",
+          "sha": "a93a6b6d7feac2fcfcf8f6ee0b1242a29d879590",
+          "status": "added",
+          "changes": 36,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/pipe-budget-lab/owned_helper.py",
+          "sha": "6e286ef635d397d4aa9b45d60b71a8e40b6bea6c",
+          "status": "added",
+          "changes": 46,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/pipe-budget-lab/pipe_runner.py",
+          "sha": "88c3ae5e4dbcb400a9fa128fe13d11df35a53bad",
+          "status": "added",
+          "changes": 165,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/pipe-budget-lab/review-summary.json",
+          "sha": "1e9562cde9040430da33931591327b0a5cd67fa1",
+          "status": "added",
+          "changes": 34,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/pipe-budget-lab/run_demo.py",
+          "sha": "f676a8a64c53c34ea6d0e1ed178e2d5493f1c60f",
+          "status": "added",
+          "changes": 83,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/pipe-budget-lab/validation-summary.json",
+          "sha": "dd36479bfbd4c5dc67af3f49787bd7122fa7d237",
+          "status": "added",
+          "changes": 79,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/research/2026-11-11-subprocess-pipe-foundations.md",
+          "sha": "3e79b7345cdecbe6cf35266e450ddce5ba6c2049",
+          "status": "added",
+          "changes": 32,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/tests/test_pipe_budget.py",
+          "sha": "7c055c241608f332f30cb92004d9b2e0d0ffd582",
+          "status": "added",
+          "changes": 187,
+          "mode": "100644"
+        }
+      ],
+      "tree": "b0219ecf3d94a2574d437dfaa37a36746c6ca3a5"
+    },
+    {
+      "number": 41,
+      "title": "Add glTF asset validation boundaries",
+      "head": "4cb5db53585f21068bbfb24ec052de64675105dd",
+      "url": "https://github.com/Herbertofury/Athena/pull/41",
+      "files": [
+        {
+          "path": "engineering/data/source-index.json",
+          "sha": "81415da7a27445c5d977a90cee4682ff1d4d9d38",
+          "status": "modified",
+          "changes": 1,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/data/sources.d/gltf-validation-20261111.json",
+          "sha": "a3ce881978a9a60614c4e09ad55deec4baa7d097",
+          "status": "added",
+          "changes": 112,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/docs/game-assets.md",
+          "sha": "5d346ca6173c3d6d1d27679e3b4d8a06edee465e",
+          "status": "modified",
+          "changes": 4,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/docs/gltf-validation-boundaries.md",
+          "sha": "6269fe6b997bf50a50aa6e3cd1da5d68554608ca",
+          "status": "added",
+          "changes": 48,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/gltf-validation-lab/README.md",
+          "sha": "e8b7f4440d77a8249f9e559ce82a34f5fed5245b",
+          "status": "added",
+          "changes": 55,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/gltf-validation-lab/dependency.json",
+          "sha": "b5be8e6a610b808d96fab33167ab1c275925e6d2",
+          "status": "added",
+          "changes": 68,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/gltf-validation-lab/fixtures.mjs",
+          "sha": "8d9c441d1afd5964989f99235bc0f62db146155b",
+          "status": "added",
+          "changes": 38,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/gltf-validation-lab/initial-hypothesis.json",
+          "sha": "6dbcd095d9afafd9444a74d9da2f5233a17091b0",
+          "status": "added",
+          "changes": 67,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/gltf-validation-lab/observed-2026-11-11.json",
+          "sha": "a122170ce1d608f3917a68c342e81048b5e51d8a",
+          "status": "added",
+          "changes": 2950,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/gltf-validation-lab/run.mjs",
+          "sha": "54574e0506fdba7b84421a43958df378d4b04cfb",
+          "status": "added",
+          "changes": 121,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/gltf-validation-lab/tests.mjs",
+          "sha": "198c6a7844670f48e339d28fde8eebecb495d795",
+          "status": "added",
+          "changes": 49,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/research/2026-11-11-gltf-validation.md",
+          "sha": "266abf7ab4198e08fdee2ce82747208d57156103",
+          "status": "added",
+          "changes": 31,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/templates/asset-validation-receipt.md",
+          "sha": "e05814ab98cc0a91c42623db9ab0833204cb5795",
+          "status": "added",
+          "changes": 18,
+          "mode": "100644"
+        }
+      ],
+      "tree": "7db0b40fd002c803d8070b9f16f2bc49997169d2"
+    },
+    {
+      "number": 42,
+      "title": "Add dependency graph and verification foundations",
+      "head": "8e4b9f1ccf4254eabc0be6086b47dc1b28618c44",
+      "url": "https://github.com/Herbertofury/Athena/pull/42",
+      "files": [
+        {
+          "path": "engineering/data/source-index.json",
+          "sha": "d2b7ae31eaf22eefdcac03f43d58c2701339b6ca",
+          "status": "modified",
+          "changes": 1,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/data/sources.d/mod-dependency-resolution-20261111.json",
+          "sha": "c6e8b7be745ac7418f185c212aa07ff5b658f450",
+          "status": "added",
+          "changes": 145,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/docs/mod-dependency-resolution.md",
+          "sha": "8a11da8802fb686a93759113063bdd15961697f7",
+          "status": "added",
+          "changes": 70,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/docs/mods.md",
+          "sha": "b1f498674894f8e33efecbdc54b4a85ceb5efec2",
+          "status": "modified",
+          "changes": 4,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/dependency-resolution-lab/README.md",
+          "sha": "c6d5de9af704dbcb535edd63d0b8fd2a8bfe799c",
+          "status": "added",
+          "changes": 56,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/dependency-resolution-lab/build.gradle",
+          "sha": "96740a146889c4d4b7b990f22beeeaa4f03b70e0",
+          "status": "added",
+          "changes": 67,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/dependency-resolution-lab/dependencies.json",
+          "sha": "86d94735b214803cba377fc7d319edc36f094313",
+          "status": "added",
+          "changes": 10,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/dependency-resolution-lab/fixtures.json",
+          "sha": "744f84082d4a906c24dd5249eb67ed35ef07a979",
+          "status": "added",
+          "changes": 328,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/dependency-resolution-lab/initial-build.gradle",
+          "sha": "0550ca879201c81b1991f0eb9717d07df186d8cf",
+          "status": "added",
+          "changes": 61,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/dependency-resolution-lab/initial-observations.json",
+          "sha": "f13be20a419b026f0c9527626d51149cbe68218e",
+          "status": "added",
+          "changes": 44,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/dependency-resolution-lab/observed-2026-11-11.json",
+          "sha": "9dec31fe4a7e80423694bf12238546c83e95ebf8",
+          "status": "added",
+          "changes": 2863,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/dependency-resolution-lab/run.py",
+          "sha": "2c8bd1a21028af0fba1439d16e1b6f2169297b92",
+          "status": "added",
+          "changes": 413,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/dependency-resolution-lab/settings.gradle",
+          "sha": "f6567f7df57094bb17e389a46a452f34899883c0",
+          "status": "added",
+          "changes": 1,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/research/2026-11-11-mod-dependency-resolution.md",
+          "sha": "0f112732dabdbab129636ae2f312c2ec8aa649b2",
+          "status": "added",
+          "changes": 41,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/templates/dependency-resolution-receipt.md",
+          "sha": "f8f5fac73a4729343f66e6121cf76a6f30203221",
+          "status": "added",
+          "changes": 19,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/tests/test_dependency_resolution_lab.py",
+          "sha": "60a1a14b91836656036b88731a56471a3695bf41",
+          "status": "added",
+          "changes": 106,
+          "mode": "100644"
+        }
+      ],
+      "tree": "d54b9b1e5e011bdc5e34a2ad789abbd61d9c8d16"
+    },
+    {
+      "number": 44,
+      "title": "Add measured texture semantics foundations",
+      "head": "5ad47fd4634e0e73c651bd40077463cb746c3b33",
+      "url": "https://github.com/Herbertofury/Athena/pull/44",
+      "files": [
+        {
+          "path": "engineering/data/source-index.json",
+          "status": "modified",
+          "sha": "c2c23a46c7a095488a98ee826be136165a99822c",
+          "changes": 1,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/data/sources.d/texture-semantics-20261111.json",
+          "status": "added",
+          "sha": "e705cc6b24a7c7792ba294a91e25a7fa8c7b524f",
+          "changes": 112,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/docs/game-assets.md",
+          "status": "modified",
+          "sha": "4b67a5d7e1642507c3f2ca5bdd3d31b722cc1fd2",
+          "changes": 4,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/docs/texture-semantics.md",
+          "status": "added",
+          "sha": "8b1bf8e0ecde67a0c2cd23e92b2440f02457b106",
+          "changes": 68,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/texture-resampling-lab/README.md",
+          "status": "added",
+          "sha": "b3ffba79b2c97a36b06b46653e53f53a2fd8aab8",
+          "changes": 34,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/texture-resampling-lab/dependency.json",
+          "status": "added",
+          "sha": "20febf58368cee89b237cae62d9a84b9aebf5514",
+          "changes": 11,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/texture-resampling-lab/driver.c",
+          "status": "added",
+          "sha": "fdf64a343fa1e6d7253a921cc7d1eb54ff837d71",
+          "changes": 31,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/texture-resampling-lab/fixtures.json",
+          "status": "added",
+          "sha": "4e286beb8efc1d29eda12bcde69a47f3bed38d3f",
+          "changes": 382,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/texture-resampling-lab/independent-replay-2026-11-11.json",
+          "status": "added",
+          "sha": "d99883c4ff526aab9e8001025dc6542aaef4f941",
+          "changes": 496,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/texture-resampling-lab/independent-review-results.json",
+          "status": "added",
+          "sha": "cf85d2478f0d034b7496f65ba5fa40354ff8121e",
+          "changes": 304,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/texture-resampling-lab/observed-2026-11-11.json",
+          "status": "added",
+          "sha": "d48e6f65e5bc46cf9ed9913570452ec2ba6c7f60",
+          "changes": 496,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/texture-resampling-lab/run.py",
+          "status": "added",
+          "sha": "64914853f2476b3552bcf9f19d8cf0e5ef60cb21",
+          "changes": 167,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/research/2026-11-11-texture-semantics.md",
+          "status": "added",
+          "sha": "47ff540de8b4289099299b00311288060fb526d9",
+          "changes": 37,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/templates/texture-acceptance-receipt.md",
+          "status": "added",
+          "sha": "08d494fc692e6e1b952236d9fea6dc27e85103d2",
+          "changes": 40,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/tests/test_texture_resampling_lab.py",
+          "status": "added",
+          "sha": "ed19f08225c2928cd024ea70afc47fab5f0440d2",
+          "changes": 157,
+          "mode": "100644"
+        }
+      ],
+      "tree": "b87f7b667b92b091105d7f81a8df63378e9b5280"
+    },
+    {
+      "number": 45,
+      "title": "Preserve WordPress collection evidence",
+      "head": "737b814c048a74dae13a502c699425daf904158f",
+      "url": "https://github.com/Herbertofury/Athena/pull/45",
+      "files": [
+        {
+          "path": "engineering/data/source-index.json",
+          "status": "modified",
+          "sha": "712e65a0d91f879364667c90bdaf7ba1de5fcb4b",
+          "changes": 1,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/data/sources.d/wordpress-collections-20261111.json",
+          "status": "added",
+          "sha": "04be8a2862669c44455b5092740ca09fc8ff158f",
+          "changes": 68,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/docs/adapters/README.md",
+          "status": "modified",
+          "sha": "8c47ace4300d723e87884022090e3f2e26bdce73",
+          "changes": 4,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/docs/adapters/wordpress-collections.md",
+          "status": "added",
+          "sha": "02d8951b8c8f8e713b0def80a8cb80204074201e",
+          "changes": 64,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/site-extraction-lab/README.md",
+          "status": "modified",
+          "sha": "8824a926359f7b3f2312ce8029261ea6f6eacf29",
+          "changes": 4,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/site-extraction-lab/wordpress-collection-validation-2026-11-11.json",
+          "status": "added",
+          "sha": "a946fadf5b7b5800c6ae1d585e65a27b9d91865e",
+          "changes": 371,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/experiments/site-extraction-lab/wordpress_collection.py",
+          "status": "added",
+          "sha": "aff2b48b518a690ffe3dba5ee54d6aed549722bc",
+          "changes": 355,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/research/2026-11-11-wordpress-collections.md",
+          "status": "added",
+          "sha": "ebc2a46e8b6605dba28299ecfe4fd46603d90237",
+          "changes": 40,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/tests/test_wordpress_collection.py",
+          "status": "added",
+          "sha": "7e6bf43d5715b808aed2e2a367973d95f25146de",
+          "changes": 317,
+          "mode": "100644"
+        },
+        {
+          "path": "engineering/tests/test_wordpress_collection_receipt.py",
+          "status": "added",
+          "sha": "c26d399381f372f1d07129e5092b95a1a39b1f28",
+          "changes": 46,
+          "mode": "100644"
+        }
+      ],
+      "tree": "fd28232c7a1c4955eb55036845ee4793854a567b"
+    },
+    {
+      "number": 46,
+      "title": "Preserve Commons upload revision evidence",
+      "head": "24df69f92b8ff7dc797768e692a66cb671567927",
+      "url": "https://github.com/Herbertofury/Athena/pull/46",
+      "files": [
+        {
+          "path": "engineering/data/source-index.json",
+          "status": "modified",
+          "sha": "178fdbf3e31d79a5d886a3dca7805b97ca05dd5f",
+          "changes": 1,
+          "mode": "100644",
+          "type": "blob"
+        },
+        {
+          "path": "engineering/data/sources.d/commons-revisions-20261111.json",
+          "status": "added",
+          "sha": "ddd997463ea46ab96ea9954e39a17133f9bb90aa",
+          "changes": 68,
+          "mode": "100644",
+          "type": "blob"
+        },
+        {
+          "path": "engineering/docs/adapters/README.md",
+          "status": "modified",
+          "sha": "9e8377610f06656f99260f5662011994ed85fdea",
+          "changes": 2,
+          "mode": "100644",
+          "type": "blob"
+        },
+        {
+          "path": "engineering/docs/adapters/wikimedia-commons.md",
+          "status": "modified",
+          "sha": "130e2ef622ca6a95b1f0696a605d6ac4269ba34c",
+          "changes": 6,
+          "mode": "100644",
+          "type": "blob"
+        },
+        {
+          "path": "engineering/experiments/commons-audio-lab/README.md",
+          "status": "modified",
+          "sha": "7b91e38cb63c7148ba0d8ef70108784e4b141be9",
+          "changes": 17,
+          "mode": "100644",
+          "type": "blob"
+        },
+        {
+          "path": "engineering/experiments/commons-audio-lab/revision-validation-2026-11-11.json",
+          "status": "added",
+          "sha": "8d87c8c2e5b2bd7a05d9ee7f8a1606fcc059ba08",
+          "changes": 195,
+          "mode": "100644",
+          "type": "blob"
+        },
+        {
+          "path": "engineering/experiments/commons-audio-lab/revisions.py",
+          "status": "added",
+          "sha": "f9fcbb643698610b3ac721a05a95054dc748413b",
+          "changes": 377,
+          "mode": "100644",
+          "type": "blob"
+        },
+        {
+          "path": "engineering/research/2026-11-11-commons-revisions.md",
+          "status": "added",
+          "sha": "3ec1d6b76421a140a27318f60eea67e47c42538b",
+          "changes": 64,
+          "mode": "100644",
+          "type": "blob"
+        },
+        {
+          "path": "engineering/tests/test_commons_revision_receipt.py",
+          "status": "added",
+          "sha": "5334bd3e0d7718f0f4831433d5f9257b6673e3f3",
+          "changes": 38,
+          "mode": "100644",
+          "type": "blob"
+        },
+        {
+          "path": "engineering/tests/test_commons_revisions.py",
+          "status": "added",
+          "sha": "fa9476f9511129678c378f796e8bc00d6d052fc9",
+          "changes": 290,
+          "mode": "100644",
+          "type": "blob"
+        }
+      ],
+      "tree": "ea45bd041d74260cae33a2a1d034fcb7a7023d66"
+    },
+    {
+      "number": 47,
+      "title": "Preserve scoped Bluesky thread context",
+      "head": "97e7b6d38646485cec577d5c4721843e5ef898f6",
+      "tree": "73c338d87a5504364aa605e13cd8667c85e92c9e",
+      "url": "https://github.com/Herbertofury/Athena/pull/47",
+      "files": [
+        {
+          "path": "engineering/data/source-index.json",
+          "status": "modified",
+          "sha": "2f1b6f068d3313519eeaa145a9b36c98bf8a7083",
+          "changes": 1,
+          "mode": "100644",
+          "type": "blob"
+        },
+        {
+          "path": "engineering/data/sources.d/bluesky-threads-20261111.json",
+          "status": "added",
+          "sha": "3aba025ac7f9831b60434ab62771727a0de31ae4",
+          "changes": 90,
+          "mode": "100644",
+          "type": "blob"
+        },
+        {
+          "path": "engineering/docs/adapters/README.md",
+          "status": "modified",
+          "sha": "f10b128937b87f34ee946687cc14e8e098858438",
+          "changes": 5,
+          "mode": "100644",
+          "type": "blob"
+        },
+        {
+          "path": "engineering/docs/adapters/bluesky.md",
+          "status": "modified",
+          "sha": "e76032481ba307c670882a1428436da32745657b",
+          "changes": 7,
+          "mode": "100644",
+          "type": "blob"
+        },
+        {
+          "path": "engineering/experiments/bluesky-thread-lab/README.md",
+          "status": "added",
+          "sha": "b72807539c38fb6d7df8bc8c4e1b1359034f4586",
+          "changes": 54,
+          "mode": "100644",
+          "type": "blob"
+        },
+        {
+          "path": "engineering/experiments/bluesky-thread-lab/public-validation-2026-11-11.json",
+          "status": "added",
+          "sha": "cf5e1b3264d910c00f7e4b900df8115931379f76",
+          "changes": 522,
+          "mode": "100644",
+          "type": "blob"
+        },
+        {
+          "path": "engineering/experiments/bluesky-thread-lab/threads.py",
+          "status": "added",
+          "sha": "bcc48e45fc4bf4098255f4df04e209de09bd96b1",
+          "changes": 317,
+          "mode": "100644",
+          "type": "blob"
+        },
+        {
+          "path": "engineering/research/2026-11-11-bluesky-threads.md",
+          "status": "added",
+          "sha": "70aead8cc96ad2edb933b28466f42bee37a152ed",
+          "changes": 51,
+          "mode": "100644",
+          "type": "blob"
+        },
+        {
+          "path": "engineering/tests/test_bluesky_thread_receipt.py",
+          "status": "added",
+          "sha": "31c34c40ba4c6a5d553b0061b39a74aa656b227a",
+          "changes": 74,
+          "mode": "100644",
+          "type": "blob"
+        },
+        {
+          "path": "engineering/tests/test_bluesky_threads.py",
+          "status": "added",
+          "sha": "3afff34621e306308618d85a93bb767b297589dd",
+          "changes": 293,
+          "mode": "100644",
+          "type": "blob"
+        }
+      ]
+    }
+  ],
+  "supporting_fixes": [
+    {
+      "number": 4,
+      "title": "Fix Research link containment for Athena docs",
+      "head": "22d05b4ae663128821f106958cc99a7991ed5d2e",
+      "tree": "a151109d1daa5809bd5e17fbd13348b397671933",
+      "url": "https://github.com/Herbertofury/Athena/pull/4",
+      "role": "Supporting checker compatibility fix; not an additional research-source fragment.",
+      "files": [
+        {
+          "path": "engineering/local-link-policy.json",
+          "sha": "e9f4f5ed5bb891a14587cd4178767c459826b757",
+          "mode": "100644",
+          "type": "blob",
+          "status": "added",
+          "changes": 4
+        },
+        {
+          "path": "engineering/scripts/check_research.py",
+          "sha": "081df5f3a3e9972fa0c6117a0c3f895b98a47864",
+          "mode": "100644",
+          "type": "blob",
+          "status": "modified",
+          "changes": 76
+        },
+        {
+          "path": "tests/research_link_test.py",
+          "sha": "e0e34bc268e45e3c42ba0680b4b71006ba7bd092",
+          "mode": "100644",
+          "type": "blob",
+          "status": "added",
+          "changes": 263
+        },
+        {
+          "path": "tests/research_links.test.cjs",
+          "sha": "ce05b13c75a0776bfc00f0d2644830019f48a9ee",
+          "mode": "100644",
+          "type": "blob",
+          "status": "added",
+          "changes": 22
+        }
+      ]
+    },
+    {
+      "number": 24,
+      "title": "Preserve new-route focus and Review state after lesson close",
+      "head": "4e13efecff1a657e9ac41a3225848431ab9b59a6",
+      "tree": "ed13d45b489d1e7aedb463a330fe23db48e2c76c",
+      "url": "https://github.com/Herbertofury/Athena/pull/24",
+      "role": "Supporting host navigation ownership fix; not a research-source fragment or browser-harness change.",
+      "files": [
+        {
+          "path": "config/runtime-public-preview.json",
+          "sha": "cf9770acff9624e451aeb6cb3685ad424366859d",
+          "status": "modified",
+          "changes": 2,
+          "mode": "100644",
+          "type": "blob"
+        },
+        {
+          "path": "dist/app.js",
+          "sha": "537e5617d861a6df30a183ce58ad46fa7fbae907",
+          "status": "modified",
+          "changes": 2,
+          "mode": "100644",
+          "type": "blob"
+        },
+        {
+          "path": "tests/navigation_close_ownership.test.cjs",
+          "sha": "a0f3b27b596d4a914943439f7f5fa94a056ea02d",
+          "status": "added",
+          "changes": 48,
+          "mode": "100644",
+          "type": "blob"
+        }
+      ]
+    }
+  ]
+}

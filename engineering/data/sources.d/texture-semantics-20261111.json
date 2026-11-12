@@ -1,0 +1,112 @@
+[
+  {
+    "id": "TX11001",
+    "title": "CSS Color Module Level 4",
+    "url": "https://www.w3.org/TR/2026/CRD-css-color-4-20261103/",
+    "observed_version": "W3C Candidate Recommendation Draft, 3 November 2026",
+    "topic": "texture-semantics-and-resampling",
+    "note": "Piecewise sRGB transfer and sample conversion code; not a mandate that every texture operation uses CSS interpolation.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 90,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "TX11002",
+    "title": "Compositing and Blending Level 1",
+    "url": "https://www.w3.org/TR/2024/CRD-compositing-1-20240321/",
+    "observed_version": "W3C Candidate Recommendation Draft, 21 March 2024",
+    "topic": "texture-semantics-and-resampling",
+    "note": "Source-over algebra distinguishes straight and associated color contributions.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 90,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "TX11003",
+    "title": "stb_image_resize2 pinned implementation",
+    "url": "https://github.com/nothings/stb_image_resize/blob/703100c5f8a0b75b4861e401db567f1d82d545b8/stb_image_resize2.h",
+    "observed_version": "v2.50; source commit 703100c5f8a0b75b4861e401db567f1d82d545b8, 1 November 2026",
+    "topic": "texture-semantics-and-resampling",
+    "note": "Actual resizer, alpha layouts, datatype transfer controls and documented determinism limits.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 90,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "TX11004",
+    "title": "stb_image_resize project notes",
+    "url": "https://github.com/nothings/stb_image_resize/blob/703100c5f8a0b75b4861e401db567f1d82d545b8/README.md",
+    "observed_version": "Source commit 703100c5f8a0b75b4861e401db567f1d82d545b8, 1 November 2026",
+    "topic": "texture-semantics-and-resampling",
+    "note": "Project security-response caveat and single-header integration; not a production recommendation.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 90,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "TX11005",
+    "title": "stb_image_resize license",
+    "url": "https://github.com/nothings/stb_image_resize/blob/703100c5f8a0b75b4861e401db567f1d82d545b8/LICENSE",
+    "observed_version": "Source commit 703100c5f8a0b75b4861e401db567f1d82d545b8, 1 November 2026",
+    "topic": "texture-semantics-and-resampling",
+    "note": "MIT or public-domain options; dependency not vendored in this contribution.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 90,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "TX11006",
+    "title": "glTF 2.0 material and texture specification",
+    "url": "https://registry.khronos.org/glTF/specs/2.0/glTF-2.0.html",
+    "observed_version": "Served version 2.0.1, 2021-10-11; source 8e798b02d254cea97659a333cfcb20875b62bdd4",
+    "topic": "texture-semantics-and-resampling",
+    "note": "Sections 3.8.3 and 3.9 distinguish material-driven color transfer, linear data, alpha modes and ignored image color metadata.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 90,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "TX11007",
+    "title": "PNG specification third edition",
+    "url": "https://www.w3.org/TR/2025/REC-png-3-20250624/",
+    "observed_version": "W3C Recommendation, 24 June 2025",
+    "topic": "texture-semantics-and-resampling",
+    "note": "Unassociated color, linear alpha and color metadata; general PNG processing differs from glTF material interpretation.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 90,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "TX11008",
+    "title": "OpenGL 4.6 Core specification",
+    "url": "https://www.khronos.org/registry/OpenGL/specs/gl/glspec46.core.pdf",
+    "observed_version": "OpenGL 4.6 Core, 5 May 2022",
+    "topic": "texture-semantics-and-resampling",
+    "note": "Section 8.24 preserves alpha through sRGB conversion and permits conversion after filtering while preferring before.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 90,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "TX11009",
+    "title": "Vulkan format feature support",
+    "url": "https://docs.vulkan.org/spec/latest/chapters/formats.html",
+    "observed_version": "Rolling latest chapter read 2026-11-11; immutable revision not established",
+    "topic": "texture-semantics-and-resampling",
+    "note": "Guaranteed baseline format features differ from additional per-device support, which must be queried.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 90,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "TX11010",
+    "title": "NVIDIA Texture Tools Exporter capabilities",
+    "url": "https://developer.nvidia.com/texture-tools-exporter",
+    "observed_version": "Product page read 2026-11-11; top release notes 2024.1",
+    "topic": "texture-semantics-and-resampling",
+    "note": "Vendor separately documents cutout-coverage correction, normal-map mip processing and linear premultiplied-alpha filtering; not local measured evidence.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 90,
+    "evidence": "primary_documented"
+  }
+]

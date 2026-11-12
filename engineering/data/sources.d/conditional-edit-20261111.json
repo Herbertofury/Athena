@@ -1,0 +1,57 @@
+[
+  {
+    "id": "CE26001",
+    "title": "HTTP semantics and conditional requests",
+    "url": "https://www.rfc-editor.org/rfc/rfc9110.html#section-13.1.1",
+    "observed_version": "RFC 9110, June 2022",
+    "topic": "web",
+    "note": "Strong write preconditions, weak cache validation and representation identity; no target implementation result.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 180,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "CE26002",
+    "title": "Additional HTTP status codes: 428",
+    "url": "https://www.rfc-editor.org/rfc/rfc6585.html#section-3",
+    "observed_version": "RFC 6585, April 2012",
+    "topic": "web",
+    "note": "Explaining required preconditions and avoiding cached 428 responses.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 180,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "CE26003",
+    "title": "HTTP caching directives",
+    "url": "https://www.rfc-editor.org/rfc/rfc9111.html#section-5.2.2.4",
+    "observed_version": "RFC 9111, June 2022",
+    "topic": "web",
+    "note": "No-cache, no-store and private have distinct purposes; the lab does not test a real browser cache.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 180,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "CE26004",
+    "title": "Python http.server limitations",
+    "url": "https://docs.python.org/3.12/library/http.server.html",
+    "observed_version": "Python 3.12 documentation, rendered 3.12.16",
+    "topic": "security",
+    "note": "Official production warning; this server is a synchronous owned-loopback fixture only.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 180,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "CE26005",
+    "title": "SQLite transaction control",
+    "url": "https://www.sqlite.org/lang_transaction.html",
+    "observed_version": "Official live documentation checked 2026-11-11",
+    "topic": "storage",
+    "note": "Immediate transactions and the single-writer boundary; no crash-durability or throughput claim.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 180,
+    "evidence": "primary_documented"
+  }
+]

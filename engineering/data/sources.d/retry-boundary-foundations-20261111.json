@@ -1,0 +1,90 @@
+[
+  {
+    "id": "RB26001",
+    "title": "HTTP Semantics: idempotent methods",
+    "url": "https://www.rfc-editor.org/rfc/rfc9110.html#section-9.2.2",
+    "observed_version": "RFC 9110, June 2022",
+    "topic": "retry-and-idempotency-foundations",
+    "note": "Idempotency concerns intended effects; non-idempotent retries need explicit knowledge of their safety.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 60,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "RB26002",
+    "title": "Making retries safe with idempotent APIs",
+    "url": "https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/",
+    "observed_version": "Living AWS Builders Library article; checked 2026-11-11",
+    "topic": "retry-and-idempotency-foundations",
+    "note": "Caller intent, atomic receipt/effect recording, changed-parameter conflicts and late-arrival retention are separate contracts.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 60,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "RB26003",
+    "title": "Transactional outbox pattern",
+    "url": "https://docs.aws.amazon.com/prescriptive-guidance/latest/cloud-design-patterns/transactional-outbox.html",
+    "observed_version": "Living AWS Prescriptive Guidance; checked 2026-11-11",
+    "topic": "retry-and-idempotency-foundations",
+    "note": "Persist the update and event together, then deliver separately with duplicate handling at the consumer.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 60,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "RB26004",
+    "title": "Isolation in SQLite",
+    "url": "https://www.sqlite.org/isolation.html",
+    "observed_version": "Living SQLite reference; tested SQLite 3.53.1",
+    "topic": "retry-and-idempotency-foundations",
+    "note": "Separate connections do not observe partial uncommitted writes by default; SQLite serializes writers.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 60,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "RB26005",
+    "title": "SQLite transaction control",
+    "url": "https://www.sqlite.org/lang_transaction.html",
+    "observed_version": "Living SQLite reference; tested SQLite 3.53.1",
+    "topic": "retry-and-idempotency-foundations",
+    "note": "BEGIN IMMEDIATE obtains a write transaction or can fail busy; explicit transactions delimit visible changes.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 60,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "RB26006",
+    "title": "Atomic commit in SQLite",
+    "url": "https://www.sqlite.org/atomiccommit.html",
+    "observed_version": "Living rollback-journal reference; checked 2026-11-11",
+    "topic": "retry-and-idempotency-foundations",
+    "note": "Atomic commit depends on storage/filesystem assumptions; process-exit trials do not certify physical durability.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 60,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "RB26007",
+    "title": "Python sqlite3 transaction and URI controls",
+    "url": "https://docs.python.org/3.12/library/sqlite3.html",
+    "observed_version": "Documentation 3.12.16; tested Python 3.12.14",
+    "topic": "retry-and-idempotency-foundations",
+    "note": "Explicit SQL transaction handling and existing-file URI mode must be chosen deliberately.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 60,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "RB26008",
+    "title": "Stripe idempotent requests",
+    "url": "https://docs.stripe.com/api/idempotent_requests",
+    "observed_version": "Living API documentation distinguishes v1 and v2; checked 2026-11-11",
+    "topic": "retry-and-idempotency-foundations",
+    "note": "Retention and response replay are provider/API-version-specific; API v1 can process reused pruned keys anew. No live request performed.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 60,
+    "evidence": "primary_documented"
+  }
+]

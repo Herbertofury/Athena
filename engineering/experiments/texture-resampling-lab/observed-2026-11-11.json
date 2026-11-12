@@ -1,0 +1,496 @@
+{
+  "schema_version": 1,
+  "scope": "Measured pinned CPU resampling of original two-pixel arrays. No image decoding, ICC color management, GPU filtering, mip chain, game importer, target performance or native acceptance.",
+  "recorded_at": "2026-11-11T04:26:21Z",
+  "inputs": {
+    "run.py": "132dff3809053a56bceee28bcbf5afb1e5809266a52880b9ea24f14fb20b1da3",
+    "driver.c": "ae2ca92a0c63ec24b2716d2f813780fb183db9c2e32402a70aea22685301b420",
+    "fixtures.json": "e827f578f1ae3df1063763226eb60ad47cc7841fe9e7f4678f8c292edf2eca03",
+    "dependency.json": "f895c98cd5ab7127a9338cf122979d44eb81fcf5ba59659da4955dd18cb5174c"
+  },
+  "dependency": {
+    "url": "https://raw.githubusercontent.com/nothings/stb_image_resize/703100c5f8a0b75b4861e401db567f1d82d545b8/stb_image_resize2.h",
+    "bytes": 634235,
+    "sha256": "7420ce124ccd746e47f66d85235eb22838b339ae0689a72d6eb2e3d32dc657d1",
+    "git_blob_sha1": "e591165661d572349689f805d025e74fffb5cb20",
+    "version": "2.50",
+    "commit": "703100c5f8a0b75b4861e401db567f1d82d545b8",
+    "repository": "nothings/stb_image_resize",
+    "name": "stb_image_resize2.h",
+    "license": "MIT or public domain; source not vendored"
+  },
+  "generated_cases_sha256": "b7b488b7d7a0c6098a60dfc0a4d36cd4f35dac04298618115fb427cc3747fb89",
+  "environment": {
+    "python": "3.12.14",
+    "system": "Linux",
+    "machine": "x86_64",
+    "compiler_version": "cc (Debian 14.2.0-19) 14.2.0\nCopyright (C) 2024 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\n"
+  },
+  "compile": {
+    "command": [
+      "cc",
+      "-std=c99",
+      "-O0",
+      "-Wall",
+      "-Wextra",
+      "-pedantic",
+      "-I.",
+      "driver.c",
+      "-lm",
+      "-o",
+      "probe"
+    ],
+    "returncode": 0,
+    "stdout": "",
+    "stderr": "",
+    "binary_sha256": "84ad918389988461c0d3b0504c076e842411221be1fb3fcc1ace1264f1ac34cf"
+  },
+  "execution": {
+    "command": [
+      "./probe"
+    ],
+    "returncode": 0,
+    "stdout": "{\"id\":\"color_bw_uint8\",\"output\":[128,128,128]}\n{\"id\":\"color_bw_uint8_srgb\",\"output\":[188,188,188]}\n{\"id\":\"color_mid_uint8\",\"output\":[64,64,64]}\n{\"id\":\"color_mid_uint8_srgb\",\"output\":[92,92,92]}\n{\"id\":\"color_constant_uint8\",\"output\":[128,128,128]}\n{\"id\":\"color_constant_uint8_srgb\",\"output\":[128,128,128]}\n{\"id\":\"edge_red_straight\",\"output\":[0,0,255,128]}\n{\"id\":\"edge_green_straight\",\"output\":[0,0,255,128]}\n{\"id\":\"edge_generic_linear\",\"output\":[128,0,128,128]}\n{\"id\":\"edge_generic_srgb\",\"output\":[188,0,188,188]}\n{\"id\":\"edge_wrong_premultiplied\",\"output\":[188,0,188,128]}\n{\"id\":\"scalar_linear\",\"output\":[128]}\n{\"id\":\"scalar_srgb\",\"output\":[188]}\n{\"id\":\"float_straight\",\"output\":[0.5,0,0.5,0.5]}\n{\"id\":\"float_premultiplied\",\"output\":[0.25,0,0.25,0.5]}\n{\"id\":\"float_double_weighted\",\"output\":[0.25,0,0.25,0.5]}\n",
+    "stderr": "",
+    "binary_sha256": "84ad918389988461c0d3b0504c076e842411221be1fb3fcc1ace1264f1ac34cf"
+  },
+  "observations": [
+    {
+      "id": "color_bw_uint8",
+      "output": [
+        128,
+        128,
+        128
+      ],
+      "api_reference": [
+        128,
+        128,
+        128
+      ],
+      "intended_reference": [
+        188,
+        188,
+        188
+      ],
+      "tolerance": 1,
+      "api_max_abs_error": 0,
+      "intended_max_abs_error": 60,
+      "matches_api_reference": true,
+      "matches_intended_contract": false,
+      "matches_declared_outcome": true
+    },
+    {
+      "id": "color_bw_uint8_srgb",
+      "output": [
+        188,
+        188,
+        188
+      ],
+      "api_reference": [
+        188,
+        188,
+        188
+      ],
+      "intended_reference": [
+        188,
+        188,
+        188
+      ],
+      "tolerance": 1,
+      "api_max_abs_error": 0,
+      "intended_max_abs_error": 0,
+      "matches_api_reference": true,
+      "matches_intended_contract": true,
+      "matches_declared_outcome": true
+    },
+    {
+      "id": "color_mid_uint8",
+      "output": [
+        64,
+        64,
+        64
+      ],
+      "api_reference": [
+        64,
+        64,
+        64
+      ],
+      "intended_reference": [
+        92,
+        92,
+        92
+      ],
+      "tolerance": 1,
+      "api_max_abs_error": 0,
+      "intended_max_abs_error": 28,
+      "matches_api_reference": true,
+      "matches_intended_contract": false,
+      "matches_declared_outcome": true
+    },
+    {
+      "id": "color_mid_uint8_srgb",
+      "output": [
+        92,
+        92,
+        92
+      ],
+      "api_reference": [
+        92,
+        92,
+        92
+      ],
+      "intended_reference": [
+        92,
+        92,
+        92
+      ],
+      "tolerance": 1,
+      "api_max_abs_error": 0,
+      "intended_max_abs_error": 0,
+      "matches_api_reference": true,
+      "matches_intended_contract": true,
+      "matches_declared_outcome": true
+    },
+    {
+      "id": "color_constant_uint8",
+      "output": [
+        128,
+        128,
+        128
+      ],
+      "api_reference": [
+        128,
+        128,
+        128
+      ],
+      "intended_reference": [
+        128,
+        128,
+        128
+      ],
+      "tolerance": 1,
+      "api_max_abs_error": 0,
+      "intended_max_abs_error": 0,
+      "matches_api_reference": true,
+      "matches_intended_contract": true,
+      "matches_declared_outcome": true
+    },
+    {
+      "id": "color_constant_uint8_srgb",
+      "output": [
+        128,
+        128,
+        128
+      ],
+      "api_reference": [
+        128,
+        128,
+        128
+      ],
+      "intended_reference": [
+        128,
+        128,
+        128
+      ],
+      "tolerance": 1,
+      "api_max_abs_error": 0,
+      "intended_max_abs_error": 0,
+      "matches_api_reference": true,
+      "matches_intended_contract": true,
+      "matches_declared_outcome": true
+    },
+    {
+      "id": "edge_red_straight",
+      "output": [
+        0,
+        0,
+        255,
+        128
+      ],
+      "api_reference": [
+        0,
+        0,
+        255,
+        128
+      ],
+      "intended_reference": [
+        0,
+        0,
+        255,
+        128
+      ],
+      "tolerance": 1,
+      "api_max_abs_error": 0,
+      "intended_max_abs_error": 0,
+      "matches_api_reference": true,
+      "matches_intended_contract": true,
+      "matches_declared_outcome": true
+    },
+    {
+      "id": "edge_green_straight",
+      "output": [
+        0,
+        0,
+        255,
+        128
+      ],
+      "api_reference": [
+        0,
+        0,
+        255,
+        128
+      ],
+      "intended_reference": [
+        0,
+        0,
+        255,
+        128
+      ],
+      "tolerance": 1,
+      "api_max_abs_error": 0,
+      "intended_max_abs_error": 0,
+      "matches_api_reference": true,
+      "matches_intended_contract": true,
+      "matches_declared_outcome": true
+    },
+    {
+      "id": "edge_generic_linear",
+      "output": [
+        128,
+        0,
+        128,
+        128
+      ],
+      "api_reference": [
+        128,
+        0,
+        128,
+        128
+      ],
+      "intended_reference": [
+        0,
+        0,
+        255,
+        128
+      ],
+      "tolerance": 1,
+      "api_max_abs_error": 0,
+      "intended_max_abs_error": 128,
+      "matches_api_reference": true,
+      "matches_intended_contract": false,
+      "matches_declared_outcome": true
+    },
+    {
+      "id": "edge_generic_srgb",
+      "output": [
+        188,
+        0,
+        188,
+        188
+      ],
+      "api_reference": [
+        188,
+        0,
+        188,
+        188
+      ],
+      "intended_reference": [
+        0,
+        0,
+        255,
+        128
+      ],
+      "tolerance": 1,
+      "api_max_abs_error": 0,
+      "intended_max_abs_error": 188,
+      "matches_api_reference": true,
+      "matches_intended_contract": false,
+      "matches_declared_outcome": true
+    },
+    {
+      "id": "edge_wrong_premultiplied",
+      "output": [
+        188,
+        0,
+        188,
+        128
+      ],
+      "api_reference": [
+        188,
+        0,
+        188,
+        128
+      ],
+      "intended_reference": [
+        0,
+        0,
+        255,
+        128
+      ],
+      "tolerance": 1,
+      "api_max_abs_error": 0,
+      "intended_max_abs_error": 188,
+      "matches_api_reference": true,
+      "matches_intended_contract": false,
+      "matches_declared_outcome": true
+    },
+    {
+      "id": "scalar_linear",
+      "output": [
+        128
+      ],
+      "api_reference": [
+        128
+      ],
+      "intended_reference": [
+        128
+      ],
+      "tolerance": 1,
+      "api_max_abs_error": 0,
+      "intended_max_abs_error": 0,
+      "matches_api_reference": true,
+      "matches_intended_contract": true,
+      "matches_declared_outcome": true
+    },
+    {
+      "id": "scalar_srgb",
+      "output": [
+        188
+      ],
+      "api_reference": [
+        188
+      ],
+      "intended_reference": [
+        128
+      ],
+      "tolerance": 1,
+      "api_max_abs_error": 0,
+      "intended_max_abs_error": 60,
+      "matches_api_reference": true,
+      "matches_intended_contract": false,
+      "matches_declared_outcome": true
+    },
+    {
+      "id": "float_straight",
+      "output": [
+        0.5,
+        0,
+        0.5,
+        0.5
+      ],
+      "api_reference": [
+        0.5,
+        0.0,
+        0.5,
+        0.5
+      ],
+      "intended_reference": [
+        0.5,
+        0.0,
+        0.5,
+        0.5
+      ],
+      "tolerance": 1e-06,
+      "api_max_abs_error": 0.0,
+      "intended_max_abs_error": 0.0,
+      "matches_api_reference": true,
+      "matches_intended_contract": true,
+      "matches_declared_outcome": true
+    },
+    {
+      "id": "float_premultiplied",
+      "output": [
+        0.25,
+        0,
+        0.25,
+        0.5
+      ],
+      "api_reference": [
+        0.25,
+        0.0,
+        0.25,
+        0.5
+      ],
+      "intended_reference": [
+        0.25,
+        0.0,
+        0.25,
+        0.5
+      ],
+      "tolerance": 1e-06,
+      "api_max_abs_error": 0.0,
+      "intended_max_abs_error": 0.0,
+      "matches_api_reference": true,
+      "matches_intended_contract": true,
+      "matches_declared_outcome": true
+    },
+    {
+      "id": "float_double_weighted",
+      "output": [
+        0.25,
+        0,
+        0.25,
+        0.5
+      ],
+      "api_reference": [
+        0.25,
+        0.0,
+        0.25,
+        0.5
+      ],
+      "intended_reference": [
+        0.5,
+        0.0,
+        0.5,
+        0.5
+      ],
+      "tolerance": 1e-06,
+      "api_max_abs_error": 0.0,
+      "intended_max_abs_error": 0.25,
+      "matches_api_reference": true,
+      "matches_intended_contract": false,
+      "matches_declared_outcome": true
+    }
+  ],
+  "findings": {
+    "hidden_rgb_outputs_equal": true,
+    "black_white_encoded_average": [
+      128,
+      128,
+      128
+    ],
+    "black_white_linear_light_average": [
+      188,
+      188,
+      188
+    ],
+    "linear_scalar": [
+      128
+    ],
+    "srgb_scalar_control": [
+      188
+    ],
+    "linear_float_source_over_black": {
+      "float_straight": [
+        0.25,
+        0.0,
+        0.25
+      ],
+      "float_premultiplied": [
+        0.25,
+        0,
+        0.25
+      ],
+      "float_double_weighted": [
+        0.125,
+        0.0,
+        0.125
+      ]
+    },
+    "mask_cutoff": 0.5,
+    "original_two_pixel_mask_coverage": 0.5,
+    "filtered_one_pixel_mask_coverage": 1.0,
+    "warning": "Compositing and mask coverage are bounded numeric observations, not renderer or mip-chain results."
+  },
+  "all_expected": true
+}

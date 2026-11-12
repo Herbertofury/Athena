@@ -1,0 +1,90 @@
+[
+  {
+    "id": "BST11001",
+    "title": "Bluesky canonical thread query lexicon",
+    "url": "https://github.com/bluesky-social/bsky/blob/19fb7b03e1096ee88376ca403103804c3e5856ce/lexicons/app/bsky/feed/getPostThread.json",
+    "observed_version": "Pinned canonical schema 19fb7b03e1096ee88376ca403103804c3e5856ce",
+    "topic": "bluesky-thread-evidence",
+    "note": "Anonymous query, explicit URI/depth/parentHeight and three output variants; no collection cursor in this schema.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 60,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "BST11002",
+    "title": "Bluesky thread view and unavailable-post definitions",
+    "url": "https://github.com/bluesky-social/bsky/blob/19fb7b03e1096ee88376ca403103804c3e5856ce/lexicons/app/bsky/feed/defs.json",
+    "observed_version": "Pinned canonical schema 19fb7b03e1096ee88376ca403103804c3e5856ce",
+    "topic": "bluesky-thread-evidence",
+    "note": "Visible post, notFound and blocked variants, optional parent/replies and separate viewer/threadgate context.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 60,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "BST11003",
+    "title": "Bluesky post record reply references",
+    "url": "https://github.com/bluesky-social/bsky/blob/19fb7b03e1096ee88376ca403103804c3e5856ce/lexicons/app/bsky/feed/post.json",
+    "observed_version": "Pinned canonical schema 19fb7b03e1096ee88376ca403103804c3e5856ce",
+    "topic": "bluesky-thread-evidence",
+    "note": "Reply root and parent are separate strong references; records preserve original text and embeds.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 60,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "BST11004",
+    "title": "Bluesky viewing threads",
+    "url": "https://bsky.network/docs/bluesky-api/viewing-threads/",
+    "observed_version": "Served reference checked 2026-11-11",
+    "topic": "bluesky-thread-evidence",
+    "note": "Ancestor and descendant request scope; notFound may mean nonexistent, deleted or moderation takedown.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 60,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "BST11005",
+    "title": "Bluesky API hosts and auth",
+    "url": "https://bsky.network/docs/api-directory/",
+    "observed_version": "Served reference checked 2026-11-11",
+    "topic": "bluesky-thread-evidence",
+    "note": "Cached public.api.bsky.app is the preferred public-read route; authenticated PDS-proxied views differ.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 60,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "BST11006",
+    "title": "Bluesky developer guidelines",
+    "url": "https://bsky.network/docs/developer-guidelines/",
+    "observed_version": "Served guidelines checked 2026-11-11",
+    "topic": "bluesky-thread-evidence",
+    "note": "No automated interactions; future social applications need reporting, content removal and security processes.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 60,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "BST11007",
+    "title": "AT Protocol canonical lexicons directory",
+    "url": "https://github.com/bluesky-social/atproto/blob/main/lexicons/README.md",
+    "observed_version": "Observed blob 20820b5df204e3e4641f17d26c66a06470debc30",
+    "topic": "bluesky-thread-evidence",
+    "note": "Canonical app.bsky definitions now live in bluesky-social/bsky; old atproto path is not the current schema source.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 60,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "BST11008",
+    "title": "EightSidedSquare public Content Content thread",
+    "url": "https://bsky.app/profile/eightsidedsquare.com/post/3lmb5eoamek2s",
+    "observed_version": "Three anonymous AppView captures on 2026-11-11",
+    "topic": "bluesky-thread-evidence",
+    "note": "Depth-zero, depth-two and one returned reply context; twelve visible representations across captures, nine distinct post identities. No full-history or playback acceptance.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 60,
+    "evidence": "primary_documented"
+  }
+]

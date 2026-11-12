@@ -1,0 +1,18 @@
+test_actual_rebuild_api_interrupted_inside_sql_restores_prior_state (__main__.IndependentReview.test_actual_rebuild_api_interrupted_inside_sql_restores_prior_state) ... ok
+test_audit_busy_is_distinct_from_corruption (__main__.IndependentReview.test_audit_busy_is_distinct_from_corruption) ... ok
+test_commit_busy_rebuild_restores_original_drift (__main__.IndependentReview.test_commit_busy_rebuild_restores_original_drift) ... ok
+test_commit_busy_rolls_back_written_data_and_postings (__main__.IndependentReview.test_commit_busy_rolls_back_written_data_and_postings) ... ok
+test_dbapi_commit_and_rollback_are_noops_in_this_mode (__main__.IndependentReview.test_dbapi_commit_and_rollback_are_noops_in_this_mode) ... ok
+test_fail_abort_and_rollback_trigger_exceptions_leave_no_partial_commit (__main__.IndependentReview.test_fail_abort_and_rollback_trigger_exceptions_leave_no_partial_commit) ... ok
+test_missing_triggers_pass_audit_and_rebuild_does_not_repair_schema (__main__.IndependentReview.test_missing_triggers_pass_audit_and_rebuild_does_not_repair_schema) ... ok
+test_multirow_update_unique_constraint_restores_statement (__main__.IndependentReview.test_multirow_update_unique_constraint_restores_statement) ... ok
+test_nested_rebuild_and_audit_leave_caller_transaction_untouched (__main__.IndependentReview.test_nested_rebuild_and_audit_leave_caller_transaction_untouched) ... ok
+test_recursive_triggers_on_paired_replace_control (__main__.IndependentReview.test_recursive_triggers_on_paired_replace_control) ... ok
+test_reinsert_reusing_rowid_has_no_old_terms (__main__.IndependentReview.test_reinsert_reusing_rowid_has_no_old_terms) ... ok
+test_replace_new_rowid_off_produces_detectable_orphan (__main__.IndependentReview.test_replace_new_rowid_off_produces_detectable_orphan) ... ok
+test_wal_exit_before_and_after_commit_reopened (__main__.IndependentReview.test_wal_exit_before_and_after_commit_reopened) ... ok
+
+----------------------------------------------------------------------
+Ran 13 tests in 1.116s
+
+OK

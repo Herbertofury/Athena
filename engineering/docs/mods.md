@@ -21,3 +21,27 @@ For Sims and other proprietary games, record the exact supported scripting/runti
 ## Native proof
 
 Use the actual target runtime, normal installed launch path, real assets, both successful and failing scenarios, multiplayer authority where relevant, and long-lived save compatibility. A successful compile, JSON validator or pretty render is only one gate.
+
+## Operational acceptance guide
+
+[Mod build acceptance](mod-build-acceptance.md) separates version lanes, Java toolchains, dependency identity, packaging and native-game evidence. Use the [compatibility receipt](../templates/mod-compatibility-receipt.md) before a target-specific comparison.
+
+## Dependency meaning and diagnostics
+
+[Dependency semantics](mod-dependency-semantics.md) separates loader metadata, version grammar, physical-side filtering and ordering. The [version API laboratory](../experiments/mod-version-semantics-lab/README.md) retains 60 measured upstream-API observations on synthetic inputs, not native mod compatibility or a universal resolver.
+
+## Bytecode injection acceptance
+
+[Injection compatibility](mod-bytecode-acceptance.md) covers selector identity, match counts, fork/remapping boundaries and native acceptance. The [bytecode selector laboratory](../experiments/bytecode-selector-lab/README.md) compiles and inspects original synthetic fixtures without loading a game or running Mixin.
+
+## Resource packaging evidence
+
+Use [resource packaging acceptance](mod-resource-packaging.md) and the [offline Gradle laboratory](../experiments/resource-packaging-lab/README.md) to separate repeatable archive bytes from complete, unique resource payloads. The lab builds original synthetic resources, not a game mod. [Dated findings](../research/2026-11-11-mod-resource-packaging.md) retain duplicate failures and source-scoped limitations.
+
+## Class loading and environment boundaries
+
+[Class-loading acceptance](mod-classloading-boundaries.md) separates compilation, discovery, reflection, initialization and invocation. The [original JVM fixture lab](../experiments/classloading-boundary-lab/README.md) demonstrates absent-dependency and initializer failures without claiming a native dedicated-server test. See the [dated evidence](../research/2026-11-11-mod-classloading.md).
+
+## Dependency selection, locking and verified files
+
+Use [build dependency evidence](mod-dependency-resolution.md) and its [offline Gradle laboratory](../experiments/dependency-resolution-lab/README.md) to distinguish a resolved graph, a stable version lock and checked artifact bytes. The original fixtures retain strict/forced downgrades, missing locked modules and changed JAR/POM failures. These are build-tool observations, not mod-loader or binary compatibility. [Dated findings](../research/2026-11-11-mod-dependency-resolution.md) retain the initial contradicted hypotheses.

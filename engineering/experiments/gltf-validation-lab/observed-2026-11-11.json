@@ -1,0 +1,2950 @@
+{
+  "schema_version": 1,
+  "scope": "Official glTF Validator on original tiny fixtures plus a limited animation/geometry data contract. No rendering, animation playback, importer, game, target compatibility, or performance acceptance.",
+  "recorded_at_utc": "2026-11-11T02:50:00.697Z",
+  "runtime": {
+    "node": "v24.22.1",
+    "platform": "linux",
+    "architecture": "x64"
+  },
+  "dependency": {
+    "name": "gltf-validator",
+    "version": "2.0.0-dev.3.10",
+    "url": "https://registry.npmjs.org/gltf-validator/-/gltf-validator-2.0.0-dev.3.10.tgz",
+    "bytes": 110015,
+    "sha256": "4e03dbdc3bc0d1342afd5d2d7ae341a7e3474502ccb872b02dbbaddaee0fdec6",
+    "sha512_integrity": "sha512-odJ4k0tRkGXiDGn78yDBg+fBbAIvBnXxh3RwAta0emSxGtyagFE8B4xELB1oYe3S5RD8Ci3uZAsZaascH2LAEQ==",
+    "git_head": "bcd52cc4ba5f333b2999a58f67cc05ddf28b4fb1",
+    "published_at": "2024-10-22T14:21:47.401Z",
+    "files": {
+      "validation.schema.json": {
+        "bytes": 11107,
+        "sha256": "e33db4da1e907481a5fc056d2daab40be1a603620d8f4a1c81919120f3340365"
+      },
+      "README.md": {
+        "bytes": 6814,
+        "sha256": "f5f26dc624a62817b356cec631b33af7358d046a4b2c0499a5f55189d986afa5"
+      },
+      "index.js": {
+        "bytes": 2829,
+        "sha256": "78deff9ea85743e86461c2d14fae76e7fc3ca0432e652f62948066b55fa16f0d"
+      },
+      "package.json": {
+        "bytes": 618,
+        "sha256": "3578d16153fa237c72784588da2e8fcccc9cd3c1c58ef34c7912f0732d2f5fa6"
+      },
+      "module.mjs": {
+        "bytes": 2822,
+        "sha256": "d2a88775a8b22f61be8e00644760f0f04b615fad0fc5175fefd40e0da4df2c8f"
+      },
+      "NOTICES": {
+        "bytes": 22286,
+        "sha256": "933f161ca1e7b3ead5a6cf93ebb3bf6cb67f0e79b38e08d2046f8cdc41cb78a3"
+      },
+      "LICENSE": {
+        "bytes": 11560,
+        "sha256": "3ddf9be5c28fe27dad143a5dc76eea25222ad1dd68934a047064e56ed2fa40c5"
+      },
+      "ISSUES.md": {
+        "bytes": 17519,
+        "sha256": "72981a105335964111253e7e5db4e956b8ab3a17fd74c2d02180bffc7f533c20"
+      },
+      "gltf_validator.dart.js": {
+        "bytes": 307792,
+        "sha256": "b73a7b2d455ac217567725138b46d826a13d7d1bb0c88c15f7c571bfb349298c"
+      }
+    },
+    "supported_extensions": [
+      "EXT_texture_webp",
+      "KHR_animation_pointer",
+      "KHR_lights_punctual",
+      "KHR_materials_anisotropy",
+      "KHR_materials_clearcoat",
+      "KHR_materials_dispersion",
+      "KHR_materials_emissive_strength",
+      "KHR_materials_ior",
+      "KHR_materials_iridescence",
+      "KHR_materials_pbrSpecularGlossiness",
+      "KHR_materials_sheen",
+      "KHR_materials_specular",
+      "KHR_materials_transmission",
+      "KHR_materials_unlit",
+      "KHR_materials_variants",
+      "KHR_materials_volume",
+      "KHR_mesh_quantization",
+      "KHR_texture_transform"
+    ]
+  },
+  "input_sha256": {
+    "run.mjs": "aac2469a003c885270f69aada145ac811da57298e27aa64d3444a002edc8cab9",
+    "fixtures.mjs": "0b6771cd169dd7b6a383699436e683e5435dfae63e03c44ee9da863643f4112b",
+    "dependency.json": "968f24a70447751d05bf1ccd186c391c6412f1f25c8340b6eb5582ad58b2d862",
+    "initial-hypothesis.json": "943b7f59c11fc998dbc498b349fe0201923e4564d29a0a17a96718078fa9e57a"
+  },
+  "cases": [
+    {
+      "id": "valid_linear",
+      "document": {
+        "asset": {
+          "version": "2.0",
+          "generator": "Athena original validation fixture"
+        },
+        "scene": 0,
+        "scenes": [
+          {
+            "nodes": [
+              0
+            ]
+          }
+        ],
+        "nodes": [
+          {
+            "name": "OriginalTriangle",
+            "mesh": 0
+          }
+        ],
+        "meshes": [
+          {
+            "primitives": [
+              {
+                "attributes": {
+                  "POSITION": 0
+                },
+                "indices": 1,
+                "mode": 4
+              }
+            ]
+          }
+        ],
+        "buffers": [
+          {
+            "uri": "scene.bin",
+            "byteLength": 76
+          }
+        ],
+        "bufferViews": [
+          {
+            "buffer": 0,
+            "byteOffset": 0,
+            "byteLength": 36,
+            "target": 34962
+          },
+          {
+            "buffer": 0,
+            "byteOffset": 36,
+            "byteLength": 6,
+            "target": 34963
+          },
+          {
+            "buffer": 0,
+            "byteOffset": 44,
+            "byteLength": 8
+          },
+          {
+            "buffer": 0,
+            "byteOffset": 52,
+            "byteLength": 24
+          }
+        ],
+        "accessors": [
+          {
+            "bufferView": 0,
+            "componentType": 5126,
+            "count": 3,
+            "type": "VEC3",
+            "min": [
+              0,
+              0,
+              0
+            ],
+            "max": [
+              1,
+              1,
+              0
+            ]
+          },
+          {
+            "bufferView": 1,
+            "componentType": 5123,
+            "count": 3,
+            "type": "SCALAR",
+            "min": [
+              0
+            ],
+            "max": [
+              2
+            ]
+          },
+          {
+            "bufferView": 2,
+            "componentType": 5126,
+            "count": 2,
+            "type": "SCALAR",
+            "min": [
+              0
+            ],
+            "max": [
+              1
+            ]
+          },
+          {
+            "bufferView": 3,
+            "componentType": 5126,
+            "count": 2,
+            "type": "VEC3"
+          }
+        ],
+        "animations": [
+          {
+            "name": "Move",
+            "samplers": [
+              {
+                "input": 2,
+                "output": 3,
+                "interpolation": "LINEAR"
+              }
+            ],
+            "channels": [
+              {
+                "sampler": 0,
+                "target": {
+                  "node": 0,
+                  "path": "translation"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "resources": {
+        "scene.bin": "0000000000000000000000000000803f0000000000000000000000000000803f000000000000010002000000000000000000803f0000000000000000000000000000803f0000000000000000"
+      },
+      "read_resources": true,
+      "max_issues": 128,
+      "expected": {
+        "num_errors": 0,
+        "issue_codes": [],
+        "is_truncated": false,
+        "fixture_gate": true
+      }
+    },
+    {
+      "id": "changed_motion",
+      "document": {
+        "asset": {
+          "version": "2.0",
+          "generator": "Athena original validation fixture"
+        },
+        "scene": 0,
+        "scenes": [
+          {
+            "nodes": [
+              0
+            ]
+          }
+        ],
+        "nodes": [
+          {
+            "name": "OriginalTriangle",
+            "mesh": 0
+          }
+        ],
+        "meshes": [
+          {
+            "primitives": [
+              {
+                "attributes": {
+                  "POSITION": 0
+                },
+                "indices": 1,
+                "mode": 4
+              }
+            ]
+          }
+        ],
+        "buffers": [
+          {
+            "uri": "scene.bin",
+            "byteLength": 76
+          }
+        ],
+        "bufferViews": [
+          {
+            "buffer": 0,
+            "byteOffset": 0,
+            "byteLength": 36,
+            "target": 34962
+          },
+          {
+            "buffer": 0,
+            "byteOffset": 36,
+            "byteLength": 6,
+            "target": 34963
+          },
+          {
+            "buffer": 0,
+            "byteOffset": 44,
+            "byteLength": 8
+          },
+          {
+            "buffer": 0,
+            "byteOffset": 52,
+            "byteLength": 24
+          }
+        ],
+        "accessors": [
+          {
+            "bufferView": 0,
+            "componentType": 5126,
+            "count": 3,
+            "type": "VEC3",
+            "min": [
+              0,
+              0,
+              0
+            ],
+            "max": [
+              1,
+              1,
+              0
+            ]
+          },
+          {
+            "bufferView": 1,
+            "componentType": 5123,
+            "count": 3,
+            "type": "SCALAR",
+            "min": [
+              0
+            ],
+            "max": [
+              2
+            ]
+          },
+          {
+            "bufferView": 2,
+            "componentType": 5126,
+            "count": 2,
+            "type": "SCALAR",
+            "min": [
+              0
+            ],
+            "max": [
+              1
+            ]
+          },
+          {
+            "bufferView": 3,
+            "componentType": 5126,
+            "count": 2,
+            "type": "VEC3"
+          }
+        ],
+        "animations": [
+          {
+            "name": "Move",
+            "samplers": [
+              {
+                "input": 2,
+                "output": 3,
+                "interpolation": "LINEAR"
+              }
+            ],
+            "channels": [
+              {
+                "sampler": 0,
+                "target": {
+                  "node": 0,
+                  "path": "translation"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "resources": {
+        "scene.bin": "0000000000000000000000000000803f0000000000000000000000000000803f000000000000010002000000000000000000803f000000000000000000000000000080400000000000000000"
+      },
+      "read_resources": true,
+      "max_issues": 128,
+      "expected": {
+        "num_errors": 0,
+        "issue_codes": [],
+        "is_truncated": false,
+        "fixture_gate": false
+      }
+    },
+    {
+      "id": "animation_removed",
+      "document": {
+        "asset": {
+          "version": "2.0",
+          "generator": "Athena original validation fixture"
+        },
+        "scene": 0,
+        "scenes": [
+          {
+            "nodes": [
+              0
+            ]
+          }
+        ],
+        "nodes": [
+          {
+            "name": "OriginalTriangle",
+            "mesh": 0
+          }
+        ],
+        "meshes": [
+          {
+            "primitives": [
+              {
+                "attributes": {
+                  "POSITION": 0
+                },
+                "indices": 1,
+                "mode": 4
+              }
+            ]
+          }
+        ],
+        "buffers": [
+          {
+            "uri": "scene.bin",
+            "byteLength": 44
+          }
+        ],
+        "bufferViews": [
+          {
+            "buffer": 0,
+            "byteOffset": 0,
+            "byteLength": 36,
+            "target": 34962
+          },
+          {
+            "buffer": 0,
+            "byteOffset": 36,
+            "byteLength": 6,
+            "target": 34963
+          }
+        ],
+        "accessors": [
+          {
+            "bufferView": 0,
+            "componentType": 5126,
+            "count": 3,
+            "type": "VEC3",
+            "min": [
+              0,
+              0,
+              0
+            ],
+            "max": [
+              1,
+              1,
+              0
+            ]
+          },
+          {
+            "bufferView": 1,
+            "componentType": 5123,
+            "count": 3,
+            "type": "SCALAR",
+            "min": [
+              0
+            ],
+            "max": [
+              2
+            ]
+          }
+        ]
+      },
+      "resources": {
+        "scene.bin": "0000000000000000000000000000803f0000000000000000000000000000803f000000000000010002000000"
+      },
+      "read_resources": true,
+      "max_issues": 128,
+      "expected": {
+        "num_errors": 0,
+        "issue_codes": [],
+        "is_truncated": false,
+        "fixture_gate": false
+      }
+    },
+    {
+      "id": "bad_index",
+      "document": {
+        "asset": {
+          "version": "2.0",
+          "generator": "Athena original validation fixture"
+        },
+        "scene": 0,
+        "scenes": [
+          {
+            "nodes": [
+              0
+            ]
+          }
+        ],
+        "nodes": [
+          {
+            "name": "OriginalTriangle",
+            "mesh": 0
+          }
+        ],
+        "meshes": [
+          {
+            "primitives": [
+              {
+                "attributes": {
+                  "POSITION": 0
+                },
+                "indices": 1,
+                "mode": 4
+              }
+            ]
+          }
+        ],
+        "buffers": [
+          {
+            "uri": "scene.bin",
+            "byteLength": 76
+          }
+        ],
+        "bufferViews": [
+          {
+            "buffer": 0,
+            "byteOffset": 0,
+            "byteLength": 36,
+            "target": 34962
+          },
+          {
+            "buffer": 0,
+            "byteOffset": 36,
+            "byteLength": 6,
+            "target": 34963
+          },
+          {
+            "buffer": 0,
+            "byteOffset": 44,
+            "byteLength": 8
+          },
+          {
+            "buffer": 0,
+            "byteOffset": 52,
+            "byteLength": 24
+          }
+        ],
+        "accessors": [
+          {
+            "bufferView": 0,
+            "componentType": 5126,
+            "count": 3,
+            "type": "VEC3",
+            "min": [
+              0,
+              0,
+              0
+            ],
+            "max": [
+              1,
+              1,
+              0
+            ]
+          },
+          {
+            "bufferView": 1,
+            "componentType": 5123,
+            "count": 3,
+            "type": "SCALAR",
+            "min": [
+              0
+            ],
+            "max": [
+              3
+            ]
+          },
+          {
+            "bufferView": 2,
+            "componentType": 5126,
+            "count": 2,
+            "type": "SCALAR",
+            "min": [
+              0
+            ],
+            "max": [
+              1
+            ]
+          },
+          {
+            "bufferView": 3,
+            "componentType": 5126,
+            "count": 2,
+            "type": "VEC3"
+          }
+        ],
+        "animations": [
+          {
+            "name": "Move",
+            "samplers": [
+              {
+                "input": 2,
+                "output": 3,
+                "interpolation": "LINEAR"
+              }
+            ],
+            "channels": [
+              {
+                "sampler": 0,
+                "target": {
+                  "node": 0,
+                  "path": "translation"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "resources": {
+        "scene.bin": "0000000000000000000000000000803f0000000000000000000000000000803f000000000000010003000000000000000000803f0000000000000000000000000000803f0000000000000000"
+      },
+      "read_resources": true,
+      "max_issues": 128,
+      "expected": {
+        "num_errors": 1,
+        "issue_codes": [
+          "ACCESSOR_INDEX_OOB"
+        ],
+        "is_truncated": false,
+        "fixture_gate": false
+      }
+    },
+    {
+      "id": "bad_index_unchecked",
+      "document": {
+        "asset": {
+          "version": "2.0",
+          "generator": "Athena original validation fixture"
+        },
+        "scene": 0,
+        "scenes": [
+          {
+            "nodes": [
+              0
+            ]
+          }
+        ],
+        "nodes": [
+          {
+            "name": "OriginalTriangle",
+            "mesh": 0
+          }
+        ],
+        "meshes": [
+          {
+            "primitives": [
+              {
+                "attributes": {
+                  "POSITION": 0
+                },
+                "indices": 1,
+                "mode": 4
+              }
+            ]
+          }
+        ],
+        "buffers": [
+          {
+            "uri": "scene.bin",
+            "byteLength": 76
+          }
+        ],
+        "bufferViews": [
+          {
+            "buffer": 0,
+            "byteOffset": 0,
+            "byteLength": 36,
+            "target": 34962
+          },
+          {
+            "buffer": 0,
+            "byteOffset": 36,
+            "byteLength": 6,
+            "target": 34963
+          },
+          {
+            "buffer": 0,
+            "byteOffset": 44,
+            "byteLength": 8
+          },
+          {
+            "buffer": 0,
+            "byteOffset": 52,
+            "byteLength": 24
+          }
+        ],
+        "accessors": [
+          {
+            "bufferView": 0,
+            "componentType": 5126,
+            "count": 3,
+            "type": "VEC3",
+            "min": [
+              0,
+              0,
+              0
+            ],
+            "max": [
+              1,
+              1,
+              0
+            ]
+          },
+          {
+            "bufferView": 1,
+            "componentType": 5123,
+            "count": 3,
+            "type": "SCALAR",
+            "min": [
+              0
+            ],
+            "max": [
+              3
+            ]
+          },
+          {
+            "bufferView": 2,
+            "componentType": 5126,
+            "count": 2,
+            "type": "SCALAR",
+            "min": [
+              0
+            ],
+            "max": [
+              1
+            ]
+          },
+          {
+            "bufferView": 3,
+            "componentType": 5126,
+            "count": 2,
+            "type": "VEC3"
+          }
+        ],
+        "animations": [
+          {
+            "name": "Move",
+            "samplers": [
+              {
+                "input": 2,
+                "output": 3,
+                "interpolation": "LINEAR"
+              }
+            ],
+            "channels": [
+              {
+                "sampler": 0,
+                "target": {
+                  "node": 0,
+                  "path": "translation"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "resources": {
+        "scene.bin": "0000000000000000000000000000803f0000000000000000000000000000803f000000000000010003000000000000000000803f0000000000000000000000000000803f0000000000000000"
+      },
+      "read_resources": false,
+      "max_issues": 128,
+      "expected": {
+        "num_errors": 1,
+        "issue_codes": [
+          "IO_ERROR"
+        ],
+        "is_truncated": false,
+        "fixture_gate": false
+      }
+    },
+    {
+      "id": "duplicate_time",
+      "document": {
+        "asset": {
+          "version": "2.0",
+          "generator": "Athena original validation fixture"
+        },
+        "scene": 0,
+        "scenes": [
+          {
+            "nodes": [
+              0
+            ]
+          }
+        ],
+        "nodes": [
+          {
+            "name": "OriginalTriangle",
+            "mesh": 0
+          }
+        ],
+        "meshes": [
+          {
+            "primitives": [
+              {
+                "attributes": {
+                  "POSITION": 0
+                },
+                "indices": 1,
+                "mode": 4
+              }
+            ]
+          }
+        ],
+        "buffers": [
+          {
+            "uri": "scene.bin",
+            "byteLength": 76
+          }
+        ],
+        "bufferViews": [
+          {
+            "buffer": 0,
+            "byteOffset": 0,
+            "byteLength": 36,
+            "target": 34962
+          },
+          {
+            "buffer": 0,
+            "byteOffset": 36,
+            "byteLength": 6,
+            "target": 34963
+          },
+          {
+            "buffer": 0,
+            "byteOffset": 44,
+            "byteLength": 8
+          },
+          {
+            "buffer": 0,
+            "byteOffset": 52,
+            "byteLength": 24
+          }
+        ],
+        "accessors": [
+          {
+            "bufferView": 0,
+            "componentType": 5126,
+            "count": 3,
+            "type": "VEC3",
+            "min": [
+              0,
+              0,
+              0
+            ],
+            "max": [
+              1,
+              1,
+              0
+            ]
+          },
+          {
+            "bufferView": 1,
+            "componentType": 5123,
+            "count": 3,
+            "type": "SCALAR",
+            "min": [
+              0
+            ],
+            "max": [
+              2
+            ]
+          },
+          {
+            "bufferView": 2,
+            "componentType": 5126,
+            "count": 2,
+            "type": "SCALAR",
+            "min": [
+              0
+            ],
+            "max": [
+              0
+            ]
+          },
+          {
+            "bufferView": 3,
+            "componentType": 5126,
+            "count": 2,
+            "type": "VEC3"
+          }
+        ],
+        "animations": [
+          {
+            "name": "Move",
+            "samplers": [
+              {
+                "input": 2,
+                "output": 3,
+                "interpolation": "LINEAR"
+              }
+            ],
+            "channels": [
+              {
+                "sampler": 0,
+                "target": {
+                  "node": 0,
+                  "path": "translation"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "resources": {
+        "scene.bin": "0000000000000000000000000000803f0000000000000000000000000000803f00000000000001000200000000000000000000000000000000000000000000000000803f0000000000000000"
+      },
+      "read_resources": true,
+      "max_issues": 128,
+      "expected": {
+        "num_errors": 1,
+        "issue_codes": [
+          "ACCESSOR_ANIMATION_INPUT_NON_INCREASING"
+        ],
+        "is_truncated": false,
+        "fixture_gate": false
+      }
+    },
+    {
+      "id": "matrix_animation",
+      "document": {
+        "asset": {
+          "version": "2.0",
+          "generator": "Athena original validation fixture"
+        },
+        "scene": 0,
+        "scenes": [
+          {
+            "nodes": [
+              0
+            ]
+          }
+        ],
+        "nodes": [
+          {
+            "name": "OriginalTriangle",
+            "mesh": 0,
+            "matrix": [
+              1,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              2,
+              0,
+              0,
+              1
+            ]
+          }
+        ],
+        "meshes": [
+          {
+            "primitives": [
+              {
+                "attributes": {
+                  "POSITION": 0
+                },
+                "indices": 1,
+                "mode": 4
+              }
+            ]
+          }
+        ],
+        "buffers": [
+          {
+            "uri": "scene.bin",
+            "byteLength": 76
+          }
+        ],
+        "bufferViews": [
+          {
+            "buffer": 0,
+            "byteOffset": 0,
+            "byteLength": 36,
+            "target": 34962
+          },
+          {
+            "buffer": 0,
+            "byteOffset": 36,
+            "byteLength": 6,
+            "target": 34963
+          },
+          {
+            "buffer": 0,
+            "byteOffset": 44,
+            "byteLength": 8
+          },
+          {
+            "buffer": 0,
+            "byteOffset": 52,
+            "byteLength": 24
+          }
+        ],
+        "accessors": [
+          {
+            "bufferView": 0,
+            "componentType": 5126,
+            "count": 3,
+            "type": "VEC3",
+            "min": [
+              0,
+              0,
+              0
+            ],
+            "max": [
+              1,
+              1,
+              0
+            ]
+          },
+          {
+            "bufferView": 1,
+            "componentType": 5123,
+            "count": 3,
+            "type": "SCALAR",
+            "min": [
+              0
+            ],
+            "max": [
+              2
+            ]
+          },
+          {
+            "bufferView": 2,
+            "componentType": 5126,
+            "count": 2,
+            "type": "SCALAR",
+            "min": [
+              0
+            ],
+            "max": [
+              1
+            ]
+          },
+          {
+            "bufferView": 3,
+            "componentType": 5126,
+            "count": 2,
+            "type": "VEC3"
+          }
+        ],
+        "animations": [
+          {
+            "name": "Move",
+            "samplers": [
+              {
+                "input": 2,
+                "output": 3,
+                "interpolation": "LINEAR"
+              }
+            ],
+            "channels": [
+              {
+                "sampler": 0,
+                "target": {
+                  "node": 0,
+                  "path": "translation"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "resources": {
+        "scene.bin": "0000000000000000000000000000803f0000000000000000000000000000803f000000000000010002000000000000000000803f0000000000000000000000000000803f0000000000000000"
+      },
+      "read_resources": true,
+      "max_issues": 128,
+      "expected": {
+        "num_errors": 1,
+        "issue_codes": [
+          "ANIMATION_CHANNEL_TARGET_NODE_MATRIX"
+        ],
+        "is_truncated": false,
+        "fixture_gate": false
+      }
+    },
+    {
+      "id": "unknown_required",
+      "document": {
+        "asset": {
+          "version": "2.0",
+          "generator": "Athena original validation fixture"
+        },
+        "scene": 0,
+        "scenes": [
+          {
+            "nodes": [
+              0
+            ]
+          }
+        ],
+        "nodes": [
+          {
+            "name": "OriginalTriangle",
+            "mesh": 0
+          }
+        ],
+        "meshes": [
+          {
+            "primitives": [
+              {
+                "attributes": {
+                  "POSITION": 0
+                },
+                "indices": 1,
+                "mode": 4
+              }
+            ]
+          }
+        ],
+        "buffers": [
+          {
+            "uri": "scene.bin",
+            "byteLength": 76
+          }
+        ],
+        "bufferViews": [
+          {
+            "buffer": 0,
+            "byteOffset": 0,
+            "byteLength": 36,
+            "target": 34962
+          },
+          {
+            "buffer": 0,
+            "byteOffset": 36,
+            "byteLength": 6,
+            "target": 34963
+          },
+          {
+            "buffer": 0,
+            "byteOffset": 44,
+            "byteLength": 8
+          },
+          {
+            "buffer": 0,
+            "byteOffset": 52,
+            "byteLength": 24
+          }
+        ],
+        "accessors": [
+          {
+            "bufferView": 0,
+            "componentType": 5126,
+            "count": 3,
+            "type": "VEC3",
+            "min": [
+              0,
+              0,
+              0
+            ],
+            "max": [
+              1,
+              1,
+              0
+            ]
+          },
+          {
+            "bufferView": 1,
+            "componentType": 5123,
+            "count": 3,
+            "type": "SCALAR",
+            "min": [
+              0
+            ],
+            "max": [
+              2
+            ]
+          },
+          {
+            "bufferView": 2,
+            "componentType": 5126,
+            "count": 2,
+            "type": "SCALAR",
+            "min": [
+              0
+            ],
+            "max": [
+              1
+            ]
+          },
+          {
+            "bufferView": 3,
+            "componentType": 5126,
+            "count": 2,
+            "type": "VEC3"
+          }
+        ],
+        "animations": [
+          {
+            "name": "Move",
+            "samplers": [
+              {
+                "input": 2,
+                "output": 3,
+                "interpolation": "LINEAR"
+              }
+            ],
+            "channels": [
+              {
+                "sampler": 0,
+                "target": {
+                  "node": 0,
+                  "path": "translation"
+                }
+              }
+            ]
+          }
+        ],
+        "extensionsUsed": [
+          "ATLAS_unrecognized"
+        ],
+        "extensionsRequired": [
+          "ATLAS_unrecognized"
+        ],
+        "extensions": {
+          "ATLAS_unrecognized": {
+            "meaning": "Original unsupported extension control"
+          }
+        }
+      },
+      "resources": {
+        "scene.bin": "0000000000000000000000000000803f0000000000000000000000000000803f000000000000010002000000000000000000803f0000000000000000000000000000803f0000000000000000"
+      },
+      "read_resources": true,
+      "max_issues": 128,
+      "expected": {
+        "num_errors": 0,
+        "issue_codes": [
+          "UNSUPPORTED_EXTENSION"
+        ],
+        "is_truncated": false,
+        "fixture_gate": false
+      }
+    },
+    {
+      "id": "missing_external",
+      "document": {
+        "asset": {
+          "version": "2.0",
+          "generator": "Athena original validation fixture"
+        },
+        "scene": 0,
+        "scenes": [
+          {
+            "nodes": [
+              0
+            ]
+          }
+        ],
+        "nodes": [
+          {
+            "name": "OriginalTriangle",
+            "mesh": 0
+          }
+        ],
+        "meshes": [
+          {
+            "primitives": [
+              {
+                "attributes": {
+                  "POSITION": 0
+                },
+                "indices": 1,
+                "mode": 4
+              }
+            ]
+          }
+        ],
+        "buffers": [
+          {
+            "uri": "scene.bin",
+            "byteLength": 76
+          }
+        ],
+        "bufferViews": [
+          {
+            "buffer": 0,
+            "byteOffset": 0,
+            "byteLength": 36,
+            "target": 34962
+          },
+          {
+            "buffer": 0,
+            "byteOffset": 36,
+            "byteLength": 6,
+            "target": 34963
+          },
+          {
+            "buffer": 0,
+            "byteOffset": 44,
+            "byteLength": 8
+          },
+          {
+            "buffer": 0,
+            "byteOffset": 52,
+            "byteLength": 24
+          }
+        ],
+        "accessors": [
+          {
+            "bufferView": 0,
+            "componentType": 5126,
+            "count": 3,
+            "type": "VEC3",
+            "min": [
+              0,
+              0,
+              0
+            ],
+            "max": [
+              1,
+              1,
+              0
+            ]
+          },
+          {
+            "bufferView": 1,
+            "componentType": 5123,
+            "count": 3,
+            "type": "SCALAR",
+            "min": [
+              0
+            ],
+            "max": [
+              2
+            ]
+          },
+          {
+            "bufferView": 2,
+            "componentType": 5126,
+            "count": 2,
+            "type": "SCALAR",
+            "min": [
+              0
+            ],
+            "max": [
+              1
+            ]
+          },
+          {
+            "bufferView": 3,
+            "componentType": 5126,
+            "count": 2,
+            "type": "VEC3"
+          }
+        ],
+        "animations": [
+          {
+            "name": "Move",
+            "samplers": [
+              {
+                "input": 2,
+                "output": 3,
+                "interpolation": "LINEAR"
+              }
+            ],
+            "channels": [
+              {
+                "sampler": 0,
+                "target": {
+                  "node": 0,
+                  "path": "translation"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "resources": {},
+      "read_resources": true,
+      "max_issues": 128,
+      "expected": {
+        "num_errors": 1,
+        "issue_codes": [
+          "IO_ERROR"
+        ],
+        "is_truncated": false,
+        "fixture_gate": false
+      }
+    },
+    {
+      "id": "truncated_report",
+      "document": {
+        "asset": {
+          "version": "2.0",
+          "generator": "Athena original validation fixture"
+        },
+        "scene": 0,
+        "scenes": [
+          {
+            "nodes": [
+              0
+            ]
+          }
+        ],
+        "nodes": [
+          {
+            "name": "OriginalTriangle",
+            "mesh": 0
+          }
+        ],
+        "meshes": [
+          {
+            "primitives": [
+              {
+                "attributes": {
+                  "POSITION": 0
+                },
+                "indices": 1,
+                "mode": 4
+              }
+            ]
+          }
+        ],
+        "buffers": [
+          {
+            "uri": "scene.bin",
+            "byteLength": 76
+          }
+        ],
+        "bufferViews": [
+          {
+            "buffer": 0,
+            "byteOffset": 0,
+            "byteLength": 36,
+            "target": 34962
+          },
+          {
+            "buffer": 0,
+            "byteOffset": 36,
+            "byteLength": 6,
+            "target": 34963
+          },
+          {
+            "buffer": 0,
+            "byteOffset": 44,
+            "byteLength": 8
+          },
+          {
+            "buffer": 0,
+            "byteOffset": 52,
+            "byteLength": 24
+          }
+        ],
+        "accessors": [
+          {
+            "bufferView": 0,
+            "componentType": 5126,
+            "count": 3,
+            "type": "VEC3",
+            "min": [
+              0,
+              0,
+              0
+            ],
+            "max": [
+              1,
+              1,
+              0
+            ]
+          },
+          {
+            "bufferView": 1,
+            "componentType": 5123,
+            "count": 3,
+            "type": "SCALAR",
+            "min": [
+              0
+            ],
+            "max": [
+              3
+            ]
+          },
+          {
+            "bufferView": 2,
+            "componentType": 5126,
+            "count": 2,
+            "type": "SCALAR",
+            "min": [
+              0
+            ],
+            "max": [
+              0
+            ]
+          },
+          {
+            "bufferView": 3,
+            "componentType": 5126,
+            "count": 2,
+            "type": "VEC3"
+          }
+        ],
+        "animations": [
+          {
+            "name": "Move",
+            "samplers": [
+              {
+                "input": 2,
+                "output": 3,
+                "interpolation": "LINEAR"
+              }
+            ],
+            "channels": [
+              {
+                "sampler": 0,
+                "target": {
+                  "node": 0,
+                  "path": "translation"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "resources": {
+        "scene.bin": "0000000000000000000000000000803f0000000000000000000000000000803f00000000000001000300000000000000000000000000000000000000000000000000803f0000000000000000"
+      },
+      "read_resources": true,
+      "max_issues": 1,
+      "expected": {
+        "num_errors": 1,
+        "issue_codes": [
+          "ACCESSOR_INDEX_OOB"
+        ],
+        "is_truncated": true,
+        "fixture_gate": false
+      }
+    }
+  ],
+  "supported_extensions": [
+    "EXT_texture_webp",
+    "KHR_animation_pointer",
+    "KHR_lights_punctual",
+    "KHR_materials_anisotropy",
+    "KHR_materials_clearcoat",
+    "KHR_materials_dispersion",
+    "KHR_materials_emissive_strength",
+    "KHR_materials_ior",
+    "KHR_materials_iridescence",
+    "KHR_materials_pbrSpecularGlossiness",
+    "KHR_materials_sheen",
+    "KHR_materials_specular",
+    "KHR_materials_transmission",
+    "KHR_materials_unlit",
+    "KHR_materials_variants",
+    "KHR_materials_volume",
+    "KHR_mesh_quantization",
+    "KHR_texture_transform"
+  ],
+  "runs": [
+    {
+      "id": "valid_linear",
+      "requests": [
+        {
+          "uri": "scene.bin",
+          "found": true
+        }
+      ],
+      "report": {
+        "uri": "valid_linear.gltf",
+        "mimeType": "model/gltf+json",
+        "validatorVersion": "2.0.0-dev.3.10",
+        "issues": {
+          "numErrors": 0,
+          "numWarnings": 0,
+          "numInfos": 0,
+          "numHints": 0,
+          "messages": [],
+          "truncated": false
+        },
+        "info": {
+          "version": "2.0",
+          "generator": "Athena original validation fixture",
+          "resources": [
+            {
+              "pointer": "/buffers/0",
+              "mimeType": "application/gltf-buffer",
+              "storage": "external",
+              "uri": "scene.bin",
+              "byteLength": 76
+            }
+          ],
+          "animationCount": 1,
+          "materialCount": 0,
+          "hasMorphTargets": false,
+          "hasSkins": false,
+          "hasTextures": false,
+          "hasDefaultScene": true,
+          "drawCallCount": 1,
+          "totalVertexCount": 3,
+          "totalTriangleCount": 1,
+          "maxUVs": 0,
+          "maxInfluences": 0,
+          "maxAttributes": 1
+        }
+      }
+    },
+    {
+      "id": "changed_motion",
+      "requests": [
+        {
+          "uri": "scene.bin",
+          "found": true
+        }
+      ],
+      "report": {
+        "uri": "changed_motion.gltf",
+        "mimeType": "model/gltf+json",
+        "validatorVersion": "2.0.0-dev.3.10",
+        "issues": {
+          "numErrors": 0,
+          "numWarnings": 0,
+          "numInfos": 0,
+          "numHints": 0,
+          "messages": [],
+          "truncated": false
+        },
+        "info": {
+          "version": "2.0",
+          "generator": "Athena original validation fixture",
+          "resources": [
+            {
+              "pointer": "/buffers/0",
+              "mimeType": "application/gltf-buffer",
+              "storage": "external",
+              "uri": "scene.bin",
+              "byteLength": 76
+            }
+          ],
+          "animationCount": 1,
+          "materialCount": 0,
+          "hasMorphTargets": false,
+          "hasSkins": false,
+          "hasTextures": false,
+          "hasDefaultScene": true,
+          "drawCallCount": 1,
+          "totalVertexCount": 3,
+          "totalTriangleCount": 1,
+          "maxUVs": 0,
+          "maxInfluences": 0,
+          "maxAttributes": 1
+        }
+      }
+    },
+    {
+      "id": "animation_removed",
+      "requests": [
+        {
+          "uri": "scene.bin",
+          "found": true
+        }
+      ],
+      "report": {
+        "uri": "animation_removed.gltf",
+        "mimeType": "model/gltf+json",
+        "validatorVersion": "2.0.0-dev.3.10",
+        "issues": {
+          "numErrors": 0,
+          "numWarnings": 0,
+          "numInfos": 0,
+          "numHints": 0,
+          "messages": [],
+          "truncated": false
+        },
+        "info": {
+          "version": "2.0",
+          "generator": "Athena original validation fixture",
+          "resources": [
+            {
+              "pointer": "/buffers/0",
+              "mimeType": "application/gltf-buffer",
+              "storage": "external",
+              "uri": "scene.bin",
+              "byteLength": 44
+            }
+          ],
+          "animationCount": 0,
+          "materialCount": 0,
+          "hasMorphTargets": false,
+          "hasSkins": false,
+          "hasTextures": false,
+          "hasDefaultScene": true,
+          "drawCallCount": 1,
+          "totalVertexCount": 3,
+          "totalTriangleCount": 1,
+          "maxUVs": 0,
+          "maxInfluences": 0,
+          "maxAttributes": 1
+        }
+      }
+    },
+    {
+      "id": "bad_index",
+      "requests": [
+        {
+          "uri": "scene.bin",
+          "found": true
+        }
+      ],
+      "report": {
+        "uri": "bad_index.gltf",
+        "mimeType": "model/gltf+json",
+        "validatorVersion": "2.0.0-dev.3.10",
+        "issues": {
+          "numErrors": 1,
+          "numWarnings": 0,
+          "numInfos": 0,
+          "numHints": 0,
+          "messages": [
+            {
+              "code": "ACCESSOR_INDEX_OOB",
+              "message": "Indices accessor element at index 2 has value 3 that is greater than the maximum vertex index available (2).",
+              "severity": 0,
+              "pointer": "/meshes/0/primitives/0/indices"
+            }
+          ],
+          "truncated": false
+        },
+        "info": {
+          "version": "2.0",
+          "generator": "Athena original validation fixture",
+          "resources": [
+            {
+              "pointer": "/buffers/0",
+              "mimeType": "application/gltf-buffer",
+              "storage": "external",
+              "uri": "scene.bin",
+              "byteLength": 76
+            }
+          ],
+          "animationCount": 1,
+          "materialCount": 0,
+          "hasMorphTargets": false,
+          "hasSkins": false,
+          "hasTextures": false,
+          "hasDefaultScene": true,
+          "drawCallCount": 1,
+          "totalVertexCount": 3,
+          "totalTriangleCount": 1,
+          "maxUVs": 0,
+          "maxInfluences": 0,
+          "maxAttributes": 1
+        }
+      }
+    },
+    {
+      "id": "bad_index_unchecked",
+      "requests": [],
+      "report": {
+        "uri": "bad_index_unchecked.gltf",
+        "mimeType": "model/gltf+json",
+        "validatorVersion": "2.0.0-dev.3.10",
+        "issues": {
+          "numErrors": 1,
+          "numWarnings": 0,
+          "numInfos": 0,
+          "numHints": 0,
+          "messages": [
+            {
+              "code": "IO_ERROR",
+              "message": "Exception: options.externalResourceFunction is required to load this resource.",
+              "severity": 0,
+              "pointer": "/buffers/0/uri"
+            }
+          ],
+          "truncated": false
+        },
+        "info": {
+          "version": "2.0",
+          "generator": "Athena original validation fixture",
+          "resources": [
+            {
+              "pointer": "/buffers/0",
+              "mimeType": "application/gltf-buffer",
+              "storage": "external",
+              "uri": "scene.bin"
+            }
+          ],
+          "animationCount": 1,
+          "materialCount": 0,
+          "hasMorphTargets": false,
+          "hasSkins": false,
+          "hasTextures": false,
+          "hasDefaultScene": true,
+          "drawCallCount": 1,
+          "totalVertexCount": 3,
+          "totalTriangleCount": 1,
+          "maxUVs": 0,
+          "maxInfluences": 0,
+          "maxAttributes": 1
+        }
+      }
+    },
+    {
+      "id": "duplicate_time",
+      "requests": [
+        {
+          "uri": "scene.bin",
+          "found": true
+        }
+      ],
+      "report": {
+        "uri": "duplicate_time.gltf",
+        "mimeType": "model/gltf+json",
+        "validatorVersion": "2.0.0-dev.3.10",
+        "issues": {
+          "numErrors": 1,
+          "numWarnings": 0,
+          "numInfos": 0,
+          "numHints": 0,
+          "messages": [
+            {
+              "code": "ACCESSOR_ANIMATION_INPUT_NON_INCREASING",
+              "message": "Animation input accessor element at index 1 is less than or equal to previous: 0 <= 0.",
+              "severity": 0,
+              "pointer": "/animations/0/samplers/0/input"
+            }
+          ],
+          "truncated": false
+        },
+        "info": {
+          "version": "2.0",
+          "generator": "Athena original validation fixture",
+          "resources": [
+            {
+              "pointer": "/buffers/0",
+              "mimeType": "application/gltf-buffer",
+              "storage": "external",
+              "uri": "scene.bin",
+              "byteLength": 76
+            }
+          ],
+          "animationCount": 1,
+          "materialCount": 0,
+          "hasMorphTargets": false,
+          "hasSkins": false,
+          "hasTextures": false,
+          "hasDefaultScene": true,
+          "drawCallCount": 1,
+          "totalVertexCount": 3,
+          "totalTriangleCount": 1,
+          "maxUVs": 0,
+          "maxInfluences": 0,
+          "maxAttributes": 1
+        }
+      }
+    },
+    {
+      "id": "matrix_animation",
+      "requests": [
+        {
+          "uri": "scene.bin",
+          "found": true
+        }
+      ],
+      "report": {
+        "uri": "matrix_animation.gltf",
+        "mimeType": "model/gltf+json",
+        "validatorVersion": "2.0.0-dev.3.10",
+        "issues": {
+          "numErrors": 1,
+          "numWarnings": 0,
+          "numInfos": 0,
+          "numHints": 0,
+          "messages": [
+            {
+              "code": "ANIMATION_CHANNEL_TARGET_NODE_MATRIX",
+              "message": "Animation channel cannot target TRS properties of a node with defined matrix.",
+              "severity": 0,
+              "pointer": "/animations/0/channels/0/target"
+            }
+          ],
+          "truncated": false
+        },
+        "info": {
+          "version": "2.0",
+          "generator": "Athena original validation fixture",
+          "resources": [
+            {
+              "pointer": "/buffers/0",
+              "mimeType": "application/gltf-buffer",
+              "storage": "external",
+              "uri": "scene.bin",
+              "byteLength": 76
+            }
+          ],
+          "animationCount": 1,
+          "materialCount": 0,
+          "hasMorphTargets": false,
+          "hasSkins": false,
+          "hasTextures": false,
+          "hasDefaultScene": true,
+          "drawCallCount": 1,
+          "totalVertexCount": 3,
+          "totalTriangleCount": 1,
+          "maxUVs": 0,
+          "maxInfluences": 0,
+          "maxAttributes": 1
+        }
+      }
+    },
+    {
+      "id": "unknown_required",
+      "requests": [
+        {
+          "uri": "scene.bin",
+          "found": true
+        }
+      ],
+      "report": {
+        "uri": "unknown_required.gltf",
+        "mimeType": "model/gltf+json",
+        "validatorVersion": "2.0.0-dev.3.10",
+        "issues": {
+          "numErrors": 0,
+          "numWarnings": 0,
+          "numInfos": 1,
+          "numHints": 0,
+          "messages": [
+            {
+              "code": "UNSUPPORTED_EXTENSION",
+              "message": "Cannot validate an extension as it is not supported by the validator: 'ATLAS_unrecognized'.",
+              "severity": 2,
+              "pointer": "/extensionsUsed/0"
+            }
+          ],
+          "truncated": false
+        },
+        "info": {
+          "version": "2.0",
+          "generator": "Athena original validation fixture",
+          "extensionsUsed": [
+            "ATLAS_unrecognized"
+          ],
+          "extensionsRequired": [
+            "ATLAS_unrecognized"
+          ],
+          "resources": [
+            {
+              "pointer": "/buffers/0",
+              "mimeType": "application/gltf-buffer",
+              "storage": "external",
+              "uri": "scene.bin",
+              "byteLength": 76
+            }
+          ],
+          "animationCount": 1,
+          "materialCount": 0,
+          "hasMorphTargets": false,
+          "hasSkins": false,
+          "hasTextures": false,
+          "hasDefaultScene": true,
+          "drawCallCount": 1,
+          "totalVertexCount": 3,
+          "totalTriangleCount": 1,
+          "maxUVs": 0,
+          "maxInfluences": 0,
+          "maxAttributes": 1
+        }
+      }
+    },
+    {
+      "id": "missing_external",
+      "requests": [
+        {
+          "uri": "scene.bin",
+          "found": false
+        }
+      ],
+      "report": {
+        "uri": "missing_external.gltf",
+        "mimeType": "model/gltf+json",
+        "validatorVersion": "2.0.0-dev.3.10",
+        "issues": {
+          "numErrors": 1,
+          "numWarnings": 0,
+          "numInfos": 0,
+          "numHints": 0,
+          "messages": [
+            {
+              "code": "IO_ERROR",
+              "message": "Node Exception: Error: Resource unavailable in original fixture map",
+              "severity": 0,
+              "pointer": "/buffers/0/uri"
+            }
+          ],
+          "truncated": false
+        },
+        "info": {
+          "version": "2.0",
+          "generator": "Athena original validation fixture",
+          "resources": [
+            {
+              "pointer": "/buffers/0",
+              "mimeType": "application/gltf-buffer",
+              "storage": "external",
+              "uri": "scene.bin"
+            }
+          ],
+          "animationCount": 1,
+          "materialCount": 0,
+          "hasMorphTargets": false,
+          "hasSkins": false,
+          "hasTextures": false,
+          "hasDefaultScene": true,
+          "drawCallCount": 1,
+          "totalVertexCount": 3,
+          "totalTriangleCount": 1,
+          "maxUVs": 0,
+          "maxInfluences": 0,
+          "maxAttributes": 1
+        }
+      }
+    },
+    {
+      "id": "truncated_report",
+      "requests": [
+        {
+          "uri": "scene.bin",
+          "found": true
+        }
+      ],
+      "report": {
+        "uri": "truncated_report.gltf",
+        "mimeType": "model/gltf+json",
+        "validatorVersion": "2.0.0-dev.3.10",
+        "issues": {
+          "numErrors": 1,
+          "numWarnings": 0,
+          "numInfos": 0,
+          "numHints": 0,
+          "messages": [
+            {
+              "code": "ACCESSOR_INDEX_OOB",
+              "message": "Indices accessor element at index 2 has value 3 that is greater than the maximum vertex index available (2).",
+              "severity": 0,
+              "pointer": "/meshes/0/primitives/0/indices"
+            }
+          ],
+          "truncated": true
+        },
+        "info": {
+          "version": "2.0",
+          "generator": "Athena original validation fixture",
+          "resources": [
+            {
+              "pointer": "/buffers/0",
+              "mimeType": "application/gltf-buffer",
+              "storage": "external",
+              "uri": "scene.bin",
+              "byteLength": 76
+            }
+          ],
+          "animationCount": 1,
+          "materialCount": 0,
+          "hasMorphTargets": false,
+          "hasSkins": false,
+          "hasTextures": false,
+          "hasDefaultScene": true,
+          "drawCallCount": 1,
+          "totalVertexCount": 3,
+          "totalTriangleCount": 1,
+          "maxUVs": 0,
+          "maxInfluences": 0,
+          "maxAttributes": 1
+        }
+      }
+    }
+  ],
+  "observations": [
+    {
+      "id": "valid_linear",
+      "document_sha256": "acc2b7d5f2f78571c8419f0e4ec0867359b7fe064512d38132692d6e66f6d263",
+      "resource_sha256": {
+        "scene.bin": "541dc673e76cf811da8d6bde44f460258e24e4cf84d1156ef788fabb58d6ef6e"
+      },
+      "report_sha256": "7869a5519a3bdbff942337e9c197d77007cedbf4beba991045998dd2af250c2b",
+      "issue_codes": [],
+      "unsupported_required_extensions": [],
+      "projection": {
+        "status": "projected",
+        "value": {
+          "scene": 0,
+          "scene_nodes": [
+            0
+          ],
+          "nodes": [
+            {
+              "mesh": 0,
+              "matrix": null,
+              "translation": null,
+              "rotation": null,
+              "scale": null
+            }
+          ],
+          "positions": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              1,
+              0,
+              0
+            ],
+            [
+              0,
+              1,
+              0
+            ]
+          ],
+          "indices": [
+            0,
+            1,
+            2
+          ],
+          "animations": [
+            {
+              "name": "Move",
+              "samplers": [
+                {
+                  "input": [
+                    0,
+                    1
+                  ],
+                  "output": [
+                    [
+                      0,
+                      0,
+                      0
+                    ],
+                    [
+                      1,
+                      0,
+                      0
+                    ]
+                  ],
+                  "interpolation": "LINEAR"
+                }
+              ],
+              "channels": [
+                {
+                  "sampler": 0,
+                  "target": {
+                    "node": 0,
+                    "path": "translation"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "gates": {
+        "report_complete": true,
+        "zero_validator_errors": true,
+        "external_buffers_supplied": true,
+        "validator_supports_required_extensions": true,
+        "fixture_contract_matches": true
+      },
+      "fixture_gate_passed": true,
+      "matches_expected": true
+    },
+    {
+      "id": "changed_motion",
+      "document_sha256": "acc2b7d5f2f78571c8419f0e4ec0867359b7fe064512d38132692d6e66f6d263",
+      "resource_sha256": {
+        "scene.bin": "1002b065c2b4321ea07bf69b3eceeba470d606975d8300e01d57aeb5c543a601"
+      },
+      "report_sha256": "23fd0308faf386ba340d740e99cbfb5c0c90bfb4aa39bbeb07723e3d0214050d",
+      "issue_codes": [],
+      "unsupported_required_extensions": [],
+      "projection": {
+        "status": "projected",
+        "value": {
+          "scene": 0,
+          "scene_nodes": [
+            0
+          ],
+          "nodes": [
+            {
+              "mesh": 0,
+              "matrix": null,
+              "translation": null,
+              "rotation": null,
+              "scale": null
+            }
+          ],
+          "positions": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              1,
+              0,
+              0
+            ],
+            [
+              0,
+              1,
+              0
+            ]
+          ],
+          "indices": [
+            0,
+            1,
+            2
+          ],
+          "animations": [
+            {
+              "name": "Move",
+              "samplers": [
+                {
+                  "input": [
+                    0,
+                    1
+                  ],
+                  "output": [
+                    [
+                      0,
+                      0,
+                      0
+                    ],
+                    [
+                      4,
+                      0,
+                      0
+                    ]
+                  ],
+                  "interpolation": "LINEAR"
+                }
+              ],
+              "channels": [
+                {
+                  "sampler": 0,
+                  "target": {
+                    "node": 0,
+                    "path": "translation"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "gates": {
+        "report_complete": true,
+        "zero_validator_errors": true,
+        "external_buffers_supplied": true,
+        "validator_supports_required_extensions": true,
+        "fixture_contract_matches": false
+      },
+      "fixture_gate_passed": false,
+      "matches_expected": true
+    },
+    {
+      "id": "animation_removed",
+      "document_sha256": "4ed43639731baa6336d54249c7c8ec4ee113cfafe5d9304abd295870dd14aab3",
+      "resource_sha256": {
+        "scene.bin": "d3478e66e380d8a2b0c9d80f3459f75660efb111e7b801a7d1c1f8f48723d79b"
+      },
+      "report_sha256": "7cb1570df002344dd86ee3e4b314d1481b204af9b6eab3e38b018ab06c29278d",
+      "issue_codes": [],
+      "unsupported_required_extensions": [],
+      "projection": {
+        "status": "projected",
+        "value": {
+          "scene": 0,
+          "scene_nodes": [
+            0
+          ],
+          "nodes": [
+            {
+              "mesh": 0,
+              "matrix": null,
+              "translation": null,
+              "rotation": null,
+              "scale": null
+            }
+          ],
+          "positions": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              1,
+              0,
+              0
+            ],
+            [
+              0,
+              1,
+              0
+            ]
+          ],
+          "indices": [
+            0,
+            1,
+            2
+          ],
+          "animations": []
+        }
+      },
+      "gates": {
+        "report_complete": true,
+        "zero_validator_errors": true,
+        "external_buffers_supplied": true,
+        "validator_supports_required_extensions": true,
+        "fixture_contract_matches": false
+      },
+      "fixture_gate_passed": false,
+      "matches_expected": true
+    },
+    {
+      "id": "bad_index",
+      "document_sha256": "560b0645f8a203314da81ccc3c7d7faac33593ae5cb06be782e1bed01de7da26",
+      "resource_sha256": {
+        "scene.bin": "a62580577ef07a32ccd1272824420e8677010e71eef8ea6ec10abf250df395c4"
+      },
+      "report_sha256": "bd382332f26afca357ed15ef325cf5499cba7dc532b5c0edda6f24ce92513436",
+      "issue_codes": [
+        "ACCESSOR_INDEX_OOB"
+      ],
+      "unsupported_required_extensions": [],
+      "projection": {
+        "status": "projected",
+        "value": {
+          "scene": 0,
+          "scene_nodes": [
+            0
+          ],
+          "nodes": [
+            {
+              "mesh": 0,
+              "matrix": null,
+              "translation": null,
+              "rotation": null,
+              "scale": null
+            }
+          ],
+          "positions": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              1,
+              0,
+              0
+            ],
+            [
+              0,
+              1,
+              0
+            ]
+          ],
+          "indices": [
+            0,
+            1,
+            3
+          ],
+          "animations": [
+            {
+              "name": "Move",
+              "samplers": [
+                {
+                  "input": [
+                    0,
+                    1
+                  ],
+                  "output": [
+                    [
+                      0,
+                      0,
+                      0
+                    ],
+                    [
+                      1,
+                      0,
+                      0
+                    ]
+                  ],
+                  "interpolation": "LINEAR"
+                }
+              ],
+              "channels": [
+                {
+                  "sampler": 0,
+                  "target": {
+                    "node": 0,
+                    "path": "translation"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "gates": {
+        "report_complete": true,
+        "zero_validator_errors": false,
+        "external_buffers_supplied": true,
+        "validator_supports_required_extensions": true,
+        "fixture_contract_matches": false
+      },
+      "fixture_gate_passed": false,
+      "matches_expected": true
+    },
+    {
+      "id": "bad_index_unchecked",
+      "document_sha256": "560b0645f8a203314da81ccc3c7d7faac33593ae5cb06be782e1bed01de7da26",
+      "resource_sha256": {
+        "scene.bin": "a62580577ef07a32ccd1272824420e8677010e71eef8ea6ec10abf250df395c4"
+      },
+      "report_sha256": "e7f902e91de128ae14b474a0571ddc51d1a0e40b338078447963c0fd58ce3297",
+      "issue_codes": [
+        "IO_ERROR"
+      ],
+      "unsupported_required_extensions": [],
+      "projection": {
+        "status": "projected",
+        "value": {
+          "scene": 0,
+          "scene_nodes": [
+            0
+          ],
+          "nodes": [
+            {
+              "mesh": 0,
+              "matrix": null,
+              "translation": null,
+              "rotation": null,
+              "scale": null
+            }
+          ],
+          "positions": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              1,
+              0,
+              0
+            ],
+            [
+              0,
+              1,
+              0
+            ]
+          ],
+          "indices": [
+            0,
+            1,
+            3
+          ],
+          "animations": [
+            {
+              "name": "Move",
+              "samplers": [
+                {
+                  "input": [
+                    0,
+                    1
+                  ],
+                  "output": [
+                    [
+                      0,
+                      0,
+                      0
+                    ],
+                    [
+                      1,
+                      0,
+                      0
+                    ]
+                  ],
+                  "interpolation": "LINEAR"
+                }
+              ],
+              "channels": [
+                {
+                  "sampler": 0,
+                  "target": {
+                    "node": 0,
+                    "path": "translation"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "gates": {
+        "report_complete": true,
+        "zero_validator_errors": false,
+        "external_buffers_supplied": false,
+        "validator_supports_required_extensions": true,
+        "fixture_contract_matches": false
+      },
+      "fixture_gate_passed": false,
+      "matches_expected": true
+    },
+    {
+      "id": "duplicate_time",
+      "document_sha256": "a8436f043ae39e430334c1fe89dbda04b67fb4bf87eec3ff7b114bdaf79bfcd8",
+      "resource_sha256": {
+        "scene.bin": "f39f92591818255d6499d187068ebbeb16a0c3ffbe43d27570db1140bc9f6181"
+      },
+      "report_sha256": "457b12faefc1e1eaadcda45024c9d9401b2a50578dfa5b250d7266d87a12d043",
+      "issue_codes": [
+        "ACCESSOR_ANIMATION_INPUT_NON_INCREASING"
+      ],
+      "unsupported_required_extensions": [],
+      "projection": {
+        "status": "projected",
+        "value": {
+          "scene": 0,
+          "scene_nodes": [
+            0
+          ],
+          "nodes": [
+            {
+              "mesh": 0,
+              "matrix": null,
+              "translation": null,
+              "rotation": null,
+              "scale": null
+            }
+          ],
+          "positions": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              1,
+              0,
+              0
+            ],
+            [
+              0,
+              1,
+              0
+            ]
+          ],
+          "indices": [
+            0,
+            1,
+            2
+          ],
+          "animations": [
+            {
+              "name": "Move",
+              "samplers": [
+                {
+                  "input": [
+                    0,
+                    0
+                  ],
+                  "output": [
+                    [
+                      0,
+                      0,
+                      0
+                    ],
+                    [
+                      1,
+                      0,
+                      0
+                    ]
+                  ],
+                  "interpolation": "LINEAR"
+                }
+              ],
+              "channels": [
+                {
+                  "sampler": 0,
+                  "target": {
+                    "node": 0,
+                    "path": "translation"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "gates": {
+        "report_complete": true,
+        "zero_validator_errors": false,
+        "external_buffers_supplied": true,
+        "validator_supports_required_extensions": true,
+        "fixture_contract_matches": false
+      },
+      "fixture_gate_passed": false,
+      "matches_expected": true
+    },
+    {
+      "id": "matrix_animation",
+      "document_sha256": "694b12af2763faced77c3e67cd6272937bba23e6f8bdcb20db89de1281e0734d",
+      "resource_sha256": {
+        "scene.bin": "541dc673e76cf811da8d6bde44f460258e24e4cf84d1156ef788fabb58d6ef6e"
+      },
+      "report_sha256": "2a9988eda74bdf4e5c595067ec27ce41ebce4b060943c6bc4cecd4c104197d27",
+      "issue_codes": [
+        "ANIMATION_CHANNEL_TARGET_NODE_MATRIX"
+      ],
+      "unsupported_required_extensions": [],
+      "projection": {
+        "status": "projected",
+        "value": {
+          "scene": 0,
+          "scene_nodes": [
+            0
+          ],
+          "nodes": [
+            {
+              "mesh": 0,
+              "matrix": [
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                2,
+                0,
+                0,
+                1
+              ],
+              "translation": null,
+              "rotation": null,
+              "scale": null
+            }
+          ],
+          "positions": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              1,
+              0,
+              0
+            ],
+            [
+              0,
+              1,
+              0
+            ]
+          ],
+          "indices": [
+            0,
+            1,
+            2
+          ],
+          "animations": [
+            {
+              "name": "Move",
+              "samplers": [
+                {
+                  "input": [
+                    0,
+                    1
+                  ],
+                  "output": [
+                    [
+                      0,
+                      0,
+                      0
+                    ],
+                    [
+                      1,
+                      0,
+                      0
+                    ]
+                  ],
+                  "interpolation": "LINEAR"
+                }
+              ],
+              "channels": [
+                {
+                  "sampler": 0,
+                  "target": {
+                    "node": 0,
+                    "path": "translation"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "gates": {
+        "report_complete": true,
+        "zero_validator_errors": false,
+        "external_buffers_supplied": true,
+        "validator_supports_required_extensions": true,
+        "fixture_contract_matches": false
+      },
+      "fixture_gate_passed": false,
+      "matches_expected": true
+    },
+    {
+      "id": "unknown_required",
+      "document_sha256": "b40cb184a1f4a05fdf99c7cc7804bbd9001bf62dd843c1e8d104bd7756d033d4",
+      "resource_sha256": {
+        "scene.bin": "541dc673e76cf811da8d6bde44f460258e24e4cf84d1156ef788fabb58d6ef6e"
+      },
+      "report_sha256": "9d9b585b7a4ed7950935b10206ffac1bfb8f02740d31204e3c94628a3f6d3277",
+      "issue_codes": [
+        "UNSUPPORTED_EXTENSION"
+      ],
+      "unsupported_required_extensions": [
+        "ATLAS_unrecognized"
+      ],
+      "projection": {
+        "status": "projected",
+        "value": {
+          "scene": 0,
+          "scene_nodes": [
+            0
+          ],
+          "nodes": [
+            {
+              "mesh": 0,
+              "matrix": null,
+              "translation": null,
+              "rotation": null,
+              "scale": null
+            }
+          ],
+          "positions": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              1,
+              0,
+              0
+            ],
+            [
+              0,
+              1,
+              0
+            ]
+          ],
+          "indices": [
+            0,
+            1,
+            2
+          ],
+          "animations": [
+            {
+              "name": "Move",
+              "samplers": [
+                {
+                  "input": [
+                    0,
+                    1
+                  ],
+                  "output": [
+                    [
+                      0,
+                      0,
+                      0
+                    ],
+                    [
+                      1,
+                      0,
+                      0
+                    ]
+                  ],
+                  "interpolation": "LINEAR"
+                }
+              ],
+              "channels": [
+                {
+                  "sampler": 0,
+                  "target": {
+                    "node": 0,
+                    "path": "translation"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "gates": {
+        "report_complete": true,
+        "zero_validator_errors": true,
+        "external_buffers_supplied": true,
+        "validator_supports_required_extensions": false,
+        "fixture_contract_matches": true
+      },
+      "fixture_gate_passed": false,
+      "matches_expected": true
+    },
+    {
+      "id": "missing_external",
+      "document_sha256": "acc2b7d5f2f78571c8419f0e4ec0867359b7fe064512d38132692d6e66f6d263",
+      "resource_sha256": {},
+      "report_sha256": "1b78929fb94aa7a4f860fbff0c050e7ab1aad72276aa0e1faae5c51ccc741863",
+      "issue_codes": [
+        "IO_ERROR"
+      ],
+      "unsupported_required_extensions": [],
+      "projection": {
+        "status": "unavailable_or_outside_tiny_fixture_contract",
+        "value": null
+      },
+      "gates": {
+        "report_complete": true,
+        "zero_validator_errors": false,
+        "external_buffers_supplied": false,
+        "validator_supports_required_extensions": true,
+        "fixture_contract_matches": false
+      },
+      "fixture_gate_passed": false,
+      "matches_expected": true
+    },
+    {
+      "id": "truncated_report",
+      "document_sha256": "819ab5521e4622566b228686b31a59a0a337a838e6f6034f5c2cb639c20d6176",
+      "resource_sha256": {
+        "scene.bin": "f8364a41ef5be6ae09831e3858becd7c732cf74e2b724d17c600a4d9ed986236"
+      },
+      "report_sha256": "b39596cfae98b4853fb48de76a2d40a7d6e26b9e5312ad6b9883e3331a8c5dee",
+      "issue_codes": [
+        "ACCESSOR_INDEX_OOB"
+      ],
+      "unsupported_required_extensions": [],
+      "projection": {
+        "status": "projected",
+        "value": {
+          "scene": 0,
+          "scene_nodes": [
+            0
+          ],
+          "nodes": [
+            {
+              "mesh": 0,
+              "matrix": null,
+              "translation": null,
+              "rotation": null,
+              "scale": null
+            }
+          ],
+          "positions": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              1,
+              0,
+              0
+            ],
+            [
+              0,
+              1,
+              0
+            ]
+          ],
+          "indices": [
+            0,
+            1,
+            3
+          ],
+          "animations": [
+            {
+              "name": "Move",
+              "samplers": [
+                {
+                  "input": [
+                    0,
+                    0
+                  ],
+                  "output": [
+                    [
+                      0,
+                      0,
+                      0
+                    ],
+                    [
+                      1,
+                      0,
+                      0
+                    ]
+                  ],
+                  "interpolation": "LINEAR"
+                }
+              ],
+              "channels": [
+                {
+                  "sampler": 0,
+                  "target": {
+                    "node": 0,
+                    "path": "translation"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "gates": {
+        "report_complete": false,
+        "zero_validator_errors": false,
+        "external_buffers_supplied": true,
+        "validator_supports_required_extensions": true,
+        "fixture_contract_matches": false
+      },
+      "fixture_gate_passed": false,
+      "matches_expected": true
+    }
+  ],
+  "case_count": 10,
+  "fixture_gates_passed": 1,
+  "all_expected": true,
+  "native_acceptance": "not_run"
+}

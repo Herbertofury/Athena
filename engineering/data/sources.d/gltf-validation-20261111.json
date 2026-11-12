@@ -1,0 +1,112 @@
+[
+  {
+    "id": "AV11001",
+    "title": "glTF 2.0 specification source",
+    "url": "https://github.com/KhronosGroup/glTF/blob/110adbcaffe5d0ef4863eb25b98d652322146d7c/specification/2.0/Specification.adoc",
+    "observed_version": "Specification source commit 110adbcaffe5d0ef4863eb25b98d652322146d7c",
+    "topic": "gltf-asset-validation-boundaries",
+    "note": "Animation inputs, interpolation, matrix/TRS targeting and required extensions; no native importer acceptance.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "AV11002",
+    "title": "Khronos glTF Validator overview",
+    "url": "https://github.com/KhronosGroup/glTF-Validator/blob/bcd52cc4ba5f333b2999a58f67cc05ddf28b4fb1/README.md",
+    "observed_version": "npm gitHead bcd52cc4ba5f333b2999a58f67cc05ddf28b4fb1",
+    "topic": "gltf-asset-validation-boundaries",
+    "note": "Validator purpose and implemented coverage, including partial KHR_animation_pointer support; declared extension names are queried directly.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "AV11003",
+    "title": "Khronos validator issue catalog",
+    "url": "https://github.com/KhronosGroup/glTF-Validator/blob/bcd52cc4ba5f333b2999a58f67cc05ddf28b4fb1/ISSUES.md",
+    "observed_version": "Source associated with gltf-validator 2.0.0-dev.3.10",
+    "topic": "gltf-asset-validation-boundaries",
+    "note": "UNSUPPORTED_EXTENSION is informational; malformed animation/index data and missing resources have distinct issues.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "AV11004",
+    "title": "Khronos validator Node API",
+    "url": "https://github.com/KhronosGroup/glTF-Validator/blob/bcd52cc4ba5f333b2999a58f67cc05ddf28b4fb1/node/index.js",
+    "observed_version": "gltf-validator 2.0.0-dev.3.10 source",
+    "topic": "gltf-asset-validation-boundaries",
+    "note": "validateString, supportedExtensions, resource callback, issue limit and timestamp controls.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "AV11005",
+    "title": "Khronos validation report schema",
+    "url": "https://github.com/KhronosGroup/glTF-Validator/blob/bcd52cc4ba5f333b2999a58f67cc05ddf28b4fb1/docs/validation.schema.json",
+    "observed_version": "gltf-validator 2.0.0-dev.3.10 source",
+    "topic": "gltf-asset-validation-boundaries",
+    "note": "Issue severities, counts and truncation are separate report fields.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "AV11006",
+    "title": "npm gltf-validator version metadata",
+    "url": "https://registry.npmjs.org/gltf-validator/2.0.0-dev.3.10",
+    "observed_version": "2.0.0-dev.3.10; published 2024-10-22 in full registry metadata",
+    "topic": "gltf-asset-validation-boundaries",
+    "note": "Registry integrity, gitHead and package identity; checked 2026-11-11 rather than represented as a new release.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "AV11007",
+    "title": "Official npm validator artifact",
+    "url": "https://registry.npmjs.org/gltf-validator/-/gltf-validator-2.0.0-dev.3.10.tgz",
+    "observed_version": "2.0.0-dev.3.10, 110015 bytes",
+    "topic": "gltf-asset-validation-boundaries",
+    "note": "Downloaded SHA-512 integrity and SHA-1 match registry metadata; SHA-256 and all nine members retained. Signatures were not verified.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "AV11008",
+    "title": "glTF animation schema",
+    "url": "https://github.com/KhronosGroup/glTF/blob/110adbcaffe5d0ef4863eb25b98d652322146d7c/specification/2.0/schema/animation.schema.json",
+    "observed_version": "glTF 2.0 source commit 110adbcaffe5d0ef4863eb25b98d652322146d7c",
+    "topic": "gltf-asset-validation-boundaries",
+    "note": "Animation channel/sampler structure does not specify which animations a particular asset must retain.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "AV11009",
+    "title": "glTF animation sampler schema",
+    "url": "https://github.com/KhronosGroup/glTF/blob/110adbcaffe5d0ef4863eb25b98d652322146d7c/specification/2.0/schema/animation.sampler.schema.json",
+    "observed_version": "glTF 2.0 source commit 110adbcaffe5d0ef4863eb25b98d652322146d7c",
+    "topic": "gltf-asset-validation-boundaries",
+    "note": "Input/output accessors and interpolation contract; the lab compares data without playing animation.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "AV11010",
+    "title": "glTF animation channel target schema",
+    "url": "https://github.com/KhronosGroup/glTF/blob/110adbcaffe5d0ef4863eb25b98d652322146d7c/specification/2.0/schema/animation.channel.target.schema.json",
+    "observed_version": "glTF 2.0 source commit 110adbcaffe5d0ef4863eb25b98d652322146d7c",
+    "topic": "gltf-asset-validation-boundaries",
+    "note": "Target node and TRS/weights path are part of the asset contract.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  }
+]

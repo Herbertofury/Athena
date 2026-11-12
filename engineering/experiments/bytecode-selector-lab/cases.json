@@ -1,0 +1,157 @@
+{
+  "schema_version": 1,
+  "kind": "synthetic",
+  "scope": "Original classes and literal method/call counts, not Mixin injection semantics or native mod compatibility.",
+  "compiler_options": [
+    "-source",
+    "21",
+    "-target",
+    "21",
+    "-proc:none"
+  ],
+  "debug_modes": [
+    "none",
+    "all"
+  ],
+  "selector": {
+    "method_name": "compute",
+    "method_descriptor": "(I)I",
+    "call_owner": "lab/Target",
+    "call_name": "hook",
+    "call_descriptor": "(I)I"
+  },
+  "fixtures": [
+    {
+      "id": "baseline",
+      "source": "fixtures/baseline/Target.java",
+      "expected": {
+        "name_matches": 1,
+        "exact_matches": 1,
+        "return_opcodes": 1,
+        "throw_opcodes": 0,
+        "exact_hook_calls": 1,
+        "owner_omitted_hook_calls": 1
+      }
+    },
+    {
+      "id": "overload",
+      "source": "fixtures/overload/Target.java",
+      "expected": {
+        "name_matches": 2,
+        "exact_matches": 1,
+        "return_opcodes": 1,
+        "throw_opcodes": 0,
+        "exact_hook_calls": 1,
+        "owner_omitted_hook_calls": 1
+      }
+    },
+    {
+      "id": "descriptor_drift",
+      "source": "fixtures/descriptor_drift/Target.java",
+      "expected": {
+        "name_matches": 1,
+        "exact_matches": 0,
+        "return_opcodes": 0,
+        "throw_opcodes": 0,
+        "exact_hook_calls": 0,
+        "owner_omitted_hook_calls": 0
+      }
+    },
+    {
+      "id": "extra_return",
+      "source": "fixtures/extra_return/Target.java",
+      "expected": {
+        "name_matches": 1,
+        "exact_matches": 1,
+        "return_opcodes": 2,
+        "throw_opcodes": 0,
+        "exact_hook_calls": 1,
+        "owner_omitted_hook_calls": 1
+      }
+    },
+    {
+      "id": "throw_path",
+      "source": "fixtures/throw_path/Target.java",
+      "expected": {
+        "name_matches": 1,
+        "exact_matches": 1,
+        "return_opcodes": 1,
+        "throw_opcodes": 1,
+        "exact_hook_calls": 1,
+        "owner_omitted_hook_calls": 1
+      }
+    },
+    {
+      "id": "always_throw",
+      "source": "fixtures/always_throw/Target.java",
+      "expected": {
+        "name_matches": 1,
+        "exact_matches": 1,
+        "return_opcodes": 0,
+        "throw_opcodes": 1,
+        "exact_hook_calls": 0,
+        "owner_omitted_hook_calls": 0
+      }
+    },
+    {
+      "id": "extra_call",
+      "source": "fixtures/extra_call/Target.java",
+      "expected": {
+        "name_matches": 1,
+        "exact_matches": 1,
+        "return_opcodes": 1,
+        "throw_opcodes": 0,
+        "exact_hook_calls": 2,
+        "owner_omitted_hook_calls": 2
+      }
+    },
+    {
+      "id": "same_count_drift",
+      "source": "fixtures/same_count_drift/Target.java",
+      "expected": {
+        "name_matches": 1,
+        "exact_matches": 1,
+        "return_opcodes": 1,
+        "throw_opcodes": 0,
+        "exact_hook_calls": 1,
+        "owner_omitted_hook_calls": 1
+      }
+    },
+    {
+      "id": "different_owner",
+      "source": "fixtures/different_owner/Target.java",
+      "expected": {
+        "name_matches": 1,
+        "exact_matches": 1,
+        "return_opcodes": 1,
+        "throw_opcodes": 0,
+        "exact_hook_calls": 0,
+        "owner_omitted_hook_calls": 1
+      }
+    },
+    {
+      "id": "unrelated_call",
+      "source": "fixtures/unrelated_call/Target.java",
+      "expected": {
+        "name_matches": 1,
+        "exact_matches": 1,
+        "return_opcodes": 1,
+        "throw_opcodes": 0,
+        "exact_hook_calls": 1,
+        "owner_omitted_hook_calls": 1
+      }
+    },
+    {
+      "id": "nested_call",
+      "source": "fixtures/nested_call/Target.java",
+      "expected": {
+        "name_matches": 1,
+        "exact_matches": 1,
+        "return_opcodes": 1,
+        "throw_opcodes": 0,
+        "exact_hook_calls": 2,
+        "owner_omitted_hook_calls": 2
+      }
+    }
+  ]
+}

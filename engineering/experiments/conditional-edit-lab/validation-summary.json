@@ -1,0 +1,84 @@
+{
+  "schema_version": 1,
+  "synthetic_only": true,
+  "checked_at": "2026-11-11",
+  "base_commit": "44384b809c80e03adbd62f8be9617d01e6ad9922",
+  "environment": {
+    "python": "3.12.14",
+    "sqlite": "3.53.1",
+    "system": "Linux",
+    "machine": "x86_64"
+  },
+  "checks": {
+    "focused_initial": {
+      "tests": 36,
+      "passed": 36
+    },
+    "focused_final": {
+      "tests": 37,
+      "passed": 37,
+      "skipped": 0
+    },
+    "focused_optimized": {
+      "tests": 37,
+      "passed": 37,
+      "skipped": 0
+    },
+    "demo": {
+      "cases": 6,
+      "passed": 6,
+      "transport": "actual owned-loopback HTTP; synthetic documents"
+    },
+    "engineering_python": {
+      "tests": 363,
+      "passed": 362,
+      "errors": 1,
+      "skipped": 0
+    },
+    "pristine_main_python": {
+      "tests": 326,
+      "passed": 325,
+      "errors": 1,
+      "same_error": true,
+      "evidence": "Separate exact-main replay retained by same research task before this contribution"
+    },
+    "engineering_javascript": {
+      "tests": 303,
+      "passed": 303,
+      "skipped": 0
+    },
+    "generated_explorer": "passed",
+    "generated_card_lab": "passed",
+    "generated_media_lab": "passed",
+    "research_check": "Inherited cross-root README link error only",
+    "browser_native_target_acceptance": "not_run",
+    "hosted_ci": "Verify exact publication head separately; existing root workflow excludes engineering-only changes"
+  },
+  "inherited_error": "apps/atlas-lab/README.md: broken local link ../../../docs/athena-local-runtime.md",
+  "initial_aggregate_failure": {
+    "retained_log": "initial-aggregate-failure.log",
+    "reason": "First aggregate run occurred before two new linked JSON artifacts were present; those missing links were repaired by adding the promised artifacts. The inherited link error remains.",
+    "later_check": "Only inherited error remains; no validator weakened"
+  },
+  "not_established": [
+    "wildcard lost-update protection",
+    "browser or proxy caching",
+    "production authentication or TLS",
+    "crash or power-loss durability",
+    "restore/replay fencing",
+    "bounded long-running history",
+    "target adoption or performance improvement"
+  ],
+  "sha256": {
+    "experiments/conditional-edit-lab/README.md": "b767d1681c64bdf8b7be92f45d8091473f287f508a5b78b04b11ceeebb6f89f1",
+    "experiments/conditional-edit-lab/conditional_edit.py": "69fdcaab830ca96396e0fb8da1e3e0c2840061ca5b1caccd47db41443a790cdc",
+    "experiments/conditional-edit-lab/demo-result.json": "110caced591bf99d6d6579861c55170c563207015cd61b932fec116da9cb4e6a",
+    "experiments/conditional-edit-lab/focused-tests.log": "1ac322052befde1c907b54adb435871d8b440b0f2c1b11e3dfb052dc5a00949c",
+    "experiments/conditional-edit-lab/initial-aggregate-failure.log": "1e864ddd9a012ef59ca4d88a0e24d6d3115bb333c7d4f908b5f50ce3927d8766",
+    "experiments/conditional-edit-lab/initial-tests.log": "766518ae6a0973118164aaddc1e059fb4c33cb2070ee794de8caa839afbd988d",
+    "experiments/conditional-edit-lab/optimized-tests.log": "1d8538f5f4df4ae2592f022c84d13fc897c48755ddadc4b2b97519d2bd76d974",
+    "experiments/conditional-edit-lab/review-summary.json": "e8d50bece11e30b79080f91badfeb488328323e76b8ea3a29017c8bcd15e7211",
+    "experiments/conditional-edit-lab/run_demo.py": "15588673581a5dc93db798ba0a9752bd869bf6a9666a6fa043cecf10934c79b1",
+    "tests/test_conditional_edit.py": "326718b7d7b8e4c431ff3b84df592440bdcc4ab7da744abaef546b7ab13dbeab"
+  }
+}

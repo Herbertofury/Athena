@@ -1,0 +1,145 @@
+[
+  {
+    "id": "MV11001",
+    "title": "Fabric mod metadata specification",
+    "url": "https://wiki.fabricmc.net/documentation:fabric_mod_json_spec",
+    "observed_version": "Schema 1; page last modified 2026-03-30",
+    "topic": "mod-dependency-version-semantics",
+    "note": "Dependency kinds and string conjunction versus array alternatives; grammar is loader-specific.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "MV11002",
+    "title": "Forge mod files",
+    "url": "https://docs.minecraftforge.net/en/1.20.1/gettingstarted/modfiles/",
+    "observed_version": "Forge 1.20.1 documentation",
+    "topic": "mod-dependency-version-semantics",
+    "note": "Mandatory, side and ordering fields; empty version range is documented as any; metadata may describe multiple mods.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "MV11003",
+    "title": "NeoForge mod files",
+    "url": "https://docs.neoforged.net/docs/1.21.11/gettingstarted/modfiles/",
+    "observed_version": "NeoForge documentation for Minecraft 1.21.11",
+    "topic": "mod-dependency-version-semantics",
+    "note": "Optional dependencies still validate compatibility when present; distinct incompatible/discouraged types and ordering cycles.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "MV11004",
+    "title": "Maven POM version requirements and ordering",
+    "url": "https://maven.apache.org/pom.html#version-order-specification",
+    "observed_version": "Live Maven POM reference checked 2026-11-11; executable control separately pinned to 3.9.9",
+    "topic": "mod-dependency-version-semantics",
+    "note": "Maven is not SemVer 2; recommended versions differ from hard ranges. API experiment is not a mod-loader wrapper.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "MV11005",
+    "title": "Fabric Loader 0.20.1 release",
+    "url": "https://github.com/FabricMC/fabric-loader/releases/tag/0.20.1",
+    "observed_version": "0.20.1; release published 2026-10-19; tag resolves to cb9523bc29ef775c50b6aef5e43bc56927cd8e67",
+    "topic": "mod-dependency-version-semantics",
+    "note": "Version identity for this laboratory; not an instruction to upgrade a game target.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "MV11006",
+    "title": "Fabric Version API",
+    "url": "https://github.com/FabricMC/fabric-loader/blob/cb9523bc29ef775c50b6aef5e43bc56927cd8e67/src/main/java/net/fabricmc/loader/api/Version.java",
+    "observed_version": "Fabric Loader 0.20.1 at cb9523bc29ef775c50b6aef5e43bc56927cd8e67",
+    "topic": "mod-dependency-version-semantics",
+    "note": "Official version parser/comparator entry point used by the original probe.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "MV11007",
+    "title": "Fabric VersionPredicate API",
+    "url": "https://github.com/FabricMC/fabric-loader/blob/cb9523bc29ef775c50b6aef5e43bc56927cd8e67/src/main/java/net/fabricmc/loader/api/metadata/version/VersionPredicate.java",
+    "observed_version": "Fabric Loader 0.20.1 at cb9523bc29ef775c50b6aef5e43bc56927cd8e67",
+    "topic": "mod-dependency-version-semantics",
+    "note": "Official single-string predicate API; JSON array combination and full mod solving are outside the experiment.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "MV11008",
+    "title": "Fabric version predicate parser",
+    "url": "https://github.com/FabricMC/fabric-loader/blob/cb9523bc29ef775c50b6aef5e43bc56927cd8e67/src/main/java/net/fabricmc/loader/impl/util/version/VersionPredicateParser.java",
+    "observed_version": "Fabric Loader 0.20.1 at cb9523bc29ef775c50b6aef5e43bc56927cd8e67",
+    "topic": "mod-dependency-version-semantics",
+    "note": "Upstream implementation inspected for wildcard, empty and opaque-version behavior; no upstream code copied.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "MV11009",
+    "title": "Maven VersionRange source",
+    "url": "https://github.com/apache/maven/blob/8e8579a9e76f7d015ee5ec7bfcdc97d260186937/maven-artifact/src/main/java/org/apache/maven/artifact/versioning/VersionRange.java",
+    "observed_version": "Maven 3.9.9 at 8e8579a9e76f7d015ee5ec7bfcdc97d260186937; historical API control",
+    "topic": "mod-dependency-version-semantics",
+    "note": "Recommended values, restriction sets and containsVersion behavior are distinct; inspect wrappers before applying to a loader.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "MV11010",
+    "title": "Maven DefaultArtifactVersion source",
+    "url": "https://github.com/apache/maven/blob/8e8579a9e76f7d015ee5ec7bfcdc97d260186937/maven-artifact/src/main/java/org/apache/maven/artifact/versioning/DefaultArtifactVersion.java",
+    "observed_version": "Maven 3.9.9 at 8e8579a9e76f7d015ee5ec7bfcdc97d260186937; historical API control",
+    "topic": "mod-dependency-version-semantics",
+    "note": "Range candidate representation delegates comparison to ComparableVersion.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "MV11011",
+    "title": "Fabric Loader official Maven artifact",
+    "url": "https://maven.fabricmc.net/net/fabricmc/fabric-loader/0.20.1/fabric-loader-0.20.1.jar",
+    "observed_version": "net.fabricmc:fabric-loader:0.20.1",
+    "topic": "mod-dependency-version-semantics",
+    "note": "Official registry provenance; independently observed size and SHA-256 retained in the experiment manifest. Jar excluded from repository.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "MV11012",
+    "title": "Maven Artifact official Central artifact",
+    "url": "https://repo.maven.apache.org/maven2/org/apache/maven/maven-artifact/3.9.9/maven-artifact-3.9.9.jar",
+    "observed_version": "org.apache.maven:maven-artifact:3.9.9",
+    "topic": "mod-dependency-version-semantics",
+    "note": "Official Central provenance; independently observed size and SHA-256 retained in manifest. Jar excluded from repository.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "MV11013",
+    "title": "Fabric dependency override guidance",
+    "url": "https://docs.fabricmc.net/players/troubleshooting/dependency-overrides",
+    "observed_version": "Live guide heading Minecraft 26.2; checked 2026-11-11",
+    "topic": "mod-dependency-version-semantics",
+    "note": "Overrides are a temporary modpack-developer tool, not a runtime-compatibility proof or a general player repair.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  }
+]

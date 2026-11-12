@@ -1,0 +1,304 @@
+{
+  "fresh_vs_old_semantic_equality": true,
+  "fresh_binary_equals_old": true,
+  "mutations": [
+    {
+      "name": "summary_boolean_flip",
+      "result": "ValueError: Summary"
+    },
+    {
+      "name": "extra_top_level",
+      "result": "ValueError: Invalid fields"
+    },
+    {
+      "name": "schema_boolean",
+      "result": "ValueError: Schema"
+    },
+    {
+      "name": "input_hash_changed",
+      "result": "ValueError: Input identity"
+    },
+    {
+      "name": "dependency_revision_changed",
+      "result": "ValueError: Dependency identity"
+    },
+    {
+      "name": "compile_nonzero",
+      "result": "ValueError: Run failure"
+    },
+    {
+      "name": "execution_boolean_returncode",
+      "result": "ValueError: Run failure"
+    },
+    {
+      "name": "binary_hash_mismatch",
+      "result": "ValueError: Compiled/executed binary identity"
+    },
+    {
+      "name": "output_tamper",
+      "result": "ValueError: Derived observations"
+    },
+    {
+      "name": "row_reorder",
+      "result": "ValueError: Output identity"
+    },
+    {
+      "name": "duplicate_json_key",
+      "result": "ValueError: Duplicate JSON key"
+    },
+    {
+      "name": "NaN_output",
+      "result": "ValueError: Non-finite JSON"
+    },
+    {
+      "name": "bool_output",
+      "result": "ValueError: Output value/type"
+    },
+    {
+      "name": "derived_observation_tamper",
+      "result": "ValueError: Derived observations"
+    },
+    {
+      "name": "findings_tamper",
+      "result": "ValueError: Derived findings"
+    },
+    {
+      "name": "matching_fabricated_hashes",
+      "result": "accepted"
+    }
+  ],
+  "independent_semantic_outputs": [
+    {
+      "id": "color_bw_uint8",
+      "expected": [
+        128,
+        128,
+        128
+      ],
+      "actual": [
+        128,
+        128,
+        128
+      ],
+      "exact": true
+    },
+    {
+      "id": "color_bw_uint8_srgb",
+      "expected": [
+        188,
+        188,
+        188
+      ],
+      "actual": [
+        188,
+        188,
+        188
+      ],
+      "exact": true
+    },
+    {
+      "id": "color_mid_uint8",
+      "expected": [
+        64,
+        64,
+        64
+      ],
+      "actual": [
+        64,
+        64,
+        64
+      ],
+      "exact": true
+    },
+    {
+      "id": "color_mid_uint8_srgb",
+      "expected": [
+        92,
+        92,
+        92
+      ],
+      "actual": [
+        92,
+        92,
+        92
+      ],
+      "exact": true
+    },
+    {
+      "id": "color_constant_uint8",
+      "expected": [
+        128,
+        128,
+        128
+      ],
+      "actual": [
+        128,
+        128,
+        128
+      ],
+      "exact": true
+    },
+    {
+      "id": "color_constant_uint8_srgb",
+      "expected": [
+        128,
+        128,
+        128
+      ],
+      "actual": [
+        128,
+        128,
+        128
+      ],
+      "exact": true
+    },
+    {
+      "id": "edge_red_straight",
+      "expected": [
+        0,
+        0,
+        255,
+        128
+      ],
+      "actual": [
+        0,
+        0,
+        255,
+        128
+      ],
+      "exact": true
+    },
+    {
+      "id": "edge_green_straight",
+      "expected": [
+        0,
+        0,
+        255,
+        128
+      ],
+      "actual": [
+        0,
+        0,
+        255,
+        128
+      ],
+      "exact": true
+    },
+    {
+      "id": "edge_generic_linear",
+      "expected": [
+        128,
+        0,
+        128,
+        128
+      ],
+      "actual": [
+        128,
+        0,
+        128,
+        128
+      ],
+      "exact": true
+    },
+    {
+      "id": "edge_generic_srgb",
+      "expected": [
+        188,
+        0,
+        188,
+        188
+      ],
+      "actual": [
+        188,
+        0,
+        188,
+        188
+      ],
+      "exact": true
+    },
+    {
+      "id": "edge_wrong_premultiplied",
+      "expected": [
+        188,
+        0,
+        188,
+        128
+      ],
+      "actual": [
+        188,
+        0,
+        188,
+        128
+      ],
+      "exact": true
+    },
+    {
+      "id": "scalar_linear",
+      "expected": [
+        128
+      ],
+      "actual": [
+        128
+      ],
+      "exact": true
+    },
+    {
+      "id": "scalar_srgb",
+      "expected": [
+        188
+      ],
+      "actual": [
+        188
+      ],
+      "exact": true
+    },
+    {
+      "id": "float_straight",
+      "expected": [
+        0.5,
+        0,
+        0.5,
+        0.5
+      ],
+      "actual": [
+        0.5,
+        0,
+        0.5,
+        0.5
+      ],
+      "exact": true
+    },
+    {
+      "id": "float_premultiplied",
+      "expected": [
+        0.25,
+        0,
+        0.25,
+        0.5
+      ],
+      "actual": [
+        0.25,
+        0,
+        0.25,
+        0.5
+      ],
+      "exact": true
+    },
+    {
+      "id": "float_double_weighted",
+      "expected": [
+        0.25,
+        0,
+        0.25,
+        0.5
+      ],
+      "actual": [
+        0.25,
+        0,
+        0.25,
+        0.5
+      ],
+      "exact": true
+    }
+  ]
+}

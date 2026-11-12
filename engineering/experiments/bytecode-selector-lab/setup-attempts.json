@@ -1,0 +1,38 @@
+[
+  {
+    "stage": "initial smoke compile",
+    "options": [
+      "--release",
+      "17",
+      "-proc:none"
+    ],
+    "outcome": "failed_before_first_class_observation",
+    "diagnostic": "error: release version 17 not supported",
+    "scope": "Executor compiler installation cannot target Java 17 with --release; no game target changed."
+  },
+  {
+    "stage": "second smoke compile",
+    "options": [
+      "--release",
+      "21",
+      "-proc:none"
+    ],
+    "outcome": "failed_before_first_class_observation",
+    "diagnostic": "error: release version 21 not supported",
+    "scope": "Compiler rejected both requested --release values; next attempt uses explicit current-JDK source/target without claiming API targeting."
+  },
+  {
+    "stage": "third smoke compile",
+    "options": [
+      "-source",
+      "21",
+      "-target",
+      "21",
+      "-proc:none",
+      "-g:all"
+    ],
+    "outcome": "failed_after_one_of_22_class_observations",
+    "diagnostic": "error: invalid flag: -g:all",
+    "scope": "Driver flag construction error. Corrected all-debug form to -g; partial output retained privately and not promoted to a completed receipt."
+  }
+]
