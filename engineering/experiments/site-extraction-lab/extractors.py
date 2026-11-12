@@ -387,6 +387,21 @@ def modpub(inputs, origin):
     p = person(main or author, "site_author", origin)
     if p:
         record["people"].append(p)
+    # The public item header can credit a creator distinct from the upload
+    # account in JSON-LD. Scope to the observed header, never rich-body text.
+    credit = one(page.xpath('//main[not(ancestor::main) and not(ancestor::*[' +
+                            cls("user-content") + '])]/*[' + cls("container") + ']/aside//span[' +
+                            cls("text-nowrap") + '][not(ancestor::*[' + cls("user-content") +
+                            '])][normalize-space(text())="Created by"]'),
+                 "ModPub creator credit")
+    if credit is not None:
+        name_node = one(credit.xpath('./span[' + cls("text-light") + ']'),
+                        "ModPub creator name", required=True)
+        name = text(name_node)
+        if not name:
+            raise ExtractionError("Missing ModPub creator name")
+        # A visible credit is not a verified account/profile/avatar join.
+        record["people"].append(person({"name": name}, "credited_original_author", origin))
     record["identity"] = {"title": schema.get("name"), "sourceUrl": public_url(schema.get("url"))}
     record["metadataSummary"] = schema.get("description")
     record["projectImage"] = public_url(schema.get("image"))
