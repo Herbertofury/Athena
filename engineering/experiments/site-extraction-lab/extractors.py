@@ -322,7 +322,8 @@ def rss(inputs, origin):
         record = base_record("rss", origin)
         guid = item.findtext("guid") or item.findtext("link")
         record["identity"] = {"id": "rss-guid:" + sha256(guid) if guid else None,
-                              "guidUrl": public_url(guid, origin), "sourceUrl": public_url(item.findtext("link"), origin)}
+                              "guidUrl": public_url(guid, origin), "sourceUrl": public_url(item.findtext("link"), origin),
+                              "title": item.findtext("title")}
         record["sourceGuid"] = guid
         author = item.findtext("{http://purl.org/dc/elements/1.1/}creator")
         record["people"] = [{"id": None, "name": author, "role": "feed_author_display_only", "avatar": None}]
