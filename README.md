@@ -80,3 +80,8 @@ Certification and vendor names belong to their owners. Athena is independent and
 ## Unified integration status
 
 Read [the workspace contract](docs/integration/WORKSPACE-CONTRACT.md) and [current integration evidence](docs/integration/STATUS.md). The public-preview package includes learning, research, media and the local-engine Lab module. The Lab requires `serve-athena`; it is visibly unavailable on a static web host. It does not include private Feature Foundry material or claim full backend/game parity. `scripts/package_app.py` packages only the reviewed runtime hashes in `config/runtime-public-preview.json`; `complete` mode still refuses a missing Foundry module.
+
+
+## Competing apps and alternative workflows
+
+[Comparison hub](COMPETITORS.md): relevant baselines, source-backed alternatives, existing research catalogs and concrete validation priorities. Candidate ideas are not claims of measured superiority.
