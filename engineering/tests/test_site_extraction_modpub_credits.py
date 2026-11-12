@@ -49,6 +49,22 @@ class ModPubCredits(unittest.TestCase):
         self.assertEqual([p['name'] for p in r['people']],['Uploader','Actual creator'])
         self.assertIn('Nested decoy',r['body']['text'])
 
+    def test_user_content_within_header_aside_cannot_supply_credit(self):
+        for wrapper in ['<div class="user-content">{}</div>', '<section class="user-content extra"><div>{}</div></section>']:
+            with self.subTest(wrapper=wrapper):
+                decoy=wrapper.format(credit('Body decoy'))
+                fixture=inputs(decoy)
+                fixture['page']=fixture['page'].replace(b'<div class="user-content">SYNTHETIC body</div>',b'')
+                r=E.extract('modpub',fixture,'https://mod.pub')
+                self.assertEqual([p['role'] for p in r['people']],['site_author'])
+
+    def test_user_content_within_header_aside_does_not_conflict_with_credit(self):
+        decoy='<div class="user-content">'+credit('Body decoy')+'</div>'
+        fixture=inputs(credit('Actual creator')+decoy)
+        fixture['page']=fixture['page'].replace(b'<div class="user-content">SYNTHETIC body</div>',b'')
+        r=E.extract('modpub',fixture,'https://mod.pub')
+        self.assertEqual([p['name'] for p in r['people']],['Uploader','Actual creator'])
+
     def test_unicode_entities_and_plaintext_attribution(self):
         r=E.extract('modpub',inputs(credit(' Équipe &amp; <b>作者</b> ')),'https://mod.pub')
         self.assertEqual(r['people'][1]['name'],'Équipe & 作者');self.assertIsNone(r['people'][1]['profile'])

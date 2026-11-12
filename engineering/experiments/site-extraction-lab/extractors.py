@@ -391,7 +391,8 @@ def modpub(inputs, origin):
     # account in JSON-LD. Scope to the observed header, never rich-body text.
     credit = one(page.xpath('//main[not(ancestor::main) and not(ancestor::*[' +
                             cls("user-content") + '])]/*[' + cls("container") + ']/aside//span[' +
-                            cls("text-nowrap") + '][normalize-space(text())="Created by"]'),
+                            cls("text-nowrap") + '][not(ancestor::*[' + cls("user-content") +
+                            '])][normalize-space(text())="Created by"]'),
                  "ModPub creator credit")
     if credit is not None:
         name_node = one(credit.xpath('./span[' + cls("text-light") + ']'),
