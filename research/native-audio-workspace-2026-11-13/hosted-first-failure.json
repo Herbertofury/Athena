@@ -1,0 +1,10 @@
+{
+  "head": "c177e8a1dd6cd4b2e1ac1cb67a5149d092b5f830",
+  "run": 43523123183,
+  "artifact": 14084850025,
+  "artifact_sha256": "de68eae199f42c3f02390b0a01f7b42b8a9dcc68e8f6187e97086c0d84177702",
+  "result": "failed",
+  "failure": "New audio check selected the first note, which is search status rather than the harness identity note. Exact harness identity is visible in failure snapshot. Correct selector; retain assertion.",
+  "system_browser_attempt": "Installed system Chromium also failed before page load: socket() Operation not permitted. No bypass attempted.",
+  "validation": "Final corrected head must pass full hosted regression and browser checks. Earlier full local npm suite passed; checkout unavailable for corrected-head local repeat."
+}
