@@ -2,6 +2,12 @@
 
 Feature Foundry's Living World studio belongs in Athena's Build workspace. Its exact source and history are being preserved before retiring the old repository. **Do not delete Feature-Foundry yet.**
 
+## Current-tree privacy correction (2026-11-13)
+
+The private release-folder link and V33 Drive source identifier have been withheld from two current source files. Artist-catalog provenance redaction is not included: publication of that payload was held for further privacy review. The original source manifest remains a historical identity record; the separate privacy-redaction receipt records changed hashes. No history was rewritten and no bundle, backup or source repository was deleted. Historical copies and author metadata therefore remain accessible in existing Git history and the retained history bundle. This is limited current-tree exposure reduction, not complete erasure.
+
+Reference images are not cleared for new runtime redistribution. Artist authority marks its five artist families as reference/curation only until permission or licensing is recorded. Preserve those gates.
+
 ## What has been recovered
 
 - All 100 files of main, commit `e1ba080b5c7590f1c844a6ed13b3a471709920b9`, verified by original Git blob and SHA-256 hashes.
@@ -32,9 +38,7 @@ No dependency cache, user credentials, account sessions, or generated workspace 
 
 ## Application integration
 
-The derived Athena module mounts under #build inside the existing app shell. It preserves the original living-world UI rather than replacing it with links or an iframe. Namespaced persistence, scoped styles/events and teardown protect the other workspaces.
-
-The browser module exposes 27 theme/world choices, five active ecology actors, media controls and six provider mapping/search routes. Native SQLite/window operations and provider account authorization are explicitly unconnected. Local source preservation is not proof that those capabilities have been migrated. Media starts paused. Authenticated playback has not been tested and no account session has been copied.
+The intended native module mounts under #build inside the existing shell, not an iframe. It is not present in the reviewed public-preview build. The prior claim of an integrated 27-world browser module was not supported by the current tree and is withdrawn. Source preservation, historical build records and catalog counts do not establish native workspace parity. Desktop commands, SQLite data migration, provider authorization and full visual/interaction acceptance remain pending.
 
 ## Deletion gates
 

@@ -1,0 +1,31 @@
+{
+  "schema": 1,
+  "scope": "Current-tree metadata redaction only; original source manifest and history bundle are unchanged.",
+  "files": [
+    {
+      "path": "feature-foundry/source/progress.md",
+      "original_sha256": "029abf1d3e5c410a7248ec32a74b2f0f7ff1ebd083871e645d2a3476ce4386f9",
+      "sanitized_sha256": "1ae75c4dcc0d4c76dac02157c2a26aa039793e15570ab86f9929da1de21f7ab3"
+    },
+    {
+      "path": "feature-foundry/source/reference/authority/V33-SOURCE.json",
+      "original_sha256": "955e22484020864cdffc8fc50648afbe80181759395203b30877f6afc4f97c78",
+      "sanitized_sha256": "9e40920579b864275fb3b00cdc8ba2383c0e2dc661fd26986531c4a8ee2bf934"
+    },
+    {
+      "path": "feature-foundry/README.md",
+      "original_sha256": "4b170cb1d066ccb493db7f726abdd235c0594619862e1fc1e9e7e1b738978b80",
+      "sanitized_sha256": "a8a368f53a0e0e71e775a0164e3fe6cbf20abfcd3338cf84df5866b26cef77ef"
+    },
+    {
+      "path": "migration/feature-foundry/README.md",
+      "original_sha256": "3790f44c5a5981765f8544928831e5aa718b7377cdce50034f97a8777fb91c8b",
+      "sanitized_sha256": "1ebae92c0901a10fac9b9e219d0b5afa15dfa17b31631a7c691d259561eb5763"
+    }
+  ],
+  "history_rewritten": false,
+  "source_repositories_deleted": false,
+  "secret_scan": "Bounded pattern review of all 101 history blobs and 10 commit objects found no matches for private-key, common API-token, JWT, or credential-literal patterns. This is not proof of absence of secrets.",
+  "rights": "Reference images and artist-specific runtime publication require separate rights clearance; not added to runtime.",
+  "held": "Artist catalog retains existing private-derived provenance metadata; its redaction payload was not published. Further review required."
+}

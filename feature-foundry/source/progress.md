@@ -25,6 +25,6 @@
 
 - Main source: https://github.com/Herbertofury/Feature-Foundry
 - Tagged release: https://github.com/Herbertofury/Feature-Foundry/releases/tag/v24.0.0
-- Complete Google Drive release folder: https://drive.google.com/drive/folders/1eU95XQZNq-3mc9HvY08JbClSBTu7tXYY
+- Complete Google Drive release folder: [private release location withheld]
 - Published artifacts: complete bundle, source bundle, web build, Windows x64 MSI, Windows x64 NSIS installer, and SHA-256 manifest.
 - Windows artifacts are release-optimized but not Authenticode-signed; Windows may show a publisher/reputation prompt.
