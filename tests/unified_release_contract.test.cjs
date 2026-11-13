@@ -18,7 +18,7 @@ test('normal browser entry point retains every generator and browser gate withou
   const scripts = JSON.parse(read('package.json')).scripts;
   assert.equal(scripts['test:browser'], 'node scripts/test_unified_browser.cjs');
   const steps = require('../scripts/test_unified_browser.cjs').plan('/fixture/project','/fixture/scratch',{});
-  for (const script of ['engineering/scripts/build_media_lab.py','scripts/build_engineering_workspaces.py','scripts/build_lab_workspace.py']) assert.ok(steps.some(s => s.args[0]===script && s.args.includes('--check')),script);
+  for (const script of ['engineering/scripts/build_media_lab.py','scripts/build_engineering_workspaces.py','scripts/build_lab_workspace.py','scripts/build_card_workspace.py']) assert.ok(steps.some(s => s.args[0]===script && s.args.includes('--check')),script);
   for (const script of ['scripts/test_browser.cjs','scripts/test_workshops_browser.cjs','scripts/test_accessibility_browser.cjs','scripts/test_lab_runtime.cjs']) assert.equal(steps.filter(s => s.args[0]===script).length,1,script);
   for (const [name,folder] of [['workshop-browser','workshops'],['accessibility-browser','accessibility']]) {
     const step=steps.find(s=>s.name===name);

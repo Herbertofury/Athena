@@ -8,6 +8,7 @@ function plan(root,temporary,env=process.env){
   const pkg=path.join(temporary,'package');
   const cargoEnv={...env,CARGO_BUILD_JOBS:'2'};
   return [
+    {name:'card-workspace-reproducibility',command:env.PYTHON||'python3',args:['scripts/build_card_workspace.py','--check'],cwd:root,env,timeout:60000},
     {name:'research-media-reproducibility',command:env.PYTHON||'python3',args:['scripts/build_engineering_workspaces.py','--check'],cwd:root,env,timeout:60000},
     {name:'lab-reproducibility',command:env.PYTHON||'python3',args:['scripts/build_lab_workspace.py','--check'],cwd:root,env,timeout:60000},
     {name:'standalone-media-reproducibility',command:env.PYTHON||'python3',args:['engineering/scripts/build_media_lab.py','--check'],cwd:root,env,timeout:60000},

@@ -12,7 +12,19 @@ REQUIRED = ('index.html', 'app.js', 'core.js', 'catalog.js', 'styles.css', 'work
             'workspaces/engineering/media/index.mjs', 'workspaces/engineering/media/style.css',
             'workspaces/engineering/lab/index.mjs', 'workspaces/engineering/lab/style.css',
             'workspaces/engineering/lab/archive-view.mjs', 'workspaces/engineering/lab/collection-input.mjs',
-            'workspaces/engineering/lab/job-submit.mjs', 'workspaces/foundry/index.js')
+            'workspaces/engineering/lab/job-submit.mjs',
+            'workspaces/engineering/cards/index.mjs',
+            'workspaces/engineering/cards/style.css',
+            'workspaces/engineering/cards/lab-core.mjs',
+            'workspaces/engineering/cards/preparation-core.mjs',
+            'workspaces/engineering/cards/lab-worker.mjs',
+            'workspaces/engineering/cards/cooperative-commit.mjs',
+            'workspaces/engineering/cards/cooperative-pairs.mjs',
+            'workspaces/engineering/cards/cooperative-scheduler.mjs',
+            'workspaces/engineering/cards/verified-receiver.mjs',
+            'workspaces/engineering/cards/baseline.mjs',
+            'workspaces/engineering/cards/bounded-encoding.mjs',
+            'workspaces/foundry/index.js')
 
 
 def package(source, output, allowlist=None, profile="complete"):
@@ -86,7 +98,7 @@ def package(source, output, allowlist=None, profile="complete"):
         for generated in ('learn/index.html', '.nojekyll'):
             data=(staged/generated).read_bytes()
             entries.append({'path':generated,'bytes':len(data),'sha256':hashlib.sha256(data).hexdigest(),'origin':'generated'})
-        manifest={'application':'Athena','entry':'index.html','profile':profile,'workspaces':['learning','research','media','lab']+(['build'] if profile=='complete' else []),
+        manifest={'application':'Athena','entry':'index.html','profile':profile,'workspaces':['learning','research','media','lab','cards']+(['build'] if profile=='complete' else []),
                   'pending':[] if profile=='complete' else ['Feature Foundry integration and verification; not included in this build'],
                   'verification':'Packaging and file hashes only; functional/browser parity is a separate gate.', 'files':entries}
         (staged/'athena-runtime-manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')
