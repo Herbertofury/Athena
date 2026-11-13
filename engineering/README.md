@@ -78,3 +78,8 @@ The fixture data is **synthetic test data**, never evidence that a real applicat
 ## October 31 community and social extraction expansion
 
 [Round-three methods](docs/adapters/methods-round3.md) adds 77 deduplicated canonical scopes and 367 dated source/outcome records, expanding coverage to 426 scopes. Updated six game guides and an [other-games guide](docs/adapters/games/other-games.md) preserve actual item/profile/media/file observations. New offline [Discord](docs/adapters/discord.md) and [Bluesky](docs/adapters/bluesky.md) normalizers add defensive identity and media handling; Bluesky has actual public API replays. Public discovery, complete extraction, entitlement and native follow operations retain separate evidence.
+
+
+## Competing apps and alternative workflows
+
+[Comparison hub](COMPETITORS.md): relevant baselines, source-backed alternatives, existing research catalogs and concrete validation priorities. Candidate ideas are not claims of measured superiority.

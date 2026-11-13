@@ -43,10 +43,7 @@ pub fn run(directory: &Path) -> Result<serde_json::Value, Box<dyn std::error::Er
                 let path = directory.join(format!("{payload_bytes}-{round}-{strategy}.sqlite"));
                 let mut c = Connection::open(&path)?;
                 c.execute_batch("PRAGMA journal_mode=DELETE; PRAGMA synchronous=FULL; CREATE TABLE cards(id INTEGER PRIMARY KEY,payload BLOB NOT NULL);")?;
-                let sync: i64 = c.query_row("PRAGMA synchronous", [], |r| r.get(0))?;
-                if sync != 2 {
-                    return Err("FULL durability setting not applied".into());
-                }
+                verify_settings(&c)?;
                 let start = Instant::now();
                 let tx = c.transaction()?;
                 if reuse {
@@ -98,4 +95,54 @@ pub fn run(directory: &Path) -> Result<serde_json::Value, Box<dyn std::error::Er
     Ok(
         serde_json::json!({"schema_version":1,"scope":"measured_local_generated_workload","sqlite_version":rusqlite::version(),"os":std::env::consts::OS,"arch":std::env::consts::ARCH,"rows_per_transaction":256,"journal_mode":"DELETE","synchronous":"FULL","rounds":7,"samples":samples,"limitations":["Not a comparison with any project's current implementation","Virtualized filesystem and host caches; no physical power-loss test","Reopening does not establish a cold OS cache","No memory or concurrent UI measurements","Same single transaction and exact input in both strategies; not a transaction-batching comparison"]}),
     )
+}
+
+fn verify_settings(c: &Connection) -> Result<(), Box<dyn std::error::Error>> {
+    let journal: String = c.query_row("PRAGMA journal_mode", [], |r| r.get(0))?;
+    let sync: i64 = c.query_row("PRAGMA synchronous", [], |r| r.get(0))?;
+    if !journal.eq_ignore_ascii_case("delete") {
+        return Err(format!("DELETE journal mode not applied: {journal}").into());
+    }
+    if sync != 2 {
+        return Err(format!("FULL synchronous setting not applied: {sync}").into());
+    }
+    Ok(())
+}
+
+#[cfg(test)]
+mod settings_tests {
+    use super::*;
+    #[test]
+    fn rejects_memory_journal_despite_full_sync() {
+        let c = Connection::open_in_memory().unwrap();
+        c.execute_batch("PRAGMA synchronous=FULL;").unwrap();
+        assert!(
+            verify_settings(&c)
+                .unwrap_err()
+                .to_string()
+                .contains("DELETE journal mode")
+        );
+    }
+    #[test]
+    fn rejects_non_full_sync() {
+        let p = std::env::temp_dir().join(format!(
+            "atlas-sync-{}-{}.sqlite",
+            std::process::id(),
+            std::time::SystemTime::now()
+                .duration_since(std::time::UNIX_EPOCH)
+                .unwrap()
+                .as_nanos()
+        ));
+        let c = Connection::open(&p).unwrap();
+        c.execute_batch("PRAGMA journal_mode=DELETE; PRAGMA synchronous=NORMAL;")
+            .unwrap();
+        assert!(
+            verify_settings(&c)
+                .unwrap_err()
+                .to_string()
+                .contains("FULL synchronous")
+        );
+        drop(c);
+        std::fs::remove_file(p).unwrap();
+    }
 }

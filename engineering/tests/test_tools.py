@@ -1,4 +1,4 @@
-import copy,datetime as dt,importlib.util,json,math,unittest
+import tempfile,copy,datetime as dt,importlib.util,json,math,unittest
 from pathlib import Path
 from unittest.mock import patch
 R=Path(__file__).resolve().parents[1]
@@ -74,6 +74,15 @@ class ResearchTests(unittest.TestCase):
     return instant
   with patch.object(research.dt,'datetime',Clock):self.assertEqual(research.utc_today(),dt.date(2026,10,27))
  def test_register_and_links(self):self.assertGreater(research.check(R,self.today)['sources'],10)
+ def test_isolated_root_cannot_escape_to_sibling(self):
+  with tempfile.TemporaryDirectory() as directory:
+   parent=Path(directory);root=parent/'research';root.mkdir()
+   (parent/'outside.md').write_text('outside')
+   (root/'README.md').write_text('[outside](../outside.md)')
+   with patch.object(research,'load_sources',return_value=self.rows):
+    with self.assertRaisesRegex(ValueError,'broken local link'):
+     research.check(root,self.today)
+    self.assertGreater(research.check(root,self.today,link_root=parent)['sources'],10)
  def test_duplicate_source(self):
   self.rows.append(copy.deepcopy(self.rows[0]))
   with self.assertRaises(ValueError):research.validate_sources(self.rows,self.today)
