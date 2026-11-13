@@ -18,6 +18,21 @@
       "social": "https://x.com/threejs",
       "selection": "owner-selected-reference",
       "source_access": "official-docs-reference; X completeness unverified"
+    },
+    {
+      "id": "bencho",
+      "name": "Bencho",
+      "portfolio": "https://bencho.dev/",
+      "selection": "owner-selected-reference",
+      "source_access": "official-index-and-detail-text-read; homepage-visually-observed; no-paid-access"
+    },
+    {
+      "id": "bestsaas",
+      "name": "BestSaaSWebDesigns",
+      "portfolio": "https://bestsaaswebdesigns.com/",
+      "social": "https://x.com/bestsaasdesigns",
+      "selection": "owner-selected-reference",
+      "source_access": "official-index-read; X403; original-sites-not-audited"
     }
   ],
   "designs": [
@@ -325,6 +340,66 @@
       "comparison_status": "not-compared",
       "license_status": "pin-source-and-resolve-asset-rights-before-reuse",
       "notes": "Official source page accessible, not deeply audited or runtime tested."
+    },
+    {
+      "id": "bencho-gallery",
+      "creator_id": "bencho",
+      "title": "Bencho component gallery",
+      "source_url": "https://bencho.dev/",
+      "evidence_level": "visually-reviewed",
+      "evidence_kind": "live-page-observation",
+      "implementation_status": "not-implemented",
+      "comparison_status": "not-compared",
+      "license_status": "no-assets-or-code-copied; terms-review-before-reuse",
+      "study_path": "docs/ui-design-library/bencho-and-saas.md"
+    },
+    {
+      "id": "bencho-panels",
+      "creator_id": "bencho",
+      "title": "Resizable panels",
+      "source_url": "https://bencho.dev/blocks/resizable-panels",
+      "evidence_level": "indexed",
+      "evidence_kind": "publisher-description",
+      "implementation_status": "not-implemented",
+      "comparison_status": "not-compared",
+      "license_status": "no-assets-or-code-copied; terms-review-before-reuse",
+      "study_path": "docs/ui-design-library/bencho-and-saas.md"
+    },
+    {
+      "id": "bencho-form-error",
+      "creator_id": "bencho",
+      "title": "Form error",
+      "source_url": "https://bencho.dev/blocks/form-error",
+      "evidence_level": "indexed",
+      "evidence_kind": "publisher-description",
+      "implementation_status": "not-implemented",
+      "comparison_status": "not-compared",
+      "license_status": "no-assets-or-code-copied; terms-review-before-reuse",
+      "study_path": "docs/ui-design-library/bencho-and-saas.md"
+    },
+    {
+      "id": "bencho-context-meter",
+      "creator_id": "bencho",
+      "title": "Context meter",
+      "source_url": "https://bencho.dev/blocks/context-meter",
+      "evidence_level": "indexed",
+      "evidence_kind": "publisher-description",
+      "implementation_status": "not-implemented",
+      "comparison_status": "not-compared",
+      "license_status": "no-assets-or-code-copied; terms-review-before-reuse",
+      "study_path": "docs/ui-design-library/bencho-and-saas.md"
+    },
+    {
+      "id": "bestsaas-gallery",
+      "creator_id": "bestsaas",
+      "title": "SaaS website inspiration collection",
+      "source_url": "https://bestsaaswebdesigns.com/",
+      "evidence_level": "indexed",
+      "evidence_kind": "publisher-description",
+      "implementation_status": "not-implemented",
+      "comparison_status": "not-compared",
+      "license_status": "no-assets-or-code-copied; terms-review-before-reuse",
+      "study_path": "docs/ui-design-library/bencho-and-saas.md"
     }
   ]
 }
