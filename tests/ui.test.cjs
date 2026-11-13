@@ -30,3 +30,28 @@ test('incomplete workspace shows recovery state instead of falsely claiming load
 
 test('shell views contain no inline scripts or style attributes under strict local CSP',()=>{const s=setup();for(const hash of ['#home','#certificates','#foundations','#labs','#review','#coverage','#library','#network',...s.window.ATHENA_DATA.certifications.map(c=>'#track/'+c.id)]){s.go(hash);assert.equal(s.doc.querySelector('[style]'),null,hash);assert.equal(s.doc.querySelector('style'),null,hash);assert.ok([...s.doc.querySelectorAll('script')].every(el=>el.hasAttribute('src')),hash);}s.go('#certificates');for(const cert of s.window.ATHENA_DATA.certifications){assert.ok(s.doc.querySelector(`[data-certificate="${cert.id}"]`));assert.ok(fs.readFileSync('dist/styles.css','utf8').includes(`.cert-card[data-certificate="${cert.id}"]{border-top-color:${cert.color}}`));}});
 test('local lab has scoped search and returns safely to learning',async()=>{const calls=[];const s=setup(undefined,{lab:async()=>({mount:async context=>{calls.push(context.search);context.container.textContent='Local fixture journal';return {unmount(){calls.push('closed');},setSearch:q=>calls.push(q)};}})});s.go('#lab?q=fixture');await new Promise(setImmediate);assert.equal(s.doc.querySelector('#main').dataset.workspace,'lab');assert.equal(s.doc.querySelector('#search-scope').textContent,'recent jobs');assert.equal(calls[0],'fixture');s.go('#foundations');await new Promise(setImmediate);assert.ok(calls.includes('closed'));assert.equal(s.doc.querySelector('#main').dataset.workspace,'learning');});
+
+test('import reports session-only progress when durable storage rejects the write',async()=>{
+ const s=setup(),progress=s.window.AthenaCore.fresh();progress.notes.identity='Imported draft retained in memory';
+ s.window.localStorage.setItem=()=>{throw Error('Quota exceeded');};
+ const control=s.doc.querySelector('#import');control.files=[{size:100,text:async()=>JSON.stringify(progress)}];
+ control.onchange({target:control});await new Promise(setImmediate);
+ assert.match(s.doc.querySelector('#toast').textContent,/only for this session/);
+ assert.match(s.doc.querySelector('#toast').textContent,/Export/);
+ assert.equal(s.store.has('athena-progress-v1'),false);
+ s.go('#foundations');click(s.window,s.doc.querySelector('[data-lesson="identity"]'));
+ assert.equal(s.doc.querySelector('#lesson-note').value,progress.notes.identity);
+});
+
+test('a later successful import clears the session-only warning and survives reload',async()=>{
+ const s=setup(),progress=s.window.AthenaCore.fresh();progress.notes.identity='Saved imported draft';
+ s.window.localStorage.setItem=()=>{throw Error('Quota exceeded');};
+ const control=s.doc.querySelector('#import');control.files=[{size:100,text:async()=>JSON.stringify(progress)}];
+ control.onchange({target:control});await new Promise(setImmediate);
+ s.window.localStorage.setItem=(key,value)=>s.store.set(key,value);
+ control.onchange({target:control});await new Promise(setImmediate);
+ assert.equal(s.doc.querySelector('#toast').textContent,'Progress imported and saved.');
+ const again=setup(s.store.get('athena-progress-v1'));again.go('#foundations');
+ click(again.window,again.doc.querySelector('[data-lesson="identity"]'));
+ assert.equal(again.doc.querySelector('#lesson-note').value,progress.notes.identity);
+});

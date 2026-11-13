@@ -25,6 +25,8 @@ jobs:
         run: git diff --exit-code -- src dist/catalog.js docs/certificates docs/shared docs/paths docs/README.md wiki
       - name: Install browser for actual runtime checks
         run: npx playwright install --with-deps chromium
+      - name: Verify progress import persistence and recovery in Chromium
+        run: node scripts/test_progress_import_browser.cjs
       - name: Test unified public app in Chromium
         run: npm run test:browser
       - uses: actions/upload-artifact@v4
