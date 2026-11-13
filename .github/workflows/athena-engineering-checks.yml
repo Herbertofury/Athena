@@ -1,0 +1,84 @@
+name: Athena engineering checks
+on:
+  push:
+    branches: [main]
+    paths: ["engineering/**", "migration/engineering-atlas/**", "scripts/verify_atlas_cutover.py", ".github/workflows/athena-engineering-checks.yml"]
+  pull_request:
+    paths: ["engineering/**", "migration/engineering-atlas/**", "scripts/verify_atlas_cutover.py", ".github/workflows/athena-engineering-checks.yml"]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: engineering
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6, resolved 2026-10-26
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6, resolved 2026-10-26
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - name: Install Athena DOM test dependencies
+        working-directory: .
+        run: npm ci --ignore-scripts
+      - name: Verify migration completeness
+        working-directory: .
+        run: python scripts/verify_atlas_cutover.py
+      - name: Check source register and internal links
+        run: python scripts/check_research.py
+      - name: Verify research catalog and generated Explorer
+        run: python scripts/build_research_explorer.py --check
+      - name: Install offline parser lab dependency
+        run: python -m pip install -r experiments/site-extraction-lab/requirements.txt
+      - name: Test benchmark and research guards
+        run: python -m unittest discover -s tests -v
+      - name: Verify content-addressed browser assets
+        run: python scripts/build_card_lab.py --check
+      - name: Verify public media asset identities
+        run: python scripts/build_media_lab.py --check
+      - name: Test all JavaScript contracts and browser harness invariants
+        run: node --test tests/*.test.mjs
+      - name: Exercise explicitly synthetic benchmark example
+        run: python scripts/compare_benchmarks.py tests/fixtures/synthetic-baseline.json tests/fixtures/synthetic-candidate.json
+  rust-lab:
+    name: Rust lab (${{ matrix.os }})
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 20
+    defaults:
+      run:
+        working-directory: engineering/apps/atlas-lab
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+      - name: Install pinned official Rust toolchain
+        run: rustup toolchain install 1.99.1 --profile minimal --component rustfmt --component clippy
+      - name: Formatting
+        run: cargo +1.99.1 fmt --all -- --check
+      - name: Static checks
+        run: cargo +1.99.1 clippy --locked --all-targets -- -D warnings
+      - name: Offline unit and differential stress tests
+        run: |
+          cargo +1.99.1 test --locked
+          cargo +1.99.1 test --locked --example version_validation_lab
+          cargo +1.99.1 test --locked --example upstream_validation_lab
+          cargo +1.99.1 test --locked --example project_process_memory_lab
+          cargo +1.99.1 test --locked --example dedup_process_probe
+          cargo +1.99.1 test --locked --example addressed_snapshot_lab
+          cargo +1.99.1 test --locked --example compact_addressed_lab
+          cargo +1.99.1 test --locked --example body_reader_allocations
+          cargo +1.99.1 test --locked --example body_reader_http
+      - name: Isolated lossless storage candidate checks
+        working-directory: engineering/experiments/compressed-snapshot-lab
+        run: |
+          cargo +1.99.1 fmt --all -- --check
+          cargo +1.99.1 clippy --locked --all-targets -- -D warnings
+          cargo +1.99.1 test --locked

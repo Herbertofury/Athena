@@ -1,3 +1,7 @@
+# Current cutover status
+
+The [2026-11-13 reconciliation](cutover-2026-11-13/README.md) supersedes the source-main revision and open-work inventory below. Athena is the active destination. Historical snapshots remain intact; do not treat preserved candidate branches as accepted implementations.
+
 # Engineering Atlas → Athena migration
 
 Athena is the new home for the learning academy and engineering research. This directory preserves provenance, independent history, and unfinished work. **The source repository is not yet safe to delete.**

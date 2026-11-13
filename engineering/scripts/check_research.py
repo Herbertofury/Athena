@@ -35,7 +35,10 @@ def utc_today():
     """Source review dates use UTC, independent of executor local timezone."""
     return dt.datetime.now(dt.timezone.utc).date()
 
-def check(root=ROOT,today=None):
+def check(root=ROOT,today=None,link_root=None):
+    if link_root is None:
+        link_root = root.parent if root.resolve() == ROOT and (ROOT.parent / "migration/engineering-atlas").is_dir() else root
+    link_root = link_root.resolve()
     ids,stale=validate_sources(load_sources(root),today or utc_today())
     failures=[];files=list(root.rglob('*.md'))
     for path in files:
@@ -46,7 +49,7 @@ def check(root=ROOT,today=None):
             u=urlsplit(link)
             if u.scheme or link.startswith('#'):continue
             target=(path.parent/unquote(u.path)).resolve()
-            if not target.is_relative_to(root.resolve()) or not target.exists():failures.append(f'{path.relative_to(root)}: broken local link {link}')
+            if not target.is_relative_to(link_root) or not target.exists():failures.append(f'{path.relative_to(root)}: broken local link {link}')
     if failures:raise ValueError('\n'.join(failures))
     return {'sources':len(ids),'markdown_files':len(files),'stale_source_ids':stale,'scope':'Offline structure only; external availability and factual accuracy require review.'}
 if __name__=='__main__':
