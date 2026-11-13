@@ -1,10 +1,10 @@
 {
   "schema": 1,
-  "review": "Reviewed native learning, Research, Media, Rust Lab and generated Card density workspace; original algorithms/worker retained, bounded workload, cleanup, no automatic runs or external requests; private Foundry excluded. Native verified audio reuses exact source verification, selection and events; explicit load, no autoplay, navigation teardown.",
+  "review": "Reviewed native learning, Research, Media, Rust Lab and generated Card density workspace; original algorithms/worker retained, bounded workload, cleanup, no automatic runs or external requests; private Foundry excluded. Native verified audio reuses exact source verification, selection and events; explicit load, no autoplay, navigation teardown. Native complete receiver lab preserves exact validation/worker bundle modules and bounded lanes, no automatic run or candidate promotion.",
   "files": [
     {
       "path": "app.js",
-      "sha256": "1f3eb203af4c00a666b07f7e76addab411eae0af353f0ba5a03a0dde724ff20d"
+      "sha256": "5d619174643c1f7611f519b3c3ff607398955c9c3d0844ae9c30525e42200b7f"
     },
     {
       "path": "catalog.js",
@@ -16,7 +16,7 @@
     },
     {
       "path": "index.html",
-      "sha256": "5e957cae50d710eece445c555d2f9fa3c4bb0363b814020f21c8b77b65cd8f97"
+      "sha256": "871a1fc623a02792bcf90d5508a48fbab13d9b2f36dcbe0a38f99ada4a8314bf"
     },
     {
       "path": "styles.css",
@@ -213,6 +213,54 @@
     {
       "path": "workspaces/engineering/audio/style.css",
       "sha256": "22345561d84439ccdaa566d05ff7d344f02dc68f9931959a1a67d16651b819c2"
+    },
+    {
+      "path": "workspaces/engineering/receiver/baseline.293713d95cef8511.mjs",
+      "sha256": "293713d95cef8511a4130262daa4ccd9e86d080dfd514141fe9b125663573123"
+    },
+    {
+      "path": "workspaces/engineering/receiver/bounded-encoding.b3c034a08dcad316.mjs",
+      "sha256": "b3c034a08dcad3166e418464779b0bd690560fcdb07577375bb65270386615e2"
+    },
+    {
+      "path": "workspaces/engineering/receiver/index.mjs",
+      "sha256": "e6126cdf333d06e31a30ea9ec4a3023de8b03f4e7e706c844e0b204fd488cde4"
+    },
+    {
+      "path": "workspaces/engineering/receiver/lab-core.07b69b8b7583dd03.mjs",
+      "sha256": "07b69b8b7583dd038b1b034afec3b61cf1766a456674d629ded5457ecbee77b8"
+    },
+    {
+      "path": "workspaces/engineering/receiver/manifest.json",
+      "sha256": "31af42cd6a235c3fdbdbd52655a381b49b60e6cd967059c6b6152b913d158ddb"
+    },
+    {
+      "path": "workspaces/engineering/receiver/phase-clock.517bbc23572a2147.mjs",
+      "sha256": "517bbc23572a21471090ab7e965897eeb84881b2f90f808b13a3352b1893a8b6"
+    },
+    {
+      "path": "workspaces/engineering/receiver/receipt-protocol.b4d10c91dd34ebaa.mjs",
+      "sha256": "b4d10c91dd34ebaaa741f5b384edc39d4ebbd00d4644faa805be2273b22dc2f2"
+    },
+    {
+      "path": "workspaces/engineering/receiver/receiver-worker.2ddd526f33d730b2.mjs",
+      "sha256": "2ddd526f33d730b242d18aa29ba2885218029685bda10a5b98820ec88b562757"
+    },
+    {
+      "path": "workspaces/engineering/receiver/style.css",
+      "sha256": "e4e48176d0d71fb9ac9905ad898ae456f153fa4966a18182e8d14caf64ab09c3"
+    },
+    {
+      "path": "workspaces/engineering/receiver/verified-receiver.0b0bb67b4513ac91.mjs",
+      "sha256": "0b0bb67b4513ac913cc2585f4b362ae4e4033dd8b908385ea760e6914614b0f1"
+    },
+    {
+      "path": "workspaces/engineering/receiver/worker-esbuild.b1772614243c7c75.mjs",
+      "sha256": "b1772614243c7c75f2df147a643b32c094ab27e07ebf20286241c488abe6b328"
+    },
+    {
+      "path": "workspaces/engineering/receiver/worker-rolldown.0e9c42dd5c7472df.mjs",
+      "sha256": "0e9c42dd5c7472df20d8f61d8adc3b2110c9d587184c9f6ace0f3c337bc1cfe1"
     }
   ]
 }
