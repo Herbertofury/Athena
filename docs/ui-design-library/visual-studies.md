@@ -16,4 +16,4 @@ Proposed original implementation: evidence records separate severity, confidence
 
 ## Headroom and remaining sandbox
 
-Headroom's observed mostly empty white panel with a small colorful icon grid/line was insufficient to infer behavior. It and the other 15 sandbox entries remain indexed, not analyzed. Complete state captures and source identity remain required. See [queue](kshv-study-queue.md) and [source studies](source-studies.md).
+Headroom's observed mostly empty white panel with a small colorful icon grid/line was insufficient to infer behavior. A later source-owned still shows Headroom's storage dashboard; it and the remaining15 now have [still-image studies](sandbox-image-studies.md), not live interaction acceptance. Complete state captures and source identity remain required. See [queue](kshv-study-queue.md) and [source studies](source-studies.md).

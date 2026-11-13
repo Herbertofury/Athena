@@ -48,3 +48,6 @@ Current inventory and inspection limits: [Keshav study queue](kshv-study-queue.m
 - [Source studies](source-studies.md): pinned Gradii and Colors source, with durability and licensing caveats; Three.js official study candidates.
 - [Rendered observations](visual-studies.md): Compact and Sieve composition plus proposed original implementation plans. Behavior and performance remain untested.
 - [Complete sandbox queue](kshv-study-queue.md): all 18 indexed examples; catalog evidence states are authoritative.
+
+- [All remaining sandbox stills](sandbox-image-studies.md): per-design architecture and test plans, with static versus live evidence distinguished.
+- [Deployed viewer source](viewer-source-study.md): verified routing, lazy loading, modal and motion mechanics, plus unresolved acceptance tests.
