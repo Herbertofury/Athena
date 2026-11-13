@@ -44,5 +44,5 @@ cleanups.push(()=>{closed=true;selection.cancel();clearTimeout(readyTimer);if(cu
 $('load').disabled=false;$('status').textContent='Ready for an explicit load. Playback has not been tested.';record('fixture_loaded');
 function setSearch(value){if(disposed)return;const query=String(value??'').trim().toLowerCase();$('search-status').textContent=!query?'Search matches this single source without changing verification.':JSON.stringify(fixture).toLowerCase().includes(query)?'This public source matches your search.':'No match in this single public sample. Verification and any loaded clip remain unchanged.';}
 setSearch(search);
-return {unmount,setTheme,setSearch,ready:true,exportState(){return null;}};
+return {unmount,setTheme,setSearch,ready:true,exportState(){return {};}};
 }

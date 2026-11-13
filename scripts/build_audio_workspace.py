@@ -26,7 +26,7 @@ def build():
     footer='''
 function setSearch(value){if(disposed)return;const query=String(value??'').trim().toLowerCase();$('search-status').textContent=!query?'Search matches this single source without changing verification.':JSON.stringify(fixture).toLowerCase().includes(query)?'This public source matches your search.':'No match in this single public sample. Verification and any loaded clip remain unchanged.';}
 setSearch(search);
-return {unmount,setTheme,setSearch,ready:true,exportState(){return null;}};
+return {unmount,setTheme,setSearch,ready:true,exportState(){return {};}};
 }
 '''
     emit('index.mjs',imports+'\n'+header+code+footer,SOURCE/'audio.js')
