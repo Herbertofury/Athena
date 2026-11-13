@@ -111,3 +111,7 @@ test('late native lesson close cannot erase newer route interaction or steal foc
  const feedback=s.doc.querySelector('#review-feedback'),html=feedback.innerHTML,card=s.doc.querySelector('.review-card');
  s.flush();assert.equal(s.doc.querySelector('.review-card')===card,true);assert.equal(feedback.innerHTML,html);assert.equal(s.focus(),feedback);
 });
+
+test('Escape cancel settles close synchronously before subsequent keyboard movement',()=>{
+ const s=setup({queuedClose:true});s.go('#workshops/security-foundations');open(s,'sec-risk-story');const event=new s.window.Event('cancel',{cancelable:true});s.dialog.dispatchEvent(event);assert.equal(event.defaultPrevented,true);assert.equal(s.dialog.open,false);const next=s.doc.querySelector('[data-lesson="sec-identity-lifecycle"]');next.focus();s.flush();assert.equal(s.focus()===next,true);assert.equal(s.doc.querySelector('[data-lesson="sec-identity-lifecycle"]')===next,true);
+});
