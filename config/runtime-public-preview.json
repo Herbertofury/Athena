@@ -1,10 +1,10 @@
 {
   "schema": 1,
-  "review": "Reviewed learning shell, public Engineering Research/Media adapters and same-origin local R&D lab assets only; private Foundry excluded.",
+  "review": "Reviewed native learning, Research, Media, Rust Lab and generated Card density workspace; original algorithms/worker retained, bounded workload, cleanup, no automatic runs or external requests; private Foundry excluded.",
   "files": [
     {
       "path": "app.js",
-      "sha256": "c440389f4b4694d5a5aa29ebf875b401cb8f8cecd844cf6e8e349018e7b89b61"
+      "sha256": "5218aa610972a181197238f61180139c32fe0cf6d122c7e06ee2e405a83e09d9"
     },
     {
       "path": "catalog.js",
@@ -16,7 +16,7 @@
     },
     {
       "path": "index.html",
-      "sha256": "9f0cd9affdcad4760f01b6f78e4a150ab003ac5ad28110e5b4dd63e78ddec521"
+      "sha256": "05d9303bd58e9a55c97f775079357854358b874b099c7d3c1cee26369c8d6a5d"
     },
     {
       "path": "styles.css",
@@ -45,6 +45,54 @@
     {
       "path": "workspace-host.js",
       "sha256": "8a14dec17d4d816de53d325a94ee0dd00ac0bc8a0a26a756af58998173157cdb"
+    },
+    {
+      "path": "workspaces/engineering/cards/baseline.mjs",
+      "sha256": "4d65180f168a09b4d8c66d6e49d554a00500a681bd4509fcd08e98e0aa3c4459"
+    },
+    {
+      "path": "workspaces/engineering/cards/bounded-encoding.mjs",
+      "sha256": "b3c034a08dcad3166e418464779b0bd690560fcdb07577375bb65270386615e2"
+    },
+    {
+      "path": "workspaces/engineering/cards/cooperative-commit.mjs",
+      "sha256": "b749b21b072f5ead6bd38d151b09cf24572609377b5753d39b293cf6593318df"
+    },
+    {
+      "path": "workspaces/engineering/cards/cooperative-pairs.mjs",
+      "sha256": "c680a72c4279922db9b560dc09fc029b3a6754d07111a9ad934a456bb2a601a6"
+    },
+    {
+      "path": "workspaces/engineering/cards/cooperative-scheduler.mjs",
+      "sha256": "d640aba946627f18dadd29165f0c1ff95c765852d84e05b6262da0cf04702872"
+    },
+    {
+      "path": "workspaces/engineering/cards/index.mjs",
+      "sha256": "8d2a86b6b3d9dd45d1c6fb1fec4865a20915d5ffcf373d81c923fca90d9a9e09"
+    },
+    {
+      "path": "workspaces/engineering/cards/lab-core.mjs",
+      "sha256": "07b69b8b7583dd038b1b034afec3b61cf1766a456674d629ded5457ecbee77b8"
+    },
+    {
+      "path": "workspaces/engineering/cards/lab-worker.mjs",
+      "sha256": "8fc077f6c73893944fb83928b487bc913918dbb786f6f89acec49da769ac5533"
+    },
+    {
+      "path": "workspaces/engineering/cards/manifest.json",
+      "sha256": "fbcae53fefeeaedf05c163bd1ff0165c06ee569a8816d1ad64b2e107f09640eb"
+    },
+    {
+      "path": "workspaces/engineering/cards/preparation-core.mjs",
+      "sha256": "4d65180f168a09b4d8c66d6e49d554a00500a681bd4509fcd08e98e0aa3c4459"
+    },
+    {
+      "path": "workspaces/engineering/cards/style.css",
+      "sha256": "5ab08b8b9088d7291e2eebc8246f0ae3ca2237c7e4ba17781d164214294bff09"
+    },
+    {
+      "path": "workspaces/engineering/cards/verified-receiver.mjs",
+      "sha256": "adcc72ef6057db3b75743bb51e83c3bf27f40df5eca9f86220a1d345c4151c7e"
     },
     {
       "path": "workspaces/engineering/lab/archive-view.mjs",

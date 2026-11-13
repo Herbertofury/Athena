@@ -46,6 +46,16 @@ class PackageTests(unittest.TestCase):
                     pack.package(source,root/'public',self.approved(source),profile='public-preview')
                 self.assertFalse((root/'public').exists())
 
+    def test_card_dependencies_required_before_output(self):
+        for relative in [p for p in pack.REQUIRED if '/cards/' in p]:
+            with self.subTest(path=relative), tempfile.TemporaryDirectory() as temp:
+                root=pathlib.Path(temp);source=self.source(root)
+                (source/'workspaces/foundry/index.js').unlink()
+                (source/relative).unlink()
+                with self.assertRaisesRegex(ValueError, 'missing'):
+                    pack.package(source,root/'public',self.approved(source),profile='public-preview')
+                self.assertFalse((root/'public').exists())
+
     def test_existing_output_preserved(self):
         with tempfile.TemporaryDirectory() as temp:
             root=pathlib.Path(temp);source=self.source(root);output=root/'public';output.mkdir();(output/'mine').write_text('preserve')
@@ -112,7 +122,7 @@ class PackageTests(unittest.TestCase):
             root=pathlib.Path(temp);source=self.source(root)
             (source/'workspaces/foundry/index.js').unlink()
             manifest=pack.package(source,root/'public',self.approved(source),profile='public-preview')
-            self.assertEqual(manifest['workspaces'],['learning','research','media','lab'])
+            self.assertEqual(manifest['workspaces'],['learning','research','media','lab','cards'])
             self.assertEqual(manifest['pending'], ['Feature Foundry integration and verification; not included in this build'])
             self.assertFalse((root/'public/workspaces/foundry/index.js').exists())
 
