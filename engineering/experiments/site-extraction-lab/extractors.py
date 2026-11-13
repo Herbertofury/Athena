@@ -8,6 +8,7 @@ from __future__ import annotations
 import hashlib
 import json
 import re
+from datetime import datetime, timedelta, timezone
 from urllib.parse import urljoin, urlsplit, urlunsplit
 
 from lxml import etree, html
@@ -312,6 +313,76 @@ def wordpress(inputs, origin):
     return record
 
 
+def rss_publication_date(item):
+    """Preserve item/pubDate; normalize only a bounded RFC-style subset.
+
+    No clock, channel-date, local-timezone or forgiving parser fallback. Raw
+    XML-decoded text stays in memory, including invalid/unsupported values.
+    Comments and leap seconds remain unsupported, never silently repaired.
+    RSS permits two- or four-digit years; two-digit century and -0000 follow
+    RFC 5322 sections 4.3 and 3.3. Unknown named/military zones stay unresolved.
+    """
+    nodes = item.findall("pubDate")
+    result = {"source": "item/pubDate", "raw": ["".join(n.itertext()) for n in nodes],
+              "state": "missing", "utc": None, "sourceTimezoneKnown": None}
+    if not nodes:
+        return result
+    if len(nodes) != 1:
+        result["state"] = "ambiguous"
+        return result
+    result["state"] = "unsupported"
+    if len(nodes[0]):
+        return result
+    value = result["raw"][0].strip(" \t\r\n")
+    if not value:
+        result["state"] = "empty"
+        return result
+    # Match the whole value; datetime parsing helpers may discard trailing data
+    # or invent UTC for an absent zone. ASCII digits/whitespace are intentional.
+    match = re.fullmatch(
+        r"(?:(Mon|Tue|Wed|Thu|Fri|Sat|Sun),[ \t\r\n]+)?"
+        r"([0-9]{1,2})[ \t\r\n]+(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)"
+        r"[ \t\r\n]+([0-9]{4}|[0-9]{2})[ \t\r\n]+([0-9]{2}):([0-9]{2})"
+        r"(?::([0-9]{2}))?(?:[ \t\r\n]+([+-][0-9]{4}|[A-Za-z]+))?", value, re.I | re.ASCII)
+    if not match:
+        return result
+    weekday, day, month, year, hour, minute, second, zone = match.groups()
+    year_value = int(year)
+    if len(year) == 2:
+        year_value += 2000 if year_value < 50 else 1900
+    if second == "60":
+        return result
+    result["state"] = "invalid"
+    if year_value < 1900:
+        return result
+    try:
+        stamp = datetime(year_value, 1 + "jan feb mar apr may jun jul aug sep oct nov dec".split().index(month.lower()),
+                         int(day), int(hour), int(minute), int(second or 0))
+        if weekday and stamp.weekday() != "mon tue wed thu fri sat sun".split().index(weekday.lower()):
+            return result
+        if zone is None:
+            result["state"] = "timezone_missing"
+            return result
+        known = {"UT": 0, "GMT": 0, "EST": -300, "EDT": -240, "CST": -360,
+                 "CDT": -300, "MST": -420, "MDT": -360, "PST": -480, "PDT": -420}
+        if zone.startswith(("+", "-")):
+            hours, minutes = int(zone[1:3]), int(zone[3:5])
+            if hours > 23 or minutes > 59:
+                return result
+            offset = (hours * 60 + minutes) * (-1 if zone[0] == "-" else 1)
+        else:
+            offset = known.get(zone.upper())
+            if offset is None:
+                result["state"] = "timezone_unknown"
+                return result
+        utc = stamp.replace(tzinfo=timezone(timedelta(minutes=offset))).astimezone(timezone.utc)
+    except (ValueError, OverflowError):
+        return result
+    result.update(state="valid", utc=utc.isoformat().replace("+00:00", "Z"),
+                  sourceTimezoneKnown=zone != "-0000")
+    return result
+
+
 def rss(inputs, origin):
     raw = inputs["feed"]
     if re.search(br"<!\s*(?:DOCTYPE|ENTITY)", raw, re.I):
@@ -325,6 +396,7 @@ def rss(inputs, origin):
                               "guidUrl": public_url(guid, origin), "sourceUrl": public_url(item.findtext("link"), origin),
                               "title": item.findtext("title")}
         record["sourceGuid"] = guid
+        record["publicationDate"] = rss_publication_date(item)
         author = item.findtext("{http://purl.org/dc/elements/1.1/}creator")
         record["people"] = [{"id": None, "name": author, "role": "feed_author_display_only", "avatar": None}]
         body = item.findtext("{http://purl.org/rss/1.0/modules/content/}encoded")
@@ -530,6 +602,10 @@ def receipt(record):
     if isinstance(record, list):
         return [receipt(r) for r in record]
     result = {key: record[key] for key in ("family", "sourceUrl", "identity", "people", "gallery", "files", "gates", "follow", "warnings", "scope", "fullSupportAccepted")}
+    if "publicationDate" in record:
+        # Raw pubDate may contain arbitrary provider text; never publish it.
+        result["publicationDate"] = {key: record["publicationDate"][key] for key in
+                                     ("source", "state", "utc", "sourceTimezoneKnown")}
     result["body"] = body_receipt(record["body"])
     result["notes"] = [body_receipt(n) for n in record["notes"]]
     result["metadataSummaryPresent"] = bool(record.get("metadataSummary"))
