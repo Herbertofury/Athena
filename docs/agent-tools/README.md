@@ -42,7 +42,7 @@ The canonical [MemPalace repository](https://github.com/MemPalace/mempalace) ide
 
 The [package manifest](https://github.com/MemPalace/mempalace/blob/develop/pyproject.toml) declares MIT, Python >=3.10, and dependencies including ChromaDB, NumPy, Hugging Face Hub and tokenizers. Optional DirectML support exists for Windows. It also records Windows-specific Chroma compaction-test retries: native acceptance cannot be inferred from platform support alone. Do not select a development branch just because it is newest.
 
-[Codex/Claude hooks](https://mempalaceofficial.com/guide/hooks) are a separate integration surface requiring inspection and explicit scope before enabling. No session folders were read in this review. Do not grant blanket transcript harvesting. Use a synthetic, non-sensitive corpus first. Upstream benchmark claims are not a comparison against this user's projects or hardware.
+[Codex/Claude hooks](https://mempalaceofficial.com/guide/hooks.html) are a separate integration surface requiring inspection and explicit scope before enabling. No session folders were read in this review. Do not grant blanket transcript harvesting. Use a synthetic, non-sensitive corpus first. Upstream benchmark claims are not a comparison against this user's projects or hardware.
 
 ### OpenMemory: disambiguate the product
 
