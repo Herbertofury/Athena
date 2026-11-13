@@ -24,6 +24,11 @@ REQUIRED = ('index.html', 'app.js', 'core.js', 'catalog.js', 'styles.css', 'work
             'workspaces/engineering/cards/verified-receiver.mjs',
             'workspaces/engineering/cards/baseline.mjs',
             'workspaces/engineering/cards/bounded-encoding.mjs',
+            'workspaces/engineering/audio/index.mjs',
+            'workspaces/engineering/audio/style.css',
+            'workspaces/engineering/audio/audio-core.mjs',
+            'workspaces/engineering/audio/archive-selection.mjs',
+            'workspaces/engineering/audio/media-events.mjs',
             'workspaces/foundry/index.js')
 
 
@@ -98,7 +103,7 @@ def package(source, output, allowlist=None, profile="complete"):
         for generated in ('learn/index.html', '.nojekyll'):
             data=(staged/generated).read_bytes()
             entries.append({'path':generated,'bytes':len(data),'sha256':hashlib.sha256(data).hexdigest(),'origin':'generated'})
-        manifest={'application':'Athena','entry':'index.html','profile':profile,'workspaces':['learning','research','media','lab','cards']+(['build'] if profile=='complete' else []),
+        manifest={'application':'Athena','entry':'index.html','profile':profile,'workspaces':['learning','research','media','lab','cards','audio']+(['build'] if profile=='complete' else []),
                   'pending':[] if profile=='complete' else ['Feature Foundry integration and verification; not included in this build'],
                   'verification':'Packaging and file hashes only; functional/browser parity is a separate gate.', 'files':entries}
         (staged/'athena-runtime-manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')
