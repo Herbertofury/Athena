@@ -14,6 +14,7 @@ def build():
     code=replace(code,"document.addEventListener('visibilitychange',()=>{if(busy&&document.hidden)hidden=true;});","const visibility=()=>{if(busy&&document.hidden)hidden=true;};document.addEventListener('visibilitychange',visibility);cleanups.push(()=>document.removeEventListener('visibilitychange',visibility));")
     code=replace(code,'const publish=()=>{','const publish=()=>{if(disposed)return;')
     code=replace(code,'if(busy)return;busy=true;','if(disposed||busy)return;busy=true;')
+    code=replace(code,'guard.begin();',"guard.begin();$('status').textContent='Calibrating current run…';$('summary').textContent='Run in progress; previous completion is not this run.';")
     code=replace(code,"}catch(error){current.error=error.message;", "}catch(error){if(disposed)return;current.error=error.message;")
     code=replace(code,'finally{current.focus_state=guard.snapshot();','finally{if(disposed)return;current.focus_state=guard.snapshot();')
     code=code.replace('URL.createObjectURL(', 'createObjectURL(').replace('URL.revokeObjectURL(', 'revokeObjectURL(')

@@ -53,7 +53,7 @@ function workerRun(lane,prepared,count,bytes){
  });
 }
 $('run').addEventListener('click',async()=>{
- if(disposed||busy)return;busy=true;stopped=false;hidden=false;guard.begin();$('run').disabled=true;$('cancel').disabled=false;$('bytes').disabled=true;$('execution').disabled=true;
+ if(disposed||busy)return;busy=true;stopped=false;hidden=false;guard.begin();$('status').textContent='Calibrating current run…';$('summary').textContent='Run in progress; previous completion is not this run.';$('run').disabled=true;$('cancel').disabled=false;$('bytes').disabled=true;$('execution').disabled=true;
  const count=200,bytes=Number($('bytes').value),execution=$('execution').value;
  current={harness:identity,source_harness:"atlas-complete-receiver-v9-explicit-phase-status",started_at:new Date().toISOString(),scope:'Generated browser receiver validation; no target acceptance',count,bytes,execution,complete:false,samples:[],limitations:['Frame gaps are scheduling observations, not INP or physical paint','No heap/RSS or provider-media measurement','Worker request duration includes startup and full input clone; clone mode also clones the full result, transfer mode includes complete output encoding, transfer and decoding','Receipt mode is validation-only: original complete input stays owned by the main thread; no transformed/new records are produced',
   'Build comparison uses identical complete validation-only receipts in all three lanes, with a new worker per sample',
