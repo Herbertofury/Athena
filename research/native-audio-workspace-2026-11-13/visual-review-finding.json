@@ -1,0 +1,12 @@
+{
+  "reviewed_head": "ae19d27c9d34eed373bd6833cd47ce9345a7f925",
+  "run": 43523663402,
+  "artifact": 14084137569,
+  "artifact_sha256": "89366afd6e4d8550bf2aa5981ace2782cf4c14e6723ff806ce8aa4d2542dbf4e",
+  "artifact_independently_verified": true,
+  "automated_result": "Full pipeline passed",
+  "visual_result": "Desktop/native audio rendered correctly. Mobile screenshot revealed Workspace settings were not saved toast after navigation.",
+  "cause": "Audio exportState returned null; shared workspace storage requires object.",
+  "repair": "Return an empty settings object, not audio bytes/receipt. Add unit contract and real browser assertion that navigation persists empty settings without toast.",
+  "limit": "Prior green pipeline does not erase visual finding. Corrected head requires full acceptance again. No actual public decode or playing claimed."
+}

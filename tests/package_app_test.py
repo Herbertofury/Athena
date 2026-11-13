@@ -122,7 +122,7 @@ class PackageTests(unittest.TestCase):
             root=pathlib.Path(temp);source=self.source(root)
             (source/'workspaces/foundry/index.js').unlink()
             manifest=pack.package(source,root/'public',self.approved(source),profile='public-preview')
-            self.assertEqual(manifest['workspaces'],['learning','research','media','lab','cards'])
+            self.assertEqual(manifest['workspaces'],['learning','research','media','lab','cards','audio'])
             self.assertEqual(manifest['pending'], ['Feature Foundry integration and verification; not included in this build'])
             self.assertFalse((root/'public/workspaces/foundry/index.js').exists())
 

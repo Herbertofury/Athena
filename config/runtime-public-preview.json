@@ -1,10 +1,10 @@
 {
   "schema": 1,
-  "review": "Reviewed native learning, Research, Media, Rust Lab and generated Card density workspace; original algorithms/worker retained, bounded workload, cleanup, no automatic runs or external requests; private Foundry excluded.",
+  "review": "Reviewed native learning, Research, Media, Rust Lab and generated Card density workspace; original algorithms/worker retained, bounded workload, cleanup, no automatic runs or external requests; private Foundry excluded. Native verified audio reuses exact source verification, selection and events; explicit load, no autoplay, navigation teardown.",
   "files": [
     {
       "path": "app.js",
-      "sha256": "5218aa610972a181197238f61180139c32fe0cf6d122c7e06ee2e405a83e09d9"
+      "sha256": "1f3eb203af4c00a666b07f7e76addab411eae0af353f0ba5a03a0dde724ff20d"
     },
     {
       "path": "catalog.js",
@@ -16,7 +16,7 @@
     },
     {
       "path": "index.html",
-      "sha256": "05d9303bd58e9a55c97f775079357854358b874b099c7d3c1cee26369c8d6a5d"
+      "sha256": "5e957cae50d710eece445c555d2f9fa3c4bb0363b814020f21c8b77b65cd8f97"
     },
     {
       "path": "styles.css",
@@ -189,6 +189,30 @@
     {
       "path": "workspaces/engineering/research/style.css",
       "sha256": "be0489093bebf2ea49801a71f5779364533e844918f05573bc4fc425b8aae744"
+    },
+    {
+      "path": "workspaces/engineering/audio/archive-selection.mjs",
+      "sha256": "de52a075043aee965b579e3259ed852dc64a9ba60cceb300d9acefd4c6223228"
+    },
+    {
+      "path": "workspaces/engineering/audio/audio-core.mjs",
+      "sha256": "98726eb5efb4ec5bdfb2b169fb56b3cce1bbf27f78e95e40fe5eb5dbe784053e"
+    },
+    {
+      "path": "workspaces/engineering/audio/index.mjs",
+      "sha256": "bee496564f2f5efcbbf62fe0f002716aa4e1414814de24b5f7e5899b87a33998"
+    },
+    {
+      "path": "workspaces/engineering/audio/manifest.json",
+      "sha256": "c3b28341d1f8676d62ef5c0121c1afcf85ce66d5403d7c4cf5a38084f453a50d"
+    },
+    {
+      "path": "workspaces/engineering/audio/media-events.mjs",
+      "sha256": "e336b2c509ca803072cb2d56c65a0b111fa4a6402b85c69f823e6f5f117a98cf"
+    },
+    {
+      "path": "workspaces/engineering/audio/style.css",
+      "sha256": "22345561d84439ccdaa566d05ff7d344f02dc68f9931959a1a67d16651b819c2"
     }
   ]
 }
