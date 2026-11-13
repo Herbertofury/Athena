@@ -15,3 +15,9 @@ The save operation now returns its persistence outcome. Import reports either sa
 - A focused Chromium acceptance runner covers simulated quota failure, last-good stored data, retained imported notes, export and successful retry/reload. Local Chromium could not launch because its process-singleton socket was not permitted. No real-browser pass is claimed locally. The runner is included before the existing combined browser CI gate.
 
 This is a bounded import correctness repair, not full Athena release acceptance, private Foundry integration, real-provider playback or Windows engine qualification. Existing release gates remain in force.
+
+## CI-discovered queued-close repair
+
+The focused import browser gate passed on CI. The existing combined gate exposed a separate native-dialog race: Escape restores focus before its queued close event; after navigation and review interaction, that late event rerendered the new route and erased feedback or stole focus. Runs 43476569358, 43477812670 and 43478193850 retain failed browser artifacts. The bounded event trace records feedback/question focus followed by unexpected heading focus without navigation.
+
+A deterministic queued-close regression fails on the original handler. A close from an obsolete route/query now leaves the newer view and focus untouched. All 25 accessibility DOM tests pass. The unmodified acceptance requirements still require hosted browser verification; this is not an accessibility conformance claim.

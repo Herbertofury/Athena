@@ -104,3 +104,10 @@ test('boundary handler respects Escape modifiers prevented events and closed dia
  last.focus();s.key(last,'Tab',{prePrevented:true});assert.equal(s.focus()===last,true);assert.equal(s.key(last,'Escape').defaultPrevented,false);
  s.dialog.close();last.focus();assert.equal(s.key(last,'Tab').defaultPrevented,false);assert.equal(s.focus()===last,true);
 });
+
+test('late native lesson close cannot erase newer route interaction or steal focus',()=>{
+ const s=setup({queuedClose:true});s.go('#workshops/security-foundations');open(s,'sec-risk-story');s.dialog.close();
+ s.go('#review');s.click(s.doc.querySelector('[data-review-answer="0"]'));
+ const feedback=s.doc.querySelector('#review-feedback'),html=feedback.innerHTML,card=s.doc.querySelector('.review-card');
+ s.flush();assert.equal(s.doc.querySelector('.review-card')===card,true);assert.equal(feedback.innerHTML,html);assert.equal(s.focus(),feedback);
+});
