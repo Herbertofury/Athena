@@ -4,7 +4,7 @@
   "files": [
     {
       "path": "app.js",
-      "sha256": "5d619174643c1f7611f519b3c3ff607398955c9c3d0844ae9c30525e42200b7f"
+      "sha256": "7cc687ce906b9cbf1761c4eac0eb81d545dfba15cfa1f9e808d02f010d6c5cff"
     },
     {
       "path": "catalog.js",
@@ -16,7 +16,7 @@
     },
     {
       "path": "index.html",
-      "sha256": "871a1fc623a02792bcf90d5508a48fbab13d9b2f36dcbe0a38f99ada4a8314bf"
+      "sha256": "5e957cae50d710eece445c555d2f9fa3c4bb0363b814020f21c8b77b65cd8f97"
     },
     {
       "path": "styles.css",
@@ -45,6 +45,30 @@
     {
       "path": "workspace-host.js",
       "sha256": "8a14dec17d4d816de53d325a94ee0dd00ac0bc8a0a26a756af58998173157cdb"
+    },
+    {
+      "path": "workspaces/engineering/audio/archive-selection.mjs",
+      "sha256": "de52a075043aee965b579e3259ed852dc64a9ba60cceb300d9acefd4c6223228"
+    },
+    {
+      "path": "workspaces/engineering/audio/audio-core.mjs",
+      "sha256": "98726eb5efb4ec5bdfb2b169fb56b3cce1bbf27f78e95e40fe5eb5dbe784053e"
+    },
+    {
+      "path": "workspaces/engineering/audio/index.mjs",
+      "sha256": "bee496564f2f5efcbbf62fe0f002716aa4e1414814de24b5f7e5899b87a33998"
+    },
+    {
+      "path": "workspaces/engineering/audio/manifest.json",
+      "sha256": "c3b28341d1f8676d62ef5c0121c1afcf85ce66d5403d7c4cf5a38084f453a50d"
+    },
+    {
+      "path": "workspaces/engineering/audio/media-events.mjs",
+      "sha256": "e336b2c509ca803072cb2d56c65a0b111fa4a6402b85c69f823e6f5f117a98cf"
+    },
+    {
+      "path": "workspaces/engineering/audio/style.css",
+      "sha256": "22345561d84439ccdaa566d05ff7d344f02dc68f9931959a1a67d16651b819c2"
     },
     {
       "path": "workspaces/engineering/cards/baseline.mjs",
@@ -175,46 +199,6 @@
       "sha256": "15fcfeb0546007b06f104cc7419dadfc697b7858e3436c4753113cb43b5a4885"
     },
     {
-      "path": "workspaces/engineering/research/catalog.json",
-      "sha256": "9d2ab033df646fe0bf51b8a2eb9da68dbeb12c64b7d14e38fe441c4f6ad946e6"
-    },
-    {
-      "path": "workspaces/engineering/research/explorer-core.mjs",
-      "sha256": "06f94ed2ef4259729f6fa956672095f8560b7e04289276c2601e0b24c7d62811"
-    },
-    {
-      "path": "workspaces/engineering/research/index.mjs",
-      "sha256": "fda2961c11928ddf950c3de829560c068270d4886005a03999139b149cf1b78d"
-    },
-    {
-      "path": "workspaces/engineering/research/style.css",
-      "sha256": "be0489093bebf2ea49801a71f5779364533e844918f05573bc4fc425b8aae744"
-    },
-    {
-      "path": "workspaces/engineering/audio/archive-selection.mjs",
-      "sha256": "de52a075043aee965b579e3259ed852dc64a9ba60cceb300d9acefd4c6223228"
-    },
-    {
-      "path": "workspaces/engineering/audio/audio-core.mjs",
-      "sha256": "98726eb5efb4ec5bdfb2b169fb56b3cce1bbf27f78e95e40fe5eb5dbe784053e"
-    },
-    {
-      "path": "workspaces/engineering/audio/index.mjs",
-      "sha256": "bee496564f2f5efcbbf62fe0f002716aa4e1414814de24b5f7e5899b87a33998"
-    },
-    {
-      "path": "workspaces/engineering/audio/manifest.json",
-      "sha256": "c3b28341d1f8676d62ef5c0121c1afcf85ce66d5403d7c4cf5a38084f453a50d"
-    },
-    {
-      "path": "workspaces/engineering/audio/media-events.mjs",
-      "sha256": "e336b2c509ca803072cb2d56c65a0b111fa4a6402b85c69f823e6f5f117a98cf"
-    },
-    {
-      "path": "workspaces/engineering/audio/style.css",
-      "sha256": "22345561d84439ccdaa566d05ff7d344f02dc68f9931959a1a67d16651b819c2"
-    },
-    {
       "path": "workspaces/engineering/receiver/baseline.293713d95cef8511.mjs",
       "sha256": "293713d95cef8511a4130262daa4ccd9e86d080dfd514141fe9b125663573123"
     },
@@ -261,6 +245,38 @@
     {
       "path": "workspaces/engineering/receiver/worker-rolldown.0e9c42dd5c7472df.mjs",
       "sha256": "0e9c42dd5c7472df20d8f61d8adc3b2110c9d587184c9f6ace0f3c337bc1cfe1"
+    },
+    {
+      "path": "workspaces/engineering/research/catalog.json",
+      "sha256": "9d2ab033df646fe0bf51b8a2eb9da68dbeb12c64b7d14e38fe441c4f6ad946e6"
+    },
+    {
+      "path": "workspaces/engineering/research/explorer-core.mjs",
+      "sha256": "06f94ed2ef4259729f6fa956672095f8560b7e04289276c2601e0b24c7d62811"
+    },
+    {
+      "path": "workspaces/engineering/research/index.mjs",
+      "sha256": "fda2961c11928ddf950c3de829560c068270d4886005a03999139b149cf1b78d"
+    },
+    {
+      "path": "workspaces/engineering/research/style.css",
+      "sha256": "be0489093bebf2ea49801a71f5779364533e844918f05573bc4fc425b8aae744"
+    },
+    {
+      "path": "workspaces/foundry/catalog.json",
+      "sha256": "1bc9ec48a345ac23e65aabf4f328b3f15d58d8e326780949a393e95b1fe0f226"
+    },
+    {
+      "path": "workspaces/foundry/index.mjs",
+      "sha256": "72e971463001dbdf9e26fb73d0f74b55d060abb08348e77a992ae47a502f00fd"
+    },
+    {
+      "path": "workspaces/foundry/layout-state.mjs",
+      "sha256": "30fd85bd5a0c30dc52a35d9d48b3a1c2867767fc98c4ac4fb51dbcbf57c2314a"
+    },
+    {
+      "path": "workspaces/foundry/style.css",
+      "sha256": "064ef67a16960533d2efb2e5eb54551812aef8c4a3070f8d9f1bd2db70ce64c5"
     }
   ]
 }
