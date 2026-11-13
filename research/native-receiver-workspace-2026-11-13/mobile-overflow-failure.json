@@ -1,0 +1,11 @@
+{
+  "head": "7f4237ee455697b0dab902b8eae98bfe67b29b78",
+  "run": 43527311429,
+  "artifact": 14085527502,
+  "artifact_sha256": "567c39d3b9ed6b65c1d9a8bf9dd723cf09cd091942063127b6ace47acc32dc30",
+  "artifact_independently_verified": true,
+  "result": "failed",
+  "verified_before_failure": "All five actual receiver execution modes completed with full parity, last-good remained byte-exact after navigation/interruption.",
+  "failure": "390px viewport had422px document scrollWidth. Screenshot shows intrinsically sized execution select exceeds label/container.",
+  "repair": "Constrain label and select to available width without hiding/clipping page content; wrap long words and explicitly theme form controls. Original overflow assertion remains."
+}

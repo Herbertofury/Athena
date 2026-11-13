@@ -29,6 +29,18 @@ REQUIRED = ('index.html', 'app.js', 'core.js', 'catalog.js', 'styles.css', 'work
             'workspaces/engineering/audio/audio-core.mjs',
             'workspaces/engineering/audio/archive-selection.mjs',
             'workspaces/engineering/audio/media-events.mjs',
+            'workspaces/engineering/receiver/baseline.293713d95cef8511.mjs',
+            'workspaces/engineering/receiver/bounded-encoding.b3c034a08dcad316.mjs',
+            'workspaces/engineering/receiver/index.mjs',
+            'workspaces/engineering/receiver/lab-core.07b69b8b7583dd03.mjs',
+            'workspaces/engineering/receiver/manifest.json',
+            'workspaces/engineering/receiver/phase-clock.517bbc23572a2147.mjs',
+            'workspaces/engineering/receiver/receipt-protocol.b4d10c91dd34ebaa.mjs',
+            'workspaces/engineering/receiver/receiver-worker.2ddd526f33d730b2.mjs',
+            'workspaces/engineering/receiver/style.css',
+            'workspaces/engineering/receiver/verified-receiver.0b0bb67b4513ac91.mjs',
+            'workspaces/engineering/receiver/worker-esbuild.b1772614243c7c75.mjs',
+            'workspaces/engineering/receiver/worker-rolldown.0e9c42dd5c7472df.mjs',
             'workspaces/foundry/index.js')
 
 
@@ -103,7 +115,7 @@ def package(source, output, allowlist=None, profile="complete"):
         for generated in ('learn/index.html', '.nojekyll'):
             data=(staged/generated).read_bytes()
             entries.append({'path':generated,'bytes':len(data),'sha256':hashlib.sha256(data).hexdigest(),'origin':'generated'})
-        manifest={'application':'Athena','entry':'index.html','profile':profile,'workspaces':['learning','research','media','lab','cards','audio']+(['build'] if profile=='complete' else []),
+        manifest={'application':'Athena','entry':'index.html','profile':profile,'workspaces':['learning','research','media','lab','cards','audio','receiver']+(['build'] if profile=='complete' else []),
                   'pending':[] if profile=='complete' else ['Feature Foundry integration and verification; not included in this build'],
                   'verification':'Packaging and file hashes only; functional/browser parity is a separate gate.', 'files':entries}
         (staged/'athena-runtime-manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')
