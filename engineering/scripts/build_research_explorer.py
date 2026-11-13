@@ -321,7 +321,7 @@ def load_bundle(root=ROOT):
 
 def markdown_catalog(bundle):
     text = ['# Research catalog', '', '**Snapshot: ' + bundle['snapshot_date'] + ' (' + bundle['snapshot_timezone'] + ').** Source checks use UTC dates.', '',
-        '[Interactive Explorer](https://herbertofury.github.io/Athena/engineering/docs/explorer/) · [Ranking methodology](research-explorer.md) · [Test queue](research-test-queue.md)', '',
+        '[Interactive Explorer](https://herbertofury.github.io/Athena/#research) · [Ranking methodology](research-explorer.md) · [Test queue](research-test-queue.md)', '',
         'Every entry below is a research candidate. Priority is an editorial test queue, not a performance score. Existing local measurements are exposed separately by exact cohort. No universal winner is implied.', '']
     for category in bundle['categories']:
         entries = sorted([e for e in bundle['entries'] if e['category'] == category['id']], key=lambda e: (e['priority'], e['name']))
@@ -349,7 +349,7 @@ def markdown_layer_map(bundle):
         '| Stack layer | Reference choices | Compare next | Research watchlist | Decision and adoption gate |',
         '|---|---|---|---|---|']
     for layer in bundle.get('layers', []):
-        row = ['[' + layer['label'] + '](https://herbertofury.github.io/Athena/engineering/docs/explorer/?layer=' + layer['id'] + '#catalog)',
+        row = ['[' + layer['label'] + '](https://herbertofury.github.io/Athena/#research?layer=' + layer['id'] + ')',
                choices(layer['baseline_ids']), choices(layer['challenger_ids']), choices(layer['watch_ids']),
                layer['decision'] + ' **Gate:** ' + layer['gate']]
         lines.append('| ' + ' | '.join(cell.replace('|', '\\|').replace('\n', ' ') for cell in row) + ' |')
@@ -367,7 +367,7 @@ def markdown_test_plan_directory(bundle):
         '| Planned comparison | Priority | Stack layers | Candidates |',
         '|---|---|---|---|']
     for plan in bundle.get('test_plans', []):
-        row = ['[' + plan['title'] + '](https://herbertofury.github.io/Athena/engineering/docs/explorer/?plan=' + plan['id'] + '#catalog)',
+        row = ['[' + plan['title'] + '](https://herbertofury.github.io/Athena/#research?plan=' + plan['id'] + ')',
                'P' + str(plan['priority']), '; '.join(layers[layer_id] for layer_id in plan['layer_ids']),
                str(len(plan['candidate_ids']))]
         lines.append('| ' + ' | '.join(cell.replace('|', '\\|').replace('\n', ' ') for cell in row) + ' |')

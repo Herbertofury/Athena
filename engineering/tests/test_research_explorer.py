@@ -181,7 +181,7 @@ class TestPlanValidationTests(unittest.TestCase):
         self.assertEqual(self.validate(), {"planned-synthetic-contract-v1"})
         self.assertEqual((self.registry, self.catalog), before)
         directory = explorer.markdown_test_plan_directory({**self.catalog, "test_plans": self.registry["plans"]})
-        self.assertIn("?plan=planned-synthetic-contract-v1#catalog", directory)
+        self.assertIn("#research?plan=planned-synthetic-contract-v1", directory)
         self.assertIn("Every row is planned, not a result", directory)
         self.assertIn("Synthetic storage", directory)
 
@@ -329,7 +329,7 @@ class CatalogValidationTests(unittest.TestCase):
         self.add_layers()
         self.assertEqual(self.validate(), {"synthetic-parser"})
         text = explorer.markdown_layer_map(self.catalog)
-        self.assertIn("?layer=synthetic-storage#catalog", text)
+        self.assertIn("#research?layer=synthetic-storage", text)
         self.assertIn("Synthetic adoption gate", text)
         self.assertEqual(self.catalog["entries"][0]["status"], "candidate")
 
@@ -966,7 +966,7 @@ class TestPlanDirectoryBuildTests(unittest.TestCase):
         self.assertEqual(result["test_plans"], 1)
         self.assertTrue(generated.startswith(before.encode()))
         self.assertTrue(generated.endswith(after.encode()))
-        self.assertIn(b"?plan=planned-synthetic-contract-v1#catalog", generated)
+        self.assertIn(b"#research?plan=planned-synthetic-contract-v1", generated)
         self.assertEqual(explorer.build(self.root, check=True)["mode"], "check")
         manifest = json.loads((self.root / "docs/explorer/build-manifest.json").read_text())
         self.assertEqual(manifest["test_plans"], 1)
@@ -1085,6 +1085,30 @@ class DeterministicBuildTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "stale"):
                 explorer.build(root, check=True)
             self.assertEqual({name: (root / name).read_bytes() for name in generated}, before_check)
+
+
+class AthenaPublicRouteTests(unittest.TestCase):
+    def test_generated_layer_and_plan_links_use_unified_hash_route(self):
+        bundle = {
+            'entries': [{'id': 'fixture', 'name': 'Synthetic fixture', 'url': 'https://example.org/fixture'}],
+            'layers': [{'id': 'synthetic-layer', 'label': 'Synthetic layer',
+                        'baseline_ids': ['fixture'], 'challenger_ids': [], 'watch_ids': [],
+                        'decision': 'No adoption claim', 'gate': 'Preserve correctness'}],
+            'test_plans': [{'id': 'synthetic-plan', 'title': 'Synthetic plan', 'priority': 1,
+                            'layer_ids': ['synthetic-layer'], 'candidate_ids': ['fixture']}],
+        }
+        layer = explorer.markdown_layer_map(bundle)
+        plans = explorer.markdown_test_plan_directory(bundle)
+        self.assertIn('https://herbertofury.github.io/Athena/#research?layer=synthetic-layer)', layer)
+        self.assertIn('https://herbertofury.github.io/Athena/#research?plan=synthetic-plan)', plans)
+        self.assertNotIn('#catalog', layer + plans)
+
+    def test_current_guides_do_not_send_reports_to_retired_source(self):
+        for path in (ROOT / 'docs/wiki-research/Research-Community.md',
+                     ROOT.parent / 'wiki/Engineering-Research-Community.md'):
+            text = path.read_text()
+            self.assertIn('https://github.com/Herbertofury/Athena/issues/new/choose', text)
+            self.assertNotIn('https://github.com/Herbertofury/Engineering-Atlas/issues/new/choose', text)
 
 
 if __name__ == "__main__":
