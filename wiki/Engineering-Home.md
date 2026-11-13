@@ -58,7 +58,7 @@ Synthetic fixtures exercise the tools. They are not real application performance
 
 ## Research Explorer and the 2026 test queue
 
-[Search and filter the research catalog](https://herbertofury.github.io/Athena/engineering/docs/explorer/): 283 candidates, including 36 papers, across 20 stack layers and 18 fields, with dated primary sources, conditional shortlists and adoption gates. Search, filter, compare and export while keeping popularity, community reports and measured cohorts separate. The consolidated queue contains 38 planned comparisons and zero approved community reports in the reviewed snapshot.
+[Search and filter the research catalog](https://herbertofury.github.io/Athena/#research): 283 candidates, including 36 papers, across 20 stack layers and 18 fields, with dated primary sources, conditional shortlists and adoption gates. Search, filter, compare and export while keeping popularity, community reports and measured cohorts separate. The consolidated queue contains 38 planned comparisons and zero approved community reports in the reviewed snapshot.
 
 [Explorer guide](https://github.com/Herbertofury/Athena/wiki/Engineering-Research-Explorer) · [2026 research radar](https://github.com/Herbertofury/Athena/wiki/Engineering-Research-Radar-2026) · [Planned test queue](https://github.com/Herbertofury/Athena/wiki/Engineering-Research-Test-Queue) · [Community reports](https://github.com/Herbertofury/Athena/wiki/Engineering-Research-Community)
 

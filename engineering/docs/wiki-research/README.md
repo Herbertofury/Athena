@@ -29,7 +29,7 @@ These are the exact append-only blocks published against the original navigation
 
 ## Research Explorer and the 2026 test queue
 
-[Search and filter the research catalog](https://herbertofury.github.io/Athena/engineering/docs/explorer/): 154 entries across 18 fields, dated source evidence, separate popularity and benchmark views, comparisons, and CSV export. The expansion carries 16 planned test cohorts and zero approved community reports in its initial reviewed snapshot.
+[Search and filter the research catalog](https://herbertofury.github.io/Athena/#research): 154 entries across 18 fields, dated source evidence, separate popularity and benchmark views, comparisons, and CSV export. The expansion carries 16 planned test cohorts and zero approved community reports in its initial reviewed snapshot.
 
 [Explorer guide](https://github.com/Herbertofury/Athena/wiki/Engineering-Research-Explorer) · [2026 research radar](https://github.com/Herbertofury/Athena/wiki/Engineering-Research-Radar-2026) · [Planned test queue](https://github.com/Herbertofury/Athena/wiki/Engineering-Research-Test-Queue) · [Community reports](https://github.com/Herbertofury/Athena/wiki/Engineering-Research-Community)
 ```

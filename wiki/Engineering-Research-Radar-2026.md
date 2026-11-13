@@ -9,7 +9,7 @@
 
 **Snapshot: 2026-10-31, America/Denver. Primary sources checked 2026-10-31 UTC.** This contribution adds **68 candidates**, refreshes **15 existing candidates**, and registers **164 primary-source observations**. The consolidated Explorer now contains **283 candidates, 36 papers, 20 stack layers, 18 fields and 38 planned comparisons**. A paper, a release note, an experiment proposal and an accepted application change are separate evidence states.
 
-[Explore the catalog](https://herbertofury.github.io/Athena/engineering/docs/explorer/) · [Comparison plans](https://github.com/Herbertofury/Athena/blob/main/engineering/docs/research-test-queue.md) · [Practical code methods](https://github.com/Herbertofury/Athena/blob/main/engineering/docs/performance.md#apply-current-methods-at-the-measured-bottleneck) · [Paper review boundaries](https://github.com/Herbertofury/Athena/blob/main/engineering/docs/paper-watchlist-2026.md#october-31-expansion-fourteen-additional-paper-records)
+[Explore the catalog](https://herbertofury.github.io/Athena/#research) · [Comparison plans](https://github.com/Herbertofury/Athena/blob/main/engineering/docs/research-test-queue.md) · [Practical code methods](https://github.com/Herbertofury/Athena/blob/main/engineering/docs/performance.md#apply-current-methods-at-the-measured-bottleneck) · [Paper review boundaries](https://github.com/Herbertofury/Athena/blob/main/engineering/docs/paper-watchlist-2026.md#october-31-expansion-fourteen-additional-paper-records)
 
 ## What should be tested first
 
@@ -173,7 +173,7 @@ The added practical coverage includes MV3/native messaging, portable contracts, 
 
 Deferred/source-conflict evidence: [ST129](https://github.com/Herbertofury/Athena/blob/main/engineering/docs/sources.md#st129) · [ST113](https://github.com/Herbertofury/Athena/blob/main/engineering/docs/sources.md#st113) · [ST114](https://github.com/Herbertofury/Athena/blob/main/engineering/docs/sources.md#st114) · [ST130](https://github.com/Herbertofury/Athena/blob/main/engineering/docs/sources.md#st130) · [ST131](https://github.com/Herbertofury/Athena/blob/main/engineering/docs/sources.md#st131) · [ST084](https://github.com/Herbertofury/Athena/blob/main/engineering/docs/sources.md#st084) · [ST101](https://github.com/Herbertofury/Athena/blob/main/engineering/docs/sources.md#st101) · [ST102](https://github.com/Herbertofury/Athena/blob/main/engineering/docs/sources.md#st102) · [ST121](https://github.com/Herbertofury/Athena/blob/main/engineering/docs/sources.md#st121) · [ST120](https://github.com/Herbertofury/Athena/blob/main/engineering/docs/sources.md#st120).
 
-[Open the stack-layer map](https://github.com/Herbertofury/Athena/blob/main/engineering/docs/stack-selection.md#stack-layer-comparison-map) · [Search the Explorer](https://herbertofury.github.io/Athena/engineering/docs/explorer/) · [Review all 20 plans](https://github.com/Herbertofury/Athena/blob/main/engineering/docs/research-test-queue.md)
+[Open the stack-layer map](https://github.com/Herbertofury/Athena/blob/main/engineering/docs/stack-selection.md#stack-layer-comparison-map) · [Search the Explorer](https://herbertofury.github.io/Athena/#research) · [Review all 20 plans](https://github.com/Herbertofury/Athena/blob/main/engineering/docs/research-test-queue.md)
 
 ## Initial sweep outcome
 
@@ -181,7 +181,7 @@ The first Explorer expansion contains **154 catalog entries across 18 fields**, 
 
 Three parallel research passes produced 133 candidate records. Duplicate Wasmtime, Playwright and WASI entries were merged without discarding distinct sources or constraints. A focused paper pass added 13 records. Three parser baselines connect the existing JSON experiment; eight complete model/harness configurations expose publisher-reported results.
 
-[Search and compare the catalog](https://herbertofury.github.io/Athena/engineering/docs/explorer/) · [Complete records](https://github.com/Herbertofury/Athena/blob/main/engineering/docs/research-catalog.md) · [Ranking contract](https://github.com/Herbertofury/Athena/blob/main/engineering/docs/research-explorer.md) · [Planned test queue](https://github.com/Herbertofury/Athena/blob/main/engineering/docs/research-test-queue.md)
+[Search and compare the catalog](https://herbertofury.github.io/Athena/#research) · [Complete records](https://github.com/Herbertofury/Athena/blob/main/engineering/docs/research-catalog.md) · [Ranking contract](https://github.com/Herbertofury/Athena/blob/main/engineering/docs/research-explorer.md) · [Planned test queue](https://github.com/Herbertofury/Athena/blob/main/engineering/docs/research-test-queue.md)
 
 ## Current signals that change a decision
 
