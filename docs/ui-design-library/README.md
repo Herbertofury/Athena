@@ -51,3 +51,5 @@ Current inventory and inspection limits: [Keshav study queue](kshv-study-queue.m
 
 - [All remaining sandbox stills](sandbox-image-studies.md): per-design architecture and test plans, with static versus live evidence distinguished.
 - [Deployed viewer source](viewer-source-study.md): verified routing, lazy loading, modal and motion mechanics, plus unresolved acceptance tests.
+
+- [Bencho and BestSaaSWebDesigns](bencho-and-saas.md): additional owner-selected follows, bounded official-source research and original implementation plans.

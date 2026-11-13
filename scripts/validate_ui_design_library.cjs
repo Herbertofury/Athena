@@ -2,7 +2,7 @@ function validate(catalog) {
  if(catalog.schema_version!==1)throw Error('Unsupported UI catalog version');
  if(!/^\d{4}-\d{2}-\d{2}$/.test(catalog.checked_at||''))throw Error('Missing review date');
  const creators=new Set(),ids=new Set();
- for(const c of catalog.creators){if(creators.has(c.id))throw Error('Duplicate creator');creators.add(c.id);for(const key of ['portfolio','social'])if(new URL(c[key]).protocol!=='https:')throw Error('Invalid source URL');}
+ for(const c of catalog.creators){if(creators.has(c.id))throw Error('Duplicate creator');creators.add(c.id);for(const key of ['portfolio','social'])if((key==='portfolio'||c[key])&&new URL(c[key]).protocol!=='https:')throw Error('Invalid source URL');}
  for(const d of catalog.designs){
   if(ids.has(d.id))throw Error('Duplicate design');ids.add(d.id);
   if(!creators.has(d.creator_id)||!d.title)throw Error('Missing design identity');
