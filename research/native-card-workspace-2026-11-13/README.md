@@ -15,7 +15,7 @@ Navigation cancels the worker and pending timers/frame callbacks, disconnects ob
 
 ## Evidence gates
 
-- Four focused DOM-emulated adapter tests cover inert mount, themes/search, listener/observer cleanup, pre-aborted mount, interrupted receipt retention and reproducible unchanged algorithm copies.
+- Five focused DOM-emulated adapter tests cover inert mount, themes/search, listener/observer cleanup, pre-aborted mount, interrupted receipt retention, actual worker termination and reproducible unchanged algorithm copies.
 - Full `npm test` passed before publication; all generated runtime hashes were checked by the normal package tool (49 files).
 - Local Chromium could not start due to `socket() failed: Operation not permitted`, before any page loaded. This is not browser acceptance. The failed launch is recorded in `local-browser-attempt.json`; no bypass was attempted.
 - Normal hosted browser gate now runs actual worker preparation, six complete samples with 200 full records, exact downloaded receipt equality, exact-record metadata, navigation retention and cancellation without replacing the last-good receipt. CI results and screenshots must be inspected on the published commit before acceptance.
