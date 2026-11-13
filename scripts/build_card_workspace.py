@@ -42,7 +42,7 @@ def build():
     code=code.replace('URL.createObjectURL(', 'createObjectURL(').replace('URL.revokeObjectURL(', 'revokeObjectURL(')
     code=code.replace('atlas-card-density-evidence.json','athena-card-density-evidence.json').replace('atlas-card-density-last-completed.json','athena-card-density-last-completed.json')
     header=(ROOT/'scripts/card_workspace_header.mjs').read_text()
-    html=body(SOURCE/'index.template.html')
+    html=body(SOURCE/'index.template.html').replace('<dialog id="record">','<dialog id="record" aria-labelledby="record-title">').replace('Unproven candidates stay in Atlas.', "Unproven candidates stay in Athena’s isolated research.")
     html='<p class="notice">Generated workload only. No target-project speedup claim. Evidence survives workspace navigation in this tab; download it before closing or reloading Athena. Shared search finds an exact record ID without filtering measured output.</p>'+html
     header=header.replace('MARKUP',json.dumps(html))
     footer='''
