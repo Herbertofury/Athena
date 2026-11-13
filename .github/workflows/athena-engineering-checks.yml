@@ -27,6 +27,9 @@ jobs:
       - name: Install Athena DOM test dependencies
         working-directory: .
         run: npm ci --ignore-scripts
+      - name: Verify migration completeness
+        working-directory: .
+        run: python scripts/verify_atlas_cutover.py
       - name: Check source register and internal links
         run: python scripts/check_research.py
       - name: Verify research catalog and generated Explorer
