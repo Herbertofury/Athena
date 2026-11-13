@@ -11,6 +11,7 @@ Athena joins a learning academy with an evidence-led engineering research librar
 - [Interactive app source](dist/index.html): serve `dist/` locally so workspace modules and JSON assets load. No account is required.
 - [GitHub wiki](https://github.com/Herbertofury/Athena/wiki): publication status must be checked separately from repository files.
 - [Broader knowledge map](docs/KNOWLEDGE-MAP.md): computers, coding, security and future schools.
+- [Creative AI tool observatory](docs/creative-ai/README.md): source-backed web, graphics, audio and video candidates with separate code/model licenses.
 - [Engineering research](engineering/README.md): preserved Atlas research, source history and native Research/Media workspaces.
 - [Coverage and quality](docs/quality/COVERAGE.md): what exists, what is verified and what remains.
 
