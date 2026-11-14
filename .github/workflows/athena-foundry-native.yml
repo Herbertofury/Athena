@@ -63,6 +63,7 @@ jobs:
         run: |
           node scripts/test_foundry_capacity_browser.mjs
           node scripts/test_foundry_save_outcome_browser.mjs
+          node scripts/test_foundry_actor_key_browser.mjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:
