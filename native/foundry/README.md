@@ -162,3 +162,11 @@ A computed 2D matrix and all four base-box corners recover the actual transform-
 Preview changes only transient object CSS. Completed pointerup validates exact theme/room/instance/prior placement, explicitly adopts existing format2 only when necessary, and writes one Undo entry. Pointercancel, capture loss, Escape, selection change, draw, scrolling, resizing or disposal cancel without saving preview. Position, scope, anchor, filters, origin, other objects, presets and environment remain unchanged. Native pin prevents editing; it is not the original lock field.
 
 Tests: `node --test native/foundry/tests/transform-gizmo.test.mjs`. Actual browser: `CHROMIUM_PATH=/path/to/headless_shell node scripts/test_foundry_transform_gizmo_browser.cjs`; uses neutral native DOM and proves skewed bottom-right-origin mirrored rotation, radial scale, cancellation and Undo/Redo. Not Windows or original-art rendering acceptance.
+
+## Current-theme object catalog
+
+Optional `assetLibrary` (`--disable-foundry-module assetLibrary`) adapts original MIT prototype-v24.ts bindAssetCards233 and spawnObject338. It exposes all reviewed objects in the active theme, even after every room instance has been deleted. Explicit Add generates a new UUID, creates an unpinned world-center instance and selects it for ordinary inspector editing. No cross-theme assets, source artwork, gravity, source left/right-world parity or downloads are claimed.
+
+Adding explicitly adopts existing format6 for older rooms and supplies only the appropriate defaults for formats6–11. Existing objects, room data, presets and environment targets are retained. A dangling target is never repaired by reusing its deleted ID; UUID/current-target collisions fail. The room cap is100 instances. One addition creates one Undo step. Catalog selection/update is not a persistence operation, and removed/stale room buttons cannot add to the next room.
+
+Tests: `node --test native/foundry/tests/asset-library.test.mjs` with the current native CLI via `ATHENA_FOUNDRY_STORE_BINARY`; includes actual mounted add/edit to SQLite save/reopen. Actual Chromium: `CHROMIUM_PATH=/path/to/headless_shell node scripts/test_foundry_asset_library_browser.cjs`, using neutral catalog objects and no external requests.
