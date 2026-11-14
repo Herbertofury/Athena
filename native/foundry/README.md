@@ -152,3 +152,11 @@ This changes neither persisted formats nor history semantics. Reproduce focused 
 `node --test native/foundry/tests/history-keys.test.mjs` and actual browser acceptance with
 `CHROMIUM_PATH=<installed-browser> node scripts/test_foundry_history_keys_browser.cjs`.
 It is not an app-wide shortcut takeover or complete original Foundry parity claim.
+
+## Explicit flip and linked magnitude workflows
+
+Source `prototype-v24.ts` `flipSelected` (302) reverses one committed axis sign. `setSelectedScale` (299), with default `transformPrefs.linked=true` (163), sets equal magnitudes while retaining each existing mirror sign; it does not preserve an aspect ratio.
+
+Native inspector provides separate horizontal/vertical Flip actions and magnitude inputs with explicit Apply buttons. Session-only linking defaults on. Applying one magnitude while linked sets both magnitudes equal; unlinked changes only that axis. Magnitudes must be finite 0.05–8; invalid input is refused rather than silently clamped. These controls use committed transforms, never pending signed-input drafts; the existing signed transform Apply workflow is unchanged. Native pin prevents edits (not an original lock-equivalence claim). Identity, position, surface/anchor, origin, rotation, filters, other instances, presets and environment remain intact. Actual changes adopt existing format v2 if necessary and create one Undo; no-op does not upgrade or consume drafts/history. Linking is not saved in workspace data.
+
+Tests: `node --test native/foundry/tests/flip-magnitude.test.mjs`; actual Chromium computed matrices: `CHROMIUM_PATH=<installed-browser> node scripts/test_foundry_flip_magnitude_browser.cjs`.
