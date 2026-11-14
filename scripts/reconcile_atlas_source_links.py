@@ -59,7 +59,7 @@ def reconcile(row, root=ROOT):
             route = routes[relative]
             # Research's existing query contract retains layer/plan selections.
             query = '?' + url.query if url.query else ''
-            file_target('dist/workspaces/engineering/' + route + '/index.mjs', PAGES + query + '#' + route,
+            file_target('dist/workspaces/engineering/' + route + '/index.mjs', PAGES + '#' + route + query,
                         'native workspace route; old Pages URL does not redirect')
         else:
             file_target('engineering/docs/' + relative, PAGES + 'engineering/docs/' + relative,

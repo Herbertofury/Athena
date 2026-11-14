@@ -43,7 +43,7 @@ class MappingSemantics(unittest.TestCase):
             self.assertTrue(row['classification'].startswith('unresolved'))
     def test_research_routes_keep_query_instead_of_losing_selection(self):
         row = self.mapped('https://herbertofury.github.io/Engineering-Atlas/explorer/?plan=planned-agent-protocol-v1#catalog')
-        self.assertEqual(row['preserved_or_native_destination'], mapper.PAGES + '?plan=planned-agent-protocol-v1#research')
+        self.assertEqual(row['preserved_or_native_destination'], mapper.PAGES + '#research?plan=planned-agent-protocol-v1')
     def test_static_asset_is_not_falsely_replaced_with_homepage(self):
         suffix = 'card-receiver-lab/receiver.de24fd43535f3039.js'
         row = self.mapped('https://herbertofury.github.io/Engineering-Atlas/' + suffix)
