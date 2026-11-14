@@ -9,3 +9,38 @@ test('invalid saved state is not silently replaced on teardown',async()=>{const 
 test('unsupported envelopes and mismatched layout keys remain recovery-held',async()=>{const first=await setup();const good=first.mounted.exportState();first.mounted.unmount();for(const state of [{version:2},null,{version:1},{...good,layouts:{wrong:good.active}}]){const t=await setup(state);assert.throws(()=>t.mounted.exportState(),/retained/);assert.equal(t.writes(),0);t.mounted.unmount();}});
 test('latest import wins and older read cannot clear a newer selection',async()=>{const t=await setup();const input=t.document.querySelector('[data-import]');let a,b;const make=time=>JSON.stringify({...t.mounted.exportState().active,time});input.files=[{size:100,text:()=>new Promise(r=>a=r)}];input.dispatchEvent(new t.window.Event('change'));input.files=[{size:100,text:()=>new Promise(r=>b=r)}];input.dispatchEvent(new t.window.Event('change'));b(make('night'));await new Promise(r=>setImmediate(r));a(make('dawn'));await new Promise(r=>setImmediate(r));assert.equal(t.mounted.exportState().active.time,'night');t.mounted.unmount();});
 test('newer room editing invalidates an outstanding import',async()=>{const t=await setup();const input=t.document.querySelector('[data-import]');let resolve;const original=t.mounted.exportState().active;input.files=[{size:100,text:()=>new Promise(r=>resolve=r)}];input.dispatchEvent(new t.window.Event('change'));const time=t.document.querySelector('[data-time]');time.value='night';time.dispatchEvent(new t.window.Event('change'));resolve(JSON.stringify({...original,time:'dawn'}));await new Promise(r=>setImmediate(r));assert.equal(t.mounted.exportState().active.time,'night');t.mounted.unmount();});
+test('workspace restore updates included rooms and retains independent room layouts',async()=>{
+ const t=await setup();const original=t.mounted.exportState().active;
+ const second={...original,roomId:catalog.themes[0].rooms[1].id,time:'night'};
+ const input=t.document.querySelector('[data-import-workspace]');
+ input.files=[{size:100,text:async()=>JSON.stringify({version:1,active:second,layouts:{[second.roomId]:second}})}];
+ input.dispatchEvent(new t.window.Event('change'));await new Promise(r=>setImmediate(r));
+ const saved=t.mounted.exportState();assert.equal(saved.active.roomId,second.roomId);assert.equal(saved.layouts[original.roomId].time,'day');assert.equal(saved.layouts[second.roomId].time,'night');
+ t.mounted.unmount();const remount=await setup(saved);assert.deepEqual(remount.mounted.exportState(),saved);remount.mounted.unmount();
+});
+test('malformed workspace restore is atomic and later room edit supersedes pending restore',async()=>{
+ const t=await setup();const original=t.mounted.exportState();const input=t.document.querySelector('[data-import-workspace]');
+ input.files=[{size:100,text:async()=>JSON.stringify({...original,layouts:{bad:original.active}})}];
+ input.dispatchEvent(new t.window.Event('change'));await new Promise(r=>setImmediate(r));
+ assert.deepEqual(t.mounted.exportState(),original);assert.equal(t.writes(),0);
+ let resolve;input.files=[{size:100,text:()=>new Promise(r=>resolve=r)}];input.dispatchEvent(new t.window.Event('change'));
+ const time=t.document.querySelector('[data-time]');time.value='night';time.dispatchEvent(new t.window.Event('change'));
+ resolve(JSON.stringify(original));await new Promise(r=>setImmediate(r));assert.equal(t.mounted.exportState().active.time,'night');t.mounted.unmount();
+});
+test('workspace recovery does not discard an invalid original envelope',async()=>{
+ const t=await setup({version:2});const input=t.document.querySelector('[data-import-workspace]');
+ input.files=[{size:100,text:async()=>'{bad'}];input.dispatchEvent(new t.window.Event('change'));await new Promise(r=>setImmediate(r));assert.throws(()=>t.mounted.exportState(),/retained/);
+ const initial=(await import('../dist/workspaces/foundry/layout-state.mjs')).createLayoutModel(catalog.themes).initial();
+ input.files=[{size:100,text:async()=>JSON.stringify({version:1,active:initial,layouts:{}})}];input.dispatchEvent(new t.window.Event('change'));await new Promise(r=>setImmediate(r));assert.throws(()=>t.mounted.exportState(),/retained/);assert.equal(t.writes(),0);t.mounted.unmount();
+});
+test('unmount prevents pending workspace restore from writing',async()=>{
+ const t=await setup();const state=t.mounted.exportState();let resolve;const input=t.document.querySelector('[data-import-workspace]');input.files=[{size:100,text:()=>new Promise(r=>resolve=r)}];input.dispatchEvent(new t.window.Event('change'));t.control.abort();resolve(JSON.stringify(state));await new Promise(r=>setImmediate(r));assert.equal(t.writes(),0);
+});
+
+test('mixed corrupt envelope retains the original after workspace or single-room imports',async()=>{
+ const m=(await import('../dist/workspaces/foundry/layout-state.mjs')).createLayoutModel(catalog.themes),active=m.initial(),other=m.initial(catalog.themes[1].id);
+ for(const selector of ['[data-import-workspace]','[data-import]']){
+ const t=await setup({version:1,active,layouts:{broken:{},[other.roomId]:other}});
+ const input=t.document.querySelector(selector);input.files=[{size:100,text:async()=>JSON.stringify(selector.includes('workspace')?{version:1,active,layouts:{}}:active)}];input.dispatchEvent(new t.window.Event('change'));await new Promise(r=>setImmediate(r));assert.equal(t.writes(),0);assert.throws(()=>t.mounted.exportState(),/retained/);assert.match(t.document.querySelector('.foundry-status').textContent,/recovery only/);t.mounted.unmount();
+ }
+});

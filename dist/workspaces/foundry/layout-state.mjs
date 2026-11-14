@@ -22,5 +22,17 @@ export function createLayoutModel(catalog) {
  function encode(value){return JSON.stringify(validate(value));}
  function save(storage,key,value){const encoded=encode(value);storage.setItem(key,encoded);return parse(encoded);}
  function load(storage,key){const raw=storage.getItem(key);return raw===null?{state:initial(),recovery:null}:{state:parse(raw),recovery:null};}
- return {validate,initial,parse,encode,save,load};
+ function workspace(input){
+  if(!plain(input)||input.version!==1||!plain(input.layouts))throw new Error('Unsupported workspace backup.');
+  const active=validate(input.active),layouts=Object.create(null);
+  for(const [id,value] of Object.entries(input.layouts)){
+   const checked=validate(value);if(id!==checked.roomId)throw new Error('Layout key mismatch.');
+   layouts[id]=checked;
+  }
+  layouts[active.roomId]=active;
+  return {version:1,active,layouts};
+ }
+ function parseWorkspace(text){if(typeof text!=='string'||text.length>1000000)throw new Error('Workspace exceeds import limit.');return workspace(JSON.parse(text));}
+ function encodeWorkspace(value){return JSON.stringify(workspace(value));}
+ return {validate,initial,parse,encode,save,load,workspace,parseWorkspace,encodeWorkspace};
 }
