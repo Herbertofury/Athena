@@ -1,0 +1,1173 @@
+✔ every learning route has one labelled main heading, updated title and route focus (111.987814ms)
+✔ skip link focuses main without changing route (11.085833ms)
+✔ all 42 workshop lessons start at title, label checks and return to exact opener (243.116653ms)
+✔ a repeated open does not erase in-progress lesson controls or journal text (34.463974ms)
+✔ delayed close cannot replace or unfocus a newer open lesson (21.431492ms)
+✔ duplicate closed events are inert after focus moves to newer work (10.022711ms)
+✔ route change closes lesson and does not restore old-route opener (9.9947ms)
+✔ duplicate Packet Trail opener retains its actual focus target (19.216908ms)
+✔ primary and supplemental feedback receives focus and contains text rather than color-only answers (14.671886ms)
+✔ filters, quest selection, incident feedback and next review restore useful focus (15.907814ms)
+✔ slash ignores modifiers, composition, repeats and prevented events while Shift slash remains usable (9.828313ms)
+✔ slash never steals focus from native fields, editable ancestors, custom textboxes or open lessons (12.19244ms)
+✔ shortcut opt-out persists separately, removes shortcut metadata and leaves learning export schema alone (15.812232ms)
+✔ unavailable preference storage is safe and session toggles still work (6.705186ms)
+✔ search live status stays outside replaced results and Escape clears without moving focus (24.248488ms)
+✔ theme button exposes pressed state after change and imported progress (21.32217ms)
+✔ slow older import cannot replace newer selected progress and cancelled import remains unchanged (10.601227ms)
+✔ mobile import restores replacement input focus without stealing it after a route change (12.223306ms)
+✔ learning controls keep labels, referenced IDs, button names and unique IDs across routes (64.074291ms)
+✔ new CSS has forced-color, reduced-motion and non-color-only focus affordances (0.507911ms)
+✔ lesson Tab and Shift+Tab wrap at visible enabled boundaries (19.759119ms)
+✔ title and feedback focus enter the modal tab order without escaping (17.510033ms)
+✔ modal boundaries exclude hidden inert disabled and nonsequential controls (17.902193ms)
+✔ boundary handler respects Escape modifiers prevented events and closed dialogs (13.643245ms)
+✔ late native lesson close cannot erase newer route interaction or steal focus (11.711769ms)
+✔ Escape cancel settles close synchronously before subsequent keyboard movement (11.737266ms)
+✔ runner import neither loads Playwright nor starts browser work (3.396763ms)
+✔ complete synthetic receipt validates but every missing duplicate or failed check fails closed (3.711749ms)
+✔ receipt requires browser identity, exact files, all workshops and clean runtime (15.106934ms)
+✔ missing Playwright fails once before any server or browser can start (1.857137ms)
+✔ all declared checks are implemented and unsafe runner shortcuts are absent (1.254845ms)
+✔ duplicate opener readiness waits for the exact live occurrence after queued close (2.80675ms)
+✔ duplicate opener wait preserves bounded browser failure rather than swallowing it (0.907592ms)
+✔ verified load exposes native controls without autoplay and downloads its owned blob (24.303048ms)
+✔ failed reload retains prior verified audio and URL (2.715906ms)
+✔ cancelled late load cannot replace a newer verified clip (2.160274ms)
+✔ old native callbacks and export cleanup cannot destroy current clip (8.310299ms)
+✔ playing is stronger than readiness and clears its deadline (2.010403ms)
+✔ event-budget boundary stops a new load before another request (7.237142ms)
+✔ synthetic media events cannot claim actual playing (1.557313ms)
+✔ buffering replaces a previous playing status without inventing failure (1.022492ms)
+✔ native teardown cancels pending loads and ignores their late results (1.037544ms)
+✔ native teardown pauses, detaches and revokes actual owned clip and export blobs (1.311289ms)
+✔ native search does not change the loaded clip or source verification (1.087758ms)
+✖ native source algorithms remain exact and generator is reproducible (60.28004ms)
+✔ native exportState honors shared workspace settings object contract without persisting audio (1.362545ms)
+✔ unified acceptance uses locked pinned-project Rust and bounded jobs (2.153554ms)
+✔ runtime acceptance cannot silently downgrade to HTTP-only and retains artifacts (0.347363ms)
+✔ packaging uses reviewed public profile without deployment or settings (0.398429ms)
+✔ Foundry store remains a standalone crate with separate locked test and strict Clippy gates (0.342837ms)
+✔ native card adapter mounts inertly, uses shared theme/search, and disconnects observers/listeners (18.331708ms)
+✔ already aborted mount never installs benchmark resources (3.405135ms)
+✔ navigation abort stops calibration and retains an explicitly incomplete receipt, not success (15.725304ms)
+✔ native generator is reproducible and retains exact source algorithms (54.968986ms)
+✔ navigation during actual preparation terminates the dedicated worker (15.044016ms)
+✔ IPv4 known /26 range (1.815044ms)
+✔ IPv4 boundary and prefix validation (0.391379ms)
+✔ IPv4 bounded property checks (11.171981ms)
+✔ policy truth table (0.803584ms)
+✔ data revenue uses row context after filtering (0.316318ms)
+✔ review scheduling, failed recovery and nonmutation (0.860783ms)
+✔ progress import is constrained and roundtrips (0.662199ms)
+✔ route selection handles default, specific and host prefixes without mutating input (0.384699ms)
+✔ route lookup rejects invalid addresses, prefixes and unaligned networks (0.415325ms)
+✔ route lookup includes exact network and last-address boundaries (0.790699ms)
+✔ creative AI catalog validates and spans all requested disciplines (2.963132ms)
+✔ code licenses cannot substitute for missing model licenses (0.840673ms)
+✔ source review cannot claim target superiority or unsupported benchmarks (1.907541ms)
+✔ runtime status requires retained evidence (0.685063ms)
+✔ duplicate identities and unsafe source URLs fail (0.632476ms)
+✔ native diagnostics loads inertly, retains both controls and recovers original DOM faults (17.306677ms)
+✔ navigation during fixture loading aborts request and cannot repopulate detached workspace (5.568685ms)
+✔ diagnostic algorithms and fixture remain exact source copies and generator reproducible (55.256922ms)
+✔ Research dark palette covers card, navigation, control and secondary text contrast (8.307755ms)
+✔ Media light palette keeps source identities, placeholders and load controls readable (1.116721ms)
+✔ Media dark placeholder text passes against both retained gradient endpoints (0.50746ms)
+✔ Research mounts actual catalog, filters, shortlist and exports without global routing (281.721857ms)
+✔ Research aborts pending mount without stale DOM writes (4.527585ms)
+✔ Media mounts source records without auto-loading providers, retains receipt on remount (67.012602ms)
+✔ Media official Bilibili frame stays autoplay-off and unloads on workspace exit (4.361619ms)
+✔ Abort stops preview decoding and does not start queued provider requests (1.124693ms)
+✔ Workspace output retains exact source algorithms and public fixture identity (1.156631ms)
+✔ YouTube player construction is explicit, autoplay-off and destroyed on unmount (4.338095ms)
+✔ Native workspace build reproduces every published module and fixture byte (70.685728ms)
+✔ Preview cancellation settles even if a detached image rejects cleanup (1.133306ms)
+✔ Privileged loopback Media retains metadata but disables all external media controls (9.663189ms)
+✔ Research renders preserved Athena evidence links while keeping original Atlas provenance visible (13.744435ms)
+✔ 3D preview loads only explicitly; close/reopen and abort release isolated worlds (15.549274ms)
+✔ close or navigation during module loading cannot resurrect GPU scene (4.177287ms)
+✔ reduced motion clears animation and never resumes it automatically (5.384113ms)
+✔ unsupported GPU and failed module leave actionable authoring-safe states (4.357704ms)
+✔ adapted real class settles paused theme and synchronizes uniforms when motion stops (23.327396ms)
+✔ layout rejects foreign ids, malformed objects and nonfinite positions (2.096981ms)
+✔ layout export rejects unsupported private/provider fields without dropping data (0.740756ms)
+✔ layout rejects prototype placements (0.285422ms)
+✔ layout save reports failure and invalid storage is never silently reset (0.503975ms)
+✔ layout rejects oversized imports before parse (0.247106ms)
+✔ workspace backups validate every room and reject unsupported private fields (2.345529ms)
+✔ rollback is bounded, cloned, reversible and new edits discard redo (1.330437ms)
+✔ workspace view defaults old backups, validates docks and rejects unknown view data (0.504186ms)
+✔ named layouts are bounded, validated and reject unsupported fields (8.34461ms)
+✔ inspector width defaults legacy data, rejects invalid sizes and survives workspace encoding (0.616982ms)
+✔ Foundry current snapshot withholds private identifiers without rewriting historical manifest (4.006635ms)
+✔ Foundry private source and reference images remain outside runtime package (4.078671ms)
+✔ reviewed neutral catalog preserves all seventeen themes and 85 ecology objects (1.712162ms)
+✔ native mount, search and abort dispose owned DOM without iframe (55.745019ms)
+✔ keyboard placement survives export and remount (38.249191ms)
+✔ invalid saved state is not silently replaced on teardown (13.329261ms)
+✔ unsupported envelopes and mismatched layout keys remain recovery-held (52.937668ms)
+✔ latest import wins and older read cannot clear a newer selection (25.4262ms)
+✔ newer room editing invalidates an outstanding import (28.197538ms)
+✔ workspace restore updates included rooms and retains independent room layouts (14.050237ms)
+✔ malformed workspace restore is atomic and later room edit supersedes pending restore (6.583345ms)
+✔ workspace recovery does not discard an invalid original envelope (9.605014ms)
+✔ unmount prevents pending workspace restore from writing (12.906035ms)
+✔ mixed corrupt envelope retains the original after workspace or single-room imports (22.086451ms)
+✔ native forms retain labels and reviewed palettes update with theme selection (15.478809ms)
+✔ undo and redo restore edits and later edits discard redo (25.741807ms)
+✔ undo of imported workspace restores all previous room state and rejects stale reads (24.318522ms)
+✔ rollback cannot clear corrupt-state recovery hold (12.080275ms)
+✔ room reset is reversible, preserves other rooms/time, and repeated reset is a no-op (44.387479ms)
+✔ reset invalidates pending imports without releasing corrupt-state protection (11.080105ms)
+✔ default-room reset cancels pending room and workspace imports without writes/history (17.336296ms)
+✔ inspector applies exact placement atomically, supports pin and undo, and rejects invalid values (18.166805ms)
+✔ inspector reflects scene selection and resets selection safely when theme changes (14.14637ms)
+✔ inspector single-axis editing preserves untouched imported coordinate precision (29.568295ms)
+✔ inspector dock persists, rolls back and survives backup restore (27.551302ms)
+✔ invalid saved inspector state remains recovery-held and older dockless state defaults right (20.109738ms)
+✔ named layouts save copies, restore across remount and remove reversibly (23.832953ms)
+✔ backup merge preserves independent presets and rejects overflowing bank atomically (9.02104ms)
+✔ panel sizing persists, changes actual CSS width, preserves dock and is undoable (23.833023ms)
+✔ invalid panel width protects original envelope and resizing supersedes pending import (12.726289ms)
+✔ Public Lab does not probe localhost or send any API request (13.801319ms)
+✔ Native Lab uses original job protocol, routes panels locally and cancels polling (86.320868ms)
+✔ Lab preserves uncertain submission warning and never retries a cancelled receipt (10.139424ms)
+✔ Lab retains last-good overview after a malformed later refresh (41.497795ms)
+✔ Lab copies the exact retained validation modules and reproduces output (78.769761ms)
+✔ Pending initialization disables every write and guards even programmatic submission before abort (13.553643ms)
+✔ Lab verifies exact archive bytes with a bounded WebCrypto completion wait (10.695096ms)
+✔ Archive completion wait fails rather than silently accepting a stuck state (10.988139ms)
+✔ Native Lab rejects malformed count maps before replacing last-good cards and recovers (8.27049ms)
+✔ CI browser coverage validates all three result groups before reporting them (4.187483ms)
+✔ CI assertions reject changed served module bytes (2.322865ms)
+✔ CI assertions reject omitted recovery failures and automatic playback (1.651943ms)
+✔ existing browser entry calls additive Media checks without adding a browser launcher (0.517445ms)
+✔ explicit storage roundtrip preserves receipt bytes and detects tampering (10.332389ms)
+✔ quota failures leave prior last-good stored; failed readback never reports success (1.301795ms)
+✔ reject malformed, partial, oversized and missing receipts without overwriting storage (1.707515ms)
+✔ receiver mounts inertly with every lane, scoped search/theme and cleanup (18.552015ms)
+✔ receiver respects already aborted lifetime (1.752482ms)
+✔ navigation during calibration retains incomplete receipt and never declares last-good (5.008446ms)
+✔ all generated modules and bundled workers retain their source identities (72.963987ms)
+✔ navigation terminates an actual started worker exactly once (179.706249ms)
+✔ unavailable saved recovery cannot replace the current receipt (5.640321ms)
+✔ Every migrated local measurement links to byte-identical immutable Athena evidence with original provenance (10.992586ms)
+✔ Research citation and deterministic-import regressions remain in normal Athena checks (674.267215ms)
+✔ generated native Media retains youtube terminal failure and supports explicit retry (36.999774ms)
+✔ generated native Media retains native terminal failure and supports explicit retry (12.694502ms)
+✔ generated native Media retains hls terminal failure and supports explicit retry (20.230857ms)
+✔ combined native Media recovery survives later player events and a terminal failure (50.510864ms)
+✔ UI library validates with real source identities (1.055291ms)
+✔ duplicate design and creator identities reject (0.758291ms)
+✔ unsupported evidence and unsafe source URLs reject (0.361224ms)
+✔ research cannot silently become implemented or compared (0.418779ms)
+✔ referenced study paths exist in repository (0.54744ms)
+✔ a reference need not invent a social account (0.266134ms)
+✔ all eight views and 13 tracks render without exception (100.578021ms)
+✔ lesson read, note and check survive close and reload (39.781708ms)
+✔ search filters and clears on navigation (7.943356ms)
+✔ certificate filters, selection and unknown route (15.439271ms)
+✔ malformed stored progress does not prevent learning (12.506193ms)
+✔ review grade disables double answers and advances (6.492881ms)
+✔ skip link focuses without changing app route (10.830586ms)
+✔ navigation exposes current page and selected filters (5.833476ms)
+✔ Packet Trail exposes eight lessons, case selection and honest feedback (20.350538ms)
+✔ route detective computes and validates without creating markup from input (6.829094ms)
+✔ new Packet Trail lesson uses persisted notes and read state (12.22646ms)
+✔ closing a case lesson restores its actual repeated opener (7.045138ms)
+✔ unified routes mount inside the same document and preserve learning state (17.908623ms)
+✔ all unified workspaces use internal routes and independent modules (8.442304ms)
+✔ a missing workspace does not prevent returning to learning (6.740347ms)
+✔ workspace query navigation preserves one mount and restores search scope (10.619844ms)
+✔ learning document handlers ignore light-DOM workspace controls (6.608382ms)
+✔ rapid workspace return restores state after asynchronous export finishes (7.715299ms)
+✔ incomplete workspace shows recovery state instead of falsely claiming loaded (6.57946ms)
+✔ shell views contain no inline scripts or style attributes under strict local CSP (41.151154ms)
+✔ local lab has scoped search and returns safely to learning (12.518152ms)
+✔ import reports session-only progress when durable storage rejects the write (16.354374ms)
+✔ a later successful import clears the session-only warning and survives reload (25.060263ms)
+✔ aggregate includes generated standalone Media verification and the complete Media regression set (0.940361ms)
+✔ normal browser entry point retains every generator and browser gate without workflow edits (1.740995ms)
+✔ static browser lane retains citation checks and invokes Media checks once (0.218413ms)
+✔ importing the runner is side-effect-free and has no eager Playwright dependency (2.827521ms)
+✔ complete synthetic receipt validates; omission or failure of any required check cannot pass (6.044599ms)
+✔ receipt requires actual browser identity, exact bytes, all lessons and clean runtime (9.628058ms)
+✔ static server refuses path escapes and symlinks outside the served root (0.992207ms)
+✔ missing browser dependency produces a failed report without loading or launching Playwright (1.707635ms)
+✔ runner keeps browser checks, artifact receipts and restrictive local-only network policy (0.974761ms)
+✔ workshop readiness rejects new URL with old home, partial or wrong directory DOM (89.514721ms)
+✔ detail readiness rejects stale directory or another workshop despite target hash (3.170909ms)
+✔ shared route wait remains pending until render and propagates a failed wait (10.883263ms)
+✔ real directory click and history transitions use rendered readiness, not URL-only waits (0.590483ms)
+✔ workshop directory and all five deep links preserve separate Packet Trail (48.266896ms)
+✔ every workshop lesson renders complete instruction, goals, evidence and limitations (167.205103ms)
+✔ 84 supplemental checks support wrong, correct, repeat, reset and reopen without XP or storage writes (256.58483ms)
+✔ workshop read marks, primary grade and notes persist using existing progress without inflating supplemental XP (14.80332ms)
+✔ worked code, supplemental text and source titles are escaped as literal text (7.365573ms)
+✔ workshops and every workshop lesson retain strict-CSP markup (112.53334ms)
+✔ navigation while a lesson is open dismisses it and resolves current route (7.399833ms)
+✔ original progress migrates unchanged while new IDs are accepted (5.910571ms)
+✔ new workshop lessons are searchable without breaking workspace navigation (27.8278ms)
+✔ workspace host mounts once, forwards current search/theme and cleans up (3.138892ms)
+✔ navigating during module load never mounts the stale module (0.470656ms)
+✔ late mount completion is disposed and cannot replace a newer workspace (0.6696ms)
+✔ load failure is surfaced without a false mounted state (0.970415ms)
+✔ pending search and theme changes reach the completed mount (0.610292ms)
+✔ a new mount waits for previous asynchronous teardown (0.759012ms)
+✔ search shortcut respects shadow-root inputs and modal boundaries (0.382846ms)
+✔ workspace state exports before teardown and same-workspace routes forward (0.685314ms)
+✔ async workspace updates are serialized so older results cannot win (0.5338ms)
+✔ teardown waits for an in-flight update before exporting and unmounting (0.502843ms)
+✔ failed initial setter cleanup cannot orphan the next workspace (2.705811ms)
+✔ restored state is resolved after an earlier asynchronous export (0.685364ms)
+✔ synchronous adapter update errors become rejected promises without breaking the queue (0.421554ms)
+✔ workspace readiness failure stays mounted for recovery without a loaded claim (0.343438ms)
+ℹ tests 225
+ℹ suites 0
+ℹ pass 224
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1645.1997
+
+✖ failing tests:
+
+test at tests/audio_workspace.test.cjs:32:1
+✖ native source algorithms remain exact and generator is reproducible (60.28004ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+  ... Skipped lines
+  
+  + Buffer(5083) [Uint8Array] [
+  - Buffer(5752) [Uint8Array] [
+      101,
+      120,
+      112,
+      111,
+      114,
+  ...
+      32,
+  +   99,
+  +   111,
+  +   110,
+  -   105,
+  -   102,
+  -   40,
+      115,
+  -   105,
+  -   103,
+  -   110,
+  -   97,
+  -   108,
+  -   46,
+  -   97,
+  -   98,
+  -   111,
+  -   114,
+      116,
+  +   32,
+  -   101,
+  -   100,
+  -   41,
+  -   123,
+  -   116,
+      114,
+  -   121,
+  -   123,
+  -   80,
+  -   114,
+  -   111,
+  -   109,
+  -   105,
+  -   115,
+      101,
+  +   106,
+  -   46,
+  -   114,
+      101,
+  -   115,
+  -   111,
+  -   108,
+  -   118,
+  -   101,
+  -   40,
+  -   114,
+  -   101,
+  -   115,
+  -   112,
+  -   111,
+  -   110,
+  -   115,
+  -   101,
+  -   46,
+  -   98,
+  -   111,
+  -   100,
+  -   121,
+  -   63,
+  -   46,
+      99,
+  -   97,
+  -   110,
+  -   99,
+  -   101,
+  -   108,
+  -   40,
+  -   41,
+  -   41,
+  -   46,
+  -   99,
+  -   97,
+      116,
+  -   99,
+  -   104,
+  -   40,
+  -   40,
+  -   41,
+      61,
+  -   62,
+  -   123,
+  -   125,
+  -   41,
+  -   59,
+  -   125,
+  -   99,
+      97,
+  +   115,
+  +   121,
+  +   110,
+  -   116,
+      99,
+  -   104,
+  -   123,
+  -   125,
+      32,
+  +   109,
+  -   116,
+  -   104,
+  -   114,
+  -   111,
+  -   119,
+  -   32,
+  -   115,
+  -   105,
+  -   103,
+  -   110,
+  -   97,
+  -   108,
+  -   46,
+  -   114,
+      101,
+  -   97,
+      115,
+  -   111,
+  -   110,
+  -   59,
+  -   125,
+  -   10,
+  -   32,
+  -   99,
+  -   111,
+  -   110,
+      115,
+  -   116,
+  -   32,
+  -   99,
+      97,
+  -   110,
+  -   99,
+  -   101,
+  -   108,
+  -   81,
+  -   117,
+  -   105,
+  -   101,
+  -   116,
+  -   108,
+  -   121,
+  -   61,
+  -   116,
+  -   97,
+  -   114,
+      103,
+      101,
+  -   116,
+      61,
+      62,
+      123,
+      116,
+      114,
+      121,
+      123,
+  +   97,
+  +   119,
+  +   97,
+  +   105,
+  +   116,
+  +   32,
+  -   80,
+      114,
+  +   101,
+  +   115,
+  +   112,
+      111,
+  +   110,
+  -   109,
+  -   105,
+      115,
+      101,
+      46,
+  +   98,
+  -   114,
+  -   101,
+  -   115,
+      111,
+  +   100,
+  +   121,
+  -   108,
+  -   118,
+  -   101,
+  -   40,
+  -   116,
+  -   97,
+  -   114,
+  -   103,
+  -   101,
+  -   116,
+      63,
+      46,
+      99,
+      97,
+      110,
+  ...
+      41,
+  -   41,
+  -   46,
+  -   99,
+  -   97,
+  -   116,
+  -   99,
+  -   104,
+  -   40,
+  -   40,
+  -   41,
+  -   61,
+  -   62,
+  -   123,
+  -   125,
+  -   41,
+      59,
+      125,
+      99,
+      97,
+      116,
+  ...
+      125,
+  -   125,
+  -   59,
+  -   10,
+  -   32,
+  -   99,
+  -   111,
+  -   110,
+  -   115,
+      116,
+  -   32,
+  -   114,
+  -   101,
+  -   106,
+  -   101,
+  -   99,
+  -   116,
+  -   61,
+  -   109,
+  -   101,
+  -   115,
+  -   115,
+  -   97,
+  -   103,
+  -   101,
+  -   61,
+  -   62,
+  -   123,
+  -   99,
+  -   97,
+  -   110,
+  -   99,
+  -   101,
+  -   108,
+  -   81,
+  -   117,
+  -   105,
+  -   101,
+  -   116,
+  -   108,
+  -   121,
+  -   40,
+  -   114,
+  -   101,
+  -   115,
+  -   112,
+  -   111,
+  -   110,
+  -   115,
+  -   101,
+  -   46,
+  -   98,
+  -   111,
+  -   100,
+  -   121,
+  -   41,
+  -   59,
+  -   116,
+      104,
+      114,
+      111,
+      119,
+      32,
+  ...
+      32,
+  -   108,
+  -   101,
+      116,
+  -   32,
+  -   99,
+  -   97,
+  -   110,
+  -   99,
+  -   101,
+  -   108,
+  -   82,
+  -   101,
+  -   113,
+  -   117,
+  -   101,
+  -   115,
+  -   116,
+  -   101,
+  -   100,
+  -   61,
+  -   102,
+  -   97,
+  -   108,
+  -   115,
+  -   101,
+  -   59,
+  -   32,
+  -   99,
+  -   111,
+  -   110,
+  -   115,
+  -   116,
+  -   32,
+  -   115,
+  -   116,
+  -   111,
+  -   112,
+  -   61,
+  -   40,
+  -   41,
+  -   61,
+  -   62,
+  -   123,
+  -   105,
+  -   102,
+  -   40,
+  -   33,
+  -   99,
+  -   97,
+  -   110,
+  -   99,
+  -   101,
+  -   108,
+  -   82,
+  -   101,
+  -   113,
+  -   117,
+  -   101,
+  -   115,
+  -   116,
+  -   101,
+  -   100,
+  -   41,
+  -   123,
+  -   99,
+  -   97,
+  -   110,
+  -   99,
+  -   101,
+  -   108,
+  -   82,
+  -   101,
+  -   113,
+  -   117,
+  -   101,
+  -   115,
+  -   116,
+  -   101,
+  -   100,
+  -   61,
+  -   116,
+      114,
+  -   117,
+  -   101,
+  -   59,
+  -   99,
+  -   97,
+  -   110,
+  -   99,
+  -   101,
+  -   108,
+  -   81,
+  -   117,
+  -   105,
+  -   101,
+  -   116,
+  -   108,
+      121,
+  -   40,
+  -   114,
+  -   101,
+  -   97,
+  -   100,
+  -   101,
+  -   114,
+  -   41,
+  -   59,
+  -   125,
+  -   125,
+  -   59,
+  -   32,
+  -   115,
+  -   105,
+  -   103,
+  -   110,
+  -   97,
+  -   108,
+  -   46,
+  -   97,
+  -   100,
+  -   100,
+  -   69,
+  -   118,
+  -   101,
+  -   110,
+  -   116,
+  -   76,
+  -   105,
+  -   115,
+  -   116,
+  -   101,
+  -   110,
+  -   101,
+  -   114,
+  -   40,
+  -   39,
+  -   97,
+  -   98,
+  -   111,
+  -   114,
+  -   116,
+  -   39,
+  -   44,
+  -   115,
+  -   116,
+  -   111,
+  -   112,
+  -   44,
+      123,
+  -   111,
+  -   110,
+  -   99,
+  -   101,
+  -   58,
+  -   116,
+  -   114,
+  -   117,
+  -   101,
+  -   125,
+  -   41,
+  -   59,
+  -   10,
+  -   32,
+  -   116,
+  -   114,
+  -   121,
+  -   123,
+      102,
+      111,
+      114,
+      40,
+      59,
+  ...
+      40,
+  -   115,
+  -   105,
+  -   103,
+  -   110,
+  -   97,
+  -   108,
+  -   46,
+  -   97,
+  -   98,
+  -   111,
+  -   114,
+  -   116,
+  -   101,
+      100,
+  -   41,
+  -   116,
+  -   104,
+  -   114,
+      111,
+  -   119,
+  -   32,
+  -   115,
+  -   105,
+  -   103,
+      110,
+  -   97,
+  -   108,
+  -   46,
+  -   114,
+      101,
+  -   97,
+  -   115,
+  -   111,
+  -   110,
+  -   59,
+  -   105,
+  -   102,
+  -   40,
+  -   100,
+  -   111,
+  -   110,
+  -   101,
+      41,
+      98,
+      114,
+      101,
+      97,
+  ...
+      123,
+  -   115,
+      116,
+  +   114,
+  +   121,
+  +   123,
+  +   97,
+  +   119,
+  +   97,
+  +   105,
+  +   116,
+  +   32,
+  +   114,
+  +   101,
+  +   97,
+  +   100,
+  +   101,
+  +   114,
+  +   46,
+  +   99,
+  +   97,
+  +   110,
+  +   99,
+  +   101,
+  +   108,
+  -   111,
+  -   112,
+      40,
+      41,
+      59,
+  +   125,
+  +   99,
+  +   97,
+      116,
+  +   99,
+      104,
+  +   123,
+  +   125,
+  +   116,
+  +   104,
+      114,
+      111,
+      119,
+      32,
+      101,
+  ...
+      123,
+  -   115,
+  -   105,
+  -   103,
+  -   110,
+  -   97,
+  -   108,
+  -   46,
+      114,
+      101,
+  -   109,
+  -   111,
+  -   118,
+  -   101,
+  -   69,
+  -   118,
+  -   101,
+  -   110,
+  -   116,
+  -   76,
+  -   105,
+  -   115,
+  -   116,
+  -   101,
+  -   110,
+  -   101,
+  -   114,
+  -   40,
+  -   39,
+      97,
+  -   98,
+  -   111,
+  -   114,
+  -   116,
+  -   39,
+  -   44,
+  -   115,
+  -   116,
+  -   111,
+  -   112,
+  -   41,
+  -   59,
+  -   114,
+  -   101,
+  -   97,
+      100,
+      101,
+      114,
+      46,
+      114,
+  ...
+      32,
+  -   108,
+  -   101,
+      116,
+  -   32,
+  -   97,
+  -   98,
+  -   111,
+      114,
+  -   116,
+  -   76,
+  -   105,
+  -   115,
+  -   116,
+  -   101,
+  -   110,
+  -   101,
+  -   114,
+  -   59,
+  -   10,
+  -   32,
+  -   99,
+  -   111,
+  -   110,
+  -   115,
+  -   116,
+  -   32,
+  -   97,
+  -   98,
+  -   111,
+  -   114,
+  -   116,
+  -   101,
+  -   100,
+  -   61,
+  -   110,
+  -   101,
+  -   119,
+  -   32,
+  -   80,
+  -   114,
+  -   111,
+  -   109,
+  -   105,
+  -   115,
+  -   101,
+  -   40,
+  -   40,
+  -   95,
+  -   44,
+  -   114,
+  -   101,
+  -   106,
+  -   101,
+  -   99,
+  -   116,
+  -   41,
+  -   61,
+  -   62,
+  -   123,
+  -   97,
+  -   98,
+  -   111,
+  -   114,
+  -   116,
+  -   76,
+  -   105,
+  -   115,
+  -   116,
+  -   101,
+  -   110,
+  -   101,
+  -   114,
+  -   61,
+  -   40,
+  -   41,
+  -   61,
+  -   62,
+  -   114,
+  -   101,
+  -   106,
+  -   101,
+  -   99,
+  -   116,
+  -   40,
+  -   99,
+  -   111,
+  -   110,
+  -   116,
+  -   114,
+  -   111,
+  -   108,
+  -   108,
+  -   101,
+  -   114,
+  -   46,
+  -   115,
+  -   105,
+  -   103,
+  -   110,
+  -   97,
+  -   108,
+  -   46,
+  -   114,
+  -   101,
+  -   97,
+  -   115,
+  -   111,
+  -   110,
+  -   41,
+  -   59,
+  -   99,
+  -   111,
+  -   110,
+  -   116,
+  -   114,
+  -   111,
+  -   108,
+  -   108,
+  -   101,
+  -   114,
+  -   46,
+  -   115,
+  -   105,
+  -   103,
+  -   110,
+  -   97,
+  -   108,
+  -   46,
+  -   97,
+  -   100,
+  -   100,
+  -   69,
+  -   118,
+  -   101,
+  -   110,
+  -   116,
+  -   76,
+  -   105,
+  -   115,
+  -   116,
+  -   101,
+  -   110,
+  -   101,
+  -   114,
+  -   40,
+  -   39,
+  -   97,
+  -   98,
+  -   111,
+  -   114,
+  -   116,
+  -   39,
+  -   44,
+  -   97,
+  -   98,
+  -   111,
+  -   114,
+  -   116,
+  -   76,
+  -   105,
+  -   115,
+  -   116,
+  -   101,
+  -   110,
+  -   101,
+  -   114,
+  -   44,
+  -   123,
+  -   111,
+  -   110,
+  -   99,
+  -   101,
+  -   58,
+  -   116,
+  -   114,
+  -   117,
+  -   101,
+  -   125,
+  -   41,
+  -   59,
+  -   125,
+  -   41,
+  -   59,
+  -   10,
+  -   32,
+  -   116,
+  -   114,
+      121,
+      123,
+      114,
+      101,
+      116,
+  ...
+      32,
+  -   80,
+      114,
+  -   111,
+  -   109,
+  -   105,
+  -   115,
+      101,
+  -   46,
+  -   114,
+      97,
+  -   99,
+  -   101,
+  -   40,
+  -   91,
+  -   114,
+  -   101,
+  -   97,
+      100,
+      83,
+      97,
+      118,
+      101,
+  ...
+      41,
+  -   44,
+  -   97,
+  -   98,
+  -   111,
+  -   114,
+  -   116,
+  -   101,
+  -   100,
+  -   93,
+  -   41,
+      59,
+      125,
+      10,
+      32,
+      102,
+  ...
+      59,
+  -   99,
+  -   111,
+  -   110,
+  -   116,
+  -   114,
+  -   111,
+  -   108,
+  -   108,
+  -   101,
+  -   114,
+  -   46,
+      115,
+      105,
+      103,
+      110,
+      97,
+      108,
+  -   46,
+  -   114,
+  -   101,
+  -   109,
+  -   111,
+  -   118,
+  -   101,
+  -   69,
+  -   118,
+  -   101,
+  -   110,
+  -   116,
+  -   76,
+  -   105,
+  -   115,
+  -   116,
+  -   101,
+  -   110,
+  -   101,
+  -   114,
+  -   40,
+  -   39,
+  -   97,
+  -   98,
+  -   111,
+  -   114,
+  -   116,
+  -   39,
+  -   44,
+  -   97,
+  -   98,
+  -   111,
+  -   114,
+  -   116,
+  -   76,
+  -   105,
+  -   115,
+  -   116,
+  -   101,
+  -   110,
+  -   101,
+  -   114,
+  -   41,
+  -   59,
+  -   115,
+  -   105,
+  -   103,
+  -   110,
+  -   97,
+  -   108,
+      63,
+      46,
+      114,
+      101,
+      109,
+  
+      at TestContext.<anonymous> (/workspace/shared/athena-atlas-overview-reconcile/tests/audio_workspace.test.cjs:32:286)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: <Buffer 65 78 70 6f 72 74 20 63 6f 6e 73 74 20 4d 41 58 5f 41 52 43 48 49 56 45 5f 42 59 54 45 53 3d 32 2a 31 30 32 34 2a 31 30 32 34 3b 0a 61 73 79 6e 63 20 ... 5033 more bytes>,
+    expected: <Buffer 65 78 70 6f 72 74 20 63 6f 6e 73 74 20 4d 41 58 5f 41 52 43 48 49 56 45 5f 42 59 54 45 53 3d 32 2a 31 30 32 34 2a 31 30 32 34 3b 0a 61 73 79 6e 63 20 ... 5702 more bytes>,
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }

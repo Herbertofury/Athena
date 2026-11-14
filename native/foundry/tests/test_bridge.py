@@ -6,9 +6,24 @@ BIN=os.environ.get('ATHENA_FOUNDRY_STORE_BINARY',str(pathlib.Path(__file__).reso
 class Tests(unittest.TestCase):
  def setUp(self):
   self.tmp=tempfile.TemporaryDirectory();self.db=pathlib.Path(self.tmp.name)/'store.sqlite';subprocess.run([BIN,'init',str(self.db)],check=True,capture_output=True);self.server=m.Bridge(BIN,self.db,ROOT.parents[1]/'dist');self.thread=threading.Thread(target=self.server.serve_forever);self.thread.start()
+ def test_utf16_workspace_budget_and_rejected_save_preserve_database(self):
+  value=json.loads(FIX);value['savedLayouts']=[{'name':'夜🌙','layout':value['active']}]
+  text=json.dumps(value,ensure_ascii=False,separators=(',',':'));units=len(text.encode('utf-16-le'))//2;text+=' '*(1_000_000-units)
+  self.assertGreater(len(text.encode('utf8')),1_000_000)
+  status,body,_=self.request('POST',body=text,headers={'Content-Type':'application/json','If-Match':'"empty"'});self.assertEqual(status,200,body)
+  status,saved,headers=self.request();self.assertEqual(status,200);before=self.db.read_bytes()
+  etag=next(v for k,v in headers if k.lower()=='etag') if isinstance(headers,list) else headers.get('ETag')
+  status,body,_=self.request('POST',body=text+' ',headers={'Content-Type':'application/json','If-Match':etag});self.assertEqual(status,422,body);self.assertEqual(self.db.read_bytes(),before)
+  self.assertEqual(self.request()[1],saved)
  def tearDown(self):self.server.shutdown();self.thread.join();self.server.server_close();self.tmp.cleanup()
  def request(self,method='GET',path='/__native/backup',body=None,headers=None):
   h={'Host':self.server.host,'Origin':self.server.origin,'X-Athena-Native':'1'};h.update(headers or {});c=http.client.HTTPConnection('127.0.0.1',self.server.server_port,timeout=5);c.request(method,path,body=body.encode('utf8') if isinstance(body,str) else body,headers=h);r=c.getresponse();result=(r.status,r.read(),dict(r.getheaders()));c.close();return result
+ def test_layers_explicit_disable_and_reviewed_static_module(self):
+  self.server.shutdown();self.thread.join();self.server.server_close()
+  self.server=m.Bridge(BIN,self.db,ROOT.parents[1]/'dist',disable_foundry_modules=['layers']);self.thread=threading.Thread(target=self.server.serve_forever);self.thread.start()
+  status,body,_=self.request(path='/native-store-bootstrap.js');self.assertEqual(status,200);self.assertIn(b'"layers":false',body)
+  self.assertEqual(self.request(path='/workspaces/foundry/native-layers.mjs')[0],200)
+  self.assertEqual(self.request()[1],b'null')
  def test_actual_cli_save_load_last_good(self):
   self.assertEqual(self.request()[1],b'null');self.assertEqual(self.request('POST',body=FIX,headers={'Content-Type':'application/json','If-Match':'"empty"'})[0],200);stored=self.request()[1];self.assertEqual(json.loads(stored),json.loads(FIX));self.assertEqual(self.request('POST',body='{"bad":true}',headers={'Content-Type':'application/json','If-Match':self.request()[2]['ETag']})[0],422);self.assertEqual(self.request()[1],stored)
  def test_transform_upgrade_refusal_is_actionable_and_nonmutating(self):

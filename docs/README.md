@@ -2,7 +2,7 @@
 
 Learn once. Apply across credentials. Build proof, not just badges.
 
-All 13 requested credentials are organized. This release contains 90 original lessons: the existing 48 foundations and Packet Trail lessons plus 42 applied lessons across five workshops. The workshops include 126 original checks (42 primary and 84 supplemental), worked examples, safe offline exercises and evidence worksheets. All 74 credential-domain rows remain roadmaps, not completed exam coverage. Real-cloud labs and Power BI workflows are unexecuted; read marks, XP and reference tests do not establish practical mastery or exam readiness.
+All 13 requested credentials are organized. This release contains 98 original lessons: the existing 48 foundations and Packet Trail lessons plus 50 applied lessons across six workshops. The workshops include 150 original checks (50 primary and 100 supplemental), worked examples, safe offline exercises and evidence worksheets. All 74 credential-domain rows remain roadmaps, not completed exam coverage. Real-cloud labs and Power BI workflows are unexecuted; read marks, XP and reference tests do not establish practical mastery or exam readiness.
 
 ## Start here
 
@@ -39,5 +39,6 @@ Start with [The Packet Trail](paths/packet-trail.md) for a coherent applied netw
 - [Programming Workshop: Small Programs, Clear Contracts](paths/programming-workshop.md)
 - [Cloud Workshop: Reason Locally, Verify Honestly](paths/cloud-workshop.md)
 - [Data & SQL Workshop: From Rows to Reliable Answers](paths/data-workshop.md)
+- [Version Control & Reproducible Delivery Workshop](paths/delivery-workshop.md)
 
 - [Keyboard access and verification limits](accessibility.md)
