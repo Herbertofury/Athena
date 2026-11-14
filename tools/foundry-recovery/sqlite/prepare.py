@@ -13,7 +13,9 @@ def capture(source):
   if not p.is_file():raise ValueError('Source must contain ordinary SQLite files')
   size=p.stat().st_size
   if size>LIMIT:raise ValueError('Source exceeds pilot byte limit')
-  data=p.read_bytes();total+=len(data)
+  # Size metadata can become stale; bound allocation across all sidecars.
+  with p.open('rb') as stream:data=stream.read(LIMIT-total+1)
+  total+=len(data)
   if total>LIMIT:raise ValueError('Combined source exceeds pilot byte limit')
   result[suffix]=data
  if '' not in result or result[''][:16]!=b'SQLite format 3\0':raise ValueError('Missing SQLite source')

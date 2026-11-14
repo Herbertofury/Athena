@@ -152,3 +152,36 @@ This changes neither persisted formats nor history semantics. Reproduce focused 
 `node --test native/foundry/tests/history-keys.test.mjs` and actual browser acceptance with
 `CHROMIUM_PATH=<installed-browser> node scripts/test_foundry_history_keys_browser.cjs`.
 It is not an app-wide shortcut takeover or complete original Foundry parity claim.
+
+## Optional selected transform gizmo
+
+`gizmo` can be disabled independently with `--disable-foundry-module gizmo`; inspector controls remain available. Explicit Enable exposes pointer Rotate/Scale handles for the current visible unpinned instance. This adapts original MIT `prototype-v24.ts` bindTransformGizmo (311–320), not original artwork or source lock semantics. No source snapshots are imported.
+
+A computed 2D matrix and all four base-box corners recover the actual transform-origin pivot, including native skew, mirrored scale and all nine origins. Unsupported ancestor transform/zoom/perspective, degenerate matrices or inconsistent measured bounds refuse edits. Rotation uses angle delta around that pivot. Radial scale preserves anisotropy and mirror signs, constraining the shared ratio so both resulting magnitudes remain 0.05–8. Optional snap is 15 degrees / 0.05 scale-ratio increments; Alt bypasses it. Ratio snapping is a deliberate bounded adaptation, not original independent-axis rounding.
+
+Preview changes only transient object CSS. Completed pointerup validates exact theme/room/instance/prior placement, explicitly adopts existing format2 only when necessary, and writes one Undo entry. Pointercancel, capture loss, Escape, selection change, draw, scrolling, resizing or disposal cancel without saving preview. Position, scope, anchor, filters, origin, other objects, presets and environment remain unchanged. Native pin prevents editing; it is not the original lock field.
+
+Tests: `node --test native/foundry/tests/transform-gizmo.test.mjs`. Actual browser: `CHROMIUM_PATH=/path/to/headless_shell node scripts/test_foundry_transform_gizmo_browser.cjs`; uses neutral native DOM and proves skewed bottom-right-origin mirrored rotation, radial scale, cancellation and Undo/Redo. Not Windows or original-art rendering acceptance.
+
+### Optional session history navigator
+
+`--disable-foundry-module sessionHistory` removes the navigator without removing core Undo/Redo. Adapted from reviewed original `prototype-v24.ts` functions `jumpHistory` and `renderHistory` (632–634), it lists retained past/current/future workspace states and restores one selected state in one host-save attempt. Entries show native theme/room IDs and chronological ordinals, not fabricated original action labels or timestamps. This is session-only, not SQLite recovery history. It preserves future Redo, existing count/character pruning, whole-workspace identity, and oversized recovery-only behavior. Stale entry epochs are refused. Unsaved inspector inputs are not snapshots; selecting another state replaces those inputs, while the current disabled entry does nothing. No original assets or user records are included.
+### Original semantic metadata authoring
+
+The independently removable `semanticRoom` module accepts explicitly selected, bounded local snapshots. The original UTF-8 bytes retain their separate exact export. An explicit Apply changes only the chosen unique record's role, physics classification, visible flag and mapping-lock flag, adapted from original `prototype-v24.ts`684–685 and the enums at `index.html`410. Existing unsupported classification strings remain unchanged unless the user deliberately chooses a supported replacement. Names may repeat; IDs identify records.
+
+These are recorded declarations, not executable physics, mesh visibility, permissions or verified room capabilities. No source files, browser storage or native layout are modified. Derivative JSON export is explicit and separately named. Undo/Redo retains at most50 field patches and256KiB of conservative UTF-16 patch data, not50 whole1MiB snapshots; previous source bytes and one working record set remain separate. No-op Apply retains Redo. New successful file selection or Close clears edit history; edits invalidate pending reads and prior derivative URLs. All values remain private local session data.
+
+### Optional local PNG backdrop
+
+`localImage` is independent and removable through `--disable-foundry-module localImage`. Source prototype-v24.ts639–640/690 loads a local image and stretches it across its selected surface. This bounded native slice supports preview and explicit current-room backdrop only, not actor routing, arbitrary targets, remote URLs or source global wallpaper. PNG is the only accepted format:8MiB maximum,8192px per axis,16MP total. Header dimensions and bounded chunk order are inspected before browser decode; APNG and unknown critical chunks are refused. Browser decode still validates actual pixels, with exact IHDR dimension agreement. Pending decoders lose their source on replacement/close/disposal and have a15-second timeout. CRC validation is delegated to the browser decoder.
+
+No file paths, bytes or route settings are persisted/uploaded. Explicit routing preserves theme/room identity and never silently retargets after navigation. An occupied procedural backdrop is not replaced: the PNG returns to preview and must be explicitly routed after that backdrop is disabled. Source-style stretch may distort aspect ratio; preview contains the image. Image layers are pointer-transparent and behind authored actors. Failed replacements retain last-good imagery; cancellation, replacement and disposal release owned BlobURLs. No animation, provider access or rendering superiority is claimed.
+
+## Current-theme object catalog
+
+Optional `assetLibrary` (`--disable-foundry-module assetLibrary`) adapts original MIT prototype-v24.ts bindAssetCards233 and spawnObject338. It exposes all reviewed objects in the active theme, even after every room instance has been deleted. Explicit Add generates a new UUID, creates an unpinned world-center instance and selects it for ordinary inspector editing. No cross-theme assets, source artwork, gravity, source left/right-world parity or downloads are claimed.
+
+Adding explicitly adopts existing format6 for older rooms and supplies only the appropriate defaults for formats6–11. Existing objects, room data, presets and environment targets are retained. A dangling target is never repaired by reusing its deleted ID; UUID/current-target collisions fail. The room cap is100 instances. One addition creates one Undo step. Catalog selection/update is not a persistence operation, and removed/stale room buttons cannot add to the next room.
+
+Tests: `node --test native/foundry/tests/asset-library.test.mjs` with the current native CLI via `ATHENA_FOUNDRY_STORE_BINARY`; includes actual mounted add/edit to SQLite save/reopen. Actual Chromium: `CHROMIUM_PATH=/path/to/headless_shell node scripts/test_foundry_asset_library_browser.cjs`, using neutral catalog objects and no external requests.
