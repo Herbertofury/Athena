@@ -163,6 +163,9 @@ Preview changes only transient object CSS. Completed pointerup validates exact t
 
 Tests: `node --test native/foundry/tests/transform-gizmo.test.mjs`. Actual browser: `CHROMIUM_PATH=/path/to/headless_shell node scripts/test_foundry_transform_gizmo_browser.cjs`; uses neutral native DOM and proves skewed bottom-right-origin mirrored rotation, radial scale, cancellation and Undo/Redo. Not Windows or original-art rendering acceptance.
 
+### Optional session history navigator
+
+`--disable-foundry-module sessionHistory` removes the navigator without removing core Undo/Redo. Adapted from reviewed original `prototype-v24.ts` functions `jumpHistory` and `renderHistory` (632–634), it lists retained past/current/future workspace states and restores one selected state in one host-save attempt. Entries show native theme/room IDs and chronological ordinals, not fabricated original action labels or timestamps. This is session-only, not SQLite recovery history. It preserves future Redo, existing count/character pruning, whole-workspace identity, and oversized recovery-only behavior. Stale entry epochs are refused. Unsaved inspector inputs are not snapshots; selecting another state replaces those inputs, while the current disabled entry does nothing. No original assets or user records are included.
 ### Original semantic metadata authoring
 
 The independently removable `semanticRoom` module accepts explicitly selected, bounded local snapshots. The original UTF-8 bytes retain their separate exact export. An explicit Apply changes only the chosen unique record's role, physics classification, visible flag and mapping-lock flag, adapted from original `prototype-v24.ts`684–685 and the enums at `index.html`410. Existing unsupported classification strings remain unchanged unless the user deliberately chooses a supported replacement. Names may repeat; IDs identify records.
