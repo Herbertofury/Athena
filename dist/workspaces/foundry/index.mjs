@@ -67,9 +67,10 @@ export async function mount(context){
  const onTheme=()=>{const t=themes.find(t=>t.id===themeSelect.value);switchRoom(t.id,t.rooms[0].id);};const onRoom=()=>switchRoom(current.themeId,roomSelect.value);const onTime=()=>{checkpoint();importGeneration++;current.time=timeSelect.value;scene.dataset.time=current.time;save();};
  themeSelect.addEventListener('change',onTheme);roomSelect.addEventListener('change',onRoom);timeSelect.addEventListener('change',onTime);
  function update(id,change){if(!drag||!drag.recorded){checkpoint();if(drag)drag.recorded=true;}importGeneration++;const t=themeView(),i=t.objects.findIndex(o=>o.id===id);if(i<0)return;const old=pos(id,i);current.placements[id]={...old,...change};const b=actor(id);if(b)position(b,current.placements[id]);selectedObject=id;syncInspector();save();}
- const down=e=>{const b=e.target.closest?.('[data-id]');if(!b||!root.contains(b)||!b.classList.contains('foundry-object')||e.button!==0)return;const t=themeView(),p=pos(b.dataset.id,t.objects.findIndex(o=>o.id===b.dataset.id));if(p.pinned){text('Object is pinned. Press P to unpin.');return;}drag={id:b.dataset.id,pointer:e.pointerId,button:b};b.setPointerCapture?.(e.pointerId);};
+ const down=e=>{if(disposed||drag)return;const b=e.target.closest?.('[data-id]');if(!b||!root.contains(b)||!b.classList.contains('foundry-object')||e.button!==0)return;const t=themeView(),p=pos(b.dataset.id,t.objects.findIndex(o=>o.id===b.dataset.id));if(p.pinned){text('Object is pinned. Press P to unpin.');return;}try{b.setPointerCapture?.(e.pointerId);}catch{text('Drag could not capture the pointer. No position changed; try again.');return;}drag={id:b.dataset.id,pointer:e.pointerId,button:b};};
  const move=e=>{if(!drag||drag.pointer!==e.pointerId)return;const box=drag.button.parentElement.getBoundingClientRect();if(box.width&&box.height)update(drag.id,{x:Math.min(.94,Math.max(.06,(e.clientX-box.left)/box.width)),y:Math.min(.94,Math.max(.06,(e.clientY-box.top)/box.height))});};
- const up=()=>{drag=null;};
+ const up=e=>{if(!drag||(e&&e.pointerId!==drag.pointer))return;const owned=drag;drag=null;try{if(owned.button.hasPointerCapture?.(owned.pointer))owned.button.releasePointerCapture(owned.pointer);}catch{/* Ownership is cancelled even if browser release fails. */}};
+ const blur=()=>up();doc.defaultView?.addEventListener('blur',blur);
  const key=e=>{const b=e.target.closest?.('[data-id]');if(!b||!root.contains(b)||!b.classList.contains('foundry-object'))return;const t=themeView(),p=pos(b.dataset.id,t.objects.findIndex(o=>o.id===b.dataset.id));if(e.key.toLowerCase()==='p'){e.preventDefault();update(b.dataset.id,{pinned:!p.pinned});return;}const delta={ArrowLeft:[-.02,0],ArrowRight:[.02,0],ArrowUp:[0,-.02],ArrowDown:[0,.02]}[e.key];if(!delta)return;e.preventDefault();if(p.pinned){text('Object is pinned. Press P to unpin.');return;}update(b.dataset.id,{x:Math.min(.94,Math.max(.06,p.x+delta[0])),y:Math.min(.94,Math.max(.06,p.y+delta[1]))});};
  const selectObject=e=>{const b=e.target.closest?.('[data-id]');if(b&&root.contains(b)&&b.classList.contains('foundry-object')){selectedObject=b.dataset.id;syncInspector();}};
  root.addEventListener('focusin',selectObject);root.addEventListener('click',selectObject);
@@ -161,7 +162,7 @@ export async function mount(context){
    report(name,'unavailable; layout authoring remains available');host.replaceChildren();const message=doc.createElement('p');message.setAttribute('role','status');message.textContent=`Optional ${name} component unavailable. Layout authoring remains available.`;host.append(message);controller.abort();
   }
  }
- function unmount(){if(disposed)return;disposed=true;drag=null;
+ function unmount(){if(disposed)return;disposed=true;up();doc.defaultView?.removeEventListener('blur',blur);
   for(const [name,entry] of Object.entries(modules)){
    try{entry.component?.dispose();moduleStates[name]='disposed';}catch{report(name,'cleanup failed');}
    finally{entry.controller.abort();entry.host.remove();}
