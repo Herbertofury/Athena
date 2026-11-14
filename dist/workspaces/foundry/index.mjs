@@ -179,6 +179,7 @@ export async function mount(context){
  nativeSoundtrack=await attach('soundtrack','./native-soundtrack.mjs','attachNativeSoundtrack',{nativeStore:context.nativeStore});
  try{nativeSoundtrack?.update(current.themeId,current.roomId);}catch{report('soundtrack','update failed; layout authoring remains available');}
  await attach('legacyImport','./native-import.mjs','attachNativeImport',{nativeStore:context.nativeStore});
+ await attach('publicVideo','./native-public-video.mjs','attachNativePublicVideo');
  nativeLocalVideo=await attach('localVideo','./native-local-video.mjs','attachNativeLocalVideo',{getSelectedTarget:()=>{const o=themeView().objects.find(o=>o.id===selectedObject);return o?{key:JSON.stringify([current.themeId,current.roomId,o.id]),label:o.name}:null;},resolveTarget:key=>{const [themeId,roomId,id]=JSON.parse(key);if(themeId!==current.themeId||roomId!==current.roomId)return null;const node=actor(id);return !node||node.parentElement===unavailableLayer||(node.parentElement===stickerLayer&&view.inspectorDock==='hidden')?null:node;}});
  nativeLayers=await attach('layers','./native-layers.mjs','attachNativeLayers',{onSelect:id=>{if(disposed||signal.aborted||!themeView().objects.some(o=>o.id===id))return;selectedObject=id;syncInspector();},onVisible:(id,value)=>changeLayer(id,'visible',value),onPin:(id,value)=>changeLayer(id,'pinned',value)});syncLayers();
  await attach('tones','./native-tones.mjs','attachNativeTones');
