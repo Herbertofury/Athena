@@ -69,3 +69,5 @@ Disable independently with `--disable-foundry-module semanticRoom` in the native
 Synthetic real-browser regression: `node scripts/test_foundry_semantic_browser.cjs`.
 Set `CHROMIUM_PATH` if using a separately installed official Chromium. Results go to
 `browser-results/foundry-semantic-room` unless `ATHENA_BROWSER_OUTPUT` is set.
+
+The cross-platform browser acceptance also terminates the idle bridge process after a completed save, relaunches it against the same synthetic SQLite file, and restores time/rotation/origin in a fresh browser context. It compares exact database bytes and committed backup before/after restart, then exercises a stale-writer conflict after relaunch. This is process-restart acceptance of already committed writes, not interrupted-write, OS crash, power-loss, installer or private-data migration proof.
