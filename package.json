@@ -5,15 +5,19 @@
   "description": "Athena interactive learning library",
   "scripts": {
     "build": "python3 scripts/build_content.py && python3 scripts/build_catalog.py && python3 scripts/build_workshop_assets.py",
-    "test": "node --test tests/*.test.cjs && npm run test:media && python3 tests/wiki_test.py && python3 scripts/validate.py && python3 tests/network_fixture_test.py && python3 tests/network_loopback_test.py && python3 tests/package_app_test.py && python3 tests/workshop_integration_test.py && python3 scripts/test_workshop_packs.py",
+    "test": "npm run test:cinematic-generated && node --test tests/*.test.cjs && npm run test:media && python3 tests/wiki_test.py && python3 scripts/validate.py && python3 tests/network_fixture_test.py && python3 tests/network_loopback_test.py && python3 tests/package_app_test.py && python3 tests/workshop_integration_test.py && python3 scripts/test_workshop_packs.py",
     "test:browser": "node scripts/test_unified_browser.cjs",
     "test:browser:static": "node scripts/test_browser.cjs",
     "test:browser:workshops": "node scripts/test_workshops_browser.cjs",
     "test:browser:accessibility": "node scripts/test_accessibility_browser.cjs",
-    "test:media": "python3 engineering/scripts/build_media_lab.py --check && node --test engineering/tests/bilibili-player.test.mjs engineering/tests/event-log-view.test.mjs engineering/tests/event-log-recovery.test.mjs engineering/tests/media-lab.test.mjs engineering/tests/preview-loader.test.mjs engineering/tests/resource-loader.test.mjs engineering/tests/media-event-recorder.test.mjs engineering/tests/media-events.test.mjs engineering/tests/media-recovery-dom.test.mjs engineering/tests/player-ready-timeout.test.mjs engineering/tests/hls-recovery.test.mjs engineering/tests/youtube-identity.test.mjs engineering/tests/youtube-recovery.test.mjs"
+    "test:media": "python3 engineering/scripts/build_media_lab.py --check && node --test engineering/tests/bilibili-player.test.mjs engineering/tests/event-log-view.test.mjs engineering/tests/event-log-recovery.test.mjs engineering/tests/media-lab.test.mjs engineering/tests/preview-loader.test.mjs engineering/tests/resource-loader.test.mjs engineering/tests/media-event-recorder.test.mjs engineering/tests/media-events.test.mjs engineering/tests/media-recovery-dom.test.mjs engineering/tests/player-ready-timeout.test.mjs engineering/tests/hls-recovery.test.mjs engineering/tests/youtube-identity.test.mjs engineering/tests/youtube-recovery.test.mjs",
+    "build:cinematic": "node scripts/build_foundry_cinematic.cjs",
+    "test:cinematic-generated": "node scripts/build_foundry_cinematic.cjs --check"
   },
   "devDependencies": {
+    "esbuild": "0.27.0",
     "linkedom": "0.18.12",
-    "playwright": "1.62.1"
+    "playwright": "1.62.1",
+    "three": "0.185.1"
   }
 }

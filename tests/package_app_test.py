@@ -19,6 +19,20 @@ class PackageTests(unittest.TestCase):
     def approved(self, source):
         return {'schema':1, 'files':[{'path':p.relative_to(source).as_posix(), 'sha256':hashlib.sha256(p.read_bytes()).hexdigest()} for p in sorted(source.rglob('*')) if p.is_file()]}
 
+    def test_public_preview_includes_reviewed_procedural_preview_only(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root=pathlib.Path(temp);source=self.source(root)
+            (source/'workspaces/foundry/index.js').unlink()
+            names=('cinematic.mjs','cinematic-world.mjs','THREE-LICENSE.txt','FOUNDRY-LICENSE.txt')
+            for name in names:
+                (source/'workspaces/foundry'/name).write_text('reviewed fixture '+name)
+            pack.package(source,root/'public',self.approved(source),profile='public-preview')
+            for name in names:
+                self.assertEqual((root/'public/workspaces/foundry'/name).read_bytes(),(source/'workspaces/foundry'/name).read_bytes())
+            (source/'workspaces/foundry/private-provider.json').write_text('{}')
+            with self.assertRaisesRegex(ValueError,'excludes Foundry'):
+                pack.package(source,root/'refused',self.approved(source),profile='public-preview')
+
     def test_missing_workspace_blocks_release_before_output(self):
         with tempfile.TemporaryDirectory() as temp:
             root=pathlib.Path(temp);source=self.source(root)
