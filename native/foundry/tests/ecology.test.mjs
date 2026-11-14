@@ -6,3 +6,21 @@ function setup(){const {document,window}=parseHTML('<html><body><section></secti
 test('explicit preview clones respect pins, keyboard, opt-in throw and cancel without mutating input',()=>{const s=setup(),original=JSON.stringify(s.value);assert.equal(s.frames.size,0);assert.equal(s.one('[data-ecology-object]'),null);s.one('[data-ecology-open]').click();const pinned=s.one('[data-ecology-object]'),before=pinned.style.transform;s.event(pinned,'keydown',{key:'ArrowRight'});assert.equal(pinned.style.transform,before);s.throwActor();assert.equal(s.frames.size,0);s.one('[data-ecology-motion]').checked=true;s.event(s.one('[data-ecology-motion]'),'change');s.throwActor(true);assert.equal(s.frames.size,0);const el=s.throwActor();assert.equal(s.frames.size,1);const old=el.style.transform;s.advance();assert.notEqual(el.style.transform,old);assert.equal(JSON.stringify(s.value),original);s.adapter.dispose();assert.equal(s.frames.size,0)});
 test('hidden/reduced motion/theme update/close/dispose stop without automatic resume',()=>{const s=setup();function start(){s.one('[data-ecology-open]').click();s.one('[data-ecology-motion]').checked=true;s.event(s.one('[data-ecology-motion]'),'change');s.throwActor();assert.equal(s.frames.size,1)}start();Object.defineProperty(s.document,'hidden',{value:true,configurable:true});s.event(s.document,'visibilitychange');assert.equal(s.frames.size,0);Object.defineProperty(s.document,'hidden',{value:false});s.event(s.document,'visibilitychange');assert.equal(s.frames.size,0);start();s.media.matches=true;s.change();assert.equal(s.frames.size,0);assert.equal(s.one('[data-ecology-motion]').checked,false);s.media.matches=false;s.change();start();s.adapter.update({...s.value,themeId:themes[1].id,placements:{}});assert.equal(s.frames.size,0);assert.equal(s.one('[data-ecology-object]').dataset.ecologyObject,themes[1].objects[0].id);s.one('[data-ecology-close]').click();assert.equal(s.one('[data-ecology-object]'),null);s.controller.abort();assert.equal(s.host.children.length,0)});
 test('throw loop settles or reaches bounded stop and never schedules permanently',()=>{const s=setup();s.one('[data-ecology-open]').click();s.one('[data-ecology-motion]').checked=true;s.event(s.one('[data-ecology-motion]'),'change');s.throwActor();for(let i=0;i<700&&s.frames.size;i++)s.advance();assert.equal(s.frames.size,0);assert.match(s.one('[data-ecology-status]').textContent,/settled|simulation limit/);s.adapter.dispose()});
+test('instance layouts preview only authored visible world copies; deletions stay deleted',()=>{
+ const s=setup(),id=themes[0].objects[0].id;
+ const value={...s.value,version:9,placements:{
+  first:{objectId:id,x:.2,y:.3,pinned:true,scope:'world',visible:true},
+  duplicate:{objectId:id,x:.7,y:.6,pinned:false,scope:'world',visible:true},
+  hidden:{objectId:id,x:.5,y:.5,pinned:false,scope:'world',visible:false},
+  ui:{objectId:id,x:.5,y:.5,pinned:false,scope:'ui',visible:true},
+  sticker:{objectId:id,x:.5,y:.5,pinned:false,scope:'sticker',visible:true}
+ }};
+ const before=JSON.stringify(value);s.adapter.update(value);s.one('[data-ecology-open]').click();
+ assert.equal(s.host.querySelectorAll('[data-ecology-object]').length,2);
+ const first=s.one('[data-ecology-instance="first"]'),copy=s.one('[data-ecology-instance="duplicate"]');
+ assert.equal(first.dataset.ecologyObject,copy.dataset.ecologyObject);assert.notEqual(first.style.transform,copy.style.transform);
+ const pinned=first.style.transform;s.event(first,'keydown',{key:'ArrowRight'});assert.equal(first.style.transform,pinned);
+ const prior=copy.style.transform;s.event(copy,'keydown',{key:'ArrowRight'});assert.notEqual(copy.style.transform,prior);
+ assert.equal(JSON.stringify(value),before);s.adapter.update({...value,placements:{}});
+ assert.equal(s.host.querySelectorAll('[data-ecology-object]').length,0);s.adapter.dispose();
+});
