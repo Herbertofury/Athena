@@ -93,8 +93,8 @@ def package(source, output, allowlist=None, profile="complete"):
         unexpected = sorted(set(actual)-set(approved))
         absent = sorted(set(approved)-set(actual))
         raise ValueError('Runtime allowlist mismatch; unreviewed: ' + ', '.join(unexpected) + '; absent: ' + ', '.join(absent))
-    if profile=='public-preview' and any(name.startswith('workspaces/foundry/') and name not in {'workspaces/foundry/index.mjs','workspaces/foundry/style.css','workspaces/foundry/catalog.json','workspaces/foundry/layout-state.mjs'} for name in actual):
-        raise ValueError('Public-preview profile excludes Foundry content beyond reviewed room authoring.')
+    if profile=='public-preview' and any(name.startswith('workspaces/foundry/') and name not in {'workspaces/foundry/index.mjs','workspaces/foundry/style.css','workspaces/foundry/catalog.json','workspaces/foundry/layout-state.mjs','workspaces/foundry/cinematic.mjs','workspaces/foundry/cinematic-world.mjs','workspaces/foundry/THREE-LICENSE.txt','workspaces/foundry/FOUNDRY-LICENSE.txt'} for name in actual):
+        raise ValueError('Public-preview profile excludes Foundry content beyond reviewed room authoring and procedural preview.')
     for name, path in actual.items():
         if hashlib.sha256(path.read_bytes()).hexdigest() != approved[name]:
             raise ValueError('Runtime content changed after allowlist review: ' + name)
