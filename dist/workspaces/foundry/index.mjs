@@ -15,12 +15,12 @@ export async function mount(context){
  const snapshot=()=>{if(invalidSavedState)throw Error('Invalid existing state is retained for recovery.');return {version:1,active:model.validate(current),layouts:Object.fromEntries(Object.entries(layouts).map(([k,v])=>[k,model.validate(v)]))};};
  function save(){layouts[current.roomId]=model.validate(current);try{context.setState?.(snapshot());text('Layout updated. Athena reports storage failures separately; export a backup for recovery.');}catch{ text('Could not save this layout. Export a backup before leaving.');}}
  const pos=(id,i)=>current.placements[id]||{x:.15+(i%3)*.32,y:.25+Math.floor(i/3)*.4,pinned:false};
- function position(button,p){button.style.left=`${p.x*100}%`;button.style.top=`${p.y*100}%`;button.setAttribute('aria-pressed',String(p.pinned));}
+ function position(button,p){button.style.left=`clamp(var(--foundry-edge-x, 60px), ${p.x*100}%, calc(100% - var(--foundry-edge-x, 60px)))`;button.style.top=`clamp(85px, ${p.y*100}%, calc(100% - 85px))`;button.setAttribute('aria-pressed',String(p.pinned));}
  function draw(){
-  const t=themes.find(t=>t.id===current.themeId);themeSelect.value=t.id;roomSelect.replaceChildren();for(const r of t.rooms){const o=doc.createElement('option');o.value=r.id;o.textContent=r.name;roomSelect.append(o);}roomSelect.value=current.roomId;timeSelect.value=current.time;scene.dataset.time=current.time;scene.replaceChildren();list.replaceChildren();
+  const t=themes.find(t=>t.id===current.themeId);for(let i=0;i<4;i++)scene.style.setProperty(`--foundry-color-${i}`,/^#[0-9a-f]{6}$/i.test(t.colors?.[i])?t.colors[i]:['#67d9ff','#7cf6a5','#e9fbff','#146b93'][i]);themeSelect.value=t.id;roomSelect.replaceChildren();for(const r of t.rooms){const o=doc.createElement('option');o.value=r.id;o.textContent=r.name;roomSelect.append(o);}roomSelect.value=current.roomId;timeSelect.value=current.time;scene.dataset.time=current.time;scene.replaceChildren();list.replaceChildren();
   let visible=0;
   t.objects.forEach((o,i)=>{if(query&&!`${t.name} ${o.name} ${o.shape} ${o.role}`.toLowerCase().includes(query.toLowerCase()))return;visible++;
-   const b=doc.createElement('button');b.type='button';b.className='foundry-object';b.dataset.id=o.id;b.textContent=o.name;b.title=`${o.shape} · ${o.role}`;b.setAttribute('aria-label',`${o.name}; arrow keys move; P toggles pin`);position(b,pos(o.id,i));scene.append(b);
+   const b=doc.createElement('button');b.type='button';b.className='foundry-object';b.dataset.id=o.id;b.dataset.shape=o.shape;const form=doc.createElement('span');form.className='foundry-object-form';form.setAttribute('aria-hidden','true');const label=doc.createElement('span');label.className='foundry-object-label';label.textContent=o.name;b.append(form,label);b.title=`${o.shape} · ${o.role}`;b.setAttribute('aria-label',`${o.name}; arrow keys move; P toggles pin`);position(b,pos(o.id,i));scene.append(b);
    const li=doc.createElement('li');li.textContent=`${o.name} · ${o.shape} · ${o.role}`;list.append(li);
   });text(`${visible} of ${t.objects.length} objects visible in ${t.rooms.find(r=>r.id===current.roomId).name}.`);
  }
