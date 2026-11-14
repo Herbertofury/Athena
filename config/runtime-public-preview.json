@@ -1,14 +1,14 @@
 {
   "schema": 1,
-  "review": "Reviewed native Athena runtime: learning, Engineering and integrated Foundry authoring with optional local SQLite bridge adapters, weather/ecology/environment and operator-selected local video. Source-owned procedural assets/licenses retained. Private databases, original private source history, credentials, recordings and binaries excluded. No autoplay or automatic database import; local bridge is explicit opt-in and not deployed on Pages. Full source retirement remains gated separately.",
+  "review": "Reviewed native Athena runtime: learning, Engineering and integrated Foundry authoring with optional local SQLite bridge adapters, weather/ecology/environment and operator-selected local video. Source-owned procedural assets/licenses retained. Private databases, original private source history, credentials, recordings and binaries excluded. No autoplay or automatic database import; local bridge is explicit opt-in and not deployed on Pages. Full source retirement remains gated separately. Public PC catalog includes only reviewed HTML, JavaScript and sourced JSON, not other research or private evidence.",
   "files": [
     {
       "path": "app.js",
-      "sha256": "80ba9b56a8462f22ed03054841bdf3ec87dd46cf8ccbf2f0a3dcc008dfb6078b"
+      "sha256": "e7c7584d516a07201bd750e065a50b9c88ec85ac5a96c04036a3ebcd551bf3f7"
     },
     {
       "path": "catalog.js",
-      "sha256": "97ce633e23cd9bbfa3d980acb7da640b9eacb40fb704a8f429e04cee68dadd5f"
+      "sha256": "1d818063cd03315348c24b54e1cabcd49fa43b049ced8e756b6c0ad33cdc6153"
     },
     {
       "path": "core.js",
@@ -23,6 +23,18 @@
       "sha256": "3c526ffced4e697cd88f2847e22f63ee6aad53d8c0b3599decb593b66cbbb069"
     },
     {
+      "path": "research/windows-utilities-2026-11-14/catalog.json",
+      "sha256": "b692af67c01ff54e4eae5b638768544656f4b3e12950c0dc20523c6ea32b00c2"
+    },
+    {
+      "path": "research/windows-utilities-2026-11-14/index.html",
+      "sha256": "7ce1f24d16943edd110903c0ade6f169ef47bf05dea39ef88b1771df1bd7623d"
+    },
+    {
+      "path": "research/windows-utilities-2026-11-14/table.js",
+      "sha256": "c7bbf00e0f9f71fa168c5e18044a44cc59ea5d224b60ec41d926b917e1eb2977"
+    },
+    {
       "path": "styles.css",
       "sha256": "bf7fb56b9403fe8a865771cd7b3cd766a52aeea5460541ec29d145fcfd8f7107"
     },
@@ -33,6 +45,10 @@
     {
       "path": "workshops/data/learner-pack.zip",
       "sha256": "8d03fb99f97ae6324de1a4cbfcb874d725778f110cb634b1ed9578a6f4711731"
+    },
+    {
+      "path": "workshops/delivery/learner-pack.zip",
+      "sha256": "2bb89bc923ed4392310c7df1204e49df61f3a4c8c5a223b31d079b013c43d5b0"
     },
     {
       "path": "workshops/programming/learner-pack.zip",
@@ -52,7 +68,7 @@
     },
     {
       "path": "workspaces/engineering/audio/archive-selection.mjs",
-      "sha256": "de52a075043aee965b579e3259ed852dc64a9ba60cceb300d9acefd4c6223228"
+      "sha256": "07c05b3224c9ad235f32a51376fc3bb4a337bd1793390c28dbeb893facc9a03e"
     },
     {
       "path": "workspaces/engineering/audio/audio-core.mjs",
@@ -64,7 +80,7 @@
     },
     {
       "path": "workspaces/engineering/audio/manifest.json",
-      "sha256": "c3b28341d1f8676d62ef5c0121c1afcf85ce66d5403d7c4cf5a38084f453a50d"
+      "sha256": "0c879dc2bfe0b22a9e81c1d82230ae02809c3b35344775231b4da80702fd2a65"
     },
     {
       "path": "workspaces/engineering/audio/media-events.mjs",
@@ -156,7 +172,7 @@
     },
     {
       "path": "workspaces/engineering/lab/archive-view.mjs",
-      "sha256": "de52a075043aee965b579e3259ed852dc64a9ba60cceb300d9acefd4c6223228"
+      "sha256": "07c05b3224c9ad235f32a51376fc3bb4a337bd1793390c28dbeb893facc9a03e"
     },
     {
       "path": "workspaces/engineering/lab/collection-input.mjs",
@@ -164,39 +180,51 @@
     },
     {
       "path": "workspaces/engineering/lab/index.mjs",
-      "sha256": "9bbd5156e14243fcf87e1a37d29625bfa7e20ec32706e321b509f7fc9ffd76d7"
+      "sha256": "68902d9670fad94734efcb81362acb876da2141e81cbdb4a39bf096bfe4986a9"
     },
     {
       "path": "workspaces/engineering/lab/job-submit.mjs",
-      "sha256": "06f5785d9ebbab16cd208712183e7fa317ac707d96a48325929b728ba26a2f9f"
+      "sha256": "6fcf656f4c19610dfd9c64be8d1f66e068489cb6c213d45b6d22b93e091f59c2"
     },
     {
       "path": "workspaces/engineering/lab/manifest.json",
-      "sha256": "0b47faa7ad5ed7b78a60a63dc003d89cb9a1224ea0bca6f5b6083092dc2c60b8"
+      "sha256": "9ba7113f53528e1ec6143e10954845005a396d808fbaa74b9ff3eb157bdd22ae"
     },
     {
       "path": "workspaces/engineering/lab/style.css",
-      "sha256": "08575c8f16deb59545a6d8fad8bc0eb234cfb963a65bf5e47a14ce91097bf251"
+      "sha256": "8857a3777c0f05c6a7fef58ccc2b1cc594f6b33c84473ce4ea6bf34a0a997d8a"
     },
     {
       "path": "workspaces/engineering/manifest.json",
-      "sha256": "c5db1d63887e474a61e598783223b4dc6dfac64a7e79fdf0ee4ca2f8e482978b"
+      "sha256": "6b0a2e1337e79f3e4e9c16e60a6e3ca83a50089994d964b3e53cf9fc32dbcf7d"
     },
     {
       "path": "workspaces/engineering/media/bilibili-player.mjs",
       "sha256": "4f893473b3fc38d20e38ee709f305137bfa3b48290dba1c42fbdb01c8f763444"
     },
     {
+      "path": "workspaces/engineering/media/compare.mjs",
+      "sha256": "297602c9d1c0fd3e7ce9198aebf11cd3b3f9ccf5a9bb2223e6207fe7b5eb254c"
+    },
+    {
       "path": "workspaces/engineering/media/event-log-view.mjs",
       "sha256": "d335ed418d4f9b5619825fc89f30dd3ad3beffe158f8d49feb9bc9d9a08b77d5"
     },
     {
+      "path": "workspaces/engineering/media/gallery-comparison.mjs",
+      "sha256": "8f4d6c97dcf8a030af2f58ce33ef4a2ea5c6f64749bc6500925cf7c7b382c89c"
+    },
+    {
       "path": "workspaces/engineering/media/index.mjs",
-      "sha256": "09718a2b9e2c0024e4934f25e1198005fc1c2767ae74b91d0c2db3ee8a9b9b09"
+      "sha256": "3f7591478db613335aa446cbaef9deb1c8b1096e31ce217f4763e4e05664d571"
+    },
+    {
+      "path": "workspaces/engineering/media/local-compare.mjs",
+      "sha256": "a1387b254a39c053342321aeaf54b2d67b71e4aaa91e0fda165afc5267e4c169"
     },
     {
       "path": "workspaces/engineering/media/media-core.mjs",
-      "sha256": "63fdf9a09d92b150d919fd14bef38f53cfdee6e64206d155ddbfa925c7917030"
+      "sha256": "aa5d06bcd0971cd618fae7a8d494ad43d3ff11f40e4d3784c71ab65c6efd9ee6"
     },
     {
       "path": "workspaces/engineering/media/media-event-recorder.mjs",
@@ -220,7 +248,7 @@
     },
     {
       "path": "workspaces/engineering/media/style.css",
-      "sha256": "b3557cd4ae93e35fd9daa5a5cfc781126f525cd3c884259057781b82eb554e83"
+      "sha256": "e0ef1feb9b876d8735ca12c21587c1c50a63ad2beb17caa61b42c246716accc4"
     },
     {
       "path": "workspaces/engineering/media/vendor/HLS-LICENSE.txt",
@@ -320,15 +348,23 @@
     },
     {
       "path": "workspaces/foundry/index.mjs",
-      "sha256": "76612c96a831835c4e4d447d51275194024b37acf282911b513c289536c0a991"
+      "sha256": "3038e183dd0c2b0953c74476a36785ca227cb4e7f6a795a539a675dbe12bfda6"
     },
     {
       "path": "workspaces/foundry/layout-state.mjs",
-      "sha256": "24ffe3c9569c119e0800ec07571ed2d9d25d51b2276a1641ef166cb83583bcfe"
+      "sha256": "489e6d8e2faf49e32b3cef5bddfb8d66077ca82ed7fc2d6b49717f2fa9b47a26"
+    },
+    {
+      "path": "workspaces/foundry/native-asset-library.mjs",
+      "sha256": "2cf2e249dc0ce4d8a5f53bec10a415f3b93391e2257cbf18cfec6b9aeb7720c1"
     },
     {
       "path": "workspaces/foundry/native-backup.mjs",
       "sha256": "d832e1c8d26a7b2df61bdf9bc7daa503bbee4323e87b64e147bb9b388f231c8c"
+    },
+    {
+      "path": "workspaces/foundry/native-canvas-view.mjs",
+      "sha256": "247f82e40db73b9a65a020974271307e7bf7a41caad286eabe6d30c808e15280"
     },
     {
       "path": "workspaces/foundry/native-ecology.mjs",
@@ -339,16 +375,48 @@
       "sha256": "ed206cc0cdd5f44d8825a0fe0656676b336422bc7a4c4a8e38361167f290a3a9"
     },
     {
+      "path": "workspaces/foundry/native-history-keys.mjs",
+      "sha256": "03b0608b16fbd5689978ea06c1728404d35b718f093801af0c4fe294079f5cde"
+    },
+    {
       "path": "workspaces/foundry/native-import.mjs",
       "sha256": "76bf163591a4dce7857dbe7d36dbc195c69e3c5dc4391a66c463f383ae68b7d9"
+    },
+    {
+      "path": "workspaces/foundry/native-layers.mjs",
+      "sha256": "430e34f89415bc37d2a91ae877c64aab38d432c8231b4b8024c316f6d57798b0"
+    },
+    {
+      "path": "workspaces/foundry/native-local-image.mjs",
+      "sha256": "52451afc8351e790debc3c4084e3aaf427da6fcf5d027aaea9b48e75cfaa621d"
     },
     {
       "path": "workspaces/foundry/native-local-video.mjs",
       "sha256": "48d719e8b516f274c4ba10d96ebde0aca48cd5cc0c9dae055f703c5d03695fc8"
     },
     {
+      "path": "workspaces/foundry/native-object-keys.mjs",
+      "sha256": "3d26db16d0948bdc650e6cab855147158e75ee0998002270848e85926a4b6cb0"
+    },
+    {
+      "path": "workspaces/foundry/native-semantic-room.mjs",
+      "sha256": "8cdd933fca4ced7c290b5955405a63628a538b18a0d4392f8425586ac3d066e8"
+    },
+    {
+      "path": "workspaces/foundry/native-session-history.mjs",
+      "sha256": "7e269dbf3211db1eefcb476e5a6657f65532e657a6e2cb378899686bb06b27b4"
+    },
+    {
       "path": "workspaces/foundry/native-soundtrack.mjs",
-      "sha256": "e8999e2e3ab0ffaece93a6c1abbdf65507c192dc11ec39100fb6afd669a6f39f"
+      "sha256": "b61d3e2ede9fed08addb0f8d309c2e7a72502c93c75fb811191a8a46290a3702"
+    },
+    {
+      "path": "workspaces/foundry/native-tones.mjs",
+      "sha256": "2bbae6e0f6844cab4bac80bc7e3942938235ea532cfaece8dc18d3c8b9fe00e4"
+    },
+    {
+      "path": "workspaces/foundry/native-transform-gizmo.mjs",
+      "sha256": "cad7ca9677fa1307a4ec663911b999dd9c45f8541e30d549324e1706648974a0"
     },
     {
       "path": "workspaces/foundry/native-weather.mjs",
@@ -361,34 +429,6 @@
     {
       "path": "workspaces/foundry/weather-renderer.mjs",
       "sha256": "dd42d1183c1288667e1c040825933b5c2b1c44b6cf9ff0c29ec6afcc3c2005dc"
-    },
-    {
-      "path": "workspaces/foundry/native-semantic-room.mjs",
-      "sha256": "59cedfdfda98bff78a4b1ab8ea9903a4a50c24d6c4f8a10fd4b5204701933eff"
-    },
-    {
-      "path": "workspaces/foundry/native-tones.mjs",
-      "sha256": "75e6feba820e910a039d1f86d511a0737cb2ab95729d5ed4ea431cb8c14395e2"
-    },
-    {
-      "path": "workspaces/foundry/native-layers.mjs",
-      "sha256": "430e34f89415bc37d2a91ae877c64aab38d432c8231b4b8024c316f6d57798b0"
-    },
-    {
-      "path": "workspaces/foundry/native-canvas-view.mjs",
-      "sha256": "247f82e40db73b9a65a020974271307e7bf7a41caad286eabe6d30c808e15280"
-    },
-    {
-      "path": "workspaces/foundry/native-history-keys.mjs",
-      "sha256": "03b0608b16fbd5689978ea06c1728404d35b718f093801af0c4fe294079f5cde"
-    },
-    {
-      "path": "workspaces/foundry/native-object-keys.mjs",
-      "sha256": "3d26db16d0948bdc650e6cab855147158e75ee0998002270848e85926a4b6cb0"
-    },
-    {
-      "path": "workspaces/foundry/native-transform-gizmo.mjs",
-      "sha256": "cad7ca9677fa1307a4ec663911b999dd9c45f8541e30d549324e1706648974a0"
     }
   ]
 }
