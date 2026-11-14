@@ -12,6 +12,10 @@ fn run() -> Result<()> {
             store.migrate_filters()?;
             println!("{}", serde_json::to_string(&store.summary()?)?);
         }
+        "upgrade-environments" if args.len() == 3 => {
+            Store::open(p)?.migrate_environments()?;
+            println!("{}", serde_json::to_string(&Store::open(p)?.summary()?)?);
+        }
         "upgrade-origins" if args.len() == 3 => {
             let mut store = Store::open(p)?;
             store.migrate_origins()?;
