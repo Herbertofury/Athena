@@ -26,5 +26,14 @@ async function check(name,fn){report.currentCheck=name;await fn();report.checks.
   await page.screenshot({path:path.join(out,'foundry-expanded-environment.png'),fullPage:true});
   await page.locator('[data-environment-preset]').selectOption('off');await page.locator('[data-environment-apply]').click();assert.equal(await page.locator('[data-environment-backdrop]').count(),0);
  });
+ await check('Motion is explicit, moves actual pixels, stops and never resumes on reload',async()=>{
+  await page.locator('[data-environment-preset]').selectOption('ocean');await page.locator('[data-environment-apply]').click();
+  const canvas=page.locator('canvas[data-environment-backdrop="ocean"]'),button=page.locator('[data-environment-motion]');
+  const pixels=()=>canvas.evaluate(c=>c.toDataURL());const first=await pixels();await page.waitForTimeout(100);assert.equal(await pixels(),first);
+  await button.click();await page.waitForFunction(()=>document.querySelector('[data-environment-motion]').textContent.startsWith('Stop'));
+  await page.waitForTimeout(200);assert.notEqual(await pixels(),first);await button.click();const stopped=await pixels();await page.waitForTimeout(100);assert.equal(await pixels(),stopped);
+  await button.click();await page.reload();await canvas.waitFor();assert.equal(await button.textContent(),'Start environment motion');const reloaded=await pixels();await page.waitForTimeout(100);assert.equal(await pixels(),reloaded);
+  await button.click();await page.locator('[data-environment-preset]').selectOption('off');await page.locator('[data-environment-apply]').click();assert.equal(await page.locator('[data-environment-backdrop]').count(),0);assert.equal(await button.isDisabled(),true);
+ });
  report.result='pass';console.log(JSON.stringify(report,null,2));
 })().catch(error=>{report.result='fail';report.failure=String(error.stack);console.error(JSON.stringify(report,null,2));process.exitCode=1;}).finally(async()=>{await browser?.close();server?.close();});
