@@ -1,0 +1,13 @@
+# Bounded authoring and recovery
+
+Normal workspace JSON retains the established **1,000,000 UTF-16 code-unit** limit shared by JavaScript and Rust. Room JSON retains 200,000. Both input and normalized output are checked: inserting the active room into the room map must not produce an export larger than its own reader accepts. These are text limits, not instance-count promises. Valid individual rooms and presets can collectively exceed the workspace budget.
+
+File preflight permits at most three UTF-8 bytes per permitted UTF-16 unit, then the parser enforces the text limit. This preserves valid historical Unicode names without reading unbounded files. The loopback bridge's separate 4,000,000-byte transport ceiling is unchanged. Names are additionally bounded to 20 × 80 characters; no provider blobs or arbitrary embedded media are added to these JSON documents.
+
+Authoring preflights a candidate snapshot before recording rollback history or sending it to storage. An edit that crosses the workspace budget restores the previous snapshot without creating an Undo entry or issuing a storage write. The native Rust normalizer independently rejects normalized expansion beyond the limit before committing SQLite changes.
+
+Existing oversized but schema-valid browser state is not discarded. Non-growing edits and navigation between existing rooms can remain in memory without overwriting saved data. The workspace export button downloads an explicitly named `athena-foundry-oversized-recovery.json` capsule with an explicit warning that it is not a directly importable ordinary backup. Its contents retain the full validated state. Reduce copies or named layouts until within the normal budget before saving normally. This is not a private-source or arbitrary-field recovery format.
+
+Rollback cloning is separate from external file import limits. It preserves an oversized recovery draft while allowing Undo back to a smaller state. Each recovery snapshot is limited to 4,000,000 UTF-16 units; history is bounded by the configured entry count and a default aggregate 50,000,000 retained serialized units. Oldest entries are evicted to stay within those bounds. This counts serialized text, not exact browser heap bytes. Rollback to an oversized state remains memory-only and visibly labeled.
+
+Verification includes exact text boundaries and Unicode, normalization expansion, atomic UI rejection, oversized Undo/Redo and a real browser recovery download, unchanged native database bytes after rejection, and existing restart/conflict acceptance. The Windows/Ubuntu native workflow runs the new capacity browser gate. No storage schema or existing transport grant changes.
