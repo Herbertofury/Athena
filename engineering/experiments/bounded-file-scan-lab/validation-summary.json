@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "synthetic_only": true,
+  "checked_at": "2026-11-11",
+  "base_commit": "44384b809c80e03adbd62f8be9617d01e6ad9922",
+  "environment": {
+    "python": "3.12.14",
+    "system": "Linux",
+    "machine": "x86_64",
+    "kernel": "6.18.57"
+  },
+  "checks": {
+    "focused_initial": {
+      "tests": 30,
+      "passed": 30
+    },
+    "focused_final": {
+      "tests": 32,
+      "passed": 32,
+      "skipped": 0
+    },
+    "focused_optimized": {
+      "tests": 32,
+      "passed": 32,
+      "skipped": 0
+    },
+    "engineering_python": {
+      "tests": 358,
+      "passed": 357,
+      "errors": 1,
+      "skipped": 0
+    },
+    "pristine_main_python": {
+      "tests": 326,
+      "passed": 325,
+      "errors": 1,
+      "same_error": true,
+      "evidence": "Separate exact-main replay retained by same research task before this contribution."
+    },
+    "engineering_javascript": {
+      "tests": 303,
+      "passed": 303,
+      "skipped": 0
+    },
+    "research_check": "Inherited cross-root README link error only",
+    "generated_explorer": "passed",
+    "generated_card_lab": "passed",
+    "generated_media_lab": "passed",
+    "platform_browser_native_target_acceptance": "not_run",
+    "hosted_ci": "Verify exact publication head separately; engineering-only changes excluded by existing workflow."
+  },
+  "inherited_error": "apps/atlas-lab/README.md: broken local link ../../../docs/athena-local-runtime.md",
+  "scope": {
+    "recursive": false,
+    "immutable_snapshot": false,
+    "hostile_filesystem_sandbox": false,
+    "performance_ranking": false,
+    "target_recommendation": false
+  },
+  "sha256": {
+    "experiments/bounded-file-scan-lab/file_scan.py": "bab06fd7d2f9537eb20e83ad4c4d9582f32e39b8802ea07ab145b350b01641a2",
+    "experiments/bounded-file-scan-lab/run_demo.py": "1475e9c8380e712c47a9f76572d38363db09d2c4a8b708b8ea7fb9714208a42f",
+    "tests/test_bounded_file_scan.py": "85452641feae4ed480d664efc058d931d28bedadec0d6e68c1e161e3ae48c134",
+    "experiments/bounded-file-scan-lab/demo-receipt.json": "60997a2edca3689967f6c60945f13cd8c5be9bf7668a69b895711f417a7e9b48",
+    "experiments/bounded-file-scan-lab/tests-initial.log": "b526bd298ea944aef8da75dc1e83139389c2d772b31ea041d2dc489e288a4024",
+    "experiments/bounded-file-scan-lab/tests-final.log": "12949c9293cf8273ff947eccb0c66a46fd7e50d79cbcf5335788157dec31fe5d",
+    "experiments/bounded-file-scan-lab/tests-optimized.log": "43c5d0c1b42bf6b1a1100de551155a96e25374ff2a3b42282e2220d741ec44c9",
+    "experiments/bounded-file-scan-lab/initial-review-finding.json": "675bf90eea8488d195a481f4af67eebe22e24739cbfa176e1a4f01eec3c5ecd8"
+  }
+}
