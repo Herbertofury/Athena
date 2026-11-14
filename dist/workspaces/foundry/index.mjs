@@ -53,7 +53,8 @@ export async function mount(context){
   const t=themes.find(t=>t.id===current.themeId),i=t.objects.findIndex(o=>o.id===selectedObject);if(i<0||pos(selectedObject,i).pinned)return;
   const raw=[one('[data-inspect-x]').value,one('[data-inspect-y]').value],values=raw.map(Number);
   if(raw.some(v=>!String(v).trim())||values.some(v=>!Number.isFinite(v)||v<0||v>100)){text('Position must contain two numbers from 0 to 100. No changes applied.');return;}
-  drag=null;update(selectedObject,{x:values[0]/100,y:values[1]/100});
+  const old=pos(selectedObject,i),preserve=(axis,index)=>raw[index]===String(Math.round(old[axis]*10000)/100)?old[axis]:values[index]/100;
+  drag=null;update(selectedObject,{x:preserve('x',0),y:preserve('y',1)});
  });
  scene.addEventListener('pointerdown',down);scene.addEventListener('pointermove',move);scene.addEventListener('pointerup',up);scene.addEventListener('pointercancel',up);scene.addEventListener('lostpointercapture',up);scene.addEventListener('keydown',key);
  let objectUrl=null;const exportButton=one('[data-export]'),importInput=one('[data-import]');

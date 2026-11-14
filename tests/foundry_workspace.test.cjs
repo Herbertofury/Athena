@@ -93,3 +93,7 @@ test('inspector reflects scene selection and resets selection safely when theme 
  const t=await setup(),q=s=>t.document.querySelector(s),b=t.document.querySelectorAll('.foundry-object')[2];b.click();assert.equal(q('[data-inspect-object]').value,b.dataset.id);const event=new t.window.Event('keydown',{bubbles:true,cancelable:true});event.key='ArrowRight';b.dispatchEvent(event);assert.equal(Number(q('[data-inspect-x]').value),81);
  const select=q('[data-theme-select]');select.value=catalog.themes[1].id;select.dispatchEvent(new t.window.Event('change'));assert.equal(q('[data-inspect-object]').value,catalog.themes[1].objects[0].id);assert.equal(q('[data-inspect-pin]').checked,false);t.mounted.unmount();
 });
+
+test('inspector single-axis editing preserves untouched imported coordinate precision',async()=>{
+ const first=await setup(),state=first.mounted.exportState(),id=catalog.themes[0].objects[0].id;first.mounted.unmount();state.active.placements[id]={x:.123456789,y:.987654321,pinned:false};const t=await setup(state),q=s=>t.document.querySelector(s);q('[data-inspect-y]').value='60';q('[data-inspect-apply]').click();assert.equal(t.mounted.exportState().active.placements[id].x,.123456789);assert.equal(t.mounted.exportState().active.placements[id].y,.6);q('[data-undo]').click();assert.deepEqual(t.mounted.exportState().active.placements[id],state.active.placements[id]);t.mounted.unmount();
+});
