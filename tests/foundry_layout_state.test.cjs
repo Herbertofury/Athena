@@ -25,3 +25,6 @@ test('rollback is bounded, cloned, reversible and new edits discard redo',async(
 test('workspace view defaults old backups, validates docks and strips unknown view data',async()=>{
  const m=await ready,base={version:1,active:m.initial(),layouts:{}};assert.deepEqual(m.workspace(base).view,{inspectorDock:'right'});for(const inspectorDock of ['left','right','hidden'])assert.deepEqual(m.workspace({...base,view:{inspectorDock,token:'secret'}}).view,{inspectorDock});for(const view of [null,{},'left',{inspectorDock:'floating'}])assert.throws(()=>m.workspace({...base,view}),/inspector/);
 });
+test('named layouts are bounded, validated and sanitize unknown fields',async()=>{
+ const m=await ready,layout=m.initial();assert.deepEqual(m.savedLayouts(),[]);assert.deepEqual(m.savedLayouts([{name:'safe',layout,token:'secret'}]),[{name:'safe',layout}]);for(const input of [null,{},[{name:'',layout}],[{name:' x',layout}],[{name:'x'.repeat(81),layout}],[{name:'x',layout},{name:'x',layout}],Array.from({length:21},(_,i)=>({name:String(i),layout})),[{name:'x',layout:{...layout,themeId:'unknown'}}]])assert.throws(()=>m.savedLayouts(input));
+});
