@@ -1,7 +1,7 @@
 import {createLayoutModel,createLayoutHistory,fitBaseToSurface} from './layout-state.mjs';
 // Native Athena authoring module. Deliberately excludes artist provenance and account sessions.
 export async function mount(context){
- let nativeSoundtrack,nativeEcology,nativeEnvironment,nativeLocalVideo,nativeLayers;
+ let nativePalette,nativeSoundtrack,nativeEcology,nativeEnvironment,nativeLocalVideo,nativeLayers;
  const modules={},moduleStates={};
  const enabled=name=>context.foundryModules?.[name]!==false;
  const report=(name,state)=>{moduleStates[name]=state;try{context.notify?.(`Foundry ${name}: ${state}.`);}catch{}};
@@ -61,7 +61,7 @@ export async function mount(context){
   t.objects.forEach((o,i)=>{if(pos(o.id,i).visible===false)return;if(query&&!`${t.name} ${o.name} ${o.shape} ${o.role}`.toLowerCase().includes(query.toLowerCase()))return;const placement=pos(o.id,i);if(surface(placement)!==unavailableLayer&&!(placement.scope==='sticker'&&placement.anchor==='inspector'&&view.inspectorDock==='hidden'))visible++;
    const b=doc.createElement('button');b.type='button';b.className='foundry-object';b.dataset.id=o.id;b.dataset.shape=o.shape;const form=doc.createElement('span');form.className='foundry-object-form';form.setAttribute('aria-hidden','true');const label=doc.createElement('span');label.className='foundry-object-label';label.textContent=o.name;b.append(form,label);b.title=`${o.shape} · ${o.role}`;b.setAttribute('aria-label',`${o.name}; arrow keys move; P toggles pin`);position(b,pos(o.id,i));surface(pos(o.id,i)).append(b);
    const li=doc.createElement('li');li.textContent=`${o.name} · ${o.shape} · ${o.role}`;list.append(li);
-  });try{nativeEnvironment?.update(current.environment);}catch{report('environment','render failed; authoring remains available');}syncInspector();try{nativeLocalVideo?.update();}catch{report('localVideo','routing update failed');}text(`${visible} of ${t.objects.length} objects visible in ${t.rooms.find(r=>r.id===current.roomId).name}.`);
+  });try{nativeEnvironment?.update(current.environment);}catch{report('environment','render failed; authoring remains available');}syncInspector();try{nativeLocalVideo?.update();}catch{report('localVideo','routing update failed');}try{nativePalette?.update();}catch{report('palette','update failed; authoring remains available');}text(`${visible} of ${t.objects.length} objects visible in ${t.rooms.find(r=>r.id===current.roomId).name}.`);
  }
  function switchRoom(themeId,roomId){checkpoint();importGeneration++;layouts[current.roomId]=model.validate(current);current=layouts[roomId]?model.validate(layouts[roomId]):{...model.initial(themeId),roomId};draw();save();}
  const onTheme=()=>{const t=themes.find(t=>t.id===themeSelect.value);switchRoom(t.id,t.rooms[0].id);};const onRoom=()=>switchRoom(current.themeId,roomSelect.value);const onTime=()=>{checkpoint();importGeneration++;current.time=timeSelect.value;scene.dataset.time=current.time;save();};
@@ -178,6 +178,7 @@ export async function mount(context){
  await attach('legacyImport','./native-import.mjs','attachNativeImport',{nativeStore:context.nativeStore});
  nativeLocalVideo=await attach('localVideo','./native-local-video.mjs','attachNativeLocalVideo',{getSelectedTarget:()=>{const o=themeView().objects.find(o=>o.id===selectedObject);return o?{key:JSON.stringify([current.themeId,current.roomId,o.id]),label:o.name}:null;},resolveTarget:key=>{const [themeId,roomId,id]=JSON.parse(key);if(themeId!==current.themeId||roomId!==current.roomId)return null;const node=actor(id);return !node||node.parentElement===unavailableLayer||(node.parentElement===stickerLayer&&view.inspectorDock==='hidden')?null:node;}});
  nativeLayers=await attach('layers','./native-layers.mjs','attachNativeLayers',{onSelect:id=>{if(disposed||signal.aborted||!themeView().objects.some(o=>o.id===id))return;selectedObject=id;syncInspector();},onVisible:(id,value)=>changeLayer(id,'visible',value),onPin:(id,value)=>changeLayer(id,'pinned',value)});syncLayers();
+ nativePalette=await attach('palette','./native-palette.mjs','attachNativePalette',{themes,scene,getTheme:()=>themes.find(t=>t.id===current.themeId)});
  await attach('tones','./native-tones.mjs','attachNativeTones');
  await attach('semanticRoom','./native-semantic-room.mjs','attachSemanticRoom');
  await attach('weather','./native-weather.mjs','attachNativeWeather');
