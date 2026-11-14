@@ -1,7 +1,7 @@
 import {createLayoutModel,createLayoutHistory} from './layout-state.mjs';
 // Native Athena authoring module. Deliberately excludes artist provenance and account sessions.
 export async function mount(context){
- let nativeSoundtrack,nativeEcology,nativeEnvironment;
+ let nativeSoundtrack,nativeEcology,nativeEnvironment,nativeLocalVideo;
  const modules={},moduleStates={};
  const enabled=name=>context.foundryModules?.[name]!==false;
  const report=(name,state)=>{moduleStates[name]=state;try{context.notify?.(`Foundry ${name}: ${state}.`);}catch{}};
@@ -52,13 +52,13 @@ export async function mount(context){
   select.disabled=!savedLayouts.length;one('[data-preset-load]').disabled=!savedLayouts.length;one('[data-preset-remove]').disabled=!savedLayouts.length;
  }
  function syncEcology(){try{nativeEcology?.update(current);}catch{report('ecology','update failed; layout authoring remains available');}}
- function draw(){try{nativeEnvironment?.clear();}catch{report('environment','surface cleanup failed');}syncEcology();try{nativeSoundtrack?.update(current.themeId,current.roomId);}catch{report('soundtrack','update failed; layout authoring remains available');}drag=null;syncPresets();root.dataset.inspectorPlacement=view.inspectorDock;one('[data-inspector-dock]').value=view.inspectorDock;root.style.setProperty('--foundry-inspector-width',`${view.inspectorWidth}px`);one('[data-inspector-width]').value=String(view.inspectorWidth);one('[data-inspector-width]').disabled=view.inspectorDock==='hidden';one('[data-inspector-width-value]').textContent=`${view.inspectorWidth} px requested; fitted to available space`;
+ function draw(){try{nativeLocalVideo?.detach();}catch{report('localVideo','surface cleanup failed');}try{nativeEnvironment?.clear();}catch{report('environment','surface cleanup failed');}syncEcology();try{nativeSoundtrack?.update(current.themeId,current.roomId);}catch{report('soundtrack','update failed; layout authoring remains available');}drag=null;syncPresets();root.dataset.inspectorPlacement=view.inspectorDock;one('[data-inspector-dock]').value=view.inspectorDock;root.style.setProperty('--foundry-inspector-width',`${view.inspectorWidth}px`);one('[data-inspector-width]').value=String(view.inspectorWidth);one('[data-inspector-width]').disabled=view.inspectorDock==='hidden';one('[data-inspector-width-value]').textContent=`${view.inspectorWidth} px requested; fitted to available space`;
   const t=themeView();for(let i=0;i<4;i++)scene.style.setProperty(`--foundry-color-${i}`,/^#[0-9a-f]{6}$/i.test(t.colors?.[i])?t.colors[i]:['#67d9ff','#7cf6a5','#e9fbff','#146b93'][i]);themeSelect.value=t.id;roomSelect.replaceChildren();for(const r of t.rooms){const o=doc.createElement('option');o.value=r.id;o.textContent=r.name;roomSelect.append(o);}roomSelect.value=current.roomId;timeSelect.value=current.time;scene.dataset.time=current.time;scene.replaceChildren();uiLayer.replaceChildren();stickerLayer.replaceChildren();unavailableLayer.replaceChildren();list.replaceChildren();
   let visible=0;
   t.objects.forEach((o,i)=>{if(pos(o.id,i).visible===false)return;if(query&&!`${t.name} ${o.name} ${o.shape} ${o.role}`.toLowerCase().includes(query.toLowerCase()))return;const placement=pos(o.id,i);if(surface(placement)!==unavailableLayer&&!(placement.scope==='sticker'&&placement.anchor==='inspector'&&view.inspectorDock==='hidden'))visible++;
    const b=doc.createElement('button');b.type='button';b.className='foundry-object';b.dataset.id=o.id;b.dataset.shape=o.shape;const form=doc.createElement('span');form.className='foundry-object-form';form.setAttribute('aria-hidden','true');const label=doc.createElement('span');label.className='foundry-object-label';label.textContent=o.name;b.append(form,label);b.title=`${o.shape} · ${o.role}`;b.setAttribute('aria-label',`${o.name}; arrow keys move; P toggles pin`);position(b,pos(o.id,i));surface(pos(o.id,i)).append(b);
    const li=doc.createElement('li');li.textContent=`${o.name} · ${o.shape} · ${o.role}`;list.append(li);
-  });try{nativeEnvironment?.update(current.environment);}catch{report('environment','render failed; authoring remains available');}syncInspector();text(`${visible} of ${t.objects.length} objects visible in ${t.rooms.find(r=>r.id===current.roomId).name}.`);
+  });try{nativeEnvironment?.update(current.environment);}catch{report('environment','render failed; authoring remains available');}syncInspector();try{nativeLocalVideo?.update();}catch{report('localVideo','routing update failed');}text(`${visible} of ${t.objects.length} objects visible in ${t.rooms.find(r=>r.id===current.roomId).name}.`);
  }
  function switchRoom(themeId,roomId){checkpoint();importGeneration++;layouts[current.roomId]=model.validate(current);current=layouts[roomId]?model.validate(layouts[roomId]):{...model.initial(themeId),roomId};draw();save();}
  const onTheme=()=>{const t=themes.find(t=>t.id===themeSelect.value);switchRoom(t.id,t.rooms[0].id);};const onRoom=()=>switchRoom(current.themeId,roomSelect.value);const onTime=()=>{checkpoint();importGeneration++;current.time=timeSelect.value;scene.dataset.time=current.time;save();};
@@ -169,7 +169,7 @@ export async function mount(context){
  nativeSoundtrack=await attach('soundtrack','./native-soundtrack.mjs','attachNativeSoundtrack',{nativeStore:context.nativeStore});
  try{nativeSoundtrack?.update(current.themeId,current.roomId);}catch{report('soundtrack','update failed; layout authoring remains available');}
  await attach('legacyImport','./native-import.mjs','attachNativeImport',{nativeStore:context.nativeStore});
- await attach('localVideo','./native-local-video.mjs','attachNativeLocalVideo');
+ nativeLocalVideo=await attach('localVideo','./native-local-video.mjs','attachNativeLocalVideo',{getSelectedTarget:()=>{const o=themeView().objects.find(o=>o.id===selectedObject);return o?{key:JSON.stringify([current.themeId,current.roomId,o.id]),label:o.name}:null;},resolveTarget:key=>{const [themeId,roomId,id]=JSON.parse(key);if(themeId!==current.themeId||roomId!==current.roomId)return null;const node=actor(id);return !node||node.parentElement===unavailableLayer||(node.parentElement===stickerLayer&&view.inspectorDock==='hidden')?null:node;}});
  await attach('weather','./native-weather.mjs','attachNativeWeather');
  nativeEcology=await attach('ecology','./native-ecology.mjs','attachNativeEcology',{themes});syncEcology();
  if(signal.aborted)unmount();

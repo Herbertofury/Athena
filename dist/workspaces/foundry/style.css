@@ -35,3 +35,6 @@
 .foundry-object>[data-environment-backdrop]{border-radius:inherit}.foundry-object>span{position:relative;z-index:1}
 
 .foundry-scene{isolation:isolate}
+
+/* Session video replaces only the procedural object artwork; labels stay outside. */
+.foundry-object-form[data-local-video-active=true]::before{visibility:hidden}
