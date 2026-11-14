@@ -1,0 +1,29 @@
+[
+  {
+    "source_commit": "cbc84c492437de72d1bb1f42bc62fda802f77157",
+    "files": [
+      {
+        "path": "docs/competitive-landscape.md",
+        "patch": "@@ -0,0 +1,23 @@\n+# Living-world and interactive desktop alternatives\n+\n+## Sources and comparable workflows\n+\n+[Lively](https://github.com/lively-community/lively) is an open-source animated wallpaper/screensaver project. [Wallpaper Engine](https://store.steampowered.com/app/431960/Wallpaperengine/) is an adjacent animated desktop product, not a full substitute for this studio.\n+\n+## How this project should earn its place\n+\n+Compare scene startup, pause/resume, interaction, GPU/CPU cost, media fallback and persisted room state on identical hardware. The differentiating target is an editable living world with dependable persistence and complete interaction, not simply animated wallpaper. This private repository's resources remain private; this page does not approve migration into public Athena.\n+\n+## Evidence and maintenance\n+\n+Source review: 2026-11-12. Scope: documented capabilities and proposed evaluation criteria, not installed comparative tests or a latest-version certification. Unknown is not unsupported. No measured superiority is claimed.\n+\n+For each meaningful upstream change, record the source URL, publication/version date, review date, affected workflow, licensing/access constraints, opportunity and reproducible acceptance test. Preserve last-good findings and failed tests. Recheck primary sources before implementation decisions; do not copy proprietary code/assets or change the product scope merely to match another tool. Proposed features remain proposals until authorized. Daily review should record no change honestly rather than invent updates.\n+\n+## Next comparison pass\n+\n+- [ ] Pin exact compared versions and representative workloads.\n+- [ ] Capture source evidence and verify applicable licenses.\n+- [ ] Measure current implementation before a replacement or optimization.\n+- [ ] Record correctness, usability, resource cost and recovery results together.\n+- [ ] Link only proven improvements to implementation milestones; retain unproven candidates as research."
+      }
+    ]
+  },
+  {
+    "source_commit": "7f0eb686ecf256e8f6690d7507ff0e3b5e03e098",
+    "files": [
+      {
+        "path": "README.md",
+        "patch": "@@ -61,3 +61,7 @@ Verification covers the exact V24 markup/CSS/runtime contract, database authorit\n - `scripts/` \u2014 deterministic release packaging\n \n Neither visual reference is used as a runtime texture. Environment art is rendered live from Three.js geometry, shaders, canvas, CSS, and SVG-compatible interface primitives.\n+\n+## Competitive landscape and related approaches\n+\n+See the [source-led comparison and evaluation plan](docs/competitive-landscape.md). Documented capabilities, research proposals and measured results are kept separate."
+      }
+    ]
+  },
+  {
+    "source_commit": "07d66bde6b758992d04a6b580f159599c705de55",
+    "files": [
+      {
+        "path": "docs/competitive-landscape.md",
+        "patch": "@@ -21,3 +21,21 @@ For each meaningful upstream change, record the source URL, publication/version\n - [ ] Measure current implementation before a replacement or optimization.\n - [ ] Record correctness, usability, resource cost and recovery results together.\n - [ ] Link only proven improvements to implementation milestones; retain unproven candidates as research.\n+\n+## Reuse foundations and concrete parts to evaluate\n+\n+[Lively source](https://github.com/lively-community/lively): inspect media lifecycle and pause/resume boundaries as reusable design references. A whole wallpaper shell is not required for a living-world studio. Wallpaper Engine stays a behavioral reference, not source/assets to copy.\n+\n+## Integration with our projects\n+\n+Athena is a potential host, but private-to-public migration remains separately gated. Define a versioned world/room capability contract, asset provenance and persistence snapshot before any transfer. Engineering Atlas can compare synthetic/public workloads without private world assets.\n+\n+## Target improvement and acceptance boundary\n+\n+Reduce idle GPU/CPU and recovery failures while preserving full scene, audio, interaction and room-state behavior. Demonstrate before/after identical scenes and pause/resume stress.\n+\n+## License, access and adoption gate\n+\n+Status: research candidate, not integrated or benchmark-proven. Before copying code, pin the exact upstream revision and record its LICENSE, dependency licenses, notices and distribution obligations. Missing/ambiguous terms block reuse; behavioral study or a permitted interoperable adapter may remain possible. Service documentation is not a source-code license or API grant. Preserve existing user permissions, private/public boundaries and creator/game asset rights.\n+\n+Choose reuse, adapter, fork or independent implementation only after a target-workload comparison. Retain raw failures and rollback; share no credentials, private fixtures or account details. Adoption remains blocked until licensing, correctness, performance and maintenance cost are reviewed together. Review delta dated 2026-11-12."
+      }
+    ]
+  }
+]
