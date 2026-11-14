@@ -40,6 +40,16 @@ jobs:
         run: cargo build --locked --manifest-path crates/athena-foundry-store/Cargo.toml
       - name: Native authoring and real HTTP SQLite integration
         run: npm run test:foundry-native
+      - if: runner.os == 'Linux'
+        name: Original-data recovery and conversion fidelity
+        env:
+          ATHENA_NATIVE_BIN: ${{ github.workspace }}/crates/athena-foundry-store/target/debug/athena-foundry-store
+          ATHENA_CATALOG: ${{ github.workspace }}/dist/workspaces/foundry/catalog.json
+          ATHENA_LAYOUT_MODEL: ${{ github.workspace }}/dist/workspaces/foundry/layout-state.mjs
+        run: |
+          python3 -m unittest discover -s tools/foundry-recovery/capsule -p 'test_*.py'
+          python3 -m unittest discover -s tools/foundry-recovery/sqlite -p 'test_*.py'
+          python3 -m unittest discover -s tools/foundry-recovery/scrapbook -p 'test_*.py'
       - name: Install Chromium for real native-profile UI checks
         run: npx playwright install chromium
       - name: Browser to native SQLite acceptance
