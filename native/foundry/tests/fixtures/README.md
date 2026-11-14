@@ -1,0 +1,1 @@
+Historical regression fixture: exact pre-cleanup cinematic adapter from the module-independence checkpoint. It is intentionally broken, imported only with an injected renderer by cinema-cleanup.test.mjs, never served as runtime. SHA-256: `3df2d8a483e55c60b3c8872be8cfcba4452cb5a4f51bdfe9e538bf02f7dd248d`.

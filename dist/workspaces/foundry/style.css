@@ -26,3 +26,12 @@
 .foundry-toolbar output{max-width:28ch;font-size:.85em}.foundry-toolbar input[type=range]{width:180px;max-width:100%}
 
 .foundry-cinema{margin-top:1rem;padding:1rem;border:1px solid #617184;border-radius:12px}.foundry-cinema label{display:inline-flex;gap:.5rem;margin:.5rem}.foundry-cinema [data-cinema-view]{position:relative;width:100%;height:360px;overflow:hidden;border-radius:12px}.foundry-cinema canvas{display:block;width:100%;height:100%}
+
+/* Scope overlays are confined to this removable workspace. */
+.foundry-workspace,.foundry-inspector{position:relative}.foundry-scope-layer{position:absolute;inset:0;pointer-events:none;z-index:2}.foundry-scope-layer>.foundry-object{pointer-events:auto}.foundry-scope-layer[hidden]{display:none}
+
+.foundry-scope-layer{overflow:hidden}
+
+.foundry-object>[data-environment-backdrop]{border-radius:inherit}.foundry-object>span{position:relative;z-index:1}
+
+.foundry-scene{isolation:isolate}
