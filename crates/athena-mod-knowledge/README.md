@@ -28,3 +28,9 @@ Five tests cover policy denial/withdrawal, idempotent replay and atomic rollback
 ## Next integration gates
 
 Add source-policy provenance/permission scope, creator accounts and reversible identity matching, provider-scoped count semantics, public export/hash manifest and schema contract, knowledge search/FTS, refresh status queries, bounded authorized adapters, native Athena routing and consumer API adapters. Import existing Minecraft-Mod-Vault/GameSync data only after public/private/license review, without copying unknown private content. Scarlet coverage is submitted mods only; WCIF counts are WCIF-observed counts, never total creator output. Game patch and mod version must be explicit on compatibility claims.
+
+## Initial real catalog seed
+
+`cargo run --locked --example seed_public_catalog -- new-catalog.sqlite`
+
+This executable creates three actual source-attributed records (Sodium, Lithium, SKSE64) from reviewed official repository pages. It refuses an existing output path. These are manually reviewed factual identity/category records, not copied source code or provider databases. No latest-version, compatibility, maintenance-score, mod-count or safety assertion is inferred. The generated file was reopened independently and returned three records with `integrity_check=ok`. This is a deliberately small starting corpus, not the requested final multi-game knowledge coverage.
