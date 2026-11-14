@@ -39,7 +39,10 @@ def fingerprint(source):
     for suffix in ('-wal', '-shm', '-journal'):
         if os.path.lexists(str(p) + suffix):
             raise Refusal('Source sidecars exist; prepare a standalone backup first.')
-    fd = os.open(p, os.O_RDONLY | getattr(os, 'O_NOFOLLOW', 0))
+    if not stat.S_ISREG(p.lstat().st_mode):
+        raise Refusal('Source must be a regular SQLite file.')
+    # Nonblocking open closes the FIFO replacement race between lstat and fstat.
+    fd = os.open(p, os.O_RDONLY | getattr(os, 'O_NOFOLLOW', 0) | getattr(os, 'O_NONBLOCK', 0))
     try:
         info = os.fstat(fd)
         if not stat.S_ISREG(info.st_mode) or not 100 <= info.st_size <= MAX_FILE:

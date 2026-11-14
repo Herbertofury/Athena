@@ -110,3 +110,37 @@ class AdditionalGuards(unittest.TestCase):
         self.assertFalse((self.root/'private.json').exists())
 
 if __name__=='__main__':unittest.main()
+
+
+@unittest.skipUnless(hasattr(os, 'mkfifo'), 'Named-pipe regression requires POSIX')
+class SpecialFileTests(unittest.TestCase):
+    def test_named_pipe_refuses_promptly_without_writer(self):
+        import subprocess, sys
+        with tempfile.TemporaryDirectory() as directory:
+            fifo = Path(directory) / 'synthetic-private-fifo'
+            os.mkfifo(fifo)
+            result = subprocess.run([sys.executable, str(Path(q.__file__)), '--source', str(fifo)], capture_output=True, text=True, timeout=2)
+            self.assertEqual(result.returncode, 1)
+            self.assertNotIn(str(fifo), result.stdout + result.stderr)
+            self.assertTrue(stat.S_ISFIFO(fifo.lstat().st_mode))
+
+    def test_replacement_between_lstat_and_open_cannot_block(self):
+        import subprocess, sys
+        with tempfile.TemporaryDirectory() as directory:
+            source = Path(directory) / 'synthetic-source'
+            source.write_bytes(b'placeholder')
+            # Run the race in its own timeout-bounded process so a regression cannot hang CI.
+            code = """import importlib.util, os, pathlib, sys
+from unittest.mock import patch
+spec=importlib.util.spec_from_file_location('q',sys.argv[1]);q=importlib.util.module_from_spec(spec);spec.loader.exec_module(q)
+p=pathlib.Path(sys.argv[2]);original=q.os.open
+def swap(path,flags,*args,**kwargs):
+ p.unlink();os.mkfifo(p);return original(path,flags,*args,**kwargs)
+with patch.object(q.os,'open',side_effect=swap):
+ try:q.fingerprint(p)
+ except q.Refusal:sys.exit(0)
+ raise AssertionError('special file accepted')
+"""
+            result = subprocess.run([sys.executable, '-c', code, str(Path(q.__file__)), str(source)], capture_output=True, timeout=2)
+            self.assertEqual(result.returncode, 0)
+            self.assertTrue(stat.S_ISFIFO(source.lstat().st_mode))
