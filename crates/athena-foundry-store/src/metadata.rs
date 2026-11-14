@@ -19,6 +19,8 @@ pub struct NativeAssignment {
 pub struct NativeSoundtrack {
     pub assignment: NativeAssignment,
     pub updated_at: Option<i64>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub updated_at_ms: Option<i64>,
 }
 pub(crate) fn now() -> Result<i64> {
     Ok(SystemTime::now()
@@ -75,7 +77,7 @@ impl Store {
     pub fn migrate_soundtrack_metadata(&mut self) -> Result<()> {
         let tx = self.db.transaction()?;
         let v: i64 = tx.query_row("PRAGMA user_version", [], |r| r.get(0))?;
-        if matches!(v, 4..=14) {
+        if matches!(v, 4..=15) {
             return Ok(());
         }
         if v != 3 {
@@ -94,15 +96,17 @@ impl Store {
         let tx = self.db.transaction()?;
         if !matches!(
             tx.query_row("PRAGMA user_version", [], |r| r.get::<_, i64>(0))?,
-            4..=14
+            4..=15
         ) {
             return Err("Run explicit upgrade-soundtracks first".into());
         }
+        clear_precision(&tx, &v.theme_id, &v.room_id)?;
         tx.execute("INSERT INTO soundtracks(theme_id,room_id,provider,url,label,status,source_id,updated_at) VALUES(?1,?2,?3,?4,?5,?6,?7,?8) ON CONFLICT(theme_id,room_id) DO UPDATE SET provider=excluded.provider,url=excluded.url,label=excluded.label,status=excluded.status,source_id=excluded.source_id,updated_at=excluded.updated_at",params![v.theme_id,v.room_id,v.provider,v.url,v.label,v.status,v.source_id,timestamp])?;
         tx.commit()?;
         Ok(NativeSoundtrack {
             assignment: v.clone(),
             updated_at: Some(timestamp),
+            updated_at_ms: None,
         })
     }
     pub fn soundtrack_native(&self, theme: &str, room: &str) -> Result<Option<NativeSoundtrack>> {
@@ -117,13 +121,36 @@ fn read_checked(
 ) -> Result<Option<NativeSoundtrack>> {
     if !matches!(
         db.query_row("PRAGMA user_version", [], |r| r.get::<_, i64>(0))?,
-        4..=14
+        4..=15
     ) {
         return Err("Run explicit upgrade-soundtracks first".into());
     }
-    let value=db.query_row("SELECT theme_id,room_id,provider,url,label,status,source_id,updated_at FROM soundtracks WHERE theme_id=?1 AND room_id=?2",params![theme,room],|r|Ok(NativeSoundtrack{assignment:NativeAssignment{theme_id:r.get(0)?,room_id:r.get(1)?,provider:r.get(2)?,url:r.get(3)?,label:r.get(4)?,status:r.get(5)?,source_id:r.get(6)?},updated_at:r.get(7)?})).optional()?;
+    let schema: i64 = db.query_row("PRAGMA user_version", [], |r| r.get(0))?;
+    let query = if schema >= 15 {
+        "SELECT theme_id,room_id,provider,url,label,status,source_id,updated_at,updated_at_ms FROM soundtracks WHERE theme_id=?1 AND room_id=?2"
+    } else {
+        "SELECT theme_id,room_id,provider,url,label,status,source_id,updated_at,NULL FROM soundtracks WHERE theme_id=?1 AND room_id=?2"
+    };
+    let value = db
+        .query_row(query, params![theme, room], |r| {
+            Ok(NativeSoundtrack {
+                assignment: NativeAssignment {
+                    theme_id: r.get(0)?,
+                    room_id: r.get(1)?,
+                    provider: r.get(2)?,
+                    url: r.get(3)?,
+                    label: r.get(4)?,
+                    status: r.get(5)?,
+                    source_id: r.get(6)?,
+                },
+                updated_at: r.get(7)?,
+                updated_at_ms: r.get(8)?,
+            })
+        })
+        .optional()?;
     if let Some(v) = &value {
         v.assignment.validate()?;
+        validate_precision(v.updated_at, v.updated_at_ms)?;
         if let Some(t) = v.updated_at {
             validate_timestamp(t)?;
         }
@@ -166,6 +193,7 @@ impl Store {
             return Ok(None);
         }
         let timestamp = now()?;
+        clear_precision(&tx, &v.theme_id, &v.room_id)?;
         tx.execute("INSERT INTO soundtracks(theme_id,room_id,provider,url,label,status,source_id,updated_at) VALUES(?1,?2,?3,?4,?5,'USER_ASSIGNED',NULL,?6) ON CONFLICT(theme_id,room_id) DO UPDATE SET provider=excluded.provider,url=excluded.url,label=excluded.label,status='USER_ASSIGNED',source_id=NULL,updated_at=excluded.updated_at",params![v.theme_id,v.room_id,v.provider,v.url,v.label,timestamp])?;
         let result = versioned(
             &v.theme_id,
@@ -173,9 +201,57 @@ impl Store {
             Some(NativeSoundtrack {
                 assignment: v.clone(),
                 updated_at: Some(timestamp),
+                updated_at_ms: None,
             }),
         )?;
         tx.commit()?;
         Ok(Some(result))
+    }
+}
+
+pub(crate) fn validate_precision(seconds: Option<i64>, millis: Option<i64>) -> Result<()> {
+    if let Some(ms) = millis {
+        let now_ms: i64 = SystemTime::now()
+            .duration_since(UNIX_EPOCH)?
+            .as_millis()
+            .try_into()?;
+        if ms < 0 || ms > now_ms || seconds != Some(ms / 1000) {
+            return Err("Invalid or inconsistent millisecond timestamp".into());
+        }
+    }
+    Ok(())
+}
+fn clear_precision(db: &rusqlite::Connection, theme: &str, room: &str) -> Result<()> {
+    let schema: i64 = db.query_row("PRAGMA user_version", [], |r| r.get(0))?;
+    if schema >= 15 {
+        db.execute(
+            "UPDATE soundtracks SET updated_at_ms=NULL WHERE theme_id=?1 AND room_id=?2",
+            params![theme, room],
+        )?;
+    }
+    Ok(())
+}
+impl Store {
+    pub fn migrate_music_precision(&mut self) -> Result<()> {
+        let tx = self.db.transaction()?;
+        let schema: i64 = tx.query_row("PRAGMA user_version", [], |r| r.get(0))?;
+        if schema == 15 {
+            return Ok(());
+        }
+        if schema != 14 {
+            return Err("Run explicit upgrade-blend-modes before upgrade-music-precision".into());
+        }
+        {
+            let mut query = tx.prepare("SELECT theme_id,room_id FROM soundtracks")?;
+            let rows =
+                query.query_map([], |r| Ok((r.get::<_, String>(0)?, r.get::<_, String>(1)?)))?;
+            for row in rows {
+                let (theme, room) = row?;
+                read_checked(&tx, &theme, &room)?;
+            }
+        }
+        tx.execute_batch("ALTER TABLE soundtracks ADD COLUMN updated_at_ms INTEGER CHECK(updated_at_ms IS NULL OR (updated_at_ms>=0 AND updated_at IS NOT NULL AND updated_at_ms/1000=updated_at)); PRAGMA user_version=15;")?;
+        tx.commit()?;
+        Ok(())
     }
 }

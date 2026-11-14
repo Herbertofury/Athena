@@ -36,7 +36,7 @@ class Bridge(HTTPServer):
             self.files['/native-store-bootstrap.js']=(payload.replace(marker,json.dumps(disabled,separators=(',',':')).encode()),kind)
         status=json.loads(self.cli('status'))
         self.schema=status.get('schema')
-        if self.schema not in (2,3,4,5,6,7,8,9,10,11,12,13,14):raise ValueError('Database requires explicit backup upgrade before launch')
+        if self.schema not in (2,3,4,5,6,7,8,9,10,11,12,13,14,15):raise ValueError('Database requires explicit backup upgrade before launch')
         super().__init__(('127.0.0.1',0),Handler)
         self.origin=f'http://127.0.0.1:{self.server_port}';self.host=f'127.0.0.1:{self.server_port}'
     def fingerprint(self):
@@ -115,7 +115,7 @@ class Handler(BaseHTTPRequestHandler):
             if not self.valid(api=True):return self.reply(403)
             match=re.fullmatch(r'/__native/soundtrack/([a-z0-9-]{1,100})/([a-z0-9:-]{1,100})',parsed.path)
             if not match:return self.reply(400)
-            if self.server.schema not in (4,5,6,7,8,9,10,11,12,13,14):return self.reply(409,'{"error":"Soundtrack metadata requires explicit upgrade-soundtracks and relaunch; no automatic migration"}')
+            if self.server.schema not in (4,5,6,7,8,9,10,11,12,13,14,15):return self.reply(409,'{"error":"Soundtrack metadata requires explicit upgrade-soundtracks and relaunch; no automatic migration"}')
             try:
                 result=json.loads(self.server.cli('read-native-versioned',room=match.groups()));return self.reply(200,json.dumps(result['value']),etag=result['version'])
             except (ValueError,subprocess.TimeoutExpired):return self.reply(422,'{"error":"Soundtrack metadata unavailable or invalid"}')
@@ -183,7 +183,7 @@ class Handler(BaseHTTPRequestHandler):
             if not expected:return self.reply(428,'{"error":"Load and review native backup before saving"}')
             if len(expected)!=1 or len(expected[0])>80:return self.reply(400)
             if self.path=='/__native/assign-soundtrack':
-                if self.server.schema not in (4,5,6,7,8,9,10,11,12,13,14):return self.reply(422,'{"error":"Explicit upgrade-soundtracks required"}')
+                if self.server.schema not in (4,5,6,7,8,9,10,11,12,13,14,15):return self.reply(422,'{"error":"Explicit upgrade-soundtracks required"}')
                 if len(raw)>8192:return self.reply(413)
                 assignment=json.loads(text)
                 if not isinstance(assignment,dict) or set(assignment)!={'theme_id','room_id','provider','url','label'}:return self.reply(400)
