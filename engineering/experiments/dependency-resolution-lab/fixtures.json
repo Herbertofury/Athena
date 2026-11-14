@@ -1,0 +1,328 @@
+{
+  "schema_version": 1,
+  "kind": "original_synthetic_local_maven_modules",
+  "cases": [
+    {
+      "id": "default_conflict",
+      "mode": "conflict",
+      "core_versions": [
+        "1.0",
+        "1.1",
+        "2.0"
+      ],
+      "mutation": null,
+      "use_lock": false,
+      "use_verification": false,
+      "extra_flags": [],
+      "legacy_only": false,
+      "expected": {
+        "success": true,
+        "core": "2.0",
+        "addon": true,
+        "reason": "CONFLICT_RESOLUTION",
+        "diagnostic": null
+      }
+    },
+    {
+      "id": "strict_transitive",
+      "mode": "strict",
+      "core_versions": [
+        "1.0",
+        "1.1",
+        "2.0"
+      ],
+      "mutation": null,
+      "use_lock": false,
+      "use_verification": false,
+      "extra_flags": [],
+      "legacy_only": false,
+      "expected": {
+        "success": true,
+        "core": "1.0",
+        "addon": true,
+        "reason": "BY_ANCESTOR",
+        "diagnostic": null
+      }
+    },
+    {
+      "id": "incompatible_stricts",
+      "mode": "impossible",
+      "core_versions": [
+        "1.0",
+        "1.1",
+        "2.0"
+      ],
+      "mutation": null,
+      "use_lock": false,
+      "use_verification": false,
+      "extra_flags": [],
+      "legacy_only": false,
+      "expected": {
+        "success": false,
+        "core": null,
+        "addon": false,
+        "reason": null,
+        "diagnostic": "Cannot find a version"
+      }
+    },
+    {
+      "id": "forced_downgrade",
+      "mode": "force",
+      "core_versions": [
+        "1.0",
+        "1.1",
+        "2.0"
+      ],
+      "mutation": null,
+      "use_lock": false,
+      "use_verification": false,
+      "extra_flags": [],
+      "legacy_only": false,
+      "expected": {
+        "success": true,
+        "core": "1.0",
+        "addon": true,
+        "reason": "FORCED",
+        "diagnostic": null
+      }
+    },
+    {
+      "id": "unused_constraint",
+      "mode": "constraint",
+      "core_versions": [
+        "1.0",
+        "1.1",
+        "2.0"
+      ],
+      "mutation": null,
+      "use_lock": false,
+      "use_verification": false,
+      "extra_flags": [],
+      "legacy_only": false,
+      "expected": {
+        "success": true,
+        "core": "1.0",
+        "addon": false,
+        "reason": null,
+        "diagnostic": null
+      }
+    },
+    {
+      "id": "write_lock",
+      "mode": "locked",
+      "core_versions": [
+        "1.0",
+        "1.1",
+        "2.0"
+      ],
+      "mutation": null,
+      "use_lock": false,
+      "use_verification": false,
+      "extra_flags": [
+        "--write-locks"
+      ],
+      "legacy_only": false,
+      "expected": {
+        "success": true,
+        "core": "1.1",
+        "addon": false,
+        "reason": null,
+        "diagnostic": null
+      }
+    },
+    {
+      "id": "unlocked_added_version",
+      "mode": "dynamic",
+      "core_versions": [
+        "1.0",
+        "1.1",
+        "1.2",
+        "2.0"
+      ],
+      "mutation": null,
+      "use_lock": false,
+      "use_verification": false,
+      "extra_flags": [],
+      "legacy_only": false,
+      "expected": {
+        "success": true,
+        "core": "1.2",
+        "addon": false,
+        "reason": null,
+        "diagnostic": null
+      }
+    },
+    {
+      "id": "locked_added_version",
+      "mode": "locked",
+      "core_versions": [
+        "1.0",
+        "1.1",
+        "1.2",
+        "2.0"
+      ],
+      "mutation": null,
+      "use_lock": true,
+      "use_verification": false,
+      "extra_flags": [],
+      "legacy_only": false,
+      "expected": {
+        "success": true,
+        "core": "1.1",
+        "addon": false,
+        "reason": "CONSTRAINT",
+        "diagnostic": null
+      }
+    },
+    {
+      "id": "locked_missing_version",
+      "mode": "locked",
+      "core_versions": [
+        "1.0",
+        "1.2",
+        "2.0"
+      ],
+      "mutation": null,
+      "use_lock": true,
+      "use_verification": false,
+      "extra_flags": [],
+      "legacy_only": false,
+      "expected": {
+        "success": false,
+        "core": null,
+        "addon": false,
+        "reason": null,
+        "diagnostic": "Could not find atlas.synthetic:core:1.1"
+      }
+    },
+    {
+      "id": "locked_changed_jar",
+      "mode": "locked",
+      "core_versions": [
+        "1.0",
+        "1.1",
+        "2.0"
+      ],
+      "mutation": "jar",
+      "use_lock": true,
+      "use_verification": false,
+      "extra_flags": [],
+      "legacy_only": false,
+      "expected": {
+        "success": true,
+        "core": "1.1",
+        "addon": false,
+        "reason": "CONSTRAINT",
+        "diagnostic": null
+      }
+    },
+    {
+      "id": "write_verification",
+      "mode": "locked",
+      "core_versions": [
+        "1.0",
+        "1.1",
+        "2.0"
+      ],
+      "mutation": null,
+      "use_lock": true,
+      "use_verification": false,
+      "extra_flags": [
+        "--write-verification-metadata",
+        "sha256"
+      ],
+      "legacy_only": false,
+      "expected": {
+        "success": true,
+        "core": "1.1",
+        "addon": false,
+        "reason": "CONSTRAINT",
+        "diagnostic": null
+      }
+    },
+    {
+      "id": "verified_original",
+      "mode": "locked",
+      "core_versions": [
+        "1.0",
+        "1.1",
+        "2.0"
+      ],
+      "mutation": null,
+      "use_lock": true,
+      "use_verification": true,
+      "extra_flags": [],
+      "legacy_only": false,
+      "expected": {
+        "success": true,
+        "core": "1.1",
+        "addon": false,
+        "reason": "CONSTRAINT",
+        "diagnostic": null
+      }
+    },
+    {
+      "id": "legacy_changed_jar",
+      "mode": "locked",
+      "core_versions": [
+        "1.0",
+        "1.1",
+        "2.0"
+      ],
+      "mutation": "jar",
+      "use_lock": true,
+      "use_verification": true,
+      "extra_flags": [],
+      "legacy_only": true,
+      "expected": {
+        "success": true,
+        "core": "1.1",
+        "addon": false,
+        "reason": "CONSTRAINT",
+        "diagnostic": null
+      }
+    },
+    {
+      "id": "verified_changed_jar",
+      "mode": "locked",
+      "core_versions": [
+        "1.0",
+        "1.1",
+        "2.0"
+      ],
+      "mutation": "jar",
+      "use_lock": true,
+      "use_verification": true,
+      "extra_flags": [],
+      "legacy_only": false,
+      "expected": {
+        "success": false,
+        "core": null,
+        "addon": false,
+        "reason": null,
+        "diagnostic": "core-1.1.jar"
+      }
+    },
+    {
+      "id": "verified_changed_pom",
+      "mode": "locked",
+      "core_versions": [
+        "1.0",
+        "1.1",
+        "2.0"
+      ],
+      "mutation": "pom",
+      "use_lock": true,
+      "use_verification": true,
+      "extra_flags": [],
+      "legacy_only": false,
+      "expected": {
+        "success": false,
+        "core": null,
+        "addon": false,
+        "reason": null,
+        "diagnostic": "core-1.1.pom"
+      }
+    }
+  ]
+}

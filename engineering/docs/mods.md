@@ -21,3 +21,7 @@ For Sims and other proprietary games, record the exact supported scripting/runti
 ## Native proof
 
 Use the actual target runtime, normal installed launch path, real assets, both successful and failing scenarios, multiplayer authority where relevant, and long-lived save compatibility. A successful compile, JSON validator or pretty render is only one gate.
+
+## Dependency selection, locking and verified files
+
+Use [build dependency evidence](mod-dependency-resolution.md) and its [offline Gradle laboratory](../experiments/dependency-resolution-lab/README.md) to distinguish a resolved graph, a stable version lock and checked artifact bytes. The original fixtures retain strict/forced downgrades, missing locked modules and changed JAR/POM failures. These are build-tool observations, not mod-loader or binary compatibility. [Dated findings](../research/2026-11-11-mod-dependency-resolution.md) retain the initial contradicted hypotheses.

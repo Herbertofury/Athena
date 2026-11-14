@@ -1,0 +1,67 @@
+import groovy.json.JsonOutput
+import java.security.MessageDigest
+import org.gradle.api.artifacts.result.ResolvedDependencyResult
+
+repositories {
+    maven {
+        url = uri('repo')
+        metadataSources { mavenPom(); artifact() }
+    }
+}
+configurations {
+    atlas {
+        canBeResolved = true
+        canBeConsumed = false
+    }
+}
+def mode = providers.gradleProperty('mode').get()
+dependencies {
+    if (mode in ['conflict', 'strict', 'force']) {
+        atlas('atlas.synthetic:core:1.0')
+        atlas('atlas.synthetic:addon:1.0')
+    } else if (mode == 'constraint') {
+        atlas('atlas.synthetic:core:1.0')
+        constraints { atlas('atlas.synthetic:absent:99.0') }
+    } else {
+        atlas('atlas.synthetic:core:1.+')
+    }
+    if (mode == 'impossible') {
+        atlas('atlas.synthetic:core') { version { strictly('1.0') } }
+        atlas('atlas.synthetic:core') { version { strictly('2.0') } }
+    }
+    if (mode == 'strict') {
+        constraints { atlas('atlas.synthetic:core') { version { strictly('1.0') } } }
+    }
+}
+if (mode == 'force') configurations.atlas.resolutionStrategy.force('atlas.synthetic:core:1.0')
+if (mode == 'locked') configurations.atlas.resolutionStrategy.activateDependencyLocking()
+
+tasks.register('observe') {
+    doLast {
+        def result = configurations.atlas.incoming.resolutionResult
+        def graph = [
+            components: result.allComponents.collect { c ->
+                [id: c.id.displayName, reasons: c.selectionReason.descriptions.collect {
+                    [cause: it.cause.toString(), description: it.description]
+                }]
+            }.sort { it.id },
+            edges: result.allDependencies.collect { d ->
+                def e = [from: d.from.id.displayName, requested: d.requested.displayName,
+                         constraint: d.constraint, resolved: d instanceof ResolvedDependencyResult]
+                if (e.resolved) e.selected = d.selected.id.displayName
+                else e.failure = d.failure.message
+                e
+            }.sort { a, b -> (a.from + a.requested + a.constraint) <=> (b.from + b.requested + b.constraint) }
+        ]
+        file('graph.json').text = JsonOutput.toJson(graph)
+        // Resolve the file collection: metadata/graph inspection alone is not this gate.
+        if (!providers.gradleProperty('legacyOnly').isPresent()) configurations.atlas.files.each { ignored -> }
+        def artifacts = configurations.atlas.resolvedConfiguration.resolvedArtifacts.collect { a ->
+            [module: a.moduleVersion.id.toString(), name: a.file.name, bytes: a.file.length(), base64: a.file.bytes.encodeBase64().toString(),
+             sha256: MessageDigest.getInstance('SHA-256').digest(a.file.bytes).encodeHex().toString()]
+        }.sort { it.module }
+        def observation = [graph: graph, artifacts: artifacts]
+        file('observation.json').text = JsonOutput.toJson(observation)
+        println('ATLAS_OBSERVATION=' + JsonOutput.toJson(observation))
+    }
+}
