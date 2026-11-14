@@ -30,6 +30,7 @@ async function check(name,fn){report.currentCheck=name;await fn();report.checks.
  await page.screenshot({path:path.join(out,'media-desktop.png'),fullPage:true});
  await require('./media_browser_checks.cjs').runMediaBrowserChecks({page,origin,root,report,check});
  await require('./media_filter_browser_checks.cjs').runMediaFilterBrowserChecks({page,report,check});
+ await require('./gallery_details_browser_checks.cjs').runGalleryDetailsBrowserChecks({page,root,report,check});
  await require('./card_browser_checks.cjs').runCardBrowserChecks({page,report,check,out});
  await check('Static public lab explains the local engine without probing API or localhost',async()=>{const requested=[];const listen=request=>requested.push(request.url());page.on('request',listen);try{await page.locator('[data-nav="lab"]').click();await page.getByText('Local evidence engine required',{exact:true}).waitFor();await page.locator('.workspace-status').filter({hasText:'unavailable capability'}).waitFor();assert.equal(await page.locator('#main').getAttribute('data-workspace'),'lab');assert.match(await page.locator('.workspace-status').textContent(),/unavailable capability/);assert.ok(requested.every(url=>!url.includes('/api/')&&!url.includes('127.0.0.1:41379')),JSON.stringify(requested));}finally{page.off('request',listen);}});
  await require('./foundry_browser_checks.cjs').runFoundryBrowserChecks({page,report,check,out});
