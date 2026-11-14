@@ -1,10 +1,10 @@
 {
   "schema": 1,
-  "review": "Reviewed native learning, Research, Media, Rust Lab and generated Card density workspace; original algorithms/worker retained, bounded workload, cleanup, no automatic runs or external requests; private Foundry excluded. Native verified audio reuses exact source verification, selection and events; explicit load, no autoplay, navigation teardown. Native complete receiver lab preserves exact validation/worker bundle modules and bounded lanes, no automatic run or candidate promotion.",
+  "review": "Reviewed native Athena runtime: learning, Engineering and integrated Foundry authoring with optional local SQLite bridge adapters, weather/ecology/environment and operator-selected local video. Source-owned procedural assets/licenses retained. Private databases, original private source history, credentials, recordings and binaries excluded. No autoplay or automatic database import; local bridge is explicit opt-in and not deployed on Pages. Full source retirement remains gated separately.",
   "files": [
     {
       "path": "app.js",
-      "sha256": "1a63a5d52f1e515c9761fcbb00b1ea2af79d53a2f04eaabe78ab0876a2a1d87a"
+      "sha256": "80ba9b56a8462f22ed03054841bdf3ec87dd46cf8ccbf2f0a3dcc008dfb6078b"
     },
     {
       "path": "catalog.js",
@@ -16,7 +16,11 @@
     },
     {
       "path": "index.html",
-      "sha256": "60e44026187caa6c2dda2cd5db7e3941c797b19035cce86ebfe77a9be9e83adf"
+      "sha256": "4a41eef861b632269ff46db86c9e2bbb08311d6664259348e15dfe14d786f173"
+    },
+    {
+      "path": "native-store-bootstrap.js",
+      "sha256": "3c526ffced4e697cd88f2847e22f63ee6aad53d8c0b3599decb593b66cbbb069"
     },
     {
       "path": "styles.css",
@@ -295,36 +299,68 @@
       "sha256": "be0489093bebf2ea49801a71f5779364533e844918f05573bc4fc425b8aae744"
     },
     {
-      "path": "workspaces/foundry/catalog.json",
-      "sha256": "1bc9ec48a345ac23e65aabf4f328b3f15d58d8e326780949a393e95b1fe0f226"
-    },
-    {
-      "path": "workspaces/foundry/index.mjs",
-      "sha256": "daa73a2f2aab193c35900d7793074b75d9db92ce638a541be064e6149f5950b2"
-    },
-    {
-      "path": "workspaces/foundry/layout-state.mjs",
-      "sha256": "934dca7ed817176c0f91f6a7a8febaf8187750e7af0a177e93e5e92bdac68ea6"
-    },
-    {
-      "path": "workspaces/foundry/style.css",
-      "sha256": "46295fa0b81b1ed0643315b167ba830c25d2225d814e858c372b9a8a6176942e"
-    },
-    {
-      "path": "workspaces/foundry/cinematic.mjs",
-      "sha256": "4e304b9b0586e187c215b2cd89342524bd4729fa70c76bf4bcb80938c26012c2"
-    },
-    {
-      "path": "workspaces/foundry/cinematic-world.mjs",
-      "sha256": "65fa24454db8440516ef30f6dc6c302a97f1998990b7f26313bce9041db71c81"
+      "path": "workspaces/foundry/FOUNDRY-LICENSE.txt",
+      "sha256": "d59d2cb7bda078bc472e5c2c1b68350509b31523cb63318647c05704878743b5"
     },
     {
       "path": "workspaces/foundry/THREE-LICENSE.txt",
       "sha256": "8b378ebe60e2fe500158cb0ac71cb5e8b7d92953c2abcc63a0eb90499653b5bc"
     },
     {
-      "path": "workspaces/foundry/FOUNDRY-LICENSE.txt",
-      "sha256": "d59d2cb7bda078bc472e5c2c1b68350509b31523cb63318647c05704878743b5"
+      "path": "workspaces/foundry/catalog.json",
+      "sha256": "1bc9ec48a345ac23e65aabf4f328b3f15d58d8e326780949a393e95b1fe0f226"
+    },
+    {
+      "path": "workspaces/foundry/cinematic-world.mjs",
+      "sha256": "65fa24454db8440516ef30f6dc6c302a97f1998990b7f26313bce9041db71c81"
+    },
+    {
+      "path": "workspaces/foundry/cinematic.mjs",
+      "sha256": "e84287ee4222b3e0ea705e76ea0e7597248eff9c225864aa87f4e968be18ce7e"
+    },
+    {
+      "path": "workspaces/foundry/index.mjs",
+      "sha256": "9425cdb8a592c8596e87024475945396cdfbe4a304b5bd24379f5f8172488c70"
+    },
+    {
+      "path": "workspaces/foundry/layout-state.mjs",
+      "sha256": "3e1bcaf833c619f2c9de959fe743efb875a345e7eb47a200dd6b6e7c024ee1c5"
+    },
+    {
+      "path": "workspaces/foundry/native-backup.mjs",
+      "sha256": "d832e1c8d26a7b2df61bdf9bc7daa503bbee4323e87b64e147bb9b388f231c8c"
+    },
+    {
+      "path": "workspaces/foundry/native-ecology.mjs",
+      "sha256": "cb2867d0f4d81014528f046534f83e8d61b52784356904fea2724d2214b43ef0"
+    },
+    {
+      "path": "workspaces/foundry/native-environment.mjs",
+      "sha256": "be4250503e9a93426b11be3765e837e4b16d68d3e1b68cec19275e77b1e8e8b5"
+    },
+    {
+      "path": "workspaces/foundry/native-import.mjs",
+      "sha256": "76bf163591a4dce7857dbe7d36dbc195c69e3c5dc4391a66c463f383ae68b7d9"
+    },
+    {
+      "path": "workspaces/foundry/native-local-video.mjs",
+      "sha256": "9d450be5ded24eebcb3d7bfcda774d692f694b4bec678d6fb1f8f206ced7adcc"
+    },
+    {
+      "path": "workspaces/foundry/native-soundtrack.mjs",
+      "sha256": "e8999e2e3ab0ffaece93a6c1abbdf65507c192dc11ec39100fb6afd669a6f39f"
+    },
+    {
+      "path": "workspaces/foundry/native-weather.mjs",
+      "sha256": "578dbe92e77079eaa07c7262a57f55f2a6af5164fc304b1a6aa4459d2ec4f092"
+    },
+    {
+      "path": "workspaces/foundry/style.css",
+      "sha256": "a20d59f6d5bf0f6c39244baf73ad0d940f3f36e9206de719b7580d8e67c4b80c"
+    },
+    {
+      "path": "workspaces/foundry/weather-renderer.mjs",
+      "sha256": "dd42d1183c1288667e1c040825933b5c2b1c44b6cf9ff0c29ec6afcc3c2005dc"
     }
   ]
 }
