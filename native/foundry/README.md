@@ -102,3 +102,22 @@ It does not establish original asset fidelity or Windows game-runtime acceptance
 Environment motion remains explicit and session-only. `prefers-reduced-motion: reduce` disables its Start control and prevents synthetic starts; a new reduce preference cancels active frames while retaining static configuration and the current painted frame. Clearing the preference never resumes motion automatically. Abort/dispose removes the preference listener. Static-only/off/unavailable-renderer status remains unchanged when no motion controller exists.
 
 This is consistent with original `prototype-v24.ts` cinematic reduced-motion behavior (lines 1548, 1565, 1606 and 1666), with dynamic preference handling matching Athena ecology. It is not complete original governor parity. Renderer formulas and persisted format/schema are unchanged. Reproduce with `node --test native/foundry/tests/environment-reduced-motion.test.mjs` and `CHROMIUM_PATH=<installed-browser> node scripts/test_foundry_environment_reduced_motion_browser.cjs`.
+
+## Optional Canvas-only view
+
+The explicit Canvas only button hides Foundry's surrounding authoring panels while keeping
+Athena navigation, the scene, restore control and status reachable. Restore panels or Escape
+returns to the same mounted inspector, including unsaved field drafts. Tab retains normal
+keyboard navigation. This adapts the clean-view purpose of reviewed MIT
+`prototype-v24.ts` (`toggleCleanView`), not its global Tab interception or app-wide chrome.
+
+The independent `canvasView` module can be disabled by the native bridge module configuration.
+It changes presentation only: no workspace JSON, SQLite schema, storage write or persisted
+preference. Navigation/disposal restores the workspace and a remount starts in normal view.
+Object selection still uses ordinary inspector behavior; toggling the view does not save drafts.
+
+Verification: `node --test native/foundry/tests/canvas-view.test.mjs`, mounted workspace and
+module-independence tests, plus `CHROMIUM_PATH=<installed-browser> node
+scripts/test_foundry_canvas_browser.cjs` for desktop/mobile controls, Escape/Tab, draft retention,
+unchanged local storage and route teardown. Synthetic browser checks do not establish original
+asset fidelity, Windows installer acceptance or completion of remaining migration gates.
