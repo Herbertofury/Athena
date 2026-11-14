@@ -15,3 +15,5 @@
 .foundry-object-label{line-height:1.2;font-size:14px;overflow-wrap:anywhere}
 
 @media(max-width:380px){.foundry-scene{--foundry-edge-x:45px}.foundry-object{width:80px;max-width:80px;padding:6px 3px}.foundry-object-label{font-size:12px}.foundry-object-form{width:56px;height:54px}}
+
+.foundry-inspector{display:grid;gap:10px;border:1px solid #7777;border-radius:12px;padding:12px;margin-bottom:20px;min-width:0}.foundry-inspector label{display:grid;gap:5px}.foundry-inspector input:not([type=checkbox]),.foundry-inspector select,.foundry-inspector button{box-sizing:border-box;width:100%;min-width:0;padding:8px;border:1px solid #7777;border-radius:6px;color:inherit;background:transparent}.foundry-inspector h2,.foundry-inspector p{margin:0}.foundry-inspector input[type=checkbox]{justify-self:start}
