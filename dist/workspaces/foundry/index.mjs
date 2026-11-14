@@ -115,26 +115,68 @@ export async function mount(context){
   }catch(e){if(!disposed&&generation===importGeneration)text(`Restore not applied: ${e.message}`);}
   finally{if(!disposed&&generation===importGeneration)workspaceInput.value='';}
  };
- const rollback=direction=>{importGeneration++;drag=null;const value=history[direction](draftSnapshot());if(!value)return;envelopeVersion=value.version;current=value.active;layout…20659 tokens truncated…talog.themes[0].objects[1].id;select.dispatchEvent(new s.window.Event('change'));assert.equal(one('[data-local-video-surface]').closest('.foundry-object').dataset.id,first);one('[data-local-video-route]').click();assert.equal(one('[data-local-video-surface]').closest('.foundry-object').dataset.id,select.value);
-one('[data-instance-delete]').click();assert.equal(one('[data-local-video-surface]'),null);assert.match(one('[data-local-video-route-status]').textContent,/unavailable/);one('[data-undo]').click();assert.ok(one('[data-local-video-surface]'));assert.equal(video.playCalls,0);
-const room=one('[data-room-select]');room.value=catalog.themes[0].rooms[1].id;room.dispatchEvent(new s.window.Event('change'));assert.equal(one('[data-local-video-surface]'),null);assert.equal(one('[data-local-video-view] video'),video);assert.equal(video.playCalls,0);
-one('[data-local-video-preview]').click();assert.match(one('[data-local-video-route-status]').textContent,/Preview only/);one('[data-local-video-route]').click();assert.ok(one('[data-local-video-surface]'));one('[data-local-video-close]').click();assert.equal(one('[data-local-video-surface]'),null);assert.equal(video.hasAttribute('src'),false);s.mounted.unmount();assert.equal(s.document.querySelector('main').children.length,0)});
-test('replayed initial search preserves uncommitted inspector input while changed search still filters',async()=>{
- const s=await setup(mount,{foundryModules:allOff});
- try {
-  const rotation=s.document.querySelector('[data-inspect-rotation]');rotation.value='45';
-  s.mounted.setSearch('');
-  assert.equal(rotation.value,'45','host initial-search replay must not erase a draft');
-  s.document.querySelector('[data-inspect-transform]').click();
-  assert.equal(Object.values(s.mounted.exportState().active.placements)[0].rotation,45);
-  s.mounted.setSearch('no-object-matches-this-search');
-  assert.equal(s.document.querySelectorAll('.foundry-scene .foundry-object').length,0);
-  s.mounted.setSearch('');
-  assert.ok(s.document.querySelectorAll('.foundry-scene .foundry-object').length>0);
- } finally {s.mounted.unmount()}
-});
-
-test('semantic metadata explorer is independently removable and never enters authoring state',async()=>{const s=await setup(mount,{foundryModules:{...allOff,semanticRoom:true}});assert.ok(s.document.querySelector('[data-semantic-file]'));const before=JSON.stringify(s.mounted.exportState());s.time('night');s.document.querySelector('[data-undo]').click();assert.equal(JSON.stringify(s.mounted.exportState().active),JSON.stringify(JSON.parse(before).active));s.mounted.unmount();assert.equal(s.document.querySelector('main').children.length,0);});
-test('source tones are independently removable and unavailable Web Audio leaves layouts untouched',async()=>{const s=await setup(mount,{foundryModules:{...allOff,tones:true}}),before=JSON.stringify(s.mounted.exportState());assert.ok(s.document.querySelector('[data-tone-play]'));s.document.querySelector('[data-tone-play]').click();await tick();assert.match(s.document.querySelector('[data-tone-status]').textContent,/unavailable|blocked/);assert.equal(JSON.stringify(s.mounted.exportState()),before);s.mounted.unmount();assert.equal(s.document.querySelector('main').children.length,0);const off=await setup(mount,{foundryModules:allOff});assert.equal(off.document.querySelector('[data-tone-play]'),null);off.mounted.unmount()});
-
-test('canvas presentation can be disabled without disabling authoring or other modules',async()=>{const s=await setup(mount,{foundryModules:{canvasView:false}});assert.equal(s.mounted.getModuleStates().canvasView,'disabled');assert.equal(s.document.querySelector('[data-canvas-view-toggle]'),null);s.time('night');assert.equal(s.mounted.exportState().active.time,'night');s.mounted.unmount();});
+ const rollback=direction=>{importGeneration++;drag=null;const value=history[direction](draftSnapshot());if(!value)return;envelopeVersion=value.version;current=value.active;layouts=value.layouts;view=value.view;savedLayouts=value.savedLayouts;draw();save();text(invalidSavedState?'Recovery draft changed; original invalid saved data remains protected.':`${direction==='undo'?'Undid':'Redid'} workspace edit. Rollback history lasts for this workspace session.`);};
+ const resetRoom=()=>{
+  importGeneration++;drag=null;
+  if(current.version<6&&!Object.keys(current.placements).length){text('Room arrangement is already at its defaults.');return;}
+  checkpoint();const blendVersion=current.version>=11;const expandedEnvironmentVersion=current.version>=10;const appearanceVersion=current.version>=7,originsVersion=current.version>=9,filtersVersion=current.version>=8;current=expandedEnvironmentVersion?{...model.upgradeOrigins({...model.initial(current.themeId),roomId:current.roomId,time:current.time}),version:10,environment:current.environment}:current.version>=6?{...model.upgradeInstances({...model.initial(current.themeId),roomId:current.roomId,time:current.time}),environment:current.environment}:{...current,placements:{}};if(appearanceVersion)current=model.upgradeAppearance(current);if(filtersVersion)current=model.upgradeFilters(current);if(originsVersion)current=model.upgradeOrigins(current);if(expandedEnvironmentVersion)current={...current,version:10};if(blendVersion)current=model.upgradeBlendModes(current);draw();save();
+  text(invalidSavedState?'Recovery draft reset; original invalid saved data remains protected.':'Room arrangement reset, including pins. Other rooms and time were preserved. Undo restores the previous arrangement.');
+ };
+ one('[data-preset-save]').addEventListener('click',()=>{
+  try{const name=one('[data-preset-name]').value.trim(),next=model.savedLayouts([...savedLayouts,{name,layout:current}]);checkpoint();importGeneration++;drag=null;savedLayouts=next;syncPresets();one('[data-preset-select]').value=String(savedLayouts.length-1);save();}
+  catch(e){text(`Named layout not saved: ${e.message}`);}
+ });
+ one('[data-preset-load]').addEventListener('click',()=>{
+  const item=savedLayouts[Number(one('[data-preset-select]').value)];if(!item)return;checkpoint();importGeneration++;layouts[current.roomId]=model.validate(current);current=model.validate(item.layout);draw();save();
+ });
+ one('[data-preset-remove]').addEventListener('click',()=>{
+  const i=Number(one('[data-preset-select]').value);if(!savedLayouts[i])return;checkpoint();importGeneration++;drag=null;savedLayouts=savedLayouts.filter((_,index)=>index!==i);syncPresets();save();
+ });
+ one('[data-inspector-dock]').addEventListener('change',()=>{checkpoint();importGeneration++;view=model.view({...view,inspectorDock:one('[data-inspector-dock]').value});draw();save();});
+ one('[data-inspector-width]').addEventListener('change',()=>{
+  try{const next=model.view({...view,inspectorWidth:Number(one('[data-inspector-width]').value)});if(next.inspectorWidth===view.inspectorWidth||view.inspectorDock==='hidden')return;checkpoint();importGeneration++;drag=null;view=next;draw();save();}
+  catch(e){text(`Panel size not changed: ${e.message}`);}
+ });
+ one('[data-reset-room]').addEventListener('click',resetRoom);
+ one('[data-undo]').addEventListener('click',()=>rollback('undo'));one('[data-redo]').addEventListener('click',()=>rollback('redo'));
+ one('[data-export-workspace]').addEventListener('click',backup);workspaceInput.addEventListener('change',restore);
+ exportButton.addEventListener('click',download);importInput.addEventListener('change',upload);draw();
+ const boundary=one('.foundry-boundary');boundary.textContent+=context.nativeStore?' A native storage capability is supplied; enabled sections report connection and schema status.':' Native storage is not connected; browser authoring and JSON backups remain available.';
+ async function attach(name,path,exportName,options={}){
+  if(disposed||signal.aborted)return;
+  if(!enabled(name)){moduleStates[name]='disabled';return;}
+  const host=doc.createElement('section');host.dataset.foundryModule=name;if(name==='cinema')host.className='foundry-cinema';root.append(host);
+  const controller=new AbortController();const entry={host,controller,component:null};modules[name]=entry;
+  try{
+   const loaded=await import(path);if(disposed||signal.aborted)return;
+   entry.component=loaded[exportName]({host,signal:controller.signal,...options});
+   if(disposed||signal.aborted){try{entry.component?.dispose();moduleStates[name]='disposed';}catch{report(name,'cleanup failed');}finally{controller.abort();host.remove();}return;}
+   moduleStates[name]='attached';return entry.component;
+  }catch{
+   if(disposed||signal.aborted){controller.abort();host.remove();return;}
+   report(name,'unavailable; layout authoring remains available');host.replaceChildren();const message=doc.createElement('p');message.setAttribute('role','status');message.textContent=`Optional ${name} component unavailable. Layout authoring remains available.`;host.append(message);controller.abort();
+  }
+ }
+ function unmount(){if(disposed)return;disposed=true;drag=null;
+  for(const [name,entry] of Object.entries(modules)){
+   try{entry.component?.dispose();moduleStates[name]='disposed';}catch{report(name,'cleanup failed');}
+   finally{entry.controller.abort();entry.host.remove();}
+  }
+  try{if(objectUrl)URL.revokeObjectURL(objectUrl);}finally{root.remove();css.remove();signal.removeEventListener('abort',unmount);}
+ }
+ signal.addEventListener('abort',unmount,{once:true});
+ nativeEnvironment=await attach('environment','./native-environment.mjs','attachEnvironment',{scene,getTargets:()=>themeView().objects,resolveTarget:id=>{const b=actor(id);if(!b||b.parentElement===unavailableLayer||(b.parentElement===stickerLayer&&view.inspectorDock==='hidden'))return null;return b;},validate:value=>model.environment(value,value.target===undefined?4:10),apply:value=>{if(disposed||signal.aborted)return;const next=model.upgradeEnvironment(current,value);checkpoint();importGeneration++;current=next;draw();save();}});try{nativeEnvironment?.update(current.environment);}catch{report('environment','render failed; authoring remains available');}
+ await attach('cinema','./cinematic.mjs','attachCinematic');
+ await attach('canvasView','./native-canvas-view.mjs','attachCanvasView',{workspace:root});
+ await attach('backup','./native-backup.mjs','attachNativeBackup',{nativeStore:context.nativeStore,model,snapshot,getRevision:()=>importGeneration,replace:value=>{if(disposed||signal.aborted)return;checkpoint();importGeneration++;drag=null;envelopeVersion=value.version;layouts=value.layouts;current=value.active;view=value.view;savedLayouts=value.savedLayouts;draw();save();}});
+ nativeSoundtrack=await attach('soundtrack','./native-soundtrack.mjs','attachNativeSoundtrack',{nativeStore:context.nativeStore});
+ try{nativeSoundtrack?.update(current.themeId,current.roomId);}catch{report('soundtrack','update failed; layout authoring remains available');}
+ await attach('legacyImport','./native-import.mjs','attachNativeImport',{nativeStore:context.nativeStore});
+ nativeLocalVideo=await attach('localVideo','./native-local-video.mjs','attachNativeLocalVideo',{getSelectedTarget:()=>{const o=themeView().objects.find(o=>o.id===selectedObject);return o?{key:JSON.stringify([current.themeId,current.roomId,o.id]),label:o.name}:null;},resolveTarget:key=>{const [themeId,roomId,id]=JSON.parse(key);if(themeId!==current.themeId||roomId!==current.roomId)return null;const node=actor(id);return !node||node.parentElement===unavailableLayer||(node.parentElement===stickerLayer&&view.inspectorDock==='hidden')?null:node;}});
+ await attach('tones','./native-tones.mjs','attachNativeTones');
+ await attach('semanticRoom','./native-semantic-room.mjs','attachSemanticRoom');
+ await attach('weather','./native-weather.mjs','attachNativeWeather');
+ nativeEcology=await attach('ecology','./native-ecology.mjs','attachNativeEcology',{themes});syncEcology();
+ if(signal.aborted)unmount();
+ return {unmount,getModuleStates:()=>({...moduleStates}),exportState:snapshot,setSearch(q){if(disposed||signal.aborted)return;const next=String(q||'');if(next===query)return;query=next;drag=null;draw();},setTheme(t){if(disposed||signal.aborted)return;root.dataset.theme=t==='light'?'light':'dark';}};
+}
