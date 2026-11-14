@@ -22,7 +22,7 @@ export function createLayoutModel(catalog) {
  function encode(value){return JSON.stringify(validate(value));}
  function save(storage,key,value){const encoded=encode(value);storage.setItem(key,encoded);return parse(encoded);}
  function load(storage,key){const raw=storage.getItem(key);return raw===null?{state:initial(),recovery:null}:{state:parse(raw),recovery:null};}
- function view(input){if(input===undefined)return {inspectorDock:'right'};if(!plain(input)||!['left','right','hidden'].includes(input.inspectorDock))throw Error('Unsupported inspector layout.');return {inspectorDock:input.inspectorDock};}
+ function view(input){if(input===undefined)return {inspectorDock:'right',inspectorWidth:240};if(!plain(input)||!['left','right','hidden'].includes(input.inspectorDock))throw Error('Unsupported inspector layout.');const inspectorWidth=input.inspectorWidth===undefined?240:input.inspectorWidth;if(!Number.isInteger(inspectorWidth)||!finite(inspectorWidth,180,480))throw Error('Inspector width must be an integer from 180 to 480.');return {inspectorDock:input.inspectorDock,inspectorWidth};}
  function savedLayouts(input){
   if(input===undefined)return [];if(!Array.isArray(input)||input.length>20)throw Error('At most 20 saved layouts are allowed.');
   const names=new Set();return input.map(item=>{if(!plain(item)||typeof item.name!=='string'||!item.name.trim()||item.name!==item.name.trim()||item.name.length>80||names.has(item.name))throw Error('Saved layout names must be unique, nonempty and at most 80 characters.');names.add(item.name);return {name:item.name,layout:validate(item.layout)};});
