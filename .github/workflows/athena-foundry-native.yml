@@ -67,6 +67,10 @@ jobs:
         env:
           ATHENA_BROWSER_OUTPUT: browser-results/foundry-local-image
         run: node scripts/test_foundry_local_image_browser.cjs
+      - name: Current-theme catalog spawning and recovery in Chromium
+        env:
+          ATHENA_BROWSER_OUTPUT: browser-results/foundry-asset-library
+        run: node scripts/test_foundry_asset_library_browser.cjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -75,4 +79,5 @@ jobs:
             browser-results/foundry-native/
             browser-results/foundry-capacity/
             browser-results/foundry-local-image/
+            browser-results/foundry-asset-library/
           if-no-files-found: error
