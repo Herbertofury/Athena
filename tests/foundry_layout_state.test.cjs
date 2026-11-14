@@ -14,3 +14,11 @@ test('workspace backups validate every room and strip unrecognized private field
  assert.throws(()=>model.workspace({...backup,layouts:{wrong:active}}));
  assert.throws(()=>model.parseWorkspace(' '.repeat(1000001)));
 });
+test('rollback is bounded, cloned, reversible and new edits discard redo',async()=>{
+ const {createLayoutHistory}=await import('../dist/workspaces/foundry/layout-state.mjs'),m=await ready,h=createLayoutHistory(m,2);
+ const state=time=>({version:1,active:{...m.initial(),time},layouts:{}});
+ h.record(state('dawn'));h.record(state('day'));h.record(state('dusk'));assert.equal(h.size,2);
+ const previous=h.undo(state('night'));assert.equal(previous.active.time,'dusk');previous.active.time='dawn';
+ assert.equal(h.redo(state('dusk')).active.time,'night');h.undo(state('night'));h.record(state('day'));assert.equal(h.canRedo,false);assert.equal(h.size,2);
+ assert.throws(()=>h.record({version:99}));assert.equal(h.size,2);
+});

@@ -36,3 +36,16 @@ export function createLayoutModel(catalog) {
  function encodeWorkspace(value){return JSON.stringify(workspace(value));}
  return {validate,initial,parse,encode,save,load,workspace,parseWorkspace,encodeWorkspace};
 }
+
+/** Bounded session-only rollback. Every retained snapshot is schema validated. */
+export function createLayoutHistory(model,limit=50){
+ if(!Number.isInteger(limit)||limit<1||limit>100)throw Error('Invalid history bound.');
+ const past=[],future=[];const copy=value=>model.parseWorkspace(model.encodeWorkspace(value));
+ return {
+  record(value){past.push(copy(value));if(past.length>limit)past.shift();future.length=0;},
+  undo(value){if(!past.length)return null;const current=copy(value);future.push(current);return copy(past.pop());},
+  redo(value){if(!future.length)return null;const current=copy(value);past.push(current);if(past.length>limit)past.shift();return copy(future.pop());},
+  get canUndo(){return past.length>0;},get canRedo(){return future.length>0;},
+  get size(){return past.length+future.length;}
+ };
+}
