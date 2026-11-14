@@ -145,3 +145,18 @@ Source `prototype-v24.ts` `nudgeSelected` (303) adds directional pixel steps; it
 Nudges measure the selected object's untransformed computed left/top and actual untransformed computed padding-box dimensions (including fractional pixels and box-sizing), then convert the moved axis to normalized coordinates. World scene respects its current CSS horizontal edge (60px or responsive 45px) and vertical 85px clamp. Outward at a rendered boundary is a genuine no-op; inward starts at the visible edge rather than accumulating invisible normalized movement. UI/sticker surfaces use their existing 0–1 bounds. Pinned, filtered/hidden, unavailable or zero-size surfaces refuse edits. Identity, scope/anchor, perpendicular coordinate, appearance and room format remain intact; each edit has one Undo. Step is not stored in backups and no-op preserves drafts/history.
 
 Tests: `node --test native/foundry/tests/pixel-nudge.test.mjs`; measured Chromium: `CHROMIUM_PATH=<installed-browser> node scripts/test_foundry_pixel_nudge_browser.cjs`.
+
+## Scoped history keyboard shortcuts
+
+The independent optional `historyKeys` module adapts original MIT `prototype-v24.ts`
+history Undo/Redo shortcuts into the native workspace. Ctrl/Command+Z undoes;
+Ctrl/Command+Shift+Z or Ctrl/Command+Y redoes, using existing enabled history buttons.
+Only events within Foundry are handled. Inputs, selects, textareas, contenteditable
+and ARIA editor islands retain their own editing shortcuts. Already consumed events,
+Alt combinations and IME composition are not intercepted. Navigation/abort removes listeners.
+Disable `historyKeys` independently without disabling ordinary Undo/Redo or authoring.
+
+This changes neither persisted formats nor history semantics. Reproduce focused tests with
+`node --test native/foundry/tests/history-keys.test.mjs` and actual browser acceptance with
+`CHROMIUM_PATH=<installed-browser> node scripts/test_foundry_history_keys_browser.cjs`.
+It is not an app-wide shortcut takeover or complete original Foundry parity claim.
