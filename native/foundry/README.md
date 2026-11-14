@@ -71,3 +71,28 @@ Set `CHROMIUM_PATH` if using a separately installed official Chromium. Results g
 `browser-results/foundry-semantic-room` unless `ATHENA_BROWSER_OUTPUT` is set.
 
 The cross-platform browser acceptance also terminates the idle bridge process after a completed save, relaunches it against the same synthetic SQLite file, and restores time/rotation/origin in a fresh browser context. It compares exact database bytes and committed backup before/after restart, then exercises a stale-writer conflict after relaunch. This is process-restart acceptance of already committed writes, not interrupted-write, OS crash, power-loss, installer or private-data migration proof.
+
+### Explicit blend-mode authoring (JSON 11 / SQLite 14)
+
+The inspector now supports the original nine `transformBlend` modes from reviewed MIT
+Feature Foundry `index.html:330` and `prototype-v24.ts` (`setSelectedBlend`, transform
+serialization): normal, multiply, screen, overlay, soft-light, hard-light, difference,
+color-dodge, luminosity. No arbitrary CSS values are accepted. Each authored instance has
+its own `blendMode`; Foundry surfaces isolate compositing from unrelated application controls.
+Original artwork/backdrop equivalence is not asserted, and the offline original converter
+still refuses nonnormal modes where equivalence has not been demonstrated.
+
+Applying a blend explicitly adopts layout/workspace JSON 11. Existing formats remain readable
+and are not silently rewritten. Normal is inserted only by explicit upgrade/edit; duplicate,
+Undo/Redo, named layouts, history recovery and imports retain the authored value. Room reset
+retains format 11 with normal defaults and is undoable; environment configuration is preserved.
+
+A local schema13 store requires an operator-run `athena-foundry-store upgrade-blend-modes DB`
+and bridge relaunch before JSON11 saves. This transactional marker migration validates active
+backup and revision integrity without rewriting their JSON; it fails closed on corruption.
+Earlier schema13 binaries refuse the schema14 database, preventing an older writer from
+silently replacing newer authoring data. Keep an independent backup before any explicit upgrade.
+
+`node scripts/test_foundry_blends_browser.cjs` checks actual Chromium overlap arithmetic with
+synthetic flat-color authored objects, all9 computed blend modes, unrelated controls and Undo.
+It does not establish original asset fidelity or Windows game-runtime acceptance.

@@ -18,6 +18,17 @@ class Tests(unittest.TestCase):
   value=json.loads(FIX);value['version']=2;before=self.db.read_bytes()
   status,body,_=self.request('POST',body=json.dumps(value),headers={'Content-Type':'application/json','If-Match':'"empty"'})
   self.assertEqual(status,422);self.assertIn(b'upgrade-transforms',body);self.assertIn(b'relaunch',body);self.assertEqual(self.db.read_bytes(),before)
+ def test_blend_upgrade_fence_and_exact_http_roundtrip(self):
+  self.server.shutdown();self.thread.join();self.server.server_close()
+  for command in ['history','soundtracks','transforms','scopes','environment','targets','instances','appearance','filters','origins','environments']:subprocess.run([BIN,'upgrade-'+command,str(self.db)],check=True,capture_output=True)
+  self.server=m.Bridge(BIN,self.db,ROOT.parents[1]/'dist');self.thread=threading.Thread(target=self.server.serve_forever);self.thread.start()
+  value=(ROOT.parents[1]/'crates/athena-foundry-store/tests/fixtures/js-blends.json').read_text();before=self.db.read_bytes()
+  status,body,_=self.request('POST',body=value,headers={'Content-Type':'application/json','If-Match':'"empty"'})
+  self.assertEqual(status,422);self.assertIn(b'upgrade-blend-modes',body);self.assertEqual(before,self.db.read_bytes())
+  self.server.shutdown();self.thread.join();self.server.server_close();subprocess.run([BIN,'upgrade-blend-modes',str(self.db)],check=True,capture_output=True)
+  self.server=m.Bridge(BIN,self.db,ROOT.parents[1]/'dist');self.thread=threading.Thread(target=self.server.serve_forever);self.thread.start()
+  status,body,_=self.request('POST',body=value,headers={'Content-Type':'application/json','If-Match':'"empty"'});self.assertEqual(status,200)
+  status,body,_=self.request();self.assertEqual(status,200);self.assertEqual(json.loads(body)['active'],json.loads(value)['active'])
  def test_scope_upgrade_requires_schema6_without_mutating_schema5(self):
   self.server.shutdown();self.thread.join();self.server.server_close()
   for command in ['upgrade-history','upgrade-soundtracks','upgrade-transforms']:subprocess.run([BIN,command,str(self.db)],check=True,capture_output=True)

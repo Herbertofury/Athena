@@ -38,3 +38,6 @@
 
 /* Session video replaces only the procedural object artwork; labels stay outside. */
 .foundry-object-form[data-local-video-active=true]::before{visibility:hidden}
+
+/* Bound authored compositing to each Foundry surface; never blend into app controls. */
+.foundry-scene,.foundry-scope-layer{isolation:isolate}
