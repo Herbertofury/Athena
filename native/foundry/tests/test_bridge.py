@@ -128,6 +128,13 @@ class Tests(unittest.TestCase):
   for h in [{'Host':'evil.test'},{'Origin':'https://evil.test'},{'X-Athena-Native':''},{'Sec-Fetch-Site':'cross-site'}]:self.assertEqual(self.request(headers=h)[0],403)
   self.assertEqual(self.request('POST',body=FIX,headers={'Origin':'','Content-Type':'application/json'})[0],403)
   status,_,headers=self.request('OPTIONS');self.assertEqual(status,405);self.assertNotIn('Access-Control-Allow-Origin',headers)
+ def test_rejected_post_bodies_are_delivered_without_native_mutation(self):
+  before=self.db.read_bytes()
+  for _ in range(5):
+   for headers,expected in [({'Origin':''},403),({'Origin':'https://evil.test'},403),({'Content-Type':'text/plain'},415)]:
+    status,body,response_headers=self.request('POST',body='x'*131072,headers={'Content-Type':'application/json',**headers})
+    self.assertEqual(status,expected);self.assertNotIn('Access-Control-Allow-Origin',response_headers)
+  self.assertEqual(self.db.read_bytes(),before);self.assertEqual(self.request()[1],b'null')
  def test_limits_routes_and_content(self):
   self.assertEqual(self.request('POST',body='',headers={'Content-Type':'application/json','Content-Length':'4000001'})[0],413)
   self.assertEqual(self.request('POST',body=FIX,headers={'Content-Type':'text/plain'})[0],415)
