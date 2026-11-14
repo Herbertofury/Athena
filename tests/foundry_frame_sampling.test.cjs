@@ -1,0 +1,4 @@
+const test=require('node:test'),assert=require('node:assert/strict');const {waitForFramebufferChange}=require('../scripts/foundry_browser_checks.cjs');
+const before={width:200,height:100,nonzero:15000,colors:100,sum:123};
+test('budget-aware pixel sampling waits for real frame, not two RAF callbacks',async()=>{let time=0,n=0;const after=await waitForFramebufferChange(async()=>++n<3?before:{...before,sum:456},{...before},{now:()=>time,wait:async ms=>{time+=ms;}});assert.equal(after.sum,456);assert.equal(n,3);});
+test('frozen, blank, resized and timing-only samples cannot satisfy actual animation',async()=>{for(const sample of [before,{...before,sum:0,nonzero:0,colors:1},{...before,sum:456,width:201}]){let time=0;await assert.rejects(waitForFramebufferChange(async()=>sample,before,{now:()=>time,wait:async ms=>{time+=ms;},timeoutMs:500}),/did not produce/);assert.equal(time,500);}});
