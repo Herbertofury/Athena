@@ -1,0 +1,75 @@
+{
+  "data": {
+    "id": 700001,
+    "gameId": 432,
+    "name": "SYNTHETIC project",
+    "summary": "SYNTHETIC summary, not full description",
+    "links": {
+      "websiteUrl": "https://www.curseforge.com/minecraft/mc-mods/SYNTHETIC"
+    },
+    "authors": [
+      {
+        "id": 900001,
+        "name": "SYNTHETIC author",
+        "url": "https://www.curseforge.com/members/SYNTHETIC"
+      }
+    ],
+    "logo": {
+      "id": 1,
+      "modId": 700001,
+      "title": "SYNTHETIC logo",
+      "description": "SYNTHETIC caption",
+      "thumbnailUrl": "https://media.forgecdn.net/SYNTHETIC/thumb.png",
+      "url": "https://media.forgecdn.net/SYNTHETIC/logo.png?synthetic=not-a-secret"
+    },
+    "screenshots": [
+      {
+        "id": 3,
+        "modId": 700001,
+        "title": "SYNTHETIC third",
+        "description": "SYNTHETIC caption",
+        "thumbnailUrl": "https://media.forgecdn.net/SYNTHETIC/thumb.png",
+        "url": "https://media.forgecdn.net/SYNTHETIC/third.png?synthetic=not-a-secret"
+      },
+      {
+        "id": 2,
+        "modId": 700001,
+        "title": "SYNTHETIC second",
+        "description": "SYNTHETIC caption",
+        "thumbnailUrl": "https://media.forgecdn.net/SYNTHETIC/thumb.png",
+        "url": "https://media.forgecdn.net/SYNTHETIC/second.png?synthetic=not-a-secret"
+      }
+    ],
+    "latestFiles": [
+      {
+        "id": 800001,
+        "modId": 700001,
+        "gameId": 432,
+        "fileName": "SYNTHETIC.jar",
+        "fileLength": 9007199254740993,
+        "isAvailable": false,
+        "downloadUrl": null,
+        "isEarlyAccessContent": true,
+        "earlyAccessEndDate": null,
+        "gameVersions": [
+          "SYNTHETIC-1",
+          "SYNTHETIC-2"
+        ],
+        "dependencies": [
+          {
+            "modId": 700002,
+            "relationType": 3
+          }
+        ],
+        "hashes": [
+          {
+            "algo": 1,
+            "value": "0000000000000000000000000000000000000000"
+          }
+        ]
+      }
+    ],
+    "allowModDistribution": null,
+    "isAvailable": false
+  }
+}
