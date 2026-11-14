@@ -137,3 +137,18 @@ The inspector adapts original `prototype-v24.ts` `centerSelected`/`fitSelectedTo
 Both actions refuse pinned, hidden/filtered, zero-size or unavailable targets without relocation. Identity, scope/anchor, origin, rotation and unrelated fields remain unchanged. Center retains format; Fit explicitly adopts existing format v2 when necessary. Each actual edit is one Undo; no-op leaves pending inspector drafts and history untouched. No database/schema changes or automatic unpinning.
 
 Tests: `node --test native/foundry/tests/center-fit.test.mjs`; actual Chromium: `CHROMIUM_PATH=<installed-browser> node scripts/test_foundry_center_fit_browser.cjs`.
+
+## Scoped history keyboard shortcuts
+
+The independent optional `historyKeys` module adapts original MIT `prototype-v24.ts`
+history Undo/Redo shortcuts into the native workspace. Ctrl/Command+Z undoes;
+Ctrl/Command+Shift+Z or Ctrl/Command+Y redoes, using existing enabled history buttons.
+Only events within Foundry are handled. Inputs, selects, textareas, contenteditable
+and ARIA editor islands retain their own editing shortcuts. Already consumed events,
+Alt combinations and IME composition are not intercepted. Navigation/abort removes listeners.
+Disable `historyKeys` independently without disabling ordinary Undo/Redo or authoring.
+
+This changes neither persisted formats nor history semantics. Reproduce focused tests with
+`node --test native/foundry/tests/history-keys.test.mjs` and actual browser acceptance with
+`CHROMIUM_PATH=<installed-browser> node scripts/test_foundry_history_keys_browser.cjs`.
+It is not an app-wide shortcut takeover or complete original Foundry parity claim.
