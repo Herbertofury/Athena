@@ -49,6 +49,7 @@ jobs:
         run: |
           python3 -m unittest discover -s tools/foundry-recovery/capsule -p 'test_*.py'
           python3 -m unittest discover -s tools/foundry-recovery/sqlite -p 'test_*.py'
+          python3 -m unittest discover -s tools/foundry-recovery/archive -p 'test_*.py' -v
           python3 -m unittest discover -s tools/foundry-recovery/scrapbook -p 'test_*.py'
       - name: Separate original native snapshot preservation
         run: python -m unittest discover -s tools/foundry-recovery/snapshot -v
@@ -58,9 +59,15 @@ jobs:
         run: npx playwright install chromium
       - name: Browser to native SQLite acceptance
         run: node scripts/test_foundry_native_browser.mjs
+      - name: Bounded authoring and oversized recovery in Chromium
+        run: |
+          node scripts/test_foundry_capacity_browser.mjs
+          node scripts/test_foundry_save_outcome_browser.mjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: native-foundry-${{ matrix.os }}
-          path: browser-results/foundry-native/
+          path: |
+            browser-results/foundry-native/
+            browser-results/foundry-capacity/
           if-no-files-found: error
