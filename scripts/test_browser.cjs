@@ -9,6 +9,19 @@ async function check(name,fn){report.currentCheck=name;await fn();report.checks.
 (async()=>{fs.mkdirSync(out,{recursive:true});server=http.createServer((req,res)=>{try{const name=decodeURIComponent(new URL(req.url,'http://localhost').pathname),file=path.resolve(root,'.'+(name==='/'?'/index.html':name));if(!file.startsWith(root+path.sep)){res.writeHead(403);return res.end();}const data=fs.readFileSync(file);res.writeHead(200,{'Content-Type':types[path.extname(file)]||'application/octet-stream','Cache-Control':'no-store'});res.end(data);}catch{res.writeHead(404);res.end('not found');}});await new Promise(r=>server.listen(0,'127.0.0.1',r));const origin='http://127.0.0.1:'+server.address().port;
  browser=await chromium.launch({headless:true,...(process.env.CHROMIUM_PATH?{executablePath:process.env.CHROMIUM_PATH}:{})});report.browser=await browser.version();const context=await browser.newContext({viewport:{width:1440,height:1000},reducedMotion:'reduce'});await context.route('**/*',route=>{if(new URL(route.request().url()).origin!==origin){report.outsideRequests.push(route.request().url());return route.abort();}return route.continue();});page=await context.newPage();page.on('pageerror',e=>report.errors.push(e.message));const search=page.locator('.topbar #search');
  async function openWorkspace(id){await page.locator('[data-nav="'+id+'"]').click();await page.waitForFunction(id=>document.querySelector('#main').dataset.workspace===id,id);const title={research:'Research',media:'Media workbench',cards:'Card density lab',audio:'Verified audio',receiver:'Complete receiver lab',diagnostics:'Media diagnostics'}[id].toLowerCase();await page.locator('.workspace-status').filter({hasText:'Athena '+title+' workspace loaded.'}).waitFor();}
+ await check('inherited names never dispatch workspaces on load or navigation',async()=>{
+   for(const name of Object.getOwnPropertyNames(Object.prototype)){
+     await page.goto(origin+'/#'+name+'?q=unrecognized');
+     await page.locator('h1').filter({hasText:'That trail is not mapped yet.'}).waitFor();
+     assert.equal(await search.inputValue(),'');
+     assert.equal(await page.locator('.workspace-container').count(),0);
+     await page.evaluate(()=>{location.hash='#foundations';});
+     await page.locator('[data-lesson]').first().waitFor();
+     await page.evaluate(name=>{location.hash='#'+name+'/child?q=unrecognized';},name);
+     await page.locator('h1').filter({hasText:'That trail is not mapped yet.'}).waitFor();
+     assert.equal(await search.inputValue(),'');
+   }
+ });
  await page.goto(origin);report.loadedAppSHA256=await page.evaluate(async()=>{const bytes=await(await fetch('app.js')).arrayBuffer();return Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',bytes)),b=>b.toString(16).padStart(2,'0')).join('');});assert.equal(report.loadedAppSHA256,crypto.createHash('sha256').update(fs.readFileSync(path.join(root,'app.js'))).digest('hex'));
  await check('Learning opens real lesson, retains read state and notes',async()=>{await page.locator('[data-nav="network"]').click();await page.locator('[data-lesson="net-dns-evidence"]').first().click();await page.locator('#lesson-dialog').waitFor({state:'visible'});await page.locator('#read-check').check();await page.locator('#lesson-note').fill('Browser-verified local note');await page.locator('#close-lesson').click();await page.reload();await page.locator('[data-lesson="net-dns-evidence"]').first().click();assert.equal(await page.locator('#read-check').isChecked(),true);assert.equal(await page.locator('#lesson-note').inputValue(),'Browser-verified local note');await page.locator('#close-lesson').click();});
  await page.screenshot({path:path.join(out,'learning-desktop.png'),fullPage:true});
