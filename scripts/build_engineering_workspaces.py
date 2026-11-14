@@ -174,7 +174,7 @@ def build():
     emit(Path('media/style.css'),scoped_css(m/'media.css','media'),m/'media.css')
     pre+='  root.innerHTML='+json.dumps(html)+';const sheet=document.createElement("link");sheet.rel="stylesheet";sheet.href=new URL("./style.css",import.meta.url).href;root.prepend(sheet);setTheme(theme);\n'
     pre+='  let blockedReceipt=null;const savedReceipt=initialState?.receipt?.schema_version===1 && Array.isArray(initialState.receipt.events)?JSON.parse(JSON.stringify(initialState.receipt)):null;\n'
-    pre+='  root.addEventListener("click",e=>{const button=e.target.closest?.("[data-event-mode]");if(button)navigate?.("#media?event_view="+button.dataset.eventMode);});\n'
+    pre+='  root.addEventListener("click",e=>{const button=e.target.closest?.("[data-event-mode]");if(button){const params=new URLSearchParams({event_view:button.dataset.eventMode,q:search});navigate?.("#media?"+params);}});\n'
     post='''
   function setSearch(value){if(disposed)return;search=String(value??'').slice(0,300);const terms=search.toLocaleLowerCase().split(/\\s+/).filter(Boolean);let visible=0;for(const card of root.querySelectorAll('article.card')){card.hidden=!terms.every(term=>card.textContent.toLocaleLowerCase().includes(term));if(!card.hidden)visible++;}root.getElementById('search-status').textContent=visible+' of '+(dataset?.cards.length||0)+' source records shown';}
   setSearch(search);

@@ -14,7 +14,7 @@ import shutil
 import statistics
 import tempfile
 import unittest
-from pathlib import Path
+from pathlib import Path, PureWindowsPath
 from unittest.mock import patch
 
 
@@ -1054,6 +1054,33 @@ class DeterministicBuildTests(unittest.TestCase):
             copied_sources = explorer.load_sources(copied_root)
             self.assertEqual(copied_sources, [*sources, contents["data/sources.d/synthetic-second.json"][0]])
             self.assertEqual(explorer.validate_catalog(catalog, copied_sources, TODAY), {"synthetic-parser"})
+
+    def test_manifest_and_stale_diagnostics_use_portable_windows_relative_paths(self):
+        # Exercise the real builder with Windows relative-path semantics, not a
+        # replacement manifest implementation. File IO remains local and offline.
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            for name in self.fixture_inputs(ROOT):
+                target = root / name
+                target.parent.mkdir(parents=True, exist_ok=True)
+                shutil.copyfile(ROOT / name, target)
+            relative_to = Path.relative_to
+            def windows_relative(path, *args, **kwargs):
+                return PureWindowsPath(*relative_to(path, *args, **kwargs).parts)
+            with patch.object(Path, "relative_to", windows_relative):
+                explorer.build(root)
+                manifest = json.loads((root / "docs/explorer/build-manifest.json").read_text())
+                self.assertIn("docs/explorer/index.html", manifest["files"])
+                self.assertFalse(any("\\" in name for name in manifest["files"]))
+                for name, digest in manifest["files"].items():
+                    self.assertEqual(hashlib.sha256((root / name).read_bytes()).hexdigest(), digest)
+                self.assertEqual(explorer.build(root, check=True)["mode"], "check")
+                target = root / "docs/explorer/index.html"
+                target.write_bytes(target.read_bytes() + b"\n<!-- stale fixture -->\n")
+                with self.assertRaises(ValueError) as caught:
+                    explorer.build(root, check=True)
+                self.assertIn("docs/explorer/index.html", str(caught.exception))
+                self.assertNotIn("\\", str(caught.exception))
 
     def test_actual_dataset_build_is_deterministic_and_check_does_not_write(self):
         inputs = self.fixture_inputs(ROOT)

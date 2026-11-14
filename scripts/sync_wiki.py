@@ -9,9 +9,13 @@ def merged(current,generated):
         return current[:current.index(START)]+block+current[current.index(END)+len(END):]
     return current.rstrip()+'\n\n'+block+'\n'
 def sync(source,target):
+    if not source.is_dir():raise ValueError('Wiki source must be an existing directory')
+    pages=sorted(source.glob('*.md'))
+    if not pages:return 0  # An empty source must not erase retained ownership evidence.
     previous=json.loads((target/'.athena-managed.json').read_text()) if (target/'.athena-managed.json').exists() else {}
-    updates={};manifest={}
-    for p in sorted(source.glob('*.md')):
+    updates={};manifest=dict(previous)
+    # Retain hashes for absent source pages; do not adopt their current target bytes.
+    for p in pages:
         dest=target/p.name;text=p.read_text()
         if p.name in ['Home.md','_Sidebar.md']:
             current=dest.read_text() if dest.exists() else ''
