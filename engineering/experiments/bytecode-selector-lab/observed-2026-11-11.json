@@ -1,0 +1,3512 @@
+{
+  "schema_version": 1,
+  "kind": "measured_bytecode_on_synthetic_sources",
+  "scope": "Measured ASM observations of original synthetic classes. No Mixin execution, bytecode transformation, game loading, or target-project acceptance.",
+  "observed_at_utc": "2026-11-11T01:44:21.646504+00:00",
+  "environment": {
+    "java_version": "openjdk version \"21.0.13\" 2026-10-20\nOpenJDK Runtime Environment (build 21.0.13+9-1-deb13u2-Debian)\nOpenJDK 64-Bit Server VM (build 21.0.13+9-1-deb13u2-Debian, mixed mode, sharing)",
+    "python": "3.12.14",
+    "platform": "Linux",
+    "architecture": "x86_64"
+  },
+  "compiler_options": [
+    "-source",
+    "21",
+    "-target",
+    "21",
+    "-proc:none"
+  ],
+  "input_sha256": {
+    "cases.json": "ae718b368f84581f3e2e9bffae2b1cccdc6256a40a93cbf041db23723bda770d",
+    "dependencies.json": "baa0c72b643e77315cd8337177c253127a916b9d73bfc53e1e50fb3a0dd0c3e6",
+    "BytecodeProbe.java": "88a00bdd187d32b4177a9a256d35574e45bb15db972d0e18f381c4c6c94f11ce",
+    "run.py": "d7762b8444f394556bef591fc07da375d83241d05f25fae0a5f5121a1665e296",
+    "setup-attempts.json": "2736b6018116af3f367b40d90d9cf5ec38ad5acb429ee1ac0e947acbbb07bdc3",
+    "fixtures/baseline/Target.java": "3a10354d5fd9c0dea103fbc678e6cacf6d720687378678487ad42f2bb43077fc",
+    "fixtures/overload/Target.java": "a20e49d1838c59a64a81b62d1372694cabbd81cef032b645a6a53ba90fa7d3fe",
+    "fixtures/descriptor_drift/Target.java": "f78689f94e78181e56b5bce39434a6ca3f02cb4c5880c37b4710670699e78a16",
+    "fixtures/extra_return/Target.java": "174ad6755f51e026593d1c0aa47093ec199ae616e61f599971c284bac6f2fe8b",
+    "fixtures/throw_path/Target.java": "3f271dc319b1faba37f3b8049ba3987a0dcd5912f2e6e43f1fc7e6192e79d410",
+    "fixtures/always_throw/Target.java": "c9a7a7b6bfc7b2f0cd612b0e21443f49a1103e5651705dbb23198590217c0dd6",
+    "fixtures/extra_call/Target.java": "a2f13e9f1a4d8196bff8ce7c55dc6dc62a71e4bd062569f1d31df208defaae3a",
+    "fixtures/same_count_drift/Target.java": "d6407189fec3b04358b44801cb375c57405c049e8c1428a2f58df1d929c47e5d",
+    "fixtures/different_owner/Target.java": "26d3059c8ccbcb81cb06f426fb2bc4f5141af1db35d5780147adb7f43f296476",
+    "fixtures/unrelated_call/Target.java": "d02116c2f005f6e45f1b53f1b4acbeb00f55dd9dce91fb1867084a68dc8e6acc",
+    "fixtures/nested_call/Target.java": "d2dea85e05795f3fdf1625f5da7934a1906e8b9741b2461afc48dd53ef5076dc"
+  },
+  "dependencies": [
+    {
+      "name": "asm-9.11.1.jar",
+      "url": "https://repo.maven.apache.org/maven2/org/ow2/asm/asm/9.11.1/asm-9.11.1.jar",
+      "bytes": 131138,
+      "sha256": "ae4e6e10d59d0a1500317764b21881ad883f8550e33c66e6142f7032c6fb566c"
+    }
+  ],
+  "class_observations": 22,
+  "all_expected": true,
+  "mismatches": [],
+  "observations": [
+    {
+      "fixture": "baseline",
+      "debug": "none",
+      "facts": {
+        "name_matches": 1,
+        "exact_matches": 1,
+        "return_opcodes": 1,
+        "throw_opcodes": 0,
+        "exact_hook_calls": 1,
+        "owner_omitted_hook_calls": 1
+      },
+      "expected": {
+        "name_matches": 1,
+        "exact_matches": 1,
+        "return_opcodes": 1,
+        "throw_opcodes": 0,
+        "exact_hook_calls": 1,
+        "owner_omitted_hook_calls": 1
+      },
+      "matches_expected": true,
+      "matching_call_context": [
+        {
+          "matching_ordinal": 0,
+          "instruction": {
+            "index": 1,
+            "opcode": 184,
+            "owner": "lab/Target",
+            "name": "hook",
+            "descriptor": "(I)I",
+            "interface": false
+          },
+          "preceding_instruction": {
+            "index": 0,
+            "opcode": 21,
+            "variable": 0
+          }
+        }
+      ]
+    },
+    {
+      "fixture": "baseline",
+      "debug": "all",
+      "facts": {
+        "name_matches": 1,
+        "exact_matches": 1,
+        "return_opcodes": 1,
+        "throw_opcodes": 0,
+        "exact_hook_calls": 1,
+        "owner_omitted_hook_calls": 1
+      },
+      "expected": {
+        "name_matches": 1,
+        "exact_matches": 1,
+        "return_opcodes": 1,
+        "throw_opcodes": 0,
+        "exact_hook_calls": 1,
+        "owner_omitted_hook_calls": 1
+      },
+      "matches_expected": true,
+      "matching_call_context": [
+        {
+          "matching_ordinal": 0,
+          "instruction": {
+            "index": 1,
+            "opcode": 184,
+            "owner": "lab/Target",
+            "name": "hook",
+            "descriptor": "(I)I",
+            "interface": false
+          },
+          "preceding_instruction": {
+            "index": 0,
+            "opcode": 21,
+            "variable": 0
+          }
+        }
+      ]
+    },
+    {
+      "fixture": "overload",
+      "debug": "none",
+      "facts": {
+        "name_matches": 2,
+        "exact_matches": 1,
+        "return_opcodes": 1,
+        "throw_opcodes": 0,
+        "exact_hook_calls": 1,
+        "owner_omitted_hook_calls": 1
+      },
+      "expected": {
+        "name_matches": 2,
+        "exact_matches": 1,
+        "return_opcodes": 1,
+        "throw_opcodes": 0,
+        "exact_hook_calls": 1,
+        "owner_omitted_hook_calls": 1
+      },
+      "matches_expected": true,
+      "matching_call_context": [
+        {
+          "matching_ordinal": 0,
+          "instruction": {
+            "index": 1,
+            "opcode": 184,
+            "owner": "lab/Target",
+            "name": "hook",
+            "descriptor": "(I)I",
+            "interface": false
+          },
+          "preceding_instruction": {
+            "index": 0,
+            "opcode": 21,
+            "variable": 0
+          }
+        }
+      ]
+    },
+    {
+      "fixture": "overload",
+      "debug": "all",
+      "facts": {
+        "name_matches": 2,
+        "exact_matches": 1,
+        "return_opcodes": 1,
+        "throw_opcodes": 0,
+        "exact_hook_calls": 1,
+        "owner_omitted_hook_calls": 1
+      },
+      "expected": {
+        "name_matches": 2,
+        "exact_matches": 1,
+        "return_opcodes": 1,
+        "throw_opcodes": 0,
+        "exact_hook_calls": 1,
+        "owner_omitted_hook_calls": 1
+      },
+      "matches_expected": true,
+      "matching_call_context": [
+        {
+          "matching_ordinal": 0,
+          "instruction": {
+            "index": 1,
+            "opcode": 184,
+            "owner": "lab/Target",
+            "name": "hook",
+            "descriptor": "(I)I",
+            "interface": false
+          },
+          "preceding_instruction": {
+            "index": 0,
+            "opcode": 21,
+            "variable": 0
+          }
+        }
+      ]
+    },
+    {
+      "fixture": "descriptor_drift",
+      "debug": "none",
+      "facts": {
+        "name_matches": 1,
+        "exact_matches": 0,
+        "return_opcodes": 0,
+        "throw_opcodes": 0,
+        "exact_hook_calls": 0,
+        "owner_omitted_hook_calls": 0
+      },
+      "expected": {
+        "name_matches": 1,
+        "exact_matches": 0,
+        "return_opcodes": 0,
+        "throw_opcodes": 0,
+        "exact_hook_calls": 0,
+        "owner_omitted_hook_calls": 0
+      },
+      "matches_expected": true,
+      "matching_call_context": []
+    },
+    {
+      "fixture": "descriptor_drift",
+      "debug": "all",
+      "facts": {
+        "name_matches": 1,
+        "exact_matches": 0,
+        "return_opcodes": 0,
+        "throw_opcodes": 0,
+        "exact_hook_calls": 0,
+        "owner_omitted_hook_calls": 0
+      },
+      "expected": {
+        "name_matches": 1,
+        "exact_matches": 0,
+        "return_opcodes": 0,
+        "throw_opcodes": 0,
+        "exact_hook_calls": 0,
+        "owner_omitted_hook_calls": 0
+      },
+      "matches_expected": true,
+      "matching_call_context": []
+    },
+    {
+      "fixture": "extra_return",
+      "debug": "none",
+      "facts": {
+        "name_matches": 1,
+        "exact_matches": 1,
+        "return_opcodes": 2,
+        "throw_opcodes": 0,
+        "exact_hook_calls": 1,
+        "owner_omitted_hook_calls": 1
+      },
+      "expected": {
+        "name_matches": 1,
+        "exact_matches": 1,
+        "return_opcodes": 2,
+        "throw_opcodes": 0,
+        "exact_hook_calls": 1,
+        "owner_omitted_hook_calls": 1
+      },
+      "matches_expected": true,
+      "matching_call_context": [
+        {
+          "matching_ordinal": 0,
+          "instruction": {
+            "index": 5,
+            "opcode": 184,
+            "owner": "lab/Target",
+            "name": "hook",
+            "descriptor": "(I)I",
+            "interface": false
+          },
+          "preceding_instruction": {
+            "index": 4,
+            "opcode": 21,
+            "variable": 0
+          }
+        }
+      ]
+    },
+    {
+      "fixture": "extra_return",
+      "debug": "all",
+      "facts": {
+        "name_matches": 1,
+        "exact_matches": 1,
+        "return_opcodes": 2,
+        "throw_opcodes": 0,
+        "exact_hook_calls": 1,
+        "owner_omitted_hook_calls": 1
+      },
+      "expected": {
+        "name_matches": 1,
+        "exact_matches": 1,
+        "return_opcodes": 2,
+        "throw_opcodes": 0,
+        "exact_hook_calls": 1,
+        "owner_omitted_hook_calls": 1
+      },
+      "matches_expected": true,
+      "matching_call_context": [
+        {
+          "matching_ordinal": 0,
+          "instruction": {
+            "index": 5,
+            "opcode": 184,
+            "owner": "lab/Target",
+            "name": "hook",
+            "descriptor": "(I)I",
+            "interface": false
+          },
+          "preceding_instruction": {
+            "index": 4,
+            "opcode": 21,
+            "variable": 0
+          }
+        }
+      ]
+    },
+    {
+      "fixture": "throw_path",
+      "debug": "none",
+      "facts": {
+        "name_matches": 1,
+        "exact_matches": 1,
+        "return_opcodes": 1,
+        "throw_opcodes": 1,
+        "exact_hook_calls": 1,
+        "owner_omitted_hook_calls": 1
+      },
+      "expected": {
+        "name_matches": 1,
+        "exact_matches": 1,
+        "return_opcodes": 1,
+        "throw_opcodes": 1,
+        "exact_hook_calls": 1,
+        "owner_omitted_hook_calls": 1
+      },
+      "matches_expected": true,
+      "matching_call_context": [
+        {
+          "matching_ordinal": 0,
+          "instruction": {
+            "index": 8,
+            "opcode": 184,
+            "owner": "lab/Target",
+            "name": "hook",
+            "descriptor": "(I)I",
+            "interface": false
+          },
+          "preceding_instruction": {
+            "index": 7,
+            "opcode": 21,
+            "variable": 0
+          }
+        }
+      ]
+    },
+    {
+      "fixture": "throw_path",
+      "debug": "all",
+      "facts": {
+        "name_matches": 1,
+        "exact_matches": 1,
+        "return_opcodes": 1,
+        "throw_opcodes": 1,
+        "exact_hook_calls": 1,
+        "owner_omitted_hook_calls": 1
+      },
+      "expected": {
+        "name_matches": 1,
+        "exact_matches": 1,
+        "return_opcodes": 1,
+        "throw_opcodes": 1,
+        "exact_hook_calls": 1,
+        "owner_omitted_hook_calls": 1
+      },
+      "matches_expected": true,
+      "matching_call_context": [
+        {
+          "matching_ordinal": 0,
+          "instruction": {
+            "index": 8,
+            "opcode": 184,
+            "owner": "lab/Target",
+            "name": "hook",
+            "descriptor": "(I)I",
+            "interface": false
+          },
+          "preceding_instruction": {
+            "index": 7,
+            "opcode": 21,
+            "variable": 0
+          }
+        }
+      ]
+    },
+    {
+      "fixture": "always_throw",
+      "debug": "none",
+      "facts": {
+        "name_matches": 1,
+        "exact_matches": 1,
+        "return_opcodes": 0,
+        "throw_opcodes": 1,
+        "exact_hook_calls": 0,
+        "owner_omitted_hook_calls": 0
+      },
+      "expected": {
+        "name_matches": 1,
+        "exact_matches": 1,
+        "return_opcodes": 0,
+        "throw_opcodes": 1,
+        "exact_hook_calls": 0,
+        "owner_omitted_hook_calls": 0
+      },
+      "matches_expected": true,
+      "matching_call_context": []
+    },
+    {
+      "fixture": "always_throw",
+      "debug": "all",
+      "facts": {
+        "name_matches": 1,
+        "exact_matches": 1,
+        "return_opcodes": 0,
+        "throw_opcodes": 1,
+        "exact_hook_calls": 0,
+        "owner_omitted_hook_calls": 0
+      },
+      "expected": {
+        "name_matches": 1,
+        "exact_matches": 1,
+        "return_opcodes": 0,
+        "throw_opcodes": 1,
+        "exact_hook_calls": 0,
+        "owner_omitted_hook_calls": 0
+      },
+      "matches_expected": true,
+      "matching_call_context": []
+    },
+    {
+      "fixture": "extra_call",
+      "debug": "none",
+      "facts": {
+        "name_matches": 1,
+        "exact_matches": 1,
+        "return_opcodes": 1,
+        "throw_opcodes": 0,
+        "exact_hook_calls": 2,
+        "owner_omitted_hook_calls": 2
+      },
+      "expected": {
+        "name_matches": 1,
+        "exact_matches": 1,
+        "return_opcodes": 1,
+        "throw_opcodes": 0,
+        "exact_hook_calls": 2,
+        "owner_omitted_hook_calls": 2
+      },
+      "matches_expected": true,
+      "matching_call_context": [
+        {
+          "matching_ordinal": 0,
+          "instruction": {
+            "index": 1,
+            "opcode": 184,
+            "owner": "lab/Target",
+            "name": "hook",
+            "descriptor": "(I)I",
+            "interface": false
+          },
+          "preceding_instruction": {
+            "index": 0,
+            "opcode": 16,
+            "operand": 100
+          }
+        },
+        {
+          "matching_ordinal": 1,
+          "instruction": {
+            "index": 4,
+            "opcode": 184,
+            "owner": "lab/Target",
+            "name": "hook",
+            "descriptor": "(I)I",
+            "interface": false
+          },
+          "preceding_instruction": {
+            "index": 3,
+            "opcode": 21,
+            "variable": 0
+          }
+        }
+      ]
+    },
+    {
+      "fixture": "extra_call",
+      "debug": "all",
+      "facts": {
+        "name_matches": 1,
+        "exact_matches": 1,
+        "return_opcodes": 1,
+        "throw_opcodes": 0,
+        "exact_hook_calls": 2,
+        "owner_omitted_hook_calls": 2
+      },
+      "expected": {
+        "name_matches": 1,
+        "exact_matches": 1,
+        "return_opcodes": 1,
+        "throw_opcodes": 0,
+        "exact_hook_calls": 2,
+        "owner_omitted_hook_calls": 2
+      },
+      "matches_expected": true,
+      "matching_call_context": [
+        {
+          "matching_ordinal": 0,
+          "instruction": {
+            "index": 1,
+            "opcode": 184,
+            "owner": "lab/Target",
+            "name": "hook",
+            "descriptor": "(I)I",
+            "interface": false
+          },
+          "preceding_instruction": {
+            "index": 0,
+            "opcode": 16,
+            "operand": 100
+          }
+        },
+        {
+          "matching_ordinal": 1,
+          "instruction": {
+            "index": 4,
+            "opcode": 184,
+            "owner": "lab/Target",
+            "name": "hook",
+            "descriptor": "(I)I",
+            "interface": false
+          },
+          "preceding_instruction": {
+            "index": 3,
+            "opcode": 21,
+            "variable": 0
+          }
+        }
+      ]
+    },
+    {
+      "fixture": "same_count_drift",
+      "debug": "none",
+      "facts": {
+        "name_matches": 1,
+        "exact_matches": 1,
+        "return_opcodes": 1,
+        "throw_opcodes": 0,
+        "exact_hook_calls": 1,
+        "owner_omitted_hook_calls": 1
+      },
+      "expected": {
+        "name_matches": 1,
+        "exact_matches": 1,
+        "return_opcodes": 1,
+        "throw_opcodes": 0,
+        "exact_hook_calls": 1,
+        "owner_omitted_hook_calls": 1
+      },
+      "matches_expected": true,
+      "matching_call_context": [
+        {
+          "matching_ordinal": 0,
+          "instruction": {
+            "index": 1,
+            "opcode": 184,
+            "owner": "lab/Target",
+            "name": "hook",
+            "descriptor": "(I)I",
+            "interface": false
+          },
+          "preceding_instruction": {
+            "index": 0,
+            "opcode": 16,
+            "operand": 100
+          }
+        }
+      ]
+    },
+    {
+      "fixture": "same_count_drift",
+      "debug": "all",
+      "facts": {
+        "name_matches": 1,
+        "exact_matches": 1,
+        "return_opcodes": 1,
+        "throw_opcodes": 0,
+        "exact_hook_calls": 1,
+        "owner_omitted_hook_calls": 1
+      },
+      "expected": {
+        "name_matches": 1,
+        "exact_matches": 1,
+        "return_opcodes": 1,
+        "throw_opcodes": 0,
+        "exact_hook_calls": 1,
+        "owner_omitted_hook_calls": 1
+      },
+      "matches_expected": true,
+      "matching_call_context": [
+        {
+          "matching_ordinal": 0,
+          "instruction": {
+            "index": 1,
+            "opcode": 184,
+            "owner": "lab/Target",
+            "name": "hook",
+            "descriptor": "(I)I",
+            "interface": false
+          },
+          "preceding_instruction": {
+            "index": 0,
+            "opcode": 16,
+            "operand": 100
+          }
+        }
+      ]
+    },
+    {
+      "fixture": "different_owner",
+      "debug": "none",
+      "facts": {
+        "name_matches": 1,
+        "exact_matches": 1,
+        "return_opcodes": 1,
+        "throw_opcodes": 0,
+        "exact_hook_calls": 0,
+        "owner_omitted_hook_calls": 1
+      },
+      "expected": {
+        "name_matches": 1,
+        "exact_matches": 1,
+        "return_opcodes": 1,
+        "throw_opcodes": 0,
+        "exact_hook_calls": 0,
+        "owner_omitted_hook_calls": 1
+      },
+      "matches_expected": true,
+      "matching_call_context": []
+    },
+    {
+      "fixture": "different_owner",
+      "debug": "all",
+      "facts": {
+        "name_matches": 1,
+        "exact_matches": 1,
+        "return_opcodes": 1,
+        "throw_opcodes": 0,
+        "exact_hook_calls": 0,
+        "owner_omitted_hook_calls": 1
+      },
+      "expected": {
+        "name_matches": 1,
+        "exact_matches": 1,
+        "return_opcodes": 1,
+        "throw_opcodes": 0,
+        "exact_hook_calls": 0,
+        "owner_omitted_hook_calls": 1
+      },
+      "matches_expected": true,
+      "matching_call_context": []
+    },
+    {
+      "fixture": "unrelated_call",
+      "debug": "none",
+      "facts": {
+        "name_matches": 1,
+        "exact_matches": 1,
+        "return_opcodes": 1,
+        "throw_opcodes": 0,
+        "exact_hook_calls": 1,
+        "owner_omitted_hook_calls": 1
+      },
+      "expected": {
+        "name_matches": 1,
+        "exact_matches": 1,
+        "return_opcodes": 1,
+        "throw_opcodes": 0,
+        "exact_hook_calls": 1,
+        "owner_omitted_hook_calls": 1
+      },
+      "matches_expected": true,
+      "matching_call_context": [
+        {
+          "matching_ordinal": 0,
+          "instruction": {
+            "index": 4,
+            "opcode": 184,
+            "owner": "lab/Target",
+            "name": "hook",
+            "descriptor": "(I)I",
+            "interface": false
+          },
+          "preceding_instruction": {
+            "index": 3,
+            "opcode": 21,
+            "variable": 1
+          }
+        }
+      ]
+    },
+    {
+      "fixture": "unrelated_call",
+      "debug": "all",
+      "facts": {
+        "name_matches": 1,
+        "exact_matches": 1,
+        "return_opcodes": 1,
+        "throw_opcodes": 0,
+        "exact_hook_calls": 1,
+        "owner_omitted_hook_calls": 1
+      },
+      "expected": {
+        "name_matches": 1,
+        "exact_matches": 1,
+        "return_opcodes": 1,
+        "throw_opcodes": 0,
+        "exact_hook_calls": 1,
+        "owner_omitted_hook_calls": 1
+      },
+      "matches_expected": true,
+      "matching_call_context": [
+        {
+          "matching_ordinal": 0,
+          "instruction": {
+            "index": 4,
+            "opcode": 184,
+            "owner": "lab/Target",
+            "name": "hook",
+            "descriptor": "(I)I",
+            "interface": false
+          },
+          "preceding_instruction": {
+            "index": 3,
+            "opcode": 21,
+            "variable": 1
+          }
+        }
+      ]
+    },
+    {
+      "fixture": "nested_call",
+      "debug": "none",
+      "facts": {
+        "name_matches": 1,
+        "exact_matches": 1,
+        "return_opcodes": 1,
+        "throw_opcodes": 0,
+        "exact_hook_calls": 2,
+        "owner_omitted_hook_calls": 2
+      },
+      "expected": {
+        "name_matches": 1,
+        "exact_matches": 1,
+        "return_opcodes": 1,
+        "throw_opcodes": 0,
+        "exact_hook_calls": 2,
+        "owner_omitted_hook_calls": 2
+      },
+      "matches_expected": true,
+      "matching_call_context": [
+        {
+          "matching_ordinal": 0,
+          "instruction": {
+            "index": 1,
+            "opcode": 184,
+            "owner": "lab/Target",
+            "name": "hook",
+            "descriptor": "(I)I",
+            "interface": false
+          },
+          "preceding_instruction": {
+            "index": 0,
+            "opcode": 21,
+            "variable": 0
+          }
+        },
+        {
+          "matching_ordinal": 1,
+          "instruction": {
+            "index": 2,
+            "opcode": 184,
+            "owner": "lab/Target",
+            "name": "hook",
+            "descriptor": "(I)I",
+            "interface": false
+          },
+          "preceding_instruction": {
+            "index": 1,
+            "opcode": 184,
+            "owner": "lab/Target",
+            "name": "hook",
+            "descriptor": "(I)I",
+            "interface": false
+          }
+        }
+      ]
+    },
+    {
+      "fixture": "nested_call",
+      "debug": "all",
+      "facts": {
+        "name_matches": 1,
+        "exact_matches": 1,
+        "return_opcodes": 1,
+        "throw_opcodes": 0,
+        "exact_hook_calls": 2,
+        "owner_omitted_hook_calls": 2
+      },
+      "expected": {
+        "name_matches": 1,
+        "exact_matches": 1,
+        "return_opcodes": 1,
+        "throw_opcodes": 0,
+        "exact_hook_calls": 2,
+        "owner_omitted_hook_calls": 2
+      },
+      "matches_expected": true,
+      "matching_call_context": [
+        {
+          "matching_ordinal": 0,
+          "instruction": {
+            "index": 1,
+            "opcode": 184,
+            "owner": "lab/Target",
+            "name": "hook",
+            "descriptor": "(I)I",
+            "interface": false
+          },
+          "preceding_instruction": {
+            "index": 0,
+            "opcode": 21,
+            "variable": 0
+          }
+        },
+        {
+          "matching_ordinal": 1,
+          "instruction": {
+            "index": 2,
+            "opcode": 184,
+            "owner": "lab/Target",
+            "name": "hook",
+            "descriptor": "(I)I",
+            "interface": false
+          },
+          "preceding_instruction": {
+            "index": 1,
+            "opcode": 184,
+            "owner": "lab/Target",
+            "name": "hook",
+            "descriptor": "(I)I",
+            "interface": false
+          }
+        }
+      ]
+    }
+  ],
+  "debug_comparisons": [
+    {
+      "fixture": "baseline",
+      "artifact_hash_equal": false,
+      "inspected_methods_equal": true
+    },
+    {
+      "fixture": "overload",
+      "artifact_hash_equal": false,
+      "inspected_methods_equal": true
+    },
+    {
+      "fixture": "descriptor_drift",
+      "artifact_hash_equal": false,
+      "inspected_methods_equal": true
+    },
+    {
+      "fixture": "extra_return",
+      "artifact_hash_equal": false,
+      "inspected_methods_equal": true
+    },
+    {
+      "fixture": "throw_path",
+      "artifact_hash_equal": false,
+      "inspected_methods_equal": true
+    },
+    {
+      "fixture": "always_throw",
+      "artifact_hash_equal": false,
+      "inspected_methods_equal": true
+    },
+    {
+      "fixture": "extra_call",
+      "artifact_hash_equal": false,
+      "inspected_methods_equal": true
+    },
+    {
+      "fixture": "same_count_drift",
+      "artifact_hash_equal": false,
+      "inspected_methods_equal": true
+    },
+    {
+      "fixture": "different_owner",
+      "artifact_hash_equal": false,
+      "inspected_methods_equal": true
+    },
+    {
+      "fixture": "unrelated_call",
+      "artifact_hash_equal": false,
+      "inspected_methods_equal": true
+    },
+    {
+      "fixture": "nested_call",
+      "artifact_hash_equal": false,
+      "inspected_methods_equal": true
+    }
+  ],
+  "inventory": [
+    {
+      "fixture": "baseline",
+      "debug": "none",
+      "class_name": "lab/Target",
+      "class_major": 65,
+      "class_bytes": 258,
+      "class_sha256": "8b30b5d71e938bb9eaac6e6e7b82877b6120402239eb967f92c889fae3226f73",
+      "methods": [
+        {
+          "name": "<init>",
+          "descriptor": "()V",
+          "access": 0,
+          "instructions": [
+            {
+              "index": 0,
+              "opcode": 25,
+              "variable": 0
+            },
+            {
+              "index": 1,
+              "opcode": 183,
+              "owner": "java/lang/Object",
+              "name": "<init>",
+              "descriptor": "()V",
+              "interface": false
+            },
+            {
+              "index": 2,
+              "opcode": 177
+            }
+          ]
+        },
+        {
+          "name": "hook",
+          "descriptor": "(I)I",
+          "access": 8,
+          "instructions": [
+            {
+              "index": 0,
+              "opcode": 21,
+              "variable": 0
+            },
+            {
+              "index": 1,
+              "opcode": 4
+            },
+            {
+              "index": 2,
+              "opcode": 96
+            },
+            {
+              "index": 3,
+              "opcode": 172
+            }
+          ]
+        },
+        {
+          "name": "other",
+          "descriptor": "(I)I",
+          "access": 8,
+          "instructions": [
+            {
+              "index": 0,
+              "opcode": 21,
+              "variable": 0
+            },
+            {
+              "index": 1,
+              "opcode": 5
+            },
+            {
+              "index": 2,
+              "opcode": 104
+            },
+            {
+              "index": 3,
+              "opcode": 172
+            }
+          ]
+        },
+        {
+          "name": "compute",
+          "descriptor": "(I)I",
+          "access": 8,
+          "instructions": [
+            {
+              "index": 0,
+              "opcode": 21,
+              "variable": 0
+            },
+            {
+              "index": 1,
+              "opcode": 184,
+              "owner": "lab/Target",
+              "name": "hook",
+              "descriptor": "(I)I",
+              "interface": false
+            },
+            {
+              "index": 2,
+              "opcode": 172
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "fixture": "baseline",
+      "debug": "all",
+      "class_name": "lab/Target",
+      "class_major": 65,
+      "class_bytes": 482,
+      "class_sha256": "617e2969b6471a35324e4a13c56b579d0700cda85517d38ae54b4a7147607e82",
+      "methods": [
+        {
+          "name": "<init>",
+          "descriptor": "()V",
+          "access": 0,
+          "instructions": [
+            {
+              "index": 0,
+              "opcode": 25,
+              "variable": 0
+            },
+            {
+              "index": 1,
+              "opcode": 183,
+              "owner": "java/lang/Object",
+              "name": "<init>",
+              "descriptor": "()V",
+              "interface": false
+            },
+            {
+              "index": 2,
+              "opcode": 177
+            }
+          ]
+        },
+        {
+          "name": "hook",
+          "descriptor": "(I)I",
+          "access": 8,
+          "instructions": [
+            {
+              "index": 0,
+              "opcode": 21,
+              "variable": 0
+            },
+            {
+              "index": 1,
+              "opcode": 4
+            },
+            {
+              "index": 2,
+              "opcode": 96
+            },
+            {
+              "index": 3,
+              "opcode": 172
+            }
+          ]
+        },
+        {
+          "name": "other",
+          "descriptor": "(I)I",
+          "access": 8,
+          "instructions": [
+            {
+              "index": 0,
+              "opcode": 21,
+              "variable": 0
+            },
+            {
+              "index": 1,
+              "opcode": 5
+            },
+            {
+              "index": 2,
+              "opcode": 104
+            },
+            {
+              "index": 3,
+              "opcode": 172
+            }
+          ]
+        },
+        {
+          "name": "compute",
+          "descriptor": "(I)I",
+          "access": 8,
+          "instructions": [
+            {
+              "index": 0,
+              "opcode": 21,
+              "variable": 0
+            },
+            {
+              "index": 1,
+              "opcode": 184,
+              "owner": "lab/Target",
+              "name": "hook",
+              "descriptor": "(I)I",
+              "interface": false
+            },
+            {
+              "index": 2,
+              "opcode": 172
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "fixture": "overload",
+      "debug": "none",
+      "class_name": "lab/Target",
+      "class_major": 65,
+      "class_bytes": 293,
+      "class_sha256": "e2eb71d016e74b31b5bfaadb6e917113afbced9c74e157a7b20692db40e7d7a5",
+      "methods": [
+        {
+          "name": "<init>",
+          "descriptor": "()V",
+          "access": 0,
+          "instructions": [
+            {
+              "index": 0,
+              "opcode": 25,
+              "variable": 0
+            },
+            {
+              "index": 1,
+              "opcode": 183,
+              "owner": "java/lang/Object",
+              "name": "<init>",
+              "descriptor": "()V",
+              "interface": false
+            },
+            {
+              "index": 2,
+              "opcode": 177
+            }
+          ]
+        },
+        {
+          "name": "hook",
+          "descriptor": "(I)I",
+          "access": 8,
+          "instructions": [
+            {
+              "index": 0,
+              "opcode": 21,
+              "variable": 0
+            },
+            {
+              "index": 1,
+              "opcode": 4
+            },
+            {
+              "index": 2,
+              "opcode": 96
+            },
+            {
+              "index": 3,
+              "opcode": 172
+            }
+          ]
+        },
+        {
+          "name": "other",
+          "descriptor": "(I)I",
+          "access": 8,
+          "instructions": [
+            {
+              "index": 0,
+              "opcode": 21,
+              "variable": 0
+            },
+            {
+              "index": 1,
+              "opcode": 5
+            },
+            {
+              "index": 2,
+              "opcode": 104
+            },
+            {
+              "index": 3,
+              "opcode": 172
+            }
+          ]
+        },
+        {
+          "name": "compute",
+          "descriptor": "(I)I",
+          "access": 8,
+          "instructions": [
+            {
+              "index": 0,
+              "opcode": 21,
+              "variable": 0
+            },
+            {
+              "index": 1,
+              "opcode": 184,
+              "owner": "lab/Target",
+              "name": "hook",
+              "descriptor": "(I)I",
+              "interface": false
+            },
+            {
+              "index": 2,
+              "opcode": 172
+            }
+          ]
+        },
+        {
+          "name": "compute",
+          "descriptor": "(J)J",
+          "access": 8,
+          "instructions": [
+            {
+              "index": 0,
+              "opcode": 22,
+              "variable": 0
+            },
+            {
+              "index": 1,
+              "opcode": 173
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "fixture": "overload",
+      "debug": "all",
+      "class_name": "lab/Target",
+      "class_major": 65,
+      "class_bytes": 551,
+      "class_sha256": "8a0ea298633bd8fd7f650de6c16b8c7ab3b24b8f5483302fb7bd4b9f4652efa5",
+      "methods": [
+        {
+          "name": "<init>",
+          "descriptor": "()V",
+          "access": 0,
+          "instructions": [
+            {
+              "index": 0,
+              "opcode": 25,
+              "variable": 0
+            },
+            {
+              "index": 1,
+              "opcode": 183,
+              "owner": "java/lang/Object",
+              "name": "<init>",
+              "descriptor": "()V",
+              "interface": false
+            },
+            {
+              "index": 2,
+              "opcode": 177
+            }
+          ]
+        },
+        {
+          "name": "hook",
+          "descriptor": "(I)I",
+          "access": 8,
+          "instructions": [
+            {
+              "index": 0,
+              "opcode": 21,
+              "variable": 0
+            },
+            {
+              "index": 1,
+              "opcode": 4
+            },
+            {
+              "index": 2,
+              "opcode": 96
+            },
+            {
+              "index": 3,
+              "opcode": 172
+            }
+          ]
+        },
+        {
+          "name": "other",
+          "descriptor": "(I)I",
+          "access": 8,
+          "instructions": [
+            {
+              "index": 0,
+              "opcode": 21,
+              "variable": 0
+            },
+            {
+              "index": 1,
+              "opcode": 5
+            },
+            {
+              "index": 2,
+              "opcode": 104
+            },
+            {
+              "index": 3,
+              "opcode": 172
+            }
+          ]
+        },
+        {
+          "name": "compute",
+          "descriptor": "(I)I",
+          "access": 8,
+          "instructions": [
+            {
+              "index": 0,
+              "opcode": 21,
+              "variable": 0
+            },
+            {
+              "index": 1,
+              "opcode": 184,
+              "owner": "lab/Target",
+              "name": "hook",
+              "descriptor": "(I)I",
+              "interface": false
+            },
+            {
+              "index": 2,
+              "opcode": 172
+            }
+          ]
+        },
+        {
+          "name": "compute",
+          "descriptor": "(J)J",
+          "access": 8,
+          "instructions": [
+            {
+              "index": 0,
+              "opcode": 22,
+              "variable": 0
+            },
+            {
+              "index": 1,
+              "opcode": 173
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "fixture": "descriptor_drift",
+      "debug": "none",
+      "class_name": "lab/Target",
+      "class_major": 65,
+      "class_bytes": 252,
+      "class_sha256": "ede55600c6308d6e34784727d34d3b1de3956fb28d906d4f6aecaa58ff0dba74",
+      "methods": [
+        {
+          "name": "<init>",
+          "descriptor": "()V",
+          "access": 0,
+          "instructions": [
+            {
+              "index": 0,
+              "opcode": 25,
+              "variable": 0
+            },
+            {
+              "index": 1,
+              "opcode": 183,
+              "owner": "java/lang/Object",
+              "name": "<init>",
+              "descriptor": "()V",
+              "interface": false
+            },
+            {
+              "index": 2,
+              "opcode": 177
+            }
+          ]
+        },
+        {
+          "name": "hook",
+          "descriptor": "(I)I",
+          "access": 8,
+          "instructions": [
+            {
+              "index": 0,
+              "opcode": 21,
+              "variable": 0
+            },
+            {
+              "index": 1,
+              "opcode": 4
+            },
+            {
+              "index": 2,
+              "opcode": 96
+            },
+            {
+              "index": 3,
+              "opcode": 172
+            }
+          ]
+        },
+        {
+          "name": "other",
+          "descriptor": "(I)I",
+          "access": 8,
+          "instructions": [
+            {
+              "index": 0,
+              "opcode": 21,
+              "variable": 0
+            },
+            {
+              "index": 1,
+              "opcode": 5
+            },
+            {
+              "index": 2,
+              "opcode": 104
+            },
+            {
+              "index": 3,
+              "opcode": 172
+            }
+          ]
+        },
+        {
+          "name": "compute",
+          "descriptor": "(J)J",
+          "access": 8,
+          "instructions": [
+            {
+              "index": 0,
+              "opcode": 22,
+              "variable": 0
+            },
+            {
+              "index": 1,
+              "opcode": 173
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "fixture": "descriptor_drift",
+      "debug": "all",
+      "class_name": "lab/Target",
+      "class_major": 65,
+      "class_bytes": 480,
+      "class_sha256": "37f1ab6d439629f9a8867be79fefea5e25bbb91f04b878fca5c484c4dd21cc75",
+      "methods": [
+        {
+          "name": "<init>",
+          "descriptor": "()V",
+          "access": 0,
+          "instructions": [
+            {
+              "index": 0,
+              "opcode": 25,
+              "variable": 0
+            },
+            {
+              "index": 1,
+              "opcode": 183,
+              "owner": "java/lang/Object",
+              "name": "<init>",
+              "descriptor": "()V",
+              "interface": false
+            },
+            {
+              "index": 2,
+              "opcode": 177
+            }
+          ]
+        },
+        {
+          "name": "hook",
+          "descriptor": "(I)I",
+          "access": 8,
+          "instructions": [
+            {
+              "index": 0,
+              "opcode": 21,
+              "variable": 0
+            },
+            {
+              "index": 1,
+              "opcode": 4
+            },
+            {
+              "index": 2,
+              "opcode": 96
+            },
+            {
+              "index": 3,
+              "opcode": 172
+            }
+          ]
+        },
+        {
+          "name": "other",
+          "descriptor": "(I)I",
+          "access": 8,
+          "instructions": [
+            {
+              "index": 0,
+              "opcode": 21,
+              "variable": 0
+            },
+            {
+              "index": 1,
+              "opcode": 5
+            },
+            {
+              "index": 2,
+              "opcode": 104
+            },
+            {
+              "index": 3,
+              "opcode": 172
+            }
+          ]
+        },
+        {
+          "name": "compute",
+          "descriptor": "(J)J",
+          "access": 8,
+          "instructions": [
+            {
+              "index": 0,
+              "opcode": 22,
+              "variable": 0
+            },
+            {
+              "index": 1,
+              "opcode": 173
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "fixture": "extra_return",
+      "debug": "none",
+      "class_name": "lab/Target",
+      "class_major": 65,
+      "class_bytes": 289,
+      "class_sha256": "9b16d927e943f2b5fee4dcd02e41f6a7eaa0c455158dd65152f58817cee6aff6",
+      "methods": [
+        {
+          "name": "<init>",
+          "descriptor": "()V",
+          "access": 0,
+          "instructions": [
+            {
+              "index": 0,
+              "opcode": 25,
+              "variable": 0
+            },
+            {
+              "index": 1,
+              "opcode": 183,
+              "owner": "java/lang/Object",
+              "name": "<init>",
+              "descriptor": "()V",
+              "interface": false
+            },
+            {
+              "index": 2,
+              "opcode": 177
+            }
+          ]
+        },
+        {
+          "name": "hook",
+          "descriptor": "(I)I",
+          "access": 8,
+          "instructions": [
+            {
+              "index": 0,
+              "opcode": 21,
+              "variable": 0
+            },
+            {
+              "index": 1,
+              "opcode": 4
+            },
+            {
+              "index": 2,
+              "opcode": 96
+            },
+            {
+              "index": 3,
+              "opcode": 172
+            }
+          ]
+        },
+        {
+          "name": "other",
+          "descriptor": "(I)I",
+          "access": 8,
+          "instructions": [
+            {
+              "index": 0,
+              "opcode": 21,
+              "variable": 0
+            },
+            {
+              "index": 1,
+              "opcode": 5
+            },
+            {
+              "index": 2,
+              "opcode": 104
+            },
+            {
+              "index": 3,
+              "opcode": 172
+            }
+          ]
+        },
+        {
+          "name": "compute",
+          "descriptor": "(I)I",
+          "access": 8,
+          "instructions": [
+            {
+              "index": 0,
+              "opcode": 21,
+              "variable": 0
+            },
+            {
+              "index": 1,
+              "opcode": 156
+            },
+            {
+              "index": 2,
+              "opcode": 2
+            },
+            {
+              "index": 3,
+              "opcode": 172
+            },
+            {
+              "index": 4,
+              "opcode": 21,
+              "variable": 0
+            },
+            {
+              "index": 5,
+              "opcode": 184,
+              "owner": "lab/Target",
+              "name": "hook",
+              "descriptor": "(I)I",
+              "interface": false
+            },
+            {
+              "index": 6,
+              "opcode": 172
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "fixture": "extra_return",
+      "debug": "all",
+      "class_name": "lab/Target",
+      "class_major": 65,
+      "class_bytes": 513,
+      "class_sha256": "112ab441060c47bafbe08cdb6f126bf06ed7f30c3d19fea82bce5b49594f03ba",
+      "methods": [
+        {
+          "name": "<init>",
+          "descriptor": "()V",
+          "access": 0,
+          "instructions": [
+            {
+              "index": 0,
+              "opcode": 25,
+              "variable": 0
+            },
+            {
+              "index": 1,
+              "opcode": 183,
+              "owner": "java/lang/Object",
+              "name": "<init>",
+              "descriptor": "()V",
+              "interface": false
+            },
+            {
+              "index": 2,
+              "opcode": 177
+            }
+          ]
+        },
+        {
+          "name": "hook",
+          "descriptor": "(I)I",
+          "access": 8,
+          "instructions": [
+            {
+              "index": 0,
+              "opcode": 21,
+              "variable": 0
+            },
+            {
+              "index": 1,
+              "opcode": 4
+            },
+            {
+              "index": 2,
+              "opcode": 96
+            },
+            {
+              "index": 3,
+              "opcode": 172
+            }
+          ]
+        },
+        {
+          "name": "other",
+          "descriptor": "(I)I",
+          "access": 8,
+          "instructions": [
+            {
+              "index": 0,
+              "opcode": 21,
+              "variable": 0
+            },
+            {
+              "index": 1,
+              "opcode": 5
+            },
+            {
+              "index": 2,
+              "opcode": 104
+            },
+            {
+              "index": 3,
+              "opcode": 172
+            }
+          ]
+        },
+        {
+          "name": "compute",
+          "descriptor": "(I)I",
+          "access": 8,
+          "instructions": [
+            {
+              "index": 0,
+              "opcode": 21,
+              "variable": 0
+            },
+            {
+              "index": 1,
+              "opcode": 156
+            },
+            {
+              "index": 2,
+              "opcode": 2
+            },
+            {
+              "index": 3,
+              "opcode": 172
+            },
+            {
+              "index": 4,
+              "opcode": 21,
+              "variable": 0
+            },
+            {
+              "index": 5,
+              "opcode": 184,
+              "owner": "lab/Target",
+              "name": "hook",
+              "descriptor": "(I)I",
+              "interface": false
+            },
+            {
+              "index": 6,
+              "opcode": 172
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "fixture": "throw_path",
+      "debug": "none",
+      "class_name": "lab/Target",
+      "class_major": 65,
+      "class_bytes": 385,
+      "class_sha256": "b20d3df588b209976cd33ba7d2502607978784f796a46fb116cc32dabbd72267",
+      "methods": [
+        {
+          "name": "<init>",
+          "descriptor": "()V",
+          "access": 0,
+          "instructions": [
+            {
+              "index": 0,
+              "opcode": 25,
+              "variable": 0
+            },
+            {
+              "index": 1,
+              "opcode": 183,
+              "owner": "java/lang/Object",
+              "name": "<init>",
+              "descriptor": "()V",
+              "interface": false
+            },
+            {
+              "index": 2,
+              "opcode": 177
+            }
+          ]
+        },
+        {
+          "name": "hook",
+          "descriptor": "(I)I",
+          "access": 8,
+          "instructions": [
+            {
+              "index": 0,
+              "opcode": 21,
+              "variable": 0
+            },
+            {
+              "index": 1,
+              "opcode": 4
+            },
+            {
+              "index": 2,
+              "opcode": 96
+            },
+            {
+              "index": 3,
+              "opcode": 172
+            }
+          ]
+        },
+        {
+          "name": "other",
+          "descriptor": "(I)I",
+          "access": 8,
+          "instructions": [
+            {
+              "index": 0,
+              "opcode": 21,
+              "variable": 0
+            },
+            {
+              "index": 1,
+              "opcode": 5
+            },
+            {
+              "index": 2,
+              "opcode": 104
+            },
+            {
+              "index": 3,
+              "opcode": 172
+            }
+          ]
+        },
+        {
+          "name": "compute",
+          "descriptor": "(I)I",
+          "access": 8,
+          "instructions": [
+            {
+              "index": 0,
+              "opcode": 21,
+              "variable": 0
+            },
+            {
+              "index": 1,
+              "opcode": 156
+            },
+            {
+              "index": 2,
+              "opcode": 187,
+              "type": "java/lang/IllegalArgumentException"
+            },
+            {
+              "index": 3,
+              "opcode": 89
+            },
+            {
+              "index": 4,
+              "opcode": 18,
+              "constant": "negative"
+            },
+            {
+              "index": 5,
+              "opcode": 183,
+              "owner": "java/lang/IllegalArgumentException",
+              "name": "<init>",
+              "descriptor": "(Ljava/lang/String;)V",
+              "interface": false
+            },
+            {
+              "index": 6,
+              "opcode": 191
+            },
+            {
+              "index": 7,
+              "opcode": 21,
+              "variable": 0
+            },
+            {
+              "index": 8,
+              "opcode": 184,
+              "owner": "lab/Target",
+              "name": "hook",
+              "descriptor": "(I)I",
+              "interface": false
+            },
+            {
+              "index": 9,
+              "opcode": 172
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "fixture": "throw_path",
+      "debug": "all",
+      "class_name": "lab/Target",
+      "class_major": 65,
+      "class_bytes": 609,
+      "class_sha256": "cceca2e2736bbf33a15b3a5fb2e251ea8756a824bcf39b6aa56f3bf882e58dfc",
+      "methods": [
+        {
+          "name": "<init>",
+          "descriptor": "()V",
+          "access": 0,
+          "instructions": [
+            {
+              "index": 0,
+              "opcode": 25,
+              "variable": 0
+            },
+            {
+              "index": 1,
+              "opcode": 183,
+              "owner": "java/lang/Object",
+              "name": "<init>",
+              "descriptor": "()V",
+              "interface": false
+            },
+            {
+              "index": 2,
+              "opcode": 177
+            }
+          ]
+        },
+        {
+          "name": "hook",
+          "descriptor": "(I)I",
+          "access": 8,
+          "instructions": [
+            {
+              "index": 0,
+              "opcode": 21,
+              "variable": 0
+            },
+            {
+              "index": 1,
+              "opcode": 4
+            },
+            {
+              "index": 2,
+              "opcode": 96
+            },
+            {
+              "index": 3,
+              "opcode": 172
+            }
+          ]
+        },
+        {
+          "name": "other",
+          "descriptor": "(I)I",
+          "access": 8,
+          "instructions": [
+            {
+              "index": 0,
+              "opcode": 21,
+              "variable": 0
+            },
+            {
+              "index": 1,
+              "opcode": 5
+            },
+            {
+              "index": 2,
+              "opcode": 104
+            },
+            {
+              "index": 3,
+              "opcode": 172
+            }
+          ]
+        },
+        {
+          "name": "compute",
+          "descriptor": "(I)I",
+          "access": 8,
+          "instructions": [
+            {
+              "index": 0,
+              "opcode": 21,
+              "variable": 0
+            },
+            {
+              "index": 1,
+              "opcode": 156
+            },
+            {
+              "index": 2,
+              "opcode": 187,
+              "type": "java/lang/IllegalArgumentException"
+            },
+            {
+              "index": 3,
+              "opcode": 89
+            },
+            {
+              "index": 4,
+              "opcode": 18,
+              "constant": "negative"
+            },
+            {
+              "index": 5,
+              "opcode": 183,
+              "owner": "java/lang/IllegalArgumentException",
+              "name": "<init>",
+              "descriptor": "(Ljava/lang/String;)V",
+              "interface": false
+            },
+            {
+              "index": 6,
+              "opcode": 191
+            },
+            {
+              "index": 7,
+              "opcode": 21,
+              "variable": 0
+            },
+            {
+              "index": 8,
+              "opcode": 184,
+              "owner": "lab/Target",
+              "name": "hook",
+              "descriptor": "(I)I",
+              "interface": false
+            },
+            {
+              "index": 9,
+              "opcode": 172
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "fixture": "always_throw",
+      "debug": "none",
+      "class_name": "lab/Target",
+      "class_major": 65,
+      "class_bytes": 336,
+      "class_sha256": "cbd287befb96086afe68e37b5be36e1bea329b662f00456de25ba29332331175",
+      "methods": [
+        {
+          "name": "<init>",
+          "descriptor": "()V",
+          "access": 0,
+          "instructions": [
+            {
+              "index": 0,
+              "opcode": 25,
+              "variable": 0
+            },
+            {
+              "index": 1,
+              "opcode": 183,
+              "owner": "java/lang/Object",
+              "name": "<init>",
+              "descriptor": "()V",
+              "interface": false
+            },
+            {
+              "index": 2,
+              "opcode": 177
+            }
+          ]
+        },
+        {
+          "name": "hook",
+          "descriptor": "(I)I",
+          "access": 8,
+          "instructions": [
+            {
+              "index": 0,
+              "opcode": 21,
+              "variable": 0
+            },
+            {
+              "index": 1,
+              "opcode": 4
+            },
+            {
+              "index": 2,
+              "opcode": 96
+            },
+            {
+              "index": 3,
+              "opcode": 172
+            }
+          ]
+        },
+        {
+          "name": "other",
+          "descriptor": "(I)I",
+          "access": 8,
+          "instructions": [
+            {
+              "index": 0,
+              "opcode": 21,
+              "variable": 0
+            },
+            {
+              "index": 1,
+              "opcode": 5
+            },
+            {
+              "index": 2,
+              "opcode": 104
+            },
+            {
+              "index": 3,
+              "opcode": 172
+            }
+          ]
+        },
+        {
+          "name": "compute",
+          "descriptor": "(I)I",
+          "access": 8,
+          "instructions": [
+            {
+              "index": 0,
+              "opcode": 187,
+              "type": "java/lang/IllegalArgumentException"
+            },
+            {
+              "index": 1,
+              "opcode": 89
+            },
+            {
+              "index": 2,
+              "opcode": 18,
+              "constant": "all"
+            },
+            {
+              "index": 3,
+              "opcode": 183,
+              "owner": "java/lang/IllegalArgumentException",
+              "name": "<init>",
+              "descriptor": "(Ljava/lang/String;)V",
+              "interface": false
+            },
+            {
+              "index": 4,
+              "opcode": 191
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "fixture": "always_throw",
+      "debug": "all",
+      "class_name": "lab/Target",
+      "class_major": 65,
+      "class_bytes": 560,
+      "class_sha256": "8b0b7ab5f71c1e8b5c56313ad83d0174114f5522c1781009d4f3aa0e365114d8",
+      "methods": [
+        {
+          "name": "<init>",
+          "descriptor": "()V",
+          "access": 0,
+          "instructions": [
+            {
+              "index": 0,
+              "opcode": 25,
+              "variable": 0
+            },
+            {
+              "index": 1,
+              "opcode": 183,
+              "owner": "java/lang/Object",
+              "name": "<init>",
+              "descriptor": "()V",
+              "interface": false
+            },
+            {
+              "index": 2,
+              "opcode": 177
+            }
+          ]
+        },
+        {
+          "name": "hook",
+          "descriptor": "(I)I",
+          "access": 8,
+          "instructions": [
+            {
+              "index": 0,
+              "opcode": 21,
+              "variable": 0
+            },
+            {
+              "index": 1,
+              "opcode": 4
+            },
+            {
+              "index": 2,
+              "opcode": 96
+            },
+            {
+              "index": 3,
+              "opcode": 172
+            }
+          ]
+        },
+        {
+          "name": "other",
+          "descriptor": "(I)I",
+          "access": 8,
+          "instructions": [
+            {
+              "index": 0,
+              "opcode": 21,
+              "variable": 0
+            },
+            {
+              "index": 1,
+              "opcode": 5
+            },
+            {
+              "index": 2,
+              "opcode": 104
+            },
+            {
+              "index": 3,
+              "opcode": 172
+            }
+          ]
+        },
+        {
+          "name": "compute",
+          "descriptor": "(I)I",
+          "access": 8,
+          "instructions": [
+            {
+              "index": 0,
+              "opcode": 187,
+              "type": "java/lang/IllegalArgumentException"
+            },
+            {
+              "index": 1,
+              "opcode": 89
+            },
+            {
+              "index": 2,
+              "opcode": 18,
+              "constant": "all"
+            },
+            {
+              "index": 3,
+              "opcode": 183,
+              "owner": "java/lang/IllegalArgumentException",
+              "name": "<init>",
+              "descriptor": "(Ljava/lang/String;)V",
+              "interface": false
+            },
+            {
+              "index": 4,
+              "opcode": 191
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "fixture": "extra_call",
+      "debug": "none",
+      "class_name": "lab/Target",
+      "class_major": 65,
+      "class_bytes": 266,
+      "class_sha256": "26633123f9591185b31bdee73a7080e656c12f8db6a27f8833a7dfaad77e7ce2",
+      "methods": [
+        {
+          "name": "<init>",
+          "descriptor": "()V",
+          "access": 0,
+          "instructions": [
+            {
+              "index": 0,
+              "opcode": 25,
+              "variable": 0
+            },
+            {
+              "index": 1,
+              "opcode": 183,
+              "owner": "java/lang/Object",
+              "name": "<init>",
+              "descriptor": "()V",
+              "interface": false
+            },
+            {
+              "index": 2,
+              "opcode": 177
+            }
+          ]
+        },
+        {
+          "name": "hook",
+          "descriptor": "(I)I",
+          "access": 8,
+          "instructions": [
+            {
+              "index": 0,
+              "opcode": 21,
+              "variable": 0
+            },
+            {
+              "index": 1,
+              "opcode": 4
+            },
+            {
+              "index": 2,
+              "opcode": 96
+            },
+            {
+              "index": 3,
+              "opcode": 172
+            }
+          ]
+        },
+        {
+          "name": "other",
+          "descriptor": "(I)I",
+          "access": 8,
+          "instructions": [
+            {
+              "index": 0,
+              "opcode": 21,
+              "variable": 0
+            },
+            {
+              "index": 1,
+              "opcode": 5
+            },
+            {
+              "index": 2,
+              "opcode": 104
+            },
+            {
+              "index": 3,
+              "opcode": 172
+            }
+          ]
+        },
+        {
+          "name": "compute",
+          "descriptor": "(I)I",
+          "access": 8,
+          "instructions": [
+            {
+              "index": 0,
+              "opcode": 16,
+              "operand": 100
+            },
+            {
+              "index": 1,
+              "opcode": 184,
+              "owner": "lab/Target",
+              "name": "hook",
+              "descriptor": "(I)I",
+              "interface": false
+            },
+            {
+              "index": 2,
+              "opcode": 54,
+              "variable": 1
+            },
+            {
+              "index": 3,
+              "opcode": 21,
+              "variable": 0
+            },
+            {
+              "index": 4,
+              "opcode": 184,
+              "owner": "lab/Target",
+              "name": "hook",
+              "descriptor": "(I)I",
+              "interface": false
+            },
+            {
+              "index": 5,
+              "opcode": 21,
+              "variable": 1
+            },
+            {
+              "index": 6,
+              "opcode": 96
+            },
+            {
+              "index": 7,
+              "opcode": 172
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "fixture": "extra_call",
+      "debug": "all",
+      "class_name": "lab/Target",
+      "class_major": 65,
+      "class_bytes": 504,
+      "class_sha256": "5dbe34cc2eb27fcb255a301eacb4c63f38dbef8952f95afd2285f06f509d9a3e",
+      "methods": [
+        {
+          "name": "<init>",
+          "descriptor": "()V",
+          "access": 0,
+          "instructions": [
+            {
+              "index": 0,
+              "opcode": 25,
+              "variable": 0
+            },
+            {
+              "index": 1,
+              "opcode": 183,
+              "owner": "java/lang/Object",
+              "name": "<init>",
+              "descriptor": "()V",
+              "interface": false
+            },
+            {
+              "index": 2,
+              "opcode": 177
+            }
+          ]
+        },
+        {
+          "name": "hook",
+          "descriptor": "(I)I",
+          "access": 8,
+          "instructions": [
+            {
+              "index": 0,
+              "opcode": 21,
+              "variable": 0
+            },
+            {
+              "index": 1,
+              "opcode": 4
+            },
+            {
+              "index": 2,
+              "opcode": 96
+            },
+            {
+              "index": 3,
+              "opcode": 172
+            }
+          ]
+        },
+        {
+          "name": "other",
+          "descriptor": "(I)I",
+          "access": 8,
+          "instructions": [
+            {
+              "index": 0,
+              "opcode": 21,
+              "variable": 0
+            },
+            {
+              "index": 1,
+              "opcode": 5
+            },
+            {
+              "index": 2,
+              "opcode": 104
+            },
+            {
+              "index": 3,
+              "opcode": 172
+            }
+          ]
+        },
+        {
+          "name": "compute",
+          "descriptor": "(I)I",
+          "access": 8,
+          "instructions": [
+            {
+              "index": 0,
+              "opcode": 16,
+              "operand": 100
+            },
+            {
+              "index": 1,
+              "opcode": 184,
+              "owner": "lab/Target",
+              "name": "hook",
+              "descriptor": "(I)I",
+              "interface": false
+            },
+            {
+              "index": 2,
+              "opcode": 54,
+              "variable": 1
+            },
+            {
+              "index": 3,
+              "opcode": 21,
+              "variable": 0
+            },
+            {
+              "index": 4,
+              "opcode": 184,
+              "owner": "lab/Target",
+              "name": "hook",
+              "descriptor": "(I)I",
+              "interface": false
+            },
+            {
+              "index": 5,
+              "opcode": 21,
+              "variable": 1
+            },
+            {
+              "index": 6,
+              "opcode": 96
+            },
+            {
+              "index": 7,
+              "opcode": 172
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "fixture": "same_count_drift",
+      "debug": "none",
+      "class_name": "lab/Target",
+      "class_major": 65,
+      "class_bytes": 259,
+      "class_sha256": "a7ecde99cd5432e3cca2ddeaccec3c610a8422a6b1f54f66b26ed1f6be8a468e",
+      "methods": [
+        {
+          "name": "<init>",
+          "descriptor": "()V",
+          "access": 0,
+          "instructions": [
+            {
+              "index": 0,
+              "opcode": 25,
+              "variable": 0
+            },
+            {
+              "index": 1,
+              "opcode": 183,
+              "owner": "java/lang/Object",
+              "name": "<init>",
+              "descriptor": "()V",
+              "interface": false
+            },
+            {
+              "index": 2,
+              "opcode": 177
+            }
+          ]
+        },
+        {
+          "name": "hook",
+          "descriptor": "(I)I",
+          "access": 8,
+          "instructions": [
+            {
+              "index": 0,
+              "opcode": 21,
+              "variable": 0
+            },
+            {
+              "index": 1,
+              "opcode": 4
+            },
+            {
+              "index": 2,
+              "opcode": 96
+            },
+            {
+              "index": 3,
+              "opcode": 172
+            }
+          ]
+        },
+        {
+          "name": "other",
+          "descriptor": "(I)I",
+          "access": 8,
+          "instructions": [
+            {
+              "index": 0,
+              "opcode": 21,
+              "variable": 0
+            },
+            {
+              "index": 1,
+              "opcode": 5
+            },
+            {
+              "index": 2,
+              "opcode": 104
+            },
+            {
+              "index": 3,
+              "opcode": 172
+            }
+          ]
+        },
+        {
+          "name": "compute",
+          "descriptor": "(I)I",
+          "access": 8,
+          "instructions": [
+            {
+              "index": 0,
+              "opcode": 16,
+              "operand": 100
+            },
+            {
+              "index": 1,
+              "opcode": 184,
+              "owner": "lab/Target",
+              "name": "hook",
+              "descriptor": "(I)I",
+              "interface": false
+            },
+            {
+              "index": 2,
+              "opcode": 172
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "fixture": "same_count_drift",
+      "debug": "all",
+      "class_name": "lab/Target",
+      "class_major": 65,
+      "class_bytes": 483,
+      "class_sha256": "9c7ba684fa477f9e1e8508a617910469e951a6f2d9dd2380db51c2a4346f7e3c",
+      "methods": [
+        {
+          "name": "<init>",
+          "descriptor": "()V",
+          "access": 0,
+          "instructions": [
+            {
+              "index": 0,
+              "opcode": 25,
+              "variable": 0
+            },
+            {
+              "index": 1,
+              "opcode": 183,
+              "owner": "java/lang/Object",
+              "name": "<init>",
+              "descriptor": "()V",
+              "interface": false
+            },
+            {
+              "index": 2,
+              "opcode": 177
+            }
+          ]
+        },
+        {
+          "name": "hook",
+          "descriptor": "(I)I",
+          "access": 8,
+          "instructions": [
+            {
+              "index": 0,
+              "opcode": 21,
+              "variable": 0
+            },
+            {
+              "index": 1,
+              "opcode": 4
+            },
+            {
+              "index": 2,
+              "opcode": 96
+            },
+            {
+              "index": 3,
+              "opcode": 172
+            }
+          ]
+        },
+        {
+          "name": "other",
+          "descriptor": "(I)I",
+          "access": 8,
+          "instructions": [
+            {
+              "index": 0,
+              "opcode": 21,
+              "variable": 0
+            },
+            {
+              "index": 1,
+              "opcode": 5
+            },
+            {
+              "index": 2,
+              "opcode": 104
+            },
+            {
+              "index": 3,
+              "opcode": 172
+            }
+          ]
+        },
+        {
+          "name": "compute",
+          "descriptor": "(I)I",
+          "access": 8,
+          "instructions": [
+            {
+              "index": 0,
+              "opcode": 16,
+              "operand": 100
+            },
+            {
+              "index": 1,
+              "opcode": 184,
+              "owner": "lab/Target",
+              "name": "hook",
+              "descriptor": "(I)I",
+              "interface": false
+            },
+            {
+              "index": 2,
+              "opcode": 172
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "fixture": "different_owner",
+      "debug": "none",
+      "class_name": "lab/Target",
+      "class_major": 65,
+      "class_bytes": 277,
+      "class_sha256": "66cf5c26874b13b8ac86242a985e28a39a73917c2c1e594c367e775e9ae30afb",
+      "methods": [
+        {
+          "name": "<init>",
+          "descriptor": "()V",
+          "access": 0,
+          "instructions": [
+            {
+              "index": 0,
+              "opcode": 25,
+              "variable": 0
+            },
+            {
+              "index": 1,
+              "opcode": 183,
+              "owner": "java/lang/Object",
+              "name": "<init>",
+              "descriptor": "()V",
+              "interface": false
+            },
+            {
+              "index": 2,
+              "opcode": 177
+            }
+          ]
+        },
+        {
+          "name": "hook",
+          "descriptor": "(I)I",
+          "access": 8,
+          "instructions": [
+            {
+              "index": 0,
+              "opcode": 21,
+              "variable": 0
+            },
+            {
+              "index": 1,
+              "opcode": 4
+            },
+            {
+              "index": 2,
+              "opcode": 96
+            },
+            {
+              "index": 3,
+              "opcode": 172
+            }
+          ]
+        },
+        {
+          "name": "other",
+          "descriptor": "(I)I",
+          "access": 8,
+          "instructions": [
+            {
+              "index": 0,
+              "opcode": 21,
+              "variable": 0
+            },
+            {
+              "index": 1,
+              "opcode": 5
+            },
+            {
+              "index": 2,
+              "opcode": 104
+            },
+            {
+              "index": 3,
+              "opcode": 172
+            }
+          ]
+        },
+        {
+          "name": "compute",
+          "descriptor": "(I)I",
+          "access": 8,
+          "instructions": [
+            {
+              "index": 0,
+              "opcode": 21,
+              "variable": 0
+            },
+            {
+              "index": 1,
+              "opcode": 184,
+              "owner": "lab/Alternate",
+              "name": "hook",
+              "descriptor": "(I)I",
+              "interface": false
+            },
+            {
+              "index": 2,
+              "opcode": 172
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "fixture": "different_owner",
+      "debug": "all",
+      "class_name": "lab/Target",
+      "class_major": 65,
+      "class_bytes": 501,
+      "class_sha256": "81898571d04004e430315177733f85660148a164735f7d3eca9afdd041cc9a29",
+      "methods": [
+        {
+          "name": "<init>",
+          "descriptor": "()V",
+          "access": 0,
+          "instructions": [
+            {
+              "index": 0,
+              "opcode": 25,
+              "variable": 0
+            },
+            {
+              "index": 1,
+              "opcode": 183,
+              "owner": "java/lang/Object",
+              "name": "<init>",
+              "descriptor": "()V",
+              "interface": false
+            },
+            {
+              "index": 2,
+              "opcode": 177
+            }
+          ]
+        },
+        {
+          "name": "hook",
+          "descriptor": "(I)I",
+          "access": 8,
+          "instructions": [
+            {
+              "index": 0,
+              "opcode": 21,
+              "variable": 0
+            },
+            {
+              "index": 1,
+              "opcode": 4
+            },
+            {
+              "index": 2,
+              "opcode": 96
+            },
+            {
+              "index": 3,
+              "opcode": 172
+            }
+          ]
+        },
+        {
+          "name": "other",
+          "descriptor": "(I)I",
+          "access": 8,
+          "instructions": [
+            {
+              "index": 0,
+              "opcode": 21,
+              "variable": 0
+            },
+            {
+              "index": 1,
+              "opcode": 5
+            },
+            {
+              "index": 2,
+              "opcode": 104
+            },
+            {
+              "index": 3,
+              "opcode": 172
+            }
+          ]
+        },
+        {
+          "name": "compute",
+          "descriptor": "(I)I",
+          "access": 8,
+          "instructions": [
+            {
+              "index": 0,
+              "opcode": 21,
+              "variable": 0
+            },
+            {
+              "index": 1,
+              "opcode": 184,
+              "owner": "lab/Alternate",
+              "name": "hook",
+              "descriptor": "(I)I",
+              "interface": false
+            },
+            {
+              "index": 2,
+              "opcode": 172
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "fixture": "unrelated_call",
+      "debug": "none",
+      "class_name": "lab/Target",
+      "class_major": 65,
+      "class_bytes": 273,
+      "class_sha256": "8cf010c79245b8d969492819834ad03d11a7bed64d995868546c5c154291e7f0",
+      "methods": [
+        {
+          "name": "<init>",
+          "descriptor": "()V",
+          "access": 0,
+          "instructions": [
+            {
+              "index": 0,
+              "opcode": 25,
+              "variable": 0
+            },
+            {
+              "index": 1,
+              "opcode": 183,
+              "owner": "java/lang/Object",
+              "name": "<init>",
+              "descriptor": "()V",
+              "interface": false
+            },
+            {
+              "index": 2,
+              "opcode": 177
+            }
+          ]
+        },
+        {
+          "name": "hook",
+          "descriptor": "(I)I",
+          "access": 8,
+          "instructions": [
+            {
+              "index": 0,
+              "opcode": 21,
+              "variable": 0
+            },
+            {
+              "index": 1,
+              "opcode": 4
+            },
+            {
+              "index": 2,
+              "opcode": 96
+            },
+            {
+              "index": 3,
+              "opcode": 172
+            }
+          ]
+        },
+        {
+          "name": "other",
+          "descriptor": "(I)I",
+          "access": 8,
+          "instructions": [
+            {
+              "index": 0,
+              "opcode": 21,
+              "variable": 0
+            },
+            {
+              "index": 1,
+              "opcode": 5
+            },
+            {
+              "index": 2,
+              "opcode": 104
+            },
+            {
+              "index": 3,
+              "opcode": 172
+            }
+          ]
+        },
+        {
+          "name": "compute",
+          "descriptor": "(I)I",
+          "access": 8,
+          "instructions": [
+            {
+              "index": 0,
+              "opcode": 21,
+              "variable": 0
+            },
+            {
+              "index": 1,
+              "opcode": 184,
+              "owner": "lab/Target",
+              "name": "other",
+              "descriptor": "(I)I",
+              "interface": false
+            },
+            {
+              "index": 2,
+              "opcode": 54,
+              "variable": 1
+            },
+            {
+              "index": 3,
+              "opcode": 21,
+              "variable": 1
+            },
+            {
+              "index": 4,
+              "opcode": 184,
+              "owner": "lab/Target",
+              "name": "hook",
+              "descriptor": "(I)I",
+              "interface": false
+            },
+            {
+              "index": 5,
+              "opcode": 172
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "fixture": "unrelated_call",
+      "debug": "all",
+      "class_name": "lab/Target",
+      "class_major": 65,
+      "class_bytes": 511,
+      "class_sha256": "bc482a449c341c7ff2430d4ce0819d4316efd16e1ffc97b836f417629c93f491",
+      "methods": [
+        {
+          "name": "<init>",
+          "descriptor": "()V",
+          "access": 0,
+          "instructions": [
+            {
+              "index": 0,
+              "opcode": 25,
+              "variable": 0
+            },
+            {
+              "index": 1,
+              "opcode": 183,
+              "owner": "java/lang/Object",
+              "name": "<init>",
+              "descriptor": "()V",
+              "interface": false
+            },
+            {
+              "index": 2,
+              "opcode": 177
+            }
+          ]
+        },
+        {
+          "name": "hook",
+          "descriptor": "(I)I",
+          "access": 8,
+          "instructions": [
+            {
+              "index": 0,
+              "opcode": 21,
+              "variable": 0
+            },
+            {
+              "index": 1,
+              "opcode": 4
+            },
+            {
+              "index": 2,
+              "opcode": 96
+            },
+            {
+              "index": 3,
+              "opcode": 172
+            }
+          ]
+        },
+        {
+          "name": "other",
+          "descriptor": "(I)I",
+          "access": 8,
+          "instructions": [
+            {
+              "index": 0,
+              "opcode": 21,
+              "variable": 0
+            },
+            {
+              "index": 1,
+              "opcode": 5
+            },
+            {
+              "index": 2,
+              "opcode": 104
+            },
+            {
+              "index": 3,
+              "opcode": 172
+            }
+          ]
+        },
+        {
+          "name": "compute",
+          "descriptor": "(I)I",
+          "access": 8,
+          "instructions": [
+            {
+              "index": 0,
+              "opcode": 21,
+              "variable": 0
+            },
+            {
+              "index": 1,
+              "opcode": 184,
+              "owner": "lab/Target",
+              "name": "other",
+              "descriptor": "(I)I",
+              "interface": false
+            },
+            {
+              "index": 2,
+              "opcode": 54,
+              "variable": 1
+            },
+            {
+              "index": 3,
+              "opcode": 21,
+              "variable": 1
+            },
+            {
+              "index": 4,
+              "opcode": 184,
+              "owner": "lab/Target",
+              "name": "hook",
+              "descriptor": "(I)I",
+              "interface": false
+            },
+            {
+              "index": 5,
+              "opcode": 172
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "fixture": "nested_call",
+      "debug": "none",
+      "class_name": "lab/Target",
+      "class_major": 65,
+      "class_bytes": 261,
+      "class_sha256": "68ac1dd3a78608098283510de90aa48839d82bc0e54bef72744b553f5fc9a25c",
+      "methods": [
+        {
+          "name": "<init>",
+          "descriptor": "()V",
+          "access": 0,
+          "instructions": [
+            {
+              "index": 0,
+              "opcode": 25,
+              "variable": 0
+            },
+            {
+              "index": 1,
+              "opcode": 183,
+              "owner": "java/lang/Object",
+              "name": "<init>",
+              "descriptor": "()V",
+              "interface": false
+            },
+            {
+              "index": 2,
+              "opcode": 177
+            }
+          ]
+        },
+        {
+          "name": "hook",
+          "descriptor": "(I)I",
+          "access": 8,
+          "instructions": [
+            {
+              "index": 0,
+              "opcode": 21,
+              "variable": 0
+            },
+            {
+              "index": 1,
+              "opcode": 4
+            },
+            {
+              "index": 2,
+              "opcode": 96
+            },
+            {
+              "index": 3,
+              "opcode": 172
+            }
+          ]
+        },
+        {
+          "name": "other",
+          "descriptor": "(I)I",
+          "access": 8,
+          "instructions": [
+            {
+              "index": 0,
+              "opcode": 21,
+              "variable": 0
+            },
+            {
+              "index": 1,
+              "opcode": 5
+            },
+            {
+              "index": 2,
+              "opcode": 104
+            },
+            {
+              "index": 3,
+              "opcode": 172
+            }
+          ]
+        },
+        {
+          "name": "compute",
+          "descriptor": "(I)I",
+          "access": 8,
+          "instructions": [
+            {
+              "index": 0,
+              "opcode": 21,
+              "variable": 0
+            },
+            {
+              "index": 1,
+              "opcode": 184,
+              "owner": "lab/Target",
+              "name": "hook",
+              "descriptor": "(I)I",
+              "interface": false
+            },
+            {
+              "index": 2,
+              "opcode": 184,
+              "owner": "lab/Target",
+              "name": "hook",
+              "descriptor": "(I)I",
+              "interface": false
+            },
+            {
+              "index": 3,
+              "opcode": 172
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "fixture": "nested_call",
+      "debug": "all",
+      "class_name": "lab/Target",
+      "class_major": 65,
+      "class_bytes": 485,
+      "class_sha256": "586ebad82619923d0c123589d462e8996fb104ab2179d7f2729a3e892a554158",
+      "methods": [
+        {
+          "name": "<init>",
+          "descriptor": "()V",
+          "access": 0,
+          "instructions": [
+            {
+              "index": 0,
+              "opcode": 25,
+              "variable": 0
+            },
+            {
+              "index": 1,
+              "opcode": 183,
+              "owner": "java/lang/Object",
+              "name": "<init>",
+              "descriptor": "()V",
+              "interface": false
+            },
+            {
+              "index": 2,
+              "opcode": 177
+            }
+          ]
+        },
+        {
+          "name": "hook",
+          "descriptor": "(I)I",
+          "access": 8,
+          "instructions": [
+            {
+              "index": 0,
+              "opcode": 21,
+              "variable": 0
+            },
+            {
+              "index": 1,
+              "opcode": 4
+            },
+            {
+              "index": 2,
+              "opcode": 96
+            },
+            {
+              "index": 3,
+              "opcode": 172
+            }
+          ]
+        },
+        {
+          "name": "other",
+          "descriptor": "(I)I",
+          "access": 8,
+          "instructions": [
+            {
+              "index": 0,
+              "opcode": 21,
+              "variable": 0
+            },
+            {
+              "index": 1,
+              "opcode": 5
+            },
+            {
+              "index": 2,
+              "opcode": 104
+            },
+            {
+              "index": 3,
+              "opcode": 172
+            }
+          ]
+        },
+        {
+          "name": "compute",
+          "descriptor": "(I)I",
+          "access": 8,
+          "instructions": [
+            {
+              "index": 0,
+              "opcode": 21,
+              "variable": 0
+            },
+            {
+              "index": 1,
+              "opcode": 184,
+              "owner": "lab/Target",
+              "name": "hook",
+              "descriptor": "(I)I",
+              "interface": false
+            },
+            {
+              "index": 2,
+              "opcode": 184,
+              "owner": "lab/Target",
+              "name": "hook",
+              "descriptor": "(I)I",
+              "interface": false
+            },
+            {
+              "index": 3,
+              "opcode": 172
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "raw_stdout": "{\"fixture\":\"baseline\",\"debug\":\"none\",\"class_name\":\"lab/Target\",\"class_major\":65,\"class_bytes\":258,\"class_sha256\":\"8b30b5d71e938bb9eaac6e6e7b82877b6120402239eb967f92c889fae3226f73\",\"methods\":[{\"name\":\"<init>\",\"descriptor\":\"()V\",\"access\":0,\"instructions\":[{\"index\":0,\"opcode\":25,\"variable\":0},{\"index\":1,\"opcode\":183,\"owner\":\"java/lang/Object\",\"name\":\"<init>\",\"descriptor\":\"()V\",\"interface\":false},{\"index\":2,\"opcode\":177}]},{\"name\":\"hook\",\"descriptor\":\"(I)I\",\"access\":8,\"instructions\":[{\"index\":0,\"opcode\":21,\"variable\":0},{\"index\":1,\"opcode\":4},{\"index\":2,\"opcode\":96},{\"index\":3,\"opcode\":172}]},{\"name\":\"other\",\"descriptor\":\"(I)I\",\"access\":8,\"instructions\":[{\"index\":0,\"opcode\":21,\"variable\":0},{\"index\":1,\"opcode\":5},{\"index\":2,\"opcode\":104},{\"index\":3,\"opcode\":172}]},{\"name\":\"compute\",\"descriptor\":\"(I)I\",\"access\":8,\"instructions\":[{\"index\":0,\"opcode\":21,\"variable\":0},{\"index\":1,\"opcode\":184,\"owner\":\"lab/Target\",\"name\":\"hook\",\"descriptor\":\"(I)I\",\"interface\":false},{\"index\":2,\"opcode\":172}]}]}\n{\"fixture\":\"baseline\",\"debug\":\"all\",\"class_name\":\"lab/Target\",\"class_major\":65,\"class_bytes\":482,\"class_sha256\":\"617e2969b6471a35324e4a13c56b579d0700cda85517d38ae54b4a7147607e82\",\"methods\":[{\"name\":\"<init>\",\"descriptor\":\"()V\",\"access\":0,\"instructions\":[{\"index\":0,\"opcode\":25,\"variable\":0},{\"index\":1,\"opcode\":183,\"owner\":\"java/lang/Object\",\"name\":\"<init>\",\"descriptor\":\"()V\",\"interface\":false},{\"index\":2,\"opcode\":177}]},{\"name\":\"hook\",\"descriptor\":\"(I)I\",\"access\":8,\"instructions\":[{\"index\":0,\"opcode\":21,\"variable\":0},{\"index\":1,\"opcode\":4},{\"index\":2,\"opcode\":96},{\"index\":3,\"opcode\":172}]},{\"name\":\"other\",\"descriptor\":\"(I)I\",\"access\":8,\"instructions\":[{\"index\":0,\"opcode\":21,\"variable\":0},{\"index\":1,\"opcode\":5},{\"index\":2,\"opcode\":104},{\"index\":3,\"opcode\":172}]},{\"name\":\"compute\",\"descriptor\":\"(I)I\",\"access\":8,\"instructions\":[{\"index\":0,\"opcode\":21,\"variable\":0},{\"index\":1,\"opcode\":184,\"owner\":\"lab/Target\",\"name\":\"hook\",\"descriptor\":\"(I)I\",\"interface\":false},{\"index\":2,\"opcode\":172}]}]}\n{\"fixture\":\"overload\",\"debug\":\"none\",\"class_name\":\"lab/Target\",\"class_major\":65,\"class_bytes\":293,\"class_sha256\":\"e2eb71d016e74b31b5bfaadb6e917113afbced9c74e157a7b20692db40e7d7a5\",\"methods\":[{\"name\":\"<init>\",\"descriptor\":\"()V\",\"access\":0,\"instructions\":[{\"index\":0,\"opcode\":25,\"variable\":0},{\"index\":1,\"opcode\":183,\"owner\":\"java/lang/Object\",\"name\":\"<init>\",\"descriptor\":\"()V\",\"interface\":false},{\"index\":2,\"opcode\":177}]},{\"name\":\"hook\",\"descriptor\":\"(I)I\",\"access\":8,\"instructions\":[{\"index\":0,\"opcode\":21,\"variable\":0},{\"index\":1,\"opcode\":4},{\"index\":2,\"opcode\":96},{\"index\":3,\"opcode\":172}]},{\"name\":\"other\",\"descriptor\":\"(I)I\",\"access\":8,\"instructions\":[{\"index\":0,\"opcode\":21,\"variable\":0},{\"index\":1,\"opcode\":5},{\"index\":2,\"opcode\":104},{\"index\":3,\"opcode\":172}]},{\"name\":\"compute\",\"descriptor\":\"(I)I\",\"access\":8,\"instructions\":[{\"index\":0,\"opcode\":21,\"variable\":0},{\"index\":1,\"opcode\":184,\"owner\":\"lab/Target\",\"name\":\"hook\",\"descriptor\":\"(I)I\",\"interface\":false},{\"index\":2,\"opcode\":172}]},{\"name\":\"compute\",\"descriptor\":\"(J)J\",\"access\":8,\"instructions\":[{\"index\":0,\"opcode\":22,\"variable\":0},{\"index\":1,\"opcode\":173}]}]}\n{\"fixture\":\"overload\",\"debug\":\"all\",\"class_name\":\"lab/Target\",\"class_major\":65,\"class_bytes\":551,\"class_sha256\":\"8a0ea298633bd8fd7f650de6c16b8c7ab3b24b8f5483302fb7bd4b9f4652efa5\",\"methods\":[{\"name\":\"<init>\",\"descriptor\":\"()V\",\"access\":0,\"instructions\":[{\"index\":0,\"opcode\":25,\"variable\":0},{\"index\":1,\"opcode\":183,\"owner\":\"java/lang/Object\",\"name\":\"<init>\",\"descriptor\":\"()V\",\"interface\":false},{\"index\":2,\"opcode\":177}]},{\"name\":\"hook\",\"descriptor\":\"(I)I\",\"access\":8,\"instructions\":[{\"index\":0,\"opcode\":21,\"variable\":0},{\"index\":1,\"opcode\":4},{\"index\":2,\"opcode\":96},{\"index\":3,\"opcode\":172}]},{\"name\":\"other\",\"descriptor\":\"(I)I\",\"access\":8,\"instructions\":[{\"index\":0,\"opcode\":21,\"variable\":0},{\"index\":1,\"opcode\":5},{\"index\":2,\"opcode\":104},{\"index\":3,\"opcode\":172}]},{\"name\":\"compute\",\"descriptor\":\"(I)I\",\"access\":8,\"instructions\":[{\"index\":0,\"opcode\":21,\"variable\":0},{\"index\":1,\"opcode\":184,\"owner\":\"lab/Target\",\"name\":\"hook\",\"descriptor\":\"(I)I\",\"interface\":false},{\"index\":2,\"opcode\":172}]},{\"name\":\"compute\",\"descriptor\":\"(J)J\",\"access\":8,\"instructions\":[{\"index\":0,\"opcode\":22,\"variable\":0},{\"index\":1,\"opcode\":173}]}]}\n{\"fixture\":\"descriptor_drift\",\"debug\":\"none\",\"class_name\":\"lab/Target\",\"class_major\":65,\"class_bytes\":252,\"class_sha256\":\"ede55600c6308d6e34784727d34d3b1de3956fb28d906d4f6aecaa58ff0dba74\",\"methods\":[{\"name\":\"<init>\",\"descriptor\":\"()V\",\"access\":0,\"instructions\":[{\"index\":0,\"opcode\":25,\"variable\":0},{\"index\":1,\"opcode\":183,\"owner\":\"java/lang/Object\",\"name\":\"<init>\",\"descriptor\":\"()V\",\"interface\":false},{\"index\":2,\"opcode\":177}]},{\"name\":\"hook\",\"descriptor\":\"(I)I\",\"access\":8,\"instructions\":[{\"index\":0,\"opcode\":21,\"variable\":0},{\"index\":1,\"opcode\":4},{\"index\":2,\"opcode\":96},{\"index\":3,\"opcode\":172}]},{\"name\":\"other\",\"descriptor\":\"(I)I\",\"access\":8,\"instructions\":[{\"index\":0,\"opcode\":21,\"variable\":0},{\"index\":1,\"opcode\":5},{\"index\":2,\"opcode\":104},{\"index\":3,\"opcode\":172}]},{\"name\":\"compute\",\"descriptor\":\"(J)J\",\"access\":8,\"instructions\":[{\"index\":0,\"opcode\":22,\"variable\":0},{\"index\":1,\"opcode\":173}]}]}\n{\"fixture\":\"descriptor_drift\",\"debug\":\"all\",\"class_name\":\"lab/Target\",\"class_major\":65,\"class_bytes\":480,\"class_sha256\":\"37f1ab6d439629f9a8867be79fefea5e25bbb91f04b878fca5c484c4dd21cc75\",\"methods\":[{\"name\":\"<init>\",\"descriptor\":\"()V\",\"access\":0,\"instructions\":[{\"index\":0,\"opcode\":25,\"variable\":0},{\"index\":1,\"opcode\":183,\"owner\":\"java/lang/Object\",\"name\":\"<init>\",\"descriptor\":\"()V\",\"interface\":false},{\"index\":2,\"opcode\":177}]},{\"name\":\"hook\",\"descriptor\":\"(I)I\",\"access\":8,\"instructions\":[{\"index\":0,\"opcode\":21,\"variable\":0},{\"index\":1,\"opcode\":4},{\"index\":2,\"opcode\":96},{\"index\":3,\"opcode\":172}]},{\"name\":\"other\",\"descriptor\":\"(I)I\",\"access\":8,\"instructions\":[{\"index\":0,\"opcode\":21,\"variable\":0},{\"index\":1,\"opcode\":5},{\"index\":2,\"opcode\":104},{\"index\":3,\"opcode\":172}]},{\"name\":\"compute\",\"descriptor\":\"(J)J\",\"access\":8,\"instructions\":[{\"index\":0,\"opcode\":22,\"variable\":0},{\"index\":1,\"opcode\":173}]}]}\n{\"fixture\":\"extra_return\",\"debug\":\"none\",\"class_name\":\"lab/Target\",\"class_major\":65,\"class_bytes\":289,\"class_sha256\":\"9b16d927e943f2b5fee4dcd02e41f6a7eaa0c455158dd65152f58817cee6aff6\",\"methods\":[{\"name\":\"<init>\",\"descriptor\":\"()V\",\"access\":0,\"instructions\":[{\"index\":0,\"opcode\":25,\"variable\":0},{\"index\":1,\"opcode\":183,\"owner\":\"java/lang/Object\",\"name\":\"<init>\",\"descriptor\":\"()V\",\"interface\":false},{\"index\":2,\"opcode\":177}]},{\"name\":\"hook\",\"descriptor\":\"(I)I\",\"access\":8,\"instructions\":[{\"index\":0,\"opcode\":21,\"variable\":0},{\"index\":1,\"opcode\":4},{\"index\":2,\"opcode\":96},{\"index\":3,\"opcode\":172}]},{\"name\":\"other\",\"descriptor\":\"(I)I\",\"access\":8,\"instructions\":[{\"index\":0,\"opcode\":21,\"variable\":0},{\"index\":1,\"opcode\":5},{\"index\":2,\"opcode\":104},{\"index\":3,\"opcode\":172}]},{\"name\":\"compute\",\"descriptor\":\"(I)I\",\"access\":8,\"instructions\":[{\"index\":0,\"opcode\":21,\"variable\":0},{\"index\":1,\"opcode\":156},{\"index\":2,\"opcode\":2},{\"index\":3,\"opcode\":172},{\"index\":4,\"opcode\":21,\"variable\":0},{\"index\":5,\"opcode\":184,\"owner\":\"lab/Target\",\"name\":\"hook\",\"descriptor\":\"(I)I\",\"interface\":false},{\"index\":6,\"opcode\":172}]}]}\n{\"fixture\":\"extra_return\",\"debug\":\"all\",\"class_name\":\"lab/Target\",\"class_major\":65,\"class_bytes\":513,\"class_sha256\":\"112ab441060c47bafbe08cdb6f126bf06ed7f30c3d19fea82bce5b49594f03ba\",\"methods\":[{\"name\":\"<init>\",\"descriptor\":\"()V\",\"access\":0,\"instructions\":[{\"index\":0,\"opcode\":25,\"variable\":0},{\"index\":1,\"opcode\":183,\"owner\":\"java/lang/Object\",\"name\":\"<init>\",\"descriptor\":\"()V\",\"interface\":false},{\"index\":2,\"opcode\":177}]},{\"name\":\"hook\",\"descriptor\":\"(I)I\",\"access\":8,\"instructions\":[{\"index\":0,\"opcode\":21,\"variable\":0},{\"index\":1,\"opcode\":4},{\"index\":2,\"opcode\":96},{\"index\":3,\"opcode\":172}]},{\"name\":\"other\",\"descriptor\":\"(I)I\",\"access\":8,\"instructions\":[{\"index\":0,\"opcode\":21,\"variable\":0},{\"index\":1,\"opcode\":5},{\"index\":2,\"opcode\":104},{\"index\":3,\"opcode\":172}]},{\"name\":\"compute\",\"descriptor\":\"(I)I\",\"access\":8,\"instructions\":[{\"index\":0,\"opcode\":21,\"variable\":0},{\"index\":1,\"opcode\":156},{\"index\":2,\"opcode\":2},{\"index\":3,\"opcode\":172},{\"index\":4,\"opcode\":21,\"variable\":0},{\"index\":5,\"opcode\":184,\"owner\":\"lab/Target\",\"name\":\"hook\",\"descriptor\":\"(I)I\",\"interface\":false},{\"index\":6,\"opcode\":172}]}]}\n{\"fixture\":\"throw_path\",\"debug\":\"none\",\"class_name\":\"lab/Target\",\"class_major\":65,\"class_bytes\":385,\"class_sha256\":\"b20d3df588b209976cd33ba7d2502607978784f796a46fb116cc32dabbd72267\",\"methods\":[{\"name\":\"<init>\",\"descriptor\":\"()V\",\"access\":0,\"instructions\":[{\"index\":0,\"opcode\":25,\"variable\":0},{\"index\":1,\"opcode\":183,\"owner\":\"java/lang/Object\",\"name\":\"<init>\",\"descriptor\":\"()V\",\"interface\":false},{\"index\":2,\"opcode\":177}]},{\"name\":\"hook\",\"descriptor\":\"(I)I\",\"access\":8,\"instructions\":[{\"index\":0,\"opcode\":21,\"variable\":0},{\"index\":1,\"opcode\":4},{\"index\":2,\"opcode\":96},{\"index\":3,\"opcode\":172}]},{\"name\":\"other\",\"descriptor\":\"(I)I\",\"access\":8,\"instructions\":[{\"index\":0,\"opcode\":21,\"variable\":0},{\"index\":1,\"opcode\":5},{\"index\":2,\"opcode\":104},{\"index\":3,\"opcode\":172}]},{\"name\":\"compute\",\"descriptor\":\"(I)I\",\"access\":8,\"instructions\":[{\"index\":0,\"opcode\":21,\"variable\":0},{\"index\":1,\"opcode\":156},{\"index\":2,\"opcode\":187,\"type\":\"java/lang/IllegalArgumentException\"},{\"index\":3,\"opcode\":89},{\"index\":4,\"opcode\":18,\"constant\":\"negative\"},{\"index\":5,\"opcode\":183,\"owner\":\"java/lang/IllegalArgumentException\",\"name\":\"<init>\",\"descriptor\":\"(Ljava/lang/String;)V\",\"interface\":false},{\"index\":6,\"opcode\":191},{\"index\":7,\"opcode\":21,\"variable\":0},{\"index\":8,\"opcode\":184,\"owner\":\"lab/Target\",\"name\":\"hook\",\"descriptor\":\"(I)I\",\"interface\":false},{\"index\":9,\"opcode\":172}]}]}\n{\"fixture\":\"throw_path\",\"debug\":\"all\",\"class_name\":\"lab/Target\",\"class_major\":65,\"class_bytes\":609,\"class_sha256\":\"cceca2e2736bbf33a15b3a5fb2e251ea8756a824bcf39b6aa56f3bf882e58dfc\",\"methods\":[{\"name\":\"<init>\",\"descriptor\":\"()V\",\"access\":0,\"instructions\":[{\"index\":0,\"opcode\":25,\"variable\":0},{\"index\":1,\"opcode\":183,\"owner\":\"java/lang/Object\",\"name\":\"<init>\",\"descriptor\":\"()V\",\"interface\":false},{\"index\":2,\"opcode\":177}]},{\"name\":\"hook\",\"descriptor\":\"(I)I\",\"access\":8,\"instructions\":[{\"index\":0,\"opcode\":21,\"variable\":0},{\"index\":1,\"opcode\":4},{\"index\":2,\"opcode\":96},{\"index\":3,\"opcode\":172}]},{\"name\":\"other\",\"descriptor\":\"(I)I\",\"access\":8,\"instructions\":[{\"index\":0,\"opcode\":21,\"variable\":0},{\"index\":1,\"opcode\":5},{\"index\":2,\"opcode\":104},{\"index\":3,\"opcode\":172}]},{\"name\":\"compute\",\"descriptor\":\"(I)I\",\"access\":8,\"instructions\":[{\"index\":0,\"opcode\":21,\"variable\":0},{\"index\":1,\"opcode\":156},{\"index\":2,\"opcode\":187,\"type\":\"java/lang/IllegalArgumentException\"},{\"index\":3,\"opcode\":89},{\"index\":4,\"opcode\":18,\"constant\":\"negative\"},{\"index\":5,\"opcode\":183,\"owner\":\"java/lang/IllegalArgumentException\",\"name\":\"<init>\",\"descriptor\":\"(Ljava/lang/String;)V\",\"interface\":false},{\"index\":6,\"opcode\":191},{\"index\":7,\"opcode\":21,\"variable\":0},{\"index\":8,\"opcode\":184,\"owner\":\"lab/Target\",\"name\":\"hook\",\"descriptor\":\"(I)I\",\"interface\":false},{\"index\":9,\"opcode\":172}]}]}\n{\"fixture\":\"always_throw\",\"debug\":\"none\",\"class_name\":\"lab/Target\",\"class_major\":65,\"class_bytes\":336,\"class_sha256\":\"cbd287befb96086afe68e37b5be36e1bea329b662f00456de25ba29332331175\",\"methods\":[{\"name\":\"<init>\",\"descriptor\":\"()V\",\"access\":0,\"instructions\":[{\"index\":0,\"opcode\":25,\"variable\":0},{\"index\":1,\"opcode\":183,\"owner\":\"java/lang/Object\",\"name\":\"<init>\",\"descriptor\":\"()V\",\"interface\":false},{\"index\":2,\"opcode\":177}]},{\"name\":\"hook\",\"descriptor\":\"(I)I\",\"access\":8,\"instructions\":[{\"index\":0,\"opcode\":21,\"variable\":0},{\"index\":1,\"opcode\":4},{\"index\":2,\"opcode\":96},{\"index\":3,\"opcode\":172}]},{\"name\":\"other\",\"descriptor\":\"(I)I\",\"access\":8,\"instructions\":[{\"index\":0,\"opcode\":21,\"variable\":0},{\"index\":1,\"opcode\":5},{\"index\":2,\"opcode\":104},{\"index\":3,\"opcode\":172}]},{\"name\":\"compute\",\"descriptor\":\"(I)I\",\"access\":8,\"instructions\":[{\"index\":0,\"opcode\":187,\"type\":\"java/lang/IllegalArgumentException\"},{\"index\":1,\"opcode\":89},{\"index\":2,\"opcode\":18,\"constant\":\"all\"},{\"index\":3,\"opcode\":183,\"owner\":\"java/lang/IllegalArgumentException\",\"name\":\"<init>\",\"descriptor\":\"(Ljava/lang/String;)V\",\"interface\":false},{\"index\":4,\"opcode\":191}]}]}\n{\"fixture\":\"always_throw\",\"debug\":\"all\",\"class_name\":\"lab/Target\",\"class_major\":65,\"class_bytes\":560,\"class_sha256\":\"8b0b7ab5f71c1e8b5c56313ad83d0174114f5522c1781009d4f3aa0e365114d8\",\"methods\":[{\"name\":\"<init>\",\"descriptor\":\"()V\",\"access\":0,\"instructions\":[{\"index\":0,\"opcode\":25,\"variable\":0},{\"index\":1,\"opcode\":183,\"owner\":\"java/lang/Object\",\"name\":\"<init>\",\"descriptor\":\"()V\",\"interface\":false},{\"index\":2,\"opcode\":177}]},{\"name\":\"hook\",\"descriptor\":\"(I)I\",\"access\":8,\"instructions\":[{\"index\":0,\"opcode\":21,\"variable\":0},{\"index\":1,\"opcode\":4},{\"index\":2,\"opcode\":96},{\"index\":3,\"opcode\":172}]},{\"name\":\"other\",\"descriptor\":\"(I)I\",\"access\":8,\"instructions\":[{\"index\":0,\"opcode\":21,\"variable\":0},{\"index\":1,\"opcode\":5},{\"index\":2,\"opcode\":104},{\"index\":3,\"opcode\":172}]},{\"name\":\"compute\",\"descriptor\":\"(I)I\",\"access\":8,\"instructions\":[{\"index\":0,\"opcode\":187,\"type\":\"java/lang/IllegalArgumentException\"},{\"index\":1,\"opcode\":89},{\"index\":2,\"opcode\":18,\"constant\":\"all\"},{\"index\":3,\"opcode\":183,\"owner\":\"java/lang/IllegalArgumentException\",\"name\":\"<init>\",\"descriptor\":\"(Ljava/lang/String;)V\",\"interface\":false},{\"index\":4,\"opcode\":191}]}]}\n{\"fixture\":\"extra_call\",\"debug\":\"none\",\"class_name\":\"lab/Target\",\"class_major\":65,\"class_bytes\":266,\"class_sha256\":\"26633123f9591185b31bdee73a7080e656c12f8db6a27f8833a7dfaad77e7ce2\",\"methods\":[{\"name\":\"<init>\",\"descriptor\":\"()V\",\"access\":0,\"instructions\":[{\"index\":0,\"opcode\":25,\"variable\":0},{\"index\":1,\"opcode\":183,\"owner\":\"java/lang/Object\",\"name\":\"<init>\",\"descriptor\":\"()V\",\"interface\":false},{\"index\":2,\"opcode\":177}]},{\"name\":\"hook\",\"descriptor\":\"(I)I\",\"access\":8,\"instructions\":[{\"index\":0,\"opcode\":21,\"variable\":0},{\"index\":1,\"opcode\":4},{\"index\":2,\"opcode\":96},{\"index\":3,\"opcode\":172}]},{\"name\":\"other\",\"descriptor\":\"(I)I\",\"access\":8,\"instructions\":[{\"index\":0,\"opcode\":21,\"variable\":0},{\"index\":1,\"opcode\":5},{\"index\":2,\"opcode\":104},{\"index\":3,\"opcode\":172}]},{\"name\":\"compute\",\"descriptor\":\"(I)I\",\"access\":8,\"instructions\":[{\"index\":0,\"opcode\":16,\"operand\":100},{\"index\":1,\"opcode\":184,\"owner\":\"lab/Target\",\"name\":\"hook\",\"descriptor\":\"(I)I\",\"interface\":false},{\"index\":2,\"opcode\":54,\"variable\":1},{\"index\":3,\"opcode\":21,\"variable\":0},{\"index\":4,\"opcode\":184,\"owner\":\"lab/Target\",\"name\":\"hook\",\"descriptor\":\"(I)I\",\"interface\":false},{\"index\":5,\"opcode\":21,\"variable\":1},{\"index\":6,\"opcode\":96},{\"index\":7,\"opcode\":172}]}]}\n{\"fixture\":\"extra_call\",\"debug\":\"all\",\"class_name\":\"lab/Target\",\"class_major\":65,\"class_bytes\":504,\"class_sha256\":\"5dbe34cc2eb27fcb255a301eacb4c63f38dbef8952f95afd2285f06f509d9a3e\",\"methods\":[{\"name\":\"<init>\",\"descriptor\":\"()V\",\"access\":0,\"instructions\":[{\"index\":0,\"opcode\":25,\"variable\":0},{\"index\":1,\"opcode\":183,\"owner\":\"java/lang/Object\",\"name\":\"<init>\",\"descriptor\":\"()V\",\"interface\":false},{\"index\":2,\"opcode\":177}]},{\"name\":\"hook\",\"descriptor\":\"(I)I\",\"access\":8,\"instructions\":[{\"index\":0,\"opcode\":21,\"variable\":0},{\"index\":1,\"opcode\":4},{\"index\":2,\"opcode\":96},{\"index\":3,\"opcode\":172}]},{\"name\":\"other\",\"descriptor\":\"(I)I\",\"access\":8,\"instructions\":[{\"index\":0,\"opcode\":21,\"variable\":0},{\"index\":1,\"opcode\":5},{\"index\":2,\"opcode\":104},{\"index\":3,\"opcode\":172}]},{\"name\":\"compute\",\"descriptor\":\"(I)I\",\"access\":8,\"instructions\":[{\"index\":0,\"opcode\":16,\"operand\":100},{\"index\":1,\"opcode\":184,\"owner\":\"lab/Target\",\"name\":\"hook\",\"descriptor\":\"(I)I\",\"interface\":false},{\"index\":2,\"opcode\":54,\"variable\":1},{\"index\":3,\"opcode\":21,\"variable\":0},{\"index\":4,\"opcode\":184,\"owner\":\"lab/Target\",\"name\":\"hook\",\"descriptor\":\"(I)I\",\"interface\":false},{\"index\":5,\"opcode\":21,\"variable\":1},{\"index\":6,\"opcode\":96},{\"index\":7,\"opcode\":172}]}]}\n{\"fixture\":\"same_count_drift\",\"debug\":\"none\",\"class_name\":\"lab/Target\",\"class_major\":65,\"class_bytes\":259,\"class_sha256\":\"a7ecde99cd5432e3cca2ddeaccec3c610a8422a6b1f54f66b26ed1f6be8a468e\",\"methods\":[{\"name\":\"<init>\",\"descriptor\":\"()V\",\"access\":0,\"instructions\":[{\"index\":0,\"opcode\":25,\"variable\":0},{\"index\":1,\"opcode\":183,\"owner\":\"java/lang/Object\",\"name\":\"<init>\",\"descriptor\":\"()V\",\"interface\":false},{\"index\":2,\"opcode\":177}]},{\"name\":\"hook\",\"descriptor\":\"(I)I\",\"access\":8,\"instructions\":[{\"index\":0,\"opcode\":21,\"variable\":0},{\"index\":1,\"opcode\":4},{\"index\":2,\"opcode\":96},{\"index\":3,\"opcode\":172}]},{\"name\":\"other\",\"descriptor\":\"(I)I\",\"access\":8,\"instructions\":[{\"index\":0,\"opcode\":21,\"variable\":0},{\"index\":1,\"opcode\":5},{\"index\":2,\"opcode\":104},{\"index\":3,\"opcode\":172}]},{\"name\":\"compute\",\"descriptor\":\"(I)I\",\"access\":8,\"instructions\":[{\"index\":0,\"opcode\":16,\"operand\":100},{\"index\":1,\"opcode\":184,\"owner\":\"lab/Target\",\"name\":\"hook\",\"descriptor\":\"(I)I\",\"interface\":false},{\"index\":2,\"opcode\":172}]}]}\n{\"fixture\":\"same_count_drift\",\"debug\":\"all\",\"class_name\":\"lab/Target\",\"class_major\":65,\"class_bytes\":483,\"class_sha256\":\"9c7ba684fa477f9e1e8508a617910469e951a6f2d9dd2380db51c2a4346f7e3c\",\"methods\":[{\"name\":\"<init>\",\"descriptor\":\"()V\",\"access\":0,\"instructions\":[{\"index\":0,\"opcode\":25,\"variable\":0},{\"index\":1,\"opcode\":183,\"owner\":\"java/lang/Object\",\"name\":\"<init>\",\"descriptor\":\"()V\",\"interface\":false},{\"index\":2,\"opcode\":177}]},{\"name\":\"hook\",\"descriptor\":\"(I)I\",\"access\":8,\"instructions\":[{\"index\":0,\"opcode\":21,\"variable\":0},{\"index\":1,\"opcode\":4},{\"index\":2,\"opcode\":96},{\"index\":3,\"opcode\":172}]},{\"name\":\"other\",\"descriptor\":\"(I)I\",\"access\":8,\"instructions\":[{\"index\":0,\"opcode\":21,\"variable\":0},{\"index\":1,\"opcode\":5},{\"index\":2,\"opcode\":104},{\"index\":3,\"opcode\":172}]},{\"name\":\"compute\",\"descriptor\":\"(I)I\",\"access\":8,\"instructions\":[{\"index\":0,\"opcode\":16,\"operand\":100},{\"index\":1,\"opcode\":184,\"owner\":\"lab/Target\",\"name\":\"hook\",\"descriptor\":\"(I)I\",\"interface\":false},{\"index\":2,\"opcode\":172}]}]}\n{\"fixture\":\"different_owner\",\"debug\":\"none\",\"class_name\":\"lab/Target\",\"class_major\":65,\"class_bytes\":277,\"class_sha256\":\"66cf5c26874b13b8ac86242a985e28a39a73917c2c1e594c367e775e9ae30afb\",\"methods\":[{\"name\":\"<init>\",\"descriptor\":\"()V\",\"access\":0,\"instructions\":[{\"index\":0,\"opcode\":25,\"variable\":0},{\"index\":1,\"opcode\":183,\"owner\":\"java/lang/Object\",\"name\":\"<init>\",\"descriptor\":\"()V\",\"interface\":false},{\"index\":2,\"opcode\":177}]},{\"name\":\"hook\",\"descriptor\":\"(I)I\",\"access\":8,\"instructions\":[{\"index\":0,\"opcode\":21,\"variable\":0},{\"index\":1,\"opcode\":4},{\"index\":2,\"opcode\":96},{\"index\":3,\"opcode\":172}]},{\"name\":\"other\",\"descriptor\":\"(I)I\",\"access\":8,\"instructions\":[{\"index\":0,\"opcode\":21,\"variable\":0},{\"index\":1,\"opcode\":5},{\"index\":2,\"opcode\":104},{\"index\":3,\"opcode\":172}]},{\"name\":\"compute\",\"descriptor\":\"(I)I\",\"access\":8,\"instructions\":[{\"index\":0,\"opcode\":21,\"variable\":0},{\"index\":1,\"opcode\":184,\"owner\":\"lab/Alternate\",\"name\":\"hook\",\"descriptor\":\"(I)I\",\"interface\":false},{\"index\":2,\"opcode\":172}]}]}\n{\"fixture\":\"different_owner\",\"debug\":\"all\",\"class_name\":\"lab/Target\",\"class_major\":65,\"class_bytes\":501,\"class_sha256\":\"81898571d04004e430315177733f85660148a164735f7d3eca9afdd041cc9a29\",\"methods\":[{\"name\":\"<init>\",\"descriptor\":\"()V\",\"access\":0,\"instructions\":[{\"index\":0,\"opcode\":25,\"variable\":0},{\"index\":1,\"opcode\":183,\"owner\":\"java/lang/Object\",\"name\":\"<init>\",\"descriptor\":\"()V\",\"interface\":false},{\"index\":2,\"opcode\":177}]},{\"name\":\"hook\",\"descriptor\":\"(I)I\",\"access\":8,\"instructions\":[{\"index\":0,\"opcode\":21,\"variable\":0},{\"index\":1,\"opcode\":4},{\"index\":2,\"opcode\":96},{\"index\":3,\"opcode\":172}]},{\"name\":\"other\",\"descriptor\":\"(I)I\",\"access\":8,\"instructions\":[{\"index\":0,\"opcode\":21,\"variable\":0},{\"index\":1,\"opcode\":5},{\"index\":2,\"opcode\":104},{\"index\":3,\"opcode\":172}]},{\"name\":\"compute\",\"descriptor\":\"(I)I\",\"access\":8,\"instructions\":[{\"index\":0,\"opcode\":21,\"variable\":0},{\"index\":1,\"opcode\":184,\"owner\":\"lab/Alternate\",\"name\":\"hook\",\"descriptor\":\"(I)I\",\"interface\":false},{\"index\":2,\"opcode\":172}]}]}\n{\"fixture\":\"unrelated_call\",\"debug\":\"none\",\"class_name\":\"lab/Target\",\"class_major\":65,\"class_bytes\":273,\"class_sha256\":\"8cf010c79245b8d969492819834ad03d11a7bed64d995868546c5c154291e7f0\",\"methods\":[{\"name\":\"<init>\",\"descriptor\":\"()V\",\"access\":0,\"instructions\":[{\"index\":0,\"opcode\":25,\"variable\":0},{\"index\":1,\"opcode\":183,\"owner\":\"java/lang/Object\",\"name\":\"<init>\",\"descriptor\":\"()V\",\"interface\":false},{\"index\":2,\"opcode\":177}]},{\"name\":\"hook\",\"descriptor\":\"(I)I\",\"access\":8,\"instructions\":[{\"index\":0,\"opcode\":21,\"variable\":0},{\"index\":1,\"opcode\":4},{\"index\":2,\"opcode\":96},{\"index\":3,\"opcode\":172}]},{\"name\":\"other\",\"descriptor\":\"(I)I\",\"access\":8,\"instructions\":[{\"index\":0,\"opcode\":21,\"variable\":0},{\"index\":1,\"opcode\":5},{\"index\":2,\"opcode\":104},{\"index\":3,\"opcode\":172}]},{\"name\":\"compute\",\"descriptor\":\"(I)I\",\"access\":8,\"instructions\":[{\"index\":0,\"opcode\":21,\"variable\":0},{\"index\":1,\"opcode\":184,\"owner\":\"lab/Target\",\"name\":\"other\",\"descriptor\":\"(I)I\",\"interface\":false},{\"index\":2,\"opcode\":54,\"variable\":1},{\"index\":3,\"opcode\":21,\"variable\":1},{\"index\":4,\"opcode\":184,\"owner\":\"lab/Target\",\"name\":\"hook\",\"descriptor\":\"(I)I\",\"interface\":false},{\"index\":5,\"opcode\":172}]}]}\n{\"fixture\":\"unrelated_call\",\"debug\":\"all\",\"class_name\":\"lab/Target\",\"class_major\":65,\"class_bytes\":511,\"class_sha256\":\"bc482a449c341c7ff2430d4ce0819d4316efd16e1ffc97b836f417629c93f491\",\"methods\":[{\"name\":\"<init>\",\"descriptor\":\"()V\",\"access\":0,\"instructions\":[{\"index\":0,\"opcode\":25,\"variable\":0},{\"index\":1,\"opcode\":183,\"owner\":\"java/lang/Object\",\"name\":\"<init>\",\"descriptor\":\"()V\",\"interface\":false},{\"index\":2,\"opcode\":177}]},{\"name\":\"hook\",\"descriptor\":\"(I)I\",\"access\":8,\"instructions\":[{\"index\":0,\"opcode\":21,\"variable\":0},{\"index\":1,\"opcode\":4},{\"index\":2,\"opcode\":96},{\"index\":3,\"opcode\":172}]},{\"name\":\"other\",\"descriptor\":\"(I)I\",\"access\":8,\"instructions\":[{\"index\":0,\"opcode\":21,\"variable\":0},{\"index\":1,\"opcode\":5},{\"index\":2,\"opcode\":104},{\"index\":3,\"opcode\":172}]},{\"name\":\"compute\",\"descriptor\":\"(I)I\",\"access\":8,\"instructions\":[{\"index\":0,\"opcode\":21,\"variable\":0},{\"index\":1,\"opcode\":184,\"owner\":\"lab/Target\",\"name\":\"other\",\"descriptor\":\"(I)I\",\"interface\":false},{\"index\":2,\"opcode\":54,\"variable\":1},{\"index\":3,\"opcode\":21,\"variable\":1},{\"index\":4,\"opcode\":184,\"owner\":\"lab/Target\",\"name\":\"hook\",\"descriptor\":\"(I)I\",\"interface\":false},{\"index\":5,\"opcode\":172}]}]}\n{\"fixture\":\"nested_call\",\"debug\":\"none\",\"class_name\":\"lab/Target\",\"class_major\":65,\"class_bytes\":261,\"class_sha256\":\"68ac1dd3a78608098283510de90aa48839d82bc0e54bef72744b553f5fc9a25c\",\"methods\":[{\"name\":\"<init>\",\"descriptor\":\"()V\",\"access\":0,\"instructions\":[{\"index\":0,\"opcode\":25,\"variable\":0},{\"index\":1,\"opcode\":183,\"owner\":\"java/lang/Object\",\"name\":\"<init>\",\"descriptor\":\"()V\",\"interface\":false},{\"index\":2,\"opcode\":177}]},{\"name\":\"hook\",\"descriptor\":\"(I)I\",\"access\":8,\"instructions\":[{\"index\":0,\"opcode\":21,\"variable\":0},{\"index\":1,\"opcode\":4},{\"index\":2,\"opcode\":96},{\"index\":3,\"opcode\":172}]},{\"name\":\"other\",\"descriptor\":\"(I)I\",\"access\":8,\"instructions\":[{\"index\":0,\"opcode\":21,\"variable\":0},{\"index\":1,\"opcode\":5},{\"index\":2,\"opcode\":104},{\"index\":3,\"opcode\":172}]},{\"name\":\"compute\",\"descriptor\":\"(I)I\",\"access\":8,\"instructions\":[{\"index\":0,\"opcode\":21,\"variable\":0},{\"index\":1,\"opcode\":184,\"owner\":\"lab/Target\",\"name\":\"hook\",\"descriptor\":\"(I)I\",\"interface\":false},{\"index\":2,\"opcode\":184,\"owner\":\"lab/Target\",\"name\":\"hook\",\"descriptor\":\"(I)I\",\"interface\":false},{\"index\":3,\"opcode\":172}]}]}\n{\"fixture\":\"nested_call\",\"debug\":\"all\",\"class_name\":\"lab/Target\",\"class_major\":65,\"class_bytes\":485,\"class_sha256\":\"586ebad82619923d0c123589d462e8996fb104ab2179d7f2729a3e892a554158\",\"methods\":[{\"name\":\"<init>\",\"descriptor\":\"()V\",\"access\":0,\"instructions\":[{\"index\":0,\"opcode\":25,\"variable\":0},{\"index\":1,\"opcode\":183,\"owner\":\"java/lang/Object\",\"name\":\"<init>\",\"descriptor\":\"()V\",\"interface\":false},{\"index\":2,\"opcode\":177}]},{\"name\":\"hook\",\"descriptor\":\"(I)I\",\"access\":8,\"instructions\":[{\"index\":0,\"opcode\":21,\"variable\":0},{\"index\":1,\"opcode\":4},{\"index\":2,\"opcode\":96},{\"index\":3,\"opcode\":172}]},{\"name\":\"other\",\"descriptor\":\"(I)I\",\"access\":8,\"instructions\":[{\"index\":0,\"opcode\":21,\"variable\":0},{\"index\":1,\"opcode\":5},{\"index\":2,\"opcode\":104},{\"index\":3,\"opcode\":172}]},{\"name\":\"compute\",\"descriptor\":\"(I)I\",\"access\":8,\"instructions\":[{\"index\":0,\"opcode\":21,\"variable\":0},{\"index\":1,\"opcode\":184,\"owner\":\"lab/Target\",\"name\":\"hook\",\"descriptor\":\"(I)I\",\"interface\":false},{\"index\":2,\"opcode\":184,\"owner\":\"lab/Target\",\"name\":\"hook\",\"descriptor\":\"(I)I\",\"interface\":false},{\"index\":3,\"opcode\":172}]}]}\n"
+}

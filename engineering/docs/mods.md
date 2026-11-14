@@ -21,3 +21,7 @@ For Sims and other proprietary games, record the exact supported scripting/runti
 ## Native proof
 
 Use the actual target runtime, normal installed launch path, real assets, both successful and failing scenarios, multiplayer authority where relevant, and long-lived save compatibility. A successful compile, JSON validator or pretty render is only one gate.
+
+## Bytecode injection acceptance
+
+[Injection compatibility](mod-bytecode-acceptance.md) covers selector identity, match counts, fork/remapping boundaries and native acceptance. The [bytecode selector laboratory](../experiments/bytecode-selector-lab/README.md) compiles and inspects original synthetic fixtures without loading a game or running Mixin.
