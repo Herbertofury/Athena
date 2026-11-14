@@ -1,0 +1,15 @@
+// Source applyThemeMix RGB interpolation, scoped to native scene accents; no global styles/storage.
+export function mixColor(a,b,t){if(!/^#[0-9a-f]{6}$/i.test(a)||!/^#[0-9a-f]{6}$/i.test(b)||!Number.isFinite(t)||t<0||t>1)throw Error('Invalid palette blend');const pa=parseInt(a.slice(1),16),pb=parseInt(b.slice(1),16),ar=pa>>16,ag=pa>>8&255,ab=pa&255,br=pb>>16,bg=pb>>8&255,bb=pb&255;return '#'+[ar+(br-ar)*t,ag+(bg-ag)*t,ab+(bb-ab)*t].map(v=>Math.round(v).toString(16).padStart(2,'0')).join('');}
+export function attachNativePalette({host,signal,themes,scene,getTheme}){
+ const doc=host.ownerDocument;let disposed=false,active=null;
+ host.innerHTML='<h2>Native scene palette mix</h2><p>Original RGB theme-mix formula applied to the first three native scene accents. Explicit Apply; session-only. No global Athena theme, asset appearance, gradients, stored layouts or source palette equivalence is implied. Switching theme clears the mix.</p><label>Secondary native theme <select data-palette-theme></select></label><label>Secondary contribution (%) <input data-palette-amount type="number" min="0" max="100" step="1" value="50"></label><button data-palette-apply>Apply scene palette mix</button><button data-palette-reset disabled>Restore base scene palette</button><p role="status" data-palette-status>Base scene palette; nothing saved.</p>';
+ const one=q=>host.querySelector(q),select=one('[data-palette-theme]'),amount=one('[data-palette-amount]'),reset=one('[data-palette-reset]'),status=one('[data-palette-status]');
+ for(const t of themes){const option=doc.createElement('option');option.value=t.id;option.textContent=t.name;select.append(option)}
+ function colors(theme,values){for(let i=0;i<3;i++)scene.style.setProperty('--foundry-color-'+i,values[i])}
+ function clear(){const base=getTheme();active=null;colors(base,base.colors);reset.disabled=true;status.textContent='Base scene palette restored; saved layout unchanged.'}
+ function update(){if(disposed)return;const base=getTheme();if(active&&active.primary!==base.id){active=null;reset.disabled=true;status.textContent='Theme changed; using its base palette.'}if(active)colors(base,active.colors)}
+ function apply(){if(disposed||signal?.aborted)return;const base=getTheme(),secondary=themes.find(t=>t.id===select.value),raw=amount.value,t=Number(raw)/100;try{if(!raw.trim()||!secondary)throw Error();const mixed=base.colors.slice(0,3).map((c,i)=>mixColor(c,secondary.colors[i],t));active={primary:base.id,colors:mixed};update();reset.disabled=false;status.textContent=`${Math.round(t*100)}% secondary native palette applied for this session; saved layout unchanged.`;}catch{status.textContent='Invalid mix; previous scene palette retained.'}}
+ one('[data-palette-apply]').addEventListener('click',apply);reset.addEventListener('click',clear);
+ function dispose(){if(disposed)return;clear();disposed=true;one('[data-palette-apply]').removeEventListener('click',apply);reset.removeEventListener('click',clear);signal?.removeEventListener('abort',dispose);host.replaceChildren()}
+ signal?.addEventListener('abort',dispose,{once:true});if(signal?.aborted)dispose();return {update,dispose};
+}
