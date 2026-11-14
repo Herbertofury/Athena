@@ -15,7 +15,7 @@ Reference images are not cleared for new runtime redistribution. Artist authorit
 - MIT licensing and the original source-contract, authority and browser tests.
 - Original local contract/authority tests, TypeScript check and Vite production build pass. This is not a native build or browser pass.
 - The original snapshot reported no wiki or Pages and no issues/PRs/runs. Recheck before retirement: the 2026-11-14 authenticated inventory now includes open acceptance issue #1. Snapshot metadata is not a current completeness claim.
-- Six original v24.0.0 release assets are inventoried. Four files are preserved and hash-verified: source ZIP, Windows EXE/MSI and SHA256SUMS.txt. The web ZIP and complete-release ZIP remain unpreserved; see the release directory's partial-preservation report.
+- Six original v24.0.0 release assets are inventoried. Four files are preserved and hash-verified: source ZIP, Windows EXE/MSI and SHA256SUMS.txt. That was the original partial-preservation checkpoint. A later independent check recovered all six exact assets from each of two existing owner-held backups; see [release recovery](release-recovery-2026-11-14.json). These backup bytes have not been published into Athena, and this does not establish current sharing ACLs, perpetual storage or full retirement readiness.
 - Fresh authenticated refs on 2026-11-14 show source main `07d66bde6b758992d04a6b580f159599c705de55`, three documentation commits beyond the bundled main. The reviewed competitive-landscape document and README link are now reconciled without reverting privacy redactions; the original bundle does not yet contain those three commit identities.
 
 ## Restore independently of the original repository
@@ -53,3 +53,9 @@ This is **partial native parity**, not a substitute for all original functionali
 6. Retain failures and last-good artifacts. The user will delete the source only after all gates are satisfied.
 
 No source repository deletion, visibility change, settings change or grant creation is part of this migration.
+
+## Release recovery addendum (2026-11-14)
+
+The original web ZIP and complete-release ZIP are no longer missing bytes: both match the original release inventory in two independently read backup containers. All six release assets match size and SHA-256; nested ZIP CRC checks passed without executing installers. The original 533-byte checksum asset was verified separately from the different 421-byte checksum inside the complete-release ZIP. The dated audit and prior failure reports are retained unchanged.
+
+Only release-byte discovery is resolved. Private issue content, later original identifying history, full native parity, live-data migration, rights/privacy review, source-independent links and native acceptance remain separate gates. The 67 blocked Atlas deployment-status histories are still unresolved. No repository deletion or archival is authorized. See [acceptance issue #60](https://github.com/Herbertofury/Athena/issues/60).
