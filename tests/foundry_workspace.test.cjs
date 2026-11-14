@@ -83,3 +83,13 @@ test('default-room reset cancels pending room and workspace imports without writ
   input.files=[{size:100,text:()=>new Promise(r=>resolve=r)}];input.dispatchEvent(new t.window.Event('change'));t.document.querySelector('[data-reset-room]').click();resolve(JSON.stringify(selector==='[data-import]'?active:{version:1,active,layouts:{}}));await new Promise(r=>setImmediate(r));assert.deepEqual(t.mounted.exportState(),original);assert.equal(t.writes(),0);assert.equal(t.document.querySelector('[data-undo]').disabled,true);t.mounted.unmount();
  }
 });
+test('inspector applies exact placement atomically, supports pin and undo, and rejects invalid values',async()=>{
+ const t=await setup(),q=s=>t.document.querySelector(s),choose=q('[data-inspect-object]');choose.value=catalog.themes[0].objects[1].id;choose.dispatchEvent(new t.window.Event('change'));const id=choose.value;
+ q('[data-inspect-x]').value='42.75';q('[data-inspect-y]').value='63.25';q('[data-inspect-apply]').click();assert.deepEqual(t.mounted.exportState().active.placements[id],{x:.4275,y:.6325,pinned:false});
+ for(const value of ['', '-1','101','Infinity','bad']){const writes=t.writes();q('[data-inspect-x]').value=value;q('[data-inspect-apply]').click();assert.equal(t.writes(),writes);assert.equal(t.mounted.exportState().active.placements[id].x,.4275);}
+ q('[data-inspect-pin]').checked=true;q('[data-inspect-pin]').dispatchEvent(new t.window.Event('change'));assert.equal(q('[data-inspect-apply]').disabled,true);assert.equal(t.mounted.exportState().active.placements[id].pinned,true);q('[data-undo]').click();assert.equal(t.mounted.exportState().active.placements[id].pinned,false);q('[data-undo]').click();assert.equal(t.mounted.exportState().active.placements[id],undefined);t.mounted.unmount();
+});
+test('inspector reflects scene selection and resets selection safely when theme changes',async()=>{
+ const t=await setup(),q=s=>t.document.querySelector(s),b=t.document.querySelectorAll('.foundry-object')[2];b.click();assert.equal(q('[data-inspect-object]').value,b.dataset.id);const event=new t.window.Event('keydown',{bubbles:true,cancelable:true});event.key='ArrowRight';b.dispatchEvent(event);assert.equal(Number(q('[data-inspect-x]').value),81);
+ const select=q('[data-theme-select]');select.value=catalog.themes[1].id;select.dispatchEvent(new t.window.Event('change'));assert.equal(q('[data-inspect-object]').value,catalog.themes[1].objects[0].id);assert.equal(q('[data-inspect-pin]').checked,false);t.mounted.unmount();
+});
