@@ -76,7 +76,7 @@ for l in lessons:
  s='# '+l['title']+'\n\n'+l['summary']+'\n\n## Learn\n\n'+'\n\n'.join(l['explain'])+'\n\n## Worked example\n\n'+l['example']+'\n\n## Practice safely\n\n'+'\n'.join(f'{i}. {v}' for i,v in enumerate(l['lab'],1))+'\n\n## Check your understanding\n\n'+l['question']+'\n\n'+'\n'.join(f'- {o}' for o in l['options'])+'\n\n<details><summary>Answer and explanation</summary>\n\n'+l['options'][l['answer']]+'. '+l['why']+'\n\n</details>\n\n## Further study\n\n'+'\n'.join('- '+u for u in l['sources'])+'\n\n**Depth:** Introductory teaching with a concept check; this is not evidence of full-domain mastery.\n'
  if l.get('workshopId'): s=lesson_markdown(l)
  write(R/f'docs/shared/{l["id"]}.md',s);write(R/f'wiki/shared-{l["id"]}.md',s)
-write(R/'wiki/_Sidebar.md','# Athena\n\n- [Home](Home)\n- [Unified app status](Unified-Athena)\n- [Knowledge map](Knowledge-Map)\n- [The Packet Trail](Packet-Trail)\n- [Coverage and quality](Coverage-and-Quality)\n- [Engineering research](Engineering-Home)\n- [Developer and agent cleanup tools](Engineering-Developer-Cleanup-and-Agent-Hygiene)\n\n## Credentials\n\n'+'\n'.join(f'- [{c["name"]}]({c["id"]})' for c in cat['certifications'])+'\n\n## Shared foundations\n\n'+'\n'.join(f'- [{l["title"]}](shared-{l["id"]})' for l in lessons))
+write(R/'wiki/_Sidebar.md','# Athena\n\n- [Home](Home)\n- [Unified app status](Unified-Athena)\n- [Knowledge map](Knowledge-Map)\n- [The Packet Trail](Packet-Trail)\n- [Coverage and quality](Coverage-and-Quality)\n- [Engineering research](Engineering-Home)\n- [Developer and agent cleanup tools](Engineering-Developer-Cleanup-and-Agent-Hygiene)\n- [Windows tools catalog](Engineering-Windows-Utilities-and-Creation-Tools)\n- [Windows optimization guide](Engineering-Windows-PC-Optimization)\n\n## Credentials\n\n'+'\n'.join(f'- [{c["name"]}]({c["id"]})' for c in cat['certifications'])+'\n\n## Shared foundations\n\n'+'\n'.join(f'- [{l["title"]}](shared-{l["id"]})' for l in lessons))
 print('Built',len(cat['certifications']),'tracks,',sum(len(c['domains']) for c in cat['certifications']),'domain roadmaps,',len(lessons),'lessons')
 
 path_doc='# The Packet Trail\n\n'+PATH['summary']+'\n\n'+PATH['limits']+'\n\n## Before you start\n\n'+ '\n'.join('- ['+next(l['title'] for l in lessons if l['id']==i)+'](../shared/'+i+'.md)' for i in PATH['prerequisites'])+'\n\n## Eight applied lessons\n\n'+ '\n'.join(str(n)+'. ['+next(l['title'] for l in lessons if l['id']==i)+'](../shared/'+i+'.md)' for n,i in enumerate(PATH['lessonIds'],1))+'\n\n## Practice and evidence\n\nThe app includes three synthetic diagnosis cases and a fixed-table route detective. They do not access your network or grant practical mastery.\n\nRun the [loopback HTTP lab](../../labs/network/README.md) on an authorized machine and retain actual test results. Complete the evidence template, explain what each test proves, and preserve unrun or failed checks.\n'
@@ -103,3 +103,9 @@ for name in ['docs/README.md','wiki/Home.md','wiki/_Sidebar.md']:
 for name, target in [('docs/README.md','accessibility.md'),('wiki/Home.md','Accessibility'),('wiki/_Sidebar.md','Accessibility')]:
  destination=R/name
  destination.write_text(destination.read_text()+'\n- [Keyboard access and verification limits]('+target+')\n')
+
+# Explicitly reviewed public PC catalog assets; no broad research-directory export.
+for name in ("index.html", "table.js", "catalog.json"):
+    target=R/"dist/research/windows-utilities-2026-11-14"/name
+    target.parent.mkdir(parents=True, exist_ok=True)
+    target.write_bytes((R/"research/windows-utilities-2026-11-14"/name).read_bytes())

@@ -90,3 +90,7 @@ Community discussion: [Claude Code browser-profile leftovers](https://www.reddit
 **Keep active worktrees, uncommitted changes, session history, release artifacts, useful compiler caches, and C:\Windows\Installer out of blanket deletion.** Preview first, use reversible cleanup, test restoration and rebuilds.
 
 This is a broad 66-repository investigation, not a proof that every relevant cleanup repository on GitHub exists in this catalog. Rankings are by stars alone, not recommendation quality.
+
+## Broader Windows catalog
+
+[Windows utilities and creation tools](../windows-utilities-2026-11-14/README.md) adds use-case ranking, vendor/GitLab sources, licensing and reuse analysis without changing this 66-entry historical snapshot.

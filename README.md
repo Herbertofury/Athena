@@ -84,9 +84,13 @@ Certification and vendor names belong to their owners. Athena is independent and
 Read [the workspace contract](docs/integration/WORKSPACE-CONTRACT.md) and [current integration evidence](docs/integration/STATUS.md). The reviewed public-preview package includes Learning, Engineering workspaces and Foundry authoring, not private databases, credentials or original private assets. Engineering Lab requires `serve-athena`; Foundry's SQLite profile requires its explicit local bridge. Neither connects to a private database from public Pages. `scripts/package_app.py` verifies the exact reviewed hashes in `config/runtime-public-preview.json`. The `public-preview` label does not mean Foundry is absent; it means complete original-source parity is not claimed. Default `complete` mode still requires the additional Foundry entry specified by the packager and is not a retirement certificate.
 
 
-## Developer cleanup research
+## Windows PC guides and developer cleanup research
 
 - [Developer and AI-agent cleanup: ranked tools](research/developer-cleanup-2026-11-14/README.md): 66 official-source projects, GitHub stars and Windows download links.
+
+- [Windows utilities and creative tools](research/windows-utilities-2026-11-14/README.md): 30 additional source-backed candidates, licenses and comparison plans.
+- [Sortable PC tools table](https://herbertofury.github.io/Athena/research/windows-utilities-2026-11-14/): GitHub stars and attributed same-source user feedback, with missing values unranked.
+- [Reversible Windows optimization guide](wiki/Engineering-Windows-PC-Optimization.md): search, startup/services, storage, CPU/power, GPU and measurement.
 
 ## Competing apps and alternative workflows
 
