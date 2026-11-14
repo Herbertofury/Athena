@@ -137,3 +137,11 @@ The inspector adapts original `prototype-v24.ts` `centerSelected`/`fitSelectedTo
 Both actions refuse pinned, hidden/filtered, zero-size or unavailable targets without relocation. Identity, scope/anchor, origin, rotation and unrelated fields remain unchanged. Center retains format; Fit explicitly adopts existing format v2 when necessary. Each actual edit is one Undo; no-op leaves pending inspector drafts and history untouched. No database/schema changes or automatic unpinning.
 
 Tests: `node --test native/foundry/tests/center-fit.test.mjs`; actual Chromium: `CHROMIUM_PATH=<installed-browser> node scripts/test_foundry_center_fit_browser.cjs`.
+
+## Selected pixel nudge
+
+Source `prototype-v24.ts` `nudgeSelected` (303) adds directional pixel steps; its inspector buttons (719) use `transformPrefs.grid=8` (163). Native inspector buttons default to 8 pixels and add a bounded session-only integer step 1–100. This adjustable range is a native adaptation, not an original setting or drag-grid snapping. Existing object arrow-key percentage movement remains unchanged.
+
+Nudges measure the selected object's untransformed computed left/top and actual untransformed computed padding-box dimensions (including fractional pixels and box-sizing), then convert the moved axis to normalized coordinates. World scene respects its current CSS horizontal edge (60px or responsive 45px) and vertical 85px clamp. Outward at a rendered boundary is a genuine no-op; inward starts at the visible edge rather than accumulating invisible normalized movement. UI/sticker surfaces use their existing 0–1 bounds. Pinned, filtered/hidden, unavailable or zero-size surfaces refuse edits. Identity, scope/anchor, perpendicular coordinate, appearance and room format remain intact; each edit has one Undo. Step is not stored in backups and no-op preserves drafts/history.
+
+Tests: `node --test native/foundry/tests/pixel-nudge.test.mjs`; measured Chromium: `CHROMIUM_PATH=<installed-browser> node scripts/test_foundry_pixel_nudge_browser.cjs`.

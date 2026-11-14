@@ -84,3 +84,11 @@ export function fitBaseToSurface({width,height,baseWidth,baseHeight,scaleX=1,sca
  const base=Math.max(baseWidth,baseHeight),fit=Math.min(3,Math.max(.05,Math.min((width-24)/base,(height-24)/base)));
  return {scaleX:fit*(scaleX<0?-1:1),scaleY:fit*(scaleY<0?-1:1)};
 }
+
+/** Explicit pixel nudge on a measured native base-position surface; no grid snapping. */
+export function nudgeBasePixels({x,y,left,top,width,height,dx,dy,step,edgeX=0,edgeY=0}){
+ if(![x,y].every(n=>Number.isFinite(n)&&n>=0&&n<=1)||![left,top,width,height,edgeX,edgeY].every(Number.isFinite)||width<=0||height<=0||edgeX<0||edgeY<0||width<2*edgeX||height<2*edgeY||!Number.isInteger(step)||step<1||step>100||![[1,0],[-1,0],[0,1],[0,-1]].some(d=>d[0]===dx&&d[1]===dy))throw Error('Nudge requires a visible measured surface and integer step 1–100 pixels.');
+ const nextLeft=Math.max(edgeX,Math.min(width-edgeX,left+dx*step)),nextTop=Math.max(edgeY,Math.min(height-edgeY,top+dy*step));
+ if((!dx||Math.abs(nextLeft-left)<.000001)&&(!dy||Math.abs(nextTop-top)<.000001))return null;
+ return {x:dx?nextLeft/width:x,y:dy?nextTop/height:y};
+}
