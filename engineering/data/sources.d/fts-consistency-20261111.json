@@ -1,0 +1,79 @@
+[
+  {
+    "id": "FT26001",
+    "title": "SQLite FTS5 external-content consistency and query language",
+    "url": "https://www.sqlite.org/fts5.html",
+    "observed_version": "Rolling documentation checked 2026-11-11",
+    "topic": "storage",
+    "note": "External-content backfill, trigger maintenance, integrity rank=1, rebuild and phrase grammar.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 180,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "FT26002",
+    "title": "SQLite trigger semantics and column-list caveats",
+    "url": "https://www.sqlite.org/lang_createtrigger.html",
+    "observed_version": "Rolling documentation checked 2026-11-11",
+    "topic": "storage",
+    "note": "Row-level triggers and OLD/NEW values; unknown UPDATE OF columns are not a validation gate.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 180,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "FT26003",
+    "title": "SQLite explicit transaction control",
+    "url": "https://www.sqlite.org/lang_transaction.html",
+    "observed_version": "Rolling documentation checked 2026-11-11",
+    "topic": "storage",
+    "note": "Single-writer transactions, rollback and commit-error boundaries.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 180,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "FT26004",
+    "title": "SQLite connection isolation and WAL snapshots",
+    "url": "https://www.sqlite.org/isolation.html",
+    "observed_version": "Rolling documentation checked 2026-11-11",
+    "topic": "storage",
+    "note": "Independent-connection visibility and old reader snapshots.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 180,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "FT26005",
+    "title": "Python sqlite3 transaction and progress APIs",
+    "url": "https://docs.python.org/3.12/library/sqlite3.html",
+    "observed_version": "Python 3.12 docs rendered 3.12.16",
+    "topic": "storage",
+    "note": "Explicit autocommit selection and progress-handler interruption; actual runtime 3.12.14.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 180,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "FT26006",
+    "title": "SQLite REPLACE and conflict handling",
+    "url": "https://www.sqlite.org/lang_conflict.html",
+    "observed_version": "Page updated 2025-11-22; checked 2026-11-11",
+    "topic": "storage",
+    "note": "REPLACE deletion triggers depend on recursive triggers; not equivalent to UPSERT.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 180,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "FT26007",
+    "title": "SQLite 3.53.1 release and source identity",
+    "url": "https://www.sqlite.org/releaselog/3_53_1.html",
+    "observed_version": "SQLite 3.53.1 released 2026-05-05",
+    "topic": "storage",
+    "note": "Recorded runtime source ID matches this release page; no reproducible-build attestation.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 180,
+    "evidence": "primary_documented"
+  }
+]
