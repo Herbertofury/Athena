@@ -63,6 +63,10 @@ jobs:
         run: |
           node scripts/test_foundry_capacity_browser.mjs
           node scripts/test_foundry_save_outcome_browser.mjs
+      - name: Local PNG preview, room routing and cleanup in Chromium
+        env:
+          ATHENA_BROWSER_OUTPUT: browser-results/foundry-local-image
+        run: node scripts/test_foundry_local_image_browser.cjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -70,4 +74,5 @@ jobs:
           path: |
             browser-results/foundry-native/
             browser-results/foundry-capacity/
+            browser-results/foundry-local-image/
           if-no-files-found: error
