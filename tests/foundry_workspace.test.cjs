@@ -51,3 +51,16 @@ test('native forms retain labels and reviewed palettes update with theme selecti
  const select=t.document.querySelector('[data-theme-select]');select.value=catalog.themes[1].id;select.dispatchEvent(new t.window.Event('change'));
  assert.equal(scene.style.getPropertyValue('--foundry-color-0'),catalog.themes[1].colors[0]);t.mounted.unmount();
 });
+test('undo and redo restore edits and later edits discard redo',async()=>{
+ const t=await setup(),time=t.document.querySelector('[data-time]'),undo=t.document.querySelector('[data-undo]'),redo=t.document.querySelector('[data-redo]');
+ assert.equal(undo.disabled,true);time.value='night';time.dispatchEvent(new t.window.Event('change'));undo.click();assert.equal(t.mounted.exportState().active.time,'day');assert.equal(redo.disabled,false);redo.click();assert.equal(t.mounted.exportState().active.time,'night');
+ undo.click();time.value='dusk';time.dispatchEvent(new t.window.Event('change'));assert.equal(redo.disabled,true);t.mounted.unmount();
+});
+test('undo of imported workspace restores all previous room state and rejects stale reads',async()=>{
+ const t=await setup(),initial=t.mounted.exportState().active,second={...initial,roomId:catalog.themes[0].rooms[1].id,time:'night'},input=t.document.querySelector('[data-import-workspace]');
+ input.files=[{size:100,text:async()=>JSON.stringify({version:1,active:second,layouts:{}})}];input.dispatchEvent(new t.window.Event('change'));await new Promise(r=>setImmediate(r));assert.equal(t.mounted.exportState().active.roomId,second.roomId);
+ let resolve;input.files=[{size:100,text:()=>new Promise(r=>resolve=r)}];input.dispatchEvent(new t.window.Event('change'));t.document.querySelector('[data-undo]').click();resolve(JSON.stringify({version:1,active:second,layouts:{}}));await new Promise(r=>setImmediate(r));assert.equal(t.mounted.exportState().active.roomId,initial.roomId);assert.equal(t.mounted.exportState().layouts[second.roomId],undefined);t.mounted.unmount();
+});
+test('rollback cannot clear corrupt-state recovery hold',async()=>{
+ const t=await setup({version:2}),time=t.document.querySelector('[data-time]');time.value='night';time.dispatchEvent(new t.window.Event('change'));t.document.querySelector('[data-undo]').click();assert.equal(t.writes(),0);assert.throws(()=>t.mounted.exportState(),/retained/);t.mounted.unmount();
+});
