@@ -83,3 +83,8 @@ The fixture data is **synthetic test data**, never evidence that a real applicat
 ## Competing apps and alternative workflows
 
 [Comparison hub](COMPETITORS.md): relevant baselines, source-backed alternatives, existing research catalogs and concrete validation priorities. Candidate ideas are not claims of measured superiority.
+
+
+## Preserved draft research
+
+[November 3 frontier systems review](research/2026-11-03-frontier-systems.md) is reconciled from preserved Atlas draft #6, with its original dated primary-source observations. Its rankings and release statements are historical research, not a new latest-version check, dependency adoption or proven performance recommendation. Re-evaluate against Athena’s current requirements and exact shipped implementation before promotion.

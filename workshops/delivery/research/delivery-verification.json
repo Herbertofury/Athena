@@ -1,0 +1,124 @@
+{
+  "executedAt": "2026-11-07",
+  "platform": "Linux",
+  "suite": {
+    "command": "PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s tests -v",
+    "tests": 99,
+    "passed": 99,
+    "failures": 0,
+    "errors": 0,
+    "note": "82 lab/CLI tests plus 17 app-content/reference consistency tests. Real Git is used except documented injected/mocked failure cases."
+  },
+  "cli": [
+    {
+      "command": "python3 labs/delivery-workshop/run_lab.py snapshots",
+      "exitCode": 0,
+      "jsonParsed": true,
+      "gitOperations": 13,
+      "runtime": {
+        "git_executable": "/usr/local/bin/git",
+        "git_version": "git version 2.52.0",
+        "observed_head_author": "Synthetic Learner <learner@example.invalid>",
+        "python_version": "3.12.14"
+      }
+    },
+    {
+      "command": "python3 labs/delivery-workshop/run_lab.py staging",
+      "exitCode": 0,
+      "jsonParsed": true,
+      "gitOperations": 14,
+      "runtime": {
+        "git_executable": "/usr/local/bin/git",
+        "git_version": "git version 2.52.0",
+        "observed_head_author": "Synthetic Learner <learner@example.invalid>",
+        "python_version": "3.12.14"
+      }
+    },
+    {
+      "command": "python3 labs/delivery-workshop/run_lab.py branches",
+      "exitCode": 0,
+      "jsonParsed": true,
+      "gitOperations": 24,
+      "runtime": {
+        "git_executable": "/usr/local/bin/git",
+        "git_version": "git version 2.52.0",
+        "observed_head_author": "Synthetic Learner <learner@example.invalid>",
+        "python_version": "3.12.14"
+      }
+    },
+    {
+      "command": "python3 labs/delivery-workshop/run_lab.py conflict",
+      "exitCode": 0,
+      "jsonParsed": true,
+      "gitOperations": 27,
+      "runtime": {
+        "git_executable": "/usr/local/bin/git",
+        "git_version": "git version 2.52.0",
+        "observed_head_author": "Synthetic Learner <learner@example.invalid>",
+        "python_version": "3.12.14"
+      }
+    },
+    {
+      "command": "python3 labs/delivery-workshop/run_lab.py recovery",
+      "exitCode": 0,
+      "jsonParsed": true,
+      "gitOperations": 17,
+      "runtime": {
+        "git_executable": "/usr/local/bin/git",
+        "git_version": "git version 2.52.0",
+        "observed_head_author": "Synthetic Learner <learner@example.invalid>",
+        "python_version": "3.12.14"
+      }
+    },
+    {
+      "command": "python3 labs/delivery-workshop/run_lab.py revision-tests",
+      "exitCode": 0,
+      "jsonParsed": true,
+      "gitOperations": 35,
+      "runtime": {
+        "git_executable": "/usr/local/bin/git",
+        "git_version": "git version 2.52.0",
+        "observed_head_author": "Synthetic Learner <learner@example.invalid>",
+        "python_version": "3.12.14"
+      }
+    },
+    {
+      "command": "python3 labs/delivery-workshop/run_lab.py provenance",
+      "exitCode": 0,
+      "jsonParsed": true,
+      "gitOperations": 20,
+      "runtime": {
+        "git_executable": "/usr/local/bin/git",
+        "git_version": "git version 2.52.0",
+        "observed_head_author": "Synthetic Learner <learner@example.invalid>",
+        "python_version": "3.12.14"
+      }
+    },
+    {
+      "command": "python3 labs/delivery-workshop/run_lab.py capstone",
+      "exitCode": 0,
+      "jsonParsed": true,
+      "gitOperations": 45,
+      "runtime": {
+        "git_executable": "/usr/local/bin/git",
+        "git_version": "git version 2.52.0",
+        "observed_head_author": "Synthetic Learner <learner@example.invalid>",
+        "python_version": "3.12.14"
+      }
+    }
+  ],
+  "content": {
+    "lessons": 8,
+    "checks": 24,
+    "paragraphs": 48,
+    "officialSources": 20,
+    "explanatoryWords": 3012
+  },
+  "limitations": [
+    "No browser launched or visual UI verification performed by this worker.",
+    "No hosted CI, signatures, authentication, remote publication or production deployment.",
+    "Fixed trusted teaching runner, not arbitrary-code sandbox or OS network attestation.",
+    "Only Linux, Python 3.12.14 and Git 2.52.0 executed here."
+  ],
+  "artifactsNote": "These are workshop-local checks. Parent application integration and downloadable-archive validation are separate."
+}

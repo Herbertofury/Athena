@@ -1,0 +1,674 @@
+{
+  "schema": 1,
+  "as_of": "2026-11-14",
+  "scope": "First practical Windows tranche, not exhaustive; existing 66-entry cleanup snapshot remains unchanged",
+  "ranking": "Editorial evaluation priority within category: 1 start here, 2 compare next, 3 specialist/greater operational risk. Not measured superiority or popularity.",
+  "legacy_catalog_sha256": "86918545f7ad39aa8d5682c7afd87babd72523dc9c71ab510b96c10c30e6ae97",
+  "tools": [
+    {
+      "id": "process-explorer",
+      "name": "Process Explorer",
+      "category": "process",
+      "priority": 1,
+      "official_url": "https://learn.microsoft.com/en-us/sysinternals/downloads/process-explorer",
+      "windows_support": "Current official page: Windows 11+, Server 2019+; v17.21 observed, not installed",
+      "license": "Microsoft Sysinternals proprietary terms",
+      "standout_features": "Handle and DLL ownership investigation; process tree",
+      "risk": "Elevated inspection exposes process details; termination can lose work",
+      "evaluation": "Measure time to identify a synthetic locked file versus Task Manager",
+      "reuse": "Behavioral inspiration only; documentation repository is not a license to copy binary implementation",
+      "evidence_status": "official documentation inspected; not installed or benchmarked",
+      "sources": [
+        "https://learn.microsoft.com/en-us/sysinternals/downloads/process-explorer"
+      ],
+      "github": null,
+      "user_rating": null
+    },
+    {
+      "id": "system-informer",
+      "name": "System Informer",
+      "category": "process",
+      "priority": 2,
+      "official_url": "https://github.com/winsiderss/systeminformer",
+      "windows_support": "Current official downloads: Windows 10/11, 32/64-bit; Canary separate",
+      "license": "MIT main repository; audit driver/dependency licenses",
+      "standout_features": "Detailed resources, process inspection and debugging",
+      "risk": "Kernel driver and process manipulation require separate informed approval",
+      "evaluation": "Compare handle diagnosis and idle overhead with Process Explorer on same workload",
+      "reuse": "Candidate reusable code under MIT notices; isolate privileged driver from UI",
+      "evidence_status": "official documentation inspected; not installed or benchmarked",
+      "sources": [
+        "https://github.com/winsiderss/systeminformer"
+      ],
+      "github": {
+        "stars": 16496,
+        "url": "https://github.com/winsiderss/systeminformer",
+        "observed_at": "2026-11-14T20:54:43.912301+00:00",
+        "meaning": "repository popularity, not quality"
+      },
+      "user_rating": null
+    },
+    {
+      "id": "process-lasso",
+      "name": "Process Lasso",
+      "category": "process",
+      "priority": 3,
+      "official_url": "https://bitsum.com/apps/process-lasso/docs/",
+      "windows_support": "Current official download: Windows 10/11/Server; x86-64, x86-32, ARM64; stable 19.0.0.94 observed",
+      "license": "Proprietary; free edition plus paid Pro; current vendor matrix requires commercial license within 30 days",
+      "standout_features": "Persistent process rules, CPU affinity/sets and ProBalance",
+      "risk": "Scheduler/power changes can worsen particular workloads; no universal FPS claim",
+      "evaluation": "Randomized baseline versus one rule: p95 input latency, build time, power and rollback",
+      "reuse": "Behavioral inspiration only; independent policy engine with exportable rules, no proprietary code copying",
+      "evidence_status": "official documentation inspected; not installed or benchmarked",
+      "sources": [
+        "https://bitsum.com/apps/process-lasso/docs/",
+        "https://bitsum.com/process-lasso-free-vs-pro/",
+        "https://dl.bitsum.com/terms-of-use/"
+      ],
+      "github": null,
+      "user_rating": null
+    },
+    {
+      "id": "bulk-crap-uninstaller",
+      "name": "Bulk Crap Uninstaller",
+      "category": "cleanup",
+      "priority": 1,
+      "official_url": "https://github.com/BCUninstaller/Bulk-Crap-Uninstaller",
+      "windows_support": "Current README: Windows 7+ since v5; website older XP/Vista language conflicts; check chosen release",
+      "license": "Apache-2.0",
+      "standout_features": "Batch uninstall orchestration and leftover review",
+      "risk": "Leftover detection can include shared data; never bulk-delete unchecked results",
+      "evaluation": "Disposable VM fixtures: missed leftovers, false positives, shared files preserved",
+      "reuse": "Candidate adapter orchestration under Apache notices/patent terms; separate inventory from execution",
+      "evidence_status": "official documentation inspected; not installed or benchmarked",
+      "sources": [
+        "https://github.com/BCUninstaller/Bulk-Crap-Uninstaller"
+      ],
+      "github": {
+        "stars": 22481,
+        "url": "https://github.com/BCUninstaller/Bulk-Crap-Uninstaller",
+        "observed_at": "2026-11-14T20:54:43.932217+00:00",
+        "meaning": "repository popularity, not quality"
+      },
+      "user_rating": null
+    },
+    {
+      "id": "revo-uninstaller",
+      "name": "Revo Uninstaller",
+      "category": "cleanup",
+      "priority": 2,
+      "official_url": "https://www.revouninstaller.com/products/revo-uninstaller-free/",
+      "windows_support": "Current FAQ: Windows 7\u201311 native 64-bit; Free and Pro distinct",
+      "license": "Proprietary freeware; separate paid Pro terms",
+      "standout_features": "Built-in uninstaller followed by leftover scan; Hunter Mode",
+      "risk": "Registry/file cleanup and permanent erase are destructive; restore points are not full backups",
+      "evaluation": "Compare against BCUninstaller using identical installers and shared-file sentinels",
+      "reuse": "Behavioral inspiration only; no permission to reuse proprietary code/assets",
+      "evidence_status": "official documentation inspected; not installed or benchmarked",
+      "sources": [
+        "https://www.revouninstaller.com/products/revo-uninstaller-free/"
+      ],
+      "github": null,
+      "user_rating": null
+    },
+    {
+      "id": "windirstat",
+      "name": "WinDirStat",
+      "category": "cleanup",
+      "priority": 1,
+      "official_url": "https://github.com/windirstat/windirstat",
+      "windows_support": "Windows; see linked upstream requirements for exact supported build/architecture",
+      "license": "GPL-3.0 repository classification",
+      "standout_features": "Disk usage visualization, large-file discovery",
+      "risk": "Deletion is separate from inspection; junctions and hardlinks complicate accounting",
+      "evaluation": "Compare reported allocated/logical bytes on sparse, compressed and hardlinked fixtures",
+      "reuse": "Copyleft candidate: inspect exact file licenses before distributing derivative code",
+      "evidence_status": "official documentation inspected; not installed or benchmarked",
+      "sources": [
+        "https://github.com/windirstat/windirstat"
+      ],
+      "github": {
+        "stars": 4535,
+        "url": "https://github.com/windirstat/windirstat",
+        "observed_at": "2026-11-14T20:54:47.437598+00:00",
+        "meaning": "repository popularity, not quality"
+      },
+      "user_rating": null
+    },
+    {
+      "id": "czkawka---krokiet",
+      "name": "Czkawka / Krokiet",
+      "category": "cleanup",
+      "priority": 2,
+      "official_url": "https://github.com/qarmin/czkawka",
+      "windows_support": "Windows; see linked upstream requirements for exact supported build/architecture",
+      "license": "Mixed/component licenses; GitHub NOASSERTION is not approval",
+      "standout_features": "Duplicate and similar-image discovery",
+      "risk": "Similar image is not identical; preserve originals and review groups",
+      "evaluation": "Byte-identical, near-duplicate and distinct-image fixtures; false-positive rate before deletion",
+      "reuse": "Reuse unresolved until component LICENSE files reviewed; consider bounded external adapter first",
+      "evidence_status": "official documentation inspected; not installed or benchmarked",
+      "sources": [
+        "https://github.com/qarmin/czkawka"
+      ],
+      "github": {
+        "stars": 35173,
+        "url": "https://github.com/qarmin/czkawka",
+        "observed_at": "2026-11-14T20:54:47.414642+00:00",
+        "meaning": "repository popularity, not quality"
+      },
+      "user_rating": null
+    },
+    {
+      "id": "bleachbit",
+      "name": "BleachBit",
+      "category": "cleanup",
+      "priority": 3,
+      "official_url": "https://github.com/bleachbit/bleachbit",
+      "windows_support": "Windows; see linked upstream requirements for exact supported build/architecture",
+      "license": "GPL-3.0 repository classification",
+      "standout_features": "Application-specific cleanup definitions",
+      "risk": "Can erase sessions/history and useful caches; regeneration costs matter",
+      "evaluation": "Preview versus actual removal on disposable profile; protected files and rebuild latency",
+      "reuse": "Copyleft definitions/engine candidate after exact component audit; declarative preview is useful architecture",
+      "evidence_status": "official documentation inspected; not installed or benchmarked",
+      "sources": [
+        "https://github.com/bleachbit/bleachbit"
+      ],
+      "github": {
+        "stars": 7491,
+        "url": "https://github.com/bleachbit/bleachbit",
+        "observed_at": "2026-11-14T20:54:47.416258+00:00",
+        "meaning": "repository popularity, not quality"
+      },
+      "user_rating": {
+        "value": 4.8,
+        "scale": 5,
+        "count": 60,
+        "source": "SourceForge",
+        "url": "https://sourceforge.net/projects/bleachbit/reviews/",
+        "observed_at": "2026-11-14",
+        "limitation": "Indexed page snapshot; historical self-selected reviews across versions, not current-version performance or safety evidence."
+      }
+    },
+    {
+      "id": "autoruns",
+      "name": "Autoruns",
+      "category": "security",
+      "priority": 1,
+      "official_url": "https://learn.microsoft.com/en-us/sysinternals/downloads/autoruns",
+      "windows_support": "Windows utility; inspected page does not establish current minimum OS",
+      "license": "Microsoft Sysinternals proprietary terms",
+      "standout_features": "Broad startup persistence inventory",
+      "risk": "Disabling services/drivers can break boot or protection; external reputation lookup may transmit data",
+      "evaluation": "Read-only inventory a VM with known startup fixtures; compare coverage and reversible disable",
+      "reuse": "Behavioral inspiration only; auditable read-only collectors before any modifier",
+      "evidence_status": "official documentation inspected; not installed or benchmarked",
+      "sources": [
+        "https://learn.microsoft.com/en-us/sysinternals/downloads/autoruns"
+      ],
+      "github": null,
+      "user_rating": null
+    },
+    {
+      "id": "wireshark",
+      "name": "Wireshark",
+      "category": "security",
+      "priority": 2,
+      "official_url": "https://gitlab.com/wireshark/wireshark",
+      "windows_support": "Windows x64/ARM64; 4.6 last branch supporting Windows 10 v1809/Server 2019; observed stable4.6.9",
+      "license": "GPLv2 Wireshark; Npcap separately licensed",
+      "standout_features": "Packet analysis, filters and protocol dissectors",
+      "risk": "Captures may contain credentials/personal data; capture only authorized traffic; driver needs review",
+      "evaluation": "Offline synthetic PCAP: expected protocols, redaction, export roundtrip and resource use",
+      "reuse": "Copyleft dissector reuse requires license review; Npcap is not covered by Wireshark GPL",
+      "evidence_status": "official documentation inspected; not installed or benchmarked",
+      "sources": [
+        "https://gitlab.com/wireshark/wireshark",
+        "https://www.wireshark.org/download.html",
+        "https://www.wireshark.org/docs/wsug_html_chunked/ChapterIntroduction.html"
+      ],
+      "github": null,
+      "user_rating": null
+    },
+    {
+      "id": "simplewall",
+      "name": "simplewall",
+      "category": "security",
+      "priority": 3,
+      "official_url": "https://github.com/henrypp/simplewall",
+      "windows_support": "Upstream Windows 7/8/8.1/10/11, 64-bit/ARM64, admin required",
+      "license": "GPL-3.0",
+      "standout_features": "Windows Filtering Platform rules with per-app control",
+      "risk": "Firewall changes can cut off remote access or break updates; upstream documents uninstall leaves filters active until disabled/removed",
+      "evaluation": "Isolated VM only: allow/deny fixture matrix, rollback and reboot persistence",
+      "reuse": "Copyleft candidate; keep policy planning separate from privileged WFP enforcement",
+      "evidence_status": "official documentation inspected; not installed or benchmarked",
+      "sources": [
+        "https://github.com/henrypp/simplewall"
+      ],
+      "github": {
+        "stars": 9313,
+        "url": "https://github.com/henrypp/simplewall",
+        "observed_at": "2026-11-14T20:54:47.410594+00:00",
+        "meaning": "repository popularity, not quality"
+      },
+      "user_rating": null
+    },
+    {
+      "id": "portmaster",
+      "name": "Portmaster",
+      "category": "security",
+      "priority": 3,
+      "official_url": "https://github.com/safing/portmaster",
+      "windows_support": "Windows; see linked upstream requirements for exact supported build/architecture",
+      "license": "GPL-3.0 main; inspect UI/driver/services separately",
+      "standout_features": "Per-application connection visibility and blocking",
+      "risk": "Network driver/filter changes and DNS policies can disrupt VPNs; paid services separate",
+      "evaluation": "VM compatibility matrix with VPN/DNS and baseline connection latency",
+      "reuse": "Study event-to-policy architecture; component licensing and service agreements independently checked",
+      "evidence_status": "official documentation inspected; not installed or benchmarked",
+      "sources": [
+        "https://github.com/safing/portmaster"
+      ],
+      "github": {
+        "stars": 14084,
+        "url": "https://github.com/safing/portmaster",
+        "observed_at": "2026-11-14T20:54:55.867885+00:00",
+        "meaning": "repository popularity, not quality"
+      },
+      "user_rating": null
+    },
+    {
+      "id": "sandboxie-plus",
+      "name": "Sandboxie Plus",
+      "category": "security",
+      "priority": 3,
+      "official_url": "https://github.com/sandboxie-plus/Sandboxie",
+      "windows_support": "Windows; see linked upstream requirements for exact supported build/architecture",
+      "license": "Mixed: GPL core, custom SandMan UI, LGPL components; not uniformly GPL",
+      "standout_features": "Application isolation and disposable sandboxes",
+      "risk": "Not an absolute malware boundary; kernel component and certificate/commercial restrictions",
+      "evaluation": "Disposable benign fixture: filesystem/registry isolation, recovery and compatibility",
+      "reuse": "No blanket reuse: review LICENSE.Plus and each component; custom UI not presumed open-source reusable",
+      "evidence_status": "official documentation inspected; not installed or benchmarked",
+      "sources": [
+        "https://github.com/sandboxie-plus/Sandboxie",
+        "https://github.com/sandboxie-plus/Sandboxie/blob/master/LICENSE.Plus"
+      ],
+      "github": {
+        "stars": 19959,
+        "url": "https://github.com/sandboxie-plus/Sandboxie",
+        "observed_at": "2026-11-14T20:54:55.850507+00:00",
+        "meaning": "repository popularity, not quality"
+      },
+      "user_rating": null
+    },
+    {
+      "id": "keepassxc",
+      "name": "KeePassXC",
+      "category": "security",
+      "priority": 1,
+      "official_url": "https://github.com/keepassxreboot/keepassxc",
+      "windows_support": "Windows; see linked upstream requirements for exact supported build/architecture",
+      "license": "Mixed/component licenses; verify COPYING before reuse",
+      "standout_features": "Local password database workflow",
+      "risk": "Password/key loss can make vault unrecoverable; no real credentials in pilot",
+      "evaluation": "Synthetic vault backup/restore, lock behavior and clipboard expiry",
+      "reuse": "Reuse unresolved at component level; encrypted storage design is inspiration, not cryptographic proof",
+      "evidence_status": "official documentation inspected; not installed or benchmarked",
+      "sources": [
+        "https://github.com/keepassxreboot/keepassxc"
+      ],
+      "github": {
+        "stars": 29993,
+        "url": "https://github.com/keepassxreboot/keepassxc",
+        "observed_at": "2026-11-14T20:54:55.952659+00:00",
+        "meaning": "repository popularity, not quality"
+      },
+      "user_rating": null
+    },
+    {
+      "id": "powertoys",
+      "name": "PowerToys",
+      "category": "productivity",
+      "priority": 1,
+      "official_url": "https://github.com/microsoft/PowerToys",
+      "windows_support": "Windows; see linked upstream requirements for exact supported build/architecture",
+      "license": "MIT main repository",
+      "standout_features": "Modular Windows productivity utilities",
+      "risk": "Keyboard hooks, rename actions and clipboard tools need scoped permissions",
+      "evaluation": "Enable one module at a time; measure startup/idle cost and verify module-off isolation",
+      "reuse": "Strong modular architecture candidate under MIT notices; test each tool removable independently",
+      "evidence_status": "official documentation inspected; not installed or benchmarked",
+      "sources": [
+        "https://github.com/microsoft/PowerToys"
+      ],
+      "github": {
+        "stars": 140986,
+        "url": "https://github.com/microsoft/PowerToys",
+        "observed_at": "2026-11-14T20:54:43.821403+00:00",
+        "meaning": "repository popularity, not quality"
+      },
+      "user_rating": null
+    },
+    {
+      "id": "everything",
+      "name": "Everything",
+      "category": "productivity",
+      "priority": 1,
+      "official_url": "https://www.voidtools.com/support/everything/",
+      "windows_support": "Windows; see linked upstream requirements for exact supported build/architecture",
+      "license": "Vendor binary license; closed-source, do not infer source rights",
+      "standout_features": "Fast indexed filename search",
+      "risk": "Indexes reveal filenames; service elevation and network sharing need explicit review",
+      "evaluation": "Cold indexing and p50/p95 query latency versus Windows Search on same fixture tree",
+      "reuse": "Behavioral inspiration only; study incremental indexing with independent implementation",
+      "evidence_status": "official documentation inspected; not installed or benchmarked",
+      "sources": [
+        "https://www.voidtools.com/support/everything/"
+      ],
+      "github": null,
+      "user_rating": null
+    },
+    {
+      "id": "unigetui",
+      "name": "UniGetUI",
+      "category": "productivity",
+      "priority": 2,
+      "official_url": "https://github.com/Devolutions/UniGetUI",
+      "windows_support": "Windows; see linked upstream requirements for exact supported build/architecture",
+      "license": "MIT",
+      "standout_features": "Unified GUI across package managers",
+      "risk": "Package trust and install/update side effects remain manager/package-specific",
+      "evaluation": "Read-only inventory adapters; duplicate package identity and failed-update recovery",
+      "reuse": "MIT adapter/UI patterns candidate; optional adapters must fail independently",
+      "evidence_status": "official documentation inspected; not installed or benchmarked",
+      "sources": [
+        "https://github.com/Devolutions/UniGetUI"
+      ],
+      "github": {
+        "stars": 27038,
+        "url": "https://github.com/Devolutions/UniGetUI",
+        "observed_at": "2026-11-14T20:54:43.872199+00:00",
+        "meaning": "repository popularity, not quality"
+      },
+      "user_rating": null
+    },
+    {
+      "id": "sharex",
+      "name": "ShareX",
+      "category": "productivity",
+      "priority": 2,
+      "official_url": "https://github.com/ShareX/ShareX",
+      "windows_support": "Windows; see linked upstream requirements for exact supported build/architecture",
+      "license": "GPL-3.0",
+      "standout_features": "Capture, recording and configurable output workflows",
+      "risk": "Automatic upload can expose private screen content; keep uploads off",
+      "evaluation": "Local-only synthetic screenshot workflow, metadata redaction and undoable output naming",
+      "reuse": "Copyleft workflow ideas; upload connector isolation and preview-before-send are useful",
+      "evidence_status": "official documentation inspected; not installed or benchmarked",
+      "sources": [
+        "https://github.com/ShareX/ShareX"
+      ],
+      "github": {
+        "stars": 41040,
+        "url": "https://github.com/ShareX/ShareX",
+        "observed_at": "2026-11-14T20:54:55.868692+00:00",
+        "meaning": "repository popularity, not quality"
+      },
+      "user_rating": null
+    },
+    {
+      "id": "restic",
+      "name": "restic",
+      "category": "backup",
+      "priority": 1,
+      "official_url": "https://github.com/restic/restic",
+      "windows_support": "Windows; see linked upstream requirements for exact supported build/architecture",
+      "license": "BSD-2-Clause",
+      "standout_features": "Encrypted deduplicating backup snapshots",
+      "risk": "Lost password prevents restore; prune removes history; backup is unproven until restored",
+      "evaluation": "Synthetic full+incremental backups then independent restore with exact hashes",
+      "reuse": "Permissive code candidate with notices; reusable snapshot/restore verification patterns",
+      "evidence_status": "official documentation inspected; not installed or benchmarked",
+      "sources": [
+        "https://github.com/restic/restic"
+      ],
+      "github": {
+        "stars": 37225,
+        "url": "https://github.com/restic/restic",
+        "observed_at": "2026-11-14T20:54:57.790954+00:00",
+        "meaning": "repository popularity, not quality"
+      },
+      "user_rating": null
+    },
+    {
+      "id": "autohotkey",
+      "name": "AutoHotkey",
+      "category": "productivity",
+      "priority": 3,
+      "official_url": "https://github.com/AutoHotkey/AutoHotkey",
+      "windows_support": "Windows; see linked upstream requirements for exact supported build/architecture",
+      "license": "GPL-2.0 repository classification",
+      "standout_features": "Windows hotkeys and scriptable automation",
+      "risk": "Scripts execute with user permissions; untrusted scripts are not harmless configuration",
+      "evaluation": "Benign scoped hotkey with focus isolation and emergency stop; no secret capture",
+      "reuse": "Copyleft engine; independently licensed scripts assessed separately; prefer current stable over default alpha branch",
+      "evidence_status": "official documentation inspected; not installed or benchmarked",
+      "sources": [
+        "https://github.com/AutoHotkey/AutoHotkey"
+      ],
+      "github": {
+        "stars": 13478,
+        "url": "https://github.com/AutoHotkey/AutoHotkey",
+        "observed_at": "2026-11-14T20:54:57.765608+00:00",
+        "meaning": "repository popularity, not quality"
+      },
+      "user_rating": null
+    },
+    {
+      "id": "blender",
+      "name": "Blender",
+      "category": "3d-assets",
+      "priority": 1,
+      "official_url": "https://www.blender.org/about/license/",
+      "windows_support": "Windows; see linked upstream requirements for exact supported build/architecture",
+      "license": "GPL; inspect current exact release/component license (website and source can differ)",
+      "standout_features": "Integrated modeling, geometry workflows, animation and asset production",
+      "risk": "Complex scenes exceed GPU/RAM; add-ons and assets have independent licenses",
+      "evaluation": "Golden mesh roundtrip: topology, UVs, normals, units, materials and export hashes; render time/peak RAM",
+      "reuse": "GPL code reuse needs compatible distribution; artwork is not automatically GPL; independent file/CLI adapter avoids coupling",
+      "evidence_status": "official documentation inspected; not installed or benchmarked",
+      "sources": [
+        "https://www.blender.org/about/license/",
+        "https://projects.blender.org/blender/blender/src/branch/main/release/license/license.md"
+      ],
+      "github": null,
+      "user_rating": null
+    },
+    {
+      "id": "krita",
+      "name": "Krita",
+      "category": "photo-art",
+      "priority": 1,
+      "official_url": "https://krita.org/en/download/",
+      "windows_support": "Windows; see linked upstream requirements for exact supported build/architecture",
+      "license": "GPLv3",
+      "standout_features": "Digital painting and layered artwork",
+      "risk": "Color profiles and plugin compatibility can change exported appearance",
+      "evaluation": "Layered fixture roundtrip, ICC-aware export, tablet latency and crash recovery",
+      "reuse": "GPL engine reuse requires compliance; brushes/fonts/assets separately licensed; test interchange adapter",
+      "evidence_status": "official documentation inspected; not installed or benchmarked",
+      "sources": [
+        "https://krita.org/en/download/"
+      ],
+      "github": null,
+      "user_rating": null
+    },
+    {
+      "id": "kdenlive",
+      "name": "Kdenlive",
+      "category": "video",
+      "priority": 1,
+      "official_url": "https://apps.kde.org/kdenlive/",
+      "windows_support": "Windows; see linked upstream requirements for exact supported build/architecture",
+      "license": "GPL-3.0-only; third-party codecs separate",
+      "standout_features": "Nonlinear timeline editing using MLT/KDE framework",
+      "risk": "Proxy/render mismatch, codecs and GPU support vary on Windows",
+      "evaluation": "Reference clips: frame count, audio sync, color, proxy/fullres fidelity and export time",
+      "reuse": "Copyleft editor; evaluate maintained MLT integration rather than invent timeline engine",
+      "evidence_status": "official documentation inspected; not installed or benchmarked",
+      "sources": [
+        "https://apps.kde.org/kdenlive/"
+      ],
+      "github": null,
+      "user_rating": null
+    },
+    {
+      "id": "audacity",
+      "name": "Audacity",
+      "category": "audio",
+      "priority": 1,
+      "official_url": "https://github.com/audacity/audacity",
+      "windows_support": "Windows; see linked upstream requirements for exact supported build/architecture",
+      "license": "Current README GPLv3; older manual says GPLv2, pin exact release",
+      "standout_features": "Multitrack recording/editing and export",
+      "risk": "Plugins/codecs separately licensed; destructive edits require project backup",
+      "evaluation": "Synthetic tones: sample count, clipping, resample error, project recovery and export metadata",
+      "reuse": "GPL code reuse after pinned LICENSE check; plugin/process boundary and nondestructive history are evaluation targets",
+      "evidence_status": "official documentation inspected; not installed or benchmarked",
+      "sources": [
+        "https://github.com/audacity/audacity",
+        "https://manual.audacityteam.org/man/license.html",
+        "https://www.audacityteam.org/download/windows/"
+      ],
+      "github": null,
+      "user_rating": {
+        "value": 4.6,
+        "scale": 5,
+        "count": 286,
+        "source": "SourceForge",
+        "url": "https://sourceforge.net/projects/audacity/reviews/",
+        "observed_at": "2026-11-14",
+        "limitation": "Indexed page snapshot; historical self-selected reviews across versions, not current-version performance or safety evidence."
+      }
+    },
+    {
+      "id": "gimp",
+      "name": "GIMP",
+      "category": "photo-art",
+      "priority": 2,
+      "official_url": "https://gitlab.gnome.org/GNOME/gimp",
+      "license": "GPLv3-or-later",
+      "windows_support": "Windows10 1903+ installer; Store requirements differ",
+      "standout_features": "Layered raster editing, color management and batch export",
+      "risk": "Plugin/file formats can lose layer or profile information",
+      "evaluation": "Layered image and ICC profile roundtrip with source unchanged",
+      "reuse": "Prefer plugins or batch adapter before full GPL-compatible fork",
+      "evidence_status": "official documentation inspected; not installed or benchmarked",
+      "sources": [
+        "https://gitlab.gnome.org/GNOME/gimp"
+      ],
+      "github": null,
+      "user_rating": null
+    },
+    {
+      "id": "meshlab",
+      "name": "MeshLab / PyMeshLab",
+      "category": "3d-assets",
+      "priority": 2,
+      "official_url": "https://github.com/cnr-isti-vclab/meshlab",
+      "license": "GPL3",
+      "windows_support": "Windows binary; exact OS/GPU minimum unverified",
+      "standout_features": "Mesh cleaning, reconstruction, texture and format conversion",
+      "risk": "Repair can alter topology, UVs and attributes",
+      "evaluation": "Measure topology, units, UVs, normals and metadata after synthetic mesh repair",
+      "reuse": "Python filter adapter candidate; GPL obligations need review",
+      "evidence_status": "official documentation inspected; not installed or benchmarked",
+      "sources": [
+        "https://github.com/cnr-isti-vclab/meshlab"
+      ],
+      "github": null,
+      "user_rating": null
+    },
+    {
+      "id": "instant-meshes",
+      "name": "Instant Meshes",
+      "category": "3d-assets",
+      "priority": 2,
+      "official_url": "https://github.com/wjakob/instant-meshes",
+      "license": "BSD3-style plus contributed-enhancements grant; preserve full license",
+      "windows_support": "Intel64 Windows binary; current build compatibility unverified",
+      "standout_features": "Interactive field-aligned mesh generation and retopology",
+      "risk": "Older compiler guidance; not a complete asset pipeline",
+      "evaluation": "Compare topology and feature preservation against source mesh",
+      "reuse": "Focused algorithm candidate after full LICENSE and maintenance review",
+      "evidence_status": "official documentation inspected; not installed or benchmarked",
+      "sources": [
+        "https://github.com/wjakob/instant-meshes"
+      ],
+      "github": null,
+      "user_rating": null
+    },
+    {
+      "id": "armorpaint",
+      "name": "ArmorPaint",
+      "category": "3d-assets",
+      "priority": 2,
+      "official_url": "https://github.com/armory3d/armorpaint",
+      "license": "zlib/libpng core; assets and dependencies separate",
+      "windows_support": "Official manual recommends Windows10+; portable",
+      "standout_features": "GPU PBR painting, layers, nodes and baking",
+      "risk": "Neural models, assets and packaged binary access have separate terms",
+      "evaluation": "Material-channel roundtrip, GPU memory, cancellation and source preservation",
+      "reuse": "Permissive core candidate for painting architecture; inspect dependencies",
+      "evidence_status": "official documentation inspected; not installed or benchmarked",
+      "sources": [
+        "https://github.com/armory3d/armorpaint"
+      ],
+      "github": null,
+      "user_rating": null
+    },
+    {
+      "id": "lmms",
+      "name": "LMMS",
+      "category": "audio",
+      "priority": 2,
+      "official_url": "https://github.com/LMMS/lmms",
+      "license": "GPLv2 per license file",
+      "windows_support": "Windows download; exact minimum/version unverified",
+      "standout_features": "Music sequencing and composition workflow",
+      "risk": "Plugins and samples have separate rights and compatibility",
+      "evaluation": "Synthetic sequence export: timing, channels and project recovery",
+      "reuse": "GPL composition architecture candidate, not audio-editor parity proof",
+      "evidence_status": "official documentation inspected; not installed or benchmarked",
+      "sources": [
+        "https://github.com/LMMS/lmms"
+      ],
+      "github": null,
+      "user_rating": null
+    },
+    {
+      "id": "f3d",
+      "name": "F3D",
+      "category": "3d-assets",
+      "priority": 2,
+      "official_url": "https://github.com/f3d-app/f3d",
+      "license": "BSD3",
+      "windows_support": "Windows release and hardware requirements unverified; attempted install link404",
+      "standout_features": "Minimal 3D viewing and preview workflow",
+      "risk": "Viewer is not model creation; unsupported formats require explicit handling",
+      "evaluation": "Compare bounded mesh preview latency, memory and missing attributes",
+      "reuse": "Lightweight preview code candidate under BSD notices",
+      "evidence_status": "official documentation inspected; not installed or benchmarked",
+      "sources": [
+        "https://github.com/f3d-app/f3d"
+      ],
+      "github": null,
+      "user_rating": null
+    }
+  ],
+  "rating_policy": "Sort only within the selected source and original scale; missing ratings remain last. No normalized cross-source score. Indexed snapshot dates may differ from live counts."
+}

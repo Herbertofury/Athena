@@ -2,6 +2,15 @@
 
 .cover-placeholder{display:grid;place-items:center;min-height:110px;padding:24px;background:linear-gradient(115deg,#2d4b50,#1b303c);color:var(--muted);font-size:12px;text-align:center}
 
+/* Closed disclosures retain card density; source prose stays selectable inert text. */
+.gallery-details{font-size:11px;color:var(--ink);margin-top:7px;overflow-wrap:anywhere}
+.gallery-details summary{cursor:pointer;line-height:1.4;padding:6px 0;color:var(--green)}
+.gallery-details summary:focus-visible{outline:2px solid var(--green);outline-offset:3px}
+.gallery-details[open]{border-top:1px solid var(--edge)}
+.gallery-description{white-space:pre-wrap;overflow-wrap:anywhere;margin:6px 0}
+.gallery-description-state,.gallery-access{color:var(--muted);font-size:10px;line-height:1.5}
+.gallery-source-meta{margin:10px 0;line-height:1.5}.gallery-source-meta dt{color:var(--muted);font-size:10px}.gallery-source-meta dd{margin:0 0 5px;overflow-wrap:anywhere}
+
 :host{display:block;min-width:0}.masthead{display:none}.shell{min-height:0}main{min-width:0}.skip{display:none}
 :host([data-theme="dark"]) .cover-placeholder{color:var(--ink)}
 :host([data-theme="light"]){color-scheme:light;--bg:#f4f6f2;--panel:#fff;--edge:#a9bdb4;--ink:#173237;--muted:#51676c;--green:#176c53;--action-ink:#fff;--subtle:#e9f0ec;--control:#e7eeeb;--placeholder:#e1ebe5;--error:#9b341e}
