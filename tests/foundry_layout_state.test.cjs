@@ -5,3 +5,12 @@ test('layout export strips private/provider fields',async()=>{const m=await read
 test('layout rejects prototype placements',async()=>{const m=await ready;assert.throws(()=>m.parse('{"version":1,"themeId":"neutral","roomId":"room","time":"day","placements":{"__proto__":{"x":0,"y":0,"pinned":false}}}'));});
 test('layout save reports failure and invalid storage is never silently reset',async()=>{const m=await ready;assert.throws(()=>m.save({setItem(){throw Error('quota');}},'layout',m.initial()),/quota/);let writes=0;assert.throws(()=>m.load({getItem(){return '{bad';},setItem(){writes++;}},'layout'));assert.equal(writes,0);});
 test('layout rejects oversized imports before parse',async()=>{const m=await ready;assert.throws(()=>m.parse(' '.repeat(200001)),/limit/);});
+test('workspace backups validate every room and strip unrecognized private fields',async()=>{
+ const fs=require('node:fs');const catalog=JSON.parse(fs.readFileSync(require('node:path').join(__dirname,'../dist/workspaces/foundry/catalog.json')));
+ const model=(await import('../dist/workspaces/foundry/layout-state.mjs')).createLayoutModel(catalog.themes);
+ const active=model.initial();const backup={version:1,active:{...active,token:'secret'},layouts:{[active.roomId]:active},privateData:'secret'};
+ const encoded=model.encodeWorkspace(backup);assert.doesNotMatch(encoded,/secret|privateData|token/);assert.deepEqual(model.parseWorkspace(encoded).active,active);
+ assert.throws(()=>model.workspace({...backup,version:2}));
+ assert.throws(()=>model.workspace({...backup,layouts:{wrong:active}}));
+ assert.throws(()=>model.parseWorkspace(' '.repeat(1000001)));
+});
