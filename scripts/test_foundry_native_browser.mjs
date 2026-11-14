@@ -11,21 +11,32 @@ fs.mkdirSync(out,{recursive:true});
 const temporary=fs.mkdtempSync(path.join(os.tmpdir(),'athena native synthetic '));
 const db=path.join(temporary,'synthetic.sqlite');
 const report={platform:process.platform,scope:'Chromium → loopback Python bridge → native Rust SQLite executable; synthetic data, not desktop installer or private migration acceptance',checks:[],errors:[]};
-let bridge,browser,context,page,exited,stderr='';
+let bridge,browser,context,page,exited,origin,stderr='';
 const cli=(command,input)=>execFileSync(binaryPath,[command,db],{encoding:'utf8',input,timeout:15000});
 async function check(name,fn){await fn();report.checks.push(name);}
-try {
- cli('init');
- for(const suffix of ['history','soundtracks','transforms','scopes','environment','targets','instances','appearance','filters','origins'])cli('upgrade-'+suffix);
+async function startBridge(){
  bridge=spawn(pythonCommand,[path.join(repoRoot,'native/foundry/bridge.py'),'--binary',binaryPath,'--database',db]);
  exited=new Promise(resolve=>bridge.once('exit',resolve));
  bridge.stderr.on('data',chunk=>stderr+=chunk);
- const origin=await new Promise((resolve,reject)=>{
+ return await new Promise((resolve,reject)=>{
   const timeout=setTimeout(()=>reject(Error('Bridge startup timed out: '+stderr)),15000);
   bridge.once('error',error=>{clearTimeout(timeout);reject(error)});
   bridge.once('exit',()=>{clearTimeout(timeout);reject(Error('Bridge exited before ready: '+stderr))});
   let text='';bridge.stdout.on('data',chunk=>{text+=chunk;if(text.includes('\n')){clearTimeout(timeout);resolve(new URL(text.trim()).origin)}});
  });
+}
+async function stopBridge(){
+ if(!bridge)return;
+ const child=bridge;bridge=undefined;
+ if(child.exitCode===null && child.signalCode===null)child.kill();
+ let timer;
+ try{await Promise.race([exited,new Promise((_,reject)=>{timer=setTimeout(()=>reject(Error('Bridge stop timed out')),10000)})]);}
+ finally{clearTimeout(timer);}
+}
+try {
+ cli('init');
+ for(const suffix of ['history','soundtracks','transforms','scopes','environment','targets','instances','appearance','filters','origins'])cli('upgrade-'+suffix);
+ origin=await startBridge();
  browser=await chromium.launch({headless:true,executablePath:process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE||undefined});
  context=await browser.newContext({viewport:{width:1440,height:1000}});
  await context.route('**/*',route=>new URL(route.request().url()).origin===origin?route.continue():route.abort());
@@ -65,6 +76,25 @@ try {
   assert.equal(await page.locator('select[data-time]').inputValue(),'night');
   assert.deepEqual(JSON.parse(cli('load-backup')),stored);
  });
+ await check('Stopped and relaunched native process restores committed state in a fresh browser',async()=>{
+  await context.close();
+  const beforeRestart=fs.readFileSync(db),savedText=cli('load-backup');
+  await stopBridge();
+  assert.deepEqual(fs.readFileSync(db),beforeRestart,'committed database unchanged after process termination');
+  origin=await startBridge();
+  assert.equal(cli('load-backup'),savedText,'native restart preserves exact committed backup');
+  assert.deepEqual(fs.readFileSync(db),beforeRestart,'startup does not rewrite database');
+  context=await browser.newContext({viewport:{width:1440,height:1000}});
+  await context.route('**/*',route=>new URL(route.request().url()).origin===origin?route.continue():route.abort());
+  page=await context.newPage();page.on('pageerror',error=>report.errors.push(String(error)));page.setDefaultTimeout(15000);
+  await page.goto(origin+'/#build');await page.locator('.foundry-scene').waitFor();
+  assert.equal(await page.locator('select[data-time]').inputValue(),'day');
+  await page.locator('[data-native-load]').click();await page.locator('[data-native-status]').filter({hasText:'restored'}).waitFor();
+  assert.equal(await page.locator('select[data-time]').inputValue(),'night');
+  assert.equal(await page.locator('[data-inspect-rotation]').inputValue(),'45');
+  assert.equal(await page.locator('[data-inspect-origin]').inputValue(),'tr');
+  assert.equal(cli('load-backup'),savedText);
+ });
  await check('Concurrent writer conflict retains newer native state and browser edit',async()=>{
   const newer=structuredClone(stored);newer.active.time='dusk';
   cli('save-backup',JSON.stringify(newer));
@@ -91,7 +121,7 @@ try {
 } catch(error){report.passed=false;report.failure=String(error.stack||error);if(page)await page.screenshot({path:path.join(out,'failure.png'),fullPage:true}).catch(()=>{});process.exitCode=1;}
 finally {
  await browser?.close();
- if(bridge){bridge.kill();await exited;}
+ await stopBridge().catch(error=>{report.passed=false;report.errors.push(String(error));process.exitCode=1;});
  report.bridgeStderr=stderr;
  fs.writeFileSync(path.join(out,'report.json'),JSON.stringify(report,null,2));
  fs.rmSync(temporary,{recursive:true,force:true,maxRetries:5,retryDelay:100});
