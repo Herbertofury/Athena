@@ -2,7 +2,7 @@
 
 [Canonical ranked research](https://github.com/Herbertofury/Athena/blob/main/research/windows-utilities-2026-11-14/README.md) · [Machine-readable catalog](https://github.com/Herbertofury/Athena/blob/main/research/windows-utilities-2026-11-14/catalog.json)
 
-24 initial candidates cover cleanup, processes, security, productivity, backup, 3D, painting, video and audio. Rankings are proposed evaluation order, not measured superiority. The original 66-entry cleanup snapshot remains unchanged. Vendor, GitHub and canonical GitLab sources are distinguished; proprietary and mixed-license tools are not blanket code-reuse candidates.
+30 source-backed candidates cover cleanup, processes, security, productivity, backup, 3D, painting, video and audio. Rankings are proposed evaluation order, not measured superiority. The original 66-entry cleanup snapshot remains unchanged. Vendor, GitHub and canonical GitLab sources are distinguished; proprietary and mixed-license tools are not blanket code-reuse candidates.
 
 See the canonical report for per-tool features, risks, reuse boundaries and measurable experiments. Native Windows installation and comparative benchmarks remain unrun. The broader PC application coverage is staged, not complete.
 
