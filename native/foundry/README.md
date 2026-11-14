@@ -152,3 +152,11 @@ This changes neither persisted formats nor history semantics. Reproduce focused 
 `node --test native/foundry/tests/history-keys.test.mjs` and actual browser acceptance with
 `CHROMIUM_PATH=<installed-browser> node scripts/test_foundry_history_keys_browser.cjs`.
 It is not an app-wide shortcut takeover or complete original Foundry parity claim.
+
+## Optional public direct video
+
+`publicVideo` is independently disabled with `--disable-foundry-module publicVideo`. It adapts the direct-video branch of original MIT `src/media/MediaSurfaceController.ts`, without autoplay, provider extraction or account access. Local video is unchanged. Explicit Load fetches a cross-origin unsigned HTTPS .mp4/.webm/.ogv with credentials omitted, redirect error, no referrer, CORS and no-store. Queries, fragments, ports, local/reserved/IP hosts and obvious credential paths are refused. DNS classification is not guaranteed by string validation; browser network protections remain essential. Public URLs must not contain secrets even in opaque paths.
+
+Entire download is limited to 32 MiB and 30 seconds, requires video MIME, and plays from an owned session Blob URL only after explicit Play. No URL or bytes are persisted, uploaded or server-proxied. Only trusted native events establish playing; codec/CORS support is distinct from URL validity. Close cancels pending loading and releases the active video. Bad URL and failed pre-commit fetch retain last-good media.
+
+Tests: `node --test native/foundry/tests/public-video.test.mjs`. Browser: `ATHENA_VIDEO_FIXTURE=/path/to/synthetic.webm CHROMIUM_PATH=/path/to/headless_shell node scripts/test_foundry_public_video_browser.cjs`. This intercepts a public-shaped HTTPS fixture URL, seeds a synthetic cookie to verify omission, and measures real decoded frames/time after explicit Play. It is not real-public-provider or Windows codec acceptance. No certificate bypass or external request is used.
