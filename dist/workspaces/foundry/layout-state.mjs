@@ -84,3 +84,9 @@ export function fitBaseToSurface({width,height,baseWidth,baseHeight,scaleX=1,sca
  const base=Math.max(baseWidth,baseHeight),fit=Math.min(3,Math.max(.05,Math.min((width-24)/base,(height-24)/base)));
  return {scaleX:fit*(scaleX<0?-1:1),scaleY:fit*(scaleY<0?-1:1)};
 }
+
+/** Source setSelectedScale links equal magnitudes while retaining each axis mirror sign. */
+export function linkedScaleMagnitude({scaleX=1,scaleY=1,axis,magnitude,linked}){
+ if(!['x','y'].includes(axis)||typeof linked!=='boolean'||![scaleX,scaleY].every(n=>Number.isFinite(n)&&Math.abs(n)>=.05&&Math.abs(n)<=8)||!Number.isFinite(magnitude)||magnitude<.05||magnitude>8)throw Error('Scale magnitude must be 0.05–8; choose X or Y explicitly.');
+ return {scaleX:axis==='x'||linked?Math.sign(scaleX)*magnitude:scaleX,scaleY:axis==='y'||linked?Math.sign(scaleY)*magnitude:scaleY};
+}
