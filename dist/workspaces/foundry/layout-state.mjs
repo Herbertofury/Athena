@@ -1,4 +1,5 @@
 /** Athena native Foundry layout state. No credentials, provider sessions or source provenance. */
+export const WORKSPACE_TEXT_LIMIT=1_000_000,LAYOUT_TEXT_LIMIT=200_000,RECOVERY_TEXT_LIMIT=4_000_000;
 export function createLayoutModel(catalog) {
  const blendModes=['normal','multiply','screen','overlay','soft-light','hard-light','difference','color-dodge','luminosity'];
  const themes=new Map(catalog.map(t=>[t.id,t]));
@@ -39,8 +40,8 @@ export function createLayoutModel(catalog) {
  function upgradeBlendModes(value){const prior=upgradeOrigins(value);if(prior.version>=11)return prior;return validate({...prior,version:11,placements:Object.fromEntries(Object.entries(prior.placements).map(([id,p])=>[id,{...p,blendMode:'normal'}]))});}
  function workspaceVersion({active,layouts={},savedLayouts=[]}){return Math.max(active.version,...Object.values(layouts).map(v=>v.version),...savedLayouts.map(v=>v.layout.version));}
  function initial(themeId=catalog[0].id){const theme=themes.get(themeId);if(!theme)throw new Error('Unknown theme.');return validate({version:1,themeId,roomId:theme.rooms[0].id,time:'day',placements:{}});}
- function parse(text){if(typeof text!=='string'||text.length>200000)throw new Error('Layout exceeds import limit.');return validate(JSON.parse(text));}
- function encode(value){return JSON.stringify(validate(value));}
+ function parse(text){if(typeof text!=='string'||text.length>LAYOUT_TEXT_LIMIT)throw new Error('Layout exceeds import limit.');return validate(JSON.parse(text));}
+ function encode(value){const text=JSON.stringify(validate(value));if(text.length>LAYOUT_TEXT_LIMIT)throw Error('Layout exceeds import limit.');return text;}
  function save(storage,key,value){const encoded=encode(value);storage.setItem(key,encoded);return parse(encoded);}
  function load(storage,key){const raw=storage.getItem(key);return raw===null?{state:initial(),recovery:null}:{state:parse(raw),recovery:null};}
  function view(input){if(input===undefined)return {inspectorDock:'right',inspectorWidth:240};if(!plain(input)||!['left','right','hidden'].includes(input.inspectorDock))throw Error('Unsupported inspector layout.');fields(input,['inspectorDock','inspectorWidth'],'inspector view');const inspectorWidth=input.inspectorWidth===undefined?240:input.inspectorWidth;if(!Number.isInteger(inspectorWidth)||!finite(inspectorWidth,180,480))throw Error('Inspector width must be an integer from 180 to 480.');return {inspectorDock:input.inspectorDock,inspectorWidth};}
@@ -60,21 +61,25 @@ export function createLayoutModel(catalog) {
   const presets=savedLayouts(input.savedLayouts);if(workspaceVersion({active,layouts,savedLayouts:presets})>input.version)throw Error('Contained layouts require matching workspace format version 2 through 8.');
   return {version:input.version,active,layouts,view:view(input.view),savedLayouts:presets};
  }
- function parseWorkspace(text){if(typeof text!=='string'||text.length>1000000)throw new Error('Workspace exceeds import limit.');return workspace(JSON.parse(text));}
- function encodeWorkspace(value){return JSON.stringify(workspace(value));}
- return {blendModes,upgradeBlendModes,validate,upgradeLayout,upgradeScopes,environment,upgradeEnvironment,upgradeInstances,upgradeAppearance,upgradeFilters,upgradeOrigins,workspaceVersion,initial,parse,encode,save,load,view,savedLayouts,workspace,parseWorkspace,encodeWorkspace};
+ function parseWorkspace(text){if(typeof text!=='string'||text.length>WORKSPACE_TEXT_LIMIT)throw new Error('Workspace exceeds import limit.');const value=workspace(JSON.parse(text));encodeWorkspace(value);return value;}
+ function encodeRecoveryWorkspace(value){const text=JSON.stringify(workspace(value));if(text.length>RECOVERY_TEXT_LIMIT)throw Error('Workspace exceeds bounded recovery limit.');return text;}
+ function encodeWorkspace(value){const text=encodeRecoveryWorkspace(value);if(text.length>WORKSPACE_TEXT_LIMIT)throw Error('Workspace exceeds import limit. Reduce room copies or named layouts; the previous workspace is retained.');return text;}
+ return {blendModes,upgradeBlendModes,validate,upgradeLayout,upgradeScopes,environment,upgradeEnvironment,upgradeInstances,upgradeAppearance,upgradeFilters,upgradeOrigins,workspaceVersion,initial,parse,encode,save,load,view,savedLayouts,workspace,parseWorkspace,encodeWorkspace,encodeRecoveryWorkspace};
 }
 
 /** Bounded session-only rollback. Every retained snapshot is schema validated. */
-export function createLayoutHistory(model,limit=50){
+export function createLayoutHistory(model,limit=50,characterBudget=50*WORKSPACE_TEXT_LIMIT){
  if(!Number.isInteger(limit)||limit<1||limit>100)throw Error('Invalid history bound.');
- const past=[],future=[];const copy=value=>model.parseWorkspace(model.encodeWorkspace(value));
+ if(!Number.isInteger(characterBudget)||characterBudget<RECOVERY_TEXT_LIMIT||characterBudget>50*WORKSPACE_TEXT_LIMIT)throw Error('Invalid history memory bound.');
+ const past=[],future=[],budget=characterBudget;
+ const copy=value=>{const text=model.encodeRecoveryWorkspace(value);return {value:model.workspace(JSON.parse(text)),size:text.length};};
+ const trim=()=>{while(past.length+future.length>1&&[...past,...future].reduce((n,v)=>n+v.size,0)>budget){if(past.length)past.shift();else future.shift();}};
  return {
-  record(value){past.push(copy(value));if(past.length>limit)past.shift();future.length=0;},
-  undo(value){if(!past.length)return null;const current=copy(value);future.push(current);return copy(past.pop());},
-  redo(value){if(!future.length)return null;const current=copy(value);past.push(current);if(past.length>limit)past.shift();return copy(future.pop());},
+  record(value){const entry=copy(value);past.push(entry);if(past.length>limit)past.shift();future.length=0;trim();},
+  undo(value){if(!past.length)return null;const current=copy(value),restored=copy(past.at(-1).value).value;future.push(current);past.pop();trim();return restored;},
+  redo(value){if(!future.length)return null;const current=copy(value),restored=copy(future.at(-1).value).value;past.push(current);future.pop();if(past.length>limit)past.shift();trim();return restored;},
   get canUndo(){return past.length>0;},get canRedo(){return future.length>0;},
-  get size(){return past.length+future.length;}
+  get size(){return past.length+future.length;},get retainedCharacters(){return [...past,...future].reduce((n,v)=>n+v.size,0);}
  };
 }
 

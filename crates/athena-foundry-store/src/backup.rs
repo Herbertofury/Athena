@@ -434,7 +434,11 @@ pub fn normalize(text: &str) -> Result<String> {
             restore_null(&mut p["layout"]);
         }
     }
-    Ok(serde_json::to_string(&output)?)
+    let normalized = serde_json::to_string(&output)?;
+    if normalized.encode_utf16().count() > 1_000_000 {
+        return Err("Normalized workspace exceeds import limit".into());
+    }
+    Ok(normalized)
 }
 
 pub(crate) fn require_storage_version(text: &str, schema: i64) -> Result<()> {
