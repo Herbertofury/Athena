@@ -48,8 +48,9 @@ jobs:
           ATHENA_LAYOUT_MODEL: ${{ github.workspace }}/dist/workspaces/foundry/layout-state.mjs
         run: |
           python3 -m unittest discover -s tools/foundry-recovery/capsule -p 'test_*.py'
-          python3 -m unittest discover -s tools/foundry-recovery/sqlite -p 'test_*.py'
           python3 -m unittest discover -s tools/foundry-recovery/scrapbook -p 'test_*.py'
+      - name: Standalone SQLite recovery and handle lifetime
+        run: python -m unittest discover -s tools/foundry-recovery/sqlite -v
       - name: Original MusicHub offline conversion
         run: python -m unittest discover -s tools/foundry-recovery/music -v
       - name: Install Chromium for real native-profile UI checks

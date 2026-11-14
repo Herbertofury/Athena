@@ -2,6 +2,7 @@
 Operator must quiesce the original app. Never publish the resulting user database.
 """
 import pathlib,hashlib,sqlite3,tempfile,os,argparse,json
+from contextlib import closing
 LIMIT=64*1024*1024
 SUFFIXES=('', '-wal', '-shm', '-journal')
 def capture(source):
@@ -34,7 +35,8 @@ def prepare(source,destination,scratch,quiescent=False):
   copy.write_bytes(first[''])
   if '-wal' in first:(stage/'source.sqlite-wal').write_bytes(first['-wal'])
   target=stage/'prepared.sqlite'
-  with sqlite3.connect(copy) as db,sqlite3.connect(target) as out:
+  # Transaction contexts do not close handles; Windows cannot unlink open files.
+  with closing(sqlite3.connect(copy)) as db,closing(sqlite3.connect(target)) as out:
    if db.execute('pragma integrity_check').fetchall()!=[('ok',)]:raise ValueError('Staged source integrity failed')
    db.backup(out)
    out.execute('pragma journal_mode=DELETE')
