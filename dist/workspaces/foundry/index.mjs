@@ -57,8 +57,9 @@ export async function mount(context){
  };
  const rollback=direction=>{importGeneration++;drag=null;const value=history[direction](draftSnapshot());if(!value)return;current=value.active;layouts=value.layouts;draw();save();text(invalidSavedState?'Recovery draft changed; original invalid saved data remains protected.':`${direction==='undo'?'Undid':'Redid'} workspace edit. Rollback history lasts for this workspace session.`);};
  const resetRoom=()=>{
+  importGeneration++;drag=null;
   if(!Object.keys(current.placements).length){text('Room arrangement is already at its defaults.');return;}
-  checkpoint();importGeneration++;drag=null;current={...current,placements:{}};draw();save();
+  checkpoint();current={...current,placements:{}};draw();save();
   text(invalidSavedState?'Recovery draft reset; original invalid saved data remains protected.':'Room arrangement reset, including pins. Other rooms and time were preserved. Undo restores the previous arrangement.');
  };
  one('[data-reset-room]').addEventListener('click',resetRoom);

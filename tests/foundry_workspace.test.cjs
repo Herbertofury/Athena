@@ -76,3 +76,10 @@ test('reset invalidates pending imports without releasing corrupt-state protecti
  const t=await setup({version:2}),b=t.document.querySelector('.foundry-object');const e=new t.window.Event('keydown',{bubbles:true,cancelable:true});e.key='ArrowRight';b.dispatchEvent(e);
  let resolve;const input=t.document.querySelector('[data-import]');input.files=[{size:100,text:()=>new Promise(r=>resolve=r)}];input.dispatchEvent(new t.window.Event('change'));t.document.querySelector('[data-reset-room]').click();resolve(JSON.stringify({version:1,themeId:catalog.themes[0].id,roomId:catalog.themes[0].rooms[0].id,time:'night',placements:{}}));await new Promise(r=>setImmediate(r));assert.equal(t.document.querySelector('[data-time]').value,'day');assert.equal(t.writes(),0);assert.throws(()=>t.mounted.exportState(),/retained/);t.mounted.unmount();
 });
+
+test('default-room reset cancels pending room and workspace imports without writes/history',async()=>{
+ for(const selector of ['[data-import]','[data-import-workspace]']){
+  const t=await setup(),original=t.mounted.exportState(),active={...original.active,time:'night'},input=t.document.querySelector(selector);let resolve;
+  input.files=[{size:100,text:()=>new Promise(r=>resolve=r)}];input.dispatchEvent(new t.window.Event('change'));t.document.querySelector('[data-reset-room]').click();resolve(JSON.stringify(selector==='[data-import]'?active:{version:1,active,layouts:{}}));await new Promise(r=>setImmediate(r));assert.deepEqual(t.mounted.exportState(),original);assert.equal(t.writes(),0);assert.equal(t.document.querySelector('[data-undo]').disabled,true);t.mounted.unmount();
+ }
+});
