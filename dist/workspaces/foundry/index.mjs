@@ -7,7 +7,7 @@ export function snapDragPosition(position,box){
 }
 // Native Athena authoring module. Deliberately excludes artist provenance and account sessions.
 export async function mount(context){
- let nativeSoundtrack,nativeEcology,nativeEnvironment,nativeLocalVideo,nativeLayers,nativeGizmo;
+ let nativeSoundtrack,nativeEcology,nativeEnvironment,nativeLocalVideo,nativeLayers,nativeGizmo,nativeSessionHistory;
  const modules={},moduleStates={};
  const enabled=name=>context.foundryModules?.[name]!==false;
  const report=(name,state)=>{moduleStates[name]=state;try{context.notify?.(`Foundry ${name}: ${state}.`);}catch{}};
@@ -29,7 +29,7 @@ export async function mount(context){
  const actor=id=>Array.from(root.querySelectorAll('.foundry-object')).find(b=>b.dataset.id===id);
 
  const draftSnapshot=()=>({version:Math.max(envelopeVersion,model.workspaceVersion({active:current,layouts,savedLayouts})),view:model.view(view),savedLayouts:model.savedLayouts(savedLayouts),active:model.validate(current),layouts:Object.fromEntries(Object.entries(layouts).map(([k,v])=>[k,model.validate(v)]))});
- const syncHistory=()=>{one('[data-undo]').disabled=!history.canUndo;one('[data-redo]').disabled=!history.canRedo;};
+ const syncHistory=()=>{one('[data-undo]').disabled=!history.canUndo;one('[data-redo]').disabled=!history.canRedo;try{nativeSessionHistory?.update();}catch{report('sessionHistory','update failed; Undo/Redo remain available');}};
  let pendingCheckpoint=null,lastAcceptedRaw=null,restoringHistory=false,saveGeneration=0;
  const checkpoint=()=>{pendingCheckpoint=model.workspace(draftSnapshot());};
  const applySnapshot=value=>{envelopeVersion=value.version;current=value.active;layouts=value.layouts;view=value.view;savedLayouts=value.savedLayouts;};
@@ -143,7 +143,7 @@ export async function mount(context){
   }catch(e){if(!disposed&&generation===importGeneration)text(`Restore not applied: ${e.message}`);}
   finally{if(!disposed&&generation===importGeneration)workspaceInput.value='';}
  };
- const rollback=direction=>{importGeneration++;drag=null;pendingCheckpoint=null;const value=history[direction](draftSnapshot());if(!value)return;envelopeVersion=value.version;current=value.active;layouts=value.layouts;view=value.view;savedLayouts=value.savedLayouts;draw();restoringHistory=true;let accepted=false;try{accepted=save();}finally{restoringHistory=false;}if(accepted&&model.encodeRecoveryWorkspace(draftSnapshot()).length<=WORKSPACE_TEXT_LIMIT)text(invalidSavedState?'Recovery draft changed; original invalid saved data remains protected.':`${direction==='undo'?'Undid':'Redid'} workspace edit. Rollback history lasts for this workspace session.`);};
+ const rollback=(direction,id,epoch)=>{const value=direction==='jump'?history.jump(draftSnapshot(),id,epoch):history[direction](draftSnapshot());if(!value)return;importGeneration++;drag=null;pendingCheckpoint=null;envelopeVersion=value.version;current=value.active;layouts=value.layouts;view=value.view;savedLayouts=value.savedLayouts;draw();restoringHistory=true;let accepted=false;try{accepted=save();}finally{restoringHistory=false;}if(accepted&&model.encodeRecoveryWorkspace(draftSnapshot()).length<=WORKSPACE_TEXT_LIMIT)text(invalidSavedState?'Recovery draft changed; original invalid saved data remains protected.':`${direction==='jump'?'Restored selected session state.':direction==='undo'?'Undid workspace edit.':'Redid workspace edit.'} Rollback history lasts for this workspace session.`);};
  const resetRoom=()=>{
   importGeneration++;drag=null;
   if(current.version<6&&!Object.keys(current.placements).length){text('Room arrangement is already at its defaults.');return;}
@@ -200,6 +200,7 @@ export async function mount(context){
  await attach('cinema','./cinematic.mjs','attachCinematic');
  await attach('canvasView','./native-canvas-view.mjs','attachCanvasView',{workspace:root});
  await attach('objectKeys','./native-object-keys.mjs','attachObjectKeys',{workspace:root});
+ nativeSessionHistory=await attach('sessionHistory','./native-session-history.mjs','attachSessionHistory',{getHistory:()=>history.list({active:current}),onJump:(id,epoch)=>{if(!disposed&&!signal.aborted)rollback('jump',id,epoch);}});
  await attach('historyKeys','./native-history-keys.mjs','attachHistoryKeys',{workspace:root});
  await attach('backup','./native-backup.mjs','attachNativeBackup',{nativeStore:context.nativeStore,model,snapshot,getRevision:()=>importGeneration,replace:value=>{if(disposed||signal.aborted)return;checkpoint();importGeneration++;drag=null;envelopeVersion=value.version;layouts=value.layouts;current=value.active;view=value.view;savedLayouts=value.savedLayouts;draw();save();}});
  nativeSoundtrack=await attach('soundtrack','./native-soundtrack.mjs','attachNativeSoundtrack',{nativeStore:context.nativeStore});

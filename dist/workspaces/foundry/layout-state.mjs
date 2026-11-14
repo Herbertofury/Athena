@@ -71,13 +71,25 @@ export function createLayoutModel(catalog) {
 export function createLayoutHistory(model,limit=50,characterBudget=50*WORKSPACE_TEXT_LIMIT){
  if(!Number.isInteger(limit)||limit<1||limit>100)throw Error('Invalid history bound.');
  if(!Number.isInteger(characterBudget)||characterBudget<RECOVERY_TEXT_LIMIT||characterBudget>50*WORKSPACE_TEXT_LIMIT)throw Error('Invalid history memory bound.');
- const past=[],future=[],budget=characterBudget;
+ const past=[],future=[],budget=characterBudget;let serial=0,currentId=0,epoch=0;
  const copy=value=>{const text=model.encodeRecoveryWorkspace(value);return {value:model.workspace(JSON.parse(text)),size:text.length};};
  const trim=()=>{while(past.length+future.length>1&&[...past,...future].reduce((n,v)=>n+v.size,0)>budget){if(past.length)past.shift();else future.shift();}};
  return {
-  record(value){const entry=copy(value);past.push(entry);if(past.length>limit)past.shift();future.length=0;trim();},
-  undo(value){if(!past.length)return null;const current=copy(value),restored=copy(past.at(-1).value).value;future.push(current);past.pop();trim();return restored;},
-  redo(value){if(!future.length)return null;const current=copy(value),restored=copy(future.at(-1).value).value;past.push(current);future.pop();if(past.length>limit)past.shift();trim();return restored;},
+  record(value){const entry=copy(value);past.push({...entry,id:currentId});currentId=++serial;epoch++;if(past.length>limit)past.shift();future.length=0;trim();},
+  undo(value){if(!past.length)return null;const current=copy(value),restored=copy(past.at(-1).value).value;future.push({...current,id:currentId});currentId=past.at(-1).id;past.pop();epoch++;trim();return restored;},
+  redo(value){if(!future.length)return null;const current=copy(value),restored=copy(future.at(-1).value).value;past.push({...current,id:currentId});currentId=future.at(-1).id;future.pop();epoch++;if(past.length>limit)past.shift();trim();return restored;},
+  list(value){const meta=(entry,state)=>({id:entry.id,state,themeId:entry.value.active.themeId,roomId:entry.value.active.roomId});return {epoch,entries:[...past.map(e=>meta(e,'past')),meta({id:currentId,value},'current'),...future.slice().reverse().map(e=>meta(e,'future'))]};},
+  jump(value,id,expectedEpoch){
+   if(expectedEpoch!==epoch)throw Error('History changed; select a current entry.');
+   if(id===currentId)return null;
+   const target=[...past,...future].find(e=>e.id===id);if(!target)throw Error('History entry is no longer retained.');
+   // Validate both snapshots before any stack mutation. Existing entries are moved,
+   // not cloned; only the live current state and returned target need copies.
+   const restored=copy(target.value).value,current={...copy(value),id:currentId};
+   const ordered=[...past,current,...future.slice().reverse()],index=ordered.findIndex(e=>e.id===id);
+   past.splice(0,past.length,...ordered.slice(0,index));future.splice(0,future.length,...ordered.slice(index+1).reverse());
+   currentId=id;epoch++;while(past.length>limit)past.shift();trim();return restored;
+  },
   get canUndo(){return past.length>0;},get canRedo(){return future.length>0;},
   get size(){return past.length+future.length;},get retainedCharacters(){return [...past,...future].reduce((n,v)=>n+v.size,0);}
  };
