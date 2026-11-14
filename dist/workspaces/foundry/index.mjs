@@ -173,5 +173,5 @@ export async function mount(context){
  await attach('weather','./native-weather.mjs','attachNativeWeather');
  nativeEcology=await attach('ecology','./native-ecology.mjs','attachNativeEcology',{themes});syncEcology();
  if(signal.aborted)unmount();
- return {unmount,getModuleStates:()=>({...moduleStates}),exportState:snapshot,setSearch(q){if(disposed||signal.aborted)return;query=String(q||'');drag=null;draw();},setTheme(t){if(disposed||signal.aborted)return;root.dataset.theme=t==='light'?'light':'dark';}};
+ return {unmount,getModuleStates:()=>({...moduleStates}),exportState:snapshot,setSearch(q){if(disposed||signal.aborted)return;const next=String(q||'');if(next===query)return;query=next;drag=null;draw();},setTheme(t){if(disposed||signal.aborted)return;root.dataset.theme=t==='light'?'light':'dark';}};
 }

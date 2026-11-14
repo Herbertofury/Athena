@@ -7,7 +7,15 @@ permissions:
   contents: read
 jobs:
   native-foundry:
-    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 20
+    env:
+      PYTHONUTF8: '1'
+      ATHENA_FOUNDRY_PYTHON: python
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -32,7 +40,8 @@ jobs:
         run: cargo build --locked --manifest-path crates/athena-foundry-store/Cargo.toml
       - name: Native authoring and real HTTP SQLite integration
         run: npm run test:foundry-native
-      - name: Original-data recovery and conversion fidelity
+      - if: runner.os == 'Linux'
+        name: Original-data recovery and conversion fidelity
         env:
           ATHENA_NATIVE_BIN: ${{ github.workspace }}/crates/athena-foundry-store/target/debug/athena-foundry-store
           ATHENA_CATALOG: ${{ github.workspace }}/dist/workspaces/foundry/catalog.json
@@ -41,3 +50,13 @@ jobs:
           python3 -m unittest discover -s tools/foundry-recovery/capsule -p 'test_*.py'
           python3 -m unittest discover -s tools/foundry-recovery/sqlite -p 'test_*.py'
           python3 -m unittest discover -s tools/foundry-recovery/scrapbook -p 'test_*.py'
+      - name: Install Chromium for real native-profile UI checks
+        run: npx playwright install chromium
+      - name: Browser to native SQLite acceptance
+        run: node scripts/test_foundry_native_browser.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: native-foundry-${{ matrix.os }}
+          path: browser-results/foundry-native/
+          if-no-files-found: error
