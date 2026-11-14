@@ -137,14 +137,37 @@ class Handler(BaseHTTPRequestHandler):
         if path=='/':path='/index.html'
         if path not in self.server.files:return self.reply(404)
         data,kind=self.server.files[path];return self.reply(200,data,kind)
-    def do_POST(self):
-        if self.path not in ('/__native/backup','/__native/restore','/__native/assign-soundtrack','/__native/legacy-import'):return self.reply(404)
-        if not self.valid(api=True,mutating=True):return self.reply(403)
-        if self.headers.get('Content-Type')!='application/json' or self.headers.get('Transfer-Encoding'):return self.reply(415)
+    def reject_post(self,code):
+        # Closing with an unread request body can reset TCP on Windows, hiding
+        # the rejection response. Discard only bounded, unambiguous framing;
+        # never parse, store or dispatch rejected input. Slow peers get 250ms.
+        self.close_connection=True
         lengths=self.headers.get_all('Content-Length') or []
-        if len(lengths)!=1 or not lengths[0].isdigit():return self.reply(411)
+        if (not self.headers.get_all('Transfer-Encoding') and len(lengths)==1
+                and re.fullmatch(r'[0-9]{1,7}',lengths[0])
+                and int(lengths[0])<=MAX_BODY):
+            remaining=int(lengths[0]);deadline=time.monotonic()+0.25
+            previous=self.connection.gettimeout()
+            try:
+                while remaining:
+                    budget=deadline-time.monotonic()
+                    if budget<=0:break
+                    self.connection.settimeout(budget)
+                    chunk=self.rfile.read1(min(remaining,65536))
+                    if not chunk:break
+                    remaining-=len(chunk)
+            except OSError:
+                pass # Incomplete/slow rejected input must never block service.
+            finally:self.connection.settimeout(previous)
+        return self.reply(code)
+    def do_POST(self):
+        if self.path not in ('/__native/backup','/__native/restore','/__native/assign-soundtrack','/__native/legacy-import'):return self.reject_post(404)
+        if not self.valid(api=True,mutating=True):return self.reject_post(403)
+        if self.headers.get('Content-Type')!='application/json' or self.headers.get('Transfer-Encoding'):return self.reject_post(415)
+        lengths=self.headers.get_all('Content-Length') or []
+        if len(lengths)!=1 or not lengths[0].isdigit():return self.reject_post(411)
         length=int(lengths[0])
-        if length>MAX_BODY:return self.reply(413)
+        if length>MAX_BODY:return self.reject_post(413)
         try:
             raw=self.rfile.read(length)
             if len(raw)!=length:return self.reply(400)
