@@ -1,4 +1,4 @@
-import {repoRoot,runtimeRoot,binaryPath,testTemp} from './paths.mjs';
+import {repoRoot,runtimeRoot,binaryPath,testTemp,pythonCommand} from './paths.mjs';
 import {mount} from '../../../dist/workspaces/foundry/index.mjs';
 import test from 'node:test';import assert from 'node:assert/strict';import fs from 'node:fs';import os from 'node:os';import path from 'node:path';import vm from 'node:vm';import {spawn,execFileSync} from 'node:child_process';import {createRequire} from 'node:module';
 import {attachNativeBackup} from '../../../dist/workspaces/foundry/native-backup.mjs';import {createLayoutModel} from '../../../dist/workspaces/foundry/layout-state.mjs';
@@ -6,7 +6,7 @@ const require=createRequire(new URL('../../../package.json',import.meta.url)),{p
 const root=path.resolve(import.meta.dirname,'..'),bin=binaryPath;
 test('actual DOM adapter to actual HTTP bridge to fixed CLI SQLite and restore',async()=>{
  const tmp=fs.mkdtempSync(path.join(os.tmpdir(),'athena-native-ui-test-')),db=path.join(tmp,'fixture.sqlite');execFileSync(bin,['init',db]);execFileSync(bin,['upgrade-history',db]);execFileSync(bin,['upgrade-soundtracks',db]);
- const child=spawn('python3',[path.join(root,'bridge.py'),'--binary',bin,'--database',db],{stdio:['ignore','pipe','pipe']});let stderr='';child.stderr.on('data',b=>stderr+=b);
+ const child=spawn(pythonCommand,[path.join(root,'bridge.py'),'--binary',bin,'--database',db],{stdio:['ignore','pipe','pipe']});let stderr='';child.stderr.on('data',b=>stderr+=b);
  const exited=new Promise(resolve=>child.on('exit',resolve));let controller;
  try {
   const origin=await new Promise((resolve,reject)=>{let text='';const timer=setTimeout(()=>reject(Error('Bridge startup timeout '+stderr)),10000);child.stdout.on('data',b=>{text+=b;if(text.includes('\n')){clearTimeout(timer);resolve(new URL(text.trim()).origin)}});child.on('error',reject);child.on('exit',()=>{clearTimeout(timer);reject(Error('Bridge exited '+stderr))});});

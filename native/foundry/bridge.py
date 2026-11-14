@@ -28,7 +28,7 @@ class Bridge(HTTPServer):
                 relative=p.relative_to(root)
                 if any(x.startswith('.') for x in relative.parts):continue
                 if relative.as_posix() not in STATIC_PATHS:raise ValueError('Unreviewed runtime file rejected; move private data outside runtime')
-                self.files['/'+relative.as_posix()]=(p.read_bytes(),mimetypes.guess_type(p)[0] or 'application/octet-stream')
+                self.files['/'+relative.as_posix()]=(p.read_bytes(),{'.js':'text/javascript','.mjs':'text/javascript','.css':'text/css','.html':'text/html','.json':'application/json'}.get(p.suffix.lower(),mimetypes.guess_type(p)[0] or 'application/octet-stream'))
         if disabled:
             payload,kind=self.files['/native-store-bootstrap.js']
             marker=b'/* FOUNDRY_STARTUP_MODULES */{}'
