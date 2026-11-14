@@ -33,7 +33,7 @@ impl Store {
             return Err("Revision ID must be positive".into());
         }
         let schema: i64 = self.db.query_row("PRAGMA user_version", [], |r| r.get(0))?;
-        if !matches!(schema, 3..=13) {
+        if !matches!(schema, 3..=14) {
             return Err("Explicit upgrade-history required".into());
         }
         let (text, digest): (String, String) = self.db.query_row(
@@ -52,7 +52,7 @@ impl Store {
     pub fn migrate_history(&mut self) -> Result<()> {
         let tx = self.db.transaction()?;
         let version: i64 = tx.query_row("PRAGMA user_version", [], |r| r.get(0))?;
-        if matches!(version, 3..=13) {
+        if matches!(version, 3..=14) {
             return Ok(());
         }
         if version != 2 {
@@ -81,7 +81,7 @@ impl Store {
     }
     pub fn revisions(&self) -> Result<Vec<Revision>> {
         let version: i64 = self.db.query_row("PRAGMA user_version", [], |r| r.get(0))?;
-        if !matches!(version, 3..=13) {
+        if !matches!(version, 3..=14) {
             return Err("Run explicit upgrade-history before reading revisions".into());
         }
         Ok(self
@@ -102,7 +102,7 @@ impl Store {
         }
         let tx = self.db.transaction()?;
         let version: i64 = tx.query_row("PRAGMA user_version", [], |r| r.get(0))?;
-        if !matches!(version, 3..=13) {
+        if !matches!(version, 3..=14) {
             return Err("Run explicit upgrade-history before restoring".into());
         }
         let (text, digest): (String, String) = tx.query_row(

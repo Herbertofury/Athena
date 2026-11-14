@@ -7,6 +7,8 @@ use std::collections::{BTreeMap, HashSet};
 #[serde(rename_all = "camelCase")]
 pub struct Placement {
     #[serde(default, skip_serializing_if = "Option::is_none")]
+    blend_mode: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
     transform_origin: Option<String>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     skew_x: Option<f64>,
@@ -124,7 +126,7 @@ fn layout(v: &Layout) -> Result<()> {
         .iter()
         .find(|t| t.id == v.theme_id)
         .ok_or("Unknown layout theme")?;
-    if !matches!(v.version, 1..=10)
+    if !matches!(v.version, 1..=11)
         || !t.rooms.iter().any(|r| r.id == v.room_id)
         || !matches!(v.time.as_str(), "dawn" | "day" | "dusk" | "night")
     {
@@ -161,6 +163,24 @@ fn layout(v: &Layout) -> Result<()> {
         return Err("At most100 instances per room".into());
     }
     for (id, p) in &v.placements {
+        if v.version >= 11
+            && !matches!(
+                p.blend_mode.as_deref(),
+                Some(
+                    "normal"
+                        | "multiply"
+                        | "screen"
+                        | "overlay"
+                        | "soft-light"
+                        | "hard-light"
+                        | "difference"
+                        | "color-dodge"
+                        | "luminosity"
+                )
+            )
+        {
+            return Err("Invalid blend mode".into());
+        }
         if v.version >= 9
             && !matches!(
                 p.transform_origin.as_deref(),
@@ -289,8 +309,12 @@ pub fn normalize(text: &str) -> Result<String> {
             .and_then(serde_json::Value::as_object)
         {
             for p in placements.values() {
+                if layout["version"].as_u64().unwrap_or(0) < 11 && p.get("blendMode").is_some() {
+                    return Err("Blend mode requires version11".into());
+                }
                 if layout["version"] != 9
                     && layout["version"] != 10
+                    && layout["version"] != 11
                     && p.get("transformOrigin").is_some()
                 {
                     return Err("Origin requires version9".into());
@@ -343,7 +367,7 @@ pub fn normalize(text: &str) -> Result<String> {
         }
     }
     let mut v: Backup = serde_json::from_str(text)?;
-    if !matches!(v.version, 1..=10) {
+    if !matches!(v.version, 1..=11) {
         return Err("Unsupported backup version".into());
     }
     layout(&v.active)?;
@@ -415,7 +439,12 @@ pub fn normalize(text: &str) -> Result<String> {
 
 pub(crate) fn require_storage_version(text: &str, schema: i64) -> Result<()> {
     let v: Backup = serde_json::from_str(text)?;
-    if v.version == 10 && schema < 13 {
+    if v.version >= 11 && schema < 14 {
+        return Err(
+            "Blend modes require explicit upgrade-blend-modes to schema14 and relaunch".into(),
+        );
+    }
+    if v.version >= 10 && schema < 13 {
         return Err(
             "Expanded environments require explicit upgrade-environments to schema13 and relaunch"
                 .into(),

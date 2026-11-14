@@ -7,6 +7,10 @@ fn run() -> Result<()> {
     }
     let p = Path::new(&args[2]);
     match args[1].as_str() {
+        "upgrade-blend-modes" if args.len() == 3 => {
+            Store::open(p)?.migrate_blend_modes()?;
+            println!("{}", serde_json::to_string(&Store::open(p)?.summary()?)?);
+        }
         "upgrade-filters" if args.len() == 3 => {
             let mut store = Store::open(p)?;
             store.migrate_filters()?;
