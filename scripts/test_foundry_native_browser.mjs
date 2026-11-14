@@ -64,6 +64,26 @@ try {
   assert.equal(stored.version,9);assert.equal(stored.active.time,'night');
   assert.ok(Object.values(stored.active.placements).some(p=>p.rotation===45 && p.transformOrigin==='tr'),JSON.stringify(stored.active.placements));
  });
+ await check('Named layouts keep independent multi-room transforms and scopes through native storage',async()=>{
+  const firstRoom=await page.locator('select[data-room-select]').inputValue();
+  await page.locator('[data-inspect-scale-x]').fill('-2');await page.locator('[data-inspect-scale-y]').fill('0.5');await page.locator('[data-inspect-transform]').click();
+  await page.locator('[data-inspect-scope]').selectOption('sticker');await page.locator('[data-inspect-anchor]').selectOption('scene');await page.locator('[data-inspect-scope-apply]').click();
+  await page.locator('[data-preset-name]').fill('Synthetic night room');await page.locator('[data-preset-save]').click();
+  const secondRoom=await page.locator('select[data-room-select] option').nth(1).getAttribute('value');assert.notEqual(secondRoom,firstRoom);
+  await page.locator('select[data-room-select]').selectOption(secondRoom);await page.locator('select[data-time]').selectOption('dusk');
+  await page.locator('[data-inspect-rotation]').fill('-30');await page.locator('[data-inspect-transform]').click();
+  await page.locator('[data-preset-name]').fill('Synthetic dusk room');await page.locator('[data-preset-save]').click();
+  await page.locator('[data-preset-select]').selectOption({label:'Synthetic night room'});await page.locator('[data-preset-load]').click();
+  assert.equal(await page.locator('select[data-room-select]').inputValue(),firstRoom);
+  assert.equal(await page.locator('select[data-time]').inputValue(),'night');
+  assert.equal(await page.locator('[data-inspect-scale-x]').inputValue(),'-2');assert.equal(await page.locator('[data-inspect-scale-y]').inputValue(),'0.5');
+  assert.equal(await page.locator('[data-inspect-scope]').inputValue(),'sticker');
+  await page.locator('[data-native-save]').click();await page.locator('[data-native-save]:not(:disabled)').waitFor();await page.locator('[data-native-status]').filter({hasText:'saved to native SQLite'}).waitFor();
+  const backup=JSON.parse(cli('load-backup'));assert.equal(backup.savedLayouts.length,2);assert.deepEqual(backup.savedLayouts.map(p=>p.name),['Synthetic night room','Synthetic dusk room']);
+  const night=backup.savedLayouts[0].layout,dusk=backup.savedLayouts[1].layout;assert.equal(night.roomId,firstRoom);assert.equal(dusk.roomId,secondRoom);assert.equal(dusk.time,'dusk');
+  assert.ok(Object.values(night.placements).some(p=>p.rotation===45&&p.scaleX===-2&&p.scaleY===.5&&p.scope==='sticker'&&p.anchor==='scene'&&p.transformOrigin==='tr'));
+  assert.ok(Object.values(dusk.placements).some(p=>p.rotation===-30));assert.equal(backup.layouts[secondRoom].time,'dusk');
+ });
  const stored=JSON.parse(cli('load-backup'));
  await check('Fresh browser context restores persisted native data, not old browser storage',async()=>{
   await context.close();context=await browser.newContext({viewport:{width:1440,height:1000}});
@@ -94,6 +114,15 @@ try {
   assert.equal(await page.locator('[data-inspect-rotation]').inputValue(),'45');
   assert.equal(await page.locator('[data-inspect-origin]').inputValue(),'tr');
   assert.equal(cli('load-backup'),savedText);
+ });
+ await check('Restarted named layouts can be removed and undone without mutating native backup',async()=>{
+  const committed=cli('load-backup');
+  assert.equal(await page.locator('[data-preset-select] option').count(),2);
+  await page.locator('[data-preset-select]').selectOption({label:'Synthetic dusk room'});await page.locator('[data-preset-load]').click();
+  assert.equal(await page.locator('select[data-time]').inputValue(),'dusk');assert.equal(await page.locator('[data-inspect-rotation]').inputValue(),'-30');
+  await page.locator('[data-preset-select]').selectOption({label:'Synthetic dusk room'});await page.locator('[data-preset-remove]').click();assert.equal(await page.locator('[data-preset-select] option').count(),1);
+  await page.locator('[data-undo]').click();assert.equal(await page.locator('[data-preset-select] option').count(),2);
+  assert.equal(cli('load-backup'),committed,'browser-only authoring does not implicitly save native storage');
  });
  await check('Concurrent writer conflict retains newer native state and browser edit',async()=>{
   const newer=structuredClone(stored);newer.active.time='dusk';
