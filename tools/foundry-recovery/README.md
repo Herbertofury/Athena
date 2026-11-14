@@ -28,7 +28,7 @@ Mapping exact fields: sourceSha256, coordinatePolicy="proportional-centers", ass
 
 Output JSONv9 requires the matching browser model or explicitly migrated native schema12 (upgrade-origins after previous migrations). Supports duplicate identity, nine source transform origins, rotation/skew/signed scale, numeric color filters, visibility/opacity/order and reviewed UI/sticker surfaces. For fractional origin f and source/target intrinsic sizes S/T, compensated target center adds (f-.5)*(S-T) after proportional center mapping. All absolute transformed corners and clipping are checked. Converted sticker coordinates can differ deliberately from original pins.
 
-Unknown fields/assets, gravity, non-normal blend, nonzero blur, unresolved anchors, same-surface stack ties, invalid bounds and clipping refuse. Blur kernel/clipping equivalence is unproven. No full original-format or rendered visual-fidelity claim.
+Unknown fields/assets, gravity, unsupported/unreviewed blend, nonzero blur, unresolved anchors, same-surface stack ties, invalid bounds and clipping refuse. Blur kernel/clipping equivalence is unproven. No full original-format or rendered visual-fidelity claim.
 
 ## Deterministic tests, no installs
 Provide absolute paths to an already-built schema12 CLI and current Athena model/catalog. Node must be installed. From this directory:
@@ -48,3 +48,26 @@ New private outputs use Unix0600, bundle directories0700. Windows ACL/real-brows
 Source review of `src/world/ThemeDirector.ts` and `src/music/MusicHub.ts` at original commit `07d66bde6b758992d04a6b580f159599c705de55` found two additional persistent values: `ff.premium-theme.v1` (plain selected-theme string) and `ff.music-hub.v2` (music route and soundtrack mappings). Capsules preserve both exactly, without applying them or asserting native conversion compatibility. Existing nine-key capsules remain readable.
 
 Provider session keys, Spotify PKCE material/client configuration, and Apple developer tokens remain excluded. This is not credential backup. Inputs can contain private URLs or labels: keep capsules private, inspect before sharing, and never place them in the static site or public repository. No browser storage was accessed by this change.
+
+### Reviewed scrapbook blend conversion
+
+Original nine modes (`normal`, `multiply`, `screen`, `overlay`, `soft-light`,
+`hard-light`, `difference`, `color-dodge`, `luminosity`) are preserved. Non-normal
+blend conversion additionally requires the mapping field
+`"blendReview": "same-isolated-backdrop-reviewed"`. Supply this only after
+reviewing the source and target isolated blending surfaces, background pixels,
+asset equivalence and order. Matching CSS mode names alone does not establish
+visual equivalence; the converter does not invent this review.
+
+A non-normal mode emits JSON11 with explicit modes for **all** placements.
+Import requires explicit native `upgrade-blend-modes` (schema14 or newer), after
+previous upgrades; older stores reject it. Normal-only input retains the exact
+legacy JSON9 output shape, so existing verified bundles remain recomputable.
+Original source/mapping bytes remain in the private bundle. Manifest version
+must match recomputed output; changing a manifest to claim version9 fails.
+
+Fifteen synthetic tests include all nine modes, actual JavaScript validation,
+eight non-normal SQLite save/reload round trips, rejection before schema14,
+missing/incorrect review, unsupported modes and bundle integrity. This verifies
+metadata/persistence, **not** source-to-target rendered pixel parity or readiness
+to delete source data. No real private scrapbook was imported by these tests.

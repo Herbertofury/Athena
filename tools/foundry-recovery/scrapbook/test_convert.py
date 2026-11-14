@@ -110,3 +110,34 @@ class OriginTests(unittest.TestCase):
   with self.assertRaisesRegex(ValueError,'clip'):convert.convert(raw,m,CAT)
 
 if __name__=='__main__':unittest.main()
+
+class BlendTests(unittest.TestCase):
+ def test_all_nine_modes_preserved_without_normal_downgrade(self):
+  # Literal original select values, independently enumerated rather than using converter list.
+  modes=['normal','multiply','screen','overlay','soft-light','hard-light','difference','color-dodge','luminosity']
+  for mode in modes:
+   rows,raw,m=fixture();rows[0]['blendMode']=mode;raw=json.dumps(rows).encode();m['sourceSha256']=hashlib.sha256(raw).hexdigest();m['blendReview']='same-isolated-backdrop-reviewed';out=convert.convert(raw,m,CAT)
+   if mode=='normal':self.assertEqual(out['version'],9);continue
+   self.assertEqual(out['version'],11);self.assertEqual([p['blendMode'] for p in out['active']['placements'].values()],[mode,'normal'])
+   with tempfile.TemporaryDirectory() as d:
+    p=Path(d);file=p/'workspace.json';file.write_text(json.dumps(out));db=p/'store.db'
+    for cmd in ['init','upgrade-history','upgrade-soundtracks','upgrade-transforms','upgrade-scopes','upgrade-environment','upgrade-targets','upgrade-instances','upgrade-appearance','upgrade-filters','upgrade-origins','upgrade-environments']:subprocess.run([BIN,cmd,str(db)],check=True,capture_output=True)
+    rejected=subprocess.run([BIN,'save-backup',str(db)],input=json.dumps(out),text=True,capture_output=True);self.assertNotEqual(rejected.returncode,0)
+    subprocess.run([BIN,'upgrade-blend-modes',str(db)],check=True,capture_output=True)
+    subprocess.run([BIN,'save-backup',str(db)],input=json.dumps(out),text=True,check=True,capture_output=True);self.assertEqual(json.loads(subprocess.check_output([BIN,'load-backup',str(db)])),out)
+    script="import fs from 'node:fs';const {createLayoutModel}=await import(process.argv[3]);const m=createLayoutModel(JSON.parse(fs.readFileSync(process.argv[1])).themes);m.parseWorkspace(fs.readFileSync(process.argv[2],'utf8'));"
+    subprocess.run(['node','--input-type=module','-e',script,str(CATALOG),str(file),MODEL.as_uri()],check=True,capture_output=True)
+ def test_review_wrong_unknown_and_nonstring_modes_refused(self):
+  for mode in ['unsupported',None,{},'multiply']:
+   rows,raw,m=fixture();rows[0]['blendMode']=mode;raw=json.dumps(rows).encode();m['sourceSha256']=hashlib.sha256(raw).hexdigest()
+   if mode!='multiply':m['blendReview']='same-isolated-backdrop-reviewed'
+   with self.assertRaises(ValueError):convert.convert(raw,m,CAT)
+  m['blendReview']='guess';
+  with self.assertRaises(ValueError):convert.convert(raw,m,CAT)
+ def test_blend_bundle_retains_bytes_and_recomputes_version(self):
+  rows,raw,m=fixture();rows[0]['blendMode']='screen';raw=json.dumps(rows).encode();m['sourceSha256']=hashlib.sha256(raw).hexdigest();m['blendReview']='same-isolated-backdrop-reviewed'
+  with tempfile.TemporaryDirectory() as d:
+   p=Path(d);source=p/'source';mapping=p/'mapping';source.write_bytes(raw);mapping.write_text(json.dumps(m));out=p/'bundle';convert.write_bundle(source,mapping,out,CATALOG)
+   self.assertEqual((out/'source-original.utf8').read_bytes(),raw);self.assertEqual(json.loads((out/'manifest.json').read_text())['nativeFormat'],11);self.assertTrue(convert.verify_bundle(out,CATALOG)['recomputed'])
+   meta=json.loads((out/'manifest.json').read_text());meta['nativeFormat']=9;(out/'manifest.json').write_text(json.dumps(meta))
+   with self.assertRaises(ValueError):convert.verify_bundle(out,CATALOG)
