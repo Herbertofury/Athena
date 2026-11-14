@@ -3,18 +3,25 @@ use atlas_lab::{
     collection::{indexed_unique, reference_unique},
     journal::Journal,
 };
-use std::{hint::black_box, path::Path, time::Instant};
+use std::{
+    hint::black_box,
+    path::{Path, PathBuf},
+    time::Instant,
+};
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     let args: Vec<String> = std::env::args().collect();
-    if args.len() == 4 && args[1] == "serve-athena" {
+    if (args.len() == 4 || (args.len() == 6 && args[4] == "--foundry-snapshot-dir"))
+        && args[1] == "serve-athena"
+    {
         return tokio::runtime::Builder::new_multi_thread()
             .worker_threads(2)
             .enable_all()
             .build()?
-            .block_on(atlas_lab::server::serve_athena(
+            .block_on(atlas_lab::server::serve_athena_with_foundry(
                 args[2].clone().into(),
                 args[3].clone().into(),
+                args.get(5).map(PathBuf::from),
             ));
     }
     if args.len() == 4 && args[1] == "review-upstream" {

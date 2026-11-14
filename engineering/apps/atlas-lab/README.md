@@ -188,4 +188,8 @@ Overview responses carry a public ephemeral instance label. A newly started engi
 
 `cargo run --locked -- serve-athena OUTPUT.sqlite VERIFIED_PACKAGE_DIRECTORY` serves the reviewed Athena shell and the native R&D Lab over the existing loopback-only origin. It preserves the original queue, journal, archive validation and baseline overview rather than promoting an isolated candidate. Assets are hash-verified and frozen at startup; arbitrary directory files are not served. Research and Media styles are local external files under the original strict CSP. External media is intentionally disabled in this database-privileged mode.
 
-See [startup, scope and acceptance evidence](../../../docs/athena-local-runtime.md). The retained `serve` and `serve-candidate` commands remain for historical reproduction. The public static app does not connect to localhost. Native-browser acceptance and other parity gaps are explicit in the integration evidence rather than inferred from unit tests.
+See [startup, scope and acceptance evidence](https://github.com/Herbertofury/Athena/blob/b1f82a9f1ac516848f6c95d4b9b87801e6090589/docs/athena-local-runtime.md). The retained `serve` and `serve-candidate` commands remain for historical reproduction. The public static app does not connect to localhost. Native-browser acceptance and other parity gaps are explicit in the integration evidence rather than inferred from unit tests.
+
+## Foundry local persistence
+
+The `serve-athena DATABASE PUBLIC_DIRECTORY` command now serves fixed catalog, soundtrack metadata, history and optional exact raw snapshot APIs. Add `--foundry-snapshot-dir EXISTING_ABSOLUTE_PRIVATE_DIRECTORY` to opt into Linux snapshot persistence. No HTTP input chooses filesystem paths. See the [Foundry route contract and limits](../../docs/foundry-local-api.md). This does not enable a native shell, provider OAuth/playback, user-state migration or frontend wiring.

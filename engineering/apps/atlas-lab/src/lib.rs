@@ -1,4 +1,6 @@
 //! Evidence gates for bounded implementation experiments, not a general self-rewriting AI.
+pub mod foundry_snapshot;
+pub mod foundry_storage;
 extern crate self as atlas_lab;
 pub mod athena_assets;
 pub mod collection_failure;
