@@ -28,3 +28,9 @@ Historical-binary compatibility tests in the Rust crate are separately marked ig
 | `transforms` | `ATHENA_FOUNDRY_OLD_PRIVATE_OUTPUT_BINARY` |
 
 These inputs are executables built from the matching historical source checkpoints, not the current store. They are deliberately not bundled. An omitted historical input is visible as an ignored test, not a compatibility pass. The historical cinematic cleanup reproduction is different: its small source-owned adapter fixture is retained byte-for-byte with a digest, and runs in the normal Node suite with an injected renderer.
+
+## Windows and real-browser acceptance
+
+The native CI matrix runs on Ubuntu and Windows. It builds the Rust executable on that OS, runs native store and real HTTP integration checks, then runs `node scripts/test_foundry_native_browser.mjs` with Playwright Chromium. The browser check uses a new synthetic database, actual UI save/restore, a fresh browser context, native conflict protection and navigation. It retains a report and screenshot per OS, blocks external browser requests, and deletes only its own temporary synthetic database. `ATHENA_FOUNDRY_PYTHON` can select the installed Python command (default `python` on Windows, `python3` elsewhere).
+
+A passing hosted Windows job verifies this local browser/bridge/executable profile on the runner. It does not verify a packaged desktop installer, the user's PC, original private database migration, all renderer/media behavior, or source-repository retirement. Missing or failed Windows runs remain open acceptance gates.
