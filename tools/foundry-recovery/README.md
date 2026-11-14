@@ -10,6 +10,18 @@ Operator-prepared JSON maps the eleven allowlisted original Foundry keys to exac
 
 capsule/assess.py exposes assess(capsule_object): checksum-verified count-only structural diagnostics, not automatic import approval. It returns no original identifiers, selectors or values. Checksums detect accidental corruption, not malicious forgery. No browser capture or complete app backup is performed.
 
+## Preserve the separate native world snapshot
+
+Original `src-tauri/src/lib.rs` (`snapshot_path`, `save_world_snapshot`) at reviewed source `f009bbd491355009d6b46fdccc22e06803fc0426` writes a separate `living-world-snapshot.json` in the original app-data directory. It is **not** the SQLite database or the browser localStorage value. Browser capsules alone do not preserve this file.
+
+Stop the original application, explicitly select that file, and choose a new private output outside the repository/static directories:
+
+    python3 snapshot/preserve.py --source SELECTED-SNAPSHOT.json --destination NEW-PRIVATE-SNAPSHOT.json --source-quiescent
+
+This performs a bounded (16 MiB) byte-for-byte copy with an SHA-256 receipt, exclusive output and file sync. Source bytes are checked before/after and output bytes rechecked. Malformed, empty or non-UTF8 files are preserved without interpreting or repairing them. Failed output is removed only if this operation created it; existing files are never overwritten. No directory scanning, default app-data access, JSON reserialization, provider access or automatic import occurs. The CLI does not log paths or values.
+
+Keep original files and receipts private. This is not a live/concurrent snapshot guarantee, credential backup, authenticity proof or scene conversion. Source `readState` is diagnostic metadata and omits full authored scene information. The six synthetic tests cover byte fidelity, source changes, size limits, exclusive writes, failure cleanup and no content/path logging; Windows ACL equivalence and complete original-data migration are not asserted.
+
 ## Prepare original SQLite safely
 Stop ALL original writes first. Select an exclusive NEW output and private scratch directory:
 
