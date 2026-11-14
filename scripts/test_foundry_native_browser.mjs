@@ -41,13 +41,16 @@ try {
   await page.locator('select[data-time]').selectOption('night');
   await page.locator('[data-inspect-rotation]').fill('45');
   await page.locator('[data-inspect-transform]').click();
+  assert.equal(await page.locator('[data-inspect-rotation]').inputValue(),'45','rotation input immediately after Apply');
   await page.locator('[data-inspect-origin]').selectOption('tr');
   await page.locator('[data-origin-apply]').click();
+  assert.equal(await page.locator('[data-inspect-origin]').inputValue(),'tr','origin input immediately after Apply');
+  assert.equal(await page.locator('[data-inspect-rotation]').inputValue(),'45','rotation retained after origin upgrade');
   await page.locator('[data-native-save]').click();
   await page.locator('[data-native-status]').filter({hasText:'saved to native SQLite'}).waitFor();
   const stored=JSON.parse(cli('load-backup'));
   assert.equal(stored.version,9);assert.equal(stored.active.time,'night');
-  assert.ok(Object.values(stored.active.placements).some(p=>p.rotation===45 && p.transformOrigin==='tr'));
+  assert.ok(Object.values(stored.active.placements).some(p=>p.rotation===45 && p.transformOrigin==='tr'),JSON.stringify(stored.active.placements));
  });
  const stored=JSON.parse(cli('load-backup'));
  await check('Fresh browser context restores persisted native data, not old browser storage',async()=>{
