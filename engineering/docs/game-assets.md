@@ -18,3 +18,7 @@ Profile CPU, GPU and IO separately. Godot's optimization guidance distinguishes 
 ## Research backlog
 
 Engine-specific import/export compatibility, material/texture budgets, mesh compression, animation retargeting, GPU-driven rendering and accessibility-aware effects require separate dated experiments. Do not mark them solved because a tool advertises support.
+
+## Texture meaning and filtering
+
+[Texture semantics](texture-semantics.md) separates color transfer, scalar data, alpha association and mask coverage with a pinned CPU resampling lab. File decoding, material validity and actual renderer appearance remain separate gates. Use the [texture acceptance receipt](../templates/texture-acceptance-receipt.md) before changing a target pipeline.

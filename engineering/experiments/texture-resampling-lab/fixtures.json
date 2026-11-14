@@ -1,0 +1,382 @@
+{
+  "schema_version": 1,
+  "scope": "Original two-pixel rows reduced to one pixel with BOX/CLAMP.",
+  "cases": [
+    {
+      "id": "color_bw_uint8",
+      "data_type": "UINT8",
+      "layout": "RGB",
+      "pixels": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "intent": {
+        "input_association": "none",
+        "output_association": "none",
+        "transfer": "srgb"
+      },
+      "expected_intent_match": false
+    },
+    {
+      "id": "color_bw_uint8_srgb",
+      "data_type": "UINT8_SRGB",
+      "layout": "RGB",
+      "pixels": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "intent": {
+        "input_association": "none",
+        "output_association": "none",
+        "transfer": "srgb"
+      },
+      "expected_intent_match": true
+    },
+    {
+      "id": "color_mid_uint8",
+      "data_type": "UINT8",
+      "layout": "RGB",
+      "pixels": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          128,
+          128,
+          128
+        ]
+      ],
+      "intent": {
+        "input_association": "none",
+        "output_association": "none",
+        "transfer": "srgb"
+      },
+      "expected_intent_match": false
+    },
+    {
+      "id": "color_mid_uint8_srgb",
+      "data_type": "UINT8_SRGB",
+      "layout": "RGB",
+      "pixels": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          128,
+          128,
+          128
+        ]
+      ],
+      "intent": {
+        "input_association": "none",
+        "output_association": "none",
+        "transfer": "srgb"
+      },
+      "expected_intent_match": true
+    },
+    {
+      "id": "color_constant_uint8",
+      "data_type": "UINT8",
+      "layout": "RGB",
+      "pixels": [
+        [
+          128,
+          128,
+          128
+        ],
+        [
+          128,
+          128,
+          128
+        ]
+      ],
+      "intent": {
+        "input_association": "none",
+        "output_association": "none",
+        "transfer": "srgb"
+      },
+      "expected_intent_match": true
+    },
+    {
+      "id": "color_constant_uint8_srgb",
+      "data_type": "UINT8_SRGB",
+      "layout": "RGB",
+      "pixels": [
+        [
+          128,
+          128,
+          128
+        ],
+        [
+          128,
+          128,
+          128
+        ]
+      ],
+      "intent": {
+        "input_association": "none",
+        "output_association": "none",
+        "transfer": "srgb"
+      },
+      "expected_intent_match": true
+    },
+    {
+      "id": "edge_red_straight",
+      "data_type": "UINT8_SRGB",
+      "layout": "RGBA",
+      "pixels": [
+        [
+          255,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          255,
+          255
+        ]
+      ],
+      "intent": {
+        "input_association": "straight",
+        "output_association": "straight",
+        "transfer": "srgb"
+      },
+      "expected_intent_match": true
+    },
+    {
+      "id": "edge_green_straight",
+      "data_type": "UINT8_SRGB",
+      "layout": "RGBA",
+      "pixels": [
+        [
+          0,
+          255,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          255,
+          255
+        ]
+      ],
+      "intent": {
+        "input_association": "straight",
+        "output_association": "straight",
+        "transfer": "srgb"
+      },
+      "expected_intent_match": true
+    },
+    {
+      "id": "edge_generic_linear",
+      "data_type": "UINT8",
+      "layout": "4CHANNEL",
+      "pixels": [
+        [
+          255,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          255,
+          255
+        ]
+      ],
+      "intent": {
+        "input_association": "straight",
+        "output_association": "straight",
+        "transfer": "srgb"
+      },
+      "expected_intent_match": false
+    },
+    {
+      "id": "edge_generic_srgb",
+      "data_type": "UINT8_SRGB",
+      "layout": "4CHANNEL",
+      "pixels": [
+        [
+          255,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          255,
+          255
+        ]
+      ],
+      "intent": {
+        "input_association": "straight",
+        "output_association": "straight",
+        "transfer": "srgb"
+      },
+      "expected_intent_match": false
+    },
+    {
+      "id": "edge_wrong_premultiplied",
+      "data_type": "UINT8_SRGB",
+      "layout": "RGBA_PM",
+      "pixels": [
+        [
+          255,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          255,
+          255
+        ]
+      ],
+      "intent": {
+        "input_association": "straight",
+        "output_association": "straight",
+        "transfer": "srgb"
+      },
+      "expected_intent_match": false
+    },
+    {
+      "id": "scalar_linear",
+      "data_type": "UINT8",
+      "layout": "1CHANNEL",
+      "pixels": [
+        [
+          0
+        ],
+        [
+          255
+        ]
+      ],
+      "intent": {
+        "input_association": "none",
+        "output_association": "none",
+        "transfer": "linear"
+      },
+      "expected_intent_match": true
+    },
+    {
+      "id": "scalar_srgb",
+      "data_type": "UINT8_SRGB",
+      "layout": "1CHANNEL",
+      "pixels": [
+        [
+          0
+        ],
+        [
+          255
+        ]
+      ],
+      "intent": {
+        "input_association": "none",
+        "output_association": "none",
+        "transfer": "linear"
+      },
+      "expected_intent_match": false
+    },
+    {
+      "id": "float_straight",
+      "data_type": "FLOAT",
+      "layout": "RGBA",
+      "pixels": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.5
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.5
+        ]
+      ],
+      "intent": {
+        "input_association": "straight",
+        "output_association": "straight",
+        "transfer": "linear"
+      },
+      "expected_intent_match": true
+    },
+    {
+      "id": "float_premultiplied",
+      "data_type": "FLOAT",
+      "layout": "RGBA_PM",
+      "pixels": [
+        [
+          0.5,
+          0.0,
+          0.0,
+          0.5
+        ],
+        [
+          0.0,
+          0.0,
+          0.5,
+          0.5
+        ]
+      ],
+      "intent": {
+        "input_association": "premultiplied",
+        "output_association": "premultiplied",
+        "transfer": "linear"
+      },
+      "expected_intent_match": true
+    },
+    {
+      "id": "float_double_weighted",
+      "data_type": "FLOAT",
+      "layout": "RGBA",
+      "pixels": [
+        [
+          0.5,
+          0.0,
+          0.0,
+          0.5
+        ],
+        [
+          0.0,
+          0.0,
+          0.5,
+          0.5
+        ]
+      ],
+      "intent": {
+        "input_association": "premultiplied",
+        "output_association": "straight",
+        "transfer": "linear"
+      },
+      "expected_intent_match": false
+    }
+  ]
+}
