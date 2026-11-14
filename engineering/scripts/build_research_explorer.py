@@ -417,7 +417,7 @@ def build(root=ROOT, check=False):
             _, suffix = rest.split(end)
             generated = '\n\n' + markdown_test_plan_directory(bundle) + '\n' if bundle.get('test_plans') else '\n'
             outputs[queue_path] = (prefix + start + generated + end + suffix).encode()
-    manifest = {'schema_version': 1, 'files': {str(path.relative_to(root)): hashlib.sha256(data).hexdigest() for path, data in outputs.items()},
+    manifest = {'schema_version': 1, 'files': {path.relative_to(root).as_posix(): hashlib.sha256(data).hexdigest() for path, data in outputs.items()},
         'entries': len(bundle['entries']), 'test_plans': len(bundle.get('test_plans', [])),
         'cohorts': len(bundle['results']['cohorts']), 'observations': len(bundle['results']['observations'])}
     outputs[destination / 'build-manifest.json'] = (json.dumps(manifest, indent=2, sort_keys=True) + '\n').encode()
@@ -425,7 +425,7 @@ def build(root=ROOT, check=False):
     for path, data in outputs.items():
         if check:
             if not path.exists() or path.read_bytes() != data:
-                errors.append(str(path.relative_to(root)))
+                errors.append(path.relative_to(root).as_posix())
         else:
             path.parent.mkdir(parents=True, exist_ok=True)
             path.write_bytes(data)

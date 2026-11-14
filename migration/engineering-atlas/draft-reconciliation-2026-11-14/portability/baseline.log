@@ -1,0 +1,13 @@
+...........................F.....................................................
+======================================================================
+FAIL: test_manifest_and_stale_diagnostics_use_portable_windows_relative_paths (test_research_explorer.DeterministicBuildTests.test_manifest_and_stale_diagnostics_use_portable_windows_relative_paths)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/athena-atlas-portability/engineering/tests/test_research_explorer.py", line 1073, in test_manifest_and_stale_diagnostics_use_portable_windows_relative_paths
+    self.assertIn("docs/explorer/index.html", manifest["files"])
+AssertionError: 'docs/explorer/index.html' not found in {'docs\\explorer\\catalog.9d2ab033df646fe0.json': '9d2ab033df646fe0bf51b8a2eb9da68dbeb12c64b7d14e38fe441c4f6ad946e6', 'docs\\explorer\\explorer-core.06f94ed2ef425972.mjs': '06f94ed2ef4259729f6fa956672095f8560b7e04289276c2601e0b24c7d62811', 'docs\\explorer\\explorer.3c4c931f11046f27.css': '3c4c931f11046f27ae45ba34b9d76a7c568379c73156f873224f8d49f3551250', 'docs\\explorer\\explorer.56b4ad1693c6c62d.mjs': '56b4ad1693c6c62d2aacb6968c8d16b050ab16be7bf6cb1051e45d10ec0f32dd', 'docs\\explorer\\index.html': 'f777d754244d8e982c7122e4f0d08d8217067778169ccd5456d05aebcde9cb09', 'docs\\research-catalog.md': '5dde6c266d7de4579b723603461d67f58cca83fda0338f17483e1e18010c9b97', 'docs\\research-test-queue.md': '21bb749308e0100a151620642a86d18af86fbed8520056868b09ae0b547e8cc4', 'docs\\stack-selection.md': '9bfb522fae4a33b158a3ec66c91be2754e6d87c40e922c4a0b63a79922118403'}
+
+----------------------------------------------------------------------
+Ran 81 tests in 0.338s
+
+FAILED (failures=1)
