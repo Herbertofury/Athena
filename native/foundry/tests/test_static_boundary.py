@@ -1,4 +1,5 @@
 import os
+from unittest.mock import patch
 import pathlib,tempfile,shutil,unittest,importlib.util,subprocess
 ROOT=pathlib.Path(__file__).resolve().parents[1];s=importlib.util.spec_from_file_location('boundary_bridge',ROOT/'bridge.py');m=importlib.util.module_from_spec(s);s.loader.exec_module(m)
 BIN=os.environ.get('ATHENA_FOUNDRY_STORE_BINARY',str(pathlib.Path(__file__).resolve().parents[3]/'crates/athena-foundry-store/target/debug'/('athena-foundry-store.exe' if os.name=='nt' else 'athena-foundry-store')))
@@ -23,4 +24,11 @@ class StaticBoundary(unittest.TestCase):
   server=self.bridge()
   try:self.assertIn('/index.html',server.files);self.assertNotIn('/workspaces/foundry/native-weather.mjs',server.files)
   finally:server.server_close()
+ def test_browser_code_types_do_not_depend_on_host_mime_registry(self):
+  with patch.object(m.mimetypes,'guess_type',return_value=('text/plain',None)):
+   server=self.bridge()
+   try:
+    for name in ('/app.js','/workspaces/foundry/index.mjs','/workspaces/foundry/layout-state.mjs'):
+     self.assertEqual(server.files[name][1],'text/javascript',name)
+   finally:server.server_close()
 if __name__=='__main__':unittest.main()
