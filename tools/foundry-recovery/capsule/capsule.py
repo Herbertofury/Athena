@@ -4,7 +4,7 @@ No browser access, uploads, rendering, active imports or value logging.
 import argparse, hashlib, json, os
 from pathlib import Path
 LIMIT = 16 * 1024 * 1024
-KEYS = frozenset(('ff-floating-vault','ff-living-ui-prefs','ff-mascot-prefs','ff-room-semantic-state','ff-scrapbook-layout','ff-visual-quality','ff-world-layout','ff-world-mascots','ff.browser-snapshot.v1'))
+KEYS = frozenset(('ff-floating-vault','ff-living-ui-prefs','ff-mascot-prefs','ff-room-semantic-state','ff-scrapbook-layout','ff-visual-quality','ff-world-layout','ff-world-mascots','ff.browser-snapshot.v1','ff.premium-theme.v1','ff.music-hub.v2'))
 
 def digest(raw):
     # JS strings may contain lone surrogates. Preserve their exact UTF-16 code units.
