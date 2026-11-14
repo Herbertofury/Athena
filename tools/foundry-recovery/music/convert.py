@@ -30,12 +30,15 @@ def convert(raw,mapping,catalog):
   seen.add(pair)
   if not isinstance(key,str) or len(key.split('::'))!=2 or key.split('::')[0]!=pair[0]:raise ValueError('Source theme/context mismatch')
   stamp=value['updatedAt']
-  if not isinstance(stamp,str) or not re.fullmatch(r'\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d(?:\.000)?Z',stamp):raise ValueError('Native seconds cannot preserve fractional timestamps; keep original capsule and reconcile explicitly')
-  timestamp=int(datetime.datetime.fromisoformat(stamp.replace('Z','+00:00')).timestamp())
-  if timestamp<0 or timestamp>datetime.datetime.now(datetime.timezone.utc).timestamp():raise ValueError('Invalid source timestamp')
+  if not isinstance(stamp,str) or not re.fullmatch(r'\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d(?:\.\d{3})?Z',stamp):raise ValueError('Expected an exact UTC millisecond timestamp')
+  instant=datetime.datetime.fromisoformat(stamp.replace('Z','+00:00'))
+  delta=instant-datetime.datetime(1970,1,1,tzinfo=datetime.timezone.utc)
+  millis=(delta.days*86400+delta.seconds)*1000+delta.microseconds//1000
+  timestamp=millis//1000
+  if timestamp<0 or instant>datetime.datetime.now(datetime.timezone.utc):raise ValueError('Invalid source timestamp')
   # Native importer validates provider-host, bounds, catalog foreign keys and provenance fields.
-  rows.append({'assignment':{'theme_id':pair[0],'room_id':pair[1],'provider':value['provider'],'url':value['url'],'label':value['label'],'status':value['status'],'source_id':value.get('sourceId')},'updated_at':timestamp})
- return {'version':1,'rows':rows}
+  rows.append({'assignment':{'theme_id':pair[0],'room_id':pair[1],'provider':value['provider'],'url':value['url'],'label':value['label'],'status':value['status'],'source_id':value.get('sourceId')},'updated_at':timestamp,'updated_at_ms':millis})
+ return {'version':2,'rows':rows}
 def main():
  p=argparse.ArgumentParser();p.add_argument('source',type=Path);p.add_argument('mapping',type=Path);p.add_argument('output',type=Path);a=p.parse_args()
  catalog=json.loads((Path(__file__).resolve().parents[3]/'dist/workspaces/foundry/catalog.json').read_text())

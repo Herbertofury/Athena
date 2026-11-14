@@ -15,19 +15,19 @@ class MusicTests(unittest.TestCase):
   binary=Path(os.environ.get('ATHENA_FOUNDRY_STORE_BINARY',root/'crates/athena-foundry-store/target/debug'/('athena-foundry-store.exe' if os.name=='nt' else 'athena-foundry-store')))
   if not binary.is_file():self.skipTest('Build native CLI for real import test')
   theme='frutiger-aero';room='frutiger-aero:room:aqua-atrium'
-  original=next(iter(self.source['mappings'].values()));self.source['mappings']={theme+'::Aqua Atrium':original}
+  original=next(iter(self.source['mappings'].values()));original['updatedAt']='2023-01-01T00:00:00.123Z';self.source['mappings']={theme+'::Aqua Atrium':original}
   raw=json.dumps(self.source).encode();catalog=json.loads((root/'dist/workspaces/foundry/catalog.json').read_text())
   payload=convert(raw,{'sourceSha256':hashlib.sha256(raw).hexdigest(),'contexts':{theme+'::Aqua Atrium':{'themeId':theme,'roomId':room}}},catalog)
   with tempfile.TemporaryDirectory()as tmp:
    db=Path(tmp)/'new.sqlite3'
    def run(command,*args,input=None):return subprocess.run([str(binary),command,str(db),*args],input=input,text=True,capture_output=True)
-   for cmd in ['init','upgrade-history','upgrade-soundtracks']:self.assertEqual(run(cmd).returncode,0)
+   for cmd in ['init','upgrade-history','upgrade-soundtracks','upgrade-transforms','upgrade-scopes','upgrade-environment','upgrade-targets','upgrade-instances','upgrade-appearance','upgrade-filters','upgrade-origins','upgrade-environments','upgrade-blend-modes','upgrade-music-precision']:self.assertEqual(run(cmd).returncode,0)
    self.assertEqual(run('import-music-json',input=json.dumps(payload)).returncode,0)
    actual=json.loads(run('read-native',theme,room).stdout);self.assertEqual(actual,payload['rows'][0])
    self.assertNotEqual(run('import-music-json',input=json.dumps(payload)).returncode,0)
- def test_fractional_time_refused_not_silently_truncated(self):
+ def test_fractional_time_preserved_not_silently_truncated(self):
   self.source['mappings']['theme::Original Room']['updatedAt']='2023-01-01T00:00:00.123Z'
-  with self.assertRaises(ValueError):self.run_convert()
+  self.assertEqual(self.run_convert()['rows'][0]['updated_at_ms'],1672531200123)
  def test_credentials_unknown_field_rejected(self):
   self.source['mappings']['theme::Original Room']['accessToken']='synthetic'
   with self.assertRaises(ValueError):self.run_convert()

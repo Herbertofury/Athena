@@ -35,7 +35,7 @@ async function stopBridge(){
 }
 try {
  cli('init');
- for(const suffix of ['history','soundtracks','transforms','scopes','environment','targets','instances','appearance','filters','origins'])cli('upgrade-'+suffix);
+ for(const suffix of ['history','soundtracks','transforms','scopes','environment','targets','instances','appearance','filters','origins','environments','blend-modes','music-precision'])cli('upgrade-'+suffix);
  origin=await startBridge();
  browser=await chromium.launch({headless:true,executablePath:process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE||undefined});
  context=await browser.newContext({viewport:{width:1440,height:1000}});

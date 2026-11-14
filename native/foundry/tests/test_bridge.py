@@ -144,6 +144,18 @@ class Tests(unittest.TestCase):
   with closing(sqlite3.connect(self.db)) as db, db:db.execute("UPDATE soundtracks SET url='javascript:alert(1)'")
   before=self.db.read_bytes();self.assertEqual(self.request(path=path)[0],422);self.assertEqual(self.db.read_bytes(),before)
   self.assertEqual(self.request(path='/__native/soundtrack/a/../../file')[0],400)
+ def test_precise_music_metadata_read_and_explicit_edit(self):
+  self.server.shutdown();self.thread.join();self.server.server_close()
+  for suffix in ['history','soundtracks','transforms','scopes','environment','targets','instances','appearance','filters','origins','environments','blend-modes','music-precision']:subprocess.run([BIN,'upgrade-'+suffix,str(self.db)],check=True,capture_output=True)
+  assignment={'theme_id':'frutiger-aero','room_id':'frutiger-aero:room:aqua-atrium','provider':'youtube','url':'https://music.youtube.com/watch?v=abc','label':'Synthetic','status':'USER_ASSIGNED','source_id':'local:1'}
+  row={'assignment':assignment,'updated_at':1672531200,'updated_at_ms':1672531200123}
+  subprocess.run([BIN,'import-music-json',str(self.db)],input=json.dumps({'version':2,'rows':[row]}),text=True,check=True,capture_output=True)
+  self.server=m.Bridge(BIN,self.db,ROOT.parents[1]/'dist');self.thread=threading.Thread(target=self.server.serve_forever);self.thread.start()
+  path='/__native/soundtrack/frutiger-aero/frutiger-aero:room:aqua-atrium'
+  status,body,headers=self.request(path=path);self.assertEqual(status,200);self.assertEqual(json.loads(body),row)
+  public={k:assignment[k] for k in ['theme_id','room_id','provider','url','label']}
+  status,body,_=self.request('POST',path='/__native/assign-soundtrack',body=json.dumps(public),headers={'Content-Type':'application/json','If-Match':headers['ETag']})
+  self.assertEqual(status,200);self.assertNotIn('updated_at_ms',json.loads(body))
  def test_host_origin_header_and_cors(self):
   for h in [{'Host':'evil.test'},{'Origin':'https://evil.test'},{'X-Athena-Native':''},{'Sec-Fetch-Site':'cross-site'}]:self.assertEqual(self.request(headers=h)[0],403)
   self.assertEqual(self.request('POST',body=FIX,headers={'Origin':'','Content-Type':'application/json'})[0],403)

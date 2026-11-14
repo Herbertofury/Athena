@@ -140,7 +140,7 @@ impl Store {
     pub fn open(path: &Path) -> Result<Self> {
         let db = Connection::open_with_flags(path, OpenFlags::SQLITE_OPEN_READ_WRITE)?;
         let version: i64 = db.query_row("PRAGMA user_version", [], |r| r.get(0))?;
-        if !matches!(version, 1..=14) {
+        if !matches!(version, 1..=15) {
             return Err("Unsupported database schema; no migration performed".into());
         }
         configure(&db)?;
@@ -176,7 +176,7 @@ impl Store {
     }
     pub fn assign(&mut self, value: &Soundtrack) -> Result<()> {
         validate_soundtrack(value)?;
-        if matches!(self.summary()?.schema, 4..=14) {
+        if matches!(self.summary()?.schema, 4..=15) {
             self.assign_native(&metadata::NativeAssignment::from_soundtrack(value))?;
             return Ok(());
         }
@@ -541,7 +541,7 @@ fn legacy_snapshot(path: &Path) -> Result<(LegacyReport, Vec<metadata::NativeSou
             report.skipped_unreviewed_soundtracks += 1;
             continue;
         }
-        let v=db.query_row("SELECT theme_id,room_id,provider,url,label,status,source_id,updated_at FROM room_soundtracks WHERE theme_id=?1 AND room_id=?2",params![theme,room],|r| Ok(metadata::NativeSoundtrack {assignment:metadata::NativeAssignment{theme_id:r.get(0)?,room_id:r.get(1)?,provider:r.get(2)?,url:r.get(3)?,label:r.get(4)?,status:r.get(5)?,source_id:r.get(6)?},updated_at:Some(r.get(7)?)}))?;
+        let v=db.query_row("SELECT theme_id,room_id,provider,url,label,status,source_id,updated_at FROM room_soundtracks WHERE theme_id=?1 AND room_id=?2",params![theme,room],|r| Ok(metadata::NativeSoundtrack {assignment:metadata::NativeAssignment{theme_id:r.get(0)?,room_id:r.get(1)?,provider:r.get(2)?,url:r.get(3)?,label:r.get(4)?,status:r.get(5)?,source_id:r.get(6)?},updated_at:Some(r.get(7)?),updated_at_ms:None}))?;
         v.assignment.validate()?;
         metadata::validate_timestamp(v.updated_at.ok_or("Missing legacy timestamp")?)?;
         assignments.push(v);
@@ -661,7 +661,7 @@ impl Store {
     pub fn migrate_backups(&mut self) -> Result<()> {
         let tx = self.db.transaction()?;
         let version: i64 = tx.query_row("PRAGMA user_version", [], |r| r.get(0))?;
-        if matches!(version, 2..=14) {
+        if matches!(version, 2..=15) {
             return Ok(());
         }
         if version != 1 {
@@ -673,7 +673,7 @@ impl Store {
     }
     pub fn save_backup(&mut self, text: &str) -> Result<()> {
         let version: i64 = self.db.query_row("PRAGMA user_version", [], |r| r.get(0))?;
-        if !matches!(version, 2..=14) {
+        if !matches!(version, 2..=15) {
             return Err("Run explicit upgrade-backups before saving workspace backups".into());
         }
         let encoded = backup::normalize(text)?;
@@ -683,7 +683,7 @@ impl Store {
         let version: i64 = tx.query_row("PRAGMA user_version", [], |r| r.get(0))?;
         backup::require_storage_version(&encoded, version)?;
         tx.execute("INSERT INTO workspace_backup VALUES(1,?1) ON CONFLICT(singleton) DO UPDATE SET json=excluded.json",[&encoded])?;
-        if matches!(version, 3..=14) {
+        if matches!(version, 3..=15) {
             history::append(&tx, &encoded, "save", None)?;
         }
         tx.commit()?;
@@ -691,7 +691,7 @@ impl Store {
     }
     pub fn load_backup(&self) -> Result<Option<String>> {
         let version: i64 = self.db.query_row("PRAGMA user_version", [], |r| r.get(0))?;
-        if !matches!(version, 2..=14) {
+        if !matches!(version, 2..=15) {
             return Err("Run explicit upgrade-backups before loading workspace backups".into());
         }
         let value: Option<String> = self
