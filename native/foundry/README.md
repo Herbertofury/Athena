@@ -110,3 +110,22 @@ This is consistent with original `prototype-v24.ts` cinematic reduced-motion beh
 Adapted from original `prototype-v24.ts` `renderLayers` (line 636), the navigator groups all current instances by actual native world/UI/sticker-anchor surfaces, ordered topmost-first by recorded stack value with exact-ID tie breaking. Hidden, filtered and unavailable-anchor instances remain selectable. Labels use text only and include full instance IDs, including duplicates. Select changes no persistent data/history; Show/Hide explicitly uses existing format-v7 appearance adoption when needed; Pin/Unpin retains the existing format. Each mutation is one Undo step. Native position pin is not original lock, and native world scene is not original left/right world partitioning. No source assets or private records are copied.
 
 Run `node --test native/foundry/tests/layers.test.mjs`; actual Chromium acceptance is `CHROMIUM_PATH=<installed-browser> node scripts/test_foundry_layers_browser.cjs`.
+
+## Optional Canvas-only view
+
+The explicit Canvas only button hides Foundry's surrounding authoring panels while keeping
+Athena navigation, the scene, restore control and status reachable. Restore panels or Escape
+returns to the same mounted inspector, including unsaved field drafts. Tab retains normal
+keyboard navigation. This adapts the clean-view purpose of reviewed MIT
+`prototype-v24.ts` (`toggleCleanView`), not its global Tab interception or app-wide chrome.
+
+The independent `canvasView` module can be disabled by the native bridge module configuration.
+It changes presentation only: no workspace JSON, SQLite schema, storage write or persisted
+preference. Navigation/disposal restores the workspace and a remount starts in normal view.
+Object selection still uses ordinary inspector behavior; toggling the view does not save drafts.
+
+Verification: `node --test native/foundry/tests/canvas-view.test.mjs`, mounted workspace and
+module-independence tests, plus `CHROMIUM_PATH=<installed-browser> node
+scripts/test_foundry_canvas_browser.cjs` for desktop/mobile controls, Escape/Tab, draft retention,
+unchanged local storage and route teardown. Synthetic browser checks do not establish original
+asset fidelity, Windows installer acceptance or completion of remaining migration gates.
