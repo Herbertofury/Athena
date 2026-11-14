@@ -1,5 +1,7 @@
 //! Fixed public upstream observations. No credentials, asset downloads or automatic adoption.
 use serde::{Deserialize, Serialize};
+#[path = "release_tag.rs"]
+mod release_tag;
 use std::{
     error::Error,
     time::{Duration, SystemTime, UNIX_EPOCH},
@@ -139,6 +141,14 @@ pub fn parse_record(source: Source, bytes: &[u8]) -> Result<Record, Box<dyn Erro
         published_at,
         payload: String::from_utf8(bytes.to_vec())?,
     })
+}
+/// Stricter admission for new observations, without rewriting historical data.
+pub fn parse_new_record(source: Source, bytes: &[u8]) -> Result<Record, Box<dyn Error>> {
+    let record = parse_record(source, bytes)?;
+    if source != Source::RustSec && !release_tag::is_stable(&record.revision) {
+        return Err("New release observation requires a non-prerelease SemVer tag".into());
+    }
+    Ok(record)
 }
 pub fn epoch_seconds() -> i64 {
     SystemTime::now()
@@ -364,6 +374,28 @@ pub(crate) mod tests {
         ] {
             assert!(parse_record(Source::Hls, bad.as_bytes()).is_err());
         }
+    }
+    #[test]
+    fn prerelease_tag_is_refused_even_when_provider_flag_is_false() {
+        for tag in ["v3.0.0-alpha.5", "v1.7.5-rc.1", "nightly", "latest"] {
+            let bytes = fixture(tag);
+            assert!(parse_new_record(Source::Hls, &bytes).is_err());
+            assert_eq!(
+                parse_record(Source::Hls, &bytes)
+                    .unwrap()
+                    .payload
+                    .as_bytes(),
+                bytes
+            );
+        }
+        let bytes = fixture("v1.7.4+build.001");
+        assert_eq!(
+            parse_new_record(Source::Hls, &bytes)
+                .unwrap()
+                .payload
+                .as_bytes(),
+            bytes
+        );
     }
     #[test]
     fn commit_checkpoint_is_one_exact_commit() {

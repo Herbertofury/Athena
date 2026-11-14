@@ -79,6 +79,45 @@ def public_url(value, origin=""):
         return None
 
 
+_SRCSET_ASCII_WHITESPACE = "\t\n\f\r "
+
+
+def srcset_url_tokens(value):
+    """Yield whole raw URL tokens; descriptor validity/source selection are not evaluated.
+
+    Follow WHATWG's splitting and descriptor-tokenizer boundaries, not a comma
+    split. Tokens can still contain private query/fragment/userinfo data: callers
+    must apply public_url before placing them in a publishable projection.
+    """
+    position, length = 0, len(value)
+    while position < length:
+        while position < length and value[position] in _SRCSET_ASCII_WHITESPACE + ",":
+            position += 1
+        if position == length:
+            return
+        start = position
+        while position < length and value[position] not in _SRCSET_ASCII_WHITESPACE:
+            position += 1
+        url = value[start:position]
+        if url.endswith(","):
+            yield url.rstrip(",")
+            continue
+        # Descriptors remain opaque. Only their comma boundaries matter here.
+        # Parentheses use a state, not nesting depth: the first ')' exits it.
+        in_parens = False
+        while position < length:
+            char = value[position]
+            position += 1
+            if in_parens:
+                if char == ")":
+                    in_parens = False
+            elif char == ",":
+                break
+            elif char == "(":
+                in_parens = True
+        yield url
+
+
 def ordered_body(node, origin="", completeness="selected_scope"):
     if node is None:
         return None
@@ -103,10 +142,10 @@ def ordered_body(node, origin="", completeness="selected_scope"):
             if current.get("type"):
                 event["mimeHint"] = current.get("type")
             if current.get("srcset"):
-                # A data URL can contain commas; reject the entire attribute.
+                # Preserve the conservative whole-attribute unsafe-scheme policy.
                 rawset = current.get("srcset")
                 event["srcset"] = [] if re.search(r"(?:data|javascript|blob):", rawset, re.I) else [
-                    u for part in rawset.split(",") if (u := public_url(part.strip().split()[0], origin))]
+                    u for token in srcset_url_tokens(rawset) if (u := public_url(token, origin))]
             events.append(event)
         if current.tag == "br":
             events.append({"type": "break"})

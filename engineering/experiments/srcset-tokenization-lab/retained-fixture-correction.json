@@ -1,0 +1,8 @@
+{
+  "kind": "retained-test-fixture-correction",
+  "initial_result": "19 tests passed; one fixture-construction error before the extractor ran",
+  "cause": "lxml Element.set rejects a raw vertical-tab control character",
+  "correction": "Construct the same HTML attribute through its numeric character reference and exercise the actual HTML parser, extractor and public receipt",
+  "production_code_changed_for_correction": false,
+  "initial_log_sha256": "25b1f579841b52010d40610c648f0de70353d6d6e7bf9d3d61b2d73af5b9bf98"
+}

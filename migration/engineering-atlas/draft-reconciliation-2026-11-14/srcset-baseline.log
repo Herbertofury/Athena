@@ -1,0 +1,559 @@
+EEEEEEEEEEEEEEEFE.FFEFFFFFFFEFE
+======================================================================
+ERROR: test_absent_and_empty_attributes_keep_existing_omission (test_srcset_empty_candidates.SrcsetEmptyCandidateTests.test_absent_and_empty_attributes_keep_existing_omission)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/athena-atlas-draft-reconcile/engineering/tests/test_srcset_empty_candidates.py", line 41, in test_absent_and_empty_attributes_keep_existing_omission
+    self.assertEqual(media(projected('   '))[0]['srcset'], [])
+                           ^^^^^^^^^^^^^^^^
+  File "/workspace/shared/athena-atlas-draft-reconcile/engineering/tests/test_srcset_empty_candidates.py", line 22, in projected
+    return E.ordered_body(node, ORIGIN)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/shared/athena-atlas-draft-reconcile/engineering/experiments/site-extraction-lab/extractors.py", line 119, in ordered_body
+    walk(node)
+  File "/workspace/shared/athena-atlas-draft-reconcile/engineering/experiments/site-extraction-lab/extractors.py", line 115, in walk
+    walk(child)
+  File "/workspace/shared/athena-atlas-draft-reconcile/engineering/experiments/site-extraction-lab/extractors.py", line 109, in walk
+    u for part in rawset.split(",") if (u := public_url(part.strip().split()[0], origin))]
+                                                        ~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+
+======================================================================
+ERROR: test_actual_wordpress_extractor_and_public_receipt_keep_scope (test_srcset_empty_candidates.SrcsetEmptyCandidateTests.test_actual_wordpress_extractor_and_public_receipt_keep_scope)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/athena-atlas-draft-reconcile/engineering/tests/test_srcset_empty_candidates.py", line 75, in test_actual_wordpress_extractor_and_public_receipt_keep_scope
+    record = E.extract('wordpress', {'post': json.dumps(data).encode()}, ORIGIN)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/shared/athena-atlas-draft-reconcile/engineering/experiments/site-extraction-lab/extractors.py", line 505, in extract
+    record = FAMILIES[family](inputs, origin)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/shared/athena-atlas-draft-reconcile/engineering/experiments/site-extraction-lab/extractors.py", line 306, in wordpress
+    record["body"] = ordered_body(html.fragment_fromstring(content["rendered"] or "", create_parent=True), origin)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/shared/athena-atlas-draft-reconcile/engineering/experiments/site-extraction-lab/extractors.py", line 119, in ordered_body
+    walk(node)
+  File "/workspace/shared/athena-atlas-draft-reconcile/engineering/experiments/site-extraction-lab/extractors.py", line 115, in walk
+    walk(child)
+  File "/workspace/shared/athena-atlas-draft-reconcile/engineering/experiments/site-extraction-lab/extractors.py", line 115, in walk
+    walk(child)
+  File "/workspace/shared/athena-atlas-draft-reconcile/engineering/experiments/site-extraction-lab/extractors.py", line 109, in walk
+    u for part in rawset.split(",") if (u := public_url(part.strip().split()[0], origin))]
+                                                        ~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+
+======================================================================
+ERROR: test_complete_selected_serialization_and_literal_text_are_retained (test_srcset_empty_candidates.SrcsetEmptyCandidateTests.test_complete_selected_serialization_and_literal_text_are_retained)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/athena-atlas-draft-reconcile/engineering/tests/test_srcset_empty_candidates.py", line 47, in test_complete_selected_serialization_and_literal_text_are_retained
+    body = E.ordered_body(node, ORIGIN)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/shared/athena-atlas-draft-reconcile/engineering/experiments/site-extraction-lab/extractors.py", line 119, in ordered_body
+    walk(node)
+  File "/workspace/shared/athena-atlas-draft-reconcile/engineering/experiments/site-extraction-lab/extractors.py", line 115, in walk
+    walk(child)
+  File "/workspace/shared/athena-atlas-draft-reconcile/engineering/experiments/site-extraction-lab/extractors.py", line 115, in walk
+    walk(child)
+  File "/workspace/shared/athena-atlas-draft-reconcile/engineering/experiments/site-extraction-lab/extractors.py", line 109, in walk
+    u for part in rawset.split(",") if (u := public_url(part.strip().split()[0], origin))]
+                                                        ~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+
+======================================================================
+ERROR: test_existing_unsafe_reference_boundaries_are_not_relaxed (test_srcset_empty_candidates.SrcsetEmptyCandidateTests.test_existing_unsafe_reference_boundaries_are_not_relaxed)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/athena-atlas-draft-reconcile/engineering/tests/test_srcset_empty_candidates.py", line 71, in test_existing_unsafe_reference_boundaries_are_not_relaxed
+    self.assertEqual(media(projected(', file:///synthetic.png 1x, https://user:pass@fixture.example/a 2x, /b.webp 3x,'))[0]['srcset'], [ORIGIN + 'b.webp'])
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/shared/athena-atlas-draft-reconcile/engineering/tests/test_srcset_empty_candidates.py", line 22, in projected
+    return E.ordered_body(node, ORIGIN)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/shared/athena-atlas-draft-reconcile/engineering/experiments/site-extraction-lab/extractors.py", line 119, in ordered_body
+    walk(node)
+  File "/workspace/shared/athena-atlas-draft-reconcile/engineering/experiments/site-extraction-lab/extractors.py", line 115, in walk
+    walk(child)
+  File "/workspace/shared/athena-atlas-draft-reconcile/engineering/experiments/site-extraction-lab/extractors.py", line 109, in walk
+    u for part in rawset.split(",") if (u := public_url(part.strip().split()[0], origin))]
+                                                        ~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+
+======================================================================
+ERROR: test_generated_blank_segments_never_remove_valid_simple_candidates (test_srcset_empty_candidates.SrcsetEmptyCandidateTests.test_generated_blank_segments_never_remove_valid_simple_candidates)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/athena-atlas-draft-reconcile/engineering/tests/test_srcset_empty_candidates.py", line 91, in test_generated_blank_segments_never_remove_valid_simple_candidates
+    self.assertEqual(media(projected(value))[0]['srcset'], [ORIGIN + 'a.webp', ORIGIN + 'b.webp'])
+                           ^^^^^^^^^^^^^^^^
+  File "/workspace/shared/athena-atlas-draft-reconcile/engineering/tests/test_srcset_empty_candidates.py", line 22, in projected
+    return E.ordered_body(node, ORIGIN)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/shared/athena-atlas-draft-reconcile/engineering/experiments/site-extraction-lab/extractors.py", line 119, in ordered_body
+    walk(node)
+  File "/workspace/shared/athena-atlas-draft-reconcile/engineering/experiments/site-extraction-lab/extractors.py", line 115, in walk
+    walk(child)
+  File "/workspace/shared/athena-atlas-draft-reconcile/engineering/experiments/site-extraction-lab/extractors.py", line 109, in walk
+    u for part in rawset.split(",") if (u := public_url(part.strip().split()[0], origin))]
+                                                        ~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+
+======================================================================
+ERROR: test_picture_source_and_fallback_survive_separators (test_srcset_empty_candidates.SrcsetEmptyCandidateTests.test_picture_source_and_fallback_survive_separators)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/athena-atlas-draft-reconcile/engineering/tests/test_srcset_empty_candidates.py", line 54, in test_picture_source_and_fallback_survive_separators
+    body = E.ordered_body(E.document('<div>before<picture><source type="image/webp" srcset=", /a.webp 1x,, /b.webp 2x,"><img src="/fallback.png"></picture>after</div>'), ORIGIN)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/shared/athena-atlas-draft-reconcile/engineering/experiments/site-extraction-lab/extractors.py", line 119, in ordered_body
+    walk(node)
+  File "/workspace/shared/athena-atlas-draft-reconcile/engineering/experiments/site-extraction-lab/extractors.py", line 115, in walk
+    walk(child)
+  File "/workspace/shared/athena-atlas-draft-reconcile/engineering/experiments/site-extraction-lab/extractors.py", line 115, in walk
+    walk(child)
+  File "/workspace/shared/athena-atlas-draft-reconcile/engineering/experiments/site-extraction-lab/extractors.py", line 109, in walk
+    u for part in rawset.split(",") if (u := public_url(part.strip().split()[0], origin))]
+                                                        ~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+
+======================================================================
+ERROR: test_query_and_fragment_filtering_for_separate_simple_urls_is_unchanged (test_srcset_empty_candidates.SrcsetEmptyCandidateTests.test_query_and_fragment_filtering_for_separate_simple_urls_is_unchanged)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/athena-atlas-draft-reconcile/engineering/tests/test_srcset_empty_candidates.py", line 62, in test_query_and_fragment_filtering_for_separate_simple_urls_is_unchanged
+    body = projected(', /a.webp?token=SYNTHETIC_SECRET#fragment 1x,, /b.webp?v=SYNTHETIC_SECRET 2x,')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/shared/athena-atlas-draft-reconcile/engineering/tests/test_srcset_empty_candidates.py", line 22, in projected
+    return E.ordered_body(node, ORIGIN)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/shared/athena-atlas-draft-reconcile/engineering/experiments/site-extraction-lab/extractors.py", line 119, in ordered_body
+    walk(node)
+  File "/workspace/shared/athena-atlas-draft-reconcile/engineering/experiments/site-extraction-lab/extractors.py", line 115, in walk
+    walk(child)
+  File "/workspace/shared/athena-atlas-draft-reconcile/engineering/experiments/site-extraction-lab/extractors.py", line 109, in walk
+    u for part in rawset.split(",") if (u := public_url(part.strip().split()[0], origin))]
+                                                        ~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+
+======================================================================
+ERROR: test_separator_recovery_keeps_order_and_duplicates (test_srcset_empty_candidates.SrcsetEmptyCandidateTests.test_separator_recovery_keeps_order_and_duplicates) (value='/a.webp 1x, ')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/athena-atlas-draft-reconcile/engineering/tests/test_srcset_empty_candidates.py", line 33, in test_separator_recovery_keeps_order_and_duplicates
+    body = projected(value)
+           ^^^^^^^^^^^^^^^^
+  File "/workspace/shared/athena-atlas-draft-reconcile/engineering/tests/test_srcset_empty_candidates.py", line 22, in projected
+    return E.ordered_body(node, ORIGIN)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/shared/athena-atlas-draft-reconcile/engineering/experiments/site-extraction-lab/extractors.py", line 119, in ordered_body
+    walk(node)
+  File "/workspace/shared/athena-atlas-draft-reconcile/engineering/experiments/site-extraction-lab/extractors.py", line 115, in walk
+    walk(child)
+  File "/workspace/shared/athena-atlas-draft-reconcile/engineering/experiments/site-extraction-lab/extractors.py", line 109, in walk
+    u for part in rawset.split(",") if (u := public_url(part.strip().split()[0], origin))]
+                                                        ~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+
+======================================================================
+ERROR: test_separator_recovery_keeps_order_and_duplicates (test_srcset_empty_candidates.SrcsetEmptyCandidateTests.test_separator_recovery_keeps_order_and_duplicates) (value=', /a.webp 1x')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/athena-atlas-draft-reconcile/engineering/tests/test_srcset_empty_candidates.py", line 33, in test_separator_recovery_keeps_order_and_duplicates
+    body = projected(value)
+           ^^^^^^^^^^^^^^^^
+  File "/workspace/shared/athena-atlas-draft-reconcile/engineering/tests/test_srcset_empty_candidates.py", line 22, in projected
+    return E.ordered_body(node, ORIGIN)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/shared/athena-atlas-draft-reconcile/engineering/experiments/site-extraction-lab/extractors.py", line 119, in ordered_body
+    walk(node)
+  File "/workspace/shared/athena-atlas-draft-reconcile/engineering/experiments/site-extraction-lab/extractors.py", line 115, in walk
+    walk(child)
+  File "/workspace/shared/athena-atlas-draft-reconcile/engineering/experiments/site-extraction-lab/extractors.py", line 109, in walk
+    u for part in rawset.split(",") if (u := public_url(part.strip().split()[0], origin))]
+                                                        ~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+
+======================================================================
+ERROR: test_separator_recovery_keeps_order_and_duplicates (test_srcset_empty_candidates.SrcsetEmptyCandidateTests.test_separator_recovery_keeps_order_and_duplicates) (value='/a.webp 1x,, /b.webp 2x')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/athena-atlas-draft-reconcile/engineering/tests/test_srcset_empty_candidates.py", line 33, in test_separator_recovery_keeps_order_and_duplicates
+    body = projected(value)
+           ^^^^^^^^^^^^^^^^
+  File "/workspace/shared/athena-atlas-draft-reconcile/engineering/tests/test_srcset_empty_candidates.py", line 22, in projected
+    return E.ordered_body(node, ORIGIN)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/shared/athena-atlas-draft-reconcile/engineering/experiments/site-extraction-lab/extractors.py", line 119, in ordered_body
+    walk(node)
+  File "/workspace/shared/athena-atlas-draft-reconcile/engineering/experiments/site-extraction-lab/extractors.py", line 115, in walk
+    walk(child)
+  File "/workspace/shared/athena-atlas-draft-reconcile/engineering/experiments/site-extraction-lab/extractors.py", line 109, in walk
+    u for part in rawset.split(",") if (u := public_url(part.strip().split()[0], origin))]
+                                                        ~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+
+======================================================================
+ERROR: test_separator_recovery_keeps_order_and_duplicates (test_srcset_empty_candidates.SrcsetEmptyCandidateTests.test_separator_recovery_keeps_order_and_duplicates) (value=',')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/athena-atlas-draft-reconcile/engineering/tests/test_srcset_empty_candidates.py", line 33, in test_separator_recovery_keeps_order_and_duplicates
+    body = projected(value)
+           ^^^^^^^^^^^^^^^^
+  File "/workspace/shared/athena-atlas-draft-reconcile/engineering/tests/test_srcset_empty_candidates.py", line 22, in projected
+    return E.ordered_body(node, ORIGIN)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/shared/athena-atlas-draft-reconcile/engineering/experiments/site-extraction-lab/extractors.py", line 119, in ordered_body
+    walk(node)
+  File "/workspace/shared/athena-atlas-draft-reconcile/engineering/experiments/site-extraction-lab/extractors.py", line 115, in walk
+    walk(child)
+  File "/workspace/shared/athena-atlas-draft-reconcile/engineering/experiments/site-extraction-lab/extractors.py", line 109, in walk
+    u for part in rawset.split(",") if (u := public_url(part.strip().split()[0], origin))]
+                                                        ~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+
+======================================================================
+ERROR: test_separator_recovery_keeps_order_and_duplicates (test_srcset_empty_candidates.SrcsetEmptyCandidateTests.test_separator_recovery_keeps_order_and_duplicates) (value=' \t\n ')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/athena-atlas-draft-reconcile/engineering/tests/test_srcset_empty_candidates.py", line 33, in test_separator_recovery_keeps_order_and_duplicates
+    body = projected(value)
+           ^^^^^^^^^^^^^^^^
+  File "/workspace/shared/athena-atlas-draft-reconcile/engineering/tests/test_srcset_empty_candidates.py", line 22, in projected
+    return E.ordered_body(node, ORIGIN)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/shared/athena-atlas-draft-reconcile/engineering/experiments/site-extraction-lab/extractors.py", line 119, in ordered_body
+    walk(node)
+  File "/workspace/shared/athena-atlas-draft-reconcile/engineering/experiments/site-extraction-lab/extractors.py", line 115, in walk
+    walk(child)
+  File "/workspace/shared/athena-atlas-draft-reconcile/engineering/experiments/site-extraction-lab/extractors.py", line 109, in walk
+    u for part in rawset.split(",") if (u := public_url(part.strip().split()[0], origin))]
+                                                        ~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+
+======================================================================
+ERROR: test_separator_recovery_keeps_order_and_duplicates (test_srcset_empty_candidates.SrcsetEmptyCandidateTests.test_separator_recovery_keeps_order_and_duplicates) (value=' , \t,\n, ')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/athena-atlas-draft-reconcile/engineering/tests/test_srcset_empty_candidates.py", line 33, in test_separator_recovery_keeps_order_and_duplicates
+    body = projected(value)
+           ^^^^^^^^^^^^^^^^
+  File "/workspace/shared/athena-atlas-draft-reconcile/engineering/tests/test_srcset_empty_candidates.py", line 22, in projected
+    return E.ordered_body(node, ORIGIN)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/shared/athena-atlas-draft-reconcile/engineering/experiments/site-extraction-lab/extractors.py", line 119, in ordered_body
+    walk(node)
+  File "/workspace/shared/athena-atlas-draft-reconcile/engineering/experiments/site-extraction-lab/extractors.py", line 115, in walk
+    walk(child)
+  File "/workspace/shared/athena-atlas-draft-reconcile/engineering/experiments/site-extraction-lab/extractors.py", line 109, in walk
+    u for part in rawset.split(",") if (u := public_url(part.strip().split()[0], origin))]
+                                                        ~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+
+======================================================================
+ERROR: test_separator_recovery_keeps_order_and_duplicates (test_srcset_empty_candidates.SrcsetEmptyCandidateTests.test_separator_recovery_keeps_order_and_duplicates) (value=', /a.webp 1x,, /a.webp 2x,')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/athena-atlas-draft-reconcile/engineering/tests/test_srcset_empty_candidates.py", line 33, in test_separator_recovery_keeps_order_and_duplicates
+    body = projected(value)
+           ^^^^^^^^^^^^^^^^
+  File "/workspace/shared/athena-atlas-draft-reconcile/engineering/tests/test_srcset_empty_candidates.py", line 22, in projected
+    return E.ordered_body(node, ORIGIN)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/shared/athena-atlas-draft-reconcile/engineering/experiments/site-extraction-lab/extractors.py", line 119, in ordered_body
+    walk(node)
+  File "/workspace/shared/athena-atlas-draft-reconcile/engineering/experiments/site-extraction-lab/extractors.py", line 115, in walk
+    walk(child)
+  File "/workspace/shared/athena-atlas-draft-reconcile/engineering/experiments/site-extraction-lab/extractors.py", line 109, in walk
+    u for part in rawset.split(",") if (u := public_url(part.strip().split()[0], origin))]
+                                                        ~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+
+======================================================================
+ERROR: test_ascii_whitespace_is_explicit_and_non_ascii_remains_in_token (test_srcset_tokenization.SrcsetTokenizationTests.test_ascii_whitespace_is_explicit_and_non_ascii_remains_in_token)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/athena-atlas-draft-reconcile/engineering/tests/test_srcset_tokenization.py", line 56, in test_ascii_whitespace_is_explicit_and_non_ascii_remains_in_token
+    self.assertEqual(list(E.srcset_url_tokens('a' + whitespace + '1x,b' + whitespace + '2x')), ['a', 'b'])
+                          ^^^^^^^^^^^^^^^^^^^
+AttributeError: module 'srcset_boundary_extraction' has no attribute 'srcset_url_tokens'
+
+======================================================================
+ERROR: test_descriptor_parenthesis_state_hides_internal_commas (test_srcset_tokenization.SrcsetTokenizationTests.test_descriptor_parenthesis_state_hides_internal_commas)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/athena-atlas-draft-reconcile/engineering/tests/test_srcset_tokenization.py", line 62, in test_descriptor_parenthesis_state_hides_internal_commas
+    self.assertEqual(list(E.srcset_url_tokens(value)), ['a', 'safe'])
+                          ^^^^^^^^^^^^^^^^^^^
+AttributeError: module 'srcset_boundary_extraction' has no attribute 'srcset_url_tokens'
+
+======================================================================
+ERROR: test_internal_commas_are_url_data_until_ascii_whitespace (test_srcset_tokenization.SrcsetTokenizationTests.test_internal_commas_are_url_data_until_ascii_whitespace)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/athena-atlas-draft-reconcile/engineering/tests/test_srcset_tokenization.py", line 27, in test_internal_commas_are_url_data_until_ascii_whitespace
+    self.assertEqual(list(E.srcset_url_tokens('a.webp,b.webp')), ['a.webp,b.webp'])
+                          ^^^^^^^^^^^^^^^^^^^
+AttributeError: module 'srcset_boundary_extraction' has no attribute 'srcset_url_tokens'
+
+======================================================================
+ERROR: test_quotes_brackets_and_backslashes_do_not_invent_escape_states (test_srcset_tokenization.SrcsetTokenizationTests.test_quotes_brackets_and_backslashes_do_not_invent_escape_states)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/athena-atlas-draft-reconcile/engineering/tests/test_srcset_tokenization.py", line 68, in test_quotes_brackets_and_backslashes_do_not_invent_escape_states
+    self.assertEqual(list(E.srcset_url_tokens(value)), expected)
+                          ^^^^^^^^^^^^^^^^^^^
+AttributeError: module 'srcset_boundary_extraction' has no attribute 'srcset_url_tokens'
+
+======================================================================
+ERROR: test_trailing_commas_and_empty_segments_retain_recovery (test_srcset_tokenization.SrcsetTokenizationTests.test_trailing_commas_and_empty_segments_retain_recovery)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/athena-atlas-draft-reconcile/engineering/tests/test_srcset_tokenization.py", line 50, in test_trailing_commas_and_empty_segments_retain_recovery
+    self.assertEqual(urls(value), [ORIGIN + 'one,two.webp', ORIGIN + 'safe.webp'])
+                     ^^^^^^^^^^^
+  File "/workspace/shared/athena-atlas-draft-reconcile/engineering/tests/test_srcset_tokenization.py", line 22, in urls
+    return [u for event in body(value)['events'] for u in event.get('srcset', [])]
+                           ^^^^^^^^^^^
+  File "/workspace/shared/athena-atlas-draft-reconcile/engineering/tests/test_srcset_tokenization.py", line 18, in body
+    return E.ordered_body(node, ORIGIN)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/shared/athena-atlas-draft-reconcile/engineering/experiments/site-extraction-lab/extractors.py", line 119, in ordered_body
+    walk(node)
+  File "/workspace/shared/athena-atlas-draft-reconcile/engineering/experiments/site-extraction-lab/extractors.py", line 115, in walk
+    walk(child)
+  File "/workspace/shared/athena-atlas-draft-reconcile/engineering/experiments/site-extraction-lab/extractors.py", line 109, in walk
+    u for part in rawset.split(",") if (u := public_url(part.strip().split()[0], origin))]
+                                                        ~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+
+======================================================================
+FAIL: test_complete_userinfo_reference_is_rejected_without_suffix_recovery (test_srcset_tokenization.SrcsetTokenizationTests.test_complete_userinfo_reference_is_rejected_without_suffix_recovery)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/athena-atlas-draft-reconcile/engineering/tests/test_srcset_tokenization.py", line 45, in test_complete_userinfo_reference_is_rejected_without_suffix_recovery
+    self.assertEqual(urls(value), [ORIGIN + 'safe.webp'])
+AssertionError: Lists differ: ['htt[16 chars]mple/SYNTHETIC_TAIL@outside.example/a.webp', '[30 chars]ebp'] != ['htt[16 chars]mple/safe.webp']
+
+First differing element 0:
+'https://fixture.example/SYNTHETIC_TAIL@outside.example/a.webp'
+'https://fixture.example/safe.webp'
+
+First list contains 1 additional elements.
+First extra element 1:
+'https://fixture.example/safe.webp'
+
+- ['https://fixture.example/SYNTHETIC_TAIL@outside.example/a.webp',
+-  'https://fixture.example/safe.webp']
+? ^
+
++ ['https://fixture.example/safe.webp']
+? ^
+
+
+======================================================================
+FAIL: test_existing_unsafe_scheme_and_control_character_policy_remains (test_srcset_tokenization.SrcsetTokenizationTests.test_existing_unsafe_scheme_and_control_character_policy_remains)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/athena-atlas-draft-reconcile/engineering/tests/test_srcset_tokenization.py", line 79, in test_existing_unsafe_scheme_and_control_character_policy_remains
+    self.assertEqual([u for e in result['events'] for u in e.get('srcset', [])], [ORIGIN + 'safe.webp'])
+AssertionError: Lists differ: ['htt[16 chars]mple/a.webp', 'https://fixture.example/SYNTHET[41 chars]ebp'] != ['htt[16 chars]mple/safe.webp']
+
+First differing element 0:
+'https://fixture.example/a.webp'
+'https://fixture.example/safe.webp'
+
+First list contains 2 additional elements.
+First extra element 1:
+'https://fixture.example/SYNTHETIC_TAIL'
+
+- ['https://fixture.example/a.webp',
+-  'https://fixture.example/SYNTHETIC_TAIL',
+-  'https://fixture.example/safe.webp']
+? ^
+
++ ['https://fixture.example/safe.webp']
+? ^
+
+
+======================================================================
+FAIL: test_generated_comma_queries_preserve_complete_tokens_before_filtering (test_srcset_tokenization.SrcsetTokenizationTests.test_generated_comma_queries_preserve_complete_tokens_before_filtering)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/athena-atlas-draft-reconcile/engineering/tests/test_srcset_tokenization.py", line 108, in test_generated_comma_queries_preserve_complete_tokens_before_filtering
+    self.assertEqual(urls(value), [ORIGIN + 'image,' + str(i) + '.webp', ORIGIN + 'safe.webp'])
+AssertionError: Lists differ: ['htt[21 chars]image', 'https://fixture.example/0.webp', 'htt[27 chars]ebp'] != ['htt[21 chars]image,0.webp', 'https://fixture.example/safe.webp']
+
+First differing element 0:
+'https://fixture.example/image'
+'https://fixture.example/image,0.webp'
+
+First list contains 1 additional elements.
+First extra element 2:
+'https://fixture.example/safe.webp'
+
++ ['https://fixture.example/image,0.webp', 'https://fixture.example/safe.webp']
+- ['https://fixture.example/image',
+-  'https://fixture.example/0.webp',
+-  'https://fixture.example/safe.webp']
+
+======================================================================
+FAIL: test_public_wordpress_receipt_uses_whole_token_filtering (test_srcset_tokenization.SrcsetTokenizationTests.test_public_wordpress_receipt_uses_whole_token_filtering)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/athena-atlas-draft-reconcile/engineering/tests/test_srcset_tokenization.py", line 100, in test_public_wordpress_receipt_uses_whole_token_filtering
+    self.assertNotIn('SYNTHETIC_TAIL', json.dumps(receipt))
+AssertionError: 'SYNTHETIC_TAIL' unexpectedly found in '{"family": "wordpress", "sourceUrl": "https://fixture.example/", "identity": {"id": 1, "sourceUrl": null, "title": null}, "people": [{"id": 7, "name": null, "avatar": null, "role": "unresolved_post_writer"}], "gallery": [], "files": [], "gates": [], "follow": {"nativeMutationTested": false, "nativeImportTested": false, "local": "Independent local creator subscription; not implemented by this lab"}, "warnings": ["Author identity is unresolved; featured image is not an avatar.", "Writer identity is not automatically original mod developer; pagination remains incomplete."], "scope": "sample_scoped_parser_experiment", "fullSupportAccepted": false, "body": {"format": "html", "completeness": "selected_scope", "characters": 11, "utf8Bytes": 115, "whitespaceCollapsedCharacters": 11, "rawSha256": "ff541701056935ed52b25da7f3e026470c4048a062a1d12dba11a5d7e4224aaa", "textSha256": "31c2400e49aa9f4e10264dc2a73542ad7ce327c1ee55b29af1164b2acbc01b42", "orderedEventCount": 3, "orderedEventTypes": ["text", "media", "text"], "media": [{"type": "media", "tag": "img", "srcset": ["https://fixture.example/one", "https://fixture.example/two.webp", "https://fixture.example/SYNTHETIC_TAIL", "https://fixture.example/safe.webp"]}], "links": [], "projectionComplete": true}, "notes": [], "metadataSummaryPresent": false, "projectImage": null}'
+
+======================================================================
+FAIL: test_query_and_fragment_suffixes_never_become_new_references (test_srcset_tokenization.SrcsetTokenizationTests.test_query_and_fragment_suffixes_never_become_new_references) (separator='?', suffix='SYNTHETIC_TAIL')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/athena-atlas-draft-reconcile/engineering/tests/test_srcset_tokenization.py", line 37, in test_query_and_fragment_suffixes_never_become_new_references
+    self.assertEqual(projected, [ORIGIN + 'a.webp', ORIGIN + 'safe.webp'])
+AssertionError: Lists differ: ['htt[45 chars]e.example/SYNTHETIC_TAIL', 'https://fixture.example/safe.webp'] != ['htt[45 chars]e.example/safe.webp']
+
+First differing element 1:
+'https://fixture.example/SYNTHETIC_TAIL'
+'https://fixture.example/safe.webp'
+
+First list contains 1 additional elements.
+First extra element 2:
+'https://fixture.example/safe.webp'
+
++ ['https://fixture.example/a.webp', 'https://fixture.example/safe.webp']
+- ['https://fixture.example/a.webp',
+-  'https://fixture.example/SYNTHETIC_TAIL',
+-  'https://fixture.example/safe.webp']
+
+======================================================================
+FAIL: test_query_and_fragment_suffixes_never_become_new_references (test_srcset_tokenization.SrcsetTokenizationTests.test_query_and_fragment_suffixes_never_become_new_references) (separator='?', suffix='SYNTHETIC_TAIL,SECOND')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/athena-atlas-draft-reconcile/engineering/tests/test_srcset_tokenization.py", line 37, in test_query_and_fragment_suffixes_never_become_new_references
+    self.assertEqual(projected, [ORIGIN + 'a.webp', ORIGIN + 'safe.webp'])
+AssertionError: Lists differ: ['htt[50 chars]mple/SYNTHETIC_TAIL', 'https://fixture.example[41 chars]ebp'] != ['htt[50 chars]mple/safe.webp']
+
+First differing element 1:
+'https://fixture.example/SYNTHETIC_TAIL'
+'https://fixture.example/safe.webp'
+
+First list contains 2 additional elements.
+First extra element 2:
+'https://fixture.example/SECOND'
+
++ ['https://fixture.example/a.webp', 'https://fixture.example/safe.webp']
+- ['https://fixture.example/a.webp',
+-  'https://fixture.example/SYNTHETIC_TAIL',
+-  'https://fixture.example/SECOND',
+-  'https://fixture.example/safe.webp']
+
+======================================================================
+FAIL: test_query_and_fragment_suffixes_never_become_new_references (test_srcset_tokenization.SrcsetTokenizationTests.test_query_and_fragment_suffixes_never_become_new_references) (separator='?', suffix='\xa0SYNTHETIC_TAIL')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/athena-atlas-draft-reconcile/engineering/tests/test_srcset_tokenization.py", line 37, in test_query_and_fragment_suffixes_never_become_new_references
+    self.assertEqual(projected, [ORIGIN + 'a.webp', ORIGIN + 'safe.webp'])
+AssertionError: Lists differ: ['htt[45 chars]e.example/SYNTHETIC_TAIL', 'https://fixture.example/safe.webp'] != ['htt[45 chars]e.example/safe.webp']
+
+First differing element 1:
+'https://fixture.example/SYNTHETIC_TAIL'
+'https://fixture.example/safe.webp'
+
+First list contains 1 additional elements.
+First extra element 2:
+'https://fixture.example/safe.webp'
+
++ ['https://fixture.example/a.webp', 'https://fixture.example/safe.webp']
+- ['https://fixture.example/a.webp',
+-  'https://fixture.example/SYNTHETIC_TAIL',
+-  'https://fixture.example/safe.webp']
+
+======================================================================
+FAIL: test_query_and_fragment_suffixes_never_become_new_references (test_srcset_tokenization.SrcsetTokenizationTests.test_query_and_fragment_suffixes_never_become_new_references) (separator='#', suffix='SYNTHETIC_TAIL')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/athena-atlas-draft-reconcile/engineering/tests/test_srcset_tokenization.py", line 37, in test_query_and_fragment_suffixes_never_become_new_references
+    self.assertEqual(projected, [ORIGIN + 'a.webp', ORIGIN + 'safe.webp'])
+AssertionError: Lists differ: ['htt[45 chars]e.example/SYNTHETIC_TAIL', 'https://fixture.example/safe.webp'] != ['htt[45 chars]e.example/safe.webp']
+
+First differing element 1:
+'https://fixture.example/SYNTHETIC_TAIL'
+'https://fixture.example/safe.webp'
+
+First list contains 1 additional elements.
+First extra element 2:
+'https://fixture.example/safe.webp'
+
++ ['https://fixture.example/a.webp', 'https://fixture.example/safe.webp']
+- ['https://fixture.example/a.webp',
+-  'https://fixture.example/SYNTHETIC_TAIL',
+-  'https://fixture.example/safe.webp']
+
+======================================================================
+FAIL: test_query_and_fragment_suffixes_never_become_new_references (test_srcset_tokenization.SrcsetTokenizationTests.test_query_and_fragment_suffixes_never_become_new_references) (separator='#', suffix='SYNTHETIC_TAIL,SECOND')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/athena-atlas-draft-reconcile/engineering/tests/test_srcset_tokenization.py", line 37, in test_query_and_fragment_suffixes_never_become_new_references
+    self.assertEqual(projected, [ORIGIN + 'a.webp', ORIGIN + 'safe.webp'])
+AssertionError: Lists differ: ['htt[50 chars]mple/SYNTHETIC_TAIL', 'https://fixture.example[41 chars]ebp'] != ['htt[50 chars]mple/safe.webp']
+
+First differing element 1:
+'https://fixture.example/SYNTHETIC_TAIL'
+'https://fixture.example/safe.webp'
+
+First list contains 2 additional elements.
+First extra element 2:
+'https://fixture.example/SECOND'
+
++ ['https://fixture.example/a.webp', 'https://fixture.example/safe.webp']
+- ['https://fixture.example/a.webp',
+-  'https://fixture.example/SYNTHETIC_TAIL',
+-  'https://fixture.example/SECOND',
+-  'https://fixture.example/safe.webp']
+
+======================================================================
+FAIL: test_query_and_fragment_suffixes_never_become_new_references (test_srcset_tokenization.SrcsetTokenizationTests.test_query_and_fragment_suffixes_never_become_new_references) (separator='#', suffix='\xa0SYNTHETIC_TAIL')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/athena-atlas-draft-reconcile/engineering/tests/test_srcset_tokenization.py", line 37, in test_query_and_fragment_suffixes_never_become_new_references
+    self.assertEqual(projected, [ORIGIN + 'a.webp', ORIGIN + 'safe.webp'])
+AssertionError: Lists differ: ['htt[45 chars]e.example/SYNTHETIC_TAIL', 'https://fixture.example/safe.webp'] != ['htt[45 chars]e.example/safe.webp']
+
+First differing element 1:
+'https://fixture.example/SYNTHETIC_TAIL'
+'https://fixture.example/safe.webp'
+
+First list contains 1 additional elements.
+First extra element 2:
+'https://fixture.example/safe.webp'
+
++ ['https://fixture.example/a.webp', 'https://fixture.example/safe.webp']
+- ['https://fixture.example/a.webp',
+-  'https://fixture.example/SYNTHETIC_TAIL',
+-  'https://fixture.example/safe.webp']
+
+======================================================================
+FAIL: test_selected_serialization_text_and_picture_order_are_unchanged (test_srcset_tokenization.SrcsetTokenizationTests.test_selected_serialization_text_and_picture_order_are_unchanged)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/athena-atlas-draft-reconcile/engineering/tests/test_srcset_tokenization.py", line 91, in test_selected_serialization_text_and_picture_order_are_unchanged
+    self.assertEqual(media[0]['srcset'], [ORIGIN + 'one,two.webp', ORIGIN + 'safe.webp'])
+AssertionError: Lists differ: ['htt[19 chars]e/one', 'https://fixture.example/two.webp', 'h[29 chars]ebp'] != ['htt[19 chars]e/one,two.webp', 'https://fixture.example/safe.webp']
+
+First differing element 0:
+'https://fixture.example/one'
+'https://fixture.example/one,two.webp'
+
+First list contains 1 additional elements.
+First extra element 2:
+'https://fixture.example/safe.webp'
+
++ ['https://fixture.example/one,two.webp', 'https://fixture.example/safe.webp']
+- ['https://fixture.example/one',
+-  'https://fixture.example/two.webp',
+-  'https://fixture.example/safe.webp']
+
+----------------------------------------------------------------------
+Ran 20 tests in 0.012s
+
+FAILED (failures=11, errors=19)

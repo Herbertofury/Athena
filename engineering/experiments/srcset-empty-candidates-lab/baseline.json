@@ -1,0 +1,123 @@
+{
+  "kind": "offline-srcset-empty-candidate-reproduction",
+  "source_revision": "13af2857af303ac54398a88ba965a966331e1e26",
+  "extractor_sha256": "2ca3ff4b1645930709ca58eb37f742cca917df4c78dc93ab9c7008475659d188",
+  "python": "3.12.14",
+  "lxml": "6.1.1.0",
+  "network_used_by_replay": false,
+  "native_browser": false,
+  "real_input": {
+    "bytes": 15465,
+    "sha256": "69fba36a8914397d2b2173d9d6d1add799dec93a5ab152be76180f5069bfd62a",
+    "post_id": 7402,
+    "source_url": "https://rre36.com/blog/development-update-q3-2026-sticks-and-stones-wont-break-my-bones-but-a-staircase-will",
+    "published_gmt": "2026-09-16T12:04:15",
+    "modified_gmt": "2026-09-16T12:11:00",
+    "srcset_attributes": 1,
+    "raw_body_published": false
+  },
+  "cases": [
+    {
+      "case": "trailing comma",
+      "scope": "synthetic",
+      "input_bytes": 132,
+      "input_sha256": "6357da27e6e5d09ffe21f928877a8e6483b50c2c13879de90e7550972d693371",
+      "status": "failed",
+      "error_type": "IndexError"
+    },
+    {
+      "case": "leading comma",
+      "scope": "synthetic",
+      "input_bytes": 132,
+      "input_sha256": "778540aae7ecba1c6e07decd6e29193ba634547f5d8137211270af2050098ea8",
+      "status": "failed",
+      "error_type": "IndexError"
+    },
+    {
+      "case": "repeated commas",
+      "scope": "synthetic",
+      "input_bytes": 143,
+      "input_sha256": "002491dd836b5442d59d26c8550810697844f2b18c0cd9ae6ce51bdfc1dccccb",
+      "status": "failed",
+      "error_type": "IndexError"
+    },
+    {
+      "case": "delimiter only",
+      "scope": "synthetic",
+      "input_bytes": 121,
+      "input_sha256": "6ba1ddead70329b4d1d627af1689f32419fda5400b13645a0324c3bf27049d75",
+      "status": "failed",
+      "error_type": "IndexError"
+    },
+    {
+      "case": "whitespace only",
+      "scope": "synthetic",
+      "input_bytes": 126,
+      "input_sha256": "fdc3166ace8854a15227346bf73a8b139d0b9a97d70474f4069ee8d9270cd6ad",
+      "status": "failed",
+      "error_type": "IndexError"
+    },
+    {
+      "case": "whitespace and delimiters",
+      "scope": "synthetic",
+      "input_bytes": 130,
+      "input_sha256": "3c0b2b42afae24ff928bc53fef81cb047e48eda330adeed3887fae9b070d6c08",
+      "status": "failed",
+      "error_type": "IndexError"
+    },
+    {
+      "case": "healthy control",
+      "scope": "synthetic",
+      "input_bytes": 142,
+      "input_sha256": "1ec09849f4efae62dcd45f6737ba5b3088105b72335318cb5ecc2e2a384a3506",
+      "status": "extracted",
+      "text_preserved": true,
+      "projected_urls_match_expected": true,
+      "projected_url_count": 2,
+      "body_raw_sha256": "930d3862e602c2a8dd256230dfc16efc061ea4e3645100f6f5e4649b1797cb1b",
+      "body_text_sha256": "688845e52369cf398b844330729d1991eaa0c5be47e2d175f7667d0c28fd31d4",
+      "events_sha256": "5d97c3016ad580e17768e40059779235ff945865c6aadaf3117079ff4a82873b",
+      "complete_record_sha256": "3ea9e765c0b346cc4da0c8e254be3be3feceeea85d3c5356c283eeca0bd5dbf6",
+      "full_support_accepted": false
+    },
+    {
+      "case": "unchanged public WordPress post",
+      "scope": "actual_public_response_offline_replay",
+      "input_bytes": 15465,
+      "input_sha256": "69fba36a8914397d2b2173d9d6d1add799dec93a5ab152be76180f5069bfd62a",
+      "status": "extracted",
+      "text_preserved": true,
+      "projected_urls_match_expected": true,
+      "projected_url_count": 6,
+      "body_raw_sha256": "979600a5d66d84635f0b77cb3c35468db576768f5814a5f3b51e5d16aad1a505",
+      "body_text_sha256": "a68710967df152fb7fe7aad729126c84cad9f54476cab73b23ab45d8818a305b",
+      "events_sha256": "1213ac3f30e547b2eb66b60aba73a5ce9aafd77b8851fcb93a7d5793166a4a95",
+      "complete_record_sha256": "295070234dfd7cf14bf07f2a9bcef34bac43e75ec4dae7c354d037d751258e13",
+      "full_support_accepted": false
+    },
+    {
+      "case": "public body with synthetic trailing separators",
+      "scope": "synthetically_mutated_public_response_not_observed_live",
+      "input_bytes": 15198,
+      "input_sha256": "b5bbc973a77c46829729dff286029d050e68a18616dac08e1143fdc9ec0bc24a",
+      "status": "failed",
+      "error_type": "IndexError"
+    },
+    {
+      "case": "public body with synthetic leading separators",
+      "scope": "synthetically_mutated_public_response_not_observed_live",
+      "input_bytes": 15198,
+      "input_sha256": "454edbdf8f42517d7623507613787cfe351747c90105cf84670de0f61e4d13f1",
+      "status": "failed",
+      "error_type": "IndexError"
+    },
+    {
+      "case": "public body with synthetic repeated separators",
+      "scope": "synthetically_mutated_public_response_not_observed_live",
+      "input_bytes": 15206,
+      "input_sha256": "56e5d564ce184b216b078b8efe8f5a03738e1d94bcc2e911aab0e0a70a40f0ca",
+      "status": "failed",
+      "error_type": "IndexError"
+    }
+  ]
+}
