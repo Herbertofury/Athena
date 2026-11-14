@@ -1,14 +1,22 @@
 use athena_foundry_store::{Store, music_import::MusicImport};
 use serde_json::json;
-fn setup() -> (std::path::PathBuf, Store) {
-    let p = std::env::temp_dir().join(format!(
-        "music-precision-{}-{}.sqlite",
+use std::sync::atomic::{AtomicU64, Ordering};
+static FIXTURE_SEQUENCE: AtomicU64 = AtomicU64::new(0);
+fn fixture_path_at(now: u128) -> std::path::PathBuf {
+    std::env::temp_dir().join(format!(
+        "music-precision-{}-{}-{}.sqlite",
         std::process::id(),
+        now,
+        FIXTURE_SEQUENCE.fetch_add(1, Ordering::Relaxed)
+    ))
+}
+fn setup() -> (std::path::PathBuf, Store) {
+    let p = fixture_path_at(
         std::time::SystemTime::now()
             .duration_since(std::time::UNIX_EPOCH)
             .unwrap()
-            .as_nanos()
-    ));
+            .as_nanos(),
+    );
     let mut s = Store::create(&p).unwrap();
     s.migrate_history().unwrap();
     s.migrate_soundtrack_metadata().unwrap();
@@ -142,4 +150,15 @@ fn upgrade_preserves_unknown_precision_and_old_import_contract() {
     );
     drop(s);
     std::fs::remove_file(p).unwrap();
+}
+
+#[test]
+fn fixture_paths_remain_unique_when_parallel_clock_samples_are_identical() {
+    // Windows clock granularity can return identical samples in parallel tests.
+    let threads: Vec<_> = (0..32)
+        .map(|_| std::thread::spawn(|| fixture_path_at(123)))
+        .collect();
+    let paths: std::collections::HashSet<_> =
+        threads.into_iter().map(|t| t.join().unwrap()).collect();
+    assert_eq!(paths.len(), 32);
 }
