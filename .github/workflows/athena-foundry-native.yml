@@ -58,9 +58,13 @@ jobs:
         run: npx playwright install chromium
       - name: Browser to native SQLite acceptance
         run: node scripts/test_foundry_native_browser.mjs
+      - name: Restored source-feature browser acceptance
+        run: node scripts/test_foundry_parity_browser.cjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: native-foundry-${{ matrix.os }}
-          path: browser-results/foundry-native/
+          path: |
+            browser-results/foundry-native/
+            browser-results/foundry-parity/
           if-no-files-found: error
