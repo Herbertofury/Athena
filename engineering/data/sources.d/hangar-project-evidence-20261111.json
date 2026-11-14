@@ -1,0 +1,46 @@
+[
+  {
+    "id": "HGP11001",
+    "title": "Hangar official API documentation",
+    "url": "https://hangar.papermc.io/api-docs",
+    "observed_version": "Public source observed 2026-11-11; software version not inferred",
+    "topic": "hangar-project-version-evidence",
+    "note": "First-party entry point to the public API specification.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 60,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "HGP11002",
+    "title": "Hangar public OpenAPI",
+    "url": "https://hangar.papermc.io/v3/api-docs/public",
+    "observed_version": "OpenAPI 3.1.0 / API 1.0",
+    "topic": "hangar-project-version-evidence",
+    "note": "Anonymous public information, documented routes only, project/version/page schema and limits. Exact schema captured privately.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 60,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "HGP11003",
+    "title": "Hangar terms and conditions",
+    "url": "https://hangar.papermc.io/terms",
+    "observed_version": "Terms last updated 2022-12-25",
+    "topic": "hangar-project-version-evidence",
+    "note": "Author rights and service limits; not blanket permission to redistribute linked assets.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 60,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "HGP11004",
+    "title": "Hangar selected public project",
+    "url": "https://hangar.papermc.io/api/v1/projects/14",
+    "observed_version": "Public source observed 2026-11-11; software version not inferred",
+    "topic": "hangar-project-version-evidence",
+    "note": "Actual Geyser project response plus selected version 238 and separate main page; external mutable references not downloaded.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 60,
+    "evidence": "primary_documented"
+  }
+]
