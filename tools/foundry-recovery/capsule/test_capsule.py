@@ -6,6 +6,11 @@ class Recovery(unittest.TestCase):
   data={k:' { "unknown": [1, 1.00], "pixel": -70 }\n' for k in c.KEYS}
   data['ff-visual-quality']='ultra';data['ff-world-layout']='corrupt { keep me';data['ff-world-mascots']='\ud800🦊\x00'
   self.assertEqual(c.unpack(c.parse(json.dumps(c.pack(data)))),data)
+ def test_premium_and_music_values_preserved_without_provider_credentials(self):
+  data={'ff.premium-theme.v1':'frutiger-aero','ff.music-hub.v2':' { "version": 2, "route": "home", "mappings": {} }\n'}
+  self.assertEqual(c.unpack(c.pack(data)),data)
+  for key in ('ff.spotify.session.v1','ff.spotify.pkce.verifier','ff.spotify.pkce.state','ff.spotify.pkce.redirect','ff.spotify.client-id','ff.apple.developer-token'):
+   with self.assertRaises(ValueError):c.pack({key:'SYNTHETIC_EXCLUDED'})
  def test_missing_vs_empty(self):
   self.assertEqual(c.unpack(c.pack({})),{});self.assertEqual(c.unpack(c.pack({'ff-visual-quality':''})),{'ff-visual-quality':''})
  def test_unknown_and_parsed_refused(self):
