@@ -1,3 +1,4 @@
+from contextlib import closing
 import os
 import pathlib,sqlite3,tempfile,subprocess,threading,http.client,json,unittest,importlib.util
 from legacy_fixture import create
@@ -16,14 +17,14 @@ class LegacyTests(unittest.TestCase):
   store=json.loads(subprocess.check_output([BIN,'read-native',str(self.dest),'frutiger-aero','frutiger-aero:room:aqua-atrium']));self.assertEqual(store['updated_at'],123456789);self.assertEqual(store['assignment']['status'],'USER_SEARCH_ROUTE');self.assertEqual(self.commit(r['review_token'])[0],409)
  def test_changed_source_existing_destination_and_spoof_refused(self):
   _,r=self.request();self.assertEqual(self.request('/__native/legacy-import',{'review_token':r['review_token'],'source':'other'})[0],400)
-  with sqlite3.connect(self.source) as db:db.execute("INSERT INTO metadata VALUES('extra','value')")
+  with closing(sqlite3.connect(self.source)) as db, db:db.execute("INSERT INTO metadata VALUES('extra','value')")
   self.assertEqual(self.commit(r['review_token'])[0],409);self.assertFalse(self.dest.exists());_,r=self.request();self.dest.write_bytes(b'keep');self.assertEqual(self.commit(r['review_token'])[0],409);self.assertEqual(self.dest.read_bytes(),b'keep');self.assertEqual(self.request(extra={'Origin':'https://evil.test'})[0],403)
  def test_source_changes_during_import_report_uncertainty(self):
   _,r=self.request();original=self.server.legacy_cli
   def changed(action):
    result=original(action)
    if action=='import-legacy':
-    with sqlite3.connect(self.source) as db:db.execute("INSERT INTO metadata VALUES('changed-after','value')")
+    with closing(sqlite3.connect(self.source)) as db, db:db.execute("INSERT INTO metadata VALUES('changed-after','value')")
    return result
   self.server.legacy_cli=changed;status,result=self.commit(r['review_token']);self.assertEqual(status,200);self.assertTrue(result['imported']);self.assertFalse(result['source_unchanged_at_checks']);self.assertFalse(result['snapshot_identity_verified'])
  def test_source_and_live_sidecar_destinations_refused(self):
@@ -32,7 +33,7 @@ class LegacyTests(unittest.TestCase):
     with self.assertRaises(ValueError):m.Bridge(BIN,self.live,ROOT.parents[1]/'dist',self.source,str(base)+suffix)
  def test_no_path_configuration_and_wal_refusal(self):
   self.server.legacy_source=None;self.assertEqual(self.request()[0],409);self.assertEqual(self.commit('a'*64)[0],409);self.server.legacy_source=self.source
-  with sqlite3.connect(self.source) as db:db.execute('PRAGMA journal_mode=WAL')
+  with closing(sqlite3.connect(self.source)) as db, db:db.execute('PRAGMA journal_mode=WAL')
   before=self.source.read_bytes();self.assertEqual(self.request()[0],422);self.assertEqual(self.source.read_bytes(),before);self.assertFalse(self.dest.exists())
  def test_uncertain_failure_consumes_review_and_preserves_output(self):
   _,r=self.request()

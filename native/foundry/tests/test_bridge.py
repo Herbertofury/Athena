@@ -1,3 +1,4 @@
+from contextlib import closing
 import os
 import importlib.util,pathlib,tempfile,subprocess,threading,http.client,unittest,json,sqlite3
 ROOT=pathlib.Path(__file__).resolve().parents[1];spec=importlib.util.spec_from_file_location('bridge',ROOT/'bridge.py');m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m)
@@ -92,7 +93,7 @@ class Tests(unittest.TestCase):
   self.assertEqual(json.loads(self.request(path=f'/__native/revision/{id}')[1]),json.loads(FIX))
   self.assertEqual(self.request(path='/__native/revision/999')[0],422)
   for path in ['/__native/revision/0','/__native/revision/-1','/__native/revision/1;drop','/__native/revision/999999999999999999999'] :self.assertEqual(self.request(path=path)[0],400)
-  with sqlite3.connect(self.db) as db:db.execute('UPDATE workspace_revisions SET sha256=? WHERE id=?',('corrupt',id))
+  with closing(sqlite3.connect(self.db)) as db, db:db.execute('UPDATE workspace_revisions SET sha256=? WHERE id=?',('corrupt',id))
   before=self.db.read_bytes();self.assertEqual(self.request(path=f'/__native/revision/{id}')[0],422);self.assertEqual(self.db.read_bytes(),before)
   token=self.request()[2]['ETag']
   for selected in [id,999]:
@@ -120,7 +121,7 @@ class Tests(unittest.TestCase):
   self.assertEqual(self.request('POST',path='/__native/assign-soundtrack',body=json.dumps({**edited,'status':'AUTHORIZED','source_id':'caller'}),headers={'Content-Type':'application/json','If-Match':reviewed})[0],400);self.assertEqual(self.db.read_bytes(),last_good)
   invalid={**edited,'url':'javascript:alert(1)'}
   self.assertEqual(self.request('POST',path='/__native/assign-soundtrack',body=json.dumps(invalid),headers={'Content-Type':'application/json','If-Match':reviewed})[0],422);self.assertEqual(self.db.read_bytes(),last_good)
-  with sqlite3.connect(self.db) as db:db.execute("UPDATE soundtracks SET url='javascript:alert(1)'")
+  with closing(sqlite3.connect(self.db)) as db, db:db.execute("UPDATE soundtracks SET url='javascript:alert(1)'")
   before=self.db.read_bytes();self.assertEqual(self.request(path=path)[0],422);self.assertEqual(self.db.read_bytes(),before)
   self.assertEqual(self.request(path='/__native/soundtrack/a/../../file')[0],400)
  def test_host_origin_header_and_cors(self):
