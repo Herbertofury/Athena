@@ -3,6 +3,35 @@ import {acceptVerifiedInput} from './receipt-protocol.b4d10c91dd34ebaa.mjs';
 import {prepareDataset} from './baseline.293713d95cef8511.mjs';
 import {verifyPrepared,verifyPreparedBounded} from './verified-receiver.0b0bb67b4513ac91.mjs';
 import {createFocusGuard,calibrateFrameCadence} from './lab-core.07b69b8b7583dd03.mjs';
+// Explicit, bounded local receipt recovery. Integrity is not renewed measurement acceptance.
+export const RECEIVER_STORAGE_KEY='athena.receiver.last-good.v1';
+const MAX_RECEIPT=262144;
+export function validateReceiverReceipt(text){
+ if(typeof text!=='string'||text.length>MAX_RECEIPT)throw Error('Receipt exceeds the 256 KiB text limit.');
+ const r=JSON.parse(text),pairs={main:['whole','bounded'],worker:['whole','bounded'],transport:['clone','transfer'],receipt:['clone','receipt'],build:['modules','esbuild','rolldown']};
+ const lanes=pairs[r?.execution];
+ if(!r||r.harness!=='athena-native-complete-receiver-v1'||r.complete!==true||r.count!==200||![8192,65536].includes(r.bytes)||!lanes||!Array.isArray(r.samples)||r.samples.length!==lanes.length*3||!/^[a-f0-9]{64}$/.test(r.dataset?.sha256||'')||!Number.isFinite(Date.parse(r.started_at))||!Number.isFinite(Date.parse(r.finished_at)))throw Error('Not a compatible complete receiver receipt.');
+ for(let round=0;round<3;round++)for(const lane of lanes){const s=r.samples.filter(s=>s.round===round&&s.lane===lane);if(s.length!==1||s[0].complete_parity!==true||!Number.isFinite(s[0].request_ms)||s[0].request_ms<0)throw Error('Receipt is missing complete lane/round parity.');}
+ return r;
+}
+async function receiptDigest(text){const hash=await globalThis.crypto.subtle.digest('SHA-256',new TextEncoder().encode(text));return [...new Uint8Array(hash)].map(x=>x.toString(16).padStart(2,'0')).join('');}
+export async function saveReceiverReceipt(storage,text){
+ validateReceiverReceipt(text);
+ const envelope=JSON.stringify({schema:1,receipt:text,sha256:await receiptDigest(text)});
+ // Storage.setItem is one atomic browser operation; quota/security failures do not clear the previous value.
+ storage.setItem(RECEIVER_STORAGE_KEY,envelope);
+ if(storage.getItem(RECEIVER_STORAGE_KEY)!==envelope)throw Error('Saved receipt read-back did not match; no durability confirmation.');
+ return {bytes:new TextEncoder().encode(envelope).length};
+}
+export async function loadReceiverReceipt(storage){
+ const raw=storage.getItem(RECEIVER_STORAGE_KEY);
+ if(raw===null)throw Error('No saved receiver receipt in this browser.');
+ if(typeof raw!=='string'||raw.length>MAX_RECEIPT*2)throw Error('Stored receipt exceeds the recovery limit.');
+ const e=JSON.parse(raw);
+ if(e?.schema!==1||typeof e.receipt!=='string'||e.receipt.length>MAX_RECEIPT||e.sha256!==await receiptDigest(e.receipt))throw Error('Stored receipt integrity check failed.');
+ return {text:e.receipt,receipt:validateReceiverReceipt(e.receipt)};
+}
+
 let retained={current:null,lastGood:null};
 export async function mount({container,search='',theme='dark',signal}={}){
  if(!container?.attachShadow)throw TypeError('Workspace container required');
@@ -24,7 +53,7 @@ export async function mount({container,search='',theme='dark',signal}={}){
  function unmount(){if(disposed)return;disposed=true;cancelRun();for(const observer of observers)observer.disconnect();observers.clear();for(const f of cleanups.splice(0))f();for(const id of timers)globalThis.clearTimeout(id);timers.clear();for(const id of frames)globalThis.cancelAnimationFrame(id);frames.clear();for(const url of urls)URL.revokeObjectURL(url);urls.clear();root.querySelector('dialog[open]')?.close();root.replaceChildren();signal?.removeEventListener('abort',unmount);}
  signal?.addEventListener('abort',unmount,{once:true});
  if(signal?.aborted){unmount();return {unmount,setTheme,setSearch(){},ready:false};}
- root.innerHTML="<p class=\"notice\">Native Athena receiver lab. Complete generated workload only; no target-project winner. Receipts survive navigation in this tab only. Download before closing or reloading.</p><p id=\"search-status\" role=\"status\"></p><h2>Complete receiver laboratory</h2><p id=\"build\">Loading verified module\u2026</p><p>Isolated generated-data comparison. Both lanes validate every field, exact bytes and SHA-256. No provider data, autoplay, production promotion or physical-paint claim.</p><label>Metadata per card <select id=\"bytes\"><option value=\"8192\">8 KiB</option><option value=\"65536\">64 KiB</option></select></label><label>Execution <select id=\"execution\"><option value=\"main\">Main thread</option><option value=\"worker\">Dedicated worker, full roundtrip</option><option value=\"transport\">Worker clone versus buffer transfer</option><option value=\"receipt\">Worker clone versus verified-input receipt</option><option value=\"build\">Native modules / esbuild / Rolldown</option></select></label><button id=\"run\" disabled>Run comparison</button><button id=\"cancel\" disabled>Cancel</button><button id=\"download\" disabled>Download current receipt</button><button id=\"last\" disabled>Download last good receipt</button><p id=\"status\">Loading the verification module. Run stays disabled until it is ready.</p><p><label>Input responsiveness probe <input id=\"probe\" placeholder=\"Type during a run\"></label></p><p id=\"summary\">No completed comparison.</p><details><summary>Complete raw receipt</summary><pre id=\"output\"></pre></details>";
+ root.innerHTML="<p class=\"notice\">Native Athena receiver lab. Complete generated workload only; no target-project winner. Receipts survive navigation in this tab. Explicitly save last-good to this browser or download before reloading. Browser storage can be cleared or evicted; keep a downloaded backup.</p><p id=\"search-status\" role=\"status\"></p><h2>Complete receiver laboratory</h2><p id=\"build\">Loading verified module\u2026</p><p>Isolated generated-data comparison. Both lanes validate every field, exact bytes and SHA-256. No provider data, autoplay, production promotion or physical-paint claim.</p><label>Metadata per card <select id=\"bytes\"><option value=\"8192\">8 KiB</option><option value=\"65536\">64 KiB</option></select></label><label>Execution <select id=\"execution\"><option value=\"main\">Main thread</option><option value=\"worker\">Dedicated worker, full roundtrip</option><option value=\"transport\">Worker clone versus buffer transfer</option><option value=\"receipt\">Worker clone versus verified-input receipt</option><option value=\"build\">Native modules / esbuild / Rolldown</option></select></label><button id=\"run\" disabled>Run comparison</button><button id=\"cancel\" disabled>Cancel</button><button id=\"download\" disabled>Download current receipt</button><button id=\"last\" disabled>Download last good receipt</button><p id=\"status\">Loading the verification module. Run stays disabled until it is ready.</p><p><label>Input responsiveness probe <input id=\"probe\" placeholder=\"Type during a run\"></label></p><p id=\"summary\">No completed comparison.</p><details><summary>Complete raw receipt</summary><pre id=\"output\"></pre></details><section aria-label=\"Saved receiver receipt\"><h3>Receipt recovery</h3><button id=\"save-receipt\" disabled>Save last-good in this browser</button><button id=\"restore-receipt\">Restore saved receipt</button><p id=\"storage-status\" role=\"status\">No automatic save or restore. Saved data stays on this origin; it is not uploaded.</p></section>";
  const style=document.createElement('link');style.rel='stylesheet';style.href=new URL('./style.css',import.meta.url).href;root.prepend(style);setTheme(theme);
 const $=id=>root.getElementById(id),guard=createFocusGuard(document,{addEventListener:listenWindow});
 const identity='athena-native-complete-receiver-v1';$('build').textContent='Loaded harness: '+identity;
@@ -32,7 +61,7 @@ let busy=false,stopped=false,hidden=false,sequence=0,cancelWorker=null,current=r
 const visibility=()=>{if(busy&&document.hidden)hidden=true;};document.addEventListener('visibilitychange',visibility);cleanups.push(()=>document.removeEventListener('visibilitychange',visibility));
 const check=()=>{guard.check();if(stopped)throw Error('Cancelled; partial evidence retained');if(hidden||document.hidden)throw Error('Visibility lost; partial evidence retained');};
 const calibrate=()=>calibrateFrameCadence({requestFrame:requestAnimationFrame,cancelFrame:cancelAnimationFrame,setTimer:setTimeout,clearTimer:clearTimeout,now:()=>performance.now(),check});
-const publish=()=>{if(disposed)return;$('output').textContent=JSON.stringify(current,null,2);$('download').disabled=!current;};
+const publish=()=>{if(disposed)return;syncStorageButtons();$('output').textContent=JSON.stringify(current,null,2);$('download').disabled=!current;};
 function workerRun(lane,prepared,count,bytes){
  return new Promise((resolve,reject)=>{
   const requestStart=performance.timeOrigin+performance.now();
@@ -53,7 +82,7 @@ function workerRun(lane,prepared,count,bytes){
  });
 }
 $('run').addEventListener('click',async()=>{
- if(disposed||busy)return;busy=true;stopped=false;hidden=false;guard.begin();$('status').textContent='Calibrating current run…';$('summary').textContent='Run in progress; previous completion is not this run.';$('run').disabled=true;$('cancel').disabled=false;$('bytes').disabled=true;$('execution').disabled=true;
+ if(disposed||busy)return;storageOperation++;busy=true;stopped=false;hidden=false;guard.begin();$('status').textContent='Calibrating current run…';$('summary').textContent='Run in progress; previous completion is not this run.';$('run').disabled=true;$('cancel').disabled=false;$('bytes').disabled=true;$('execution').disabled=true;
  const count=200,bytes=Number($('bytes').value),execution=$('execution').value;
  current={harness:identity,source_harness:"atlas-complete-receiver-v9-explicit-phase-status",started_at:new Date().toISOString(),scope:'Generated browser receiver validation; no target acceptance',count,bytes,execution,complete:false,samples:[],limitations:['Frame gaps are scheduling observations, not INP or physical paint','No heap/RSS or provider-media measurement','Worker request duration includes startup and full input clone; clone mode also clones the full result, transfer mode includes complete output encoding, transfer and decoding','Receipt mode is validation-only: original complete input stays owned by the main thread; no transformed/new records are produced',
   'Build comparison uses identical complete validation-only receipts in all three lanes, with a new worker per sample',
@@ -82,7 +111,7 @@ $('run').addEventListener('click',async()=>{
   }
   check();const completedSummary=completeDataSummary(current.samples);current.complete=true;current.focus_state=guard.snapshot();current.finished_at=new Date().toISOString();lastGood=JSON.stringify(current,null,2);$('last').disabled=false;$('summary').textContent=completedSummary.text;$('status').textContent=completedSummary.rejected?'Complete data comparison; rejected phase timelines are retained, not accepted.':'Complete data comparison. Inspect the scope and retained measurements.';
  }catch(error){if(disposed)return;current.error=error.message;current.complete=false;$('status').textContent=error.message;}
- finally{if(disposed)return;current.focus_state=guard.snapshot();guard.finish();publish();busy=false;$('run').disabled=false;$('cancel').disabled=true;$('bytes').disabled=false;$('execution').disabled=false;}
+ finally{if(disposed)return;current.focus_state=guard.snapshot();guard.finish();publish();busy=false;$('run').disabled=false;$('cancel').disabled=true;$('bytes').disabled=false;$('execution').disabled=false;syncStorageButtons();}
 });
 $('cancel').addEventListener('click',()=>{stopped=true;if(cancelWorker)cancelWorker();$('cancel').disabled=true;});
 function download(text,name){const url=createObjectURL(new Blob([text],{type:'application/json'})),a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>revokeObjectURL(url),1000);}
@@ -90,6 +119,11 @@ $('download').addEventListener('click',()=>download(JSON.stringify(current,null,
 $('last').addEventListener('click',()=>{if(lastGood)download(lastGood,'receiver-last-good.json');});
 
 $('run').disabled=false;$('status').textContent='Ready. Keep this window in the foreground.';
+let storageOperation=0;
+function syncStorageButtons(){if(disposed)return;$('save-receipt').disabled=busy||!lastGood;$('restore-receipt').disabled=busy;}
+async function recover(action){if(disposed||busy)return;const operation=++storageOperation;try{if(action==='save'){if(!lastGood)throw Error('No complete receipt to save.');await saveReceiverReceipt(window.localStorage,lastGood);if(disposed||operation!==storageOperation)return;$('storage-status').textContent='Saved last-good receipt and verified exact read-back. Browser storage may still be cleared or evicted; keep a downloaded backup.';}else{const saved=await loadReceiverReceipt(window.localStorage);if(disposed||busy||operation!==storageOperation)return;current=saved.receipt;lastGood=saved.text;retained={current,lastGood};publish();$('last').disabled=false;$('status').textContent='Restored historical receipt, not a new run.';$('summary').textContent='Recovered '+current.execution+' receipt from '+current.finished_at+'. These are historical generated-workload results, not fresh acceptance.';$('storage-status').textContent='Stored receipt checksum and structure verified. No workload was executed.';}}catch(error){if(!disposed&&operation===storageOperation)$('storage-status').textContent='Receipt recovery: '+error.message;}finally{syncStorageButtons();}}
+$('save-receipt').addEventListener('click',()=>recover('save'));$('restore-receipt').addEventListener('click',()=>recover('restore'));
+syncStorageButtons();
 cancelRun=()=>{stopped=true;cancelWorker?.();guard.finish();if(busy&&current){current.complete=false;current.error='Workspace navigation interrupted this run; no winner declared.';}retained={current,lastGood};};
 if(current){publish();$('status').textContent='Previous receipt retained. A new run is explicit.';}
 $('last').disabled=!lastGood;
