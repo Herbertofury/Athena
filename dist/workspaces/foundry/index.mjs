@@ -154,7 +154,11 @@ export async function mount(context){
   catch(e){text(`Named layout not saved: ${e.message}`);}
  });
  one('[data-preset-load]').addEventListener('click',()=>{
-  const item=savedLayouts[Number(one('[data-preset-select]').value)];if(!item)return;checkpoint();importGeneration++;layouts[current.roomId]=model.validate(current);current=model.validate(item.layout);draw();save();
+  const item=savedLayouts[Number(one('[data-preset-select]').value)];if(!item)return;
+  const next=model.validate(item.layout),nextLayouts={...layouts,[current.roomId]:model.validate(current)};
+  const candidate={version:Math.max(envelopeVersion,model.workspaceVersion({active:next,layouts:nextLayouts,savedLayouts})),active:next,layouts:nextLayouts,view:model.view(view),savedLayouts:model.savedLayouts(savedLayouts)};
+  if(model.encodeRecoveryWorkspace(candidate)===model.encodeRecoveryWorkspace(draftSnapshot())){text('Named layout already matches this workspace. Draft inputs and Undo/Redo retained.');return;}
+  checkpoint();importGeneration++;layouts=nextLayouts;current=next;draw();save();
  });
  one('[data-preset-remove]').addEventListener('click',()=>{
   const i=Number(one('[data-preset-select]').value);if(!savedLayouts[i])return;checkpoint();importGeneration++;drag=null;savedLayouts=savedLayouts.filter((_,index)=>index!==i);syncPresets();save();
