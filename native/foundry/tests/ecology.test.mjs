@@ -24,3 +24,14 @@ test('instance layouts preview only authored visible world copies; deletions sta
  assert.equal(JSON.stringify(value),before);s.adapter.update({...value,placements:{}});
  assert.equal(s.host.querySelectorAll('[data-ecology-object]').length,0);s.adapter.dispose();
 });
+test('authored proxy appearance survives keyboard, throws, settling and redraw without editing source',()=>{
+ const s=setup(),id=themes[0].objects[1].id,p={objectId:id,x:.2,y:.2,pinned:false,scope:'world',rotation:35,scaleX:-1.5,scaleY:.7,skewX:12,skewY:-8,opacity:.4,zIndex:77,transformOrigin:'br',brightness:.8,contrast:1.3,saturation:.2,hue:-90,blur:2};
+ const value={...s.value,version:11,placements:{copy:p}},before=JSON.stringify(value);s.adapter.update(value);s.one('[data-ecology-open]').click();const el=s.one('[data-ecology-instance="copy"]');
+ const check=()=>{assert.match(el.style.transform,/skew\(12deg,-8deg\) scale\(-1.5,0.7\)/);assert.equal(el.style.opacity,'0.4');assert.equal(el.style.zIndex,'77');assert.equal(el.style.transformOrigin,'100% 100%');assert.equal(el.style.filter,'brightness(0.8) contrast(1.3) saturate(0.2) hue-rotate(-90deg) blur(2px)')};check();assert.match(el.style.transform,/rotate\(35deg\)/);s.event(el,'keydown',{key:'ArrowRight'});check();
+ s.one('[data-ecology-motion]').checked=true;s.event(s.one('[data-ecology-motion]'),'change');s.throwActor();s.advance();check();for(let i=0;i<700&&s.frames.size;i++)s.advance();check();assert.match(el.style.transform,/rotate\(35deg\)/);assert.equal(JSON.stringify(value),before);s.adapter.update(value);assert.match(s.one('[data-ecology-instance="copy"]').style.transform,/rotate\(35deg\)/);s.adapter.dispose();
+});
+test('appearance copy rejects CSS strings and nonfinite/out-of-range primitives',async()=>{
+ const {ecologyAppearance}=await import('../../../dist/workspaces/foundry/native-ecology.mjs');const clean=ecologyAppearance();
+ assert.deepEqual(ecologyAppearance({rotation:Infinity,scaleX:0,scaleY:NaN,skewX:100,skewY:'2;display:none',opacity:-1,zIndex:3.5,transformOrigin:'__proto__',brightness:'url(https://example.invalid)',contrast:3,saturation:-1,hue:181,blur:21}),clean);
+ assert.equal(ecologyAppearance({transformOrigin:'tl',opacity:0,zIndex:0,scaleX:-8}).origin,'0% 0%');
+});
