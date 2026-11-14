@@ -67,10 +67,13 @@ try {
  await check('Concurrent writer conflict retains newer native state and browser edit',async()=>{
   const newer=structuredClone(stored);newer.active.time='dusk';
   cli('save-backup',JSON.stringify(newer));
+  const written=cli('load-backup'),beforeConflict=fs.readFileSync(db);
+  assert.equal(JSON.parse(written).active.time,'dusk');
   await page.locator('select[data-time]').selectOption('day');await page.locator('[data-native-save]').click();
   await page.locator('[data-native-status]').filter({hasText:'Save conflict'}).waitFor();
   assert.equal(await page.locator('select[data-time]').inputValue(),'day');
-  assert.deepEqual(JSON.parse(cli('load-backup')),newer);
+  assert.equal(cli('load-backup'),written);
+  assert.deepEqual(fs.readFileSync(db),beforeConflict);
   await page.locator('[data-native-load]').click();
   await page.locator('[data-native-status]').filter({hasText:'restored'}).waitFor();
   assert.equal(await page.locator('select[data-time]').inputValue(),'dusk');
