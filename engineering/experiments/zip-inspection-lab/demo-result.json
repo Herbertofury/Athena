@@ -1,0 +1,414 @@
+{
+  "schema_version": 1,
+  "evidence": "measured_generated_zip_bytes_only",
+  "checked_at": "2026-11-11T02:09:59.505689+00:00",
+  "environment": {
+    "python": "3.12.14",
+    "os": "Linux",
+    "machine": "x86_64",
+    "zlib_build": "1.3.2",
+    "zlib_runtime": "1.3.2",
+    "unicode_data": "15.0.0"
+  },
+  "source_sha256": {
+    "inspect_zip.py": "cc3db7fc6e280e34bd05cecf8106804186a21aee6a045f9871ae7628423b145c",
+    "fixtures.py": "72a589d9c23fc2b227e3ae6cdda74ad14196c14e29a59ae8fb19a917256309d6",
+    "run_demo.py": "f777abdf6e431b6a9f1cc296cfcaf49d1d64679a0bdacd7928ffb9478b1d2234"
+  },
+  "cases": [
+    {
+      "name": "valid_mixed",
+      "archive_base64": "UEsDBBQAAAAAAAAAIQAAAAAAAAAAAAAAAAAFAAAAbW9kcy9QSwMEFAAAAAgAAAAhACDwTNMSAAAAEAAAAAsAAABtb2RzL2EuanNvbqtWSs1LTMpJTVGyKikqTa0FAFBLAwQUAAAAAAAAACEAYQKeEA4AAAAOAAAADwAAAG1vZHMvcmVhZG1lLnR4dGdlbmVyYXRlZCBvbmx5UEsBAhQDFAAAAAAAAAAhAAAAAAAAAAAAAAAAAAUAAAAAAAAAAAAQAMBBAAAAAG1vZHMvUEsBAhQDFAAAAAgAAAAhACDwTNMSAAAAEAAAAAsAAAAAAAAAAAAAAICBIwAAAG1vZHMvYS5qc29uUEsBAhQDFAAAAAAAAAAhAGECnhAOAAAADgAAAA8AAAAAAAAAAAAAAICBXgAAAG1vZHMvcmVhZG1lLnR4dFBLBQYAAAAAAwADAKkAAACZAAAAAAA=",
+      "expected_error": null,
+      "result": {
+        "schema_version": 1,
+        "status": "complete",
+        "complete": true,
+        "limits": {
+          "archive_bytes": 1048576,
+          "entries": 64,
+          "name_bytes": 512,
+          "depth": 8,
+          "member_bytes": 32768,
+          "total_bytes": 65536,
+          "chunk_bytes": 4096
+        },
+        "archive_bytes": 344,
+        "archive_sha256": "e3d86f36e2f20608fc1178fb1beacb29c95dd6b49272ef7f1ea9659d0eed918d",
+        "entries": [
+          {
+            "name": "mods/",
+            "kind": "directory",
+            "method": 0,
+            "compressed_bytes": 0,
+            "declared_bytes": 0,
+            "crc32": 0,
+            "start": 35,
+            "end": 35,
+            "status": "verified",
+            "observed_bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "name": "mods/a.json",
+            "kind": "file",
+            "method": 8,
+            "compressed_bytes": 18,
+            "declared_bytes": 16,
+            "crc32": 3545034784,
+            "start": 76,
+            "end": 94,
+            "status": "verified",
+            "observed_bytes": 16,
+            "sha256": "26b3426b2593763c96d0890b4a77a0bbf66d13fc512b0c6b138a23c290f30a2a"
+          },
+          {
+            "name": "mods/readme.txt",
+            "kind": "file",
+            "method": 0,
+            "compressed_bytes": 14,
+            "declared_bytes": 14,
+            "crc32": 278790753,
+            "start": 139,
+            "end": 153,
+            "status": "verified",
+            "observed_bytes": 14,
+            "sha256": "9f0ea52947e2c2c10661c7f194d1df8bc5728bb09084cbbbecd897e1b50faee4"
+          }
+        ],
+        "decoded_bytes_observed": 30,
+        "max_output_chunk": 16,
+        "error": null
+      },
+      "passed": true
+    },
+    {
+      "name": "duplicate_name_control",
+      "archive_base64": "UEsDBBQAAAAAAAAAIQBX7nGSBQAAAAUAAAAEAAAAc2FtZWZpcnN0UEsDBBQAAAAAAAAAIQBpER+2BgAAAAYAAAAEAAAAc2FtZXNlY29uZFBLAQIUAxQAAAAAAAAAIQBX7nGSBQAAAAUAAAAEAAAAAAAAAAAAAACAgQAAAABzYW1lUEsBAhQDFAAAAAAAAAAhAGkRH7YGAAAABgAAAAQAAAAAAAAAAAAAAICBJwAAAHNhbWVQSwUGAAAAAAIAAgBkAAAATwAAAAAA",
+      "expected_error": "duplicate_or_portable_name_collision",
+      "library_name_read_control": {
+        "name": "same",
+        "body_hex": "7365636f6e64",
+        "length": 6
+      },
+      "result": {
+        "schema_version": 1,
+        "status": "refused",
+        "complete": false,
+        "limits": {
+          "archive_bytes": 1048576,
+          "entries": 64,
+          "name_bytes": 512,
+          "depth": 8,
+          "member_bytes": 32768,
+          "total_bytes": 65536,
+          "chunk_bytes": 4096
+        },
+        "archive_bytes": 201,
+        "archive_sha256": "ab98447ba024c68bc1382e1938fc0888840522eb078b1e70edcd6cd3944a273e",
+        "entries": [],
+        "decoded_bytes_observed": 0,
+        "max_output_chunk": 0,
+        "error": "duplicate_or_portable_name_collision"
+      },
+      "passed": true
+    },
+    {
+      "name": "forged_size_control",
+      "archive_base64": "UEsDBBQAAAAIAAAAIQCLntnTBgAAAAEAAAAHAAAAbW9kLmJpbnN0pD0AAFBLAQIUAxQAAAAIAAAAIQCLntnTBgAAAAEAAAAHAAAAAAAAAAAAAACAgQAAAABtb2QuYmluUEsFBgAAAAABAAEANQAAACsAAAAAAA==",
+      "expected_error": "actual_declared_size_disagreement",
+      "library_name_read_control": {
+        "name": "mod.bin",
+        "body_hex": "41",
+        "length": 1
+      },
+      "result": {
+        "schema_version": 1,
+        "status": "partial",
+        "complete": false,
+        "limits": {
+          "archive_bytes": 1048576,
+          "entries": 64,
+          "name_bytes": 512,
+          "depth": 8,
+          "member_bytes": 32768,
+          "total_bytes": 65536,
+          "chunk_bytes": 4096
+        },
+        "archive_bytes": 118,
+        "archive_sha256": "28bfe5b9a2761c5b80f32fbcb14493301b7da6c6cc799dce3a31a29ed424f4a7",
+        "entries": [
+          {
+            "name": "mod.bin",
+            "kind": "file",
+            "method": 8,
+            "compressed_bytes": 6,
+            "declared_bytes": 1,
+            "crc32": 3554254475,
+            "start": 37,
+            "end": 43,
+            "status": "failed",
+            "observed_bytes": 100,
+            "sha256": null,
+            "error": "actual_declared_size_disagreement"
+          }
+        ],
+        "decoded_bytes_observed": 100,
+        "max_output_chunk": 100,
+        "error": "actual_declared_size_disagreement"
+      },
+      "passed": true
+    },
+    {
+      "name": "actual_budget",
+      "archive_base64": "UEsDBBQAAAAIAAAAIQCLntnT2gMAAAEAAAAHAAAAbW9kLmJpbu3BgQAAAADDILb5Sx3kVQEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAK8GUEsBAhQDFAAAAAgAAAAhAIue2dPaAwAAAQAAAAcAAAAAAAAAAAAAAICBAAAAAG1vZC5iaW5QSwUGAAAAAAEAAQA1AAAA/wMAAAAA",
+      "expected_error": "actual_member_budget",
+      "result": {
+        "schema_version": 1,
+        "status": "partial",
+        "complete": false,
+        "limits": {
+          "archive_bytes": 1048576,
+          "entries": 64,
+          "name_bytes": 512,
+          "depth": 8,
+          "member_bytes": 32,
+          "total_bytes": 100,
+          "chunk_bytes": 7
+        },
+        "archive_bytes": 1098,
+        "archive_sha256": "512564feaf65a5501162d370fe50dad7eed1480580806b04d3488a7f631658a8",
+        "entries": [
+          {
+            "name": "mod.bin",
+            "kind": "file",
+            "method": 8,
+            "compressed_bytes": 986,
+            "declared_bytes": 1,
+            "crc32": 3554254475,
+            "start": 37,
+            "end": 1023,
+            "status": "failed",
+            "observed_bytes": 33,
+            "sha256": null,
+            "error": "actual_member_budget"
+          }
+        ],
+        "decoded_bytes_observed": 33,
+        "max_output_chunk": 7,
+        "error": "actual_member_budget"
+      },
+      "passed": true
+    },
+    {
+      "name": "partial_crc_failure",
+      "archive_base64": "UEsDBBQAAAAAAAAAIQBH3dx5AgAAAAIAAAAFAAAAZmlyc3Rva1BLAwQUAAAAAAAAACEAdKyr4gYAAAAGAAAABgAAAHNlY29uZFhyb2tlblBLAwQUAAAAAAAAACEASbID7AUAAAAFAAAABQAAAHRoaXJkbGF0ZXJQSwECFAMUAAAAAAAAACEAR93ceQIAAAACAAAABQAAAAAAAAAAAAAAgIEAAAAAZmlyc3RQSwECFAMUAAAAAAAAACEAdKyr4gYAAAAGAAAABgAAAAAAAAAAAAAAgIElAAAAc2Vjb25kUEsBAhQDFAAAAAAAAAAhAEmyA+wFAAAABQAAAAUAAAAAAAAAAAAAAICBTwAAAHRoaXJkUEsFBgAAAAADAAMAmgAAAHcAAAAAAA==",
+      "expected_error": "crc_mismatch",
+      "result": {
+        "schema_version": 1,
+        "status": "partial",
+        "complete": false,
+        "limits": {
+          "archive_bytes": 1048576,
+          "entries": 64,
+          "name_bytes": 512,
+          "depth": 8,
+          "member_bytes": 32768,
+          "total_bytes": 65536,
+          "chunk_bytes": 4096
+        },
+        "archive_bytes": 295,
+        "archive_sha256": "67de9d18c2b7e5f43204d5722d08b9fe68eeec033a50253a47169afb28eed542",
+        "entries": [
+          {
+            "name": "first",
+            "kind": "file",
+            "method": 0,
+            "compressed_bytes": 2,
+            "declared_bytes": 2,
+            "crc32": 2044517703,
+            "start": 35,
+            "end": 37,
+            "status": "verified",
+            "observed_bytes": 2,
+            "sha256": "2689367b205c16ce32ed4200942b8b8b1e262dfc70d9bc9fbc77c49699a4f1df"
+          },
+          {
+            "name": "second",
+            "kind": "file",
+            "method": 0,
+            "compressed_bytes": 6,
+            "declared_bytes": 6,
+            "crc32": 3802901620,
+            "start": 73,
+            "end": 79,
+            "status": "failed",
+            "observed_bytes": 6,
+            "sha256": null,
+            "error": "crc_mismatch"
+          },
+          {
+            "name": "third",
+            "kind": "file",
+            "method": 0,
+            "compressed_bytes": 5,
+            "declared_bytes": 5,
+            "crc32": 3959665225,
+            "start": 114,
+            "end": 119,
+            "status": "not_attempted",
+            "observed_bytes": 0,
+            "sha256": null
+          }
+        ],
+        "decoded_bytes_observed": 8,
+        "max_output_chunk": 6,
+        "error": "crc_mismatch"
+      },
+      "passed": true
+    },
+    {
+      "name": "traversal_refusal",
+      "archive_base64": "UEsDBBQAAAAIAAAAIQCrJpXECwAAAAkAAAAKAAAALi4vb3V0c2lkZUtPzUstSixJTQEAUEsBAhQDFAAAAAgAAAAhAKsmlcQLAAAACQAAAAoAAAAAAAAAAAAAAICBAAAAAC4uL291dHNpZGVQSwUGAAAAAAEAAQA4AAAAMwAAAAAA",
+      "expected_error": "relative_nonempty_components_required",
+      "result": {
+        "schema_version": 1,
+        "status": "refused",
+        "complete": false,
+        "limits": {
+          "archive_bytes": 1048576,
+          "entries": 64,
+          "name_bytes": 512,
+          "depth": 8,
+          "member_bytes": 32768,
+          "total_bytes": 65536,
+          "chunk_bytes": 4096
+        },
+        "archive_bytes": 129,
+        "archive_sha256": "31886162d19ca2f2ff12001956253192f17d84e1ee2e4d80eb1f5aed5aa15ab6",
+        "entries": [],
+        "decoded_bytes_observed": 0,
+        "max_output_chunk": 0,
+        "error": "relative_nonempty_components_required"
+      },
+      "passed": true
+    },
+    {
+      "name": "portable_collision",
+      "archive_base64": "UEsDBBQAAAgAAAAAIQBDvrfoAQAAAAEAAAAFAAAAY2Fmw6lhUEsDBBQAAAgAAAAAIQD5775xAQAAAAEAAAAGAAAAY2FmZcyBYlBLAQIUAxQAAAgAAAAAIQBDvrfoAQAAAAEAAAAFAAAAAAAAAAAAAACAgQAAAABjYWbDqVBLAQIUAxQAAAgAAAAAIQD5775xAQAAAAEAAAAGAAAAAAAAAAAAAACAgSQAAABjYWZlzIFQSwUGAAAAAAIAAgBnAAAASQAAAAAA",
+      "expected_error": "duplicate_or_portable_name_collision",
+      "result": {
+        "schema_version": 1,
+        "status": "refused",
+        "complete": false,
+        "limits": {
+          "archive_bytes": 1048576,
+          "entries": 64,
+          "name_bytes": 512,
+          "depth": 8,
+          "member_bytes": 32768,
+          "total_bytes": 65536,
+          "chunk_bytes": 4096
+        },
+        "archive_bytes": 198,
+        "archive_sha256": "4e7123f4d6e9a94030e5cd31fe6c1e16388cee978f1f344d28ef7d2b1f8b5990",
+        "entries": [],
+        "decoded_bytes_observed": 0,
+        "max_output_chunk": 0,
+        "error": "duplicate_or_portable_name_collision"
+      },
+      "passed": true
+    },
+    {
+      "name": "trailing_stream_accounting",
+      "archive_base64": "UEsDBBQAAAAIAAAAIQDCQSQ1BgAAAAMAAAAHAAAAbW9kLmJpbktMSgYAIVBLAQIUAxQAAAAIAAAAIQDCQSQ1BgAAAAMAAAAHAAAAAAAAAAAAAACAgQAAAABtb2QuYmluUEsFBgAAAAABAAEANQAAACsAAAAAAA==",
+      "expected_error": "trailing_compressed_bytes",
+      "result": {
+        "schema_version": 1,
+        "status": "partial",
+        "complete": false,
+        "limits": {
+          "archive_bytes": 1048576,
+          "entries": 64,
+          "name_bytes": 512,
+          "depth": 8,
+          "member_bytes": 32768,
+          "total_bytes": 65536,
+          "chunk_bytes": 4096
+        },
+        "archive_bytes": 118,
+        "archive_sha256": "bf5bf6368b6ffef3abf76e6aacc08df2234aa77a417307944e5e1123f19ed0f4",
+        "entries": [
+          {
+            "name": "mod.bin",
+            "kind": "file",
+            "method": 8,
+            "compressed_bytes": 6,
+            "declared_bytes": 3,
+            "crc32": 891568578,
+            "start": 37,
+            "end": 43,
+            "status": "failed",
+            "observed_bytes": 3,
+            "sha256": null,
+            "error": "trailing_compressed_bytes"
+          }
+        ],
+        "decoded_bytes_observed": 3,
+        "max_output_chunk": 3,
+        "error": "trailing_compressed_bytes"
+      },
+      "passed": true
+    },
+    {
+      "name": "cooperative_cancellation",
+      "archive_base64": "UEsDBBQAAAAIAAAAIQAbEJrYJQAAACBOAAAHAAAAbW9kLmJpbu3BMQEAAADCoGzrX8oaHkABAAAAAAAAAAAAAAAAAAAAAAAA8GBQSwECFAMUAAAACAAAACEAGxCa2CUAAAAgTgAABwAAAAAAAAAAAAAAgIEAAAAAbW9kLmJpblBLBQYAAAAAAQABADUAAABKAAAAAAA=",
+      "expected_error": "cancelled",
+      "result": {
+        "schema_version": 1,
+        "status": "partial",
+        "complete": false,
+        "limits": {
+          "archive_bytes": 1048576,
+          "entries": 64,
+          "name_bytes": 512,
+          "depth": 8,
+          "member_bytes": 32768,
+          "total_bytes": 65536,
+          "chunk_bytes": 4096
+        },
+        "archive_bytes": 149,
+        "archive_sha256": "f1f341ded7545e9ad032adc05632935330ae67575ba66f74479fd48cdceb1812",
+        "entries": [
+          {
+            "name": "mod.bin",
+            "kind": "file",
+            "method": 8,
+            "compressed_bytes": 37,
+            "declared_bytes": 20000,
+            "crc32": 3633975323,
+            "start": 37,
+            "end": 74,
+            "status": "failed",
+            "observed_bytes": 8192,
+            "sha256": null,
+            "error": "cancelled"
+          }
+        ],
+        "decoded_bytes_observed": 8192,
+        "max_output_chunk": 4096,
+        "error": "cancelled"
+      },
+      "passed": true
+    }
+  ],
+  "passed": true,
+  "not_established": [
+    "general ZIP compatibility",
+    "safe extraction",
+    "signature or publisher trust",
+    "whole-process RSS or CPU limit",
+    "real mod package acceptance",
+    "performance improvement"
+  ]
+}
