@@ -5,6 +5,18 @@ from build_engineering_workspaces import replace, body, scoped_css, LIFECYCLE
 ROOT=Path(__file__).resolve().parents[1]
 SOURCE=ROOT/'engineering/docs/audio-lab'
 DEST=ROOT/'dist/workspaces/engineering/audio'
+# Bounded native-style readiness: independent of audio fetching/playback.
+STYLE_READY = r"""
+const styleState=await new Promise(resolve=>{
+ let settled=false,timer=null;
+ const finish=state=>{if(settled)return;settled=true;globalThis.clearTimeout(timer);style.removeEventListener('load',loaded);style.removeEventListener('error',failed);lifetime.signal.removeEventListener('abort',aborted);resolve(state);};
+ const loaded=()=>finish(style.sheet?'ready':'failed'),failed=()=>finish('failed'),aborted=()=>finish('aborted');
+ style.addEventListener('load',loaded);style.addEventListener('error',failed);lifetime.signal.addEventListener('abort',aborted,{once:true});
+ timer=globalThis.setTimeout(()=>finish('timeout'),15000);
+ try{root.prepend(style);if(lifetime.signal.aborted)aborted();else if(style.sheet)loaded();}catch{failed();}
+});
+if(styleState!=='ready'||disposed){unmount();if(styleState==='aborted'||disposed&&styleState==='ready')return {unmount,setTheme,setSearch(){},exportState(){return null;},ready:false};throw new Error(styleState==='timeout'?'Audio stylesheet readiness timed out. Reopen the workspace to retry.':'Audio stylesheet failed to load. Reopen the workspace to retry.');}
+"""
 def build():
     files={}; origins={}
     def emit(name,content,source):
@@ -22,7 +34,7 @@ def build():
     code=replace(code,"finally{$('load').disabled=closed||selection.pending;", "finally{if(disposed)return;$('load').disabled=closed||selection.pending;")
     html='<p class="note">Athena native verified audio v1. One dated public sample. Load verifies complete bytes; native Play is separate. Autoplay is off. Export the receipt before leaving this workspace.</p>'+body(SOURCE/'index.template.html').replace('../media-lab/','#media')
     html='<p id="search-status" class="note" role="status"></p>'+html
-    header='export async function mount({container,search="",theme="dark",signal:outerSignal}={}){\n'+LIFECYCLE+'\nroot.innerHTML='+json.dumps(html)+';\nconst style=document.createElement("link");style.rel="stylesheet";style.href=new URL("./style.css",import.meta.url).href;root.prepend(style);setTheme(theme);\n'
+    header='export async function mount({container,search="",theme="dark",signal:outerSignal}={}){\n'+LIFECYCLE+'\nroot.innerHTML='+json.dumps(html)+';\nconst style=document.createElement("link");style.rel="stylesheet";style.href=new URL("./style.css",import.meta.url).href;setTheme(theme);\n'+STYLE_READY
     footer='''
 function setSearch(value){if(disposed)return;const query=String(value??'').trim().toLowerCase();$('search-status').textContent=!query?'Search matches this single source without changing verification.':JSON.stringify(fixture).toLowerCase().includes(query)?'This public source matches your search.':'No match in this single public sample. Verification and any loaded clip remain unchanged.';}
 setSearch(search);
