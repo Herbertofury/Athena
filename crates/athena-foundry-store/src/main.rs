@@ -50,6 +50,17 @@ fn run() -> Result<()> {
             Store::open(p)?.migrate_soundtrack_metadata()?;
             println!("{}", serde_json::to_string(&Store::open(p)?.summary()?)?);
         }
+        "import-music-json" if args.len() == 3 => {
+            let mut text = String::new();
+            std::io::stdin().take(1_000_001).read_to_string(&mut text)?;
+            if text.len() > 1_000_000 {
+                return Err("Music import exceeds limit".into());
+            }
+            let value =
+                serde_json::from_str::<athena_foundry_store::music_import::MusicImport>(&text)?;
+            let count = Store::open(p)?.import_music(&value)?;
+            println!("{{\"imported\":{count}}}");
+        }
         "assign-native" if args.len() == 3 => {
             let mut text = String::new();
             std::io::stdin().take(8193).read_to_string(&mut text)?;
