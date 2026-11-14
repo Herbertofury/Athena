@@ -41,6 +41,8 @@ REQUIRED = ('index.html', 'app.js', 'core.js', 'catalog.js', 'styles.css', 'work
             'workspaces/engineering/receiver/verified-receiver.0b0bb67b4513ac91.mjs',
             'workspaces/engineering/receiver/worker-esbuild.b1772614243c7c75.mjs',
             'workspaces/engineering/receiver/worker-rolldown.0e9c42dd5c7472df.mjs',
+            'workspaces/engineering/diagnostics/index.mjs',
+            'workspaces/engineering/diagnostics/style.css',
             'workspaces/foundry/index.mjs',
             'workspaces/foundry/style.css',
             'workspaces/foundry/catalog.json',
@@ -119,7 +121,7 @@ def package(source, output, allowlist=None, profile="complete"):
         for generated in ('learn/index.html', '.nojekyll'):
             data=(staged/generated).read_bytes()
             entries.append({'path':generated,'bytes':len(data),'sha256':hashlib.sha256(data).hexdigest(),'origin':'generated'})
-        manifest={'application':'Athena','entry':'index.html','profile':profile,'workspaces':['learning','research','media','lab','cards','audio','receiver','build'],
+        manifest={'application':'Athena','entry':'index.html','profile':profile,'workspaces':['learning','research','media','lab','cards','audio','receiver','diagnostics','build'],
                   'pending':[] if profile=='complete' else ['Full Foundry parity: original 3D, artist worlds, native persistence and provider authorization'],
                   'verification':'Packaging and file hashes only; functional/browser parity is a separate gate.', 'files':entries}
         (staged/'athena-runtime-manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')

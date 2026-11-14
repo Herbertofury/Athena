@@ -1,3 +1,5 @@
+See the [2026-11-14 native parity and retirement audit](retirement-2026-11-14/README.md) for current verification. Older gate lists below are historical.
+
 # Current cutover status
 
 The [2026-11-13 reconciliation](cutover-2026-11-13/README.md) supersedes the source-main revision and open-work inventory below. Athena is the active destination. Historical snapshots remain intact; do not treat preserved candidate branches as accepted implementations.
