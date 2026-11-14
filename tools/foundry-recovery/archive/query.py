@@ -87,10 +87,23 @@ def expected_columns(table):
     return cols
 
 
-def inspect(source, tables=None, *, private_export=False, destination=None):
+def inspect(source, tables=None, *, private_export=False, destination=None, artist_id=None):
     selected = tuple(tables or FIELDS)
     if len(set(selected)) != len(selected) or any(t not in FIELDS for t in selected):
         raise Refusal('Select unique supported table families only.')
+    if artist_id is not None:
+        if not tables or 'history' in selected:
+            raise Refusal('Artist filtering requires explicit supported artist table selections; history has no artist field.')
+        if not isinstance(artist_id, str):
+            raise Refusal('Artist filter must be bounded UTF-8 text.')
+        try:
+            encoded_filter = artist_id.encode('utf8')
+        except UnicodeEncodeError:
+            raise Refusal('Artist filter must be bounded UTF-8 text.') from None
+        if len(encoded_filter) > MAX_VALUE:
+            raise Refusal('Artist filter exceeds the bounded UTF-8 byte limit.')
+    where = ' WHERE artist_id COLLATE BINARY = ?' if artist_id is not None else ''
+    parameters = (artist_id,) if artist_id is not None else ()
     if private_export and os.name != 'posix':
         raise Refusal('Private export requires verified POSIX mode support.')
     if private_export and (not tables or destination is None):
@@ -136,7 +149,7 @@ def inspect(source, tables=None, *, private_export=False, destination=None):
             columns = db.execute(f'PRAGMA table_xinfo("{table}")').fetchall()
             if [(c[1], c[2].upper(), c[3], c[5]) for c in columns] != expected_columns(table) or any(c[6] for c in columns):
                 raise Refusal('Selected table schema does not match the reviewed original.')
-            count = db.execute(f'SELECT count(*) FROM (SELECT 1 FROM "{table}" LIMIT {MAX_ROWS + 1})').fetchone()[0]
+            count = db.execute(f'SELECT count(*) FROM (SELECT 1 FROM "{table}"{where} LIMIT {MAX_ROWS + 1})', parameters).fetchone()[0]
             if count > MAX_ROWS:
                 raise Refusal('Selected table exceeds the bounded row limit.')
             counts[table] = count
@@ -144,11 +157,11 @@ def inspect(source, tables=None, *, private_export=False, destination=None):
                 continue
             projected = FIELDS[table][1].split()
             maxima = ','.join(f'coalesce(max(length(cast("{c}" AS blob))),0)' for c in projected)
-            if any(n > MAX_VALUE for n in db.execute(f'SELECT {maxima} FROM "{table}"').fetchone()):
+            if any(n > MAX_VALUE for n in db.execute(f'SELECT {maxima} FROM "{table}"{where}', parameters).fetchone()):
                 raise Refusal('Projected value exceeds the bounded byte limit.')
-            sql = 'SELECT ' + ','.join(f'"{c}"' for c in projected) + f' FROM "{table}" ORDER BY id LIMIT {MAX_ROWS + 1}'
+            sql = 'SELECT ' + ','.join(f'"{c}"' for c in projected) + f' FROM "{table}"{where} ORDER BY id LIMIT {MAX_ROWS + 1}'
             rows[table] = []
-            for values in db.execute(sql):
+            for values in db.execute(sql, parameters):
                 for name, value in zip(projected, values):
                     expected = int if table == 'history' and name in ('id', 'created_at') else str
                     if type(value) is not expected:
@@ -203,11 +216,12 @@ def main(argv=None):
     parser = SafeParser(description='Local prepared archive counts or explicitly selected PRIVATE metadata export; never a lossless migration.')
     parser.add_argument('--source', required=True)
     parser.add_argument('--table', action='append', choices=tuple(FIELDS))
+    parser.add_argument('--artist-id', help='Exact artist identifier; requires explicit artist-family tables. Value is never echoed.')
     parser.add_argument('--private-export', action='store_true')
     parser.add_argument('--destination')
     args = parser.parse_args(argv)
     try:
-        result = inspect(args.source, args.table, private_export=args.private_export, destination=args.destination)
+        result = inspect(args.source, args.table, private_export=args.private_export, destination=args.destination, artist_id=args.artist_id)
     except (OSError, sqlite3.Error, Refusal, ValueError, OverflowError):
         # Intentionally do not echo database errors, file paths, table contents or input values.
         print(json.dumps({'ok': False, 'error': 'Archive inspection refused. Check standalone schema1 source, bounds and exclusive destination; no source changes authorized.'}))

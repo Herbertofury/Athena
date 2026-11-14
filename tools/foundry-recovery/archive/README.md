@@ -48,3 +48,18 @@ Synthetic tests (no actual artist records or user databases):
 ```sh
 python3 -m unittest discover -s tools/foundry-recovery/archive -p 'test_*.py' -v
 ```
+
+## Exact artist selection (local only)
+
+`--artist-id` narrows counts and any explicitly requested private export to an exact artist identifier. Select one or more of `artist_worlds`, `artist_districts`, `artist_weather`, or `music_routes` explicitly. A filter without explicit tables, or with `history`, is refused rather than silently ignored.
+
+```sh
+python3 tools/foundry-recovery/archive/query.py \
+  --source /private/prepared.sqlite --table music_routes --artist-id 'exact identifier'
+```
+
+This adapts the original schema1 `database.rs:list_music_routes` optional parameter-bound artist selection (lines223–233), extending the same exact selection to the other three reviewed artist families. SQL uses a bound text parameter and explicit binary comparison, never a wildcard or interpolated filter. Matching is case-sensitive, not prefix-based, and performs no trimming or Unicode normalization; an empty string matches only a stored empty identifier. Maximum filter size is4096 UTF-8 bytes. The filter is not echoed in CLI receipts or errors. **Command-line arguments may still be visible to local process inspection and shell history**; avoid entering secrets as identifiers or use the local Python `inspect(..., artist_id=...)` API in a controlled process.
+
+The1000-row limit and projected-value checks apply to the filtered result. The unchanged source-file and SQLite progress/allocation budgets still bound any underlying scan, including queries without an index. A zero-match result is an empty count/export, not an error. Values in a private export still contain the selected artist IDs and other potentially sensitive fields; filtering does not sanitize or authorize publication. All original read-only, sidecar, symlink, FIFO/device, exclusive-output and source-change safeguards remain unchanged.
+
+CLI arguments may still appear in the operator’s shell history or OS process listing. Never place credentials or secret tokens in `--artist-id`; the no-echo guarantee applies to this tool’s receipts/errors, not those OS facilities. Use the local Python `inspect(..., artist_id=...)` API when an authorized private identifier must not be supplied as a command-line argument.
