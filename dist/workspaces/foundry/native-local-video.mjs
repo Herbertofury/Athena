@@ -10,7 +10,7 @@ export function attachNativeLocalVideo({host,signal,getSelectedTarget=()=>null,r
   if(disposed)return;route.disabled=!active;preview.disabled=!active||!target;
   if(!active||!target)return;
   const node=resolveTarget(target.key);
-  if(!node){detach();requestPause();routeStatus.textContent='Selected surface unavailable. Video paused in preview; original target retained, no retargeting.';return;}
+  if(!node){detach();requestPause();routeStatus.textContent='Selected surface unavailable. Video returned to preview; pause requested. Original target retained, no retargeting.';return;}
   const surface=node.querySelector('.foundry-object-form')||node;
   if(layer?.parentElement===surface)return;
   detach();layer=doc.createElement('span');layer.dataset.localVideoSurface='true';layer.setAttribute('aria-hidden','true');layer.style.cssText='position:absolute;inset:0;overflow:hidden;pointer-events:none;border-radius:inherit;z-index:2';
