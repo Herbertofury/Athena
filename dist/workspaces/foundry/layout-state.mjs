@@ -38,6 +38,31 @@ export function createLayoutModel(catalog) {
  function upgradeFilters(value){const prior=upgradeAppearance(value);if(prior.version>=8)return prior;return validate({...prior,version:8,placements:Object.fromEntries(Object.entries(prior.placements).map(([id,p])=>[id,{...p,skewX:0,skewY:0,brightness:1,contrast:1,saturation:1,hue:0,blur:0}]))});}
  function upgradeOrigins(value){const prior=upgradeFilters(value);if(prior.version>=9)return prior;return validate({...prior,version:9,placements:Object.fromEntries(Object.entries(prior.placements).map(([id,p])=>[id,{...p,transformOrigin:"mc"}]))});}
  function upgradeBlendModes(value){const prior=upgradeOrigins(value);if(prior.version>=11)return prior;return validate({...prior,version:11,placements:Object.fromEntries(Object.entries(prior.placements).map(([id,p])=>[id,{...p,blendMode:'normal'}]))});}
+ // Restore only world actors, as the original Living World reset does.
+ function resetWorldActors(value,makeId=()=>globalThis.crypto.randomUUID()){
+  let prior=validate(value);
+  const hasScrapbook=Object.values(prior.placements).some(p=>p.scope==='ui'||p.scope==='sticker');
+  // Separate world copies need independent identities when an old base ID is scrapbook-owned.
+  if(hasScrapbook&&prior.version<6)prior=upgradeInstances(prior);
+  if(prior.version<6)return validate({...prior,placements:{}});
+  let defaults=upgradeInstances({...initial(prior.themeId),roomId:prior.roomId,time:prior.time});
+  if(prior.version>=7)defaults=upgradeAppearance(defaults);
+  if(prior.version>=8)defaults=upgradeFilters(defaults);
+  if(prior.version>=9)defaults=upgradeOrigins(defaults);
+  if(prior.version>=10)defaults={...defaults,version:10};
+  if(prior.version>=11)defaults=upgradeBlendModes(defaults);
+  const placements=Object.fromEntries(Object.entries(prior.placements).filter(([,p])=>p.scope==='ui'||p.scope==='sticker'));
+  if(Object.keys(placements).length+Object.keys(defaults.placements).length>100)throw Error('Reset would exceed 100 instances. Existing scrapbook actors were preserved; remove an unwanted actor before resetting.');
+  for(const [base,p] of Object.entries(defaults.placements)){
+   let id=base;
+   if(Object.hasOwn(placements,id)){
+    let attempts=0;
+    do{if(++attempts>16)throw Error('Could not allocate a distinct world actor ID. Existing room was preserved.');id='instance-'+makeId();}while(Object.hasOwn(placements,id)||themes.get(prior.themeId).objects.some(o=>o.id===id));
+   }
+   placements[id]=p;
+  }
+  return validate({...prior,placements});
+ }
  function workspaceVersion({active,layouts={},savedLayouts=[]}){return Math.max(active.version,...Object.values(layouts).map(v=>v.version),...savedLayouts.map(v=>v.layout.version));}
  function initial(themeId=catalog[0].id){const theme=themes.get(themeId);if(!theme)throw new Error('Unknown theme.');return validate({version:1,themeId,roomId:theme.rooms[0].id,time:'day',placements:{}});}
  function parse(text){if(typeof text!=='string'||text.length>LAYOUT_TEXT_LIMIT)throw new Error('Layout exceeds import limit.');return validate(JSON.parse(text));}
@@ -64,7 +89,7 @@ export function createLayoutModel(catalog) {
  function parseWorkspace(text){if(typeof text!=='string'||text.length>WORKSPACE_TEXT_LIMIT)throw new Error('Workspace exceeds import limit.');const value=workspace(JSON.parse(text));encodeWorkspace(value);return value;}
  function encodeRecoveryWorkspace(value){const text=JSON.stringify(workspace(value));if(text.length>RECOVERY_TEXT_LIMIT)throw Error('Workspace exceeds bounded recovery limit.');return text;}
  function encodeWorkspace(value){const text=encodeRecoveryWorkspace(value);if(text.length>WORKSPACE_TEXT_LIMIT)throw Error('Workspace exceeds import limit. Reduce room copies or named layouts; the previous workspace is retained.');return text;}
- return {blendModes,upgradeBlendModes,validate,upgradeLayout,upgradeScopes,environment,upgradeEnvironment,upgradeInstances,upgradeAppearance,upgradeFilters,upgradeOrigins,workspaceVersion,initial,parse,encode,save,load,view,savedLayouts,workspace,parseWorkspace,encodeWorkspace,encodeRecoveryWorkspace};
+ return {resetWorldActors,blendModes,upgradeBlendModes,validate,upgradeLayout,upgradeScopes,environment,upgradeEnvironment,upgradeInstances,upgradeAppearance,upgradeFilters,upgradeOrigins,workspaceVersion,initial,parse,encode,save,load,view,savedLayouts,workspace,parseWorkspace,encodeWorkspace,encodeRecoveryWorkspace};
 }
 
 /** Bounded session-only rollback. Every retained snapshot is schema validated. */
