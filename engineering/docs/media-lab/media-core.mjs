@@ -1,6 +1,6 @@
 import {bilibiliEmbedUrl} from './bilibili-player.mjs';
 export function safeSourceUrl(value){try{const u=new URL(value);return u.protocol==='https:'&&!u.port&&!u.username&&!u.password&&new Set(['modrinth.com','www.nexusmods.com','store.steampowered.com','www.youtube.com','www.bilibili.com']).has(u.hostname)?u.href:null;}catch{return null;}}
-export const MEDIA_HOSTS = new Set(['cdn.modrinth.com','staticdelivery.nexusmods.com','shared.akamai.steamstatic.com','store.akamai.steamstatic.com','video.akamai.steamstatic.com','i.ytimg.com']);
+export const MEDIA_HOSTS = new Set(['cdn.modrinth.com','staticdelivery.nexusmods.com','images.nexusmods.com','shared.akamai.steamstatic.com','store.akamai.steamstatic.com','video.akamai.steamstatic.com','i.ytimg.com']);
 export function safeMediaUrl(value) {try{const u=new URL(value);return u.protocol==='https:'&&!u.port&&!u.username&&!u.password&&MEDIA_HOSTS.has(u.hostname)?u.href:null;}catch{return null;}}
 const SOURCE_HOSTS = Object.freeze({
   Modrinth: 'modrinth.com',
@@ -21,6 +21,7 @@ export function validateFixture(data) {
     ids.add(card.id);
     const source = safeSourceUrl(card.source);
     if (!source || new URL(source).hostname !== SOURCE_HOSTS[card.provider]) throw Error('Disallowed provider source link');
+    if(card.provider==='Steam') validateSteamCardIdentity(card, source);
     if(card.provider==='YouTube') validateYouTubeCardIdentity(card, source);
     if(card.provider==='Bilibili'){if(card.cover!==null||card.cover_status!=='official-player-only'||card.gallery.length!==0||card.videos.length!==1)throw Error('Unverified Bilibili cover or media scope');}
     // The official Modrinth project API permits icon_url:null. Preserve that
@@ -54,7 +55,7 @@ export function coverPlaceholderLabel(card){
   return 'Cover unavailable.';
 }
 
-export function providerOwnsHost(value,provider){const safe=safeMediaUrl(value);if(!safe)return false;const host=new URL(safe).hostname;const hosts={Modrinth:['cdn.modrinth.com'],'Nexus Mods':['staticdelivery.nexusmods.com'],Steam:['shared.akamai.steamstatic.com','store.akamai.steamstatic.com','video.akamai.steamstatic.com'],YouTube:['i.ytimg.com']};return Boolean(hosts[provider]?.includes(host));}
+export function providerOwnsHost(value,provider){const safe=safeMediaUrl(value);if(!safe)return false;const host=new URL(safe).hostname;const hosts={Modrinth:['cdn.modrinth.com'],'Nexus Mods':['staticdelivery.nexusmods.com','images.nexusmods.com'],Steam:['shared.akamai.steamstatic.com','store.akamai.steamstatic.com','video.akamai.steamstatic.com'],YouTube:['i.ytimg.com']};return Boolean(hosts[provider]?.includes(host));}
 
 export function nativePlaybackLabel(type) {
   const labels={playing:'Playing the selected source trailer.',pause:'Paused.',ended:'Playback ended.',error:'Playback failed. The source entry is preserved.'};
@@ -81,4 +82,14 @@ function validateYouTubeCardIdentity(card, source) {
   for(const media of card.gallery)
     if(thumbnailId(media?.preview)!==video.id||thumbnailId(media?.original)!==video.id)
       throw Error('Mismatched YouTube gallery identity');
+}
+
+// App cards use the canonical Steam AppID namespace. A provider-owned host
+// alone does not bind an app card to its advertised source action. This does
+// not establish ownership of CDN assets, library access or playable trailers.
+function validateSteamCardIdentity(card, source) {
+  const identity=/^steam:([1-9][0-9]*)$/.exec(card.id);
+  const pathId=/^\/app\/([1-9][0-9]*)(?:\/|$)/.exec(new URL(source).pathname);
+  if(!identity||identity[0]!==card.id||!pathId||identity[1]!==pathId[1])
+    throw Error('Mismatched Steam source and card identity');
 }

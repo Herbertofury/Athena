@@ -1,0 +1,3 @@
+# Job submission cancellation regression, 2026-11-04
+
+Source baseline: de9481e07b31a12918fa2cd53909e706d207b225. In a synthetic uncooperative ReadableStream, awaiting cancellation prevents the UI promise from resolving to the unconfirmed state. The baseline log records the failure. The candidate aborts and starts best-effort cancellation without waiting; it still reports an unconfirmed outcome and never retries. Focused tests cover both response-body and reader cancellation. The 45-file Node suite passed 286 tests. These are local synthetic/fixture tests; real-browser behavior, latency distributions, Rust and full repository CI remain unverified. No performance claim is made.
