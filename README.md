@@ -28,9 +28,9 @@ Open **Applied workshops** in the app. Each route includes prerequisites, ordere
 
 - 13 credential pathways with dated exam/version and source notes.
 - 74 **domain roadmaps**, not 74 completed courses or exhaustive objective maps.
-- 90 original lessons: 48 existing foundations and Packet Trail lessons plus 42 applied workshop lessons.
-- Five coherent workshops: Security, Systems, Programming, Cloud and Data/SQL. Their 126 checks comprise 42 primary checks and 84 supplemental checks; 16 lessons include worked Python or SQL snippets.
-- Downloadable offline exercises, fixtures, editable programming projects, reference acceptance tests and evidence worksheets. The app does not execute Python or SQL.
+- 98 original lessons: 48 existing foundations and Packet Trail lessons plus 50 applied workshop lessons.
+- Six coherent workshops: Security, Systems, Programming, Cloud, Data/SQL and Version Control & Reproducible Delivery. Their 150 checks comprise 50 primary checks and 100 supplemental checks; 24 lessons include worked code snippets.
+- Downloadable offline exercises, fixtures, editable programming projects, reference acceptance tests and evidence worksheets. The app does not execute Python, SQL or Git. Delivery exercises use actual Git only in disposable local repositories, without remotes or credentials.
 - Four local interactive learning tools: fixed-table route selection, IPv4 subnetting, simplified policy decisions and filter-context arithmetic.
 - Search, pathway selection, read/check tracking, spaced review, local notes and validated progress export/import.
 - Matching repository documentation and prepared wiki pages generated from one catalog.
@@ -49,7 +49,7 @@ npm run build
 npm test
 ```
 
-The public static app has no account, analytics or external font dependency. Learning and research work locally. Media provider requests remain explicit and autoplay stays off; the R&D Lab connects only when this same shell is served by the verified local Rust engine. The public page never probes localhost. See the local-engine instructions above. DOM tests use pinned LinkeDOM. `npm run test:browser` verifies generated adapters, runs static, workshop and accessibility Chromium checks, builds/tests the pinned Rust engine and runs full engine-backed Chromium acceptance with external requests blocked. `npm run test:browser:static` is the smaller static-only check. `npm run test:browser:workshops` is the new real-Chromium acceptance gate for all five workshops, literal code escaping, 84 supplemental checks, downloads, focus, history and desktop/mobile layouts. Browser and engine acceptance has run at identified revisions; see [integration status](docs/integration/STATUS.md) for dated evidence and limits. A historical passing run does not certify a later revision. Read exact-head receipts rather than treating DOM or harness-contract tests as browser evidence.
+The public static app has no account, analytics or external font dependency. Learning and research work locally. Media provider requests remain explicit and autoplay stays off; the R&D Lab connects only when this same shell is served by the verified local Rust engine. The public page never probes localhost. See the local-engine instructions above. DOM tests use pinned LinkeDOM. `npm run test:browser` verifies generated adapters, runs static, workshop and accessibility Chromium checks, builds/tests the pinned Rust engine and runs full engine-backed Chromium acceptance with external requests blocked. `npm run test:browser:static` is the smaller static-only check. `npm run test:browser:workshops` is the new real-Chromium acceptance gate for all six workshops, literal code escaping, 100 supplemental checks, downloads, focus, history and desktop/mobile layouts. Browser and engine acceptance has run at identified revisions; see [integration status](docs/integration/STATUS.md) for dated evidence and limits. A historical passing run does not certify a later revision. Read exact-head receipts rather than treating DOM or harness-contract tests as browser evidence.
 
 ## Organization
 
@@ -83,6 +83,10 @@ Certification and vendor names belong to their owners. Athena is independent and
 
 Read [the workspace contract](docs/integration/WORKSPACE-CONTRACT.md) and [current integration evidence](docs/integration/STATUS.md). The reviewed public-preview package includes Learning, Engineering workspaces and Foundry authoring, not private databases, credentials or original private assets. Engineering Lab requires `serve-athena`; Foundry's SQLite profile requires its explicit local bridge. Neither connects to a private database from public Pages. `scripts/package_app.py` verifies the exact reviewed hashes in `config/runtime-public-preview.json`. The `public-preview` label does not mean Foundry is absent; it means complete original-source parity is not claimed. Default `complete` mode still requires the additional Foundry entry specified by the packager and is not a retirement certificate.
 
+
+## Developer cleanup research
+
+- [Developer and AI-agent cleanup: ranked tools](research/developer-cleanup-2026-11-14/README.md): 66 official-source projects, GitHub stars and Windows download links.
 
 ## Competing apps and alternative workflows
 

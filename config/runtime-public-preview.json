@@ -8,7 +8,7 @@
     },
     {
       "path": "catalog.js",
-      "sha256": "97ce633e23cd9bbfa3d980acb7da640b9eacb40fb704a8f429e04cee68dadd5f"
+      "sha256": "1d818063cd03315348c24b54e1cabcd49fa43b049ced8e756b6c0ad33cdc6153"
     },
     {
       "path": "core.js",
@@ -33,6 +33,10 @@
     {
       "path": "workshops/data/learner-pack.zip",
       "sha256": "8d03fb99f97ae6324de1a4cbfcb874d725778f110cb634b1ed9578a6f4711731"
+    },
+    {
+      "path": "workshops/delivery/learner-pack.zip",
+      "sha256": "2bb89bc923ed4392310c7df1204e49df61f3a4c8c5a223b31d079b013c43d5b0"
     },
     {
       "path": "workshops/programming/learner-pack.zip",
@@ -187,12 +191,24 @@
       "sha256": "4f893473b3fc38d20e38ee709f305137bfa3b48290dba1c42fbdb01c8f763444"
     },
     {
+      "path": "workspaces/engineering/media/compare.mjs",
+      "sha256": "297602c9d1c0fd3e7ce9198aebf11cd3b3f9ccf5a9bb2223e6207fe7b5eb254c"
+    },
+    {
       "path": "workspaces/engineering/media/event-log-view.mjs",
       "sha256": "d335ed418d4f9b5619825fc89f30dd3ad3beffe158f8d49feb9bc9d9a08b77d5"
     },
     {
+      "path": "workspaces/engineering/media/gallery-comparison.mjs",
+      "sha256": "8f4d6c97dcf8a030af2f58ce33ef4a2ea5c6f64749bc6500925cf7c7b382c89c"
+    },
+    {
       "path": "workspaces/engineering/media/index.mjs",
       "sha256": "3f7591478db613335aa446cbaef9deb1c8b1096e31ce217f4763e4e05664d571"
+    },
+    {
+      "path": "workspaces/engineering/media/local-compare.mjs",
+      "sha256": "a1387b254a39c053342321aeaf54b2d67b71e4aaa91e0fda165afc5267e4c169"
     },
     {
       "path": "workspaces/engineering/media/media-core.mjs",
@@ -331,6 +347,10 @@
       "sha256": "d832e1c8d26a7b2df61bdf9bc7daa503bbee4323e87b64e147bb9b388f231c8c"
     },
     {
+      "path": "workspaces/foundry/native-canvas-view.mjs",
+      "sha256": "247f82e40db73b9a65a020974271307e7bf7a41caad286eabe6d30c808e15280"
+    },
+    {
       "path": "workspaces/foundry/native-ecology.mjs",
       "sha256": "b855df07924c41817e8371759962d97d36c86665357bc391a917ed6883ec049e"
     },
@@ -339,16 +359,44 @@
       "sha256": "ed206cc0cdd5f44d8825a0fe0656676b336422bc7a4c4a8e38361167f290a3a9"
     },
     {
+      "path": "workspaces/foundry/native-history-keys.mjs",
+      "sha256": "03b0608b16fbd5689978ea06c1728404d35b718f093801af0c4fe294079f5cde"
+    },
+    {
       "path": "workspaces/foundry/native-import.mjs",
       "sha256": "76bf163591a4dce7857dbe7d36dbc195c69e3c5dc4391a66c463f383ae68b7d9"
+    },
+    {
+      "path": "workspaces/foundry/native-layers.mjs",
+      "sha256": "430e34f89415bc37d2a91ae877c64aab38d432c8231b4b8024c316f6d57798b0"
     },
     {
       "path": "workspaces/foundry/native-local-video.mjs",
       "sha256": "48d719e8b516f274c4ba10d96ebde0aca48cd5cc0c9dae055f703c5d03695fc8"
     },
     {
+      "path": "workspaces/foundry/native-object-keys.mjs",
+      "sha256": "3d26db16d0948bdc650e6cab855147158e75ee0998002270848e85926a4b6cb0"
+    },
+    {
+      "path": "workspaces/foundry/native-semantic-room.mjs",
+      "sha256": "8cdd933fca4ced7c290b5955405a63628a538b18a0d4392f8425586ac3d066e8"
+    },
+    {
+      "path": "workspaces/foundry/native-session-history.mjs",
+      "sha256": "7e269dbf3211db1eefcb476e5a6657f65532e657a6e2cb378899686bb06b27b4"
+    },
+    {
       "path": "workspaces/foundry/native-soundtrack.mjs",
       "sha256": "e8999e2e3ab0ffaece93a6c1abbdf65507c192dc11ec39100fb6afd669a6f39f"
+    },
+    {
+      "path": "workspaces/foundry/native-tones.mjs",
+      "sha256": "2bbae6e0f6844cab4bac80bc7e3942938235ea532cfaece8dc18d3c8b9fe00e4"
+    },
+    {
+      "path": "workspaces/foundry/native-transform-gizmo.mjs",
+      "sha256": "cad7ca9677fa1307a4ec663911b999dd9c45f8541e30d549324e1706648974a0"
     },
     {
       "path": "workspaces/foundry/native-weather.mjs",
@@ -361,50 +409,6 @@
     {
       "path": "workspaces/foundry/weather-renderer.mjs",
       "sha256": "dd42d1183c1288667e1c040825933b5c2b1c44b6cf9ff0c29ec6afcc3c2005dc"
-    },
-    {
-      "path": "workspaces/foundry/native-semantic-room.mjs",
-      "sha256": "8cdd933fca4ced7c290b5955405a63628a538b18a0d4392f8425586ac3d066e8"
-    },
-    {
-      "path": "workspaces/foundry/native-tones.mjs",
-      "sha256": "2bbae6e0f6844cab4bac80bc7e3942938235ea532cfaece8dc18d3c8b9fe00e4"
-    },
-    {
-      "path": "workspaces/foundry/native-layers.mjs",
-      "sha256": "430e34f89415bc37d2a91ae877c64aab38d432c8231b4b8024c316f6d57798b0"
-    },
-    {
-      "path": "workspaces/foundry/native-canvas-view.mjs",
-      "sha256": "247f82e40db73b9a65a020974271307e7bf7a41caad286eabe6d30c808e15280"
-    },
-    {
-      "path": "workspaces/foundry/native-history-keys.mjs",
-      "sha256": "03b0608b16fbd5689978ea06c1728404d35b718f093801af0c4fe294079f5cde"
-    },
-    {
-      "path": "workspaces/foundry/native-object-keys.mjs",
-      "sha256": "3d26db16d0948bdc650e6cab855147158e75ee0998002270848e85926a4b6cb0"
-    },
-    {
-      "path": "workspaces/foundry/native-transform-gizmo.mjs",
-      "sha256": "cad7ca9677fa1307a4ec663911b999dd9c45f8541e30d549324e1706648974a0"
-    },
-    {
-      "path": "workspaces/foundry/native-session-history.mjs",
-      "sha256": "7e269dbf3211db1eefcb476e5a6657f65532e657a6e2cb378899686bb06b27b4"
-    },
-    {
-      "path": "workspaces/engineering/media/compare.mjs",
-      "sha256": "297602c9d1c0fd3e7ce9198aebf11cd3b3f9ccf5a9bb2223e6207fe7b5eb254c"
-    },
-    {
-      "path": "workspaces/engineering/media/gallery-comparison.mjs",
-      "sha256": "8f4d6c97dcf8a030af2f58ce33ef4a2ea5c6f64749bc6500925cf7c7b382c89c"
-    },
-    {
-      "path": "workspaces/engineering/media/local-compare.mjs",
-      "sha256": "a1387b254a39c053342321aeaf54b2d67b71e4aaa91e0fda165afc5267e4c169"
     }
   ]
 }

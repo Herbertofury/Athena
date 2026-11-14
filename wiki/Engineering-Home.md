@@ -39,6 +39,8 @@ A research home for building apps, mods, programs and game tooling. **Reviewed f
 
 **Evidence ladder:** primary documented → hypothesis → measured → accepted in a named target. Rejected and superseded approaches stay documented. The dated primary-source register grows with each reviewed investigation; it is not an exhaustive review of every field.
 
+[Developer and AI-agent cleanup catalog](https://github.com/Herbertofury/Athena/wiki/Engineering-Developer-Cleanup-and-Agent-Hygiene): 66 projects ranked by stars with official download links.
+
 ## Tools you can use
 
 - [Worker-sweep screening tool](https://github.com/Herbertofury/Athena/blob/main/engineering/docs/worker-sweep-tool.md): compare 4/8/16/32/64 with output-equivalence and explicit resource/UX budgets; no automatic default changes.

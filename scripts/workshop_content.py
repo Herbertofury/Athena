@@ -5,7 +5,7 @@ import json
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-KEYS = ('security', 'systems', 'programming', 'cloud', 'data')
+KEYS = ('security', 'systems', 'programming', 'cloud', 'data', 'delivery')
 LESSONS, PATHS, SOURCES = [], [], {}
 for key in KEYS:
     folder = ROOT / 'workshops' / key

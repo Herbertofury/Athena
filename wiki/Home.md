@@ -4,7 +4,7 @@ Welcome to the Athena wiki!
 
 Learn once. Apply across credentials. Build proof, not just badges.
 
-All 13 requested credentials are organized. This release contains 90 original lessons: the existing 48 foundations and Packet Trail lessons plus 42 applied lessons across five workshops. The workshops include 126 original checks (42 primary and 84 supplemental), worked examples, safe offline exercises and evidence worksheets. All 74 credential-domain rows remain roadmaps, not completed exam coverage. Real-cloud labs and Power BI workflows are unexecuted; read marks, XP and reference tests do not establish practical mastery or exam readiness.
+All 13 requested credentials are organized. This release contains 98 original lessons: the existing 48 foundations and Packet Trail lessons plus 50 applied lessons across six workshops. The workshops include 150 original checks (50 primary and 100 supplemental), worked examples, safe offline exercises and evidence worksheets. All 74 credential-domain rows remain roadmaps, not completed exam coverage. Real-cloud labs and Power BI workflows are unexecuted; read marks, XP and reference tests do not establish practical mastery or exam readiness.
 
 ## Start here
 
@@ -45,5 +45,6 @@ The engineering source is preserved under `engineering/`, with native wiki pages
 - [Programming Workshop: Small Programs, Clear Contracts](Workshop-programming-workshop)
 - [Cloud Workshop: Reason Locally, Verify Honestly](Workshop-cloud-workshop)
 - [Data & SQL Workshop: From Rows to Reliable Answers](Workshop-data-workshop)
+- [Version Control & Reproducible Delivery Workshop](Workshop-delivery-workshop)
 
 - [Keyboard access and verification limits](Accessibility)
