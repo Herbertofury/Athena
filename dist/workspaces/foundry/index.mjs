@@ -30,11 +30,11 @@ export async function mount(context){
 
  const draftSnapshot=()=>({version:Math.max(envelopeVersion,model.workspaceVersion({active:current,layouts,savedLayouts})),view:model.view(view),savedLayouts:model.savedLayouts(savedLayouts),active:model.validate(current),layouts:Object.fromEntries(Object.entries(layouts).map(([k,v])=>[k,model.validate(v)]))});
  const syncHistory=()=>{one('[data-undo]').disabled=!history.canUndo;one('[data-redo]').disabled=!history.canRedo;};
- let pendingCheckpoint=null,lastAcceptedRaw=null,restoringHistory=false;
+ let pendingCheckpoint=null,lastAcceptedRaw=null,restoringHistory=false,saveGeneration=0;
  const checkpoint=()=>{pendingCheckpoint=model.workspace(draftSnapshot());};
  const applySnapshot=value=>{envelopeVersion=value.version;current=value.active;layouts=value.layouts;view=value.view;savedLayouts=value.savedLayouts;};
  const snapshot=()=>{if(invalidSavedState)throw Error('Invalid existing state is retained for recovery.');return {version:Math.max(envelopeVersion,model.workspaceVersion({active:current,layouts,savedLayouts})),view:model.view(view),savedLayouts:model.savedLayouts(savedLayouts),active:model.validate(current),layouts:Object.fromEntries(Object.entries(layouts).map(([k,v])=>[k,model.validate(v)]))};};
- function save(){if(disposed||signal.aborted)return false;
+ function save(){if(disposed||signal.aborted)return false;const generation=++saveGeneration;
   const candidate=draftSnapshot();candidate.layouts[candidate.active.roomId]=candidate.active;const raw=model.encodeRecoveryWorkspace(candidate),prior=pendingCheckpoint||(raw.length>WORKSPACE_TEXT_LIMIT&&lastAcceptedRaw?model.workspace(JSON.parse(lastAcceptedRaw)):null);
   const oversized=raw.length>WORKSPACE_TEXT_LIMIT;
   const reducing=oversized&&prior&&model.encodeRecoveryWorkspace(prior).length>=raw.length;
@@ -43,7 +43,8 @@ export async function mount(context){
   if(pendingCheckpoint){history.record(pendingCheckpoint);pendingCheckpoint=null;}
   applySnapshot(candidate);lastAcceptedRaw=raw;syncEcology();syncHistory();
   if(oversized){text('Oversized recovery draft retained in memory only. Export recovery data or reduce room copies/named layouts before saving.');return false;}
-  try{context.setState?.(snapshot());text('Layout updated. Athena reports storage failures separately; export a backup for recovery.');}catch{text('Could not save this layout. Export a backup before leaving.');}return true;
+  const failed=()=>text(invalidSavedState?'Layout opened for recovery only. Original invalid saved data is retained and has not been overwritten; export this room before leaving.':'Could not save this layout. Your draft and Undo history remain available; export a backup before leaving.');
+  try{const result=context.setState?.(snapshot());if(result&&typeof result.then==='function'){text('Layout changed; workspace host save is pending. Export a backup before leaving.');Promise.resolve(result).then(accepted=>{if(disposed||signal.aborted||generation!==saveGeneration)return;if(accepted===false)failed();else text('Workspace host accepted the layout update. Native SQLite backup remains a separate explicit action.');},()=>{if(!disposed&&!signal.aborted&&generation===saveGeneration)failed();});return false;}if(result===false){failed();return false;}text('Layout updated. Athena reports storage failures separately; export a backup for recovery.');return true;}catch{failed();return false;}
  }
  lastAcceptedRaw=model.encodeRecoveryWorkspace(draftSnapshot());
  const themeView=()=>{const t=themes.find(t=>t.id===current.themeId);return current.version>=6?{...t,objects:Object.entries(current.placements).map(([id,p])=>({...t.objects.find(o=>o.id===p.objectId),id,objectId:p.objectId,zIndex:p.zIndex??0,name:t.objects.find(o=>o.id===p.objectId).name+(id.startsWith('instance-')?' · '+id.slice(-8):'')})).sort((a,b)=>a.zIndex-b.zIndex||(a.id<b.id?-1:a.id>b.id?1:0))}:t;};
@@ -142,7 +143,7 @@ export async function mount(context){
   }catch(e){if(!disposed&&generation===importGeneration)text(`Restore not applied: ${e.message}`);}
   finally{if(!disposed&&generation===importGeneration)workspaceInput.value='';}
  };
- const rollback=direction=>{importGeneration++;drag=null;pendingCheckpoint=null;const value=history[direction](draftSnapshot());if(!value)return;envelopeVersion=value.version;current=value.active;layouts=value.layouts;view=value.view;savedLayouts=value.savedLayouts;draw();restoringHistory=true;try{save();}finally{restoringHistory=false;}if(model.encodeRecoveryWorkspace(draftSnapshot()).length<=WORKSPACE_TEXT_LIMIT)text(invalidSavedState?'Recovery draft changed; original invalid saved data remains protected.':`${direction==='undo'?'Undid':'Redid'} workspace edit. Rollback history lasts for this workspace session.`);};
+ const rollback=direction=>{importGeneration++;drag=null;pendingCheckpoint=null;const value=history[direction](draftSnapshot());if(!value)return;envelopeVersion=value.version;current=value.active;layouts=value.layouts;view=value.view;savedLayouts=value.savedLayouts;draw();restoringHistory=true;let accepted=false;try{accepted=save();}finally{restoringHistory=false;}if(accepted&&model.encodeRecoveryWorkspace(draftSnapshot()).length<=WORKSPACE_TEXT_LIMIT)text(invalidSavedState?'Recovery draft changed; original invalid saved data remains protected.':`${direction==='undo'?'Undid':'Redid'} workspace edit. Rollback history lasts for this workspace session.`);};
  const resetRoom=()=>{
   importGeneration++;drag=null;
   if(current.version<6&&!Object.keys(current.placements).length){text('Room arrangement is already at its defaults.');return;}
