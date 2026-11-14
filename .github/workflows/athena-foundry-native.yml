@@ -63,6 +63,22 @@ jobs:
         run: |
           node scripts/test_foundry_capacity_browser.mjs
           node scripts/test_foundry_save_outcome_browser.mjs
+      - name: Local PNG preview, room routing and cleanup in Chromium
+        env:
+          ATHENA_BROWSER_OUTPUT: browser-results/foundry-local-image
+        run: node scripts/test_foundry_local_image_browser.cjs
+      - name: Current-theme catalog spawning and recovery in Chromium
+        env:
+          ATHENA_BROWSER_OUTPUT: browser-results/foundry-asset-library
+        run: node scripts/test_foundry_asset_library_browser.cjs
+      - name: Actor grab offset and drag-grid regressions in Chromium
+        env:
+          ATHENA_BROWSER_OUTPUT: browser-results/foundry-drag-offset
+        run: node scripts/test_foundry_drag_offset_browser.cjs
+      - name: Existing release-grid regression in Chromium
+        env:
+          ATHENA_BROWSER_OUTPUT: browser-results/foundry-drag-grid
+        run: node scripts/test_foundry_drag_grid_browser.cjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -70,4 +86,8 @@ jobs:
           path: |
             browser-results/foundry-native/
             browser-results/foundry-capacity/
+            browser-results/foundry-local-image/
+            browser-results/foundry-asset-library/
+            browser-results/foundry-drag-offset/
+            browser-results/foundry-drag-grid/
           if-no-files-found: error
