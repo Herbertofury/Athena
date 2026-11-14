@@ -23,6 +23,10 @@ export function createLayoutModel(catalog) {
  function save(storage,key,value){const encoded=encode(value);storage.setItem(key,encoded);return parse(encoded);}
  function load(storage,key){const raw=storage.getItem(key);return raw===null?{state:initial(),recovery:null}:{state:parse(raw),recovery:null};}
  function view(input){if(input===undefined)return {inspectorDock:'right'};if(!plain(input)||!['left','right','hidden'].includes(input.inspectorDock))throw Error('Unsupported inspector layout.');return {inspectorDock:input.inspectorDock};}
+ function savedLayouts(input){
+  if(input===undefined)return [];if(!Array.isArray(input)||input.length>20)throw Error('At most 20 saved layouts are allowed.');
+  const names=new Set();return input.map(item=>{if(!plain(item)||typeof item.name!=='string'||!item.name.trim()||item.name!==item.name.trim()||item.name.length>80||names.has(item.name))throw Error('Saved layout names must be unique, nonempty and at most 80 characters.');names.add(item.name);return {name:item.name,layout:validate(item.layout)};});
+ }
  function workspace(input){
   if(!plain(input)||input.version!==1||!plain(input.layouts))throw new Error('Unsupported workspace backup.');
   const active=validate(input.active),layouts=Object.create(null);
@@ -31,11 +35,11 @@ export function createLayoutModel(catalog) {
    layouts[id]=checked;
   }
   layouts[active.roomId]=active;
-  return {version:1,active,layouts,view:view(input.view)};
+  return {version:1,active,layouts,view:view(input.view),savedLayouts:savedLayouts(input.savedLayouts)};
  }
  function parseWorkspace(text){if(typeof text!=='string'||text.length>1000000)throw new Error('Workspace exceeds import limit.');return workspace(JSON.parse(text));}
  function encodeWorkspace(value){return JSON.stringify(workspace(value));}
- return {validate,initial,parse,encode,save,load,view,workspace,parseWorkspace,encodeWorkspace};
+ return {validate,initial,parse,encode,save,load,view,savedLayouts,workspace,parseWorkspace,encodeWorkspace};
 }
 
 /** Bounded session-only rollback. Every retained snapshot is schema validated. */
