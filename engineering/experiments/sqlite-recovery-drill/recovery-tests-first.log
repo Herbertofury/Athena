@@ -1,0 +1,22 @@
+test_backup_excludes_uncommitted_transaction (test_sqlite_recovery_drill.RecoveryDrillTests.test_backup_excludes_uncommitted_transaction) ... ok
+test_cancelled_copy_does_not_touch_last_good (test_sqlite_recovery_drill.RecoveryDrillTests.test_cancelled_copy_does_not_touch_last_good) ... ok
+test_complete_backup_restore_drill_into_new_database (test_sqlite_recovery_drill.RecoveryDrillTests.test_complete_backup_restore_drill_into_new_database) ... ok
+test_existing_destination_is_never_overwritten (test_sqlite_recovery_drill.RecoveryDrillTests.test_existing_destination_is_never_overwritten) ... ok
+test_expired_deadline_refuses_copy (test_sqlite_recovery_drill.RecoveryDrillTests.test_expired_deadline_refuses_copy) ... ok
+test_future_version_rejected_without_schema_change (test_sqlite_recovery_drill.RecoveryDrillTests.test_future_version_rejected_without_schema_change) ... ok
+test_integrity_ok_does_not_imply_foreign_keys_ok (test_sqlite_recovery_drill.RecoveryDrillTests.test_integrity_ok_does_not_imply_foreign_keys_ok) ... ok
+test_integrity_ok_does_not_imply_payload_identity_ok (test_sqlite_recovery_drill.RecoveryDrillTests.test_integrity_ok_does_not_imply_payload_identity_ok) ... ok
+test_mid_backup_committed_mutation_restarts_complete_copy (test_sqlite_recovery_drill.RecoveryDrillTests.test_mid_backup_committed_mutation_restarts_complete_copy) ... ok
+test_migration_commits_version_and_complete_payload (test_sqlite_recovery_drill.RecoveryDrillTests.test_migration_commits_version_and_complete_payload) ... ok
+test_migration_rolls_back_at_each_precommit_boundary (test_sqlite_recovery_drill.RecoveryDrillTests.test_migration_rolls_back_at_each_precommit_boundary) ... ok
+test_process_exit_after_commit_retains_v2 (test_sqlite_recovery_drill.RecoveryDrillTests.test_process_exit_after_commit_retains_v2) ... ok
+test_process_exit_before_commit_preserves_v1 (test_sqlite_recovery_drill.RecoveryDrillTests.test_process_exit_before_commit_preserves_v1) ... ok
+test_repeated_migration_rejected (test_sqlite_recovery_drill.RecoveryDrillTests.test_repeated_migration_rejected) ... ok
+test_unexpected_schema_rejected (test_sqlite_recovery_drill.RecoveryDrillTests.test_unexpected_schema_rejected) ... ok
+test_wal_only_committed_rows_need_database_backup (test_sqlite_recovery_drill.RecoveryDrillTests.test_wal_only_committed_rows_need_database_backup) ... ok
+test_wrong_application_rejected (test_sqlite_recovery_drill.RecoveryDrillTests.test_wrong_application_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 17 tests in 0.148s
+
+OK

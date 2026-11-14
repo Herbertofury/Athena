@@ -1,0 +1,142 @@
+test_attach_denied_no_target_created (test_sqlite_query_boundary.QueryBoundaryTests.test_attach_denied_no_target_created) ... ok
+test_byte_limit_exact_boundary (test_sqlite_query_boundary.QueryBoundaryTests.test_byte_limit_exact_boundary) ... ok
+test_cancellation_before_and_during_execution (test_sqlite_query_boundary.QueryBoundaryTests.test_cancellation_before_and_during_execution) ... ok
+test_complete_query_and_exact_serialized_bytes (test_sqlite_query_boundary.QueryBoundaryTests.test_complete_query_and_exact_serialized_bytes) ... ok
+test_count_star_handles_empty_column_authorization (test_sqlite_query_boundary.QueryBoundaryTests.test_count_star_handles_empty_column_authorization) ... ERROR
+test_deadline_expiry_during_execution (test_sqlite_query_boundary.QueryBoundaryTests.test_deadline_expiry_during_execution) ... ok
+test_expired_deadline_preflight (test_sqlite_query_boundary.QueryBoundaryTests.test_expired_deadline_preflight) ... ok
+test_extension_function_denied (test_sqlite_query_boundary.QueryBoundaryTests.test_extension_function_denied) ... ok
+test_invalid_policy_and_parameters_refused (test_sqlite_query_boundary.QueryBoundaryTests.test_invalid_policy_and_parameters_refused) ... ok
+test_join_of_permitted_table_preserves_complete_output (test_sqlite_query_boundary.QueryBoundaryTests.test_join_of_permitted_table_preserves_complete_output) ... ERROR
+test_missing_database_is_not_created (test_sqlite_query_boundary.QueryBoundaryTests.test_missing_database_is_not_created) ... ok
+test_multiple_statements_refused (test_sqlite_query_boundary.QueryBoundaryTests.test_multiple_statements_refused) ... ok
+test_nonfinite_result_not_silently_reencoded (test_sqlite_query_boundary.QueryBoundaryTests.test_nonfinite_result_not_silently_reencoded) ... ok
+test_oversized_parameter_refused (test_sqlite_query_boundary.QueryBoundaryTests.test_oversized_parameter_refused) ... ok
+test_oversized_sql_refused (test_sqlite_query_boundary.QueryBoundaryTests.test_oversized_sql_refused) ... ok
+test_parameters_are_values_not_sql (test_sqlite_query_boundary.QueryBoundaryTests.test_parameters_are_values_not_sql) ... ok
+test_pragma_and_table_valued_pragma_denied (test_sqlite_query_boundary.QueryBoundaryTests.test_pragma_and_table_valued_pragma_denied) ... ok
+test_private_table_denied (test_sqlite_query_boundary.QueryBoundaryTests.test_private_table_denied) ... ok
+test_progress_budget_stops_expensive_join (test_sqlite_query_boundary.QueryBoundaryTests.test_progress_budget_stops_expensive_join) ... ERROR
+test_row_limit_does_not_promote_partial_output (test_sqlite_query_boundary.QueryBoundaryTests.test_row_limit_does_not_promote_partial_output) ... ERROR
+test_schema_introspection_denied (test_sqlite_query_boundary.QueryBoundaryTests.test_schema_introspection_denied) ... ok
+test_schema_mutation_denied (test_sqlite_query_boundary.QueryBoundaryTests.test_schema_mutation_denied) ... ok
+test_separate_connections_do_not_share_policy (test_sqlite_query_boundary.QueryBoundaryTests.test_separate_connections_do_not_share_policy) ... ERROR
+test_union_cannot_smuggle_private_table (test_sqlite_query_boundary.QueryBoundaryTests.test_union_cannot_smuggle_private_table) ... ok
+test_unlisted_function_denied (test_sqlite_query_boundary.QueryBoundaryTests.test_unlisted_function_denied) ... ok
+test_vacuum_into_denied_no_target_created (test_sqlite_query_boundary.QueryBoundaryTests.test_vacuum_into_denied_no_target_created) ... ok
+test_write_update_delete_insert_denied (test_sqlite_query_boundary.QueryBoundaryTests.test_write_update_delete_insert_denied) ... ok
+
+======================================================================
+ERROR: test_count_star_handles_empty_column_authorization (test_sqlite_query_boundary.QueryBoundaryTests.test_count_star_handles_empty_column_authorization)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "experiments/sqlite-query-boundary-lab/query_boundary.py", line 148, in run_query
+    cursor = conn.execute(sql, parameters)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sqlite3.DatabaseError: not authorized
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "tests/test_sqlite_query_boundary.py", line 55, in test_count_star_handles_empty_column_authorization
+    self.assertEqual(self.run_sql('SELECT count(*) FROM catalog')['rows'], [[20]])
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "tests/test_sqlite_query_boundary.py", line 36, in run_sql
+    return q.run_query(self.db, sql, parameters, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "experiments/sqlite-query-boundary-lab/query_boundary.py", line 166, in run_query
+    raise Rejected(reason) from exc
+query_boundary.Rejected: query authorization denied
+
+======================================================================
+ERROR: test_join_of_permitted_table_preserves_complete_output (test_sqlite_query_boundary.QueryBoundaryTests.test_join_of_permitted_table_preserves_complete_output)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "experiments/sqlite-query-boundary-lab/query_boundary.py", line 148, in run_query
+    cursor = conn.execute(sql, parameters)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sqlite3.DatabaseError: not authorized
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "tests/test_sqlite_query_boundary.py", line 58, in test_join_of_permitted_table_preserves_complete_output
+    r = self.run_sql('SELECT a.id,b.name FROM catalog a JOIN catalog b ON a.id=b.id ORDER BY a.id')
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "tests/test_sqlite_query_boundary.py", line 36, in run_sql
+    return q.run_query(self.db, sql, parameters, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "experiments/sqlite-query-boundary-lab/query_boundary.py", line 166, in run_query
+    raise Rejected(reason) from exc
+query_boundary.Rejected: query authorization denied
+
+======================================================================
+ERROR: test_progress_budget_stops_expensive_join (test_sqlite_query_boundary.QueryBoundaryTests.test_progress_budget_stops_expensive_join)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "experiments/sqlite-query-boundary-lab/query_boundary.py", line 148, in run_query
+    cursor = conn.execute(sql, parameters)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sqlite3.DatabaseError: not authorized
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "tests/test_sqlite_query_boundary.py", line 133, in test_progress_budget_stops_expensive_join
+    self.assertEqual(self.run_sql('SELECT count(*) FROM catalog')['rows'], [[20]])
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "tests/test_sqlite_query_boundary.py", line 36, in run_sql
+    return q.run_query(self.db, sql, parameters, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "experiments/sqlite-query-boundary-lab/query_boundary.py", line 166, in run_query
+    raise Rejected(reason) from exc
+query_boundary.Rejected: query authorization denied
+
+======================================================================
+ERROR: test_row_limit_does_not_promote_partial_output (test_sqlite_query_boundary.QueryBoundaryTests.test_row_limit_does_not_promote_partial_output)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "experiments/sqlite-query-boundary-lab/query_boundary.py", line 148, in run_query
+    cursor = conn.execute(sql, parameters)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sqlite3.DatabaseError: not authorized
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "tests/test_sqlite_query_boundary.py", line 107, in test_row_limit_does_not_promote_partial_output
+    r = self.run_sql('SELECT id FROM catalog ORDER BY id', policy=q.Policy(rows=20))
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "tests/test_sqlite_query_boundary.py", line 36, in run_sql
+    return q.run_query(self.db, sql, parameters, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "experiments/sqlite-query-boundary-lab/query_boundary.py", line 166, in run_query
+    raise Rejected(reason) from exc
+query_boundary.Rejected: query authorization denied
+
+======================================================================
+ERROR: test_separate_connections_do_not_share_policy (test_sqlite_query_boundary.QueryBoundaryTests.test_separate_connections_do_not_share_policy)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "experiments/sqlite-query-boundary-lab/query_boundary.py", line 148, in run_query
+    cursor = conn.execute(sql, parameters)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sqlite3.DatabaseError: not authorized
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "tests/test_sqlite_query_boundary.py", line 161, in test_separate_connections_do_not_share_policy
+    self.assertEqual(self.run_sql('SELECT id FROM catalog')['row_count'], 20)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "tests/test_sqlite_query_boundary.py", line 36, in run_sql
+    return q.run_query(self.db, sql, parameters, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "experiments/sqlite-query-boundary-lab/query_boundary.py", line 166, in run_query
+    raise Rejected(reason) from exc
+query_boundary.Rejected: query authorization denied
+
+----------------------------------------------------------------------
+Ran 27 tests in 0.016s
+
+FAILED (errors=5)

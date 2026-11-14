@@ -1,0 +1,22 @@
+{
+  "evidence": "synthetic_functional_policy_tests",
+  "platform": "Linux",
+  "python": "3.12.14",
+  "sqlite": "3.53.1",
+  "tests": 32,
+  "passed": 32,
+  "initial_tests": 27,
+  "initial_errors": 5,
+  "initial_failure": "Nullable database name in empty-column read rejected positive count/rowid queries",
+  "source_sha256": "0ec010eeae829de466c1651bc4056f56bae600291f5e809595dd2b736b53ee3c",
+  "tests_sha256": "bcfc78d9a926eb08c6ce51449a19ebee03601679580096f6ed1ca0298e043eb4",
+  "limits": [
+    "Trusted generated schema only",
+    "No hostile database or path acceptance",
+    "No hard CPU/time/RSS guarantee",
+    "No production endpoint",
+    "No performance comparison",
+    "No Windows/macOS execution"
+  ],
+  "independent_review": "No substantive finding within trusted-schema scope; nullable-read and encoded-byte regression suggestions added"
+}
