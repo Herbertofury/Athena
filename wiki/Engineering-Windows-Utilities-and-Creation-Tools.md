@@ -8,6 +8,6 @@ See the canonical report for per-tool features, risks, reuse boundaries and meas
 
 ## Sortable research table
 
-The repository-backed [interactive table](../research/windows-utilities-2026-11-14/index.html) includes category/search filters, GitHub-star ordering and attributed same-source user-rating ordering. GitHub source preview does not execute HTML; serve the research directory locally or use a separately verified deployment. No live Wiki publication is implied.
+The repository-backed [interactive table](https://herbertofury.github.io/Athena/research/windows-utilities-2026-11-14/) includes category/search filters, GitHub-star ordering and attributed same-source user-rating ordering. GitHub source preview does not execute HTML; serve the research directory locally or use a separately verified deployment. No live Wiki publication is implied.
 
 Related: [Windows PC optimization](Engineering-Windows-PC-Optimization.md) covers measure-first configuration and rollback rather than app selection.

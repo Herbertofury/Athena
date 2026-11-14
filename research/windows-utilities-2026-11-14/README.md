@@ -4,7 +4,7 @@ Checked 2026-11-14. **30 source-backed candidates, not an exhaustive catalog or 
 
 ## Browse the sortable table
 
-[Open the interactive research table](index.html): filter by category/search, sort by GitHub stars, editorial priority, or attributed SourceForge user rating/review count. Stars use the retained official repository snapshot. Two user-rating snapshots are available (Audacity 4.6/5, 286 reviews; BleachBit 4.8/5, 60 reviews), from their [SourceForge](https://sourceforge.net/projects/audacity/reviews/) [review pages](https://sourceforge.net/projects/bleachbit/reviews/) observed November 14. These indexed, self-selected historical reviews may lag live counts and are not current-version performance evidence. Missing ratings remain unranked; incompatible sources/scales are not normalized together. The table works when served over HTTP; GitHub source view does not execute it.
+[Open the interactive research table](https://herbertofury.github.io/Athena/research/windows-utilities-2026-11-14/): filter by category/search, sort by GitHub stars, editorial priority, or attributed SourceForge user rating/review count. Stars use the retained official repository snapshot. Two user-rating snapshots are available (Audacity 4.6/5, 286 reviews; BleachBit 4.8/5, 60 reviews), from their [SourceForge](https://sourceforge.net/projects/audacity/reviews/) [review pages](https://sourceforge.net/projects/bleachbit/reviews/) observed November 14. These indexed, self-selected historical reviews may lag live counts and are not current-version performance evidence. Missing ratings remain unranked; incompatible sources/scales are not normalized together. The table works when served over HTTP; GitHub source view does not execute it.
 
 ## Practical starting shortlist
 
