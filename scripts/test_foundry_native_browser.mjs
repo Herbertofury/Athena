@@ -10,7 +10,7 @@ const out=path.join(repoRoot,'browser-results/foundry-native');
 fs.mkdirSync(out,{recursive:true});
 const temporary=fs.mkdtempSync(path.join(os.tmpdir(),'athena native synthetic '));
 const db=path.join(temporary,'synthetic.sqlite');
-const report={platform:process.platform,scope:'Chromium → loopback Python bridge → native Rust SQLite executable; synthetic data, not desktop installer or private migration acceptance',checks:[],errors:[]};
+const report={platform:process.platform,scope:'Chromium → loopback Python bridge → native Rust SQLite executable; synthetic data, not desktop installer or private migration acceptance',checks:[],errors:[],networkFailures:[],httpFailures:[]};
 let bridge,browser,context,page,exited,origin,stderr='';
 const cli=(command,input)=>execFileSync(binaryPath,[command,db],{encoding:'utf8',input,timeout:15000});
 async function check(name,fn){await fn();report.checks.push(name);}
@@ -41,6 +41,8 @@ try {
  context=await browser.newContext({viewport:{width:1440,height:1000}});
  await context.route('**/*',route=>new URL(route.request().url()).origin===origin?route.continue():route.abort());
  page=await context.newPage();page.on('pageerror',error=>report.errors.push(String(error)));
+ page.on('requestfailed',request=>report.networkFailures.push({path:new URL(request.url()).pathname,error:request.failure()?.errorText}));
+ page.on('response',response=>{if(response.status()>=400)report.httpFailures.push({path:new URL(response.url()).pathname,status:response.status()})});
  page.setDefaultTimeout(15000);
  await page.goto(origin+'/#build');await page.locator('.foundry-scene').waitFor();
  await check('Native profile loads without iframe or automatic playback',async()=>{
@@ -68,7 +70,9 @@ try {
  await check('Fresh browser context restores persisted native data, not old browser storage',async()=>{
   await context.close();context=await browser.newContext({viewport:{width:1440,height:1000}});
   await context.route('**/*',route=>new URL(route.request().url()).origin===origin?route.continue():route.abort());
-  page=await context.newPage();page.on('pageerror',error=>report.errors.push(String(error)));page.setDefaultTimeout(15000);
+  page=await context.newPage();page.on('pageerror',error=>report.errors.push(String(error)));
+ page.on('requestfailed',request=>report.networkFailures.push({path:new URL(request.url()).pathname,error:request.failure()?.errorText}));
+ page.on('response',response=>{if(response.status()>=400)report.httpFailures.push({path:new URL(response.url()).pathname,status:response.status()})});page.setDefaultTimeout(15000);
   await page.goto(origin+'/#build');await page.locator('.foundry-scene').waitFor();
   assert.equal(await page.locator('select[data-time]').inputValue(),'day');
   await page.locator('[data-native-load]').click();
@@ -86,7 +90,9 @@ try {
   assert.deepEqual(fs.readFileSync(db),beforeRestart,'startup does not rewrite database');
   context=await browser.newContext({viewport:{width:1440,height:1000}});
   await context.route('**/*',route=>new URL(route.request().url()).origin===origin?route.continue():route.abort());
-  page=await context.newPage();page.on('pageerror',error=>report.errors.push(String(error)));page.setDefaultTimeout(15000);
+  page=await context.newPage();page.on('pageerror',error=>report.errors.push(String(error)));
+ page.on('requestfailed',request=>report.networkFailures.push({path:new URL(request.url()).pathname,error:request.failure()?.errorText}));
+ page.on('response',response=>{if(response.status()>=400)report.httpFailures.push({path:new URL(response.url()).pathname,status:response.status()})});page.setDefaultTimeout(15000);
   await page.goto(origin+'/#build');await page.locator('.foundry-scene').waitFor();
   assert.equal(await page.locator('select[data-time]').inputValue(),'day');
   await page.locator('[data-native-load]').click();await page.locator('[data-native-status]').filter({hasText:'restored'}).waitFor();

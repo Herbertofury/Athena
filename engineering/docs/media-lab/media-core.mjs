@@ -1,6 +1,6 @@
 import {bilibiliEmbedUrl} from './bilibili-player.mjs';
 export function safeSourceUrl(value){try{const u=new URL(value);return u.protocol==='https:'&&!u.port&&!u.username&&!u.password&&new Set(['modrinth.com','www.nexusmods.com','store.steampowered.com','www.youtube.com','www.bilibili.com']).has(u.hostname)?u.href:null;}catch{return null;}}
-export const MEDIA_HOSTS = new Set(['cdn.modrinth.com','staticdelivery.nexusmods.com','shared.akamai.steamstatic.com','store.akamai.steamstatic.com','video.akamai.steamstatic.com','i.ytimg.com']);
+export const MEDIA_HOSTS = new Set(['cdn.modrinth.com','staticdelivery.nexusmods.com','images.nexusmods.com','shared.akamai.steamstatic.com','store.akamai.steamstatic.com','video.akamai.steamstatic.com','i.ytimg.com']);
 export function safeMediaUrl(value) {try{const u=new URL(value);return u.protocol==='https:'&&!u.port&&!u.username&&!u.password&&MEDIA_HOSTS.has(u.hostname)?u.href:null;}catch{return null;}}
 const SOURCE_HOSTS = Object.freeze({
   Modrinth: 'modrinth.com',
@@ -24,6 +24,9 @@ export function validateFixture(data) {
     if(card.provider==='Steam') validateSteamCardIdentity(card, source);
     if(card.provider==='YouTube') validateYouTubeCardIdentity(card, source);
     if(card.provider==='Bilibili'){if(card.cover!==null||card.cover_status!=='official-player-only'||card.gallery.length!==0||card.videos.length!==1)throw Error('Unverified Bilibili cover or media scope');}
+    // The official Modrinth project API permits icon_url:null. Preserve that
+    // explicit absence without synthesizing an image or relaxing URL checks.
+    else if(card.provider==='Modrinth'&&card.cover_status==='not-provided'){if(card.cover!==null)throw Error('Contradictory Modrinth cover absence');}
     else if (!providerOwnsHost(card.cover, card.provider)) throw Error('Disallowed cover host');
     for (const media of card.gallery) {
       if (!media || !providerOwnsHost(media.preview, card.provider) || !providerOwnsHost(media.original, card.provider)) throw Error('Disallowed gallery host');
@@ -46,7 +49,13 @@ export function validateFixture(data) {
 }
 export function mediaCounts(data){return {cards:data.cards.length,gallery_images:data.cards.reduce((n,c)=>n+c.gallery.length,0),video_entries:data.cards.reduce((n,c)=>n+c.videos.length,0)};}
 
-export function providerOwnsHost(value,provider){const safe=safeMediaUrl(value);if(!safe)return false;const host=new URL(safe).hostname;const hosts={Modrinth:['cdn.modrinth.com'],'Nexus Mods':['staticdelivery.nexusmods.com'],Steam:['shared.akamai.steamstatic.com','store.akamai.steamstatic.com','video.akamai.steamstatic.com'],YouTube:['i.ytimg.com']};return Boolean(hosts[provider]?.includes(host));}
+export function coverPlaceholderLabel(card){
+  if(card?.provider==='Modrinth'&&card.cover===null&&card.cover_status==='not-provided')return 'No cover supplied by the public project record.';
+  if(card?.provider==='Bilibili'&&card.cover===null&&card.cover_status==='official-player-only')return 'Poster remains inside the official player';
+  return 'Cover unavailable.';
+}
+
+export function providerOwnsHost(value,provider){const safe=safeMediaUrl(value);if(!safe)return false;const host=new URL(safe).hostname;const hosts={Modrinth:['cdn.modrinth.com'],'Nexus Mods':['staticdelivery.nexusmods.com','images.nexusmods.com'],Steam:['shared.akamai.steamstatic.com','store.akamai.steamstatic.com','video.akamai.steamstatic.com'],YouTube:['i.ytimg.com']};return Boolean(hosts[provider]?.includes(host));}
 
 export function nativePlaybackLabel(type) {
   const labels={playing:'Playing the selected source trailer.',pause:'Paused.',ended:'Playback ended.',error:'Playback failed. The source entry is preserved.'};
