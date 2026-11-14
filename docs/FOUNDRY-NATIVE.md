@@ -9,10 +9,23 @@ The public static app supports browser/file authoring. Native SQLite saves, reco
 ```
 cargo build --locked --manifest-path crates/athena-foundry-store/Cargo.toml
 crates/athena-foundry-store/target/debug/athena-foundry-store init /path/to/new-store.sqlite3
+crates/athena-foundry-store/target/debug/athena-foundry-store upgrade-history /path/to/new-store.sqlite3
+crates/athena-foundry-store/target/debug/athena-foundry-store upgrade-soundtracks /path/to/new-store.sqlite3
+crates/athena-foundry-store/target/debug/athena-foundry-store upgrade-transforms /path/to/new-store.sqlite3
+crates/athena-foundry-store/target/debug/athena-foundry-store upgrade-scopes /path/to/new-store.sqlite3
+crates/athena-foundry-store/target/debug/athena-foundry-store upgrade-environment /path/to/new-store.sqlite3
+crates/athena-foundry-store/target/debug/athena-foundry-store upgrade-targets /path/to/new-store.sqlite3
+crates/athena-foundry-store/target/debug/athena-foundry-store upgrade-instances /path/to/new-store.sqlite3
+crates/athena-foundry-store/target/debug/athena-foundry-store upgrade-appearance /path/to/new-store.sqlite3
+crates/athena-foundry-store/target/debug/athena-foundry-store upgrade-filters /path/to/new-store.sqlite3
+crates/athena-foundry-store/target/debug/athena-foundry-store upgrade-origins /path/to/new-store.sqlite3
+crates/athena-foundry-store/target/debug/athena-foundry-store upgrade-environments /path/to/new-store.sqlite3
+crates/athena-foundry-store/target/debug/athena-foundry-store upgrade-blend-modes /path/to/new-store.sqlite3
+crates/athena-foundry-store/target/debug/athena-foundry-store upgrade-music-precision /path/to/new-store.sqlite3
 python3 native/foundry/bridge.py --binary crates/athena-foundry-store/target/debug/athena-foundry-store --database /path/to/new-store.sqlite3
 ```
 
-Use your platform's `.exe` filename on Windows. Choose a new database path, never an original source database. The server prints its loopback URL. Existing databases require explicitly reviewed version upgrades; a refused old schema is not permission to overwrite it. Preserve a verified backup first. The store supports schema 13 and authoring JSON version 10; old formats remain explicitly versioned rather than silently coerced.
+Use your platform's `.exe` filename on Windows. Choose a new database path, never an original source database. The server prints its loopback URL. Existing databases require explicitly reviewed version upgrades; a refused old schema is not permission to overwrite it. Preserve a verified backup first. `init` intentionally creates schema2, not the latest schema. The explicit commands above prepare a **new, disposable or user-chosen** database through schema15 before launching the bridge. Do not paste this sequence against an existing original database; preserve and review its backup and upgrade requirements first. The current store supports schema15 and authoring JSON version11; old formats remain explicitly versioned rather than silently coerced.
 
 Native save/recovery uses optimistic snapshot tokens and SQLite transactions. Conflicts retain browser edits; there is no blind retry. Recovery history retains at most 50 entries, not an unlimited provenance archive. Cancellation cannot undo a server write already committed. Selected-room soundtrack links are metadata, not proof of provider access or playback. Local video is explicitly selected and never uploaded by this integration.
 
