@@ -96,3 +96,9 @@ silently replacing newer authoring data. Keep an independent backup before any e
 `node scripts/test_foundry_blends_browser.cjs` checks actual Chromium overlap arithmetic with
 synthetic flat-color authored objects, all9 computed blend modes, unrelated controls and Undo.
 It does not establish original asset fidelity or Windows game-runtime acceptance.
+
+## Selected-instance reset
+
+The inspector's **Reset selected transform and appearance** adapts the reviewed original `prototype-v24.ts` `resetSelectedTransform` (line 306). It restores only fields supported by the current room format: rotation/scales, opacity/visibility, skew and color filters, transform origin and blend mode. There is no format or database upgrade. Position, scope, sticker anchor, pin, stacking, asset/instance identity, other instances, environment and saved presets remain intact. One Undo restores the previous appearance; an already-default selection creates no history entry. Original `locked` has no native equivalent: native pin is deliberately retained, and original transform-origin anchor maps to `transformOrigin`, not the native sticker anchor.
+
+Run `node --test native/foundry/tests/selected-reset.test.mjs` for model and real mount coverage. Run `CHROMIUM_PATH=<installed-browser> node scripts/test_foundry_selected_reset_browser.cjs` for actual Chromium controls, computed appearance, hidden-instance recovery and Undo/Redo. Synthetic state only; this does not establish full original visual parity.

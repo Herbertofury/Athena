@@ -37,6 +37,13 @@ export function createLayoutModel(catalog) {
  function upgradeFilters(value){const prior=upgradeAppearance(value);if(prior.version>=8)return prior;return validate({...prior,version:8,placements:Object.fromEntries(Object.entries(prior.placements).map(([id,p])=>[id,{...p,skewX:0,skewY:0,brightness:1,contrast:1,saturation:1,hue:0,blur:0}]))});}
  function upgradeOrigins(value){const prior=upgradeFilters(value);if(prior.version>=9)return prior;return validate({...prior,version:9,placements:Object.fromEntries(Object.entries(prior.placements).map(([id,p])=>[id,{...p,transformOrigin:"mc"}]))});}
  function upgradeBlendModes(value){const prior=upgradeOrigins(value);if(prior.version>=11)return prior;return validate({...prior,version:11,placements:Object.fromEntries(Object.entries(prior.placements).map(([id,p])=>[id,{...p,blendMode:'normal'}]))});}
+ /** Source prototype-v24 resetSelectedTransform; native pin/anchor are not source lock/origin. */
+ function resetSelectedTransform(value,id){
+  const next=validate(value),p=next.placements[id];if(!p)throw Error('Select a stored object instance to reset.');
+  const defaults={rotation:0,scaleX:1,scaleY:1,opacity:1,visible:true,skewX:0,skewY:0,brightness:1,contrast:1,saturation:1,hue:0,blur:0,transformOrigin:'mc',blendMode:'normal'};
+  for(const [key,v] of Object.entries(defaults))if(Object.hasOwn(p,key))p[key]=v;
+  return validate(next);
+ }
  function workspaceVersion({active,layouts={},savedLayouts=[]}){return Math.max(active.version,...Object.values(layouts).map(v=>v.version),...savedLayouts.map(v=>v.layout.version));}
  function initial(themeId=catalog[0].id){const theme=themes.get(themeId);if(!theme)throw new Error('Unknown theme.');return validate({version:1,themeId,roomId:theme.rooms[0].id,time:'day',placements:{}});}
  function parse(text){if(typeof text!=='string'||text.length>200000)throw new Error('Layout exceeds import limit.');return validate(JSON.parse(text));}
@@ -62,7 +69,7 @@ export function createLayoutModel(catalog) {
  }
  function parseWorkspace(text){if(typeof text!=='string'||text.length>1000000)throw new Error('Workspace exceeds import limit.');return workspace(JSON.parse(text));}
  function encodeWorkspace(value){return JSON.stringify(workspace(value));}
- return {blendModes,upgradeBlendModes,validate,upgradeLayout,upgradeScopes,environment,upgradeEnvironment,upgradeInstances,upgradeAppearance,upgradeFilters,upgradeOrigins,workspaceVersion,initial,parse,encode,save,load,view,savedLayouts,workspace,parseWorkspace,encodeWorkspace};
+ return {resetSelectedTransform,blendModes,upgradeBlendModes,validate,upgradeLayout,upgradeScopes,environment,upgradeEnvironment,upgradeInstances,upgradeAppearance,upgradeFilters,upgradeOrigins,workspaceVersion,initial,parse,encode,save,load,view,savedLayouts,workspace,parseWorkspace,encodeWorkspace};
 }
 
 /** Bounded session-only rollback. Every retained snapshot is schema validated. */
