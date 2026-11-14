@@ -1,6 +1,7 @@
 """Offline original MusicHub v2 conversion. Explicit context mapping; never guesses a room."""
 import argparse,datetime,hashlib,json,re,os
 from pathlib import Path
+MAX_INPUT_BYTES=1_000_000
 PROVIDERS={'spotify','apple','deezer','soundcloud','tidal','youtube'}
 def pairs(items):
  out={}
@@ -8,8 +9,13 @@ def pairs(items):
   if k in out:raise ValueError('Duplicate JSON key')
   out[k]=v
  return out
+def read_bounded(path):
+ # Bound allocation before JSON parsing; never trust file size metadata.
+ with path.open('rb') as stream:raw=stream.read(MAX_INPUT_BYTES+1)
+ if len(raw)>MAX_INPUT_BYTES:raise ValueError('Input exceeds limit')
+ return raw
 def parse(raw):
- if len(raw)>1_000_000:raise ValueError('Input exceeds limit')
+ if len(raw)>MAX_INPUT_BYTES:raise ValueError('Input exceeds limit')
  return json.loads(raw.decode('utf-8'),object_pairs_hook=pairs,parse_constant=lambda _: (_ for _ in ()).throw(ValueError('Nonfinite JSON')))
 def exact(v,keys):
  if not isinstance(v,dict) or set(v)!=set(keys):raise ValueError('Unsupported or missing fields')
@@ -42,6 +48,6 @@ def convert(raw,mapping,catalog):
 def main():
  p=argparse.ArgumentParser();p.add_argument('source',type=Path);p.add_argument('mapping',type=Path);p.add_argument('output',type=Path);a=p.parse_args()
  catalog=json.loads((Path(__file__).resolve().parents[3]/'dist/workspaces/foundry/catalog.json').read_text())
- result=convert(a.source.read_bytes(),parse(a.mapping.read_bytes()),catalog)
+ result=convert(read_bounded(a.source),parse(read_bounded(a.mapping)),catalog)
  with os.fdopen(os.open(a.output,os.O_WRONLY|os.O_CREAT|os.O_EXCL,0o600),'w',encoding='utf-8')as f:json.dump(result,f,ensure_ascii=False,indent=2);f.write('\n')
 if __name__=='__main__':main()
