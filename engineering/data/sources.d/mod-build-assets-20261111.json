@@ -1,0 +1,167 @@
+[
+  {
+    "id": "MB11001",
+    "title": "Forge 1.20.1 development prerequisites",
+    "url": "https://docs.minecraftforge.net/en/1.20.1/gettingstarted/",
+    "observed_version": "Minecraft Forge 1.20.1 documentation",
+    "topic": "mod-build-asset-acceptance",
+    "note": "Java 17 and 64-bit JVM prerequisites; historical target lane, not current-loader guidance.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "MB11002",
+    "title": "Fabric development environment",
+    "url": "https://docs.fabricmc.net/develop/getting-started/setting-up",
+    "observed_version": "Page heading 26.2; body requirement explicitly scoped to Minecraft 26.1",
+    "topic": "mod-build-asset-acceptance",
+    "note": "Opened page and recorded Java 25 wording without broadening its stated target.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "MB11003",
+    "title": "NeoForge getting started",
+    "url": "https://docs.neoforged.net/docs/gettingstarted/",
+    "observed_version": "Version selector 26.1",
+    "topic": "mod-build-asset-acceptance",
+    "note": "Java 25 and 64-bit JVM; separate ModDevGradle and NeoGradle template paths.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "MB11004",
+    "title": "Gradle Java toolchains",
+    "url": "https://docs.gradle.org/current/userguide/toolchains.html",
+    "observed_version": "Gradle manual 9.9.1",
+    "topic": "mod-build-asset-acceptance",
+    "note": "Toolchain, --release, source/target compatibility and IDE Gradle JVM are distinct controls.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "MB11005",
+    "title": "Gradle dependency locking",
+    "url": "https://docs.gradle.org/current/userguide/dependency_locking.html",
+    "observed_version": "Gradle manual 9.9.1",
+    "topic": "mod-build-asset-acceptance",
+    "note": "Resolved-configuration locks, buildscript distinction and changing-artifact limitation.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "MB11006",
+    "title": "Gradle securing dependencies",
+    "url": "https://docs.gradle.org/current/userguide/securing_dependencies.html",
+    "observed_version": "Gradle manual 9.9.1",
+    "topic": "mod-build-asset-acceptance",
+    "note": "Strict verification, bootstrapping trust limitation, changing/local artifact exclusions; old dependency_verification URL returned navigation only.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "MB11007",
+    "title": "Fabric Loom reference",
+    "url": "https://docs.fabricmc.net/develop/loom/",
+    "observed_version": "Documentation heading 26.2",
+    "topic": "mod-build-asset-acceptance",
+    "note": "Different plugin IDs for non-obfuscated and remapping targets; include is non-transitive and packaging-task-specific.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "MB11008",
+    "title": "NeoForge non-Minecraft dependencies",
+    "url": "https://docs.neoforged.net/toolchain/docs/dependencies/nonmclibs/",
+    "observed_version": "Version-specific sections 1.21.9+ and 1.21.8-and-earlier",
+    "topic": "mod-build-asset-acceptance",
+    "note": "Development classpath and production jar-in-jar requirements are separate.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "MB11009",
+    "title": "Forge 1.20.1 physical and logical sides",
+    "url": "https://docs.minecraftforge.net/en/1.20.1/concepts/sides/",
+    "observed_version": "Minecraft Forge 1.20.1 documentation",
+    "topic": "mod-build-asset-acceptance",
+    "note": "Single-player hosts logical client/server together and can conceal dedicated-server classloading failures.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "MB11010",
+    "title": "Fabric automated testing",
+    "url": "https://docs.fabricmc.net/develop/automatic-testing",
+    "observed_version": "Documentation heading 26.2",
+    "topic": "mod-build-asset-acceptance",
+    "note": "Opened Loader JUnit, server GameTests, client GameTests and production test task sections; no local execution.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "MB11011",
+    "title": "BepInEx installation channels",
+    "url": "https://docs.bepinex.dev/master/articles/user_guide/installation/index.html",
+    "observed_version": "Master documentation, not a pinned release",
+    "topic": "mod-build-asset-acceptance",
+    "note": "Stable and bleeding-edge channels and separate target installation paths; no universal OS/runtime compatibility assertion.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "MB11012",
+    "title": "glTF 2.0 specification",
+    "url": "https://registry.khronos.org/glTF/specs/2.0/glTF-2.0.html",
+    "observed_version": "Displayed version 2.0.1; 2021-10-11; commit 8e798b02d254cea97659a333cfcb20875b62bdd4",
+    "topic": "mod-build-asset-acceptance",
+    "note": "Reviewed asset/container version separation, used/required extension relationship and external-resource GLB allowance.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 180,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "MB11013",
+    "title": "Khronos glTF Validator",
+    "url": "https://github.com/KhronosGroup/glTF-Validator",
+    "observed_version": "README on main; no release version asserted",
+    "topic": "mod-build-asset-acceptance",
+    "note": "JSON issue reports, resource-validation controls, supported/partial extension coverage; no runtime rendering guarantee.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "MB11014",
+    "title": "Godot available 3D formats",
+    "url": "https://docs.godotengine.org/en/stable/tutorials/assets_pipeline/importing_3d_scenes/available_formats.html",
+    "observed_version": "Stable documentation; no exact runtime version inferred",
+    "topic": "mod-build-asset-acceptance",
+    "note": "Editor import stages, Blender-dependent blend conversion and Android/web editor limitation.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "MB11015",
+    "title": "Godot model export considerations",
+    "url": "https://docs.godotengine.org/en/stable/tutorials/assets_pipeline/importing_3d_scenes/model_export_considerations.html",
+    "observed_version": "Stable documentation; no exact runtime version inferred",
+    "topic": "mod-build-asset-acceptance",
+    "note": "Camera forward and model front differ despite sharing a right-handed Y-up coordinate convention.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  }
+]
