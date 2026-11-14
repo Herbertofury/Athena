@@ -1,0 +1,17 @@
+name: Atlas metadata preservation
+on:
+  push:
+    paths: ['migration/engineering-atlas/metadata-2026-11-14/**', 'tests/atlas_metadata_test.py', '.github/workflows/athena-atlas-metadata.yml']
+  pull_request:
+    paths: ['migration/engineering-atlas/metadata-2026-11-14/**', 'tests/atlas_metadata_test.py', '.github/workflows/athena-atlas-metadata.yml']
+permissions:
+  contents: read
+jobs:
+  snapshot-integrity:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - run: python tests/atlas_metadata_test.py
