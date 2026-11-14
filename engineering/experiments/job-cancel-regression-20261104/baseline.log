@@ -1,0 +1,37 @@
+✔ fixed receipt decoder retains complete SQLite integer identity (1.211393ms)
+✔ ambiguous, noncanonical, malformed and oversized receipts stay unconfirmed (0.553008ms)
+✔ one fixed POST with exact payload returns a string id without automatic retries (5.044361ms)
+✔ invalid deadline makes no request (0.453749ms)
+✔ failed status, wrong MIME, invalid UTF-8 and excess bytes never become accepted jobs (1.591983ms)
+✔ fragmented receipt bytes and bounded empty chunks are handled without chunk retention (34.486263ms)
+✔ transport failure is unconfirmed and does not expose its private diagnostic (0.390765ms)
+✖ unconfirmed result does not hang on an uncooperative body cancellation (201.336601ms)
+ℹ tests 8
+ℹ suites 0
+ℹ pass 7
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 341.012652
+
+✖ failing tests:
+
+test at tests/job-submit.test.mjs:31:1
+✖ unconfirmed result does not hang on an uncooperative body cancellation (201.336601ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'hung'
+  - 'unconfirmed'
+  
+      at TestContext.<anonymous> (file:///workspace/scratch/c648c483d888/atlas-reconstruction/tests/job-submit.test.mjs:35:9)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'hung',
+    expected: 'unconfirmed',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

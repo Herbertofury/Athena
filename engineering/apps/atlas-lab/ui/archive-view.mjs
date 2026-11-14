@@ -4,7 +4,9 @@ async function readSavedArchive(kind,id,{signal,fetchImpl}) {
  else if(typeof id!=='string'||!/^[A-Za-z0-9]{8}$/.test(id))throw new Error('Enter one saved canonical eight-character ID.');
  if(!globalThis.crypto?.subtle)throw new Error('Integrity verification is unavailable; no unchecked archive accepted.');
  const response=await fetchImpl('/api/'+kind+'-archive/'+id,{signal,cache:'no-store',redirect:'error',credentials:'same-origin'});
- const reject=async message=>{try{await response.body?.cancel();}catch{}throw new Error(message);};
+ if(signal.aborted){try{Promise.resolve(response.body?.cancel()).catch(()=>{});}catch{} throw signal.reason;}
+ const cancelQuietly=target=>{try{Promise.resolve(target?.cancel()).catch(()=>{});}catch{}};
+ const reject=message=>{cancelQuietly(response.body);throw new Error(message);};
  if(!response.ok)return reject(response.status===404?'No archived response exists for that canonical ID.':'Saved response could not be verified ('+response.status+').');
  if(!/^application\/json(?:\s*;\s*charset=utf-8)?$/i.test(response.headers.get('content-type')||''))return reject('Unexpected saved-response content type.');
  if(response.headers.get('x-atlas-archive-kind')!==kind)return reject('Saved-response kind mismatch.');
@@ -18,9 +20,10 @@ async function readSavedArchive(kind,id,{signal,fetchImpl}) {
  // Retain bytes, not one object per transport chunk. Empty/tiny chunks must
  // not turn the two-MiB byte budget into unbounded retained chunk metadata.
  const reader=response.body.getReader();let buffer=new Uint8Array(0),size=0;
- try{for(;;){const {done,value}=await reader.read();if(done)break;if(!(value instanceof Uint8Array))throw new Error('Unexpected response byte stream.');const next=size+value.byteLength;if(next>MAX_ARCHIVE_BYTES)throw new Error('Saved response exceeds the size budget.');if(next>buffer.length){const grown=new Uint8Array(Math.min(MAX_ARCHIVE_BYTES,Math.max(next,16384,buffer.length*2)));grown.set(buffer.subarray(0,size));buffer=grown;}buffer.set(value,size);size=next;}}
- catch(error){try{await reader.cancel();}catch{}throw error;}
- finally{reader.releaseLock();}
+ let cancelRequested=false; const stop=()=>{if(!cancelRequested){cancelRequested=true;cancelQuietly(reader);}}; signal.addEventListener('abort',stop,{once:true});
+ try{for(;;){const {done,value}=await reader.read();if(signal.aborted)throw signal.reason;if(done)break;if(!(value instanceof Uint8Array))throw new Error('Unexpected response byte stream.');const next=size+value.byteLength;if(next>MAX_ARCHIVE_BYTES)throw new Error('Saved response exceeds the size budget.');if(next>buffer.length){const grown=new Uint8Array(Math.min(MAX_ARCHIVE_BYTES,Math.max(next,16384,buffer.length*2)));grown.set(buffer.subarray(0,size));buffer=grown;}buffer.set(value,size);size=next;}}
+ catch(error){stop();throw error;}
+ finally{signal.removeEventListener('abort',stop);reader.releaseLock();}
  if(size===0)throw new Error('An empty saved response is not accepted.');
  if(length!==null&&BigInt(size)!==BigInt(length))throw new Error('Saved-response length mismatch.');
  const bytes=buffer.length===size?buffer:buffer.slice(0,size);
@@ -38,8 +41,10 @@ export async function loadSavedArchive(kind,id,{signal,fetchImpl=globalThis.fetc
  const controller=new AbortController(),relay=()=>controller.abort(signal.reason);
  signal?.addEventListener('abort',relay,{once:true});
  const timer=setTimeout(()=>controller.abort(new DOMException('Saved-response request timed out','TimeoutError')),timeoutMs);
- try{return await readSavedArchive(kind,id,{signal:controller.signal,fetchImpl});}
- finally{clearTimeout(timer);signal?.removeEventListener('abort',relay);}
+ let abortListener;
+ const aborted=new Promise((_,reject)=>{abortListener=()=>reject(controller.signal.reason);controller.signal.addEventListener('abort',abortListener,{once:true});});
+ try{return await Promise.race([readSavedArchive(kind,id,{signal:controller.signal,fetchImpl}),aborted]);}
+ finally{clearTimeout(timer);controller.signal.removeEventListener('abort',abortListener);signal?.removeEventListener('abort',relay);}
 }
 export function loadSavedProject(id,options){return loadSavedArchive('project',id,options);}
 export function createArchiveSelection(loader=loadSavedProject){
