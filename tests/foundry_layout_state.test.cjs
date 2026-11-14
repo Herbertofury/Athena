@@ -22,3 +22,6 @@ test('rollback is bounded, cloned, reversible and new edits discard redo',async(
  assert.equal(h.redo(state('dusk')).active.time,'night');h.undo(state('night'));h.record(state('day'));assert.equal(h.canRedo,false);assert.equal(h.size,2);
  assert.throws(()=>h.record({version:99}));assert.equal(h.size,2);
 });
+test('workspace view defaults old backups, validates docks and strips unknown view data',async()=>{
+ const m=await ready,base={version:1,active:m.initial(),layouts:{}};assert.deepEqual(m.workspace(base).view,{inspectorDock:'right'});for(const inspectorDock of ['left','right','hidden'])assert.deepEqual(m.workspace({...base,view:{inspectorDock,token:'secret'}}).view,{inspectorDock});for(const view of [null,{},'left',{inspectorDock:'floating'}])assert.throws(()=>m.workspace({...base,view}),/inspector/);
+});
