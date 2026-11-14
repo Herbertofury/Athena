@@ -1,0 +1,20 @@
+{
+  "scope": "local implementation checkpoint; no hosted/native/served acceptance claimed",
+  "python_tests_passed": 366,
+  "focused_srcset_passed": 20,
+  "oracle_inputs": 105987,
+  "oracle_mismatches": 0,
+  "rust_library_tests_passed": 153,
+  "rust_format_check": "passed",
+  "logs": {
+    "rust": {
+      "sha256": "f7c323647b4e6aaad5a53f11bcd14542681d1df2afaf37b504767ded2448c2f2",
+      "bytes": 16921
+    },
+    "clippy": {
+      "sha256": "201552b8f989899763b9882cce0047b67420f19ef12c4c896c3b4e8784e4300a",
+      "bytes": 3498
+    }
+  },
+  "strict_clippy": "passed"
+}

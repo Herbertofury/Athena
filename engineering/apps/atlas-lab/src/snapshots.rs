@@ -108,7 +108,7 @@ impl SnapshotStore {
         {
             return Err("Unverified upstream response metadata".into());
         }
-        let record = crate::upstream_reviews::parse_record(source, bytes)?;
+        let record = crate::upstream_reviews::parse_new_record(source, bytes)?;
         self.prepare_upstream_tables()?;
         let tx = self
             .0
@@ -412,6 +412,48 @@ impl SnapshotStore {
 #[cfg(test)]
 mod tests {
     use super::*;
+    #[test]
+    fn new_release_guard_preserves_last_good_and_legacy_archive_bytes() {
+        use crate::upstream_reviews::{Source, tests::fixture};
+        let mut store = SnapshotStore::open(Path::new(":memory:")).unwrap();
+        let good = fixture("v1.7.4");
+        store
+            .save_upstream(Source::Hls, &good, &upstream_meta(10000))
+            .unwrap();
+        let legacy = fixture("v1.7.5-alpha.1");
+        assert!(
+            store
+                .save_upstream(Source::Hls, &legacy, &upstream_meta(10002))
+                .is_err()
+        );
+        assert_eq!(
+            store
+                .latest_upstream_payload(Source::Hls)
+                .unwrap()
+                .unwrap()
+                .as_bytes(),
+            good
+        );
+        // Model a row accepted before the stricter admission policy. It remains
+        // readable, but replay never grants it new-admission or upgrade status.
+        store
+            .0
+            .execute(
+                "UPDATE snapshots SET payload=?1",
+                [String::from_utf8(legacy.clone()).unwrap()],
+            )
+            .unwrap();
+        assert_eq!(
+            store
+                .latest_upstream_snapshot(Source::Hls)
+                .unwrap()
+                .unwrap()
+                .1
+                .payload
+                .as_bytes(),
+            legacy
+        );
+    }
     #[test]
     fn upstream_archive_snapshot_binds_source_generation_and_complete_bytes() {
         use crate::upstream_reviews::{Source, tests::fixture};

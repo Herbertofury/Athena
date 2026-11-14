@@ -1,0 +1,8 @@
+{
+  "kind": "retained-replay-harness-correction",
+  "initial_comparison": "healthy public record hashes differed because the preliminary baseline replay used the synthetic fixture origin",
+  "cause": "Replay harness context mismatch, not an extractor regression",
+  "preliminary_receipt_sha256": "21baa8d85f4347dd55d02122f56ad0d88f11452b8900b07a7506cad0aee4d2a7",
+  "correction": "Use the public post link as origin in both baseline and candidate replays; both final healthy record hashes are equal",
+  "final_real_record_sha256": "295070234dfd7cf14bf07f2a9bcef34bac43e75ec4dae7c354d037d751258e13"
+}
