@@ -84,6 +84,10 @@ Certification and vendor names belong to their owners. Athena is independent and
 Read [the workspace contract](docs/integration/WORKSPACE-CONTRACT.md) and [current integration evidence](docs/integration/STATUS.md). The reviewed public-preview package includes Learning, Engineering workspaces and Foundry authoring, not private databases, credentials or original private assets. Engineering Lab requires `serve-athena`; Foundry's SQLite profile requires its explicit local bridge. Neither connects to a private database from public Pages. `scripts/package_app.py` verifies the exact reviewed hashes in `config/runtime-public-preview.json`. The `public-preview` label does not mean Foundry is absent; it means complete original-source parity is not claimed. Default `complete` mode still requires the additional Foundry entry specified by the packager and is not a retirement certificate.
 
 
+## Developer cleanup research
+
+- [Developer and AI-agent cleanup: ranked tools](research/developer-cleanup-2026-11-14/README.md): 66 official-source projects, GitHub stars and Windows download links.
+
 ## Competing apps and alternative workflows
 
 [Comparison hub](COMPETITORS.md): relevant baselines, source-backed alternatives, existing research catalogs and concrete validation priorities. Candidate ideas are not claims of measured superiority.
