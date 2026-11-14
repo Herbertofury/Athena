@@ -1,0 +1,889 @@
+{
+  "schema": 1,
+  "themes": [
+    {
+      "id": "frutiger-aero",
+      "name": "Frutiger Aero",
+      "rooms": [
+        {
+          "id": "frutiger-aero:room:aqua-atrium",
+          "name": "Aqua Atrium"
+        },
+        {
+          "id": "frutiger-aero:room:cloud-terminal",
+          "name": "Cloud Terminal"
+        }
+      ],
+      "objects": [
+        {
+          "id": "frutiger-aero:aqua-globe",
+          "name": "Aqua Globe",
+          "shape": "orb",
+          "role": "anchor"
+        },
+        {
+          "id": "frutiger-aero:cloud-terminal",
+          "name": "Cloud Terminal",
+          "shape": "tower",
+          "role": "play"
+        },
+        {
+          "id": "frutiger-aero:leaf-fan",
+          "name": "Leaf Fan",
+          "shape": "console",
+          "role": "play"
+        },
+        {
+          "id": "frutiger-aero:water-orb",
+          "name": "Water Orb",
+          "shape": "chair",
+          "role": "play"
+        },
+        {
+          "id": "frutiger-aero:glass-dolphin",
+          "name": "Glass Dolphin",
+          "shape": "sign",
+          "role": "scenic"
+        }
+      ],
+      "colors": [
+        "#67d9ff",
+        "#7cf6a5",
+        "#e9fbff",
+        "#146b93"
+      ]
+    },
+    {
+      "id": "utopian-scholastic",
+      "name": "Utopian Scholastic",
+      "rooms": [
+        {
+          "id": "utopian-scholastic:room:archive-rotunda",
+          "name": "Archive Rotunda"
+        },
+        {
+          "id": "utopian-scholastic:room:learning-commons",
+          "name": "Learning Commons"
+        }
+      ],
+      "objects": [
+        {
+          "id": "utopian-scholastic:orrery",
+          "name": "Orrery",
+          "shape": "orb",
+          "role": "anchor"
+        },
+        {
+          "id": "utopian-scholastic:reading-lamp",
+          "name": "Reading Lamp",
+          "shape": "tower",
+          "role": "play"
+        },
+        {
+          "id": "utopian-scholastic:archive-globe",
+          "name": "Archive Globe",
+          "shape": "console",
+          "role": "play"
+        },
+        {
+          "id": "utopian-scholastic:museum-plinth",
+          "name": "Museum Plinth",
+          "shape": "chair",
+          "role": "play"
+        },
+        {
+          "id": "utopian-scholastic:wayfinding-totem",
+          "name": "Wayfinding Totem",
+          "shape": "sign",
+          "role": "scenic"
+        }
+      ],
+      "colors": [
+        "#ffd36a",
+        "#75c9ff",
+        "#f7f0d5",
+        "#344f78"
+      ]
+    },
+    {
+      "id": "wacky-pomo",
+      "name": "Wacky Pomo",
+      "rooms": [
+        {
+          "id": "wacky-pomo:room:sottsass-salon",
+          "name": "Sottsass Salon"
+        },
+        {
+          "id": "wacky-pomo:room:object-theatre",
+          "name": "Object Theatre"
+        }
+      ],
+      "objects": [
+        {
+          "id": "wacky-pomo:sculpture-chair",
+          "name": "Sculpture Chair",
+          "shape": "orb",
+          "role": "anchor"
+        },
+        {
+          "id": "wacky-pomo:pattern-column",
+          "name": "Pattern Column",
+          "shape": "tower",
+          "role": "play"
+        },
+        {
+          "id": "wacky-pomo:crooked-clock",
+          "name": "Crooked Clock",
+          "shape": "console",
+          "role": "play"
+        },
+        {
+          "id": "wacky-pomo:totem-lamp",
+          "name": "Totem Lamp",
+          "shape": "chair",
+          "role": "play"
+        },
+        {
+          "id": "wacky-pomo:impossible-vase",
+          "name": "Impossible Vase",
+          "shape": "sign",
+          "role": "scenic"
+        }
+      ],
+      "colors": [
+        "#ff5d7d",
+        "#ffe04a",
+        "#5be0c3",
+        "#36213e"
+      ]
+    },
+    {
+      "id": "contempo-eclectic",
+      "name": "Contempo Eclectic",
+      "rooms": [
+        {
+          "id": "contempo-eclectic:room:gallery-living-room",
+          "name": "Gallery Living Room"
+        },
+        {
+          "id": "contempo-eclectic:room:material-library",
+          "name": "Material Library"
+        }
+      ],
+      "objects": [
+        {
+          "id": "contempo-eclectic:travertine-table",
+          "name": "Travertine Table",
+          "shape": "orb",
+          "role": "anchor"
+        },
+        {
+          "id": "contempo-eclectic:art-lamp",
+          "name": "Art Lamp",
+          "shape": "tower",
+          "role": "play"
+        },
+        {
+          "id": "contempo-eclectic:velvet-chair",
+          "name": "Velvet Chair",
+          "shape": "console",
+          "role": "play"
+        },
+        {
+          "id": "contempo-eclectic:gallery-vessel",
+          "name": "Gallery Vessel",
+          "shape": "chair",
+          "role": "play"
+        },
+        {
+          "id": "contempo-eclectic:collected-screen",
+          "name": "Collected Screen",
+          "shape": "sign",
+          "role": "scenic"
+        }
+      ],
+      "colors": [
+        "#d8b48a",
+        "#789b8b",
+        "#f4eee5",
+        "#4d3e38"
+      ]
+    },
+    {
+      "id": "vaporwave",
+      "name": "Vaporwave",
+      "rooms": [
+        {
+          "id": "vaporwave:room:food-court-mirage",
+          "name": "Food Court Mirage"
+        },
+        {
+          "id": "vaporwave:room:statue-arcade",
+          "name": "Statue Arcade"
+        }
+      ],
+      "objects": [
+        {
+          "id": "vaporwave:marble-bust",
+          "name": "Marble Bust",
+          "shape": "orb",
+          "role": "anchor"
+        },
+        {
+          "id": "vaporwave:palm-terminal",
+          "name": "Palm Terminal",
+          "shape": "tower",
+          "role": "play"
+        },
+        {
+          "id": "vaporwave:vhs-shrine",
+          "name": "VHS Shrine",
+          "shape": "console",
+          "role": "play"
+        },
+        {
+          "id": "vaporwave:mall-fountain",
+          "name": "Mall Fountain",
+          "shape": "chair",
+          "role": "play"
+        },
+        {
+          "id": "vaporwave:sunset-crt",
+          "name": "Sunset CRT",
+          "shape": "sign",
+          "role": "scenic"
+        }
+      ],
+      "colors": [
+        "#ff71ce",
+        "#01cdfe",
+        "#b967ff",
+        "#2a0a55"
+      ]
+    },
+    {
+      "id": "neo-y2k",
+      "name": "Neo-Y2K",
+      "rooms": [
+        {
+          "id": "neo-y2k:room:translucent-bedroom",
+          "name": "Translucent Bedroom"
+        },
+        {
+          "id": "neo-y2k:room:device-boutique",
+          "name": "Device Boutique"
+        }
+      ],
+      "objects": [
+        {
+          "id": "neo-y2k:bubble-console",
+          "name": "Bubble Console",
+          "shape": "orb",
+          "role": "anchor"
+        },
+        {
+          "id": "neo-y2k:chrome-speaker",
+          "name": "Chrome Speaker",
+          "shape": "tower",
+          "role": "play"
+        },
+        {
+          "id": "neo-y2k:translucent-phone",
+          "name": "Translucent Phone",
+          "shape": "console",
+          "role": "play"
+        },
+        {
+          "id": "neo-y2k:gel-chair",
+          "name": "Gel Chair",
+          "shape": "chair",
+          "role": "play"
+        },
+        {
+          "id": "neo-y2k:orbital-webcam",
+          "name": "Orbital Webcam",
+          "shape": "sign",
+          "role": "scenic"
+        }
+      ],
+      "colors": [
+        "#ff4fd8",
+        "#7effff",
+        "#b6ff45",
+        "#4726ff"
+      ]
+    },
+    {
+      "id": "liminal-leisure",
+      "name": "Liminal Leisure",
+      "rooms": [
+        {
+          "id": "liminal-leisure:room:infinite-pool",
+          "name": "Infinite Pool"
+        },
+        {
+          "id": "liminal-leisure:room:silent-hotel-hall",
+          "name": "Silent Hotel Hall"
+        }
+      ],
+      "objects": [
+        {
+          "id": "liminal-leisure:pool-ladder",
+          "name": "Pool Ladder",
+          "shape": "orb",
+          "role": "anchor"
+        },
+        {
+          "id": "liminal-leisure:wet-floor-sign",
+          "name": "Wet Floor Sign",
+          "shape": "tower",
+          "role": "play"
+        },
+        {
+          "id": "liminal-leisure:hotel-lamp",
+          "name": "Hotel Lamp",
+          "shape": "console",
+          "role": "play"
+        },
+        {
+          "id": "liminal-leisure:dream-float",
+          "name": "Dream Float",
+          "shape": "chair",
+          "role": "play"
+        },
+        {
+          "id": "liminal-leisure:hallway-plant",
+          "name": "Hallway Plant",
+          "shape": "sign",
+          "role": "scenic"
+        }
+      ],
+      "colors": [
+        "#8ce9e3",
+        "#f4e7ae",
+        "#b8b5ff",
+        "#4c6680"
+      ]
+    },
+    {
+      "id": "diner-kitsch",
+      "name": "Diner Kitsch",
+      "rooms": [
+        {
+          "id": "diner-kitsch:room:pie-counter",
+          "name": "Pie Counter"
+        },
+        {
+          "id": "diner-kitsch:room:jukebox-booth",
+          "name": "Jukebox Booth"
+        }
+      ],
+      "objects": [
+        {
+          "id": "diner-kitsch:jukebox",
+          "name": "Jukebox",
+          "shape": "orb",
+          "role": "anchor"
+        },
+        {
+          "id": "diner-kitsch:pie-case",
+          "name": "Pie Case",
+          "shape": "tower",
+          "role": "play"
+        },
+        {
+          "id": "diner-kitsch:counter-stool",
+          "name": "Counter Stool",
+          "shape": "console",
+          "role": "play"
+        },
+        {
+          "id": "diner-kitsch:milkshake-lamp",
+          "name": "Milkshake Lamp",
+          "shape": "chair",
+          "role": "play"
+        },
+        {
+          "id": "diner-kitsch:menu-rocket",
+          "name": "Menu Rocket",
+          "shape": "sign",
+          "role": "scenic"
+        }
+      ],
+      "colors": [
+        "#ff4f5e",
+        "#54e1d6",
+        "#fff0c2",
+        "#2a3847"
+      ]
+    },
+    {
+      "id": "cassette-futurism",
+      "name": "Cassette Futurism",
+      "rooms": [
+        {
+          "id": "cassette-futurism:room:mission-lounge",
+          "name": "Mission Lounge"
+        },
+        {
+          "id": "cassette-futurism:room:tape-service-bay",
+          "name": "Tape Service Bay"
+        }
+      ],
+      "objects": [
+        {
+          "id": "cassette-futurism:mission-crt",
+          "name": "Mission CRT",
+          "shape": "orb",
+          "role": "anchor"
+        },
+        {
+          "id": "cassette-futurism:tape-deck",
+          "name": "Tape Deck",
+          "shape": "tower",
+          "role": "play"
+        },
+        {
+          "id": "cassette-futurism:service-robot",
+          "name": "Service Robot",
+          "shape": "console",
+          "role": "play"
+        },
+        {
+          "id": "cassette-futurism:console-chair",
+          "name": "Console Chair",
+          "shape": "chair",
+          "role": "play"
+        },
+        {
+          "id": "cassette-futurism:status-beacon",
+          "name": "Status Beacon",
+          "shape": "sign",
+          "role": "scenic"
+        }
+      ],
+      "colors": [
+        "#ff9f43",
+        "#77d7c8",
+        "#d8d1bd",
+        "#27313d"
+      ]
+    },
+    {
+      "id": "googie-kitsch",
+      "name": "Googie Kitsch",
+      "rooms": [
+        {
+          "id": "googie-kitsch:room:saucer-lounge",
+          "name": "Saucer Lounge"
+        },
+        {
+          "id": "googie-kitsch:room:motel-coffeehouse",
+          "name": "Motel Coffeehouse"
+        }
+      ],
+      "objects": [
+        {
+          "id": "googie-kitsch:motel-pylon",
+          "name": "Motel Pylon",
+          "shape": "orb",
+          "role": "anchor"
+        },
+        {
+          "id": "googie-kitsch:saucer-lamp",
+          "name": "Saucer Lamp",
+          "shape": "tower",
+          "role": "play"
+        },
+        {
+          "id": "googie-kitsch:boomerang-bench",
+          "name": "Boomerang Bench",
+          "shape": "console",
+          "role": "play"
+        },
+        {
+          "id": "googie-kitsch:coffeehouse-sign",
+          "name": "Coffeehouse Sign",
+          "shape": "chair",
+          "role": "play"
+        },
+        {
+          "id": "googie-kitsch:rocket-fin",
+          "name": "Rocket Fin",
+          "shape": "sign",
+          "role": "scenic"
+        }
+      ],
+      "colors": [
+        "#ff6542",
+        "#4fe0ff",
+        "#ffe45e",
+        "#1e3a5f"
+      ]
+    },
+    {
+      "id": "french-synthpop",
+      "name": "French Synthpop",
+      "rooms": [
+        {
+          "id": "french-synthpop:room:candy-tv-studio",
+          "name": "Candy TV Studio"
+        },
+        {
+          "id": "french-synthpop:room:midnight-boutique",
+          "name": "Midnight Boutique"
+        }
+      ],
+      "objects": [
+        {
+          "id": "french-synthpop:banana-phone",
+          "name": "Banana Phone",
+          "shape": "orb",
+          "role": "anchor"
+        },
+        {
+          "id": "french-synthpop:studio-mirror",
+          "name": "Studio Mirror",
+          "shape": "tower",
+          "role": "play"
+        },
+        {
+          "id": "french-synthpop:pop-microphone",
+          "name": "Pop Microphone",
+          "shape": "console",
+          "role": "play"
+        },
+        {
+          "id": "french-synthpop:boutique-tv",
+          "name": "Boutique TV",
+          "shape": "chair",
+          "role": "play"
+        },
+        {
+          "id": "french-synthpop:candy-synth",
+          "name": "Candy Synth",
+          "shape": "sign",
+          "role": "scenic"
+        }
+      ],
+      "colors": [
+        "#ff77ad",
+        "#7d8cff",
+        "#ffe6ef",
+        "#3c2a5d"
+      ]
+    },
+    {
+      "id": "memphis",
+      "name": "Memphis",
+      "rooms": [
+        {
+          "id": "memphis:room:broadcast-lounge",
+          "name": "Broadcast Lounge"
+        },
+        {
+          "id": "memphis:room:laminate-playroom",
+          "name": "Laminate Playroom"
+        }
+      ],
+      "objects": [
+        {
+          "id": "memphis:broadcast-totem",
+          "name": "Broadcast Totem",
+          "shape": "orb",
+          "role": "anchor"
+        },
+        {
+          "id": "memphis:laminate-desk",
+          "name": "Laminate Desk",
+          "shape": "tower",
+          "role": "play"
+        },
+        {
+          "id": "memphis:squiggle-lamp",
+          "name": "Squiggle Lamp",
+          "shape": "console",
+          "role": "play"
+        },
+        {
+          "id": "memphis:pattern-sofa",
+          "name": "Pattern Sofa",
+          "shape": "chair",
+          "role": "play"
+        },
+        {
+          "id": "memphis:geometry-tv",
+          "name": "Geometry TV",
+          "shape": "sign",
+          "role": "scenic"
+        }
+      ],
+      "colors": [
+        "#ff4c7a",
+        "#ffd43b",
+        "#30c7c9",
+        "#2f2455"
+      ]
+    },
+    {
+      "id": "ethereal-cgi",
+      "name": "Ethereal CGI",
+      "rooms": [
+        {
+          "id": "ethereal-cgi:room:dolphin-fountain",
+          "name": "Dolphin Fountain"
+        },
+        {
+          "id": "ethereal-cgi:room:floating-island-lab",
+          "name": "Floating Island Lab"
+        }
+      ],
+      "objects": [
+        {
+          "id": "ethereal-cgi:crystal-dolphin",
+          "name": "Crystal Dolphin",
+          "shape": "orb",
+          "role": "anchor"
+        },
+        {
+          "id": "ethereal-cgi:floating-island",
+          "name": "Floating Island",
+          "shape": "tower",
+          "role": "play"
+        },
+        {
+          "id": "ethereal-cgi:dreamcast-orb",
+          "name": "Dreamcast Orb",
+          "shape": "console",
+          "role": "play"
+        },
+        {
+          "id": "ethereal-cgi:polygon-fountain",
+          "name": "Polygon Fountain",
+          "shape": "chair",
+          "role": "play"
+        },
+        {
+          "id": "ethereal-cgi:sky-pillar",
+          "name": "Sky Pillar",
+          "shape": "sign",
+          "role": "scenic"
+        }
+      ],
+      "colors": [
+        "#91e6ff",
+        "#d5a7ff",
+        "#fff7c4",
+        "#5361a8"
+      ]
+    },
+    {
+      "id": "divine-machinery",
+      "name": "Divine Machinery",
+      "rooms": [
+        {
+          "id": "divine-machinery:room:reliquary-nave",
+          "name": "Reliquary Nave"
+        },
+        {
+          "id": "divine-machinery:room:choir-control-room",
+          "name": "Choir Control Room"
+        }
+      ],
+      "objects": [
+        {
+          "id": "divine-machinery:reliquary-crt",
+          "name": "Reliquary CRT",
+          "shape": "orb",
+          "role": "anchor"
+        },
+        {
+          "id": "divine-machinery:choir-terminal",
+          "name": "Choir Terminal",
+          "shape": "tower",
+          "role": "play"
+        },
+        {
+          "id": "divine-machinery:transmission-heart",
+          "name": "Transmission Heart",
+          "shape": "console",
+          "role": "play"
+        },
+        {
+          "id": "divine-machinery:stained-console",
+          "name": "Stained Console",
+          "shape": "chair",
+          "role": "play"
+        },
+        {
+          "id": "divine-machinery:halo-tower",
+          "name": "Halo Tower",
+          "shape": "sign",
+          "role": "scenic"
+        }
+      ],
+      "colors": [
+        "#f5c96b",
+        "#76c5ff",
+        "#ff6f91",
+        "#291f45"
+      ]
+    },
+    {
+      "id": "dark-fantasy",
+      "name": "Dark Fantasy",
+      "rooms": [
+        {
+          "id": "dark-fantasy:room:black-lake-keep",
+          "name": "Black Lake Keep"
+        },
+        {
+          "id": "dark-fantasy:room:crystal-cavern",
+          "name": "Crystal Cavern"
+        }
+      ],
+      "objects": [
+        {
+          "id": "dark-fantasy:moonwell",
+          "name": "Moonwell",
+          "shape": "orb",
+          "role": "anchor"
+        },
+        {
+          "id": "dark-fantasy:cursed-armor",
+          "name": "Cursed Armor",
+          "shape": "tower",
+          "role": "play"
+        },
+        {
+          "id": "dark-fantasy:crystal-brazier",
+          "name": "Crystal Brazier",
+          "shape": "console",
+          "role": "play"
+        },
+        {
+          "id": "dark-fantasy:moss-throne",
+          "name": "Moss Throne",
+          "shape": "chair",
+          "role": "play"
+        },
+        {
+          "id": "dark-fantasy:fae-mirror",
+          "name": "Fae Mirror",
+          "shape": "sign",
+          "role": "scenic"
+        }
+      ],
+      "colors": [
+        "#9ca7ff",
+        "#57b79c",
+        "#e8c67a",
+        "#21182f"
+      ]
+    },
+    {
+      "id": "atomic-age",
+      "name": "Atomic Age",
+      "rooms": [
+        {
+          "id": "atomic-age:room:hi-fi-lounge",
+          "name": "Hi-Fi Lounge"
+        },
+        {
+          "id": "atomic-age:room:science-fair-patio",
+          "name": "Science Fair Patio"
+        }
+      ],
+      "objects": [
+        {
+          "id": "atomic-age:sputnik-lamp",
+          "name": "Sputnik Lamp",
+          "shape": "orb",
+          "role": "anchor"
+        },
+        {
+          "id": "atomic-age:hi-fi-console",
+          "name": "Hi-Fi Console",
+          "shape": "tower",
+          "role": "play"
+        },
+        {
+          "id": "atomic-age:molecular-chair",
+          "name": "Molecular Chair",
+          "shape": "console",
+          "role": "play"
+        },
+        {
+          "id": "atomic-age:patio-planter",
+          "name": "Patio Planter",
+          "shape": "chair",
+          "role": "play"
+        },
+        {
+          "id": "atomic-age:science-fair-tv",
+          "name": "Science Fair TV",
+          "shape": "sign",
+          "role": "scenic"
+        }
+      ],
+      "colors": [
+        "#ff7f66",
+        "#5bd5cf",
+        "#ffe56b",
+        "#35546b"
+      ]
+    },
+    {
+      "id": "jazz-design",
+      "name": "Jazz Design / Solo Jazz",
+      "rooms": [
+        {
+          "id": "jazz-design:room:solo-lounge",
+          "name": "Solo Lounge"
+        },
+        {
+          "id": "jazz-design:room:rhythm-studio",
+          "name": "Rhythm Studio"
+        }
+      ],
+      "objects": [
+        {
+          "id": "jazz-design:brass-halo-lamp",
+          "name": "Brass Halo Lamp",
+          "shape": "orb",
+          "role": "anchor"
+        },
+        {
+          "id": "jazz-design:midnight-mix-desk",
+          "name": "Midnight Mix Desk",
+          "shape": "tower",
+          "role": "play"
+        },
+        {
+          "id": "jazz-design:velvet-lounge-chair",
+          "name": "Velvet Lounge Chair",
+          "shape": "chair",
+          "role": "play"
+        },
+        {
+          "id": "jazz-design:vinyl-bloom",
+          "name": "Vinyl Bloom",
+          "shape": "console",
+          "role": "play"
+        },
+        {
+          "id": "jazz-design:neon-score-sign",
+          "name": "Neon Score Sign",
+          "shape": "sign",
+          "role": "scenic"
+        }
+      ],
+      "colors": [
+        "#f2c14e",
+        "#ff5d8f",
+        "#39c6d8",
+        "#24163c"
+      ]
+    }
+  ]
+}

@@ -3,7 +3,7 @@
 const fs=require('node:fs'),path=require('node:path'),os=require('node:os');
 const {spawnSync}=require('node:child_process');
 function plan(root,temporary,env=process.env){
-  const lab=path.join(root,'engineering/apps/atlas-lab'),target=path.join(temporary,'target');
+  const lab=path.join(root,'engineering/apps/atlas-lab'),foundry=path.join(root,'crates/athena-foundry-store'),target=path.join(temporary,'target');
   const output=path.resolve(root,env.ATHENA_BROWSER_OUTPUT||'browser-results');
   const pkg=path.join(temporary,'package');
   const cargoEnv={...env,CARGO_BUILD_JOBS:'2'};
@@ -20,6 +20,8 @@ function plan(root,temporary,env=process.env){
     {name:'accessibility-browser',command:process.execPath,args:['scripts/test_accessibility_browser.cjs'],cwd:root,env:{...env,ATHENA_ACCESSIBILITY_BROWSER_OUTPUT:path.join(output,'accessibility')},timeout:300000},
     {name:'rust-tests',command:'cargo',args:['test','--locked','--all-targets','--target-dir',target],cwd:lab,env:cargoEnv,timeout:900000},
     {name:'rust-clippy',command:'cargo',args:['clippy','--locked','--all-targets','--target-dir',target,'--','-D','warnings'],cwd:lab,env:cargoEnv,timeout:900000},
+    {name:'foundry-store-tests',command:'cargo',args:['test','--locked','--all-targets','--target-dir',target],cwd:foundry,env:cargoEnv,timeout:900000},
+    {name:'foundry-store-clippy',command:'cargo',args:['clippy','--locked','--all-targets','--target-dir',target,'--','-D','warnings'],cwd:foundry,env:cargoEnv,timeout:900000},
     {name:'rust-build',command:'cargo',args:['build','--locked','--bin','atlas-lab','--target-dir',target],cwd:lab,env:cargoEnv,timeout:900000},
     {name:'verified-package',command:env.PYTHON||'python3',args:['scripts/package_app.py','--profile','public-preview','--allowlist','config/runtime-public-preview.json','--output',pkg],cwd:root,env,timeout:60000},
     {name:'rust-browser',command:process.execPath,args:['scripts/test_lab_runtime.cjs'],cwd:root,env:{...env,ATHENA_LAB_BINARY:path.join(target,'debug',process.platform==='win32'?'atlas-lab.exe':'atlas-lab'),ATHENA_RUNTIME_PACKAGE:pkg,ATHENA_LAB_TEST_OUTPUT:path.join(output,'lab-runtime'),ATHENA_LAB_HTTP_ONLY:'0'},timeout:240000}
