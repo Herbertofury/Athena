@@ -5,8 +5,48 @@
 const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto');
 
 async function runMediaBrowserChecks({page,origin,root,report,check}){
+  await check('Media accepts exact Nexus large-preview URLs without automatic image requests',async()=>{
+    const fixture={schema_version:1,access:'public-only',private_data_included:false,cards:[
+      {game:1151,mod:42147,domain:'fallout4',name:'F4SE preview fixture',image:'42147-1574018373-1181117442.jpeg',bucket:'42'},
+      {game:4187,mod:106,domain:'starfield',name:'SFSE preview fixture',image:'106-1692987450-947775764.png',bucket:'10'},
+    ].map(value=>({id:`nexus:${value.game}:${value.mod}`,provider:'Nexus Mods',kind:'mod',title:value.name,
+      creator:'Synthetic browser projection',summary:'Recorded public API URL examples; no live collection in this check.',
+      source:`https://www.nexusmods.com/${value.domain}/mods/${value.mod}`,
+      cover:`https://images.nexusmods.com/mod-images/${value.game}/t/large/${value.bucket}/${value.mod}/${value.image}`,
+      gallery:[{preview:`https://images.nexusmods.com/mod-images/${value.game}/t/large/${value.bucket}/${value.mod}/${value.image}`,
+        original:`https://staticdelivery.nexusmods.com/mods/${value.game}/images/${value.mod}/${value.image}`}],videos:[],
+      completeness:'One cover/preview pair only; full gallery and file payloads unverified.'}))};
+    const fixtureUrl=origin+'/workspaces/engineering/media/public-fixtures.json';
+    const body=JSON.stringify(fixture),handler=route=>route.fulfill({status:200,contentType:'application/json',body});
+    await page.route(fixtureUrl,handler);
+    try{
+      const result=await page.evaluate(async fixture=>{
+        const {mount}=await import('/workspaces/engineering/media/index.mjs');
+        const container=document.createElement('section');document.body.append(container);let controller;
+        const require=(condition,message)=>{if(!condition)throw Error(message);};
+        try{
+          controller=await mount({container,route:'#media?q=',theme:'dark'});require(controller.ready,'Nexus fixture did not mount');
+          const root=container.shadowRoot,cards=[...root.querySelectorAll('article.card')];require(cards.length===2,'Missing Nexus cards');
+          for(const [index,card]of cards.entries()){
+            const expected=fixture.cards[index];require(card.dataset.cardId===expected.id,'Wrong Nexus identity');
+            require(card.querySelector('.source').href===expected.source,'Wrong source link');
+            require(card.querySelector('.gallery a').href===expected.gallery[0].original,'Original image URL changed');
+            const images=[...card.querySelectorAll('img')];require(images.length===2,'Missing cover or preview');
+            for(const image of images){require(image.dataset.source===expected.cover,'Large preview URL lost');require(!image.hasAttribute('src'),'Image loaded without explicit action');}
+            require(card.querySelectorAll('video,audio,iframe').length===0,'Unexpected player');
+          }
+          const receipt=controller.exportState().receipt;require(receipt.fixture_counts.cards===2&&receipt.fixture_counts.gallery_images===2&&receipt.fixture_counts.video_entries===0,'Wrong receipt counts');
+          controller.unmount();require(root.childNodes.length===0,'Unmount left Nexus workspace DOM');
+          return {cards:cards.length,pendingImages:4,automaticImages:0,players:0,fixtureSHA256:receipt.fixture_sha256,
+            scope:'Actual native-workspace DOM with synthetic projection of recorded API URLs; no live image decode, full gallery or file download acceptance'};
+        }finally{controller?.unmount();container.remove();}
+      },fixture);
+      assert.equal(result.fixtureSHA256,crypto.createHash('sha256').update(body).digest('hex'));
+      assert.equal(result.cards,2);assert.equal(result.pendingImages,4);assert.equal(result.automaticImages,0);assert.equal(result.players,0);report.nexusLargePreview=result;
+    }finally{await page.unroute(fixtureUrl,handler);}
+  });
   await check('Media served correction modules match the reviewed runtime bytes',async()=>{
-    const names=['index.mjs','event-log-view.mjs','media-event-recorder.mjs'];
+    const names=['index.mjs','event-log-view.mjs','media-event-recorder.mjs','media-core.mjs'];
     const identities=await page.evaluate(async names=>{
       const result={};for(const name of names){const response=await fetch('/workspaces/engineering/media/'+name,{cache:'no-store'});if(!response.ok)throw Error('Media module unavailable: '+name);const bytes=await response.arrayBuffer();result[name]=Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',bytes)),b=>b.toString(16).padStart(2,'0')).join('');}return result;
     },names);
