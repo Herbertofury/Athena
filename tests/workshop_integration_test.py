@@ -19,13 +19,13 @@ BY_ID = {x['id']: x for x in C['lessons']}
 
 class WorkshopIntegration(unittest.TestCase):
     def test_complete_nonoverlapping_inventory(self):
-        self.assertEqual(len(C['lessons']), 90)
-        self.assertEqual(len(BY_ID), 90)
-        self.assertEqual(len(PATHS), 5)
-        self.assertEqual(len(LESSONS), 42)
+        self.assertEqual(len(C['lessons']), 98)
+        self.assertEqual(len(BY_ID), 98)
+        self.assertEqual(len(PATHS), 6)
+        self.assertEqual(len(LESSONS), 50)
         self.assertEqual(C['learningPaths'][0]['id'], 'packet-trail')
         self.assertEqual(C['learningPaths'][1:], C['workshops'])
-        self.assertEqual(Counter(x['answer'] for x in C['lessons']), {0:23,1:23,2:22,3:22})
+        self.assertEqual(Counter(x['answer'] for x in C['lessons']), {0:25,1:25,2:24,3:24})
         self.assertEqual(len(C['diagnosisCases']), 3)
         self.assertEqual(len(C['certifications']), 13)
         self.assertEqual(sum(len(x['domains']) for x in C['certifications']), 74)
@@ -47,7 +47,7 @@ class WorkshopIntegration(unittest.TestCase):
 
     def test_paths_prerequisites_downloads_and_sources(self):
         ids = set(BY_ID)
-        self.assertEqual([len(x['lessonIds']) for x in PATHS], [10,8,8,8,8])
+        self.assertEqual([len(x['lessonIds']) for x in PATHS], [10,8,8,8,8,8])
         for path in C['workshops']:
             self.assertTrue(set(path['lessonIds'] + path['prerequisites']) <= ids)
             self.assertEqual(path['caseIds'], [])
@@ -70,7 +70,7 @@ class WorkshopIntegration(unittest.TestCase):
                 self.assertIn(check['why'], doc)
             if item.get('workedCode'):
                 self.assertIn(item['workedCode'], doc)
-        self.assertEqual(sum(bool(x.get('workedCode')) for x in LESSONS), 16)
+        self.assertEqual(sum(bool(x.get('workedCode')) for x in LESSONS), 24)
 
     def test_generated_runtime_catalog_matches_source(self):
         text = (R / 'dist/catalog.js').read_text()

@@ -50,7 +50,7 @@ cat['learningPaths']=[PATH, *WORKSHOP_PATHS]
 cat['workshops']=WORKSHOP_PATHS
 cat['workshopSources']=WORKSHOP_SOURCES
 cat['diagnosisCases']=CASES
-cat['coverageStatement']='All 13 requested credentials are organized. This release contains 90 original lessons: the existing 48 foundations and Packet Trail lessons plus 42 applied lessons across five workshops. The workshops include 126 original checks (42 primary and 84 supplemental), worked examples, safe offline exercises and evidence worksheets. All 74 credential-domain rows remain roadmaps, not completed exam coverage. Real-cloud labs and Power BI workflows are unexecuted; read marks, XP and reference tests do not establish practical mastery or exam readiness.'
+cat['coverageStatement']='All 13 requested credentials are organized. This release contains 98 original lessons: the existing 48 foundations and Packet Trail lessons plus 50 applied lessons across six workshops. The workshops include 150 original checks (50 primary and 100 supplemental), worked examples, safe offline exercises and evidence worksheets. All 74 credential-domain rows remain roadmaps, not completed exam coverage. Real-cloud labs and Power BI workflows are unexecuted; read marks, XP and reference tests do not establish practical mastery or exam readiness.'
 (R/'src/catalog.json').write_text(json.dumps(cat,indent=2,ensure_ascii=False)+'\n')
 (R/'dist/catalog.js').write_text('globalThis.ATHENA_DATA = '+json.dumps(cat,ensure_ascii=False)+';\n')
 # Repository-native documentation and ready-to-publish wiki, both generated from the same catalog.
