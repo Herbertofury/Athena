@@ -1,0 +1,2 @@
+const test=require('node:test'),assert=require('node:assert/strict'),{spawnSync}=require('node:child_process');
+test('wiki partial-sync ownership history regressions',()=>{const result=spawnSync('python3',['tests/wiki_history_test.py','-v'],{encoding:'utf8',timeout:30000});assert.equal(result.error,undefined);assert.equal(result.status,0,result.stdout+'\n'+result.stderr);assert.match(result.stderr,/Ran 6 tests/);});
