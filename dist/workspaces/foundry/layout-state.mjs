@@ -77,3 +77,10 @@ export function createLayoutHistory(model,limit=50){
   get size(){return past.length+future.length;}
  };
 }
+
+/** Source fitSelectedToView: approximate base-box fit, not rotated/skewed visual bounds. */
+export function fitBaseToSurface({width,height,baseWidth,baseHeight,scaleX=1,scaleY=1}){
+ if(![width,height,baseWidth,baseHeight].every(n=>typeof n==='number'&&Number.isFinite(n)&&n>0)||![scaleX,scaleY].every(n=>typeof n==='number'&&Number.isFinite(n)&&n!==0))throw Error('Visible surface and untransformed object dimensions are required.');
+ const base=Math.max(baseWidth,baseHeight),fit=Math.min(3,Math.max(.05,Math.min((width-24)/base,(height-24)/base)));
+ return {scaleX:fit*(scaleX<0?-1:1),scaleY:fit*(scaleY<0?-1:1)};
+}

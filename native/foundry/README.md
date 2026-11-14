@@ -129,3 +129,11 @@ module-independence tests, plus `CHROMIUM_PATH=<installed-browser> node
 scripts/test_foundry_canvas_browser.cjs` for desktop/mobile controls, Escape/Tab, draft retention,
 unchanged local storage and route teardown. Synthetic browser checks do not establish original
 asset fidelity, Windows installer acceptance or completion of remaining migration gates.
+
+## Selected base-box Center and Fit
+
+The inspector adapts original `prototype-v24.ts` `centerSelected`/`fitSelectedToView` (lines 304–305), using native normalized surfaces rather than original viewport-pixel coordinates. Center sets the untransformed base-box center to 50%/50%; it does not center a rotated/skewed silhouette. Fit separately uses the resolved native surface client dimensions and actor offsetWidth/offsetHeight: scale magnitude `clamp(min((width-24)/max(baseWidth,baseHeight), (height-24)/max(baseWidth,baseHeight)), .05, 3)`, preserving each mirror sign. This is the original approximate square-base formula, not guaranteed transformed-bounds containment.
+
+Both actions refuse pinned, hidden/filtered, zero-size or unavailable targets without relocation. Identity, scope/anchor, origin, rotation and unrelated fields remain unchanged. Center retains format; Fit explicitly adopts existing format v2 when necessary. Each actual edit is one Undo; no-op leaves pending inspector drafts and history untouched. No database/schema changes or automatic unpinning.
+
+Tests: `node --test native/foundry/tests/center-fit.test.mjs`; actual Chromium: `CHROMIUM_PATH=<installed-browser> node scripts/test_foundry_center_fit_browser.cjs`.
