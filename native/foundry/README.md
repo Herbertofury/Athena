@@ -152,3 +152,13 @@ This changes neither persisted formats nor history semantics. Reproduce focused 
 `node --test native/foundry/tests/history-keys.test.mjs` and actual browser acceptance with
 `CHROMIUM_PATH=<installed-browser> node scripts/test_foundry_history_keys_browser.cjs`.
 It is not an app-wide shortcut takeover or complete original Foundry parity claim.
+
+## Optional selected transform gizmo
+
+`gizmo` can be disabled independently with `--disable-foundry-module gizmo`; inspector controls remain available. Explicit Enable exposes pointer Rotate/Scale handles for the current visible unpinned instance. This adapts original MIT `prototype-v24.ts` bindTransformGizmo (311–320), not original artwork or source lock semantics. No source snapshots are imported.
+
+A computed 2D matrix and all four base-box corners recover the actual transform-origin pivot, including native skew, mirrored scale and all nine origins. Unsupported ancestor transform/zoom/perspective, degenerate matrices or inconsistent measured bounds refuse edits. Rotation uses angle delta around that pivot. Radial scale preserves anisotropy and mirror signs, constraining the shared ratio so both resulting magnitudes remain 0.05–8. Optional snap is 15 degrees / 0.05 scale-ratio increments; Alt bypasses it. Ratio snapping is a deliberate bounded adaptation, not original independent-axis rounding.
+
+Preview changes only transient object CSS. Completed pointerup validates exact theme/room/instance/prior placement, explicitly adopts existing format2 only when necessary, and writes one Undo entry. Pointercancel, capture loss, Escape, selection change, draw, scrolling, resizing or disposal cancel without saving preview. Position, scope, anchor, filters, origin, other objects, presets and environment remain unchanged. Native pin prevents editing; it is not the original lock field.
+
+Tests: `node --test native/foundry/tests/transform-gizmo.test.mjs`. Actual browser: `CHROMIUM_PATH=/path/to/headless_shell node scripts/test_foundry_transform_gizmo_browser.cjs`; uses neutral native DOM and proves skewed bottom-right-origin mirrored rotation, radial scale, cancellation and Undo/Redo. Not Windows or original-art rendering acceptance.
