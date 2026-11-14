@@ -13,5 +13,34 @@
       "name": "atlas-cancel-after.log",
       "sha256": "74703f85f2d9bb00d51605ae45fce562900b5f15c82da43ebaccd4e02ec16072"
     }
-  ]
+  ],
+  "packaged_runtime_files": 93,
+  "served_asset_identities_verified": 92,
+  "local_browser": "blocked before page creation: process socket not permitted",
+  "loopback_http": {
+    "result": "pass",
+    "checks": [
+      {
+        "name": "Served shell and every allowlisted runtime file match package bytes",
+        "result": "pass"
+      },
+      {
+        "name": "Loopback API keeps strict Host, Origin, custom-header and no-CORS protections",
+        "result": "pass"
+      },
+      {
+        "name": "Exact generated archive reads and bounded experiment persist across restart",
+        "result": "pass"
+      },
+      {
+        "name": "Final SQLite integrity and exact job count",
+        "result": "pass"
+      }
+    ],
+    "verifiedAssets": 92,
+    "integrity": "ok\n1",
+    "binarySHA256": "ffd5165431a13e53c9335234ba788a46f4fa9df83c9642c02b3bc3fb85feff1d",
+    "harnessSHA256": "88f07a18fb2a7789f1052e561273f310a447ed344edebbba4587299bd3b72f81",
+    "packageSHA256": "2d673113b09ff6da6fd21203acaeadee22ee95eeb56b80fae0d7e7f1b1cee01a"
+  }
 }

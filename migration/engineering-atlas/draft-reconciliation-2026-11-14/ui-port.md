@@ -11,3 +11,7 @@ Ports #7/#8 cancellation and request-wide archive deadlines and #10 malformed Ov
 - Archive deadlines settle the caller; a permanently uncooperative underlying operation can still remain pending. No automatic retry of uncertain writes, timeout weakening, result truncation or performance superiority claim.
 
 Hosted CI, served assets and fresh real Chromium acceptance are separate pending gates. Source preserved #9/#11 gallery compare and #6 research still require reconciliation; this port does not call them complete.
+
+## Packaging and runtime follow-up
+
+The public-preview packager correctly rejected stale reviewed hashes after the shared modules changed. Updated only the six affected Lab/Audio allowlist entries; packaged93 runtime files and verified92 served asset bytes against the real loopback Rust engine. Browser launch was blocked by the execution environment's process-socket restriction before page creation; no browser pass is claimed and no restriction was bypassed. Exact-head hosted Chromium remains the acceptance route.
