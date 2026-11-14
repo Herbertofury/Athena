@@ -1,0 +1,314 @@
+[
+  {
+    "id": "bi-transformations-1",
+    "lessonId": "bi-transformations",
+    "question": "A quantity cannot be parsed. What preserves the strongest audit trail?",
+    "options": [
+      "Keep the raw value in a reject ledger with a reason",
+      "Replace it silently with zero",
+      "Delete the entire input without recording counts",
+      "Treat parsing failure as a successful sale"
+    ],
+    "answer": 0,
+    "why": "A reject ledger preserves what was received and why it was excluded, allowing counts to reconcile without inventing a valid value."
+  },
+  {
+    "id": "bi-transformations-2",
+    "lessonId": "bi-transformations",
+    "question": "Two local plans produce the same total. What follows?",
+    "options": [
+      "Power Query definitely folded every step",
+      "They agree for the checked fixture",
+      "All connectors support the same M operations",
+      "Their production runtimes will match"
+    ],
+    "answer": 1,
+    "why": "Equality on a bounded dataset is local correctness evidence, not proof about a separate vendor engine or performance."
+  },
+  {
+    "id": "bi-transformations-3",
+    "lessonId": "bi-transformations",
+    "question": "What happens when a category-by-month grid is unpivoted?",
+    "options": [
+      "It becomes order-line sales automatically",
+      "All months are added into one date",
+      "Monthly columns become category-month records",
+      "Every source key becomes unique automatically"
+    ],
+    "answer": 2,
+    "why": "Unpivot changes the representation and grain. It does not establish equivalence to a transaction fact table."
+  },
+  {
+    "id": "bi-star-filters-1",
+    "lessonId": "bi-star-filters",
+    "question": "What does the declared grain explain?",
+    "options": [
+      "The preferred chart color",
+      "The workspace password policy",
+      "The file extension",
+      "The business meaning of one fact row"
+    ],
+    "answer": 3,
+    "why": "Grain identifies the event and level of detail represented by a record; it determines which aggregations make sense."
+  },
+  {
+    "id": "bi-star-filters-2",
+    "lessonId": "bi-star-filters",
+    "question": "Hardware and North filters both reach Sales. Which rows qualify in this simple model?",
+    "options": [
+      "Rows satisfying both filters",
+      "Rows satisfying either filter alone",
+      "Every row twice",
+      "Only rows without product keys"
+    ],
+    "answer": 0,
+    "why": "Independent dimension restrictions intersect at the facts. Adding separately filtered totals would double-count or include ineligible rows."
+  },
+  {
+    "id": "bi-star-filters-3",
+    "lessonId": "bi-star-filters",
+    "question": "A lookup key is duplicated. What is the sound teaching response?",
+    "options": [
+      "Assume relationships repair it",
+      "Flag the key-quality failure before accepting the result",
+      "Hide the duplicate in the chart",
+      "Count the extra join rows as new sales"
+    ],
+    "answer": 1,
+    "why": "A unique-key dimension is a declared assumption. A violated assumption should produce visible evidence, not an unexplained total."
+  },
+  {
+    "id": "bi-context-1",
+    "lessonId": "bi-context",
+    "question": "A report region selection changes. Which expectation fits the teaching case?",
+    "options": [
+      "Every historical unit price is rewritten",
+      "The file becomes a deployed semantic model",
+      "A selected aggregate changes while stored line amounts remain fixed",
+      "Calculated columns must all become measures"
+    ],
+    "answer": 2,
+    "why": "A query selection changes the evaluated population, not the source line facts in this Import-oriented example."
+  },
+  {
+    "id": "bi-context-2",
+    "lessonId": "bi-context",
+    "question": "What does a new same-column filter normally do inside CALCULATE without KEEPFILTERS?",
+    "options": [
+      "Always intersect with the old value",
+      "Erase all filters everywhere",
+      "Modify source rows permanently",
+      "Replace that existing column restriction"
+    ],
+    "answer": 3,
+    "why": "The example concerns replacement on the same filtered column. KEEPFILTERS changes the combination to intersection; other context is not automatically erased."
+  },
+  {
+    "id": "bi-context-3",
+    "lessonId": "bi-context",
+    "question": "Which expression answers revenue per unit over the whole selected population?",
+    "options": [
+      "Total revenue divided by total units",
+      "Unweighted average of line prices in every case",
+      "Sum of product identifiers",
+      "Maximum unit price minus number of lines"
+    ],
+    "answer": 0,
+    "why": "The numerator and denominator use the same population and weight by units. A mean of line prices instead weights each line equally."
+  },
+  {
+    "id": "bi-date-reasoning-1",
+    "lessonId": "bi-date-reasoning",
+    "question": "Why include dates without sales in the teaching calendar?",
+    "options": [
+      "Every missing date is a hidden sale",
+      "The analytical time structure is separate from observed events",
+      "It guarantees exam readiness",
+      "It removes the need for a date role"
+    ],
+    "answer": 1,
+    "why": "An uninterrupted calendar can represent periods consistently even when no transactions occur on some dates."
+  },
+  {
+    "id": "bi-date-reasoning-2",
+    "lessonId": "bi-date-reasoning",
+    "question": "What makes a year-over-year comparison potentially misleading?",
+    "options": [
+      "Comparing complete equal months",
+      "Stating the cutoff date",
+      "Comparing a partial current period with an unexplained full prior period",
+      "Naming the denominator"
+    ],
+    "answer": 2,
+    "why": "Different observation windows can dominate the apparent change. Declare and align periods before interpreting growth."
+  },
+  {
+    "id": "bi-date-reasoning-3",
+    "lessonId": "bi-date-reasoning",
+    "question": "Stock balances are 10 on Monday and 12 on Tuesday. Under a Tuesday closing rule, what is closing stock?",
+    "options": [
+      "22",
+      "2",
+      "The number of calendar dates",
+      "12"
+    ],
+    "answer": 3,
+    "why": "A stock balance is a snapshot. Summing balances across dates double-counts inventory instead of reporting the closing position."
+  },
+  {
+    "id": "bi-report-design-1",
+    "lessonId": "bi-report-design",
+    "question": "Hardware is 9000 out of all-category revenue 16000. What is its share?",
+    "options": [
+      "56.25%",
+      "100% regardless of denominator",
+      "9%",
+      "160%"
+    ],
+    "answer": 0,
+    "why": "Divide 9000 by 16000. A 100% answer instead describes Hardware relative to a Hardware-only selected population."
+  },
+  {
+    "id": "bi-report-design-2",
+    "lessonId": "bi-report-design",
+    "question": "A report plan has an alt-text field. What has been established?",
+    "options": [
+      "That a screen reader passed every visual",
+      "Only that the checked field is present",
+      "That tab order is correct in Power BI",
+      "That all color contrasts are adequate"
+    ],
+    "answer": 1,
+    "why": "A presence check does not evaluate rendered behavior or the quality of the description."
+  },
+  {
+    "id": "bi-report-design-3",
+    "lessonId": "bi-report-design",
+    "question": "What should accompany a changing percentage?",
+    "options": [
+      "Only a decorative icon",
+      "A hidden date range",
+      "An understandable denominator and selection scope",
+      "An unexplained color"
+    ],
+    "answer": 2,
+    "why": "Readers need the reference population to understand why a share changes and what comparison it supports."
+  },
+  {
+    "id": "bi-storage-refresh-1",
+    "lessonId": "bi-storage-refresh",
+    "question": "A visual reaggregates an unchanged copied snapshot. Which total should it use?",
+    "options": [
+      "The later source total automatically",
+      "Zero because data is copied",
+      "A random total chosen by the chart",
+      "The snapshot total of 12000 cents"
+    ],
+    "answer": 3,
+    "why": "Requerying the same copied population does not add records that were never imported into that snapshot."
+  },
+  {
+    "id": "bi-storage-refresh-2",
+    "lessonId": "bi-storage-refresh",
+    "question": "What does the invented outage scenario establish?",
+    "options": [
+      "The behavior of this bounded local source-dependence model",
+      "A real service uptime guarantee",
+      "That DirectQuery has no caches",
+      "That Direct Lake always falls back to SQL"
+    ],
+    "answer": 0,
+    "why": "The scenario distinguishes conceptual dependence on a source from copied-data availability, without testing a provider."
+  },
+  {
+    "id": "bi-storage-refresh-3",
+    "lessonId": "bi-storage-refresh",
+    "question": "Which statement about the exercise is accurate?",
+    "options": [
+      "A Fabric capacity was configured",
+      "Direct Lake framing is discussed but not modeled",
+      "A gateway was installed",
+      "A scheduled refresh was published"
+    ],
+    "answer": 1,
+    "why": "The workshop is local and bounded. Real service configuration and Direct Lake behavior remain separate work."
+  },
+  {
+    "id": "bi-access-rls-1",
+    "lessonId": "bi-access-rls",
+    "question": "Which workspace-role choice is unsafe for a person who must be restricted by RLS in this scenario?",
+    "options": [
+      "Viewer with the intended row role",
+      "A tested restricted Viewer",
+      "Contributor",
+      "A read-only Viewer assignment"
+    ],
+    "answer": 2,
+    "why": "The documented workspace RLS restriction does not apply to Contributor, Member or Admin roles."
+  },
+  {
+    "id": "bi-access-rls-2",
+    "lessonId": "bi-access-rls",
+    "question": "What happens when the fixed Viewer has both North and South region roles?",
+    "options": [
+      "Only the smaller region remains",
+      "Both roles cancel all access",
+      "The source records are permanently deleted",
+      "The union includes all 16000 cents"
+    ],
+    "answer": 3,
+    "why": "These allowed-role populations union, so an additional role broadens the visible rows."
+  },
+  {
+    "id": "bi-access-rls-3",
+    "lessonId": "bi-access-rls",
+    "question": "Why is this local command not a security boundary?",
+    "options": [
+      "The complete fixture remains readable and the code is modifiable",
+      "All permission reasoning is useless",
+      "A green test automatically grants workspace access",
+      "Python establishes cloud identities automatically"
+    ],
+    "answer": 0,
+    "why": "Local set filtering can illustrate policy but cannot protect a dataset that the learner can directly inspect."
+  },
+  {
+    "id": "bi-capstone-1",
+    "lessonId": "bi-capstone",
+    "question": "Which conclusion is supported by a passing capstone receipt?",
+    "options": [
+      "All Power BI capabilities were executed",
+      "The bounded local reconciliation passed for its synthetic inputs",
+      "The learner is certified-ready",
+      "The report is safe to publish with real data"
+    ],
+    "answer": 1,
+    "why": "The evidence supports only the computations and checks that actually ran, under the recorded fixture and scope."
+  },
+  {
+    "id": "bi-capstone-2",
+    "lessonId": "bi-capstone",
+    "question": "Which period reconciliation is expected?",
+    "options": [
+      "6000 plus 10000 equals 12000 cents",
+      "January alone proves a full-year source",
+      "6000 plus 10000 equals 16000 cents",
+      "A percentage replaces the monetary total"
+    ],
+    "answer": 2,
+    "why": "January and February partition these six facts. The complete calendar does not imply that transactions exist on every date."
+  },
+  {
+    "id": "bi-capstone-3",
+    "lessonId": "bi-capstone",
+    "question": "What should the objective-guide mapping communicate?",
+    "options": [
+      "A fabricated percentage of exam readiness",
+      "That Python executes DAX",
+      "That all objectives have been implemented",
+      "Selected conceptual links and remaining product gaps"
+    ],
+    "answer": 3,
+    "why": "A dated partial mapping is useful for further planning, but coverage and readiness need evidence this workshop does not provide."
+  }
+]

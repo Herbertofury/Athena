@@ -1,0 +1,99 @@
+{
+  "reviewedAt": "2026-11-08",
+  "status": "Partial conceptual mapping only; real Azure administration unexecuted. AZ-104 current task-effective-date verification incomplete.",
+  "runner": "workshops/azure/labs/azure-workshop/run_lab.py",
+  "model": "workshops/azure/labs/azure-workshop/lab.py",
+  "evidenceBasis": "Mappings describe implemented commands and stated model boundaries; automated test results are recorded separately.",
+  "lessons": [
+    {
+      "lessonId": "azf-hierarchy",
+      "command": "hierarchy",
+      "fixture": "fixtures/hierarchy.json",
+      "localTask": "Validate synthetic resource ancestry; identify orphan/cycle errors.",
+      "domainRelationship": "Foundations architecture; administration identity/governance",
+      "uncovered": "No actual management groups, subscription changes, resource moves or deletion.",
+      "azureExecution": "Not executed"
+    },
+    {
+      "lessonId": "azf-access",
+      "command": "access",
+      "fixture": "fixtures/access.json",
+      "localTask": "Evaluate exact principal/action grants and inherited scope in fixtures.",
+      "domainRelationship": "Foundations access; administration identity/governance",
+      "uncovered": "No directory lifecycle, real assignments, groups, denies, conditions, credentials or live data-plane access.",
+      "azureExecution": "Not executed"
+    },
+    {
+      "lessonId": "azf-governance",
+      "command": "governance",
+      "fixture": "fixtures/governance.json",
+      "localTask": "Separate synthetic region/tag findings from control-plane lock blocking.",
+      "domainRelationship": "Foundations governance; administration identity/governance",
+      "uncovered": "No Policy engine evaluation, assignments, effect ordering, remediation identity or live locks.",
+      "azureExecution": "Not executed"
+    },
+    {
+      "lessonId": "azf-storage",
+      "command": "storage",
+      "fixture": "fixtures/storage.json",
+      "localTask": "Compare a capability subset for LRS, ZRS and RA-GZRS.",
+      "domainRelationship": "Foundations services; administration storage",
+      "uncovered": "Not the full redundancy matrix; no actual account, SAS/key, Files/Blob lifecycle, encryption, transfer or failover.",
+      "azureExecution": "Not executed"
+    },
+    {
+      "lessonId": "azf-network",
+      "command": "network",
+      "fixture": "fixtures/network.json",
+      "localTask": "Select longest-prefix candidates; report equal-prefix ties unresolved; apply fixture first-match layers.",
+      "domainRelationship": "Foundations networking; administration networking",
+      "uncovered": "No Azure source precedence/default-rule/stateful-flow engine, real DNS, peering, endpoints, Bastion or load balancing.",
+      "azureExecution": "Not executed"
+    },
+    {
+      "lessonId": "azf-compute",
+      "command": "compute",
+      "fixture": "fixtures/compute.json",
+      "localTask": "Calculate ceiling capacity and max-scale shortfall.",
+      "domainRelationship": "Foundations compute; administration compute; architecture enrichment",
+      "uncovered": "No SKU discovery, quota, metrics autoscale, runtime deployment, VM/storage/network configuration or App Service/container operation.",
+      "azureExecution": "Not executed"
+    },
+    {
+      "lessonId": "azf-monitoring",
+      "command": "monitoring",
+      "fixture": "fixtures/monitoring.json",
+      "localTask": "Compare strict mean threshold over complete synthetic windows; distinguish missing data.",
+      "domainRelationship": "Foundations monitoring; administration monitoring/maintenance",
+      "uncovered": "No live KQL, diagnostic settings, signal collection, alert/action-group delivery or Network Watcher.",
+      "azureExecution": "Not executed"
+    },
+    {
+      "lessonId": "azf-recovery",
+      "command": "recovery",
+      "fixture": "fixtures/recovery.json",
+      "localTask": "Order dependencies and calculate snapshot-age RPO.",
+      "domainRelationship": "Administration monitoring/maintenance; foundations enrichment",
+      "uncovered": "No vault, backup policy, restore execution, failover, failback or measured application RTO.",
+      "azureExecution": "Not executed"
+    },
+    {
+      "lessonId": "azf-cost",
+      "command": "cost",
+      "fixture": "fixtures/cost.json",
+      "localTask": "Allocate invented charges by tags using Decimal; detect budget threshold without stopping spend.",
+      "domainRelationship": "Foundations governance; administration identity/governance",
+      "uncovered": "No billing API, actual price quote, delayed ingestion simulation, purchase or budget creation.",
+      "azureExecution": "Not executed"
+    },
+    {
+      "lessonId": "azf-capstone",
+      "command": "capstone",
+      "fixture": "fixtures/capstone.json",
+      "localTask": "Integrate risk and missing-evidence decisions across fixtures.",
+      "domainRelationship": "Cross-domain partial application; architecture enrichment",
+      "uncovered": "No deployment, production acceptance, live security assurance or proof of exam readiness.",
+      "azureExecution": "Not executed"
+    }
+  ]
+}

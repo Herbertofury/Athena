@@ -1,0 +1,58 @@
+{
+  "scopes": [
+    {
+      "id": "root",
+      "parent": null,
+      "kind": "management_group"
+    },
+    {
+      "id": "sub",
+      "parent": "root",
+      "kind": "subscription"
+    },
+    {
+      "id": "rg",
+      "parent": "sub",
+      "kind": "resource_group"
+    },
+    {
+      "id": "vm",
+      "parent": "rg",
+      "kind": "resource"
+    }
+  ],
+  "resources": [
+    {
+      "id": "vm",
+      "region": "westus",
+      "tags": []
+    }
+  ],
+  "allowed_regions": [
+    "eastus"
+  ],
+  "required_tags": [
+    "owner"
+  ],
+  "locks": [
+    {
+      "id": "rg-delete-lock",
+      "scope": "rg",
+      "level": "CanNotDelete"
+    }
+  ],
+  "operations": [
+    {
+      "id": "delete-vm",
+      "resource_id": "vm",
+      "operation": "delete",
+      "plane": "control"
+    },
+    {
+      "id": "delete-data",
+      "resource_id": "vm",
+      "operation": "delete",
+      "plane": "data"
+    }
+  ]
+}

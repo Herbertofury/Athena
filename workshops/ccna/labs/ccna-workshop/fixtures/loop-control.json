@@ -1,0 +1,51 @@
+{
+  "switches": [
+    {
+      "id": "root",
+      "priority": 4096,
+      "mac": "02:00:00:00:00:01"
+    },
+    {
+      "id": "left",
+      "priority": 32768,
+      "mac": "02:00:00:00:00:02"
+    },
+    {
+      "id": "right",
+      "priority": 32768,
+      "mac": "02:00:00:00:00:03"
+    },
+    {
+      "id": "edge",
+      "priority": 32768,
+      "mac": "02:00:00:00:00:04"
+    },
+    {
+      "id": "island",
+      "priority": 32768,
+      "mac": "02:00:00:00:00:05"
+    }
+  ],
+  "links": [
+    {
+      "a": "root",
+      "b": "left",
+      "cost": 4
+    },
+    {
+      "a": "root",
+      "b": "right",
+      "cost": 4
+    },
+    {
+      "a": "left",
+      "b": "edge",
+      "cost": 4
+    },
+    {
+      "a": "right",
+      "b": "edge",
+      "cost": 4
+    }
+  ]
+}

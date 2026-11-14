@@ -1,0 +1,294 @@
+{
+  "identity": {
+    "request": {
+      "action": "read",
+      "resource": "orders",
+      "required_approvals": [
+        "owner"
+      ]
+    },
+    "rules": [
+      {
+        "id": "reader",
+        "effect": "allow",
+        "action": "read",
+        "resource": "orders"
+      },
+      {
+        "id": "write-guard",
+        "effect": "deny",
+        "action": "write",
+        "resource": "orders"
+      }
+    ],
+    "approvals": []
+  },
+  "network": {
+    "nodes": [
+      "client",
+      "edge",
+      "app",
+      "db"
+    ],
+    "routes": [
+      [
+        "client",
+        "edge"
+      ],
+      [
+        "edge",
+        "app"
+      ],
+      [
+        "app",
+        "db"
+      ]
+    ],
+    "allows": [
+      [
+        "client",
+        "edge"
+      ],
+      [
+        "edge",
+        "app"
+      ]
+    ],
+    "source": "client",
+    "target": "db"
+  },
+  "storage": {
+    "requirements": [
+      "object_api",
+      "independent_objects"
+    ],
+    "options": [
+      {
+        "id": "S3-shaped",
+        "capabilities": [
+          "object_api",
+          "independent_objects"
+        ],
+        "caveats": [
+          "Object storage model, not a general block disk or shared POSIX filesystem."
+        ]
+      },
+      {
+        "id": "EBS-shaped",
+        "capabilities": [
+          "block_device"
+        ],
+        "caveats": [
+          "Block volume model. Attachment and availability constraints require actual service design."
+        ]
+      },
+      {
+        "id": "EFS-shaped",
+        "capabilities": [
+          "shared_files",
+          "nfs"
+        ],
+        "caveats": [
+          "Shared NFS file model. Check client, region, performance and access requirements."
+        ]
+      }
+    ]
+  },
+  "compute": {
+    "requirements": [
+      "event_triggered",
+      "no_host_management"
+    ],
+    "options": [
+      {
+        "id": "function-shaped",
+        "capabilities": [
+          "event_triggered",
+          "no_host_management",
+          "container_image"
+        ],
+        "caveats": [
+          "Validate runtime, duration, concurrency, payload and cold-start constraints."
+        ]
+      },
+      {
+        "id": "managed-container-shaped",
+        "capabilities": [
+          "event_triggered",
+          "no_host_management",
+          "container_image",
+          "long_lived_process"
+        ],
+        "caveats": [
+          "Event integration and orchestration must be designed; no automatic service equivalence."
+        ]
+      },
+      {
+        "id": "vm-shaped",
+        "capabilities": [
+          "host_control",
+          "container_image"
+        ],
+        "caveats": [
+          "Guest operating system patching and capacity are in scope for the design."
+        ]
+      }
+    ]
+  },
+  "queues": {
+    "messages": [
+      {
+        "id": "order-1",
+        "amount_cents": 1200
+      },
+      {
+        "id": "order-2",
+        "amount_cents": 800
+      }
+    ],
+    "deliveries": [
+      {
+        "id": "order-1",
+        "handler_ok": true,
+        "ack_received": false
+      },
+      {
+        "id": "order-1",
+        "handler_ok": true,
+        "ack_received": true
+      },
+      {
+        "id": "order-2",
+        "handler_ok": false,
+        "ack_received": false
+      },
+      {
+        "id": "order-2",
+        "handler_ok": false,
+        "ack_received": false
+      },
+      {
+        "id": "order-2",
+        "handler_ok": false,
+        "ack_received": false
+      }
+    ],
+    "max_attempts": 3
+  },
+  "database": {
+    "requirements": [
+      "relational",
+      "read_scaling"
+    ],
+    "options": [
+      {
+        "id": "single-instance-shaped",
+        "capabilities": [
+          "relational"
+        ],
+        "caveats": [
+          "Single instance does not meet this fixture read-scaling requirement."
+        ]
+      },
+      {
+        "id": "multi-az-instance-shaped",
+        "capabilities": [
+          "relational",
+          "standby_failover"
+        ],
+        "caveats": [
+          "RDS Multi-AZ DB instance standby is not a read-serving replica."
+        ]
+      },
+      {
+        "id": "read-replica-shaped",
+        "capabilities": [
+          "relational",
+          "read_scaling"
+        ],
+        "caveats": [
+          "This selected read-serving replica design may lag; not every engine or replica mode serves reads. Check actual support."
+        ]
+      },
+      {
+        "id": "multi-az-cluster-shaped",
+        "capabilities": [
+          "relational",
+          "read_scaling",
+          "standby_failover"
+        ],
+        "caveats": [
+          "RDS Multi-AZ DB clusters have readable instances; engine and regional support must be checked."
+        ]
+      }
+    ]
+  },
+  "resilience": {
+    "replicas": [
+      {
+        "id": "app-1",
+        "domain": "zone-a"
+      },
+      {
+        "id": "app-2",
+        "domain": "zone-a"
+      },
+      {
+        "id": "app-3",
+        "domain": "zone-b"
+      }
+    ],
+    "failed_domains": [
+      "zone-a"
+    ],
+    "required_survivors": 2,
+    "measured_restore_minutes": 45,
+    "backup_age_minutes": 20,
+    "target_rto_minutes": 60,
+    "target_rpo_minutes": 15
+  },
+  "operations": {
+    "evidence": [
+      {
+        "id": "e1",
+        "kind": "metric",
+        "summary": "Fictional p95 response latency rose to 900 ms."
+      },
+      {
+        "id": "e2",
+        "kind": "api_event",
+        "summary": "Fictional deployment API call attributed to a synthetic role."
+      },
+      {
+        "id": "e3",
+        "kind": "configuration",
+        "summary": "Fictional resource configuration changed from one to two instances."
+      },
+      {
+        "id": "e4",
+        "kind": "customer_report",
+        "summary": "Fictional customer reported a timeout; cause unverified."
+      }
+    ]
+  },
+  "cost": {
+    "lines": [
+      {
+        "id": "compute-hours",
+        "quantity": "100",
+        "unit_usd": "0.12"
+      },
+      {
+        "id": "storage-gb-month",
+        "quantity": "50",
+        "unit_usd": "0.02"
+      },
+      {
+        "id": "transfer-gb",
+        "quantity": "10",
+        "unit_usd": "0.09"
+      }
+    ],
+    "budget_cents": 1300
+  }
+}

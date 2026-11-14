@@ -1,0 +1,194 @@
+{
+  "reviewedAt": "2026-11-08",
+  "sources": [
+    {
+      "key": "az-900-guide",
+      "title": "Study guide for Exam AZ-900",
+      "url": "https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-900",
+      "scope": "Supports fundamentals domain weights and skills heading July 20, 2026. This workshop covers selected concepts only, not the entire exam.",
+      "notes": "Retrieval status: readable open verified; page last updated June 22, 2026. English updates precede localized versions; approximately eight weeks is guidance, not a guaranteed rollout date."
+    },
+    {
+      "key": "az-104-guide",
+      "title": "Study guide for Exam AZ-104",
+      "url": "https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104",
+      "scope": "Supports stable administration domains and partial gap mapping. Current task-level effective-date verification is incomplete because official indexed and opened versions conflict.",
+      "notes": "Retrieval status: readable article reviewed, temporal conflict unresolved. Search index shows skills as of April 17, 2026; canonical and tracked opens show October 26, 2023 despite page update October 30, 2026. Do not label the older heading current or silently choose a date."
+    },
+    {
+      "key": "az-104-certification",
+      "title": "Microsoft Certified: Azure Administrator Associate",
+      "url": "https://learn.microsoft.com/en-us/credentials/certifications/azure-administrator/",
+      "scope": "Confirms administrator role, five domains and Last Updated April 17, 2026. Certification metadata does not resolve the conflicting study-guide effective date.",
+      "notes": "Retrieval status: readable open verified. Linked official short-link study guide could not be fetched; no account access was attempted."
+    },
+    {
+      "key": "arm-overview",
+      "title": "Azure Resource Manager overview",
+      "url": "https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/overview",
+      "scope": "Supports resource hierarchy, ARM management, declarative deployment and common lifecycle grouping. Does not validate a deployment.",
+      "notes": "Retrieval status: opened and relevant article text reviewed on 2026-11-08. Official Microsoft Learn documentation; availability and exact service behavior must be rechecked before live use."
+    },
+    {
+      "key": "resource-groups",
+      "title": "Manage Azure resource groups",
+      "url": "https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/manage-resource-groups-portal",
+      "scope": "Supports lifecycle grouping and resource-group metadata location versus resource location. Does not establish that every resource can be moved.",
+      "notes": "Retrieval status: opened and relevant article text reviewed on 2026-11-08. Official Microsoft Learn documentation; availability and exact service behavior must be rechecked before live use."
+    },
+    {
+      "key": "role-systems",
+      "title": "Azure roles and Microsoft Entra roles",
+      "url": "https://learn.microsoft.com/en-us/azure/role-based-access-control/rbac-and-directory-admin-roles",
+      "scope": "Distinguishes directory administration from Azure resource roles. Does not imply Entra administrators automatically own Azure resources.",
+      "notes": "Retrieval status: opened and relevant article text reviewed on 2026-11-08. Official Microsoft Learn documentation; availability and exact service behavior must be rechecked before live use."
+    },
+    {
+      "key": "rbac",
+      "title": "What is Azure RBAC?",
+      "url": "https://learn.microsoft.com/en-us/azure/role-based-access-control/overview",
+      "scope": "Supports principal, role, scope, inherited/additive assignments and separate data permissions. Simplified exercises exclude deny assignments and role conditions.",
+      "notes": "Retrieval status: opened and relevant article text reviewed on 2026-11-08. Official Microsoft Learn documentation; availability and exact service behavior must be rechecked before live use."
+    },
+    {
+      "key": "locks",
+      "title": "Lock Azure resources",
+      "url": "https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/lock-resources",
+      "scope": "Supports ReadOnly and CanNotDelete control-plane restrictions and inherited locks. Locks are not protection against authorized data-plane deletion.",
+      "notes": "Retrieval status: opened and relevant article text reviewed on 2026-11-08. Official Microsoft Learn documentation; availability and exact service behavior must be rechecked before live use."
+    },
+    {
+      "key": "policy",
+      "title": "Azure Policy overview",
+      "url": "https://learn.microsoft.com/en-us/azure/governance/policy/overview",
+      "scope": "Supports policy assignments and effects for governance; policy does not grant RBAC permission. Avoid treating every effect as deny or automatic repair.",
+      "notes": "Retrieval status: opened and relevant article text reviewed on 2026-11-08. Official Microsoft Learn documentation; availability and exact service behavior must be rechecked before live use."
+    },
+    {
+      "key": "policy-evaluation",
+      "title": "Policy compliance evaluation",
+      "url": "https://learn.microsoft.com/en-us/azure/governance/policy/how-to/get-compliance-data",
+      "scope": "Supports evaluation triggers, asynchronous scans and periodic compliance checks. A fresh assignment does not imply instant complete compliance reporting.",
+      "notes": "Retrieval status: opened and relevant article text reviewed on 2026-11-08. Official Microsoft Learn documentation; availability and exact service behavior must be rechecked before live use."
+    },
+    {
+      "key": "policy-remediation",
+      "title": "Remediate non-compliant resources",
+      "url": "https://learn.microsoft.com/en-us/azure/governance/policy/how-to/remediate-resources",
+      "scope": "Supports remediation tasks for modify and deployIfNotExists, with managed-identity permissions. Audit/deny alone do not repair existing resources.",
+      "notes": "Retrieval status: opened and relevant article text reviewed on 2026-11-08. Official Microsoft Learn documentation; availability and exact service behavior must be rechecked before live use."
+    },
+    {
+      "key": "storage-redundancy",
+      "title": "Azure Storage redundancy",
+      "url": "https://learn.microsoft.com/en-us/azure/storage/common/storage-redundancy",
+      "scope": "Supports LRS, ZRS, GRS, GZRS and read-access variants, asynchronous geo-replication and service/region limits. Redundancy is not versioned recovery or zero-data-loss assurance.",
+      "notes": "Retrieval status: opened and relevant article text reviewed on 2026-11-08. Official Microsoft Learn documentation; availability and exact service behavior must be rechecked before live use."
+    },
+    {
+      "key": "storage-auth",
+      "title": "Authorize access to Azure Storage",
+      "url": "https://learn.microsoft.com/en-us/azure/storage/common/authorize-data-access",
+      "scope": "Supports Entra-based authorization and distinctions from Shared Key/SAS. Network connectivity does not grant permission; exact support varies by storage service.",
+      "notes": "Retrieval status: opened and relevant article text reviewed on 2026-11-08. Official Microsoft Learn documentation; availability and exact service behavior must be rechecked before live use."
+    },
+    {
+      "key": "storage-private",
+      "title": "Use private endpoints for Azure Storage",
+      "url": "https://learn.microsoft.com/en-us/azure/storage/common/storage-private-endpoints",
+      "scope": "Supports service-specific private endpoints, normal endpoint names and DNS configuration. Does not automatically disable public access or replace authorization.",
+      "notes": "Retrieval status: opened and relevant article text reviewed on 2026-11-08. Official Microsoft Learn documentation; availability and exact service behavior must be rechecked before live use."
+    },
+    {
+      "key": "vnet",
+      "title": "Azure Virtual Network overview",
+      "url": "https://learn.microsoft.com/en-us/azure/virtual-network/virtual-networks-overview",
+      "scope": "Supports private network, subnets, peering and hybrid connectivity concepts. Does not prove end-to-end traffic reachability.",
+      "notes": "Retrieval status: opened and relevant article text reviewed on 2026-11-08. Official Microsoft Learn documentation; availability and exact service behavior must be rechecked before live use."
+    },
+    {
+      "key": "routes",
+      "title": "Virtual network traffic routing",
+      "url": "https://learn.microsoft.com/en-us/azure/virtual-network/virtual-networks-udr-overview",
+      "scope": "Supports route prefix selection, next hops and precedence. Preferred-route and service-endpoint exceptions mean a simplified local selector is not a full Azure route engine.",
+      "notes": "Retrieval status: opened and relevant article text reviewed on 2026-11-08. Official Microsoft Learn documentation; availability and exact service behavior must be rechecked before live use."
+    },
+    {
+      "key": "nsg",
+      "title": "Network security groups",
+      "url": "https://learn.microsoft.com/en-us/azure/virtual-network/network-security-groups-overview",
+      "scope": "Supports five-tuple filtering, lower-number priority and stateful flows. Existing sessions may survive a rule edit; NSGs are not application authentication.",
+      "notes": "Retrieval status: opened and relevant article text reviewed on 2026-11-08. Official Microsoft Learn documentation; availability and exact service behavior must be rechecked before live use."
+    },
+    {
+      "key": "private-dns",
+      "title": "Azure private endpoint DNS configuration",
+      "url": "https://learn.microsoft.com/en-us/azure/private-link/private-endpoint-dns",
+      "scope": "Supports private endpoint name resolution and service-specific zones. DNS results and data authorization are independent.",
+      "notes": "Retrieval status: opened and relevant article text reviewed on 2026-11-08. Official Microsoft Learn documentation; availability and exact service behavior must be rechecked before live use."
+    },
+    {
+      "key": "compute",
+      "title": "Choose an Azure compute service",
+      "url": "https://learn.microsoft.com/en-us/azure/architecture/guide/technology-choices/compute-decision-tree",
+      "scope": "Supports comparing hosting and operational responsibilities. Architecture decision work is enrichment, not comprehensive AZ-900 or AZ-104 coverage.",
+      "notes": "Retrieval status: opened and relevant article text reviewed on 2026-11-08. Official Microsoft Learn documentation; availability and exact service behavior must be rechecked before live use."
+    },
+    {
+      "key": "vmss",
+      "title": "Virtual Machine Scale Sets overview",
+      "url": "https://learn.microsoft.com/en-us/azure/virtual-machine-scale-sets/overview",
+      "scope": "Supports instance scaling and availability placement. A scale set alone is not multi-region recovery or immunity to datacenter failure.",
+      "notes": "Retrieval status: opened and relevant article text reviewed on 2026-11-08. Official Microsoft Learn documentation; availability and exact service behavior must be rechecked before live use."
+    },
+    {
+      "key": "monitor",
+      "title": "Azure Monitor overview",
+      "url": "https://learn.microsoft.com/en-us/azure/azure-monitor/fundamentals/overview",
+      "scope": "Supports metrics, logs, analysis, alerts and autoscale concepts. Offline observations do not prove live telemetry or alert delivery.",
+      "notes": "Retrieval status: opened and relevant article text reviewed on 2026-11-08. Official Microsoft Learn documentation; availability and exact service behavior must be rechecked before live use."
+    },
+    {
+      "key": "activity-log",
+      "title": "Azure Monitor activity log",
+      "url": "https://learn.microsoft.com/en-us/azure/azure-monitor/fundamentals/activity-log",
+      "scope": "Supports control-plane change evidence and default 90-day retention. Not a complete record of data reads or application behavior.",
+      "notes": "Retrieval status: opened and relevant article text reviewed on 2026-11-08. Official Microsoft Learn documentation; availability and exact service behavior must be rechecked before live use."
+    },
+    {
+      "key": "diagnostics",
+      "title": "Diagnostic settings in Azure Monitor",
+      "url": "https://learn.microsoft.com/en-us/azure/azure-monitor/data-collection/diagnostic-settings",
+      "scope": "Supports collection destinations and distinction between default platform signals and opt-in resource logs. Collection needs configuration and has latency.",
+      "notes": "Retrieval status: opened and relevant article text reviewed on 2026-11-08. Official Microsoft Learn documentation; availability and exact service behavior must be rechecked before live use."
+    },
+    {
+      "key": "backup",
+      "title": "Azure Backup overview",
+      "url": "https://learn.microsoft.com/en-us/azure/backup/backup-overview",
+      "scope": "Supports backup purpose and recovery planning. A successful backup alone does not prove restore usability or achieved RTO.",
+      "notes": "Retrieval status: opened and relevant article text reviewed on 2026-11-08. Official Microsoft Learn documentation; availability and exact service behavior must be rechecked before live use."
+    },
+    {
+      "key": "site-recovery",
+      "title": "About Azure Site Recovery",
+      "url": "https://learn.microsoft.com/en-us/azure/site-recovery/site-recovery-overview",
+      "scope": "Supports replication, failover, failback and dependency planning. A design exercise does not prove disaster recovery execution.",
+      "notes": "Retrieval status: opened and relevant article text reviewed on 2026-11-08. Official Microsoft Learn documentation; availability and exact service behavior must be rechecked before live use."
+    },
+    {
+      "key": "budgets",
+      "title": "Create and manage Azure budgets",
+      "url": "https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/tutorial-acm-create-budgets",
+      "scope": "Supports actual/forecast alerts, budget periods and delayed cost evaluation. Budgets do not stop resources or impose a spending hard cap.",
+      "notes": "Retrieval status: opened and relevant article text reviewed on 2026-11-08. Official Microsoft Learn documentation; availability and exact service behavior must be rechecked before live use."
+    },
+    {
+      "key": "tags",
+      "title": "Use tags to organize Azure resources",
+      "url": "https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/tag-resources",
+      "scope": "Supports cost attribution metadata, plain-text visibility and lack of automatic resource-tag inheritance. Tags are neither secrets nor access controls.",
+      "notes": "Retrieval status: opened and relevant article text reviewed on 2026-11-08. Official Microsoft Learn documentation; availability and exact service behavior must be rechecked before live use."
+    }
+  ]
+}

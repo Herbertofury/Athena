@@ -1,0 +1,59 @@
+{
+  "ports": [
+    {
+      "id": "deskA",
+      "mode": "access",
+      "local_vlans": [
+        10
+      ],
+      "peer_vlans": []
+    },
+    {
+      "id": "deskB",
+      "mode": "access",
+      "local_vlans": [
+        20
+      ],
+      "peer_vlans": []
+    },
+    {
+      "id": "uplink",
+      "mode": "trunk",
+      "local_vlans": [
+        10,
+        20,
+        30
+      ],
+      "peer_vlans": [
+        10,
+        20
+      ]
+    }
+  ],
+  "frames": [
+    {
+      "ingress": "deskA",
+      "vlan": 10,
+      "source": "02:00:00:00:00:01",
+      "destination": "02:00:00:00:00:02"
+    },
+    {
+      "ingress": "uplink",
+      "vlan": 10,
+      "source": "02:00:00:00:00:02",
+      "destination": "02:00:00:00:00:01"
+    },
+    {
+      "ingress": "uplink",
+      "vlan": 20,
+      "source": "02:00:00:00:00:01",
+      "destination": "02:00:00:00:00:02"
+    },
+    {
+      "ingress": "deskA",
+      "vlan": 20,
+      "source": "02:00:00:00:00:03",
+      "destination": "02:00:00:00:00:02"
+    }
+  ]
+}

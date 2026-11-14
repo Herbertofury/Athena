@@ -1,0 +1,392 @@
+[
+  {
+    "id": "azf-hierarchy-1",
+    "lessonId": "azf-hierarchy",
+    "question": "What does a resource group primarily help organize?",
+    "options": [
+      "Resources managed together through a lifecycle",
+      "All identities in a tenant",
+      "Every organization on the internet",
+      "Only resources with identical prices"
+    ],
+    "answer": 0,
+    "why": "Resource groups are management containers; identity directories and price groupings answer different questions."
+  },
+  {
+    "id": "azf-hierarchy-2",
+    "lessonId": "azf-hierarchy",
+    "question": "What does the ancestry receipt prove?",
+    "options": [
+      "That deletion is approved",
+      "The relationships in the supplied synthetic hierarchy",
+      "That a principal has Owner access",
+      "That all Azure moves are supported"
+    ],
+    "answer": 1,
+    "why": "The model has no Azure inventory or authorization engine and evaluates only its provided tree."
+  },
+  {
+    "id": "azf-hierarchy-3",
+    "lessonId": "azf-hierarchy",
+    "question": "A resource has no cost-center tag although its group has one. What should you check?",
+    "options": [
+      "Whether tags are always copied automatically",
+      "Whether deleting the subscription will fix it",
+      "Whether an explicit inheritance or tagging mechanism was configured",
+      "Whether the directory password expired"
+    ],
+    "answer": 2,
+    "why": "Resources do not automatically inherit resource-group tags; verify the actual policy or process."
+  },
+  {
+    "id": "azf-access-1",
+    "lessonId": "azf-access",
+    "question": "Which elements define an Azure role assignment?",
+    "options": [
+      "Password, region and invoice",
+      "Tenant logo, policy name and budget",
+      "Subscription name alone",
+      "Principal, role definition and scope"
+    ],
+    "answer": 3,
+    "why": "The assignment binds who receives which permissions at which resource scope."
+  },
+  {
+    "id": "azf-access-2",
+    "lessonId": "azf-access",
+    "question": "A workload uses managed identity. What still needs review?",
+    "options": [
+      "Its resource permissions and supported authentication path",
+      "Only its display color",
+      "Nothing because identity implies authorization",
+      "Whether it can share its password"
+    ],
+    "answer": 0,
+    "why": "Managed identity changes credential management, not the need for appropriate permissions."
+  },
+  {
+    "id": "azf-access-3",
+    "lessonId": "azf-access",
+    "question": "Why separate reading configuration from reading stored reports?",
+    "options": [
+      "Data has no access controls",
+      "Control-plane and data-plane permissions can differ",
+      "Directory roles always grant both",
+      "Any Reader role grants every blob"
+    ],
+    "answer": 1,
+    "why": "Resource-management permissions alone do not establish data access for every service."
+  },
+  {
+    "id": "azf-governance-1",
+    "lessonId": "azf-governance",
+    "question": "An audit policy finds a missing tag. What is justified?",
+    "options": [
+      "The resource creation was necessarily blocked",
+      "The missing tag was automatically repaired",
+      "The evaluated resource is noncompliant with that rule",
+      "All resource access was revoked"
+    ],
+    "answer": 2,
+    "why": "Audit detects noncompliance; it does not inherently deny or remediate."
+  },
+  {
+    "id": "azf-governance-2",
+    "lessonId": "azf-governance",
+    "question": "What does a management lock fail to guarantee?",
+    "options": [
+      "Restriction of selected management operations",
+      "A distinct purpose from role assignment",
+      "A possible obstacle to authorized maintenance",
+      "Protection against every data-plane deletion"
+    ],
+    "answer": 3,
+    "why": "Locks apply to the management plane, while service data protections need separate review."
+  },
+  {
+    "id": "azf-governance-3",
+    "lessonId": "azf-governance",
+    "question": "Why retain policy and lock results separately?",
+    "options": [
+      "They answer different control questions",
+      "Only lock results can be evidence",
+      "Policy results replace all permissions",
+      "Both are the same authorization engine"
+    ],
+    "answer": 0,
+    "why": "Compliance requirements and restrictions on management changes are distinct."
+  },
+  {
+    "id": "azf-storage-1",
+    "lessonId": "azf-storage",
+    "question": "What does geographic redundancy fail to guarantee?",
+    "options": [
+      "Additional geographic copies",
+      "Recovery from every accidental overwrite",
+      "A distinction from local redundancy",
+      "A potential secondary recovery location"
+    ],
+    "answer": 1,
+    "why": "Replication and recovery from unwanted changes are different requirements."
+  },
+  {
+    "id": "azf-storage-2",
+    "lessonId": "azf-storage",
+    "question": "Why does the fixed comparison select RA-GZRS?",
+    "options": [
+      "It is always free",
+      "It automatically grants data access",
+      "It matches both supplied feature requirements",
+      "It is supported by every account type"
+    ],
+    "answer": 2,
+    "why": "The result follows the fixture flags, not universal availability or suitability."
+  },
+  {
+    "id": "azf-storage-3",
+    "lessonId": "azf-storage",
+    "question": "An authorized reader cannot reach the endpoint. What else matters?",
+    "options": [
+      "Only the resource group name",
+      "Whether the budget is green",
+      "Whether replicas grant a password",
+      "Network path and name resolution"
+    ],
+    "answer": 3,
+    "why": "Authorization and connectivity are independent conditions for successful access."
+  },
+  {
+    "id": "azf-network-1",
+    "lessonId": "azf-network",
+    "question": "The subnet allows a new flow but the NIC NSG denies it. What follows?",
+    "options": [
+      "The flow is not allowed through both layers",
+      "The subnet always wins",
+      "The lower-level rule is ignored",
+      "DNS converts the denial to an allow"
+    ],
+    "answer": 0,
+    "why": "All applicable filtering layers must permit the flow."
+  },
+  {
+    "id": "azf-network-2",
+    "lessonId": "azf-network",
+    "question": "A private endpoint exists. What still needs checking?",
+    "options": [
+      "Whether private IPs bypass authentication",
+      "The client hostname resolves through the intended DNS path",
+      "Whether NSGs become irrelevant",
+      "Whether all public access is necessarily disabled"
+    ],
+    "answer": 1,
+    "why": "A private endpoint does not alone prove client DNS behavior or public endpoint restrictions."
+  },
+  {
+    "id": "azf-network-3",
+    "lessonId": "azf-network",
+    "question": "Why retain a route tie in this model?",
+    "options": [
+      "Azure never chooses routes",
+      "Both routes necessarily carry each packet",
+      "It omits Azure route-source precedence and cannot justify a winner",
+      "The shorter route name always wins"
+    ],
+    "answer": 2,
+    "why": "Explicit ambiguity is more accurate than an unsupported tie-breaker."
+  },
+  {
+    "id": "azf-compute-1",
+    "lessonId": "azf-compute",
+    "question": "Demand requires eight instances but the ceiling is six. What is justified?",
+    "options": [
+      "Autoscale guarantees eight anyway",
+      "The workload is proven highly available",
+      "The budget automatically approves more instances",
+      "The configured ceiling cannot satisfy the modeled demand"
+    ],
+    "answer": 3,
+    "why": "A maximum of six leaves a modeled capacity deficit when eight are required."
+  },
+  {
+    "id": "azf-compute-2",
+    "lessonId": "azf-compute",
+    "question": "What does a new VM instance count fail to prove?",
+    "options": [
+      "That the application is initialized and serving healthy requests",
+      "That a count can be recorded",
+      "That scaling has a configured ceiling",
+      "That demand can be estimated"
+    ],
+    "answer": 0,
+    "why": "Provisioned infrastructure and useful application readiness are different states."
+  },
+  {
+    "id": "azf-compute-3",
+    "lessonId": "azf-compute",
+    "question": "Which input most strengthens capacity planning?",
+    "options": [
+      "The longest service name",
+      "Measured safe throughput under a representative workload",
+      "The cheapest region label alone",
+      "A universal instance count for all apps"
+    ],
+    "answer": 1,
+    "why": "Capacity estimates depend on workload and performance evidence."
+  },
+  {
+    "id": "azf-monitoring-1",
+    "lessonId": "azf-monitoring",
+    "question": "Two of three expected samples produce a low mean. What should the report say?",
+    "options": [
+      "The service is definitely healthy",
+      "The missing sample must be zero",
+      "The window is incomplete and cannot justify a complete-window health conclusion",
+      "The threshold should be silently lowered"
+    ],
+    "answer": 2,
+    "why": "Completeness is part of the evidence; missing values cannot be invented."
+  },
+  {
+    "id": "azf-monitoring-2",
+    "lessonId": "azf-monitoring",
+    "question": "What does the Azure Activity Log primarily describe?",
+    "options": [
+      "Every application trace automatically",
+      "All blob contents",
+      "Only CPU measurements",
+      "Platform-level resource-management activity"
+    ],
+    "answer": 3,
+    "why": "Activity records and application/data-plane telemetry are distinct sources."
+  },
+  {
+    "id": "azf-monitoring-3",
+    "lessonId": "azf-monitoring",
+    "question": "A complete mean equals 85 under a strict greater-than-85 rule. What follows?",
+    "options": [
+      "It does not breach that exact comparison",
+      "It always breaches",
+      "The sample is missing",
+      "The threshold is irrelevant"
+    ],
+    "answer": 0,
+    "why": "Equality does not satisfy a strict greater-than comparison."
+  },
+  {
+    "id": "azf-recovery-1",
+    "lessonId": "azf-recovery",
+    "question": "Which statement best describes RPO?",
+    "options": [
+      "The number of administrator accounts",
+      "The acceptable data-loss interval",
+      "The guaranteed uptime of a replica",
+      "The length of every restore command"
+    ],
+    "answer": 1,
+    "why": "RPO concerns tolerated data loss, while RTO concerns restoration time."
+  },
+  {
+    "id": "azf-recovery-2",
+    "lessonId": "azf-recovery",
+    "question": "A recovery point is fresh enough. What remains unproven?",
+    "options": [
+      "That its age can be compared",
+      "That an objective can be recorded",
+      "That restoration completes and the application works",
+      "That a plan can list dependencies"
+    ],
+    "answer": 2,
+    "why": "Freshness alone does not prove restorability, timing or application correctness."
+  },
+  {
+    "id": "azf-recovery-3",
+    "lessonId": "azf-recovery",
+    "question": "Why restore network before database in this fixture?",
+    "options": [
+      "Every Azure database always has this exact graph",
+      "The model measured the fastest order",
+      "Application authentication is unnecessary",
+      "The supplied dependency graph requires that order"
+    ],
+    "answer": 3,
+    "why": "The ordering is derived from the fictional graph and is not a universal service sequence."
+  },
+  {
+    "id": "azf-cost-1",
+    "lessonId": "azf-cost",
+    "question": "What happens automatically when this modeled budget is exceeded?",
+    "options": [
+      "The model reports a threshold finding, not a spending stop",
+      "All Azure resources are deleted",
+      "All charges are refunded",
+      "The subscription becomes free"
+    ],
+    "answer": 0,
+    "why": "Budgets are monitoring and response inputs, not automatic universal hard caps."
+  },
+  {
+    "id": "azf-cost-2",
+    "lessonId": "azf-cost",
+    "question": "Where should untagged cost appear?",
+    "options": [
+      "Nowhere in the total",
+      "In a visible unallocated category pending investigation",
+      "Under a random owner",
+      "As negative spending"
+    ],
+    "answer": 1,
+    "why": "Keeping unallocated cost visible preserves reconciliation and accountability."
+  },
+  {
+    "id": "azf-cost-3",
+    "lessonId": "azf-cost",
+    "question": "What does repairing a cost-center tag directly change?",
+    "options": [
+      "The bill necessarily becomes zero",
+      "The resource stops running",
+      "Attribution metadata, not the underlying consumption",
+      "The service automatically gains capacity"
+    ],
+    "answer": 2,
+    "why": "Metadata repair helps reporting; it does not itself reduce use."
+  },
+  {
+    "id": "azf-capstone-1",
+    "lessonId": "azf-capstone",
+    "question": "Every local command exits successfully. What does that establish?",
+    "options": [
+      "A full AZ-104 qualification",
+      "Successful regional failover",
+      "Correct live role assignments",
+      "The local exercises ran, not that Azure is production-ready"
+    ],
+    "answer": 3,
+    "why": "Execution success is bounded by the local models and their synthetic inputs."
+  },
+  {
+    "id": "azf-capstone-2",
+    "lessonId": "azf-capstone",
+    "question": "What belongs beside a claim that the service is recoverable?",
+    "options": [
+      "A defined recovery objective and appropriate restore-test evidence",
+      "Only a storage service logo",
+      "Only a budget threshold",
+      "An invented restoration timestamp"
+    ],
+    "answer": 0,
+    "why": "Recoverability needs evidence tied to objectives rather than labels or fabricated results."
+  },
+  {
+    "id": "azf-capstone-3",
+    "lessonId": "azf-capstone",
+    "question": "How should conflicting AZ-104 effective-date evidence be handled?",
+    "options": [
+      "Choose the newest date and claim certainty",
+      "Disclose incomplete version verification and retain a partial mapping",
+      "Claim complete examination coverage anyway",
+      "Remove all scope limits"
+    ],
+    "answer": 1,
+    "why": "Source uncertainty constrains coverage claims and should remain visible."
+  }
+]

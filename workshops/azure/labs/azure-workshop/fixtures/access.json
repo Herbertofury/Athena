@@ -1,0 +1,48 @@
+{
+  "scopes": [
+    {
+      "id": "root",
+      "parent": null,
+      "kind": "management_group"
+    },
+    {
+      "id": "sub",
+      "parent": "root",
+      "kind": "subscription"
+    },
+    {
+      "id": "rg",
+      "parent": "sub",
+      "kind": "resource_group"
+    },
+    {
+      "id": "vm",
+      "parent": "rg",
+      "kind": "resource"
+    }
+  ],
+  "assignments": [
+    {
+      "id": "readers",
+      "principal": "analyst",
+      "scope": "rg",
+      "actions": [
+        "Microsoft.Compute/virtualMachines/read"
+      ]
+    }
+  ],
+  "requests": [
+    {
+      "id": "read",
+      "principal": "analyst",
+      "scope": "vm",
+      "action": "Microsoft.Compute/virtualMachines/read"
+    },
+    {
+      "id": "delete",
+      "principal": "analyst",
+      "scope": "vm",
+      "action": "Microsoft.Compute/virtualMachines/delete"
+    }
+  ]
+}

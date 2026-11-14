@@ -1,0 +1,58 @@
+{
+  "routes": [
+    {
+      "id": "default",
+      "prefix": "0.0.0.0/0",
+      "next_hop": "virtual_appliance"
+    },
+    {
+      "id": "private-a",
+      "prefix": "10.20.0.0/16",
+      "next_hop": "virtual_network"
+    },
+    {
+      "id": "private-b",
+      "prefix": "10.20.0.0/16",
+      "next_hop": "virtual_appliance"
+    }
+  ],
+  "destinations": [
+    "10.20.1.4",
+    "203.0.113.8"
+  ],
+  "nsg_cases": [
+    {
+      "id": "web-new-flow",
+      "layers": [
+        {
+          "id": "subnet",
+          "rules": [
+            {
+              "id": "allow-web",
+              "priority": 100,
+              "matches": true,
+              "action": "allow"
+            }
+          ]
+        },
+        {
+          "id": "nic",
+          "rules": [
+            {
+              "id": "deny-web",
+              "priority": 100,
+              "matches": true,
+              "action": "deny"
+            },
+            {
+              "id": "allow-later",
+              "priority": 200,
+              "matches": true,
+              "action": "allow"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "rules": [
+    {
+      "id": "blockHost",
+      "action": "deny",
+      "source": "192.0.2.9/32",
+      "destination": "0.0.0.0/0",
+      "protocol": "any",
+      "port_min": 0,
+      "port_max": 65535
+    },
+    {
+      "id": "allowHttps",
+      "action": "permit",
+      "source": "192.0.2.0/24",
+      "destination": "198.51.100.0/24",
+      "protocol": "tcp",
+      "port_min": 443,
+      "port_max": 443
+    }
+  ],
+  "packet": {
+    "source": "192.0.2.9",
+    "destination": "198.51.100.20",
+    "protocol": "tcp",
+    "destination_port": 443
+  },
+  "static_nat": [
+    {
+      "inside_local": "192.0.2.9",
+      "inside_global": "203.0.113.9"
+    }
+  ]
+}

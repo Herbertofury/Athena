@@ -1,0 +1,33 @@
+{
+  "destination": "192.0.2.77",
+  "routes": [
+    {
+      "id": "default",
+      "prefix": "0.0.0.0/0",
+      "admin_distance": 1,
+      "next_hop": "198.51.100.1",
+      "active": true
+    },
+    {
+      "id": "primary",
+      "prefix": "192.0.2.0/24",
+      "admin_distance": 90,
+      "next_hop": "198.51.100.2",
+      "active": false
+    },
+    {
+      "id": "floating",
+      "prefix": "192.0.2.0/24",
+      "admin_distance": 200,
+      "next_hop": "198.51.100.3",
+      "active": true
+    },
+    {
+      "id": "specific",
+      "prefix": "192.0.2.64/26",
+      "admin_distance": 220,
+      "next_hop": "198.51.100.4",
+      "active": true
+    }
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "neighbors": [
+    {
+      "id": "peerA",
+      "same_subnet": true,
+      "area_match": true,
+      "hello_match": true,
+      "dead_match": true,
+      "authentication_match": true,
+      "mtu_match": false
+    },
+    {
+      "id": "peerB",
+      "same_subnet": true,
+      "area_match": true,
+      "hello_match": true,
+      "dead_match": true,
+      "authentication_match": true,
+      "mtu_match": true
+    }
+  ],
+  "nodes": [
+    "A",
+    "B",
+    "C",
+    "D",
+    "island"
+  ],
+  "links": [
+    {
+      "a": "A",
+      "b": "B",
+      "cost": 10
+    },
+    {
+      "a": "A",
+      "b": "C",
+      "cost": 3
+    },
+    {
+      "a": "C",
+      "b": "B",
+      "cost": 2
+    },
+    {
+      "a": "B",
+      "b": "D",
+      "cost": 4
+    },
+    {
+      "a": "C",
+      "b": "D",
+      "cost": 20
+    }
+  ],
+  "source": "A"
+}

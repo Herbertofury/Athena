@@ -1,0 +1,392 @@
+[
+  {
+    "id": "ccnaf-vlans-1",
+    "lessonId": "ccnaf-vlans",
+    "question": "Which address is learned from an arriving frame?",
+    "options": [
+      "The source MAC in its VLAN and ingress context",
+      "The destination IP as a route",
+      "Every MAC in every VLAN",
+      "The DNS server address"
+    ],
+    "answer": 0,
+    "why": "Source learning supplies the location used by later destination lookups; it is not IP routing."
+  },
+  {
+    "id": "ccnaf-vlans-2",
+    "lessonId": "ccnaf-vlans",
+    "question": "What does an allowed-list intersection establish?",
+    "options": [
+      "A successful application exchange",
+      "Common permitted VLAN membership, with operational checks still missing",
+      "Identical native VLAN settings",
+      "A measured trunk throughput"
+    ],
+    "answer": 1,
+    "why": "Common membership is necessary for the modeled path but cannot prove operational trunk behavior."
+  },
+  {
+    "id": "ccnaf-vlans-3",
+    "lessonId": "ccnaf-vlans",
+    "question": "A destination exists only in VLAN 10. A VLAN 20 frame names it. What follows?",
+    "options": [
+      "The switch automatically routes it",
+      "All VLANs merge temporarily",
+      "The VLAN 10 entry does not resolve the VLAN 20 lookup",
+      "The frame must reach its application"
+    ],
+    "answer": 2,
+    "why": "Forwarding context is VLAN-specific; another VLAN entry cannot establish this destination location."
+  },
+  {
+    "id": "ccnaf-loop-control-1",
+    "lessonId": "ccnaf-loop-control",
+    "question": "Why can flooding through a Layer 2 cycle be dangerous?",
+    "options": [
+      "Every switch becomes a DNS server",
+      "IP routes always disappear",
+      "All links automatically shut down",
+      "Frames can circulate and multiply without an IP-style hop limit"
+    ],
+    "answer": 3,
+    "why": "Loop control is needed because ordinary bridging does not decrement an IP TTL on each bridge hop."
+  },
+  {
+    "id": "ccnaf-loop-control-2",
+    "lessonId": "ccnaf-loop-control",
+    "question": "An indirect root path costs less than a direct link. Which principle applies?",
+    "options": [
+      "Compare cumulative root path cost, not cable count alone",
+      "Always choose the direct cable",
+      "Choose the highest bridge priority",
+      "Ignore all costs on redundant links"
+    ],
+    "answer": 0,
+    "why": "The preferred root path is based on protocol comparisons, including accumulated cost."
+  },
+  {
+    "id": "ccnaf-loop-control-3",
+    "lessonId": "ccnaf-loop-control",
+    "question": "What does this graph exercise not measure?",
+    "options": [
+      "The supplied link costs",
+      "Actual spanning-tree convergence and packet loss",
+      "The identifiers in its fixture",
+      "The arithmetic sum of a modeled path"
+    ],
+    "answer": 1,
+    "why": "Graph calculations do not generate BPDUs or observe timed equipment behavior."
+  },
+  {
+    "id": "ccnaf-bundles-1",
+    "lessonId": "ccnaf-bundles",
+    "question": "Which mode pair can initiate LACP negotiation?",
+    "options": [
+      "Passive and passive",
+      "Static on and passive as equivalent LACP peers",
+      "Active and passive",
+      "Two disabled interfaces"
+    ],
+    "answer": 2,
+    "why": "An active endpoint initiates LACP; two passive endpoints do not initiate negotiation."
+  },
+  {
+    "id": "ccnaf-bundles-2",
+    "lessonId": "ccnaf-bundles",
+    "question": "What does two-member aggregation guarantee for one flow?",
+    "options": [
+      "Exactly twice the link speed",
+      "Zero packet loss",
+      "Identical hashing on every platform",
+      "No automatic doubling of that flow’s throughput"
+    ],
+    "answer": 3,
+    "why": "Hash-based distribution can keep one flow on one member even when aggregate capacity increases."
+  },
+  {
+    "id": "ccnaf-bundles-3",
+    "lessonId": "ccnaf-bundles",
+    "question": "Changing passive to active removes one incompatibility. What next?",
+    "options": [
+      "Recheck the remaining member settings and operational evidence",
+      "Assume all VLAN mismatches disappeared",
+      "Declare measured failover success",
+      "Treat static on as negotiated LACP"
+    ],
+    "answer": 0,
+    "why": "Negotiation mode is only one prerequisite and cannot repair unrelated configuration differences."
+  },
+  {
+    "id": "ccnaf-ipv6-1",
+    "lessonId": "ccnaf-ipv6",
+    "question": "What does same-prefix membership prove by itself?",
+    "options": [
+      "Successful neighbor discovery",
+      "Only the arithmetic membership relationship",
+      "An active default router",
+      "That all firewall policies permit traffic"
+    ],
+    "answer": 1,
+    "why": "Prefix arithmetic cannot establish operational links, successful neighbor discovery or permissive traffic policy."
+  },
+  {
+    "id": "ccnaf-ipv6-2",
+    "lessonId": "ccnaf-ipv6",
+    "question": "Which mechanism handles IPv6 neighbor address resolution?",
+    "options": [
+      "IPv4 ARP unchanged",
+      "DNS zone transfers",
+      "ICMPv6 Neighbor Discovery",
+      "LACP negotiation"
+    ],
+    "answer": 2,
+    "why": "Neighbor Solicitation and Advertisement are part of IPv6 ND, not IPv4 ARP."
+  },
+  {
+    "id": "ccnaf-ipv6-3",
+    "lessonId": "ccnaf-ipv6",
+    "question": "Why may a link-local next hop need an interface identifier?",
+    "options": [
+      "Link-local addresses are public DNS names",
+      "IPv6 addresses cannot be compressed",
+      "The interface identifier supplies a password",
+      "Its meaning is limited to a link and may be ambiguous across interfaces"
+    ],
+    "answer": 3,
+    "why": "Link scope makes the outgoing interface part of the context needed to identify a neighbor."
+  },
+  {
+    "id": "ccnaf-routing-1",
+    "lessonId": "ccnaf-routing",
+    "question": "A /24 and /16 both match. The /16 has lower administrative distance. Which forwarding principle applies?",
+    "options": [
+      "The installed /24 is more specific",
+      "The /16 always wins",
+      "The first listed route wins",
+      "Administrative distance measures prefix length"
+    ],
+    "answer": 0,
+    "why": "Longest-prefix matching governs destination specificity; source preference does not make a shorter prefix more specific."
+  },
+  {
+    "id": "ccnaf-routing-2",
+    "lessonId": "ccnaf-routing",
+    "question": "What makes a static route floating relative to a preferred route?",
+    "options": [
+      "A larger physical interface",
+      "A less preferred administrative distance for the intended backup prefix",
+      "A DNS alias",
+      "A requirement to use wireless"
+    ],
+    "answer": 1,
+    "why": "The backup is configured to be less preferred while the primary route remains available."
+  },
+  {
+    "id": "ccnaf-routing-3",
+    "lessonId": "ccnaf-routing",
+    "question": "What should a model do with an unresolved equal preference?",
+    "options": [
+      "Invent a successful failover",
+      "Choose randomly and call it IOS behavior",
+      "Preserve the tie and name missing decision information",
+      "Treat list order as measured performance"
+    ],
+    "answer": 2,
+    "why": "An explicit unresolved result is more defensible than an unsupported routing choice."
+  },
+  {
+    "id": "ccnaf-ospf-1",
+    "lessonId": "ccnaf-ospf",
+    "question": "A peer passes all modeled prerequisite checks. What is justified?",
+    "options": [
+      "Full adjacency is proven",
+      "Every database is synchronized",
+      "Application delivery is guaranteed",
+      "No checked mismatch was found; adjacency still needs observation"
+    ],
+    "answer": 3,
+    "why": "A prerequisite checklist does not implement or observe the OSPF neighbor state machine."
+  },
+  {
+    "id": "ccnaf-ospf-2",
+    "lessonId": "ccnaf-ospf",
+    "question": "What does an OSPF cost sum represent here?",
+    "options": [
+      "A path metric over supplied edges",
+      "Measured round-trip latency",
+      "An administrative-distance total",
+      "A certificate trust score"
+    ],
+    "answer": 0,
+    "why": "OSPF path costs are protocol metrics, not measured latency or administrative distance."
+  },
+  {
+    "id": "ccnaf-ospf-3",
+    "lessonId": "ccnaf-ospf",
+    "question": "After correcting a modeled MTU mismatch on paper, what remains unknown?",
+    "options": [
+      "Whether the old input had a mismatch",
+      "Whether the real neighbors would reach the expected state",
+      "Whether integers can be added",
+      "Whether the paper change was a real packet capture"
+    ],
+    "answer": 1,
+    "why": "Removing one obstacle does not prove exchange, synchronization or operational convergence."
+  },
+  {
+    "id": "ccnaf-services-1",
+    "lessonId": "ccnaf-services",
+    "question": "An earlier deny matches before a later HTTPS permit. What determines the result?",
+    "options": [
+      "The last permit in the list",
+      "The rule with the friendliest name",
+      "The earlier matching deny",
+      "The NAT address"
+    ],
+    "answer": 2,
+    "why": "Ordered ACL evaluation stops at the first applicable entry; a later permit cannot override that earlier matching deny."
+  },
+  {
+    "id": "ccnaf-services-2",
+    "lessonId": "ccnaf-services",
+    "question": "A static NAT mapping exists. What does that prove?",
+    "options": [
+      "All ACLs permit traffic",
+      "DNS is correct",
+      "NTP is synchronized",
+      "A modeled address association, not permission or delivery"
+    ],
+    "answer": 3,
+    "why": "Translation, filtering and application success are separate mechanisms and evidence claims."
+  },
+  {
+    "id": "ccnaf-services-3",
+    "lessonId": "ccnaf-services",
+    "question": "Why retain time synchronization evidence during troubleshooting?",
+    "options": [
+      "Clock disagreement can distort event correlation",
+      "NTP automatically rewrites ACLs",
+      "DHCP leases are passwords",
+      "DNS cannot work without a public NAT address"
+    ],
+    "answer": 0,
+    "why": "Reliable timing helps compare logs, but it does not replace protocol-specific observations."
+  },
+  {
+    "id": "ccnaf-wireless-1",
+    "lessonId": "ccnaf-wireless",
+    "question": "A client cannot meet the approved WLAN security requirement. What is a defensible next step?",
+    "options": [
+      "Silently downgrade the security minimum",
+      "Consider a compatible approved client while preserving the requirement",
+      "Assume SSID visibility proves compatibility",
+      "Disable authentication everywhere"
+    ],
+    "answer": 1,
+    "why": "Compatibility should be resolved without silently changing the security decision; a capability mismatch does not authorize weakening the approved minimum."
+  },
+  {
+    "id": "ccnaf-wireless-2",
+    "lessonId": "ccnaf-wireless",
+    "question": "What can a simple channel-spacing model establish?",
+    "options": [
+      "Measured airtime contention",
+      "A complete RF site survey",
+      "A bounded comparison under its stated width assumptions",
+      "Guaranteed roaming performance"
+    ],
+    "answer": 2,
+    "why": "Channel arithmetic omits actual RF conditions, neighboring transmitters, client capabilities and deployment behavior that affect measured performance."
+  },
+  {
+    "id": "ccnaf-wireless-3",
+    "lessonId": "ccnaf-wireless",
+    "question": "What does an SSID alone tell you?",
+    "options": [
+      "That certificates are validated",
+      "That all clients support WPA3",
+      "That the uplink VLAN is correct",
+      "The advertised service-set identity, not complete security assurance"
+    ],
+    "answer": 3,
+    "why": "A name does not establish authentication, client capability or wired-network configuration."
+  },
+  {
+    "id": "ccnaf-automation-1",
+    "lessonId": "ccnaf-automation",
+    "question": "Why distinguish numeric 20 from string “20” in a configuration contract?",
+    "options": [
+      "They have different JSON types and may mean different valid inputs",
+      "JSON has no types",
+      "Strings always configure VLANs faster",
+      "Any equal-looking text is automatically equivalent"
+    ],
+    "answer": 0,
+    "why": "Type validation prevents silent coercion from hiding invalid or unintended configuration."
+  },
+  {
+    "id": "ccnaf-automation-2",
+    "lessonId": "ccnaf-automation",
+    "question": "A diff says remove retired. What has happened?",
+    "options": [
+      "A switch port was deleted",
+      "A removal was planned in the model, not executed on a device",
+      "An HTTP DELETE succeeded",
+      "A controller granted authorization"
+    ],
+    "answer": 1,
+    "why": "The local comparison emits planned changes without contacting an API, so it provides no evidence of deletion or configuration repair."
+  },
+  {
+    "id": "ccnaf-automation-3",
+    "lessonId": "ccnaf-automation",
+    "question": "What does idempotent HTTP semantics mean?",
+    "options": [
+      "Every response is identical",
+      "Every failed request can be retried blindly",
+      "Repeating an identical request has the same intended effect as one request",
+      "No server logs are written"
+    ],
+    "answer": 2,
+    "why": "Idempotence concerns intended effect; uncertain outcomes and API-specific contracts still require care."
+  },
+  {
+    "id": "ccnaf-capstone-1",
+    "lessonId": "ccnaf-capstone",
+    "question": "A route exists but the relevant ACL denies the service. What should the review say?",
+    "options": [
+      "The route automatically overrides the ACL",
+      "NAT guarantees success",
+      "The application must be running",
+      "Routing evidence does not erase the modeled policy contradiction"
+    ],
+    "answer": 3,
+    "why": "Independent mechanisms answer different questions; a route does not authorize denied traffic."
+  },
+  {
+    "id": "ccnaf-capstone-2",
+    "lessonId": "ccnaf-capstone",
+    "question": "How should absent neighbor evidence be represented?",
+    "options": [
+      "As an unresolved claim requiring an appropriate observation",
+      "As a successful ping",
+      "As proof the router is broken",
+      "As an irrelevant detail"
+    ],
+    "answer": 0,
+    "why": "Missing evidence is uncertainty, not success or a specific failure diagnosis."
+  },
+  {
+    "id": "ccnaf-capstone-3",
+    "lessonId": "ccnaf-capstone",
+    "question": "What does completing this workshop establish?",
+    "options": [
+      "Complete CCNA coverage",
+      "Practice with selected local models and explicit gaps",
+      "Production network approval",
+      "Real Cisco configuration proficiency"
+    ],
+    "answer": 1,
+    "why": "Bounded offline work cannot substitute for the omitted objectives and equipment-based validation."
+  }
+]

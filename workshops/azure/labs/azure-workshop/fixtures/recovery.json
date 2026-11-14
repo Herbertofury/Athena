@@ -1,0 +1,22 @@
+{
+  "components": [
+    {
+      "id": "app",
+      "depends_on": [
+        "database"
+      ]
+    },
+    {
+      "id": "database",
+      "depends_on": [
+        "network"
+      ]
+    },
+    {
+      "id": "network",
+      "depends_on": []
+    }
+  ],
+  "recovery_point_age_minutes": 45,
+  "rpo_minutes": 30
+}

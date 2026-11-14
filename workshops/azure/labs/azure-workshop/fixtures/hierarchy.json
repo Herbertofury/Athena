@@ -1,0 +1,24 @@
+{
+  "scopes": [
+    {
+      "id": "root",
+      "parent": null,
+      "kind": "management_group"
+    },
+    {
+      "id": "sub",
+      "parent": "root",
+      "kind": "subscription"
+    },
+    {
+      "id": "rg",
+      "parent": "sub",
+      "kind": "resource_group"
+    },
+    {
+      "id": "vm",
+      "parent": "rg",
+      "kind": "resource"
+    }
+  ]
+}

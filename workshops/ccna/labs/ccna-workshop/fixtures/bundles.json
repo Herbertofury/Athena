@@ -1,0 +1,36 @@
+{
+  "members": [
+    {
+      "id": "m1",
+      "speed_mbps": 1000,
+      "duplex": "full",
+      "vlans": [
+        10,
+        20
+      ],
+      "local_mode": "active",
+      "peer_mode": "passive"
+    },
+    {
+      "id": "m2",
+      "speed_mbps": 1000,
+      "duplex": "full",
+      "vlans": [
+        20,
+        10
+      ],
+      "local_mode": "passive",
+      "peer_mode": "passive"
+    },
+    {
+      "id": "m3",
+      "speed_mbps": 100,
+      "duplex": "full",
+      "vlans": [
+        10
+      ],
+      "local_mode": "active",
+      "peer_mode": "active"
+    }
+  ]
+}
