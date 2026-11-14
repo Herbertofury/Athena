@@ -103,6 +103,14 @@ Environment motion remains explicit and session-only. `prefers-reduced-motion: r
 
 This is consistent with original `prototype-v24.ts` cinematic reduced-motion behavior (lines 1548, 1565, 1606 and 1666), with dynamic preference handling matching Athena ecology. It is not complete original governor parity. Renderer formulas and persisted format/schema are unchanged. Reproduce with `node --test native/foundry/tests/environment-reduced-motion.test.mjs` and `CHROMIUM_PATH=<installed-browser> node scripts/test_foundry_environment_reduced_motion_browser.cjs`.
 
+## Independent layer navigator
+
+`layers` is an optional removable module. Disable it with `--disable-foundry-module layers` in the local bridge startup profile or `foundryModules.layers=false` in the mount context. Core inspector/Undo/persistence do not depend on it.
+
+Adapted from original `prototype-v24.ts` `renderLayers` (line 636), the navigator groups all current instances by actual native world/UI/sticker-anchor surfaces, ordered topmost-first by recorded stack value with exact-ID tie breaking. Hidden, filtered and unavailable-anchor instances remain selectable. Labels use text only and include full instance IDs, including duplicates. Select changes no persistent data/history; Show/Hide explicitly uses existing format-v7 appearance adoption when needed; Pin/Unpin retains the existing format. Each mutation is one Undo step. Native position pin is not original lock, and native world scene is not original left/right world partitioning. No source assets or private records are copied.
+
+Run `node --test native/foundry/tests/layers.test.mjs`; actual Chromium acceptance is `CHROMIUM_PATH=<installed-browser> node scripts/test_foundry_layers_browser.cjs`.
+
 ## Optional Canvas-only view
 
 The explicit Canvas only button hides Foundry's surrounding authoring panels while keeping
