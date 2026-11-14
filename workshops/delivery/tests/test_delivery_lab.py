@@ -60,7 +60,7 @@ class Exercises(unittest.TestCase):
 
     def test_runtime_evidence(self):
         r = self.results['snapshots']['runtime']
-        self.assertEqual(r['git_executable'], '/usr/local/bin/git'); self.assertIn('git version', r['git_version'])
+        self.assertEqual(r['git_executable'], lab.select_git()); self.assertIn(r['git_executable'], lab.GIT_CANDIDATES); self.assertIn('git version', r['git_version'])
         self.assertEqual(r['observed_head_author'], 'Synthetic Learner <learner@example.invalid>')
         self.assertRegex(r['python_version'], r'^3\.\d+\.\d+')
 

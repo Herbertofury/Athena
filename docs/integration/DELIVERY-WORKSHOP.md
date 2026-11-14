@@ -1,7 +1,7 @@
 # Native Delivery workshop integration
 
 Source: original Athena #11 at `311991d6c0b1abd9f88a87077fc4be853a0c758b`.
-All 28 `workshops/delivery` source files are retained byte-for-byte.
+All 28 original source files are recoverable at that donor. The 27 implementation/content files remain byte-identical; one test now checks the actually selected allowlisted Git binary rather than hardcoding the original machine path.
 This integrates only Delivery, not the four remaining supplemental workshops.
 
 The native catalog now has 98 lessons and six workshops. Delivery contributes
@@ -25,6 +25,8 @@ no remotes, user repository, credentials, hooks or publication.
 Initial local failures exposed outdated exact-count assertions and one mistaken
 count edit. These were corrected to the actual complete inventory; prior failures
 were retained, and final suites passed without skipping old lesson checks.
+
+CI initially exposed an original machine-specific Git-path assertion; the repair preserves the allowlisted executable check. Actual accessibility Chromium also passed for all 50 workshop lessons.
 
 These receipts are local Linux evidence, not native Windows, new hosted deployment,
 certification mastery, real cloud operation or source-retirement acceptance.
