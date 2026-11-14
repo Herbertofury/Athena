@@ -63,5 +63,11 @@
     "Full native feature parity and native acceptance",
     "Privacy/rights review: historical exposure remains; reference assets not cleared for new runtime"
   ],
-  "noDeletion": true
+  "noDeletion": true,
+  "retainedFailure": {
+    "head": "954741115fa7fc139839bf8d0f187ec424bc89e4",
+    "job": 132311157852,
+    "stage": "npm test",
+    "detail": "211/212 passed; privacy receipt correctly rejected changed ledger hash. Refreshed reviewed ledger digest, retaining previous digest; no privacy assertion removed."
+  }
 }
