@@ -6,6 +6,7 @@
 - [The Packet Trail](Packet-Trail)
 - [Coverage and quality](Coverage-and-Quality)
 - [Engineering research](Engineering-Home)
+- [Developer and agent cleanup tools](Engineering-Developer-Cleanup-and-Agent-Hygiene)
 - [Windows tools catalog](Engineering-Windows-Utilities-and-Creation-Tools)
 - [Windows optimization guide](Engineering-Windows-PC-Optimization)
 
