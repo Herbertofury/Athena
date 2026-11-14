@@ -1,0 +1,20 @@
+import {createLocalComparison,comparisonReceipt} from './local-compare.mjs';
+/** Optional local-only comparison. Never fetches providers or uploads selected data. */
+export function mountGalleryComparison({container,cards,signal}){
+ const doc=container.ownerDocument,comparison=createLocalComparison();let disposed=false,sequence=0;const urls=new Set(),timers=new Set();
+ const node=(tag,text)=>{const e=doc.createElement(tag);if(text)e.textContent=text;return e;};
+ const panel=node('section');panel.className='receipt';panel.dataset.galleryComparison='';
+ const title=node('h2','Compare a local Modrinth response'),help=node('p','Select a saved public project JSON. Only ordered preview/original URL pairs are compared, not image decoding, source authenticity or complete content. No provider request or upload is made.');
+ const form=node('form'),select=node('select'),file=node('input'),run=node('button','Compare gallery'),last=node('button','Show last completed comparison'),download=node('button','Download comparison receipt'),status=node('p','Choose a saved project JSON. No provider request will be sent.');
+ select.setAttribute('aria-label','Retained Modrinth card');select.dataset.galleryCard='';file.type='file';file.accept='application/json,.json';file.setAttribute('aria-label','Saved project JSON');file.dataset.galleryFile='';run.type='submit';last.type=download.type='button';last.disabled=download.disabled=true;status.setAttribute('role','status');status.dataset.galleryStatus='';status.style.overflowWrap='anywhere';
+ for(const card of cards.filter(c=>c.provider==='Modrinth')){const option=node('option',card.title);option.value=card.id;select.append(option);}run.disabled=select.options.length===0;
+ const changed=()=>{sequence++;comparison.cancel();run.disabled=select.options.length===0;status.textContent='Selection changed. Run a new comparison.'+(comparison.last?' Last completed result is retained.':'');};
+ file.addEventListener('change',changed);select.addEventListener('change',changed);
+ const show=record=>{status.textContent=`Card ${record.card_id}: ${record.result.status}. ${record.result.reason||`Source ${record.result.actual_count}, snapshot ${record.result.snapshot_count}.`} SHA-256 ${record.sha256}. URL pairs only; not image or source verification.`;};
+ form.addEventListener('submit',async event=>{event.preventDefault();if(disposed)return;const card=cards.find(c=>c.id===select.value);if(!card)return;const own=++sequence;run.disabled=true;status.textContent='Comparing local JSON; last completed result is retained…';try{const result=await comparison.load(file.files?.[0],card);if(disposed||own!==sequence||result.status!=='ready')return;last.disabled=download.disabled=false;show(result.record);}catch(error){if(!disposed&&own===sequence)status.textContent=error.message+(comparison.last?' Last completed result is retained.':'');}finally{if(!disposed&&own===sequence)run.disabled=false;}});
+ last.addEventListener('click',()=>{if(disposed||!comparison.last)return;sequence++;comparison.cancel();run.disabled=false;show(comparison.last);});
+ download.addEventListener('click',()=>{if(disposed||!comparison.last)return;const url=URL.createObjectURL(new Blob([JSON.stringify(comparisonReceipt(comparison.last),null,2)],{type:'application/json'}));urls.add(url);const a=node('a');a.href=url;a.download='athena-local-gallery-comparison.json';a.click();const timer=setTimeout(()=>{timers.delete(timer);urls.delete(url);URL.revokeObjectURL(url);},1000);timers.add(timer);});
+ form.style.display='grid';form.style.gap='8px';for(const control of [select,file]){control.style.maxWidth='100%';control.style.minWidth='0';}form.append(select,file,run);panel.append(title,help,form,last,download,status);container.append(panel);
+ function dispose(){if(disposed)return;disposed=true;sequence++;comparison.cancel();for(const timer of timers)clearTimeout(timer);for(const url of urls)URL.revokeObjectURL(url);timers.clear();urls.clear();panel.remove();signal?.removeEventListener('abort',dispose);}
+ signal?.addEventListener('abort',dispose,{once:true});if(signal?.aborted)dispose();return {dispose};
+}
