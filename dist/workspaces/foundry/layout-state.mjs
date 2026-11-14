@@ -22,6 +22,7 @@ export function createLayoutModel(catalog) {
  function encode(value){return JSON.stringify(validate(value));}
  function save(storage,key,value){const encoded=encode(value);storage.setItem(key,encoded);return parse(encoded);}
  function load(storage,key){const raw=storage.getItem(key);return raw===null?{state:initial(),recovery:null}:{state:parse(raw),recovery:null};}
+ function view(input){if(input===undefined)return {inspectorDock:'right'};if(!plain(input)||!['left','right','hidden'].includes(input.inspectorDock))throw Error('Unsupported inspector layout.');return {inspectorDock:input.inspectorDock};}
  function workspace(input){
   if(!plain(input)||input.version!==1||!plain(input.layouts))throw new Error('Unsupported workspace backup.');
   const active=validate(input.active),layouts=Object.create(null);
@@ -30,11 +31,11 @@ export function createLayoutModel(catalog) {
    layouts[id]=checked;
   }
   layouts[active.roomId]=active;
-  return {version:1,active,layouts};
+  return {version:1,active,layouts,view:view(input.view)};
  }
  function parseWorkspace(text){if(typeof text!=='string'||text.length>1000000)throw new Error('Workspace exceeds import limit.');return workspace(JSON.parse(text));}
  function encodeWorkspace(value){return JSON.stringify(workspace(value));}
- return {validate,initial,parse,encode,save,load,workspace,parseWorkspace,encodeWorkspace};
+ return {validate,initial,parse,encode,save,load,view,workspace,parseWorkspace,encodeWorkspace};
 }
 
 /** Bounded session-only rollback. Every retained snapshot is schema validated. */
