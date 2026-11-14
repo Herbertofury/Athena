@@ -1,0 +1,17 @@
+// Real Chromium presentation test; local synthetic authoring state only.
+const fs=require('fs'),path=require('path'),http=require('http'),assert=require('assert/strict'),{chromium}=require('playwright');
+const base=path.resolve(__dirname,'../dist'),out=path.resolve(process.env.ATHENA_BROWSER_OUTPUT||'browser-results/learning-search');let browser,server;
+const report={scope:'Full lesson literal search; not semantic ranking or exhaustive native IME acceptance',checks:[],errors:[],outsideRequests:[]};
+async function check(name,fn){await fn();report.checks.push({name,result:'pass'});}
+(async()=>{fs.mkdirSync(out,{recursive:true});server=http.createServer((req,res)=>{try{const f=path.resolve(base,'.'+new URL(req.url,'http://localhost').pathname.replace(/^\/$/,'/index.html'));if(!f.startsWith(base+path.sep))throw Error();const b=fs.readFileSync(f);res.setHeader('Content-Type',f.endsWith('.js')||f.endsWith('.mjs')?'text/javascript':f.endsWith('.html')?'text/html':f.endsWith('.css')?'text/css':f.endsWith('.json')?'application/json':'application/octet-stream');res.end(b);}catch{res.writeHead(404);res.end();}});await new Promise(r=>server.listen(0,'127.0.0.1',r));const origin='http://127.0.0.1:'+server.address().port;browser=await chromium.launch({headless:true,...(process.env.CHROMIUM_PATH?{executablePath:process.env.CHROMIUM_PATH}:{})});report.browser=browser.version();const context=await browser.newContext({viewport:{width:1440,height:1000},reducedMotion:'reduce'});await context.route('**/*',r=>{if(new URL(r.request().url()).origin===origin)return r.continue();report.outsideRequests.push(r.request().url());return r.abort();});const page=await context.newPage();page.on('pageerror',e=>report.errors.push(e.message));await page.goto(origin+'/#library');const search=page.locator('#search');
+await check('Reordered body terms find owning lessons and preserve literal display',async()=>{
+for(const [query,id] of [['TTL DNS','dns-dhcp'],['recovery RAID','hardware']]){
+await search.fill(query);await page.locator('#main [data-lesson="'+id+'"]').first().waitFor();assert.equal(await search.inputValue(),query);assert.ok((await page.locator('#main').innerText()).includes(query));}
+await search.fill('this-unmatchable-literal[?');await page.locator('#main .empty').waitFor();assert.equal(await page.locator('#main [data-lesson]').count(),0);
+});
+await check('Compatibility spellings and clear preserve progress and navigate normally',async()=>{
+const before=await page.evaluate(()=>JSON.stringify(localStorage));await search.fill('ｄｎｓ');await page.locator('#main [data-lesson="dns-dhcp"]').first().waitFor();
+await search.fill('');await page.locator('#main [data-lesson]').first().waitFor();assert.equal(await page.evaluate(()=>JSON.stringify(localStorage)),before);
+await page.locator('[data-nav="build"]').click();await page.locator('.foundry-workspace').waitFor();await page.locator('[data-nav="library"]').click();await search.fill('TTL DNS');await page.locator('#main [data-lesson="dns-dhcp"]').first().waitFor();await page.screenshot({path:path.join(out,'learning-search.png'),fullPage:true});
+});
+assert.deepEqual(report.errors,[]);assert.deepEqual(report.outsideRequests,[]);report.result='pass';})().catch(e=>{report.result='failed';report.error=e.stack;process.exitCode=1;}).finally(async()=>{await browser?.close();server?.close();fs.writeFileSync(path.join(out,'report.json'),JSON.stringify(report,null,2));console.log(JSON.stringify(report,null,2));});
