@@ -1,0 +1,1057 @@
+{
+  "schema_version": 1,
+  "scope": "Measured original JVM fixtures with complete and client-absent classpaths. No Fabric, Forge, NeoForge, game process, annotation stripping, or target-project acceptance.",
+  "recorded_at_utc": "2026-11-11T02:23:00+00:00",
+  "environment": {
+    "python": "3.12.14",
+    "system": "Linux",
+    "machine": "x86_64"
+  },
+  "runtime_reference": {
+    "schema_version": 1,
+    "jdk_source_repo": "openjdk/jdk21u",
+    "jdk_source_tag": "jdk-21.0.13+9",
+    "jdk_source_commit": "ba94eace682733f66e623c089bcafcf4a1b8e39c",
+    "compiler_options": [
+      "-source",
+      "21",
+      "-target",
+      "21",
+      "-proc:none",
+      "-g:none",
+      "-encoding",
+      "UTF-8"
+    ],
+    "scope": "Source revision reference, not an assertion that the local Debian runtime was built reproducibly from these sources. No external runtime is downloaded."
+  },
+  "input_sha256": {
+    "run.py": "9852df7f26d90044087230f0423f2e0eb2c69ad90d62f979825a95b62b19053b",
+    "ClassloadingProbe.java": "6b4c496fc8c3e36ee439375bde5db1e1c26f84d2789451cdf0814292b9ecff65",
+    "cases.json": "f502f8311e398c18ef2d8b99e4c43853553546168a989a8978435d941d384077",
+    "runtime-reference.json": "de9219dea20430177d1179b6887637179f83df4829ed8b6543566b0f2548ce14",
+    "fixtures/client/ClientApi.java": "d8f56599c2febbd85f60b2cef009ec5121b8b7163791264a221cce51d5cd8cfa",
+    "fixtures/lab/BodyReference.java": "73033efed366c05d2aa0d77b12601ea2ac496f6cdf154b2fc0ce3959fee61dcc",
+    "fixtures/lab/ConstantConsumer.java": "49126f313a005777b2e66a1acc4629bc6277aacbd2e353c346a1d7fd0a37a5be",
+    "fixtures/lab/Constants.java": "b09402a9a157c4fb5e81d088023f3c2565319cddb94f5fa88076db8726a66285",
+    "fixtures/lab/DescriptorReference.java": "4d4ceaae15addca0ce79aa60dd2ddab3db8950070e6d7cec25c8baf5fca734e8",
+    "fixtures/lab/Exploding.java": "8ae06fb83187dacd23e1713e73c2d07c6ff0f01392a286335bc7fc1f977edde5",
+    "fixtures/lab/SafeCommon.java": "c819fe20eaf9ddde46c5c9e44698a4ed26ee65630d0058d610e8cdd0ae354b7b",
+    "fixtures/lab/StaticReference.java": "fc0c7313bf4511b70f172d32f63b745c101322bf4a0c4a20376733a92507e811",
+    "fixtures/lab/Trace.java": "6521e3b365c45595038c47d477178213d6245c83e61ee4eb5df07e9047f01f3a"
+  },
+  "driver_returncode": 0,
+  "driver_stdout": "{\"kind\":\"compiled\",\"java_version\":\"21.0.13\",\"java_runtime_version\":\"21.0.13+9-1-deb13u2-Debian\",\"java_vendor\":\"Debian\",\"compiler\":\"com.sun.tools.javac.api.JavacTool\",\"inventory\":[{\"path\":\"client/ClientApi.class\",\"bytes\":317,\"class_major\":65,\"sha256\":\"c46c775fc4aa37bf26e558d70084814cc34db2aadfc13fa7f322182fffc4ae15\"},{\"path\":\"lab/BodyReference.class\",\"bytes\":417,\"class_major\":65,\"sha256\":\"75abd70303ac24cba0b7d0a79a65aedb5cb381524c6108b464f52c9b1e35f9f2\"},{\"path\":\"lab/ConstantConsumer.class\",\"bytes\":324,\"class_major\":65,\"sha256\":\"64a54deeba39e93c92cb5aca8e81e91b3c68bbe6d389b1afe0fb7810cadaf35a\"},{\"path\":\"lab/Constants.class\",\"bytes\":417,\"class_major\":65,\"sha256\":\"4c485216d9f3719fa48ae619a7c12228097e52aaacfcb74dd98a4bf04ac903b2\"},{\"path\":\"lab/DescriptorReference.class\",\"bytes\":416,\"class_major\":65,\"sha256\":\"da24b466398b52f9b88df2073c9073c3048d88a644b77ae5dcf3178e8ee4550d\"},{\"path\":\"lab/Exploding.class\",\"bytes\":662,\"class_major\":65,\"sha256\":\"d2c24a008b8758425d584f8e02eacc0cd2e9347613b3a6b27b4e0abaccf4ed8e\"},{\"path\":\"lab/SafeCommon.class\",\"bytes\":316,\"class_major\":65,\"sha256\":\"66593d22bd97d741203030a89051baa23f5009fbec4e34acb061e162f9f07d32\"},{\"path\":\"lab/StaticReference.class\",\"bytes\":400,\"class_major\":65,\"sha256\":\"6f49117757470713ef58af6878738391bf1e975561b293bf7df438e29c7f7011\"},{\"path\":\"lab/Trace.class\",\"bytes\":890,\"class_major\":65,\"sha256\":\"29d4dfac77b640b05c0d68b5d9f11fc22c521fdcb60eecdbca210eab30fa8bb4\"}],\"profiles\":{\"complete\":[\"client/ClientApi.class\",\"lab/BodyReference.class\",\"lab/ConstantConsumer.class\",\"lab/Constants.class\",\"lab/DescriptorReference.class\",\"lab/Exploding.class\",\"lab/SafeCommon.class\",\"lab/StaticReference.class\",\"lab/Trace.class\"],\"without_client\":[\"lab/BodyReference.class\",\"lab/ConstantConsumer.class\",\"lab/Constants.class\",\"lab/DescriptorReference.class\",\"lab/Exploding.class\",\"lab/SafeCommon.class\",\"lab/StaticReference.class\",\"lab/Trace.class\"]}}\n{\"kind\":\"observation\",\"id\":\"presence_complete:1\",\"scenario\":\"presence_complete\",\"profile\":\"complete\",\"operation\":\"discover\",\"class_name\":\"client.ClientApi\",\"loader_generation\":1,\"success\":true,\"result\":\"class:client.ClientApi\",\"exception_chain\":[],\"events\":[]}\n{\"kind\":\"observation\",\"id\":\"safe_complete:1\",\"scenario\":\"safe_complete\",\"profile\":\"complete\",\"operation\":\"discover\",\"class_name\":\"lab.SafeCommon\",\"loader_generation\":1,\"success\":true,\"result\":\"class:lab.SafeCommon\",\"exception_chain\":[],\"events\":[]}\n{\"kind\":\"observation\",\"id\":\"safe_complete:2\",\"scenario\":\"safe_complete\",\"profile\":\"complete\",\"operation\":\"initialize\",\"class_name\":\"lab.SafeCommon\",\"loader_generation\":1,\"success\":true,\"result\":\"class:lab.SafeCommon\",\"exception_chain\":[],\"events\":[\"SafeCommon\"]}\n{\"kind\":\"observation\",\"id\":\"safe_complete:3\",\"scenario\":\"safe_complete\",\"profile\":\"complete\",\"operation\":\"initialize\",\"class_name\":\"lab.SafeCommon\",\"loader_generation\":1,\"success\":true,\"result\":\"class:lab.SafeCommon\",\"exception_chain\":[],\"events\":[\"SafeCommon\"]}\n{\"kind\":\"observation\",\"id\":\"safe_complete:4\",\"scenario\":\"safe_complete\",\"profile\":\"complete\",\"operation\":\"invoke:value\",\"class_name\":\"lab.SafeCommon\",\"loader_generation\":1,\"success\":true,\"result\":\"common\",\"exception_chain\":[],\"events\":[\"SafeCommon\"]}\n{\"kind\":\"observation\",\"id\":\"body_complete:1\",\"scenario\":\"body_complete\",\"profile\":\"complete\",\"operation\":\"discover\",\"class_name\":\"lab.BodyReference\",\"loader_generation\":1,\"success\":true,\"result\":\"class:lab.BodyReference\",\"exception_chain\":[],\"events\":[]}\n{\"kind\":\"observation\",\"id\":\"body_complete:2\",\"scenario\":\"body_complete\",\"profile\":\"complete\",\"operation\":\"invoke:run:false\",\"class_name\":\"lab.BodyReference\",\"loader_generation\":1,\"success\":true,\"result\":\"common\",\"exception_chain\":[],\"events\":[\"BodyReference\"]}\n{\"kind\":\"observation\",\"id\":\"body_complete:3\",\"scenario\":\"body_complete\",\"profile\":\"complete\",\"operation\":\"invoke:run:true\",\"class_name\":\"lab.BodyReference\",\"loader_generation\":1,\"success\":true,\"result\":\"client\",\"exception_chain\":[],\"events\":[\"BodyReference\",\"ClientApi\"]}\n{\"kind\":\"observation\",\"id\":\"descriptor_complete:1\",\"scenario\":\"descriptor_complete\",\"profile\":\"complete\",\"operation\":\"discover\",\"class_name\":\"lab.DescriptorReference\",\"loader_generation\":1,\"success\":true,\"result\":\"class:lab.DescriptorReference\",\"exception_chain\":[],\"events\":[]}\n{\"kind\":\"observation\",\"id\":\"descriptor_complete:2\",\"scenario\":\"descriptor_complete\",\"profile\":\"complete\",\"operation\":\"methods\",\"class_name\":\"lab.DescriptorReference\",\"loader_generation\":1,\"success\":true,\"result\":\"methods:passthrough,ping\",\"exception_chain\":[],\"events\":[]}\n{\"kind\":\"observation\",\"id\":\"descriptor_complete:3\",\"scenario\":\"descriptor_complete\",\"profile\":\"complete\",\"operation\":\"initialize\",\"class_name\":\"lab.DescriptorReference\",\"loader_generation\":1,\"success\":true,\"result\":\"class:lab.DescriptorReference\",\"exception_chain\":[],\"events\":[\"DescriptorReference\"]}\n{\"kind\":\"observation\",\"id\":\"static_complete:1\",\"scenario\":\"static_complete\",\"profile\":\"complete\",\"operation\":\"discover\",\"class_name\":\"lab.StaticReference\",\"loader_generation\":1,\"success\":true,\"result\":\"class:lab.StaticReference\",\"exception_chain\":[],\"events\":[]}\n{\"kind\":\"observation\",\"id\":\"static_complete:2\",\"scenario\":\"static_complete\",\"profile\":\"complete\",\"operation\":\"initialize\",\"class_name\":\"lab.StaticReference\",\"loader_generation\":1,\"success\":true,\"result\":\"class:lab.StaticReference\",\"exception_chain\":[],\"events\":[\"StaticReference\",\"ClientApi\"]}\n{\"kind\":\"observation\",\"id\":\"static_complete:3\",\"scenario\":\"static_complete\",\"profile\":\"complete\",\"operation\":\"initialize\",\"class_name\":\"lab.StaticReference\",\"loader_generation\":1,\"success\":true,\"result\":\"class:lab.StaticReference\",\"exception_chain\":[],\"events\":[\"StaticReference\",\"ClientApi\"]}\n{\"kind\":\"observation\",\"id\":\"presence_without_client:1\",\"scenario\":\"presence_without_client\",\"profile\":\"without_client\",\"operation\":\"discover\",\"class_name\":\"client.ClientApi\",\"loader_generation\":1,\"success\":false,\"result\":null,\"exception_chain\":[\"java.lang.ClassNotFoundException\"],\"events\":[]}\n{\"kind\":\"observation\",\"id\":\"safe_without_client:1\",\"scenario\":\"safe_without_client\",\"profile\":\"without_client\",\"operation\":\"discover\",\"class_name\":\"lab.SafeCommon\",\"loader_generation\":1,\"success\":true,\"result\":\"class:lab.SafeCommon\",\"exception_chain\":[],\"events\":[]}\n{\"kind\":\"observation\",\"id\":\"safe_without_client:2\",\"scenario\":\"safe_without_client\",\"profile\":\"without_client\",\"operation\":\"initialize\",\"class_name\":\"lab.SafeCommon\",\"loader_generation\":1,\"success\":true,\"result\":\"class:lab.SafeCommon\",\"exception_chain\":[],\"events\":[\"SafeCommon\"]}\n{\"kind\":\"observation\",\"id\":\"safe_without_client:3\",\"scenario\":\"safe_without_client\",\"profile\":\"without_client\",\"operation\":\"initialize\",\"class_name\":\"lab.SafeCommon\",\"loader_generation\":1,\"success\":true,\"result\":\"class:lab.SafeCommon\",\"exception_chain\":[],\"events\":[\"SafeCommon\"]}\n{\"kind\":\"observation\",\"id\":\"safe_without_client:4\",\"scenario\":\"safe_without_client\",\"profile\":\"without_client\",\"operation\":\"invoke:value\",\"class_name\":\"lab.SafeCommon\",\"loader_generation\":1,\"success\":true,\"result\":\"common\",\"exception_chain\":[],\"events\":[\"SafeCommon\"]}\n{\"kind\":\"observation\",\"id\":\"body_without_client:1\",\"scenario\":\"body_without_client\",\"profile\":\"without_client\",\"operation\":\"discover\",\"class_name\":\"lab.BodyReference\",\"loader_generation\":1,\"success\":true,\"result\":\"class:lab.BodyReference\",\"exception_chain\":[],\"events\":[]}\n{\"kind\":\"observation\",\"id\":\"body_without_client:2\",\"scenario\":\"body_without_client\",\"profile\":\"without_client\",\"operation\":\"invoke:run:false\",\"class_name\":\"lab.BodyReference\",\"loader_generation\":1,\"success\":true,\"result\":\"common\",\"exception_chain\":[],\"events\":[\"BodyReference\"]}\n{\"kind\":\"observation\",\"id\":\"body_without_client:3\",\"scenario\":\"body_without_client\",\"profile\":\"without_client\",\"operation\":\"invoke:run:true\",\"class_name\":\"lab.BodyReference\",\"loader_generation\":1,\"success\":false,\"result\":null,\"exception_chain\":[\"java.lang.reflect.InvocationTargetException\",\"java.lang.NoClassDefFoundError\",\"java.lang.ClassNotFoundException\"],\"events\":[\"BodyReference\"]}\n{\"kind\":\"observation\",\"id\":\"body_without_client:4\",\"scenario\":\"body_without_client\",\"profile\":\"without_client\",\"operation\":\"invoke:run:false\",\"class_name\":\"lab.BodyReference\",\"loader_generation\":1,\"success\":true,\"result\":\"common\",\"exception_chain\":[],\"events\":[\"BodyReference\"]}\n{\"kind\":\"observation\",\"id\":\"descriptor_without_client:1\",\"scenario\":\"descriptor_without_client\",\"profile\":\"without_client\",\"operation\":\"discover\",\"class_name\":\"lab.DescriptorReference\",\"loader_generation\":1,\"success\":true,\"result\":\"class:lab.DescriptorReference\",\"exception_chain\":[],\"events\":[]}\n{\"kind\":\"observation\",\"id\":\"descriptor_without_client:2\",\"scenario\":\"descriptor_without_client\",\"profile\":\"without_client\",\"operation\":\"methods\",\"class_name\":\"lab.DescriptorReference\",\"loader_generation\":1,\"success\":false,\"result\":null,\"exception_chain\":[\"java.lang.NoClassDefFoundError\",\"java.lang.ClassNotFoundException\"],\"events\":[]}\n{\"kind\":\"observation\",\"id\":\"descriptor_without_client:3\",\"scenario\":\"descriptor_without_client\",\"profile\":\"without_client\",\"operation\":\"initialize\",\"class_name\":\"lab.DescriptorReference\",\"loader_generation\":1,\"success\":true,\"result\":\"class:lab.DescriptorReference\",\"exception_chain\":[],\"events\":[\"DescriptorReference\"]}\n{\"kind\":\"observation\",\"id\":\"static_without_client:1\",\"scenario\":\"static_without_client\",\"profile\":\"without_client\",\"operation\":\"discover\",\"class_name\":\"lab.StaticReference\",\"loader_generation\":1,\"success\":true,\"result\":\"class:lab.StaticReference\",\"exception_chain\":[],\"events\":[]}\n{\"kind\":\"observation\",\"id\":\"static_without_client:2\",\"scenario\":\"static_without_client\",\"profile\":\"without_client\",\"operation\":\"initialize\",\"class_name\":\"lab.StaticReference\",\"loader_generation\":1,\"success\":false,\"result\":null,\"exception_chain\":[\"java.lang.NoClassDefFoundError\",\"java.lang.ClassNotFoundException\"],\"events\":[\"StaticReference\"]}\n{\"kind\":\"observation\",\"id\":\"static_without_client:3\",\"scenario\":\"static_without_client\",\"profile\":\"without_client\",\"operation\":\"initialize\",\"class_name\":\"lab.StaticReference\",\"loader_generation\":1,\"success\":false,\"result\":null,\"exception_chain\":[\"java.lang.NoClassDefFoundError\",\"java.lang.ExceptionInInitializerError\"],\"events\":[\"StaticReference\"]}\n{\"kind\":\"observation\",\"id\":\"initializer_retry:1\",\"scenario\":\"initializer_retry\",\"profile\":\"complete\",\"operation\":\"discover\",\"class_name\":\"lab.Exploding\",\"loader_generation\":1,\"success\":true,\"result\":\"class:lab.Exploding\",\"exception_chain\":[],\"events\":[]}\n{\"kind\":\"observation\",\"id\":\"initializer_retry:2\",\"scenario\":\"initializer_retry\",\"profile\":\"complete\",\"operation\":\"initialize\",\"class_name\":\"lab.Exploding\",\"loader_generation\":1,\"success\":false,\"result\":null,\"exception_chain\":[\"java.lang.ExceptionInInitializerError\",\"java.lang.IllegalStateException\"],\"events\":[\"Exploding\"]}\n{\"kind\":\"observation\",\"id\":\"initializer_retry:3\",\"scenario\":\"initializer_retry\",\"profile\":\"complete\",\"operation\":\"initialize\",\"class_name\":\"lab.Exploding\",\"loader_generation\":1,\"success\":false,\"result\":null,\"exception_chain\":[\"java.lang.NoClassDefFoundError\",\"java.lang.ExceptionInInitializerError\"],\"events\":[\"Exploding\"]}\n{\"kind\":\"observation\",\"id\":\"initializer_retry:4\",\"scenario\":\"initializer_retry\",\"profile\":\"complete\",\"operation\":\"clear_failure_then_initialize\",\"class_name\":\"lab.Exploding\",\"loader_generation\":1,\"success\":false,\"result\":null,\"exception_chain\":[\"java.lang.NoClassDefFoundError\",\"java.lang.ExceptionInInitializerError\"],\"events\":[\"Exploding\"]}\n{\"kind\":\"observation\",\"id\":\"initializer_retry:5\",\"scenario\":\"initializer_retry\",\"profile\":\"complete\",\"operation\":\"fresh_loader_then_initialize\",\"class_name\":\"lab.Exploding\",\"loader_generation\":2,\"success\":true,\"result\":\"class:lab.Exploding\",\"exception_chain\":[],\"events\":[\"Exploding\",\"Exploding\"]}\n{\"kind\":\"observation\",\"id\":\"constants:1\",\"scenario\":\"constants\",\"profile\":\"complete\",\"operation\":\"discover\",\"class_name\":\"lab.ConstantConsumer\",\"loader_generation\":1,\"success\":true,\"result\":\"class:lab.ConstantConsumer\",\"exception_chain\":[],\"events\":[]}\n{\"kind\":\"observation\",\"id\":\"constants:2\",\"scenario\":\"constants\",\"profile\":\"complete\",\"operation\":\"invoke:literal\",\"class_name\":\"lab.ConstantConsumer\",\"loader_generation\":1,\"success\":true,\"result\":\"7\",\"exception_chain\":[],\"events\":[]}\n{\"kind\":\"observation\",\"id\":\"constants:3\",\"scenario\":\"constants\",\"profile\":\"complete\",\"operation\":\"invoke:boxed\",\"class_name\":\"lab.ConstantConsumer\",\"loader_generation\":1,\"success\":true,\"result\":\"9\",\"exception_chain\":[],\"events\":[\"Constants\"]}\n",
+  "driver_stderr": "",
+  "compiled": {
+    "kind": "compiled",
+    "java_version": "21.0.13",
+    "java_runtime_version": "21.0.13+9-1-deb13u2-Debian",
+    "java_vendor": "Debian",
+    "compiler": "com.sun.tools.javac.api.JavacTool",
+    "inventory": [
+      {
+        "path": "client/ClientApi.class",
+        "bytes": 317,
+        "class_major": 65,
+        "sha256": "c46c775fc4aa37bf26e558d70084814cc34db2aadfc13fa7f322182fffc4ae15"
+      },
+      {
+        "path": "lab/BodyReference.class",
+        "bytes": 417,
+        "class_major": 65,
+        "sha256": "75abd70303ac24cba0b7d0a79a65aedb5cb381524c6108b464f52c9b1e35f9f2"
+      },
+      {
+        "path": "lab/ConstantConsumer.class",
+        "bytes": 324,
+        "class_major": 65,
+        "sha256": "64a54deeba39e93c92cb5aca8e81e91b3c68bbe6d389b1afe0fb7810cadaf35a"
+      },
+      {
+        "path": "lab/Constants.class",
+        "bytes": 417,
+        "class_major": 65,
+        "sha256": "4c485216d9f3719fa48ae619a7c12228097e52aaacfcb74dd98a4bf04ac903b2"
+      },
+      {
+        "path": "lab/DescriptorReference.class",
+        "bytes": 416,
+        "class_major": 65,
+        "sha256": "da24b466398b52f9b88df2073c9073c3048d88a644b77ae5dcf3178e8ee4550d"
+      },
+      {
+        "path": "lab/Exploding.class",
+        "bytes": 662,
+        "class_major": 65,
+        "sha256": "d2c24a008b8758425d584f8e02eacc0cd2e9347613b3a6b27b4e0abaccf4ed8e"
+      },
+      {
+        "path": "lab/SafeCommon.class",
+        "bytes": 316,
+        "class_major": 65,
+        "sha256": "66593d22bd97d741203030a89051baa23f5009fbec4e34acb061e162f9f07d32"
+      },
+      {
+        "path": "lab/StaticReference.class",
+        "bytes": 400,
+        "class_major": 65,
+        "sha256": "6f49117757470713ef58af6878738391bf1e975561b293bf7df438e29c7f7011"
+      },
+      {
+        "path": "lab/Trace.class",
+        "bytes": 890,
+        "class_major": 65,
+        "sha256": "29d4dfac77b640b05c0d68b5d9f11fc22c521fdcb60eecdbca210eab30fa8bb4"
+      }
+    ],
+    "profiles": {
+      "complete": [
+        "client/ClientApi.class",
+        "lab/BodyReference.class",
+        "lab/ConstantConsumer.class",
+        "lab/Constants.class",
+        "lab/DescriptorReference.class",
+        "lab/Exploding.class",
+        "lab/SafeCommon.class",
+        "lab/StaticReference.class",
+        "lab/Trace.class"
+      ],
+      "without_client": [
+        "lab/BodyReference.class",
+        "lab/ConstantConsumer.class",
+        "lab/Constants.class",
+        "lab/DescriptorReference.class",
+        "lab/Exploding.class",
+        "lab/SafeCommon.class",
+        "lab/StaticReference.class",
+        "lab/Trace.class"
+      ]
+    }
+  },
+  "observations": [
+    {
+      "id": "presence_complete:1",
+      "scenario": "presence_complete",
+      "profile": "complete",
+      "operation": "discover",
+      "class_name": "client.ClientApi",
+      "loader_generation": 1,
+      "actual": {
+        "success": true,
+        "result": "class:client.ClientApi",
+        "exception_chain": [],
+        "events": []
+      },
+      "expected": {
+        "success": true,
+        "result": "class:client.ClientApi",
+        "exception_chain": [],
+        "events": []
+      },
+      "matches_expected": true
+    },
+    {
+      "id": "safe_complete:1",
+      "scenario": "safe_complete",
+      "profile": "complete",
+      "operation": "discover",
+      "class_name": "lab.SafeCommon",
+      "loader_generation": 1,
+      "actual": {
+        "success": true,
+        "result": "class:lab.SafeCommon",
+        "exception_chain": [],
+        "events": []
+      },
+      "expected": {
+        "success": true,
+        "result": "class:lab.SafeCommon",
+        "exception_chain": [],
+        "events": []
+      },
+      "matches_expected": true
+    },
+    {
+      "id": "safe_complete:2",
+      "scenario": "safe_complete",
+      "profile": "complete",
+      "operation": "initialize",
+      "class_name": "lab.SafeCommon",
+      "loader_generation": 1,
+      "actual": {
+        "success": true,
+        "result": "class:lab.SafeCommon",
+        "exception_chain": [],
+        "events": [
+          "SafeCommon"
+        ]
+      },
+      "expected": {
+        "success": true,
+        "result": "class:lab.SafeCommon",
+        "exception_chain": [],
+        "events": [
+          "SafeCommon"
+        ]
+      },
+      "matches_expected": true
+    },
+    {
+      "id": "safe_complete:3",
+      "scenario": "safe_complete",
+      "profile": "complete",
+      "operation": "initialize",
+      "class_name": "lab.SafeCommon",
+      "loader_generation": 1,
+      "actual": {
+        "success": true,
+        "result": "class:lab.SafeCommon",
+        "exception_chain": [],
+        "events": [
+          "SafeCommon"
+        ]
+      },
+      "expected": {
+        "success": true,
+        "result": "class:lab.SafeCommon",
+        "exception_chain": [],
+        "events": [
+          "SafeCommon"
+        ]
+      },
+      "matches_expected": true
+    },
+    {
+      "id": "safe_complete:4",
+      "scenario": "safe_complete",
+      "profile": "complete",
+      "operation": "invoke:value",
+      "class_name": "lab.SafeCommon",
+      "loader_generation": 1,
+      "actual": {
+        "success": true,
+        "result": "common",
+        "exception_chain": [],
+        "events": [
+          "SafeCommon"
+        ]
+      },
+      "expected": {
+        "success": true,
+        "result": "common",
+        "exception_chain": [],
+        "events": [
+          "SafeCommon"
+        ]
+      },
+      "matches_expected": true
+    },
+    {
+      "id": "body_complete:1",
+      "scenario": "body_complete",
+      "profile": "complete",
+      "operation": "discover",
+      "class_name": "lab.BodyReference",
+      "loader_generation": 1,
+      "actual": {
+        "success": true,
+        "result": "class:lab.BodyReference",
+        "exception_chain": [],
+        "events": []
+      },
+      "expected": {
+        "success": true,
+        "result": "class:lab.BodyReference",
+        "exception_chain": [],
+        "events": []
+      },
+      "matches_expected": true
+    },
+    {
+      "id": "body_complete:2",
+      "scenario": "body_complete",
+      "profile": "complete",
+      "operation": "invoke:run:false",
+      "class_name": "lab.BodyReference",
+      "loader_generation": 1,
+      "actual": {
+        "success": true,
+        "result": "common",
+        "exception_chain": [],
+        "events": [
+          "BodyReference"
+        ]
+      },
+      "expected": {
+        "success": true,
+        "result": "common",
+        "exception_chain": [],
+        "events": [
+          "BodyReference"
+        ]
+      },
+      "matches_expected": true
+    },
+    {
+      "id": "body_complete:3",
+      "scenario": "body_complete",
+      "profile": "complete",
+      "operation": "invoke:run:true",
+      "class_name": "lab.BodyReference",
+      "loader_generation": 1,
+      "actual": {
+        "success": true,
+        "result": "client",
+        "exception_chain": [],
+        "events": [
+          "BodyReference",
+          "ClientApi"
+        ]
+      },
+      "expected": {
+        "success": true,
+        "result": "client",
+        "exception_chain": [],
+        "events": [
+          "BodyReference",
+          "ClientApi"
+        ]
+      },
+      "matches_expected": true
+    },
+    {
+      "id": "descriptor_complete:1",
+      "scenario": "descriptor_complete",
+      "profile": "complete",
+      "operation": "discover",
+      "class_name": "lab.DescriptorReference",
+      "loader_generation": 1,
+      "actual": {
+        "success": true,
+        "result": "class:lab.DescriptorReference",
+        "exception_chain": [],
+        "events": []
+      },
+      "expected": {
+        "success": true,
+        "result": "class:lab.DescriptorReference",
+        "exception_chain": [],
+        "events": []
+      },
+      "matches_expected": true
+    },
+    {
+      "id": "descriptor_complete:2",
+      "scenario": "descriptor_complete",
+      "profile": "complete",
+      "operation": "methods",
+      "class_name": "lab.DescriptorReference",
+      "loader_generation": 1,
+      "actual": {
+        "success": true,
+        "result": "methods:passthrough,ping",
+        "exception_chain": [],
+        "events": []
+      },
+      "expected": {
+        "success": true,
+        "result": "methods:passthrough,ping",
+        "exception_chain": [],
+        "events": []
+      },
+      "matches_expected": true
+    },
+    {
+      "id": "descriptor_complete:3",
+      "scenario": "descriptor_complete",
+      "profile": "complete",
+      "operation": "initialize",
+      "class_name": "lab.DescriptorReference",
+      "loader_generation": 1,
+      "actual": {
+        "success": true,
+        "result": "class:lab.DescriptorReference",
+        "exception_chain": [],
+        "events": [
+          "DescriptorReference"
+        ]
+      },
+      "expected": {
+        "success": true,
+        "result": "class:lab.DescriptorReference",
+        "exception_chain": [],
+        "events": [
+          "DescriptorReference"
+        ]
+      },
+      "matches_expected": true
+    },
+    {
+      "id": "static_complete:1",
+      "scenario": "static_complete",
+      "profile": "complete",
+      "operation": "discover",
+      "class_name": "lab.StaticReference",
+      "loader_generation": 1,
+      "actual": {
+        "success": true,
+        "result": "class:lab.StaticReference",
+        "exception_chain": [],
+        "events": []
+      },
+      "expected": {
+        "success": true,
+        "result": "class:lab.StaticReference",
+        "exception_chain": [],
+        "events": []
+      },
+      "matches_expected": true
+    },
+    {
+      "id": "static_complete:2",
+      "scenario": "static_complete",
+      "profile": "complete",
+      "operation": "initialize",
+      "class_name": "lab.StaticReference",
+      "loader_generation": 1,
+      "actual": {
+        "success": true,
+        "result": "class:lab.StaticReference",
+        "exception_chain": [],
+        "events": [
+          "StaticReference",
+          "ClientApi"
+        ]
+      },
+      "expected": {
+        "success": true,
+        "result": "class:lab.StaticReference",
+        "exception_chain": [],
+        "events": [
+          "StaticReference",
+          "ClientApi"
+        ]
+      },
+      "matches_expected": true
+    },
+    {
+      "id": "static_complete:3",
+      "scenario": "static_complete",
+      "profile": "complete",
+      "operation": "initialize",
+      "class_name": "lab.StaticReference",
+      "loader_generation": 1,
+      "actual": {
+        "success": true,
+        "result": "class:lab.StaticReference",
+        "exception_chain": [],
+        "events": [
+          "StaticReference",
+          "ClientApi"
+        ]
+      },
+      "expected": {
+        "success": true,
+        "result": "class:lab.StaticReference",
+        "exception_chain": [],
+        "events": [
+          "StaticReference",
+          "ClientApi"
+        ]
+      },
+      "matches_expected": true
+    },
+    {
+      "id": "presence_without_client:1",
+      "scenario": "presence_without_client",
+      "profile": "without_client",
+      "operation": "discover",
+      "class_name": "client.ClientApi",
+      "loader_generation": 1,
+      "actual": {
+        "success": false,
+        "result": null,
+        "exception_chain": [
+          "java.lang.ClassNotFoundException"
+        ],
+        "events": []
+      },
+      "expected": {
+        "success": false,
+        "result": null,
+        "exception_chain": [
+          "java.lang.ClassNotFoundException"
+        ],
+        "events": []
+      },
+      "matches_expected": true
+    },
+    {
+      "id": "safe_without_client:1",
+      "scenario": "safe_without_client",
+      "profile": "without_client",
+      "operation": "discover",
+      "class_name": "lab.SafeCommon",
+      "loader_generation": 1,
+      "actual": {
+        "success": true,
+        "result": "class:lab.SafeCommon",
+        "exception_chain": [],
+        "events": []
+      },
+      "expected": {
+        "success": true,
+        "result": "class:lab.SafeCommon",
+        "exception_chain": [],
+        "events": []
+      },
+      "matches_expected": true
+    },
+    {
+      "id": "safe_without_client:2",
+      "scenario": "safe_without_client",
+      "profile": "without_client",
+      "operation": "initialize",
+      "class_name": "lab.SafeCommon",
+      "loader_generation": 1,
+      "actual": {
+        "success": true,
+        "result": "class:lab.SafeCommon",
+        "exception_chain": [],
+        "events": [
+          "SafeCommon"
+        ]
+      },
+      "expected": {
+        "success": true,
+        "result": "class:lab.SafeCommon",
+        "exception_chain": [],
+        "events": [
+          "SafeCommon"
+        ]
+      },
+      "matches_expected": true
+    },
+    {
+      "id": "safe_without_client:3",
+      "scenario": "safe_without_client",
+      "profile": "without_client",
+      "operation": "initialize",
+      "class_name": "lab.SafeCommon",
+      "loader_generation": 1,
+      "actual": {
+        "success": true,
+        "result": "class:lab.SafeCommon",
+        "exception_chain": [],
+        "events": [
+          "SafeCommon"
+        ]
+      },
+      "expected": {
+        "success": true,
+        "result": "class:lab.SafeCommon",
+        "exception_chain": [],
+        "events": [
+          "SafeCommon"
+        ]
+      },
+      "matches_expected": true
+    },
+    {
+      "id": "safe_without_client:4",
+      "scenario": "safe_without_client",
+      "profile": "without_client",
+      "operation": "invoke:value",
+      "class_name": "lab.SafeCommon",
+      "loader_generation": 1,
+      "actual": {
+        "success": true,
+        "result": "common",
+        "exception_chain": [],
+        "events": [
+          "SafeCommon"
+        ]
+      },
+      "expected": {
+        "success": true,
+        "result": "common",
+        "exception_chain": [],
+        "events": [
+          "SafeCommon"
+        ]
+      },
+      "matches_expected": true
+    },
+    {
+      "id": "body_without_client:1",
+      "scenario": "body_without_client",
+      "profile": "without_client",
+      "operation": "discover",
+      "class_name": "lab.BodyReference",
+      "loader_generation": 1,
+      "actual": {
+        "success": true,
+        "result": "class:lab.BodyReference",
+        "exception_chain": [],
+        "events": []
+      },
+      "expected": {
+        "success": true,
+        "result": "class:lab.BodyReference",
+        "exception_chain": [],
+        "events": []
+      },
+      "matches_expected": true
+    },
+    {
+      "id": "body_without_client:2",
+      "scenario": "body_without_client",
+      "profile": "without_client",
+      "operation": "invoke:run:false",
+      "class_name": "lab.BodyReference",
+      "loader_generation": 1,
+      "actual": {
+        "success": true,
+        "result": "common",
+        "exception_chain": [],
+        "events": [
+          "BodyReference"
+        ]
+      },
+      "expected": {
+        "success": true,
+        "result": "common",
+        "exception_chain": [],
+        "events": [
+          "BodyReference"
+        ]
+      },
+      "matches_expected": true
+    },
+    {
+      "id": "body_without_client:3",
+      "scenario": "body_without_client",
+      "profile": "without_client",
+      "operation": "invoke:run:true",
+      "class_name": "lab.BodyReference",
+      "loader_generation": 1,
+      "actual": {
+        "success": false,
+        "result": null,
+        "exception_chain": [
+          "java.lang.reflect.InvocationTargetException",
+          "java.lang.NoClassDefFoundError",
+          "java.lang.ClassNotFoundException"
+        ],
+        "events": [
+          "BodyReference"
+        ]
+      },
+      "expected": {
+        "success": false,
+        "result": null,
+        "exception_chain": [
+          "java.lang.reflect.InvocationTargetException",
+          "java.lang.NoClassDefFoundError",
+          "java.lang.ClassNotFoundException"
+        ],
+        "events": [
+          "BodyReference"
+        ]
+      },
+      "matches_expected": true
+    },
+    {
+      "id": "body_without_client:4",
+      "scenario": "body_without_client",
+      "profile": "without_client",
+      "operation": "invoke:run:false",
+      "class_name": "lab.BodyReference",
+      "loader_generation": 1,
+      "actual": {
+        "success": true,
+        "result": "common",
+        "exception_chain": [],
+        "events": [
+          "BodyReference"
+        ]
+      },
+      "expected": {
+        "success": true,
+        "result": "common",
+        "exception_chain": [],
+        "events": [
+          "BodyReference"
+        ]
+      },
+      "matches_expected": true
+    },
+    {
+      "id": "descriptor_without_client:1",
+      "scenario": "descriptor_without_client",
+      "profile": "without_client",
+      "operation": "discover",
+      "class_name": "lab.DescriptorReference",
+      "loader_generation": 1,
+      "actual": {
+        "success": true,
+        "result": "class:lab.DescriptorReference",
+        "exception_chain": [],
+        "events": []
+      },
+      "expected": {
+        "success": true,
+        "result": "class:lab.DescriptorReference",
+        "exception_chain": [],
+        "events": []
+      },
+      "matches_expected": true
+    },
+    {
+      "id": "descriptor_without_client:2",
+      "scenario": "descriptor_without_client",
+      "profile": "without_client",
+      "operation": "methods",
+      "class_name": "lab.DescriptorReference",
+      "loader_generation": 1,
+      "actual": {
+        "success": false,
+        "result": null,
+        "exception_chain": [
+          "java.lang.NoClassDefFoundError",
+          "java.lang.ClassNotFoundException"
+        ],
+        "events": []
+      },
+      "expected": {
+        "success": false,
+        "result": null,
+        "exception_chain": [
+          "java.lang.NoClassDefFoundError",
+          "java.lang.ClassNotFoundException"
+        ],
+        "events": []
+      },
+      "matches_expected": true
+    },
+    {
+      "id": "descriptor_without_client:3",
+      "scenario": "descriptor_without_client",
+      "profile": "without_client",
+      "operation": "initialize",
+      "class_name": "lab.DescriptorReference",
+      "loader_generation": 1,
+      "actual": {
+        "success": true,
+        "result": "class:lab.DescriptorReference",
+        "exception_chain": [],
+        "events": [
+          "DescriptorReference"
+        ]
+      },
+      "expected": {
+        "success": true,
+        "result": "class:lab.DescriptorReference",
+        "exception_chain": [],
+        "events": [
+          "DescriptorReference"
+        ]
+      },
+      "matches_expected": true
+    },
+    {
+      "id": "static_without_client:1",
+      "scenario": "static_without_client",
+      "profile": "without_client",
+      "operation": "discover",
+      "class_name": "lab.StaticReference",
+      "loader_generation": 1,
+      "actual": {
+        "success": true,
+        "result": "class:lab.StaticReference",
+        "exception_chain": [],
+        "events": []
+      },
+      "expected": {
+        "success": true,
+        "result": "class:lab.StaticReference",
+        "exception_chain": [],
+        "events": []
+      },
+      "matches_expected": true
+    },
+    {
+      "id": "static_without_client:2",
+      "scenario": "static_without_client",
+      "profile": "without_client",
+      "operation": "initialize",
+      "class_name": "lab.StaticReference",
+      "loader_generation": 1,
+      "actual": {
+        "success": false,
+        "result": null,
+        "exception_chain": [
+          "java.lang.NoClassDefFoundError",
+          "java.lang.ClassNotFoundException"
+        ],
+        "events": [
+          "StaticReference"
+        ]
+      },
+      "expected": {
+        "success": false,
+        "result": null,
+        "exception_chain": [
+          "java.lang.NoClassDefFoundError",
+          "java.lang.ClassNotFoundException"
+        ],
+        "events": [
+          "StaticReference"
+        ]
+      },
+      "matches_expected": true
+    },
+    {
+      "id": "static_without_client:3",
+      "scenario": "static_without_client",
+      "profile": "without_client",
+      "operation": "initialize",
+      "class_name": "lab.StaticReference",
+      "loader_generation": 1,
+      "actual": {
+        "success": false,
+        "result": null,
+        "exception_chain": [
+          "java.lang.NoClassDefFoundError",
+          "java.lang.ExceptionInInitializerError"
+        ],
+        "events": [
+          "StaticReference"
+        ]
+      },
+      "expected": {
+        "success": false,
+        "result": null,
+        "exception_chain": [
+          "java.lang.NoClassDefFoundError",
+          "java.lang.ExceptionInInitializerError"
+        ],
+        "events": [
+          "StaticReference"
+        ]
+      },
+      "matches_expected": true
+    },
+    {
+      "id": "initializer_retry:1",
+      "scenario": "initializer_retry",
+      "profile": "complete",
+      "operation": "discover",
+      "class_name": "lab.Exploding",
+      "loader_generation": 1,
+      "actual": {
+        "success": true,
+        "result": "class:lab.Exploding",
+        "exception_chain": [],
+        "events": []
+      },
+      "expected": {
+        "success": true,
+        "result": "class:lab.Exploding",
+        "exception_chain": [],
+        "events": []
+      },
+      "matches_expected": true
+    },
+    {
+      "id": "initializer_retry:2",
+      "scenario": "initializer_retry",
+      "profile": "complete",
+      "operation": "initialize",
+      "class_name": "lab.Exploding",
+      "loader_generation": 1,
+      "actual": {
+        "success": false,
+        "result": null,
+        "exception_chain": [
+          "java.lang.ExceptionInInitializerError",
+          "java.lang.IllegalStateException"
+        ],
+        "events": [
+          "Exploding"
+        ]
+      },
+      "expected": {
+        "success": false,
+        "result": null,
+        "exception_chain": [
+          "java.lang.ExceptionInInitializerError",
+          "java.lang.IllegalStateException"
+        ],
+        "events": [
+          "Exploding"
+        ]
+      },
+      "matches_expected": true
+    },
+    {
+      "id": "initializer_retry:3",
+      "scenario": "initializer_retry",
+      "profile": "complete",
+      "operation": "initialize",
+      "class_name": "lab.Exploding",
+      "loader_generation": 1,
+      "actual": {
+        "success": false,
+        "result": null,
+        "exception_chain": [
+          "java.lang.NoClassDefFoundError",
+          "java.lang.ExceptionInInitializerError"
+        ],
+        "events": [
+          "Exploding"
+        ]
+      },
+      "expected": {
+        "success": false,
+        "result": null,
+        "exception_chain": [
+          "java.lang.NoClassDefFoundError",
+          "java.lang.ExceptionInInitializerError"
+        ],
+        "events": [
+          "Exploding"
+        ]
+      },
+      "matches_expected": true
+    },
+    {
+      "id": "initializer_retry:4",
+      "scenario": "initializer_retry",
+      "profile": "complete",
+      "operation": "clear_failure_then_initialize",
+      "class_name": "lab.Exploding",
+      "loader_generation": 1,
+      "actual": {
+        "success": false,
+        "result": null,
+        "exception_chain": [
+          "java.lang.NoClassDefFoundError",
+          "java.lang.ExceptionInInitializerError"
+        ],
+        "events": [
+          "Exploding"
+        ]
+      },
+      "expected": {
+        "success": false,
+        "result": null,
+        "exception_chain": [
+          "java.lang.NoClassDefFoundError",
+          "java.lang.ExceptionInInitializerError"
+        ],
+        "events": [
+          "Exploding"
+        ]
+      },
+      "matches_expected": true
+    },
+    {
+      "id": "initializer_retry:5",
+      "scenario": "initializer_retry",
+      "profile": "complete",
+      "operation": "fresh_loader_then_initialize",
+      "class_name": "lab.Exploding",
+      "loader_generation": 2,
+      "actual": {
+        "success": true,
+        "result": "class:lab.Exploding",
+        "exception_chain": [],
+        "events": [
+          "Exploding",
+          "Exploding"
+        ]
+      },
+      "expected": {
+        "success": true,
+        "result": "class:lab.Exploding",
+        "exception_chain": [],
+        "events": [
+          "Exploding",
+          "Exploding"
+        ]
+      },
+      "matches_expected": true
+    },
+    {
+      "id": "constants:1",
+      "scenario": "constants",
+      "profile": "complete",
+      "operation": "discover",
+      "class_name": "lab.ConstantConsumer",
+      "loader_generation": 1,
+      "actual": {
+        "success": true,
+        "result": "class:lab.ConstantConsumer",
+        "exception_chain": [],
+        "events": []
+      },
+      "expected": {
+        "success": true,
+        "result": "class:lab.ConstantConsumer",
+        "exception_chain": [],
+        "events": []
+      },
+      "matches_expected": true
+    },
+    {
+      "id": "constants:2",
+      "scenario": "constants",
+      "profile": "complete",
+      "operation": "invoke:literal",
+      "class_name": "lab.ConstantConsumer",
+      "loader_generation": 1,
+      "actual": {
+        "success": true,
+        "result": "7",
+        "exception_chain": [],
+        "events": []
+      },
+      "expected": {
+        "success": true,
+        "result": "7",
+        "exception_chain": [],
+        "events": []
+      },
+      "matches_expected": true
+    },
+    {
+      "id": "constants:3",
+      "scenario": "constants",
+      "profile": "complete",
+      "operation": "invoke:boxed",
+      "class_name": "lab.ConstantConsumer",
+      "loader_generation": 1,
+      "actual": {
+        "success": true,
+        "result": "9",
+        "exception_chain": [],
+        "events": [
+          "Constants"
+        ]
+      },
+      "expected": {
+        "success": true,
+        "result": "9",
+        "exception_chain": [],
+        "events": [
+          "Constants"
+        ]
+      },
+      "matches_expected": true
+    }
+  ],
+  "observation_count": 37,
+  "expected_failure_observations": 8,
+  "all_expected": true
+}
