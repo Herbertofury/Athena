@@ -24,3 +24,5 @@
 
 @media(min-width:701px){.foundry-workspace[data-inspector-placement=right] .foundry-grid{grid-template-columns:minmax(0,1fr) min(45%,var(--foundry-inspector-width,240px))}.foundry-workspace[data-inspector-placement=left] .foundry-grid{grid-template-columns:min(45%,var(--foundry-inspector-width,240px)) minmax(0,1fr)}}
 .foundry-toolbar output{max-width:28ch;font-size:.85em}.foundry-toolbar input[type=range]{width:180px;max-width:100%}
+
+.foundry-cinema{margin-top:1rem;padding:1rem;border:1px solid #617184;border-radius:12px}.foundry-cinema label{display:inline-flex;gap:.5rem;margin:.5rem}.foundry-cinema [data-cinema-view]{position:relative;width:100%;height:360px;overflow:hidden;border-radius:12px}.foundry-cinema canvas{display:block;width:100%;height:100%}
