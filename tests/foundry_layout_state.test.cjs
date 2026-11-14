@@ -23,8 +23,10 @@ test('rollback is bounded, cloned, reversible and new edits discard redo',async(
  assert.throws(()=>h.record({version:99}));assert.equal(h.size,2);
 });
 test('workspace view defaults old backups, validates docks and strips unknown view data',async()=>{
- const m=await ready,base={version:1,active:m.initial(),layouts:{}};assert.deepEqual(m.workspace(base).view,{inspectorDock:'right'});for(const inspectorDock of ['left','right','hidden'])assert.deepEqual(m.workspace({...base,view:{inspectorDock,token:'secret'}}).view,{inspectorDock});for(const view of [null,{},'left',{inspectorDock:'floating'}])assert.throws(()=>m.workspace({...base,view}),/inspector/);
+ const m=await ready,base={version:1,active:m.initial(),layouts:{}};assert.deepEqual(m.workspace(base).view,{inspectorDock:'right',inspectorWidth:240});for(const inspectorDock of ['left','right','hidden'])assert.deepEqual(m.workspace({...base,view:{inspectorDock,token:'secret'}}).view,{inspectorDock,inspectorWidth:240});for(const view of [null,{},'left',{inspectorDock:'floating'}])assert.throws(()=>m.workspace({...base,view}),/inspector/);
 });
 test('named layouts are bounded, validated and sanitize unknown fields',async()=>{
  const m=await ready,layout=m.initial();assert.deepEqual(m.savedLayouts(),[]);assert.deepEqual(m.savedLayouts([{name:'safe',layout,token:'secret'}]),[{name:'safe',layout}]);for(const input of [null,{},[{name:'',layout}],[{name:' x',layout}],[{name:'x'.repeat(81),layout}],[{name:'x',layout},{name:'x',layout}],Array.from({length:21},(_,i)=>({name:String(i),layout})),[{name:'x',layout:{...layout,themeId:'unknown'}}]])assert.throws(()=>m.savedLayouts(input));
 });
+
+test('inspector width defaults legacy data, rejects invalid sizes and survives workspace encoding',async()=>{const m=await ready;assert.equal(m.view({inspectorDock:'left'}).inspectorWidth,240);for(const width of [180,240,480])assert.equal(m.view({inspectorDock:'right',inspectorWidth:width}).inspectorWidth,width);for(const width of [null,'240',179,481,Infinity,NaN,240.5])assert.throws(()=>m.view({inspectorDock:'right',inspectorWidth:width}),/width/);const data={version:1,active:m.initial(),layouts:{},view:{inspectorDock:'left',inspectorWidth:320}};assert.deepEqual(m.parseWorkspace(m.encodeWorkspace(data)).view,data.view);});
