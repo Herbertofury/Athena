@@ -34,6 +34,7 @@ try {
  await page.goto(origin+'/#build');await page.locator('.foundry-scene').waitFor();
  await check('Native profile loads without iframe or automatic playback',async()=>{
   assert.equal(await page.locator('.foundry-workspace iframe').count(),0);
+  await page.locator('[data-native-save]').waitFor();
   assert.equal(await page.locator('[data-native-save]').count(),1);
   assert.equal(await page.locator('audio[autoplay],video[autoplay]').count(),0);
  });
