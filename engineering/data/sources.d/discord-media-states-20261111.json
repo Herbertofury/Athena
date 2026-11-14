@@ -1,0 +1,46 @@
+[
+  {
+    "id": "DMS11001",
+    "title": "Discord message media flag namespaces",
+    "url": "https://docs.discord.com/developers/resources/message",
+    "observed_version": "Official source commit 36adecb2e0bbbf500c430147ef4acbe9aa1a389e",
+    "topic": "discord-media-state-projection",
+    "note": "Attachment flags, embed flags and embed-media flags have distinct meanings. Scanning can arrive through later message updates.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 14,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "DMS11002",
+    "title": "Discord component visibility and media state",
+    "url": "https://docs.discord.com/developers/components/reference",
+    "observed_version": "Official source commit 36adecb2e0bbbf500c430147ef4acbe9aa1a389e",
+    "topic": "discord-media-state-projection",
+    "note": "Container spoiler scope, unfurled animation and separate content-scan masks. Absence is not a clean result.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 14,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "DMS11003",
+    "title": "Pinned Discord message schema",
+    "url": "https://github.com/discord/discord-api-docs/blob/36adecb2e0bbbf500c430147ef4acbe9aa1a389e/developers/resources/message.mdx",
+    "observed_version": "Official source commit 36adecb2e0bbbf500c430147ef4acbe9aa1a389e",
+    "topic": "discord-media-state-projection",
+    "note": "Exact Git blob and SHA-256 retained in schema provenance. Documentation evidence, not a live response.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 14,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "DMS11004",
+    "title": "Pinned Discord component schema",
+    "url": "https://github.com/discord/discord-api-docs/blob/36adecb2e0bbbf500c430147ef4acbe9aa1a389e/developers/components/reference.mdx",
+    "observed_version": "Official source commit 36adecb2e0bbbf500c430147ef4acbe9aa1a389e",
+    "topic": "discord-media-state-projection",
+    "note": "Exact Git blob and SHA-256 retained in schema provenance. Positive flag/spoiler regression payloads are synthetic.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 14,
+    "evidence": "primary_documented"
+  }
+]

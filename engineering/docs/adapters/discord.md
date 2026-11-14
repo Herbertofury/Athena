@@ -80,3 +80,18 @@ The test suite also covers malformed/rounded IDs, webhook/user separation, compo
 Actual public Discord discovery pages were inspected for [Cyberpunk2077 Modding Community](https://discord.com/servers/cyberpunk-2077-modding-community-717692382849663036), [Modding Guild](https://discord.com/servers/872252014002843658), and [Skywind](https://discord.com/servers/skywind-145539675577122816). The pages expose stable guild identifiers, descriptions, separate server icons/splashes and community routes. They expose no member-post history or author avatars for private messages. Skywind states it publishes news there first. [RDSOC31005] [RDSOC31006] [RDSOC31007]
 
 Keep named guilds under the Discord platform adapter. A local channel/thread watch can filter by stable poster identity after the app has a permitted read route. It is not a global author-following feed. Native announcement following, membership, notifications and an installed bot's permissions remain separate operations. Source login alone does not authorize self-bot collection or create an app grant.
+
+## Native preservation reconciliation (2026-11-14)
+
+The offline normalizer now preserves the component-embed tree and source-specific
+media flags from original Athena drafts #54 and #55 (exact donor
+`388cd5f8ad6de8329bc4f87b1620a73180eaa62d`). Container spoiler state propagates to
+its descendants, not siblings; attachment and unfurled-media flag namespaces stay
+separate. Scan hints are not safety verdicts. Existing access gates and raw-source
+retention remain. No live transport, credentials, downloading or playback is added.
+
+The [component replay](../../experiments/discord-component-embed-lab/README.md) and
+[flag evidence](../../experiments/discord-media-state-lab/README.md) retain their dated
+original results, complete official example and license. The reconciliation was
+verified with 46 Discord tests, all 433 Engineering Python tests and full npm tests.
+These are local offline checks, not live provider or native Windows acceptance.
