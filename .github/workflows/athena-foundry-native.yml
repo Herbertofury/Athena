@@ -60,7 +60,9 @@ jobs:
       - name: Browser to native SQLite acceptance
         run: node scripts/test_foundry_native_browser.mjs
       - name: Bounded authoring and oversized recovery in Chromium
-        run: node scripts/test_foundry_capacity_browser.mjs
+        run: |
+          node scripts/test_foundry_capacity_browser.mjs
+          node scripts/test_foundry_save_outcome_browser.mjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:
