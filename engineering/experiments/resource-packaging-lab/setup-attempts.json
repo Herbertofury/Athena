@@ -1,0 +1,56 @@
+{
+  "scope": "Sanitized development failures, not accepted experiment receipts. Expectations were not changed.",
+  "attempts": [
+    {
+      "stage": "first receipt validation",
+      "outcome": "rejected",
+      "error": "Expected duplicate-path failure not observed",
+      "limitation": "Raw build streams were not retained by the first runner. No accepted receipt was written."
+    },
+    {
+      "stage": "instrumented receipt validation",
+      "outcome": "rejected",
+      "error": "Expected duplicate-path failure not observed",
+      "reason": "Validator incorrectly required the word duplicate; Gradle 9.2.1 reports has already been copied there.",
+      "runs": [
+        {
+          "id": "a:success",
+          "returncode": 0,
+          "stdout": "To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.2.1/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.\nDaemon will be stopped at the end of the build \n> Task :defaultJar\n> Task :timestampJar\n> Task :missingJar\n> Task :excludeJar\n> Task :includeJar\n\nBUILD SUCCESSFUL in 4s\n5 actionable tasks: 5 executed\n",
+          "stderr": ""
+        },
+        {
+          "id": "b:success",
+          "returncode": 0,
+          "stdout": "To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.2.1/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.\nDaemon will be stopped at the end of the build \n> Task :defaultJar\n> Task :timestampJar\n> Task :missingJar\n> Task :excludeJar\n> Task :includeJar\n\nBUILD SUCCESSFUL in 4s\n5 actionable tasks: 5 executed\n",
+          "stderr": ""
+        },
+        {
+          "id": "a:failDifferent",
+          "returncode": 1,
+          "stdout": "To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.2.1/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.\nDaemon will be stopped at the end of the build \n> Task :failDifferent FAILED\n1 actionable task: 1 executed\n",
+          "stderr": "\nFAILURE: Build failed with an exception.\n\n* What went wrong:\nExecution failed for task ':failDifferent'.\n> Cannot copy file '<RUN>/project-a/alternate/assets/atlas_lab/data/message.txt' to 'assets/atlas_lab/data/message.txt' because file '<RUN>/project-a/primary/assets/atlas_lab/data/message.txt' has already been copied there.\n\n* Try:\n> Run with --stacktrace option to get the stack trace.\n> Run with --info or --debug option to get more log output.\n> Run with --scan to generate a Build Scan (powered by Develocity).\n> Get more help at https://help.gradle.org.\n\nBUILD FAILED in 4s\n"
+        },
+        {
+          "id": "a:failIdentical",
+          "returncode": 1,
+          "stdout": "To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.2.1/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.\nDaemon will be stopped at the end of the build \n> Task :failIdentical FAILED\n1 actionable task: 1 executed\n",
+          "stderr": "\nFAILURE: Build failed with an exception.\n\n* What went wrong:\nExecution failed for task ':failIdentical'.\n> Cannot copy file '<RUN>/project-a/identical/assets/atlas_lab/data/message.txt' to 'assets/atlas_lab/data/message.txt' because file '<RUN>/project-a/primary/assets/atlas_lab/data/message.txt' has already been copied there.\n\n* Try:\n> Run with --stacktrace option to get the stack trace.\n> Run with --info or --debug option to get more log output.\n> Run with --scan to generate a Build Scan (powered by Develocity).\n> Get more help at https://help.gradle.org.\n\nBUILD FAILED in 4s\n"
+        }
+      ],
+      "artifact_sha256": {
+        "a:defaultJar": "b7e4326986c4873666ee5c6d8c9991eafd63be7f04d255d616a03afa3c2c9738",
+        "a:timestampJar": "e28cc0653dd1ead8c89e5b9fa9b20a620f6a1dbbb99b93e25c7fc7c3c7fc8c15",
+        "a:missingJar": "585d02380058bf2ca3dbfacba758ff87f7ccfa8b346e9f8ff694a66cda0ee815",
+        "a:excludeJar": "b7e4326986c4873666ee5c6d8c9991eafd63be7f04d255d616a03afa3c2c9738",
+        "a:includeJar": "cfadfa56269663f94e6140eac4d86939da8ce4e1f8659b7d87ffc52bc2dbd407",
+        "b:defaultJar": "b7e4326986c4873666ee5c6d8c9991eafd63be7f04d255d616a03afa3c2c9738",
+        "b:timestampJar": "ff81cd697067acd8ee7d1a2ec62bdbe96fdd0a935018a160af4af2b506ec8938",
+        "b:missingJar": "585d02380058bf2ca3dbfacba758ff87f7ccfa8b346e9f8ff694a66cda0ee815",
+        "b:excludeJar": "804250e8491975dff9ef135891526351a3cdde66dbd40eb030dc38892e2ffba5",
+        "b:includeJar": "51462b31e994a7fa5166027d570756c318d6464ded204ca826612110f8cbe00a"
+      },
+      "correction": "Require the actual duplicate-copy diagnostic, expected resource path, failed task name and nonzero exit; preserve both different-byte and identical-byte failures."
+    }
+  ]
+}

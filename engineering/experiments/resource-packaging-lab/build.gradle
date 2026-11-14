@@ -1,0 +1,32 @@
+// Original resource-only fixture. No game, loader, external plugin, or repository.
+import org.gradle.api.file.DuplicatesStrategy
+import org.gradle.api.tasks.bundling.Jar
+
+String variant = providers.gradleProperty('variant').get()
+if (!(variant in ['a', 'b'])) throw new GradleException('Unknown fixture variant')
+
+def archive = { String name, Closure configure ->
+    tasks.register(name, Jar) {
+        archiveFileName = "${name}.jar"
+        destinationDirectory = layout.buildDirectory.dir('artifacts')
+        duplicatesStrategy = DuplicatesStrategy.FAIL
+        configure.delegate = delegate
+        configure.resolveStrategy = Closure.DELEGATE_FIRST
+        configure.call()
+    }
+}
+archive('defaultJar') { from('primary') }
+archive('timestampJar') { from('primary'); preserveFileTimestamps = true }
+archive('missingJar') { from('primary') { exclude('**/bytes.bin') } }
+archive('excludeJar') {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    from(variant == 'a' ? 'primary' : 'alternate')
+    from(variant == 'a' ? 'alternate' : 'primary')
+}
+archive('includeJar') {
+    duplicatesStrategy = DuplicatesStrategy.INCLUDE
+    from(variant == 'a' ? 'primary' : 'alternate')
+    from(variant == 'a' ? 'alternate' : 'primary')
+}
+archive('failDifferent') { from('primary'); from('alternate') }
+archive('failIdentical') { from('primary'); from('identical') }

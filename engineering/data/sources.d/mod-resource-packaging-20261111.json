@@ -1,0 +1,123 @@
+[
+  {
+    "id": "RP11001",
+    "title": "Gradle reproducible archives and file operations",
+    "url": "https://docs.gradle.org/9.2.1/userguide/working_with_files.html",
+    "observed_version": "Gradle 9.2.1",
+    "topic": "mod-resource-packaging-acceptance",
+    "note": "Gradle 9.0+ defaults order, timestamps and permissions; file filtering is a separate transformation.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "RP11002",
+    "title": "Gradle Jar task reference",
+    "url": "https://docs.gradle.org/9.2.1/dsl/org.gradle.api.tasks.bundling.Jar.html",
+    "observed_version": "Gradle 9.2.1",
+    "topic": "mod-resource-packaging-acceptance",
+    "note": "Archive timestamp/order controls and duplicate strategy inheritance.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "RP11003",
+    "title": "Gradle DuplicatesStrategy API",
+    "url": "https://docs.gradle.org/9.2.1/javadoc/org/gradle/api/file/DuplicatesStrategy.html",
+    "observed_version": "Gradle 9.2.1",
+    "topic": "mod-resource-packaging-acceptance",
+    "note": "EXCLUDE ignores subsequent paths; FAIL rejects them; INCLUDE permits them.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "RP11004",
+    "title": "Gradle published release checksums",
+    "url": "https://gradle.org/release-checksums/",
+    "observed_version": "9.2.1 checksum entry; current page also lists 9.9.1",
+    "topic": "mod-resource-packaging-acceptance",
+    "note": "Downloaded historical binary distribution matches the published 9.2.1 SHA-256, not a recommendation to upgrade.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "RP11005",
+    "title": "Gradle 9.2.1 binary distribution checksum",
+    "url": "https://downloads.gradle.org/distributions/gradle-9.2.1-bin.zip.sha256",
+    "observed_version": "Gradle 9.2.1",
+    "topic": "mod-resource-packaging-acceptance",
+    "note": "72f44c9f8ebcb1af43838f45ee5c4aa9c5444898b3468ab3f4af7b6076c5bc3f.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "RP11006",
+    "title": "Gradle 9.2.1 source revision",
+    "url": "https://github.com/gradle/gradle/commit/30ecdc708db275e8f8769ea0620f6dd919a58f76",
+    "observed_version": "Tag v9.2.1 resolves to this commit",
+    "topic": "mod-resource-packaging-acceptance",
+    "note": "Installed Gradle version output reports this same revision; no source-to-binary build was performed.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "RP11007",
+    "title": "Gradle Java compatibility matrix",
+    "url": "https://docs.gradle.org/9.2.1/userguide/compatibility.html",
+    "observed_version": "Gradle 9.2.1",
+    "topic": "mod-resource-packaging-acceptance",
+    "note": "Execution JVM support is distinct from compiling or running target game code.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "RP11008",
+    "title": "Python ZIP archive documentation",
+    "url": "https://docs.python.org/3.12/library/zipfile.html",
+    "observed_version": "Python 3.12 documentation; local Python 3.12.14",
+    "topic": "mod-resource-packaging-acceptance",
+    "note": "ZipInfo is required to address each occurrence when names repeat; archive reading is not game-resource acceptance.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "RP11009",
+    "title": "Gradle 9.2.1 release notes",
+    "url": "https://docs.gradle.org/9.2.1/release-notes.html",
+    "observed_version": "Gradle 9.2.1",
+    "topic": "mod-resource-packaging-acceptance",
+    "note": "Historical controlled version, separately identified from current release and project compatibility.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "RP11010",
+    "title": "Gradle single-use daemon behavior",
+    "url": "https://docs.gradle.org/9.2.1/userguide/gradle_daemon.html#sec:disabling_the_daemon",
+    "observed_version": "Gradle 9.2.1",
+    "topic": "mod-resource-packaging-acceptance",
+    "note": "No-daemon can still launch a single-use process to honor JVM settings; observed logs retain this fact.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "RP11011",
+    "title": "Gradle CopySpec content expansion",
+    "url": "https://docs.gradle.org/9.2.1/javadoc/org/gradle/api/file/CopySpec.html",
+    "observed_version": "Gradle 9.2.1",
+    "topic": "mod-resource-packaging-acceptance",
+    "note": "Expand uses Groovy SimpleTemplateEngine; transformation guidance here is documented, not an executed filtering experiment.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  }
+]
