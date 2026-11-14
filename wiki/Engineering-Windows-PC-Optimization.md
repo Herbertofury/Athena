@@ -14,7 +14,7 @@
 | Smoother games or creation viewport | [GPU and gaming](#gpu-display-and-gaming) | Frame times and input latency, not just average FPS |
 | Faster builds | [Developer workloads](#developer-workloads) | Clean/incremental builds, restore, tests, durable files |
 
-Related: [Windows utilities and creation tools](Engineering-Windows-Utilities-and-Creation-Tools.md), [developer cleanup catalog](../research/developer-cleanup-2026-11-14/README.md), [measurement worksheet](../research/windows-optimization-2026-11-14/BENCHMARK.md). GitHub stars and review ratings are discovery signals, not evidence that a tweak improves this machine.
+Related: [Windows utilities and creation tools](Engineering-Windows-Utilities-and-Creation-Tools.md), [developer cleanup catalog](https://github.com/Herbertofury/Athena/blob/main/research/developer-cleanup-2026-11-14/README.md), [measurement worksheet](https://github.com/Herbertofury/Athena/blob/main/research/windows-optimization-2026-11-14/BENCHMARK.md). GitHub stars and review ratings are discovery signals, not evidence that a tweak improves this machine.
 
 ## Measure and recover first
 
@@ -96,4 +96,4 @@ Compare package restore, clean/incremental builds, test results, disk usage and 
 - **Recommended for that workload:** paired baseline comparison shows a worthwhile improvement, requirements intact, rollback verified.
 - **Not established:** “best optimizer,” universal service replacements, guaranteed FPS boosts, lowest latency for every application, or superiority based on stars alone.
 
-Use the [benchmark worksheet](../research/windows-optimization-2026-11-14/BENCHMARK.md) before upgrading a candidate's evidence tier. The [source register](../research/windows-optimization-2026-11-14/SOURCES.md) separates documentation from measurements. Repository wiki source publication does not itself prove that the separate live GitHub Wiki was synchronized.
+Use the [benchmark worksheet](https://github.com/Herbertofury/Athena/blob/main/research/windows-optimization-2026-11-14/BENCHMARK.md) before upgrading a candidate's evidence tier. The [source register](https://github.com/Herbertofury/Athena/blob/main/research/windows-optimization-2026-11-14/SOURCES.md) separates documentation from measurements. Repository wiki source publication does not itself prove that the separate live GitHub Wiki was synchronized.
