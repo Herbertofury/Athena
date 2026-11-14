@@ -140,7 +140,8 @@ def build():
     manifest=json.loads((r/'build-manifest.json').read_text());catalog=next(p for p in manifest['files'] if re.fullmatch(r'docs/explorer/catalog\.[a-f0-9]+\.json',p))
     copy(Path('research/catalog.json'),ROOT/'engineering'/catalog)
     # Media reuses official players, complete receipts and the existing codec/player state machines.
-    m=SOURCE/'media-lab';src=(m/'media.js').read_text();split=src.index('const $=');imports=src[:split];code=src[split:]
+    m=SOURCE/'media-lab';src=(m/'media.js').read_text();split=src.index('const $=');imports="import {mountGalleryComparison} from './gallery-comparison.mjs';\n"+src[:split];code=src[split:]
+    code=replace(code,'render(dataset);',"render(dataset);cleanups.push(mountGalleryComparison({container:root.querySelector('main'),cards:dataset.cards,signal:lifetime.signal}).dispose);")
     code=replace(code,'document.getElementById(id)','root.getElementById(id)')
     code=replace(code,"new URL(location.href).searchParams.get('event_view')==='bounded'","(route.includes('?')?new URLSearchParams(route.slice(route.indexOf('?')+1)).get('event_view'):initialState?.event_view)==='bounded'")
     code=replace(code,'let dataset=null,decoded=0,previewLoader=null,previewBusy=false;','let dataset=null,decoded=0,previewLoader=null,previewBusy=false,mediaReady=false;')
@@ -187,7 +188,7 @@ def build():
 }
 '''
     emit(Path('media/index.mjs'),pre+code+post,m/'media.js')
-    deps=['media-event-recorder.mjs','media-events.mjs','bilibili-player.mjs','resource-loader.mjs','media-core.mjs','event-log-view.mjs','public-fixtures.json','vendor/hls-1.7.3.min.js','vendor/HLS-LICENSE.txt','vendor/provenance.json']
+    deps=['compare.mjs','local-compare.mjs','gallery-comparison.mjs','media-event-recorder.mjs','media-events.mjs','bilibili-player.mjs','resource-loader.mjs','media-core.mjs','event-log-view.mjs','public-fixtures.json','vendor/hls-1.7.3.min.js','vendor/HLS-LICENSE.txt','vendor/provenance.json']
     for name in deps:copy(Path('media')/name,m/name)
     p=m/'preview-loader.mjs';s=p.read_text();s=replace(s,'{concurrency=4,','{signal=null,concurrency=4,');s=replace(s,"if(timer!==null)clearTimer(timer);timer=null;ok?resolve():reject(error);","if(timer!==null)clearTimer(timer);timer=null;signal?.removeEventListener('abort',onAbort);ok?resolve():reject(error);")
     s=replace(s,'    timer=setTimer(()=>{',"    const onAbort=()=>{try{entry.image.removeAttribute('src');}catch{notify('image_abort_cleanup_failed',{source:entry.image.dataset.source,attempt:entry.attempts});}finish(false,Error('Workspace unloaded'));};\n    if(signal?.aborted){onAbort();return;}signal?.addEventListener('abort',onAbort,{once:true});\n    timer=setTimer(()=>{")
