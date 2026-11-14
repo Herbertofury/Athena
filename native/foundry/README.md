@@ -152,3 +152,22 @@ This changes neither persisted formats nor history semantics. Reproduce focused 
 `node --test native/foundry/tests/history-keys.test.mjs` and actual browser acceptance with
 `CHROMIUM_PATH=<installed-browser> node scripts/test_foundry_history_keys_browser.cjs`.
 It is not an app-wide shortcut takeover or complete original Foundry parity claim.
+
+## Owned actor context menu
+
+The independent `actorMenu` module adapts the reviewed MIT `prototype-v24.ts`
+actor menu interaction: right-click, Context Menu key or Shift+F10 on a native actor
+selects that exact instance and opens Duplicate, Toggle position pin and Delete.
+Actions delegate existing controls and their normal Undo behavior. This is not original
+physics, repair, gravity, full context-menu or original asset fidelity parity.
+
+Arrow keys/Home/End move within enabled menu items; Escape restores the actor's focus;
+Tab dismisses without trapping navigation. Outside pointer, resize, abort and workspace
+navigation dismiss or remove the owned portal. A removed actor or changed selection
+cannot execute a stale action. The portal remains usable in Canvas-only mode. Styling
+comes from the existing external stylesheet, not injected inline style elements.
+Disable `actorMenu` independently; authoring, keyboard shortcuts and existing controls
+continue without it. No schema or persisted data is added.
+
+Run `node --test native/foundry/tests/actor-menu.test.mjs` and
+`CHROMIUM_PATH=<installed-browser> node scripts/test_foundry_actor_menu_browser.cjs`.

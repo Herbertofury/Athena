@@ -48,3 +48,5 @@
 .foundry-workspace[data-foundry-canvas-only=true]>.foundry-grid{display:block!important}
 .foundry-workspace[data-foundry-canvas-only=true]>.foundry-grid>aside{display:none!important}
 .foundry-workspace[data-foundry-canvas-only=true]>.foundry-grid>.foundry-scene{height:min(70vh,800px);min-height:300px}
+
+.foundry-actor-context{position:fixed;z-index:10000;min-width:13rem;max-width:calc(100vw - 16px);padding:8px;border:1px solid #6c829d;border-radius:10px;background:#15202e;color:#f5f9ff;box-shadow:0 8px 30px #0008}.foundry-actor-context[hidden]{display:none}.foundry-actor-context button{display:block;width:100%;padding:10px;text-align:left;background:transparent;color:inherit;border:0;border-radius:5px}.foundry-actor-context button:focus-visible{outline:2px solid #8cdbff;background:#263d55}

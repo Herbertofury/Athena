@@ -174,6 +174,7 @@ export async function mount(context){
  await attach('canvasView','./native-canvas-view.mjs','attachCanvasView',{workspace:root});
  await attach('objectKeys','./native-object-keys.mjs','attachObjectKeys',{workspace:root});
  await attach('historyKeys','./native-history-keys.mjs','attachHistoryKeys',{workspace:root});
+ await attach('actorMenu','./native-actor-menu.mjs','attachActorMenu',{workspace:root});
  await attach('backup','./native-backup.mjs','attachNativeBackup',{nativeStore:context.nativeStore,model,snapshot,getRevision:()=>importGeneration,replace:value=>{if(disposed||signal.aborted)return;checkpoint();importGeneration++;drag=null;envelopeVersion=value.version;layouts=value.layouts;current=value.active;view=value.view;savedLayouts=value.savedLayouts;draw();save();}});
  nativeSoundtrack=await attach('soundtrack','./native-soundtrack.mjs','attachNativeSoundtrack',{nativeStore:context.nativeStore});
  try{nativeSoundtrack?.update(current.themeId,current.roomId);}catch{report('soundtrack','update failed; layout authoring remains available');}
