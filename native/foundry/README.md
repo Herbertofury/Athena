@@ -48,3 +48,24 @@ Run from the repository root. The loopback-only test rejects outside requests an
 The native CI matrix runs on Ubuntu and Windows. It builds the Rust executable on that OS, runs native store and real HTTP integration checks, then runs `node scripts/test_foundry_native_browser.mjs` with Playwright Chromium. The browser check uses a new synthetic database, actual UI save/restore, a fresh browser context, native conflict protection and navigation. It retains a report and screenshot per OS, blocks external browser requests, and deletes only its own temporary synthetic database. `ATHENA_FOUNDRY_PYTHON` can select the installed Python command (default `python` on Windows, `python3` elsewhere).
 
 A passing hosted Windows job verifies this local browser/bridge/executable profile on the runner. It does not verify a packaged desktop installer, the user's PC, original private database migration, all renderer/media behavior, or source-repository retirement. Missing or failed Windows runs remain open acceptance gates.
+
+### Original semantic room metadata (read-only)
+
+The independently removable `semanticRoom` component accepts an explicitly selected local
+`ff-room-semantic-state` JSON export. It displays source labels, roles, action descriptions,
+visibility/lock flags and optional extracted `atlasId` as **recorded metadata**, not verified
+meshes, working actions, physics or navmesh. Source contract: original MIT Feature Foundry
+`src/prototype-v24.ts`, `roomStateSnapshot`/`saveRoomSemanticState` (lines 661/675),
+initial schema lines 144–156. The original `scanRoomPipeline` is simulated and is not ported.
+
+No browser storage, native schema, mesh import, provider request or upload is involved.
+The session export preserves original file bytes, including UTF-8 BOM/whitespace. Unknown
+fields, ambiguous duplicate JSON keys, invalid UTF-8, duplicate object IDs, invalid references
+and oversized structures fail closed; the previous accepted snapshot remains available.
+Limits: 1 MiB, 500 objects, 64 action labels per object, bounded strings/nesting. This is not
+lossless semantic migration. Close/unmount releases the export URL and pending reads are fenced.
+Disable independently with `--disable-foundry-module semanticRoom` in the native launcher.
+
+Synthetic real-browser regression: `node scripts/test_foundry_semantic_browser.cjs`.
+Set `CHROMIUM_PATH` if using a separately installed official Chromium. Results go to
+`browser-results/foundry-semantic-room` unless `ATHENA_BROWSER_OUTPUT` is set.

@@ -170,6 +170,7 @@ export async function mount(context){
  try{nativeSoundtrack?.update(current.themeId,current.roomId);}catch{report('soundtrack','update failed; layout authoring remains available');}
  await attach('legacyImport','./native-import.mjs','attachNativeImport',{nativeStore:context.nativeStore});
  nativeLocalVideo=await attach('localVideo','./native-local-video.mjs','attachNativeLocalVideo',{getSelectedTarget:()=>{const o=themeView().objects.find(o=>o.id===selectedObject);return o?{key:JSON.stringify([current.themeId,current.roomId,o.id]),label:o.name}:null;},resolveTarget:key=>{const [themeId,roomId,id]=JSON.parse(key);if(themeId!==current.themeId||roomId!==current.roomId)return null;const node=actor(id);return !node||node.parentElement===unavailableLayer||(node.parentElement===stickerLayer&&view.inspectorDock==='hidden')?null:node;}});
+ await attach('semanticRoom','./native-semantic-room.mjs','attachSemanticRoom');
  await attach('weather','./native-weather.mjs','attachNativeWeather');
  nativeEcology=await attach('ecology','./native-ecology.mjs','attachNativeEcology',{themes});syncEcology();
  if(signal.aborted)unmount();
