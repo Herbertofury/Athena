@@ -41,3 +41,10 @@
 
 /* Bound authored compositing to each Foundry surface; never blend into app controls. */
 .foundry-scene,.foundry-scope-layer{isolation:isolate}
+
+/* Explicit session-only canvas presentation; never hide Athena's outer shell. */
+.foundry-canvas-controls{display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin:0 0 16px}.foundry-canvas-controls button{font:inherit;color:inherit;background:transparent;border:1px solid currentColor;border-radius:8px;padding:10px;cursor:pointer}.foundry-canvas-controls button:focus-visible{outline:3px solid #9e8cff;outline-offset:3px}.foundry-canvas-controls span{max-width:65ch;font-size:.875rem}
+.foundry-workspace[data-foundry-canvas-only=true]>:not(.foundry-canvas-controls):not(.foundry-grid):not(.foundry-status){display:none!important}
+.foundry-workspace[data-foundry-canvas-only=true]>.foundry-grid{display:block!important}
+.foundry-workspace[data-foundry-canvas-only=true]>.foundry-grid>aside{display:none!important}
+.foundry-workspace[data-foundry-canvas-only=true]>.foundry-grid>.foundry-scene{height:min(70vh,800px);min-height:300px}
