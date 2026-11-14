@@ -126,7 +126,7 @@ fn layout(v: &Layout) -> Result<()> {
         .iter()
         .find(|t| t.id == v.theme_id)
         .ok_or("Unknown layout theme")?;
-    if !matches!(v.version, 1..=11)
+    if !matches!(v.version, 1..=12)
         || !t.rooms.iter().any(|r| r.id == v.room_id)
         || !matches!(v.time.as_str(), "dawn" | "day" | "dusk" | "night")
     {
@@ -134,7 +134,8 @@ fn layout(v: &Layout) -> Result<()> {
     }
     if v.version >= 4 {
         let env = v.environment.as_ref().ok_or("Missing room environment")?;
-        if !(matches!(env.preset.as_str(), "off" | "vapor" | "backrooms")
+        if !((v.version >= 12 && env.preset == "cosmic")
+            || matches!(env.preset.as_str(), "off" | "vapor" | "backrooms")
             || (v.version >= 10
                 && matches!(
                     env.preset.as_str(),
@@ -315,6 +316,7 @@ pub fn normalize(text: &str) -> Result<String> {
                 if layout["version"] != 9
                     && layout["version"] != 10
                     && layout["version"] != 11
+                    && layout["version"] != 12
                     && p.get("transformOrigin").is_some()
                 {
                     return Err("Origin requires version9".into());
@@ -367,7 +369,7 @@ pub fn normalize(text: &str) -> Result<String> {
         }
     }
     let mut v: Backup = serde_json::from_str(text)?;
-    if !matches!(v.version, 1..=11) {
+    if !matches!(v.version, 1..=12) {
         return Err("Unsupported backup version".into());
     }
     layout(&v.active)?;
@@ -439,6 +441,9 @@ pub fn normalize(text: &str) -> Result<String> {
 
 pub(crate) fn require_storage_version(text: &str, schema: i64) -> Result<()> {
     let v: Backup = serde_json::from_str(text)?;
+    if v.version >= 12 && schema < 16 {
+        return Err("Cosmic environments require explicit upgrade-cosmic-environment to schema16 and relaunch".into());
+    }
     if v.version >= 11 && schema < 14 {
         return Err(
             "Blend modes require explicit upgrade-blend-modes to schema14 and relaunch".into(),

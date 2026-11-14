@@ -13,22 +13,22 @@ async function check(name,fn){report.currentCheck=name;await fn();report.checks.
  await check('Expanded original environments paint distinctly and survive reload/reset',async()=>{
   await page.locator('[data-nav="build"]').click();await page.locator('[data-environment-preset]').waitFor();
   const sums=[];
-  for(const preset of ['frutiger','aurora','ocean','raincity','diner']){
+  for(const preset of ['cosmic','frutiger','aurora','ocean','raincity','diner']){
    await page.locator('[data-environment-preset]').selectOption(preset);await page.locator('[data-environment-apply]').click();
    const canvas=page.locator('canvas[data-environment-backdrop="'+preset+'"]');await canvas.waitFor();
    const pixels=await canvas.evaluate(c=>{const data=c.getContext('2d').getImageData(0,0,c.width,c.height).data;let sum=0,visible=0;for(let i=0;i<data.length;i+=4){sum=(sum+data[i]*3+data[i+1]*5+data[i+2]*7)>>>0;if(data[i+3])visible++;}return {sum,visible};});
    assert.ok(pixels.visible>500000);sums.push(pixels.sum);
   }
-  assert.equal(new Set(sums).size,5);report.expandedEnvironmentPixels=sums;
+  assert.equal(new Set(sums).size,6);report.expandedEnvironmentPixels=sums;
   await page.reload();await page.locator('canvas[data-environment-backdrop="diner"]').waitFor();
   await page.locator('[data-reset-room]').click();await page.locator('canvas[data-environment-backdrop="diner"]').waitFor();
-  const event=page.waitForEvent('download');await page.locator('[data-export]').click();const download=await event;const fs=require('node:fs');const filename=path.join(out,'expanded-environment-layout.json');await download.saveAs(filename);const value=JSON.parse(fs.readFileSync(filename));assert.equal(value.version,10);assert.equal(value.environment.preset,'diner');
+  const event=page.waitForEvent('download');await page.locator('[data-export]').click();const download=await event;const fs=require('node:fs');const filename=path.join(out,'expanded-environment-layout.json');await download.saveAs(filename);const value=JSON.parse(fs.readFileSync(filename));assert.equal(value.version,12);assert.equal(value.environment.preset,'diner');
   await page.screenshot({path:path.join(out,'foundry-expanded-environment.png'),fullPage:true});
   await page.locator('[data-environment-preset]').selectOption('off');await page.locator('[data-environment-apply]').click();assert.equal(await page.locator('[data-environment-backdrop]').count(),0);
  });
  await check('Motion is explicit, moves actual pixels, stops and never resumes on reload',async()=>{
-  await page.locator('[data-environment-preset]').selectOption('ocean');await page.locator('[data-environment-apply]').click();
-  const canvas=page.locator('canvas[data-environment-backdrop="ocean"]'),button=page.locator('[data-environment-motion]');
+  await page.locator('[data-environment-preset]').selectOption('cosmic');await page.locator('[data-environment-apply]').click();
+  const canvas=page.locator('canvas[data-environment-backdrop="cosmic"]'),button=page.locator('[data-environment-motion]');
   const pixels=()=>canvas.evaluate(c=>c.toDataURL());const first=await pixels();await page.waitForTimeout(100);assert.equal(await pixels(),first);
   await button.click();await page.waitForFunction(()=>document.querySelector('[data-environment-motion]').textContent.startsWith('Stop'));
   await page.waitForTimeout(200);assert.notEqual(await pixels(),first);await button.click();const stopped=await pixels();await page.waitForTimeout(100);assert.equal(await pixels(),stopped);
