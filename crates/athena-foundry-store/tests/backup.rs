@@ -14,7 +14,7 @@ fn actual_js_export_roundtrips() {
 #[test]
 fn bad_backups_rejected() {
     let changes: Vec<(&str, Value)> = vec![
-        ("/version", json!(12)),
+        ("/version", json!(13)),
         ("/active/themeId", json!("wrong")),
         ("/active/roomId", json!("wrong")),
         ("/active/time", json!("later")),

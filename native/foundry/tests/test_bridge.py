@@ -88,6 +88,15 @@ class Tests(unittest.TestCase):
   self.server=m.Bridge(BIN,self.db,ROOT.parents[1]/'dist');self.thread=threading.Thread(target=self.server.serve_forever);self.thread.start()
   self.assertEqual(self.request('POST',body=json.dumps(value),headers={'Content-Type':'application/json','If-Match':'"empty"'})[0],200)
   loaded=json.loads(self.request()[1]);self.assertEqual(loaded['active'],value['active']);self.assertEqual(loaded['version'],10)
+ def test_cosmic_environment_explicit_upgrade_roundtrip(self):
+  value={'version':12,'active':{'version':12,'themeId':'frutiger-aero','roomId':'frutiger-aero:room:aqua-atrium','time':'day','placements':{},'environment':{'preset':'cosmic','opacity':.82,'horizon':.48,'target':'room','targetId':None}},'layouts':{},'view':{'inspectorDock':'right','inspectorWidth':240},'savedLayouts':[]}
+  before=self.db.read_bytes();status,body,_=self.request('POST',body=json.dumps(value),headers={'Content-Type':'application/json','If-Match':'"empty"'})
+  self.assertEqual(status,422);self.assertIn(b'upgrade-cosmic-environment',body);self.assertEqual(before,self.db.read_bytes())
+  self.server.shutdown();self.thread.join();self.server.server_close()
+  for command in ['upgrade-history','upgrade-soundtracks','upgrade-transforms','upgrade-scopes','upgrade-environment','upgrade-targets','upgrade-instances','upgrade-appearance','upgrade-filters','upgrade-origins','upgrade-environments','upgrade-blend-modes','upgrade-music-precision','upgrade-cosmic-environment']:subprocess.run([BIN,command,str(self.db)],check=True,capture_output=True)
+  self.server=m.Bridge(BIN,self.db,ROOT.parents[1]/'dist');self.thread=threading.Thread(target=self.server.serve_forever);self.thread.start()
+  self.assertEqual(self.request('POST',body=json.dumps(value),headers={'Content-Type':'application/json','If-Match':'"empty"'})[0],200)
+  loaded=json.loads(self.request()[1]);self.assertEqual(loaded['active'],value['active']);self.assertEqual(loaded['version'],12)
  def test_two_clients_and_external_cli_are_fenced(self):
   a=self.request()[2]['ETag'];b=self.request()[2]['ETag']
   self.assertEqual(a,b)

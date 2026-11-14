@@ -77,7 +77,7 @@ impl Store {
     pub fn migrate_soundtrack_metadata(&mut self) -> Result<()> {
         let tx = self.db.transaction()?;
         let v: i64 = tx.query_row("PRAGMA user_version", [], |r| r.get(0))?;
-        if matches!(v, 4..=15) {
+        if matches!(v, 4..=16) {
             return Ok(());
         }
         if v != 3 {
@@ -96,7 +96,7 @@ impl Store {
         let tx = self.db.transaction()?;
         if !matches!(
             tx.query_row("PRAGMA user_version", [], |r| r.get::<_, i64>(0))?,
-            4..=15
+            4..=16
         ) {
             return Err("Run explicit upgrade-soundtracks first".into());
         }
@@ -121,7 +121,7 @@ fn read_checked(
 ) -> Result<Option<NativeSoundtrack>> {
     if !matches!(
         db.query_row("PRAGMA user_version", [], |r| r.get::<_, i64>(0))?,
-        4..=15
+        4..=16
     ) {
         return Err("Run explicit upgrade-soundtracks first".into());
     }
@@ -235,7 +235,7 @@ impl Store {
     pub fn migrate_music_precision(&mut self) -> Result<()> {
         let tx = self.db.transaction()?;
         let schema: i64 = tx.query_row("PRAGMA user_version", [], |r| r.get(0))?;
-        if schema == 15 {
+        if schema >= 15 {
             return Ok(());
         }
         if schema != 14 {

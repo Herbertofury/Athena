@@ -140,7 +140,7 @@ impl Store {
     pub fn open(path: &Path) -> Result<Self> {
         let db = Connection::open_with_flags(path, OpenFlags::SQLITE_OPEN_READ_WRITE)?;
         let version: i64 = db.query_row("PRAGMA user_version", [], |r| r.get(0))?;
-        if !matches!(version, 1..=15) {
+        if !matches!(version, 1..=16) {
             return Err("Unsupported database schema; no migration performed".into());
         }
         configure(&db)?;
@@ -176,7 +176,7 @@ impl Store {
     }
     pub fn assign(&mut self, value: &Soundtrack) -> Result<()> {
         validate_soundtrack(value)?;
-        if matches!(self.summary()?.schema, 4..=15) {
+        if matches!(self.summary()?.schema, 4..=16) {
             self.assign_native(&metadata::NativeAssignment::from_soundtrack(value))?;
             return Ok(());
         }
@@ -661,7 +661,7 @@ impl Store {
     pub fn migrate_backups(&mut self) -> Result<()> {
         let tx = self.db.transaction()?;
         let version: i64 = tx.query_row("PRAGMA user_version", [], |r| r.get(0))?;
-        if matches!(version, 2..=15) {
+        if matches!(version, 2..=16) {
             return Ok(());
         }
         if version != 1 {
@@ -673,7 +673,7 @@ impl Store {
     }
     pub fn save_backup(&mut self, text: &str) -> Result<()> {
         let version: i64 = self.db.query_row("PRAGMA user_version", [], |r| r.get(0))?;
-        if !matches!(version, 2..=15) {
+        if !matches!(version, 2..=16) {
             return Err("Run explicit upgrade-backups before saving workspace backups".into());
         }
         let encoded = backup::normalize(text)?;
@@ -683,7 +683,7 @@ impl Store {
         let version: i64 = tx.query_row("PRAGMA user_version", [], |r| r.get(0))?;
         backup::require_storage_version(&encoded, version)?;
         tx.execute("INSERT INTO workspace_backup VALUES(1,?1) ON CONFLICT(singleton) DO UPDATE SET json=excluded.json",[&encoded])?;
-        if matches!(version, 3..=15) {
+        if matches!(version, 3..=16) {
             history::append(&tx, &encoded, "save", None)?;
         }
         tx.commit()?;
@@ -691,7 +691,7 @@ impl Store {
     }
     pub fn load_backup(&self) -> Result<Option<String>> {
         let version: i64 = self.db.query_row("PRAGMA user_version", [], |r| r.get(0))?;
-        if !matches!(version, 2..=15) {
+        if !matches!(version, 2..=16) {
             return Err("Run explicit upgrade-backups before loading workspace backups".into());
         }
         let value: Option<String> = self
@@ -1171,6 +1171,51 @@ impl Store {
             }
         }
         tx.execute_batch("PRAGMA user_version=14;")?;
+        tx.commit()?;
+        Ok(())
+    }
+    pub fn migrate_cosmic_environment(&mut self) -> Result<()> {
+        let tx = self
+            .db
+            .transaction_with_behavior(rusqlite::TransactionBehavior::Immediate)?;
+        let version: i64 = tx.query_row("PRAGMA user_version", [], |r| r.get(0))?;
+        if version >= 16 {
+            return Ok(());
+        }
+        if version != 15 {
+            return Err(
+                "Run explicit upgrade-music-precision before upgrade-cosmic-environment".into(),
+            );
+        }
+        let active: Option<String> = tx
+            .query_row(
+                "SELECT json FROM workspace_backup WHERE singleton=1",
+                [],
+                |r| r.get(0),
+            )
+            .optional()?;
+        if let Some(text) = active {
+            let normalized = backup::normalize(&text)?;
+            backup::require_storage_version(&normalized, 15)?;
+        }
+        {
+            let mut statement =
+                tx.prepare("SELECT json,sha256 FROM workspace_revisions LIMIT 51")?;
+            let rows = statement
+                .query_map([], |r| Ok((r.get::<_, String>(0)?, r.get::<_, String>(1)?)))?
+                .collect::<rusqlite::Result<Vec<_>>>()?;
+            if rows.len() > 50 {
+                return Err("Unexpected revision count; preserve database for review".into());
+            }
+            for (text, digest) in rows {
+                if concurrency::version(Some(&text)) != format!("\"{digest}\"") {
+                    return Err("Revision integrity mismatch; upgrade not applied".into());
+                }
+                let normalized = backup::normalize(&text)?;
+                backup::require_storage_version(&normalized, 15)?;
+            }
+        }
+        tx.execute_batch("PRAGMA user_version=16;")?;
         tx.commit()?;
         Ok(())
     }

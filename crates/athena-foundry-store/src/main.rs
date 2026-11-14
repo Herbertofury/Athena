@@ -11,6 +11,10 @@ fn run() -> Result<()> {
             let mut store = Store::open(Path::new(&args[2]))?;
             store.migrate_music_precision()?;
         }
+        "upgrade-cosmic-environment" if args.len() == 3 => {
+            Store::open(p)?.migrate_cosmic_environment()?;
+            println!("{}", serde_json::to_string(&Store::open(p)?.summary()?)?);
+        }
         "upgrade-blend-modes" if args.len() == 3 => {
             Store::open(p)?.migrate_blend_modes()?;
             println!("{}", serde_json::to_string(&Store::open(p)?.summary()?)?);

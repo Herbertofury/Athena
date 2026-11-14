@@ -29,7 +29,7 @@ impl Store {
         }
         let tx = self.db.transaction()?;
         let schema: i64 = tx.query_row("PRAGMA user_version", [], |r| r.get(0))?;
-        if !(4..=15).contains(&schema) {
+        if !(4..=16).contains(&schema) {
             return Err("Explicit soundtrack schema upgrade required".into());
         }
         if import.version == 2 && schema < 15 {
