@@ -3,7 +3,7 @@
 Python standard-library tools; no browser access, downloads, uploads or provider requests. Keep inputs/outputs private and OUTSIDE Athena static/runtime directories. These tools do not establish repository deletion readiness.
 
 ## Preserve exact browser values
-Operator-prepared JSON maps the nine allowlisted original Foundry keys to exact raw strings. Unknown keys refuse; malformed original JSON strings, absent/empty distinction and UTF-16 surrogates remain preserved.
+Operator-prepared JSON maps the eleven allowlisted original Foundry keys to exact raw strings. Unknown keys refuse; malformed original JSON strings, absent/empty distinction and UTF-16 surrogates remain preserved.
 
     python3 capsule/capsule.py pack VALUES.json NEW-CAPSULE.json
     python3 capsule/capsule.py unpack CAPSULE.json NEW-VALUES.json
@@ -43,3 +43,8 @@ Provide absolute paths to an already-built schema12 CLI and current Athena model
 13 capsule/assessment + 5 SQLite + 12 converter tests. Inputs are synthetic; temporary new DBs only, never supplied user databases. TMPDIR may select private writable test space. Missing required environment variables fail explicitly.
 
 New private outputs use Unix0600, bundle directories0700. Windows ACL/real-browser acceptance unverified. Source-only package: no databases, binaries, private exports/bundles or logs. Source application/runtime is not modified.
+
+## Additional original persistent preferences
+Source review of `src/world/ThemeDirector.ts` and `src/music/MusicHub.ts` at original commit `07d66bde6b758992d04a6b580f159599c705de55` found two additional persistent values: `ff.premium-theme.v1` (plain selected-theme string) and `ff.music-hub.v2` (music route and soundtrack mappings). Capsules preserve both exactly, without applying them or asserting native conversion compatibility. Existing nine-key capsules remain readable.
+
+Provider session keys, Spotify PKCE material/client configuration, and Apple developer tokens remain excluded. This is not credential backup. Inputs can contain private URLs or labels: keep capsules private, inspect before sharing, and never place them in the static site or public repository. No browser storage was accessed by this change.

@@ -6,7 +6,7 @@ NEUTRAL={'opacity':1,'blendMode':'normal','skewX':0,'skewY':0,'brightness':1,'co
 def assess(capsule):
     raw=unpack(capsule);counts=collections.Counter();formats={}
     for key,value in raw.items():
-        if key=='ff-visual-quality':
+        if key in ('ff-visual-quality','ff.premium-theme.v1'):
             formats[key]='opaque-original-preference';counts['quality_policy_not_mapped']+=1;continue
         try: data=parse(value)
         except (ValueError,TypeError):
