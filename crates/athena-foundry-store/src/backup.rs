@@ -124,7 +124,7 @@ fn layout(v: &Layout) -> Result<()> {
         .iter()
         .find(|t| t.id == v.theme_id)
         .ok_or("Unknown layout theme")?;
-    if !matches!(v.version, 1..=9)
+    if !matches!(v.version, 1..=10)
         || !t.rooms.iter().any(|r| r.id == v.room_id)
         || !matches!(v.time.as_str(), "dawn" | "day" | "dusk" | "night")
     {
@@ -132,7 +132,12 @@ fn layout(v: &Layout) -> Result<()> {
     }
     if v.version >= 4 {
         let env = v.environment.as_ref().ok_or("Missing room environment")?;
-        if !matches!(env.preset.as_str(), "off" | "vapor" | "backrooms")
+        if !(matches!(env.preset.as_str(), "off" | "vapor" | "backrooms")
+            || (v.version >= 10
+                && matches!(
+                    env.preset.as_str(),
+                    "frutiger" | "aurora" | "ocean" | "raincity" | "diner"
+                )))
             || !env.opacity.is_finite()
             || !(0.0..=1.0).contains(&env.opacity)
             || !env.horizon.is_finite()
@@ -156,7 +161,7 @@ fn layout(v: &Layout) -> Result<()> {
         return Err("At most100 instances per room".into());
     }
     for (id, p) in &v.placements {
-        if v.version == 9
+        if v.version >= 9
             && !matches!(
                 p.transform_origin.as_deref(),
                 Some("tl" | "tc" | "tr" | "ml" | "mc" | "mr" | "bl" | "bc" | "br")
@@ -284,7 +289,10 @@ pub fn normalize(text: &str) -> Result<String> {
             .and_then(serde_json::Value::as_object)
         {
             for p in placements.values() {
-                if layout["version"] != 9 && p.get("transformOrigin").is_some() {
+                if layout["version"] != 9
+                    && layout["version"] != 10
+                    && p.get("transformOrigin").is_some()
+                {
                     return Err("Origin requires version9".into());
                 }
                 if layout["version"].as_u64().unwrap_or(0) < 8
@@ -335,7 +343,7 @@ pub fn normalize(text: &str) -> Result<String> {
         }
     }
     let mut v: Backup = serde_json::from_str(text)?;
-    if !matches!(v.version, 1..=9) {
+    if !matches!(v.version, 1..=10) {
         return Err("Unsupported backup version".into());
     }
     layout(&v.active)?;
@@ -407,7 +415,13 @@ pub fn normalize(text: &str) -> Result<String> {
 
 pub(crate) fn require_storage_version(text: &str, schema: i64) -> Result<()> {
     let v: Backup = serde_json::from_str(text)?;
-    if v.version == 9 && schema != 12 {
+    if v.version == 10 && schema < 13 {
+        return Err(
+            "Expanded environments require explicit upgrade-environments to schema13 and relaunch"
+                .into(),
+        );
+    }
+    if v.version >= 9 && schema < 12 {
         return Err(
             "Origin backups require explicit upgrade-origins to schema12 and relaunch".into(),
         );

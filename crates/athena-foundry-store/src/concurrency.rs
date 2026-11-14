@@ -21,7 +21,7 @@ impl Store {
             .db
             .transaction_with_behavior(TransactionBehavior::Immediate)?;
         let schema: i64 = tx.query_row("PRAGMA user_version", [], |r| r.get(0))?;
-        if !matches!(schema, 2..=12) {
+        if !matches!(schema, 2..=13) {
             return Err("Backup upgrade required".into());
         }
         backup::require_storage_version(&encoded, schema)?;
@@ -43,7 +43,7 @@ impl Store {
             return Ok(None);
         }
         tx.execute("INSERT INTO workspace_backup VALUES(1,?1) ON CONFLICT(singleton) DO UPDATE SET json=excluded.json", [&encoded])?;
-        if matches!(schema, 3..=12) {
+        if matches!(schema, 3..=13) {
             history::append(&tx, &encoded, "save", None)?;
         }
         tx.commit()?;
@@ -70,7 +70,7 @@ impl Store {
             .db
             .transaction_with_behavior(TransactionBehavior::Immediate)?;
         let schema: i64 = tx.query_row("PRAGMA user_version", [], |r| r.get(0))?;
-        if !matches!(schema, 3..=12) {
+        if !matches!(schema, 3..=13) {
             return Err("Explicit upgrade-history required".into());
         }
         let current: Option<String> = tx
