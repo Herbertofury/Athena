@@ -6,7 +6,7 @@
 'use strict';
 const fs=require('node:fs'),path=require('node:path'),http=require('node:http');
 const assert=require('node:assert/strict'),crypto=require('node:crypto');
-const WORKSHOP_IDS=Object.freeze(['security-foundations','systems-workshop','programming-workshop','cloud-workshop','data-workshop']);
+const WORKSHOP_IDS=Object.freeze(['security-foundations','systems-workshop','programming-workshop','cloud-workshop','data-workshop','delivery-workshop']);
 const REQUIRED_CHECKS=Object.freeze(['exact served files','catalog counts and directory','workshop ZIP downloads','all workshop routes and lessons','literal worked-code markup is inert','supplemental checks and unchanged XP','read and notes persistence','close and Escape focus','history Back and Forward','desktop and mobile layout','Packet Trail regression','no external requests or page errors']);
 const CSP="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'none'; frame-src 'none'";
 const sha256=bytes=>crypto.createHash('sha256').update(bytes).digest('hex');
@@ -17,9 +17,9 @@ function validateReceipt(report){
  for(const field of ['errors','outsideRequests','cspViolations','failedResponses'])assert.deepEqual(report[field],[],field);
  assert.ok(report.files.length>=6,'Need served application identity');
  for(const item of report.files){assert.match(item.sha256,/^[a-f0-9]{64}$/);assert.equal(item.loadedSHA256,item.sha256);}
- assert.equal(report.totalLessons,90);assert.equal(report.addedLessons,42);
- assert.deepEqual(report.workshopIds,WORKSHOP_IDS);assert.equal(new Set(report.openedLessonIds).size,42);
- assert.equal(report.supplementalChecksExercised,84);assert.deepEqual(report.downloads.map(d=>d.id),WORKSHOP_IDS);for(const d of report.downloads){assert.equal(d.status,200);assert.equal(d.mime,'application/zip');assert.deepEqual(d.header,[80,75,3,4]);assert.match(d.sha256,/^[a-f0-9]{64}$/);assert.ok(d.size>100);}
+ assert.equal(report.totalLessons,98);assert.equal(report.addedLessons,50);
+ assert.deepEqual(report.workshopIds,WORKSHOP_IDS);assert.equal(new Set(report.openedLessonIds).size,50);
+ assert.equal(report.supplementalChecksExercised,100);assert.deepEqual(report.downloads.map(d=>d.id),WORKSHOP_IDS);for(const d of report.downloads){assert.equal(d.status,200);assert.equal(d.mime,'application/zip');assert.deepEqual(d.header,[80,75,3,4]);assert.match(d.sha256,/^[a-f0-9]{64}$/);assert.ok(d.size>100);}
  for(const viewport of ['desktop','mobile'])for(const id of WORKSHOP_IDS)assert.ok(report.screenshots.some(s=>s.name===`${id}-${viewport}.png`),`Missing ${id} ${viewport} screenshot`);
  return true;
 }
@@ -31,7 +31,7 @@ function workshopRouteReady(hash){
  if(location.hash!==hash)return false;
  const main=document.querySelector('#main'),paths=globalThis.ATHENA_DATA?.workshops;
  if(main?.dataset.workspace!=='learning'||!Array.isArray(paths))return false;
- if(hash==='#workshops')return paths.length===5&&main.querySelectorAll('[data-workshop]').length===5&&paths.every(p=>{
+ if(hash==='#workshops')return paths.length===6&&main.querySelectorAll('[data-workshop]').length===6&&paths.every(p=>{
   const links=[...main.querySelectorAll('[data-workshop]')].filter(a=>a.dataset.workshop===p.id);
   return links.length===1&&links[0].getAttribute('href')==='#workshops/'+p.id;
  });
@@ -71,10 +71,10 @@ async function run(env=process.env){
   });
   let data,paths,added;
   await check('catalog counts and directory',async()=>{
-   data=await page.evaluate(()=>globalThis.ATHENA_DATA);assert.equal(data.lessons.length,90);report.totalLessons=data.lessons.length;
+   data=await page.evaluate(()=>globalThis.ATHENA_DATA);assert.equal(data.lessons.length,98);report.totalLessons=data.lessons.length;
    paths=data.workshops;assert.ok(Array.isArray(paths),'ATHENA_DATA.workshops must be an array');
    assert.deepEqual(paths.map(p=>p.id),WORKSHOP_IDS);report.workshopIds=paths.map(p=>p.id);
-   const addedIds=[...new Set(paths.flatMap(p=>p.lessonIds))];assert.equal(addedIds.length,42);added=addedIds.map(id=>{const lesson=data.lessons.find(l=>l.id===id);assert.ok(lesson,`Missing ${id}`);return lesson;});report.addedLessons=added.length;
+   const addedIds=[...new Set(paths.flatMap(p=>p.lessonIds))];assert.equal(addedIds.length,50);added=addedIds.map(id=>{const lesson=data.lessons.find(l=>l.id===id);assert.ok(lesson,`Missing ${id}`);return lesson;});report.addedLessons=added.length;
    await page.locator('[data-nav="workshops"]').click();await waitForWorkshopRoute(page,'#workshops');
    for(const id of WORKSHOP_IDS){const link=page.locator(`#main [data-workshop="${id}"]`);assert.equal(await link.count(),1);assert.equal(await link.getAttribute('href'),'#workshops/'+id);}
   });
@@ -117,7 +117,7 @@ async function run(env=process.env){
      await block.locator('[data-check-reset]').click();assert.equal((await feedback.textContent()).trim(),'');assert.equal(await options.nth(item.answer).isEnabled(),true);
      await options.nth(item.answer).click();assert.ok((await feedback.textContent()).includes(item.why));assert.ok(await options.nth(item.answer).evaluate(el=>el.classList.contains('correct')));assert.deepEqual(await snapshot(),before);count++;
     }await close();await open(id);assert.equal((await page.locator('.supplemental-feedback').allTextContents()).every(t=>t.trim()===''),true,'Reopening starts fresh supplemental practice');assert.deepEqual(await snapshot(),before);await close();}}
-   report.supplementalChecksExercised=count;assert.equal(count,84);
+   report.supplementalChecksExercised=count;assert.equal(count,100);
   });
   await check('read and notes persistence',async()=>{
    const p=paths[0],id=p.lessonIds[0],note='Browser receipt <script>not executable</script> & literal notes';await route('#workshops/'+p.id);await open(id);await page.locator('#read-check').check();await page.locator('#lesson-note').fill(note);await close();await page.reload();await open(id);assert.equal(await page.locator('#read-check').isChecked(),true);assert.equal(await page.locator('#lesson-note').inputValue(),note);assert.equal(await page.locator('#xp-label').textContent(),'10 learning XP');await close();
@@ -126,7 +126,7 @@ async function run(env=process.env){
    const id=paths[0].lessonIds[0];for(const how of ['button','Escape']){await open(id);if(how==='button')await close();else{await page.keyboard.press('Escape');await dialog.waitFor({state:'hidden'});await page.waitForFunction(id=>document.activeElement?.dataset.lesson===id,id);}assert.equal(await page.evaluate(()=>document.activeElement?.dataset.lesson),id);}
   });
   await check('history Back and Forward',async()=>{
-   await route('#workshops');await page.locator(`[data-workshop="${WORKSHOP_IDS[0]}"]`).click();await waitForWorkshopRoute(page,'#workshops/'+WORKSHOP_IDS[0]);await page.goBack();await waitForWorkshopRoute(page,'#workshops');await page.locator('#main [data-workshop]').first().waitFor();assert.equal(await page.locator('#main [data-workshop]').count(),5);await page.goForward();await waitForWorkshopRoute(page,'#workshops/'+WORKSHOP_IDS[0]);await page.locator(`#main [data-lesson="${paths[0].lessonIds[0]}"]`).first().waitFor();
+   await route('#workshops');await page.locator(`[data-workshop="${WORKSHOP_IDS[0]}"]`).click();await waitForWorkshopRoute(page,'#workshops/'+WORKSHOP_IDS[0]);await page.goBack();await waitForWorkshopRoute(page,'#workshops');await page.locator('#main [data-workshop]').first().waitFor();assert.equal(await page.locator('#main [data-workshop]').count(),6);await page.goForward();await waitForWorkshopRoute(page,'#workshops/'+WORKSHOP_IDS[0]);await page.locator(`#main [data-lesson="${paths[0].lessonIds[0]}"]`).first().waitFor();
   });
   await check('desktop and mobile layout',async()=>{
    async function noOverflow(label){const sizes=await page.evaluate(()=>({width:document.documentElement.clientWidth,scroll:document.documentElement.scrollWidth,dialogWidth:document.querySelector('#lesson-dialog').clientWidth,dialogScroll:document.querySelector('#lesson-dialog').scrollWidth,open:document.querySelector('#lesson-dialog').open}));assert.ok(sizes.scroll<=sizes.width+1,JSON.stringify({label,...sizes}));if(sizes.open)assert.ok(sizes.dialogScroll<=sizes.dialogWidth+1,JSON.stringify({label,...sizes}));}

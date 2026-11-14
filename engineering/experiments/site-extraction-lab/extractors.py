@@ -11,7 +11,8 @@ import re
 from datetime import datetime, timedelta, timezone
 from urllib.parse import urljoin, urlsplit, urlunsplit
 
-from lxml import etree, html
+# JSON/reference helpers stay usable without optional HTML/XML parsing support.
+# Parser entry points import lxml normally and fail if it is unavailable.
 
 
 class ExtractionError(ValueError):
@@ -36,6 +37,7 @@ def json_loads(value):
 
 
 def document(value):
+    from lxml import html
     # Observed fixture responses are UTF-8; fragments lack a charset declaration.
     return html.fromstring(value, parser=html.HTMLParser(no_network=True, encoding="utf-8"))
 
@@ -122,6 +124,7 @@ def srcset_url_tokens(value):
 def ordered_body(node, origin="", completeness="selected_scope"):
     if node is None:
         return None
+    from lxml import html
     events = []
     def emit_text(value):
         if value is not None and value != "":
@@ -343,6 +346,7 @@ def wordpress(inputs, origin):
     if content.get("protected"):
         record["gates"].append("protected_body")
     elif "rendered" in content:
+        from lxml import html
         record["body"] = ordered_body(html.fragment_fromstring(content["rendered"] or "", create_parent=True), origin)
     record["metadataSummary"] = post.get("excerpt", {}).get("rendered")
     record["projectImageId"] = post.get("featured_media")
@@ -425,6 +429,7 @@ def rss(inputs, origin):
     raw = inputs["feed"]
     if re.search(br"<!\s*(?:DOCTYPE|ENTITY)", raw, re.I):
         raise ExtractionError("RSS DTD/entity declarations are not supported")
+    from lxml import etree, html
     root = etree.fromstring(raw, parser=etree.XMLParser(resolve_entities=False, load_dtd=False, no_network=True))
     # Validate the core envelope, not RSS version conformance or extensions.
     if root.tag != "rss":
@@ -548,6 +553,7 @@ def modpub(inputs, origin):
 
 def fragment_document(payload):
     """Join only observed DOM fragments; no invented outer post/profile markup."""
+    from lxml import html
     fragments = []
     for part in payload.get("parts", []):
         values = part.get("html", [])

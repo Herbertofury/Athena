@@ -39,3 +39,17 @@ test('Lab verifies exact archive bytes with a bounded WebCrypto completion wait'
 });
 
 test('Archive completion wait fails rather than silently accepting a stuck state',async()=>{await assert.rejects(waitFor(()=>false,10),/Timed out waiting for verified archive completion/);});
+
+test('Native Lab rejects malformed count maps before replacing last-good cards and recovers',async()=>{
+ const e=setup();let c;const job={id:1,id_text:'1',state:'succeeded',attempt:1,job:'DedupExperiment',result:{error:'Synthetic retained'}};
+ try{
+  e.setOverview({jobs:[job],counts:{succeeded:3},worker_status:'running'});
+  c=await(await import(moduleURL)).mount({container:e.container});const r=e.container.shadowRoot,node=r.querySelector('.job');assert.ok(node);
+  for(const counts of [null,[],{queued:'2',running:1},{succeeded:-1},{failed:0.5},{queued:Number.MAX_SAFE_INTEGER,running:1},{unknown:'bad'}]){
+   e.setOverview({jobs:[],counts,worker_status:'running'});e.document.dispatchEvent(new e.window.Event('visibilitychange'));await tick();await tick();
+   assert.equal(r.querySelector('.job')===node,true,JSON.stringify(counts));assert.equal(r.getElementById('completed').textContent,'3');assert.match(r.getElementById('connection').textContent,/Previous results remain visible/);
+  }
+  e.setOverview({jobs:[job],counts:{queued:2,running:1,succeeded:7},worker_status:'running'});e.document.dispatchEvent(new e.window.Event('visibilitychange'));await tick();await tick();
+  assert.equal(r.getElementById('pending').textContent,'3');assert.equal(r.getElementById('completed').textContent,'7');assert.equal(r.querySelector('.job'),node);
+ }finally{c?.unmount();e.restore();}
+});

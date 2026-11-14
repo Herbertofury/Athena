@@ -1,0 +1,188 @@
+{
+  "reviewedAt": "2026-11-07",
+  "method": "Opened current official Git, Python 3.12 and GitHub Actions documentation through the web tool; inspected relevant command, environment, hash, context and event sections. No GitHub account, remote repository or hosted workflow was accessed.",
+  "originality": "All eight lesson narratives, fictional scenarios, 24 questions, code fixtures, safety contract and handoff rubric are original teaching. Sources support narrow command/library/CI facts, not the pedagogical design or a claim of certification coverage.",
+  "versionScope": "Execution target: installed Git 2.52.0 and Python 3.12.14 on Linux. Python documentation currently labels 3.12.16; stable APIs used. Current Git reference pages can describe newer options; the lab uses only the bounded operations actually verified here. Other platforms/versions are not certified.",
+  "sources": [
+    {
+      "id": "glossary",
+      "title": "Git glossary",
+      "url": "https://git-scm.com/docs/gitglossary",
+      "reviewedAt": "2026-11-07",
+      "status": "opened",
+      "supports": "Working tree, index, HEAD, commit, branch, parent and fast-forward vocabulary.",
+      "sourceType": "official documentation"
+    },
+    {
+      "id": "add",
+      "title": "Git add reference",
+      "url": "https://git-scm.com/docs/git-add",
+      "reviewedAt": "2026-11-07",
+      "status": "opened",
+      "supports": "Staged contents select the next plain commit; later edits require another add.",
+      "sourceType": "official documentation"
+    },
+    {
+      "id": "diff",
+      "title": "Git diff reference",
+      "url": "https://git-scm.com/docs/git-diff",
+      "reviewedAt": "2026-11-07",
+      "status": "opened",
+      "supports": "Ordinary working-tree/index comparison versus cached index/HEAD comparison.",
+      "sourceType": "official documentation"
+    },
+    {
+      "id": "status",
+      "title": "Git status reference",
+      "url": "https://git-scm.com/docs/git-status",
+      "reviewedAt": "2026-11-07",
+      "status": "opened",
+      "supports": "Porcelain/short status and distinct staged, unstaged and untracked states.",
+      "sourceType": "official documentation"
+    },
+    {
+      "id": "commit",
+      "title": "Git commit reference",
+      "url": "https://git-scm.com/docs/git-commit",
+      "reviewedAt": "2026-11-07",
+      "status": "opened",
+      "supports": "Commit information and author/committer fields; author name does not affect authentication.",
+      "sourceType": "official documentation"
+    },
+    {
+      "id": "branch",
+      "title": "Git branch reference",
+      "url": "https://git-scm.com/docs/git-branch",
+      "reviewedAt": "2026-11-07",
+      "status": "opened",
+      "supports": "Branch-head creation at a revision and branch/reference behavior.",
+      "sourceType": "official documentation"
+    },
+    {
+      "id": "merge",
+      "title": "Git merge reference",
+      "url": "https://git-scm.com/docs/git-merge",
+      "reviewedAt": "2026-11-07",
+      "status": "opened",
+      "supports": "Fast-forward versus true merge, conflicts and explicit edit/add/commit resolution.",
+      "sourceType": "official documentation"
+    },
+    {
+      "id": "revert",
+      "title": "Git revert reference",
+      "url": "https://git-scm.com/docs/git-revert",
+      "reviewedAt": "2026-11-07",
+      "status": "opened",
+      "supports": "Additive corrective commits reversing changes; clean-state requirement and nontrivial cases.",
+      "sourceType": "official documentation"
+    },
+    {
+      "id": "show",
+      "title": "Git show reference",
+      "url": "https://git-scm.com/docs/git-show",
+      "reviewedAt": "2026-11-07",
+      "status": "opened",
+      "supports": "Inspecting committed objects and file contents.",
+      "sourceType": "official documentation"
+    },
+    {
+      "id": "revision",
+      "title": "Git rev-parse reference",
+      "url": "https://git-scm.com/docs/git-rev-parse",
+      "reviewedAt": "2026-11-07",
+      "status": "opened",
+      "supports": "Resolving exact revision identities; verification syntax and ambiguity precautions.",
+      "sourceType": "official documentation"
+    },
+    {
+      "id": "config",
+      "title": "Git configuration reference",
+      "url": "https://git-scm.com/docs/git-config",
+      "reviewedAt": "2026-11-07",
+      "status": "opened",
+      "supports": "Configuration scopes, author metadata, hooks, signing and helper settings.",
+      "sourceType": "official documentation"
+    },
+    {
+      "id": "environment",
+      "title": "Git command and environment reference",
+      "url": "https://git-scm.com/docs/git",
+      "reviewedAt": "2026-11-07",
+      "status": "opened",
+      "supports": "GIT_CONFIG_SYSTEM/GLOBAL/NOSYSTEM and environment variables that affect execution.",
+      "sourceType": "official documentation"
+    },
+    {
+      "id": "init",
+      "title": "Git init reference",
+      "url": "https://git-scm.com/docs/git-init",
+      "reviewedAt": "2026-11-07",
+      "status": "opened",
+      "supports": "Repository initialization, explicit initial branch/object format and template selection.",
+      "sourceType": "official documentation"
+    },
+    {
+      "id": "tempfile",
+      "title": "Python 3.12 tempfile",
+      "url": "https://docs.python.org/3.12/library/tempfile.html",
+      "reviewedAt": "2026-11-07",
+      "status": "opened",
+      "supports": "Owned temporary directories/files and ordinary context-manager cleanup.",
+      "sourceType": "official documentation"
+    },
+    {
+      "id": "subprocess",
+      "title": "Python 3.12 subprocess",
+      "url": "https://docs.python.org/3.12/library/subprocess.html",
+      "reviewedAt": "2026-11-07",
+      "status": "opened",
+      "supports": "Argument lists, explicit environment, shell=False, return codes and timeout behavior.",
+      "sourceType": "official documentation"
+    },
+    {
+      "id": "unittest",
+      "title": "Python 3.12 unittest",
+      "url": "https://docs.python.org/3.12/library/unittest.html",
+      "reviewedAt": "2026-11-07",
+      "status": "opened",
+      "supports": "Standard-library assertions, tests, discovery and subtests.",
+      "sourceType": "official documentation"
+    },
+    {
+      "id": "hashlib",
+      "title": "Python 3.12 hashlib",
+      "url": "https://docs.python.org/3.12/library/hashlib.html",
+      "reviewedAt": "2026-11-07",
+      "status": "opened",
+      "supports": "SHA-256 computation over bytes and hexadecimal digest representation.",
+      "sourceType": "official documentation"
+    },
+    {
+      "id": "ci-events",
+      "title": "GitHub Actions workflow events reference",
+      "url": "https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows",
+      "reviewedAt": "2026-11-07",
+      "status": "opened",
+      "supports": "pull_request can test the merge-branch commit rather than only the contributor head.",
+      "sourceType": "official documentation"
+    },
+    {
+      "id": "ci-context",
+      "title": "GitHub Actions contexts reference",
+      "url": "https://docs.github.com/en/actions/reference/workflows-and-actions/contexts",
+      "reviewedAt": "2026-11-07",
+      "status": "opened",
+      "supports": "github.sha identifies a workflow-triggering commit with event-dependent meaning.",
+      "sourceType": "official documentation"
+    },
+    {
+      "id": "attestations",
+      "title": "GitHub Actions artifact attestations",
+      "url": "https://docs.github.com/en/actions/concepts/security/artifact-attestations",
+      "reviewedAt": "2026-11-07",
+      "status": "opened",
+      "supports": "Signed provenance claims are distinct from an unauthenticated local digest; no attestation implemented here.",
+      "sourceType": "official documentation"
+    }
+  ]
+}

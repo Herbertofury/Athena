@@ -99,7 +99,8 @@ class RssFormatGateTests(unittest.TestCase):
             E.rss({'feed': b'<!DOCTYPE feed [<!ENTITY x "synthetic">]><feed/>'}, 'https://example.test')
 
     def test_malformed_xml_is_not_empty_success(self):
-        with self.assertRaises(E.etree.XMLSyntaxError):
+        from lxml.etree import XMLSyntaxError
+        with self.assertRaises(XMLSyntaxError):
             E.rss({'feed': b'<rss><channel>'}, 'https://example.test')
 
 
