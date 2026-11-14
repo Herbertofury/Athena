@@ -14,8 +14,9 @@ Reference images are not cleared for new runtime redistribution. Artist authorit
 - All 10 commits across main and build/living-world-v24, with exact original commit identities, trees and blobs. Both branches and tag v24.0.0 are included in a complete self-contained Git bundle.
 - MIT licensing and the original source-contract, authority and browser tests.
 - Original local contract/authority tests, TypeScript check and Vite production build pass. This is not a native build or browser pass.
-- Repository metadata reports no wiki or Pages site; all-state issue and pull-request lists are empty and Actions reports zero runs.
-- Six original v24.0.0 release assets are inventoried with official SHA-256 hashes. Their bytes have **not** yet been preserved.
+- The original snapshot reported no wiki or Pages and no issues/PRs/runs. Recheck before retirement: the 2026-11-14 authenticated inventory now includes open acceptance issue #1. Snapshot metadata is not a current completeness claim.
+- Six original v24.0.0 release assets are inventoried. Four files are preserved and hash-verified: source ZIP, Windows EXE/MSI and SHA256SUMS.txt. The web ZIP and complete-release ZIP remain unpreserved; see the release directory's partial-preservation report.
+- Fresh authenticated refs on 2026-11-14 show source main `07d66bde6b758992d04a6b580f159599c705de55`, three documentation commits beyond the bundled main. The reviewed competitive-landscape document and README link are now reconciled without reverting privacy redactions; the original bundle does not yet contain those three commit identities.
 
 ## Restore independently of the original repository
 
@@ -38,7 +39,9 @@ No dependency cache, user credentials, account sessions, or generated workspace 
 
 ## Application integration
 
-The intended native module mounts under #build inside the existing shell, not an iframe. It is not present in the reviewed public-preview build. The prior claim of an integrated 27-world browser module was not supported by the current tree and is withdrawn. Source preservation, historical build records and catalog counts do not establish native workspace parity. Desktop commands, SQLite data migration, provider authorization and full visual/interaction acceptance remain pending.
+Athena now has a native Foundry module under #build, not an iframe. PRs #73–#81 implement neutral theme/room selection, visual ecology forms, pointer/keyboard placement and pinning, local persistence, per-room/all-room backups and recovery protection, undo/redo, reset, precise object inspection, left/right/hidden inspector docking and named room layouts. At main `ba960d48d21bcb0e9ee5322731890a6dc97a1641`, focused and full tests plus hosted Chromium/unified acceptance passed; Pages and all 69 allowlisted served asset hashes were verified.
+
+This is **partial native parity**, not a substitute for all original functionality. Cinematic Three.js rendering, animated mascots, rights-gated artist worlds, native SQLite/Tauri/provider flows and full floating/resizable panels are not yet accepted. Browser acceptance does not establish Windows-native or game acceptance. See the dated [retirement audit](retirement-audit-2026-11-14.json).
 
 ## Deletion gates
 

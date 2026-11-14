@@ -1,0 +1,73 @@
+{
+  "reviewDate": "2026-11-14",
+  "athenaMain": "ba960d48d21bcb0e9ee5322731890a6dc97a1641",
+  "retirementReady": false,
+  "sourceRefs": [
+    {
+      "ref": "refs/heads/build/living-world-v24",
+      "sha": "f009bbd491355009d6b46fdccc22e06803fc0426"
+    },
+    {
+      "ref": "refs/heads/main",
+      "sha": "07d66bde6b758992d04a6b580f159599c705de55"
+    },
+    {
+      "ref": "refs/tags/v24.0.0",
+      "sha": "e1ba080b5c7590f1c844a6ed13b3a471709920b9"
+    }
+  ],
+  "snapshotRecovery": {
+    "bundle": "feature-foundry-history.bundle",
+    "sha256": "58cee3405ab433e38ad440dec5aa2b20f4f43141ee18b8f6b16009f84900599b",
+    "restore": "independent git clone --mirror succeeded",
+    "fsck": "git fsck --full clean",
+    "commits": 10,
+    "completeAtCurrentSourceHead": false
+  },
+  "sourceDelta": {
+    "commits": [
+      "cbc84c492437de72d1bb1f42bc62fda802f77157",
+      "7f0eb686ecf256e8f6690d7507ff0e3b5e03e098",
+      "07d66bde6b758992d04a6b580f159599c705de55"
+    ],
+    "files": [
+      "README.md",
+      "docs/competitive-landscape.md"
+    ],
+    "review": "Documentation-only delta reviewed; competitive-landscape bytes retained exactly and README link applied without reverting privacy redactions. New commit identities not yet added to preserved bundle."
+  },
+  "release": {
+    "verifiedPreserved": [
+      "Feature-Foundry-v24.0.0-source.zip",
+      "Feature-Foundry-v24.0.0-windows-x64-setup.exe",
+      "Feature-Foundry-v24.0.0-windows-x64.msi",
+      "SHA256SUMS.txt"
+    ],
+    "missing": [
+      "Feature-Foundry-v24.0.0-web.zip",
+      "Feature-Foundry-v24.0.0-complete-release.zip"
+    ],
+    "downloadAttempt": "Authenticated release UI listed both missing assets. Supported web ZIP download timed out; browser reached an error URL which could not be observed under browser URL policy. No completed path returned; complete ZIP was not attempted.",
+    "execution": "No installer executed."
+  },
+  "issueInventory": {
+    "open": [
+      1
+    ],
+    "comments": 0,
+    "contentPreserved": false
+  },
+  "remainingGates": [
+    "Current source history and issue metadata preservation",
+    "Missing release archives: authenticated transfer, hash and privacy/rights review",
+    "Full native feature parity and native acceptance",
+    "Privacy/rights review: historical exposure remains; reference assets not cleared for new runtime"
+  ],
+  "noDeletion": true,
+  "retainedFailure": {
+    "head": "954741115fa7fc139839bf8d0f187ec424bc89e4",
+    "job": 132311157852,
+    "stage": "npm test",
+    "detail": "211/212 passed; privacy receipt correctly rejected changed ledger hash. Refreshed reviewed ledger digest, retaining previous digest; no privacy assertion removed."
+  }
+}

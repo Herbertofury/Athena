@@ -61,3 +61,7 @@ Verification covers the exact V24 markup/CSS/runtime contract, database authorit
 - `scripts/` — deterministic release packaging
 
 Neither visual reference is used as a runtime texture. Environment art is rendered live from Three.js geometry, shaders, canvas, CSS, and SVG-compatible interface primitives.
+
+## Competitive landscape and related approaches
+
+See the [source-led comparison and evaluation plan](docs/competitive-landscape.md). Documented capabilities, research proposals and measured results are kept separate.
