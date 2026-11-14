@@ -1,0 +1,18 @@
+ERROR: test_register_and_links (test_tools.ResearchTests.test_register_and_links)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<engineering>/tests/test_tools.py", line 76, in test_register_and_links
+    def test_register_and_links(self):self.assertGreater(research.check(R,self.today)['sources'],10)
+                                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<engineering>/scripts/check_research.py", line 50, in check
+    if failures:raise ValueError('\n'.join(failures))
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: research/2026-11-11-conditional-edit-foundations.md: broken local link ../experiments/conditional-edit-lab/validation-summary.json
+apps/atlas-lab/README.md: broken local link ../../../docs/athena-local-runtime.md
+experiments/conditional-edit-lab/README.md: broken local link validation-summary.json
+experiments/conditional-edit-lab/README.md: broken local link review-summary.json
+
+----------------------------------------------------------------------
+Ran 363 tests in 4.102s
+
+FAILED (errors=1)
