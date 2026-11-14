@@ -49,6 +49,7 @@ jobs:
         run: |
           python3 -m unittest discover -s tools/foundry-recovery/capsule -p 'test_*.py'
           python3 -m unittest discover -s tools/foundry-recovery/sqlite -p 'test_*.py'
+          python3 -m unittest discover -s tools/foundry-recovery/archive -p 'test_*.py' -v
           python3 -m unittest discover -s tools/foundry-recovery/scrapbook -p 'test_*.py'
       - name: Separate original native snapshot preservation
         run: python -m unittest discover -s tools/foundry-recovery/snapshot -v
