@@ -96,3 +96,9 @@ silently replacing newer authoring data. Keep an independent backup before any e
 `node scripts/test_foundry_blends_browser.cjs` checks actual Chromium overlap arithmetic with
 synthetic flat-color authored objects, all9 computed blend modes, unrelated controls and Undo.
 It does not establish original asset fidelity or Windows game-runtime acceptance.
+
+## Environment reduced-motion preference
+
+Environment motion remains explicit and session-only. `prefers-reduced-motion: reduce` disables its Start control and prevents synthetic starts; a new reduce preference cancels active frames while retaining static configuration and the current painted frame. Clearing the preference never resumes motion automatically. Abort/dispose removes the preference listener. Static-only/off/unavailable-renderer status remains unchanged when no motion controller exists.
+
+This is consistent with original `prototype-v24.ts` cinematic reduced-motion behavior (lines 1548, 1565, 1606 and 1666), with dynamic preference handling matching Athena ecology. It is not complete original governor parity. Renderer formulas and persisted format/schema are unchanged. Reproduce with `node --test native/foundry/tests/environment-reduced-motion.test.mjs` and `CHROMIUM_PATH=<installed-browser> node scripts/test_foundry_environment_reduced_motion_browser.cjs`.
