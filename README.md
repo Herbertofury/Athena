@@ -2,11 +2,12 @@
 
 **Curiosity becomes capability.** An organized home for learning computers, security, coding, infrastructure, data and beyond.
 
-Athena joins a learning academy with an evidence-led engineering research library. Learning, Research, Media workbench and the local R&D Lab now mount in one Athena document, with shared navigation, search and theme. Feature Foundry integration and verification are in progress; it is not included in this build. Its purpose is deep understanding and demonstrable practical skill, not collecting badges or claiming mastery from a progress bar.
+Athena joins a learning academy with an evidence-led engineering research library. Learning, Engineering research and labs, and reviewed Foundry authoring now mount as native workspaces in one Athena document, with shared navigation, search and theme. Foundry also has an explicitly started local SQLite profile; original-feature fidelity and private user-data migration remain separate, unfinished acceptance work. Its purpose is deep understanding and demonstrable practical skill, not collecting badges or claiming mastery from a progress bar.
 
 ## Start here
 
 - [Learning library](docs/README.md): 13 certificate pathways, shared lessons and guided capstones.
+- [Native Foundry profile](native/foundry/README.md): optional local authoring storage, recovery and explicit local media controls.
 - [Local Rust/SQLite evidence engine](docs/athena-local-runtime.md): native collection, archives and bounded experiments in the same shell.
 - [Interactive app source](dist/index.html): serve `dist/` locally so workspace modules and JSON assets load. No account is required.
 - [GitHub wiki](https://github.com/Herbertofury/Athena/wiki): publication status must be checked separately from repository files.
@@ -48,7 +49,7 @@ npm run build
 npm test
 ```
 
-The public static app has no account, analytics or external font dependency. Learning and research work locally. Media provider requests remain explicit and autoplay stays off; the R&D Lab connects only when this same shell is served by the verified local Rust engine. The public page never probes localhost. See the local-engine instructions above. DOM tests use pinned LinkeDOM. `npm run test:browser` verifies generated adapters, runs static, workshop and accessibility Chromium checks, builds/tests the pinned Rust engine and runs full engine-backed Chromium acceptance with external requests blocked. `npm run test:browser:static` is the smaller static-only check. `npm run test:browser:workshops` is the new real-Chromium acceptance gate for all five workshops, literal code escaping, 84 supplemental checks, downloads, focus, history and desktop/mobile layouts. This combined staging build has not run any browser gate. Read the exact run receipts rather than treating DOM or harness-contract tests as browser evidence.
+The public static app has no account, analytics or external font dependency. Learning and research work locally. Media provider requests remain explicit and autoplay stays off; the R&D Lab connects only when this same shell is served by the verified local Rust engine. The public page never probes localhost. See the local-engine instructions above. DOM tests use pinned LinkeDOM. `npm run test:browser` verifies generated adapters, runs static, workshop and accessibility Chromium checks, builds/tests the pinned Rust engine and runs full engine-backed Chromium acceptance with external requests blocked. `npm run test:browser:static` is the smaller static-only check. `npm run test:browser:workshops` is the new real-Chromium acceptance gate for all five workshops, literal code escaping, 84 supplemental checks, downloads, focus, history and desktop/mobile layouts. Browser and engine acceptance has run at identified revisions; see [integration status](docs/integration/STATUS.md) for dated evidence and limits. A historical passing run does not certify a later revision. Read exact-head receipts rather than treating DOM or harness-contract tests as browser evidence.
 
 ## Organization
 
@@ -70,7 +71,7 @@ migration/              Migration inventory and preservation evidence
 
 ## Keyboard access
 
-Use the skip link, normal Tab/Shift+Tab navigation and Escape to close lessons. Open **Keyboard options** to disable the single-key / search shortcut; this preference is separate from learning-progress exports. Lesson and feedback focus, search announcements, descriptive labels and system color/motion styles have automated DOM coverage. See [accessibility notes](docs/accessibility.md) for controls, evidence and remaining manual/browser work. `npm run test:browser:accessibility` is the new CI gate and has not been run in this local staging environment.
+Use the skip link, normal Tab/Shift+Tab navigation and Escape to close lessons. Open **Keyboard options** to disable the single-key / search shortcut; this preference is separate from learning-progress exports. Lesson and feedback focus, search announcements, descriptive labels and system color/motion styles have automated DOM coverage. See [accessibility notes](docs/accessibility.md) for controls, evidence and remaining manual/browser work. `npm run test:browser:accessibility` is a separate automated browser gate, not a complete manual accessibility audit. Check the result for the revision being evaluated.
 
 ## Safety and privacy
 
@@ -80,7 +81,7 @@ Certification and vendor names belong to their owners. Athena is independent and
 
 ## Unified integration status
 
-Read [the workspace contract](docs/integration/WORKSPACE-CONTRACT.md) and [current integration evidence](docs/integration/STATUS.md). The public-preview package includes learning, research, media and the local-engine Lab module. The Lab requires `serve-athena`; it is visibly unavailable on a static web host. It does not include private Feature Foundry material or claim full backend/game parity. `scripts/package_app.py` packages only the reviewed runtime hashes in `config/runtime-public-preview.json`; `complete` mode still refuses a missing Foundry module.
+Read [the workspace contract](docs/integration/WORKSPACE-CONTRACT.md) and [current integration evidence](docs/integration/STATUS.md). The reviewed public-preview package includes Learning, Engineering workspaces and Foundry authoring, not private databases, credentials or original private assets. Engineering Lab requires `serve-athena`; Foundry's SQLite profile requires its explicit local bridge. Neither connects to a private database from public Pages. `scripts/package_app.py` verifies the exact reviewed hashes in `config/runtime-public-preview.json`. The `public-preview` label does not mean Foundry is absent; it means complete original-source parity is not claimed. Default `complete` mode still requires the additional Foundry entry specified by the packager and is not a retirement certificate.
 
 
 ## Competing apps and alternative workflows

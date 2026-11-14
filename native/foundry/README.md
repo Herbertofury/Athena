@@ -96,3 +96,78 @@ silently replacing newer authoring data. Keep an independent backup before any e
 `node scripts/test_foundry_blends_browser.cjs` checks actual Chromium overlap arithmetic with
 synthetic flat-color authored objects, all9 computed blend modes, unrelated controls and Undo.
 It does not establish original asset fidelity or Windows game-runtime acceptance.
+
+## Environment reduced-motion preference
+
+Environment motion remains explicit and session-only. `prefers-reduced-motion: reduce` disables its Start control and prevents synthetic starts; a new reduce preference cancels active frames while retaining static configuration and the current painted frame. Clearing the preference never resumes motion automatically. Abort/dispose removes the preference listener. Static-only/off/unavailable-renderer status remains unchanged when no motion controller exists.
+
+This is consistent with original `prototype-v24.ts` cinematic reduced-motion behavior (lines 1548, 1565, 1606 and 1666), with dynamic preference handling matching Athena ecology. It is not complete original governor parity. Renderer formulas and persisted format/schema are unchanged. Reproduce with `node --test native/foundry/tests/environment-reduced-motion.test.mjs` and `CHROMIUM_PATH=<installed-browser> node scripts/test_foundry_environment_reduced_motion_browser.cjs`.
+
+## Independent layer navigator
+
+`layers` is an optional removable module. Disable it with `--disable-foundry-module layers` in the local bridge startup profile or `foundryModules.layers=false` in the mount context. Core inspector/Undo/persistence do not depend on it.
+
+Adapted from original `prototype-v24.ts` `renderLayers` (line 636), the navigator groups all current instances by actual native world/UI/sticker-anchor surfaces, ordered topmost-first by recorded stack value with exact-ID tie breaking. Hidden, filtered and unavailable-anchor instances remain selectable. Labels use text only and include full instance IDs, including duplicates. Select changes no persistent data/history; Show/Hide explicitly uses existing format-v7 appearance adoption when needed; Pin/Unpin retains the existing format. Each mutation is one Undo step. Native position pin is not original lock, and native world scene is not original left/right world partitioning. No source assets or private records are copied.
+
+Run `node --test native/foundry/tests/layers.test.mjs`; actual Chromium acceptance is `CHROMIUM_PATH=<installed-browser> node scripts/test_foundry_layers_browser.cjs`.
+
+## Optional Canvas-only view
+
+The explicit Canvas only button hides Foundry's surrounding authoring panels while keeping
+Athena navigation, the scene, restore control and status reachable. Restore panels or Escape
+returns to the same mounted inspector, including unsaved field drafts. Tab retains normal
+keyboard navigation. This adapts the clean-view purpose of reviewed MIT
+`prototype-v24.ts` (`toggleCleanView`), not its global Tab interception or app-wide chrome.
+
+The independent `canvasView` module can be disabled by the native bridge module configuration.
+It changes presentation only: no workspace JSON, SQLite schema, storage write or persisted
+preference. Navigation/disposal restores the workspace and a remount starts in normal view.
+Object selection still uses ordinary inspector behavior; toggling the view does not save drafts.
+
+Verification: `node --test native/foundry/tests/canvas-view.test.mjs`, mounted workspace and
+module-independence tests, plus `CHROMIUM_PATH=<installed-browser> node
+scripts/test_foundry_canvas_browser.cjs` for desktop/mobile controls, Escape/Tab, draft retention,
+unchanged local storage and route teardown. Synthetic browser checks do not establish original
+asset fidelity, Windows installer acceptance or completion of remaining migration gates.
+
+## Selected base-box Center and Fit
+
+The inspector adapts original `prototype-v24.ts` `centerSelected`/`fitSelectedToView` (lines 304–305), using native normalized surfaces rather than original viewport-pixel coordinates. Center sets the untransformed base-box center to 50%/50%; it does not center a rotated/skewed silhouette. Fit separately uses the resolved native surface client dimensions and actor offsetWidth/offsetHeight: scale magnitude `clamp(min((width-24)/max(baseWidth,baseHeight), (height-24)/max(baseWidth,baseHeight)), .05, 3)`, preserving each mirror sign. This is the original approximate square-base formula, not guaranteed transformed-bounds containment.
+
+Both actions refuse pinned, hidden/filtered, zero-size or unavailable targets without relocation. Identity, scope/anchor, origin, rotation and unrelated fields remain unchanged. Center retains format; Fit explicitly adopts existing format v2 when necessary. Each actual edit is one Undo; no-op leaves pending inspector drafts and history untouched. No database/schema changes or automatic unpinning.
+
+Tests: `node --test native/foundry/tests/center-fit.test.mjs`; actual Chromium: `CHROMIUM_PATH=<installed-browser> node scripts/test_foundry_center_fit_browser.cjs`.
+
+## Scoped history keyboard shortcuts
+
+The independent optional `historyKeys` module adapts original MIT `prototype-v24.ts`
+history Undo/Redo shortcuts into the native workspace. Ctrl/Command+Z undoes;
+Ctrl/Command+Shift+Z or Ctrl/Command+Y redoes, using existing enabled history buttons.
+Only events within Foundry are handled. Inputs, selects, textareas, contenteditable
+and ARIA editor islands retain their own editing shortcuts. Already consumed events,
+Alt combinations and IME composition are not intercepted. Navigation/abort removes listeners.
+Disable `historyKeys` independently without disabling ordinary Undo/Redo or authoring.
+
+This changes neither persisted formats nor history semantics. Reproduce focused tests with
+`node --test native/foundry/tests/history-keys.test.mjs` and actual browser acceptance with
+`CHROMIUM_PATH=<installed-browser> node scripts/test_foundry_history_keys_browser.cjs`.
+It is not an app-wide shortcut takeover or complete original Foundry parity claim.
+
+## Optional selected transform gizmo
+
+`gizmo` can be disabled independently with `--disable-foundry-module gizmo`; inspector controls remain available. Explicit Enable exposes pointer Rotate/Scale handles for the current visible unpinned instance. This adapts original MIT `prototype-v24.ts` bindTransformGizmo (311–320), not original artwork or source lock semantics. No source snapshots are imported.
+
+A computed 2D matrix and all four base-box corners recover the actual transform-origin pivot, including native skew, mirrored scale and all nine origins. Unsupported ancestor transform/zoom/perspective, degenerate matrices or inconsistent measured bounds refuse edits. Rotation uses angle delta around that pivot. Radial scale preserves anisotropy and mirror signs, constraining the shared ratio so both resulting magnitudes remain 0.05–8. Optional snap is 15 degrees / 0.05 scale-ratio increments; Alt bypasses it. Ratio snapping is a deliberate bounded adaptation, not original independent-axis rounding.
+
+Preview changes only transient object CSS. Completed pointerup validates exact theme/room/instance/prior placement, explicitly adopts existing format2 only when necessary, and writes one Undo entry. Pointercancel, capture loss, Escape, selection change, draw, scrolling, resizing or disposal cancel without saving preview. Position, scope, anchor, filters, origin, other objects, presets and environment remain unchanged. Native pin prevents editing; it is not the original lock field.
+
+Tests: `node --test native/foundry/tests/transform-gizmo.test.mjs`. Actual browser: `CHROMIUM_PATH=/path/to/headless_shell node scripts/test_foundry_transform_gizmo_browser.cjs`; uses neutral native DOM and proves skewed bottom-right-origin mirrored rotation, radial scale, cancellation and Undo/Redo. Not Windows or original-art rendering acceptance.
+
+### Optional session history navigator
+
+`--disable-foundry-module sessionHistory` removes the navigator without removing core Undo/Redo. Adapted from reviewed original `prototype-v24.ts` functions `jumpHistory` and `renderHistory` (632–634), it lists retained past/current/future workspace states and restores one selected state in one host-save attempt. Entries show native theme/room IDs and chronological ordinals, not fabricated original action labels or timestamps. This is session-only, not SQLite recovery history. It preserves future Redo, existing count/character pruning, whole-workspace identity, and oversized recovery-only behavior. Stale entry epochs are refused. Unsaved inspector inputs are not snapshots; selecting another state replaces those inputs, while the current disabled entry does nothing. No original assets or user records are included.
+### Original semantic metadata authoring
+
+The independently removable `semanticRoom` module accepts explicitly selected, bounded local snapshots. The original UTF-8 bytes retain their separate exact export. An explicit Apply changes only the chosen unique record's role, physics classification, visible flag and mapping-lock flag, adapted from original `prototype-v24.ts`684–685 and the enums at `index.html`410. Existing unsupported classification strings remain unchanged unless the user deliberately chooses a supported replacement. Names may repeat; IDs identify records.
+
+These are recorded declarations, not executable physics, mesh visibility, permissions or verified room capabilities. No source files, browser storage or native layout are modified. Derivative JSON export is explicit and separately named. Undo/Redo retains at most50 field patches and256KiB of conservative UTF-16 patch data, not50 whole1MiB snapshots; previous source bytes and one working record set remain separate. No-op Apply retains Redo. New successful file selection or Close clears edit history; edits invalidate pending reads and prior derivative URLs. All values remain private local session data.

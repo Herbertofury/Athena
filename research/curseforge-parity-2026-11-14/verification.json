@@ -1,0 +1,40 @@
+{
+  "baseline": "ed08dd843c016b57e20082d2d9f3a3ef1ca730bd",
+  "donor_commit": "bcc6369008c429065f001486f405dfc47ff445de",
+  "files": [
+    {
+      "path": "engineering/docs/adapters/curseforge-schema-preparation.md",
+      "sha256": "8a2cdbbe9a4c6ef4088d6f04d083c9d24ea07cbc83fe6448b63286501201d5fa",
+      "byte_exact_donor": true
+    },
+    {
+      "path": "engineering/experiments/site-extraction-lab/curseforge.py",
+      "sha256": "1dd9e55674fe380644cc80ba3dd6f3ae41e3c80e93f4b391ac2a4cd48c4fe142",
+      "byte_exact_donor": true
+    },
+    {
+      "path": "engineering/experiments/site-extraction-lab/fixtures/curseforge-synthetic/description.json",
+      "sha256": "caede8d7f9d0f4c0984a4dfa27fb0fd20f981b3599b199954586515661e6ccec",
+      "byte_exact_donor": true
+    },
+    {
+      "path": "engineering/experiments/site-extraction-lab/fixtures/curseforge-synthetic/files.json",
+      "sha256": "7c9e407efaf320a2efd3f4e111d64e8c9e4508c708e9bae2409abe11bc7d2ba5",
+      "byte_exact_donor": true
+    },
+    {
+      "path": "engineering/experiments/site-extraction-lab/fixtures/curseforge-synthetic/project.json",
+      "sha256": "bb705742069fe7b97a3ca538d9444012969ad5e8244ca4ad2b70454d22edf7c5",
+      "byte_exact_donor": true
+    },
+    {
+      "path": "engineering/tests/test_site_extraction_curseforge.py",
+      "sha256": "ec7f9131fda357eea2ac9600ee4bd43afff3fd47eac8a6995cc195ee9a0e333a",
+      "byte_exact_donor": true
+    }
+  ],
+  "synthetic_mapper_tests": 39,
+  "engineering_python_tests": 405,
+  "new_network_requests": 0,
+  "scope": "Offline normalization only; no provider keys, transport, runtime registration or live acceptance."
+}

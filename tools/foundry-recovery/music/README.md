@@ -2,6 +2,8 @@
 
 This offline tool converts the explicitly supplied raw value of original `ff.music-hub.v2`, whose `MusicHub.ts` format is version/route/mappings and keys are `theme::district`. It never reads a browser, session storage, credentials or providers. Preserve the exact original capsule first. **Do not publish source values, mapping files, output or databases.** Output is exclusively created (owner-only mode on POSIX), never overwritten.
 
+Both source and mapping inputs are capped at 1,000,000 bytes before parsing; oversized input is refused before any output file is created.
+
 Supply a mapping JSON with exactly `sourceSha256` (SHA-256 of the source bytes) and `contexts`. Each original context key maps to `{ "themeId": "reviewed-native-theme", "roomId": "reviewed-native-room" }`. Every source mapping must have exactly one known destination, no duplicate destinations. Display names are not silently treated as room IDs.
 
 ```
