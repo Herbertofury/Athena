@@ -64,3 +64,15 @@ test('undo of imported workspace restores all previous room state and rejects st
 test('rollback cannot clear corrupt-state recovery hold',async()=>{
  const t=await setup({version:2}),time=t.document.querySelector('[data-time]');time.value='night';time.dispatchEvent(new t.window.Event('change'));t.document.querySelector('[data-undo]').click();assert.equal(t.writes(),0);assert.throws(()=>t.mounted.exportState(),/retained/);t.mounted.unmount();
 });
+
+test('room reset is reversible, preserves other rooms/time, and repeated reset is a no-op',async()=>{
+ const t=await setup(),room=t.document.querySelector('[data-room-select]'),time=t.document.querySelector('[data-time]');
+ const move=()=>{const b=t.document.querySelector('.foundry-object');for(const key of ['ArrowRight','p']){const e=new t.window.Event('keydown',{bubbles:true,cancelable:true});e.key=key;b.dispatchEvent(e);}};
+ move();const first=t.mounted.exportState().active;room.value=catalog.themes[0].rooms[1].id;room.dispatchEvent(new t.window.Event('change'));time.value='night';time.dispatchEvent(new t.window.Event('change'));move();const before=t.mounted.exportState();
+ t.document.querySelector('[data-reset-room]').click();let state=t.mounted.exportState();assert.equal(Object.keys(state.active.placements).length,0);assert.equal(state.active.time,'night');assert.deepEqual(state.layouts[first.roomId],first);const writes=t.writes();t.document.querySelector('[data-reset-room]').click();assert.equal(t.writes(),writes);
+ t.document.querySelector('[data-undo]').click();assert.deepEqual(t.mounted.exportState(),before);t.document.querySelector('[data-redo]').click();assert.equal(Object.keys(t.mounted.exportState().active.placements).length,0);t.mounted.unmount();
+});
+test('reset invalidates pending imports without releasing corrupt-state protection',async()=>{
+ const t=await setup({version:2}),b=t.document.querySelector('.foundry-object');const e=new t.window.Event('keydown',{bubbles:true,cancelable:true});e.key='ArrowRight';b.dispatchEvent(e);
+ let resolve;const input=t.document.querySelector('[data-import]');input.files=[{size:100,text:()=>new Promise(r=>resolve=r)}];input.dispatchEvent(new t.window.Event('change'));t.document.querySelector('[data-reset-room]').click();resolve(JSON.stringify({version:1,themeId:catalog.themes[0].id,roomId:catalog.themes[0].rooms[0].id,time:'night',placements:{}}));await new Promise(r=>setImmediate(r));assert.equal(t.document.querySelector('[data-time]').value,'day');assert.equal(t.writes(),0);assert.throws(()=>t.mounted.exportState(),/retained/);t.mounted.unmount();
+});
