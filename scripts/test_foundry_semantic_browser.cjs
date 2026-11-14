@@ -3,6 +3,7 @@ const fs=require('node:fs'),path=require('node:path'),http=require('node:http'),
 const {chromium}=require('playwright');
 const root=path.resolve(process.env.ATHENA_BROWSER_ROOT||'dist'),out=path.resolve(process.env.ATHENA_BROWSER_OUTPUT||'browser-results/foundry-semantic-room');
 const fixture={sourceName:'Synthetic <img onerror=alert(1)>.blend',imported:true,importMode:'unified-detached',keepUnified:true,detachInteractables:true,autoPhysics:false,mascotAffordances:true,selectedId:'sample',stage:'ready',tableAssetId:null,objects:[{id:'sample',name:'Synthetic chair',icon:'X',role:'Seat',physics:'Unverified',interactive:true,detachable:true,visible:true,locked:false,state:'recorded',actions:['Sit','<script>not executable</script>'],mascot:'Recorded action',atlasId:'synthetic-source-id'}]};
+fixture.objects.push({...fixture.objects[0],id:'second'});
 const raw=Buffer.from('\ufeff \n'+JSON.stringify(fixture,null,3)+'\n');
 const report={kind:'actual Chromium local semantic metadata',checks:[],errors:[],outsideRequests:[],limitations:['Synthetic saved metadata only; no meshes, physics, migrations or actual user records']};
 let browser,server,page;
@@ -31,6 +32,18 @@ async function check(name,fn){report.current=name;await fn();report.checks.push(
  await check('download reproduces exact original BOM whitespace and bytes',async()=>{
   const event=page.waitForEvent('download');await one('[data-semantic-export]').click();const download=await event;
   const data=fs.readFileSync(await download.path());assert.deepEqual(data,raw);report.originalSHA256=crypto.createHash('sha256').update(raw).digest('hex');report.exportSHA256=crypto.createHash('sha256').update(data).digest('hex');
+ });
+ await check('explicit typed edit changes only exact duplicate ID, with Undo/Redo and distinct derivative download',async()=>{
+  const stored=await page.evaluate(()=>JSON.stringify(localStorage));
+  await one('[data-semantic-select]').selectOption('second');
+  assert.equal(await one('[data-semantic-role]').inputValue(),'Seat');
+  await one('[data-semantic-visible]').uncheck();await one('[data-semantic-locked]').check();await one('[data-semantic-apply]').click();
+  await one('[data-semantic-prepare]').click();const pending=page.waitForEvent('download');await one('[data-semantic-edited]').click();const download=await pending;
+  const changed=JSON.parse(fs.readFileSync(await download.path(),'utf8')),expected=structuredClone(fixture);expected.objects[1].visible=false;expected.objects[1].locked=true;assert.deepEqual(changed,expected);
+  const href=await one('[data-semantic-edited]').getAttribute('href');await one('[data-semantic-undo]').click();assert.equal(await one('[data-semantic-visible]').isChecked(),true);assert.equal(await one('[data-semantic-edited]').getAttribute('href'),null);assert.equal(await page.evaluate(async u=>{try{await fetch(u);return false}catch{return true}},href),true);
+  await one('[data-semantic-apply]').click();assert.equal(await one('[data-semantic-redo]').isEnabled(),true);await one('[data-semantic-redo]').click();assert.equal(await one('[data-semantic-visible]').isChecked(),false);
+  const original=page.waitForEvent('download');await one('[data-semantic-export]').click();assert.deepEqual(fs.readFileSync(await (await original).path()),raw);assert.equal(await page.evaluate(()=>JSON.stringify(localStorage)),stored);
+  await one('[data-semantic-editor]').scrollIntoViewIfNeeded();await page.screenshot({path:path.join(out,'semantic-authoring.png')});
  });
  await check('ambiguous replacement is refused while previous snapshot remains',async()=>{
   await one('[data-semantic-file]').setInputFiles({name:'invalid.json',mimeType:'application/json',buffer:Buffer.from('{"objects":[],"objects":[]}')});
