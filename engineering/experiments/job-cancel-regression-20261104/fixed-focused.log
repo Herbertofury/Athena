@@ -1,0 +1,24 @@
+✔ collect-form recovers from an unconfirmed submission without retrying (8.018452ms)
+✔ version-experiment-form recovers from an unconfirmed submission without retrying (2.154124ms)
+✔ version-collect-form recovers from an unconfirmed submission without retrying (1.672433ms)
+✔ upstream-form recovers from an unconfirmed submission without retrying (1.624161ms)
+✔ project-archive-form recovers from an unconfirmed submission without retrying (1.657361ms)
+✔ run-experiment recovers from an unconfirmed submission without retrying (3.126129ms)
+✔ submission deadline covers a stalled receipt body, not only response headers (5.617969ms)
+✔ fixed receipt decoder retains complete SQLite integer identity (1.148128ms)
+✔ ambiguous, noncanonical, malformed and oversized receipts stay unconfirmed (0.544264ms)
+✔ one fixed POST with exact payload returns a string id without automatic retries (5.553943ms)
+✔ invalid deadline makes no request (0.615351ms)
+✔ failed status, wrong MIME, invalid UTF-8 and excess bytes never become accepted jobs (1.878141ms)
+✔ fragmented receipt bytes and bounded empty chunks are handled without chunk retention (31.571676ms)
+✔ transport failure is unconfirmed and does not expose its private diagnostic (0.352908ms)
+✔ unconfirmed result does not hang on an uncooperative body cancellation (0.519037ms)
+✔ unconfirmed result does not wait for stalled reader cancellation (0.73468ms)
+ℹ tests 16
+ℹ suites 0
+ℹ pass 16
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 334.192326

@@ -1,0 +1,28 @@
+✖ Native Lab rejects malformed count maps before replacing last-good cards and recovers (38.447126ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 0
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 264.182524
+
+✖ failing tests:
+
+test at tests/lab_workspace.test.cjs:43:1
+✖ Native Lab rejects malformed count maps before replacing last-good cards and recovers (38.447126ms)
+  AssertionError [ERR_ASSERTION]: []
+  
+  false !== true
+  
+      at TestContext.<anonymous> (/workspace/shared/athena-atlas-overview-reconcile/tests/lab_workspace.test.cjs:50:11)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

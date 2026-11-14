@@ -1,0 +1,72 @@
+{
+  "app_sha256": "db5cf2357b3d18a04ea0b8264fd07f249a57d9e2d49a55241fb6e591667beff5",
+  "harness_sha256": "e183aa04356ca60dfbd8608ff264787eb8b2b824937fedfff6f785107dcf231b",
+  "input_sha256": "741a0aeb30465b19391358a488a0e019dc9a6aa300088c9addb7388ec23c7ffe",
+  "kind": "synthetic-controlled-renderer-reproduction",
+  "source_revision": "a723e81c73f403190ef44a9f8bea26e0f564f4f1",
+  "native_browser": false,
+  "real_http": false,
+  "node": "v24.22.1",
+  "cases": [
+    {
+      "case": "numeric string concatenates pending metric",
+      "rejected": false,
+      "shown": {
+        "pending": "42",
+        "completed": "0",
+        "failed": "0"
+      },
+      "last_good_retained": false
+    },
+    {
+      "case": "negative completed count",
+      "rejected": false,
+      "shown": {
+        "pending": "0",
+        "completed": "-7",
+        "failed": "0"
+      },
+      "last_good_retained": false
+    },
+    {
+      "case": "boolean failed count",
+      "rejected": false,
+      "shown": {
+        "pending": "0",
+        "completed": "0",
+        "failed": "true"
+      },
+      "last_good_retained": false
+    },
+    {
+      "case": "non-finite count from JSON exponent overflow",
+      "rejected": false,
+      "shown": {
+        "pending": "Infinity",
+        "completed": "0",
+        "failed": "0"
+      },
+      "last_good_retained": false
+    },
+    {
+      "case": "unsafe aggregate sum",
+      "rejected": false,
+      "shown": {
+        "pending": "9007199254740992",
+        "completed": "0",
+        "failed": "0"
+      },
+      "last_good_retained": false
+    },
+    {
+      "case": "array masquerading as counts",
+      "rejected": false,
+      "shown": {
+        "pending": "0",
+        "completed": "0",
+        "failed": "0"
+      },
+      "last_good_retained": false
+    }
+  ]
+}

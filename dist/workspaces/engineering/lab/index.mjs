@@ -38,12 +38,26 @@ function showPanel(name) {
 }
 root.querySelectorAll('[data-panel]').forEach(b=>b.addEventListener('click',()=>{currentPanel=b.dataset.panel;showPanel(currentPanel);navigate?.('#lab?panel='+currentPanel,{replace:false});}));showPanel(currentPanel);
 function text(tag,value,className) {const e=document.createElement(tag);e.textContent=value;if(className)e.className=className;return e;}
+// SQL GROUP BY omits zero-count states. Only absence means zero: coercing a
+// present value can concatenate strings, hide nulls or display rounded totals.
+function overviewMetrics(data) {
+  const invalid=()=>{throw new Error('Invalid overview counts; previous results are retained.');};
+  if(!data||typeof data!=='object'||Array.isArray(data)||!Array.isArray(data.jobs))invalid();
+  const counts=data.counts;
+  if(!counts||typeof counts!=='object'||Array.isArray(counts))invalid();
+  for(const value of Object.values(counts))if(!Number.isSafeInteger(value)||value<0)invalid();
+  const count=state=>Object.hasOwn(counts,state)?counts[state]:0;
+  const pending=count('queued')+count('running');
+  if(!Number.isSafeInteger(pending))invalid();
+  return {pending,completed:count('succeeded'),failed:count('failed')};
+}
 function render(data,instance=null) {
+  // Validate before preparing cards or committing a new engine/cache identity.
+  const metrics=overviewMetrics(data);
   if(instance!==null&&!/^[a-f0-9]{32}$/.test(instance))throw new Error('Invalid engine identity; previous results are retained.');
   const reuse=instance!==null&&instance===renderedInstance;
   const identities=data.jobs.map(jobIdentity);
   if(new Set(identities).size!==identities.length)throw new Error('Repeated job identities; previous results are retained.');
-  const metrics={pending:(data.counts.queued||0)+(data.counts.running||0),completed:data.counts.succeeded||0,failed:data.counts.failed||0};
   const nodes=[],nextRenderedJobs=new Map();
   if(!data.jobs.length){if(!emptyNode){emptyNode=text('div','','empty');emptyNode.append(text('strong','Your first experiment starts with a question.'),text('span','Open Collection to retrieve public project metadata.'));}nodes.push(emptyNode);}
   for(const [index,job] of data.jobs.entries()){const identity=identities[index];const signature=job.state+':'+job.attempt;const prior=reuse?renderedJobs.get(identity):null;if(prior&&prior.signature===signature){nextRenderedJobs.set(identity,prior);nodes.push(prior.node);continue;}const e=text('article','','job');const top=text('div','','job-top');
