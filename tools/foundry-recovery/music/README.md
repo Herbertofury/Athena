@@ -46,3 +46,20 @@ python3 tools/foundry-recovery/music/reconcile.py --source preserved-capsule.jso
 ```
 
 The existing capsule validator checks every entry and its UTF-16 checksum before selecting only `ff.music-hub.v2`. The mapping's `sourceSha256` must describe the exact selected MusicHub string encoded as UTF-8, **not the surrounding capsule bytes**. Use the original reviewed mapping; do not silently rewrite its hash. Capsules are bounded at16MiB and the extracted music value retains its1MiB bound. An unpaired surrogate in the music value cannot become UTF-8 and is refused; unrelated original values, including surrogates, remain preserved in the capsule and are not exported to native music. Missing music, tampered entries, invalid mappings and existing outputs refuse without modifying source bytes. No browser reads or other capsule keys are imported. Raw-file mode remains the default.
+
+## Resume a partially imported mapping without overwrites
+
+`resume_plan.py` writes a **new private** `import-music-json` candidate containing only missing mapped records. It reuses the same verified source/mapping, standalone schema-15 capture, integrity checks, five-second query budget and quiescence requirement as reconciliation. Exact existing records are omitted; any differing mapped record refuses the entire plan, leaving no candidate. This is not automatic conflict resolution or a native database write.
+
+```sh
+python tools/foundry-recovery/music/resume_plan.py \
+  --source /private/original-music.json --mapping /private/reviewed-mapping.json \
+  --database /private/standalone-native.sqlite --source-quiescent \
+  --destination /private/new-missing-only.json
+```
+
+Add `--capsule` for the already-supported reviewed original-value capsule input. Destination creation is exclusive; existing files and symlinks are never overwritten. The stdout receipt contains counts and source-snapshot/candidate hashes, not private labels/URLs. The candidate itself contains private mapped records and must not be published. Exit0 means prepared, exit2 means unavailable/conflicting; preserve any incomplete new output after an I/O error. All-identical input produces an empty import rather than repeating records.
+
+The existing native importer remains **insert-only and all-or-nothing**. Applying a reviewed candidate is a separate explicit action, not performed by the planner. Recheck source freshness before that action. An assignment made after planning causes the existing importer to reject rather than overwrite it; regenerate the plan after review. No provider request, credential migration, source deletion or complete-app migration claim is made.
+
+Verification: 30 local MusicHub tests pass, including five new planner tests for exact/missing/conflict, no-overwrite, source integrity, quiescence and sidecars. The 34-room actual native/bridge test now imports half, plans only the missing half, proves unchanged source DB during planning, verifies a stale candidate is rejected without partial writes, then imports the other half and verifies all rooms through fresh bridge reads. Hosted Windows/Linux checks remain separate from local results and are recorded on the associated PR.

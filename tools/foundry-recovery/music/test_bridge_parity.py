@@ -5,6 +5,7 @@ import hashlib,importlib.util,json,os,pathlib,subprocess,sys,tempfile,threading,
 from email.message import Message
 from unittest.mock import Mock
 from reconcile import reconcile
+from resume_plan import plan
 ROOT=pathlib.Path(__file__).resolve().parents[3]
 spec=importlib.util.spec_from_file_location('music_parity_bridge',ROOT/'native/foundry/bridge.py')
 bridge=importlib.util.module_from_spec(spec);spec.loader.exec_module(bridge)
@@ -33,7 +34,18 @@ class ParityTests(unittest.TestCase):
    def cli(command,payload=None):
     return subprocess.run([str(binary),command,str(db)],input=json.dumps(payload,ensure_ascii=False).encode('utf8') if payload else None,capture_output=True)
    for command in ['init']+['upgrade-'+x for x in UPGRADES]:self.assertEqual(cli(command).returncode,0)
-   self.assertEqual(cli('import-music-json',payload).returncode,0)
+   half=len(payload['rows'])//2
+   self.assertEqual(cli('import-music-json',{'version':payload['version'],'rows':payload['rows'][:half]}).returncode,0)
+   before_plan=db.read_bytes();candidate=t/'missing-only.json'
+   receipt=plan(src,mapping,db,catalog,candidate,True)
+   self.assertEqual(db.read_bytes(),before_plan);self.assertEqual(receipt['already_identical'],half)
+   missing=json.loads(candidate.read_bytes());self.assertEqual(missing['rows'],payload['rows'][half:])
+   # A concurrent/new assignment after planning must still abort the insert-only importer.
+   stale=t/'changed-after-plan.sqlite';stale.write_bytes(db.read_bytes())
+   def import_staged(value):return subprocess.run([str(binary),'import-music-json',str(stale)],input=json.dumps(value).encode('utf8'),capture_output=True)
+   self.assertEqual(import_staged({'version':missing['version'],'rows':missing['rows'][:1]}).returncode,0)
+   changed=stale.read_bytes();self.assertNotEqual(import_staged(missing).returncode,0);self.assertEqual(stale.read_bytes(),changed)
+   self.assertEqual(cli('import-music-json',missing).returncode,0)
    persisted=db.read_bytes();versions=[]
    report=reconcile(src,mapping,db,catalog,True)
    self.assertEqual(report['counts']['exact'],len(contexts));self.assertTrue(report['all_mapped_records_match']);self.assertFalse(report['migration_complete'])
