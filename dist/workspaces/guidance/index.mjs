@@ -1,5 +1,5 @@
 import {validateCatalog,findDocuments,exportPacket,exportMarkdown} from './model.mjs';
-export async function mount({container,search='',theme='dark',signal,getState=()=>({}),setState=()=>true}={}){
+export async function mount({container,search='',theme='dark',signal,state={},setState=()=>true}={}){
  const root=container.shadowRoot||container.attachShadow({mode:'open'}),cleanup=[],urls=new Set();let disposed=false,catalog=null,query=search,selected=new Set(),current='',saved=true;
  const style=document.createElement('link');style.rel='stylesheet';style.href=new URL('./style.css',import.meta.url).href;
  const shell=document.createElement('section');shell.className='guidance';root.replaceChildren(style,shell);
@@ -13,7 +13,7 @@ export async function mount({container,search='',theme='dark',signal,getState=()
  try{
   const response=await fetch(new URL('./catalog.json',import.meta.url),{signal});if(!response.ok)throw Error('Catalog HTTP '+response.status);catalog=validateCatalog(await response.json());
   if(disposed)return {ready:false,unmount,setTheme,setSearch(){}};
-  const state=getState()||{};selected=new Set(Array.isArray(state.selected)?state.selected.filter(id=>catalog.documents.some(d=>d.id===id)):[]);current=catalog.documents.some(d=>d.id===state.current)?state.current:catalog.documents[0].id;
+  const restored=state||{};selected=new Set(Array.isArray(restored.selected)?restored.selected.filter(id=>catalog.documents.some(d=>d.id===id)):[]);current=catalog.documents.some(d=>d.id===restored.current)?restored.current:catalog.documents[0].id;
  }catch(error){if(!disposed)shell.replaceChildren(element('h2','Guidance could not load'),element('p',error.message+' Your other Athena workspaces remain available. Retry by reopening this workspace.','status'));return {ready:false,unmount,setTheme,setSearch(){}};}
  const intro=element('header',undefined,'intro');intro.append(element('p','SHARED KNOWLEDGE · LOCAL OWNERSHIP','eyebrow'),element('h2','Build once. Carry the understanding.'),element('p','A living engineering core for your projects. Explore the complete standards, choose what is useful, and export a source-attributed reference pack. Your project rules remain yours.'));
  const identity=element('p',`Athena guidance ${catalog.version} · ${catalog.documents.length} complete standards · source digests retained`,'identity');intro.append(identity);

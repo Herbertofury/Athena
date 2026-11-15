@@ -8,7 +8,7 @@ const http=require('node:http'),fs=require('node:fs'),path=require('node:path'),
   browser=await chromium.launch({executablePath:process.env.CHROMIUM_PATH||undefined,headless:true,args:['--no-sandbox']});const page=await browser.newPage({viewport:{width:1440,height:1000}}),errors=[];page.on('pageerror',e=>errors.push(e.message));
   await page.goto(`http://127.0.0.1:${server.address().port}/#guidance`);await page.getByRole('heading',{name:'Build once. Carry the understanding.'}).waitFor();
   await page.waitForFunction(()=>{const b=document.querySelector('.workspace-container')?.shadowRoot?.querySelector('.reader');return b&&getComputedStyle(b).borderRadius==='20px';});
-  assert.equal(await page.getByRole('checkbox').count(),16);assert.equal(await page.locator('iframe').count(),0);
+  assert.equal(await page.getByRole('checkbox').count(),16);assert.equal(await page.locator('iframe').count(),0);fs.mkdirSync('browser-results',{recursive:true});await page.screenshot({path:'browser-results/guidance-desktop.png',fullPage:true});
   await page.getByRole('button',{name:'Select all standards',exact:true}).click();
   const [download]=await Promise.all([page.waitForEvent('download'),page.getByRole('button',{name:'Export selected JSON',exact:true}).click()]);const packet=JSON.parse(fs.readFileSync(await download.path(),'utf8'));
   assert.equal(packet.documents.length,16);assert(packet.scope.includes('Does not install'));assert(packet.documents.every(d=>d.sha256.length===64&&d.text&&d.sourcePath.startsWith('guidance/')));
@@ -21,7 +21,7 @@ const http=require('node:http'),fs=require('node:fs'),path=require('node:path'),
   await page.locator('nav [data-nav=continuity]').click();await page.getByRole('link',{name:'Guidance library',exact:true}).click();await page.getByRole('checkbox').first().waitFor();assert.equal(await page.getByRole('checkbox',{checked:true}).count(),1);
   await page.evaluate(()=>{Storage.prototype.setItem=function(){throw Error('Synthetic quota failure');};});await page.getByRole('button',{name:'Select all standards',exact:true}).click();await page.getByText(/Selection could not be saved. Export it before leaving this page./).waitFor();
   const [recovery]=await Promise.all([page.waitForEvent('download'),page.getByRole('button',{name:'Export selected JSON',exact:true}).click()]);assert.equal(JSON.parse(fs.readFileSync(await recovery.path(),'utf8')).documents.length,16);
-  await page.setViewportSize({width:390,height:844});await page.screenshot({path:process.env.GUIDANCE_SCREENSHOT||'/tmp/athena-guidance-mobile.png',fullPage:true});assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);
+  await page.setViewportSize({width:390,height:844});await page.screenshot({path:process.env.GUIDANCE_SCREENSHOT||'browser-results/guidance-mobile.png',fullPage:true});assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);
   assert.deepEqual(errors,[]);console.log('PASS native guidance route, complete16 standards, canonical-source navigation, shared search, persistent selection, JSON/Markdown downloads, quota recovery and narrow layout; local public packaged catalog only.');
  }finally{await browser?.close();server.close();}
 })().catch(e=>{console.error(e);process.exitCode=1;});

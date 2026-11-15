@@ -17,4 +17,4 @@ export function exportPacket(catalog,ids){
  if(!documents.length)throw Error('Choose at least one standard to export.');
  return {schema:1,kind:'athena-guidance-reference-pack',version:catalog.version,sourceRepository:catalog.sourceRepository,sourceRevision:catalog.sourceRevision,legacySourceCommit:catalog.legacySourceCommit,scope:'Reference only. Does not install instructions, execute tools, grant permissions or override project-owned guidance.',documents};
 }
-export function exportMarkdown(packet){return ['# Athena guidance reference pack',`Version: ${packet.version}`,packet.scope,...packet.documents.flatMap(d=>[`\n---\nSource: ${d.sourceUrl}`,`Path: ${d.sourcePath}`,`SHA-256: ${d.sha256}\n`,d.text])].join('\n\n');}
+export function exportMarkdown(packet){return ['# Athena guidance reference pack',`Version: ${packet.version}`,`Source: ${packet.sourceRepository}`,`Revision identity: ${packet.sourceRevision}`,`Original source commit: ${packet.legacySourceCommit}`,packet.scope,...packet.documents.flatMap(d=>[`\n---\nSource: ${d.sourceUrl}`,`Path: ${d.sourcePath}`,`SHA-256: ${d.sha256}\n`,d.text])].join('\n\n');}
