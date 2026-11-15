@@ -1,14 +1,21 @@
 use athena_foundry_store::{Store, music_import::MusicImport};
 use serde_json::json;
+static NEXT_PATH: std::sync::atomic::AtomicU64 = std::sync::atomic::AtomicU64::new(0);
+fn fixture_path(tick: u128) -> std::path::PathBuf {
+    // Clock precision is not uniqueness, notably on parallel Windows runners.
+    let sequence = NEXT_PATH.fetch_add(1, std::sync::atomic::Ordering::Relaxed);
+    std::env::temp_dir().join(format!(
+        "music-precision-{}-{tick}-{sequence}.sqlite",
+        std::process::id()
+    ))
+}
 fn setup() -> (std::path::PathBuf, Store) {
-    let p = std::env::temp_dir().join(format!(
-        "music-precision-{}-{}.sqlite",
-        std::process::id(),
+    let p = fixture_path(
         std::time::SystemTime::now()
             .duration_since(std::time::UNIX_EPOCH)
             .unwrap()
-            .as_nanos()
-    ));
+            .as_nanos(),
+    );
     let mut s = Store::create(&p).unwrap();
     s.migrate_history().unwrap();
     s.migrate_soundtrack_metadata().unwrap();
@@ -142,4 +149,14 @@ fn upgrade_preserves_unknown_precision_and_old_import_contract() {
     );
     drop(s);
     std::fs::remove_file(p).unwrap();
+}
+
+#[test]
+fn parallel_fixture_names_remain_unique_with_identical_clock_ticks() {
+    let paths: Vec<_> = (0..8)
+        .map(|_| std::thread::spawn(|| (0..100).map(|_| fixture_path(123)).collect::<Vec<_>>()))
+        .flat_map(|thread| thread.join().unwrap())
+        .collect();
+    let unique: std::collections::HashSet<_> = paths.iter().collect();
+    assert_eq!(unique.len(), 800);
 }
