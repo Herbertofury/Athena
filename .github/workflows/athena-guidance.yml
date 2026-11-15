@@ -9,7 +9,11 @@ permissions:
   contents: read
 jobs:
   verify:
-    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v7
       - uses: actions/setup-python@v7
@@ -17,3 +21,7 @@ jobs:
           python-version: '3.12'
       - run: python guidance/tools/repository_governance.py check
       - run: python -m unittest discover -s guidance/tests -v
+      - name: Build canonical reference bundle
+        run: python guidance/tools/reference_bundle.py --output reference-core.zip
+      - name: Verify canonical reference bundle
+        run: python guidance/tools/reference_bundle.py --verify reference-core.zip
