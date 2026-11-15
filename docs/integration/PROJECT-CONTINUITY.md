@@ -73,3 +73,12 @@ Continuity storage schema2 accepts and losslessly upgrades schema1 notes in memo
 the original stored copy is only replaced on a successful write. Exported schema2
 identifies dependency-policy history explicitly. Older runtimes should retain an
 unrecognized snapshot rather than overwrite it.
+
+## Local historical evidence review
+
+The [read-only review CLI](../../tools/continuity-review/README.md) accepts an
+explicitly selected local Continuity JSON export. It shows every included note
+revision, source and timestamp, changed fields, and reviewed dependency baselines
+in Markdown or JSON. It reuses the native validation and context compiler; it does
+not import, restore, capture, transmit or alter owner data. This is a command-line
+review companion, not a new graphical workspace or full Constellation parity.
