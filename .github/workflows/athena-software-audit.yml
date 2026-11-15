@@ -9,6 +9,7 @@ on:
       - 'src/software/**'
       - 'scripts/build_software_catalog.py'
       - 'scripts/check_software_links.py'
+      - 'scripts/report_software_coverage.py'
       - 'scripts/software_browser_checks.cjs'
       - 'tests/software*'
       - '.github/workflows/athena-software-audit.yml'
@@ -33,6 +34,8 @@ jobs:
       - run: npm run test:software
       - run: npx playwright install --with-deps chromium
       - run: npm run test:software:browser
+      - name: Report evidence refresh and category coverage
+        run: python3 scripts/report_software_coverage.py --output software-refresh-report.json
       - name: Audit official links and provenance sources
         if: github.event_name != 'pull_request'
         run: python3 scripts/check_software_links.py --workers 8 --timeout 15 --output software-link-report.json --strict
@@ -43,5 +46,6 @@ jobs:
           name: athena-software-verification
           path: |
             software-link-report.json
+            software-refresh-report.json
             browser-results/software/
           if-no-files-found: ignore

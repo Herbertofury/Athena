@@ -1,42 +1,57 @@
 {
-  "applications": 488,
-  "new_applications": 383,
+  "applications": 736,
+  "new_applications": 631,
   "preserved_pc_records": 105,
   "preserved_cleanup_records": 66,
   "baseline_categories": 42,
-  "categories": 198,
+  "categories": 286,
   "families": 10,
-  "source_urls": 1773,
-  "alternative_links": 806,
-  "unresolved_alternative_mentions": 80,
-  "legacy_records_enriched": 49,
-  "use_cases": 738,
-  "decision_guides": 36,
+  "source_urls": 3148,
+  "alternative_links": 1492,
+  "unresolved_alternative_mentions": 77,
+  "legacy_records_enriched": 65,
+  "use_cases": 1154,
+  "decision_guides": 85,
   "related_research_records": 94,
   "preserved_cleanup_unranked": 3,
   "preserved_cleanup_excluded": 1,
   "by_family": {
-    "ai": 11,
-    "creative": 88,
-    "development": 82,
-    "files": 57,
-    "gaming": 26,
-    "networking": 49,
-    "productivity": 42,
-    "science": 37,
-    "security": 42,
-    "system": 54
+    "ai": 22,
+    "creative": 112,
+    "development": 127,
+    "files": 65,
+    "gaming": 44,
+    "networking": 83,
+    "productivity": 74,
+    "science": 78,
+    "security": 51,
+    "system": 80
   },
   "by_platform": {
-    "Bootable": 4,
-    "FreeBSD": 6,
-    "Linux": 367,
-    "Web": 18,
-    "Windows": 435,
-    "macOS": 341
+    "Bootable": 6,
+    "FreeBSD": 42,
+    "Linux": 576,
+    "Web": 40,
+    "Windows": 633,
+    "macOS": 529
   },
   "by_maintenance": {
-    "active": 289,
-    "unverified": 199
+    "active": 476,
+    "unverified": 260
+  },
+  "by_license": {
+    "mixed": 36,
+    "open-source": 583,
+    "proprietary": 94,
+    "source-available": 9,
+    "unknown": 14
+  },
+  "by_pricing": {
+    "free": 441,
+    "freemium": 63,
+    "mixed": 39,
+    "paid": 18,
+    "subscription": 13,
+    "unknown": 162
   }
 }

@@ -45,4 +45,7 @@ Start with [The Packet Trail](paths/packet-trail.md) for a coherent applied netw
 
 - [Keyboard access and verification limits](accessibility.md)
 
-- [Software discovery: tasks, comparisons and sources](https://herbertofury.github.io/Athena/#software)
+
+## Software discovery
+
+- [Catalog and application families](https://herbertofury.github.io/Athena/#software)

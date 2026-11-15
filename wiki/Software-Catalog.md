@@ -2,9 +2,9 @@
 
 [Open the integrated software workspace](https://herbertofury.github.io/Athena/#software).
 
-Reviewed 2026-11-14. **488 applications**, **198 task categories**, **10 families**, **1773 distinct cited source URLs**, **806 explicit alternative links**, and **36 task decision guides**.
+Reviewed 2026-11-15. **736 applications**, **286 task categories**, **10 families**, **3148 distinct cited source URLs**, **1492 explicit alternative links**, and **85 task decision guides**.
 
-The PC application catalog grew from 105 records and 42 categories. 383 researched records were added, and 49 original records received dated metadata enrichments. The original cleanup snapshot (66 main candidates, three unranked and one excluded), 105-entry Windows research catalog, creative-AI research and engineering library are retained byte for byte. Their records are not counted again to inflate this expansion. The workspace separately exposes 94 preserved cleanup and creative-AI research records.
+The PC application catalog grew from 105 records and 42 categories. 631 researched records were added, and 65 original records received dated metadata enrichments. The original cleanup snapshot (66 main candidates, three unranked and one excluded), 105-entry Windows research catalog, creative-AI research and engineering library are retained byte for byte. Their records are not counted again to inflate this expansion. The workspace separately exposes 94 preserved cleanup and creative-AI research records.
 
 ## Find the right tool
 
@@ -16,21 +16,22 @@ Recommendations are editorial matches to documented capabilities. A free tool, a
 
 | Family | Applications | Task categories |
 | --- | ---: | ---: |
-| [System & hardware](Software-System) | 54 | 21 |
-| [Files, backup & recovery](Software-Files) | 57 | 12 |
-| [Security & privacy](Software-Security) | 42 | 21 |
-| [Networks & remote access](Software-Networking) | 49 | 16 |
-| [Productivity & accessibility](Software-Productivity) | 42 | 25 |
-| [Creative & multimedia](Software-Creative) | 88 | 44 |
-| [Development & automation](Software-Development) | 82 | 24 |
-| [AI & local models](Software-Ai) | 11 | 4 |
-| [Gaming & modding](Software-Gaming) | 26 | 9 |
-| [Science & specialized work](Software-Science) | 37 | 22 |
+| [System & hardware](Software-System) | 80 | 33 |
+| [Files, backup & recovery](Software-Files) | 65 | 14 |
+| [Security & privacy](Software-Security) | 51 | 26 |
+| [Networks & remote access](Software-Networking) | 83 | 29 |
+| [Productivity & accessibility](Software-Productivity) | 74 | 37 |
+| [Creative & multimedia](Software-Creative) | 112 | 50 |
+| [Development & automation](Software-Development) | 127 | 36 |
+| [AI & local models](Software-Ai) | 22 | 7 |
+| [Gaming & modding](Software-Gaming) | 44 | 13 |
+| [Science & specialized work](Software-Science) | 78 | 41 |
 
 ## Evidence and maintenance
 
 - [Selection methodology and contributor contract](Software-Methodology)
 - [Task decision guides](Software-Decision-Guides)
+- [Coverage gaps and refresh priorities](Software-Coverage)
 - [Preserved cleanup research](Engineering-Developer-Cleanup-and-Agent-Hygiene)
 - [Preserved Windows catalog](Engineering-Windows-Utilities-and-Creation-Tools)
 - [Creative-AI research](https://github.com/Herbertofury/Athena/blob/main/data/creative-ai-tools.json)

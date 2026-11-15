@@ -4,7 +4,7 @@ Make and manage images, sound, video and three-dimensional work.
 
 [Browse in Athena](https://herbertofury.github.io/Athena/#software?family=creative) · [Catalog](Software-Catalog) · [Method](Software-Methodology)
 
-88 applications. Reviewed 2026-11-14; individual records identify inherited research.
+112 applications. Reviewed 2026-11-15; individual records identify inherited research.
 
 ## 3D modeling and procedural creation
 
@@ -13,6 +13,7 @@ Make and manage images, sound, video and three-dimensional work.
 Integrated modeling, geometry workflows, animation and asset production
 
 - **Platforms:** Windows, macOS, Linux. **License:** GPL; inspect current exact release/component license (website and source can differ). **Pricing model:** free.
+- **Compatibility details:** The official installation manual documents all three desktop systems and links the download page. Check the current release's hardware requirements; older LTS builds may differ.
 - **Pick for:** Integrated modeling, geometry workflows, animation and asset production
 - **Compare when:** Golden mesh roundtrip: topology, UVs, normals, units, materials and export hashes; render time/peak RAM
 - **Strengths:** Integrated modeling, geometry workflows, animation and asset production
@@ -25,6 +26,7 @@ Integrated modeling, geometry workflows, animation and asset production
 Low-poly modeling, UV templates, texture painting and rigged animation
 
 - **Platforms:** Windows, macOS, Linux, Web. **License:** GPLv3 core; external API plugins/themes may be proprietary under exception. **Pricing model:** free.
+- **Compatibility details:** Official release assets include Windows installers, macOS disk images and Linux packages; the official site also links the web application.
 - **Pick for:** Low-poly modeling, UV templates, texture painting and rigged animation
 - **Compare when:** Target-game UV, pivot, animation and export roundtrip fixtures
 - **Strengths:** Low-poly modeling, UV templates, texture painting and rigged animation
@@ -37,6 +39,7 @@ Low-poly modeling, UV templates, texture painting and rigged animation
 Procedural geometry, simulation, terrain, USD layout and look development
 
 - **Platforms:** Windows, macOS, Linux. **License:** Proprietary; FX/Core/Indie/Education/Apprentice have distinct terms. **Pricing model:** freemium.
+- **Compatibility details:** Apprentice is the free learning edition, with noncommercial and file/output restrictions. Current Houdini requirements list Windows 11, Apple Silicon macOS and supported Linux distributions.
 - **Pick for:** Procedural geometry, simulation, terrain, USD layout and look development
 - **Compare when:** Target mesh/terrain/simulation fixtures with memory and deterministic recook measures
 - **Strengths:** Procedural geometry, simulation, terrain, USD layout and look development
@@ -49,6 +52,7 @@ Procedural geometry, simulation, terrain, USD layout and look development
 Subdivision mesh modeling and AutoUV; explicitly no animation support
 
 - **Platforms:** Windows, macOS, Linux. **License:** Open source per official site; exact code license not inspected. **Pricing model:** free.
+- **Compatibility details:** The current download page lists Windows, Apple Silicon macOS and Linux packages, with release-specific operating-system requirements.
 - **Pick for:** Subdivision mesh modeling and AutoUV; explicitly no animation support
 - **Compare when:** Mesh topology, UV preservation and export roundtrip comparison
 - **Strengths:** Subdivision mesh modeling and AutoUV; explicitly no animation support
@@ -64,6 +68,7 @@ Subdivision mesh modeling and AutoUV; explicitly no animation support
 Minimal 3D viewing and preview workflow
 
 - **Platforms:** Windows, macOS, Linux. **License:** BSD3. **Pricing model:** unknown.
+- **Compatibility details:** The current download page provides supported desktop packages and installation choices, replacing the previously unverified installation path.
 - **Pick for:** Minimal 3D viewing and preview workflow
 - **Compare when:** Compare bounded mesh preview latency, memory and missing attributes
 - **Strengths:** Minimal 3D viewing and preview workflow
@@ -97,7 +102,7 @@ Focused spectrogram viewer for inspecting the frequency content of audio files.
 - **Limitations:** A spectrogram alone does not establish perceptual quality or prove an audio file's provenance.
 - **Maintenance:** unverified — Official repository commit activity observed on 2023-07-15 (UTC). Activity is not a runtime or platform-compatibility test. ([evidence](https://github.com/alexkay/spek/commit/b1600d9926fa434330171cbebb407d2d0ccdcf03))
 - [Official project](https://www.spek.cc/) · [Official installation / downloads](https://github.com/alexkay/spek/releases) · [Repository](https://github.com/alexkay/spek)
-- **Sources:** [Official project documentation](https://www.spek.cc/) (2026-11-14; identity, features, platforms); [Official project README](https://raw.githubusercontent.com/alexkay/spek/HEAD/README.md) (2026-11-14; identity, features, license, platforms); [Upstream license terms](https://raw.githubusercontent.com/alexkay/spek/HEAD/LICENSE) (2026-11-14; license); [Official release listing](https://github.com/alexkay/spek/releases) (2026-11-14; identity, downloads); [Official repository activity feed](https://github.com/alexkay/spek/commits/HEAD.atom) (2026-11-14; maintenance)
+- **Sources:** [Official project documentation](https://www.spek.cc/) (2026-11-14; identity, features, platforms, pricing); [Official project README](https://raw.githubusercontent.com/alexkay/spek/HEAD/README.md) (2026-11-14; identity, features, license, platforms); [Upstream license terms](https://raw.githubusercontent.com/alexkay/spek/HEAD/LICENSE) (2026-11-14; license); [Official release listing](https://github.com/alexkay/spek/releases) (2026-11-14; identity, downloads); [Official repository activity feed](https://github.com/alexkay/spek/commits/HEAD.atom) (2026-11-14; maintenance)
 
 ## Audio conversion
 
@@ -121,6 +126,7 @@ Audio converter and CD-ripping application supporting several encoder formats.
 Multitrack recording/editing and export
 
 - **Platforms:** Windows, macOS, Linux. **License:** Current README GPLv3; older manual says GPLv2, pin exact release. **Pricing model:** free.
+- **Compatibility details:** Official downloads list Windows x86-64/ARM64, universal macOS, and Linux x86-64/ARM64 AppImages.
 - **Pick for:** Multitrack recording/editing and export
 - **Compare when:** Synthetic tones: sample count, clipping, resample error, project recovery and export metadata
 - **Strengths:** Multitrack recording/editing and export
@@ -139,7 +145,7 @@ Desktop audio editor aimed at direct waveform editing and effect preview.
 - **Limitations:** It is not a full multitrack music-production workstation; inspect supported plugins for your platform.
 - **Maintenance:** unverified — Official documentation reviewed; a recent release or maintained-build assessment was not established.
 - [Official project](https://www.ocenaudio.com/) · [Official installation / downloads](https://www.ocenaudio.com/download)
-- **Sources:** [Official project documentation](https://www.ocenaudio.com/) (2026-11-14; identity, features); [Official installation and download information](https://www.ocenaudio.com/download) (2026-11-14; identity, downloads, platforms); [Official project documentation](https://www.ocenaudio.com/features) (2026-11-14; identity, features, platforms); [Official project documentation](https://www.ocenaudio.com/en/) (2026-11-14; identity, features); [Official project documentation](https://www.ocenaudio.com/whatis) (2026-11-14; identity, features, platforms)
+- **Sources:** [Official project documentation](https://www.ocenaudio.com/) (2026-11-14; identity, features); [Official installation and download information](https://www.ocenaudio.com/download) (2026-11-14; identity, downloads, platforms, pricing); [Official project documentation](https://www.ocenaudio.com/features) (2026-11-14; identity, features, platforms); [Official project documentation](https://www.ocenaudio.com/en/) (2026-11-14; identity, features); [Official project documentation](https://www.ocenaudio.com/whatis) (2026-11-14; identity, features, platforms)
 
 ## Audio plug-in hosts
 
@@ -155,6 +161,57 @@ Audio plugin host for loading, connecting and managing instruments and effects.
 - **Maintenance:** active — Official repository commit activity observed on 2026-03-19 (UTC). Activity is not a runtime or platform-compatibility test. ([evidence](https://github.com/falkTX/Carla/commit/97a9e0740baf6df2df942495c02532a624c44682))
 - [Official project](https://kx.studio/Applications:Carla) · [Official installation / downloads](https://kx.studio/Applications:Carla#Download) · [Repository](https://github.com/falkTX/Carla)
 - **Sources:** [Official project documentation](https://kx.studio/Applications:Carla) (2026-11-14; identity, features, platforms, pricing); [Official project README](https://raw.githubusercontent.com/falkTX/Carla/HEAD/README.md) (2026-11-14; identity, features, license, platforms); [Official installation and download information](https://kx.studio/Applications:Carla#Download) (2026-11-14; identity, downloads, platforms, pricing); [Official repository activity feed](https://github.com/falkTX/Carla/commits/HEAD.atom) (2026-11-14; maintenance)
+
+## Audio Programming
+
+### ChucK
+
+Audio-programming language for timed concurrent processes and live modification of musical code.
+
+- **Platforms:** Windows, macOS, Linux. **License:** MIT OR GPL-2.0-or-later. **Pricing model:** free.
+- **Pick for:** Choose it when time and concurrency should be first-class parts of a live-coded sound workflow.
+- **Compare when:** The programming model differs from a timeline DAW. Audio drivers and optional integrations need their own compatibility checks.
+- **Strengths:** Choose it when time and concurrency should be first-class parts of a live-coded sound workflow.
+- **Limitations:** The programming model differs from a timeline DAW. Audio drivers and optional integrations need their own compatibility checks.
+- **Maintenance:** active — The official release feed contains 'chuck-1.5.5.9' with an updated timestamp of 2026-11-06T01:13:51Z. This is a maintenance signal, not an installation or stability test. ([evidence](https://github.com/ccrma/chuck/releases.atom))
+- [Official project](https://chuck.stanford.edu/) · [Official installation / downloads](https://chuck.stanford.edu/release/) · [Repository](https://github.com/ccrma/chuck)
+- **Sources:** [Official product documentation](https://chuck.stanford.edu/) (2026-11-14; features, identity, platforms, pricing); [Official upstream README](https://raw.githubusercontent.com/ccrma/chuck/HEAD/README.md) (2026-11-14; features, identity, license, platforms, pricing); [Official product documentation](https://chuck.stanford.edu/release/) (2026-11-14; downloads, platforms); [Official upstream release activity feed](https://github.com/ccrma/chuck/releases.atom) (2026-11-14; maintenance)
+### Csound
+
+Sound-computing language and runtime for synthesis, audio effects and algorithmic composition.
+
+- **Platforms:** Windows, macOS, Linux. **License:** LGPL-2.1-or-later. **Pricing model:** free.
+- **Pick for:** Choose it for explicit, programmable synthesis and reusable sound-processing instruments.
+- **Compare when:** The language, orchestra structure and runtime integrations require learning. Distinguish stable releases from development-branch installers.
+- **Strengths:** Choose it for explicit, programmable synthesis and reusable sound-processing instruments.
+- **Limitations:** The language, orchestra structure and runtime integrations require learning. Distinguish stable releases from development-branch installers.
+- **Maintenance:** active — The official release feed contains '7.0.0' with an updated timestamp of 2026-10-24T11:55:54Z. This is a maintenance signal, not an installation or stability test. ([evidence](https://github.com/csound/csound/releases.atom))
+- [Official project](https://csound.com/) · [Official installation / downloads](https://csound.com/download.html) · [Repository](https://github.com/csound/csound)
+- **Sources:** [Official product documentation](https://csound.com/) (2026-11-14; features, identity, license, platforms, pricing); [Official upstream README](https://raw.githubusercontent.com/csound/csound/HEAD/README.md) (2026-11-14; features, identity); [Official upstream license text](https://raw.githubusercontent.com/csound/csound/HEAD/COPYING) (2026-11-14; license); [Official download and distribution documentation](https://csound.com/download.html) (2026-11-14; downloads, platforms); [Official upstream release activity feed](https://github.com/csound/csound/releases.atom) (2026-11-14; maintenance)
+### Pure Data
+
+Visual patching environment for constructing interactive audio and multimedia systems.
+
+- **Platforms:** Windows, macOS, Linux. **License:** Standard Improved BSD License. **Pricing model:** free.
+- **Pick for:** Choose it for building interactive signal-processing systems by connecting visible processing objects.
+- **Compare when:** External libraries and forks are separate compatibility choices. A patch still requires careful handling of timing, signal levels and audio routing.
+- **Strengths:** Choose it for building interactive signal-processing systems by connecting visible processing objects.
+- **Limitations:** External libraries and forks are separate compatibility choices. A patch still requires careful handling of timing, signal levels and audio routing.
+- **Maintenance:** active — The official release feed contains '0.57-0' with an updated timestamp of 2026-10-05T09:57:25Z. This is a maintenance signal, not an installation or stability test. ([evidence](https://github.com/pure-data/pure-data/releases.atom))
+- [Official project](https://puredata.info/) · [Official installation / downloads](https://puredata.info/downloads/pure-data) · [Repository](https://github.com/pure-data/pure-data)
+- **Sources:** [Official product documentation](https://puredata.info/) (2026-11-14; features, identity, platforms); [Official upstream license text](https://raw.githubusercontent.com/pure-data/pure-data/HEAD/LICENSE.txt) (2026-11-14; license); [Official download and distribution documentation](https://puredata.info/downloads/pure-data) (2026-11-14; downloads, platforms, pricing); [Official upstream release activity feed](https://github.com/pure-data/pure-data/releases.atom) (2026-11-14; maintenance)
+### SuperCollider
+
+Audio-programming platform pairing a synthesis server with a language and development environment.
+
+- **Platforms:** Windows, macOS, Linux. **License:** GPL-3.0. **Pricing model:** free.
+- **Pick for:** Choose it when sound generation and composition need programmable structure and flexible real-time control.
+- **Compare when:** It requires learning an audio programming environment. Audio routing, latency and complex synthesis graphs must be tested on the target setup.
+- **Strengths:** Choose it when sound generation and composition need programmable structure and flexible real-time control.
+- **Limitations:** It requires learning an audio programming environment. Audio routing, latency and complex synthesis graphs must be tested on the target setup.
+- **Maintenance:** active — The official release feed contains '3.14.1' with an updated timestamp of 2025-11-24T17:14:06Z. This is a maintenance signal, not an installation or stability test. ([evidence](https://github.com/supercollider/supercollider/releases.atom))
+- [Official project](https://supercollider.github.io/) · [Official installation / downloads](https://supercollider.github.io/downloads) · [Repository](https://github.com/supercollider/supercollider)
+- **Sources:** [Official product documentation](https://supercollider.github.io/) (2026-11-14; features, identity, platforms, pricing); [Official upstream README](https://raw.githubusercontent.com/supercollider/supercollider/HEAD/README.md) (2026-11-14; features, identity, license, platforms); [Official upstream license text](https://raw.githubusercontent.com/supercollider/supercollider/HEAD/COPYING) (2026-11-14; license); [Official download and distribution documentation](https://supercollider.github.io/downloads) (2026-11-14; downloads, platforms); [Official upstream release activity feed](https://github.com/supercollider/supercollider/releases.atom) (2026-11-14; maintenance)
 
 ## Audio tags and metadata
 
@@ -193,7 +250,7 @@ Music tagging application that matches recordings with MusicBrainz metadata.
 - **Limitations:** Automatic matches require review, particularly for rare editions, compilations and recordings with ambiguous metadata.
 - **Maintenance:** active — Official repository commit activity observed on 2026-11-14 (UTC). Activity is not a runtime or platform-compatibility test. ([evidence](https://github.com/metabrainz/picard/commit/dc89c799481ed81f5a26221852ffa8f3ebcdb431))
 - [Official project](https://picard.musicbrainz.org/) · [Official installation / downloads](https://picard.musicbrainz.org/downloads/) · [Repository](https://github.com/metabrainz/picard)
-- **Sources:** [Official project documentation](https://picard.musicbrainz.org/) (2026-11-14; identity, features); [Official project README](https://raw.githubusercontent.com/metabrainz/picard/HEAD/README.md) (2026-11-14; identity, features, license, platforms); [Official installation and download information](https://picard.musicbrainz.org/downloads/) (2026-11-14; identity, downloads); [Upstream license terms](https://raw.githubusercontent.com/metabrainz/picard/HEAD/COPYING.txt) (2026-11-14; license); [Official repository activity feed](https://github.com/metabrainz/picard/commits/HEAD.atom) (2026-11-14; maintenance)
+- **Sources:** [Official project documentation](https://picard.musicbrainz.org/) (2026-11-14; identity, features); [Official project README](https://raw.githubusercontent.com/metabrainz/picard/HEAD/README.md) (2026-11-14; identity, features, license, platforms); [Official installation and download information](https://picard.musicbrainz.org/downloads/) (2026-11-14; identity, downloads); [Upstream license terms](https://raw.githubusercontent.com/metabrainz/picard/HEAD/COPYING.txt) (2026-11-14; license); [Official repository activity feed](https://github.com/metabrainz/picard/commits/HEAD.atom) (2026-11-14; maintenance); [Project-linked Linux distribution pricing](https://flathub.org/apps/org.musicbrainz.Picard) (2026-11-14; pricing)
 
 ## Digital audio workstations
 
@@ -202,6 +259,7 @@ Music tagging application that matches recordings with MusicBrainz metadata.
 Music creation and performance; step sequencing, automation and ARA 2 in current product page
 
 - **Platforms:** Windows, macOS. **License:** Proprietary; editions and rent-to-own terms differ. **Pricing model:** paid.
+- **Compatibility details:** The official desktop trial is time-limited. Paid editions and rent-to-own purchasing are distinct from a free ongoing license.
 - **Pick for:** Music creation and performance; step sequencing, automation and ARA 2 in current product page
 - **Compare when:** Live performance dropout, clip arrangement and project exchange tests
 - **Strengths:** Music creation and performance; step sequencing, automation and ARA 2 in current product page
@@ -226,6 +284,7 @@ Digital audio workstation for multitrack recording, MIDI, editing and mixing.
 Beat sequencing, piano-roll composition, arrangement, instruments and effects
 
 - **Platforms:** Windows, macOS. **License:** Proprietary; editions and optional FL Cloud plans differ. **Pricing model:** paid.
+- **Compatibility details:** Paid desktop editions include lifetime updates under the publisher's terms. The trial has separate restrictions; Linux is not listed as a native desktop platform.
 - **Pick for:** Beat sequencing, piano-roll composition, arrangement, instruments and effects
 - **Compare when:** Workflow speed, MIDI editing, plugin stability and export parity
 - **Strengths:** Beat sequencing, piano-roll composition, arrangement, instruments and effects
@@ -238,6 +297,7 @@ Beat sequencing, piano-roll composition, arrangement, instruments and effects
 Music sequencing and composition workflow
 
 - **Platforms:** Windows, macOS, Linux. **License:** GPLv2 per license file. **Pricing model:** free.
+- **Compatibility details:** The official download page separates stable releases from nightly builds. Plugin compatibility varies by operating system.
 - **Pick for:** Music sequencing and composition workflow
 - **Compare when:** Synthetic sequence export: timing, channels and project recovery
 - **Strengths:** Music sequencing and composition workflow
@@ -262,6 +322,7 @@ Linux audio and MIDI sequencer with multitrack editing and plugin support.
 Multitrack audio/MIDI, routing, scripting, portable operation and plugin support
 
 - **Platforms:** Windows, macOS, Linux. **License:** Proprietary paid license; 60-day full evaluation, not permanent freeware. **Pricing model:** paid.
+- **Compatibility details:** The official page documents all three desktop systems and a fully functional 60-day evaluation; ongoing use requires an appropriate paid license.
 - **Pick for:** Multitrack audio/MIDI, routing, scripting, portable operation and plugin support
 - **Compare when:** ASIO latency, dropout, project reopen and plugin compatibility comparison
 - **Strengths:** Multitrack audio/MIDI, routing, scripting, portable operation and plugin support
@@ -269,6 +330,31 @@ Multitrack audio/MIDI, routing, scripting, portable operation and plugin support
 - **Maintenance:** unverified — Retained research snapshot; current release activity was not established by this import.
 - [Official project](https://www.reaper.fm/) · [Official installation / downloads](https://www.reaper.fm/download.php)
 - **Sources:** [Preserved original research source](https://www.reaper.fm/) (2026-11-14; identity, features); [Official packages and evaluation terms](https://www.reaper.fm/download.php) (2026-11-14; downloads, features, identity, platforms, pricing); [Official paid license options](https://www.reaper.fm/purchase.php) (2026-11-14; identity, pricing)
+### Rosegarden
+
+Linux music-composition application combining MIDI sequencing, notation and audio support.
+
+- **Platforms:** Linux. **License:** GPL-2.0-or-later. **Pricing model:** unknown.
+- **Pick for:** Choose it for Linux composition where MIDI and traditional notation need to work together.
+- **Compare when:** Its desktop and audio-stack focus is Linux. Instruments, sound libraries and routing need separate configuration.
+- **Strengths:** Choose it for Linux composition where MIDI and traditional notation need to work together.
+- **Limitations:** Its desktop and audio-stack focus is Linux. Instruments, sound libraries and routing need separate configuration.
+- **Maintenance:** active — The official homepage announces Rosegarden 26.06 released on 2026-06-03. ([evidence](https://www.rosegardenmusic.com/))
+- [Official project](https://www.rosegardenmusic.com/) · [Official installation / downloads](https://www.rosegardenmusic.com/getting/) · [Repository](https://github.com/tedfelix/rosegarden-official)
+- **Sources:** [Official product documentation](https://www.rosegardenmusic.com/) (2026-11-14; features, identity, maintenance, platforms); [Official download and distribution documentation](https://www.rosegardenmusic.com/getting/) (2026-11-14; downloads, platforms); [Official upstream README](https://raw.githubusercontent.com/tedfelix/rosegarden-official/HEAD/README.md) (2026-11-14; features, identity, license, platforms); [Official upstream license text](https://raw.githubusercontent.com/tedfelix/rosegarden-official/HEAD/COPYING) (2026-11-14; license); [Official download and distribution documentation](https://www.rosegardenmusic.com/getting/source/) (2026-11-14; downloads, identity)
+### Zrythm
+
+Digital audio workstation with recording, MIDI editing, automation and plugin workflows.
+
+- **Platforms:** Windows, macOS, Linux. **License:** AGPL-3.0-or-later with additional trademark terms. **Pricing model:** freemium.
+- **Compatibility details:** Free limited and paid complete installers differ. The v2 alpha is explicitly offered for testing, separately from the v1 installer choices.
+- **Pick for:** Choose it for exploring an open-source DAW with integrated automation and modern editing workflows.
+- **Compare when:** Free installers have feature limits and paid builds differ. The v2 alpha is a separate testing choice, and project compatibility should be checked before migration.
+- **Strengths:** Choose it for exploring an open-source DAW with integrated automation and modern editing workflows.
+- **Limitations:** Free installers have feature limits and paid builds differ. The v2 alpha is a separate testing choice, and project compatibility should be checked before migration.
+- **Maintenance:** active — The official release feed contains 'v2.0.0-alpha.7' with an updated timestamp of 2026-10-25T10:00:31Z. This is a maintenance signal, not an installation or stability test. ([evidence](https://github.com/zrythm/zrythm/releases.atom))
+- [Official project](https://www.zrythm.org/) · [Official installation / downloads](https://www.zrythm.org/en/download.html) · [Repository](https://github.com/zrythm/zrythm)
+- **Sources:** [Official product documentation](https://www.zrythm.org/) (2026-11-14; features, identity); [Official upstream README](https://raw.githubusercontent.com/zrythm/zrythm/HEAD/README.md) (2026-11-14; features, identity, platforms); [Official licensing and terms](https://raw.githubusercontent.com/zrythm/zrythm/HEAD/LICENSES/LicenseRef-ZrythmLicense.txt) (2026-11-14; license); [Official download and distribution documentation](https://www.zrythm.org/en/download.html) (2026-11-14; downloads, platforms, pricing); [Official upstream release activity feed](https://github.com/zrythm/zrythm/releases.atom) (2026-11-14; maintenance)
 
 ## Screen capture and broadcasting
 
@@ -277,18 +363,20 @@ Multitrack audio/MIDI, routing, scripting, portable operation and plugin support
 Video recording and livestreaming application with scenes, capture sources, audio mixing, and plugins.
 
 - **Platforms:** Windows, macOS, Linux. **License:** GPL-2.0. **Pricing model:** free.
+- **Pricing details:** An official public app/package distribution was accessible without payment or authentication. Optional paid editions, hosted services, models and third-party dependencies retain separate terms.
 - **Pick for:** Record tutorials or stream gameplay with composited scenes.
 - **Compare when:** Encoder settings, capture permissions, and plugins affect stability and load.
 - **Strengths:** Reusable scenes combine capture sources and audio into structured recording or streaming layouts.
 - **Limitations:** Encoder settings, capture permissions, and plugins affect stability and load.
 - **Maintenance:** active — Repository not archived; latest repository push observed 2026-11-11. Activity is not a runtime, security, or support guarantee. ([evidence](https://api.github.com/repos/obsproject/obs-studio))
 - [Official project](https://obsproject.com/) · [Official installation / downloads](https://github.com/obsproject/obs-studio/releases) · [Repository](https://github.com/obsproject/obs-studio)
-- **Sources:** [Official repository metadata: identity, license detection and activity](https://api.github.com/repos/obsproject/obs-studio) (2026-11-14; identity, maintenance, license); [Official project README](https://raw.githubusercontent.com/obsproject/obs-studio/HEAD/README.rst) (2026-11-14; identity, features); [Official official documentation](https://obsproject.com/) (2026-11-14; identity, features, platforms); [Official release inspected: 33.0.1](https://github.com/obsproject/obs-studio/releases/tag/33.0.1) (2026-11-14; downloads, maintenance, platforms)
+- **Sources:** [Official repository metadata: identity, license detection and activity](https://api.github.com/repos/obsproject/obs-studio) (2026-11-14; identity, maintenance, license); [Official project README](https://raw.githubusercontent.com/obsproject/obs-studio/HEAD/README.rst) (2026-11-14; identity, features); [Official official documentation](https://obsproject.com/) (2026-11-14; identity, features, platforms); [Official release inspected: 33.0.1](https://github.com/obsproject/obs-studio/releases/tag/33.0.1) (2026-11-14; downloads, maintenance, platforms); [Public upstream app/package distribution: availability without payment or authentication checked](https://github.com/obsproject/obs-studio/releases/download/33.0.1/OBS-Studio-33.0.1-Windows-x64.zip) (2026-11-14; downloads, pricing)
 ### ShareX
 
 Capture, recording and configurable output workflows
 
 - **Platforms:** Windows. **License:** GPL-3.0. **Pricing model:** unknown.
+- **Compatibility details:** Windows; see linked upstream requirements for exact supported build/architecture
 - **Pick for:** Capture, recording and configurable output workflows
 - **Compare when:** Local-only synthetic screenshot workflow, metadata redaction and undoable output naming
 - **Strengths:** Capture, recording and configurable output workflows
@@ -314,11 +402,25 @@ Collaborative drawing and animation application where participants share a live 
 
 ## Visual effects compositing
 
+### Adobe After Effects
+
+Motion graphics and visual effects compositor for animated titles, tracked elements and layered shots.
+
+- **Platforms:** Windows, macOS. **License:** Adobe proprietary software terms; paid subscription. **Pricing model:** subscription.
+- **Compatibility details:** This entry covers the desktop application. Check the linked requirements for the current release, hardware acceleration and activation requirements; web and mobile editions have different capabilities.
+- **Pick for:** Choose it when motion design and editable After Effects compositions are required deliverables.
+- **Compare when:** Rendering and previews can require substantial memory and GPU resources; evaluate project-sized scenes.
+- **Strengths:** Choose it when motion design and editable After Effects compositions are required deliverables.; Animation and compositing tools share a timeline and layer model.
+- **Limitations:** Rendering and previews can require substantial memory and GPU resources; evaluate project-sized scenes.; It complements a video editor; compare Blender or Natron for different compositing models and budgets.
+- **Maintenance:** unverified — Current product and distribution documentation reviewed; a dated release history was not independently established for this entry.
+- [Official project](https://www.adobe.com/products/aftereffects.html) · [Official installation / downloads](https://www.adobe.com/products/aftereffects.html)
+- **Sources:** [Official product features and trial route](https://www.adobe.com/products/aftereffects.html) (2026-11-14; identity, features, downloads); [Official Adobe plans](https://www.adobe.com/creativecloud/plans.html) (2026-11-14; pricing); [Official Creative Cloud platform requirements](https://helpx.adobe.com/download-install/apps/system-requirements/creative-cloud-requirements.html) (2026-11-14; platforms); [Official Adobe software licensing terms](https://www.adobe.com/legal/licenses-terms.html) (2026-11-14; license)
 ### Natron
 
 Node-based compositor and OpenFX effects
 
 - **Platforms:** Windows, macOS, Linux. **License:** GPLv2. **Pricing model:** free.
+- **Compatibility details:** The stable macOS release is Intel-based and uses Rosetta 2 on Apple Silicon; native Apple Silicon support is separately offered as an alpha build.
 - **Pick for:** Node-based compositor and OpenFX effects
 - **Compare when:** Node graph reopening, alpha/color fidelity and render regression fixtures
 - **Strengths:** Node-based compositor and OpenFX effects
@@ -329,6 +431,19 @@ Node-based compositor and OpenFX effects
 
 ## Desktop publishing
 
+### Adobe InDesign
+
+Page layout and typography environment for books, magazines, brochures and other structured publications.
+
+- **Platforms:** Windows, macOS. **License:** Adobe proprietary software terms; paid subscription. **Pricing model:** subscription.
+- **Compatibility details:** This entry covers the desktop application. Check the linked requirements for the current release, hardware acceleration and activation requirements; web and mobile editions have different capabilities.
+- **Pick for:** Choose it for long documents where typography, page structure and an InDesign handoff are central.
+- **Compare when:** Subscription and production training add cost; compare Scribus or Affinity for simpler publishing requirements.
+- **Strengths:** Choose it for long documents where typography, page structure and an InDesign handoff are central.; Combines placed graphics and structured text in a publication workspace.
+- **Limitations:** Subscription and production training add cost; compare Scribus or Affinity for simpler publishing requirements.; Linked fonts and images still need to be managed when handing a publication to another computer.
+- **Maintenance:** unverified — Current product and distribution documentation reviewed; a dated release history was not independently established for this entry.
+- [Official project](https://www.adobe.com/products/indesign.html) · [Official installation / downloads](https://www.adobe.com/products/indesign.html)
+- **Sources:** [Official product features and trial route](https://www.adobe.com/products/indesign.html) (2026-11-14; identity, features, downloads); [Official Adobe plans](https://www.adobe.com/creativecloud/plans.html) (2026-11-14; pricing); [Official Creative Cloud platform requirements](https://helpx.adobe.com/download-install/apps/system-requirements/creative-cloud-requirements.html) (2026-11-14; platforms); [Official Adobe software licensing terms](https://www.adobe.com/legal/licenses-terms.html) (2026-11-14; license)
 ### Scribus
 
 Desktop publishing application for page layouts and press-oriented PDF documents.
@@ -340,7 +455,7 @@ Desktop publishing application for page layouts and press-oriented PDF documents
 - **Limitations:** Document interchange with proprietary layout applications requires a separate workflow.
 - **Maintenance:** active — Official repository commit activity observed on 2026-11-13 (UTC). Activity is not a runtime or platform-compatibility test. ([evidence](https://github.com/scribusproject/scribus/commit/a98017c31ec0a6e0ec75520ffecec410c376dc9a))
 - [Official project](https://www.scribus.net/) · [Official installation / downloads](https://www.scribus.net/downloads/) · [Repository](https://github.com/scribusproject/scribus)
-- **Sources:** [Official project documentation](https://www.scribus.net/) (2026-11-14; identity, features, license); [Official project README](https://raw.githubusercontent.com/scribusproject/scribus/HEAD/README.md) (2026-11-14; identity, features); [Upstream license terms](https://raw.githubusercontent.com/scribusproject/scribus/HEAD/COPYING) (2026-11-14; license); [Official installation and download information](https://www.scribus.net/downloads/) (2026-11-14; identity, downloads, platforms); [Official repository activity feed](https://github.com/scribusproject/scribus/commits/HEAD.atom) (2026-11-14; maintenance)
+- **Sources:** [Official project documentation](https://www.scribus.net/) (2026-11-14; identity, features, license, pricing); [Official project README](https://raw.githubusercontent.com/scribusproject/scribus/HEAD/README.md) (2026-11-14; identity, features); [Upstream license terms](https://raw.githubusercontent.com/scribusproject/scribus/HEAD/COPYING) (2026-11-14; license); [Official installation and download information](https://www.scribus.net/downloads/) (2026-11-14; identity, downloads, platforms); [Official repository activity feed](https://github.com/scribusproject/scribus/commits/HEAD.atom) (2026-11-14; maintenance)
 
 ## Digital painting
 
@@ -349,6 +464,7 @@ Desktop publishing application for page layouts and press-oriented PDF documents
 Digital painting and layered artwork
 
 - **Platforms:** Windows, macOS, Linux. **License:** GPLv3. **Pricing model:** free.
+- **Compatibility details:** Free official desktop installers and AppImage; optional paid store distribution supports development.
 - **Pick for:** Digital painting and layered artwork
 - **Compare when:** Layered fixture roundtrip, ICC-aware export, tablet latency and crash recovery
 - **Strengths:** Digital painting and layered artwork
@@ -367,7 +483,7 @@ Brush-oriented digital painting application with a canvas-focused interface.
 - **Limitations:** A photo-editing or layout tool is still useful for workflows outside painting.
 - **Maintenance:** active — Official repository commit activity observed on 2026-09-13 (UTC). Activity is not a runtime or platform-compatibility test. ([evidence](https://github.com/mypaint/mypaint/commit/fb6f7d6b12238d125294496b105f5f36e658bc61))
 - [Official project](https://mypaint.app/en/) · [Official installation / downloads](https://github.com/mypaint/mypaint/releases) · [Repository](https://github.com/mypaint/mypaint)
-- **Sources:** [Official project README](https://raw.githubusercontent.com/mypaint/mypaint/HEAD/README.md) (2026-11-14; identity, features, platforms); [Upstream license terms](https://raw.githubusercontent.com/mypaint/mypaint/HEAD/COPYING) (2026-11-14; license); [Official project documentation](https://mypaint.app/en/) (2026-11-14; identity, features, platforms); [Official release listing](https://github.com/mypaint/mypaint/releases) (2026-11-14; identity, downloads); [Official repository activity feed](https://github.com/mypaint/mypaint/commits/HEAD.atom) (2026-11-14; maintenance)
+- **Sources:** [Official project README](https://raw.githubusercontent.com/mypaint/mypaint/HEAD/README.md) (2026-11-14; identity, features, platforms); [Upstream license terms](https://raw.githubusercontent.com/mypaint/mypaint/HEAD/COPYING) (2026-11-14; license); [Official project documentation](https://mypaint.app/en/) (2026-11-14; identity, features, platforms); [Official release listing](https://github.com/mypaint/mypaint/releases) (2026-11-14; identity, downloads); [Official repository activity feed](https://github.com/mypaint/mypaint/commits/HEAD.atom) (2026-11-14; maintenance); [Project-linked Linux distribution pricing](https://flathub.org/apps/org.mypaint.MyPaint) (2026-11-14; pricing)
 
 ## DJ mixing
 
@@ -390,7 +506,7 @@ DJ application with decks, mixing controls and hardware-controller support.
 
 Pattern-based drum machine for programming and arranging percussion parts.
 
-- **Platforms:** Windows, macOS, Linux. **License:** GPL-2.0. **Pricing model:** free.
+- **Platforms:** Windows, macOS, Linux. **License:** GPL-2.0. **Pricing model:** unknown.
 - **Pick for:** A focused rhythm-production tool with visual pattern editing.
 - **Compare when:** Audio routing and kit/plugin availability vary across platforms.
 - **Strengths:** A focused rhythm-production tool with visual pattern editing.
@@ -399,6 +515,72 @@ Pattern-based drum machine for programming and arranging percussion parts.
 - [Official project](https://github.com/hydrogen-music/hydrogen) · [Official installation / downloads](https://github.com/hydrogen-music/hydrogen/releases) · [Repository](https://github.com/hydrogen-music/hydrogen)
 - **Sources:** [Official project README](https://raw.githubusercontent.com/hydrogen-music/hydrogen/HEAD/README.md) (2026-11-14; identity, features, license, platforms); [Upstream license terms](https://raw.githubusercontent.com/hydrogen-music/hydrogen/HEAD/COPYING) (2026-11-14; license); [Official release listing](https://github.com/hydrogen-music/hydrogen/releases) (2026-11-14; identity, downloads); [Official repository activity feed](https://github.com/hydrogen-music/hydrogen/commits/HEAD.atom) (2026-11-14; maintenance)
 
+## Font Editors
+
+### Birdfont
+
+Font editor for creating vector glyphs and exporting common desktop and web font formats.
+
+- **Platforms:** Windows, macOS, Linux. **License:** GPL-3.0 source; binary editions have additional use and output-font restrictions. **Pricing model:** freemium.
+- **Pick for:** Choose it for a focused visual font-design workflow while selecting the edition that matches the intended font distribution.
+- **Compare when:** GPL source and distributed binary editions have different terms. The free binary restricts created fonts to the SIL Open Font License, and additional capabilities are paid.
+- **Strengths:** Choose it for a focused visual font-design workflow while selecting the edition that matches the intended font distribution.
+- **Limitations:** GPL source and distributed binary editions have different terms. The free binary restricts created fonts to the SIL Open Font License, and additional capabilities are paid.
+- **Maintenance:** unverified — Official product and distribution information was reviewed, but a sufficiently recent dated maintenance signal was not established. This does not imply that the project is discontinued.
+- [Official project](https://birdfont.org/) · [Official installation / downloads](https://birdfont.org/download.php) · [Repository](https://github.com/johanmattssonm/birdfont)
+- **Sources:** [Official product documentation](https://birdfont.org/) (2026-11-14; features, identity, pricing); [Official upstream README](https://raw.githubusercontent.com/johanmattssonm/birdfont/HEAD/README.md) (2026-11-14; identity, license, platforms); [Official download and distribution documentation](https://birdfont.org/download.php) (2026-11-14; downloads, license, platforms, pricing)
+### FontForge
+
+Font-design application for drawing glyphs, editing outlines and producing font files.
+
+- **Platforms:** Windows, macOS, Linux. **License:** GPL-3.0-or-later overall; most parts also available under BSD-style terms. **Pricing model:** free.
+- **Pick for:** Choose it for an open-source font-making workflow with direct control over glyph outlines and encoding.
+- **Compare when:** Its interface and font-engineering concepts take time to learn. Validate exported fonts in the applications and scripts that will use them.
+- **Strengths:** Choose it for an open-source font-making workflow with direct control over glyph outlines and encoding.
+- **Limitations:** Its interface and font-engineering concepts take time to learn. Validate exported fonts in the applications and scripts that will use them.
+- **Maintenance:** unverified — Official product and distribution information was reviewed, but a sufficiently recent dated maintenance signal was not established. This does not imply that the project is discontinued.
+- [Official project](https://fontforge.org/en-US/) · [Official installation / downloads](https://fontforge.org/en-US/downloads/) · [Repository](https://github.com/fontforge/fontforge)
+- **Sources:** [Official product documentation](https://fontforge.org/en-US/) (2026-11-14; features, identity, pricing); [Official upstream README](https://raw.githubusercontent.com/fontforge/fontforge/HEAD/README.md) (2026-11-14; features, identity, platforms); [Official upstream license text](https://raw.githubusercontent.com/fontforge/fontforge/HEAD/LICENSE) (2026-11-14; license); [Official download and distribution documentation](https://fontforge.org/en-US/downloads/) (2026-11-14; downloads, platforms)
+### FontLab
+
+Commercial type-design environment for drawing, spacing and producing static, variable and color fonts.
+
+- **Platforms:** Windows, macOS. **License:** Proprietary FontLab end-user license. **Pricing model:** paid.
+- **Pick for:** Choose it for professional font production that needs integrated drawing, masters, spacing and OpenType tools.
+- **Compare when:** It is paid software with activation and edition-specific terms. Learning advanced type engineering remains necessary despite the integrated tools.
+- **Strengths:** Choose it for professional font production that needs integrated drawing, masters, spacing and OpenType tools.
+- **Limitations:** It is paid software with activation and edition-specific terms. Learning advanced type engineering remains necessary despite the integrated tools.
+- **Maintenance:** unverified — Official product and distribution information was reviewed, but a sufficiently recent dated maintenance signal was not established. This does not imply that the project is discontinued.
+- [Official project](https://www.fontlab.com/font-editor/fontlab/) · [Official installation / downloads](https://www.fontlab.com/font-editor/fontlab/)
+- **Sources:** [Official product documentation](https://www.fontlab.com/font-editor/fontlab/) (2026-11-14; downloads, features, identity, platforms, pricing); [Official licensing and terms](https://www.fontlab.com/legal/eula/) (2026-11-14; license)
+
+## Font Management
+
+### Font Manager
+
+GTK application for previewing, organizing and managing fonts on a Linux desktop.
+
+- **Platforms:** Linux. **License:** GPL-3.0. **Pricing model:** unknown.
+- **Pick for:** Choose it for a native Linux font-management workflow integrated with common package and desktop conventions.
+- **Compare when:** It is Linux-oriented and is not a font-outline editor. Desktop integration depends on installed toolkit and file-manager support.
+- **Strengths:** Choose it for a native Linux font-management workflow integrated with common package and desktop conventions.
+- **Limitations:** It is Linux-oriented and is not a font-outline editor. Desktop integration depends on installed toolkit and file-manager support.
+- **Maintenance:** active — The official release feed contains '0.9.6' with an updated timestamp of 2026-11-05T04:53:33Z. This is a maintenance signal, not an installation or stability test. ([evidence](https://github.com/FontManager/font-manager/releases.atom))
+- [Official project](https://fontmanager.github.io/) · [Official installation / downloads](https://github.com/FontManager/font-manager/releases) · [Repository](https://github.com/FontManager/font-manager)
+- **Sources:** [Official product documentation](https://fontmanager.github.io/) (2026-11-14; downloads, features, identity, platforms); [Official upstream README](https://raw.githubusercontent.com/FontManager/font-manager/HEAD/README.md) (2026-11-14; features, identity, platforms); [Official upstream license text](https://raw.githubusercontent.com/FontManager/font-manager/HEAD/COPYING) (2026-11-14; license); [Official download and distribution documentation](https://github.com/FontManager/font-manager/releases) (2026-11-14; downloads); [Official upstream release activity feed](https://github.com/FontManager/font-manager/releases.atom) (2026-11-14; maintenance)
+### FontBase
+
+Desktop font manager for organizing, previewing and activating collections of fonts.
+
+- **Platforms:** Windows, macOS, Linux. **License:** Proprietary FontBase terms and EULA. **Pricing model:** freemium.
+- **Pick for:** Choose it for managing a working font collection across supported desktop platforms.
+- **Compare when:** The base application and Awesome paid features differ. Managing a font in the app does not grant rights to use the font commercially.
+- **Strengths:** Choose it for managing a working font collection across supported desktop platforms.
+- **Limitations:** The base application and Awesome paid features differ. Managing a font in the app does not grant rights to use the font commercially.
+- **Maintenance:** unverified — Official product and distribution information was reviewed, but a sufficiently recent dated maintenance signal was not established. This does not imply that the project is discontinued.
+- [Official project](https://fontba.se/) · [Official installation / downloads](https://fontba.se/downloads)
+- **Sources:** [Official product documentation](https://fontba.se/) (2026-11-14; features, identity, platforms, pricing); [Official product documentation](https://fontba.se/pricing) (2026-11-14; pricing); [Official download and distribution documentation](https://fontba.se/downloads) (2026-11-14; downloads, platforms); [Official licensing and terms](https://fontba.se/legal/terms) (2026-11-14; license)
+
 ## Hand-drawn animation
 
 ### OpenToonz
@@ -406,6 +588,7 @@ Pattern-based drum machine for programming and arranging percussion parts.
 2D ink/paint and animation production; effect SDK
 
 - **Platforms:** Windows, macOS, Linux. **License:** New BSD source license; installer rules separate. **Pricing model:** free.
+- **Compatibility details:** Windows and macOS desktop packages are presented on the official site; Linux build instructions and CI are maintained in the official repository. The separate GTS scanner utility is Windows-only.
 - **Pick for:** 2D ink/paint and animation production; effect SDK
 - **Compare when:** Raster/vector scene reopen, frame timing and effect export fixtures
 - **Strengths:** 2D ink/paint and animation production; effect SDK
@@ -418,6 +601,7 @@ Pattern-based drum machine for programming and arranging percussion parts.
 Hand-drawn animation with raster/vector workflows
 
 - **Platforms:** Windows, macOS, Linux. **License:** GPL-2.0 repository classification; pin exact release/file notices. **Pricing model:** free.
+- **Compatibility details:** Official stable downloads cover Windows, macOS and Linux; alternative and legacy packages are listed separately.
 - **Pick for:** Hand-drawn animation with raster/vector workflows
 - **Compare when:** Onion skin, frame timing, tablet input and lossless export fixtures
 - **Strengths:** Hand-drawn animation with raster/vector workflows
@@ -425,6 +609,22 @@ Hand-drawn animation with raster/vector workflows
 - **Maintenance:** unverified — Retained research snapshot; current release activity was not established by this import.
 - [Official project](https://www.pencil2d.org/) · [Official installation / downloads](https://www.pencil2d.org/download/) · [Repository](https://github.com/pencil2d/pencil)
 - **Sources:** [Official free commercial-use statement](https://www.pencil2d.org/) (2026-11-14; features, identity, platforms, pricing); [Verified official source repository](https://github.com/pencil2d/pencil) (2026-11-14; features, identity); [Official desktop and legacy downloads](https://www.pencil2d.org/download/) (2026-11-14; downloads, identity, platforms)
+
+## Graphic Design Suites
+
+### Affinity
+
+Unified pixel editing, vector design and page layout application from Canva.
+
+- **Platforms:** Windows, macOS. **License:** Proprietary Canva Affinity terms; free core application, paid-plan features separate. **Pricing model:** freemium.
+- **Compatibility details:** Desktop Windows and macOS editions; architecture and OS minimums are listed on the download page. Tablet availability is outside this PC catalog entry.
+- **Pick for:** Choose it for a combined photo, vector and layout workflow without a mandatory paid core subscription.
+- **Compare when:** A verified Canva account is required; optional Canva AI features depend on paid-plan access.
+- **Strengths:** Choose it for a combined photo, vector and layout workflow without a mandatory paid core subscription.; Switching between design disciplines inside one application can reduce file handoffs.
+- **Limitations:** A verified Canva account is required; optional Canva AI features depend on paid-plan access.; This is the unified Affinity application; evaluate document exchange with older Affinity and Adobe workflows before migrating production files.
+- **Maintenance:** unverified — Current product and distribution documentation reviewed; a dated release history was not independently established for this entry.
+- [Official project](https://www.affinity.studio/) · [Official installation / downloads](https://www.affinity.studio/download)
+- **Sources:** [Official Affinity download and product overview](https://www.affinity.studio/download) (2026-11-14; identity, features, platforms, downloads); [Official free access and paid feature explanation](https://www.canva.com/help/free-affinity-access/) (2026-11-14; pricing); [Official Affinity license terms](https://www.canva.com/policies/affinity-additional-terms/) (2026-11-14; license)
 
 ## Guitar tablature
 
@@ -439,7 +639,7 @@ Tablature and score editor with playback for guitar and other instruments.
 - **Limitations:** Import fidelity depends on the tablature format and its version.
 - **Maintenance:** active — Official repository commit activity observed on 2026-11-12 (UTC). Activity is not a runtime or platform-compatibility test. ([evidence](https://github.com/helge17/tuxguitar/commit/012ebd7040a19e9159004c4f084b19c7f0abdfcd))
 - [Official project](https://www.tuxguitar.app/) · [Official installation / downloads](https://github.com/helge17/tuxguitar/releases) · [Repository](https://github.com/helge17/tuxguitar)
-- **Sources:** [Official project documentation](https://www.tuxguitar.app/) (2026-11-14; identity, features, platforms, license); [Official release listing](https://github.com/helge17/tuxguitar/releases) (2026-11-14; identity, downloads); [Official project README](https://raw.githubusercontent.com/helge17/tuxguitar/HEAD/README.md) (2026-11-14; identity, features, license, platforms); [Official repository activity feed](https://github.com/helge17/tuxguitar/commits/HEAD.atom) (2026-11-14; maintenance)
+- **Sources:** [Official project documentation](https://www.tuxguitar.app/) (2026-11-14; identity, features, platforms, license, pricing); [Official release listing](https://github.com/helge17/tuxguitar/releases) (2026-11-14; identity, downloads); [Official project README](https://raw.githubusercontent.com/helge17/tuxguitar/HEAD/README.md) (2026-11-14; identity, features, license, platforms); [Official repository activity feed](https://github.com/helge17/tuxguitar/commits/HEAD.atom) (2026-11-14; maintenance)
 
 ## HDR photography
 
@@ -481,7 +681,7 @@ Command-line suite for converting, transforming and composing raster images.
 - **Limitations:** Delegates, security policies and build options affect supported formats; it is not a painting workspace.
 - **Maintenance:** active — Official repository commit activity observed on 2026-11-14 (UTC). Activity is not a runtime or platform-compatibility test. ([evidence](https://github.com/ImageMagick/ImageMagick/commit/2c5232a5384f601329723c5b19d1dcfa0e8f69d1))
 - [Official project](https://imagemagick.org/) · [Official installation / downloads](https://imagemagick.org/download/) · [Repository](https://github.com/ImageMagick/ImageMagick)
-- **Sources:** [Official project documentation](https://imagemagick.org/) (2026-11-14; identity, features); [Official project README](https://raw.githubusercontent.com/ImageMagick/ImageMagick/HEAD/README.md) (2026-11-14; identity, features, platforms); [Upstream license terms](https://raw.githubusercontent.com/ImageMagick/ImageMagick/HEAD/LICENSE) (2026-11-14; license); [Official installation and download information](https://imagemagick.org/download/) (2026-11-14; identity, downloads, platforms); [Official repository activity feed](https://github.com/ImageMagick/ImageMagick/commits/HEAD.atom) (2026-11-14; maintenance)
+- **Sources:** [Official project documentation](https://imagemagick.org/) (2026-11-14; identity, features, pricing); [Official project README](https://raw.githubusercontent.com/ImageMagick/ImageMagick/HEAD/README.md) (2026-11-14; identity, features, platforms); [Upstream license terms](https://raw.githubusercontent.com/ImageMagick/ImageMagick/HEAD/LICENSE) (2026-11-14; license); [Official installation and download information](https://imagemagick.org/download/) (2026-11-14; identity, downloads, platforms); [Official repository activity feed](https://github.com/ImageMagick/ImageMagick/commits/HEAD.atom) (2026-11-14; maintenance)
 
 ## Image viewers
 
@@ -508,7 +708,7 @@ Windows image viewer with batch conversion, basic editing and optional format pl
 - **Limitations:** Free use is limited by the non-commercial terms; optional plugins have separate compatibility requirements.
 - **Maintenance:** unverified — Official documentation reviewed; a recent release or maintained-build assessment was not established.
 - [Official project](https://www.irfanview.com/) · [Official installation / downloads](https://www.irfanview.com/main_download_engl.htm)
-- **Sources:** [Official project documentation](https://www.irfanview.com/) (2026-11-14; identity, features, platforms, license); [Official installation and download information](https://www.irfanview.com/main_download_engl.htm) (2026-11-14; identity, downloads)
+- **Sources:** [Official project documentation](https://www.irfanview.com/) (2026-11-14; identity, features, platforms, license, pricing); [Official installation and download information](https://www.irfanview.com/main_download_engl.htm) (2026-11-14; identity, downloads); [Official pricing or distribution documentation](https://www.irfanview.com/main_support_engl.htm) (2026-11-14; pricing)
 ### nomacs
 
 Cross-platform image viewer with metadata display and synchronized viewing.
@@ -520,7 +720,7 @@ Cross-platform image viewer with metadata display and synchronized viewing.
 - **Limitations:** Supported formats and packaging vary by platform; verify RAW support for your files.
 - **Maintenance:** active — Official repository commit activity observed on 2026-11-09 (UTC). Activity is not a runtime or platform-compatibility test. ([evidence](https://github.com/nomacs/nomacs/commit/4c881488405b42a11aa122739b389939b05c3e16))
 - [Official project](https://nomacs.org/) · [Official installation / downloads](https://github.com/nomacs/nomacs/releases) · [Repository](https://github.com/nomacs/nomacs)
-- **Sources:** [Official project documentation](https://nomacs.org/) (2026-11-14; identity, features, license); [Official project README](https://raw.githubusercontent.com/nomacs/nomacs/HEAD/README.md) (2026-11-14; identity, features, license, platforms); [Upstream license terms](https://raw.githubusercontent.com/nomacs/nomacs/HEAD/LICENSE) (2026-11-14; license); [Official release listing](https://github.com/nomacs/nomacs/releases) (2026-11-14; identity, downloads); [Official repository activity feed](https://github.com/nomacs/nomacs/commits/HEAD.atom) (2026-11-14; maintenance)
+- **Sources:** [Official project documentation](https://nomacs.org/) (2026-11-14; identity, features, license, pricing); [Official project README](https://raw.githubusercontent.com/nomacs/nomacs/HEAD/README.md) (2026-11-14; identity, features, license, platforms); [Upstream license terms](https://raw.githubusercontent.com/nomacs/nomacs/HEAD/LICENSE) (2026-11-14; license); [Official release listing](https://github.com/nomacs/nomacs/releases) (2026-11-14; identity, downloads); [Official repository activity feed](https://github.com/nomacs/nomacs/commits/HEAD.atom) (2026-11-14; maintenance)
 ### qView
 
 Minimal image viewer centered on the image rather than editing controls.
@@ -546,6 +746,21 @@ Image browser, organizer and batch processor with broad format support.
 - [Official project](https://www.xnview.com/en/xnviewmp/) · [Official installation / downloads](https://www.xnview.com/en/xnviewmp/#downloads)
 - **Sources:** [Official project documentation](https://www.xnview.com/en/xnviewmp/) (2026-11-14; identity, features, platforms, license, pricing); [Official installation and download information](https://www.xnview.com/en/xnviewmp/#downloads) (2026-11-14; identity, downloads, platforms, license, pricing)
 
+## Live Coding Music
+
+### Sonic Pi
+
+Live-coding music environment that turns editable programs into synthesized and sampled sound.
+
+- **Platforms:** Windows, macOS, Linux, Web. **License:** MIT application source with GPL distribution obligations; web component and dependencies have separate terms. **Pricing model:** free.
+- **Pick for:** Choose it for learning programming through music or performing repeatable musical patterns with editable code.
+- **Compare when:** Timing, audio-device configuration and complex code affect live performance. Desktop and browser components have different license details.
+- **Strengths:** Choose it for learning programming through music or performing repeatable musical patterns with editable code.
+- **Limitations:** Timing, audio-device configuration and complex code affect live performance. Desktop and browser components have different license details.
+- **Maintenance:** active — The official release feed contains 'SuperSonic' with an updated timestamp of 2026-08-07T06:51:55Z. This is a maintenance signal, not an installation or stability test. ([evidence](https://github.com/sonic-pi-net/sonic-pi/releases.atom))
+- [Official project](https://sonic-pi.net/) · [Official installation / downloads](https://sonic-pi.net/) · [Repository](https://github.com/sonic-pi-net/sonic-pi)
+- **Sources:** [Official product documentation](https://sonic-pi.net/) (2026-11-14; downloads, features, identity, platforms, pricing); [Official upstream README](https://raw.githubusercontent.com/sonic-pi-net/sonic-pi/HEAD/README.md) (2026-11-14; features, identity); [Official upstream license text](https://raw.githubusercontent.com/sonic-pi-net/sonic-pi/HEAD/LICENSE.md) (2026-11-14; license); [Official upstream release activity feed](https://github.com/sonic-pi-net/sonic-pi/releases.atom) (2026-11-14; maintenance)
+
 ## 3D materials, painting and baking
 
 ### Adobe Substance 3D Painter
@@ -553,6 +768,7 @@ Image browser, organizer and batch processor with broad format support.
 Non-destructive 3D painting, UDIMs, smart masks, custom export presets and Python scripting
 
 - **Platforms:** Windows, macOS, Linux. **License:** Proprietary; commercial subscription and education noncommercial terms differ. **Pricing model:** mixed.
+- **Compatibility details:** Adobe's requirements distinguish Linux Enterprise and Steam distribution. Paid subscriptions and the Steam perpetual edition have different update, asset and service entitlements; verify the appropriate edition before purchase.
 - **Pick for:** Non-destructive 3D painting, UDIMs, smart masks, custom export presets and Python scripting
 - **Compare when:** Bake-to-engine normal/color convention tests and stroke/project recovery
 - **Strengths:** Non-destructive 3D painting, UDIMs, smart masks, custom export presets and Python scripting
@@ -565,6 +781,7 @@ Non-destructive 3D painting, UDIMs, smart masks, custom export presets and Pytho
 GPU PBR painting, layers, nodes and baking
 
 - **Platforms:** Windows, macOS, Linux. **License:** zlib/libpng core; assets and dependencies separate. **Pricing model:** mixed.
+- **Compatibility details:** Official desktop binaries are paid; source code is available to build. Current macOS packages target Apple Silicon; Windows and Linux packages are x64.
 - **Pick for:** GPU PBR painting, layers, nodes and baking
 - **Compare when:** Material-channel roundtrip, GPU memory, cancellation and source preservation
 - **Strengths:** GPU PBR painting, layers, nodes and baking
@@ -577,6 +794,7 @@ GPU PBR painting, layers, nodes and baking
 Texture baking, painting and ray-traced/raster rendering
 
 - **Platforms:** Windows, macOS. **License:** Proprietary commercial product. **Pricing model:** mixed.
+- **Compatibility details:** Official installers are supplied through a Marmoset account. Perpetual and subscription licenses are offered; the free trial lasts 30 days. Check GPU requirements for the selected version.
 - **Pick for:** Texture baking, painting and ray-traced/raster rendering
 - **Compare when:** Normal-map tangent agreement, cage artifacts and target-engine rendering comparison
 - **Strengths:** Texture baking, painting and ray-traced/raster rendering
@@ -589,6 +807,7 @@ Texture baking, painting and ray-traced/raster rendering
 Godot-based procedural texture graph, PBR export and experimental painting
 
 - **Platforms:** Windows, macOS, Linux. **License:** MIT by default unless files specify otherwise. **Pricing model:** free.
+- **Compatibility details:** The developer's official itch.io download lists all three desktop systems with name-your-own-price distribution.
 - **Pick for:** Godot-based procedural texture graph, PBR export and experimental painting
 - **Compare when:** PBR channel/normal conventions, graph determinism, texture seams and export tests
 - **Strengths:** Godot-based procedural texture graph, PBR export and experimental painting
@@ -640,7 +859,7 @@ Utility that reports technical metadata for audio and video files.
 - **Limitations:** It reports media properties rather than repairing or transcoding the media.
 - **Maintenance:** active — Official repository commit activity observed on 2026-11-14 (UTC). Activity is not a runtime or platform-compatibility test. ([evidence](https://github.com/MediaArea/MediaInfo/commit/447b20d44dd9d404800667f1c0015841c752d134))
 - [Official project](https://mediaarea.net/en/MediaInfo) · [Official installation / downloads](https://mediaarea.net/en/MediaInfo/Download) · [Repository](https://github.com/MediaArea/MediaInfo)
-- **Sources:** [Official project documentation](https://mediaarea.net/en/MediaInfo) (2026-11-14; identity, features, platforms, license); [Official project README](https://raw.githubusercontent.com/MediaArea/MediaInfo/HEAD/README.md) (2026-11-14; identity, features, license, platforms); [Upstream license terms](https://raw.githubusercontent.com/MediaArea/MediaInfo/HEAD/LICENSE) (2026-11-14; license); [Official installation and download information](https://mediaarea.net/en/MediaInfo/Download) (2026-11-14; identity, downloads); [Official repository activity feed](https://github.com/MediaArea/MediaInfo/commits/HEAD.atom) (2026-11-14; maintenance)
+- **Sources:** [Official project documentation](https://mediaarea.net/en/MediaInfo) (2026-11-14; identity, features, platforms, license); [Official project README](https://raw.githubusercontent.com/MediaArea/MediaInfo/HEAD/README.md) (2026-11-14; identity, features, license, platforms, pricing); [Upstream license terms](https://raw.githubusercontent.com/MediaArea/MediaInfo/HEAD/LICENSE) (2026-11-14; license); [Official installation and download information](https://mediaarea.net/en/MediaInfo/Download) (2026-11-14; identity, downloads); [Official repository activity feed](https://github.com/MediaArea/MediaInfo/commits/HEAD.atom) (2026-11-14; maintenance)
 
 ## Media players
 
@@ -660,7 +879,7 @@ Windows media player with a traditional desktop interface and integrated playbac
 
 Configurable media player with command-line control and a scriptable playback engine.
 
-- **Platforms:** Windows, macOS, Linux. **License:** GPL-2.0-or-later; optional LGPL-2.1-or-later build. **Pricing model:** free.
+- **Platforms:** Windows, macOS, Linux. **License:** GPL-2.0-or-later; optional LGPL-2.1-or-later build. **Pricing model:** unknown.
 - **Pick for:** Useful for users who want precise configuration or to embed playback in a workflow.
 - **Compare when:** Its minimal interface and configuration files are less approachable than a conventional media-library application.
 - **Strengths:** Useful for users who want precise configuration or to embed playback in a workflow.
@@ -702,7 +921,7 @@ Self-hosted media library server with clients for streaming personal collections
 
 Command-line multimedia toolkit for encoding, filtering, inspection and stream processing.
 
-- **Platforms:** Windows, macOS, Linux. **License:** LGPL-2.1-or-later by default; optional GPL components. **Pricing model:** free.
+- **Platforms:** Windows, macOS, Linux. **License:** LGPL-2.1-or-later by default; optional GPL components. **Pricing model:** unknown.
 - **Pick for:** Enables reproducible and automatable media pipelines.
 - **Compare when:** Licensing and codec availability depend on build options; hardware support varies by build and device.
 - **Strengths:** Enables reproducible and automatable media pipelines.
@@ -715,6 +934,7 @@ Command-line multimedia toolkit for encoding, filtering, inspection and stream p
 Queued video transcoding; AV1/H.264/H.265; optional hardware encoding
 
 - **Platforms:** Windows, macOS, Linux. **License:** Mostly GPLv2; BSD portions and mixed licensed dependencies. **Pricing model:** free.
+- **Compatibility details:** The official download page offers macOS, Windows x64/ARM64 and Linux Flatpak packages, without an account requirement.
 - **Pick for:** Queued video transcoding; AV1/H.264/H.265; optional hardware encoding
 - **Compare when:** Same-source quality/size/time comparison with chosen encoder
 - **Strengths:** Queued video transcoding; AV1/H.264/H.265; optional hardware encoding
@@ -742,6 +962,7 @@ Desktop interface for FFmpeg-based video, audio and image conversion workflows.
 Interactive field-aligned mesh generation and retopology
 
 - **Platforms:** Windows, macOS, Linux. **License:** BSD3-style plus contributed-enhancements grant; preserve full license. **Pricing model:** unknown.
+- **Compatibility details:** The project README links precompiled Windows, macOS and Linux binaries plus a separate dataset archive.
 - **Pick for:** Interactive field-aligned mesh generation and retopology
 - **Compare when:** Compare topology and feature preservation against source mesh
 - **Strengths:** Interactive field-aligned mesh generation and retopology
@@ -754,6 +975,7 @@ Interactive field-aligned mesh generation and retopology
 Mesh cleaning, reconstruction, texture and format conversion
 
 - **Platforms:** Windows, macOS, Linux. **License:** GPL3. **Pricing model:** unknown.
+- **Compatibility details:** MeshLab's README explicitly documents Windows, macOS and Linux. This overlay covers the desktop MeshLab component of the preserved MeshLab / PyMeshLab record.
 - **Pick for:** Mesh cleaning, reconstruction, texture and format conversion
 - **Compare when:** Measure topology, units, UVs, normals and metadata after synthetic mesh repair
 - **Strengths:** Mesh cleaning, reconstruction, texture and format conversion
@@ -802,7 +1024,7 @@ Configurable desktop audio player with component-based features and music-librar
 - **Limitations:** Windows and macOS editions differ; plugins and layouts are not universally portable between them.
 - **Maintenance:** unverified — Official documentation reviewed; a recent release or maintained-build assessment was not established.
 - [Official project](https://www.foobar2000.org/) · [Official installation / downloads](https://www.foobar2000.org/download)
-- **Sources:** [Official project documentation](https://www.foobar2000.org/) (2026-11-14; identity, features, platforms, license); [Official installation and download information](https://www.foobar2000.org/download) (2026-11-14; identity, downloads, platforms)
+- **Sources:** [Official project documentation](https://www.foobar2000.org/) (2026-11-14; identity, features, platforms, license, pricing); [Official installation and download information](https://www.foobar2000.org/download) (2026-11-14; identity, downloads, platforms)
 ### MusicBee
 
 Windows music player and library manager with tagging, playlists and customization.
@@ -814,7 +1036,7 @@ Windows music player and library manager with tagging, playlists and customizati
 - **Limitations:** Windows-focused; device synchronization and plugins should be tested with your equipment.
 - **Maintenance:** unverified — Official documentation reviewed; a recent release or maintained-build assessment was not established.
 - [Official project](https://getmusicbee.com/) · [Official installation / downloads](https://getmusicbee.com/downloads/)
-- **Sources:** [Official project documentation](https://getmusicbee.com/) (2026-11-14; identity, features, platforms); [Official installation and download information](https://getmusicbee.com/downloads/) (2026-11-14; identity, downloads, platforms)
+- **Sources:** [Official project documentation](https://getmusicbee.com/) (2026-11-14; identity, features, platforms, pricing); [Official installation and download information](https://getmusicbee.com/downloads/) (2026-11-14; identity, downloads, platforms)
 ### Strawberry Music Player
 
 Music player and collection organizer aimed at local music libraries.
@@ -889,6 +1111,7 @@ Panorama stitching workflow for combining overlapping photographs into mosaics.
 Local photo/video catalog, EXIF/IPTC/XMP search, batch processing and RAW support
 
 - **Platforms:** Windows, macOS, Linux. **License:** Open source; exact code SPDX not inspected here. **Pricing model:** free.
+- **Compatibility details:** Official packages include Windows, Linux AppImage and separate Apple Silicon/Intel macOS builds.
 - **Pick for:** Local photo/video catalog, EXIF/IPTC/XMP search, batch processing and RAW support
 - **Compare when:** Metadata preservation, duplicate-safe import and large-library search tests
 - **Strengths:** Local photo/video catalog, EXIF/IPTC/XMP search, batch processing and RAW support
@@ -904,6 +1127,7 @@ Local photo/video catalog, EXIF/IPTC/XMP search, batch processing and RAW suppor
 Node-based photogrammetry and reconstruction workflows
 
 - **Platforms:** Windows, Linux. **License:** MPL-2.0 classification; review component licenses. **Pricing model:** unknown.
+- **Compatibility details:** The current official prebuilt downloads are Windows and Linux. Pipeline/plugin hardware requirements are separate from the framework's availability.
 - **Pick for:** Node-based photogrammetry and reconstruction workflows
 - **Compare when:** Known-scale image set: reconstruction completeness, accuracy, memory and textures
 - **Strengths:** Node-based photogrammetry and reconstruction workflows
@@ -931,6 +1155,7 @@ Pixel-art and sprite-animation editor with a frame-and-layer workflow.
 Sprite animation, onion skins, layers and tiled drawing
 
 - **Platforms:** Windows, macOS, Linux. **License:** GPLv2; distinct from current proprietary Aseprite. **Pricing model:** free.
+- **Compatibility details:** The project README explicitly lists Windows, macOS and Linux release downloads.
 - **Pick for:** Sprite animation, onion skins, layers and tiled drawing
 - **Compare when:** Palette/transparency, sprite-sheet framing and animation timing tests
 - **Strengths:** Sprite animation, onion skins, layers and tiled drawing
@@ -949,15 +1174,29 @@ Open-source pixel-art workspace for sprites, tiles and frame animation.
 - **Limitations:** Check engine export conventions and tablet behavior with your project before standardizing on it.
 - **Maintenance:** active — Official repository commit activity observed on 2026-11-13 (UTC). Activity is not a runtime or platform-compatibility test. ([evidence](https://github.com/Orama-Interactive/Pixelorama/commit/6e76284b50d3e2948a423dcb37a96e3897fef3f5))
 - [Official project](https://orama-interactive.itch.io/pixelorama) · [Official installation / downloads](https://orama-interactive.itch.io/pixelorama) · [Repository](https://github.com/Orama-Interactive/Pixelorama)
-- **Sources:** [Official project documentation](https://orama-interactive.itch.io/pixelorama) (2026-11-14; identity, features, platforms, license, downloads); [Official project README](https://raw.githubusercontent.com/Orama-Interactive/Pixelorama/HEAD/README.md) (2026-11-14; identity, features, license, platforms); [Upstream license terms](https://raw.githubusercontent.com/Orama-Interactive/Pixelorama/HEAD/LICENSE) (2026-11-14; license); [Official repository activity feed](https://github.com/Orama-Interactive/Pixelorama/commits/HEAD.atom) (2026-11-14; maintenance)
+- **Sources:** [Official project documentation](https://orama-interactive.itch.io/pixelorama) (2026-11-14; identity, features, platforms, license, downloads, pricing); [Official project README](https://raw.githubusercontent.com/Orama-Interactive/Pixelorama/HEAD/README.md) (2026-11-14; identity, features, license, platforms); [Upstream license terms](https://raw.githubusercontent.com/Orama-Interactive/Pixelorama/HEAD/LICENSE) (2026-11-14; license); [Official repository activity feed](https://github.com/Orama-Interactive/Pixelorama/commits/HEAD.atom) (2026-11-14; maintenance)
 
 ## Raster image editing
 
+### Adobe Photoshop
+
+Layer-based photo editing and compositing for retouching, image construction and professional raster artwork.
+
+- **Platforms:** Windows, macOS. **License:** Adobe proprietary software terms; paid subscription. **Pricing model:** subscription.
+- **Compatibility details:** This entry covers the desktop application. Check the linked requirements for the current release, hardware acceleration and activation requirements; web and mobile editions have different capabilities.
+- **Pick for:** A strong candidate when editable Photoshop documents and detailed layered compositing are part of the delivery workflow.
+- **Compare when:** An ongoing subscription is required; compare the actual layer and export needs with Affinity or GIMP.
+- **Strengths:** A strong candidate when editable Photoshop documents and detailed layered compositing are part of the delivery workflow.; Combines photographic corrections and constructed artwork in one editor.
+- **Limitations:** An ongoing subscription is required; compare the actual layer and export needs with Affinity or GIMP.; Generative services have separate usage allowances; they do not make the desktop editor an offline equivalent of every cloud feature.
+- **Maintenance:** unverified — Current product and distribution documentation reviewed; a dated release history was not independently established for this entry.
+- [Official project](https://www.adobe.com/products/photoshop.html) · [Official installation / downloads](https://www.adobe.com/products/photoshop.html)
+- **Sources:** [Official product features and trial route](https://www.adobe.com/products/photoshop.html) (2026-11-14; identity, features, downloads); [Official Adobe plans](https://www.adobe.com/creativecloud/plans.html) (2026-11-14; pricing); [Official Creative Cloud platform requirements](https://helpx.adobe.com/download-install/apps/system-requirements/creative-cloud-requirements.html) (2026-11-14; platforms); [Official Adobe software licensing terms](https://www.adobe.com/legal/licenses-terms.html) (2026-11-14; license)
 ### GIMP
 
 Layered raster editing, color management and batch export
 
 - **Platforms:** Windows, macOS, Linux. **License:** GPLv3-or-later. **Pricing model:** free.
+- **Compatibility details:** Use the official downloads page to select the supported operating system and processor architecture.
 - **Pick for:** Layered raster editing, color management and batch export
 - **Compare when:** Layered image and ICC profile roundtrip with source unchanged
 - **Strengths:** Layered raster editing, color management and batch export
@@ -976,10 +1215,35 @@ Drawing and image-editing application with layers and approachable desktop tools
 - **Limitations:** Advanced production workflows and specialist color needs should be evaluated separately.
 - **Maintenance:** active — Official repository commit activity observed on 2026-11-08 (UTC). Activity is not a runtime or platform-compatibility test. ([evidence](https://github.com/PintaProject/Pinta/commit/b7f527a3d5f716b4f81903c39d5ea02579a5bd3b))
 - [Official project](https://www.pinta-project.com/) · [Official installation / downloads](https://www.pinta-project.com/releases/) · [Repository](https://github.com/PintaProject/Pinta)
-- **Sources:** [Official project documentation](https://www.pinta-project.com/) (2026-11-14; identity, features, platforms, license); [Official project README](https://raw.githubusercontent.com/PintaProject/Pinta/HEAD/readme.md) (2026-11-14; identity, features, license, platforms); [Official project documentation](https://www.pinta-project.com/releases/) (2026-11-14; identity, features, platforms, downloads); [Official repository activity feed](https://github.com/PintaProject/Pinta/commits/HEAD.atom) (2026-11-14; maintenance)
+- **Sources:** [Official project documentation](https://www.pinta-project.com/) (2026-11-14; identity, features, platforms, license, pricing); [Official project README](https://raw.githubusercontent.com/PintaProject/Pinta/HEAD/readme.md) (2026-11-14; identity, features, license, platforms); [Official project documentation](https://www.pinta-project.com/releases/) (2026-11-14; identity, features, platforms, downloads); [Official repository activity feed](https://github.com/PintaProject/Pinta/commits/HEAD.atom) (2026-11-14; maintenance)
 
 ## RAW photo development
 
+### Adobe Lightroom Classic
+
+Desktop photo catalog and RAW development application centered on locally managed image libraries.
+
+- **Platforms:** Windows, macOS. **License:** Adobe proprietary software terms; paid subscription. **Pricing model:** subscription.
+- **Compatibility details:** This entry covers the desktop application. Check the linked requirements for the current release, hardware acceleration and activation requirements; web and mobile editions have different capabilities.
+- **Pick for:** Choose it for a large local photo library that needs catalog organization and repeatable RAW edits.
+- **Compare when:** Subscription is required; compare darktable or Capture One against the camera files and catalog workflow you actually use.
+- **Strengths:** Choose it for a large local photo library that needs catalog organization and repeatable RAW edits.; Combines selection, development and output within one photographic workflow.
+- **Limitations:** Subscription is required; compare darktable or Capture One against the camera files and catalog workflow you actually use.; Classic and the cloud-centered Lightroom application have different storage and synchronization models.
+- **Maintenance:** unverified — Current product and distribution documentation reviewed; a dated release history was not independently established for this entry.
+- [Official project](https://www.adobe.com/products/photoshop-lightroom-classic.html) · [Official installation / downloads](https://www.adobe.com/products/photoshop-lightroom-classic.html)
+- **Sources:** [Official product features and trial route](https://www.adobe.com/products/photoshop-lightroom-classic.html) (2026-11-14; identity, features, downloads); [Official Adobe plans](https://www.adobe.com/creativecloud/plans.html) (2026-11-14; pricing); [Official Creative Cloud platform requirements](https://helpx.adobe.com/download-install/apps/system-requirements/creative-cloud-requirements.html) (2026-11-14; platforms); [Official Adobe software licensing terms](https://www.adobe.com/legal/licenses-terms.html) (2026-11-14; license)
+### Capture One Pro
+
+RAW photo development and tethered capture software for controlled photographic workflows.
+
+- **Platforms:** Windows, macOS. **License:** Capture One proprietary EULA; subscription or perpetual Pro license. **Pricing model:** mixed.
+- **Pick for:** Choose it when tethered capture and controlled color editing are central to a photo session.
+- **Compare when:** Camera support and tethering features vary; verify the exact body and connection workflow.
+- **Strengths:** Choose it when tethered capture and controlled color editing are central to a photo session.; Subscription and perpetual Pro purchase routes allow different upgrade commitments.
+- **Limitations:** Camera support and tethering features vary; verify the exact body and connection workflow.; Perpetual-license update rights differ from a subscription, and some studio collaboration features belong to other plans.
+- **Maintenance:** unverified — Current product and distribution documentation reviewed; a dated release history was not independently established for this entry.
+- [Official project](https://www.captureone.com/en/products/capture-one-pro) · [Official installation / downloads](https://www.captureone.com/en/pricing/capture-one-pro)
+- **Sources:** [Official Capture One Pro overview](https://www.captureone.com/en/products/capture-one-pro) (2026-11-14; identity, features); [Official Pro plans and trial route](https://www.captureone.com/en/pricing/capture-one-pro) (2026-11-14; pricing, downloads); [Official system requirements](https://support.captureone.com/hc/en-us/articles/360002466277-Capture-One-System-Requirements-and-OS-compatibility) (2026-11-14; platforms); [Official product licensing terms](https://www.captureone.com/en/terms-conditions) (2026-11-14; license)
 ### darktable
 
 Non-destructive RAW development and photo catalog management for photographers.
@@ -991,12 +1255,25 @@ Non-destructive RAW development and photo catalog management for photographers.
 - **Limitations:** Current macOS support targets Apple Silicon; camera-specific RAW behavior and the processing pipeline need evaluation.
 - **Maintenance:** active — Official repository commit activity observed on 2026-11-14 (UTC). Activity is not a runtime or platform-compatibility test. ([evidence](https://github.com/darktable-org/darktable/commit/da609a5b641c4af4dca52277e14dd62069d89b44))
 - [Official project](https://www.darktable.org/) · [Official installation / downloads](https://www.darktable.org/install/) · [Repository](https://github.com/darktable-org/darktable)
-- **Sources:** [Official project documentation](https://www.darktable.org/) (2026-11-14; identity, features, license); [Official project README](https://raw.githubusercontent.com/darktable-org/darktable/HEAD/README.md) (2026-11-14; identity, features, license, platforms); [Upstream license terms](https://raw.githubusercontent.com/darktable-org/darktable/HEAD/LICENSE) (2026-11-14; license); [Official installation and download information](https://www.darktable.org/install/) (2026-11-14; identity, downloads, platforms, license); [Official repository activity feed](https://github.com/darktable-org/darktable/commits/HEAD.atom) (2026-11-14; maintenance)
+- **Sources:** [Official project documentation](https://www.darktable.org/) (2026-11-14; identity, features, license); [Official project README](https://raw.githubusercontent.com/darktable-org/darktable/HEAD/README.md) (2026-11-14; identity, features, license, platforms); [Upstream license terms](https://raw.githubusercontent.com/darktable-org/darktable/HEAD/LICENSE) (2026-11-14; license); [Official installation and download information](https://www.darktable.org/install/) (2026-11-14; identity, downloads, platforms, license); [Official repository activity feed](https://github.com/darktable-org/darktable/commits/HEAD.atom) (2026-11-14; maintenance); [Project-linked Linux distribution pricing](https://flathub.org/apps/details/org.darktable.Darktable) (2026-11-14; pricing)
+### DxO PhotoLab
+
+RAW development software focused on optical corrections, photographic adjustments and noise reduction.
+
+- **Platforms:** Windows, macOS. **License:** DxO proprietary personal software license; perpetual purchase. **Pricing model:** paid.
+- **Pick for:** Choose it when supported camera/lens corrections and a perpetual photo-editor license fit the workflow.
+- **Compare when:** Check support for the exact camera, lens and RAW format; GPU requirements vary by processing feature.
+- **Strengths:** Choose it when supported camera/lens corrections and a perpetual photo-editor license fit the workflow.; A useful candidate for testing difficult RAW images against your current converter.
+- **Limitations:** Check support for the exact camera, lens and RAW format; GPU requirements vary by processing feature.; Edition and separately licensed companion products affect available features; upgrades are separate from keeping a purchased version.
+- **Maintenance:** unverified — Current product and distribution documentation reviewed; a dated release history was not independently established for this entry.
+- [Official project](https://www.dxo.com/en/dxo-photolab/) · [Official installation / downloads](https://www.dxo.com/en/dxo-photolab/)
+- **Sources:** [Official PhotoLab product and purchase route](https://www.dxo.com/en/dxo-photolab/) (2026-11-14; identity, features, pricing, downloads); [Official PhotoLab system requirements](https://support.dxo.com/hc/en-us/articles/4406558299537-System-requirements-for-DxO-PhotoLab) (2026-11-14; platforms); [Official personal licensing explanation](https://support.dxo.com/hc/en-us/articles/6818700166301-How-many-computers-can-I-install-DxO-PhotoLab-on-Can-I-use-it-on-Mac-and-PC-with-the-same-license) (2026-11-14; license); [Official trial and edition differences](https://support.dxo.com/hc/en-us/articles/6757612644637-What-is-the-difference-between-the-demo-free-trial-version-and-the-paid-version-of-DxO-PhotoLab) (2026-11-14; pricing, features)
 ### RawTherapee
 
 Non-destructive floating-point RAW processing, demosaicing and pixel-shift workflows
 
 - **Platforms:** Windows, macOS, Linux. **License:** GPLv3. **Pricing model:** free.
+- **Compatibility details:** Official releases provide Windows, Linux and macOS builds; choose the appropriate processor architecture.
 - **Pick for:** Non-destructive floating-point RAW processing, demosaicing and pixel-shift workflows
 - **Compare when:** Camera fixture color, highlight recovery and batch export comparison
 - **Strengths:** Non-destructive floating-point RAW processing, demosaicing and pixel-shift workflows
@@ -1012,6 +1289,7 @@ Non-destructive floating-point RAW processing, demosaicing and pixel-shift workf
 Reference boards, image arrangement, annotations and always-on-top viewer
 
 - **Platforms:** Windows, macOS, Linux. **License:** Proprietary; inspect license agreement for chosen use. **Pricing model:** mixed.
+- **Compatibility details:** Personal-use contributions and paid commercial licenses have different terms. The official download page lists Windows, macOS and Linux packages.
 - **Pick for:** Reference boards, image arrangement, annotations and always-on-top viewer
 - **Compare when:** Large-board memory, image quality, save/reopen and portable links
 - **Strengths:** Reference boards, image arrangement, annotations and always-on-top viewer
@@ -1019,6 +1297,35 @@ Reference boards, image arrangement, annotations and always-on-top viewer
 - **Maintenance:** unverified — Retained research snapshot; current release activity was not established by this import.
 - [Official project](https://www.pureref.com/) · [Official installation / downloads](https://www.pureref.com/download.php)
 - **Sources:** [Preserved original research source](https://www.pureref.com/) (2026-11-14; identity, features); [Official platform packages and license options](https://www.pureref.com/download.php) (2026-11-14; downloads, identity, platforms, pricing); [Official personal and commercial license terms](https://www.pureref.com/license.php) (2026-11-14; identity, license, pricing)
+
+## Screen Recording
+
+### ScreenToGif
+
+Windows recorder and frame editor for screen, webcam and sketch-board animations.
+
+- **Platforms:** Windows. **License:** Microsoft Public License (MS-PL). **Pricing model:** unknown.
+- **Compatibility details:** Windows desktop application. The current README requires .NET 9 Desktop Runtime or newer unless the chosen package bundles it.
+- **Pick for:** Choose it for short instructional animations that need editing before export.
+- **Compare when:** It is Windows-specific and requires a compatible .NET runtime. Animated GIF output can become large and has limited colors.
+- **Strengths:** Choose it for short instructional animations that need editing before export.
+- **Limitations:** It is Windows-specific and requires a compatible .NET runtime. Animated GIF output can become large and has limited colors.
+- **Maintenance:** active — The official release feed contains 'ScreenToGif 2.43.2' with an updated timestamp of 2026-07-29T17:14:39Z. This is a maintenance signal, not an installation or stability test. ([evidence](https://github.com/NickeManarin/ScreenToGif/releases.atom))
+- [Official project](https://github.com/NickeManarin/ScreenToGif) · [Official installation / downloads](https://github.com/NickeManarin/ScreenToGif/releases) · [Repository](https://github.com/NickeManarin/ScreenToGif)
+- **Sources:** [Official product documentation](https://github.com/NickeManarin/ScreenToGif) (2026-11-14; features, identity); [Official upstream README](https://raw.githubusercontent.com/NickeManarin/ScreenToGif/HEAD/README.md) (2026-11-14; downloads, features, identity, platforms); [Official upstream license text](https://raw.githubusercontent.com/NickeManarin/ScreenToGif/HEAD/LICENSE.txt) (2026-11-14; license); [Official download and distribution documentation](https://github.com/NickeManarin/ScreenToGif/releases) (2026-11-14; downloads); [Official upstream release activity feed](https://github.com/NickeManarin/ScreenToGif/releases.atom) (2026-11-14; maintenance)
+### vokoscreenNG
+
+Desktop screencasting application for Windows and Linux recording workflows.
+
+- **Platforms:** Windows, Linux. **License:** GPL-2.0. **Pricing model:** free.
+- **Compatibility details:** Check the documented Windows, Linux X11 and Linux Wayland feature differences.
+- **Pick for:** Choose it for a focused screencast interface with documented Windows, X11 and Wayland paths.
+- **Compare when:** Capabilities and permissions differ between Windows, X11 and Wayland. Verify the appropriate capture backend and audio devices.
+- **Strengths:** Choose it for a focused screencast interface with documented Windows, X11 and Wayland paths.
+- **Limitations:** Capabilities and permissions differ between Windows, X11 and Wayland. Verify the appropriate capture backend and audio devices.
+- **Maintenance:** active — The official release feed contains '4.11.1' with an updated timestamp of 2026-10-31T13:48:29Z. This is a maintenance signal, not an installation or stability test. ([evidence](https://github.com/vkohaupt/vokoscreenNG/releases.atom))
+- [Official project](https://linuxecke.volkoh.de/vokoscreen/vokoscreen.html) · [Official installation / downloads](https://linuxecke.volkoh.de/vokoscreen/vokoscreen.html) · [Repository](https://github.com/vkohaupt/vokoscreenNG)
+- **Sources:** [Official product documentation](https://linuxecke.volkoh.de/vokoscreen/vokoscreen.html) (2026-11-14; downloads, features, identity, platforms, pricing); [Official upstream license text](https://raw.githubusercontent.com/vkohaupt/vokoscreenNG/HEAD/COPYING) (2026-11-14; license); [Official upstream release activity feed](https://github.com/vkohaupt/vokoscreenNG/releases.atom) (2026-11-14; maintenance)
 
 ## Software synthesizers
 
@@ -1060,7 +1367,7 @@ Subtitle editor focused on timing and styled typesetting against video.
 - **Limitations:** Complex styled subtitles may render differently in players with incomplete ASS support.
 - **Maintenance:** active — Official repository commit activity observed on 2026-11-12 (UTC). Activity is not a runtime or platform-compatibility test. ([evidence](https://github.com/TypesettingTools/Aegisub/commit/f90e5d4f9a3ab7af397c1920ed1d37a6d6d0e008))
 - [Official project](https://aegisub.org/) · [Official installation / downloads](https://aegisub.org/downloads/) · [Repository](https://github.com/TypesettingTools/Aegisub)
-- **Sources:** [Official project documentation](https://aegisub.org/) (2026-11-14; identity, features, license); [Official project README](https://raw.githubusercontent.com/TypesettingTools/Aegisub/HEAD/README.md) (2026-11-14; identity, features, license, platforms); [Official installation and download information](https://aegisub.org/downloads/) (2026-11-14; identity, downloads, platforms); [Official repository activity feed](https://github.com/TypesettingTools/Aegisub/commits/HEAD.atom) (2026-11-14; maintenance)
+- **Sources:** [Official project documentation](https://aegisub.org/) (2026-11-14; identity, features, license, pricing); [Official project README](https://raw.githubusercontent.com/TypesettingTools/Aegisub/HEAD/README.md) (2026-11-14; identity, features, license, platforms); [Official installation and download information](https://aegisub.org/downloads/) (2026-11-14; identity, downloads, platforms); [Official repository activity feed](https://github.com/TypesettingTools/Aegisub/commits/HEAD.atom) (2026-11-14; maintenance)
 ### Subtitle Edit
 
 Subtitle creation, timing and conversion editor with current cross-platform builds.
@@ -1072,7 +1379,7 @@ Subtitle creation, timing and conversion editor with current cross-platform buil
 - **Limitations:** Runtime and media dependencies vary by operating system; speech-recognition features may need additional components.
 - **Maintenance:** active — Official repository commit activity observed on 2026-11-14 (UTC). Activity is not a runtime or platform-compatibility test. ([evidence](https://github.com/SubtitleEdit/subtitleedit/commit/504b2d2730bb5789fdab09a3aed780d911f3a50c))
 - [Official project](https://www.nikse.dk/subtitleedit) · [Official installation / downloads](https://github.com/SubtitleEdit/subtitleedit/releases) · [Repository](https://github.com/SubtitleEdit/subtitleedit)
-- **Sources:** [Official project README](https://raw.githubusercontent.com/SubtitleEdit/subtitleedit/HEAD/README.md) (2026-11-14; identity, features, platforms); [Upstream license terms](https://raw.githubusercontent.com/SubtitleEdit/subtitleedit/HEAD/LICENSE) (2026-11-14; license); [Official release listing](https://github.com/SubtitleEdit/subtitleedit/releases) (2026-11-14; identity, downloads); [Official repository activity feed](https://github.com/SubtitleEdit/subtitleedit/commits/HEAD.atom) (2026-11-14; maintenance)
+- **Sources:** [Official project README](https://raw.githubusercontent.com/SubtitleEdit/subtitleedit/HEAD/README.md) (2026-11-14; identity, features, platforms); [Upstream license terms](https://raw.githubusercontent.com/SubtitleEdit/subtitleedit/HEAD/LICENSE) (2026-11-14; license); [Official release listing](https://github.com/SubtitleEdit/subtitleedit/releases) (2026-11-14; identity, downloads); [Official repository activity feed](https://github.com/SubtitleEdit/subtitleedit/commits/HEAD.atom) (2026-11-14; maintenance); [Official pricing or distribution documentation](https://raw.githubusercontent.com/SubtitleEdit/subtitleedit/HEAD/docs/faq.md) (2026-11-14; pricing)
 
 ## Vector animation
 
@@ -1105,6 +1412,7 @@ Vector animation editor suited to motion graphics and animated web assets.
 Vector tweening, bitmap cutout bones and linked parameters
 
 - **Platforms:** Windows, macOS, Linux. **License:** GPLv3. **Pricing model:** free.
+- **Compatibility details:** The publisher explicitly offers a free download; the optional contribution is not mandatory.
 - **Pick for:** Vector tweening, bitmap cutout bones and linked parameters
 - **Compare when:** Animation timing, interpolation, render and project reopen tests
 - **Strengths:** Vector tweening, bitmap cutout bones and linked parameters
@@ -1115,6 +1423,19 @@ Vector tweening, bitmap cutout bones and linked parameters
 
 ## Vector graphics
 
+### Adobe Illustrator
+
+Vector illustration and graphic design software for scalable artwork, logos and editable typography.
+
+- **Platforms:** Windows, macOS. **License:** Adobe proprietary software terms; paid subscription. **Pricing model:** subscription.
+- **Compatibility details:** This entry covers the desktop application. Check the linked requirements for the current release, hardware acceleration and activation requirements; web and mobile editions have different capabilities.
+- **Pick for:** Choose it when collaborators require native Illustrator artwork and its vector editing workflow.
+- **Compare when:** Subscription cost may be unnecessary for occasional SVG and logo work; compare Inkscape and Affinity.
+- **Strengths:** Choose it when collaborators require native Illustrator artwork and its vector editing workflow.; Artboards suit producing related design variations in one document.
+- **Limitations:** Subscription cost may be unnecessary for occasional SVG and logo work; compare Inkscape and Affinity.; Raster retouching and complex multipage publishing are separate workflows.
+- **Maintenance:** unverified — Current product and distribution documentation reviewed; a dated release history was not independently established for this entry.
+- [Official project](https://www.adobe.com/products/illustrator.html) · [Official installation / downloads](https://www.adobe.com/products/illustrator.html)
+- **Sources:** [Official product features and trial route](https://www.adobe.com/products/illustrator.html) (2026-11-14; identity, features, downloads); [Official Adobe plans](https://www.adobe.com/creativecloud/plans.html) (2026-11-14; pricing); [Official Creative Cloud platform requirements](https://helpx.adobe.com/download-install/apps/system-requirements/creative-cloud-requirements.html) (2026-11-14; platforms); [Official Adobe software licensing terms](https://www.adobe.com/legal/licenses-terms.html) (2026-11-14; license)
 ### Inkscape
 
 SVG illustration editor for icons, diagrams, logos and scalable artwork.
@@ -1130,11 +1451,25 @@ SVG illustration editor for icons, diagrams, logos and scalable artwork.
 
 ## Video editing
 
+### Adobe Premiere
+
+Timeline video editor for assembling, refining and delivering audiovisual projects.
+
+- **Platforms:** Windows, macOS. **License:** Adobe proprietary software terms; paid subscription. **Pricing model:** subscription.
+- **Compatibility details:** This entry covers the desktop application. Check the linked requirements for the current release, hardware acceleration and activation requirements; web and mobile editions have different capabilities.
+- **Pick for:** Choose it when a production already exchanges Premiere projects and uses Adobe post-production tools.
+- **Compare when:** Subscription and suitable CPU, GPU and storage resources are required; compare DaVinci Resolve and Kdenlive using representative footage.
+- **Strengths:** Choose it when a production already exchanges Premiere projects and uses Adobe post-production tools.; A single editing timeline covers assembly through delivery.
+- **Limitations:** Subscription and suitable CPU, GPU and storage resources are required; compare DaVinci Resolve and Kdenlive using representative footage.; After Effects-style motion graphics and compositing remain a separate specialist workflow.
+- **Maintenance:** unverified — Current product and distribution documentation reviewed; a dated release history was not independently established for this entry.
+- [Official project](https://www.adobe.com/products/premiere.html) · [Official installation / downloads](https://www.adobe.com/products/premiere.html)
+- **Sources:** [Official product features and trial route](https://www.adobe.com/products/premiere.html) (2026-11-14; identity, features, downloads); [Official Adobe plans](https://www.adobe.com/creativecloud/plans.html) (2026-11-14; pricing); [Official Creative Cloud platform requirements](https://helpx.adobe.com/download-install/apps/system-requirements/creative-cloud-requirements.html) (2026-11-14; platforms); [Official Adobe software licensing terms](https://www.adobe.com/legal/licenses-terms.html) (2026-11-14; license)
 ### DaVinci Resolve
 
 Integrated editing, grading, Fusion compositing and Fairlight audio
 
 - **Platforms:** Windows, macOS, Linux. **License:** Proprietary; free and Studio editions need edition-specific terms. **Pricing model:** freemium.
+- **Compatibility details:** Free Resolve and paid Studio are separate offerings. Codec, GPU and feature availability must be checked for the chosen operating system and edition.
 - **Pick for:** Integrated editing, grading, Fusion compositing and Fairlight audio
 - **Compare when:** Target codec playback, color/export and project roundtrip comparison
 - **Strengths:** Integrated editing, grading, Fusion compositing and Fairlight audio
@@ -1153,12 +1488,13 @@ Linux multitrack video editor built around a non-linear editing workflow.
 - **Limitations:** Its supported target is Linux; validate media and export profiles for each delivery format.
 - **Maintenance:** active — Official repository commit activity observed on 2026-11-12 (UTC). Activity is not a runtime or platform-compatibility test. ([evidence](https://github.com/jliljebl/flowblade/commit/ccf84cc28c9bfe961bc02a784bb04a46966d6ddd))
 - [Official project](https://jliljebl.github.io/flowblade/) · [Official installation / downloads](https://jliljebl.github.io/flowblade/download.html) · [Repository](https://github.com/jliljebl/flowblade)
-- **Sources:** [Official project documentation](https://jliljebl.github.io/flowblade/) (2026-11-14; identity, features, platforms, license); [Official project README](https://raw.githubusercontent.com/jliljebl/flowblade/HEAD/README.md) (2026-11-14; identity, features, license, platforms); [Upstream license terms](https://raw.githubusercontent.com/jliljebl/flowblade/HEAD/LICENSE) (2026-11-14; license); [Official installation and download information](https://jliljebl.github.io/flowblade/download.html) (2026-11-14; identity, downloads, platforms); [Official repository activity feed](https://github.com/jliljebl/flowblade/commits/HEAD.atom) (2026-11-14; maintenance)
+- **Sources:** [Official project documentation](https://jliljebl.github.io/flowblade/) (2026-11-14; identity, features, platforms, license, pricing); [Official project README](https://raw.githubusercontent.com/jliljebl/flowblade/HEAD/README.md) (2026-11-14; identity, features, license, platforms); [Upstream license terms](https://raw.githubusercontent.com/jliljebl/flowblade/HEAD/LICENSE) (2026-11-14; license); [Official installation and download information](https://jliljebl.github.io/flowblade/download.html) (2026-11-14; identity, downloads, platforms); [Official repository activity feed](https://github.com/jliljebl/flowblade/commits/HEAD.atom) (2026-11-14; maintenance)
 ### Kdenlive
 
 Nonlinear timeline editing using MLT/KDE framework
 
 - **Platforms:** Windows, macOS, Linux. **License:** GPL-3.0-only; third-party codecs separate. **Pricing model:** free.
+- **Compatibility details:** Official stable packages include Windows, Linux AppImage/Flatpak, and both Apple Silicon and Intel macOS builds. Daily builds are separately identified as testing releases.
 - **Pick for:** Nonlinear timeline editing using MLT/KDE framework
 - **Compare when:** Reference clips: frame count, audio sync, color, proxy/fullres fidelity and export time
 - **Strengths:** Nonlinear timeline editing using MLT/KDE framework
@@ -1166,11 +1502,24 @@ Nonlinear timeline editing using MLT/KDE framework
 - **Maintenance:** unverified — Retained research snapshot; current release activity was not established by this import.
 - [Official project](https://apps.kde.org/kdenlive/) · [Official installation / downloads](https://kdenlive.org/download/) · [Repository](https://invent.kde.org/multimedia/kdenlive)
 - **Sources:** [Preserved original research source](https://apps.kde.org/kdenlive/) (2026-11-14; identity, features); [Official stable and development downloads](https://kdenlive.org/download/) (2026-11-14; downloads, identity, platforms); [Official project history and purpose](https://kdenlive.org/about/) (2026-11-14; identity, pricing); [Verified official source repository](https://invent.kde.org/multimedia/kdenlive) (2026-11-14; identity)
+### OpenShot
+
+Desktop video editor with multi-track composition, transitions, titles and keyframe animation.
+
+- **Platforms:** Windows, macOS, Linux. **License:** GPL-3.0-or-later. **Pricing model:** free.
+- **Pick for:** Choose it for approachable video assembly with an openly licensed desktop application.
+- **Compare when:** Timeline responsiveness and export compatibility depend on media, effects and hardware. Test a representative project before adopting a production workflow.
+- **Strengths:** Choose it for approachable video assembly with an openly licensed desktop application.
+- **Limitations:** Timeline responsiveness and export compatibility depend on media, effects and hardware. Test a representative project before adopting a production workflow.
+- **Maintenance:** active — The official release feed contains 'v4.1.1' with an updated timestamp of 2026-11-02T01:23:15Z. This is a maintenance signal, not an installation or stability test. ([evidence](https://github.com/OpenShot/openshot-qt/releases.atom))
+- [Official project](https://www.openshot.org/) · [Official installation / downloads](https://www.openshot.org/download/) · [Repository](https://github.com/OpenShot/openshot-qt)
+- **Sources:** [Official product documentation](https://www.openshot.org/) (2026-11-14; features, identity, license, platforms, pricing); [Official upstream README](https://raw.githubusercontent.com/OpenShot/openshot-qt/HEAD/README.md) (2026-11-14; features, identity, platforms); [Official upstream license text](https://raw.githubusercontent.com/OpenShot/openshot-qt/HEAD/COPYING) (2026-11-14; license); [Official download and distribution documentation](https://www.openshot.org/download/) (2026-11-14; downloads, platforms); [Official upstream release activity feed](https://github.com/OpenShot/openshot-qt/releases.atom) (2026-11-14; maintenance)
 ### Shotcut
 
 Native timeline editing, track compositing, color tools, motion tracking and proxy-oriented workflows
 
 - **Platforms:** Windows, macOS, Linux. **License:** GPLv3 per official FAQ. **Pricing model:** free.
+- **Compatibility details:** Official packages cover Windows, macOS and Linux; legacy operating systems require separately listed older versions.
 - **Pick for:** Native timeline editing, track compositing, color tools, motion tracking and proxy-oriented workflows
 - **Compare when:** Timeline playback and export on identical 1080p/4K fixtures
 - **Strengths:** Native timeline editing, track compositing, color tools, motion tracking and proxy-oriented workflows

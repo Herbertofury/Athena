@@ -1,0 +1,87 @@
+{
+  "reviewed_at": "2026-11-14",
+  "meaning": "Research backlog, not a list of verified recommendations or a claim that the taxonomy is complete.",
+  "priorities": [
+    {
+      "area": "Desktop communication and conferencing",
+      "tasks": [
+        "Private messaging and interoperable chat",
+        "Video meetings and screen sharing",
+        "Team communication and account boundaries"
+      ],
+      "next_evidence": "Compare desktop clients, protocol interoperability, retention controls, account requirements and free-plan limits. Existing email and remote-desktop coverage does not establish chat or meeting coverage."
+    },
+    {
+      "area": "Radio and signal workflows",
+      "tasks": [
+        "Software-defined radio reception",
+        "Spectrum and antenna analysis",
+        "Amateur-radio logging and decoding"
+      ],
+      "next_evidence": "Verify receiver hardware, drivers, operating-system support and protocol capabilities separately; network packet tools are not substitutes for radio processing."
+    },
+    {
+      "area": "Bioinformatics and sequence analysis",
+      "tasks": [
+        "Sequence alignment and assembly",
+        "Genomic visualization",
+        "Reproducible molecular data analysis"
+      ],
+      "next_evidence": "Extend beyond the current imaging and molecular visualization records with documented formats, reproducibility and installation requirements."
+    },
+    {
+      "area": "Building design and production manufacturing",
+      "tasks": [
+        "Building information modeling and IFC exchange",
+        "Building-energy simulation",
+        "Production CAM, nesting and machine-specific postprocessing"
+      ],
+      "next_evidence": "Evaluate interoperability and complete licensing costs; existing CAD, simulation and electronics entries do not establish a complete BIM or manufacturing workflow."
+    },
+    {
+      "area": "Specialist audio restoration and delivery",
+      "tasks": [
+        "Dialogue restoration and source separation",
+        "Mastering and loudness compliance",
+        "Audio-forensics and damaged-recording repair"
+      ],
+      "next_evidence": "Add representative licensed sample tests and documented plug-in/standalone compatibility. Existing DAW and synthesis coverage is broader than current restoration coverage."
+    },
+    {
+      "area": "Project, schedule and resource planning",
+      "tasks": [
+        "Gantt and dependency planning",
+        "Resource and capacity scheduling",
+        "Portfolio and project file interchange"
+      ],
+      "next_evidence": "Compare local and hosted project models, export/import limits, team licensing and offline behavior beyond simple task lists."
+    },
+    {
+      "area": "Industrial robotics and control",
+      "tasks": [
+        "Robot simulation and motion planning",
+        "PLC programming and industrial protocols",
+        "Hardware-in-the-loop development"
+      ],
+      "next_evidence": "Verify supported controllers, simulation fidelity, host requirements and deployment licensing. General electronics and application automation do not establish industrial control coverage."
+    },
+    {
+      "area": "Operational business software",
+      "tasks": [
+        "Inventory and purchasing",
+        "Desktop or self-hosted ERP and point of sale",
+        "Small-business workflow integration"
+      ],
+      "next_evidence": "Extend beyond personal accounting and general office tools with documented data portability, deployment requirements and business licensing. Existing accounting coverage includes some invoicing, but does not establish full ERP or inventory capability."
+    },
+    {
+      "area": "Evidence depth and thin comparison sets",
+      "tasks": [
+        "Second and third candidates for single-tool categories",
+        "Measured lightweight and accessibility comparisons",
+        "Refresh unresolved licensing, pricing and maintenance fields"
+      ],
+      "next_evidence": "Use the generated refresh queue and coverage report. Do not turn documentation review, download availability or popularity into a speed, security or reliability ranking."
+    }
+  ]
+}

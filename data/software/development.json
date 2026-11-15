@@ -102,9 +102,19 @@
             "maintenance",
             "platforms"
           ]
+        },
+        {
+          "url": "https://github.com/neovim/neovim/releases/download/v0.12.6/nvim-win64.msi",
+          "label": "Public upstream app/package distribution: availability without payment or authentication checked",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "downloads",
+            "pricing"
+          ]
         }
       ],
-      "evidence_status": "official-docs-reviewed"
+      "evidence_status": "official-docs-reviewed",
+      "pricing_notes": "An official public app/package distribution was accessible without payment or authentication. Optional paid editions, hosted services, models and third-party dependencies retain separate terms."
     },
     {
       "id": "helix",
@@ -196,9 +206,19 @@
             "maintenance",
             "platforms"
           ]
+        },
+        {
+          "url": "https://github.com/helix-editor/helix/releases/download/25.07.1/helix-25.07.1-x86_64-windows.zip",
+          "label": "Public upstream app/package distribution: availability without payment or authentication checked",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "downloads",
+            "pricing"
+          ]
         }
       ],
-      "evidence_status": "official-docs-reviewed"
+      "evidence_status": "official-docs-reviewed",
+      "pricing_notes": "An official public app/package distribution was accessible without payment or authentication. Optional paid editions, hosted services, models and third-party dependencies retain separate terms."
     },
     {
       "id": "vim",
@@ -268,8 +288,9 @@
           "label": "Official project README",
           "checked_at": "2026-11-14",
           "supports": [
+            "features",
             "identity",
-            "features"
+            "platforms"
           ]
         },
         {
@@ -280,9 +301,28 @@
             "identity",
             "features"
           ]
+        },
+        {
+          "url": "https://www.vim.org/downloads/gvim_9.2.0000_x64.exe",
+          "label": "Public upstream app/package distribution: availability without payment or authentication checked",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "downloads",
+            "pricing"
+          ]
+        },
+        {
+          "url": "https://www.vim.org/download.php",
+          "label": "Official source: Official Windows installers, Unix builds and macOS distribution guidance.",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "downloads",
+            "platforms"
+          ]
         }
       ],
-      "evidence_status": "official-docs-reviewed"
+      "evidence_status": "official-docs-reviewed",
+      "pricing_notes": "An official public app/package distribution was accessible without payment or authentication. Optional paid editions, hosted services, models and third-party dependencies retain separate terms."
     },
     {
       "id": "vscodium",
@@ -376,9 +416,19 @@
             "maintenance",
             "platforms"
           ]
+        },
+        {
+          "url": "https://github.com/VSCodium/vscodium/releases/download/1.143.17232/VSCodium-x64-1.143.17232.msi",
+          "label": "Public upstream app/package distribution: availability without payment or authentication checked",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "downloads",
+            "pricing"
+          ]
         }
       ],
-      "evidence_status": "official-docs-reviewed"
+      "evidence_status": "official-docs-reviewed",
+      "pricing_notes": "An official public app/package distribution was accessible without payment or authentication. Optional paid editions, hosted services, models and third-party dependencies retain separate terms."
     },
     {
       "id": "vscode",
@@ -457,8 +507,10 @@
           "label": "Official official documentation",
           "checked_at": "2026-11-14",
           "supports": [
+            "features",
             "identity",
-            "features"
+            "platforms",
+            "pricing"
           ]
         },
         {
@@ -567,9 +619,19 @@
             "maintenance",
             "platforms"
           ]
+        },
+        {
+          "url": "https://github.com/geany/geany/releases/download/2.1.0/geany-2.1_setup.exe",
+          "label": "Public upstream app/package distribution: availability without payment or authentication checked",
+          "checked_at": "2026-11-15",
+          "supports": [
+            "downloads",
+            "pricing"
+          ]
         }
       ],
-      "evidence_status": "official-docs-reviewed"
+      "evidence_status": "official-docs-reviewed",
+      "pricing_notes": "An official public app/package distribution was accessible without payment or authentication. Optional paid editions, hosted services, models and third-party dependencies retain separate terms."
     },
     {
       "id": "kate",
@@ -665,14 +727,16 @@
           "label": "Official platforms download documentation",
           "checked_at": "2026-11-14",
           "supports": [
-            "identity",
+            "downloads",
             "features",
+            "identity",
             "platforms",
-            "downloads"
+            "pricing"
           ]
         }
       ],
-      "evidence_status": "official-docs-reviewed"
+      "evidence_status": "official-docs-reviewed",
+      "pricing_notes": "An official public app/package distribution was accessible without payment or authentication. Optional paid editions, hosted services, models and third-party dependencies retain separate terms."
     },
     {
       "id": "lapce",
@@ -766,9 +830,19 @@
             "maintenance",
             "platforms"
           ]
+        },
+        {
+          "url": "https://github.com/lapce/lapce/releases/download/v0.4.6/Lapce-windows.msi",
+          "label": "Public upstream app/package distribution: availability without payment or authentication checked",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "downloads",
+            "pricing"
+          ]
         }
       ],
-      "evidence_status": "official-docs-reviewed"
+      "evidence_status": "official-docs-reviewed",
+      "pricing_notes": "An official public app/package distribution was accessible without payment or authentication. Optional paid editions, hosted services, models and third-party dependencies retain separate terms."
     },
     {
       "id": "zed",
@@ -861,9 +935,27 @@
             "maintenance",
             "platforms"
           ]
+        },
+        {
+          "url": "https://github.com/zed-industries/zed/releases/download/v1.28.1/Zed-x86_64.exe",
+          "label": "Public upstream app/package distribution: availability without payment or authentication checked",
+          "checked_at": "2026-11-15",
+          "supports": [
+            "downloads",
+            "pricing"
+          ]
+        },
+        {
+          "url": "https://zed.dev/docs/account/plans-and-pricing",
+          "label": "Official source: Free editor use and optional paid hosted-AI/team plans.",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "pricing"
+          ]
         }
       ],
-      "evidence_status": "official-docs-reviewed"
+      "evidence_status": "official-docs-reviewed",
+      "pricing_notes": "An official public app/package distribution was accessible without payment or authentication. Optional paid editions, hosted services, models and third-party dependencies retain separate terms."
     },
     {
       "id": "pulsar",
@@ -962,9 +1054,19 @@
             "maintenance",
             "platforms"
           ]
+        },
+        {
+          "url": "https://github.com/pulsar-edit/pulsar/releases/download/v1.133.1/Windows.Pulsar-1.133.1-win.zip",
+          "label": "Public upstream app/package distribution: availability without payment or authentication checked",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "downloads",
+            "pricing"
+          ]
         }
       ],
-      "evidence_status": "official-docs-reviewed"
+      "evidence_status": "official-docs-reviewed",
+      "pricing_notes": "An official public app/package distribution was accessible without payment or authentication. Optional paid editions, hosted services, models and third-party dependencies retain separate terms."
     },
     {
       "id": "lite-xl",
@@ -1058,9 +1160,19 @@
             "maintenance",
             "platforms"
           ]
+        },
+        {
+          "url": "https://github.com/lite-xl/lite-xl/releases/download/v2.1.8/lite-xl-v2.1.8-windows-x86_64.zip",
+          "label": "Public upstream app/package distribution: availability without payment or authentication checked",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "downloads",
+            "pricing"
+          ]
         }
       ],
-      "evidence_status": "official-docs-reviewed"
+      "evidence_status": "official-docs-reviewed",
+      "pricing_notes": "An official public app/package distribution was accessible without payment or authentication. Optional paid editions, hosted services, models and third-party dependencies retain separate terms."
     },
     {
       "id": "micro",
@@ -1154,9 +1266,19 @@
             "maintenance",
             "platforms"
           ]
+        },
+        {
+          "url": "https://github.com/micro-editor/micro/releases/download/v2.0.15/micro-2.0.15-win64.zip",
+          "label": "Public upstream app/package distribution: availability without payment or authentication checked",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "downloads",
+            "pricing"
+          ]
         }
       ],
-      "evidence_status": "official-docs-reviewed"
+      "evidence_status": "official-docs-reviewed",
+      "pricing_notes": "An official public app/package distribution was accessible without payment or authentication. Optional paid editions, hosted services, models and third-party dependencies retain separate terms."
     },
     {
       "id": "thonny",
@@ -1248,9 +1370,19 @@
             "maintenance",
             "platforms"
           ]
+        },
+        {
+          "url": "https://github.com/thonny/thonny/releases/download/v5.0.1/thonny-5.0.1-windows-portable-x64.zip",
+          "label": "Public upstream app/package distribution: availability without payment or authentication checked",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "downloads",
+            "pricing"
+          ]
         }
       ],
-      "evidence_status": "official-docs-reviewed"
+      "evidence_status": "official-docs-reviewed",
+      "pricing_notes": "An official public app/package distribution was accessible without payment or authentication. Optional paid editions, hosted services, models and third-party dependencies retain separate terms."
     },
     {
       "id": "spyder",
@@ -1342,9 +1474,19 @@
             "maintenance",
             "platforms"
           ]
+        },
+        {
+          "url": "https://github.com/spyder-ide/spyder/releases/download/v6.1.8/Spyder-Windows-x86_64.exe",
+          "label": "Public upstream app/package distribution: availability without payment or authentication checked",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "downloads",
+            "pricing"
+          ]
         }
       ],
-      "evidence_status": "official-docs-reviewed"
+      "evidence_status": "official-docs-reviewed",
+      "pricing_notes": "An official public app/package distribution was accessible without payment or authentication. Optional paid editions, hosted services, models and third-party dependencies retain separate terms."
     },
     {
       "id": "jupyterlab",
@@ -1436,9 +1578,19 @@
             "downloads",
             "maintenance"
           ]
+        },
+        {
+          "url": "https://github.com/jupyterlab/jupyterlab/releases/download/v4.6.6/jupyterlab-4.6.6-py3-none-any.whl",
+          "label": "Public upstream app/package distribution: availability without payment or authentication checked",
+          "checked_at": "2026-11-15",
+          "supports": [
+            "downloads",
+            "pricing"
+          ]
         }
       ],
-      "evidence_status": "official-docs-reviewed"
+      "evidence_status": "official-docs-reviewed",
+      "pricing_notes": "An official public app/package distribution was accessible without payment or authentication. Optional paid editions, hosted services, models and third-party dependencies retain separate terms."
     },
     {
       "id": "ripgrep",
@@ -1524,9 +1676,19 @@
             "maintenance",
             "platforms"
           ]
+        },
+        {
+          "url": "https://github.com/BurntSushi/ripgrep/releases/download/15.2.0/ripgrep-15.2.0-x86_64-pc-windows-gnu.zip",
+          "label": "Public upstream app/package distribution: availability without payment or authentication checked",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "downloads",
+            "pricing"
+          ]
         }
       ],
-      "evidence_status": "official-docs-reviewed"
+      "evidence_status": "official-docs-reviewed",
+      "pricing_notes": "An official public app/package distribution was accessible without payment or authentication. Optional paid editions, hosted services, models and third-party dependencies retain separate terms."
     },
     {
       "id": "fd",
@@ -1612,9 +1774,19 @@
             "maintenance",
             "platforms"
           ]
+        },
+        {
+          "url": "https://github.com/sharkdp/fd/releases/download/v10.5.2/fd-v10.5.2-x86_64-pc-windows-gnu.zip",
+          "label": "Public upstream app/package distribution: availability without payment or authentication checked",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "downloads",
+            "pricing"
+          ]
         }
       ],
-      "evidence_status": "official-docs-reviewed"
+      "evidence_status": "official-docs-reviewed",
+      "pricing_notes": "An official public app/package distribution was accessible without payment or authentication. Optional paid editions, hosted services, models and third-party dependencies retain separate terms."
     },
     {
       "id": "fzf",
@@ -1708,9 +1880,19 @@
             "maintenance",
             "platforms"
           ]
+        },
+        {
+          "url": "https://github.com/junegunn/fzf/releases/download/v0.75.0/fzf-0.75.0-windows_amd64.msi",
+          "label": "Public upstream app/package distribution: availability without payment or authentication checked",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "downloads",
+            "pricing"
+          ]
         }
       ],
-      "evidence_status": "official-docs-reviewed"
+      "evidence_status": "official-docs-reviewed",
+      "pricing_notes": "An official public app/package distribution was accessible without payment or authentication. Optional paid editions, hosted services, models and third-party dependencies retain separate terms."
     },
     {
       "id": "bat",
@@ -1796,9 +1978,19 @@
             "maintenance",
             "platforms"
           ]
+        },
+        {
+          "url": "https://github.com/sharkdp/bat/releases/download/v0.26.1/bat-v0.26.1-x86_64-pc-windows-msvc.zip",
+          "label": "Public upstream app/package distribution: availability without payment or authentication checked",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "downloads",
+            "pricing"
+          ]
         }
       ],
-      "evidence_status": "official-docs-reviewed"
+      "evidence_status": "official-docs-reviewed",
+      "pricing_notes": "An official public app/package distribution was accessible without payment or authentication. Optional paid editions, hosted services, models and third-party dependencies retain separate terms."
     },
     {
       "id": "eza",
@@ -1892,9 +2084,19 @@
             "maintenance",
             "platforms"
           ]
+        },
+        {
+          "url": "https://github.com/eza-community/eza/releases/download/v0.23.5/eza.exe_x86_64-pc-windows-gnu.zip",
+          "label": "Public upstream app/package distribution: availability without payment or authentication checked",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "downloads",
+            "pricing"
+          ]
         }
       ],
-      "evidence_status": "official-docs-reviewed"
+      "evidence_status": "official-docs-reviewed",
+      "pricing_notes": "An official public app/package distribution was accessible without payment or authentication. Optional paid editions, hosted services, models and third-party dependencies retain separate terms."
     },
     {
       "id": "zoxide",
@@ -1979,9 +2181,19 @@
             "maintenance",
             "platforms"
           ]
+        },
+        {
+          "url": "https://github.com/ajeetdsouza/zoxide/releases/download/v0.10.0/zoxide-0.10.0-x86_64-pc-windows-msvc.zip",
+          "label": "Public upstream app/package distribution: availability without payment or authentication checked",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "downloads",
+            "pricing"
+          ]
         }
       ],
-      "evidence_status": "official-docs-reviewed"
+      "evidence_status": "official-docs-reviewed",
+      "pricing_notes": "An official public app/package distribution was accessible without payment or authentication. Optional paid editions, hosted services, models and third-party dependencies retain separate terms."
     },
     {
       "id": "starship",
@@ -2075,9 +2287,19 @@
             "maintenance",
             "platforms"
           ]
+        },
+        {
+          "url": "https://github.com/starship/starship/releases/download/v1.27.0/starship-x86_64-pc-windows-msvc.msi",
+          "label": "Public upstream app/package distribution: availability without payment or authentication checked",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "downloads",
+            "pricing"
+          ]
         }
       ],
-      "evidence_status": "official-docs-reviewed"
+      "evidence_status": "official-docs-reviewed",
+      "pricing_notes": "An official public app/package distribution was accessible without payment or authentication. Optional paid editions, hosted services, models and third-party dependencies retain separate terms."
     },
     {
       "id": "oh-my-posh",
@@ -2170,9 +2392,19 @@
             "maintenance",
             "platforms"
           ]
+        },
+        {
+          "url": "https://github.com/JanDeDobbeleer/oh-my-posh/releases/download/v32.0.0/posh-windows-amd64.exe",
+          "label": "Public upstream app/package distribution: availability without payment or authentication checked",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "downloads",
+            "pricing"
+          ]
         }
       ],
-      "evidence_status": "official-docs-reviewed"
+      "evidence_status": "official-docs-reviewed",
+      "pricing_notes": "An official public app/package distribution was accessible without payment or authentication. Optional paid editions, hosted services, models and third-party dependencies retain separate terms."
     },
     {
       "id": "nushell",
@@ -2266,9 +2498,19 @@
             "maintenance",
             "platforms"
           ]
+        },
+        {
+          "url": "https://github.com/nushell/nushell/releases/download/0.117.0/nu-0.117.0-x86_64-pc-windows-msvc.msi",
+          "label": "Public upstream app/package distribution: availability without payment or authentication checked",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "downloads",
+            "pricing"
+          ]
         }
       ],
-      "evidence_status": "official-docs-reviewed"
+      "evidence_status": "official-docs-reviewed",
+      "pricing_notes": "An official public app/package distribution was accessible without payment or authentication. Optional paid editions, hosted services, models and third-party dependencies retain separate terms."
     },
     {
       "id": "fish",
@@ -2368,9 +2610,19 @@
             "maintenance",
             "platforms"
           ]
+        },
+        {
+          "url": "https://github.com/fish-shell/fish-shell/releases/download/4.9.3/fish-4.9.3-linux-x86_64.tar.xz",
+          "label": "Public upstream app/package distribution: availability without payment or authentication checked",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "downloads",
+            "pricing"
+          ]
         }
       ],
-      "evidence_status": "official-docs-reviewed"
+      "evidence_status": "official-docs-reviewed",
+      "pricing_notes": "An official public app/package distribution was accessible without payment or authentication. Optional paid editions, hosted services, models and third-party dependencies retain separate terms."
     },
     {
       "id": "xonsh",
@@ -2471,9 +2723,19 @@
             "maintenance",
             "platforms"
           ]
+        },
+        {
+          "url": "https://github.com/xonsh/xonsh/releases/download/0.25.0/xonsh-x86_64.AppImage",
+          "label": "Public upstream app/package distribution: availability without payment or authentication checked",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "downloads",
+            "pricing"
+          ]
         }
       ],
-      "evidence_status": "official-docs-reviewed"
+      "evidence_status": "official-docs-reviewed",
+      "pricing_notes": "An official public app/package distribution was accessible without payment or authentication. Optional paid editions, hosted services, models and third-party dependencies retain separate terms."
     },
     {
       "id": "just",
@@ -2567,9 +2829,19 @@
             "maintenance",
             "platforms"
           ]
+        },
+        {
+          "url": "https://github.com/casey/just/releases/download/1.59.0/just-1.59.0-x86_64-pc-windows-msvc.zip",
+          "label": "Public upstream app/package distribution: availability without payment or authentication checked",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "downloads",
+            "pricing"
+          ]
         }
       ],
-      "evidence_status": "official-docs-reviewed"
+      "evidence_status": "official-docs-reviewed",
+      "pricing_notes": "An official public app/package distribution was accessible without payment or authentication. Optional paid editions, hosted services, models and third-party dependencies retain separate terms."
     },
     {
       "id": "task",
@@ -2662,9 +2934,19 @@
             "maintenance",
             "platforms"
           ]
+        },
+        {
+          "url": "https://github.com/go-task/task/releases/download/v3.54.0/task_windows_386.zip",
+          "label": "Public upstream app/package distribution: availability without payment or authentication checked",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "downloads",
+            "pricing"
+          ]
         }
       ],
-      "evidence_status": "official-docs-reviewed"
+      "evidence_status": "official-docs-reviewed",
+      "pricing_notes": "An official public app/package distribution was accessible without payment or authentication. Optional paid editions, hosted services, models and third-party dependencies retain separate terms."
     },
     {
       "id": "watchexec",
@@ -2758,9 +3040,19 @@
             "maintenance",
             "platforms"
           ]
+        },
+        {
+          "url": "https://github.com/watchexec/watchexec/releases/download/v2.8.0/watchexec-2.8.0-x86_64-pc-windows-msvc.zip",
+          "label": "Public upstream app/package distribution: availability without payment or authentication checked",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "downloads",
+            "pricing"
+          ]
         }
       ],
-      "evidence_status": "official-docs-reviewed"
+      "evidence_status": "official-docs-reviewed",
+      "pricing_notes": "An official public app/package distribution was accessible without payment or authentication. Optional paid editions, hosted services, models and third-party dependencies retain separate terms."
     },
     {
       "id": "hyperfine",
@@ -2846,9 +3138,19 @@
             "maintenance",
             "platforms"
           ]
+        },
+        {
+          "url": "https://github.com/sharkdp/hyperfine/releases/download/v2.0.0/hyperfine-v2.0.0-x86_64-pc-windows-msvc.zip",
+          "label": "Public upstream app/package distribution: availability without payment or authentication checked",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "downloads",
+            "pricing"
+          ]
         }
       ],
-      "evidence_status": "official-docs-reviewed"
+      "evidence_status": "official-docs-reviewed",
+      "pricing_notes": "An official public app/package distribution was accessible without payment or authentication. Optional paid editions, hosted services, models and third-party dependencies retain separate terms."
     },
     {
       "id": "jq",
@@ -2948,9 +3250,19 @@
             "maintenance",
             "platforms"
           ]
+        },
+        {
+          "url": "https://github.com/jqlang/jq/releases/download/jq-1.8.2/jq-win64.exe",
+          "label": "Public upstream app/package distribution: availability without payment or authentication checked",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "downloads",
+            "pricing"
+          ]
         }
       ],
-      "evidence_status": "official-docs-reviewed"
+      "evidence_status": "official-docs-reviewed",
+      "pricing_notes": "An official public app/package distribution was accessible without payment or authentication. Optional paid editions, hosted services, models and third-party dependencies retain separate terms."
     },
     {
       "id": "yq",
@@ -3044,9 +3356,19 @@
             "maintenance",
             "platforms"
           ]
+        },
+        {
+          "url": "https://github.com/mikefarah/yq/releases/download/v4.54.3/yq_windows_386.exe",
+          "label": "Public upstream app/package distribution: availability without payment or authentication checked",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "downloads",
+            "pricing"
+          ]
         }
       ],
-      "evidence_status": "official-docs-reviewed"
+      "evidence_status": "official-docs-reviewed",
+      "pricing_notes": "An official public app/package distribution was accessible without payment or authentication. Optional paid editions, hosted services, models and third-party dependencies retain separate terms."
     },
     {
       "id": "miller",
@@ -3147,9 +3469,19 @@
             "maintenance",
             "platforms"
           ]
+        },
+        {
+          "url": "https://github.com/johnkerl/miller/releases/download/v6.22.0/miller-6.22.0-windows-386.zip",
+          "label": "Public upstream app/package distribution: availability without payment or authentication checked",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "downloads",
+            "pricing"
+          ]
         }
       ],
-      "evidence_status": "official-docs-reviewed"
+      "evidence_status": "official-docs-reviewed",
+      "pricing_notes": "An official public app/package distribution was accessible without payment or authentication. Optional paid editions, hosted services, models and third-party dependencies retain separate terms."
     },
     {
       "id": "qsv",
@@ -3250,9 +3582,19 @@
             "maintenance",
             "platforms"
           ]
+        },
+        {
+          "url": "https://github.com/dathere/qsv/releases/download/28.0.0/qsv-28.0.0-x86_64-pc-windows-gnu.zip",
+          "label": "Public upstream app/package distribution: availability without payment or authentication checked",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "downloads",
+            "pricing"
+          ]
         }
       ],
-      "evidence_status": "official-docs-reviewed"
+      "evidence_status": "official-docs-reviewed",
+      "pricing_notes": "An official public app/package distribution was accessible without payment or authentication. Optional paid editions, hosted services, models and third-party dependencies retain separate terms."
     },
     {
       "id": "csvkit",
@@ -3342,9 +3684,27 @@
           "supports": [
             "downloads"
           ]
+        },
+        {
+          "url": "https://files.pythonhosted.org/packages/41/76/7ffa26fcd79eb0a51daf73d18481d4d5214685545d27aadc5e76e01d522d/csvkit-2.2.0-py3-none-any.whl",
+          "label": "Public upstream app/package distribution: availability without payment or authentication checked",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "downloads",
+            "pricing"
+          ]
+        },
+        {
+          "url": "https://csvkit.readthedocs.io/en/latest/tricks.html",
+          "label": "Official source: The current documentation explicitly supports maintained Python versions on Windows, macOS and Linux.",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "platforms"
+          ]
         }
       ],
-      "evidence_status": "official-docs-reviewed"
+      "evidence_status": "official-docs-reviewed",
+      "pricing_notes": "An official public app/package distribution was accessible without payment or authentication. Optional paid editions, hosted services, models and third-party dependencies retain separate terms."
     },
     {
       "id": "httpie",
@@ -3447,9 +3807,19 @@
             "downloads",
             "maintenance"
           ]
+        },
+        {
+          "url": "https://files.pythonhosted.org/packages/03/b6/39bcf01e1185882f34bc9fb77d1fb4a27911a55f60ab407de34abc8a2347/httpie-3.2.4-py3-none-any.whl",
+          "label": "Public upstream app/package distribution: availability without payment or authentication checked",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "downloads",
+            "pricing"
+          ]
         }
       ],
-      "evidence_status": "official-docs-reviewed"
+      "evidence_status": "official-docs-reviewed",
+      "pricing_notes": "An official public app/package distribution was accessible without payment or authentication. Optional paid editions, hosted services, models and third-party dependencies retain separate terms."
     },
     {
       "id": "xh",
@@ -3534,9 +3904,19 @@
             "maintenance",
             "platforms"
           ]
+        },
+        {
+          "url": "https://github.com/ducaale/xh/releases/download/v0.26.3/xh-v0.26.3-x86_64-pc-windows-msvc.zip",
+          "label": "Public upstream app/package distribution: availability without payment or authentication checked",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "downloads",
+            "pricing"
+          ]
         }
       ],
-      "evidence_status": "official-docs-reviewed"
+      "evidence_status": "official-docs-reviewed",
+      "pricing_notes": "An official public app/package distribution was accessible without payment or authentication. Optional paid editions, hosted services, models and third-party dependencies retain separate terms."
     },
     {
       "id": "curl",
@@ -3634,9 +4014,27 @@
             "downloads",
             "maintenance"
           ]
+        },
+        {
+          "url": "https://github.com/curl/curl/releases/download/curl-8_23_0/curl-8.23.0.zip",
+          "label": "Public upstream source distribution; compiled binary packaging is separate",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "downloads",
+            "pricing"
+          ]
+        },
+        {
+          "url": "https://curl.se/docs/faq.html",
+          "label": "Official source: Documented supported operating-system families include Windows, macOS and modern Unix systems.",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "platforms"
+          ]
         }
       ],
-      "evidence_status": "official-docs-reviewed"
+      "evidence_status": "official-docs-reviewed",
+      "pricing_notes": "The upstream source was publicly accessible at no charge and its build/install route was reviewed. This establishes no-cost source availability, not free prebuilt binaries on every platform."
     },
     {
       "id": "lazygit",
@@ -3720,9 +4118,19 @@
             "maintenance",
             "platforms"
           ]
+        },
+        {
+          "url": "https://github.com/jesseduffield/lazygit/releases/download/v0.66.3/lazygit_0.66.3_windows_x86_64.zip",
+          "label": "Public upstream app/package distribution: availability without payment or authentication checked",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "downloads",
+            "pricing"
+          ]
         }
       ],
-      "evidence_status": "official-docs-reviewed"
+      "evidence_status": "official-docs-reviewed",
+      "pricing_notes": "An official public app/package distribution was accessible without payment or authentication. Optional paid editions, hosted services, models and third-party dependencies retain separate terms."
     },
     {
       "id": "gitui",
@@ -3806,9 +4214,19 @@
             "maintenance",
             "platforms"
           ]
+        },
+        {
+          "url": "https://github.com/gitui-org/gitui/releases/download/v0.28.1/gitui-linux-x86_64.tar.gz",
+          "label": "Public upstream app/package distribution: availability without payment or authentication checked",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "downloads",
+            "pricing"
+          ]
         }
       ],
-      "evidence_status": "official-docs-reviewed"
+      "evidence_status": "official-docs-reviewed",
+      "pricing_notes": "An official public app/package distribution was accessible without payment or authentication. Optional paid editions, hosted services, models and third-party dependencies retain separate terms."
     },
     {
       "id": "git-extensions",
@@ -3906,9 +4324,19 @@
             "maintenance",
             "platforms"
           ]
+        },
+        {
+          "url": "https://github.com/gitextensions/gitextensions/releases/download/v7.2.1/GitExtensions-x64-7.2.1.7-0aea2d6df.msi",
+          "label": "Public upstream app/package distribution: availability without payment or authentication checked",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "downloads",
+            "pricing"
+          ]
         }
       ],
-      "evidence_status": "official-docs-reviewed"
+      "evidence_status": "official-docs-reviewed",
+      "pricing_notes": "An official public app/package distribution was accessible without payment or authentication. Optional paid editions, hosted services, models and third-party dependencies retain separate terms."
     },
     {
       "id": "github-desktop",
@@ -4001,9 +4429,19 @@
             "maintenance",
             "platforms"
           ]
+        },
+        {
+          "url": "https://github.com/desktop/desktop/releases/download/release-3.6.10/GitHub.Desktop-x64.zip",
+          "label": "Public upstream app/package distribution: availability without payment or authentication checked",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "downloads",
+            "pricing"
+          ]
         }
       ],
-      "evidence_status": "official-docs-reviewed"
+      "evidence_status": "official-docs-reviewed",
+      "pricing_notes": "An official public app/package distribution was accessible without payment or authentication. Optional paid editions, hosted services, models and third-party dependencies retain separate terms."
     },
     {
       "id": "delta",
@@ -4095,9 +4533,19 @@
             "maintenance",
             "platforms"
           ]
+        },
+        {
+          "url": "https://github.com/dandavison/delta/releases/download/0.20.1/delta-0.20.1-x86_64-pc-windows-msvc.zip",
+          "label": "Public upstream app/package distribution: availability without payment or authentication checked",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "downloads",
+            "pricing"
+          ]
         }
       ],
-      "evidence_status": "official-docs-reviewed"
+      "evidence_status": "official-docs-reviewed",
+      "pricing_notes": "An official public app/package distribution was accessible without payment or authentication. Optional paid editions, hosted services, models and third-party dependencies retain separate terms."
     },
     {
       "id": "difftastic",
@@ -4189,9 +4637,19 @@
             "maintenance",
             "platforms"
           ]
+        },
+        {
+          "url": "https://github.com/Wilfred/difftastic/releases/download/0.72.0/difft-0.72.0-x86_64-pc-windows-msvc.zip",
+          "label": "Public upstream app/package distribution: availability without payment or authentication checked",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "downloads",
+            "pricing"
+          ]
         }
       ],
-      "evidence_status": "official-docs-reviewed"
+      "evidence_status": "official-docs-reviewed",
+      "pricing_notes": "An official public app/package distribution was accessible without payment or authentication. Optional paid editions, hosted services, models and third-party dependencies retain separate terms."
     },
     {
       "id": "winmerge",
@@ -4281,9 +4739,19 @@
             "maintenance",
             "platforms"
           ]
+        },
+        {
+          "url": "https://github.com/WinMerge/winmerge/releases/download/v2.16.60/winmerge-2.16.60-x64-exe.zip",
+          "label": "Public upstream app/package distribution: availability without payment or authentication checked",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "downloads",
+            "pricing"
+          ]
         }
       ],
-      "evidence_status": "official-docs-reviewed"
+      "evidence_status": "official-docs-reviewed",
+      "pricing_notes": "An official public app/package distribution was accessible without payment or authentication. Optional paid editions, hosted services, models and third-party dependencies retain separate terms."
     },
     {
       "id": "meld",
@@ -4362,12 +4830,23 @@
           "label": "Official official documentation",
           "checked_at": "2026-11-14",
           "supports": [
-            "identity",
-            "features"
+            "downloads",
+            "features",
+            "identity"
+          ]
+        },
+        {
+          "url": "https://github.com/GNOME/meld/archive/HEAD.zip",
+          "label": "Public upstream source distribution; compiled binary packaging is separate",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "downloads",
+            "pricing"
           ]
         }
       ],
-      "evidence_status": "official-docs-reviewed"
+      "evidence_status": "official-docs-reviewed",
+      "pricing_notes": "The upstream source was publicly accessible at no charge and its build/install route was reviewed. This establishes no-cost source availability, not free prebuilt binaries on every platform."
     },
     {
       "id": "db-browser-sqlite",
@@ -4468,12 +4947,22 @@
             "maintenance",
             "platforms"
           ]
+        },
+        {
+          "url": "https://github.com/sqlitebrowser/sqlitebrowser/releases/download/v3.13.1/DB.Browser.for.SQLite-v3.13.1-win64.msi",
+          "label": "Public upstream app/package distribution: availability without payment or authentication checked",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "downloads",
+            "pricing"
+          ]
         }
       ],
       "evidence_status": "official-docs-reviewed",
       "aliases": [
         "DB4S"
-      ]
+      ],
+      "pricing_notes": "An official public app/package distribution was accessible without payment or authentication. Optional paid editions, hosted services, models and third-party dependencies retain separate terms."
     },
     {
       "id": "letos",
@@ -4575,13 +5064,23 @@
             "maintenance",
             "platforms"
           ]
+        },
+        {
+          "url": "https://github.com/pawelsalawa/letos/archive/HEAD.zip",
+          "label": "Public upstream source distribution; compiled binary packaging is separate",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "downloads",
+            "pricing"
+          ]
         }
       ],
       "evidence_status": "official-docs-reviewed",
       "aliases": [
         "SQLiteStudio",
         "Letos"
-      ]
+      ],
+      "pricing_notes": "The upstream source was publicly accessible at no charge and its build/install route was reviewed. This establishes no-cost source availability, not free prebuilt binaries on every platform."
     },
     {
       "id": "dbeaver",
@@ -4674,6 +5173,15 @@
             "maintenance",
             "platforms"
           ]
+        },
+        {
+          "url": "https://github.com/dbeaver/dbeaver/releases/download/26.2.4/dbeaver-ce-26.2.4-windows-x86_64.exe",
+          "label": "Public upstream app/package distribution: availability without payment or authentication checked",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "downloads",
+            "pricing"
+          ]
         }
       ],
       "evidence_status": "official-docs-reviewed",
@@ -4681,7 +5189,8 @@
         "DBeaver",
         "DBeaver Community Edition",
         "DBeaver CE"
-      ]
+      ],
+      "pricing_notes": "An official public app/package distribution was accessible without payment or authentication. Optional paid editions, hosted services, models and third-party dependencies retain separate terms."
     },
     {
       "id": "heidisql",
@@ -4771,9 +5280,19 @@
             "maintenance",
             "platforms"
           ]
+        },
+        {
+          "url": "https://github.com/HeidiSQL/HeidiSQL/releases/download/v12.22/heidisql-12.22-1.x86_64.rpm",
+          "label": "Public upstream app/package distribution: availability without payment or authentication checked",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "downloads",
+            "pricing"
+          ]
         }
       ],
-      "evidence_status": "official-docs-reviewed"
+      "evidence_status": "official-docs-reviewed",
+      "pricing_notes": "An official public app/package distribution was accessible without payment or authentication. Optional paid editions, hosted services, models and third-party dependencies retain separate terms."
     },
     {
       "id": "pgadmin",
@@ -4874,12 +5393,22 @@
             "platforms",
             "downloads"
           ]
+        },
+        {
+          "url": "https://github.com/pgadmin-org/pgadmin4/archive/HEAD.zip",
+          "label": "Public upstream source distribution; compiled binary packaging is separate",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "downloads",
+            "pricing"
+          ]
         }
       ],
       "evidence_status": "official-docs-reviewed",
       "aliases": [
         "pgAdmin 4"
-      ]
+      ],
+      "pricing_notes": "The upstream source was publicly accessible at no charge and its build/install route was reviewed. This establishes no-cost source availability, not free prebuilt binaries on every platform."
     },
     {
       "id": "bruno",
@@ -4973,9 +5502,27 @@
             "maintenance",
             "platforms"
           ]
+        },
+        {
+          "url": "https://github.com/usebruno/bruno/releases/download/v4.3.0/bruno_4.3.0_x64_mac.dmg",
+          "label": "Public upstream app/package distribution: availability without payment or authentication checked",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "downloads",
+            "pricing"
+          ]
+        },
+        {
+          "url": "https://www.usebruno.com/pricing",
+          "label": "Official source: A free Open Source edition and paid Pro/Ultimate plans are listed.",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "pricing"
+          ]
         }
       ],
-      "evidence_status": "official-docs-reviewed"
+      "evidence_status": "official-docs-reviewed",
+      "pricing_notes": "An official public app/package distribution was accessible without payment or authentication. Optional paid editions, hosted services, models and third-party dependencies retain separate terms."
     },
     {
       "id": "insomnia",
@@ -5069,9 +5616,27 @@
             "maintenance",
             "platforms"
           ]
+        },
+        {
+          "url": "https://github.com/Kong/insomnia/releases/download/core%4013.4.0/Insomnia.Core-13.4.0.exe",
+          "label": "Public upstream app/package distribution: availability without payment or authentication checked",
+          "checked_at": "2026-11-15",
+          "supports": [
+            "downloads",
+            "pricing"
+          ]
+        },
+        {
+          "url": "https://insomnia.rest/pricing",
+          "label": "Official source: Free Essentials and local Scratch Pad use alongside paid Pro/Enterprise plans.",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "pricing"
+          ]
         }
       ],
-      "evidence_status": "official-docs-reviewed"
+      "evidence_status": "official-docs-reviewed",
+      "pricing_notes": "An official public app/package distribution was accessible without payment or authentication. Optional paid editions, hosted services, models and third-party dependencies retain separate terms."
     },
     {
       "id": "hoppscotch",
@@ -5163,6 +5728,14 @@
           "supports": [
             "downloads",
             "maintenance"
+          ]
+        },
+        {
+          "url": "https://hoppscotch.com/pricing",
+          "label": "Official source: Free use and paid organizational features/support are offered.",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "pricing"
           ]
         }
       ],
@@ -5257,9 +5830,28 @@
             "downloads",
             "maintenance"
           ]
+        },
+        {
+          "url": "https://files.pythonhosted.org/packages/a7/b2/886992a28a7bf86e47691d7a33e26eba370ee71d89b77d3128412910a33e/mitmproxy-12.3.1-py3-none-any.whl",
+          "label": "Public upstream app/package distribution: availability without payment or authentication checked",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "downloads",
+            "pricing"
+          ]
+        },
+        {
+          "url": "https://docs.mitmproxy.org/stable/overview/installation/",
+          "label": "Official source: Native Windows installation, macOS installation and Linux packages are documented; capture modes differ by platform.",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "platforms",
+            "downloads"
+          ]
         }
       ],
-      "evidence_status": "official-docs-reviewed"
+      "evidence_status": "official-docs-reviewed",
+      "pricing_notes": "An official public app/package distribution was accessible without payment or authentication. Optional paid editions, hosted services, models and third-party dependencies retain separate terms."
     },
     {
       "id": "http-toolkit",
@@ -5339,8 +5931,17 @@
           "label": "Official official documentation",
           "checked_at": "2026-11-14",
           "supports": [
-            "identity",
-            "features"
+            "downloads",
+            "features",
+            "identity"
+          ]
+        },
+        {
+          "url": "https://httptoolkit.com/pricing/",
+          "label": "Official source: Core features are free; Pro and Team subscriptions unlock additional capabilities.",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "pricing"
           ]
         }
       ],
@@ -5438,9 +6039,19 @@
             "maintenance",
             "platforms"
           ]
+        },
+        {
+          "url": "https://github.com/gcla/termshark/archive/HEAD.zip",
+          "label": "Public upstream source distribution; compiled binary packaging is separate",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "downloads",
+            "pricing"
+          ]
         }
       ],
-      "evidence_status": "official-docs-reviewed"
+      "evidence_status": "official-docs-reviewed",
+      "pricing_notes": "The upstream source was publicly accessible at no charge and its build/install route was reviewed. This establishes no-cost source availability, not free prebuilt binaries on every platform."
     },
     {
       "id": "ghidra",
@@ -5533,9 +6144,19 @@
             "downloads",
             "maintenance"
           ]
+        },
+        {
+          "url": "https://github.com/NationalSecurityAgency/ghidra/releases/download/Ghidra_12.2_build/ghidra_12.2_PUBLIC_20261016.zip",
+          "label": "Public upstream app/package distribution: availability without payment or authentication checked",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "downloads",
+            "pricing"
+          ]
         }
       ],
-      "evidence_status": "official-docs-reviewed"
+      "evidence_status": "official-docs-reviewed",
+      "pricing_notes": "An official public app/package distribution was accessible without payment or authentication. Optional paid editions, hosted services, models and third-party dependencies retain separate terms."
     },
     {
       "id": "cutter",
@@ -5629,9 +6250,19 @@
             "maintenance",
             "platforms"
           ]
+        },
+        {
+          "url": "https://github.com/rizinorg/cutter/releases/download/v2.5.0/Cutter-v2.5.0-Windows-x86_64.zip",
+          "label": "Public upstream app/package distribution: availability without payment or authentication checked",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "downloads",
+            "pricing"
+          ]
         }
       ],
-      "evidence_status": "official-docs-reviewed"
+      "evidence_status": "official-docs-reviewed",
+      "pricing_notes": "An official public app/package distribution was accessible without payment or authentication. Optional paid editions, hosted services, models and third-party dependencies retain separate terms."
     },
     {
       "id": "radare2",
@@ -5732,9 +6363,19 @@
             "maintenance",
             "platforms"
           ]
+        },
+        {
+          "url": "https://github.com/radareorg/radare2/releases/download/6.2.6/radare2-6.2.6-w64.zip",
+          "label": "Public upstream app/package distribution: availability without payment or authentication checked",
+          "checked_at": "2026-11-15",
+          "supports": [
+            "downloads",
+            "pricing"
+          ]
         }
       ],
-      "evidence_status": "official-docs-reviewed"
+      "evidence_status": "official-docs-reviewed",
+      "pricing_notes": "An official public app/package distribution was accessible without payment or authentication. Optional paid editions, hosted services, models and third-party dependencies retain separate terms."
     },
     {
       "id": "x64dbg",
@@ -5831,9 +6472,19 @@
             "downloads",
             "maintenance"
           ]
+        },
+        {
+          "url": "https://github.com/x64dbg/x64dbg/releases/download/2026.05.27/snapshot_2026-05-27_12-11.zip",
+          "label": "Public upstream app/package distribution: availability without payment or authentication checked",
+          "checked_at": "2026-11-15",
+          "supports": [
+            "downloads",
+            "pricing"
+          ]
         }
       ],
-      "evidence_status": "official-docs-reviewed"
+      "evidence_status": "official-docs-reviewed",
+      "pricing_notes": "An official public app/package distribution was accessible without payment or authentication. Optional paid editions, hosted services, models and third-party dependencies retain separate terms."
     },
     {
       "id": "imhex",
@@ -5925,9 +6576,19 @@
             "maintenance",
             "platforms"
           ]
+        },
+        {
+          "url": "https://github.com/WerWolv/ImHex/releases/download/v1.38.1/imhex-1.38.1-Windows-x86_64.msi",
+          "label": "Public upstream app/package distribution: availability without payment or authentication checked",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "downloads",
+            "pricing"
+          ]
         }
       ],
-      "evidence_status": "official-docs-reviewed"
+      "evidence_status": "official-docs-reviewed",
+      "pricing_notes": "An official public app/package distribution was accessible without payment or authentication. Optional paid editions, hosted services, models and third-party dependencies retain separate terms."
     },
     {
       "id": "ilspy",
@@ -6021,9 +6682,19 @@
             "maintenance",
             "platforms"
           ]
+        },
+        {
+          "url": "https://github.com/icsharpcode/ILSpy/releases/download/v11.2/ILSpy_windows_11.2.0.10050-x64.zip",
+          "label": "Public upstream app/package distribution: availability without payment or authentication checked",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "downloads",
+            "pricing"
+          ]
         }
       ],
-      "evidence_status": "official-docs-reviewed"
+      "evidence_status": "official-docs-reviewed",
+      "pricing_notes": "An official public app/package distribution was accessible without payment or authentication. Optional paid editions, hosted services, models and third-party dependencies retain separate terms."
     },
     {
       "id": "dnspyex",
@@ -6104,9 +6775,19 @@
             "maintenance",
             "platforms"
           ]
+        },
+        {
+          "url": "https://github.com/dnSpyEx/dnSpy/releases/download/v6.6.0/dnSpy-net-win64.zip",
+          "label": "Public upstream app/package distribution: availability without payment or authentication checked",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "downloads",
+            "pricing"
+          ]
         }
       ],
-      "evidence_status": "official-docs-reviewed"
+      "evidence_status": "official-docs-reviewed",
+      "pricing_notes": "An official public app/package distribution was accessible without payment or authentication. Optional paid editions, hosted services, models and third-party dependencies retain separate terms."
     },
     {
       "id": "renderdoc",
@@ -6198,9 +6879,19 @@
             "downloads",
             "maintenance"
           ]
+        },
+        {
+          "url": "https://github.com/baldurk/renderdoc/archive/HEAD.zip",
+          "label": "Public upstream source distribution; compiled binary packaging is separate",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "downloads",
+            "pricing"
+          ]
         }
       ],
-      "evidence_status": "official-docs-reviewed"
+      "evidence_status": "official-docs-reviewed",
+      "pricing_notes": "The upstream source was publicly accessible at no charge and its build/install route was reviewed. This establishes no-cost source availability, not free prebuilt binaries on every platform."
     },
     {
       "id": "tracy",
@@ -6290,9 +6981,19 @@
             "maintenance",
             "platforms"
           ]
+        },
+        {
+          "url": "https://github.com/wolfpld/tracy/releases/download/v0.15.0/windows-0.15.0.zip",
+          "label": "Public upstream app/package distribution: availability without payment or authentication checked",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "downloads",
+            "pricing"
+          ]
         }
       ],
-      "evidence_status": "official-docs-reviewed"
+      "evidence_status": "official-docs-reviewed",
+      "pricing_notes": "An official public app/package distribution was accessible without payment or authentication. Optional paid editions, hosted services, models and third-party dependencies retain separate terms."
     },
     {
       "id": "perfetto",
@@ -6386,9 +7087,19 @@
             "maintenance",
             "platforms"
           ]
+        },
+        {
+          "url": "https://github.com/google/perfetto/releases/download/v59.1/windows-amd64.zip",
+          "label": "Public upstream app/package distribution: availability without payment or authentication checked",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "downloads",
+            "pricing"
+          ]
         }
       ],
-      "evidence_status": "official-docs-reviewed"
+      "evidence_status": "official-docs-reviewed",
+      "pricing_notes": "An official public app/package distribution was accessible without payment or authentication. Optional paid editions, hosted services, models and third-party dependencies retain separate terms."
     },
     {
       "id": "speedscope",
@@ -6456,8 +7167,9 @@
           "label": "Official project README",
           "checked_at": "2026-11-14",
           "supports": [
+            "features",
             "identity",
-            "features"
+            "platforms"
           ]
         },
         {
@@ -6477,9 +7189,20 @@
             "downloads",
             "maintenance"
           ]
+        },
+        {
+          "url": "https://github.com/jlfwong/speedscope/archive/HEAD.zip",
+          "label": "Public upstream source distribution; compiled binary packaging is separate",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "downloads",
+            "pricing"
+          ]
         }
       ],
-      "evidence_status": "official-docs-reviewed"
+      "evidence_status": "official-docs-reviewed",
+      "pricing_notes": "The upstream source was publicly accessible at no charge and its build/install route was reviewed. This establishes no-cost source availability, not free prebuilt binaries on every platform.",
+      "platform_notes": "Runs in a supported web browser. Profiles are imported into the web application rather than a platform-native profiler."
     },
     {
       "id": "ollama",
@@ -6573,9 +7296,19 @@
             "maintenance",
             "platforms"
           ]
+        },
+        {
+          "url": "https://github.com/ollama/ollama/releases/download/v0.40.16/ollama-windows-amd64.zip",
+          "label": "Public upstream app/package distribution: availability without payment or authentication checked",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "downloads",
+            "pricing"
+          ]
         }
       ],
-      "evidence_status": "official-docs-reviewed"
+      "evidence_status": "official-docs-reviewed",
+      "pricing_notes": "An official public app/package distribution was accessible without payment or authentication. Optional paid editions, hosted services, models and third-party dependencies retain separate terms."
     },
     {
       "id": "llama-cpp",
@@ -6658,9 +7391,29 @@
             "downloads",
             "maintenance"
           ]
+        },
+        {
+          "url": "https://github.com/ggml-org/llama.cpp/archive/HEAD.zip",
+          "label": "Public upstream source distribution; compiled binary packaging is separate",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "downloads",
+            "pricing"
+          ]
+        },
+        {
+          "url": "https://github.com/ggml-org/llama.cpp/blob/master/docs/build.md",
+          "label": "Official source: Build instructions cover Windows, macOS and Linux, with backend-specific prerequisites.",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "platforms",
+            "downloads"
+          ]
         }
       ],
-      "evidence_status": "official-docs-reviewed"
+      "evidence_status": "official-docs-reviewed",
+      "pricing_notes": "The upstream source was publicly accessible at no charge and its build/install route was reviewed. This establishes no-cost source availability, not free prebuilt binaries on every platform.",
+      "platform_notes": "Windows, macOS and Linux builds are documented; acceleration backends, compiler requirements and model compatibility differ by host."
     },
     {
       "id": "jan",
@@ -6761,9 +7514,19 @@
             "maintenance",
             "platforms"
           ]
+        },
+        {
+          "url": "https://github.com/janhq/jan/releases/download/v0.8.8/Jan_0.8.8_x64-setup.exe",
+          "label": "Public upstream app/package distribution: availability without payment or authentication checked",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "downloads",
+            "pricing"
+          ]
         }
       ],
-      "evidence_status": "official-docs-reviewed"
+      "evidence_status": "official-docs-reviewed",
+      "pricing_notes": "An official public app/package distribution was accessible without payment or authentication. Optional paid editions, hosted services, models and third-party dependencies retain separate terms."
     },
     {
       "id": "gpt4all",
@@ -6859,9 +7622,19 @@
             "maintenance",
             "platforms"
           ]
+        },
+        {
+          "url": "https://github.com/nomic-ai/gpt4all/releases/download/v3.10.0/gpt4all-installer-win64-v3.10.0.exe",
+          "label": "Public upstream app/package distribution: availability without payment or authentication checked",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "downloads",
+            "pricing"
+          ]
         }
       ],
-      "evidence_status": "official-docs-reviewed"
+      "evidence_status": "official-docs-reviewed",
+      "pricing_notes": "An official public app/package distribution was accessible without payment or authentication. Optional paid editions, hosted services, models and third-party dependencies retain separate terms."
     },
     {
       "id": "anythingllm",
@@ -6956,9 +7729,19 @@
             "maintenance",
             "platforms"
           ]
+        },
+        {
+          "url": "https://github.com/Mintplex-Labs/anything-llm/releases/download/v1.19.0/AnythingLLMDesktop.dmg",
+          "label": "Public upstream app/package distribution: availability without payment or authentication checked",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "downloads",
+            "pricing"
+          ]
         }
       ],
-      "evidence_status": "official-docs-reviewed"
+      "evidence_status": "official-docs-reviewed",
+      "pricing_notes": "An official public app/package distribution was accessible without payment or authentication. Optional paid editions, hosted services, models and third-party dependencies retain separate terms."
     },
     {
       "id": "open-webui",
@@ -7059,6 +7842,14 @@
           "supports": [
             "downloads",
             "maintenance"
+          ]
+        },
+        {
+          "url": "https://docs.openwebui.com/enterprise/",
+          "label": "Official source: Standard branded use is free; branding changes and enterprise-exclusive offerings require the appropriate enterprise license.",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "pricing"
           ]
         }
       ],
@@ -7164,9 +7955,19 @@
             "maintenance",
             "platforms"
           ]
+        },
+        {
+          "url": "https://github.com/mudler/LocalAI/releases/download/v4.12.1/LocalAI-Launcher-x86_64.AppImage",
+          "label": "Public upstream app/package distribution: availability without payment or authentication checked",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "downloads",
+            "pricing"
+          ]
         }
       ],
-      "evidence_status": "official-docs-reviewed"
+      "evidence_status": "official-docs-reviewed",
+      "pricing_notes": "An official public app/package distribution was accessible without payment or authentication. Optional paid editions, hosted services, models and third-party dependencies retain separate terms."
     },
     {
       "id": "aider",
@@ -7258,9 +8059,28 @@
             "downloads",
             "maintenance"
           ]
+        },
+        {
+          "url": "https://files.pythonhosted.org/packages/75/f7/e20749d9a510673e7adf910b005e3efe4ceaf9c194f1dd40d6931a3f34b9/aider_chat-0.86.2-py3-none-any.whl",
+          "label": "Public upstream app/package distribution: availability without payment or authentication checked",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "downloads",
+            "pricing"
+          ]
+        },
+        {
+          "url": "https://aider.chat/docs/install.html",
+          "label": "Official source: Official installation paths are provided for Windows PowerShell and macOS/Linux shells.",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "platforms",
+            "downloads"
+          ]
         }
       ],
-      "evidence_status": "official-docs-reviewed"
+      "evidence_status": "official-docs-reviewed",
+      "pricing_notes": "An official public app/package distribution was accessible without payment or authentication. Optional paid editions, hosted services, models and third-party dependencies retain separate terms."
     },
     {
       "id": "continue",
@@ -7352,9 +8172,38 @@
             "downloads",
             "maintenance"
           ]
+        },
+        {
+          "url": "https://github.com/continuedev/continue/archive/HEAD.zip",
+          "label": "Public upstream source distribution; compiled binary packaging is separate",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "downloads",
+            "pricing"
+          ]
+        },
+        {
+          "url": "https://github.com/continuedev/continue/blob/main/extensions/cli/README.md",
+          "label": "Official source: The CLI documentation provides Windows and macOS/Linux installation paths.",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "platforms",
+            "downloads"
+          ]
+        },
+        {
+          "url": "https://docs.continue.dev/ide-extensions/install",
+          "label": "Official source: Editor integrations require a supported VS Code or JetBrains installation.",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "platforms",
+            "downloads"
+          ]
         }
       ],
-      "evidence_status": "official-docs-reviewed"
+      "evidence_status": "official-docs-reviewed",
+      "pricing_notes": "The upstream source was publicly accessible at no charge and its build/install route was reviewed. This establishes no-cost source availability, not free prebuilt binaries on every platform.",
+      "platform_notes": "CLI and editor integrations have different installation paths; VS Code/JetBrains compatibility and provider setup must be checked."
     },
     {
       "id": "cline",
@@ -7446,9 +8295,29 @@
             "downloads",
             "maintenance"
           ]
+        },
+        {
+          "url": "https://github.com/cline/cline/releases/download/v4.1.26/cline-4.1.26.vsix",
+          "label": "Public upstream app/package distribution: availability without payment or authentication checked",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "downloads",
+            "pricing"
+          ]
+        },
+        {
+          "url": "https://github.com/cline/cline/blob/main/apps/cli/README.md",
+          "label": "Official source: Official CLI documentation lists macOS, Linux and Windows binaries on arm64 and x64.",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "platforms",
+            "downloads"
+          ]
         }
       ],
-      "evidence_status": "official-docs-reviewed"
+      "evidence_status": "official-docs-reviewed",
+      "pricing_notes": "An official public app/package distribution was accessible without payment or authentication. Optional paid editions, hosted services, models and third-party dependencies retain separate terms.",
+      "platform_notes": "Windows, macOS and Linux are documented for the CLI/editor workflow. Desktop-app availability and release maturity are a separate surface and should be checked independently."
     },
     {
       "id": "llamafile",
@@ -7518,9 +8387,10 @@
           "label": "Official project README",
           "checked_at": "2026-11-14",
           "supports": [
-            "identity",
+            "downloads",
             "features",
-            "downloads"
+            "identity",
+            "platforms"
           ]
         },
         {
@@ -7539,9 +8409,19 @@
             "downloads",
             "maintenance"
           ]
+        },
+        {
+          "url": "https://github.com/mozilla-ai/llamafile/releases/download/0.10.6/llamafile-0.10.6.zip",
+          "label": "Public upstream app/package distribution: availability without payment or authentication checked",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "downloads",
+            "pricing"
+          ]
         }
       ],
-      "evidence_status": "official-docs-reviewed"
+      "evidence_status": "official-docs-reviewed",
+      "pricing_notes": "An official public app/package distribution was accessible without payment or authentication. Optional paid editions, hosted services, models and third-party dependencies retain separate terms."
     },
     {
       "id": "node-red",
@@ -7634,9 +8514,36 @@
             "downloads",
             "maintenance"
           ]
+        },
+        {
+          "url": "https://github.com/node-red/node-red/releases/download/5.0.9/node-red-5.0.9.zip",
+          "label": "Public upstream app/package distribution: availability without payment or authentication checked",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "downloads",
+            "pricing"
+          ]
+        },
+        {
+          "url": "https://nodered.org/docs/getting-started/local",
+          "label": "Official source: Local Node.js installation and browser access are documented, with separate Windows instructions.",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "platforms",
+            "downloads"
+          ]
+        },
+        {
+          "url": "https://nodered.org/docs/faq/starting-node-red-on-boot",
+          "label": "Official source: Startup documentation explicitly covers Windows and Linux/OS X paths.",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "platforms"
+          ]
         }
       ],
-      "evidence_status": "official-docs-reviewed"
+      "evidence_status": "official-docs-reviewed",
+      "pricing_notes": "An official public app/package distribution was accessible without payment or authentication. Optional paid editions, hosted services, models and third-party dependencies retain separate terms."
     },
     {
       "id": "n8n",
@@ -7736,9 +8643,36 @@
             "downloads",
             "maintenance"
           ]
+        },
+        {
+          "url": "https://support.n8n.io/article/can-i-use-your-license-for-my-use-case",
+          "label": "Official source: Free self-hosted Community use is subject to Sustainable Use License conditions; commercial licenses are separate.",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "pricing",
+            "license"
+          ]
+        },
+        {
+          "url": "https://n8n.io/pricing/",
+          "label": "Official source: Paid hosted and enterprise options are distinct from the free self-hosted Community edition.",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "pricing"
+          ]
+        },
+        {
+          "url": "https://github.com/n8n-io/n8n-docs/blob/main/docs/deploy/host-n8n/README.md",
+          "label": "Official source: Current self-hosting instructions require Docker on Linux/macOS or WSL on Windows and expose a web interface.",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "platforms",
+            "downloads"
+          ]
         }
       ],
-      "evidence_status": "official-docs-reviewed"
+      "evidence_status": "official-docs-reviewed",
+      "platform_notes": "Self-hosted deployment is a service with a web interface. Current setup requires Docker on Linux/macOS or WSL on Windows; the desktop OS list does not imply native graphical installers."
     },
     {
       "id": "activepieces",
@@ -7838,9 +8772,36 @@
             "downloads",
             "maintenance"
           ]
+        },
+        {
+          "url": "https://www.activepieces.com/pricing",
+          "label": "Official source: A free plan and paid tiers have different capabilities and allowances for cloud or on-premises deployment.",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "pricing"
+          ]
+        },
+        {
+          "url": "https://www.activepieces.com/docs/install/options/docker-compose",
+          "label": "Official source: Docker Compose deployment serves a browser interface; Windows requires WSL2, and paid license keys extend the free plan.",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "platforms",
+            "downloads",
+            "pricing"
+          ]
+        },
+        {
+          "url": "https://docs.docker.com/compose/install/",
+          "label": "Official source: The required Compose runtime is available through Docker Desktop on Windows, macOS and Linux; this establishes container-host compatibility rather than a native app installer.",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "platforms"
+          ]
         }
       ],
-      "evidence_status": "official-docs-reviewed"
+      "evidence_status": "official-docs-reviewed",
+      "platform_notes": "The web interface is browser-based. Self-hosting requires Docker Compose; Windows uses WSL2, and macOS compatibility follows the required Docker runtime rather than a native desktop app."
     },
     {
       "id": "espanso",
@@ -7934,9 +8895,19 @@
             "maintenance",
             "platforms"
           ]
+        },
+        {
+          "url": "https://github.com/espanso/espanso/releases/download/v2.4.1/Espanso-Win-Portable-x86_64.zip",
+          "label": "Public upstream app/package distribution: availability without payment or authentication checked",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "downloads",
+            "pricing"
+          ]
         }
       ],
-      "evidence_status": "official-docs-reviewed"
+      "evidence_status": "official-docs-reviewed",
+      "pricing_notes": "An official public app/package distribution was accessible without payment or authentication. Optional paid editions, hosted services, models and third-party dependencies retain separate terms."
     },
     {
       "id": "beeftext",
@@ -8027,9 +8998,19 @@
             "maintenance",
             "platforms"
           ]
+        },
+        {
+          "url": "https://github.com/xmichelo/Beeftext/releases/download/v16.0/Beeftext-16.0-Installer.exe",
+          "label": "Public upstream app/package distribution: availability without payment or authentication checked",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "downloads",
+            "pricing"
+          ]
         }
       ],
-      "evidence_status": "official-docs-reviewed"
+      "evidence_status": "official-docs-reviewed",
+      "pricing_notes": "An official public app/package distribution was accessible without payment or authentication. Optional paid editions, hosted services, models and third-party dependencies retain separate terms."
     },
     {
       "id": "pulovers-macro-creator",
@@ -8128,9 +9109,19 @@
             "maintenance",
             "platforms"
           ]
+        },
+        {
+          "url": "https://github.com/Pulover/PuloversMacroCreator/releases/download/v5.4.1/MacroCreator-setup.exe",
+          "label": "Public upstream app/package distribution: availability without payment or authentication checked",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "downloads",
+            "pricing"
+          ]
         }
       ],
-      "evidence_status": "official-docs-reviewed"
+      "evidence_status": "official-docs-reviewed",
+      "pricing_notes": "An official public app/package distribution was accessible without payment or authentication. Optional paid editions, hosted services, models and third-party dependencies retain separate terms."
     },
     {
       "id": "playnite",
@@ -8319,9 +9310,19 @@
             "maintenance",
             "platforms"
           ]
+        },
+        {
+          "url": "https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher/releases/download/v2.22.4/Heroic-2.22.4-macOS-x64.dmg",
+          "label": "Public upstream app/package distribution: availability without payment or authentication checked",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "downloads",
+            "pricing"
+          ]
         }
       ],
-      "evidence_status": "official-docs-reviewed"
+      "evidence_status": "official-docs-reviewed",
+      "pricing_notes": "An official public app/package distribution was accessible without payment or authentication. Optional paid editions, hosted services, models and third-party dependencies retain separate terms."
     },
     {
       "id": "lutris",
@@ -8411,9 +9412,19 @@
             "maintenance",
             "platforms"
           ]
+        },
+        {
+          "url": "https://github.com/lutris/lutris/releases/download/v0.5.22/lutris_0.5.22_all.deb",
+          "label": "Public upstream app/package distribution: availability without payment or authentication checked",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "downloads",
+            "pricing"
+          ]
         }
       ],
-      "evidence_status": "official-docs-reviewed"
+      "evidence_status": "official-docs-reviewed",
+      "pricing_notes": "An official public app/package distribution was accessible without payment or authentication. Optional paid editions, hosted services, models and third-party dependencies retain separate terms."
     },
     {
       "id": "bottles",
@@ -8504,9 +9515,19 @@
             "downloads",
             "maintenance"
           ]
+        },
+        {
+          "url": "https://github.com/bottlesdevs/Bottles/archive/HEAD.zip",
+          "label": "Public upstream source distribution; compiled binary packaging is separate",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "downloads",
+            "pricing"
+          ]
         }
       ],
-      "evidence_status": "official-docs-reviewed"
+      "evidence_status": "official-docs-reviewed",
+      "pricing_notes": "The upstream source was publicly accessible at no charge and its build/install route was reviewed. This establishes no-cost source availability, not free prebuilt binaries on every platform."
     },
     {
       "id": "protonup-qt",
@@ -8598,9 +9619,19 @@
             "maintenance",
             "platforms"
           ]
+        },
+        {
+          "url": "https://github.com/DavidoTek/ProtonUp-Qt/releases/download/v2.16.0/ProtonUp-Qt-2.16.0-x86_64.AppImage",
+          "label": "Public upstream app/package distribution: availability without payment or authentication checked",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "downloads",
+            "pricing"
+          ]
         }
       ],
-      "evidence_status": "official-docs-reviewed"
+      "evidence_status": "official-docs-reviewed",
+      "pricing_notes": "An official public app/package distribution was accessible without payment or authentication. Optional paid editions, hosted services, models and third-party dependencies retain separate terms."
     },
     {
       "id": "protontricks",
@@ -8672,9 +9703,28 @@
             "features",
             "downloads"
           ]
+        },
+        {
+          "url": "https://files.pythonhosted.org/packages/92/fd/db457adcc245add22ef81b58ac32e7fbcc267b697876cf684818f94db6c7/protontricks-1.15.0-py3-none-any.whl",
+          "label": "Public upstream app/package distribution: availability without payment or authentication checked",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "downloads",
+            "pricing"
+          ]
+        },
+        {
+          "url": "https://github.com/Matoking/protontricks/blob/master/setup.cfg",
+          "label": "Official source: Upstream package metadata explicitly declares Linux as its platform.",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "platforms"
+          ]
         }
       ],
-      "evidence_status": "official-docs-reviewed"
+      "evidence_status": "official-docs-reviewed",
+      "pricing_notes": "An official public app/package distribution was accessible without payment or authentication. Optional paid editions, hosted services, models and third-party dependencies retain separate terms.",
+      "platform_notes": "Linux/Steam/Proton tool; launching Windows executables through Proton does not make Protontricks a native Windows application."
     },
     {
       "id": "prismlauncher",
@@ -8767,9 +9817,19 @@
             "maintenance",
             "platforms"
           ]
+        },
+        {
+          "url": "https://github.com/PrismLauncher/PrismLauncher/releases/download/11.1.1/PrismLauncher-Windows-MSVC-11.1.1.zip",
+          "label": "Public upstream app/package distribution: availability without payment or authentication checked",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "downloads",
+            "pricing"
+          ]
         }
       ],
-      "evidence_status": "official-docs-reviewed"
+      "evidence_status": "official-docs-reviewed",
+      "pricing_notes": "An official public app/package distribution was accessible without payment or authentication. Optional paid editions, hosted services, models and third-party dependencies retain separate terms."
     },
     {
       "id": "modrinth-app",
@@ -8884,9 +9944,19 @@
             "maintenance",
             "platforms"
           ]
+        },
+        {
+          "url": "https://github.com/modrinth/code/releases/download/v0.23.3/Modrinth.App_0.23.3_x64-setup.exe",
+          "label": "Public upstream app/package distribution: availability without payment or authentication checked",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "downloads",
+            "pricing"
+          ]
         }
       ],
-      "evidence_status": "official-docs-reviewed"
+      "evidence_status": "official-docs-reviewed",
+      "pricing_notes": "An official public app/package distribution was accessible without payment or authentication. Optional paid editions, hosted services, models and third-party dependencies retain separate terms."
     },
     {
       "id": "mod-organizer-2",
@@ -8976,12 +10046,22 @@
             "maintenance",
             "platforms"
           ]
+        },
+        {
+          "url": "https://github.com/ModOrganizer2/modorganizer/releases/download/v2.5.2/Mod.Organizer-2.5.2.7z",
+          "label": "Public upstream app/package distribution: availability without payment or authentication checked",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "downloads",
+            "pricing"
+          ]
         }
       ],
       "evidence_status": "official-docs-reviewed",
       "aliases": [
         "MO2"
-      ]
+      ],
+      "pricing_notes": "An official public app/package distribution was accessible without payment or authentication. Optional paid editions, hosted services, models and third-party dependencies retain separate terms."
     },
     {
       "id": "vortex",
@@ -9071,9 +10151,19 @@
             "maintenance",
             "platforms"
           ]
+        },
+        {
+          "url": "https://github.com/Nexus-Mods/Vortex/releases/download/v2.10.1/vortex-setup-2.10.1.exe",
+          "label": "Public upstream app/package distribution: availability without payment or authentication checked",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "downloads",
+            "pricing"
+          ]
         }
       ],
-      "evidence_status": "official-docs-reviewed"
+      "evidence_status": "official-docs-reviewed",
+      "pricing_notes": "An official public app/package distribution was accessible without payment or authentication. Optional paid editions, hosted services, models and third-party dependencies retain separate terms."
     },
     {
       "id": "wrye-bash",
@@ -9163,9 +10253,19 @@
             "maintenance",
             "platforms"
           ]
+        },
+        {
+          "url": "https://github.com/wrye-bash/wrye-bash/releases/download/v315/Wrye.Bash.315.-.Installer.exe",
+          "label": "Public upstream app/package distribution: availability without payment or authentication checked",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "downloads",
+            "pricing"
+          ]
         }
       ],
-      "evidence_status": "official-docs-reviewed"
+      "evidence_status": "official-docs-reviewed",
+      "pricing_notes": "An official public app/package distribution was accessible without payment or authentication. Optional paid editions, hosted services, models and third-party dependencies retain separate terms."
     },
     {
       "id": "xedit",
@@ -9254,9 +10354,27 @@
             "downloads",
             "maintenance"
           ]
+        },
+        {
+          "url": "https://github.com/TES5Edit/TES5Edit/releases/download/xedit-4.1.5f/xEdit.4.1.5f.7z",
+          "label": "Public upstream app/package distribution: availability without payment or authentication checked",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "downloads",
+            "pricing"
+          ]
+        },
+        {
+          "url": "https://tes5edit.github.io/docs/2-overview.html",
+          "label": "Official source: The official xEdit documentation describes Windows installation and runtime requirements.",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "platforms"
+          ]
         }
       ],
-      "evidence_status": "official-docs-reviewed"
+      "evidence_status": "official-docs-reviewed",
+      "pricing_notes": "An official public app/package distribution was accessible without payment or authentication. Optional paid editions, hosted services, models and third-party dependencies retain separate terms."
     },
     {
       "id": "loot",
@@ -9347,9 +10465,19 @@
             "maintenance",
             "platforms"
           ]
+        },
+        {
+          "url": "https://github.com/loot/loot/releases/download/0.29.2/loot_0.29.2-win64.7z",
+          "label": "Public upstream app/package distribution: availability without payment or authentication checked",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "downloads",
+            "pricing"
+          ]
         }
       ],
-      "evidence_status": "official-docs-reviewed"
+      "evidence_status": "official-docs-reviewed",
+      "pricing_notes": "An official public app/package distribution was accessible without payment or authentication. Optional paid editions, hosted services, models and third-party dependencies retain separate terms."
     },
     {
       "id": "reframework",
@@ -9429,9 +10557,28 @@
             "downloads",
             "maintenance"
           ]
+        },
+        {
+          "url": "https://github.com/praydog/REFramework/releases/download/v1.5.9.1/DD2.zip",
+          "label": "Public upstream app/package distribution: availability without payment or authentication checked",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "downloads",
+            "pricing"
+          ]
+        },
+        {
+          "url": "https://raw.githubusercontent.com/praydog/REFramework/master/.github/workflows/dev-release.yml",
+          "label": "Official source: The official release workflow builds Windows DLL distributions; Linux use is via the separate Proton compatibility route.",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "platforms"
+          ]
         }
       ],
-      "evidence_status": "official-docs-reviewed"
+      "evidence_status": "official-docs-reviewed",
+      "pricing_notes": "An official public app/package distribution was accessible without payment or authentication. Optional paid editions, hosted services, models and third-party dependencies retain separate terms.",
+      "platform_notes": "The native distribution is a Windows game DLL. Upstream documents a separate Proton/Linux compatibility path; support varies by game and runtime."
     },
     {
       "id": "bepinex",
@@ -9524,9 +10671,19 @@
             "maintenance",
             "platforms"
           ]
+        },
+        {
+          "url": "https://github.com/BepInEx/BepInEx/releases/download/v5.4.23.6/BepInEx_win_x64_5.4.23.6.zip",
+          "label": "Public upstream app/package distribution: availability without payment or authentication checked",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "downloads",
+            "pricing"
+          ]
         }
       ],
-      "evidence_status": "official-docs-reviewed"
+      "evidence_status": "official-docs-reviewed",
+      "pricing_notes": "An official public app/package distribution was accessible without payment or authentication. Optional paid editions, hosted services, models and third-party dependencies retain separate terms."
     },
     {
       "id": "retroarch",
@@ -9596,8 +10753,9 @@
           "label": "Official project README",
           "checked_at": "2026-11-14",
           "supports": [
+            "features",
             "identity",
-            "features"
+            "platforms"
           ]
         },
         {
@@ -9617,9 +10775,19 @@
             "downloads",
             "maintenance"
           ]
+        },
+        {
+          "url": "https://github.com/libretro/RetroArch/releases/download/v1.22.2/retroarch-sourceonly-1.22.2.tar.xz",
+          "label": "Public upstream source distribution; compiled binary packaging is separate",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "downloads",
+            "pricing"
+          ]
         }
       ],
-      "evidence_status": "official-docs-reviewed"
+      "evidence_status": "official-docs-reviewed",
+      "pricing_notes": "The upstream source was publicly accessible at no charge and its build/install route was reviewed. This establishes no-cost source availability, not free prebuilt binaries on every platform."
     },
     {
       "id": "dolphin",
@@ -9710,9 +10878,19 @@
             "platforms",
             "maintenance"
           ]
+        },
+        {
+          "url": "https://github.com/dolphin-emu/dolphin/archive/HEAD.zip",
+          "label": "Public upstream source distribution; compiled binary packaging is separate",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "downloads",
+            "pricing"
+          ]
         }
       ],
-      "evidence_status": "official-docs-reviewed"
+      "evidence_status": "official-docs-reviewed",
+      "pricing_notes": "The upstream source was publicly accessible at no charge and its build/install route was reviewed. This establishes no-cost source availability, not free prebuilt binaries on every platform."
     },
     {
       "id": "pcsx2",
@@ -9805,9 +10983,19 @@
             "maintenance",
             "platforms"
           ]
+        },
+        {
+          "url": "https://github.com/PCSX2/pcsx2/releases/download/v2.8.2/pcsx2-v2.8.2-windows-x64-Qt.7z",
+          "label": "Public upstream app/package distribution: availability without payment or authentication checked",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "downloads",
+            "pricing"
+          ]
         }
       ],
-      "evidence_status": "official-docs-reviewed"
+      "evidence_status": "official-docs-reviewed",
+      "pricing_notes": "An official public app/package distribution was accessible without payment or authentication. Optional paid editions, hosted services, models and third-party dependencies retain separate terms."
     },
     {
       "id": "rpcs3",
@@ -9890,9 +11078,19 @@
             "downloads",
             "maintenance"
           ]
+        },
+        {
+          "url": "https://github.com/RPCS3/rpcs3/archive/HEAD.zip",
+          "label": "Public upstream source distribution; compiled binary packaging is separate",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "downloads",
+            "pricing"
+          ]
         }
       ],
-      "evidence_status": "official-docs-reviewed"
+      "evidence_status": "official-docs-reviewed",
+      "pricing_notes": "The upstream source was publicly accessible at no charge and its build/install route was reviewed. This establishes no-cost source availability, not free prebuilt binaries on every platform."
     },
     {
       "id": "ppsspp",
@@ -9992,9 +11190,19 @@
             "maintenance",
             "platforms"
           ]
+        },
+        {
+          "url": "https://github.com/hrydgard/ppsspp/releases/download/v1.20.4/PPSSPP-v1.20.4-Windows-x64.zip",
+          "label": "Public upstream app/package distribution: availability without payment or authentication checked",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "downloads",
+            "pricing"
+          ]
         }
       ],
-      "evidence_status": "official-docs-reviewed"
+      "evidence_status": "official-docs-reviewed",
+      "pricing_notes": "An official public app/package distribution was accessible without payment or authentication. Optional paid editions, hosted services, models and third-party dependencies retain separate terms."
     },
     {
       "id": "mgba",
@@ -10086,9 +11294,19 @@
             "maintenance",
             "platforms"
           ]
+        },
+        {
+          "url": "https://github.com/mgba-emu/mgba/releases/download/0.10.5/mGBA-0.10.5-win64.7z",
+          "label": "Public upstream app/package distribution: availability without payment or authentication checked",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "downloads",
+            "pricing"
+          ]
         }
       ],
-      "evidence_status": "official-docs-reviewed"
+      "evidence_status": "official-docs-reviewed",
+      "pricing_notes": "An official public app/package distribution was accessible without payment or authentication. Optional paid editions, hosted services, models and third-party dependencies retain separate terms."
     },
     {
       "id": "duckstation",
@@ -10189,9 +11407,19 @@
             "maintenance",
             "platforms"
           ]
+        },
+        {
+          "url": "https://github.com/stenzek/duckstation/releases/download/latest/duckstation-windows-x64-release.zip",
+          "label": "Public upstream app/package distribution: availability without payment or authentication checked",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "downloads",
+            "pricing"
+          ]
         }
       ],
-      "evidence_status": "official-docs-reviewed"
+      "evidence_status": "official-docs-reviewed",
+      "pricing_notes": "An official public app/package distribution was accessible without payment or authentication. Optional paid editions, hosted services, models and third-party dependencies retain separate terms."
     },
     {
       "id": "sunshine",
@@ -10295,9 +11523,19 @@
             "maintenance",
             "platforms"
           ]
+        },
+        {
+          "url": "https://github.com/SunshineStream/Sunshine/releases/download/v2026.914.233613/Sunshine-Windows-AMD64-lite.zip",
+          "label": "Public upstream app/package distribution: availability without payment or authentication checked",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "downloads",
+            "pricing"
+          ]
         }
       ],
-      "evidence_status": "official-docs-reviewed"
+      "evidence_status": "official-docs-reviewed",
+      "pricing_notes": "An official public app/package distribution was accessible without payment or authentication. Optional paid editions, hosted services, models and third-party dependencies retain separate terms."
     },
     {
       "id": "moonlight",
@@ -10390,9 +11628,19 @@
             "maintenance",
             "platforms"
           ]
+        },
+        {
+          "url": "https://github.com/moonlight-stream/moonlight-qt/releases/download/v6.2.0/MoonlightPortable-x64-6.2.0.zip",
+          "label": "Public upstream app/package distribution: availability without payment or authentication checked",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "downloads",
+            "pricing"
+          ]
         }
       ],
-      "evidence_status": "official-docs-reviewed"
+      "evidence_status": "official-docs-reviewed",
+      "pricing_notes": "An official public app/package distribution was accessible without payment or authentication. Optional paid editions, hosted services, models and third-party dependencies retain separate terms."
     },
     {
       "id": "obs-studio",
@@ -10485,12 +11733,22 @@
             "maintenance",
             "platforms"
           ]
+        },
+        {
+          "url": "https://github.com/obsproject/obs-studio/releases/download/33.0.1/OBS-Studio-33.0.1-Windows-x64.zip",
+          "label": "Public upstream app/package distribution: availability without payment or authentication checked",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "downloads",
+            "pricing"
+          ]
         }
       ],
       "evidence_status": "official-docs-reviewed",
       "aliases": [
         "OBS"
-      ]
+      ],
+      "pricing_notes": "An official public app/package distribution was accessible without payment or authentication. Optional paid editions, hosted services, models and third-party dependencies retain separate terms."
     },
     {
       "id": "antimicrox",
@@ -10572,9 +11830,19 @@
             "maintenance",
             "platforms"
           ]
+        },
+        {
+          "url": "https://github.com/AntiMicroX/antimicrox/releases/download/3.6.2/antimicrox-3.6.2-Windows-AMD64.exe",
+          "label": "Public upstream app/package distribution: availability without payment or authentication checked",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "downloads",
+            "pricing"
+          ]
         }
       ],
-      "evidence_status": "official-docs-reviewed"
+      "evidence_status": "official-docs-reviewed",
+      "pricing_notes": "An official public app/package distribution was accessible without payment or authentication. Optional paid editions, hosted services, models and third-party dependencies retain separate terms."
     },
     {
       "id": "joyshockmapper",
@@ -10664,9 +11932,19 @@
             "downloads",
             "maintenance"
           ]
+        },
+        {
+          "url": "https://github.com/JibbSmart/JoyShockMapper/archive/HEAD.zip",
+          "label": "Public upstream source distribution; compiled binary packaging is separate",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "downloads",
+            "pricing"
+          ]
         }
       ],
-      "evidence_status": "official-docs-reviewed"
+      "evidence_status": "official-docs-reviewed",
+      "pricing_notes": "The upstream source was publicly accessible at no charge and its build/install route was reviewed. This establishes no-cost source availability, not free prebuilt binaries on every platform."
     },
     {
       "id": "aria2",
@@ -10758,9 +12036,19 @@
             "maintenance",
             "platforms"
           ]
+        },
+        {
+          "url": "https://github.com/aria2/aria2/releases/download/release-1.37.0/aria2-1.37.0-win-64bit-build1.zip",
+          "label": "Public upstream app/package distribution: availability without payment or authentication checked",
+          "checked_at": "2026-11-15",
+          "supports": [
+            "downloads",
+            "pricing"
+          ]
         }
       ],
-      "evidence_status": "official-docs-reviewed"
+      "evidence_status": "official-docs-reviewed",
+      "pricing_notes": "An official public app/package distribution was accessible without payment or authentication. Optional paid editions, hosted services, models and third-party dependencies retain separate terms."
     },
     {
       "id": "motrix",
@@ -10860,9 +12148,19 @@
             "maintenance",
             "platforms"
           ]
+        },
+        {
+          "url": "https://github.com/agalwood/Motrix/releases/download/v2.4.1/Motrix-2.4.1-x64.dmg",
+          "label": "Public upstream app/package distribution: availability without payment or authentication checked",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "downloads",
+            "pricing"
+          ]
         }
       ],
-      "evidence_status": "official-docs-reviewed"
+      "evidence_status": "official-docs-reviewed",
+      "pricing_notes": "An official public app/package distribution was accessible without payment or authentication. Optional paid editions, hosted services, models and third-party dependencies retain separate terms."
     },
     {
       "id": "qbittorrent",
@@ -10961,9 +12259,19 @@
             "maintenance",
             "platforms"
           ]
+        },
+        {
+          "url": "https://github.com/qbittorrent/qBittorrent/releases/download/release-5.3.0/qbittorrent_5.3.0_x64_setup.exe",
+          "label": "Public upstream app/package distribution: availability without payment or authentication checked",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "downloads",
+            "pricing"
+          ]
         }
       ],
-      "evidence_status": "official-docs-reviewed"
+      "evidence_status": "official-docs-reviewed",
+      "pricing_notes": "An official public app/package distribution was accessible without payment or authentication. Optional paid editions, hosted services, models and third-party dependencies retain separate terms."
     },
     {
       "id": "transmission",
@@ -11063,9 +12371,19 @@
             "maintenance",
             "platforms"
           ]
+        },
+        {
+          "url": "https://github.com/transmission/transmission/releases/download/4.1.4/transmission-4.1.4-x64.msi",
+          "label": "Public upstream app/package distribution: availability without payment or authentication checked",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "downloads",
+            "pricing"
+          ]
         }
       ],
-      "evidence_status": "official-docs-reviewed"
+      "evidence_status": "official-docs-reviewed",
+      "pricing_notes": "An official public app/package distribution was accessible without payment or authentication. Optional paid editions, hosted services, models and third-party dependencies retain separate terms."
     },
     {
       "id": "deluge",
@@ -11166,9 +12484,19 @@
             "platforms",
             "downloads"
           ]
+        },
+        {
+          "url": "https://github.com/deluge-torrent/deluge/archive/HEAD.zip",
+          "label": "Public upstream source distribution; compiled binary packaging is separate",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "downloads",
+            "pricing"
+          ]
         }
       ],
-      "evidence_status": "official-docs-reviewed"
+      "evidence_status": "official-docs-reviewed",
+      "pricing_notes": "The upstream source was publicly accessible at no charge and its build/install route was reviewed. This establishes no-cost source availability, not free prebuilt binaries on every platform."
     },
     {
       "id": "yt-dlp",
@@ -11252,9 +12580,19 @@
             "maintenance",
             "platforms"
           ]
+        },
+        {
+          "url": "https://github.com/yt-dlp/yt-dlp/releases/download/2026.10.26/yt-dlp.exe",
+          "label": "Public upstream app/package distribution: availability without payment or authentication checked",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "downloads",
+            "pricing"
+          ]
         }
       ],
-      "evidence_status": "official-docs-reviewed"
+      "evidence_status": "official-docs-reviewed",
+      "pricing_notes": "An official public app/package distribution was accessible without payment or authentication. Optional paid editions, hosted services, models and third-party dependencies retain separate terms."
     },
     {
       "id": "streamlink",
@@ -11347,9 +12685,19 @@
             "downloads",
             "maintenance"
           ]
+        },
+        {
+          "url": "https://github.com/streamlink/streamlink/releases/download/8.6.3/streamlink-8.6.3.tar.gz",
+          "label": "Public upstream source distribution; compiled binary packaging is separate",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "downloads",
+            "pricing"
+          ]
         }
       ],
-      "evidence_status": "official-docs-reviewed"
+      "evidence_status": "official-docs-reviewed",
+      "pricing_notes": "The upstream source was publicly accessible at no charge and its build/install route was reviewed. This establishes no-cost source availability, not free prebuilt binaries on every platform."
     },
     {
       "id": "firefox",
@@ -11455,6 +12803,15 @@
             "downloads",
             "platforms"
           ]
+        },
+        {
+          "url": "https://www.firefox.com/en-US/more/faq/",
+          "label": "Official source: Mozilla explicitly states that the browser has no usage charge and supports Windows, macOS and Linux.",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "pricing",
+            "platforms"
+          ]
         }
       ],
       "evidence_status": "official-docs-reviewed",
@@ -11553,12 +12910,22 @@
             "maintenance",
             "platforms"
           ]
+        },
+        {
+          "url": "https://github.com/brave/brave-browser/releases/download/v1.99.57/Brave-Browser-x64.dmg",
+          "label": "Public upstream app/package distribution: availability without payment or authentication checked",
+          "checked_at": "2026-11-15",
+          "supports": [
+            "downloads",
+            "pricing"
+          ]
         }
       ],
       "evidence_status": "official-docs-reviewed",
       "aliases": [
         "Brave Browser"
-      ]
+      ],
+      "pricing_notes": "An official public app/package distribution was accessible without payment or authentication. Optional paid editions, hosted services, models and third-party dependencies retain separate terms."
     },
     {
       "id": "sublime-text",
@@ -12280,6 +13647,14 @@
           "supports": [
             "license"
           ]
+        },
+        {
+          "url": "https://vivaldi.com/privacy/browser/",
+          "label": "Official source: The vendor explicitly describes providing the browser free of charge through partner revenue.",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "pricing"
+          ]
         }
       ],
       "evidence_status": "official-docs-reviewed"
@@ -12362,9 +13737,19 @@
           "supports": [
             "license"
           ]
+        },
+        {
+          "url": "https://dl.librewolf.net/librewolf/159.0.1-1/librewolf-159.0.1-1-windows-x86_64-setup.exe",
+          "label": "Public upstream app/package distribution: availability without payment or authentication checked",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "downloads",
+            "pricing"
+          ]
         }
       ],
-      "evidence_status": "official-docs-reviewed"
+      "evidence_status": "official-docs-reviewed",
+      "pricing_notes": "An official public app/package distribution was accessible without payment or authentication. Optional paid editions, hosted services, models and third-party dependencies retain separate terms."
     },
     {
       "id": "tor-browser",

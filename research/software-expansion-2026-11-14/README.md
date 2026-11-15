@@ -32,6 +32,8 @@ metadata, popularity or HTTP reachability with a verified quality ranking.
 - `baseline.json` records source commit, checksums and original counts.
 - `*-sources.json` contain research source observations from each team.
 - `coverage.json` is generated from the actual integrated database.
+- `refresh-queue.json` records unresolved metadata and review priorities without relabeling products as abandoned.
+- `data/software/coverage-priorities.json` and the generated Wiki coverage page identify underrepresented task domains and single-candidate categories.
 - `local-browser-attempt.json` records the host restriction before any UI checks ran.
 - The source-audit report distinguishes successful requests, missing endpoints, access blocks and inconclusive checks.
 - GitHub Actions artifacts retain actual Chromium results and screenshots.

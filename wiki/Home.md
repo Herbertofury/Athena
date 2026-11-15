@@ -51,4 +51,10 @@ The engineering source is preserved under `engineering/`, with native wiki pages
 
 - [Keyboard access and verification limits](Accessibility)
 
-- [Software discovery: tasks, comparisons and sources](Software-Catalog)
+
+## Software discovery
+
+- [Catalog and application families](Software-Catalog)
+- [Task decision guides](Software-Decision-Guides)
+- [Coverage and refresh priorities](Software-Coverage)
+- [Selection and evidence methodology](Software-Methodology)

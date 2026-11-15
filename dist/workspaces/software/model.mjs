@@ -59,7 +59,86 @@ function pattern(term) {
   return new RegExp('(?:^|[^a-z0-9])' + escaped + (term.length <= 3 ? '(?=$|[^a-z0-9])' : ''), 'i');
 }
 export function alternativeTarget(query) {
-  return fold(query).match(/\b(?:alternatives?\s+(?:to|for)|replacement\s+for|instead\s+of)\s+(.+?)\s*[?.!]*$/)?.[1]?.trim() || '';
+  const value = fold(query).trim().replace(/[?.!]+$/, '').trim();
+  return value.match(/\b(?:alternatives?\s+(?:to|for)|replacement\s+for|instead\s+of)\s+(.+?)$/)?.[1]?.trim() ||
+    value.match(/^(?:(?:please|find|show|compare|me|an?|the|best)\s+)*(.+?)\s+alternatives?$/)?.[1]?.trim() || '';
+}
+function taskIntent(query) {
+  const value = fold(query).replace(/[^a-z0-9+#.]+/g, ' ').trim();
+  const taskWords = value.split(/\s+/).filter(word => !STOP.has(word)).join(' ');
+  const capabilities = row => fold([row.app.summary, ...(row.app.features || []), ...(row.app.use_cases || [])].join(' '));
+  let accepts, consumed, score;
+  // A few high-confidence task phrases need semantic direction or category
+  // context. Keep their expansion scoped: a photo is not a disk image, speech
+  // recognition is not speech synthesis, and transfer tools are not analyzers.
+  if (/\b(?:duplicates?|similar)\b/.test(value) && /\b(?:photos?|images?|pictures?)\b/.test(value)) {
+    accepts = row => row.app.category_id === 'files/duplicate-detection' && /\b(?:photo|picture|image)/.test(row.text);
+    consumed = /\b(?:remove|removing|delete|deleting|find|detect|review|duplicates?|similar|photos?|images?|pictures?)\b/g;
+  } else if (/\bocr\b/.test(value) || /\b(?:scan|scans|scanned|scanning)\b/.test(value) && /\b(?:docs?|documents?|paperwork|pages?)\b/.test(value)) {
+    accepts = row => row.app.category_id === 'productivity/scanning-ocr';
+    consumed = /\b(?:ocr|scan|scans|scanned|scanning|docs?|documents?|paperwork|pages?|pdfs?)\b/g;
+  } else if (/\b(?:extract|extracting|extractor|export|recover)\b/.test(value) && /\b(?:games?|unity|unreal)\b/.test(value) && /\b(?:assets?|models?|textures?)\b/.test(value)) {
+    // These entries explicitly cover extraction/reconstruction. Other game
+    // asset editors specialize in modifying meshes or converting textures.
+    accepts = row => ['fmodel', 'assetripper'].includes(row.app.id);
+    consumed = /\b(?:extract|extracting|extractor|export|recover|games?|assets?|models?|textures?)\b/g;
+  } else if (/\b(?:speech|audio) to text\b/.test(value)) {
+    accepts = row => row.app.category_id === 'ai/speech-transcription';
+    consumed = /\b(?:speech|audio|to|text)\b/g;
+  } else if (/^(?:(?:locate|identify)\s+)?(?:large|largest|big|biggest)\s+(?:files?|folders?)\b/.test(taskWords)) {
+    accepts = row => row.app.category_id === 'files/storage-analysis' &&
+      /\b(?:files?|folders?|directories|directory)\b/.test(capabilities(row));
+    consumed = /\b(?:find|locate|identify|large|largest|big|biggest|files?|folders?)\b/g;
+  } else if (/\b(?:convert|conversion|transcode|transcoding|encode|encoding)\b/.test(value) && /\b(?:videos?|movies?|footage)\b/.test(value)) {
+    accepts = row => row.app.category_id === 'creative/media-transcoding';
+    consumed = /\b(?:convert|conversion|transcode|transcoding|encode|encoding|videos?|movies?|footage)\b/g;
+  } else if (/\b(?:crop|cropping|resize|resizing|scale|scaling)\b/.test(value) && /\b(?:images?|photos?|pictures?)\b/.test(value) && !/\b(?:disk|drive|partition)\b/.test(value)) {
+    // Crop/scale capabilities were checked in the official GIMP 3 manual,
+    // ImageMagick mogrify documentation and IrfanView FAQ (2026-11-15).
+    // https://docs.gimp.org/3.0/en/gimp-tool-crop.html
+    // https://docs.gimp.org/3.0/en/gimp-image-scale.html
+    // https://imagemagick.org/mogrify/ · https://www.irfanview.com/faq.htm
+    accepts = row => ['gimp', 'imagemagick', 'irfanview'].includes(row.app.id);
+    consumed = /\b(?:crop|cropping|resize|resizing|scale|scaling|images?|photos?|pictures?)\b/g;
+  } else if (/\bmusic\b/.test(value) && /\b(?:make|create|compose|composing|produce|producing|production|write|record)\b/.test(value) && !/\b(?:videos?|movies?|playlists?|libraries|library|collections?)\b/.test(value)) {
+    const creation = ['creative/audio-workstations', 'creative/music-notation', 'creative/live-coding-music', 'creative/audio-programming', 'creative/modular-audio', 'creative/software-synthesizers'];
+    accepts = row => creation.includes(row.app.category_id);
+    score = row => row.app.category_id === 'creative/audio-workstations' ? 30 : 0;
+    consumed = /\b(?:make|create|compose|composing|produce|producing|production|write|record|music)\b/g;
+  } else if (/\b(?:remove|removal|clean|cleanup|cleaning|disinfect)\b/.test(value) && /\b(?:malware|viruses?|infections?)\b/.test(value)) {
+    // A scanning engine alone does not establish a removal workflow.
+    accepts = row => row.app.category_id === 'security/malware-scanning' && /\b(?:remov|clean|quarant)/.test(capabilities(row));
+    consumed = /\b(?:remove|removal|clean|cleanup|cleaning|disinfect|malware|viruses?|infections?)\b/g;
+  } else if (/\bnetwork\b/.test(value) && /\btraffic\b/.test(value) && (/\b(?:monitor|monitoring|watch|watching|inspect|inspecting|analyze|analyse|analysis|capture|capturing|observe)\b/.test(value) || /^(?:network traffic|traffic network)\b/.test(taskWords))) {
+    accepts = row => ['networking/traffic-monitoring', 'networking/packet-analysis', 'networking/packet-capture'].includes(row.app.category_id);
+    consumed = /\b(?:monitor|monitoring|watch|watching|inspect|inspecting|analyze|analyse|analysis|capture|capturing|observe|network|traffic)\b/g;
+  } else if (/\b3d\b/.test(value) && /\b(?:print|printing|slicing|slice|slicer)\b/.test(value)) {
+    accepts = row => row.app.category_id === 'science/3d-printing';
+    consumed = /\b(?:3d|print|printing|slicing|slice|slicer|models?)\b/g;
+  } else if (/\bpdfs?\b/.test(value) && !/\b(?:text|content)\b/.test(value) && (/\b(?:organize|organise|reorder|rearrange|merge|combine|split|rotate|crop|extract)\b/.test(value) || /\bpages?\b/.test(value) && /\b(?:edit|editing)\b/.test(value))) {
+    const operations = [
+      [/\b(?:merge|combine)\b/, /\b(?:merg|combin)/], [/\bsplit\b/, /\bsplit/],
+      [/\b(?:reorder|rearrange)\b/, /\b(?:reorder|rearrang)/], [/\brotate\b/, /\brotat/],
+      [/\bcrop\b/, /\bcrop/], [/\bextract\b/, /\bextract/],
+    ].filter(([requested]) => requested.test(value));
+    accepts = row => ['productivity/pdf-organization', 'productivity/pdf-processing', 'productivity/pdf-editors'].includes(row.app.category_id) &&
+      operations.every(([, supported]) => supported.test(capabilities(row)));
+    score = row => row.app.category_id === 'productivity/pdf-organization' ? 20 : 0;
+    consumed = /\b(?:organize|organise|reorder|rearrange|merge|combine|split|rotate|crop|extract|edit|editing|pdfs?|pages?|documents?)\b/g;
+  } else if (/\bpdfs?\b/.test(value) && /\b(?:edit|editing|editors?|modify|modifying)\b/.test(value)) {
+    // Default PDF editing means existing page content. Readers, source-document
+    // editors and page-only utilities do not satisfy this request. ABBYY's
+    // record specifically limits its full PDF-editing workflow to Windows.
+    accepts = (row, state) => row.app.category_id === 'productivity/pdf-editors' ||
+      row.app.id === 'abbyy-finereader-pdf' && (!state.platform || state.platform === 'Windows') && !/\b(?:mac|macos|linux)\b/.test(value);
+    score = row => row.app.category_id === 'productivity/pdf-editors' ? 20 : 0;
+    consumed = /\b(?:edit|editing|editors?|modify|modifying|pdfs?|text|content|documents?|pages?)\b/g;
+  }
+  if (!accepts) return null;
+  // Retain unrecognized qualifiers, so "Unity", "Windows", "free", etc.
+  // still constrain matches rather than silently broadening the request.
+  const remaining = value.replace(consumed, ' ');
+  return {accepts, score, query: /\b(?:speech|audio) to text\b/.test(value) ? remaining.replace(/\boffline\b/g, 'local') : remaining};
 }
 export function parseState(route = '', saved = {}) {
   const raw = String(route).split('?')[1];
@@ -108,20 +187,22 @@ export function queryCatalog(index, state, catalog) {
     if ((targetRow && (row.app.alternative_ids || []).includes(targetRow.app.id)) || (row.app.alternatives || []).some(n => fold(n) === target)) alternativeIds.add(row.app.id);
   }
   if (targetRow) alternativeIds.delete(targetRow.app.id);
-  const tokens = (target ? [] : terms(state.q)).map(group => group.map(pattern));
+  const intent = target ? null : taskIntent(state.q);
+  const tokens = (target ? [] : terms(intent?.query ?? state.q)).map(group => group.map(pattern));
   const task = catalog.recipes.find(r => r.id === state.task);
   const picks = new Map((task?.picks || []).map((p, i) => [p.app_id, i]));
   const rows = [];
   for (const row of index) {
     const a = row.app;
     if (target && !alternativeIds.has(a.id)) continue;
+    if (intent && !intent.accepts(row, state)) continue;
     if (state.family && a.family !== state.family || state.category && a.category_id !== state.category ||
         state.platform && !a.platforms.includes(state.platform) || state.license && a.license_kind !== state.license ||
         state.pricing && a.pricing_model !== state.pricing || state.maintenance && a.maintenance.status !== state.maintenance ||
         state.task && (!task || !picks.has(a.id))) continue;
     if (!tokens.every(group => group.some(re => re.test(row.text)))) continue;
     const exact = fold(state.q).trim();
-    const score = (row.name === exact ? 200 : row.aliases.includes(exact) ? 150 : 0) + tokens.reduce((n, group) => n + (group.some(re => re.test(row.name)) ? 20 : group.some(re => re.test(row.category)) ? 12 : group.some(re => re.test(row.tasks)) ? 6 : 1), 0);
+    const score = (row.name === exact ? 200 : row.aliases.includes(exact) ? 150 : 0) + (intent?.score?.(row) || 0) + tokens.reduce((n, group) => n + (group.some(re => re.test(row.name)) ? 20 : group.some(re => re.test(row.category)) ? 12 : group.some(re => re.test(row.tasks)) ? 6 : 1), 0);
     rows.push({app: a, score});
   }
   rows.sort((a, b) => {
@@ -145,7 +226,7 @@ export function comparisonRows(apps) {
   return [
     ['Choose for', a => a.recommendation.pick_for], ['Compare when', a => a.recommendation.compare_when],
     ['Platforms', a => a.platforms.join(', ') + (a.platform_notes ? '\n' + a.platform_notes : '')],
-    ['Pricing model', a => a.pricing_model], ['License', a => a.license + ' (' + a.license_kind + ')'],
+    ['Pricing model', a => [a.pricing_model, a.pricing_notes].filter(Boolean).join('\n')], ['License', a => a.license + ' (' + a.license_kind + ')'],
     ['Features', a => a.features.join('\n')], ['Strengths', a => a.strengths.join('\n')],
     ['Limitations', a => a.limitations.join('\n')],
     ['Maintenance', a => a.maintenance.status + ': ' + a.maintenance.note],

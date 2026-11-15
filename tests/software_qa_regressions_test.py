@@ -86,7 +86,10 @@ class IntegrationRegressions(unittest.TestCase):
             "blockbench": "open-source",
             "armorpaint": "open-source",
             "duplicati": "mixed",
-            "everything": "proprietary",
+            # The current vendor binary uses MIT-style terms, but application
+            # source availability is unresolved. Do not turn that license text
+            # into a verified open-source classification.
+            "everything": "unknown",
         }
         for app_id, classification in expected.items():
             with self.subTest(app_id=app_id):

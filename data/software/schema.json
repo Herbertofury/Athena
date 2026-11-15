@@ -285,6 +285,10 @@
                 }
               }
             }
+          },
+          "pricing_notes": {
+            "type": "string",
+            "minLength": 1
           }
         }
       }

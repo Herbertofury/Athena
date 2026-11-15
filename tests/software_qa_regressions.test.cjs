@@ -33,6 +33,181 @@ test('alternative requests use explicit relationships and preserve platform cons
   assert.deepEqual(queryCatalog(index, {...state, q: 'alternatives to unlisted-fixture-product'}, catalog), []);
 });
 
+test('suffix alternative requests resolve existing Photoshop and MATLAB relationships', async () => {
+  const {indexCatalog, queryCatalog, parseState, alternativeTarget} = await model;
+  const index = indexCatalog(catalog);
+  const find = q => queryCatalog(index, {...parseState(), q}, catalog);
+  for (const q of ['Photoshop alternative', 'compare Photoshop alternatives', 'Please find Photoshop alternatives?  ']) {
+    assert.equal(alternativeTarget(q), 'photoshop');
+    const ids = new Set(find(q).map(a => a.id));
+    assert.ok(ids.has('gimp'), q);
+    assert.ok(ids.has('krita'), q);
+    assert.equal(ids.has('adobe-photoshop'), false, q);
+  }
+  assert.ok(find('MATLAB alternative').some(a => a.id === 'gnu-octave'));
+  assert.ok(find('MATLAB alternative').some(a => a.id === 'scilab'));
+  assert.deepEqual(find('unlisted-fixture-product alternatives'), []);
+  const filtered = queryCatalog(index, {...parseState(), q: 'Photoshop alternatives', platform: 'Linux'}, catalog);
+  assert.ok(filtered.some(a => a.id === 'gimp'));
+  assert.ok(filtered.every(a => a.platforms.includes('Linux')));
+});
+
+test('task intent retrieves picture deduplication and scanning tools without unrelated editors', async () => {
+  const {indexCatalog, queryCatalog, parseState} = await model;
+  const index = indexCatalog(catalog), find = q => queryCatalog(index, {...parseState(), q}, catalog);
+  const duplicates = find('remove duplicate photos');
+  assert.ok(duplicates.some(a => a.id === 'czkawka---krokiet'));
+  assert.ok(duplicates.some(a => a.id === 'dupeguru'));
+  assert.ok(duplicates.every(a => a.category_id === 'files/duplicate-detection'));
+  assert.equal(duplicates.some(a => ['jdupes', 'rmlint', 'clonezilla'].includes(a.id)), false);
+  for (const q of ['OCR scanned docs', 'scan documents']) {
+    const rows = find(q);
+    assert.ok(rows.some(a => a.id === 'ocrmypdf'), q);
+    assert.ok(rows.some(a => a.id === 'naps2'), q);
+    assert.ok(rows.every(a => a.category_id === 'productivity/scanning-ocr'), q);
+    assert.equal(rows.some(a => a.id === 'pdf-arranger'), false, q);
+  }
+});
+
+test('task intent distinguishes game asset extraction from mesh editing and retains engine qualifiers', async () => {
+  const {indexCatalog, queryCatalog, parseState} = await model;
+  const index = indexCatalog(catalog), find = q => queryCatalog(index, {...parseState(), q}, catalog);
+  const rows = find('extract game assets');
+  assert.ok(rows.some(a => a.id === 'assetripper'));
+  assert.ok(rows.some(a => a.id === 'fmodel'));
+  assert.equal(rows.some(a => ['bodyslide', 'texconv'].includes(a.id)), false);
+  const unity = find('extract Unity game assets');
+  assert.ok(unity.some(a => a.id === 'assetripper'));
+  assert.equal(unity.some(a => a.id === 'fmodel'), false);
+  assert.deepEqual(find('extract game assets unsupported-fixture-format'), []);
+});
+
+test('speech direction retrieves transcription rather than speech synthesis', async () => {
+  const {indexCatalog, queryCatalog, parseState} = await model;
+  const index = indexCatalog(catalog), find = q => queryCatalog(index, {...parseState(), q}, catalog);
+  for (const q of ['speech to text', 'local speech to text', 'offline speech-to-text']) {
+    const rows = find(q);
+    assert.ok(rows.some(a => a.id === 'whisper-cpp'), q);
+    assert.equal(rows.some(a => a.id === 'espeak-ng'), false, q);
+    assert.ok(rows.every(a => a.category_id === 'ai/speech-transcription'), q);
+  }
+  const synthesis = find('text to speech');
+  assert.ok(synthesis.some(a => a.id === 'espeak-ng'));
+  assert.equal(synthesis.some(a => a.id === 'whisper-cpp'), false);
+});
+
+test('large-file task prioritizes storage analysis and preserves explicit platform filters', async () => {
+  const {indexCatalog, queryCatalog, parseState} = await model;
+  const index = indexCatalog(catalog);
+  const rows = queryCatalog(index, {...parseState(), q: 'find large files'}, catalog);
+  assert.ok(rows.some(a => a.id === 'wiztree'));
+  assert.ok(rows.some(a => a.id === 'windirstat'));
+  assert.ok(rows.every(a => a.category_id === 'files/storage-analysis'));
+  assert.equal(rows.some(a => ['croc', 'rsync', 'yazi', 'duf'].includes(a.id)), false,
+    'Transfers, file browsing and mounted-volume totals do not locate large files');
+  const windows = queryCatalog(index, {...parseState(), q: 'find large files', platform: 'Windows'}, catalog);
+  assert.ok(windows.some(a => a.id === 'wiztree'));
+  assert.ok(windows.every(a => a.platforms.includes('Windows')));
+  assert.equal(windows.some(a => a.id === 'grandperspective'), false);
+  const transfer = queryCatalog(index, {...parseState(), q: 'send large files'}, catalog);
+  assert.ok(transfer.some(a => a.id === 'croc'), 'A transfer request must not be rerouted into disk analysis');
+});
+
+test('video conversion retrieves transcoders rather than subtitle-format tools', async () => {
+  const {indexCatalog, queryCatalog, parseState} = await model;
+  const index = indexCatalog(catalog), find = q => queryCatalog(index, {...parseState(), q}, catalog);
+  const rows = find('convert video');
+  for (const id of ['ffmpeg', 'handbrake', 'shutter-encoder']) assert.ok(rows.some(a => a.id === id), id);
+  assert.equal(rows.some(a => a.id === 'subtitle-edit'), false);
+  assert.deepEqual(find('convert video unsupported-fixture-codec'), []);
+});
+
+test('crop and resize requests retrieve verified image operations and preserve platform constraints', async () => {
+  const {indexCatalog, queryCatalog, parseState} = await model;
+  const index = indexCatalog(catalog);
+  for (const q of ['crop images', 'resize photos']) {
+    const rows = queryCatalog(index, {...parseState(), q}, catalog);
+    for (const id of ['gimp', 'imagemagick', 'irfanview']) assert.ok(rows.some(a => a.id === id), q + ': ' + id);
+    assert.equal(rows.some(a => ['clonezilla', 'rescuezilla'].includes(a.id)), false);
+    const linux = queryCatalog(index, {...parseState(), q, platform: 'Linux'}, catalog);
+    assert.ok(linux.some(a => a.id === 'imagemagick'));
+    assert.equal(linux.some(a => a.id === 'irfanview'), false);
+    assert.ok(linux.every(a => a.platforms.includes('Linux')));
+  }
+  assert.deepEqual(queryCatalog(index, {...parseState(), q: 'resize photos unsupported-fixture-format'}, catalog), []);
+});
+
+test('music creation leads with production tools and does not turn library management into composition', async () => {
+  const {indexCatalog, queryCatalog, parseState} = await model;
+  const index = indexCatalog(catalog), find = q => queryCatalog(index, {...parseState(), q}, catalog);
+  const rows = find('make music');
+  for (const id of ['reaper', 'ardour', 'lmms', 'fl-studio']) assert.ok(rows.slice(0, 8).some(a => a.id === id), id);
+  assert.ok(rows.slice(0, 8).every(a => a.category_id === 'creative/audio-workstations'));
+  assert.equal(rows.some(a => ['musicbee', 'musicbrainz-picard', 'strawberry'].includes(a.id)), false);
+  assert.ok(find('manage music').some(a => a.id === 'musicbee'));
+  assert.deepEqual(find('make music unsupported-fixture-workflow'), []);
+});
+
+test('malware removal requires a documented cleaning workflow while scanning remains discoverable', async () => {
+  const {indexCatalog, queryCatalog, parseState} = await model;
+  const index = indexCatalog(catalog), find = q => queryCatalog(index, {...parseState(), q}, catalog);
+  const rows = find('remove malware');
+  assert.ok(rows.some(a => a.id === 'malwarebytes'));
+  assert.ok(rows.some(a => a.id === 'emsisoft-emergency-kit'));
+  assert.equal(rows.some(a => a.id === 'clamav'), false, 'The scanning-engine record does not establish a removal workflow');
+  assert.ok(find('scan for malware').some(a => a.id === 'clamav'));
+});
+
+test('network traffic requests include packet analysis alongside connection and bandwidth tools', async () => {
+  const {indexCatalog, queryCatalog, parseState} = await model;
+  const index = indexCatalog(catalog);
+  for (const q of ['monitor network traffic', 'network traffic']) {
+    const rows = queryCatalog(index, {...parseState(), q}, catalog);
+    for (const id of ['wireshark', 'sniffnet', 'tcpdump']) assert.ok(rows.some(a => a.id === id), q + ': ' + id);
+    assert.equal(rows.some(a => a.id === 'little-snitch'), false, 'Blocking traffic is a separate task');
+  }
+  const windows = queryCatalog(index, {...parseState(), q: 'monitor network traffic', platform: 'Windows'}, catalog);
+  assert.ok(windows.some(a => a.id === 'wireshark'));
+  assert.ok(windows.every(a => a.platforms.includes('Windows')));
+});
+
+test('3D printing retrieves slicers and retains material-specific qualifications', async () => {
+  const {indexCatalog, queryCatalog, parseState} = await model;
+  const index = indexCatalog(catalog), find = q => queryCatalog(index, {...parseState(), q}, catalog);
+  const rows = find('3D print models');
+  for (const id of ['prusaslicer', 'cura', 'orcaslicer']) assert.ok(rows.some(a => a.id === id), id);
+  assert.equal(rows.some(a => ['freecad', 'blender'].includes(a.id)), false);
+  const resin = find('3D print resin models');
+  assert.ok(resin.some(a => a.id === 'prusaslicer'));
+  assert.equal(resin.some(a => a.id === 'orcaslicer'), false);
+  assert.deepEqual(find('3D print models unsupported-fixture-material'), []);
+});
+
+test('PDF content editing stays distinct from page organization, readers and source-document editors', async () => {
+  const {indexCatalog, queryCatalog, parseState} = await model;
+  const index = indexCatalog(catalog), find = q => queryCatalog(index, {...parseState(), q}, catalog);
+  for (const q of ['edit PDF', 'edit PDF text']) {
+    const rows = find(q);
+    assert.equal(rows[0]?.category_id, 'productivity/pdf-editors', q);
+    assert.ok(rows.some(a => a.id === 'adobe-acrobat-pro'), q);
+    assert.ok(rows.some(a => a.id === 'abbyy-finereader-pdf'), q);
+    assert.equal(rows.some(a => ['pdf-arranger', 'pdfsam-basic', 'sumatrapdf', 'texstudio', 'typst'].includes(a.id)), false, q);
+  }
+  const pages = find('edit PDF pages');
+  assert.equal(pages[0]?.category_id, 'productivity/pdf-organization');
+  assert.ok(pages.some(a => a.id === 'pdf-arranger'));
+  assert.ok(pages.some(a => a.id === 'pdfsam-basic'));
+  assert.ok(find('merge PDF documents').some(a => a.id === 'pdfsam-basic'));
+  const crop = find('crop PDF pages');
+  assert.ok(crop.some(a => a.id === 'pdf-arranger'));
+  assert.equal(crop.some(a => a.id === 'pdfsam-basic'), false, 'PDFsam Basic does not document page cropping in this record');
+  const mac = queryCatalog(index, {...parseState(), q: 'edit PDF', platform: 'macOS'}, catalog);
+  assert.ok(mac.some(a => a.id === 'adobe-acrobat-pro'));
+  assert.equal(mac.some(a => a.id === 'abbyy-finereader-pdf'), false, 'The record limits full PDF editing to the Windows edition');
+  assert.ok(find('read PDF').some(a => a.id === 'sumatrapdf'));
+  assert.deepEqual(find('edit PDF unsupported-fixture-feature'), []);
+});
+
 async function domFixture(t, route = '#software?q=', saved = {}) {
   const {window} = parseHTML('<html><body><section id="software-fixture"></section></body></html>');
   const document = window.document;

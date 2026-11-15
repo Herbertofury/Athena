@@ -1,0 +1,100 @@
+{
+  "schema_version": 1,
+  "completed_at": "2026-11-15T02:32:20.991846+00:00",
+  "scope": "Local generated-data, preservation, deterministic application tests and public packaging; actual Chromium and deployed-site verification run separately on GitHub Actions.",
+  "counts": {
+    "applications": 736,
+    "new_applications": 631,
+    "preserved_pc_records": 105,
+    "preserved_cleanup_records": 66,
+    "baseline_categories": 42,
+    "categories": 286,
+    "families": 10,
+    "source_urls": 3148,
+    "alternative_links": 1492,
+    "unresolved_alternative_mentions": 77,
+    "legacy_records_enriched": 65,
+    "use_cases": 1154,
+    "decision_guides": 85,
+    "related_research_records": 94,
+    "preserved_cleanup_unranked": 3,
+    "preserved_cleanup_excluded": 1,
+    "by_family": {
+      "ai": 22,
+      "creative": 112,
+      "development": 127,
+      "files": 65,
+      "gaming": 44,
+      "networking": 83,
+      "productivity": 74,
+      "science": 78,
+      "security": 51,
+      "system": 80
+    },
+    "by_platform": {
+      "Bootable": 6,
+      "FreeBSD": 42,
+      "Linux": 576,
+      "Web": 40,
+      "Windows": 633,
+      "macOS": 529
+    },
+    "by_maintenance": {
+      "active": 476,
+      "unverified": 260
+    },
+    "by_license": {
+      "mixed": 36,
+      "open-source": 583,
+      "proprietary": 94,
+      "source-available": 9,
+      "unknown": 14
+    },
+    "by_pricing": {
+      "free": 441,
+      "freemium": 63,
+      "mixed": 39,
+      "paid": 18,
+      "subscription": 13,
+      "unknown": 162
+    }
+  },
+  "preserved_baseline_files": 4,
+  "checks": [
+    {
+      "command": "npm run build",
+      "result": "pass"
+    },
+    {
+      "command": "npm test",
+      "result": "pass",
+      "software_focus": {
+        "javascript_tests": 30,
+        "python_tests": 16
+      }
+    },
+    {
+      "command": "python3 scripts/package_app.py --profile public-preview --allowlist config/runtime-public-preview.json --output <fresh directory>",
+      "result": "pass",
+      "runtime_files": 117
+    },
+    {
+      "command": "Final recorded search matrix replay",
+      "result": "pass",
+      "query_cases": 37
+    }
+  ],
+  "files": {
+    "dist/workspaces/software/catalog.json": "c2b6af8a973a3dd58f9b1fe259eb5bc4cac70b65bb912968647aa7c545fabff2",
+    "src/software/index.mjs": "ee74ab61882a526a0d331aa90198771ded80049f3894c6742e4109585cf1fd6c",
+    "src/software/model.mjs": "ef08147df62f1a4c6319e17503f3a9d5584e6ba4c4a3ef33727282068eca6abd",
+    "src/software/style.css": "9add15b17765aabe8dc14420afa7ec4fd9d0098f244413a30c74cbec1693a8b2",
+    "config/runtime-public-preview.json": "02c12cdfb7002c06ecb51f4dfeb02fb76bf3c744c81f441f7de79f724234a432",
+    "scripts/software_browser_checks.cjs": "f0c3514e96f96510b2cbf65607c3050230cd24ef08325a5e8449d51346998d0a"
+  },
+  "logs": {
+    "athena-final-build.log": "56994100f736bafd11dc504c49beee12b5bab18ce66326cca3b10db31d9f0da6",
+    "athena-final-test.log": "6cdcd55a6f747d178106119997bed38a113ca764bd8a505a7ad34433353b6c5b",
+    "athena-final-package.log": "f299046c69b0add0595e32d1551c47bc0c214fdf082826f6b0490a005ad1606a"
+  }
+}

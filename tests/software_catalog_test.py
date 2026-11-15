@@ -57,9 +57,22 @@ class CatalogTests(unittest.TestCase):
         self.assertIn("maintenance review date missing or invalid", str(error.exception))
         self.assertIn("source review date missing or invalid", str(error.exception))
 
+    def test_known_fields_require_claim_specific_sources(self):
+        a = copy.deepcopy(next(x for x in self.catalog["applications"]
+                               if x["evidence_status"] != "legacy-research" and x["pricing_model"] != "unknown"))
+        for s in a["sources"]:
+            s["supports"] = [x for x in s["supports"] if x != "pricing"] or ["identity"]
+        with self.assertRaisesRegex(ValueError, "missing claim-specific sources: pricing"):
+            builder.validate([a])
+        a["pricing_model"] = "unknown"
+        builder.validate([a])
+
     def test_taxonomy_alternatives_and_recommendations_have_real_targets(self):
         ids = {a["id"] for a in self.catalog["applications"]}
         categories = {c["id"] for c in self.catalog["categories"]}
+        for c in self.catalog["categories"]:
+            self.assertEqual(c["count"], len(c["application_ids"]))
+            self.assertEqual(set(c["application_ids"]), {a["id"] for a in self.catalog["applications"] if a["category_id"] == c["id"]})
         for a in self.catalog["applications"]:
             self.assertIn(a["category_id"], categories)
             self.assertTrue(set(a["alternative_ids"]) <= ids)
@@ -70,6 +83,14 @@ class CatalogTests(unittest.TestCase):
             for p in recipe["picks"]:
                 self.assertIn(p["app_id"], ids)
                 self.assertTrue(p["reason"] and p["tradeoff"])
+
+    def test_refresh_queue_separates_review_age_from_product_status(self):
+        current = builder.coverage_report(self.catalog, builder.REVIEWED)
+        later = builder.coverage_report(self.catalog, "2027-03-01")
+        self.assertFalse(any("latest source review older than 90 days" in a["reasons"] for a in current["refresh_queue"]))
+        self.assertTrue(all("latest source review older than 90 days" in a["reasons"] for a in later["refresh_queue"]))
+        self.assertEqual(len(later["refresh_queue"]), len(self.catalog["applications"]))
+        self.assertEqual(later["counts"]["by_maintenance"], current["counts"]["by_maintenance"])
 
     def test_link_audit_does_not_confuse_access_blocks_with_missing_pages(self):
         for status in [200, 206]: self.assertEqual(links.classify(status), "reachable")

@@ -1,6 +1,6 @@
 # Software selection and evidence
 
-[Browse the software workspace](https://herbertofury.github.io/Athena/#software) · [Catalog and coverage](Software-Catalog) · [Task guides](Software-Decision-Guides)
+[Browse the software workspace](https://herbertofury.github.io/Athena/#software) · [Catalog](Software-Catalog) · [Task guides](Software-Decision-Guides) · [Coverage and refresh priorities](Software-Coverage)
 
 Athena helps a person choose software for a concrete task. The database keeps product identity, documented capabilities, suitability judgments, maintenance observations and measured results separate. The present expansion is a documentation-backed discovery catalog, not a claim that every program has been installed or benchmarked.
 
@@ -40,7 +40,7 @@ Claims about relative performance need a separate reproducible experiment: pin v
 
 ## Data and generated views
 
-The canonical additions live in `data/software/systems.json`, `creative.json` and `development.json`. Task guides live beside them. `scripts/build_software_catalog.py` combines the additions with the original Windows catalog, checks identity and source contracts, resolves alternatives, derives family/category relationships and writes the main application database and Wiki pages from the same records.
+The canonical additions live in `data/software/systems.json`, `creative.json`, `development.json` and the automatically discovered `*-expanded.json` batches. Task guides live beside them. `scripts/build_software_catalog.py` combines the additions with the original Windows catalog, checks identity and source contracts, resolves alternatives, derives family/category relationships and writes the main application database and Wiki pages from the same records.
 
 The original cleanup snapshot, Windows catalog, creative-AI catalog and engineering research library are immutable inputs to this expansion. Their checksums are recorded in `research/software-expansion-2026-11-14/baseline.json`. The imported PC records retain the full original fields. All 66 main cleanup candidates, three unranked candidates and one previously excluded candidate remain searchable with their original classifications, alongside 24 creative-AI research records. Existing model and engineering research records are not counted again as newly discovered desktop applications.
 
@@ -53,6 +53,7 @@ npm run build
 npm run test:software
 npm run test:software:browser
 python3 scripts/check_software_links.py --output software-link-report.json
+python3 scripts/report_software_coverage.py --output software-refresh-report.json
 ```
 
 `--check` verifies that generated data, workspace assets and Wiki pages match their sources. The public package allowlist must be reviewed and updated for changed runtime files. It is not silently rewritten by the catalog builder. Athena's existing full application checks remain in force.
@@ -71,6 +72,8 @@ The **Athena software source audit** workflow runs weekly and on explicit dispat
 | Redirect | Record and review the final destination. A redirect does not by itself prove a project transfer is legitimate. |
 
 The audit uses bounded requests and concurrency, retries HEAD refusals with a bounded GET, and never executes a download or deletes catalog entries. The strict gate flags missing current links while retaining the already-excluded historical 404 as evidence; it does not quietly promote that candidate. Human review is required before replacing claims. CI artifacts retain the audit and browser evidence; the actual GitHub Wiki sync workflow publishes managed pages while preserving unrelated and user-edited pages.
+
+The workflow also recomputes a dated evidence-refresh queue. Records with unresolved fields or a latest source review more than 90 days old remain visible for human review. See [coverage and refresh priorities](Software-Coverage) for the complete backlog and categories needing more candidates.
 
 ## Remaining research work
 

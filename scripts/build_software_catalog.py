@@ -13,7 +13,7 @@ import re
 from urllib.parse import urlsplit, urlunsplit
 
 ROOT = Path(__file__).resolve().parents[1]
-REVIEWED = "2026-11-14"
+REVIEWED = "2026-11-15"
 LEGACY = "research/windows-utilities-2026-11-14/catalog.json"
 BASELINE = "research/software-expansion-2026-11-14/baseline.json"
 PARTITIONS = ("systems", "creative", "development")
@@ -182,6 +182,17 @@ def validate(apps):
             require(valid_date(s.get("checked_at")), "source review date missing or invalid")
             require(bool(s.get("supports")) and set(s["supports"]) <= SOURCE_CLAIMS, "invalid source claims")
             require(bool(s.get("label")), "source label missing")
+        if a.get("evidence_status") != "legacy-research":
+            claims = {claim for s in a.get("sources", []) for claim in s.get("supports", [])}
+            required_claims = {"identity", "features", "platforms"}
+            if a.get("license_kind") != "unknown": required_claims.add("license")
+            if a.get("pricing_model") != "unknown": required_claims.add("pricing")
+            if a.get("download_url"): required_claims.add("downloads")
+            if m.get("status") != "unverified": required_claims.add("maintenance")
+            require(required_claims <= claims, "missing claim-specific sources: " + ", ".join(sorted(required_claims - claims)))
+        for field in ("platform_notes", "pricing_notes"):
+            if field in a:
+                require(isinstance(a[field], str) and bool(a[field].strip()), f"invalid {field}")
     if errors:
         raise ValueError("\n".join(errors))
 
@@ -204,7 +215,7 @@ def load_catalog(require_partitions=True):
             raise ValueError("Unsupported software partition schema: " + path)
         apps.extend(dict(a, origin=path) for a in d["applications"])
     existing = {a["id"]: a for a in apps if a["origin"] == LEGACY}
-    allowed_enrichment = {"official_url", "download_url", "repository_url", "platforms", "platform_notes", "license_kind", "license", "pricing_model", "aliases"}
+    allowed_enrichment = {"official_url", "download_url", "repository_url", "platforms", "platform_notes", "license_kind", "license", "pricing_model", "aliases", "limitations", "recommendation", "maintenance"}
     for path in sorted((ROOT / "data/software").glob("legacy-*-enrichment.json")):
         for update in json.loads(path.read_text())["applications"]:
             app = existing.get(update["id"])
@@ -287,7 +298,7 @@ def load_catalog(require_partitions=True):
             members = [a for a in apps if a["family"] == family and a["category"] == cat]
             related = Counter(by_id[i]["category_id"] for a in members for i in a["alternative_ids"] if by_id[i]["category_id"] != family + "/" + cat)
             categories.append({"id": family + "/" + cat, "name": taxonomy.get("category_labels", {}).get(family + "/" + cat, cat.replace("-", " ").title()), "family": family,
-                               "count": len(members), "related_category_ids": sorted(related),
+                               "count": len(members), "application_ids": sorted(a["id"] for a in members), "related_category_ids": sorted(related),
                                "use_cases": list(dict.fromkeys(u for a in members for u in a["use_cases"]))[:8]})
     recipe_paths = sorted((ROOT / "data/software").glob("*-recipes.json"))
     recipes = [r for p in recipe_paths for r in json.loads(p.read_text())["recipes"]]
@@ -322,6 +333,8 @@ def load_catalog(require_partitions=True):
         "by_family": dict(sorted(Counter(a["family"] for a in apps).items())),
         "by_platform": dict(sorted(Counter(p for a in apps for p in a["platforms"]).items())),
         "by_maintenance": dict(sorted(Counter(a["maintenance"]["status"] for a in apps).items())),
+        "by_license": dict(sorted(Counter(a["license_kind"] for a in apps).items())),
+        "by_pricing": dict(sorted(Counter(a["pricing_model"] for a in apps).items())),
     }
     return {"schema_version": 1, "reviewed_at": REVIEWED,
             "scope": "Sourced software discovery. Documentation review is not an installation, security audit, performance benchmark or universal best-product verdict.",
@@ -364,6 +377,7 @@ Recommendations are editorial matches to documented capabilities. A free tool, a
 
 - [Selection methodology and contributor contract](Software-Methodology)
 - [Task decision guides](Software-Decision-Guides)
+- [Coverage gaps and refresh priorities](Software-Coverage)
 - [Preserved cleanup research](Engineering-Developer-Cleanup-and-Agent-Hygiene)
 - [Preserved Windows catalog](Engineering-Windows-Utilities-and-Creation-Tools)
 - [Creative-AI research]({base}/blob/main/data/creative-ai-tools.json)
@@ -382,6 +396,10 @@ The scheduled source audit records HTTP outcomes, redirects and dates. A reachab
             for a in [x for x in apps if x["category_id"] == cat["id"]]:
                 text += f"### {a['name']}\n\n{a['summary']}\n\n"
                 text += f"- **Platforms:** {', '.join(a['platforms'])}. **License:** {a['license']}. **Pricing model:** {a['pricing_model']}.\n"
+                if a.get('platform_notes'):
+                    text += f"- **Compatibility details:** {a['platform_notes']}\n"
+                if a.get('pricing_notes'):
+                    text += f"- **Pricing details:** {a['pricing_notes']}\n"
                 text += f"- **Pick for:** {a['recommendation']['pick_for']}\n- **Compare when:** {a['recommendation']['compare_when']}\n"
                 text += f"- **Strengths:** {'; '.join(a['strengths'])}\n- **Limitations:** {'; '.join(a['limitations'])}\n"
                 text += f"- **Maintenance:** {a['maintenance']['status']} — {a['maintenance']['note']}"
@@ -403,13 +421,86 @@ The scheduled source audit records HTTP outcomes, redirects and dates. A reachab
             a = by_id[p["app_id"]]
             guide += f"| {clean(p['label'])} | [{clean(a['name'])}]({a['official_url']}) | {clean(p['reason'])} | {clean(p['tradeoff'])} |\n"
     files["wiki/Software-Decision-Guides.md"] = guide
+    files["wiki/Software-Coverage.md"] = coverage_markdown(catalog)
     return files
+
+
+def coverage_report(catalog, as_of=REVIEWED):
+    """Produce a human review queue; missing evidence is not a product verdict."""
+    today = date.fromisoformat(as_of)
+    queue = []
+    for app in catalog["applications"]:
+        reasons = []
+        if app["license_kind"] == "unknown": reasons.append("license classification unresolved")
+        if app["pricing_model"] == "unknown": reasons.append("distribution pricing unresolved")
+        if app["maintenance"]["status"] == "unverified": reasons.append("dated maintenance evidence unresolved")
+        latest = max(date.fromisoformat(s["checked_at"]) for s in app["sources"])
+        age = (today - latest).days
+        if age > 90: reasons.append("latest source review older than 90 days")
+        claims = {claim for source in app["sources"] for claim in source["supports"]}
+        required = {"identity", "features", "platforms"}
+        if app["license_kind"] != "unknown": required.add("license")
+        if app["pricing_model"] != "unknown": required.add("pricing")
+        if app.get("download_url"): required.add("downloads")
+        missing = sorted(required - claims)
+        if missing: reasons.append("preserved record needs field-specific source mapping: " + ", ".join(missing))
+        if reasons:
+            queue.append({"app_id": app["id"], "name": app["name"], "origin": app["origin"],
+                          "latest_source_review": latest.isoformat(), "review_age_days": max(0, age), "reasons": reasons})
+    thin = [{"category_id": c["id"], "name": c["name"], "application_ids": c["application_ids"]}
+            for c in catalog["categories"] if c["count"] == 1]
+    outside = defaultdict(list)
+    for app in catalog["applications"]:
+        for name in app["alternatives_outside_catalog"]:
+            outside[name].append(app["id"])
+    return {"schema_version": 1, "as_of": as_of, "review_interval_days": 90,
+            "scope": "Research work queue. Unknown fields and review age do not establish inactivity, insecurity or inferior quality.",
+            "counts": catalog["counts"], "records_needing_research": len(queue), "refresh_queue": queue,
+            "alternatives_not_yet_researched": [{"name": name, "mentioned_by": sorted(ids)} for name, ids in sorted(outside.items())],
+            "single_application_categories": thin, "coverage_priorities": read("data/software/coverage-priorities.json")["priorities"]}
+
+
+def coverage_markdown(catalog):
+    report = coverage_report(catalog)
+    c = catalog["counts"]
+    text = f"""# Software coverage and refresh priorities
+
+[Catalog](Software-Catalog) · [Decision guides](Software-Decision-Guides) · [Method](Software-Methodology)
+
+Reviewed {REVIEWED}. The integrated catalog contains **{c['applications']} applications in {c['categories']} categories**. It is a substantial expansion, not a claim of complete software coverage. {len(report['single_application_categories'])} categories currently contain one application and need stronger comparison sets.
+
+## Evidence that remains open
+
+| Field | Unresolved records |
+| --- | ---: |
+| Pricing model | {c['by_pricing'].get('unknown', 0)} |
+| License classification | {c['by_license'].get('unknown', 0)} |
+| Dated maintenance evidence | {c['by_maintenance'].get('unverified', 0)} |
+
+The counts overlap. Unknown pricing can mean that free source code was verified but the distribution terms were not established. Unverified maintenance is not the same as an abandoned project. All nonlegacy records with known licensing, pricing, platform or download claims must include corresponding source annotations; the build rejects missing mappings. An annotation identifies the source's intended role and is not a substitute for reading it.
+
+There are also {c['unresolved_alternative_mentions']} mentions of alternatives outside this catalog. The refresh queue records their names and referring records as research leads; they are not counted as verified applications or promoted to ranked choices.
+
+The [machine-readable refresh queue](https://github.com/Herbertofury/Athena/blob/main/research/software-expansion-2026-11-14/refresh-queue.json) contains {report['records_needing_research']} records needing more research. Run `python3 scripts/report_software_coverage.py --output software-refresh-report.json` to recompute the queue using today's date. The weekly source-audit workflow retains this report alongside HTTP outcomes and real-browser evidence. A 90-day review interval is a scheduling policy, not a factual expiration date.
+
+## Next coverage areas
+
+"""
+    for priority in report["coverage_priorities"]:
+        text += f"### {priority['area']}\n\n" + "; ".join(priority["tasks"]) + ".\n\n" + priority["next_evidence"] + "\n\n"
+    text += "## Categories with one researched candidate\n\nThese are useful starting points but do not yet support a broad within-category comparison. Related tools can still appear in task guides and explicit alternative links.\n\n| Category | Current application |\n| --- | --- |\n"
+    by_id = {a["id"]: a for a in catalog["applications"]}
+    for cat in report["single_application_categories"]:
+        app = by_id[cat["application_ids"][0]]
+        text += f"| {cat['name']} | [{app['name']}]({app['official_url']}) |\n"
+    return text
 
 
 def build(check=False, partial=False):
     catalog = load_catalog(require_partitions=not partial)
     outputs = {"dist/workspaces/software/catalog.json": json.dumps(catalog, ensure_ascii=False, separators=(",", ":")) + "\n",
                "research/software-expansion-2026-11-14/coverage.json": json.dumps(catalog["counts"], indent=2) + "\n",
+               "research/software-expansion-2026-11-14/refresh-queue.json": json.dumps(coverage_report(catalog), indent=2) + "\n",
                **markdown(catalog)}
     for name in ("index.mjs", "model.mjs", "style.css"):
         p = ROOT / "src/software" / name

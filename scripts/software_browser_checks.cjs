@@ -1,8 +1,11 @@
 /* Real Chromium acceptance for integrated software discovery. No external installs. */
 const {chromium} = require('playwright');
 const http = require('node:http'), fs = require('node:fs'), path = require('node:path'), assert = require('node:assert/strict');
+const {createHash} = require('node:crypto');
 const root = path.resolve('dist'), output = path.resolve(process.env.ATHENA_SOFTWARE_BROWSER_OUTPUT || 'browser-results/software');
-const catalog = JSON.parse(fs.readFileSync(path.join(root, 'workspaces/software/catalog.json')));
+const catalogBytes = fs.readFileSync(path.join(root, 'workspaces/software/catalog.json'));
+const catalog = JSON.parse(catalogBytes);
+const catalogHash = createHash('sha256').update(catalogBytes).digest('hex');
 const server = http.createServer((req, res) => {
   const p = path.resolve(root, '.' + decodeURIComponent(new URL(req.url, 'http://local').pathname));
   if (!p.startsWith(root + path.sep) && p !== root) {res.writeHead(403).end(); return;}
@@ -14,15 +17,31 @@ const server = http.createServer((req, res) => {
 });
 (async () => {
   fs.mkdirSync(output, {recursive: true});
-  await new Promise(r => server.listen(0, '127.0.0.1', r));
-  const report = {started_at: new Date().toISOString(), applications: catalog.applications.length, checks: [], result: 'running'};
+  const remoteBase = process.env.ATHENA_SOFTWARE_BASE_URL;
+  if (!remoteBase) await new Promise(r => server.listen(0, '127.0.0.1', r));
+  const base = remoteBase ? remoteBase.replace(/\/?$/, '/') : `http://127.0.0.1:${server.address().port}/`;
+  const report = {started_at: new Date().toISOString(), base_url: base, catalog_sha256: catalogHash, applications: catalog.applications.length, checks: [], result: 'running'};
   let browser, page;
   try {
     browser = await chromium.launch({executablePath: process.env.CHROMIUM_PATH || undefined, headless: true, args: ['--no-sandbox']});
     page = await browser.newPage({viewport: {width: 1500, height: 1050}});
     const errors = [];
     page.on('pageerror', e => errors.push(e.message));
-    const base = `http://127.0.0.1:${server.address().port}/`;
+    let observedHash;
+    report.catalog_verification_attempts = [];
+    for (let attempt = 0; attempt < (remoteBase ? 10 : 1); attempt++) {
+      try {
+        const response = await page.request.get(new URL('workspaces/software/catalog.json', base).href, {headers: {'Cache-Control': 'no-cache'}, timeout: 10000});
+        observedHash = response.ok() ? createHash('sha256').update(await response.body()).digest('hex') : `HTTP ${response.status()}`;
+      } catch (error) {
+        observedHash = 'Transport error: ' + String(error.message).slice(0, 300);
+      }
+      report.catalog_verification_attempts.push({attempt: attempt + 1, observed: observedHash});
+      if (observedHash === catalogHash) break;
+      if (remoteBase && attempt < 9) await new Promise(resolve => setTimeout(resolve, 3000));
+    }
+    assert.equal(observedHash, catalogHash, 'Served software database must match the reviewed commit byte for byte');
+    report.checks.push('Served database SHA-256 equals the reviewed commit');
     await page.goto(base + '#software?q=');
     const main = page.locator('.workspace-container');
     await main.getByRole('heading', {name: 'What do you want to do?'}).waitFor();
@@ -112,6 +131,6 @@ const server = http.createServer((req, res) => {
     report.finished_at = new Date().toISOString();
     fs.writeFileSync(path.join(output, 'report.json'), JSON.stringify(report, null, 2) + '\n');
     console.log(JSON.stringify(report, null, 2));
-    await browser?.close(); server.close();
+    await browser?.close(); if (server.listening) server.close();
   }
 })().catch(error => {console.error(error); process.exitCode = 1;});
