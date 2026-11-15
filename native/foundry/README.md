@@ -241,3 +241,10 @@ The native browser harness now runs its complete synthetic editing, persistence,
 conflict and restart flows through this portable launcher outside the checkout on
 hosted Windows/Linux; this remains distinct from the owner's installed desktop
 acceptance and complete source-repository retirement.
+
+Retained acceptance failure: initial portable-native run `43707165315` passed the
+complete Ubuntu browser flow, while Windows refused runtime hashes during Python
+package tests before reaching browser launch. Windows checkout line-ending
+conversion changed runtime bytes. `.gitattributes` now preserves `dist/**` as
+exact Git blob bytes on checkout. No hash check was weakened and no published
+runtime asset or allowlist was rewritten to accommodate altered bytes.
