@@ -1,10 +1,10 @@
 {
   "schema": 1,
-  "review": "Reviewed native Athena runtime: learning, Engineering and integrated Foundry authoring with optional local SQLite bridge adapters, weather/ecology/environment and operator-selected local video. Source-owned procedural assets/licenses retained. Private databases, original private source history, credentials, recordings and binaries excluded. No autoplay or automatic database import; local bridge is explicit opt-in and not deployed on Pages. Full source retirement remains gated separately. Public PC catalog includes only reviewed HTML, JavaScript and sourced JSON, not other research or private evidence.",
+  "review": "Reviewed native Athena runtime: learning, Engineering and integrated Foundry authoring with optional local SQLite bridge adapters, weather/ecology/environment and operator-selected local video. Source-owned procedural assets/licenses retained. Private databases, original private source history, credentials, recordings and binaries excluded. No autoplay or automatic database import; local bridge is explicit opt-in and not deployed on Pages. Full source retirement remains gated separately. Public PC catalog includes only reviewed HTML, JavaScript and sourced JSON, not other research or private evidence. Athena Guidance includes only owner-reviewed public versioned standards and native reader/export code; no local rules or private consumer state are published.",
   "files": [
     {
       "path": "app.js",
-      "sha256": "ec3ec6d7eae7305ea59d9852f4d0d45848a1c74c3fe45d05193adc813c74f584"
+      "sha256": "6d6940eb0f97bd0744d47b066514199c0c6655af37544aca0bee8ded27b1e2d7"
     },
     {
       "path": "catalog.js",
@@ -16,7 +16,7 @@
     },
     {
       "path": "index.html",
-      "sha256": "00d86a8095b62c00a87fb2bcf14d53cb37548b643804d976538e4be5587351fa"
+      "sha256": "ed51fd1b0199bc1655d59a0e06dc6db614f3d29983c8c33095b220e6cd0e3dd6"
     },
     {
       "path": "native-store-bootstrap.js",
@@ -445,6 +445,22 @@
     {
       "path": "workspaces/continuity/context.mjs",
       "sha256": "29ceebf3080b947d9ba7013d4f20c842832850a2d1433cd08f12fb1afd974ead"
+    },
+    {
+      "path": "workspaces/guidance/catalog.json",
+      "sha256": "29ad23400b3ca1bdd339a27a79c819b3bdbd64b0951fa141d384903a8aa2caaa"
+    },
+    {
+      "path": "workspaces/guidance/index.mjs",
+      "sha256": "611a38d6c5439cc7dd72d770863f629011029311bf5c3f27232c72ed05baab8f"
+    },
+    {
+      "path": "workspaces/guidance/model.mjs",
+      "sha256": "7429db4b1223acb50c9c146f44730047e94a12e1b18bcc8a6630ec7058fe1d32"
+    },
+    {
+      "path": "workspaces/guidance/style.css",
+      "sha256": "a39eb687698f5b6208c1ff54bd6a3fa9547a27934ac8f746b7a2db4af9722a80"
     }
   ]
 }

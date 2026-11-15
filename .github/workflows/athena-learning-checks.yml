@@ -29,6 +29,8 @@ jobs:
         run: node scripts/test_progress_import_browser.cjs
       - name: Verify native project continuity
         run: node scripts/test_continuity_browser.cjs
+      - name: Verify native guidance reader and reference exports
+        run: node scripts/test_guidance_browser.cjs
       - name: Test unified public app in Chromium
         run: npm run test:browser
       - uses: actions/upload-artifact@v4
