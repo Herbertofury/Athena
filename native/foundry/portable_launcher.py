@@ -1,5 +1,5 @@
 """Launch a verified portable package with an explicitly selected external database."""
-import argparse,hashlib,importlib.util,json,pathlib,sys,os,subprocess,tempfile,sqlite3,types
+import argparse,hashlib,importlib.util,json,pathlib,sys,os,subprocess,tempfile,sqlite3,types,re,stat
 
 def external_path(value):
     path=pathlib.Path(value)
@@ -14,32 +14,74 @@ def destination_clear(destination):
     if any(os.path.lexists(str(destination)+suffix) for suffix in ('','-wal','-shm','-journal')):
         raise FileExistsError('Destination database or sidecar exists; preserve it and choose a new name')
 
+def portable_name(name):
+    if not isinstance(name,str) or not name or len(name)>512 or any(ord(c)<32 or ord(c)>126 for c in name):return False
+    relative=pathlib.PurePosixPath(name)
+    if relative.is_absolute() or str(relative)!=name or '..' in relative.parts or any(c in name for c in '\\:<>"|?*'):return False
+    reserved={'CON','PRN','AUX','NUL','CONIN$','CONOUT$'}|{f'{prefix}{n}' for prefix in ('COM','LPT') for n in range(1,10)}
+    return all(part and part[-1] not in '. ' and part.split('.')[0].upper() not in reserved for part in relative.parts)
+
+def link_or_reparse(path):
+    metadata=path.lstat()
+    return stat.S_ISLNK(metadata.st_mode) or bool(getattr(metadata,'st_file_attributes',0)&0x400)
+
 def verify(root):
     root=pathlib.Path(root).absolute()
-    if any(p.is_symlink() for p in (root,*root.parents)):raise ValueError('Symlink package refused')
+    if any(link_or_reparse(p) for p in (root,*root.parents)):raise ValueError('Symlink package refused')
     manifest=root/'native-package.json'
-    if manifest.is_symlink() or manifest.stat().st_size>1024*1024:raise ValueError('Invalid manifest')
-    data=json.loads(manifest.read_text(encoding='utf-8'))
-    if data.get('schema')!=1 or data.get('platform') not in ('windows','linux'):raise ValueError('Invalid platform')
+    if link_or_reparse(manifest) or not manifest.is_file() or manifest.stat().st_size>1024*1024:raise ValueError('Invalid manifest')
+    with manifest.open('rb') as stream:payload=stream.read(1024*1024+1)
+    if len(payload)>1024*1024:raise ValueError('Invalid manifest')
+    data=json.loads(payload.decode('utf-8'))
+    if not isinstance(data,dict):raise ValueError('Invalid manifest object')
+    if type(data.get('schema')) is not int or data.get('schema')!=1 or data.get('platform') not in ('windows','linux'):raise ValueError('Invalid platform')
     expected_binary='athena-foundry-store.exe' if data['platform']=='windows' else 'athena-foundry-store'
     if data.get('binary')!=expected_binary:raise ValueError('Invalid executable')
     engine=data.get('engine')
     if engine is not None:
         if data.get('profile')!='unified' or engine!=('atlas-lab.exe' if data['platform']=='windows' else 'atlas-lab'):raise ValueError('Invalid engine profile')
     elif 'profile' in data:raise ValueError('Unsupported profile')
-    names=set()
-    for entry in data['files']:
-        name=entry['path'];relative=pathlib.PurePosixPath(name)
-        if relative.is_absolute() or str(relative)!=name or '\\' in name or '..' in relative.parts or name in names:raise ValueError('Invalid path')
-        names.add(name);path=root/name
-        if not path.is_file() or any(p.is_symlink() for p in (path,*path.parents)) or path.stat().st_size!=entry['bytes']:raise ValueError('Invalid file')
-        h=hashlib.sha256()
+    entries=data.get('files')
+    if not isinstance(entries,list) or not 1<=len(entries)<=2000:raise ValueError('Invalid file inventory')
+    names=set();aliases=set();total=0
+    # Validate the entire inventory before consulting any listed path. The manifest
+    # is an integrity record, not authority to inspect paths outside the package.
+    for entry in entries:
+        if not isinstance(entry,dict):raise ValueError('Invalid entry')
+        name=entry.get('path');size=entry.get('bytes');digest=entry.get('sha256')
+        if not portable_name(name) or name.casefold() in aliases or name.casefold()=='native-package.json':raise ValueError('Invalid path')
+        if type(size) is not int or not 0<=size<=600*1024*1024:raise ValueError('Invalid file size')
+        if not isinstance(digest,str) or not re.fullmatch('[0-9a-f]{64}',digest):raise ValueError('Invalid digest')
+        total+=size
+        if total>600*1024*1024:raise ValueError('Package byte bound exceeded')
+        names.add(name);aliases.add(name.casefold())
+    for entry in entries:
+        path=root/entry['path']
+        if any(link_or_reparse(p) for p in (path,*path.parents)):raise ValueError('Invalid file')
+        metadata=path.stat()
+        if not stat.S_ISREG(metadata.st_mode) or metadata.st_size!=entry['bytes']:raise ValueError('Invalid file')
+        h=hashlib.sha256();remaining=entry['bytes']
         with path.open('rb') as stream:
-            while chunk:=stream.read(1024*1024):h.update(chunk)
+            while remaining:
+                chunk=stream.read(min(1024*1024,remaining))
+                if not chunk:raise ValueError('File changed during verification')
+                remaining-=len(chunk);h.update(chunk)
+            if stream.read(1):raise ValueError('File changed during verification')
         if h.hexdigest()!=entry['sha256']:raise ValueError('Integrity mismatch')
     if not {expected_binary,'bridge.py','launch.py','sqlite_backup.py'}<=names:raise ValueError('Incomplete package')
     if engine and not {engine,'portable_process.py','runtime/athena-runtime-manifest.json','runtime/learn/index.html','runtime/.nojekyll'}<=names:raise ValueError('Incomplete unified profile')
-    actual={p.relative_to(root).as_posix() for p in root.rglob('*') if p.is_file() or p.is_symlink()}
+    actual=set();pending=[root];visited=0
+    while pending:
+        directory=pending.pop()
+        with os.scandir(directory) as children:
+            for child in children:
+                visited+=1
+                if visited>4000:raise ValueError('Package traversal bound exceeded')
+                path=pathlib.Path(child.path);metadata=child.stat(follow_symlinks=False)
+                if stat.S_ISLNK(metadata.st_mode) or getattr(metadata,'st_file_attributes',0)&0x400:raise ValueError('Package link or reparse point refused')
+                if stat.S_ISDIR(metadata.st_mode):pending.append(path)
+                elif stat.S_ISREG(metadata.st_mode):actual.add(path.relative_to(root).as_posix())
+                else:raise ValueError('Unexpected package entry')
     if actual!=names|{'native-package.json'}:raise ValueError('Unexpected package content')
     return data
 
