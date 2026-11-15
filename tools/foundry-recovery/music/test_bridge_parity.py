@@ -45,6 +45,14 @@ class ParityTests(unittest.TestCase):
      h.do_GET();args=h.reply.call_args
      self.assertEqual(args.args[0],200);self.assertEqual(json.loads(args.args[1]),row)
      self.assertIsInstance(args.kwargs['etag'],str);current.append(args.kwargs['etag'])
+    library=bridge.Handler.__new__(bridge.Handler);library.server=server;library.path='/__native/soundtracks';library.headers=Message();library.headers['Host']=server.host;library.headers['X-Athena-Native']='1';library.reply=Mock()
+    library.do_GET();self.assertEqual(library.reply.call_args.args[0],200)
+    listed=json.loads(library.reply.call_args.args[1]);self.assertEqual(len(listed),len(payload['rows']))
+    expected={ (r['assignment']['theme_id'],r['assignment']['room_id']):r for r in payload['rows'] }
+    ordered=[]
+    for record in listed:
+     a=record['value']['assignment'];key=(a['theme_id'],a['room_id']);ordered.append(key);self.assertEqual(record['value'],expected[key]);self.assertIn(record['version'],current)
+    self.assertEqual(ordered,sorted(expected))
     versions.append(current)
    self.assertEqual(versions[0],versions[1]);self.assertEqual(db.read_bytes(),persisted)
    self.assertNotEqual(cli('import-music-json',payload).returncode,0);self.assertEqual(db.read_bytes(),persisted)

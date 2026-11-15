@@ -175,6 +175,30 @@ fn versioned(
     })
 }
 impl Store {
+    /// Whole native bookmark library from one read transaction; never partial.
+    pub fn soundtrack_library(&self) -> Result<Vec<VersionedSoundtrack>> {
+        let tx = self.db.unchecked_transaction()?;
+        let schema: i64 = tx.query_row("PRAGMA user_version", [], |r| r.get(0))?;
+        if !matches!(schema, 4..=15) {
+            return Err("Explicit upgrade-soundtracks required".into());
+        }
+        let keys = tx
+            .prepare(
+                "SELECT theme_id,room_id FROM soundtracks ORDER BY theme_id,room_id LIMIT 1001",
+            )?
+            .query_map([], |r| Ok((r.get::<_, String>(0)?, r.get::<_, String>(1)?)))?
+            .collect::<rusqlite::Result<Vec<_>>>()?;
+        if keys.len() > 1000 {
+            return Err("Native library exceeds 1000 records; no partial result".into());
+        }
+        let mut result = Vec::with_capacity(keys.len());
+        for (theme, room) in keys {
+            let value = read_checked(&tx, &theme, &room)?;
+            result.push(versioned(&theme, &room, value)?);
+        }
+        tx.commit()?;
+        Ok(result)
+    }
     pub fn soundtrack_versioned(&self, theme: &str, room: &str) -> Result<VersionedSoundtrack> {
         versioned(theme, room, self.soundtrack_native(theme, room)?)
     }

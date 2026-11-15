@@ -142,6 +142,11 @@ class Handler(BaseHTTPRequestHandler):
             if self.server.legacy_source is None:return self.reply(409,'{"error":"Legacy import not configured. Operator must select source and NEW destination at launch."}')
             try:return self.reply(200,json.dumps(self.server.inspect_source()))
             except (OSError,ValueError,subprocess.TimeoutExpired):return self.reply(422,'{"error":"Review failed or source changed; no import attempted. A quiescent supported source backup is required."}')
+        if parsed.path=='/__native/soundtracks':
+            if not self.valid(api=True):return self.reply(403)
+            if self.server.schema not in range(4,16):return self.reply(409,'{"error":"Library requires explicit upgrade-soundtracks and relaunch"}')
+            try:return self.reply(200,self.server.cli('list-native-soundtracks'))
+            except (ValueError,subprocess.TimeoutExpired):return self.reply(422,'{"error":"Native library unavailable or invalid; no partial result"}')
         if parsed.path.startswith('/__native/soundtrack/'):
             if not self.valid(api=True):return self.reply(403)
             match=re.fullmatch(r'/__native/soundtrack/([a-z0-9-]{1,100})/([a-z0-9:-]{1,100})',parsed.path)
