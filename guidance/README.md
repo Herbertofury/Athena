@@ -48,3 +48,9 @@ A structural pass is **not** security, licensing, host compatibility or runtime 
 `python guidance/tools/plan_transition.py --target /explicit/consumer-checkout` produces a **read-only proposal**, reusing the consumer audit. It maps all 16 legacy snapshots to Athena paths, checks destination collisions and existing dual locks, and carries uninspected files and legacy-reference digests into review. Even matching unmanaged destinations are preserved for review, not silently adopted. Project-owned instructions and every legacy file remain untouched. A reviewable proposal is not authorization, policy-semantic equivalence or installed-harness acceptance; no apply command is provided. Review report filenames before sharing.
 
 The public Noxviola transition receipt is a real selected-consumer plan, not a completed migration. Existing `repository_governance.py apply` still refuses legacy locks until a separately reviewed transition exists.
+
+## Adoption exception recovery
+
+Explicit `repository_governance.py apply` stages the complete write set before changing snapshots, commits the adoption lock last, and rolls back committed writes if an I/O exception or handled keyboard interruption occurs. It preserves project-owned instructions and refuses legacy adoption as before. If rollback itself fails or a committed destination changed concurrently, it reports failure and retains a local `.athena-adoption-*` recovery directory containing original bytes and a path index. Keep that directory private and inspect it before any retry; it is not a public evidence artifact.
+
+This is **exception rollback, not crash-atomic or power-loss-durable storage**. Serialize writers and use a stable checkout. Abrupt process termination, hostile filesystem mutation and hardware failure still require backup/recovery procedures. No real consumer was changed to qualify this implementation; injected-failure tests operate only on disposable fixture repositories.

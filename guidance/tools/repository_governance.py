@@ -17,6 +17,7 @@ import sys
 from pathlib import Path
 
 from athena_io import atomic_json, load_json
+from adoption_transaction import write_set
 
 SOURCE_URL = "https://github.com/Herbertofury/Athena"
 MANIFEST = "registry/repository-governance.json"
@@ -148,18 +149,16 @@ def apply(repo: Path, target: Path) -> list[dict]:
                             capture_output=True, text=True, check=True).stdout.strip()
     dirty = subprocess.run(["git", "-C", str(repo), "status", "--porcelain"],
                            capture_output=True, text=True, check=True).stdout.strip()
-    for action in actions:
-        rel = action["path"]
-        if action["action"] not in {"create", "update"} or rel == LOCK:
-            continue
-        path = safe_path(target, rel)
-        path.parent.mkdir(parents=True, exist_ok=True)
-        path.write_bytes(data[rel])
+    payloads = {a["path"]: data[a["path"]] for a in actions
+                if a["action"] in {"create", "update"} and a["path"] != LOCK}
     if any(a["path"] == LOCK and a["action"] == "update" for a in actions):
-        atomic_json(safe_path(target, LOCK), {"schemaVersion": 1, "sourceRepository": SOURCE_URL,
+        lock_data = {"schemaVersion": 1, "sourceRepository": SOURCE_URL,
                     "sourceCommit": commit, "sourceWorkingTreeDirty": bool(dirty),
                     "version": manifest["version"], "digestFormat": manifest["digestFormat"],
-                    "files": {destination(k): v for k, v in manifest["files"].items()}})
+                    "files": {destination(k): v for k, v in manifest["files"].items()}}
+        # Lock is committed last, after all snapshots and optional routers.
+        payloads[LOCK] = (json.dumps(lock_data, indent=2, sort_keys=True) + "\n").encode("utf-8")
+    write_set(target, payloads, safe_path)
     return plan(repo, target)[2]
 
 
