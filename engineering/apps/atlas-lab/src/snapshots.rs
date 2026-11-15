@@ -210,11 +210,29 @@ impl SnapshotStore {
         &self,
         id: &str,
     ) -> Result<Option<(i64, crate::modrinth::ProjectRecord)>, Box<dyn std::error::Error>> {
+        self.modrinth_project_snapshot_at(id, None)
+    }
+    /// Return only the explicitly selected historical generation; never fall back.
+    pub fn modrinth_project_generation(
+        &self,
+        id: &str,
+        generation: i64,
+    ) -> Result<Option<(i64, crate::modrinth::ProjectRecord)>, Box<dyn std::error::Error>> {
+        if generation < 1 {
+            return Err("Invalid archive generation".into());
+        }
+        self.modrinth_project_snapshot_at(id, Some(generation))
+    }
+    fn modrinth_project_snapshot_at(
+        &self,
+        id: &str,
+        generation: Option<i64>,
+    ) -> Result<Option<(i64, crate::modrinth::ProjectRecord)>, Box<dyn std::error::Error>> {
         crate::modrinth::projects_url(&[id.to_owned()])?;
         // Four MiB in the database encoding admits every valid two-MiB UTF-8
         // record even in a UTF-16 database. Parsing still enforces two MiB UTF-8.
         // Reject grossly oversized stored values before copying TEXT into Rust.
-        let stored:Option<(i64,Option<String>)>=self.0.query_row("SELECT generation,CASE WHEN octet_length(payload)<=4194304 THEN payload ELSE NULL END FROM snapshots WHERE provider='modrinth-project-raw' AND canonical_id=?1 ORDER BY generation DESC LIMIT 1",[id],|r|Ok((r.get(0)?,r.get(1)?))).optional()?;
+        let stored:Option<(i64,Option<String>)>=self.0.query_row("SELECT generation,CASE WHEN octet_length(payload)<=4194304 THEN payload ELSE NULL END FROM snapshots WHERE provider='modrinth-project-raw' AND canonical_id=?1 AND (?2 IS NULL OR generation=?2) ORDER BY generation DESC LIMIT 1",params![id,generation],|r|Ok((r.get(0)?,r.get(1)?))).optional()?;
         stored
             .map(|(generation, text)| {
                 if generation < 1 {

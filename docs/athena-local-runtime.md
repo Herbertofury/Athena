@@ -58,3 +58,9 @@ The package SHA-256 was `e98a0d006c976761c882a5a0c2142a688f7b668570bac0ad59168bb
 The optional `ATHENA_LAB_HTTP_ONLY=1` harness mode remains explicitly labeled HTTP-only. Both modes require the same final read-only integrity/count check. GitHub Pages still reports its existing setup Not Found condition with automatic enablement off, so these are actual loopback CI browser results, not verification of a deployed public site.
 
 These tests use generated snapshots and a fixed built-in workload. They do not prove live collection on every provider, Windows correctness, crash/power-loss durability, resource/performance superiority, full Foundry integration, autonomous self-improvement, or readiness to delete Engineering Atlas. Private Foundry content is excluded.
+
+### Explicit archived project generation
+
+The loopback Engineering backend exposes `GET /api/project-archive/{canonical_id}/{generation}` for an explicitly selected positive integer generation. It returns the exact validated archived project JSON and existing generation/SHA-256 provenance headers. Missing or wrong-project generations return 404, invalid generation values return 400, and invalid stored payloads return 422. It never substitutes the latest record when a historical selection is missing or corrupt. The existing latest-record endpoint remains unchanged.
+
+This is native backend/API capability, not a new graphical history selector or a completed source-repository migration. No provider request, media download, archive deletion or owner-data migration is involved. Existing loopback origin/host protections apply. SQLite fixture and handler tests verify old/new generations, preserved Unicode/unknown fields, retained failures, restart, wrong IDs, missing/invalid generations and corrupt/oversized records.

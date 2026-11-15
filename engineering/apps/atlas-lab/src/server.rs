@@ -187,6 +187,23 @@ async fn saved_archive_response(
     id: String,
     kind: ArchiveKind,
 ) -> Result<Response, StatusCode> {
+    saved_archive_at(app, id, kind, None).await
+}
+async fn saved_project_generation_response(
+    State(app): State<App>,
+    RoutePath((id, generation)): RoutePath<(String, i64)>,
+) -> Result<Response, StatusCode> {
+    if generation < 1 {
+        return Err(StatusCode::BAD_REQUEST);
+    }
+    saved_archive_at(app, id, ArchiveKind::Project, Some(generation)).await
+}
+async fn saved_archive_at(
+    app: App,
+    id: String,
+    kind: ArchiveKind,
+    selected_generation: Option<i64>,
+) -> Result<Response, StatusCode> {
     match kind {
         ArchiveKind::Project => {
             crate::modrinth::projects_url(std::slice::from_ref(&id))
@@ -209,9 +226,15 @@ async fn saved_archive_response(
         let store = crate::snapshots::SnapshotStore::open(&app.path)
             .map_err(|_| StatusCode::INTERNAL_SERVER_ERROR)?;
         let stored = match kind {
-            ArchiveKind::Project => store.latest_modrinth_project_snapshot(&id).map(|snapshot| {
-                snapshot.map(|(generation, record)| (generation, record.raw_json().to_owned()))
-            }),
+            ArchiveKind::Project => {
+                let selected = match selected_generation {
+                    Some(generation) => store.modrinth_project_generation(&id, generation),
+                    None => store.latest_modrinth_project_snapshot(&id),
+                };
+                selected.map(|snapshot| {
+                    snapshot.map(|(generation, record)| (generation, record.raw_json().to_owned()))
+                })
+            }
             ArchiveKind::Version => store.latest_modrinth_version_snapshot(&id).map(|snapshot| {
                 snapshot.map(|(generation, record)| (generation, record.payload.get().to_owned()))
             }),
@@ -574,6 +597,10 @@ async fn serve_strategy(
     let app = static_router
         .route("/api/runtime", get(runtime_info))
         .route("/api/project-archive/{id}", get(saved_project_response))
+        .route(
+            "/api/project-archive/{id}/{generation}",
+            get(saved_project_generation_response),
+        )
         .route("/api/version-archive/{id}", get(saved_version_response))
         .route("/api/upstream-archive/{id}", get(saved_upstream_response))
         .route("/api/overview", get(overview))
@@ -933,5 +960,107 @@ mod tests {
         assert!(!permitted(&h, true));
         h.insert(header::ORIGIN, ORIGIN.parse().unwrap());
         assert!(permitted(&h, true));
+    }
+}
+
+#[cfg(test)]
+mod project_generation_tests {
+    use super::*;
+    #[test]
+    fn explicit_archive_endpoint_preserves_bytes_and_rejects_missing_generation() {
+        let directory = std::env::temp_dir().join(format!(
+            "athena-history-endpoint-{}-{}",
+            std::process::id(),
+            std::time::SystemTime::now()
+                .duration_since(std::time::UNIX_EPOCH)
+                .unwrap()
+                .as_nanos()
+        ));
+        std::fs::create_dir(&directory).unwrap();
+        let path = directory.join("fixture.sqlite");
+        let mut store = crate::snapshots::SnapshotStore::open(&path).unwrap();
+        let body = r#" {"id":"AANobbMI","slug":"sodium","title":"Old 雪","description":"fixture","project_type":"mod","versions":[],"unknown":null} "#;
+        let generation = store
+            .save_modrinth_project_record(
+                "sodium",
+                &crate::modrinth::parse_project_record(body.as_bytes(), "sodium").unwrap(),
+            )
+            .unwrap();
+        let newer = body.replace("Old 雪", "New ❄");
+        store
+            .save_modrinth_project_record(
+                "sodium",
+                &crate::modrinth::parse_project_record(newer.as_bytes(), "sodium").unwrap(),
+            )
+            .unwrap();
+        drop(store);
+        let (wake, _receiver) = std::sync::mpsc::sync_channel(1);
+        let app = App {
+            engine_instance: "0".repeat(32),
+            runtime_assets: None,
+            path,
+            worker_status: Arc::new(AtomicU8::new(1)),
+            wake,
+            overview_candidate: false,
+            db_slots: Arc::new(tokio::sync::Semaphore::new(4)),
+        };
+        tokio::runtime::Builder::new_multi_thread()
+            .worker_threads(2)
+            .enable_all()
+            .build()
+            .unwrap()
+            .block_on(async {
+                let response = saved_project_generation_response(
+                    State(app.clone()),
+                    RoutePath(("AANobbMI".into(), generation)),
+                )
+                .await
+                .unwrap();
+                assert_eq!(
+                    response.headers()["x-atlas-generation"],
+                    generation.to_string()
+                );
+                assert_eq!(
+                    response.headers()["x-atlas-payload-sha256"],
+                    crate::build_identity::sha256_hex(body.as_bytes())
+                );
+                assert_eq!(
+                    axum::body::to_bytes(response.into_body(), 4096)
+                        .await
+                        .unwrap()
+                        .as_ref(),
+                    body.as_bytes()
+                );
+                for invalid in [0, -1] {
+                    assert_eq!(
+                        saved_project_generation_response(
+                            State(app.clone()),
+                            RoutePath(("AANobbMI".into(), invalid))
+                        )
+                        .await
+                        .unwrap_err(),
+                        StatusCode::BAD_REQUEST
+                    );
+                }
+                assert_eq!(
+                    saved_project_generation_response(
+                        State(app.clone()),
+                        RoutePath(("AANobbMI".into(), generation + 100))
+                    )
+                    .await
+                    .unwrap_err(),
+                    StatusCode::NOT_FOUND
+                );
+                assert_eq!(
+                    saved_project_generation_response(
+                        State(app.clone()),
+                        RoutePath(("OTHER123".into(), generation))
+                    )
+                    .await
+                    .unwrap_err(),
+                    StatusCode::NOT_FOUND
+                );
+            });
+        std::fs::remove_dir_all(directory).unwrap();
     }
 }
