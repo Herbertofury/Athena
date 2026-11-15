@@ -3,7 +3,11 @@ import shutil
 import unittest
 from unittest.mock import patch
 import test_transition_consumer as fixtures
-from test_consumer_audit import snapshot
+from test_consumer_audit import snapshot as raw_snapshot
+from pathlib import Path
+
+def snapshot(root):
+ return {Path(path).as_posix():data for path,data in raw_snapshot(root).items()}
 import transition_consumer as transition
 import update_transitioned_consumer as update
 import repository_governance as governance
