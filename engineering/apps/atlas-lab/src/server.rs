@@ -184,6 +184,13 @@ async fn version_history_response(
 ) -> Result<Json<crate::snapshots::ProjectHistoryPage>, StatusCode> {
     archive_history_response(app, id, query, ArchiveKind::Version).await
 }
+async fn upstream_history_response(
+    State(app): State<App>,
+    RoutePath(id): RoutePath<String>,
+    Query(query): Query<ProjectHistoryQuery>,
+) -> Result<Json<crate::snapshots::ProjectHistoryPage>, StatusCode> {
+    archive_history_response(app, id, query, ArchiveKind::Upstream).await
+}
 async fn archive_history_response(
     app: App,
     id: String,
@@ -203,7 +210,9 @@ async fn archive_history_response(
             crate::modrinth_versions::versions_url(std::slice::from_ref(&id))
                 .map_err(|_| StatusCode::BAD_REQUEST)?;
         }
-        ArchiveKind::Upstream => return Err(StatusCode::BAD_REQUEST),
+        ArchiveKind::Upstream => {
+            crate::upstream_reviews::Source::parse(&id).map_err(|_| StatusCode::BAD_REQUEST)?;
+        }
     }
     let permit = app
         .db_slots
@@ -216,7 +225,11 @@ async fn archive_history_response(
         let page = match kind {
             ArchiveKind::Project => store.modrinth_project_history(&id, query.before, limit),
             ArchiveKind::Version => store.modrinth_version_history(&id, query.before, limit),
-            ArchiveKind::Upstream => return Err(StatusCode::BAD_REQUEST),
+            ArchiveKind::Upstream => store.upstream_history(
+                crate::upstream_reviews::Source::parse(&id).map_err(|_| StatusCode::BAD_REQUEST)?,
+                query.before,
+                limit,
+            ),
         };
         page.map(Json).map_err(|_| StatusCode::UNPROCESSABLE_ENTITY)
     })
@@ -266,6 +279,15 @@ async fn saved_version_generation_response(
     }
     saved_archive_at(app, id, ArchiveKind::Version, Some(generation)).await
 }
+async fn saved_upstream_generation_response(
+    State(app): State<App>,
+    RoutePath((id, generation)): RoutePath<(String, i64)>,
+) -> Result<Response, StatusCode> {
+    if generation < 1 {
+        return Err(StatusCode::BAD_REQUEST);
+    }
+    saved_archive_at(app, id, ArchiveKind::Upstream, Some(generation)).await
+}
 async fn saved_archive_at(
     app: App,
     id: String,
@@ -313,12 +335,17 @@ async fn saved_archive_at(
                         .map(|(generation, record)| (generation, record.payload.get().to_owned()))
                 })
             }
-            ArchiveKind::Upstream => store
-                .latest_upstream_snapshot(
-                    crate::upstream_reviews::Source::parse(&id)
-                        .map_err(|_| StatusCode::BAD_REQUEST)?,
-                )
-                .map(|snapshot| snapshot.map(|(generation, record)| (generation, record.payload))),
+            ArchiveKind::Upstream => {
+                let source = crate::upstream_reviews::Source::parse(&id)
+                    .map_err(|_| StatusCode::BAD_REQUEST)?;
+                let selected = match selected_generation {
+                    Some(generation) => store.upstream_generation(source, generation),
+                    None => store.latest_upstream_snapshot(source),
+                };
+                selected.map(|snapshot| {
+                    snapshot.map(|(generation, record)| (generation, record.payload))
+                })
+            }
         };
         let (generation, payload) = stored
             .map_err(|_| StatusCode::UNPROCESSABLE_ENTITY)?
@@ -684,6 +711,11 @@ async fn serve_strategy(
         )
         .route("/api/version-history/{id}", get(version_history_response))
         .route("/api/upstream-archive/{id}", get(saved_upstream_response))
+        .route(
+            "/api/upstream-archive/{id}/{generation}",
+            get(saved_upstream_generation_response),
+        )
+        .route("/api/upstream-history/{id}", get(upstream_history_response))
         .route("/api/overview", get(overview))
         .route("/api/jobs", post(enqueue))
         .layer(DefaultBodyLimit::max(4096))
@@ -727,6 +759,171 @@ mod tests {
             );
             assert!(seen.insert(value));
         }
+    }
+
+    #[test]
+    fn upstream_history_retains_exact_generations_without_fallback() {
+        use crate::upstream_reviews::{Source, response_meta, tests::fixture};
+        let path = std::env::temp_dir().join(format!(
+            "athena-upstream-history-{}-{}.sqlite",
+            std::process::id(),
+            std::time::SystemTime::now()
+                .duration_since(std::time::UNIX_EPOCH)
+                .unwrap()
+                .as_nanos()
+        ));
+        let first = fixture("v1.7.4");
+        let mut store = crate::snapshots::SnapshotStore::open(&path).unwrap();
+        for body in [&first, &fixture("v1.7.5")] {
+            store
+                .save_upstream(
+                    Source::Hls,
+                    body,
+                    &response_meta(200, &HeaderMap::new(), 10000, 0),
+                )
+                .unwrap();
+        }
+        store.record_upstream_failure(Source::Hls).unwrap();
+        drop(store);
+        let store = crate::snapshots::SnapshotStore::open(&path).unwrap();
+        let page = store.upstream_history(Source::Hls, None, 1).unwrap();
+        assert_eq!(page.entries[0].generation, "2");
+        assert_eq!(page.next_before.as_deref(), Some("2"));
+        let older = store.upstream_history(Source::Hls, Some(2), 1).unwrap();
+        assert_eq!(older.entries[0].generation, "1");
+        assert!(older.next_before.is_none());
+        assert!(
+            store
+                .upstream_history(Source::RustSec, None, 1)
+                .unwrap()
+                .entries
+                .is_empty()
+        );
+        assert!(store.upstream_history(Source::Hls, None, 101).is_err());
+        assert!(store.upstream_history(Source::Hls, Some(0), 1).is_err());
+        assert!(store.upstream_generation(Source::Hls, 0).is_err());
+        assert_eq!(
+            store
+                .upstream_generation(Source::Hls, 1)
+                .unwrap()
+                .unwrap()
+                .1
+                .payload
+                .as_bytes(),
+            first
+        );
+        assert!(
+            store
+                .upstream_generation(Source::RustSec, 1)
+                .unwrap()
+                .is_none()
+        );
+        assert!(store.upstream_generation(Source::Hls, 3).unwrap().is_none());
+        drop(store);
+        let (wake, _receiver) = std::sync::mpsc::sync_channel(1);
+        let app = App {
+            engine_instance: "0".repeat(32),
+            runtime_assets: None,
+            path: path.clone(),
+            worker_status: Arc::new(AtomicU8::new(1)),
+            wake,
+            overview_candidate: false,
+            db_slots: Arc::new(tokio::sync::Semaphore::new(4)),
+        };
+        tokio::runtime::Builder::new_multi_thread()
+            .worker_threads(2)
+            .enable_all()
+            .build()
+            .unwrap()
+            .block_on(async {
+                let response = saved_upstream_generation_response(
+                    State(app.clone()),
+                    RoutePath(("hls".into(), 1)),
+                )
+                .await
+                .unwrap();
+                assert_eq!(response.headers()["x-atlas-generation"], "1");
+                assert_eq!(
+                    response.headers()["x-atlas-payload-sha256"],
+                    crate::build_identity::sha256_hex(&first)
+                );
+                assert_eq!(
+                    axum::body::to_bytes(response.into_body(), 2097152)
+                        .await
+                        .unwrap()
+                        .as_ref(),
+                    first
+                );
+                for (id, generation, expected) in [
+                    ("hls", 0, StatusCode::BAD_REQUEST),
+                    ("hls", 3, StatusCode::NOT_FOUND),
+                    ("rustsec", 1, StatusCode::NOT_FOUND),
+                    ("unknown", 1, StatusCode::BAD_REQUEST),
+                ] {
+                    assert_eq!(
+                        saved_upstream_generation_response(
+                            State(app.clone()),
+                            RoutePath((id.into(), generation))
+                        )
+                        .await
+                        .unwrap_err(),
+                        expected
+                    );
+                }
+                let page = upstream_history_response(
+                    State(app.clone()),
+                    RoutePath("hls".into()),
+                    Query(ProjectHistoryQuery {
+                        before: None,
+                        limit: Some(1),
+                    }),
+                )
+                .await
+                .unwrap()
+                .0;
+                assert_eq!(page.entries[0].generation, "2");
+                assert_eq!(
+                    upstream_history_response(
+                        State(app.clone()),
+                        RoutePath("unknown".into()),
+                        Query(ProjectHistoryQuery {
+                            before: None,
+                            limit: None
+                        })
+                    )
+                    .await
+                    .unwrap_err(),
+                    StatusCode::BAD_REQUEST
+                );
+                for body in ["{}".to_owned(), "x".repeat(4194305)] {
+                    let c = rusqlite::Connection::open(&path).unwrap();
+                    c.execute("UPDATE snapshots SET payload=?1 WHERE generation=1", [body])
+                        .unwrap();
+                    drop(c);
+                    assert_eq!(
+                        saved_upstream_generation_response(
+                            State(app.clone()),
+                            RoutePath(("hls".into(), 1))
+                        )
+                        .await
+                        .unwrap_err(),
+                        StatusCode::UNPROCESSABLE_ENTITY
+                    );
+                    let latest =
+                        saved_upstream_response(State(app.clone()), RoutePath("hls".into()))
+                            .await
+                            .unwrap();
+                    assert_eq!(latest.headers()["x-atlas-generation"], "2");
+                }
+                assert_eq!(app.db_slots.available_permits(), 4);
+            });
+        assert_eq!(
+            crate::snapshots::SnapshotStore::open(&path)
+                .unwrap()
+                .attempts()
+                .unwrap(),
+            3
+        );
     }
 
     #[test]

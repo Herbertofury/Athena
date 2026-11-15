@@ -70,3 +70,19 @@ This is native backend/API capability, not a new graphical history selector or a
 Each entry contains generation, stored observation timestamp and byte count in the **database encoding**. Listing is not payload validation or a source-truth verdict: corrupt payloads remain discoverable as metadata, and explicit retrieval rejects them. No payload JSON is parsed/copied just to list history. Existing loopback checks and bounded database concurrency apply. This API does not add a graphical history selector or certify migration retirement.
 
 Version archives have matching endpoints: `GET /api/version-history/{version_id}?limit=50&before=123` and `GET /api/version-archive/{version_id}/{generation}`. History uses the same bounded metadata/keyset rules but isolates the version namespace, even where a project has the same ID. Explicit generation retrieval preserves the stored version JSON object and rejects invalid/missing/corrupt selections without latest fallback. Linked files remain metadata and are never downloaded or executed. Batch separators are not part of the archived version object. Backend fixture tests cover historical/restarted retrieval, namespace separation, exact Unicode/unknown fields, failure retention and pagination. This remains an API, not a graphical history browser or owner-data migration.
+
+### Saved upstream observation history
+
+`GET /api/upstream-history/{source_id}?limit=50&before=123` lists bounded
+metadata for the fixed `hls`, `serde-json` or `rustsec` source only. Limits are
+1–100; positive generation cursors are returned as strings. This shares the
+archive keyset pagination contract, not a frozen multi-request snapshot.
+`GET /api/upstream-archive/{source_id}/{generation}` returns that exact validated
+stored response with its generation and payload hash. Unknown sources or invalid
+parameters return 400; absent or wrong-source generations return 404; corrupt or
+oversized stored responses return 422. None silently falls back to latest.
+
+The original latest-only endpoint remains unchanged. Read-only history does not
+fetch upstream data, download assets, adopt versions, modify receipts or make
+source truth/security claims. Tests use generated public-shaped fixtures and
+SQLite reopen, not real provider activity, UI selection or power-loss durability.
