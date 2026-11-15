@@ -2,7 +2,7 @@
 use crate::jobs::{Job, Queue};
 use axum::{
     Json, Router,
-    extract::{DefaultBodyLimit, Path as RoutePath, Request, State},
+    extract::{DefaultBodyLimit, Path as RoutePath, Query, Request, State},
     http::{HeaderMap, StatusCode, header},
     middleware::{self, Next},
     response::{Html, IntoResponse, Response},
@@ -163,6 +163,39 @@ impl ArchiveKind {
             Self::Upstream => "upstream",
         }
     }
+}
+#[derive(serde::Deserialize)]
+#[serde(deny_unknown_fields)]
+struct ProjectHistoryQuery {
+    before: Option<i64>,
+    limit: Option<usize>,
+}
+async fn project_history_response(
+    State(app): State<App>,
+    RoutePath(id): RoutePath<String>,
+    Query(query): Query<ProjectHistoryQuery>,
+) -> Result<Json<crate::snapshots::ProjectHistoryPage>, StatusCode> {
+    let limit = query.limit.unwrap_or(50);
+    if !(1..=100).contains(&limit) || query.before.is_some_and(|value| value < 1) {
+        return Err(StatusCode::BAD_REQUEST);
+    }
+    crate::modrinth::projects_url(std::slice::from_ref(&id))
+        .map_err(|_| StatusCode::BAD_REQUEST)?;
+    let permit = app
+        .db_slots
+        .try_acquire_owned()
+        .map_err(|_| StatusCode::TOO_MANY_REQUESTS)?;
+    tokio::task::spawn_blocking(move || {
+        let _permit = permit;
+        let store = crate::snapshots::SnapshotStore::open(&app.path)
+            .map_err(|_| StatusCode::INTERNAL_SERVER_ERROR)?;
+        store
+            .modrinth_project_history(&id, query.before, limit)
+            .map(Json)
+            .map_err(|_| StatusCode::UNPROCESSABLE_ENTITY)
+    })
+    .await
+    .map_err(|_| StatusCode::INTERNAL_SERVER_ERROR)?
 }
 async fn saved_project_response(
     State(app): State<App>,
@@ -597,6 +630,7 @@ async fn serve_strategy(
     let app = static_router
         .route("/api/runtime", get(runtime_info))
         .route("/api/project-archive/{id}", get(saved_project_response))
+        .route("/api/project-history/{id}", get(project_history_response))
         .route(
             "/api/project-archive/{id}/{generation}",
             get(saved_project_generation_response),
@@ -1010,6 +1044,62 @@ mod project_generation_tests {
             .build()
             .unwrap()
             .block_on(async {
+                let page = project_history_response(
+                    State(app.clone()),
+                    RoutePath("AANobbMI".into()),
+                    Query(ProjectHistoryQuery {
+                        before: None,
+                        limit: Some(1),
+                    }),
+                )
+                .await
+                .unwrap()
+                .0;
+                assert_eq!(page.entries.len(), 1);
+                assert_eq!(page.next_before.as_deref(), Some("2"));
+                let older = project_history_response(
+                    State(app.clone()),
+                    RoutePath("AANobbMI".into()),
+                    Query(ProjectHistoryQuery {
+                        before: Some(2),
+                        limit: Some(1),
+                    }),
+                )
+                .await
+                .unwrap()
+                .0;
+                assert_eq!(older.entries[0].generation, generation.to_string());
+                assert!(older.next_before.is_none());
+                let missing = project_history_response(
+                    State(app.clone()),
+                    RoutePath("OTHER123".into()),
+                    Query(ProjectHistoryQuery {
+                        before: None,
+                        limit: None,
+                    }),
+                )
+                .await
+                .unwrap()
+                .0;
+                assert!(missing.entries.is_empty());
+                assert_eq!(
+                    project_history_response(
+                        State(app.clone()),
+                        RoutePath("AANobbMI".into()),
+                        Query(ProjectHistoryQuery {
+                            before: Some(0),
+                            limit: None
+                        })
+                    )
+                    .await
+                    .unwrap_err(),
+                    StatusCode::BAD_REQUEST
+                );
+                for uri in ["/?before=nope", "/?limit=1&limit=2", "/?unknown=1"] {
+                    assert!(
+                        Query::<ProjectHistoryQuery>::try_from_uri(&uri.parse().unwrap()).is_err()
+                    );
+                }
                 let response = saved_project_generation_response(
                     State(app.clone()),
                     RoutePath(("AANobbMI".into(), generation)),

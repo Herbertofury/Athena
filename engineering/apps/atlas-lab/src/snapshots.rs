@@ -3,6 +3,18 @@ use crate::modrinth::Project;
 use rusqlite::{Connection, OptionalExtension, TransactionBehavior, params};
 use std::path::Path;
 pub struct SnapshotStore(Connection);
+#[derive(Debug, serde::Serialize)]
+pub struct ProjectHistoryEntry {
+    pub generation: String,
+    pub observed_at: String,
+    pub stored_bytes: i64,
+}
+#[derive(Debug, serde::Serialize)]
+pub struct ProjectHistoryPage {
+    pub entries: Vec<ProjectHistoryEntry>,
+    pub next_before: Option<String>,
+    pub scope: &'static str,
+}
 impl SnapshotStore {
     pub fn open(path: &Path) -> rusqlite::Result<Self> {
         let c = Connection::open(path)?;
@@ -244,6 +256,52 @@ impl SnapshotStore {
                 Ok((generation, record))
             })
             .transpose()
+    }
+    /// Bounded metadata only; listing never parses or returns archived payloads.
+    pub fn modrinth_project_history(
+        &self,
+        id: &str,
+        before: Option<i64>,
+        limit: usize,
+    ) -> Result<ProjectHistoryPage, Box<dyn std::error::Error>> {
+        crate::modrinth::projects_url(&[id.to_owned()])?;
+        if !(1..=100).contains(&limit) || before.is_some_and(|value| value < 1) {
+            return Err("Invalid project history cursor or page size".into());
+        }
+        let mut statement = self.0.prepare(
+            "SELECT generation,CASE WHEN length(observed_at)<=64 THEN observed_at ELSE NULL END,octet_length(payload) FROM snapshots WHERE provider='modrinth-project-raw' AND canonical_id=?1 AND (?2 IS NULL OR generation<?2) ORDER BY generation DESC LIMIT ?3"
+        )?;
+        let rows = statement.query_map(params![id, before, (limit + 1) as i64], |row| {
+            Ok((
+                row.get::<_, i64>(0)?,
+                row.get::<_, Option<String>>(1)?,
+                row.get::<_, i64>(2)?,
+            ))
+        })?;
+        let mut entries = Vec::new();
+        for row in rows {
+            let (generation, observed_at, stored_bytes) = row?;
+            if generation < 1 || stored_bytes < 0 {
+                return Err("Invalid stored project history metadata".into());
+            }
+            entries.push(ProjectHistoryEntry {
+                generation: generation.to_string(),
+                observed_at: observed_at.ok_or("Invalid stored project observation timestamp")?,
+                stored_bytes,
+            });
+        }
+        let has_more = entries.len() > limit;
+        entries.truncate(limit);
+        let next_before = if has_more {
+            entries.last().map(|entry| entry.generation.clone())
+        } else {
+            None
+        };
+        Ok(ProjectHistoryPage {
+            entries,
+            next_before,
+            scope: "Stored metadata only, not payload validation, completeness or source truth. Byte counts use database encoding. Keyset pages exclude newer insertions after the selected cursor.",
+        })
     }
     pub fn record_project_raw_failure(
         &self,
