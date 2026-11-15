@@ -83,3 +83,15 @@ eight non-normal SQLite save/reload round trips, rejection before schema14,
 missing/incorrect review, unsupported modes and bundle integrity. This verifies
 metadata/persistence, **not** source-to-target rendered pixel parity or readiness
 to delete source data. No real private scrapbook was imported by these tests.
+
+### Verify a retained scrapbook bundle without importing it
+
+From the repository root, use the exact catalog retained with the reviewed conversion:
+
+```sh
+python3 tools/foundry-recovery/scrapbook/convert.py --catalog /path/to/reviewed-catalog.json --verify-bundle /path/to/private-bundle
+```
+
+This read-only command verifies the four-file bundle, exact source/mapping/workspace/catalog digests, deterministic conversion and truthful manifest limits. It reports verified row count and partial compatibility; it does not import into a live store, repair files or prove original visual fidelity. Keep the matching catalog: a changed catalog is refused, not silently substituted. Missing, tampered or inconsistent bundles fail nonzero and remain unchanged. Verification must not be combined with creation arguments. The existing --source/--mapping/--new-bundle creation command is unchanged.
+
+Six real CLI subprocess tests use synthetic fixtures and check byte-for-byte preservation on success and failure, tampering, catalog drift, missing files, argument modes and existing creation compatibility. No private data or native owner-device acceptance is claimed.

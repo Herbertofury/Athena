@@ -136,8 +136,22 @@ def verify_bundle(directory,catalog_path):
  if parse(workspace)!=expected:raise ValueError('Workspace differs from deterministic conversion')
  if manifest.get('rows')!=len(expected['active']['placements']) or manifest.get('nativeFormat')!=expected['version'] or manifest.get('partialCompatibility') is not True or manifest.get('originalVisualFidelityVerified') is not False or manifest.get('sourceRetained') is not True:raise ValueError('Manifest claims inconsistent')
  return {'verifiedRows':len(expected['active']['placements']),'recomputed':True,'partialCompatibility':True,'originalVisualFidelityVerified':False}
-if __name__=='__main__':
- p=argparse.ArgumentParser();p.add_argument('--catalog',type=Path,required=True);p.add_argument('--source',type=Path,required=True);p.add_argument('--mapping',type=Path,required=True);p.add_argument('--new-bundle',type=Path,required=True);a=p.parse_args()
- try:count=write_bundle(a.source,a.mapping,a.new_bundle,a.catalog)
- except Exception as e:raise SystemExit('Conversion refused/failed: '+str(e))
- print(json.dumps({'convertedRows':count,'partialCompatibility':True,'originalVisualFidelityVerified':False}))
+def main():
+ p=argparse.ArgumentParser(description='Create or independently verify a partial scrapbook recovery bundle.')
+ p.add_argument('--catalog',type=Path,required=True)
+ mode=p.add_mutually_exclusive_group(required=True)
+ mode.add_argument('--new-bundle',type=Path)
+ mode.add_argument('--verify-bundle',type=Path)
+ p.add_argument('--source',type=Path);p.add_argument('--mapping',type=Path);a=p.parse_args()
+ if a.verify_bundle is not None and (a.source is not None or a.mapping is not None):
+  p.error('--verify-bundle does not accept --source or --mapping')
+ if a.new_bundle is not None and (a.source is None or a.mapping is None):
+  p.error('--new-bundle requires --source and --mapping')
+ try:
+  if a.verify_bundle is not None:result=verify_bundle(a.verify_bundle,a.catalog)
+  else:
+   count=write_bundle(a.source,a.mapping,a.new_bundle,a.catalog)
+   result={'convertedRows':count,'partialCompatibility':True,'originalVisualFidelityVerified':False}
+ except Exception as e:raise SystemExit('Recovery verification/conversion refused or failed: '+str(e))
+ print(json.dumps(result))
+if __name__=='__main__':main()
