@@ -11,13 +11,20 @@ use std::{
 struct Scratch(PathBuf);
 impl Scratch {
     fn new() -> Self {
-        let path = std::env::temp_dir().join(format!(
-            "athena-standalone-{}-{}",
-            std::process::id(),
+        Self::at_timestamp(
             SystemTime::now()
                 .duration_since(UNIX_EPOCH)
                 .unwrap()
-                .as_nanos()
+                .as_nanos(),
+        )
+    }
+    fn at_timestamp(timestamp: u128) -> Self {
+        use std::sync::atomic::{AtomicU64, Ordering};
+        static NEXT: AtomicU64 = AtomicU64::new(0);
+        let sequence = NEXT.fetch_add(1, Ordering::Relaxed);
+        let path = std::env::temp_dir().join(format!(
+            "athena-standalone-{}-{timestamp}-{sequence}",
+            std::process::id()
         ));
         std::fs::create_dir(&path).unwrap();
         Self(path)
@@ -138,4 +145,30 @@ fn actual_cli_uses_bounded_runner_and_retrieves_complete_run() {
     let retrieved: serde_json::Value = serde_json::from_slice(&retrieved.stdout).unwrap();
     assert_eq!(retrieved["run"], result["run"]);
     assert_eq!(std::fs::read(scratch.db()).unwrap(), before);
+}
+
+#[test]
+fn repeated_clock_fixture_directories_are_independent() {
+    let fixtures = std::thread::scope(|scope| {
+        let handles: Vec<_> = (0..16)
+            .map(|_| scope.spawn(|| Scratch::at_timestamp(123456)))
+            .collect();
+        handles
+            .into_iter()
+            .map(|h| h.join().unwrap())
+            .collect::<Vec<_>>()
+    });
+    let names: std::collections::HashSet<_> = fixtures.iter().map(|f| f.0.clone()).collect();
+    assert_eq!(names.len(), 16);
+    for (index, fixture) in fixtures.iter().enumerate() {
+        std::fs::write(fixture.0.join("sentinel"), index.to_string()).unwrap();
+    }
+    for (index, fixture) in fixtures.iter().enumerate() {
+        assert_eq!(
+            std::fs::read_to_string(fixture.0.join("sentinel")).unwrap(),
+            index.to_string()
+        );
+    }
+    drop(fixtures);
+    assert!(names.iter().all(|path| !path.exists()));
 }

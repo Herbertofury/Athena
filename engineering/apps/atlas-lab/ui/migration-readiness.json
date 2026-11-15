@@ -1,0 +1,126 @@
+{
+  "schema": 1,
+  "snapshot_date": "2026-11-15",
+  "source_snapshot_commit": "12ebe1e06707bdc1febd3369a43221e62c332f78",
+  "retirement_certified": false,
+  "scope": "Read-only routing and evidence snapshot, not a new live repository audit. No source is certified safe to delete. Older evidence retains its original date.",
+  "projects": [
+    {
+      "id": "atlas",
+      "name": "Engineering-Atlas",
+      "workspace": "/#lab",
+      "native_entry": "/learning",
+      "summary": "Engineering and bounded offline experiments run inside the Athena engine.",
+      "gates": [
+        {
+          "state": "recorded",
+          "label": "Historical recovery",
+          "detail": "The 2026-11-14 receipt records 39 refs, repository and wiki bundle restoration/fsck, and matching wiki snapshots. This page does not revalidate current upstream refs."
+        },
+        {
+          "state": "open",
+          "label": "Retirement decision",
+          "detail": "Reconcile current capabilities, links, dependencies and owner-target acceptance. Historical preservation is not full migration acceptance."
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Historical recovery receipt (2026-11-14)",
+          "url": "https://github.com/Herbertofury/Athena/blob/12ebe1e06707bdc1febd3369a43221e62c332f78/migration/engineering-atlas/retirement-2026-11-14/verification.json"
+        },
+        {
+          "label": "Native Learning History and explicit runner scope",
+          "url": "https://github.com/Herbertofury/Athena/blob/12ebe1e06707bdc1febd3369a43221e62c332f78/engineering/docs/learning-history.md"
+        }
+      ]
+    },
+    {
+      "id": "foundry",
+      "name": "Feature Foundry",
+      "workspace": "/#build",
+      "native_entry": null,
+      "summary": "Native Foundry workspace, durable store and preserved-source recovery tooling coexist in Athena.",
+      "gates": [
+        {
+          "state": "recorded",
+          "label": "Preserved audit",
+          "detail": "The 2026-11-14 audit explicitly records retirementReady=false, preserved history and selected release files."
+        },
+        {
+          "state": "open",
+          "label": "Archive and history reconciliation",
+          "detail": "That audit lists current-source history/issue preservation and two release archives as remaining gates. Recheck current authoritative sources before resolving them."
+        },
+        {
+          "state": "open",
+          "label": "Native and rights acceptance",
+          "detail": "Complete native parity, owner-target acceptance, and privacy/rights review remain separate gates; tests do not grant asset rights."
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Dated retirement audit",
+          "url": "https://github.com/Herbertofury/Athena/blob/12ebe1e06707bdc1febd3369a43221e62c332f78/migration/feature-foundry/retirement-audit-2026-11-14.json"
+        },
+        {
+          "label": "Native Foundry implementation scope",
+          "url": "https://github.com/Herbertofury/Athena/blob/12ebe1e06707bdc1febd3369a43221e62c332f78/docs/FOUNDRY-NATIVE.md"
+        }
+      ]
+    },
+    {
+      "id": "constellation",
+      "name": "Project Constellation",
+      "workspace": "/#continuity",
+      "native_entry": null,
+      "summary": "Athena Continuity provides source-attributed notes, revisions and explicit evidence dependencies.",
+      "gates": [
+        {
+          "state": "recorded",
+          "label": "Native continuity slice",
+          "detail": "Integration documentation distinguishes the reconstructed 0.20.1 baseline from incomplete staged 0.20.2 recovery. It is not a full extension port."
+        },
+        {
+          "state": "open",
+          "label": "Remaining source capabilities",
+          "detail": "Browser capture, pause/resume, remote synchronization, grants and source history/release reconciliation require their own scoped verification. No approval automation is imported."
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Continuity capabilities, provenance and remaining gates",
+          "url": "https://github.com/Herbertofury/Athena/blob/12ebe1e06707bdc1febd3369a43221e62c332f78/docs/integration/PROJECT-CONTINUITY.md"
+        }
+      ]
+    },
+    {
+      "id": "guidance",
+      "name": "Agent-Foundry guidance",
+      "workspace": "/#guidance",
+      "native_entry": null,
+      "summary": "Athena owns the native guidance library and reviewed migration/audit tools.",
+      "gates": [
+        {
+          "state": "recorded",
+          "label": "Source and consumer evidence",
+          "detail": "The inventory pins source 87166b5 and records 528 file digests. A scoped Noxviola consumer audit is not fleet-wide adoption."
+        },
+        {
+          "state": "open",
+          "label": "Retirement gates",
+          "detail": "Capabilities, rights, recoverable history/wiki/releases, legacy consumer references, target adapters and live acceptance remain separate verification gates."
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Pinned source inventory",
+          "url": "https://github.com/Herbertofury/Athena/blob/12ebe1e06707bdc1febd3369a43221e62c332f78/guidance/registry/agent-foundry-source-inventory.json"
+        },
+        {
+          "label": "Guidance integration and retirement gates",
+          "url": "https://github.com/Herbertofury/Athena/blob/12ebe1e06707bdc1febd3369a43221e62c332f78/docs/integration/AGENT-GUIDANCE.md"
+        }
+      ]
+    }
+  ]
+}
