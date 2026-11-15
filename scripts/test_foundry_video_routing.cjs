@@ -32,6 +32,15 @@ async function check(name,fn){report.current=name;await fn();report.checks.push(
   assert.equal(report.render.videoCount,1);assert.ok(report.render.videoBox.width>0&&report.render.videoBox.height>0);assert.equal(report.render.visibility,'visible');assert.notEqual(report.render.display,'none');assert.equal(report.render.layerZ,'2');assert.equal(report.render.pseudoVisibility,'hidden');assert.equal(report.render.labelVisibility,'visible');assert.equal(report.render.pointerEvents,'none');assert.equal(report.render.controls,false);assert.equal(report.render.paused,true);
   await one('.foundry-scene').screenshot({path:path.join(out,'routed-scene.png')});
  });
+ await check('failed replacement setup preserves decoded routed player and controls',async()=>{
+  const prior=await one('video').evaluate(v=>({src:v.src,time:v.currentTime,paused:v.paused}));
+  await page.evaluate(()=>{const load=HTMLMediaElement.prototype.load;HTMLMediaElement.prototype.load=function(){HTMLMediaElement.prototype.load=load;throw Error('synthetic replacement setup fault');};});
+  await one('[data-local-video-file]').setInputFiles(fixture);
+  await one('[data-local-video-status]').filter({hasText:'Previous video retained.'}).waitFor();
+  assert.equal(await one('video').count(),1);assert.equal(await one('[data-local-video-surface] video').count(),1);
+  const retained=await one('video').evaluate(v=>({src:v.src,time:v.currentTime,paused:v.paused}));assert.deepEqual(retained,prior);
+  assert.equal(await one('[data-local-video-play]').isEnabled(),true);
+ });
  await check('explicit Play yields trusted playing; filtering pauses same player with no retarget',async()=>{
   await one('[data-local-video-play]').click();await one('[data-local-video-status][data-state=playing]').waitFor();
   assert.equal(await one('video').evaluate(v=>v.paused),false);
