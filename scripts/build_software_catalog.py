@@ -5,6 +5,7 @@ installs, benchmarks, changes source claims, or grants a product a quality score
 """
 import argparse
 from collections import Counter, defaultdict
+from datetime import date
 import hashlib
 import json
 from pathlib import Path
@@ -63,6 +64,13 @@ def safe_url(url):
     try:
         p = urlsplit(url)
         return p.scheme in {"http", "https"} and bool(p.hostname) and not p.username and not p.password
+    except ValueError:
+        return False
+
+
+def valid_date(value):
+    try:
+        return isinstance(value, str) and date.fromisoformat(value).isoformat() == value
     except ValueError:
         return False
 
@@ -165,12 +173,13 @@ def validate(apps):
             require(len(a.get("recommendation", {}).get(field, "")) > 5, f"missing recommendation {field}")
         m = a.get("maintenance", {})
         require(m.get("status") in MAINTENANCE and bool(m.get("note")), "missing maintenance status and basis")
+        require(valid_date(m.get("checked_at")), "maintenance review date missing or invalid")
         if m.get("status") != "unverified":
             require(safe_url(m.get("source_url")), "maintenance assertion needs a source")
         require(bool(a.get("sources")), "missing source provenance")
         for s in a.get("sources", []):
             require(safe_url(s.get("url")), "invalid source URL")
-            require(bool(re.fullmatch(r"\d{4}-\d{2}-\d{2}", s.get("checked_at", ""))), "source review date missing")
+            require(valid_date(s.get("checked_at")), "source review date missing or invalid")
             require(bool(s.get("supports")) and set(s["supports"]) <= SOURCE_CLAIMS, "invalid source claims")
             require(bool(s.get("label")), "source label missing")
     if errors:
@@ -185,8 +194,9 @@ def load_catalog(require_partitions=True):
             raise ValueError("Preserved research changed; explicitly review the baseline before proceeding: " + entry["path"])
     legacy = read(LEGACY)
     apps = [normalize_legacy(x, legacy) for x in legacy["tools"]]
-    for part in PARTITIONS:
-        path = f"data/software/{part}.json"
+    partition_paths = [f"data/software/{part}.json" for part in PARTITIONS]
+    partition_paths.extend(p.relative_to(ROOT).as_posix() for p in sorted((ROOT / "data/software").glob("*-expanded.json")))
+    for path in partition_paths:
         if not (ROOT / path).exists() and not require_partitions:
             continue
         d = read(path)
@@ -286,11 +296,15 @@ def load_catalog(require_partitions=True):
     if len({r["id"] for r in recipes}) != len(recipes):
         raise ValueError("Duplicate decision guide id")
     for recipe in recipes:
+        if not all(isinstance(recipe.get(k), str) and recipe[k].strip() for k in ("id", "title", "description")):
+            raise ValueError("Decision guides need a stable identity, title and task description")
+        if len(recipe.get("picks", [])) < 2 or len({p["app_id"] for p in recipe["picks"]}) != len(recipe["picks"]):
+            raise ValueError("Decision guides need at least two distinct application choices: " + recipe["id"])
         for pick in recipe["picks"]:
             if pick["app_id"] not in by_id:
                 raise ValueError("Unknown recommendation target: " + pick["app_id"])
-            if not pick.get("reason") or not pick.get("tradeoff"):
-                raise ValueError("Recommendations need both reason and tradeoff")
+            if not pick.get("label") or not pick.get("reason") or not pick.get("tradeoff"):
+                raise ValueError("Recommendations need a task-specific role, reason and tradeoff")
     counts = {
         "applications": len(apps), "new_applications": len(apps) - len(legacy["tools"]),
         "preserved_pc_records": len(legacy["tools"]), "preserved_cleanup_records": len(cleanup["tools"]),

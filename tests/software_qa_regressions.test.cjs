@@ -12,6 +12,27 @@ const catalog = JSON.parse(fs.readFileSync('dist/workspaces/software/catalog.jso
 const model = import('../src/software/model.mjs');
 const workspace = import('../src/software/index.mjs');
 
+test('everyday task phrasing retrieves relevant tools without treating disk as any file', async () => {
+  const {indexCatalog, queryCatalog, parseState} = await model;
+  const index = indexCatalog(catalog), find = q => queryCatalog(index, {...parseState(), q}, catalog);
+  assert.ok(find('please help me edit a video').some(a => a.id === 'kdenlive'));
+  assert.ok(find('make a disk image').some(a => a.id === 'clonezilla'));
+  assert.equal(find('make a disk image').some(a => a.id === 'bruno'), false);
+  assert.ok(find('record my screen').some(a => a.id === 'obs-studio'));
+  assert.ok(find('I want to program in Python').slice(0, 3).some(a => a.id === 'thonny'));
+});
+
+test('alternative requests use explicit relationships and preserve platform constraints', async () => {
+  const {indexCatalog, queryCatalog, parseState, alternativeTarget} = await model;
+  const index = indexCatalog(catalog), state = {...parseState(), q: 'Find an alternative to Clonezilla?'};
+  assert.equal(alternativeTarget(state.q), 'clonezilla');
+  const alternatives = queryCatalog(index, state, catalog);
+  assert.ok(alternatives.some(a => a.id === 'rescuezilla'));
+  assert.equal(alternatives.some(a => a.id === 'clonezilla'), false);
+  assert.ok(queryCatalog(index, {...state, platform: 'Bootable'}, catalog).every(a => a.platforms.includes('Bootable')));
+  assert.deepEqual(queryCatalog(index, {...state, q: 'alternatives to unlisted-fixture-product'}, catalog), []);
+});
+
 async function domFixture(t, route = '#software?q=', saved = {}) {
   const {window} = parseHTML('<html><body><section id="software-fixture"></section></body></html>');
   const document = window.document;

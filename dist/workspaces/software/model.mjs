@@ -1,8 +1,11 @@
 // Pure catalog queries. No network, browser globals, quality scores or mutation.
 export const FILTERS = ['family', 'category', 'platform', 'license', 'pricing', 'maintenance', 'task'];
-const STOP = new Set('a an the i my me to for with and of on in want need how can do find show software tool tools application applications app apps best pc computer computers laptop program programs'.split(' '));
+const STOP = new Set('a an the i my me to for with and of on in want need how can do find show software tool tools application applications app apps best pc computer computers laptop programs help please that which what would could should like some something make create'.split(' '));
 const SYNONYMS = {
-  files: ['files', 'file', 'folder', 'disk', 'image'],
+  files: ['files', 'file', 'folder', 'folders'],
+  disk: ['disk', 'disks', 'drive', 'drives'],
+  image: ['image', 'images', 'imaging', 'clone', 'cloning'],
+  code: ['code', 'coding', 'program', 'programming', 'developer', 'development', 'ide', 'ides'],
   backup: ['backup', 'backups', 'snapshot', 'archival'],
   recover: ['recovery', 'recover', 'undelete', 'restore', 'deleted'],
   duplicates: ['duplicate', 'duplicates', 'deduplication', 'deduplicate'],
@@ -38,20 +41,25 @@ export function terms(query) {
     });
 }
 export function indexCatalog(catalog) {
+  const taskAliases = {'creative/capture-streaming': 'screen recording screen capture screencast', 'files/disk-imaging': 'disk image cloning bare metal backup'};
   return catalog.applications.map(app => ({app,
     name: fold(app.name),
+    aliases: (app.aliases || []).map(fold),
     category: fold(app.category.replaceAll('-', ' ')),
-    tasks: fold([app.category, ...(app.use_cases || []), ...(app.tags || [])].join(' ')),
+    tasks: fold([app.category, taskAliases[app.category_id] || '', ...(app.use_cases || []), ...(app.tags || [])].join(' ')),
     text: fold([app.name, app.id, app.summary, app.family, app.category, app.license_kind, app.pricing_model,
       ...(app.features || []), ...(app.strengths || []), ...(app.use_cases || []),
-      ...(app.tags || []), ...(app.aliases || []), ...(app.platforms || [])].join(' ')),
+      ...(app.tags || []), ...(app.aliases || []), ...(app.platforms || []), taskAliases[app.category_id] || ''].join(' ')),
   }));
 }
-function matches(text, term) {
+function pattern(term) {
   const escaped = term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
   // Short terms must be whole words: AI is not mail; mod is not model.
   // Longer terms may prefix a word, retaining useful singular/stem searches.
-  return new RegExp('(?:^|[^a-z0-9])' + escaped + (term.length <= 3 ? '(?=$|[^a-z0-9])' : ''), 'i').test(text);
+  return new RegExp('(?:^|[^a-z0-9])' + escaped + (term.length <= 3 ? '(?=$|[^a-z0-9])' : ''), 'i');
+}
+export function alternativeTarget(query) {
+  return fold(query).match(/\b(?:alternatives?\s+(?:to|for)|replacement\s+for|instead\s+of)\s+(.+?)\s*[?.!]*$/)?.[1]?.trim() || '';
 }
 export function parseState(route = '', saved = {}) {
   const raw = String(route).split('?')[1];
@@ -93,18 +101,27 @@ export function normalizeState(state, catalog) {
   return {state: next, removed};
 }
 export function queryCatalog(index, state, catalog) {
-  const tokens = terms(state.q);
+  const target = alternativeTarget(state.q);
+  const targetRow = target ? index.find(r => r.name === target || fold(r.app.id) === target || r.aliases.includes(target)) : null;
+  const alternativeIds = new Set(targetRow?.app.alternative_ids || []);
+  if (target) for (const row of index) {
+    if ((targetRow && (row.app.alternative_ids || []).includes(targetRow.app.id)) || (row.app.alternatives || []).some(n => fold(n) === target)) alternativeIds.add(row.app.id);
+  }
+  if (targetRow) alternativeIds.delete(targetRow.app.id);
+  const tokens = (target ? [] : terms(state.q)).map(group => group.map(pattern));
   const task = catalog.recipes.find(r => r.id === state.task);
   const picks = new Map((task?.picks || []).map((p, i) => [p.app_id, i]));
   const rows = [];
   for (const row of index) {
     const a = row.app;
+    if (target && !alternativeIds.has(a.id)) continue;
     if (state.family && a.family !== state.family || state.category && a.category_id !== state.category ||
         state.platform && !a.platforms.includes(state.platform) || state.license && a.license_kind !== state.license ||
         state.pricing && a.pricing_model !== state.pricing || state.maintenance && a.maintenance.status !== state.maintenance ||
         state.task && (!task || !picks.has(a.id))) continue;
-    if (!tokens.every(group => group.some(t => matches(row.text, t)))) continue;
-    const score = (row.name === fold(state.q).trim() ? 200 : 0) + tokens.reduce((n, group) => n + (group.some(t => matches(row.name, t)) ? 20 : group.some(t => matches(row.category, t)) ? 12 : group.some(t => matches(row.tasks, t)) ? 6 : 1), 0);
+    if (!tokens.every(group => group.some(re => re.test(row.text)))) continue;
+    const exact = fold(state.q).trim();
+    const score = (row.name === exact ? 200 : row.aliases.includes(exact) ? 150 : 0) + tokens.reduce((n, group) => n + (group.some(re => re.test(row.name)) ? 20 : group.some(re => re.test(row.category)) ? 12 : group.some(re => re.test(row.tasks)) ? 6 : 1), 0);
     rows.push({app: a, score});
   }
   rows.sort((a, b) => {
@@ -114,10 +131,10 @@ export function queryCatalog(index, state, catalog) {
   return rows.map(r => r.app);
 }
 export function queryResearch(records, query) {
-  const tokens = terms(query);
+  const tokens = terms(query).map(group => group.map(pattern));
   return records.filter(r => {
     const text = fold([r.name, r.summary, r.category, r.platform_notes, JSON.stringify(r.original)].join(' '));
-    return tokens.every(group => group.some(term => matches(text, term)));
+    return tokens.every(group => group.some(re => re.test(text)));
   });
 }
 export function safeLink(value) {

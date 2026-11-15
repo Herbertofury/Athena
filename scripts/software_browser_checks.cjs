@@ -16,10 +16,11 @@ const server = http.createServer((req, res) => {
   fs.mkdirSync(output, {recursive: true});
   await new Promise(r => server.listen(0, '127.0.0.1', r));
   const report = {started_at: new Date().toISOString(), applications: catalog.applications.length, checks: [], result: 'running'};
-  let browser;
+  let browser, page;
   try {
     browser = await chromium.launch({executablePath: process.env.CHROMIUM_PATH || undefined, headless: true, args: ['--no-sandbox']});
-    const page = await browser.newPage({viewport: {width: 1500, height: 1050}}), errors = [];
+    page = await browser.newPage({viewport: {width: 1500, height: 1050}});
+    const errors = [];
     page.on('pageerror', e => errors.push(e.message));
     const base = `http://127.0.0.1:${server.address().port}/`;
     await page.goto(base + '#software?q=');
@@ -99,7 +100,14 @@ const server = http.createServer((req, res) => {
     assert.deepEqual(errors, []);
     report.checks.push('Learning route remains available; workspace unmount/remount and deep links; no browser errors');
     report.result = 'pass';
-  } catch (error) {report.result = 'failed'; report.error = error.stack; throw error;}
+  } catch (error) {
+    report.result = 'failed'; report.error = error.stack;
+    if (page) {
+      await page.screenshot({path: path.join(output, 'software-failure.png'), fullPage: true}).catch(() => {});
+      report.visible_state = await page.locator('.workspace-container').ariaSnapshot().catch(() => 'Snapshot unavailable');
+    }
+    throw error;
+  }
   finally {
     report.finished_at = new Date().toISOString();
     fs.writeFileSync(path.join(output, 'report.json'), JSON.stringify(report, null, 2) + '\n');

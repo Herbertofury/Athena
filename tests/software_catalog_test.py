@@ -48,6 +48,15 @@ class CatalogTests(unittest.TestCase):
         self.assertIn("maintenance assertion needs a source", str(error.exception))
         self.assertIn("invalid source claims", str(error.exception))
 
+    def test_impossible_review_dates_are_rejected(self):
+        a = copy.deepcopy(self.catalog["applications"][0])
+        a["maintenance"]["checked_at"] = "2026-02-30"
+        a["sources"][0]["checked_at"] = "2026-13-01"
+        with self.assertRaises(ValueError) as error:
+            builder.validate([a])
+        self.assertIn("maintenance review date missing or invalid", str(error.exception))
+        self.assertIn("source review date missing or invalid", str(error.exception))
+
     def test_taxonomy_alternatives_and_recommendations_have_real_targets(self):
         ids = {a["id"] for a in self.catalog["applications"]}
         categories = {c["id"] for c in self.catalog["categories"]}

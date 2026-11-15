@@ -1,4 +1,4 @@
-import {FILTERS, indexCatalog, parseState, encodeState, normalizeState, queryCatalog, queryResearch, safeLink, comparisonRows} from './model.mjs';
+import {FILTERS, indexCatalog, parseState, encodeState, normalizeState, queryCatalog, queryResearch, safeLink, comparisonRows, alternativeTarget} from './model.mjs';
 
 function element(tag, attrs = {}, ...children) {
   const e = document.createElement(tag);
@@ -91,8 +91,8 @@ export async function mount({container, search = '', state: saved = {}, route = 
     select.value = value;
   }
   for (const key of FILTERS) {
-    const select = element('select', {id: key, onchange: e => update({[key]: e.target.value})});
-    $('filters').append(element('label', {}, LABELS[key], select));
+    const select = element('select', {id: key, 'aria-label': LABELS[key], onchange: e => update({[key]: e.target.value})});
+    $('filters').append(element('label', {for: key}, LABELS[key], select));
   }
   function renderFilters() {
     options($('family'), catalog.families.map(x => [x.id, x.name + ' (' + (catalog.counts.by_family[x.id] || 0) + ')']), state.family);
@@ -185,7 +185,7 @@ export async function mount({container, search = '', state: saved = {}, route = 
     rows = queryCatalog(index, state, catalog);
     renderGuide();
     $('result-count').textContent = `${rows.length.toLocaleString()} of ${catalog.applications.length.toLocaleString()} tools` + (state.q ? ' matching “' + state.q + '”' : '');
-    $('result-context').textContent = state.task ? 'Task-guide order is an editorial fit to these constraints.' : 'Use filters to narrow the task. Open a tool to inspect evidence and alternatives.';
+    $('result-context').textContent = state.task ? 'Task-guide order is an editorial fit to these constraints.' : alternativeTarget(state.q) ? 'Explicitly researched alternatives to ' + alternativeTarget(state.q) + '; your filters still apply.' : 'Use filters to narrow the task. Open a tool to inspect evidence and alternatives.';
     $('results').replaceChildren(...rows.slice(0, limit).map(card));
     if (!rows.length) $('results').append(element('div', {class: 'empty'}, element('h3', {}, 'No matching tools yet'), element('p', {}, 'Try a broader task or remove a filter. A missing result is a coverage gap, not proof that no suitable software exists.'), element('button', {type: 'button', onclick: reset}, 'Clear search and filters')));
     $('more').hidden = rows.length <= limit;
