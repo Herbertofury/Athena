@@ -1,8 +1,18 @@
 # Athena
 
-**Curiosity becomes capability.** An organized home for learning computers, security, coding, infrastructure, data and beyond.
+**Curiosity becomes capability.** A beautiful, responsive personal home for learning, building and improving every project.
 
 Athena joins a learning academy with an evidence-led engineering research library. Learning, Engineering research and labs, and reviewed Foundry authoring now mount as native workspaces in one Athena document, with shared navigation, search and theme. Foundry also has an explicitly started local SQLite profile; original-feature fidelity and private user-data migration remain separate, unfinished acceptance work. Its purpose is deep understanding and demonstrable practical skill, not collecting badges or claiming mastery from a progress bar.
+
+## The product we are building
+
+Athena is one polished native app: a learning academy, evidence-led R&D workshop and reusable project home. It should learn with its owner, organize reusable features and favorite UI patterns, and challenge existing methods through real comparison rather than repeatedly rebuilding the same work. Distinctive desktop-quality design and measured responsiveness matter together. Learning and continuous experimentation remain core, not optional polish.
+
+Overlapping capabilities from Engineering-Atlas, Feature Foundry, Feature Forge and Project Constellation belong in Athena's own navigation, data and workflows, not embedded apps or a collection of renamed links. Existing themes are inspiration, not authority: better designs may replace them. The experience should inform and empower the user, explain uncertainty and preserve control rather than impose arbitrary restrictions.
+
+**Delivery priority: finish native integration. This is a goal, not a completed-migration claim.** Keep source repositories until each capability, history, data, link, test and dependency has been reconciled and accepted. Shared databases remain in [Modding-Knowledge](https://github.com/Herbertofury/Modding-Knowledge), consumed by Athena and other apps rather than duplicated here.
+
+Read the [product vision](wiki/Athena-Vision.md) and [actual integration evidence](docs/integration/STATUS.md) together.
 
 ## Start here
 

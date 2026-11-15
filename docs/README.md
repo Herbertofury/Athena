@@ -1,5 +1,7 @@
 # Athena
 
+A beautiful personal home for learning, building and improving every project. [Product vision](https://github.com/Herbertofury/Athena/wiki/Athena-Vision): one native app, reusable capabilities, continuous learning and evidence-led experiments. This direction is not a completed-migration claim.
+
 Learn once. Apply across credentials. Build proof, not just badges.
 
 All 13 requested credentials are organized. This release contains 98 original lessons: the existing 48 foundations and Packet Trail lessons plus 50 applied lessons across six workshops. The workshops include 150 original checks (50 primary and 100 supplemental), worked examples, safe offline exercises and evidence worksheets. All 74 credential-domain rows remain roadmaps, not completed exam coverage. Real-cloud labs and Power BI workflows are unexecuted; read marks, XP and reference tests do not establish practical mastery or exam readiness.
