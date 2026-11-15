@@ -15,6 +15,16 @@ PYTHONDONTWRITEBYTECODE=1 python guidance/tools/repository_governance.py check
 PYTHONDONTWRITEBYTECODE=1 python -m unittest discover -s guidance/tests -v
 ```
 
+## Read-only consumer dependency audit
+
+Before migration, inspect only explicitly selected checkouts:
+
+```sh
+python guidance/tools/audit_consumers.py --target /path/to/consumer
+```
+
+The audit verifies known lock identities, complete snapshot paths, digest drift and tracked old-source references without changing repositories or emitting file contents. Local instructions remain local. It reports uninspected paths; references can be provenance rather than active dependencies. This is not a deletion approval, automatic fleet discovery, or a migration writer. See [the Noxviola public-checkout receipt](evidence/noxviola-consumer-audit-2026-11-15.json). That one target is not the fleet.
+
 ## Provenance and rights
 
 Ported with the repository owner's authorization from Herbertofury/Agent-Foundry commit `87166b5f6a621c61b90bbbfe90835a3752c1c51b`. This port contains its owner-authored governance standards, repository governance implementation, the small standard-library JSON helper and related tests, adapted to Athena identity. Original source inventory and SHA-256 hashes are retained in [the source inventory](registry/agent-foundry-source-inventory.json). Protocol registry is a preserved source snapshot, not a freshly reverified claim.

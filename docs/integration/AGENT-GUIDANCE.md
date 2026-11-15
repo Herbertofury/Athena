@@ -22,6 +22,12 @@ The `#guidance` route belongs to Athena navigation and shared search. Its genera
 
 `python scripts/build_guidance.py --check` verifies generated content against canonical sources. Model/DOM tests cover completeness, source digests, search, exports and cleanup. The Chromium acceptance script tests actual route loading, source links, selection persistence, export downloads, quota recovery and narrow layout. Browser execution is a separate gate from these unit tests.
 
+## Consumer dependency evidence
+
+The Athena-owned `guidance/tools/audit_consumers.py` audits explicitly named checkouts without changing their instructions, snapshots or locks. It checks the complete 16-file core, source pin identity, snapshot digests and tracked legacy references. Output excludes file contents and absolute target paths, but operators should still review repository filenames before sharing a report. Unsupported/binary paths are explicitly uninspected. Historical provenance references are not automatically treated as live dependencies or rewritten.
+
+A real read-only pass on public Noxviola main `424f49946956de6ce36b6212c7682d46e179f228` found its unchanged Agent-Foundry 1.1.2 pin at `87166b5f6a621c61b90bbbfe90835a3752c1c51b`, all 16 snapshots matching, three legacy-reference files, 26 tracked text files inspected and two images uninspected. No consumer migration was performed. The [sanitized receipt](../../guidance/evidence/noxviola-consumer-audit-2026-11-15.json) retains hashes/statuses, not private instruction text. Fleet coverage and source retirement remain incomplete.
+
 ## Retirement gates
 
 1. Reconcile every source capability against an implemented Athena capability, an explicitly accepted replacement, or a retained archive dependency. A filename inventory is not parity.
