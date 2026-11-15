@@ -35,3 +35,14 @@ The command reuses the converter, captures bounded snapshot bytes with the exist
 Inputs are checked again after reading; changed inputs refuse a result. Database size is bounded by the shared64MiB capture limit, source/mapping by1MiB each, and SQLite execution by a five-second progress deadline. Checksums and quiescence assertions do not defeat malicious concurrent replacement or establish provenance/authenticity. Requires Python SQLite `deserialize` support. The report never certifies playback, credentials, original hub routing, unrelated application data or source-repository retirement.
 
 Six synthetic CLI/unit regressions cover exact, missing/different, sidecars, quiescence, schema/corruption, changed capture and malformed input with byte-preservation checks. The all-room acceptance also calls reconciliation on the real Rust-created schema15 store. Hosted Windows/Linux tests qualify the exact compiled source; local existing-binary results alone are not that qualification.
+
+## Use the preserved original-value capsule directly
+
+Both commands accept explicit `--capsule` input, so extracting a raw value by hand is unnecessary:
+
+```
+python3 tools/foundry-recovery/music/convert.py preserved-capsule.json reviewed-contexts.json new-native-music.json --capsule
+python3 tools/foundry-recovery/music/reconcile.py --source preserved-capsule.json --mapping reviewed-contexts.json --database standalone-native.sqlite3 --source-quiescent --capsule
+```
+
+The existing capsule validator checks every entry and its UTF-16 checksum before selecting only `ff.music-hub.v2`. The mapping's `sourceSha256` must describe the exact selected MusicHub string encoded as UTF-8, **not the surrounding capsule bytes**. Use the original reviewed mapping; do not silently rewrite its hash. Capsules are bounded at16MiB and the extracted music value retains its1MiB bound. An unpaired surrogate in the music value cannot become UTF-8 and is refused; unrelated original values, including surrogates, remain preserved in the capsule and are not exported to native music. Missing music, tampered entries, invalid mappings and existing outputs refuse without modifying source bytes. No browser reads or other capsule keys are imported. Raw-file mode remains the default.

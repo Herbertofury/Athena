@@ -1,5 +1,5 @@
 """Offline original MusicHub v2 conversion. Explicit context mapping; never guesses a room."""
-import argparse,datetime,hashlib,json,re,os
+import argparse,datetime,hashlib,json,re,os,importlib.util
 from pathlib import Path
 MAX_INPUT_BYTES=1_000_000
 PROVIDERS={'spotify','apple','deezer','soundcloud','tidal','youtube'}
@@ -14,6 +14,17 @@ def read_bounded(path):
  with path.open('rb') as stream:raw=stream.read(MAX_INPUT_BYTES+1)
  if len(raw)>MAX_INPUT_BYTES:raise ValueError('Input exceeds limit')
  return raw
+def read_music_source(path,capsule=False):
+ if not capsule:return read_bounded(path)
+ spec=importlib.util.spec_from_file_location('original_value_capsule',Path(__file__).resolve().parents[1]/'capsule/capsule.py')
+ module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module)
+ if path.is_symlink() or not path.is_file():raise ValueError('Regular capsule file required')
+ with path.open('rb') as stream:raw=stream.read(module.LIMIT+1)
+ values=module.unpack(module.parse(raw))
+ if 'ff.music-hub.v2' not in values:raise ValueError('Capsule has no MusicHub value')
+ music=values['ff.music-hub.v2'].encode('utf-8',errors='strict')
+ if len(music)>MAX_INPUT_BYTES:raise ValueError('MusicHub value exceeds limit')
+ return music
 def parse(raw):
  if len(raw)>MAX_INPUT_BYTES:raise ValueError('Input exceeds limit')
  return json.loads(raw.decode('utf-8'),object_pairs_hook=pairs,parse_constant=lambda _: (_ for _ in ()).throw(ValueError('Nonfinite JSON')))
@@ -46,8 +57,12 @@ def convert(raw,mapping,catalog):
   rows.append({'assignment':{'theme_id':pair[0],'room_id':pair[1],'provider':value['provider'],'url':value['url'],'label':value['label'],'status':value['status'],'source_id':value.get('sourceId')},'updated_at':timestamp,'updated_at_ms':millis})
  return {'version':2,'rows':rows}
 def main():
- p=argparse.ArgumentParser();p.add_argument('source',type=Path);p.add_argument('mapping',type=Path);p.add_argument('output',type=Path);a=p.parse_args()
+ p=argparse.ArgumentParser();p.add_argument('source',type=Path);p.add_argument('mapping',type=Path);p.add_argument('output',type=Path);p.add_argument('--capsule',action='store_true');a=p.parse_args()
  catalog=json.loads((Path(__file__).resolve().parents[3]/'dist/workspaces/foundry/catalog.json').read_text())
- result=convert(read_bounded(a.source),parse(read_bounded(a.mapping)),catalog)
+ result=convert(read_music_source(a.source,a.capsule),parse(read_bounded(a.mapping)),catalog)
  with os.fdopen(os.open(a.output,os.O_WRONLY|os.O_CREAT|os.O_EXCL,0o600),'w',encoding='utf-8')as f:json.dump(result,f,ensure_ascii=False,indent=2);f.write('\n')
-if __name__=='__main__':main()
+if __name__=='__main__':
+ try:main()
+ except (OSError,ValueError,TypeError,KeyError) as error:
+  reason='Input exceeds limit' if str(error)=='Input exceeds limit' else 'Music conversion refused; verify reviewed inputs and a new output path. No source writes attempted.'
+  raise SystemExit(reason) from None
