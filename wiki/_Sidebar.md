@@ -6,6 +6,9 @@
 - [The Packet Trail](Packet-Trail)
 - [Coverage and quality](Coverage-and-Quality)
 - [Engineering research](Engineering-Home)
+- [Developer and agent cleanup tools](Engineering-Developer-Cleanup-and-Agent-Hygiene)
+- [Windows tools catalog](Engineering-Windows-Utilities-and-Creation-Tools)
+- [Windows optimization guide](Engineering-Windows-PC-Optimization)
 
 ## Credentials
 
@@ -115,6 +118,14 @@
 - [Build a complete time series with an explicit window](shared-data-time-series)
 - [Use constraints and rollback to protect the dataset](shared-data-quality-transactions)
 - [Deliver a reproducible analysis with honest limits](shared-data-explain-deliver)
+- [Explain the three states before saving history](shared-delivery-snapshots)
+- [Review the staged change, not just the working file](shared-delivery-staging)
+- [Combine independent work with a visible merge](shared-delivery-branches)
+- [Resolve a disagreement and verify the result](shared-delivery-conflicts)
+- [Undo a mistake without erasing the record](shared-delivery-recovery)
+- [Attach a test receipt to the revision actually tested](shared-delivery-revision-tests)
+- [Identify an artifact without overstating its trust](shared-delivery-provenance)
+- [Hand off a local candidate with defensible evidence](shared-delivery-capstone)
 
 
 ## Applied workshops
@@ -124,5 +135,6 @@
 - [Programming Workshop: Small Programs, Clear Contracts](Workshop-programming-workshop)
 - [Cloud Workshop: Reason Locally, Verify Honestly](Workshop-cloud-workshop)
 - [Data & SQL Workshop: From Rows to Reliable Answers](Workshop-data-workshop)
+- [Version Control & Reproducible Delivery Workshop](Workshop-delivery-workshop)
 
 - [Keyboard access and verification limits](Accessibility)

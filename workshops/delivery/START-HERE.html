@@ -1,0 +1,468 @@
+<!doctype html><html lang="en"><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Version Control &amp; Reproducible Delivery Workshop</title>
+<style>body{font:18px/1.6 system-ui,sans-serif;max-width:78ch;margin:2rem auto;padding:0 1rem;color:#17212b;background:#fff}a{color:#174a8b}h1,h2,h3{line-height:1.2}section{margin:3rem 0}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#edf2f6;padding:1rem}summary{cursor:pointer}li{margin:.5rem 0}:focus-visible{outline:3px solid #a44400;outline-offset:3px}</style>
+<main><h1>Version Control &amp; Reproducible Delivery Workshop</h1><p>Eight connected lessons use real Git in isolated temporary repositories to make staging, merges, conflict resolution, additive recovery, exact-revision tests and local artifact provenance observable.</p>
+<p><strong>Local only.</strong> Every runnable exercise creates its own temporary repository. No user repository, remote, credentials, signatures, hosted CI or publication is used. The artifact demo remains in memory. This is an additive study reference. Registration in Athena’s main catalog and built-in exercise downloads remains pending.</p>
+<p>Verified here on Linux with Python 3.12.14 and Git 2.52.0. See the lab guide for the narrow tool lookup and platform contract. If unavailable, use paper predictions and label them unexecuted.</p>
+<p><a href="labs/delivery-workshop/README.md">Lab guide</a> · <a href="labs/delivery-workshop/WORKSHEET.md">Worksheet</a> · <a href="labs/delivery-workshop/ANSWER-KEY.md">Answer key</a> · <a href="docs/DELIVERY-COVERAGE.md">Coverage and limits</a></p>
+<nav aria-label="Workshop lessons"><ol>
+<li><a href="#delivery-snapshots">Explain the three states before saving history</a></li>
+<li><a href="#delivery-staging">Review the staged change, not just the working file</a></li>
+<li><a href="#delivery-branches">Combine independent work with a visible merge</a></li>
+<li><a href="#delivery-conflicts">Resolve a disagreement and verify the result</a></li>
+<li><a href="#delivery-recovery">Undo a mistake without erasing the record</a></li>
+<li><a href="#delivery-revision-tests">Attach a test receipt to the revision actually tested</a></li>
+<li><a href="#delivery-provenance">Identify an artifact without overstating its trust</a></li>
+<li><a href="#delivery-capstone">Hand off a local candidate with defensible evidence</a></li>
+</ol></nav>
+<section id="delivery-snapshots"><h2>Explain the three states before saving history</h2>
+<p>Observe working files, staged content and committed snapshots as different evidence.</p><h3>Learning goals</h3><ul>
+<li>Distinguish the working tree, index and HEAD without treating them as three folders.</li>
+<li>Predict what a plain commit records after a file changes twice.</li>
+<li>Describe author identity, authentication and publication as separate claims.</li>
+</ul>
+<p>Suppose you are preparing a small fictional project for a teammate. You edit a file, select the version worth saving, then make another edit before committing. Which version becomes history? A useful mental model names three states: the working tree is the files you can edit, the index holds the proposed next snapshot, and HEAD normally identifies the current branch and its current commit. These are related states, not three independent project copies.</p>
+<p>A commit records a snapshot together with information such as its parent and message. The first commit has no parent; later history links changes to earlier states. A difference view helps a human understand what changed, but it is not the same thing as saying Git stores only the visible patch. In this workshop, read committed file content directly and compare it with the working file instead of inferring both from a success message.</p>
+<p>Staging is a selection made at a particular time. When you add a file and then edit it again, the earlier staged contents remain selected until you add the new contents. A plain commit in our lab records the staged selection, not whichever version happens to be open in an editor. First run snapshots to compare two committed versions. In the next lesson, staging exposes the three-state distinction directly; use its two diffs and final working content to check your prediction.</p>
+<p>A commit name identifies an object in the repository. A branch name can move as new commits are created, so “main” is not a permanent test receipt. Keep the full commit identifier when you need to identify exactly what was inspected. Different metadata or parents can change a commit identifier even if a particular file is identical; compare the relevant bytes as well as the history.</p>
+<p>The author and committer fields are metadata, not proof of a signed-in account. The lab deliberately uses a fictional teaching identity, never your name or email. It does not authenticate to a host, create a signature or publish anything. Seeing a name in a log supports the narrow statement that the commit contains that field, not that the named human approved the work.</p>
+<p>Every exercise creates and owns a new temporary repository. It excludes inherited Git configuration and environment settings, uses empty hooks and templates, and removes only its owned temporary work afterward. Run the supplied wrapper, not the illustrative internal Git commands in a personal project. A paper prediction remains useful if the required tools are unavailable; label it unexecuted rather than presenting expected output as an observation.</p>
+<h3>Worked example</h3><p>The snapshots command records “Decision: baseline” at one revision and “Decision: reviewed” at a later revision. Reading the earlier revision still returns baseline after the second commit; the current state is clean. This establishes retained snapshots. The following staging exercise separately demonstrates that staged and unstaged versions can differ. Both histories are temporary and local, not published releases.</p>
+<pre><code># Run from this workshop folder. The wrapper creates its own disposable repo.
+python3 labs/delivery-workshop/run_lab.py snapshots
+# Internal inspection concepts, not commands to run in your own repository:
+# git status --porcelain=v1
+# git diff
+# git diff --cached
+# git show HEAD:&lt;fixed-teaching-file&gt;
+# git rev-parse HEAD</code></pre>
+<h3>Practice safely</h3><ol>
+<li>Draw the working-tree, index and HEAD states, then predict the two committed versions in snapshots.</li>
+<li>Run the supplied snapshots command and inspect its structured evidence.</li>
+<li>Compare old_content and new_content at before and after; verify the final clean flag. Use staging in the next lesson for different working bytes.</li>
+<li>Find the synthetic author fields and explain why they do not authenticate a person.</li>
+<li>Record the actual Git/Python versions and the full observed commit identifiers.</li>
+<li>State whether any remote was contacted or any persistent learner repository was created.</li>
+</ol><h3>Evidence to keep</h3><ul>
+<li>Two committed versions and their actual revision identifiers; a separate three-state prediction for staging.</li>
+<li>Full commit identifiers and the synthetic identity from an actual run.</li>
+<li>An explicit local-only, disposable-repository statement.</li>
+</ul><h3>Three original checks</h3>
+<p><strong>You stage version A, edit the working file to version B, then make a plain commit. What is recorded?</strong></p><ol type="A">
+<li>Version A from the index</li>
+<li>Version B because it is newest</li>
+<li>Both as separate commits automatically</li>
+<li>Neither until you sign in</li>
+</ol><details><summary>Answer and reasoning</summary><p>A. Version A from the index The lab uses a plain commit of the staged selection. Later unstaged edits remain outside that snapshot.</p></details>
+<p><strong>What does the synthetic author name in a commit prove?</strong></p><ol type="A">
+<li>That a hosting account authenticated</li>
+<li>That the commit records that metadata</li>
+<li>That a teammate approved it</li>
+<li>That the release was uploaded</li>
+</ol><details><summary>Answer and reasoning</summary><p>B. That the commit records that metadata Author metadata is distinct from account authentication, signatures, approval and publication.</p></details>
+<p><strong>Why record a full commit identifier instead of only the branch name?</strong></p><ol type="A">
+<li>Branches encrypt files</li>
+<li>Commit names are release approvals</li>
+<li>A branch can move to another commit</li>
+<li>A branch never changes</li>
+</ol><details><summary>Answer and reasoning</summary><p>C. A branch can move to another commit The branch identifies a moving line of work. An exact revision makes the recorded observation specific.</p></details>
+<h3>Limits</h3><p>Only fixed synthetic files in owned temporary repositories are used. No user Git identity is changed; no authentication, signing, remote backup or publication is performed.</p><h3>Official references</h3><ul>
+<li><a href="https://git-scm.com/docs/gitglossary">https://git-scm.com/docs/gitglossary</a></li>
+<li><a href="https://git-scm.com/docs/git-add">https://git-scm.com/docs/git-add</a></li>
+<li><a href="https://git-scm.com/docs/git-commit">https://git-scm.com/docs/git-commit</a></li>
+<li><a href="https://git-scm.com/docs/git">https://git-scm.com/docs/git</a></li>
+<li><a href="https://git-scm.com/docs/git-init">https://git-scm.com/docs/git-init</a></li>
+<li><a href="https://docs.python.org/3.12/library/tempfile.html">https://docs.python.org/3.12/library/tempfile.html</a></li>
+</ul></section>
+<section id="delivery-staging"><h2>Review the staged change, not just the working file</h2>
+<p>Use two distinct diffs and a clear commit reason to avoid saving the wrong revision.</p><h3>Learning goals</h3><ul>
+<li>Explain which endpoints plain diff and cached diff compare.</li>
+<li>Detect a file that has both staged and unstaged changes.</li>
+<li>Evaluate a commit message against the actual selected change.</li>
+</ul>
+<p>A reviewable change has a purpose, a bounded set of selected contents and evidence that those contents match the purpose. “Save everything” is not a reliable review strategy. Our fictional teammate needs the intended correction without a later draft accidentally joining it. The staging exercise makes that difference visible in one small file so the selection is easy to inspect.</p>
+<p>With the ordinary forms used here, git diff compares working content with the index, while git diff --cached compares the index with HEAD. One answers what is still unstaged; the other answers what the next plain commit proposes. An empty working diff does not establish that there is nothing staged. An empty cached diff does not establish that the working tree is unchanged.</p>
+<p>A short status has two columns for a tracked path: the index change relative to HEAD and the working-tree change relative to the index. A file marked MM can therefore contain both a staged change and a later unstaged change. Read each column as a relationship, not as a vague urgency level. Untracked files need separate attention because an ordinary diff does not list their full contents.</p>
+<p>Review the complete staged patch before deciding that the commit is coherent. Check names, values, removed lines and any unrelated material, not only the number of files changed. In a real review, a plausible message does not make a wrong patch correct. Here the fixture is synthetic and fixed; do not introduce passwords, personal data or user files to make the demonstration feel realistic.</p>
+<p>A useful message explains why the selected change exists in language another maintainer can understand. It cannot substitute for the diff or for a behavioral test. Write one candidate message after examining the evidence, then point to the exact staged lines that justify it. If the evidence and the message disagree, revise your explanation rather than quietly claiming that the latest working draft was saved.</p>
+<p>The supplied command performs inspection and a temporary local commit under the lab safety contract. It does not offer a repository-path option or a free-form Git shell. That narrow interface is intentional: the learning task is to reason about selected contents, not to try broad commands in whatever directory your terminal happens to occupy. Keep both diffs in your worksheet so someone can audit your prediction.</p>
+<h3>Worked example</h3><p>Imagine HEAD contains “draft”, the index contains “reviewed”, and the working file contains “reviewed plus unapproved experiment”. The staged diff should describe draft to reviewed, while the unstaged diff should describe the extra experiment. A message claiming that the experiment was committed would contradict the selected snapshot even if the commit command returned success.</p>
+<pre><code># Safe runnable entry point; it never accepts a repository path.
+python3 labs/delivery-workshop/run_lab.py staging
+# The wrapper inspects these relationships in its own temporary repository:
+# git status --porcelain=v1
+# git diff --cached
+# git diff
+# Compare selected content with the resulting committed content.</code></pre>
+<h3>Practice safely</h3><ol>
+<li>Predict which text belongs in each diff before reading the output.</li>
+<li>Run staging and identify staged and unstaged evidence separately.</li>
+<li>Explain each column of a tracked-file status entry such as MM.</li>
+<li>Write a commit message justified by the selected patch, not by the latest working draft.</li>
+<li>Explain why an untracked file requires status inspection even when diff is empty.</li>
+<li>Keep the final selected-content comparison and any remaining-change status.</li>
+</ol><h3>Evidence to keep</h3><ul>
+<li>Two labelled diffs and a correct status-column explanation.</li>
+<li>A proposed commit message tied to specific selected lines.</li>
+<li>The observed distinction between committed and remaining working content.</li>
+</ul><h3>Three original checks</h3>
+<p><strong>Which ordinary command reviews the proposed next plain commit relative to HEAD?</strong></p><ol type="A">
+<li>git diff alone</li>
+<li>A branch name without a command</li>
+<li>Reading only the commit message</li>
+<li>git diff --cached</li>
+</ol><details><summary>Answer and reasoning</summary><p>D. git diff --cached The cached or staged diff compares the index with the current commit by default.</p></details>
+<p><strong>What can MM mean for a tracked path in short status?</strong></p><ol type="A">
+<li>The index and working tree both differ from their comparison states</li>
+<li>The file is encrypted twice</li>
+<li>Two remote servers approved it</li>
+<li>No change can be committed</li>
+</ol><details><summary>Answer and reasoning</summary><p>A. The index and working tree both differ from their comparison states The first column describes the index relative to HEAD, and the second the working tree relative to the index.</p></details>
+<p><strong>The plain working diff is empty. What conclusion is still unsafe?</strong></p><ol type="A">
+<li>There are no differences in that comparison</li>
+<li>There cannot be staged or untracked changes</li>
+<li>The compared working contents match the index</li>
+<li>Another status check may be useful</li>
+</ol><details><summary>Answer and reasoning</summary><p>B. There cannot be staged or untracked changes A single diff view is not a complete inventory of staged and untracked state.</p></details>
+<h3>Limits</h3><p>This is full-file staging of fixed text, not an interactive patch editor, secret scanner, code-review approval or proof of business correctness. No real repository is inspected or modified.</p><h3>Official references</h3><ul>
+<li><a href="https://git-scm.com/docs/git-diff">https://git-scm.com/docs/git-diff</a></li>
+<li><a href="https://git-scm.com/docs/git-status">https://git-scm.com/docs/git-status</a></li>
+<li><a href="https://git-scm.com/docs/git-add">https://git-scm.com/docs/git-add</a></li>
+<li><a href="https://git-scm.com/docs/git-commit">https://git-scm.com/docs/git-commit</a></li>
+</ul></section>
+<section id="delivery-branches"><h2>Combine independent work with a visible merge</h2>
+<p>Trace two diverging branches and verify that their changes survive integration.</p><h3>Learning goals</h3><ul>
+<li>Draw branch pointers and parent relationships before and after a merge.</li>
+<li>Distinguish a fast-forward from a two-parent merge commit.</li>
+<li>Check integrated content instead of equating a clean merge with correct behavior.</li>
+</ul>
+<p>A branch names a line of work by pointing to a commit. Creating another branch does not copy an entire project into a second folder. In our exercise, two branches start from the same baseline, then each gains its own commit. Drawing the shared ancestor before looking at output makes it easier to predict why neither tip alone contains both changes.</p>
+<p>The branches exercise assigns independent files to the two lines of work. One records a change on the main line, the other a change on a feature line. The changes are deliberately nonconflicting so you can learn the shape of integration without also solving a disputed requirement. The teaching scenario is small enough to verify every final file rather than relying on an impressive-looking graph.</p>
+<p>When one tip already contains the other as an ancestor, a fast-forward can move the branch pointer without adding a merge commit. In the divergent example, both sides have new work, so the lab creates a merge commit with two parents. Those parents record the two histories being combined. Count and identify them in the evidence instead of assuming that every merge command must produce the same history shape.</p>
+<p>A nonconflicting textual merge is a mechanical outcome. Two changes can touch different files and still disagree about an interface, unit or behavior. For example, a caller could begin sending cents while a separately edited callee still treats the number as dollars. No overlapping line is required for that defect. After combining work, test the integrated behavior that matters, not merely each branch in isolation.</p>
+<p>The current branch matters when integrating. A merge updates the branch you have selected, incorporating the other history into that branch. In the fixed lab this target is explicit. Your worksheet should name the target branch, both input commits and the resulting commit so a reader can tell what was combined and where the result lives.</p>
+<p>The exercise keeps both histories in a temporary local repository and verifies final file content and clean state. It does not delete branches, contact a host or decide that a pull request is ready to merge. Branch protection, collaboration permissions and required checks belong to a separate real-project workflow with its own authorization and evidence.</p>
+<h3>Worked example</h3><p>Draw baseline A splitting into main commit B and feature commit C. The integration commit M has parents B and C, and its contents include both independent edits. The two-parent shape records ancestry; the separate content assertions establish that the intended bytes survived. Neither alone proves that a real application works.</p>
+<pre><code># Runs only a fixed divergent-branch scenario in an owned disposable repo.
+python3 labs/delivery-workshop/run_lab.py branches
+# Internal observations include the selected branch and parent identities:
+# git rev-parse HEAD
+# git show -s --format=%P HEAD
+# git log --oneline --all
+# Final fixed-file content is also verified.</code></pre>
+<h3>Practice safely</h3><ol>
+<li>Draw A, B, C and M, labelling the two branch pointers and parent arrows.</li>
+<li>Run branches and map the observed identifiers to your drawing.</li>
+<li>Verify that the merge result has two parents and retains both independent changes.</li>
+<li>Name the target branch rather than saying only that two branches were merged.</li>
+<li>Invent a semantic incompatibility that would not require a textual conflict.</li>
+<li>Separate the successful local merge from unperformed remote review and publication.</li>
+</ol><h3>Evidence to keep</h3><ul>
+<li>A parent graph labelled with actual full revisions.</li>
+<li>Both independent changes visible in the merged contents.</li>
+<li>A semantic-risk example and an explicit local-only statement.</li>
+</ul><h3>Three original checks</h3>
+<p><strong>What is the strongest reason this divergent merge has two parents?</strong></p><ol type="A">
+<li>Every commit has two parents</li>
+<li>Two files force two parents</li>
+<li>Each branch contains work after their shared ancestor</li>
+<li>A remote server was contacted</li>
+</ol><details><summary>Answer and reasoning</summary><p>C. Each branch contains work after their shared ancestor The merge joins two distinct histories; the file count and network activity do not determine that relationship.</p></details>
+<p><strong>A merge completes without a textual conflict. What still needs checking?</strong></p><ol type="A">
+<li>Nothing, correctness is guaranteed</li>
+<li>Only the color of the branch label</li>
+<li>Whether Git created a hosting account</li>
+<li>The integrated behavior and intended final contents</li>
+</ol><details><summary>Answer and reasoning</summary><p>D. The integrated behavior and intended final contents Mechanically compatible edits can still be semantically incompatible.</p></details>
+<p><strong>What happens in a fast-forward integration?</strong></p><ol type="A">
+<li>The branch can advance to an existing descendant without a new merge commit</li>
+<li>All commits are erased</li>
+<li>Every file gets copied into a second project</li>
+<li>Authentication becomes unnecessary for future pushes</li>
+</ol><details><summary>Answer and reasoning</summary><p>A. The branch can advance to an existing descendant without a new merge commit A fast-forward changes the reference because the desired history already contains the earlier tip.</p></details>
+<h3>Limits</h3><p>Only a small two-branch, nonconflicting merge is executed. No remote branches, pull requests, protection rules, distributed collaboration or production integration checks are exercised.</p><h3>Official references</h3><ul>
+<li><a href="https://git-scm.com/docs/git-branch">https://git-scm.com/docs/git-branch</a></li>
+<li><a href="https://git-scm.com/docs/git-merge">https://git-scm.com/docs/git-merge</a></li>
+<li><a href="https://git-scm.com/docs/gitglossary">https://git-scm.com/docs/gitglossary</a></li>
+<li><a href="https://git-scm.com/docs/git-show">https://git-scm.com/docs/git-show</a></li>
+</ul></section>
+<section id="delivery-conflicts"><h2>Resolve a disagreement and verify the result</h2>
+<p>Treat conflict markers as a prompt to decide meaning, then complete the merge explicitly.</p><h3>Learning goals</h3><ul>
+<li>Identify the unresolved state instead of treating a conflict as a completed merge.</li>
+<li>Explain a deliberate same-line resolution using an agreed teaching requirement.</li>
+<li>Verify resolved content, staging state and final merge parents.</li>
+</ul>
+<p>A conflict is a pause in integration, not proof that either contributor is careless. The conflict exercise changes the same baseline line differently on two branches. Git cannot select the intended final meaning from those competing edits, so the merge stops. A nonzero result at this planned point is expected evidence, while an unrelated command failure would be a lab error.</p>
+<p>Conflict markers display alternative contents around an unresolved region. They are not useful final program or document text. In a simple two-branch merge, the current side and incoming side correspond to the histories being combined, but labels alone do not decide which requirement wins. Read the original intent and both changes before choosing the final content.</p>
+<p>The supplied scenario defines its final resolved text explicitly. The wrapper writes that resolution in the temporary repository, stages it and completes the merge. This is an actual conflict and actual resolution, not a string pretending to be terminal output. Predict the unresolved and resolved states before running so you can explain why each transition is necessary.</p>
+<p>Removing marker lines is insufficient when the retained content is wrong. A useful resolution must satisfy the teaching requirement and preserve the changes that should survive. The output therefore includes the conflict state, the final text and the completed merge relationship. If a real disagreement has no clear intended behavior, the responsible step is to clarify the requirement rather than picking a side to make status look clean.</p>
+<p>Staging a resolution tells Git that the selected content resolves the unmerged path. Completing the merge records that result in history. These are separate actions. Inspect the final status and parent count, then inspect the bytes or test the behavior. A clean state says there is no pending difference under the checked conditions; it does not establish that your resolution was a good product decision.</p>
+<p>The conflict is restricted to a fresh synthetic repository with no preexisting work to preserve. The exercise does not teach forceful cleanup commands as a universal recovery method. Record the expected failed merge alongside the successful resolution; hiding the negative step removes the most important evidence that the conflict-handling path really ran.</p>
+<h3>Worked example</h3><p>The intended trace is: create a shared baseline; commit two incompatible edits; observe a stopped merge with an unmerged path; write the specified resolved content; stage it; complete a two-parent commit; verify no unresolved entries remain. The intermediate failure is successful exercise coverage, not a failed final outcome.</p>
+<pre><code># Runs the deliberate conflict and its explicit fixed resolution locally.
+python3 labs/delivery-workshop/run_lab.py conflict
+# Internal inspection concepts only:
+# git status --porcelain=v1
+# git ls-files --unmerged
+# After selecting the documented resolved text: stage, commit, inspect.
+# No arbitrary repository path, merge tool or external editor is launched.</code></pre>
+<h3>Practice safely</h3><ol>
+<li>Predict the merge return status and explain why failure is expected at that point.</li>
+<li>Run conflict and distinguish unresolved evidence from final resolved evidence.</li>
+<li>Write a one-sentence rationale for the chosen final text.</li>
+<li>Verify that markers and unmerged entries are absent after resolution.</li>
+<li>Check the final contents and both merge parents, not only clean status.</li>
+<li>Describe what you would ask a teammate if the intended resolution were ambiguous.</li>
+</ol><h3>Evidence to keep</h3><ul>
+<li>Observed expected conflict status and unresolved-path evidence.</li>
+<li>A reasoned resolution, final contents and two-parent commit.</li>
+<li>An explanation separating mechanical resolution from semantic correctness.</li>
+</ul><h3>Three original checks</h3>
+<p><strong>What does the expected conflict return code mean in this lab?</strong></p><ol type="A">
+<li>All history was lost</li>
+<li>The merge paused for a required resolution</li>
+<li>The merge is already fully committed</li>
+<li>A remote rejected your password</li>
+</ol><details><summary>Answer and reasoning</summary><p>B. The merge paused for a required resolution The scenario deliberately creates an incompatible edit so the unresolved path can be inspected.</p></details>
+<p><strong>Which sequence properly completes the fixed conflict scenario?</strong></p><ol type="A">
+<li>Delete only the marker symbols and assume success</li>
+<li>Publish before inspecting the result</li>
+<li>Choose correct final content, stage it, complete the merge and verify</li>
+<li>Rename the branch without resolving the path</li>
+</ol><details><summary>Answer and reasoning</summary><p>C. Choose correct final content, stage it, complete the merge and verify Content selection, staging, history recording and verification each answer a different part of the task.</p></details>
+<p><strong>Why is a clean final status insufficient evidence that a resolution is correct?</strong></p><ol type="A">
+<li>Clean status means there is no history</li>
+<li>Git refuses every valid resolution</li>
+<li>All tests run automatically on every commit</li>
+<li>Incorrect content can also be fully committed</li>
+</ol><details><summary>Answer and reasoning</summary><p>D. Incorrect content can also be fully committed Git records the chosen contents; the requirement and behavioral checks determine whether those contents are appropriate.</p></details>
+<h3>Limits</h3><p>One deliberate text conflict is executed. Rename/delete conflicts, binary files, multiple merge bases, interactive tools and recovery of existing user work are outside this exercise.</p><h3>Official references</h3><ul>
+<li><a href="https://git-scm.com/docs/git-merge">https://git-scm.com/docs/git-merge</a></li>
+<li><a href="https://git-scm.com/docs/git-status">https://git-scm.com/docs/git-status</a></li>
+<li><a href="https://git-scm.com/docs/git-add">https://git-scm.com/docs/git-add</a></li>
+<li><a href="https://docs.python.org/3.12/library/unittest.html">https://docs.python.org/3.12/library/unittest.html</a></li>
+</ul></section>
+<section id="delivery-recovery"><h2>Undo a mistake without erasing the record</h2>
+<p>Use an additive revert and verify restored behavior alongside preserved history.</p><h3>Learning goals</h3><ul>
+<li>Distinguish reverting a change from deleting a commit.</li>
+<li>Identify the exact mistaken revision before choosing a recovery.</li>
+<li>Explain why restored file bytes and restored external state are different claims.</li>
+</ul>
+<p>A recoverable workflow makes it possible to explain what happened, not merely to hide a bad result. In the recovery exercise a baseline is committed, a deliberately wrong change is committed, and a new revert commit reverses that change. The bad commit remains in history. This lets a reviewer see both the mistake and the corrective action.</p>
+<p>Before undoing anything, identify the revision and inspect the change you intend to reverse. Reverting an unrelated commit because its message sounds similar would be a new mistake. The fixed lab records the baseline, mistaken revision and final revision separately, then compares contents and parent relationships. Your explanation should name the target, not say “undo the last thing” without evidence.</p>
+<p>Git revert records a new change that reverses an earlier change. It is not the same operation as moving a branch pointer backward or discarding working files. This workshop chooses the additive approach because it exposes the correction in inspectable history. It does not demonstrate destructive commands, rewrite shared history or encourage broad cleanup in personal repositories.</p>
+<p>The important checks are independent: the corrected contents match the intended baseline, the mistaken commit remains an ancestor, and the new correction is a distinct commit. Merely comparing the first and last file is not enough to prove that history was preserved. Merely counting commits is not enough to prove that the right content returned.</p>
+<p>A revert is not always conflict-free and does not erase consequences outside Git. Later edits may depend on the reverted change. A database migration, an email already sent or a deployed side effect needs its own recovery plan. Even when a source file returns to its old bytes, you have not thereby restored a database or proven that a live service is healthy.</p>
+<p>Our exercise uses a simple linear history with no external effects, so the result is intentionally bounded. A real recovery decision needs ownership, impact and validation appropriate to that system. Here your deliverable is the observed additive history plus a short explanation of what was restored and what was never present. Do not turn a passing local revert into a claim of incident-response readiness.</p>
+<h3>Worked example</h3><p>For baseline A, mistaken change B and corrective commit C, the final file can match A while HEAD identifies C, not A. B remains in C’s ancestry. That is the central observation: the content was corrected by adding history rather than pretending the mistake never existed.</p>
+<pre><code># Safe, fixed linear-history recovery in a disposable repository.
+python3 labs/delivery-workshop/run_lab.py recovery
+# The wrapper targets its own recorded mistaken commit with git revert.
+# It compares initial and final bytes, then inspects the history.
+# No reset --hard, clean, force push or deletion of user history is used.</code></pre>
+<h3>Practice safely</h3><ol>
+<li>Predict the final contents and final number of commits in the simple scenario.</li>
+<li>Run recovery and identify the baseline, mistaken and corrective revisions.</li>
+<li>Verify both content restoration and continued presence of the mistaken commit.</li>
+<li>Explain why the final commit identifier should differ from the baseline.</li>
+<li>Give an external side effect that a source revert would not undo.</li>
+<li>State which more complicated recovery cases were not executed.</li>
+</ol><h3>Evidence to keep</h3><ul>
+<li>Three actual revisions and an additive parent chain.</li>
+<li>A baseline/final content comparison and preserved mistaken commit.</li>
+<li>A bounded recovery statement that excludes external side effects.</li>
+</ul><h3>Three original checks</h3>
+<p><strong>After an additive revert, where is the mistaken commit?</strong></p><ol type="A">
+<li>Still present in the recorded history</li>
+<li>Necessarily erased from every repository</li>
+<li>Converted into a password</li>
+<li>Automatically published as a release</li>
+</ol><details><summary>Answer and reasoning</summary><p>A. Still present in the recorded history The correction is a new commit; it does not remove the original commit from the ancestry.</p></details>
+<p><strong>The final file matches the baseline. Must the final commit identifier also match?</strong></p><ol type="A">
+<li>Yes, equal files force equal commits</li>
+<li>No; the corrective commit has its own parent and metadata</li>
+<li>Only if a remote is configured</li>
+<li>Only when the branch name is short</li>
+</ol><details><summary>Answer and reasoning</summary><p>B. No; the corrective commit has its own parent and metadata Commit identity depends on more than one file’s contents, including the history relationship.</p></details>
+<p><strong>What cannot be concluded from this successful local revert?</strong></p><ol type="A">
+<li>The fixed file was restored</li>
+<li>A corrective commit was created</li>
+<li>A production database and all external side effects were rolled back</li>
+<li>The earlier mistake remains visible</li>
+</ol><details><summary>Answer and reasoning</summary><p>C. A production database and all external side effects were rolled back This repository has no production system or external effects. Source recovery does not perform those separate operations.</p></details>
+<h3>Limits</h3><p>The lab reverts one simple non-merge commit. It does not rewrite history, perform disaster recovery, reverse deployment effects or test complicated revert conflicts.</p><h3>Official references</h3><ul>
+<li><a href="https://git-scm.com/docs/git-revert">https://git-scm.com/docs/git-revert</a></li>
+<li><a href="https://git-scm.com/docs/git-show">https://git-scm.com/docs/git-show</a></li>
+<li><a href="https://git-scm.com/docs/gitglossary">https://git-scm.com/docs/gitglossary</a></li>
+</ul></section>
+<section id="delivery-revision-tests"><h2>Attach a test receipt to the revision actually tested</h2>
+<p>Reject stale and dirty evidence before treating a local result as a delivery gate.</p><h3>Learning goals</h3><ul>
+<li>Record source revision, cleanliness, command, environment and outcome together.</li>
+<li>Explain why an old passing result cannot approve a newer revision.</li>
+<li>Separate local executed tests from unexecuted CI and broader quality claims.</li>
+</ul>
+<p>“Tests passed” omits the most important question: which contents did they test? A branch may have moved, a working file may differ from its commit, or a receipt may refer to yesterday’s code. The revision-tests exercise ties a small fixed test run to an exact clean source revision and deliberately challenges that relationship with stale or dirty state.</p>
+<p>A useful local receipt includes the full revision, the check command, actual tool versions, the outcome and whether the inspected state remained unchanged. Cleanliness is part of this workshop’s contract, not a universal proof of hermeticity. Untracked or ignored generated files, external dependencies and environment differences can matter in larger projects. The fixed assertions read release.json from the named commit, not from working-tree files. The clean-checkout gate is a separate local handoff policy, not a claim that those assertions consume modified working bytes.</p>
+<p>Record the expected source identity before testing and check the repository state again afterward. If the source is dirty or the identity differs, refuse to relabel an older result as evidence for the new contents. This protects the meaning of the receipt even if the code change looks harmless. It does not establish that every possible concurrent filesystem change is impossible.</p>
+<p>A test must be able to disagree with the implementation. The supplied fixed checks exercise documented behavior and relevant boundaries rather than merely checking that a process printed something. A failing assertion is a result to explain, not a reason to remove the assertion until everything turns green. Keep the result tied to the exact scenario that produced it.</p>
+<p>CI systems also expose revision information, but its meaning depends on the event. GitHub’s documentation notes that github.sha depends on what triggered the workflow; a pull-request workflow can concern a merge result rather than simply the contributor’s branch tip. In a real CI review, inspect the checked-out revision and event semantics. This workshop reads that documentation but never creates or runs a hosted workflow.</p>
+<p>Our local test gate is evidence for the fixed teaching behavior under the recorded environment. It is not a coverage percentage, security assessment or promise that the program has no defects. In your handoff, write the narrow supported claim and list the unexecuted checks. A refusal to accept dirty or stale evidence is an intended successful guardrail, not an excuse to manufacture a passing receipt.</p>
+<h3>Worked example</h3><p>Receipt R reports a pass for clean revision A. The branch then advances to B, or a file is edited without committing. R remains evidence about A; it does not become evidence about B or the edited working tree. The lab demonstrates the accepted clean run and rejected mismatches so the rule is observable rather than only advisory.</p>
+<pre><code># Executes fixed local checks and tests the receipt guards.
+python3 labs/delivery-workshop/run_lab.py revision-tests
+# Receipt reasoning:
+# expected revision == observed clean revision
+# run fixed checks; retain exit/result evidence and tool versions
+# verify the tested source identity again before accepting the receipt
+# No GitHub Actions workflow is submitted or executed.</code></pre>
+<h3>Practice safely</h3><ol>
+<li>Run revision-tests and locate the exact revision attached to the accepted result.</li>
+<li>Identify which outputs demonstrate dirty-state and stale-revision rejection.</li>
+<li>List command, environment, outcome and source-state fields needed by a reviewer.</li>
+<li>Explain why a moving branch name cannot replace the recorded full revision.</li>
+<li>Write a two-sentence local-test claim and one important limitation.</li>
+<li>Describe the CI event question you would verify before trusting a future hosted result.</li>
+</ol><h3>Evidence to keep</h3><ul>
+<li>An executed local receipt with full revision and environment.</li>
+<li>Observed rejection of dirty or stale evidence.</li>
+<li>A statement separating local tests, hosted CI and untested behavior.</li>
+</ul><h3>Three original checks</h3>
+<p><strong>A receipt passed for revision A, but the branch now points to B. What is supported?</strong></p><ol type="A">
+<li>B is automatically approved</li>
+<li>All future commits passed too</li>
+<li>The branch name invalidates all historical evidence</li>
+<li>The receipt is still evidence for A only</li>
+</ol><details><summary>Answer and reasoning</summary><p>D. The receipt is still evidence for A only Evidence stays attached to the tested source. A new revision needs its own relevant checks.</p></details>
+<p><strong>Why reject a dirty working tree under this lab’s test-receipt contract?</strong></p><ol type="A">
+<li>It violates this local handoff’s clean-checkout requirement, even though the assertions read committed data</li>
+<li>Dirty means the computer has malware</li>
+<li>Git cannot read any modified file</li>
+<li>The author identity is missing by definition</li>
+</ol><details><summary>Answer and reasoning</summary><p>A. It violates this local handoff’s clean-checkout requirement, even though the assertions read committed data Dirty state fails a separate checkout-state gate before assertions. The fixed data checks read release.json from the recorded commit; they do not test modified working-tree files.</p></details>
+<p><strong>What should you verify before treating github.sha as the contributor’s exact branch tip?</strong></p><ol type="A">
+<li>Only the job name</li>
+<li>The workflow event and actual checked-out revision</li>
+<li>Only that the badge is green</li>
+<li>Whether the commit message sounds confident</li>
+</ol><details><summary>Answer and reasoning</summary><p>B. The workflow event and actual checked-out revision CI revision semantics depend on the event. The documented context is not a substitute for inspecting the run.</p></details>
+<h3>Limits</h3><p>Only the supplied fixed local checks run. No hosted CI, credentials, network, arbitrary learner code, coverage measurement, concurrency proof or production assurance is included.</p><h3>Official references</h3><ul>
+<li><a href="https://git-scm.com/docs/git-rev-parse">https://git-scm.com/docs/git-rev-parse</a></li>
+<li><a href="https://git-scm.com/docs/git-status">https://git-scm.com/docs/git-status</a></li>
+<li><a href="https://docs.python.org/3.12/library/unittest.html">https://docs.python.org/3.12/library/unittest.html</a></li>
+<li><a href="https://docs.python.org/3.12/library/subprocess.html">https://docs.python.org/3.12/library/subprocess.html</a></li>
+<li><a href="https://docs.github.com/en/actions/reference/workflows-and-actions/contexts">https://docs.github.com/en/actions/reference/workflows-and-actions/contexts</a></li>
+<li><a href="https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows">https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows</a></li>
+</ul></section>
+<section id="delivery-provenance"><h2>Identify an artifact without overstating its trust</h2>
+<p>Compare deterministic bytes and explain what a SHA-256 digest does and does not establish.</p><h3>Learning goals</h3><ul>
+<li>Connect a local artifact to committed inputs and an explicit construction recipe.</li>
+<li>Distinguish source revision identity from an artifact-byte digest.</li>
+<li>Explain why a matching unauthenticated hash is not proof of publisher identity.</li>
+</ul>
+<p>A source revision and a delivered artifact answer different questions. The revision identifies source history; the artifact is the exact file someone would receive. Packaging choices can add timestamps, change file order or omit important inputs. The provenance exercise creates a small local artifact from fixed committed teaching files and records a manifest so that the relationship is inspectable.</p>
+<p>A deterministic recipe controls the inputs that affect its output. For this exercise, file names, file bytes, ordering and archive metadata are fixed rather than taken from the current clock or a random directory listing. Building the same recipe twice should produce equal bytes under the tested implementation. That is a specific repeatability observation, not proof that every operating system or independent toolchain will emit the same artifact.</p>
+<p>A SHA-256 digest is calculated from the artifact bytes. Compare it with the digest of a deliberately modified copy to detect that change. Keep the full digest in the receipt; a short prefix is useful for conversation but weaker as an exact record. A digest is not encryption, and knowing one does not provide the underlying source or a recovery copy.</p>
+<p>Integrity checks require a meaningful reference. If an attacker can replace both a file and its unauthenticated checksum, a matching pair can still describe the attacker’s file. A manifest written by the same local process helps explain the run, but does not independently authenticate its author. The synthetic commit name is likewise not a signature or a verified publisher identity.</p>
+<p>Signed provenance systems address a different trust question by connecting claims about a build with an identity and verification policy. GitHub documents artifact attestations as signed provenance claims. This workshop uses that distinction to explain what is missing; it does not generate attestations, use signing keys or assert compliance with a supply-chain assurance level. Even authenticated provenance would not prove that source code is free of defects.</p>
+<p>Review the manifest, the artifact membership, the repeated-build comparison and the tamper comparison together. Then state exactly what the exercise established: fixed local inputs produced an observed byte sequence, its digest was measured, and a changed sequence was detected. The artifact exists only in memory, while the owned temporary repository is cleaned up; the JSON evidence is the durable thing you can copy into your worksheet.</p>
+<h3>Worked example</h3><p>Two builds of the same fixed committed input set yield identical bytes and digest D. Flipping one payload byte in a copy yields a different digest. That demonstrates repeatability and change detection for this recipe. It does not demonstrate who published either file, whether the software is safe or whether an independent machine can reproduce it.</p>
+<pre><code># Produces and checks a temporary local source artifact, then cleans it up.
+python3 labs/delivery-workshop/run_lab.py provenance
+# Conceptual byte checks implemented with Python standard-library hashlib:
+# SHA256(first_build_bytes) == SHA256(second_build_bytes)
+# SHA256(first_build_bytes) != SHA256(tampered_copy_bytes)
+# A matching digest does not authenticate a publisher.</code></pre>
+<h3>Practice safely</h3><ol>
+<li>Run provenance and identify the source revision and artifact digest separately.</li>
+<li>Explain which construction choices make the local output deterministic.</li>
+<li>Verify the repeated-byte result and deliberately changed-copy result.</li>
+<li>List the archive members and check they are the intended committed files.</li>
+<li>Describe how replacing both an artifact and an unauthenticated hash defeats publisher attribution.</li>
+<li>State that signing, independent rebuilding and remote publication were not performed.</li>
+</ol><h3>Evidence to keep</h3><ul>
+<li>A source revision, artifact membership and full SHA-256 digest.</li>
+<li>Repeated-build equality and changed-copy inequality observations.</li>
+<li>A provenance statement that clearly excludes authentication and independent reproducibility.</li>
+</ul><h3>Three original checks</h3>
+<p><strong>What does comparing an artifact with a trusted expected SHA-256 digest primarily check?</strong></p><ol type="A">
+<li>Whether the author is morally trustworthy</li>
+<li>Whether every requirement is satisfied</li>
+<li>Whether the observed bytes match that reference</li>
+<li>Whether the file is encrypted</li>
+</ol><details><summary>Answer and reasoning</summary><p>C. Whether the observed bytes match that reference The digest comparison concerns byte integrity relative to the expected reference, not correctness or identity by itself.</p></details>
+<p><strong>Why control archive timestamps and file order?</strong></p><ol type="A">
+<li>They authenticate the publisher</li>
+<li>They replace all tests</li>
+<li>They publish a release automatically</li>
+<li>Those packaging inputs can otherwise change the output bytes</li>
+</ol><details><summary>Answer and reasoning</summary><p>D. Those packaging inputs can otherwise change the output bytes A deterministic artifact recipe must control metadata and ordering as well as source-file contents.</p></details>
+<p><strong>A file and its checksum were both replaced by an untrusted sender. They match. What remains unproven?</strong></p><ol type="A">
+<li>The intended publisher and authorized build provenance</li>
+<li>That a checksum can be computed</li>
+<li>That the two received values are consistent</li>
+<li>That bytes exist</li>
+</ol><details><summary>Answer and reasoning</summary><p>A. The intended publisher and authorized build provenance An unauthenticated matching pair can be manufactured together. Identity and trusted provenance require additional evidence.</p></details>
+<h3>Limits</h3><p>The artifact is a temporary deterministic teaching bundle, not a compiled release. No signatures, hosted attestations, independent builder, SBOM, package registry, malware scan or publication is performed.</p><h3>Official references</h3><ul>
+<li><a href="https://docs.python.org/3.12/library/hashlib.html">https://docs.python.org/3.12/library/hashlib.html</a></li>
+<li><a href="https://docs.github.com/en/actions/concepts/security/artifact-attestations">https://docs.github.com/en/actions/concepts/security/artifact-attestations</a></li>
+<li><a href="https://git-scm.com/docs/git-show">https://git-scm.com/docs/git-show</a></li>
+<li><a href="https://docs.python.org/3.12/library/tempfile.html">https://docs.python.org/3.12/library/tempfile.html</a></li>
+</ul></section>
+<section id="delivery-capstone"><h2>Hand off a local candidate with defensible evidence</h2>
+<p>Connect review, integration, recovery, tests and artifact identity into a bounded delivery decision.</p><h3>Learning goals</h3><ul>
+<li>Write a release-candidate claim that each recorded observation actually supports.</li>
+<li>Reconcile the tested revision, packaged revision and artifact digest.</li>
+<li>Separate local readiness for review from authorization and evidence for publication.</li>
+</ul>
+<p>The capstone is a decision exercise: can another person tell what changed, what was tested, what was packaged and what remains unknown? A collection of green outputs is not enough if the outputs describe different revisions. Work backward from a concise handoff statement, then identify which observations are necessary to support each part of it.</p>
+<p>Run the fixed capstone to assemble a temporary local candidate and its evidence. Compare its recorded source identity, local checks and artifact identity. The earlier exercises remain useful supporting evidence about how staging, merges, conflicts and revert behave, but their separate temporary histories are not automatically the capstone’s history. Never join unrelated identifiers into a story just because all commands passed.</p>
+<p>A practical handoff has three layers. First describe the intended change and the relevant reviewed contents. Next state the exact tested and packaged revision with the commands, environment and outcomes. Finally give the artifact digest and the limits on trust and readiness. This structure is an original teaching contract, not a universal release standard or a replacement for a team’s requirements.</p>
+<p>Investigate mismatches before delivering a confident summary. A packaged revision that differs from the tested revision needs explanation and new relevant verification. A dirty state means the named commit alone is insufficient. A changed digest means the bytes differ from the recorded reference. These are distinct problems, so do not repair them by editing the receipt to fit the answer you wanted.</p>
+<p>Use precise verbs in the final note. “Created a temporary local commit,” “ran the fixed local checks” and “measured these artifact bytes” are supported observations when actually executed. “Published,” “CI passed,” “signed,” “approved” and “production ready” require different evidence and, where relevant, authorization. A local commit does not upload itself and a downloadable exercise archive is not a release of the learner’s project.</p>
+<p>Close with a next-step boundary. The work can be ready for a human to review as a local teaching candidate while remote collaboration, broader testing, approval and real distribution remain unperformed. Explain one residual risk and the evidence that would address it. If you completed only the paper alternative, submit the predictions and reasoning clearly labelled as unexecuted rather than fabricating identifiers or results.</p>
+<h3>Worked example</h3><p>A defensible note says: “The local candidate at the recorded full revision passed the supplied checks under the printed environment. The artifact was constructed from the recorded committed input set and has the printed SHA-256 digest. These are local teaching results; no hosted CI, signature, remote upload or production deployment was performed.” Replace general labels with actual observed fields in your worksheet.</p>
+<pre><code># Executes the bounded local handoff scenario; no remote or publication step.
+python3 labs/delivery-workshop/run_lab.py capstone
+# Re-run the workshop verification from this workshop folder:
+python3 -m unittest discover -s tests -v
+# In the worksheet, reconcile source revision, tested revision and artifact.
+# Record unexecuted stages instead of claiming they passed.</code></pre>
+<h3>Practice safely</h3><ol>
+<li>Complete the prior predictions and explain every expected negative result.</li>
+<li>Run capstone and reconcile its own revisions, local tests and artifact fields.</li>
+<li>Write a reviewable handoff with exact observations instead of generic green-check claims.</li>
+<li>Run the supplied unittest suite and keep its actual outcome separate from the capstone checks.</li>
+<li>Name one uncovered failure mode and the additional evidence it would require.</li>
+<li>Complete the worksheet rubric, including the local-only and no-publication statements.</li>
+</ol><h3>Evidence to keep</h3><ul>
+<li>A reconciled capstone receipt and a short original handoff note.</li>
+<li>The actual workshop unittest outcome, separate from the candidate checks.</li>
+<li>A residual-risk statement and unexecuted-stage checklist.</li>
+</ul><h3>Three original checks</h3>
+<p><strong>The tested revision and packaged revision differ without explanation. What should the handoff do?</strong></p><ol type="A">
+<li>Hide the older identifier</li>
+<li>Stop the readiness claim and reconcile or retest the actual candidate</li>
+<li>Reuse the green result because branch names match</li>
+<li>Claim publication to avoid confusion</li>
+</ol><details><summary>Answer and reasoning</summary><p>B. Stop the readiness claim and reconcile or retest the actual candidate A delivery claim must refer to the contents actually tested and packaged; unexplained mismatches invalidate that connection.</p></details>
+<p><strong>Which statement fits this workshop’s completed local capstone?</strong></p><ol type="A">
+<li>The production service is deployed</li>
+<li>GitHub approved all pull requests</li>
+<li>The bounded local candidate and evidence were produced; hosted publication remains unperformed</li>
+<li>A real publisher identity was cryptographically verified</li>
+</ol><details><summary>Answer and reasoning</summary><p>C. The bounded local candidate and evidence were produced; hosted publication remains unperformed The exercise is deliberately local, synthetic and temporary. Its evidence must stay within that scope.</p></details>
+<p><strong>Why keep a limitation in an otherwise successful handoff?</strong></p><ol type="A">
+<li>It turns a passing test into a failure</li>
+<li>It makes exact revisions unnecessary</li>
+<li>It authorizes remote distribution</li>
+<li>It tells the next reviewer which claims the evidence does not support</li>
+</ol><details><summary>Answer and reasoning</summary><p>D. It tells the next reviewer which claims the evidence does not support Clear limits make the next decision safer and more efficient without erasing the successful bounded observations.</p></details>
+<h3>Limits</h3><p>This capstone ends with a temporary local teaching candidate and evidence. It is not a remote release, hosted CI pass, certification assessment, production deployment or general software supply-chain assurance.</p><h3>Official references</h3><ul>
+<li><a href="https://git-scm.com/docs/git-rev-parse">https://git-scm.com/docs/git-rev-parse</a></li>
+<li><a href="https://docs.python.org/3.12/library/unittest.html">https://docs.python.org/3.12/library/unittest.html</a></li>
+<li><a href="https://docs.python.org/3.12/library/hashlib.html">https://docs.python.org/3.12/library/hashlib.html</a></li>
+<li><a href="https://docs.github.com/en/actions/reference/workflows-and-actions/contexts">https://docs.github.com/en/actions/reference/workflows-and-actions/contexts</a></li>
+<li><a href="https://docs.github.com/en/actions/concepts/security/artifact-attestations">https://docs.github.com/en/actions/concepts/security/artifact-attestations</a></li>
+</ul></section>
+</main></html>

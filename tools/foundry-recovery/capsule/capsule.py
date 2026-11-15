@@ -52,8 +52,14 @@ def write_new(path, data):
     if len(raw)>LIMIT:
         raise ValueError('Encoded result exceeds limit')
     fd=os.open(path,os.O_WRONLY|os.O_CREAT|os.O_EXCL,0o600)
-    with os.fdopen(fd,'wb') as f:
-        f.write(raw);f.flush();os.fsync(f.fileno())
+    try:
+        with os.fdopen(fd,'wb') as f:
+            f.write(raw);f.flush();os.fsync(f.fileno())
+    except BaseException:
+        # Only this exclusively created output belongs to the failed operation.
+        # Never leave a partial capsule masquerading as a durable recovery copy.
+        Path(path).unlink()
+        raise
 
 def main():
     p=argparse.ArgumentParser(description=__doc__);p.add_argument('operation',choices=['pack','unpack']);p.add_argument('source',type=Path);p.add_argument('destination',type=Path);a=p.parse_args()
