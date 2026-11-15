@@ -1,6 +1,13 @@
 """Launch a verified portable package with an explicitly selected external database."""
 import argparse,hashlib,importlib.util,json,pathlib,sys,os,subprocess,tempfile,sqlite3,types
 
+def external_path(value):
+    path=pathlib.Path(value)
+    # absolute() retains parent components, which can evade lexical package checks.
+    # Reject rather than resolve so existing symlink checks are never bypassed.
+    if '..' in path.parts:raise ValueError('Parent path components are not allowed; use a direct external path')
+    return path.absolute()
+
 def destination_clear(destination):
     # Refuse stale recovery state as well as an existing main file. Checks are
     # for trusted private directories, not protection against hostile path races.
@@ -32,7 +39,7 @@ def verify(root):
     return data
 
 def create_database(root,data,destination):
-    destination=pathlib.Path(destination).absolute()
+    destination=external_path(destination)
     root=pathlib.Path(root).absolute()
     if root in destination.parents or not destination.parent.is_dir() or any(p.is_symlink() for p in (destination,*destination.parents)) or os.path.lexists(destination):
         raise ValueError('New external database required')
@@ -57,7 +64,7 @@ def create_database(root,data,destination):
     return {'created':True,'schema':15,'integrity':'ok','existing_database_modified':False}
 
 def backup_database(root,data,source,destination,quiescent=False,upgrade=False):
-    root=pathlib.Path(root).absolute();source=pathlib.Path(source).absolute();destination=pathlib.Path(destination).absolute()
+    root=pathlib.Path(root).absolute();source=external_path(source);destination=external_path(destination)
     if not quiescent:raise ValueError('Stop source writes and assert quiescence')
     for path in (source,destination):
         if root in path.parents or any(p.is_symlink() for p in (path,*path.parents)):raise ValueError('External non-symlink paths required')
@@ -110,7 +117,7 @@ def main():
         if a.create_database:
             print(json.dumps(create_database(root,data,a.create_database)));return
         if not a.database:raise ValueError('Explicit database required')
-        database=pathlib.Path(a.database).absolute()
+        database=external_path(a.database)
         if not database.is_file() or any(x.is_symlink() for x in (database,*database.parents)) or root==database or root in database.parents:raise ValueError('External regular database required')
         if (sys.platform=='win32')!=(data['platform']=='windows') or sys.platform not in ('win32','linux'):raise ValueError('Platform mismatch')
         spec=importlib.util.spec_from_file_location('athena_portable_bridge',root/'bridge.py');bridge=importlib.util.module_from_spec(spec);spec.loader.exec_module(bridge)
