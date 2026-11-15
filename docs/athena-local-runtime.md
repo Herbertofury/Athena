@@ -86,3 +86,53 @@ The original latest-only endpoint remains unchanged. Read-only history does not
 fetch upstream data, download assets, adopt versions, modify receipts or make
 source truth/security claims. Tests use generated public-shaped fixtures and
 SQLite reopen, not real provider activity, UI selection or power-loss durability.
+
+## Explicit unified native profile
+
+Build `engineering/apps/atlas-lab` and prepare the same reviewed public runtime
+package described above. With an **existing schema15** native Foundry database
+outside that package, select both stores explicitly:
+
+```
+atlas-lab serve-unified /private/evidence.sqlite /absolute/verified-package /private/authoring.sqlite
+```
+
+The Lab and Feature Workshop now use the same `http://127.0.0.1:41379` navigation
+and document. The Rust engine links the existing native Foundry library directly;
+there is no iframe, subprocess command proxy, remote bind or new API grant.
+The evidence journal and authoring database remain distinct. `serve-athena` and
+the standalone Python Foundry profile are preserved. This command never upgrades,
+imports, restores or discovers a source database on startup. Prepare a separate
+upgraded copy explicitly if an older native schema needs migration.
+
+The unified profile provides native backup/CAS save, revision listing/read and
+explicit reviewed restore, soundtrack read/library/CAS assignment/clear. Legacy
+source import remains in its existing explicitly configured standalone profile;
+this does not claim all original app capabilities or retirement readiness.
+
+### Ownership and request boundaries
+
+Both DBs must be external to the served package. Selected symlinks, symmetric
+main/sidecar name collisions, and existing cross-store or within-store hardlink
+aliases are refused before opening the evidence queue. Use private directories:
+these startup checks are not protection against a malicious local process replacing
+paths afterward. The authoring main-file size check is64MiB, not a bound on WAL,
+total disk usage or growth after the check.
+
+Native authorization (exact Host, Origin for writes, X-Athena-Native, fetch-site),
+If-Match and framing checks precede body reads. Four shared permits bound buffered
+bodies and native DB workers; each body is limited to4MB and5seconds. Reads share
+the same admission budget. The existing Atlas write header is not interchangeable
+with native authorization. Native SQL uses a10second cooperative VM progress
+budget, including initial integrity queries. A15second response timeout reports
+an uncertain outcome, never success or an automatic retry; the permit stays held
+until any detached worker actually finishes. This is **not** hard cancellation of
+blocked OS I/O or a guarantee that a timed-out write did not commit. Refresh and
+review the native state before another write. No schema or original data is
+silently rewritten.
+
+Only the unified profile allows `blob:` image/media for user-selected local PNG
+and video. Script, frame and connection restrictions remain same-origin; no remote
+players, inline/eval script or autoplay are enabled. Browser acceptance separately
+checks local decoding/playback and native persistence. Hosted runner evidence is
+not owner-device installation or private migration acceptance.

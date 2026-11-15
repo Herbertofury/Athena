@@ -3,13 +3,26 @@
 version = 4
 
 [[package]]
+name = "athena-foundry-store"
+version = "0.1.0"
+dependencies = [
+ "rusqlite",
+ "serde",
+ "serde_json",
+ "sha2",
+ "url",
+]
+
+[[package]]
 name = "atlas-lab"
 version = "0.1.0"
 dependencies = [
+ "athena-foundry-store",
  "axum",
  "getrandom 0.4.3",
  "reqwest",
  "rusqlite",
+ "same-file",
  "serde",
  "serde_json",
  "sha2",

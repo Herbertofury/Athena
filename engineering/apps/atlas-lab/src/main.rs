@@ -7,6 +7,17 @@ use std::{hint::black_box, path::Path, time::Instant};
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     let args: Vec<String> = std::env::args().collect();
+    if args.len() == 5 && args[1] == "serve-unified" {
+        return tokio::runtime::Builder::new_multi_thread()
+            .worker_threads(2)
+            .enable_all()
+            .build()?
+            .block_on(atlas_lab::server::serve_unified(
+                args[2].clone().into(),
+                args[3].clone().into(),
+                args[4].clone().into(),
+            ));
+    }
     if args.len() == 4 && args[1] == "serve-athena" {
         return tokio::runtime::Builder::new_multi_thread()
             .worker_threads(2)
