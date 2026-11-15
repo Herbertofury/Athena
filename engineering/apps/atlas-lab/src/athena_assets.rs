@@ -173,15 +173,25 @@ impl RuntimeAssets {
 #[cfg(test)]
 mod tests {
     use super::*;
-    fn fixture() -> std::path::PathBuf {
+    fn exclusive_fixture_root(timestamp: u128) -> std::path::PathBuf {
+        use std::sync::atomic::{AtomicU64, Ordering};
+        static NEXT: AtomicU64 = AtomicU64::new(0);
+        let sequence = NEXT.fetch_add(1, Ordering::Relaxed);
         let root = std::env::temp_dir().join(format!(
-            "athena-assets-{}-{}",
-            std::process::id(),
+            "athena-assets-{}-{timestamp}-{sequence}",
+            std::process::id()
+        ));
+        // Do not reuse another fixture's directory even if clocks repeat.
+        std::fs::create_dir(&root).unwrap();
+        root
+    }
+    fn fixture() -> std::path::PathBuf {
+        let root = exclusive_fixture_root(
             std::time::SystemTime::now()
                 .duration_since(std::time::UNIX_EPOCH)
                 .unwrap()
-                .as_nanos()
-        ));
+                .as_nanos(),
+        );
         std::fs::create_dir_all(root.join("workspaces/engineering/lab")).unwrap();
         let files = [
             ("index.html", "<title>Athena</title>"),
@@ -202,6 +212,32 @@ mod tests {
         )
         .unwrap();
         root
+    }
+    #[test]
+    fn repeated_clock_values_still_allocate_independent_exclusive_fixtures() {
+        let roots = std::thread::scope(|scope| {
+            let handles: Vec<_> = (0..16)
+                .map(|index| {
+                    scope.spawn(move || {
+                        let root = exclusive_fixture_root(123456);
+                        std::fs::write(root.join("sentinel"), index.to_string()).unwrap();
+                        assert_eq!(
+                            std::fs::read_to_string(root.join("sentinel")).unwrap(),
+                            index.to_string()
+                        );
+                        std::fs::remove_dir_all(&root).unwrap();
+                        root
+                    })
+                })
+                .collect();
+            handles
+                .into_iter()
+                .map(|h| h.join().unwrap())
+                .collect::<Vec<_>>()
+        });
+        let unique: std::collections::HashSet<_> = roots.iter().collect();
+        assert_eq!(unique.len(), 16);
+        assert!(roots.iter().all(|path| !path.exists()));
     }
     // A complete, deterministic stored ZIP with one README entry. Loading is
     // byte serving only: the runtime neither extracts nor executes its contents.
