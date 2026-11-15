@@ -205,7 +205,10 @@ pub mod journal {
                 "CREATE TABLE IF NOT EXISTS experiments (
                   id INTEGER PRIMARY KEY, recorded_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
                   candidate TEXT NOT NULL, baseline TEXT NOT NULL, evidence TEXT NOT NULL,
-                  decision TEXT NOT NULL, parent INTEGER REFERENCES experiments(id), acceptance_policy TEXT);",
+                  decision TEXT NOT NULL, parent INTEGER REFERENCES experiments(id), acceptance_policy TEXT);
+                 CREATE TABLE IF NOT EXISTS experiment_runs (
+                  experiment_id INTEGER PRIMARY KEY REFERENCES experiments(id),
+                  schema_version INTEGER NOT NULL CHECK(schema_version=1), output TEXT NOT NULL);",
             )?;
             // Preserve legacy records as policy-unknown, never invent their thresholds.
             if !Self::has_policy_column(&conn)? {
@@ -249,6 +252,48 @@ pub mod journal {
             gate: &Gate,
             parent: Option<i64>,
         ) -> Result<i64, Box<dyn std::error::Error>> {
+            self.record_internal(e, gate, parent, None)
+        }
+        /// Retain complete bounded runner output atomically with its evidence row.
+        pub fn record_run(
+            &mut self,
+            run: &crate::experiment_runner::RunOutput,
+        ) -> Result<i64, Box<dyn std::error::Error>> {
+            let gate = crate::experiment_runner::policy();
+            if run.decision != gate.evaluate(&run.evidence) {
+                return Err("Runner decision differs from recorded policy".into());
+            }
+            let output = serde_json::to_string(run)?;
+            if output.len() > crate::jobs::MAX_JOB_OUTPUT_BYTES {
+                return Err("Complete run output exceeds retention budget".into());
+            }
+            self.record_internal(&run.evidence, &gate, None, Some(&output))
+        }
+        /// Explicit read-only retrieval; does not create or migrate a journal.
+        pub fn read_run(
+            path: &std::path::Path,
+            id: i64,
+        ) -> Result<serde_json::Value, Box<dyn std::error::Error>> {
+            if id <= 0 {
+                return Err("Positive experiment ID required".into());
+            }
+            let conn =
+                Connection::open_with_flags(path, rusqlite::OpenFlags::SQLITE_OPEN_READ_ONLY)?;
+            let output: Option<String> = conn.query_row(
+                "SELECT CASE WHEN schema_version=1 AND length(CAST(output AS BLOB))<=?2 THEN output END FROM experiment_runs WHERE experiment_id=?1",
+                params![id, crate::jobs::MAX_JOB_OUTPUT_BYTES as i64],
+                |row| row.get(0),
+            )?;
+            let output = output.ok_or("Unsupported or oversized stored run")?;
+            Ok(serde_json::from_str(&output)?)
+        }
+        fn record_internal(
+            &mut self,
+            e: &Evidence,
+            gate: &Gate,
+            parent: Option<i64>,
+            output: Option<&str>,
+        ) -> Result<i64, Box<dyn std::error::Error>> {
             let evidence = serde_json::to_string(e)?;
             let decision = serde_json::to_string(&gate.evaluate(e))?;
             let policy = gate.snapshot();
@@ -277,6 +322,9 @@ pub mod journal {
             tx.execute("INSERT INTO experiments(candidate,baseline,evidence,decision,parent,acceptance_policy) VALUES(?1,?2,?3,?4,?5,?6)",
                 params![e.candidate_revision,e.baseline_revision,evidence,decision,parent,policy_json])?;
             let id = tx.last_insert_rowid();
+            if let Some(output) = output {
+                tx.execute("INSERT INTO experiment_runs(experiment_id,schema_version,output) VALUES(?1,1,?2)", params![id, output])?;
+            }
             tx.commit()?;
             Ok(id)
         }
