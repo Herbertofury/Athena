@@ -335,3 +335,24 @@ standalone backup. Packages built before this guard must be rebuilt to include i
 See the [advisory assessment](../../research/python-sqlite-wal-advisory-2026-11-15/README.md).
 Tests on older Python SQLite now verify WAL refusal, not successful WAL recovery;
 previous dated WAL-success evidence is not a current security qualification.
+
+### Explicit upgrade to a separate database
+
+For a stopped native database at schema 2–15, the portable launcher can prepare a
+**new upgraded copy**, leaving the source untouched:
+
+```
+python -B launch.py --upgrade-copy /external/old.sqlite --backup-destination /external/new.sqlite --source-quiescent
+```
+
+This is not startup auto-upgrade, restore, or an in-place migration. The destination
+must not exist. The existing 64 MiB guarded snapshot preparation runs first; a
+captured WAL still requires Python-linked SQLite 3.54.0+. Only the staged copy is
+upgraded through the published native schema commands (15-second limit each).
+Final schema/integrity, standalone state and original byte hashes are checked
+before exclusive publication. Failures clean only the private staging directory;
+an existing/racing destination is never overwritten. Keep the old database and
+choose the new path explicitly when launching. Quiescence assertions and sampled
+hash checks do not make this safe with concurrent writers.
+
+[Upgrade-copy evidence and scope](../../research/portable-upgrade-copy-2026-11-15/README.md)
