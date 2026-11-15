@@ -3,13 +3,14 @@ import fs from 'node:fs';
 import {TextDecoder} from 'node:util';
 import {review, markdown} from './review.mjs';
 import {compare, comparisonMarkdown} from './compare.mjs';
-const usage = 'node tools/continuity-review/cli.mjs --input continuity.json [--baseline BEFORE.json] [--project NAME] [--format markdown|json] [--output NEW_FILE]';
+import {impact, impactMarkdown} from './impact.mjs';
+const usage = 'node tools/continuity-review/cli.mjs --input continuity.json [--baseline BEFORE.json | --impact NOTE_ID] [--project NAME] [--format markdown|json] [--output NEW_FILE]';
 try {
   const args = process.argv.slice(2), options = {};
   if (args.length === 1 && args[0] === '--help') {console.log(usage); process.exit(0);}
   for (let index = 0; index < args.length; index += 2) {
     const key = args[index], value = args[index + 1];
-    if (!['--input', '--baseline', '--project', '--format', '--output'].includes(key) || value === undefined || key in options) throw Error('Invalid arguments');
+    if (!['--input', '--baseline', '--impact', '--project', '--format', '--output'].includes(key) || value === undefined || key in options) throw Error('Invalid arguments');
     options[key] = value;
   }
   if (!options['--input'] || !['markdown', 'json'].includes(options['--format'] || 'markdown')) throw Error('Invalid arguments');
@@ -28,10 +29,12 @@ try {
   } finally {fs.closeSync(fd);}
   return data;
   }
+  if (options['--impact'] !== undefined && (options['--baseline'] !== undefined || options['--project'] !== undefined)) throw Error('Impact is cross-project');
   const data = readInput(options['--input']);
   const comparing = options['--baseline'] !== undefined;
-  const report = comparing ? compare(readInput(options['--baseline']), data, options['--project'] || '') : review(data, options['--project'] || '');
-  const text = options['--format'] === 'json' ? JSON.stringify(report, null, 2) + '\n' : (comparing ? comparisonMarkdown(report) : markdown(report));
+  const impacting = options['--impact'] !== undefined;
+  const report = impacting ? impact(data, options['--impact']) : comparing ? compare(readInput(options['--baseline']), data, options['--project'] || '') : review(data, options['--project'] || '');
+  const text = options['--format'] === 'json' ? JSON.stringify(report, null, 2) + '\n' : (impacting ? impactMarkdown(report) : comparing ? comparisonMarkdown(report) : markdown(report));
   if (options['--output']) fs.writeFileSync(options['--output'], text, {flag: 'wx', mode: 0o600});
   else process.stdout.write(text);
 } catch {

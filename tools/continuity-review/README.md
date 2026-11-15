@@ -73,3 +73,29 @@ Tests: `node --test tests/continuity-review.test.cjs tests/continuity-comparison
 Synthetic fixtures cover policy/provenance/history, cycles, moved roots, removed
 links, stable ordering, missing projects, invalid snapshots, real CLI operation,
 private-error redaction and refusal to overwrite either input or an existing report.
+
+## Find downstream projects before changing shared knowledge
+
+```sh
+node tools/continuity-review/cli.mjs --input continuity.json --impact shared-note-id --format json --output impact.json
+```
+
+The reverse-dependency review follows **explicit** note links across all projects,
+including ignored notes. It reports every reachable downstream note/project,
+current evidence, reviewed link provenance and missing/changed revision states.
+`distance` and `via` encode one deterministic shortest path back to the requested
+note, without expanding repeated full paths; all reached links remain available,
+including cycles. The requested note is not counted as its own dependent.
+
+A missing target can still have downstream dependents. An unknown unreferenced ID
+has zero known coverage, never a claim that nothing outside this collection is
+affected. Findings are advisory, not semantic compatibility judgments or editing
+blocks. `--impact` cannot combine with project filtering or baseline comparison:
+those would silently hide cross-project impact. No file is changed, source is
+queried or action is applied. The existing input limit, private-output handling,
+no-overwrite behavior and concurrent-file-mutation limitations apply unchanged.
+Reports contain private note text and URLs; do not publish them without review.
+
+Synthetic tests additionally cover branching, cycles/self-links, ignored notes,
+missing targets/revisions, deterministic ordering, a 1500-link chain, real CLI
+use, unchanged input bytes, incompatible options and overwrite refusal.
