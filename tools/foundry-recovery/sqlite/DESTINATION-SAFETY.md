@@ -41,3 +41,9 @@ change does not invoke or promote the isolated native staged-WAL candidate.
 Full hosted Windows/Linux package and native regression results must be verified
 for the proposed commit before merge. No source repository or saved data is
 removed by this change.
+
+Initial hosted Windows run `43723295164` failed on test-fixture cleanup with
+WinError 32: the Python transaction context did not close its SQLite connection.
+The synthetic fixture now explicitly closes it with `contextlib.closing`; no
+assertion or production guard was weakened. Ubuntu and learning checks passed
+that initial head. Both operating systems must pass again at the corrected head.

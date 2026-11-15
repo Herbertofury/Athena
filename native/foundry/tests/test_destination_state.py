@@ -1,6 +1,7 @@
 """Publication boundary tests; synthetic SQLite plus mocked native status, no Rust acceptance claim."""
 import importlib.util,json,os,pathlib,sqlite3,subprocess,sys,tempfile,unittest
 from unittest.mock import patch
+from contextlib import closing
 ROOT=pathlib.Path(__file__).resolve().parents[3]
 spec=importlib.util.spec_from_file_location('destination_launcher',ROOT/'native/foundry/portable_launcher.py')
 launch=importlib.util.module_from_spec(spec);spec.loader.exec_module(launch)
@@ -8,7 +9,8 @@ class DestinationTests(unittest.TestCase):
  def setUp(self):
   self.tmp=tempfile.TemporaryDirectory();self.addCleanup(self.tmp.cleanup);self.root=pathlib.Path(self.tmp.name)
   self.bundle=self.root/'bundle';self.bundle.mkdir();self.source=self.root/'source.sqlite';self.output=self.root/'new.sqlite'
-  with sqlite3.connect(self.source) as db:db.execute('CREATE TABLE evidence(value TEXT)');db.execute("INSERT INTO evidence VALUES('synthetic')")
+  with closing(sqlite3.connect(self.source)) as db, db:db.execute('CREATE TABLE evidence(value TEXT)');db.execute("INSERT INTO evidence VALUES('synthetic')")
+  with self.assertRaises(sqlite3.ProgrammingError):db.execute('select 1')
   self.before=self.source.read_bytes();self.data={'binary':'unused-reviewed-native'}
   (self.bundle/'sqlite_backup.py').write_bytes((ROOT/'tools/foundry-recovery/sqlite/prepare.py').read_bytes())
  def invoke(self,mode):
