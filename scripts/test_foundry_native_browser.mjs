@@ -60,7 +60,14 @@ try {
  const initialized=JSON.parse(execFileSync(pythonCommand,[path.join(portable,'launch.py'),'--create-database',db],{cwd:temporary,encoding:'utf8',timeout:60000}));
  assert.equal(initialized.schema,15);assert.equal(initialized.integrity,'ok');
  report.checks.push('Explicit portable first-run creates verified new schema15 store without checkout commands');
+ let offlineRun,offlineRaw;
  if(unified){
+  offlineRun=JSON.parse(execFileSync(unified,['dedup-lab',journal],{encoding:'utf8',timeout:60000}));
+  // Generated raw fixture proves display preserves integers beyond JS precision.
+  offlineRaw=execFileSync(pythonCommand,['-c',`import sqlite3,sys
+c=sqlite3.connect(sys.argv[1]); raw=c.execute('SELECT output FROM experiment_runs WHERE experiment_id=?',(int(sys.argv[2]),)).fetchone()[0]
+raw='{\"large_integer\":18446744073709551617,'+raw[1:]
+c.execute('UPDATE experiment_runs SET output=? WHERE experiment_id=?',(raw,int(sys.argv[2])));c.execute('UPDATE experiments SET candidate=? WHERE id=?',('<img src=x onerror=alert(1)>',int(sys.argv[2])));c.commit();c.close();sys.stdout.write(raw)`,journal,String(offlineRun.experiment_id)],{encoding:'utf8',timeout:15000});
   if(!portableUnified)execFileSync(pythonCommand,[path.join(repoRoot,'scripts/package_app.py'),'--profile','public-preview','--allowlist',path.join(repoRoot,'config/runtime-public-preview.json'),'--output',enginePackage],{cwd:repoRoot,timeout:30000});
   report.portableUnified=portableUnified;
   report.scope='Actual unified Rust evidence and Foundry native stores in one origin; synthetic fixtures, no private migration or installer acceptance';
@@ -267,6 +274,21 @@ try {
   assert.equal(await page.locator('audio[autoplay],video[autoplay]').count(),0);
   assert.ok(await page.locator('audio,video').evaluateAll(nodes=>nodes.every(node=>node.paused)));
   assert.equal(report.externalRequests.length,beforeExternal,'bookmark workflow must not request a provider');
+ });
+ if(unified)await check('Native read-only Learning History survives restart and exposes exact retained run',async()=>{
+  const runtime=await (await fetch(origin+'/api/runtime')).json();assert.equal(runtime.learning_history_url,'/learning');
+  await page.goto(origin+'/learning');await page.locator('#records li').first().waitFor();
+  assert.ok((await page.locator('#records button').first().textContent()).includes('<img src=x onerror=alert(1)>'));assert.equal(await page.locator('#records img').count(),0);
+  await page.locator('#records button').first().click();
+  await page.locator('#detail summary').filter({hasText:'Complete run'}).waitFor();
+  const full=await page.locator('#detail pre').last().textContent();assert.equal(full,offlineRaw);assert.ok(full.includes('"large_integer":18446744073709551617'));
+  await page.reload();await page.locator('#detail summary').filter({hasText:'Complete run'}).waitFor();
+  assert.equal(await page.locator('#detail pre').last().textContent(),offlineRaw);
+  assert.equal((await fetch(origin+'/api/learning/history?before=0')).status,400);
+  assert.equal((await fetch(origin+'/api/learning/history/999999')).status,404);
+  assert.equal((await fetch(origin+'/api/learning/history',{method:'POST',headers:{Origin:origin,'x-atlas-request':'local-ui'}})).status,405);
+  assert.equal(await page.locator('iframe').count(),0);
+  await page.screenshot({path:path.join(out,'learning-history.png'),fullPage:true});
  });
  await check('Explicit stopped-profile backup preserves native workspace and soundtrack library',async()=>{
   await stopBridge();
