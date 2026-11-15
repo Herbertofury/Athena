@@ -54,3 +54,22 @@ The public Noxviola transition receipt is a real selected-consumer plan, not a c
 Explicit `repository_governance.py apply` stages the complete write set before changing snapshots, commits the adoption lock last, and rolls back committed writes if an I/O exception or handled keyboard interruption occurs. It preserves project-owned instructions and refuses legacy adoption as before. If rollback itself fails or a committed destination changed concurrently, it reports failure and retains a local `.athena-adoption-*` recovery directory containing original bytes and a path index. Keep that directory private and inspect it before any retry; it is not a public evidence artifact.
 
 This is **exception rollback, not crash-atomic or power-loss-durable storage**. Serialize writers and use a stable checkout. Abrupt process termination, hostile filesystem mutation and hardware failure still require backup/recovery procedures. No real consumer was changed to qualify this implementation; injected-failure tests operate only on disposable fixture repositories.
+
+## Inspect policy changes before any transition
+
+`python guidance/tools/review_policy_changes.py --target /explicit/legacy-consumer`
+compares the 16 known legacy policy snapshots with the checked Athena release.
+Default JSON contains only fixed relative paths, hashes, observed changes and pin
+matches. Add `--include-content` to explicitly include local unified text diffs;
+these can reveal private local edits, so keep that report local. Reports never
+include root/nested project instructions or echo unrecognized lock path names.
+
+This is a review companion, not an apply patch or proof of policy equivalence.
+Missing or locally edited files stay explicit and untouched. Unknown lock entries
+are counted, not silently accepted. Foreign locks, links/junctions, nonregular
+files, invalid UTF-8 and excessive input are refused. Read budgets are 1 MiB per
+file and 8 MiB total; no truncation is presented as a complete comparison. LF and
+CRLF policy text is compared using the existing portable manifest convention.
+Use a stable checkout: concurrent mutations are not a snapshot guarantee. No
+network access, fleet scan, source execution, consumer write or retirement
+certification occurs. Existing transition/adoption restrictions remain unchanged.
