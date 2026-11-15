@@ -7,24 +7,26 @@ import {createHash} from 'node:crypto';
 import {spawn, execFileSync} from 'node:child_process';
 import {chromium} from 'playwright';
 import {repoRoot, binaryPath, pythonCommand} from '../native/foundry/tests/paths.mjs';
-const out=path.join(repoRoot,'browser-results/foundry-native');
+const unified=process.env.ATHENA_UNIFIED_ENGINE;
+const out=path.join(repoRoot,unified?'browser-results/unified-native':'browser-results/foundry-native');
 fs.mkdirSync(out,{recursive:true});
 const temporary=fs.mkdtempSync(path.join(os.tmpdir(),'athena native synthetic '));
 const db=path.join(temporary,'synthetic.sqlite');
 const portable=path.join(temporary,'portable');
+const enginePackage=path.join(temporary,'engine-package'),journal=path.join(temporary,'journal.sqlite');
 const report={platform:process.platform,scope:'Chromium → loopback Python bridge → native Rust SQLite executable; synthetic data, not desktop installer or private migration acceptance',checks:[],errors:[],networkFailures:[],httpFailures:[],externalRequests:[]};
 let bridge,browser,context,page,exited,origin,stderr='';
 const cli=(command,input)=>execFileSync(binaryPath,[command,db],{encoding:'utf8',input,timeout:15000});
 async function check(name,fn){await fn();report.checks.push(name);}
 async function startBridge(){
- bridge=spawn(pythonCommand,[path.join(portable,'launch.py'),'--database',db],{cwd:temporary});
+ bridge=unified?spawn(unified,['serve-unified',journal,enginePackage,db],{cwd:temporary}):spawn(pythonCommand,[path.join(portable,'launch.py'),'--database',db],{cwd:temporary});
  exited=new Promise(resolve=>bridge.once('exit',resolve));
  bridge.stderr.on('data',chunk=>stderr+=chunk);
  return await new Promise((resolve,reject)=>{
   const timeout=setTimeout(()=>reject(Error('Bridge startup timed out: '+stderr)),15000);
   bridge.once('error',error=>{clearTimeout(timeout);reject(error)});
   bridge.once('exit',()=>{clearTimeout(timeout);reject(Error('Bridge exited before ready: '+stderr))});
-  let text='';bridge.stdout.on('data',chunk=>{text+=chunk;if(text.includes('\n')){clearTimeout(timeout);resolve(new URL(text.trim()).origin)}});
+  let text='';bridge.stdout.on('data',chunk=>{text+=chunk;if(text.includes('\n')){clearTimeout(timeout);resolve(unified?'http://127.0.0.1:41379':new URL(text.trim()).origin)}});
  });
 }
 async function stopBridge(){
@@ -43,6 +45,10 @@ try {
  const initialized=JSON.parse(execFileSync(pythonCommand,[path.join(portable,'launch.py'),'--create-database',db],{cwd:temporary,encoding:'utf8',timeout:60000}));
  assert.equal(initialized.schema,15);assert.equal(initialized.integrity,'ok');
  report.checks.push('Explicit portable first-run creates verified new schema15 store without checkout commands');
+ if(unified){
+  execFileSync(pythonCommand,[path.join(repoRoot,'scripts/package_app.py'),'--profile','public-preview','--allowlist',path.join(repoRoot,'config/runtime-public-preview.json'),'--output',enginePackage],{cwd:repoRoot,timeout:30000});
+  report.scope='Actual unified Rust evidence and Foundry native stores in one origin; synthetic fixtures, no private migration or installer acceptance';
+ }
  origin=await startBridge();
  browser=await chromium.launch({headless:true,executablePath:process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE||undefined});
  context=await browser.newContext({viewport:{width:1440,height:1000}});
@@ -51,12 +57,44 @@ try {
  page.on('requestfailed',request=>report.networkFailures.push({path:new URL(request.url()).pathname,error:request.failure()?.errorText}));
  page.on('response',response=>{if(response.status()>=400)report.httpFailures.push({path:new URL(response.url()).pathname,status:response.status()})});
  page.setDefaultTimeout(15000);
+ if(unified)await check('Real Lab and native Foundry share one verified origin without iframe',async()=>{
+  await page.goto(origin+'/#lab');await page.locator('#connection').filter({hasText:'Connected'}).waitFor();
+  assert.equal(await page.locator('iframe').count(),0);
+  const info=await (await context.request.get(origin+'/api/runtime')).json();assert.equal(info.application,'Athena');assert.equal(info.same_origin_only,true);
+  assert.equal((await context.request.get(origin+'/__native/backup')).status(),403);
+  assert.equal((await context.request.post(origin+'/__native/backup',{headers:{'X-Athena-Native':'1','Content-Type':'application/json','If-Match':'"empty"'},data:'{}'})).status(),403);
+  assert.equal((await context.request.post(origin+'/api/jobs',{headers:{Origin:origin,'X-Athena-Native':'1'},data:{kind:'dedup'}})).status(),403);
+ });
  await page.goto(origin+'/#build');await page.locator('.foundry-scene').waitFor();
  await check('Native profile loads without iframe or automatic playback',async()=>{
   assert.equal(await page.locator('.foundry-workspace iframe').count(),0);
   await page.locator('[data-native-save]').waitFor();
   assert.equal(await page.locator('[data-native-save]').count(),1);
   assert.equal(await page.locator('audio[autoplay],video[autoplay]').count(),0);
+ });
+ if(unified)await check('Unified CSP allows explicit local PNG and synthetic video without external players',async()=>{
+  const png=await page.evaluate(()=>{const c=document.createElement('canvas');c.width=64;c.height=48;c.getContext('2d').fillRect(0,0,64,48);return c.toDataURL('image/png').split(',')[1]});
+  await page.locator('[data-local-image-file]').setInputFiles({name:'synthetic.png',mimeType:'image/png',buffer:Buffer.from(png,'base64')});
+  await page.locator('[data-local-image-view] img').evaluate(img=>img.decode());
+  await page.locator('[data-local-image-route]').click();assert.equal(await page.locator('[data-local-image-surface] img').evaluate(i=>i.naturalWidth),64);
+  await page.locator('[data-local-image-close]').click();
+  const bytes=await page.evaluate(async()=>{
+   const canvas=document.createElement('canvas');canvas.width=160;canvas.height=90;
+   const ctx=canvas.getContext('2d'),stream=canvas.captureStream(15),chunks=[];
+   const recorder=new MediaRecorder(stream,{mimeType:'video/webm;codecs=vp8'});let timer,deadline;
+   try{return await new Promise((resolve,reject)=>{
+    let frame=0;recorder.ondataavailable=e=>{if(e.data.size)chunks.push(e.data)};
+    recorder.onerror=()=>reject(Error('synthetic recorder failed'));
+    recorder.onstop=async()=>resolve(Array.from(new Uint8Array(await new Blob(chunks,{type:'video/webm'}).arrayBuffer())));
+    deadline=setTimeout(()=>reject(Error('synthetic recorder deadline')),10000);
+    recorder.start();timer=setInterval(()=>{ctx.fillStyle=frame%2?'#204080':'#80c040';ctx.fillRect(0,0,160,90);ctx.fillStyle='#ffffff';ctx.fillRect((frame*7)%140,20,20,50);if(++frame===30){clearInterval(timer);recorder.stop()}},80);
+   })}finally{clearInterval(timer);clearTimeout(deadline);if(recorder.state!=='inactive')recorder.stop();stream.getTracks().forEach(t=>t.stop())}
+  });
+  await page.locator('[data-local-video-file]').setInputFiles({name:'synthetic.webm',mimeType:'video/webm',buffer:Buffer.from(bytes)});
+  await page.locator('[data-local-video-play]:not(:disabled)').waitFor();assert.equal(await page.locator('video').evaluate(v=>v.paused),true);
+  await page.locator('video').evaluate(v=>v.addEventListener('playing',event=>{if(event.isTrusted)v.dataset.nativeTestPlaying='true'},{once:true}));
+  await page.locator('[data-local-video-play]').click();await page.locator('video[data-native-test-playing="true"]').waitFor();
+  await page.locator('[data-local-video-close]').click();assert.equal(report.externalRequests.length,0);
  });
  await check('Real UI edit saves schema9 workspace through native SQLite',async()=>{
   await page.locator('select[data-time]').selectOption('night');
@@ -225,7 +263,7 @@ try {
  assert.deepEqual(report.errors,[]);
  await page.screenshot({path:path.join(out,'native-profile.png'),fullPage:true});
  report.passed=true;
-} catch(error){report.passed=false;report.failure=String(error.stack||error);if(page)await page.screenshot({path:path.join(out,'failure.png'),fullPage:true}).catch(()=>{});process.exitCode=1;}
+} catch(error){report.passed=false;report.failure=String(error.stack||error);if(page)report.mediaFailure=await page.locator('video').evaluateAll(xs=>xs.map(v=>({readyState:v.readyState,paused:v.paused,ended:v.ended,time:v.currentTime,duration:v.duration,error:v.error?.message||null,playingEvent:v.dataset.nativeTestPlaying||null}))).catch(()=>[]);if(page)await page.screenshot({path:path.join(out,'failure.png'),fullPage:true}).catch(()=>{});process.exitCode=1;}
 finally {
  await browser?.close();
  await stopBridge().catch(error=>{report.passed=false;report.errors.push(String(error));process.exitCode=1;});

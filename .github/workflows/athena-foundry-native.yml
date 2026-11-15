@@ -40,6 +40,13 @@ jobs:
         run: cargo clippy --locked --manifest-path crates/athena-foundry-store/Cargo.toml --all-targets -- -D warnings
       - name: Build local bridge executable
         run: cargo build --locked --manifest-path crates/athena-foundry-store/Cargo.toml
+      - name: Build unified evidence and authoring engine
+        run: cargo build --locked --manifest-path engineering/apps/atlas-lab/Cargo.toml
+      - name: Unified dual-store HTTP acceptance
+        env:
+          ATHENA_UNIFIED_ENGINE: ${{ github.workspace }}/engineering/apps/atlas-lab/target/debug/atlas-lab${{ runner.os == 'Windows' && '.exe' || '' }}
+          ATHENA_FOUNDRY_STORE_BINARY: ${{ github.workspace }}/crates/athena-foundry-store/target/debug/athena-foundry-store${{ runner.os == 'Windows' && '.exe' || '' }}
+        run: python native/foundry/tests/unified_http.py
       - name: Native authoring and real HTTP SQLite integration
         run: npm run test:foundry-native
       - if: runner.os == 'Linux'
@@ -63,6 +70,10 @@ jobs:
       - name: Install Chromium for real native-profile UI checks
         run: npx playwright install chromium
       - name: Browser to native SQLite acceptance
+        run: node scripts/test_foundry_native_browser.mjs
+      - name: Unified Lab and Foundry browser acceptance
+        env:
+          ATHENA_UNIFIED_ENGINE: ${{ github.workspace }}/engineering/apps/atlas-lab/target/debug/atlas-lab${{ runner.os == 'Windows' && '.exe' || '' }}
         run: node scripts/test_foundry_native_browser.mjs
       - name: Bounded authoring and oversized recovery in Chromium
         run: |
@@ -94,6 +105,7 @@ jobs:
           name: native-foundry-${{ matrix.os }}
           path: |
             browser-results/foundry-native/
+            browser-results/unified-native/
             browser-results/foundry-capacity/
             browser-results/foundry-local-image/
             browser-results/foundry-video-routing/

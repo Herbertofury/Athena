@@ -608,3 +608,5 @@ pub mod content_addressed_candidate;
 // Isolated binary-address/integer-reference study; not used by application storage.
 #[path = "../../../experiments/content-addressed-snapshot-lab/compact_store.rs"]
 pub mod compact_addressed_candidate;
+
+pub mod foundry_native;

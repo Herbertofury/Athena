@@ -51,7 +51,8 @@ fn permitted(headers: &HeaderMap, write: bool) -> bool {
 async fn guard(request: Request, next: Next) -> Response {
     if !permitted(
         request.headers(),
-        request.method() != axum::http::Method::GET,
+        request.method() != axum::http::Method::GET
+            && !request.uri().path().starts_with("/__native/"),
     ) {
         return StatusCode::FORBIDDEN.into_response();
     }
@@ -614,10 +615,10 @@ fn worker(path: PathBuf, stop: Arc<AtomicBool>, status: Arc<AtomicU8>, wake: Rec
     }
 }
 pub async fn serve(path: PathBuf) -> Result<(), Box<dyn std::error::Error>> {
-    serve_strategy(path, false, None).await
+    serve_strategy(path, false, None, None).await
 }
 pub async fn serve_candidate(path: PathBuf) -> Result<(), Box<dyn std::error::Error>> {
-    serve_strategy(path, true, None).await
+    serve_strategy(path, true, None, None).await
 }
 pub async fn serve_athena(
     path: PathBuf,
@@ -625,12 +626,23 @@ pub async fn serve_athena(
 ) -> Result<(), Box<dyn std::error::Error>> {
     let assets =
         crate::athena_assets::RuntimeAssets::load(&public).map_err(std::io::Error::other)?;
-    serve_strategy(path, false, Some(Arc::new(assets))).await
+    serve_strategy(path, false, Some(Arc::new(assets)), None).await
+}
+pub async fn serve_unified(
+    path: PathBuf,
+    public: PathBuf,
+    foundry: PathBuf,
+) -> Result<(), Box<dyn std::error::Error>> {
+    let foundry = crate::foundry_native::validate(&foundry, &path, &public)?;
+    let assets =
+        crate::athena_assets::RuntimeAssets::load(&public).map_err(std::io::Error::other)?;
+    serve_strategy(path, false, Some(Arc::new(assets)), Some(foundry)).await
 }
 async fn serve_strategy(
     path: PathBuf,
     overview_candidate: bool,
     runtime_assets: Option<Arc<crate::athena_assets::RuntimeAssets>>,
+    foundry: Option<PathBuf>,
 ) -> Result<(), Box<dyn std::error::Error>> {
     let engine_instance = new_engine_instance()?;
     Queue::open(&path)?;
@@ -719,7 +731,6 @@ async fn serve_strategy(
         .route("/api/overview", get(overview))
         .route("/api/jobs", post(enqueue))
         .layer(DefaultBodyLimit::max(4096))
-        .layer(middleware::from_fn(guard))
         .with_state(App {
             engine_instance,
             runtime_assets,
@@ -729,6 +740,21 @@ async fn serve_strategy(
             overview_candidate,
             db_slots: Arc::new(tokio::sync::Semaphore::new(4)),
         });
+    let unified = foundry.is_some();
+    let app = if let Some(path) = foundry {
+        app.merge(crate::foundry_native::router(path))
+    } else {
+        app
+    };
+    let app = if unified {
+        app.layer(middleware::from_fn(|request:Request,next:Next|async move {
+        let mut response=guard(request,next).await;
+        response.headers_mut().insert(header::CONTENT_SECURITY_POLICY,"default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' blob:; media-src 'self' blob:; connect-src 'self'; frame-ancestors 'none'; base-uri 'none'; form-action 'self'".parse().unwrap());
+        response
+    }))
+    } else {
+        app.layer(middleware::from_fn(guard))
+    };
     println!(
         "Athena Lab local interface: {ORIGIN}. Press Ctrl+C to stop. No remote access is enabled."
     );
