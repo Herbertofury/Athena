@@ -288,7 +288,36 @@ c.execute('UPDATE experiment_runs SET output=? WHERE experiment_id=?',(raw,int(s
   assert.equal((await fetch(origin+'/api/learning/history/999999')).status,404);
   assert.equal((await fetch(origin+'/api/learning/history',{method:'POST',headers:{Origin:origin,'x-atlas-request':'local-ui'}})).status,405);
   assert.equal(await page.locator('iframe').count(),0);
+  const beforeRuns=await (await fetch(origin+'/api/learning/history')).json();
+  let submissions=0;await page.route('**/api/jobs',async route=>{submissions++;await route.continue();});
+  await page.locator('#run-experiment').click();await page.locator('#run-experiment').evaluate(button=>button.click());
+  await page.locator('#run-status').filter({hasText:'Complete experiment history is retained'}).waitFor({timeout:90000});
+  assert.equal(submissions,1);await page.unroute('**/api/jobs');
+  const afterRuns=await (await fetch(origin+'/api/learning/history')).json();
+  assert.equal(afterRuns.records.length,beforeRuns.records.length+1);
+  const retainedId=afterRuns.records[0].id;
+  const retained=await (await fetch(origin+'/api/learning/history/'+retainedId)).json();
+  assert.equal(retained.run_state,'retained');assert.ok(retained.run.includes('evidence'));
+  await stopBridge();origin=await startBridge();await page.goto(origin+'/learning#'+retainedId);
+  await page.locator('#detail summary').filter({hasText:'Complete run'}).waitFor();
+  assert.equal(await page.locator('#detail pre').last().textContent(),retained.run);
   await page.screenshot({path:path.join(out,'learning-history.png'),fullPage:true});
+  let uncertainSubmissions=0;
+  await page.route('**/api/jobs',async route=>{uncertainSubmissions++;await route.fetch();await route.abort('failed');});
+  await page.locator('#run-experiment').click();
+  await page.locator('#run-status').filter({hasText:'Submission outcome is unconfirmed'}).waitFor();
+  assert.equal(await page.locator('#run-experiment').isDisabled(),true);
+  await page.locator('#run-experiment').evaluate(button=>button.click());
+  assert.equal(uncertainSubmissions,1);await page.unroute('**/api/jobs');
+  // Lost status is distinct from lost acceptance. Never automatically resubmit.
+  await page.reload();await page.locator('#records li').first().waitFor();
+  let statusSubmissions=0;await page.route('**/api/jobs',async route=>{statusSubmissions++;await route.continue();});
+  await page.route('**/api/learning/jobs/*',route=>route.abort('failed'));
+  await page.locator('#run-experiment').click();
+  await page.locator('#run-status').filter({hasText:'was accepted, but status is unconfirmed'}).waitFor();
+  assert.equal(await page.locator('#run-experiment').isDisabled(),true);assert.equal(statusSubmissions,1);
+  await page.unroute('**/api/jobs');await page.unroute('**/api/learning/jobs/*');
+
  });
  await check('Explicit stopped-profile backup preserves native workspace and soundtrack library',async()=>{
   await stopBridge();
