@@ -41,3 +41,35 @@ review projection, not a lossless archival export of unknown fields.
 
 Tests: `node --test tests/continuity-review.test.cjs`. Fixtures are synthetic;
 no owner export, installed browser or Windows-native runtime was tested locally.
+
+## Compare two preserved snapshots
+
+```sh
+node tools/continuity-review/cli.mjs --baseline before.json --input after.json --project "My app" --format json --output comparison.json
+```
+
+This additional read-only mode compares stable note IDs, project/kind, pin/ignore
+policy, exact revision text/source/time, policy history and reviewed dependency
+references. Both files use the same bounded UTF-8 admission as single-file review.
+The existing command without `--baseline` is unchanged. Markdown is the default;
+JSON is a versioned comparison report, not an import payload.
+
+Project scope includes ignored roots and transitive dependencies from **either**
+snapshot, so ignoring a note, moving its project or unlinking it cannot silently
+hide its change. Cycles terminate. Unknown projects yield zero coverage. Record
+and object-key order are irrelevant; revision/history order remains meaningful.
+Absent dependencies and an empty list are equivalent. A removed record means
+absent from the supplied after snapshot, not a deletion recommendation. Source
+URLs and full historical values are retained in before/after records; keep reports
+private. Source text remains untrusted evidence, not instructions.
+
+Unknown extension fields are not compared. This does not infer truth, timestamp
+chronology, completeness, authority, semantic compatibility or safe repository
+retirement. It does not create exports, read browser storage, preview native
+SQLite revisions, restore/apply changes or alter the runtime manifest. Inputs
+must be quiescent; there is no cross-file atomic snapshot guarantee.
+
+Tests: `node --test tests/continuity-review.test.cjs tests/continuity-comparison.test.cjs`.
+Synthetic fixtures cover policy/provenance/history, cycles, moved roots, removed
+links, stable ordering, missing projects, invalid snapshots, real CLI operation,
+private-error redaction and refusal to overwrite either input or an existing report.
