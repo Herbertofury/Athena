@@ -47,6 +47,20 @@ def unpack(data):
         out[e['key']]=e['value']
     return values(out)
 
+def extract_utf8(path, key, max_bytes):
+    """Validate every entry before selecting one exact UTF-8 value; never write."""
+    if key not in KEYS or type(max_bytes) is not int or not 0 < max_bytes <= LIMIT:
+        raise ValueError('Unsupported extraction request')
+    path=Path(path)
+    if path.is_symlink() or not path.is_file():
+        raise ValueError('Regular capsule file required')
+    with path.open('rb') as stream: raw=stream.read(LIMIT+1)
+    original=unpack(parse(raw))
+    if key not in original: raise ValueError('Capsule value missing')
+    selected=original[key].encode('utf-8', errors='strict')
+    if len(selected)>max_bytes: raise ValueError('Selected value exceeds limit')
+    return selected
+
 def write_new(path, data):
     raw=json.dumps(data,ensure_ascii=True,allow_nan=False,sort_keys=True,separators=(',',':')).encode('ascii')
     if len(raw)>LIMIT:

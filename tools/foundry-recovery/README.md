@@ -95,3 +95,13 @@ python3 tools/foundry-recovery/scrapbook/convert.py --catalog /path/to/reviewed-
 This read-only command verifies the four-file bundle, exact source/mapping/workspace/catalog digests, deterministic conversion and truthful manifest limits. It reports verified row count and partial compatibility; it does not import into a live store, repair files or prove original visual fidelity. Keep the matching catalog: a changed catalog is refused, not silently substituted. Missing, tampered or inconsistent bundles fail nonzero and remain unchanged. Verification must not be combined with creation arguments. The existing --source/--mapping/--new-bundle creation command is unchanged.
 
 Six real CLI subprocess tests use synthetic fixtures and check byte-for-byte preservation on success and failure, tampering, catalog drift, missing files, argument modes and existing creation compatibility. No private data or native owner-device acceptance is claimed.
+
+### Convert directly from a preserved original-value capsule
+
+```
+python3 scrapbook/convert.py --catalog CATALOG.json --source PRESERVED-CAPSULE.json --mapping REVIEWED.json --new-bundle NEW-PRIVATE-DIRECTORY --capsule
+```
+
+Explicit `--capsule` validates every entry using the shared original-value capsule implementation, then selects only `ff-scrapbook-layout`. Music conversion uses the same extraction helper. The mapping hash must identify the selected raw scrapbook string encoded as UTF-8, not the enclosing capsule. Existing geometry, asset, surface, anchor and blend review requirements remain mandatory. No review is invented from a checksum.
+
+The four-file bundle retains exact selected scrapbook UTF-8 bytes, not unrelated capsule values. Keep the entire original capsule separately; it is never modified or replaced. Bundle verification stays unchanged and recomputes the same workspace as raw-input mode. `--capsule` is rejected in verify-only mode. Missing/tampered values, non-UTF8-representable selected strings, size violations and existing destinations refuse. Unrelated lone-surrogate strings remain preserved in the capsule. No browser reads, live imports, provider requests or source artwork occur, and visual fidelity/deletion readiness remain unverified.
