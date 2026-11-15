@@ -171,7 +171,24 @@ impl SnapshotStore {
         &self,
         source: crate::upstream_reviews::Source,
     ) -> Result<Option<(i64, crate::upstream_reviews::Record)>, Box<dyn std::error::Error>> {
-        self.latest_upstream_raw_snapshot(source)?
+        self.upstream_snapshot_at(source, None)
+    }
+    pub fn upstream_generation(
+        &self,
+        source: crate::upstream_reviews::Source,
+        generation: i64,
+    ) -> Result<Option<(i64, crate::upstream_reviews::Record)>, Box<dyn std::error::Error>> {
+        if generation < 1 {
+            return Err("Invalid upstream archive generation".into());
+        }
+        self.upstream_snapshot_at(source, Some(generation))
+    }
+    fn upstream_snapshot_at(
+        &self,
+        source: crate::upstream_reviews::Source,
+        generation: Option<i64>,
+    ) -> Result<Option<(i64, crate::upstream_reviews::Record)>, Box<dyn std::error::Error>> {
+        self.upstream_raw_snapshot_at(source, generation)?
             .map(|(generation, payload)| {
                 if generation < 1 {
                     return Err("Invalid upstream archive generation".into());
@@ -187,7 +204,14 @@ impl SnapshotStore {
         &self,
         source: crate::upstream_reviews::Source,
     ) -> rusqlite::Result<Option<(i64, String)>> {
-        self.0.query_row("SELECT generation,CASE WHEN typeof(payload)='text' AND octet_length(payload)>4194304 THEN NULL ELSE payload END FROM snapshots WHERE provider='github-upstream' AND canonical_id=?1 ORDER BY generation DESC LIMIT 1",[source.id()],|r| {
+        self.upstream_raw_snapshot_at(source, None)
+    }
+    fn upstream_raw_snapshot_at(
+        &self,
+        source: crate::upstream_reviews::Source,
+        generation: Option<i64>,
+    ) -> rusqlite::Result<Option<(i64, String)>> {
+        self.0.query_row("SELECT generation,CASE WHEN typeof(payload)='text' AND octet_length(payload)>4194304 THEN NULL ELSE payload END FROM snapshots WHERE provider='github-upstream' AND canonical_id=?1 AND (?2 IS NULL OR generation=?2) ORDER BY generation DESC LIMIT 1",params![source.id(),generation],|r| {
             let body:String=r.get(1)?;
             if body.len()>crate::upstream_reviews::MAX_BODY as usize {
                 return Err(rusqlite::Error::FromSqlConversionFailure(1,rusqlite::types::Type::Text,Box::new(std::io::Error::new(std::io::ErrorKind::InvalidData,"Stored upstream payload exceeds read budget"))));
@@ -275,6 +299,14 @@ impl SnapshotStore {
     ) -> Result<ProjectHistoryPage, Box<dyn std::error::Error>> {
         crate::modrinth_versions::versions_url(&[id.to_owned()])?;
         self.archive_history("modrinth-version", id, before, limit)
+    }
+    pub fn upstream_history(
+        &self,
+        source: crate::upstream_reviews::Source,
+        before: Option<i64>,
+        limit: usize,
+    ) -> Result<ProjectHistoryPage, Box<dyn std::error::Error>> {
+        self.archive_history("github-upstream", source.id(), before, limit)
     }
     fn archive_history(
         &self,
