@@ -86,6 +86,10 @@ fn run() -> Result<()> {
                 serde_json::to_string(&Store::open(p)?.assign_native(&v)?)?
             );
         }
+        "list-native-soundtracks" if args.len() == 3 => println!(
+            "{}",
+            serde_json::to_string(&Store::open(p)?.soundtrack_library()?)?
+        ),
         "read-native-versioned" if args.len() == 5 => println!(
             "{}",
             serde_json::to_string(&Store::open(p)?.soundtrack_versioned(&args[3], &args[4])?)?

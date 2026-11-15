@@ -185,3 +185,11 @@ Optional `assetLibrary` (`--disable-foundry-module assetLibrary`) adapts origina
 Adding explicitly adopts existing format6 for older rooms and supplies only the appropriate defaults for formats6–11. Existing objects, room data, presets and environment targets are retained. A dangling target is never repaired by reusing its deleted ID; UUID/current-target collisions fail. The room cap is100 instances. One addition creates one Undo step. Catalog selection/update is not a persistence operation, and removed/stale room buttons cannot add to the next room.
 
 Tests: `node --test native/foundry/tests/asset-library.test.mjs` with the current native CLI via `ATHENA_FOUNDRY_STORE_BINARY`; includes actual mounted add/edit to SQLite save/reopen. Actual Chromium: `CHROMIUM_PATH=/path/to/headless_shell node scripts/test_foundry_asset_library_browser.cjs`, using neutral catalog objects and no external requests.
+
+## Native soundtrack library
+
+`athena-foundry-store list-native-soundtracks SELECTED.sqlite3` returns all stored bookmark records in deterministic `(theme_id, room_id)` order. Each entry uses the same `{value, version}` contract as the existing per-room read, preserving source provenance and exact optional milliseconds. A single read transaction covers enumeration and validation, so concurrent writers cannot produce a mixed-generation library. Schemas4–15 are supported; older schemas require explicit upgrade, not automatic migration. Empty is `[]`. More than1000 records or any invalid record fails the complete operation rather than returning a partial library. This is not a pagination API.
+
+The existing local profile also exposes `GET /__native/soundtracks`, requiring the same native header/host/origin admission as per-room metadata. Query parameters are not accepted. Existing4MB response and15-second subprocess limits remain. The endpoint is read-only and opens no provider/player. Public Pages do not call it. No settings, capabilities, sign-in or network permissions are expanded.
+
+This enables native cross-room library access without knowing each room in advance. It does not yet add an app-wide library panel, provider search, playback, or source-deletion readiness. Stored URLs/labels are private local metadata and should not be published.
