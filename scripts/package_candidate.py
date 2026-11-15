@@ -135,7 +135,7 @@ def extract(archive,destination,expected_sha):
         if len(infos)>2000:raise ValueError('Archive entry bound exceeded')
         for i in infos:
             name=pathlib.PurePosixPath(i.filename);size+=i.file_size
-            if not safe_name(i.filename) or i.filename.casefold() in names or i.is_dir() or ((i.external_attr>>16)&0o170000)!=0o100000:raise ValueError('Unsafe archive entry')
+            if i.orig_filename!=i.filename or not safe_name(i.orig_filename) or not safe_name(i.filename) or i.filename.casefold() in names or i.is_dir() or ((i.external_attr>>16)&0o170000)!=0o100000:raise ValueError('Unsafe archive entry')
             names.add(i.filename.casefold())
         if size>600*1024*1024:raise ValueError('Archive byte bound exceeded')
         destination.mkdir(mode=0o700)

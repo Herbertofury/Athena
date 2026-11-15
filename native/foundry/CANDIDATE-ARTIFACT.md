@@ -50,3 +50,9 @@ needed an uncached other-target crate; host filtering resolved the issue without
 download. Synthetic archive tests verify deterministic packaging, integrity,
 exclusive destinations, unsafe Windows paths and license refusals. Hosted exact
 Windows/Linux results remain required; this note is not evidence of their success.
+
+Initial hosted run 43735482109 passed the Linux extracted-candidate workflow but
+failed the Windows hostile-name regression: Python ZipInfo normalized a backslash
+name before validation. The fixture now writes the literal hostile name, and the
+extractor validates the original name and refuses any normalization difference.
+This failure is retained; corrected exact Windows/Linux CI is required.

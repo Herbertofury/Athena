@@ -21,7 +21,7 @@ class CandidateArchive(unittest.TestCase):
   for n,name in enumerate(('../escape','C:stream','C:/escape','//host/share','a\\b','CON','a./file','nul.txt','COM¹','CONOUT$','file?')):
    archive=self.root/f'bad{n}.zip'
    with zipfile.ZipFile(archive,'w') as z:
-    info=zipfile.ZipInfo(name);info.external_attr=0o100600<<16;z.writestr(info,b'x')
+    info=zipfile.ZipInfo('placeholder');info.filename=name;info.orig_filename=name;info.external_attr=0o100600<<16;z.writestr(info,b'x')
    self.assertRaises(ValueError,c.extract,archive,self.root/f'out{n}',c.sha(archive));self.assertFalse((self.root/f'out{n}').exists())
  def test_unreviewed_license_and_missing_notices_refuse(self):
   data=json.loads(self.metadata.read_text());data['packages'][0]['license']='GPL-3.0';self.metadata.write_text(json.dumps(data))
