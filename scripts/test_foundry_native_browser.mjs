@@ -214,6 +214,14 @@ try {
   assert.ok(await page.locator('audio,video').evaluateAll(nodes=>nodes.every(node=>node.paused)));
   assert.equal(report.externalRequests.length,beforeExternal,'bookmark workflow must not request a provider');
  });
+ await check('Explicit stopped-profile backup preserves native workspace and soundtrack library',async()=>{
+  await stopBridge();
+  const before=fs.readFileSync(db),backup=path.join(temporary,'native-backup.sqlite');
+  const savedWorkspace=cli('load-backup'),savedMusic=cli('list-native-soundtracks');
+  const receipt=JSON.parse(execFileSync(pythonCommand,[path.join(portable,'launch.py'),'--backup-database',db,'--backup-destination',backup,'--source-quiescent'],{cwd:temporary,encoding:'utf8',timeout:60000}));
+  assert.equal(receipt.backed_up,true);assert.equal(receipt.restored,false);assert.deepEqual(fs.readFileSync(db),before);
+  for(const [command,expected] of [['load-backup',savedWorkspace],['list-native-soundtracks',savedMusic]])assert.equal(execFileSync(binaryPath,[command,backup],{encoding:'utf8',timeout:15000}),expected);
+ });
  assert.deepEqual(report.errors,[]);
  await page.screenshot({path:path.join(out,'native-profile.png'),fullPage:true});
  report.passed=true;

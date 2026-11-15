@@ -20,7 +20,7 @@ def verify(root):
         with path.open('rb') as stream:
             while chunk:=stream.read(1024*1024):h.update(chunk)
         if h.hexdigest()!=entry['sha256']:raise ValueError('Integrity mismatch')
-    if not {expected_binary,'bridge.py','launch.py'}<=names:raise ValueError('Incomplete package')
+    if not {expected_binary,'bridge.py','launch.py','sqlite_backup.py'}<=names:raise ValueError('Incomplete package')
     actual={p.relative_to(root).as_posix() for p in root.rglob('*') if p.is_file() or p.is_symlink()}
     if actual!=names|{'native-package.json'}:raise ValueError('Unexpected package content')
     return data
@@ -48,15 +48,39 @@ def create_database(root,data,destination):
         os.link(staged,destination)
     return {'created':True,'schema':15,'integrity':'ok','existing_database_modified':False}
 
+def backup_database(root,data,source,destination,quiescent=False):
+    root=pathlib.Path(root).absolute();source=pathlib.Path(source).absolute();destination=pathlib.Path(destination).absolute()
+    if not quiescent:raise ValueError('Stop source writes and assert quiescence')
+    for path in (source,destination):
+        if root in path.parents or any(p.is_symlink() for p in (path,*path.parents)):raise ValueError('External non-symlink paths required')
+    if not source.is_file() or not destination.parent.is_dir() or os.path.lexists(destination):raise ValueError('Existing source and new destination required')
+    if str(destination) in {str(source)+suffix for suffix in ('','-wal','-shm','-journal')}:raise ValueError('Source aliases refused')
+    with tempfile.TemporaryDirectory(prefix='.athena-backup-',dir=destination.parent) as temporary:
+        staged=pathlib.Path(temporary)/'backup.sqlite3'
+        result=subprocess.run([sys.executable,'-B',str(root/'sqlite_backup.py'),'--source',str(source),'--destination',str(staged),'--scratch',temporary,'--source-quiescent'],capture_output=True,timeout=30,check=True)
+        receipt=json.loads(result.stdout.decode('utf-8',errors='strict'))
+        status_result=subprocess.run([str(root/data['binary']),'status',str(staged)],capture_output=True,timeout=15,check=True)
+        status=json.loads(status_result.stdout.decode('utf-8',errors='strict'))
+        if status.get('integrity')!='ok' or not 2<=status.get('schema',0)<=15:raise ValueError('Native backup not verified')
+        if any(os.path.lexists(str(staged)+suffix) for suffix in ('-wal','-shm','-journal')):raise ValueError('Backup not standalone')
+        if hashlib.sha256(staged.read_bytes()).hexdigest()!=receipt.get('destination_sha256'):raise ValueError('Backup changed after preparation')
+        os.link(staged,destination)
+    return {'backed_up':True,'schema':status['schema'],'integrity':'ok','bytes':receipt['destination_bytes'],
+        'sha256':receipt['destination_sha256'],'source_unchanged_at_checks':receipt['source_unchanged_at_checks'],
+        'source_wal_present':receipt['source_wal_present'],'restored':False}
+
 def main():
     sys.dont_write_bytecode=True
-    p=argparse.ArgumentParser(description=__doc__);p.add_argument('--database');p.add_argument('--create-database');p.add_argument('--verify-only',action='store_true');a=p.parse_args()
+    p=argparse.ArgumentParser(description=__doc__);p.add_argument('--database');p.add_argument('--create-database');p.add_argument('--backup-database');p.add_argument('--backup-destination');p.add_argument('--source-quiescent',action='store_true');p.add_argument('--verify-only',action='store_true');a=p.parse_args()
     root=pathlib.Path(__file__).resolve().parent
     try:
         data=verify(root)
-        if sum((bool(a.database),bool(a.create_database),a.verify_only))!=1:raise ValueError('Choose one operation')
+        if sum((bool(a.database),bool(a.create_database),bool(a.backup_database),a.verify_only))!=1:raise ValueError('Choose one operation')
+        if bool(a.backup_database)!=bool(a.backup_destination) or (a.source_quiescent and not a.backup_database):raise ValueError('Backup arguments required together')
         if a.verify_only:print('Package file integrity verified; no executable or database opened.');return
         if (sys.platform=='win32')!=(data['platform']=='windows') or sys.platform not in ('win32','linux'):raise ValueError('Platform mismatch')
+        if a.backup_database:
+            print(json.dumps(backup_database(root,data,a.backup_database,a.backup_destination,a.source_quiescent)));return
         if a.create_database:
             print(json.dumps(create_database(root,data,a.create_database)));return
         if not a.database:raise ValueError('Explicit database required')

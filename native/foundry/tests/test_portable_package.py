@@ -10,7 +10,7 @@ class PortableTests(unittest.TestCase):
   receipt=self.build();self.assertFalse(receipt['database_included']);self.assertEqual(launch.verify(self.output),receipt)
   result=subprocess.run([sys.executable,'-B',str(self.output/'launch.py'),'--verify-only'],cwd=self.root,capture_output=True,text=True)
   self.assertEqual(result.returncode,0,result.stderr);self.assertIn('no executable or database opened',result.stdout);self.assertFalse((self.output/'__pycache__').exists())
-  manifest=json.loads((ROOT/'config/runtime-public-preview.json').read_text());self.assertEqual(len(receipt['files']),len(manifest['files'])+3)
+  manifest=json.loads((ROOT/'config/runtime-public-preview.json').read_text());self.assertEqual(len(receipt['files']),len(manifest['files'])+4)
   for row in manifest['files']:self.assertEqual((self.output/'runtime'/row['path']).read_bytes(),(ROOT/'dist'/row['path']).read_bytes())
  def test_refuse_existing_destination_and_wrong_binary_hash(self):
   with self.assertRaises(ValueError):pack.package(ROOT/'dist',self.binary,'0'*64,self.output,'linux')

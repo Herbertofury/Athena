@@ -275,3 +275,41 @@ native creator; Windows ACL privacy and sudden-power-loss publication durability
 remain separate acceptance concerns. Synthetic regressions cover actual native
 creation/reopen, timeout cleanup, concurrent destination, unsupported hard links
 and path refusal. Hosted UI acceptance uses this explicit first-run command.
+
+### Whole native database backup outside the checkout
+
+Stop Athena and every other writer to the selected database first, then explicitly
+request a new private backup:
+
+```sh
+python3 /portable-athena/launch.py --backup-database /private/athena.sqlite3 --backup-destination /private/new-backup.sqlite3 --source-quiescent
+```
+
+This uses the existing reviewed SQLite recovery helper, included byte-for-byte and
+covered by package hashes. It captures the database and available WAL/SHM bytes
+under the existing combined64MiB budget, detects changes across repeated captures,
+and refuses rollback journals. SQLite opens only disposable staged copies, never
+the original. The helper prepares and integrity-checks a standalone snapshot;
+the native executable checks its supported schema/integrity before exclusive
+publication. All tables are preserved, including workspace history, soundtracks
+and catalog metadata, unlike a workspace-only JSON export. No restore is performed.
+
+The quiescence flag is an operator assertion, **not a live-backup guarantee**.
+Byte comparisons cannot defeat a concurrent writer or an attacker changing and
+restoring files between checks. There is no global source lock; do not use this
+while the app is running. Capture/preparation is bounded by30 seconds, native
+validation by15 seconds. Existing targets, source/sidecar aliases, symlinks,
+internal package paths and unsupported hard links refuse. Failures remove only
+owned temporary staging; sources and racing destinations stay untouched.
+
+The receipt prints checksum/size and verification states, not labels or records.
+The backup itself contains private application data; keep it private and review
+before sharing. POSIX creation modes are retained; Windows ACL and power-loss
+publication durability are not certified. No credential/session discovery or
+source-repository deletion is part of this operation.
+
+Synthetic tests compare the complete SQL contents of a populated WAL-backed native
+store with its backup and verify original DB/WAL/SHM hashes remain unchanged. They
+also cover CLI use, corruption, quiescence, timeout cleanup, destination races and
+no-overwrite. The hosted portable browser flow verifies a stopped-profile backup
+retains the workspace and soundtrack library written through the actual UI.

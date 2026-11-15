@@ -44,6 +44,7 @@ def package(source,binary,expected_sha,output,platform):
     if os.name=='posix':(output/exe).chmod(0o700)
     copy(ROOT/'native/foundry/bridge.py','bridge.py')
     copy(ROOT/'native/foundry/portable_launcher.py','launch.py')
+    copy(ROOT/'tools/foundry-recovery/sqlite/prepare.py','sqlite_backup.py')
     receipt={'schema':1,'platform':platform,'binary':exe,'files':files,'database_included':False,
         'limits':'File integrity only, not binary authenticity, owner-device acceptance or complete migration.'}
     (output/'native-package.json').write_text(json.dumps(receipt,indent=2)+'\n',encoding='utf-8')
