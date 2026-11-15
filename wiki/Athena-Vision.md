@@ -1,0 +1,19 @@
+# Athena: product vision
+
+**A beautiful personal home for learning, building and improving every project.** Athena is intended to be a polished, fast, cohesive product for its owner's daily work, not a collection of embedded apps or a catalog pretending to be an application.
+
+## What belongs here
+
+- **Learn and experiment continuously.** Teaching, practical labs, research, new capabilities and deeper understanding are first-class work, not optional extras sacrificed for visual polish.
+- **Build once, reuse well.** Organize reusable features, components, adapters, UI patterns, themes, project decisions and evidence so projects do not repeatedly rebuild the same capabilities. Retain provenance and compatibility requirements.
+- **One native product.** Reconcile useful capabilities from Engineering-Atlas, Feature Foundry, Feature Forge and Project Constellation into Athena's navigation, data, search and workflows. Preserve capability and history rather than their names, separate shells or embedded applications.
+- **Beautiful and genuinely responsive.** Aim for distinctive, refined desktop-quality visual design with accessible typography, thoughtful motion and high information density. Measure input and scroll latency, memory, durable storage and complete real workflows; beauty must not conceal slow or fragile behavior.
+- **Challenge the current favorite.** Existing Foundry themes, user inspiration and new releases are candidates, not unquestionable authority. Compare alternatives against the actual workload, preserve failures and last-good results, and improve or replace designs when evidence supports it. Popularity, novelty and generated microbenchmarks alone do not prove superiority.
+- **Inform and empower.** Explain evidence, uncertainty, risks and reversible choices without arbitrary product restrictions. The user remains in control. Respect actual permission, privacy, licensing and platform boundaries; do not mistake an uncertain recommendation for a mandatory block.
+- **A shared knowledge ecosystem, not one oversized repository.** [Modding-Knowledge](https://github.com/Herbertofury/Modding-Knowledge) owns the shared structured modding databases. Athena and other apps should consume versioned shared interfaces rather than copy or rebuild those databases. The wiki documents and navigates real data; it is not a substitute for it.
+
+## Direction is not a completion claim
+
+This page defines the product goal, not delivered feature parity. Learning, Engineering and reviewed Foundry authoring already share the Athena shell; native integration remains partial. The optional local engines have explicit startup and access boundaries. Full source-capability parity, user-data migration, dependency reconciliation and final native acceptance are unfinished. Check [integration evidence](https://github.com/Herbertofury/Athena/blob/main/docs/integration/STATUS.md) for identified revisions, tests and remaining gates.
+
+The highest delivery priority is completing native Athena integration while keeping learning and evidence-led R&D active. Source repositories remain preserved until capabilities, history, wiki/evidence, links, data, tests and dependencies have been reconciled and verified. Each source needs its own deletion-readiness verdict. A merged PR, attractive preview or passing unit test alone is not that verdict; this page does not authorize or announce source deletion.
