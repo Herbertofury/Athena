@@ -99,13 +99,19 @@ def main():
    receipt=json.loads(result.stdout);assert receipt['complete'] and not receipt['atomic_live_snapshot'] and not receipt['restored'];assert source_hashes()==original
    assert json.loads((checkpoint/'checkpoint.json').read_text())==receipt
    for name,row in receipt['stores'].items():assert hashlib.sha256((checkpoint/name).read_bytes()).hexdigest()==row['sha256']
-   # Open only the synthetic copies to verify actual native and Engineering parity.
-   command=[sys.executable,'-B',str(package/'launch.py'),'--database',str(checkpoint/'foundry.sqlite3'),'--journal',str(checkpoint/'engineering.sqlite3')]
+   preserved={path.name:hashlib.sha256(path.read_bytes()).hexdigest() for path in checkpoint.iterdir()}
+   working=root/'working-pair'
+   fork=subprocess.run([sys.executable,'-B',str(package/'launch.py'),'--fork-checkpoint',str(checkpoint),'--working-directory',str(working),'--source-quiescent'],capture_output=True,timeout=90,check=True)
+   assert json.loads(fork.stdout)['parent_checkpoint_sha256']==preserved['checkpoint.json']
+   # Open only the fork, leaving the preserved checkpoint pair unchanged.
+   command=[sys.executable,'-B',str(package/'launch.py'),'--database',str(working/'foundry.sqlite3'),'--journal',str(working/'engineering.sqlite3')]
    p=start()
    try:
     assert json.loads(request('GET','/__native/backup',headers=h)[2])==json.loads(payload)
     assert 'succeeded' in request('GET','/api/overview')[2]
    finally:stop(p)
-   assert source_hashes()==original;checkpoint_verified=True
-  print(json.dumps({'passed':True,'portable_launcher':portable,'dual_checkpoint_verified':checkpoint_verified,'scope':'actual local dual-store process, synthetic workspace and built-in dedup job; not browser or owner data','engine_sha256':hashlib.sha256(ENGINE.read_bytes()).hexdigest(),'checks':['symmetric DB/sidecar and hardlink refusal','pre-body unauthorized and duplicate-header rejection','oversize length rejection','four-slot slow-body admission and deadline','native and Atlas guards remain distinct','workspace compare-save and stale conflict','revision history','bounded offline job','both stores persist across process restart']}))
+   assert source_hashes()==original
+   assert {path.name:hashlib.sha256(path.read_bytes()).hexdigest() for path in checkpoint.iterdir()}==preserved
+   checkpoint_verified=True
+  print(json.dumps({'passed':True,'portable_launcher':portable,'dual_checkpoint_verified':checkpoint_verified,'checkpoint_fork_verified':checkpoint_verified,'scope':'actual local dual-store process, synthetic workspace and built-in dedup job; not browser or owner data','engine_sha256':hashlib.sha256(ENGINE.read_bytes()).hexdigest(),'checks':['symmetric DB/sidecar and hardlink refusal','pre-body unauthorized and duplicate-header rejection','oversize length rejection','four-slot slow-body admission and deadline','native and Atlas guards remain distinct','workspace compare-save and stale conflict','revision history','bounded offline job','both stores persist across process restart']}))
 if __name__=='__main__':main()

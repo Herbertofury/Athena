@@ -147,7 +147,7 @@ def backup_database(root,data,source,destination,quiescent=False,upgrade=False):
         'sha256':final_sha,'source_unchanged_at_checks':receipt['source_unchanged_at_checks'],
         'source_wal_present':receipt['source_wal_present'],'sqlite_runtime':receipt['sqlite_runtime'],'restored':False}
 
-def checkpoint_stores(root,data,native,journal,destination,quiescent=False):
+def checkpoint_stores(root,data,native,journal,destination,quiescent=False,expected_source_hashes=None,parent_checkpoint_sha256=None):
     """Explicit stopped-source copies, not an atomic live snapshot or restore."""
     if not quiescent or data.get('profile')!='unified':raise ValueError('Stopped unified profile required')
     root=pathlib.Path(root).absolute();sources=[external_path(native),external_path(journal)];destination=external_path(destination)
@@ -170,6 +170,7 @@ def checkpoint_stores(root,data,native,journal,destination,quiescent=False):
     capture=types.ModuleType('athena_checkpoint_capture')
     exec(compile((root/'sqlite_backup.py').read_bytes(),'sqlite_backup.py','exec'),capture.__dict__)
     identities=[capture.digest(capture.capture(path)) for path in sources]
+    if expected_source_hashes is not None and identities!=expected_source_hashes:raise ValueError('Checkpoint changed after receipt verification')
     names=('foundry.sqlite3','engineering.sqlite3');receipts=[]
     with tempfile.TemporaryDirectory(prefix='.athena-checkpoint-',dir=destination.parent) as temporary:
         stage=pathlib.Path(temporary)
@@ -191,6 +192,7 @@ def checkpoint_stores(root,data,native,journal,destination,quiescent=False):
         result={'schema':1,'complete':True,'private_user_data':True,'source_unchanged_at_checks':True,'atomic_live_snapshot':False,'restored':False,'native_schema':15,
                 'engineering_validation':'SQLite integrity only; semantic/native acceptance remains separate',
                 'stores':{name:{'sha256':receipt['destination_sha256'],'bytes':receipt['destination_bytes'],'source_file_hashes':receipt['source_file_hashes'],'source_wal_present':receipt['source_wal_present'],'sqlite_runtime':receipt['sqlite_runtime']} for name,receipt in zip(names,receipts)}}
+        if parent_checkpoint_sha256 is not None:result['parent_checkpoint_sha256']=parent_checkpoint_sha256
         # Exclusive directory. Completion marker is linked last; any partial new
         # directory on failure is retained for inspection, never called complete.
         marker=stage/'checkpoint.json'
@@ -200,14 +202,68 @@ def checkpoint_stores(root,data,native,journal,destination,quiescent=False):
         for name in (*names,'checkpoint.json'):os.link(stage/name,destination/name)
     return result
 
+def verify_checkpoint(directory):
+    """Read a bounded unsigned integrity receipt; never treat receipt paths as authority."""
+    directory=external_path(directory)
+    if not directory.is_dir() or any(link_or_reparse(p) for p in (directory,*directory.parents)):raise ValueError('Ordinary checkpoint directory required')
+    expected={'foundry.sqlite3','engineering.sqlite3','checkpoint.json'};observed=set()
+    with os.scandir(directory) as entries:
+        for entry in entries:
+            if entry.name not in expected or entry.name in observed:raise ValueError('Unexpected checkpoint content')
+            metadata=entry.stat(follow_symlinks=False)
+            if not stat.S_ISREG(metadata.st_mode) or getattr(metadata,'st_file_attributes',0)&0x400:raise ValueError('Checkpoint links refused')
+            observed.add(entry.name)
+    if observed!=expected:raise ValueError('Incomplete checkpoint')
+    marker=directory/'checkpoint.json'
+    if marker.stat().st_size>1024*1024:raise ValueError('Checkpoint receipt too large')
+    with marker.open('rb') as stream:payload=stream.read(1024*1024+1)
+    if len(payload)>1024*1024:raise ValueError('Checkpoint receipt too large')
+    def unique(pairs):
+        result={}
+        for key,value in pairs:
+            if key in result:raise ValueError('Duplicate receipt key')
+            result[key]=value
+        return result
+    receipt=json.loads(payload.decode('utf-8'),object_pairs_hook=unique)
+    if not isinstance(receipt,dict) or type(receipt.get('schema')) is not int or receipt['schema']!=1 or receipt.get('complete') is not True:raise ValueError('Unsupported checkpoint receipt')
+    stores=receipt.get('stores')
+    if not isinstance(stores,dict) or set(stores)!=expected-{'checkpoint.json'}:raise ValueError('Invalid checkpoint stores')
+    # Validate every row before reading either database. Output names are fixed.
+    for row in stores.values():
+        if not isinstance(row,dict) or type(row.get('bytes')) is not int or not 16<=row['bytes']<=64*1024*1024:raise ValueError('Invalid checkpoint size')
+        if not isinstance(row.get('sha256'),str) or not re.fullmatch('[0-9a-f]{64}',row['sha256']):raise ValueError('Invalid checkpoint digest')
+    for name,row in stores.items():
+        path=directory/name
+        if path.stat().st_size!=row['bytes']:raise ValueError('Checkpoint size mismatch')
+        digest=hashlib.sha256();remaining=row['bytes']
+        with path.open('rb') as stream:
+            while remaining:
+                chunk=stream.read(min(1024*1024,remaining))
+                if not chunk:raise ValueError('Checkpoint changed')
+                remaining-=len(chunk);digest.update(chunk)
+            if stream.read(1):raise ValueError('Checkpoint changed')
+        if digest.hexdigest()!=row['sha256']:raise ValueError('Checkpoint hash mismatch')
+    return receipt,hashlib.sha256(payload).hexdigest()
+
+def fork_checkpoint(root,data,source,destination,quiescent=False):
+    if not quiescent:raise ValueError('Stop all checkpoint writers first')
+    source=external_path(source);destination=external_path(destination)
+    if source==destination or source in destination.parents:raise ValueError('Working directory must be outside preserved checkpoint')
+    receipt,parent_digest=verify_checkpoint(source)
+    names=('foundry.sqlite3','engineering.sqlite3')
+    expected=[{'':receipt['stores'][name]['sha256']} for name in names]
+    return checkpoint_stores(root,data,source/names[0],source/names[1],destination,True,expected,parent_digest)
+
 def main():
     sys.dont_write_bytecode=True
-    p=argparse.ArgumentParser(description=__doc__);p.add_argument('--database');p.add_argument('--journal');p.add_argument('--checkpoint-directory');p.add_argument('--create-database');p.add_argument('--backup-database');p.add_argument('--upgrade-copy');p.add_argument('--backup-destination');p.add_argument('--source-quiescent',action='store_true');p.add_argument('--verify-only',action='store_true');a=p.parse_args()
+    p=argparse.ArgumentParser(description=__doc__);p.add_argument('--database');p.add_argument('--journal');p.add_argument('--checkpoint-directory');p.add_argument('--fork-checkpoint');p.add_argument('--working-directory');p.add_argument('--create-database');p.add_argument('--backup-database');p.add_argument('--upgrade-copy');p.add_argument('--backup-destination');p.add_argument('--source-quiescent',action='store_true');p.add_argument('--verify-only',action='store_true');a=p.parse_args()
     root=pathlib.Path(__file__).resolve().parent
     try:
         data=verify(root)
-        if sum((bool(a.database),bool(a.create_database),bool(a.backup_database),bool(a.upgrade_copy),a.verify_only))!=1:raise ValueError('Choose one operation')
-        if bool(a.backup_database or a.upgrade_copy)!=bool(a.backup_destination) or (a.source_quiescent and not (a.backup_database or a.upgrade_copy or a.checkpoint_directory)):raise ValueError('Backup arguments required together')
+        if sum((bool(a.database),bool(a.create_database),bool(a.backup_database),bool(a.upgrade_copy),bool(a.fork_checkpoint),a.verify_only))!=1:raise ValueError('Choose one operation')
+        if bool(a.backup_database or a.upgrade_copy)!=bool(a.backup_destination) or (a.source_quiescent and not (a.backup_database or a.upgrade_copy or a.checkpoint_directory or a.fork_checkpoint)):raise ValueError('Backup arguments required together')
+        if bool(a.fork_checkpoint)!=bool(a.working_directory):raise ValueError('Fork requires a new working directory')
+        if a.fork_checkpoint and (a.journal or a.checkpoint_directory or not a.source_quiescent):raise ValueError('Fork requires stopped source and no unrelated arguments')
         if a.checkpoint_directory and not (a.database and a.journal and a.source_quiescent):raise ValueError('Checkpoint requires both existing stores and stopped-source assertion')
         if a.journal and not a.database:raise ValueError('Journal requires explicit native database')
         if a.database and bool(a.journal)!=bool(data.get('engine')):raise ValueError('Unified profile requires both stores; standalone profile has no journal')
@@ -215,6 +271,8 @@ def main():
             print('Package file integrity verified; no executable or database opened.')
             print(json.dumps({'python_sqlite':sqlite3.sqlite_version,'wal_recovery_allowed':sqlite3.sqlite_version_info >= (3,54,0)}));return
         if (sys.platform=='win32')!=(data['platform']=='windows') or sys.platform not in ('win32','linux'):raise ValueError('Platform mismatch')
+        if a.fork_checkpoint:
+            print(json.dumps(fork_checkpoint(root,data,a.fork_checkpoint,a.working_directory,a.source_quiescent)));return
         if a.backup_database or a.upgrade_copy:
             print(json.dumps(backup_database(root,data,a.backup_database or a.upgrade_copy,a.backup_destination,a.source_quiescent,upgrade=bool(a.upgrade_copy))));return
         if a.create_database:
