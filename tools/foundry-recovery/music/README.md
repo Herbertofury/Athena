@@ -21,3 +21,17 @@ Provider, URL, label, status and optional sourceId are preserved. Original UTC m
 The original hub route is retained in the capsule, not imported into Athena navigation. This does not migrate Spotify session tokens, PKCE, MusicKit credentials, provider libraries, playback state or private assets, and does not establish full source retirement readiness. Preserve original capsules and backups.
 
 Tests: `python3 -m unittest discover -s tools/foundry-recovery/music -v`; native migration, atomicity, metadata precision and conflict checks run in normal `cargo test`.
+
+## Reconcile imported bookmarks without writing the database
+
+Stop database writers and select a **standalone schema15 snapshot**, retaining all originals. Active WAL/SHM/journal sidecars are refused; prepare a separate backup first using the existing SQLite recovery tool. Do not delete sidecars to make this command pass.
+
+```
+python3 tools/foundry-recovery/music/reconcile.py --source original-music.json --mapping reviewed-contexts.json --database standalone-native.sqlite3 --source-quiescent
+```
+
+The command reuses the converter, captures bounded snapshot bytes with the existing recovery reader, and opens only an in-memory SQLite copy. It compares every mapped room's provider, URL, label, status, optional provenance and both timestamp fields. It prints **counts only**: exact, missing or different. Additional native rooms are not treated as errors; this verifies only the explicitly mapped original set. Zero mapped records is vacuous, not evidence of complete migration. Exit0 means all mapped records match;1 means differences/missing records;2 means verification could not complete. No automatic import, overwrite, upgrade, repair or provider request occurs.
+
+Inputs are checked again after reading; changed inputs refuse a result. Database size is bounded by the shared64MiB capture limit, source/mapping by1MiB each, and SQLite execution by a five-second progress deadline. Checksums and quiescence assertions do not defeat malicious concurrent replacement or establish provenance/authenticity. Requires Python SQLite `deserialize` support. The report never certifies playback, credentials, original hub routing, unrelated application data or source-repository retirement.
+
+Six synthetic CLI/unit regressions cover exact, missing/different, sidecars, quiescence, schema/corruption, changed capture and malformed input with byte-preservation checks. The all-room acceptance also calls reconciliation on the real Rust-created schema15 store. Hosted Windows/Linux tests qualify the exact compiled source; local existing-binary results alone are not that qualification.
