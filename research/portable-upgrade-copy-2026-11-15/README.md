@@ -24,6 +24,11 @@ for existing native schema checkpoints without touching held runtime assets.
   Corrected to the published `load-backup` command; failed local log retained.
   No application behavior was weakened to pass that harness.
 
+- Initial hosted Windows run `43716162652` exposed an unclosed SQLite handle
+  in the synthetic source-mutation test, preventing temporary fixture cleanup.
+  The transaction context did not close the connection. Added explicit closing;
+  Linux had passed. Failure evidence is retained; no cleanup errors are ignored.
+
 ## Limits
 
 The source must be stopped. Hash checks detect sampled changes, not a continuous

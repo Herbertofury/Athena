@@ -4,6 +4,7 @@ from test_portable_backup import launch,BINARY,ROOT
 import hashlib,json,pathlib,sqlite3,subprocess,sys
 from unittest.mock import patch
 import unittest
+from contextlib import closing
 class UpgradeTests(base.BackupTests):
  def backup(self,quiescent=True):return launch.backup_database(self.bundle,self.data,self.db,self.out,quiescent,upgrade=True)
  def upgrade(self):return launch.backup_database(self.bundle,self.data,self.db,self.out,True,upgrade=True)
@@ -30,7 +31,7 @@ class UpgradeTests(base.BackupTests):
   def mutate(args,**kw):
    result=real(args,**kw)
    if args[1]=='status' and hasattr(mutate,'seen'):
-    with sqlite3.connect(self.db) as db:db.execute('pragma user_version=14')
+    with closing(sqlite3.connect(self.db)) as db,db:db.execute('pragma user_version=14')
    if args[1]=='status':mutate.seen=True
    return result
   with patch.object(launch.subprocess,'run',side_effect=mutate):
