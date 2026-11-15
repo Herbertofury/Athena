@@ -202,6 +202,42 @@ impl Store {
     pub fn soundtrack_versioned(&self, theme: &str, room: &str) -> Result<VersionedSoundtrack> {
         versioned(theme, room, self.soundtrack_native(theme, room)?)
     }
+    /// Clear one local override only when the caller reviewed its current token.
+    pub fn compare_clear_soundtrack(
+        &mut self,
+        expected: &str,
+        theme: &str,
+        room: &str,
+    ) -> Result<Option<VersionedSoundtrack>> {
+        if !nonempty(theme, 200) || !nonempty(room, 200) {
+            return Err("Invalid room identity".into());
+        }
+        let tx = self
+            .db
+            .transaction_with_behavior(rusqlite::TransactionBehavior::Immediate)?;
+        let known: bool = tx.query_row(
+            "SELECT EXISTS(SELECT 1 FROM rooms WHERE theme_id=?1 AND id=?2)",
+            params![theme, room],
+            |r| r.get(0),
+        )?;
+        if !known {
+            return Err("Unknown room".into());
+        }
+        let current = read_checked(&tx, theme, room)?;
+        let had_value = current.is_some();
+        if versioned(theme, room, current)?.version != expected {
+            return Ok(None);
+        }
+        let result = versioned(theme, room, None)?;
+        if had_value {
+            tx.execute(
+                "DELETE FROM soundtracks WHERE theme_id=?1 AND room_id=?2",
+                params![theme, room],
+            )?;
+            tx.commit()?;
+        }
+        Ok(Some(result))
+    }
     pub fn compare_assign_soundtrack(
         &mut self,
         expected: &str,

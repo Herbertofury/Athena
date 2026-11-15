@@ -197,7 +197,7 @@ class Handler(BaseHTTPRequestHandler):
             finally:self.connection.settimeout(previous)
         return self.reply(code)
     def do_POST(self):
-        if self.path not in ('/__native/backup','/__native/restore','/__native/assign-soundtrack','/__native/legacy-import'):return self.reject_post(404)
+        if self.path not in ('/__native/backup','/__native/restore','/__native/assign-soundtrack','/__native/clear-soundtrack','/__native/legacy-import'):return self.reject_post(404)
         if not self.valid(api=True,mutating=True):return self.reject_post(403)
         # Reject duplicate/empty framing headers before body parsing or CLI dispatch.
         if self.headers.get_all('Content-Type')!=['application/json'] or self.headers.get_all('Transfer-Encoding'):return self.reject_post(415)
@@ -221,6 +221,14 @@ class Handler(BaseHTTPRequestHandler):
             expected=self.headers.get_all('If-Match') or []
             if not expected:return self.reply(428,'{"error":"Load and review native backup before saving"}')
             if len(expected)!=1 or len(expected[0])>80:return self.reply(400)
+            if self.path=='/__native/clear-soundtrack':
+                if self.server.schema not in range(4,16):return self.reply(422,'{"error":"Explicit upgrade-soundtracks required"}')
+                if len(raw)>2048:return self.reply(413)
+                request=json.loads(text)
+                if not isinstance(request,dict) or set(request)!={'theme_id','room_id'}:return self.reply(400)
+                result=json.loads(self.server.cli('compare-clear-soundtrack',json.dumps({'expected':expected[0],**request})))
+                if result is None:return self.reply(409,'{"error":"Room bookmark changed; refresh and review before clearing"}')
+                return self.reply(200,'null',etag=result['version'])
             if self.path=='/__native/assign-soundtrack':
                 if self.server.schema not in (4,5,6,7,8,9,10,11,12,13,14,15):return self.reply(422,'{"error":"Explicit upgrade-soundtracks required"}')
                 if len(raw)>8192:return self.reply(413)
