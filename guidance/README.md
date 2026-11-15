@@ -99,3 +99,37 @@ Git bundle refs retain object IDs, not symbolic alias configuration. The isolate
 restore uses a detached HEAD; branch checkout and symbolic remote-HEAD settings
 need separate restoration if required. This is Git object/history recovery, not
 a complete clone configuration backup.
+
+## Self-contained history recovery capsule
+
+`history_capsule.py` adds the metadata absent from a plain Git bundle: exact local
+ref object IDs, symbolic aliases, attached/detached HEAD and object format. It
+stores those with the bundle in a private ZIP and independently verifies recovery
+before exclusively publishing the new file. It reuses `history_bundle.py` rather
+than changing the earlier bundle or any source repository.
+
+```sh
+python guidance/tools/history_capsule.py create --source /selected/repo --output /outside/source/new-capsule.zip
+python guidance/tools/history_capsule.py verify /selected/capsule.zip
+python guidance/tools/history_capsule.py restore /selected/capsule.zip --destination /new/empty-path.git
+```
+
+Verification needs no original checkout. Restore creates a **new bare repository**,
+never checks out or executes source, refuses existing destinations, restores exact
+symbolic targets/HEAD, checks all object connectivity and compares metadata.
+A failed restore can leave a new partial destination for inspection; do not treat
+it as verified or overwrite an existing repository. The capsule is never changed.
+POSIX destination mode 0700 is requested, not a Windows ACL guarantee.
+
+The ZIP accepts exactly two stored members; encryption, unexpected/duplicate
+members, wrong hashes, unsafe refs and alias cycles are rejected. Budgets are
+32 MiB bundle, 1 MiB manifest and 10,000 refs. Larger collections need an explicit
+larger-capacity design, not truncation. Digests detect internal inconsistency, not
+independent authenticity: an adversary can rewrite both manifest and payload.
+Do not trust or execute a recovered source merely because verification passes.
+
+Names and full historical content are inside the private capsule. Keep it private
+until rights and sensitive-data review; default stdout reports counts/hash only.
+Git LFS content, submodule repositories, working changes, reflogs, unreachable
+objects, remote freshness, wiki, release assets and consumer dependencies remain
+separate gates. This improves history recovery, **not deletion readiness**.
