@@ -20,6 +20,9 @@ class BackupTests(unittest.TestCase):
    source.execute('pragma journal_mode=WAL');source.execute('pragma wal_autocheckpoint=0')
    source.execute("INSERT INTO soundtracks(theme_id,room_id,provider,url,label,status,updated_at) VALUES(?,?,?,?,?,?,?)",('frutiger-aero','frutiger-aero:room:aqua-atrium','youtube','https://music.youtube.com/watch?v=synthetic','PRIVATE SYNTHETIC','ready',1));source.commit()
    expected=list(source.iterdump());before=self.fingerprints();self.assertIn('-wal',before)
+   if sqlite3.sqlite_version_info < (3,54,0):
+    with self.assertRaises(subprocess.CalledProcessError):self.backup()
+    self.assertEqual(before,self.fingerprints());self.assertFalse(self.out.exists());return
    receipt=self.backup();self.assertTrue(receipt['source_wal_present']);self.assertEqual(before,self.fingerprints())
    with closing(sqlite3.connect(self.out)) as backup:self.assertEqual(expected,list(backup.iterdump()))
    self.assertEqual(self.out.read_bytes()[18:20],b'\x01\x01');self.assertFalse(receipt['restored'])

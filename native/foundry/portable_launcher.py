@@ -1,5 +1,5 @@
 """Launch a verified portable package with an explicitly selected external database."""
-import argparse,hashlib,importlib.util,json,pathlib,sys,os,subprocess,tempfile
+import argparse,hashlib,importlib.util,json,pathlib,sys,os,subprocess,tempfile,sqlite3
 
 def verify(root):
     root=pathlib.Path(root).absolute()
@@ -67,7 +67,7 @@ def backup_database(root,data,source,destination,quiescent=False):
         os.link(staged,destination)
     return {'backed_up':True,'schema':status['schema'],'integrity':'ok','bytes':receipt['destination_bytes'],
         'sha256':receipt['destination_sha256'],'source_unchanged_at_checks':receipt['source_unchanged_at_checks'],
-        'source_wal_present':receipt['source_wal_present'],'restored':False}
+        'source_wal_present':receipt['source_wal_present'],'sqlite_runtime':receipt['sqlite_runtime'],'restored':False}
 
 def main():
     sys.dont_write_bytecode=True
@@ -77,7 +77,9 @@ def main():
         data=verify(root)
         if sum((bool(a.database),bool(a.create_database),bool(a.backup_database),a.verify_only))!=1:raise ValueError('Choose one operation')
         if bool(a.backup_database)!=bool(a.backup_destination) or (a.source_quiescent and not a.backup_database):raise ValueError('Backup arguments required together')
-        if a.verify_only:print('Package file integrity verified; no executable or database opened.');return
+        if a.verify_only:
+            print('Package file integrity verified; no executable or database opened.')
+            print(json.dumps({'python_sqlite':sqlite3.sqlite_version,'wal_recovery_allowed':sqlite3.sqlite_version_info >= (3,54,0)}));return
         if (sys.platform=='win32')!=(data['platform']=='windows') or sys.platform not in ('win32','linux'):raise ValueError('Platform mismatch')
         if a.backup_database:
             print(json.dumps(backup_database(root,data,a.backup_database,a.backup_destination,a.source_quiescent)));return
@@ -89,7 +91,7 @@ def main():
         if (sys.platform=='win32')!=(data['platform']=='windows') or sys.platform not in ('win32','linux'):raise ValueError('Platform mismatch')
         spec=importlib.util.spec_from_file_location('athena_portable_bridge',root/'bridge.py');bridge=importlib.util.module_from_spec(spec);spec.loader.exec_module(bridge)
         server=bridge.Bridge(root/data['binary'],database,root/'runtime')
-    except (OSError,ValueError,KeyError,TypeError,subprocess.SubprocessError):p.exit(2,'Launch refused: verify package, platform and external existing database. No automatic repair or existing-database upgrade.\n')
+    except (OSError,ValueError,KeyError,TypeError,subprocess.SubprocessError):p.exit(2,'Launch refused: verify package, platform and external existing database. WAL recovery requires Python SQLite 3.54.0+. No automatic repair or existing-database upgrade.\n')
     print(server.origin+'/#build',flush=True)
     try:server.serve_forever()
     except KeyboardInterrupt:pass

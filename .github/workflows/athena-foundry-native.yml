@@ -25,6 +25,8 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.13'
+      - name: Record actual Python SQLite runtime
+        run: python -c "import json,sqlite3,sys; print(json.dumps({'python':sys.version,'sqlite':sqlite3.sqlite_version,'source_id':sqlite3.connect(':memory:').execute('select sqlite_source_id()').fetchone()[0],'wal_recovery_allowed':sqlite3.sqlite_version_info >= (3,54,0)}))"
       - uses: dtolnay/rust-toolchain@master
         with:
           toolchain: '1.99.1'
