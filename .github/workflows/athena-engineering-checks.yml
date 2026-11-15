@@ -66,6 +66,10 @@ jobs:
       - name: Static checks
         run: cargo +1.99.1 clippy --locked --all-targets -- -D warnings
       - name: Offline unit and differential stress tests
+        id: rust-tests
+        shell: bash
+        env:
+          ATHENA_SYNTHETIC_FAILURE_DIR: ${{ runner.temp }}/athena-synthetic-failures
         run: |
           cargo +1.99.1 test --locked
           cargo +1.99.1 test --locked --example version_validation_lab
@@ -76,6 +80,19 @@ jobs:
           cargo +1.99.1 test --locked --example compact_addressed_lab
           cargo +1.99.1 test --locked --example body_reader_allocations
           cargo +1.99.1 test --locked --example body_reader_http
+      - name: One isolated snapshot contention observation
+        if: ${{ !cancelled() && (steps.rust-tests.outcome == 'success' || steps.rust-tests.outcome == 'failure') }}
+        env:
+          ATHENA_SYNTHETIC_FAILURE_DIR: ${{ runner.temp }}/athena-synthetic-failures
+        run: cargo +1.99.1 test --locked --test persistence concurrent_snapshot_writers_preserve_complete_history_and_attempt_pairing -- --exact --nocapture
+      - name: Retain generated failed snapshot fixtures
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: synthetic-snapshot-failures-${{ matrix.os }}
+          path: ${{ runner.temp }}/athena-synthetic-failures
+          retention-days: 14
+          if-no-files-found: ignore
       - name: Isolated lossless storage candidate checks
         working-directory: engineering/experiments/compressed-snapshot-lab
         run: |
