@@ -1,0 +1,614 @@
+{
+  "reviewed_at": "2026-11-14",
+  "applications": [
+    {
+      "id": "restic",
+      "platforms": [
+        "Windows",
+        "macOS",
+        "Linux",
+        "FreeBSD"
+      ],
+      "pricing_model": "free",
+      "download_url": "https://restic.readthedocs.io/en/stable/020_installation.html",
+      "platform_notes": "Command-line application; the official installation guide covers native binaries and packages for each listed platform.",
+      "sources": [
+        {
+          "url": "https://restic.net/",
+          "label": "Official restic platform, pricing and license overview",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "platforms",
+            "pricing",
+            "license"
+          ]
+        },
+        {
+          "url": "https://restic.readthedocs.io/en/stable/020_installation.html",
+          "label": "Official restic installation guide",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "platforms",
+            "downloads"
+          ]
+        },
+        {
+          "url": "https://github.com/restic/restic",
+          "label": "Official restic repository",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "identity"
+          ]
+        }
+      ],
+      "repository_url": "https://github.com/restic/restic"
+    },
+    {
+      "id": "kopia",
+      "platforms": [
+        "Windows",
+        "macOS",
+        "Linux",
+        "FreeBSD"
+      ],
+      "pricing_model": "unknown",
+      "download_url": "https://kopia.io/docs/installation/",
+      "platform_notes": "GUI and CLI distributions are documented for Windows, macOS and Linux. FreeBSD is documented through ports; this does not imply that KopiaUI is supplied there. Storage providers may charge separately.",
+      "sources": [
+        {
+          "url": "https://kopia.io/",
+          "label": "Official Kopia desktop-platform overview",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "platforms"
+          ]
+        },
+        {
+          "url": "https://kopia.io/docs/installation/",
+          "label": "Official public Kopia installation and download instructions",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "platforms",
+            "downloads"
+          ]
+        },
+        {
+          "url": "https://github.com/kopia/kopia",
+          "label": "Official Kopia repository and Apache license declaration",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "identity",
+            "license"
+          ]
+        }
+      ],
+      "repository_url": "https://github.com/kopia/kopia"
+    },
+    {
+      "id": "duplicati",
+      "platforms": [
+        "Windows",
+        "macOS",
+        "Linux"
+      ],
+      "pricing_model": "freemium",
+      "download_url": "https://duplicati.com/download",
+      "platform_notes": "Desktop backup software supports Windows, macOS and Linux. The optional management console offers free and paid tiers; its proprietary components are distinct from the MIT core.",
+      "sources": [
+        {
+          "url": "https://github.com/duplicati/duplicati",
+          "label": "Official platform and component-license declarations",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "identity",
+            "platforms",
+            "license"
+          ]
+        },
+        {
+          "url": "https://duplicati.com/download",
+          "label": "Official Duplicati downloads",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "downloads"
+          ]
+        },
+        {
+          "url": "https://duplicati.com/pricing",
+          "label": "Official management-console pricing",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "pricing"
+          ]
+        }
+      ],
+      "repository_url": "https://github.com/duplicati/duplicati",
+      "license_kind": "mixed"
+    },
+    {
+      "id": "syncthing",
+      "platforms": [
+        "Windows",
+        "macOS",
+        "Linux",
+        "FreeBSD"
+      ],
+      "pricing_model": "unknown",
+      "download_url": "https://syncthing.net/downloads/",
+      "platform_notes": "The base distribution is a daemon or command-line application with a browser interface. Desktop tray integrations are separate projects and may have different requirements.",
+      "sources": [
+        {
+          "url": "https://syncthing.net/",
+          "label": "Official Syncthing platform and open-source overview",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "platforms",
+            "license"
+          ]
+        },
+        {
+          "url": "https://syncthing.net/downloads/",
+          "label": "Official publicly distributed Syncthing builds",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "platforms",
+            "downloads"
+          ]
+        },
+        {
+          "url": "https://github.com/syncthing/syncthing",
+          "label": "Official Syncthing repository",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "identity"
+          ]
+        }
+      ],
+      "repository_url": "https://github.com/syncthing/syncthing"
+    },
+    {
+      "id": "rclone",
+      "platforms": [
+        "Windows",
+        "macOS",
+        "Linux",
+        "FreeBSD"
+      ],
+      "pricing_model": "unknown",
+      "download_url": "https://rclone.org/downloads/",
+      "platform_notes": "Command-line binaries are available for all listed platforms. The download page documents release-specific OS minimums; cloud-storage service charges remain separate.",
+      "sources": [
+        {
+          "url": "https://rclone.org/downloads/",
+          "label": "Official rclone downloads and OS requirements",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "platforms",
+            "downloads"
+          ]
+        },
+        {
+          "url": "https://github.com/rclone/rclone",
+          "label": "Official rclone repository and free-software license declaration",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "identity",
+            "license"
+          ]
+        }
+      ],
+      "repository_url": "https://github.com/rclone/rclone"
+    },
+    {
+      "id": "freefilesync",
+      "platforms": [
+        "Windows",
+        "macOS",
+        "Linux"
+      ],
+      "pricing_model": "freemium",
+      "download_url": "https://freefilesync.org/download.php",
+      "platform_notes": "Native Windows, macOS and Linux editions. Standard and Donation editions are for private personal use; businesses, organizations and commercial use require Business Edition.",
+      "sources": [
+        {
+          "url": "https://freefilesync.org/faq.php",
+          "label": "Official platforms and edition terms",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "platforms",
+            "license",
+            "pricing"
+          ]
+        },
+        {
+          "url": "https://freefilesync.org/download.php",
+          "label": "Official FreeFileSync downloads",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "platforms",
+            "downloads"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "7-zip",
+      "platforms": [
+        "Windows",
+        "macOS",
+        "Linux"
+      ],
+      "pricing_model": "free",
+      "download_url": "https://www.7-zip.org/download.html",
+      "platform_notes": "Windows includes the graphical file manager and shell integration. The official Linux and macOS releases listed here are console editions, not the Windows GUI.",
+      "sources": [
+        {
+          "url": "https://www.7-zip.org/",
+          "label": "Official no-charge use and component-license statement",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "pricing",
+            "license"
+          ]
+        },
+        {
+          "url": "https://www.7-zip.org/download.html",
+          "label": "Official 7-Zip platform downloads and repository link",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "platforms",
+            "downloads",
+            "identity"
+          ]
+        }
+      ],
+      "repository_url": "https://github.com/ip7z/7zip",
+      "license_kind": "mixed"
+    },
+    {
+      "id": "peazip",
+      "platforms": [
+        "Windows",
+        "macOS",
+        "Linux"
+      ],
+      "pricing_model": "free",
+      "download_url": "https://peazip.github.io/",
+      "platform_notes": "Native Windows, macOS and Linux releases are listed by the project. Architecture coverage and experimental builds differ by platform; included compression engines retain their own licenses.",
+      "sources": [
+        {
+          "url": "https://peazip.github.io/",
+          "label": "Official PeaZip platform download portal",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "platforms",
+            "downloads"
+          ]
+        },
+        {
+          "url": "https://peazip.github.io/peazip-free-archiver.html",
+          "label": "Official free-of-charge personal and professional use statement",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "pricing",
+            "license"
+          ]
+        },
+        {
+          "url": "https://github.com/peazip/PeaZip",
+          "label": "Official PeaZip repository",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "identity"
+          ]
+        }
+      ],
+      "repository_url": "https://github.com/peazip/PeaZip"
+    },
+    {
+      "id": "keepassxc",
+      "platforms": [
+        "Windows",
+        "macOS",
+        "Linux"
+      ],
+      "pricing_model": "free",
+      "download_url": "https://keepassxc.org/download/",
+      "platform_notes": "Native Windows, macOS and Linux editions. Official downloads distinguish current architectures, OS requirements and legacy builds; browser integration also requires its companion extension.",
+      "sources": [
+        {
+          "url": "https://keepassxc.org/",
+          "label": "Official free and cross-platform application overview",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "platforms",
+            "pricing"
+          ]
+        },
+        {
+          "url": "https://keepassxc.org/download/",
+          "label": "Official KeePassXC downloads and requirements",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "platforms",
+            "downloads"
+          ]
+        },
+        {
+          "url": "https://github.com/keepassxreboot/keepassxc",
+          "label": "Official KeePassXC repository",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "identity"
+          ]
+        }
+      ],
+      "repository_url": "https://github.com/keepassxreboot/keepassxc"
+    },
+    {
+      "id": "wireshark",
+      "platforms": [
+        "Windows",
+        "macOS",
+        "Linux",
+        "FreeBSD"
+      ],
+      "pricing_model": "free",
+      "download_url": "https://www.wireshark.org/download.html",
+      "platform_notes": "Official Windows and macOS packages and Linux/BSD distribution packages are documented. Requirements differ by release; Windows live capture uses Npcap, which has separate licensing.",
+      "sources": [
+        {
+          "url": "https://www.wireshark.org/",
+          "label": "Official platforms and no-license-fee FAQ",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "platforms",
+            "pricing"
+          ]
+        },
+        {
+          "url": "https://www.wireshark.org/download.html",
+          "label": "Official Wireshark downloads and capture-driver note",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "downloads",
+            "platforms"
+          ]
+        },
+        {
+          "url": "https://www.wireshark.org/docs/wsug_html_chunked/ChIntroPlatforms.html",
+          "label": "Official platform requirements including FreeBSD",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "platforms"
+          ]
+        }
+      ],
+      "repository_url": "https://gitlab.com/wireshark/wireshark"
+    },
+    {
+      "id": "putty",
+      "platforms": [
+        "Windows",
+        "Linux"
+      ],
+      "pricing_model": "free",
+      "download_url": "https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html",
+      "platform_notes": "Official Windows executables and Unix source releases are available; some Linux distributions provide packages. The current FAQ states that the core project has no release-quality native macOS port.",
+      "sources": [
+        {
+          "url": "https://www.chiark.greenend.org.uk/~sgtatham/putty/faq.html",
+          "label": "Official no-cost use and platform-port FAQ",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "platforms",
+            "pricing"
+          ]
+        },
+        {
+          "url": "https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html",
+          "label": "Official PuTTY stable downloads",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "downloads",
+            "platforms"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "localsend",
+      "platforms": [
+        "Windows",
+        "macOS",
+        "Linux"
+      ],
+      "pricing_model": "free",
+      "download_url": "https://localsend.org/download",
+      "platform_notes": "Desktop Windows, macOS and Linux clients are listed. The current repository documents Windows 10 and macOS 12 minimums; Linux requires the documented desktop portal packages.",
+      "sources": [
+        {
+          "url": "https://localsend.org/",
+          "label": "Official platform and free-of-charge FAQ",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "platforms",
+            "pricing"
+          ]
+        },
+        {
+          "url": "https://localsend.org/download",
+          "label": "Official LocalSend downloads",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "platforms",
+            "downloads"
+          ]
+        },
+        {
+          "url": "https://github.com/localsend/localsend",
+          "label": "Official repository and OS prerequisites",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "identity",
+            "platforms"
+          ]
+        }
+      ],
+      "repository_url": "https://github.com/localsend/localsend"
+    },
+    {
+      "id": "double-commander",
+      "platforms": [
+        "Windows",
+        "macOS",
+        "Linux",
+        "FreeBSD"
+      ],
+      "pricing_model": "free",
+      "download_url": "https://sourceforge.net/p/doublecmd/wiki/Download/",
+      "platform_notes": "Windows, Linux and native Cocoa macOS builds are offered; FreeBSD is available through ports. Linux GTK and Qt builds have different toolkit dependencies.",
+      "sources": [
+        {
+          "url": "https://doublecmd.sourceforge.io/",
+          "label": "Official free application overview",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "pricing"
+          ]
+        },
+        {
+          "url": "https://github.com/doublecmd/doublecmd/wiki/Supported-platforms",
+          "label": "Maintainer platform requirements",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "platforms"
+          ]
+        },
+        {
+          "url": "https://sourceforge.net/p/doublecmd/wiki/Download/",
+          "label": "Maintainer download portal linked by the project homepage",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "platforms",
+            "downloads"
+          ]
+        },
+        {
+          "url": "https://github.com/doublecmd/doublecmd",
+          "label": "Official Double Commander repository",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "identity"
+          ]
+        }
+      ],
+      "repository_url": "https://github.com/doublecmd/doublecmd"
+    },
+    {
+      "id": "nvda",
+      "platforms": [
+        "Windows"
+      ],
+      "pricing_model": "free",
+      "download_url": "https://www.nvaccess.org/download/",
+      "platform_notes": "Current NVDA requires 64-bit Windows 10 or later; ARM64 is supported on Windows 11. Windows 11 is recommended. Historical installers for older systems are separate and not recommended on newer systems.",
+      "sources": [
+        {
+          "url": "https://www.nvaccess.org/about-nvda/",
+          "label": "Official NVDA current system requirements",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "platforms"
+          ]
+        },
+        {
+          "url": "https://www.nvaccess.org/download/",
+          "label": "Official free download and legacy-build guidance",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "downloads",
+            "pricing",
+            "platforms"
+          ]
+        },
+        {
+          "url": "https://github.com/nvaccess/nvda",
+          "label": "Official NV Access screen-reader repository",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "identity"
+          ]
+        }
+      ],
+      "repository_url": "https://github.com/nvaccess/nvda"
+    },
+    {
+      "id": "powertoys",
+      "platforms": [
+        "Windows"
+      ],
+      "pricing_model": "free",
+      "download_url": "https://learn.microsoft.com/en-us/windows/powertoys/install",
+      "platform_notes": "Requires Windows 11 or Windows 10 version 2004/build 19041 or newer, with x64 or ARM64 hardware. Installation is documented through GitHub releases, Microsoft Store and supported package managers.",
+      "sources": [
+        {
+          "url": "https://learn.microsoft.com/en-us/windows/powertoys",
+          "label": "Microsoft free-utility overview",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "pricing",
+            "platforms"
+          ]
+        },
+        {
+          "url": "https://learn.microsoft.com/en-us/windows/powertoys/install",
+          "label": "Microsoft installation and system requirements",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "downloads",
+            "platforms"
+          ]
+        },
+        {
+          "url": "https://github.com/microsoft/PowerToys",
+          "label": "Official Microsoft PowerToys repository",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "identity"
+          ]
+        }
+      ],
+      "repository_url": "https://github.com/microsoft/PowerToys"
+    },
+    {
+      "id": "everything",
+      "platforms": [
+        "Windows"
+      ],
+      "pricing_model": "free",
+      "download_url": "https://www.voidtools.com/downloads/",
+      "platform_notes": "Windows application; stable and beta downloads are separately labeled. NTFS indexing requires its service or appropriate elevation. Lite omits IPC and screen-reader/accessibility integration.",
+      "sources": [
+        {
+          "url": "https://www.voidtools.com/faq/",
+          "label": "Official freeware, Windows requirements and Lite-edition FAQ",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "pricing",
+            "platforms",
+            "features"
+          ]
+        },
+        {
+          "url": "https://www.voidtools.com/downloads/",
+          "label": "Official stable and beta download portal",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "downloads"
+          ]
+        }
+      ]
+    }
+  ]
+}

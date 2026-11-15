@@ -44,3 +44,5 @@ Start with [The Packet Trail](paths/packet-trail.md) for a coherent applied netw
 - [Version Control & Reproducible Delivery Workshop](paths/delivery-workshop.md)
 
 - [Keyboard access and verification limits](accessibility.md)
+
+- [Software discovery: tasks, comparisons and sources](https://herbertofury.github.io/Athena/#software)

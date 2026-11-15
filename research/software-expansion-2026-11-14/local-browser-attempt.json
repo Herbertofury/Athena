@@ -1,0 +1,6 @@
+{
+  "status": "blocked_before_application_execution",
+  "command": "CHROMIUM_PATH=/usr/bin/chromium node scripts/software_browser_checks.cjs",
+  "observed_error": "Chromium process_singleton_posix.cc socket() failed: Operation not permitted (1)",
+  "scope": "Host denies Chromium launch; no application assertions ran. GitHub Actions will run the actual Chromium acceptance unchanged."
+}

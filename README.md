@@ -16,6 +16,7 @@ Read the [product vision](wiki/Athena-Vision.md) and [actual integration evidenc
 
 ## Start here
 
+- [Software discovery](https://herbertofury.github.io/Athena/#software): integrated task search, platform/license/pricing filters, conditional recommendations and side-by-side comparison. [Catalog and live Wiki](https://github.com/Herbertofury/Athena/wiki/Software-Catalog) · [Sourced database](data/software/) · [Methodology](wiki/Software-Methodology.md).
 - [Learning library](docs/README.md): 13 certificate pathways, shared lessons and guided capstones.
 - [Native Foundry profile](native/foundry/README.md): optional local authoring storage, recovery and explicit local media controls.
 - [Local Rust/SQLite evidence engine](docs/athena-local-runtime.md): native collection, archives and bounded experiments in the same shell.
@@ -25,6 +26,14 @@ Read the [product vision](wiki/Athena-Vision.md) and [actual integration evidenc
 - [Creative AI tool observatory](docs/creative-ai/README.md): source-backed web, graphics, audio and video candidates with separate code/model licenses.
 - [Engineering research](engineering/README.md): preserved Atlas research, source history and native Research/Media workspaces.
 - [Coverage and quality](docs/quality/COVERAGE.md): what exists, what is verified and what remains.
+
+## Discover software for a real task
+
+Open **Software discovery** in Athena's main navigation. Search a product, feature or task, narrow by operating system and license/pricing needs, then inspect the capabilities, limitations and dated primary sources. Task guides explain why different users may prefer a free, open-source, premium or specialist option. Select up to four products for a side-by-side comparison; filtered views can be shared and the complete matching records exported as JSON.
+
+The catalog spans systems and hardware, files and recovery, security, networks, productivity and accessibility, creative media, development and automation, local AI, gaming/modding, and scientific work. Product renames and aliases resolve to the same identity. Existing cleanup and creative-AI research remains searchable with its original evidence status, including unranked and excluded candidates.
+
+`npm run build` generates the software database, workspace assets and Wiki pages from the same source records. `npm run test:software` checks preservation, identities, aliases, relationships, source contracts and search behavior. `npm run test:software:browser` exercises the real main workspace in Chromium. A weekly GitHub Actions source audit records reachability without confusing access blocks with dead projects. The [coverage report](research/software-expansion-2026-11-14/coverage.json) contains the exact generated counts; [verification evidence](research/software-expansion-2026-11-14/) records limitations and results.
 
 ## Start with The Packet Trail
 
