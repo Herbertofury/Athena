@@ -5,5 +5,7 @@
   "initialResult": "43 tests: 14 errors and 3 failures; Ubuntu passed",
   "diagnosis": "Destination containment compared a resolved child against an unresolved target. Windows temporary path aliases produced false escapes. Compare both canonical paths while preserving existing link checks. CRLF fixture also converted existing CRLF twice.",
   "regression": "Alias-root containment regression still refuses parent escape; CRLF fixture normalizes before conversion.",
-  "scope": "Hosted fixture repositories only; no real consumer installation or source retirement. Corrected hosted result must be checked separately."
+  "scope": "Hosted fixture repositories only; no real consumer installation or source retirement. Corrected hosted result must be checked separately.",
+  "secondFailedRun": "https://github.com/Herbertofury/Athena/actions/runs/43678053892",
+  "secondResult": "44 tests: 4 fixture errors. Production containment failure corrected; remaining fixture UTF-8 reads/writes and simulated alias needed platform-neutral canonicalization."
 }
