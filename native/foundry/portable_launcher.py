@@ -147,14 +147,68 @@ def backup_database(root,data,source,destination,quiescent=False,upgrade=False):
         'sha256':final_sha,'source_unchanged_at_checks':receipt['source_unchanged_at_checks'],
         'source_wal_present':receipt['source_wal_present'],'sqlite_runtime':receipt['sqlite_runtime'],'restored':False}
 
+def checkpoint_stores(root,data,native,journal,destination,quiescent=False):
+    """Explicit stopped-source copies, not an atomic live snapshot or restore."""
+    if not quiescent or data.get('profile')!='unified':raise ValueError('Stopped unified profile required')
+    root=pathlib.Path(root).absolute();sources=[external_path(native),external_path(journal)];destination=external_path(destination)
+    if os.path.lexists(destination) or not destination.parent.is_dir() or root==destination or root in destination.parents:raise ValueError('New external checkpoint directory required')
+    if any(link_or_reparse(p) for p in destination.parents):raise ValueError('Checkpoint ancestors must not be links')
+    families=[]
+    for source in sources:
+        if root==source or root in source.parents or not source.is_file():raise ValueError('Existing external stores required')
+        if any(link_or_reparse(p) for p in (source,*source.parents)):raise ValueError('Store ancestors must not be links')
+        family=[pathlib.Path(str(source)+suffix) for suffix in ('','-wal','-shm','-journal')]
+        for path in family:
+            if os.path.lexists(path) and link_or_reparse(path):raise ValueError('Store sidecar link refused')
+        families.append(family)
+    # Reject reserved-path and inode overlaps, including aliases within one family.
+    all_paths=families[0]+families[1]
+    if destination in all_paths:raise ValueError('Checkpoint directory must not occupy a source sidecar path')
+    for index,path in enumerate(all_paths):
+        for other in all_paths[index+1:]:
+            if path==other or (path.exists() and other.exists() and os.path.samefile(path,other)):raise ValueError('Store ownership overlap')
+    capture=types.ModuleType('athena_checkpoint_capture')
+    exec(compile((root/'sqlite_backup.py').read_bytes(),'sqlite_backup.py','exec'),capture.__dict__)
+    identities=[capture.digest(capture.capture(path)) for path in sources]
+    names=('foundry.sqlite3','engineering.sqlite3');receipts=[]
+    with tempfile.TemporaryDirectory(prefix='.athena-checkpoint-',dir=destination.parent) as temporary:
+        stage=pathlib.Path(temporary)
+        for index,(source,name) in enumerate(zip(sources,names)):
+            target=stage/name
+            result=subprocess.run([sys.executable,'-B',str(root/'sqlite_backup.py'),'--source',str(source),'--destination',str(target),'--scratch',str(stage),'--source-quiescent'],capture_output=True,timeout=30,check=True)
+            receipt=json.loads(result.stdout.decode('utf-8',errors='strict'))
+            if receipt.get('source_file_hashes')!=identities[index]:raise ValueError('Source changed before preparation')
+            if any(os.path.lexists(str(target)+suffix) for suffix in ('-wal','-shm','-journal')):raise ValueError('Non-standalone checkpoint')
+            if target.stat().st_size>64*1024*1024 or hashlib.sha256(target.read_bytes()).hexdigest()!=receipt.get('destination_sha256'):raise ValueError('Checkpoint integrity mismatch')
+            receipts.append(receipt)
+        status=subprocess.run([str(root/data['binary']),'status',str(stage/names[0])],capture_output=True,timeout=15,check=True)
+        status=json.loads(status.stdout.decode('utf-8',errors='strict'))
+        if status.get('schema')!=15 or status.get('integrity')!='ok':raise ValueError('Current native schema required; no upgrade performed')
+        if [capture.digest(capture.capture(path)) for path in sources]!=identities:raise ValueError('Stores changed during checkpoint')
+        for name,receipt in zip(names,receipts):
+            if any(os.path.lexists(str(stage/name)+suffix) for suffix in ('-wal','-shm','-journal')):raise ValueError('Prepared copy gained sidecars')
+            if hashlib.sha256((stage/name).read_bytes()).hexdigest()!=receipt['destination_sha256']:raise ValueError('Prepared copy changed')
+        result={'schema':1,'complete':True,'private_user_data':True,'source_unchanged_at_checks':True,'atomic_live_snapshot':False,'restored':False,'native_schema':15,
+                'engineering_validation':'SQLite integrity only; semantic/native acceptance remains separate',
+                'stores':{name:{'sha256':receipt['destination_sha256'],'bytes':receipt['destination_bytes'],'source_file_hashes':receipt['source_file_hashes'],'source_wal_present':receipt['source_wal_present'],'sqlite_runtime':receipt['sqlite_runtime']} for name,receipt in zip(names,receipts)}}
+        # Exclusive directory. Completion marker is linked last; any partial new
+        # directory on failure is retained for inspection, never called complete.
+        marker=stage/'checkpoint.json'
+        with marker.open('x',encoding='utf-8') as stream:
+            json.dump(result,stream,indent=2);stream.write('\n');stream.flush();os.fsync(stream.fileno())
+        destination.mkdir(mode=0o700)
+        for name in (*names,'checkpoint.json'):os.link(stage/name,destination/name)
+    return result
+
 def main():
     sys.dont_write_bytecode=True
-    p=argparse.ArgumentParser(description=__doc__);p.add_argument('--database');p.add_argument('--journal');p.add_argument('--create-database');p.add_argument('--backup-database');p.add_argument('--upgrade-copy');p.add_argument('--backup-destination');p.add_argument('--source-quiescent',action='store_true');p.add_argument('--verify-only',action='store_true');a=p.parse_args()
+    p=argparse.ArgumentParser(description=__doc__);p.add_argument('--database');p.add_argument('--journal');p.add_argument('--checkpoint-directory');p.add_argument('--create-database');p.add_argument('--backup-database');p.add_argument('--upgrade-copy');p.add_argument('--backup-destination');p.add_argument('--source-quiescent',action='store_true');p.add_argument('--verify-only',action='store_true');a=p.parse_args()
     root=pathlib.Path(__file__).resolve().parent
     try:
         data=verify(root)
         if sum((bool(a.database),bool(a.create_database),bool(a.backup_database),bool(a.upgrade_copy),a.verify_only))!=1:raise ValueError('Choose one operation')
-        if bool(a.backup_database or a.upgrade_copy)!=bool(a.backup_destination) or (a.source_quiescent and not (a.backup_database or a.upgrade_copy)):raise ValueError('Backup arguments required together')
+        if bool(a.backup_database or a.upgrade_copy)!=bool(a.backup_destination) or (a.source_quiescent and not (a.backup_database or a.upgrade_copy or a.checkpoint_directory)):raise ValueError('Backup arguments required together')
+        if a.checkpoint_directory and not (a.database and a.journal and a.source_quiescent):raise ValueError('Checkpoint requires both existing stores and stopped-source assertion')
         if a.journal and not a.database:raise ValueError('Journal requires explicit native database')
         if a.database and bool(a.journal)!=bool(data.get('engine')):raise ValueError('Unified profile requires both stores; standalone profile has no journal')
         if a.verify_only:
@@ -172,6 +226,8 @@ def main():
         if data.get('engine'):
             journal=external_path(a.journal)
             if root in journal.parents or any(p.is_symlink() for p in (journal,*journal.parents)) or not journal.parent.is_dir():raise ValueError('External journal required')
+            if a.checkpoint_directory:
+                print(json.dumps(checkpoint_stores(root,data,database,journal,a.checkpoint_directory,a.source_quiescent)));return
             if not journal.exists():destination_clear(journal)
             # Engine performs symmetric sidecar/hardlink ownership and schema checks
             # before opening either store. No proxy or security settings changed.

@@ -90,5 +90,22 @@ def main():
    assert json.loads(request('GET','/__native/backup',headers=h)[2])==json.loads(payload)
    assert 'succeeded' in request('GET','/api/overview')[2]
   finally:stop(p)
-  print(json.dumps({'passed':True,'portable_launcher':portable,'scope':'actual local dual-store process, synthetic workspace and built-in dedup job; not browser or owner data','engine_sha256':hashlib.sha256(ENGINE.read_bytes()).hexdigest(),'checks':['symmetric DB/sidecar and hardlink refusal','pre-body unauthorized and duplicate-header rejection','oversize length rejection','four-slot slow-body admission and deadline','native and Atlas guards remain distinct','workspace compare-save and stale conflict','revision history','bounded offline job','both stores persist across process restart']}))
+  checkpoint_verified=False
+  if portable:
+   def source_hashes():
+    return {str(path):hashlib.sha256(path.read_bytes()).hexdigest() for main in (db,journal) for suffix in ('','-wal','-shm','-journal') if (path:=pathlib.Path(str(main)+suffix)).exists()}
+   original=source_hashes();checkpoint=root/'dual-checkpoint'
+   result=subprocess.run(command+['--checkpoint-directory',str(checkpoint),'--source-quiescent'],capture_output=True,timeout=90,check=True)
+   receipt=json.loads(result.stdout);assert receipt['complete'] and not receipt['atomic_live_snapshot'] and not receipt['restored'];assert source_hashes()==original
+   assert json.loads((checkpoint/'checkpoint.json').read_text())==receipt
+   for name,row in receipt['stores'].items():assert hashlib.sha256((checkpoint/name).read_bytes()).hexdigest()==row['sha256']
+   # Open only the synthetic copies to verify actual native and Engineering parity.
+   command=[sys.executable,'-B',str(package/'launch.py'),'--database',str(checkpoint/'foundry.sqlite3'),'--journal',str(checkpoint/'engineering.sqlite3')]
+   p=start()
+   try:
+    assert json.loads(request('GET','/__native/backup',headers=h)[2])==json.loads(payload)
+    assert 'succeeded' in request('GET','/api/overview')[2]
+   finally:stop(p)
+   assert source_hashes()==original;checkpoint_verified=True
+  print(json.dumps({'passed':True,'portable_launcher':portable,'dual_checkpoint_verified':checkpoint_verified,'scope':'actual local dual-store process, synthetic workspace and built-in dedup job; not browser or owner data','engine_sha256':hashlib.sha256(ENGINE.read_bytes()).hexdigest(),'checks':['symmetric DB/sidecar and hardlink refusal','pre-body unauthorized and duplicate-header rejection','oversize length rejection','four-slot slow-body admission and deadline','native and Atlas guards remain distinct','workspace compare-save and stale conflict','revision history','bounded offline job','both stores persist across process restart']}))
 if __name__=='__main__':main()
