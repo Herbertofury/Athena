@@ -36,6 +36,6 @@ class SkillPreflightTests(unittest.TestCase):
         (self.root/'x.pyc').write_bytes(b'cache')
         self.assertIn('generated-cache-present', skill.inspect(self.root)['errors'])
     def test_crlf_header(self):
-        self.md.write_bytes(self.md.read_bytes().replace(b'\n', b'\r\n'))
+        self.md.write_bytes(self.md.read_bytes().replace(b'\r\n', b'\n').replace(b'\n', b'\r\n'))
         self.assertTrue(skill.inspect(self.root)['structuralPass'])
 if __name__ == '__main__': unittest.main()

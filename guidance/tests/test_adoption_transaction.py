@@ -30,7 +30,7 @@ class TransactionTests(unittest.TestCase):
     def test_upgrade_failure_restores_existing_snapshots_and_lock(self):
         self.adopted();before=files(self.target)
         for name in governance.POLICY_FILES[:3]:
-            p=self.source/name;p.write_text(p.read_text()+'\nUpdated guidance.\n')
+            p=self.source/name;p.write_text(p.read_text(encoding="utf-8")+'\nUpdated guidance.\n',encoding='utf-8')
         self.manifest('1.0.1')
         with patch.object(transaction.os,'replace',side_effect=self.fail_replace(3)):
             with self.assertRaises(OSError):governance.apply(self.source,self.target)
@@ -43,7 +43,7 @@ class TransactionTests(unittest.TestCase):
     def test_rollback_failure_retains_recovery_not_success(self):
         self.adopted()
         for name in governance.POLICY_FILES[:3]:
-            p=self.source/name;p.write_text(p.read_text()+'\nChanged.\n')
+            p=self.source/name;p.write_text(p.read_text(encoding="utf-8")+'\nChanged.\n',encoding='utf-8')
         self.manifest('1.0.1'); original=transaction.os.replace; count=0
         def broken(a,b):
             nonlocal count

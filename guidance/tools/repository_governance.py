@@ -73,7 +73,7 @@ def safe_path(target: Path, relative: str) -> Path:
             break
         if item.is_symlink() or (hasattr(item, "is_junction") and item.is_junction()):
             raise ValueError(f"linked destination refused: {item}")
-    if not path.resolve().is_relative_to(target):
+    if not path.resolve().is_relative_to(target.resolve()):
         raise ValueError(f"destination escapes target: {relative}")
     return path
 
