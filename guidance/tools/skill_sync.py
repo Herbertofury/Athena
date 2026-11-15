@@ -84,6 +84,7 @@ def prepare(sources,target,own_recovery=None):
         if not portable(name):raise ValueError('nonportable Skill name')
         if name.casefold() in names:raise ValueError('duplicate Skill name')
         names.add(name.casefold())
+        if any(p.name.casefold()==name.casefold() and p.name!=name for p in entries):raise ValueError('target name alias')
         if source==target or source.is_relative_to(target) or target.is_relative_to(source):raise ValueError('separate source and target required')
         files,hashes=tree(source);total+=sum(map(len,files.values()))
         if total>MAX_BYTES:raise ValueError('batch byte budget')
@@ -95,9 +96,6 @@ def prepare(sources,target,own_recovery=None):
         row={'name':name,'source':str(source),'destination':str(dest),'files':hashes,'oldFiles':old_hashes,'oldMarkerSha256':sha(old_marker) if old_marker else None,
              'action':'create' if old_hashes is None else 'noop' if old_hashes==hashes else 'update'}
         rows.append(row);payloads[name]=files
-    # Detect case aliases already on disk, even on case-sensitive hosts.
-    for row in rows:
-        if any(p.name.casefold()==row['name'].casefold() and p.name!=row['name'] for p in entries):raise ValueError('target name alias')
     plan={'schema':1,'target':str(target),'skills':rows,'scope':'Local private paths; review complete Skill contents/rights and client compatibility before apply. No execution or permission grant.'}
     plan['reviewSha256']=sha(encoded(plan))
     return plan,payloads
