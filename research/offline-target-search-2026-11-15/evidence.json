@@ -1,0 +1,265 @@
+{
+  "baseline_function_sha256": "145ecfdc014e9884d749325a616ba23ce5e58dbbf766b5a2244bdf1b11401e5d",
+  "baseline_success": 6,
+  "candidate_success": 10,
+  "decision": "RETAIN IN R&D: candidate changes substring/empty-query behavior; timings exclude UI and use different runtimes, no superiority claim.",
+  "documents": 98,
+  "kind": "actual Athena corpus / author-selected task comparison, not blind user study",
+  "network_scope": "No network APIs used. Python audit socket guard; Node not sandboxed. No OS isolation claimed.",
+  "node": "v24.22.1",
+  "python": "3.12.14",
+  "query_sha256": "cdefc689eab0b1b7e13f58c47c6a421d86c3aadc1c004ffabc79e0e711737726",
+  "reopen_equal": true,
+  "repeat_measurements": 101,
+  "results": [
+    {
+      "baseline_expected_anywhere": false,
+      "baseline_median_ms": 0.10746899999999471,
+      "baseline_p95_ms": 0.49958999999999776,
+      "baseline_target_success": false,
+      "baseline_top5": [],
+      "baseline_total_results": 0,
+      "candidate_median_ms": 0.016424,
+      "candidate_p95_ms": 0.050555,
+      "candidate_target_success": true,
+      "candidate_top5": [
+        "sys-durable-database",
+        "data-csv-types",
+        "databases",
+        "sys-diagnose-evidence"
+      ],
+      "expected": "sys-durable-database",
+      "kind": "multi-token discovery",
+      "query": "durable database"
+    },
+    {
+      "baseline_expected_anywhere": false,
+      "baseline_median_ms": 0.04554799999999659,
+      "baseline_p95_ms": 0.13134499999998184,
+      "baseline_target_success": false,
+      "baseline_top5": [],
+      "baseline_total_results": 0,
+      "candidate_median_ms": 0.016315,
+      "candidate_p95_ms": 0.032898,
+      "candidate_target_success": true,
+      "candidate_top5": [
+        "sys-durable-database",
+        "data-csv-types",
+        "databases",
+        "sys-diagnose-evidence"
+      ],
+      "expected": "sys-durable-database",
+      "kind": "reordered discovery",
+      "query": "database durable"
+    },
+    {
+      "baseline_expected_anywhere": true,
+      "baseline_median_ms": 0.05006399999999189,
+      "baseline_p95_ms": 0.09351900000001478,
+      "baseline_target_success": false,
+      "baseline_top5": [
+        "shell-data",
+        "identity",
+        "cryptography",
+        "cloud-models",
+        "cost"
+      ],
+      "baseline_total_results": 11,
+      "candidate_median_ms": 0.017827,
+      "candidate_p95_ms": 0.03396,
+      "candidate_target_success": true,
+      "candidate_top5": [
+        "terraform-lifecycle",
+        "terraform-workflow",
+        "git",
+        "testing",
+        "kubernetes-core"
+      ],
+      "expected": "terraform-workflow",
+      "kind": "keyword",
+      "query": "Terraform"
+    },
+    {
+      "baseline_expected_anywhere": true,
+      "baseline_median_ms": 0.044375000000002274,
+      "baseline_p95_ms": 0.08824099999998225,
+      "baseline_target_success": true,
+      "baseline_top5": [
+        "dns-dhcp",
+        "net-dns-evidence"
+      ],
+      "baseline_total_results": 2,
+      "candidate_median_ms": 0.010746,
+      "candidate_p95_ms": 0.028292,
+      "candidate_target_success": true,
+      "candidate_top5": [
+        "dns-dhcp",
+        "net-dns-evidence"
+      ],
+      "expected": "dns-dhcp",
+      "kind": "keyword",
+      "query": "DNS"
+    },
+    {
+      "baseline_expected_anywhere": true,
+      "baseline_median_ms": 0.03920800000000213,
+      "baseline_p95_ms": 0.09030400000000327,
+      "baseline_target_success": true,
+      "baseline_top5": [],
+      "baseline_total_results": 0,
+      "candidate_median_ms": 0.009885,
+      "candidate_p95_ms": 0.030725,
+      "candidate_target_success": true,
+      "candidate_top5": [],
+      "expected": null,
+      "kind": "out of corpus",
+      "query": "Keyboard escape preview"
+    },
+    {
+      "baseline_expected_anywhere": true,
+      "baseline_median_ms": 0.046559000000002015,
+      "baseline_p95_ms": 0.09251699999998664,
+      "baseline_target_success": true,
+      "baseline_top5": [
+        "ip-subnets",
+        "net-subnet-planning"
+      ],
+      "baseline_total_results": 2,
+      "candidate_median_ms": 0.009884,
+      "candidate_p95_ms": 0.035733,
+      "candidate_target_success": false,
+      "candidate_top5": [
+        "net-subnet-planning"
+      ],
+      "expected": "ip-subnets",
+      "kind": "substring compatibility",
+      "query": "subnet"
+    },
+    {
+      "baseline_expected_anywhere": true,
+      "baseline_median_ms": 0.03990899999999442,
+      "baseline_p95_ms": 0.0852959999999996,
+      "baseline_target_success": true,
+      "baseline_top5": [
+        "hardware"
+      ],
+      "baseline_total_results": 1,
+      "candidate_median_ms": 0.09435,
+      "candidate_p95_ms": 0.174288,
+      "candidate_target_success": true,
+      "candidate_top5": [
+        "hardware",
+        "cloud-failure-domains",
+        "sec-restore-proof",
+        "cloud-network-storage",
+        "kubernetes-operations"
+      ],
+      "expected": "hardware",
+      "kind": "exact title",
+      "query": "Hardware, storage and failure domains"
+    },
+    {
+      "baseline_expected_anywhere": false,
+      "baseline_median_ms": 0.039368000000024495,
+      "baseline_p95_ms": 0.09426999999999452,
+      "baseline_target_success": false,
+      "baseline_top5": [],
+      "baseline_total_results": 0,
+      "candidate_median_ms": 0.016725,
+      "candidate_p95_ms": 0.075041,
+      "candidate_target_success": true,
+      "candidate_top5": [
+        "resilience",
+        "sec-restore-proof",
+        "sys-durable-database",
+        "cloud-recovery-objectives",
+        "cloud-network-storage"
+      ],
+      "expected": "resilience",
+      "kind": "multi-token discovery",
+      "query": "backup RPO"
+    },
+    {
+      "baseline_expected_anywhere": false,
+      "baseline_median_ms": 0.04661899999999264,
+      "baseline_p95_ms": 0.09237700000002746,
+      "baseline_target_success": false,
+      "baseline_top5": [],
+      "baseline_total_results": 0,
+      "candidate_median_ms": 0.021332,
+      "candidate_p95_ms": 0.051927,
+      "candidate_target_success": true,
+      "candidate_top5": [
+        "git",
+        "delivery-capstone",
+        "delivery-staging",
+        "cloud-change-review",
+        "terraform-workflow"
+      ],
+      "expected": "git",
+      "kind": "reordered discovery",
+      "query": "review Git"
+    },
+    {
+      "baseline_expected_anywhere": true,
+      "baseline_median_ms": 0.039097999999995636,
+      "baseline_p95_ms": 0.16976099999999406,
+      "baseline_target_success": true,
+      "baseline_top5": [
+        "troubleshooting",
+        "hardware",
+        "os-processes",
+        "files-permissions",
+        "shell-data"
+      ],
+      "baseline_total_results": 98,
+      "candidate_median_ms": 0.00015,
+      "candidate_p95_ms": 0.00017,
+      "candidate_target_success": false,
+      "candidate_top5": [],
+      "expected": "troubleshooting",
+      "kind": "empty browse compatibility",
+      "query": ""
+    },
+    {
+      "baseline_expected_anywhere": true,
+      "baseline_median_ms": 0.0387670000000071,
+      "baseline_p95_ms": 0.07243699999997943,
+      "baseline_target_success": true,
+      "baseline_top5": [],
+      "baseline_total_results": 0,
+      "candidate_median_ms": 0.0068,
+      "candidate_p95_ms": 0.023795,
+      "candidate_target_success": true,
+      "candidate_top5": [],
+      "expected": null,
+      "kind": "out of corpus",
+      "query": "zzzz_nonexistent"
+    },
+    {
+      "baseline_expected_anywhere": false,
+      "baseline_median_ms": 0.04055999999999926,
+      "baseline_p95_ms": 0.1294409999999857,
+      "baseline_target_success": false,
+      "baseline_top5": [],
+      "baseline_total_results": 0,
+      "candidate_median_ms": 0.014802,
+      "candidate_p95_ms": 0.028532,
+      "candidate_target_success": true,
+      "candidate_top5": [
+        "cryptography",
+        "sec-data-integrity",
+        "transport-tls"
+      ],
+      "expected": "cryptography",
+      "kind": "reordered discovery",
+      "query": "Hashing encryption"
+    }
+  ],
+  "source_commit": "ef04d4a02b597f02a1f5e90adec8cd8bb2ca75b4",
+  "source_hashes": {
+    "dist/app.js": "6d6940eb0f97bd0744d47b066514199c0c6655af37544aca0bee8ded27b1e2d7",
+    "dist/catalog.js": "1d818063cd03315348c24b54e1cabcd49fa43b049ced8e756b6c0ad33cdc6153"
+  },
+  "sqlite": "3.53.1"
+}
