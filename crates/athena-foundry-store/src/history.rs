@@ -26,7 +26,83 @@ pub(crate) fn append(
     tx.execute("DELETE FROM workspace_revisions WHERE id NOT IN (SELECT id FROM workspace_revisions ORDER BY id DESC LIMIT 50)",[])?;
     Ok(id)
 }
+#[derive(Debug, Serialize)]
+pub struct RevisionChange {
+    pub path: String,
+    pub change: &'static str,
+}
+#[derive(Debug, Serialize)]
+pub struct RevisionPreview {
+    pub target_revision: i64,
+    pub current_version: String,
+    pub restore_applied: bool,
+    pub changes: Vec<RevisionChange>,
+}
+fn diff_values(
+    a: Option<&serde_json::Value>,
+    b: Option<&serde_json::Value>,
+    path: String,
+    depth: usize,
+    out: &mut Vec<RevisionChange>,
+) -> Result<()> {
+    if a == b {
+        return Ok(());
+    }
+    if depth > 32 || path.len() > 4096 {
+        return Err("Revision preview path/depth limit exceeded".into());
+    }
+    if let (Some(serde_json::Value::Object(left)), Some(serde_json::Value::Object(right))) = (a, b)
+    {
+        let keys: std::collections::BTreeSet<_> = left.keys().chain(right.keys()).collect();
+        for key in keys {
+            let escaped = key.replace('~', "~0").replace('/', "~1");
+            diff_values(
+                left.get(key),
+                right.get(key),
+                format!("{path}/{escaped}"),
+                depth + 1,
+                out,
+            )?;
+        }
+    } else {
+        if out.len() >= 2048 {
+            return Err("Revision preview exceeds 2048 changes; no partial result".into());
+        }
+        out.push(RevisionChange {
+            path,
+            change: if a.is_none() {
+                "added"
+            } else if b.is_none() {
+                "removed"
+            } else {
+                "replaced"
+            },
+        });
+    }
+    Ok(())
+}
 impl Store {
+    /// Preview restoration from a single read snapshot; never apply it.
+    pub fn preview_revision(&self, id: i64) -> Result<RevisionPreview> {
+        let tx = self.db.unchecked_transaction()?;
+        let target = self.read_revision(id)?;
+        let current = self.load_backup()?;
+        let a = current
+            .as_deref()
+            .map(serde_json::from_str::<serde_json::Value>)
+            .transpose()?;
+        let b = serde_json::from_str::<serde_json::Value>(&target)?;
+        let mut changes = Vec::new();
+        diff_values(a.as_ref(), Some(&b), String::new(), 0, &mut changes)?;
+        let result = RevisionPreview {
+            target_revision: id,
+            current_version: crate::concurrency::version(current.as_deref()),
+            restore_applied: false,
+            changes,
+        };
+        tx.commit()?;
+        Ok(result)
+    }
     /// Read and authenticate a retained typed snapshot without mutation.
     pub fn read_revision(&self, id: i64) -> Result<String> {
         if id < 1 {
@@ -127,4 +203,60 @@ fn digest_hex(text: &str) -> String {
         .iter()
         .map(|b| format!("{b:02x}"))
         .collect()
+}
+
+#[cfg(test)]
+mod preview_tests {
+    use super::*;
+    use serde_json::json;
+    #[test]
+    fn pointers_escape_and_arrays_are_atomic() {
+        let mut out = Vec::new();
+        diff_values(
+            Some(&json!({"a/b~":1,"remove":1,"array":[1,2]})),
+            Some(&json!({"a/b~":2,"add":null,"array":[2,1]})),
+            String::new(),
+            0,
+            &mut out,
+        )
+        .unwrap();
+        assert_eq!(
+            out.iter()
+                .map(|x| (x.path.as_str(), x.change))
+                .collect::<Vec<_>>(),
+            vec![
+                ("/a~1b~0", "replaced"),
+                ("/add", "added"),
+                ("/array", "replaced"),
+                ("/remove", "removed")
+            ]
+        );
+    }
+    #[test]
+    fn excessive_changes_and_paths_refuse_partial_success() {
+        let a = json!({});
+        let b =
+            serde_json::Value::Object((0..2049).map(|n| (format!("key{n}"), json!(n))).collect());
+        assert!(diff_values(Some(&a), Some(&b), String::new(), 0, &mut Vec::new()).is_err());
+        assert!(
+            diff_values(
+                Some(&json!(0)),
+                Some(&json!(1)),
+                "x".repeat(4097),
+                0,
+                &mut Vec::new()
+            )
+            .is_err()
+        );
+        assert!(
+            diff_values(
+                Some(&json!(0)),
+                Some(&json!(1)),
+                String::new(),
+                33,
+                &mut Vec::new()
+            )
+            .is_err()
+        );
+    }
 }

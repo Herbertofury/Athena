@@ -155,6 +155,13 @@ class Handler(BaseHTTPRequestHandler):
             try:
                 result=json.loads(self.server.cli('read-native-versioned',room=match.groups()));return self.reply(200,json.dumps(result['value']),etag=result['version'])
             except (ValueError,subprocess.TimeoutExpired):return self.reply(422,'{"error":"Soundtrack metadata unavailable or invalid"}')
+        if parsed.path.startswith('/__native/revision-preview/'):
+            if not self.valid(api=True):return self.reply(403)
+            match=re.fullmatch(r'/__native/revision-preview/([1-9][0-9]{0,15})',parsed.path)
+            if not match:return self.reply(400)
+            if self.server.schema==2:return self.reply(409,'{"error":"Explicit history upgrade required"}')
+            try:return self.reply(200,self.server.cli('preview-revision',revision=int(match[1])))
+            except (ValueError,subprocess.TimeoutExpired):return self.reply(422,'{"error":"Revision preview unavailable or over budget; nothing restored"}')
         if parsed.path=='/__native/revisions' or parsed.path.startswith('/__native/revision/'):
             if not self.valid(api=True):return self.reply(403)
             if self.server.schema==2:return self.reply(409,'{"error":"History unavailable: explicit upgrade-history required before relaunch. No automatic migration."}')

@@ -122,6 +122,10 @@ fn run() -> Result<()> {
             Store::open(p)?.migrate_history()?;
             println!("{}", serde_json::to_string(&Store::open(p)?.summary()?)?);
         }
+        "preview-revision" if args.len() == 4 => println!(
+            "{}",
+            serde_json::to_string(&Store::open(p)?.preview_revision(args[3].parse()?)?)?
+        ),
         "read-revision" if args.len() == 4 => {
             println!("{}", Store::open(p)?.read_revision(args[3].parse()?)?)
         }
