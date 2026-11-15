@@ -14,3 +14,9 @@ The Rust store emits JSON through `serde_json::to_string` and `println!` in `cra
 - Existing Windows/Linux native CI runs this test file alongside the real Rust/bridge tests. Hosted results must be verified separately.
 
 No runtime assets, held manifests, old repositories or owner records changed. Owner-device acceptance and source retirement remain open.
+
+## Hosted failure and correction
+
+Initial head `d738c556` failed Windows job `132699846474` in run `43677202061`; Linux and learning passed. Explicit text-mode UTF-8 still decodes in a Windows subprocess reader thread. The invalid-byte regression raised there and left `stdout=None`, leading to `AttributeError` instead of the expected decoding error. This was not retried unchanged.
+
+Corrected implementation transports bytes, encodes input as UTF-8, checks output byte length, and decodes stdout strictly on the calling thread. This preserves errors across platforms and does not decode unused stderr. Failure excerpt is retained in `windows-failure.txt`.

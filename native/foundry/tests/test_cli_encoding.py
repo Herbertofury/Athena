@@ -11,7 +11,7 @@ class Tests(unittest.TestCase):
  def child(self,code):
   def run(args,**kwargs):
    # Model a Windows non-UTF8 default only when production omitted encoding.
-   kwargs.setdefault('encoding','cp1252')
+   if kwargs.get('text'):kwargs.setdefault('encoding','cp1252')
    return REAL_RUN([sys.executable,'-c',code],**kwargs)
   return run
  def test_native_output_preserves_unicode(self):
