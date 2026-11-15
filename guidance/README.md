@@ -73,3 +73,29 @@ CRLF policy text is compared using the existing portable manifest convention.
 Use a stable checkout: concurrent mutations are not a snapshot guarantee. No
 network access, fleet scan, source execution, consumer write or retirement
 certification occurs. Existing transition/adoption restrictions remain unchanged.
+
+## Recoverable local Git history checkpoint
+
+`python guidance/tools/history_bundle.py --source /explicit/repository --output /outside/source/new.bundle`
+creates a local bundle of every locally available ref plus HEAD, restores it into
+an independent temporary bare repository, checks complete object connectivity,
+and compares exact refs/HEAD before publishing the new bundle. Source files and
+refs are not modified. No checkout, source execution, remote refresh or upload
+occurs; lazy fetching is disabled. Shallow history, replacements and grafts are
+rejected. Existing outputs are never overwritten; the verified file is published
+with an exclusive hard link, so the output filesystem must support hard links.
+POSIX mode 0600 is requested; this is not a Windows ACL guarantee.
+
+Keep the bundle private until complete history rights and private-data review.
+The summary emits only head/hash/count/verification flags, not names or content.
+Uncommitted files, reflogs, unreachable objects, LFS objects, submodule repositories,
+wiki, releases and external dependencies remain separate gates. A local recovery
+check is neither an off-machine durable backup nor repository-deletion approval.
+Temporary restore files are removed after the check; the final bundle is retained.
+Use a stable source. Ref changes during capture are rejected, but concurrent
+history/working-tree changes are not a full filesystem snapshot guarantee.
+
+Git bundle refs retain object IDs, not symbolic alias configuration. The isolated
+restore uses a detached HEAD; branch checkout and symbolic remote-HEAD settings
+need separate restoration if required. This is Git object/history recovery, not
+a complete clone configuration backup.
