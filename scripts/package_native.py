@@ -14,12 +14,17 @@ def digest(path):
         while chunk:=stream.read(1024*1024):h.update(chunk)
     return h.hexdigest()
 
-def package(source,binary,expected_sha,output,platform):
+def package(source,binary,expected_sha,output,platform,engine=None,engine_sha=None):
     source=pathlib.Path(source).absolute(); output=pathlib.Path(output).absolute(); binary=regular(binary)
     if platform not in ('windows','linux') or not re.fullmatch('[0-9a-f]{64}',expected_sha):raise ValueError('Explicit platform and SHA256 required')
     if binary.stat().st_size>256*1024*1024 or digest(binary)!=expected_sha:raise ValueError('Binary digest/size mismatch')
     if output==source or source in output.parents or output in binary.parents:raise ValueError('Separate output required')
     if any(p.is_symlink() for p in (source,*source.parents,output,*output.parents)):raise ValueError('Symlink paths refused')
+    if bool(engine)!=bool(engine_sha):raise ValueError('Engine and reviewed SHA256 required together')
+    if engine:
+        engine=regular(engine)
+        if not re.fullmatch('[0-9a-f]{64}',engine_sha) or engine.stat().st_size>256*1024*1024 or digest(engine)!=engine_sha:raise ValueError('Engine digest/size mismatch')
+        if output in engine.parents:raise ValueError('Separate engine output required')
     manifest=json.loads((ROOT/'config/runtime-public-preview.json').read_text())
     approved={row['path']:row['sha256'] for row in manifest['files']}
     actual={p.relative_to(source).as_posix() for p in source.rglob('*') if p.is_file() or p.is_symlink()}
@@ -38,7 +43,14 @@ def package(source,binary,expected_sha,output,platform):
         sha=digest(target)
         if expected is not None and sha!=expected:raise ValueError('Source changed during packaging')
         files.append({'path':name,'sha256':sha,'bytes':target.stat().st_size})
-    for name,sha in sorted(approved.items()):copy(source/name,'runtime/'+name,sha)
+    if engine:
+        spec=importlib.util.spec_from_file_location('athena_runtime_package',ROOT/'scripts/package_app.py')
+        app=importlib.util.module_from_spec(spec);spec.loader.exec_module(app)
+        app.package(source,output/'runtime',manifest,'public-preview')
+        for path in sorted((output/'runtime').rglob('*')):
+            if path.is_file():files.append({'path':path.relative_to(output).as_posix(),'sha256':digest(path),'bytes':path.stat().st_size})
+    else:
+        for name,sha in sorted(approved.items()):copy(source/name,'runtime/'+name,sha)
     exe='athena-foundry-store.exe' if platform=='windows' else 'athena-foundry-store'
     copy(binary,exe,expected_sha)
     if os.name=='posix':(output/exe).chmod(0o700)
@@ -47,11 +59,17 @@ def package(source,binary,expected_sha,output,platform):
     copy(ROOT/'tools/foundry-recovery/sqlite/prepare.py','sqlite_backup.py')
     receipt={'schema':1,'platform':platform,'binary':exe,'files':files,'database_included':False,
         'limits':'File integrity only, not binary authenticity, owner-device acceptance or complete migration.'}
+    if engine:
+        engine_name='atlas-lab.exe' if platform=='windows' else 'atlas-lab'
+        copy(engine,engine_name,engine_sha)
+        copy(ROOT/'native/foundry/portable_process.py','portable_process.py')
+        if os.name=='posix':(output/engine_name).chmod(0o700)
+        receipt['engine']=engine_name;receipt['profile']='unified'
     (output/'native-package.json').write_text(json.dumps(receipt,indent=2)+'\n',encoding='utf-8')
     return receipt
 
 if __name__=='__main__':
-    p=argparse.ArgumentParser(description=__doc__);p.add_argument('--source',required=True);p.add_argument('--binary',required=True);p.add_argument('--binary-sha256',required=True);p.add_argument('--output',required=True);p.add_argument('--platform',choices=['windows','linux'],required=True);a=p.parse_args()
-    try:r=package(a.source,a.binary,a.binary_sha256,a.output,a.platform)
+    p=argparse.ArgumentParser(description=__doc__);p.add_argument('--source',required=True);p.add_argument('--binary',required=True);p.add_argument('--binary-sha256',required=True);p.add_argument('--output',required=True);p.add_argument('--platform',choices=['windows','linux'],required=True);p.add_argument('--engine');p.add_argument('--engine-sha256');a=p.parse_args()
+    try:r=package(a.source,a.binary,a.binary_sha256,a.output,a.platform,a.engine,a.engine_sha256)
     except (OSError,ValueError,KeyError):p.exit(2,'Packaging refused. Check inputs and new destination; a partial new output may remain. Nothing installed.\n')
     print(json.dumps({'files':len(r['files']),'database_included':False,'installed':False}))

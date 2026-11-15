@@ -23,6 +23,10 @@ def verify(root):
     if data.get('schema')!=1 or data.get('platform') not in ('windows','linux'):raise ValueError('Invalid platform')
     expected_binary='athena-foundry-store.exe' if data['platform']=='windows' else 'athena-foundry-store'
     if data.get('binary')!=expected_binary:raise ValueError('Invalid executable')
+    engine=data.get('engine')
+    if engine is not None:
+        if data.get('profile')!='unified' or engine!=('atlas-lab.exe' if data['platform']=='windows' else 'atlas-lab'):raise ValueError('Invalid engine profile')
+    elif 'profile' in data:raise ValueError('Unsupported profile')
     names=set()
     for entry in data['files']:
         name=entry['path'];relative=pathlib.PurePosixPath(name)
@@ -34,6 +38,7 @@ def verify(root):
             while chunk:=stream.read(1024*1024):h.update(chunk)
         if h.hexdigest()!=entry['sha256']:raise ValueError('Integrity mismatch')
     if not {expected_binary,'bridge.py','launch.py','sqlite_backup.py'}<=names:raise ValueError('Incomplete package')
+    if engine and not {engine,'portable_process.py','runtime/athena-runtime-manifest.json','runtime/learn/index.html','runtime/.nojekyll'}<=names:raise ValueError('Incomplete unified profile')
     actual={p.relative_to(root).as_posix() for p in root.rglob('*') if p.is_file() or p.is_symlink()}
     if actual!=names|{'native-package.json'}:raise ValueError('Unexpected package content')
     return data
@@ -102,12 +107,14 @@ def backup_database(root,data,source,destination,quiescent=False,upgrade=False):
 
 def main():
     sys.dont_write_bytecode=True
-    p=argparse.ArgumentParser(description=__doc__);p.add_argument('--database');p.add_argument('--create-database');p.add_argument('--backup-database');p.add_argument('--upgrade-copy');p.add_argument('--backup-destination');p.add_argument('--source-quiescent',action='store_true');p.add_argument('--verify-only',action='store_true');a=p.parse_args()
+    p=argparse.ArgumentParser(description=__doc__);p.add_argument('--database');p.add_argument('--journal');p.add_argument('--create-database');p.add_argument('--backup-database');p.add_argument('--upgrade-copy');p.add_argument('--backup-destination');p.add_argument('--source-quiescent',action='store_true');p.add_argument('--verify-only',action='store_true');a=p.parse_args()
     root=pathlib.Path(__file__).resolve().parent
     try:
         data=verify(root)
         if sum((bool(a.database),bool(a.create_database),bool(a.backup_database),bool(a.upgrade_copy),a.verify_only))!=1:raise ValueError('Choose one operation')
         if bool(a.backup_database or a.upgrade_copy)!=bool(a.backup_destination) or (a.source_quiescent and not (a.backup_database or a.upgrade_copy)):raise ValueError('Backup arguments required together')
+        if a.journal and not a.database:raise ValueError('Journal requires explicit native database')
+        if a.database and bool(a.journal)!=bool(data.get('engine')):raise ValueError('Unified profile requires both stores; standalone profile has no journal')
         if a.verify_only:
             print('Package file integrity verified; no executable or database opened.')
             print(json.dumps({'python_sqlite':sqlite3.sqlite_version,'wal_recovery_allowed':sqlite3.sqlite_version_info >= (3,54,0)}));return
@@ -120,6 +127,17 @@ def main():
         database=external_path(a.database)
         if not database.is_file() or any(x.is_symlink() for x in (database,*database.parents)) or root==database or root in database.parents:raise ValueError('External regular database required')
         if (sys.platform=='win32')!=(data['platform']=='windows') or sys.platform not in ('win32','linux'):raise ValueError('Platform mismatch')
+        if data.get('engine'):
+            journal=external_path(a.journal)
+            if root in journal.parents or any(p.is_symlink() for p in (journal,*journal.parents)) or not journal.parent.is_dir():raise ValueError('External journal required')
+            if not journal.exists():destination_clear(journal)
+            # Engine performs symmetric sidecar/hardlink ownership and schema checks
+            # before opening either store. No proxy or security settings changed.
+            command=[str(root/data['engine']),'serve-unified',str(journal),str(root/'runtime'),str(database)]
+            if sys.platform=='win32':
+                spec=importlib.util.spec_from_file_location('athena_owned_process',root/'portable_process.py');owned=importlib.util.module_from_spec(spec);spec.loader.exec_module(owned)
+                raise SystemExit(owned.run_windows(command))
+            os.execv(command[0],command)
         spec=importlib.util.spec_from_file_location('athena_portable_bridge',root/'bridge.py');bridge=importlib.util.module_from_spec(spec);spec.loader.exec_module(bridge)
         server=bridge.Bridge(root/data['binary'],database,root/'runtime')
     except (OSError,ValueError,KeyError,TypeError,subprocess.SubprocessError):p.exit(2,'Launch refused: verify package, platform and external existing database. WAL recovery requires Python SQLite 3.54.0+. No automatic repair or existing-database upgrade.\n')

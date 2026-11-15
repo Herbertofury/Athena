@@ -47,6 +47,12 @@ jobs:
           ATHENA_UNIFIED_ENGINE: ${{ github.workspace }}/engineering/apps/atlas-lab/target/debug/atlas-lab${{ runner.os == 'Windows' && '.exe' || '' }}
           ATHENA_FOUNDRY_STORE_BINARY: ${{ github.workspace }}/crates/athena-foundry-store/target/debug/athena-foundry-store${{ runner.os == 'Windows' && '.exe' || '' }}
         run: python native/foundry/tests/unified_http.py
+      - name: Portable unified process acceptance outside checkout
+        env:
+          ATHENA_UNIFIED_ENGINE: ${{ github.workspace }}/engineering/apps/atlas-lab/target/debug/atlas-lab${{ runner.os == 'Windows' && '.exe' || '' }}
+          ATHENA_FOUNDRY_STORE_BINARY: ${{ github.workspace }}/crates/athena-foundry-store/target/debug/athena-foundry-store${{ runner.os == 'Windows' && '.exe' || '' }}
+          ATHENA_PORTABLE_UNIFIED: '1'
+        run: python native/foundry/tests/unified_http.py
       - name: Native authoring and real HTTP SQLite integration
         run: npm run test:foundry-native
       - if: runner.os == 'Linux'
@@ -73,6 +79,7 @@ jobs:
         run: node scripts/test_foundry_native_browser.mjs
       - name: Unified Lab and Foundry browser acceptance
         env:
+          ATHENA_PORTABLE_UNIFIED: '1'
           ATHENA_UNIFIED_ENGINE: ${{ github.workspace }}/engineering/apps/atlas-lab/target/debug/atlas-lab${{ runner.os == 'Windows' && '.exe' || '' }}
         run: node scripts/test_foundry_native_browser.mjs
       - name: Bounded authoring and oversized recovery in Chromium
