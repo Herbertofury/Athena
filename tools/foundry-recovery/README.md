@@ -109,3 +109,5 @@ The four-file bundle retains exact selected scrapbook UTF-8 bytes, not unrelated
 ### Compare migrated Scrapbook placements
 
 [Read-only Scrapbook reconciliation](scrapbook/RECONCILIATION.md) verifies a reviewed bundle against a standalone native snapshot and reports exact, missing and different mapped placements without opening the original database in SQLite. This is semantic migration evidence, not visual acceptance or retirement clearance.
+
+[Scrapbook merge planning](scrapbook/MERGE-PLAN.md) can prepare a new private candidate that preserves unrelated native layouts and refuses conflicting IDs/stacking. It never applies the candidate or overwrites the original database.
