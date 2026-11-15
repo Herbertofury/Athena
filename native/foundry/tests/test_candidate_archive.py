@@ -18,7 +18,7 @@ class CandidateArchive(unittest.TestCase):
   self.assertRaises(FileExistsError,c.extract,self.root/'one'/result['archive'],out,result['archive_sha256']);self.assertEqual(sentinel.read_bytes(),b'keep')
   self.assertRaises(ValueError,c.extract,self.root/'one'/result['archive'],self.root/'bad','0'*64);self.assertFalse((self.root/'bad').exists())
  def test_unsafe_names_fail_before_extraction(self):
-  for n,name in enumerate(('../escape','C:stream','C:/escape','//host/share','a\\b','CON','a./file','nul.txt','COM¹','CONOUT$','file?')):
+  for n,name in enumerate(('../escape','C:stream','C:/escape','//host/share','a\\b','CON','a./file','nul.txt','COM¹','CONOUT$','file?','safe\x00evil')):
    archive=self.root/f'bad{n}.zip'
    with zipfile.ZipFile(archive,'w') as z:
     info=zipfile.ZipInfo('placeholder');info.filename=name;info.orig_filename=name;info.external_attr=0o100600<<16;z.writestr(info,b'x')
