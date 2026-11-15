@@ -184,3 +184,18 @@ class AthenaMigrationBoundaryTests(GovernanceCases, unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+class CanonicalPathTests(unittest.TestCase):
+    def test_target_and_child_use_same_resolved_basis(self):
+        from unittest.mock import patch
+        with tempfile.TemporaryDirectory() as temporary:
+            target=Path(temporary)/'consumer';target.mkdir()
+            alias=Path(temporary)/'ALIAS'
+            original=Path.resolve
+            def resolve(path,*args,**kwargs):
+                if path==alias:return target
+                if path.is_relative_to(alias):return original(target/path.relative_to(alias),*args,**kwargs)
+                return original(path,*args,**kwargs)
+            with patch.object(Path,'resolve',resolve):
+                self.assertEqual(governance.safe_path(alias,'nested/file.md'),alias/'nested/file.md')
+                with self.assertRaises(ValueError):governance.safe_path(alias,'../escape.md')
