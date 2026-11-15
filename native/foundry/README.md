@@ -313,3 +313,12 @@ store with its backup and verify original DB/WAL/SHM hashes remain unchanged. Th
 also cover CLI use, corruption, quiescence, timeout cleanup, destination races and
 no-overwrite. The hosted portable browser flow verifies a stopped-profile backup
 retains the workspace and soundtrack library written through the actual UI.
+
+### Historical-writer local acceptance checkpoint
+
+The [2026-11-15 historical-writer receipt](../../research/native-historical-writers-2026-11-15/README.md)
+records eight successful Linux local runs of the optional tests above, using
+separately rebuilt retained source checkpoints for schema4–11 against upgraded
+schema5–12 stores. Exact source inventories and executable hashes are retained.
+This is not Windows historical acceptance or verified distributed-release identity;
+normal hosted CI still correctly leaves these tests ignored without their fixtures.
