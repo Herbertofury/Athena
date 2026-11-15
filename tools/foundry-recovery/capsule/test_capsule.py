@@ -1,5 +1,6 @@
 import copy,json,os,tempfile,unittest,subprocess,sys
 from pathlib import Path
+from unittest.mock import patch
 import capsule as c
 class Recovery(unittest.TestCase):
  def test_all_keys_and_exact_strings(self):
@@ -45,6 +46,29 @@ class Recovery(unittest.TestCase):
    self.assertEqual(json.loads(restored.read_text()),raw);self.assertEqual(source.read_bytes(),before)
    r=subprocess.run([sys.executable,cli,'pack',str(source),str(packed)],capture_output=True,text=True)
    self.assertNotEqual(r.returncode,0);self.assertNotIn('SYNTHETIC_PRIVATE_MARKER',r.stdout+r.stderr)
+ def test_failed_fsync_removes_only_new_output_and_allows_retry(self):
+  with tempfile.TemporaryDirectory() as d:
+   root=Path(d);source=root/'source.json';output=root/'capsule.json'
+   source.write_text(json.dumps({'ff-world-layout':'SYNTHETIC_PRIVATE_MARKER'}))
+   before=source.read_bytes();data=c.pack(json.loads(before))
+   with patch('capsule.os.fsync',side_effect=OSError('synthetic disk failure')):
+    with self.assertRaises(OSError):c.write_new(output,data)
+   self.assertFalse(output.exists());self.assertEqual(source.read_bytes(),before)
+   c.write_new(output,data)
+   self.assertEqual(c.unpack(c.parse(output.read_bytes())),json.loads(before))
+ def test_interrupted_output_is_removed(self):
+  with tempfile.TemporaryDirectory() as d:
+   output=Path(d)/'capsule.json'
+   with patch('capsule.os.fsync',side_effect=KeyboardInterrupt):
+    with self.assertRaises(KeyboardInterrupt):c.write_new(output,c.pack({}))
+   self.assertFalse(output.exists())
+ def test_existing_output_survives_injected_failure(self):
+  with tempfile.TemporaryDirectory() as d:
+   output=Path(d)/'capsule.json';output.write_bytes(b'existing recovery')
+   with patch('capsule.os.fsync',side_effect=OSError('must not reach')) as sync:
+    with self.assertRaises(FileExistsError):c.write_new(output,c.pack({}))
+    sync.assert_not_called()
+   self.assertEqual(output.read_bytes(),b'existing recovery')
  def test_limit(self):
   with self.assertRaises(ValueError):c.parse(b' '*(c.LIMIT+1))
 if __name__=='__main__':unittest.main()
