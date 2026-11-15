@@ -163,7 +163,7 @@ try {
    const response=await fetch(endpoint,{method,headers,body:body===undefined?undefined:JSON.stringify(body)});
    return {status:response.status,etag:response.headers.get('ETag'),value:await response.json()};
   },{method,endpoint,body,token});
-  const read=room=>request('GET','/__native/soundtrack/'+encodeURIComponent(theme)+'/'+encodeURIComponent(room));
+  const read=room=>{assert.match(theme,/^[a-z0-9-]{1,100}$/);assert.match(room,/^[a-z0-9:-]{1,100}$/);return request('GET','/__native/soundtrack/'+theme+'/'+room)};
   const saveUI=async(room,label)=>{
    await page.locator('[data-room-select]').selectOption(room);
    await page.locator('[data-soundtrack-save]:not(:disabled)').waitFor();
