@@ -27,10 +27,17 @@ Publish only after the relevant checks pass, preserve a recoverable previous ver
 
 [Exact audits and lock hashes](https://github.com/Herbertofury/Engineering-Atlas/tree/d2bb61459aa5e22375f2f1347cb54946fb688c4b/experiments/dependency-audit-lab) cover 185 application packages, 47 isolated compression packages and 26 parser packages. A fresh RustSec fetch was pinned to 99670cfc; all three final checks used a clean worktree and returned no known matches, warnings or ignored advisories. A retained untracked placeholder caused the original cleanliness assertion to fail, so a separate worktree was used rather than deleting history or pretending it was clean.
 
-[The delta review](https://github.com/Herbertofury/Engineering-Atlas/blob/d2bb61459aa5e22375f2f1347cb54946fb688c4b/research/2026-10-27-security-delta.md) distinguishes rustls-ffi from rustls and records the assigned nextest advisory. Neither affected package is in the checked locks; the reviewed workflow uses cargo test. This is not an inventory of globally installed tools, other projects, vendored source safety or unknown vulnerabilities. No security setting or dependency was changed.
+[The delta review](https://github.com/Herbertofury/Athena/blob/d1d6d998ba38d2fcedd140c48e3c5d21e132f671/engineering/research/2026-10-27-security-delta.md) distinguishes rustls-ffi from rustls and records the assigned nextest advisory. Neither affected package is in the checked locks; the reviewed workflow uses cargo test. This is not an inventory of globally installed tools, other projects, vendored source safety or unknown vulnerabilities. No security setting or dependency was changed.
 
 ### Repeatable audit hygiene
 
 [The pinned audit runner](https://github.com/Herbertofury/Engineering-Atlas/blob/a2d47438676b5589f12c0cccfe29e6b99d66e197/experiments/dependency-audit-lab/run_pinned_audit.py) verifies the tool hash, expected database commit, clean worktree and advisory-file inventory; freezes three fixed lockfiles; rejects filters/ignored checks; and retains partial timeout/error output. A real dirty checkout was rejected before audit/output creation, while a clean pinned run completed all three checks. Seven fixtures cover failure gates without executing fixture binaries.
 
 This is a trusted analyst CLI, not an app command endpoint or general self-modification. The caller still verifies revision freshness. Time/input limits and post-execution output checks are not hard OS isolation; raw local stderr needs review before sharing. [Results and limitations](https://github.com/Herbertofury/Engineering-Atlas/tree/a2d47438676b5589f12c0cccfe29e6b99d66e197/experiments/dependency-audit-lab).
+
+
+## Preserved evidence link provenance
+
+The links above now use content-identical Athena copies, verified by Git blob/tree identity on 2026-11-15. Original revision citations remain below as provenance, not runtime dependencies. This does not certify source-repository deletion readiness. Other historical links on this page remain unchanged where exact replacement was not verified.
+
+- Original: `https://github.com/Herbertofury/Engineering-Atlas/blob/d2bb61459aa5e22375f2f1347cb54946fb688c4b/research/2026-10-27-security-delta.md`; identical blob object: `bdc820bebecb31a1b8295d55b3d5764689fb2bf5`.

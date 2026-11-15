@@ -15,10 +15,10 @@ Reviewed October 28, 2026. A project-neutral guide to measured storage choices, 
 
 | Study | Verified result | Decision |
 |---|---|---|
-| [Prepared SQLite insertion](https://github.com/Herbertofury/Engineering-Atlas/tree/b66e2f0b2a559504d284fd9ac85dc2f924c0f137/experiments/rust-storage-lab) | Complete generated payloads, equal transaction boundaries | Preparation overhead is workload-dependent; no target-project recommendation |
-| [SQLite versus redb ordered insertion](https://github.com/Herbertofury/Engineering-Atlas/tree/b66e2f0b2a559504d284fd9ac85dc2f924c0f137/experiments/ordered-kv-lab) | Full public-source replay and generated density cases; rollback and readback checks | Sorted cursor did not win here; redb remains isolated |
-| [Actual connection contract](https://github.com/Herbertofury/Engineering-Atlas/tree/0c72b9953e1fe2e957608a4bcef1dc0f95710b04/experiments/sqlite-contract-lab) | Three failing baseline regressions repaired; 108 unit, eight integration and 55 HTTP checks | Applied to Atlas stores only; not a speed or physical durability claim |
-| [Optimized-interpreter receipt repair](https://github.com/Herbertofury/Engineering-Atlas/tree/b66e2f0b2a559504d284fd9ac85dc2f924c0f137/experiments/ordered-kv-lab/evidence/receipt-guard) | 46 malformed cases rejected in normal and optimized Python; 82 historical samples revalidated; 32 fresh Rust processes through the optimized runner | Explicit acceptance checks replace debug assertions |
+| [Prepared SQLite insertion](https://github.com/Herbertofury/Athena/tree/d1d6d998ba38d2fcedd140c48e3c5d21e132f671/engineering/experiments/rust-storage-lab) | Complete generated payloads, equal transaction boundaries | Preparation overhead is workload-dependent; no target-project recommendation |
+| [SQLite versus redb ordered insertion](https://github.com/Herbertofury/Athena/tree/d1d6d998ba38d2fcedd140c48e3c5d21e132f671/engineering/experiments/ordered-kv-lab) | Full public-source replay and generated density cases; rollback and readback checks | Sorted cursor did not win here; redb remains isolated |
+| [Actual connection contract](https://github.com/Herbertofury/Athena/tree/d1d6d998ba38d2fcedd140c48e3c5d21e132f671/engineering/experiments/sqlite-contract-lab) | Three failing baseline regressions repaired; 108 unit, eight integration and 55 HTTP checks | Applied to Atlas stores only; not a speed or physical durability claim |
+| [Optimized-interpreter receipt repair](https://github.com/Herbertofury/Athena/tree/d1d6d998ba38d2fcedd140c48e3c5d21e132f671/engineering/experiments/ordered-kv-lab/evidence/receipt-guard) | 46 malformed cases rejected in normal and optimized Python; 82 historical samples revalidated; 32 fresh Rust processes through the optimized runner | Explicit acceptance checks replace debug assertions |
 
 ## Preserve the failure, not just the fastest retry
 
@@ -47,3 +47,13 @@ The new gate uses Atlas's existing duplicate-key/non-finite decoder and explicit
 5. Re-run against an actual target's current implementation before placing a recommendation in that target's wiki or TODO.
 
 [Evidence index](Engineering-Experiment-Evidence) · [Algorithms and storage](Engineering-Algorithms-and-Storage) · [Research method](Engineering-Research-Method)
+
+
+## Preserved evidence link provenance
+
+The links above now use content-identical Athena copies, verified by Git blob/tree identity on 2026-11-15. Original revision citations remain below as provenance, not runtime dependencies. This does not certify source-repository deletion readiness. Other historical links on this page remain unchanged where exact replacement was not verified.
+
+- Original: `https://github.com/Herbertofury/Engineering-Atlas/tree/b66e2f0b2a559504d284fd9ac85dc2f924c0f137/experiments/ordered-kv-lab/evidence/receipt-guard`; identical tree object: `36f2f61587a0a17d0e7c7194ac4415feff3fe042`.
+- Original: `https://github.com/Herbertofury/Engineering-Atlas/tree/0c72b9953e1fe2e957608a4bcef1dc0f95710b04/experiments/sqlite-contract-lab`; identical tree object: `3224414536b3d0f96529ce62e07e166f1bbe6d33`.
+- Original: `https://github.com/Herbertofury/Engineering-Atlas/tree/b66e2f0b2a559504d284fd9ac85dc2f924c0f137/experiments/rust-storage-lab`; identical tree object: `a76d968d51a276d928a72ce4b8847b7217cb4467`.
+- Original: `https://github.com/Herbertofury/Engineering-Atlas/tree/b66e2f0b2a559504d284fd9ac85dc2f924c0f137/experiments/ordered-kv-lab`; identical tree object: `26cd130464f9c061ce9cc59125d62b9cbda7f8dc`.
