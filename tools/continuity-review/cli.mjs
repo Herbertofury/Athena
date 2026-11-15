@@ -2,17 +2,19 @@
 import fs from 'node:fs';
 import {TextDecoder} from 'node:util';
 import {review, markdown} from './review.mjs';
-const usage = 'node tools/continuity-review/cli.mjs --input continuity.json [--project NAME] [--format markdown|json] [--output NEW_FILE]';
+import {compare, comparisonMarkdown} from './compare.mjs';
+const usage = 'node tools/continuity-review/cli.mjs --input continuity.json [--baseline BEFORE.json] [--project NAME] [--format markdown|json] [--output NEW_FILE]';
 try {
   const args = process.argv.slice(2), options = {};
   if (args.length === 1 && args[0] === '--help') {console.log(usage); process.exit(0);}
   for (let index = 0; index < args.length; index += 2) {
     const key = args[index], value = args[index + 1];
-    if (!['--input', '--project', '--format', '--output'].includes(key) || value === undefined || key in options) throw Error('Invalid arguments');
+    if (!['--input', '--baseline', '--project', '--format', '--output'].includes(key) || value === undefined || key in options) throw Error('Invalid arguments');
     options[key] = value;
   }
   if (!options['--input'] || !['markdown', 'json'].includes(options['--format'] || 'markdown')) throw Error('Invalid arguments');
-  const path = options['--input'], before = fs.lstatSync(path);
+  function readInput(path) {
+  const before = fs.lstatSync(path);
   if (!before.isFile() || before.isSymbolicLink()) throw Error('Select a regular file');
   const fd = fs.openSync(path, fs.constants.O_RDONLY | (fs.constants.O_NOFOLLOW || 0));
   let data;
@@ -24,8 +26,12 @@ try {
     if (length > limit) throw Error('Input too large');
     data = JSON.parse(new TextDecoder('utf-8', {fatal: true}).decode(buffer.subarray(0, length)));
   } finally {fs.closeSync(fd);}
-  const report = review(data, options['--project'] || '');
-  const text = options['--format'] === 'json' ? JSON.stringify(report, null, 2) + '\n' : markdown(report);
+  return data;
+  }
+  const data = readInput(options['--input']);
+  const comparing = options['--baseline'] !== undefined;
+  const report = comparing ? compare(readInput(options['--baseline']), data, options['--project'] || '') : review(data, options['--project'] || '');
+  const text = options['--format'] === 'json' ? JSON.stringify(report, null, 2) + '\n' : (comparing ? comparisonMarkdown(report) : markdown(report));
   if (options['--output']) fs.writeFileSync(options['--output'], text, {flag: 'wx', mode: 0o600});
   else process.stdout.write(text);
 } catch {
