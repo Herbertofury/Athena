@@ -454,6 +454,26 @@ fn persist_experiment(
         }
     }
 }
+fn persist_complete_dedup(
+    path: &Path,
+    run: &crate::experiment_runner::RunOutput,
+) -> (bool, serde_json::Value) {
+    let mut output = serde_json::json!({"experiment":run,"acceptance_policy":crate::experiment_runner::policy().snapshot()});
+    match crate::journal::Journal::open(path)
+        .map_err(|_| ())
+        .and_then(|mut journal| journal.record_run(run).map_err(|_| ()))
+    {
+        Ok(id) => {
+            output["experiment_id"] = id.into();
+            output["experiment_id_text"] = id.to_string().into();
+            (run.completed, output)
+        }
+        Err(()) => {
+            output["error"]="Could not append complete experiment history; raw evidence remains in this job result".into();
+            (false, output)
+        }
+    }
+}
 fn saved_version_experiment(
     path: &Path,
     version: &str,
@@ -590,8 +610,7 @@ fn worker(path: PathBuf, stop: Arc<AtomicBool>, status: Arc<AtomicU8>, wake: Rec
                     }),
                     Job::ReviewUpstream {source}=>upstream_job(&path,source,&mut upstream_client,&stop),
                     Job::DedupExperiment=>crate::experiment_runner::run_builtin(||stop.load(Ordering::Relaxed)).map(|run|{
-                        let output=serde_json::json!({"experiment":run});
-                        persist_experiment(&path,run.completed,output,&run.evidence,&crate::experiment_runner::policy())
+                        persist_complete_dedup(&path,&run)
                     }).map_err(|_|"Built-in experiment configuration rejected"),
                     Job::VersionValidationExperiment {version}=>saved_version_experiment(&path,version,&stop),
                 };
@@ -1434,5 +1453,61 @@ mod project_generation_tests {
                 );
             });
         std::fs::remove_dir_all(directory).unwrap();
+    }
+}
+
+#[cfg(test)]
+mod complete_dedup_history_tests {
+    use super::*;
+    #[test]
+    fn cancelled_run_is_retained_and_journal_failure_keeps_job_evidence() {
+        let path = std::env::temp_dir().join(format!(
+            "athena-complete-dedup-{}-{}.sqlite",
+            std::process::id(),
+            std::time::SystemTime::now()
+                .duration_since(std::time::UNIX_EPOCH)
+                .unwrap()
+                .as_nanos()
+        ));
+        std::fs::OpenOptions::new()
+            .create_new(true)
+            .write(true)
+            .open(&path)
+            .unwrap();
+        let run = crate::experiment_runner::run_builtin(|| true).unwrap();
+        let (completed, output) = persist_complete_dedup(&path, &run);
+        assert!(!completed);
+        let id = output["experiment_id_text"]
+            .as_str()
+            .unwrap()
+            .parse::<i64>()
+            .unwrap();
+        assert_eq!(
+            crate::journal::Journal::read_run(&path, id).unwrap(),
+            serde_json::to_value(&run).unwrap()
+        );
+        let c = rusqlite::Connection::open(&path).unwrap();
+        c.execute_batch("CREATE TRIGGER refuse_new_run BEFORE INSERT ON experiment_runs BEGIN SELECT RAISE(ABORT,'injected synthetic failure'); END;").unwrap();
+        drop(c);
+        let (completed, output) = persist_complete_dedup(&path, &run);
+        assert!(!completed);
+        assert!(output.get("experiment_id_text").is_none());
+        assert_eq!(output["experiment"], serde_json::to_value(&run).unwrap());
+        assert!(output["error"].is_string());
+        let c = rusqlite::Connection::open(&path).unwrap();
+        assert_eq!(
+            c.query_row("SELECT count(*) FROM experiments", [], |r| r
+                .get::<_, i64>(0))
+                .unwrap(),
+            1
+        );
+        assert_eq!(
+            c.query_row("SELECT count(*) FROM experiment_runs", [], |r| r
+                .get::<_, i64>(0))
+                .unwrap(),
+            1
+        );
+        drop(c);
+        std::fs::remove_file(path).unwrap();
     }
 }

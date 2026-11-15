@@ -110,6 +110,42 @@ async fn record(
     .await
     .map_err(|_| StatusCode::INTERNAL_SERVER_ERROR)?
 }
+fn job_status(path: &std::path::Path, id: i64) -> rusqlite::Result<Option<serde_json::Value>> {
+    let c = connection(path)?;
+    let row:Option<(String,Option<String>)>=c.query_row("SELECT state,CASE WHEN length(CAST(result AS BLOB))<=2097152 THEN result END FROM jobs WHERE id=?1 AND payload='\"DedupExperiment\"'",[id],|r|Ok((r.get(0)?,r.get(1)?))).optional()?;
+    let Some((state, raw)) = row else {
+        return Ok(None);
+    };
+    let result = raw.and_then(|text| serde_json::from_str::<serde_json::Value>(&text).ok());
+    let experiment_id = result
+        .as_ref()
+        .and_then(|r| r["experiment_id_text"].as_str())
+        .filter(|id| id.parse::<i64>().is_ok_and(|n| n > 0));
+    Ok(Some(
+        serde_json::json!({"id":id.to_string(),"state":state,"experiment_id":experiment_id,"history_retained":experiment_id.is_some()}),
+    ))
+}
+async fn job(
+    State(s): State<History>,
+    Path(id): Path<i64>,
+) -> Result<Json<serde_json::Value>, StatusCode> {
+    if id <= 0 {
+        return Err(StatusCode::BAD_REQUEST);
+    }
+    let permit = s
+        .slots
+        .try_acquire_owned()
+        .map_err(|_| StatusCode::TOO_MANY_REQUESTS)?;
+    tokio::task::spawn_blocking(move || {
+        let _permit = permit;
+        job_status(&s.path, id)
+            .map_err(|_| StatusCode::INTERNAL_SERVER_ERROR)?
+            .map(Json)
+            .ok_or(StatusCode::NOT_FOUND)
+    })
+    .await
+    .map_err(|_| StatusCode::INTERNAL_SERVER_ERROR)?
+}
 pub fn router(path: PathBuf) -> Router {
     Router::new()
         .route(
@@ -136,6 +172,17 @@ pub fn router(path: PathBuf) -> Router {
                     .into_response()
             }),
         )
+        .route(
+            "/learning/job-submit.mjs",
+            get(|| async {
+                (
+                    [(header::CONTENT_TYPE, "text/javascript")],
+                    include_str!("../ui/job-submit.mjs"),
+                )
+                    .into_response()
+            }),
+        )
+        .route("/api/learning/jobs/{id}", get(job))
         .route("/api/learning/history", get(list))
         .route("/api/learning/history/{id}", get(record))
         .with_state(History {
