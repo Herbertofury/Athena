@@ -2,9 +2,9 @@
 const fs=require('node:fs'),path=require('node:path'),http=require('node:http'),assert=require('node:assert/strict'),crypto=require('node:crypto');
 const {chromium}=require('playwright');
 const root=path.resolve(process.env.ATHENA_BROWSER_ROOT||'dist'),out=path.resolve(process.env.ATHENA_BROWSER_OUTPUT||'browser-results/foundry-video-routing');
-const fixture=process.env.ATHENA_LOCAL_VIDEO_FIXTURE;
-if(!fixture||!fs.statSync(fixture).isFile())throw Error('ATHENA_LOCAL_VIDEO_FIXTURE must identify an existing synthetic test video');
-const report={kind:'actual Chromium synthetic local-file routing',fixtureSHA256:crypto.createHash('sha256').update(fs.readFileSync(fixture)).digest('hex'),checks:[],errors:[],outsideRequests:[],limitations:['Synthetic local video only; no real user media or providers','Does not establish all codecs, Windows acceptance or full original media parity']};
+let fixture=process.env.ATHENA_LOCAL_VIDEO_FIXTURE;
+if(fixture&&!fs.statSync(fixture).isFile())throw Error('ATHENA_LOCAL_VIDEO_FIXTURE must identify an existing synthetic test video');
+const report={kind:'actual Chromium synthetic local-file routing',fixtureSource:fixture?'operator synthetic fixture':'generated canvas pattern (no capture device)',checks:[],errors:[],outsideRequests:[],limitations:['Synthetic local video only; no real user media or providers','Does not establish all codecs, Windows acceptance or full original media parity']};
 let browser,server,page;
 async function check(name,fn){report.current=name;await fn();report.checks.push(name);}
 (async()=>{
@@ -14,6 +14,23 @@ async function check(name,fn){report.current=name;await fn();report.checks.push(
  browser=await chromium.launch({headless:true,...(process.env.CHROMIUM_PATH?{executablePath:process.env.CHROMIUM_PATH}:{})});report.browser=browser.version();
  const context=await browser.newContext({viewport:{width:1440,height:1000},reducedMotion:'reduce'});
  await context.route('**/*',route=>{const u=new URL(route.request().url());if(u.origin!==origin&&u.protocol!=='blob:'){report.outsideRequests.push(u.href);return route.abort();}return route.continue();});
+ if(!fixture){
+  const generator=await context.newPage();
+  try{const bytes=await generator.evaluate(async()=>{
+   const canvas=document.createElement('canvas');canvas.width=160;canvas.height=90;
+   if(!MediaRecorder.isTypeSupported('video/webm;codecs=vp8'))throw Error('Synthetic VP8 recorder unavailable');
+   const draw=canvas.getContext('2d'),stream=canvas.captureStream(15),chunks=[];
+   const recorder=new MediaRecorder(stream,{mimeType:'video/webm;codecs=vp8'});let timer,deadline;
+   try{return await new Promise((resolve,reject)=>{let frame=0;
+    recorder.ondataavailable=e=>{if(e.data.size)chunks.push(e.data)};
+    recorder.onerror=()=>reject(Error('Synthetic video recording failed'));
+    recorder.onstop=async()=>{try{resolve(Array.from(new Uint8Array(await new Blob(chunks,{type:'video/webm'}).arrayBuffer())))}catch(e){reject(e)}};
+    deadline=setTimeout(()=>reject(Error('Synthetic recording deadline exceeded')),10000);
+    recorder.start();timer=setInterval(()=>{draw.fillStyle=frame%2?'#204080':'#80c040';draw.fillRect(0,0,160,90);draw.fillStyle='#ffffff';draw.fillRect((frame*7)%140,20,20,50);if(++frame===30){clearInterval(timer);recorder.stop()}},80);
+   });}finally{clearInterval(timer);clearTimeout(deadline);if(recorder.state!=='inactive')recorder.stop();stream.getTracks().forEach(t=>t.stop())}
+  });if(!bytes.length||bytes.length>1024*1024)throw Error('Synthetic video exceeds bounds');fixture=path.join(out,'synthetic.webm');fs.writeFileSync(fixture,Buffer.from(bytes));}finally{await generator.close()}
+ }
+ report.fixtureSHA256=crypto.createHash('sha256').update(fs.readFileSync(fixture)).digest('hex');
  page=await context.newPage();page.on('pageerror',e=>report.errors.push(e.message));
  await page.goto(origin+'/index.html#build');
  await page.locator('[data-local-video-file]').waitFor();
