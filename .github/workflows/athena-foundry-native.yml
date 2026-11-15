@@ -105,6 +105,7 @@ jobs:
           name: native-foundry-${{ matrix.os }}
           path: |
             browser-results/foundry-native/
+            browser-results/unified-native/
             browser-results/foundry-capacity/
             browser-results/foundry-local-image/
             browser-results/foundry-video-routing/

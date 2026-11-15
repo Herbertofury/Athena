@@ -31,3 +31,10 @@ in this profile, no source retirement claim. Private directory trust is necessar
 path checks are not race-proof local sandboxing. SQL deadline is cooperative and
 response timeout does not prove transaction cancellation. See the runtime guide
 for exact byte/time/admission bounds and uncertain-outcome behavior.
+
+Initial hosted native run43719863909 reached unified Lab/Foundry and PNG decode
+but its one-frame synthetic video did not produce the required playing-event
+acceptance. Replaced that generator with the existing animated30-frame VP8
+workload, kept the strict trusted-event assertion, and added media-failure state
+and unified screenshot/report artifact retention. This is a retained failed
+acceptance, not a playback success or reason to relax CSP.

@@ -79,9 +79,16 @@ try {
   await page.locator('[data-local-image-route]').click();assert.equal(await page.locator('[data-local-image-surface] img').evaluate(i=>i.naturalWidth),64);
   await page.locator('[data-local-image-close]').click();
   const bytes=await page.evaluate(async()=>{
-   const canvas=document.createElement('canvas');canvas.width=64;canvas.height=48;const ctx=canvas.getContext('2d'),stream=canvas.captureStream(10),chunks=[];
-   const recorder=new MediaRecorder(stream,{mimeType:'video/webm;codecs=vp8'});
-   try{return await new Promise((resolve,reject)=>{recorder.ondataavailable=e=>chunks.push(e.data);recorder.onerror=()=>reject(Error('synthetic recorder failed'));recorder.onstop=async()=>resolve(Array.from(new Uint8Array(await new Blob(chunks,{type:'video/webm'}).arrayBuffer())));recorder.start();ctx.fillRect(0,0,64,48);setTimeout(()=>recorder.stop(),300)})}finally{stream.getTracks().forEach(t=>t.stop())}
+   const canvas=document.createElement('canvas');canvas.width=160;canvas.height=90;
+   const ctx=canvas.getContext('2d'),stream=canvas.captureStream(15),chunks=[];
+   const recorder=new MediaRecorder(stream,{mimeType:'video/webm;codecs=vp8'});let timer,deadline;
+   try{return await new Promise((resolve,reject)=>{
+    let frame=0;recorder.ondataavailable=e=>{if(e.data.size)chunks.push(e.data)};
+    recorder.onerror=()=>reject(Error('synthetic recorder failed'));
+    recorder.onstop=async()=>resolve(Array.from(new Uint8Array(await new Blob(chunks,{type:'video/webm'}).arrayBuffer())));
+    deadline=setTimeout(()=>reject(Error('synthetic recorder deadline')),10000);
+    recorder.start();timer=setInterval(()=>{ctx.fillStyle=frame%2?'#204080':'#80c040';ctx.fillRect(0,0,160,90);ctx.fillStyle='#ffffff';ctx.fillRect((frame*7)%140,20,20,50);if(++frame===30){clearInterval(timer);recorder.stop()}},80);
+   })}finally{clearInterval(timer);clearTimeout(deadline);if(recorder.state!=='inactive')recorder.stop();stream.getTracks().forEach(t=>t.stop())}
   });
   await page.locator('[data-local-video-file]').setInputFiles({name:'synthetic.webm',mimeType:'video/webm',buffer:Buffer.from(bytes)});
   await page.locator('[data-local-video-play]:not(:disabled)').waitFor();assert.equal(await page.locator('video').evaluate(v=>v.paused),true);
@@ -256,7 +263,7 @@ try {
  assert.deepEqual(report.errors,[]);
  await page.screenshot({path:path.join(out,'native-profile.png'),fullPage:true});
  report.passed=true;
-} catch(error){report.passed=false;report.failure=String(error.stack||error);if(page)await page.screenshot({path:path.join(out,'failure.png'),fullPage:true}).catch(()=>{});process.exitCode=1;}
+} catch(error){report.passed=false;report.failure=String(error.stack||error);if(page)report.mediaFailure=await page.locator('video').evaluateAll(xs=>xs.map(v=>({readyState:v.readyState,paused:v.paused,ended:v.ended,time:v.currentTime,duration:v.duration,error:v.error?.message||null,playingEvent:v.dataset.nativeTestPlaying||null}))).catch(()=>[]);if(page)await page.screenshot({path:path.join(out,'failure.png'),fullPage:true}).catch(()=>{});process.exitCode=1;}
 finally {
  await browser?.close();
  await stopBridge().catch(error=>{report.passed=false;report.errors.push(String(error));process.exitCode=1;});
