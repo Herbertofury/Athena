@@ -3,3 +3,5 @@
 .runner{border:1px solid #45405f;border-radius:16px;padding:1.2rem;background:#191d2b;margin-bottom:2rem}.runner h2{margin-top:0}.runner p{max-width:850px}.runner button{background:#c9b9ff;color:#171020;border-radius:9px;padding:.7rem 1rem}.runner button:disabled{opacity:.55;cursor:wait}
 
 .runner{overflow-wrap:anywhere}
+
+.comparison-controls{border:1px solid #45405f;border-radius:16px;padding:1rem;margin-bottom:1rem}.comparison-controls button{border:1px solid #65607e;border-radius:8px;padding:.5rem .8rem;margin:.25rem}.comparison-controls button:disabled{opacity:.5;cursor:default}.comparison-controls p,#comparison-result{overflow-wrap:anywhere;color:#c2bdd6;font-size:.85rem}.comparison-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}.record-panel{min-width:0;overflow-wrap:anywhere}.record-panel h3{font-size:1rem}.comparison-grid .record-panel{border-top:2px solid #8471b2;padding-top:.5rem}@media(max-width:1050px){.comparison-grid{grid-template-columns:1fr}}
