@@ -4,6 +4,7 @@ Transport is in-memory, not browser/socket acceptance. No provider requests.
 import hashlib,importlib.util,json,os,pathlib,subprocess,sys,tempfile,threading,unittest
 from email.message import Message
 from unittest.mock import Mock
+from reconcile import reconcile
 ROOT=pathlib.Path(__file__).resolve().parents[3]
 spec=importlib.util.spec_from_file_location('music_parity_bridge',ROOT/'native/foundry/bridge.py')
 bridge=importlib.util.module_from_spec(spec);spec.loader.exec_module(bridge)
@@ -34,6 +35,8 @@ class ParityTests(unittest.TestCase):
    for command in ['init']+['upgrade-'+x for x in UPGRADES]:self.assertEqual(cli(command).returncode,0)
    self.assertEqual(cli('import-music-json',payload).returncode,0)
    persisted=db.read_bytes();versions=[]
+   report=reconcile(src,mapping,db,catalog,True)
+   self.assertEqual(report['counts']['exact'],len(contexts));self.assertTrue(report['all_mapped_records_match']);self.assertFalse(report['migration_complete'])
    for restart in range(2):
     server=bridge.Bridge.__new__(bridge.Bridge);server.binary=str(binary);server.database=str(db);server.operation_lock=threading.RLock();server.schema=15;server.host='127.0.0.1:1';server.origin='http://'+server.host
     current=[]
