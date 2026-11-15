@@ -42,3 +42,9 @@ This is a portable reference pack, not a signed release, Skill installer, fleet 
 `python guidance/tools/skill_preflight.py /explicit/skill-directory` inventories one selected source without executing its code or treating its instructions as authority. It checks a deliberately limited single-line frontmatter subset, matching name/directory, required description, generated caches and bounded file/byte counts. Links and nonregular files are refused rather than followed. Unsupported YAML needs review; it is not declared invalid for every Skill host. No source discovery, installation, private-content output or propagation occurs.
 
 A structural pass is **not** security, licensing, host compatibility or runtime acceptance. Review filenames before publishing reports. Use a stable checkout: this is not a sandbox for concurrently hostile filesystem mutation. The retained eight-Skill source receipt is an inventory checkpoint only; domain assets and instruction semantics remain unreviewed for migration.
+
+## Legacy adoption transition review
+
+`python guidance/tools/plan_transition.py --target /explicit/consumer-checkout` produces a **read-only proposal**, reusing the consumer audit. It maps all 16 legacy snapshots to Athena paths, checks destination collisions and existing dual locks, and carries uninspected files and legacy-reference digests into review. Even matching unmanaged destinations are preserved for review, not silently adopted. Project-owned instructions and every legacy file remain untouched. A reviewable proposal is not authorization, policy-semantic equivalence or installed-harness acceptance; no apply command is provided. Review report filenames before sharing.
+
+The public Noxviola transition receipt is a real selected-consumer plan, not a completed migration. Existing `repository_governance.py apply` still refuses legacy locks until a separately reviewed transition exists.
