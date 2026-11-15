@@ -16,6 +16,7 @@ function plan(root,temporary,env=process.env){
     {name:'lab-reproducibility',command:env.PYTHON||'python3',args:['scripts/build_lab_workspace.py','--check'],cwd:root,env,timeout:60000},
     {name:'standalone-media-reproducibility',command:env.PYTHON||'python3',args:['engineering/scripts/build_media_lab.py','--check'],cwd:root,env,timeout:60000},
     {name:'static-browser',command:process.execPath,args:['scripts/test_browser.cjs'],cwd:root,env,timeout:180000},
+    {name:'software-browser',command:process.execPath,args:['scripts/software_browser_checks.cjs'],cwd:root,env:{...env,ATHENA_SOFTWARE_BROWSER_OUTPUT:path.join(output,'software')},timeout:180000},
     {name:'workshop-browser',command:process.execPath,args:['scripts/test_workshops_browser.cjs'],cwd:root,env:{...env,ATHENA_WORKSHOPS_BROWSER_OUTPUT:path.join(output,'workshops')},timeout:300000},
     {name:'accessibility-browser',command:process.execPath,args:['scripts/test_accessibility_browser.cjs'],cwd:root,env:{...env,ATHENA_ACCESSIBILITY_BROWSER_OUTPUT:path.join(output,'accessibility')},timeout:300000},
     {name:'rust-tests',command:'cargo',args:['test','--locked','--all-targets','--target-dir',target],cwd:lab,env:cargoEnv,timeout:900000},
@@ -24,6 +25,7 @@ function plan(root,temporary,env=process.env){
     {name:'foundry-store-clippy',command:'cargo',args:['clippy','--locked','--all-targets','--target-dir',target,'--','-D','warnings'],cwd:foundry,env:cargoEnv,timeout:900000},
     {name:'rust-build',command:'cargo',args:['build','--locked','--bin','atlas-lab','--target-dir',target],cwd:lab,env:cargoEnv,timeout:900000},
     {name:'verified-package',command:env.PYTHON||'python3',args:['scripts/package_app.py','--profile','public-preview','--allowlist','config/runtime-public-preview.json','--output',pkg],cwd:root,env,timeout:60000},
+    {name:'guidance-browser',command:process.execPath,args:['scripts/test_guidance_browser.cjs'],cwd:root,env:{...env,ATHENA_PUBLIC_ROOT:pkg},timeout:180000},
     {name:'rust-browser',command:process.execPath,args:['scripts/test_lab_runtime.cjs'],cwd:root,env:{...env,ATHENA_LAB_BINARY:path.join(target,'debug',process.platform==='win32'?'atlas-lab.exe':'atlas-lab'),ATHENA_RUNTIME_PACKAGE:pkg,ATHENA_LAB_TEST_OUTPUT:path.join(output,'lab-runtime'),ATHENA_LAB_HTTP_ONLY:'0'},timeout:240000}
   ];
 }

@@ -4,7 +4,7 @@
   "files": [
     {
       "path": "app.js",
-      "sha256": "6d6940eb0f97bd0744d47b066514199c0c6655af37544aca0bee8ded27b1e2d7"
+      "sha256": "439588f7f2fc3ddf002d79824510cfa1c0c48e1ab47623a2a6b655baa73769ca"
     },
     {
       "path": "catalog.js",
@@ -16,7 +16,7 @@
     },
     {
       "path": "index.html",
-      "sha256": "ed51fd1b0199bc1655d59a0e06dc6db614f3d29983c8c33095b220e6cd0e3dd6"
+      "sha256": "b95597d554e463d1f243ecc59f4541a5bd0d79b9bbf1b2d4b364c245f49979c6"
     },
     {
       "path": "native-store-bootstrap.js",
@@ -65,6 +65,22 @@
     {
       "path": "workspace-host.js",
       "sha256": "8a14dec17d4d816de53d325a94ee0dd00ac0bc8a0a26a756af58998173157cdb"
+    },
+    {
+      "path": "workspaces/continuity/context.mjs",
+      "sha256": "29ceebf3080b947d9ba7013d4f20c842832850a2d1433cd08f12fb1afd974ead"
+    },
+    {
+      "path": "workspaces/continuity/index.mjs",
+      "sha256": "18d528c3c8e3feaa6ed6fb2402019eed1c32b4beb4763139c46509936dcaabd0"
+    },
+    {
+      "path": "workspaces/continuity/model.mjs",
+      "sha256": "c47e47859d2d16e7c19f72cb6c999a205b3c8444e5b7f3379d96e93581e6d23a"
+    },
+    {
+      "path": "workspaces/continuity/style.css",
+      "sha256": "f550e505125deb513046b6e71889a6c7ad7e3165b50b2ac2957c094215f5d2aa"
     },
     {
       "path": "workspaces/engineering/audio/archive-selection.mjs",
@@ -431,22 +447,6 @@
       "sha256": "dd42d1183c1288667e1c040825933b5c2b1c44b6cf9ff0c29ec6afcc3c2005dc"
     },
     {
-      "path": "workspaces/continuity/index.mjs",
-      "sha256": "18d528c3c8e3feaa6ed6fb2402019eed1c32b4beb4763139c46509936dcaabd0"
-    },
-    {
-      "path": "workspaces/continuity/model.mjs",
-      "sha256": "c47e47859d2d16e7c19f72cb6c999a205b3c8444e5b7f3379d96e93581e6d23a"
-    },
-    {
-      "path": "workspaces/continuity/style.css",
-      "sha256": "f550e505125deb513046b6e71889a6c7ad7e3165b50b2ac2957c094215f5d2aa"
-    },
-    {
-      "path": "workspaces/continuity/context.mjs",
-      "sha256": "29ceebf3080b947d9ba7013d4f20c842832850a2d1433cd08f12fb1afd974ead"
-    },
-    {
       "path": "workspaces/guidance/catalog.json",
       "sha256": "29ad23400b3ca1bdd339a27a79c819b3bdbd64b0951fa141d384903a8aa2caaa"
     },
@@ -461,6 +461,22 @@
     {
       "path": "workspaces/guidance/style.css",
       "sha256": "a39eb687698f5b6208c1ff54bd6a3fa9547a27934ac8f746b7a2db4af9722a80"
+    },
+    {
+      "path": "workspaces/software/catalog.json",
+      "sha256": "c2b6af8a973a3dd58f9b1fe259eb5bc4cac70b65bb912968647aa7c545fabff2"
+    },
+    {
+      "path": "workspaces/software/index.mjs",
+      "sha256": "ee74ab61882a526a0d331aa90198771ded80049f3894c6742e4109585cf1fd6c"
+    },
+    {
+      "path": "workspaces/software/model.mjs",
+      "sha256": "ef08147df62f1a4c6319e17503f3a9d5584e6ba4c4a3ef33727282068eca6abd"
+    },
+    {
+      "path": "workspaces/software/style.css",
+      "sha256": "9add15b17765aabe8dc14420afa7ec4fd9d0098f244413a30c74cbec1693a8b2"
     }
   ]
 }

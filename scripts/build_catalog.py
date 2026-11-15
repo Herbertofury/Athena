@@ -109,3 +109,14 @@ for name in ("index.html", "table.js", "catalog.json"):
     target=R/"dist/research/windows-utilities-2026-11-14"/name
     target.parent.mkdir(parents=True, exist_ok=True)
     target.write_bytes((R/"research/windows-utilities-2026-11-14"/name).read_bytes())
+
+# Software discovery is part of the same Athena shell and generated Wiki navigation.
+for name, target in [("docs/README.md", "https://herbertofury.github.io/Athena/#software"), ("wiki/Home.md", "Software-Catalog"), ("wiki/_Sidebar.md", "Software-Catalog")]:
+ destination = R / name
+ links = "\n\n## Software discovery\n\n- [Catalog and application families](" + target + ")\n"
+ if name.startswith("wiki/"):
+  links += "- [Task decision guides](Software-Decision-Guides)\n- [Coverage and refresh priorities](Software-Coverage)\n- [Selection and evidence methodology](Software-Methodology)\n"
+ if name == "wiki/_Sidebar.md":
+  for family, label in [("System", "System and hardware"), ("Files", "Files, backup and recovery"), ("Security", "Security and privacy"), ("Networking", "Networks and remote access"), ("Productivity", "Productivity and accessibility"), ("Creative", "Creative and multimedia"), ("Development", "Development and automation"), ("Ai", "AI and local models"), ("Gaming", "Gaming and modding"), ("Science", "Science and specialized work")]:
+   links += "- [" + label + "](Software-" + family + ")\n"
+ destination.write_text(destination.read_text() + links)

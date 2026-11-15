@@ -41,3 +41,15 @@ jobs:
       - name: Publish
         id: deployment
         uses: actions/deploy-pages@v4
+      - name: Verify the published software workspace
+        env:
+          ATHENA_SOFTWARE_BASE_URL: ${{ steps.deployment.outputs.page_url }}
+          ATHENA_SOFTWARE_BROWSER_OUTPUT: browser-results/software-live
+        run: npm run test:software:browser
+      - name: Retain live publication evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: athena-software-live-verification
+          path: browser-results/software-live/
+          if-no-files-found: ignore

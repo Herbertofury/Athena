@@ -50,3 +50,11 @@ The engineering source is preserved under `engineering/`, with native wiki pages
 - [Version Control & Reproducible Delivery Workshop](Workshop-delivery-workshop)
 
 - [Keyboard access and verification limits](Accessibility)
+
+
+## Software discovery
+
+- [Catalog and application families](Software-Catalog)
+- [Task decision guides](Software-Decision-Guides)
+- [Coverage and refresh priorities](Software-Coverage)
+- [Selection and evidence methodology](Software-Methodology)

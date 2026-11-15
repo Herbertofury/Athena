@@ -139,3 +139,21 @@
 - [Version Control & Reproducible Delivery Workshop](Workshop-delivery-workshop)
 
 - [Keyboard access and verification limits](Accessibility)
+
+
+## Software discovery
+
+- [Catalog and application families](Software-Catalog)
+- [Task decision guides](Software-Decision-Guides)
+- [Coverage and refresh priorities](Software-Coverage)
+- [Selection and evidence methodology](Software-Methodology)
+- [System and hardware](Software-System)
+- [Files, backup and recovery](Software-Files)
+- [Security and privacy](Software-Security)
+- [Networks and remote access](Software-Networking)
+- [Productivity and accessibility](Software-Productivity)
+- [Creative and multimedia](Software-Creative)
+- [Development and automation](Software-Development)
+- [AI and local models](Software-Ai)
+- [Gaming and modding](Software-Gaming)
+- [Science and specialized work](Software-Science)

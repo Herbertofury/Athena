@@ -1,0 +1,418 @@
+{
+  "recipes": [
+    {
+      "id": "analyze-microscopy-and-volumetric-images",
+      "title": "Analyze microscopy slides and three-dimensional scans",
+      "description": "Choose by image type and analysis method: interactive segmentation, large-slide annotation, repeatable measurement pipelines or learned classification.",
+      "picks": [
+        {
+          "app_id": "3d-slicer",
+          "label": "Extensible volume workspace",
+          "reason": "Combines volumetric visualization, segmentation, registration and extensions in one shared environment.",
+          "tradeoff": "Validate the selected extensions and analysis method for the research workflow; the application does not establish clinical suitability."
+        },
+        {
+          "app_id": "itk-snap",
+          "label": "Focused volume segmentation",
+          "reason": "Linked orthogonal views and manual or active-contour segmentation suit tracing structures through image volumes.",
+          "tradeoff": "Its focused toolset offers fewer general-purpose extensions than 3D Slicer; stable and beta packages differ."
+        },
+        {
+          "app_id": "qupath",
+          "label": "Whole-slide annotations",
+          "reason": "Whole-slide viewing, object measurements and interactive classifiers suit microscopy-slide workflows.",
+          "tradeoff": "Validate classifiers and measurements on representative images; upstream specifies research use."
+        },
+        {
+          "app_id": "cellprofiler",
+          "label": "Repeatable batch measurements",
+          "reason": "Explicit processing pipelines apply the same measurement sequence to many biological images.",
+          "tradeoff": "Good pipelines still need segmentation tuning and quality checks; Linux uses a separate source-installation route."
+        },
+        {
+          "app_id": "ilastik",
+          "label": "Interactive image classification",
+          "reason": "Brush labels train pixel and object classifiers without writing a model-training program.",
+          "tradeoff": "Training examples determine the result, and GPU packages add hardware and licensing requirements."
+        }
+      ]
+    },
+    {
+      "id": "visualize-molecular-and-material-structures",
+      "title": "Visualize molecules, crystals and particle simulations",
+      "description": "Match the viewer to the data: molecular structures and maps, crystallographic densities, teaching demonstrations or particle trajectories.",
+      "picks": [
+        {
+          "app_id": "chimerax",
+          "label": "Molecular models with density maps",
+          "reason": "Combines molecular and volume visualization with commands and extension packages for structural-biology workflows.",
+          "tradeoff": "Noncommercial and commercial use have different terms; published source is not under an unrestricted open-source license."
+        },
+        {
+          "app_id": "pymol",
+          "label": "Scripted molecular figures",
+          "reason": "Scriptable scenes and molecular representations suit repeatable molecular illustrations.",
+          "tradeoff": "Commercial application bundles and permissively licensed source have different distribution and support terms."
+        },
+        {
+          "app_id": "jmol",
+          "label": "Portable chemistry demonstrations",
+          "reason": "Java desktop viewing and the related JSmol browser workflow support interactive molecular teaching.",
+          "tradeoff": "The desktop JAR requires Java; browser embedding is a separate deployment task."
+        },
+        {
+          "app_id": "vesta",
+          "label": "Crystals and volume densities",
+          "reason": "Crystal, polyhedral and isosurface views help inspect structures and density data together.",
+          "tradeoff": "The redistribution license is restrictive; current terms allow business use at no cost only until business-license conditions are established."
+        },
+        {
+          "app_id": "ovito",
+          "label": "Particle and atomistic trajectories",
+          "reason": "Pipeline-based particle analysis connects structural measurements with simulation visualization.",
+          "tradeoff": "Basic and Pro expose different modifiers and automation features; large trajectories need suitable resources."
+        }
+      ]
+    },
+    {
+      "id": "plot-fit-and-model-scientific-data",
+      "title": "Plot measurements, fit curves and explore mathematics",
+      "description": "Choose an interactive plotting application, a scriptable figure generator, a specialist fitter or a broader mathematical environment.",
+      "picks": [
+        {
+          "app_id": "labplot",
+          "label": "Graphical experimental analysis",
+          "reason": "Worksheets, plots, fitting, data import and digitization support a graphical measurement-analysis workflow.",
+          "tradeoff": "Notebook backends require separate runtimes; verify fitting models and imported units."
+        },
+        {
+          "app_id": "gnuplot",
+          "label": "Versionable plotting scripts",
+          "reason": "A compact plotting language produces repeatable two- and three-dimensional figures in automated workflows.",
+          "tradeoff": "The command language and terminal-specific output settings require learning."
+        },
+        {
+          "app_id": "fityk",
+          "label": "Peak and curve fitting",
+          "reason": "Interactive model construction and fitting tools suit overlapping peaks and experimental curves.",
+          "tradeoff": "Its published desktop binaries are older than its source release; assess packaging and model assumptions."
+        },
+        {
+          "app_id": "scilab",
+          "label": "Numerical engineering and Xcos",
+          "reason": "Matrix calculations, visualization and block-diagram simulation share one numerical environment.",
+          "tradeoff": "MATLAB language and toolbox compatibility are incomplete; check each external module."
+        },
+        {
+          "app_id": "sagemath",
+          "label": "Symbolic and algebraic exploration",
+          "reason": "A Python-based interface brings algebra, number theory and numerical packages into one mathematical system.",
+          "tradeoff": "The dependency stack is substantial, and current Windows usage goes through WSL or containers."
+        }
+      ]
+    },
+    {
+      "id": "select-engineering-simulation-workflow",
+      "title": "Choose a simulation workflow for an engineering problem",
+      "description": "Start with the physics and model representation; these tools serve different stages and are often complementary.",
+      "picks": [
+        {
+          "app_id": "openmodelica",
+          "label": "Equation-based system models",
+          "reason": "Modelica models and simulation tools suit coupled dynamic systems and reusable component models.",
+          "tradeoff": "Library compatibility, solver settings and initialization need validation for the chosen model."
+        },
+        {
+          "app_id": "simulide",
+          "label": "Interactive electronics learning",
+          "reason": "A visual real-time circuit environment supports analog, digital and selected microcontroller experiments.",
+          "tradeoff": "Device models and simulator approximations limit fidelity; check version-specific component support."
+        },
+        {
+          "app_id": "febio",
+          "label": "Biomechanics finite elements",
+          "reason": "Nonlinear materials and coupled physics focus on biomechanics and biophysics models, with FEBio Studio for model work.",
+          "tradeoff": "A specialist solver requires validated material models and boundary conditions; source and binary licenses differ."
+        },
+        {
+          "app_id": "openfoam",
+          "label": "Computational fluid dynamics",
+          "reason": "The Foundation distribution supplies extensible solvers and utilities for continuum and fluid simulations.",
+          "tradeoff": "Mesh quality, boundary conditions and solver selection require expertise; Windows and macOS follow supporting-environment instructions."
+        },
+        {
+          "app_id": "salome",
+          "label": "Geometry and simulation meshes",
+          "reason": "Geometry preparation, meshing and related workflow modules help prepare models for numerical solvers.",
+          "tradeoff": "A preprocessing platform does not replace the selected solver; module and package compatibility matter."
+        }
+      ]
+    },
+    {
+      "id": "process-satellite-and-environmental-data",
+      "title": "Process satellite imagery and environmental scenarios",
+      "description": "Separate satellite preprocessing, scalable image algorithms, ecosystem-service models and general geographic editing.",
+      "picks": [
+        {
+          "app_id": "esa-snap",
+          "label": "Sentinel product processing",
+          "reason": "Mission-specific toolboxes and processing graphs support remote-sensing raster workflows.",
+          "tradeoff": "Sensor product type and processing order matter; large scenes can require substantial memory and disk space."
+        },
+        {
+          "app_id": "orfeo-toolbox",
+          "label": "Scriptable image-processing algorithms",
+          "reason": "Command-line, Python and QGIS integrations suit repeatable processing of large remote-sensing imagery.",
+          "tradeoff": "Current package and QGIS-provider versions must match; ARM Mac usage follows a Docker route."
+        },
+        {
+          "app_id": "invest",
+          "label": "Ecosystem-service scenarios",
+          "reason": "Models connect spatial land-use inputs with ecosystem-service indicators and scenario comparisons.",
+          "tradeoff": "Outputs depend on local data, assumptions and model scope; inspect the documented telemetry and data requirements."
+        },
+        {
+          "app_id": "qgis",
+          "label": "General desktop GIS",
+          "reason": "Broad vector and raster editing, geoprocessing and map production support the surrounding geographic workflow.",
+          "tradeoff": "Domain-specific satellite and ecosystem models may still require external tools or plugins."
+        }
+      ]
+    },
+    {
+      "id": "acquire-guide-and-measure-astronomy-images",
+      "title": "Build an astronomy acquisition and analysis workflow",
+      "description": "Acquisition, mount guiding, plate solving, image processing and time-series measurements are separate jobs that may need several tools.",
+      "picks": [
+        {
+          "app_id": "nina",
+          "label": "Automated acquisition on Windows",
+          "reason": "Sequences and supported equipment integrations organize deep-sky imaging sessions.",
+          "tradeoff": "Confirm the exact camera, focuser, mount and driver support; it is a Windows application."
+        },
+        {
+          "app_id": "phd2",
+          "label": "Mount guiding",
+          "reason": "Guide-star tracking, calibration and diagnostic tools help maintain tracking during exposures.",
+          "tradeoff": "Guiding cannot compensate for every mechanical or optical problem; the exact guide camera and mount need support."
+        },
+        {
+          "app_id": "astap",
+          "label": "Plate solving and image inspection",
+          "reason": "Astrometric solving, stacking and FITS tools support image identification and processing.",
+          "tradeoff": "The selected star database, field of view and input quality affect solving; exact redistribution terms remain unverified."
+        },
+        {
+          "app_id": "siril",
+          "label": "Astronomy image processing",
+          "reason": "Calibration, registration, stacking and processing tools turn acquired image sets into finished astronomical images.",
+          "tradeoff": "Correct calibration frames and acquisition metadata remain essential; it does not replace equipment-control software."
+        },
+        {
+          "app_id": "astroimagej",
+          "label": "Photometry and time-series measurements",
+          "reason": "Astronomy-focused ImageJ tools support calibrated image analysis and light-curve work.",
+          "tradeoff": "Photometric accuracy depends on calibration, apertures, comparison stars and timing metadata."
+        }
+      ]
+    },
+    {
+      "id": "create-and-organize-typefaces",
+      "title": "Create fonts and manage an installed font collection",
+      "description": "Use a font editor to design glyphs and font behavior; use a manager to preview, activate and organize existing typefaces.",
+      "picks": [
+        {
+          "app_id": "fontforge",
+          "label": "Open-source font construction",
+          "reason": "Outline editing, font conversion and scripting cover a broad range of font-authoring tasks.",
+          "tradeoff": "The dense interface and production settings need learning; validate exports in target shaping and rendering engines."
+        },
+        {
+          "app_id": "birdfont",
+          "label": "Approachable outline design",
+          "reason": "Vector glyph editing and common font exports provide a focused font-design workflow.",
+          "tradeoff": "The free binary edition restricts created fonts to SIL Open Font License output; commercial and advanced formats have separate editions."
+        },
+        {
+          "app_id": "fontlab",
+          "label": "Commercial typeface production",
+          "reason": "Detailed glyph, family and variable-font tools target professional font production.",
+          "tradeoff": "It is paid Windows/macOS software; assess the trial against the required production workflow."
+        },
+        {
+          "app_id": "fontbase",
+          "label": "Font activation across desktops",
+          "reason": "Previewing, collections and activation help manage working typeface libraries on Windows, macOS and Linux.",
+          "tradeoff": "Advanced Awesome features require payment, and application activation behavior needs checking."
+        },
+        {
+          "app_id": "font-manager",
+          "label": "Linux desktop font management",
+          "reason": "Font previews, collections and fontconfig-oriented controls serve Linux desktop collections.",
+          "tradeoff": "Its scope is font management rather than glyph design; desktop and fontconfig behavior affect results."
+        }
+      ]
+    },
+    {
+      "id": "program-and-perform-electronic-sound",
+      "title": "Program instruments and perform with live code",
+      "description": "Choose a beginner-facing live-coding instrument, visual patches or a deeper language for synthesis and precisely timed processes.",
+      "picks": [
+        {
+          "app_id": "sonic-pi",
+          "label": "Approachable live coding",
+          "reason": "An integrated code editor, samples and synthesis tools support musical programming and performance.",
+          "tradeoff": "Complex audio routing and custom DSP may require a lower-level environment; web and desktop distributions differ."
+        },
+        {
+          "app_id": "pure-data",
+          "label": "Visual audio patches",
+          "reason": "A graphical dataflow model makes control, synthesis and interactive media patches explicit.",
+          "tradeoff": "External libraries and audio configuration can affect patch portability."
+        },
+        {
+          "app_id": "supercollider",
+          "label": "Programmable synthesis systems",
+          "reason": "A language and synthesis server support algorithmic composition, instruments and flexible control.",
+          "tradeoff": "The language, server architecture and timing model take study."
+        },
+        {
+          "app_id": "csound",
+          "label": "Detailed synthesis instruments",
+          "reason": "A large opcode library supports explicit signal processing and programmable instruments.",
+          "tradeoff": "Instrument design and host integration require technical learning; opcode support varies across environments."
+        },
+        {
+          "app_id": "chuck",
+          "label": "Precisely timed musical processes",
+          "reason": "Its strongly timed concurrent language makes timing and live program changes central to musical code.",
+          "tradeoff": "The timing and concurrency model is distinctive, and additional interfaces may require other tools."
+        }
+      ]
+    },
+    {
+      "id": "plan-and-write-long-documents",
+      "title": "Plan and write a novel, thesis or long document",
+      "description": "Choose by working format and planning style: Markdown with citations, structured outlining, story development or a commercial project binder.",
+      "picks": [
+        {
+          "app_id": "zettlr",
+          "label": "Markdown research writing",
+          "reason": "Plain-text files, citation integration and export tools suit research notes and long Markdown documents.",
+          "tradeoff": "Advanced export depends on the external document toolchain and careful citation configuration."
+        },
+        {
+          "app_id": "manuskript",
+          "label": "Open-source outlining",
+          "reason": "An outliner, story-planning tools and focused writing views support structured drafting.",
+          "tradeoff": "Export capabilities and platform packages differ from commercial writing suites; check the current package for the intended OS."
+        },
+        {
+          "app_id": "bibisco",
+          "label": "Characters and story structure",
+          "reason": "Character, scene and narrative-planning tools keep story development alongside manuscript work.",
+          "tradeoff": "Community and Supporters editions have different features; optional synchronization is a separate service."
+        },
+        {
+          "app_id": "scrivener",
+          "label": "Commercial project binder",
+          "reason": "Research material, scenes and draft organization share a project workspace with compilation tools.",
+          "tradeoff": "Windows and macOS licenses and features differ; learn compilation and backup behavior before a large project."
+        }
+      ]
+    },
+    {
+      "id": "translate-documents-and-software",
+      "title": "Translate documents or localize application strings",
+      "description": "A translation-memory application fits documents; catalog editors fit software strings and localization formats.",
+      "picks": [
+        {
+          "app_id": "omegat",
+          "label": "Document translation memory",
+          "reason": "Segmented translation, fuzzy matches, glossaries and translation memories support repeated document work.",
+          "tradeoff": "Check format filters and final exported documents; it is an assisted translation workflow rather than automatic translation alone."
+        },
+        {
+          "app_id": "poedit",
+          "label": "Focused localization editing",
+          "reason": "Catalog editing and validation support common software and website localization formats.",
+          "tradeoff": "Paid Pro assistance and services differ from the open-source core; verify the project format and plural rules."
+        },
+        {
+          "app_id": "lokalize",
+          "label": "Integrated localization workflow",
+          "reason": "Translation-memory and project tools support sustained application localization work.",
+          "tradeoff": "Linux is the main desktop route; Windows and macOS installers offered by KDE are nightly testing builds."
+        }
+      ]
+    },
+    {
+      "id": "choose-personal-accounting-workflow",
+      "title": "Choose software for household books and spending records",
+      "description": "Compare bookkeeping structure and import workflow before selecting a tool. Institution connectivity and financial-data formats vary.",
+      "picks": [
+        {
+          "app_id": "gnucash",
+          "label": "Double-entry books",
+          "reason": "Accounts, reconciliation, scheduled transactions and business-oriented records suit structured double-entry bookkeeping.",
+          "tradeoff": "The accounting model needs learning; online imports and quote services depend on external providers and components."
+        },
+        {
+          "app_id": "homebank",
+          "label": "Personal spending analysis",
+          "reason": "Imports, categories, budgets and reports make household transaction review approachable.",
+          "tradeoff": "It is oriented toward personal accounts rather than a full business ledger; third-party ports receive limited publisher support."
+        },
+        {
+          "app_id": "kmymoney",
+          "label": "Desktop personal-finance accounts",
+          "reason": "Account registers, scheduled transactions and reports organize household finances in a KDE application.",
+          "tradeoff": "Banking plugins vary by platform; the reviewed Windows distribution notes missing AqBanking support."
+        },
+        {
+          "app_id": "skrooge",
+          "label": "Flexible transaction analysis",
+          "reason": "Category, tag and report tools support detailed inspection of imported spending records.",
+          "tradeoff": "Import quality and duplicate handling need review; non-Linux installation routes can require more setup."
+        }
+      ]
+    },
+    {
+      "id": "choose-accessible-computer-interaction",
+      "title": "Choose accessible input, screen reading and document reading",
+      "description": "Match the barrier to the tool: eye-controlled typing, voice commands, desktop speech or accessible reading. Device and application compatibility determine the useful combination.",
+      "picks": [
+        {
+          "app_id": "optikey",
+          "label": "Eye-controlled typing and pointer",
+          "reason": "An on-screen keyboard and communication tools support interaction through compatible eye trackers and other input methods.",
+          "tradeoff": "Confirm the exact tracker and OptiKey version; newer releases have changed support for some older hardware."
+        },
+        {
+          "app_id": "talon",
+          "label": "Voice and alternative input",
+          "reason": "Voice commands, dictation and customizable input actions can support hands-free work across applications.",
+          "tradeoff": "Commands and recognition require setup and practice; Linux targets X11, and Talon+ has a separate paid membership."
+        },
+        {
+          "app_id": "orca-screen-reader",
+          "label": "Linux desktop speech and braille",
+          "reason": "Orca exposes accessible desktop interfaces through speech and braille on supported Linux environments.",
+          "tradeoff": "Results depend on each application exposing a usable accessibility interface."
+        },
+        {
+          "app_id": "nvda",
+          "label": "Windows desktop screen reading",
+          "reason": "The existing NVDA record covers keyboard-driven screen reading and extensibility on Windows.",
+          "tradeoff": "Application accessibility, speech setup and add-on compatibility require individual checks."
+        },
+        {
+          "app_id": "thorium-reader",
+          "label": "Accessible publication reading",
+          "reason": "Navigation and accessibility support focus on EPUB and other supported digital publications.",
+          "tradeoff": "Publication structure and protection schemes determine accessible reading; it does not replace a system screen reader."
+        }
+      ]
+    }
+  ]
+}

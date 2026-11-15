@@ -1,0 +1,358 @@
+{
+  "recipes": [
+    {
+      "id": "design-print-and-vector-documents",
+      "title": "Design page layouts and scalable artwork",
+      "description": "Match the tool to page layout, vector illustration, everyday documents or programmable typesetting.",
+      "picks": [
+        {
+          "app_id": "scribus",
+          "label": "Print layout",
+          "reason": "Page layout, color management and PDF output suit brochures and multi-page publications.",
+          "tradeoff": "Check imported assets and press requirements; proprietary layout-document interchange is limited."
+        },
+        {
+          "app_id": "inkscape",
+          "label": "Vector artwork",
+          "reason": "SVG-native editing suits icons, logos and illustrations that must remain scalable.",
+          "tradeoff": "It is primarily a drawing workflow; complex multi-page publishing needs a layout application."
+        },
+        {
+          "app_id": "libreoffice",
+          "label": "Office documents",
+          "reason": "Writer, Calc and Impress cover ordinary documents without a separate publishing stack.",
+          "tradeoff": "Complex imported Office files and macros need compatibility checks."
+        },
+        {
+          "app_id": "typst",
+          "label": "Programmable documents",
+          "reason": "The open-source compiler and templates support repeatable technical reports.",
+          "tradeoff": "The markup workflow and hosted-editor plans differ from traditional desktop word processing."
+        }
+      ]
+    },
+    {
+      "id": "inspect-and-process-image-files",
+      "title": "Inspect and process image files",
+      "description": "Choose for RAW development, minimal viewing, broad browsing or repeatable image processing.",
+      "picks": [
+        {
+          "app_id": "darktable",
+          "label": "RAW photography",
+          "reason": "Non-destructive processing and image-library tools fit photographic development.",
+          "tradeoff": "Learn the processing pipeline and verify camera support."
+        },
+        {
+          "app_id": "qview",
+          "label": "Minimal viewing",
+          "reason": "A sparse viewer interface keeps attention on the image.",
+          "tradeoff": "It omits full cataloging and photo-editing features."
+        },
+        {
+          "app_id": "xnview-mp",
+          "label": "Browse and batch",
+          "reason": "Viewing, metadata and batch conversion are available in one application.",
+          "tradeoff": "Company use needs an appropriate paid license."
+        },
+        {
+          "app_id": "imagemagick",
+          "label": "Scripted processing",
+          "reason": "Command-line transforms support repeatable conversion and image-composition pipelines.",
+          "tradeoff": "Build options, delegates and security policy affect supported formats."
+        }
+      ]
+    },
+    {
+      "id": "trim-convert-and-inspect-media",
+      "title": "Trim, convert and inspect media",
+      "description": "Use the operation you need to choose between trimming, transcoding, container changes and technical inspection.",
+      "picks": [
+        {
+          "app_id": "losslesscut",
+          "label": "Trim without full re-encoding",
+          "reason": "Stream-preserving cuts suit long recordings with unwanted sections.",
+          "tradeoff": "Keyframes constrain some cuts; store builds and direct-download pricing differ."
+        },
+        {
+          "app_id": "shutter-encoder",
+          "label": "Graphical conversion",
+          "reason": "An FFmpeg-based desktop interface exposes production-oriented conversion and rewrapping.",
+          "tradeoff": "Quality and delivery compatibility depend on the selected settings."
+        },
+        {
+          "app_id": "mkvtoolnix",
+          "label": "Matroska tracks",
+          "reason": "Dedicated muxing and metadata tools manage tracks and chapters in MKV files.",
+          "tradeoff": "This does not replace a video-effects or general transcoding workflow."
+        },
+        {
+          "app_id": "mediainfo",
+          "label": "Diagnose a file",
+          "reason": "Reports codecs, tracks and technical properties before import or delivery.",
+          "tradeoff": "Inspection does not repair the file."
+        }
+      ]
+    },
+    {
+      "id": "create-and-time-subtitles",
+      "title": "Create and time subtitles",
+      "description": "Compare a broad subtitle-editing workflow with detailed styled subtitle typesetting.",
+      "picks": [
+        {
+          "app_id": "subtitle-edit",
+          "label": "General subtitle work",
+          "reason": "Timing, conversion and video-assisted editing cover common subtitle preparation tasks.",
+          "tradeoff": "Runtime and media dependencies differ by platform."
+        },
+        {
+          "app_id": "aegisub",
+          "label": "Styled typesetting",
+          "reason": "Audio timing, ASS styling and video preview support detailed subtitle placement.",
+          "tradeoff": "Player support for complex ASS styling varies."
+        }
+      ]
+    },
+    {
+      "id": "write-music-notation",
+      "title": "Write music notation and guitar tabs",
+      "description": "Choose among visual score entry, reproducible engraving and instrument-specific notation.",
+      "picks": [
+        {
+          "app_id": "musescore-studio",
+          "label": "Visual score editing",
+          "reason": "An open-source desktop score editor combines notation, playback and part extraction.",
+          "tradeoff": "The desktop app is distinct from paid score-sharing and optional sound services."
+        },
+        {
+          "app_id": "lilypond",
+          "label": "Text-based engraving",
+          "reason": "Notation source can be versioned and compiled into printable scores.",
+          "tradeoff": "Learning the notation language is required."
+        },
+        {
+          "app_id": "frescobaldi",
+          "label": "LilyPond editor",
+          "reason": "Editing aids and preview provide a focused environment for LilyPond projects.",
+          "tradeoff": "LilyPond remains a separate required engraving engine."
+        },
+        {
+          "app_id": "tuxguitar",
+          "label": "Guitar tablature",
+          "reason": "Tablature and playback fit guitar-oriented composing and practice.",
+          "tradeoff": "Check import fidelity and the newer file format before sharing with older versions."
+        }
+      ]
+    },
+    {
+      "id": "build-a-software-synthesis-workspace",
+      "title": "Build a software synthesis workspace",
+      "description": "Compare modular patching, a broad hybrid synth and a focused FM instrument.",
+      "picks": [
+        {
+          "app_id": "bespoke-synth",
+          "label": "Modular composition",
+          "reason": "Visual patching combines synthesis, sequencing and processing modules.",
+          "tradeoff": "Its workflow differs from a conventional linear DAW."
+        },
+        {
+          "app_id": "vcv-rack",
+          "label": "Virtual modular rack",
+          "reason": "A module ecosystem and cable-based patching fit modular-synthesis study and sound design.",
+          "tradeoff": "Rack Free, Rack Pro and third-party modules have separate feature and licensing choices."
+        },
+        {
+          "app_id": "surge-xt",
+          "label": "Free hybrid instrument",
+          "reason": "Multiple synthesis methods and modulation options provide a broad sound-design palette.",
+          "tradeoff": "Plugin compatibility and complex-patch CPU demands need checking."
+        },
+        {
+          "app_id": "dexed",
+          "label": "FM specialist",
+          "reason": "DX7-inspired FM synthesis and patch workflows suit a specific sound-design approach.",
+          "tradeoff": "It is intentionally narrower than a general-purpose synthesizer."
+        }
+      ]
+    },
+    {
+      "id": "choose-a-personal-knowledge-base",
+      "title": "Choose a personal knowledge base",
+      "description": "Decide whether notebooks, local Markdown, hierarchical rich notes or plain-text sync integration best match your work.",
+      "picks": [
+        {
+          "app_id": "joplin",
+          "label": "Open-source notebooks",
+          "reason": "Markdown notes, notebooks and several synchronization options suit a conventional research notebook.",
+          "tradeoff": "Hosted Joplin Cloud is optional and paid; test sync and restore behavior."
+        },
+        {
+          "app_id": "obsidian",
+          "label": "Local linked files",
+          "reason": "Markdown vaults and links support a flexible, local-file knowledge graph.",
+          "tradeoff": "The app is proprietary; optional Sync and Publish services are paid."
+        },
+        {
+          "app_id": "trilium",
+          "label": "Rich hierarchy",
+          "reason": "Nested notes and multiple note types suit a structured personal knowledge base.",
+          "tradeoff": "Scripting and self-hosted options add administration responsibilities."
+        },
+        {
+          "app_id": "qownnotes",
+          "label": "Plain-text workflow",
+          "reason": "Markdown files and optional Nextcloud/ownCloud integration suit file-centered note management.",
+          "tradeoff": "The synchronization service is a separate component to configure."
+        }
+      ]
+    },
+    {
+      "id": "make-paperwork-searchable",
+      "title": "Scan, search and organize paperwork",
+      "description": "Choose a scanning interface, an automated OCR pipeline, or a focused page organizer.",
+      "picks": [
+        {
+          "app_id": "naps2",
+          "label": "Scan to searchable PDF",
+          "reason": "Scanner acquisition, page handling and OCR are available in a desktop interface.",
+          "tradeoff": "Driver support and scan quality affect the result."
+        },
+        {
+          "app_id": "ocrmypdf",
+          "label": "Automated PDF OCR",
+          "reason": "A command-line workflow adds searchable text layers to existing scanned PDFs.",
+          "tradeoff": "Language packs, dependencies and OCR review are required."
+        },
+        {
+          "app_id": "pdf-arranger",
+          "label": "Organize pages",
+          "reason": "Merge, split, crop and reorder PDF pages interactively.",
+          "tradeoff": "It does not replace text editing or a redaction tool."
+        },
+        {
+          "app_id": "okular",
+          "label": "Read and annotate",
+          "reason": "Document viewing and PDF annotation support reviewing the result.",
+          "tradeoff": "Annotation interoperability and platform packaging should be tested."
+        }
+      ]
+    },
+    {
+      "id": "analyze-scientific-images",
+      "title": "Analyze scientific images and simulation output",
+      "description": "Match microscopy images, Python-based image stacks or simulation meshes to the appropriate analysis environment.",
+      "picks": [
+        {
+          "app_id": "fiji",
+          "label": "Microscopy toolbox",
+          "reason": "The ImageJ distribution bundles many scientific imaging tools and plugins.",
+          "tradeoff": "Validate the chosen analysis and plugin versions before drawing conclusions."
+        },
+        {
+          "app_id": "napari",
+          "label": "Python image stacks",
+          "reason": "Multidimensional viewing and Python integration fit custom scientific imaging workflows.",
+          "tradeoff": "Manage the Python environment, plugin versions and memory needs."
+        },
+        {
+          "app_id": "paraview",
+          "label": "Simulation visualization",
+          "reason": "Data readers and a visualization pipeline fit numerical and mesh-based simulation outputs.",
+          "tradeoff": "Large datasets and specialized formats require resource planning."
+        }
+      ]
+    },
+    {
+      "id": "map-and-process-geospatial-data",
+      "title": "Map and process geospatial data",
+      "description": "Choose a desktop map-making environment, analysis engine, terrain specialist or point-cloud pipeline.",
+      "picks": [
+        {
+          "app_id": "qgis",
+          "label": "Desktop GIS",
+          "reason": "Map composition and spatial editing support a broad geographic-information workflow.",
+          "tradeoff": "Coordinate systems, data quality and plugins need review."
+        },
+        {
+          "app_id": "grass-gis",
+          "label": "Repeatable geospatial analysis",
+          "reason": "Dedicated raster/vector modules and scripting suit analytical processing.",
+          "tradeoff": "Region and projection concepts have a learning curve."
+        },
+        {
+          "app_id": "saga-gis",
+          "label": "Terrain specialist",
+          "reason": "Terrain, raster and geoscience modules support elevation-derived analysis.",
+          "tradeoff": "Check module behavior and version-specific file support."
+        },
+        {
+          "app_id": "pdal",
+          "label": "Point-cloud automation",
+          "reason": "Pipeline-based filtering and conversion suit batch LiDAR processing.",
+          "tradeoff": "A separate viewer helps inspect the results."
+        }
+      ]
+    },
+    {
+      "id": "design-and-simulate-electronics",
+      "title": "Design and simulate electronics",
+      "description": "Compare complete PCB design, a structured component workflow, accessible prototype documentation and circuit simulation.",
+      "picks": [
+        {
+          "app_id": "kicad",
+          "label": "PCB design suite",
+          "reason": "Schematic capture, board layout and 3D viewing cover a complete board-design workflow.",
+          "tradeoff": "Footprints and manufacturing outputs need checking against actual components and fabrication rules."
+        },
+        {
+          "app_id": "librepcb",
+          "label": "Integrated component libraries",
+          "reason": "A consistent schematic/board/library model suits repeatable component-driven designs.",
+          "tradeoff": "Confirm library coverage and advanced board requirements."
+        },
+        {
+          "app_id": "fritzing",
+          "label": "Prototype documentation",
+          "reason": "Breadboard, schematic and board views suit visually documenting accessible electronics projects.",
+          "tradeoff": "Official binaries are paid; component accuracy still needs review."
+        },
+        {
+          "app_id": "qucs-s",
+          "label": "Circuit simulation",
+          "reason": "A graphical front end connects schematics with several SPICE-compatible simulators.",
+          "tradeoff": "Models and simulator selection determine the validity of results."
+        }
+      ]
+    },
+    {
+      "id": "analyze-tabular-scientific-data",
+      "title": "Analyze tabular scientific data",
+      "description": "Compare conventional statistics, Bayesian workflows, visual data mining and matrix-based numerical programming.",
+      "picks": [
+        {
+          "app_id": "jamovi",
+          "label": "Spreadsheet-style statistics",
+          "reason": "A graphical data editor and R-based analyses suit teaching and common statistical tasks.",
+          "tradeoff": "Choose the model and assumptions deliberately; extra modules may be required."
+        },
+        {
+          "app_id": "jasp",
+          "label": "Frequentist and Bayesian analysis",
+          "reason": "Graphical analysis and reporting cover both statistical approaches.",
+          "tradeoff": "Interpretation and study design remain the responsibility of the analyst."
+        },
+        {
+          "app_id": "orange",
+          "label": "Visual analysis workflows",
+          "reason": "Connected widgets make exploratory analysis and machine-learning steps visible.",
+          "tradeoff": "Validate data splits and defaults to avoid misleading results."
+        },
+        {
+          "app_id": "gnu-octave",
+          "label": "Numerical programming",
+          "reason": "Matrix-oriented syntax supports custom numerical experiments and plotting.",
+          "tradeoff": "Compatibility with MATLAB toolboxes and specialized integrations is incomplete."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,3028 @@
+{
+  "schema_version": 1,
+  "reviewed_at": "2026-11-14",
+  "scope": "Follow-up factual-provenance audit of the 127 previously added systems records; original historical research snapshots remain unchanged.",
+  "input_sha256": "7aa804135a3318d41437f6889d7ab820141e81d6e9560b9a3278dc9c62365ea5",
+  "applications_preserved": 127,
+  "applications_updated": 110,
+  "sources_or_support_mappings_added": 92,
+  "pricing_before": {
+    "free": 87,
+    "mixed": 9,
+    "subscription": 4,
+    "freemium": 20,
+    "paid": 7
+  },
+  "pricing_after": {
+    "free": 54,
+    "unknown": 31,
+    "mixed": 10,
+    "subscription": 4,
+    "freemium": 21,
+    "paid": 7
+  },
+  "license_after": {
+    "open-source": 85,
+    "unknown": 5,
+    "source-available": 2,
+    "proprietary": 26,
+    "mixed": 9
+  },
+  "method": [
+    "Reused prior official-document bodies and retrieval receipts where their content supported the missing claim; independently fetched current application EULAs and price/platform documents for remaining gaps.",
+    "For public binary distribution, reviewed the official asset list and checked anonymous HTTP HEAD access to the main application package. Source archives, symbols, unrelated downloads and HTML donation interstitials were excluded as binary evidence.",
+    "No installer, command-line application or executable was run, and no package content was downloaded for execution. HEAD metadata establishes accessibility only, not signature, safety, functionality or performance.",
+    "Source supports identify exactly which fields have primary evidence. Unestablished pricing and exact application licensing remain unknown, without deleting the application.",
+    "The pricing labels for Monitorian and NanaZip were corrected to reflect paid add-ons or editions described by their maintainers.",
+    "Web-research receipts are identified separately when the raw shell response is a placeholder. Gzip responses were decoded before document review and document hashing.",
+    "No original Windows-PC or cleanup research snapshot, record ID, feature list or use-case list was changed."
+  ],
+  "changes": [
+    {
+      "id": "borgbackup",
+      "fields_changed": [
+        "sources"
+      ]
+    },
+    {
+      "id": "vorta",
+      "fields_changed": [
+        "sources"
+      ]
+    },
+    {
+      "id": "pika-backup",
+      "fields_changed": [
+        "pricing_model"
+      ]
+    },
+    {
+      "id": "back-in-time",
+      "fields_changed": [
+        "pricing_model"
+      ]
+    },
+    {
+      "id": "deja-dup",
+      "fields_changed": [
+        "pricing_model"
+      ]
+    },
+    {
+      "id": "urbackup",
+      "fields_changed": [
+        "sources"
+      ]
+    },
+    {
+      "id": "duplicacy",
+      "fields_changed": [
+        "sources"
+      ]
+    },
+    {
+      "id": "duplicity",
+      "fields_changed": [
+        "pricing_model"
+      ]
+    },
+    {
+      "id": "timeshift",
+      "fields_changed": [
+        "pricing_model"
+      ]
+    },
+    {
+      "id": "snapper",
+      "fields_changed": [
+        "pricing_model"
+      ]
+    },
+    {
+      "id": "clonezilla",
+      "fields_changed": [
+        "sources"
+      ]
+    },
+    {
+      "id": "rescuezilla",
+      "fields_changed": [
+        "sources"
+      ]
+    },
+    {
+      "id": "macrium-reflect",
+      "fields_changed": [
+        "sources"
+      ]
+    },
+    {
+      "id": "veeam-agent-windows",
+      "fields_changed": [
+        "sources"
+      ]
+    },
+    {
+      "id": "arq-backup",
+      "fields_changed": [
+        "sources"
+      ]
+    },
+    {
+      "id": "testdisk",
+      "fields_changed": [
+        "sources"
+      ]
+    },
+    {
+      "id": "photorec",
+      "fields_changed": [
+        "sources"
+      ]
+    },
+    {
+      "id": "gnu-ddrescue",
+      "fields_changed": [
+        "pricing_model",
+        "sources"
+      ]
+    },
+    {
+      "id": "dmde",
+      "fields_changed": [
+        "license",
+        "license_kind"
+      ]
+    },
+    {
+      "id": "r-studio",
+      "fields_changed": [
+        "sources"
+      ]
+    },
+    {
+      "id": "explorer-plus-plus",
+      "fields_changed": [
+        "sources"
+      ]
+    },
+    {
+      "id": "xyplorer",
+      "fields_changed": [
+        "sources"
+      ]
+    },
+    {
+      "id": "multi-commander",
+      "fields_changed": [
+        "license",
+        "license_kind"
+      ]
+    },
+    {
+      "id": "dolphin-file-manager",
+      "fields_changed": [
+        "pricing_model"
+      ]
+    },
+    {
+      "id": "thunar",
+      "fields_changed": [
+        "pricing_model",
+        "sources"
+      ]
+    },
+    {
+      "id": "nemo",
+      "fields_changed": [
+        "sources"
+      ]
+    },
+    {
+      "id": "gnome-files",
+      "fields_changed": [
+        "pricing_model"
+      ]
+    },
+    {
+      "id": "yazi",
+      "fields_changed": [
+        "sources"
+      ]
+    },
+    {
+      "id": "lf",
+      "fields_changed": [
+        "sources"
+      ]
+    },
+    {
+      "id": "ranger",
+      "fields_changed": [
+        "pricing_model",
+        "sources"
+      ]
+    },
+    {
+      "id": "nnn",
+      "fields_changed": [
+        "sources"
+      ]
+    },
+    {
+      "id": "broot",
+      "fields_changed": [
+        "sources"
+      ]
+    },
+    {
+      "id": "dupeguru",
+      "fields_changed": [
+        "sources"
+      ]
+    },
+    {
+      "id": "fclones",
+      "fields_changed": [
+        "sources"
+      ]
+    },
+    {
+      "id": "jdupes",
+      "fields_changed": [
+        "sources"
+      ]
+    },
+    {
+      "id": "ncdu",
+      "fields_changed": [
+        "sources"
+      ]
+    },
+    {
+      "id": "nanazip",
+      "fields_changed": [
+        "pricing_model",
+        "limitations",
+        "sources"
+      ]
+    },
+    {
+      "id": "winrar",
+      "fields_changed": [
+        "sources"
+      ]
+    },
+    {
+      "id": "filezilla",
+      "fields_changed": [
+        "sources"
+      ]
+    },
+    {
+      "id": "cyberduck",
+      "fields_changed": [
+        "sources"
+      ]
+    },
+    {
+      "id": "mountain-duck",
+      "fields_changed": [
+        "sources"
+      ]
+    },
+    {
+      "id": "openssh",
+      "fields_changed": [
+        "pricing_model"
+      ]
+    },
+    {
+      "id": "nmap",
+      "fields_changed": [
+        "sources"
+      ]
+    },
+    {
+      "id": "angry-ip-scanner",
+      "fields_changed": [
+        "sources"
+      ]
+    },
+    {
+      "id": "iperf3",
+      "fields_changed": [
+        "pricing_model"
+      ]
+    },
+    {
+      "id": "mtr",
+      "fields_changed": [
+        "pricing_model"
+      ]
+    },
+    {
+      "id": "trippy",
+      "fields_changed": [
+        "sources"
+      ]
+    },
+    {
+      "id": "bandwhich",
+      "fields_changed": [
+        "sources"
+      ]
+    },
+    {
+      "id": "nethogs",
+      "fields_changed": [
+        "pricing_model"
+      ]
+    },
+    {
+      "id": "netlimiter",
+      "fields_changed": [
+        "sources"
+      ]
+    },
+    {
+      "id": "glasswire",
+      "fields_changed": [
+        "sources"
+      ]
+    },
+    {
+      "id": "pingplotter",
+      "fields_changed": [
+        "sources"
+      ]
+    },
+    {
+      "id": "wireguard",
+      "fields_changed": [
+        "pricing_model"
+      ]
+    },
+    {
+      "id": "netbird",
+      "fields_changed": [
+        "sources"
+      ]
+    },
+    {
+      "id": "zerotier",
+      "fields_changed": [
+        "sources"
+      ]
+    },
+    {
+      "id": "openvpn",
+      "fields_changed": [
+        "pricing_model"
+      ]
+    },
+    {
+      "id": "mullvad-vpn",
+      "fields_changed": [
+        "sources"
+      ]
+    },
+    {
+      "id": "proton-vpn",
+      "fields_changed": [
+        "sources"
+      ]
+    },
+    {
+      "id": "rustdesk",
+      "fields_changed": [
+        "sources"
+      ]
+    },
+    {
+      "id": "remmina",
+      "fields_changed": [
+        "sources"
+      ]
+    },
+    {
+      "id": "freerdp",
+      "fields_changed": [
+        "pricing_model"
+      ]
+    },
+    {
+      "id": "tigervnc",
+      "fields_changed": [
+        "pricing_model"
+      ]
+    },
+    {
+      "id": "xrdp",
+      "fields_changed": [
+        "pricing_model"
+      ]
+    },
+    {
+      "id": "meshcentral",
+      "fields_changed": [
+        "pricing_model"
+      ]
+    },
+    {
+      "id": "apache-guacamole",
+      "fields_changed": [
+        "sources"
+      ]
+    },
+    {
+      "id": "anydesk",
+      "fields_changed": [
+        "sources"
+      ]
+    },
+    {
+      "id": "teamviewer",
+      "fields_changed": [
+        "sources"
+      ]
+    },
+    {
+      "id": "1password",
+      "fields_changed": [
+        "sources"
+      ]
+    },
+    {
+      "id": "keepass",
+      "fields_changed": [
+        "sources"
+      ]
+    },
+    {
+      "id": "proton-pass",
+      "fields_changed": [
+        "sources"
+      ]
+    },
+    {
+      "id": "age",
+      "fields_changed": [
+        "sources"
+      ]
+    },
+    {
+      "id": "gnupg",
+      "fields_changed": [
+        "sources"
+      ]
+    },
+    {
+      "id": "gpg4win",
+      "fields_changed": [
+        "sources"
+      ]
+    },
+    {
+      "id": "veracrypt",
+      "fields_changed": [
+        "sources"
+      ]
+    },
+    {
+      "id": "cryptomator",
+      "fields_changed": [
+        "sources"
+      ]
+    },
+    {
+      "id": "gocryptfs",
+      "fields_changed": [
+        "sources"
+      ]
+    },
+    {
+      "id": "opensnitch",
+      "fields_changed": [
+        "sources"
+      ]
+    },
+    {
+      "id": "lulu",
+      "fields_changed": [
+        "sources"
+      ]
+    },
+    {
+      "id": "usbguard",
+      "fields_changed": [
+        "pricing_model"
+      ]
+    },
+    {
+      "id": "qemu",
+      "fields_changed": [
+        "pricing_model"
+      ]
+    },
+    {
+      "id": "utm",
+      "fields_changed": [
+        "sources"
+      ]
+    },
+    {
+      "id": "virt-manager",
+      "fields_changed": [
+        "pricing_model"
+      ]
+    },
+    {
+      "id": "gnome-boxes",
+      "fields_changed": [
+        "pricing_model"
+      ]
+    },
+    {
+      "id": "multipass",
+      "fields_changed": [
+        "sources"
+      ]
+    },
+    {
+      "id": "vagrant",
+      "fields_changed": [
+        "sources"
+      ]
+    },
+    {
+      "id": "distrobox",
+      "fields_changed": [
+        "sources"
+      ]
+    },
+    {
+      "id": "podman-desktop",
+      "fields_changed": [
+        "sources"
+      ]
+    },
+    {
+      "id": "rancher-desktop",
+      "fields_changed": [
+        "sources"
+      ]
+    },
+    {
+      "id": "cpu-x",
+      "fields_changed": [
+        "sources"
+      ]
+    },
+    {
+      "id": "hardinfo2",
+      "fields_changed": [
+        "pricing_model"
+      ]
+    },
+    {
+      "id": "smartmontools",
+      "fields_changed": [
+        "pricing_model"
+      ]
+    },
+    {
+      "id": "gsmartcontrol",
+      "fields_changed": [
+        "sources"
+      ]
+    },
+    {
+      "id": "crystaldiskmark",
+      "fields_changed": [
+        "pricing_model"
+      ]
+    },
+    {
+      "id": "fio",
+      "fields_changed": [
+        "sources"
+      ]
+    },
+    {
+      "id": "diskspd",
+      "fields_changed": [
+        "sources"
+      ]
+    },
+    {
+      "id": "memtest86-plus",
+      "fields_changed": [
+        "sources"
+      ]
+    },
+    {
+      "id": "memtest86",
+      "fields_changed": [
+        "license",
+        "license_kind"
+      ]
+    },
+    {
+      "id": "occt",
+      "fields_changed": [
+        "sources"
+      ]
+    },
+    {
+      "id": "stress-ng",
+      "fields_changed": [
+        "sources"
+      ]
+    },
+    {
+      "id": "btop",
+      "fields_changed": [
+        "sources"
+      ]
+    },
+    {
+      "id": "bottom",
+      "fields_changed": [
+        "sources"
+      ]
+    },
+    {
+      "id": "glances",
+      "fields_changed": [
+        "pricing_model"
+      ]
+    },
+    {
+      "id": "htop",
+      "fields_changed": [
+        "pricing_model"
+      ]
+    },
+    {
+      "id": "nvtop",
+      "fields_changed": [
+        "sources"
+      ]
+    },
+    {
+      "id": "liquidctl",
+      "fields_changed": [
+        "sources"
+      ]
+    },
+    {
+      "id": "openrgb",
+      "fields_changed": [
+        "sources"
+      ]
+    },
+    {
+      "id": "monitorian",
+      "fields_changed": [
+        "pricing_model",
+        "limitations",
+        "sources"
+      ]
+    },
+    {
+      "id": "monitorcontrol",
+      "fields_changed": [
+        "sources"
+      ]
+    },
+    {
+      "id": "lact",
+      "fields_changed": [
+        "sources"
+      ]
+    },
+    {
+      "id": "coolercontrol",
+      "fields_changed": [
+        "pricing_model"
+      ]
+    }
+  ],
+  "claim_evidence": [
+    {
+      "id": "macrium-reflect",
+      "claims_added": [
+        "license"
+      ],
+      "url": "https://www.macrium.com/eula",
+      "finding": "Publisher software terms reserve ownership and restrict modification, source derivation or redistribution; this supports the proprietary application-license classification.",
+      "observation": {
+        "url": "https://www.macrium.com/eula",
+        "retrieved_at": "2026-11-15T02:16:58.102185+00:00",
+        "http_status": 200,
+        "final_url": "https://www.macrium.com/eula",
+        "sha256": "226f42d149dc372502f45781c3d50107c442f07aff178bc73719c97056d8014c",
+        "byte_length": 332155
+      }
+    },
+    {
+      "id": "veeam-agent-windows",
+      "claims_added": [
+        "license"
+      ],
+      "url": "https://www.veeam.com/legal/eula.html",
+      "finding": "Publisher software terms reserve ownership and restrict modification, source derivation or redistribution; this supports the proprietary application-license classification.",
+      "observation": {
+        "url": "https://www.veeam.com/legal/eula.html",
+        "retrieved_at": "2026-11-15T02:16:58.103134+00:00",
+        "http_status": 200,
+        "final_url": "https://www.veeam.com/legal/eula.html",
+        "sha256": "f3c40ede2327c00477c475f1ce2c448e095cf94d6abf0fdb12eb4ae9fcc441f6",
+        "byte_length": 226539
+      }
+    },
+    {
+      "id": "arq-backup",
+      "claims_added": [
+        "license"
+      ],
+      "url": "https://www.arqbackup.com/documentation/arq6docs/English.lproj/license.html",
+      "finding": "Publisher software terms reserve ownership and restrict modification, source derivation or redistribution; this supports the proprietary application-license classification. Although the URL is under the older documentation path, the retrieved agreement expressly covers Arq 7.",
+      "observation": {
+        "url": "https://www.arqbackup.com/documentation/arq6docs/English.lproj/license.html",
+        "retrieved_at": "2026-11-15T02:16:58.103773+00:00",
+        "http_status": 200,
+        "final_url": "https://www.arqbackup.com/documentation/arq6docs/English.lproj/license.html",
+        "sha256": "5aba9e55b756a5d7cd6085fe766e138942644bfca2a683988c8f87bbc71c4c2a",
+        "byte_length": 47824
+      }
+    },
+    {
+      "id": "r-studio",
+      "claims_added": [
+        "license"
+      ],
+      "url": "https://www.r-studio.com/includes/eula/PopupEulaDRC.shtml?R-STUDIO",
+      "finding": "Publisher software terms reserve ownership and restrict modification, source derivation or redistribution; this supports the proprietary application-license classification.",
+      "observation": {
+        "url": "https://www.r-studio.com/includes/eula/PopupEulaDRC.shtml?R-STUDIO",
+        "retrieved_at": "2026-11-15T02:16:58.105178+00:00",
+        "http_status": 200,
+        "final_url": "https://www.r-studio.com/includes/eula/PopupEulaDRC.shtml?R-STUDIO",
+        "sha256": "18b2caa7d5326c13f14c774119eb14c43cf181a2d51a15a75c93cf0b9d13ec32",
+        "byte_length": 15409
+      }
+    },
+    {
+      "id": "xyplorer",
+      "claims_added": [
+        "license"
+      ],
+      "url": "https://www.xyplorer.com/purchase.php?lic=SL",
+      "finding": "Publisher software terms reserve ownership and restrict modification, source derivation or redistribution; this supports the proprietary application-license classification.",
+      "observation": {
+        "url": "https://www.xyplorer.com/purchase.php?lic=SL",
+        "retrieved_at": "2026-11-15T02:16:58.106189+00:00",
+        "http_status": 200,
+        "final_url": "https://www.xyplorer.com/purchase.php?lic=SL",
+        "sha256": "3f968ce8690612701f435eab882518ffaba6d89c050af6f4645357875e5d1dbd",
+        "byte_length": 58865
+      }
+    },
+    {
+      "id": "winrar",
+      "claims_added": [
+        "license"
+      ],
+      "url": "https://www.win-rar.com/winrarlicense.html?&L=0",
+      "finding": "Publisher software terms reserve ownership and restrict modification, source derivation or redistribution; this supports the proprietary application-license classification.",
+      "observation": {
+        "url": "https://www.win-rar.com/winrarlicense.html?&L=0",
+        "retrieved_at": "2026-11-15T02:15:37.961995+00:00",
+        "http_status": 200,
+        "final_url": "https://www.win-rar.com/winrarlicense.html?&L=0",
+        "sha256": "f091192bbf13c5b89b5b549742fac99b6adb8cddf010f57f38c618498ee6667c",
+        "byte_length": 28741
+      }
+    },
+    {
+      "id": "mountain-duck",
+      "claims_added": [
+        "license"
+      ],
+      "url": "https://mountainduck.io/buy/eula/",
+      "finding": "Publisher software terms reserve ownership and restrict modification, source derivation or redistribution; this supports the proprietary application-license classification.",
+      "observation": {
+        "url": "https://mountainduck.io/buy/eula/",
+        "retrieved_at": "2026-11-15T02:16:58.106598+00:00",
+        "http_status": 200,
+        "final_url": "https://mountainduck.io/buy/eula/",
+        "sha256": "2a83cde733cc3f851070b1a2eb3ae49e6af48b6985617852288e47130baefb61",
+        "byte_length": 7374
+      }
+    },
+    {
+      "id": "netlimiter",
+      "claims_added": [
+        "license"
+      ],
+      "url": "https://netlimiter.com/eula",
+      "finding": "Publisher software terms reserve ownership and restrict modification, source derivation or redistribution; this supports the proprietary application-license classification.",
+      "observation": {
+        "url": "https://netlimiter.com/eula",
+        "retrieved_at": "2026-11-15T02:17:02.007112+00:00",
+        "http_status": 200,
+        "final_url": "https://netlimiter.com/eula",
+        "sha256": "66d8973445b708e9c162dd7a9405fa96a403e9eb0cf49d8f24770902dd45732d",
+        "byte_length": 24775
+      }
+    },
+    {
+      "id": "glasswire",
+      "claims_added": [
+        "license"
+      ],
+      "url": "https://www.glasswire.com/license/",
+      "finding": "Publisher software terms reserve ownership and restrict modification, source derivation or redistribution; this supports the proprietary application-license classification.",
+      "observation": {
+        "url": "https://www.glasswire.com/license/",
+        "retrieved_at": "2026-11-15T02:17:02.025012+00:00",
+        "http_status": 200,
+        "final_url": "https://www.glasswire.com/license/",
+        "sha256": "ce725d37f74a7810d0795111d0e51f004583c0627f616f63af2218a69b84d43d",
+        "byte_length": 73357
+      }
+    },
+    {
+      "id": "pingplotter",
+      "claims_added": [
+        "license"
+      ],
+      "url": "https://www.pingman.com/licenseagreement.html",
+      "finding": "Publisher software terms reserve ownership and restrict modification, source derivation or redistribution; this supports the proprietary application-license classification.",
+      "observation": {
+        "url": "https://www.pingman.com/licenseagreement.html",
+        "retrieved_at": "2026-11-15T02:17:02.737931+00:00",
+        "http_status": 200,
+        "final_url": "https://www.pingman.com/licenseagreement.html",
+        "sha256": "9fc8f78330d2e8f2de7ccc1cddfeee2009171974b53fef0ffbac3d18df41b8b2",
+        "byte_length": 31746
+      }
+    },
+    {
+      "id": "1password",
+      "claims_added": [
+        "license"
+      ],
+      "url": "https://1password.com/legal/terms-of-service",
+      "finding": "Publisher software terms reserve ownership and restrict modification, source derivation or redistribution; this supports the proprietary application-license classification.",
+      "observation": {
+        "url": "https://1password.com/legal/terms-of-service",
+        "retrieved_at": "2026-11-15T02:17:03.473514+00:00",
+        "http_status": 200,
+        "final_url": "https://1password.com/legal/terms-of-service",
+        "sha256": "3a76eaff5180fe4a6cdf1a84feef812153c99fb128a9ab914074f9d7fd09a420",
+        "byte_length": 307279
+      }
+    },
+    {
+      "id": "anydesk",
+      "claims_added": [
+        "license"
+      ],
+      "url": "https://anydesk.com/en/terms",
+      "finding": "Publisher software terms reserve ownership and restrict modification, source derivation or redistribution; this supports the proprietary application-license classification.",
+      "observation": {
+        "url": "https://anydesk.com/en/terms",
+        "retrieval_method": "web research service primary-source review",
+        "web_reference": "turn51search2",
+        "reviewed_at": "2026-11-14",
+        "finding": "Official software terms grant a limited nonexclusive, nontransferable, nonsublicensable use right under the applicable contract.",
+        "note": "Raw shell response was a proxy placeholder; it was not accepted as content evidence."
+      }
+    },
+    {
+      "id": "teamviewer",
+      "claims_added": [
+        "license"
+      ],
+      "url": "https://www.teamviewer.com/en/legal/eula/",
+      "finding": "Publisher software terms reserve ownership and restrict modification, source derivation or redistribution; this supports the proprietary application-license classification.",
+      "observation": {
+        "url": "https://www.teamviewer.com/en/legal/eula/",
+        "retrieval_method": "web research service primary-source review",
+        "web_reference": "turn51search3",
+        "reviewed_at": "2026-11-14",
+        "finding": "Official EULA governs software and server services using limited paid and noncommercial free licenses, with reserved proprietary rights.",
+        "note": "Raw shell response was a proxy placeholder; it was not accepted as content evidence."
+      }
+    },
+    {
+      "id": "proton-vpn",
+      "claims_added": [
+        "license"
+      ],
+      "url": "https://proton.me/community/open-source",
+      "finding": "Proton explicitly identifies its applications as open source and links their repositories; the catalog separately identifies hosted-service terms.",
+      "observation": {
+        "url": "https://proton.me/community/open-source",
+        "retrieved_at": "2026-11-15T02:19:04.326677+00:00",
+        "http_status": 200,
+        "final_url": "https://proton.me/community/open-source",
+        "sha256": "aac61d097934fcc29add6fb0bda00581cf5618ccd948898353fec837363932f4",
+        "wire_sha256": "c123c169d9fa907c34fd045e6195e62924622393ffc5656dc6e40a42e66ac5ce",
+        "byte_length": 285334
+      }
+    },
+    {
+      "id": "proton-vpn",
+      "claims_added": [
+        "license"
+      ],
+      "url": "https://proton.me/legal/terms",
+      "finding": "These terms govern the hosted account/service separately from the open-source client applications.",
+      "observation": {
+        "url": "https://proton.me/legal/terms",
+        "retrieved_at": "2026-11-15T02:19:04.327487+00:00",
+        "http_status": 200,
+        "final_url": "https://proton.me/legal/terms",
+        "sha256": "029803887f5c4213b70bccdfad1ea46f6db63ea8f7b64bc3e6e5dd13ae79343e",
+        "wire_sha256": "3e0280c84d2e1fe5a74c9df88313b6310b1e56915ec71295f9b8545c6962d467",
+        "byte_length": 303977
+      }
+    },
+    {
+      "id": "proton-pass",
+      "claims_added": [
+        "license"
+      ],
+      "url": "https://proton.me/community/open-source",
+      "finding": "Proton explicitly identifies its applications as open source and links their repositories; the catalog separately identifies hosted-service terms.",
+      "observation": {
+        "url": "https://proton.me/community/open-source",
+        "retrieved_at": "2026-11-15T02:19:04.326677+00:00",
+        "http_status": 200,
+        "final_url": "https://proton.me/community/open-source",
+        "sha256": "aac61d097934fcc29add6fb0bda00581cf5618ccd948898353fec837363932f4",
+        "wire_sha256": "c123c169d9fa907c34fd045e6195e62924622393ffc5656dc6e40a42e66ac5ce",
+        "byte_length": 285334
+      }
+    },
+    {
+      "id": "proton-pass",
+      "claims_added": [
+        "license"
+      ],
+      "url": "https://proton.me/legal/terms",
+      "finding": "These terms govern the hosted account/service separately from the open-source client applications.",
+      "observation": {
+        "url": "https://proton.me/legal/terms",
+        "retrieved_at": "2026-11-15T02:19:04.327487+00:00",
+        "http_status": 200,
+        "final_url": "https://proton.me/legal/terms",
+        "sha256": "029803887f5c4213b70bccdfad1ea46f6db63ea8f7b64bc3e6e5dd13ae79343e",
+        "wire_sha256": "3e0280c84d2e1fe5a74c9df88313b6310b1e56915ec71295f9b8545c6962d467",
+        "byte_length": 303977
+      }
+    },
+    {
+      "id": "rescuezilla",
+      "claims_added": [
+        "platforms"
+      ],
+      "url": "https://rescuezilla.com/download",
+      "finding": "The reviewed document identifies the recorded host platform(s), distribution options or bootable deployment.",
+      "observation": {
+        "url": "https://rescuezilla.com/download",
+        "retrieved_at": "2026-11-15T02:15:13.679542+00:00",
+        "http_status": 200,
+        "final_url": "https://rescuezilla.com/download",
+        "sha256": "aaee463ca36c60c321d7ee61d211fcb0ed1a030cec491b4902467415b14f8ad9",
+        "byte_length": 5167
+      }
+    },
+    {
+      "id": "gnu-ddrescue",
+      "claims_added": [
+        "platforms"
+      ],
+      "url": "https://formulae.brew.sh/formula/ddrescue",
+      "finding": "Primary distribution-maintainer documentation establishes the recorded platform package. It is packaging evidence, not an upstream runtime test.",
+      "observation": {
+        "url": "https://formulae.brew.sh/formula/ddrescue",
+        "retrieved_at": "2026-11-15T02:17:06.960386+00:00",
+        "http_status": 200,
+        "final_url": "https://formulae.brew.sh/formula/ddrescue",
+        "sha256": "7b9f2b4b7c283acb60c688e1e7ddf6903283b537f52fa884bbd3c260843c5b7f",
+        "byte_length": 10284
+      }
+    },
+    {
+      "id": "thunar",
+      "claims_added": [
+        "platforms"
+      ],
+      "url": "https://archlinux.org/packages/extra/x86_64/thunar/",
+      "finding": "Primary distribution-maintainer documentation establishes the recorded platform package. It is packaging evidence, not an upstream runtime test.",
+      "observation": {
+        "url": "https://archlinux.org/packages/extra/x86_64/thunar/",
+        "retrieved_at": "2026-11-15T02:17:05.575480+00:00",
+        "http_status": 200,
+        "final_url": "https://archlinux.org/packages/extra/x86_64/thunar/",
+        "sha256": "101b520e0e6fbe3821259f552c7a67195e3603ec864cd71bb978da75272b2a61",
+        "byte_length": 19079
+      }
+    },
+    {
+      "id": "ranger",
+      "claims_added": [
+        "platforms"
+      ],
+      "url": "https://github.com/ranger/ranger/wiki/Official-user-guide",
+      "finding": "The official project guide documents Linux terminal integration and macOS pbcopy integration; the Homebrew package record was reviewed separately.",
+      "observation": {
+        "url": "https://github.com/ranger/ranger/wiki/Official-user-guide",
+        "retrieved_at": "2026-11-15T02:18:27.553997+00:00",
+        "http_status": 200,
+        "final_url": "https://github.com/ranger/ranger/wiki/Official-user-guide",
+        "sha256": "3fa47b53ce5565446eae1b1d0c88d8d8758fa17bc8c06b714f9d2396086ea223",
+        "byte_length": 259719
+      }
+    },
+    {
+      "id": "winrar",
+      "claims_added": [
+        "platforms"
+      ],
+      "url": "https://www.rarlab.com/download.htm",
+      "finding": "The reviewed document identifies the recorded host platform(s), distribution options or bootable deployment.",
+      "observation": {
+        "url": "https://www.rarlab.com/download.htm",
+        "checked_at": "2026-11-15T01:34:08.006192+00:00",
+        "status": 200,
+        "final_url": "https://www.rarlab.com/download.htm",
+        "sha256": "75fb286481fb96c64aae072ec64b0e47eb0f433ff29b215d2df986faa6c7d7fd",
+        "bytes": 24471,
+        "title": "WinRAR archiver, a powerful tool to process RAR and ZIP files",
+        "source_cache": "prior systems research cache; actual document reviewed for the added claim"
+      }
+    },
+    {
+      "id": "filezilla",
+      "claims_added": [
+        "platforms"
+      ],
+      "url": "https://sourceforge.net/projects/filezilla/",
+      "finding": "The reviewed document identifies the recorded host platform(s), distribution options or bootable deployment.",
+      "observation": {
+        "url": "https://sourceforge.net/projects/filezilla/",
+        "retrieved_at": "2026-11-15T02:17:07.157594+00:00",
+        "http_status": 200,
+        "final_url": "https://sourceforge.net/projects/filezilla/",
+        "sha256": "296eee1d54dce9e4c6d61eefb2511bd20a313ab124714face8883178127a34de",
+        "byte_length": 136303
+      }
+    },
+    {
+      "id": "glasswire",
+      "claims_added": [
+        "platforms"
+      ],
+      "url": "https://www.glasswire.com/download/",
+      "finding": "The reviewed document identifies the recorded host platform(s), distribution options or bootable deployment.",
+      "observation": {
+        "url": "https://www.glasswire.com/download/",
+        "checked_at": "2026-11-15T01:35:02.981138+00:00",
+        "status": 200,
+        "final_url": "https://www.glasswire.com/download/",
+        "sha256": "9a0e0139d254b60f99f2bdcf147de9e011542fc79032e3a9f7b9e1caf921f774",
+        "bytes": 29766,
+        "title": "Download Firewall Software by GlassWire",
+        "source_cache": "prior systems research cache; actual document reviewed for the added claim"
+      }
+    },
+    {
+      "id": "keepass",
+      "claims_added": [
+        "platforms"
+      ],
+      "url": "https://keepass.info/download.html",
+      "finding": "The reviewed document identifies the recorded host platform(s), distribution options or bootable deployment.",
+      "observation": {
+        "url": "https://keepass.info/download.html",
+        "checked_at": "2026-11-15T01:35:54.330193+00:00",
+        "status": 200,
+        "final_url": "https://keepass.info/download.html",
+        "sha256": "804d33068b1fd519f856fdb750f22bb0a8fe8c898afaa2a47474d08838dc93f5",
+        "bytes": 31389,
+        "title": "Downloads - KeePass",
+        "source_cache": "prior systems research cache; actual document reviewed for the added claim"
+      }
+    },
+    {
+      "id": "occt",
+      "claims_added": [
+        "platforms"
+      ],
+      "url": "https://www.ocbase.com/download",
+      "finding": "The reviewed document identifies the recorded host platform(s), distribution options or bootable deployment.",
+      "observation": {
+        "url": "https://www.ocbase.com/download",
+        "checked_at": "2026-11-15T01:37:05.226387+00:00",
+        "status": 200,
+        "final_url": "https://www.ocbase.com/download-personal",
+        "sha256": "ebe3a3892580ccbbe11d70a5eaa5051ba0f1f7fd3a719f2251ef3bdcccb6c65b",
+        "bytes": 1306963,
+        "title": "OCCT Personal Download - OCBASE/OCCT",
+        "source_cache": "prior systems research cache; actual document reviewed for the added claim"
+      }
+    },
+    {
+      "id": "borgbackup",
+      "claims_added": [
+        "pricing"
+      ],
+      "url": "https://www.borgbackup.org/",
+      "finding": "The product documentation explicitly describes the applicable no-charge distribution, free/paid editions, donation-supported download, paid service or commercial licensing options. License freedom alone is not the basis.",
+      "observation": {
+        "url": "https://www.borgbackup.org/",
+        "checked_at": "2026-11-15T01:34:01.963299+00:00",
+        "status": 200,
+        "final_url": "https://www.borgbackup.org/",
+        "sha256": "7324587f00c57b5231d03303edec254e8295d7780d04e4b4c1f0bec8cc24b119",
+        "bytes": 82651,
+        "title": "BorgBackup \u2013 Deduplicating archiver with compression and authenticated encryption",
+        "source_cache": "prior systems research cache; actual document reviewed for the added claim"
+      }
+    },
+    {
+      "id": "vorta",
+      "claims_added": [
+        "pricing"
+      ],
+      "url": "https://vorta.borgbase.com/",
+      "finding": "The product documentation explicitly describes the applicable no-charge distribution, free/paid editions, donation-supported download, paid service or commercial licensing options. License freedom alone is not the basis.",
+      "observation": {
+        "url": "https://vorta.borgbase.com/",
+        "checked_at": "2026-11-15T01:33:59.946459+00:00",
+        "status": 200,
+        "final_url": "https://vorta.borgbase.com/",
+        "sha256": "38f118cf196d25d97f7d34a6b0b3e0ad7df07d045e3689e534acf98f370b940f",
+        "bytes": 13474,
+        "title": "Home | Vorta for BorgBackup",
+        "source_cache": "prior systems research cache; actual document reviewed for the added claim"
+      }
+    },
+    {
+      "id": "clonezilla",
+      "claims_added": [
+        "pricing"
+      ],
+      "url": "https://clonezilla.org/",
+      "finding": "The product documentation explicitly describes the applicable no-charge distribution, free/paid editions, donation-supported download, paid service or commercial licensing options. License freedom alone is not the basis.",
+      "observation": {
+        "url": "https://clonezilla.org/",
+        "checked_at": "2026-11-15T01:33:39.095863+00:00",
+        "status": 200,
+        "final_url": "https://clonezilla.org/",
+        "sha256": "7a42607c204d178e52432b4df02a9f15be97e46a04f4c0a5cdec4e998b47371b",
+        "bytes": 21473,
+        "title": "Clonezilla - About",
+        "source_cache": "prior systems research cache; actual document reviewed for the added claim"
+      }
+    },
+    {
+      "id": "testdisk",
+      "claims_added": [
+        "pricing"
+      ],
+      "url": "https://www.cgsecurity.org/wiki/TestDisk",
+      "finding": "The product documentation explicitly describes the applicable no-charge distribution, free/paid editions, donation-supported download, paid service or commercial licensing options. License freedom alone is not the basis.",
+      "observation": {
+        "url": "https://www.cgsecurity.org/wiki/TestDisk",
+        "checked_at": "2026-11-15T01:34:02.167392+00:00",
+        "status": 200,
+        "final_url": "https://www.cgsecurity.org/wiki/TestDisk",
+        "sha256": "31ced39a3c566281e006b2fe95149a4b2b5fa3479feccfb635575bad3ee7860e",
+        "bytes": 30670,
+        "title": "Partition Recovery and File Undelete",
+        "source_cache": "prior systems research cache; actual document reviewed for the added claim"
+      }
+    },
+    {
+      "id": "photorec",
+      "claims_added": [
+        "pricing"
+      ],
+      "url": "https://www.cgsecurity.org/wiki/PhotoRec",
+      "finding": "The product documentation explicitly describes the applicable no-charge distribution, free/paid editions, donation-supported download, paid service or commercial licensing options. License freedom alone is not the basis.",
+      "observation": {
+        "url": "https://www.cgsecurity.org/wiki/PhotoRec",
+        "checked_at": "2026-11-15T01:34:02.118430+00:00",
+        "status": 200,
+        "final_url": "https://www.cgsecurity.org/wiki/PhotoRec",
+        "sha256": "3d5054a1da2e9389b932c5b9a7a14267d3d5095ce699329fa888623c3d49b13e",
+        "bytes": 33414,
+        "title": "Digital Picture and File Recovery",
+        "source_cache": "prior systems research cache; actual document reviewed for the added claim"
+      }
+    },
+    {
+      "id": "nemo",
+      "claims_added": [
+        "pricing"
+      ],
+      "url": "https://github.com/linuxmint/nemo",
+      "finding": "The product documentation explicitly describes the applicable no-charge distribution, free/paid editions, donation-supported download, paid service or commercial licensing options. License freedom alone is not the basis.",
+      "observation": {
+        "url": "https://github.com/linuxmint/nemo",
+        "checked_at": "2026-11-15T01:33:52.321164+00:00",
+        "status": 200,
+        "final_url": "https://github.com/linuxmint/nemo",
+        "sha256": "a23cdc405ab08f22861b3e8da9e84005f94044162914f3a18b64b2cffe377730",
+        "bytes": 275877,
+        "title": "GitHub - linuxmint/nemo: File browser for Cinnamon \u00b7 GitHub",
+        "source_cache": "prior systems research cache; actual document reviewed for the added claim"
+      }
+    },
+    {
+      "id": "duplicacy",
+      "claims_added": [
+        "pricing"
+      ],
+      "url": "https://duplicacy.com/",
+      "finding": "The product documentation explicitly describes the applicable no-charge distribution, free/paid editions, donation-supported download, paid service or commercial licensing options. License freedom alone is not the basis.",
+      "observation": {
+        "url": "https://duplicacy.com/",
+        "checked_at": "2026-11-15T01:37:55.699871+00:00",
+        "status": 200,
+        "final_url": "https://duplicacy.com/",
+        "sha256": "d85f38252afc038895925a018bc32477301a64978602000857c4aa727c37c068",
+        "bytes": 13756,
+        "title": "Duplicacy",
+        "source_cache": "prior systems research cache; actual document reviewed for the added claim"
+      }
+    },
+    {
+      "id": "cyberduck",
+      "claims_added": [
+        "pricing"
+      ],
+      "url": "https://cyberduck.io/download/",
+      "finding": "The product documentation explicitly describes the applicable no-charge distribution, free/paid editions, donation-supported download, paid service or commercial licensing options. License freedom alone is not the basis.",
+      "observation": {
+        "url": "https://cyberduck.io/download/",
+        "checked_at": "2026-11-15T01:34:35.167183+00:00",
+        "status": 200,
+        "final_url": "https://cyberduck.io/download/",
+        "sha256": "c04257bc85f507f9c29dae6a8381dd0a794a58087eb16640e1bbf4de072048e7",
+        "bytes": 28552,
+        "title": "Download",
+        "source_cache": "prior systems research cache; actual document reviewed for the added claim"
+      }
+    },
+    {
+      "id": "nmap",
+      "claims_added": [
+        "pricing"
+      ],
+      "url": "https://github.com/nmap/nmap",
+      "finding": "The product documentation explicitly describes the applicable no-charge distribution, free/paid editions, donation-supported download, paid service or commercial licensing options. License freedom alone is not the basis.",
+      "observation": {
+        "url": "https://github.com/nmap/nmap",
+        "checked_at": "2026-11-15T01:34:44.483909+00:00",
+        "status": 200,
+        "final_url": "https://github.com/nmap/nmap",
+        "sha256": "d0c1d93f5c9aa69c2d08f94b3a97cb74290f4cab99075c22bc1a3f73b3b722ec",
+        "bytes": 444030,
+        "title": "GitHub - nmap/nmap: Nmap - the Network Mapper. Github mirror of official SVN repository. \u00b7 GitHub",
+        "source_cache": "prior systems research cache; actual document reviewed for the added claim"
+      }
+    },
+    {
+      "id": "angry-ip-scanner",
+      "claims_added": [
+        "pricing"
+      ],
+      "url": "https://angryip.org/",
+      "finding": "The product documentation explicitly describes the applicable no-charge distribution, free/paid editions, donation-supported download, paid service or commercial licensing options. License freedom alone is not the basis.",
+      "observation": {
+        "url": "https://angryip.org/",
+        "checked_at": "2026-11-15T01:34:35.157537+00:00",
+        "status": 200,
+        "final_url": "https://angryip.org/",
+        "sha256": "a63da6649f4a26d5616c5aa9f649538c51797a5a73cf7fed899cc57e958bb77e",
+        "bytes": 5960,
+        "title": "Angry IP Scanner - the original IP scanner for Windows, Mac and Linux",
+        "source_cache": "prior systems research cache; actual document reviewed for the added claim"
+      }
+    },
+    {
+      "id": "netbird",
+      "claims_added": [
+        "pricing"
+      ],
+      "url": "https://netbird.io/pricing",
+      "finding": "The product documentation explicitly describes the applicable no-charge distribution, free/paid editions, donation-supported download, paid service or commercial licensing options. License freedom alone is not the basis.",
+      "observation": {
+        "url": "https://netbird.io/pricing",
+        "retrieval_method": "web research service primary-source review",
+        "web_reference": "turn53view0",
+        "reviewed_at": "2026-11-14",
+        "finding": "The official pricing page documents a no-charge hosted tier and paid Team/Business/Enterprise plans.",
+        "note": "Raw shell response was a proxy placeholder; it was not accepted as content evidence."
+      }
+    },
+    {
+      "id": "zerotier",
+      "claims_added": [
+        "pricing"
+      ],
+      "url": "https://www.zerotier.com/pricing/",
+      "finding": "The product documentation explicitly describes the applicable no-charge distribution, free/paid editions, donation-supported download, paid service or commercial licensing options. License freedom alone is not the basis.",
+      "observation": {
+        "url": "https://www.zerotier.com/pricing/",
+        "retrieved_at": "2026-11-15T02:15:34.089851+00:00",
+        "http_status": 200,
+        "final_url": "https://www.zerotier.com/pricing/",
+        "sha256": "f940cfb518859b2e770e062ee06fbd93f6aff3f7b389a87a04481d243384029e",
+        "byte_length": 751138
+      }
+    },
+    {
+      "id": "mullvad-vpn",
+      "claims_added": [
+        "pricing"
+      ],
+      "url": "https://mullvad.net/en/pricing",
+      "finding": "The product documentation explicitly describes the applicable no-charge distribution, free/paid editions, donation-supported download, paid service or commercial licensing options. License freedom alone is not the basis.",
+      "observation": {
+        "url": "https://mullvad.net/en/pricing",
+        "retrieval_method": "web research service primary-source review",
+        "web_reference": "turn53view1",
+        "reviewed_at": "2026-11-14",
+        "finding": "The official page documents paid time-based VPN service at a flat monthly rate and explicitly says no free plan.",
+        "note": "Raw shell response was a proxy placeholder; it was not accepted as content evidence."
+      }
+    },
+    {
+      "id": "rustdesk",
+      "claims_added": [
+        "pricing"
+      ],
+      "url": "https://rustdesk.com/pricing.html",
+      "finding": "The product documentation explicitly describes the applicable no-charge distribution, free/paid editions, donation-supported download, paid service or commercial licensing options. License freedom alone is not the basis.",
+      "observation": {
+        "url": "https://rustdesk.com/pricing.html",
+        "retrieved_at": "2026-11-15T02:15:34.099417+00:00",
+        "http_status": 200,
+        "final_url": "https://rustdesk.com/pricing/",
+        "sha256": "21acd83200d7b07feef18d9fa72a3a5554731299757f983638e264d08b6635ae",
+        "byte_length": 112821
+      }
+    },
+    {
+      "id": "remmina",
+      "claims_added": [
+        "pricing"
+      ],
+      "url": "https://remmina.org/",
+      "finding": "The product documentation explicitly describes the applicable no-charge distribution, free/paid editions, donation-supported download, paid service or commercial licensing options. License freedom alone is not the basis.",
+      "observation": {
+        "url": "https://remmina.org/",
+        "checked_at": "2026-11-15T01:34:57.393896+00:00",
+        "status": 200,
+        "final_url": "https://remmina.org/",
+        "sha256": "b6f343d5f3809d922f772d3a33e95352dfbc68223c517e9db96a38108085025e",
+        "bytes": 14648,
+        "title": "Remmina remote desktop client",
+        "source_cache": "prior systems research cache; actual document reviewed for the added claim"
+      }
+    },
+    {
+      "id": "apache-guacamole",
+      "claims_added": [
+        "pricing"
+      ],
+      "url": "https://guacamole.apache.org/",
+      "finding": "The product documentation explicitly describes the applicable no-charge distribution, free/paid editions, donation-supported download, paid service or commercial licensing options. License freedom alone is not the basis.",
+      "observation": {
+        "url": "https://guacamole.apache.org/",
+        "checked_at": "2026-11-15T01:34:46.480700+00:00",
+        "status": 200,
+        "final_url": "https://guacamole.apache.org/",
+        "sha256": "d7424a4c74777660e8c18ecc38de666c305036448896914714cb3e25112a1338",
+        "bytes": 13693,
+        "title": "Apache Guacamole\u00ae",
+        "source_cache": "prior systems research cache; actual document reviewed for the added claim"
+      }
+    },
+    {
+      "id": "gpg4win",
+      "claims_added": [
+        "pricing"
+      ],
+      "url": "https://www.gpg4win.org/get-gpg4win.html",
+      "finding": "The product documentation explicitly describes the applicable no-charge distribution, free/paid editions, donation-supported download, paid service or commercial licensing options. License freedom alone is not the basis.",
+      "observation": {
+        "url": "https://www.gpg4win.org/get-gpg4win.html",
+        "retrieved_at": "2026-11-15T02:19:04.328586+00:00",
+        "http_status": 200,
+        "final_url": "https://www.gpg4win.org/get-gpg4win.html",
+        "sha256": "03b71a50f6c537bd4a6cf4ae95c17b8b49a29b80875ea77d1e5968dc6ce087a7",
+        "wire_sha256": "03b71a50f6c537bd4a6cf4ae95c17b8b49a29b80875ea77d1e5968dc6ce087a7",
+        "byte_length": 14406
+      }
+    },
+    {
+      "id": "cryptomator",
+      "claims_added": [
+        "pricing"
+      ],
+      "url": "https://cryptomator.org/pricing/",
+      "finding": "The product documentation explicitly describes the applicable no-charge distribution, free/paid editions, donation-supported download, paid service or commercial licensing options. License freedom alone is not the basis.",
+      "observation": {
+        "url": "https://cryptomator.org/pricing/",
+        "retrieved_at": "2026-11-15T02:19:04.329284+00:00",
+        "http_status": 200,
+        "final_url": "https://cryptomator.org/pricing/",
+        "sha256": "aa7cb557019f1596dd789fdce525368f6f864f8c926857c08b8ef38e73fb9d64",
+        "wire_sha256": "aa7cb557019f1596dd789fdce525368f6f864f8c926857c08b8ef38e73fb9d64",
+        "byte_length": 127202
+      }
+    },
+    {
+      "id": "lulu",
+      "claims_added": [
+        "pricing"
+      ],
+      "url": "https://objective-see.org/products/lulu.html",
+      "finding": "The product documentation explicitly describes the applicable no-charge distribution, free/paid editions, donation-supported download, paid service or commercial licensing options. License freedom alone is not the basis.",
+      "observation": {
+        "url": "https://objective-see.org/products/lulu.html",
+        "retrieved_at": "2026-11-15T02:15:26.768427+00:00",
+        "http_status": 200,
+        "final_url": "https://objective-see.org/products/lulu.html",
+        "sha256": "6ca9ccf614caba4fb6d92841b1294d0a0412d599ccdd2da0c70fb9743d2587e5",
+        "byte_length": 38809
+      }
+    },
+    {
+      "id": "utm",
+      "claims_added": [
+        "pricing"
+      ],
+      "url": "https://mac.getutm.app/",
+      "finding": "The product documentation explicitly describes the applicable no-charge distribution, free/paid editions, donation-supported download, paid service or commercial licensing options. License freedom alone is not the basis.",
+      "observation": {
+        "url": "https://mac.getutm.app/",
+        "checked_at": "2026-11-15T01:35:54.372983+00:00",
+        "status": 200,
+        "final_url": "https://getutm.app/",
+        "sha256": "1711d4514121868a4695561602f1f1b515671610e4a7c2ca0230718b8f78feb5",
+        "bytes": 11625,
+        "title": "UTM | Virtual machines on Apple devices",
+        "source_cache": "prior systems research cache; actual document reviewed for the added claim"
+      }
+    },
+    {
+      "id": "podman-desktop",
+      "claims_added": [
+        "pricing"
+      ],
+      "url": "https://podman-desktop.io/",
+      "finding": "The product documentation explicitly describes the applicable no-charge distribution, free/paid editions, donation-supported download, paid service or commercial licensing options. License freedom alone is not the basis.",
+      "observation": {
+        "url": "https://podman-desktop.io/",
+        "checked_at": "2026-11-15T01:35:58.049819+00:00",
+        "status": 200,
+        "final_url": "https://podman-desktop.io/",
+        "sha256": "1eecf61273e65b4d44d79a2204cb59fb5c5fb0abf72648921a0fa9c278edb042",
+        "bytes": 41511,
+        "title": "Podman Desktop - Containers and Kubernetes | Podman Desktop",
+        "source_cache": "prior systems research cache; actual document reviewed for the added claim"
+      }
+    },
+    {
+      "id": "memtest86-plus",
+      "claims_added": [
+        "pricing"
+      ],
+      "url": "https://memtest.org/",
+      "finding": "The product documentation explicitly describes the applicable no-charge distribution, free/paid editions, donation-supported download, paid service or commercial licensing options. License freedom alone is not the basis.",
+      "observation": {
+        "url": "https://memtest.org/",
+        "retrieved_at": "2026-11-15T02:15:34.512613+00:00",
+        "http_status": 200,
+        "final_url": "https://memtest.org/",
+        "sha256": "aa7b0e0964580a9ecfa12e94ac5aa1ec69ca377a06612bdad29c630e45536847",
+        "byte_length": 108953
+      }
+    },
+    {
+      "id": "stress-ng",
+      "claims_added": [
+        "pricing"
+      ],
+      "url": "https://github.com/ColinIanKing/stress-ng",
+      "finding": "The product documentation explicitly describes the applicable no-charge distribution, free/paid editions, donation-supported download, paid service or commercial licensing options. License freedom alone is not the basis.",
+      "observation": {
+        "url": "https://github.com/ColinIanKing/stress-ng",
+        "checked_at": "2026-11-15T01:36:28.327299+00:00",
+        "status": 200,
+        "final_url": "https://github.com/ColinIanKing/stress-ng",
+        "sha256": "a57b4bd44086f2e0856ae72767c587e3d7328c1cef619112e6725207aa29ad9f",
+        "bytes": 682520,
+        "title": "GitHub - ColinIanKing/stress-ng: This is the stress-ng upstream project git repository.  stress-ng will stress test a computer system in various selectable ways. It was designed to exercise various physical subsystems of a computer as well as the various operating system kernel interfaces. \u00b7 GitHub",
+        "source_cache": "prior systems research cache; actual document reviewed for the added claim"
+      }
+    },
+    {
+      "id": "monitorcontrol",
+      "claims_added": [
+        "pricing"
+      ],
+      "url": "https://github.com/MonitorControl/MonitorControl",
+      "finding": "The product documentation explicitly describes the applicable no-charge distribution, free/paid editions, donation-supported download, paid service or commercial licensing options. License freedom alone is not the basis.",
+      "observation": {
+        "url": "https://github.com/MonitorControl/MonitorControl",
+        "checked_at": "2026-11-15T01:36:30.200992+00:00",
+        "status": 200,
+        "final_url": "https://github.com/MonitorControl/MonitorControl",
+        "sha256": "ab60b59d8fcb03d49ce236313459f95cf508591ca4725472bd49e7cc7e7e623d",
+        "bytes": 279246,
+        "title": "GitHub - MonitorControl/MonitorControl: \ud83d\udda5 Control your display's brightness & volume on your Mac as if it was a native Apple Display. Use Apple Keyboard keys or custom shortcuts. Shows the native macOS OSDs. \u00b7 GitHub",
+        "source_cache": "prior systems research cache; actual document reviewed for the added claim"
+      }
+    },
+    {
+      "id": "borgbackup",
+      "claims_added": [
+        "pricing"
+      ],
+      "url": "https://github.com/borgbackup/borg/releases/expanded_assets/2.0.0b25",
+      "finding": "A named main application package is offered through the official project/download page and was anonymously reachable by an HTTP HEAD request. This establishes a no-charge distribution option; it does not verify a signature, installation or hosted-service pricing.",
+      "observation": {
+        "url": "https://github.com/borgbackup/borg/releases/expanded_assets/2.0.0b25",
+        "retrieved_at": "2026-11-15T02:14:50.528888+00:00",
+        "http_status": 200,
+        "final_url": "https://github.com/borgbackup/borg/releases/expanded_assets/2.0.0b25",
+        "sha256": "30180a0e74e784c6f9164dfa5103def3ed3e0125599de9ab96ac17f3219b047f",
+        "byte_length": 141630
+      }
+    },
+    {
+      "id": "vorta",
+      "claims_added": [
+        "pricing"
+      ],
+      "url": "https://github.com/borgbase/vorta/releases/expanded_assets/v0.12.1",
+      "finding": "A named main application package is offered through the official project/download page and was anonymously reachable by an HTTP HEAD request. This establishes a no-charge distribution option; it does not verify a signature, installation or hosted-service pricing.",
+      "observation": {
+        "url": "https://github.com/borgbase/vorta/releases/expanded_assets/v0.12.1",
+        "retrieved_at": "2026-11-15T02:14:50.529799+00:00",
+        "http_status": 200,
+        "final_url": "https://github.com/borgbase/vorta/releases/expanded_assets/v0.12.1",
+        "sha256": "ab51154b61a9f0494eea30b2e891cd3908aa7c7b66155ceb54d5b9f89808d8a1",
+        "byte_length": 12519
+      }
+    },
+    {
+      "id": "yazi",
+      "claims_added": [
+        "pricing"
+      ],
+      "url": "https://github.com/sxyazi/yazi/releases/expanded_assets/nightly",
+      "finding": "A named main application package is offered through the official project/download page and was anonymously reachable by an HTTP HEAD request. This establishes a no-charge distribution option; it does not verify a signature, installation or hosted-service pricing.",
+      "observation": {
+        "url": "https://github.com/sxyazi/yazi/releases/expanded_assets/nightly",
+        "retrieved_at": "2026-11-15T02:15:01.114757+00:00",
+        "http_status": 200,
+        "final_url": "https://github.com/sxyazi/yazi/releases/expanded_assets/nightly",
+        "sha256": "5098edf177b7bed944e3531c968e1fb7d0359c345d6ea2737e3d695f2618a8fa",
+        "byte_length": 80786
+      }
+    },
+    {
+      "id": "lf",
+      "claims_added": [
+        "pricing"
+      ],
+      "url": "https://github.com/gokcehan/lf/releases/expanded_assets/r42",
+      "finding": "A named main application package is offered through the official project/download page and was anonymously reachable by an HTTP HEAD request. This establishes a no-charge distribution option; it does not verify a signature, installation or hosted-service pricing.",
+      "observation": {
+        "url": "https://github.com/gokcehan/lf/releases/expanded_assets/r42",
+        "retrieved_at": "2026-11-15T02:15:01.464374+00:00",
+        "http_status": 200,
+        "final_url": "https://github.com/gokcehan/lf/releases/expanded_assets/r42",
+        "sha256": "b9265119579f6e3be3a7eddbde32cbffa86c6d6ee299ce0a2ff08e1fe4fd3050",
+        "byte_length": 119987
+      }
+    },
+    {
+      "id": "nnn",
+      "claims_added": [
+        "pricing"
+      ],
+      "url": "https://github.com/jarun/nnn/releases/expanded_assets/v5.3",
+      "finding": "A named main application package is offered through the official project/download page and was anonymously reachable by an HTTP HEAD request. This establishes a no-charge distribution option; it does not verify a signature, installation or hosted-service pricing.",
+      "observation": {
+        "url": "https://github.com/jarun/nnn/releases/expanded_assets/v5.3",
+        "retrieved_at": "2026-11-15T02:15:01.497508+00:00",
+        "http_status": 200,
+        "final_url": "https://github.com/jarun/nnn/releases/expanded_assets/v5.3",
+        "sha256": "6913b518f066d7cb925838309d7d69fa0317dc9ccc6c1f9618f57d1cf32a10b1",
+        "byte_length": 36548
+      }
+    },
+    {
+      "id": "dupeguru",
+      "claims_added": [
+        "pricing"
+      ],
+      "url": "https://github.com/arsenetar/dupeguru/releases/expanded_assets/4.3.1",
+      "finding": "A named main application package is offered through the official project/download page and was anonymously reachable by an HTTP HEAD request. This establishes a no-charge distribution option; it does not verify a signature, installation or hosted-service pricing.",
+      "observation": {
+        "url": "https://github.com/arsenetar/dupeguru/releases/expanded_assets/4.3.1",
+        "retrieved_at": "2026-11-15T02:15:01.738700+00:00",
+        "http_status": 200,
+        "final_url": "https://github.com/arsenetar/dupeguru/releases/expanded_assets/4.3.1",
+        "sha256": "87ca181d0c0ea3088781f6dd7dbf58c3e2e12bc3d974ae2d8b82c4b8514fda40",
+        "byte_length": 36251
+      }
+    },
+    {
+      "id": "fclones",
+      "claims_added": [
+        "pricing"
+      ],
+      "url": "https://github.com/pkolaczk/fclones/releases/expanded_assets/v0.35.0",
+      "finding": "A named main application package is offered through the official project/download page and was anonymously reachable by an HTTP HEAD request. This establishes a no-charge distribution option; it does not verify a signature, installation or hosted-service pricing.",
+      "observation": {
+        "url": "https://github.com/pkolaczk/fclones/releases/expanded_assets/v0.35.0",
+        "retrieved_at": "2026-11-15T02:15:04.739761+00:00",
+        "http_status": 200,
+        "final_url": "https://github.com/pkolaczk/fclones/releases/expanded_assets/v0.35.0",
+        "sha256": "98303979743c8ec754fc0dcf53f7e36161e0e26aff413e562e5a7b70f642d269",
+        "byte_length": 16514
+      }
+    },
+    {
+      "id": "nanazip",
+      "claims_added": [
+        "pricing"
+      ],
+      "url": "https://github.com/M2Team/NanaZip/releases/expanded_assets/7.0.1882.0",
+      "finding": "A named main application package is offered through the official project/download page and was anonymously reachable by an HTTP HEAD request. This establishes a no-charge distribution option; it does not verify a signature, installation or hosted-service pricing.",
+      "observation": {
+        "url": "https://github.com/M2Team/NanaZip/releases/expanded_assets/7.0.1882.0",
+        "retrieved_at": "2026-11-15T02:15:04.804470+00:00",
+        "http_status": 200,
+        "final_url": "https://github.com/M2Team/NanaZip/releases/expanded_assets/7.0.1882.0",
+        "sha256": "c5a78d360294ca141852637d44dc48a4a2286c3a065fda6f244b8842de610331",
+        "byte_length": 39409
+      }
+    },
+    {
+      "id": "angry-ip-scanner",
+      "claims_added": [
+        "pricing"
+      ],
+      "url": "https://github.com/angryip/ipscan/releases/expanded_assets/3.12.1",
+      "finding": "A named main application package is offered through the official project/download page and was anonymously reachable by an HTTP HEAD request. This establishes a no-charge distribution option; it does not verify a signature, installation or hosted-service pricing.",
+      "observation": {
+        "url": "https://github.com/angryip/ipscan/releases/expanded_assets/3.12.1",
+        "retrieved_at": "2026-11-15T02:15:05.147114+00:00",
+        "http_status": 200,
+        "final_url": "https://github.com/angryip/ipscan/releases/expanded_assets/3.12.1",
+        "sha256": "701bb454d66fc9fb6bce68673b3963c9e4a002f92429f79b195f82c107ed5c5e",
+        "byte_length": 44415
+      }
+    },
+    {
+      "id": "trippy",
+      "claims_added": [
+        "pricing"
+      ],
+      "url": "https://github.com/fujiapple852/trippy/releases/expanded_assets/0.13.0",
+      "finding": "A named main application package is offered through the official project/download page and was anonymously reachable by an HTTP HEAD request. This establishes a no-charge distribution option; it does not verify a signature, installation or hosted-service pricing.",
+      "observation": {
+        "url": "https://github.com/fujiapple852/trippy/releases/expanded_assets/0.13.0",
+        "retrieved_at": "2026-11-15T02:15:05.214659+00:00",
+        "http_status": 200,
+        "final_url": "https://github.com/fujiapple852/trippy/releases/expanded_assets/0.13.0",
+        "sha256": "fed380096378f0d8e8fc147262c84b3050f86ea7e0359ceb1d2c6478ca103470",
+        "byte_length": 38838
+      }
+    },
+    {
+      "id": "bandwhich",
+      "claims_added": [
+        "pricing"
+      ],
+      "url": "https://github.com/imsnif/bandwhich/releases/expanded_assets/v0.23.1",
+      "finding": "A named main application package is offered through the official project/download page and was anonymously reachable by an HTTP HEAD request. This establishes a no-charge distribution option; it does not verify a signature, installation or hosted-service pricing.",
+      "observation": {
+        "url": "https://github.com/imsnif/bandwhich/releases/expanded_assets/v0.23.1",
+        "retrieved_at": "2026-11-15T02:15:05.267023+00:00",
+        "http_status": 200,
+        "final_url": "https://github.com/imsnif/bandwhich/releases/expanded_assets/v0.23.1",
+        "sha256": "9199bc5d506bd14b21e75643e8fff83f8c762c70c0fe14a53d8fc3fa20d86341",
+        "byte_length": 24797
+      }
+    },
+    {
+      "id": "age",
+      "claims_added": [
+        "pricing"
+      ],
+      "url": "https://github.com/FiloSottile/age/releases/expanded_assets/v1.3.2",
+      "finding": "A named main application package is offered through the official project/download page and was anonymously reachable by an HTTP HEAD request. This establishes a no-charge distribution option; it does not verify a signature, installation or hosted-service pricing.",
+      "observation": {
+        "url": "https://github.com/FiloSottile/age/releases/expanded_assets/v1.3.2",
+        "retrieved_at": "2026-11-15T02:15:17.083512+00:00",
+        "http_status": 200,
+        "final_url": "https://github.com/FiloSottile/age/releases/expanded_assets/v1.3.2",
+        "sha256": "35b8ed1e90e05199e316500c823e9c3a6e9142f789cc54f297b0f9afbe3dfcb4",
+        "byte_length": 76869
+      }
+    },
+    {
+      "id": "veracrypt",
+      "claims_added": [
+        "pricing"
+      ],
+      "url": "https://github.com/veracrypt/VeraCrypt/releases/expanded_assets/VeraCrypt_1.26.31",
+      "finding": "A named main application package is offered through the official project/download page and was anonymously reachable by an HTTP HEAD request. This establishes a no-charge distribution option; it does not verify a signature, installation or hosted-service pricing.",
+      "observation": {
+        "url": "https://github.com/veracrypt/VeraCrypt/releases/expanded_assets/VeraCrypt_1.26.31",
+        "retrieved_at": "2026-11-15T02:15:17.126022+00:00",
+        "http_status": 200,
+        "final_url": "https://github.com/veracrypt/VeraCrypt/releases/expanded_assets/VeraCrypt_1.26.31",
+        "sha256": "bc22be066fec6e4cecfc61d46af8357c1f40130663152d1a4c296cd05743287c",
+        "byte_length": 491675
+      }
+    },
+    {
+      "id": "gocryptfs",
+      "claims_added": [
+        "pricing"
+      ],
+      "url": "https://github.com/rfjakob/gocryptfs/releases/expanded_assets/v2.7.0",
+      "finding": "A named main application package is offered through the official project/download page and was anonymously reachable by an HTTP HEAD request. This establishes a no-charge distribution option; it does not verify a signature, installation or hosted-service pricing.",
+      "observation": {
+        "url": "https://github.com/rfjakob/gocryptfs/releases/expanded_assets/v2.7.0",
+        "retrieved_at": "2026-11-15T02:15:19.452923+00:00",
+        "http_status": 200,
+        "final_url": "https://github.com/rfjakob/gocryptfs/releases/expanded_assets/v2.7.0",
+        "sha256": "90018a28546d134ee34362bfe5ee5a6c9135c02ff32d4ae6285ccf0c981901e8",
+        "byte_length": 36865
+      }
+    },
+    {
+      "id": "opensnitch",
+      "claims_added": [
+        "pricing"
+      ],
+      "url": "https://github.com/evilsocket/opensnitch/releases/expanded_assets/v1.8.0",
+      "finding": "A named main application package is offered through the official project/download page and was anonymously reachable by an HTTP HEAD request. This establishes a no-charge distribution option; it does not verify a signature, installation or hosted-service pricing.",
+      "observation": {
+        "url": "https://github.com/evilsocket/opensnitch/releases/expanded_assets/v1.8.0",
+        "retrieved_at": "2026-11-15T02:15:19.542766+00:00",
+        "http_status": 200,
+        "final_url": "https://github.com/evilsocket/opensnitch/releases/expanded_assets/v1.8.0",
+        "sha256": "356068d16038cb4efa550a472c853646eeb9b280b9f59f9cf70108d1e9311205",
+        "byte_length": 56755
+      }
+    },
+    {
+      "id": "lulu",
+      "claims_added": [
+        "pricing"
+      ],
+      "url": "https://github.com/objective-see/LuLu/releases/expanded_assets/v4.5.7",
+      "finding": "A named main application package is offered through the official project/download page and was anonymously reachable by an HTTP HEAD request. This establishes a no-charge distribution option; it does not verify a signature, installation or hosted-service pricing.",
+      "observation": {
+        "url": "https://github.com/objective-see/LuLu/releases/expanded_assets/v4.5.7",
+        "retrieved_at": "2026-11-15T02:15:19.572240+00:00",
+        "http_status": 200,
+        "final_url": "https://github.com/objective-see/LuLu/releases/expanded_assets/v4.5.7",
+        "sha256": "c360963b64461fb73d912340de94ea62b641bd8b58312c27061e3add873e00d7",
+        "byte_length": 8514
+      }
+    },
+    {
+      "id": "multipass",
+      "claims_added": [
+        "pricing"
+      ],
+      "url": "https://github.com/canonical/multipass/releases/expanded_assets/v1.17.1",
+      "finding": "A named main application package is offered through the official project/download page and was anonymously reachable by an HTTP HEAD request. This establishes a no-charge distribution option; it does not verify a signature, installation or hosted-service pricing.",
+      "observation": {
+        "url": "https://github.com/canonical/multipass/releases/expanded_assets/v1.17.1",
+        "retrieved_at": "2026-11-15T02:15:20.663440+00:00",
+        "http_status": 200,
+        "final_url": "https://github.com/canonical/multipass/releases/expanded_assets/v1.17.1",
+        "sha256": "8b4bb6e117061ba82eb9e56570155b4e420d56c605e013a51aa420bd26085077",
+        "byte_length": 12589
+      }
+    },
+    {
+      "id": "vagrant",
+      "claims_added": [
+        "pricing"
+      ],
+      "url": "https://github.com/hashicorp/vagrant/releases/expanded_assets/2.4.10.dev%2B000834-2757db88",
+      "finding": "A named main application package is offered through the official project/download page and was anonymously reachable by an HTTP HEAD request. This establishes a no-charge distribution option; it does not verify a signature, installation or hosted-service pricing.",
+      "observation": {
+        "url": "https://github.com/hashicorp/vagrant/releases/expanded_assets/2.4.10.dev%2B000834-2757db88",
+        "retrieved_at": "2026-11-15T02:15:23.000813+00:00",
+        "http_status": 200,
+        "final_url": "https://github.com/hashicorp/vagrant/releases/expanded_assets/2.4.10.dev%2B000834-2757db88",
+        "sha256": "d48b405a81484a5cbfa0b979ef71409c5ab67cc5991221173a6fbba72e0dbf2c",
+        "byte_length": 53114
+      }
+    },
+    {
+      "id": "distrobox",
+      "claims_added": [
+        "pricing"
+      ],
+      "url": "https://github.com/89luca89/distrobox/releases/expanded_assets/2.0.0-rc.4",
+      "finding": "A named main application package is offered through the official project/download page and was anonymously reachable by an HTTP HEAD request. This establishes a no-charge distribution option; it does not verify a signature, installation or hosted-service pricing.",
+      "observation": {
+        "url": "https://github.com/89luca89/distrobox/releases/expanded_assets/2.0.0-rc.4",
+        "retrieved_at": "2026-11-15T02:15:23.001272+00:00",
+        "http_status": 200,
+        "final_url": "https://github.com/89luca89/distrobox/releases/expanded_assets/2.0.0-rc.4",
+        "sha256": "e05905f1f3598bc56a7ae06bf66395d27cfe52af532a711e5cacf2dbe153dd0d",
+        "byte_length": 12583
+      }
+    },
+    {
+      "id": "podman-desktop",
+      "claims_added": [
+        "pricing"
+      ],
+      "url": "https://github.com/podman-desktop/podman-desktop/releases/expanded_assets/v1.30.7",
+      "finding": "A named main application package is offered through the official project/download page and was anonymously reachable by an HTTP HEAD request. This establishes a no-charge distribution option; it does not verify a signature, installation or hosted-service pricing.",
+      "observation": {
+        "url": "https://github.com/podman-desktop/podman-desktop/releases/expanded_assets/v1.30.7",
+        "retrieved_at": "2026-11-15T02:15:23.016176+00:00",
+        "http_status": 200,
+        "final_url": "https://github.com/podman-desktop/podman-desktop/releases/expanded_assets/v1.30.7",
+        "sha256": "eb77880a3471b63ae6d2ce677a5bea346e394326b2428d871e38ec797ee0cb18",
+        "byte_length": 186697
+      }
+    },
+    {
+      "id": "rancher-desktop",
+      "claims_added": [
+        "pricing"
+      ],
+      "url": "https://github.com/rancher-sandbox/rancher-desktop/releases/expanded_assets/v1.25.0",
+      "finding": "A named main application package is offered through the official project/download page and was anonymously reachable by an HTTP HEAD request. This establishes a no-charge distribution option; it does not verify a signature, installation or hosted-service pricing.",
+      "observation": {
+        "url": "https://github.com/rancher-sandbox/rancher-desktop/releases/expanded_assets/v1.25.0",
+        "retrieved_at": "2026-11-15T02:15:23.020074+00:00",
+        "http_status": 200,
+        "final_url": "https://github.com/rancher-sandbox/rancher-desktop/releases/expanded_assets/v1.25.0",
+        "sha256": "e298362dfe36c1adb89140f322812457ff1aaf0b44122161f93fda7e6583756c",
+        "byte_length": 53293
+      }
+    },
+    {
+      "id": "cpu-x",
+      "claims_added": [
+        "pricing"
+      ],
+      "url": "https://github.com/TheTumultuousUnicornOfDarkness/CPU-X/releases/expanded_assets/v5.4.1",
+      "finding": "A named main application package is offered through the official project/download page and was anonymously reachable by an HTTP HEAD request. This establishes a no-charge distribution option; it does not verify a signature, installation or hosted-service pricing.",
+      "observation": {
+        "url": "https://github.com/TheTumultuousUnicornOfDarkness/CPU-X/releases/expanded_assets/v5.4.1",
+        "retrieved_at": "2026-11-15T02:15:23.025634+00:00",
+        "http_status": 200,
+        "final_url": "https://github.com/TheTumultuousUnicornOfDarkness/CPU-X/releases/expanded_assets/v5.4.1",
+        "sha256": "e53a236dc577eb3fd8f907f1ed6e381657d82db06a9a8d3734b5eec38b49a471",
+        "byte_length": 20727
+      }
+    },
+    {
+      "id": "gsmartcontrol",
+      "claims_added": [
+        "pricing"
+      ],
+      "url": "https://github.com/ashaduri/gsmartcontrol/releases/expanded_assets/v2.0.2",
+      "finding": "A named main application package is offered through the official project/download page and was anonymously reachable by an HTTP HEAD request. This establishes a no-charge distribution option; it does not verify a signature, installation or hosted-service pricing.",
+      "observation": {
+        "url": "https://github.com/ashaduri/gsmartcontrol/releases/expanded_assets/v2.0.2",
+        "retrieved_at": "2026-11-15T02:15:26.856433+00:00",
+        "http_status": 200,
+        "final_url": "https://github.com/ashaduri/gsmartcontrol/releases/expanded_assets/v2.0.2",
+        "sha256": "86025d3f0a1d3c3de26f9023889487b12ddebb1fd36b48e71c55d6ead218d309",
+        "byte_length": 12517
+      }
+    },
+    {
+      "id": "fio",
+      "claims_added": [
+        "pricing"
+      ],
+      "url": "https://github.com/axboe/fio/releases/expanded_assets/fio-3.43",
+      "finding": "A named main application package is offered through the official project/download page and was anonymously reachable by an HTTP HEAD request. This establishes a no-charge distribution option; it does not verify a signature, installation or hosted-service pricing.",
+      "observation": {
+        "url": "https://github.com/axboe/fio/releases/expanded_assets/fio-3.43",
+        "retrieved_at": "2026-11-15T02:15:26.919538+00:00",
+        "http_status": 200,
+        "final_url": "https://github.com/axboe/fio/releases/expanded_assets/fio-3.43",
+        "sha256": "51d798751bb00523b5df32d3d469b6d5355f6f555865aec067b5d485e4df4e2b",
+        "byte_length": 12467
+      }
+    },
+    {
+      "id": "btop",
+      "claims_added": [
+        "pricing"
+      ],
+      "url": "https://github.com/aristocratos/btop/releases/expanded_assets/v1.4.8",
+      "finding": "A named main application package is offered through the official project/download page and was anonymously reachable by an HTTP HEAD request. This establishes a no-charge distribution option; it does not verify a signature, installation or hosted-service pricing.",
+      "observation": {
+        "url": "https://github.com/aristocratos/btop/releases/expanded_assets/v1.4.8",
+        "retrieved_at": "2026-11-15T02:15:26.996179+00:00",
+        "http_status": 200,
+        "final_url": "https://github.com/aristocratos/btop/releases/expanded_assets/v1.4.8",
+        "sha256": "cc2ac7b68c0fc6c528c682bbb8240d7c5886388b3056ec3bbe2211247b6ed036",
+        "byte_length": 48939
+      }
+    },
+    {
+      "id": "bottom",
+      "claims_added": [
+        "pricing"
+      ],
+      "url": "https://github.com/ClementTsang/bottom/releases/expanded_assets/nightly-99d586a1-1794557057",
+      "finding": "A named main application package is offered through the official project/download page and was anonymously reachable by an HTTP HEAD request. This establishes a no-charge distribution option; it does not verify a signature, installation or hosted-service pricing.",
+      "observation": {
+        "url": "https://github.com/ClementTsang/bottom/releases/expanded_assets/nightly-99d586a1-1794557057",
+        "retrieved_at": "2026-11-15T02:15:30.093134+00:00",
+        "http_status": 200,
+        "final_url": "https://github.com/ClementTsang/bottom/releases/expanded_assets/nightly-99d586a1-1794557057",
+        "sha256": "69eb2f1b08933723649b6e41bd983e6ea07104fd8b93e6fdb18d152e3bf86bf0",
+        "byte_length": 152973
+      }
+    },
+    {
+      "id": "nvtop",
+      "claims_added": [
+        "pricing"
+      ],
+      "url": "https://github.com/Syllo/nvtop/releases/expanded_assets/3.4.0",
+      "finding": "A named main application package is offered through the official project/download page and was anonymously reachable by an HTTP HEAD request. This establishes a no-charge distribution option; it does not verify a signature, installation or hosted-service pricing.",
+      "observation": {
+        "url": "https://github.com/Syllo/nvtop/releases/expanded_assets/3.4.0",
+        "retrieved_at": "2026-11-15T02:15:31.015318+00:00",
+        "http_status": 200,
+        "final_url": "https://github.com/Syllo/nvtop/releases/expanded_assets/3.4.0",
+        "sha256": "e58de783e98a2937e3ce220e6f44ee4c37d82c65d79d34e066c69fe6cace47a3",
+        "byte_length": 12531
+      }
+    },
+    {
+      "id": "liquidctl",
+      "claims_added": [
+        "pricing"
+      ],
+      "url": "https://github.com/liquidctl/liquidctl/releases/expanded_assets/v1.16.0",
+      "finding": "A named main application package is offered through the official project/download page and was anonymously reachable by an HTTP HEAD request. This establishes a no-charge distribution option; it does not verify a signature, installation or hosted-service pricing.",
+      "observation": {
+        "url": "https://github.com/liquidctl/liquidctl/releases/expanded_assets/v1.16.0",
+        "retrieved_at": "2026-11-15T02:15:31.025634+00:00",
+        "http_status": 200,
+        "final_url": "https://github.com/liquidctl/liquidctl/releases/expanded_assets/v1.16.0",
+        "sha256": "1d803ba55e27bfb159b5b23d781d0a3dc2d410316e2fb59cb8e667219ab6167b",
+        "byte_length": 24628
+      }
+    },
+    {
+      "id": "monitorcontrol",
+      "claims_added": [
+        "pricing"
+      ],
+      "url": "https://github.com/MonitorControl/MonitorControl/releases/expanded_assets/v4.4.0",
+      "finding": "A named main application package is offered through the official project/download page and was anonymously reachable by an HTTP HEAD request. This establishes a no-charge distribution option; it does not verify a signature, installation or hosted-service pricing.",
+      "observation": {
+        "url": "https://github.com/MonitorControl/MonitorControl/releases/expanded_assets/v4.4.0",
+        "retrieved_at": "2026-11-15T02:15:31.048834+00:00",
+        "http_status": 200,
+        "final_url": "https://github.com/MonitorControl/MonitorControl/releases/expanded_assets/v4.4.0",
+        "sha256": "10a4ae3eaa029bb523517ad92eea66681283da67e96caf99e4f281d33b4500fe",
+        "byte_length": 8577
+      }
+    },
+    {
+      "id": "lact",
+      "claims_added": [
+        "pricing"
+      ],
+      "url": "https://github.com/ilya-zlobintsev/LACT/releases/expanded_assets/test-build",
+      "finding": "A named main application package is offered through the official project/download page and was anonymously reachable by an HTTP HEAD request. This establishes a no-charge distribution option; it does not verify a signature, installation or hosted-service pricing.",
+      "observation": {
+        "url": "https://github.com/ilya-zlobintsev/LACT/releases/expanded_assets/test-build",
+        "retrieved_at": "2026-11-15T02:15:31.055162+00:00",
+        "http_status": 200,
+        "final_url": "https://github.com/ilya-zlobintsev/LACT/releases/expanded_assets/test-build",
+        "sha256": "8a24b5153a1045bebd9829d024beb9783ac5c7ee51b546ee036fb76bc3d907d0",
+        "byte_length": 77441
+      }
+    },
+    {
+      "id": "jdupes",
+      "claims_added": [
+        "pricing"
+      ],
+      "url": "https://codeberg.org/jbruchon/jdupes/releases",
+      "finding": "A named main application package is offered through the official project/download page and was anonymously reachable by an HTTP HEAD request. This establishes a no-charge distribution option; it does not verify a signature, installation or hosted-service pricing.",
+      "observation": {
+        "url": "https://codeberg.org/jbruchon/jdupes/releases",
+        "retrieved_at": "2026-11-15T02:15:19.255582+00:00",
+        "http_status": 200,
+        "final_url": "https://codeberg.org/jbruchon/jdupes/releases",
+        "sha256": "e6d02e56c9c67ef9ca41fb731874775d82acb5dd2054c8f11b941efe927618eb",
+        "byte_length": 112533
+      }
+    },
+    {
+      "id": "ncdu",
+      "claims_added": [
+        "pricing"
+      ],
+      "url": "https://dev.yorhel.nl/ncdu",
+      "finding": "A named main application package is offered through the official project/download page and was anonymously reachable by an HTTP HEAD request. This establishes a no-charge distribution option; it does not verify a signature, installation or hosted-service pricing.",
+      "observation": {
+        "url": "https://dev.yorhel.nl/ncdu",
+        "retrieved_at": "2026-11-15T02:15:20.692105+00:00",
+        "http_status": 200,
+        "final_url": "https://dev.yorhel.nl/ncdu",
+        "sha256": "24d16f2308f67c096dc2e54947fe8eef74fa0e75fe80e6ecdd0c8dfceb5c694b",
+        "byte_length": 11648
+      }
+    },
+    {
+      "id": "gnupg",
+      "claims_added": [
+        "pricing"
+      ],
+      "url": "https://gnupg.org/download/",
+      "finding": "A named main application package is offered through the official project/download page and was anonymously reachable by an HTTP HEAD request. This establishes a no-charge distribution option; it does not verify a signature, installation or hosted-service pricing.",
+      "observation": {
+        "url": "https://gnupg.org/download/",
+        "retrieved_at": "2026-11-15T02:15:25.673088+00:00",
+        "http_status": 200,
+        "final_url": "https://gnupg.org/download/",
+        "sha256": "22e3253ac77d3e256ad8010ec1209cc01e3e46ac92efbe5830d50773cc648e69",
+        "byte_length": 19817
+      }
+    },
+    {
+      "id": "memtest86-plus",
+      "claims_added": [
+        "pricing"
+      ],
+      "url": "https://memtest.org/",
+      "finding": "A named main application package is offered through the official project/download page and was anonymously reachable by an HTTP HEAD request. This establishes a no-charge distribution option; it does not verify a signature, installation or hosted-service pricing.",
+      "observation": {
+        "url": "https://memtest.org/",
+        "retrieved_at": "2026-11-15T02:15:34.512613+00:00",
+        "http_status": 200,
+        "final_url": "https://memtest.org/",
+        "sha256": "aa7b0e0964580a9ecfa12e94ac5aa1ec69ca377a06612bdad29c630e45536847",
+        "byte_length": 108953
+      }
+    },
+    {
+      "id": "openrgb",
+      "claims_added": [
+        "pricing"
+      ],
+      "url": "https://openrgb.org/releases.html",
+      "finding": "A named main application package is offered through the official project/download page and was anonymously reachable by an HTTP HEAD request. This establishes a no-charge distribution option; it does not verify a signature, installation or hosted-service pricing.",
+      "observation": {
+        "url": "https://openrgb.org/releases.html",
+        "retrieved_at": "2026-11-15T02:15:37.333547+00:00",
+        "http_status": 200,
+        "final_url": "https://openrgb.org/releases.html",
+        "sha256": "c391c91a109992a6acb9ef2609352d8ded9f7801a05d5e31dea63e26025ae233",
+        "byte_length": 44841
+      }
+    },
+    {
+      "id": "broot",
+      "claims_added": [
+        "pricing"
+      ],
+      "url": "https://github.com/Canop/broot/releases/expanded_assets/v1.62.0",
+      "finding": "A named main application package is offered through the official project/download page and was anonymously reachable by an HTTP HEAD request. This establishes a no-charge distribution option; it does not verify a signature, installation or hosted-service pricing.",
+      "observation": {
+        "url": "https://github.com/Canop/broot/releases/expanded_assets/v1.62.0",
+        "retrieved_at": "2026-11-15T02:15:01.551532+00:00",
+        "http_status": 200,
+        "final_url": "https://github.com/Canop/broot/releases/expanded_assets/v1.62.0",
+        "sha256": "30bd811c110ba546f6707289ce2cd28c8424fa37aea67a83a3ca6530ac56a8c2",
+        "byte_length": 8500
+      }
+    },
+    {
+      "id": "diskspd",
+      "claims_added": [
+        "pricing"
+      ],
+      "url": "https://github.com/microsoft/diskspd/releases/expanded_assets/v2.3",
+      "finding": "A named main application package is offered through the official project/download page and was anonymously reachable by an HTTP HEAD request. This establishes a no-charge distribution option; it does not verify a signature, installation or hosted-service pricing.",
+      "observation": {
+        "url": "https://github.com/microsoft/diskspd/releases/expanded_assets/v2.3",
+        "retrieved_at": "2026-11-15T02:15:26.920052+00:00",
+        "http_status": 200,
+        "final_url": "https://github.com/microsoft/diskspd/releases/expanded_assets/v2.3",
+        "sha256": "061f798e3b32667e0223f9d3520e45eb1e89c8fa10f5ddd0a216c58e7182f337",
+        "byte_length": 8496
+      }
+    },
+    {
+      "id": "urbackup",
+      "claims_added": [
+        "pricing"
+      ],
+      "url": "https://www.urbackup.org/download.html",
+      "finding": "A named main application package is offered through the official project/download page and was anonymously reachable by an HTTP HEAD request. This establishes a no-charge distribution option; it does not verify a signature, installation or hosted-service pricing.",
+      "observation": {
+        "url": "https://www.urbackup.org/download.html",
+        "retrieved_at": "2026-11-15T02:15:09.700701+00:00",
+        "http_status": 200,
+        "final_url": "https://www.urbackup.org/download.html",
+        "sha256": "85dda12deea4880f14886c46e831c0a530585d7413fc9627f7e22b4c0d44af64",
+        "byte_length": 17848
+      }
+    },
+    {
+      "id": "rescuezilla",
+      "claims_added": [
+        "pricing"
+      ],
+      "url": "https://github.com/rescuezilla/rescuezilla/releases/expanded_assets/2.6.2",
+      "finding": "A named main application package is offered through the official project/download page and was anonymously reachable by an HTTP HEAD request. This establishes a no-charge distribution option; it does not verify a signature, installation or hosted-service pricing.",
+      "observation": {
+        "url": "https://github.com/rescuezilla/rescuezilla/releases/expanded_assets/2.6.2",
+        "retrieved_at": "2026-11-15T02:14:56.860621+00:00",
+        "http_status": 200,
+        "final_url": "https://github.com/rescuezilla/rescuezilla/releases/expanded_assets/2.6.2",
+        "sha256": "d9c6d3c838d83deaf147dec90c9bc5a7a6a9935ee4d5b87e3654ef375663a917",
+        "byte_length": 36575
+      }
+    },
+    {
+      "id": "explorer-plus-plus",
+      "claims_added": [
+        "pricing"
+      ],
+      "url": "https://explorerplusplus.com/download",
+      "finding": "A named main application package is offered through the official project/download page and was anonymously reachable by an HTTP HEAD request. This establishes a no-charge distribution option; it does not verify a signature, installation or hosted-service pricing.",
+      "observation": {
+        "url": "https://explorerplusplus.com/download",
+        "retrieved_at": "2026-11-15T02:15:14.795131+00:00",
+        "http_status": 200,
+        "final_url": "https://explorerplusplus.com/download",
+        "sha256": "80ff92fa91abd5e0142d309c79447d3bff10b6b608e9bc7d4fe01d93cf2baf5b",
+        "byte_length": 15609
+      }
+    },
+    {
+      "id": "monitorian",
+      "claims_added": [
+        "pricing"
+      ],
+      "url": "https://github.com/emoacht/Monitorian",
+      "finding": "The README describes subscription add-ons for the Microsoft Store version; a uniformly free pricing label was incomplete.",
+      "observation": {
+        "url": "https://github.com/emoacht/Monitorian",
+        "checked_at": "2026-11-15T01:36:37.213970+00:00",
+        "status": 200,
+        "final_url": "https://github.com/emoacht/Monitorian",
+        "sha256": "c6a071898f9f6150f0d5bce34f575e273ee8f44e63ca4246d525616066e934a0",
+        "bytes": 352224,
+        "title": "GitHub - emoacht/Monitorian: A Windows desktop tool to adjust the brightness of multiple monitors with ease \u00b7 GitHub",
+        "source_cache": "prior systems research cache; actual document reviewed for the added claim"
+      }
+    },
+    {
+      "id": "nanazip",
+      "claims_added": [
+        "pricing"
+      ],
+      "url": "https://github.com/M2Team/NanaZip",
+      "finding": "The README documents a separately purchased Sponsor Edition while standard application packages remain publicly available.",
+      "observation": {
+        "url": "https://github.com/M2Team/NanaZip",
+        "checked_at": "2026-11-15T01:33:47.319375+00:00",
+        "status": 200,
+        "final_url": "https://github.com/M2Team/NanaZip",
+        "sha256": "90a1a8ef7c255bcb24209a0a69f18dd3ef652f8157f393f696b7f907cd7d6da2",
+        "bytes": 386340,
+        "title": "GitHub - M2Team/NanaZip: The 7-Zip derivative intended for the modern Windows experience \u00b7 GitHub",
+        "source_cache": "prior systems research cache; actual document reviewed for the added claim"
+      }
+    }
+  ],
+  "accepted_public_distributions": [
+    {
+      "id": "borgbackup",
+      "url": "https://github.com/borgbackup/borg/releases/download/2.0.0b25/borg-windows-x86_64-gh.exe",
+      "asset_name": "borg-windows-x86_64-gh.exe",
+      "source_url": "https://github.com/borgbackup/borg/releases/expanded_assets/2.0.0b25",
+      "method": "HEAD",
+      "retrieved_at": "2026-11-15T02:17:11.954047+00:00",
+      "http_status": 200,
+      "final_url_without_query": "https://release-assets.githubusercontent.com/github-production-release-asset/35517126/37120518-08a0-498f-a016-fcaf44ac906b",
+      "content_type": "application/octet-stream",
+      "content_length": "28804970"
+    },
+    {
+      "id": "vorta",
+      "url": "https://github.com/borgbase/vorta/releases/download/v0.12.1/Vorta-v0.12.1-arm.dmg",
+      "asset_name": "Vorta-v0.12.1-arm.dmg",
+      "source_url": "https://github.com/borgbase/vorta/releases/expanded_assets/v0.12.1",
+      "method": "HEAD",
+      "retrieved_at": "2026-11-15T02:17:11.954541+00:00",
+      "http_status": 200,
+      "final_url_without_query": "https://release-assets.githubusercontent.com/github-production-release-asset/154956532/9726a9af-4167-4d43-9154-835233513ed5",
+      "content_type": "application/octet-stream",
+      "content_length": "45686573"
+    },
+    {
+      "id": "yazi",
+      "url": "https://github.com/sxyazi/yazi/releases/download/nightly/yazi-aarch64-apple-darwin.zip",
+      "asset_name": "yazi-aarch64-apple-darwin.zip",
+      "source_url": "https://github.com/sxyazi/yazi/releases/expanded_assets/nightly",
+      "method": "HEAD",
+      "retrieved_at": "2026-11-15T02:17:11.956083+00:00",
+      "http_status": 200,
+      "final_url_without_query": "https://release-assets.githubusercontent.com/github-production-release-asset/663900193/4eacb437-8abc-4f9e-b772-04177cc863a6",
+      "content_type": "application/octet-stream",
+      "content_length": "19571874"
+    },
+    {
+      "id": "lf",
+      "url": "https://github.com/gokcehan/lf/releases/download/r42/lf-darwin-amd64.tar.gz",
+      "asset_name": "lf-darwin-amd64.tar.gz",
+      "source_url": "https://github.com/gokcehan/lf/releases/expanded_assets/r42",
+      "method": "HEAD",
+      "retrieved_at": "2026-11-15T02:17:11.956432+00:00",
+      "http_status": 200,
+      "final_url_without_query": "https://release-assets.githubusercontent.com/github-production-release-asset/65616765/384b28de-9451-402f-8e8a-cd4a225b2f04",
+      "content_type": "application/octet-stream",
+      "content_length": "2337597"
+    },
+    {
+      "id": "nnn",
+      "url": "https://github.com/jarun/nnn/releases/download/v5.3/nnn-emoji-static-5.3.x86_64.tar.gz",
+      "asset_name": "nnn-emoji-static-5.3.x86_64.tar.gz",
+      "source_url": "https://github.com/jarun/nnn/releases/expanded_assets/v5.3",
+      "method": "HEAD",
+      "retrieved_at": "2026-11-15T02:17:11.957001+00:00",
+      "http_status": 200,
+      "final_url_without_query": "https://release-assets.githubusercontent.com/github-production-release-asset/66150122/9801c70b-c815-4c8c-acee-be1408651aca",
+      "content_type": "application/octet-stream",
+      "content_length": "663378"
+    },
+    {
+      "id": "dupeguru",
+      "url": "https://github.com/arsenetar/dupeguru/releases/download/4.3.1/dupeguru-4.3.1-2.x86_64.rpm",
+      "asset_name": "dupeguru-4.3.1-2.x86_64.rpm",
+      "source_url": "https://github.com/arsenetar/dupeguru/releases/expanded_assets/4.3.1",
+      "method": "HEAD",
+      "retrieved_at": "2026-11-15T02:17:22.035265+00:00",
+      "http_status": 200,
+      "final_url_without_query": "https://release-assets.githubusercontent.com/github-production-release-asset/10856340/1507e382-9039-41cb-834f-64776c41e4a6",
+      "content_type": "application/octet-stream",
+      "content_length": "1368805"
+    },
+    {
+      "id": "fclones",
+      "url": "https://github.com/pkolaczk/fclones/releases/download/v0.35.0/fclones-0.35.0-2.x86_64.rpm",
+      "asset_name": "fclones-0.35.0-2.x86_64.rpm",
+      "source_url": "https://github.com/pkolaczk/fclones/releases/expanded_assets/v0.35.0",
+      "method": "HEAD",
+      "retrieved_at": "2026-11-15T02:17:22.036166+00:00",
+      "http_status": 200,
+      "final_url_without_query": "https://release-assets.githubusercontent.com/github-production-release-asset/269959476/ef2a8832-b357-4b1d-a425-9858c8fc5cb3",
+      "content_type": "application/octet-stream",
+      "content_length": "1990889"
+    },
+    {
+      "id": "nanazip",
+      "url": "https://github.com/M2Team/NanaZip/releases/download/7.0.1882.0/NanaZipPreview_7.0.1882.0.msixbundle",
+      "asset_name": "NanaZipPreview_7.0.1882.0.msixbundle",
+      "source_url": "https://github.com/M2Team/NanaZip/releases/expanded_assets/7.0.1882.0",
+      "method": "HEAD",
+      "retrieved_at": "2026-11-15T02:17:22.046231+00:00",
+      "http_status": 200,
+      "final_url_without_query": "https://release-assets.githubusercontent.com/github-production-release-asset/401508496/1ba77993-d0bf-4169-9155-2f9cc329d805",
+      "content_type": "application/octet-stream",
+      "content_length": "12442763"
+    },
+    {
+      "id": "angry-ip-scanner",
+      "url": "https://github.com/angryip/ipscan/releases/download/3.12.1/ipscan-3.12.1-1.x86_64.rpm",
+      "asset_name": "ipscan-3.12.1-1.x86_64.rpm",
+      "source_url": "https://github.com/angryip/ipscan/releases/expanded_assets/3.12.1",
+      "method": "HEAD",
+      "retrieved_at": "2026-11-15T02:17:22.048390+00:00",
+      "http_status": 200,
+      "final_url_without_query": "https://release-assets.githubusercontent.com/github-production-release-asset/1968850/195646c3-e9b2-4aa1-9b97-455299537964",
+      "content_type": "application/octet-stream",
+      "content_length": "2142631"
+    },
+    {
+      "id": "trippy",
+      "url": "https://github.com/fujiapple852/trippy/releases/download/0.13.0/trippy-0.13.0-aarch64-apple-darwin.tar.gz",
+      "asset_name": "trippy-0.13.0-aarch64-apple-darwin.tar.gz",
+      "source_url": "https://github.com/fujiapple852/trippy/releases/expanded_assets/0.13.0",
+      "method": "HEAD",
+      "retrieved_at": "2026-11-15T02:17:22.060646+00:00",
+      "http_status": 200,
+      "final_url_without_query": "https://release-assets.githubusercontent.com/github-production-release-asset/474961035/4502366c-ce08-403c-ae29-3ed3911c814b",
+      "content_type": "application/octet-stream",
+      "content_length": "3246346"
+    },
+    {
+      "id": "bandwhich",
+      "url": "https://github.com/imsnif/bandwhich/releases/download/v0.23.1/bandwhich-v0.23.1-aarch64-apple-darwin.tar.gz",
+      "asset_name": "bandwhich-v0.23.1-aarch64-apple-darwin.tar.gz",
+      "source_url": "https://github.com/imsnif/bandwhich/releases/expanded_assets/v0.23.1",
+      "method": "HEAD",
+      "retrieved_at": "2026-11-15T02:17:22.066311+00:00",
+      "http_status": 200,
+      "final_url_without_query": "https://release-assets.githubusercontent.com/github-production-release-asset/206874323/3fc9f700-9123-46c5-b67a-72da4c890562",
+      "content_type": "application/octet-stream",
+      "content_length": "1894447"
+    },
+    {
+      "id": "age",
+      "url": "https://github.com/FiloSottile/age/releases/download/v1.3.2/age-v1.3.2-darwin-amd64.tar.gz",
+      "asset_name": "age-v1.3.2-darwin-amd64.tar.gz",
+      "source_url": "https://github.com/FiloSottile/age/releases/expanded_assets/v1.3.2",
+      "method": "HEAD",
+      "retrieved_at": "2026-11-15T02:17:22.132164+00:00",
+      "http_status": 200,
+      "final_url_without_query": "https://release-assets.githubusercontent.com/github-production-release-asset/187403699/38d935db-6f46-435f-979f-db8cdcd0cf98",
+      "content_type": "application/octet-stream",
+      "content_length": "19376787"
+    },
+    {
+      "id": "veracrypt",
+      "url": "https://github.com/veracrypt/VeraCrypt/releases/download/VeraCrypt_1.26.31/VeraCrypt-1.26.31-aarch64.AppImage",
+      "asset_name": "VeraCrypt-1.26.31-aarch64.AppImage",
+      "source_url": "https://github.com/veracrypt/VeraCrypt/releases/expanded_assets/VeraCrypt_1.26.31",
+      "method": "HEAD",
+      "retrieved_at": "2026-11-15T02:17:29.781500+00:00",
+      "http_status": 200,
+      "final_url_without_query": "https://release-assets.githubusercontent.com/github-production-release-asset/26376490/56ccfe0f-1f40-46d3-b5b1-8309190ff67e",
+      "content_type": "application/octet-stream",
+      "content_length": "13773320"
+    },
+    {
+      "id": "gocryptfs",
+      "url": "https://github.com/rfjakob/gocryptfs/releases/download/v2.7.0/gocryptfs_v2.7.0_linux-static_amd64.tar.gz",
+      "asset_name": "gocryptfs_v2.7.0_linux-static_amd64.tar.gz",
+      "source_url": "https://github.com/rfjakob/gocryptfs/releases/expanded_assets/v2.7.0",
+      "method": "HEAD",
+      "retrieved_at": "2026-11-15T02:17:29.806164+00:00",
+      "http_status": 200,
+      "final_url_without_query": "https://release-assets.githubusercontent.com/github-production-release-asset/41997606/b4bfc354-8265-485f-8afb-0cf36ef5e326",
+      "content_type": "application/octet-stream",
+      "content_length": "8429840"
+    },
+    {
+      "id": "opensnitch",
+      "url": "https://github.com/evilsocket/opensnitch/releases/download/v1.8.0/opensnitch-1.8.0-1.aarch64.rpm",
+      "asset_name": "opensnitch-1.8.0-1.aarch64.rpm",
+      "source_url": "https://github.com/evilsocket/opensnitch/releases/expanded_assets/v1.8.0",
+      "method": "HEAD",
+      "retrieved_at": "2026-11-15T02:17:29.808619+00:00",
+      "http_status": 200,
+      "final_url_without_query": "https://release-assets.githubusercontent.com/github-production-release-asset/88417028/7bcd9c62-f161-4169-a547-71dbc35a569a",
+      "content_type": "application/octet-stream",
+      "content_length": "6278249"
+    },
+    {
+      "id": "lulu",
+      "url": "https://github.com/objective-see/LuLu/releases/download/v4.5.7/LuLu_4.5.7.dmg",
+      "asset_name": "LuLu_4.5.7.dmg",
+      "source_url": "https://github.com/objective-see/LuLu/releases/expanded_assets/v4.5.7",
+      "method": "HEAD",
+      "retrieved_at": "2026-11-15T02:17:29.811132+00:00",
+      "http_status": 200,
+      "final_url_without_query": "https://release-assets.githubusercontent.com/github-production-release-asset/103010090/8d90c0fe-c27d-4be9-85a7-d7490f627a83",
+      "content_type": "application/octet-stream",
+      "content_length": "6684272"
+    },
+    {
+      "id": "multipass",
+      "url": "https://github.com/canonical/multipass/releases/download/v1.17.1/multipass-1.17.1+mac-Darwin.pkg",
+      "asset_name": "multipass-1.17.1+mac-Darwin.pkg",
+      "source_url": "https://github.com/canonical/multipass/releases/expanded_assets/v1.17.1",
+      "method": "HEAD",
+      "retrieved_at": "2026-11-15T02:17:29.819327+00:00",
+      "http_status": 200,
+      "final_url_without_query": "https://release-assets.githubusercontent.com/github-production-release-asset/114128199/d771d7af-7420-42b3-b4df-cc2dd174e278",
+      "content_type": "application/octet-stream",
+      "content_length": "162671803"
+    },
+    {
+      "id": "vagrant",
+      "url": "https://github.com/hashicorp/vagrant/releases/download/2.4.10.dev%2B000834-2757db88/vagrant-2.4.10.dev-1.i686.rpm",
+      "asset_name": "vagrant-2.4.10.dev-1.i686.rpm",
+      "source_url": "https://github.com/hashicorp/vagrant/releases/expanded_assets/2.4.10.dev%2B000834-2757db88",
+      "method": "HEAD",
+      "retrieved_at": "2026-11-15T02:17:29.826365+00:00",
+      "http_status": 200,
+      "final_url_without_query": "https://release-assets.githubusercontent.com/github-production-release-asset/481872/fe0c4301-3bac-4709-bc0c-b068c01ddd27",
+      "content_type": "application/octet-stream",
+      "content_length": "86442796"
+    },
+    {
+      "id": "distrobox",
+      "url": "https://github.com/89luca89/distrobox/releases/download/2.0.0-rc.4/distrobox-linux-amd64.tar.gz",
+      "asset_name": "distrobox-linux-amd64.tar.gz",
+      "source_url": "https://github.com/89luca89/distrobox/releases/expanded_assets/2.0.0-rc.4",
+      "method": "HEAD",
+      "retrieved_at": "2026-11-15T02:17:29.860763+00:00",
+      "http_status": 200,
+      "final_url_without_query": "https://release-assets.githubusercontent.com/github-production-release-asset/429485913/7b70d8d0-0f08-42c1-ba8d-6ec9785a0aa5",
+      "content_type": "application/octet-stream",
+      "content_length": "6822813"
+    },
+    {
+      "id": "podman-desktop",
+      "url": "https://github.com/podman-desktop/podman-desktop/releases/download/v1.30.7/podman-desktop-1.30.7-arm64.dmg",
+      "asset_name": "podman-desktop-1.30.7-arm64.dmg",
+      "source_url": "https://github.com/podman-desktop/podman-desktop/releases/expanded_assets/v1.30.7",
+      "method": "HEAD",
+      "retrieved_at": "2026-11-15T02:17:37.469081+00:00",
+      "http_status": 200,
+      "final_url_without_query": "https://release-assets.githubusercontent.com/github-production-release-asset/465844859/13810177-d00c-40ea-a801-41f5802edf83",
+      "content_type": "application/octet-stream",
+      "content_length": "246528480"
+    },
+    {
+      "id": "rancher-desktop",
+      "url": "https://github.com/rancher-sandbox/rancher-desktop/releases/download/v1.25.0/rancher-desktop-linux-v1.25.0.zip",
+      "asset_name": "rancher-desktop-linux-v1.25.0.zip",
+      "source_url": "https://github.com/rancher-sandbox/rancher-desktop/releases/expanded_assets/v1.25.0",
+      "method": "HEAD",
+      "retrieved_at": "2026-11-15T02:17:37.515841+00:00",
+      "http_status": 200,
+      "final_url_without_query": "https://release-assets.githubusercontent.com/github-production-release-asset/306701996/ca6ddc9a-a6f6-41cc-8fcd-907e89681be4",
+      "content_type": "application/octet-stream",
+      "content_length": "732579843"
+    },
+    {
+      "id": "cpu-x",
+      "url": "https://github.com/TheTumultuousUnicornOfDarkness/CPU-X/releases/download/v5.4.1/CPU-X-5.4.1-aarch64.AppImage",
+      "asset_name": "CPU-X-5.4.1-aarch64.AppImage",
+      "source_url": "https://github.com/TheTumultuousUnicornOfDarkness/CPU-X/releases/expanded_assets/v5.4.1",
+      "method": "HEAD",
+      "retrieved_at": "2026-11-15T02:17:37.516560+00:00",
+      "http_status": 200,
+      "final_url_without_query": "https://release-assets.githubusercontent.com/github-production-release-asset/24292801/922f5b2e-1930-4b21-976b-67e10e137239",
+      "content_type": "application/octet-stream",
+      "content_length": "26450080"
+    },
+    {
+      "id": "gsmartcontrol",
+      "url": "https://github.com/ashaduri/gsmartcontrol/releases/download/v2.0.2/gsmartcontrol-2.0.2-win32.exe",
+      "asset_name": "gsmartcontrol-2.0.2-win32.exe",
+      "source_url": "https://github.com/ashaduri/gsmartcontrol/releases/expanded_assets/v2.0.2",
+      "method": "HEAD",
+      "retrieved_at": "2026-11-15T02:17:37.526602+00:00",
+      "http_status": 200,
+      "final_url_without_query": "https://release-assets.githubusercontent.com/github-production-release-asset/341614595/53c9194b-5561-4d26-9eb9-cda292e07bcc",
+      "content_type": "application/octet-stream",
+      "content_length": "26580619"
+    },
+    {
+      "id": "fio",
+      "url": "https://github.com/axboe/fio/releases/download/fio-3.43/fio-3.43-x64.msi",
+      "asset_name": "fio-3.43-x64.msi",
+      "source_url": "https://github.com/axboe/fio/releases/expanded_assets/fio-3.43",
+      "method": "HEAD",
+      "retrieved_at": "2026-11-15T02:17:37.533679+00:00",
+      "http_status": 200,
+      "final_url_without_query": "https://release-assets.githubusercontent.com/github-production-release-asset/6331631/f0ec882e-5aca-4918-9488-2d37800b2348",
+      "content_type": "application/octet-stream",
+      "content_length": "2871296"
+    },
+    {
+      "id": "btop",
+      "url": "https://github.com/aristocratos/btop/releases/download/v1.4.8/btop-aarch64-unknown-linux-musl.tar.gz",
+      "asset_name": "btop-aarch64-unknown-linux-musl.tar.gz",
+      "source_url": "https://github.com/aristocratos/btop/releases/expanded_assets/v1.4.8",
+      "method": "HEAD",
+      "retrieved_at": "2026-11-15T02:17:37.533961+00:00",
+      "http_status": 200,
+      "final_url_without_query": "https://release-assets.githubusercontent.com/github-production-release-asset/365005377/10dd3de9-ddad-4168-b962-1c1b52a01a46",
+      "content_type": "application/octet-stream",
+      "content_length": "973166"
+    },
+    {
+      "id": "bottom",
+      "url": "https://github.com/ClementTsang/bottom/releases/download/nightly-99d586a1-1794557057/bottom-0.15.0-1.x86_64.rpm",
+      "asset_name": "bottom-0.15.0-1.x86_64.rpm",
+      "source_url": "https://github.com/ClementTsang/bottom/releases/expanded_assets/nightly-99d586a1-1794557057",
+      "method": "HEAD",
+      "retrieved_at": "2026-11-15T02:17:37.563155+00:00",
+      "http_status": 200,
+      "final_url_without_query": "https://release-assets.githubusercontent.com/github-production-release-asset/205042455/8fb01410-9a75-47f4-9964-27487313dadd",
+      "content_type": "application/octet-stream",
+      "content_length": "1659855"
+    },
+    {
+      "id": "nvtop",
+      "url": "https://github.com/Syllo/nvtop/releases/download/3.4.0/nvtop-3.4.0-aarch64.AppImage",
+      "asset_name": "nvtop-3.4.0-aarch64.AppImage",
+      "source_url": "https://github.com/Syllo/nvtop/releases/expanded_assets/3.4.0",
+      "method": "HEAD",
+      "retrieved_at": "2026-11-15T02:17:47.147404+00:00",
+      "http_status": 200,
+      "final_url_without_query": "https://release-assets.githubusercontent.com/github-production-release-asset/94530674/765e9376-9f16-4e49-976a-6c1163f262df",
+      "content_type": "application/octet-stream",
+      "content_length": "1358344"
+    },
+    {
+      "id": "liquidctl",
+      "url": "https://github.com/liquidctl/liquidctl/releases/download/v1.16.0/liquidctl-1.16.0-py3-none-any.whl",
+      "asset_name": "liquidctl-1.16.0-py3-none-any.whl",
+      "source_url": "https://github.com/liquidctl/liquidctl/releases/expanded_assets/v1.16.0",
+      "method": "HEAD",
+      "retrieved_at": "2026-11-15T02:17:47.151013+00:00",
+      "http_status": 200,
+      "final_url_without_query": "https://release-assets.githubusercontent.com/github-production-release-asset/142497496/23336849-bba2-4bc4-9534-ede397f58e78",
+      "content_type": "application/octet-stream",
+      "content_length": "153709"
+    },
+    {
+      "id": "monitorcontrol",
+      "url": "https://github.com/MonitorControl/MonitorControl/releases/download/v4.4.0/MonitorControl.4.4.0.dmg",
+      "asset_name": "MonitorControl.4.4.0.dmg",
+      "source_url": "https://github.com/MonitorControl/MonitorControl/releases/expanded_assets/v4.4.0",
+      "method": "HEAD",
+      "retrieved_at": "2026-11-15T02:17:47.201579+00:00",
+      "http_status": 200,
+      "final_url_without_query": "https://release-assets.githubusercontent.com/github-production-release-asset/103784142/9100b00d-4bbc-47bc-bc1a-eb244d35f3fa",
+      "content_type": "application/octet-stream",
+      "content_length": "20391423"
+    },
+    {
+      "id": "lact",
+      "url": "https://github.com/ilya-zlobintsev/LACT/releases/download/test-build/io.github.ilya_zlobintsev.LACT.flatpak",
+      "asset_name": "io.github.ilya_zlobintsev.LACT.flatpak",
+      "source_url": "https://github.com/ilya-zlobintsev/LACT/releases/expanded_assets/test-build",
+      "method": "HEAD",
+      "retrieved_at": "2026-11-15T02:17:47.227917+00:00",
+      "http_status": 200,
+      "final_url_without_query": "https://release-assets.githubusercontent.com/github-production-release-asset/304892612/6ae2c716-087e-40d4-913a-04a2a9e23116",
+      "content_type": "application/octet-stream",
+      "content_length": "6564960"
+    },
+    {
+      "id": "jdupes",
+      "url": "https://codeberg.org/jbruchon/jdupes/releases/download/v1.31.3/jdupes-1.31.3-win32.zip",
+      "asset_name": "jdupes-1.31.3-win32.zip",
+      "source_url": "https://codeberg.org/jbruchon/jdupes/releases",
+      "method": "HEAD",
+      "retrieved_at": "2026-11-15T02:17:47.321832+00:00",
+      "http_status": 200,
+      "final_url_without_query": "https://codeberg.org/jbruchon/jdupes/releases/download/v1.31.3/jdupes-1.31.3-win32.zip",
+      "content_type": "application/octet-stream",
+      "content_length": "453413"
+    },
+    {
+      "id": "ncdu",
+      "url": "https://dev.yorhel.nl/download/ncdu-2.9.1-linux-x86.tar.gz",
+      "asset_name": "ncdu-2.9.1-linux-x86.tar.gz",
+      "source_url": "https://dev.yorhel.nl/ncdu",
+      "method": "HEAD",
+      "retrieved_at": "2026-11-15T02:17:50.637521+00:00",
+      "http_status": 200,
+      "final_url_without_query": "https://dev.yorhel.nl/download/ncdu-2.9.1-linux-x86.tar.gz",
+      "content_type": "application/x-gzip",
+      "content_length": "368152"
+    },
+    {
+      "id": "gnupg",
+      "url": "https://gnupg.org/ftp/gcrypt/binary/gnupg-w32-2.5.24_20260923.exe",
+      "asset_name": "gnupg-w32-2.5.24_20260923.exe",
+      "source_url": "https://gnupg.org/download/",
+      "method": "HEAD",
+      "retrieved_at": "2026-11-15T02:17:50.657130+00:00",
+      "http_status": 200,
+      "final_url_without_query": "https://gnupg.org/ftp/gcrypt/binary/gnupg-w32-2.5.24_20260923.exe",
+      "content_type": "application/x-msdos-program",
+      "content_length": "5804864"
+    },
+    {
+      "id": "memtest86-plus",
+      "url": "https://memtest.org/download/v9.00/mt86plus_9.00_USB_Installer.exe",
+      "asset_name": "mt86plus_9.00_USB_Installer.exe",
+      "source_url": "https://memtest.org/",
+      "method": "HEAD",
+      "retrieved_at": "2026-11-15T02:17:51.115630+00:00",
+      "http_status": 200,
+      "final_url_without_query": "https://memtest.org/download/v9.00/mt86plus_9.00_USB_Installer.exe",
+      "content_type": "application/x-msdos-program",
+      "content_length": "528924"
+    },
+    {
+      "id": "openrgb",
+      "url": "https://codeberg.org/OpenRGB/OpenRGB/releases/download/release_1.1/OpenRGB_1.1_Windows_64_8e16de2.msi",
+      "asset_name": "OpenRGB_1.1_Windows_64_8e16de2.msi",
+      "source_url": "https://openrgb.org/releases.html",
+      "method": "HEAD",
+      "retrieved_at": "2026-11-15T02:17:54.827750+00:00",
+      "http_status": 200,
+      "final_url_without_query": "https://codeberg.org/OpenRGB/OpenRGB/releases/download/release_1.1/OpenRGB_1.1_Windows_64_8e16de2.msi",
+      "content_type": "application/octet-stream",
+      "content_length": "23345664"
+    },
+    {
+      "id": "broot",
+      "url": "https://github.com/Canop/broot/releases/download/v1.62.0/broot_1.62.0.zip",
+      "asset_name": "broot_1.62.0.zip",
+      "source_url": "https://github.com/Canop/broot/releases/expanded_assets/v1.62.0",
+      "method": "HEAD",
+      "retrieved_at": "2026-11-15T02:19:31.233635+00:00",
+      "http_status": 200,
+      "final_url_without_query": "https://release-assets.githubusercontent.com/github-production-release-asset/157766521/a8f3aaa5-0e51-4912-8d54-52c985645074",
+      "content_type": "application/octet-stream",
+      "content_length": "68129888"
+    },
+    {
+      "id": "diskspd",
+      "url": "https://github.com/microsoft/diskspd/releases/download/v2.3/DiskSpd.ZIP",
+      "asset_name": "DiskSpd.ZIP",
+      "source_url": "https://github.com/microsoft/diskspd/releases/expanded_assets/v2.3",
+      "method": "HEAD",
+      "retrieved_at": "2026-11-15T02:19:31.234569+00:00",
+      "http_status": 200,
+      "final_url_without_query": "https://release-assets.githubusercontent.com/github-production-release-asset/23956428/90c87533-059c-4331-9c88-9704c7709e82",
+      "content_type": "application/octet-stream",
+      "content_length": "3606329"
+    },
+    {
+      "id": "urbackup",
+      "url": "https://hndl.urbackup.org/Client/2.5.32/UrBackup%20Client%202.5.32.exe",
+      "asset_name": "UrBackup%20Client%202.5.32.exe",
+      "source_url": "https://www.urbackup.org/download.html",
+      "method": "HEAD",
+      "retrieved_at": "2026-11-15T02:19:31.235118+00:00",
+      "http_status": 200,
+      "final_url_without_query": "https://hndl.urbackup.org/Client/2.5.32/UrBackup%20Client%202.5.32.exe",
+      "content_type": "application/octet-stream",
+      "content_length": "59641960"
+    },
+    {
+      "id": "rescuezilla",
+      "url": "https://github.com/rescuezilla/rescuezilla/releases/download/2.6.2/rescuezilla-2.6.2-64bit.noble.iso",
+      "asset_name": "rescuezilla-2.6.2-64bit.noble.iso",
+      "source_url": "https://github.com/rescuezilla/rescuezilla/releases/expanded_assets/2.6.2",
+      "method": "HEAD",
+      "retrieved_at": "2026-11-15T02:19:31.236025+00:00",
+      "http_status": 200,
+      "final_url_without_query": "https://release-assets.githubusercontent.com/github-production-release-asset/209983790/912e667a-1919-4241-a2ef-944a7a9026f6",
+      "content_type": "application/octet-stream",
+      "content_length": "1594339328"
+    },
+    {
+      "id": "explorer-plus-plus",
+      "url": "https://download.explorerplusplus.com/stable/1.4.0/explorerpp_x64.zip",
+      "asset_name": "explorerpp_x64.zip",
+      "source_url": "https://explorerplusplus.com/download",
+      "method": "HEAD",
+      "retrieved_at": "2026-11-15T02:21:30.184248+00:00",
+      "http_status": 200,
+      "final_url_without_query": "https://download.explorerplusplus.com/stable/1.4.0/explorerpp_x64.zip",
+      "content_type": "application/zip",
+      "content_length": "2392706"
+    }
+  ],
+  "excluded_distribution_observations": [
+    {
+      "id": "urbackup",
+      "url": "https://github.com/uroni/urbackup_backend/releases/download/restore-cd-latest/restore_cd_2_amd64.tar.xz",
+      "asset_name": "restore_cd_2_amd64.tar.xz",
+      "source_url": "https://github.com/uroni/urbackup_backend/releases/expanded_assets/restore-cd-latest",
+      "method": "HEAD",
+      "retrieved_at": "2026-11-15T02:17:11.955150+00:00",
+      "http_status": 200,
+      "final_url_without_query": "https://release-assets.githubusercontent.com/github-production-release-asset/6784757/12ad69f1-1ab4-442d-97c2-ee66f908376e",
+      "content_type": "application/octet-stream",
+      "content_length": "4520264",
+      "exclusion_reason": "Initial selector matched a source archive or a recovery component; replaced with the main application distribution observed in the official links."
+    },
+    {
+      "id": "broot",
+      "url": "https://github.com/Canop/broot/archive/refs/tags/v1.62.0.zip",
+      "asset_name": "v1.62.0.zip",
+      "source_url": "https://github.com/Canop/broot/releases/expanded_assets/v1.62.0",
+      "method": "HEAD",
+      "retrieved_at": "2026-11-15T02:17:54.935043+00:00",
+      "http_status": 200,
+      "final_url_without_query": "https://codeload.github.com/Canop/broot/zip/refs/tags/v1.62.0",
+      "content_type": "application/zip",
+      "content_length": null,
+      "exclusion_reason": "Initial selector matched a source archive or a recovery component; replaced with the main application distribution observed in the official links."
+    },
+    {
+      "id": "diskspd",
+      "url": "https://github.com/microsoft/diskspd/archive/refs/tags/v2.3.zip",
+      "asset_name": "v2.3.zip",
+      "source_url": "https://github.com/microsoft/diskspd/releases/expanded_assets/v2.3",
+      "method": "HEAD",
+      "retrieved_at": "2026-11-15T02:17:54.991976+00:00",
+      "http_status": 200,
+      "final_url_without_query": "https://codeload.github.com/microsoft/diskspd/zip/refs/tags/v2.3",
+      "content_type": "application/zip",
+      "content_length": null,
+      "exclusion_reason": "Initial selector matched a source archive or a recovery component; replaced with the main application distribution observed in the official links."
+    },
+    {
+      "id": "testdisk",
+      "url": "https://www.cgsecurity.org/Download_and_donate.php/testdisk-7.3-WIP.win64.zip",
+      "asset_name": "testdisk-7.3-WIP.win64.zip",
+      "source_url": "https://www.cgsecurity.org/wiki/TestDisk_Download",
+      "method": "HEAD",
+      "retrieved_at": "2026-11-15T02:17:47.230539+00:00",
+      "http_status": 200,
+      "final_url_without_query": "https://www.cgsecurity.org/Download_and_donate.php/testdisk-7.3-WIP.win64.zip",
+      "content_type": "text/html; charset=UTF-8",
+      "content_length": "21166",
+      "exclusion_reason": "URL led to an HTML donation/redirect page, not an observed binary response."
+    },
+    {
+      "id": "photorec",
+      "url": "https://www.cgsecurity.org/Download_and_donate.php/testdisk-7.3-WIP.win64.zip",
+      "asset_name": "testdisk-7.3-WIP.win64.zip",
+      "source_url": "https://www.cgsecurity.org/wiki/TestDisk_Download",
+      "method": "HEAD",
+      "retrieved_at": "2026-11-15T02:17:47.231039+00:00",
+      "http_status": 200,
+      "final_url_without_query": "https://www.cgsecurity.org/Download_and_donate.php/testdisk-7.3-WIP.win64.zip",
+      "content_type": "text/html; charset=UTF-8",
+      "content_length": "21166",
+      "exclusion_reason": "URL led to an HTML donation/redirect page, not an observed binary response."
+    }
+  ],
+  "unknowns_retained_or_introduced": [
+    {
+      "id": "pika-backup",
+      "field": "pricing_model",
+      "previous": "free",
+      "current": "unknown",
+      "reason": "The sources reviewed establish features/licensing or source availability, but an explicit price policy or no-charge main application distribution was not independently established."
+    },
+    {
+      "id": "back-in-time",
+      "field": "pricing_model",
+      "previous": "free",
+      "current": "unknown",
+      "reason": "The sources reviewed establish features/licensing or source availability, but an explicit price policy or no-charge main application distribution was not independently established."
+    },
+    {
+      "id": "deja-dup",
+      "field": "pricing_model",
+      "previous": "free",
+      "current": "unknown",
+      "reason": "The sources reviewed establish features/licensing or source availability, but an explicit price policy or no-charge main application distribution was not independently established."
+    },
+    {
+      "id": "duplicity",
+      "field": "pricing_model",
+      "previous": "free",
+      "current": "unknown",
+      "reason": "The sources reviewed establish features/licensing or source availability, but an explicit price policy or no-charge main application distribution was not independently established."
+    },
+    {
+      "id": "timeshift",
+      "field": "pricing_model",
+      "previous": "free",
+      "current": "unknown",
+      "reason": "The sources reviewed establish features/licensing or source availability, but an explicit price policy or no-charge main application distribution was not independently established."
+    },
+    {
+      "id": "snapper",
+      "field": "pricing_model",
+      "previous": "free",
+      "current": "unknown",
+      "reason": "The sources reviewed establish features/licensing or source availability, but an explicit price policy or no-charge main application distribution was not independently established."
+    },
+    {
+      "id": "gnu-ddrescue",
+      "field": "pricing_model",
+      "previous": "free",
+      "current": "unknown",
+      "reason": "The sources reviewed establish features/licensing or source availability, but an explicit price policy or no-charge main application distribution was not independently established."
+    },
+    {
+      "id": "dmde",
+      "field": "license_kind",
+      "previous": "proprietary",
+      "current": "unknown",
+      "previous_license": "Proprietary; free and paid editions",
+      "reason": "The application EULA was not independently established by the primary documents reviewed; pricing or copyright branding alone does not establish the exact license grant."
+    },
+    {
+      "id": "multi-commander",
+      "field": "license_kind",
+      "previous": "proprietary",
+      "current": "unknown",
+      "previous_license": "Proprietary freeware",
+      "reason": "The application EULA was not independently established by the primary documents reviewed; pricing or copyright branding alone does not establish the exact license grant."
+    },
+    {
+      "id": "dolphin-file-manager",
+      "field": "pricing_model",
+      "previous": "free",
+      "current": "unknown",
+      "reason": "The sources reviewed establish features/licensing or source availability, but an explicit price policy or no-charge main application distribution was not independently established."
+    },
+    {
+      "id": "thunar",
+      "field": "pricing_model",
+      "previous": "free",
+      "current": "unknown",
+      "reason": "The sources reviewed establish features/licensing or source availability, but an explicit price policy or no-charge main application distribution was not independently established."
+    },
+    {
+      "id": "gnome-files",
+      "field": "pricing_model",
+      "previous": "free",
+      "current": "unknown",
+      "reason": "The sources reviewed establish features/licensing or source availability, but an explicit price policy or no-charge main application distribution was not independently established."
+    },
+    {
+      "id": "ranger",
+      "field": "pricing_model",
+      "previous": "free",
+      "current": "unknown",
+      "reason": "The sources reviewed establish features/licensing or source availability, but an explicit price policy or no-charge main application distribution was not independently established."
+    },
+    {
+      "id": "openssh",
+      "field": "pricing_model",
+      "previous": "free",
+      "current": "unknown",
+      "reason": "The sources reviewed establish features/licensing or source availability, but an explicit price policy or no-charge main application distribution was not independently established."
+    },
+    {
+      "id": "iperf3",
+      "field": "pricing_model",
+      "previous": "free",
+      "current": "unknown",
+      "reason": "The sources reviewed establish features/licensing or source availability, but an explicit price policy or no-charge main application distribution was not independently established."
+    },
+    {
+      "id": "mtr",
+      "field": "pricing_model",
+      "previous": "free",
+      "current": "unknown",
+      "reason": "The sources reviewed establish features/licensing or source availability, but an explicit price policy or no-charge main application distribution was not independently established."
+    },
+    {
+      "id": "nethogs",
+      "field": "pricing_model",
+      "previous": "free",
+      "current": "unknown",
+      "reason": "The sources reviewed establish features/licensing or source availability, but an explicit price policy or no-charge main application distribution was not independently established."
+    },
+    {
+      "id": "wireguard",
+      "field": "pricing_model",
+      "previous": "free",
+      "current": "unknown",
+      "reason": "The sources reviewed establish features/licensing or source availability, but an explicit price policy or no-charge main application distribution was not independently established."
+    },
+    {
+      "id": "openvpn",
+      "field": "pricing_model",
+      "previous": "free",
+      "current": "unknown",
+      "reason": "The sources reviewed establish features/licensing or source availability, but an explicit price policy or no-charge main application distribution was not independently established."
+    },
+    {
+      "id": "freerdp",
+      "field": "pricing_model",
+      "previous": "free",
+      "current": "unknown",
+      "reason": "The sources reviewed establish features/licensing or source availability, but an explicit price policy or no-charge main application distribution was not independently established."
+    },
+    {
+      "id": "tigervnc",
+      "field": "pricing_model",
+      "previous": "free",
+      "current": "unknown",
+      "reason": "The sources reviewed establish features/licensing or source availability, but an explicit price policy or no-charge main application distribution was not independently established."
+    },
+    {
+      "id": "xrdp",
+      "field": "pricing_model",
+      "previous": "free",
+      "current": "unknown",
+      "reason": "The sources reviewed establish features/licensing or source availability, but an explicit price policy or no-charge main application distribution was not independently established."
+    },
+    {
+      "id": "meshcentral",
+      "field": "pricing_model",
+      "previous": "free",
+      "current": "unknown",
+      "reason": "The sources reviewed establish features/licensing or source availability, but an explicit price policy or no-charge main application distribution was not independently established."
+    },
+    {
+      "id": "usbguard",
+      "field": "pricing_model",
+      "previous": "free",
+      "current": "unknown",
+      "reason": "The sources reviewed establish features/licensing or source availability, but an explicit price policy or no-charge main application distribution was not independently established."
+    },
+    {
+      "id": "qemu",
+      "field": "pricing_model",
+      "previous": "free",
+      "current": "unknown",
+      "reason": "The sources reviewed establish features/licensing or source availability, but an explicit price policy or no-charge main application distribution was not independently established."
+    },
+    {
+      "id": "virt-manager",
+      "field": "pricing_model",
+      "previous": "free",
+      "current": "unknown",
+      "reason": "The sources reviewed establish features/licensing or source availability, but an explicit price policy or no-charge main application distribution was not independently established."
+    },
+    {
+      "id": "gnome-boxes",
+      "field": "pricing_model",
+      "previous": "free",
+      "current": "unknown",
+      "reason": "The sources reviewed establish features/licensing or source availability, but an explicit price policy or no-charge main application distribution was not independently established."
+    },
+    {
+      "id": "hardinfo2",
+      "field": "pricing_model",
+      "previous": "free",
+      "current": "unknown",
+      "reason": "The sources reviewed establish features/licensing or source availability, but an explicit price policy or no-charge main application distribution was not independently established."
+    },
+    {
+      "id": "smartmontools",
+      "field": "pricing_model",
+      "previous": "free",
+      "current": "unknown",
+      "reason": "The sources reviewed establish features/licensing or source availability, but an explicit price policy or no-charge main application distribution was not independently established."
+    },
+    {
+      "id": "crystaldiskmark",
+      "field": "pricing_model",
+      "previous": "free",
+      "current": "unknown",
+      "reason": "The sources reviewed establish features/licensing or source availability, but an explicit price policy or no-charge main application distribution was not independently established."
+    },
+    {
+      "id": "memtest86",
+      "field": "license_kind",
+      "previous": "proprietary",
+      "current": "unknown",
+      "previous_license": "Proprietary; Free and paid editions",
+      "reason": "The application EULA was not independently established by the primary documents reviewed; pricing or copyright branding alone does not establish the exact license grant."
+    },
+    {
+      "id": "glances",
+      "field": "pricing_model",
+      "previous": "free",
+      "current": "unknown",
+      "reason": "The sources reviewed establish features/licensing or source availability, but an explicit price policy or no-charge main application distribution was not independently established."
+    },
+    {
+      "id": "htop",
+      "field": "pricing_model",
+      "previous": "free",
+      "current": "unknown",
+      "reason": "The sources reviewed establish features/licensing or source availability, but an explicit price policy or no-charge main application distribution was not independently established."
+    },
+    {
+      "id": "coolercontrol",
+      "field": "pricing_model",
+      "previous": "free",
+      "current": "unknown",
+      "reason": "The sources reviewed establish features/licensing or source availability, but an explicit price policy or no-charge main application distribution was not independently established."
+    }
+  ]
+}
