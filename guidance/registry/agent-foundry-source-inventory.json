@@ -1,0 +1,2666 @@
+{
+  "sourceRepository": "https://github.com/Herbertofury/Agent-Foundry",
+  "sourceCommit": "87166b5f6a621c61b90bbbfe90835a3752c1c51b",
+  "sourceTree": "4344bd44fcbc9d485bfdd26604d5f1fa874f99b2",
+  "status": "partial-native-port-not-retirement-ready",
+  "importedGovernancePaths": [
+    "AUTHORIZATION_CONTROL_STANDARD.md",
+    "CHALLENGER_INTEGRATION_STANDARD.md",
+    "DESIGN_QUALITY_STANDARD.md",
+    "DISTRIBUTION_STANDARD.md",
+    "DURABLE_EXECUTION_STANDARD.md",
+    "EVALUATION_STANDARD.md",
+    "FAILURE_INTELLIGENCE_STANDARD.md",
+    "INTEROPERABILITY_STANDARD.md",
+    "MODERNIZATION_STANDARD.md",
+    "OBSERVABILITY_STANDARD.md",
+    "PERFORMANCE_ACCEPTANCE.md",
+    "PRODUCT_INVARIANTS.md",
+    "RUNTIME_PROOF.md",
+    "SUPPLY_CHAIN_STANDARD.md",
+    "THIRD_PARTY_SKILL_SECURITY.md",
+    "templates/AGENTS.repository.md"
+  ],
+  "files": [
+    {
+      "path": ".github/ISSUE_TEMPLATE/bug_report.yml",
+      "sha256": "570e33b638baadf926a9c66ac6ce3e7f4a2d535fe7b9b9468bb58fad8a3b3d53",
+      "bytes": 864
+    },
+    {
+      "path": ".github/ISSUE_TEMPLATE/feature_request.yml",
+      "sha256": "c1240c0762c758fedd01a9b21172e933c1a8562b467839b15954cdd03082cfb9",
+      "bytes": 772
+    },
+    {
+      "path": ".github/dependabot.yml",
+      "sha256": "6bccf1cd127e76090f227c32ae0c3e71e1dc8ce34c54908e6ec06b1dfc0b0e4a",
+      "bytes": 210
+    },
+    {
+      "path": ".github/pull_request_template.md",
+      "sha256": "a7671770f62c9a168a913634f3ea70f02b9e23019776c62f2bb9a7d16842cd91",
+      "bytes": 737
+    },
+    {
+      "path": ".github/workflows/dependency-review.yml",
+      "sha256": "2d9f88006190fca9e31207911c8ef485e2c2c2b22b03050c2607034a2cc7d0e9",
+      "bytes": 1296
+    },
+    {
+      "path": ".github/workflows/normalize-skill-mirror.yml",
+      "sha256": "21d53f7b20a1b1efc7c85d5c3b8e42b2eeff63f8f0469b2715d49fdb8031fc05",
+      "bytes": 2203
+    },
+    {
+      "path": ".github/workflows/publish-wiki.yml",
+      "sha256": "562431561597b355e0511d91333d1d173005d675eedc091ca31dde6525096098",
+      "bytes": 1858
+    },
+    {
+      "path": ".github/workflows/release-skills.yml",
+      "sha256": "a9334ec0faf36becbd2605bb1335a131a2f4143ade1a9f7fcefb675fe44af4dd",
+      "bytes": 3441
+    },
+    {
+      "path": ".github/workflows/test-foundry-tools.yml",
+      "sha256": "a5a94987abe2488ccc0a8ac5723c6d0b2c03eeeec48ea197024d9e9049c5bfd9",
+      "bytes": 976
+    },
+    {
+      "path": ".github/workflows/validate-foundry.yml",
+      "sha256": "01b27a84c670aa32ab91e0d4d7ee402e4e17149108bb403f4e3ebb42a1103c6e",
+      "bytes": 4729
+    },
+    {
+      "path": ".github/workflows/validate-skills.yml",
+      "sha256": "72d444735ebb18c39aee5d4d27f805c9b376044863ef8b090c71615581e9d2a4",
+      "bytes": 2884
+    },
+    {
+      "path": ".release/foundry-skills-v0.1.0",
+      "sha256": "9a159a7471b0114cebd06bec8257437b0a5e86d89176b37ea95f40349857b660",
+      "bytes": 478
+    },
+    {
+      "path": ".release/foundry-skills-v0.1.1",
+      "sha256": "b3c2073f01732c0f6d5538e316c7189a4719d1921cc3fef8e8d70c09ceb3112c",
+      "bytes": 341
+    },
+    {
+      "path": ".release/foundry-skills-v0.1.2",
+      "sha256": "73541438d26ceb83c7d9974a7fcc8fe592e27d607e3c365b45bd0fe1f096914a",
+      "bytes": 611
+    },
+    {
+      "path": ".release/foundry-skills-v0.1.3",
+      "sha256": "b8f3c3222b07ce57f8591ece547dd8f7b34d569f01e6125bfb580ec21ac1d601",
+      "bytes": 736
+    },
+    {
+      "path": ".release/foundry-skills-v0.1.4",
+      "sha256": "b060f610bf5559cebdd2a157028cf60588c5d2292a25f068913a9db18b083558",
+      "bytes": 429
+    },
+    {
+      "path": ".release/foundry-skills-v0.1.5",
+      "sha256": "3b3b84072c0e3f9104eb9ed23a3305a5af4962cb46a9227bcfcd0a474b230a7d",
+      "bytes": 1031
+    },
+    {
+      "path": "AGENTS.md",
+      "sha256": "9c06b56f7141f5d5cabd29fb5b771dd053b78bf76c1471c7aa71d555fe624f1f",
+      "bytes": 7557
+    },
+    {
+      "path": "AUTHORIZATION_CONTROL_STANDARD.md",
+      "sha256": "8835f053671703efd93d4298362e6e36b74498aef518d1f1e0844671f232a256",
+      "bytes": 2040
+    },
+    {
+      "path": "CHALLENGER_INTEGRATION_STANDARD.md",
+      "sha256": "99896ab140c00f9b3f3cb2faeee7e6861bf8f405121dd3db207efdb663958ba8",
+      "bytes": 2590
+    },
+    {
+      "path": "CLAUDE.md",
+      "sha256": "336cc4fbf19beaada7ccf9986414fa91851a8d7a07dfb3ccbe800a69eed0ab49",
+      "bytes": 11
+    },
+    {
+      "path": "COMPETITORS.md",
+      "sha256": "f954c2f1f5e2237d8d6696f83d89bb2b6ac485966bb6ce3ed1cebbfc3dbc24dc",
+      "bytes": 5837
+    },
+    {
+      "path": "CONTRIBUTING.md",
+      "sha256": "95e5ec52a50e6f921631ae09d039dfd6d3efdc2dd8f76231c6d2f3da55957f66",
+      "bytes": 1533
+    },
+    {
+      "path": "DESIGN_QUALITY_STANDARD.md",
+      "sha256": "403bf05fa52ff93eab3d8f3ea2d9849bd94b7442ddcef6de2b31659f66755bd4",
+      "bytes": 2827
+    },
+    {
+      "path": "DISTRIBUTION_STANDARD.md",
+      "sha256": "2c3d8e11e1c8f80e14493140a1247312e6d601603e8738bf63adee798c8a3f5b",
+      "bytes": 3243
+    },
+    {
+      "path": "DURABLE_EXECUTION_STANDARD.md",
+      "sha256": "caa37bb0ec934b4779f7c9888442c6d3f5f3a8b63243679516f3401d85ff227a",
+      "bytes": 4097
+    },
+    {
+      "path": "EVALUATION_STANDARD.md",
+      "sha256": "2ee1fe60f4b280d246d21a2169b2b9ec990aa1a91d95c10d60e06cdbaf2b7814",
+      "bytes": 2478
+    },
+    {
+      "path": "FAILURE_INTELLIGENCE_STANDARD.md",
+      "sha256": "81dc3d42f6adc8fb8f84472c2de101749c4530f0aa61dbd1e3e3bfad438355a3",
+      "bytes": 1373
+    },
+    {
+      "path": "INTEROPERABILITY_STANDARD.md",
+      "sha256": "5b277d8118be1274c42fc619bd713cdd83e4d57874c8ce4267e716801fc5e797",
+      "bytes": 3842
+    },
+    {
+      "path": "LICENSING.md",
+      "sha256": "0aded357d5716f17383bf4fc36f5c37bf14fc2cb4d27863abba953fe5ff1d398",
+      "bytes": 1141
+    },
+    {
+      "path": "MODERNIZATION_STANDARD.md",
+      "sha256": "0c0ac11dba865f4fecd0604f911aea84094c300e5231b2a790951d28f9be4fcb",
+      "bytes": 2598
+    },
+    {
+      "path": "OBSERVABILITY_STANDARD.md",
+      "sha256": "2ecb83035924f46d55520e4fdca968314b6e840d137e1d98d4e7e15454b83dc1",
+      "bytes": 1868
+    },
+    {
+      "path": "PERFORMANCE_ACCEPTANCE.md",
+      "sha256": "6de187e05094f635f7b3a51a16372f0450bba4aa00b8e7e1f888ab055e40e3da",
+      "bytes": 5627
+    },
+    {
+      "path": "PRODUCT_INVARIANTS.md",
+      "sha256": "6557f62771230a833d69a53dace8e40992afa93d0ff00e75eef79c9c1c70b565",
+      "bytes": 15305
+    },
+    {
+      "path": "README.md",
+      "sha256": "792729e50544504175d29d6cd10ce346884f81067e9a9dcee009b5d3d9177872",
+      "bytes": 9790
+    },
+    {
+      "path": "RUNTIME_PROOF.md",
+      "sha256": "d3970caf1cbf96100676ca31468f46e3caed53592428c0a8087beba2717fe9e4",
+      "bytes": 892
+    },
+    {
+      "path": "SECURITY.md",
+      "sha256": "f245a50a5d4effba78e09739759cd78d770328e2fd311b46514c74d4d07dbaed",
+      "bytes": 1360
+    },
+    {
+      "path": "SOURCE_MANIFEST.json",
+      "sha256": "9a38e2cd87731598bf3426395d4284329881d66baa2894a9bd2ad1052dae5f4b",
+      "bytes": 82421
+    },
+    {
+      "path": "SUPPLY_CHAIN_STANDARD.md",
+      "sha256": "efb1376716f4c1d1fec655d1b16ca8213ce00eca4b6ec501ed1b902652daf74f",
+      "bytes": 1992
+    },
+    {
+      "path": "THIRD_PARTY_SKILL_SECURITY.md",
+      "sha256": "0d640f0cfa8da1a3a51199e32a1618d38e6934cca6060c2fd38096cabcd10665",
+      "bytes": 2438
+    },
+    {
+      "path": "adapters/README.md",
+      "sha256": "c298321ab45908401ebe33bb1579db7878c6ad911287ffb1478f7640e1ae2b2b",
+      "bytes": 359
+    },
+    {
+      "path": "agents/README.md",
+      "sha256": "dd88b0adce4e5a340e16dd133af7b02cdefc7cb39eaa5dcc5d13feefa9581509",
+      "bytes": 357
+    },
+    {
+      "path": "bundles/README.md",
+      "sha256": "8df153a9f330d0f5024beb8eb814e81dd13033fd12324ceb6e03b9abdbbb09ab",
+      "bytes": 2740
+    },
+    {
+      "path": "catalog/SKILLS.md",
+      "sha256": "7592389f100caae65aef5e899bdceb1b09d3c215d0ed8ee34d19f18ea60add80",
+      "bytes": 2050
+    },
+    {
+      "path": "challengers/README.md",
+      "sha256": "0f218a01ce1e7f6789d769d831ee6c10d60d45ef2611361ad2ff918d0223938f",
+      "bytes": 353
+    },
+    {
+      "path": "config/foundry-sync.example.json",
+      "sha256": "b0de622ebce82d22a57f4744298719b9e34fdd2cf7efb34b37ac5514c36e3028",
+      "bytes": 884
+    },
+    {
+      "path": "docs/ARCHITECTURE.md",
+      "sha256": "44b8eddf432dcc03498843453c8017574b2307f6b46ed619aae8fcaa59322088",
+      "bytes": 1355
+    },
+    {
+      "path": "docs/CHAT-AND-AGENT-BOUNDARIES.md",
+      "sha256": "4db82a55e953b66ebaa28d594d1f3bcdb00234e8e7022871ebd8ede81bbdd347",
+      "bytes": 1719
+    },
+    {
+      "path": "docs/MINECRAFT_DEV_KIT_CHAT_AND_CODE_BOUNDARY.md",
+      "sha256": "8b38c9a3790a1b8f392c9d19756f87eb208904f57289d06db80c1922732e4abd",
+      "bytes": 2192
+    },
+    {
+      "path": "docs/REPOSITORY-GOVERNANCE.md",
+      "sha256": "924e0bdfdfc0b8c67dad7a01834a81d3a783abaa5c123c90caf2486edd3bb1ad",
+      "bytes": 3702
+    },
+    {
+      "path": "docs/SKILL-AUTHORING.md",
+      "sha256": "736d66939455c4d985af9790debb8b6199fe4b2ac020bb5297e9f5a17b1134c9",
+      "bytes": 1500
+    },
+    {
+      "path": "docs/index.html",
+      "sha256": "3ed9fea54473a3c34349c7c4a35752dc606846a4f2a86821766b62863a4f6f95",
+      "bytes": 4546
+    },
+    {
+      "path": "evals/README.md",
+      "sha256": "a16e16ae6fe5355d7e236f6d022d0438bd4864a055caa1d8b013009ecae7f0d2",
+      "bytes": 1045
+    },
+    {
+      "path": "incident-brain/README.md",
+      "sha256": "331b31b2e68935e617b9dacfb14e2adff3df67e52e0d6000db890cfa4df81fab",
+      "bytes": 350
+    },
+    {
+      "path": "invariants/README.md",
+      "sha256": "e0ff675122c6efde2888d4004e3cdc7c82ad0cbab8b3708760f865c058d57444",
+      "bytes": 315
+    },
+    {
+      "path": "llms.txt",
+      "sha256": "c4af812e863076c9ebd12d47c7376852ce29f77e82ede10b97fc397e212a35e0",
+      "bytes": 1989
+    },
+    {
+      "path": "receipts/README.md",
+      "sha256": "fa3266f16082ffc7210f266e69e3de4b326065cbf4586f67150536b4091ceeae",
+      "bytes": 884
+    },
+    {
+      "path": "registry/README.md",
+      "sha256": "147149d1a6dc48e5efb8978e72f3c0daaee2de40659e212bc0941ab6305efc52",
+      "bytes": 561
+    },
+    {
+      "path": "registry/protocols.json",
+      "sha256": "24394d234aab6a576f704b2e2910943a8fe9aeecac83a5fb70e09446e0750224",
+      "bytes": 2053
+    },
+    {
+      "path": "registry/repository-governance.json",
+      "sha256": "8ab0160880cdb0df6006d8ae0d4e2940d2add1a943bc959afd310dd96ec77fcd",
+      "bytes": 1977
+    },
+    {
+      "path": "research/CHALLENGER_SWEEP_2026-09-27.md",
+      "sha256": "17d8eee1ef68ca46d134d7ccead68412d4e27789bd9e0bd2ee5686dc61b73ef9",
+      "bytes": 4820
+    },
+    {
+      "path": "schemas/challenger-receipt.schema.json",
+      "sha256": "d66356eaa43abf95fc942073a3f897167611e71e83e9a24a304088a0f1583d09",
+      "bytes": 2114
+    },
+    {
+      "path": "schemas/eval-case.schema.json",
+      "sha256": "601a355f216386e17e7a4f0de536b5338f5405c90519524d4c92e4c6f094edac",
+      "bytes": 1647
+    },
+    {
+      "path": "schemas/release-receipt.schema.json",
+      "sha256": "71698b25f22c6ed23c9cd75cbc33a59eb94b3c0a0829b88e2634d4050d41811a",
+      "bytes": 1672
+    },
+    {
+      "path": "schemas/skill-trust-receipt.schema.json",
+      "sha256": "6fff5b8f08fd15ef142a5cb1e3e25fd8fe50d4330016eb85fce3eddc57efbafb",
+      "bytes": 2351
+    },
+    {
+      "path": "skills/README.md",
+      "sha256": "cfdbe44d1b213dd592bb31077c7f311cce0f9c340d8acd65d2597d3476492fc8",
+      "bytes": 557
+    },
+    {
+      "path": "skills/SOURCE_POLICY.md",
+      "sha256": "94b5ef200e6b9d1f26dbac08f0fd868402140785b9b6e0494d7451c8c1ff19f1",
+      "bytes": 887
+    },
+    {
+      "path": "skills/artifact-browser-companion/SKILL.md",
+      "sha256": "9ef288c675fb214eb82b6b5d4f650bf0a2ae0b6019f7736e4f88cf8d528b244e",
+      "bytes": 16696
+    },
+    {
+      "path": "skills/artifact-browser-companion/agents/openai.yaml",
+      "sha256": "86a768c901ca455840e2923b3386f6f6b3766febad0cb99fb1ec2fd2b40a94ff",
+      "bytes": 309
+    },
+    {
+      "path": "skills/artifact-browser-companion/assets/electron-starter/README.md",
+      "sha256": "d0cafb52a2fafba580b488891c22dd9fa11eb220b5b920e9b19466bfc0513d96",
+      "bytes": 591
+    },
+    {
+      "path": "skills/artifact-browser-companion/assets/electron-starter/config/source-manifest.json",
+      "sha256": "bf0165e9cfac1a354070be132f5c8ea25c6f72dd340c2491429bcf95bb48591b",
+      "bytes": 148
+    },
+    {
+      "path": "skills/artifact-browser-companion/assets/electron-starter/data/catalog.json",
+      "sha256": "c4627d3b966982aa4c4021e0127da9359f6bd27d75c6f498f73251ff5f81487d",
+      "bytes": 565
+    },
+    {
+      "path": "skills/artifact-browser-companion/assets/electron-starter/forge.config.js",
+      "sha256": "b397f9109a956a923caf0590eea63695fb74d02a608a902dc6c7c2d5d1908d6c",
+      "bytes": 334
+    },
+    {
+      "path": "skills/artifact-browser-companion/assets/electron-starter/index.html",
+      "sha256": "2ab3c791e7d41c0c77bcc57cbcf48e4c48e650f68fc28d9c9e914dcfb0ae271d",
+      "bytes": 1953
+    },
+    {
+      "path": "skills/artifact-browser-companion/assets/electron-starter/main.js",
+      "sha256": "7c6cf5a12b741765283e686308c1027af78a19271ee045e65cafec24267c0aac",
+      "bytes": 8532
+    },
+    {
+      "path": "skills/artifact-browser-companion/assets/electron-starter/package.json",
+      "sha256": "20c2bcc789af681dce5697f263f062fc6207c6d36d3e813959ad7b3a11e982af",
+      "bytes": 737
+    },
+    {
+      "path": "skills/artifact-browser-companion/assets/electron-starter/preload.js",
+      "sha256": "fee0e47a37e85ea3d8cf59b4476337600e7fc16d8ec8d370188d376447a6e626",
+      "bytes": 1850
+    },
+    {
+      "path": "skills/artifact-browser-companion/assets/electron-starter/renderer.js",
+      "sha256": "510ec8c03250b5baaba04253606619d7d1a7e6dec50000ec095a6a412ef1940f",
+      "bytes": 6399
+    },
+    {
+      "path": "skills/artifact-browser-companion/assets/electron-starter/styles.css",
+      "sha256": "dd6a381a114d2c93777d98c8a6ca89dfbcd930221c8400472c7a32a970d7dcf9",
+      "bytes": 2134
+    },
+    {
+      "path": "skills/artifact-browser-companion/assets/icon.svg",
+      "sha256": "fbb6c7314886573cd56c3f86884a65afe3b5f4ce4bf1ee6baeeeb1fa50aea7a4",
+      "bytes": 2922
+    },
+    {
+      "path": "skills/artifact-browser-companion/references/browser-shell.md",
+      "sha256": "b45b9f1d6a45591aba1c96b9b44f645cbfba9b2ca54e4421e39521bad0a8775c",
+      "bytes": 5135
+    },
+    {
+      "path": "skills/artifact-browser-companion/references/gallery-standard.md",
+      "sha256": "a8ffe03f20c448f3d6589d7b8affbe5b3ac1a6ab317804207dc2d177bd07d459",
+      "bytes": 2401
+    },
+    {
+      "path": "skills/artifact-browser-companion/references/qa-standard.md",
+      "sha256": "89a28c4767edb54aa1f95058b9057c52330258454fb9270ddd460dcbeec880fe",
+      "bytes": 2727
+    },
+    {
+      "path": "skills/artifact-browser-companion/references/source-model.md",
+      "sha256": "936885bb1327a8f45d0c1fe13df422c22819f1cbd4a4a22c687d0cf2f44b319c",
+      "bytes": 3331
+    },
+    {
+      "path": "skills/artifact-browser-companion/references/ui-ux-standard.md",
+      "sha256": "9973f801143b284c73a547543e630c77bae4a0731f13e18382d57b1ce1cc99a1",
+      "bytes": 2629
+    },
+    {
+      "path": "skills/artifact-browser-companion/references/update-standard.md",
+      "sha256": "5abd2a4b87960b8744816a29b39fe438d286cb8d02fab776ad8ea6334d4784e5",
+      "bytes": 2402
+    },
+    {
+      "path": "skills/artifact-browser-companion/scripts/scaffold_companion.py",
+      "sha256": "5e8581d118e554357f6dd86b281aa5a0aeb01fbfeb5d8cb4810fe93367e28398",
+      "bytes": 2195
+    },
+    {
+      "path": "skills/artifact-browser-companion/scripts/validate_catalog.py",
+      "sha256": "ec282b7889c935e77201915392c41574d83d66067966edf474de0f04db2e70f7",
+      "bytes": 4162
+    },
+    {
+      "path": "skills/minecraft-dev-kit/README.md",
+      "sha256": "8d4542a8430a80e66d9c23d77bca641212618c19438ef4f34e4a1403375f5a59",
+      "bytes": 6528
+    },
+    {
+      "path": "skills/minecraft-dev-kit/SKILL.md",
+      "sha256": "f7008b5c5526d43c51036e5ac56e377af761d56435933d57e217f9156865f79b",
+      "bytes": 25365
+    },
+    {
+      "path": "skills/minecraft-dev-kit/VERIFICATION.md",
+      "sha256": "a16f56a7a5279740debc1309f99803dc188ca98e6f87b5a282db3a9b407ab242",
+      "bytes": 3103
+    },
+    {
+      "path": "skills/minecraft-dev-kit/agents/openai.yaml",
+      "sha256": "076664d5a94f04aa7af9f2e32da62ba8bb8d1359c4ee4d99b5b1b3952a2721d7",
+      "bytes": 307
+    },
+    {
+      "path": "skills/minecraft-dev-kit/assets/icon.svg",
+      "sha256": "72343cc4b66256ae7de8474c7cad14e711ad84a94c473732a44f96a56124c42d",
+      "bytes": 786
+    },
+    {
+      "path": "skills/minecraft-dev-kit/bootstrap.ps1",
+      "sha256": "04d2a9ff0e8b870b388f319abc4306db43c399ebbaf5b931de65bc27bef4a38b",
+      "bytes": 7003
+    },
+    {
+      "path": "skills/minecraft-dev-kit/devkit.cmd",
+      "sha256": "f2e5bcc8ec6c0c295d0cbb93baf51a349eb70a868a5ae81f141c0b4f36808a43",
+      "bytes": 179
+    },
+    {
+      "path": "skills/minecraft-dev-kit/devkit.sh",
+      "sha256": "79935f4c23ab46b8ba5066d542cc2f11249bfa4f16e5851a47e37f7b27138692",
+      "bytes": 261
+    },
+    {
+      "path": "skills/minecraft-dev-kit/references/animated-java-semantics.md",
+      "sha256": "066a6a23a5aa59bf15136c692c47c1f97b54081fb35278dcf72151683529d6e3",
+      "bytes": 3705
+    },
+    {
+      "path": "skills/minecraft-dev-kit/references/animation-reconstruction.md",
+      "sha256": "ad4694180dc36b9da1d872fc03c7839541d405554ebd3845c1c55e2abc4b4f00",
+      "bytes": 4273
+    },
+    {
+      "path": "skills/minecraft-dev-kit/references/cem-emf-semantics.md",
+      "sha256": "42a86319f49203f24ce03de5458315204ac7fcdf501f70cc6795af0abe359f30",
+      "bytes": 2284
+    },
+    {
+      "path": "skills/minecraft-dev-kit/references/creature-rig-archetypes.json",
+      "sha256": "1f14f3c418a322a87582f2124c2c6727f146919cff8d3dbe2dd4f32dcd016d53",
+      "bytes": 2780
+    },
+    {
+      "path": "skills/minecraft-dev-kit/references/creature-spec-authoring.md",
+      "sha256": "fe5218c4056e7e37f1545113c14d673c5c61bd1fa1a3a0ca502e9c927520b8dd",
+      "bytes": 6111
+    },
+    {
+      "path": "skills/minecraft-dev-kit/references/custom-content-plugin-semantics.md",
+      "sha256": "9826b84563677963ec5822aea529d3138def96b8fa793446852821f5841f1002",
+      "bytes": 5819
+    },
+    {
+      "path": "skills/minecraft-dev-kit/references/dev-kit-layout.md",
+      "sha256": "8c9cd4c98fca66430bbd4bb7c3a203774b1036c3cbf430ec4a95027204f8c99e",
+      "bytes": 3936
+    },
+    {
+      "path": "skills/minecraft-dev-kit/references/forge-production-client-qa.md",
+      "sha256": "62dcba535a16894c968dcc408bcdfe004c73996c96656ca5691920be5ee72a20",
+      "bytes": 5761
+    },
+    {
+      "path": "skills/minecraft-dev-kit/references/future-feature-bridge-qa.md",
+      "sha256": "731a24985f32fddd0aef251906192cdf614e178e16b04934adbddfa2f2243a70",
+      "bytes": 10237
+    },
+    {
+      "path": "skills/minecraft-dev-kit/references/mcmodels-public-study.md",
+      "sha256": "46a4bae04a4ecc37ca719667f76c2870ee7e4c3d5dfc8e44530ce77040b9e589",
+      "bytes": 6509
+    },
+    {
+      "path": "skills/minecraft-dev-kit/references/minecraft-26.3-port-rules.json",
+      "sha256": "a936bccf5e9a641a7be3682c4f5ef164d7f13cd4b00e70128767a6941ed862b8",
+      "bytes": 7634
+    },
+    {
+      "path": "skills/minecraft-dev-kit/references/minecraft-26.3-porting.md",
+      "sha256": "90d74412422f8310582ff93bcafa833ecf50921ea4d1f2cee90d635741b59226",
+      "bytes": 12866
+    },
+    {
+      "path": "skills/minecraft-dev-kit/references/minecraft-26.3-semantic-migrations.json",
+      "sha256": "053197f86172bf367b0d6be8b089f8daadccb127d417a20d0426ac2cfc0b9c2f",
+      "bytes": 9967
+    },
+    {
+      "path": "skills/minecraft-dev-kit/references/minecraft-26.3-toolchain-lock.json",
+      "sha256": "b92346d555a3673259ed4137a1e875fdebb9f5da69f9f7a43ab58c36e47c8979",
+      "bytes": 1729
+    },
+    {
+      "path": "skills/minecraft-dev-kit/references/minecraft-mapping-prewarm-profiles.json",
+      "sha256": "0457f8723c7a9c12b0597ae331fcc2c231e9576b959db36ac1fbf5bb74a97c95",
+      "bytes": 1212
+    },
+    {
+      "path": "skills/minecraft-dev-kit/references/minecraft-mapping-sources.json",
+      "sha256": "035563758570d3e961341dcf1e429be17762b72411fb11558d20f05732aa9684",
+      "bytes": 4294
+    },
+    {
+      "path": "skills/minecraft-dev-kit/references/modelengine-mythic-semantics.md",
+      "sha256": "0e0eba71a5bbd432a6bf1d61c4a4490d8eb1e2a8ad8b6c07589d37a11cf41f60",
+      "bytes": 5279
+    },
+    {
+      "path": "skills/minecraft-dev-kit/references/native-runtime-qa.md",
+      "sha256": "6384d0ff671f8a7a31e5311aba0a0501dc77e433a44e870de4aa897d0bbf9073",
+      "bytes": 6090
+    },
+    {
+      "path": "skills/minecraft-dev-kit/references/pixel-texture-art.md",
+      "sha256": "95941707ae8525b41f6cb9a232c22583541de52ea500bee15e64091e0d1554b9",
+      "bytes": 4959
+    },
+    {
+      "path": "skills/minecraft-dev-kit/references/player-rig-oracles.json",
+      "sha256": "699924299ccf7050fdee3c0bf3d867bd461421a13ae551c6c6af8606f260ae98",
+      "bytes": 2280
+    },
+    {
+      "path": "skills/minecraft-dev-kit/references/port-conversion-gates.md",
+      "sha256": "b8cb9b05d9267ee77cdd1d5d6b1bfcb352854add3c57626271e995e627278822",
+      "bytes": 5802
+    },
+    {
+      "path": "skills/minecraft-dev-kit/references/premium-combat-animation-vfx-sfx.md",
+      "sha256": "fcc9f2a2929bcfc75dd6e9048b26ee11838d769bfaafb96b573b9469646ef88f",
+      "bytes": 5172
+    },
+    {
+      "path": "skills/minecraft-dev-kit/references/premium-creature-art-direction.md",
+      "sha256": "53e2a6b65add3e434f3a46fa2ce26286379322db9c23914e6787776f434bd75a",
+      "bytes": 4467
+    },
+    {
+      "path": "skills/minecraft-dev-kit/references/premium-encounter-ai.md",
+      "sha256": "8192d69ed9527be27b397f74ffd510ff913a2757ef8a58383e4670219452b2fc",
+      "bytes": 4484
+    },
+    {
+      "path": "skills/minecraft-dev-kit/references/premium-market-visual-study.md",
+      "sha256": "ea736fdf953263cedee5b122fb13edbca28e0b110b0949127be0923bdb68102a",
+      "bytes": 8323
+    },
+    {
+      "path": "skills/minecraft-dev-kit/references/premium-mob-pack-manifest-schema.json",
+      "sha256": "159818b5e286e08c9a947ccdedf80c778aa7621cfafa11d763a6d105bb4dd55b",
+      "bytes": 5844
+    },
+    {
+      "path": "skills/minecraft-dev-kit/references/premium-mob-pack-production.md",
+      "sha256": "e7c88b29ec2dda405ebf3920b509c213cd96c07c2a6d23856f6db546e3165817",
+      "bytes": 12514
+    },
+    {
+      "path": "skills/minecraft-dev-kit/references/premium-native-mob-runtime.md",
+      "sha256": "52bb24b8c71aac7ca78a12b70bfd503123df463b6abd7562555377784fef5a92",
+      "bytes": 4506
+    },
+    {
+      "path": "skills/minecraft-dev-kit/references/premium-sfx-production.md",
+      "sha256": "0642f49a1242782ec08a1787c3645b798e051afabd5bcdf407cac4b87d47f4c5",
+      "bytes": 2092
+    },
+    {
+      "path": "skills/minecraft-dev-kit/references/premium-texture-material-production.md",
+      "sha256": "765a7fae1f640e078055012dfca070be9a03d2430801c3a03ec22dc803717ea1",
+      "bytes": 2828
+    },
+    {
+      "path": "skills/minecraft-dev-kit/references/premium-vfx-production.md",
+      "sha256": "f3cd78aee5559e024fd52a2302d8575a670a36a41c0c35d22816f680dd9bf221",
+      "bytes": 1789
+    },
+    {
+      "path": "skills/minecraft-dev-kit/references/reference-exact-reconstruction.md",
+      "sha256": "3c332a17646771267a7577e164a65879646efdf949ec32a4418e324f1c08350e",
+      "bytes": 11560
+    },
+    {
+      "path": "skills/minecraft-dev-kit/references/reference-model-reconstruction.md",
+      "sha256": "082ccbef8e5d085faf5cef9573e9226769c9516041fc77650dfe11bf6a232f70",
+      "bytes": 7767
+    },
+    {
+      "path": "skills/minecraft-dev-kit/references/renderer-target-matrix.md",
+      "sha256": "8b5faa384d7cf310fa292f9e8d78d26bcd714db47fa243e781c5a448df2fd7fb",
+      "bytes": 4672
+    },
+    {
+      "path": "skills/minecraft-dev-kit/references/server-asset-conversion.md",
+      "sha256": "9b7eb49d524e5a33dba87d2fcffeece5aac6e006f418a6d5394836e863c419a4",
+      "bytes": 9062
+    },
+    {
+      "path": "skills/minecraft-dev-kit/references/server-plugin-ecosystem.md",
+      "sha256": "6991ada4297001a9029a3264a2d6de83f443c9d1e16d16c53832343d8f052252",
+      "bytes": 10847
+    },
+    {
+      "path": "skills/minecraft-dev-kit/references/server-plugin-registry.json",
+      "sha256": "e0beeabc85d5d0d998919c5bef24cba4753ce9af8a7184eb9f11f000f5e86c41",
+      "bytes": 119909
+    },
+    {
+      "path": "skills/minecraft-dev-kit/references/vanilla-feature-atlas.md",
+      "sha256": "3310912798971f244a29c51d518666a7cbbe2502b76740953463ec55ea283407",
+      "bytes": 12618
+    },
+    {
+      "path": "skills/minecraft-dev-kit/references/workbench-v7.md",
+      "sha256": "c197c42696e8f3095c87c9070f0168b121effbd30e7e886c0bdad424f77adf71",
+      "bytes": 3390
+    },
+    {
+      "path": "skills/minecraft-dev-kit/references/workbench-v8.md",
+      "sha256": "887d88c22f491655b91e0d9ba385e4d6d72a841dacf9b98199b3360513d90f3e",
+      "bytes": 3099
+    },
+    {
+      "path": "skills/minecraft-dev-kit/scripts/Prewarm-Minecraft-26.3-Toolchains.ps1",
+      "sha256": "7d932e54d738e5be4da9f4838868823d152030a99a20f9c4a956b912b2b94fc1",
+      "bytes": 2526
+    },
+    {
+      "path": "skills/minecraft-dev-kit/scripts/Prewarm-Minecraft-Client-Assets.ps1",
+      "sha256": "8a845f6b138e8ffd4cfbc50b2152a38b148bb37cabd803f745ccea7b864f5b5b",
+      "bytes": 4232
+    },
+    {
+      "path": "skills/minecraft-dev-kit/scripts/access_rule_resolver.py",
+      "sha256": "50269d8075cf499a9923293fe0ed220e6337a5d154b9387c7fe1af1f577ba26e",
+      "bytes": 5539
+    },
+    {
+      "path": "skills/minecraft-dev-kit/scripts/adjacent_plugin_ir.py",
+      "sha256": "984f6b7b65f2cff1b4188285dc3d8090e7bf6673ad836f5d088f01d581fe2990",
+      "bytes": 9153
+    },
+    {
+      "path": "skills/minecraft-dev-kit/scripts/animated_java_blueprint_ir.py",
+      "sha256": "646e8c2fdd79e11e3cc81b02e31cce49c9483efe8e54fd658b943354db2e9567",
+      "bytes": 7179
+    },
+    {
+      "path": "skills/minecraft-dev-kit/scripts/animated_texture_builder.py",
+      "sha256": "2a63c7bb4411a0410e86662811594c2bdafae726a681a8293ecf3783e93e7263",
+      "bytes": 1774
+    },
+    {
+      "path": "skills/minecraft-dev-kit/scripts/api_reference_migration.py",
+      "sha256": "512fb3425cf0c20279a575aa8aa815ae512b2ca4bf2f0be31c7a46d52eafbd26",
+      "bytes": 11304
+    },
+    {
+      "path": "skills/minecraft-dev-kit/scripts/bbmodel_ir.py",
+      "sha256": "d8723e6c013db14e4e634990bc7bb5370e9abb4801682e86e6920e7e98d87034",
+      "bytes": 7055
+    },
+    {
+      "path": "skills/minecraft-dev-kit/scripts/bbmodel_lint.py",
+      "sha256": "5d8a5f858a51c2812d43ec6a5910f6f9d215989baf46043c234b5d46ad2b06f9",
+      "bytes": 2886
+    },
+    {
+      "path": "skills/minecraft-dev-kit/scripts/cem_ir.py",
+      "sha256": "c913ba5da1d3fb3d2a596d557b6999d96898859ef3654e98b32ef31cede6695c",
+      "bytes": 7400
+    },
+    {
+      "path": "skills/minecraft-dev-kit/scripts/classfile_symbol_index.py",
+      "sha256": "09aee01cdbace21332f592fbb3b0568182770962d35968c73505e67a609dbf4f",
+      "bytes": 15505
+    },
+    {
+      "path": "skills/minecraft-dev-kit/scripts/content_identity_inventory.py",
+      "sha256": "0499ff9edc6e80239e69a67331f3949bf0045f669757df6f24f91a6dc5b25814",
+      "bytes": 10104
+    },
+    {
+      "path": "skills/minecraft-dev-kit/scripts/content_parity_audit.py",
+      "sha256": "ca72782ef46792164138881af86ca4da9a23263310a5c0bdab29da42d200bcbd",
+      "bytes": 3180
+    },
+    {
+      "path": "skills/minecraft-dev-kit/scripts/content_plugin_ir.py",
+      "sha256": "5444bdb5df3b27e758e3b31b3813b599a0ae3b4ce4f346bd122d6353a10e8314",
+      "bytes": 11103
+    },
+    {
+      "path": "skills/minecraft-dev-kit/scripts/creature_animation_blockout.py",
+      "sha256": "0fd885b7abdf5ed74b406e1daae99e0339f549bde0634cd6a88f0a377292d993",
+      "bytes": 8085
+    },
+    {
+      "path": "skills/minecraft-dev-kit/scripts/creature_animation_retarget.py",
+      "sha256": "adf32c42fc1e691febc1058a938b3e9df3ba04a524ea15ab77634d9991f91533",
+      "bytes": 2006
+    },
+    {
+      "path": "skills/minecraft-dev-kit/scripts/creature_blockout_generator.py",
+      "sha256": "90dfc02ddf9b11bafdf101fd1d0b384b5d61f897cc02260098f4cab10d6ee9a9",
+      "bytes": 8043
+    },
+    {
+      "path": "skills/minecraft-dev-kit/scripts/creature_spec_compiler.py",
+      "sha256": "6c29869561a9c84a33e9d694f62956a924425590e9d10a4863665dcdb05aa4be",
+      "bytes": 20096
+    },
+    {
+      "path": "skills/minecraft-dev-kit/scripts/creature_spec_preview.py",
+      "sha256": "a1482e35c7913fc5aaf25f312e5c72be2b9b483053657decb74eb247d9c9e7f5",
+      "bytes": 7741
+    },
+    {
+      "path": "skills/minecraft-dev-kit/scripts/creature_texture_audit.py",
+      "sha256": "2ee6fca0062c4a5be66919d898725568c1f0e34921bc0a45a0e19dd278d416af",
+      "bytes": 6428
+    },
+    {
+      "path": "skills/minecraft-dev-kit/scripts/creature_texture_blockout.py",
+      "sha256": "9cbb58129a949f4d7dba46bffd8d6e3954d3c5e490be768ca5e69b3096dd75c1",
+      "bytes": 4610
+    },
+    {
+      "path": "skills/minecraft-dev-kit/scripts/creature_uv_packer.py",
+      "sha256": "fd38170b07c14fcc9baafbcc13ec04c5dd42e4532e48073ff52f93d737b24314",
+      "bytes": 3562
+    },
+    {
+      "path": "skills/minecraft-dev-kit/scripts/gif_pose_sampler.py",
+      "sha256": "518872db5a16e75ec62c859b0432436e456b80d685e1abf4e09f850f6c6f42dc",
+      "bytes": 3061
+    },
+    {
+      "path": "skills/minecraft-dev-kit/scripts/gif_to_animated_texture.py",
+      "sha256": "13668284acf5953f319b1e5e0f43ee291e252d1f7e1dab3bb09f5e39b826f2f5",
+      "bytes": 2819
+    },
+    {
+      "path": "skills/minecraft-dev-kit/scripts/java_model_ir.py",
+      "sha256": "0422293b4d305a8a7dd5825a6b73035293f8255e2608bcdad6cbea2c40757eae",
+      "bytes": 5471
+    },
+    {
+      "path": "skills/minecraft-dev-kit/scripts/mapping_bridge.py",
+      "sha256": "d0af1d37ee5243d2e68e67aaa206750cd2ff3f4d8ca02073d260a895dc8c6041",
+      "bytes": 10081
+    },
+    {
+      "path": "skills/minecraft-dev-kit/scripts/mapping_lineage.py",
+      "sha256": "0f029d52e09ab3d78d85847abc176251de3d7bc9157e687ec76e39b5d40be3f1",
+      "bytes": 31709
+    },
+    {
+      "path": "skills/minecraft-dev-kit/scripts/mixin_surface_audit.py",
+      "sha256": "8c8bce7f56790b09dbf0414f6503d10d5e72c1f5cffe859ffa20b6b3471b59a2",
+      "bytes": 16963
+    },
+    {
+      "path": "skills/minecraft-dev-kit/scripts/mixin_target_resolver.py",
+      "sha256": "205dbece6785cd7ab0e3d28731eec2d588e0acc453e461c5e6334157423565e5",
+      "bytes": 11398
+    },
+    {
+      "path": "skills/minecraft-dev-kit/scripts/mob_animation_curve_audit.py",
+      "sha256": "3ffa78c0e64ee74edfaf787b8fb7ce6cc424d7833baed2be319271ee926ceffe",
+      "bytes": 4974
+    },
+    {
+      "path": "skills/minecraft-dev-kit/scripts/mob_animation_state_audit.py",
+      "sha256": "896a13742cca5dd943fa1f41bbbc84c1c77042d67630900db56443e9c9d6a74b",
+      "bytes": 5244
+    },
+    {
+      "path": "skills/minecraft-dev-kit/scripts/mob_combat_design_audit.py",
+      "sha256": "bdd500ec6a243665b99f9e2011df017f7b43ad12ec8da80df7b546303c861fca",
+      "bytes": 5286
+    },
+    {
+      "path": "skills/minecraft-dev-kit/scripts/mob_encounter_graph_audit.py",
+      "sha256": "913fbfe71c04842dabd491820b0f3d05305df1569e6916f782118bfc6eb7de49",
+      "bytes": 5228
+    },
+    {
+      "path": "skills/minecraft-dev-kit/scripts/mob_event_marker_audit.py",
+      "sha256": "ed6fc9be37f0d1f04c6914b4855b6d7d14d5650df918964255f6eeb8b4ac9c43",
+      "bytes": 4577
+    },
+    {
+      "path": "skills/minecraft-dev-kit/scripts/mob_geometry_quality_audit.py",
+      "sha256": "f1edbf4e133f13422d7069c6207ee5b1d483e70c52616610e93a8f4d073b87e4",
+      "bytes": 5109
+    },
+    {
+      "path": "skills/minecraft-dev-kit/scripts/mob_model_complexity_audit.py",
+      "sha256": "a0a4c6d591704975a2f07161837d43af48f1e619295f13e22076d31c5f6e8b89",
+      "bytes": 5492
+    },
+    {
+      "path": "skills/minecraft-dev-kit/scripts/mob_pack_shotlist.py",
+      "sha256": "b879bcbb8977493fc845731cbe67490db2f023da1bd9f6ee146c169c40910e2e",
+      "bytes": 3147
+    },
+    {
+      "path": "skills/minecraft-dev-kit/scripts/mob_pack_spec_compile.py",
+      "sha256": "d684e8ec894850857925c79372be40bcd950426795c3485b98fb41a208c27e40",
+      "bytes": 4036
+    },
+    {
+      "path": "skills/minecraft-dev-kit/scripts/mob_runtime_contract_audit.py",
+      "sha256": "9fc1fa226541fb399e122002795f63cd25f6ff369e01d1a53bb92f8dcb99c2d0",
+      "bytes": 4815
+    },
+    {
+      "path": "skills/minecraft-dev-kit/scripts/mob_sfx_contract_audit.py",
+      "sha256": "589cceb4900228307b1b958ff3aadc0a5bebe0eb7cae3ee25e6788cb7012852b",
+      "bytes": 4825
+    },
+    {
+      "path": "skills/minecraft-dev-kit/scripts/mob_silhouette_diversity_audit.py",
+      "sha256": "9b930b98b1c30e70c062794dc7fa34c5176e9201201a1000c76bb9f860c989ea",
+      "bytes": 3718
+    },
+    {
+      "path": "skills/minecraft-dev-kit/scripts/mob_variant_quality_audit.py",
+      "sha256": "9b63c523477eb1e0c5c8f686036cc536cd2c5e77a5edd354a49cedf29454e9c4",
+      "bytes": 4339
+    },
+    {
+      "path": "skills/minecraft-dev-kit/scripts/mob_vfx_contract_audit.py",
+      "sha256": "b52b95f2dbd87640395c0e44e7993aaa35a585823ff5dbe81002711265592cc5",
+      "bytes": 5076
+    },
+    {
+      "path": "skills/minecraft-dev-kit/scripts/mythic_skill_ir.py",
+      "sha256": "b180a2fac4aa1ca2157a5367e0f0ad31479ac6d4b06ddbc99a64b6a713606ecb",
+      "bytes": 8161
+    },
+    {
+      "path": "skills/minecraft-dev-kit/scripts/packaged_linkage_audit.py",
+      "sha256": "0074ea8f7c9681e99071cad9dc628b7d4a3d33eb01f54434a9d4f8868080ea40",
+      "bytes": 8197
+    },
+    {
+      "path": "skills/minecraft-dev-kit/scripts/plugin_registry_audit.py",
+      "sha256": "86389ab6233811a94da796f0deb6640bfe8196a57afc7f6418a30e2a46ad24bf",
+      "bytes": 4424
+    },
+    {
+      "path": "skills/minecraft-dev-kit/scripts/plugin_registry_export.py",
+      "sha256": "9fd103ccd5850d751bf612aac5209a32fbb5574ddb7e87b3b0c25378a415b0cf",
+      "bytes": 2657
+    },
+    {
+      "path": "skills/minecraft-dev-kit/scripts/port_26_3_common.py",
+      "sha256": "90694fb2bf3d70170d1d8ad53542b22106fe213c81a804330d1ce6757f708aba",
+      "bytes": 6420
+    },
+    {
+      "path": "skills/minecraft-dev-kit/scripts/port_26_3_pipeline.py",
+      "sha256": "d4fe0962b4092b0f4261f116320dd8a0be760e806551f9d7376a4a2c22f0cdc1",
+      "bytes": 6464
+    },
+    {
+      "path": "skills/minecraft-dev-kit/scripts/port_26_3_selftest.py",
+      "sha256": "b6583747a68bece3b4d73f28f4d1377fdb3f7e4b147b918ee1b7f5607a01a515",
+      "bytes": 29476
+    },
+    {
+      "path": "skills/minecraft-dev-kit/scripts/port_failure_triage.py",
+      "sha256": "59630bc27955311399415e1983afe65b448f7ec2ae7bf275298da7e7fb1ece0e",
+      "bytes": 10506
+    },
+    {
+      "path": "skills/minecraft-dev-kit/scripts/port_guard.py",
+      "sha256": "24c72dae4e71cd58e88e38f9c82d6086b602fc77ec11604c1601499ce8b357bc",
+      "bytes": 21795
+    },
+    {
+      "path": "skills/minecraft-dev-kit/scripts/port_intake.py",
+      "sha256": "2ace6aea4d33f36025329675cf7d4ff5c625629b6d695cd420ce89b3729495bc",
+      "bytes": 17560
+    },
+    {
+      "path": "skills/minecraft-dev-kit/scripts/port_scaffold_26_3.py",
+      "sha256": "f47545685963495ba13437e340071fc47634769956a193165f77632ac49a5605",
+      "bytes": 12067
+    },
+    {
+      "path": "skills/minecraft-dev-kit/scripts/port_semantic_planner.py",
+      "sha256": "e6e8f61a0e539dd108bf32e6f5a708965809fad1c1a0c35c027d64b43c8e8737",
+      "bytes": 9023
+    },
+    {
+      "path": "skills/minecraft-dev-kit/scripts/premium_mob_pack_gate.py",
+      "sha256": "f3dac8a424e2da3cd45246efafc03e1ad437a6be3220faaf90d953b0d4f7762c",
+      "bytes": 21229
+    },
+    {
+      "path": "skills/minecraft-dev-kit/scripts/premium_mob_pack_pipeline.py",
+      "sha256": "46a16dc65cd76e7aae1212185a74fdedc9e71fae9b77500848b98b65c4c2e1a0",
+      "bytes": 8098
+    },
+    {
+      "path": "skills/minecraft-dev-kit/scripts/premium_mob_pack_scaffold.py",
+      "sha256": "4f3f0eb4b686b913ee686ab04dfe26e8f9da783ffa5986f697337ec1fd87011e",
+      "bytes": 7914
+    },
+    {
+      "path": "skills/minecraft-dev-kit/scripts/premium_mob_pack_selftest.py",
+      "sha256": "bf65c226c9bf9936d62f0cd2b888228f5d88c54b6f83663249845f420a132a46",
+      "bytes": 14173
+    },
+    {
+      "path": "skills/minecraft-dev-kit/scripts/premium_mob_runtime_plan.py",
+      "sha256": "0f0558091a43e41ca326e9f8eaf8ef943b8727032e1796bbcb330c7d2c67cd18",
+      "bytes": 4095
+    },
+    {
+      "path": "skills/minecraft-dev-kit/scripts/prewarm_mc_26_3_mappings.py",
+      "sha256": "ce598f4df26997764e3dfc59a1bbafd08bf71bbab4f1c46b2232cf3df8c58a11",
+      "bytes": 3760
+    },
+    {
+      "path": "skills/minecraft-dev-kit/scripts/prewarm_mc_26_3_toolchains.py",
+      "sha256": "1bc9751fc2d4548fe021c69b863b29d65aa9f9e7aff17f73bc18eb9e417b6709",
+      "bytes": 3413
+    },
+    {
+      "path": "skills/minecraft-dev-kit/scripts/procedural_sfx_blockout.py",
+      "sha256": "3fdea68277380b343b54b0d8a075f653583259db60033c5e292275c8659b9231",
+      "bytes": 2427
+    },
+    {
+      "path": "skills/minecraft-dev-kit/scripts/reference_asset_probe.py",
+      "sha256": "548a496eb1b70bb361f80231a2159d4aa5d77d35028608b607389a2f3998d1e1",
+      "bytes": 2660
+    },
+    {
+      "path": "skills/minecraft-dev-kit/scripts/reference_asset_scaffold.py",
+      "sha256": "ea17b337f0f6fe01edcbe0170b337e920cb8e6b1a9746a42a8908fcd27a06e4f",
+      "bytes": 12096
+    },
+    {
+      "path": "skills/minecraft-dev-kit/scripts/reference_attachment_fit.py",
+      "sha256": "6fb8815d199dacd5b8ae0ca80ff97182c8b759f297d830f00caa231f5f52e661",
+      "bytes": 12150
+    },
+    {
+      "path": "skills/minecraft-dev-kit/scripts/reference_auto_refine.py",
+      "sha256": "36714b4a31535a67e5d7fb6b4f2e44263a55c8ef34a2e751f2c97bb6961ea8a8",
+      "bytes": 6899
+    },
+    {
+      "path": "skills/minecraft-dev-kit/scripts/reference_catalog.py",
+      "sha256": "21c9acab6ac62e4fb98d275a356ca4630516ca5800a5abd684c8ef4dbb706543",
+      "bytes": 5534
+    },
+    {
+      "path": "skills/minecraft-dev-kit/scripts/reference_catalog_selftest.py",
+      "sha256": "1298344f606a6313edb2500d864a0c4bea53d855eff169e27206fc0fb2055b76",
+      "bytes": 3183
+    },
+    {
+      "path": "skills/minecraft-dev-kit/scripts/reference_cuboid_fit.py",
+      "sha256": "e2d847974332c2b5509ce29c5ae8cb2a478b5e877382263ecf21724ade230c81",
+      "bytes": 15410
+    },
+    {
+      "path": "skills/minecraft-dev-kit/scripts/reference_marketplace_full_selftest.py",
+      "sha256": "1060e6c41027ab5727975709025c1e5db5847d83d731e9a94dd51df01b099914",
+      "bytes": 11537
+    },
+    {
+      "path": "skills/minecraft-dev-kit/scripts/reference_marketplace_motion_selftest.py",
+      "sha256": "d8df7e87630a4bd42be869eeef3765fb7a6044d30fe9dc428dec24b09d75db88",
+      "bytes": 4553
+    },
+    {
+      "path": "skills/minecraft-dev-kit/scripts/reference_marketplace_static_selftest.py",
+      "sha256": "a5a11bbf8e72c57b0cdf1c00e875231c4669d7e6ae755ec18bd8c4494c779f56",
+      "bytes": 6385
+    },
+    {
+      "path": "skills/minecraft-dev-kit/scripts/reference_media_ingest.py",
+      "sha256": "357aa42d3ded043203f72ddee0e993c5fcf1ba294d18bc01260ab8573bdb102d",
+      "bytes": 9743
+    },
+    {
+      "path": "skills/minecraft-dev-kit/scripts/reference_motion_partition.py",
+      "sha256": "2b661a097c1fc548781be2667403e11f5ea9f6b74c04f5c0a7e9b93b7467f56e",
+      "bytes": 4004
+    },
+    {
+      "path": "skills/minecraft-dev-kit/scripts/reference_pack_consistency_audit.py",
+      "sha256": "a79b3d7832cd4ca3d94adefeb8d3f3993e5b99a9ea23006a21416cf5fe8b64c2",
+      "bytes": 11019
+    },
+    {
+      "path": "skills/minecraft-dev-kit/scripts/reference_parity_gate.py",
+      "sha256": "adca5caf74fa3a46ca4312c0d1a22d006c9dd39531fda2aa811a085ecadcf6cc",
+      "bytes": 10401
+    },
+    {
+      "path": "skills/minecraft-dev-kit/scripts/reference_pose_sequence_fit.py",
+      "sha256": "4240a3f1201c0739938652250c85a483d8dc07689e66d8487d8e90711b1550b3",
+      "bytes": 8979
+    },
+    {
+      "path": "skills/minecraft-dev-kit/scripts/reference_reconstruction_advanced_selftest.py",
+      "sha256": "f454fb745ae05e56e83f42694538d925fb6f952d568e0a98f2444ad35e9dd9f2",
+      "bytes": 10070
+    },
+    {
+      "path": "skills/minecraft-dev-kit/scripts/reference_reconstruction_pipeline.py",
+      "sha256": "cc161b1b5615c91b729a47eae29b5f13743614685d78bfe3069ae87eedc5dfc6",
+      "bytes": 26989
+    },
+    {
+      "path": "skills/minecraft-dev-kit/scripts/reference_reconstruction_selftest.py",
+      "sha256": "98b424cdd9ac5963e65c0e7826082c3c993ce5fa334b4f766d9f61828ec6c6f8",
+      "bytes": 13804
+    },
+    {
+      "path": "skills/minecraft-dev-kit/scripts/reference_residual_map.py",
+      "sha256": "e41906d14d5fbf2a3f0db4b9022979cce1cf289feace7b16a68af36641d9f49b",
+      "bytes": 2708
+    },
+    {
+      "path": "skills/minecraft-dev-kit/scripts/reference_sequence_probe.py",
+      "sha256": "655dab0aa7b815bc1ddb0ea6e83080b6fde3b35cfc92435cbf148e9336c2c980",
+      "bytes": 5374
+    },
+    {
+      "path": "skills/minecraft-dev-kit/scripts/reference_sprite_extract.py",
+      "sha256": "3b46438d1959fbef2ab7406e5fa8c909d03ca066d7d381157565a137847dad1f",
+      "bytes": 5028
+    },
+    {
+      "path": "skills/minecraft-dev-kit/scripts/reference_texture_bake.py",
+      "sha256": "cd91cd7bda560630efe7ac4558310b2c26833eadcec2f892c7318694aca4bd27",
+      "bytes": 9930
+    },
+    {
+      "path": "skills/minecraft-dev-kit/scripts/reference_texture_delight.py",
+      "sha256": "af8b4079a28461bda6a08fc265ba1637f3d10b4f941971c9c4c7cf69d259db4e",
+      "bytes": 3315
+    },
+    {
+      "path": "skills/minecraft-dev-kit/scripts/reference_turntable_calibrate.py",
+      "sha256": "ef5b39c3cb1a817aac87a73f5cfb8825ac6ee3863d75ba18c7301ee55ab444df",
+      "bytes": 6939
+    },
+    {
+      "path": "skills/minecraft-dev-kit/scripts/reference_visual_hull.py",
+      "sha256": "925e341ffc8027353005edaf9a5d04e6e0c7e23832d2e19f7c6a0bcb32a5f40a",
+      "bytes": 8929
+    },
+    {
+      "path": "skills/minecraft-dev-kit/scripts/registration_identity_inventory.py",
+      "sha256": "12c0d19eeaabfb8ca973371fb6435d8012e60657057dbfe5094747ded77c255f",
+      "bytes": 8396
+    },
+    {
+      "path": "skills/minecraft-dev-kit/scripts/registration_parity_audit.py",
+      "sha256": "13e68dda96c0661455e5e268b5c4e5ce251258444beed83d3e94f47c5f0786aa",
+      "bytes": 2837
+    },
+    {
+      "path": "skills/minecraft-dev-kit/scripts/renderer_target_selector.py",
+      "sha256": "c22e7f6a14b94729d7de8d665a0c1b420e4b22c494d680a61609ce81f4026ccd",
+      "bytes": 5624
+    },
+    {
+      "path": "skills/minecraft-dev-kit/scripts/server_asset_link_audit.py",
+      "sha256": "96f0810d0d1397bcbb9f6748779fccfa1835c8127a092f4585dc9ecd2b2a507f",
+      "bytes": 6430
+    },
+    {
+      "path": "skills/minecraft-dev-kit/scripts/server_asset_pipeline.py",
+      "sha256": "3324ec3187399ac4a67d84610251be9c2b1f34b616cd644e0999b702fd6c683b",
+      "bytes": 10959
+    },
+    {
+      "path": "skills/minecraft-dev-kit/scripts/server_asset_probe.py",
+      "sha256": "878ab70c9b8a1ce76f9d43bf1ac499f585dfcea45425957097da39aa685754dd",
+      "bytes": 13365
+    },
+    {
+      "path": "skills/minecraft-dev-kit/scripts/server_asset_stage.py",
+      "sha256": "d0e7a3d9dcb6cd96f3b1dd37c0c341e3f808557300f488162516fe9efef9cab0",
+      "bytes": 4877
+    },
+    {
+      "path": "skills/minecraft-dev-kit/scripts/server_conversion_manifest.py",
+      "sha256": "3d23e9f8b5036e1cf2573578eb48804105334b9f76c435021ca92d2f37e3a0a5",
+      "bytes": 12244
+    },
+    {
+      "path": "skills/minecraft-dev-kit/scripts/server_family_ir.py",
+      "sha256": "699d173909a407c132eb0f2054c234ccf8cb91b52bafa4cae326f809b97bd15f",
+      "bytes": 13548
+    },
+    {
+      "path": "skills/minecraft-dev-kit/scripts/server_pack_resolver.py",
+      "sha256": "bae75b34c8c81882bad456e102681be529ef9f1f5d41f6049eaf29eecbc0c97c",
+      "bytes": 5607
+    },
+    {
+      "path": "skills/minecraft-dev-kit/scripts/server_plugin_coverage.py",
+      "sha256": "d4fa0f2c789eb7af45ca70110197d89bb1728711ec86d37211b09b81205135cb",
+      "bytes": 6040
+    },
+    {
+      "path": "skills/minecraft-dev-kit/scripts/server_plugin_inventory.py",
+      "sha256": "3ce75d48db0a170dc6eff061718249847d28242b4ec5e6fb757740ca051f97ed",
+      "bytes": 10663
+    },
+    {
+      "path": "skills/minecraft-dev-kit/scripts/server_semantics_probe.py",
+      "sha256": "1c478199a489ca750a7532654ba6deed2545e8cd609e50abea86ea3819568458",
+      "bytes": 6208
+    },
+    {
+      "path": "skills/minecraft-dev-kit/scripts/unknown_plugin_triage.py",
+      "sha256": "ad0b78182ceba8c278b7bb0363ad3e8f4253bdb9f97a2786c4e5fec24dbccca5",
+      "bytes": 6806
+    },
+    {
+      "path": "skills/minecraft-dev-kit/scripts/visual_match_gate.py",
+      "sha256": "51f21ff8079803c8d77440d46c7e2e64eb6388c0cb56efee963b0e7b6a867566",
+      "bytes": 2656
+    },
+    {
+      "path": "skills/minecraft-dev-kit/worker/README.md",
+      "sha256": "643a9e40e093235327cbc65bd58f162fb9c06d659c91b539f026f325b5e499cb",
+      "bytes": 6412
+    },
+    {
+      "path": "skills/minecraft-dev-kit/worker/bootstrap.ps1",
+      "sha256": "04d2a9ff0e8b870b388f319abc4306db43c399ebbaf5b931de65bc27bef4a38b",
+      "bytes": 7003
+    },
+    {
+      "path": "skills/minecraft-dev-kit/worker/devkit.cmd",
+      "sha256": "f2e5bcc8ec6c0c295d0cbb93baf51a349eb70a868a5ae81f141c0b4f36808a43",
+      "bytes": 179
+    },
+    {
+      "path": "skills/minecraft-dev-kit/worker/devkit.sh",
+      "sha256": "79935f4c23ab46b8ba5066d542cc2f11249bfa4f16e5851a47e37f7b27138692",
+      "bytes": 261
+    },
+    {
+      "path": "skills/minecraft-dev-kit/worker/references/minecraft-26.3-port-rules.json",
+      "sha256": "a936bccf5e9a641a7be3682c4f5ef164d7f13cd4b00e70128767a6941ed862b8",
+      "bytes": 7634
+    },
+    {
+      "path": "skills/minecraft-dev-kit/worker/references/minecraft-26.3-semantic-migrations.json",
+      "sha256": "941d3a33b2479229f32ba68b8af9c312adadf55feeb51f23f7ae950ef115aac3",
+      "bytes": 11579
+    },
+    {
+      "path": "skills/minecraft-dev-kit/worker/references/minecraft-mapping-prewarm-profiles.json",
+      "sha256": "0457f8723c7a9c12b0597ae331fcc2c231e9576b959db36ac1fbf5bb74a97c95",
+      "bytes": 1212
+    },
+    {
+      "path": "skills/minecraft-dev-kit/worker/references/minecraft-mapping-sources.json",
+      "sha256": "035563758570d3e961341dcf1e429be17762b72411fb11558d20f05732aa9684",
+      "bytes": 4294
+    },
+    {
+      "path": "skills/minecraft-dev-kit/worker/references/native-mixin-owners-26.3.json",
+      "sha256": "d22ce23f098c13b60ecc236d8ba5e5f722a21dbcaad6e32adcb334964265b5ec",
+      "bytes": 3096
+    },
+    {
+      "path": "skills/minecraft-dev-kit/worker/scripts/access_rule_resolver.py",
+      "sha256": "8424773f61e0ae4e2a6774f9a65d2b48f08f04db0e11aa43709ea998dcbe74a8",
+      "bytes": 6493
+    },
+    {
+      "path": "skills/minecraft-dev-kit/worker/scripts/api_reference_migration.py",
+      "sha256": "512fb3425cf0c20279a575aa8aa815ae512b2ca4bf2f0be31c7a46d52eafbd26",
+      "bytes": 11304
+    },
+    {
+      "path": "skills/minecraft-dev-kit/worker/scripts/classfile_symbol_index.py",
+      "sha256": "02c9e11d8ad132fab927958e7bfdc5194d7745f4cf24ce1ead3088164a46915e",
+      "bytes": 27400
+    },
+    {
+      "path": "skills/minecraft-dev-kit/worker/scripts/content_identity_inventory.py",
+      "sha256": "ec65b0aacb4c95c2b8873e64a4613e5e22984ec8de0f5c9162e0303d98eabcf9",
+      "bytes": 10103
+    },
+    {
+      "path": "skills/minecraft-dev-kit/worker/scripts/content_parity_audit.py",
+      "sha256": "b05207405d58c11da30561cfe2a9786d9419eba8d826d1996c59a0029d566ddf",
+      "bytes": 3179
+    },
+    {
+      "path": "skills/minecraft-dev-kit/worker/scripts/devkit.py",
+      "sha256": "a945b305783c44bbb955585639d8ba78134e42de7cf4c4cf88662933cf9c72c2",
+      "bytes": 23056
+    },
+    {
+      "path": "skills/minecraft-dev-kit/worker/scripts/devkit_chunk_packet_selftest.py",
+      "sha256": "da412128b33cc01a99aa1ddf7cb08fbf6805e07e8e880ddcd7affccc5eb254d9",
+      "bytes": 2642
+    },
+    {
+      "path": "skills/minecraft-dev-kit/worker/scripts/devkit_dependencies.py",
+      "sha256": "07471f5e3938368fc6db0cdae9a6be716166ca5e7b7f6d472d90310256efe3dd",
+      "bytes": 15265
+    },
+    {
+      "path": "skills/minecraft-dev-kit/worker/scripts/devkit_diagnostics.py",
+      "sha256": "1f7975aeeb7aafce34ffa69858194f5c0cfe774a5431315bced24082c314fb95",
+      "bytes": 2422
+    },
+    {
+      "path": "skills/minecraft-dev-kit/worker/scripts/devkit_diagnostics_selftest.py",
+      "sha256": "d38cb1588728526e26cb55a568bffd7ea56ba3c7b61c66f1af19ead429da6539",
+      "bytes": 1491
+    },
+    {
+      "path": "skills/minecraft-dev-kit/worker/scripts/devkit_mixin_selftest.py",
+      "sha256": "2a1f31c68ad5989bb7b7a372c0e1fbf8fd1465f04c188b141e7998ab9c1838d3",
+      "bytes": 3076
+    },
+    {
+      "path": "skills/minecraft-dev-kit/worker/scripts/devkit_mouse_bridge_selftest.py",
+      "sha256": "678a4511153b99dd87084f7324a632b293e196c977fa408e67a42a64e5fd4596",
+      "bytes": 3932
+    },
+    {
+      "path": "skills/minecraft-dev-kit/worker/scripts/devkit_native.py",
+      "sha256": "e7d63fa15a9adf720bfd1fcd69941b67472bad4b8b9d25ddaa25c36fc9dd8247",
+      "bytes": 15439
+    },
+    {
+      "path": "skills/minecraft-dev-kit/worker/scripts/devkit_native_restart.py",
+      "sha256": "3e82e16677ff1feaefd93d3256d2947b35a2e4cc53b1cac7b5bb4559e023dc50",
+      "bytes": 10507
+    },
+    {
+      "path": "skills/minecraft-dev-kit/worker/scripts/devkit_native_restart_selftest.py",
+      "sha256": "7aa5603ce097c02198b683dce4b39fd984c2da239d2a2e74afd2fdbda34fc5a3",
+      "bytes": 3466
+    },
+    {
+      "path": "skills/minecraft-dev-kit/worker/scripts/devkit_qol_selftest.py",
+      "sha256": "086134ea647e717f7565f881529073bc1b6a35d11e1e28755cf14ab05f672561",
+      "bytes": 9030
+    },
+    {
+      "path": "skills/minecraft-dev-kit/worker/scripts/devkit_resume_selftest.py",
+      "sha256": "2ee4f58123b0364e2254e9350eeca70ebb405e3746e23e52aeeb6869d748e982",
+      "bytes": 6258
+    },
+    {
+      "path": "skills/minecraft-dev-kit/worker/scripts/devkit_runtime_mixin_selftest.py",
+      "sha256": "89f875c9bba0c01f8d5f54bf68d7507323771ad3b496fbbd9e088a0394f20c9b",
+      "bytes": 7626
+    },
+    {
+      "path": "skills/minecraft-dev-kit/worker/scripts/devkit_setup_selftest.py",
+      "sha256": "532cf4b4e83a54a6f2108f7aca7698acf4cd72e791c86bffcda0e5c16153fd6f",
+      "bytes": 3085
+    },
+    {
+      "path": "skills/minecraft-dev-kit/worker/scripts/devkit_shader_selftest.py",
+      "sha256": "77fb579b2b1374a38409f74b0ccf282b9faf8f0a6e487f2d63aef233ad2df7b0",
+      "bytes": 5701
+    },
+    {
+      "path": "skills/minecraft-dev-kit/worker/scripts/devkit_symbols.py",
+      "sha256": "a8dd5e3cecf3e1b060d8188c8205e0ab8b9cd4eb4fdd007a5f5cd0de42712e40",
+      "bytes": 4432
+    },
+    {
+      "path": "skills/minecraft-dev-kit/worker/scripts/devkit_toolchains.py",
+      "sha256": "7edf97bbce9a5fe7a0c21b3a50c4c432411fd293ba091ba6093c538446939832",
+      "bytes": 11923
+    },
+    {
+      "path": "skills/minecraft-dev-kit/worker/scripts/devkit_workbench_selftest.py",
+      "sha256": "91a23ed50178ed75707c449768cacbee3f6c12de953653b4a0846d391d34050d",
+      "bytes": 6098
+    },
+    {
+      "path": "skills/minecraft-dev-kit/worker/scripts/mapping_bridge.py",
+      "sha256": "d0af1d37ee5243d2e68e67aaa206750cd2ff3f4d8ca02073d260a895dc8c6041",
+      "bytes": 10081
+    },
+    {
+      "path": "skills/minecraft-dev-kit/worker/scripts/mapping_lineage.py",
+      "sha256": "0f029d52e09ab3d78d85847abc176251de3d7bc9157e687ec76e39b5d40be3f1",
+      "bytes": 31709
+    },
+    {
+      "path": "skills/minecraft-dev-kit/worker/scripts/mixin_surface_audit.py",
+      "sha256": "a9a7582c801b72171c48d06b67e283c44531ee94a677ded13e9991aa2f94397e",
+      "bytes": 17015
+    },
+    {
+      "path": "skills/minecraft-dev-kit/worker/scripts/mixin_target_resolver.py",
+      "sha256": "efe4daea30c3058ef10c7d1021e7459198cdfc45579c11016d62db3585e307db",
+      "bytes": 12353
+    },
+    {
+      "path": "skills/minecraft-dev-kit/worker/scripts/northpoint_chunk_packet_rules.py",
+      "sha256": "651d05ad93365cbf898ad2353f40123793bb749fef53a8be91f4af24059ce47e",
+      "bytes": 3673
+    },
+    {
+      "path": "skills/minecraft-dev-kit/worker/scripts/northpoint_compose.py",
+      "sha256": "0e4f99c568290914a847afe0bb8f3527dfbc54896980144466601be7b2bcdc67",
+      "bytes": 5280
+    },
+    {
+      "path": "skills/minecraft-dev-kit/worker/scripts/northpoint_compose_selftest.py",
+      "sha256": "166232d9ccf5e98bac5a6f7f9b29ec3fe2552348924579052cfc78194e71d67e",
+      "bytes": 2483
+    },
+    {
+      "path": "skills/minecraft-dev-kit/worker/scripts/northpoint_execution.py",
+      "sha256": "79fb356a95c50a2901b1d7160eb938bbb50e3c59bdfe246e231c5ea86f136960",
+      "bytes": 7602
+    },
+    {
+      "path": "skills/minecraft-dev-kit/worker/scripts/northpoint_execution_selftest.py",
+      "sha256": "ef4001e688f4001bebc47f6d2f2da96ffe630981345c8e6e3171394cb79989e9",
+      "bytes": 3374
+    },
+    {
+      "path": "skills/minecraft-dev-kit/worker/scripts/northpoint_fixture_driver.py",
+      "sha256": "e5013651a1e3a12f5db9daf52ab05a934bffd97d1f2e5322aa9d0f057473da2f",
+      "bytes": 4037
+    },
+    {
+      "path": "skills/minecraft-dev-kit/worker/scripts/northpoint_graduation.py",
+      "sha256": "ddcfae581e7b121e24a9420ad119f0f6ec299c8f8f75083127185daa5be872fd",
+      "bytes": 3335
+    },
+    {
+      "path": "skills/minecraft-dev-kit/worker/scripts/northpoint_job_runner.py",
+      "sha256": "e269e1326ffcfa01f0ee9f7d72f24530a3919f84d9950b46b79eafb220f73161",
+      "bytes": 18385
+    },
+    {
+      "path": "skills/minecraft-dev-kit/worker/scripts/northpoint_job_runner_selftest.py",
+      "sha256": "c3be90f1650fef81c38ac998faad27423d583be0e233450e5ed263390a815aa2",
+      "bytes": 5402
+    },
+    {
+      "path": "skills/minecraft-dev-kit/worker/scripts/northpoint_mouse_invoker_rules.py",
+      "sha256": "50c64f4d6af59b684c387c7eb76b6d1ae2600fbc39c95a970a89f4643e426d01",
+      "bytes": 6058
+    },
+    {
+      "path": "skills/minecraft-dev-kit/worker/scripts/northpoint_production_driver.py",
+      "sha256": "d0f81485842c979d0409a3e601a80e90351427485e452a868c36a102d12ac622",
+      "bytes": 28703
+    },
+    {
+      "path": "skills/minecraft-dev-kit/worker/scripts/northpoint_production_driver_selftest.py",
+      "sha256": "f0ede894b0ff361674a3e1d962d6d259b823008256dfcb53e47b302d38cfcd3a",
+      "bytes": 8573
+    },
+    {
+      "path": "skills/minecraft-dev-kit/worker/scripts/northpoint_public_mod_smoke.py",
+      "sha256": "6d9a231bfe3a6ef2f98ca03e5a0f0ed891326d833d006499aab29f4a37737312",
+      "bytes": 7766
+    },
+    {
+      "path": "skills/minecraft-dev-kit/worker/scripts/northpoint_runtime_mixin_rules.py",
+      "sha256": "b2e330528041a3b4de5aeaf0a27b82e41efba62d4a77a834598640a23094e86d",
+      "bytes": 14545
+    },
+    {
+      "path": "skills/minecraft-dev-kit/worker/scripts/northpoint_runtime_proof_selftest.py",
+      "sha256": "6d457187c397421bd0d9cb16abfc11d3f78830328100ee03532f688f3add11d1",
+      "bytes": 5369
+    },
+    {
+      "path": "skills/minecraft-dev-kit/worker/scripts/northpoint_semantic_migration_selftest.py",
+      "sha256": "f982ff7df72caacc50559d57ab97ca0bcfbb8661f028d58e42f8d4b4d6c3635d",
+      "bytes": 6862
+    },
+    {
+      "path": "skills/minecraft-dev-kit/worker/scripts/northpoint_shader_rules.py",
+      "sha256": "568b7214287bf7e2c7be5d22dfd8ae1bfd0cdc4769427a79d3d11fe04ae87960",
+      "bytes": 9588
+    },
+    {
+      "path": "skills/minecraft-dev-kit/worker/scripts/northpoint_source_intake.py",
+      "sha256": "db412cfe5f3dac61132c698db40770ec8c13d36002f995412a63d173885f4099",
+      "bytes": 13801
+    },
+    {
+      "path": "skills/minecraft-dev-kit/worker/scripts/northpoint_source_intake_selftest.py",
+      "sha256": "523ecece7aeda816e927b2d57e8e0bf894e8c45393f14b7f3b195a326673a839",
+      "bytes": 4214
+    },
+    {
+      "path": "skills/minecraft-dev-kit/worker/scripts/northpoint_target_26_3.py",
+      "sha256": "40d3462e4d45260f268845237cc79fcb6221357f462f104a659838ed889c607c",
+      "bytes": 11904
+    },
+    {
+      "path": "skills/minecraft-dev-kit/worker/scripts/northpoint_target_26_3_core.py",
+      "sha256": "72e17acba62a5cc30854d7dbd6c1676d8ef7865c8064d6149dce44e5cd58e9bd",
+      "bytes": 77299
+    },
+    {
+      "path": "skills/minecraft-dev-kit/worker/scripts/northpoint_target_26_3_selftest.py",
+      "sha256": "7f08bcba59d192caa96b0a02930323a5a1bcb6fed8832741ca5b93217ebeb772",
+      "bytes": 42543
+    },
+    {
+      "path": "skills/minecraft-dev-kit/worker/scripts/packaged_linkage_audit.py",
+      "sha256": "933ac318a7d9ffaada6a021fffc65279ce481aa1c18b871454d4e1f601d6a322",
+      "bytes": 33069
+    },
+    {
+      "path": "skills/minecraft-dev-kit/worker/scripts/port_26_3_common.py",
+      "sha256": "345912e6121cd2b4ca8c0b8f45bf5156b0b53830051162568f27931cf0180576",
+      "bytes": 6419
+    },
+    {
+      "path": "skills/minecraft-dev-kit/worker/scripts/port_26_3_pipeline.py",
+      "sha256": "d4fe0962b4092b0f4261f116320dd8a0be760e806551f9d7376a4a2c22f0cdc1",
+      "bytes": 6464
+    },
+    {
+      "path": "skills/minecraft-dev-kit/worker/scripts/port_26_3_selftest.py",
+      "sha256": "a396cf6dd2d5da123d2e1b4bb73ddc6a1b96461d0b00c87363c1d4263c2e4458",
+      "bytes": 30854
+    },
+    {
+      "path": "skills/minecraft-dev-kit/worker/scripts/port_failure_triage.py",
+      "sha256": "59630bc27955311399415e1983afe65b448f7ec2ae7bf275298da7e7fb1ece0e",
+      "bytes": 10506
+    },
+    {
+      "path": "skills/minecraft-dev-kit/worker/scripts/port_guard.py",
+      "sha256": "24c72dae4e71cd58e88e38f9c82d6086b602fc77ec11604c1601499ce8b357bc",
+      "bytes": 21795
+    },
+    {
+      "path": "skills/minecraft-dev-kit/worker/scripts/port_intake.py",
+      "sha256": "2ace6aea4d33f36025329675cf7d4ff5c625629b6d695cd420ce89b3729495bc",
+      "bytes": 17560
+    },
+    {
+      "path": "skills/minecraft-dev-kit/worker/scripts/port_scaffold_26_3.py",
+      "sha256": "742b8db92ef7ebee026c6147ae6b2d9921a715c19eb3485bac79588d701e9b54",
+      "bytes": 12345
+    },
+    {
+      "path": "skills/minecraft-dev-kit/worker/scripts/port_semantic_planner.py",
+      "sha256": "e6e8f61a0e539dd108bf32e6f5a708965809fad1c1a0c35c027d64b43c8e8737",
+      "bytes": 9023
+    },
+    {
+      "path": "skills/minecraft-dev-kit/worker/scripts/prewarm_mc_26_3_mappings.py",
+      "sha256": "ce598f4df26997764e3dfc59a1bbafd08bf71bbab4f1c46b2232cf3df8c58a11",
+      "bytes": 3760
+    },
+    {
+      "path": "skills/minecraft-dev-kit/worker/scripts/reflection_surface_resolver.py",
+      "sha256": "b5ba1e0270d44e37d45e1efaea9decb07c554a6eb01d9bb5662afb2bd5c02b98",
+      "bytes": 9243
+    },
+    {
+      "path": "skills/minecraft-dev-kit/worker/scripts/registration_identity_inventory.py",
+      "sha256": "2f174817d4287c4a83a23b3ff246e3fc8a7f068bd0d1fa727b136bee207285bc",
+      "bytes": 8395
+    },
+    {
+      "path": "skills/minecraft-dev-kit/worker/scripts/registration_parity_audit.py",
+      "sha256": "e58fc0de7287924c889f9d2af48a0a16d5cfc6f6cbb674c8dbc806594ff1509b",
+      "bytes": 2836
+    },
+    {
+      "path": "skills/minecraft-repair/SKILL.md",
+      "sha256": "b4ebb151ad7b8edaf46cd9772ca20f3210b38108d78e2aa98309e3c4af007696",
+      "bytes": 21434
+    },
+    {
+      "path": "skills/minecraft-repair/agents/openai.yaml",
+      "sha256": "734aff221ab662c06916f8c3788ee2b313060969c927acb7e3df08147facbc87",
+      "bytes": 332
+    },
+    {
+      "path": "skills/minecraft-repair/assets/icon.svg",
+      "sha256": "8936b24f674a1250d999e2c2b5901374fb4240426f32bd1ae340c352a90d617d",
+      "bytes": 1738
+    },
+    {
+      "path": "skills/minecraft-repair/references/artifact-patching.md",
+      "sha256": "f3e4705210e0b5a7b6863c4ceae34a34b9b392fb34b6e1add3c35f851d898b8e",
+      "bytes": 6213
+    },
+    {
+      "path": "skills/minecraft-repair/references/diagnostic-playbook.md",
+      "sha256": "7c0b3d10457e53489651234838c9c0e971b5acf2ace69b41bb4a96245acf1a67",
+      "bytes": 5408
+    },
+    {
+      "path": "skills/minecraft-repair/references/repair-mark.md",
+      "sha256": "e04275ec564526e62c048fd6793613fe5d639aa0c3f2c6798eefd604e15c11d3",
+      "bytes": 8240
+    },
+    {
+      "path": "skills/minecraft-repair/references/repair-memory.md",
+      "sha256": "4f252f8bc0c5ebe68bc292fe02e3cdec310e505ceea845026a16f9b1b5e1d314",
+      "bytes": 3971
+    },
+    {
+      "path": "skills/minecraft-repair/references/seed-repairs.jsonl",
+      "sha256": "ce850598c0a6bfc1c63d39f15d9321c52ae485723900f07eaecbfbc997a357db",
+      "bytes": 2850
+    },
+    {
+      "path": "skills/minecraft-repair/scripts/apply_repair_mark.py",
+      "sha256": "be2cefec9eef125e0e7258871c6b4eb902c4a1b11a75ffc6f864949c2bf21266",
+      "bytes": 3267
+    },
+    {
+      "path": "skills/minecraft-repair/scripts/class_utf8_patch.py",
+      "sha256": "4e444ebe806dac34135b3c6a9843a058ab0826c996a2f6530069efc433f4890c",
+      "bytes": 9038
+    },
+    {
+      "path": "skills/minecraft-repair/scripts/inspect_jar.py",
+      "sha256": "d908465ef82e69a7f7d04bbeaed7b652b31c5af9ebf3862c2103b8e63a777ad4",
+      "bytes": 4800
+    },
+    {
+      "path": "skills/minecraft-repair/scripts/jar_diff.py",
+      "sha256": "df11a81ccf7f06ef19582a5fecce5c301558e9205dee955c9fc928c14fecb64d",
+      "bytes": 2170
+    },
+    {
+      "path": "skills/minecraft-repair/scripts/repair_kb.py",
+      "sha256": "8f148e4d6529f366e7428ffea826f02ed57c1f0731e6e58deccdabf330edf9e4",
+      "bytes": 7637
+    },
+    {
+      "path": "skills/minecraft-repair/scripts/repair_mark_gate.py",
+      "sha256": "ab9d457d58e0ddb98b7734f68a85494ce9ad74c2f3e2e450b271480ab494d0fa",
+      "bytes": 4032
+    },
+    {
+      "path": "skills/minecraft-repair/scripts/triage_log.py",
+      "sha256": "2686cf37cf3d905c7fa18e3aaed03b658cd54913ebc6add02dae84232c85246c",
+      "bytes": 7827
+    },
+    {
+      "path": "skills/project-brain-orchestrator/CHANGELOG.md",
+      "sha256": "91e7f82d693a03635bd321693bf7098b554beb2611504cddcf7b6c7922972b72",
+      "bytes": 3120
+    },
+    {
+      "path": "skills/project-brain-orchestrator/SKILL.md",
+      "sha256": "4d9b2c49f119ec264a3b7065704f9e7e87d70068212177f4d3da51d2be85749d",
+      "bytes": 21304
+    },
+    {
+      "path": "skills/project-brain-orchestrator/VERSION",
+      "sha256": "0c9a9d43610d66f4cc3f42da08cae044483de25894a9daf9dc6a76ff75ca9327",
+      "bytes": 6
+    },
+    {
+      "path": "skills/project-brain-orchestrator/agents/openai.yaml",
+      "sha256": "74cd682eaeb32a57fa605da511937da2b8b4ae6f2348ff954a26bb680ac09e17",
+      "bytes": 455
+    },
+    {
+      "path": "skills/project-brain-orchestrator/assets/agents-md-hybrid/.agents/ENVIRONMENT.md",
+      "sha256": "40dc14f8cdb9191d0047260bab449010e0806be53bd2817afcce7547c05300ce",
+      "bytes": 2527
+    },
+    {
+      "path": "skills/project-brain-orchestrator/assets/agents-md-hybrid/.agents/EXECUTION.md",
+      "sha256": "310899f9cabd05c8762e9a7c6289bf480e1fcc998379496c3527ff0ede94b6fc",
+      "bytes": 10574
+    },
+    {
+      "path": "skills/project-brain-orchestrator/assets/agents-md-hybrid/.agents/LEARNING.md",
+      "sha256": "1b36032e2a69ac9a82fa99fca0bfe43b636afca02a08cb10187e84ff0fc4a907",
+      "bytes": 3838
+    },
+    {
+      "path": "skills/project-brain-orchestrator/assets/agents-md-hybrid/.agents/LIBRARY-STORAGE.md",
+      "sha256": "1019dff170f9b3c4b3c78140680b78bed202a7d419b31c63be537f1748142165",
+      "bytes": 6035
+    },
+    {
+      "path": "skills/project-brain-orchestrator/assets/agents-md-hybrid/.agents/MEMORY-CONTINUITY.md",
+      "sha256": "d53820ee68c0afe121cda9c6e83693e125ffc3fd85423fc72e4e336637b4e882",
+      "bytes": 12844
+    },
+    {
+      "path": "skills/project-brain-orchestrator/assets/agents-md-hybrid/.agents/PITFALLS-QUARANTINE.md",
+      "sha256": "4734524aff1303be593ad0f731ff645d57d889d10cd847b18149a0d31f21456b",
+      "bytes": 37
+    },
+    {
+      "path": "skills/project-brain-orchestrator/assets/agents-md-hybrid/.agents/PITFALLS.md",
+      "sha256": "9a7d9500991153d2e36930f24f428341f0608a5fb325eb0398963ce3f35e5b78",
+      "bytes": 17495
+    },
+    {
+      "path": "skills/project-brain-orchestrator/assets/agents-md-hybrid/.agents/RESEARCH.md",
+      "sha256": "2a5d19135771d3f69c328c50e94d5281ce3ade4a5e5b45af3f1f2419faddd66e",
+      "bytes": 6161
+    },
+    {
+      "path": "skills/project-brain-orchestrator/assets/agents-md-hybrid/.agents/SAFETY-CLOSEOUT.md",
+      "sha256": "da4e646aa640993bbdae3701bc099b93b25842c2b1c65a7651a4034e7eed318c",
+      "bytes": 7962
+    },
+    {
+      "path": "skills/project-brain-orchestrator/assets/agents-md-hybrid/.agents/UI-FUNCTIONALITY.md",
+      "sha256": "09f1e1c377a421b7d61db74f941816376661bd168e137752bd4254d75cb1acc0",
+      "bytes": 4869
+    },
+    {
+      "path": "skills/project-brain-orchestrator/assets/agents-md-hybrid/.agents/VERIFICATION.md",
+      "sha256": "1849c0d77d9992cd667e79635694e921377bcb9ddb7e2c4d3bc4509ad86a32a1",
+      "bytes": 6300
+    },
+    {
+      "path": "skills/project-brain-orchestrator/assets/agents-md-hybrid/AGENTS.md",
+      "sha256": "275c7edb66abb0ccc9f90ce38abaf2bffd764a8e0d1b1cdf586110370cbd9b09",
+      "bytes": 30847
+    },
+    {
+      "path": "skills/project-brain-orchestrator/assets/agents-md-hybrid/AGENTS.modular.md",
+      "sha256": "a9c822b3acb4b7c9a4821540e3b387c19c4a45cbc17f1e1a4e8b3b94b9101322",
+      "bytes": 9556
+    },
+    {
+      "path": "skills/project-brain-orchestrator/assets/agents-md-hybrid/MANIFEST.json",
+      "sha256": "e61a1006556f4e33bcd664605d3540f79096201ea4a019f027bd714024f9e4a9",
+      "bytes": 2255
+    },
+    {
+      "path": "skills/project-brain-orchestrator/assets/agents-md-hybrid/README.md",
+      "sha256": "c311bac55320d893c1b1c1d678547aa5746ee9bd613db561bf9c006365135589",
+      "bytes": 3945
+    },
+    {
+      "path": "skills/project-brain-orchestrator/assets/codex/ACTIVE-TASK.template.json",
+      "sha256": "a36513ab5cbc6f76db63ad66b334802af93b617738f4b52d02c6635b67e9eae4",
+      "bytes": 247
+    },
+    {
+      "path": "skills/project-brain-orchestrator/assets/codex/README.md",
+      "sha256": "80832a8ca5c9594c22faa3017da199446847e6422d5e56e9df05945553451284",
+      "bytes": 1202
+    },
+    {
+      "path": "skills/project-brain-orchestrator/assets/codex/compact-prompt.md",
+      "sha256": "ab6c7f5e1daab48bd72acc6a04f9991ec87627b50e0daebbd9798f2953bfd5d7",
+      "bytes": 1043
+    },
+    {
+      "path": "skills/project-brain-orchestrator/assets/codex/config.toml.example",
+      "sha256": "1c9d75a52bf526cda8c95b8f6ba87df52fd6adf444eeda0a6a11b0d0afdda6c8",
+      "bytes": 437
+    },
+    {
+      "path": "skills/project-brain-orchestrator/assets/hooks/README.md",
+      "sha256": "2860ef3442a2ab6e3a5a39c332934c6b43356959b0a5b7ec8b384f3fe90e341c",
+      "bytes": 923
+    },
+    {
+      "path": "skills/project-brain-orchestrator/assets/hooks/agent_hook.py",
+      "sha256": "bda6347a35117c3ad90f980438c670c42267388bfda2a20ad86ca61a9f1d7c0f",
+      "bytes": 4897
+    },
+    {
+      "path": "skills/project-brain-orchestrator/assets/icon.svg",
+      "sha256": "e9301497fa98ef56aaca7ede0857b9a18dc06c34040f0679c609a6bf49b1d38b",
+      "bytes": 420
+    },
+    {
+      "path": "skills/project-brain-orchestrator/assets/library/README.md",
+      "sha256": "e6acd54723d350a73467e6c039d10a32a196635b4cc6695550913ddab3ba1797",
+      "bytes": 955
+    },
+    {
+      "path": "skills/project-brain-orchestrator/assets/library/quota-profiles.json",
+      "sha256": "89f97dd239994e473eb5ea3a5eef05cfd3e7fc7fa2f489b92dc622d8fad71acc",
+      "bytes": 433
+    },
+    {
+      "path": "skills/project-brain-orchestrator/assets/memory/FEATURE-FOUNDRY-COMPASS.seed.json",
+      "sha256": "99e14af431df5128e138c968f8203c6560ea41e32eb29d32f7e8e97556dfa800",
+      "bytes": 61571
+    },
+    {
+      "path": "skills/project-brain-orchestrator/assets/memory/FEATURE-FOUNDRY-LIVING-ECOLOGY.seed.json",
+      "sha256": "dbd79ace93b6102981a46aa49ba31f0b854dbf1e9eea24a8bb289b2309cbad8e",
+      "bytes": 36514
+    },
+    {
+      "path": "skills/project-brain-orchestrator/assets/memory/FEATURE-FOUNDRY-OBJECT-INTELLIGENCE.seed.json",
+      "sha256": "933277b6c6b2950b1fcd7fc1d3c8dcf282f10dd213059d19a581f11602041453",
+      "bytes": 20582
+    },
+    {
+      "path": "skills/project-brain-orchestrator/assets/memory/FEATURE-FOUNDRY-SOURCE-HUBS.seed.json",
+      "sha256": "3b7c2285a257acd1c5541f06e6993d59392a4234c3fa3c6214462507bd25589c",
+      "bytes": 30279
+    },
+    {
+      "path": "skills/project-brain-orchestrator/assets/memory/PROJECT-CATALOG.template.json",
+      "sha256": "fa6a28aa310df22facc96c67e89f78f735377f800a937a1a68011e390e34ee2f",
+      "bytes": 147
+    },
+    {
+      "path": "skills/project-brain-orchestrator/assets/memory/PROJECT-COMPASS.template.json",
+      "sha256": "b90dfa50db201330a1f74e1d00b808aeb5625f80b0a545108e77102cd5f2afe9",
+      "bytes": 291
+    },
+    {
+      "path": "skills/project-brain-orchestrator/assets/memory/PROJECT-MEMORY.template.json",
+      "sha256": "2574d6ee1569659cde4ba675ecea2391c2a248c500a7d5f8c9b349887bcbf332",
+      "bytes": 243
+    },
+    {
+      "path": "skills/project-brain-orchestrator/assets/memory/README.md",
+      "sha256": "dfe6cbfaf16f57acb0639fdc64a135d39994e52e5071d7f912518cc37ed2617b",
+      "bytes": 6920
+    },
+    {
+      "path": "skills/project-brain-orchestrator/assets/memory/USER-PROJECTS-DATABASE.seed.md",
+      "sha256": "29952da3c83dc72ea43520a153c0ebfa003a46f8e1bd51c86a9afbd60c9609b2",
+      "bytes": 42057
+    },
+    {
+      "path": "skills/project-brain-orchestrator/policies/policy-catalog.json",
+      "sha256": "06ea2fd4e32de844e24c6760e66ae8e2a0d9174150b25ee888a1dc7382eff891",
+      "bytes": 115889
+    },
+    {
+      "path": "skills/project-brain-orchestrator/references/ARTIFACT-CREDENTIAL-HANDLING.md",
+      "sha256": "5996eaa2e89b09f585897e23749c311508e913be2b5ac0683762cb7fb3a24d42",
+      "bytes": 1487
+    },
+    {
+      "path": "skills/project-brain-orchestrator/references/ARTIFACT-PROVIDER-WORKFLOWS.md",
+      "sha256": "fe685dd2170b8cfc156faf973f08016f2d720c1b48023ead3c02e3b0411faeb3",
+      "bytes": 3265
+    },
+    {
+      "path": "skills/project-brain-orchestrator/references/ARTIFACT-PUBLISHING.md",
+      "sha256": "e9d5b2ab9a8ecaf7df24ad0c0fe26622759a25c25d29f50475b70007cd99ffe2",
+      "bytes": 7199
+    },
+    {
+      "path": "skills/project-brain-orchestrator/references/ARTIFACT-VERIFICATION-CONTRACT.md",
+      "sha256": "940d469b08534717f7423891da1fb87e2d9b8e6b12c91e15c0548866548cbb87",
+      "bytes": 2337
+    },
+    {
+      "path": "skills/project-brain-orchestrator/references/BUNDLE-README.md",
+      "sha256": "c311bac55320d893c1b1c1d678547aa5746ee9bd613db561bf9c006365135589",
+      "bytes": 3945
+    },
+    {
+      "path": "skills/project-brain-orchestrator/references/CORE.md",
+      "sha256": "a9c822b3acb4b7c9a4821540e3b387c19c4a45cbc17f1e1a4e8b3b94b9101322",
+      "bytes": 9556
+    },
+    {
+      "path": "skills/project-brain-orchestrator/references/DRIVE-PERSISTENCE.md",
+      "sha256": "9d960890d81395fd4ec98f384ef7510d8f2dcb98601992ec4b7aec3b470e1cdf",
+      "bytes": 7318
+    },
+    {
+      "path": "skills/project-brain-orchestrator/references/ENVIRONMENT.md",
+      "sha256": "40dc14f8cdb9191d0047260bab449010e0806be53bd2817afcce7547c05300ce",
+      "bytes": 2527
+    },
+    {
+      "path": "skills/project-brain-orchestrator/references/EXECUTION.md",
+      "sha256": "310899f9cabd05c8762e9a7c6289bf480e1fcc998379496c3527ff0ede94b6fc",
+      "bytes": 10574
+    },
+    {
+      "path": "skills/project-brain-orchestrator/references/FEATURE-FOUNDRY-ASSET-INTELLIGENCE.md",
+      "sha256": "37c26b7bcfbd252ec6deee1b3535bfb2a7841340340d361c756f5b09fb5e17aa",
+      "bytes": 16913
+    },
+    {
+      "path": "skills/project-brain-orchestrator/references/FEATURE-FOUNDRY-LIVING-ECOLOGY.md",
+      "sha256": "723da725aea42ffa0b2dac6eb88bc6c94ba6cd07b3d3173ac836783332d74303",
+      "bytes": 29341
+    },
+    {
+      "path": "skills/project-brain-orchestrator/references/FULL-CONTRACT.md",
+      "sha256": "275c7edb66abb0ccc9f90ce38abaf2bffd764a8e0d1b1cdf586110370cbd9b09",
+      "bytes": 30847
+    },
+    {
+      "path": "skills/project-brain-orchestrator/references/LEARNING.md",
+      "sha256": "1b36032e2a69ac9a82fa99fca0bfe43b636afca02a08cb10187e84ff0fc4a907",
+      "bytes": 3838
+    },
+    {
+      "path": "skills/project-brain-orchestrator/references/LIBRARY-STORAGE.md",
+      "sha256": "1019dff170f9b3c4b3c78140680b78bed202a7d419b31c63be537f1748142165",
+      "bytes": 6035
+    },
+    {
+      "path": "skills/project-brain-orchestrator/references/MEMORY-CONTINUITY.md",
+      "sha256": "d53820ee68c0afe121cda9c6e83693e125ffc3fd85423fc72e4e336637b4e882",
+      "bytes": 12844
+    },
+    {
+      "path": "skills/project-brain-orchestrator/references/PITFALLS-QUARANTINE.md",
+      "sha256": "4734524aff1303be593ad0f731ff645d57d889d10cd847b18149a0d31f21456b",
+      "bytes": 37
+    },
+    {
+      "path": "skills/project-brain-orchestrator/references/PITFALLS.md",
+      "sha256": "9a7d9500991153d2e36930f24f428341f0608a5fb325eb0398963ce3f35e5b78",
+      "bytes": 17495
+    },
+    {
+      "path": "skills/project-brain-orchestrator/references/PROJECT-CATALOG.md",
+      "sha256": "d99e8758b89dd747ec40439e35f27724f33b58f4aaa5a63ea62b12dcf4790187",
+      "bytes": 2778
+    },
+    {
+      "path": "skills/project-brain-orchestrator/references/PROJECT-COMPASS.md",
+      "sha256": "87f1214d1a6bcdcf590a4c4ecd89fb0715b092936c6551ec565a03fb4db79bb2",
+      "bytes": 4668
+    },
+    {
+      "path": "skills/project-brain-orchestrator/references/PROJECT-CONSTELLATION-BRAIN.md",
+      "sha256": "a9f5c54bf8e813a862e8e9777fc64507c854b1d3197cb82207bec96ce4be8527",
+      "bytes": 4840
+    },
+    {
+      "path": "skills/project-brain-orchestrator/references/RESEARCH.md",
+      "sha256": "2a5d19135771d3f69c328c50e94d5281ce3ade4a5e5b45af3f1f2419faddd66e",
+      "bytes": 6161
+    },
+    {
+      "path": "skills/project-brain-orchestrator/references/SAFETY-CLOSEOUT.md",
+      "sha256": "da4e646aa640993bbdae3701bc099b93b25842c2b1c65a7651a4034e7eed318c",
+      "bytes": 7962
+    },
+    {
+      "path": "skills/project-brain-orchestrator/references/SOURCE-MANIFEST.json",
+      "sha256": "e61a1006556f4e33bcd664605d3540f79096201ea4a019f027bd714024f9e4a9",
+      "bytes": 2255
+    },
+    {
+      "path": "skills/project-brain-orchestrator/references/UI-FUNCTIONALITY.md",
+      "sha256": "09f1e1c377a421b7d61db74f941816376661bd168e137752bd4254d75cb1acc0",
+      "bytes": 4869
+    },
+    {
+      "path": "skills/project-brain-orchestrator/references/VERIFICATION.md",
+      "sha256": "1849c0d77d9992cd667e79635694e921377bcb9ddb7e2c4d3bc4509ad86a32a1",
+      "bytes": 6300
+    },
+    {
+      "path": "skills/project-brain-orchestrator/references/approved-rules.json",
+      "sha256": "a3494e402d3695d235ed8549665e5b713be454acb5f35d547f42d79b406b6f95",
+      "bytes": 28661
+    },
+    {
+      "path": "skills/project-brain-orchestrator/references/candidates.json",
+      "sha256": "b32853e8e5ab9c4ad13e7ef05932303062c37e202ef840c2b579b2253c7e90c4",
+      "bytes": 43
+    },
+    {
+      "path": "skills/project-brain-orchestrator/references/incidents.jsonl",
+      "sha256": "869007c6fd7585401362f4d5ff80a97e7fdd173567ee495331ea2f27d7c4d564",
+      "bytes": 5113
+    },
+    {
+      "path": "skills/project-brain-orchestrator/references/pitfalls-approved.json",
+      "sha256": "a3494e402d3695d235ed8549665e5b713be454acb5f35d547f42d79b406b6f95",
+      "bytes": 28661
+    },
+    {
+      "path": "skills/project-brain-orchestrator/references/pitfalls-archive.json",
+      "sha256": "b32853e8e5ab9c4ad13e7ef05932303062c37e202ef840c2b579b2253c7e90c4",
+      "bytes": 43
+    },
+    {
+      "path": "skills/project-brain-orchestrator/references/pitfalls-quarantine.json",
+      "sha256": "b32853e8e5ab9c4ad13e7ef05932303062c37e202ef840c2b579b2253c7e90c4",
+      "bytes": 43
+    },
+    {
+      "path": "skills/project-brain-orchestrator/references/provider-config.example.json",
+      "sha256": "457bed187bb262311554c81b59d0a192e67f4c56b23b2c2700d5e2ef90c8d2f4",
+      "bytes": 425
+    },
+    {
+      "path": "skills/project-brain-orchestrator/references/retired-rules.json",
+      "sha256": "b32853e8e5ab9c4ad13e7ef05932303062c37e202ef840c2b579b2253c7e90c4",
+      "bytes": 43
+    },
+    {
+      "path": "skills/project-brain-orchestrator/scripts/RUN-TESTS.cmd",
+      "sha256": "f229c9c560391653fd60182d86b83129dcdb5e98005b9ea93958155013a4cbfb",
+      "bytes": 235
+    },
+    {
+      "path": "skills/project-brain-orchestrator/scripts/agents_doctor.py",
+      "sha256": "725cd8bbe07c008f0befed8d5c377febf4659f530d61fb789572d24b20734ea2",
+      "bytes": 11475
+    },
+    {
+      "path": "skills/project-brain-orchestrator/scripts/artifact-publisher.cmd",
+      "sha256": "4d17473e5c79086aa6ca7c5829467b238cb9c35f4f62a47710e156f092efb7fe",
+      "bytes": 341
+    },
+    {
+      "path": "skills/project-brain-orchestrator/scripts/artifact_publisher.py",
+      "sha256": "d3449e35ba6c53aa05222b059336383fd6ebdfee68475e1ac72aa2886e005815",
+      "bytes": 52723
+    },
+    {
+      "path": "skills/project-brain-orchestrator/scripts/asset_intelligence.py",
+      "sha256": "8f869d0546d3032a6077f11a147bae8774889f7a0b11abed60e8f54fa8c48dca",
+      "bytes": 8123
+    },
+    {
+      "path": "skills/project-brain-orchestrator/scripts/closeout_receipt.py",
+      "sha256": "338c13496846fe9b0a3584d71f61d3c9f4110eff9f8e745a1ba28d2ea133ab97",
+      "bytes": 4731
+    },
+    {
+      "path": "skills/project-brain-orchestrator/scripts/compile_policy.py",
+      "sha256": "59d32de3a37c1c98c9e2fb13547ead7ddca0a7663a2b970fe655841beef33cfb",
+      "bytes": 5261
+    },
+    {
+      "path": "skills/project-brain-orchestrator/scripts/export_bundle.py",
+      "sha256": "2ee2be97c9d602ac83941af9a17625826590844c5813e04834da24ab22cb5c21",
+      "bytes": 2813
+    },
+    {
+      "path": "skills/project-brain-orchestrator/scripts/install_agents_bundle.py",
+      "sha256": "4d0a1be102f6dc3297586a494758b3fe0c2d38431f2ff216a96dda6684ef1b76",
+      "bytes": 7468
+    },
+    {
+      "path": "skills/project-brain-orchestrator/scripts/library_manager.py",
+      "sha256": "cb4983e793bb34104bf942daa6742b431107595d839c5112c375e97d480e86af",
+      "bytes": 36739
+    },
+    {
+      "path": "skills/project-brain-orchestrator/scripts/living_ecology.py",
+      "sha256": "dea02a2d497a0e6840b7c2180d8d9f775fd1a2e05e8907ff18a1845394627200",
+      "bytes": 14906
+    },
+    {
+      "path": "skills/project-brain-orchestrator/scripts/manage_pitfalls.py",
+      "sha256": "30d2fef66d0cdbbdd138fd5045acb76ce3e9d6169827557199b635e6e5cc21a8",
+      "bytes": 10858
+    },
+    {
+      "path": "skills/project-brain-orchestrator/scripts/performance_audit.py",
+      "sha256": "2a7945663b7d084984f702c8e7a9c5ab415473e367f79ebf4eeee463ea149bff",
+      "bytes": 4217
+    },
+    {
+      "path": "skills/project-brain-orchestrator/scripts/project_catalog.py",
+      "sha256": "bec62d60f21674c5e2eadac32615280c7be1358c0212abaa82af1aec9f61e8b8",
+      "bytes": 35253
+    },
+    {
+      "path": "skills/project-brain-orchestrator/scripts/project_compass.py",
+      "sha256": "96e0c974ec8da3f6fa28ca5ab7f4db32b86b3a1f6fd2741018630bc7a1f22400",
+      "bytes": 7318
+    },
+    {
+      "path": "skills/project-brain-orchestrator/scripts/project_memory.py",
+      "sha256": "1730620a80032d346b07eabbc93130ffd7f8587e6d956a3865b7ece88cd68855",
+      "bytes": 42315
+    },
+    {
+      "path": "skills/project-brain-orchestrator/scripts/project_probe.py",
+      "sha256": "feb507bea7e78b37644251fa6bd79bf36417b9f69ca460a499c001f80452f3f4",
+      "bytes": 4174
+    },
+    {
+      "path": "skills/project-brain-orchestrator/scripts/research_memory.py",
+      "sha256": "a7fc128dec5e05a477ef589d20d0431daf23768d47f0a59190edefd32af00cfb",
+      "bytes": 10974
+    },
+    {
+      "path": "skills/project-brain-orchestrator/scripts/sync_agents_sources.py",
+      "sha256": "4fa081ed7eaaee32dc182c9001ff8a7f012a40180b35e9f6ade91b39c129dcd0",
+      "bytes": 946
+    },
+    {
+      "path": "skills/project-brain-orchestrator/scripts/task_state.py",
+      "sha256": "365794e8afae904bcc5bfd132fcadb750f9c43a9dfdbf7cb4dd5ac4344335683",
+      "bytes": 3877
+    },
+    {
+      "path": "skills/project-brain-orchestrator/scripts/test_artifact_publisher.py",
+      "sha256": "317848326692061d1a16b8bd1edbe44d9ff03e44b332e42e875ee28a9bfdcaf5",
+      "bytes": 7009
+    },
+    {
+      "path": "skills/project-brain-orchestrator/scripts/ui_audit.py",
+      "sha256": "c96600986bbd9b39c35105f950302b1b933d10e334a609e72188ae4e487c1c55",
+      "bytes": 5316
+    },
+    {
+      "path": "skills/project-brain-orchestrator/tests/fixtures/pitfalls-approved.json",
+      "sha256": "a7cefdb3c53de7c7a8c80c75d02d2e57196b59f67fd7a672e45ca71b9729ec49",
+      "bytes": 225
+    },
+    {
+      "path": "skills/project-brain-orchestrator/tests/test_asset_intelligence.py",
+      "sha256": "26cbcc1c7f86f1301de04f8fa3b5829c7a6244f7ce17be242e21368db9139ce9",
+      "bytes": 2817
+    },
+    {
+      "path": "skills/project-brain-orchestrator/tests/test_drive_persistence_policy.py",
+      "sha256": "9f7917bf264d40cbaace0a0e6c1e3d53bd93ea09db9f4d3083e515e2f42aaf77",
+      "bytes": 1922
+    },
+    {
+      "path": "skills/project-brain-orchestrator/tests/test_living_ecology.py",
+      "sha256": "cd22a971272568a076b0cf7d5013ff4744da93250c015f674916bbd5c961cee7",
+      "bytes": 4728
+    },
+    {
+      "path": "skills/project-brain-orchestrator/tests/test_performance_contract.py",
+      "sha256": "b96014159944445263522f56f4aabdc986790c65e9a2cf1a494a1240cc4deb0b",
+      "bytes": 800
+    },
+    {
+      "path": "skills/project-brain-orchestrator/tests/test_project_compass.py",
+      "sha256": "a7c1f93e619187722c2684b3700ce28e988d1501a585d154fe5280235cdbd233",
+      "bytes": 5234
+    },
+    {
+      "path": "skills/project-brain-orchestrator/tests/test_tools.py",
+      "sha256": "19edfed54c0b491c82eb7397e214111d8f59957d7c4ca4b46e3e5a47e84e53c3",
+      "bytes": 20558
+    },
+    {
+      "path": "skills/project-visual-qa-showcase/SKILL.md",
+      "sha256": "5ddb53488254db2cf868eed8ddb15446d453a428d2bb66fc1165daafc8ab457b",
+      "bytes": 15963
+    },
+    {
+      "path": "skills/project-visual-qa-showcase/agents/openai.yaml",
+      "sha256": "7cad2707385fb7555153056295df2385783a968c6c823162e57307bed4390632",
+      "bytes": 957
+    },
+    {
+      "path": "skills/project-visual-qa-showcase/assets/icon.svg",
+      "sha256": "e9301497fa98ef56aaca7ede0857b9a18dc06c34040f0679c609a6bf49b1d38b",
+      "bytes": 420
+    },
+    {
+      "path": "skills/project-visual-qa-showcase/references/cross-format-model-port.md",
+      "sha256": "c701125b025b2156c7418852afc2d0f1e504e5d9cea60b58766906c0cf44a68f",
+      "bytes": 2831
+    },
+    {
+      "path": "skills/project-visual-qa-showcase/references/minecraft-rest-pose-ik-grounding.md",
+      "sha256": "ddcb2c14d6f230c6338b501b1ec856f07d7b1f69e9fa399a52379f6c4a3ad0ce",
+      "bytes": 6158
+    },
+    {
+      "path": "skills/project-visual-qa-showcase/references/quality-gates.md",
+      "sha256": "521359ddcc0dfe2120a849ccd38eca71f49df3d179fe2ded82cfc38f4a0e6884",
+      "bytes": 4340
+    },
+    {
+      "path": "skills/project-visual-qa-showcase/references/standalone-source-pack-porting.md",
+      "sha256": "807aa48073305da7840492e55e2b26a6ad7a46f2ea1531fafc031dbd72d24797",
+      "bytes": 5319
+    },
+    {
+      "path": "skills/project-visual-qa-showcase/scripts/bundle_showcase.py",
+      "sha256": "c2a79058803f513b5c669439dbea3a43644d1fcad5d559d50aeee4e687e1fb14",
+      "bytes": 1911
+    },
+    {
+      "path": "skills/revenue-operator/SKILL.md",
+      "sha256": "983aeb2cc56aae5878499fb59f4b7d106afc45683c6b51cbe6c7cd06bf995a99",
+      "bytes": 13121
+    },
+    {
+      "path": "skills/revenue-operator/agents/openai.yaml",
+      "sha256": "61b6a3fae4aae95ce6aba1aa56153dbc545986a767f795123ae6baee3ca81cdc",
+      "bytes": 275
+    },
+    {
+      "path": "skills/revenue-operator/assets/icon.svg",
+      "sha256": "72343cc4b66256ae7de8474c7cad14e711ad84a94c473732a44f96a56124c42d",
+      "bytes": 786
+    },
+    {
+      "path": "skills/revenue-operator/references/app-integration.md",
+      "sha256": "4541794553ba6d35c00bcf6c31d44f9d72bfde6a64982bb84dbf064b440d07e9",
+      "bytes": 648
+    },
+    {
+      "path": "skills/revenue-operator/references/pipeline-schema.md",
+      "sha256": "6b730fc41665aaa8d6fbf648633b4a4026a88d1c47e4f7337e4dcc71760431cf",
+      "bytes": 1968
+    },
+    {
+      "path": "skills/revenue-operator/references/strategy.md",
+      "sha256": "dc1213f1c9fefee7b4f87fa0474e85c055270a87bda532b3d44c1461120bcf85",
+      "bytes": 5650
+    },
+    {
+      "path": "skills/revenue-operator/scripts/score_opportunities.py",
+      "sha256": "547abf5e8414365b2859fed837987eb4019f3c981aa702c3a00e024cb56dd8e2",
+      "bytes": 3101
+    },
+    {
+      "path": "skills/ultimate-agent-governance/SKILL.md",
+      "sha256": "6cd52b6954fc2d835a81051cd30a9976ed6ab7f220498581a8c039b740a15985",
+      "bytes": 22558
+    },
+    {
+      "path": "skills/ultimate-agent-governance/agents/openai.yaml",
+      "sha256": "ed9e1ae9eb1b8b730db481acb113637c965a5d695e5fe5ad2e3c5116b5fb7ecc",
+      "bytes": 309
+    },
+    {
+      "path": "skills/ultimate-agent-governance/assets/icon.svg",
+      "sha256": "8936b24f674a1250d999e2c2b5901374fb4240426f32bd1ae340c352a90d617d",
+      "bytes": 1738
+    },
+    {
+      "path": "skills/ultimate-agent-governance/assets/site-adapter-manifest.schema.json",
+      "sha256": "90072b206422173e9ed2f3697cf49fe62f7e5842b381b3c5841d333cbb1a9918",
+      "bytes": 1736
+    },
+    {
+      "path": "skills/ultimate-agent-governance/evals/evals.json",
+      "sha256": "06051ae09e8217c01af8b20b437331de0e06f0df3ad08ca2a2c42c49edaedd94",
+      "bytes": 31329
+    },
+    {
+      "path": "skills/ultimate-agent-governance/references/app-runtime-performance.md",
+      "sha256": "8f35831376aca49823460ff7c53d3792be8a4e00a79f7bee7da803d91580d64a",
+      "bytes": 8190
+    },
+    {
+      "path": "skills/ultimate-agent-governance/references/challenger-integration.md",
+      "sha256": "0a16f32457f87d67e20ff9a27a83ea1c96bdce59718071aa1e0bcd4f1205d690",
+      "bytes": 5894
+    },
+    {
+      "path": "skills/ultimate-agent-governance/references/continuous-modernization.md",
+      "sha256": "3af885c598287d45b3208f30fffec4faf51fb67c50a79f2019b8862a5f0381ff",
+      "bytes": 20055
+    },
+    {
+      "path": "skills/ultimate-agent-governance/references/cross-agent-adapters.md",
+      "sha256": "3a1106774924939d3a022f06aaf9ffe9b5c048e2d734a4e29027f2d3ebba6a50",
+      "bytes": 1760
+    },
+    {
+      "path": "skills/ultimate-agent-governance/references/evaluation.md",
+      "sha256": "340b38c253f260335e438439f4f059b11addc233663fdb7b54ea404ab633fa3c",
+      "bytes": 2184
+    },
+    {
+      "path": "skills/ultimate-agent-governance/references/failure-intelligence.md",
+      "sha256": "d0d2212743b8f1d6043dd2cb605f915b5f5e83a16b1b14e92ab3c55c8d35accf",
+      "bytes": 8092
+    },
+    {
+      "path": "skills/ultimate-agent-governance/references/invariant-authoring.md",
+      "sha256": "0aa8d74282dfe5e9da0a7bb538cc3024c5b9907388498f7acfdd708e26fb9e28",
+      "bytes": 1050
+    },
+    {
+      "path": "skills/ultimate-agent-governance/references/live-chat-execution.md",
+      "sha256": "be68c7b7372c19f4170c62967c5391183130165d1fd8097eb025f1d4ed077c72",
+      "bytes": 16813
+    },
+    {
+      "path": "skills/ultimate-agent-governance/references/research-basis.md",
+      "sha256": "bfad4ab55646d830172b949f7ca64efc12fbf2213c9caf1ae6da1b16e3edf40e",
+      "bytes": 2305
+    },
+    {
+      "path": "skills/ultimate-agent-governance/references/shared-execution-constitution.md",
+      "sha256": "63f0ab42e3556f134067bd59db634629d1202d60022f0928ccc1517333682e43",
+      "bytes": 4719
+    },
+    {
+      "path": "skills/ultimate-agent-governance/references/site-adapter-platform.md",
+      "sha256": "6c0c11f46dce0aca1710f4a200606a8c8c14e539253ce306346cdf02c8d01720",
+      "bytes": 3262
+    },
+    {
+      "path": "skills/ultimate-agent-governance/references/workflow-selection.md",
+      "sha256": "7328f099ef6b52ca7d88b5608788057f459171413ae8787b1493d8038228b110",
+      "bytes": 1860
+    },
+    {
+      "path": "skills/ultimate-agent-governance/scripts/audit_agent_governance.py",
+      "sha256": "fc058120be849afaa5fca0f232f3c560843db06469534a7f2c4a7ef4a0d80b43",
+      "bytes": 20269
+    },
+    {
+      "path": "skills/ultimate-agent-governance/scripts/audit_cross_skill_constitution.py",
+      "sha256": "0e87fa48d6e6824f791a60c8fa374e90ea539608561189d5cd8d7782578a1228",
+      "bytes": 2846
+    },
+    {
+      "path": "skills/ultimate-agent-governance/scripts/challenger_gate.py",
+      "sha256": "6d244714ffef164b40d24d0ff58376f3aa7cdbd071268cbea5c76b311007ea4a",
+      "bytes": 2784
+    },
+    {
+      "path": "skills/ultimate-agent-governance/scripts/completeness_gate.py",
+      "sha256": "60d80277ab7ae82f44455d103e954b525107c0610b80c175ae870d11cc4b549a",
+      "bytes": 4985
+    },
+    {
+      "path": "skills/ultimate-agent-governance/scripts/completion_receipt.py",
+      "sha256": "6f47a00496b7c0aa123b16abb790d2d2d98cb5d458e10cd6308c72c78907df63",
+      "bytes": 8991
+    },
+    {
+      "path": "skills/ultimate-agent-governance/scripts/failure_incident.py",
+      "sha256": "748f06d1ad2470de4f985a3dbf60a9d19b94c592dd52555f233ff591868f6af2",
+      "bytes": 3773
+    },
+    {
+      "path": "skills/ultimate-agent-governance/scripts/install_execution_constitution.py",
+      "sha256": "15fe403133f636b15def66afe4c4db7ee97ed4e6a662d54e5a77c0f413f6eca5",
+      "bytes": 10379
+    },
+    {
+      "path": "skills/ultimate-agent-governance/scripts/invariant_harness.py",
+      "sha256": "589f92f9478f1deab3c490cc008a3a8fc71428df6a165d16b8af26646a9a510a",
+      "bytes": 3412
+    },
+    {
+      "path": "skills/ultimate-agent-governance/scripts/performance_gate.py",
+      "sha256": "90798f4b94a49ba024c2290b8b9a0f39863c9920d55d12e25c7c45c4ffc3db1b",
+      "bytes": 8631
+    },
+    {
+      "path": "skills/ultimate-agent-governance/scripts/site_adapter_manifest_check.py",
+      "sha256": "7f067965d85cac0ac1886c60bf8513b71396f79b9d9d48c4bb9158c53cbcda75",
+      "bytes": 3646
+    },
+    {
+      "path": "skills/ultimate-agent-governance/scripts/upgrade_gate.py",
+      "sha256": "aab8f1419822cb396ed8b1de65678451232bfb0a08a7a834b38a8f80c5d3b159",
+      "bytes": 6818
+    },
+    {
+      "path": "skills/zero-loss-chat-accelerator/SKILL.md",
+      "sha256": "f4a1e31ee992fe0f2d7934ebee0a60094aec3dc9625f5b6a51e38d7ee1890d9d",
+      "bytes": 18640
+    },
+    {
+      "path": "skills/zero-loss-chat-accelerator/agents/openai.yaml",
+      "sha256": "6017194c40c60c01810108a6658d416664d6d769d39774274227dc8e3a5778fa",
+      "bytes": 314
+    },
+    {
+      "path": "skills/zero-loss-chat-accelerator/assets/icon.svg",
+      "sha256": "72343cc4b66256ae7de8474c7cad14e711ad84a94c473732a44f96a56124c42d",
+      "bytes": 786
+    },
+    {
+      "path": "skills/zero-loss-chat-accelerator/references/adaptive-routing.md",
+      "sha256": "d5464dd20455db46b872db1b055d82f956235d10e15f507fd632a922c139b3ec",
+      "bytes": 3639
+    },
+    {
+      "path": "skills/zero-loss-chat-accelerator/references/benchmark.md",
+      "sha256": "e853e9941bc800a46b906b581bfb3fc3bd8e5e9f5feeadebfee43a3f457fdb47",
+      "bytes": 5866
+    },
+    {
+      "path": "skills/zero-loss-chat-accelerator/references/connector-project-fastpath.md",
+      "sha256": "338809cace8217cb951dfedfb8dd10d5f7dd9d9aff4a9dd803d14fdb23b50558",
+      "bytes": 11933
+    },
+    {
+      "path": "skills/zero-loss-chat-accelerator/references/global-memory-seed.md",
+      "sha256": "b485690f5eba15451a2f10cc96307828a1f95302960b325e20bc70ec991ee3d0",
+      "bytes": 1160
+    },
+    {
+      "path": "skills/zero-loss-chat-accelerator/references/research-fastpath.md",
+      "sha256": "dfd9525909fab3e04046d438c867b77627a4b29ce3c340f70a81f96eeb6110e5",
+      "bytes": 2091
+    },
+    {
+      "path": "skills/zero-loss-chat-accelerator/references/stall-brain.md",
+      "sha256": "c5108f365f0ba6cf16a6ba02e5a7815e562e4a2657ed0930eef2d775df424108",
+      "bytes": 14756
+    },
+    {
+      "path": "skills/zero-loss-chat-accelerator/references/stall-patterns.json",
+      "sha256": "1447c23c18d04786af3f17ed582feee6cf995e8fd53476e91587b11c81912988",
+      "bytes": 19540
+    },
+    {
+      "path": "skills/zero-loss-chat-accelerator/references/watchdog.md",
+      "sha256": "7db933c107c87fcaf61e8e2c0f87ebd3056f0f94b4f7bf010c1c1b89c84c4cd8",
+      "bytes": 4430
+    },
+    {
+      "path": "skills/zero-loss-chat-accelerator/scripts/audit_skill_composition.py",
+      "sha256": "8997258869abe7a2746e7fbc00411bd74db5d702f9d234ca4a95e60aad40166d",
+      "bytes": 2445
+    },
+    {
+      "path": "skills/zero-loss-chat-accelerator/scripts/audit_skill_stalls.py",
+      "sha256": "9839d750b597e5345e33e87e904dbadc76314afa4c5c61fb53ae8ce34ab0b222",
+      "bytes": 8771
+    },
+    {
+      "path": "skills/zero-loss-chat-accelerator/scripts/audit_trace.py",
+      "sha256": "cb9fe47f71201eb96b4a229a2be848d3e148bbbd6efc07e3231d067e5e5d536f",
+      "bytes": 31810
+    },
+    {
+      "path": "skills/zero-loss-chat-accelerator/scripts/compare_traces.py",
+      "sha256": "c400d12cea7e1b6c27a0e1952040c22fef45cd7c9b517161b29f1f042dde1488",
+      "bytes": 7368
+    },
+    {
+      "path": "skills/zero-loss-chat-accelerator/scripts/plan_waves.py",
+      "sha256": "fdb680ce2eb7ebe5ee859f30d71bd778bdaeff5e9867f7602af79694edac80d1",
+      "bytes": 12691
+    },
+    {
+      "path": "skills/zero-loss-chat-accelerator/scripts/self_test.py",
+      "sha256": "90de0545a7e84cb209447349f5c57f9b00ae42667f42485ad7d4f6468652d757",
+      "bytes": 24205
+    },
+    {
+      "path": "skills/zero-loss-chat-accelerator/scripts/stall_brain.py",
+      "sha256": "0fe2001e7e66abe19e36c1c58993eab31d34f73b380286addf56040e32c4cdd3",
+      "bytes": 6042
+    },
+    {
+      "path": "skills/zero-loss-chat-accelerator/scripts/watchdog.py",
+      "sha256": "77a7bc1f7d59ac12a952b617692effc16cd26d449ca8bdce9c0a3aa7ed3a702c",
+      "bytes": 11938
+    },
+    {
+      "path": "templates/AGENTS.repository.md",
+      "sha256": "15c80d7805f48075fa76fa4d0c5a0394e107e5f5ad1c1ef862d6fbb5a1a9a258",
+      "bytes": 3260
+    },
+    {
+      "path": "templates/README.md",
+      "sha256": "79af6a7ed7ed19e4ddc7472fe86b2c2c3aff951b23051c6c06e5c6b2098e0450",
+      "bytes": 282
+    },
+    {
+      "path": "tests/test_foundry_sync.py",
+      "sha256": "b55a1be6e9882d6f715e3e57224859b2ddd14ae86b041f21d1499bd68e6b0eb3",
+      "bytes": 2350
+    },
+    {
+      "path": "tests/test_packaging.py",
+      "sha256": "d154c74ca0ce0a774072e5cb3f1200239e7d2527f05c2c0cfe2b48b8d281754e",
+      "bytes": 1291
+    },
+    {
+      "path": "tests/test_performance_gate.py",
+      "sha256": "c799fd18911db3c031264e60b3a36daab3af67c1211602fc939fa8b0ad63b245",
+      "bytes": 4163
+    },
+    {
+      "path": "tests/test_project_workflow_docs.py",
+      "sha256": "0dc62eb05a423e739b1729420290d5e5ba8430b0dc5d19d1fd08cae6e6e0ffe4",
+      "bytes": 1244
+    },
+    {
+      "path": "tests/test_repository_governance.py",
+      "sha256": "9d28a96ccf1cee84fc6b4e154c1d2774c85fd5a7bb43374c2cafa2e311bdbae9",
+      "bytes": 10028
+    },
+    {
+      "path": "tools/README.md",
+      "sha256": "9e580ea9bf2419de9fcfc8c8d2e0643037951779c81f70c98a7c82d26255c1ac",
+      "bytes": 1133
+    },
+    {
+      "path": "tools/check_workflow_dependencies.py",
+      "sha256": "dc9033b1fb90f14eff4735b4202db673d2e2f67af42a75e6066b23b92b754529",
+      "bytes": 1292
+    },
+    {
+      "path": "tools/foundry_sync.py",
+      "sha256": "1349a7deb4707ddbfb60dd24aaaaf82570811f1c7ffccf11d69b338994ad3f8a",
+      "bytes": 10208
+    },
+    {
+      "path": "tools/normalize_skill_mirror.py",
+      "sha256": "b658ffcc46aa62ae1d866db178e002f9520beeae1dbf7cd721b5fb583928595f",
+      "bytes": 7213
+    },
+    {
+      "path": "tools/package_skills.py",
+      "sha256": "3b7c626fd40a9837b0a7920199ad19d1f439e7f2894f06fba2767a9a5ab4c196",
+      "bytes": 3401
+    },
+    {
+      "path": "tools/repository_governance.py",
+      "sha256": "e0b9f7043c7ec9a090216676116cfcc72ac87412dc35049e7373fc0779fb44cf",
+      "bytes": 10547
+    },
+    {
+      "path": "tools/source_manifest.py",
+      "sha256": "92ffd0c4e400256745fe16a322e32aa5af78ce88ae8120d9360068d81b906013",
+      "bytes": 2992
+    },
+    {
+      "path": "tools/validate_skill_tree.py",
+      "sha256": "fae5866e87e604e57c1ce83c5552f72c46f6ba4ba60f898d98920fd8a84d2875",
+      "bytes": 3054
+    },
+    {
+      "path": "wiki/AGENTS-md-and-Invariants.md",
+      "sha256": "8499a8da91c20da8fd27105e56167e03729935cb6e406a6149929355fb30ee1d",
+      "bytes": 2887
+    },
+    {
+      "path": "wiki/Architecture.md",
+      "sha256": "cd89536d51f24acf11c0507b399809cef20413d827a3614b7066e556d95a8a18",
+      "bytes": 1080
+    },
+    {
+      "path": "wiki/Authorization-and-Runtime-Control.md",
+      "sha256": "7ef9f798626d4160da99a272334827c6197daa9c2ff3de5688005f7a1b1e5fee",
+      "bytes": 1016
+    },
+    {
+      "path": "wiki/Building-a-Skill.md",
+      "sha256": "cbe11289b2f95209607a559dc2f66ba80d4665120399eb5ee2594160034bcbae",
+      "bytes": 903
+    },
+    {
+      "path": "wiki/Challenger-and-Integration-Standard.md",
+      "sha256": "5110a1217031eeb170b30b3d9bbca06ae03b935f40e9b057d29e236d033426d4",
+      "bytes": 1537
+    },
+    {
+      "path": "wiki/Competing-Approaches.md",
+      "sha256": "7cddcbcf276ecbc3769bbd22630f752f8b3121b3d0c5966573389ca2a259b327",
+      "bytes": 558
+    },
+    {
+      "path": "wiki/Cross-Agent-Compatibility.md",
+      "sha256": "11f63f7a0fed10bce3266f2f88c2ac123b93d00c10c144156aa86ea568eb1e24",
+      "bytes": 638
+    },
+    {
+      "path": "wiki/Distribution-and-Sync.md",
+      "sha256": "92120c690a6d34580e02492f086248cad5c62e40ec5865c292611fb4e5e79d59",
+      "bytes": 1029
+    },
+    {
+      "path": "wiki/Durable-Execution.md",
+      "sha256": "9702ad2464c180c761387744ba50c924cce2cbde6a8575474781af0633542372",
+      "bytes": 1442
+    },
+    {
+      "path": "wiki/Evaluation-and-Observability.md",
+      "sha256": "7a54fca02da15c21389eeecebf218303945b1407dd0cc21396e1b97371dcfa56",
+      "bytes": 1154
+    },
+    {
+      "path": "wiki/Failure-Intelligence.md",
+      "sha256": "d00d318931b45711959d350562eb88a33a390a80dd096000435a4e6b61fa3d81",
+      "bytes": 877
+    },
+    {
+      "path": "wiki/Getting-Started.md",
+      "sha256": "8871b1ac5724395882bd0c6cced0f0eb59172708736e5d6daa68f782b5b1e9bb",
+      "bytes": 1445
+    },
+    {
+      "path": "wiki/Home.md",
+      "sha256": "6073a6d6a6000b18dd84fafcd069d7bbda5289ff3a7bbb79f5205dbe8d08391c",
+      "bytes": 4631
+    },
+    {
+      "path": "wiki/Interoperability-Protocols.md",
+      "sha256": "1a58009d69dd15219d4f7306d49daa4fe6ee9cbf5a626007aed9e2c1ea3f0443",
+      "bytes": 1157
+    },
+    {
+      "path": "wiki/Performance-and-Runtime-Proof.md",
+      "sha256": "2e9658db8cc17e33e47f4f3a765f3503606c9dd11f763bbd4f3b7018874162a5",
+      "bytes": 2102
+    },
+    {
+      "path": "wiki/Project-Constellation-Integration.md",
+      "sha256": "73db890f90018dd809362dd2e0022d5505ab8e964431305ba7ace8b04895c534",
+      "bytes": 735
+    },
+    {
+      "path": "wiki/Remote-Continuity-and-Wiki-Sync.md",
+      "sha256": "701ce02b29f147a7e51b282e6046d1410238839b52e2b423cecb7b0609449a9b",
+      "bytes": 4101
+    },
+    {
+      "path": "wiki/Repository-Governance-Sync.md",
+      "sha256": "f8dcdde486c6d047f45d947ce92679c74de8d8c4605d082757ce573be6db5fe0",
+      "bytes": 726
+    },
+    {
+      "path": "wiki/Roadmap.md",
+      "sha256": "301225f8ad1571ee72a7e293e83f71bee9d00d6e2a865e7f592b87b6ebefbf85",
+      "bytes": 3696
+    },
+    {
+      "path": "wiki/Skills-Catalog.md",
+      "sha256": "b318216bb40661488353212442a603e7a16c4a1e7da6fe795d4d9e2ab8fc50fb",
+      "bytes": 1943
+    },
+    {
+      "path": "wiki/Trust-and-Supply-Chain.md",
+      "sha256": "30fe25297c51cb282dc14106e8c8323fb6dcf251d780120dea82e334be2d5c6a",
+      "bytes": 1120
+    },
+    {
+      "path": "wiki/Ultimate-Agent-Governance.md",
+      "sha256": "1afd63ef2cfc1521bdd1c0aa29f5f13869aa1186fcff21db79427222f695f513",
+      "bytes": 2752
+    },
+    {
+      "path": "wiki/Wiki-Publishing.md",
+      "sha256": "a225499030eed0dcf5bd202874a044964b1b32d89b3e4df0f0c4c4b6630bbb08",
+      "bytes": 1792
+    },
+    {
+      "path": "wiki/Zero-Loss-Execution.md",
+      "sha256": "123412c3eb3fab2857426cad244242e0118994c388368f01937b9d77c7d0c948",
+      "bytes": 1407
+    },
+    {
+      "path": "wiki/_Footer.md",
+      "sha256": "73c0d735b164da2a5e30def787ed44a7175a6e1af3c3f7d45a335fae35e7ccbc",
+      "bytes": 188
+    },
+    {
+      "path": "wiki/_Sidebar.md",
+      "sha256": "5e0c8b77befddf8da2e1ee51725a5bf29ce7587044dbf59384674d46ec17d3e0",
+      "bytes": 1266
+    }
+  ]
+}
