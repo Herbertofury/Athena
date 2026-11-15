@@ -190,9 +190,12 @@ class Handler(BaseHTTPRequestHandler):
     def do_POST(self):
         if self.path not in ('/__native/backup','/__native/restore','/__native/assign-soundtrack','/__native/legacy-import'):return self.reject_post(404)
         if not self.valid(api=True,mutating=True):return self.reject_post(403)
-        if self.headers.get('Content-Type')!='application/json' or self.headers.get('Transfer-Encoding'):return self.reject_post(415)
+        # Reject duplicate/empty framing headers before body parsing or CLI dispatch.
+        if self.headers.get_all('Content-Type')!=['application/json'] or self.headers.get_all('Transfer-Encoding'):return self.reject_post(415)
         lengths=self.headers.get_all('Content-Length') or []
-        if len(lengths)!=1 or not lengths[0].isdigit():return self.reject_post(411)
+        # HTTP lengths are bounded ASCII decimals; str.isdigit also accepts characters
+        # (for example superscripts) that int() cannot parse.
+        if len(lengths)!=1 or not re.fullmatch(r'[0-9]{1,7}',lengths[0]):return self.reject_post(411)
         length=int(lengths[0])
         if length>MAX_BODY:return self.reject_post(413)
         try:
