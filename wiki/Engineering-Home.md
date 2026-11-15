@@ -39,6 +39,8 @@ A research home for building apps, mods, programs and game tooling. **Reviewed f
 
 **Evidence ladder:** primary documented → hypothesis → measured → accepted in a named target. Rejected and superseded approaches stay documented. The dated primary-source register grows with each reviewed investigation; it is not an exhaustive review of every field.
 
+[Developer and AI-agent cleanup catalog](https://github.com/Herbertofury/Athena/wiki/Engineering-Developer-Cleanup-and-Agent-Hygiene): 66 projects ranked by stars with official download links.
+
 ## Tools you can use
 
 - [Worker-sweep screening tool](https://github.com/Herbertofury/Athena/blob/main/engineering/docs/worker-sweep-tool.md): compare 4/8/16/32/64 with output-equivalence and explicit resource/UX budgets; no automatic default changes.
@@ -71,3 +73,5 @@ The first reviewed wiki pages are available: [2026 extraction methods](https://g
 ## Preserved draft correctness reconciliation
 
 The [November 14 reconciliation](https://github.com/Herbertofury/Athena/tree/main/migration/engineering-atlas/draft-reconciliation-2026-11-14) independently restores exact Atlas draft #5–#13 heads and verifies their saved descriptions. The current port integrates stable-release admission into Athena's local Rust engine and whole-token srcset filtering into its offline extractor. Local verification: 153 Rust library tests, 366 Python tests, 105,987 generated tokenizer oracle inputs, and strict Clippy. This does not certify native browser/provider acceptance, promote the other archived drafts, or authorize source deletion. Remaining gallery/Overview/cancellation and retirement gates are explicit in that receipt.
+
+Native Lab continuation ports the preserved cancellation/deadline and malformed-Overview guards, with shared archive logic propagated to Audio. [Current UI receipt](https://github.com/Herbertofury/Athena/blob/main/migration/engineering-atlas/draft-reconciliation-2026-11-14/ui-port.md) separates DOM regressions from pending fresh browser/served acceptance. Gallery comparison remains an explicit open reconciliation item.

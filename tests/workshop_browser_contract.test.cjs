@@ -5,10 +5,10 @@ const test=require('node:test'),assert=require('node:assert/strict');
 const fs=require('node:fs'),os=require('node:os'),path=require('node:path'),Module=require('node:module');
 const runnerPath=path.resolve(__dirname,'../scripts/test_workshops_browser.cjs');
 const {WORKSHOP_IDS,REQUIRED_CHECKS,CSP,sha256,createReport,validateReceipt,resolveAsset,workshopRouteReady,waitForWorkshopRoute,run}=require(runnerPath);
-function fixture(){return {...createReport('/fixture/dist','/fixture/report'),result:'pass',browser:'Chromium fixture, NOT a browser run',checks:REQUIRED_CHECKS.map(name=>({name,result:'pass'})),files:['index.html','app.js','catalog.js','core.js','workspace-host.js','styles.css'].map(name=>({name,sha256:'a'.repeat(64),loadedSHA256:'a'.repeat(64)})),screenshots:WORKSHOP_IDS.flatMap(id=>['desktop','mobile'].map(viewport=>({name:`${id}-${viewport}.png`,sha256:'b'.repeat(64)}))),totalLessons:90,addedLessons:42,workshopIds:[...WORKSHOP_IDS],openedLessonIds:Array.from({length:42},(_,i)=>`fixture-lesson-${i}`),supplementalChecksExercised:84,downloads:WORKSHOP_IDS.map(id=>({id,status:200,mime:'application/zip',header:[80,75,3,4],sha256:'c'.repeat(64),size:101}))};}
+function fixture(){return {...createReport('/fixture/dist','/fixture/report'),result:'pass',browser:'Chromium fixture, NOT a browser run',checks:REQUIRED_CHECKS.map(name=>({name,result:'pass'})),files:['index.html','app.js','catalog.js','core.js','workspace-host.js','styles.css'].map(name=>({name,sha256:'a'.repeat(64),loadedSHA256:'a'.repeat(64)})),screenshots:WORKSHOP_IDS.flatMap(id=>['desktop','mobile'].map(viewport=>({name:`${id}-${viewport}.png`,sha256:'b'.repeat(64)}))),totalLessons:98,addedLessons:50,workshopIds:[...WORKSHOP_IDS],openedLessonIds:Array.from({length:50},(_,i)=>`fixture-lesson-${i}`),supplementalChecksExercised:100,downloads:WORKSHOP_IDS.map(id=>({id,status:200,mime:'application/zip',header:[80,75,3,4],sha256:'c'.repeat(64),size:101}))};}
 test('importing the runner is side-effect-free and has no eager Playwright dependency',()=>{
  assert.equal(typeof run,'function');assert.equal(Object.keys(require.cache).some(name=>/[\\/]playwright[\\/]/.test(name)),false);
- assert.equal(WORKSHOP_IDS.length,5);assert.ok(Object.isFrozen(WORKSHOP_IDS));assert.ok(Object.isFrozen(REQUIRED_CHECKS));
+ assert.equal(WORKSHOP_IDS.length,6);assert.ok(Object.isFrozen(WORKSHOP_IDS));assert.ok(Object.isFrozen(REQUIRED_CHECKS));
  const report=createReport('/fixture','/receipt');assert.equal(report.result,'running');assert.equal(report.browser,null);assert.deepEqual(report.checks,[]);assert.throws(()=>validateReceipt(report));
 });
 test('complete synthetic receipt validates; omission or failure of any required check cannot pass',()=>{
@@ -76,5 +76,5 @@ test('real directory click and history transitions use rendered readiness, not U
  assert.ok(source.includes(`await page.goForward();await waitForWorkshopRoute(page,'#workshops/'+WORKSHOP_IDS[0]);`));
  assert.ok(source.includes(`await page.locator(\`[data-workshop="\${WORKSHOP_IDS[0]}"]\`).click();await waitForWorkshopRoute(page,'#workshops/'+WORKSHOP_IDS[0]);await page.goBack()`));
  assert.equal(source.includes("waitForURL('**/#workshops"),false);
- assert.ok(source.includes("assert.equal(await link.count(),1)"));assert.ok(source.includes("assert.equal(addedIds.length,42)"));
+ assert.ok(source.includes("assert.equal(await link.count(),1)"));assert.ok(source.includes("assert.equal(addedIds.length,50)"));
 });

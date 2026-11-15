@@ -1,6 +1,6 @@
 import json,pathlib,re
 R=pathlib.Path(__file__).resolve().parents[1];d=json.loads((R/'src/catalog.json').read_text());ids={l['id'] for l in d['lessons']}
-assert len(d['certifications'])==13 and len(ids)==len(d['lessons'])==90
+assert len(d['certifications'])==13 and len(ids)==len(d['lessons'])==98
 assert sum(len(c['domains']) for c in d['certifications'])==74
 track_ids={c['id'] for c in d['certifications']}
 for cluster in d['sharedKnowledge']:
@@ -26,11 +26,11 @@ for src in re.findall(r'(?:src|href)="([^"]+)"',html):
 assert 'SKILLQUEST' not in html and '<title>Athena' in html
 assert '34 original' not in (R/'src/catalog.json').read_text()
 from collections import Counter
-assert Counter(l['answer'] for l in d['lessons'])=={0:23,1:23,2:22,3:22}
+assert Counter(l['answer'] for l in d['lessons'])=={0:25,1:25,2:24,3:24}
 for l in d['lessons']:
  assert (R/f'docs/shared/{l["id"]}.md').read_bytes()==(R/f'wiki/shared-{l["id"]}.md').read_bytes()
 assert len({tuple(c['lab']['steps']) for c in d['certifications']})==13
-print('Catalog, 13 paths, 74 roadmaps, 90 lessons, shared-lesson wiki parity and documentation links validated. Engineering links require combined-deployment verification.')
+print('Catalog, 13 paths, 74 roadmaps, 98 lessons, shared-lesson wiki parity and documentation links validated. Engineering links require combined-deployment verification.')
 
 for path in d['learningPaths']:
  assert set(path['lessonIds']+path['prerequisites']) <= ids

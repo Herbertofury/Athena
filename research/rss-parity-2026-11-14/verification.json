@@ -1,0 +1,42 @@
+{
+  "baseline": "a8a30f387c10c70e1e8195c37d97e9623437e20a",
+  "donor": "124cd648006cd06f8491ae70105165df00962675",
+  "baseline_extractor_sha256": "e55cd0ffbcc5a0c51606161ecabbaa983955c22866db695ac05647ce5de9ba32",
+  "candidate_extractor_sha256": "c5e5ab9a6912df4a8ae54cc3053064d161b1a0f99626311b4ee30677a5f0f9f2",
+  "changed_existing_functions": [
+    "rss",
+    "receipt"
+  ],
+  "unchanged_existing_functions": [
+    "base_record",
+    "body_receipt",
+    "cls",
+    "document",
+    "dwemer",
+    "extract",
+    "fragment_document",
+    "json_loads",
+    "markdown_body",
+    "modpub",
+    "modrinth",
+    "one",
+    "ordered_body",
+    "person",
+    "pmc",
+    "public_url",
+    "require_id",
+    "schema_of",
+    "schemas",
+    "sha256",
+    "simsfinds",
+    "srcset_url_tokens",
+    "subscribestar",
+    "text",
+    "unique_ids",
+    "valid_id",
+    "wordpress"
+  ],
+  "synthetic_rss_tests": 35,
+  "engineering_python_tests": 396,
+  "new_provider_requests": 0
+}

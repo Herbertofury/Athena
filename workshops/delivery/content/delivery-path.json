@@ -1,0 +1,21 @@
+{
+  "id": "delivery-workshop",
+  "title": "Version Control & Reproducible Delivery Workshop",
+  "summary": "Eight connected lessons use real Git in isolated temporary repositories to make staging, merges, conflict resolution, additive recovery, exact-revision tests and local artifact provenance observable.",
+  "lessonIds": [
+    "delivery-snapshots",
+    "delivery-staging",
+    "delivery-branches",
+    "delivery-conflicts",
+    "delivery-recovery",
+    "delivery-revision-tests",
+    "delivery-provenance",
+    "delivery-capstone"
+  ],
+  "prerequisites": [
+    "git",
+    "testing"
+  ],
+  "caseIds": [],
+  "limits": "Actual fixed local Git/Python practice only. No user repository, remote, credentials, hooks, signatures, hosted CI or publication is used. A temporary local commit is not a published release."
+}

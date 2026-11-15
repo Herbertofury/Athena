@@ -20,3 +20,15 @@ Expired CI artifacts/logs are already unavailable and cannot be recreated from w
 Public GitHub API records were retrieved without credentials. Irrelevant public user-profile fields were removed; the original source author login and substantive issue/PR content remain. No private repository input, credentials, account secrets or paid assets are included.
 
 Run `python tests/atlas_metadata_test.py` for offline integrity, cross-record identity and deployment coverage checks. `manifest.json` records hashes and explicit scope limits. Original source remains untouched.
+
+## Verified link-map correction
+
+The original automatic mapping claimed 20 nonexistent destinations: one already-Athena URL received a second `engineering/` prefix; 15 unpublished source file references and four wiki names were projected without checking existence. The focused pre-fix regression failed for all 20. Original URL and location records are unchanged. The corrected mapping fixes the existing Athena link and explicitly marks the remaining 19 references unresolved instead of presenting dead destinations as preserved content.
+
+`python scripts/reconcile_atlas_source_links.py --check` reproduces the mapping from the actual repository tree. Eight regression tests cover all claimed file/wiki destinations, an existing Athena URL, absent targets, query-preserving native Research routes, static asset identity, issue creation versus preserved issue records, and unknown hosts/discussions. The original four metadata integrity/identity tests also pass. Snapshot hashes were refreshed for the corrected derived mapping; source GitHub records were not rewritten.
+
+The missing file references concern prepared Discourse/Mastodon/round-four work. Their existence was not established in the restored source Git bundle; this map cannot recover unavailable local work. Preserved wiki text can describe prepared work without proving the referenced code was published. The four absent page projections are `Engineering-Adapter-Round-Four-Other-Games`, `Engineering-Adapter-Round-Four-Target-Games`, `Engineering-Adapter-Tebex-and-Cfx`, and `Engineering-Wikimedia-Commons-Adapter-Research`.
+
+Native Pages mappings select the actual workspace and retain Research query parameters instead of pointing every link at the home page. Static assets retain distinct file destinations. Issue-creation links now point to the destination creation route rather than pretending to identify a preserved issue body. These remain offline target checks, not HTTP redirects, fragment-anchor validation, service-identity transfer or a deletion-readiness certification.
+
+Separate read-only publication check: all 71 unique mapped wiki page names exist in the live Athena wiki Git tree at `9515bff1f6918ff6927e25d92fb39020cfe2c68b`. This verifies page identity/presence, not every anchor or rendered page.

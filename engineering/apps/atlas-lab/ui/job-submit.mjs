@@ -22,7 +22,10 @@ export async function submitJob(job,{fetchImpl=globalThis.fetch,timeoutMs=15000}
   if(controller.signal.aborted)throw new Error(UNCONFIRMED);
   return decodeJobReceipt(new TextDecoder('utf-8',{fatal:true,ignoreBOM:true}).decode(bytes.subarray(0,size)));
  }catch{
-  try{if(reader)await reader.cancel();else await response?.body?.cancel();}catch{}
+  // Cleanup is best-effort: a hostile or stalled stream can leave cancel() pending.
+  // Never let it keep the submission UI locked after the outcome is unknown.
+  controller.abort();
+  try{const cancellation=reader?reader.cancel():response?.body?.cancel();Promise.resolve(cancellation).catch(()=>{});}catch{}
   throw new Error(UNCONFIRMED);
  }finally{try{reader?.releaseLock();}catch{}clearTimeout(timer);}
 }

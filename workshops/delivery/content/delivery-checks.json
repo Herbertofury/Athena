@@ -1,0 +1,314 @@
+[
+  {
+    "id": "delivery-snapshots-1",
+    "lessonId": "delivery-snapshots",
+    "question": "You stage version A, edit the working file to version B, then make a plain commit. What is recorded?",
+    "options": [
+      "Version A from the index",
+      "Version B because it is newest",
+      "Both as separate commits automatically",
+      "Neither until you sign in"
+    ],
+    "answer": 0,
+    "why": "The lab uses a plain commit of the staged selection. Later unstaged edits remain outside that snapshot."
+  },
+  {
+    "id": "delivery-snapshots-2",
+    "lessonId": "delivery-snapshots",
+    "question": "What does the synthetic author name in a commit prove?",
+    "options": [
+      "That a hosting account authenticated",
+      "That the commit records that metadata",
+      "That a teammate approved it",
+      "That the release was uploaded"
+    ],
+    "answer": 1,
+    "why": "Author metadata is distinct from account authentication, signatures, approval and publication."
+  },
+  {
+    "id": "delivery-snapshots-3",
+    "lessonId": "delivery-snapshots",
+    "question": "Why record a full commit identifier instead of only the branch name?",
+    "options": [
+      "Branches encrypt files",
+      "Commit names are release approvals",
+      "A branch can move to another commit",
+      "A branch never changes"
+    ],
+    "answer": 2,
+    "why": "The branch identifies a moving line of work. An exact revision makes the recorded observation specific."
+  },
+  {
+    "id": "delivery-staging-1",
+    "lessonId": "delivery-staging",
+    "question": "Which ordinary command reviews the proposed next plain commit relative to HEAD?",
+    "options": [
+      "git diff alone",
+      "A branch name without a command",
+      "Reading only the commit message",
+      "git diff --cached"
+    ],
+    "answer": 3,
+    "why": "The cached or staged diff compares the index with the current commit by default."
+  },
+  {
+    "id": "delivery-staging-2",
+    "lessonId": "delivery-staging",
+    "question": "What can MM mean for a tracked path in short status?",
+    "options": [
+      "The index and working tree both differ from their comparison states",
+      "The file is encrypted twice",
+      "Two remote servers approved it",
+      "No change can be committed"
+    ],
+    "answer": 0,
+    "why": "The first column describes the index relative to HEAD, and the second the working tree relative to the index."
+  },
+  {
+    "id": "delivery-staging-3",
+    "lessonId": "delivery-staging",
+    "question": "The plain working diff is empty. What conclusion is still unsafe?",
+    "options": [
+      "There are no differences in that comparison",
+      "There cannot be staged or untracked changes",
+      "The compared working contents match the index",
+      "Another status check may be useful"
+    ],
+    "answer": 1,
+    "why": "A single diff view is not a complete inventory of staged and untracked state."
+  },
+  {
+    "id": "delivery-branches-1",
+    "lessonId": "delivery-branches",
+    "question": "What is the strongest reason this divergent merge has two parents?",
+    "options": [
+      "Every commit has two parents",
+      "Two files force two parents",
+      "Each branch contains work after their shared ancestor",
+      "A remote server was contacted"
+    ],
+    "answer": 2,
+    "why": "The merge joins two distinct histories; the file count and network activity do not determine that relationship."
+  },
+  {
+    "id": "delivery-branches-2",
+    "lessonId": "delivery-branches",
+    "question": "A merge completes without a textual conflict. What still needs checking?",
+    "options": [
+      "Nothing, correctness is guaranteed",
+      "Only the color of the branch label",
+      "Whether Git created a hosting account",
+      "The integrated behavior and intended final contents"
+    ],
+    "answer": 3,
+    "why": "Mechanically compatible edits can still be semantically incompatible."
+  },
+  {
+    "id": "delivery-branches-3",
+    "lessonId": "delivery-branches",
+    "question": "What happens in a fast-forward integration?",
+    "options": [
+      "The branch can advance to an existing descendant without a new merge commit",
+      "All commits are erased",
+      "Every file gets copied into a second project",
+      "Authentication becomes unnecessary for future pushes"
+    ],
+    "answer": 0,
+    "why": "A fast-forward changes the reference because the desired history already contains the earlier tip."
+  },
+  {
+    "id": "delivery-conflicts-1",
+    "lessonId": "delivery-conflicts",
+    "question": "What does the expected conflict return code mean in this lab?",
+    "options": [
+      "All history was lost",
+      "The merge paused for a required resolution",
+      "The merge is already fully committed",
+      "A remote rejected your password"
+    ],
+    "answer": 1,
+    "why": "The scenario deliberately creates an incompatible edit so the unresolved path can be inspected."
+  },
+  {
+    "id": "delivery-conflicts-2",
+    "lessonId": "delivery-conflicts",
+    "question": "Which sequence properly completes the fixed conflict scenario?",
+    "options": [
+      "Delete only the marker symbols and assume success",
+      "Publish before inspecting the result",
+      "Choose correct final content, stage it, complete the merge and verify",
+      "Rename the branch without resolving the path"
+    ],
+    "answer": 2,
+    "why": "Content selection, staging, history recording and verification each answer a different part of the task."
+  },
+  {
+    "id": "delivery-conflicts-3",
+    "lessonId": "delivery-conflicts",
+    "question": "Why is a clean final status insufficient evidence that a resolution is correct?",
+    "options": [
+      "Clean status means there is no history",
+      "Git refuses every valid resolution",
+      "All tests run automatically on every commit",
+      "Incorrect content can also be fully committed"
+    ],
+    "answer": 3,
+    "why": "Git records the chosen contents; the requirement and behavioral checks determine whether those contents are appropriate."
+  },
+  {
+    "id": "delivery-recovery-1",
+    "lessonId": "delivery-recovery",
+    "question": "After an additive revert, where is the mistaken commit?",
+    "options": [
+      "Still present in the recorded history",
+      "Necessarily erased from every repository",
+      "Converted into a password",
+      "Automatically published as a release"
+    ],
+    "answer": 0,
+    "why": "The correction is a new commit; it does not remove the original commit from the ancestry."
+  },
+  {
+    "id": "delivery-recovery-2",
+    "lessonId": "delivery-recovery",
+    "question": "The final file matches the baseline. Must the final commit identifier also match?",
+    "options": [
+      "Yes, equal files force equal commits",
+      "No; the corrective commit has its own parent and metadata",
+      "Only if a remote is configured",
+      "Only when the branch name is short"
+    ],
+    "answer": 1,
+    "why": "Commit identity depends on more than one file’s contents, including the history relationship."
+  },
+  {
+    "id": "delivery-recovery-3",
+    "lessonId": "delivery-recovery",
+    "question": "What cannot be concluded from this successful local revert?",
+    "options": [
+      "The fixed file was restored",
+      "A corrective commit was created",
+      "A production database and all external side effects were rolled back",
+      "The earlier mistake remains visible"
+    ],
+    "answer": 2,
+    "why": "This repository has no production system or external effects. Source recovery does not perform those separate operations."
+  },
+  {
+    "id": "delivery-revision-tests-1",
+    "lessonId": "delivery-revision-tests",
+    "question": "A receipt passed for revision A, but the branch now points to B. What is supported?",
+    "options": [
+      "B is automatically approved",
+      "All future commits passed too",
+      "The branch name invalidates all historical evidence",
+      "The receipt is still evidence for A only"
+    ],
+    "answer": 3,
+    "why": "Evidence stays attached to the tested source. A new revision needs its own relevant checks."
+  },
+  {
+    "id": "delivery-revision-tests-2",
+    "lessonId": "delivery-revision-tests",
+    "question": "Why reject a dirty working tree under this lab’s test-receipt contract?",
+    "options": [
+      "It violates this local handoff’s clean-checkout requirement, even though the assertions read committed data",
+      "Dirty means the computer has malware",
+      "Git cannot read any modified file",
+      "The author identity is missing by definition"
+    ],
+    "answer": 0,
+    "why": "Dirty state fails a separate checkout-state gate before assertions. The fixed data checks read release.json from the recorded commit; they do not test modified working-tree files."
+  },
+  {
+    "id": "delivery-revision-tests-3",
+    "lessonId": "delivery-revision-tests",
+    "question": "What should you verify before treating github.sha as the contributor’s exact branch tip?",
+    "options": [
+      "Only the job name",
+      "The workflow event and actual checked-out revision",
+      "Only that the badge is green",
+      "Whether the commit message sounds confident"
+    ],
+    "answer": 1,
+    "why": "CI revision semantics depend on the event. The documented context is not a substitute for inspecting the run."
+  },
+  {
+    "id": "delivery-provenance-1",
+    "lessonId": "delivery-provenance",
+    "question": "What does comparing an artifact with a trusted expected SHA-256 digest primarily check?",
+    "options": [
+      "Whether the author is morally trustworthy",
+      "Whether every requirement is satisfied",
+      "Whether the observed bytes match that reference",
+      "Whether the file is encrypted"
+    ],
+    "answer": 2,
+    "why": "The digest comparison concerns byte integrity relative to the expected reference, not correctness or identity by itself."
+  },
+  {
+    "id": "delivery-provenance-2",
+    "lessonId": "delivery-provenance",
+    "question": "Why control archive timestamps and file order?",
+    "options": [
+      "They authenticate the publisher",
+      "They replace all tests",
+      "They publish a release automatically",
+      "Those packaging inputs can otherwise change the output bytes"
+    ],
+    "answer": 3,
+    "why": "A deterministic artifact recipe must control metadata and ordering as well as source-file contents."
+  },
+  {
+    "id": "delivery-provenance-3",
+    "lessonId": "delivery-provenance",
+    "question": "A file and its checksum were both replaced by an untrusted sender. They match. What remains unproven?",
+    "options": [
+      "The intended publisher and authorized build provenance",
+      "That a checksum can be computed",
+      "That the two received values are consistent",
+      "That bytes exist"
+    ],
+    "answer": 0,
+    "why": "An unauthenticated matching pair can be manufactured together. Identity and trusted provenance require additional evidence."
+  },
+  {
+    "id": "delivery-capstone-1",
+    "lessonId": "delivery-capstone",
+    "question": "The tested revision and packaged revision differ without explanation. What should the handoff do?",
+    "options": [
+      "Hide the older identifier",
+      "Stop the readiness claim and reconcile or retest the actual candidate",
+      "Reuse the green result because branch names match",
+      "Claim publication to avoid confusion"
+    ],
+    "answer": 1,
+    "why": "A delivery claim must refer to the contents actually tested and packaged; unexplained mismatches invalidate that connection."
+  },
+  {
+    "id": "delivery-capstone-2",
+    "lessonId": "delivery-capstone",
+    "question": "Which statement fits this workshop’s completed local capstone?",
+    "options": [
+      "The production service is deployed",
+      "GitHub approved all pull requests",
+      "The bounded local candidate and evidence were produced; hosted publication remains unperformed",
+      "A real publisher identity was cryptographically verified"
+    ],
+    "answer": 2,
+    "why": "The exercise is deliberately local, synthetic and temporary. Its evidence must stay within that scope."
+  },
+  {
+    "id": "delivery-capstone-3",
+    "lessonId": "delivery-capstone",
+    "question": "Why keep a limitation in an otherwise successful handoff?",
+    "options": [
+      "It turns a passing test into a failure",
+      "It makes exact revisions unnecessary",
+      "It authorizes remote distribution",
+      "It tells the next reviewer which claims the evidence does not support"
+    ],
+    "answer": 3,
+    "why": "Clear limits make the next decision safer and more efficient without erasing the successful bounded observations."
+  }
+]
