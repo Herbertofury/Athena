@@ -10,6 +10,8 @@ import tempfile
 REQUIRED = ('index.html', 'app.js', 'core.js', 'catalog.js', 'styles.css', 'workspace-host.js',
             'workspaces/software/index.mjs', 'workspaces/software/model.mjs',
             'workspaces/software/style.css', 'workspaces/software/catalog.json',
+            'workspaces/guidance/index.mjs', 'workspaces/guidance/model.mjs',
+            'workspaces/guidance/style.css', 'workspaces/guidance/catalog.json',
             'workspaces/engineering/research/index.mjs', 'workspaces/engineering/research/style.css',
             'workspaces/engineering/media/index.mjs', 'workspaces/engineering/media/style.css',
             'workspaces/engineering/lab/index.mjs', 'workspaces/engineering/lab/style.css',
@@ -123,7 +125,7 @@ def package(source, output, allowlist=None, profile="complete"):
         for generated in ('learn/index.html', '.nojekyll'):
             data=(staged/generated).read_bytes()
             entries.append({'path':generated,'bytes':len(data),'sha256':hashlib.sha256(data).hexdigest(),'origin':'generated'})
-        manifest={'application':'Athena','entry':'index.html','profile':profile,'workspaces':['learning','software','research','media','lab','cards','audio','receiver','diagnostics','build'],
+        manifest={'application':'Athena','entry':'index.html','profile':profile,'workspaces':['learning','software','guidance','research','media','lab','cards','audio','receiver','diagnostics','build'],
                   'pending':[] if profile=='complete' else ['Full Foundry parity: original 3D, artist worlds, native persistence and provider authorization'],
                   'verification':'Packaging and file hashes only; functional/browser parity is a separate gate.', 'files':entries}
         (staged/'athena-runtime-manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')

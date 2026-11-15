@@ -1,10 +1,10 @@
 {
   "schema": 1,
-  "review": "Reviewed native Athena runtime: learning, Engineering and integrated Foundry authoring with optional local SQLite bridge adapters, weather/ecology/environment and operator-selected local video. Source-owned procedural assets/licenses retained. Private databases, original private source history, credentials, recordings and binaries excluded. No autoplay or automatic database import; local bridge is explicit opt-in and not deployed on Pages. Full source retirement remains gated separately. Public PC catalog includes only reviewed HTML, JavaScript and sourced JSON, not other research or private evidence.",
+  "review": "Reviewed native Athena runtime: learning, Engineering and integrated Foundry authoring with optional local SQLite bridge adapters, weather/ecology/environment and operator-selected local video. Source-owned procedural assets/licenses retained. Private databases, original private source history, credentials, recordings and binaries excluded. No autoplay or automatic database import; local bridge is explicit opt-in and not deployed on Pages. Full source retirement remains gated separately. Public PC catalog includes only reviewed HTML, JavaScript and sourced JSON, not other research or private evidence. Athena Guidance includes only owner-reviewed public versioned standards and native reader/export code; no local rules or private consumer state are published.",
   "files": [
     {
       "path": "app.js",
-      "sha256": "15377499edff1f806c57d6c1587f78c73f22e8a046f02aae3956bf61aeafb9d4"
+      "sha256": "439588f7f2fc3ddf002d79824510cfa1c0c48e1ab47623a2a6b655baa73769ca"
     },
     {
       "path": "catalog.js",
@@ -16,7 +16,7 @@
     },
     {
       "path": "index.html",
-      "sha256": "4bd1c3a7c7501a74102bfa2de4cb7f88f91a8c866dcae86e4b182358a43807bd"
+      "sha256": "b95597d554e463d1f243ecc59f4541a5bd0d79b9bbf1b2d4b364c245f49979c6"
     },
     {
       "path": "native-store-bootstrap.js",
@@ -65,6 +65,22 @@
     {
       "path": "workspace-host.js",
       "sha256": "8a14dec17d4d816de53d325a94ee0dd00ac0bc8a0a26a756af58998173157cdb"
+    },
+    {
+      "path": "workspaces/continuity/context.mjs",
+      "sha256": "29ceebf3080b947d9ba7013d4f20c842832850a2d1433cd08f12fb1afd974ead"
+    },
+    {
+      "path": "workspaces/continuity/index.mjs",
+      "sha256": "18d528c3c8e3feaa6ed6fb2402019eed1c32b4beb4763139c46509936dcaabd0"
+    },
+    {
+      "path": "workspaces/continuity/model.mjs",
+      "sha256": "c47e47859d2d16e7c19f72cb6c999a205b3c8444e5b7f3379d96e93581e6d23a"
+    },
+    {
+      "path": "workspaces/continuity/style.css",
+      "sha256": "f550e505125deb513046b6e71889a6c7ad7e3165b50b2ac2957c094215f5d2aa"
     },
     {
       "path": "workspaces/engineering/audio/archive-selection.mjs",
@@ -431,20 +447,20 @@
       "sha256": "dd42d1183c1288667e1c040825933b5c2b1c44b6cf9ff0c29ec6afcc3c2005dc"
     },
     {
-      "path": "workspaces/continuity/index.mjs",
-      "sha256": "18d528c3c8e3feaa6ed6fb2402019eed1c32b4beb4763139c46509936dcaabd0"
+      "path": "workspaces/guidance/catalog.json",
+      "sha256": "29ad23400b3ca1bdd339a27a79c819b3bdbd64b0951fa141d384903a8aa2caaa"
     },
     {
-      "path": "workspaces/continuity/model.mjs",
-      "sha256": "c47e47859d2d16e7c19f72cb6c999a205b3c8444e5b7f3379d96e93581e6d23a"
+      "path": "workspaces/guidance/index.mjs",
+      "sha256": "611a38d6c5439cc7dd72d770863f629011029311bf5c3f27232c72ed05baab8f"
     },
     {
-      "path": "workspaces/continuity/style.css",
-      "sha256": "f550e505125deb513046b6e71889a6c7ad7e3165b50b2ac2957c094215f5d2aa"
+      "path": "workspaces/guidance/model.mjs",
+      "sha256": "7429db4b1223acb50c9c146f44730047e94a12e1b18bcc8a6630ec7058fe1d32"
     },
     {
-      "path": "workspaces/continuity/context.mjs",
-      "sha256": "29ceebf3080b947d9ba7013d4f20c842832850a2d1433cd08f12fb1afd974ead"
+      "path": "workspaces/guidance/style.css",
+      "sha256": "a39eb687698f5b6208c1ff54bd6a3fa9547a27934ac8f746b7a2db4af9722a80"
     },
     {
       "path": "workspaces/software/catalog.json",

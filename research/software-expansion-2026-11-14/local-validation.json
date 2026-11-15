@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "completed_at": "2026-11-15T02:32:20.991846+00:00",
+  "completed_at": "2026-11-15T02:36:44.528977+00:00",
   "scope": "Local generated-data, preservation, deterministic application tests and public packaging; actual Chromium and deployed-site verification run separately on GitHub Actions.",
   "counts": {
     "applications": 736,
@@ -76,7 +76,7 @@
     {
       "command": "python3 scripts/package_app.py --profile public-preview --allowlist config/runtime-public-preview.json --output <fresh directory>",
       "result": "pass",
-      "runtime_files": 117
+      "runtime_files": 121
     },
     {
       "command": "Final recorded search matrix replay",
@@ -89,12 +89,30 @@
     "src/software/index.mjs": "ee74ab61882a526a0d331aa90198771ded80049f3894c6742e4109585cf1fd6c",
     "src/software/model.mjs": "ef08147df62f1a4c6319e17503f3a9d5584e6ba4c4a3ef33727282068eca6abd",
     "src/software/style.css": "9add15b17765aabe8dc14420afa7ec4fd9d0098f244413a30c74cbec1693a8b2",
-    "config/runtime-public-preview.json": "02c12cdfb7002c06ecb51f4dfeb02fb76bf3c744c81f441f7de79f724234a432",
-    "scripts/software_browser_checks.cjs": "f0c3514e96f96510b2cbf65607c3050230cd24ef08325a5e8449d51346998d0a"
+    "config/runtime-public-preview.json": "2ed9050affb51e1a728f1fd2921a2dec9c0d13b26cd5f7a6ec86c23167e47828",
+    "scripts/software_browser_checks.cjs": "f0c3514e96f96510b2cbf65607c3050230cd24ef08325a5e8449d51346998d0a",
+    "dist/app.js": "439588f7f2fc3ddf002d79824510cfa1c0c48e1ab47623a2a6b655baa73769ca",
+    "dist/index.html": "b95597d554e463d1f243ecc59f4541a5bd0d79b9bbf1b2d4b364c245f49979c6",
+    "native/foundry/bridge.py": "39315629637350cacf39b5cbff923685212a0ade1dc573570df7b6d527395909",
+    "scripts/package_app.py": "47ac45b8264eaccf5112d1e2a8c138ae7a2318dd68fdc4697c344053ba01c155",
+    "scripts/test_unified_browser.cjs": "95b7296aa34ffe07d32e760d7990008e57e73c8e1167685c316cbbe3ae30c32c"
   },
   "logs": {
     "athena-final-build.log": "56994100f736bafd11dc504c49beee12b5bab18ce66326cca3b10db31d9f0da6",
-    "athena-final-test.log": "6cdcd55a6f747d178106119997bed38a113ca764bd8a505a7ad34433353b6c5b",
-    "athena-final-package.log": "f299046c69b0add0595e32d1551c47bc0c214fdf082826f6b0490a005ad1606a"
+    "athena-final-test.log": "84eb76985caf07b01fcbca622c16703492e6a9418d0daf15a1e0e753a6835256",
+    "athena-final-package.log": "9bb263c47fb3b56f9a52f937ef7f1c230d1946cbf616c25a62f6a7a54b888b3d"
+  },
+  "main_integration": {
+    "incoming_main": "2475a23da5037fa1d34bdf4468afd1b977e2e2e6",
+    "public_and_native_allowlist_paths": 119,
+    "unchanged_guidance_assets": 4,
+    "guidance_source_catalog_check": "pass",
+    "guidance_browser_gate": "Added to unified acceptance against the verified public package; execution is recorded in GitHub Actions.",
+    "preserved_software_behavior": [
+      "registry and navigation",
+      "saved-search restoration",
+      "homepage launch tile",
+      "all software runtime assets"
+    ]
   }
 }

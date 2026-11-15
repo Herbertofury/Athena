@@ -1,0 +1,105 @@
+{
+  "baseline_top1": "1/3",
+  "finding": {
+    "after": [
+      {
+        "actual_id": "experiment-queue",
+        "correct": true,
+        "evidence": [
+          {
+            "body": "Queue restart recovery requires a durable transaction journal. Synthetic local experiment confirms queued writes survive restart when committed.",
+            "id": "experiment-queue",
+            "score": -2.9445909271923267,
+            "sha256": "a4decf187da9bfe1bcf37224d3d2e5d726265b2849d1c74d48a0daff7c5bab3e",
+            "source": "fixture://local-project/experiment-queue"
+          }
+        ],
+        "expected_id": "experiment-queue",
+        "query": "restart durable journal"
+      },
+      {
+        "actual_id": "experiment-search",
+        "correct": true,
+        "evidence": [
+          {
+            "body": "Search attribution requires immutable source hashes and revision identifiers. Synthetic local experiment confirms historical revisions remain retrievable.",
+            "id": "experiment-search",
+            "score": -2.6165422447667965,
+            "sha256": "a9f02fc0c230b9b90b0bd8b14038ca0460c49b78d6520446041730223eed4206",
+            "source": "fixture://local-project/experiment-search"
+          }
+        ],
+        "expected_id": "experiment-search",
+        "query": "attribution immutable revision"
+      },
+      {
+        "actual_id": "stable",
+        "correct": true,
+        "evidence": [
+          {
+            "body": "Keyboard escape closes preview.",
+            "id": "stable",
+            "score": -4.404716559239431,
+            "sha256": "a8fa1d82b6de7140925281f9448429056b2ebe4b622ee57b5f0a70dec4c97716",
+            "source": "fixture://local-project/stable"
+          }
+        ],
+        "expected_id": "stable",
+        "query": "keyboard escape preview"
+      }
+    ],
+    "baseline_generation": 1,
+    "before": [
+      {
+        "actual_id": null,
+        "correct": false,
+        "evidence": [],
+        "expected_id": "experiment-queue",
+        "query": "restart durable journal"
+      },
+      {
+        "actual_id": null,
+        "correct": false,
+        "evidence": [],
+        "expected_id": "experiment-search",
+        "query": "attribution immutable revision"
+      },
+      {
+        "actual_id": "stable",
+        "correct": true,
+        "evidence": [
+          {
+            "body": "Keyboard escape closes preview.",
+            "id": "stable",
+            "score": -1.7420861698037737,
+            "sha256": "a8fa1d82b6de7140925281f9448429056b2ebe4b622ee57b5f0a70dec4c97716",
+            "source": "fixture://local-project/stable"
+          }
+        ],
+        "expected_id": "stable",
+        "query": "keyboard escape preview"
+      }
+    ],
+    "candidate_generation": 2,
+    "kind": "synthetic-retrieval-comparison",
+    "limits": "Corpus refresh benefit only; no algorithm superiority or external discovery."
+  },
+  "network": "socket audit denial tested in parent and reader; not kernel isolation",
+  "python": "3.12.14",
+  "refreshed_top1": "3/3",
+  "rejected_transactions": [
+    {
+      "message": "UNIQUE constraint failed: documents.generation, documents.id",
+      "type": "IntegrityError"
+    },
+    {
+      "message": "Each document requires nonempty id, source and body",
+      "type": "ValueError"
+    }
+  ],
+  "restart_independent_interpreter": true,
+  "rollback_restore_exact": true,
+  "scope": "synthetic local offline R&D only",
+  "source_script_sha256": "d06d328762f152df5189e91fad143b962b2bfd7f8998a42bc8b921bb3250bc30",
+  "sqlite": "3.53.1"
+}
