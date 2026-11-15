@@ -1,0 +1,3 @@
+# Runtime hashes identify exact Git blob bytes, including on Windows checkouts.
+# Do not transform text line endings or binary runtime assets during checkout.
+dist/** -text

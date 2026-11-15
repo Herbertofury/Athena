@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
+import {createHash} from 'node:crypto';
 import {spawn, execFileSync} from 'node:child_process';
 import {chromium} from 'playwright';
 import {repoRoot, binaryPath, pythonCommand} from '../native/foundry/tests/paths.mjs';
@@ -10,12 +11,13 @@ const out=path.join(repoRoot,'browser-results/foundry-native');
 fs.mkdirSync(out,{recursive:true});
 const temporary=fs.mkdtempSync(path.join(os.tmpdir(),'athena native synthetic '));
 const db=path.join(temporary,'synthetic.sqlite');
+const portable=path.join(temporary,'portable');
 const report={platform:process.platform,scope:'Chromium → loopback Python bridge → native Rust SQLite executable; synthetic data, not desktop installer or private migration acceptance',checks:[],errors:[],networkFailures:[],httpFailures:[],externalRequests:[]};
 let bridge,browser,context,page,exited,origin,stderr='';
 const cli=(command,input)=>execFileSync(binaryPath,[command,db],{encoding:'utf8',input,timeout:15000});
 async function check(name,fn){await fn();report.checks.push(name);}
 async function startBridge(){
- bridge=spawn(pythonCommand,[path.join(repoRoot,'native/foundry/bridge.py'),'--binary',binaryPath,'--database',db]);
+ bridge=spawn(pythonCommand,[path.join(portable,'launch.py'),'--database',db],{cwd:temporary});
  exited=new Promise(resolve=>bridge.once('exit',resolve));
  bridge.stderr.on('data',chunk=>stderr+=chunk);
  return await new Promise((resolve,reject)=>{
@@ -34,6 +36,10 @@ async function stopBridge(){
  finally{clearTimeout(timer);}
 }
 try {
+ const binarySha=createHash('sha256').update(fs.readFileSync(binaryPath)).digest('hex');
+ execFileSync(pythonCommand,['-B',path.join(repoRoot,'scripts/package_native.py'),'--source',path.join(repoRoot,'dist'),'--binary',binaryPath,'--binary-sha256',binarySha,'--platform',process.platform==='win32'?'windows':'linux','--output',portable],{encoding:'utf8',timeout:30000});
+ execFileSync(pythonCommand,['-B',path.join(portable,'launch.py'),'--verify-only'],{cwd:temporary,encoding:'utf8',timeout:15000});
+ report.checks.push('Portable native package exact hashes verified outside source checkout');
  cli('init');
  for(const suffix of ['history','soundtracks','transforms','scopes','environment','targets','instances','appearance','filters','origins','environments','blend-modes','music-precision'])cli('upgrade-'+suffix);
  origin=await startBridge();
