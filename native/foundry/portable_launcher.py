@@ -1,6 +1,12 @@
 """Launch a verified portable package with an explicitly selected external database."""
 import argparse,hashlib,importlib.util,json,pathlib,sys,os,subprocess,tempfile,sqlite3,types
 
+def destination_clear(destination):
+    # Refuse stale recovery state as well as an existing main file. Checks are
+    # for trusted private directories, not protection against hostile path races.
+    if any(os.path.lexists(str(destination)+suffix) for suffix in ('','-wal','-shm','-journal')):
+        raise FileExistsError('Destination database or sidecar exists; preserve it and choose a new name')
+
 def verify(root):
     root=pathlib.Path(root).absolute()
     if any(p.is_symlink() for p in (root,*root.parents)):raise ValueError('Symlink package refused')
@@ -30,6 +36,7 @@ def create_database(root,data,destination):
     root=pathlib.Path(root).absolute()
     if root in destination.parents or not destination.parent.is_dir() or any(p.is_symlink() for p in (destination,*destination.parents)) or os.path.lexists(destination):
         raise ValueError('New external database required')
+    destination_clear(destination)
     binary=root/data['binary']
     # Stage on the destination filesystem. Never upgrade or open an existing target.
     with tempfile.TemporaryDirectory(prefix='.athena-first-run-',dir=destination.parent) as temporary:
@@ -45,6 +52,7 @@ def create_database(root,data,destination):
         if any(os.path.lexists(str(staged)+suffix) for suffix in ('-wal','-shm','-journal')):raise ValueError('Native setup is not standalone')
         # Exclusive publication, unlike rename which can replace an existing target.
         # If hard links are unsupported, refuse rather than degrade to overwrite/copy.
+        destination_clear(destination)
         os.link(staged,destination)
     return {'created':True,'schema':15,'integrity':'ok','existing_database_modified':False}
 
@@ -54,6 +62,7 @@ def backup_database(root,data,source,destination,quiescent=False,upgrade=False):
     for path in (source,destination):
         if root in path.parents or any(p.is_symlink() for p in (path,*path.parents)):raise ValueError('External non-symlink paths required')
     if not source.is_file() or not destination.parent.is_dir() or os.path.lexists(destination):raise ValueError('Existing source and new destination required')
+    destination_clear(destination)
     if str(destination) in {str(source)+suffix for suffix in ('','-wal','-shm','-journal')}:raise ValueError('Source aliases refused')
     with tempfile.TemporaryDirectory(prefix='.athena-backup-',dir=destination.parent) as temporary:
         staged=pathlib.Path(temporary)/'backup.sqlite3'
@@ -78,6 +87,7 @@ def backup_database(root,data,source,destination,quiescent=False,upgrade=False):
         if any(os.path.lexists(str(staged)+suffix) for suffix in ('-wal','-shm','-journal')):raise ValueError('Backup not standalone')
         payload=staged.read_bytes();final_sha=hashlib.sha256(payload).hexdigest()
         if not upgrade and final_sha!=receipt.get('destination_sha256'):raise ValueError('Backup changed after preparation')
+        destination_clear(destination)
         os.link(staged,destination)
     return {'backed_up':True,'upgraded_copy':upgrade,'source_schema':original_schema,'schema':status['schema'],'integrity':'ok','bytes':len(payload),
         'sha256':final_sha,'source_unchanged_at_checks':receipt['source_unchanged_at_checks'],
