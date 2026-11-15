@@ -12,6 +12,8 @@ Athena is one polished native app: a learning academy, evidence-led R&D workshop
 
 **Offline growth is part of that ambition.** With no connected services, Athena should still learn from local project material and retained evidence, run permitted bounded experiments and improve reusable knowledge. Offline work cannot discover unseen external releases or validate current online facts; freshness and verification limits must stay visible.
 
+**Human judgment belongs throughout the product.** Athena should unite machine initiative with human intelligence across research, plans, designs, experiments and delivery, not just a single-plan review screen. Make evidence, alternatives and decisions easy to inspect and steer, with lightweight opportunities to correct, approve or reverse work rather than obstructive blanket gates.
+
 Overlapping capabilities from Engineering-Atlas, Feature Foundry, Feature Forge and Project Constellation belong in Athena's own navigation, data and workflows, not embedded apps or a collection of renamed links. Existing themes are inspiration, not authority: better designs may replace them. The experience should inform and empower the user, explain uncertainty and preserve control rather than impose arbitrary restrictions.
 
 **Delivery priority: finish native integration. This is a goal, not a completed-migration claim.** Keep source repositories until each capability, history, data, link, test and dependency has been reconciled and accepted. Shared databases remain in [Modding-Knowledge](https://github.com/Herbertofury/Modding-Knowledge), consumed by Athena and other apps rather than duplicated here.
