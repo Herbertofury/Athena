@@ -15,6 +15,12 @@ def main():
   subprocess.run([sys.executable,str(ROOT/'scripts/package_app.py'),'--profile','public-preview','--allowlist',str(ROOT/'config/runtime-public-preview.json'),'--output',str(public)],cwd=ROOT,check=True,capture_output=True)
   subprocess.run([str(STORE),'init',str(db)],check=True,capture_output=True)
   for s in ('history','soundtracks','transforms','scopes','environment','targets','instances','appearance','filters','origins','environments','blend-modes','music-precision'):subprocess.run([str(STORE),'upgrade-'+s,str(db)],check=True,capture_output=True)
+  portable=os.environ.get('ATHENA_PORTABLE_UNIFIED')=='1'
+  command=[str(ENGINE),'serve-unified',str(journal),str(public),str(db)]
+  if portable:
+   package=root/'portable'
+   subprocess.run([sys.executable,str(ROOT/'scripts/package_native.py'),'--source',str(ROOT/'dist'),'--binary',str(STORE),'--binary-sha256',hashlib.sha256(STORE.read_bytes()).hexdigest(),'--engine',str(ENGINE),'--engine-sha256',hashlib.sha256(ENGINE.read_bytes()).hexdigest(),'--output',str(package),'--platform','windows' if sys.platform=='win32' else 'linux'],check=True,capture_output=True)
+   command=[sys.executable,'-B',str(package/'launch.py'),'--database',str(db),'--journal',str(journal)]
   before=db.read_bytes()
   for wrong in (db,pathlib.Path(str(db)+'-wal')):
    r=subprocess.run([str(ENGINE),'serve-unified',str(wrong),str(public),str(db)],capture_output=True,timeout=10);assert r.returncode!=0;assert db.read_bytes()==before
@@ -29,7 +35,7 @@ def main():
   h={'Origin':'http://127.0.0.1:41379','X-Athena-Native':'1','Content-Type':'application/json','If-Match':'"empty"'}
   payload=(ROOT/'crates/athena-foundry-store/tests/fixtures/js-workspace.json').read_text()
   def start():
-   p=subprocess.Popen([str(ENGINE),'serve-unified',str(journal),str(public),str(db)],stdout=subprocess.PIPE,stderr=subprocess.PIPE)
+   p=subprocess.Popen(command,stdout=subprocess.PIPE,stderr=subprocess.PIPE)
    for _ in range(100):
     if p.poll() is not None:raise AssertionError(p.stderr.read().decode())
     try:
@@ -37,6 +43,15 @@ def main():
     except OSError:pass
     time.sleep(.05)
    p.kill();p.wait();raise AssertionError('startup timed out')
+  def stop(p):
+   p.terminate();p.wait(timeout=10)
+   for _ in range(100):
+    try:
+     with socket.create_connection(('127.0.0.1',41379),timeout=.1):pass
+    except OSError:break
+    time.sleep(.05)
+   else:raise AssertionError('Engine listener survived launcher termination')
+   p.stdout.close();p.stderr.close()
   p=start()
   try:
    assert json.loads(request('GET','/api/runtime')[2])['application']=='Athena'
@@ -69,11 +84,11 @@ def main():
     if 'succeeded' in json.dumps(overview):break
     time.sleep(.1)
    else:raise AssertionError('local experiment did not complete')
-  finally:p.terminate();p.wait(timeout=10)
+  finally:stop(p)
   p=start()
   try:
    assert json.loads(request('GET','/__native/backup',headers=h)[2])==json.loads(payload)
    assert 'succeeded' in request('GET','/api/overview')[2]
-  finally:p.terminate();p.wait(timeout=10)
-  print(json.dumps({'passed':True,'scope':'actual local dual-store process, synthetic workspace and built-in dedup job; not browser or owner data','engine_sha256':hashlib.sha256(ENGINE.read_bytes()).hexdigest(),'checks':['symmetric DB/sidecar and hardlink refusal','pre-body unauthorized and duplicate-header rejection','oversize length rejection','four-slot slow-body admission and deadline','native and Atlas guards remain distinct','workspace compare-save and stale conflict','revision history','bounded offline job','both stores persist across process restart']}))
+  finally:stop(p)
+  print(json.dumps({'passed':True,'portable_launcher':portable,'scope':'actual local dual-store process, synthetic workspace and built-in dedup job; not browser or owner data','engine_sha256':hashlib.sha256(ENGINE.read_bytes()).hexdigest(),'checks':['symmetric DB/sidecar and hardlink refusal','pre-body unauthorized and duplicate-header rejection','oversize length rejection','four-slot slow-body admission and deadline','native and Atlas guards remain distinct','workspace compare-save and stale conflict','revision history','bounded offline job','both stores persist across process restart']}))
 if __name__=='__main__':main()

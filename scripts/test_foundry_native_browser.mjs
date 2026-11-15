@@ -2,12 +2,14 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import os from 'node:os';
+import net from 'node:net';
 import path from 'node:path';
 import {createHash} from 'node:crypto';
 import {spawn, execFileSync} from 'node:child_process';
 import {chromium} from 'playwright';
 import {repoRoot, binaryPath, pythonCommand} from '../native/foundry/tests/paths.mjs';
 const unified=process.env.ATHENA_UNIFIED_ENGINE;
+const portableUnified=Boolean(unified && process.env.ATHENA_PORTABLE_UNIFIED==='1');
 const out=path.join(repoRoot,unified?'browser-results/unified-native':'browser-results/foundry-native');
 fs.mkdirSync(out,{recursive:true});
 const temporary=fs.mkdtempSync(path.join(os.tmpdir(),'athena native synthetic '));
@@ -19,7 +21,7 @@ let bridge,browser,context,page,exited,origin,stderr='';
 const cli=(command,input)=>execFileSync(binaryPath,[command,db],{encoding:'utf8',input,timeout:15000});
 async function check(name,fn){await fn();report.checks.push(name);}
 async function startBridge(){
- bridge=unified?spawn(unified,['serve-unified',journal,enginePackage,db],{cwd:temporary}):spawn(pythonCommand,[path.join(portable,'launch.py'),'--database',db],{cwd:temporary});
+ bridge=portableUnified?spawn(pythonCommand,['-B',path.join(portable,'launch.py'),'--database',db,'--journal',journal],{cwd:temporary}):unified?spawn(unified,['serve-unified',journal,enginePackage,db],{cwd:temporary}):spawn(pythonCommand,[path.join(portable,'launch.py'),'--database',db],{cwd:temporary});
  exited=new Promise(resolve=>bridge.once('exit',resolve));
  bridge.stderr.on('data',chunk=>stderr+=chunk);
  return await new Promise((resolve,reject)=>{
@@ -36,17 +38,23 @@ async function stopBridge(){
  let timer;
  try{await Promise.race([exited,new Promise((_,reject)=>{timer=setTimeout(()=>reject(Error('Bridge stop timed out')),10000)})]);}
  finally{clearTimeout(timer);}
+ if(portableUnified){
+  const open=()=>new Promise((resolve,reject)=>{const s=net.connect(41379,'127.0.0.1');s.setTimeout(1000);s.once('connect',()=>{s.destroy();resolve(true)});s.once('error',()=>resolve(false));s.once('timeout',()=>{s.destroy();reject(Error('Listener-close probe timed out'))})});
+  let closed=false;for(let i=0;i<100;i++){if(!await open()){closed=true;break;}await new Promise(r=>setTimeout(r,50));}
+  assert.ok(closed,'Engine listener survived portable launcher termination');
+ }
 }
 try {
  const binarySha=createHash('sha256').update(fs.readFileSync(binaryPath)).digest('hex');
- execFileSync(pythonCommand,['-B',path.join(repoRoot,'scripts/package_native.py'),'--source',path.join(repoRoot,'dist'),'--binary',binaryPath,'--binary-sha256',binarySha,'--platform',process.platform==='win32'?'windows':'linux','--output',portable],{encoding:'utf8',timeout:30000});
+ execFileSync(pythonCommand,['-B',path.join(repoRoot,'scripts/package_native.py'),'--source',path.join(repoRoot,'dist'),'--binary',binaryPath,'--binary-sha256',binarySha,'--platform',process.platform==='win32'?'windows':'linux','--output',portable,...(portableUnified?['--engine',unified,'--engine-sha256',createHash('sha256').update(fs.readFileSync(unified)).digest('hex')]:[])],{encoding:'utf8',timeout:30000});
  execFileSync(pythonCommand,['-B',path.join(portable,'launch.py'),'--verify-only'],{cwd:temporary,encoding:'utf8',timeout:15000});
  report.checks.push('Portable native package exact hashes verified outside source checkout');
  const initialized=JSON.parse(execFileSync(pythonCommand,[path.join(portable,'launch.py'),'--create-database',db],{cwd:temporary,encoding:'utf8',timeout:60000}));
  assert.equal(initialized.schema,15);assert.equal(initialized.integrity,'ok');
  report.checks.push('Explicit portable first-run creates verified new schema15 store without checkout commands');
  if(unified){
-  execFileSync(pythonCommand,[path.join(repoRoot,'scripts/package_app.py'),'--profile','public-preview','--allowlist',path.join(repoRoot,'config/runtime-public-preview.json'),'--output',enginePackage],{cwd:repoRoot,timeout:30000});
+  if(!portableUnified)execFileSync(pythonCommand,[path.join(repoRoot,'scripts/package_app.py'),'--profile','public-preview','--allowlist',path.join(repoRoot,'config/runtime-public-preview.json'),'--output',enginePackage],{cwd:repoRoot,timeout:30000});
+  report.portableUnified=portableUnified;
   report.scope='Actual unified Rust evidence and Foundry native stores in one origin; synthetic fixtures, no private migration or installer acceptance';
  }
  origin=await startBridge();
