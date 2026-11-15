@@ -322,3 +322,16 @@ separately rebuilt retained source checkpoints for schema4–11 against upgraded
 schema5–12 stores. Exact source inventories and executable hashes are retained.
 This is not Windows historical acceptance or verified distributed-release identity;
 normal hosted CI still correctly leaves these tests ignored without their fixtures.
+
+### SQLite runtime prerequisite for WAL recovery
+
+The portable backup helper refuses captured WAL files unless **Python's linked
+SQLite is3.54.0 or newer**, before opening any captured database. Rust's bundled
+SQLite version does not establish Python's version. `--verify-only` prints the
+actual Python SQLite version and eligibility; successful receipts record it too.
+Older runtimes still support the guarded standalone-file path. Do not discard
+sidecars to bypass refusal. Use a patched runtime or an independently prepared
+standalone backup. Packages built before this guard must be rebuilt to include it.
+See the [advisory assessment](../../research/python-sqlite-wal-advisory-2026-11-15/README.md).
+Tests on older Python SQLite now verify WAL refusal, not successful WAL recovery;
+previous dated WAL-success evidence is not a current security qualification.

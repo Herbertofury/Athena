@@ -29,7 +29,12 @@ def prepare(source,destination,scratch,quiescent=False):
  reserved={pathlib.Path(str(source.resolve())+suffix) for suffix in SUFFIXES}
  if destination.resolve() in reserved:raise ValueError('Destination must not be the source or any source sidecar path')
  if destination.exists() or destination.is_symlink():raise FileExistsError('Destination already exists')
- first=capture(source);identity=digest(first)
+ first=capture(source)
+ # CVE-2026-119375: staging does not fix a vulnerable Python-linked SQLite.
+ # Refuse WAL before any sqlite3.connect, even if Rust bundles a patched copy.
+ if '-wal' in first and sqlite3.sqlite_version_info < (3,54,0):
+  raise ValueError('WAL recovery requires Python-linked SQLite 3.54.0 or newer; use a patched runtime or an independently prepared standalone backup')
+ identity=digest(first)
  if digest(capture(source))!=identity:raise ValueError('Source changed while capturing; retry after quiescing')
  # SQLite touches only disposable staged copies, never original database/sidecars.
  with tempfile.TemporaryDirectory(prefix='foundry-stage-',dir=scratch) as temporary:
@@ -53,6 +58,6 @@ def prepare(source,destination,scratch,quiescent=False):
   except BaseException:
    if created:destination.unlink()
    raise
- return {'prepared':True,'private_user_data':True,'source_unchanged_at_checks':True,'source_file_hashes':identity,'destination_sha256':hashlib.sha256(payload).hexdigest(),'destination_bytes':len(payload),'source_wal_present':'-wal' in first,'lossless_app_migration':False}
+ return {'prepared':True,'sqlite_runtime':sqlite3.sqlite_version,'private_user_data':True,'source_unchanged_at_checks':True,'source_file_hashes':identity,'destination_sha256':hashlib.sha256(payload).hexdigest(),'destination_bytes':len(payload),'source_wal_present':'-wal' in first,'lossless_app_migration':False}
 if __name__=='__main__':
  p=argparse.ArgumentParser();p.add_argument('--source',required=True);p.add_argument('--destination',required=True);p.add_argument('--scratch',required=True);p.add_argument('--source-quiescent',action='store_true');a=p.parse_args();print(json.dumps(prepare(a.source,a.destination,a.scratch,a.source_quiescent)))
