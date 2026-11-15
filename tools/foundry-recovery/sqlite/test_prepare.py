@@ -34,6 +34,32 @@ class Tests(unittest.TestCase):
    self.assertRaises(ValueError,prepare.prepare,self.source,pathlib.Path(str(self.source)+suffix),self.root,True)
   self.assertEqual(prepare.capture(self.source),before)
   self.assertFalse(pathlib.Path(str(self.source)+'-journal').exists())
+ def test_destination_sidecars_refused_before_sqlite_open(self):
+  before=prepare.capture(self.source)
+  for suffix in ('-wal','-shm','-journal'):
+   with self.subTest(suffix=suffix):
+    output=self.root/('reserved'+suffix+'.sqlite');side=pathlib.Path(str(output)+suffix);side.write_bytes(b'preserve recovery state')
+    with patch('prepare.sqlite3.connect') as connect:
+     self.assertRaises(FileExistsError,prepare.prepare,self.source,output,self.root,True);connect.assert_not_called()
+    self.assertFalse(output.exists());self.assertEqual(side.read_bytes(),b'preserve recovery state')
+  self.assertEqual(prepare.capture(self.source),before)
+ def test_late_destination_sidecar_refuses_publication(self):
+  before=prepare.capture(self.source);original=prepare.digest;calls=0;side=pathlib.Path(str(self.dest)+'-journal')
+  def late(parts):
+   nonlocal calls
+   calls+=1
+   if calls==3:side.write_bytes(b'late recovery state')
+   return original(parts)
+  with patch('prepare.digest',side_effect=late):self.assertRaises(FileExistsError,prepare.prepare,self.source,self.dest,self.root,True)
+  self.assertFalse(self.dest.exists());self.assertEqual(side.read_bytes(),b'late recovery state');self.assertEqual(prepare.capture(self.source),before)
+  self.assertEqual(list(self.root.glob('foundry-stage-*')),[])
+ def test_dangling_destination_sidecar_refused(self):
+  side=pathlib.Path(str(self.dest)+'-wal')
+  try:side.symlink_to(self.root/'absent')
+  except OSError as error:self.skipTest('Symlink creation unavailable: '+str(error))
+  with patch('prepare.sqlite3.connect') as connect:
+   self.assertRaises(FileExistsError,prepare.prepare,self.source,self.dest,self.root,True);connect.assert_not_called()
+  self.assertTrue(side.is_symlink());self.assertFalse(self.dest.exists())
  def test_existing_destination_never_overwritten(self):
   self.dest.write_bytes(b'existing');self.assertRaises(FileExistsError,prepare.prepare,self.source,self.dest,self.root,True);self.assertEqual(self.dest.read_bytes(),b'existing')
  def test_changed_source_refuses_before_destination(self):
