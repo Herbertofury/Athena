@@ -105,3 +105,7 @@ python3 scrapbook/convert.py --catalog CATALOG.json --source PRESERVED-CAPSULE.j
 Explicit `--capsule` validates every entry using the shared original-value capsule implementation, then selects only `ff-scrapbook-layout`. Music conversion uses the same extraction helper. The mapping hash must identify the selected raw scrapbook string encoded as UTF-8, not the enclosing capsule. Existing geometry, asset, surface, anchor and blend review requirements remain mandatory. No review is invented from a checksum.
 
 The four-file bundle retains exact selected scrapbook UTF-8 bytes, not unrelated capsule values. Keep the entire original capsule separately; it is never modified or replaced. Bundle verification stays unchanged and recomputes the same workspace as raw-input mode. `--capsule` is rejected in verify-only mode. Missing/tampered values, non-UTF8-representable selected strings, size violations and existing destinations refuse. Unrelated lone-surrogate strings remain preserved in the capsule. No browser reads, live imports, provider requests or source artwork occur, and visual fidelity/deletion readiness remain unverified.
+
+### Compare migrated Scrapbook placements
+
+[Read-only Scrapbook reconciliation](scrapbook/RECONCILIATION.md) verifies a reviewed bundle against a standalone native snapshot and reports exact, missing and different mapped placements without opening the original database in SQLite. This is semantic migration evidence, not visual acceptance or retirement clearance.

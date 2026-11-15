@@ -3,6 +3,7 @@ import hashlib, importlib.util, json, os, pathlib, subprocess, sys, tempfile, th
 from email.message import Message
 from unittest.mock import Mock
 import convert
+from reconcile import reconcile
 ROOT = pathlib.Path(__file__).resolve().parents[3]
 spec = importlib.util.spec_from_file_location('scrapbook_parity_bridge', ROOT/'native/foundry/bridge.py')
 bridge = importlib.util.module_from_spec(spec); spec.loader.exec_module(bridge)
@@ -39,6 +40,9 @@ class NativeParity(unittest.TestCase):
       preserved = {p:p.read_bytes() for p in folder.rglob('*') if p.is_file()}
       result = cli('save-backup', json.dumps(expected).encode()); self.assertEqual(result.returncode,0,result.stderr)
       persisted = db.read_bytes(); versions = []
+      report = reconcile(bundle,db,catalog_path,binary,True)
+      self.assertEqual(report['counts'],{'expected':2,'exact':2,'missing':0,'different':0})
+      self.assertTrue(report['all_mapped_placements_match']); self.assertFalse(report['source_retirement_safe'])
       for restart in range(2):
        server = bridge.Bridge.__new__(bridge.Bridge); server.binary=str(binary); server.database=str(db); server.operation_lock=threading.RLock(); server.schema=15; server.host='127.0.0.1:1'; server.origin='http://'+server.host
        handler = bridge.Handler.__new__(bridge.Handler); handler.server=server; handler.path='/__native/backup'; handler.headers=Message(); handler.headers['Host']=server.host; handler.headers['X-Athena-Native']='1'; handler.reply=Mock()
