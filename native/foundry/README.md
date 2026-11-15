@@ -203,3 +203,41 @@ This is an explicit local configuration removal, not an automatic cleanup. A mat
 There is no new UI control in this pass. Consumers should retain/export the old assignment before requesting removal if they want to undo it; workspace revision history is not a soundtrack-undo log. Only invoke on an explicit user action, never as a background migration side effect.
 
 Synthetic acceptance uses the actual Rust executable through the bridge handler for schema4 and15, including wrong origin, missing token, stale token, malformed request, successful removal, unchanged unrelated room and idempotence. Transport is in-memory, not an owner-device/browser test. A Rust regression also verifies closed/reopened persistence and unknown-room refusal. The initial Python fixture assumed every schema-upgrade command emits JSON; commands with empty stdout exposed that harness assumption, corrected before final tests. No product validation was relaxed.
+
+## Portable native profile, independent of the checkout
+
+Build the store from reviewed Athena source first, then explicitly supply its
+SHA-256 and platform. This builder copies **only unchanged published allowlisted
+runtime files**, the existing bridge, launcher and selected executable. It does
+not change the runtime allowlist or include any database, token or user profile.
+
+```sh
+python3 -B scripts/package_native.py --source dist --binary /path/to/athena-foundry-store --binary-sha256 VERIFIED_SHA256 --platform linux --output /new/portable-athena
+python3 /new/portable-athena/launch.py --verify-only
+python3 /new/portable-athena/launch.py --database /private/existing-athena.sqlite3
+```
+
+For Windows use `--platform windows`, the compiled `.exe`, and `python` where
+appropriate. Python 3.11+ remains required; this is not a standalone installer or
+bundled Python distribution. The launcher prints a loopback URL to open manually;
+it does not open a browser, install software, sign in, start automatically,
+create/upgrade a database or change security settings. The supplied database must
+already exist **outside** the bundle. Existing bridge admission/schema rules apply.
+Ctrl+C closes the bridge. All authored changes occur only through existing app
+operations against that explicitly selected database.
+
+Before launch, every packaged file is checked for exact size/hash and inventory;
+unlisted files (including accidentally copied databases), symlinks, corruption,
+missing files and platform mismatch refuse. `--verify-only` never executes the
+binary or opens a database. The integrity manifest is not a signature or proof of
+binary authenticity: obtain the executable from your reviewed build, not an
+unknown download. Checks do not protect against hostile concurrent file mutation.
+
+Destination creation is exclusive. A packaging I/O failure may leave a partial
+**new** output directory for inspection; it never replaces an existing destination.
+Keep data outside the bundle and rebuild into a new directory for an update. No
+original repository, historical source, private backup or input file is removed.
+The native browser harness now runs its complete synthetic editing, persistence,
+conflict and restart flows through this portable launcher outside the checkout on
+hosted Windows/Linux; this remains distinct from the owner's installed desktop
+acceptance and complete source-repository retirement.
