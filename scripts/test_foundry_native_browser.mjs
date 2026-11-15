@@ -40,8 +40,9 @@ try {
  execFileSync(pythonCommand,['-B',path.join(repoRoot,'scripts/package_native.py'),'--source',path.join(repoRoot,'dist'),'--binary',binaryPath,'--binary-sha256',binarySha,'--platform',process.platform==='win32'?'windows':'linux','--output',portable],{encoding:'utf8',timeout:30000});
  execFileSync(pythonCommand,['-B',path.join(portable,'launch.py'),'--verify-only'],{cwd:temporary,encoding:'utf8',timeout:15000});
  report.checks.push('Portable native package exact hashes verified outside source checkout');
- cli('init');
- for(const suffix of ['history','soundtracks','transforms','scopes','environment','targets','instances','appearance','filters','origins','environments','blend-modes','music-precision'])cli('upgrade-'+suffix);
+ const initialized=JSON.parse(execFileSync(pythonCommand,[path.join(portable,'launch.py'),'--create-database',db],{cwd:temporary,encoding:'utf8',timeout:60000}));
+ assert.equal(initialized.schema,15);assert.equal(initialized.integrity,'ok');
+ report.checks.push('Explicit portable first-run creates verified new schema15 store without checkout commands');
  origin=await startBridge();
  browser=await chromium.launch({headless:true,executablePath:process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE||undefined});
  context=await browser.newContext({viewport:{width:1440,height:1000}});

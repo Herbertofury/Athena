@@ -248,3 +248,30 @@ package tests before reaching browser launch. Windows checkout line-ending
 conversion changed runtime bytes. `.gitattributes` now preserves `dist/**` as
 exact Git blob bytes on checkout. No hash check was weakened and no published
 runtime asset or allowlist was rewritten to accommodate altered bytes.
+
+### Explicit first-run creation
+
+For a new installation, create a separate new database without manually invoking
+the store's migration sequence:
+
+```sh
+python3 /new/portable-athena/launch.py --create-database /private/new-athena.sqlite3
+python3 /new/portable-athena/launch.py --database /private/new-athena.sqlite3
+```
+
+Creation is explicit and separate from launch, verify-only and opening an existing
+store. It runs the bundled native init/upgrade sequence in a private temporary
+sibling directory, checks schema15 and integrity, then publishes through an
+exclusive hard link. Existing destinations, symlinks, paths inside the bundle,
+missing parents and unsupported hard-link filesystems refuse. No fallback rename
+or overwrite occurs. Failed setup removes only its owned staging directory;
+original files and any destination created concurrently remain untouched.
+
+Each native step has a15-second deadline. The supplied executable must still be
+trusted reviewed code; hashes do not sandbox it. This creates a fresh empty
+workspace with catalog metadata, not a migration of old user data. Existing DBs
+are never upgraded automatically. POSIX private-file modes originate from the
+native creator; Windows ACL privacy and sudden-power-loss publication durability
+remain separate acceptance concerns. Synthetic regressions cover actual native
+creation/reopen, timeout cleanup, concurrent destination, unsupported hard links
+and path refusal. Hosted UI acceptance uses this explicit first-run command.

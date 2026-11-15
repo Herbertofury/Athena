@@ -1,5 +1,5 @@
 """Launch a verified portable package with an explicitly selected external database."""
-import argparse,hashlib,importlib.util,json,pathlib,sys
+import argparse,hashlib,importlib.util,json,pathlib,sys,os,subprocess,tempfile
 
 def verify(root):
     root=pathlib.Path(root).absolute()
@@ -25,20 +25,47 @@ def verify(root):
     if actual!=names|{'native-package.json'}:raise ValueError('Unexpected package content')
     return data
 
+def create_database(root,data,destination):
+    destination=pathlib.Path(destination).absolute()
+    root=pathlib.Path(root).absolute()
+    if root in destination.parents or not destination.parent.is_dir() or any(p.is_symlink() for p in (destination,*destination.parents)) or os.path.lexists(destination):
+        raise ValueError('New external database required')
+    binary=root/data['binary']
+    # Stage on the destination filesystem. Never upgrade or open an existing target.
+    with tempfile.TemporaryDirectory(prefix='.athena-first-run-',dir=destination.parent) as temporary:
+        staged=pathlib.Path(temporary)/'new.sqlite3'
+        def run(command):
+            result=subprocess.run([str(binary),command,str(staged)],capture_output=True,timeout=15,check=True)
+            return result.stdout.decode('utf-8',errors='strict')
+        run('init')
+        for suffix in ('history','soundtracks','transforms','scopes','environment','targets','instances','appearance','filters','origins','environments','blend-modes','music-precision'):
+            run('upgrade-'+suffix)
+        status=json.loads(run('status'))
+        if status.get('schema')!=15 or status.get('integrity')!='ok':raise ValueError('Native setup verification failed')
+        if any(os.path.lexists(str(staged)+suffix) for suffix in ('-wal','-shm','-journal')):raise ValueError('Native setup is not standalone')
+        # Exclusive publication, unlike rename which can replace an existing target.
+        # If hard links are unsupported, refuse rather than degrade to overwrite/copy.
+        os.link(staged,destination)
+    return {'created':True,'schema':15,'integrity':'ok','existing_database_modified':False}
+
 def main():
     sys.dont_write_bytecode=True
-    p=argparse.ArgumentParser(description=__doc__);p.add_argument('--database');p.add_argument('--verify-only',action='store_true');a=p.parse_args()
+    p=argparse.ArgumentParser(description=__doc__);p.add_argument('--database');p.add_argument('--create-database');p.add_argument('--verify-only',action='store_true');a=p.parse_args()
     root=pathlib.Path(__file__).resolve().parent
     try:
         data=verify(root)
+        if sum((bool(a.database),bool(a.create_database),a.verify_only))!=1:raise ValueError('Choose one operation')
         if a.verify_only:print('Package file integrity verified; no executable or database opened.');return
+        if (sys.platform=='win32')!=(data['platform']=='windows') or sys.platform not in ('win32','linux'):raise ValueError('Platform mismatch')
+        if a.create_database:
+            print(json.dumps(create_database(root,data,a.create_database)));return
         if not a.database:raise ValueError('Explicit database required')
         database=pathlib.Path(a.database).absolute()
         if not database.is_file() or any(x.is_symlink() for x in (database,*database.parents)) or root==database or root in database.parents:raise ValueError('External regular database required')
         if (sys.platform=='win32')!=(data['platform']=='windows') or sys.platform not in ('win32','linux'):raise ValueError('Platform mismatch')
         spec=importlib.util.spec_from_file_location('athena_portable_bridge',root/'bridge.py');bridge=importlib.util.module_from_spec(spec);spec.loader.exec_module(bridge)
         server=bridge.Bridge(root/data['binary'],database,root/'runtime')
-    except (OSError,ValueError,KeyError,TypeError):p.exit(2,'Launch refused: verify package, platform and external existing database. No automatic repair or upgrade.\n')
+    except (OSError,ValueError,KeyError,TypeError,subprocess.SubprocessError):p.exit(2,'Launch refused: verify package, platform and external existing database. No automatic repair or existing-database upgrade.\n')
     print(server.origin+'/#build',flush=True)
     try:server.serve_forever()
     except KeyboardInterrupt:pass
