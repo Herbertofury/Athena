@@ -193,3 +193,13 @@ Tests: `node --test native/foundry/tests/asset-library.test.mjs` with the curren
 The existing local profile also exposes `GET /__native/soundtracks`, requiring the same native header/host/origin admission as per-room metadata. Query parameters are not accepted. Existing4MB response and15-second subprocess limits remain. The endpoint is read-only and opens no provider/player. Public Pages do not call it. No settings, capabilities, sign-in or network permissions are expanded.
 
 This enables native cross-room library access without knowing each room in advance. It does not yet add an app-wide library panel, provider search, playback, or source-deletion readiness. Stored URLs/labels are private local metadata and should not be published.
+
+### Clear one local soundtrack assignment
+
+The native CLI accepts `compare-clear-soundtrack DATABASE` with JSON stdin containing exactly `expected`, `theme_id` and `room_id`. Obtain the current room token with `read-native-versioned` first. The authenticated local bridge exposes `POST /__native/clear-soundtrack` with body `{ "theme_id": "…", "room_id": "…" }` and the same Host/Origin/native-header/JSON framing checks and `If-Match` token requirement as assignment writes.
+
+This is an explicit local configuration removal, not an automatic cleanup. A matching token removes only that room's bookmark and returns `null` with the new ETag; stale tokens return HTTP409 without changes. A repeated clear with the current empty token is a no-write success. Unknown rooms and unsupported schemas are rejected. Schemas4–15 are supported without an implicit upgrade. Other rooms, workspace layouts and external providers are not changed. This operation does not sign out, revoke grants, delete remote media or stop an already-playing player.
+
+There is no new UI control in this pass. Consumers should retain/export the old assignment before requesting removal if they want to undo it; workspace revision history is not a soundtrack-undo log. Only invoke on an explicit user action, never as a background migration side effect.
+
+Synthetic acceptance uses the actual Rust executable through the bridge handler for schema4 and15, including wrong origin, missing token, stale token, malformed request, successful removal, unchanged unrelated room and idempotence. Transport is in-memory, not an owner-device/browser test. A Rust regression also verifies closed/reopened persistence and unknown-room refusal. The initial Python fixture assumed every schema-upgrade command emits JSON; commands with empty stdout exposed that harness assumption, corrected before final tests. No product validation was relaxed.
