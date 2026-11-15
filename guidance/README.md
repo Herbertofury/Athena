@@ -30,3 +30,9 @@ The audit verifies known lock identities, complete snapshot paths, digest drift 
 Ported with the repository owner's authorization from Herbertofury/Agent-Foundry commit `87166b5f6a621c61b90bbbfe90835a3752c1c51b`. This port contains its owner-authored governance standards, repository governance implementation, the small standard-library JSON helper and related tests, adapted to Athena identity. Original source inventory and SHA-256 hashes are retained in [the source inventory](registry/agent-foundry-source-inventory.json). Protocol registry is a preserved source snapshot, not a freshly reverified claim.
 
 No repository-wide license is inferred or newly granted. Third-party Skills, assets, archives, installers and bundled source have **not** been imported in this slice. Their rights and provenance require individual review. The source repository and its history remain preserved.
+
+## Reproducible core reference bundle
+
+`python guidance/tools/reference_bundle.py --output /chosen/new-reference.zip` creates a deterministic ZIP of the 16 reviewed canonical documents and an exact-content receipt. Existing outputs are refused. `--verify /chosen/new-reference.zip` verifies against the local checked canonical release, without extraction, execution or installation. Fixed ordering, timestamps, modes and uncompressed bytes make repeat builds identical. Verification rejects unexpected/duplicate/traversal paths, tampered content, changed metadata and oversized input.
+
+This is a portable reference pack, not a signed release, Skill installer, fleet update or complete source archive. It excludes local project instructions, domain Skills/assets and credentials. Digest parity proves integrity relative to the selected local canonical source, not external trust or permission. Component rights still need review; no repository-wide license is inferred. Only explicit repository plan/apply operations can adopt guidance.
