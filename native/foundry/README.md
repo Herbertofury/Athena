@@ -193,3 +193,11 @@ Tests: `node --test native/foundry/tests/asset-library.test.mjs` with the curren
 The existing local profile also exposes `GET /__native/soundtracks`, requiring the same native header/host/origin admission as per-room metadata. Query parameters are not accepted. Existing4MB response and15-second subprocess limits remain. The endpoint is read-only and opens no provider/player. Public Pages do not call it. No settings, capabilities, sign-in or network permissions are expanded.
 
 This enables native cross-room library access without knowing each room in advance. It does not yet add an app-wide library panel, provider search, playback, or source-deletion readiness. Stored URLs/labels are private local metadata and should not be published.
+
+## Preview a retained revision before restoring
+
+`athena-foundry-store preview-revision SELECTED.sqlite3 REVISION_ID` returns a read-only structural preview from the current backup to the selected retained revision. The native bridge exposes the same operation at `GET /__native/revision-preview/ID` under the existing native header/host/origin checks. It never invokes restore, saves a backup or appends history.
+
+The response includes `target_revision`, `current_version`, `restore_applied:false` and deterministic `changes` entries containing JSON Pointer paths plus `added`, `removed` or `replaced`. Object fields recurse; arrays (including named layout lists) are treated as whole values, not guessed identity matches. No before/after values are returned, although paths can contain private object identifiers. Root path is the empty string. `~` and `/` in keys use JSON Pointer escaping. An unchanged revision has no changes.
+
+Both snapshots are validated and the retained revision's digest verified inside one SQLite read transaction. A missing/corrupt revision or invalid current backup refuses the preview. More than2048 change entries,4096UTF-8 path bytes or32 nested levels fails explicitly, never presenting a partial preview as complete. Existing4MB snapshot/response limits remain. The returned version token describes the previewed current backup, not permission to restore; a later restore must still use existing compare-and-restore conflict checks. No new schema or automatic migration occurs. New UI controls and source-rendering equivalence are not claimed by this backend capability.
