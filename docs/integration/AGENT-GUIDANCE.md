@@ -8,13 +8,19 @@ This is the AGENTS.md/Skills/repository-alignment project, distinct from the cre
 
 | Capability | This slice | Remaining acceptance |
 |---|---|---|
-| Versioned 16-file engineering core | Native `guidance/`, Athena identity and release 2.0.1 | Native application navigation/editor/search and real project acceptance |
+| Versioned 16-file engineering core | Native `guidance/`, Athena identity and release 2.0.1 | Native reader/search/reference export implemented in next slice; editor and real project acceptance remain |
 | Explicit repository plan/apply/status | Ported with local-rule preservation and test coverage | Reviewed migration for existing Foundry locks; each consumer tested separately |
 | Desired-state multi-agent Skill installs | Source inventoried, not ported | Target-native compatibility; unmanaged conflict/rollback tests |
 | Eight packaged Skills and domain assets | Source inventoried, not copied | Per-component rights/private-data review; preserve capabilities/assets and author attribution |
 | Deterministic bundles, receipts, supply chain | Source inventoried | Athena-owned packaging/attestation/release compatibility |
 | Protocol/adapters, evals, failure intelligence | Standards preserved; registry snapshot retained | Actual runtime adapters/evals and incident workflows |
 | Wiki, source history and releases | Source commit/tree and all 528 file digests recorded | Full history, live wiki, release artifacts, old links and external dependencies reconciled |
+
+## Native guidance library
+
+The `#guidance` route belongs to Athena navigation and shared search. Its generated catalog contains the complete16 canonical standards, with version, exact source paths and SHA-256 digests. Local selection persists independently of the canonical rules. JSON and Markdown exports preserve complete selected text and attribution. Exports are reference packets, not installed instructions or new permission grants. No local project rules are uploaded or auto-propagated.
+
+`python scripts/build_guidance.py --check` verifies generated content against canonical sources. Model/DOM tests cover completeness, source digests, search, exports and cleanup. The Chromium acceptance script tests actual route loading, source links, selection persistence, export downloads, quota recovery and narrow layout. Browser execution is a separate gate from these unit tests.
 
 ## Retirement gates
 

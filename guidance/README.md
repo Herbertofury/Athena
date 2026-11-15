@@ -1,6 +1,6 @@
 # Athena Guidance
 
-Athena's shared repository-alignment and reusable-agent capability. The first native source port owns a versioned engineering core and a local-safe plan/apply/status implementation under **Athena**, not Foundry. This is executable Athena source, not a remote embed. It is not yet the complete app workspace or full Agent-Foundry migration.
+Athena's shared repository-alignment and reusable-agent capability. The first native source port owns a versioned engineering core and a local-safe plan/apply/status implementation under **Athena**, not Foundry. This is executable Athena source, not a remote embed. The native `#guidance` library adds shared search and source-attributed reference exports; editing, installed Skill workflows and full Agent-Foundry migration remain incomplete.
 
 - [Repository guidance and explicit adoption](docs/REPOSITORY-GOVERNANCE.md)
 - [Shared adapter](templates/AGENTS.repository.md)
