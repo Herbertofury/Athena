@@ -1,0 +1,479 @@
+{
+  "schema": 1,
+  "producer": "Athena guidance consumer audit",
+  "consumers": [
+    {
+      "label": "Bloom-and-Boom",
+      "head": "a38b442c82559ca1c6af94a4b7edafbcd770201b",
+      "scope": "Explicit checkout only. Working tracked text and known adoption locks; no network, file contents or private notes in output.",
+      "referenceDisposition": "Unreviewed references may be provenance rather than active dependencies; review before rewriting.",
+      "legacyRetirementReady": false,
+      "retirementReason": "This audit cannot prove source history, releases, wiki, runtime parity or unseen consumers reconciled.",
+      "locks": [
+        {
+          "kind": "legacy",
+          "present": true,
+          "state": "legacy-migration-required",
+          "issues": [],
+          "snapshots": [
+            {
+              "path": ".agents/foundry/PRODUCT_INVARIANTS.md",
+              "state": "unchanged",
+              "matchesPreservedCanonical": true,
+              "sha256": "6557f62771230a833d69a53dace8e40992afa93d0ff00e75eef79c9c1c70b565"
+            },
+            {
+              "path": ".agents/foundry/MODERNIZATION_STANDARD.md",
+              "state": "unchanged",
+              "matchesPreservedCanonical": true,
+              "sha256": "0c0ac11dba865f4fecd0604f911aea84094c300e5231b2a790951d28f9be4fcb"
+            },
+            {
+              "path": ".agents/foundry/DESIGN_QUALITY_STANDARD.md",
+              "state": "unchanged",
+              "matchesPreservedCanonical": true,
+              "sha256": "403bf05fa52ff93eab3d8f3ea2d9849bd94b7442ddcef6de2b31659f66755bd4"
+            },
+            {
+              "path": ".agents/foundry/FAILURE_INTELLIGENCE_STANDARD.md",
+              "state": "unchanged",
+              "matchesPreservedCanonical": true,
+              "sha256": "81dc3d42f6adc8fb8f84472c2de101749c4530f0aa61dbd1e3e3bfad438355a3"
+            },
+            {
+              "path": ".agents/foundry/CHALLENGER_INTEGRATION_STANDARD.md",
+              "state": "unchanged",
+              "matchesPreservedCanonical": true,
+              "sha256": "99896ab140c00f9b3f3cb2faeee7e6861bf8f405121dd3db207efdb663958ba8"
+            },
+            {
+              "path": ".agents/foundry/PERFORMANCE_ACCEPTANCE.md",
+              "state": "unchanged",
+              "matchesPreservedCanonical": true,
+              "sha256": "6de187e05094f635f7b3a51a16372f0450bba4aa00b8e7e1f888ab055e40e3da"
+            },
+            {
+              "path": ".agents/foundry/RUNTIME_PROOF.md",
+              "state": "unchanged",
+              "matchesPreservedCanonical": true,
+              "sha256": "d3970caf1cbf96100676ca31468f46e3caed53592428c0a8087beba2717fe9e4"
+            },
+            {
+              "path": ".agents/foundry/DURABLE_EXECUTION_STANDARD.md",
+              "state": "unchanged",
+              "matchesPreservedCanonical": true,
+              "sha256": "caa37bb0ec934b4779f7c9888442c6d3f5f3a8b63243679516f3401d85ff227a"
+            },
+            {
+              "path": ".agents/foundry/EVALUATION_STANDARD.md",
+              "state": "unchanged",
+              "matchesPreservedCanonical": true,
+              "sha256": "2ee1fe60f4b280d246d21a2169b2b9ec990aa1a91d95c10d60e06cdbaf2b7814"
+            },
+            {
+              "path": ".agents/foundry/OBSERVABILITY_STANDARD.md",
+              "state": "unchanged",
+              "matchesPreservedCanonical": true,
+              "sha256": "2ecb83035924f46d55520e4fdca968314b6e840d137e1d98d4e7e15454b83dc1"
+            },
+            {
+              "path": ".agents/foundry/INTEROPERABILITY_STANDARD.md",
+              "state": "unchanged",
+              "matchesPreservedCanonical": true,
+              "sha256": "5b277d8118be1274c42fc619bd713cdd83e4d57874c8ce4267e716801fc5e797"
+            },
+            {
+              "path": ".agents/foundry/AUTHORIZATION_CONTROL_STANDARD.md",
+              "state": "unchanged",
+              "matchesPreservedCanonical": true,
+              "sha256": "8835f053671703efd93d4298362e6e36b74498aef518d1f1e0844671f232a256"
+            },
+            {
+              "path": ".agents/foundry/THIRD_PARTY_SKILL_SECURITY.md",
+              "state": "unchanged",
+              "matchesPreservedCanonical": true,
+              "sha256": "0d640f0cfa8da1a3a51199e32a1618d38e6934cca6060c2fd38096cabcd10665"
+            },
+            {
+              "path": ".agents/foundry/SUPPLY_CHAIN_STANDARD.md",
+              "state": "unchanged",
+              "matchesPreservedCanonical": true,
+              "sha256": "efb1376716f4c1d1fec655d1b16ca8213ce00eca4b6ec501ed1b902652daf74f"
+            },
+            {
+              "path": ".agents/foundry/DISTRIBUTION_STANDARD.md",
+              "state": "unchanged",
+              "matchesPreservedCanonical": true,
+              "sha256": "2c3d8e11e1c8f80e14493140a1247312e6d601603e8738bf63adee798c8a3f5b"
+            },
+            {
+              "path": ".agents/foundry/AGENTS-adapter.md",
+              "state": "unchanged",
+              "matchesPreservedCanonical": true,
+              "sha256": "15c80d7805f48075fa76fa4d0c5a0394e107e5f5ad1c1ef862d6fbb5a1a9a258"
+            }
+          ],
+          "version": "1.1.2",
+          "sourceCommit": "87166b5f6a621c61b90bbbfe90835a3752c1c51b",
+          "knownSourceCommit": "87166b5f6a621c61b90bbbfe90835a3752c1c51b"
+        },
+        {
+          "kind": "athena",
+          "present": false,
+          "state": "absent"
+        }
+      ],
+      "legacyReferences": [
+        {
+          "path": ".agent-foundry/governance-lock.json",
+          "sha256": "6b3f678a8238a0dba57ff517fd55776194cf6bdf599313714f1f709f2c16bacb",
+          "counts": {
+            "sourceUrl": 1,
+            "snapshotPath": 16,
+            "statePath": 0
+          }
+        },
+        {
+          "path": ".agents/foundry/AGENTS-adapter.md",
+          "sha256": "15c80d7805f48075fa76fa4d0c5a0394e107e5f5ad1c1ef862d6fbb5a1a9a258",
+          "counts": {
+            "sourceUrl": 0,
+            "snapshotPath": 2,
+            "statePath": 1
+          }
+        },
+        {
+          "path": "AGENTS.md",
+          "sha256": "67080f5cd2fa632ab830bc31373fef22db09f416fef1e60c5f409c7bbc79a117",
+          "counts": {
+            "sourceUrl": 1,
+            "snapshotPath": 1,
+            "statePath": 0
+          }
+        },
+        {
+          "path": "docs/BUILD-AND-TESTING.md",
+          "sha256": "49e6f73b6735706a98cd5915aa1dd08c9242037777648486fa2373249874eaf9",
+          "counts": {
+            "sourceUrl": 3,
+            "snapshotPath": 0,
+            "statePath": 0
+          }
+        },
+        {
+          "path": "docs/REFERENCE2.md",
+          "sha256": "b02db0e5a7e73c12cb1c6e3706fe06d836a3cb30d5245cd74e2ead3fff76dea9",
+          "counts": {
+            "sourceUrl": 2,
+            "snapshotPath": 0,
+            "statePath": 0
+          }
+        },
+        {
+          "path": "docs/REFERENCE3.md",
+          "sha256": "04e8159e9954b8536ed48c011e67d7afa3c6d31da7c8f6a5e2a8396e3a469196",
+          "counts": {
+            "sourceUrl": 1,
+            "snapshotPath": 0,
+            "statePath": 0
+          }
+        },
+        {
+          "path": "docs/STATUS.md",
+          "sha256": "7bd2e2dc267752b90831e662522c8ff15214feb00268bfa4a689212614e366e0",
+          "counts": {
+            "sourceUrl": 3,
+            "snapshotPath": 0,
+            "statePath": 0
+          }
+        }
+      ],
+      "scannedTextFiles": 28,
+      "uninspectedPaths": [
+        "docs/Bloom-and-Boom-reference3-development-bundle.zip",
+        "docs/assets/bloom-and-boom-banner.svg",
+        "docs/assets/bloom-family-native-dev7.png",
+        "docs/native-froglights-reference2.png",
+        "docs/native-froglights-reference3.png"
+      ],
+      "remainingConsumerWork": true,
+      "writesPerformed": false,
+      "repository": "https://github.com/Herbertofury/Bloom-and-Boom",
+      "transitionProposal": {
+        "targetHead": "a38b442c82559ca1c6af94a4b7edafbcd770201b",
+        "sourceVersion": "1.1.2",
+        "destinationVersion": "2.0.1",
+        "conflicts": [],
+        "candidateForHumanReview": true,
+        "proposalOnly": true,
+        "writesPerformed": false,
+        "retirementReady": false
+      },
+      "checkoutUnchanged": true,
+      "referenceClasses": {
+        "pinnedLocalGuidance": [
+          ".agent-foundry/governance-lock.json",
+          ".agents/foundry/AGENTS-adapter.md",
+          "AGENTS.md"
+        ],
+        "historicalDocumentation": [
+          "docs/BUILD-AND-TESTING.md",
+          "docs/REFERENCE2.md",
+          "docs/REFERENCE3.md",
+          "docs/STATUS.md"
+        ],
+        "runtimeFailureEstablished": false
+      },
+      "localSkillPaths": [
+        ".agents/skills/bloom-native-fidelity/SKILL.md"
+      ],
+      "runtimeAssessment": "No application build or runtime was executed. Local pinned standards remain present; source URLs do not establish network-dependent execution."
+    },
+    {
+      "label": "Modhunter",
+      "head": "1a99a66d346b1593273afc7c2b12e2d493c8d5e0",
+      "scope": "Explicit checkout only. Working tracked text and known adoption locks; no network, file contents or private notes in output.",
+      "referenceDisposition": "Unreviewed references may be provenance rather than active dependencies; review before rewriting.",
+      "legacyRetirementReady": false,
+      "retirementReason": "This audit cannot prove source history, releases, wiki, runtime parity or unseen consumers reconciled.",
+      "locks": [
+        {
+          "kind": "legacy",
+          "present": true,
+          "state": "legacy-migration-required",
+          "issues": [],
+          "snapshots": [
+            {
+              "path": ".agents/foundry/PRODUCT_INVARIANTS.md",
+              "state": "unchanged",
+              "matchesPreservedCanonical": true,
+              "sha256": "6557f62771230a833d69a53dace8e40992afa93d0ff00e75eef79c9c1c70b565"
+            },
+            {
+              "path": ".agents/foundry/MODERNIZATION_STANDARD.md",
+              "state": "unchanged",
+              "matchesPreservedCanonical": true,
+              "sha256": "0c0ac11dba865f4fecd0604f911aea84094c300e5231b2a790951d28f9be4fcb"
+            },
+            {
+              "path": ".agents/foundry/DESIGN_QUALITY_STANDARD.md",
+              "state": "unchanged",
+              "matchesPreservedCanonical": true,
+              "sha256": "403bf05fa52ff93eab3d8f3ea2d9849bd94b7442ddcef6de2b31659f66755bd4"
+            },
+            {
+              "path": ".agents/foundry/FAILURE_INTELLIGENCE_STANDARD.md",
+              "state": "unchanged",
+              "matchesPreservedCanonical": true,
+              "sha256": "81dc3d42f6adc8fb8f84472c2de101749c4530f0aa61dbd1e3e3bfad438355a3"
+            },
+            {
+              "path": ".agents/foundry/CHALLENGER_INTEGRATION_STANDARD.md",
+              "state": "unchanged",
+              "matchesPreservedCanonical": true,
+              "sha256": "99896ab140c00f9b3f3cb2faeee7e6861bf8f405121dd3db207efdb663958ba8"
+            },
+            {
+              "path": ".agents/foundry/PERFORMANCE_ACCEPTANCE.md",
+              "state": "unchanged",
+              "matchesPreservedCanonical": true,
+              "sha256": "6de187e05094f635f7b3a51a16372f0450bba4aa00b8e7e1f888ab055e40e3da"
+            },
+            {
+              "path": ".agents/foundry/RUNTIME_PROOF.md",
+              "state": "unchanged",
+              "matchesPreservedCanonical": true,
+              "sha256": "d3970caf1cbf96100676ca31468f46e3caed53592428c0a8087beba2717fe9e4"
+            },
+            {
+              "path": ".agents/foundry/DURABLE_EXECUTION_STANDARD.md",
+              "state": "unchanged",
+              "matchesPreservedCanonical": true,
+              "sha256": "caa37bb0ec934b4779f7c9888442c6d3f5f3a8b63243679516f3401d85ff227a"
+            },
+            {
+              "path": ".agents/foundry/EVALUATION_STANDARD.md",
+              "state": "unchanged",
+              "matchesPreservedCanonical": true,
+              "sha256": "2ee1fe60f4b280d246d21a2169b2b9ec990aa1a91d95c10d60e06cdbaf2b7814"
+            },
+            {
+              "path": ".agents/foundry/OBSERVABILITY_STANDARD.md",
+              "state": "unchanged",
+              "matchesPreservedCanonical": true,
+              "sha256": "2ecb83035924f46d55520e4fdca968314b6e840d137e1d98d4e7e15454b83dc1"
+            },
+            {
+              "path": ".agents/foundry/INTEROPERABILITY_STANDARD.md",
+              "state": "unchanged",
+              "matchesPreservedCanonical": true,
+              "sha256": "5b277d8118be1274c42fc619bd713cdd83e4d57874c8ce4267e716801fc5e797"
+            },
+            {
+              "path": ".agents/foundry/AUTHORIZATION_CONTROL_STANDARD.md",
+              "state": "unchanged",
+              "matchesPreservedCanonical": true,
+              "sha256": "8835f053671703efd93d4298362e6e36b74498aef518d1f1e0844671f232a256"
+            },
+            {
+              "path": ".agents/foundry/THIRD_PARTY_SKILL_SECURITY.md",
+              "state": "unchanged",
+              "matchesPreservedCanonical": true,
+              "sha256": "0d640f0cfa8da1a3a51199e32a1618d38e6934cca6060c2fd38096cabcd10665"
+            },
+            {
+              "path": ".agents/foundry/SUPPLY_CHAIN_STANDARD.md",
+              "state": "unchanged",
+              "matchesPreservedCanonical": true,
+              "sha256": "efb1376716f4c1d1fec655d1b16ca8213ce00eca4b6ec501ed1b902652daf74f"
+            },
+            {
+              "path": ".agents/foundry/DISTRIBUTION_STANDARD.md",
+              "state": "unchanged",
+              "matchesPreservedCanonical": true,
+              "sha256": "2c3d8e11e1c8f80e14493140a1247312e6d601603e8738bf63adee798c8a3f5b"
+            },
+            {
+              "path": ".agents/foundry/AGENTS-adapter.md",
+              "state": "unchanged",
+              "matchesPreservedCanonical": true,
+              "sha256": "15c80d7805f48075fa76fa4d0c5a0394e107e5f5ad1c1ef862d6fbb5a1a9a258"
+            }
+          ],
+          "version": "1.1.2",
+          "sourceCommit": "87166b5f6a621c61b90bbbfe90835a3752c1c51b",
+          "knownSourceCommit": "87166b5f6a621c61b90bbbfe90835a3752c1c51b"
+        },
+        {
+          "kind": "athena",
+          "present": false,
+          "state": "absent"
+        }
+      ],
+      "legacyReferences": [
+        {
+          "path": ".agent-foundry/governance-lock.json",
+          "sha256": "6b3f678a8238a0dba57ff517fd55776194cf6bdf599313714f1f709f2c16bacb",
+          "counts": {
+            "sourceUrl": 1,
+            "snapshotPath": 16,
+            "statePath": 0
+          }
+        },
+        {
+          "path": ".agents/foundry/AGENTS-adapter.md",
+          "sha256": "15c80d7805f48075fa76fa4d0c5a0394e107e5f5ad1c1ef862d6fbb5a1a9a258",
+          "counts": {
+            "sourceUrl": 0,
+            "snapshotPath": 2,
+            "statePath": 1
+          }
+        },
+        {
+          "path": "AGENTS.md",
+          "sha256": "74bb6d563321fff6adcc93091fb32ff563e45614aa3ff6bd7999ccdd072f7edb",
+          "counts": {
+            "sourceUrl": 0,
+            "snapshotPath": 1,
+            "statePath": 0
+          }
+        }
+      ],
+      "scannedTextFiles": 359,
+      "uninspectedPaths": [
+        ".gitattributes",
+        ".gitignore",
+        "Install_to_MO2.bat",
+        "assets/atlas-map.png",
+        "assets/bestiary.png",
+        "assets/desktop-tabs.png",
+        "desktop/Run_ModHunter.bat",
+        "dist/Modhunter-All-in-One.zip",
+        "dist/Modhunter-Complete-Source.zip",
+        "dist/Modhunter-Desktop-Source.zip",
+        "dist/Modhunter-MO2-Plugin.zip",
+        "mo2_update_arsenal/__pycache__/__init__.cpython-314.pyc",
+        "mo2_update_arsenal/__pycache__/bridge.cpython-314.pyc",
+        "mo2_update_arsenal/__pycache__/focus.cpython-314.pyc",
+        "mo2_update_arsenal/__pycache__/gameplay.cpython-314.pyc",
+        "mo2_update_arsenal/__pycache__/lore.cpython-314.pyc",
+        "mo2_update_arsenal/__pycache__/model.cpython-314.pyc",
+        "mo2_update_arsenal/__pycache__/scanner.cpython-314.pyc",
+        "native/.gitignore",
+        "native/Cargo.lock",
+        "native/Check_MO2_Readiness.bat",
+        "native/Install_MO2_Plugin.bat",
+        "native/crates/modhunter-desktop/icons/icon.ico",
+        "native/crates/modhunter-desktop/icons/icon.png",
+        "native/qt_bridge/qt_bridge.cpp",
+        "native/qt_bridge/qt_bridge_fixture.cpp",
+        "native/qt_bridge/qt_bridge_test.cpp",
+        "screenshots/atlas-campaign.png",
+        "screenshots/atlas-map.png",
+        "screenshots/desktop-tabbar.png",
+        "screenshots/modhunter-lore-bestiary.png",
+        "screenshots/modhunter-lore-npc-boss.png",
+        "screenshots/modhunter-menu.png",
+        "screenshots/shiverfell-open-world.png",
+        "source-parts/part-000.b64",
+        "source-parts/part-001.b64",
+        "source-parts/part-002.b64",
+        "source-parts/part-003.b64",
+        "source-parts/part-004.b64",
+        "source-parts/part-005.b64",
+        "source-parts/part-006.b64",
+        "source-parts/part-007.b64",
+        "source-parts/part-008.b64",
+        "source-parts/part-009.b64",
+        "source-parts/part-010.b64",
+        "source-parts/part-011.b64",
+        "source-parts/part-012.b64",
+        "source-parts/part-013.b64",
+        "source-parts/part-014.b64",
+        "source-parts/part-015.b64",
+        "source-parts/part-016.b64",
+        "source-parts/part-017.b64",
+        "source-parts/part-018.b64",
+        "source-parts/part-019.b64",
+        "tests/__pycache__/test_bridge.cpython-314.pyc",
+        "tests/__pycache__/test_core.cpython-314.pyc",
+        "tests/__pycache__/test_focus.cpython-314.pyc",
+        "tests/__pycache__/test_gameplay.cpython-314.pyc",
+        "tests/__pycache__/test_lore.cpython-314.pyc",
+        "tests/__pycache__/test_realm.cpython-314.pyc",
+        "tests/__pycache__/test_siege.cpython-314.pyc"
+      ],
+      "remainingConsumerWork": true,
+      "writesPerformed": false,
+      "repository": "https://github.com/Herbertofury/Modhunter",
+      "transitionProposal": {
+        "targetHead": "1a99a66d346b1593273afc7c2b12e2d493c8d5e0",
+        "sourceVersion": "1.1.2",
+        "destinationVersion": "2.0.1",
+        "conflicts": [],
+        "candidateForHumanReview": true,
+        "proposalOnly": true,
+        "writesPerformed": false,
+        "retirementReady": false
+      },
+      "checkoutUnchanged": true,
+      "referenceClasses": {
+        "pinnedLocalGuidance": [
+          ".agent-foundry/governance-lock.json",
+          ".agents/foundry/AGENTS-adapter.md",
+          "AGENTS.md"
+        ],
+        "historicalDocumentation": [],
+        "runtimeFailureEstablished": false
+      },
+      "localSkillPaths": [
+        ".agents/skills/modhunter-profile-lifecycle/SKILL.md"
+      ],
+      "runtimeAssessment": "No application build or runtime was executed. Local pinned standards remain present; source URLs do not establish network-dependent execution."
+    }
+  ],
+  "date": "2026-11-15",
+  "athenaCommit": "a3c6058af3c8c28c05319299c0d75e036fb9f02b",
+  "sourceHeadVerified": "87166b5f6a621c61b90bbbfe90835a3752c1c51b",
+  "coverage": "Two explicit public main checkouts only; not fleet coverage or application execution."
+}
