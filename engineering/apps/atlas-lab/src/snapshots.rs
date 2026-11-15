@@ -2,6 +2,39 @@
 use crate::modrinth::Project;
 use rusqlite::{Connection, OptionalExtension, TransactionBehavior, params};
 use std::path::Path;
+#[derive(Debug, serde::Serialize)]
+pub struct SnapshotWriteStage {
+    pub stage: &'static str,
+    pub elapsed_micros: u64,
+    pub succeeded: bool,
+    pub sqlite_extended_code: Option<i32>,
+}
+#[derive(Debug, serde::Serialize)]
+pub struct SnapshotWriteReport {
+    pub stages: Vec<SnapshotWriteStage>,
+    pub autocommit_after: bool,
+}
+fn write_stage<T>(
+    diagnostics: &mut Option<Vec<SnapshotWriteStage>>,
+    stage: &'static str,
+    operation: impl FnOnce() -> rusqlite::Result<T>,
+) -> rusqlite::Result<T> {
+    let started = diagnostics.as_ref().map(|_| std::time::Instant::now());
+    let result = operation();
+    if let (Some(events), Some(started)) = (diagnostics, started) {
+        let code = match &result {
+            Err(rusqlite::Error::SqliteFailure(error, _)) => Some(error.extended_code),
+            _ => None,
+        };
+        events.push(SnapshotWriteStage {
+            stage,
+            elapsed_micros: started.elapsed().as_micros().min(u64::MAX as u128) as u64,
+            succeeded: result.is_ok(),
+            sqlite_extended_code: code,
+        });
+    }
+    result
+}
 pub struct SnapshotStore(Connection);
 #[derive(Debug, serde::Serialize)]
 pub struct ProjectHistoryEntry {
@@ -224,14 +257,39 @@ impl SnapshotStore {
         requested: &str,
         record: &crate::modrinth::ProjectRecord,
     ) -> Result<i64, Box<dyn std::error::Error>> {
-        // Private immutable envelope was parsed once; rebind the current request.
-        // No unchecked constructor or mutable payload accessor is exposed.
+        self.save_project_record_internal(requested, record, &mut None)
+    }
+    /// Opt-in non-sensitive diagnostics; errors and transaction semantics unchanged.
+    pub fn save_modrinth_project_record_diagnosed(
+        &mut self,
+        requested: &str,
+        record: &crate::modrinth::ProjectRecord,
+    ) -> (Result<i64, Box<dyn std::error::Error>>, SnapshotWriteReport) {
+        let mut diagnostics = Some(Vec::new());
+        let result = self.save_project_record_internal(requested, record, &mut diagnostics);
+        let report = SnapshotWriteReport {
+            stages: diagnostics.unwrap_or_default(),
+            autocommit_after: self.0.is_autocommit(),
+        };
+        (result, report)
+    }
+    fn save_project_record_internal(
+        &mut self,
+        requested: &str,
+        record: &crate::modrinth::ProjectRecord,
+        diagnostics: &mut Option<Vec<SnapshotWriteStage>>,
+    ) -> Result<i64, Box<dyn std::error::Error>> {
+        // Immutable envelope and exact request binding remain unchanged.
         record.bind_request(requested)?;
-        let tx = self.0.transaction()?;
-        tx.execute("INSERT INTO snapshots(provider,canonical_id,payload) VALUES('modrinth-project-raw',?1,?2)",params![record.project().id,record.raw_json()])?;
+        let tx = write_stage(diagnostics, "begin", || self.0.transaction())?;
+        write_stage(diagnostics, "payload_insert", || {
+            tx.execute("INSERT INTO snapshots(provider,canonical_id,payload) VALUES('modrinth-project-raw',?1,?2)",params![record.project().id,record.raw_json()])
+        })?;
         let generation = tx.last_insert_rowid();
-        tx.execute("INSERT INTO collection_attempts(requested_id,outcome,generation) VALUES(?1,'success',?2)",params![format!("modrinth-project-raw:{requested}"),generation])?;
-        tx.commit()?;
+        write_stage(diagnostics, "attempt_insert", || {
+            tx.execute("INSERT INTO collection_attempts(requested_id,outcome,generation) VALUES(?1,'success',?2)",params![format!("modrinth-project-raw:{requested}"),generation])
+        })?;
+        write_stage(diagnostics, "commit", || tx.commit())?;
         Ok(generation)
     }
     pub fn latest_modrinth_project_record(
