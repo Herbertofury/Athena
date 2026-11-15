@@ -298,7 +298,10 @@ c.execute('UPDATE experiment_runs SET output=? WHERE experiment_id=?',(raw,int(s
   const retainedId=afterRuns.records[0].id;
   const retained=await (await fetch(origin+'/api/learning/history/'+retainedId)).json();
   assert.equal(retained.run_state,'retained');assert.ok(retained.run.includes('evidence'));
-  await stopBridge();origin=await startBridge();await page.goto(origin+'/learning#'+retainedId);
+  const beforeInstance=(await (await fetch(origin+'/api/runtime')).json()).engine_instance;
+  await stopBridge();origin=await startBridge();
+  assert.notEqual((await (await fetch(origin+'/api/runtime')).json()).engine_instance,beforeInstance);
+  await page.goto(origin+'/learning#'+retainedId);await page.reload();
   await page.locator('#detail summary').filter({hasText:'Complete run'}).waitFor();
   assert.equal(await page.locator('#detail pre').last().textContent(),retained.run);
   await page.screenshot({path:path.join(out,'learning-history.png'),fullPage:true});
