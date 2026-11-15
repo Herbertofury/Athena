@@ -1,5 +1,5 @@
 """Launch a verified portable package with an explicitly selected external database."""
-import argparse,hashlib,importlib.util,json,pathlib,sys,os,subprocess,tempfile,sqlite3
+import argparse,hashlib,importlib.util,json,pathlib,sys,os,subprocess,tempfile,sqlite3,types
 
 def verify(root):
     root=pathlib.Path(root).absolute()
@@ -48,7 +48,7 @@ def create_database(root,data,destination):
         os.link(staged,destination)
     return {'created':True,'schema':15,'integrity':'ok','existing_database_modified':False}
 
-def backup_database(root,data,source,destination,quiescent=False):
+def backup_database(root,data,source,destination,quiescent=False,upgrade=False):
     root=pathlib.Path(root).absolute();source=pathlib.Path(source).absolute();destination=pathlib.Path(destination).absolute()
     if not quiescent:raise ValueError('Stop source writes and assert quiescence')
     for path in (source,destination):
@@ -62,27 +62,41 @@ def backup_database(root,data,source,destination,quiescent=False):
         status_result=subprocess.run([str(root/data['binary']),'status',str(staged)],capture_output=True,timeout=15,check=True)
         status=json.loads(status_result.stdout.decode('utf-8',errors='strict'))
         if status.get('integrity')!='ok' or not 2<=status.get('schema',0)<=15:raise ValueError('Native backup not verified')
-        if any(os.path.lexists(str(staged)+suffix) for suffix in ('-wal','-shm','-journal')):raise ValueError('Backup not standalone')
         if hashlib.sha256(staged.read_bytes()).hexdigest()!=receipt.get('destination_sha256'):raise ValueError('Backup changed after preparation')
+        original_schema=status['schema']
+        if upgrade:
+            upgrades=('history','soundtracks','transforms','scopes','environment','targets','instances','appearance','filters','origins','environments','blend-modes','music-precision')
+            for suffix in upgrades[original_schema-2:]:
+                subprocess.run([str(root/data['binary']),'upgrade-'+suffix,str(staged)],capture_output=True,timeout=15,check=True)
+            final=subprocess.run([str(root/data['binary']),'status',str(staged)],capture_output=True,timeout=15,check=True)
+            status=json.loads(final.stdout.decode('utf-8',errors='strict'))
+            if status.get('schema')!=15 or status.get('integrity')!='ok':raise ValueError('Upgrade verification failed')
+            # Recheck raw source bytes after all transformations. No SQLite source open.
+            capture=types.ModuleType('athena_upgrade_capture')
+            exec(compile((root/'sqlite_backup.py').read_bytes(),'sqlite_backup.py','exec'),capture.__dict__)
+            if capture.digest(capture.capture(source))!=receipt['source_file_hashes']:raise ValueError('Source changed during upgrade')
+        if any(os.path.lexists(str(staged)+suffix) for suffix in ('-wal','-shm','-journal')):raise ValueError('Backup not standalone')
+        payload=staged.read_bytes();final_sha=hashlib.sha256(payload).hexdigest()
+        if not upgrade and final_sha!=receipt.get('destination_sha256'):raise ValueError('Backup changed after preparation')
         os.link(staged,destination)
-    return {'backed_up':True,'schema':status['schema'],'integrity':'ok','bytes':receipt['destination_bytes'],
-        'sha256':receipt['destination_sha256'],'source_unchanged_at_checks':receipt['source_unchanged_at_checks'],
+    return {'backed_up':True,'upgraded_copy':upgrade,'source_schema':original_schema,'schema':status['schema'],'integrity':'ok','bytes':len(payload),
+        'sha256':final_sha,'source_unchanged_at_checks':receipt['source_unchanged_at_checks'],
         'source_wal_present':receipt['source_wal_present'],'sqlite_runtime':receipt['sqlite_runtime'],'restored':False}
 
 def main():
     sys.dont_write_bytecode=True
-    p=argparse.ArgumentParser(description=__doc__);p.add_argument('--database');p.add_argument('--create-database');p.add_argument('--backup-database');p.add_argument('--backup-destination');p.add_argument('--source-quiescent',action='store_true');p.add_argument('--verify-only',action='store_true');a=p.parse_args()
+    p=argparse.ArgumentParser(description=__doc__);p.add_argument('--database');p.add_argument('--create-database');p.add_argument('--backup-database');p.add_argument('--upgrade-copy');p.add_argument('--backup-destination');p.add_argument('--source-quiescent',action='store_true');p.add_argument('--verify-only',action='store_true');a=p.parse_args()
     root=pathlib.Path(__file__).resolve().parent
     try:
         data=verify(root)
-        if sum((bool(a.database),bool(a.create_database),bool(a.backup_database),a.verify_only))!=1:raise ValueError('Choose one operation')
-        if bool(a.backup_database)!=bool(a.backup_destination) or (a.source_quiescent and not a.backup_database):raise ValueError('Backup arguments required together')
+        if sum((bool(a.database),bool(a.create_database),bool(a.backup_database),bool(a.upgrade_copy),a.verify_only))!=1:raise ValueError('Choose one operation')
+        if bool(a.backup_database or a.upgrade_copy)!=bool(a.backup_destination) or (a.source_quiescent and not (a.backup_database or a.upgrade_copy)):raise ValueError('Backup arguments required together')
         if a.verify_only:
             print('Package file integrity verified; no executable or database opened.')
             print(json.dumps({'python_sqlite':sqlite3.sqlite_version,'wal_recovery_allowed':sqlite3.sqlite_version_info >= (3,54,0)}));return
         if (sys.platform=='win32')!=(data['platform']=='windows') or sys.platform not in ('win32','linux'):raise ValueError('Platform mismatch')
-        if a.backup_database:
-            print(json.dumps(backup_database(root,data,a.backup_database,a.backup_destination,a.source_quiescent)));return
+        if a.backup_database or a.upgrade_copy:
+            print(json.dumps(backup_database(root,data,a.backup_database or a.upgrade_copy,a.backup_destination,a.source_quiescent,upgrade=bool(a.upgrade_copy))));return
         if a.create_database:
             print(json.dumps(create_database(root,data,a.create_database)));return
         if not a.database:raise ValueError('Explicit database required')
