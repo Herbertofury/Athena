@@ -9,12 +9,13 @@ import {spawn, execFileSync} from 'node:child_process';
 import {chromium} from 'playwright';
 import {repoRoot, binaryPath, pythonCommand} from '../native/foundry/tests/paths.mjs';
 const unified=process.env.ATHENA_UNIFIED_ENGINE;
-const portableUnified=Boolean(unified && process.env.ATHENA_PORTABLE_UNIFIED==='1');
-const out=path.join(repoRoot,unified?'browser-results/unified-native':'browser-results/foundry-native');
+const suppliedPackage=process.env.ATHENA_TEST_PORTABLE_PACKAGE;
+const portableUnified=Boolean(unified && (process.env.ATHENA_PORTABLE_UNIFIED==='1'||suppliedPackage));
+const out=path.join(repoRoot,suppliedPackage?'browser-results/portable-artifact':unified?'browser-results/unified-native':'browser-results/foundry-native');
 fs.mkdirSync(out,{recursive:true});
 const temporary=fs.mkdtempSync(path.join(os.tmpdir(),'athena native synthetic '));
 const db=path.join(temporary,'synthetic.sqlite');
-const portable=path.join(temporary,'portable');
+const portable=suppliedPackage?path.resolve(suppliedPackage):path.join(temporary,'portable');
 const enginePackage=path.join(temporary,'engine-package'),journal=path.join(temporary,'journal.sqlite');
 const report={platform:process.platform,scope:'Chromium → loopback Python bridge → native Rust SQLite executable; synthetic data, not desktop installer or private migration acceptance',checks:[],errors:[],networkFailures:[],httpFailures:[],externalRequests:[]};
 let bridge,browser,context,page,exited,origin,stderr='';
@@ -46,8 +47,15 @@ async function stopBridge(){
 }
 try {
  const binarySha=createHash('sha256').update(fs.readFileSync(binaryPath)).digest('hex');
- execFileSync(pythonCommand,['-B',path.join(repoRoot,'scripts/package_native.py'),'--source',path.join(repoRoot,'dist'),'--binary',binaryPath,'--binary-sha256',binarySha,'--platform',process.platform==='win32'?'windows':'linux','--output',portable,...(portableUnified?['--engine',unified,'--engine-sha256',createHash('sha256').update(fs.readFileSync(unified)).digest('hex')]:[])],{encoding:'utf8',timeout:30000});
+ if(!suppliedPackage)execFileSync(pythonCommand,['-B',path.join(repoRoot,'scripts/package_native.py'),'--source',path.join(repoRoot,'dist'),'--binary',binaryPath,'--binary-sha256',binarySha,'--platform',process.platform==='win32'?'windows':'linux','--output',portable,...(portableUnified?['--engine',unified,'--engine-sha256',createHash('sha256').update(fs.readFileSync(unified)).digest('hex')]:[])],{encoding:'utf8',timeout:30000});
  execFileSync(pythonCommand,['-B',path.join(portable,'launch.py'),'--verify-only'],{cwd:temporary,encoding:'utf8',timeout:15000});
+ if(suppliedPackage){
+  assert.ok(portableUnified,'Extracted artifact acceptance requires unified profile');
+  const suffix=process.platform==='win32'?'.exe':'';
+  assert.equal(createHash('sha256').update(fs.readFileSync(path.join(portable,'athena-foundry-store'+suffix))).digest('hex'),binarySha);
+  assert.equal(createHash('sha256').update(fs.readFileSync(path.join(portable,'atlas-lab'+suffix))).digest('hex'),createHash('sha256').update(fs.readFileSync(unified)).digest('hex'));
+  report.checks.push('Extracted archive executables exactly match tested current build');
+ }
  report.checks.push('Portable native package exact hashes verified outside source checkout');
  const initialized=JSON.parse(execFileSync(pythonCommand,[path.join(portable,'launch.py'),'--create-database',db],{cwd:temporary,encoding:'utf8',timeout:60000}));
  assert.equal(initialized.schema,15);assert.equal(initialized.integrity,'ok');

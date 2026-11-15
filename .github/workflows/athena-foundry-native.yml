@@ -42,6 +42,8 @@ jobs:
         run: cargo build --locked --manifest-path crates/athena-foundry-store/Cargo.toml
       - name: Build unified evidence and authoring engine
         run: cargo build --locked --manifest-path engineering/apps/atlas-lab/Cargo.toml
+      - name: Build and extract unsigned candidate from exact current binaries
+        run: python scripts/package_candidate.py --binary crates/athena-foundry-store/target/debug/athena-foundry-store${{ runner.os == 'Windows' && '.exe' || '' }} --engine engineering/apps/atlas-lab/target/debug/atlas-lab${{ runner.os == 'Windows' && '.exe' || '' }} --platform ${{ runner.os == 'Windows' && 'windows' || 'linux' }} --output candidate-artifact --extract-to candidate-extracted
       - name: Unified dual-store HTTP acceptance
         env:
           ATHENA_UNIFIED_ENGINE: ${{ github.workspace }}/engineering/apps/atlas-lab/target/debug/atlas-lab${{ runner.os == 'Windows' && '.exe' || '' }}
@@ -82,6 +84,13 @@ jobs:
           ATHENA_PORTABLE_UNIFIED: '1'
           ATHENA_UNIFIED_ENGINE: ${{ github.workspace }}/engineering/apps/atlas-lab/target/debug/atlas-lab${{ runner.os == 'Windows' && '.exe' || '' }}
         run: node scripts/test_foundry_native_browser.mjs
+      - name: Extracted candidate archive actual browser acceptance
+        env:
+          ATHENA_UNIFIED_ENGINE: ${{ github.workspace }}/engineering/apps/atlas-lab/target/debug/atlas-lab${{ runner.os == 'Windows' && '.exe' || '' }}
+          ATHENA_TEST_PORTABLE_PACKAGE: ${{ github.workspace }}/candidate-extracted
+        run: |
+          node scripts/test_foundry_native_browser.mjs
+          python -B candidate-extracted/launch.py --verify-only
       - name: Bounded authoring and oversized recovery in Chromium
         run: |
           node scripts/test_foundry_capacity_browser.mjs
@@ -106,6 +115,13 @@ jobs:
         env:
           ATHENA_BROWSER_OUTPUT: browser-results/foundry-drag-grid
         run: node scripts/test_foundry_drag_grid_browser.cjs
+      - name: Retain only fully tested unsigned evaluation bundle
+        uses: actions/upload-artifact@v4
+        with:
+          name: athena-unified-candidate-${{ matrix.os }}
+          path: candidate-artifact/
+          retention-days: 14
+          if-no-files-found: error
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -113,6 +129,7 @@ jobs:
           path: |
             browser-results/foundry-native/
             browser-results/unified-native/
+            browser-results/portable-artifact/
             browser-results/foundry-capacity/
             browser-results/foundry-local-image/
             browser-results/foundry-video-routing/
