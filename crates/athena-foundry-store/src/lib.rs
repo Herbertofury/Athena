@@ -100,6 +100,17 @@ fn catalog(text: &str) -> Result<Catalog> {
 impl Store {
     /// Creates a new file exclusively; refuses existing files and removes nothing on error.
     pub fn create(path: &Path) -> Result<Self> {
+        // Refuse all preexisting SQLite recovery state before creating the main file.
+        // This is a preflight for trusted directories, not an atomic family lock.
+        for suffix in ["", "-wal", "-shm", "-journal"] {
+            let mut member = path.as_os_str().to_os_string();
+            member.push(suffix);
+            match std::fs::symlink_metadata(Path::new(&member)) {
+                Ok(_) => return Err("New database requires an empty destination family".into()),
+                Err(error) if error.kind() == std::io::ErrorKind::NotFound => {}
+                Err(error) => return Err(error.into()),
+            }
+        }
         let c = catalog(CATALOG)?;
         let mut options = std::fs::OpenOptions::new();
         options.write(true).create_new(true);
