@@ -1,3 +1,4 @@
+import {decodeJobReceipt} from '../engineering/apps/atlas-lab/ui/job-submit.mjs';
 // Bounded real-browser/native-process acceptance. Only synthetic data is used.
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
@@ -305,13 +306,16 @@ c.execute('UPDATE experiment_runs SET output=? WHERE experiment_id=?',(raw,int(s
   await page.locator('#detail summary').filter({hasText:'Complete run'}).waitFor();
   assert.equal(await page.locator('#detail pre').last().textContent(),retained.run);
   await page.screenshot({path:path.join(out,'learning-history.png'),fullPage:true});
-  let uncertainSubmissions=0;
-  await page.route('**/api/jobs',async route=>{uncertainSubmissions++;await route.fetch();await route.abort('failed');});
+  let uncertainSubmissions=0,acceptedStatus,acceptedReceipt;
+  await page.route('**/api/jobs',async route=>{uncertainSubmissions++;const accepted=await route.fetch();acceptedStatus=accepted.status();acceptedReceipt=await accepted.text();await route.abort('failed');});
   await page.locator('#run-experiment').click();
   await page.locator('#run-status').filter({hasText:'Submission outcome is unconfirmed'}).waitFor();
   assert.equal(await page.locator('#run-experiment').isDisabled(),true);
   await page.locator('#run-experiment').evaluate(button=>button.click());
-  assert.equal(uncertainSubmissions,1);await page.unroute('**/api/jobs');
+  assert.equal(uncertainSubmissions,1);assert.equal(acceptedStatus,200);
+  const acceptedId=decodeJobReceipt(acceptedReceipt).id;
+  const acceptedState=await fetch(origin+'/api/learning/jobs/'+acceptedId);assert.equal(acceptedState.status,200);assert.equal((await acceptedState.json()).id,acceptedId);
+  await page.unroute('**/api/jobs');
   // Lost status is distinct from lost acceptance. Never automatically resubmit.
   await page.reload();await page.locator('#records li').first().waitFor();
   let statusSubmissions=0;await page.route('**/api/jobs',async route=>{statusSubmissions++;await route.continue();});
