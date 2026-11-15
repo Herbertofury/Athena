@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "completed_at": "2026-11-15T02:36:44.528977+00:00",
+  "completed_at": "2026-11-15T02:47:47.148185+00:00",
   "scope": "Local generated-data, preservation, deterministic application tests and public packaging; actual Chromium and deployed-site verification run separately on GitHub Actions.",
   "counts": {
     "applications": 736,
@@ -82,6 +82,23 @@
       "command": "Final recorded search matrix replay",
       "result": "pass",
       "query_cases": 37
+    },
+    {
+      "command": "JavaScript syntax and seven browser-runner/release contract tests after the settled-theme verifier update",
+      "result": "pass",
+      "basis": "Independent final visual QA review; exact-commit Chromium execution is a GitHub Actions gate."
+    },
+    {
+      "command": "python3 scripts/check_software_links.py --workers 12 --timeout 12 --resume --strict --output research/software-expansion-2026-11-14/link-audit.json",
+      "result": "pass",
+      "url_count": 3909,
+      "summary": {
+        "access_blocked": 7,
+        "not_found": 1,
+        "reachable": 3901
+      },
+      "actionable_not_found": 0,
+      "preserved_excluded_history_404": 1
     }
   ],
   "files": {
@@ -90,12 +107,13 @@
     "src/software/model.mjs": "ef08147df62f1a4c6319e17503f3a9d5584e6ba4c4a3ef33727282068eca6abd",
     "src/software/style.css": "9add15b17765aabe8dc14420afa7ec4fd9d0098f244413a30c74cbec1693a8b2",
     "config/runtime-public-preview.json": "2ed9050affb51e1a728f1fd2921a2dec9c0d13b26cd5f7a6ec86c23167e47828",
-    "scripts/software_browser_checks.cjs": "f0c3514e96f96510b2cbf65607c3050230cd24ef08325a5e8449d51346998d0a",
+    "scripts/software_browser_checks.cjs": "f4009d098c91079b818887048f3d7a73e7c53a2e12ae246a37188546819bcc2f",
     "dist/app.js": "439588f7f2fc3ddf002d79824510cfa1c0c48e1ab47623a2a6b655baa73769ca",
     "dist/index.html": "b95597d554e463d1f243ecc59f4541a5bd0d79b9bbf1b2d4b364c245f49979c6",
     "native/foundry/bridge.py": "39315629637350cacf39b5cbff923685212a0ade1dc573570df7b6d527395909",
     "scripts/package_app.py": "47ac45b8264eaccf5112d1e2a8c138ae7a2318dd68fdc4697c344053ba01c155",
-    "scripts/test_unified_browser.cjs": "95b7296aa34ffe07d32e760d7990008e57e73c8e1167685c316cbbe3ae30c32c"
+    "scripts/test_unified_browser.cjs": "95b7296aa34ffe07d32e760d7990008e57e73c8e1167685c316cbbe3ae30c32c",
+    "research/software-expansion-2026-11-14/link-audit.json": "96dfb3f31462820245b90ec3549a5a63f4b7af3ed4763499b152eb236214e054"
   },
   "logs": {
     "athena-final-build.log": "56994100f736bafd11dc504c49beee12b5bab18ce66326cca3b10db31d9f0da6",
@@ -113,6 +131,7 @@
       "saved-search restoration",
       "homepage launch tile",
       "all software runtime assets"
-    ]
+    ],
+    "latest_main_preserved": "ef04d4a02b597f02a1f5e90adec8cd8bb2ca75b4"
   }
 }

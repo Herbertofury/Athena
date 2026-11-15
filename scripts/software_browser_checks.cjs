@@ -109,8 +109,42 @@ const server = http.createServer((req, res) => {
     const overflow = await page.evaluate(() => ({width: innerWidth, body: document.documentElement.scrollWidth}));
     assert.ok(overflow.body <= overflow.width + 2, JSON.stringify(overflow));
     await page.locator('#theme').click();
-    await page.screenshot({path: path.join(output, 'software-mobile-light.png'), fullPage: false});
-    report.checks.push('390px mobile layout without document overflow; light theme and measured search response');
+    await page.locator('#main[data-workspace="software"] .workspace-container[data-theme="light"]').waitFor();
+    // Finish finite CSS transitions before capturing or measuring the light theme.
+    await page.screenshot({path: path.join(output, 'software-mobile-light.png'), fullPage: false, animations: 'disabled'});
+    const lightTaskContrast = await main.locator('#quick-tasks button').evaluateAll(buttons => {
+      function opaqueRgb(value) {
+        const match = /^rgba?\(([^)]+)\)$/.exec(value);
+        const channels = match ? match[1].trim().split(/[\s,\/]+/).map(Number) : [];
+        if (![3, 4].includes(channels.length) || (channels.length === 4 && channels[3] !== 1) ||
+            channels.slice(0, 3).some(channel => !Number.isFinite(channel) || channel < 0 || channel > 255)) {
+          throw new Error('Quick-task contrast requires an opaque RGB color: ' + value);
+        }
+        return channels.slice(0, 3);
+      }
+      function luminance(rgb) {
+        const linear = rgb.map(channel => {
+          const value = channel / 255;
+          return value <= 0.04045 ? value / 12.92 : ((value + 0.055) / 1.055) ** 2.4;
+        });
+        return 0.2126 * linear[0] + 0.7152 * linear[1] + 0.0722 * linear[2];
+      }
+      return buttons.map(button => {
+        const style = getComputedStyle(button);
+        if (style.backgroundImage !== 'none' || Number(style.opacity) !== 1) {
+          throw new Error('Quick-task contrast requires an opaque solid button background');
+        }
+        const foreground = luminance(opaqueRgb(style.color)), background = luminance(opaqueRgb(style.backgroundColor));
+        return {text: button.textContent.trim(), color: style.color, background_color: style.backgroundColor,
+          ratio: (Math.max(foreground, background) + 0.05) / (Math.min(foreground, background) + 0.05)};
+      });
+    });
+    assert.ok(lightTaskContrast.length, 'Light-theme quick-task buttons must be present');
+    report.light_theme_quick_task_contrast = {required_ratio: 4.5,
+      minimum_ratio: Math.min(...lightTaskContrast.map(button => button.ratio)), buttons: lightTaskContrast};
+    assert.ok(lightTaskContrast.every(button => button.ratio >= 4.5),
+      'Light-theme quick-task text contrast must be at least 4.5:1: ' + JSON.stringify(report.light_theme_quick_task_contrast));
+    report.checks.push('390px mobile layout without document overflow; settled light theme with quick-task text contrast at least 4.5:1; measured search response');
     await page.goto(base + '#certificates');
     await page.getByRole('heading', {name: /career|quest|certificate/i}).first().waitFor();
     await page.goto(base + '#software?platform=Windows');

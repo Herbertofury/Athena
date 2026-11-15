@@ -1,0 +1,84 @@
+{
+  "schema_version": 1,
+  "tested_commit": "bb4438810c235e4fecd1b956f245193fb0cfe985",
+  "scope": "Successful integrated application candidate. The final evidence commit adds the completed URL audit and a settled-light-theme contrast assertion; later exact-commit and live deployment results are linked from pull request 180.",
+  "pull_request": "https://github.com/Herbertofury/Athena/pull/180",
+  "runs": [
+    {
+      "id": 43668771742,
+      "name": "Athena software source audit",
+      "status": "completed",
+      "conclusion": "success",
+      "event": "pull_request",
+      "url": "https://github.com/Herbertofury/Athena/actions/runs/43668771742",
+      "sha": "bb4438810c235e4fecd1b956f245193fb0cfe985"
+    },
+    {
+      "id": 43668771759,
+      "name": "Athena native Foundry",
+      "status": "completed",
+      "conclusion": "success",
+      "event": "pull_request",
+      "url": "https://github.com/Herbertofury/Athena/actions/runs/43668771759",
+      "sha": "bb4438810c235e4fecd1b956f245193fb0cfe985"
+    },
+    {
+      "id": 43668771796,
+      "name": "Athena learning checks",
+      "status": "completed",
+      "conclusion": "success",
+      "event": "pull_request",
+      "url": "https://github.com/Herbertofury/Athena/actions/runs/43668771796",
+      "sha": "bb4438810c235e4fecd1b956f245193fb0cfe985"
+    },
+    {
+      "id": 43668768775,
+      "name": "Athena learning checks",
+      "status": "completed",
+      "conclusion": "success",
+      "event": "push",
+      "url": "https://github.com/Herbertofury/Athena/actions/runs/43668768775",
+      "sha": "bb4438810c235e4fecd1b956f245193fb0cfe985"
+    }
+  ],
+  "native_platforms": [
+    "ubuntu-latest",
+    "windows-latest"
+  ],
+  "software_browser": {
+    "started_at": "2026-11-15T02:40:21.205Z",
+    "base_url": "http://127.0.0.1:46377/",
+    "catalog_sha256": "c2b6af8a973a3dd58f9b1fe259eb5bc4cac70b65bb912968647aa7c545fabff2",
+    "applications": 736,
+    "checks": [
+      "Served database SHA-256 equals the reviewed commit",
+      "Main navigation, lazy catalog load, bounded card rendering, real styles and counts",
+      "Combined OS/license filters, natural task search, detail sources and keyboard dialog close",
+      "Side-by-side comparison including limitations; selections and filtered URL survive reload",
+      "Task guide shows explicit reasons, tradeoffs and its exact candidate set",
+      "Empty-state recovery and complete JSON export with provenance",
+      "390px mobile layout without document overflow; light theme and measured search response",
+      "Learning route remains available; workspace unmount/remount and deep links; no browser errors"
+    ],
+    "result": "pass",
+    "catalog_verification_attempts": [
+      {
+        "attempt": 1,
+        "observed": "c2b6af8a973a3dd58f9b1fe259eb5bc4cac70b65bb912968647aa7c545fabff2"
+      }
+    ],
+    "search_to_result_ms": 20,
+    "finished_at": "2026-11-15T02:40:24.379Z"
+  },
+  "software_screenshot_sha256": {
+    "software-desktop.png": "4c74245b254aa31ffc398c9a52083769b50e4aea648bfebdb666dda77df6e369",
+    "software-mobile-light.png": "dbf3fb93de2148df1c87906f95cbb27479a65c31d925e86b4669a647b5da9307",
+    "software-comparison.png": "5a57cca7c4b0f9f7d11a11141671ca0642fa54a09f984431c9af1ccf678859e0",
+    "software-mobile.png": "8cbf5f575bf952ca203d8f81864e7ebfed03c017b968025ebc51d55b7437e657"
+  },
+  "software_artifact": {
+    "id": 14143348358,
+    "sha256": "f1329da051a857f8ee27b97ee52d63eed10bf61f23809a100c0ef2b80ddd3d7f"
+  },
+  "limits": "These checks validate Athena's application and catalog integration. They do not establish installed-product behavior, comparative software benchmarks or security certification."
+}
