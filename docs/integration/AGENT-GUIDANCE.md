@@ -11,7 +11,7 @@ This is the AGENTS.md/Skills/repository-alignment project, distinct from the cre
 | Versioned 16-file engineering core | Native `guidance/`, Athena identity and release 2.0.1 | Native reader/search/reference export implemented in next slice; editor and real project acceptance remain |
 | Explicit repository plan/apply/status | Ported with local-rule preservation and test coverage | Reviewed migration for existing Foundry locks; each consumer tested separately |
 | Desired-state multi-agent Skill installs | Source inventoried, not ported | Target-native compatibility; unmanaged conflict/rollback tests |
-| Eight packaged Skills and domain assets | Source inventoried, not copied | Per-component rights/private-data review; preserve capabilities/assets and author attribution |
+| Eight packaged Skills and domain assets | Source inventoried, not copied; native bounded read-only preflight and [eight-Skill receipt](../../guidance/evidence/agent-foundry-skill-preflight-2026-11-15.json) | Per-component rights/private-data review; preserve capabilities/assets and author attribution |
 | Deterministic bundles, receipts, supply chain | Athena-owned reproducible 16-document core reference ZIP and exact canonical verifier | Signed release/attestation, Skill packaging and installed-client compatibility remain |
 | Protocol/adapters, evals, failure intelligence | Standards preserved; registry snapshot retained | Actual runtime adapters/evals and incident workflows |
 | Wiki, source history and releases | Source commit/tree and all 528 file digests recorded | Full history, live wiki, release artifacts, old links and external dependencies reconciled |
