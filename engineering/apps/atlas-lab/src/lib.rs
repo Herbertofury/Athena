@@ -2,6 +2,7 @@
 extern crate self as atlas_lab;
 pub mod athena_assets;
 pub mod collection_failure;
+pub mod learning_history;
 mod storage_connection;
 use serde::{Deserialize, Serialize};
 

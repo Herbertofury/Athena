@@ -67,7 +67,7 @@ async fn guard(request: Request, next: Next) -> Response {
 async fn runtime_info(State(app): State<App>) -> Json<serde_json::Value> {
     Json(serde_json::json!({"application":"Athena", "api_version":1,
         "engine_instance":app.engine_instance,"loopback_only":true,"same_origin_only":true,
-        "external_media":false,"overview_strategy":if app.overview_candidate {"validated-raw-candidate"} else {"baseline"},
+        "learning_history_url":"/learning","external_media":false,"overview_strategy":if app.overview_candidate {"validated-raw-candidate"} else {"baseline"},
         "runtime_manifest_sha256":app.runtime_assets.as_ref().map(|assets|assets.manifest_sha256.as_str())}))
 }
 async fn runtime_asset(State(app): State<App>, request: Request) -> Response {
@@ -644,6 +644,7 @@ async fn serve_strategy(
     runtime_assets: Option<Arc<crate::athena_assets::RuntimeAssets>>,
     foundry: Option<PathBuf>,
 ) -> Result<(), Box<dyn std::error::Error>> {
+    let path_for_history = path.clone();
     let engine_instance = new_engine_instance()?;
     Queue::open(&path)?;
     let listener = tokio::net::TcpListener::bind(HOST).await?;
@@ -740,6 +741,7 @@ async fn serve_strategy(
             overview_candidate,
             db_slots: Arc::new(tokio::sync::Semaphore::new(4)),
         });
+    let app = app.merge(crate::learning_history::router(path_for_history));
     let unified = foundry.is_some();
     let app = if let Some(path) = foundry {
         app.merge(crate::foundry_native::router(path))
