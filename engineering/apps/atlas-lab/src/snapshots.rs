@@ -265,19 +265,38 @@ impl SnapshotStore {
         limit: usize,
     ) -> Result<ProjectHistoryPage, Box<dyn std::error::Error>> {
         crate::modrinth::projects_url(&[id.to_owned()])?;
+        self.archive_history("modrinth-project-raw", id, before, limit)
+    }
+    pub fn modrinth_version_history(
+        &self,
+        id: &str,
+        before: Option<i64>,
+        limit: usize,
+    ) -> Result<ProjectHistoryPage, Box<dyn std::error::Error>> {
+        crate::modrinth_versions::versions_url(&[id.to_owned()])?;
+        self.archive_history("modrinth-version", id, before, limit)
+    }
+    fn archive_history(
+        &self,
+        provider: &str,
+        id: &str,
+        before: Option<i64>,
+        limit: usize,
+    ) -> Result<ProjectHistoryPage, Box<dyn std::error::Error>> {
         if !(1..=100).contains(&limit) || before.is_some_and(|value| value < 1) {
             return Err("Invalid project history cursor or page size".into());
         }
         let mut statement = self.0.prepare(
-            "SELECT generation,CASE WHEN length(observed_at)<=64 THEN observed_at ELSE NULL END,octet_length(payload) FROM snapshots WHERE provider='modrinth-project-raw' AND canonical_id=?1 AND (?2 IS NULL OR generation<?2) ORDER BY generation DESC LIMIT ?3"
+            "SELECT generation,CASE WHEN length(observed_at)<=64 THEN observed_at ELSE NULL END,octet_length(payload) FROM snapshots WHERE provider=?4 AND canonical_id=?1 AND (?2 IS NULL OR generation<?2) ORDER BY generation DESC LIMIT ?3"
         )?;
-        let rows = statement.query_map(params![id, before, (limit + 1) as i64], |row| {
-            Ok((
-                row.get::<_, i64>(0)?,
-                row.get::<_, Option<String>>(1)?,
-                row.get::<_, i64>(2)?,
-            ))
-        })?;
+        let rows =
+            statement.query_map(params![id, before, (limit + 1) as i64, provider], |row| {
+                Ok((
+                    row.get::<_, i64>(0)?,
+                    row.get::<_, Option<String>>(1)?,
+                    row.get::<_, i64>(2)?,
+                ))
+            })?;
         let mut entries = Vec::new();
         for row in rows {
             let (generation, observed_at, stored_bytes) = row?;
@@ -466,9 +485,29 @@ impl SnapshotStore {
         id: &str,
     ) -> Result<Option<(i64, crate::modrinth_versions::VersionRecord)>, Box<dyn std::error::Error>>
     {
+        self.modrinth_version_snapshot_at(id, None)
+    }
+    pub fn modrinth_version_generation(
+        &self,
+        id: &str,
+        generation: i64,
+    ) -> Result<Option<(i64, crate::modrinth_versions::VersionRecord)>, Box<dyn std::error::Error>>
+    {
+        if generation < 1 {
+            return Err("Invalid version archive generation".into());
+        }
+        self.modrinth_version_snapshot_at(id, Some(generation))
+    }
+    fn modrinth_version_snapshot_at(
+        &self,
+        id: &str,
+        generation: Option<i64>,
+    ) -> Result<Option<(i64, crate::modrinth_versions::VersionRecord)>, Box<dyn std::error::Error>>
+    {
+        crate::modrinth_versions::versions_url(&[id.to_owned()])?;
         // Reuse the project archive's encoded-size bound before copying TEXT.
         // Four MiB admits valid two-MiB UTF-8 payloads in UTF-16 databases.
-        let stored:Option<(i64,Option<String>)>=self.0.query_row("SELECT generation,CASE WHEN octet_length(payload)<=4194304 THEN payload ELSE NULL END FROM snapshots WHERE provider='modrinth-version' AND canonical_id=?1 ORDER BY generation DESC LIMIT 1",[id],|r|Ok((r.get(0)?,r.get(1)?))).optional()?;
+        let stored:Option<(i64,Option<String>)>=self.0.query_row("SELECT generation,CASE WHEN octet_length(payload)<=4194304 THEN payload ELSE NULL END FROM snapshots WHERE provider='modrinth-version' AND canonical_id=?1 AND (?2 IS NULL OR generation=?2) ORDER BY generation DESC LIMIT 1",params![id,generation],|r|Ok((r.get(0)?,r.get(1)?))).optional()?;
         stored
             .map(|(generation, body)| {
                 if generation < 1 {

@@ -175,12 +175,36 @@ async fn project_history_response(
     RoutePath(id): RoutePath<String>,
     Query(query): Query<ProjectHistoryQuery>,
 ) -> Result<Json<crate::snapshots::ProjectHistoryPage>, StatusCode> {
+    archive_history_response(app, id, query, ArchiveKind::Project).await
+}
+async fn version_history_response(
+    State(app): State<App>,
+    RoutePath(id): RoutePath<String>,
+    Query(query): Query<ProjectHistoryQuery>,
+) -> Result<Json<crate::snapshots::ProjectHistoryPage>, StatusCode> {
+    archive_history_response(app, id, query, ArchiveKind::Version).await
+}
+async fn archive_history_response(
+    app: App,
+    id: String,
+    query: ProjectHistoryQuery,
+    kind: ArchiveKind,
+) -> Result<Json<crate::snapshots::ProjectHistoryPage>, StatusCode> {
     let limit = query.limit.unwrap_or(50);
     if !(1..=100).contains(&limit) || query.before.is_some_and(|value| value < 1) {
         return Err(StatusCode::BAD_REQUEST);
     }
-    crate::modrinth::projects_url(std::slice::from_ref(&id))
-        .map_err(|_| StatusCode::BAD_REQUEST)?;
+    match kind {
+        ArchiveKind::Project => {
+            crate::modrinth::projects_url(std::slice::from_ref(&id))
+                .map_err(|_| StatusCode::BAD_REQUEST)?;
+        }
+        ArchiveKind::Version => {
+            crate::modrinth_versions::versions_url(std::slice::from_ref(&id))
+                .map_err(|_| StatusCode::BAD_REQUEST)?;
+        }
+        ArchiveKind::Upstream => return Err(StatusCode::BAD_REQUEST),
+    }
     let permit = app
         .db_slots
         .try_acquire_owned()
@@ -189,10 +213,12 @@ async fn project_history_response(
         let _permit = permit;
         let store = crate::snapshots::SnapshotStore::open(&app.path)
             .map_err(|_| StatusCode::INTERNAL_SERVER_ERROR)?;
-        store
-            .modrinth_project_history(&id, query.before, limit)
-            .map(Json)
-            .map_err(|_| StatusCode::UNPROCESSABLE_ENTITY)
+        let page = match kind {
+            ArchiveKind::Project => store.modrinth_project_history(&id, query.before, limit),
+            ArchiveKind::Version => store.modrinth_version_history(&id, query.before, limit),
+            ArchiveKind::Upstream => return Err(StatusCode::BAD_REQUEST),
+        };
+        page.map(Json).map_err(|_| StatusCode::UNPROCESSABLE_ENTITY)
     })
     .await
     .map_err(|_| StatusCode::INTERNAL_SERVER_ERROR)?
@@ -231,6 +257,15 @@ async fn saved_project_generation_response(
     }
     saved_archive_at(app, id, ArchiveKind::Project, Some(generation)).await
 }
+async fn saved_version_generation_response(
+    State(app): State<App>,
+    RoutePath((id, generation)): RoutePath<(String, i64)>,
+) -> Result<Response, StatusCode> {
+    if generation < 1 {
+        return Err(StatusCode::BAD_REQUEST);
+    }
+    saved_archive_at(app, id, ArchiveKind::Version, Some(generation)).await
+}
 async fn saved_archive_at(
     app: App,
     id: String,
@@ -268,9 +303,16 @@ async fn saved_archive_at(
                     snapshot.map(|(generation, record)| (generation, record.raw_json().to_owned()))
                 })
             }
-            ArchiveKind::Version => store.latest_modrinth_version_snapshot(&id).map(|snapshot| {
-                snapshot.map(|(generation, record)| (generation, record.payload.get().to_owned()))
-            }),
+            ArchiveKind::Version => {
+                let selected = match selected_generation {
+                    Some(generation) => store.modrinth_version_generation(&id, generation),
+                    None => store.latest_modrinth_version_snapshot(&id),
+                };
+                selected.map(|snapshot| {
+                    snapshot
+                        .map(|(generation, record)| (generation, record.payload.get().to_owned()))
+                })
+            }
             ArchiveKind::Upstream => store
                 .latest_upstream_snapshot(
                     crate::upstream_reviews::Source::parse(&id)
@@ -636,6 +678,11 @@ async fn serve_strategy(
             get(saved_project_generation_response),
         )
         .route("/api/version-archive/{id}", get(saved_version_response))
+        .route(
+            "/api/version-archive/{id}/{generation}",
+            get(saved_version_generation_response),
+        )
+        .route("/api/version-history/{id}", get(version_history_response))
         .route("/api/upstream-archive/{id}", get(saved_upstream_response))
         .route("/api/overview", get(overview))
         .route("/api/jobs", post(enqueue))
@@ -819,6 +866,16 @@ mod tests {
             db_slots: Arc::new(tokio::sync::Semaphore::new(4)),
         };
         tokio::runtime::Builder::new_multi_thread().worker_threads(2).enable_all().build().unwrap().block_on(async {
+            let history=version_history_response(State(app.clone()),RoutePath(id.clone()),Query(ProjectHistoryQuery{before:None,limit:Some(1)})).await.unwrap().0;
+            assert_eq!(history.entries.len(),1);
+            assert_eq!(history.entries[0].generation,version_generation.to_string());
+            assert!(history.next_before.is_none());
+            let selected=saved_version_generation_response(State(app.clone()),RoutePath((id.clone(),version_generation))).await.unwrap();
+            assert_eq!(axum::body::to_bytes(selected.into_body(),4096).await.unwrap().as_ref(),version.as_bytes());
+            for missing in [project_generation,version_generation+100] {
+                assert_eq!(saved_version_generation_response(State(app.clone()),RoutePath((id.clone(),missing))).await.unwrap_err(),StatusCode::NOT_FOUND);
+            }
+            assert_eq!(saved_version_generation_response(State(app.clone()),RoutePath((id.clone(),0))).await.unwrap_err(),StatusCode::BAD_REQUEST);
             for (kind, expected, generation) in [(ArchiveKind::Project, project, project_generation),(ArchiveKind::Version, version, version_generation)] {
                 let response = saved_archive_response(app.clone(), id.clone(), kind).await.unwrap();
                 assert_eq!(response.headers()["x-atlas-archive-kind"], kind.label());
