@@ -5,6 +5,11 @@ import pathlib,hashlib,sqlite3,tempfile,os,argparse,json
 from contextlib import closing
 LIMIT=64*1024*1024
 SUFFIXES=('', '-wal', '-shm', '-journal')
+def destination_clear(destination):
+ # A new main file beside old recovery state is not a new SQLite destination.
+ # Trusted private directories are required; these checks do not defeat path races.
+ if any(os.path.lexists(str(destination)+suffix) for suffix in SUFFIXES):
+  raise FileExistsError('Destination database or sidecar already exists; preserve it and choose a new name')
 def capture(source):
  result={};total=0
  for suffix in SUFFIXES:
@@ -28,7 +33,7 @@ def prepare(source,destination,scratch,quiescent=False):
  source=pathlib.Path(source);destination=pathlib.Path(destination);scratch=pathlib.Path(scratch)
  reserved={pathlib.Path(str(source.resolve())+suffix) for suffix in SUFFIXES}
  if destination.resolve() in reserved:raise ValueError('Destination must not be the source or any source sidecar path')
- if destination.exists() or destination.is_symlink():raise FileExistsError('Destination already exists')
+ destination_clear(destination)
  first=capture(source)
  # CVE-2026-119375: staging does not fix a vulnerable Python-linked SQLite.
  # Refuse WAL before any sqlite3.connect, even if Rust bundles a patched copy.
@@ -51,6 +56,7 @@ def prepare(source,destination,scratch,quiescent=False):
   if digest(capture(source))!=identity:raise ValueError('Source changed during preparation; destination not created')
   payload=target.read_bytes()
   if payload[18:20]!=b'\x01\x01':raise ValueError('Standalone rollback-journal backup required')
+  destination_clear(destination)
   created=False
   try:
    with os.fdopen(os.open(destination, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o600), 'wb') as f:
