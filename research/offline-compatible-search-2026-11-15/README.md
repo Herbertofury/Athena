@@ -41,3 +41,17 @@ checked separately; this README does not assert an unobserved browser pass.
 
 Rollback is removing the isolated experiment; native app source is unchanged.
 Earlier failed candidate evidence remains under `offline-target-search-2026-11-15`.
+
+### Verified hosted receipt
+
+The dedicated hosted run [43669779259](https://github.com/Herbertofury/Athena/actions/runs/43669779259)
+on head `0e55d37af74e250b82ffb54b1664d54ac934a1b7` passed in Chromium
+151.0.7922.34. `hosted-browser-receipt.json` preserves its real raw browser receipt.
+Artifact 14142949266 ZIP SHA-256:
+`abc149d3fd4a27cc5ce112bd9e8df69be0f63edbcf0bdf172c1ff5ec8ecc4347`.
+Loaded baseline/candidate script hashes verified. Subnet results/order preserved;
+reordered database and cryptography queries rendered their expected lessons.
+Median input-to-two-frame samples were about 31.7–31.9 ms for both: **no demonstrated
+speed advantage**, and frame cadence dominates this measurement. Local missing-browser
+failure remains preserved separately. This is a hosted local-app experiment, not a
+production deployment or native offline-learning rollout.

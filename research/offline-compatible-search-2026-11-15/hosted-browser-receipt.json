@@ -1,0 +1,63 @@
+{
+  "scope": "actual local Athena Chromium UI, experimental response substitution only",
+  "cases": [
+    {
+      "mode": "baseline",
+      "query": "subnet",
+      "ids": [
+        "ip-subnets",
+        "net-subnet-planning"
+      ],
+      "median_input_to_two_frames_ms": 31.69999999999709,
+      "p95_ms": 31.80000000000291
+    },
+    {
+      "mode": "baseline",
+      "query": "database durable",
+      "ids": [],
+      "median_input_to_two_frames_ms": 31.80000000000291,
+      "p95_ms": 32
+    },
+    {
+      "mode": "baseline",
+      "query": "Hashing encryption",
+      "ids": [],
+      "median_input_to_two_frames_ms": 31.900000000001455,
+      "p95_ms": 31.900000000001455
+    },
+    {
+      "mode": "candidate",
+      "query": "subnet",
+      "ids": [
+        "ip-subnets",
+        "net-subnet-planning"
+      ],
+      "median_input_to_two_frames_ms": 31.80000000000291,
+      "p95_ms": 32
+    },
+    {
+      "mode": "candidate",
+      "query": "database durable",
+      "ids": [
+        "databases",
+        "sys-durable-database"
+      ],
+      "median_input_to_two_frames_ms": 31.89999999999418,
+      "p95_ms": 32.19999999999709
+    },
+    {
+      "mode": "candidate",
+      "query": "Hashing encryption",
+      "ids": [
+        "cryptography",
+        "sec-data-integrity"
+      ],
+      "median_input_to_two_frames_ms": 31.89999999999418,
+      "p95_ms": 32
+    }
+  ],
+  "browser": "151.0.7922.34",
+  "baseline_loaded_app_sha256": "6d6940eb0f97bd0744d47b066514199c0c6655af37544aca0bee8ded27b1e2d7",
+  "candidate_loaded_app_sha256": "981b92a4c654863ce171be04cab797431d878f35d89af9cb93ece94a007cdbaf",
+  "passed": true
+}
