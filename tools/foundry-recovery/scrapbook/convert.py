@@ -1,5 +1,5 @@
 """Explicit offline partial converter. No browser, user-store, provider or network access."""
-import argparse,hashlib,json,math,os,uuid
+import argparse,hashlib,json,math,os,uuid,importlib.util
 from pathlib import Path
 LIMIT=1_000_000
 BLENDS=frozenset(['normal','multiply','screen','overlay','soft-light','hard-light','difference','color-dodge','luminosity'])
@@ -111,8 +111,13 @@ def bounded_read(path):
  with path.open('rb') as f:data=f.read(LIMIT+1)
  if len(data)>LIMIT:raise ValueError('Input exceeds limit')
  return data
-def write_bundle(source,mapping_path,destination,catalog_path):
- raw=bounded_read(source);mapraw=bounded_read(mapping_path);mapping=parse(mapraw);catalograw=bounded_read(catalog_path);catalog=parse(catalograw);output=convert(raw,mapping,catalog);workspace=json.dumps(output,ensure_ascii=True,indent=2).encode()
+def write_bundle(source,mapping_path,destination,catalog_path,capsule=False):
+ if capsule:
+  spec=importlib.util.spec_from_file_location('original_value_capsule',Path(__file__).resolve().parents[1]/'capsule/capsule.py')
+  module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module)
+  raw=module.extract_utf8(source,'ff-scrapbook-layout',LIMIT)
+ else:raw=bounded_read(source)
+ mapraw=bounded_read(mapping_path);mapping=parse(mapraw);catalograw=bounded_read(catalog_path);catalog=parse(catalograw);output=convert(raw,mapping,catalog);workspace=json.dumps(output,ensure_ascii=True,indent=2).encode()
  # Only create after full validation. Reserve a NEW private directory, never overwrite.
  destination.mkdir(mode=0o700)
  def write(name,data):
@@ -142,15 +147,15 @@ def main():
  mode=p.add_mutually_exclusive_group(required=True)
  mode.add_argument('--new-bundle',type=Path)
  mode.add_argument('--verify-bundle',type=Path)
- p.add_argument('--source',type=Path);p.add_argument('--mapping',type=Path);a=p.parse_args()
- if a.verify_bundle is not None and (a.source is not None or a.mapping is not None):
-  p.error('--verify-bundle does not accept --source or --mapping')
+ p.add_argument('--source',type=Path);p.add_argument('--mapping',type=Path);p.add_argument('--capsule',action='store_true');a=p.parse_args()
+ if a.verify_bundle is not None and (a.source is not None or a.mapping is not None or a.capsule):
+  p.error('--verify-bundle does not accept --source, --mapping or --capsule')
  if a.new_bundle is not None and (a.source is None or a.mapping is None):
   p.error('--new-bundle requires --source and --mapping')
  try:
   if a.verify_bundle is not None:result=verify_bundle(a.verify_bundle,a.catalog)
   else:
-   count=write_bundle(a.source,a.mapping,a.new_bundle,a.catalog)
+   count=write_bundle(a.source,a.mapping,a.new_bundle,a.catalog,a.capsule)
    result={'convertedRows':count,'partialCompatibility':True,'originalVisualFidelityVerified':False}
  except Exception as e:raise SystemExit('Recovery verification/conversion refused or failed: '+str(e))
  print(json.dumps(result))

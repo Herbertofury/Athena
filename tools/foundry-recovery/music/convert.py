@@ -18,13 +18,7 @@ def read_music_source(path,capsule=False):
  if not capsule:return read_bounded(path)
  spec=importlib.util.spec_from_file_location('original_value_capsule',Path(__file__).resolve().parents[1]/'capsule/capsule.py')
  module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module)
- if path.is_symlink() or not path.is_file():raise ValueError('Regular capsule file required')
- with path.open('rb') as stream:raw=stream.read(module.LIMIT+1)
- values=module.unpack(module.parse(raw))
- if 'ff.music-hub.v2' not in values:raise ValueError('Capsule has no MusicHub value')
- music=values['ff.music-hub.v2'].encode('utf-8',errors='strict')
- if len(music)>MAX_INPUT_BYTES:raise ValueError('MusicHub value exceeds limit')
- return music
+ return module.extract_utf8(path,'ff.music-hub.v2',MAX_INPUT_BYTES)
 def parse(raw):
  if len(raw)>MAX_INPUT_BYTES:raise ValueError('Input exceeds limit')
  return json.loads(raw.decode('utf-8'),object_pairs_hook=pairs,parse_constant=lambda _: (_ for _ in ()).throw(ValueError('Nonfinite JSON')))
