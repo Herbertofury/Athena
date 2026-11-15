@@ -86,9 +86,9 @@ class Bridge(ThreadingMixIn,HTTPServer):
     def legacy_cli(self,action):
         args=[self.binary,action,str(self.legacy_source)]
         if action=='import-legacy':args.append(str(self.import_destination))
-        result=subprocess.run(args,capture_output=True,text=True,timeout=15,check=False)
-        if result.returncode or len(result.stdout.encode())>MAX_BODY:raise ValueError('Legacy operation rejected')
-        return json.loads(result.stdout)
+        result=subprocess.run(args,capture_output=True,timeout=15,check=False)
+        if result.returncode or len(result.stdout)>MAX_BODY:raise ValueError('Legacy operation rejected')
+        return json.loads(result.stdout.decode("utf-8",errors="strict"))
     @serialized
     def inspect_source(self):
         self.review=None
@@ -109,10 +109,10 @@ class Bridge(ThreadingMixIn,HTTPServer):
         return 200,{'imported':True,'report':report,'source_unchanged_at_checks':unchanged,'snapshot_identity_verified':False,'lossless_migration':False,'restart_required':True}
     @serialized
     def cli(self,command,text=None,revision=None,room=None):
-        result=subprocess.run([self.binary,command,self.database]+([str(revision)] if revision is not None else [])+(list(room) if room is not None else []),input=text,capture_output=True,text=True,timeout=15,check=False)
+        result=subprocess.run([self.binary,command,self.database]+([str(revision)] if revision is not None else [])+(list(room) if room is not None else []),input=text.encode("utf-8") if text is not None else None,capture_output=True,timeout=15,check=False)
         if result.returncode!=0:raise ValueError('Native operation failed; database retained')
-        if len(result.stdout.encode())>MAX_BODY:raise ValueError('Native response exceeds limit')
-        return result.stdout.strip()
+        if len(result.stdout)>MAX_BODY:raise ValueError('Native response exceeds limit')
+        return result.stdout.decode("utf-8",errors="strict").strip()
 def version(text):
     return '"empty"' if text=='null' else '"'+hashlib.sha256(text.encode()).hexdigest()+'"'
 class Handler(BaseHTTPRequestHandler):
