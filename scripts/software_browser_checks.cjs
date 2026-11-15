@@ -31,15 +31,15 @@ const server = http.createServer((req, res) => {
     assert.match(await main.locator('#result-count').textContent(), new RegExp(String(catalog.applications.length)));
     await page.screenshot({path: path.join(output, 'software-desktop.png'), fullPage: false});
     report.checks.push('Main navigation, lazy catalog load, bounded card rendering, real styles and counts');
-    await main.getByLabel('Operating system', {exact: true}).selectOption('Windows');
-    await main.getByLabel('License type', {exact: true}).selectOption('open-source');
+    await main.getByRole('combobox', {name: 'Operating system', exact: true}).selectOption('Windows');
+    await main.getByRole('combobox', {name: 'License type', exact: true}).selectOption('open-source');
     const filteredIds = await main.locator('.software-card').evaluateAll(nodes => nodes.map(n => n.dataset.appId));
     assert.ok(filteredIds.length && filteredIds.every(id => {
       const app = catalog.applications.find(a => a.id === id);
       return app.platforms.includes('Windows') && app.license_kind === 'open-source';
     }));
     // Czkawka's inherited component-license review is explicitly mixed.
-    await main.getByLabel('License type', {exact: true}).selectOption('');
+    await main.getByRole('combobox', {name: 'License type', exact: true}).selectOption('');
     await page.locator('#search').fill('find duplicate files');
     await main.locator('[data-app-id="czkawka---krokiet"]').waitFor();
     await main.getByRole('button', {name: 'Explore Czkawka / Krokiet', exact: true}).click();
@@ -65,7 +65,7 @@ const server = http.createServer((req, res) => {
     report.checks.push('Side-by-side comparison including limitations; selections and filtered URL survive reload');
     if (catalog.recipes.length) {
       await main.getByRole('button', {name: 'Reset filters', exact: true}).click();
-      await main.getByLabel('Decision guide', {exact: true}).selectOption(catalog.recipes[0].id);
+      await main.getByRole('combobox', {name: 'Decision guide', exact: true}).selectOption(catalog.recipes[0].id);
       await main.locator('#guide:not([hidden])').waitFor();
       assert.equal(await main.locator('.software-card').count(), catalog.recipes[0].picks.length);
       report.checks.push('Task guide shows explicit reasons, tradeoffs and its exact candidate set');
@@ -95,8 +95,8 @@ const server = http.createServer((req, res) => {
     await page.goto(base + '#certificates');
     await page.getByRole('heading', {name: /career|quest|certificate/i}).first().waitFor();
     await page.goto(base + '#software?platform=Windows');
-    await main.getByLabel('Operating system', {exact: true}).waitFor();
-    assert.equal(await main.getByLabel('Operating system', {exact: true}).inputValue(), 'Windows');
+    await main.getByRole('combobox', {name: 'Operating system', exact: true}).waitFor();
+    assert.equal(await main.getByRole('combobox', {name: 'Operating system', exact: true}).inputValue(), 'Windows');
     assert.deepEqual(errors, []);
     report.checks.push('Learning route remains available; workspace unmount/remount and deep links; no browser errors');
     report.result = 'pass';
