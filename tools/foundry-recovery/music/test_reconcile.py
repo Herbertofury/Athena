@@ -1,5 +1,6 @@
 import hashlib,json,pathlib,sqlite3,subprocess,sys,tempfile,unittest
 from unittest.mock import patch
+from contextlib import closing
 import reconcile as m
 ROOT=pathlib.Path(__file__).resolve().parents[3]
 class ReconcileTests(unittest.TestCase):
@@ -9,7 +10,7 @@ class ReconcileTests(unittest.TestCase):
   self.catalog=json.loads((ROOT/'dist/workspaces/foundry/catalog.json').read_text(encoding='utf8'));t=self.catalog['themes'][0];r=t['rooms'][0];self.pair=(t['id'],r['id']);key=t['id']+'::Original'
   raw=json.dumps({'version':2,'route':'home','mappings':{key:{'provider':'youtube','url':'https://music.youtube.com/watch?v=synthetic','label':'PRIVATE-SYNTHETIC 音楽','status':'USER_ASSIGNED','updatedAt':'2023-01-01T00:00:00.123Z'}}},ensure_ascii=False).encode('utf8');self.source.write_bytes(raw)
   self.mapping.write_text(json.dumps({'sourceSha256':hashlib.sha256(raw).hexdigest(),'contexts':{key:{'themeId':self.pair[0],'roomId':self.pair[1]}}}),encoding='utf8')
-  with sqlite3.connect(self.db) as db:
+  with closing(sqlite3.connect(self.db)) as db, db:
    db.executescript('CREATE TABLE soundtracks(theme_id TEXT,room_id TEXT,provider TEXT,url TEXT,label TEXT,status TEXT,source_id TEXT,updated_at INTEGER,updated_at_ms INTEGER); PRAGMA user_version=15;')
    db.execute('INSERT INTO soundtracks VALUES(?,?,?,?,?,?,?,?,?)',self.pair+('youtube','https://music.youtube.com/watch?v=synthetic','PRIVATE-SYNTHETIC 音楽','USER_ASSIGNED',None,1672531200,1672531200123))
  def verify(self):return m.reconcile(self.source,self.mapping,self.db,self.catalog,True)
@@ -19,7 +20,7 @@ class ReconcileTests(unittest.TestCase):
   before=self.bytes();r=self.command('--source-quiescent');self.assertEqual(r.returncode,0,r.stderr);report=json.loads(r.stdout);self.assertEqual(report['counts'],{'expected':1,'exact':1,'missing':0,'different':0});self.assertFalse(report['migration_complete']);self.assertNotIn(b'PRIVATE-SYNTHETIC',r.stdout+r.stderr);self.assertEqual(self.bytes(),before)
  def test_missing_and_different_are_distinct(self):
   for sql,count in [('UPDATE soundtracks SET updated_at_ms=1672531200124','different'),('DELETE FROM soundtracks','missing')]:
-   with sqlite3.connect(self.db) as db:db.execute(sql)
+   with closing(sqlite3.connect(self.db)) as db, db:db.execute(sql)
    before=self.bytes();report=self.verify();self.assertEqual(report['counts'][count],1);self.assertFalse(report['all_mapped_records_match']);self.assertEqual(self.command('--source-quiescent').returncode,1);self.assertEqual(self.bytes(),before)
  def test_quiescence_and_sidecars_rejected_without_changes(self):
   self.assertEqual(self.command().returncode,2)
@@ -28,7 +29,7 @@ class ReconcileTests(unittest.TestCase):
    with self.assertRaises(ValueError):self.verify()
    self.assertEqual(self.bytes(),before);p.unlink()
  def test_wrong_schema_and_corruption(self):
-  with sqlite3.connect(self.db) as db:db.execute('PRAGMA user_version=14')
+  with closing(sqlite3.connect(self.db)) as db, db:db.execute('PRAGMA user_version=14')
   with self.assertRaises(ValueError):self.verify()
   self.db.write_bytes(b'invalid');before=self.bytes();r=self.command('--source-quiescent');self.assertEqual(r.returncode,2);self.assertEqual(self.bytes(),before);self.assertNotIn(str(self.root).encode(),r.stdout+r.stderr)
  def test_changed_snapshot_does_not_report_match(self):
