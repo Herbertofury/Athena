@@ -23,3 +23,5 @@ test('context exports complete evidence and does not silently discard large vali
  const m=await modules();const s=m.fresh();for(let i=0;i<600;i++)s.entries.push({id:String(i),project:i===599?'A':'B',dependencies:i?[{id:String(i-1),revision:1}]:[],kind:'resource',pinned:false,ignored:false,revisions:[{text:'Evidence'+i+'x'.repeat(500),source:'https://example.org/'+i,at:i}],history:[{action:'created',at:i}]});
  assert.equal(m.validate(s).entries.length,600);const packet=m.compileContext(s,'A');assert.equal(packet.entries.length,600);assert.equal(packet.coverage.selectedRoots,1);assert.equal(packet.links.length,599);assert(m.contextMarkdown(packet).includes('https://example.org/599'));assert.equal('confidence' in packet.entries[0],false);
 });
+
+test('schema1 notes upgrade losslessly without mutating the original backup',async()=>{const m=await modules();const legacy={schema:1,entries:[]};const current=m.validate(legacy);assert.equal(current.schema,2);assert.equal(legacy.schema,1);assert.throws(()=>m.validate({schema:99,entries:[]}));});

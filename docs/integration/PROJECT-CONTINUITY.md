@@ -68,3 +68,8 @@ as proven better, and an idle/unknown conversation is never inferred completed.
 Evidence baseline: reconstructed Constellation0.20.1 tree
 `89b711f46672830e786ba3afcdf0d1973325a896`, not root package0.16.1. The staged0.20.2
 source is incomplete and remains a separate recovery gate; no full-parity claim.
+
+Continuity storage schema2 accepts and losslessly upgrades schema1 notes in memory;
+the original stored copy is only replaced on a successful write. Exported schema2
+identifies dependency-policy history explicitly. Older runtimes should retain an
+unrecognized snapshot rather than overwrite it.

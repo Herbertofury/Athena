@@ -1,5 +1,5 @@
 // Native Athena continuity contract. No provider requests, execution or grants.
-export function fresh() { return {schema: 1, entries: []}; }
+export function fresh() { return {schema: 2, entries: []}; }
 const kinds = new Set(['decision', 'next-action', 'resource', 'blocker']);
 const actions = new Set(['created', 'revised', 'pinned', 'unpinned', 'ignored', 'restored', 'linked', 'unlinked', 'dependency-reviewed']);
 function text(value, max) {
@@ -13,7 +13,7 @@ function source(value) {
   return url.href;
 }
 export function validate(value) {
-  if (!value || value.schema !== 1 || !Array.isArray(value.entries)) throw Error('Unsupported continuity data');
+  if (!value || ![1, 2].includes(value.schema) || !Array.isArray(value.entries)) throw Error('Unsupported continuity data');
   const ids = new Set();
   for (const entry of value.entries) {
     text(entry.id, 100);
@@ -40,7 +40,9 @@ export function validate(value) {
   }
   // Quota is reported by the actual persistence owner. Do not discard an otherwise
   // valid exportable draft merely because it exceeds a guessed record/byte count.
-  return structuredClone(value);
+  const result = structuredClone(value);
+  result.schema = 2; // Lossless upgrade of legacy notes; original input remains untouched.
+  return result;
 }
 export function apply(value, action, now = Date.now()) {
   const next = validate(value);
