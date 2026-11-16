@@ -28,7 +28,10 @@ jobs:
       - name: Verify progress import persistence and recovery in Chromium
         run: node scripts/test_progress_import_browser.cjs
       - name: Verify native project continuity
-        run: node scripts/test_continuity_browser.cjs
+        run: |
+          node scripts/test_continuity_browser.cjs
+          node scripts/test_continuity_import_browser.cjs
+          node scripts/test_continuity_artifacts_browser.cjs
       - name: Verify native guidance reader and reference exports
         run: node scripts/test_guidance_browser.cjs
       - name: Test unified public app in Chromium
@@ -39,3 +42,5 @@ jobs:
           name: athena-browser-evidence
           path: browser-results
           if-no-files-found: ignore
+
+

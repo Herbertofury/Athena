@@ -1,0 +1,33 @@
+name: Foundry ecology appearance
+on:
+  pull_request:
+    paths:
+      - 'dist/workspaces/foundry/native-ecology.mjs'
+      - 'scripts/test_foundry_ecology_appearance_browser.cjs'
+      - 'native/foundry/tests/ecology.test.mjs'
+      - '.github/workflows/foundry-ecology-appearance.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'dist/workspaces/foundry/native-ecology.mjs'
+      - 'scripts/test_foundry_ecology_appearance_browser.cjs'
+      - 'native/foundry/tests/ecology.test.mjs'
+      - '.github/workflows/foundry-ecology-appearance.yml'
+permissions:
+  contents: read
+jobs:
+  appearance:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm ci --ignore-scripts
+      - run: npx playwright install --with-deps chromium
+      - run: node --test native/foundry/tests/ecology.test.mjs
+      - run: node scripts/test_foundry_ecology_appearance_browser.cjs

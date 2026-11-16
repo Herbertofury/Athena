@@ -68,10 +68,18 @@ Native-library peak memory, UI latency, physical power-loss durability and actua
 
 ### LZ4 safe block follow-up
 
-[Two additional four-strategy runs](https://github.com/Herbertofury/Engineering-Atlas/tree/fc10171a6b6857cfdee68ff49941abad163c751b/experiments/compressed-snapshot-lab) retain 112 further complete byte/rollback/integrity samples. Official lz4_flex 0.14.0 runs with safe-encode, safe-decode and checked-decode enabled, bounded zero-filled output and exact length/hash validation. The older invalid-offset advisory and patched-version history were reviewed; vulnerable versions were not executed.
+[Two additional four-strategy runs](https://github.com/Herbertofury/Athena/tree/d1d6d998ba38d2fcedd140c48e3c5d21e132f671/engineering/experiments/compressed-snapshot-lab) retain 112 further complete byte/rollback/integrity samples. Official lz4_flex 0.14.0 runs with safe-encode, safe-decode and checked-decode enabled, bounded zero-filled output and exact length/hash validation. The older invalid-offset advisory and patched-version history were reviewed; vulnerable versions were not executed.
 
 LZ4 saves less space than Zstd (six-record database 32,768 versus 28,672 bytes; raw 45,056), but has the lowest compressed write median in both new runs. Raw still wins write+commit. The replay read median only beats raw in the first run, not the repeat, so it is not a stable read-speed claim. These are isolated component tradeoffs, not a current SnapshotStore or other-project adoption result. All prior measurements and source revisions remain available.
 
 ## Representation eligibility · 2026-10-27
 
-[A dated paper screen](https://github.com/Herbertofury/Engineering-Atlas/blob/d2bb61459aa5e22375f2f1347cb54946fb688c4b/research/2026-10-27-representation-contracts.md) separates lossy semantic reconstruction and thresholded telemetry from byte-exact storage. Five independently written rational cases test a fidelity boundary, not author code or performance. No research prototype was executed and no candidate was promoted. Required raw evidence cannot be silently replaced with an approximate representation.
+[A dated paper screen](https://github.com/Herbertofury/Athena/blob/d1d6d998ba38d2fcedd140c48e3c5d21e132f671/engineering/research/2026-10-27-representation-contracts.md) separates lossy semantic reconstruction and thresholded telemetry from byte-exact storage. Five independently written rational cases test a fidelity boundary, not author code or performance. No research prototype was executed and no candidate was promoted. Required raw evidence cannot be silently replaced with an approximate representation.
+
+
+## Preserved evidence link provenance
+
+The links above now use content-identical Athena copies, verified by Git blob/tree identity on 2026-11-15. Original revision citations remain below as provenance, not runtime dependencies. This does not certify source-repository deletion readiness. Other historical links on this page remain unchanged where exact replacement was not verified.
+
+- Original: `https://github.com/Herbertofury/Engineering-Atlas/blob/d2bb61459aa5e22375f2f1347cb54946fb688c4b/research/2026-10-27-representation-contracts.md`; identical blob object: `e5b381652715a877745fdc6c3260f118f394b452`.
+- Original: `https://github.com/Herbertofury/Engineering-Atlas/tree/fc10171a6b6857cfdee68ff49941abad163c751b/experiments/compressed-snapshot-lab`; identical tree object: `64376711c70b387d353e75d52b96254a8557f9b7`.

@@ -15,7 +15,7 @@ Source, validator, measurement-harness, compiler, target, profile, compiler-flag
 
 The final local pass verified 47 new HTTP checks and all 23 existing workflow checks. The real saved-record run completed; a separately labeled generated cancellation fixture retained its partial sample and previous results. Source snapshots and collection-attempt counts were unchanged. Local checks passed 73 Rust unit tests, four persistence tests, four candidate-example tests, 48 Node tests and 53 Python tests. Exact served assets and backend harness identity were checked; native-browser visual/input QA remains pending. Missing process-memory and per-strategy cancellation evidence still block promotion.
 
-[Verified implementation, raw receipts and limitations](https://github.com/Herbertofury/Engineering-Atlas/tree/dc6c3977acd1667324c07bcf7e5906f75450b73c/experiments/saved-version-runner-lab). CI and Pages passed for that exact commit. The dependency scan matched 185 locked packages against the recorded RustSec revision without known advisory matches or warnings; it is not a complete security guarantee.
+[Verified implementation, raw receipts and limitations](https://github.com/Herbertofury/Athena/tree/d1d6d998ba38d2fcedd140c48e3c5d21e132f671/engineering/experiments/saved-version-runner-lab). CI and Pages passed for that exact commit. The dependency scan matched 185 locked packages against the recorded RustSec revision without known advisory matches or warnings; it is not a complete security guarantee.
 
 ## Earlier generated-identifier execution and integrity
 
@@ -33,7 +33,7 @@ This is a bounded experimentation engine, not general autonomous self-modificati
 
 ## Queue scheduling repair · 2026-10-27
 
-[Retained comparison and stabilization evidence](https://github.com/Herbertofury/Engineering-Atlas/tree/91ad3b47769e847a8be423300811f3aec6e09c89/experiments/queue-wakeup-lab) measures actual Atlas HTTP jobs, not another project's performance. A bounded enqueue notification replaces the unconditional sleep between jobs; idle recovery scans remain.
+[Retained comparison and stabilization evidence](https://github.com/Herbertofury/Athena/tree/d1d6d998ba38d2fcedd140c48e3c5d21e132f671/engineering/experiments/queue-wakeup-lab) measures actual Atlas HTTP jobs, not another project's performance. A bounded enqueue notification replaces the unconditional sleep between jobs; idle recovery scans remain.
 
 In the repaired 20-run comparison, median queued-to-claim time fell from 745.0 to 0.5 ms and request-to-complete from 1640.431 to 816.389 ms. Event times have millisecond resolution. Full results, 10,000 stress cases per job, reopened records and integrity checks were preserved. No memory, rendering or provider-throughput improvement is claimed.
 
@@ -43,10 +43,19 @@ An initial public collection run retained one unexplained first-request failure 
 
 ## Consistent overview snapshots and isolated HTTP candidate · 2026-10-27
 
-[Full HTTP and concurrent-writer evidence](https://github.com/Herbertofury/Engineering-Atlas/tree/0b18f0ea1e5ba084d45d11a200e6f779a098093d/experiments/overview-http-lab) now covers the previously isolated checked-raw serializer. Normal serve keeps the Value serializer; explicit serve-candidate uses a labeled test mode on a fresh/copied database.
+[Full HTTP and concurrent-writer evidence](https://github.com/Herbertofury/Athena/tree/d1d6d998ba38d2fcedd140c48e3c5d21e132f671/engineering/experiments/overview-http-lab) now covers the previously isolated checked-raw serializer. Normal serve keeps the Value serializer; explicit serve-candidate uses a labeled test mode on a fresh/copied database.
 
 A bounded writer stress test exposed different snapshots for the job list and its totals: 146/182 normal and 167/200 candidate responses were inconsistent before repair. Both paths now use one read transaction. The repeated test had zero inconsistencies in 200 normal and 200 candidate responses. Error paths release the transaction, and JSON/security checks are preserved.
 
 Two 300-sample HTTP passes retained complete-output parity and all failed measurements. The larger 10/50-job histories replay real public records; they are not other-project evidence. The fast candidate still regressed a small-workload maximum, so it remains isolated. Approximate process memory observations, one-host timings and a correct response are not browser-paint, input-latency or universal no-loss acceptance.
 
 The normal application receives the snapshot-correctness repair, not automatic serializer promotion. Original source, failed receipts and rollback copies remain retained.
+
+
+## Preserved evidence link provenance
+
+The links above now use content-identical Athena copies, verified by Git blob/tree identity on 2026-11-15. Original revision citations remain below as provenance, not runtime dependencies. This does not certify source-repository deletion readiness. Other historical links on this page remain unchanged where exact replacement was not verified.
+
+- Original: `https://github.com/Herbertofury/Engineering-Atlas/tree/dc6c3977acd1667324c07bcf7e5906f75450b73c/experiments/saved-version-runner-lab`; identical tree object: `85c29cdfd08d6b2147f7f8b99d88b247c74a1b51`.
+- Original: `https://github.com/Herbertofury/Engineering-Atlas/tree/0b18f0ea1e5ba084d45d11a200e6f779a098093d/experiments/overview-http-lab`; identical tree object: `cb18c11110a2dfa56531aa928be808521fff5f86`.
+- Original: `https://github.com/Herbertofury/Engineering-Atlas/tree/91ad3b47769e847a8be423300811f3aec6e09c89/experiments/queue-wakeup-lab`; identical tree object: `94b29eb0b7a134be497a113dedba1bf5f761a8d0`.
