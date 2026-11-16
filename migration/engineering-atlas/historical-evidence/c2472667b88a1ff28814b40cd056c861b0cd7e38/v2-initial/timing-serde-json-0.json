@@ -1,0 +1,210 @@
+{
+  "baseline_source_sha256": "ce5b543bd21ee4549c4760bfa5bfb2a5d54195b9d8e685cb6db41351dc55993e",
+  "candidate_sha256": "40a73fb906688faa13f0962719b006b330bbd49a46aa4f3a7cd4b620f217d8f5",
+  "compiler": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+  "complete": true,
+  "default_parser_changed": false,
+  "flags_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "input_bytes": 1976,
+  "input_sha256": "5f925df075cd26348137226615ad84fa6056430262db0a9d5fdba811c11b5697",
+  "lock_sha256": "4ba18f93c261a48a42ea595be3f8a37b6d9c419912d7e7875204ac0641e2dd85",
+  "profile": "release",
+  "samples": [
+    {
+      "baseline_ns": 1154493,
+      "candidate_ns": 541354,
+      "complete_record_equal": true,
+      "iterations": 100,
+      "round": 0,
+      "warmup": true
+    },
+    {
+      "baseline_ns": 1399312,
+      "candidate_ns": 541617,
+      "complete_record_equal": true,
+      "iterations": 100,
+      "round": 1,
+      "warmup": true
+    },
+    {
+      "baseline_ns": 4753061,
+      "candidate_ns": 3328625,
+      "complete_record_equal": true,
+      "iterations": 100,
+      "round": 2,
+      "warmup": true
+    },
+    {
+      "baseline_ns": 3007477,
+      "candidate_ns": 3568202,
+      "complete_record_equal": true,
+      "iterations": 100,
+      "round": 3,
+      "warmup": true
+    },
+    {
+      "baseline_ns": 8478953,
+      "candidate_ns": 398219,
+      "complete_record_equal": true,
+      "iterations": 100,
+      "round": 4,
+      "warmup": false
+    },
+    {
+      "baseline_ns": 2389169,
+      "candidate_ns": 489136,
+      "complete_record_equal": true,
+      "iterations": 100,
+      "round": 5,
+      "warmup": false
+    },
+    {
+      "baseline_ns": 1009129,
+      "candidate_ns": 363013,
+      "complete_record_equal": true,
+      "iterations": 100,
+      "round": 6,
+      "warmup": false
+    },
+    {
+      "baseline_ns": 5925104,
+      "candidate_ns": 937422,
+      "complete_record_equal": true,
+      "iterations": 100,
+      "round": 7,
+      "warmup": false
+    },
+    {
+      "baseline_ns": 3948099,
+      "candidate_ns": 365234,
+      "complete_record_equal": true,
+      "iterations": 100,
+      "round": 8,
+      "warmup": false
+    },
+    {
+      "baseline_ns": 1054809,
+      "candidate_ns": 524723,
+      "complete_record_equal": true,
+      "iterations": 100,
+      "round": 9,
+      "warmup": false
+    },
+    {
+      "baseline_ns": 1035892,
+      "candidate_ns": 421720,
+      "complete_record_equal": true,
+      "iterations": 100,
+      "round": 10,
+      "warmup": false
+    },
+    {
+      "baseline_ns": 987023,
+      "candidate_ns": 377281,
+      "complete_record_equal": true,
+      "iterations": 100,
+      "round": 11,
+      "warmup": false
+    },
+    {
+      "baseline_ns": 2879837,
+      "candidate_ns": 545712,
+      "complete_record_equal": true,
+      "iterations": 100,
+      "round": 12,
+      "warmup": false
+    },
+    {
+      "baseline_ns": 1028037,
+      "candidate_ns": 469998,
+      "complete_record_equal": true,
+      "iterations": 100,
+      "round": 13,
+      "warmup": false
+    },
+    {
+      "baseline_ns": 1498620,
+      "candidate_ns": 388407,
+      "complete_record_equal": true,
+      "iterations": 100,
+      "round": 14,
+      "warmup": false
+    },
+    {
+      "baseline_ns": 1334500,
+      "candidate_ns": 596142,
+      "complete_record_equal": true,
+      "iterations": 100,
+      "round": 15,
+      "warmup": false
+    },
+    {
+      "baseline_ns": 1200779,
+      "candidate_ns": 442966,
+      "complete_record_equal": true,
+      "iterations": 100,
+      "round": 16,
+      "warmup": false
+    },
+    {
+      "baseline_ns": 1236805,
+      "candidate_ns": 520022,
+      "complete_record_equal": true,
+      "iterations": 100,
+      "round": 17,
+      "warmup": false
+    },
+    {
+      "baseline_ns": 1070809,
+      "candidate_ns": 2470621,
+      "complete_record_equal": true,
+      "iterations": 100,
+      "round": 18,
+      "warmup": false
+    },
+    {
+      "baseline_ns": 1574041,
+      "candidate_ns": 10071975,
+      "complete_record_equal": true,
+      "iterations": 100,
+      "round": 19,
+      "warmup": false
+    },
+    {
+      "baseline_ns": 1642756,
+      "candidate_ns": 369850,
+      "complete_record_equal": true,
+      "iterations": 100,
+      "round": 20,
+      "warmup": false
+    },
+    {
+      "baseline_ns": 1128285,
+      "candidate_ns": 359412,
+      "complete_record_equal": true,
+      "iterations": 100,
+      "round": 21,
+      "warmup": false
+    },
+    {
+      "baseline_ns": 1169113,
+      "candidate_ns": 1272772,
+      "complete_record_equal": true,
+      "iterations": 100,
+      "round": 22,
+      "warmup": false
+    },
+    {
+      "baseline_ns": 1906986,
+      "candidate_ns": 352736,
+      "complete_record_equal": true,
+      "iterations": 100,
+      "round": 23,
+      "warmup": false
+    }
+  ],
+  "scope": "Actual Atlas upstream parser component; real public response input, not network or UI timing",
+  "source": "serde-json",
+  "target": "x86_64-unknown-linux-gnu",
+  "validator_sha256": "6ad7e142a62e7575553b132e563a554e233197d880b192837c8a187646e2696d"
+}
