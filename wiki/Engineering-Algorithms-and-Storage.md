@@ -60,7 +60,7 @@ This is not whole-process RAM or physical peak usage: native allocations, stack,
 
 ## Lossless snapshot compression · 2026-10-27
 
-[Isolated Rust/SQLite component and 112 retained samples](https://github.com/Herbertofury/Engineering-Atlas/tree/7d74b122b550993d7be7905f3ff1091a56337497/experiments/compressed-snapshot-lab) compare raw BLOB storage, per-record Zstd and reused codec contexts. Six real public records retain all bytes; a separate 32× replay is explicitly generated. All use identical DELETE/FULL commit boundaries, reopened byte/hash checks, rollback and integrity checks.
+[Isolated Rust/SQLite component and 112 retained samples](https://github.com/Herbertofury/Athena/tree/5a107cdf6cf9b6911fedc5ba4f2a20c939d9c485/migration/engineering-atlas/historical-evidence/bab282e3b75965d3391b37b259273658904b78da) compare raw BLOB storage, per-record Zstd and reused codec contexts. Six real public records retain all bytes; a separate 32× replay is explicitly generated. All use identical DELETE/FULL commit boundaries, reopened byte/hash checks, rollback and integrity checks.
 
 Compression reduces the small database from 45,056 to 28,672 bytes (36.4%), but raw storage is faster across final end-to-end medians. Reusing codec contexts reduces compression/read overhead without changing frames or checks, yet one small-workload repeat regresses overall write time versus per-record compression. This is a space/CPU tradeoff, not a universal win. Keep the app storage unchanged; no migration or other-project recommendation follows.
 
@@ -83,3 +83,9 @@ The links above now use content-identical Athena copies, verified by Git blob/tr
 
 - Original: `https://github.com/Herbertofury/Engineering-Atlas/blob/d2bb61459aa5e22375f2f1347cb54946fb688c4b/research/2026-10-27-representation-contracts.md`; identical blob object: `e5b381652715a877745fdc6c3260f118f394b452`.
 - Original: `https://github.com/Herbertofury/Engineering-Atlas/tree/fc10171a6b6857cfdee68ff49941abad163c751b/experiments/compressed-snapshot-lab`; identical tree object: `64376711c70b387d353e75d52b96254a8557f9b7`.
+
+## Preserved historical snapshot provenance
+
+The linked snapshots preserve exact historical evidence, including failed experiments. They are inert archives, not current recommendations or standalone runnable checkouts. Original source references remain below; no source repository has been deleted.
+
+- Original: `https://github.com/Herbertofury/Engineering-Atlas/tree/7d74b122b550993d7be7905f3ff1091a56337497/experiments/compressed-snapshot-lab`; preserved tree object: `bab282e3b75965d3391b37b259273658904b78da`.

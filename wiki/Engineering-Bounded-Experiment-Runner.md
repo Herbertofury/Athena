@@ -1,7 +1,7 @@
 <!-- Athena managed engineering page. Original source and revision are retained in migration/engineering-atlas. -->
 # Bounded Experiment Runner
 
-[Atlas home](Engineering-Home) · [Implementation and retained evidence](https://github.com/Herbertofury/Engineering-Atlas/tree/f06dcb9c64b179252973f6f86d32791301e3e00f/experiments/bounded-runner-lab)
+[Atlas home](Engineering-Home) · [Implementation and retained evidence](https://github.com/Herbertofury/Athena/tree/5a107cdf6cf9b6911fedc5ba4f2a20c939d9c485/migration/engineering-atlas/historical-evidence/7a0a39656772fdf53d7d997577d6532342436cfc)
 
 Reviewed 2026-10-27. Implemented and local HTTP-tested; visual browser interaction acceptance remains pending.
 
@@ -59,3 +59,9 @@ The links above now use content-identical Athena copies, verified by Git blob/tr
 - Original: `https://github.com/Herbertofury/Engineering-Atlas/tree/dc6c3977acd1667324c07bcf7e5906f75450b73c/experiments/saved-version-runner-lab`; identical tree object: `85c29cdfd08d6b2147f7f8b99d88b247c74a1b51`.
 - Original: `https://github.com/Herbertofury/Engineering-Atlas/tree/0b18f0ea1e5ba084d45d11a200e6f779a098093d/experiments/overview-http-lab`; identical tree object: `cb18c11110a2dfa56531aa928be808521fff5f86`.
 - Original: `https://github.com/Herbertofury/Engineering-Atlas/tree/91ad3b47769e847a8be423300811f3aec6e09c89/experiments/queue-wakeup-lab`; identical tree object: `94b29eb0b7a134be497a113dedba1bf5f761a8d0`.
+
+## Preserved historical snapshot provenance
+
+The linked snapshots preserve exact historical evidence, including failed experiments. They are inert archives, not current recommendations or standalone runnable checkouts. Original source references remain below; no source repository has been deleted.
+
+- Original: `https://github.com/Herbertofury/Engineering-Atlas/tree/f06dcb9c64b179252973f6f86d32791301e3e00f/experiments/bounded-runner-lab`; preserved tree object: `7a0a39656772fdf53d7d997577d6532342436cfc`.

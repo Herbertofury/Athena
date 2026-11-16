@@ -1,0 +1,471 @@
+{
+  "harness": "atlas-event-log-render-v2-blocked",
+  "source_module": "/Engineering-Atlas/media-lab/event-log-benchmark.5cee62f2bd6f90f5.js",
+  "started_at": "2026-10-28T00:52:19.403Z",
+  "environment": {
+    "user_agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36",
+    "viewport": [
+      1180,
+      757
+    ],
+    "device_pixel_ratio": 1,
+    "visibility": "visible"
+  },
+  "scope": "original retained public event sequence",
+  "repeat": 1,
+  "event_count": 34,
+  "complete_json_bytes": 8280,
+  "complete": true,
+  "samples": [
+    {
+      "round": 0,
+      "strategy": "full_history",
+      "synchronous_render_ms": 1.0999999940395355,
+      "frame_ready_proxy_ms": 1199.5,
+      "scroll_frame_wait_ms": [
+        600.1000000238419,
+        599.6999999880791,
+        602.5999999940395,
+        614.3000000119209,
+        599.2999999821186,
+        599.9000000059605,
+        599.9000000059605,
+        599.1999999880791
+      ],
+      "heap_before": 3735987,
+      "heap_after": 3895407,
+      "log_text_code_units_written": 156267,
+      "dom_text_nodes": 1,
+      "complete_output_equal": true
+    },
+    {
+      "round": 0,
+      "strategy": "append",
+      "synchronous_render_ms": 1.0999999940395355,
+      "frame_ready_proxy_ms": 1198.8999999761581,
+      "scroll_frame_wait_ms": [
+        184.09999999403954,
+        599.6999999880791,
+        599.4000000059605,
+        616.9000000059605,
+        602.8000000119209,
+        596.7999999821186,
+        599.5,
+        600
+      ],
+      "heap_before": 3933631,
+      "heap_after": 3978889,
+      "log_text_code_units_written": 8281,
+      "dom_text_nodes": 36,
+      "complete_output_equal": true
+    },
+    {
+      "round": 0,
+      "strategy": "blocked",
+      "synchronous_render_ms": 2.0999999940395355,
+      "frame_ready_proxy_ms": 1199.5,
+      "scroll_frame_wait_ms": [
+        183.10000002384186,
+        599.6999999880791,
+        600.4000000059605,
+        599.5999999940395,
+        598.9000000059605,
+        599.7999999821186,
+        623.0999999940395,
+        610.9000000059605
+      ],
+      "heap_before": 3981885,
+      "heap_after": 4172985,
+      "log_text_code_units_written": 8281,
+      "dom_text_nodes": 3,
+      "complete_output_equal": true
+    },
+    {
+      "round": 1,
+      "strategy": "blocked",
+      "synchronous_render_ms": 0.699999988079071,
+      "frame_ready_proxy_ms": 1216.5,
+      "scroll_frame_wait_ms": [
+        182.5,
+        599.8000000119209,
+        600.3999999761581,
+        599.5,
+        599.8000000119209,
+        600.3000000119209,
+        599.1999999880791,
+        599.8000000119209
+      ],
+      "heap_before": 2365235,
+      "heap_after": 2555539,
+      "log_text_code_units_written": 8281,
+      "dom_text_nodes": 3,
+      "complete_output_equal": true
+    },
+    {
+      "round": 1,
+      "strategy": "append",
+      "synchronous_render_ms": 1,
+      "frame_ready_proxy_ms": 1200.699999988079,
+      "scroll_frame_wait_ms": [
+        182.40000000596046,
+        599.7999999821186,
+        600,
+        616.6000000238419,
+        600.1999999880791,
+        598.8000000119209,
+        600.6999999880791,
+        600.6999999880791
+      ],
+      "heap_before": 2558267,
+      "heap_after": 2600299,
+      "log_text_code_units_written": 8281,
+      "dom_text_nodes": 36,
+      "complete_output_equal": true
+    },
+    {
+      "round": 1,
+      "strategy": "full_history",
+      "synchronous_render_ms": 1.199999988079071,
+      "frame_ready_proxy_ms": 1199.4000000059605,
+      "scroll_frame_wait_ms": [
+        183.60000002384186,
+        599.8999999761581,
+        599.6000000238419,
+        599.6999999880791,
+        316.69999998807907,
+        283.7000000178814,
+        600,
+        599.5999999940395
+      ],
+      "heap_before": 2603111,
+      "heap_after": 2761347,
+      "log_text_code_units_written": 156267,
+      "dom_text_nodes": 1,
+      "complete_output_equal": true
+    },
+    {
+      "round": 2,
+      "strategy": "append",
+      "synchronous_render_ms": 1.300000011920929,
+      "frame_ready_proxy_ms": 1199.5,
+      "scroll_frame_wait_ms": [
+        184.30000001192093,
+        600.2999999821186,
+        598.5,
+        600.3000000119209,
+        599,
+        600.1999999880791,
+        599.9000000059605,
+        599.5999999940395
+      ],
+      "heap_before": 2763987,
+      "heap_after": 2806023,
+      "log_text_code_units_written": 8281,
+      "dom_text_nodes": 36,
+      "complete_output_equal": true
+    },
+    {
+      "round": 2,
+      "strategy": "full_history",
+      "synchronous_render_ms": 0.800000011920929,
+      "frame_ready_proxy_ms": 1200,
+      "scroll_frame_wait_ms": [
+        182.7999999821186,
+        617.0999999940395,
+        599.8000000119209,
+        599.5,
+        600.5999999940395,
+        599.5,
+        600.2000000178814,
+        599.8999999761581
+      ],
+      "heap_before": 2808643,
+      "heap_after": 2966779,
+      "log_text_code_units_written": 156267,
+      "dom_text_nodes": 1,
+      "complete_output_equal": true
+    },
+    {
+      "round": 2,
+      "strategy": "blocked",
+      "synchronous_render_ms": 1.399999976158142,
+      "frame_ready_proxy_ms": 1199.5,
+      "scroll_frame_wait_ms": [
+        183,
+        600.5,
+        613.3999999761581,
+        1003.7000000178814,
+        182.09999999403954,
+        615.8000000119209,
+        600.0999999940395,
+        599.7999999821186
+      ],
+      "heap_before": 2969411,
+      "heap_after": 3010871,
+      "log_text_code_units_written": 8281,
+      "dom_text_nodes": 3,
+      "complete_output_equal": true
+    },
+    {
+      "round": 3,
+      "strategy": "blocked",
+      "synchronous_render_ms": 0.5,
+      "frame_ready_proxy_ms": 1615.5,
+      "scroll_frame_wait_ms": [
+        182.90000000596046,
+        599.8000000119209,
+        600.1999999880791,
+        600,
+        600.2000000178814,
+        599.7999999821186,
+        600.5999999940395,
+        598.6999999880791
+      ],
+      "heap_before": 3050517,
+      "heap_after": 3092081,
+      "log_text_code_units_written": 8281,
+      "dom_text_nodes": 3,
+      "complete_output_equal": true
+    },
+    {
+      "round": 3,
+      "strategy": "full_history",
+      "synchronous_render_ms": 0.9000000059604645,
+      "frame_ready_proxy_ms": 1215.2000000178814,
+      "scroll_frame_wait_ms": [
+        184,
+        600.9000000059605,
+        599,
+        600.2999999821186,
+        603.5,
+        596.1000000238419,
+        609.1999999880791,
+        1006.4000000059605
+      ],
+      "heap_before": 3094689,
+      "heap_after": 3252825,
+      "log_text_code_units_written": 156267,
+      "dom_text_nodes": 1,
+      "complete_output_equal": true
+    },
+    {
+      "round": 3,
+      "strategy": "append",
+      "synchronous_render_ms": 0.5999999940395355,
+      "frame_ready_proxy_ms": 1616.199999988079,
+      "scroll_frame_wait_ms": [
+        182.2999999821186,
+        616.5,
+        600.1000000238419,
+        601.5999999940395,
+        598,
+        600.1999999880791,
+        600.3000000119209,
+        599
+      ],
+      "heap_before": 3255445,
+      "heap_after": 2382079,
+      "log_text_code_units_written": 8281,
+      "dom_text_nodes": 36,
+      "complete_output_equal": true
+    },
+    {
+      "round": 4,
+      "strategy": "full_history",
+      "synchronous_render_ms": 1.0999999940395355,
+      "frame_ready_proxy_ms": 1199.5999999940395,
+      "scroll_frame_wait_ms": [
+        182.80000001192093,
+        599.6999999880791,
+        600.3000000119209,
+        599.8999999761581,
+        600,
+        599.5,
+        600.3000000119209,
+        616.0999999940395
+      ],
+      "heap_before": 2385439,
+      "heap_after": 2543575,
+      "log_text_code_units_written": 156267,
+      "dom_text_nodes": 1,
+      "complete_output_equal": true
+    },
+    {
+      "round": 4,
+      "strategy": "blocked",
+      "synchronous_render_ms": 0.5999999940395355,
+      "frame_ready_proxy_ms": 1200.0999999940395,
+      "scroll_frame_wait_ms": [
+        183.40000000596046,
+        598.9000000059605,
+        599.8999999761581,
+        599.6000000238419,
+        599.8999999761581,
+        600,
+        600.3000000119209,
+        600.0999999940395
+      ],
+      "heap_before": 2546219,
+      "heap_after": 2736495,
+      "log_text_code_units_written": 8281,
+      "dom_text_nodes": 3,
+      "complete_output_equal": true
+    },
+    {
+      "round": 4,
+      "strategy": "append",
+      "synchronous_render_ms": 0.4000000059604645,
+      "frame_ready_proxy_ms": 1200.1000000238419,
+      "scroll_frame_wait_ms": [
+        199.40000000596046,
+        600.4000000059605,
+        599.0999999940395,
+        600.7999999821186,
+        600.1000000238419,
+        599.0999999940395,
+        617.6999999880791,
+        582.0999999940395
+      ],
+      "heap_before": 2739115,
+      "heap_after": 2781095,
+      "log_text_code_units_written": 8281,
+      "dom_text_nodes": 36,
+      "complete_output_equal": true
+    },
+    {
+      "round": 5,
+      "strategy": "append",
+      "synchronous_render_ms": 1.100000023841858,
+      "frame_ready_proxy_ms": 1198.1000000238419,
+      "scroll_frame_wait_ms": [
+        183.40000000596046,
+        599.4000000059605,
+        599.7999999821186,
+        617.2000000178814,
+        599,
+        600.7999999821186,
+        599.3000000119209,
+        599.6999999880791
+      ],
+      "heap_before": 2783723,
+      "heap_after": 2825707,
+      "log_text_code_units_written": 8281,
+      "dom_text_nodes": 36,
+      "complete_output_equal": true
+    },
+    {
+      "round": 5,
+      "strategy": "blocked",
+      "synchronous_render_ms": 0.5999999940395355,
+      "frame_ready_proxy_ms": 1199.0999999940395,
+      "scroll_frame_wait_ms": [
+        182.90000000596046,
+        600.1999999880791,
+        599.2000000178814,
+        600.9000000059605,
+        599.0999999940395,
+        600.1999999880791,
+        616.4000000059605,
+        599.1999999880791
+      ],
+      "heap_before": 2828267,
+      "heap_after": 2869739,
+      "log_text_code_units_written": 8281,
+      "dom_text_nodes": 3,
+      "complete_output_equal": true
+    },
+    {
+      "round": 5,
+      "strategy": "full_history",
+      "synchronous_render_ms": 1.7000000178813934,
+      "frame_ready_proxy_ms": 1199.800000011921,
+      "scroll_frame_wait_ms": [
+        181.90000000596046,
+        607.0999999940395,
+        593.1999999880791,
+        600.0999999940395,
+        599.9000000059605,
+        599.3000000119209,
+        619.5999999940395,
+        579.6999999880791
+      ],
+      "heap_before": 3769688,
+      "heap_after": 3931328,
+      "log_text_code_units_written": 156267,
+      "dom_text_nodes": 1,
+      "complete_output_equal": true
+    },
+    {
+      "round": 6,
+      "strategy": "full_history",
+      "synchronous_render_ms": 1.300000011920929,
+      "frame_ready_proxy_ms": 1215.800000011921,
+      "scroll_frame_wait_ms": [
+        185.7000000178814,
+        598.8999999761581,
+        599,
+        600.3000000119209,
+        599.6999999880791,
+        599.6000000238419,
+        600.2999999821186,
+        598.8000000119209
+      ],
+      "heap_before": 3934184,
+      "heap_after": 4098164,
+      "log_text_code_units_written": 156267,
+      "dom_text_nodes": 1,
+      "complete_output_equal": true
+    },
+    {
+      "round": 6,
+      "strategy": "append",
+      "synchronous_render_ms": 0.5,
+      "frame_ready_proxy_ms": 1198.8999999761581,
+      "scroll_frame_wait_ms": [
+        183.39999997615814,
+        617.1000000238419,
+        601,
+        598.8999999761581,
+        583.4000000059605,
+        616.5,
+        600.0999999940395,
+        608.7000000178814
+      ],
+      "heap_before": 4100772,
+      "heap_after": 2391799,
+      "log_text_code_units_written": 8281,
+      "dom_text_nodes": 36,
+      "complete_output_equal": true
+    },
+    {
+      "round": 6,
+      "strategy": "blocked",
+      "synchronous_render_ms": 0.5,
+      "frame_ready_proxy_ms": 1662.2000000178814,
+      "scroll_frame_wait_ms": [
+        1293.6000000238419,
+        191.7999999821186,
+        582.5,
+        619.5,
+        699.9000000059605,
+        550.8000000119209,
+        729.5,
+        449.7999999821186
+      ],
+      "heap_before": 2433633,
+      "heap_after": 2623969,
+      "log_text_code_units_written": 8281,
+      "dom_text_nodes": 3,
+      "complete_output_equal": true
+    }
+  ],
+  "limitations": [
+    "Event-log component only; not full card/media loading or target-project acceptance",
+    "Double-rAF is a scheduling proxy, not physical paint",
+    "Heap snapshots when exposed are not peak memory and can be coarse or GC-dependent",
+    "Same immutable records and full visible JSON; no truncation, sampling or omitted events",
+    "One browser/environment; no general best-method ranking"
+  ],
+  "frame_cadence_unreliable": true,
+  "finished_at": "2026-10-28T00:54:50.461Z"
+}
