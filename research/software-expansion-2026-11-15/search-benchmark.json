@@ -1,0 +1,691 @@
+{
+  "schema_version": 1,
+  "experiment_id": "fixed-string-search-20261115",
+  "measured_at": "2026-11-15T03:16:21.856639+00:00",
+  "seed": 20261115,
+  "environment_start": {
+    "os": "Linux",
+    "release": "6.18.57",
+    "architecture": "x86_64",
+    "python": "3.12.14",
+    "logical_cpus": 9,
+    "cpu_affinity_count": 9,
+    "load_average": [
+      0.33935546875,
+      0.25390625,
+      0.09130859375
+    ],
+    "cpu_model": "AMD EPYC 9V74 80-Core Processor"
+  },
+  "tools": {
+    "gnu-grep": {
+      "version_output": "grep (GNU grep) 3.11\nCopyright (C) 2023 Free Software Foundation, Inc.\nLicense GPLv3+: GNU GPL version 3 or later <https://gnu.org/licenses/gpl.html>.\nThis is free software: you are free to change and redistribute it.\nThere is NO WARRANTY, to the extent permitted by law.\n\nWritten by Mike Haertel and others; see\n<https://git.savannah.gnu.org/cgit/grep.git/tree/AUTHORS>.\n\ngrep -P uses PCRE2 10.46 2025-08-27",
+      "executable_sha256": "bd6686bf7a650a9717fd7e73fdb07dc63b70547a1da41bce093c56df937a66eb"
+    },
+    "ripgrep-auto": {
+      "version_output": "ripgrep 15.2.0 (rev e89fff89ac)\n\nfeatures:+pcre2\nsimd(compile):+SSE2,-SSSE3,-AVX2\nsimd(runtime):+SSE2,+SSSE3,+AVX2\n\nPCRE2 10.45 is available (JIT is available)",
+      "executable_sha256": "e62198eb19b136b88c330af83647b5a962cb99b6b1f066758568f12de1974849"
+    },
+    "ripgrep-one-thread": {
+      "version_output": "ripgrep 15.2.0 (rev e89fff89ac)\n\nfeatures:+pcre2\nsimd(compile):+SSE2,-SSSE3,-AVX2\nsimd(runtime):+SSE2,+SSSE3,+AVX2\n\nPCRE2 10.45 is available (JIT is available)",
+      "executable_sha256": "e62198eb19b136b88c330af83647b5a962cb99b6b1f066758568f12de1974849"
+    }
+  },
+  "repetitions": 9,
+  "warmup_runs_per_tool": 2,
+  "method": "Warm filesystem cache; fixed-string, case-sensitive UTF-8 byte matching with C locale; all regular/hidden files searched; full filename:line:text output captured through a pipe; two warmups then interleaved measured subprocess runs. Startup and output transport are included. Sorting and correctness checks are excluded from timing.",
+  "limitations": [
+    "One shared Linux container; scheduler load, CPU quota, filesystem and caching can change results.",
+    "Synthetic plain-text workloads with no symlinks, binary data, regular expressions, encoding conversion or real repository ignore policy.",
+    "Exact installed versions and executable hashes are recorded; results do not compare every current release or platform.",
+    "No RAM, energy, security, accessibility, cold-cache or universal speed ranking is measured."
+  ],
+  "cases": [
+    {
+      "id": "many-small-selective",
+      "file_count": 1602,
+      "input_bytes": 21230973,
+      "corpus_sha256": "419a4d7ab2643652e94cbc863246a1b654b245830b2312e94f1974fe7cf28161",
+      "matched_lines": 156,
+      "expected_output_sha256": "d122fcd31493a4bdf6f462b48145b09546b043fe92727d0e107595428a8cdd26",
+      "oracle_passed_every_run": true,
+      "commands": {
+        "gnu-grep": [
+          "grep",
+          "-r",
+          "-F",
+          "-n",
+          "-H",
+          "--binary-files=text",
+          "--color=never",
+          "--",
+          "ATHENA_MATCH_271828",
+          "many-small"
+        ],
+        "ripgrep-auto": [
+          "rg",
+          "--no-config",
+          "--no-ignore",
+          "--hidden",
+          "--text",
+          "--encoding",
+          "none",
+          "--color",
+          "never",
+          "--no-heading",
+          "--line-number",
+          "--with-filename",
+          "--fixed-strings",
+          "--",
+          "ATHENA_MATCH_271828",
+          "many-small"
+        ],
+        "ripgrep-one-thread": [
+          "rg",
+          "--no-config",
+          "--no-ignore",
+          "--hidden",
+          "--text",
+          "--encoding",
+          "none",
+          "--color",
+          "never",
+          "--no-heading",
+          "--line-number",
+          "--with-filename",
+          "--fixed-strings",
+          "--threads",
+          "1",
+          "--",
+          "ATHENA_MATCH_271828",
+          "many-small"
+        ]
+      },
+      "measured_order": [
+        [
+          "gnu-grep",
+          "ripgrep-auto",
+          "ripgrep-one-thread"
+        ],
+        [
+          "ripgrep-auto",
+          "ripgrep-one-thread",
+          "gnu-grep"
+        ],
+        [
+          "ripgrep-one-thread",
+          "gnu-grep",
+          "ripgrep-auto"
+        ],
+        [
+          "gnu-grep",
+          "ripgrep-auto",
+          "ripgrep-one-thread"
+        ],
+        [
+          "ripgrep-auto",
+          "ripgrep-one-thread",
+          "gnu-grep"
+        ],
+        [
+          "ripgrep-one-thread",
+          "gnu-grep",
+          "ripgrep-auto"
+        ],
+        [
+          "gnu-grep",
+          "ripgrep-auto",
+          "ripgrep-one-thread"
+        ],
+        [
+          "ripgrep-auto",
+          "ripgrep-one-thread",
+          "gnu-grep"
+        ],
+        [
+          "ripgrep-one-thread",
+          "gnu-grep",
+          "ripgrep-auto"
+        ]
+      ],
+      "results": {
+        "gnu-grep": {
+          "milliseconds": [
+            10.952614,
+            13.533185,
+            12.37088,
+            12.746004,
+            13.180209,
+            34.459118,
+            13.214249,
+            11.61432,
+            11.721563
+          ],
+          "median_ms": 12.746004,
+          "min_ms": 10.952614,
+          "max_ms": 34.459118
+        },
+        "ripgrep-auto": {
+          "milliseconds": [
+            7.130792,
+            9.430389,
+            12.394741,
+            11.699576,
+            13.71974,
+            7.227876,
+            10.681283,
+            6.706256,
+            6.900988
+          ],
+          "median_ms": 9.430389,
+          "min_ms": 6.706256,
+          "max_ms": 13.71974
+        },
+        "ripgrep-one-thread": {
+          "milliseconds": [
+            9.294318,
+            8.558928,
+            11.857658,
+            11.187705,
+            9.717217,
+            10.155117,
+            17.068729,
+            9.557251,
+            9.904308
+          ],
+          "median_ms": 9.904308,
+          "min_ms": 8.558928,
+          "max_ms": 17.068729
+        }
+      }
+    },
+    {
+      "id": "many-small-no-match",
+      "file_count": 1602,
+      "input_bytes": 21230973,
+      "corpus_sha256": "419a4d7ab2643652e94cbc863246a1b654b245830b2312e94f1974fe7cf28161",
+      "matched_lines": 0,
+      "expected_output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "oracle_passed_every_run": true,
+      "commands": {
+        "gnu-grep": [
+          "grep",
+          "-r",
+          "-F",
+          "-n",
+          "-H",
+          "--binary-files=text",
+          "--color=never",
+          "--",
+          "ATHENA_ABSENT_314159",
+          "many-small"
+        ],
+        "ripgrep-auto": [
+          "rg",
+          "--no-config",
+          "--no-ignore",
+          "--hidden",
+          "--text",
+          "--encoding",
+          "none",
+          "--color",
+          "never",
+          "--no-heading",
+          "--line-number",
+          "--with-filename",
+          "--fixed-strings",
+          "--",
+          "ATHENA_ABSENT_314159",
+          "many-small"
+        ],
+        "ripgrep-one-thread": [
+          "rg",
+          "--no-config",
+          "--no-ignore",
+          "--hidden",
+          "--text",
+          "--encoding",
+          "none",
+          "--color",
+          "never",
+          "--no-heading",
+          "--line-number",
+          "--with-filename",
+          "--fixed-strings",
+          "--threads",
+          "1",
+          "--",
+          "ATHENA_ABSENT_314159",
+          "many-small"
+        ]
+      },
+      "measured_order": [
+        [
+          "gnu-grep",
+          "ripgrep-auto",
+          "ripgrep-one-thread"
+        ],
+        [
+          "ripgrep-auto",
+          "ripgrep-one-thread",
+          "gnu-grep"
+        ],
+        [
+          "ripgrep-one-thread",
+          "gnu-grep",
+          "ripgrep-auto"
+        ],
+        [
+          "gnu-grep",
+          "ripgrep-auto",
+          "ripgrep-one-thread"
+        ],
+        [
+          "ripgrep-auto",
+          "ripgrep-one-thread",
+          "gnu-grep"
+        ],
+        [
+          "ripgrep-one-thread",
+          "gnu-grep",
+          "ripgrep-auto"
+        ],
+        [
+          "gnu-grep",
+          "ripgrep-auto",
+          "ripgrep-one-thread"
+        ],
+        [
+          "ripgrep-auto",
+          "ripgrep-one-thread",
+          "gnu-grep"
+        ],
+        [
+          "ripgrep-one-thread",
+          "gnu-grep",
+          "ripgrep-auto"
+        ]
+      ],
+      "results": {
+        "gnu-grep": {
+          "milliseconds": [
+            12.843518,
+            15.16764,
+            12.59735,
+            11.841455,
+            11.852772,
+            10.781547,
+            11.044314,
+            13.171367,
+            15.058675
+          ],
+          "median_ms": 12.59735,
+          "min_ms": 10.781547,
+          "max_ms": 15.16764
+        },
+        "ripgrep-auto": {
+          "milliseconds": [
+            7.782778,
+            8.512325,
+            6.954202,
+            7.150646,
+            7.204615,
+            7.658119,
+            7.125114,
+            6.653678,
+            9.185512
+          ],
+          "median_ms": 7.204615,
+          "min_ms": 6.653678,
+          "max_ms": 9.185512
+        },
+        "ripgrep-one-thread": {
+          "milliseconds": [
+            9.984436,
+            9.74294,
+            10.555257,
+            8.689307,
+            11.102139,
+            9.958657,
+            8.206939,
+            9.833794,
+            9.903451
+          ],
+          "median_ms": 9.903451,
+          "min_ms": 8.206939,
+          "max_ms": 11.102139
+        }
+      }
+    },
+    {
+      "id": "one-large-selective",
+      "file_count": 1,
+      "input_bytes": 31813710,
+      "corpus_sha256": "d2dfbb4d6c74af8fab2e1585837745c71fb48260cf56e8cd9cfacede5e702733",
+      "matched_lines": 241,
+      "expected_output_sha256": "f90d08b42872270c1638a4d423bc2eb12d56229060fb19107f3e93dd4bfd757f",
+      "oracle_passed_every_run": true,
+      "commands": {
+        "gnu-grep": [
+          "grep",
+          "-r",
+          "-F",
+          "-n",
+          "-H",
+          "--binary-files=text",
+          "--color=never",
+          "--",
+          "ATHENA_MATCH_271828",
+          "large.txt"
+        ],
+        "ripgrep-auto": [
+          "rg",
+          "--no-config",
+          "--no-ignore",
+          "--hidden",
+          "--text",
+          "--encoding",
+          "none",
+          "--color",
+          "never",
+          "--no-heading",
+          "--line-number",
+          "--with-filename",
+          "--fixed-strings",
+          "--",
+          "ATHENA_MATCH_271828",
+          "large.txt"
+        ],
+        "ripgrep-one-thread": [
+          "rg",
+          "--no-config",
+          "--no-ignore",
+          "--hidden",
+          "--text",
+          "--encoding",
+          "none",
+          "--color",
+          "never",
+          "--no-heading",
+          "--line-number",
+          "--with-filename",
+          "--fixed-strings",
+          "--threads",
+          "1",
+          "--",
+          "ATHENA_MATCH_271828",
+          "large.txt"
+        ]
+      },
+      "measured_order": [
+        [
+          "gnu-grep",
+          "ripgrep-auto",
+          "ripgrep-one-thread"
+        ],
+        [
+          "ripgrep-auto",
+          "ripgrep-one-thread",
+          "gnu-grep"
+        ],
+        [
+          "ripgrep-one-thread",
+          "gnu-grep",
+          "ripgrep-auto"
+        ],
+        [
+          "gnu-grep",
+          "ripgrep-auto",
+          "ripgrep-one-thread"
+        ],
+        [
+          "ripgrep-auto",
+          "ripgrep-one-thread",
+          "gnu-grep"
+        ],
+        [
+          "ripgrep-one-thread",
+          "gnu-grep",
+          "ripgrep-auto"
+        ],
+        [
+          "gnu-grep",
+          "ripgrep-auto",
+          "ripgrep-one-thread"
+        ],
+        [
+          "ripgrep-auto",
+          "ripgrep-one-thread",
+          "gnu-grep"
+        ],
+        [
+          "ripgrep-one-thread",
+          "gnu-grep",
+          "ripgrep-auto"
+        ]
+      ],
+      "results": {
+        "gnu-grep": {
+          "milliseconds": [
+            12.435722,
+            12.065515,
+            12.59809,
+            11.493436,
+            11.830058,
+            11.772733,
+            11.769564,
+            11.830524,
+            12.836983
+          ],
+          "median_ms": 11.830524,
+          "min_ms": 11.493436,
+          "max_ms": 12.836983
+        },
+        "ripgrep-auto": {
+          "milliseconds": [
+            6.025207,
+            6.425647,
+            4.90238,
+            5.454866,
+            4.724048,
+            6.91273,
+            5.418382,
+            4.744808,
+            5.58632
+          ],
+          "median_ms": 5.454866,
+          "min_ms": 4.724048,
+          "max_ms": 6.91273
+        },
+        "ripgrep-one-thread": {
+          "milliseconds": [
+            5.567621,
+            10.2378,
+            4.7804,
+            4.9227,
+            5.501344,
+            4.912495,
+            4.546365,
+            4.398337,
+            4.730407
+          ],
+          "median_ms": 4.912495,
+          "min_ms": 4.398337,
+          "max_ms": 10.2378
+        }
+      }
+    },
+    {
+      "id": "one-dense-output",
+      "file_count": 1,
+      "input_bytes": 7588890,
+      "corpus_sha256": "3c3605b186caed3dcba9d19335942c1c0da0791fbbaf88406f8ef62316835461",
+      "matched_lines": 50000,
+      "expected_output_sha256": "e848d2d4bd37fc3f8bf67db515d2c001012efcc7cd3a3a0d4bb79a3abbd4466c",
+      "oracle_passed_every_run": true,
+      "commands": {
+        "gnu-grep": [
+          "grep",
+          "-r",
+          "-F",
+          "-n",
+          "-H",
+          "--binary-files=text",
+          "--color=never",
+          "--",
+          "ATHENA_MATCH_271828",
+          "dense.txt"
+        ],
+        "ripgrep-auto": [
+          "rg",
+          "--no-config",
+          "--no-ignore",
+          "--hidden",
+          "--text",
+          "--encoding",
+          "none",
+          "--color",
+          "never",
+          "--no-heading",
+          "--line-number",
+          "--with-filename",
+          "--fixed-strings",
+          "--",
+          "ATHENA_MATCH_271828",
+          "dense.txt"
+        ],
+        "ripgrep-one-thread": [
+          "rg",
+          "--no-config",
+          "--no-ignore",
+          "--hidden",
+          "--text",
+          "--encoding",
+          "none",
+          "--color",
+          "never",
+          "--no-heading",
+          "--line-number",
+          "--with-filename",
+          "--fixed-strings",
+          "--threads",
+          "1",
+          "--",
+          "ATHENA_MATCH_271828",
+          "dense.txt"
+        ]
+      },
+      "measured_order": [
+        [
+          "gnu-grep",
+          "ripgrep-auto",
+          "ripgrep-one-thread"
+        ],
+        [
+          "ripgrep-auto",
+          "ripgrep-one-thread",
+          "gnu-grep"
+        ],
+        [
+          "ripgrep-one-thread",
+          "gnu-grep",
+          "ripgrep-auto"
+        ],
+        [
+          "gnu-grep",
+          "ripgrep-auto",
+          "ripgrep-one-thread"
+        ],
+        [
+          "ripgrep-auto",
+          "ripgrep-one-thread",
+          "gnu-grep"
+        ],
+        [
+          "ripgrep-one-thread",
+          "gnu-grep",
+          "ripgrep-auto"
+        ],
+        [
+          "gnu-grep",
+          "ripgrep-auto",
+          "ripgrep-one-thread"
+        ],
+        [
+          "ripgrep-auto",
+          "ripgrep-one-thread",
+          "gnu-grep"
+        ],
+        [
+          "ripgrep-one-thread",
+          "gnu-grep",
+          "ripgrep-auto"
+        ]
+      ],
+      "results": {
+        "gnu-grep": {
+          "milliseconds": [
+            21.199957,
+            17.916204,
+            16.073887,
+            15.725768,
+            18.099014,
+            17.9878,
+            21.631114,
+            17.800363,
+            18.908729
+          ],
+          "median_ms": 17.9878,
+          "min_ms": 15.725768,
+          "max_ms": 21.631114
+        },
+        "ripgrep-auto": {
+          "milliseconds": [
+            15.557775,
+            23.750409,
+            22.738426,
+            19.407133,
+            28.828239,
+            19.355888,
+            18.271548,
+            19.390229,
+            20.906254
+          ],
+          "median_ms": 19.407133,
+          "min_ms": 15.557775,
+          "max_ms": 28.828239
+        },
+        "ripgrep-one-thread": {
+          "milliseconds": [
+            16.710817,
+            17.881092,
+            16.256787,
+            16.017944,
+            24.182196,
+            19.54837,
+            16.058124,
+            17.786974,
+            23.63604
+          ],
+          "median_ms": 17.786974,
+          "min_ms": 16.017944,
+          "max_ms": 24.182196
+        }
+      }
+    }
+  ],
+  "environment_end": {
+    "os": "Linux",
+    "release": "6.18.57",
+    "architecture": "x86_64",
+    "python": "3.12.14",
+    "logical_cpus": 9,
+    "cpu_affinity_count": 9,
+    "load_average": [
+      0.392578125,
+      0.2666015625,
+      0.09619140625
+    ],
+    "cpu_model": "AMD EPYC 9V74 80-Core Processor"
+  }
+}

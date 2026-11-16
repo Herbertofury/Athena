@@ -4,9 +4,28 @@ Make and manage images, sound, video and three-dimensional work.
 
 [Browse in Athena](https://herbertofury.github.io/Athena/#software?family=creative) · [Catalog](Software-Catalog) · [Method](Software-Methodology)
 
-112 applications. Reviewed 2026-11-15; individual records identify inherited research.
+142 applications. Reviewed 2026-11-16; individual records identify inherited research.
+
+## 2D animation
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=creative%2F2d-animation)
+
+### Tahoma2D
+
+A 2D animation and stop-motion application derived from OpenToonz with drawing, cutout and camera workflows.
+
+- **Platforms:** Windows, macOS, Linux. **License:** Modified BSD; third-party components retain separate licenses. **Pricing model:** free.
+- **Pick for:** A free integrated animation workspace with a simpler OpenToonz-derived layout.
+- **Compare when:** Camera capture requires supported hardware.
+- **Strengths:** A free integrated animation workspace with a simpler OpenToonz-derived layout.
+- **Limitations:** Camera capture requires supported hardware.; Production interchange and plugin requirements should be checked against the specific workflow.
+- **Maintenance:** unverified — Official distribution and capability documentation reviewed; a dated maintenance conclusion was not established.
+- [Official project](https://tahoma2d.org/) · [Official installation / downloads](https://github.com/tahoma2d/tahoma2d/releases) · [Repository](https://github.com/tahoma2d/tahoma2d)
+- **Sources:** [Official documentation](https://tahoma2d.org/) (2026-11-15; identity, features, pricing); [Official documentation](https://github.com/tahoma2d/tahoma2d/blob/master/README.md) (2026-11-15; license, platforms, downloads)
 
 ## 3D modeling and procedural creation
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=creative%2F3d-modeling)
 
 ### Blender
 
@@ -63,6 +82,8 @@ Subdivision mesh modeling and AutoUV; explicitly no animation support
 
 ## 3D model viewers
 
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=creative%2F3d-viewers)
+
 ### F3D
 
 Minimal 3D viewing and preview workflow
@@ -77,8 +98,94 @@ Minimal 3D viewing and preview workflow
 - [Official project](https://github.com/f3d-app/f3d) · [Official installation / downloads](https://f3d.app/download/) · [Repository](https://github.com/f3d-app/f3d)
 - **Sources:** [Verified official source repository](https://github.com/f3d-app/f3d) (2026-11-14; features, identity); [Official desktop packages and installation options](https://f3d.app/download/) (2026-11-14; downloads, identity, platforms)
 
+## Acoustic measurement and analysis
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=creative%2Facoustic-measurement)
+
+### Friture
+
+Real-time audio analyzer with spectrum, spectrogram, scope and signal-generator views.
+
+- **Platforms:** Windows, macOS, Linux. **License:** GNU GPLv3. **Pricing model:** free.
+- **Pick for:** Choose Friture to inspect incoming audio through several focused measurement widgets.
+- **Compare when:** Measurement accuracy depends on input hardware and calibration; this is not a multitrack editor.
+- **Strengths:** Choose Friture to inspect incoming audio through several focused measurement widgets.
+- **Limitations:** Measurement accuracy depends on input hardware and calibration; this is not a multitrack editor.
+- **Maintenance:** unverified — Official distribution and capability documentation reviewed; a dated maintenance conclusion was not established.
+- [Official project](https://friture.org/) · [Official installation / downloads](https://friture.org/download.html) · [Repository](https://github.com/tlecomte/friture)
+- **Sources:** [Official documentation](https://friture.org/) (2026-11-15; identity, features, platforms, pricing, license); [Official documentation](https://friture.org/download.html) (2026-11-15; downloads, platforms); [Official documentation](https://github.com/tlecomte/friture/blob/master/COPYING.txt) (2026-11-15; license)
+### Open Sound Meter
+
+Audio measurement application for live spectrum, transfer-function and sound-level analysis.
+
+- **Platforms:** Windows, macOS, Linux. **License:** GNU GPL v3 for documented desktop release. **Pricing model:** free.
+- **Pricing details:** Free desktop Community release reviewed; mobile products are sold separately.
+- **Pick for:** Choose Open Sound Meter for real-time system tuning with saved measurement overlays.
+- **Compare when:** Results depend on the microphone, interface, timing reference and calibration.
+- **Strengths:** Choose Open Sound Meter for real-time system tuning with saved measurement overlays.
+- **Limitations:** Results depend on the microphone, interface, timing reference and calibration.; Desktop Community licensing differs from separately sold mobile and account services.
+- **Maintenance:** unverified — Official distribution and capability documentation reviewed; a dated maintenance conclusion was not established.
+- [Official project](https://opensoundmeter.com/en/) · [Official installation / downloads](https://opensoundmeter.com/releases) · [Repository](https://github.com/psmokotnin/osm)
+- **Sources:** [Official documentation](https://opensoundmeter.com/en/) (2026-11-15; identity, features, pricing, platforms); [Official documentation](https://opensoundmeter.com/releases) (2026-11-15; license, downloads, maintenance)
+### Room EQ Wizard
+
+Room, loudspeaker and audio-device measurement software with response plots and equalizer-filter planning.
+
+- **Platforms:** Windows, macOS, Linux. **License:** Proprietary REW EULA. **Pricing model:** freemium.
+- **Pricing details:** Base application is free, including commercial use; Pro measurement features require a paid upgrade.
+- **Pick for:** Choose REW to connect calibrated measurements with speaker placement and equalization decisions.
+- **Compare when:** Requires suitable measurement hardware and calibration; an EQ curve cannot repair every acoustic problem.
+- **Strengths:** Choose REW to connect calibrated measurements with speaker placement and equalization decisions.
+- **Limitations:** Requires suitable measurement hardware and calibration; an EQ curve cannot repair every acoustic problem.; The paid Pro upgrade adds simultaneous multi-input measurement.
+- **Maintenance:** unverified — Official distribution and capability documentation reviewed; a dated maintenance conclusion was not established.
+- [Official project](https://www.roomeqwizard.com/) · [Official installation / downloads](https://www.roomeqwizard.com/)
+- **Sources:** [Official documentation](https://www.roomeqwizard.com/) (2026-11-15; identity, features, pricing, platforms, downloads); [Official documentation](https://www.roomeqwizard.com/eula.html) (2026-11-15; license, pricing)
+
+## Animation lip synchronization
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=creative%2Fanimation-lip-sync)
+
+### Papagayo-NG
+
+Align spoken dialogue with mouth-shape timing for character animation using waveform editing and language-specific phoneme breakdowns.
+
+- **Platforms:** Windows, macOS, Linux. **License:** GNU GPLv2. **Pricing model:** unknown.
+- **Pick for:** Manual correction of mouth-shape timing for a Moho-oriented animation workflow.
+- **Compare when:** Upstream documentation describes Moho export; other pipeline interchange requires checking or adaptation.
+- **Strengths:** Manual correction of mouth-shape timing for a Moho-oriented animation workflow.
+- **Limitations:** Upstream documentation describes Moho export; other pipeline interchange requires checking or adaptation.; Source setup uses Python dependencies and current packaged releases were not established.
+- **Maintenance:** unverified — Official distribution and capability documentation reviewed; a dated maintenance conclusion was not established.
+- [Official project](https://github.com/morevnaproject-org/papagayo-ng) · [Repository](https://github.com/morevnaproject-org/papagayo-ng)
+- **Sources:** [Official documentation](https://github.com/morevnaproject-org/papagayo-ng) (2026-11-15; identity, features); [Official documentation](https://github.com/morevnaproject-org/papagayo-ng/blob/master/readme.md) (2026-11-15; features, platforms); [Official documentation](https://github.com/morevnaproject-org/papagayo-ng/blob/master/gpl.txt) (2026-11-15; license)
+
 ## Audio analysis
 
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=creative%2Faudio-analysis)
+
+### Sonic Annotator
+
+Command-line batch extractor for audio features produced by Vamp analysis plugins.
+
+- **Platforms:** Windows, macOS, Linux. **License:** GNU GPL. **Pricing model:** unknown.
+- **Pick for:** Choose Sonic Annotator to apply a documented audio-analysis transform across a collection reproducibly.
+- **Compare when:** Requires suitable Vamp plugins and parameter choices; it does not provide an interactive audio editor.
+- **Strengths:** Choose Sonic Annotator to apply a documented audio-analysis transform across a collection reproducibly.
+- **Limitations:** Requires suitable Vamp plugins and parameter choices; it does not provide an interactive audio editor.
+- **Maintenance:** unverified — Official distribution and capability documentation reviewed; a dated maintenance conclusion was not established.
+- [Official project](https://www.vamp-plugins.org/sonic-annotator/) · [Official installation / downloads](https://github.com/sonic-visualiser/sonic-annotator/releases) · [Repository](https://github.com/sonic-visualiser/sonic-annotator)
+- **Sources:** [Official documentation](https://www.vamp-plugins.org/sonic-annotator/) (2026-11-15; identity, features, license, downloads, platforms)
+### Sonic Lineup
+
+Listening aid that aligns and compares recordings of structurally similar musical material.
+
+- **Platforms:** Windows, macOS, Linux. **License:** GNU GPL v2 or later. **Pricing model:** free.
+- **Pick for:** Choose Sonic Lineup to compare takes or performances of the same work before detailed annotation elsewhere.
+- **Compare when:** Designed for comparison rather than editing, annotation or precision measurement.
+- **Strengths:** Choose Sonic Lineup to compare takes or performances of the same work before detailed annotation elsewhere.
+- **Limitations:** Designed for comparison rather than editing, annotation or precision measurement.; Recordings need enough structural similarity for meaningful alignment.
+- **Maintenance:** unverified — Official distribution and capability documentation reviewed; a dated maintenance conclusion was not established.
+- [Official project](https://www.sonicvisualiser.org/sonic-lineup/) · [Official installation / downloads](https://www.sonicvisualiser.org/sonic-lineup/download.html)
+- **Sources:** [Official documentation](https://www.sonicvisualiser.org/sonic-lineup/) (2026-11-15; identity, features, pricing, platforms); [Official documentation](https://www.sonicvisualiser.org/sonic-lineup/download.html) (2026-11-15; downloads, license, platforms)
 ### Sonic Visualiser
 
 Audio visualization and annotation application for examining recordings in detail.
@@ -103,9 +210,35 @@ Focused spectrogram viewer for inspecting the frequency content of audio files.
 - **Maintenance:** unverified — Official repository commit activity observed on 2023-07-15 (UTC). Activity is not a runtime or platform-compatibility test. ([evidence](https://github.com/alexkay/spek/commit/b1600d9926fa434330171cbebb407d2d0ccdcf03))
 - [Official project](https://www.spek.cc/) · [Official installation / downloads](https://github.com/alexkay/spek/releases) · [Repository](https://github.com/alexkay/spek)
 - **Sources:** [Official project documentation](https://www.spek.cc/) (2026-11-14; identity, features, platforms, pricing); [Official project README](https://raw.githubusercontent.com/alexkay/spek/HEAD/README.md) (2026-11-14; identity, features, license, platforms); [Upstream license terms](https://raw.githubusercontent.com/alexkay/spek/HEAD/LICENSE) (2026-11-14; license); [Official release listing](https://github.com/alexkay/spek/releases) (2026-11-14; identity, downloads); [Official repository activity feed](https://github.com/alexkay/spek/commits/HEAD.atom) (2026-11-14; maintenance)
+### Tony
+
+Pitch and note transcription tool for monophonic recordings, with interactive correction and CSV export.
+
+- **Platforms:** Windows, macOS, Linux. **License:** GNU GPL v2 or later. **Pricing model:** free.
+- **Pick for:** Choose Tony when solo melody transcription needs an editable intermediate result for analysis.
+- **Compare when:** Primarily designed for monophonic and solo-vocal material; polyphonic arrangements need different methods.
+- **Strengths:** Choose Tony when solo melody transcription needs an editable intermediate result for analysis.
+- **Limitations:** Primarily designed for monophonic and solo-vocal material; polyphonic arrangements need different methods.; Automatic estimates still require review.
+- **Maintenance:** unverified — Official distribution and capability documentation reviewed; a dated maintenance conclusion was not established.
+- [Official project](https://www.sonicvisualiser.org/tony/) · [Official installation / downloads](https://www.sonicvisualiser.org/tony/download.html)
+- **Sources:** [Official documentation](https://www.sonicvisualiser.org/tony/) (2026-11-15; identity, features, platforms, pricing); [Official documentation](https://www.sonicvisualiser.org/tony/download.html) (2026-11-15; downloads, platforms, license)
 
 ## Audio conversion
 
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=creative%2Faudio-conversion)
+
+### dBpoweramp Music Converter
+
+Commercial Windows and Mac audio conversion and CD-ripping suite with batch processing, metadata tools and DSP options.
+
+- **Platforms:** Windows, macOS. **License:** Commercial software license; complete EULA was not independently retrieved. **Pricing model:** paid.
+- **Pick for:** Fits GUI-based library conversion and CD extraction with repeatable presets
+- **Compare when:** A 21-day trial is offered; ongoing paid edition and platform entitlements need checking at purchase
+- **Strengths:** Fits GUI-based library conversion and CD extraction with repeatable presets; Folder filters and file-manager integration support routine collection maintenance
+- **Limitations:** A 21-day trial is offered; ongoing paid edition and platform entitlements need checking at purchase; DSP normalization, resampling and lossy encoding can alter samples or quality; retain archival originals; Some extra codecs and automation routes are Windows-only
+- **Maintenance:** unverified — Official features and distribution routes were reviewed; a dated maintenance commitment was not established.
+- [Official project](https://www.dbpoweramp.com/dmc) · [Official installation / downloads](https://www.dbpoweramp.com/download)
+- **Sources:** [Official documentation reviewed for this claim](https://www.dbpoweramp.com/dmc) (2026-11-16; identity, features, platforms, downloads, pricing); [Official documentation reviewed for this claim](https://www.dbpoweramp.com/download) (2026-11-16; downloads); [Official documentation reviewed for this claim](https://www.dbpoweramp.com/purchase) (2026-11-16; pricing)
 ### fre:ac
 
 Audio converter and CD-ripping application supporting several encoder formats.
@@ -118,8 +251,22 @@ Audio converter and CD-ripping application supporting several encoder formats.
 - **Maintenance:** active — Official repository commit activity observed on 2026-10-25 (UTC). Activity is not a runtime or platform-compatibility test. ([evidence](https://github.com/enzo1982/freac/commit/4b47105c219fbe1612c45b40deb4955428d29931))
 - [Official project](https://www.freac.org/) · [Official installation / downloads](https://www.freac.org/downloads-mainmenu-33) · [Repository](https://github.com/enzo1982/freac)
 - **Sources:** [Official project documentation](https://www.freac.org/) (2026-11-14; identity, features, platforms, license, pricing); [Upstream license terms](https://raw.githubusercontent.com/enzo1982/freac/HEAD/COPYING) (2026-11-14; license); [Official installation and download information](https://www.freac.org/downloads-mainmenu-33) (2026-11-14; identity, downloads, platforms); [Official repository activity feed](https://github.com/enzo1982/freac/commits/HEAD.atom) (2026-11-14; maintenance)
+### X Lossless Decoder
+
+Mac audio conversion and CD extraction with cue-sheet splitting, multiple codecs and command-line use.
+
+- **Platforms:** macOS. **License:** License unresolved: maintainer project metadata lists OSL-3.0; installed-source and bundled-codec terms need reconciliation. **Pricing model:** free.
+- **Pick for:** Fits Mac lossless-library conversion and cue-based album splitting
+- **Compare when:** macOS only; some codecs and plugins need additional dependencies
+- **Strengths:** Fits Mac lossless-library conversion and cue-based album splitting; Offers a focused audio workflow without requiring a general multimedia command line
+- **Limitations:** macOS only; some codecs and plugins need additional dependencies; The project license metadata was observed, but the complete installed-source and codec license set was not independently verified; Changing lossless containers preserves source quality only when processing settings do not alter the samples
+- **Maintenance:** unverified — Official features and distribution routes were reviewed; a dated maintenance commitment was not established.
+- [Official project](https://tmkk.undo.jp/xld/index_e.html) · [Official installation / downloads](https://sourceforge.net/projects/xld/files/) · [Repository](https://sourceforge.net/p/xld/code/)
+- **Sources:** [Official documentation reviewed for this claim](https://tmkk.undo.jp/xld/index_e.html) (2026-11-16; identity, features, platforms, downloads, pricing); [Official documentation reviewed for this claim](https://sourceforge.net/projects/xld/) (2026-11-16; license, downloads); [Official documentation reviewed for this claim](https://sourceforge.net/p/xld/code/HEAD/tree/) (2026-11-16; identity); [Official documentation reviewed for this claim](https://sourceforge.net/projects/xld/files/) (2026-11-16; downloads)
 
 ## Audio editing
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=creative%2Faudio-editing)
 
 ### Audacity
 
@@ -133,7 +280,8 @@ Multitrack recording/editing and export
 - **Limitations:** Plugins/codecs separately licensed; destructive edits require project backup; GPL code reuse after pinned LICENSE check; plugin/process boundary and nondestructive history are evaluation targets
 - **Maintenance:** unverified — Retained research snapshot; current release activity was not established by this import.
 - [Official project](https://github.com/audacity/audacity) · [Official installation / downloads](https://www.audacityteam.org/download/) · [Repository](https://github.com/audacity/audacity)
-- **Sources:** [Verified official source repository](https://github.com/audacity/audacity) (2026-11-14; features, identity); [Preserved original research source](https://manual.audacityteam.org/man/license.html) (2026-11-14; identity, features); [Preserved original research source](https://www.audacityteam.org/download/windows/) (2026-11-14; identity, features); [Official desktop downloads](https://www.audacityteam.org/download/) (2026-11-14; downloads, identity, platforms); [Official product page](https://www.audacityteam.org/) (2026-11-14; identity, pricing)
+- **Sources:** [Verified official source repository](https://github.com/audacity/audacity) (2026-11-14; features, identity); [Preserved original research source](https://manual.audacityteam.org/man/license.html) (2026-11-14; identity, features); [Preserved original research source](https://www.audacityteam.org/download/windows/) (2026-11-14; identity, features); [Official desktop downloads](https://www.audacityteam.org/download/) (2026-11-14; downloads, identity, platforms); [Official product page](https://www.audacityteam.org/) (2026-11-14; identity, pricing); [Official Noise Reduction manual: profile, suitable noise and limitations](https://manual.audacityteam.org/man/noise_reduction.html) (2026-11-15; features)
+- **Documented task support — Reduce noise in recorded audio:** Select a noise-only passage to capture a profile, then preview reduction on the recording. **Limits:** Irregular traffic, isolated clicks and heavily overlapping sound need other repair methods; aggressive reduction can distort wanted audio.; This evidence covers recorded-file processing, not a live microphone filter. [Evidence 1](https://manual.audacityteam.org/man/noise_reduction.html)
 ### ocenaudio
 
 Desktop audio editor aimed at direct waveform editing and effect preview.
@@ -146,9 +294,35 @@ Desktop audio editor aimed at direct waveform editing and effect preview.
 - **Maintenance:** unverified — Official documentation reviewed; a recent release or maintained-build assessment was not established.
 - [Official project](https://www.ocenaudio.com/) · [Official installation / downloads](https://www.ocenaudio.com/download)
 - **Sources:** [Official project documentation](https://www.ocenaudio.com/) (2026-11-14; identity, features); [Official installation and download information](https://www.ocenaudio.com/download) (2026-11-14; identity, downloads, platforms, pricing); [Official project documentation](https://www.ocenaudio.com/features) (2026-11-14; identity, features, platforms); [Official project documentation](https://www.ocenaudio.com/en/) (2026-11-14; identity, features); [Official project documentation](https://www.ocenaudio.com/whatis) (2026-11-14; identity, features, platforms)
+### Tenacity
+
+Community-developed multitrack recorder and editor derived from Audacity.
+
+- **Platforms:** Windows, macOS, Linux. **License:** GNU GPL v2 or later. **Pricing model:** unknown.
+- **Pick for:** Choose Tenacity for a community-maintained editing workflow with scripting and accessible controls.
+- **Compare when:** Check current release packaging and plugin compatibility for your operating system.
+- **Strengths:** Choose Tenacity for a community-maintained editing workflow with scripting and accessible controls.
+- **Limitations:** Check current release packaging and plugin compatibility for your operating system.; Upstream development is on Codeberg; the GitHub repository is a mirror.
+- **Maintenance:** unverified — Official distribution and capability documentation reviewed; a dated maintenance conclusion was not established.
+- [Official project](https://tenacityaudio.org/) · [Official installation / downloads](https://codeberg.org/tenacityteam/tenacity/releases) · [Repository](https://codeberg.org/tenacityteam/tenacity)
+- **Sources:** [Official documentation](https://tenacityaudio.org/) (2026-11-15; identity, features, platforms, downloads); [Official documentation](https://github.com/tenacityteam/tenacity/blob/main/README.md) (2026-11-15; identity, license, downloads)
 
 ## Audio plug-in hosts
 
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=creative%2Faudio-plugin-hosts)
+
+### Cantabile
+
+Windows host for playing audio instruments and effects live, with free Lite and paid editions for performance management.
+
+- **Platforms:** Windows. **License:** Proprietary Topten Software license. **Pricing model:** freemium.
+- **Pick for:** Fits a Windows live-performance rig built around instrument and effect plugins
+- **Compare when:** Current releases require 64-bit Windows 10 Anniversary Update or Windows 11
+- **Strengths:** Fits a Windows live-performance rig built around instrument and effect plugins; The free Lite edition permits basic hosting before selecting paid performance features
+- **Limitations:** Current releases require 64-bit Windows 10 Anniversary Update or Windows 11; Set lists, advanced routing and state management differ across Lite, Solo and Performer; Latency and reliability depend on the audio driver, buffer and plugins; test the complete set before a performance
+- **Maintenance:** unverified — Official features and distribution routes were reviewed; a dated maintenance commitment was not established.
+- [Official project](https://www.cantabilesoftware.com/) · [Official installation / downloads](https://www.cantabilesoftware.com/download/)
+- **Sources:** [Official documentation reviewed for this claim](https://www.cantabilesoftware.com/compare) (2026-11-16; identity, features, platforms, pricing); [Official documentation reviewed for this claim](https://www.cantabilesoftware.com/download/) (2026-11-16; downloads); [Official documentation reviewed for this claim](https://www.cantabilesoftware.com/license) (2026-11-16; license)
 ### Carla
 
 Audio plugin host for loading, connecting and managing instruments and effects.
@@ -161,8 +335,22 @@ Audio plugin host for loading, connecting and managing instruments and effects.
 - **Maintenance:** active — Official repository commit activity observed on 2026-03-19 (UTC). Activity is not a runtime or platform-compatibility test. ([evidence](https://github.com/falkTX/Carla/commit/97a9e0740baf6df2df942495c02532a624c44682))
 - [Official project](https://kx.studio/Applications:Carla) · [Official installation / downloads](https://kx.studio/Applications:Carla#Download) · [Repository](https://github.com/falkTX/Carla)
 - **Sources:** [Official project documentation](https://kx.studio/Applications:Carla) (2026-11-14; identity, features, platforms, pricing); [Official project README](https://raw.githubusercontent.com/falkTX/Carla/HEAD/README.md) (2026-11-14; identity, features, license, platforms); [Official installation and download information](https://kx.studio/Applications:Carla#Download) (2026-11-14; identity, downloads, platforms, pricing); [Official repository activity feed](https://github.com/falkTX/Carla/commits/HEAD.atom) (2026-11-14; maintenance)
+### Element (Kushview)
 
-## Audio Programming
+Open-source modular audio plugin host for routing instruments and effects on desktop systems.
+
+- **Platforms:** Windows, macOS, Linux. **License:** GPL-3.0; hosted plugins and optional add-ons have separate terms. **Pricing model:** mixed.
+- **Pick for:** Fits reusable modular routing without needing a full recording workstation
+- **Compare when:** The free public channel trails supporter/nightly updates by a version or two; paid options change delivery timing, not a documented core feature lock
+- **Strengths:** Fits reusable modular routing without needing a full recording workstation; A fully functional free public build is available alongside paid update channels
+- **Limitations:** The free public channel trails supporter/nightly updates by a version or two; paid options change delivery timing, not a documented core feature lock; Plugin format support varies by OS and plugin architecture; AU is a Mac format; Installed plugins retain their own licensing and system requirements
+- **Maintenance:** unverified — Official features and distribution routes were reviewed; a dated maintenance commitment was not established.
+- [Official project](https://kushview.net/element/) · [Official installation / downloads](https://kushview.net/element/download/) · [Repository](https://github.com/kushview/element)
+- **Sources:** [Official documentation reviewed for this claim](https://kushview.net/element/) (2026-11-16; identity, features); [Official documentation reviewed for this claim](https://kushview.net/element/download/) (2026-11-16; features, platforms, downloads, pricing); [Official documentation reviewed for this claim](https://kushview.net/article/element-memberships/) (2026-11-16; license, pricing); [Official documentation reviewed for this claim](https://github.com/kushview/element) (2026-11-16; features, platforms, license)
+
+## Audio programming
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=creative%2Faudio-programming)
 
 ### ChucK
 
@@ -213,7 +401,55 @@ Audio-programming platform pairing a synthesis server with a language and develo
 - [Official project](https://supercollider.github.io/) · [Official installation / downloads](https://supercollider.github.io/downloads) · [Repository](https://github.com/supercollider/supercollider)
 - **Sources:** [Official product documentation](https://supercollider.github.io/) (2026-11-14; features, identity, platforms, pricing); [Official upstream README](https://raw.githubusercontent.com/supercollider/supercollider/HEAD/README.md) (2026-11-14; features, identity, license, platforms); [Official upstream license text](https://raw.githubusercontent.com/supercollider/supercollider/HEAD/COPYING) (2026-11-14; license); [Official download and distribution documentation](https://supercollider.github.io/downloads) (2026-11-14; downloads, platforms); [Official upstream release activity feed](https://github.com/supercollider/supercollider/releases.atom) (2026-11-14; maintenance)
 
+## Audio restoration
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=creative%2Faudio-restoration)
+
+### Acon Digital Acoustica
+
+Audio editor with spectral, multitrack, restoration and mastering workflows.
+
+- **Platforms:** Windows, macOS, Linux. **License:** Proprietary commercial license. **Pricing model:** paid.
+- **Pricing details:** Paid perpetual editions with a 30-day trial; module bundles vary by edition.
+- **Pick for:** Choose Acoustica for restoration and general editing under a perpetual-license model.
+- **Compare when:** Advanced processing is divided among Standard, Premium and Ultimate editions.
+- **Strengths:** Choose Acoustica for restoration and general editing under a perpetual-license model.
+- **Limitations:** Advanced processing is divided among Standard, Premium and Ultimate editions.; Linux support is explicitly a public beta; validate the required format and host workflow.
+- **Maintenance:** unverified — Official distribution and capability documentation reviewed; a dated maintenance conclusion was not established.
+- [Official project](https://acondigital.com/products/acoustica/) · [Official installation / downloads](https://acondigital.com/products/acoustica/)
+- **Sources:** [Official documentation](https://acondigital.com/plug-in-eula) (2026-11-15; license); [Official documentation reviewed for this claim](https://acondigital.com/products/acoustica/) (2026-11-16; identity, features, platforms, downloads, pricing); [Official documentation reviewed for this claim](https://acondigital.com/acoustica8-linux/) (2026-11-16; platforms, downloads, features)
+- **Documented task support — Reduce noise in recorded audio:** Choose an edition containing the restoration tools needed for the recording; Standard in-app tools and Premium/Ultimate plugin entitlements differ.; Use the editor or a supported host for the selected restoration module; Linux distributions are explicitly a public beta. **Limits:** This documents recorded-audio cleanup; a DAW plugin or real-time preview alone does not establish system-wide microphone filtering.; Noise reduction can change desirable audio; audition representative sections and preserve an untreated original. [Evidence 1](https://acondigital.com/products/acoustica/) [Evidence 2](https://acondigital.com/acoustica8-linux/)
+### Adobe Audition
+
+Waveform, spectral and multitrack audio editor integrated with Adobe video-production workflows.
+
+- **Platforms:** Windows, macOS. **License:** Proprietary Adobe license. **Pricing model:** subscription.
+- **Pick for:** Choose Audition when audio cleanup and mixing need to fit an existing Adobe production workflow.
+- **Compare when:** Requires a subscription and online activation; check the current release against your OS and processor.
+- **Strengths:** Choose Audition when audio cleanup and mixing need to fit an existing Adobe production workflow.
+- **Limitations:** Requires a subscription and online activation; check the current release against your OS and processor.; It is a recorded-audio workstation, not a general live microphone-noise filter.
+- **Maintenance:** active — Official requirements document release 27.0 in November 2026. ([evidence](https://helpx.adobe.com/audition/desktop/introduction/system-requirements.html))
+- [Official project](https://www.adobe.com/products/audition.html) · [Official installation / downloads](https://www.adobe.com/products/audition/free-trial-download.html)
+- **Sources:** [Official documentation](https://www.adobe.com/products/audition.html) (2026-11-15; identity, features, pricing); [Official documentation](https://www.adobe.com/products/audition/free-trial-download.html) (2026-11-15; pricing, downloads); [Official documentation](https://helpx.adobe.com/audition/desktop/introduction/system-requirements.html) (2026-11-15; platforms, maintenance); [Official documentation](https://www.adobe.com/legal/terms.html) (2026-11-15; license); [Official documentation reviewed for this claim](https://helpx.adobe.com/audition/desktop/effects-reference/noise-reduction-restoration-effects.html) (2026-11-16; features)
+- **Documented task support — Reduce noise in recorded audio:** Open the recording in Audition and select the restoration effect appropriate to the noise.; The documented Noise Reduction process uses a representative noise-only selection to capture a noise print in the Waveform Editor. **Limits:** This records documented file/session restoration, not an operating-system microphone-filter setup.; Noise prints must match the noise and sample type; strong reduction can alter desired audio or introduce artifacts. [Evidence 1](https://helpx.adobe.com/audition/desktop/effects-reference/noise-reduction-restoration-effects.html)
+### iZotope RX
+
+Audio repair suite combining a spectral editor with specialized noise, dialogue and artifact-processing modules.
+
+- **Platforms:** Windows, macOS. **License:** Proprietary software license. **Pricing model:** paid.
+- **Pricing details:** Paid edition-based software; compare exact module entitlements and available purchase or bundle plans.
+- **Pick for:** Choose RX when a recording requires targeted repair and visual inspection of individual artifacts.
+- **Compare when:** Modules and host formats differ by edition; Advanced capabilities should not be assumed in lower tiers.
+- **Strengths:** Choose RX when a recording requires targeted repair and visual inspection of individual artifacts.
+- **Limitations:** Modules and host formats differ by edition; Advanced capabilities should not be assumed in lower tiers.; Repair processing can alter desired material and needs listening checks.
+- **Maintenance:** unverified — Official distribution and capability documentation reviewed; a dated maintenance conclusion was not established.
+- [Official project](https://www.izotope.com/products/rx-advanced) · [Official installation / downloads](https://www.izotope.com/pages/product-downloads)
+- **Sources:** [Official documentation](https://www.izotope.com/products/rx-advanced) (2026-11-15; identity, features, platforms, pricing, downloads); [Official documentation](https://www.izotope.com/pages/software-license-agreement) (2026-11-15; license); [Official documentation reviewed for this claim](https://www.izotope.com/community/blog/how-to-clean-up-voice-recordings-video-podcasts) (2026-11-16; features)
+- **Documented task support — Reduce noise in recorded audio:** Use an RX edition that includes the required restoration module; standalone editor and plugin entitlements vary by edition.; For the documented Spectral De-noise workflow, load recorded audio, learn representative noise and preview the reduction. **Limits:** This assertion concerns recorded-audio repair; it does not establish a system-wide live microphone filter.; Excessive reduction can remove wanted speech or introduce artifacts; inspect the noise-only preview and retain the original recording. [Evidence 1](https://www.izotope.com/community/blog/how-to-clean-up-voice-recordings-video-podcasts)
+
 ## Audio tags and metadata
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=creative%2Faudio-tagging)
 
 ### Kid3
 
@@ -253,6 +489,8 @@ Music tagging application that matches recordings with MusicBrainz metadata.
 - **Sources:** [Official project documentation](https://picard.musicbrainz.org/) (2026-11-14; identity, features); [Official project README](https://raw.githubusercontent.com/metabrainz/picard/HEAD/README.md) (2026-11-14; identity, features, license, platforms); [Official installation and download information](https://picard.musicbrainz.org/downloads/) (2026-11-14; identity, downloads); [Upstream license terms](https://raw.githubusercontent.com/metabrainz/picard/HEAD/COPYING.txt) (2026-11-14; license); [Official repository activity feed](https://github.com/metabrainz/picard/commits/HEAD.atom) (2026-11-14; maintenance); [Project-linked Linux distribution pricing](https://flathub.org/apps/org.musicbrainz.Picard) (2026-11-14; pricing)
 
 ## Digital audio workstations
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=creative%2Faudio-workstations)
 
 ### Ableton Live
 
@@ -329,7 +567,8 @@ Multitrack audio/MIDI, routing, scripting, portable operation and plugin support
 - **Limitations:** ARM beta and plugin architectures differ; samples/extensions have separate licenses; Proprietary product: workflow inspiration only; no code or asset copying.
 - **Maintenance:** unverified — Retained research snapshot; current release activity was not established by this import.
 - [Official project](https://www.reaper.fm/) · [Official installation / downloads](https://www.reaper.fm/download.php)
-- **Sources:** [Preserved original research source](https://www.reaper.fm/) (2026-11-14; identity, features); [Official packages and evaluation terms](https://www.reaper.fm/download.php) (2026-11-14; downloads, features, identity, platforms, pricing); [Official paid license options](https://www.reaper.fm/purchase.php) (2026-11-14; identity, pricing)
+- **Sources:** [Preserved original research source](https://www.reaper.fm/) (2026-11-14; identity, features); [Official packages and evaluation terms](https://www.reaper.fm/download.php) (2026-11-14; downloads, features, identity, platforms, pricing); [Official paid license options](https://www.reaper.fm/purchase.php) (2026-11-14; identity, pricing); [Official REAPER effects guide, section 8.5: ReaFIR noise reduction](https://www.reaper.fm/userguide/REAPEREffectsGuide2021.pdf) (2026-11-15; features)
+- **Documented task support — Reduce noise in recorded audio:** Use the included ReaFIR effect in Subtract mode and learn a profile from a noise-only section. **Limits:** Profile subtraction requires careful listening and adjustment; this review does not establish live microphone routing or comparative restoration quality. [Evidence 1](https://www.reaper.fm/userguide/REAPEREffectsGuide2021.pdf)
 ### Rosegarden
 
 Linux music-composition application combining MIDI sequencing, notation and audio support.
@@ -356,7 +595,38 @@ Digital audio workstation with recording, MIDI editing, automation and plugin wo
 - [Official project](https://www.zrythm.org/) · [Official installation / downloads](https://www.zrythm.org/en/download.html) · [Repository](https://github.com/zrythm/zrythm)
 - **Sources:** [Official product documentation](https://www.zrythm.org/) (2026-11-14; features, identity); [Official upstream README](https://raw.githubusercontent.com/zrythm/zrythm/HEAD/README.md) (2026-11-14; features, identity, platforms); [Official licensing and terms](https://raw.githubusercontent.com/zrythm/zrythm/HEAD/LICENSES/LicenseRef-ZrythmLicense.txt) (2026-11-14; license); [Official download and distribution documentation](https://www.zrythm.org/en/download.html) (2026-11-14; downloads, platforms, pricing); [Official upstream release activity feed](https://github.com/zrythm/zrythm/releases.atom) (2026-11-14; maintenance)
 
+## Camera tethering
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=creative%2Fcamera-tethering)
+
+### digiCamControl
+
+Control supported digital cameras from Windows for tethered shooting and remote capture.
+
+- **Platforms:** Windows. **License:** MIT. **Pricing model:** free.
+- **Pick for:** A free Windows tethering option when the specific camera is supported.
+- **Compare when:** Camera features vary by model; check the supported-camera list before relying on a session.
+- **Strengths:** A free Windows tethering option when the specific camera is supported.
+- **Limitations:** Camera features vary by model; check the supported-camera list before relying on a session.; The Windows application requires its documented .NET runtime.
+- **Maintenance:** unverified — Official distribution and capability documentation reviewed; a dated maintenance conclusion was not established.
+- [Official project](https://digicamcontrol.com/) · [Official installation / downloads](https://digicamcontrol.com/download) · [Repository](https://github.com/dukus/digiCamControl)
+- **Sources:** [Official documentation](https://digicamcontrol.com/doc/) (2026-11-15; identity, features, pricing, platforms); [Official documentation](https://digicamcontrol.com/download) (2026-11-15; downloads, platforms, maintenance); [Official documentation](https://github.com/dukus/digiCamControl/blob/master/README.md) (2026-11-15; license, features)
+### Entangle
+
+A desktop interface for tethered digital-camera capture, live preview and color-managed image review.
+
+- **Platforms:** Linux, FreeBSD. **License:** GNU GPLv3 or later. **Pricing model:** unknown.
+- **Pick for:** Linux or FreeBSD tethering for cameras supported by libgphoto.
+- **Compare when:** Camera support depends on libgphoto and the particular model.
+- **Strengths:** Linux or FreeBSD tethering for cameras supported by libgphoto.
+- **Limitations:** Camera support depends on libgphoto and the particular model.; The official stable release page still lists June 2020; recent maintenance was not established.
+- **Maintenance:** unverified — Official distribution and capability documentation reviewed; a dated maintenance conclusion was not established.
+- [Official project](https://entangle-photo.org/) · [Official installation / downloads](https://entangle-photo.org/download/) · [Repository](https://gitlab.com/entangle/entangle)
+- **Sources:** [Official documentation](https://entangle-photo.org/) (2026-11-15; identity, features, license, platforms); [Official documentation](https://entangle-photo.org/download/) (2026-11-15; downloads, platforms, maintenance)
+
 ## Screen capture and broadcasting
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=creative%2Fcapture-streaming)
 
 ### OBS Studio
 
@@ -387,6 +657,8 @@ Capture, recording and configurable output workflows
 
 ## Collaborative drawing
 
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=creative%2Fcollaborative-drawing)
+
 ### Drawpile
 
 Collaborative drawing and animation application where participants share a live canvas.
@@ -401,6 +673,8 @@ Collaborative drawing and animation application where participants share a live 
 - **Sources:** [Official project documentation](https://drawpile.net/) (2026-11-14; identity, features, platforms, license, pricing); [Official project README](https://raw.githubusercontent.com/drawpile/Drawpile/HEAD/README.md) (2026-11-14; identity, features, platforms); [Upstream license terms](https://raw.githubusercontent.com/drawpile/Drawpile/HEAD/LICENSE.txt) (2026-11-14; license); [Official installation and download information](https://drawpile.net/download/) (2026-11-14; identity, downloads, platforms, license, pricing); [Official repository activity feed](https://github.com/drawpile/Drawpile/commits/HEAD.atom) (2026-11-14; maintenance)
 
 ## Visual effects compositing
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=creative%2Fcompositing)
 
 ### Adobe After Effects
 
@@ -431,6 +705,8 @@ Node-based compositor and OpenFX effects
 
 ## Desktop publishing
 
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=creative%2Fdesktop-publishing)
+
 ### Adobe InDesign
 
 Page layout and typography environment for books, magazines, brochures and other structured publications.
@@ -458,6 +734,8 @@ Desktop publishing application for page layouts and press-oriented PDF documents
 - **Sources:** [Official project documentation](https://www.scribus.net/) (2026-11-14; identity, features, license, pricing); [Official project README](https://raw.githubusercontent.com/scribusproject/scribus/HEAD/README.md) (2026-11-14; identity, features); [Upstream license terms](https://raw.githubusercontent.com/scribusproject/scribus/HEAD/COPYING) (2026-11-14; license); [Official installation and download information](https://www.scribus.net/downloads/) (2026-11-14; identity, downloads, platforms); [Official repository activity feed](https://github.com/scribusproject/scribus/commits/HEAD.atom) (2026-11-14; maintenance)
 
 ## Digital painting
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=creative%2Fdigital-painting)
 
 ### Krita
 
@@ -487,6 +765,8 @@ Brush-oriented digital painting application with a canvas-focused interface.
 
 ## DJ mixing
 
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=creative%2Fdj-mixing)
+
 ### Mixxx
 
 DJ application with decks, mixing controls and hardware-controller support.
@@ -502,6 +782,8 @@ DJ application with decks, mixing controls and hardware-controller support.
 
 ## Drum sequencing
 
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=creative%2Fdrum-sequencing)
+
 ### Hydrogen
 
 Pattern-based drum machine for programming and arranging percussion parts.
@@ -515,7 +797,9 @@ Pattern-based drum machine for programming and arranging percussion parts.
 - [Official project](https://github.com/hydrogen-music/hydrogen) · [Official installation / downloads](https://github.com/hydrogen-music/hydrogen/releases) · [Repository](https://github.com/hydrogen-music/hydrogen)
 - **Sources:** [Official project README](https://raw.githubusercontent.com/hydrogen-music/hydrogen/HEAD/README.md) (2026-11-14; identity, features, license, platforms); [Upstream license terms](https://raw.githubusercontent.com/hydrogen-music/hydrogen/HEAD/COPYING) (2026-11-14; license); [Official release listing](https://github.com/hydrogen-music/hydrogen/releases) (2026-11-14; identity, downloads); [Official repository activity feed](https://github.com/hydrogen-music/hydrogen/commits/HEAD.atom) (2026-11-14; maintenance)
 
-## Font Editors
+## Font editing
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=creative%2Ffont-editors)
 
 ### Birdfont
 
@@ -554,7 +838,9 @@ Commercial type-design environment for drawing, spacing and producing static, va
 - [Official project](https://www.fontlab.com/font-editor/fontlab/) · [Official installation / downloads](https://www.fontlab.com/font-editor/fontlab/)
 - **Sources:** [Official product documentation](https://www.fontlab.com/font-editor/fontlab/) (2026-11-14; downloads, features, identity, platforms, pricing); [Official licensing and terms](https://www.fontlab.com/legal/eula/) (2026-11-14; license)
 
-## Font Management
+## Font management
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=creative%2Ffont-management)
 
 ### Font Manager
 
@@ -583,6 +869,8 @@ Desktop font manager for organizing, previewing and activating collections of fo
 
 ## Hand-drawn animation
 
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=creative%2Fframe-animation)
+
 ### OpenToonz
 
 2D ink/paint and animation production; effect SDK
@@ -610,7 +898,9 @@ Hand-drawn animation with raster/vector workflows
 - [Official project](https://www.pencil2d.org/) · [Official installation / downloads](https://www.pencil2d.org/download/) · [Repository](https://github.com/pencil2d/pencil)
 - **Sources:** [Official free commercial-use statement](https://www.pencil2d.org/) (2026-11-14; features, identity, platforms, pricing); [Verified official source repository](https://github.com/pencil2d/pencil) (2026-11-14; features, identity); [Official desktop and legacy downloads](https://www.pencil2d.org/download/) (2026-11-14; downloads, identity, platforms)
 
-## Graphic Design Suites
+## Graphic design suites
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=creative%2Fgraphic-design-suites)
 
 ### Affinity
 
@@ -628,6 +918,8 @@ Unified pixel editing, vector design and page layout application from Canva.
 
 ## Guitar tablature
 
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=creative%2Fguitar-tablature)
+
 ### TuxGuitar
 
 Tablature and score editor with playback for guitar and other instruments.
@@ -643,6 +935,8 @@ Tablature and score editor with playback for guitar and other instruments.
 
 ## HDR photography
 
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=creative%2Fhdr-photography)
+
 ### Luminance HDR
 
 HDR image fusion and tone mapping application for exposure-bracketed photography.
@@ -657,6 +951,8 @@ HDR image fusion and tone mapping application for exposure-bracketed photography
 - **Sources:** [Official project documentation](https://qtpfsgui.sourceforge.net/) (2026-11-14; identity, features, platforms, license, pricing); [Official project README](https://raw.githubusercontent.com/LuminanceHDR/LuminanceHDR/HEAD/README.md) (2026-11-14; identity, features, platforms); [Upstream license terms](https://raw.githubusercontent.com/LuminanceHDR/LuminanceHDR/HEAD/LICENSE) (2026-11-14; license); [Official project documentation](https://sourceforge.net/projects/qtpfsgui/files/) (2026-11-14; identity, features, platforms, downloads); [Official repository activity feed](https://github.com/LuminanceHDR/LuminanceHDR/commits/HEAD.atom) (2026-11-14; maintenance)
 
 ## Batch image processing
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=creative%2Fimage-processing)
 
 ### G'MIC
 
@@ -684,6 +980,8 @@ Command-line suite for converting, transforming and composing raster images.
 - **Sources:** [Official project documentation](https://imagemagick.org/) (2026-11-14; identity, features, pricing); [Official project README](https://raw.githubusercontent.com/ImageMagick/ImageMagick/HEAD/README.md) (2026-11-14; identity, features, platforms); [Upstream license terms](https://raw.githubusercontent.com/ImageMagick/ImageMagick/HEAD/LICENSE) (2026-11-14; license); [Official installation and download information](https://imagemagick.org/download/) (2026-11-14; identity, downloads, platforms); [Official repository activity feed](https://github.com/ImageMagick/ImageMagick/commits/HEAD.atom) (2026-11-14; maintenance)
 
 ## Image viewers
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=creative%2Fimage-viewers)
 
 ### ImageGlass
 
@@ -746,7 +1044,9 @@ Image browser, organizer and batch processor with broad format support.
 - [Official project](https://www.xnview.com/en/xnviewmp/) · [Official installation / downloads](https://www.xnview.com/en/xnviewmp/#downloads)
 - **Sources:** [Official project documentation](https://www.xnview.com/en/xnviewmp/) (2026-11-14; identity, features, platforms, license, pricing); [Official installation and download information](https://www.xnview.com/en/xnviewmp/#downloads) (2026-11-14; identity, downloads, platforms, license, pricing)
 
-## Live Coding Music
+## Live coding for music
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=creative%2Flive-coding-music)
 
 ### Sonic Pi
 
@@ -762,6 +1062,8 @@ Live-coding music environment that turns editable programs into synthesized and 
 - **Sources:** [Official product documentation](https://sonic-pi.net/) (2026-11-14; downloads, features, identity, platforms, pricing); [Official upstream README](https://raw.githubusercontent.com/sonic-pi-net/sonic-pi/HEAD/README.md) (2026-11-14; features, identity); [Official upstream license text](https://raw.githubusercontent.com/sonic-pi-net/sonic-pi/HEAD/LICENSE.md) (2026-11-14; license); [Official upstream release activity feed](https://github.com/sonic-pi-net/sonic-pi/releases.atom) (2026-11-14; maintenance)
 
 ## 3D materials, painting and baking
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=creative%2Fmaterial-authoring)
 
 ### Adobe Substance 3D Painter
 
@@ -818,6 +1120,8 @@ Godot-based procedural texture graph, PBR export and experimental painting
 
 ## Media centers
 
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=creative%2Fmedia-centers)
+
 ### Kodi
 
 Media-center application with a television-oriented interface for local and network libraries.
@@ -832,6 +1136,8 @@ Media-center application with a television-oriented interface for local and netw
 - **Sources:** [Official project documentation](https://kodi.tv/) (2026-11-14; identity, features, platforms, pricing); [Official project README](https://raw.githubusercontent.com/xbmc/xbmc/HEAD/README.md) (2026-11-14; identity, features, license, platforms, pricing); [Upstream license terms](https://raw.githubusercontent.com/xbmc/xbmc/HEAD/LICENSE.md) (2026-11-14; license); [Official installation and download information](https://kodi.tv/download/) (2026-11-14; identity, downloads, platforms, pricing); [Official repository activity feed](https://github.com/xbmc/xbmc/commits/HEAD.atom) (2026-11-14; maintenance)
 
 ## Media containers and remuxing
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=creative%2Fmedia-containers)
 
 ### MKVToolNix
 
@@ -848,6 +1154,8 @@ Utilities and graphical tools for constructing, inspecting and changing Matroska
 
 ## Media metadata inspection
 
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=creative%2Fmedia-inspection)
+
 ### MediaInfo
 
 Utility that reports technical metadata for audio and video files.
@@ -862,6 +1170,8 @@ Utility that reports technical metadata for audio and video files.
 - **Sources:** [Official project documentation](https://mediaarea.net/en/MediaInfo) (2026-11-14; identity, features, platforms, license); [Official project README](https://raw.githubusercontent.com/MediaArea/MediaInfo/HEAD/README.md) (2026-11-14; identity, features, license, platforms, pricing); [Upstream license terms](https://raw.githubusercontent.com/MediaArea/MediaInfo/HEAD/LICENSE) (2026-11-14; license); [Official installation and download information](https://mediaarea.net/en/MediaInfo/Download) (2026-11-14; identity, downloads); [Official repository activity feed](https://github.com/MediaArea/MediaInfo/commits/HEAD.atom) (2026-11-14; maintenance)
 
 ## Media players
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=creative%2Fmedia-players)
 
 ### MPC-BE
 
@@ -902,6 +1212,8 @@ Media player for local files, discs and network streams across desktop platforms
 
 ## Media servers
 
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=creative%2Fmedia-servers)
+
 ### Jellyfin
 
 Self-hosted media library server with clients for streaming personal collections.
@@ -916,6 +1228,8 @@ Self-hosted media library server with clients for streaming personal collections
 - **Sources:** [Official project documentation](https://jellyfin.org/) (2026-11-14; identity, features, license, pricing); [Official project README](https://raw.githubusercontent.com/jellyfin/jellyfin/HEAD/README.md) (2026-11-14; identity, features, license, platforms, pricing); [Upstream license terms](https://raw.githubusercontent.com/jellyfin/jellyfin/HEAD/LICENSE) (2026-11-14; license); [Official installation and download information](https://jellyfin.org/downloads/) (2026-11-14; identity, downloads); [Official repository activity feed](https://github.com/jellyfin/jellyfin/commits/HEAD.atom) (2026-11-14; maintenance)
 
 ## Video and media conversion
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=creative%2Fmedia-transcoding)
 
 ### FFmpeg
 
@@ -957,6 +1271,8 @@ Desktop interface for FFmpeg-based video, audio and image conversion workflows.
 
 ## Mesh repair and retopology
 
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=creative%2Fmesh-processing)
+
 ### Instant Meshes
 
 Interactive field-aligned mesh generation and retopology
@@ -986,6 +1302,8 @@ Mesh cleaning, reconstruction, texture and format conversion
 
 ## Modular audio environments
 
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=creative%2Fmodular-audio)
+
 ### Bespoke Synth
 
 Modular audio workspace where instruments, effects and control modules are connected visually.
@@ -1012,6 +1330,8 @@ Virtual modular synthesizer environment modeled around rack-mounted modules and 
 - **Sources:** [Official project documentation](https://vcvrack.com/Rack) (2026-11-14; identity, features, platforms, license, pricing); [Official project README](https://raw.githubusercontent.com/VCVRack/Rack/HEAD/README.md) (2026-11-14; identity, features); [Upstream license terms](https://raw.githubusercontent.com/VCVRack/Rack/HEAD/LICENSE.md) (2026-11-14; license); [Official project documentation](https://vcvrack.com/Rack#get) (2026-11-14; identity, features, platforms, license, pricing, downloads); [Official repository activity feed](https://github.com/VCVRack/Rack/commits/HEAD.atom) (2026-11-14; maintenance)
 
 ## Music players and libraries
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=creative%2Fmusic-libraries)
 
 ### foobar2000
 
@@ -1052,6 +1372,8 @@ Music player and collection organizer aimed at local music libraries.
 
 ## Music notation
 
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=creative%2Fmusic-notation)
+
 ### Frescobaldi
 
 LilyPond-oriented text editor with score preview and notation-editing aids.
@@ -1091,6 +1413,8 @@ Score notation and composition application for writing, editing and playing shee
 
 ## Panorama stitching
 
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=creative%2Fpanorama-stitching)
+
 ### Hugin
 
 Panorama stitching workflow for combining overlapping photographs into mosaics.
@@ -1105,6 +1429,8 @@ Panorama stitching workflow for combining overlapping photographs into mosaics.
 - **Sources:** [Official project documentation](https://hugin.sourceforge.io/) (2026-11-14; identity, features); [Official installation and download information](https://hugin.sourceforge.io/download/) (2026-11-14; identity, downloads, platforms, pricing); [Official project documentation](https://sourceforge.net/projects/hugin/) (2026-11-14; identity, features, platforms, license)
 
 ## Photo libraries and metadata
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=creative%2Fphoto-management)
 
 ### digiKam
 
@@ -1122,6 +1448,32 @@ Local photo/video catalog, EXIF/IPTC/XMP search, batch processing and RAW suppor
 
 ## Photogrammetry
 
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=creative%2Fphotogrammetry)
+
+### Agisoft Metashape
+
+Standalone photogrammetry software for reconstructing spatial data from photographs, with Standard and Professional editions.
+
+- **Platforms:** Windows, macOS, Linux. **License:** Proprietary commercial license. **Pricing model:** paid.
+- **Pick for:** A commercial desktop photogrammetry option with perpetual licensing choices.
+- **Compare when:** GIS and survey requirements need edition-specific evaluation.
+- **Strengths:** A commercial desktop photogrammetry option with perpetual licensing choices.
+- **Limitations:** GIS and survey requirements need edition-specific evaluation.; The save-disabled demo differs from the time-limited full trial.
+- **Maintenance:** unverified — Official distribution and capability documentation reviewed; a dated maintenance conclusion was not established.
+- [Official project](https://www.agisoft.com/) · [Official installation / downloads](https://www.agisoft.com/downloads/installer/)
+- **Sources:** [Official documentation](https://www.agisoft.com/) (2026-11-15; identity, features); [Official documentation](https://www.agisoft.com/downloads/installer/) (2026-11-15; downloads, platforms, pricing); [Official documentation](https://www.agisoft.com/buy/licensing-options/) (2026-11-15; license, pricing)
+### COLMAP
+
+Reconstruct camera poses and 3D geometry from overlapping photographs through a graphical or command-line photogrammetry pipeline.
+
+- **Platforms:** Windows, macOS, Linux. **License:** BSD 3-clause; dependencies have separate terms. **Pricing model:** free.
+- **Pick for:** A controllable reconstruction pipeline for researchers and technical asset workflows.
+- **Compare when:** Dense reconstruction and GPU acceleration depend on the installed build and hardware.
+- **Strengths:** A controllable reconstruction pipeline for researchers and technical asset workflows.
+- **Limitations:** Dense reconstruction and GPU acceleration depend on the installed build and hardware.; Requires suitable overlapping photographs and reconstruction parameter choices.
+- **Maintenance:** unverified — Official distribution and capability documentation reviewed; a dated maintenance conclusion was not established.
+- [Official project](https://colmap.github.io/) · [Official installation / downloads](https://colmap.github.io/install.html) · [Repository](https://github.com/colmap/colmap)
+- **Sources:** [Official documentation](https://colmap.github.io/) (2026-11-15; identity, features, pricing); [Official documentation](https://colmap.github.io/install.html) (2026-11-15; platforms, downloads); [Official documentation](https://github.com/colmap/colmap/blob/main/LICENSE) (2026-11-15; license)
 ### Meshroom
 
 Node-based photogrammetry and reconstruction workflows
@@ -1135,8 +1487,59 @@ Node-based photogrammetry and reconstruction workflows
 - **Maintenance:** unverified — Retained research snapshot; current release activity was not established by this import.
 - [Official project](https://meshroom.org/) · [Official installation / downloads](https://meshroom.org/download/) · [Repository](https://github.com/alicevision/Meshroom)
 - **Sources:** [Preserved original research source](https://github.com/alicevision/meshroom) (2026-11-14; identity, features); [Preserved original research source](https://github.com/alicevision/meshroom/releases) (2026-11-14; identity, features); [Official current Windows and Linux packages](https://meshroom.org/download/) (2026-11-14; downloads, identity, platforms); [Verified official source repository](https://github.com/alicevision/Meshroom) (2026-11-14; identity)
+### MicMac
+
+A photogrammetry toolchain from IGN and ENSG for image orientation and geometric reconstruction.
+
+- **Platforms:** Windows, macOS, Linux. **License:** CeCILL-B. **Pricing model:** free.
+- **Pick for:** Specialist photogrammetry workflows that benefit from explicit processing stages.
+- **Compare when:** The command-line toolchain has a substantial learning curve.
+- **Strengths:** Specialist photogrammetry workflows that benefit from explicit processing stages.
+- **Limitations:** The command-line toolchain has a substantial learning curve.; This record covers the MicMac repository; MMVII is a separate newer development line.
+- **Maintenance:** unverified — Official distribution and capability documentation reviewed; a dated maintenance conclusion was not established.
+- [Official project](https://github.com/micmacIGN/micmac) · [Official installation / downloads](https://github.com/micmacIGN/micmac/releases) · [Repository](https://github.com/micmacIGN/micmac)
+- **Sources:** [Official documentation](https://github.com/micmacIGN/micmac/blob/master/README.md) (2026-11-15; identity, features, license, pricing, platforms, downloads)
+### OpenMVS
+
+Turn registered photographs and camera poses into dense point clouds, reconstructed surfaces and textured meshes.
+
+- **Platforms:** Windows, macOS, Linux. **License:** GNU AGPLv3. **Pricing model:** unknown.
+- **Pick for:** A modular dense-reconstruction stage for an existing camera-registration pipeline.
+- **Compare when:** Camera poses and a sparse reconstruction are inputs; it does not replace the full capture-registration workflow.
+- **Strengths:** A modular dense-reconstruction stage for an existing camera-registration pipeline.
+- **Limitations:** Camera poses and a sparse reconstruction are inputs; it does not replace the full capture-registration workflow.; Building and tuning the toolchain is a technical task.
+- **Maintenance:** unverified — Official distribution and capability documentation reviewed; a dated maintenance conclusion was not established.
+- [Official project](https://github.com/cdcseacave/openMVS) · [Official installation / downloads](https://github.com/cdcseacave/openMVS/wiki/Building) · [Repository](https://github.com/cdcseacave/openMVS)
+- **Sources:** [Official documentation](https://github.com/cdcseacave/openMVS/blob/develop/README.md) (2026-11-15; identity, features, license, platforms, downloads)
+### RealityScan Desktop
+
+Reconstruct detailed 3D assets from photographs and laser scans, with command-line automation for repeatable jobs.
+
+- **Platforms:** Windows, Linux. **License:** Epic commercial software license; eligibility-based free tier. **Pricing model:** mixed.
+- **Pricing details:** Free for qualifying individuals, small businesses and educational users; paid annual seats otherwise. Check the current eligibility terms.
+- **Pick for:** Photogrammetry asset production where its revenue-based licensing and NVIDIA requirements fit.
+- **Compare when:** Free eligibility depends on revenue or education status; larger businesses need annual seats.
+- **Strengths:** Photogrammetry asset production where its revenue-based licensing and NVIDIA requirements fit.
+- **Limitations:** Free eligibility depends on revenue or education status; larger businesses need annual seats.; Windows installation uses an Epic account and launcher; Linux has a separate download route and NVIDIA requirements.
+- **Maintenance:** unverified — Official distribution and capability documentation reviewed; a dated maintenance conclusion was not established.
+- [Official project](https://www.realityscan.com/) · [Official installation / downloads](https://www.realityscan.com/download)
+- **Sources:** [Official documentation](https://www.realityscan.com/) (2026-11-15; identity, features); [Official documentation](https://www.realityscan.com/download) (2026-11-15; downloads, platforms, pricing); [Official documentation](https://www.realityscan.com/license) (2026-11-15; license, pricing)
+### WebODM
+
+Process aerial photographs into georeferenced maps, elevation models, point clouds and textured 3D outputs through a local web interface.
+
+- **Platforms:** Windows, macOS, Linux. **License:** GNU AGPLv3. **Pricing model:** free.
+- **Pick for:** A packaged aerial-mapping workflow for users who prefer a browser interface.
+- **Compare when:** Large image collections need substantial memory and processing time.
+- **Strengths:** A packaged aerial-mapping workflow for users who prefer a browser interface.
+- **Limitations:** Large image collections need substantial memory and processing time.; Current WebODM uses ODX and is no longer affiliated with OpenDroneMap; older installation advice can be misleading.
+- **Maintenance:** active — The official download page reports a November 4, 2026 update. ([evidence](https://webodm.org/download/))
+- [Official project](https://webodm.org/) · [Official installation / downloads](https://webodm.org/download/) · [Repository](https://github.com/WebODM/WebODM)
+- **Sources:** [Official documentation](https://github.com/WebODM/WebODM/blob/master/README.md) (2026-11-15; identity, features, license, pricing); [Official documentation](https://webodm.org/download/) (2026-11-15; downloads, platforms, pricing, maintenance)
 
 ## Pixel art
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=creative%2Fpixel-art)
 
 ### Aseprite
 
@@ -1178,6 +1581,8 @@ Open-source pixel-art workspace for sprites, tiles and frame animation.
 
 ## Raster image editing
 
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=creative%2Fraster-graphics)
+
 ### Adobe Photoshop
 
 Layer-based photo editing and compositing for retouching, image construction and professional raster artwork.
@@ -1218,6 +1623,8 @@ Drawing and image-editing application with layers and approachable desktop tools
 - **Sources:** [Official project documentation](https://www.pinta-project.com/) (2026-11-14; identity, features, platforms, license, pricing); [Official project README](https://raw.githubusercontent.com/PintaProject/Pinta/HEAD/readme.md) (2026-11-14; identity, features, license, platforms); [Official project documentation](https://www.pinta-project.com/releases/) (2026-11-14; identity, features, platforms, downloads); [Official repository activity feed](https://github.com/PintaProject/Pinta/commits/HEAD.atom) (2026-11-14; maintenance)
 
 ## RAW photo development
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=creative%2Fraw-photography)
 
 ### Adobe Lightroom Classic
 
@@ -1284,6 +1691,8 @@ Non-destructive floating-point RAW processing, demosaicing and pixel-shift workf
 
 ## Visual reference boards
 
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=creative%2Freference-boards)
+
 ### PureRef
 
 Reference boards, image arrangement, annotations and always-on-top viewer
@@ -1298,7 +1707,9 @@ Reference boards, image arrangement, annotations and always-on-top viewer
 - [Official project](https://www.pureref.com/) · [Official installation / downloads](https://www.pureref.com/download.php)
 - **Sources:** [Preserved original research source](https://www.pureref.com/) (2026-11-14; identity, features); [Official platform packages and license options](https://www.pureref.com/download.php) (2026-11-14; downloads, identity, platforms, pricing); [Official personal and commercial license terms](https://www.pureref.com/license.php) (2026-11-14; identity, license, pricing)
 
-## Screen Recording
+## Screen recording
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=creative%2Fscreen-recording)
 
 ### ScreenToGif
 
@@ -1327,7 +1738,26 @@ Desktop screencasting application for Windows and Linux recording workflows.
 - [Official project](https://linuxecke.volkoh.de/vokoscreen/vokoscreen.html) · [Official installation / downloads](https://linuxecke.volkoh.de/vokoscreen/vokoscreen.html) · [Repository](https://github.com/vkohaupt/vokoscreenNG)
 - **Sources:** [Official product documentation](https://linuxecke.volkoh.de/vokoscreen/vokoscreen.html) (2026-11-14; downloads, features, identity, platforms, pricing); [Official upstream license text](https://raw.githubusercontent.com/vkohaupt/vokoscreenNG/HEAD/COPYING) (2026-11-14; license); [Official upstream release activity feed](https://github.com/vkohaupt/vokoscreenNG/releases.atom) (2026-11-14; maintenance)
 
+## Singing voice synthesis
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=creative%2Fsinging-synthesis)
+
+### OpenUtau
+
+A singing-synthesis editor for arranging notes, lyrics and expression with compatible voicebanks and rendering engines.
+
+- **Platforms:** Windows, macOS, Linux. **License:** MIT; voicebanks and engines may have separate terms. **Pricing model:** free.
+- **Pick for:** A free vocal-synthesis editor with cross-platform downloads.
+- **Compare when:** Voicebanks have their own licenses and compatibility requirements.
+- **Strengths:** A free vocal-synthesis editor with cross-platform downloads.
+- **Limitations:** Voicebanks have their own licenses and compatibility requirements.; The project is a focused singing editor rather than a complete audio-production workstation.
+- **Maintenance:** unverified — Official distribution and capability documentation reviewed; a dated maintenance conclusion was not established.
+- [Official project](https://openutau.com/) · [Official installation / downloads](https://openutau.com/) · [Repository](https://github.com/openutau/OpenUtau)
+- **Sources:** [Official documentation](https://openutau.com/) (2026-11-15; identity, platforms, downloads); [Official documentation](https://github.com/openutau/OpenUtau) (2026-11-15; features, license, pricing)
+
 ## Software synthesizers
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=creative%2Fsoftware-synthesizers)
 
 ### Dexed
 
@@ -1354,7 +1784,44 @@ Hybrid software synthesizer offering multiple synthesis methods and modulation o
 - [Official project](https://surge-synthesizer.github.io/) · [Official installation / downloads](https://surge-synthesizer.github.io/) · [Repository](https://github.com/surge-synthesizer/surge)
 - **Sources:** [Official project documentation](https://surge-synthesizer.github.io/) (2026-11-14; identity, features, platforms, downloads); [Official project README](https://raw.githubusercontent.com/surge-synthesizer/surge/HEAD/README.md) (2026-11-14; identity, features, license, platforms, pricing); [Upstream license terms](https://raw.githubusercontent.com/surge-synthesizer/surge/HEAD/LICENSE) (2026-11-14; license); [Official repository activity feed](https://github.com/surge-synthesizer/surge/commits/HEAD.atom) (2026-11-14; maintenance)
 
+## Speaker and crossover processing
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=creative%2Fspeaker-processing)
+
+### CamillaDSP
+
+Configurable real-time audio engine for FIR/IIR filtering, active crossovers and multichannel routing.
+
+- **Platforms:** Windows, macOS, Linux. **License:** GPL-3.0 or MPL-2.0; ASIO-enabled binaries GPL-3.0 only. **Pricing model:** unknown.
+- **Pricing details:** Open-source engine and release distributions are documented; no paid binary entitlement was assessed.
+- **Pick for:** Choose CamillaDSP when speaker correction needs an explicit, reproducible processing pipeline.
+- **Compare when:** Requires correct device routing, channel mapping and gain management; the core program is command-line.
+- **Strengths:** Choose CamillaDSP when speaker correction needs an explicit, reproducible processing pipeline.
+- **Limitations:** Requires correct device routing, channel mapping and gain management; the core program is command-line.; ASIO builds have a narrower license choice than the general engine.
+- **Maintenance:** unverified — Official distribution and capability documentation reviewed; a dated maintenance conclusion was not established.
+- [Official project](https://github.com/HEnquist/camilladsp) · [Official installation / downloads](https://github.com/HEnquist/camilladsp/releases) · [Repository](https://github.com/HEnquist/camilladsp)
+- **Sources:** [Official documentation](https://raw.githubusercontent.com/HEnquist/camilladsp/master/README.md) (2026-11-15; identity, features, platforms, license, downloads)
+
+## Stop-motion animation
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=creative%2Fstop-motion)
+
+### Dragonframe
+
+Stop-motion production software combining camera capture, animation review, exposure planning and optional motion-control hardware.
+
+- **Platforms:** Windows, macOS, Linux. **License:** Proprietary Dragonframe license; the current FAQ links a Dragonframe 5 EULA, so confirm the selected release agreement. **Pricing model:** paid.
+- **Pick for:** Dedicated stop-motion sets needing coordinated camera, lighting and movement controls.
+- **Compare when:** Supported cameras and separate motion-control hardware determine available controls.
+- **Strengths:** Dedicated stop-motion sets needing coordinated camera, lighting and movement controls.
+- **Limitations:** Supported cameras and separate motion-control hardware determine available controls.; The trial adds watermarks and limits captures; paid licensing is required for unrestricted production.; The public FAQ links an older Dragonframe 5 EULA; confirm current-release and educational-license conditions in the installer before deployment.
+- **Maintenance:** active — Official downloads list the dated 2026.07.5 release. ([evidence](https://www.dragonframe.com/downloads/))
+- [Official project](https://www.dragonframe.com/) · [Official installation / downloads](https://www.dragonframe.com/downloads/)
+- **Sources:** [Official documentation](https://www.dragonframe.com/dragonframe-software/) (2026-11-15; identity, features); [Official documentation](https://www.dragonframe.com/downloads/) (2026-11-15; downloads, platforms, pricing, maintenance); [Official documentation](https://www.dragonframe.com/store/) (2026-11-15; pricing); [Official documentation reviewed for this claim](https://www.dragonframe.com/faq/) (2026-11-16; license); [Official documentation reviewed for this claim](https://www.dragonframe.com/download/Dragonframe5_EULA.pdf) (2026-11-16; license)
+
 ## Subtitle editing
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=creative%2Fsubtitles)
 
 ### Aegisub
 
@@ -1381,7 +1848,53 @@ Subtitle creation, timing and conversion editor with current cross-platform buil
 - [Official project](https://www.nikse.dk/subtitleedit) · [Official installation / downloads](https://github.com/SubtitleEdit/subtitleedit/releases) · [Repository](https://github.com/SubtitleEdit/subtitleedit)
 - **Sources:** [Official project README](https://raw.githubusercontent.com/SubtitleEdit/subtitleedit/HEAD/README.md) (2026-11-14; identity, features, platforms); [Upstream license terms](https://raw.githubusercontent.com/SubtitleEdit/subtitleedit/HEAD/LICENSE) (2026-11-14; license); [Official release listing](https://github.com/SubtitleEdit/subtitleedit/releases) (2026-11-14; identity, downloads); [Official repository activity feed](https://github.com/SubtitleEdit/subtitleedit/commits/HEAD.atom) (2026-11-14; maintenance); [Official pricing or distribution documentation](https://raw.githubusercontent.com/SubtitleEdit/subtitleedit/HEAD/docs/faq.md) (2026-11-14; pricing)
 
+## System audio processing and equalization
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=creative%2Fsystem-audio-processing)
+
+### EasyEffects
+
+Linux PipeWire effects processor for output audio and microphone input, with configurable effect ordering.
+
+- **Platforms:** Linux. **License:** GNU GPL v3 or later. **Pricing model:** unknown.
+- **Pricing details:** Distribution packages and Flatpak are documented; no separate commercial entitlement was assessed.
+- **Pick for:** Choose EasyEffects for desktop-wide Linux audio processing without routing every application through a DAW.
+- **Compare when:** Requires PipeWire and suitable plugin packages; some distribution packages omit effects.
+- **Strengths:** Choose EasyEffects for desktop-wide Linux audio processing without routing every application through a DAW.
+- **Limitations:** Requires PipeWire and suitable plugin packages; some distribution packages omit effects.; Keep hardware devices as defaults, as instructed by upstream, to avoid routing problems.
+- **Maintenance:** unverified — Official distribution and capability documentation reviewed; a dated maintenance conclusion was not established.
+- [Official project](https://github.com/wwmm/easyeffects) · [Official installation / downloads](https://github.com/wwmm/easyeffects#installation) · [Repository](https://github.com/wwmm/easyeffects)
+- **Sources:** [Official documentation](https://github.com/wwmm/easyeffects/blob/master/README.md) (2026-11-15; identity, features, platforms, license, downloads); [Official documentation reviewed for this claim](https://wwmm.github.io/easyeffects/) (2026-11-16; features); [Official documentation reviewed for this claim](https://wwmm.github.io/easyeffects/plugins/rnnoise.html) (2026-11-16; features); [Official documentation reviewed for this claim](https://wwmm.github.io/easyeffects/plugins/deepfilternet.html) (2026-11-16; features); [Official documentation reviewed for this claim](https://github.com/wwmm/easyeffects) (2026-11-16; features, platforms, license, downloads)
+- **Documented task support — Suppress noise in live microphone audio:** Use Linux with PipeWire and route the intended recording or calling application through EasyEffects input processing.; Enable RNNoise or a supported Deep Noise Remover model with the required plugin/model dependencies installed.; Keep real hardware as the system default input/output, following the upstream routing warning. **Limits:** A package can omit effect dependencies; a listed feature is not proof that it is installed or enabled locally.; Check the destination application actually receives the processed microphone and evaluate latency and speech artifacts on the local setup. [Evidence 1](https://wwmm.github.io/easyeffects/) [Evidence 2](https://wwmm.github.io/easyeffects/plugins/rnnoise.html) [Evidence 3](https://wwmm.github.io/easyeffects/plugins/deepfilternet.html) [Evidence 4](https://github.com/wwmm/easyeffects)
+### Equalizer APO
+
+Windows audio-processing object for system equalization, multichannel filtering and VST effects.
+
+- **Platforms:** Windows. **License:** GNU GPL v2. **Pricing model:** unknown.
+- **Pricing details:** Official source and binary distribution are available; pricing classification was not independently established.
+- **Pick for:** Choose Equalizer APO for Windows playback processing that integrates with the system audio-effects path.
+- **Compare when:** ASIO and WASAPI exclusive applications bypass the required system-effects infrastructure.
+- **Strengths:** Choose Equalizer APO for Windows playback processing that integrates with the system audio-effects path.
+- **Limitations:** ASIO and WASAPI exclusive applications bypass the required system-effects infrastructure.; Device-driver changes may require reconfiguration.
+- **Maintenance:** unverified — Official distribution and capability documentation reviewed; a dated maintenance conclusion was not established.
+- [Official project](https://sourceforge.net/projects/equalizerapo/) · [Official installation / downloads](https://sourceforge.net/projects/equalizerapo/files/)
+- **Sources:** [Official documentation](https://sourceforge.net/projects/equalizerapo/) (2026-11-15; identity, features, platforms, license, downloads)
+### Peace Equalizer
+
+Graphical equalizer and effects interface for managing Equalizer APO on Windows.
+
+- **Platforms:** Windows. **License:** GNU GPL v2. **Pricing model:** unknown.
+- **Pick for:** Choose Peace when Equalizer APO needs convenient profiles and interactive controls.
+- **Compare when:** Equalizer APO must be installed first; Peace is a front end, not a standalone replacement for its audio engine.
+- **Strengths:** Choose Peace when Equalizer APO needs convenient profiles and interactive controls.
+- **Limitations:** Equalizer APO must be installed first; Peace is a front end, not a standalone replacement for its audio engine.; Windows updates can require repairing the underlying APO installation.
+- **Maintenance:** active — Developer distribution page lists a March 15, 2026 update. ([evidence](https://sourceforge.net/projects/peace-equalizer-apo-extension/))
+- [Official project](https://sourceforge.net/projects/peace-equalizer-apo-extension/) · [Official installation / downloads](https://sourceforge.net/projects/peace-equalizer-apo-extension/files/)
+- **Sources:** [Official documentation](https://sourceforge.net/projects/peace-equalizer-apo-extension/) (2026-11-15; identity, features, platforms, license, downloads, maintenance)
+
 ## Vector animation
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=creative%2Fvector-animation)
 
 ### Friction
 
@@ -1423,6 +1936,8 @@ Vector tweening, bitmap cutout bones and linked parameters
 
 ## Vector graphics
 
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=creative%2Fvector-graphics)
+
 ### Adobe Illustrator
 
 Vector illustration and graphic design software for scalable artwork, logos and editable typography.
@@ -1450,6 +1965,8 @@ SVG illustration editor for icons, diagrams, logos and scalable artwork.
 - **Sources:** [Official project README](https://raw.githubusercontent.com/inkscape/inkscape/HEAD/README.md) (2026-11-14; identity, features, platforms, pricing); [Official installation and download information](https://wiki.inkscape.org/wiki/Installing_Inkscape) (2026-11-14; identity, downloads, platforms, license); [Upstream license terms](https://wiki.inkscape.org/wiki/License_Discussion) (2026-11-14; license); [Official installation and download information](https://inkscape.org/release/) (2026-11-14; identity, downloads, platforms, license, pricing); [Official project documentation](https://lists.inkscape.org/hyperkitty/list/inkscape-announce%40lists.inkscape.org/message/OCEYDBJCKK2ZF65O3FNKZOSTL7JBTZND/) (2026-11-14; identity, features, platforms); [Official repository activity feed](https://github.com/inkscape/inkscape/commits/HEAD.atom) (2026-11-14; maintenance)
 
 ## Video editing
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=creative%2Fvideo-editing)
 
 ### Adobe Premiere
 
@@ -1529,6 +2046,8 @@ Native timeline editing, track compositing, color tools, motion tracking and pro
 - **Sources:** [Official downloads and legacy platform notes](https://shotcut.org/download/) (2026-11-14; downloads, features, identity, platforms, pricing); [Preserved original research source](https://www.shotcut.org/features/) (2026-11-14; identity, features); [Preserved original research source](https://www.shotcut.org/FAQ/) (2026-11-14; identity, features); [Verified official source repository](https://github.com/mltframework/shotcut) (2026-11-14; identity)
 
 ## Lossless video trimming
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=creative%2Fvideo-trimming)
 
 ### LosslessCut
 

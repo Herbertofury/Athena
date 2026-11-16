@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "reviewed_at": "2026-11-16",
+  "app_id": "jetbrains-rider",
+  "issue": "The task query program in C# could not find Rider because the record only named .NET, even though the product explicitly supports C#.",
+  "source": {
+    "url": "https://www.jetbrains.com/rider/features/",
+    "label": "Official supported languages, project types and desktop platforms",
+    "checked_at": "2026-11-16",
+    "supports": [
+      "features",
+      "platforms"
+    ]
+  },
+  "retrieval": {
+    "method": "HTTP GET",
+    "outcome": "readable official product page",
+    "source_reference": "turn92view0",
+    "http_status": 200,
+    "final_url": "https://www.jetbrains.com/rider/features/",
+    "retrieved_at": "2026-11-16T18:15:24.674651+00:00",
+    "sha256": "32a08fae7b1bf3a45e9709fc223f05a516386d7617de90492d26c1fa3e0d0188",
+    "byte_length": 59750
+  },
+  "observations": [
+    "The official features page explicitly lists C#, F# and VB.NET editing and code insight.",
+    "The same page lists Windows, macOS and Linux and describes opening, building, running and debugging supported .NET applications."
+  ],
+  "change": "Add supported languages to the Rider record only; do not treat every .NET tool as a C# IDE.",
+  "before": {
+    "features": [
+      "C#, F# and VB.NET editing, code insight and .NET tooling",
+      "Debugger and tests",
+      "Game-engine integrations"
+    ],
+    "tags": [
+      "development",
+      "dotnet-ides",
+      ".net-tooling",
+      "debugger-and-tests",
+      "game-engine-integrations",
+      "C#",
+      "F#",
+      "VB.NET"
+    ],
+    "use_cases": [
+      "Develop and debug C#, F# or VB.NET projects with .NET and supported game-engine integrations."
+    ]
+  },
+  "after": {
+    "features": [
+      "C#, F# and VB.NET editing, code insight and .NET tooling",
+      "Debugger and tests",
+      "Game-engine integrations"
+    ],
+    "tags": [
+      "development",
+      "dotnet-ides",
+      ".net-tooling",
+      "debugger-and-tests",
+      "game-engine-integrations",
+      "C#",
+      "F#",
+      "VB.NET"
+    ],
+    "use_cases": [
+      "Develop and debug C#, F# or VB.NET projects with .NET and supported game-engine integrations."
+    ]
+  },
+  "scope": "Documented functionality and source metadata; no installation or runtime validation performed."
+}

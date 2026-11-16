@@ -4,9 +4,11 @@ Read, write, organize knowledge and make computing accessible.
 
 [Browse in Athena](https://herbertofury.github.io/Athena/#software?family=productivity) · [Catalog](Software-Catalog) · [Method](Software-Methodology)
 
-74 applications. Reviewed 2026-11-15; individual records identify inherited research.
+151 applications. Reviewed 2026-11-16; individual records identify inherited research.
 
-## Academic Writing
+## Academic writing
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=productivity%2Facademic-writing)
 
 ### Zettlr
 
@@ -22,6 +24,8 @@ Markdown writing environment combining linked notes, citations and document-expo
 - **Sources:** [Official product documentation](https://www.zettlr.com/) (2026-11-14; features, identity, platforms, pricing); [Official upstream README](https://raw.githubusercontent.com/Zettlr/Zettlr/HEAD/README.md) (2026-11-14; downloads, features, identity, platforms); [Official upstream license text](https://raw.githubusercontent.com/Zettlr/Zettlr/HEAD/LICENSE) (2026-11-14; license); [Official download and distribution documentation](https://github.com/Zettlr/Zettlr/releases) (2026-11-14; downloads); [Official upstream release activity feed](https://github.com/Zettlr/Zettlr/releases.atom) (2026-11-14; maintenance)
 
 ## Screen reading and braille accessibility
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=productivity%2Faccessibility)
 
 ### NVDA
 
@@ -49,7 +53,9 @@ Extensible Linux screen reader combining speech and braille output with applicat
 - [Official project](https://help.gnome.org/users/orca/stable/) · [Official installation / downloads](https://gitlab.gnome.org/GNOME/orca) · [Repository](https://gitlab.gnome.org/GNOME/orca)
 - **Sources:** [Official product documentation](https://help.gnome.org/users/orca/stable/) (2026-11-14; features, identity); [Official upstream README](https://raw.githubusercontent.com/GNOME/orca/HEAD/README.md) (2026-11-14; downloads, features, identity, platforms, pricing); [Official upstream license text](https://raw.githubusercontent.com/GNOME/orca/HEAD/COPYING) (2026-11-14; license)
 
-## Accessible Reading
+## Accessible reading
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=productivity%2Faccessible-reading)
 
 ### Thorium Reader
 
@@ -66,6 +72,8 @@ Accessible desktop reader for EPUB, DAISY, PDF, audiobooks and supported protect
 
 ## Application launchers
 
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=productivity%2Fapplication-launchers)
+
 ### Flow Launcher
 
 Keyboard launcher and search
@@ -80,8 +88,22 @@ Keyboard launcher and search
 - [Official project](https://github.com/Flow-Launcher/Flow.Launcher) · [Repository](https://github.com/Flow-Launcher/Flow.Launcher)
 - **Sources:** [Preserved original research source](https://github.com/Flow-Launcher/Flow.Launcher) (2026-11-14; identity, features)
 
-## Assistive Input
+## Assistive computer input
 
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=productivity%2Fassistive-input)
+
+### Enable Viacam
+
+Move the mouse pointer with head movements captured by an ordinary webcam, with configurable dwell clicking.
+
+- **Platforms:** Windows, Linux. **License:** GNU GPLv3. **Pricing model:** free.
+- **Pick for:** Hands-free pointer control without a dedicated eye-tracking device.
+- **Compare when:** Webcam quality, lighting and calibration affect usability.
+- **Strengths:** Hands-free pointer control without a dedicated eye-tracking device.
+- **Limitations:** Webcam quality, lighting and calibration affect usability.; The Windows support list stops at Windows 10; current Windows 11 support was not established.
+- **Maintenance:** unverified — Official distribution and capability documentation reviewed; a dated maintenance conclusion was not established.
+- [Official project](https://eviacam.crea-si.com/) · [Official installation / downloads](https://eviacam.crea-si.com/) · [Repository](https://github.com/cmauri/eviacam)
+- **Sources:** [Official documentation](https://eviacam.crea-si.com/) (2026-11-15; identity, features, platforms, license, pricing, downloads)
 ### OptiKey
 
 Windows assistive-input suite offering on-screen keyboards, communication and mouse control.
@@ -108,7 +130,131 @@ Desktop input-control application combining voice commands, dictation and option
 - [Official project](https://talonvoice.com/) · [Official installation / downloads](https://talonvoice.com/)
 - **Sources:** [Official product documentation](https://talonvoice.com/) (2026-11-14; downloads, features, identity, platforms); [Official licensing and terms](https://talonvoice.com/EULA.txt) (2026-11-14; license, pricing); [Official product documentation](https://talonvoice.com/docs/) (2026-11-14; identity); [Publisher membership options linked from the official website](https://www.patreon.com/join/lunixbochs) (2026-11-14; pricing)
 
+## Business accounting
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=productivity%2Fbusiness-accounting)
+
+### Frappe Books
+
+Self-hosted accounting application for small businesses, with invoices, stock and point-of-sale workflows.
+
+- **Platforms:** Web. **License:** AGPL-3.0-only. **Pricing model:** free.
+- **Compatibility details:** Current Frappe Framework application uses a browser. The previous Electron desktop product is end-of-life and is not the download recommended here.
+- **Pricing details:** Current official product page states free use with no subscription; server operation is separate.
+- **Pick for:** A small business wants browser-based bookkeeping on its own server.
+- **Compare when:** Choose Manager for single-user offline desktop accounting or ERPNext for a fuller ERP.
+- **Strengths:** Combines accounting and stock on a user-controlled Frappe site; Shared browser access replaces single-computer desktop constraints
+- **Limitations:** Current product has moved away from the old desktop app; Server setup and regional accounting suitability need evaluation
+- **Maintenance:** active — Official release v16.2.1 is dated 2026-11-12; installation and performance were not independently tested. ([evidence](https://github.com/frappe/frappe-books/releases/tag/v16.2.1))
+- [Official project](https://frappe.io/books) · [Official installation / downloads](https://github.com/frappe/frappe-books) · [Repository](https://github.com/frappe/frappe-books)
+- **Sources:** [Official product overview](https://frappe.io/books) (2026-11-15; identity, features, pricing); [Official project documentation](https://raw.githubusercontent.com/frappe/frappe-books/develop/README.md) (2026-11-15; identity, features, downloads, platforms); [Official licensing terms](https://raw.githubusercontent.com/frappe/frappe-books/develop/license.txt) (2026-11-15; license); [Official download or installation entry point](https://github.com/frappe/frappe-books) (2026-11-15; downloads); [Official dated release](https://github.com/frappe/frappe-books/releases/tag/v16.2.1) (2026-11-15; maintenance, downloads)
+### Manager
+
+Small-business accounting with an offline desktop edition and team server/cloud options.
+
+- **Platforms:** Windows, macOS, Linux, Web. **License:** FSL-1.1-Apache-2.0; noncompete restriction with future Apache grant. **Pricing model:** freemium.
+- **Compatibility details:** Official source documents Windows, macOS and Linux desktop/server releases; a browser accesses the server edition.
+- **Pricing details:** Desktop edition is explicitly free with no usage or time limit; managed cloud and other commercial arrangements are separate.
+- **Pick for:** One person needs local business accounting without a desktop subscription.
+- **Compare when:** Consider team server/cloud arrangements for simultaneous access and check current licensing.
+- **Strengths:** Desktop keeps accounts available offline; Common file format supports moving between systems and editions
+- **Limitations:** Desktop is single-user; FSL restricts competing commercial products and services
+- **Maintenance:** active — Official release 26.11.11 is dated 2026-11-10; installation and performance were not independently tested. ([evidence](https://github.com/managerhq/Manager/releases/tag/26.11.11))
+- [Official project](https://www.manager.io/) · [Official installation / downloads](https://www.manager.io/download) · [Repository](https://github.com/managerhq/Manager)
+- **Sources:** [Official product overview](https://www.manager.io/) (2026-11-15; identity, features); [Official project documentation](https://raw.githubusercontent.com/managerhq/Manager/main/README.md) (2026-11-15; identity, features, downloads, platforms, pricing); [Official licensing terms](https://raw.githubusercontent.com/managerhq/Manager/main/LICENSE.md) (2026-11-15; license); [Official download or installation entry point](https://www.manager.io/download) (2026-11-15; downloads); [Official dated release](https://github.com/managerhq/Manager/releases/tag/26.11.11) (2026-11-15; maintenance, downloads)
+
+## Business management and ERP
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=productivity%2Fbusiness-management)
+
+### Apache OFBiz
+
+Java business-application suite and framework for ERP, commerce and operational customization.
+
+- **Platforms:** Web. **License:** Apache-2.0. **Pricing model:** free.
+- **Compatibility details:** Server-side Java application with browser interfaces; build and deployment prerequisites apply.
+- **Pricing details:** Official source releases are freely downloadable; setup, customization and operating infrastructure are not included.
+- **Pick for:** A technical team needs adaptable business application foundations.
+- **Compare when:** Choose a ready-configured ERP or dedicated inventory application when implementation capacity is limited.
+- **Strengths:** Suitable foundation for customized business applications; Apache licensing permits broad adaptation
+- **Limitations:** Requires Java development and deployment expertise; Not a turnkey desktop accounting package
+- **Maintenance:** unverified — Official product and installation material reviewed; a recent dated release was not established for this product scope.
+- [Official project](https://ofbiz.apache.org/) · [Official installation / downloads](https://ofbiz.apache.org/download.html) · [Repository](https://github.com/apache/ofbiz-framework)
+- **Sources:** [Official product overview](https://ofbiz.apache.org/) (2026-11-15; identity, features); [Official project documentation](https://raw.githubusercontent.com/apache/ofbiz-framework/trunk/README.md) (2026-11-15; identity, features, downloads, platforms); [Official licensing terms](https://raw.githubusercontent.com/apache/ofbiz-framework/trunk/LICENSE) (2026-11-15; license); [Distribution and pricing qualification](https://ofbiz.apache.org/download.html) (2026-11-15; pricing, downloads)
+### Dolibarr
+
+Modular ERP and CRM for contacts, invoicing, stock, orders and small-business administration.
+
+- **Platforms:** Web, Windows, macOS, Linux. **License:** GPL-3.0-or-later; dependencies retain their licenses. **Pricing model:** free.
+- **Compatibility details:** Web UI; official documentation supports PHP deployments on Windows, macOS and Linux, with packaged routes for selected systems.
+- **Pricing details:** Core distribution is free; hosted providers, professional services and some add-ons are paid.
+- **Pick for:** A business wants modular customer, sales and stock administration on its own infrastructure.
+- **Compare when:** Compare ERPNext or Tryton for deeper integrated operational requirements.
+- **Strengths:** Enable relevant modules without adopting every workflow; Packaged and standard PHP deployment options
+- **Limitations:** External add-ons can have separate prices and compatibility limits; Business configuration and localization still require evaluation
+- **Maintenance:** active — Official release 24.0.3 is dated 2026-11-11; installation and performance were not independently tested. ([evidence](https://github.com/Dolibarr/dolibarr/releases/tag/24.0.3))
+- [Official project](https://www.dolibarr.org/) · [Official installation / downloads](https://www.dolibarr.org/downloads.php) · [Repository](https://github.com/Dolibarr/dolibarr)
+- **Sources:** [Official product overview](https://www.dolibarr.org/) (2026-11-15; identity, features, platforms); [Official project documentation](https://raw.githubusercontent.com/Dolibarr/dolibarr/develop/README.md) (2026-11-15; identity, features, downloads, pricing); [Official licensing terms](https://raw.githubusercontent.com/Dolibarr/dolibarr/develop/COPYING) (2026-11-15; license); [Official download or installation entry point](https://www.dolibarr.org/downloads.php) (2026-11-15; downloads); [Official dated release](https://github.com/Dolibarr/dolibarr/releases/tag/24.0.3) (2026-11-15; maintenance, downloads)
+### ERPNext
+
+Integrated ERP for accounting, stock, orders, manufacturing and project operations.
+
+- **Platforms:** Web. **License:** GPL-3.0. **Pricing model:** free.
+- **Compatibility details:** Browser application on Frappe; documented Docker or Bench deployment is required, not a native desktop installer.
+- **Pricing details:** The core is free to self-host; Frappe Cloud hosting, implementation and support are separately paid services.
+- **Pick for:** A business needs connected inventory, purchasing, manufacturing and accounting.
+- **Compare when:** Compare narrower inventory tools when a full ERP rollout would be excessive.
+- **Strengths:** Shared records connect financial and operational workflows; Core functionality is available without feature-license tiers
+- **Limitations:** Implementation requires data migration and process design; Localizations and compliance requirements must be checked for the business
+- **Maintenance:** active — Official release v16.55.0 is dated 2026-11-12; installation and performance were not independently tested. ([evidence](https://github.com/frappe/erpnext/releases/tag/v16.55.0))
+- [Official project](https://frappe.io/erpnext) · [Official installation / downloads](https://github.com/frappe/erpnext) · [Repository](https://github.com/frappe/erpnext)
+- **Sources:** [Official product overview](https://frappe.io/erpnext) (2026-11-15; identity, features); [Official project documentation](https://raw.githubusercontent.com/frappe/erpnext/develop/README.md) (2026-11-15; identity, features, downloads, platforms); [Official licensing terms](https://raw.githubusercontent.com/frappe/erpnext/develop/license.txt) (2026-11-15; license); [Distribution and pricing qualification](https://frappe.io/erpnext/pricing) (2026-11-15; pricing); [Official download or installation entry point](https://github.com/frappe/erpnext) (2026-11-15; downloads); [Official dated release](https://github.com/frappe/erpnext/releases/tag/v16.55.0) (2026-11-15; maintenance, downloads)
+### iDempiere
+
+Community ERP, CRM and supply-chain system with multi-entity accounting and an OSGi plugin architecture.
+
+- **Platforms:** Web. **License:** GPL-2.0. **Pricing model:** free.
+- **Compatibility details:** Java-based server application accessed through a web client; follow official deployment prerequisites.
+- **Pricing details:** The official project states no licensing cost; implementation, hosting and optional services are separate.
+- **Pick for:** An organization needs extensible ERP logic and multiple accounting entities.
+- **Compare when:** Use a simpler accounting or stock application when full ERP implementation is disproportionate.
+- **Strengths:** Business logic and modular extensions support substantial customization; Multi-entity workflows suit more structured organizations
+- **Limitations:** Implementation requires ERP and server expertise; Database and plugin choices affect operations and upgrade effort
+- **Maintenance:** unverified — Official product and installation material reviewed; a recent dated release was not established for this product scope.
+- [Official project](https://www.idempiere.org/) · [Official installation / downloads](https://idempiere.org/download/) · [Repository](https://github.com/idempiere/idempiere)
+- **Sources:** [Official product overview](https://www.idempiere.org/) (2026-11-15; identity, features); [Official project documentation](https://raw.githubusercontent.com/idempiere/idempiere/master/README.md) (2026-11-15; identity, features, downloads, platforms); [Official licensing terms](https://raw.githubusercontent.com/idempiere/idempiere/master/LICENSE.md) (2026-11-15; license); [Distribution and pricing qualification](https://idempiere.org/) (2026-11-15; pricing); [Official download or installation entry point](https://idempiere.org/download/) (2026-11-15; downloads)
+### Odoo Community
+
+Community edition of a modular business suite for CRM, sales, inventory and other operations.
+
+- **Platforms:** Web. **License:** LGPL-3.0 Community core; module licenses vary. **Pricing model:** free.
+- **Compatibility details:** Browser application with server installation; this record covers Community rather than the hosted Enterprise service.
+- **Pricing details:** Community is explicitly free; Enterprise, official hosting and some third-party modules are separate commercial offerings.
+- **Pick for:** A business wants a modular self-hosted suite and has checked Community feature coverage.
+- **Compare when:** Compare editions carefully when advanced accounting, support or enterprise capabilities are required.
+- **Strengths:** Modules can share business records; Source can be deployed and extended on owned infrastructure
+- **Limitations:** Community and Enterprise feature sets differ substantially; Custom modules add maintenance and upgrade work
+- **Maintenance:** unverified — Official product and installation material reviewed; a recent dated release was not established for this product scope.
+- [Official project](https://www.odoo.com/page/community) · [Official installation / downloads](https://www.odoo.com/page/download) · [Repository](https://github.com/odoo/odoo)
+- **Sources:** [Official product overview](https://www.odoo.com/page/community) (2026-11-15; identity, features); [Official project documentation](https://raw.githubusercontent.com/odoo/odoo/20.0/README.md) (2026-11-15; identity, features, downloads, platforms); [Official licensing terms](https://raw.githubusercontent.com/odoo/odoo/20.0/LICENSE) (2026-11-15; license); [Distribution and pricing qualification](https://www.odoo.com/) (2026-11-15; pricing); [Official download or installation entry point](https://www.odoo.com/page/download) (2026-11-15; downloads)
+### Tryton
+
+Modular business platform with accounting, inventory, purchasing and manufacturing, plus desktop and web clients.
+
+- **Platforms:** Windows, macOS, Linux, Web. **License:** GPL-3.0-or-later platform and official business modules. **Pricing model:** free.
+- **Compatibility details:** Windows, macOS and Linux packages are desktop clients connected to a Tryton server; a web client is also available.
+- **Pricing details:** Official clients and source archives are publicly downloadable; implementation and hosting services are separate costs.
+- **Pick for:** You need a modular ERP with a native client option and control of the server.
+- **Compare when:** Choose a standalone accounting program when server operations and ERP configuration are unnecessary.
+- **Strengths:** Clear client/server architecture; Business modules can be selected around actual processes
+- **Limitations:** Desktop client still needs a configured application server; Deployment and localization require specialist setup
+- **Maintenance:** unverified — Official product and installation material reviewed; a recent dated release was not established for this product scope.
+- [Official project](https://www.tryton.org/) · [Official installation / downloads](https://www.tryton.org/download)
+- **Sources:** [Official product overview](https://www.tryton.org/) (2026-11-15; identity, features); [Official licensing terms](https://raw.githubusercontent.com/tryton/trytond/develop/COPYRIGHT) (2026-11-15; license); [Documented deployment and platform scope](https://www.tryton.org/download) (2026-11-15; platforms, pricing, downloads)
+
 ## Clipboard managers
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=productivity%2Fclipboard-managers)
 
 ### CopyQ
 
@@ -124,7 +270,73 @@ Searchable clipboard history and scripting
 - [Official project](https://github.com/hluk/CopyQ) · [Repository](https://github.com/hluk/CopyQ)
 - **Sources:** [Preserved original research source](https://github.com/hluk/CopyQ) (2026-11-14; identity, features)
 
+## Customer relationship management
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=productivity%2Fcustomer-management)
+
+### EspoCRM
+
+Configurable CRM for contacts, leads, opportunities, campaigns and support cases.
+
+- **Platforms:** Web. **License:** AGPL-3.0 core; commercial extensions have separate terms. **Pricing model:** freemium.
+- **Compatibility details:** Web client and PHP API backend with supported database; official deployment guides cover installation.
+- **Pricing details:** Core is explicitly free; cloud service and commercial extensions are separate.
+- **Pick for:** You need a configurable CRM with custom fields and API integration.
+- **Compare when:** Compare SuiteCRM for established business processes or Twenty for developer-defined CRM applications.
+- **Strengths:** Data model can adapt to specific business relationships; Browser UI and API share the same core records
+- **Limitations:** Server deployment requires PHP and a database; Advanced extensions and managed cloud can add costs
+- **Maintenance:** active — Official release 10.1.1 is dated 2026-11-10; installation and performance were not independently tested. ([evidence](https://github.com/espocrm/espocrm/releases/tag/10.1.1))
+- [Official project](https://www.espocrm.com/) · [Official installation / downloads](https://www.espocrm.com/download/) · [Repository](https://github.com/espocrm/espocrm)
+- **Sources:** [Official product overview](https://www.espocrm.com/) (2026-11-15; identity, features); [Official project documentation](https://raw.githubusercontent.com/espocrm/espocrm/master/README.md) (2026-11-15; identity, features, downloads, platforms, pricing); [Official licensing terms](https://raw.githubusercontent.com/espocrm/espocrm/master/LICENSE.txt) (2026-11-15; license); [Official download or installation entry point](https://www.espocrm.com/download/) (2026-11-15; downloads); [Official dated release](https://github.com/espocrm/espocrm/releases/tag/10.1.1) (2026-11-15; maintenance, downloads)
+### SuiteCRM
+
+Self-hosted customer relationship management for leads, opportunities, quotations and customer service.
+
+- **Platforms:** Web, Linux. **License:** AGPL-3.0. **Pricing model:** freemium.
+- **Compatibility details:** Current SuiteCRM 8 is a browser application with an Angular/Symfony stack. Its official README recommends a Linux server with the supported LAMP components; local testing still requires a server environment.
+- **Pricing details:** Community downloads are free; hosted service, support, assurance and some extensions are paid.
+- **Pick for:** A business needs configurable sales and customer-service records under its own administration.
+- **Compare when:** Check the chosen SuiteCRM version’s feature and compatibility matrix before migration.
+- **Strengths:** Business records can be customized and self-hosted; Sales and service teams can share customer context
+- **Limitations:** Version7 and8 have different architecture and feature coverage; Installation, upgrades and extensions need technical oversight
+- **Maintenance:** unverified — Current SuiteCRM 8 README and installation material reviewed. A dated release for the current 8.x product was not independently established in this review.
+- [Official project](https://suitecrm.com/) · [Official installation / downloads](https://suitecrm.com/download/) · [Repository](https://github.com/SuiteCRM/SuiteCRM-Core)
+- **Sources:** [Official CRM overview](https://suitecrm.com/) (2026-11-15; identity, features); [Official SuiteCRM 8 architecture and installation](https://raw.githubusercontent.com/SuiteCRM/SuiteCRM-Core/hotfix/README.md) (2026-11-15; identity, features, platforms, downloads); [Official SuiteCRM 8 license](https://raw.githubusercontent.com/SuiteCRM/SuiteCRM-Core/hotfix/LICENSE.txt) (2026-11-15; license); [Official Community downloads and commercial options](https://suitecrm.com/download/) (2026-11-15; pricing, downloads)
+### Twenty
+
+Extensible CRM with custom objects, views and workflows that technical teams can define as applications.
+
+- **Platforms:** Web. **License:** AGPL-3.0 with application exception; selected MIT packages and commercial Enterprise files. **Pricing model:** freemium.
+- **Compatibility details:** Browser application with documented Docker Compose self-hosting.
+- **Pricing details:** Free self-hosted core and paid hosted/enterprise offerings have distinct terms; inspect the current plan for required features.
+- **Pick for:** A technical team wants to define CRM objects and behavior as maintainable applications.
+- **Compare when:** Choose a more preconfigured CRM when developer capacity is limited.
+- **Strengths:** Custom CRM structures can be managed as code; Supports self-hosting alongside a managed service
+- **Limitations:** Enterprise-marked code is commercially licensed; Building and operating tailored applications needs technical ownership
+- **Maintenance:** active — Official release twenty/v2.58.0 is dated 2026-11-13; installation and performance were not independently tested. ([evidence](https://github.com/twentyhq/twenty/releases/tag/twenty/v2.58.0))
+- [Official project](https://twenty.com/) · [Official installation / downloads](https://github.com/twentyhq/twenty) · [Repository](https://github.com/twentyhq/twenty)
+- **Sources:** [Official product overview](https://twenty.com/) (2026-11-15; identity, features); [Official project documentation](https://raw.githubusercontent.com/twentyhq/twenty/main/README.md) (2026-11-15; identity, features, downloads, platforms); [Official licensing terms](https://raw.githubusercontent.com/twentyhq/twenty/main/LICENSE) (2026-11-15; license); [Distribution and pricing qualification](https://twenty.com/pricing) (2026-11-15; pricing); [Official download or installation entry point](https://github.com/twentyhq/twenty) (2026-11-15; downloads); [Official dated release](https://github.com/twentyhq/twenty/releases/tag/twenty/v2.58.0) (2026-11-15; maintenance, downloads)
+
+## Tabular data cleaning
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=productivity%2Fdata-cleaning)
+
+### OpenRefine
+
+Local tabular-data cleanup with facets, clustering, transformations and optional reconciliation against external knowledge services.
+
+- **Platforms:** Windows, macOS, Linux. **License:** BSD-3-Clause. **Pricing model:** free.
+- **Pick for:** Fits inspectable cleanup of inconsistent names and categorical fields
+- **Compare when:** The local interface uses a browser; optional reconciliation and fetching can transmit selected data to services
+- **Strengths:** Fits inspectable cleanup of inconsistent names and categorical fields; Recorded operations help repeat and audit a cleanup workflow
+- **Limitations:** The local interface uses a browser; optional reconciliation and fetching can transmit selected data to services; Clustering proposes similar values and still needs human review before merging
+- **Maintenance:** active — The official download page dates version 3.10.0 to 26 February 2026. ([evidence](https://openrefine.org/download))
+- [Official project](https://openrefine.org/) · [Official installation / downloads](https://openrefine.org/download) · [Repository](https://github.com/OpenRefine/OpenRefine)
+- **Sources:** [Official documentation reviewed for this claim](https://openrefine.org/) (2026-11-16; identity, features); [Official documentation reviewed for this claim](https://openrefine.org/download) (2026-11-16; license, platforms, pricing, downloads, maintenance)
+
 ## Desktop automation
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=productivity%2Fdesktop-automation)
 
 ### AutoHotkey
 
@@ -168,6 +380,8 @@ Windows automation recorder and script builder based on AutoHotkey.
 
 ## Desktop utility suites
 
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=productivity%2Fdesktop-utility-suites)
+
 ### PowerToys
 
 Modular Windows productivity utilities
@@ -183,6 +397,8 @@ Modular Windows productivity utilities
 - **Sources:** [Official Microsoft PowerToys repository](https://github.com/microsoft/PowerToys) (2026-11-14; features, identity); [Official capabilities and practical usage basis](https://learn.microsoft.com/en-us/windows/powertoys) (2026-11-15; features, platforms, pricing); [Microsoft installation and system requirements](https://learn.microsoft.com/en-us/windows/powertoys/install) (2026-11-14; downloads, platforms); [Official elevated-application interaction limitations](https://learn.microsoft.com/en-us/windows/powertoys/administrator) (2026-11-15; features)
 
 ## Diagramming
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=productivity%2Fdiagramming)
 
 ### diagrams.net Desktop
 
@@ -211,6 +427,8 @@ Desktop graph editor with automatic layout tools for structured diagrams.
 
 ## Dictionary lookup
 
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=productivity%2Fdictionaries)
+
 ### GoldenDict-ng
 
 Dictionary lookup application that combines local dictionaries and configurable lookup sources.
@@ -226,6 +444,8 @@ Dictionary lookup application that combines local dictionaries and configurable 
 
 ## Document conversion
 
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=productivity%2Fdocument-conversion)
+
 ### Pandoc
 
 Document conversion tool connecting markup, office and publishing formats.
@@ -240,6 +460,8 @@ Document conversion tool connecting markup, office and publishing formats.
 - **Sources:** [Official project documentation](https://pandoc.org/) (2026-11-14; identity, features, license, pricing); [Official project README](https://raw.githubusercontent.com/jgm/pandoc/HEAD/README.md) (2026-11-14; identity, features, license); [Official installation and download information](https://pandoc.org/installing.html) (2026-11-14; identity, downloads, platforms, license); [Official repository activity feed](https://github.com/jgm/pandoc/commits/HEAD.atom) (2026-11-14; maintenance)
 
 ## E-book libraries and editing
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=productivity%2Febooks)
 
 ### calibre
 
@@ -266,7 +488,9 @@ EPUB editor for working directly with ebook structure and content.
 - [Official project](https://sigil-ebook.com/) · [Official installation / downloads](https://sigil-ebook.com/sigil/download/) · [Repository](https://github.com/Sigil-Ebook/Sigil)
 - **Sources:** [Official project documentation](https://sigil-ebook.com/) (2026-11-14; identity, features); [Official project README](https://raw.githubusercontent.com/Sigil-Ebook/Sigil/HEAD/README.md) (2026-11-14; identity, features, license, platforms, pricing); [Official installation and download information](https://sigil-ebook.com/sigil/download/) (2026-11-14; identity, downloads, platforms); [Upstream license terms](https://raw.githubusercontent.com/Sigil-Ebook/Sigil/HEAD/COPYING.txt) (2026-11-14; license); [Official repository activity feed](https://github.com/Sigil-Ebook/Sigil/commits/HEAD.atom) (2026-11-14; maintenance)
 
-## Email Clients
+## Email clients
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=productivity%2Femail-clients)
 
 ### Betterbird
 
@@ -319,7 +543,9 @@ Desktop email, calendar and contact manager supporting multiple accounts and ext
 - [Official project](https://www.thunderbird.net/) · [Official installation / downloads](https://www.thunderbird.net/en-US/thunderbird/all/)
 - **Sources:** [Official product documentation](https://www.thunderbird.net/) (2026-11-14; features, identity, platforms, pricing); [Official licensing and terms](https://updates.thunderbird.net/en-US/thunderbird/about/rights/) (2026-11-14; license, pricing); [Official product documentation](https://www.thunderbird.net/en-US/thunderbird/all/) (2026-11-14; downloads, platforms); [Official product documentation](https://developer.thunderbird.net/thunderbird-development/setting-up-a-build-environment) (2026-11-14; identity)
 
-## Feed Readers
+## RSS and news feed readers
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=productivity%2Ffeed-readers)
 
 ### Liferea
 
@@ -374,6 +600,8 @@ Desktop feed reader supporting several feed formats and optional connections to 
 
 ## Focused prose writing
 
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=productivity%2Ffocused-writing)
+
 ### FocusWriter
 
 Writing application with a hide-away interface for concentrating on prose.
@@ -388,6 +616,8 @@ Writing application with a hide-away interface for concentrating on prose.
 - **Sources:** [Official project documentation](https://gottcode.org/focuswriter/) (2026-11-14; identity, features, platforms, license, pricing, downloads); [Official project README](https://raw.githubusercontent.com/gottcode/focuswriter/HEAD/README) (2026-11-14; identity, features, platforms); [Upstream license terms](https://raw.githubusercontent.com/gottcode/focuswriter/HEAD/COPYING) (2026-11-14; license); [Official repository activity feed](https://github.com/gottcode/focuswriter/commits/HEAD.atom) (2026-11-14; maintenance)
 
 ## Handwritten notes
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=productivity%2Fhandwritten-notes)
 
 ### Rnote
 
@@ -414,7 +644,178 @@ Handwritten-note application with pen input and PDF annotation workflows.
 - [Official project](https://xournalpp.github.io/) · [Official installation / downloads](https://xournalpp.github.io/installation/) · [Repository](https://github.com/xournalpp/xournalpp)
 - **Sources:** [Official project documentation](https://xournalpp.github.io/) (2026-11-14; identity, features, platforms); [Official project README](https://raw.githubusercontent.com/xournalpp/xournalpp/HEAD/README.md) (2026-11-14; identity, features, license, platforms); [Upstream license terms](https://raw.githubusercontent.com/xournalpp/xournalpp/HEAD/LICENSE) (2026-11-14; license); [Official installation and download information](https://xournalpp.github.io/installation/) (2026-11-14; identity, downloads, platforms); [Official repository activity feed](https://github.com/xournalpp/xournalpp/commits/HEAD.atom) (2026-11-14; maintenance); [Project-linked Linux distribution pricing](https://flathub.org/apps/details/com.github.xournalpp.xournalpp) (2026-11-14; pricing)
 
+## Inventory management
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=productivity%2Finventory-management)
+
+### Grocy
+
+Household stock management with expiry dates, shopping lists, recipes and chores.
+
+- **Platforms:** Web, Windows. **License:** MIT. **Pricing model:** free.
+- **Compatibility details:** Web service; the official project links a Windows desktop wrapper that runs the service locally. Browser installation alone does not create offline capability.
+- **Pricing details:** Official source and release distributions are available without a product charge; optional community wrappers and hosting have separate terms.
+- **Pick for:** You want to manage groceries and household supplies on your own device or server.
+- **Compare when:** Choose business stock software for purchasing, sales and audited warehouse operations.
+- **Strengths:** Connects household stock with what to buy and cook; API enables home-automation integrations
+- **Limitations:** Consumer household scope is a poor fit for regulated business inventory; Web PWA does not provide offline operation by itself
+- **Maintenance:** active — Official release v4.7.1 is dated 2026-09-04; installation and performance were not independently tested. ([evidence](https://github.com/grocy/grocy/releases/tag/v4.7.1))
+- [Official project](https://grocy.info/) · [Official installation / downloads](https://github.com/grocy/grocy) · [Repository](https://github.com/grocy/grocy)
+- **Sources:** [Official product overview](https://grocy.info/) (2026-11-15; identity, features); [Official project documentation](https://raw.githubusercontent.com/grocy/grocy/master/README.md) (2026-11-15; identity, features, downloads, platforms); [Official licensing terms](https://raw.githubusercontent.com/grocy/grocy/master/LICENSE.md) (2026-11-15; license); [Distribution and pricing qualification](https://github.com/grocy/grocy/releases/latest) (2026-11-15; pricing); [Official download or installation entry point](https://github.com/grocy/grocy) (2026-11-15; downloads); [Official dated release](https://github.com/grocy/grocy/releases/tag/v4.7.1) (2026-11-15; maintenance, downloads)
+### InvenTree
+
+Parts inventory with stock locations, suppliers, bills of materials and build workflows.
+
+- **Platforms:** Web. **License:** MIT. **Pricing model:** free.
+- **Compatibility details:** Browser application with Python/Django backend; official Docker and server installation routes are available.
+- **Pricing details:** The official education page states the MIT software is free; hosting and implementation remain separate.
+- **Pick for:** A workshop or technical team tracks components, assemblies and build stock.
+- **Compare when:** Compare Part-DB for electronics-centered cataloging or an ERP for financial integration.
+- **Strengths:** Connects individual components to assembly requirements; Extensible API supports workshop and manufacturing integrations
+- **Limitations:** Needs server and database administration; Accounting and retail checkout may require separate systems
+- **Maintenance:** active — Official release 1.7.2 is dated 2026-11-12; installation and performance were not independently tested. ([evidence](https://github.com/inventree/InvenTree/releases/tag/1.7.2))
+- [Official project](https://inventree.org/) · [Official installation / downloads](https://docs.inventree.org/en/latest/start/install/) · [Repository](https://github.com/inventree/InvenTree)
+- **Sources:** [Official product overview](https://inventree.org/) (2026-11-15; identity, features); [Official project documentation](https://raw.githubusercontent.com/inventree/InvenTree/master/README.md) (2026-11-15; identity, features, downloads, platforms); [Official licensing terms](https://raw.githubusercontent.com/inventree/InvenTree/master/LICENSE) (2026-11-15; license); [Distribution and pricing qualification](https://inventree.org/use/education.html) (2026-11-15; pricing); [Official download or installation entry point](https://docs.inventree.org/en/latest/start/install/) (2026-11-15; downloads); [Official dated release](https://github.com/inventree/InvenTree/releases/tag/1.7.2) (2026-11-15; maintenance, downloads)
+### OpenBoxes
+
+Inventory and warehouse management with multi-facility stock, lots, expiry dates and shipments.
+
+- **Platforms:** Web. **License:** EPL-1.0. **Pricing model:** freemium.
+- **Compatibility details:** Browser application with a self-hosted server; use production installation documentation for deployment.
+- **Pricing details:** Software is free to download and use; managed hosting, implementation and support are paid options.
+- **Pick for:** A warehouse or distribution team needs lots, expiry dates and facility-to-facility stock visibility.
+- **Compare when:** Use a component manager for BOM-heavy workshops or an ERP for integrated finance.
+- **Strengths:** Supply-chain detail supports stock movement across facilities; Healthcare-origin workflows include expiry-sensitive inventory
+- **Limitations:** Deployment and user training are material work; Financial accounting may remain in a separate system
+- **Maintenance:** active — Official release v0.9.9 is dated 2026-10-23; installation and performance were not independently tested. ([evidence](https://github.com/openboxes/openboxes/releases/tag/v0.9.9))
+- [Official project](https://openboxes.com/) · [Official installation / downloads](https://docs.openboxes.com/en/latest/admin-guide/installation/) · [Repository](https://github.com/openboxes/openboxes)
+- **Sources:** [Official product overview](https://openboxes.com/) (2026-11-15; identity, features); [Official project documentation](https://raw.githubusercontent.com/openboxes/openboxes/develop/README.md) (2026-11-15; identity, features, downloads, platforms); [Official licensing terms](https://raw.githubusercontent.com/openboxes/openboxes/develop/LICENSE.md) (2026-11-15; license); [Distribution and pricing qualification](https://openboxes.com/pricing/) (2026-11-15; pricing); [Official download or installation entry point](https://docs.openboxes.com/en/latest/admin-guide/installation/) (2026-11-15; downloads); [Official dated release](https://github.com/openboxes/openboxes/releases/tag/v0.9.9) (2026-11-15; maintenance, downloads)
+### Part-DB
+
+Electronic-component inventory with datasheets, parametric search, labels and KiCad integration.
+
+- **Platforms:** Web. **License:** AGPL-3.0-or-later. **Pricing model:** unknown.
+- **Compatibility details:** PHP web application; database and build/deployment requirements are documented.
+- **Pricing details:** Public source and installation routes are documented. A blanket price statement covering hosted services and external integrations was not established.
+- **Pick for:** An electronics bench or makerspace needs searchable component records and BOM availability.
+- **Compare when:** Use InvenTree for broader manufacturing/build workflows or an ERP for business accounting.
+- **Strengths:** Specialized around electronic components rather than generic stock; Supplier information and datasheets stay attached to parts
+- **Limitations:** Server setup and database maintenance are required; Supplier or AI integrations may have separate access and pricing conditions
+- **Maintenance:** active — Official release v2.20.6 is dated 2026-11-14; installation and performance were not independently tested. ([evidence](https://github.com/Part-DB/Part-DB-server/releases/tag/v2.20.6))
+- [Official project](https://docs.part-db.de/) · [Official installation / downloads](https://docs.part-db.de/installation/) · [Repository](https://github.com/Part-DB/Part-DB-server)
+- **Sources:** [Official product overview](https://docs.part-db.de/) (2026-11-15; identity, features); [Official project documentation](https://raw.githubusercontent.com/Part-DB/Part-DB-server/master/README.md) (2026-11-15; identity, features, downloads, platforms); [Official licensing terms](https://raw.githubusercontent.com/Part-DB/Part-DB-server/master/LICENSE) (2026-11-15; license); [Official download or installation entry point](https://docs.part-db.de/installation/) (2026-11-15; downloads); [Official dated release](https://github.com/Part-DB/Part-DB-server/releases/tag/v2.20.6) (2026-11-15; maintenance, downloads)
+### Snipe-IT
+
+IT asset records for equipment assignment, license tracking and check-in/check-out workflows.
+
+- **Platforms:** Windows, macOS, Linux, Web. **License:** AGPL-3.0. **Pricing model:** freemium.
+- **Compatibility details:** Web application; official README explicitly supports Windows, macOS and Linux web-server hosts, not standalone EXE-style operation.
+- **Pricing details:** Self-hosted Snipe-IT is free; managed hosting and support plans are paid.
+- **Pick for:** IT needs an accountable record of equipment, users and assignments.
+- **Compare when:** Choose stock-control software for consumables, manufacturing or warehouse fulfillment.
+- **Strengths:** Designed around who holds each asset; APIs connect inventory with existing IT processes
+- **Limitations:** Asset records need accurate ongoing updates; It is not a complete warehouse or financial ERP
+- **Maintenance:** active — Official release v8.8.3 is dated 2026-10-22; installation and performance were not independently tested. ([evidence](https://github.com/grokability/snipe-it/releases/tag/v8.8.3))
+- [Official project](https://snipeitapp.com/) · [Official installation / downloads](https://snipeitapp.com/download) · [Repository](https://github.com/grokability/snipe-it)
+- **Sources:** [Official product overview](https://snipeitapp.com/) (2026-11-15; identity, features, pricing); [Official project documentation](https://raw.githubusercontent.com/snipe/snipe-it/master/README.md) (2026-11-15; identity, features, downloads, platforms); [Official licensing terms](https://raw.githubusercontent.com/snipe/snipe-it/master/LICENSE) (2026-11-15; license); [Official download or installation entry point](https://snipeitapp.com/download) (2026-11-15; downloads); [Official dated release](https://github.com/grokability/snipe-it/releases/tag/v8.8.3) (2026-11-15; maintenance, downloads)
+
+## Invoicing
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=productivity%2Finvoicing)
+
+### Invoice Ninja
+
+Invoicing and client billing with quotes, recurring invoices, payment gateways and time records.
+
+- **Platforms:** Windows, macOS, Linux, Web. **License:** Elastic License 2.0 source; commercial white-label terms. **Pricing model:** freemium.
+- **Compatibility details:** Windows, macOS and Linux desktop clients require a hosted or self-hosted server; the server also has a browser UI.
+- **Pricing details:** Self-hosted code includes hosted Pro/Enterprise features; branding removal is separately licensed. Hosted plans have a free tier and paid tiers; payment processors charge separately.
+- **Pick for:** Billing needs quotes, recurring invoices and a client portal with self-hosting.
+- **Compare when:** Compare MIT alternatives when licensing flexibility or simpler billing is more important.
+- **Strengths:** Broad billing workflow with self-hosted server option; Desktop clients can connect to self-hosted installations
+- **Limitations:** ELv2 restricts offering the product as a competing managed service; Branding removal and some hosted capabilities require payment
+- **Maintenance:** active — Official release v5.13.53 is dated 2026-11-02; installation and performance were not independently tested. ([evidence](https://github.com/invoiceninja/invoiceninja/releases/tag/v5.13.53))
+- [Official project](https://invoiceninja.com/) · [Official installation / downloads](https://github.com/invoiceninja/invoiceninja) · [Repository](https://github.com/invoiceninja/invoiceninja)
+- **Sources:** [Official product overview](https://invoiceninja.com/) (2026-11-15; identity, features); [Official project documentation](https://raw.githubusercontent.com/invoiceninja/invoiceninja/v5-stable/README.md) (2026-11-15; identity, features, downloads, platforms, pricing); [Official licensing terms](https://raw.githubusercontent.com/invoiceninja/invoiceninja/v5-stable/LICENSE) (2026-11-15; license); [Official download or installation entry point](https://github.com/invoiceninja/invoiceninja) (2026-11-15; downloads); [Official dated release](https://github.com/invoiceninja/invoiceninja/releases/tag/v5.13.53) (2026-11-15; maintenance, downloads)
+### InvoicePlane
+
+Self-hosted invoicing for quotes, customer records, PDF templates and payment tracking.
+
+- **Platforms:** Web. **License:** MIT application; trademark and bundled component notices apply. **Pricing model:** free.
+- **Compatibility details:** PHP/database web application, installed on a server or compatible local stack.
+- **Pricing details:** Official project describes the application as free; hosting and any third-party professional services are separate.
+- **Pick for:** A freelancer or small business needs a focused self-hosted billing application.
+- **Compare when:** Use a broader billing system for advanced automation or full accounting software for ledgers.
+- **Strengths:** Focused billing scope without a full ERP rollout; Templates and amount formats can be tailored
+- **Limitations:** Community support has no service-level commitment; Local tax and e-invoicing compliance must be verified for the business
+- **Maintenance:** active — Official release v1.7.2 is dated 2026-08-28; installation and performance were not independently tested. ([evidence](https://github.com/InvoicePlane/InvoicePlane/releases/tag/v1.7.2))
+- [Official project](https://www.invoiceplane.com/) · [Official installation / downloads](https://www.invoiceplane.com/downloads) · [Repository](https://github.com/InvoicePlane/InvoicePlane)
+- **Sources:** [Official product overview](https://www.invoiceplane.com/) (2026-11-15; identity, features); [Official project documentation](https://raw.githubusercontent.com/InvoicePlane/InvoicePlane/develop/README.md) (2026-11-15; identity, features, downloads, platforms); [Official licensing terms](https://raw.githubusercontent.com/InvoicePlane/InvoicePlane/develop/LICENSE.txt) (2026-11-15; license); [Distribution and pricing qualification](https://invoiceplane.com/about) (2026-11-15; pricing); [Official download or installation entry point](https://www.invoiceplane.com/downloads) (2026-11-15; downloads); [Official dated release](https://github.com/InvoicePlane/InvoicePlane/releases/tag/v1.7.2) (2026-11-15; maintenance, downloads)
+### SolidInvoice
+
+Invoicing and quotations with recurring billing, customer records and payment integration.
+
+- **Platforms:** Web, macOS, Linux. **License:** MIT. **Pricing model:** freemium.
+- **Compatibility details:** Browser application; README documents macOS/Linux Homebrew and local executable routes plus Docker. OS claims do not imply every feature is native.
+- **Pricing details:** Self-hosted edition is explicitly free; hosted service has free and paid plans. Payment-gateway charges are separate.
+- **Pick for:** A small business wants self-hosted invoices and recurring billing with MIT licensing.
+- **Compare when:** Compare InvoicePlane for a smaller basic workflow or a full accounting system for ledgers.
+- **Strengths:** Self-hosted edition offers control over billing data; Official deployment includes containers and local binary routes
+- **Limitations:** Payment services have separate fees; Server backups, updates and business compliance remain operator responsibilities
+- **Maintenance:** active — Official release 3.1.3 is dated 2026-11-10; installation and performance were not independently tested. ([evidence](https://github.com/SolidInvoice/SolidInvoice/releases/tag/3.1.3))
+- [Official project](https://solidinvoice.co/) · [Official installation / downloads](https://github.com/SolidInvoice/SolidInvoice) · [Repository](https://github.com/SolidInvoice/SolidInvoice)
+- **Sources:** [Official product overview](https://solidinvoice.co/) (2026-11-15; identity, features); [Official project documentation](https://raw.githubusercontent.com/SolidInvoice/SolidInvoice/3.2.x/README.md) (2026-11-15; identity, features, downloads, platforms, pricing); [Official licensing terms](https://raw.githubusercontent.com/SolidInvoice/SolidInvoice/3.2.x/LICENSE) (2026-11-15; license); [Official download or installation entry point](https://github.com/SolidInvoice/SolidInvoice) (2026-11-15; downloads); [Official dated release](https://github.com/SolidInvoice/SolidInvoice/releases/tag/3.1.3) (2026-11-15; maintenance, downloads)
+
+## Kanban boards
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=productivity%2Fkanban-boards)
+
+### Kanboard
+
+Focused self-hosted Kanban with WIP limits, task filters and event-driven actions.
+
+- **Platforms:** Web. **License:** MIT. **Pricing model:** free.
+- **Compatibility details:** PHP web application operated on a server or local compatible environment.
+- **Pricing details:** The official project describes the application as free; server operation is the user’s responsibility.
+- **Pick for:** You need a compact Kanban service with explicit work-in-progress limits.
+- **Compare when:** Choose a broader project system for portfolios, complex scheduling or extensive product planning.
+- **Strengths:** Small feature scope keeps board workflows direct; Permissive license and documented deployment options
+- **Limitations:** Explicitly in maintenance mode, with fixes rather than major feature development; Plugins need separate compatibility review
+- **Maintenance:** active — Official release v1.2.57 is dated 2026-10-31; installation and performance were not independently tested. The official README explicitly describes the project as in maintenance mode, focused on fixes and small improvements. ([evidence](https://github.com/kanboard/kanboard/releases/tag/v1.2.57))
+- [Official project](https://kanboard.org/) · [Official installation / downloads](https://docs.kanboard.org/v1/admin/installation/) · [Repository](https://github.com/kanboard/kanboard)
+- **Sources:** [Official product overview](https://kanboard.org/) (2026-11-15; identity, features, pricing); [Official project documentation](https://raw.githubusercontent.com/kanboard/kanboard/main/README.md) (2026-11-15; identity, features, downloads, platforms); [Official licensing terms](https://raw.githubusercontent.com/kanboard/kanboard/main/LICENSE) (2026-11-15; license); [Official download or installation entry point](https://docs.kanboard.org/v1/admin/installation/) (2026-11-15; downloads); [Official dated release](https://github.com/kanboard/kanboard/releases/tag/v1.2.57) (2026-11-15; maintenance, downloads)
+### Planka
+
+Self-hosted Kanban with real-time cards, comments and attachments, under restricted community terms.
+
+- **Platforms:** Web. **License:** PLANKA Fair Use Community License 1.1 and commercial Pro/Enterprise terms. **Pricing model:** freemium.
+- **Compatibility details:** Browser interface with a self-hosted application/database stack.
+- **Pricing details:** Community is free for permitted uses; Pro, Enterprise and hosting are paid. Free self-hosting does not remove the license’s third-party commercial-use restrictions.
+- **Pick for:** Internal team boards fit the Community license and real-time card collaboration is enough.
+- **Compare when:** Prefer MIT/AGPL alternatives when unrestricted external-client use or open-source licensing is required.
+- **Strengths:** Direct visual collaboration for internal boards; A documented upgrade path adds commercial features
+- **Limitations:** Community license restricts commercial access by external organizations and hosted services; Pro migration can be one-way and needs backup planning
+- **Maintenance:** active — Official release v2.3.1 is dated 2026-11-05; installation and performance were not independently tested. ([evidence](https://github.com/plankanban/planka/releases/tag/v2.3.1))
+- [Official project](https://planka.app/) · [Official installation / downloads](https://github.com/plankanban/planka) · [Repository](https://github.com/plankanban/planka)
+- **Sources:** [Official product overview](https://planka.app/) (2026-11-15; identity, features); [Official project documentation](https://raw.githubusercontent.com/plankanban/planka/master/README.md) (2026-11-15; identity, features, downloads, platforms, pricing); [Official licensing terms](https://raw.githubusercontent.com/plankanban/planka/master/LICENSE.md) (2026-11-15; license); [Official download or installation entry point](https://github.com/plankanban/planka) (2026-11-15; downloads); [Official dated release](https://github.com/plankanban/planka/releases/tag/v2.3.1) (2026-11-15; maintenance, downloads)
+### Wekan
+
+Collaborative Kanban boards with swimlanes, imports, custom fields and workflow rules.
+
+- **Platforms:** Web, Windows, macOS, Linux. **License:** MIT. **Pricing model:** free.
+- **Compatibility details:** Web interface; official installation material lists Windows, macOS and Linux bundles, plus Linux/container options.
+- **Pricing details:** Official bundles and source are freely distributed; optional professional support is separately paid.
+- **Pick for:** A team needs flexible Kanban boards and broad import/export choices.
+- **Compare when:** Choose Kanboard for a deliberately smaller interface or inspect PLANKA licensing for a polished alternative.
+- **Strengths:** Extensive board organization and migration options; Official local/server bundles support several desktop host systems
+- **Limitations:** The service and its data store still need administration; Large feature surface can require configuration and training
+- **Maintenance:** active — Official release v13.13 is dated 2026-11-15; installation and performance were not independently tested. ([evidence](https://github.com/wekan/wekan/releases/tag/v13.13))
+- [Official project](https://wekan.fi/) · [Official installation / downloads](https://wekan.fi/install/) · [Repository](https://github.com/wekan/wekan)
+- **Sources:** [Official product overview](https://wekan.fi/) (2026-11-15; identity, features); [Official project documentation](https://raw.githubusercontent.com/wekan/wekan/main/README.md) (2026-11-15; identity, features, downloads); [Official licensing terms](https://raw.githubusercontent.com/wekan/wekan/main/LICENSE) (2026-11-15; license); [Documented deployment and platform scope](https://wekan.fi/install/) (2026-11-15; platforms, pricing, downloads); [Official dated release](https://github.com/wekan/wekan/releases/tag/v13.13) (2026-11-15; maintenance, downloads)
+
 ## LaTeX document editors
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=productivity%2Flatex-editors)
 
 ### LyX
 
@@ -441,7 +842,9 @@ Integrated LaTeX editing environment with completion, document navigation and pr
 - [Official project](https://www.texstudio.org/) · [Official installation / downloads](https://www.texstudio.org/#download) · [Repository](https://github.com/texstudio-org/texstudio)
 - **Sources:** [Official project documentation](https://www.texstudio.org/) (2026-11-14; identity, features, platforms, license, pricing); [Official project README](https://raw.githubusercontent.com/texstudio-org/texstudio/HEAD/README.md) (2026-11-14; identity, features); [Upstream license terms](https://raw.githubusercontent.com/texstudio-org/texstudio/HEAD/COPYING) (2026-11-14; license); [Official installation and download information](https://www.texstudio.org/#download) (2026-11-14; identity, downloads, platforms, license, pricing); [Official repository activity feed](https://github.com/texstudio-org/texstudio/commits/HEAD.atom) (2026-11-14; maintenance)
 
-## Longform Writing
+## Long-form writing
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=productivity%2Flongform-writing)
 
 ### bibisco
 
@@ -480,7 +883,56 @@ Commercial long-form writing environment combining a manuscript binder, research
 - [Official project](https://www.literatureandlatte.com/scrivener/overview) · [Official installation / downloads](https://www.literatureandlatte.com/scrivener/download)
 - **Sources:** [Official product documentation](https://www.literatureandlatte.com/scrivener/overview) (2026-11-14; features, identity, platforms, pricing); [Official download and distribution documentation](https://www.literatureandlatte.com/scrivener/download) (2026-11-14; downloads, platforms, pricing); [Official licensing and terms](https://www.literatureandlatte.com/end-user-licence-agreement) (2026-11-14; license)
 
+## Low-code business applications
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=productivity%2Flow-code-apps)
+
+### Appsmith
+
+Low-code internal application builder using database/API connectors, UI widgets and JavaScript.
+
+- **Platforms:** Web. **License:** Apache-2.0 Community; commercial editions have separate terms. **Pricing model:** freemium.
+- **Compatibility details:** Browser-based builder and runtime backed by a self-hosted service, commonly deployed with Docker or Kubernetes.
+- **Pricing details:** Community edition is free; cloud and self-hosted commercial plans add paid capabilities and limits.
+- **Pick for:** Developers need internal tools over existing data and APIs without building every UI component.
+- **Compare when:** Use Baserow for data-first no-code workflows or a full framework for unrestricted product development.
+- **Strengths:** Builds interfaces around existing business systems; Custom code can handle logic beyond preset widgets
+- **Limitations:** Requires technical ownership of queries and access controls; Governance and advanced collaboration vary by paid tier
+- **Maintenance:** active — Official release v2.7.0 is dated 2026-11-12; installation and performance were not independently tested. ([evidence](https://github.com/appsmithorg/appsmith/releases/tag/v2.7.0))
+- [Official project](https://www.appsmith.com/) · [Official installation / downloads](https://github.com/appsmithorg/appsmith) · [Repository](https://github.com/appsmithorg/appsmith)
+- **Sources:** [Official product overview](https://www.appsmith.com/) (2026-11-15; identity, features); [Official project documentation](https://raw.githubusercontent.com/appsmithorg/appsmith/release/README.md) (2026-11-15; identity, features, downloads, platforms); [Official licensing terms](https://raw.githubusercontent.com/appsmithorg/appsmith/release/LICENSE) (2026-11-15; license); [Distribution and pricing qualification](https://www.appsmith.com/pricing) (2026-11-15; pricing); [Official download or installation entry point](https://github.com/appsmithorg/appsmith) (2026-11-15; downloads); [Official dated release](https://github.com/appsmithorg/appsmith/releases/tag/v2.7.0) (2026-11-15; maintenance, downloads)
+### Baserow
+
+No-code database and application platform with tables, forms, views and workflow building.
+
+- **Platforms:** Web. **License:** MIT open-source edition; premium/enterprise directories have separate commercial licenses. **Pricing model:** freemium.
+- **Compatibility details:** Browser application with documented container and server deployment; no native desktop OS claim.
+- **Pricing details:** Free cloud/self-host tiers exist; premium and enterprise features require paid licenses.
+- **Pick for:** You need structured data and simple applications without writing a full custom stack.
+- **Compare when:** Compare Grist for Python formulas or Appsmith for interfaces on existing databases.
+- **Strengths:** Lets nondevelopers maintain structured operational records; Self-hosting keeps deployment under organizational control
+- **Limitations:** Advanced views and governance can require paid editions; Self-hosting and external integrations need maintenance
+- **Maintenance:** active — Official release 2.4.3 is dated 2026-11-14; installation and performance were not independently tested. ([evidence](https://github.com/baserow/baserow/releases/tag/2.4.3))
+- [Official project](https://baserow.io/) · [Official installation / downloads](https://github.com/baserow/baserow) · [Repository](https://github.com/baserow/baserow)
+- **Sources:** [Official product overview](https://baserow.io/) (2026-11-15; identity, features); [Official project documentation](https://raw.githubusercontent.com/baserow/baserow/develop/README.md) (2026-11-15; identity, features, downloads, platforms); [Official licensing terms](https://raw.githubusercontent.com/baserow/baserow/develop/LICENSE) (2026-11-15; license); [Distribution and pricing qualification](https://baserow.io/pricing) (2026-11-15; pricing); [Official download or installation entry point](https://github.com/baserow/baserow) (2026-11-15; downloads); [Official dated release](https://github.com/baserow/baserow/releases/tag/2.4.3) (2026-11-15; maintenance, downloads)
+### Grist
+
+Relational spreadsheets with Python formulas, linked views, forms and granular access rules.
+
+- **Platforms:** Windows, macOS, Linux, Web. **License:** Apache-2.0 Community; commercial editions have separate terms. **Pricing model:** freemium.
+- **Compatibility details:** Core is a web service; official README also identifies a Windows/macOS/Linux desktop app for local documents.
+- **Pricing details:** Community self-hosting is free; hosted and Enterprise offerings have separate plans and limits.
+- **Pick for:** A team needs spreadsheet-like editing with relations and controlled data views.
+- **Compare when:** Use Baserow for a no-code database focus or Appsmith to build interfaces over existing APIs.
+- **Strengths:** Bridges spreadsheet editing and structured records; Portable documents and self-hosting reduce dependence on one service
+- **Limitations:** Relational table behavior differs from ordinary spreadsheets; Enterprise administration and hosted quotas depend on edition
+- **Maintenance:** active — Official release v1.7.22 is dated 2026-10-29; installation and performance were not independently tested. ([evidence](https://github.com/gristlabs/grist-core/releases/tag/v1.7.22))
+- [Official project](https://www.getgrist.com/) · [Official installation / downloads](https://github.com/gristlabs/grist-core) · [Repository](https://github.com/gristlabs/grist-core)
+- **Sources:** [Official product overview](https://www.getgrist.com/) (2026-11-15; identity, features); [Official project documentation](https://raw.githubusercontent.com/gristlabs/grist-core/main/README.md) (2026-11-15; identity, features, downloads, platforms); [Official licensing terms](https://raw.githubusercontent.com/gristlabs/grist-core/main/LICENSE.txt) (2026-11-15; license); [Distribution and pricing qualification](https://www.getgrist.com/pricing/) (2026-11-15; pricing); [Official download or installation entry point](https://github.com/gristlabs/grist-core) (2026-11-15; downloads); [Official dated release](https://github.com/gristlabs/grist-core/releases/tag/v1.7.22) (2026-11-15; maintenance, downloads)
+
 ## Markdown editors
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=productivity%2Fmarkdown-editors)
 
 ### ghostwriter
 
@@ -495,7 +947,146 @@ Markdown editor with live preview and a focused writing interface.
 - [Official project](https://ghostwriter.kde.org/) · [Official installation / downloads](https://ghostwriter.kde.org/download/) · [Repository](https://github.com/KDE/ghostwriter)
 - **Sources:** [Official project documentation](https://ghostwriter.kde.org/) (2026-11-14; identity, features, platforms, license, pricing); [Official project README](https://raw.githubusercontent.com/KDE/ghostwriter/HEAD/README.md) (2026-11-14; identity, features, license, platforms); [Upstream license terms](https://raw.githubusercontent.com/KDE/ghostwriter/HEAD/COPYING) (2026-11-14; license); [Official installation and download information](https://ghostwriter.kde.org/download/) (2026-11-14; identity, downloads, platforms, pricing); [Official repository activity feed](https://github.com/KDE/ghostwriter/commits/HEAD.atom) (2026-11-14; maintenance)
 
+## Matrix messaging clients
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=productivity%2Fmatrix-clients)
+
+### Element Desktop
+
+Matrix collaboration client with desktop and browser access, encrypted rooms and a choice of homeserver.
+
+- **Platforms:** Windows, macOS, Linux, Web. **License:** AGPL-3.0-or-later OR GPL-3.0-or-later; commercial licensing also offered. **Pricing model:** free.
+- **Pricing details:** The personal client is free. Enterprise server, hosting and commercial licensing are separate products.
+- **Pick for:** Choose for a full Matrix client across desktop operating systems and browsers.
+- **Compare when:** Compare native Matrix clients for a particular desktop environment or check enterprise server terms for organizational hosting.
+- **Strengths:** Works with the federated Matrix ecosystem instead of requiring every organization to share one provider.; Official desktop packages and a hosted web client offer several access paths.
+- **Limitations:** A Matrix account and suitable homeserver are required; server administration is separate from installing the client.; Desktop, web, calling and enterprise products have different support scopes and must be checked for the chosen deployment.
+- **Maintenance:** unverified — Product documentation reviewed; a current dated release or lifecycle commitment has not been established for this record.
+- [Official project](https://element.io/) · [Official installation / downloads](https://element.io/download) · [Repository](https://github.com/element-hq/element-web)
+- **Sources:** [Official documentation and distribution evidence](https://element.io/) (2026-11-15; identity, features, pricing); [Official documentation and distribution evidence](https://github.com/element-hq/element-web) (2026-11-15; identity, license, platforms, features); [Official documentation and distribution evidence](https://element.io/download) (2026-11-15; downloads, platforms)
+### FluffyChat
+
+Matrix messenger emphasizing familiar conversation views, spaces, rich media and encrypted chat backups.
+
+- **Platforms:** Windows, macOS, Linux, Web. **License:** AGPL-3.0. **Pricing model:** free.
+- **Compatibility details:** Linux and web are established distributions; Windows and macOS were announced as beta deployments in October 2026.
+- **Pick for:** Choose for a conversational Matrix interface, particularly on Linux or the web.
+- **Compare when:** Compare established desktop clients when stable Windows/macOS deployment or a specific call configuration is essential.
+- **Strengths:** A chat-focused interface exposes Matrix communities, stickers and media without requiring a workplace deployment.; Uses the same federated Matrix network as other clients, allowing a choice of homeserver.
+- **Limitations:** Windows and macOS deployments were newly introduced as beta versions; macOS TestFlight capacity is limited.; Calling depends on the homeserver and MatrixRTC infrastructure, so a working message account does not establish call compatibility.
+- **Maintenance:** active — Official release feed contains v2.11.5 with an updated timestamp of 2026-11-06. This is release-channel activity evidence, not proof of a stable build, installed compatibility or security testing. ([evidence](https://github.com/krille-chan/fluffychat/releases.atom))
+- [Official project](https://fluffychat.im/) · [Official installation / downloads](https://github.com/krille-chan/fluffychat/releases) · [Repository](https://github.com/krille-chan/fluffychat)
+- **Sources:** [Official documentation and distribution evidence](https://fluffychat.im/) (2026-11-15; identity, features, pricing, downloads); [Official documentation and distribution evidence](https://github.com/krille-chan/fluffychat) (2026-11-15; identity, features, license); [Official documentation and distribution evidence](https://www.matrix.org/blog/2026/10/30/this-week-in-matrix-2026-10-30/) (2026-11-15; platforms, downloads, features); [Official documentation and distribution evidence](https://fluffy.chat/faq/) (2026-11-15; platforms); [Official release or lifecycle evidence](https://github.com/krille-chan/fluffychat/releases.atom) (2026-11-15; maintenance)
+### Fractal
+
+GNOME-oriented Matrix messaging app with multiple accounts, rich message rendering and encrypted conversations.
+
+- **Platforms:** Linux. **License:** GPL-3.0. **Pricing model:** unknown.
+- **Pricing details:** No paid installer price or explicit no-charge binary statement was established in the reviewed primary documentation.
+- **Pick for:** Choose for Matrix messaging on GNOME with multiple accounts and rich media.
+- **Compare when:** Compare cross-platform clients for Windows/macOS deployment or verify portal setup on another Linux desktop.
+- **Strengths:** Fits GNOME and adaptive Linux desktop layouts while keeping Matrix federation.; Multiple accounts and in-conversation media suit participation in several communities.
+- **Limitations:** Official installation is a Linux Flatpak; this review did not establish supported Windows or macOS packages.; Secret storage requires a compatible desktop portal or Secret Service, particularly outside GNOME.
+- **Maintenance:** unverified — Product documentation reviewed; a current dated release or lifecycle commitment has not been established for this record.
+- [Official project](https://gitlab.gnome.org/World/fractal) · [Official installation / downloads](https://flathub.org/apps/org.gnome.Fractal) · [Repository](https://gitlab.gnome.org/World/fractal)
+- **Sources:** [Official documentation and distribution evidence](https://gitlab.gnome.org/World/fractal) (2026-11-15; identity, license); [Official documentation and distribution evidence](https://gitlab.gnome.org/World/fractal/-/raw/main/README.md) (2026-11-15; identity, features, platforms, downloads)
+### NeoChat
+
+KDE Matrix messenger with spaces, account switching, rich conversations and desktop integration.
+
+- **Platforms:** Linux, Windows. **License:** GPL-3.0. **Pricing model:** unknown.
+- **Compatibility details:** Linux is the primary current packaged workflow; Windows installers include older stable and testing builds.
+- **Pick for:** Choose for KDE-focused Matrix messaging when its documented feature coverage matches your rooms.
+- **Compare when:** Compare Element for calls or threads and verify Windows build status before deployment.
+- **Strengths:** KDE integration and spaces help organize Matrix communities within a Plasma workflow.; Account switching and room-management tools cover more than simple one-to-one chat.
+- **Limitations:** Official documentation lists VoIP, threads and parts of encryption support as incomplete.; Current Linux releases and Windows distribution do not have identical maturity; the page exposes an older stable Windows installer and newer testing builds.
+- **Maintenance:** unverified — Product documentation reviewed; a current dated release or lifecycle commitment has not been established for this record.
+- [Official project](https://apps.kde.org/neochat/) · [Official installation / downloads](https://apps.kde.org/neochat/) · [Repository](https://invent.kde.org/network/neochat)
+- **Sources:** [Official documentation and distribution evidence](https://apps.kde.org/neochat/) (2026-11-15; identity, features, license, platforms, downloads, maintenance)
+### Nheko
+
+Native Qt Matrix client with encrypted rooms, rich replies, media and configurable desktop profiles.
+
+- **Platforms:** Windows, macOS, Linux. **License:** GPL-3.0. **Pricing model:** unknown.
+- **Pick for:** Choose for a Qt Matrix client with desktop-oriented navigation and profiles.
+- **Compare when:** Check call, codec and secret-storage requirements before standardizing on it.
+- **Strengths:** Native desktop integration includes keyboard room switching and configurable profiles.; Supports Matrix accounts without requiring the Element client.
+- **Limitations:** The project says its encryption implementation has not been independently audited.; Calls vary by platform; Linux needs a secret service and Windows video playback may need additional codecs.
+- **Maintenance:** unverified — The reviewed official release feed's newest observed entry is v0.12.1-1 (updated 2025-08-11). Recent maintenance remains unverified; this does not prove the project is abandoned. ([evidence](https://github.com/Nheko-Reborn/nheko/releases.atom))
+- [Official project](https://nheko-reborn.github.io/) · [Official installation / downloads](https://github.com/Nheko-Reborn/nheko/releases) · [Repository](https://github.com/Nheko-Reborn/nheko)
+- **Sources:** [Official documentation and distribution evidence](https://nheko-reborn.github.io/) (2026-11-15; identity, platforms, downloads); [Official documentation and distribution evidence](https://github.com/Nheko-Reborn/nheko) (2026-11-15; features, license, platforms, downloads); [Official release or lifecycle evidence](https://github.com/Nheko-Reborn/nheko/releases.atom) (2026-11-15; maintenance)
+
+## Personal messaging
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=productivity%2Fmessaging)
+
+### Jami
+
+Peer-to-peer communication app combining messages, audio/video calls, screen sharing and linked devices.
+
+- **Platforms:** Windows, macOS, Linux. **License:** GPL-3.0-or-later. **Pricing model:** free.
+- **Pick for:** Choose for a free peer-to-peer desktop communication account with calls and screen sharing.
+- **Compare when:** Compare provider-backed messengers when simple account recovery and consistent always-online delivery matter most.
+- **Strengths:** Accounts do not require a phone number or email address.; Direct-device and local-network workflows suit users who want to manage their own communication identity.
+- **Limitations:** Losing all linked devices without an account backup can lose access to the account.; Peer-to-peer reachability and device availability affect communication; the web edition is still a preview rather than equivalent stable desktop support.
+- **Maintenance:** unverified — Product documentation reviewed; a current dated release or lifecycle commitment has not been established for this record.
+- [Official project](https://jami.net/) · [Official installation / downloads](https://jami.net/download/)
+- **Sources:** [Official documentation and distribution evidence](https://jami.net/) (2026-11-15; identity, features, license, platforms, pricing); [Official documentation and distribution evidence](https://jami.net/download/) (2026-11-15; downloads, platforms); [Official documentation and distribution evidence](https://docs.jami.net/setup/index.html) (2026-11-15; features, platforms)
+### Session
+
+Desktop messenger using account IDs, encrypted messaging and an onion-routed service-node network.
+
+- **Platforms:** Windows, macOS, Linux. **License:** GPL-3.0. **Pricing model:** unknown.
+- **Compatibility details:** Current release requires Windows 10+, macOS 13+ or Linux glibc 2.35+. No FreeBSD claim is made from a misleading asset suffix.
+- **Pick for:** Choose for account-ID messaging when the Session network and recovery model fit your contacts.
+- **Compare when:** Compare SimpleX for pairwise connection identifiers or Signal for phone-linked mainstream contact discovery.
+- **Strengths:** Creates an identity without requiring a phone number or email address.; Official desktop releases include published signature-verification instructions and hashes.
+- **Limitations:** Account recovery depends on protecting the recovery information; it is not a conventional email-password reset workflow.; Community and direct-message privacy differ, and paid Pro features must be checked separately from the open-source client license.
+- **Maintenance:** active — Official release feed contains Session 1.18.4 with an updated timestamp of 2026-11-13. This is release-channel activity evidence, not proof of a stable build, installed compatibility or security testing. ([evidence](https://github.com/session-foundation/session-desktop/releases.atom))
+- [Official project](https://getsession.org/) · [Official installation / downloads](https://github.com/session-foundation/session-desktop/releases/latest) · [Repository](https://github.com/session-foundation/session-desktop)
+- **Sources:** [Official documentation and distribution evidence](https://getsession.org/) (2026-11-15; identity, features); [Official documentation and distribution evidence](https://github.com/session-foundation/session-desktop) (2026-11-15; identity, features, license); [Official documentation and distribution evidence](https://github.com/session-foundation/session-desktop/releases/latest) (2026-11-15; platforms, downloads); [Official release or lifecycle evidence](https://github.com/session-foundation/session-desktop/releases.atom) (2026-11-15; maintenance)
+### Signal
+
+Encrypted messaging and calling client that links a desktop computer to an existing Signal mobile account.
+
+- **Platforms:** Windows, macOS, Linux. **License:** AGPL-3.0. **Pricing model:** free.
+- **Pick for:** Choose when your contacts already use Signal and you want their conversations on a supported desktop.
+- **Compare when:** Compare independent-account messengers when desktop-only registration or federation is a requirement.
+- **Strengths:** A consistent desktop companion for contacts already using Signal.; Nonprofit service is explicitly offered without a subscription or advertising.
+- **Limitations:** Desktop setup requires an existing Signal Android or iOS account.; Contacts need Signal; it does not connect directly to Matrix, XMPP or ordinary SIP accounts.
+- **Maintenance:** active — Official release feed contains v8.36.0-beta.1 with an updated timestamp of 2026-11-11. This is release-channel activity evidence, not proof of a stable build, installed compatibility or security testing. ([evidence](https://github.com/signalapp/Signal-Desktop/releases.atom))
+- [Official project](https://signal.org/) · [Official installation / downloads](https://signal.org/download/) · [Repository](https://github.com/signalapp/Signal-Desktop)
+- **Sources:** [Official documentation and distribution evidence](https://signal.org/) (2026-11-15; identity, features, pricing); [Official documentation and distribution evidence](https://github.com/signalapp/Signal-Desktop) (2026-11-15; identity, features, license, platforms); [Official documentation and distribution evidence](https://signal.org/download/) (2026-11-15; downloads, platforms); [Official release or lifecycle evidence](https://github.com/signalapp/Signal-Desktop/releases.atom) (2026-11-15; maintenance)
+### SimpleX Chat
+
+Private messenger using invitation links and per-connection identifiers, with independent desktop clients and optional linked-device operation.
+
+- **Platforms:** Windows, macOS, Linux. **License:** AGPL-3.0. **Pricing model:** freemium.
+- **Pricing details:** Core messenger is free; optional supporter badges are paid and can increase file limits and storage duration.
+- **Pick for:** Choose when avoiding a global account identifier and controlling contact connections are primary goals.
+- **Compare when:** Compare Signal for an established address-book workflow or Matrix for large federated room management.
+- **Strengths:** Contacts can connect without publishing a phone number or global account identifier.; Desktop clients and optional self-hosted relays support several deployment preferences.
+- **Limitations:** Contacts must exchange a link or use a discovery workflow, which differs from address-book-based messengers.; Local profiles and data need deliberate backup; optional paid supporter badges extend file size and availability.
+- **Maintenance:** active — Official release feed contains v7.1.4 with an updated timestamp of 2026-11-15. This is release-channel activity evidence, not proof of a stable build, installed compatibility or security testing. ([evidence](https://github.com/simplex-chat/simplex-chat/releases.atom))
+- [Official project](https://simplex.chat/) · [Official installation / downloads](https://simplex.chat/downloads/) · [Repository](https://github.com/simplex-chat/simplex-chat)
+- **Sources:** [Official documentation and distribution evidence](https://github.com/simplex-chat/simplex-chat) (2026-11-15; identity, features, license); [Official documentation and distribution evidence](https://simplex.chat/downloads/) (2026-11-15; identity, pricing, platforms, downloads); [Official documentation and distribution evidence](https://simplex.chat/docs/guide/supporter-badges.html) (2026-11-15; pricing, features); [Official release or lifecycle evidence](https://github.com/simplex-chat/simplex-chat/releases.atom) (2026-11-15; maintenance)
+### Telegram Desktop
+
+Desktop client for Telegram cloud chats, public channels, large groups and synchronized file sharing.
+
+- **Platforms:** Windows, macOS, Linux. **License:** GPL-3.0 with OpenSSL exception. **Pricing model:** freemium.
+- **Pricing details:** Free core messaging; Premium subscriptions add limits and features. Paid content and channel monetization are separate from the desktop source license.
+- **Pick for:** Choose for existing Telegram communities and synchronized cloud conversations.
+- **Compare when:** Compare Signal or another messenger when end-to-end encrypted message history is the main requirement.
+- **Strengths:** Cloud history is available across connected desktop and mobile devices.; Channels, groups and bots support broadcast and community workflows in the same client.
+- **Limitations:** Cloud chats use client-server encryption rather than end-to-end encryption.; Some limits and convenience features require Telegram Premium; channel advertising and paid content are separate concerns.
+- **Maintenance:** active — Official release feed contains v 7.4.4 with an updated timestamp of 2026-11-13. This is release-channel activity evidence, not proof of a stable build, installed compatibility or security testing. ([evidence](https://github.com/telegramdesktop/tdesktop/releases.atom))
+- [Official project](https://desktop.telegram.org/) · [Official installation / downloads](https://desktop.telegram.org/) · [Repository](https://github.com/telegramdesktop/tdesktop)
+- **Sources:** [Official documentation and distribution evidence](https://desktop.telegram.org/) (2026-11-15; identity, downloads, platforms); [Official documentation and distribution evidence](https://github.com/telegramdesktop/tdesktop) (2026-11-15; identity, license, features); [Official documentation and distribution evidence](https://telegram.org/faq) (2026-11-15; features, pricing); [Official documentation and distribution evidence](https://telegram.org/faq_premium) (2026-11-15; pricing, features); [Official release or lifecycle evidence](https://github.com/telegramdesktop/tdesktop/releases.atom) (2026-11-15; maintenance)
+
 ## Mind mapping
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=productivity%2Fmind-mapping)
 
 ### Freeplane
 
@@ -511,6 +1102,8 @@ Mind-mapping application for organizing ideas, notes and relationships in branch
 - **Sources:** [Official project documentation](https://www.freeplane.org/) (2026-11-14; identity, features, platforms, pricing); [Official project README](https://raw.githubusercontent.com/freeplane/freeplane/HEAD/README.md) (2026-11-14; identity, features, pricing); [Official project documentation](https://sourceforge.net/projects/freeplane/files/) (2026-11-14; identity, features, downloads); [Official installation and download information](https://docs.freeplane.org/getting-started/Distributions.html) (2026-11-14; identity, downloads, platforms); [Official repository metadata](https://api.github.com/repos/freeplane/freeplane) (2026-11-14; identity, license); [Upstream license terms](https://raw.githubusercontent.com/freeplane/freeplane/HEAD/license.txt) (2026-11-14; license); [Official repository activity feed](https://github.com/freeplane/freeplane/commits/HEAD.atom) (2026-11-14; maintenance)
 
 ## Notes and personal knowledge
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=productivity%2Fnotes-knowledge)
 
 ### CherryTree
 
@@ -611,6 +1204,8 @@ Desktop wiki editor for connected pages, simple formatting and attached informat
 
 ## Office suites
 
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=productivity%2Foffice-suites)
+
 ### LibreOffice
 
 Office suite for documents, spreadsheets, presentations and related desktop productivity tasks.
@@ -649,7 +1244,9 @@ Desktop office editors for documents, spreadsheets, presentations and PDFs.
 - [Official project](https://www.onlyoffice.com/desktop.aspx) · [Official installation / downloads](https://www.onlyoffice.com/download-desktop) · [Repository](https://github.com/ONLYOFFICE/DesktopEditors)
 - **Sources:** [Official project documentation](https://www.onlyoffice.com/desktop.aspx) (2026-11-14; identity, features, platforms, pricing); [Official project README](https://raw.githubusercontent.com/ONLYOFFICE/DesktopEditors/HEAD/README.md) (2026-11-14; identity, features, platforms); [Upstream license terms](https://raw.githubusercontent.com/ONLYOFFICE/DesktopEditors/HEAD/LICENSE) (2026-11-14; license); [Official installation and download information](https://www.onlyoffice.com/download-desktop) (2026-11-14; identity, downloads, platforms, license, pricing); [Official repository activity feed](https://github.com/ONLYOFFICE/DesktopEditors/commits/HEAD.atom) (2026-11-14; maintenance)
 
-## Pdf Editors
+## PDF content editors
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=productivity%2Fpdf-editors)
 
 ### Adobe Acrobat Pro
 
@@ -666,6 +1263,8 @@ PDF editing and document preparation software with conversion, signing and docum
 - **Sources:** [Official product features and trial route](https://www.adobe.com/acrobat/acrobat-pro.html) (2026-11-14; identity, features, downloads); [Official Adobe plans](https://www.adobe.com/creativecloud/plans.html) (2026-11-14; pricing); [Official Adobe software licensing terms](https://www.adobe.com/legal/licenses-terms.html) (2026-11-14; license); [Official Acrobat desktop availability](https://www.adobe.com/acrobat/acrobat-pro.html) (2026-11-14; platforms)
 
 ## PDF page organization
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=productivity%2Fpdf-organization)
 
 ### PDF Arranger
 
@@ -692,7 +1291,9 @@ Offline PDF utility for splitting, combining, rotating and extracting pages.
 - [Official project](https://pdfsam.org/pdfsam-basic/) · [Official installation / downloads](https://pdfsam.org/download-pdfsam-basic/) · [Repository](https://github.com/torakiki/pdfsam)
 - **Sources:** [Official product documentation](https://pdfsam.org/pdfsam-basic/) (2026-11-14; features, identity, license, platforms, pricing); [Official upstream README](https://raw.githubusercontent.com/torakiki/pdfsam/HEAD/README.md) (2026-11-14; features, identity); [Official upstream license text](https://raw.githubusercontent.com/torakiki/pdfsam/HEAD/LICENSE) (2026-11-14; license); [Official download and distribution documentation](https://pdfsam.org/download-pdfsam-basic/) (2026-11-14; downloads, platforms); [Official upstream release activity feed](https://github.com/torakiki/pdfsam/releases.atom) (2026-11-14; maintenance)
 
-## Pdf Processing
+## PDF processing
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=productivity%2Fpdf-processing)
 
 ### Stirling PDF
 
@@ -708,6 +1309,8 @@ PDF processing platform with desktop, browser and self-hosted workflows for docu
 - **Sources:** [Official product documentation](https://www.stirlingpdf.com/) (2026-11-14; features, identity, pricing); [Official upstream README](https://raw.githubusercontent.com/Stirling-Tools/Stirling-PDF/HEAD/README.md) (2026-11-14; features, identity); [Official upstream license text](https://raw.githubusercontent.com/Stirling-Tools/Stirling-PDF/HEAD/LICENSE) (2026-11-14; license); [Official product documentation](https://docs.stirlingpdf.com/) (2026-11-14; features, identity, platforms); [Official download and distribution documentation](https://docs.stirlingpdf.com/Desktop/Install/) (2026-11-14; downloads, platforms); [Official licensing and terms](https://docs.stirlingpdf.com/Server/Licensing/Plans-and-Licences/) (2026-11-14; license, pricing); [Official download and distribution documentation](https://stirling.com/download) (2026-11-14; downloads); [Official upstream release activity feed](https://github.com/Stirling-Tools/Stirling-PDF/releases.atom) (2026-11-14; maintenance)
 
 ## PDF and document readers
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=productivity%2Fpdf-readers)
 
 ### Okular
 
@@ -734,8 +1337,24 @@ Windows reader for PDF, ebook and comic formats with a focused reading interface
 - [Official project](https://www.sumatrapdfreader.org/) · [Official installation / downloads](https://www.sumatrapdfreader.org/download-free-pdf-viewer) · [Repository](https://github.com/sumatrapdfreader/sumatrapdf)
 - **Sources:** [Official project documentation](https://www.sumatrapdfreader.org/) (2026-11-14; identity, features, platforms, pricing); [Official project README](https://raw.githubusercontent.com/sumatrapdfreader/sumatrapdf/HEAD/readme.md) (2026-11-14; identity, features, license, platforms); [Upstream license terms](https://raw.githubusercontent.com/sumatrapdfreader/sumatrapdf/HEAD/COPYING) (2026-11-14; license); [Official installation and download information](https://www.sumatrapdfreader.org/download-free-pdf-viewer) (2026-11-14; identity, downloads, platforms); [Official repository activity feed](https://github.com/sumatrapdfreader/sumatrapdf/commits/HEAD.atom) (2026-11-14; maintenance)
 
-## Personal Accounting
+## Personal accounting and budgeting
 
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=productivity%2Fpersonal-accounting)
+
+### Actual Budget
+
+Local-first envelope budgeting with transaction imports, reports and optional synchronization.
+
+- **Platforms:** Windows, macOS, Linux, Web. **License:** MIT. **Pricing model:** free.
+- **Compatibility details:** Official README links Windows, macOS and Linux local apps plus a browser/server deployment.
+- **Pricing details:** Application is explicitly free; optional hosting and bank-data providers can cost extra.
+- **Pick for:** You want envelope budgeting with locally stored data and optional multi-device sync.
+- **Compare when:** Compare accounting-focused tools when double-entry ledgers or business reporting matter more.
+- **Strengths:** Budget remains usable locally without network access; Self-hosted synchronization keeps infrastructure choice open
+- **Limitations:** Bank synchronization availability and fees depend on providers; Sync service still requires setup or paid hosting
+- **Maintenance:** active — Official release v26.11.0 is dated 2026-11-02; installation and performance were not independently tested. ([evidence](https://github.com/actualbudget/actual/releases/tag/v26.11.0))
+- [Official project](https://actualbudget.org/) · [Official installation / downloads](https://actualbudget.org/docs/install/) · [Repository](https://github.com/actualbudget/actual)
+- **Sources:** [Official product overview](https://actualbudget.org/) (2026-11-15; identity, features); [Official project documentation](https://raw.githubusercontent.com/actualbudget/actual/master/README.md) (2026-11-15; identity, features, downloads, platforms, pricing); [Official licensing terms](https://raw.githubusercontent.com/actualbudget/actual/master/LICENSE.txt) (2026-11-15; license); [Official download or installation entry point](https://actualbudget.org/docs/install/) (2026-11-15; downloads); [Official dated release](https://github.com/actualbudget/actual/releases/tag/v26.11.0) (2026-11-15; maintenance, downloads)
 ### GnuCash
 
 Double-entry accounting application for personal finances and small-business bookkeeping.
@@ -749,6 +1368,20 @@ Double-entry accounting application for personal finances and small-business boo
 - **Maintenance:** active — The official release feed contains 'GnuCash 5.17 Released' with an updated timestamp of 2026-09-27T21:10:16Z. This is a maintenance signal, not an installation or stability test. ([evidence](https://github.com/Gnucash/gnucash/releases.atom))
 - [Official project](https://github.com/Gnucash/gnucash) · [Official installation / downloads](https://github.com/Gnucash/gnucash/releases) · [Repository](https://github.com/Gnucash/gnucash)
 - **Sources:** [Official upstream README](https://raw.githubusercontent.com/Gnucash/gnucash/HEAD/README) (2026-11-14; downloads, features, identity, platforms); [Official upstream license text](https://raw.githubusercontent.com/Gnucash/gnucash/HEAD/LICENSE) (2026-11-14; license); [Official product documentation](https://github.com/Gnucash/gnucash) (2026-11-14; features, identity); [Official download and distribution documentation](https://github.com/Gnucash/gnucash/releases) (2026-11-14; downloads, platforms); [Official upstream release activity feed](https://github.com/Gnucash/gnucash/releases.atom) (2026-11-14; maintenance)
+### hledger
+
+Plain-text double-entry accounting with CLI reports, imports and optional terminal/web interfaces.
+
+- **Platforms:** Windows, macOS, Linux. **License:** GPL-3.0-or-later. **Pricing model:** free.
+- **Compatibility details:** Official documentation establishes Windows, macOS and Linux installation; terminal and web interfaces are optional tools.
+- **Pricing details:** Official binaries and source are available without a license charge; financial sponsorship is optional.
+- **Pick for:** You want financial records and reporting that can be inspected and versioned as text.
+- **Compare when:** Choose a graphical budgeting or accounting program when transaction entry should be primarily visual.
+- **Strengths:** Records work with version control and text editors; Reproducible reports support inspectable bookkeeping
+- **Limitations:** Text accounting has a learning curve; Rich invoicing and business workflows require additional tools
+- **Maintenance:** active — Official release 1.52.4 is dated 2026-09-10; installation and performance were not independently tested. ([evidence](https://github.com/hledgerorg/hledger/releases/tag/1.52.4))
+- [Official project](https://hledger.org/) · [Official installation / downloads](https://hledger.org/install.html) · [Repository](https://github.com/hledgerorg/hledger)
+- **Sources:** [Official product overview](https://hledger.org/) (2026-11-15; identity, features); [Official project documentation](https://raw.githubusercontent.com/simonmichael/hledger/main/README.md) (2026-11-15; identity, features, downloads, platforms); [Official licensing terms](https://raw.githubusercontent.com/simonmichael/hledger/main/LICENSE) (2026-11-15; license); [Distribution and pricing qualification](https://hledger.org/install.html) (2026-11-15; pricing, downloads); [Official dated release](https://github.com/hledgerorg/hledger/releases/tag/1.52.4) (2026-11-15; maintenance, downloads)
 ### HomeBank
 
 Personal-finance application for organizing transactions, budgets and spending reports.
@@ -789,7 +1422,178 @@ KDE personal-finance manager emphasizing imports, transaction operations and ada
 - [Official project](https://skrooge.org/) · [Official installation / downloads](https://skrooge.org/download/) · [Repository](https://github.com/KDE/skrooge)
 - **Sources:** [Official product documentation](https://skrooge.org/) (2026-11-14; features, identity, license, platforms); [Official download and distribution documentation](https://skrooge.org/download/) (2026-11-14; downloads, platforms)
 
+## Point of sale
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=productivity%2Fpoint-of-sale)
+
+### Chromis POS
+
+Desktop point of sale with separate till/back-office functions, stock and receipt hardware support.
+
+- **Platforms:** Windows, Linux. **License:** GPL-3.0-or-later; bundled component notices apply. **Pricing model:** free.
+- **Compatibility details:** Current project listing establishes Windows and tested Linux Mint with Java; older macOS marketing is not treated as current compatibility.
+- **Pricing details:** Official project distributes the application as free software; hardware and deployment costs are separate.
+- **Pick for:** A shop needs a desktop register with configurable receipt and barcode workflows.
+- **Compare when:** Prefer a currently supported commercial deployment when service guarantees are essential.
+- **Strengths:** Desktop checkout targets practical retail hardware; Separates cashier operation from administration
+- **Limitations:** Recent maintenance was not established from the older release listing; Hardware compatibility and local fiscal/payment requirements need testing
+- **Maintenance:** unverified — Official product and installation material reviewed; a recent dated release was not established for this product scope.
+- [Official project](https://chromis.co.uk/) · [Official installation / downloads](https://sourceforge.net/projects/chromispos/files/) · [Repository](https://github.com/ChromisPos/ChromisPOS)
+- **Sources:** [Official product overview](https://chromis.co.uk/) (2026-11-15; identity, features, pricing); [Official licensing terms](https://chromis.co.uk/licence-details/) (2026-11-15; license); [Documented deployment and platform scope](https://sourceforge.net/projects/chromispos/) (2026-11-15; platforms); [Official download or installation entry point](https://sourceforge.net/projects/chromispos/files/) (2026-11-15; downloads)
+### Open Source POS
+
+Self-hosted point of sale with stock, receipts, customers and sales reports.
+
+- **Platforms:** Web. **License:** MIT-derived license with mandatory visible footer attribution. **Pricing model:** free.
+- **Compatibility details:** PHP web application with MySQL/MariaDB; clients use browsers and depend on the local or hosted server.
+- **Pricing details:** Project release packages and source are publicly distributed without a product fee; hardware, hosting and payment services are separate.
+- **Pick for:** A small shop needs a browser-based sales register and stock records.
+- **Compare when:** Compare desktop POS options for hardware-heavy checkout or an ERP for broader operations.
+- **Strengths:** Combines checkout with basic stock administration; Local server deployment can serve multiple workstations
+- **Limitations:** License requires visible unmodified footer attribution; Receipt hardware, payment integration and local fiscal rules require validation
+- **Maintenance:** active — Official release 3.4.3 is dated 2026-10-22; installation and performance were not independently tested. ([evidence](https://github.com/opensourcepos/opensourcepos/releases/tag/3.4.3))
+- [Official project](https://opensourcepos.org/) · [Official installation / downloads](https://github.com/opensourcepos/opensourcepos) · [Repository](https://github.com/opensourcepos/opensourcepos)
+- **Sources:** [Official product overview](https://opensourcepos.org/) (2026-11-15; identity, features); [Official project documentation](https://raw.githubusercontent.com/opensourcepos/opensourcepos/master/README.md) (2026-11-15; identity, features, downloads, platforms); [Official licensing terms](https://raw.githubusercontent.com/opensourcepos/opensourcepos/master/LICENSE) (2026-11-15; license); [Distribution and pricing qualification](https://github.com/opensourcepos/opensourcepos/releases/latest) (2026-11-15; pricing); [Official download or installation entry point](https://github.com/opensourcepos/opensourcepos) (2026-11-15; downloads); [Official dated release](https://github.com/opensourcepos/opensourcepos/releases/tag/3.4.3) (2026-11-15; maintenance, downloads)
+
+## Project scheduling and planning
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=productivity%2Fproject-planning)
+
+### GanttProject
+
+Offline desktop planning with task dependencies, resource loads and Gantt charts.
+
+- **Platforms:** Windows, macOS, Linux. **License:** GPL-3.0. **Pricing model:** free.
+- **Compatibility details:** Native desktop packages for Windows, macOS and Linux.
+- **Pricing details:** Desktop downloads are free; optional paid downloads support development, and the separate collaboration cloud is commercial.
+- **Pick for:** An individual planner needs offline Gantt schedules and resource loads.
+- **Compare when:** Evaluate ProjectLibre for more traditional project controls or OpenProject for a shared team service.
+- **Strengths:** Local project files work without a hosted account; Useful scheduling and resource views in one desktop application
+- **Limitations:** Multi-user collaboration needs WebDAV or the optional cloud service; Microsoft Project interchange should be checked with representative files
+- **Maintenance:** unverified — Official release ganttproject-3.3.3323 is dated 2024-01-22; installation and performance were not independently tested. ([evidence](https://github.com/bardsoftware/ganttproject/releases/tag/ganttproject-3.3.3323))
+- [Official project](https://www.ganttproject.biz/) · [Official installation / downloads](https://www.ganttproject.biz/download/free) · [Repository](https://github.com/bardsoftware/ganttproject)
+- **Sources:** [Official product overview](https://www.ganttproject.biz/) (2026-11-15; identity, features, pricing); [Official project documentation](https://raw.githubusercontent.com/bardsoftware/ganttproject/master/README) (2026-11-15; identity, features, downloads, platforms); [Official licensing terms](https://raw.githubusercontent.com/bardsoftware/ganttproject/master/LICENSE) (2026-11-15; license); [Official download or installation entry point](https://www.ganttproject.biz/download/free) (2026-11-15; downloads); [Official dated release](https://github.com/bardsoftware/ganttproject/releases/tag/ganttproject-3.3.3323) (2026-11-15; maintenance, downloads)
+### OpenProject
+
+Self-hosted team project management combining work packages, Gantt schedules and collaboration.
+
+- **Platforms:** Web, Linux. **License:** GPL-3.0 core; Enterprise services and add-ons have commercial terms. **Pricing model:** freemium.
+- **Compatibility details:** Browser client backed by a self-hosted service; the official installation FAQ requires a Linux server for Community.
+- **Pricing details:** Community self-hosting is free; Enterprise cloud and on-premises add-ons are commercial.
+- **Pick for:** A team needs a shared project system with timelines and work-package tracking.
+- **Compare when:** Compare simpler boards when full project administration is unnecessary.
+- **Strengths:** One shared system connects schedules with discussion and work history; Community edition can be operated on owned infrastructure
+- **Limitations:** Requires server administration and upgrades; Enterprise add-ons and hosted service are paid
+- **Maintenance:** active — Official release v17.9.7 is dated 2026-11-09; installation and performance were not independently tested. ([evidence](https://github.com/opf/openproject/releases/tag/v17.9.7))
+- [Official project](https://www.openproject.org/) · [Official installation / downloads](https://www.openproject.org/download-and-installation/) · [Repository](https://github.com/opf/openproject)
+- **Sources:** [Official product overview](https://www.openproject.org/) (2026-11-15; identity, features, pricing); [Official project documentation](https://raw.githubusercontent.com/opf/openproject/dev/README.md) (2026-11-15; identity, features, downloads); [Official licensing terms](https://raw.githubusercontent.com/opf/openproject/dev/LICENSE) (2026-11-15; license); [Documented deployment and platform scope](https://www.openproject.org/docs/installation-and-operations/installation-faq/) (2026-11-15; platforms); [Official download or installation entry point](https://www.openproject.org/download-and-installation/) (2026-11-15; downloads); [Official dated release](https://github.com/opf/openproject/releases/tag/v17.9.7) (2026-11-15; maintenance, downloads)
+### ProjectLibre Desktop
+
+Desktop project scheduling with critical path, work breakdown and earned-value views.
+
+- **Platforms:** Windows, macOS, Linux. **License:** CPAL-1.0 for Desktop covered code; bundled components retain their licenses. **Pricing model:** free.
+- **Compatibility details:** The official Desktop page lists Windows, macOS and Linux.
+- **Pricing details:** Desktop is free with no subscription. ProjectLibre Cloud is a separate paid product.
+- **Pick for:** A project manager wants a local schedule with critical-path and cost controls.
+- **Compare when:** Use OpenProject for shared workflows; test complex imported schedules before adopting Desktop.
+- **Strengths:** Keeps individual project files on the computer; Combines schedule structure with cost and resource analysis
+- **Limitations:** Desktop targets one planner and individual projects; Cloud portfolio, AI and resource-leveling claims do not describe Desktop
+- **Maintenance:** unverified — Official product and installation material reviewed; a recent dated release was not established for this product scope.
+- [Official project](https://projectlibre.com/projectlibre-desktop/) · [Official installation / downloads](https://sourceforge.net/projects/projectlibre/)
+- **Sources:** [Official product overview](https://projectlibre.com/projectlibre-desktop/) (2026-11-15; identity, features, platforms, pricing); [Official project documentation](https://raw.githubusercontent.com/smartqubit/projectlibre/master/README.md) (2026-11-15; identity, features, downloads); [Official licensing terms](https://projectlibre.com/terms-service/) (2026-11-15; license); [Official download or installation entry point](https://sourceforge.net/projects/projectlibre/) (2026-11-15; downloads)
+### ProjeQtOr
+
+Project portfolio planning centered on shared resources, capacity and project controls.
+
+- **Platforms:** Web. **License:** AGPL-3.0-or-later. **Pricing model:** freemium.
+- **Compatibility details:** Self-hosted web application; this record makes no native-desktop claim.
+- **Pricing details:** Software use is free; hosting, automatic-update services and support are paid options.
+- **Pick for:** Several projects compete for the same people and need capacity-aware planning.
+- **Compare when:** Use TaskJuggler for text-based scheduling or a desktop planner for one project.
+- **Strengths:** Shared-resource constraints support portfolio scheduling; Project control records can stay with the plan
+- **Limitations:** Requires deployment and project-process configuration; More administration than a simple personal Gantt file
+- **Maintenance:** unverified — Official product and installation material reviewed; a recent dated release was not established for this product scope.
+- [Official project](https://www.projeqtor.org/) · [Official installation / downloads](https://www.projeqtor.org/en/67-downloads)
+- **Sources:** [Official product overview](https://www.projeqtor.org/) (2026-11-15; identity, features, platforms); [Official licensing terms](https://www.projeqtor.com/en/general-terms-and-conditions-of-sale-gtc/) (2026-11-15; license); [Distribution and pricing qualification](https://www.projeqtor.com/en/price/) (2026-11-15; pricing); [Official download or installation entry point](https://www.projeqtor.org/en/67-downloads) (2026-11-15; downloads)
+### TaskJuggler
+
+Text-based project modeling with constraint scheduling and resource balancing.
+
+- **Platforms:** Windows, macOS, Linux. **License:** GPL-2.0. **Pricing model:** free.
+- **Compatibility details:** Ruby-based CLI; the official project lists Windows, macOS and Linux, with installation prerequisites.
+- **Pricing details:** The project explicitly provides free software and an installable Ruby gem; no separate paid binary claim.
+- **Pick for:** Scheduling must account for resource constraints and be reproducible from text.
+- **Compare when:** Choose a graphical planner when manual schedule editing is more important than scripted models.
+- **Strengths:** Schedules can be versioned and regenerated from text; Resource constraints drive the planning calculation
+- **Limitations:** Requires learning a project-description language and Ruby setup; Less suitable for occasional drag-and-drop planning
+- **Maintenance:** unverified — Official product and installation material reviewed; a recent dated release was not established for this product scope.
+- [Official project](https://taskjuggler.org/) · [Official installation / downloads](https://taskjuggler.org/download.html) · [Repository](https://github.com/taskjuggler/TaskJuggler)
+- **Sources:** [Official product overview](https://taskjuggler.org/) (2026-11-15; identity, features, platforms, pricing); [Official project documentation](https://raw.githubusercontent.com/taskjuggler/TaskJuggler/master/README.rdoc) (2026-11-15; identity, features, downloads); [Official licensing terms](https://raw.githubusercontent.com/taskjuggler/TaskJuggler/master/COPYING) (2026-11-15; license); [Official download or installation entry point](https://taskjuggler.org/download.html) (2026-11-15; downloads)
+
+## Project and issue tracking
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=productivity%2Fproject-tracking)
+
+### Leantime
+
+Project coordination that links everyday tasks with goals, milestones and team planning.
+
+- **Platforms:** Web. **License:** AGPL-3.0 core; optional commercial plugins. **Pricing model:** freemium.
+- **Compatibility details:** Browser application; local PHP/database or official container deployment is required.
+- **Pricing details:** Community self-hosting is free; current cloud plans and optional plugins are paid.
+- **Pick for:** A mixed team needs tasks, project context and time tracking in one system.
+- **Compare when:** Use a simpler task manager for personal lists or a dedicated scheduler for formal resource leveling.
+- **Strengths:** Combines execution and project context for mixed teams; Core self-hosted features are documented separately from plugins
+- **Limitations:** Self-hosting needs PHP and a database; Some advanced plugins and managed hosting cost extra
+- **Maintenance:** active — Official release v3.14.0 is dated 2026-11-10; installation and performance were not independently tested. ([evidence](https://github.com/Leantime/leantime/releases/tag/v3.14.0))
+- [Official project](https://leantime.io/) · [Official installation / downloads](https://github.com/Leantime/leantime) · [Repository](https://github.com/Leantime/leantime)
+- **Sources:** [Official product overview](https://leantime.io/) (2026-11-15; identity, features); [Official project documentation](https://raw.githubusercontent.com/Leantime/leantime/master/README.md) (2026-11-15; identity, features, downloads, platforms); [Official licensing terms](https://raw.githubusercontent.com/Leantime/leantime/master/LICENSE) (2026-11-15; license); [Distribution and pricing qualification](https://leantime.io/pricing/) (2026-11-15; pricing); [Official download or installation entry point](https://github.com/Leantime/leantime) (2026-11-15; downloads); [Official dated release](https://github.com/Leantime/leantime/releases/tag/v3.14.0) (2026-11-15; maintenance, downloads)
+### Plane
+
+Issue and product planning with cycles, modules, filtered views and built-in pages.
+
+- **Platforms:** Web. **License:** AGPL-3.0 Community; commercial editions have separate terms. **Pricing model:** freemium.
+- **Compatibility details:** Web client with self-hosted server deployment; container support is not a claim of native Windows/macOS desktop support.
+- **Pricing details:** Free core/tier is available; paid plans add advanced and enterprise functionality.
+- **Pick for:** Product work needs issues, cycles and project documentation together.
+- **Compare when:** Compare mature issue workflows or formal project scheduling when those requirements dominate.
+- **Strengths:** Keeps planning documents close to tracked work; Official self-host options include Docker and Kubernetes
+- **Limitations:** Feature availability differs across editions; Operating the full service needs database and infrastructure maintenance
+- **Maintenance:** active — Official release v1.4.3 is dated 2026-10-28; installation and performance were not independently tested. ([evidence](https://github.com/makeplane/plane/releases/tag/v1.4.3))
+- [Official project](https://plane.so/) · [Official installation / downloads](https://developers.plane.so/self-hosting/overview) · [Repository](https://github.com/makeplane/plane)
+- **Sources:** [Official product overview](https://plane.so/) (2026-11-15; identity, features); [Official project documentation](https://raw.githubusercontent.com/makeplane/plane/preview/README.md) (2026-11-15; identity, features, downloads, platforms); [Official licensing terms](https://raw.githubusercontent.com/makeplane/plane/preview/LICENSE.txt) (2026-11-15; license); [Distribution and pricing qualification](https://plane.so/pricing) (2026-11-15; pricing); [Official download or installation entry point](https://developers.plane.so/self-hosting/overview) (2026-11-15; downloads); [Official dated release](https://github.com/makeplane/plane/releases/tag/v1.4.3) (2026-11-15; maintenance, downloads)
+### Redmine
+
+Self-hosted issue and project tracker with role controls, time logs and project wikis.
+
+- **Platforms:** Web. **License:** GPL-2.0-or-later. **Pricing model:** free.
+- **Compatibility details:** Web application deployed with Ruby on Rails and a supported database; this record does not imply a native desktop installer.
+- **Pricing details:** Official source release archives are publicly downloadable with no product license fee; hosting and optional third-party services are separate.
+- **Pick for:** A team wants configurable issue workflows with a self-hosted project history.
+- **Compare when:** Compare OpenProject for planning emphasis and Taiga for Scrum-oriented boards.
+- **Strengths:** Flexible issue fields adapt to different teams; Project context and repository activity stay together
+- **Limitations:** Ruby on Rails and database operations require administration; Plugin compatibility needs checking for each upgrade
+- **Maintenance:** unverified — Official product and installation material reviewed; a recent dated release was not established for this product scope.
+- [Official project](https://www.redmine.org/) · [Official installation / downloads](https://www.redmine.org/projects/redmine/wiki/Download) · [Repository](https://github.com/redmine/redmine)
+- **Sources:** [Official product overview](https://www.redmine.org/) (2026-11-15; identity, features); [Official project documentation](https://raw.githubusercontent.com/redmine/redmine/master/README.rdoc) (2026-11-15; identity, features, downloads, platforms); [Official licensing terms](https://raw.githubusercontent.com/redmine/redmine/master/LICENSE.txt) (2026-11-15; license); [Distribution and pricing qualification](https://www.redmine.org/projects/redmine/wiki/Download) (2026-11-15; pricing, downloads)
+### Taiga
+
+Agile project tracking with Scrum backlogs, sprint boards and Kanban workflows.
+
+- **Platforms:** Web. **License:** MPL-2.0 backend and AGPL-3.0 frontend; component-specific licenses. **Pricing model:** freemium.
+- **Compatibility details:** Browser application; follow the official self-host deployment instructions rather than treating the backend repository alone as a complete desktop app.
+- **Pricing details:** Official pricing lists a free Basic option and paid support/hosting choices; self-hosted source remains available.
+- **Pick for:** A team works in Scrum or Kanban and wants a self-hostable agile workspace.
+- **Compare when:** Choose a formal planner for resource-constrained schedules or a small board for basic personal work.
+- **Strengths:** Purposeful agile planning views; Team backlog and issue context can share a self-hosted service
+- **Limitations:** Deployment involves multiple application services; Resource leveling and financial project controls are outside its focus
+- **Maintenance:** unverified — Official product and installation material reviewed; a recent dated release was not established for this product scope.
+- [Official project](https://taiga.io/) · [Official installation / downloads](https://github.com/taigaio/taiga-back) · [Repository](https://github.com/taigaio/taiga-back)
+- **Sources:** [Official product overview](https://taiga.io/) (2026-11-15; identity, features); [Official project documentation](https://raw.githubusercontent.com/taigaio/taiga-back/main/README.md) (2026-11-15; identity, features, downloads, platforms); [Official licensing terms](https://raw.githubusercontent.com/taigaio/taiga-back/main/LICENSE) (2026-11-15; license); [Distribution and pricing qualification](https://taiga.io/deployment-pricing-options/) (2026-11-15; pricing); [Official download or installation entry point](https://github.com/taigaio/taiga-back) (2026-11-15; downloads); [Official frontend licensing terms](https://raw.githubusercontent.com/taigaio/taiga-front/main/LICENSE) (2026-11-15; license)
+
 ## Reference management
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=productivity%2Freference-management)
 
 ### JabRef
 
@@ -817,6 +1621,8 @@ Research reference manager for collecting sources, organizing libraries and inse
 - **Sources:** [Official project documentation](https://www.zotero.org/) (2026-11-14; identity, features, platforms, pricing); [Official project README](https://raw.githubusercontent.com/zotero/zotero/HEAD/README.md) (2026-11-14; identity, features); [Upstream license terms](https://raw.githubusercontent.com/zotero/zotero/HEAD/COPYING) (2026-11-14; license); [Official installation and download information](https://www.zotero.org/download/) (2026-11-14; identity, downloads, platforms); [Official repository activity feed](https://github.com/zotero/zotero/commits/HEAD.atom) (2026-11-14; maintenance); [Official pricing or distribution documentation](https://www.zotero.org/storage) (2026-11-14; pricing)
 
 ## Scanning and OCR
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=productivity%2Fscanning-ocr)
 
 ### ABBYY FineReader PDF
 
@@ -868,7 +1674,43 @@ Optical character recognition engine and command-line application for extracting
 - [Official project](https://tesseract-ocr.github.io/) · [Official installation / downloads](https://tesseract-ocr.github.io/tessdoc/Installation.html) · [Repository](https://github.com/tesseract-ocr/tesseract)
 - **Sources:** [Official project documentation](https://tesseract-ocr.github.io/) (2026-11-14; identity, features); [Official project README](https://raw.githubusercontent.com/tesseract-ocr/tesseract/HEAD/README.md) (2026-11-14; identity, features, license, platforms); [Upstream license terms](https://raw.githubusercontent.com/tesseract-ocr/tesseract/HEAD/LICENSE) (2026-11-14; license); [Official installation and download information](https://tesseract-ocr.github.io/tessdoc/Installation.html) (2026-11-14; identity, downloads, platforms, license, pricing); [Official repository activity feed](https://github.com/tesseract-ocr/tesseract/commits/HEAD.atom) (2026-11-14; maintenance)
 
+## Screen magnification
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=productivity%2Fscreen-magnification)
+
+### ZoomText
+
+Windows screen magnification with pointer, focus and color controls, plus reading tools in the Magnifier/Reader edition.
+
+- **Platforms:** Windows. **License:** Commercial license; full license terms not independently reviewed. **Pricing model:** paid.
+- **Pick for:** Magnification-centered access with adjustable visual tracking and contrast.
+- **Compare when:** Reading tools depend on the purchased edition.
+- **Strengths:** Magnification-centered access with adjustable visual tracking and contrast.
+- **Limitations:** Reading tools depend on the purchased edition.; Users needing comprehensive nonvisual navigation should also compare a full screen reader.
+- **Maintenance:** active — Official downloads list a November 2026 release. ([evidence](https://support.freedomscientific.com/Downloads/ZoomText))
+- [Official project](https://vispero.com/zoomtext-screen-magnifier-software/) · [Official installation / downloads](https://support.freedomscientific.com/Downloads/ZoomText)
+- **Sources:** [Official documentation](https://vispero.com/zoomtext-screen-magnifier-software/) (2026-11-15; identity, features, platforms, pricing); [Official documentation](https://support.freedomscientific.com/Downloads/ZoomText) (2026-11-15; downloads, maintenance)
+
+## Screen readers
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=productivity%2Fscreen-readers)
+
+### JAWS
+
+A Windows screen reader providing speech and refreshable-braille access to desktop applications and web content.
+
+- **Platforms:** Windows. **License:** Commercial license; full license terms not independently reviewed. **Pricing model:** paid.
+- **Pick for:** Windows accessibility workflows requiring vendor training and commercial support options.
+- **Compare when:** Compatibility depends on application accessibility and the selected braille hardware.
+- **Strengths:** Windows accessibility workflows requiring vendor training and commercial support options.
+- **Limitations:** Compatibility depends on application accessibility and the selected braille hardware.; Licensing and deployment terms vary; evaluate the trial with the actual applications used.
+- **Maintenance:** active — Official downloads list JAWS 2027 in November 2026. ([evidence](https://support.freedomscientific.com/Downloads/JAWS))
+- [Official project](https://vispero.com/jaws-screen-reader-software/) · [Official installation / downloads](https://support.freedomscientific.com/Downloads/JAWS)
+- **Sources:** [Official documentation](https://vispero.com/jaws-screen-reader-software/) (2026-11-15; identity, features, pricing); [Official documentation](https://support.freedomscientific.com/Downloads/JAWS) (2026-11-15; downloads, maintenance); [Official documentation](https://support.freedomscientific.com/Downloads/JAWS/JAWS-System-Requirements) (2026-11-15; platforms)
+
 ## Spaced repetition learning
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=productivity%2Fspaced-repetition)
 
 ### Anki
 
@@ -883,8 +1725,23 @@ Flashcard application that schedules reviews using spaced repetition.
 - [Official project](https://apps.ankiweb.net/) · [Official installation / downloads](https://apps.ankiweb.net/#downloads) · [Repository](https://github.com/ankitects/anki)
 - **Sources:** [Official project documentation](https://apps.ankiweb.net/) (2026-11-14; identity, features, platforms, pricing); [Official project README](https://raw.githubusercontent.com/ankitects/anki/HEAD/README.md) (2026-11-14; identity, features); [Upstream license terms](https://raw.githubusercontent.com/ankitects/anki/HEAD/LICENSE) (2026-11-14; license); [Official installation and download information](https://apps.ankiweb.net/#downloads) (2026-11-14; identity, downloads, platforms, pricing)
 
-## Speech Synthesis
+## Text-to-speech synthesis
 
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=productivity%2Fspeech-synthesis)
+
+### Balabolka
+
+Read documents and clipboard text aloud using installed Windows speech voices and save spoken output to audio files.
+
+- **Platforms:** Windows. **License:** Proprietary; free noncommercial use, paid commercial license. **Pricing model:** mixed.
+- **Pricing details:** Free for noncommercial use only. Commercial organizations and commercial audio use require the relevant application and voice rights.
+- **Pick for:** Windows document narration with existing SAPI-compatible voices.
+- **Compare when:** Commercial use requires a separate license, including paid use of generated audio.
+- **Strengths:** Windows document narration with existing SAPI-compatible voices.
+- **Limitations:** Commercial use requires a separate license, including paid use of generated audio.; Voice licenses and availability are separate from the application license.
+- **Maintenance:** unverified — Official distribution and capability documentation reviewed; a dated maintenance conclusion was not established.
+- [Official project](https://www.cross-plus-a.com/balabolka.htm) · [Official installation / downloads](https://www.cross-plus-a.com/balabolka.htm)
+- **Sources:** [Official documentation](https://www.cross-plus-a.com/balabolka.htm) (2026-11-15; identity, features, downloads); [Official documentation](https://www.cross-plus-a.com/bfaq.htm) (2026-11-15; platforms, features); [Official documentation reviewed for this claim](https://www.cross-plus-a.com/license.htm) (2026-11-16; license, pricing)
 ### eSpeak NG
 
 Compact speech-synthesis engine with command-line, library and Windows speech-interface options.
@@ -898,9 +1755,63 @@ Compact speech-synthesis engine with command-line, library and Windows speech-in
 - **Maintenance:** unverified — Official product and distribution information was reviewed, but a sufficiently recent dated maintenance signal was not established. This does not imply that the project is discontinued.
 - [Official project](https://github.com/espeak-ng/espeak-ng) · [Official installation / downloads](https://github.com/espeak-ng/espeak-ng/releases) · [Repository](https://github.com/espeak-ng/espeak-ng)
 - **Sources:** [Official product documentation](https://github.com/espeak-ng/espeak-ng) (2026-11-14; features, identity); [Official upstream README](https://raw.githubusercontent.com/espeak-ng/espeak-ng/HEAD/README.md) (2026-11-14; features, identity, license, platforms); [Official upstream license text](https://raw.githubusercontent.com/espeak-ng/espeak-ng/HEAD/COPYING) (2026-11-14; license); [Official download and distribution documentation](https://github.com/espeak-ng/espeak-ng/releases) (2026-11-14; downloads)
+### Speech Note
 
-## Task Management
+A desktop interface for local speech recognition, speech synthesis and text translation using downloadable language models.
 
+- **Platforms:** Linux. **License:** Mozilla Public License 2.0; models and dependencies have separate terms. **Pricing model:** unknown.
+- **Pick for:** Linux speech workflows that can run locally after the necessary models are downloaded.
+- **Compare when:** Model downloads, disk space and hardware requirements vary by selected engine.
+- **Strengths:** Linux speech workflows that can run locally after the necessary models are downloaded.
+- **Limitations:** Model downloads, disk space and hardware requirements vary by selected engine.; Model licensing is separate from the application, and output quality depends on language and model.
+- **Maintenance:** unverified — Official distribution and capability documentation reviewed; a dated maintenance conclusion was not established.
+- [Official project](https://github.com/mkiol/dsnote) · [Official installation / downloads](https://github.com/mkiol/dsnote) · [Repository](https://github.com/mkiol/dsnote)
+- **Sources:** [Official documentation](https://github.com/mkiol/dsnote/blob/main/README.md) (2026-11-15; identity, features, license, platforms, downloads)
+### TextAloud
+
+Windows text-to-speech reader for documents, selected text and audio-file creation, with optional separately licensed voices.
+
+- **Platforms:** Windows. **License:** Commercial single-user software license; optional voice and generated-audio rights are separate. **Pricing model:** paid.
+- **Pick for:** Fits listening to documents and proofreading text on Windows
+- **Compare when:** The application purchase does not grant unrestricted rights to every voice or generated audio file
+- **Strengths:** Fits listening to documents and proofreading text on Windows; Can use the resident Windows voice before buying optional voices
+- **Limitations:** The application purchase does not grant unrestricted rights to every voice or generated audio file; The cited Acapela offering allows personal use of generated audio and works only in NextUp products; commercial use needs separate terms; Browser and Word extensions should be checked against the current host versions
+- **Maintenance:** unverified — Official features and distribution routes were reviewed; a dated maintenance commitment was not established.
+- [Official project](https://nextup.com/TextAloud/) · [Official installation / downloads](https://nextup.com/download.html)
+- **Sources:** [Official documentation reviewed for this claim](https://nextup.com/TextAloud/) (2026-11-16; identity, features, platforms); [Official documentation reviewed for this claim](https://nextup.com/download.html) (2026-11-16; downloads); [Official documentation reviewed for this claim](https://nextup.com/TextAloud/pricing.html) (2026-11-16; license, pricing); [Official documentation reviewed for this claim](https://nextup.com/acapela/) (2026-11-16; license)
+
+## Task management
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=productivity%2Ftask-management)
+
+### Task Coach
+
+Local desktop task manager for nested tasks, effort tracking, categories and notes.
+
+- **Platforms:** Windows, macOS, Linux. **License:** GPL-3.0. **Pricing model:** free.
+- **Compatibility details:** Current official README lists Windows installers, macOS Intel/Apple Silicon packages and Linux packages.
+- **Pricing details:** Task Coach is explicitly free; current packages are available from the official GitHub releases.
+- **Pick for:** A local GUI is preferable for nested task lists and effort records.
+- **Compare when:** Use Vikunja for a shared service or Taskwarrior for shell automation.
+- **Strengths:** Keeps structured personal work in a desktop application; Task decomposition and effort logs suit detailed individual planning
+- **Limitations:** Current packages require reading platform installation notes; Older project homepage content can point to obsolete releases
+- **Maintenance:** active — Official release v2.0.3.11 is dated 2026-11-11; installation and performance were not independently tested. ([evidence](https://github.com/taskcoach/taskcoach/releases/tag/v2.0.3.11))
+- [Official project](https://www.taskcoach.org/) · [Official installation / downloads](https://github.com/taskcoach/taskcoach/releases/latest) · [Repository](https://github.com/taskcoach/taskcoach)
+- **Sources:** [Official product overview](https://www.taskcoach.org/) (2026-11-15; identity, features); [Official project documentation](https://raw.githubusercontent.com/taskcoach/taskcoach/master/README.md) (2026-11-15; identity, features, downloads, license, platforms); [Distribution and pricing qualification](https://taskcoach.org/) (2026-11-15; pricing); [Official download or installation entry point](https://github.com/taskcoach/taskcoach/releases/latest) (2026-11-15; downloads); [Official dated release](https://github.com/taskcoach/taskcoach/releases/tag/v2.0.3.11) (2026-11-15; maintenance, downloads)
+### Taskwarrior
+
+Command-line task tracking with projects, tags, filters and an extensible hook ecosystem.
+
+- **Platforms:** Linux, macOS, Windows. **License:** MIT. **Pricing model:** free.
+- **Compatibility details:** Official downloads cover Linux, macOS and Windows routes; inspect current package prerequisites rather than assuming identical native packaging.
+- **Pricing details:** The project offers free source and distribution packages; sponsorship is optional.
+- **Pick for:** Tasks should be created, filtered and automated from a terminal.
+- **Compare when:** Use a graphical application for visual scheduling or shared boards.
+- **Strengths:** Fits shell scripts and keyboard workflows; Plain commands can integrate task tracking with other local tools
+- **Limitations:** Command syntax and configuration take learning; Windows packaging requires following the current platform route
+- **Maintenance:** active — Official release v3.5.0 is dated 2026-08-16; installation and performance were not independently tested. ([evidence](https://github.com/GothenburgBitFactory/taskwarrior/releases/tag/v3.5.0))
+- [Official project](https://taskwarrior.org/) · [Official installation / downloads](https://taskwarrior.org/download/) · [Repository](https://github.com/GothenburgBitFactory/taskwarrior)
+- **Sources:** [Official product overview](https://taskwarrior.org/) (2026-11-15; identity, features, pricing); [Official project documentation](https://raw.githubusercontent.com/GothenburgBitFactory/taskwarrior/develop/README.md) (2026-11-15; identity, features, downloads); [Official licensing terms](https://raw.githubusercontent.com/GothenburgBitFactory/taskwarrior/develop/LICENSE) (2026-11-15; license); [Documented deployment and platform scope](https://taskwarrior.org/download/) (2026-11-15; platforms, downloads); [Official dated release](https://github.com/GothenburgBitFactory/taskwarrior/releases/tag/v3.5.0) (2026-11-15; maintenance, downloads)
 ### Todoist
 
 Task and project manager with quick capture, recurring due dates and synchronized personal or team lists.
@@ -913,8 +1824,24 @@ Task and project manager with quick capture, recurring due dates and synchronize
 - **Maintenance:** unverified — Current product and distribution documentation reviewed; a dated release history was not independently established for this entry.
 - [Official project](https://www.todoist.com/) · [Official installation / downloads](https://www.todoist.com/downloads)
 - **Sources:** [Official Todoist feature and plan matrix](https://www.todoist.com/pricing) (2026-11-14; identity, features, pricing); [Official desktop and browser downloads](https://www.todoist.com/downloads) (2026-11-14; platforms, downloads); [Official Todoist license terms](https://www.todoist.com/terms-of-service) (2026-11-14; license)
+### Vikunja
+
+Self-hostable task management with lists, Kanban, tables and Gantt views.
+
+- **Platforms:** Web. **License:** AGPL-3.0-or-later core; GPL-3.0-or-later desktop wrapper. **Pricing model:** freemium.
+- **Compatibility details:** Reviewed browser application and server installation; desktop-wrapper OS claims are intentionally not inferred.
+- **Pricing details:** The core is free to self-host; managed cloud and optional Pro features are commercial.
+- **Pick for:** You want a self-hostable task manager with several views of the same work.
+- **Compare when:** Use a scheduler for resource allocation or Taskwarrior for a command-line workflow.
+- **Strengths:** Works for personal lists that later become shared projects; Data can remain on a user-operated instance
+- **Limitations:** Hosting requires maintenance; Pro features such as administration and time tracking have separate terms
+- **Maintenance:** active — Official release v2.8.0 is dated 2026-11-05; installation and performance were not independently tested. ([evidence](https://github.com/go-vikunja/vikunja/releases/tag/v2.8.0))
+- [Official project](https://vikunja.io/) · [Official installation / downloads](https://vikunja.io/install) · [Repository](https://github.com/go-vikunja/vikunja)
+- **Sources:** [Official product overview](https://vikunja.io/) (2026-11-15; identity, features, pricing); [Official project documentation](https://raw.githubusercontent.com/go-vikunja/vikunja/main/README.md) (2026-11-15; identity, features, downloads, platforms); [Official licensing terms](https://raw.githubusercontent.com/go-vikunja/vikunja/main/LICENSE) (2026-11-15; license); [Official download or installation entry point](https://vikunja.io/install) (2026-11-15; downloads); [Official dated release](https://github.com/go-vikunja/vikunja/releases/tag/v2.8.0) (2026-11-15; maintenance, downloads)
 
 ## Task planning and focus timers
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=productivity%2Ftasks-time)
 
 ### Super Productivity
 
@@ -929,7 +1856,53 @@ Personal task manager combining planning, time tracking and focus tools.
 - [Official project](https://super-productivity.com/) · [Official installation / downloads](https://super-productivity.com/download/) · [Repository](https://github.com/super-productivity/super-productivity)
 - **Sources:** [Official project documentation](https://super-productivity.com/) (2026-11-14; identity, features, platforms, pricing); [Official project README](https://raw.githubusercontent.com/johannesjo/super-productivity/HEAD/README.md) (2026-11-14; identity, features, license, platforms); [Upstream license terms](https://raw.githubusercontent.com/johannesjo/super-productivity/HEAD/LICENSE) (2026-11-14; license); [Official installation and download information](https://super-productivity.com/download/) (2026-11-14; identity, downloads, platforms, pricing); [Official repository activity feed](https://github.com/johannesjo/super-productivity/commits/HEAD.atom) (2026-11-14; maintenance)
 
+## Team chat
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=productivity%2Fteam-chat)
+
+### Mattermost Desktop
+
+Desktop client for one or more Mattermost workspaces, with notifications, deep links and managed deployment settings.
+
+- **Platforms:** Windows, macOS, Linux. **License:** Apache-2.0 desktop client; server editions are separately licensed. **Pricing model:** unknown.
+- **Pricing details:** This record covers the desktop client. Server licensing, production entitlements and support must be checked separately.
+- **Pick for:** Choose for an existing Mattermost deployment that needs desktop integration and managed settings.
+- **Compare when:** Compare complete server licensing and administration requirements when selecting a new team-chat platform.
+- **Strengths:** Keeps several organization workspaces accessible without juggling browser tabs.; Administrators can preconfigure server URLs and deployment settings.
+- **Limitations:** A compatible Mattermost server and account are required; the desktop client does not provide a server.; The server download currently defaults to a limited evaluation edition, so desktop open-source status does not establish unrestricted server entitlements.
+- **Maintenance:** active — Official release feed contains 6.5.0-nightly.20261113 with an updated timestamp of 2026-11-13. This is release-channel activity evidence, not proof of a stable build, installed compatibility or security testing. ([evidence](https://github.com/mattermost/desktop/releases.atom))
+- [Official project](https://mattermost.com/download/) · [Official installation / downloads](https://mattermost.com/download/) · [Repository](https://github.com/mattermost/desktop)
+- **Sources:** [Official documentation and distribution evidence](https://github.com/mattermost/desktop) (2026-11-15; identity, features, license, platforms); [Official documentation and distribution evidence](https://mattermost.com/download/) (2026-11-15; downloads, platforms, features); [Official release or lifecycle evidence](https://github.com/mattermost/desktop/releases.atom) (2026-11-15; maintenance)
+### Rocket.Chat Desktop
+
+Desktop client for Rocket.Chat workspaces with multiple-server access, notifications and enterprise deployment controls.
+
+- **Platforms:** Windows, macOS, Linux. **License:** MIT desktop client; Rocket.Chat server products are separately licensed. **Pricing model:** unknown.
+- **Pricing details:** Desktop client and server subscriptions are separate. The client license does not determine hosting or server feature costs.
+- **Pick for:** Choose for users of an existing Rocket.Chat server who want desktop notifications and managed configuration.
+- **Compare when:** Compare server edition, maintenance and infrastructure needs before treating the free client source as the whole deployment.
+- **Strengths:** Connects directly to an organization’s chosen Rocket.Chat server.; Deployment settings let administrators preconfigure servers and update behavior.
+- **Limitations:** Users need a server address and account; installing the desktop app does not create a collaboration service.; Server version, edition and configuration determine available channels, calls and enterprise features.
+- **Maintenance:** active — Official release feed contains 4.19.3 with an updated timestamp of 2026-11-12. This is release-channel activity evidence, not proof of a stable build, installed compatibility or security testing. ([evidence](https://github.com/RocketChat/Rocket.Chat.Electron/releases.atom))
+- [Official project](https://www.rocket.chat/download-apps) · [Official installation / downloads](https://www.rocket.chat/download-apps) · [Repository](https://github.com/RocketChat/Rocket.Chat.Electron)
+- **Sources:** [Official documentation and distribution evidence](https://www.rocket.chat/download-apps) (2026-11-15; identity, features, platforms, downloads); [Official documentation and distribution evidence](https://github.com/RocketChat/Rocket.Chat.Electron) (2026-11-15; identity, features, license, platforms, downloads); [Official release or lifecycle evidence](https://github.com/RocketChat/Rocket.Chat.Electron/releases.atom) (2026-11-15; maintenance)
+### Zulip Desktop
+
+Desktop client for Zulip’s topic-organized team conversations, with multiple organizations and integrated notifications.
+
+- **Platforms:** Windows, macOS, Linux. **License:** Apache-2.0 desktop client. **Pricing model:** freemium.
+- **Pricing details:** Desktop access is included in free and paid deployments; hosted history, support and some server/mobile services vary by plan.
+- **Pick for:** Choose for asynchronous team discussions where topic structure is valuable.
+- **Compare when:** Compare simpler channel chat when participants are unlikely to maintain topics, and check cloud/self-hosted plan differences.
+- **Strengths:** Topic organization helps teams follow several discussions without treating every channel as one long stream.; A single desktop client can switch among hosted and self-hosted Zulip organizations.
+- **Limitations:** Users must learn the channel-and-topic conversation model for it to stay organized.; Cloud search history and some support or notification entitlements vary by plan and hosting arrangement.
+- **Maintenance:** active — Official release feed contains v5.14.2 with an updated timestamp of 2026-10-31. This is release-channel activity evidence, not proof of a stable build, installed compatibility or security testing. ([evidence](https://github.com/zulip/zulip-desktop/releases.atom))
+- [Official project](https://zulip.com/apps/) · [Official installation / downloads](https://zulip.com/apps/) · [Repository](https://github.com/zulip/zulip-desktop)
+- **Sources:** [Official documentation and distribution evidence](https://github.com/zulip/zulip-desktop) (2026-11-15; identity, features, license, platforms); [Official documentation and distribution evidence](https://zulip.com/help/desktop-app-install-guide) (2026-11-15; downloads, platforms); [Official documentation and distribution evidence](https://zulip.com/plans/) (2026-11-15; pricing, features); [Official release or lifecycle evidence](https://github.com/zulip/zulip-desktop/releases.atom) (2026-11-15; maintenance)
+
 ## Text expansion
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=productivity%2Ftext-expansion)
 
 ### Beeftext
 
@@ -960,6 +1933,8 @@ Text expander replacing typed triggers with snippets, dynamic values, or generat
 
 ## Time tracking
 
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=productivity%2Ftime-tracking)
+
 ### ActivityWatch
 
 Local activity-tracking application for reviewing time spent in applications and websites.
@@ -972,8 +1947,52 @@ Local activity-tracking application for reviewing time spent in applications and
 - **Maintenance:** active — Official repository commit activity observed on 2026-11-13 (UTC). Activity is not a runtime or platform-compatibility test. ([evidence](https://github.com/ActivityWatch/activitywatch/commit/b1dbd358ef6e284baa33aa075a885716538f1e1a))
 - [Official project](https://activitywatch.net/) · [Official installation / downloads](https://activitywatch.net/downloads/) · [Repository](https://github.com/ActivityWatch/activitywatch)
 - **Sources:** [Official project documentation](https://activitywatch.net/) (2026-11-14; identity, features, platforms, license, pricing); [Official project README](https://raw.githubusercontent.com/ActivityWatch/activitywatch/HEAD/README.md) (2026-11-14; identity, features, platforms); [Upstream license terms](https://raw.githubusercontent.com/ActivityWatch/activitywatch/HEAD/LICENSE.txt) (2026-11-14; license); [Official installation and download information](https://activitywatch.net/downloads/) (2026-11-14; identity, downloads, platforms, pricing); [Official repository activity feed](https://github.com/ActivityWatch/activitywatch/commits/HEAD.atom) (2026-11-14; maintenance)
+### Kimai
 
-## Translation
+Team time tracking with customer/project rates, timesheets, reports and invoicing workflows.
+
+- **Platforms:** Web. **License:** AGPL-3.0 core; paid plugins have separate terms. **Pricing model:** freemium.
+- **Compatibility details:** Browser application with server-side PHP/database deployment.
+- **Pricing details:** Self-hosted core is free; cloud plans, support and some plugins are paid.
+- **Pick for:** A team needs reviewed time entries and customer billing reports.
+- **Compare when:** Choose TimeTagger for personal interactive tracking or ActivityWatch for automatic activity observation.
+- **Strengths:** Connects time records to customer billing; Self-hosting supports teams that control their own data
+- **Limitations:** Requires PHP, database and update administration; Advanced plugins or hosted service can add cost
+- **Maintenance:** active — Official release 2.72.0 is dated 2026-11-13; installation and performance were not independently tested. ([evidence](https://github.com/kimai/kimai/releases/tag/2.72.0))
+- [Official project](https://www.kimai.org/) · [Official installation / downloads](https://www.kimai.org/en/download.html) · [Repository](https://github.com/kimai/kimai)
+- **Sources:** [Official product overview](https://www.kimai.org/) (2026-11-15; identity, features); [Official project documentation](https://raw.githubusercontent.com/kimai/kimai/main/README.md) (2026-11-15; identity, features, downloads, platforms); [Official licensing terms](https://raw.githubusercontent.com/kimai/kimai/main/LICENSE) (2026-11-15; license); [Distribution and pricing qualification](https://www.kimai.org/en/pricing) (2026-11-15; pricing); [Official download or installation entry point](https://www.kimai.org/en/download.html) (2026-11-15; downloads); [Official dated release](https://github.com/kimai/kimai/releases/tag/2.72.0) (2026-11-15; maintenance, downloads)
+### TimeTagger
+
+Personal time tracking built around tags, an editable timeline and exportable reports.
+
+- **Platforms:** Web. **License:** GPL-3.0. **Pricing model:** freemium.
+- **Compatibility details:** Web UI backed by a Python service that may run locally or on a server.
+- **Pricing details:** Self-hosting is explicitly free; the developer offers paid hosted subscriptions and a lifetime service plan.
+- **Pick for:** A freelancer wants a visual timeline and flexible tag-based time reporting.
+- **Compare when:** Use Kimai for team approvals or Timewarrior for a pure CLI.
+- **Strengths:** Tags allow overlapping ways to analyze work; Can run locally while retaining a visual interface
+- **Limitations:** Team approval and enterprise billing workflows are outside its focus; Remote self-hosting needs authentication and backup configuration
+- **Maintenance:** active — Official release v26.1.3 is dated 2026-02-02; installation and performance were not independently tested. ([evidence](https://github.com/almarklein/timetagger/releases/tag/v26.1.3))
+- [Official project](https://timetagger.app/) · [Official installation / downloads](https://github.com/almarklein/timetagger) · [Repository](https://github.com/almarklein/timetagger)
+- **Sources:** [Official product overview](https://timetagger.app/) (2026-11-15; identity, features, pricing); [Official project documentation](https://raw.githubusercontent.com/almarklein/timetagger/main/README.md) (2026-11-15; identity, features, downloads, platforms); [Official licensing terms](https://raw.githubusercontent.com/almarklein/timetagger/main/LICENSE) (2026-11-15; license); [Official download or installation entry point](https://github.com/almarklein/timetagger) (2026-11-15; downloads); [Official dated release](https://github.com/almarklein/timetagger/releases/tag/v26.1.3) (2026-11-15; maintenance, downloads)
+### Timewarrior
+
+CLI time tracking with stopwatch commands, backfilled intervals and reports.
+
+- **Platforms:** Linux, macOS. **License:** MIT. **Pricing model:** free.
+- **Compatibility details:** Official installation instructions establish Linux and macOS routes; Windows compatibility is not inferred.
+- **Pricing details:** Free software with public source archives and documented distribution packages.
+- **Pick for:** You want local time records controlled by terminal commands.
+- **Compare when:** Use Kimai for team billing or TimeTagger for a visual timeline.
+- **Strengths:** Works directly in shell-driven workflows; Can correct historical intervals instead of requiring live timers
+- **Limitations:** Command-line interface needs learning; Team approvals and invoicing require other tools
+- **Maintenance:** active — Official release v1.10.0 is dated 2026-08-02; installation and performance were not independently tested. ([evidence](https://github.com/GothenburgBitFactory/timewarrior/releases/tag/v1.10.0))
+- [Official project](https://timewarrior.net/) · [Official installation / downloads](https://timewarrior.net/docs/install/) · [Repository](https://github.com/GothenburgBitFactory/timewarrior)
+- **Sources:** [Official product overview](https://timewarrior.net/) (2026-11-15; identity, features, pricing); [Official project documentation](https://raw.githubusercontent.com/GothenburgBitFactory/timewarrior/develop/README.md) (2026-11-15; identity, features, downloads); [Official licensing terms](https://raw.githubusercontent.com/GothenburgBitFactory/timewarrior/develop/LICENSE) (2026-11-15; license); [Documented deployment and platform scope](https://timewarrior.net/docs/install/) (2026-11-15; platforms, downloads); [Official dated release](https://github.com/GothenburgBitFactory/timewarrior/releases/tag/v1.10.0) (2026-11-15; maintenance, downloads)
+
+## Translation and localization
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=productivity%2Ftranslation)
 
 ### Lokalize
 
@@ -1016,6 +2035,8 @@ Translation editor focused on gettext catalogs and related application-localizat
 
 ## Document typesetting
 
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=productivity%2Ftypesetting)
+
 ### Typst
 
 Markup-based typesetting system with a local compiler and an optional collaborative web editor.
@@ -1028,3 +2049,185 @@ Markup-based typesetting system with a local compiler and an optional collaborat
 - **Maintenance:** active — Official repository commit activity observed on 2026-10-28 (UTC). Activity is not a runtime or platform-compatibility test. ([evidence](https://github.com/typst/typst/commit/84cca406aafe7f830ed3f37f1cc6f0c8b6b65a03))
 - [Official project](https://typst.app/) · [Official installation / downloads](https://github.com/typst/typst/releases) · [Repository](https://github.com/typst/typst)
 - **Sources:** [Official project documentation](https://typst.app/) (2026-11-14; identity, features, pricing); [Official project README](https://raw.githubusercontent.com/typst/typst/HEAD/README.md) (2026-11-14; identity, features, platforms); [Upstream license terms](https://raw.githubusercontent.com/typst/typst/HEAD/LICENSE) (2026-11-14; license); [Official release listing](https://github.com/typst/typst/releases) (2026-11-14; identity, downloads); [Official repository activity feed](https://github.com/typst/typst/commits/HEAD.atom) (2026-11-14; maintenance); [Official pricing or distribution documentation](https://typst.app/pricing/) (2026-11-14; pricing)
+
+## Video conferencing
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=productivity%2Fvideo-conferencing)
+
+### BigBlueButton
+
+Self-hosted virtual-classroom platform with multi-user whiteboards, breakout rooms, polling and learning analytics.
+
+- **Platforms:** Web, Linux. **License:** LGPL-3.0 project components; third-party component licenses apply. **Pricing model:** unknown.
+- **Compatibility details:** Browser client; documented production server is dedicated Ubuntu 24.04. It is not a standalone Windows/macOS conferencing server.
+- **Pricing details:** Open-source deployment and commercial hosting are distinct; this review did not establish a universal hosting or packaged-distribution price.
+- **Pick for:** Choose for interactive teaching when you can operate or purchase a supported classroom deployment.
+- **Compare when:** Compare simpler meeting platforms when breakout teaching tools and LMS integration are unnecessary.
+- **Strengths:** Teaching tools combine lesson presentation with small-group work and quick understanding checks.; An organization can integrate its own virtual classroom into a learning-management system.
+- **Limitations:** Production deployment needs a dedicated supported Ubuntu server, substantial resources, DNS and certificates.; Hosting, upgrades and recordings require ongoing administration; the project does not make every commercial hosting plan free.
+- **Maintenance:** active — Official release feed contains v4.0.2 with an updated timestamp of 2026-11-06. This is release-channel activity evidence, not proof of a stable build, installed compatibility or security testing. ([evidence](https://github.com/bigbluebutton/bigbluebutton/releases.atom))
+- [Official project](https://bigbluebutton.org/) · [Official installation / downloads](https://docs.bigbluebutton.org/administration/install) · [Repository](https://github.com/bigbluebutton/bigbluebutton)
+- **Sources:** [Official documentation and distribution evidence](https://bigbluebutton.org/) (2026-11-15; identity, features); [Official documentation and distribution evidence](https://github.com/bigbluebutton/bigbluebutton) (2026-11-15; identity, features, license, platforms); [Official documentation and distribution evidence](https://bigbluebutton.org/open-source-project/open-source-license/) (2026-11-15; license); [Official documentation and distribution evidence](https://docs.bigbluebutton.org/administration/install) (2026-11-15; downloads, platforms, features); [Official release or lifecycle evidence](https://github.com/bigbluebutton/bigbluebutton/releases.atom) (2026-11-15; maintenance)
+### Cisco Webex
+
+Cisco meeting and collaboration client combining video meetings, messaging, screen sharing and optional business calling.
+
+- **Platforms:** Windows, macOS, Linux, Web. **License:** Proprietary Cisco General Terms and applicable offer terms. **Pricing model:** freemium.
+- **Pick for:** Choose when Cisco meetings, calling or room systems are already part of the workplace.
+- **Compare when:** Compare the actual host plan and required desktop features against Zoom or Teams before standardizing.
+- **Strengths:** Can combine meetings with Cisco-managed room and calling deployments.; Guest meeting attendance does not require every participant to buy a host license.
+- **Limitations:** Free hosting has a meeting-duration cap; additional host licenses are required for concurrent hosted meetings.; Browser and Linux capabilities do not necessarily match every desktop calling or enterprise feature.
+- **Maintenance:** unverified — Product documentation reviewed; a current dated release or lifecycle commitment has not been established for this record.
+- [Official project](https://www.webex.com/) · [Official installation / downloads](https://www.webex.com/downloads.html)
+- **Sources:** [Official documentation and distribution evidence](https://www.webex.com/) (2026-11-15; identity, features); [Official documentation and distribution evidence](https://www.webex.com/downloads.html) (2026-11-15; platforms, downloads); [Official documentation and distribution evidence](https://pricing.webex.com/us/en/) (2026-11-15; pricing, features, platforms); [Official documentation and distribution evidence](https://www.cisco.com/site/us/en/about/legal/contract-experience/index.html) (2026-11-15; license); [Official documentation and distribution evidence](https://www.cisco.com/c/dam/en_us/about/doing_business/legal/Cisco_General_Terms.pdf) (2026-11-15; license)
+### Jitsi Meet
+
+Browser-based video-conferencing platform available as a public service or a self-hosted deployment.
+
+- **Platforms:** Web, Linux. **License:** Apache-2.0 for Jitsi Meet; stack components have their own notices. **Pricing model:** free.
+- **Compatibility details:** Web meeting client; Linux is the documented server deployment. This record does not count unofficial desktop wrappers.
+- **Pricing details:** Public meeting use and open-source software are free; self-hosting resources and optional commercial JaaS are separate.
+- **Pick for:** Choose for browser meetings with an open deployment path and control over the host.
+- **Compare when:** Compare managed services when hosting operations are undesirable, or BigBlueButton for classroom-specific tools.
+- **Strengths:** Participants can join through a supported browser without deploying a desktop client.; Organizations can operate their own instance and configure access rules.
+- **Limitations:** The public meet.jit.si service currently requires a Google, Facebook or GitHub account to start a meeting.; Self-hosting needs DNS, TLS and network configuration; transport encryption is distinct from optional end-to-end encryption.
+- **Maintenance:** active — Official release feed contains 9646 with an updated timestamp of 2026-11-14. This is release-channel activity evidence, not proof of a stable build, installed compatibility or security testing. ([evidence](https://github.com/jitsi/jitsi-meet/releases.atom))
+- [Official project](https://jitsi.org/jitsi-meet/) · [Official installation / downloads](https://jitsi.github.io/handbook/docs/devops-guide/devops-guide-quickstart/) · [Repository](https://github.com/jitsi/jitsi-meet)
+- **Sources:** [Official documentation and distribution evidence](https://github.com/jitsi/jitsi-meet) (2026-11-15; identity, features, license, pricing, platforms); [Official documentation and distribution evidence](https://jitsi.github.io/handbook/docs/devops-guide/devops-guide-quickstart/) (2026-11-15; downloads, platforms, features); [Official documentation and distribution evidence](https://jitsi.org/security/) (2026-11-15; features); [Official release or lifecycle evidence](https://github.com/jitsi/jitsi-meet/releases.atom) (2026-11-15; maintenance)
+### Microsoft Teams
+
+Microsoft collaboration client for meetings, persistent channels, shared files and organization-managed calling.
+
+- **Platforms:** Windows, macOS, Web. **License:** Proprietary Microsoft software and service terms. **Pricing model:** freemium.
+- **Compatibility details:** Native Windows/macOS desktop clients; Linux access is through supported browsers or a PWA.
+- **Pricing details:** Free personal tier and paid business/enterprise subscriptions differ. Some Microsoft 365 bundles explicitly exclude Teams.
+- **Pick for:** Choose for an organization whose accounts and documents already live in Microsoft 365.
+- **Compare when:** Check exact Teams inclusion in the purchased plan and compare guest workflows before choosing it for a cross-organization community.
+- **Strengths:** Fits organizations already managing identity, files and collaboration in Microsoft 365.; Persistent channels keep shared context alongside scheduled meetings.
+- **Limitations:** Personal Free, business Teams and Microsoft 365 bundles have different limits and entitlements.; Linux uses the web client or PWA; the former native Linux desktop app is no longer supported.
+- **Maintenance:** unverified — Product documentation reviewed; a current dated release or lifecycle commitment has not been established for this record.
+- [Official project](https://www.microsoft.com/en-us/microsoft-teams/group-chat-software) · [Official installation / downloads](https://www.microsoft.com/en-us/microsoft-teams/download-app)
+- **Sources:** [Official documentation and distribution evidence](https://www.microsoft.com/en-us/microsoft-teams/group-chat-software) (2026-11-15; identity, features); [Official documentation and distribution evidence](https://www.microsoft.com/en-us/microsoft-teams/download-app) (2026-11-15; downloads, pricing, platforms); [Official documentation and distribution evidence](https://learn.microsoft.com/en-us/microsoftteams/teams-client-system-requirements) (2026-11-15; platforms); [Official documentation and distribution evidence](https://www.microsoft.com/en-us/servicesagreement) (2026-11-15; license)
+### Zoom Workplace
+
+Meeting and collaboration suite for scheduled video calls, screen sharing, chat and organization-managed conferencing.
+
+- **Platforms:** Windows, macOS, Linux, Web. **License:** Proprietary Zoom software and service terms. **Pricing model:** freemium.
+- **Pricing details:** Free Basic meetings have a duration limit; paid subscriptions and add-ons extend capabilities. No region-specific price is frozen in this record.
+- **Pick for:** Choose for scheduled meetings where participants already use Zoom and guest access is valuable.
+- **Compare when:** Compare self-hosted meeting platforms for infrastructure control or Teams/Webex for an existing organization ecosystem.
+- **Strengths:** A meeting-link workflow works for guest participants across supported desktop platforms.; The surrounding suite connects meetings with chat, scheduling and collaboration tools.
+- **Limitations:** The free Basic plan limits meeting duration; higher limits and some administration features require paid plans.; Feature availability varies by platform, account plan and administrator policy; a downloaded client does not unlock every service.
+- **Maintenance:** unverified — Product documentation reviewed; a current dated release or lifecycle commitment has not been established for this record.
+- [Official project](https://www.zoom.com/) · [Official installation / downloads](https://zoom.us/download)
+- **Sources:** [Official documentation and distribution evidence](https://www.zoom.com/) (2026-11-15; identity, features); [Official documentation and distribution evidence](https://www.zoom.com/en/products/virtual-meetings/) (2026-11-15; features, pricing); [Official documentation and distribution evidence](https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0060748) (2026-11-15; platforms); [Official documentation and distribution evidence](https://zoom.us/download) (2026-11-15; downloads); [Official documentation and distribution evidence](https://www.zoom.com/en/trust/terms/) (2026-11-15; license)
+
+## Voice chat
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=productivity%2Fvoice-chat)
+
+### Discord
+
+Hosted community platform combining persistent text channels, drop-in voice, video, streaming and integrations.
+
+- **Platforms:** Windows, macOS, Linux, Web. **License:** Proprietary Discord client and service terms. **Pricing model:** freemium.
+- **Pricing details:** Core service is free; optional Nitro subscriptions, boosts and third-party purchases have separate costs.
+- **Pick for:** Choose for a hosted community that wants text, voice and activities in one familiar service.
+- **Compare when:** Compare Mumble or Matrix when independently operated infrastructure is a requirement.
+- **Strengths:** Persistent channels let a community move between asynchronous text and live voice.; Integrated discovery, game presence and moderation extensions suit established online communities.
+- **Limitations:** Accounts, communities and availability depend on Discord’s hosted service rather than a self-hosted server.; Nitro and boosts gate some upload, streaming and customization capabilities.
+- **Maintenance:** unverified — Product documentation reviewed; a current dated release or lifecycle commitment has not been established for this record.
+- [Official project](https://discord.com/) · [Official installation / downloads](https://discord.com/download)
+- **Sources:** [Official documentation and distribution evidence](https://discord.com/) (2026-11-15; identity, features, platforms); [Official documentation and distribution evidence](https://discord.com/download) (2026-11-15; downloads, platforms); [Official documentation and distribution evidence](https://discord.com/nitro) (2026-11-15; pricing, features); [Official documentation and distribution evidence](https://discord.com/terms) (2026-11-15; license, pricing)
+### Mumble
+
+Open-source voice-chat system with self-hosted servers, permissioned channels, positional audio and multichannel recording.
+
+- **Platforms:** Windows, macOS, Linux, FreeBSD. **License:** BSD-3-Clause. **Pricing model:** free.
+- **Pick for:** Choose for a voice community that wants to run its own server and manage detailed channel permissions.
+- **Compare when:** Compare Discord for hosted community discovery or meeting platforms for presentation-centered collaboration.
+- **Strengths:** Server operators control channels, permissions and authentication integrations.; Voice-focused features suit gaming groups, community nets and multitrack podcast capture.
+- **Limitations:** Users need access to a Mumble server; hosting and administration are separate responsibilities.; Overlay and positional-audio support depend on platform and game; macOS stable builds differ from the newest cross-platform release.
+- **Maintenance:** active — Official release feed contains v1.6.1001 (1.6.x RC 2) with an updated timestamp of 2026-10-25. This is release-channel activity evidence, not proof of a stable build, installed compatibility or security testing. ([evidence](https://github.com/mumble-voip/mumble/releases.atom))
+- [Official project](https://www.mumble.info/) · [Official installation / downloads](https://www.mumble.info/downloads/) · [Repository](https://github.com/mumble-voip/mumble)
+- **Sources:** [Official documentation and distribution evidence](https://www.mumble.info/) (2026-11-15; identity, features, pricing); [Official documentation and distribution evidence](https://github.com/mumble-voip/mumble) (2026-11-15; identity, platforms); [Official documentation and distribution evidence](https://raw.githubusercontent.com/mumble-voip/mumble/master/LICENSE) (2026-11-15; license); [Official documentation and distribution evidence](https://www.mumble.info/downloads/) (2026-11-15; downloads, platforms, maintenance); [Official release or lifecycle evidence](https://github.com/mumble-voip/mumble/releases.atom) (2026-11-15; maintenance)
+### TeamSpeak
+
+Voice and community client built around managed channels and self-hosted or commercially hosted TeamSpeak servers.
+
+- **Platforms:** Windows, macOS, Linux. **License:** Proprietary TeamSpeak license terms. **Pricing model:** unknown.
+- **Compatibility details:** TeamSpeak 6 is beta; the download page also retains legacy TeamSpeak 3 clients.
+- **Pick for:** Choose when your community wants TeamSpeak server control and channel permissions.
+- **Compare when:** Compare Mumble for an open-source stack, or Discord for a provider-hosted community; check TeamSpeak 6 beta maturity first.
+- **Strengths:** Channel and permission controls suit organized gaming communities and coordinated groups.; Server owners can choose their own hosting rather than relying solely on a public community platform.
+- **Limitations:** The new TeamSpeak 6 client is currently beta; legacy TeamSpeak 3 is in a phased transition.; Server licensing, commercial hosting and client access are separate arrangements that need checking for the intended community size.
+- **Maintenance:** unverified — Product documentation reviewed; a current dated release or lifecycle commitment has not been established for this record.
+- [Official project](https://www.teamspeak.com/) · [Official installation / downloads](https://www.teamspeak.com/en/downloads)
+- **Sources:** [Official documentation and distribution evidence](https://www.teamspeak.com/) (2026-11-15; identity, features); [Official documentation and distribution evidence](https://www.teamspeak.com/en/downloads) (2026-11-15; platforms, downloads); [Official documentation and distribution evidence](https://www.teamspeak.com/en/features/licensing/) (2026-11-15; pricing, features); [Official documentation and distribution evidence](https://www.teamspeak.com/en/terms-and-conditions/) (2026-11-15; license, features)
+
+## XMPP messaging clients
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=productivity%2Fxmpp-clients)
+
+### Dino
+
+Linux XMPP messenger focused on a clean chat interface, encrypted conversations and interoperable calls.
+
+- **Platforms:** Linux. **License:** GPL-3.0-or-later. **Pricing model:** unknown.
+- **Pick for:** Choose for an uncluttered Linux XMPP client with calls and file sharing.
+- **Compare when:** Compare Gajim or Psi for other platforms and additional account-management controls.
+- **Strengths:** A focused GTK interface suits Linux users who want XMPP without a large configuration surface.; Supports standardized XMPP messaging and calls with other compatible clients.
+- **Limitations:** Official desktop distribution targets Linux; no supported Windows or macOS installer was established.; Encryption must be enabled for relevant conversations and depends on compatible peer capabilities.
+- **Maintenance:** active — Official release feed contains v0.5.1 with an updated timestamp of 2025-11-15. This is release-channel activity evidence, not proof of a stable build, installed compatibility or security testing. ([evidence](https://github.com/dino/dino/releases.atom))
+- [Official project](https://dino.im/) · [Official installation / downloads](https://dino.im/#download) · [Repository](https://github.com/dino/dino)
+- **Sources:** [Official documentation and distribution evidence](https://dino.im/) (2026-11-15; identity, features, platforms, downloads); [Official documentation and distribution evidence](https://github.com/dino/dino) (2026-11-15; identity, features, license, platforms); [Official release or lifecycle evidence](https://github.com/dino/dino/releases.atom) (2026-11-15; maintenance)
+### Gajim
+
+Desktop XMPP messenger with encrypted conversations, groups, file sharing and synchronized chat history.
+
+- **Platforms:** Windows, macOS, Linux. **License:** GPL-3.0. **Pricing model:** free.
+- **Pick for:** Choose for a desktop XMPP workflow with modern media and encrypted chat features.
+- **Compare when:** Check server extensions and target architecture when migrating a group.
+- **Strengths:** Provider choice and XMPP interoperability avoid tying all contacts to a single chat service.; Current official Windows, Apple Silicon macOS and Linux installation paths are documented.
+- **Limitations:** An XMPP account and server with the required extensions are needed for the intended feature set.; Native macOS distribution currently emphasizes Apple Silicon; check package availability for older Intel Macs.
+- **Maintenance:** unverified — Product documentation reviewed; a current dated release or lifecycle commitment has not been established for this record.
+- [Official project](https://gajim.org/) · [Official installation / downloads](https://gajim.org/download/) · [Repository](https://gitlab.com/gajim/gajim)
+- **Sources:** [Official documentation and distribution evidence](https://gajim.org/) (2026-11-15; identity, features, pricing); [Official documentation and distribution evidence](https://dev.gajim.org/gajim/gajim) (2026-11-15; identity, license); [Official documentation and distribution evidence](https://gajim.org/download/) (2026-11-15; platforms, downloads)
+### Pidgin
+
+Multiprotocol desktop messenger that keeps XMPP, IRC and other supported chat accounts in one interface.
+
+- **Platforms:** Windows, Linux. **License:** GPL; application distributed as GNU GPL software. **Pricing model:** free.
+- **Pick for:** Choose for simultaneous access to several supported chat networks.
+- **Compare when:** Compare dedicated XMPP clients when modern encryption and media features should work through one integrated workflow.
+- **Strengths:** One desktop client can keep IRC and XMPP conversations available together.; Plugin architecture can add networks and specialized features beyond the built-in protocols.
+- **Limitations:** Protocol support and file-transfer behavior vary by network and plugin.; End-to-end encryption requires an appropriate plugin; a multiprotocol account alone does not establish encrypted messaging.
+- **Maintenance:** unverified — Product documentation reviewed; a current dated release or lifecycle commitment has not been established for this record.
+- [Official project](https://pidgin.im/) · [Official installation / downloads](https://pidgin.im/install/)
+- **Sources:** [Official documentation and distribution evidence](https://pidgin.im/) (2026-11-15; identity, features, license, platforms, pricing); [Official documentation and distribution evidence](https://pidgin.im/install/) (2026-11-15; downloads, platforms); [Official documentation and distribution evidence](https://pidgin.im/about/) (2026-11-15; features)
+### Profanity
+
+Terminal XMPP messenger with keyboard-driven group chat, encrypted messaging and configurable plugins.
+
+- **Platforms:** Linux, macOS, FreeBSD, Windows. **License:** GPL-3.0. **Pricing model:** unknown.
+- **Compatibility details:** Windows support uses WSL or Cygwin. Feature availability follows installed build dependencies.
+- **Pick for:** Choose for XMPP from a terminal with explicit control over features and key handling.
+- **Compare when:** Compare a graphical client for integrated media browsing and simpler desktop setup.
+- **Strengths:** Works well in keyboard-centered terminals and remote shell workflows.; Documents several encryption choices and modern XMPP extensions without requiring a graphical chat client.
+- **Limitations:** Windows use requires WSL or Cygwin rather than a native desktop installer.; Encryption and notifications depend on build options; Cygwin may require compiling additional encryption libraries.
+- **Maintenance:** active — Official release feed contains 0.19.0 with an updated timestamp of 2026-10-15. This is release-channel activity evidence, not proof of a stable build, installed compatibility or security testing. ([evidence](https://github.com/profanity-im/profanity/releases.atom))
+- [Official project](https://profanity-im.github.io/) · [Official installation / downloads](https://profanity-im.github.io/guide/latest/install.html) · [Repository](https://github.com/profanity-im/profanity)
+- **Sources:** [Official documentation and distribution evidence](https://profanity-im.github.io/) (2026-11-15; identity, features, platforms, downloads); [Official documentation and distribution evidence](https://github.com/profanity-im/profanity) (2026-11-15; identity, license); [Official documentation and distribution evidence](https://profanity-im.github.io/guide/latest/install.html) (2026-11-15; platforms, downloads, features); [Official release or lifecycle evidence](https://github.com/profanity-im/profanity/releases.atom) (2026-11-15; maintenance)
+### Psi
+
+Configurable Qt XMPP client for experienced users, with flexible windows, themes and optional encryption plugins.
+
+- **Platforms:** Windows, macOS, Linux, FreeBSD. **License:** GNU GPL; see project COPYING and component notices. **Pricing model:** free.
+- **Pricing details:** Free client; Psi+ is a rolling development branch rather than a separately counted application here.
+- **Pick for:** Choose when XMPP configuration and interface customization matter more than a simplified setup.
+- **Compare when:** Compare Gajim or Dino for a more integrated modern default, and check plugin availability in the selected build.
+- **Strengths:** Detailed interface customization suits established XMPP workflows.; The official project explains the relationship between stable Psi and its rolling Psi+ development builds.
+- **Limitations:** Official Windows and macOS builds may omit the PsiMedia calling plugin.; Stable releases are infrequent and downloaded Windows/macOS builds lack an embedded automatic updater.
+- **Maintenance:** unverified — Product documentation reviewed; a current dated release or lifecycle commitment has not been established for this record.
+- [Official project](https://psi-im.org/) · [Official installation / downloads](https://psi-im.org/downloads/) · [Repository](https://github.com/psi-im/psi)
+- **Sources:** [Official documentation and distribution evidence](https://psi-im.org/) (2026-11-15; identity, pricing, platforms); [Official documentation and distribution evidence](https://github.com/psi-im/psi) (2026-11-15; identity, features, license, platforms); [Official documentation and distribution evidence](https://psi-im.org/downloads/) (2026-11-15; downloads, features)

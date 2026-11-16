@@ -8,11 +8,13 @@ on:
       - 'data/software/**'
       - 'src/software/**'
       - 'scripts/build_software_catalog.py'
+      - 'scripts/prepare_software_publication.py'
       - 'scripts/check_software_links.py'
       - 'scripts/report_software_coverage.py'
       - 'scripts/software_browser_checks.cjs'
       - 'tests/software*'
       - '.github/workflows/athena-software-audit.yml'
+      - '.github/workflows/athena-software-prepare.yml'
 permissions:
   contents: read
 concurrency:
@@ -21,6 +23,7 @@ concurrency:
 jobs:
   verify:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -37,8 +40,7 @@ jobs:
       - name: Report evidence refresh and category coverage
         run: python3 scripts/report_software_coverage.py --output software-refresh-report.json
       - name: Audit official links and provenance sources
-        if: github.event_name != 'pull_request'
-        run: python3 scripts/check_software_links.py --workers 8 --timeout 15 --output software-link-report.json --strict
+        run: python3 scripts/check_software_links.py --workers 16 --timeout 12 --output software-link-report.json --strict
       - name: Retain source audit and browser evidence
         if: always()
         uses: actions/upload-artifact@v4

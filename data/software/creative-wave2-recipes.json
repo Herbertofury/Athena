@@ -1,0 +1,1207 @@
+{
+  "recipes": [
+    {
+      "id": "wave2-select-sequence-workbench",
+      "title": "Choose a graphical sequence-analysis and cloning workbench",
+      "description": "Match the workbench to the laboratory task: broad sequence analysis, supported project workflows, or visual cloning design.",
+      "picks": [
+        {
+          "app_id": "ugene",
+          "label": "Open graphical analysis workspace",
+          "reason": "Combines sequence viewing, annotation, alignment tools and visual workflows.",
+          "tradeoff": "External tools and reference databases add dependencies; validate each selected method."
+        },
+        {
+          "app_id": "geneious-prime",
+          "label": "Supported integrated laboratory workflow",
+          "reason": "Brings mapping, alignment, cloning, automation and project management into a commercial desktop environment.",
+          "tradeoff": "Subscriptions, cloud entitlements and academic eligibility differ by plan."
+        },
+        {
+          "app_id": "snapgene",
+          "label": "Visual cloning design and documentation",
+          "reason": "Plasmid maps, cloning simulation and edit history make construct design inspectable.",
+          "tradeoff": "Free Viewer mode supports inspection and annotation; full cloning design requires a paid subscription."
+        }
+      ]
+    },
+    {
+      "id": "wave2-prepare-sequence-alignments",
+      "title": "Create and inspect biological sequence alignments",
+      "description": "Distinguish alignment computation from manual inspection. Difficult regions and biological assumptions still need review before tree inference.",
+      "picks": [
+        {
+          "app_id": "mafft",
+          "label": "Scriptable alignment generation",
+          "reason": "Offers several sequence-alignment strategies and workflows for adding sequences to an existing alignment.",
+          "tradeoff": "Strategy choice and package licenses vary; inspect ambiguous alignment regions."
+        },
+        {
+          "app_id": "jalview",
+          "label": "Alignment interpretation with annotations",
+          "reason": "Links alignment editing and analysis with biological annotations and molecular structure views.",
+          "tradeoff": "Some services require a network connection, and external analyses have their own assumptions."
+        },
+        {
+          "app_id": "aliview",
+          "label": "Focused alignment inspection",
+          "reason": "Provides a dedicated viewer/editor with navigation suited to checking alignment columns and sequence labels.",
+          "tradeoff": "External aligners and Java packaging require separate setup."
+        }
+      ]
+    },
+    {
+      "id": "wave2-infer-evolutionary-trees",
+      "title": "Choose a phylogenetic inference method and interface",
+      "description": "Choose by statistical question and workflow, then check models, support and uncertainty. These tools do not establish one universally best tree.",
+      "picks": [
+        {
+          "app_id": "iq-tree",
+          "label": "Model-aware maximum likelihood",
+          "reason": "Combines maximum-likelihood inference, model selection, branch support and checkpointing.",
+          "tradeoff": "Alignment quality and model assumptions remain critical; complex models can consume substantial resources."
+        },
+        {
+          "app_id": "raxml-ng",
+          "label": "Explicit scripted likelihood searches",
+          "reason": "Provides tree-search, parameter-optimization and bootstrap controls for reproducible analyses.",
+          "tradeoff": "Windows uses WSL; search replicates and settings must be justified."
+        },
+        {
+          "app_id": "mega",
+          "label": "Graphical molecular-evolution analysis",
+          "reason": "Presents evolutionary distances and tree methods in an integrated graphical environment.",
+          "tradeoff": "Its no-charge terms are limited to research and education, with redistribution restrictions."
+        },
+        {
+          "app_id": "beast2",
+          "label": "Bayesian dated-tree models",
+          "reason": "Samples trees and parameters to represent posterior uncertainty in time-aware evolutionary models.",
+          "tradeoff": "Check priors, convergence, effective sample sizes and independent chains before interpretation."
+        },
+        {
+          "app_id": "figtree",
+          "label": "Display a legacy tree project",
+          "reason": "Provides branch/node display and annotation controls for tree figures.",
+          "tradeoff": "FigTree is superseded by PearTree; neither viewer replaces inference or convergence diagnostics."
+        }
+      ]
+    },
+    {
+      "id": "wave2-inspect-genomic-evidence",
+      "title": "Inspect reads, genome annotations and assembly graphs",
+      "description": "Pick the data representation first: mapped reads, curated annotations, complex genome views or assembly-graph connectivity.",
+      "picks": [
+        {
+          "app_id": "igv",
+          "label": "Locus-level read and track review",
+          "reason": "Displays aligned-read and genomic-track evidence in a local desktop session.",
+          "tradeoff": "Large datasets need valid indexes and compatible reference coordinates."
+        },
+        {
+          "app_id": "jbrowse-desktop",
+          "label": "Extensible complex genome views",
+          "reason": "Supports a pluggable desktop workspace with multiple genomic representations.",
+          "tradeoff": "Plugins and input formats need preparation; the separate web deployment is a different product route."
+        },
+        {
+          "app_id": "artemis",
+          "label": "Genome annotation curation",
+          "reason": "Combines sequence-feature inspection with editing and comparative tools.",
+          "tradeoff": "Java and optional database workflows add setup requirements."
+        },
+        {
+          "app_id": "tablet",
+          "label": "Focused assembly and alignment viewing",
+          "reason": "Concentrates on visual review of sequencing assemblies and mapped reads.",
+          "tradeoff": "A visible pattern still needs an appropriate analytical method before drawing conclusions."
+        },
+        {
+          "app_id": "bandage",
+          "label": "Assembly-graph connectivity",
+          "reason": "Shows connections and branches that disappear in a flat contig file.",
+          "tradeoff": "Current packages differ by platform, and graph topology alone does not prove assembly correctness."
+        }
+      ]
+    },
+    {
+      "id": "wave2-check-sequencing-quality",
+      "title": "Inspect, preprocess and summarize sequencing quality",
+      "description": "These tools cover complementary stages: diagnose raw reads, apply justified preprocessing, then compare results across samples.",
+      "picks": [
+        {
+          "app_id": "fastqc",
+          "label": "Per-file diagnostic reports",
+          "reason": "Reports sequencing quality and composition patterns before or after preprocessing.",
+          "tradeoff": "Warning thresholds are heuristics and can reflect legitimate assay properties."
+        },
+        {
+          "app_id": "fastp",
+          "label": "Preprocessing with recorded reports",
+          "reason": "Combines quality filtering, adapter trimming and HTML/JSON reporting in a scripted step.",
+          "tradeoff": "Trimming can remove useful sequence; tune settings for the actual library."
+        },
+        {
+          "app_id": "multiqc",
+          "label": "Cross-sample report aggregation",
+          "reason": "Collects supported tool outputs into a project-level overview.",
+          "tradeoff": "It does not perform the underlying measurements; module recognition and sample naming affect aggregation."
+        }
+      ]
+    },
+    {
+      "id": "wave2-transform-genomic-files",
+      "title": "Select a command-line tool for a genomic file operation",
+      "description": "Choose by data model instead of treating every sequence utility as interchangeable.",
+      "picks": [
+        {
+          "app_id": "seqkit",
+          "label": "FASTA and FASTQ sequences",
+          "reason": "Filters, transforms, extracts and summarizes sequence records with self-contained executables.",
+          "tradeoff": "Check identifiers, strand handling and coordinate conventions."
+        },
+        {
+          "app_id": "samtools",
+          "label": "SAM, BAM and CRAM alignments",
+          "reason": "Sorts, indexes, filters and converts mapped-read alignment files.",
+          "tradeoff": "Reference and sorting assumptions must match downstream tools; Windows setup differs."
+        },
+        {
+          "app_id": "bedtools",
+          "label": "Genomic interval relationships",
+          "reason": "Intersects, merges and compares regions such as genes, peaks and coverage intervals.",
+          "tradeoff": "BED and GFF coordinate conventions differ; current source and older docs also carry different license labels."
+        },
+        {
+          "app_id": "minimap2",
+          "label": "Mapping long reads or assemblies",
+          "reason": "Aligns sequence data to a reference using task-specific presets.",
+          "tradeoff": "It is a mapper rather than a general file editor; this record verifies the published Linux binary route."
+        }
+      ]
+    },
+    {
+      "id": "wave2-select-bim-authoring",
+      "title": "Choose a BIM authoring environment",
+      "description": "Start with team deliverables, native operating-system needs, exchange formats and the authoring model.",
+      "picks": [
+        {
+          "app_id": "autodesk-revit",
+          "label": "Revit-centered multidisciplinary delivery",
+          "reason": "Connects architectural, structural and building-services models with documentation.",
+          "tradeoff": "Native Windows requirement and separately licensed collaboration services can affect the toolchain."
+        },
+        {
+          "app_id": "archicad",
+          "label": "Architectural BIM on Windows or Mac",
+          "reason": "Combines architectural modeling, documentation and team workflows with native desktop options.",
+          "tradeoff": "Plan entitlements and consultant exchange requirements need agreement before a project starts."
+        },
+        {
+          "app_id": "bricscad-bim",
+          "label": "DWG-based transition into BIM",
+          "reason": "Places building-modeling and IFC tools alongside familiar DWG drafting workflows.",
+          "tradeoff": "Some integrations vary by OS; perpetual and subscription entitlements differ."
+        },
+        {
+          "app_id": "bonsai",
+          "label": "Open IFC authoring inside Blender",
+          "reason": "Creates native IFC data with linked drawings, schedules and Python automation.",
+          "tradeoff": "It requires compatible Blender and is labeled alpha; test exchange and workflow stability on representative projects."
+        }
+      ]
+    },
+    {
+      "id": "wave2-review-ifc-and-city-models",
+      "title": "Review IFC deliverables and city-scale semantic models",
+      "description": "A dedicated viewer suits reviewers who do not need a full authoring license. Check format coverage and paid extensions before selecting one.",
+      "picks": [
+        {
+          "app_id": "bimvision",
+          "label": "Focused IFC stakeholder review",
+          "reason": "Provides building geometry and property inspection with a free core viewer.",
+          "tradeoff": "Optional plugins have separate licenses and the installer flow requests an email address."
+        },
+        {
+          "app_id": "kit-model-viewer",
+          "label": "IFC, gbXML and CityGML review",
+          "reason": "Connects building-scale and city-scale semantic formats with property and relationship inspection.",
+          "tradeoff": "Requires Windows runtime components; open plugin code does not imply an open-source application license."
+        },
+        {
+          "app_id": "bonsai",
+          "label": "Review that may become IFC authoring",
+          "reason": "Native IFC editing can help when inspection uncovers data that must be changed.",
+          "tradeoff": "A Blender extension and alpha authoring workflow bring more setup than a standalone viewer."
+        }
+      ]
+    },
+    {
+      "id": "wave2-plan-interiors-and-concepts",
+      "title": "Plan interior layouts and architectural concepts",
+      "description": "Match the tool to the level of design detail: rooms and furniture, flexible spatial concepts or data-rich building models.",
+      "picks": [
+        {
+          "app_id": "sweet-home-3d",
+          "label": "Rooms and furniture",
+          "reason": "Links a floor plan with three-dimensional furniture placement and interior views.",
+          "tradeoff": "Free and paid distributions bundle different assets; it is not a full building-engineering system."
+        },
+        {
+          "app_id": "sketchup",
+          "label": "Flexible spatial concept modeling",
+          "reason": "Supports direct 3D modeling with extensions and plan-dependent documentation tools.",
+          "tradeoff": "Desktop subscriptions, web access and Studio features have different capabilities and terms."
+        },
+        {
+          "app_id": "bonsai",
+          "label": "Concepts that need native IFC data",
+          "reason": "Connects geometry with building classifications, properties and coordinated documentation.",
+          "tradeoff": "Requires Blender and familiarity with IFC/BIM workflows; current Studio is alpha."
+        }
+      ]
+    },
+    {
+      "id": "wave2-model-building-energy",
+      "title": "Choose a building-energy modeling workflow",
+      "description": "Separate the simulation engine from graphical model preparation and from legacy project compatibility.",
+      "picks": [
+        {
+          "app_id": "energyplus",
+          "label": "Detailed simulation engine",
+          "reason": "Provides whole-building thermal and HVAC simulation for scripted or interface-driven workflows.",
+          "tradeoff": "Requires carefully prepared geometry, schedules, weather and system assumptions."
+        },
+        {
+          "app_id": "openstudio-application",
+          "label": "Open graphical EnergyPlus workflow",
+          "reason": "Adds graphical model editing and compatible simulation components around the OpenStudio ecosystem.",
+          "tradeoff": "Application, SDK and SketchUp plugin are separate products; verify release compatibility."
+        },
+        {
+          "app_id": "designbuilder",
+          "label": "Commercial integrated performance analysis",
+          "reason": "Combines model preparation with licensed energy, daylight, HVAC and other analysis modules.",
+          "tradeoff": "Required modules affect cost; results still depend on validated model assumptions."
+        },
+        {
+          "app_id": "equest",
+          "label": "Existing DOE-2 project compatibility",
+          "reason": "Supports established eQUEST models, wizards and energy-efficiency comparisons.",
+          "tradeoff": "The public download is older and current maintenance is unverified; confirm project and compliance requirements."
+        }
+      ]
+    },
+    {
+      "id": "wave2-plan-professional-lighting",
+      "title": "Choose a lighting and luminaire planning tool",
+      "description": "Both tools offer a free core, but manufacturer participation and paid extensions change practical project coverage.",
+      "picks": [
+        {
+          "app_id": "dialux-evo",
+          "label": "Luminaire-based lighting design",
+          "reason": "Covers indoor, outdoor, street and emergency lighting calculations and documentation.",
+          "tradeoff": "Non-member luminaires and some export/productivity features require paid plans."
+        },
+        {
+          "app_id": "relux-desktop",
+          "label": "Lighting with sensor planning",
+          "reason": "Combines artificial-light/daylight calculations with luminaire and sensor planning.",
+          "tradeoff": "Non-member product presentation and specialist extensions have separate licensing; native Windows is required."
+        }
+      ]
+    },
+    {
+      "id": "wave2-model-life-cycle-impacts",
+      "title": "Choose a desktop life-cycle assessment workflow",
+      "description": "Software choice does not supply the inventory data or settle model assumptions. Compare database access, scripting needs and model transparency.",
+      "picks": [
+        {
+          "app_id": "openlca",
+          "label": "Graphical multi-database LCA work",
+          "reason": "Provides process networks, impact assessment and exchange with several LCA data ecosystems.",
+          "tradeoff": "Commercial background databases and services may cost extra despite the free application."
+        },
+        {
+          "app_id": "activity-browser",
+          "label": "Brightway-connected analysis",
+          "reason": "Brings graphical project and inventory editing to the Python/Brightway ecosystem.",
+          "tradeoff": "Environment compatibility and separately licensed datasets require setup and review."
+        }
+      ]
+    },
+    {
+      "id": "wave2-generate-cnc-toolpaths",
+      "title": "Choose CAD/CAM software for a CNC project",
+      "description": "Match the design source, required machining strategies, machine output and edition restrictions before generating a job.",
+      "picks": [
+        {
+          "app_id": "estlcam",
+          "label": "Compact 2D and 3D preparation",
+          "reason": "Generates toolpaths from drawings, meshes and images with an optional compatible control workflow.",
+          "tradeoff": "Free mode adds file-operation delays; paid version 13 updates have a one-year entitlement period."
+        },
+        {
+          "app_id": "carbide-create",
+          "label": "Integrated design for Carbide machines",
+          "reason": "Combines vector drawing, simulation and 2D/2.5D machining in Core.",
+          "tradeoff": "Standard G-code for other machines and advanced 3D work require Pro."
+        },
+        {
+          "app_id": "vcarve",
+          "label": "Decorative routing and signs",
+          "reason": "Provides V-carving, decorative toolpaths and machining of imported relief models.",
+          "tradeoff": "It is a paid Windows product; the trial cannot cut arbitrary user-created designs."
+        },
+        {
+          "app_id": "deskproto",
+          "label": "Imported geometry to machining",
+          "reason": "Offers a permanent free entry point and paid advanced/multi-axis editions.",
+          "tradeoff": "Edition capabilities and the selected postprocessor must match the machine."
+        },
+        {
+          "app_id": "blendercam",
+          "label": "Blender-centered CAM",
+          "reason": "Keeps geometry and toolpath work in the Fabex CNC Blender extension.",
+          "tradeoff": "Requires compatible Blender/dependencies and careful postprocessor validation."
+        },
+        {
+          "app_id": "kiri-moto",
+          "label": "Multiple fabrication processes",
+          "reason": "Provides browser, desktop and local-server routes for milling, laser and printing preparation.",
+          "tradeoff": "Machine profiles and deployment-specific storage behavior need verification."
+        }
+      ]
+    },
+    {
+      "id": "wave2-nest-vector-parts",
+      "title": "Arrange vector parts on sheet material",
+      "description": "Nesting tools propose layouts; verify paths, units, spacing and the downstream cutting process before using the result.",
+      "picks": [
+        {
+          "app_id": "svgnest",
+          "label": "Browser-based SVG nesting",
+          "reason": "Packs irregular SVG parts with spacing, rotation and part-in-part controls.",
+          "tradeoff": "Input geometry must be prepared as suitable paths, and heuristic nesting does not guarantee a global optimum."
+        },
+        {
+          "app_id": "deepnest-next",
+          "label": "Desktop nesting and shared cuts",
+          "reason": "Adds a desktop workflow with common-line merging and DXF conversion.",
+          "tradeoff": "Confirm any external conversion path; the released MIT desktop repository differs from the separate rewrite."
+        }
+      ]
+    },
+    {
+      "id": "wave2-prepare-laser-jobs",
+      "title": "Choose software for preparing and sending laser jobs",
+      "description": "Start with the controller, then decide whether integrated drawing, engraving preparation or a free focused sender is the priority.",
+      "picks": [
+        {
+          "app_id": "lightburn",
+          "label": "Integrated multi-controller workflow",
+          "reason": "Combines layout, editing, job settings and supported controller communication.",
+          "tradeoff": "Core/Pro compatibility depends on controller type; current Linux support is limited to legacy releases."
+        },
+        {
+          "app_id": "lasergrbl",
+          "label": "Free GRBL-focused Windows workflow",
+          "reason": "Prepares raster engraving jobs and sends them to compatible GRBL controllers.",
+          "tradeoff": "It is not a universal laser driver; verify the actual machine and material settings."
+        },
+        {
+          "app_id": "kiri-moto",
+          "label": "Fabrication preparation in a browser",
+          "reason": "Can prepare laser jobs alongside milling and 3D-printing workflows.",
+          "tradeoff": "Generated jobs still require a compatible machine profile and sending/control route."
+        }
+      ]
+    },
+    {
+      "id": "wave2-measure-rooms-and-sound",
+      "title": "Measure a room, loudspeaker or live audio signal",
+      "description": "Choose the measurement method before the interface. Calibrated microphones, sound-card routing and repeatable measurement conditions matter more than a polished plot.",
+      "picks": [
+        {
+          "app_id": "room-eq-wizard",
+          "label": "Room and loudspeaker response",
+          "reason": "Combines acoustic measurements, response views and equalizer-filter planning.",
+          "tradeoff": "Correct microphone calibration, timing and placement are required; an equalizer cannot repair every room problem."
+        },
+        {
+          "app_id": "open-sound-meter",
+          "label": "Live transfer-function workflow",
+          "reason": "Provides real-time spectrum, transfer-function and sound-level views.",
+          "tradeoff": "Sound-level accuracy depends on calibration and hardware; confirm platform pricing and distribution."
+        },
+        {
+          "app_id": "friture",
+          "label": "Immediate signal inspection",
+          "reason": "Provides spectrum, spectrogram and scope views for an incoming audio signal.",
+          "tradeoff": "An attractive spectrum is not a calibrated room-acoustics report."
+        }
+      ]
+    },
+    {
+      "id": "wave2-restore-recorded-audio",
+      "title": "Reduce noise in an existing recording",
+      "description": "These are conditional choices for recorded files or editor sessions. Compare the noise type, available edition and listening result on a copy of your source.",
+      "picks": [
+        {
+          "app_id": "izotope-rx",
+          "label": "Detailed restoration modules",
+          "reason": "Provides dedicated spectral and voice restoration workflows with noise-only monitoring.",
+          "tradeoff": "Module and standalone-editor availability vary by edition; strong processing can remove wanted speech."
+        },
+        {
+          "app_id": "acoustica",
+          "label": "Editing with restoration in one workspace",
+          "reason": "Combines waveform/spectral editing with edition-specific restoration tools.",
+          "tradeoff": "Standard in-app tools differ from Premium/Ultimate plugins; Linux is currently a public beta."
+        },
+        {
+          "app_id": "adobe-audition",
+          "label": "Restoration inside an Adobe audio session",
+          "reason": "Documents noise-print reduction, adaptive effects and spectral selection.",
+          "tradeoff": "Subscription licensing applies; offline Noise Reduction is specific to the Waveform Editor."
+        }
+      ]
+    },
+    {
+      "id": "wave2-process-desktop-audio",
+      "title": "Choose a desktop audio-processing route",
+      "description": "Match input versus playback processing, operating system and routing. Equalization, convolution and speech noise suppression solve different signal problems.",
+      "picks": [
+        {
+          "app_id": "easy-effects",
+          "label": "Linux microphone and playback effects",
+          "reason": "Applies configured effects to PipeWire applications and can process microphone audio before the destination app.",
+          "tradeoff": "Install the selected noise plugin/model, keep hardware defaults as upstream instructs, and verify the destination receives processed input."
+        },
+        {
+          "app_id": "equalizer-apo",
+          "label": "Windows endpoint equalization",
+          "reason": "Provides configurable Windows audio processing for supported device paths.",
+          "tradeoff": "Driver and audio-mode compatibility determine whether processing applies; this record does not establish general-purpose noise suppression."
+        },
+        {
+          "app_id": "camilladsp",
+          "label": "Configured convolution and DSP pipeline",
+          "reason": "Offers explicit audio-processing pipelines for deliberate routing and filtering setups.",
+          "tradeoff": "Device backends and configuration require technical setup; measure the complete signal path."
+        }
+      ]
+    },
+    {
+      "id": "wave2-extract-and-review-audio-features",
+      "title": "Extract and inspect features from recorded audio",
+      "description": "Use reproducible feature extraction when the question needs structured outputs, then review the visual or aligned result before interpreting it.",
+      "picks": [
+        {
+          "app_id": "sonic-annotator",
+          "label": "Batch feature extraction",
+          "reason": "Runs supported audio-analysis plugins and writes machine-readable results.",
+          "tradeoff": "The selected plugin defines the measurement and may need separate installation or licensing."
+        },
+        {
+          "app_id": "sonic-visualiser",
+          "label": "Detailed visual inspection",
+          "reason": "Displays and annotates recorded audio with layered analysis views.",
+          "tradeoff": "Plugin availability and parameter choices affect results; visual patterns need interpretation."
+        },
+        {
+          "app_id": "sonic-lineup",
+          "label": "Compare aligned recordings",
+          "reason": "Supports comparison of multiple audio recordings through an aligned visual workflow.",
+          "tradeoff": "Alignment is an analytical aid and can need correction; it does not prove musical or perceptual equivalence."
+        }
+      ]
+    },
+    {
+      "id": "wave2-inspect-vocal-pitch",
+      "title": "Inspect a monophonic vocal melody or speech contour",
+      "description": "A singing-note transcription and a phonetic pitch analysis use different assumptions. Check octave errors and unvoiced regions against the recording.",
+      "picks": [
+        {
+          "app_id": "tony",
+          "label": "Correct an estimated melody transcription",
+          "reason": "Focuses on pitch and note extraction from monophonic recordings with manual correction.",
+          "tradeoff": "Polyphonic mixtures and ambiguous note boundaries require more work; automatic output is not ground truth."
+        },
+        {
+          "app_id": "praat",
+          "label": "Speech-oriented acoustic analysis",
+          "reason": "Provides pitch, spectral and phonetic analysis with scripting.",
+          "tradeoff": "Pitch range, voicing assumptions and analysis windows must match the speaker and question."
+        },
+        {
+          "app_id": "sonic-visualiser",
+          "label": "Layered listening and inspection",
+          "reason": "Lets analysts combine waveform, spectrogram and available analysis layers.",
+          "tradeoff": "Automatic feature extraction may require a suitable Vamp plugin."
+        }
+      ]
+    },
+    {
+      "id": "wave2-reconstruct-photographs",
+      "title": "Choose a photogrammetry reconstruction workflow",
+      "description": "Select the intended output: camera poses, a textured object mesh, or a georeferenced aerial product. Capture overlap, scale control and validation remain essential.",
+      "picks": [
+        {
+          "app_id": "colmap",
+          "label": "Camera reconstruction and sparse/dense stages",
+          "reason": "Provides graphical and command-line structure-from-motion workflows.",
+          "tradeoff": "Dense processing has hardware and dependency requirements; reconstructed scale needs external control."
+        },
+        {
+          "app_id": "openmvs",
+          "label": "Dense mesh after camera registration",
+          "reason": "Consumes registered images and camera poses to produce dense geometry and textures.",
+          "tradeoff": "It needs an upstream registration stage and compatible interchange data."
+        },
+        {
+          "app_id": "webodm",
+          "label": "Aerial mapping through a web interface",
+          "reason": "The current WebODM distribution uses ODX for aerial imagery processing and offers official free installers.",
+          "tradeoff": "The current project is independent of OpenDroneMap; verify the actual engine and deployment route in older tutorials."
+        },
+        {
+          "app_id": "agisoft-metashape",
+          "label": "Commercial integrated reconstruction",
+          "reason": "Combines reconstruction, inspection and project workflow in a commercial desktop product.",
+          "tradeoff": "Geospatial and advanced features depend on edition; check hardware and license requirements."
+        },
+        {
+          "app_id": "realityscan-desktop",
+          "label": "Commercial desktop reconstruction route",
+          "reason": "Offers a photogrammetry pipeline for turning photographs into 3D assets.",
+          "tradeoff": "Revenue-based eligibility and entitlement terms need checking before assuming no-charge use."
+        }
+      ]
+    },
+    {
+      "id": "wave2-tether-a-still-camera",
+      "title": "Control a tethered camera from the computer",
+      "description": "Check the exact camera model and requested control before selecting an application; USB detection alone does not prove live view or remote exposure support.",
+      "picks": [
+        {
+          "app_id": "digicamcontrol",
+          "label": "Windows tethered still photography",
+          "reason": "Provides remote camera control and supported capture workflows on Windows.",
+          "tradeoff": "Individual camera models expose different capabilities."
+        },
+        {
+          "app_id": "entangle",
+          "label": "Linux tethering through supported cameras",
+          "reason": "Provides a graphical tethered photography workflow built around camera-control support.",
+          "tradeoff": "The underlying camera library and device support determine available actions."
+        },
+        {
+          "app_id": "dragonframe",
+          "label": "Frame-by-frame animation capture",
+          "reason": "Coordinates camera capture with animation review, exposure sheets and optional hardware.",
+          "tradeoff": "It is a paid production tool; supported camera and motion-control hardware must be checked."
+        }
+      ]
+    },
+    {
+      "id": "wave2-build-stop-motion-shots",
+      "title": "Capture and assemble a stop-motion shot",
+      "description": "Choose by the capture equipment and the production controls you need, then test one short shot with the real camera.",
+      "picks": [
+        {
+          "app_id": "dragonframe",
+          "label": "Coordinated production set",
+          "reason": "Connects frame capture with exposure, dialogue, lighting and motion-control workflows.",
+          "tradeoff": "Hardware support and paid entitlements determine the usable feature set; the public FAQ currently links an older EULA."
+        },
+        {
+          "app_id": "tahoma2d",
+          "label": "Open animation workspace with capture features",
+          "reason": "Combines 2D animation tools with supported stop-motion capture workflows.",
+          "tradeoff": "Camera integration and capture controls differ from a dedicated motion-control setup."
+        }
+      ]
+    },
+    {
+      "id": "wave2-prepare-animated-dialogue",
+      "title": "Prepare voice and mouth timing for animation",
+      "description": "These tools address separate parts of dialogue production: generating a singing voice, timing phonemes and using those timings in an animation scene.",
+      "picks": [
+        {
+          "app_id": "papagayo-ng",
+          "label": "Map recorded dialogue to mouth cues",
+          "reason": "Provides a focused phoneme and timing workflow for lip synchronization.",
+          "tradeoff": "Automatic or initial timing needs manual review and a matching mouth-shape set."
+        },
+        {
+          "app_id": "tahoma2d",
+          "label": "Use dialogue timing in a 2D scene",
+          "reason": "Provides an animation environment for assembling character and scene work.",
+          "tradeoff": "Confirm supported timing interchange and drawing setup; import is not a finished performance."
+        },
+        {
+          "app_id": "openutau",
+          "label": "Synthesize a singing performance",
+          "reason": "Creates singing output from note and lyric data with supported voicebanks.",
+          "tradeoff": "Voicebank and renderer compatibility and licenses are separate; singing synthesis is not general dialogue lip-sync."
+        }
+      ]
+    },
+    {
+      "id": "wave2-select-accessibility-support",
+      "title": "Choose support for a specific desktop access need",
+      "description": "Select the access task first: pointer control, reading the interface, magnification or speech input. Verify the application combination with the person using it.",
+      "picks": [
+        {
+          "app_id": "enable-viacam",
+          "label": "Head movement for pointer control",
+          "reason": "Uses a camera-based head-tracking workflow to move the pointer.",
+          "tradeoff": "Camera placement, lighting and comfortable movement range affect usability."
+        },
+        {
+          "app_id": "jaws",
+          "label": "Windows screen reading",
+          "reason": "Provides spoken and braille access to supported Windows applications.",
+          "tradeoff": "Commercial licensing and application-specific accessibility support need checking."
+        },
+        {
+          "app_id": "zoomtext",
+          "label": "Windows magnification and reading support",
+          "reason": "Combines screen magnification with supported reading features.",
+          "tradeoff": "Edition and compatibility determine the available reading controls."
+        },
+        {
+          "app_id": "speech-note",
+          "label": "Local speech/text workflows on Linux",
+          "reason": "Provides configurable speech recognition and synthesis routes through local models.",
+          "tradeoff": "Model downloads, hardware support and output quality vary; test the intended language and input device."
+        }
+      ]
+    },
+    {
+      "id": "wave2-read-documents-aloud",
+      "title": "Read documents aloud and create personal speech audio",
+      "description": "Choose the operating system, text workflow and voice first. The application license and the voice/output license are separate decisions.",
+      "picks": [
+        {
+          "app_id": "balabolka",
+          "label": "Windows reading with installed voices",
+          "reason": "Reads documents and clipboard text with supported Windows voices and can export audio.",
+          "tradeoff": "Noncommercial use is free; commercial organizations or paid audio distribution require the application license plus appropriate voice rights."
+        },
+        {
+          "app_id": "textaloud",
+          "label": "Paid Windows reading workflow",
+          "reason": "Adds word highlighting, selected-text tools and batch audio creation.",
+          "tradeoff": "Optional Acapela voices are limited to NextUp products and personal generated-audio use unless separate rights are obtained."
+        },
+        {
+          "app_id": "speech-note",
+          "label": "Configurable local Linux models",
+          "reason": "Combines text-to-speech with other local speech workflows.",
+          "tradeoff": "Model licensing, language support and hardware requirements differ from the application itself."
+        }
+      ]
+    },
+    {
+      "id": "wave2-choose-cfd-workflow",
+      "title": "Choose an interface and solver route for CFD",
+      "description": "Start from the physical model, mesh and verification plan. A friendlier interface does not validate turbulence, boundary conditions or convergence.",
+      "picks": [
+        {
+          "app_id": "openfoam",
+          "label": "Configurable open-source simulation toolkit",
+          "reason": "The Foundation distribution provides extensible finite-volume CFD workflows.",
+          "tradeoff": "Solver setup, meshing and scripting require expertise; other OpenFOAM distributions are separate products."
+        },
+        {
+          "app_id": "su2",
+          "label": "Aerodynamic analysis and design research",
+          "reason": "Provides open-source simulation and adjoint-oriented design methods.",
+          "tradeoff": "Build features vary; documented prebuilt packages omit discrete-adjoint support."
+        },
+        {
+          "app_id": "simflow",
+          "label": "Graphical setup with commercial support options",
+          "reason": "Presents CFD preparation and analysis through a desktop interface with Windows, Linux and Apple Silicon Mac routes.",
+          "tradeoff": "The free edition is limited to 200,000 mesh cells and one CPU; paid terms and solver assumptions still matter."
+        }
+      ]
+    },
+    {
+      "id": "wave2-choose-finite-element-solver",
+      "title": "Match a finite-element solver to the engineering problem",
+      "description": "Compare the material models, coupling and preprocessing workflow required by the project. Benchmark a known case before interpreting a new model.",
+      "picks": [
+        {
+          "app_id": "calculix",
+          "label": "Scriptable structural and thermal cases",
+          "reason": "Provides linear/nonlinear, static/dynamic and thermal analysis with an Abaqus-style input approach.",
+          "tradeoff": "A familiar input style does not guarantee complete Abaqus compatibility; geometry and solver checks remain necessary."
+        },
+        {
+          "app_id": "code-aster",
+          "label": "Broad structural mechanics workflow",
+          "reason": "Combines structural analysis with the SALOME/AsterStudy ecosystem and scripted execution.",
+          "tradeoff": "Linux/container and third-party Windows packages have different installation and support boundaries."
+        },
+        {
+          "app_id": "elmer",
+          "label": "Multiphysics coupling",
+          "reason": "Offers a finite-element suite spanning multiple physical equations.",
+          "tradeoff": "Each coupled model needs suitable numerical settings and independent validation."
+        },
+        {
+          "app_id": "febio",
+          "label": "Biomechanical constitutive models",
+          "reason": "Focuses on nonlinear mechanics and multiphysics used in biomechanics.",
+          "tradeoff": "Specialized material assumptions must match the specimen and loading; solver availability does not validate a biological conclusion."
+        }
+      ]
+    },
+    {
+      "id": "wave2-study-airfoils-and-wings",
+      "title": "Start or migrate an airfoil and wing analysis project",
+      "description": "Potential-flow tools suit preliminary exploration under their model assumptions. Use more complete CFD only when its additional complexity is justified and validated.",
+      "picks": [
+        {
+          "app_id": "flow5",
+          "label": "Current XFLR5-family starting point",
+          "reason": "Provides the successor workflow and recent releases for preliminary aerodynamic analysis.",
+          "tradeoff": "Version 7.58 ends Intel Mac binary packaging and the developer announces no future Linux packages; source builds and old binaries need a plan."
+        },
+        {
+          "app_id": "xflr5",
+          "label": "Reproduce a legacy analysis",
+          "reason": "Preserves established airfoil and wing-analysis workflows and project compatibility.",
+          "tradeoff": "Development closed on 30 June 2026, so new projects should evaluate the successor."
+        },
+        {
+          "app_id": "su2",
+          "label": "Broader CFD research route",
+          "reason": "Provides a solver and design framework for cases beyond the potential-flow workflow.",
+          "tradeoff": "It requires a suitable mesh, physical models and verification; it is not a drop-in file replacement."
+        }
+      ]
+    },
+    {
+      "id": "wave2-model-water-systems",
+      "title": "Choose a water model for the actual hydraulic domain",
+      "description": "A pressurized drinking-water network, sewer catchment, river floodplain and groundwater system require different governing models and inputs.",
+      "picks": [
+        {
+          "app_id": "epanet",
+          "label": "Pressurized distribution network",
+          "reason": "Models hydraulic and water-quality behavior in drinking-water pipe networks.",
+          "tradeoff": "The Windows GUI and toolkit serve a specific network domain; input demands and calibration control the result."
+        },
+        {
+          "app_id": "epa-swmm",
+          "label": "Stormwater and sewer catchments",
+          "reason": "Models rainfall-runoff, drainage networks and selected green-infrastructure controls.",
+          "tradeoff": "The official desktop GUI is Windows; a portable computational engine does not imply a matching native GUI."
+        },
+        {
+          "app_id": "hec-ras",
+          "label": "River and floodplain hydraulics",
+          "reason": "Provides river hydraulic analysis with official Windows desktop tools.",
+          "tradeoff": "Linux downloads are computational engines, not the Windows graphical application; the HEC software license is not open source."
+        },
+        {
+          "app_id": "modflow6",
+          "label": "Groundwater flow and transport system",
+          "reason": "Provides the USGS modular numerical groundwater framework.",
+          "tradeoff": "Input preparation and conceptual-model design need separate tools and hydrogeological expertise."
+        }
+      ]
+    },
+    {
+      "id": "wave2-simulate-molecular-systems",
+      "title": "Choose a molecular simulation engine",
+      "description": "Select by force field, particle model, algorithms and required packages. An installed engine does not establish that the chosen model is scientifically appropriate.",
+      "picks": [
+        {
+          "app_id": "gromacs",
+          "label": "Molecular dynamics workflows",
+          "reason": "Provides a molecular-dynamics engine with documented build and acceleration options.",
+          "tradeoff": "Force-field preparation, sampling and validation dominate the scientific result; accelerator support depends on the build."
+        },
+        {
+          "app_id": "lammps",
+          "label": "Configurable particle interactions",
+          "reason": "Supports molecular and materials simulation through selectable interaction styles and packages.",
+          "tradeoff": "A prebuilt executable may omit a required package; record the exact build and configuration."
+        }
+      ]
+    },
+    {
+      "id": "wave2-inspect-particle-trajectories",
+      "title": "Inspect simulation particles, trajectories or molecular structures",
+      "description": "Choose by data representation and analysis method, then keep visualization settings separate from measured quantities.",
+      "picks": [
+        {
+          "app_id": "ovito",
+          "label": "Particle and atomistic analysis pipelines",
+          "reason": "Provides visualization and analysis workflows for particle-based simulation data.",
+          "tradeoff": "Basic and Pro capabilities differ; inspect the license and method requirements for the intended analysis."
+        },
+        {
+          "app_id": "vmd",
+          "label": "Molecular trajectory inspection",
+          "reason": "Provides molecular graphics and trajectory-oriented analysis for supported datasets.",
+          "tradeoff": "VMD has a custom source-available license, not an OSI open-source license; production and test builds differ by platform."
+        },
+        {
+          "app_id": "chimerax",
+          "label": "Structures and experimental maps",
+          "reason": "Combines atomic models with density maps and related molecular data.",
+          "tradeoff": "Commercial-use conditions differ from free noncommercial use; trajectories and file formats need checking."
+        }
+      ]
+    },
+    {
+      "id": "wave2-analyze-terrain",
+      "title": "Choose a terrain-analysis working style",
+      "description": "Begin with the DEM, coordinate system, resolution and drainage assumptions. Interface choice is secondary to preprocessing and interpretation.",
+      "picks": [
+        {
+          "app_id": "saga-gis",
+          "label": "Graphical geoscientific toolbox",
+          "reason": "Offers dedicated terrain and raster-analysis modules.",
+          "tradeoff": "Processing choices and grid resolution can materially change derived landforms or drainage."
+        },
+        {
+          "app_id": "whitebox-workflows",
+          "label": "Scripted local geospatial processing",
+          "reason": "Exposes terrain, hydrology and LiDAR tools through Python and R.",
+          "tradeoff": "Next Gen APIs and Python/R binary platforms differ; optional Pro workflows are separately licensed."
+        },
+        {
+          "app_id": "grass-gis",
+          "label": "Integrated raster/vector analysis system",
+          "reason": "Combines geospatial processing with reusable command-based workflows.",
+          "tradeoff": "Its data model and environment setup take time to learn."
+        },
+        {
+          "app_id": "qgis",
+          "label": "Map-centered desktop workbench",
+          "reason": "Combines data inspection, editing and access to processing providers.",
+          "tradeoff": "External provider availability and plugin versions determine which algorithms are actually installed."
+        }
+      ]
+    },
+    {
+      "id": "wave2-explore-network-data",
+      "title": "Choose a network-analysis environment",
+      "description": "A network picture and a biological interaction analysis require different supporting data. Check identifiers, directedness, weights and missing edges before comparing metrics.",
+      "picks": [
+        {
+          "app_id": "gephi",
+          "label": "Interactive exploratory graph figures",
+          "reason": "Offers network layouts, filters, statistics and visual exports.",
+          "tradeoff": "The current roadmap still lists complete undo/redo as unfinished; save versions and avoid treating layout distance as scientific evidence."
+        },
+        {
+          "app_id": "cytoscape",
+          "label": "Attributed biological or research networks",
+          "reason": "Combines network visualization with data integration and an app ecosystem.",
+          "tradeoff": "App versions, identifiers and external services add dependencies and may have separate terms."
+        }
+      ]
+    },
+    {
+      "id": "wave2-clean-data-and-build-visual-pipelines",
+      "title": "Clean a table or build a visual analysis pipeline",
+      "description": "Choose an interactive cleanup tool for inconsistent values, or a workflow system when the analysis needs several repeatable processing stages.",
+      "picks": [
+        {
+          "app_id": "openrefine",
+          "label": "Inspect and normalize messy values",
+          "reason": "Facets, clustering and replayable transformations make table cleanup inspectable.",
+          "tradeoff": "Reconciliation can send selected data to external services; proposed merges need review."
+        },
+        {
+          "app_id": "knime",
+          "label": "Reusable visual data pipelines",
+          "reason": "Connects preparation, modeling and optional code through a workflow graph.",
+          "tradeoff": "Desktop access is free, while Hub deployment/collaboration and some integrations have separate terms."
+        },
+        {
+          "app_id": "orange",
+          "label": "Interactive exploratory analysis",
+          "reason": "Uses connected widgets for visual data analysis and machine learning.",
+          "tradeoff": "Widget choices and validation design determine whether model results are meaningful."
+        }
+      ]
+    },
+    {
+      "id": "wave2-analyze-economic-data",
+      "title": "Choose an econometric and statistical workflow",
+      "description": "Decide which model, diagnostics and reproducibility path you need before choosing the interface. None of these applications makes observational data causal by itself.",
+      "picks": [
+        {
+          "app_id": "gretl",
+          "label": "Econometrics with GUI and scripts",
+          "reason": "Combines regression, time-series and panel methods with Hansl scripting.",
+          "tradeoff": "Statistical assumptions and model diagnostics remain the analyst’s responsibility."
+        },
+        {
+          "app_id": "r",
+          "label": "Programmable statistical environment",
+          "reason": "Offers broad statistical and graphical packages for scripted analyses.",
+          "tradeoff": "Package versions, methods and licenses need to be recorded separately."
+        },
+        {
+          "app_id": "pspp",
+          "label": "Syntax and graphical statistical workflow",
+          "reason": "Provides common data-analysis procedures through GUI and command syntax.",
+          "tradeoff": "Check procedure coverage and interchange compatibility for the specific study."
+        },
+        {
+          "app_id": "jasp",
+          "label": "Graphical frequentist/Bayesian analysis",
+          "reason": "Offers a graphical interface for documented statistical methods.",
+          "tradeoff": "Available analyses and prior settings must match the research question."
+        }
+      ]
+    },
+    {
+      "id": "wave2-fit-experimental-data",
+      "title": "Choose a curve-fitting and plotting tool",
+      "description": "Choose by model form, constraints, uncertainty and reporting needs. Residuals and parameter identifiability matter more than a smooth fitted line.",
+      "picks": [
+        {
+          "app_id": "fityk",
+          "label": "Focused overlapping-peak fitting",
+          "reason": "Provides a dedicated interface for fitting peaks and experimental curves.",
+          "tradeoff": "Model choice and parameter constraints require domain judgment."
+        },
+        {
+          "app_id": "originpro",
+          "label": "Commercial integrated laboratory analysis",
+          "reason": "Combines fitting, statistics, graph formatting and reusable templates.",
+          "tradeoff": "Current native releases are Windows-only and advanced functions depend on edition and license."
+        },
+        {
+          "app_id": "labplot",
+          "label": "Open scientific plotting workspace",
+          "reason": "Combines imported data, plotting and fitting in a worksheet-oriented environment.",
+          "tradeoff": "Confirm the available fit model and interoperability with the lab’s data formats."
+        },
+        {
+          "app_id": "scidavis",
+          "label": "Table-and-graph analysis workflow",
+          "reason": "Presents numerical data and scientific plots in a compact graphical workspace.",
+          "tradeoff": "Check required advanced procedures and current platform packages before standardizing on it."
+        }
+      ]
+    },
+    {
+      "id": "wave2-capture-the-night-sky",
+      "title": "Select astronomical camera capture software",
+      "description": "Capture the night sky with software matched to the camera, driver, platform and observing workflow. High-frame-rate planetary video, live stacking and unattended deep-sky sequencing are distinct tasks.",
+      "picks": [
+        {
+          "app_id": "firecapture",
+          "label": "Private planetary acquisition",
+          "reason": "Focuses on supported astronomical cameras and planetary capture controls.",
+          "tradeoff": "The license prohibits commercial use, and camera support varies by operating system."
+        },
+        {
+          "app_id": "astrodmx-capture",
+          "label": "Multi-platform supported-camera capture",
+          "reason": "Provides acquisition packages for Windows, Mac and Linux processor combinations.",
+          "tradeoff": "ChromeOS support ended; verify the precise camera SDK and architecture."
+        },
+        {
+          "app_id": "sharpcap",
+          "label": "Windows live stacking and EAA",
+          "reason": "Combines camera acquisition with live image accumulation and optional alignment tools.",
+          "tradeoff": "Selected functions require annual Pro licensing; unlicensed real-camera Pro testing disables saving."
+        },
+        {
+          "app_id": "nina",
+          "label": "Deep-sky equipment and sequence coordination",
+          "reason": "Organizes supported equipment, targets, framing and imaging sequences on Windows.",
+          "tradeoff": "It serves a different acquisition pattern from planetary video; hardware and plugin compatibility must be checked."
+        }
+      ]
+    },
+    {
+      "id": "wave2-process-astronomical-images",
+      "title": "Process astronomy captures for an image or measurement",
+      "description": "Select visual image production or quantitative photometry first, and preserve the calibration data and processing history needed to assess the result.",
+      "picks": [
+        {
+          "app_id": "siril",
+          "label": "Calibration, registration and stacking",
+          "reason": "Provides an astrophotography processing workflow for prepared image sequences.",
+          "tradeoff": "Calibration frames, rejection settings and color handling influence the output."
+        },
+        {
+          "app_id": "astroimagej",
+          "label": "Astronomical image measurement",
+          "reason": "Provides calibration and photometry-oriented analysis derived from ImageJ.",
+          "tradeoff": "Quantitative measurements need appropriate apertures, reference stars and uncertainty checks."
+        },
+        {
+          "app_id": "astap",
+          "label": "Plate solving and FITS inspection",
+          "reason": "Combines astrometric solving with stacking and related astronomy utilities.",
+          "tradeoff": "Required star databases and data preparation are separate installation concerns."
+        }
+      ]
+    },
+    {
+      "id": "wave2-host-audio-plugins",
+      "title": "Choose a host for audio instruments and effects",
+      "description": "Match plugin format, operating system, routing and stage-management requirements. Test the complete audio chain at the intended buffer size.",
+      "picks": [
+        {
+          "app_id": "carla",
+          "label": "Open plugin hosting and patching",
+          "reason": "Provides a dedicated host for loading and connecting instruments and effects.",
+          "tradeoff": "Plugin formats and optional bridges vary by build and operating system."
+        },
+        {
+          "app_id": "element",
+          "label": "Modular routing graph",
+          "reason": "Provides configurable audio/MIDI plugin graphs with free public builds.",
+          "tradeoff": "The no-charge channel trails paid update channels; hosted plugins need their own compatible licenses and binaries."
+        },
+        {
+          "app_id": "cantabile",
+          "label": "Windows live performance management",
+          "reason": "Offers free basic VST hosting and paid set-list, routing and state tools.",
+          "tradeoff": "Advanced performance functions depend on edition; current releases require 64-bit Windows."
+        }
+      ]
+    },
+    {
+      "id": "wave2-convert-audio-collections",
+      "title": "Convert an audio collection or extract CDs",
+      "description": "Decide whether the target is archival lossless audio, portable listening copies or scripted conversion. Preserve source files when applying DSP or lossy encoding.",
+      "picks": [
+        {
+          "app_id": "freac",
+          "label": "Open desktop conversion and CD extraction",
+          "reason": "Combines audio conversion and disc extraction with supported encoders.",
+          "tradeoff": "Encoder and metadata options require deliberate setup for an archival workflow."
+        },
+        {
+          "app_id": "xld",
+          "label": "Mac cue-sheet and lossless workflow",
+          "reason": "Provides lossless conversion, cue splitting and CD extraction with GUI and command-line routes.",
+          "tradeoff": "Mac only; the full source/package license set remains unresolved in this review."
+        },
+        {
+          "app_id": "dbpoweramp",
+          "label": "Commercial library conversion interface",
+          "reason": "Provides batch filtering, file-manager integration and CD-ripping tools.",
+          "tradeoff": "The trial is time-limited, some codec/automation options are Windows-only, and the full EULA remains a research gap."
+        },
+        {
+          "app_id": "ffmpeg",
+          "label": "Scripted multimedia transformations",
+          "reason": "Provides explicit codec and filter commands suitable for reproducible batches.",
+          "tradeoff": "The command line demands precise stream and format choices; a successful command can still produce an unintended quality change."
+        }
+      ]
+    },
+    {
+      "id": "wave2-annotate-language-recordings",
+      "title": "Choose language annotation or acoustic measurement tools",
+      "description": "Distinguish labeling what happened in a recording from measuring the acoustic signal. Many research projects need both and an explicit interchange workflow.",
+      "picks": [
+        {
+          "app_id": "elan",
+          "label": "Hierarchical multimodal annotation",
+          "reason": "Synchronizes audio/video with time-aligned tiers, controlled vocabularies and structured EAF documents.",
+          "tradeoff": "Playback depends on codecs and platform; tier design and annotation agreement need their own protocol."
+        },
+        {
+          "app_id": "praat",
+          "label": "Phonetic signal measurements",
+          "reason": "Provides speech-oriented acoustic analysis and scripting alongside annotation.",
+          "tradeoff": "Pitch/formant parameters and segmentation choices affect measurements."
+        },
+        {
+          "app_id": "sonic-visualiser",
+          "label": "Layered audio inspection",
+          "reason": "Combines spectrograms, annotation and available analysis layers for detailed review.",
+          "tradeoff": "It does not replace a corpus annotation scheme or a validated phonetic measurement method."
+        }
+      ]
+    },
+    {
+      "id": "wave2-explore-a-geographic-globe",
+      "title": "Choose a desktop globe or GIS workspace",
+      "description": "Choose visual geographic context versus data processing. Imagery access, content rights and project formats determine long-term portability.",
+      "picks": [
+        {
+          "app_id": "marble",
+          "label": "Open virtual-globe exploration",
+          "reason": "Provides map themes and globe-based geographic exploration.",
+          "tradeoff": "Available map sources have different coverage and rights."
+        },
+        {
+          "app_id": "google-earth-pro",
+          "label": "Google imagery and KML context",
+          "reason": "Provides desktop imagery exploration, historical views and GIS import/export.",
+          "tradeoff": "Desktop downloads end on 25 June 2027; imagery attribution and bulk-download restrictions still apply."
+        },
+        {
+          "app_id": "qgis",
+          "label": "Data editing and spatial analysis",
+          "reason": "Provides a full GIS workbench for local layers and processing.",
+          "tradeoff": "It needs explicitly sourced datasets; it does not automatically include the same imagery service."
+        }
+      ]
+    },
+    {
+      "id": "wave2-present-phylogenetic-trees",
+      "title": "Prepare or maintain an annotated phylogenetic tree figure",
+      "description": "These viewers present already inferred trees. Inspect rooting, branch units, metadata and uncertainty before making a publication figure.",
+      "picks": [
+        {
+          "app_id": "peartree",
+          "label": "Current FigTree successor",
+          "reason": "Combines tree/metadata display and export with desktop packages and local browser operation.",
+          "tradeoff": "Temporal interpretations require valid dates and models; the viewer does not establish inference quality."
+        },
+        {
+          "app_id": "figtree",
+          "label": "Legacy figure compatibility",
+          "reason": "Can reproduce an existing FigTree-based presentation workflow.",
+          "tradeoff": "The upstream README says PearTree supersedes it; ongoing FigTree support is not assumed."
+        }
+      ]
+    },
+    {
+      "id": "wave2-measure-motion-from-video",
+      "title": "Measure motion from video and analyze the resulting data",
+      "description": "Choose a calibrated physics-video workflow for trajectories, image analysis for pixel/region measurements, and a plotting tool for exported data. These stages are complementary.",
+      "picks": [
+        {
+          "app_id": "tracker",
+          "label": "Calibrated trajectory and model comparison",
+          "reason": "Tracks objects, overlays vectors and compares particle models against recorded motion.",
+          "tradeoff": "Perspective, frame timing and calibration errors propagate into velocity and acceleration; test the actual video format."
+        },
+        {
+          "app_id": "fiji",
+          "label": "Image and region analysis",
+          "reason": "Provides a plugin-based scientific image-analysis environment for supported image sequences.",
+          "tradeoff": "A suitable method/plugin and calibration are needed; not every image workflow is a physics trajectory measurement."
+        },
+        {
+          "app_id": "labplot",
+          "label": "Inspect and fit exported measurements",
+          "reason": "Combines data import, plotting and fitting after acquisition.",
+          "tradeoff": "The plotting stage cannot recover missing calibration or correct an invalid tracking model."
+        }
+      ]
+    }
+  ]
+}

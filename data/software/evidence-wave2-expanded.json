@@ -1,0 +1,111 @@
+{
+  "schema_version": 1,
+  "reviewed_at": "2026-11-15",
+  "applications": [
+    {
+      "id": "gnu-grep",
+      "name": "GNU grep",
+      "family": "development",
+      "category": "terminal-search",
+      "summary": "Command-line matching of fixed strings and regular expressions in text streams and files, with explicit recursive-search and output controls.",
+      "license": "GNU General Public License v3.0 or later",
+      "evidence_status": "official-docs-reviewed",
+      "official_url": "https://www.gnu.org/software/grep/",
+      "download_url": "https://ftp.gnu.org/gnu/grep/",
+      "repository_url": "https://savannah.gnu.org/git/?group=grep",
+      "features": [
+        "Fixed-string and regular-expression matching",
+        "Line, count and filename output",
+        "Recursive directory search",
+        "Pipeline input"
+      ],
+      "strengths": [
+        "Explicit line-oriented output fits shell pipelines and existing command-line scripts."
+      ],
+      "limitations": [
+        "Recursive search does not automatically apply Git ignore rules.",
+        "Locale, binary handling, regex dialect and output options affect results and must be aligned before comparing tools.",
+        "The recorded performance experiment uses GNU grep 3.11; it does not test every current release or operating system."
+      ],
+      "use_cases": [
+        "Filter text streams and search file contents with predictable command-line options."
+      ],
+      "tags": [
+        "terminal-search",
+        "development",
+        "text",
+        "grep",
+        "fixed-strings",
+        "regular-expressions",
+        "pipeline"
+      ],
+      "platforms": [
+        "Linux"
+      ],
+      "platform_notes": "Linux packaging was verified through Ubuntu and the installed Linux executable. Upstream distributes portable source; other operating-system builds are not established by this record.",
+      "license_kind": "open-source",
+      "pricing_model": "free",
+      "pricing_notes": "The official source archive is publicly downloadable without payment. Distribution packages and optional commercial support have separate terms.",
+      "alternatives": [
+        "ripgrep"
+      ],
+      "recommendation": {
+        "pick_for": "Use line-oriented matching in shell pipelines and scripts with explicit search flags.",
+        "compare_when": "Consider ripgrep for repository ignore-file awareness; inspect the scoped measurement rather than assuming a universal speed winner."
+      },
+      "maintenance": {
+        "status": "unverified",
+        "checked_at": "2026-11-15",
+        "note": "The inspected stable release announcement is grep 3.12 from April 2025; this source does not establish current release cadence.",
+        "source_url": "https://lists.gnu.org/archive/html/info-gnu/2025-04/msg00008.html"
+      },
+      "sources": [
+        {
+          "url": "https://www.gnu.org/software/grep/",
+          "label": "Official project identity, distribution routes and GPL terms",
+          "checked_at": "2026-11-15",
+          "supports": [
+            "identity",
+            "features",
+            "license",
+            "downloads"
+          ]
+        },
+        {
+          "url": "https://www.gnu.org/software/grep/manual/grep.html",
+          "label": "Official matching, recursion, output and locale manual",
+          "checked_at": "2026-11-15",
+          "supports": [
+            "features"
+          ]
+        },
+        {
+          "url": "https://packages.ubuntu.com/noble/grep",
+          "label": "Official Ubuntu Linux package and distribution details",
+          "checked_at": "2026-11-15",
+          "supports": [
+            "platforms",
+            "downloads"
+          ]
+        },
+        {
+          "url": "https://ftp.gnu.org/gnu/grep/grep-3.12.tar.xz",
+          "label": "Official public source archive: bounded unauthenticated HTTP retrieval observed",
+          "checked_at": "2026-11-15",
+          "supports": [
+            "downloads",
+            "pricing"
+          ]
+        },
+        {
+          "url": "https://lists.gnu.org/archive/html/info-gnu/2025-04/msg00008.html",
+          "label": "Official stable release announcement with date",
+          "checked_at": "2026-11-15",
+          "supports": [
+            "maintenance"
+          ]
+        }
+      ]
+    }
+  ]
+}

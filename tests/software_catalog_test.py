@@ -3,6 +3,7 @@ import copy
 import importlib.util
 from pathlib import Path
 import unittest
+from unittest.mock import patch
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -39,6 +40,12 @@ class CatalogTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "duplicate official identity"):
             builder.validate([a, b])
 
+    def test_product_identity_retains_meaningful_unicode_and_punctuation(self):
+        self.assertEqual(builder.product_key("µManager"), builder.product_key("μManager"))
+        self.assertNotEqual(builder.product_key("µManager"), builder.product_key("Manager"))
+        self.assertNotEqual(builder.product_key("MemTest86+"), builder.product_key("MemTest86"))
+        self.assertEqual(builder.product_key("DB Browser for SQLite"), "db-browser-for-sqlite")
+
     def test_maintenance_and_source_claims_cannot_be_invented_without_evidence(self):
         a = copy.deepcopy(self.catalog["applications"][0])
         a["maintenance"].update(status="active", source_url=None)
@@ -67,6 +74,40 @@ class CatalogTests(unittest.TestCase):
         a["pricing_model"] = "unknown"
         builder.validate([a])
 
+    def test_task_capabilities_require_known_ids_conditions_and_cited_feature_evidence(self):
+        original = next(a for a in self.catalog["applications"] if a["id"] == "gpt4all")
+        for mutation, message in [
+            (lambda a: a["capabilities"][0].update(id="invented-task"), "unknown capability"),
+            (lambda a: a["capabilities"][0].update(conditions=[]), "capability needs conditions"),
+            (lambda a: a["capabilities"][0].update(source_urls=["https://example.com/unsupported"]), "cited feature evidence"),
+            (lambda a: a.update(capabilities=a["capabilities"] * 2), "duplicate capability"),
+        ]:
+            with self.subTest(message=message):
+                app = copy.deepcopy(original)
+                mutation(app)
+                with self.assertRaisesRegex(ValueError, message): builder.validate([app])
+        app = copy.deepcopy(original)
+        for source in app["sources"]:
+            if source["url"] in app["capabilities"][0]["source_urls"]: source["supports"] = ["identity"]
+        with self.assertRaisesRegex(ValueError, "cited feature evidence"): builder.validate([app])
+
+    def test_second_expansion_preserves_all_published_application_ids(self):
+        baseline = builder.read("research/software-expansion-2026-11-15/baseline.json")
+        self.assertTrue(set(baseline["application_ids"]) <= {a["id"] for a in self.catalog["applications"]})
+
+    def test_measurements_bind_targets_to_checked_raw_data_and_exact_evidence(self):
+        original_read = builder.read
+        document = copy.deepcopy(original_read("data/software/evaluations.json"))
+        document["evaluations"][0]["data_sha256"] = "0" * 64
+        with patch.object(builder, "read", side_effect=lambda p: document if p == "data/software/evaluations.json" else original_read(p)):
+            with self.assertRaisesRegex(ValueError, "evidence hash mismatch"):
+                builder.evaluation_registry({a["id"] for a in self.catalog["applications"]})
+        document = copy.deepcopy(original_read("data/software/evaluations.json"))
+        document["evaluations"][0]["tool_app_ids"]["ripgrep-auto"] = "invented-product"
+        with patch.object(builder, "read", side_effect=lambda p: document if p == "data/software/evaluations.json" else original_read(p)):
+            with self.assertRaisesRegex(ValueError, "versions must map"):
+                builder.evaluation_registry({a["id"] for a in self.catalog["applications"]})
+
     def test_taxonomy_alternatives_and_recommendations_have_real_targets(self):
         ids = {a["id"] for a in self.catalog["applications"]}
         categories = {c["id"] for c in self.catalog["categories"]}
@@ -91,6 +132,18 @@ class CatalogTests(unittest.TestCase):
         self.assertTrue(all("latest source review older than 90 days" in a["reasons"] for a in later["refresh_queue"]))
         self.assertEqual(len(later["refresh_queue"]), len(self.catalog["applications"]))
         self.assertEqual(later["counts"]["by_maintenance"], current["counts"]["by_maintenance"])
+
+    def test_fresh_homepage_does_not_hide_an_overdue_license_source(self):
+        catalog = copy.deepcopy(self.catalog)
+        app = catalog["applications"][0]
+        old_source = dict(app["sources"][0], checked_at="2025-01-01", supports=["license"])
+        app["sources"].append(old_source)
+        report = builder.coverage_report(catalog, builder.REVIEWED)
+        record = next(item for item in report["refresh_queue"] if item["app_id"] == app["id"])
+        self.assertIn("some cited sources older than 90 days", record["reasons"])
+        source = next(item for item in report["source_refresh_queue"] if item["url"] == old_source["url"])
+        self.assertTrue(any(ref["app_id"] == app["id"] and ref["supports"] == ["license"] for ref in source["references"]))
+        self.assertGreater(report["source_urls_due_for_review"], 0)
 
     def test_link_audit_does_not_confuse_access_blocks_with_missing_pages(self):
         for status in [200, 206]: self.assertEqual(links.classify(status), "reachable")
