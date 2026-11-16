@@ -87,6 +87,17 @@ const server = http.createServer((req, res) => {
     assert.match(await main.locator('.scoped-measurements').textContent(), /dense-output timings overlapped/);
     await page.keyboard.press('Escape');
     report.checks.push('Evidence-backed offline PDF and recorded-audio tasks; setup conditions, live-input distinction and separately scoped measurements');
+    await page.locator('#search').fill('ProjectCleaner');
+    await main.locator('#research-count').click();
+    const historical = main.locator('#research-records .research-record');
+    await historical.getByText('Source unavailable', {exact: true}).waitFor();
+    assert.equal(await historical.locator('a[href="https://github.com/cbuntingde/ProjectCleaner"]').count(), 0);
+    assert.equal(await historical.locator('a[href$="research-availability-review.json"]').count(), 1);
+    assert.match(await historical.locator('pre').textContent(), /https:\/\/github.com\/cbuntingde\/ProjectCleaner/);
+    await historical.scrollIntoViewIfNeeded();
+    await page.screenshot({path: path.join(output, 'software-research-availability.png')});
+    await main.locator('#research-count').click();
+    report.checks.push('Unavailable historical source is labelled with dated review evidence; original record is retained and the dead outward link is disabled');
     await main.getByRole('button', {name: 'Reset filters', exact: true}).click();
     await main.getByRole('combobox', {name: 'Operating system', exact: true}).selectOption('Linux');
     await page.locator('#search').fill('unmatchable-fixture-workflow');

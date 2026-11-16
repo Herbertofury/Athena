@@ -119,7 +119,11 @@ def collect_urls(catalog, official_only=False):
             if a["maintenance"].get("source_url"):
                 urls[a["maintenance"]["source_url"]].append({"app_id": a["id"], "field": "maintenance"})
     for record in catalog.get("research_records", []):
-        urls[record["official_url"]].append({"research_id": record["id"], "field": "preserved_research_source", "record_state": "excluded" if record["id"].startswith("cleanup-excluded-") else "research"})
+        state = "excluded" if record["id"].startswith("cleanup-excluded-") else "research"
+        if state == "research" and record.get("availability", {}).get("status") == "unavailable":
+            state = "unavailable-history"
+        urls[record["official_url"]].append({"research_id": record["id"], "field": "preserved_research_source", "record_state": state,
+                                            "availability_status": record.get("availability", {}).get("status")})
     return urls
 
 
@@ -156,9 +160,12 @@ def main():
     def save():
         for item in report["results"]:
             item["excluded_history_only"] = all(r.get("record_state") == "excluded" for r in item["references"])
+            item["retained_history_only"] = all(r.get("record_state") in {"excluded", "unavailable-history"} for r in item["references"])
         report["results"].sort(key=lambda x: x["url"])
         report["summary"] = dict(sorted(Counter(x["outcome"] for x in report["results"]).items()))
-        report["actionable_not_found"] = sum(x["outcome"] == "not_found" and not x["excluded_history_only"] for x in report["results"])
+        report["actionable_not_found"] = sum(x["outcome"] == "not_found" and not x["retained_history_only"] for x in report["results"])
+        report["historical_not_found"] = sum(x["outcome"] == "not_found" and x["retained_history_only"] for x in report["results"])
+        report["unavailable_history_now_reachable"] = sum(x["outcome"] == "reachable" and any(r.get("availability_status") == "unavailable" for r in x["references"]) for x in report["results"])
         temporary = args.output.with_suffix(args.output.suffix + ".tmp")
         temporary.write_text(json.dumps(report, indent=2) + "\n")
         temporary.replace(args.output)
@@ -173,7 +180,7 @@ def main():
     report.update(completed=True, finished_at=datetime.now(timezone.utc).isoformat(), url_count=len(urls))
     save()
     print(json.dumps({"urls": len(urls), "summary": report["summary"], "report": str(args.output)}, indent=2))
-    return 1 if args.strict and any(x["outcome"] == "invalid_or_nonpublic" or (x["outcome"] == "not_found" and not x["excluded_history_only"]) for x in report["results"]) else 0
+    return 1 if args.strict and any(x["outcome"] == "invalid_or_nonpublic" or (x["outcome"] == "not_found" and not x["retained_history_only"]) for x in report["results"]) else 0
 
 
 if __name__ == "__main__":

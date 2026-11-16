@@ -156,6 +156,33 @@ def capability_registry():
     return definitions
 
 
+def apply_research_availability(records):
+    """Annotate retained history without changing its original object or any app."""
+    by_id = {r["id"]: r for r in records}
+    seen = set()
+    for review in read("data/software/research-availability.json")["records"]:
+        record_id = review.get("research_id")
+        if record_id in seen or record_id not in by_id:
+            raise ValueError("Availability review requires a unique preserved research identity")
+        seen.add(record_id)
+        record = by_id[record_id]
+        if review.get("expected_original_url") != record["official_url"]:
+            raise ValueError("Availability review URL must match the preserved source")
+        if review.get("status") != "unavailable" or not valid_date(review.get("checked_at")) or not review.get("note"):
+            raise ValueError("Availability review requires a dated, explained observation")
+        path = review.get("evidence_path", "")
+        evidence = (ROOT / path).resolve()
+        if not path or Path(path).is_absolute() or not evidence.is_relative_to(ROOT) or not evidence.is_file():
+            raise ValueError("Availability evidence must exist inside the repository")
+        if hashlib.sha256(evidence.read_bytes()).hexdigest() != review.get("evidence_sha256"):
+            raise ValueError("Availability evidence hash mismatch")
+        matching = [r for r in read(path)["records"] if r.get("research_id") == record_id and r.get("url") == record["official_url"]]
+        if len(matching) != 1 or not any(o.get("url") == record["official_url"] and o.get("status") in {404, 410} and o.get("outcome") == "not_found" and o.get("checked_at", "").startswith(review["checked_at"])
+                                          for o in matching[0].get("observations", [])):
+            raise ValueError("Availability review requires matching dated HTTP evidence")
+        record["availability"] = {**review, "evidence_url": "https://github.com/Herbertofury/Athena/blob/main/" + path}
+
+
 def evaluation_registry(app_ids):
     evaluations = read("data/software/evaluations.json")["evaluations"]
     seen = set()
@@ -363,6 +390,7 @@ def load_catalog(require_partitions=True):
             "summary": item["summary"], "platform_notes": item.get("setup", "Unverified"),
             "official_url": item["repository"], "evidence_status": item.get("verification", "Research snapshot"),
             "origin": ai_path, "original": item})
+    apply_research_availability(research_records)
     categories = []
     for family, (title, description) in FAMILIES.items():
         for cat in sorted({a["category"] for a in apps if a["family"] == family}):
@@ -402,6 +430,7 @@ def load_catalog(require_partitions=True):
         "applications_with_documented_capabilities": sum(bool(a.get("capabilities")) for a in apps),
         "measured_comparisons": len(evaluations),
         "related_research_records": len(research_records),
+        "unavailable_research_sources": sum(r.get("availability", {}).get("status") == "unavailable" for r in research_records),
         "preserved_cleanup_unranked": len(cleanup["unranked"]),
         "preserved_cleanup_excluded": len(cleanup["excluded"]),
         "by_family": dict(sorted(Counter(a["family"] for a in apps).items())),
@@ -431,7 +460,7 @@ def markdown(catalog):
 
 Reviewed {REVIEWED}. **{c['applications']} applications**, **{c['categories']} task categories**, **{c['families']} families**, **{c['source_urls']} distinct cited source URLs**, **{c['alternative_links']} explicit alternative links**, and **{c['decision_guides']} task decision guides**.
 
-The PC application catalog grew from {c['preserved_pc_records']} records and {c['baseline_categories']} categories. {c['new_applications']} researched records were added, and {c['legacy_records_enriched']} original records received dated metadata enrichments. The original cleanup snapshot (66 main candidates, three unranked and one excluded), 105-entry Windows research catalog, creative-AI research and engineering library are retained byte for byte. Their records are not counted again to inflate this expansion. The workspace separately exposes {c['related_research_records']} preserved cleanup and creative-AI research records.
+The PC application catalog grew from {c['preserved_pc_records']} records and {c['baseline_categories']} categories. {c['new_applications']} researched records were added, and {c['legacy_records_enriched']} original records received dated metadata enrichments. The original cleanup snapshot (66 main candidates, three unranked and one excluded), 105-entry Windows research catalog, creative-AI research and engineering library are retained byte for byte. Their records are not counted again to inflate this expansion. The workspace separately exposes {c['related_research_records']} preserved cleanup and creative-AI research records. Dated availability reviews identify {c['unavailable_research_sources']} unavailable historical sources; those records stay searchable with their original data and evidence, while unavailable outward links are disabled.
 
 ## Find the right tool
 

@@ -248,7 +248,9 @@ export async function mount({container, search = '', state: saved = {}, route = 
     $('research-records').replaceChildren(...(research.open ? researchRows : []).map(r => element('article', {class: 'research-record'},
       element('h3', {}, r.name), badge(r.kind), element('p', {}, r.summary),
       element('p', {class: 'muted'}, r.platform_notes), element('p', {class: 'muted'}, r.evidence_status),
-      link('Original project / source ↗', r.official_url),
+      r.availability?.status === 'unavailable' ? element('div', {class: 'research-availability'},
+        badge('Source unavailable'), element('p', {}, r.availability.note + ' Checked ' + r.availability.checked_at + '.'),
+        link('Availability review ↗', r.availability.evidence_url)) : link('Original project / source ↗', r.official_url),
       element('details', {}, element('summary', {}, 'Inspect preserved source record'), element('pre', {}, JSON.stringify(r.original, null, 2))))));
   }
   function reset() { state = parseState('software?q='); limit = 24; persist(); render(); navigate?.('#software?q=', {replace: true}); }

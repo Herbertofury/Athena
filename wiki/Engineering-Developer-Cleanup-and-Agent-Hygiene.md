@@ -2,7 +2,9 @@
 
 [Engineering research](Engineering-Home) · [Canonical catalog](https://github.com/Herbertofury/Athena/blob/main/research/developer-cleanup-2026-11-14/README.md)
 
-**66 verified GitHub repositories · ranked by star counts checked November 14, 2026.** All tool names link directly to official downloads or source/installation repositories.
+**66 GitHub repositories in the November 14, 2026 research snapshot · ranked by the star counts recorded then.** The original records and rankings are retained. Official download/source routes remain linked where available; dated availability updates are identified separately.
+
+**Availability update, November 16, 2026:** the preserved ProjectCleaner and previously excluded WinDiskCleanup public URLs returned HTTP 404. No verified replacement identity was established. Their original URLs and records remain in the canonical research snapshot; the [availability review](https://github.com/Herbertofury/Athena/blob/main/research/software-expansion-2026-11-15/research-availability-review.json) records the observations and limits. The integrated [software research library](https://herbertofury.github.io/Athena/#software?q=ProjectCleaner) displays the dated notice with the unchanged original record.
 
 | Rank | Tool (official direct link) | GitHub stars | Platform | Role |
 |---:|---|---:|---|---|
@@ -65,7 +67,7 @@
 | 57 | [Windows disk cleanup skill](https://github.com/Mi9-LLC/agent-skills) | 1 | Windows | skill |
 | 58 | [wombat](https://github.com/YannByte/wombat) | 1 | Check docs | agents |
 | 59 | [midden](https://github.com/starhaven-io/midden) | 1 | Check docs | agents |
-| 60 | [ProjectCleaner](https://github.com/cbuntingde/ProjectCleaner) | 0 | Windows | project |
+| 60 | ProjectCleaner · [source unavailable when checked](https://github.com/Herbertofury/Athena/blob/main/research/software-expansion-2026-11-15/research-availability-review.json) | 0 | Windows | project |
 | 61 | [worktree-cleanup](https://github.com/gregkop/worktree-cleanup) | 0 | Windows/Mac/Linux | skill |
 | 62 | [worktree (beyond10x)](https://github.com/beyond10x/worktree) | 0 | Check docs | worktrees |
 | 63 | [careen-survey](https://github.com/j0yen/careen-survey) | 0 | Check docs | rust |
@@ -87,7 +89,7 @@
 
 Star counts are a **2026-11-14 snapshot** checked from GitHub repository API metadata, not installed-user counts. Release assets checked for Krokiet 12.0.2, Worktrunk 0.81.0, MangoDisk 2.0.0, WinDirStat 2.9.3, SquirrelDisk 2.6.1, and Jharu 1.0.0. Windows install/runtime compatibility has not been tested on a Windows PC. Some entries are tiny experimental projects, monitoring tools, Mac-only apps, or agent skills rather than standalone cleanup software.
 
-Community discussion: [Claude Code browser-profile leftovers](https://www.reddit.com/r/ClaudeCode/comments/1xufdct/my_mac_ran_out_of_disk_i_asked_claude_what_was/); [agent disk/cache management](https://www.reddit.com/r/ClaudeCode/comments/1xnvxar/how_do_i_prevent_claude_from_eating_up_my_hard/). X searches were inconclusive, so no independent X endorsements are claimed. Previously mentioned [WinDiskCleanup](https://github.com/AbdulWaseaDev/WinDiskCleanup) returned GitHub 404 during live verification and is excluded.
+Community discussion: [Claude Code browser-profile leftovers](https://www.reddit.com/r/ClaudeCode/comments/1xufdct/my_mac_ran_out_of_disk_i_asked_claude_what_was/); [agent disk/cache management](https://www.reddit.com/r/ClaudeCode/comments/1xnvxar/how_do_i_prevent_claude_from_eating_up_my_hard/). X searches were inconclusive, so no independent X endorsements are claimed. Previously mentioned WinDiskCleanup returned GitHub 404 during live verification and remains excluded; its original URL is preserved in the [availability evidence](https://github.com/Herbertofury/Athena/blob/main/research/software-expansion-2026-11-15/research-availability-review.json).
 
 **Keep active worktrees, uncommitted changes, session history, release artifacts, useful compiler caches, and C:\Windows\Installer out of blanket deletion.** Preview first, use reversible cleanup, test restoration and rebuilds.
 

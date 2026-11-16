@@ -440,6 +440,18 @@ test('unranked and excluded cleanup snapshots remain discoverable as research', 
   assert.match(excluded.evidence_status, /not a recommended/i);
 });
 
+test('DOM: unavailable historical sources retain their records without an active dead link', async t => {
+  const ui = await domFixture(t, '#software?q=ProjectCleaner');
+  ui.toggle('research-library', true);
+  const record = ui.root.querySelector('.research-record');
+  assert.ok(record);
+  assert.match(record.textContent, /Source unavailable/);
+  assert.match(record.textContent, /2026-11-16/);
+  assert.ok(record.querySelector('a[href$="research-availability-review.json"]'));
+  assert.equal(record.querySelector('a[href="https://github.com/cbuntingde/ProjectCleaner"]'), null);
+  assert.match(record.querySelector('pre').textContent, /https:\/\/github.com\/cbuntingde\/ProjectCleaner/);
+});
+
 test('category deep links survive a taxonomy move across families', async () => {
   const {parseState, normalizeState, queryCatalog, indexCatalog} = await model;
   const state = parseState('#software?family=creative&category=creative%2Fcad&platform=Windows');
