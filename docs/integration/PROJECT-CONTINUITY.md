@@ -26,7 +26,7 @@ No root LICENSE was found in that source; do not infer third-party reuse rights.
 | --- | --- |
 | Project decisions/actions with provenance and pin/ignore history | Native manual-entry slice implemented; no source dataset imported |
 | Immutable output revisions | Native note revision history; complete artifact/media revision parity pending |
-| Full-text indexing, project brain, continuity export | Native substring search and JSON export; indexed search, bounded synthesis and restore/import pending |
+| Full-text indexing, project brain, continuity export | Native substring search and JSON export; indexed search and bounded synthesis pending; bounded additive local backup import implemented |
 | Mounted chat capture across provider adapters | Not ported; maintain browser-scoped, explicit consent and private-data boundaries |
 | Output Vault, artifact files and rich reader | Not ported; reconcile media/files with existing Athena workflows |
 | Tab state, execution pulse and reliability supervisor | Not ported; do not infer completion from idle or missing signal |
@@ -82,3 +82,31 @@ revision, source and timestamp, changed fields, and reviewed dependency baseline
 in Markdown or JSON. It reuses the native validation and context compiler; it does
 not import, restore, capture, transmit or alter owner data. This is a command-line
 review companion, not a new graphical workspace or full Constellation parity.
+
+
+## Explicit additive local backup import
+
+Select an exported Athena Continuity JSON file in the native workspace to add
+missing notes. Identical IDs are retained once; any conflicting ID or top-level
+extension metadata refuses the entire batch before saving. No incoming entry can
+overwrite an existing revision, policy or dependency. Unknown fields are retained.
+Schema1 imports upgrade through the existing validator. This is not a Constellation
+extension database importer, browser capture, remote sync or full migration.
+
+Admission is strict UTF-8 JSON, up to16 MiB, nesting128 and100 total notes after
+merge. These are explicit import/UI budgets, not a storage quota or truncation.
+Duplicate keys, numbers that cannot round-trip as JSON without numeric change,
+unsupported schemas and malformed data are refused. Larger valid collections must
+remain preserved outside this import path; no records are silently dropped.
+
+The most recent file selection wins and unmount cancels late results. The merge
+uses the current mounted draft after reading. Use a single editing tab: the shared
+host does not provide cross-tab compare-and-swap or external update synchronization.
+Browser persistence may reject even admitted imports (including the host's250000
+character settings budget); the complete admitted draft remains exportable, with
+explicit unsaved wording. Do not close that page before exporting an unsaved draft.
+
+Local contract/DOM tests pass using synthetic data. Local Chromium launch was
+blocked by singleton socket EPERM, not a test pass. Browser acceptance and exact
+served manifest identity must be checked in CI before delivery. No owner backup,
+installed extension, provider session or source retirement was accepted here.
