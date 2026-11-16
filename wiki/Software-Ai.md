@@ -4,9 +4,11 @@ Run and evaluate model-assisted workflows with explicit hardware and licensing l
 
 [Browse in Athena](https://herbertofury.github.io/Athena/#software?family=ai) · [Catalog](Software-Catalog) · [Method](Software-Methodology)
 
-22 applications. Reviewed 2026-11-15; individual records identify inherited research.
+28 applications. Reviewed 2026-11-16; individual records identify inherited research.
 
-## Ai Command Line
+## AI command-line assistants
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=ai%2Fai-command-line)
 
 ### AIChat
 
@@ -37,8 +39,38 @@ Command-line and Python interface for model prompts, plugins, embeddings and loc
 - [Official project](https://llm.datasette.io/en/stable/) · [Official installation / downloads](https://llm.datasette.io/en/stable/setup.html) · [Repository](https://github.com/simonw/llm)
 - **Sources:** [Official project README: documented behavior and installation](https://raw.githubusercontent.com/simonw/llm/HEAD/README.md) (2026-11-14; downloads, features, identity, license); [Official license text or upstream licensing metadata](https://raw.githubusercontent.com/simonw/llm/main/LICENSE) (2026-11-14; license); [Official downloads or installation instructions](https://llm.datasette.io/en/stable/setup.html) (2026-11-14; downloads); [Official documentation: Python package installation and documented macOS/Linux configuration paths.](https://llm.datasette.io/en/latest/setup.html) (2026-11-14; platforms, downloads); [Public upstream app/package distribution: unauthenticated availability checked](https://files.pythonhosted.org/packages/43/70/8a4de4f81d7e7eba291569d9acd7fa77ec794f37ed9cc78fd1d493a43953/llm-0.37.2-py3-none-any.whl) (2026-11-14; downloads, pricing); [Observed upstream release record and date](https://github.com/simonw/llm/releases/tag/0.37.2) (2026-11-14; downloads, maintenance)
 
-## Ai Evaluation
+## AI evaluation
 
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=ai%2Fai-evaluation)
+
+### DeepEval
+
+LLM evaluation runner with test cases, metrics and integration into Python test workflows.
+
+- **Platforms:** Windows, Linux. **License:** Apache-2.0. **Pricing model:** free.
+- **Compatibility details:** Official quickstart documents local Python execution and Linux/Windows result-path setup; a supported Python environment is required.
+- **Pricing details:** Open-source runner is free; model inference and optional Confident AI services have separate terms and costs.
+- **Pick for:** You want programmable evaluations that fit a Python test suite.
+- **Compare when:** Use human review and held-out examples to calibrate metrics; use Promptfoo for configuration-driven comparisons.
+- **Strengths:** Evaluation criteria can be checked repeatedly during development; Test cases integrate with an existing Python workflow
+- **Limitations:** Model-based judges have uncertainty and may incur API fees; Local runner execution does not make remote judge calls offline
+- **Maintenance:** active — Official release python-v4.2.4 is dated 2026-09-22; installation and performance were not independently tested. ([evidence](https://github.com/confident-ai/deepeval/releases/tag/python-v4.2.4))
+- [Official project](https://github.com/confident-ai/deepeval) · [Official installation / downloads](https://deepeval.com/docs/getting-started) · [Repository](https://github.com/confident-ai/deepeval)
+- **Sources:** [Official product overview](https://github.com/confident-ai/deepeval) (2026-11-15; identity, features); [Official project documentation](https://raw.githubusercontent.com/confident-ai/deepeval/main/README.md) (2026-11-15; identity, features, downloads, pricing); [Official licensing terms](https://raw.githubusercontent.com/confident-ai/deepeval/main/LICENSE.md) (2026-11-15; license); [Documented deployment and platform scope](https://deepeval.com/docs/getting-started) (2026-11-15; platforms, downloads); [Official dated release](https://github.com/confident-ai/deepeval/releases/tag/python-v4.2.4) (2026-11-15; maintenance, downloads)
+### Langfuse
+
+LLM application observability with traces, evaluations, prompt management and dataset workflows.
+
+- **Platforms:** Web. **License:** MIT core; enterprise directories use separate commercial terms. **Pricing model:** freemium.
+- **Compatibility details:** Browser service with official container deployment; SDKs instrument applications separately.
+- **Pricing details:** Core can be self-hosted; hosted free/paid plans and enterprise capabilities are separate.
+- **Pick for:** You need to understand model behavior across real application traces.
+- **Compare when:** Use a local evaluation runner for isolated tests and review hosted versus self-hosted data handling.
+- **Strengths:** Connects model calls and application steps in a shared history; Prompts and evaluation results can be reviewed together
+- **Limitations:** Self-hosting requires several backing services; Traces can contain sensitive application data and need deliberate retention rules
+- **Maintenance:** active — Official release v4.80.0 is dated 2026-11-13; installation and performance were not independently tested. ([evidence](https://github.com/langfuse/langfuse/releases/tag/v4.80.0))
+- [Official project](https://github.com/langfuse/langfuse) · [Official installation / downloads](https://github.com/langfuse/langfuse#self-host-langfuse) · [Repository](https://github.com/langfuse/langfuse)
+- **Sources:** [Official product overview](https://github.com/langfuse/langfuse) (2026-11-15; identity, features); [Official project documentation](https://raw.githubusercontent.com/langfuse/langfuse/main/README.md) (2026-11-15; identity, features, downloads, platforms, pricing); [Official licensing terms](https://raw.githubusercontent.com/langfuse/langfuse/main/LICENSE) (2026-11-15; license); [Official download or installation entry point](https://github.com/langfuse/langfuse#self-host-langfuse) (2026-11-15; downloads); [Official dated release](https://github.com/langfuse/langfuse/releases/tag/v4.80.0) (2026-11-15; maintenance, downloads)
 ### Promptfoo
 
 CLI and local viewer for evaluating prompts and model-backed applications against repeatable test cases.
@@ -55,6 +87,8 @@ CLI and local viewer for evaluating prompts and model-backed applications agains
 - **Sources:** [Official project README: documented behavior and installation](https://raw.githubusercontent.com/promptfoo/promptfoo/HEAD/README.md) (2026-11-14; downloads, features, identity, license); [Official license text or upstream licensing metadata](https://raw.githubusercontent.com/promptfoo/promptfoo/HEAD/LICENSE) (2026-11-14; license); [Official downloads or installation instructions](https://www.promptfoo.dev/docs/installation/) (2026-11-14; downloads, platforms); [Public upstream app/package distribution: unauthenticated availability checked](https://registry.npmjs.org/promptfoo/-/promptfoo-0.125.1.tgz) (2026-11-14; downloads, pricing); [Observed upstream release record and date](https://github.com/promptfoo/promptfoo/releases/tag/0.125.1) (2026-11-14; downloads, maintenance)
 
 ## AI coding assistants
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=ai%2Fcoding-assistants)
 
 ### Aider
 
@@ -140,23 +174,76 @@ Self-hosted coding assistant with a local model server, editor integrations and 
 - [Official project](https://www.tabbyml.com/) · [Official installation / downloads](https://github.com/TabbyML/tabby/releases) · [Repository](https://github.com/tabbyml/tabby)
 - **Sources:** [Official project README: documented behavior and installation](https://raw.githubusercontent.com/tabbyml/tabby/HEAD/README.md) (2026-11-14; downloads, features, identity); [Official license text or upstream licensing metadata](https://raw.githubusercontent.com/tabbyml/tabby/HEAD/LICENSE) (2026-11-14; license); [Official downloads or installation instructions](https://github.com/TabbyML/tabby/releases) (2026-11-14; downloads); [Official documentation: Community is free; Team and Enterprise features require the appropriate paid license.](https://tabby.tabbyml.com/docs/administration/license/) (2026-11-14; pricing); [Official documentation: Windows server installation has hardware and runtime prerequisites.](https://tabby.tabbyml.com/docs/quick-start/installation/windows/) (2026-11-14; platforms, downloads); [Official documentation: Linux server installation and accelerator choices.](https://tabby.tabbyml.com/docs/quick-start/installation/linux/) (2026-11-14; platforms, downloads); [Public upstream app/package distribution: unauthenticated availability checked](https://github.com/TabbyML/tabby/releases/download/v0.32.0/tabby_aarch64-apple-darwin.tar.gz) (2026-11-14; downloads, pricing); [Observed upstream release record and date](https://github.com/tabbyml/tabby/releases/tag/v0.32.0) (2026-11-14; downloads, maintenance)
 
+## AI training data annotation
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=ai%2Fdata-labeling)
+
+### Argilla
+
+Collaborative dataset curation application for collecting human feedback on text and model outputs.
+
+- **Platforms:** Web. **License:** Apache-2.0. **Pricing model:** free.
+- **Compatibility details:** Browser UI and server with a Python SDK; the SDK alone is not the full application.
+- **Pricing details:** Apache source and client are free; hosted infrastructure has separate terms.
+- **Pick for:** A project already benefits from Argilla-style human feedback datasets and accepts its maintenance scope.
+- **Compare when:** Prefer an actively evolving annotation platform when new capabilities and long-term vendor development are necessary.
+- **Strengths:** Connects domain reviewers with programmatic dataset workflows; Feedback fields can be adapted to a project
+- **Limitations:** Authors state that new feature development has ended and maintenance is limited to fixes; Requires a server as well as the Python client
+- **Maintenance:** unverified — Official release v2.8.0 is dated 2025-03-11; installation and performance were not independently tested. ([evidence](https://github.com/argilla-io/argilla/releases/tag/v2.8.0))
+- [Official project](https://github.com/argilla-io/argilla) · [Official installation / downloads](https://github.com/argilla-io/argilla#-getting-started) · [Repository](https://github.com/argilla-io/argilla)
+- **Sources:** [Official product overview](https://github.com/argilla-io/argilla) (2026-11-15; identity, features); [Official project documentation](https://raw.githubusercontent.com/argilla-io/argilla/develop/README.md) (2026-11-15; identity, features, downloads, platforms, pricing); [Official licensing terms](https://raw.githubusercontent.com/argilla-io/argilla/develop/LICENSE) (2026-11-15; license); [Official download or installation entry point](https://github.com/argilla-io/argilla#-getting-started) (2026-11-15; downloads); [Official dated release](https://github.com/argilla-io/argilla/releases/tag/v2.8.0) (2026-11-15; maintenance, downloads)
+### CVAT Community
+
+Self-hosted browser application for collaborative image, video, audio and 3D annotation with dataset import/export and APIs.
+
+- **Platforms:** Web. **License:** MIT core; some serverless assets and dependencies have separate licenses. **Pricing model:** free.
+- **Compatibility details:** Docker/Compose server accessed through a browser; upstream primarily tests Chromium-based browsers. Firefox has caveats and Safari/WebKit is not supported.
+- **Pricing details:** Community is explicitly free and self-hosted. CVAT Online, Enterprise and annotation services have separate plans and limits.
+- **Pick for:** A team needs a self-hosted visual annotation platform with standard dataset formats and APIs.
+- **Compare when:** Compare Label Studio for a different multi-modal task model and Argilla for text-feedback workflows; verify edition-specific features.
+- **Strengths:** A visual annotation workflow covers both individual frames and structured datasets; Self-hosting gives the team control over storage and service configuration
+- **Limitations:** Operating the full server stack requires backups, upgrades and resource planning; Hosted/Enterprise features such as some quality-control UI and built-in models are not automatically included in Community
+- **Maintenance:** active — Official release v2.83.0 is dated 2026-11-12. This is a release observation; installation and performance were not independently tested. ([evidence](https://github.com/cvat-ai/cvat/releases/tag/v2.83.0))
+- [Official project](https://www.cvat.ai/) · [Official installation / downloads](https://docs.cvat.ai/docs/administration/community/basics/installation/) · [Repository](https://github.com/cvat-ai/cvat)
+- **Sources:** [Official project documentation](https://github.com/cvat-ai/cvat/blob/develop/README.md) (2026-11-16; identity, features, platforms, downloads, pricing); [Official application and dependency licensing](https://github.com/cvat-ai/cvat/blob/develop/LICENSE) (2026-11-16; license); [Official Community installation](https://docs.cvat.ai/docs/administration/community/basics/installation/) (2026-11-16; platforms, downloads); [Official dated release and distribution](https://github.com/cvat-ai/cvat/releases/tag/v2.83.0) (2026-11-16; maintenance, downloads)
+### Label Studio
+
+Configurable annotation application for text, images, audio, video and time-series datasets.
+
+- **Platforms:** Web. **License:** Apache-2.0 Community; commercial editions separate. **Pricing model:** freemium.
+- **Compatibility details:** Browser interface backed by local or hosted Python/container deployment.
+- **Pricing details:** Community is publicly installable; enterprise and hosted services have separate pricing.
+- **Pick for:** You need configurable annotation across more than one kind of media.
+- **Compare when:** Compare specialist tools for detailed image workflows or Argilla for feedback-oriented text datasets.
+- **Strengths:** Different annotation tasks can share one project system; Templates reduce the need for a custom labeling interface
+- **Limitations:** Team governance and review capabilities differ by edition; Dataset storage, access control and label quality need separate planning
+- **Maintenance:** active — Official release 1.23.2 is dated 2026-09-29; installation and performance were not independently tested. ([evidence](https://github.com/HumanSignal/label-studio/releases/tag/1.23.2))
+- [Official project](https://github.com/HumanSignal/label-studio) · [Official installation / downloads](https://github.com/HumanSignal/label-studio#try-out-label-studio) · [Repository](https://github.com/HumanSignal/label-studio)
+- **Sources:** [Official product overview](https://github.com/HumanSignal/label-studio) (2026-11-15; identity, features); [Official project documentation](https://raw.githubusercontent.com/HumanSignal/label-studio/develop/README.md) (2026-11-15; identity, features, downloads, platforms, pricing); [Official licensing terms](https://raw.githubusercontent.com/HumanSignal/label-studio/develop/LICENSE) (2026-11-15; license); [Official download or installation entry point](https://github.com/HumanSignal/label-studio#try-out-label-studio) (2026-11-15; downloads); [Official dated release](https://github.com/HumanSignal/label-studio/releases/tag/1.23.2) (2026-11-15; maintenance, downloads)
+
 ## Document question answering
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=ai%2Fdocument-ai)
 
 ### AnythingLLM
 
 AI workspace combining document ingestion, retrieval, model connections, and configurable agents.
 
-- **Platforms:** Windows, macOS, Linux. **License:** MIT. **Pricing model:** free.
-- **Pricing details:** An official public app/package distribution was accessible without payment or authentication. Optional paid editions, hosted services, models and third-party dependencies retain separate terms.
+- **Platforms:** Windows, macOS, Linux. **License:** MIT. **Pricing model:** freemium.
+- **Compatibility details:** Desktop is a single-user app on Windows, macOS and Linux. Shared browser access and multi-user controls use the Docker deployment; documented Pro feature availability is Windows and macOS.
+- **Pricing details:** Core desktop document chat is free; optional Desktop Pro subscriptions raise limits on additional Magic features. External provider fees remain separate.
 - **Pick for:** Ask questions over a controlled document collection with an explicit model provider.
 - **Compare when:** Local deployment does not guarantee local processing when remote providers are selected.
 - **Strengths:** Document ingestion and retrieval can be organized into separate workspaces.
 - **Limitations:** Local deployment does not guarantee local processing when remote providers are selected.; Software licensing does not cover model weights, optional hosted services, or provider usage charges; verify those separately.
 - **Maintenance:** active — Repository not archived; latest repository push observed 2026-11-13. Activity is not a runtime, security, or support guarantee. ([evidence](https://api.github.com/repos/Mintplex-Labs/anything-llm))
 - [Official project](https://anythingllm.com/) · [Official installation / downloads](https://github.com/Mintplex-Labs/anything-llm/releases) · [Repository](https://github.com/Mintplex-Labs/anything-llm)
-- **Sources:** [Official repository metadata: identity, license detection and activity](https://api.github.com/repos/Mintplex-Labs/anything-llm) (2026-11-14; identity, maintenance, license); [Official project README](https://raw.githubusercontent.com/Mintplex-Labs/anything-llm/HEAD/README.md) (2026-11-14; identity, features, downloads, platforms); [Official official documentation](https://anythingllm.com/) (2026-11-14; identity, features); [Official release inspected: v1.19.0](https://github.com/Mintplex-Labs/anything-llm/releases/tag/v1.19.0) (2026-11-14; downloads, maintenance, platforms); [Public upstream app/package distribution: availability without payment or authentication checked](https://github.com/Mintplex-Labs/anything-llm/releases/download/v1.19.0/AnythingLLMDesktop.dmg) (2026-11-14; downloads, pricing)
+- **Sources:** [Official repository metadata: identity, license detection and activity](https://api.github.com/repos/Mintplex-Labs/anything-llm) (2026-11-14; identity, maintenance, license); [Official PDF support and desktop distributions](https://raw.githubusercontent.com/Mintplex-Labs/anything-llm/HEAD/README.md) (2026-11-15; downloads, features, identity, platforms); [Official official documentation](https://anythingllm.com/) (2026-11-14; identity, features); [Official release inspected: v1.19.0](https://github.com/Mintplex-Labs/anything-llm/releases/tag/v1.19.0) (2026-11-14; downloads, maintenance, platforms); [Public upstream app/package distribution: availability without payment or authentication checked](https://github.com/Mintplex-Labs/anything-llm/releases/download/v1.19.0/AnythingLLMDesktop.dmg) (2026-11-14; downloads, pricing); [Official desktop offline operation and telemetry policy](https://docs.anythingllm.com/installation-desktop/privacy) (2026-11-15; features); [Official local embedder and first-use model download](https://docs.anythingllm.com/setup/embedder-configuration/local/built-in) (2026-11-15; features); [Official local LLM provider and model setup](https://docs.anythingllm.com/setup/llm-configuration/local/built-in) (2026-11-15; features); [Official attachment and retrieval context limits](https://docs.anythingllm.com/chatting-with-documents/introduction) (2026-11-15; features); [Official free core and optional Desktop Pro limits](https://docs.anythingllm.com/pro/overview) (2026-11-15; pricing, features, platforms)
+- **Documented task support — Chat with PDF documents offline:** Use the desktop app with a local LLM, local embedder and local vector database.; Download models, run the first embedding and prepare any optional reranker before disconnecting; avoid remote providers and web-connected agents. **Limits:** Retrieval sends selected chunks to the model; attached documents are constrained by its context window.; The built-in embedding model is primarily trained on English; test retrieval quality for other languages. [Evidence 1](https://raw.githubusercontent.com/Mintplex-Labs/anything-llm/HEAD/README.md) [Evidence 2](https://docs.anythingllm.com/installation-desktop/privacy) [Evidence 3](https://docs.anythingllm.com/setup/embedder-configuration/local/built-in) [Evidence 4](https://docs.anythingllm.com/setup/llm-configuration/local/built-in) [Evidence 5](https://docs.anythingllm.com/chatting-with-documents/introduction)
 
 ## Local AI interfaces
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=ai%2Flocal-ai-clients)
 
 ### GPT4All
 
@@ -170,7 +257,8 @@ Desktop application and tooling for running supported language models locally an
 - **Limitations:** Compatible models and document processing have hardware and model-license constraints.; Software licensing does not cover model weights, optional hosted services, or provider usage charges; verify those separately.; Repository activity is older than one year; current maintenance has not been established.
 - **Maintenance:** unverified — Repository not archived; latest repository push observed 2025-05-27. Activity is not a runtime, security, or support guarantee. No push within the preceding year was observed; current support status needs reassessment. ([evidence](https://api.github.com/repos/nomic-ai/gpt4all))
 - [Official project](https://www.nomic.ai/gpt4all) · [Official installation / downloads](https://github.com/nomic-ai/gpt4all/releases) · [Repository](https://github.com/nomic-ai/gpt4all)
-- **Sources:** [Official repository metadata: identity, license detection and activity](https://api.github.com/repos/nomic-ai/gpt4all) (2026-11-14; identity, maintenance, license); [Official project README](https://raw.githubusercontent.com/nomic-ai/gpt4all/HEAD/README.md) (2026-11-14; identity, features, downloads, platforms); [Official official documentation](https://www.nomic.ai/gpt4all) (2026-11-14; identity, features); [Official release inspected: v3.10.0](https://github.com/nomic-ai/gpt4all/releases/tag/v3.10.0) (2026-11-14; downloads, maintenance, platforms); [Public upstream app/package distribution: availability without payment or authentication checked](https://github.com/nomic-ai/gpt4all/releases/download/v3.10.0/gpt4all-installer-win64-v3.10.0.exe) (2026-11-14; downloads, pricing)
+- **Sources:** [Official repository metadata: identity, license detection and activity](https://api.github.com/repos/nomic-ai/gpt4all) (2026-11-14; identity, maintenance, license); [Official project README](https://raw.githubusercontent.com/nomic-ai/gpt4all/HEAD/README.md) (2026-11-14; identity, features, downloads, platforms); [Official official documentation](https://www.nomic.ai/gpt4all) (2026-11-14; identity, features); [Official release inspected: v3.10.0](https://github.com/nomic-ai/gpt4all/releases/tag/v3.10.0) (2026-11-14; downloads, maintenance, platforms); [Public upstream app/package distribution: availability without payment or authentication checked](https://github.com/nomic-ai/gpt4all/releases/download/v3.10.0/gpt4all-installer-win64-v3.10.0.exe) (2026-11-14; downloads, pricing); [Official LocalDocs workflow and on-device indexing](https://docs.gpt4all.io/gpt4all_desktop/localdocs.html) (2026-11-15; features); [Official PDF file support and off-device embedding switch](https://docs.gpt4all.io/gpt4all_desktop/settings.html) (2026-11-15; features)
+- **Documented task support — Chat with PDF documents offline:** Download a compatible local chat model and the embedding model before disconnecting.; Keep Use Nomic Embed API off and use a local model for the chat. **Limits:** LocalDocs retrieves selected text snippets; it does not guarantee complete-document coverage or correct answers. [Evidence 1](https://docs.gpt4all.io/gpt4all_desktop/localdocs.html) [Evidence 2](https://docs.gpt4all.io/gpt4all_desktop/settings.html)
 ### Jan
 
 Desktop AI chat application that can use local models and configured remote providers.
@@ -202,16 +290,17 @@ Portable local-model runner with a bundled browser interface, GGUF model support
 
 Desktop application for discovering, downloading and running supported local language models with chat and API interfaces.
 
-- **Platforms:** Windows, macOS, Linux. **License:** Proprietary LM Studio app terms; bundled components and models retain separate licenses. **Pricing model:** free.
+- **Platforms:** Windows, macOS, Linux. **License:** Proprietary LM Studio app terms; bundled components and models retain separate licenses. **Pricing model:** freemium.
 - **Compatibility details:** Officially supports Windows, Linux and Apple Silicon macOS; check the system-requirements page for current CPU, OS and RAM requirements.
-- **Pricing details:** Classification follows the cited official pricing or licensing explanation; optional services and third-party assets may have separate terms.
+- **Pricing details:** Local model use remains available on the free plan. Optional Bionic cloud-inference subscriptions and usage credits are paid; model licenses remain separate.
 - **Pick for:** Try supported local language models through a desktop interface.
 - **Compare when:** The app is proprietary and model terms are separate; hardware requirements include Apple Silicon for current macOS builds and sufficient memory.
 - **Strengths:** A graphical setup path helps users run compatible models without assembling a serving stack.
-- **Limitations:** The app is proprietary and model terms are separate; hardware requirements include Apple Silicon for current macOS builds and sufficient memory.
+- **Limitations:** The app is proprietary and model terms are separate; hardware requirements include Apple Silicon for current macOS builds and sufficient memory.; Choosing cloud inference or web search sends requests outside the local workflow; the offline claim applies to local models and local document processing.
 - **Maintenance:** unverified — Official sources and distribution pages were reviewed; current maintenance commitments were not independently established.
 - [Official project](https://lmstudio.ai/) · [Official installation / downloads](https://lmstudio.ai/download)
-- **Sources:** [Official product page: identity and documented features](https://lmstudio.ai/) (2026-11-14; features, identity); [Official downloads or installation instructions](https://lmstudio.ai/download) (2026-11-14; downloads); [Official documentation: Official announcement makes LM Studio free for personal and workplace use.](https://lmstudio.ai/blog/free-for-work) (2026-11-14; pricing); [Official documentation: Windows, Apple Silicon macOS and Linux hardware/system requirements.](https://lmstudio.ai/docs/app/system-requirements) (2026-11-14; platforms); [Official documentation: The LM Studio application is governed by proprietary app terms; models and bundled components have separate terms.](https://lmstudio.ai/app-terms) (2026-11-14; license); [Official documentation: Desktop model discovery, local chat and local model-serving workflows.](https://lmstudio.ai/docs/app/basics) (2026-11-14; identity, features, downloads)
+- **Sources:** [Official product page: identity and documented features](https://lmstudio.ai/) (2026-11-14; features, identity); [Official downloads or installation instructions](https://lmstudio.ai/download) (2026-11-14; downloads); [Official documentation: Official announcement makes LM Studio free for personal and workplace use.](https://lmstudio.ai/blog/free-for-work) (2026-11-14; pricing); [Official documentation: Windows, Apple Silicon macOS and Linux hardware/system requirements.](https://lmstudio.ai/docs/app/system-requirements) (2026-11-14; platforms); [Official documentation: The LM Studio application is governed by proprietary app terms; models and bundled components have separate terms.](https://lmstudio.ai/app-terms) (2026-11-14; license); [Official documentation: Desktop model discovery, local chat and local model-serving workflows.](https://lmstudio.ai/docs/app/basics) (2026-11-14; identity, features, downloads); [Official offline operation and network-dependent actions](https://lmstudio.ai/docs/app/offline) (2026-11-15; features); [Official PDF attachments and retrieval behavior](https://lmstudio.ai/docs/app/basics/rag) (2026-11-15; features); [Current app privacy policy distinguishes local and cloud processing](https://lmstudio.ai/app-privacy) (2026-11-15; features); [Current free local plan and optional paid cloud tiers](https://lmstudio.ai/pricing) (2026-11-15; pricing)
+- **Documented task support — Chat with PDF documents offline:** Download a supported local model and its runtime before disconnecting.; Use local inference and document attachments; cloud models, web search and new downloads require connectivity. **Limits:** Long documents use retrieval of selected content; prompt detail and model context affect answer coverage. [Evidence 1](https://lmstudio.ai/docs/app/offline) [Evidence 2](https://lmstudio.ai/docs/app/basics/rag) [Evidence 3](https://lmstudio.ai/app-privacy)
 ### Open WebUI
 
 Self-hostable web interface for model chat, retrieval workflows, and connections to compatible model APIs.
@@ -240,6 +329,8 @@ Desktop local-model interface with portable builds, multiple generation modes an
 - **Sources:** [Official project README: documented behavior and installation](https://raw.githubusercontent.com/oobabooga/textgen/HEAD/README.md) (2026-11-14; downloads, features, identity, platforms); [Official license text or upstream licensing metadata](https://raw.githubusercontent.com/oobabooga/textgen/HEAD/LICENSE) (2026-11-14; license); [Official downloads or installation instructions](https://github.com/oobabooga/textgen/releases) (2026-11-14; downloads); [Public upstream app/package distribution: unauthenticated availability checked](https://github.com/oobabooga/textgen/releases/download/v4.9/textgen-portable-4.9-windows-cpu.zip) (2026-11-14; downloads, pricing); [Observed upstream release record and date](https://github.com/oobabooga/textgen/releases/tag/v4.9) (2026-11-14; downloads, maintenance)
 
 ## Local model runtimes
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=ai%2Flocal-model-runtimes)
 
 ### llama.cpp
 
@@ -309,8 +400,24 @@ Model inference and serving engine with batched execution, attention-memory mana
 - [Official project](https://vllm.ai/) · [Official installation / downloads](https://docs.vllm.ai/en/latest/getting_started/installation/gpu/) · [Repository](https://github.com/vllm-project/vllm)
 - **Sources:** [Official project README: documented behavior and installation](https://raw.githubusercontent.com/vllm-project/vllm/HEAD/README.md) (2026-11-14; downloads, features, identity); [Official license text or upstream licensing metadata](https://raw.githubusercontent.com/vllm-project/vllm/HEAD/LICENSE) (2026-11-14; license); [Official downloads or installation instructions](https://docs.vllm.ai/en/latest/getting_started/installation/gpu/) (2026-11-14; downloads, platforms); [Official documentation: CPU installation varies by architecture; macOS support is experimental and is not treated as equivalent to the primary Linux deployment.](https://docs.vllm.ai/en/latest/getting_started/installation/cpu/) (2026-11-14; platforms); [Public upstream app/package distribution: unauthenticated availability checked](https://github.com/vllm-project/vllm/releases/download/v0.33.0rc3/vllm-0.33.0+cpu-cp38-abi3-macosx_11_0_arm64.whl) (2026-11-14; downloads, pricing); [Observed upstream release record and date](https://github.com/vllm-project/vllm/releases/tag/v0.33.0rc3) (2026-11-14; downloads, maintenance)
 
-## Speech Transcription
+## Speech-to-text transcription
 
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=ai%2Fspeech-transcription)
+
+### Buzz
+
+Desktop speech transcription application with local Whisper backends, subtitle exports and batch workflows.
+
+- **Platforms:** Windows, macOS, Linux. **License:** MIT. **Pricing model:** free.
+- **Compatibility details:** Published v1.4.5 includes both Intel and Apple Silicon macOS packages alongside Windows and Linux. The current main-branch README describes Apple Silicon for subsequent macOS development and names v1.4.5 as the last Intel release.
+- **Pricing details:** Public desktop packages and source are free; optional remote models or plugins may have separate costs.
+- **Pick for:** You want a GUI for local transcription with subtitle output and repeatable file handling.
+- **Compare when:** Compare whisper.cpp for custom command-line integration and verify the backend fits the available hardware.
+- **Strengths:** A desktop interface exposes local speech models without building a pipeline; Subtitle exports and folder watching fit repeated media workflows
+- **Limitations:** Models require downloads and sufficient local resources; Intel Mac users must choose the v1.4.5 package; current main-branch/source-build policy differs from that published release.
+- **Maintenance:** active — Official release v1.4.5 is dated 2026-08-23; installation and performance were not independently tested. ([evidence](https://github.com/chidiwilliams/buzz/releases/tag/v1.4.5))
+- [Official project](https://github.com/chidiwilliams/buzz) · [Official installation / downloads](https://sourceforge.net/projects/buzz-captions/files/) · [Repository](https://github.com/chidiwilliams/buzz)
+- **Sources:** [Official product overview](https://github.com/chidiwilliams/buzz) (2026-11-15; identity, features); [Official project documentation](https://raw.githubusercontent.com/chidiwilliams/buzz/main/README.md) (2026-11-15; identity, features, downloads, platforms); [Official licensing terms](https://raw.githubusercontent.com/chidiwilliams/buzz/main/LICENSE) (2026-11-15; license); [Distribution and pricing qualification](https://sourceforge.net/projects/buzz-captions/files/) (2026-11-15; pricing, downloads); [Official dated release](https://github.com/chidiwilliams/buzz/releases/tag/v1.4.5) (2026-11-16; maintenance, downloads, platforms)
 ### whisper.cpp
 
 C/C++ implementation of Whisper speech recognition with command-line tools and several acceleration backends.

@@ -4,9 +4,28 @@ Protect identities and data; investigate suspicious behavior.
 
 [Browse in Athena](https://herbertofury.github.io/Athena/#software?family=security) · [Catalog](Software-Catalog) · [Method](Software-Methodology)
 
-51 applications. Reviewed 2026-11-15; individual records identify inherited research.
+54 applications. Reviewed 2026-11-16; individual records identify inherited research.
+
+## Security audit event tracing
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=security%2Factivity-tracing)
+
+### Linux Audit
+
+Linux audit userspace tools for collecting kernel audit events and querying who performed recorded actions.
+
+- **Platforms:** Linux. **License:** GPL-2.0 tools and LGPL-2.1 libraries. **Pricing model:** unknown.
+- **Pick for:** Maintain an attributable audit trail when specific system actions need persistent records.
+- **Compare when:** Events depend on configured rules and kernel auditing; absent records do not prove an action never happened.
+- **Strengths:** Maintain an attributable audit trail when specific system actions need persistent records.
+- **Limitations:** Events depend on configured rules and kernel auditing; absent records do not prove an action never happened.; Broad rules can overwhelm queues or storage, so lost-event counters and retention need attention.
+- **Maintenance:** active — Official release feed contains audit-4.2.1 with an updated timestamp of 2026-07-29. This is release-channel activity evidence, not proof of a stable build, installed compatibility or security testing. ([evidence](https://github.com/linux-audit/audit-userspace/releases.atom))
+- [Official project](https://github.com/linux-audit/audit-userspace) · [Official installation / downloads](https://github.com/linux-audit/audit-userspace/releases) · [Repository](https://github.com/linux-audit/audit-userspace)
+- **Sources:** [Official documentation and distribution evidence](https://github.com/linux-audit/audit-userspace) (2026-11-15; identity, features, platforms, license, downloads); [Official release or lifecycle evidence](https://github.com/linux-audit/audit-userspace/releases.atom) (2026-11-15; maintenance)
 
 ## Adware and unwanted software removal
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=security%2Fadware-removal)
 
 ### Malwarebytes AdwCleaner
 
@@ -23,6 +42,8 @@ Specialized adware, potentially unwanted program and unwanted preinstalled-softw
 - **Sources:** [Preserved original research source](https://www.malwarebytes.com/adwcleaner) (2026-11-14; identity, features); [Preserved original research source](https://help.malwarebytes.com/hc/en-us/articles/31589231147035-Scan-and-clean-a-device-with-AdwCleaner) (2026-11-14; identity, features); [Preserved original research source](https://help.malwarebytes.com/hc/en-us/articles/31589274807579-System-requirements-for-AdwCleaner) (2026-11-14; identity, features)
 
 ## Application firewalls
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=security%2Fapplication-firewalls)
 
 ### Little Snitch
 
@@ -89,6 +110,20 @@ Windows Filtering Platform rules with per-app control
 
 ## Application sandboxing
 
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=security%2Fapplication-sandboxing)
+
+### Firejail
+
+Linux application sandbox using namespaces, seccomp and configurable profiles to limit process access.
+
+- **Platforms:** Linux. **License:** GPL-2.0. **Pricing model:** unknown.
+- **Pick for:** Apply explicit isolation profiles to supported Linux desktop applications.
+- **Compare when:** A profile must match the application and desired permissions; incompatible restrictions can break functionality.
+- **Strengths:** Apply explicit isolation profiles to supported Linux desktop applications.
+- **Limitations:** A profile must match the application and desired permissions; incompatible restrictions can break functionality.; Sandboxing reduces selected access paths but does not prove an application safe or replace system updates.
+- **Maintenance:** active — Official release feed contains Release 0.9.82.2 with an updated timestamp of 2026-11-04. This is release-channel activity evidence, not proof of a stable build, installed compatibility or security testing. ([evidence](https://github.com/netblue30/firejail/releases.atom))
+- [Official project](https://firejail.wordpress.com/) · [Official installation / downloads](https://github.com/netblue30/firejail/releases) · [Repository](https://github.com/netblue30/firejail)
+- **Sources:** [Official documentation and distribution evidence](https://github.com/netblue30/firejail) (2026-11-15; identity, features, platforms, license, downloads); [Official release or lifecycle evidence](https://github.com/netblue30/firejail/releases.atom) (2026-11-15; maintenance)
 ### Sandboxie Plus
 
 Application isolation and disposable sandboxes
@@ -103,7 +138,9 @@ Application isolation and disposable sandboxes
 - [Official project](https://github.com/sandboxie-plus/Sandboxie) · [Repository](https://github.com/sandboxie-plus/Sandboxie)
 - **Sources:** [Preserved original research source](https://github.com/sandboxie-plus/Sandboxie) (2026-11-14; identity, features); [Preserved original research source](https://github.com/sandboxie-plus/Sandboxie/blob/master/LICENSE.Plus) (2026-11-14; identity, features)
 
-## Authenticator Apps
+## Two-factor authenticators
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=security%2Fauthenticator-apps)
 
 ### Ente Auth
 
@@ -132,7 +169,9 @@ Companion application for managing YubiKey-backed credentials and authenticator 
 - [Official project](https://www.yubico.com/products/yubico-authenticator/) · [Official installation / downloads](https://www.yubico.com/products/yubico-authenticator/) · [Repository](https://github.com/Yubico/yubioath-flutter)
 - **Sources:** [Official project feature documentation](https://raw.githubusercontent.com/Yubico/yubioath-flutter/HEAD/README.adoc) (2026-11-14; features, identity, platforms); [Official application license text](https://raw.githubusercontent.com/Yubico/yubioath-flutter/HEAD/LICENSE) (2026-11-14; license); [Official download or installation landing page](https://www.yubico.com/products/yubico-authenticator/) (2026-11-14; downloads, identity); [Official release activity or lifecycle basis](https://github.com/Yubico/yubioath-flutter/releases.atom) (2026-11-14; maintenance)
 
-## Configuration Auditing
+## Security configuration auditing
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=security%2Fconfiguration-auditing)
 
 ### Lynis
 
@@ -147,24 +186,42 @@ Local Unix security-auditing utility that reports configuration findings and har
 - **Maintenance:** active — Official release-feed entry 'Lynis 3.1.7' updated 2026-06-25. Feed activity can include prereleases; it does not establish installed stability. ([evidence](https://github.com/CISOfy/lynis/releases.atom))
 - [Official project](https://cisofy.com/lynis/) · [Official installation / downloads](https://github.com/CISOfy/lynis) · [Repository](https://github.com/CISOfy/lynis)
 - **Sources:** [Official project feature documentation](https://raw.githubusercontent.com/CISOfy/lynis/HEAD/README.md) (2026-11-14; features, identity, platforms); [Official application license text](https://raw.githubusercontent.com/CISOfy/lynis/HEAD/LICENSE) (2026-11-14; license); [Official download or installation landing page](https://github.com/CISOfy/lynis) (2026-11-14; downloads); [Official project identity and product page](https://cisofy.com/lynis/) (2026-11-14; identity); [Official release activity or lifecycle basis](https://github.com/CISOfy/lynis/releases.atom) (2026-11-14; maintenance)
+### OpenSCAP
+
+Standards-based security configuration scanner for evaluating systems against SCAP content and generating reports.
+
+- **Platforms:** Linux. **License:** LGPL-2.1. **Pricing model:** unknown.
+- **Compatibility details:** Upstream explicitly removed Windows support; Linux is the supported catalog target.
+- **Pick for:** Evaluate a system against a specified machine-readable baseline with reproducible findings.
+- **Compare when:** Useful results require applicable, current policy content; passing one profile is not comprehensive security assurance.
+- **Strengths:** Evaluate a system against a specified machine-readable baseline with reproducible findings.
+- **Limitations:** Useful results require applicable, current policy content; passing one profile is not comprehensive security assurance.; Upstream removed Windows support; this record does not promise current Windows operation.
+- **Maintenance:** active — Official release feed contains 1.4.6 with an updated timestamp of 2026-10-22. This is release-channel activity evidence, not proof of a stable build, installed compatibility or security testing. ([evidence](https://github.com/OpenSCAP/openscap/releases.atom))
+- [Official project](https://www.open-scap.org/) · [Official installation / downloads](https://www.open-scap.org/download/) · [Repository](https://github.com/OpenSCAP/openscap)
+- **Sources:** [Official documentation and distribution evidence](https://www.open-scap.org/) (2026-11-15; identity, features, downloads); [Official documentation and distribution evidence](https://github.com/OpenSCAP/openscap) (2026-11-15; license, platforms, features, downloads); [Official documentation and distribution evidence](https://github.com/OpenSCAP/openscap/blob/main/docs/windows.md) (2026-11-15; platforms, maintenance); [Official release or lifecycle evidence](https://github.com/OpenSCAP/openscap/releases.atom) (2026-11-15; maintenance)
 
 ## Detection rule engineering
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=security%2Fdetection-rules)
 
 ### Sigma rules
 
 Portable detection-rule corpus for supported log sources; not a standalone scanner.
 
-- **Platforms:** Windows. **License:** Detection Rule License 1.1; specification differs. **Pricing model:** unknown.
+- **Platforms:** Windows. **License:** Detection Rule License 1.1 for the rule collection; specification and logo are public domain. **Pricing model:** free.
 - **Compatibility details:** Rules require a compatible engine, backend and configured telemetry.
+- **Pricing details:** The upstream rule collection is available at no cost. Conversion, collection and SIEM products used with it have separate licenses and operating costs.
 - **Pick for:** Portable detection-rule corpus for supported log sources; not a standalone scanner.
 - **Compare when:** Compare benign known-positive and known-negative fixtures, false positives, missing events and collection overhead in an isolated VM; no live malware.
 - **Strengths:** Portable detection-rule corpus for supported log sources; not a standalone scanner.
 - **Limitations:** Do not assume rules work unchanged on every backend.; Treat rule content separately from engine licensing.
 - **Maintenance:** unverified — Retained research snapshot; current release activity was not established by this import.
 - [Official project](https://github.com/SigmaHQ/sigma) · [Repository](https://github.com/SigmaHQ/sigma)
-- **Sources:** [Preserved original research source](https://github.com/SigmaHQ/sigma) (2026-11-14; identity, features); [Preserved original research source](https://github.com/SigmaHQ/sigma/blob/master/LICENSE) (2026-11-14; identity, features)
+- **Sources:** [Official Sigma rule collection and no-cost distribution statement](https://github.com/SigmaHQ/sigma) (2026-11-15; features, identity, pricing); [Rule, specification and logo licensing boundaries](https://github.com/SigmaHQ/sigma/blob/master/LICENSE) (2026-11-15; features, identity, license); [Official DRL description and author-attribution requirements](https://github.com/SigmaHQ/Detection-Rule-License) (2026-11-15; license)
 
 ## USB device access control
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=security%2Fdevice-access-control)
 
 ### USBGuard
 
@@ -181,6 +238,8 @@ Linux USB device authorization framework using allow and block rules.
 
 ## Disk encryption
 
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=security%2Fdisk-encryption)
+
 ### VeraCrypt
 
 Disk-encryption application for encrypted containers and supported device encryption.
@@ -194,7 +253,9 @@ Disk-encryption application for encrypted containers and supported device encryp
 - [Official project](https://veracrypt.io/) · [Official installation / downloads](https://veracrypt.io/en/Downloads.html) · [Repository](https://github.com/veracrypt/VeraCrypt)
 - **Sources:** [Official project documentation](https://veracrypt.io/) (2026-11-14; identity, features); [Official source repository and README](https://github.com/veracrypt/VeraCrypt) (2026-11-14; identity, features, platforms); [Official download or installation landing page](https://veracrypt.io/en/Downloads.html) (2026-11-14; downloads); [Official source license](https://raw.githubusercontent.com/veracrypt/VeraCrypt/HEAD/License.txt) (2026-11-14; license); [Official release activity](https://github.com/veracrypt/VeraCrypt/releases.atom) (2026-11-14; maintenance); [Official public application distribution](https://github.com/veracrypt/VeraCrypt/releases/expanded_assets/VeraCrypt_1.26.31) (2026-11-14; pricing)
 
-## Encrypted Folder Managers
+## Encrypted folder management
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=security%2Fencrypted-folder-managers)
 
 ### SiriKali
 
@@ -212,6 +273,8 @@ Graphical manager for supported encrypted-folder tools and selected SSHFS workfl
 
 ## Endpoint inventory queries
 
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=security%2Fendpoint-inventory)
+
 ### osquery
 
 SQL-style operating-system instrumentation and inventory.
@@ -227,6 +290,8 @@ SQL-style operating-system instrumentation and inventory.
 - **Sources:** [Preserved original research source](https://github.com/osquery/osquery) (2026-11-14; identity, features); [Preserved original research source](https://github.com/osquery/osquery/blob/master/LICENSE) (2026-11-14; identity, features)
 
 ## Endpoint investigation
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=security%2Fendpoint-investigation)
 
 ### Velociraptor
 
@@ -244,6 +309,8 @@ VQL-based host-state collection and endpoint investigation.
 
 ## Endpoint event telemetry
 
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=security%2Fendpoint-telemetry)
+
 ### Sysmon
 
 Persistent telemetry service/driver. Event 8 remote-thread creation, 10 process access and 7 image loading support investigation.
@@ -259,6 +326,8 @@ Persistent telemetry service/driver. Event 8 remote-thread creation, 10 process 
 - **Sources:** [Official release or lifecycle evidence](https://learn.microsoft.com/en-us/sysinternals/downloads/sysmon) (2026-11-15; downloads, features, identity, maintenance, platforms); [Preserved original research source](https://learn.microsoft.com/en-us/windows/security/operating-system-security/sysmon/sysmon-events) (2026-11-14; identity, features); [Microsoft Sysinternals license terms](https://learn.microsoft.com/en-us/sysinternals/license-terms) (2026-11-15; license); [Microsoft application archive publicly available without payment](https://download.sysinternals.com/files/Sysmon.zip) (2026-11-15; downloads, pricing)
 
 ## Event log forensics
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=security%2Fevent-log-forensics)
 
 ### Chainsaw
 
@@ -288,6 +357,8 @@ Sigma-based threat hunting and forensic timelines from Windows event logs.
 - **Sources:** [Preserved original research source](https://github.com/Yamato-Security/hayabusa) (2026-11-14; identity, features)
 
 ## File encryption
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=security%2Ffile-encryption)
 
 ### age
 
@@ -363,7 +434,9 @@ Windows distribution combining GnuPG with graphical certificate and file-encrypt
 - [Official project](https://www.gpg4win.org/) · [Official installation / downloads](https://www.gpg4win.org/download.html)
 - **Sources:** [Official project documentation](https://www.gpg4win.org/) (2026-11-14; identity, features, platforms, maintenance); [Official download or installation landing page](https://www.gpg4win.org/download.html) (2026-11-14; downloads); [Official component license notices](https://www.gpg4win.org/license.html) (2026-11-14; license); [Official distribution price or edition policy](https://www.gpg4win.org/get-gpg4win.html) (2026-11-14; pricing)
 
-## File Integrity Monitoring
+## File integrity monitoring
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=security%2Ffile-integrity-monitoring)
 
 ### AIDE
 
@@ -381,6 +454,8 @@ File-integrity checker comparing filesystem attributes and hashes against a stor
 
 ## File pattern matching
 
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=security%2Ffile-pattern-matching)
+
 ### YARA-X
 
 Rust implementation of YARA-style pattern matching.
@@ -397,6 +472,8 @@ Rust implementation of YARA-style pattern matching.
 
 ## Executable signature verification
 
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=security%2Ffile-signature-verification)
+
 ### Sigcheck
 
 File version, timestamp, digital signature and certificate-chain inspection.
@@ -412,6 +489,8 @@ File version, timestamp, digital signature and certificate-chain inspection.
 - **Sources:** [Official release or lifecycle evidence](https://learn.microsoft.com/en-us/sysinternals/downloads/sigcheck) (2026-11-15; downloads, features, identity, maintenance, platforms); [Microsoft Sysinternals license terms](https://learn.microsoft.com/en-us/sysinternals/license-terms) (2026-11-15; license); [Microsoft application archive publicly available without payment](https://download.sysinternals.com/files/Sigcheck.zip) (2026-11-15; downloads, pricing)
 
 ## Process injection detection
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=security%2Finjection-detection)
 
 ### HollowsHunter
 
@@ -430,7 +509,7 @@ PE-sieve-based multi-process scanner with filters and optional repeated/ETW-trig
 
 Live user-mode memory analysis for indicators of compromise.
 
-- **Platforms:** Windows. **License:** Exact license review pending. **Pricing model:** unknown.
+- **Platforms:** Windows. **License:** GNU General Public License version 3. **Pricing model:** unknown.
 - **Compatibility details:** Release page identifies 64-bit Windows only.
 - **Pick for:** Live user-mode memory analysis for indicators of compromise.
 - **Compare when:** Compare benign known-positive and known-negative fixtures, false positives, missing events and collection overhead in an isolated VM; no live malware.
@@ -438,7 +517,7 @@ Live user-mode memory analysis for indicators of compromise.
 - **Limitations:** Analyst tool, not a universal malware verdict. Validate maintenance and Windows compatibility before recommending.; Architecture inspiration only until exact license reviewed.
 - **Maintenance:** unverified — Retained research snapshot; current release activity was not established by this import.
 - [Official project](https://github.com/forrest-orr/moneta) · [Repository](https://github.com/forrest-orr/moneta)
-- **Sources:** [Preserved original research source](https://github.com/forrest-orr/moneta) (2026-11-14; identity, features); [Preserved original research source](https://github.com/forrest-orr/moneta/releases) (2026-11-14; identity, features)
+- **Sources:** [Upstream Windows memory-analysis project and usage documentation](https://github.com/forrest-orr/moneta) (2026-11-15; features, identity, platforms); [Preserved original research source](https://github.com/forrest-orr/moneta/releases) (2026-11-14; identity, features); [Upstream Moneta GPL version 3 license](https://github.com/forrest-orr/moneta/blob/master/LICENSE) (2026-11-15; license)
 ### PE-sieve
 
 Scans one process for suspicious injected/replaced executable code, hooks and in-memory patches; offers DLL API.
@@ -453,7 +532,9 @@ Scans one process for suspicious injected/replaced executable code, hooks and in
 - [Official project](https://github.com/hasherezade/pe-sieve) · [Repository](https://github.com/hasherezade/pe-sieve)
 - **Sources:** [Preserved original research source](https://github.com/hasherezade/pe-sieve) (2026-11-14; identity, features)
 
-## Intrusion Prevention
+## Intrusion prevention
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=security%2Fintrusion-prevention)
 
 ### CrowdSec Security Engine
 
@@ -483,6 +564,8 @@ Log-driven service that temporarily blocks sources matching configured abuse pat
 - **Sources:** [Official project feature documentation](https://raw.githubusercontent.com/fail2ban/fail2ban/HEAD/README.md) (2026-11-14; features, identity, platforms); [Official application license text](https://raw.githubusercontent.com/fail2ban/fail2ban/HEAD/COPYING) (2026-11-14; license); [Official download or installation landing page](https://github.com/fail2ban/fail2ban) (2026-11-14; downloads, identity); [Official release activity or lifecycle basis](https://github.com/fail2ban/fail2ban/releases.atom) (2026-11-14; maintenance)
 
 ## Malware scanning and removal
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=security%2Fmalware-scanning)
 
 ### ClamAV
 
@@ -552,6 +635,8 @@ On-demand Windows malware scan/removal tool.
 
 ## Managed endpoint monitoring
 
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=security%2Fmanaged-endpoint-monitoring)
+
 ### Wazuh agent
 
 Windows endpoint agent for a managed Wazuh monitoring deployment.
@@ -567,6 +652,8 @@ Windows endpoint agent for a managed Wazuh monitoring deployment.
 - **Sources:** [Preserved original research source](https://documentation.wazuh.com/current/installation-guide/wazuh-agent/wazuh-agent-package-windows.html) (2026-11-14; identity, features)
 
 ## Memory forensics
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=security%2Fmemory-forensics)
 
 ### MemProcFS
 
@@ -585,17 +672,20 @@ Memory-analysis toolkit exposing memory artifacts through a filesystem-oriented 
 
 Framework for analyzing memory images, including Windows artifacts.
 
-- **Platforms:** Windows. **License:** Volatility Software License 1.0. **Pricing model:** unknown.
+- **Platforms:** Windows. **License:** Volatility Software License 1.0; custom copyleft terms cover changes and qualifying additions, including dedicated wrappers. **Pricing model:** free.
 - **Compatibility details:** Windows memory analysis; Python/dependency and symbol requirements apply.
+- **Pricing details:** The upstream VSL grants no-cost use, sharing and modification under its terms. This classification covers the framework, not commercial training, support or surrounding forensic products.
 - **Pick for:** Framework for analyzing memory images, including Windows artifacts.
 - **Compare when:** Compare benign known-positive and known-negative fixtures, false positives, missing events and collection overhead in an isolated VM; no live malware.
 - **Strengths:** Framework for analyzing memory images, including Windows artifacts.
 - **Limitations:** Memory acquisition and analysis can expose highly sensitive content; some Windows 11 images have documented issues.; Read VSL 1.0 directly; do not label as generic GPL or unrestricted reuse.
 - **Maintenance:** unverified — Retained research snapshot; current release activity was not established by this import.
 - [Official project](https://github.com/volatilityfoundation/volatility3) · [Repository](https://github.com/volatilityfoundation/volatility3)
-- **Sources:** [Preserved original research source](https://github.com/volatilityfoundation/volatility3) (2026-11-14; identity, features); [Preserved original research source](https://github.com/volatilityfoundation/volatility3/releases) (2026-11-14; identity, features)
+- **Sources:** [Official framework, stable-branch and installation documentation](https://github.com/volatilityfoundation/volatility3) (2026-11-15; downloads, features, identity); [Preserved original research source](https://github.com/volatilityfoundation/volatility3/releases) (2026-11-14; identity, features); [Upstream Volatility Software License 1.0 grant and copyleft scope](https://github.com/volatilityfoundation/volatility3/blob/develop/LICENSE.txt) (2026-11-15; license, pricing)
 
 ## Password managers
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=security%2Fpassword-managers)
 
 ### 1Password
 
@@ -674,6 +764,8 @@ Password manager with cross-device vaults, autofill and email-alias features.
 
 ## Privacy VPN services
 
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=security%2Fprivacy-vpn)
+
 ### Mullvad VPN
 
 Commercial VPN service with open-source desktop clients and account-number access.
@@ -701,6 +793,8 @@ VPN service offering desktop clients and free or paid service tiers.
 
 ## Repair and disinfection orchestration
 
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=security%2Frepair-orchestration)
+
 ### Tron
 
 Batch-script orchestration of multiple Windows cleanup, repair and disinfection tools.
@@ -716,6 +810,8 @@ Batch-script orchestration of multiple Windows cleanup, repair and disinfection 
 - **Sources:** [Preserved original research source](https://github.com/bmrf/tron) (2026-11-14; identity, features)
 
 ## Static executable analysis
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=security%2Fstatic-file-analysis)
 
 ### Detect It Easy
 

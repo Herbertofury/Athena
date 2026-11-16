@@ -4,10 +4,26 @@ Write, inspect, test and deliver software and workflows.
 
 [Browse in Athena](https://herbertofury.github.io/Athena/#software?family=development) · [Catalog](Software-Catalog) · [Method](Software-Methodology)
 
-127 applications. Reviewed 2026-11-15; individual records identify inherited research.
+185 applications. Reviewed 2026-11-16; individual records identify inherited research.
 
-## Analytical Databases
+## Analytical databases
 
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=development%2Fanalytical-databases)
+
+### ClickHouse
+
+Column-oriented SQL database for analytical queries, with a local command mode and server deployments.
+
+- **Platforms:** Linux, macOS, FreeBSD. **License:** Apache-2.0. **Pricing model:** free.
+- **Compatibility details:** Official README lists Linux, macOS and FreeBSD installation; this record does not infer native Windows support from WSL or containers.
+- **Pricing details:** Open-source self-managed engine has no product license fee; managed cloud and infrastructure incur separate costs.
+- **Pick for:** You need a columnar analytical engine that can grow from local investigation to a server.
+- **Compare when:** Choose DuckDB for embedded single-process analytics or a transactional database for frequent row updates.
+- **Strengths:** Fits repeated aggregation over structured analytical data; Local mode can explore data before operating a server
+- **Limitations:** Operational tuning and storage design matter at scale; Transactional application workloads need separate evaluation
+- **Maintenance:** active — Official release v26.9.28.166-stable is dated 2026-11-14; installation and performance were not independently tested. ([evidence](https://github.com/ClickHouse/ClickHouse/releases/tag/v26.9.28.166-stable))
+- [Official project](https://clickhouse.com/) · [Official installation / downloads](https://github.com/ClickHouse/ClickHouse#how-to-install-linux-macos-freebsd) · [Repository](https://github.com/ClickHouse/ClickHouse)
+- **Sources:** [Official product overview](https://clickhouse.com/) (2026-11-15; identity, features, pricing); [Official project documentation](https://raw.githubusercontent.com/ClickHouse/ClickHouse/master/README.md) (2026-11-15; identity, features, downloads, platforms); [Official licensing terms](https://raw.githubusercontent.com/ClickHouse/ClickHouse/master/LICENSE) (2026-11-15; license); [Official download or installation entry point](https://github.com/ClickHouse/ClickHouse#how-to-install-linux-macos-freebsd) (2026-11-15; downloads); [Official dated release](https://github.com/ClickHouse/ClickHouse/releases/tag/v26.9.28.166-stable) (2026-11-15; maintenance, downloads)
 ### DuckDB
 
 In-process SQL analytics engine with a CLI and bindings for querying local and remote data files.
@@ -22,8 +38,24 @@ In-process SQL analytics engine with a CLI and bindings for querying local and r
 - **Maintenance:** active — An upstream release was observed dated 2026-10-21. This is evidence of release activity, not a support, security, stability or runtime-quality guarantee. ([evidence](https://github.com/duckdb/duckdb/releases/tag/v2.0.0))
 - [Official project](https://duckdb.org/) · [Official installation / downloads](https://duckdb.org/docs/installation) · [Repository](https://github.com/duckdb/duckdb)
 - **Sources:** [Official project README: documented behavior and installation](https://raw.githubusercontent.com/duckdb/duckdb/HEAD/README.md) (2026-11-14; downloads, features, identity); [Official license text or upstream licensing metadata](https://raw.githubusercontent.com/duckdb/duckdb/HEAD/LICENSE) (2026-11-14; license); [Official downloads or installation instructions](https://duckdb.org/docs/installation) (2026-11-14; downloads); [Official documentation: Official CLI and library distribution choices for Windows, macOS and Linux.](https://duckdb.org/docs/installation/) (2026-11-14; platforms, downloads); [Public upstream app/package distribution: unauthenticated availability checked](https://github.com/duckdb/duckdb/releases/download/v2.0.0/duckdb-cli-linux-amd64-musl.tar.gz) (2026-11-14; downloads, pricing); [Observed upstream release record and date](https://github.com/duckdb/duckdb/releases/tag/v2.0.0) (2026-11-14; downloads, maintenance)
+### QuestDB
 
-## Api Mocking
+Time-series SQL database with timestamp-aware queries, ingestion protocols and a browser console.
+
+- **Platforms:** Linux, macOS, Web. **License:** Apache-2.0 core; Enterprise features have separate terms. **Pricing model:** freemium.
+- **Compatibility details:** README documents Docker deployment and native Apple Silicon Homebrew packages; Intel Macs use Docker. Linux host requirements apply to container deployment.
+- **Pricing details:** Open-source deployment is free; Enterprise capabilities and managed operations are separate.
+- **Pick for:** Data is primarily timestamped events and requires time-series SQL queries.
+- **Compare when:** Choose ClickHouse for broader columnar workloads or DuckDB for local embedded analysis.
+- **Strengths:** Time-oriented query operators suit event and telemetry analysis; SQL access connects existing query tools
+- **Limitations:** Enterprise automatic storage tiering is distinct from open-source manual conversion; Host architecture and ingestion protocol support must match the workload
+- **Maintenance:** active — Official release 10.2.0 is dated 2026-11-10; installation and performance were not independently tested. ([evidence](https://github.com/questdb/questdb/releases/tag/10.2.0))
+- [Official project](https://questdb.com/) · [Official installation / downloads](https://github.com/questdb/questdb#get-started) · [Repository](https://github.com/questdb/questdb)
+- **Sources:** [Official product overview](https://questdb.com/) (2026-11-15; identity, features); [Official project documentation](https://raw.githubusercontent.com/questdb/questdb/master/README.md) (2026-11-15; identity, features, downloads, platforms, pricing); [Official licensing terms](https://raw.githubusercontent.com/questdb/questdb/master/LICENSE.txt) (2026-11-15; license); [Official download or installation entry point](https://github.com/questdb/questdb#get-started) (2026-11-15; downloads); [Official dated release](https://github.com/questdb/questdb/releases/tag/10.2.0) (2026-11-15; maintenance, downloads)
+
+## API mocking
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=development%2Fapi-mocking)
 
 ### Mockoon
 
@@ -55,6 +87,8 @@ HTTP service simulator with request matching, response templating and record/rep
 - **Sources:** [Official project README: documented behavior and installation](https://github.com/wiremock/wiremock/blob/master/README.md) (2026-11-14; downloads, features, identity); [Official license text or upstream licensing metadata](https://github.com/wiremock/wiremock/blob/master/LICENSE.txt) (2026-11-14; license); [Official downloads or installation instructions](https://wiremock.org/docs/download-and-installation/) (2026-11-14; downloads, features); [Official documentation: The standalone JAR runs using the required Java runtime; host compatibility depends on that runtime.](https://wiremock.org/docs/standalone/java-jar/) (2026-11-14; platforms, downloads); [Public upstream source distribution; binary packaging is separate](https://github.com/wiremock/wiremock/archive/HEAD.zip) (2026-11-14; downloads, pricing); [Observed upstream release record and date](https://github.com/wiremock/wiremock/releases/tag/3.13.2) (2026-11-14; downloads, maintenance)
 
 ## API testing
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=development%2Fapi-testing)
 
 ### Bruno
 
@@ -111,6 +145,8 @@ Desktop API design and testing client supporting request collections, authentica
 
 ## Command benchmarking
 
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=development%2Fbenchmarking-tools)
+
 ### Hyperfine
 
 Command-line benchmarking tool with repeated runs, warmups, statistical summaries, and export formats.
@@ -127,6 +163,50 @@ Command-line benchmarking tool with repeated runs, warmups, statistical summarie
 
 ## Binary editors
 
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=development%2Fbinary-editors)
+
+### 010 Editor
+
+Hex and text editor with programmable binary templates, scripts and structured file inspection.
+
+- **Platforms:** Windows, macOS, Linux. **License:** Proprietary commercial EULA. **Pricing model:** paid.
+- **Compatibility details:** Official downloads provide Windows, macOS Intel/ARM and Linux builds with version-specific OS requirements.
+- **Pricing details:** Commercial software with a 30-day trial; home/academic and commercial licenses differ. Exact current prices are linked rather than frozen.
+- **Pick for:** Binary formats need reusable parsing templates and automated edits.
+- **Compare when:** Use HxD for occasional simple Windows edits or Hex Fiend for a focused macOS workflow.
+- **Strengths:** Templates expose file structures instead of just bytes; Scripts can automate repeated binary transformations
+- **Limitations:** Paid license follows a limited trial; Templates and raw-disk operations require format expertise and care
+- **Maintenance:** unverified — Official product and installation material reviewed; a recent dated release was not established for this product scope.
+- [Official project](https://www.sweetscape.com/010editor/) · [Official installation / downloads](https://www.sweetscape.com/download/010editor/)
+- **Sources:** [Official product overview](https://www.sweetscape.com/010editor/) (2026-11-15; identity, features, pricing); [Official licensing terms](https://www.sweetscape.com/download/010editor/) (2026-11-15; license, platforms, downloads)
+### Hex Fiend
+
+macOS hex editor with binary comparison, large-file editing, data inspectors and templates.
+
+- **Platforms:** macOS. **License:** BSD-2-Clause. **Pricing model:** free.
+- **Compatibility details:** Official project lists macOS and gives the minimum supported release for its current binary.
+- **Pricing details:** Official binaries and source are publicly available without a product fee.
+- **Pick for:** You want a focused native macOS tool to inspect and compare binary files.
+- **Compare when:** Choose 010 Editor when shared cross-platform template workflows are essential.
+- **Strengths:** Handles binary editing in a focused macOS interface; File changes can be inspected through a structure template or a diff
+- **Limitations:** Only macOS is supported; Specialized format templates still need authoring or review
+- **Maintenance:** unverified — Official release v2.18.1 is dated 2025-03-16; installation and performance were not independently tested. ([evidence](https://github.com/HexFiend/HexFiend/releases/tag/v2.18.1))
+- [Official project](https://hexfiend.com/) · [Official installation / downloads](https://github.com/HexFiend/HexFiend/releases) · [Repository](https://github.com/HexFiend/HexFiend)
+- **Sources:** [Official product overview](https://hexfiend.com/) (2026-11-15; identity, features, platforms, pricing); [Official project documentation](https://raw.githubusercontent.com/HexFiend/HexFiend/master/README.md) (2026-11-15; identity, features, downloads); [Official licensing terms](https://raw.githubusercontent.com/HexFiend/HexFiend/master/License.txt) (2026-11-15; license); [Official download or installation entry point](https://github.com/HexFiend/HexFiend/releases) (2026-11-15; downloads); [Official dated release](https://github.com/HexFiend/HexFiend/releases/tag/v2.18.1) (2026-11-15; maintenance, downloads)
+### HxD
+
+Windows hex editor with file, memory and disk views plus search and checksum tools.
+
+- **Platforms:** Windows. **License:** Proprietary freeware license; redistribution restrictions apply. **Pricing model:** free.
+- **Compatibility details:** Windows desktop application with installable and portable packages; current OS compatibility should be checked against the download documentation.
+- **Pricing details:** Official license explicitly permits free private and commercial use; selling or modifying redistributed packages is restricted.
+- **Pick for:** You want a no-cost Windows hex editor for file inspection and occasional low-level work.
+- **Compare when:** Choose 010 Editor for template-driven binary parsing or ImHex for a broader analysis workbench.
+- **Strengths:** Combines everyday binary editing with low-level Windows inspection; A portable distribution is available
+- **Limitations:** Disk and memory editing can modify live data; Current maintenance could not be established beyond the older public release listing
+- **Maintenance:** unverified — Official product and installation material reviewed; a recent dated release was not established for this product scope.
+- [Official project](https://mh-nexus.de/en/hxd/) · [Official installation / downloads](https://mh-nexus.de/en/downloads.php?product=HxD20)
+- **Sources:** [Official product overview](https://mh-nexus.de/en/hxd/) (2026-11-15; identity, features, platforms); [Official licensing terms](https://mh-nexus.de/en/hxd/license.php) (2026-11-15; license, pricing); [Official download or installation entry point](https://mh-nexus.de/en/downloads.php?product=HxD20) (2026-11-15; downloads)
 ### ImHex
 
 Hex editor with a pattern language, data visualization, and binary-analysis features.
@@ -141,7 +221,9 @@ Hex editor with a pattern language, data visualization, and binary-analysis feat
 - [Official project](https://imhex.werwolv.net/) · [Official installation / downloads](https://github.com/WerWolv/ImHex/releases) · [Repository](https://github.com/WerWolv/ImHex)
 - **Sources:** [Official repository metadata: identity, license detection and activity](https://api.github.com/repos/WerWolv/ImHex) (2026-11-14; identity, maintenance, license); [Official project README](https://raw.githubusercontent.com/WerWolv/ImHex/HEAD/README.md) (2026-11-14; identity, features); [Official official documentation](https://imhex.werwolv.net/) (2026-11-14; identity, features); [Official release inspected: v1.38.1](https://github.com/WerWolv/ImHex/releases/tag/v1.38.1) (2026-11-14; downloads, maintenance, platforms); [Public upstream app/package distribution: availability without payment or authentication checked](https://github.com/WerWolv/ImHex/releases/download/v1.38.1/imhex-1.38.1-Windows-x86_64.msi) (2026-11-14; downloads, pricing)
 
-## Browser Testing
+## Browser testing
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=development%2Fbrowser-testing)
 
 ### Cypress
 
@@ -186,7 +268,9 @@ JavaScript browser automation for Chrome and Firefox through DevTools Protocol o
 - [Official project](https://github.com/puppeteer/puppeteer) · [Official installation / downloads](https://github.com/puppeteer/puppeteer#installation) · [Repository](https://github.com/puppeteer/puppeteer)
 - **Sources:** [Official project README: documented behavior and installation](https://github.com/puppeteer/puppeteer/blob/main/README.md) (2026-11-14; downloads, features, identity); [Official license text or upstream licensing metadata](https://github.com/puppeteer/puppeteer/blob/main/LICENSE) (2026-11-14; license); [Official downloads or installation instructions](https://github.com/puppeteer/puppeteer#installation) (2026-11-14; downloads); [Official documentation: Supported host requirements for browser automation on Windows, macOS and Linux.](https://pptr.dev/next/guides/system-requirements) (2026-11-14; platforms); [Public upstream app/package distribution: unauthenticated availability checked](https://registry.npmjs.org/puppeteer/-/puppeteer-25.17.0.tgz) (2026-11-14; downloads, pricing); [Observed upstream release record and date](https://github.com/puppeteer/puppeteer/releases/tag/browsers-v3.2.7) (2026-11-14; downloads, maintenance)
 
-## Build Caching
+## Compiler and build caching
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=development%2Fbuild-caching)
 
 ### ccache
 
@@ -217,8 +301,38 @@ Compiler cache for Rust and native languages with local, remote and distributed 
 - [Official project](https://github.com/mozilla/sccache) · [Official installation / downloads](https://github.com/mozilla/sccache/releases) · [Repository](https://github.com/mozilla/sccache)
 - **Sources:** [Official project README: documented behavior and installation](https://raw.githubusercontent.com/mozilla/sccache/HEAD/README.md) (2026-11-14; downloads, features, identity, platforms); [Official license text or upstream licensing metadata](https://raw.githubusercontent.com/mozilla/sccache/HEAD/LICENSE) (2026-11-14; license); [Official downloads or installation instructions](https://github.com/mozilla/sccache/releases) (2026-11-14; downloads); [Public upstream app/package distribution: unauthenticated availability checked](https://github.com/mozilla/sccache/releases/download/v0.19.0/sccache-v0.19.0-x86_64-pc-windows-msvc.zip) (2026-11-14; downloads, pricing); [Observed upstream release record and date](https://github.com/mozilla/sccache/releases/tag/v0.19.0) (2026-11-14; downloads, maintenance)
 
-## Build Systems
+## Build systems
 
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=development%2Fbuild-systems)
+
+### Bazel
+
+Multi-language build and test system using explicit targets, dependency analysis and caching.
+
+- **Platforms:** Windows, macOS, Linux. **License:** Apache-2.0. **Pricing model:** free.
+- **Compatibility details:** Official README states Windows, macOS and Linux host support.
+- **Pricing details:** Public binaries and source are free; remote execution and cache infrastructure are separate.
+- **Pick for:** A multi-language codebase needs a shared build graph and caching strategy.
+- **Compare when:** Choose CMake or Meson for conventional native projects where their ecosystem fits better.
+- **Strengths:** Explicit build graph can serve large mixed-language repositories; Shared rules support reproducible build environments when configured correctly
+- **Limitations:** Rule and toolchain setup is substantial; Hermeticity depends on declared inputs and correct toolchain configuration
+- **Maintenance:** active — Official release 9.3.2 is dated 2026-11-05; installation and performance were not independently tested. ([evidence](https://github.com/bazelbuild/bazel/releases/tag/9.3.2))
+- [Official project](https://bazel.build/) · [Official installation / downloads](https://bazel.build/install) · [Repository](https://github.com/bazelbuild/bazel)
+- **Sources:** [Official product overview](https://bazel.build/) (2026-11-15; identity, features); [Official project documentation](https://raw.githubusercontent.com/bazelbuild/bazel/master/README.md) (2026-11-15; identity, features, downloads, platforms, pricing); [Official licensing terms](https://raw.githubusercontent.com/bazelbuild/bazel/master/LICENSE) (2026-11-15; license); [Official download or installation entry point](https://bazel.build/install) (2026-11-15; downloads); [Official dated release](https://github.com/bazelbuild/bazel/releases/tag/9.3.2) (2026-11-15; maintenance, downloads)
+### Buck2
+
+Multi-language build system with an incremental computation engine, explicit targets and remote execution support.
+
+- **Platforms:** Windows, macOS, Linux. **License:** MIT OR Apache-2.0. **Pricing model:** free.
+- **Compatibility details:** Official installation guide covers Windows, macOS and Linux; source builds need the documented Rust toolchain.
+- **Pricing details:** Public source and release binaries are free under dual licenses; remote execution infrastructure is separate.
+- **Pick for:** A large repository needs explicit cross-language dependencies and a custom build platform.
+- **Compare when:** Benchmark a representative build against Bazel or existing tooling before migrating.
+- **Strengths:** One graph can coordinate builds across language boundaries; Pinned releases can align developer and CI tool versions
+- **Limitations:** Rule and toolchain migration requires engineering work; Latest-tag binaries move frequently; pin a reviewed version for reproducible use
+- **Maintenance:** unverified — Official product and installation material reviewed; a recent dated release was not established for this product scope.
+- [Official project](https://buck2.build/) · [Official installation / downloads](https://buck2.build/docs/getting_started/install/) · [Repository](https://github.com/meta/buck2)
+- **Sources:** [Official product overview](https://buck2.build/) (2026-11-15; identity, features); [Official project documentation](https://raw.githubusercontent.com/facebook/buck2/main/README.md) (2026-11-15; identity, features, downloads, pricing); [Official licensing terms](https://raw.githubusercontent.com/facebook/buck2/main/LICENSE-APACHE) (2026-11-15; license); [Documented deployment and platform scope](https://buck2.build/docs/getting_started/install/) (2026-11-15; platforms, downloads)
 ### CMake
 
 Build-system generator with toolchain configuration, testing and packaging utilities.
@@ -261,8 +375,71 @@ Small build executor commonly used as the backend for generated native-code buil
 - **Maintenance:** active — An upstream release was observed dated 2025-11-20. This is evidence of release activity, not a support, security, stability or runtime-quality guarantee. ([evidence](https://github.com/ninja-build/ninja/releases/tag/v1.13.2))
 - [Official project](https://ninja-build.org/) · [Official installation / downloads](https://github.com/ninja-build/ninja/releases) · [Repository](https://github.com/ninja-build/ninja)
 - **Sources:** [Official project README: documented behavior and installation](https://raw.githubusercontent.com/ninja-build/ninja/HEAD/README.md) (2026-11-14; downloads, features, identity, platforms); [Official license text or upstream licensing metadata](https://raw.githubusercontent.com/ninja-build/ninja/HEAD/COPYING) (2026-11-14; license); [Official downloads or installation instructions](https://github.com/ninja-build/ninja/releases) (2026-11-14; downloads); [Public upstream app/package distribution: unauthenticated availability checked](https://github.com/ninja-build/ninja/releases/download/v1.13.2/ninja-win.zip) (2026-11-14; downloads, pricing); [Observed upstream release record and date](https://github.com/ninja-build/ninja/releases/tag/v1.13.2) (2026-11-14; downloads, maintenance)
+### SCons
+
+Build automation tool that expresses dependency and construction rules as Python programs.
+
+- **Platforms:** Windows, macOS, Linux. **License:** MIT. **Pricing model:** free.
+- **Compatibility details:** Official README documents Windows, macOS, Linux and other POSIX hosts; supported Python is required.
+- **Pricing details:** Public Python package and source are free under MIT.
+- **Pick for:** Your build needs programmable Python rules and custom construction steps.
+- **Compare when:** Compare Meson for a more constrained build definition or Bazel for shared remote execution.
+- **Strengths:** General Python logic can express specialized build steps; Built-in scanners cover common native languages
+- **Limitations:** Build scripts require Python knowledge; Performance and caching depend on project design rather than language alone
+- **Maintenance:** active — Official release 4.11.1 is dated 2026-08-27; installation and performance were not independently tested. ([evidence](https://github.com/SCons/scons/releases/tag/4.11.1))
+- [Official project](https://scons.org/) · [Official installation / downloads](https://scons.org/pages/download.html) · [Repository](https://github.com/SCons/scons)
+- **Sources:** [Official product overview](https://scons.org/) (2026-11-15; identity, features); [Official project documentation](https://raw.githubusercontent.com/SCons/scons/master/README.rst) (2026-11-15; identity, features, downloads, platforms, pricing); [Official licensing terms](https://raw.githubusercontent.com/SCons/scons/master/LICENSE) (2026-11-15; license); [Official download or installation entry point](https://scons.org/pages/download.html) (2026-11-15; downloads); [Official dated release](https://github.com/SCons/scons/releases/tag/4.11.1) (2026-11-15; maintenance, downloads)
+
+## Business intelligence and data reports
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=development%2Fbusiness-intelligence)
+
+### Apache Superset
+
+SQL-oriented analytics application with chart builders, dashboards and a dataset semantic layer.
+
+- **Platforms:** Web. **License:** Apache-2.0. **Pricing model:** free.
+- **Compatibility details:** Server-hosted browser application; follow the current administrative deployment requirements.
+- **Pricing details:** Apache source and public packages have no product fee; infrastructure and commercial hosting are separate.
+- **Pick for:** An analytics team needs self-hosted dashboards and direct SQL exploration.
+- **Compare when:** Compare Metabase when simpler visual questions matter more than detailed chart configuration.
+- **Strengths:** Rich visualization choices work with many SQL data sources; Dataset definitions can centralize shared analytical logic
+- **Limitations:** Production deployment and database drivers need administration; Permissions do not replace controls in the underlying database
+- **Maintenance:** active — Official release 6.1.0 is dated 2026-05-13; installation and performance were not independently tested. ([evidence](https://github.com/apache/superset/releases/tag/6.1.0))
+- [Official project](https://superset.apache.org/) · [Official installation / downloads](https://superset.apache.org/admin-docs/) · [Repository](https://github.com/apache/superset)
+- **Sources:** [Official product overview](https://superset.apache.org/) (2026-11-15; identity, features); [Official project documentation](https://raw.githubusercontent.com/apache/superset/master/README.md) (2026-11-15; identity, features, downloads, platforms, pricing); [Official licensing terms](https://raw.githubusercontent.com/apache/superset/master/LICENSE.txt) (2026-11-15; license); [Official download or installation entry point](https://superset.apache.org/admin-docs/) (2026-11-15; downloads); [Official dated release](https://github.com/apache/superset/releases/tag/6.1.0) (2026-11-15; maintenance, downloads)
+### Evidence Core
+
+Code-based framework for analytical reports and data applications built with SQL, Markdown and reusable components.
+
+- **Platforms:** Windows, macOS, Linux, Web. **License:** MIT. **Pricing model:** unknown.
+- **Compatibility details:** Local CLI supports Windows x64, macOS Intel/Apple Silicon, and Linux x64/ARM64; deployed reports are accessed through a browser.
+- **Pricing details:** Open-source code and a public installation route are documented. A separate explicit pricing statement for the current distribution was not established in this review.
+- **Pick for:** You want analytical reports in reviewable source files and can maintain a local or hosted deployment.
+- **Compare when:** Compare Metabase or Superset for a browser-oriented BI authoring workflow and verify any Studio-only requirements.
+- **Strengths:** Report definitions can be versioned and reviewed with the rest of a project; Connects explanatory narrative with analytical queries and reusable metrics
+- **Limitations:** Evidence Studio hosting, agent and governance features are separate from the MIT framework; Existing projects need to distinguish current Core syntax and deployment from the previous framework
+- **Maintenance:** active — The official August 26, 2026 announcement introduces Evidence Core and distinguishes it from hosted Evidence Studio. The older repository package release is not used as evidence for this newer CLI. ([evidence](https://evidence.dev/blog/evidence-core))
+- [Official project](https://evidence.dev/) · [Official installation / downloads](https://docs.evidence.dev/cli) · [Repository](https://github.com/evidence-dev/evidence)
+- **Sources:** [Official project documentation](https://github.com/evidence-dev/evidence/blob/main/README.md) (2026-11-16; identity, features, platforms, downloads); [Official application and dependency licensing](https://github.com/evidence-dev/evidence/blob/main/LICENSE) (2026-11-16; license); [Official CLI and supported platforms](https://docs.evidence.dev/cli) (2026-11-16; platforms, downloads, features); [Official Core launch and Studio distinction](https://evidence.dev/blog/evidence-core) (2026-11-16; identity, features, maintenance)
+### Metabase
+
+Business intelligence application with visual questions, SQL queries, dashboards and reports.
+
+- **Platforms:** Web. **License:** AGPL-3.0 Open Source; enterprise and embedding files have separate terms. **Pricing model:** freemium.
+- **Compatibility details:** Browser application deployed as Java service or container; a database connection and application storage are required.
+- **Pricing details:** Open Source edition is free and self-hosted; paid cloud and enterprise editions are separate.
+- **Pick for:** A team needs approachable questions and dashboards over an existing database.
+- **Compare when:** Compare Superset for a SQL-centered analytics team and check commercial plan boundaries.
+- **Strengths:** Non-SQL users can explore configured datasets; Self-hosted deployment can sit alongside existing databases
+- **Limitations:** Database access and permissions need careful configuration; Enterprise governance, embedding and AI capabilities vary by plan
+- **Maintenance:** active — Official release v0.65.4 is dated 2026-11-13; installation and performance were not independently tested. ([evidence](https://github.com/metabase/metabase/releases/tag/v0.65.4))
+- [Official project](https://www.metabase.com/) · [Official installation / downloads](https://www.metabase.com/start/oss) · [Repository](https://github.com/metabase/metabase)
+- **Sources:** [Official product overview](https://www.metabase.com/) (2026-11-15; identity, features, pricing); [Official project documentation](https://raw.githubusercontent.com/metabase/metabase/master/README.md) (2026-11-15; identity, features, downloads, platforms); [Official licensing terms](https://raw.githubusercontent.com/metabase/metabase/master/LICENSE.txt) (2026-11-15; license); [Official download or installation entry point](https://www.metabase.com/start/oss) (2026-11-15; downloads); [Official dated release](https://github.com/metabase/metabase/releases/tag/v0.65.4) (2026-11-15; maintenance, downloads)
 
 ## Text and code editors
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=development%2Fcode-editors)
 
 ### Geany
 
@@ -445,7 +622,89 @@ Collaborative graphical code editor with language tooling, terminal integration,
 - [Official project](https://zed.dev/) · [Official installation / downloads](https://github.com/zed-industries/zed/releases) · [Repository](https://github.com/zed-industries/zed)
 - **Sources:** [Official repository metadata: identity, license detection and activity](https://api.github.com/repos/zed-industries/zed) (2026-11-14; identity, maintenance); [Official project README](https://raw.githubusercontent.com/zed-industries/zed/HEAD/README.md) (2026-11-14; identity, features, platforms, license); [Official official documentation](https://zed.dev/) (2026-11-14; identity, features); [Official release inspected: v1.28.1](https://github.com/zed-industries/zed/releases/tag/v1.28.1) (2026-11-14; downloads, maintenance, platforms); [Public upstream app/package distribution: availability without payment or authentication checked](https://github.com/zed-industries/zed/releases/download/v1.28.1/Zed-x86_64.exe) (2026-11-15; downloads, pricing); [Official source: Free editor use and optional paid hosted-AI/team plans.](https://zed.dev/docs/account/plans-and-pricing) (2026-11-14; pricing)
 
+## Code and configuration linting
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=development%2Fcode-linting)
+
+### actionlint
+
+Static checker for GitHub Actions syntax, expressions, workflow dependencies and action usage.
+
+- **Platforms:** Windows, macOS, Linux. **License:** MIT. **Pricing model:** free.
+- **Compatibility details:** Official installation documentation provides release binaries and package-manager options for Windows, macOS and Linux.
+- **Pricing details:** Public binaries and source are free under MIT.
+- **Pick for:** You want local validation of GitHub Actions configuration and expressions.
+- **Compare when:** Retain actual CI execution to verify permissions, service access and runner behavior.
+- **Strengths:** Finds mistakes before a hosted workflow starts; Checks workflow semantics beyond generic YAML syntax
+- **Limitations:** Cannot reproduce every hosted runner or action behavior; Embedded script checks require optional external analyzers
+- **Maintenance:** active — Official release v1.7.12 is dated 2026-03-30; installation and performance were not independently tested. ([evidence](https://github.com/rhysd/actionlint/releases/tag/v1.7.12))
+- [Official project](https://github.com/rhysd/actionlint) · [Official installation / downloads](https://github.com/rhysd/actionlint/blob/main/docs/install.md) · [Repository](https://github.com/rhysd/actionlint)
+- **Sources:** [Official product overview](https://github.com/rhysd/actionlint) (2026-11-15; identity, features); [Official project documentation](https://raw.githubusercontent.com/rhysd/actionlint/main/README.md) (2026-11-15; identity, features, downloads, pricing); [Official licensing terms](https://raw.githubusercontent.com/rhysd/actionlint/main/LICENSE.txt) (2026-11-15; license); [Documented deployment and platform scope](https://raw.githubusercontent.com/rhysd/actionlint/main/docs/install.md) (2026-11-15; platforms); [Official download or installation entry point](https://github.com/rhysd/actionlint/blob/main/docs/install.md) (2026-11-15; downloads); [Official dated release](https://github.com/rhysd/actionlint/releases/tag/v1.7.12) (2026-11-15; maintenance, downloads)
+### Hadolint
+
+Dockerfile linter that checks build instructions and ShellCheck diagnostics in embedded shell commands.
+
+- **Platforms:** Windows, macOS, Linux. **License:** GPL-3.0. **Pricing model:** free.
+- **Compatibility details:** Official README documents Windows, macOS and Linux binaries, package managers and container execution.
+- **Pricing details:** Public binaries and source are free under GPL.
+- **Pick for:** You need consistent Dockerfile and embedded-shell checks before building images.
+- **Compare when:** Pair with an image vulnerability scanner and real build tests for other failure classes.
+- **Strengths:** Combines Dockerfile and shell checks in one CLI; Severity and rule configuration suit project policies
+- **Limitations:** Passing lint does not establish image security or reproducibility; Intentional build patterns may need documented exclusions
+- **Maintenance:** active — Official release v2.15.1 is dated 2026-07-31; installation and performance were not independently tested. ([evidence](https://github.com/hadolint/hadolint/releases/tag/v2.15.1))
+- [Official project](https://github.com/hadolint/hadolint) · [Official installation / downloads](https://github.com/hadolint/hadolint#install) · [Repository](https://github.com/hadolint/hadolint)
+- **Sources:** [Official product overview](https://github.com/hadolint/hadolint) (2026-11-15; identity, features); [Official project documentation](https://raw.githubusercontent.com/hadolint/hadolint/master/README.md) (2026-11-15; identity, features, downloads, platforms, pricing); [Official licensing terms](https://raw.githubusercontent.com/hadolint/hadolint/master/LICENSE) (2026-11-15; license); [Official download or installation entry point](https://github.com/hadolint/hadolint#install) (2026-11-15; downloads); [Official dated release](https://github.com/hadolint/hadolint/releases/tag/v2.15.1) (2026-11-15; maintenance, downloads)
+### Ruff
+
+Python linter and formatter combining configurable rules, fixes and project-level configuration.
+
+- **Platforms:** Windows, macOS, Linux. **License:** MIT; bundled third-party notices apply. **Pricing model:** free.
+- **Compatibility details:** Official README supplies native macOS, Linux and Windows installation instructions.
+- **Pricing details:** Official package and standalone distributions are free; no product subscription is required.
+- **Pick for:** You want a consolidated lint-and-format tool for Python code.
+- **Compare when:** Retain a dedicated type checker and review rule compatibility when migrating existing projects.
+- **Strengths:** A shared configuration can cover linting, import organization and formatting; Standalone binaries and Python package distribution fit different environments
+- **Limitations:** Rule parity with older plugin stacks is not exact; Automatic fixes still need review and type checking remains separate
+- **Maintenance:** active — Official release 0.17.5 is dated 2026-11-12; installation and performance were not independently tested. ([evidence](https://github.com/astral-sh/ruff/releases/tag/0.17.5))
+- [Official project](https://docs.astral.sh/ruff/) · [Official installation / downloads](https://github.com/astral-sh/ruff#installation) · [Repository](https://github.com/astral-sh/ruff)
+- **Sources:** [Official product overview](https://docs.astral.sh/ruff/) (2026-11-15; identity, features); [Official project documentation](https://raw.githubusercontent.com/astral-sh/ruff/main/README.md) (2026-11-15; identity, features, downloads, platforms, pricing); [Official licensing terms](https://raw.githubusercontent.com/astral-sh/ruff/main/LICENSE) (2026-11-15; license); [Official download or installation entry point](https://github.com/astral-sh/ruff#installation) (2026-11-15; downloads); [Official dated release](https://github.com/astral-sh/ruff/releases/tag/0.17.5) (2026-11-15; maintenance, downloads)
+### ShellCheck
+
+Static analyzer for shell scripts that identifies quoting, syntax, portability and semantic pitfalls.
+
+- **Platforms:** Windows, macOS, Linux, FreeBSD, Web. **License:** GPL-3.0. **Pricing model:** free.
+- **Compatibility details:** Official README lists Windows, macOS, Linux and FreeBSD installation plus a web interface.
+- **Pricing details:** Free GPL tool with public binaries and packages; web playground is optional.
+- **Pick for:** You maintain shell scripts and want early feedback on common semantic errors.
+- **Compare when:** Use Bats-core as a complement to verify actual execution behavior.
+- **Strengths:** Explains common shell mistakes at the offending line; CLI use fits local checks and CI
+- **Limitations:** Static analysis does not execute or prove a script correct; Shell dialect and intentional exceptions need configuration
+- **Maintenance:** active — Official release v0.11.0 is dated 2025-08-04; installation and performance were not independently tested. ([evidence](https://github.com/koalaman/shellcheck/releases/tag/v0.11.0))
+- [Official project](https://www.shellcheck.net/) · [Official installation / downloads](https://github.com/koalaman/shellcheck#installing) · [Repository](https://github.com/koalaman/shellcheck)
+- **Sources:** [Official product overview](https://www.shellcheck.net/) (2026-11-15; identity, features); [Official project documentation](https://raw.githubusercontent.com/koalaman/shellcheck/master/README.md) (2026-11-15; identity, features, downloads, platforms, pricing); [Official licensing terms](https://raw.githubusercontent.com/koalaman/shellcheck/master/LICENSE) (2026-11-15; license); [Official download or installation entry point](https://github.com/koalaman/shellcheck#installing) (2026-11-15; downloads); [Official dated release](https://github.com/koalaman/shellcheck/releases/tag/v0.11.0) (2026-11-15; maintenance, downloads)
+
+## Data application frameworks
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=development%2Fdata-app-frameworks)
+
+### SQLPage
+
+SQL-driven web application server that turns queries into forms, tables, charts and data-editing pages.
+
+- **Platforms:** Windows, macOS, Linux, Web. **License:** MIT. **Pricing model:** free.
+- **Compatibility details:** Local executable or container serves browser pages. Release binaries cover Linux/Windows x86-64 and Apple Silicon macOS; Intel Macs use Homebrew and may require a source build.
+- **Pricing details:** The local open-source application is available without a license fee. Optional hosting, support, dependencies and infrastructure have separate terms.
+- **Pick for:** You want a small data-centric web application and prefer defining its behavior in SQL.
+- **Compare when:** Compare Evidence Core for analytical reports or Appsmith when a visual application builder fits the team better.
+- **Strengths:** SQL practitioners can build a small data application without maintaining a separate JavaScript frontend; A standalone server and SQL files keep deployment inputs visible
+- **Limitations:** Application authors still own SQL permissions, authentication configuration and data validation; Connector drivers and platform architecture can require additional setup
+- **Maintenance:** active — Official release v0.48.0 is dated 2026-11-12. This is a release observation; installation and performance were not independently tested. ([evidence](https://github.com/sqlpage/SQLPage/releases/tag/v0.48.0))
+- [Official project](https://sql-page.com/) · [Official installation / downloads](https://sql-page.com/your-first-sql-website/) · [Repository](https://github.com/sqlpage/SQLPage)
+- **Sources:** [Official project documentation](https://github.com/sqlpage/SQLPage/blob/main/README.md) (2026-11-16; identity, features, platforms, downloads); [Official application and dependency licensing](https://github.com/sqlpage/SQLPage/blob/main/LICENSE.txt) (2026-11-16; license, pricing); [Official free software tutorial and platform qualifications](https://sql-page.com/your-first-sql-website/) (2026-11-16; downloads, platforms, pricing); [Official authentication setup](https://sql-page.com/sso/) (2026-11-16; features); [Official dated release and distribution](https://github.com/sqlpage/SQLPage/releases/tag/v0.48.0) (2026-11-16; maintenance, downloads)
+
 ## Command-line data processing
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=development%2Fdata-cli)
 
 ### csvkit
 
@@ -541,7 +800,98 @@ Portable command-line processor for YAML and related structured formats using a 
 - [Official project](https://mikefarah.gitbook.io/yq) · [Official installation / downloads](https://github.com/mikefarah/yq/releases) · [Repository](https://github.com/mikefarah/yq)
 - **Sources:** [Official repository metadata: identity, license detection and activity](https://api.github.com/repos/mikefarah/yq) (2026-11-14; identity, maintenance, license); [Official project README](https://raw.githubusercontent.com/mikefarah/yq/HEAD/README.md) (2026-11-14; identity, features, downloads, platforms); [Official official documentation](https://mikefarah.gitbook.io/yq) (2026-11-14; identity, features); [Official release inspected: v4.54.3](https://github.com/mikefarah/yq/releases/tag/v4.54.3) (2026-11-14; downloads, maintenance, platforms); [Public upstream app/package distribution: availability without payment or authentication checked](https://github.com/mikefarah/yq/releases/download/v4.54.3/yq_windows_386.exe) (2026-11-14; downloads, pricing)
 
-## Data Publishing
+## Data pipelines and orchestration
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=development%2Fdata-pipelines)
+
+### Apache Airflow
+
+Workflow orchestration with code-defined tasks, schedules, execution history and a browser interface.
+
+- **Platforms:** Linux, macOS, Web. **License:** Apache-2.0. **Pricing model:** free.
+- **Compatibility details:** Official requirements specify POSIX/Linux and macOS for development; production is Linux, with a browser UI. Windows requires WSL or Linux containers.
+- **Pricing details:** Apache source and packages have no product fee; infrastructure and managed offerings are separate.
+- **Pick for:** A team needs scheduled multi-step workflows with visible task history.
+- **Compare when:** Compare Prefect for Python-function workflows or Dagster when data assets are the organizing model.
+- **Strengths:** Explicit task dependencies support repeatable batch workflows; Providers connect many external systems
+- **Limitations:** Production deployment requires several operational components; Native Windows is not supported; use Linux containers or WSL for development
+- **Maintenance:** active — Official release 3.4.0 is dated 2026-11-06; installation and performance were not independently tested. ([evidence](https://github.com/apache/airflow/releases/tag/3.4.0))
+- [Official project](https://airflow.apache.org/) · [Official installation / downloads](https://github.com/apache/airflow#installing-from-pypi) · [Repository](https://github.com/apache/airflow)
+- **Sources:** [Official product overview](https://airflow.apache.org/) (2026-11-15; identity, features); [Official project documentation](https://raw.githubusercontent.com/apache/airflow/main/README.md) (2026-11-15; identity, features, downloads, platforms, pricing); [Official licensing terms](https://raw.githubusercontent.com/apache/airflow/main/LICENSE) (2026-11-15; license); [Official download or installation entry point](https://github.com/apache/airflow#installing-from-pypi) (2026-11-15; downloads); [Official dated release](https://github.com/apache/airflow/releases/tag/3.4.0) (2026-11-15; maintenance, downloads)
+### Dagster
+
+Data orchestration platform that models assets, dependencies, checks and materialization history.
+
+- **Platforms:** Web. **License:** Apache-2.0. **Pricing model:** freemium.
+- **Compatibility details:** Python tools and a self-hosted browser server; package and integration requirements apply.
+- **Pricing details:** Open-source self-hosting is available; managed service and enterprise features have paid plans.
+- **Pick for:** You want to organize pipelines around datasets and their dependencies.
+- **Compare when:** Use Prefect for function-first workflows or a simpler runner for a single script.
+- **Strengths:** Asset history connects pipeline execution to produced data; Local development shares concepts with production orchestration
+- **Limitations:** Asset modeling adds an initial learning cost; Managed deployment and enterprise controls have separate plans
+- **Maintenance:** active — Official release 1.13.30 is dated 2026-11-12; installation and performance were not independently tested. ([evidence](https://github.com/dagster-io/dagster/releases/tag/1.13.30))
+- [Official project](https://dagster.io/) · [Official installation / downloads](https://github.com/dagster-io/dagster) · [Repository](https://github.com/dagster-io/dagster)
+- **Sources:** [Official product overview](https://dagster.io/) (2026-11-15; identity, features, pricing); [Official project documentation](https://raw.githubusercontent.com/dagster-io/dagster/master/README.md) (2026-11-15; identity, features, downloads); [Official licensing terms](https://raw.githubusercontent.com/dagster-io/dagster/master/LICENSE) (2026-11-15; license); [Documented deployment and platform scope](https://raw.githubusercontent.com/dagster-io/dagster/master/python_modules/dagster/README.md) (2026-11-15; platforms); [Official download or installation entry point](https://github.com/dagster-io/dagster) (2026-11-15; downloads); [Official dated release](https://github.com/dagster-io/dagster/releases/tag/1.13.30) (2026-11-15; maintenance, downloads)
+### dbt Core
+
+Analytics transformation tooling that builds, tests and documents SQL models in a versioned project.
+
+- **Platforms:** Windows, macOS, Linux. **License:** Apache-2.0 source; dbt product distribution is governed by a separate Product Licensing Agreement. **Pricing model:** unknown.
+- **Compatibility details:** Current upstream v2 README lists macOS and Linux x86-64/ARM and Windows x86-64; Windows ARM is not yet supported.
+- **Pricing details:** Current product distribution terms were reviewed, but a universal pricing classification was not established. Apache source and licensed binaries are distinguished.
+- **Pick for:** You need reviewable SQL transformations and dependency-aware analytical builds.
+- **Compare when:** Compare orchestration and ingestion tools separately; dbt does not replace every part of a data pipeline.
+- **Strengths:** SQL transformations can follow source-control and review practices; Model dependencies and tests connect analytical tables to their definitions
+- **Limitations:** Current v2 distribution and v1 Python Core have different installation and compatibility concerns; A supported database or warehouse and appropriate credentials are still required
+- **Maintenance:** active — Official v2.0.0 release was published September 14, 2026. This supports the v2 line described here; the separate v1 Python Core release is not used to establish v2 maintenance. ([evidence](https://github.com/dbt-labs/dbt/releases/tag/v2.0.0))
+- [Official project](https://www.getdbt.com/) · [Official installation / downloads](https://docs.getdbt.com/docs/local/install-dbt?version=2) · [Repository](https://github.com/dbt-labs/dbt)
+- **Sources:** [Official product overview](https://www.getdbt.com/) (2026-11-15; identity, features); [Official project documentation](https://raw.githubusercontent.com/dbt-labs/dbt-core/main/README.md) (2026-11-15; identity, features, downloads, platforms); [Official licensing terms](https://www.getdbt.com/dbt-fusion-engine-license-agreement) (2026-11-15; license); [Official download or installation entry point](https://docs.getdbt.com/docs/local/install-dbt?version=2) (2026-11-15; downloads); [Official dated release for the documented v2 line](https://github.com/dbt-labs/dbt/releases/tag/v2.0.0) (2026-11-16; maintenance, downloads); [Official Apache source license, separate from product distribution terms](https://raw.githubusercontent.com/dbt-labs/dbt/main/LICENSE) (2026-11-16; license)
+### Kestra
+
+Declarative workflow orchestration with a browser editor, execution tracking and task plugins.
+
+- **Platforms:** Web. **License:** Apache-2.0 core; Enterprise has separate terms. **Pricing model:** freemium.
+- **Compatibility details:** Browser application backed by a server or container; local quick-start examples are development deployments.
+- **Pricing details:** Core self-hosting is free; Cloud and Enterprise carry separate pricing and controls.
+- **Pick for:** You need to coordinate diverse scripts and services with a shared execution interface.
+- **Compare when:** Use a Python-first orchestrator when Python code should define the whole workflow.
+- **Strengths:** One workflow can coordinate scripts and services in different languages; Visual operations and code definitions share the same workflow
+- **Limitations:** Task execution needs configured runtimes and credentials; Enterprise governance differs from free Core
+- **Maintenance:** active — Official release v2.0.10 is dated 2026-11-10; installation and performance were not independently tested. ([evidence](https://github.com/kestra-io/kestra/releases/tag/v2.0.10))
+- [Official project](https://kestra.io/) · [Official installation / downloads](https://github.com/kestra-io/kestra#-quick-start) · [Repository](https://github.com/kestra-io/kestra)
+- **Sources:** [Official product overview](https://kestra.io/) (2026-11-15; identity, features, pricing); [Official project documentation](https://raw.githubusercontent.com/kestra-io/kestra/develop/README.md) (2026-11-15; identity, features, downloads, platforms); [Official licensing terms](https://raw.githubusercontent.com/kestra-io/kestra/develop/LICENSE) (2026-11-15; license); [Official download or installation entry point](https://github.com/kestra-io/kestra#-quick-start) (2026-11-15; downloads); [Official dated release](https://github.com/kestra-io/kestra/releases/tag/v2.0.10) (2026-11-15; maintenance, downloads)
+### Meltano
+
+Code-first data integration CLI using configured extractors, loaders and project environments.
+
+- **Platforms:** Linux, macOS. **License:** MIT core; connector licenses vary. **Pricing model:** free.
+- **Compatibility details:** Linux/macOS Python installation; official guide advises WSL or Docker for complete Windows functionality.
+- **Pricing details:** Core is publicly installable without a product fee; hosted operations and third-party APIs may incur costs.
+- **Pick for:** You need configurable data extraction and loading that fits a code-based project.
+- **Compare when:** Use an orchestrator for broader task coordination and dbt for SQL transformations after loading.
+- **Strengths:** Integration configuration can be reviewed and versioned; Connector ecosystem reduces repeated API plumbing
+- **Limitations:** Connector quality and supported Python versions vary independently; Official in-depth guide warns native Windows support is incomplete
+- **Maintenance:** active — Official release v4.4.1 is dated 2026-10-07; installation and performance were not independently tested. ([evidence](https://github.com/meltano/meltano/releases/tag/v4.4.1))
+- [Official project](https://meltano.com/) · [Official installation / downloads](https://docs.meltano.com/getting-started) · [Repository](https://github.com/meltano/meltano)
+- **Sources:** [Official product overview](https://meltano.com/) (2026-11-15; identity, features); [Official project documentation](https://raw.githubusercontent.com/meltano/meltano/main/README.md) (2026-11-15; identity, features, downloads, pricing); [Official licensing terms](https://raw.githubusercontent.com/meltano/meltano/main/LICENSE) (2026-11-15; license); [Documented deployment and platform scope](https://docs.meltano.com/guide/installation-guide) (2026-11-15; platforms); [Official download or installation entry point](https://docs.meltano.com/getting-started) (2026-11-15; downloads); [Official dated release](https://github.com/meltano/meltano/releases/tag/v4.4.1) (2026-11-15; maintenance, downloads)
+### Prefect
+
+Python workflow orchestration with tasks, retries, schedules and local or hosted run monitoring.
+
+- **Platforms:** Web. **License:** Apache-2.0 core. **Pricing model:** freemium.
+- **Compatibility details:** Python package with an optional self-hosted browser control plane; this Web record avoids claiming unverified native installers.
+- **Pricing details:** Open-source engine can be self-hosted; managed service plans and infrastructure costs are separate.
+- **Pick for:** You want to evolve Python scripts into scheduled, observable flows.
+- **Compare when:** Compare Dagster for an asset-centered model and Airflow for established scheduled DAG operations.
+- **Strengths:** Existing Python functions can become observable workflows; Local execution can grow into worker-based deployments
+- **Limitations:** Infrastructure and credentials still require operational ownership; Managed cloud features and quotas are separate from the open-source engine
+- **Maintenance:** active — Official release 3.9.3 is dated 2026-11-13; installation and performance were not independently tested. ([evidence](https://github.com/PrefectHQ/prefect/releases/tag/3.9.3))
+- [Official project](https://www.prefect.io/) · [Official installation / downloads](https://github.com/PrefectHQ/prefect#getting-started) · [Repository](https://github.com/PrefectHQ/prefect)
+- **Sources:** [Official product overview](https://www.prefect.io/) (2026-11-15; identity, features, pricing); [Official project documentation](https://raw.githubusercontent.com/PrefectHQ/prefect/main/README.md) (2026-11-15; identity, features, downloads, platforms); [Official licensing terms](https://raw.githubusercontent.com/PrefectHQ/prefect/main/LICENSE) (2026-11-15; license); [Official download or installation entry point](https://github.com/PrefectHQ/prefect#getting-started) (2026-11-15; downloads); [Official dated release](https://github.com/PrefectHQ/prefect/releases/tag/3.9.3) (2026-11-15; maintenance, downloads)
+
+## Data publishing
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=development%2Fdata-publishing)
 
 ### Datasette
 
@@ -560,6 +910,22 @@ Local web application and CLI for exploring SQLite databases and exposing search
 
 ## Database clients
 
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=development%2Fdatabase-clients)
+
+### Beekeeper Studio
+
+Desktop SQL editor and database manager with tabbed queries, saved history and table editing.
+
+- **Platforms:** Windows, macOS, Linux. **License:** GPL-3.0-or-later Community; commercial directories use a separate EULA. **Pricing model:** freemium.
+- **Compatibility details:** Official Community FAQ and download page establish Windows, macOS and Linux.
+- **Pricing details:** Community features are free; the single application download unlocks premium features with a paid license.
+- **Pick for:** You want a focused desktop SQL workflow with query history and editable tables.
+- **Compare when:** Compare the free driver list against DbGate and DBeaver before relying on a particular database.
+- **Strengths:** Focused SQL workflow avoids a full development IDE; Same core interface is available across desktop platforms
+- **Limitations:** Some database engines and advanced features require payment; Product download combines free and paid functionality
+- **Maintenance:** active — Official release v6.2.2 is dated 2026-11-06; installation and performance were not independently tested. ([evidence](https://github.com/beekeeper-studio/beekeeper-studio/releases/tag/v6.2.2))
+- [Official project](https://www.beekeeperstudio.io/) · [Official installation / downloads](https://www.beekeeperstudio.io/get) · [Repository](https://github.com/beekeeper-studio/beekeeper-studio)
+- **Sources:** [Official product overview](https://www.beekeeperstudio.io/) (2026-11-15; identity, features); [Official project documentation](https://raw.githubusercontent.com/beekeeper-studio/beekeeper-studio/master/README.md) (2026-11-15; identity, features, downloads); [Official licensing terms](https://raw.githubusercontent.com/beekeeper-studio/beekeeper-studio/master/LICENSE.md) (2026-11-15; license); [Documented deployment and platform scope](https://www.beekeeperstudio.io/community/) (2026-11-15; platforms, pricing); [Official download or installation entry point](https://www.beekeeperstudio.io/get) (2026-11-15; downloads); [Official dated release](https://github.com/beekeeper-studio/beekeeper-studio/releases/tag/v6.2.2) (2026-11-15; maintenance, downloads)
 ### DB Browser for SQLite
 
 Visual SQLite database browser for creating databases, editing tables, inspecting data, and running SQL.
@@ -586,6 +952,20 @@ Universal database client with SQL editing, data browsing, schema navigation, an
 - **Maintenance:** active — Repository not archived; latest repository push observed 2026-11-14. Activity is not a runtime, security, or support guarantee. ([evidence](https://api.github.com/repos/dbeaver/dbeaver))
 - [Official project](https://dbeaver.io/) · [Official installation / downloads](https://github.com/dbeaver/dbeaver/releases) · [Repository](https://github.com/dbeaver/dbeaver)
 - **Sources:** [Official repository metadata: identity, license detection and activity](https://api.github.com/repos/dbeaver/dbeaver) (2026-11-14; identity, maintenance, license); [Official project README](https://raw.githubusercontent.com/dbeaver/dbeaver/HEAD/README.md) (2026-11-14; identity, features); [Official official documentation](https://dbeaver.io/) (2026-11-14; identity, features, platforms); [Official release inspected: 26.2.4](https://github.com/dbeaver/dbeaver/releases/tag/26.2.4) (2026-11-14; downloads, maintenance, platforms); [Public upstream app/package distribution: availability without payment or authentication checked](https://github.com/dbeaver/dbeaver/releases/download/26.2.4/dbeaver-ce-26.2.4-windows-x86_64.exe) (2026-11-14; downloads, pricing)
+### DbGate
+
+SQL and NoSQL database manager with data editing, queries, schema comparison and import/export.
+
+- **Platforms:** Windows, macOS, Linux, Web. **License:** GPL-3.0 Community; premium editions are commercial. **Pricing model:** freemium.
+- **Compatibility details:** Official README documents Windows, Linux, macOS and a server-hosted browser version.
+- **Pricing details:** Community is free under GPL; Premium drivers and team capabilities are paid.
+- **Pick for:** You regularly switch between several SQL and NoSQL databases.
+- **Compare when:** Check the edition matrix for your exact drivers before selecting it over DBeaver or Beekeeper Studio.
+- **Strengths:** One workspace covers several relational and document data stores; Web and desktop distribution fit different environments
+- **Limitations:** Some database drivers and integrations require Premium; Shared web deployment needs access-control administration
+- **Maintenance:** active — Official release v7.3.6 is dated 2026-11-12; installation and performance were not independently tested. ([evidence](https://github.com/dbgate/dbgate/releases/tag/v7.3.6))
+- [Official project](https://www.dbgate.io/) · [Official installation / downloads](https://www.dbgate.io/download-community/) · [Repository](https://github.com/dbgate/dbgate)
+- **Sources:** [Official product overview](https://www.dbgate.io/) (2026-11-15; identity, features); [Official project documentation](https://raw.githubusercontent.com/dbgate/dbgate/master/README.md) (2026-11-15; identity, features, downloads, platforms, pricing); [Official licensing terms](https://raw.githubusercontent.com/dbgate/dbgate/master/LICENSE) (2026-11-15; license); [Official download or installation entry point](https://www.dbgate.io/download-community/) (2026-11-15; downloads); [Official dated release](https://github.com/dbgate/dbgate/releases/tag/v7.3.6) (2026-11-15; maintenance, downloads)
 ### Harlequin
 
 Terminal SQL IDE with an editor, database catalog, results table and pluggable database adapters.
@@ -666,7 +1046,103 @@ Universal terminal database client with a psql-inspired interface and drivers fo
 - [Official project](https://github.com/xo/usql) · [Official installation / downloads](https://github.com/xo/usql/releases) · [Repository](https://github.com/xo/usql)
 - **Sources:** [Official project README: documented behavior and installation](https://raw.githubusercontent.com/xo/usql/HEAD/README.md) (2026-11-14; downloads, features, identity, platforms); [Official license text or upstream licensing metadata](https://raw.githubusercontent.com/xo/usql/HEAD/LICENSE) (2026-11-14; license); [Official downloads or installation instructions](https://github.com/xo/usql/releases) (2026-11-14; downloads); [Public upstream app/package distribution: unauthenticated availability checked](https://github.com/xo/usql/releases/download/v0.21.6/usql-0.21.6-windows-amd64.zip) (2026-11-14; downloads, pricing); [Observed upstream release record and date](https://github.com/xo/usql/releases/tag/v0.21.6) (2026-11-14; downloads, maintenance)
 
+## Database engines and CLI tools
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=development%2Fdatabase-engines)
+
+### Dolt
+
+SQL database with Git-like branches, commits, diffs and merges for tables and schemas.
+
+- **Platforms:** Windows, macOS, Linux. **License:** Apache-2.0. **Pricing model:** free.
+- **Compatibility details:** Official README provides native Windows, macOS and Linux install paths.
+- **Pricing details:** Open-source local database is publicly downloadable without a fee; hosting and collaboration services have separate plans.
+- **Pick for:** Your data itself needs branching, review and merge history.
+- **Compare when:** Choose ordinary SQLite when a local file is sufficient and table-versioning overhead is unnecessary.
+- **Strengths:** Data changes can be reviewed as commits; SQL and version-control workflows share the same database
+- **Limitations:** Compatibility and performance must be checked with the intended SQL workload; Merge conflicts in data need explicit resolution
+- **Maintenance:** active — Official release v2.7.3 is dated 2026-11-11; installation and performance were not independently tested. ([evidence](https://github.com/dolthub/dolt/releases/tag/v2.7.3))
+- [Official project](https://www.dolthub.com/) · [Official installation / downloads](https://github.com/dolthub/dolt#installation) · [Repository](https://github.com/dolthub/dolt)
+- **Sources:** [Official product overview](https://www.dolthub.com/) (2026-11-15; identity, features); [Official project documentation](https://raw.githubusercontent.com/dolthub/dolt/main/README.md) (2026-11-15; identity, features, downloads, platforms, pricing); [Official licensing terms](https://raw.githubusercontent.com/dolthub/dolt/main/LICENSE) (2026-11-15; license); [Official download or installation entry point](https://github.com/dolthub/dolt#installation) (2026-11-15; downloads); [Official dated release](https://github.com/dolthub/dolt/releases/tag/v2.7.3) (2026-11-15; maintenance, downloads)
+### SQLite CLI
+
+Command-line database shell for creating, inspecting, querying and exporting SQLite files.
+
+- **Platforms:** Windows, macOS, Linux. **License:** Public domain core; optional components retain their notices. **Pricing model:** free.
+- **Compatibility details:** Official downloads provide desktop command-line tools; build options affect bundled extensions.
+- **Pricing details:** Core and official command-line utilities are public domain; commercial support and optional extensions are separate.
+- **Pick for:** You need scriptable SQL over local database files without administering a server.
+- **Compare when:** Use DB Browser for SQLite for visual editing or Dolt when table history and merging are central.
+- **Strengths:** A database is a portable local file; CLI operations fit scripts and repeatable inspection
+- **Limitations:** Concurrent write behavior differs from client-server databases; Extension availability depends on the selected build
+- **Maintenance:** unverified — Official product and installation material reviewed; a recent dated release was not established for this product scope.
+- [Official project](https://sqlite.org/cli.html) · [Official installation / downloads](https://sqlite.org/download.html) · [Repository](https://github.com/sqlite/sqlite)
+- **Sources:** [Official product overview](https://sqlite.org/cli.html) (2026-11-15; identity, features); [Official project documentation](https://raw.githubusercontent.com/sqlite/sqlite/master/README.md) (2026-11-15; identity, features, downloads); [Official licensing terms](https://sqlite.org/copyright.html) (2026-11-15; license, pricing); [Documented deployment and platform scope](https://sqlite.org/download.html) (2026-11-15; platforms, downloads)
+
+## Database schema migrations
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=development%2Fdatabase-migrations)
+
+### Atlas
+
+Database schema management with declarative planning, versioned migrations and schema comparison.
+
+- **Platforms:** Windows, macOS, Linux. **License:** Apache-2.0 Community source; standard distribution includes proprietary features under Atlas MSA. **Pricing model:** freemium.
+- **Compatibility details:** Official installation documents Windows, macOS, Linux and containers.
+- **Pricing details:** Standard CLI is free under its MSA; Pro features require a license after trial. Apache Community build remains available with fewer capabilities.
+- **Pick for:** You want schema-as-code planning rather than manually writing every migration.
+- **Compare when:** Check which commands require standard or Pro distribution before adopting Community.
+- **Strengths:** Desired-state models can generate schema migration plans; Fits workflows where schema and application changes are reviewed together
+- **Limitations:** Community is a minimal build with important command gaps; Standard distribution and Pro capabilities have separate license terms
+- **Maintenance:** active — Official release v1.3.0 is dated 2026-08-02; installation and performance were not independently tested. ([evidence](https://github.com/ariga/atlas/releases/tag/v1.3.0))
+- [Official project](https://atlasgo.io/) · [Official installation / downloads](https://atlasgo.io/community-edition) · [Repository](https://github.com/ariga/atlas)
+- **Sources:** [Official product overview](https://atlasgo.io/) (2026-11-15; identity, features); [Official project documentation](https://raw.githubusercontent.com/ariga/atlas/master/README.md) (2026-11-15; identity, features, downloads); [Official licensing terms](https://raw.githubusercontent.com/ariga/atlas/master/LICENSE) (2026-11-15; license); [Documented deployment and platform scope](https://atlasgo.io/community-edition) (2026-11-16; platforms, pricing, downloads, license); [Official dated release](https://github.com/ariga/atlas/releases/tag/v1.3.0) (2026-11-15; maintenance, downloads)
+### dbmate
+
+Standalone database migration CLI using timestamped SQL files and a shared schema history.
+
+- **Platforms:** Windows, macOS, Linux. **License:** MIT. **Pricing model:** free.
+- **Compatibility details:** Official README documents Windows, macOS and Linux packages or binaries.
+- **Pricing details:** Public binaries and source have no product fee; the project explicitly avoids a SaaS upsell.
+- **Pick for:** A project needs a compact migration CLI without adopting a framework.
+- **Compare when:** Compare Flyway for broader database integrations or Atlas for declarative schema planning.
+- **Strengths:** Independent of the application language or framework; Migration files remain ordinary reviewable SQL
+- **Limitations:** Database-specific SQL still needs testing; Rollbacks cannot automatically recover data discarded by a migration
+- **Maintenance:** active — Official release v2.38.1 is dated 2026-11-09; installation and performance were not independently tested. ([evidence](https://github.com/amacneil/dbmate/releases/tag/v2.38.1))
+- [Official project](https://github.com/amacneil/dbmate) · [Official installation / downloads](https://github.com/amacneil/dbmate#installation) · [Repository](https://github.com/amacneil/dbmate)
+- **Sources:** [Official product overview](https://github.com/amacneil/dbmate) (2026-11-15; identity, features); [Official project documentation](https://raw.githubusercontent.com/amacneil/dbmate/main/README.md) (2026-11-15; identity, features, downloads, platforms, pricing); [Official licensing terms](https://raw.githubusercontent.com/amacneil/dbmate/main/LICENSE) (2026-11-15; license); [Official download or installation entry point](https://github.com/amacneil/dbmate#installation) (2026-11-15; downloads); [Official dated release](https://github.com/amacneil/dbmate/releases/tag/v2.38.1) (2026-11-15; maintenance, downloads)
+### Flyway Community
+
+Database migration tool that versions and applies schema changes through SQL or Java migrations.
+
+- **Platforms:** Windows, macOS, Linux. **License:** Apache-2.0 OSS core; Redgate distributions and paid features have separate terms. **Pricing model:** freemium.
+- **Compatibility details:** Official README and CLI documentation establish native Windows, macOS and Linux distributions.
+- **Pricing details:** Redgate Community is free; Teams/Enterprise add paid features. The separately documented OSS distribution is Apache-licensed.
+- **Pick for:** You need a conventional migration history across several database engines.
+- **Compare when:** Use dbmate for a compact SQL-only workflow or Atlas for declarative planning.
+- **Strengths:** Migration files fit existing source-control and CI workflows; Broad database integrations support mixed application stacks
+- **Limitations:** OSS and Redgate Community distributions differ; Advanced comparison, governance and automation features require paid editions
+- **Maintenance:** active — Official release flyway-13.12.2 is dated 2026-11-12; installation and performance were not independently tested. ([evidence](https://github.com/flyway/flyway/releases/tag/flyway-13.12.2))
+- [Official project](https://www.red-gate.com/products/flyway/community/) · [Official installation / downloads](https://www.red-gate.com/products/flyway/community/) · [Repository](https://github.com/flyway/flyway)
+- **Sources:** [Official product overview](https://www.red-gate.com/products/flyway/community/) (2026-11-15; identity, features, pricing, downloads); [Official project documentation](https://raw.githubusercontent.com/flyway/flyway/main/README.md) (2026-11-15; identity, features, downloads, platforms); [Official licensing terms](https://raw.githubusercontent.com/flyway/flyway/main/LICENSE.md) (2026-11-15; license); [Official dated release](https://github.com/flyway/flyway/releases/tag/flyway-13.12.2) (2026-11-15; maintenance, downloads)
+### Liquibase Community
+
+Database change management with changelogs, ordered changesets and deployment tracking.
+
+- **Platforms:** Windows, macOS, Linux. **License:** FSL-1.1-ALv2 for current Community; future Apache-2.0 conversion under its terms. **Pricing model:** free.
+- **Compatibility details:** Official README identifies Windows ZIP and Linux/macOS archives; Java and database drivers are required.
+- **Pricing details:** Community downloads are free for uses allowed by the FSL; Liquibase Secure is a separate commercial distribution.
+- **Pick for:** You want structured change history and declarative changesets across supported databases.
+- **Compare when:** Review current FSL terms before choosing it over an unrestricted open-source migration tool.
+- **Strengths:** Changelogs make the intended sequence of schema changes explicit; Several changelog formats suit different teams
+- **Limitations:** Current FSL has permitted-purpose and competitive-use restrictions; Rollback support depends on the change type and supplied rollback logic
+- **Maintenance:** active — Official release v5.0.4 is dated 2026-08-20; installation and performance were not independently tested. ([evidence](https://github.com/liquibase/liquibase/releases/tag/v5.0.4))
+- [Official project](https://www.liquibase.com/) · [Official installation / downloads](https://www.liquibase.com/download-community) · [Repository](https://github.com/liquibase/liquibase)
+- **Sources:** [Official product overview](https://www.liquibase.com/) (2026-11-15; identity, features); [Official project documentation](https://raw.githubusercontent.com/liquibase/liquibase/main/README.md) (2026-11-15; identity, features, downloads, platforms); [Official licensing terms](https://raw.githubusercontent.com/liquibase/liquibase/main/LICENSE.txt) (2026-11-15; license); [Distribution and pricing qualification](https://www.liquibase.com/download-community) (2026-11-15; pricing, downloads); [Official dated release](https://github.com/liquibase/liquibase/releases/tag/v5.0.4) (2026-11-15; maintenance, downloads)
+
 ## Debuggers
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=development%2Fdebuggers)
 
 ### dnSpyEx
 
@@ -697,6 +1173,22 @@ Graphical Windows debugger for user-mode x86 and x64 programs with disassembly, 
 
 ## Developer utility suites
 
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=development%2Fdeveloper-utilities)
+
+### CyberChef
+
+Browser-based data transformation workbench that chains encodings, parsing, hashing and other operations.
+
+- **Platforms:** Web. **License:** Apache-2.0. **Pricing model:** free.
+- **Compatibility details:** Runs in a browser; official README documents local source/container deployment.
+- **Pricing details:** Public source, release artifacts and container image have no product fee.
+- **Pick for:** A technical task requires several visible, repeatable transformation steps.
+- **Compare when:** Use a small utility for single conversions or a script for large unattended workloads.
+- **Strengths:** Recipes make multi-step transformations repeatable; Visual inputs and outputs help inspect encoded data
+- **Limitations:** It is not a substitute for a reviewed production cryptography implementation; Large input handling depends on browser memory and chosen operations
+- **Maintenance:** active — Official release v11.5.0 is dated 2026-09-18; installation and performance were not independently tested. ([evidence](https://github.com/gchq/CyberChef/releases/tag/v11.5.0))
+- [Official project](https://github.com/gchq/CyberChef) · [Official installation / downloads](https://github.com/gchq/CyberChef#running-locally) · [Repository](https://github.com/gchq/CyberChef)
+- **Sources:** [Official product overview](https://github.com/gchq/CyberChef) (2026-11-15; identity, features); [Official project documentation](https://raw.githubusercontent.com/gchq/CyberChef/master/README.md) (2026-11-15; identity, features, downloads, platforms, pricing); [Official licensing terms](https://raw.githubusercontent.com/gchq/CyberChef/master/LICENSE) (2026-11-15; license); [Official download or installation entry point](https://github.com/gchq/CyberChef#running-locally) (2026-11-15; downloads); [Official dated release](https://github.com/gchq/CyberChef/releases/tag/v11.5.0) (2026-11-15; maintenance, downloads)
 ### DevToys
 
 Developer conversion and formatting utility suite
@@ -710,8 +1202,24 @@ Developer conversion and formatting utility suite
 - **Maintenance:** unverified — Retained research snapshot; current release activity was not established by this import.
 - [Official project](https://github.com/DevToys-app/DevToys) · [Repository](https://github.com/DevToys-app/DevToys)
 - **Sources:** [Preserved original research source](https://github.com/DevToys-app/DevToys) (2026-11-14; identity, features)
+### IT-Tools
+
+Self-hostable collection of developer utilities for data formatting, conversion and common calculations.
+
+- **Platforms:** Web. **License:** GPL-3.0. **Pricing model:** free.
+- **Compatibility details:** Browser application that can run from the hosted site or a local/self-hosted container.
+- **Pricing details:** Public source and container images are free under GPL; hosting is separate.
+- **Pick for:** You want a browser-based toolbox for small technical transformations.
+- **Compare when:** Choose CyberChef for chained recipes or DevToys for a dedicated desktop toolbox.
+- **Strengths:** Frequently needed small utilities share one interface; Local hosting can keep routine utility workflows under user control
+- **Limitations:** Individual tool behavior still needs checking on important data; It is a collection of utilities rather than a full development environment
+- **Maintenance:** unverified — Official release v2024.10.22-7ca5933 is dated 2024-10-22; installation and performance were not independently tested. ([evidence](https://github.com/CorentinTh/it-tools/releases/tag/v2024.10.22-7ca5933))
+- [Official project](https://github.com/CorentinTh/it-tools) · [Official installation / downloads](https://github.com/CorentinTh/it-tools#self-host) · [Repository](https://github.com/CorentinTh/it-tools)
+- **Sources:** [Official product overview](https://github.com/CorentinTh/it-tools) (2026-11-15; identity, features); [Official project documentation](https://raw.githubusercontent.com/CorentinTh/it-tools/main/README.md) (2026-11-15; identity, features, downloads, platforms, pricing); [Official licensing terms](https://raw.githubusercontent.com/CorentinTh/it-tools/main/LICENSE) (2026-11-15; license); [Official download or installation entry point](https://github.com/CorentinTh/it-tools#self-host) (2026-11-15; downloads); [Official dated release](https://github.com/CorentinTh/it-tools/releases/tag/v2024.10.22-7ca5933) (2026-11-15; maintenance, downloads)
 
 ## Diff and merge tools
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=development%2Fdiff-merge)
 
 ### Beyond Compare
 
@@ -778,7 +1286,9 @@ Windows visual file and directory comparison tool with merging, filtering, and p
 - [Official project](https://winmerge.org/) · [Official installation / downloads](https://github.com/WinMerge/winmerge/releases) · [Repository](https://github.com/WinMerge/winmerge)
 - **Sources:** [Official repository metadata: identity, license detection and activity](https://api.github.com/repos/WinMerge/winmerge) (2026-11-14; identity, maintenance, license); [Official project README](https://raw.githubusercontent.com/WinMerge/winmerge/HEAD/README.md) (2026-11-14; identity, features); [Official official documentation](https://winmerge.org/) (2026-11-14; identity, features); [Official release inspected: v2.16.60](https://github.com/WinMerge/winmerge/releases/tag/v2.16.60) (2026-11-14; downloads, maintenance, platforms); [Public upstream app/package distribution: availability without payment or authentication checked](https://github.com/WinMerge/winmerge/releases/download/v2.16.60/winmerge-2.16.60-x64-exe.zip) (2026-11-14; downloads, pricing)
 
-## Environment Management
+## Development environment management
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=development%2Fenvironment-management)
 
 ### Conda
 
@@ -794,6 +1304,34 @@ Language-agnostic binary package and environment manager used by several distrib
 - **Maintenance:** active — An upstream release was observed dated 2026-11-06. This is evidence of release activity, not a support, security, stability or runtime-quality guarantee. ([evidence](https://github.com/conda/conda/releases/tag/26.10.0))
 - [Official project](https://docs.conda.io/en/latest/) · [Official installation / downloads](https://docs.conda.io/projects/conda/en/stable/user-guide/install/) · [Repository](https://github.com/conda/conda)
 - **Sources:** [Official project README: documented behavior and installation](https://raw.githubusercontent.com/conda/conda/HEAD/README.md) (2026-11-14; downloads, features, identity, license); [Official license text or upstream licensing metadata](https://raw.githubusercontent.com/conda/conda/HEAD/LICENSE) (2026-11-14; license); [Official downloads or installation instructions](https://docs.conda.io/projects/conda/en/stable/user-guide/install/) (2026-11-14; downloads, platforms, pricing); [Public upstream app/package distribution: unauthenticated availability checked](https://github.com/conda/conda/releases/download/26.10.0/conda-26.10.0.tar.gz) (2026-11-14; downloads, pricing); [Observed upstream release record and date](https://github.com/conda/conda/releases/tag/26.10.0) (2026-11-14; downloads, maintenance)
+### Devbox
+
+Project-specific development shells that declare operating-system tools in a JSON file and resolve them through Nix.
+
+- **Platforms:** Windows, macOS, Linux. **License:** Apache-2.0. **Pricing model:** unknown.
+- **Compatibility details:** Linux and macOS packages; Windows uses WSL2 rather than a native Windows shell. Nix provides the underlying package store.
+- **Pricing details:** Open-source code and a public installation route are documented. A separate explicit pricing statement for the current distribution was not established in this review.
+- **Pick for:** A team wants a declared local toolchain with a simpler entry point than writing Nix expressions.
+- **Compare when:** Use Nix directly for detailed packaging control; compare DDEV or Lando when the main need is a running web-service stack.
+- **Strengths:** Declares system-level tools together instead of manually managing conflicting installations; A JSON entry point reduces the initial Nix configuration work
+- **Limitations:** Shell isolation does not provide a virtual-machine security boundary; Package availability and reproducibility still depend on the selected Nix packages and recorded versions
+- **Maintenance:** active — Official release 0.21.0 is dated 2026-11-13. This is a release observation; installation and performance were not independently tested. ([evidence](https://github.com/jetify-com/devbox/releases/tag/0.21.0))
+- [Official project](https://www.jetify.com/devbox/) · [Official installation / downloads](https://github.com/jetify-com/devbox#installing-devbox) · [Repository](https://github.com/jetify-com/devbox)
+- **Sources:** [Official project documentation](https://github.com/jetify-com/devbox/blob/main/README.md) (2026-11-16; identity, features, platforms, downloads); [Official application and dependency licensing](https://github.com/jetify-com/devbox/blob/main/LICENSE) (2026-11-16; license); [Official operating-system requirements](https://github.com/jetify-com/docs/blob/main/docs/devbox/installing-devbox.mdx) (2026-11-16; platforms, downloads); [Official dated release and distribution](https://github.com/jetify-com/devbox/releases/tag/0.21.0) (2026-11-16; maintenance, downloads)
+### direnv
+
+Shell extension that loads and unloads approved project environment variables when the working directory changes.
+
+- **Platforms:** macOS, Linux, FreeBSD. **License:** MIT. **Pricing model:** unknown.
+- **Compatibility details:** Unix-like systems with a supported shell; shell hooks are required. The release also publishes FreeBSD binaries.
+- **Pricing details:** Open-source code and a public installation route are documented. A separate explicit pricing statement for the current distribution was not established in this review.
+- **Pick for:** You already have a shell and toolchain and want project variables to appear and disappear automatically.
+- **Compare when:** Use Devbox, Nix or mise alongside or instead of it when tools themselves must also be installed and versioned.
+- **Strengths:** Project settings follow directory changes without modifying the global shell profile; Small CLI integrates with existing shells and language environment managers
+- **Limitations:** An approved .envrc executes shell code; review the actual project file before authorizing it; It does not install a complete toolchain or isolate processes by itself
+- **Maintenance:** active — Official release v2.38.2 is dated 2026-10-10. This is a release observation; installation and performance were not independently tested. ([evidence](https://github.com/direnv/direnv/releases/tag/v2.38.2))
+- [Official project](https://direnv.net/) · [Official installation / downloads](https://direnv.net/docs/installation.html) · [Repository](https://github.com/direnv/direnv)
+- **Sources:** [Official project documentation](https://github.com/direnv/direnv/blob/master/README.md) (2026-11-16; identity, features, platforms, downloads); [Official application and dependency licensing](https://github.com/direnv/direnv/blob/master/LICENSE) (2026-11-16; license); [Official dated release and distribution](https://github.com/direnv/direnv/releases/tag/v2.38.2) (2026-11-16; maintenance, downloads)
 ### fnm
 
 Node.js version manager supporting project version files and several desktop shells.
@@ -836,6 +1374,20 @@ Project tool-version manager combining runtime selection, environment variables 
 - **Maintenance:** active — An upstream release was observed dated 2026-11-13. This is evidence of release activity, not a support, security, stability or runtime-quality guarantee. ([evidence](https://github.com/jdx/mise/releases/tag/v2026.11.8))
 - [Official project](https://mise.jdx.dev/) · [Official installation / downloads](https://github.com/jdx/mise/releases) · [Repository](https://github.com/jdx/mise)
 - **Sources:** [Official project README: documented behavior and installation](https://raw.githubusercontent.com/jdx/mise/HEAD/README.md) (2026-11-14; downloads, features, identity, license, platforms); [Official license text or upstream licensing metadata](https://raw.githubusercontent.com/jdx/mise/HEAD/LICENSE) (2026-11-14; license); [Official downloads or installation instructions](https://github.com/jdx/mise/releases) (2026-11-14; downloads); [Public upstream app/package distribution: unauthenticated availability checked](https://github.com/jdx/mise/releases/download/v2026.11.8/mise-v2026.11.8-linux-arm64-musl.tar.gz) (2026-11-14; downloads, pricing); [Observed upstream release record and date](https://github.com/jdx/mise/releases/tag/v2026.11.8) (2026-11-14; downloads, maintenance)
+### Nix
+
+Declarative package manager and build system for reproducible development environments and isolated package stores.
+
+- **Platforms:** Windows, macOS, Linux. **License:** LGPL-2.1. **Pricing model:** unknown.
+- **Compatibility details:** Official installation covers Linux and macOS; Windows runs Nix inside WSL2. Nix the package manager does not require installing NixOS.
+- **Pricing details:** Open-source code and a public installation route are documented. A separate explicit pricing statement for the current distribution was not established in this review.
+- **Pick for:** You need detailed control over reproducible toolchains, packages and build dependencies.
+- **Compare when:** Compare Devbox for a simpler shell configuration or language-focused managers for narrower projects.
+- **Strengths:** System tools and libraries can be described in one reproducible dependency model; Multiple package versions can coexist without a conventional global installation
+- **Limitations:** The Nix language and packaging model introduce a substantial learning curve; Reproducibility depends on pinned inputs and build behavior; it is not guaranteed by a package-manager label alone
+- **Maintenance:** active — Official Nix manual dates the 2.35.0 release notes June 22, 2026. This documents a maintained release line; installation and performance were not independently tested. ([evidence](https://nix.dev/manual/nix/2.35/release-notes/rl-2.35.html))
+- [Official project](https://nixos.org/) · [Official installation / downloads](https://nix.dev/install-nix) · [Repository](https://github.com/NixOS/nix)
+- **Sources:** [Official project documentation](https://github.com/NixOS/nix/blob/master/README.md) (2026-11-16; identity, features, platforms, downloads); [Official application and dependency licensing](https://github.com/NixOS/nix/blob/master/COPYING) (2026-11-16; license); [Official installation and host scope](https://nix.dev/install-nix) (2026-11-16; platforms, downloads); [Official dated release notes](https://nix.dev/manual/nix/2.35/release-notes/rl-2.35.html) (2026-11-16; maintenance, features)
 ### Pixi
 
 Project environment manager that combines conda packages, Python packages, task definitions and lockfiles.
@@ -895,6 +1447,8 @@ Python package and project manager with environment creation, dependency locking
 
 ## Git clients
 
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=development%2Fgit-clients)
+
 ### Fork
 
 Commercial Git desktop client with commit history, interactive rebase, staging, image diffs, and merge-conflict tools.
@@ -907,6 +1461,20 @@ Commercial Git desktop client with commit history, interactive rebase, staging, 
 - **Maintenance:** unverified — Official product and distribution documentation reviewed; a recent dated release or repository activity was not independently established for this record. ([evidence](https://git-fork.com/))
 - [Official project](https://git-fork.com/) · [Official installation / downloads](https://git-fork.com/)
 - **Sources:** [Official platform downloads, features and purchase/evaluation information](https://git-fork.com/) (2026-11-14; identity, features, platforms, downloads, pricing, license)
+### Git Cola
+
+Qt-based Git desktop client for reviewing diffs, staging changes and navigating repository history.
+
+- **Platforms:** Windows, macOS, Linux. **License:** GPL-2.0. **Pricing model:** unknown.
+- **Compatibility details:** Official instructions cover Linux, macOS and Windows. Git, Python and a supported Qt binding are required unless provided by the selected package.
+- **Pricing details:** Open-source code and a public installation route are documented. A separate explicit pricing statement for the current distribution was not established in this review.
+- **Pick for:** You want an open-source desktop Git interface that works with existing local repositories.
+- **Compare when:** Compare Git Extensions for its Windows workflow or lazygit for a terminal interface.
+- **Strengths:** Uses ordinary local Git repositories without requiring a hosting account; A focused GUI exposes staging and history beside command-line workflows
+- **Limitations:** Python/Qt packaging differs between operating systems; Users still need to understand Git operations such as reset, rebase and merge
+- **Maintenance:** active — Official release v4.19.0 is dated 2026-07-12. This is a release observation; installation and performance were not independently tested. ([evidence](https://github.com/git-cola/git-cola/releases/tag/v4.19.0))
+- [Official project](https://git-cola.gitlab.io/) · [Official installation / downloads](https://github.com/git-cola/git-cola#installation) · [Repository](https://github.com/git-cola/git-cola)
+- **Sources:** [Official project documentation](https://github.com/git-cola/git-cola/blob/main/README.md) (2026-11-16; identity, features, platforms, downloads); [Official application and dependency licensing](https://github.com/git-cola/git-cola/blob/main/LICENSE) (2026-11-16; license); [Official Git Cola commands and staging documentation](https://github.com/git-cola/git-cola/blob/main/docs/git-cola.rst) (2026-11-16; features); [Official dated release and distribution](https://github.com/git-cola/git-cola/releases/tag/v4.19.0) (2026-11-16; maintenance, downloads)
 ### Git Extensions
 
 Graphical Windows Git client with repository history, branch management, diffs, and integration tools.
@@ -974,6 +1542,50 @@ Terminal Git interface for staging, branching, rebasing, reviewing diffs, and na
 
 ## Graphics debugging
 
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=development%2Fgraphics-debugging)
+
+### apitrace
+
+Graphics API tracing tools for recording calls, replaying traces and inspecting rendering state.
+
+- **Platforms:** Windows, Linux, macOS. **License:** MIT. **Pricing model:** free.
+- **Compatibility details:** Official build instructions cover Windows, Linux and macOS; capture/replay API coverage and bitness differ.
+- **Pricing details:** Public source and available binaries are free under MIT.
+- **Pick for:** You need call-level tracing for an API and platform that apitrace supports.
+- **Compare when:** Choose RenderDoc or vendor tools when modern frame debugging and hardware counters better match the task.
+- **Strengths:** Recorded call sequences can be inspected outside the original run; Useful for supported legacy OpenGL and Direct3D debugging
+- **Limitations:** Supported capture/replay features differ across APIs and platforms; Maintainer states that work proceeds as available time permits
+- **Maintenance:** active — Official release 14.0 is dated 2026-03-10; installation and performance were not independently tested. ([evidence](https://github.com/apitrace/apitrace/releases/tag/14.0))
+- [Official project](https://github.com/apitrace/apitrace) · [Official installation / downloads](https://github.com/apitrace/apitrace/releases) · [Repository](https://github.com/apitrace/apitrace)
+- **Sources:** [Official product overview](https://github.com/apitrace/apitrace) (2026-11-15; identity, features, pricing); [Official licensing terms](https://raw.githubusercontent.com/apitrace/apitrace/master/LICENSE) (2026-11-15; license); [Documented deployment and platform scope](https://raw.githubusercontent.com/apitrace/apitrace/master/docs/INSTALL.markdown) (2026-11-15; platforms); [Official download or installation entry point](https://github.com/apitrace/apitrace/releases) (2026-11-15; downloads); [Official dated release](https://github.com/apitrace/apitrace/releases/tag/14.0) (2026-11-15; maintenance, downloads)
+### NVIDIA Nsight Graphics
+
+NVIDIA graphics debugger and profiler for supported Direct3D, Vulkan and OpenGL applications.
+
+- **Platforms:** Windows, Linux. **License:** Proprietary NVIDIA developer-tools agreement; component notices apply. **Pricing model:** free.
+- **Compatibility details:** Official download center lists Windows and Linux x64/ARM variants; consult the current supported GPU and driver matrix.
+- **Pricing details:** NVIDIA identifies participating Nsight standalone tools as free; Pro/NDA access and hardware requirements are separate.
+- **Pick for:** You need NVIDIA-specific graphics debugging and performance analysis.
+- **Compare when:** Use RenderDoc for broader hardware capture coverage and PIX for its DirectX workflow.
+- **Strengths:** Hardware-specific analysis can connect graphics events to NVIDIA GPU behavior; Debugging and profiling share captured application context
+- **Limitations:** Supported GPU, driver and API combinations are specific; Public and Pro/NDA distributions have different availability and terms
+- **Maintenance:** unverified — Official product and installation material reviewed; a recent dated release was not established for this product scope.
+- [Official project](https://developer.nvidia.com/nsight-graphics) · [Official installation / downloads](https://developer.nvidia.com/tools-downloads)
+- **Sources:** [Official product overview](https://developer.nvidia.com/nsight-graphics) (2026-11-15; identity, features); [Official licensing terms](https://docs.nvidia.com/nsight-graphics/CopyrightAndLicenses/) (2026-11-15; license); [Documented deployment and platform scope](https://developer.nvidia.com/tools-downloads) (2026-11-15; platforms, downloads); [Distribution and pricing qualification](https://docs.nvidia.com/nsight-vs-integration/getting-started/index.html) (2026-11-15; pricing)
+### PIX on Windows
+
+Microsoft graphics debugging and performance tool for DirectX 12 applications on Windows.
+
+- **Platforms:** Windows. **License:** Distribution license not established from the reviewed overview and download documentation. **Pricing model:** unknown.
+- **Compatibility details:** Windows builds are distributed separately from Xbox GDK PIX and older HoloLens-specific versions.
+- **Pricing details:** Official public downloads were found; this review did not establish complete commercial-use and distribution terms, so pricing/licensing remain explicitly unresolved.
+- **Pick for:** You develop a DirectX 12 Windows application and need Microsoft’s capture tooling.
+- **Compare when:** Use a cross-API tool for Vulkan/OpenGL and check capture compatibility for the target GPU.
+- **Strengths:** Targets the DirectX 12 development workflow; Combines frame analysis with broader application timing
+- **Limitations:** Windows and DirectX scope differs from cross-API tools; Hardware, driver and preview-feature requirements must match the capture
+- **Maintenance:** unverified — Official product and installation material reviewed; a recent dated release was not established for this product scope.
+- [Official project](https://learn.microsoft.com/en-us/windows/pix/overview) · [Official installation / downloads](https://devblogs.microsoft.com/pix/download/)
+- **Sources:** [Official product overview](https://learn.microsoft.com/en-us/windows/pix/overview) (2026-11-15; identity, features); [Documented deployment and platform scope](https://devblogs.microsoft.com/pix/download/) (2026-11-15; platforms, downloads)
 ### RenderDoc
 
 Frame-capture graphics debugger for supported rendering APIs with resource and pipeline inspection.
@@ -989,6 +1601,8 @@ Frame-capture graphics debugger for supported rendering APIs with resource and p
 - **Sources:** [Official repository metadata: identity, license detection and activity](https://api.github.com/repos/baldurk/renderdoc) (2026-11-14; identity, maintenance, license); [Official project README](https://raw.githubusercontent.com/baldurk/renderdoc/HEAD/README.md) (2026-11-14; identity, features, platforms); [Official official documentation](https://renderdoc.org/) (2026-11-14; identity, features); [Official release inspected: v1.47](https://github.com/baldurk/renderdoc/releases/tag/v1.47) (2026-11-14; downloads, maintenance); [Public upstream source distribution; compiled binary packaging is separate](https://github.com/baldurk/renderdoc/archive/HEAD.zip) (2026-11-14; downloads, pricing)
 
 ## HTTP command-line clients
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=development%2Fhttp-clients)
 
 ### curl
 
@@ -1032,6 +1646,8 @@ HTTP command-line client inspired by HTTPie's syntax, implemented in Rust with f
 
 ## HTTP interception and debugging
 
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=development%2Fhttp-debugging)
+
 ### HTTP Toolkit
 
 Desktop HTTP debugging tool that captures and inspects traffic from supported applications and runtimes.
@@ -1059,6 +1675,8 @@ Interactive intercepting proxy for inspecting, replaying, modifying, and scripti
 - **Sources:** [Official repository metadata: identity, license detection and activity](https://api.github.com/repos/mitmproxy/mitmproxy) (2026-11-14; identity, maintenance, license); [Official project README](https://raw.githubusercontent.com/mitmproxy/mitmproxy/HEAD/README.md) (2026-11-14; identity, features); [Official official documentation](https://www.mitmproxy.org/) (2026-11-14; identity, features); [Official release inspected: v12.3.1](https://github.com/mitmproxy/mitmproxy/releases/tag/v12.3.1) (2026-11-14; downloads, maintenance); [Public upstream app/package distribution: availability without payment or authentication checked](https://files.pythonhosted.org/packages/a7/b2/886992a28a7bf86e47691d7a33e26eba370ee71d89b77d3128412910a33e/mitmproxy-12.3.1-py3-none-any.whl) (2026-11-14; downloads, pricing); [Official source: Native Windows installation, macOS installation and Linux packages are documented; capture modes differ by platform.](https://docs.mitmproxy.org/stable/overview/installation/) (2026-11-14; platforms, downloads)
 
 ## Integrated development environments
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=development%2Fides)
 
 ### IntelliJ IDEA
 
@@ -1095,7 +1713,7 @@ Cross-platform .NET and game-development IDE with refactoring, debugging, testin
 - **Limitations:** Free non-commercial licensing has eligibility conditions; commercial work requires the appropriate subscription.
 - **Maintenance:** unverified — Official product and distribution documentation reviewed; a recent dated release or repository activity was not independently established for this record. ([evidence](https://www.jetbrains.com/rider/))
 - [Official project](https://www.jetbrains.com/rider/) · [Official installation / downloads](https://www.jetbrains.com/rider/download/)
-- **Sources:** [Official product features and free-use scope](https://www.jetbrains.com/rider/) (2026-11-14; identity, features, pricing); [Official operating-system downloads](https://www.jetbrains.com/rider/download/) (2026-11-14; downloads, platforms); [JetBrains product use and subscription terms](https://www.jetbrains.com/legal/docs/toolbox/user/) (2026-11-14; license)
+- **Sources:** [Official product features and free-use scope](https://www.jetbrains.com/rider/) (2026-11-14; identity, features, pricing); [Official operating-system downloads](https://www.jetbrains.com/rider/download/) (2026-11-14; downloads, platforms); [JetBrains product use and subscription terms](https://www.jetbrains.com/legal/docs/toolbox/user/) (2026-11-14; license); [Official supported languages, project types and desktop platforms](https://www.jetbrains.com/rider/features/) (2026-11-16; features, platforms)
 ### Positron
 
 Data-science IDE based on Code OSS with integrated R and Python exploration and reproducible authoring workflows.
@@ -1151,7 +1769,42 @@ Python IDE aimed at learning, with a debugger that exposes expression evaluation
 - [Official project](https://thonny.org/) · [Official installation / downloads](https://github.com/thonny/thonny/releases) · [Repository](https://github.com/thonny/thonny)
 - **Sources:** [Official repository metadata: identity, license detection and activity](https://api.github.com/repos/thonny/thonny) (2026-11-14; identity, maintenance, license); [Official project README](https://raw.githubusercontent.com/thonny/thonny/HEAD/README.rst) (2026-11-14; identity); [Official official documentation](https://thonny.org/) (2026-11-14; identity, features, platforms); [Official release inspected: v5.0.1](https://github.com/thonny/thonny/releases/tag/v5.0.1) (2026-11-14; downloads, maintenance, platforms); [Public upstream app/package distribution: availability without payment or authentication checked](https://github.com/thonny/thonny/releases/download/v5.0.1/thonny-5.0.1-windows-portable-x64.zip) (2026-11-14; downloads, pricing)
 
-## Load Testing
+## JavaScript and TypeScript runtimes
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=development%2Fjavascript-runtimes)
+
+### Bun
+
+JavaScript and TypeScript toolkit combining a runtime, package manager, bundler and test runner.
+
+- **Platforms:** Windows, macOS, Linux. **License:** MIT core; JavaScriptCore/WebKit and bundled dependencies retain their own licenses. **Pricing model:** unknown.
+- **Compatibility details:** Official README lists Windows, Linux and macOS x64/ARM64. Linux kernel and x64 CPU requirements vary by build and must be checked.
+- **Pricing details:** Open-source code and a public installation route are documented. A separate explicit pricing statement for the current distribution was not established in this review.
+- **Pick for:** You want to evaluate a single toolkit for runtime, dependencies, building and testing.
+- **Compare when:** Compare Deno for permission-oriented execution and pnpm/npm for a package-manager change that keeps the existing runtime.
+- **Strengths:** One executable covers several stages of a JavaScript project workflow; Can be evaluated incrementally as a package manager or runtime
+- **Limitations:** Node API and native-module compatibility should be validated on the actual application; No general speed ranking is established here; performance depends on workload and configuration
+- **Maintenance:** active — Official release bun-v1.4.4 is dated 2026-10-22. This is a release observation; installation and performance were not independently tested. ([evidence](https://github.com/oven-sh/bun/releases/tag/bun-v1.4.4))
+- [Official project](https://bun.com/) · [Official installation / downloads](https://bun.com/docs/installation) · [Repository](https://github.com/oven-sh/bun)
+- **Sources:** [Official project documentation](https://github.com/oven-sh/bun/blob/main/README.md) (2026-11-16; identity, features, platforms, downloads); [Official application and dependency licensing](https://github.com/oven-sh/bun/blob/main/LICENSE.md) (2026-11-16; license); [Official dated release and distribution](https://github.com/oven-sh/bun/releases/tag/bun-v1.4.4) (2026-11-16; maintenance, downloads)
+### Deno
+
+JavaScript, TypeScript and WebAssembly runtime with explicit permissions and integrated developer tools.
+
+- **Platforms:** Windows, macOS, Linux. **License:** MIT. **Pricing model:** unknown.
+- **Compatibility details:** Official installation and release packages cover supported Windows, macOS and Linux architectures; check runtime version and native dependencies.
+- **Pricing details:** Open-source code and a public installation route are documented. A separate explicit pricing statement for the current distribution was not established in this review.
+- **Pick for:** You want TypeScript execution, integrated tooling and an explicit runtime permission model.
+- **Compare when:** Compare Bun for its integrated package and runtime workflow; test existing Node applications rather than assuming compatibility.
+- **Strengths:** Combines a runtime and common development tasks in one CLI; Permission prompts make requested filesystem and network access visible
+- **Limitations:** Node compatibility still needs testing against the application and its native modules; Permissions are not a substitute for auditing code or a complete hostile-code sandbox
+- **Maintenance:** active — Official release v2.9.8 is dated 2026-10-21. This is a release observation; installation and performance were not independently tested. ([evidence](https://github.com/denoland/deno/releases/tag/v2.9.8))
+- [Official project](https://deno.com/) · [Official installation / downloads](https://github.com/denoland/deno#installation) · [Repository](https://github.com/denoland/deno)
+- **Sources:** [Official project documentation](https://github.com/denoland/deno/blob/main/README.md) (2026-11-16; identity, features, platforms, downloads); [Official application and dependency licensing](https://github.com/denoland/deno/blob/main/LICENSE.md) (2026-11-16; license); [Official runtime features](https://docs.deno.com/runtime/) (2026-11-16; features); [Official dated release and distribution](https://github.com/denoland/deno/releases/tag/v2.9.8) (2026-11-16; maintenance, downloads)
+
+## Load testing
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=development%2Fload-testing)
 
 ### Apache JMeter
 
@@ -1224,7 +1877,42 @@ Command-line HTTP load generator designed around a specified request rate and co
 - [Official project](https://github.com/tsenart/vegeta) · [Official installation / downloads](https://github.com/tsenart/vegeta/releases) · [Repository](https://github.com/tsenart/vegeta)
 - **Sources:** [Official project README: documented behavior and installation](https://github.com/tsenart/vegeta/blob/master/README.md) (2026-11-14; downloads, features, identity, license, platforms); [Official license text or upstream licensing metadata](https://github.com/tsenart/vegeta/blob/master/LICENSE) (2026-11-14; license); [Official downloads or installation instructions](https://github.com/tsenart/vegeta/releases) (2026-11-14; downloads); [Public upstream app/package distribution: unauthenticated availability checked](https://github.com/tsenart/vegeta/releases/download/v12.13.0/vegeta_12.13.0_darwin_amd64.tar.gz) (2026-11-14; downloads, pricing); [Observed upstream release record and date](https://github.com/tsenart/vegeta/releases/tag/v12.13.0) (2026-11-14; downloads, maintenance)
 
-## Memory Profiling
+## Local web development environments
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=development%2Flocal-web-development)
+
+### DDEV
+
+Container-based local web development with per-project PHP, database and web-server configuration.
+
+- **Platforms:** Windows, macOS, Linux. **License:** Apache-2.0. **Pricing model:** free.
+- **Compatibility details:** Requires a supported Docker provider; official instructions cover Windows/WSL2, macOS and Linux on supported architectures.
+- **Pricing details:** The local open-source application is available without a license fee. Optional hosting, support, dependencies and infrastructure have separate terms.
+- **Pick for:** You need a documented local PHP/CMS environment with databases, HTTPS and debugging included.
+- **Compare when:** Compare Lando for its broader recipe and service composition; choose Devbox when you mainly need tools in a shell.
+- **Strengths:** Common CMS development services have a documented, repeatable setup; Project configuration can travel with the repository
+- **Limitations:** Docker provider requirements and licensing are separate from DDEV; A local development stack is not automatically a production hosting configuration
+- **Maintenance:** active — Official release v1.25.5 is dated 2026-10-26. This is a release observation; installation and performance were not independently tested. ([evidence](https://github.com/ddev/ddev/releases/tag/v1.25.5))
+- [Official project](https://ddev.com/) · [Official installation / downloads](https://docs.ddev.com/en/stable/users/install/ddev-installation/) · [Repository](https://github.com/ddev/ddev)
+- **Sources:** [Official project documentation](https://github.com/ddev/ddev/blob/main/README.md) (2026-11-16; identity, features, platforms, downloads, pricing); [Official application and dependency licensing](https://github.com/ddev/ddev/blob/main/LICENSE) (2026-11-16; license); [Official installation requirements](https://docs.ddev.com/en/stable/users/install/ddev-installation/) (2026-11-16; platforms, downloads); [Official dated release and distribution](https://github.com/ddev/ddev/releases/tag/v1.25.5) (2026-11-16; maintenance, downloads)
+### Lando
+
+Local development environment manager that assembles container services, commands and application recipes in a Landofile.
+
+- **Platforms:** Windows, macOS, Linux. **License:** MIT. **Pricing model:** free.
+- **Compatibility details:** Official installer supports Windows, macOS and Linux; Docker-based services require the supported engine and host configuration.
+- **Pricing details:** The local open-source application is available without a license fee. Optional hosting, support, dependencies and infrastructure have separate terms.
+- **Pick for:** Your web project needs a repeatable collection of services and custom developer commands.
+- **Compare when:** Compare DDEV for a focused CMS workflow or plain shell environment tools for projects without service containers.
+- **Strengths:** A Landofile captures service setup and project-specific commands together; Recipes offer a starting point while allowing lower-level customization
+- **Limitations:** Docker setup and service resource use remain part of the workflow; Plugin, engine and recipe versions can affect an existing project
+- **Maintenance:** active — Official release v3.26.9 is dated 2026-08-20. This is a release observation; installation and performance were not independently tested. ([evidence](https://github.com/lando/lando/releases/tag/v3.26.9))
+- [Official project](https://lando.dev/) · [Official installation / downloads](https://docs.lando.dev/install/) · [Repository](https://github.com/lando/lando)
+- **Sources:** [Official project documentation](https://github.com/lando/lando/blob/main/README.md) (2026-11-16; identity, features, platforms, downloads, pricing); [Official application and dependency licensing](https://github.com/lando/lando/blob/main/LICENSE) (2026-11-16; license); [Official platform installation routes](https://docs.lando.dev/install/) (2026-11-16; platforms, downloads); [Official dated release and distribution](https://github.com/lando/lando/releases/tag/v3.26.9) (2026-11-16; maintenance, downloads)
+
+## Memory profiling
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=development%2Fmemory-profiling)
 
 ### Heaptrack
 
@@ -1271,6 +1959,22 @@ Dynamic-analysis suite with memory-error detection, thread checks and CPU/cache 
 
 ## Computational notebooks
 
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=development%2Fnotebooks)
+
+### Jupyter Notebook
+
+Browser-based notebook application combining code cells, text and outputs through language kernels.
+
+- **Platforms:** Web. **License:** BSD-3-Clause. **Pricing model:** free.
+- **Compatibility details:** Local or hosted Python server accessed from a browser; kernels and packages determine actual computation requirements.
+- **Pricing details:** Public open-source package has no product fee; hosted notebook services are separate.
+- **Pick for:** You want a focused interface for existing Jupyter notebook workflows.
+- **Compare when:** Choose JupyterLab for a broader multi-document workspace or marimo for reactive Python files.
+- **Strengths:** Widely used notebook format connects tools and teaching materials; A focused notebook interface can run on a local server
+- **Limitations:** Hidden execution state requires disciplined reproducibility practices; Classic v6 extensions are not automatically compatible with Notebook v7
+- **Maintenance:** active — Official release v7.6.5 is dated 2026-11-06; installation and performance were not independently tested. ([evidence](https://github.com/jupyter/notebook/releases/tag/v7.6.5))
+- [Official project](https://jupyter.org/) · [Official installation / downloads](https://jupyter.org/install) · [Repository](https://github.com/jupyter/notebook)
+- **Sources:** [Official product overview](https://jupyter.org/) (2026-11-15; identity, features); [Official project documentation](https://raw.githubusercontent.com/jupyter/notebook/main/README.md) (2026-11-15; identity, features, downloads, platforms); [Official licensing terms](https://raw.githubusercontent.com/jupyter/notebook/main/LICENSE) (2026-11-15; license); [Distribution and pricing qualification](https://jupyter.org/install) (2026-11-15; pricing, downloads); [Official dated release](https://github.com/jupyter/notebook/releases/tag/v7.6.5) (2026-11-15; maintenance, downloads)
 ### JupyterLab
 
 Browser-based local workspace for notebooks, code, terminals, data files, and interactive computation.
@@ -1284,9 +1988,39 @@ Browser-based local workspace for notebooks, code, terminals, data files, and in
 - **Maintenance:** active — Repository not archived; latest repository push observed 2026-11-14. Activity is not a runtime, security, or support guarantee. ([evidence](https://api.github.com/repos/jupyterlab/jupyterlab))
 - [Official project](https://jupyter.org/) · [Official installation / downloads](https://jupyter.org/install) · [Repository](https://github.com/jupyterlab/jupyterlab)
 - **Sources:** [Official repository metadata: identity, license detection and activity](https://api.github.com/repos/jupyterlab/jupyterlab) (2026-11-14; identity, maintenance, license); [Official project README](https://raw.githubusercontent.com/jupyterlab/jupyterlab/HEAD/README.md) (2026-11-14; identity, features, platforms); [Official official documentation](https://jupyter.org/) (2026-11-14; identity, features); [Official release inspected: v4.6.6](https://github.com/jupyterlab/jupyterlab/releases/tag/v4.6.6) (2026-11-14; downloads, maintenance); [Public upstream app/package distribution: availability without payment or authentication checked](https://github.com/jupyterlab/jupyterlab/releases/download/v4.6.6/jupyterlab-4.6.6-py3-none-any.whl) (2026-11-15; downloads, pricing)
+### marimo
 
-## Package Managers
+Reactive Python notebook that stores programs as Python files and can run as a script or interactive app.
 
+- **Platforms:** Windows, macOS, Linux, Web. **License:** Apache-2.0. **Pricing model:** free.
+- **Compatibility details:** Publisher metadata declares OS-independent Python and web environments; a supported Python installation and browser are required.
+- **Pricing details:** Local open-source package is publicly installable without a product fee; hosting and optional model services are separate.
+- **Pick for:** You want notebook interactivity with explicit dependencies and reviewable Python source.
+- **Compare when:** Use Jupyter for its established notebook interchange or when existing extensions are required.
+- **Strengths:** Code diffs use ordinary Python files; Reactive execution makes cell dependencies explicit
+- **Limitations:** Reactive dependency rules require adapting some notebook patterns; Python packages and optional model services have separate requirements
+- **Maintenance:** active — Official release 0.25.2 is dated 2026-10-19; installation and performance were not independently tested. ([evidence](https://github.com/marimo-team/marimo/releases/tag/0.25.2))
+- [Official project](https://marimo.io/) · [Official installation / downloads](https://github.com/marimo-team/marimo#quickstart) · [Repository](https://github.com/marimo-team/marimo)
+- **Sources:** [Official product overview](https://marimo.io/) (2026-11-15; identity, features); [Official project documentation](https://raw.githubusercontent.com/marimo-team/marimo/main/README.md) (2026-11-15; identity, features, downloads, pricing); [Official licensing terms](https://raw.githubusercontent.com/marimo-team/marimo/main/LICENSE) (2026-11-15; license); [Documented deployment and platform scope](https://pypi.org/pypi/marimo/json) (2026-11-15; platforms); [Official download or installation entry point](https://github.com/marimo-team/marimo#quickstart) (2026-11-15; downloads); [Official dated release](https://github.com/marimo-team/marimo/releases/tag/0.25.2) (2026-11-15; maintenance, downloads)
+
+## JavaScript package managers
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=development%2Fpackage-managers)
+
+### npm CLI
+
+Command-line package manager distributed with Node.js for installing, publishing and scripting JavaScript packages.
+
+- **Platforms:** Windows, macOS, Linux. **License:** Artistic-2.0 for the CLI; dependencies and registry service have separate terms. **Pricing model:** unknown.
+- **Compatibility details:** Runs on supported Node.js versions; the official installation guide covers Windows, macOS and Linux. CLI compatibility depends on the selected Node/npm release pair.
+- **Pricing details:** Open-source code and a public installation route are documented. A separate explicit pricing statement for the current distribution was not established in this review.
+- **Pick for:** You need the standard Node.js package workflow without adding another package-manager dependency.
+- **Compare when:** Compare pnpm for shared dependency storage or Yarn for its workspace and resolution models.
+- **Strengths:** Bundled with common Node.js distributions and widely documented; A standard package.json workflow minimizes extra package-manager setup
+- **Limitations:** The open-source CLI does not imply free private registry or organizational services; Install scripts, dependency updates and runtime compatibility need project policy
+- **Maintenance:** active — Official release v12.2.2 is dated 2026-11-04. This is a release observation; installation and performance were not independently tested. ([evidence](https://github.com/npm/cli/releases/tag/v12.2.2))
+- [Official project](https://docs.npmjs.com/cli/) · [Official installation / downloads](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) · [Repository](https://github.com/npm/cli)
+- **Sources:** [Official project documentation](https://github.com/npm/cli/blob/latest/README.md) (2026-11-16; identity, features, platforms, downloads); [Official application and dependency licensing](https://github.com/npm/cli/blob/latest/LICENSE) (2026-11-16; license); [Official installation and Node.js requirement](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) (2026-11-16; platforms, downloads); [Official locked CI installation behavior](https://docs.npmjs.com/cli/v12/commands/npm-ci) (2026-11-16; features); [Official dated release and distribution](https://github.com/npm/cli/releases/tag/v12.2.2) (2026-11-16; maintenance, downloads)
 ### pnpm
 
 JavaScript package manager using a shared content-addressed store, lockfiles and workspace support.
@@ -1301,8 +2035,24 @@ JavaScript package manager using a shared content-addressed store, lockfiles and
 - **Maintenance:** active — An upstream release was observed dated 2026-11-05. This is evidence of release activity, not a support, security, stability or runtime-quality guarantee. ([evidence](https://github.com/pnpm/pnpm/releases/tag/v12.18.0))
 - [Official project](https://pnpm.io/) · [Official installation / downloads](https://pnpm.io/installation) · [Repository](https://github.com/pnpm/pnpm)
 - **Sources:** [Official project README: documented behavior and installation](https://raw.githubusercontent.com/pnpm/pnpm/HEAD/README.md) (2026-11-14; downloads, features, identity, license, platforms); [Official license text or upstream licensing metadata](https://raw.githubusercontent.com/pnpm/pnpm/main/LICENSE) (2026-11-14; license); [Official downloads or installation instructions](https://pnpm.io/installation) (2026-11-14; downloads); [Public upstream app/package distribution: unauthenticated availability checked](https://registry.npmjs.org/pnpm/-/pnpm-12.21.0.tgz) (2026-11-14; downloads, pricing); [Observed upstream release record and date](https://github.com/pnpm/pnpm/releases/tag/v12.18.0) (2026-11-14; downloads, maintenance)
+### Yarn
+
+Modern JavaScript package manager with workspaces, extensible commands and configurable dependency installation strategies.
+
+- **Platforms:** Windows, macOS, Linux. **License:** BSD-2-Clause. **Pricing model:** unknown.
+- **Compatibility details:** Requires a supported Node.js version; official documentation covers Corepack-based project setup. Portable package scripts target Windows, macOS and Linux.
+- **Pricing details:** Open-source code and a public installation route are documented. A separate explicit pricing statement for the current distribution was not established in this review.
+- **Pick for:** A JavaScript monorepo needs workspace tooling and deliberate control over dependency resolution.
+- **Compare when:** Compare pnpm or npm when conventional node_modules behavior and existing CI integration dominate the decision.
+- **Strengths:** Dependency strategy and package-manager version can be recorded per project; Workspace and constraint tools support coordinated multi-package repositories
+- **Limitations:** Modern Yarn differs from Yarn Classic and may require a migration; Plug’n’Play can expose tool assumptions about node_modules; integration must be checked
+- **Maintenance:** active — Official release @yarnpkg/cli/4.18.1 is dated 2026-09-24. This is a release observation; installation and performance were not independently tested. ([evidence](https://github.com/yarnpkg/berry/releases/tag/%40yarnpkg/cli/4.18.1))
+- [Official project](https://yarnpkg.com/) · [Official installation / downloads](https://yarnpkg.com/getting-started/install) · [Repository](https://github.com/yarnpkg/berry)
+- **Sources:** [Official project documentation](https://github.com/yarnpkg/berry/blob/master/README.md) (2026-11-16; identity, features, platforms, downloads); [Official application and dependency licensing](https://github.com/yarnpkg/berry/blob/master/LICENSE.md) (2026-11-16; license); [Official project installation](https://yarnpkg.com/getting-started/install) (2026-11-16; platforms, downloads); [Official dependency resolution behavior](https://yarnpkg.com/features/pnp) (2026-11-16; features); [Official dated release and distribution](https://github.com/yarnpkg/berry/releases/tag/%40yarnpkg/cli/4.18.1) (2026-11-16; maintenance, downloads)
 
 ## Performance profiling
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=development%2Fperformance-profiling)
 
 ### async-profiler
 
@@ -1431,6 +2181,8 @@ Visual Java troubleshooting application combining JVM monitoring, thread inspect
 
 ## Reverse engineering
 
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=development%2Freverse-engineering)
+
 ### Cutter
 
 Graphical reverse-engineering platform built on Rizin, with disassembly views, graphs, and analysis tools.
@@ -1486,6 +2238,8 @@ Command-line framework for binary inspection, disassembly, patching, debugging, 
 
 ## Shell prompts and customization
 
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=development%2Fshell-customization)
+
 ### Oh My Posh
 
 Configurable shell prompt engine with themes, contextual segments, and broad shell integration.
@@ -1514,6 +2268,8 @@ Cross-shell prompt that displays contextual information such as Git state and la
 - **Sources:** [Official repository metadata: identity, license detection and activity](https://api.github.com/repos/starship/starship) (2026-11-14; identity, maintenance, license); [Official project README](https://raw.githubusercontent.com/starship/starship/HEAD/README.md) (2026-11-14; identity, features, downloads, platforms); [Official official documentation](https://starship.rs/) (2026-11-14; identity, features); [Official release inspected: v1.27.0](https://github.com/starship/starship/releases/tag/v1.27.0) (2026-11-14; downloads, maintenance, platforms); [Public upstream app/package distribution: availability without payment or authentication checked](https://github.com/starship/starship/releases/download/v1.27.0/starship-x86_64-pc-windows-msvc.msi) (2026-11-14; downloads, pricing)
 
 ## Shells
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=development%2Fshells)
 
 ### Fish
 
@@ -1570,6 +2326,8 @@ Python-powered shell combining shell commands with Python expressions and object
 
 ## Task runners
 
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=development%2Ftask-runners)
+
 ### just
 
 Project command runner using a justfile to organize named recipes and reusable developer tasks.
@@ -1612,6 +2370,64 @@ File-watching command runner that restarts or triggers commands when relevant fi
 
 ## Terminal emulators
 
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=development%2Fterminal-emulators)
+
+### Alacritty
+
+OpenGL terminal emulator with vi-style selection, search and configurable text hints.
+
+- **Platforms:** Windows, macOS, Linux, FreeBSD. **License:** Apache-2.0; retained MIT notices for prior portions. **Pricing model:** free.
+- **Compatibility details:** Official installation covers Windows, macOS, Linux and BSD; OpenGL ES 2.0 and Windows ConPTY requirements apply.
+- **Pricing details:** Official desktop binaries and source are publicly available without a product fee.
+- **Pick for:** You prefer a focused terminal that leaves multiplexing to another tool.
+- **Compare when:** Choose WezTerm or kitty when tabs and layout management should be built in.
+- **Strengths:** Focused terminal behavior integrates with existing shells and multiplexers; Text configuration can be versioned
+- **Limitations:** Tabs and split-pane workflows require another program; Official project still describes the release as beta
+- **Maintenance:** active — Official release v0.17.0 is dated 2026-04-06; installation and performance were not independently tested. ([evidence](https://github.com/alacritty/alacritty/releases/tag/v0.17.0))
+- [Official project](https://alacritty.org/) · [Official installation / downloads](https://github.com/alacritty/alacritty/releases) · [Repository](https://github.com/alacritty/alacritty)
+- **Sources:** [Official product overview](https://alacritty.org/) (2026-11-15; identity, features); [Official project documentation](https://raw.githubusercontent.com/alacritty/alacritty/master/README.md) (2026-11-15; identity, features, downloads, platforms); [Official licensing terms](https://raw.githubusercontent.com/alacritty/alacritty/master/LICENSE-APACHE) (2026-11-15; license); [Distribution and pricing qualification](https://github.com/alacritty/alacritty/releases/latest) (2026-11-15; pricing); [Official download or installation entry point](https://github.com/alacritty/alacritty/releases) (2026-11-15; downloads); [Official dated release](https://github.com/alacritty/alacritty/releases/tag/v0.17.0) (2026-11-15; maintenance, downloads)
+### Ghostty
+
+Terminal emulator with native desktop interfaces, tabs, split panes and GPU rendering.
+
+- **Platforms:** macOS, Linux. **License:** MIT. **Pricing model:** free.
+- **Compatibility details:** Official downloads cover macOS 13+ on Intel and Apple Silicon, and Linux packages or source builds.
+- **Pricing details:** Official macOS download and Linux package/build instructions are freely accessible; no paid desktop tier is documented.
+- **Pick for:** You want tabs and split panes in a terminal that follows the host desktop.
+- **Compare when:** Choose WezTerm for a shared Windows/macOS/Linux setup or scripting-heavy multiplexing.
+- **Strengths:** Desktop integration follows the host platform; Includes everyday pane and tab management
+- **Limitations:** Current desktop downloads cover macOS and Linux; Native-platform behavior and configuration differ between hosts
+- **Maintenance:** unverified — Official product and installation material reviewed; a recent dated release was not established for this product scope.
+- [Official project](https://ghostty.org/) · [Official installation / downloads](https://ghostty.org/download) · [Repository](https://github.com/ghostty-org/ghostty)
+- **Sources:** [Official product overview](https://ghostty.org/) (2026-11-15; identity, features); [Official project documentation](https://raw.githubusercontent.com/ghostty-org/ghostty/main/README.md) (2026-11-15; identity, features, downloads); [Official licensing terms](https://raw.githubusercontent.com/ghostty-org/ghostty/main/LICENSE) (2026-11-15; license); [Documented deployment and platform scope](https://ghostty.org/download) (2026-11-15; platforms, pricing, downloads)
+### kitty
+
+GPU terminal with layouts, tabs, graphics and scriptable extensions called kittens.
+
+- **Platforms:** macOS, Linux, FreeBSD. **License:** GPL-3.0. **Pricing model:** free.
+- **Compatibility details:** Project lists Linux, macOS and BSD; binary installers cover Linux and macOS while BSD installation differs.
+- **Pricing details:** Official binaries and source are publicly distributed without a product fee; sponsorship is optional.
+- **Pick for:** You want integrated layouts, graphics and programmable terminal utilities on Unix-like desktops.
+- **Compare when:** Use WezTerm when native Windows support is part of the same workflow.
+- **Strengths:** Rich terminal functions can be combined without a separate multiplexer; Terminal graphics and keyboard protocols enable specialized workflows
+- **Limitations:** No native Windows application is documented; Some features require applications that implement kitty protocols
+- **Maintenance:** active — Official release v0.50.0 is dated 2026-11-03; installation and performance were not independently tested. ([evidence](https://github.com/kovidgoyal/kitty/releases/tag/v0.50.0))
+- [Official project](https://sw.kovidgoyal.net/kitty/) · [Official installation / downloads](https://sw.kovidgoyal.net/kitty/binary/) · [Repository](https://github.com/kovidgoyal/kitty)
+- **Sources:** [Official product overview](https://sw.kovidgoyal.net/kitty/) (2026-11-15; identity, features, platforms); [Official licensing terms](https://raw.githubusercontent.com/kovidgoyal/kitty/master/LICENSE) (2026-11-15; license); [Distribution and pricing qualification](https://sw.kovidgoyal.net/kitty/binary/) (2026-11-15; pricing, downloads); [Official dated release](https://github.com/kovidgoyal/kitty/releases/tag/v0.50.0) (2026-11-15; maintenance, downloads)
+### WezTerm
+
+Terminal emulator with local and remote panes, tabs, multiplexing and Lua configuration.
+
+- **Platforms:** Windows, macOS, Linux, FreeBSD. **License:** MIT. **Pricing model:** free.
+- **Compatibility details:** Official project documents Linux, macOS, Windows and FreeBSD; package availability varies.
+- **Pricing details:** Public builds and source are available without a product fee; sponsorship is optional.
+- **Pick for:** You want a configurable terminal with built-in multiplexing across several operating systems.
+- **Compare when:** Compare Alacritty for a smaller feature surface or Ghostty for platform-native desktop integration.
+- **Strengths:** One configuration can cover several desktop platforms; Integrated multiplexing connects local and remote terminal sessions
+- **Limitations:** Lua customization requires scripting knowledge; GPU and terminal-protocol compatibility depend on the host environment
+- **Maintenance:** unverified — Official release 20240203-110809-5046fc22 is dated 2024-02-03; installation and performance were not independently tested. ([evidence](https://github.com/wezterm/wezterm/releases/tag/20240203-110809-5046fc22))
+- [Official project](https://wezterm.org/) · [Official installation / downloads](https://wezterm.org/installation.html) · [Repository](https://github.com/wezterm/wezterm)
+- **Sources:** [Official product overview](https://wezterm.org/) (2026-11-15; identity, features, platforms); [Official project documentation](https://raw.githubusercontent.com/wezterm/wezterm/main/README.md) (2026-11-15; identity, features, downloads); [Official licensing terms](https://raw.githubusercontent.com/wezterm/wezterm/main/LICENSE.md) (2026-11-15; license); [Distribution and pricing qualification](https://wezterm.org/installation.html) (2026-11-15; pricing, downloads); [Official dated release](https://github.com/wezterm/wezterm/releases/tag/20240203-110809-5046fc22) (2026-11-15; maintenance, downloads)
 ### Windows Terminal
 
 Tabbed terminal and console host tooling
@@ -1627,6 +2443,8 @@ Tabbed terminal and console host tooling
 - **Sources:** [Preserved original research source](https://github.com/microsoft/terminal) (2026-11-14; identity, features)
 
 ## Terminal search and filtering
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=development%2Fterminal-search)
 
 ### fd
 
@@ -1654,6 +2472,21 @@ Interactive fuzzy finder that selects entries from arbitrary command output and 
 - **Maintenance:** active — Repository not archived; latest repository push observed 2026-11-12. Activity is not a runtime, security, or support guarantee. ([evidence](https://api.github.com/repos/junegunn/fzf))
 - [Official project](https://junegunn.github.io/fzf/) · [Official installation / downloads](https://github.com/junegunn/fzf/releases) · [Repository](https://github.com/junegunn/fzf)
 - **Sources:** [Official repository metadata: identity, license detection and activity](https://api.github.com/repos/junegunn/fzf) (2026-11-14; identity, maintenance, license); [Official project README](https://raw.githubusercontent.com/junegunn/fzf/HEAD/README.md) (2026-11-14; identity, features, downloads, platforms); [Official official documentation](https://junegunn.github.io/fzf/) (2026-11-14; identity, features); [Official release inspected: v0.75.0](https://github.com/junegunn/fzf/releases/tag/v0.75.0) (2026-11-14; downloads, maintenance, platforms); [Public upstream app/package distribution: availability without payment or authentication checked](https://github.com/junegunn/fzf/releases/download/v0.75.0/fzf-0.75.0-windows_amd64.msi) (2026-11-14; downloads, pricing)
+### GNU grep
+
+Command-line matching of fixed strings and regular expressions in text streams and files, with explicit recursive-search and output controls.
+
+- **Platforms:** Linux. **License:** GNU General Public License v3.0 or later. **Pricing model:** free.
+- **Compatibility details:** Linux packaging was verified through Ubuntu and the installed Linux executable. Upstream distributes portable source; other operating-system builds are not established by this record.
+- **Pricing details:** The official source archive is publicly downloadable without payment. Distribution packages and optional commercial support have separate terms.
+- **Pick for:** Use line-oriented matching in shell pipelines and scripts with explicit search flags.
+- **Compare when:** Consider ripgrep for repository ignore-file awareness; inspect the scoped measurement rather than assuming a universal speed winner.
+- **Strengths:** Explicit line-oriented output fits shell pipelines and existing command-line scripts.
+- **Limitations:** Recursive search does not automatically apply Git ignore rules.; Locale, binary handling, regex dialect and output options affect results and must be aligned before comparing tools.; The recorded performance experiment uses GNU grep 3.11; it does not test every current release or operating system.
+- **Maintenance:** unverified — The inspected stable release announcement is grep 3.12 from April 2025; this source does not establish current release cadence. ([evidence](https://lists.gnu.org/archive/html/info-gnu/2025-04/msg00008.html))
+- [Official project](https://www.gnu.org/software/grep/) · [Official installation / downloads](https://ftp.gnu.org/gnu/grep/) · [Repository](https://savannah.gnu.org/git/?group=grep)
+- **Sources:** [Official project identity, distribution routes and GPL terms](https://www.gnu.org/software/grep/) (2026-11-15; identity, features, license, downloads); [Official matching, recursion, output and locale manual](https://www.gnu.org/software/grep/manual/grep.html) (2026-11-15; features); [Official Ubuntu Linux package and distribution details](https://packages.ubuntu.com/noble/grep) (2026-11-15; platforms, downloads); [Official public source archive: bounded unauthenticated HTTP retrieval observed](https://ftp.gnu.org/gnu/grep/grep-3.12.tar.xz) (2026-11-15; downloads, pricing); [Official stable release announcement with date](https://lists.gnu.org/archive/html/info-gnu/2025-04/msg00008.html) (2026-11-15; maintenance)
+- **Scoped measurement:** [Fixed-string search with equivalent output](https://github.com/Herbertofury/Athena/blob/main/research/software-expansion-2026-11-15/search-benchmark.md). On these four synthetic warm-cache Linux workloads, ripgrep had lower median time on selective and no-match searches; dense-output timings overlapped. Complete outputs and exit codes matched an independent oracle in every run.
 ### ripgrep
 
 Recursive command-line text search that understands common ignore files and supports regular expressions.
@@ -1667,8 +2500,11 @@ Recursive command-line text search that understands common ignore files and supp
 - **Maintenance:** active — Repository not archived; latest repository push observed 2026-11-09. Activity is not a runtime, security, or support guarantee. ([evidence](https://api.github.com/repos/BurntSushi/ripgrep))
 - [Official project](https://github.com/BurntSushi/ripgrep) · [Official installation / downloads](https://github.com/BurntSushi/ripgrep/releases) · [Repository](https://github.com/BurntSushi/ripgrep)
 - **Sources:** [Official repository metadata: identity, license detection and activity](https://api.github.com/repos/BurntSushi/ripgrep) (2026-11-14; identity, maintenance, license); [Official project README](https://raw.githubusercontent.com/BurntSushi/ripgrep/HEAD/README.md) (2026-11-14; identity, features, downloads, platforms, license); [Official release inspected: 15.2.0](https://github.com/BurntSushi/ripgrep/releases/tag/15.2.0) (2026-11-14; downloads, maintenance, platforms); [Public upstream app/package distribution: availability without payment or authentication checked](https://github.com/BurntSushi/ripgrep/releases/download/15.2.0/ripgrep-15.2.0-x86_64-pc-windows-gnu.zip) (2026-11-14; downloads, pricing)
+- **Scoped measurement:** [Fixed-string search with equivalent output](https://github.com/Herbertofury/Athena/blob/main/research/software-expansion-2026-11-15/search-benchmark.md). On these four synthetic warm-cache Linux workloads, ripgrep had lower median time on selective and no-match searches; dense-output timings overlapped. Complete outputs and exit codes matched an independent oracle in every run.
 
 ## Terminal navigation and inspection
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=development%2Fterminal-utilities)
 
 ### bat
 
@@ -1710,7 +2546,9 @@ Shell directory navigator that learns frequently visited locations and provides 
 - [Official project](https://github.com/ajeetdsouza/zoxide) · [Official installation / downloads](https://github.com/ajeetdsouza/zoxide/releases) · [Repository](https://github.com/ajeetdsouza/zoxide)
 - **Sources:** [Official repository metadata: identity, license detection and activity](https://api.github.com/repos/ajeetdsouza/zoxide) (2026-11-14; identity, maintenance, license); [Official project README](https://raw.githubusercontent.com/ajeetdsouza/zoxide/HEAD/README.md) (2026-11-14; identity, features, downloads, platforms); [Official release inspected: v0.10.0](https://github.com/ajeetdsouza/zoxide/releases/tag/v0.10.0) (2026-11-14; downloads, maintenance, platforms); [Public upstream app/package distribution: availability without payment or authentication checked](https://github.com/ajeetdsouza/zoxide/releases/download/v0.10.0/zoxide-0.10.0-x86_64-pc-windows-msvc.zip) (2026-11-14; downloads, pricing)
 
-## Test Automation
+## Test automation frameworks
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=development%2Ftest-automation)
 
 ### Appium
 
@@ -1741,8 +2579,24 @@ Keyword-based automation framework for acceptance tests and robotic process auto
 - [Official project](https://robotframework.org/) · [Official installation / downloads](https://github.com/robotframework/robotframework#installation) · [Repository](https://github.com/robotframework/robotframework)
 - **Sources:** [Official project README: documented behavior and installation](https://github.com/robotframework/robotframework/blob/master/README.rst) (2026-11-14; downloads, features, identity, license); [Official license text or upstream licensing metadata](https://github.com/robotframework/robotframework/blob/master/LICENSE.txt) (2026-11-14; license); [Official downloads or installation instructions](https://github.com/robotframework/robotframework#installation) (2026-11-14; downloads); [Official documentation: Python-based framework installation and platform-independent acceptance automation.](https://github.com/robotframework/robotframework) (2026-11-14; platforms, downloads); [Official documentation: Explicit Python and framework installation instructions for Windows, macOS and Linux.](https://github.com/robotframework/robotframework/blob/master/INSTALL.rst) (2026-11-14; platforms, downloads); [Public upstream app/package distribution: unauthenticated availability checked](https://files.pythonhosted.org/packages/2b/a3/6d528a8ac42a03ba4b9f6642b80ea37de2d18086d458c044bb6a6a8df5b9/robotframework-7.5.1-py3-none-any.whl) (2026-11-14; downloads, pricing); [Observed upstream release record and date](https://github.com/robotframework/robotframework/releases/tag/v7.5.1) (2026-11-14; downloads, maintenance)
 
-## Test Runners
+## Test runners
 
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=development%2Ftest-runners)
+
+### Bats-core
+
+Bash test runner for checking command output, exit status and shell behavior with TAP-compatible reports.
+
+- **Platforms:** Windows, macOS, Linux, FreeBSD. **License:** MIT. **Pricing model:** free.
+- **Compatibility details:** Official support matrix covers Linux, macOS, FreeBSD and Windows through Git Bash/MSYS2/Cygwin or WSL.
+- **Pricing details:** Public source and packages are free under MIT.
+- **Pick for:** You need executable regression tests for Bash scripts or CLI programs.
+- **Compare when:** Use ShellCheck alongside it for static shell analysis; runtime tests cover different failures.
+- **Strengths:** Tests can exercise command-line programs through their real interfaces; Shell fixtures fit existing Unix automation
+- **Limitations:** Requires a supported Bash environment; Shell quoting and process behavior remain part of test correctness
+- **Maintenance:** active — Official release v1.14.0 is dated 2026-07-21; installation and performance were not independently tested. ([evidence](https://github.com/bats-core/bats-core/releases/tag/v1.14.0))
+- [Official project](https://bats-core.readthedocs.io/) · [Official installation / downloads](https://bats-core.readthedocs.io/en/stable/installation.html) · [Repository](https://github.com/bats-core/bats-core)
+- **Sources:** [Official product overview](https://bats-core.readthedocs.io/) (2026-11-15; identity, features); [Official project documentation](https://raw.githubusercontent.com/bats-core/bats-core/master/README.md) (2026-11-15; identity, features, downloads); [Official licensing terms](https://raw.githubusercontent.com/bats-core/bats-core/master/LICENSE.md) (2026-11-15; license); [Documented deployment and platform scope](https://bats-core.readthedocs.io/en/stable/support-matrix.html) (2026-11-15; platforms); [Distribution and pricing qualification](https://bats-core.readthedocs.io/en/stable/installation.html) (2026-11-15; pricing, downloads); [Official dated release](https://github.com/bats-core/bats-core/releases/tag/v1.14.0) (2026-11-15; maintenance, downloads)
 ### cargo-nextest
 
 Rust test runner providing per-test process isolation, filtering, retries and CI-oriented reporting.
@@ -1757,8 +2611,85 @@ Rust test runner providing per-test process isolation, filtering, retries and CI
 - **Maintenance:** active — An upstream release was observed dated 2026-11-13. This is evidence of release activity, not a support, security, stability or runtime-quality guarantee. ([evidence](https://github.com/nextest-rs/nextest/releases/tag/cargo-nextest-0.9.152))
 - [Official project](https://nexte.st/) · [Official installation / downloads](https://nexte.st/docs/installation/pre-built-binaries/) · [Repository](https://github.com/nextest-rs/nextest)
 - **Sources:** [Official project README: documented behavior and installation](https://raw.githubusercontent.com/nextest-rs/nextest/HEAD/README.md) (2026-11-14; downloads, features, identity, license); [Official license text or upstream licensing metadata](https://raw.githubusercontent.com/nextest-rs/nextest/HEAD/LICENSE-APACHE) (2026-11-14; license); [Official downloads or installation instructions](https://nexte.st/docs/installation/pre-built-binaries/) (2026-11-14; downloads, platforms); [Official documentation: Rust test runner with isolated test processes and filtering; doctests remain outside its supported test model.](https://nexte.st/) (2026-11-14; features); [Public upstream app/package distribution: unauthenticated availability checked](https://github.com/nextest-rs/nextest/releases/download/cargo-nextest-0.9.152/cargo-nextest-0.9.152-aarch64-pc-windows-msvc.tar.gz) (2026-11-14; downloads, pricing); [Observed upstream release record and date](https://github.com/nextest-rs/nextest/releases/tag/cargo-nextest-0.9.152) (2026-11-14; downloads, maintenance)
+### Jest
+
+JavaScript testing framework with assertions, mocks, snapshots, coverage and interactive watch mode.
+
+- **Platforms:** Windows, macOS, Linux. **License:** MIT. **Pricing model:** free.
+- **Compatibility details:** Official CI covers Windows, macOS and Linux; supported Node versions and project transforms are required.
+- **Pricing details:** Public npm package and MIT source have no product fee.
+- **Pick for:** An established JavaScript project needs a broad conventional test framework.
+- **Compare when:** Compare Vitest for Vite-first projects and real-browser tools for browser behavior.
+- **Strengths:** A single test framework supplies many common test primitives; Existing integrations suit established JavaScript projects
+- **Limitations:** ESM and build transforms can require project-specific configuration; Browser-like test environments are simulations unless a real browser is separately used
+- **Maintenance:** active — Official release v30.5.2 is dated 2026-09-18; installation and performance were not independently tested. ([evidence](https://github.com/jestjs/jest/releases/tag/v30.5.2))
+- [Official project](https://jestjs.io/) · [Official installation / downloads](https://jestjs.io/docs/getting-started) · [Repository](https://github.com/jestjs/jest)
+- **Sources:** [Official product overview](https://jestjs.io/) (2026-11-15; identity, features); [Official project documentation](https://raw.githubusercontent.com/jestjs/jest/main/README.md) (2026-11-15; identity, features, downloads, pricing); [Official licensing terms](https://raw.githubusercontent.com/jestjs/jest/main/LICENSE) (2026-11-15; license); [Documented deployment and platform scope](https://raw.githubusercontent.com/jestjs/jest/main/.github/workflows/nodejs.yml) (2026-11-15; platforms); [Official download or installation entry point](https://jestjs.io/docs/getting-started) (2026-11-15; downloads); [Official dated release](https://github.com/jestjs/jest/releases/tag/v30.5.2) (2026-11-15; maintenance, downloads)
+### pytest
+
+Python test runner with assertion introspection, reusable fixtures, parameterization and plugins.
+
+- **Platforms:** Windows, macOS, Linux. **License:** MIT. **Pricing model:** free.
+- **Compatibility details:** Publisher metadata lists macOS, Windows and POSIX/Unix; current supported Python version is required.
+- **Pricing details:** Open-source package is free; optional third-party support is separate.
+- **Pick for:** You need expressive tests for a Python project with reusable setup.
+- **Compare when:** Use Robot Framework for keyword-driven acceptance workflows and test each plugin combination you adopt.
+- **Strengths:** Small tests can share controlled setup through fixtures; Detailed failures reduce manual inspection of assertion values
+- **Limitations:** Plugin combinations can complicate upgrades; Async and distributed execution need appropriate plugins
+- **Maintenance:** active — Official release 9.2.0 is dated 2026-10-27; installation and performance were not independently tested. ([evidence](https://github.com/pytest-dev/pytest/releases/tag/9.2.0))
+- [Official project](https://pytest.org/) · [Official installation / downloads](https://docs.pytest.org/en/stable/getting-started.html) · [Repository](https://github.com/pytest-dev/pytest)
+- **Sources:** [Official product overview](https://pytest.org/) (2026-11-15; identity, features); [Official project documentation](https://raw.githubusercontent.com/pytest-dev/pytest/main/README.rst) (2026-11-15; identity, features, downloads, pricing); [Official licensing terms](https://raw.githubusercontent.com/pytest-dev/pytest/main/LICENSE) (2026-11-15; license); [Documented deployment and platform scope](https://pypi.org/pypi/pytest/json) (2026-11-15; platforms); [Official download or installation entry point](https://docs.pytest.org/en/stable/getting-started.html) (2026-11-15; downloads); [Official dated release](https://github.com/pytest-dev/pytest/releases/tag/9.2.0) (2026-11-15; maintenance, downloads)
+### Vitest
+
+JavaScript and TypeScript test runner integrating Vite transforms, watch mode, mocking and browser tests.
+
+- **Platforms:** Windows, macOS, Linux. **License:** MIT. **Pricing model:** free.
+- **Compatibility details:** Official CI exercises Linux, macOS and Windows; current Node/Vite requirements apply.
+- **Pricing details:** Free open-source package; browser infrastructure and external CI are separate.
+- **Pick for:** Your project uses Vite or needs integrated TypeScript and component testing.
+- **Compare when:** Keep end-to-end navigation tests in Playwright or Cypress when they cover a different user workflow.
+- **Strengths:** Application transforms can be shared with tests; Watch mode focuses development feedback on related changes
+- **Limitations:** Jest-compatible APIs do not guarantee identical behavior; Browser mode requires an additional configured browser provider
+- **Maintenance:** active — Official release v5.1.0 is dated 2026-11-02; installation and performance were not independently tested. ([evidence](https://github.com/vitest-dev/vitest/releases/tag/v5.1.0))
+- [Official project](https://vitest.dev/) · [Official installation / downloads](https://vitest.dev/guide/) · [Repository](https://github.com/vitest-dev/vitest)
+- **Sources:** [Official product overview](https://vitest.dev/) (2026-11-15; identity, features, pricing); [Official project documentation](https://raw.githubusercontent.com/vitest-dev/vitest/main/README.md) (2026-11-15; identity, features, downloads); [Official licensing terms](https://raw.githubusercontent.com/vitest-dev/vitest/main/LICENSE) (2026-11-15; license); [Documented deployment and platform scope](https://raw.githubusercontent.com/vitest-dev/vitest/main/.github/workflows/ci.yml) (2026-11-15; platforms); [Official download or installation entry point](https://vitest.dev/guide/) (2026-11-15; downloads); [Official dated release](https://github.com/vitest-dev/vitest/releases/tag/v5.1.0) (2026-11-15; maintenance, downloads)
+
+## Version control systems
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=development%2Fversion-control)
+
+### Fossil
+
+Distributed version-control system that bundles project tickets, wiki, forum and a web interface into a self-contained executable.
+
+- **Platforms:** Windows, macOS, Linux. **License:** BSD-2-Clause. **Pricing model:** free.
+- **Compatibility details:** Official project documents standalone executables for Windows, macOS and Linux; source builds are also available.
+- **Pricing details:** The local open-source application is available without a license fee. Optional hosting, support, dependencies and infrastructure have separate terms.
+- **Pick for:** You want an integrated, self-hosted source and project-history system in one executable.
+- **Compare when:** Compare Git-backed tools when existing Git hosting, CI or contributor expectations are the deciding constraint.
+- **Strengths:** A project can retain code and collaboration records together; Small self-hosted deployments need fewer separate applications
+- **Limitations:** Its repository format and workflow differ from Git; GitHub mirroring does not make all Fossil tickets and wiki data native Git objects
+- **Maintenance:** active — Official changelog lists release 2.28 on March 11, 2026 and a separate pending 2.29 section. Pending work is not presented as a released version. ([evidence](https://fossil-scm.org/home/doc/trunk/www/changes.wiki))
+- [Official project](https://fossil-scm.org/home/doc/trunk/www/index.wiki) · [Official installation / downloads](https://fossil-scm.org/home/uv/download.html) · [Repository](https://fossil-scm.org/home)
+- **Sources:** [Official project overview](https://fossil-scm.org/home/doc/trunk/www/index.wiki) (2026-11-16; identity, features, platforms, pricing); [Official BSD licensing terms](https://fossil-scm.org/home/doc/trunk/COPYRIGHT-BSD2.txt) (2026-11-16; license); [Official download route](https://fossil-scm.org/home/uv/download.html) (2026-11-16; downloads); [Official dated release history](https://fossil-scm.org/home/doc/trunk/www/changes.wiki) (2026-11-16; maintenance)
+### Jujutsu
+
+Version-control system with a Git-backed storage model, automatic working-copy snapshots and an operation log.
+
+- **Platforms:** Windows, macOS, Linux. **License:** Apache-2.0. **Pricing model:** unknown.
+- **Compatibility details:** Official releases provide Windows, macOS and Linux binaries. The current storage backend uses Git while higher-level metadata is stored separately.
+- **Pricing details:** Open-source code and a public installation route are documented. A separate explicit pricing statement for the current distribution was not established in this review.
+- **Pick for:** You want a different local change-editing workflow while keeping Git-based repositories and hosting.
+- **Compare when:** Use a Git GUI when the team needs conventional Git semantics; compare Fossil for integrated project hosting.
+- **Strengths:** Change editing and recovery are explicit parts of the command model; Git-backed repositories allow adoption alongside existing hosting
+- **Limitations:** Bookmarks, conflicts and working-copy semantics differ from ordinary Git commands; Some replication features are explicitly experimental; interoperability does not mean every Git tool understands Jujutsu metadata
+- **Maintenance:** active — Official release v0.47.1 is dated 2026-11-05. This is a release observation; installation and performance were not independently tested. ([evidence](https://github.com/jj-vcs/jj/releases/tag/v0.47.1))
+- [Official project](https://www.jj-vcs.dev/) · [Official installation / downloads](https://docs.jj-vcs.dev/latest/install-and-setup/) · [Repository](https://github.com/jj-vcs/jj)
+- **Sources:** [Official project documentation](https://github.com/jj-vcs/jj/blob/main/README.md) (2026-11-16; identity, features, platforms, downloads); [Official application and dependency licensing](https://github.com/jj-vcs/jj/blob/main/LICENSE) (2026-11-16; license); [Official dated release and distribution](https://github.com/jj-vcs/jj/releases/tag/v0.47.1) (2026-11-16; maintenance, downloads)
 
 ## Workflow automation
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=development%2Fworkflow-automation)
 
 ### Activepieces
 

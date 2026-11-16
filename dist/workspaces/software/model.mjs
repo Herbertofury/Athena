@@ -29,12 +29,19 @@ const SYNONYMS = {
   video: ['video', 'videos', 'movie', 'movies'],
   read: ['read', 'reader', 'reading', 'readers'],
   manage: ['manage', 'manager', 'management', 'managing'],
+  simulate: ['simulate', 'simulation', 'simulations', 'simulator', 'simulating'],
+  robot: ['robot', 'robots', 'robotics'],
+  align: ['align', 'alignment', 'alignments', 'aligning'],
+  sequence: ['sequence', 'sequences', 'sequencing'],
+  validate: ['validate', 'validation', 'validating', 'validator', 'check', 'checker', 'checking'],
+  workflow: ['workflow', 'workflows'],
+  broadcast: ['broadcast', 'broadcasts', 'broadcasting'],
 };
 export function fold(value) {
   return String(value ?? '').normalize('NFKD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
 }
 export function terms(query) {
-  return fold(query).replace(/back\s+up/g, 'backup').split(/[^a-z0-9+#.]+/)
+  return fold(query).replace(/back\s+up/g, 'backup').replace(/\bsoftware[\s-]+defined[\s-]+radio\b/g, 'sdr').split(/[^a-z0-9+#.]+/)
     .filter(t => t && !STOP.has(t)).slice(0, 24).map(t => {
       const group = Object.values(SYNONYMS).find(v => v.includes(t));
       return group || [t];
@@ -71,7 +78,21 @@ function taskIntent(query) {
   // A few high-confidence task phrases need semantic direction or category
   // context. Keep their expansion scoped: a photo is not a disk image, speech
   // recognition is not speech synthesis, and transfer tools are not analyzers.
-  if (/\b(?:duplicates?|similar)\b/.test(value) && /\b(?:photos?|images?|pictures?)\b/.test(value)) {
+  if (/\b(?:program|code|coding|develop|programming)\s+(?:in|using)\s+(?:python|c\+\+|c#|java|javascript|typescript|rust|go|ruby|php|kotlin|swift)(?:\s|$)/.test(value)) {
+    // Writing programs calls for an editor or interactive development
+    // environment. A linter, language runtime or Python-based application
+    // mentioning code must not displace those results as the catalog grows.
+    accepts = row => ['development/ides', 'development/code-editors', 'development/notebooks'].includes(row.app.category_id);
+    score = row => row.app.category_id === 'development/ides' ? 30 : 0;
+    consumed = /\b(?:program|code|coding|develop|programming|in|using)\b/g;
+  } else if (/\bpdfs?\b/.test(value) && /\b(?:chat|ask|questions?|answers?)\b/.test(value) && /\b(?:offline|local|locally|disconnected)\b/.test(value)) {
+    accepts = row => (row.app.capabilities || []).some(c => c.id === 'offline-pdf-chat');
+    consumed = /\b(?:chat|ask|asking|questions?|answers?|about|over|pdfs?|documents?|offline|local|locally|disconnected)\b/g;
+  } else if (/\b(?:noise|denoise|denoising)\b/.test(value) && /\b(?:remove|removing|removal|reduce|reducing|reduction|suppress|suppression|denoise|denoising)\b/.test(value) && !/\b(?:images?|photos?|pictures?|radio|signals?)\b/.test(value)) {
+    const live = /\b(?:live|real time|microphone|mic|meetings?|calls?)\b/.test(value);
+    accepts = row => (row.app.capabilities || []).some(c => c.id === (live ? 'live-audio-noise-suppression' : 'recorded-audio-noise-reduction'));
+    consumed = /\b(?:remove|removing|removal|reduce|reducing|reduction|suppress|suppression|denoise|denoising|background|noise|audio|recorded|recordings?|from|live|real time|microphone|mic|meetings?|calls?)\b/g;
+  } else if (/\b(?:duplicates?|similar)\b/.test(value) && /\b(?:photos?|images?|pictures?)\b/.test(value)) {
     accepts = row => row.app.category_id === 'files/duplicate-detection' && /\b(?:photo|picture|image)/.test(row.text);
     consumed = /\b(?:remove|removing|delete|deleting|find|detect|review|duplicates?|similar|photos?|images?|pictures?)\b/g;
   } else if (/\bocr\b/.test(value) || /\b(?:scan|scans|scanned|scanning)\b/.test(value) && /\b(?:docs?|documents?|paperwork|pages?)\b/.test(value)) {
@@ -180,6 +201,8 @@ export function normalizeState(state, catalog) {
   return {state: next, removed};
 }
 export function queryCatalog(index, state, catalog) {
+  const exact = fold(state.q).trim();
+  const productQuery = exact && index.some(row => row.name === exact || row.aliases.includes(exact) || fold(row.app.id) === exact);
   const target = alternativeTarget(state.q);
   const targetRow = target ? index.find(r => r.name === target || fold(r.app.id) === target || r.aliases.includes(target)) : null;
   const alternativeIds = new Set(targetRow?.app.alternative_ids || []);
@@ -187,7 +210,10 @@ export function queryCatalog(index, state, catalog) {
     if ((targetRow && (row.app.alternative_ids || []).includes(targetRow.app.id)) || (row.app.alternatives || []).some(n => fold(n) === target)) alternativeIds.add(row.app.id);
   }
   if (targetRow) alternativeIds.delete(targetRow.app.id);
-  const intent = target ? null : taskIntent(state.q);
+  // A product can have a name that is also a task phrase: 3D Slicer is a
+  // medical-imaging application. Resolve complete known names before narrowing
+  // generic requests such as "3D printing". Explicit filters still apply.
+  const intent = target || productQuery ? null : taskIntent(state.q);
   const tokens = (target ? [] : terms(intent?.query ?? state.q)).map(group => group.map(pattern));
   const task = catalog.recipes.find(r => r.id === state.task);
   const picks = new Map((task?.picks || []).map((p, i) => [p.app_id, i]));
@@ -201,8 +227,7 @@ export function queryCatalog(index, state, catalog) {
         state.pricing && a.pricing_model !== state.pricing || state.maintenance && a.maintenance.status !== state.maintenance ||
         state.task && (!task || !picks.has(a.id))) continue;
     if (!tokens.every(group => group.some(re => re.test(row.text)))) continue;
-    const exact = fold(state.q).trim();
-    const score = (row.name === exact ? 200 : row.aliases.includes(exact) ? 150 : 0) + (intent?.score?.(row) || 0) + tokens.reduce((n, group) => n + (group.some(re => re.test(row.name)) ? 20 : group.some(re => re.test(row.category)) ? 12 : group.some(re => re.test(row.tasks)) ? 6 : 1), 0);
+    const score = (row.name === exact || fold(a.id) === exact ? 200 : row.aliases.includes(exact) ? 150 : 0) + (intent?.score?.(row) || 0) + tokens.reduce((n, group) => n + (group.some(re => re.test(row.name)) ? 20 : group.some(re => re.test(row.category)) ? 12 : group.some(re => re.test(row.tasks)) ? 6 : 1), 0);
     rows.push({app: a, score});
   }
   rows.sort((a, b) => {
@@ -218,6 +243,27 @@ export function queryResearch(records, query) {
     return tokens.every(group => group.some(re => re.test(text)));
   });
 }
+export function relatedGuides(catalog, applications, limit = 3) {
+  const visible = new Set(applications.map(a => a.id));
+  return catalog.recipes.map(recipe => ({recipe, matched: recipe.picks.filter(p => visible.has(p.app_id)).length}))
+    .filter(item => item.matched > 0)
+    .sort((a, b) => b.matched - a.matched || a.recipe.title.localeCompare(b.recipe.title))
+    .slice(0, limit);
+}
+export function queryGuides(catalog, query = '', eligibleIds = null) {
+  const tokens = terms(query).map(group => group.map(pattern));
+  const names = new Map(catalog.applications.map(app => [app.id, app.name]));
+  return catalog.recipes.map(recipe => {
+    const title = fold(recipe.title);
+    const text = fold([recipe.title, recipe.description,
+      ...recipe.picks.flatMap(pick => [names.get(pick.app_id), pick.label, pick.reason])].join(' '));
+    const available = recipe.picks.filter(pick => !eligibleIds || eligibleIds.has(pick.app_id)).length;
+    const score = tokens.reduce((total, group) => total + (group.some(re => re.test(title)) ? 5 : 1), 0);
+    return {recipe, text, available, score};
+  }).filter(item => item.available && tokens.every(group => group.some(re => re.test(item.text))))
+    .sort((a, b) => b.score - a.score || a.recipe.title.localeCompare(b.recipe.title))
+    .map(({recipe, available}) => ({recipe, available}));
+}
 export function safeLink(value) {
   try { const u = new URL(value); return ['https:', 'http:'].includes(u.protocol) && !u.username && !u.password ? u.href : null; }
   catch { return null; }
@@ -230,6 +276,6 @@ export function comparisonRows(apps) {
     ['Features', a => a.features.join('\n')], ['Strengths', a => a.strengths.join('\n')],
     ['Limitations', a => a.limitations.join('\n')],
     ['Maintenance', a => a.maintenance.status + ': ' + a.maintenance.note],
-    ['Evidence', a => a.evidence_status === 'legacy-research' ? a.legacy_evidence_status : 'Official documentation reviewed; not installed or benchmarked'],
+    ['Evidence', a => (a.evidence_status === 'legacy-research' ? a.legacy_evidence_status : 'Official documentation reviewed; not installed or benchmarked unless a separate scoped measurement is linked in details') + (a.evaluation_ids?.length ? '\nScoped measurement available in tool details.' : '')],
   ].map(([label, get]) => ({label, values: apps.map(get)}));
 }
