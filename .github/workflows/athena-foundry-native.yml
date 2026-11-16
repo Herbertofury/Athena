@@ -40,6 +40,10 @@ jobs:
         run: cargo clippy --locked --manifest-path crates/athena-foundry-store/Cargo.toml --all-targets -- -D warnings
       - name: Build local bridge executable
         run: cargo build --locked --manifest-path crates/athena-foundry-store/Cargo.toml
+      - name: Isolated staged WAL candidate (production guard unchanged)
+        env:
+          ATHENA_STAGED_WAL_BINARY: ${{ github.workspace }}/crates/athena-foundry-store/target/debug/staged-wal-candidate${{ runner.os == 'Windows' && '.exe' || '' }}
+        run: python -m unittest discover -s research/staged-wal-candidate-2026-11-15 -v
       - name: Build unified evidence and authoring engine
         run: cargo build --locked --manifest-path engineering/apps/atlas-lab/Cargo.toml
       - name: Build and extract unsigned candidate from exact current binaries
