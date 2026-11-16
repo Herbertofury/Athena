@@ -1111,9 +1111,9 @@ Multi-instrument software for supported Digilent hardware, including oscilloscop
 - **Compare when:** Real acquisition requires compatible Digilent hardware.
 - **Strengths:** Use a coordinated set of instruments with compatible Digilent hardware or explore controls in demo mode.
 - **Limitations:** Real acquisition requires compatible Digilent hardware.; Platform and instrument capabilities differ by device; Linux packages also require the Adept runtime.
-- **Maintenance:** unverified — Product documentation reviewed; a current dated release or lifecycle commitment has not been established for this record.
-- [Official project](https://digilent.com/shop/waveforms/) · [Official installation / downloads](https://lp.digilent.com/complete-waveforms-download/)
-- **Sources:** [Official documentation and distribution evidence](https://digilent.com/shop/waveforms/) (2026-11-15; identity, features, platforms, pricing, downloads); [Official documentation and distribution evidence](https://digilent.com/reference/software/waveforms/waveforms-3/previous-versions) (2026-11-15; platforms, downloads, maintenance)
+- **Maintenance:** unverified — The official distribution index lists version 3.25.1 released 2026-03-06. Recent ongoing development or a lifecycle commitment has not been established for this record. ([evidence](https://digilent.com/reference/software/waveforms/waveforms-3/previous-versions))
+- [Official project](https://digilent.com/shop/waveforms/) · [Official installation / downloads](https://digilent.com/reference/software/waveforms/waveforms-3/previous-versions)
+- **Sources:** [Official documentation and distribution evidence](https://digilent.com/shop/waveforms/) (2026-11-15; identity, features, platforms, pricing, downloads); [Official current and historical WaveForms platform downloads and dated release information](https://digilent.com/reference/software/waveforms/waveforms-3/previous-versions) (2026-11-16; platforms, downloads, maintenance)
 ### OpenHantek6022
 
 Desktop oscilloscope frontend for Hantek 6022BE/BL and documented compatible USB oscilloscopes.
