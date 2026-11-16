@@ -136,3 +136,32 @@ and video. Script, frame and connection restrictions remain same-origin; no remo
 players, inline/eval script or autoplay are enabled. Browser acceptance separately
 checks local decoding/playback and native persistence. Hosted runner evidence is
 not owner-device installation or private migration acceptance.
+
+## Compare retained learning records
+
+The native `/learning` view can pin one selected record and show it beside a
+second selected record. This is an explicit read-only inspection tool: it does
+not start an experiment, select a winner, promote code, or write a comparison to
+the journal. The pin is page-local and is cleared on reload. Clear comparison
+returns to the selected record without changing retained evidence.
+
+Both evidence and complete-run payloads remain verbatim text, including integers
+larger than JavaScript's safe numeric range and literal HTML-like strings. The
+view reports exact retained-text identity/difference, not semantic equality or
+performance superiority. Missing, unsupported or over-budget payloads are
+explicitly unavailable, never treated as equal empty evidence. Compare workload,
+environment, correctness and failed trials before drawing conclusions.
+
+The page retains at most one pinned and one selected record. Each displayed raw
+field is capped at 2,097,152 JavaScript code units in addition to the server's
+existing 2 MiB per-field returned-data budget; DOM copies and response parsing
+have overhead, so this is not a whole-browser memory limit or hostile-server
+sandbox. A pending/failed selection cannot be pinned, and stale responses cannot
+overwrite a newer selection. Existing owner-journal access controls apply.
+
+Validation includes DOM regressions for exact large integers/HTML literals,
+missing data, repeated pin/clear, stale selection and oversized response refusal.
+The packaged native-browser harness checks two actual retained synthetic runs,
+no comparison write requests, narrow layout, exact text and reload clearing on
+Windows and Linux. A synthetic fixture is not an authentic target-project speed
+comparison or complete migration acceptance.

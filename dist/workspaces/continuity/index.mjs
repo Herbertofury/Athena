@@ -1,4 +1,6 @@
+import {attachArtifacts} from './artifacts.mjs';
 import {fresh, validate, apply, visible} from './model.mjs';
+import {parseBackup, mergeBackup, MAX_IMPORT_BYTES} from './import.mjs';
 import {compileContext, contextMarkdown} from './context.mjs';
 
 export function mount({container, state, search = '', setState, signal, theme = 'dark'}) {
@@ -10,9 +12,10 @@ export function mount({container, state, search = '', setState, signal, theme = 
   root.innerHTML = `<h2>Project continuity</h2><p>Source-attributed decisions, next actions, resources and blockers shared in Athena. Manual local notes, not an automatic chat capture or a verified completion detector. Do not paste credentials.</p><p id="notice" role="status"></p>
     <form><label>Project<input name="project" required maxlength="200"></label><label>Kind<select name="kind"><option value="decision">Decision</option><option value="next-action">Next action</option><option value="resource">Resource</option><option value="blocker">Blocker</option></select></label><label>Note<textarea name="text" required maxlength="10000"></textarea></label><label>Source URL (optional HTTPS)<input name="source" type="url"></label><button type="submit">Save note</button><button type="button" id="cancel" hidden>Cancel revision</button></form>
     <section class="context-panel" aria-labelledby="context-title"><h3 id="context-title">Reusable project context</h3><p>Explicit links keep the evidence revision you reviewed. Changed sources are advisory, never automatic verdicts. Cross-project dependencies remain included, even when an upstream note is ignored.</p><label>Project context<select id="project-context" aria-label="Project context"><option value="">All projects</option></select></label><p id="context-summary" role="status"></p><ul id="context-warnings"></ul><button id="export-context">Export context Markdown</button><details><summary>Inspect complete context packet</summary><pre id="context-packet"></pre></details></section>
-    <button id="ignored">Show ignored</button><button id="export">Export local continuity JSON</button><p>Notes remain in this browser. Export separately for backup; browser storage is not a remote backup. Sources are claims, not automatically trusted facts.</p><section id="entries" aria-label="Continuity entries"></section>`;
+    <label>Import local continuity backup<input id="import-backup" type="file" accept="application/json,.json"></label><p>Import adds missing notes and retains identical notes. Conflicting IDs or metadata refuse the whole import. Export your current notes first. Import is limited to 16 MiB and 100 total notes for this interface; larger backups are refused, never truncated. No provider data is fetched. Use one Athena tab for editing; other tabs are not synchronized.</p><button id="ignored">Show ignored</button><button id="export">Export local continuity JSON</button><p>Notes remain in this browser. Export separately for backup; browser storage is not a remote backup. Sources are claims, not automatically trusted facts.</p><section id="entries" aria-label="Continuity entries"></section><section id="artifact-journal"></section>`;
   const style = document.createElement('link'); style.rel = 'stylesheet'; style.href = new URL('./style.css', import.meta.url).href; root.prepend(style);
   const $ = selector => root.querySelector(selector), form = $('form'), notice = $('#notice');
+  const artifacts = attachArtifacts({host:$('#artifact-journal'),signal});
   notice.textContent = error || 'Ready. No notes are sent to a provider.';
   function element(tag, text) { const item = document.createElement(tag); if (text !== undefined) item.textContent = text; return item; }
   function button(action, label, id, dependencyId) {
@@ -96,6 +99,26 @@ export function mount({container, state, search = '', setState, signal, theme = 
       commit(action);
     }
   };
+  let importGeneration = 0;
+  $('#import-backup').onchange = async event => {
+    const input = event.target, file = input.files?.[0], generation = ++importGeneration;
+    input.value = '';
+    if (!file || !data || disposed) return;
+    try {
+      if (file.size > MAX_IMPORT_BYTES) throw Error('Backup exceeds the 16 MiB local import budget');
+      const incoming = parseBackup(new Uint8Array(await file.arrayBuffer()));
+      if (disposed || generation !== importGeneration) return;
+      // Merge against the current draft after the read, never a stale captured state.
+      const result = mergeBackup(data, incoming);
+      data = result.data;
+      let saved = false;
+      try { saved = setState?.(data); } catch { /* Keep the admitted draft exportable. */ }
+      notice.textContent = saved === true ? `Imported ${result.added} notes; ${result.unchanged} identical notes retained. Saved in this browser. Export a backup.` : 'Import is not saved to durable browser storage. Keep this page open and export the local draft.';
+      try { render(); } catch { notice.textContent = saved === true ? 'Import saved, but display failed. Reload to inspect the stored notes.' : 'Import draft retained, but display failed. Keep this page open and export the local draft.'; }
+    } catch {
+      if (!disposed && generation === importGeneration) notice.textContent = 'Import refused: use a valid UTF-8 Continuity backup up to 16 MiB and 100 total notes, without conflicting IDs, duplicate keys, lossy numbers or metadata. Existing notes were not changed.';
+    }
+  };
   $('#ignored').onclick = () => { showIgnored = !showIgnored; $('#ignored').textContent = showIgnored ? 'Hide ignored' : 'Show ignored'; render(); };
   $('#project-context').onchange = event => { project = event.target.value; renderContext(); };
   function download(text, filename, type) {
@@ -105,9 +128,10 @@ export function mount({container, state, search = '', setState, signal, theme = 
   }
   $('#export').onclick = () => { if (data) download(JSON.stringify(data, null, 2), 'athena-continuity.json', 'application/json'); };
   $('#export-context').onclick = () => { if (data) download(contextMarkdown(compileContext(data, project)), 'athena-project-context.md', 'text/markdown'); };
-  if (!data) for (const control of root.querySelectorAll('input,textarea,select,button')) control.disabled = true;
-  function unmount() { if (disposed) return; disposed = true; for (const url of urls) URL.revokeObjectURL(url); root.replaceChildren(); signal?.removeEventListener('abort', unmount); }
+  if (!data) for (const control of root.querySelectorAll('input,textarea,select,button')) if (!control.closest('#artifact-journal')) control.disabled = true;
+  function unmount() { if (disposed) return; disposed = true; artifacts.dispose(); for (const url of urls) URL.revokeObjectURL(url); root.replaceChildren(); signal?.removeEventListener('abort', unmount); }
   function setTheme(value) { container.dataset.theme = value === 'light' ? 'light' : 'dark'; }
   setTheme(theme); render(); signal?.addEventListener('abort', unmount, {once: true}); if (signal?.aborted) unmount();
   return {ready: !!data, unmount, setTheme, setSearch(value) { search = String(value); render(); }};
 }
+
