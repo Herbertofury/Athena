@@ -10,7 +10,7 @@
 
 The simulations never execute commands, call a device/network API, alter a real OS, or create a sandbox. These are constrained teaching models, not OS emulators, full courses or practical certification. Wrong/out-of-order actions explain their limits without mutating the model. Reset starts a clean mission; navigation retains session work, page reload discards the active mission. Logs retain the latest 100 actions. JSON receipts contain synthetic state and limitations, not user device data.
 
-First verified completion gives 100 **simulation XP** and a mission badge. Replay cannot duplicate that local reward. Rewards use a separate versioned browser-storage key, do not inflate existing lesson XP or mark courses complete, and remain locally editable rather than tamper-proof. Read failure preserves existing storage; write failure is explicitly session-only. Receipts are export-only at this stage. No cloud/profile sync is claimed.
+First verified completion gives 100 **simulation XP** and a mission badge. Replay cannot duplicate that local reward. Rewards use separate versioned per-mission browser-storage keys, so concurrent tabs never overwrite another mission award, do not inflate existing lesson XP or mark courses complete, and remain locally editable rather than tamper-proof. Read failure preserves existing storage; write failure is explicitly session-only. Receipts are export-only at this stage. No cloud/profile sync is claimed.
 
 Success has a static badge, optional one-shot expanding star burst and no sound, rapid flashing or repeating animation. Reduced-motion overrides the celebration toggle. All actions use buttons; feedback is live and receives focus. Completion requires the final evidence check, not merely reaching a changed setting.
 
