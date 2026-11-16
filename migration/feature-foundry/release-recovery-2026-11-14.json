@@ -1,0 +1,55 @@
+{
+  "schema": 1,
+  "reviewDate": "2026-11-14",
+  "retirementReady": false,
+  "evidence": "Two existing owner-held backup containers independently yielded all six exact original release assets; no payload execution or public backup upload.",
+  "assets": [
+    {
+      "name": "Feature-Foundry-v24.0.0-complete-release.zip",
+      "bytes": 11716663,
+      "sha256": "593b3e0be60ab694ddd8fbe9e3bc48c3b2c443a542d0eb41390b09596707f54b",
+      "matches_original_inventory": true
+    },
+    {
+      "name": "Feature-Foundry-v24.0.0-source.zip",
+      "bytes": 6998572,
+      "sha256": "b8701b37328277667820af9f6ea630f33d13d1c9ffaa9827b914328895fc97c2",
+      "matches_original_inventory": true
+    },
+    {
+      "name": "Feature-Foundry-v24.0.0-web.zip",
+      "bytes": 328556,
+      "sha256": "99f3714e5cae72e726711ebed0821ed09dbc1cadd7ab470afa2c3ad5f9f48726",
+      "matches_original_inventory": true
+    },
+    {
+      "name": "Feature-Foundry-v24.0.0-windows-x64-setup.exe",
+      "bytes": 2003721,
+      "sha256": "b4ac90edf1213f3e5a9a1a8724184ae2e97bc30da3f69f877aadfe71819dc49a",
+      "matches_original_inventory": true
+    },
+    {
+      "name": "Feature-Foundry-v24.0.0-windows-x64.msi",
+      "bytes": 2633728,
+      "sha256": "29a42693cc630d3aec72d137297063eab8f7c08ec21828cb8efd3871e025b157",
+      "matches_original_inventory": true
+    },
+    {
+      "name": "SHA256SUMS.txt",
+      "bytes": 533,
+      "sha256": "7c936936de7f3cf0d4efb9e35a1d6229db31b9e140efd951f2dd70f0a4517686",
+      "matches_original_inventory": true
+    }
+  ],
+  "verifiedCopiesPerAsset": 2,
+  "crcChecks": "Both outer containers, complete-release ZIPs and web ZIPs passed.",
+  "limits": [
+    "Backup availability verified at this check, not perpetual durability.",
+    "Owner-supplied artifacts are accessible through the connected Library; current sharing ACL and exclusive ownership are not established by materialization. No public archive copy is implied.",
+    "Installer/native execution, privacy and license review, full source parity and live user data migration remain independent gates.",
+    "Private issue content and unrecoverable original identifying Git history are not resolved.",
+    "The 67 blocked Atlas deployment-status histories remain unresolved; no denied endpoint retried."
+  ],
+  "historicalAudit": "retirement-audit-2026-11-14.json remains unchanged as dated evidence.",
+  "noDeletion": true
+}
