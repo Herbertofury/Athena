@@ -37,7 +37,23 @@ const {chromium}=require('playwright');
   const motionPositions=new Set();for(let i=0;i<12;i++){await page.waitForTimeout(16);motionPositions.add(await actor.evaluate(el=>el.style.transform));assert(await actor.evaluate(el=>{const a=el.getBoundingClientRect(),s=el.parentElement.getBoundingClientRect();return a.left>=s.left-1&&a.top>=s.top-1&&a.right<=s.right+1&&a.bottom<=s.bottom+1}), 'rotating motion form crossed stage boundary')}
   assert(motionPositions.size>1,'post-release throw must actually animate, not pass as stationary');
   await page.setViewportSize({width:360,height:700});await page.waitForTimeout(100);assert(await actor.evaluate(el=>{const a=el.getBoundingClientRect(),s=el.parentElement.getBoundingClientRect();return a.width<=110&&a.right<=s.right+1&&a.bottom<=s.bottom+1}));
+  // Controlled solid colors test the compositor, not original artwork/backdrop parity.
+  await page.evaluate(()=>{
+   const id=themes[0].objects[0].id;window.blendFixture={version:6,themeId:themes[0].id,roomId:themes[0].rooms[0].id,placements:{a:{objectId:id,x:.2,y:.2,pinned:false,blendMode:'multiply'},b:{objectId:id,x:.3,y:.2,pinned:false,blendMode:'multiply'}}};
+   document.querySelector('#host').style.background='rgb(255,0,0)';
+   const style=document.createElement('style');style.textContent='[data-ecology-stage] .foundry-object{background:rgb(128,128,128)!important;border:0!important;box-shadow:none!important;border-radius:0!important;outline:0!important} [data-ecology-stage] .foundry-object>*{display:none!important}';document.head.append(style);adapter.update(blendFixture);
+  });
+  async function sampleOverlap(mode){
+   await page.evaluate(mode=>{blendFixture.placements.a.blendMode=mode;blendFixture.placements.b.blendMode=mode;adapter.update(blendFixture)},mode);
+   await page.locator('[data-ecology-stage]').scrollIntoViewIfNeeded();
+   const boxes=await page.locator('[data-ecology-object]').evaluateAll(els=>els.map(el=>{const r=el.getBoundingClientRect();return {x:r.x,y:r.y,w:r.width,h:r.height,blend:getComputedStyle(el).mixBlendMode}}));
+   assert.equal(boxes[0].blend,mode);assert(boxes[1].x+5<boxes[0].x+boxes[0].w,'fixture must overlap');
+   const png=(await page.screenshot()).toString('base64');
+   return page.evaluate(async({png,boxes})=>{const img=new Image();img.src='data:image/png;base64,'+png;await img.decode();const canvas=document.createElement('canvas');canvas.width=img.width;canvas.height=img.height;const ctx=canvas.getContext('2d');ctx.drawImage(img,0,0);const a=boxes[0],b=boxes[1],y=Math.floor(a.y+20),singleX=Math.floor(a.x+2),overlapX=Math.floor(b.x+5);return {single:[...ctx.getImageData(singleX,y,1,1).data],overlap:[...ctx.getImageData(overlapX,y,1,1).data]};},{png,boxes});
+  }
+  const blendPixels={};for(const [mode,expected] of [['normal',128],['multiply',64],['screen',192]]){const receipt=await sampleOverlap(mode);blendPixels[mode]=receipt;for(let c=0;c<3;c++){assert(Math.abs(receipt.single[c]-128)<=1,'blend escaped isolated preview');assert(Math.abs(receipt.overlap[c]-expected)<=1,'overlap blend pixel mismatch')}assert.equal(receipt.overlap[3],255)}
+  await page.evaluate(()=>{blendFixture.placements.a.blendMode='url(https://example.invalid/blend)';adapter.update(blendFixture)});assert.equal(await page.locator('[data-ecology-object]').first().evaluate(el=>getComputedStyle(el).mixBlendMode),'normal');
   await page.waitForTimeout(100);assert.deepEqual(outside,[]);await page.click('[data-ecology-close]');assert.equal(await actor.count(),0);
-  console.log(JSON.stringify({actualChromium:true,before,shapes,keyboardMovement:true,inputUnchanged:true,closeClean:true,motionPositions:motionPositions.size,outsideRequests:outside.length}));
+  console.log(JSON.stringify({actualChromium:true,before,shapes,blendPixels,keyboardMovement:true,inputUnchanged:true,closeClean:true,motionPositions:motionPositions.size,outsideRequests:outside.length}));
  }finally{if(browser)await browser.close();server.close()}
 })().catch(e=>{console.error(e);process.exitCode=1});
