@@ -38,3 +38,24 @@ test('ecology preserves allowlisted blends within isolated stage and neutralizes
 
 test('authored rotation footprint includes corners for both sway signs and right-angle swaps',()=>{for(const rotation of [-360,-180,-90,-45,0,30,90,180,360])for(const vx of [-100,0,100]){const b=motionBox(110,150,vx,rotation),r=b.angle*Math.PI/180;for(const [x,y]of[[0,0],[110,0],[0,150],[110,150]]){const px=b.insetX+55+(x-55)*Math.cos(r)-(y-75)*Math.sin(r),py=b.insetY+75+(x-55)*Math.sin(r)+(y-75)*Math.cos(r);assert(px>=-1e-9&&px<=b.width+1e-9);assert(py>=-1e-9&&py<=b.height+1e-9)}}assert(Math.abs(motionBox(110,150,0,90).width-150)<1e-9);for(const bad of [361,-361,NaN,Infinity,'90'])assert.throws(()=>motionBox(110,150,0,bad))});
 test('rotation remains through movement and pause while new footprint reclamps without writes',()=>{const s=setup(),id=themes[0].objects[1].id;s.value.placements[id]={x:1,y:1,pinned:false,rotation:90};s.adapter.update(s.value);const original=JSON.stringify(s.value);s.one('[data-ecology-open]').click();let el=s.one('[data-ecology-object="'+id+'"]');assert.match(el.style.transform,/rotate\(90deg\)/);assert.equal(el.style.transformOrigin,'50% 50%');s.one('[data-ecology-motion]').checked=true;s.throwActor();for(let i=0;i<10;i++)s.advance();s.one('[data-ecology-motion]').checked=false;s.event(s.one('[data-ecology-motion]'),'change');assert.match(el.style.transform,/rotate\(90deg\)/);assert.equal(s.frames.size,0);assert.equal(JSON.stringify(s.value),original);for(const rotation of ['90',Infinity,-361,361,'1) url(https://example.invalid/rotation)']){s.value.placements[id].rotation=rotation;s.adapter.update(s.value);el=s.one('[data-ecology-object="'+id+'"]');assert.match(el.style.transform,/rotate\(0deg\)/)}s.adapter.dispose()});
+
+
+test('secondary pointers cannot steal a drag; interruptions release capture and ignore stale input',()=>{
+ for(const interruption of ['keyboard','pause','resize','close','update','hidden','dispose']){
+  const s=setup();s.one('[data-ecology-open]').click();const el=s.one('[data-ecology-object="'+themes[0].objects[1].id+'"]');
+  const captures=new Set(),released=[];el.setPointerCapture=id=>captures.add(id);el.hasPointerCapture=id=>captures.has(id);el.releasePointerCapture=id=>{released.push(id);captures.delete(id);s.event(el,'lostpointercapture',{pointerId:id})};
+  s.event(el,'pointerdown',{button:0,pointerId:1,clientX:10,clientY:10});const initial=el.style.transform;
+  s.event(el,'pointerdown',{button:0,pointerId:2,clientX:500,clientY:500});s.event(el,'pointermove',{pointerId:2,clientX:510,clientY:510});s.event(el,'pointerup',{pointerId:2});
+  assert.equal(el.style.transform,initial);assert.deepEqual([...captures],[1]);
+  s.event(el,'pointermove',{pointerId:1,clientX:30,clientY:20});assert.notEqual(el.style.transform,initial);
+  if(interruption==='keyboard')s.event(el,'keydown',{key:'ArrowRight'});
+  if(interruption==='pause')s.event(s.one('[data-ecology-motion]'),'change');
+  if(interruption==='resize')s.resize();
+  if(interruption==='close')s.one('[data-ecology-close]').click();
+  if(interruption==='update')s.adapter.update(s.value);
+  if(interruption==='hidden'){Object.defineProperty(s.document,'hidden',{value:true});s.event(s.document,'visibilitychange')}
+  if(interruption==='dispose')s.adapter.dispose();
+  assert.deepEqual(released,[1],interruption);assert.equal(captures.size,0);const stopped=el.style.transform;
+  s.event(el,'pointermove',{pointerId:1,clientX:60,clientY:40});s.event(el,'pointerup',{pointerId:1});assert.equal(el.style.transform,stopped);assert.equal(s.frames.size,0);s.adapter.dispose();
+ }
+});
