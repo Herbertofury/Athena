@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "records": [
+    {
+      "research_id": "cleanup-excluded-1",
+      "expected_original_url": "https://github.com/AbdulWaseaDev/WinDiskCleanup",
+      "status": "unavailable",
+      "checked_at": "2026-11-16",
+      "note": "This source was already excluded in the original cleanup research; the preserved URL still returned HTTP 404 in the publication audit.",
+      "evidence_path": "research/software-expansion-2026-11-15/research-availability-review.json",
+      "evidence_sha256": "20fbc30a4805d6fd73e072bfef1e54299b6b75258838e89c5e46c726064b908e"
+    },
+    {
+      "research_id": "cleanup-research-60",
+      "expected_original_url": "https://github.com/cbuntingde/ProjectCleaner",
+      "status": "unavailable",
+      "checked_at": "2026-11-16",
+      "note": "The preserved repository URL is not publicly reachable in these checks. No replacement identity was established. These observations do not determine whether the repository was deleted, made private, disabled or moved.",
+      "evidence_path": "research/software-expansion-2026-11-15/research-availability-review.json",
+      "evidence_sha256": "20fbc30a4805d6fd73e072bfef1e54299b6b75258838e89c5e46c726064b908e"
+    }
+  ]
+}

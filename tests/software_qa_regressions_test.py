@@ -80,6 +80,19 @@ class IntegrationRegressions(unittest.TestCase):
                         self.assertIn(classification, retained["kind"])
                         self.assertIn("not a recommended", retained["evidence_status"])
 
+
+    def test_unavailable_annotation_rejects_an_observation_for_a_different_url(self):
+        original_read = builder.read
+        def changed(path):
+            data = original_read(path)
+            if path == "research/software-expansion-2026-11-15/research-availability-review.json":
+                data = copy.deepcopy(data)
+                data["records"][0]["observations"][0]["url"] = "https://unrelated.example/"
+            return data
+        with patch.object(builder, "read", side_effect=changed):
+            with self.assertRaisesRegex(ValueError, "matching dated HTTP evidence"):
+                builder.apply_research_availability(copy.deepcopy(self.catalog["research_records"]))
+
     def test_license_filter_classification_does_not_use_unrelated_proprietary_mentions(self):
         expected = {
             "libresprite": "open-source",
@@ -107,11 +120,29 @@ class IntegrationRegressions(unittest.TestCase):
         refs = links.collect_urls(self.catalog)[evidence]
         self.assertTrue(any(r.get("app_id") == app["id"] and r.get("field") == "maintenance" for r in refs))
 
+    def test_unavailable_research_annotation_preserves_original_and_requires_bound_evidence(self):
+        row = next(r for r in self.catalog["research_records"] if r["id"] == "cleanup-research-60")
+        original = builder.read("research/developer-cleanup-2026-11-14/catalog.json")["tools"][59]
+        self.assertEqual(row["original"], original)
+        self.assertEqual(row["official_url"], original["download"])
+        self.assertEqual(row["availability"]["status"], "unavailable")
+        original_read = builder.read
+        for field, value in (("research_id", "current-app"), ("expected_original_url", "https://different.example/"), ("evidence_sha256", "0" * 64)):
+            def changed(path):
+                data = original_read(path)
+                if path == "data/software/research-availability.json":
+                    data = copy.deepcopy(data)
+                    data["records"][0][field] = value
+                return data
+            with self.subTest(field=field), patch.object(builder, "read", side_effect=changed):
+                with self.assertRaises(ValueError):
+                    builder.apply_research_availability(copy.deepcopy(self.catalog["research_records"]))
+
 
 class SourceAuditRegressions(unittest.TestCase):
     """Exercise the command's exit status and receipt without any network access."""
 
-    def audit(self, active_uses_missing_url=False):
+    def audit(self, active_uses_missing_url=False, unavailable_history=False, recovered=False, excluded_unavailable=False):
         missing = "https://projects.example/historical-exclusion"
         current = "https://projects.example/current-application"
         catalog = {
@@ -122,9 +153,12 @@ class SourceAuditRegressions(unittest.TestCase):
             }],
             "research_records": [{"id": "cleanup-excluded-1", "official_url": missing}],
         }
+        if unavailable_history:
+            catalog["research_records"] = [{"id": "cleanup-excluded-1" if excluded_unavailable else "cleanup-research-60", "official_url": missing,
+                "availability": {"status": "unavailable", "checked_at": "2026-11-16"}}]
 
         def observed(url, timeout=15):
-            status = 404 if url == missing else 200
+            status = 404 if url == missing and not recovered else 200
             return {
                 "url": url, "status": status, "outcome": links.classify(status),
                 "checked_at": "2026-11-15T00:00:00+00:00", "final_url": url, "method": "HEAD",
@@ -155,6 +189,24 @@ class SourceAuditRegressions(unittest.TestCase):
         self.assertEqual(report["actionable_not_found"], 1)
         self.assertFalse(report["results"][0]["excluded_history_only"])
         self.assertTrue(any(r.get("app_id") == "current-app" for r in report["results"][0]["references"]))
+
+    def test_unavailable_history_stays_audited_and_cannot_hide_an_application_failure(self):
+        status, report = self.audit(unavailable_history=True)
+        self.assertEqual(status, 0)
+        self.assertEqual(report["historical_not_found"], 1)
+        self.assertEqual(report["actionable_not_found"], 0)
+        self.assertFalse(next(x for x in report["results"] if x["status"] == 404)["excluded_history_only"])
+        status, report = self.audit(active_uses_missing_url=True, unavailable_history=True)
+        self.assertEqual(status, 1)
+        self.assertEqual(report["actionable_not_found"], 1)
+        self.assertEqual(report["historical_not_found"], 0)
+        status, report = self.audit(unavailable_history=True, recovered=True)
+        self.assertEqual(status, 0)
+        self.assertEqual(report["unavailable_history_now_reachable"], 1)
+        status, report = self.audit(unavailable_history=True, recovered=True, excluded_unavailable=True)
+        self.assertEqual(status, 0)
+        self.assertEqual(report["unavailable_history_now_reachable"], 1)
+        self.assertTrue(any(x["excluded_history_only"] for x in report["results"]))
 
 
 if __name__ == "__main__":

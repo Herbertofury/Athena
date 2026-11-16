@@ -1,0 +1,838 @@
+{
+  "recipes": [
+    {
+      "id": "wave2-choose-private-desktop-chat",
+      "title": "Choose a private desktop messenger that fits your contacts",
+      "description": "Start with account setup, contact reachability and whether you need a mobile-linked account or an independent desktop identity.",
+      "picks": [
+        {
+          "app_id": "signal",
+          "label": "Existing Signal contacts",
+          "reason": "Desktop links into the Signal account and supports encrypted conversations, calls and files.",
+          "tradeoff": "Initial desktop use requires the mobile Signal account; it is not a federated chat client."
+        },
+        {
+          "app_id": "simplex-chat",
+          "label": "Identity without a global user address",
+          "reason": "SimpleX is designed around contact connections rather than a global phone-number identity.",
+          "tradeoff": "Invitation and connection management differ from mainstream messengers; check the current desktop limitations."
+        },
+        {
+          "app_id": "jami",
+          "label": "Peer-to-peer conversations",
+          "reason": "Jami provides distributed calling and messaging without requiring a conventional central chat server.",
+          "tradeoff": "Peer reachability, synchronization and account backup require a different workflow from cloud history."
+        },
+        {
+          "app_id": "session",
+          "label": "Session-network messaging",
+          "reason": "Session provides a distinct network and account-identifier approach for messaging.",
+          "tradeoff": "It does not interoperate with Signal or Matrix; assess the actual feature and network requirements."
+        }
+      ]
+    },
+    {
+      "id": "wave2-choose-matrix-client",
+      "title": "Choose a Matrix client for your desktop",
+      "description": "Use one Matrix account ecosystem while selecting a client whose platform maturity, media and calling coverage fit the task.",
+      "picks": [
+        {
+          "app_id": "element-desktop",
+          "label": "Broad desktop and web access",
+          "reason": "Provides a full Matrix interface with official desktop packages and browser access.",
+          "tradeoff": "Homeserver and calling infrastructure are separate from client installation."
+        },
+        {
+          "app_id": "nheko",
+          "label": "Qt desktop workflow",
+          "reason": "Offers keyboard-oriented navigation, profiles and native desktop integration.",
+          "tradeoff": "Calling, codecs and secret storage differ by platform; the project qualifies encryption audit status."
+        },
+        {
+          "app_id": "fractal",
+          "label": "GNOME-focused Linux messaging",
+          "reason": "Combines Matrix accounts with an adaptive GNOME interface and rich message views.",
+          "tradeoff": "Official installation targets Linux and requires compatible secret-storage services."
+        },
+        {
+          "app_id": "fluffychat",
+          "label": "Conversation-focused interface",
+          "reason": "Emphasizes everyday messaging, spaces and rich media across established Linux/web deployments.",
+          "tradeoff": "Windows/macOS deployments were introduced as beta; calling requires compatible MatrixRTC infrastructure."
+        }
+      ]
+    },
+    {
+      "id": "wave2-choose-xmpp-client",
+      "title": "Choose an XMPP desktop or terminal client",
+      "description": "Compare the client together with your server’s extensions: encryption, calls and file sharing are not identical everywhere.",
+      "picks": [
+        {
+          "app_id": "gajim",
+          "label": "Graphical everyday XMPP",
+          "reason": "Brings modern messaging, files and account-provider choice into one desktop client.",
+          "tradeoff": "Check server extensions and macOS architecture availability."
+        },
+        {
+          "app_id": "dino",
+          "label": "Focused Linux chat and calls",
+          "reason": "Keeps XMPP conversations and compatible calls in a streamlined GTK interface.",
+          "tradeoff": "Official distribution focuses on Linux and encryption must match the conversation configuration."
+        },
+        {
+          "app_id": "profanity",
+          "label": "Terminal and remote-shell use",
+          "reason": "Offers keyboard-driven rooms, encryption choices and plugins without a graphical desktop.",
+          "tradeoff": "Windows needs WSL or Cygwin and optional features depend on build configuration."
+        },
+        {
+          "app_id": "psi",
+          "label": "Detailed configuration",
+          "reason": "Provides flexible windows, themes and optional encryption plugins for established XMPP users.",
+          "tradeoff": "Calling plugins and automatic updates differ across distributed builds."
+        }
+      ]
+    },
+    {
+      "id": "wave2-choose-sip-softphone",
+      "title": "Choose a softphone for an existing SIP account",
+      "description": "A softphone is a client: check the SIP service, codecs and provisioning separately from the app’s price.",
+      "picks": [
+        {
+          "app_id": "linphone",
+          "label": "Cross-platform SIP ecosystem",
+          "reason": "Offers a SIP-based communication client with open-source components and documented service integration.",
+          "tradeoff": "Service provisioning and account compatibility remain separate from installing the client."
+        },
+        {
+          "app_id": "microsip",
+          "label": "Compact Windows SIP calling",
+          "reason": "Focuses on Windows SIP calls with a small dedicated client.",
+          "tradeoff": "Windows-only scope and supported codecs may not match every provider."
+        },
+        {
+          "app_id": "zoiper",
+          "label": "Commercial desktop workflow",
+          "reason": "Provides a SIP/IAX-oriented client with paid features and support paths.",
+          "tradeoff": "Free and paid editions have different capabilities and usage terms."
+        }
+      ]
+    },
+    {
+      "id": "wave2-choose-community-voice",
+      "title": "Choose voice chat for a community or game group",
+      "description": "Decide whether the group wants a hosted community platform or a separately operated voice server.",
+      "picks": [
+        {
+          "app_id": "mumble",
+          "label": "Self-hosted voice server",
+          "reason": "Pairs a desktop client with a server your group can operate and configure.",
+          "tradeoff": "Server hosting and voice setup remain your responsibility."
+        },
+        {
+          "app_id": "teamspeak",
+          "label": "Structured voice communities",
+          "reason": "Provides channels and permissions in a dedicated voice ecosystem.",
+          "tradeoff": "Client generations and server licensing limits need to match the planned deployment."
+        },
+        {
+          "app_id": "discord",
+          "label": "Hosted text and voice community",
+          "reason": "Combines channels, media and voice in an established hosted service.",
+          "tradeoff": "Accounts, service policies and optional paid features are part of the choice."
+        }
+      ]
+    },
+    {
+      "id": "wave2-choose-team-chat-client",
+      "title": "Choose desktop access for a team chat deployment",
+      "description": "These desktop apps connect to an existing workspace; evaluate the server and hosting plan as part of the decision.",
+      "picks": [
+        {
+          "app_id": "zulip-desktop",
+          "label": "Topic-organized asynchronous work",
+          "reason": "Topics keep parallel discussions identifiable and the client supports several organizations.",
+          "tradeoff": "Teams must maintain the topic model and hosted history limits vary by plan."
+        },
+        {
+          "app_id": "mattermost-desktop",
+          "label": "Managed Mattermost access",
+          "reason": "Supports several servers, notifications and administrator-provided settings.",
+          "tradeoff": "Desktop Apache licensing does not determine server production entitlements."
+        },
+        {
+          "app_id": "rocketchat-desktop",
+          "label": "Managed Rocket.Chat access",
+          "reason": "Connects users to organization-selected servers with desktop notifications and managed configuration.",
+          "tradeoff": "Server edition and version determine the actual collaboration features."
+        }
+      ]
+    },
+    {
+      "id": "wave2-choose-desktop-meetings",
+      "title": "Choose browser or desktop video meetings",
+      "description": "Compare participant access, hosting responsibility and organization requirements before choosing a meeting application.",
+      "picks": [
+        {
+          "app_id": "jitsi-meet",
+          "label": "Browser-first open meeting stack",
+          "reason": "Provides browser-based meetings with public-service or self-hosted paths.",
+          "tradeoff": "Hosting, authentication and deployment configuration influence the actual meeting service."
+        },
+        {
+          "app_id": "zoom-workplace",
+          "label": "Hosted meetings across organizations",
+          "reason": "Offers desktop meetings and collaboration features with familiar guest workflows.",
+          "tradeoff": "Free meeting limits and paid entitlements vary by plan."
+        },
+        {
+          "app_id": "microsoft-teams",
+          "label": "Microsoft 365 collaboration",
+          "reason": "Fits organizations already using Microsoft identity, channels and collaboration services.",
+          "tradeoff": "Personal, work and education accounts have different capabilities and licensing."
+        },
+        {
+          "app_id": "cisco-webex",
+          "label": "Managed business meeting workflow",
+          "reason": "Provides vendor-managed meetings and business collaboration options.",
+          "tradeoff": "Check the specific client package, account type and subscription feature set."
+        }
+      ]
+    },
+    {
+      "id": "wave2-choose-virtual-classroom",
+      "title": "Choose an interactive virtual classroom",
+      "description": "Lesson whiteboards, breakout activities and LMS integration can matter more than ordinary meeting features.",
+      "picks": [
+        {
+          "app_id": "bigbluebutton",
+          "label": "Teaching and LMS integration",
+          "reason": "Combines shared presentations, whiteboards, polls and breakout rooms in a classroom-focused server.",
+          "tradeoff": "Supported hosting requires a dedicated Ubuntu server and ongoing administration or a hosting provider."
+        },
+        {
+          "app_id": "jitsi-meet",
+          "label": "Simpler open meetings",
+          "reason": "Works well for a browser meeting when classroom-specific analytics are unnecessary.",
+          "tradeoff": "Teaching workflows and LMS functionality require additional integration."
+        },
+        {
+          "app_id": "zoom-workplace",
+          "label": "Hosted classroom meetings",
+          "reason": "Provides a managed meeting service for classes that prefer vendor hosting.",
+          "tradeoff": "Education plans, recording and breakout entitlements must be checked separately."
+        }
+      ]
+    },
+    {
+      "id": "wave2-choose-sdr-receiver",
+      "title": "Choose a general SDR receiver interface",
+      "description": "Begin with the exact receiver hardware and OS, then compare multi-channel listening, plugins and recording needs.",
+      "picks": [
+        {
+          "app_id": "sdrpp",
+          "label": "Modular multi-VFO listening",
+          "reason": "Provides multiple receive channels and hardware modules across desktop platforms.",
+          "tradeoff": "The project emphasizes nightly builds and device-driver compatibility remains essential."
+        },
+        {
+          "app_id": "gqrx",
+          "label": "Focused analog-mode receiver",
+          "reason": "Offers AM/FM/SSB reception and spectrum inspection without designing a flowgraph.",
+          "tradeoff": "Supported hardware follows gr-osmosdr and package paths differ by OS."
+        },
+        {
+          "app_id": "sdr-console",
+          "label": "Windows station and recording",
+          "reason": "Combines multiple receivers, IQ playback and selected transceiver integrations.",
+          "tradeoff": "Commercial licensing differs from hobby use and transmit support is device-specific."
+        },
+        {
+          "app_id": "sdrangel",
+          "label": "Experimental multi-device workbench",
+          "reason": "Adds receiver/transmitter plugins and specialized demodulation in a configurable workspace.",
+          "tradeoff": "The project explicitly targets experimentation rather than mission-critical production."
+        }
+      ]
+    },
+    {
+      "id": "wave2-migrate-sdrplay-receiver",
+      "title": "Choose between legacy SDRuno and current SDRplay paths",
+      "description": "Keep legacy configurations identifiable while checking hardware support before selecting a replacement.",
+      "picks": [
+        {
+          "app_id": "sdrconnect",
+          "label": "Current vendor cross-platform path",
+          "reason": "Offers graphical and headless operation on Windows, macOS and supported Linux systems.",
+          "tradeoff": "Original RSP1 is excluded and Linux support is narrower than all distributions."
+        },
+        {
+          "app_id": "sdruno",
+          "label": "Existing legacy station",
+          "reason": "Retains the established SDRuno configuration and plugin workflow.",
+          "tradeoff": "The vendor marks it end of life; it is a legacy option rather than an active-development recommendation."
+        },
+        {
+          "app_id": "sdrpp",
+          "label": "Alternative receiver interface",
+          "reason": "Provides a modular receive interface where the appropriate SDRplay module and drivers support the device.",
+          "tradeoff": "Verify exact module/API and hardware compatibility; vendor parity is not assumed."
+        }
+      ]
+    },
+    {
+      "id": "wave2-inspect-radio-protocol",
+      "title": "Inspect a captured radio protocol",
+      "description": "Choose whether you need visual sample analysis, a structured protocol workbench or a programmable processing chain.",
+      "picks": [
+        {
+          "app_id": "inspectrum",
+          "label": "Measure captured samples",
+          "reason": "Spectrograms and cursors help inspect modulation and symbol timing in recorded IQ files.",
+          "tradeoff": "It is an offline viewer, not a complete live capture and protocol decoder."
+        },
+        {
+          "app_id": "universal-radio-hacker",
+          "label": "Connect samples to message fields",
+          "reason": "Combines acquisition, demodulation, labeling and protocol interpretation for owned lab devices.",
+          "tradeoff": "Automatic decoding still needs a correct signal and protocol model."
+        },
+        {
+          "app_id": "gnu-radio",
+          "label": "Build a custom decoder",
+          "reason": "Reusable processing blocks and flowgraphs let you express signal chains beyond fixed application features.",
+          "tradeoff": "Drivers and out-of-tree modules must match the selected GNU Radio generation."
+        }
+      ]
+    },
+    {
+      "id": "wave2-choose-amateur-digital-mode",
+      "title": "Choose amateur-radio digital text workflows",
+      "description": "Structured contacts, conversational text and broad modem collections solve different tasks.",
+      "picks": [
+        {
+          "app_id": "wsjt-x",
+          "label": "Structured weak-signal contacts",
+          "reason": "Implements timed modes such as FT8, FT4 and Q65 with documented operating sequences.",
+          "tradeoff": "Clock synchronization and short structured messages are central constraints."
+        },
+        {
+          "app_id": "jtdx",
+          "label": "Alternative weak-signal workflow",
+          "reason": "Provides a separate WSJT-derived operating and decoding environment.",
+          "tradeoff": "Release cadence and supported features differ from WSJT-X; current maintenance is not assumed."
+        },
+        {
+          "app_id": "js8call",
+          "label": "Keyboard messages over HF",
+          "reason": "Uses JS8 message passing for free-form text through the current JS8Call-Improved continuation.",
+          "tradeoff": "JS8 messages are not ordinary FT8 contacts and need compatible peers."
+        },
+        {
+          "app_id": "fldigi",
+          "label": "Several established text modems",
+          "reason": "Brings multiple sound-card digital text modes into one application.",
+          "tradeoff": "Choose a matching mode and configure the audio/rig path explicitly."
+        }
+      ]
+    },
+    {
+      "id": "wave2-choose-radio-voice-or-data",
+      "title": "Choose digital voice or data software for a radio station",
+      "description": "Identify whether the payload is speech, text or an experiment before comparing the interface.",
+      "picks": [
+        {
+          "app_id": "freedv",
+          "label": "Open HF digital speech",
+          "reason": "Provides digital voice through an open codec/modem stack and a configured SSB station.",
+          "tradeoff": "Both ends need compatible modes and audio paths; development releases are not the stable channel."
+        },
+        {
+          "app_id": "fldigi",
+          "label": "Text through audio modems",
+          "reason": "Supports multiple established text modes with station integration.",
+          "tradeoff": "It is not a speech-codec application and each mode has its own operating conventions."
+        },
+        {
+          "app_id": "gnu-radio",
+          "label": "Custom signal experiments",
+          "reason": "Allows a purpose-built signal-processing chain using reusable blocks.",
+          "tradeoff": "Requires substantially more DSP and hardware integration work than a station-ready application."
+        }
+      ]
+    },
+    {
+      "id": "wave2-build-aprs-station",
+      "title": "Choose complementary software for an APRS station",
+      "description": "Separate the sound-card modem from the mapping client; these roles can be combined in one station.",
+      "picks": [
+        {
+          "app_id": "dire-wolf",
+          "label": "Sound-card modem and gateway",
+          "reason": "Provides AX.25/APRS encoding, decoding and interfaces to client programs.",
+          "tradeoff": "A suitable audio/PTT setup is required and it does not supply a full map-focused interface."
+        },
+        {
+          "app_id": "xastir",
+          "label": "Extensible APRS maps",
+          "reason": "Displays station information using local maps and radio/Internet interfaces.",
+          "tradeoff": "Build paths and mapping dependencies require setup, especially on Windows."
+        },
+        {
+          "app_id": "yaac",
+          "label": "Java mapping and messages",
+          "reason": "Combines APRS mapping, local geographic data and extensible telemetry in a Java client.",
+          "tradeoff": "Java, map storage and external interface compatibility must be checked for the host."
+        }
+      ]
+    },
+    {
+      "id": "wave2-program-radio-memories",
+      "title": "Choose radio memory programming or live control",
+      "description": "Channel memories and DMR codeplugs differ from live CAT control; match the tool to the exact model and task.",
+      "picks": [
+        {
+          "app_id": "chirp",
+          "label": "Memories for supported radios",
+          "reason": "Offers one channel-editing workflow across a broad documented model list.",
+          "tradeoff": "Firmware variants, cable compatibility and per-model support remain decisive."
+        },
+        {
+          "app_id": "qdmr",
+          "label": "Supported DMR codeplugs",
+          "reason": "Provides codeplug and contact-database editing on Linux and macOS.",
+          "tradeoff": "Only listed DMR models are supported and codeplugs are not universally portable."
+        },
+        {
+          "app_id": "flrig",
+          "label": "Live transceiver controls",
+          "reason": "Provides a dedicated CAT panel and fldigi integration.",
+          "tradeoff": "It controls operating settings rather than replacing every radio’s memory-programming application."
+        }
+      ]
+    },
+    {
+      "id": "wave2-choose-radio-logbook",
+      "title": "Choose an amateur-radio logbook",
+      "description": "Compare general station records, integrated DX operations and contest-specific exchange handling.",
+      "picks": [
+        {
+          "app_id": "cqrlog",
+          "label": "Linux-oriented SQL logbook",
+          "reason": "Combines contact records, QSL workflows and Hamlib/cluster integrations.",
+          "tradeoff": "MySQL/MariaDB setup is required and distribution packages can trail repository releases."
+        },
+        {
+          "app_id": "log4om",
+          "label": "Windows general station log",
+          "reason": "Provides contact, award and transceiver integrations for everyday operation.",
+          "tradeoff": "External service subscriptions and radio integration must be checked separately."
+        },
+        {
+          "app_id": "n1mm-logger-plus",
+          "label": "Contest operation",
+          "reason": "Organizes contacts around contest rules, exchanges and station controls.",
+          "tradeoff": "A general daily logger can be simpler outside contests."
+        },
+        {
+          "app_id": "dxlab",
+          "label": "Cooperating station applications",
+          "reason": "Combines modular logging, spotting, propagation and radio-control components.",
+          "tradeoff": "Several coordinated applications create more setup surfaces."
+        }
+      ]
+    },
+    {
+      "id": "wave2-choose-satellite-tools",
+      "title": "Choose satellite pass planning or signal decoding",
+      "description": "An orbit planner predicts geometry; a receiver decoder processes the signal captured during a pass.",
+      "picks": [
+        {
+          "app_id": "previsat",
+          "label": "Visual observation planning",
+          "reason": "Predicts passes, transits and selected flares with world and sky views.",
+          "tradeoff": "Use current orbital elements and correct site coordinates; it does not decode RF samples."
+        },
+        {
+          "app_id": "gpredict",
+          "label": "Tracking and station coordination",
+          "reason": "Provides satellite tracking in a dedicated desktop application with supported station-control integrations.",
+          "tradeoff": "Radio/rotator setup and orbital data are separate requirements."
+        },
+        {
+          "app_id": "satdump",
+          "label": "Receive-data decoding",
+          "reason": "Turns supported live or recorded satellite signals into decoded products.",
+          "tradeoff": "Needs compatible RF hardware and supported signals; not every satellite has a decoder."
+        }
+      ]
+    },
+    {
+      "id": "wave2-choose-plc-engineering",
+      "title": "Choose a PLC programming environment",
+      "description": "Compare editor openness, controller compatibility and runtime licensing as separate decisions.",
+      "picks": [
+        {
+          "app_id": "openplc",
+          "label": "Open editor with simulator",
+          "reason": "Provides IEC programming and a simulator with multiple runtime targets.",
+          "tradeoff": "Bare-metal runtime and commercial deployment terms are separate from the GPL editor."
+        },
+        {
+          "app_id": "beremiz",
+          "label": "Portable open PLC projects",
+          "reason": "Uses PLCopen XML with a compiler and several runtime options.",
+          "tradeoff": "Target I/O integration is engineering work and runtime licenses differ."
+        },
+        {
+          "app_id": "codesys-development-system",
+          "label": "Broad compatible-controller ecosystem",
+          "reason": "Offers IEC editors, libraries and device tooling for CODESYS-compatible targets.",
+          "tradeoff": "The free IDE includes a demo runtime; production runtime and add-ons can require licenses."
+        },
+        {
+          "app_id": "twincat-3",
+          "label": "Beckhoff PC automation",
+          "reason": "Integrates PLC engineering and supported industrial hardware configuration.",
+          "tradeoff": "Runtime/functions cost extra and VM operation does not provide hard-real-time guarantees."
+        }
+      ]
+    },
+    {
+      "id": "wave2-choose-robot-simulator",
+      "title": "Choose a robot simulator or offline programmer",
+      "description": "General robot algorithms and production controller program generation require different interfaces and validation.",
+      "picks": [
+        {
+          "app_id": "webots",
+          "label": "Integrated robot learning and prototyping",
+          "reason": "Combines models, sensors, worlds and controllers in one environment.",
+          "tradeoff": "Model assumptions determine the usefulness of simulated behavior."
+        },
+        {
+          "app_id": "gazebo",
+          "label": "Modular ROS-oriented simulation",
+          "reason": "Provides configurable physics, sensors and a plugin ecosystem for robot workflows.",
+          "tradeoff": "Linux support is strongest; ROS/version pairing and other-OS limitations matter."
+        },
+        {
+          "app_id": "coppeliasim",
+          "label": "Scriptable robot scenes",
+          "reason": "Supports flexible scene scripting, external APIs and headless/library operation.",
+          "tradeoff": "Edu eligibility is narrowly defined; companies and general research institutions need other terms."
+        },
+        {
+          "app_id": "robodk",
+          "label": "Industrial offline programming",
+          "reason": "Adds controller post-processors and robot manufacturing workflows.",
+          "tradeoff": "Commercial program generation is licensed and actual workcells still need calibration and validation."
+        }
+      ]
+    },
+    {
+      "id": "wave2-choose-cnc-sender",
+      "title": "Choose a sender for a supported CNC controller",
+      "description": "Check firmware and machine configuration before comparing convenience features such as probing, surfacing and browser control.",
+      "picks": [
+        {
+          "app_id": "universal-gcode-sender",
+          "label": "Cross-platform desktop sender",
+          "reason": "Combines machine state, jogging and toolpath visualization.",
+          "tradeoff": "It is mainly a controller interface, so full CAM design remains separate."
+        },
+        {
+          "app_id": "gsender",
+          "label": "Guided Grbl/grblHAL workflow",
+          "reason": "Adds probing, surfacing and calibration helpers.",
+          "tradeoff": "Mach3/4 controllers do not use the supported interface."
+        },
+        {
+          "app_id": "bcnc",
+          "label": "Autoleveling and G-code editing",
+          "reason": "Combines a sender/editor with probing-based surface compensation.",
+          "tradeoff": "Probe accuracy, units and controller settings directly affect generated motion."
+        },
+        {
+          "app_id": "cncjs",
+          "label": "Browser interface near the machine",
+          "reason": "Keeps the serial server at the machine while exposing controls in a browser.",
+          "tradeoff": "The server and remote-access configuration must be maintained."
+        }
+      ]
+    },
+    {
+      "id": "wave2-choose-electronics-instruments",
+      "title": "Choose software for electronic signal capture",
+      "description": "Start with the acquisition hardware: these frontends have different device compatibility and protocol ecosystems.",
+      "picks": [
+        {
+          "app_id": "pulseview",
+          "label": "Open sigrok-compatible analysis",
+          "reason": "Provides logic/scope views and protocol decoders across supported sigrok devices.",
+          "tradeoff": "Device drivers and acquisition limits vary, and packages can be nightly builds."
+        },
+        {
+          "app_id": "saleae-logic",
+          "label": "Saleae instrument integration",
+          "reason": "Offers an integrated capture/decoder workflow and automation APIs.",
+          "tradeoff": "Physical acquisition requires supported Saleae hardware."
+        },
+        {
+          "app_id": "scopy",
+          "label": "Analog Devices learning and analysis",
+          "reason": "Provides software instruments and control panels for supported ADI devices.",
+          "tradeoff": "Available tools depend on the exact device and plugin."
+        },
+        {
+          "app_id": "digilent-waveforms",
+          "label": "Digilent multi-instrument suite",
+          "reason": "Combines analog/digital instruments and an SDK, with demo mode for exploration.",
+          "tradeoff": "Real measurements need compatible hardware and Linux installation includes the Adept runtime."
+        }
+      ]
+    },
+    {
+      "id": "wave2-choose-serial-workbench",
+      "title": "Choose a serial terminal or telemetry dashboard",
+      "description": "Simple command exchange, terminal emulation and structured live visualization are separate needs.",
+      "picks": [
+        {
+          "app_id": "coolterm",
+          "label": "Simple data exchange",
+          "reason": "Provides text/hex serial send, receive and logging without full terminal emulation.",
+          "tradeoff": "Linux builds have limited developer testing."
+        },
+        {
+          "app_id": "cutecom",
+          "label": "Linux command sessions",
+          "reason": "Separates command input and receive output and keeps device sessions.",
+          "tradeoff": "The current README only identifies Linux as tested."
+        },
+        {
+          "app_id": "tera-term",
+          "label": "Windows terminal and scripts",
+          "reason": "Combines serial/SSH terminal emulation with a macro language.",
+          "tradeoff": "Windows-focused interface and macros do not transfer directly to other clients."
+        },
+        {
+          "app_id": "serial-studio",
+          "label": "Structured live dashboards",
+          "reason": "Turns parsed device frames into plots, gauges and recorded sessions.",
+          "tradeoff": "GPL source builds and official Pro binaries have different terms and industrial-driver availability."
+        }
+      ]
+    },
+    {
+      "id": "wave2-choose-firmware-tool",
+      "title": "Choose firmware update, chip programming or debug tools",
+      "description": "A supported vendor update, an external flash programmer and a debug server are different operations.",
+      "picks": [
+        {
+          "app_id": "fwupd",
+          "label": "Supported device firmware updates",
+          "reason": "Uses the Linux firmware-update ecosystem for devices supported by its plugins and firmware sources.",
+          "tradeoff": "Availability depends on the exact device and vendor-provided update support."
+        },
+        {
+          "app_id": "flashrom",
+          "label": "Supported flash-chip access",
+          "reason": "Reads, writes and verifies chips through documented internal or external programmers.",
+          "tradeoff": "Unsupported hardware, especially laptops, is explicitly warned against; Windows internal programmers are unsupported."
+        },
+        {
+          "app_id": "stm32cubeprogrammer",
+          "label": "ST device programming",
+          "reason": "Provides GUI/CLI programming and device configuration for supported STM32 targets.",
+          "tradeoff": "Target-specific settings can be persistent and require exact device documentation."
+        },
+        {
+          "app_id": "openocd",
+          "label": "Debug-probe integration",
+          "reason": "Connects supported JTAG/SWD probes and targets to GDB and programming workflows.",
+          "tradeoff": "Probe/target scripts and host drivers determine compatibility."
+        }
+      ]
+    },
+    {
+      "id": "wave2-choose-linux-event-tracing",
+      "title": "Choose Linux process tracing or a persistent audit trail",
+      "description": "Select the observation model: an attached process, a wider captured event stream or a policy-driven persistent audit log.",
+      "picks": [
+        {
+          "app_id": "strace",
+          "label": "Trace one process or failure",
+          "reason": "Reveals syscalls, signals, missing paths and error returns without rebuilding the app.",
+          "tradeoff": "Tracing affects timing and output may include application data."
+        },
+        {
+          "app_id": "sysdig-oss",
+          "label": "Capture container-aware system events",
+          "reason": "Adds reusable traces and context for Linux container troubleshooting.",
+          "tradeoff": "Needs a compatible probe/driver and careful capture scope."
+        },
+        {
+          "app_id": "linux-audit",
+          "label": "Keep configured attributable events",
+          "reason": "Collects kernel audit records and offers structured query/report tools.",
+          "tradeoff": "Only configured events are collected, and backlog or storage pressure can lose data."
+        }
+      ]
+    },
+    {
+      "id": "wave2-choose-linux-audit-method",
+      "title": "Choose configuration assessment or file-integrity monitoring",
+      "description": "A configuration scan, an integrity baseline and event collection provide different evidence.",
+      "picks": [
+        {
+          "app_id": "openscap",
+          "label": "Specified SCAP baseline",
+          "reason": "Evaluates machine-readable security policies and generates structured results.",
+          "tradeoff": "Applicable current content is required and upstream Windows support has been removed."
+        },
+        {
+          "app_id": "lynis",
+          "label": "Broad local assessment",
+          "reason": "Reviews many system configuration areas and records improvement findings.",
+          "tradeoff": "Recommendations still require interpretation for the system’s actual purpose."
+        },
+        {
+          "app_id": "aide",
+          "label": "File-integrity baseline",
+          "reason": "Compares selected filesystem metadata/content against a previously captured database.",
+          "tradeoff": "A trustworthy baseline and update procedure are necessary; it does not explain every change by itself."
+        },
+        {
+          "app_id": "linux-audit",
+          "label": "Recorded action history",
+          "reason": "Collects rule-selected events that can help attribute later changes.",
+          "tradeoff": "Rules, storage and lost-event monitoring must be configured deliberately."
+        }
+      ]
+    },
+    {
+      "id": "wave2-choose-openvpn-desktop-client",
+      "title": "Choose an OpenVPN desktop client",
+      "description": "All choices need a server or service. Compare OS support, simultaneous tunnels and configuration control.",
+      "picks": [
+        {
+          "app_id": "openvpn-connect",
+          "label": "Vendor-managed profile access",
+          "reason": "Imports profiles from compatible servers and provides a documented desktop client.",
+          "tradeoff": "Only one active server connection at a time; Linux uses a separate client."
+        },
+        {
+          "app_id": "tunnelblick",
+          "label": "Open-source macOS interface",
+          "reason": "Provides a no-charge GPL macOS frontend with bundled supporting binaries.",
+          "tradeoff": "Profile options must match the selected stable release and macOS networking behavior."
+        },
+        {
+          "app_id": "viscosity",
+          "label": "Advanced native connection control",
+          "reason": "Adds simultaneous tunnels, split DNS, routing and scriptable deployment.",
+          "tradeoff": "It is a paid client and advanced routing still requires network knowledge."
+        }
+      ]
+    },
+    {
+      "id": "wave2-choose-wireless-diagnostics",
+      "title": "Choose Wi-Fi inspection, site surveying or passive monitoring",
+      "description": "Match the measurement method to the question; network names alone do not establish physical coverage.",
+      "picks": [
+        {
+          "app_id": "wifi-explorer",
+          "label": "Nearby-channel and capability inspection",
+          "reason": "Shows channel overlaps, network details and signal history using a Mac adapter.",
+          "tradeoff": "Standard and Pro editions differ; it is not a full heatmap survey tool."
+        },
+        {
+          "app_id": "netspot",
+          "label": "Coverage surveys and planning",
+          "reason": "Builds licensed survey/heatmap/planning workflows from site measurements.",
+          "tradeoff": "Edition limits, commercial rights and measurement quality matter."
+        },
+        {
+          "app_id": "kismet",
+          "label": "Passive wireless monitoring",
+          "reason": "Collects observations from supported Wi-Fi/Bluetooth/RF sources into a web interface.",
+          "tradeoff": "Adapters and drivers dominate compatibility; Windows is a WSL/remote-capture workflow."
+        }
+      ]
+    },
+    {
+      "id": "wave2-choose-rgb-controller",
+      "title": "Choose cross-brand RGB control",
+      "description": "Check your devices first, then compare effect design, licensing and release maturity.",
+      "picks": [
+        {
+          "app_id": "openrgb",
+          "label": "Open cross-brand device control",
+          "reason": "Provides a common interface for supported RGB devices.",
+          "tradeoff": "Hardware support and access permissions must be verified for the exact device."
+        },
+        {
+          "app_id": "signalrgb",
+          "label": "Integrated lighting and paid content",
+          "reason": "Combines effects, reactive content and device controls with a free core.",
+          "tradeoff": "Linux is beta, standard use is personal/noncommercial, and Pro/content purchases have separate entitlements."
+        },
+        {
+          "app_id": "artemis-rgb",
+          "label": "Conditional layered effects",
+          "reason": "Offers plugins and data-driven profile layers for custom reactive lighting.",
+          "tradeoff": "PolyForm Noncommercial is source-available, and prerelease device support has uneven testing."
+        }
+      ]
+    },
+    {
+      "id": "wave2-choose-gpu-controls",
+      "title": "Choose GPU controls for your operating system",
+      "description": "Select by supported GPU/driver and control scope; no software guarantees a safe or faster tuning result.",
+      "picks": [
+        {
+          "app_id": "lact",
+          "label": "Linux GPU control comparison",
+          "reason": "Provides a current Linux-oriented alternative for supported GPU control workflows.",
+          "tradeoff": "Check exact GPU/driver features instead of assuming every control is available."
+        },
+        {
+          "app_id": "corectrl",
+          "label": "Existing Linux profile workflow",
+          "reason": "Applies hardware profiles per application on supported devices.",
+          "tradeoff": "Upstream is maintenance-only and does not plan new hardware support."
+        },
+        {
+          "app_id": "msi-afterburner",
+          "label": "Windows card monitoring and tuning",
+          "reason": "Combines monitoring, supported tuning controls and fan profiles.",
+          "tradeoff": "Capabilities vary by board/driver and stability must be assessed on the actual hardware."
+        }
+      ]
+    },
+    {
+      "id": "wave2-choose-usb-over-network",
+      "title": "Choose USB sharing for a remote host",
+      "description": "Choose by operating systems, device timing and licensing, then verify the actual peripheral workload.",
+      "picks": [
+        {
+          "app_id": "usbipd-win",
+          "label": "Windows USB host with supported clients",
+          "reason": "Shares Windows-attached USB devices through its documented USB/IP workflow.",
+          "tradeoff": "Client support and device/driver behavior must match the intended setup."
+        },
+        {
+          "app_id": "virtualhere",
+          "label": "Cross-platform licensed server",
+          "reason": "Provides desktop client/server packages and a free client.",
+          "tradeoff": "The paid server license is bound to hardware and cannot be transferred."
+        },
+        {
+          "app_id": "usb-network-gate",
+          "label": "Alternative cross-platform product",
+          "reason": "Provides remote USB sharing across its listed desktop platforms.",
+          "tradeoff": "Current free-homepage and purchase-page pricing conflict; Linux kernel compatibility is also unresolved."
+        }
+      ]
+    }
+  ]
+}

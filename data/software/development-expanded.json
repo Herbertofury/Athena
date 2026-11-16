@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "reviewed_at": "2026-11-14",
+  "reviewed_at": "2026-11-15",
   "applications": [
     {
       "id": "playwright",
@@ -8776,16 +8776,20 @@
         "Local model downloads",
         "Chat interface",
         "Local API server",
-        "Model configuration"
+        "Model configuration",
+        "Local PDF document chat",
+        "Full-context or retrieved document text"
       ],
       "strengths": [
         "A graphical setup path helps users run compatible models without assembling a serving stack."
       ],
       "limitations": [
-        "The app is proprietary and model terms are separate; hardware requirements include Apple Silicon for current macOS builds and sufficient memory."
+        "The app is proprietary and model terms are separate; hardware requirements include Apple Silicon for current macOS builds and sufficient memory.",
+        "Choosing cloud inference or web search sends requests outside the local workflow; the offline claim applies to local models and local document processing."
       ],
       "use_cases": [
-        "Try supported local language models through a desktop interface."
+        "Try supported local language models through a desktop interface.",
+        "Chat with PDF documents offline using a downloaded local model."
       ],
       "alternatives": [
         "KoboldCpp",
@@ -8799,7 +8803,7 @@
       ],
       "license": "Proprietary LM Studio app terms; bundled components and models retain separate licenses",
       "license_kind": "proprietary",
-      "pricing_model": "free",
+      "pricing_model": "freemium",
       "platform_notes": "Officially supports Windows, Linux and Apple Silicon macOS; check the system-requirements page for current CPU, OS and RAM requirements.",
       "official_url": "https://lmstudio.ai/",
       "download_url": "https://lmstudio.ai/download",
@@ -8816,9 +8820,12 @@
         "local-model-downloads",
         "chat-interface",
         "local-api-server",
-        "model-configuration"
+        "model-configuration",
+        "offline-pdf-chat",
+        "pdf",
+        "rag"
       ],
-      "pricing_notes": "Classification follows the cited official pricing or licensing explanation; optional services and third-party assets may have separate terms.",
+      "pricing_notes": "Local model use remains available on the free plan. Optional Bionic cloud-inference subscriptions and usage credits are paid; model licenses remain separate.",
       "maintenance": {
         "status": "unverified",
         "checked_at": "2026-11-14",
@@ -8874,6 +8881,55 @@
             "identity",
             "features",
             "downloads"
+          ]
+        },
+        {
+          "url": "https://lmstudio.ai/docs/app/offline",
+          "label": "Official offline operation and network-dependent actions",
+          "checked_at": "2026-11-15",
+          "supports": [
+            "features"
+          ]
+        },
+        {
+          "url": "https://lmstudio.ai/docs/app/basics/rag",
+          "label": "Official PDF attachments and retrieval behavior",
+          "checked_at": "2026-11-15",
+          "supports": [
+            "features"
+          ]
+        },
+        {
+          "url": "https://lmstudio.ai/app-privacy",
+          "label": "Current app privacy policy distinguishes local and cloud processing",
+          "checked_at": "2026-11-15",
+          "supports": [
+            "features"
+          ]
+        },
+        {
+          "url": "https://lmstudio.ai/pricing",
+          "label": "Current free local plan and optional paid cloud tiers",
+          "checked_at": "2026-11-15",
+          "supports": [
+            "pricing"
+          ]
+        }
+      ],
+      "capabilities": [
+        {
+          "id": "offline-pdf-chat",
+          "conditions": [
+            "Download a supported local model and its runtime before disconnecting.",
+            "Use local inference and document attachments; cloud models, web search and new downloads require connectivity."
+          ],
+          "limitations": [
+            "Long documents use retrieval of selected content; prompt detail and model context affect answer coverage."
+          ],
+          "source_urls": [
+            "https://lmstudio.ai/docs/app/offline",
+            "https://lmstudio.ai/docs/app/basics/rag",
+            "https://lmstudio.ai/app-privacy"
           ]
         }
       ]

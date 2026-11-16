@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "reviewed_at": "2026-11-15",
+  "recipes": [
+    {
+      "id": "chat-with-pdf-offline",
+      "title": "Chat with PDF documents offline",
+      "description": "Prepare models before disconnecting, choose local processing at every stage, and inspect cited passages. These documented configurations have not been installed or quality-benchmarked in this research pass.",
+      "picks": [
+        {
+          "app_id": "gpt4all",
+          "label": "Folder-based document collections",
+          "reason": "LocalDocs indexes local text snippets and exposes source references.",
+          "tradeoff": "Disable off-device embedding, use a local chat model and note the unverified maintenance status."
+        },
+        {
+          "app_id": "lm-studio",
+          "label": "Attach documents to a local chat",
+          "reason": "Supports PDF attachments with local processing and a documented offline workflow.",
+          "tradeoff": "Long files use retrieval; cloud features and model downloads are separate online operations."
+        },
+        {
+          "app_id": "anythingllm",
+          "label": "Configurable document workspaces",
+          "reason": "Combines PDF ingestion with selectable local models, embeddings and storage.",
+          "tradeoff": "All selected providers must stay local; first-use model downloads and context limits need preparation."
+        }
+      ]
+    },
+    {
+      "id": "reduce-steady-recording-noise",
+      "title": "Reduce steady noise in an audio recording",
+      "description": "Compare two documented noise-profile workflows for recorded material. Judge artifacts against the original recording; these entries do not establish live microphone suppression or a measured quality winner.",
+      "picks": [
+        {
+          "app_id": "audacity",
+          "label": "Focused free editing workflow",
+          "reason": "Provides a noise-profile effect for steady hum, hiss and similar backgrounds.",
+          "tradeoff": "Needs a noise-only sample and is unsuitable for many irregular noises."
+        },
+        {
+          "app_id": "reaper",
+          "label": "Inside an existing multitrack project",
+          "reason": "The included ReaFIR effect offers profile-based subtraction.",
+          "tradeoff": "Paid workstation licensing and effect setup are additional considerations."
+        }
+      ]
+    }
+  ]
+}

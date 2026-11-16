@@ -1,87 +1,105 @@
 {
-  "reviewed_at": "2026-11-14",
-  "meaning": "Research backlog, not a list of verified recommendations or a claim that the taxonomy is complete.",
+  "reviewed_at": "2026-11-16",
+  "meaning": "Research backlog informed by the integrated second expansion. These are remaining evidence and coverage tasks, not verified recommendations or a claim that the taxonomy is complete. Counts describe the reviewed snapshot; generated coverage and refresh reports remain authoritative.",
   "priorities": [
     {
-      "area": "Desktop communication and conferencing",
+      "area": "Complete evidence and lifecycle reviews",
       "tasks": [
-        "Private messaging and interoperable chat",
-        "Video meetings and screen sharing",
-        "Team communication and account boundaries"
+        "Resolve uncertain current licensing and distribution pricing",
+        "Check dated maintenance and successor projects",
+        "Verify current installer routes and supported host versions"
       ],
-      "next_evidence": "Compare desktop clients, protocol interoperability, retention controls, account requirements and free-plan limits. Existing email and remote-desktop coverage does not establish chat or meeting coverage."
+      "next_evidence": "The current catalog already includes communication, radio, bioinformatics, BIM/CAM, industrial control and business workflows. Use the generated refresh queue to select unresolved fields across these records. Recheck the exact license, release or platform document; a reachable homepage does not establish current maintenance, a free distribution, or compatibility."
     },
     {
-      "area": "Radio and signal workflows",
+      "area": "Strengthen existing single-application categories",
       "tasks": [
-        "Software-defined radio reception",
-        "Spectrum and antenna analysis",
-        "Amateur-radio logging and decoding"
+        "Compare additional candidates for cleanup, startup inventory and client-server backup",
+        "Deepen screen magnification, accessible reading, document question answering and data cleaning",
+        "Add peers for specialized scientific measurement and control tasks"
       ],
-      "next_evidence": "Verify receiver hardware, drivers, operating-system support and protocol capabilities separately; network packet tools are not substitutes for radio processing."
+      "next_evidence": "The integrated review has 102 single-application categories; 34 of the original 112 singleton categories gained alternatives. Use expansion-progress.json and the refresh queue for current totals and identities. Preserve the cleanup library, including unranked and excluded research; do not promote a candidate merely to increase a category count."
     },
     {
-      "area": "Bioinformatics and sequence analysis",
+      "area": "Installed workflow, accessibility and resource measurements",
       "tasks": [
-        "Sequence alignment and assembly",
-        "Genomic visualization",
-        "Reproducible molecular data analysis"
+        "Reproduce complete task workflows on supported operating systems",
+        "Measure startup, memory, storage and task completion with declared inputs",
+        "Exercise keyboard access, screen readers and recovery from failed operations"
       ],
-      "next_evidence": "Extend beyond the current imaging and molecular visualization records with documented formats, reproducibility and installation requirements."
+      "next_evidence": "Most recommendations are documentation-based. Establish public or licensed fixtures, pinned versions, equivalent outputs and reproducible environments before asserting lightweight, faster or more reliable choices. The existing grep/ripgrep experiment is scoped to its tested versions, workload and environment; it does not rank unrelated applications."
     },
     {
-      "area": "Building design and production manufacturing",
+      "area": "Communication account and interoperability boundaries",
       "tasks": [
-        "Building information modeling and IFC exchange",
-        "Building-energy simulation",
-        "Production CAM, nesting and machine-specific postprocessing"
+        "Compare messaging and conference workflows across desktop clients",
+        "Verify account, server and identity requirements",
+        "Test export, retention and free-plan limits"
       ],
-      "next_evidence": "Evaluate interoperability and complete licensing costs; existing CAD, simulation and electronics entries do not establish a complete BIM or manufacturing workflow."
+      "next_evidence": "Desktop chat, protocol clients, team communication and conferencing now have comparison sets. Next verify complete account-to-account workflows, supported interoperability and data portability. Client availability does not establish end-to-end encryption, retention guarantees or every hosted plan feature."
     },
     {
-      "area": "Specialist audio restoration and delivery",
+      "area": "Radio hardware and signal workflow validation",
       "tasks": [
-        "Dialogue restoration and source separation",
-        "Mastering and loudness compliance",
-        "Audio-forensics and damaged-recording repair"
+        "Match SDR receivers to supported hardware and drivers",
+        "Reproduce digital decoding and logging handoffs",
+        "Verify device programming, packet radio and satellite data formats"
       ],
-      "next_evidence": "Add representative licensed sample tests and documented plug-in/standalone compatibility. Existing DAW and synthesis coverage is broader than current restoration coverage."
+      "next_evidence": "SDR, amateur radio, RF analysis and satellite workflows now have sourced entries and guides. Compare hardware generations, firmware, driver requirements and operating-system packages; distinguish reception, offline signal analysis and any licensed transmission requirements. Follow documented end-of-life and successor-project notices."
     },
     {
-      "area": "Project, schedule and resource planning",
+      "area": "Reproducible bioinformatics and laboratory work",
       "tasks": [
-        "Gantt and dependency planning",
-        "Resource and capacity scheduling",
-        "Portfolio and project file interchange"
+        "Compare sequence analysis and phylogenetic workflows with known inputs",
+        "Check genomic visualization format limits and reproducible installation",
+        "Research laboratory information management and electronic lab notebooks"
       ],
-      "next_evidence": "Compare local and hosted project models, export/import limits, team licensing and offline behavior beyond simple task lists."
+      "next_evidence": "Sequence, alignment, phylogeny and genome visualization coverage is established in this expansion. Next use reference datasets and exact program versions to verify workflow compatibility. Dedicated laboratory record systems remain a research lead, with deployment, data portability and access-control evidence needed before inclusion."
     },
     {
-      "area": "Industrial robotics and control",
+      "area": "BIM, building simulation and manufacturing interchange",
       "tasks": [
-        "Robot simulation and motion planning",
-        "PLC programming and industrial protocols",
-        "Hardware-in-the-loop development"
+        "Compare IFC import/export and model review round trips",
+        "Validate building-energy and lighting model exchange",
+        "Test CAM postprocessors, nesting and CNC handoffs on safe fixtures"
       ],
-      "next_evidence": "Verify supported controllers, simulation fidelity, host requirements and deployment licensing. General electronics and application automation do not establish industrial control coverage."
+      "next_evidence": "BIM, building analysis, CAM, nesting and machine-control records now exist. Verify complete workflows and their edition, platform, machine and postprocessor constraints. A supported file extension does not prove a lossless round trip; a simulator does not establish a safe real-machine program."
     },
     {
-      "area": "Operational business software",
+      "area": "Audio quality, restoration and delivery comparisons",
       "tasks": [
-        "Inventory and purchasing",
-        "Desktop or self-hosted ERP and point of sale",
-        "Small-business workflow integration"
+        "Compare recorded dialogue restoration on licensed samples",
+        "Measure live microphone filtering with supported routing",
+        "Verify loudness delivery, plug-in formats and standalone availability"
       ],
-      "next_evidence": "Extend beyond personal accounting and general office tools with documented data portability, deployment requirements and business licensing. Existing accounting coverage includes some invoicing, but does not establish full ERP or inventory capability."
+      "next_evidence": "The catalog now distinguishes documented recorded-audio restoration from live input suppression and supplies conditional setup notes. Add controlled sample, latency and quality comparisons, retaining raw measurements and artifacts. Confirm edition-specific modules and the microphone, host, model and plug-in configuration used."
     },
     {
-      "area": "Evidence depth and thin comparison sets",
+      "area": "Industrial simulation and controller compatibility",
       "tasks": [
-        "Second and third candidates for single-tool categories",
-        "Measured lightweight and accessibility comparisons",
-        "Refresh unresolved licensing, pricing and maintenance fields"
+        "Compare robot simulation and offline programming workflows",
+        "Verify PLC languages, supported controllers and deployment terms",
+        "Research FPGA design and HDL simulation or verification"
       ],
-      "next_evidence": "Use the generated refresh queue and coverage report. Do not turn documentation review, download availability or popularity into a speed, security or reliability ranking."
+      "next_evidence": "Robot, PLC and factory-simulation comparison sets now exist. Verify model fidelity, controller coverage and simulation-to-deployment boundaries with documented fixtures and vendor requirements. FPGA/HDL workflows remain an underrepresented research direction; research their toolchain licensing and hardware dependencies separately."
+    },
+    {
+      "area": "Business deployment, planning and data portability",
+      "tasks": [
+        "Compare inventory, accounting, ERP, CRM and invoicing handoffs",
+        "Verify scheduling, resource planning and project interchange",
+        "Exercise self-hosted backup, restore, upgrade and export paths"
+      ],
+      "next_evidence": "Project planning and operational business software now have sourced records and guides. Next compare deployment effort, edition boundaries, team licensing, import/export completeness and recoverability. Local application pricing, hosted subscription terms and the cost of a full operational deployment are separate claims."
+    },
+    {
+      "area": "Scientific comparison depth and additional specialist work",
+      "tasks": [
+        "Add peers for groundwater, river hydraulics and stormwater workflows",
+        "Research mathematical optimization and constraint solvers",
+        "Research screenwriting, storyboarding and production scheduling"
+      ],
+      "next_evidence": "Scientific coverage now includes molecular dynamics, CFD/FEA, hydrology, astronomical capture and video measurement. Several model-specific categories still have one record. Compare like-for-like tasks and validated inputs rather than treating different scientific models as interchangeable. Optimization and production-planning leads require primary-source research before they become recommendations."
     }
   ]
 }
