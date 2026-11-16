@@ -359,3 +359,10 @@ hash checks do not make this safe with concurrent writers.
 
 ### Current-theme catalog search
 The native Asset Library filters catalog entries by name, shape and role. All whitespace-separated terms must match, case-insensitively. Search stays in the current theme, retains the instance limit, and does not change layouts, selection or history. It is session-only and clearing it restores the full current-theme catalog. Filtered-out stale buttons cannot add objects.
+
+### Session-only local backdrop fit
+The local PNG backdrop offers Stretch (source default), Contain (whole image),
+and Cover (cropped edges). Changing fit updates only an already explicitly routed
+image; it never routes a preview, allocates another image or writes authoring data.
+Preview remains aspect-preserving. Invalid fit values are rejected. Fit resets on
+module recreation, and does not imply persistent media or full Foundry parity.
