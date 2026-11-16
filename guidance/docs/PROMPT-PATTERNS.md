@@ -47,3 +47,23 @@ Choose State Machine Hunter for creator-follow lifecycle. Discover actual regist
 Compare the current prompt against one candidate on the same representative tasks, source revision, model/version, tools, budget and independent acceptance checks. Include failures and interruption cases. Freeze acceptance before trials; retain outputs, failures, task IDs, input/artifact hashes, configuration and reviewer findings. Run repeated trials where feasible and report sample size and variance. Measure correctness first, then latency and actual provider token/cost records. Unknown metrics remain unknown. Reject gains achieved by dropping requirements, weakening tests or unauthorized action. Use the separate token-evaluation tooling when integrated, rather than duplicating its gate.
 
 Promote only for the tested task family with linked receipts. No such trials have run for these six candidates. Re-evaluate after material model/tool/workflow changes. A future native prompt library must preserve source identity, checked-at date, changes, blocked/stale status and previous versions. A date in a document is not automatic monitoring. Keep AGENTS.md short; examples and evidence belong here.
+
+## Targeted refactoring prompts
+
+These owner-requested examples name the code smell and transformation instead of asking for generic cleanup. They are candidates, not permission for repository-wide churn. First inspect callers, tests, public contracts and scoped instructions at the actual revision; preserve concurrent changes. Separate behavior changes from structural refactoring.
+
+### Extract Function
+
+Inspect the selected long function and identify a cohesive responsibility whose extraction improves understanding or testability. Do not split merely to meet a line-count threshold. Record inputs, outputs, mutation, exceptions, side-effect order, captured variables, asynchronous cancellation and resource ownership. Add characterization tests first, then extract that responsibility with a meaningful name and explicit dependencies. Preserve caller behavior, error types/messages and ordering. Keep coupled lifecycle logic together when extraction would obscure ownership. Show the before/after evidence, not just fewer lines.
+
+### Consolidate genuine duplication
+
+Locate repeated implementations within the selected scope and compare their semantics and callers. Similar-looking code with different policies is not necessarily duplication. For genuinely shared behavior, define the smallest common contract, add caller-specific characterization tests, then introduce one implementation without boolean mode flags that hide divergent policies. Preserve distinct validation, normalization, authorization, ordering and error behavior. Leave deliberate differences separate and explain why. Test each caller plus boundary cases; do not claim a string-search result proves equivalence.
+
+### Rename unclear symbols
+
+Identify ambiguous names in the selected code and infer the actual role from implementation, callers and domain terminology. Use language-aware references where available. Rename to convey that role without changing behavior. Check public exports, reflection, dynamic imports, configuration, serialized keys, database fields, routes and external consumers. An internal rename must not silently rename a wire/storage format. Preserve compatibility adapters where needed; a public API migration requires explicit scope and acceptance. Run callers, persistence round-trips and affected integration checks; show unresolved dynamic references rather than declaring a blind text replacement complete.
+
+### Executable teaching checks
+
+Run `python3 -m unittest discover -s guidance/tests -p 'test_refactoring_examples.py' -v`. The small original fixtures in `guidance/examples/refactoring.py` demonstrate extraction, shared behavior with intentionally different surrounding policies, and internal renaming that preserves a serialized key. Tests compare pre/post results, exceptions and input mutation, and include negative controls showing that unifying distinct policies or renaming the serialized key would break the contract. These synthetic tests do not prove a model follows these prompts or certify production refactors. Apply real task-specific tests at the actual changed revision.

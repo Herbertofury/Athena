@@ -31,3 +31,7 @@ The screenshot establishes no measured quality, token, billing, latency or relia
 - [ ] Verify publication and exact-head CI separately from local checks.
 
 External tracking belongs under Athena #269 and Noxviola Assistant-Backlog. The parent coordinator owns that update to avoid concurrent writes. This document records the task immediately; it is not evidence the external tracker was updated.
+
+## Follow-up: explicit refactoring prompts
+
+Owner requested concrete examples for Extract Function, duplicate consolidation and meaningful renaming. Recorded before implementation. Scope: reusable task templates plus executable teaching fixtures, not an unsolicited refactor of Athena production code. Acceptance: behavior-preservation examples cover errors, input mutation, output compatibility and semantic differences; keep ambiguous duplication separate and avoid arbitrary length thresholds. Comparative agent efficacy and production refactoring remain unmeasured.
