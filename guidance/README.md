@@ -133,3 +133,7 @@ until rights and sensitive-data review; default stdout reports counts/hash only.
 Git LFS content, submodule repositories, working changes, reflogs, unreachable
 objects, remote freshness, wiki, release assets and consumer dependencies remain
 separate gates. This improves history recovery, **not deletion readiness**.
+
+## Athena-local agent corrections
+
+[Root agent instructions](../AGENTS.md), the [correction workflow](docs/AGENT-CORRECTION.md), and the [starter verification map](registry/verification-map.json) connect existing standards to executable checks. The map is validated by the guidance test suite; it records no execution status and does not change the pinned shared release or consumer instructions.
