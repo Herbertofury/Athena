@@ -4,6 +4,7 @@ pub mod athena_assets;
 pub mod collection_failure;
 pub mod learning_history;
 pub mod migration_readiness;
+mod snapshot_admission;
 mod storage_connection;
 use serde::{Deserialize, Serialize};
 

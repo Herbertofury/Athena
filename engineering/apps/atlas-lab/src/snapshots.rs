@@ -35,7 +35,10 @@ fn write_stage<T>(
     }
     result
 }
-pub struct SnapshotStore(Connection);
+pub struct SnapshotStore(
+    Connection,
+    std::sync::Arc<crate::snapshot_admission::Admission>,
+);
 #[derive(Debug, serde::Serialize)]
 pub struct ProjectHistoryEntry {
     pub generation: String,
@@ -52,6 +55,8 @@ impl SnapshotStore {
     pub fn open(path: &Path) -> rusqlite::Result<Self> {
         let c = Connection::open(path)?;
         crate::storage_connection::configure(&c)?;
+        let admission = crate::snapshot_admission::for_connection(&c)?;
+        let permit = admission.enter()?;
         c.execute_batch("CREATE TABLE IF NOT EXISTS snapshots (
               generation INTEGER PRIMARY KEY, provider TEXT NOT NULL,
               canonical_id TEXT NOT NULL, observed_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -63,9 +68,11 @@ impl SnapshotStore {
               generation INTEGER REFERENCES snapshots(generation),
               recorded_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
               CHECK((outcome='success' AND generation IS NOT NULL) OR (outcome='failure' AND generation IS NULL)));")?;
-        Ok(Self(c))
+        drop(permit);
+        Ok(Self(c, admission))
     }
     fn prepare_upstream_tables(&self) -> rusqlite::Result<()> {
+        let _permit = self.1.enter()?;
         self.0.execute_batch("CREATE TABLE IF NOT EXISTS upstream_budget (id INTEGER PRIMARY KEY CHECK(id=1), window_start INTEGER NOT NULL, attempts INTEGER NOT NULL, next_allowed INTEGER NOT NULL, limited_count INTEGER NOT NULL, pending INTEGER NOT NULL CHECK(pending IN(0,1)));
         INSERT OR IGNORE INTO upstream_budget VALUES(1,0,0,0,0,0);
         CREATE TABLE IF NOT EXISTS upstream_receipts (generation INTEGER PRIMARY KEY REFERENCES snapshots(generation), payload TEXT NOT NULL);")
@@ -93,6 +100,7 @@ impl SnapshotStore {
             return Err("Invalid upstream clock".into());
         }
         self.prepare_upstream_tables()?;
+        let _permit = self.1.enter()?;
         let tx = self
             .0
             .transaction_with_behavior(TransactionBehavior::Immediate)?;
@@ -125,6 +133,7 @@ impl SnapshotStore {
         if meta.next_allowed_epoch < 0 {
             return Err("Invalid upstream cooldown".into());
         }
+        let _permit = self.1.enter()?;
         let count=self.0.execute("UPDATE upstream_budget SET next_allowed=max(next_allowed,?1),limited_count=CASE WHEN ?2 THEN min(limited_count+1,10) WHEN ?3=200 THEN 0 ELSE limited_count END,pending=0 WHERE id=1 AND pending=1",params![meta.next_allowed_epoch,meta.rate_limited,meta.status])?;
         if count != 1 {
             return Err("No upstream request reservation".into());
@@ -155,6 +164,7 @@ impl SnapshotStore {
         }
         let record = crate::upstream_reviews::parse_new_record(source, bytes)?;
         self.prepare_upstream_tables()?;
+        let _permit = self.1.enter()?;
         let tx = self
             .0
             .transaction_with_behavior(TransactionBehavior::Immediate)?;
@@ -281,6 +291,7 @@ impl SnapshotStore {
     ) -> Result<i64, Box<dyn std::error::Error>> {
         // Immutable envelope and exact request binding remain unchanged.
         record.bind_request(requested)?;
+        let _permit = write_stage(diagnostics, "writer_admission", || self.1.enter())?;
         let tx = write_stage(diagnostics, "begin", || self.0.transaction())?;
         write_stage(diagnostics, "payload_insert", || {
             tx.execute("INSERT INTO snapshots(provider,canonical_id,payload) VALUES('modrinth-project-raw',?1,?2)",params![record.project().id,record.raw_json()])
@@ -430,6 +441,7 @@ impl SnapshotStore {
         // Enforce the same validation for callers as for network responses.
         crate::modrinth::parse_requested_project(&body, requested_id)?;
         let body = String::from_utf8(body)?;
+        let _permit = self.1.enter()?;
         let tx = self.0.transaction()?;
         tx.execute(
             "INSERT INTO snapshots(provider,canonical_id,payload) VALUES('modrinth',?1,?2)",
@@ -452,6 +464,7 @@ impl SnapshotStore {
         if validated.missing_ids != batch.missing_ids {
             return Err("Inconsistent missing project identities".into());
         }
+        let _permit = self.1.enter()?;
         let tx = self.0.transaction()?;
         let mut generations = Vec::new();
         for project in validated.projects {
@@ -478,6 +491,7 @@ impl SnapshotStore {
         ids: &[String],
     ) -> Result<(), Box<dyn std::error::Error>> {
         crate::modrinth::projects_url(ids)?;
+        let _permit = self.1.enter()?;
         let tx = self.0.transaction()?;
         for id in ids {
             tx.execute(
@@ -489,6 +503,7 @@ impl SnapshotStore {
         Ok(())
     }
     pub fn record_failure(&self, requested_id: &str) -> rusqlite::Result<()> {
+        let _permit = self.1.enter()?;
         // Intentionally do not persist error URLs, response bodies or credentials.
         self.0.execute(
             "INSERT INTO collection_attempts(requested_id,outcome) VALUES(?1,'failure')",
@@ -528,6 +543,7 @@ impl SnapshotStore {
         {
             return Err("Inconsistent version batch identities or missing state".into());
         }
+        let _permit = self.1.enter()?;
         let tx = self.0.transaction()?;
         let mut generations = Vec::new();
         for version in checked.versions {
@@ -551,6 +567,7 @@ impl SnapshotStore {
         ids: &[String],
     ) -> Result<(), Box<dyn std::error::Error>> {
         crate::modrinth_versions::versions_url(ids)?;
+        let _permit = self.1.enter()?;
         let tx = self.0.transaction()?;
         for id in ids {
             tx.execute(

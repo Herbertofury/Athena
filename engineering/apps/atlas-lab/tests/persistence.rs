@@ -365,7 +365,7 @@ fn held_writer_reports_busy_without_partial_snapshot_then_explicit_call_succeeds
         assert!(result.is_ok());
         assert!(report.autocommit_after);
         assert!(report.stages.iter().all(|stage| stage.succeeded));
-        assert_eq!(report.stages.len(), 4);
+        assert_eq!(report.stages.len(), 5);
         assert_eq!(store.attempts().unwrap(), 1);
     }
 }
