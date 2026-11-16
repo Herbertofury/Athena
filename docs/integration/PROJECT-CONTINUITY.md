@@ -25,7 +25,7 @@ No root LICENSE was found in that source; do not infer third-party reuse rights.
 | Capability | Athena status / remaining gate |
 | --- | --- |
 | Project decisions/actions with provenance and pin/ignore history | Native manual-entry slice implemented; no source dataset imported |
-| Immutable output revisions | Native note revision history; complete artifact/media revision parity pending |
+| Immutable output revisions | Native note revision history and bounded opaque local file journal; rich artifact/media reader parity pending |
 | Full-text indexing, project brain, continuity export | Native substring search and JSON export; indexed search and bounded synthesis pending; bounded additive local backup import implemented |
 | Mounted chat capture across provider adapters | Not ported; maintain browser-scoped, explicit consent and private-data boundaries |
 | Output Vault, artifact files and rich reader | Not ported; reconcile media/files with existing Athena workflows |
@@ -110,3 +110,46 @@ Local contract/DOM tests pass using synthetic data. Local Chromium launch was
 blocked by singleton socket EPERM, not a test pass. Browser acceptance and exact
 served manifest identity must be checked in CI before delivery. No owner backup,
 installed extension, provider session or source retirement was accepted here.
+
+
+## Local opaque artifact revision journal
+
+The native Continuity workspace now offers an explicitly opened browser-local
+artifact journal. Select a file and choose either a new artifact or an existing
+artifact before retaining a new immutable revision. Original binary bytes, name,
+MIME label, timestamp, sequence and SHA-256 are retained in one IndexedDB transaction.
+Identical latest bytes/name/MIME are a no-op. Parallel connections append against
+the latest committed sequence rather than replacing another revision.
+
+This newly authored shared storage module is not a second Modding-Knowledge database:
+it holds private operator-selected bytes, not shared public knowledge. Existing
+Foundry image/video adapters are session renderers; the Engineering snapshot archive
+accepts fixed public provider records. Neither was an arbitrary local-file journal.
+No source extension code, browser capture, provider credentials or sessions were copied.
+
+Files remain opaque: no HTML/SVG execution, preview, image decode or autoplay. Each
+explicit download rechecks its exact bytes against the stored hash and uses an
+application/octet-stream Blob. Four prepared download links are admitted at once,
+including pending reads. Finish downloads before explicitly releasing their links;
+disposal releases all session links. This limit does not remove stored revisions.
+
+Admission budgets are 8 MiB per nonempty file, 64 MiB of distinct bytes and 100
+revisions. Browser quota can be lower. Failures abort the complete transaction,
+including any new blob, preserving earlier committed revisions. No deletion,
+eviction, truncation or automatic cleanup of user data is implemented. Hashing
+and bounded cursor reads are not a measured latency or peak-memory guarantee.
+
+Storage is origin-scoped IndexedDB, **not an encrypted vault**, tamper-proof record,
+owner-authenticity proof, remote backup or native Rust/SQLite store. Same-origin
+scripts and browser-profile access can read it; clearing/evicting browser storage
+can lose it. SHA-256 verifies consistency of bytes, not provenance or metadata
+signatures. The existing note JSON export does **not** contain artifact bytes;
+keep independent downloaded copies of every revision you need before clearing data.
+The journal remains accessible even if unrelated note JSON cannot be opened.
+
+Local UI/hash tests and a synthetic fake-indexeddb transaction rehearsal passed;
+that rehearsal is not actual browser acceptance. The hosted browser test exercises
+real IndexedDB/reload/download, concurrent appends, injected quota rollback/no orphan
+blobs, corruption refusal, 100-revision/64-MiB admission, and hostile HTML as inert
+bytes. Require that exact candidate's hosted tests before delivery. None of this
+certifies installed-provider capture, user-data migration or source retirement.
