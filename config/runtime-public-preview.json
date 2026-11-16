@@ -4,7 +4,7 @@
   "files": [
     {
       "path": "app.js",
-      "sha256": "4973e4e6ae338662a5a36fcd2db700cd35721ba18939d694dc9178635f580ced"
+      "sha256": "bb7162c6ba6cfc714ba42e05a25cd73eb1a1e6f219f57e6519757ae8b62fd6aa"
     },
     {
       "path": "assets/athena-fox-owl-original.png",
@@ -20,7 +20,7 @@
     },
     {
       "path": "index.html",
-      "sha256": "b95597d554e463d1f243ecc59f4541a5bd0d79b9bbf1b2d4b364c245f49979c6"
+      "sha256": "c58c72ca080dd1e39d94c1ac107eb8c8e27349d8c6eddce681474f728df73f83"
     },
     {
       "path": "native-store-bootstrap.js",
@@ -37,6 +37,18 @@
     {
       "path": "research/windows-utilities-2026-11-14/table.js",
       "sha256": "c7bbf00e0f9f71fa168c5e18044a44cc59ea5d224b60ec41d926b917e1eb2977"
+    },
+    {
+      "path": "shared/artifact-store.mjs",
+      "sha256": "83f6f50e0c80df217703717e089223cd2e80143075526a4bf81ce167b174e698"
+    },
+    {
+      "path": "simulations.css",
+      "sha256": "9117fdf86cadb8078c3a57e460465552508d62c5a906a04e28e2bfaa4c4aca74"
+    },
+    {
+      "path": "simulations.js",
+      "sha256": "daadc5baf6929eb01c2a217f3b217a08ead9681e89a54145725d07e3b3a3b2b7"
     },
     {
       "path": "styles.css",
@@ -69,6 +81,10 @@
     {
       "path": "workspace-host.js",
       "sha256": "8a14dec17d4d816de53d325a94ee0dd00ac0bc8a0a26a756af58998173157cdb"
+    },
+    {
+      "path": "workspaces/continuity/artifacts.mjs",
+      "sha256": "6424ef812fbd1db7fe5b4f0344fa894e20d1db5f625df7b931a28ceab6f3f641"
     },
     {
       "path": "workspaces/continuity/context.mjs",
@@ -485,14 +501,6 @@
     {
       "path": "workspaces/software/style.css",
       "sha256": "9add15b17765aabe8dc14420afa7ec4fd9d0098f244413a30c74cbec1693a8b2"
-    },
-    {
-      "path": "shared/artifact-store.mjs",
-      "sha256": "83f6f50e0c80df217703717e089223cd2e80143075526a4bf81ce167b174e698"
-    },
-    {
-      "path": "workspaces/continuity/artifacts.mjs",
-      "sha256": "6424ef812fbd1db7fe5b4f0344fa894e20d1db5f625df7b931a28ceab6f3f641"
     }
   ]
 }
