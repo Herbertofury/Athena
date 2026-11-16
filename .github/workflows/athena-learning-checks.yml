@@ -34,6 +34,8 @@ jobs:
           node scripts/test_continuity_artifacts_browser.cjs
       - name: Verify native guidance reader and reference exports
         run: node scripts/test_guidance_browser.cjs
+      - name: Verify safe browser-only training missions
+        run: node scripts/test_simulations_browser.cjs
       - name: Test unified public app in Chromium
         run: npm run test:browser
       - uses: actions/upload-artifact@v4
@@ -42,5 +44,6 @@ jobs:
           name: athena-browser-evidence
           path: browser-results
           if-no-files-found: ignore
+
 
 
