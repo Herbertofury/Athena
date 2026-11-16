@@ -356,3 +356,6 @@ choose the new path explicitly when launching. Quiescence assertions and sampled
 hash checks do not make this safe with concurrent writers.
 
 [Upgrade-copy evidence and scope](../../research/portable-upgrade-copy-2026-11-15/README.md)
+
+### Current-theme catalog search
+The native Asset Library filters catalog entries by name, shape and role. All whitespace-separated terms must match, case-insensitively. Search stays in the current theme, retains the instance limit, and does not change layouts, selection or history. It is session-only and clearing it restores the full current-theme catalog. Filtered-out stale buttons cannot add objects.
