@@ -34,9 +34,10 @@ const {chromium}=require('playwright');
   // At the lower-right collision boundary, keyboard movement must remain bounded using the actual authored form dimensions.
   await actor.press('ArrowRight');await actor.press('ArrowDown');assert(await actor.evaluate(el=>{const a=el.getBoundingClientRect(),s=el.parentElement.getBoundingClientRect();return a.right<=s.right+1&&a.bottom<=s.bottom+1}));
   await page.locator('[data-ecology-motion]').check();const dragBox=await actor.boundingBox();await page.mouse.move(dragBox.x+dragBox.width/2,dragBox.y+dragBox.height/2);await page.mouse.down();await page.mouse.move(dragBox.x+dragBox.width/2+35,dragBox.y+dragBox.height/2+25,{steps:3});await page.mouse.up();
-  for(let i=0;i<12;i++){await page.waitForTimeout(16);assert(await actor.evaluate(el=>{const a=el.getBoundingClientRect(),s=el.parentElement.getBoundingClientRect();return a.left>=s.left-1&&a.top>=s.top-1&&a.right<=s.right+1&&a.bottom<=s.bottom+1}), 'rotating motion form crossed stage boundary')}
+  const motionPositions=new Set();for(let i=0;i<12;i++){await page.waitForTimeout(16);motionPositions.add(await actor.evaluate(el=>el.style.transform));assert(await actor.evaluate(el=>{const a=el.getBoundingClientRect(),s=el.parentElement.getBoundingClientRect();return a.left>=s.left-1&&a.top>=s.top-1&&a.right<=s.right+1&&a.bottom<=s.bottom+1}), 'rotating motion form crossed stage boundary')}
+  assert(motionPositions.size>1,'post-release throw must actually animate, not pass as stationary');
   await page.setViewportSize({width:360,height:700});await page.waitForTimeout(100);assert(await actor.evaluate(el=>{const a=el.getBoundingClientRect(),s=el.parentElement.getBoundingClientRect();return a.width<=110&&a.right<=s.right+1&&a.bottom<=s.bottom+1}));
   await page.waitForTimeout(100);assert.deepEqual(outside,[]);await page.click('[data-ecology-close]');assert.equal(await actor.count(),0);
-  console.log(JSON.stringify({actualChromium:true,before,shapes,keyboardMovement:true,inputUnchanged:true,closeClean:true,outsideRequests:outside.length}));
+  console.log(JSON.stringify({actualChromium:true,before,shapes,keyboardMovement:true,inputUnchanged:true,closeClean:true,motionPositions:motionPositions.size,outsideRequests:outside.length}));
  }finally{if(browser)await browser.close();server.close()}
 })().catch(e=>{console.error(e);process.exitCode=1});
