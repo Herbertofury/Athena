@@ -21,6 +21,8 @@ jobs:
       - run: npm ci --ignore-scripts
       - run: npm run build
       - run: npm test
+      - name: Test isolated read-only storage experiment
+        run: node --test experiments/storage-observatory/*.test.mjs
       - name: Generated curriculum is current
         run: git diff --exit-code -- src dist/catalog.js docs/certificates docs/shared docs/paths docs/README.md wiki
       - name: Install browser for actual runtime checks
