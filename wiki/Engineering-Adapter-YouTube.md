@@ -27,8 +27,15 @@ Earlier tests reached player-ready but remained buffering. The v10 public test r
 
 The single-watch-video workbench binds source, canonical card, player and thumbnail video IDs. Nine generated mismatches fail while retained fields remain unchanged. Channels, playlists, Shorts source routes and multi-video collection schemas remain outside this contract. URL agreement does not establish ownership or complete collection.
 
-[Retained before/after, raw public playback receipt and exact implementation verification](https://github.com/Herbertofury/Engineering-Atlas/tree/0cca1cca404351a0680a0914937eb7e6f37ce969/experiments/youtube-identity-lab). All nine served assets matched v10. All five cards, 19 gallery entries and 19 video entries remain. 22 of 23 previews decoded; the failed thumbnail and delayed playback remain recorded. Pause was confirmed and reload cleanup left zero players. Autoplay remains off. No playback-speed improvement is attributed to the identity repair.
+[Retained before/after, raw public playback receipt and exact implementation verification](https://github.com/Herbertofury/Athena/tree/d1d6d998ba38d2fcedd140c48e3c5d21e132f671/engineering/experiments/youtube-identity-lab). All nine served assets matched v10. All five cards, 19 gallery entries and 19 video entries remain. 22 of 23 previews decoded; the failed thumbnail and delayed playback remain recorded. Pause was confirmed and reload cleanup left zero players. Autoplay remains off. No playback-speed improvement is attributed to the identity repair.
 
 ## October 28 research expansion
 
 [Current platform-family research](https://github.com/Herbertofury/Athena/wiki/Engineering-Social-and-Publishing-Adapters) adds author/avatar attribution, full body/media/files, follow/import distinctions and current interface limits. [Coverage catalog](https://github.com/Herbertofury/Athena/wiki/Engineering-Site-Adapter-Coverage) and [authenticated fixtures](https://github.com/Herbertofury/Athena/wiki/Engineering-Adapter-Login-and-Authenticated-Research) describe the remaining work. This update preserves the evidence status above; it does not broaden an earlier narrow success or erase a failure.
+
+
+## Preserved evidence link provenance
+
+The links above now use content-identical Athena copies, verified by Git blob/tree identity on 2026-11-15. Original revision citations remain below as provenance, not runtime dependencies. This does not certify source-repository deletion readiness. Other historical links on this page remain unchanged where exact replacement was not verified.
+
+- Original: `https://github.com/Herbertofury/Engineering-Atlas/tree/0cca1cca404351a0680a0914937eb7e6f37ce969/experiments/youtube-identity-lab`; identical tree object: `3a7f8b8475ce2c79c711ca5c1a0686d09a4e71ad`.

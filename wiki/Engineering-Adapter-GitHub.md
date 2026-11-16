@@ -3,7 +3,7 @@
 
 # GitHub · fixed public source observations
 
-Reviewed October 27, 2026. [Adapter directory](https://github.com/Herbertofury/Athena/wiki/Engineering-Site-Adapters) · [Executable evidence](https://github.com/Herbertofury/Engineering-Atlas/tree/50a32d09767c0ba01d136906d6ae6929435f80c4/experiments/upstream-review-lab)
+Reviewed October 27, 2026. [Adapter directory](https://github.com/Herbertofury/Athena/wiki/Engineering-Site-Adapters) · [Executable evidence](https://github.com/Herbertofury/Athena/tree/d1d6d998ba38d2fcedd140c48e3c5d21e132f671/engineering/experiments/upstream-review-lab)
 
 ## Coverage, not a blanket support claim
 
@@ -37,3 +37,10 @@ Complete public JSON remains local with append-only application generations. Pub
 ## October 28 research expansion
 
 [Current platform-family research](https://github.com/Herbertofury/Athena/wiki/Engineering-Social-and-Publishing-Adapters) adds author/avatar attribution, full body/media/files, follow/import distinctions and current interface limits. [Coverage catalog](https://github.com/Herbertofury/Athena/wiki/Engineering-Site-Adapter-Coverage) and [authenticated fixtures](https://github.com/Herbertofury/Athena/wiki/Engineering-Adapter-Login-and-Authenticated-Research) describe the remaining work. This update preserves the evidence status above; it does not broaden an earlier narrow success or erase a failure.
+
+
+## Preserved evidence link provenance
+
+The links above now use content-identical Athena copies, verified by Git blob/tree identity on 2026-11-15. Original revision citations remain below as provenance, not runtime dependencies. This does not certify source-repository deletion readiness. Other historical links on this page remain unchanged where exact replacement was not verified.
+
+- Original: `https://github.com/Herbertofury/Engineering-Atlas/tree/50a32d09767c0ba01d136906d6ae6929435f80c4/experiments/upstream-review-lab`; identical tree object: `4e270e492dbcfa601fa1fff7c184939b1ff903f4`.
