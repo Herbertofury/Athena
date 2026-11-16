@@ -44,3 +44,26 @@ No fleet writes, source deletion, archive/visibility changes, new credentials, g
 ## Fresh two-consumer inventory
 
 The [Bloom-and-Boom / Modhunter review](../../guidance/evidence/bloom-modhunter-retirement-review-2026-11-15.md) and [sanitized receipt](../../guidance/evidence/bloom-modhunter-consumer-audit-2026-11-15.json) verify two additional public main snapshots. Both retain intact 16-file Agent-Foundry pins; read-only Athena transition proposals are conflict-free, not applied or behaviorally accepted. Local guidance routing, historical skill/CI references and project-owned skills are classified separately. No consumer was changed and no runtime failure is inferred from a legacy URL. Fleet, skill propagation, history and retirement gates remain open.
+
+## Reviewed Skill rollback
+
+`guidance/tools/skill_rollback.py` restores a selected committed Skill-sync
+transaction without deleting the displaced install or its source. First run
+`python guidance/tools/skill_rollback.py plan --recovery PATH`, review the private
+plan, then use `apply --recovery PATH --review-sha256 DIGEST`. Updates restore the
+exact retained previous files and marker; newly created installs move out of
+active discovery into retained recovery. Local edits, changed backups, occupied
+recovery destinations, stale reviews and invalid paths are refused. An interrupted
+rollback records an unresolved state and blocks further sync; preserve all copies
+and inspect, rather than retry blindly. Use trusted quiescent local directories.
+This is not crash/power-loss atomicity, client compatibility acceptance, automatic
+fleet migration, or a source-retirement certificate.
+
+The [eight-Skill rollback receipt](../../guidance/evidence/skill-rollback-acceptance-2026-11-16.json)
+records 420 real staged payload files: create, controlled inert update, restore
+exact previous file/marker bytes, then undo initial installation while retaining
+both generations. Source staging remained unchanged. Reproduce with
+`python guidance/tools/accept_skill_rollback.py --source SKILL_DIRECTORY --output-parent EXISTING_PRIVATE_DIRECTORY`
+(repeat `--source` for each Skill). Trials remain in a new non-client directory;
+no Skill scripts execute. This verifies byte preservation on Linux, not Windows,
+installed-client behavior, source publication, or all Skill capabilities.
