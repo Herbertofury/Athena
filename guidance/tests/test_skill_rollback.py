@@ -100,3 +100,14 @@ class SkillRollbackTests(unittest.TestCase):
         self.assertFalse(result['clientInstalled'])
         self.assertFalse(result['sourceCodeExecuted'])
         self.assertFalse(result['retirementReady'])
+
+    def test_acceptance_refuses_output_inside_source_without_writes(self):
+        from accept_skill_rollback import run, snapshot
+        nested = self.source / 'nested-output'
+        nested.mkdir()
+        before = snapshot(self.source)
+        directories = sorted(str(p) for p in self.source.rglob('*'))
+        for output in (self.source, nested):
+            with self.assertRaises(ValueError): run([self.source], output)
+            self.assertEqual(snapshot(self.source), before)
+            self.assertEqual(sorted(str(p) for p in self.source.rglob('*')), directories)

@@ -20,6 +20,9 @@ def snapshot(root):
 
 def run(sources, output_parent):
     sources = [safe(p) for p in sources]
+    output_parent = safe(output_parent)
+    if any(output_parent == source or output_parent.is_relative_to(source) for source in sources):
+        raise ValueError('trial output must be outside every selected source')
     # Preflight every input before any copies. No source code is executed.
     before = {str(p): tree(p)[1] for p in sources}
     trial = Path(tempfile.mkdtemp(prefix='athena-rollback-trial-', dir=safe(output_parent)))
