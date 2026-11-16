@@ -12,6 +12,90 @@ const catalog = JSON.parse(fs.readFileSync('dist/workspaces/software/catalog.jso
 const model = import('../src/software/model.mjs');
 const workspace = import('../src/software/index.mjs');
 
+test('offline PDF chat uses documented configurations and retains qualifiers', async () => {
+  const {indexCatalog, queryCatalog, parseState} = await model;
+  const index = indexCatalog(catalog), find = q => queryCatalog(index, {...parseState(), q}, catalog);
+  for (const q of ['chat with PDF offline', 'ask questions about local PDF documents']) {
+    const rows = find(q);
+    for (const id of ['gpt4all', 'anythingllm', 'lm-studio']) assert.ok(rows.some(a => a.id === id), q + ': ' + id);
+    assert.ok(rows.every(a => a.capabilities.some(c => c.id === 'offline-pdf-chat')));
+  }
+  assert.deepEqual(find('chat with PDF offline unsupported-fixture-format'), []);
+  assert.ok(find('chat with PDF offline Linux').every(a => a.platforms.includes('Linux')));
+  const withoutEvidence = {...catalog, applications: catalog.applications.map(a => ({...a, capabilities: []}))};
+  assert.deepEqual(queryCatalog(indexCatalog(withoutEvidence), {...parseState(), q: 'chat with PDF offline'}, withoutEvidence), [], 'Local/offline words alone do not establish end-to-end offline support');
+});
+
+test('recorded noise reduction is distinct from image denoising and live input', async () => {
+  const {indexCatalog, queryCatalog, parseState} = await model;
+  const index = indexCatalog(catalog), find = q => queryCatalog(index, {...parseState(), q}, catalog);
+  for (const q of ['remove background noise', 'reduce noise from recorded audio']) {
+    const rows = find(q);
+    assert.ok(rows.some(a => a.id === 'audacity'));
+    assert.ok(rows.some(a => a.id === 'reaper'));
+    assert.ok(rows.every(a => a.capabilities.some(c => c.id === 'recorded-audio-noise-reduction')));
+  }
+  assert.equal(find('remove background noise from live microphone').some(a => ['audacity', 'reaper'].includes(a.id)), false);
+  assert.equal(find('remove image noise').some(a => ['audacity', 'reaper'].includes(a.id)), false);
+  assert.deepEqual(find('remove background noise unsupported-fixture-format'), []);
+});
+
+test('DOM: task conditions and scoped measurements are visible with their own evidence', async t => {
+  const fixture = await domFixture(t, '#software?q=GPT4All');
+  fixture.click(fixture.root.querySelector('[data-app-id="gpt4all"] .primary'));
+  const task = fixture.root.querySelector('.documented-capabilities');
+  assert.match(task.textContent, /Required setup/);
+  assert.match(task.textContent, /Keep Use Nomic Embed API off/);
+  assert.ok(task.querySelector('a[href="https://docs.gpt4all.io/gpt4all_desktop/settings.html"]'));
+  fixture.click(fixture.root.querySelector('[data-close="detail-dialog"]'));
+  fixture.instance.setRoute('#software?q=ripgrep');
+  fixture.click(fixture.root.querySelector('[data-app-id="ripgrep"] .primary'));
+  const measurement = fixture.root.querySelector('.scoped-measurements');
+  assert.match(measurement.textContent, /dense-output timings overlapped/);
+  assert.equal(measurement.querySelectorAll('a').length, 3);
+  assert.ok(measurement.querySelector('a[href$="search-benchmark.json"]'));
+});
+
+test('DOM: matching decision guides lead from search results into a constrained comparison', async t => {
+  const fixture = await domFixture(t, '#software?q=chat+with+PDF+offline&platform=Linux');
+  const suggestion = [...fixture.root.querySelectorAll('#suggested-guides button')].find(b => b.textContent.startsWith('Chat with PDF documents offline'));
+  assert.ok(suggestion);
+  fixture.click(suggestion);
+  assert.equal(fixture.root.getElementById('task').value, 'chat-with-pdf-offline');
+  assert.equal(fixture.root.getElementById('platform').value, 'Linux');
+  assert.equal(fixture.root.getElementById('suggested-guides').hidden, true);
+  assert.match(fixture.root.getElementById('guide').textContent, /Prepare models before disconnecting/);
+  assert.ok([...fixture.root.querySelectorAll('.software-card')].every(n => catalog.applications.find(a => a.id === n.dataset.appId).platforms.includes('Linux')));
+});
+
+test('decision guide discovery searches tasks and keeps unavailable choices out of its counts', async () => {
+  const {queryGuides} = await model;
+  const before = JSON.stringify(catalog);
+  assert.ok(queryGuides(catalog, 'offline PDF').some(item => item.recipe.id === 'chat-with-pdf-offline'));
+  const onlyGpt4all = queryGuides(catalog, 'offline PDF', new Set(['gpt4all']));
+  assert.ok(onlyGpt4all.some(item => item.recipe.id === 'chat-with-pdf-offline' && item.available === 1));
+  assert.deepEqual(queryGuides(catalog, '', new Set()), []);
+  assert.deepEqual(queryGuides(catalog, 'unmatchable-fixture-workflow'), []);
+  assert.equal(JSON.stringify(catalog), before);
+});
+
+test('DOM: searchable guide directory pages through guides and preserves OS when opening a task', async t => {
+  const fixture = await domFixture(t, '#software?platform=Linux&q=unmatchable-fixture-workflow');
+  fixture.toggle('guide-directory', true);
+  assert.equal(fixture.root.querySelectorAll('.guide-directory-card').length, 12);
+  fixture.click(fixture.root.getElementById('guide-directory-more'));
+  assert.equal(fixture.root.querySelectorAll('.guide-directory-card').length, 24);
+  fixture.input('guide-search', 'offline PDF');
+  const choice = [...fixture.root.querySelectorAll('.guide-directory-card button')].find(b => b.textContent === 'Chat with PDF documents offline');
+  assert.ok(choice, 'A task must be discoverable even when the main product search has no matches');
+  fixture.click(choice);
+  assert.equal(fixture.root.getElementById('guide-directory').open, false);
+  assert.equal(fixture.root.getElementById('platform').value, 'Linux');
+  assert.equal(fixture.root.getElementById('task').value, 'chat-with-pdf-offline');
+  assert.equal(fixture.focus(), fixture.root.getElementById('guide'));
+  assert.ok([...fixture.root.querySelectorAll('.software-card')].every(n => catalog.applications.find(a => a.id === n.dataset.appId).platforms.includes('Linux')));
+});
+
 test('everyday task phrasing retrieves relevant tools without treating disk as any file', async () => {
   const {indexCatalog, queryCatalog, parseState} = await model;
   const index = indexCatalog(catalog), find = q => queryCatalog(index, {...parseState(), q}, catalog);
@@ -20,6 +104,21 @@ test('everyday task phrasing retrieves relevant tools without treating disk as a
   assert.equal(find('make a disk image').some(a => a.id === 'bruno'), false);
   assert.ok(find('record my screen').some(a => a.id === 'obs-studio'));
   assert.ok(find('I want to program in Python').slice(0, 3).some(a => a.id === 'thonny'));
+  assert.equal(find('I want to program in Python').some(a => ['ruff', 'gnu-radio'].includes(a.id)), false,
+    'A language-specific editing request must not be displaced by a linter or a Python-based radio toolkit');
+  assert.ok(find('Python linter').some(a => a.id === 'ruff'), 'Linting remains a distinct discoverable task');
+});
+
+test('specialist task wording resolves radio, robotics and validation without dropping qualifiers', async () => {
+  const {indexCatalog, queryCatalog, parseState} = await model;
+  const index = indexCatalog(catalog), find = q => queryCatalog(index, {...parseState(), q}, catalog);
+  for (const q of ['software defined radio', 'software-defined radio']) {
+    assert.ok(find(q).some(a => a.id === 'sdrpp'));
+    assert.ok(find(q).some(a => a.id === 'gqrx'));
+  }
+  assert.ok(find('simulate industrial robots').some(a => a.id === 'robodk'));
+  assert.ok(find('validate GitHub Actions').some(a => a.id === 'actionlint'));
+  assert.deepEqual(find('simulate industrial robots unsupported-fixture-controller'), []);
 });
 
 test('alternative requests use explicit relationships and preserve platform constraints', async () => {
@@ -265,6 +364,16 @@ async function domFixture(t, route = '#software?q=', saved = {}) {
       const node = container.shadowRoot.getElementById(id);
       node.value = value;
       node.dispatchEvent(new window.Event('change', {bubbles: true}));
+    },
+    input(id, value) {
+      const node = container.shadowRoot.getElementById(id);
+      node.value = value;
+      node.dispatchEvent(new window.Event('input', {bubbles: true}));
+    },
+    toggle(id, open) {
+      const node = container.shadowRoot.getElementById(id);
+      node.open = open;
+      node.dispatchEvent(new window.Event('toggle'));
     },
     check(node) {
       node.checked = true;

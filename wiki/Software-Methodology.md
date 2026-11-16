@@ -38,13 +38,29 @@ Maintenance values are `active`, `archived`, `discontinued` or `unverified`. Any
 
 Claims about relative performance need a separate reproducible experiment: pin versions, hardware, operating system, input data and settings; verify complete equivalent output; repeat measurements; retain failures, resource use and uncertainty. Independent security evaluations must identify the exact test, version, date and scope. Until that work exists, Athena does not convert an editorial recommendation into a benchmark winner.
 
+### Documented task support
+
+Some tasks require a whole configuration, beyond a feature keyword. Each structured capability assertion identifies required setup, task-specific limitations and cited feature evidence. The builder rejects unknown capability identifiers, empty setup/limits and evidence links absent from the record's feature sources. Search uses these assertions for offline PDF chat and audio noise reduction. Recorded-file restoration and live microphone suppression are different assertions.
+
+For example, offline PDF chat requires downloaded models and local processing throughout the selected workflow. A local desktop interface with a remote embedding provider does not meet that condition. The application detail shows those conditions beside the underlying sources. These are documented workflows; they have not been independently installed or quality-tested merely because they have a structured assertion.
+
+### Scoped measurements
+
+The [fixed-string search experiment](https://github.com/Herbertofury/Athena/blob/main/research/software-expansion-2026-11-15/search-benchmark.md) compares installed GNU grep 3.11 and ripgrep 15.2.0 in a shared Linux environment. Every complete output and exit code matched an independent oracle across 132 runs. The report retains per-run timings, exact commands, binary and corpus hashes, warm-cache conditions and limitations. The raw results and reproduction script are separate links in both tool details.
+
+`data/software/evaluations.json` binds the named tools to the measured versions and exact evidence hashes. The builder rejects missing files, altered evidence, mismatched tool bindings or absent complete-output checks. This experiment measures elapsed search-and-output time on four synthetic workloads; it supplies no memory, energy, security or universal performance verdict.
+
 ## Data and generated views
 
 The canonical additions live in `data/software/systems.json`, `creative.json`, `development.json` and the automatically discovered `*-expanded.json` batches. Task guides live beside them. `scripts/build_software_catalog.py` combines the additions with the original Windows catalog, checks identity and source contracts, resolves alternatives, derives family/category relationships and writes the main application database and Wiki pages from the same records.
 
 The original cleanup snapshot, Windows catalog, creative-AI catalog and engineering research library are immutable inputs to this expansion. Their checksums are recorded in `research/software-expansion-2026-11-14/baseline.json`. The imported PC records retain the full original fields. All 66 main cleanup candidates, three unranked candidates and one previously excluded candidate remain searchable with their original classifications, alongside 24 creative-AI research records. Existing model and engineering research records are not counted again as newly discovered desktop applications.
 
+The second expansion additionally preserves all 736 previously published application identities. Its baseline, current coverage, refresh queue and comparison-depth report are in `research/software-expansion-2026-11-15/`. `expansion-progress.json` counts how many of the 112 original single-application categories gained comparison choices; new rows and new categories alone do not establish that improvement. Previous expansion receipts remain historical snapshots.
+
 `data/software/taxonomy.json` assigns task categories and readable labels, consolidates synonyms and keeps old category URLs working after reorganizations. Taxonomy decisions change navigation, not the underlying historical source records. Related categories are derived from explicitly researched alternative relationships rather than assuming every tool in a broad family is interchangeable.
+
+The workspace includes a searchable decision-guide directory with incremental display. It searches guide titles, descriptions and candidate roles, and shows how many choices meet the operating-system, license, pricing and maintenance filters. Opening a guide preserves those filters. A guide match remains a comparison aid; it does not silently add unsupported capabilities to a product's search record. Wiki category sections and individual guides link directly to their corresponding application views.
 
 Run from the repository root:
 
@@ -60,7 +76,7 @@ python3 scripts/report_software_coverage.py --output software-refresh-report.jso
 
 ## Link audit and refresh workflow
 
-The **Athena software source audit** workflow runs weekly and on explicit dispatch. Pull requests run deterministic catalog and real Chromium acceptance checks; scheduled/manual runs also examine all official, download, repository, maintenance and provenance URLs. Each report includes the input catalog hash, time, final URL, HTTP status and associated record fields.
+The **Athena software source audit** workflow runs on software pull requests, weekly and on explicit dispatch. Each run performs deterministic catalog checks, real Chromium acceptance checks and an audit of all official, download, repository, maintenance and provenance URLs. Each report includes the input catalog hash, time, final URL, HTTP status and associated record fields.
 
 | Observation | Meaning and next action |
 | --- | --- |
@@ -73,7 +89,7 @@ The **Athena software source audit** workflow runs weekly and on explicit dispat
 
 The audit uses bounded requests and concurrency, retries HEAD refusals with a bounded GET, and never executes a download or deletes catalog entries. The strict gate flags missing current links while retaining the already-excluded historical 404 as evidence; it does not quietly promote that candidate. Human review is required before replacing claims. CI artifacts retain the audit and browser evidence; the actual GitHub Wiki sync workflow publishes managed pages while preserving unrelated and user-edited pages.
 
-The workflow also recomputes a dated evidence-refresh queue. Records with unresolved fields or a latest source review more than 90 days old remain visible for human review. See [coverage and refresh priorities](Software-Coverage) for the complete backlog and categories needing more candidates.
+The workflow also recomputes a dated evidence-refresh queue. Records with unresolved fields or any cited source more than 90 days old remain visible for human review. A new homepage review does not reset the date of an older license, pricing or compatibility source. The source-level queue groups overdue URLs with the specific applications and claim types that depend on them. See [coverage and refresh priorities](Software-Coverage) for the complete backlog and categories needing more candidates.
 
 ## Remaining research work
 

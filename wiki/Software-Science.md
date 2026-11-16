@@ -4,9 +4,11 @@ Map, simulate, measure, design and analyze specialist data.
 
 [Browse in Athena](https://herbertofury.github.io/Athena/#software?family=science) · [Catalog](Software-Catalog) · [Method](Software-Methodology)
 
-78 applications. Reviewed 2026-11-15; individual records identify inherited research.
+182 applications. Reviewed 2026-11-15; individual records identify inherited research.
 
 ## 2D CAD drafting
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=science%2F2d-cad)
 
 ### Autodesk AutoCAD
 
@@ -48,6 +50,8 @@ Two-dimensional CAD environment with a GPL core and commercial extensions.
 
 ## 3D print slicing
 
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=science%2F3d-printing)
+
 ### OrcaSlicer
 
 Open-source FDM slicer with printer profiles and calibration-oriented workflows.
@@ -85,7 +89,205 @@ Desktop 3D-printing slicer with configurable settings and a printer ecosystem.
 - [Official project](https://ultimaker.com/software/ultimaker-cura/) · [Official installation / downloads](https://ultimaker.com/software/ultimaker-cura/) · [Repository](https://github.com/Ultimaker/Cura)
 - **Sources:** [Official project documentation](https://ultimaker.com/software/ultimaker-cura/) (2026-11-14; identity, features, platforms, pricing, downloads); [Official project README](https://raw.githubusercontent.com/Ultimaker/Cura/HEAD/README.md) (2026-11-14; identity, features, license); [Upstream license terms](https://raw.githubusercontent.com/Ultimaker/Cura/HEAD/LICENSE) (2026-11-14; license); [Official repository activity feed](https://github.com/Ultimaker/Cura/commits/HEAD.atom) (2026-11-14; maintenance)
 
+## Amateur Digital Modes
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=science%2Famateur-digital-modes)
+
+### fldigi
+
+Sound-card digital modem for many amateur-radio text modes, with logging and station integration.
+
+- **Platforms:** Windows, macOS, Linux. **License:** GPL-3.0; older manual licensing text differs from the current repository. **Pricing model:** unknown.
+- **Pick for:** Use several established digital text modes without maintaining a separate application for each.
+- **Compare when:** Mode selection and sound-device levels need configuration for the station.
+- **Strengths:** Use several established digital text modes without maintaining a separate application for each.
+- **Limitations:** Mode selection and sound-device levels need configuration for the station.; fldigi is distinct from the companion flrig radio-control application and from dedicated FT8 tools.
+- **Maintenance:** unverified — Product documentation reviewed; a current dated release or lifecycle commitment has not been established for this record.
+- [Official project](https://www.w1hkj.org/) · [Official installation / downloads](https://www.w1hkj.org/files/fldigi/) · [Repository](https://github.com/w1hkj/fldigi)
+- **Sources:** [Official documentation and distribution evidence](https://www.w1hkj.org/) (2026-11-15; identity, features, platforms, downloads); [Official documentation and distribution evidence](https://github.com/w1hkj/fldigi) (2026-11-15; identity, features, license)
+### JS8Call-Improved
+
+Community continuation of JS8Call for keyboard messaging over weak-signal HF radio links.
+
+- **Platforms:** Windows, macOS, Linux. **License:** GPL-3.0; Qt dependencies use their own licenses. **Pricing model:** unknown.
+- **Pick for:** Exchange free-form text over a configured HF station when structured FT8 contact messages are too limited.
+- **Compare when:** JS8 uses its own messaging protocol and is not interchangeable with ordinary FT8 decoding.
+- **Strengths:** Exchange free-form text over a configured HF station when structured FT8 contact messages are too limited.
+- **Limitations:** JS8 uses its own messaging protocol and is not interchangeable with ordinary FT8 decoding.; Radio/audio configuration, channel conditions and operator procedures determine usable communication.
+- **Maintenance:** unverified — Product documentation reviewed; a current dated release or lifecycle commitment has not been established for this record.
+- [Official project](http://js8call.com/) · [Official installation / downloads](https://github.com/JS8Call-improved/JS8Call-improved/releases) · [Repository](https://github.com/JS8Call-improved/JS8Call-improved)
+- **Sources:** [Official documentation and distribution evidence](http://js8call.com/) (2026-11-15; identity, features, platforms, downloads); [Official documentation and distribution evidence](https://github.com/JS8Call-improved/JS8Call-improved) (2026-11-15; identity, features, license, platforms, downloads)
+### JTDX
+
+WSJT-derived amateur-radio application focused on weak-signal digital contacts and decoding workflows.
+
+- **Platforms:** Windows, macOS, Linux. **License:** GNU GPL; see repository license file. **Pricing model:** unknown.
+- **Pick for:** Compare a specialized weak-signal workflow with WSJT-X when its decoding and operating controls fit the station.
+- **Compare when:** It is a separate project from WSJT-X; features and release cadence can differ.
+- **Strengths:** Compare a specialized weak-signal workflow with WSJT-X when its decoding and operating controls fit the station.
+- **Limitations:** It is a separate project from WSJT-X; features and release cadence can differ.; Correct rig, audio and time configuration remain required and are not validated by installing the program.
+- **Maintenance:** unverified — The reviewed official release feed's newest observed entry is 159 (updated 2022-03-01). Recent maintenance remains unverified; this does not prove the project is abandoned. ([evidence](https://github.com/jtdx-project/jtdx/releases.atom))
+- [Official project](https://github.com/jtdx-project/jtdx) · [Official installation / downloads](https://github.com/jtdx-project/jtdx/releases) · [Repository](https://github.com/jtdx-project/jtdx)
+- **Sources:** [Official documentation and distribution evidence](https://github.com/jtdx-project/jtdx) (2026-11-15; identity, features, license, platforms, downloads); [Official release or lifecycle evidence](https://github.com/jtdx-project/jtdx/releases.atom) (2026-11-15; maintenance)
+### WSJT-X
+
+Weak-signal amateur-radio communication suite implementing timed digital modes such as FT8, FT4 and Q65.
+
+- **Platforms:** Windows, macOS, Linux. **License:** GPL-3.0. **Pricing model:** free.
+- **Pick for:** Make structured weak-signal contacts using documented, widely implemented amateur-radio protocols.
+- **Compare when:** Timed modes require suitable clock synchronization and a configured radio/audio path.
+- **Strengths:** Make structured weak-signal contacts using documented, widely implemented amateur-radio protocols.
+- **Limitations:** Timed modes require suitable clock synchronization and a configured radio/audio path.; Short structured exchanges are different from unrestricted conversational messaging.
+- **Maintenance:** unverified — Product documentation reviewed; a current dated release or lifecycle commitment has not been established for this record.
+- [Official project](https://github.com/WSJTX/wsjtx) · [Official installation / downloads](https://wsjt.sourceforge.io/wsjtx.html) · [Repository](https://github.com/WSJTX/wsjtx)
+- **Sources:** [Official documentation and distribution evidence](https://github.com/WSJTX/wsjtx) (2026-11-15; identity, features, license, pricing); [Official documentation and distribution evidence](https://wsjt.sourceforge.io/wsjtx.html) (2026-11-15; platforms, downloads)
+
+## Amateur Digital Voice
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=science%2Famateur-digital-voice)
+
+### FreeDV
+
+Digital-voice application for amateur HF radio using open speech-codec and modem technology.
+
+- **Platforms:** Windows, macOS, Linux. **License:** GPL-2.0 GUI; bundled components have separate licenses. **Pricing model:** unknown.
+- **Pick for:** Explore digital voice with an open modem/codec stack and a compatible SSB radio setup.
+- **Compare when:** Requires a suitable two-way audio path and compatible operating mode at both ends.
+- **Strengths:** Explore digital voice with an open modem/codec stack and a compatible SSB radio setup.
+- **Limitations:** Requires a suitable two-way audio path and compatible operating mode at both ends.; Experimental development releases differ from the current stable release; choose the intended release channel.
+- **Maintenance:** active — Official release feed contains v3.0.0-dev1 with an updated timestamp of 2026-11-03. This is release-channel activity evidence, not proof of a stable build, installed compatibility or security testing. ([evidence](https://github.com/drowe67/freedv-gui/releases.atom))
+- [Official project](https://freedv.org/) · [Official installation / downloads](https://freedv.org/download/) · [Repository](https://github.com/drowe67/freedv-gui)
+- **Sources:** [Official documentation and distribution evidence](https://freedv.org/) (2026-11-15; identity, features); [Official documentation and distribution evidence](https://github.com/drowe67/freedv-gui) (2026-11-15; features, license, platforms); [Official documentation and distribution evidence](https://freedv.org/download/) (2026-11-15; downloads, platforms); [Official release or lifecycle evidence](https://freedv.org/freedv-2-4-1-released/) (2026-11-15; maintenance); [Official release or lifecycle evidence](https://github.com/drowe67/freedv-gui/releases.atom) (2026-11-15; maintenance)
+
+## Amateur Radio Logging
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=science%2Famateur-radio-logging)
+
+### CQRLOG
+
+Amateur-radio logger with a database-backed logbook, rig control, DX cluster and QSL workflows.
+
+- **Platforms:** Linux, macOS. **License:** GPL-2.0. **Pricing model:** unknown.
+- **Pick for:** Choose a Linux-oriented integrated logbook when SQL storage and station integrations are useful.
+- **Compare when:** The application depends on a configured MySQL/MariaDB environment.
+- **Strengths:** Choose a Linux-oriented integrated logbook when SQL storage and station integrations are useful.
+- **Limitations:** The application depends on a configured MySQL/MariaDB environment.; The website and package channels can show older releases than the repository; verify the selected distribution.
+- **Maintenance:** active — Official release feed contains CQRLOG v3.3.0 with an updated timestamp of 2026-10-25. This is release-channel activity evidence, not proof of a stable build, installed compatibility or security testing. ([evidence](https://github.com/ok2cqr/cqrlog/releases.atom))
+- [Official project](https://github.com/ok2cqr/cqrlog) · [Official installation / downloads](https://github.com/ok2cqr/cqrlog/releases) · [Repository](https://github.com/ok2cqr/cqrlog)
+- **Sources:** [Official documentation and distribution evidence](https://github.com/ok2cqr/cqrlog) (2026-11-15; identity, features, platforms, license, downloads); [Official documentation and distribution evidence](https://github.com/ok2cqr/cqrlog/releases/expanded_assets/v3.3.0) (2026-11-15; platforms, downloads); [Official release or lifecycle evidence](https://github.com/ok2cqr/cqrlog/releases.atom) (2026-11-15; maintenance)
+### DXLab
+
+Interoperable Windows station suite covering logging, transceiver control, propagation, spotting and digital operation.
+
+- **Platforms:** Windows. **License:** Vendor freeware terms; individual component notices apply. **Pricing model:** free.
+- **Pick for:** Assemble a station workflow from cooperating specialist applications without requiring every component.
+- **Compare when:** The suite uses several coordinated programs and configuration surfaces.
+- **Strengths:** Assemble a station workflow from cooperating specialist applications without requiring every component.
+- **Limitations:** The suite uses several coordinated programs and configuration surfaces.; Native support is Windows; compatibility-layer use on other systems needs separate evaluation.
+- **Maintenance:** unverified — Product documentation reviewed; a current dated release or lifecycle commitment has not been established for this record.
+- [Official project](https://www.dxlabsuite.com/) · [Official installation / downloads](https://www.dxlabsuite.com/)
+- **Sources:** [Official documentation and distribution evidence](https://www.dxlabsuite.com/) (2026-11-15; identity, features, platforms, pricing, downloads)
+### Log4OM
+
+Windows station logbook with contact management, awards, cluster links and transceiver integrations.
+
+- **Platforms:** Windows. **License:** Freeware; detailed redistribution terms not established. **Pricing model:** free.
+- **Pick for:** Organize a Windows station around a general-purpose logbook with many operating integrations.
+- **Compare when:** External callbooks and online services can require separate accounts or subscriptions.
+- **Strengths:** Organize a Windows station around a general-purpose logbook with many operating integrations.
+- **Limitations:** External callbooks and online services can require separate accounts or subscriptions.; Radio integrations and database configuration must be checked against the installed version.
+- **Maintenance:** unverified — Product documentation reviewed; a current dated release or lifecycle commitment has not been established for this record.
+- [Official project](https://www.log4om.com/) · [Official installation / downloads](https://www.log4om.com/download/)
+- **Sources:** [Official documentation and distribution evidence](https://www.log4om.com/) (2026-11-15; identity, features, platforms, pricing, downloads); [Official documentation and distribution evidence](https://www.log4om.com/download/) (2026-11-15; pricing, platforms, downloads)
+### N1MM Logger+
+
+Contest-oriented Windows logger supporting phone, CW and digital operation with contest-specific rules.
+
+- **Platforms:** Windows. **License:** Freeware; project distribution terms apply. **Pricing model:** free.
+- **Pick for:** Choose a contest-focused workflow when rapid exchanges, rules and station integration drive the session.
+- **Compare when:** Contest configuration and supported equipment must match the operating event.
+- **Strengths:** Choose a contest-focused workflow when rapid exchanges, rules and station integration drive the session.
+- **Limitations:** Contest configuration and supported equipment must match the operating event.; A general daily logbook can be simpler for casual contact and award management.
+- **Maintenance:** unverified — Product documentation reviewed; a current dated release or lifecycle commitment has not been established for this record.
+- [Official project](https://n1mmwp.hamdocs.com/) · [Official installation / downloads](https://n1mmwp.hamdocs.com/)
+- **Sources:** [Official documentation and distribution evidence](https://n1mmwp.hamdocs.com/) (2026-11-15; identity, features, platforms, pricing, downloads)
+
+## Aprs Packet Radio
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=science%2Faprs-packet-radio)
+
+### Dire Wolf
+
+Software sound-card AX.25 modem and APRS encoder/decoder that can act as a TNC, digipeater or gateway.
+
+- **Platforms:** Windows, macOS, Linux. **License:** GPL-2.0. **Pricing model:** unknown.
+- **Pick for:** Replace a separate packet TNC with a configured computer sound-card modem for supported packet workflows.
+- **Compare when:** Audio interface, PTT and levels need station-specific configuration.
+- **Strengths:** Replace a separate packet TNC with a configured computer sound-card modem for supported packet workflows.
+- **Limitations:** Audio interface, PTT and levels need station-specific configuration.; Distribution packages may lag project releases; an APRS map client is a separate application.
+- **Maintenance:** unverified — The reviewed official release feed's newest observed entry is Version 1.8.1 - November 2025 (updated 2025-11-13). Recent maintenance remains unverified; this does not prove the project is abandoned. ([evidence](https://github.com/wb2osz/direwolf/releases.atom))
+- [Official project](https://github.com/wb2osz/direwolf) · [Official installation / downloads](https://github.com/wb2osz/direwolf/releases) · [Repository](https://github.com/wb2osz/direwolf)
+- **Sources:** [Official documentation and distribution evidence](https://github.com/wb2osz/direwolf) (2026-11-15; identity, features, platforms, license, downloads); [Official release or lifecycle evidence](https://github.com/wb2osz/direwolf/releases.atom) (2026-11-15; maintenance)
+### Xastir
+
+APRS mapping client for station positions, messages and supported radio or Internet interfaces.
+
+- **Platforms:** Linux, macOS, Windows. **License:** GPL-2.0. **Pricing model:** unknown.
+- **Pick for:** Combine local maps and APRS station information in an extensible desktop client.
+- **Compare when:** Windows use follows the documented compatibility-layer build path rather than a standard native installer.
+- **Strengths:** Combine local maps and APRS station information in an extensible desktop client.
+- **Limitations:** Windows use follows the documented compatibility-layer build path rather than a standard native installer.; Map data, serial/TNC interfaces and APRS-IS configuration are separate setup steps.
+- **Maintenance:** active — Official release feed contains Release 2.2.4 with an updated timestamp of 2026-03-02. This is release-channel activity evidence, not proof of a stable build, installed compatibility or security testing. ([evidence](https://github.com/Xastir/Xastir/releases.atom))
+- [Official project](https://github.com/Xastir/Xastir) · [Official installation / downloads](https://github.com/Xastir/Xastir/releases) · [Repository](https://github.com/Xastir/Xastir)
+- **Sources:** [Official documentation and distribution evidence](https://github.com/Xastir/Xastir) (2026-11-15; identity, features, license, platforms, downloads); [Official release or lifecycle evidence](https://github.com/Xastir/Xastir/releases.atom) (2026-11-15; maintenance)
+### YAAC
+
+Java APRS client combining local mapping, station messages, TNC connections and extensible telemetry.
+
+- **Platforms:** Windows, macOS, Linux. **License:** LGPL-3.0; verify bundled component notices. **Pricing model:** free.
+- **Pick for:** Use APRS maps and messages across Java-capable desktops, including offline map storage.
+- **Compare when:** A compatible Java runtime and radio/TNC or Internet connection are needed.
+- **Strengths:** Use APRS maps and messages across Java-capable desktops, including offline map storage.
+- **Limitations:** A compatible Java runtime and radio/TNC or Internet connection are needed.; Offline geographic datasets require disk space, and some data services require their own accounts.
+- **Maintenance:** unverified — Product documentation reviewed; a current dated release or lifecycle commitment has not been established for this record.
+- [Official project](https://www.ka2ddo.org/ka2ddo/YAAC.html) · [Official installation / downloads](https://www.ka2ddo.org/ka2ddo/YAAC.html)
+- **Sources:** [Official documentation and distribution evidence](https://www.ka2ddo.org/ka2ddo/YAAC.html) (2026-11-15; identity, features, platforms, license, pricing, downloads)
+
+## Architectural Modeling
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=science%2Farchitectural-modeling)
+
+### SketchUp
+
+Three-dimensional conceptual modeling application with desktop and web editions, extensions and drawing-document workflows.
+
+- **Platforms:** Windows, macOS, Web. **License:** Proprietary Trimble SketchUp license. **Pricing model:** mixed.
+- **Compatibility details:** Desktop installers are Windows/macOS. The current 2027 page requires Windows 11 or Apple Silicon macOS; older supported versions have different requirements.
+- **Pricing details:** Paid desktop subscription plans differ from browser-based access and educational offers; check the specific plan and usage terms.
+- **Pick for:** Choose SketchUp for rapid architectural and spatial concept modeling with a substantial extension ecosystem.
+- **Compare when:** Free web access and paid desktop subscriptions have different capabilities and use terms.
+- **Strengths:** Choose SketchUp for rapid architectural and spatial concept modeling with a substantial extension ecosystem.; Desktop plans connect modeling with presentation and documentation tools.
+- **Limitations:** Free web access and paid desktop subscriptions have different capabilities and use terms.; Extensions, rendering integrations and Studio features have separate platform and plan requirements.
+- **Maintenance:** unverified — Current release cadence or an explicit maintenance commitment was not established by the reviewed sources. Availability alone is not a maintenance guarantee.
+- [Official project](https://www.sketchup.com/) · [Official installation / downloads](https://www.sketchup.com/en/download/all)
+- **Sources:** [Official product documentation](https://www.sketchup.com/) (2026-11-15; identity, features, pricing, license); [Official product documentation](https://www.sketchup.com/en/download/all) (2026-11-15; downloads, platforms)
+### Sweet Home 3D
+
+Interior-design application for drawing floor plans, placing furniture and viewing the result in three dimensions.
+
+- **Platforms:** Windows, macOS, Linux, Web. **License:** GNU GPL v2 for the application; furniture and other assets may have separate terms. **Pricing model:** mixed.
+- **Pricing details:** Free desktop packages are available; paid app-store packages include larger asset libraries. Asset licenses must be checked independently.
+- **Pick for:** Choose Sweet Home 3D for arranging rooms and furniture without adopting a full architectural BIM system.
+- **Compare when:** The application is for interior layout rather than engineering-grade building documentation.
+- **Strengths:** Choose Sweet Home 3D for arranging rooms and furniture without adopting a full architectural BIM system.; The linked plan and 3D views make household layout decisions tangible.
+- **Limitations:** The application is for interior layout rather than engineering-grade building documentation.; Free downloads and paid store editions bundle different furniture and texture collections.
+- **Maintenance:** unverified — Current release cadence or an explicit maintenance commitment was not established by the reviewed sources. Availability alone is not a maintenance guarantee.
+- [Official project](https://www.sweethome3d.com/) · [Official installation / downloads](https://www.sweethome3d.com/download.jsp)
+- **Sources:** [Official product documentation](https://www.sweethome3d.com/) (2026-11-15; identity, features, platforms); [Official product documentation](https://www.sweethome3d.com/download.jsp) (2026-11-15; downloads, platforms, pricing); [Official product documentation](https://www.sweethome3d.com/license/) (2026-11-15; license)
+
 ## Astronomical Image Analysis
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=science%2Fastronomical-image-analysis)
 
 ### AstroImageJ
 
@@ -101,6 +303,8 @@ Astronomical-image analysis environment derived from ImageJ, with calibration an
 - **Sources:** [Official product documentation](https://astroimagej.com/) (2026-11-14; downloads, features, identity, license, platforms); [Official upstream README](https://raw.githubusercontent.com/AstroImageJ/astroimagej/HEAD/README.md) (2026-11-14; features, identity); [Official upstream license text](https://raw.githubusercontent.com/AstroImageJ/astroimagej/HEAD/LICENSE) (2026-11-14; license); [Official upstream release activity feed](https://github.com/AstroImageJ/astroimagej/releases.atom) (2026-11-14; maintenance)
 
 ## Planetariums and space exploration
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=science%2Fastronomy)
 
 ### Celestia
 
@@ -128,6 +332,8 @@ Desktop planetarium that renders the night sky for selected locations and times.
 - **Sources:** [Official project documentation](https://stellarium.org/) (2026-11-14; identity, features, platforms, pricing, downloads); [Official project README](https://raw.githubusercontent.com/Stellarium/stellarium/HEAD/README.md) (2026-11-14; identity, features, platforms, pricing); [Upstream license terms](https://raw.githubusercontent.com/Stellarium/stellarium/HEAD/COPYING) (2026-11-14; license); [Official repository activity feed](https://github.com/Stellarium/stellarium/commits/HEAD.atom) (2026-11-14; maintenance)
 
 ## Astronomy imaging and acquisition
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=science%2Fastrophotography)
 
 ### ASTAP
 
@@ -190,7 +396,9 @@ Astronomical image-processing application for calibration, registration and stac
 - [Official project](https://siril.org/) · [Official installation / downloads](https://siril.org/download/) · [Repository](https://gitlab.com/free-astro/siril)
 - **Sources:** [Official project documentation](https://siril.org/) (2026-11-14; identity, features, platforms); [Official installation and download information](https://siril.org/download/) (2026-11-14; identity, downloads, platforms); [Official project README](https://gitlab.com/free-astro/siril/-/raw/master/README.md) (2026-11-14; identity, features, license, platforms)
 
-## Bioimage Analysis
+## Biological image analysis
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=science%2Fbioimage-analysis)
 
 ### CellProfiler
 
@@ -231,7 +439,122 @@ Bioimage-analysis application for annotating microscopy images and building quan
 - [Official project](https://qupath.github.io/) · [Official installation / downloads](https://github.com/qupath/qupath/releases) · [Repository](https://github.com/qupath/qupath)
 - **Sources:** [Official product documentation](https://qupath.github.io/) (2026-11-14; downloads, features, identity, platforms); [Official upstream README](https://raw.githubusercontent.com/qupath/qupath/HEAD/README.md) (2026-11-14; features, identity, pricing); [Official upstream license text](https://raw.githubusercontent.com/qupath/qupath/HEAD/LICENSE) (2026-11-14; license); [Official download and distribution documentation](https://github.com/qupath/qupath/releases) (2026-11-14; downloads); [Official upstream release activity feed](https://github.com/qupath/qupath/releases.atom) (2026-11-14; maintenance)
 
+## Building energy modeling
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=science%2Fbuilding-energy-modeling)
+
+### DesignBuilder
+
+Commercial graphical building-performance environment combining modeling with energy, HVAC, daylight and other licensed analysis modules.
+
+- **Platforms:** Windows. **License:** Proprietary DesignBuilder software license. **Pricing model:** subscription.
+- **Pricing details:** Commercial term licenses and module bundles vary; evaluate required modules rather than assuming every analysis is included.
+- **Pick for:** Choose DesignBuilder when integrated modeling and several building-performance analyses justify a supported commercial workflow.
+- **Compare when:** Modules are licensed separately or in packages; a base license does not unlock every advertised analysis.
+- **Strengths:** Choose DesignBuilder when integrated modeling and several building-performance analyses justify a supported commercial workflow.; Modular licensing allows a team to select the analyses it actually needs.
+- **Limitations:** Modules are licensed separately or in packages; a base license does not unlock every advertised analysis.; Models and results still require validation of geometry, loads, schedules and boundary conditions.
+- **Maintenance:** unverified — Current release cadence or an explicit maintenance commitment was not established by the reviewed sources. Availability alone is not a maintenance guarantee.
+- [Official project](https://designbuilder.co.uk/) · [Official installation / downloads](https://designbuilder.co.uk/download/)
+- **Sources:** [Official product documentation](https://designbuilder.co.uk/) (2026-11-15; identity, features, downloads); [Official product documentation](https://designbuilder.co.uk/software/licensing-options) (2026-11-15; license, pricing); [Official product documentation](https://support.designbuilder.co.uk/support/solutions/articles/103000181121-which-operating-systems-does-designbuilder-support-) (2026-11-15; platforms)
+### EnergyPlus
+
+Whole-building energy simulation engine for evaluating heating, cooling, ventilation and related building performance.
+
+- **Platforms:** Windows, macOS, Linux. **License:** EnergyPlus BSD-3-like license. **Pricing model:** unknown.
+- **Pricing details:** No complete price or distribution-cost statement was established from the reviewed primary sources; check the selected distribution route.
+- **Pick for:** Choose EnergyPlus when a transparent simulation engine and detailed building-system models are required.
+- **Compare when:** It is primarily a simulation engine; a separate interface can simplify geometry and model preparation.
+- **Strengths:** Choose EnergyPlus when a transparent simulation engine and detailed building-system models are required.; It underpins several graphical building-energy tools and automated analysis workflows.
+- **Limitations:** It is primarily a simulation engine; a separate interface can simplify geometry and model preparation.; Weather, schedules, system assumptions and model validation strongly influence results.
+- **Maintenance:** active — Official release feed entry 'EnergyPlus 26.2.0' was updated 2026-10-01T09:41:08Z. This is a dated maintenance signal, not an installation or quality benchmark. ([evidence](https://github.com/NatLabRockies/EnergyPlus/releases.atom))
+- [Official project](https://github.com/NatLabRockies/EnergyPlus) · [Official installation / downloads](https://github.com/NatLabRockies/EnergyPlus/releases) · [Repository](https://github.com/NatLabRockies/EnergyPlus)
+- **Sources:** [Official upstream documentation](https://raw.githubusercontent.com/NatLabRockies/EnergyPlus/HEAD/README.md) (2026-11-15; identity, features, license); [Official upstream documentation](https://github.com/NatLabRockies/EnergyPlus/releases) (2026-11-15; downloads, platforms); [Official upstream documentation](https://raw.githubusercontent.com/NatLabRockies/EnergyPlus/HEAD/LICENSE.txt) (2026-11-15; license); [Official release activity feed](https://github.com/NatLabRockies/EnergyPlus/releases.atom) (2026-11-15; maintenance)
+### eQUEST
+
+DOE-2-based building-energy analysis application with model-creation wizards and graphical result reporting.
+
+- **Platforms:** Windows. **License:** License terms not fully established from the reviewed landing page. **Pricing model:** unknown.
+- **Compatibility details:** Windows application; the reviewed public download is older, so current Windows compatibility needs confirmation.
+- **Pricing details:** No complete price or distribution-cost statement was established from the reviewed primary sources; check the selected distribution route.
+- **Pick for:** Choose eQUEST when an existing project or established workflow specifically uses DOE-2 and eQUEST models.
+- **Compare when:** The download page prominently offers an older 2018 build; current maintenance is not established.
+- **Strengths:** Choose eQUEST when an existing project or established workflow specifically uses DOE-2 and eQUEST models.; Its wizards provide a route from building description to comparative energy scenarios.
+- **Limitations:** The download page prominently offers an older 2018 build; current maintenance is not established.; Confirm current project, code-compliance and operating-system requirements before relying on a legacy workflow.
+- **Maintenance:** unverified — Current release cadence or an explicit maintenance commitment was not established by the reviewed sources. Availability alone is not a maintenance guarantee.
+- [Official project](https://www.doe2.com/equest/) · [Official installation / downloads](https://www.doe2.com/equest/)
+- **Sources:** [Official product documentation](https://www.doe2.com/equest/) (2026-11-15; identity, features, downloads, platforms)
+### OpenStudio Application
+
+Graphical building-energy model editor and analysis application built on the OpenStudio SDK and EnergyPlus.
+
+- **Platforms:** Windows, macOS, Linux. **License:** Revised BSD 3-Clause license. **Pricing model:** free.
+- **Pick for:** Choose OpenStudio Application for an open graphical front end to whole-building energy modeling.
+- **Compare when:** The Application is a distinct product from the OpenStudio SDK and the SketchUp plugin.
+- **Strengths:** Choose OpenStudio Application for an open graphical front end to whole-building energy modeling.; It provides a more structured model-editing workflow than directly managing engine input files.
+- **Limitations:** The Application is a distinct product from the OpenStudio SDK and the SketchUp plugin.; Check the selected release’s installers and bundled engine compatibility before moving a project.
+- **Maintenance:** active — Official release feed entry 'v1.12.0-rc2' was updated 2026-07-27T03:23:03Z. This is a dated maintenance signal, not an installation or quality benchmark. ([evidence](https://github.com/openstudiocoalition/OpenStudioApplication/releases.atom))
+- [Official project](https://openstudiocoalition.org/) · [Official installation / downloads](https://github.com/openstudiocoalition/OpenStudioApplication/releases) · [Repository](https://github.com/openstudiocoalition/OpenStudioApplication)
+- **Sources:** [Official product documentation](https://openstudiocoalition.org/) (2026-11-15; identity, features, pricing); [Official upstream documentation](https://raw.githubusercontent.com/openstudiocoalition/OpenStudioApplication/HEAD/README.md) (2026-11-15; identity, platforms, downloads, pricing); [Official product documentation](https://openstudiocoalition.org/about/software_license/) (2026-11-15; license, pricing); [Official upstream documentation](https://github.com/openstudiocoalition/OpenStudioApplication/releases) (2026-11-15; downloads); [Official release activity feed](https://github.com/openstudiocoalition/OpenStudioApplication/releases.atom) (2026-11-15; maintenance)
+
+## Building information modeling (BIM)
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=science%2Fbuilding-information-modeling)
+
+### Autodesk Revit
+
+BIM authoring application for coordinated architectural, structural and building-services models and documentation.
+
+- **Platforms:** Windows. **License:** Proprietary Autodesk software license. **Pricing model:** subscription.
+- **Compatibility details:** Native Windows application. Mac hardware does not imply native macOS support.
+- **Pick for:** Choose Revit when a project team’s deliverables and coordination process center on Revit models.
+- **Compare when:** Current Revit is a Windows application; running it on a Mac requires a supported Windows environment.
+- **Strengths:** Choose Revit when a project team’s deliverables and coordination process center on Revit models.; Its multidiscipline environment connects model changes with project documentation.
+- **Limitations:** Current Revit is a Windows application; running it on a Mac requires a supported Windows environment.; Collaboration services, add-ins and adjacent Autodesk products can require additional entitlements.
+- **Maintenance:** unverified — Current release cadence or an explicit maintenance commitment was not established by the reviewed sources. Availability alone is not a maintenance guarantee.
+- [Official project](https://www.autodesk.com/products/revit/overview) · [Official installation / downloads](https://www.autodesk.com/products/revit/overview)
+- **Sources:** [Official product documentation](https://www.autodesk.com/products/revit/overview) (2026-11-15; identity, features, platforms, pricing, license, downloads); [Official product documentation](https://www.autodesk.com/products/revit/product-details) (2026-11-15; platforms, features)
+### Bonsai Studio
+
+Blender-based BIM authoring environment that creates and edits native IFC building models.
+
+- **Platforms:** Windows, macOS, Linux. **License:** GNU GPL v3 for the Bonsai component; IfcOpenShell components have separate terms. **Pricing model:** free.
+- **Compatibility details:** Extension for a compatible Blender installation; current extension-platform and Blender-version combinations must be checked separately.
+- **Pick for:** Choose Bonsai Studio when an open IFC-centered model and Python automation matter more than a proprietary authoring format.
+- **Compare when:** It is a Blender extension, and the publisher labels the current Studio release alpha software.
+- **Strengths:** Choose Bonsai Studio when an open IFC-centered model and Python automation matter more than a proprietary authoring format.; Blender integration connects BIM data with an extensible modeling environment.
+- **Limitations:** It is a Blender extension, and the publisher labels the current Studio release alpha software.; Match the extension to its supported Blender version and test IFC exchange with collaborators.
+- **Maintenance:** active — Official release feed entry 'bonsai-0.9.1-alpha2611140952 (unstable)' was updated 2026-11-14T09:54:25Z. This is a dated maintenance signal, not an installation or quality benchmark. ([evidence](https://github.com/IfcOpenShell/IfcOpenShell/releases.atom))
+- [Official project](https://bonsaibim.org/studio.html) · [Official installation / downloads](https://docs.bonsaibim.org/studio/quickstart/installation.html) · [Repository](https://github.com/IfcOpenShell/IfcOpenShell)
+- **Sources:** [Official product documentation](https://bonsaibim.org/studio.html) (2026-11-15; identity, features, pricing, platforms); [Official product documentation](https://extensions.blender.org/add-ons/bonsai/) (2026-11-15; downloads, platforms, license); [Official upstream documentation](https://raw.githubusercontent.com/IfcOpenShell/IfcOpenShell/HEAD/src/bonsai/COPYING) (2026-11-15; license); [Official release activity feed](https://github.com/IfcOpenShell/IfcOpenShell/releases.atom) (2026-11-15; maintenance)
+### BricsCAD BIM
+
+DWG-based CAD environment with a BIM toolset for building modeling, documentation and IFC exchange.
+
+- **Platforms:** Windows, macOS, Linux. **License:** Proprietary Octave BricsCAD license. **Pricing model:** mixed.
+- **Pricing details:** Paid perpetual and subscription licenses are offered. Trial access is time-limited.
+- **Pick for:** Choose BricsCAD BIM when familiar DWG workflows and building information need to coexist.
+- **Compare when:** Platform-specific functions and third-party integrations differ, despite shared core BIM capabilities.
+- **Strengths:** Choose BricsCAD BIM when familiar DWG workflows and building information need to coexist.; Perpetual and subscription options give teams different upgrade and ownership choices.
+- **Limitations:** Platform-specific functions and third-party integrations differ, despite shared core BIM capabilities.; The BIM toolset is a paid product level; a general BricsCAD trial does not establish a permanent free entitlement.
+- **Maintenance:** unverified — Current release cadence or an explicit maintenance commitment was not established by the reviewed sources. Availability alone is not a maintenance guarantee.
+- [Official project](https://bricscad.octave.com/bricscad/bim) · [Official installation / downloads](https://bricscad.octave.com/bricscad-download)
+- **Sources:** [Official product documentation](https://bricscad.octave.com/bricscad/bim) (2026-11-15; identity, features, pricing, license); [Official product documentation](https://bricscad.octave.com/bricscad-download) (2026-11-15; downloads); [Official product documentation](https://boa.bricscad.octave.com/common/releasenotes.jsp?l=en_US&pl=mac) (2026-11-15; platforms); [Official product documentation](https://boa.bricscad.octave.com/common/releasenotes.jsp?l=en_EN&pl=lin) (2026-11-15; platforms); [Official product documentation](https://help.bricsys.com/en-us/document/knowledge-base/installation/windows-10-support-ending-with-bricscad-v271) (2026-11-15; platforms)
+### Graphisoft Archicad
+
+Architectural BIM design and documentation system with model-based drawings and coordinated team workflows.
+
+- **Platforms:** Windows, macOS. **License:** Proprietary Graphisoft Archicad license. **Pricing model:** subscription.
+- **Pick for:** Choose Archicad for an architectural BIM workflow with native Windows and macOS options.
+- **Compare when:** Studio, Collaborate and other plans provide different collaboration and service entitlements.
+- **Strengths:** Choose Archicad for an architectural BIM workflow with native Windows and macOS options.; Its architecture-focused toolset connects design development with documentation.
+- **Limitations:** Studio, Collaborate and other plans provide different collaboration and service entitlements.; Confirm version and exchange requirements with consultants before selecting a project toolchain.
+- **Maintenance:** unverified — Current release cadence or an explicit maintenance commitment was not established by the reviewed sources. Availability alone is not a maintenance guarantee.
+- [Official project](https://www.graphisoft.com/solutions/archicad) · [Official installation / downloads](https://www.graphisoft.com/en-us/downloads/?section=product&product=archicad)
+- **Sources:** [Official product documentation](https://www.graphisoft.com/solutions/archicad) (2026-11-15; identity, features, pricing, license); [Official product documentation](https://www.graphisoft.com/en-us/plans-and-products/system-requirements/) (2026-11-15; platforms); [Official product documentation](https://www.graphisoft.com/en-us/downloads/?section=product&product=archicad) (2026-11-15; downloads)
+
 ## Business Intelligence
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=science%2Fbusiness-intelligence)
 
 ### Power BI Desktop
 
@@ -258,7 +581,92 @@ Visual data exploration and dashboard authoring application with a free local ed
 - [Official project](https://www.tableau.com/products/desktop) · [Official installation / downloads](https://www.tableau.com/products/desktop-free/download)
 - **Sources:** [Official Tableau Desktop overview](https://www.tableau.com/products/desktop) (2026-11-14; identity, features); [Official Desktop Free Edition and paid-plan comparison](https://www.tableau.com/pricing) (2026-11-14; pricing, features); [Official Free Edition download route](https://www.tableau.com/products/desktop-free/download) (2026-11-14; downloads); [Official Tableau platform requirements](https://www.tableau.com/products/techspecs) (2026-11-14; platforms); [Official Tableau agreements](https://www.tableau.com/legal/eula) (2026-11-14; license, pricing); [Official Desktop Free Edition supplementary terms, March 2026](https://wp.sfdcdigital.com/tableau/en-us/wp-content/uploads/sites/47/documents/legal/Tableau-Desktop-Free-Edition-Supplement.pdf) (2026-11-14; license, pricing)
 
+## CAM toolpaths
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=science%2Fcam-toolpaths)
+
+### Carbide Create
+
+Integrated CAD/CAM application for vector design, 2D/2.5D machining and optional advanced 3D toolpaths.
+
+- **Platforms:** Windows, macOS. **License:** Proprietary Carbide Create license. **Pricing model:** freemium.
+- **Pricing details:** Core is included with Carbide 3D hardware. Pro is paid and is required for standard G-code output to non-Carbide machines.
+- **Pick for:** Choose Carbide Create when design and machining should remain in one approachable workspace.
+- **Compare when:** Core output is tied to supported Carbide 3D machines; standard G-code for other CNC machines requires Pro.
+- **Strengths:** Choose Carbide Create when design and machining should remain in one approachable workspace.; Core is included with Carbide 3D machines, while Pro broadens machining capabilities and output.
+- **Limitations:** Core output is tied to supported Carbide 3D machines; standard G-code for other CNC machines requires Pro.; Check the edition before assuming 3D machining or advanced strategies are included.
+- **Maintenance:** unverified — Current release cadence or an explicit maintenance commitment was not established by the reviewed sources. Availability alone is not a maintenance guarantee.
+- [Official project](https://carbide3d.com/carbidecreate/) · [Official installation / downloads](https://carbide3d.com/carbidecreate/download/)
+- **Sources:** [Official product documentation](https://carbide3d.com/carbidecreate/) (2026-11-15; identity, features, license, pricing, platforms); [Official product documentation](https://carbide3d.com/carbidecreate/download/) (2026-11-15; downloads, platforms)
+### DeskProto
+
+CAM application for generating toolpaths from three-dimensional models, drawings and images, with free and advanced editions.
+
+- **Platforms:** Windows, macOS, Linux. **License:** Proprietary DeskProto license. **Pricing model:** freemium.
+- **Pricing details:** Permanent Free edition; Entry, Expert and Multi-Axis editions require paid licenses after trial use.
+- **Pick for:** Choose DeskProto when imported models need machining preparation without adopting a full CAD suite.
+- **Compare when:** Multi-axis and advanced controls depend on the selected edition.
+- **Strengths:** Choose DeskProto when imported models need machining preparation without adopting a full CAD suite.; A permanent Free edition provides an entry point with a shared interface across paid editions.
+- **Limitations:** Multi-axis and advanced controls depend on the selected edition.; Check machine postprocessors and preview the generated toolpaths before machining.
+- **Maintenance:** unverified — Current release cadence or an explicit maintenance commitment was not established by the reviewed sources. Availability alone is not a maintenance guarantee.
+- [Official project](https://www.deskproto.com/) · [Official installation / downloads](https://www.deskproto.com/download/dp-software.php)
+- **Sources:** [Official product documentation](https://www.deskproto.com/) (2026-11-15; identity, features); [Official product documentation](https://www.deskproto.com/download/dp-software.php) (2026-11-15; downloads, platforms, pricing, license)
+### Estlcam
+
+CAM and compatible CNC-control application for generating machining programs from drawings, meshes and images.
+
+- **Platforms:** Windows. **License:** Proprietary Estlcam license with an indefinitely usable delayed evaluation mode. **Pricing model:** freemium.
+- **Pricing details:** Free evaluation remains functional with increasing file-operation delays. A paid key removes delays for eligible versions and includes one year of updates.
+- **Pick for:** Choose Estlcam for a compact drawing-to-toolpath workflow and supported control hardware.
+- **Compare when:** The free mode adds increasing delays when opening and saving files.
+- **Strengths:** Choose Estlcam for a compact drawing-to-toolpath workflow and supported control hardware.; Its unlimited-duration evaluation allows meaningful workflow assessment before purchasing.
+- **Limitations:** The free mode adds increasing delays when opening and saving files.; Version 13 paid licenses include one year of updates; later updates require a separate update purchase.
+- **Maintenance:** active — Developer lists Estlcam 13.020 dated 11 November 2026. ([evidence](https://www.estlcam.de/))
+- [Official project](https://www.estlcam.de/) · [Official installation / downloads](https://www.estlcam.de/)
+- **Sources:** [Official product documentation](https://www.estlcam.de/) (2026-11-15; identity, features, license, pricing, downloads, platforms, maintenance)
+### Fabex CNC
+
+Blender CAM extension, now presented upstream as Fabex CNC, for generating machining toolpaths and postprocessed G-code.
+
+- **Platforms:** Windows, macOS, Linux. **License:** GNU GPL v3, with separately identified component licenses. **Pricing model:** free.
+- **Compatibility details:** Blender extension rather than a standalone CAM executable; follow the current Blender compatibility and dependency instructions.
+- **Pick for:** Choose Fabex CNC when fabrication preparation should stay close to a Blender modeling workflow.
+- **Compare when:** It requires a compatible Blender installation and extension dependencies.
+- **Strengths:** Choose Fabex CNC when fabrication preparation should stay close to a Blender modeling workflow.; Open-source extension code and multiple postprocessors support adaptable workflows.
+- **Limitations:** It requires a compatible Blender installation and extension dependencies.; Postprocessor selection and simulated toolpaths must be checked against the actual machine.
+- **Maintenance:** active — Official release feed entry '3.0.2' was updated 2026-01-01T00:44:03Z. This is a dated maintenance signal, not an installation or quality benchmark. ([evidence](https://github.com/vilemduha/blendercam/releases.atom))
+- [Official project](https://blendercam.com/) · [Official installation / downloads](https://github.com/vilemduha/blendercam) · [Repository](https://github.com/vilemduha/blendercam)
+- **Sources:** [Official product documentation](https://blendercam.com/) (2026-11-15; identity, features, pricing); [Official upstream documentation](https://raw.githubusercontent.com/vilemduha/blendercam/HEAD/README.md) (2026-11-15; identity, features, license, platforms, downloads); [Official release activity feed](https://github.com/vilemduha/blendercam/releases.atom) (2026-11-15; maintenance)
+### Kiri:Moto
+
+Browser-based and desktop fabrication preparation tool supporting CNC milling, laser cutting and several 3D-printing workflows.
+
+- **Platforms:** Web, Windows, macOS, Linux. **License:** MIT License. **Pricing model:** free.
+- **Pricing details:** Free application; donations and institutional support fund development.
+- **Pick for:** Choose Kiri:Moto when several digital-fabrication processes should share an accessible preparation tool.
+- **Compare when:** Machine profiles, stock setup and postprocessing still require careful verification.
+- **Strengths:** Choose Kiri:Moto when several digital-fabrication processes should share an accessible preparation tool.; Browser and locally hosted options support different deployment needs.
+- **Limitations:** Machine profiles, stock setup and postprocessing still require careful verification.; Browser, desktop and local-server routes have different installation and persistence behavior.
+- **Maintenance:** active — Official release feed entry '4.7.3' was updated 2026-08-16T14:59:32Z. This is a dated maintenance signal, not an installation or quality benchmark. ([evidence](https://github.com/GridSpace/grid-apps/releases.atom))
+- [Official project](https://grid.space/kiri/) · [Official installation / downloads](https://github.com/GridSpace/grid-apps) · [Repository](https://github.com/GridSpace/grid-apps)
+- **Sources:** [Official upstream documentation](https://github.com/GridSpace/grid-apps) (2026-11-15; identity, features, license, pricing, downloads, platforms); [Official upstream documentation](https://raw.githubusercontent.com/GridSpace/grid-apps/HEAD/license.md) (2026-11-15; license); [Official release activity feed](https://github.com/GridSpace/grid-apps/releases.atom) (2026-11-15; maintenance)
+### Vectric VCarve
+
+CAD/CAM application for CNC vector work, decorative 2.5D carving and machining imported three-dimensional models.
+
+- **Platforms:** Windows. **License:** Proprietary Vectric VCarve license. **Pricing model:** paid.
+- **Pricing details:** Paid editions with a restricted trial; trial cutting is limited to supplied compatible projects.
+- **Pick for:** Choose VCarve when decorative routing and sign-making need integrated design, preview and toolpath tools.
+- **Compare when:** Trial software only cuts approved trial projects, not arbitrary user-created designs.
+- **Strengths:** Choose VCarve when decorative routing and sign-making need integrated design, preview and toolpath tools.; Desktop and Pro editions let users choose a feature level appropriate to machine and project scope.
+- **Limitations:** Trial software only cuts approved trial projects, not arbitrary user-created designs.; VCarve is a Windows product; Vectric’s separate macOS product should not be confused with a native Mac VCarve edition.
+- **Maintenance:** unverified — Current release cadence or an explicit maintenance commitment was not established by the reviewed sources. Availability alone is not a maintenance guarantee.
+- [Official project](https://www.vectric.com/products/vcarve-pro) · [Official installation / downloads](https://www.vectric.com/free-trial/)
+- **Sources:** [Official product documentation](https://www.vectric.com/products/vcarve-pro) (2026-11-15; identity, features, pricing, license); [Official product documentation](https://www.vectric.com/free-trial/) (2026-11-15; downloads, platforms, pricing); [Official product documentation](https://www.vectric.com/support/system-requirements) (2026-11-15; platforms)
+
 ## Breadboard and circuit documentation
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=science%2Fcircuit-design)
 
 ### Fritzing
 
@@ -274,6 +682,8 @@ Electronics design tool that connects breadboard diagrams, schematics and PCB la
 - **Sources:** [Official project documentation](https://fritzing.org/) (2026-11-14; identity, features, platforms); [Official project README](https://raw.githubusercontent.com/fritzing/fritzing-app/HEAD/README.md) (2026-11-14; identity, features, license); [Official installation and download information](https://fritzing.org/download/) (2026-11-14; identity, downloads, platforms, pricing); [Official repository activity feed](https://github.com/fritzing/fritzing-app/commits/HEAD.atom) (2026-11-14; maintenance)
 
 ## Circuit simulation
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=science%2Fcircuit-simulation)
 
 ### ngspice
 
@@ -313,7 +723,91 @@ Interactive circuit simulator aimed at learning analog, digital and microcontrol
 - [Official project](https://simulide.com/p/) · [Official installation / downloads](https://simulide.com/p/downloads/)
 - **Sources:** [Official product documentation](https://simulide.com/p/) (2026-11-14; features, identity, license); [Official download and distribution documentation](https://simulide.com/p/downloads/) (2026-11-14; downloads); [Official download and distribution documentation](https://simulide.com/p/downloads/simulide-1-1-0/) (2026-11-14; downloads, platforms)
 
+## Cnc Gcode Senders
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=science%2Fcnc-gcode-senders)
+
+### bCNC
+
+Python CNC sender and G-code editor with probing, autoleveling and practical CAM operations.
+
+- **Platforms:** Windows, macOS, Linux. **License:** GPL-2.0; some modules MIT. **Pricing model:** unknown.
+- **Pick for:** Combine sender controls with surface compensation when machining a non-flat workpiece.
+- **Compare when:** Probe setup, units and controller compatibility directly affect the resulting path.
+- **Strengths:** Combine sender controls with surface compensation when machining a non-flat workpiece.
+- **Limitations:** Probe setup, units and controller compatibility directly affect the resulting path.; Installation can require Python/Tk dependencies; unofficial binaries may differ from the documented build.
+- **Maintenance:** active — Official release feed contains 1.0.0 with an updated timestamp of 2026-11-06. This is release-channel activity evidence, not proof of a stable build, installed compatibility or security testing. ([evidence](https://github.com/vlachoudis/bCNC/releases.atom))
+- [Official project](https://github.com/vlachoudis/bCNC) · [Official installation / downloads](https://github.com/vlachoudis/bCNC) · [Repository](https://github.com/vlachoudis/bCNC)
+- **Sources:** [Official documentation and distribution evidence](https://github.com/vlachoudis/bCNC) (2026-11-15; identity, features, platforms, license, downloads); [Official release or lifecycle evidence](https://github.com/vlachoudis/bCNC/releases.atom) (2026-11-15; maintenance)
+### cncjs
+
+Browser-based CNC control interface connected to a local server and supported serial motion controllers.
+
+- **Platforms:** Windows, macOS, Linux, Web. **License:** MIT. **Pricing model:** unknown.
+- **Pick for:** Operate a supported CNC controller through a browser interface while the serial connection stays on a host computer.
+- **Compare when:** Requires the CNCjs server and a supported controller; browser access alone cannot reach arbitrary USB hardware.
+- **Strengths:** Operate a supported CNC controller through a browser interface while the serial connection stays on a host computer.
+- **Limitations:** Requires the CNCjs server and a supported controller; browser access alone cannot reach arbitrary USB hardware.; Remote access and controller settings need deliberate configuration.
+- **Maintenance:** active — Official release feed contains v1.12.0 with an updated timestamp of 2026-11-14. This is release-channel activity evidence, not proof of a stable build, installed compatibility or security testing. ([evidence](https://github.com/cncjs/cncjs/releases.atom))
+- [Official project](https://cnc.js.org/) · [Official installation / downloads](https://cnc.js.org/docs/installation/) · [Repository](https://github.com/cncjs/cncjs)
+- **Sources:** [Official documentation and distribution evidence](https://cnc.js.org/) (2026-11-15; identity, features, platforms, license, downloads); [Official documentation and distribution evidence](https://github.com/cncjs/cncjs) (2026-11-15; features, license, platforms); [Official release or lifecycle evidence](https://github.com/cncjs/cncjs/releases.atom) (2026-11-15; maintenance)
+### gSender
+
+CNC control application for Grbl and grblHAL machines, with jogging, probing, surfacing and calibration helpers.
+
+- **Platforms:** Windows, macOS, Linux. **License:** GPL-3.0. **Pricing model:** free.
+- **Pick for:** Choose a guided Grbl/grblHAL machine-control workflow with common setup and surfacing tools included.
+- **Compare when:** Mach3/4 controllers are not supported through the same interface.
+- **Strengths:** Choose a guided Grbl/grblHAL machine-control workflow with common setup and surfacing tools included.
+- **Limitations:** Mach3/4 controllers are not supported through the same interface.; Advanced axes and probing require compatible firmware and machine configuration.
+- **Maintenance:** active — Official release feed contains v1.6.4--.gcontrol with an updated timestamp of 2026-09-28. This is release-channel activity evidence, not proof of a stable build, installed compatibility or security testing. ([evidence](https://github.com/Sienci-Labs/gsender/releases.atom))
+- [Official project](https://sienci.com/gsender/) · [Official installation / downloads](https://sienci.com/gsender/) · [Repository](https://github.com/Sienci-Labs/gsender)
+- **Sources:** [Official documentation and distribution evidence](https://sienci.com/gsender/) (2026-11-15; identity, features, platforms, pricing, downloads); [Official documentation and distribution evidence](https://github.com/Sienci-Labs/gsender) (2026-11-15; license, features); [Official release or lifecycle evidence](https://github.com/Sienci-Labs/gsender/releases.atom) (2026-11-15; maintenance)
+### OpenBuilds CONTROL
+
+Desktop G-code sender and setup interface for Grbl-based CNC machines.
+
+- **Platforms:** Windows, macOS, Linux. **License:** GPL-3.0. **Pricing model:** unknown.
+- **Pick for:** Use a focused Grbl host when an OpenBuilds-style setup and machine controls fit the workflow.
+- **Compare when:** Compatible Grbl firmware and correctly configured machine settings are required.
+- **Strengths:** Use a focused Grbl host when an OpenBuilds-style setup and machine controls fit the workflow.
+- **Limitations:** Compatible Grbl firmware and correctly configured machine settings are required.; It is a machine host, not a substitute for CAD/CAM toolpath preparation.
+- **Maintenance:** unverified — The reviewed official release feed's newest observed entry is v1.0.390 (updated 2025-06-02). Recent maintenance remains unverified; this does not prove the project is abandoned. ([evidence](https://github.com/OpenBuilds/OpenBuilds-CONTROL/releases.atom))
+- [Official project](https://github.com/OpenBuilds/OpenBuilds-CONTROL) · [Official installation / downloads](https://github.com/OpenBuilds/OpenBuilds-CONTROL/releases) · [Repository](https://github.com/OpenBuilds/OpenBuilds-CONTROL)
+- **Sources:** [Official documentation and distribution evidence](https://github.com/OpenBuilds/OpenBuilds-CONTROL) (2026-11-15; identity, features, platforms, license, downloads); [Official documentation and distribution evidence](https://github.com/OpenBuilds/OpenBuilds-CONTROL/releases/expanded_assets/v1.0.390) (2026-11-15; platforms, downloads); [Official release or lifecycle evidence](https://github.com/OpenBuilds/OpenBuilds-CONTROL/releases.atom) (2026-11-15; maintenance)
+### Universal Gcode Sender
+
+Cross-platform CNC sender with machine controls, G-code visualization and a modular desktop workspace.
+
+- **Platforms:** Windows, macOS, Linux. **License:** GPL-3.0. **Pricing model:** free.
+- **Pick for:** Use an integrated sender and visualizer for a supported CNC controller across desktop OSes.
+- **Compare when:** It is primarily a machine interface rather than a full CAM package.
+- **Strengths:** Use an integrated sender and visualizer for a supported CNC controller across desktop OSes.
+- **Limitations:** It is primarily a machine interface rather than a full CAM package.; Firmware dialect, units and machine configuration must match the loaded program.
+- **Maintenance:** active — Official release feed contains v2.1.30 with an updated timestamp of 2026-11-09. This is release-channel activity evidence, not proof of a stable build, installed compatibility or security testing. ([evidence](https://github.com/winder/Universal-G-Code-Sender/releases.atom))
+- [Official project](https://winder.github.io/ugs_website/) · [Official installation / downloads](https://winder.github.io/ugs_website/download/) · [Repository](https://github.com/winder/Universal-G-Code-Sender)
+- **Sources:** [Official documentation and distribution evidence](https://winder.github.io/ugs_website/) (2026-11-15; identity, features, platforms, pricing, downloads); [Official documentation and distribution evidence](https://github.com/winder/Universal-G-Code-Sender) (2026-11-15; features, license); [Official release or lifecycle evidence](https://github.com/winder/Universal-G-Code-Sender/releases.atom) (2026-11-15; maintenance)
+
+## Cnc Machine Control
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=science%2Fcnc-machine-control)
+
+### LinuxCNC
+
+Linux motion-control system that interprets G-code and drives supported CNC machines through configured hardware interfaces.
+
+- **Platforms:** Linux, Bootable. **License:** GPL-2.0. **Pricing model:** unknown.
+- **Pick for:** Use a configurable PC controller when the project needs direct machine control and appropriate real-time hardware.
+- **Compare when:** Real hardware operation requires suitable timing, I/O configuration and machine-specific setup.
+- **Strengths:** Use a configurable PC controller when the project needs direct machine control and appropriate real-time hardware.
+- **Limitations:** Real hardware operation requires suitable timing, I/O configuration and machine-specific setup.; It is a controller rather than a general CAD/CAM design tool; simulation success does not validate machine wiring.
+- **Maintenance:** active — Official release feed contains v2.10.0-pre2 with an updated timestamp of 2026-09-28. This is release-channel activity evidence, not proof of a stable build, installed compatibility or security testing. ([evidence](https://github.com/LinuxCNC/linuxcnc/releases.atom))
+- [Official project](https://linuxcnc.org/) · [Official installation / downloads](https://linuxcnc.org/downloads/) · [Repository](https://github.com/LinuxCNC/linuxcnc)
+- **Sources:** [Official documentation and distribution evidence](https://linuxcnc.org/) (2026-11-15; identity, features, license, platforms, downloads); [Official documentation and distribution evidence](https://github.com/LinuxCNC/linuxcnc) (2026-11-15; features, license); [Official release or lifecycle evidence](https://github.com/LinuxCNC/linuxcnc/releases.atom) (2026-11-15; maintenance)
+
 ## CNC toolpath simulation
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=science%2Fcnc-simulation)
 
 ### CAMotics
 
@@ -330,6 +824,8 @@ Three-axis CNC toolpath simulation application for previewing material removal.
 
 ## Computational Fluid Dynamics
 
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=science%2Fcomputational-fluid-dynamics)
+
 ### OpenFOAM Foundation
 
 OpenFOAM Foundation distribution for computational fluid dynamics and related numerical simulation.
@@ -345,6 +841,8 @@ OpenFOAM Foundation distribution for computational fluid dynamics and related nu
 - **Sources:** [Official product documentation](https://openfoam.org/) (2026-11-14; features, identity, license, maintenance, pricing); [Official upstream license text](https://raw.githubusercontent.com/OpenFOAM/OpenFOAM-dev/HEAD/COPYING) (2026-11-14; license); [Official download and distribution documentation](https://openfoam.org/download/) (2026-11-14; downloads, platforms); [Official download and distribution documentation](https://openfoam.org/download/windows/) (2026-11-14; platforms); [Official download and distribution documentation](https://openfoam.org/download/macos/) (2026-11-14; platforms)
 
 ## Computer algebra
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=science%2Fcomputer-algebra)
 
 ### Maxima
 
@@ -386,6 +884,8 @@ Symbolic and numerical technical computing system with programmable notebooks, g
 
 ## Crystal Visualization
 
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=science%2Fcrystal-visualization)
+
 ### VESTA
 
 Three-dimensional viewer for crystal structures, volumetric densities and crystal morphology.
@@ -402,6 +902,8 @@ Three-dimensional viewer for crystal structures, volumetric densities and crysta
 
 ## Curve Fitting
 
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=science%2Fcurve-fitting)
+
 ### Fityk
 
 Curve-fitting application focused on experimental datasets and overlapping peaks.
@@ -416,7 +918,27 @@ Curve-fitting application focused on experimental datasets and overlapping peaks
 - [Official project](https://fityk.nieto.pl/) · [Official installation / downloads](https://fityk.nieto.pl/) · [Repository](https://github.com/wojdyr/fityk)
 - **Sources:** [Official product documentation](https://fityk.nieto.pl/) (2026-11-14; downloads, features, identity, license, platforms); [Official upstream license text](https://raw.githubusercontent.com/wojdyr/fityk/HEAD/COPYING) (2026-11-14; license)
 
+## Device Telemetry
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=science%2Fdevice-telemetry)
+
+### Serial Studio
+
+Desktop telemetry dashboard for structured hardware data, with plots, gauges, recording and edition-dependent industrial protocols.
+
+- **Platforms:** Windows, macOS, Linux. **License:** GPL-3.0-or-later core; proprietary official binaries and Pro modules. **Pricing model:** mixed.
+- **Pricing details:** Free GPL core when compiled from source; official binaries and Pro modules use commercial terms. Personal/educational unlicensed binary use and Pro feature trials have separate restrictions.
+- **Pick for:** Turn structured device telemetry into reusable dashboards without writing a complete visualization application.
+- **Compare when:** GPL source builds and official binaries have different terms and feature sets.
+- **Strengths:** Turn structured device telemetry into reusable dashboards without writing a complete visualization application.
+- **Limitations:** GPL source builds and official binaries have different terms and feature sets.; Industrial protocols such as Modbus, CAN and OPC UA are Pro features; do not assume every listed driver is in the free source build.
+- **Maintenance:** active — Official release feed contains Continuous Build with an updated timestamp of 2026-11-13. This is release-channel activity evidence, not proof of a stable build, installed compatibility or security testing. ([evidence](https://github.com/Serial-Studio/Serial-Studio/releases.atom))
+- [Official project](https://serial-studio.com/) · [Official installation / downloads](https://serial-studio.com/) · [Repository](https://github.com/Serial-Studio/Serial-Studio)
+- **Sources:** [Official documentation and distribution evidence](https://serial-studio.com/) (2026-11-15; identity, features, platforms, downloads); [Official documentation and distribution evidence](https://github.com/Serial-Studio/Serial-Studio) (2026-11-15; license, features); [Official documentation and distribution evidence](https://serial-studio.com/pricing) (2026-11-15; pricing, license, features); [Official documentation and distribution evidence](https://github.com/Serial-Studio/Serial-Studio/blob/master/doc/help/Pro-vs-Free.md) (2026-11-15; pricing, license, features); [Official release or lifecycle evidence](https://github.com/Serial-Studio/Serial-Studio/releases.atom) (2026-11-15; maintenance)
+
 ## Ecosystem Modeling
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=science%2Fecosystem-modeling)
 
 ### InVEST
 
@@ -434,6 +956,8 @@ Collection of spatial models and a desktop workbench for exploring ecosystem ser
 
 ## Electrical Diagrams
 
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=science%2Felectrical-diagrams)
+
 ### QElectroTech
 
 Diagram editor for industrial electrical schematics with reusable symbol libraries.
@@ -447,7 +971,124 @@ Diagram editor for industrial electrical schematics with reusable symbol librari
 - [Official project](https://qelectrotech.org/) · [Official installation / downloads](https://qelectrotech.org/download.php) · [Repository](https://github.com/qelectrotech/qelectrotech-source-mirror)
 - **Sources:** [Official product documentation](https://qelectrotech.org/) (2026-11-14; features, identity, license, platforms, pricing); [Official upstream README](https://raw.githubusercontent.com/qelectrotech/qelectrotech-source-mirror/HEAD/README.md) (2026-11-14; features, identity); [Official upstream license text](https://raw.githubusercontent.com/qelectrotech/qelectrotech-source-mirror/HEAD/LICENSE) (2026-11-14; license); [Official download and distribution documentation](https://qelectrotech.org/download.php) (2026-11-14; downloads, platforms); [Official upstream release activity feed](https://github.com/qelectrotech/qelectrotech-source-mirror/releases.atom) (2026-11-14; maintenance)
 
+## Electronic Signal Analysis
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=science%2Felectronic-signal-analysis)
+
+### Digilent WaveForms
+
+Multi-instrument software for supported Digilent hardware, including oscilloscopes, generators, logic analysis and an SDK.
+
+- **Platforms:** Windows, macOS, Linux. **License:** Vendor-distributed freeware; exact redistribution terms were not established in reviewed documentation. **Pricing model:** free.
+- **Pricing details:** Free software; hardware and some device-specific capabilities are separate.
+- **Pick for:** Use a coordinated set of instruments with compatible Digilent hardware or explore controls in demo mode.
+- **Compare when:** Real acquisition requires compatible Digilent hardware.
+- **Strengths:** Use a coordinated set of instruments with compatible Digilent hardware or explore controls in demo mode.
+- **Limitations:** Real acquisition requires compatible Digilent hardware.; Platform and instrument capabilities differ by device; Linux packages also require the Adept runtime.
+- **Maintenance:** unverified — Product documentation reviewed; a current dated release or lifecycle commitment has not been established for this record.
+- [Official project](https://digilent.com/shop/waveforms/) · [Official installation / downloads](https://lp.digilent.com/complete-waveforms-download/)
+- **Sources:** [Official documentation and distribution evidence](https://digilent.com/shop/waveforms/) (2026-11-15; identity, features, platforms, pricing, downloads); [Official documentation and distribution evidence](https://digilent.com/reference/software/waveforms/waveforms-3/previous-versions) (2026-11-15; platforms, downloads, maintenance)
+### OpenHantek6022
+
+Desktop oscilloscope frontend for Hantek 6022BE/BL and documented compatible USB oscilloscopes.
+
+- **Platforms:** Linux, macOS, Windows, FreeBSD. **License:** GPL-3.0. **Pricing model:** unknown.
+- **Pick for:** Reuse a supported Hantek 6022-class scope through an open desktop application.
+- **Compare when:** Hardware support is narrow; this does not support every Hantek product.
+- **Strengths:** Reuse a supported Hantek 6022-class scope through an open desktop application.
+- **Limitations:** Hardware support is narrow; this does not support every Hantek product.; Windows requires the correct WinUSB driver, and non-Linux support depends on volunteers.
+- **Maintenance:** active — Official release feed contains devdrop with an updated timestamp of 2026-10-08. This is release-channel activity evidence, not proof of a stable build, installed compatibility or security testing. ([evidence](https://github.com/OpenHantek/OpenHantek6022/releases.atom))
+- [Official project](https://github.com/OpenHantek/OpenHantek6022) · [Official installation / downloads](https://github.com/OpenHantek/OpenHantek6022/releases) · [Repository](https://github.com/OpenHantek/OpenHantek6022)
+- **Sources:** [Official documentation and distribution evidence](https://github.com/OpenHantek/OpenHantek6022) (2026-11-15; identity, features, license, platforms, downloads); [Official release or lifecycle evidence](https://github.com/OpenHantek/OpenHantek6022/releases.atom) (2026-11-15; maintenance)
+### PulseView
+
+Graphical sigrok frontend for logic analyzers, oscilloscopes and mixed-signal captures with protocol decoding.
+
+- **Platforms:** Windows, macOS, Linux. **License:** GPL-3.0-or-later. **Pricing model:** unknown.
+- **Pick for:** Use one interface for supported analyzers when open protocol decoding and capture inspection matter.
+- **Compare when:** Hardware support depends on sigrok drivers and device-specific acquisition limits.
+- **Strengths:** Use one interface for supported analyzers when open protocol decoding and capture inspection matter.
+- **Limitations:** Hardware support depends on sigrok drivers and device-specific acquisition limits.; Some platform packages are nightly builds; verify the selected device and package before standardizing a lab.
+- **Maintenance:** unverified — The reviewed official release feed's newest observed entry is continuous (updated 2025-11-10). Recent maintenance remains unverified; this does not prove the project is abandoned. ([evidence](https://github.com/sigrokproject/pulseview/releases.atom))
+- [Official project](https://sigrok.org/wiki/PulseView) · [Official installation / downloads](https://sigrok.org/wiki/Downloads) · [Repository](https://github.com/sigrokproject/pulseview)
+- **Sources:** [Official documentation and distribution evidence](https://sigrok.org/wiki/PulseView) (2026-11-15; identity, features, license, downloads); [Official documentation and distribution evidence](https://sigrok.org/wiki/Downloads) (2026-11-15; platforms, downloads); [Official documentation and distribution evidence](https://github.com/sigrokproject/pulseview) (2026-11-15; features, license); [Official release or lifecycle evidence](https://github.com/sigrokproject/pulseview/releases.atom) (2026-11-15; maintenance)
+### Saleae Logic 2
+
+Desktop capture and analysis software for Saleae instruments, with protocol decoding and automation interfaces.
+
+- **Platforms:** Windows, macOS, Linux. **License:** Vendor software terms; extension licenses vary. **Pricing model:** free.
+- **Pricing details:** Software download is free; compatible acquisition hardware is purchased separately.
+- **Pick for:** Use the vendor-integrated workflow for capturing and decoding signals with supported Saleae hardware.
+- **Compare when:** Real acquisition requires supported Saleae instruments and suitable probes.
+- **Strengths:** Use the vendor-integrated workflow for capturing and decoding signals with supported Saleae hardware.
+- **Limitations:** Real acquisition requires supported Saleae instruments and suitable probes.; Hardware sample limits and decoder configuration affect what a capture can establish.
+- **Maintenance:** unverified — Product documentation reviewed; a current dated release or lifecycle commitment has not been established for this record.
+- [Official project](https://www.saleae.com/downloads) · [Official installation / downloads](https://www.saleae.com/downloads)
+- **Sources:** [Official documentation and distribution evidence](https://www.saleae.com/downloads) (2026-11-15; identity, features, platforms, downloads); [Official documentation and distribution evidence](https://new.saleae.com/support/logic-software/download-and-installation/sw-installation) (2026-11-15; pricing, downloads); [Official documentation and distribution evidence](https://www.saleae.com/support/logic-software/download-and-installation/sw-download) (2026-11-15; features); [Official documentation and distribution evidence](https://www.saleae.com/terms-of-service) (2026-11-15; license)
+### Scopy
+
+Analog Devices instrument frontend providing oscilloscope, signal analysis and device-specific control panels.
+
+- **Platforms:** Windows, macOS, Linux. **License:** GPL-3.0; third-party component licenses apply. **Pricing model:** unknown.
+- **Pick for:** Use software instruments tailored to supported Analog Devices hardware and learning boards.
+- **Compare when:** The available instruments depend on the connected device and plugin.
+- **Strengths:** Use software instruments tailored to supported Analog Devices hardware and learning boards.
+- **Limitations:** The available instruments depend on the connected device and plugin.; Desktop GPU/USB dependencies and supported hardware must be checked for the target system.
+- **Maintenance:** active — Official release feed contains Scopy v2.2.1 with an updated timestamp of 2026-11-06. This is release-channel activity evidence, not proof of a stable build, installed compatibility or security testing. ([evidence](https://github.com/analogdevicesinc/scopy/releases.atom))
+- [Official project](https://analogdevicesinc.github.io/scopy/) · [Official installation / downloads](https://github.com/analogdevicesinc/scopy/releases) · [Repository](https://github.com/analogdevicesinc/scopy)
+- **Sources:** [Official documentation and distribution evidence](https://analogdevicesinc.github.io/scopy/) (2026-11-15; identity, features, downloads); [Official documentation and distribution evidence](https://github.com/analogdevicesinc/scopy) (2026-11-15; license, platforms, downloads); [Official release or lifecycle evidence](https://github.com/analogdevicesinc/scopy/releases.atom) (2026-11-15; maintenance)
+
+## Embedded Debugging
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=science%2Fembedded-debugging)
+
+### OpenOCD
+
+On-chip debugging server that connects supported debug probes and target processors to tools such as GDB.
+
+- **Platforms:** Linux, macOS, Windows. **License:** GPL-2.0-or-later. **Pricing model:** unknown.
+- **Pick for:** Use a common debug server across supported probes and processors instead of a separate vendor GUI for each.
+- **Compare when:** Probe, target and configuration-script support determine whether a board works.
+- **Strengths:** Use a common debug server across supported probes and processors instead of a separate vendor GUI for each.
+- **Limitations:** Probe, target and configuration-script support determine whether a board works.; Prebuilt distributions and driver setup vary by OS; source availability does not ensure a turnkey package.
+- **Maintenance:** unverified — Product documentation reviewed; a current dated release or lifecycle commitment has not been established for this record.
+- [Official project](https://openocd.org/) · [Official installation / downloads](https://www.openocd.org/pages/getting-openocd.html)
+- **Sources:** [Official documentation and distribution evidence](https://openocd.org/) (2026-11-15; identity, features, platforms); [Official documentation and distribution evidence](https://www.openocd.org/pages/getting-openocd.html) (2026-11-15; downloads, platforms, license)
+### STM32CubeProgrammer
+
+STMicroelectronics utility for reading, programming and configuring supported STM32 microcontrollers through several interfaces.
+
+- **Platforms:** Windows, macOS, Linux. **License:** ST proprietary software license. **Pricing model:** free.
+- **Pricing details:** No-charge vendor utility; download can require accepting ST terms or using its account/download workflow.
+- **Pick for:** Use ST’s supported programming workflow for STM32 targets and documented transport interfaces.
+- **Compare when:** It is specific to supported ST targets and interfaces.
+- **Strengths:** Use ST’s supported programming workflow for STM32 targets and documented transport interfaces.
+- **Limitations:** It is specific to supported ST targets and interfaces.; Some operations change persistent device configuration; exact target and option-byte documentation remain necessary.
+- **Maintenance:** unverified — Product documentation reviewed; a current dated release or lifecycle commitment has not been established for this record.
+- [Official project](https://www.st.com/en/development-tools/stm32cubeprog.html) · [Official installation / downloads](https://www.st.com/en/development-tools/stm32cubeprog.html)
+- **Sources:** [Official documentation and distribution evidence](https://www.st.com/en/development-tools/stm32cubeprog.html) (2026-11-15; identity, features, platforms, pricing, license, downloads); [Official documentation and distribution evidence](https://dev.st.com/stm32cube-docs/prog/2.23.0/en/docs/markup/CubeProg_FAQ.html) (2026-11-15; identity, pricing, license, platforms)
+
+## Factory Simulation
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=science%2Ffactory-simulation)
+
+### Factory I/O
+
+Interactive 3D factory simulator for practicing PLC logic with virtual industrial sensors, actuators and production scenes.
+
+- **Platforms:** Windows. **License:** Proprietary commercial license. **Pricing model:** paid.
+- **Pricing details:** Paid editions with a time-limited trial; choose by required PLC connection driver.
+- **Pick for:** Practice control logic against a visible production process without assembling a physical training factory.
+- **Compare when:** Connection drivers vary by purchased edition.
+- **Strengths:** Practice control logic against a visible production process without assembling a physical training factory.
+- **Limitations:** Connection drivers vary by purchased edition.; The simulator requires compatible Windows graphics and does not establish real machine commissioning or safety.
+- **Maintenance:** unverified — Product documentation reviewed; a current dated release or lifecycle commitment has not been established for this record.
+- [Official project](https://factoryio.com/) · [Official installation / downloads](https://factoryio.com/download-archive)
+- **Sources:** [Official documentation and distribution evidence](https://factoryio.com/) (2026-11-15; identity, features, downloads); [Official documentation and distribution evidence](https://factoryio.com/editions) (2026-11-15; license, pricing, features); [Official documentation and distribution evidence](https://docs.factoryio.com/manual/system-requirements/) (2026-11-15; platforms)
+
 ## Finite element analysis
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=science%2Ffinite-element-analysis)
 
 ### Elmer FEM
 
@@ -474,7 +1115,81 @@ Finite-element software suite focused on nonlinear mechanics and multiphysics in
 - [Official project](https://febio.org/) · [Official installation / downloads](https://febio.org/downloads/) · [Repository](https://github.com/febiosoftware/FEBio)
 - **Sources:** [Official product documentation](https://febio.org/) (2026-11-14; features, identity, license, pricing); [Official upstream README](https://raw.githubusercontent.com/febiosoftware/FEBio/HEAD/README.md) (2026-11-14; downloads, features, identity, platforms); [Official upstream license text](https://raw.githubusercontent.com/febiosoftware/FEBio/HEAD/LICENSE) (2026-11-14; license); [Official download and distribution documentation](https://febio.org/downloads/) (2026-11-14; downloads, platforms); [Official product documentation](https://febio.org/about/licensing/) (2026-11-14; license, pricing); [Official upstream release activity feed](https://github.com/febiosoftware/FEBio/releases.atom) (2026-11-14; maintenance)
 
+## Genome browsers
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=science%2Fgenome-browsers)
+
+### Artemis
+
+Genome browser and annotation environment with companion comparative-genomics views and sequence-feature inspection.
+
+- **Platforms:** Windows, macOS, Linux. **License:** GNU GPL v3. **Pricing model:** free.
+- **Pick for:** Choose Artemis when editing genome annotations is part of the task rather than only viewing reads.
+- **Compare when:** Java is required and the documented runtime depends on the release.
+- **Strengths:** Choose Artemis when editing genome annotations is part of the task rather than only viewing reads.; Its companion tools connect annotation with sequence comparisons.
+- **Limitations:** Java is required and the documented runtime depends on the release.; Database-backed and comparative workflows require additional inputs and setup.
+- **Maintenance:** unverified — Current release cadence or an explicit maintenance commitment was not established by the reviewed sources. Availability alone is not a maintenance guarantee.
+- [Official project](https://sanger-pathogens.github.io/Artemis/) · [Official installation / downloads](https://github.com/sanger-pathogens/Artemis/releases) · [Repository](https://github.com/sanger-pathogens/Artemis)
+- **Sources:** [Official upstream documentation](https://sanger-pathogens.github.io/Artemis/) (2026-11-15; identity, features, license, downloads, platforms); [Official upstream documentation](https://raw.githubusercontent.com/sanger-pathogens/Artemis/HEAD/README.md) (2026-11-15; pricing, features, platforms)
+### Bandage
+
+Interactive assembly-graph viewer for exploring connections that are lost when an assembly is reduced to contig sequences.
+
+- **Platforms:** Windows, macOS, Linux. **License:** GNU GPL v3. **Pricing model:** unknown.
+- **Compatibility details:** Windows is documented by the project, but the current release listing emphasizes macOS and Linux; inspect version-specific assets before choosing a build.
+- **Pricing details:** No complete price or distribution-cost statement was established from the reviewed primary sources; check the selected distribution route.
+- **Pick for:** Choose Bandage when graph connectivity is central to understanding a de novo assembly.
+- **Compare when:** Graph structure is evidence to inspect, not automatic proof of a correct assembly.
+- **Strengths:** Choose Bandage when graph connectivity is central to understanding a de novo assembly.; Viewing branches and repeats can reveal questions that a flat contig list cannot show.
+- **Limitations:** Graph structure is evidence to inspect, not automatic proof of a correct assembly.; Current release packaging differs by OS; Windows may require an older published build or a source build.
+- **Maintenance:** unverified — Current release cadence or an explicit maintenance commitment was not established by the reviewed sources. Availability alone is not a maintenance guarantee.
+- [Official project](https://rrwick.github.io/Bandage/) · [Official installation / downloads](https://github.com/rrwick/Bandage/releases) · [Repository](https://github.com/rrwick/Bandage)
+- **Sources:** [Official upstream documentation](https://rrwick.github.io/Bandage/) (2026-11-15; identity, features, platforms, downloads); [Official upstream documentation](https://raw.githubusercontent.com/rrwick/Bandage/HEAD/README.md) (2026-11-15; license, platforms, downloads); [Official upstream documentation](https://github.com/rrwick/Bandage/releases) (2026-11-15; downloads, platforms)
+### Integrative Genomics Viewer
+
+Desktop genome browser for interactive inspection of mapped reads, variants, annotations and other genomic tracks.
+
+- **Platforms:** Windows, macOS, Linux. **License:** MIT License. **Pricing model:** unknown.
+- **Compatibility details:** Desktop IGV; Java is bundled in selected installers. This record does not represent the separate IGV web app or JavaScript library.
+- **Pricing details:** No complete price or distribution-cost statement was established from the reviewed primary sources; check the selected distribution route.
+- **Pick for:** Choose IGV for inspecting genomic evidence at individual loci alongside annotations.
+- **Compare when:** Large files need appropriate sorting and indexing; remote data still require network access.
+- **Strengths:** Choose IGV for inspecting genomic evidence at individual loci alongside annotations.; A local desktop session can work with private files without first publishing a genome browser.
+- **Limitations:** Large files need appropriate sorting and indexing; remote data still require network access.; Packages without a bundled Java runtime require Java 21 or later for the reviewed release line.
+- **Maintenance:** active — Official release feed entry 'v3.0.0-beta.8: Fit track height on Expand and Squish (#1901)' was updated 2026-11-06T18:19:09Z. This is a dated maintenance signal, not an installation or quality benchmark. ([evidence](https://github.com/igvteam/igv/releases.atom))
+- [Official project](https://igv.org/) · [Official installation / downloads](https://igv.org/doc/desktop/DownloadPage/index.html) · [Repository](https://github.com/igvteam/igv)
+- **Sources:** [Official product documentation](https://igv.org/) (2026-11-15; identity, features, license); [Official product documentation](https://igv.org/doc/desktop/DownloadPage/index.html) (2026-11-15; downloads, platforms); [Official upstream documentation](https://raw.githubusercontent.com/igvteam/igv/HEAD/README.md) (2026-11-15; identity, platforms); [Official release activity feed](https://github.com/igvteam/igv/releases.atom) (2026-11-15; maintenance); [Official feature documentation](https://igv.org/doc/desktop/) (2026-11-15; features)
+### JBrowse Desktop
+
+Extensible desktop genome browser with linked linear and structural views for complex genomic data.
+
+- **Platforms:** Windows, macOS, Linux. **License:** Apache License 2.0. **Pricing model:** unknown.
+- **Compatibility details:** This record covers JBrowse Desktop. The separate web app and embeddable components require their own deployment.
+- **Pricing details:** No complete price or distribution-cost statement was established from the reviewed primary sources; check the selected distribution route.
+- **Pick for:** Choose JBrowse Desktop when complex genomic views should be explored in a local graphical application.
+- **Compare when:** Desktop, web and embedded products are separate deployment choices.
+- **Strengths:** Choose JBrowse Desktop when complex genomic views should be explored in a local graphical application.; A shared ecosystem connects desktop, web and embedded deployments.
+- **Limitations:** Desktop, web and embedded products are separate deployment choices.; Large datasets need appropriate indexes and formats; third-party plugins require their own review.
+- **Maintenance:** active — Official release feed entry 'Release v5.0.0-beta.21' was updated 2026-11-09T02:07:31Z. This is a dated maintenance signal, not an installation or quality benchmark. ([evidence](https://github.com/GMOD/jbrowse-components/releases.atom))
+- [Official project](https://jbrowse.org/jb2/) · [Official installation / downloads](https://jbrowse.org/jb2/download/) · [Repository](https://github.com/GMOD/jbrowse-components)
+- **Sources:** [Official product documentation](https://jbrowse.org/jb2/) (2026-11-15; identity, features, license); [Official product documentation](https://jbrowse.org/jb2/download/) (2026-11-15; downloads, platforms); [Official upstream documentation](https://raw.githubusercontent.com/GMOD/jbrowse-components/HEAD/README.md) (2026-11-15; features, identity); [Official release activity feed](https://github.com/GMOD/jbrowse-components/releases.atom) (2026-11-15; maintenance)
+### Tablet
+
+Graphical viewer for next-generation sequencing assemblies and read alignments.
+
+- **Platforms:** Windows, macOS, Linux. **License:** BSD 2-Clause. **Pricing model:** unknown.
+- **Pricing details:** No complete price or distribution-cost statement was established from the reviewed primary sources; check the selected distribution route.
+- **Pick for:** Choose Tablet for a focused visual review of assemblies and aligned reads.
+- **Compare when:** The viewer depends on prepared input assemblies and alignments.
+- **Strengths:** Choose Tablet for a focused visual review of assemblies and aligned reads.; Its project documentation centers on desktop inspection rather than running an entire analysis pipeline.
+- **Limitations:** The viewer depends on prepared input assemblies and alignments.; Do not mistake a visual pattern for a validated variant or assembly-quality conclusion.
+- **Maintenance:** unverified — Current release cadence or an explicit maintenance commitment was not established by the reviewed sources. Availability alone is not a maintenance guarantee.
+- [Official project](https://ics.hutton.ac.uk/tablet/) · [Official installation / downloads](https://ics.hutton.ac.uk/tablet/download-tablet/) · [Repository](https://github.com/cropgeeks/tablet)
+- **Sources:** [Official product documentation](https://ics.hutton.ac.uk/tablet/) (2026-11-15; identity, features, platforms); [Official product documentation](https://ics.hutton.ac.uk/tablet/download-tablet/) (2026-11-15; downloads); [Official upstream documentation](https://raw.githubusercontent.com/cropgeeks/tablet/HEAD/LICENSE) (2026-11-15; license)
+
 ## Geographic information systems
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=science%2Fgeographic-information)
 
 ### GRASS GIS
 
@@ -501,7 +1216,135 @@ Desktop geographic information system for mapping, spatial analysis and geodata 
 - [Official project](https://qgis.org/) · [Official installation / downloads](https://qgis.org/download/) · [Repository](https://github.com/qgis/QGIS)
 - **Sources:** [Official project documentation](https://qgis.org/) (2026-11-14; identity, features, platforms, license, pricing); [Official project README](https://raw.githubusercontent.com/qgis/QGIS/HEAD/README.md) (2026-11-14; identity, features, license, platforms, pricing); [Upstream license terms](https://raw.githubusercontent.com/qgis/QGIS/HEAD/COPYING) (2026-11-14; license); [Official installation and download information](https://qgis.org/download/) (2026-11-14; identity, downloads, platforms, license, pricing); [Official repository activity feed](https://github.com/qgis/QGIS/commits/HEAD.atom) (2026-11-14; maintenance)
 
-## Medical Image Analysis
+## IFC model viewers
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=science%2Fifc-viewers)
+
+### BIMvision
+
+Windows IFC model viewer for inspecting building geometry, properties and model data without a full BIM authoring application.
+
+- **Platforms:** Windows. **License:** Publisher freeware terms; complete redistribution license not established in reviewed pages. **Pricing model:** freemium.
+- **Pricing details:** The core IFC viewer is free for personal and commercial use. Plugins can have separate prices and licenses.
+- **Pick for:** Choose BIMvision when stakeholders need to inspect IFC deliverables without an authoring-suite license.
+- **Compare when:** Advanced workflows can require separately licensed plugins.
+- **Strengths:** Choose BIMvision when stakeholders need to inspect IFC deliverables without an authoring-suite license.; A focused viewer can suit review and coordination roles.
+- **Limitations:** Advanced workflows can require separately licensed plugins.; The reviewed download flow sends the installer to an email address; the core is not a general BIM authoring suite.
+- **Maintenance:** unverified — Current release cadence or an explicit maintenance commitment was not established by the reviewed sources. Availability alone is not a maintenance guarantee.
+- [Official project](https://bimvision.eu/) · [Official installation / downloads](https://bimvision.eu/download/)
+- **Sources:** [Official product documentation](https://bimvision.eu/) (2026-11-15; identity, features, pricing); [Official product documentation](https://bimvision.eu/download/) (2026-11-15; downloads, platforms, pricing)
+### KITModelViewer
+
+BIM and GIS semantic-model viewer supporting IFC, gbXML and CityGML with property inspection and an extensible plugin interface.
+
+- **Platforms:** Windows. **License:** Publisher freeware; full application redistribution terms not established in reviewed pages. **Pricing model:** free.
+- **Compatibility details:** Windows distribution requiring the publisher-listed Visual C++ runtime and .NET Framework 4.8.
+- **Pick for:** Choose KITModelViewer when one review workflow spans building information and city-scale semantic models.
+- **Compare when:** The Windows package requires Microsoft runtime components listed by the publisher.
+- **Strengths:** Choose KITModelViewer when one review workflow spans building information and city-scale semantic models.; Its format coverage adds context beyond an IFC-only viewer.
+- **Limitations:** The Windows package requires Microsoft runtime components listed by the publisher.; The viewer is separate from its open-source plugin examples; plugin licensing does not establish the application’s license.
+- **Maintenance:** active — Institute download page dates KITModelViewer 7.5 to 19 December 2025. ([evidence](https://www.iai.kit.edu/english/1302.php))
+- [Official project](https://www.iai.kit.edu/english/4561.php) · [Official installation / downloads](https://www.iai.kit.edu/english/1302.php)
+- **Sources:** [Official product documentation](https://www.iai.kit.edu/english/4561.php) (2026-11-15; identity, features); [Official product documentation](https://www.iai.kit.edu/english/1302.php) (2026-11-15; downloads, platforms, pricing, maintenance)
+
+## Laser cutting preparation
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=science%2Flaser-preparation)
+
+### LaserGRBL
+
+Windows laser-engraving application that prepares images and sends jobs to supported GRBL-based laser controllers.
+
+- **Platforms:** Windows. **License:** GNU GPL v3; bundled libraries have their own licenses. **Pricing model:** free.
+- **Pick for:** Choose LaserGRBL for a focused free Windows workflow with a compatible GRBL laser controller.
+- **Compare when:** It is designed around supported GRBL-style controllers and is not a universal laser driver.
+- **Strengths:** Choose LaserGRBL for a focused free Windows workflow with a compatible GRBL laser controller.; It combines image preparation with direct job sending.
+- **Limitations:** It is designed around supported GRBL-style controllers and is not a universal laser driver.; Material settings, machine setup and job previews must be checked for the actual hardware.
+- **Maintenance:** unverified — Current release cadence or an explicit maintenance commitment was not established by the reviewed sources. Availability alone is not a maintenance guarantee.
+- [Official project](https://lasergrbl.com/) · [Official installation / downloads](https://lasergrbl.com/download/) · [Repository](https://github.com/arkypita/LaserGRBL)
+- **Sources:** [Official product documentation](https://lasergrbl.com/) (2026-11-15; identity, features, pricing, platforms); [Official product documentation](https://lasergrbl.com/download/) (2026-11-15; downloads, license, pricing); [Official upstream documentation](https://raw.githubusercontent.com/arkypita/LaserGRBL/HEAD/README.md) (2026-11-15; features, platforms, license)
+### LightBurn
+
+Laser layout, editing and job-control application supporting multiple controller families through licensed editions.
+
+- **Platforms:** Windows, macOS. **License:** Proprietary LightBurn license. **Pricing model:** paid.
+- **Compatibility details:** Current releases: Windows and macOS. Linux users must evaluate the specifically documented older release line.
+- **Pricing details:** Paid perpetual license with a limited update-entitlement period; optional update renewals and edition upgrades are separate.
+- **Pick for:** Choose LightBurn when design preparation and supported laser control should share one workflow.
+- **Compare when:** Choose Core or Pro according to the controller; compatibility is not determined by laser brand alone.
+- **Strengths:** Choose LightBurn when design preparation and supported laser control should share one workflow.; Controller-specific editions make it useful across several laser-machine ecosystems.
+- **Limitations:** Choose Core or Pro according to the controller; compatibility is not determined by laser brand alone.; Current releases support Windows and macOS; Linux is a legacy-version path, not a current-platform claim.
+- **Maintenance:** unverified — Current release cadence or an explicit maintenance commitment was not established by the reviewed sources. Availability alone is not a maintenance guarantee.
+- [Official project](https://lightburnsoftware.com/) · [Official installation / downloads](https://lightburnsoftware.com/pages/download-trial)
+- **Sources:** [Official product documentation](https://lightburnsoftware.com/) (2026-11-15; identity, features, pricing, license); [Official product documentation](https://lightburnsoftware.com/pages/download-trial) (2026-11-15; downloads); [Official product documentation](https://docs.lightburnsoftware.com/2.2/GetStarted/InstallLightBurn/) (2026-11-15; platforms)
+
+## Life cycle assessment
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=science%2Flife-cycle-assessment)
+
+### Activity Browser
+
+Graphical life-cycle assessment interface built around the Brightway ecosystem for managing projects, inventories and calculations.
+
+- **Platforms:** Windows, macOS, Linux. **License:** GNU LGPL v3 or later. **Pricing model:** unknown.
+- **Compatibility details:** Python-based desktop application; follow the current isolated-environment instructions and release status.
+- **Pricing details:** No complete price or distribution-cost statement was established from the reviewed primary sources; check the selected distribution route.
+- **Pick for:** Choose Activity Browser when an LCA workflow should connect graphical editing with the Python-based Brightway ecosystem.
+- **Compare when:** Installation requires the documented Python environment and compatible package versions.
+- **Strengths:** Choose Activity Browser when an LCA workflow should connect graphical editing with the Python-based Brightway ecosystem.; It suits users who may extend analysis beyond the interface.
+- **Limitations:** Installation requires the documented Python environment and compatible package versions.; Background databases and models retain their own licenses; a software license does not grant dataset access.
+- **Maintenance:** unverified — Current release cadence or an explicit maintenance commitment was not established by the reviewed sources. Availability alone is not a maintenance guarantee.
+- [Official project](https://github.com/LCA-ActivityBrowser/activity-browser) · [Official installation / downloads](https://github.com/LCA-ActivityBrowser/activity-browser) · [Repository](https://github.com/LCA-ActivityBrowser/activity-browser)
+- **Sources:** [Official upstream documentation](https://raw.githubusercontent.com/LCA-ActivityBrowser/activity-browser/HEAD/README.md) (2026-11-15; identity, features, license, downloads, platforms)
+### openLCA
+
+Desktop life-cycle assessment and footprint-modeling application with process networks, impact methods and database integration.
+
+- **Platforms:** Windows, macOS, Linux. **License:** Mozilla Public License 2.0. **Pricing model:** free.
+- **Pricing details:** The application is free; commercial databases, support and related services may cost extra.
+- **Pick for:** Choose openLCA when an open desktop application and access to multiple LCA database ecosystems matter.
+- **Compare when:** The software’s free license does not include every background database; data licenses and costs are separate.
+- **Strengths:** Choose openLCA when an open desktop application and access to multiple LCA database ecosystems matter.; Graphical process models support inspection of assumptions and connections.
+- **Limitations:** The software’s free license does not include every background database; data licenses and costs are separate.; Results depend on system boundaries, allocation choices, inventory quality and impact methods.
+- **Maintenance:** active — Official release feed entry 'v2.7.0' was updated 2026-08-26T14:23:01Z. This is a dated maintenance signal, not an installation or quality benchmark. ([evidence](https://github.com/GreenDelta/olca-app/releases.atom))
+- [Official project](https://www.openlca.org/) · [Official installation / downloads](https://www.openlca.org/download/) · [Repository](https://github.com/GreenDelta/olca-app)
+- **Sources:** [Official product documentation](https://www.openlca.org/) (2026-11-15; identity, features, pricing); [Official product documentation](https://www.openlca.org/download/) (2026-11-15; downloads, platforms); [Official upstream documentation](https://raw.githubusercontent.com/GreenDelta/olca-app/HEAD/README.md) (2026-11-15; license); [Official release activity feed](https://github.com/GreenDelta/olca-app/releases.atom) (2026-11-15; maintenance)
+
+## Lighting Design
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=science%2Flighting-design)
+
+### DIALux evo
+
+Lighting-design application for planning, calculating and visualizing indoor, outdoor, street and emergency lighting.
+
+- **Platforms:** Windows. **License:** Proprietary DIALux license. **Pricing model:** freemium.
+- **Pricing details:** Free core is limited to participating manufacturers’ luminaires; non-member access and Pro features require paid plans.
+- **Pick for:** Choose DIALux evo for luminaire-based professional lighting layouts and calculation reports.
+- **Compare when:** Using non-member luminaires and some productivity/export functions requires paid subscriptions.
+- **Strengths:** Choose DIALux evo for luminaire-based professional lighting layouts and calculation reports.; The free core supports products from participating manufacturers.
+- **Limitations:** Using non-member luminaires and some productivity/export functions requires paid subscriptions.; Photometric files, calculation settings and applicable project standards need review.
+- **Maintenance:** unverified — Current release cadence or an explicit maintenance commitment was not established by the reviewed sources. Availability alone is not a maintenance guarantee.
+- [Official project](https://www.dialux.com/) · [Official installation / downloads](https://www.dialux.com/en-GB/download)
+- **Sources:** [Official product documentation](https://www.dialux.com/) (2026-11-15; identity, features, pricing); [Official product documentation](https://www.dialux.com/en-GB/download) (2026-11-15; downloads, platforms, pricing); [Official product documentation](https://www.dialux.com/en-GB/pricing) (2026-11-15; pricing, license)
+### ReluxDesktop
+
+Lighting and sensor-planning application for modeling illumination and producing professional planning outputs.
+
+- **Platforms:** Windows. **License:** Proprietary ReluxDesktop license. **Pricing model:** freemium.
+- **Compatibility details:** Native Windows application. The requirements article contains older hardware details, so this record uses only its explicit OS distinction.
+- **Pricing details:** Core application is free; third-party product identification and specialist extensions have separate licensing.
+- **Pick for:** Choose ReluxDesktop when lighting and sensor planning should share one graphical model.
+- **Compare when:** Non-member product presentation and specialist extensions can require paid licenses.
+- **Strengths:** Choose ReluxDesktop when lighting and sensor planning should share one graphical model.; The core application is explicitly free for personal, educational and commercial use.
+- **Limitations:** Non-member product presentation and specialist extensions can require paid licenses.; The application is native Windows software; Mac and Linux require a Windows virtual machine.
+- **Maintenance:** unverified — Current release cadence or an explicit maintenance commitment was not established by the reviewed sources. Availability alone is not a maintenance guarantee.
+- [Official project](https://relux.com/en/relux-desktop.html) · [Official installation / downloads](https://relux.com/en/relux-desktop.html)
+- **Sources:** [Official product documentation](https://relux.com/en/relux-desktop.html) (2026-11-15; identity, features, pricing, license, downloads); [Official product documentation](https://relux.com/knowledge-hub/knowledge-db/relux-desktop/installation-and-update/system-requirements) (2026-11-15; platforms)
+
+## Medical image research and analysis
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=science%2Fmedical-image-analysis)
 
 ### 3D Slicer
 
@@ -531,6 +1374,8 @@ Focused application for manually and semi-automatically segmenting structures in
 
 ## Simulation mesh generation
 
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=science%2Fmesh-generation)
+
 ### Gmsh
 
 Mesh-generation application with geometry, meshing and post-processing tools.
@@ -545,6 +1390,8 @@ Mesh-generation application with geometry, meshing and post-processing tools.
 - **Sources:** [Official project documentation](https://gmsh.info/) (2026-11-14; identity, features, platforms, license, pricing); [Official installation and download information](https://gmsh.info/#Download) (2026-11-14; identity, downloads, platforms, license, pricing)
 
 ## Microscope Control
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=science%2Fmicroscope-control)
 
 ### Micro-Manager
 
@@ -562,6 +1409,8 @@ Microscope-control application that coordinates cameras, stages and other imagin
 
 ## Molecular modeling
 
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=science%2Fmolecular-modeling)
+
 ### Avogadro
 
 Molecular editor and visualization tool for constructing and inspecting chemical structures.
@@ -576,6 +1425,8 @@ Molecular editor and visualization tool for constructing and inspecting chemical
 - **Sources:** [Official project documentation](https://avogadro.cc/) (2026-11-14; identity, features, platforms, license, pricing); [Official project README](https://raw.githubusercontent.com/OpenChemistry/avogadroapp/HEAD/README.md) (2026-11-14; identity, features, license, platforms); [Upstream license terms](https://raw.githubusercontent.com/OpenChemistry/avogadroapp/HEAD/LICENSE) (2026-11-14; license); [Official installation and download information](https://avogadro.cc/install/index.html) (2026-11-14; identity, downloads, platforms); [Official repository activity feed](https://github.com/OpenChemistry/avogadroapp/commits/HEAD.atom) (2026-11-14; maintenance)
 
 ## Molecular Visualization
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=science%2Fmolecular-visualization)
 
 ### Jmol
 
@@ -617,6 +1468,8 @@ Molecular-visualization application for exploring atomic structures, density map
 
 ## Numerical computing
 
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=science%2Fnumerical-computing)
+
 ### GNU Octave
 
 Numerical computing environment with matrix-oriented syntax and plotting tools.
@@ -656,6 +1509,8 @@ Numerical-computing environment with a mathematical language, visualization and 
 - **Sources:** [Official product documentation](https://www.scilab.org/) (2026-11-14; features, identity, platforms, pricing); [Official product documentation](https://www.scilab.org/about/scilab-open-source-software) (2026-11-14; license, pricing); [Official download and distribution documentation](https://www.scilab.org/download/latest) (2026-11-14; downloads, maintenance, platforms)
 
 ## Parametric and scripted CAD
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=science%2Fparametric-cad)
 
 ### Autodesk Fusion
 
@@ -711,6 +1566,8 @@ Constraint-based parametric CAD tool for 2D sketches and 3D mechanical geometry.
 
 ## Particle Analysis
 
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=science%2Fparticle-analysis)
+
 ### OVITO
 
 Visualization and analysis application for atomistic, particle and other simulation datasets.
@@ -725,6 +1582,8 @@ Visualization and analysis application for atomistic, particle and other simulat
 - **Sources:** [Official product documentation](https://www.ovito.org/) (2026-11-14; downloads, features, identity, license, platforms, pricing)
 
 ## PCB design
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=science%2Fpcb-design)
 
 ### KiCad
 
@@ -753,6 +1612,8 @@ Electronic design application with schematic, board and component-library workfl
 
 ## Phonetics Analysis
 
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=science%2Fphonetics-analysis)
+
 ### Praat
 
 Speech-analysis and scripting environment for examining phonetic features and annotating audio.
@@ -767,7 +1628,135 @@ Speech-analysis and scripting environment for examining phonetic features and an
 - [Official project](https://praat.org/) · [Official installation / downloads](https://praat.org/) · [Repository](https://github.com/praat/praat)
 - **Sources:** [Official product documentation](https://praat.org/) (2026-11-14; downloads, features, identity, platforms); [Official upstream README](https://raw.githubusercontent.com/praat/praat/HEAD/README.md) (2026-11-14; features, identity, license, platforms); [Official upstream license text](https://praat.org/manual/License.html) (2026-11-14; license); [Official upstream release activity feed](https://github.com/praat/praat/releases.atom) (2026-11-14; maintenance)
 
+## Phylogenetics
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=science%2Fphylogenetics)
+
+### BEAST 2
+
+Bayesian evolutionary-analysis platform using Markov chain Monte Carlo to infer dated trees and model uncertainty.
+
+- **Platforms:** Windows, macOS, Linux. **License:** GNU LGPL v2.1 or later. **Pricing model:** unknown.
+- **Pricing details:** No complete price or distribution-cost statement was established from the reviewed primary sources; check the selected distribution route.
+- **Pick for:** Choose BEAST 2 for time-aware Bayesian models and posterior uncertainty rather than only a single best-scoring tree.
+- **Compare when:** Check convergence, effective sample sizes, priors and independent chains before interpreting results.
+- **Strengths:** Choose BEAST 2 for time-aware Bayesian models and posterior uncertainty rather than only a single best-scoring tree.; Packages extend the core model space for specialist evolutionary questions.
+- **Limitations:** Check convergence, effective sample sizes, priors and independent chains before interpreting results.; Optional packages have their own compatibility, methods and licensing considerations.
+- **Maintenance:** active — Official release feed entry 'BEAST v2.7.9 prerelease' was updated 2026-11-05T04:16:54Z. This is a dated maintenance signal, not an installation or quality benchmark. ([evidence](https://github.com/CompEvol/beast2/releases.atom))
+- [Official project](https://www.beast2.org/) · [Official installation / downloads](https://www.beast2.org/) · [Repository](https://github.com/CompEvol/beast2)
+- **Sources:** [Official product documentation](https://www.beast2.org/) (2026-11-15; identity, features, platforms, downloads); [Official upstream documentation](https://raw.githubusercontent.com/CompEvol/beast2/HEAD/README.md) (2026-11-15; license, identity); [Official release activity feed](https://github.com/CompEvol/beast2/releases.atom) (2026-11-15; maintenance)
+### FigTree
+
+Graphical viewer for displaying, annotating and exporting phylogenetic trees, including summarized BEAST results.
+
+- **Platforms:** Windows, macOS, Linux. **License:** License classification not confirmed in the reviewed primary documentation. **Pricing model:** unknown.
+- **Pricing details:** No complete price or distribution-cost statement was established from the reviewed primary sources; check the selected distribution route.
+- **Pick for:** Choose FigTree to prepare readable figures from an already inferred phylogenetic tree.
+- **Compare when:** It visualizes supplied trees; it does not replace inference or convergence diagnostics.
+- **Strengths:** Choose FigTree to prepare readable figures from an already inferred phylogenetic tree.; Its support for annotated BEAST trees is useful after Bayesian analysis.
+- **Limitations:** It visualizes supplied trees; it does not replace inference or convergence diagnostics.; The original project page warns that polish and completeness reflect a research tool developed for its author’s needs.
+- **Maintenance:** active — Official release feed entry 'FigTree v1.5.0-beta1' was updated 2026-05-26T22:17:43Z. This is a dated maintenance signal, not an installation or quality benchmark. ([evidence](https://github.com/rambaut/figtree/releases.atom))
+- [Official project](https://tree.bio.ed.ac.uk/software/figtree/) · [Official installation / downloads](https://github.com/rambaut/figtree/releases) · [Repository](https://github.com/rambaut/figtree)
+- **Sources:** [Official product documentation](https://tree.bio.ed.ac.uk/software/figtree/) (2026-11-15; identity, features, downloads, platforms); [Official release activity feed](https://github.com/rambaut/figtree/releases.atom) (2026-11-15; maintenance)
+### IQ-TREE
+
+Command-line maximum-likelihood phylogenetics with model selection, branch support and alignment simulation.
+
+- **Platforms:** Windows, macOS, Linux. **License:** GNU GPL v2. **Pricing model:** free.
+- **Pick for:** Choose IQ-TREE when reproducible tree inference needs model selection and support analysis in one command-line workflow.
+- **Compare when:** Results depend on alignment quality, model assumptions and support settings.
+- **Strengths:** Choose IQ-TREE when reproducible tree inference needs model selection and support analysis in one command-line workflow.; Checkpointing helps resume an interrupted analysis.
+- **Limitations:** Results depend on alignment quality, model assumptions and support settings.; Large partitioned or mixture-model analyses can require substantial memory and compute.
+- **Maintenance:** active — Official release feed entry 'Release version 3.1.4' was updated 2026-09-14T23:13:56Z. This is a dated maintenance signal, not an installation or quality benchmark. ([evidence](https://github.com/iqtree/iqtree3/releases.atom))
+- [Official project](https://github.com/iqtree/iqtree3) · [Official installation / downloads](https://github.com/iqtree/iqtree3/releases) · [Repository](https://github.com/iqtree/iqtree3)
+- **Sources:** [Official upstream documentation](https://raw.githubusercontent.com/iqtree/iqtree3/HEAD/README.md) (2026-11-15; identity, features, license); [Official upstream documentation](https://iqtree.github.io/doc/Home) (2026-11-15; pricing, identity); [Official upstream documentation](https://iqtree.github.io/doc/Quickstart) (2026-11-15; downloads, platforms); [Official release activity feed](https://github.com/iqtree/iqtree3/releases.atom) (2026-11-15; maintenance)
+### MEGA
+
+Molecular Evolutionary Genetics Analysis environment for alignments, evolutionary distances and phylogenetic inference.
+
+- **Platforms:** Windows, macOS, Linux. **License:** Proprietary MEGA End-User Agreement; research and educational use permitted without charge. **Pricing model:** free.
+- **Pricing details:** Free for research and educational purposes under the MEGA agreement; this is not an unrestricted open-source license.
+- **Pick for:** Choose MEGA when evolutionary analyses benefit from a graphical, method-oriented workflow.
+- **Compare when:** Free-use terms are scoped to research and education; redistribution and modification are restricted.
+- **Strengths:** Choose MEGA when evolutionary analyses benefit from a graphical, method-oriented workflow.; GUI and command-line editions support exploratory and repeatable analysis styles.
+- **Limitations:** Free-use terms are scoped to research and education; redistribution and modification are restricted.; Model selection, alignment quality and uncertainty still require scientific judgment.
+- **Maintenance:** unverified — Current release cadence or an explicit maintenance commitment was not established by the reviewed sources. Availability alone is not a maintenance guarantee.
+- [Official project](https://www.megasoftware.net/) · [Official installation / downloads](https://www.megasoftware.net/)
+- **Sources:** [Official product documentation](https://www.megasoftware.net/) (2026-11-15; identity, features, downloads, platforms); [Official product documentation](https://www.megasoftware.net/faq) (2026-11-15; pricing, platforms); [Official product documentation](https://www.megasoftware.net/dload_win_gui) (2026-11-15; license)
+### RAxML-NG
+
+Maximum-likelihood phylogenetic inference program with tree search, model optimization and bootstrap analysis.
+
+- **Platforms:** Linux, macOS, Windows. **License:** GNU Affero GPL v3. **Pricing model:** unknown.
+- **Compatibility details:** Native command-line binaries for Linux and macOS; Windows uses Windows Subsystem for Linux as documented upstream.
+- **Pricing details:** No complete price or distribution-cost statement was established from the reviewed primary sources; check the selected distribution route.
+- **Pick for:** Choose RAxML-NG for scripted maximum-likelihood inference and explicit search controls.
+- **Compare when:** Windows usage follows the documented WSL route rather than a native Windows application.
+- **Strengths:** Choose RAxML-NG for scripted maximum-likelihood inference and explicit search controls.; It provides a useful methodological comparison to IQ-TREE on the same curated alignment.
+- **Limitations:** Windows usage follows the documented WSL route rather than a native Windows application.; Inference settings and replicate counts should be justified for the dataset.
+- **Maintenance:** active — Official release feed entry 'RAxML-NG v2.0.4' was updated 2026-10-28T10:17:49Z. This is a dated maintenance signal, not an installation or quality benchmark. ([evidence](https://github.com/amkozlov/raxml-ng/releases.atom))
+- [Official project](https://github.com/amkozlov/raxml-ng) · [Official installation / downloads](https://github.com/amkozlov/raxml-ng/releases) · [Repository](https://github.com/amkozlov/raxml-ng)
+- **Sources:** [Official upstream documentation](https://raw.githubusercontent.com/amkozlov/raxml-ng/HEAD/README.md) (2026-11-15; identity, features, license, platforms, downloads); [Official upstream documentation](https://raw.githubusercontent.com/amkozlov/raxml-ng/HEAD/LICENSE.txt) (2026-11-15; license); [Official release activity feed](https://github.com/amkozlov/raxml-ng/releases.atom) (2026-11-15; maintenance)
+
+## Plc Development
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=science%2Fplc-development)
+
+### Beremiz
+
+IEC 61131-3 development environment and runtime toolchain for machine automation using portable PLCopen projects.
+
+- **Platforms:** Windows, Linux. **License:** GPL-2.0-or-later IDE; LGPL-2.1-or-later Python runtime; GPL-3.0-or-later C++ runtime. **Pricing model:** unknown.
+- **Pick for:** Keep PLC programs in a portable project format with an open compiler/runtime toolchain.
+- **Compare when:** Targets and I/O libraries require engineering integration.
+- **Strengths:** Keep PLC programs in a portable project format with an open compiler/runtime toolchain.
+- **Limitations:** Targets and I/O libraries require engineering integration.; The IDE, Python runtime and C++ runtime carry different licenses; distribution needs component-aware review.
+- **Maintenance:** active — Official release feed contains 1.6.2 - Bugfix release with an updated timestamp of 2026-11-12. This is release-channel activity evidence, not proof of a stable build, installed compatibility or security testing. ([evidence](https://github.com/beremiz/beremiz/releases.atom))
+- [Official project](https://beremiz.org/) · [Official installation / downloads](https://github.com/beremiz/beremiz/releases) · [Repository](https://github.com/beremiz/beremiz)
+- **Sources:** [Official documentation and distribution evidence](https://beremiz.org/) (2026-11-15; identity, features); [Official documentation and distribution evidence](https://github.com/beremiz/beremiz) (2026-11-15; identity, features, platforms, license, downloads); [Official release or lifecycle evidence](https://github.com/beremiz/beremiz/releases.atom) (2026-11-15; maintenance)
+### CODESYS Development System
+
+Manufacturer-independent IEC 61131-3 engineering environment for supported PLCs and SoftPLC runtimes.
+
+- **Platforms:** Windows. **License:** Proprietary CODESYS EULA. **Pricing model:** mixed.
+- **Pricing details:** Base development system has no license charge; runtime operation and add-on products have separate licenses.
+- **Pick for:** Use a broad PLC engineering environment when the target controller supports CODESYS.
+- **Compare when:** The free engineering installation includes a demo SoftPLC; sustained runtime operation needs matching licenses.
+- **Strengths:** Use a broad PLC engineering environment when the target controller supports CODESYS.
+- **Limitations:** The free engineering installation includes a demo SoftPLC; sustained runtime operation needs matching licenses.; Professional add-ons and technical support can cost extra.
+- **Maintenance:** unverified — Product documentation reviewed; a current dated release or lifecycle commitment has not been established for this record.
+- [Official project](https://us.codesys.com/products/engineering/development-system/) · [Official installation / downloads](https://store.codesys.com/en/codesys.html)
+- **Sources:** [Official documentation and distribution evidence](https://us.codesys.com/products/engineering/development-system/) (2026-11-15; identity, features, pricing, downloads); [Official documentation and distribution evidence](https://store.codesys.com/en/codesys.html) (2026-11-15; platforms, downloads, features); [Official documentation and distribution evidence](https://www.codesys.com/ecosystem/discover-codesys/licensing/) (2026-11-15; license, pricing)
+### OpenPLC
+
+IEC 61131-3 programming environment for creating, simulating and deploying control logic to supported runtimes.
+
+- **Platforms:** Windows, macOS, Linux. **License:** GPL-3.0 editor; bare-metal runtime has GPL/commercial licensing. **Pricing model:** mixed.
+- **Pricing details:** Editor source is GPLv3; commercial services and bare-metal runtime licensing are separate. Check deployment-specific terms.
+- **Pick for:** Develop PLC logic with an inspectable editor and test it before choosing supported target hardware.
+- **Compare when:** The editor and target runtime have separate installation and licensing requirements.
+- **Strengths:** Develop PLC logic with an inspectable editor and test it before choosing supported target hardware.
+- **Limitations:** The editor and target runtime have separate installation and licensing requirements.; Commercial bare-metal deployment needs review of the current runtime licensing terms; the free editor does not settle every deployment right.
+- **Maintenance:** unverified — Product documentation reviewed; a current dated release or lifecycle commitment has not been established for this record.
+- [Official project](https://autonomylogic.com/) · [Official installation / downloads](https://autonomylogic.com/download/) · [Repository](https://github.com/Autonomy-Logic/openplc-editor)
+- **Sources:** [Official documentation and distribution evidence](https://autonomylogic.com/download/) (2026-11-15; identity, features, platforms, pricing, downloads); [Official documentation and distribution evidence](https://github.com/Autonomy-Logic/openplc-editor) (2026-11-15; identity, features, license, platforms)
+### TwinCAT 3
+
+Beckhoff engineering and runtime suite for PC-based PLC, motion and industrial automation projects.
+
+- **Platforms:** Windows. **License:** Proprietary Beckhoff software license. **Pricing model:** mixed.
+- **Pricing details:** Free core PLC engineering; runtime, functions and some programming tools have separate costs.
+- **Pick for:** Develop a Beckhoff-compatible PC control project within an integrated engineering environment.
+- **Compare when:** Core PLC engineering is free of license cost, while runtime and additional functions are chargeable.
+- **Strengths:** Develop a Beckhoff-compatible PC control project within an integrated engineering environment.
+- **Limitations:** Core PLC engineering is free of license cost, while runtime and additional functions are chargeable.; Hard real-time execution is not supported inside virtual machines; runtime suitability must be established for actual hardware.
+- **Maintenance:** unverified — Product documentation reviewed; a current dated release or lifecycle commitment has not been established for this record.
+- [Official project](https://www.beckhoff.com/en-us/products/automation/twincat/) · [Official installation / downloads](https://www.beckhoff.com/en-us/support/download-finder/search-result/?c-1=26782567)
+- **Sources:** [Official documentation and distribution evidence](https://www.beckhoff.com/en-us/products/automation/twincat/) (2026-11-15; identity, features, platforms, downloads); [Official documentation and distribution evidence](https://www.beckhoff.com/en-us/products/automation/twincat/twincat-3-licensing/) (2026-11-15; license, pricing, features)
+
 ## Point cloud processing
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=science%2Fpoint-clouds)
 
 ### CloudCompare
 
@@ -794,7 +1783,85 @@ Command-line and library toolkit for processing point clouds through reproducibl
 - [Official project](https://pdal.org/) · [Official installation / downloads](https://pdal.org/en/stable/download.html) · [Repository](https://github.com/PDAL/PDAL)
 - **Sources:** [Official project documentation](https://pdal.io/) (2026-11-14; identity, features, platforms); [Official project README](https://raw.githubusercontent.com/PDAL/PDAL/HEAD/README.md) (2026-11-14; identity, features, platforms); [Upstream license terms](https://raw.githubusercontent.com/PDAL/PDAL/HEAD/LICENSE.txt) (2026-11-14; license); [Official installation and download information](https://pdal.org/en/stable/download.html) (2026-11-14; identity, downloads, platforms); [Official repository activity feed](https://github.com/PDAL/PDAL/commits/HEAD.atom) (2026-11-14; maintenance)
 
+## Radio Control
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=science%2Fradio-control)
+
+### flrig
+
+Transceiver control application with a graphical control panel and integration with fldigi.
+
+- **Platforms:** Windows, macOS, Linux. **License:** GPL-2.0. **Pricing model:** unknown.
+- **Pick for:** Separate radio control from the digital modem when the station benefits from a dedicated CAT interface.
+- **Compare when:** Only supported radio models and interfaces are usable.
+- **Strengths:** Separate radio control from the digital modem when the station benefits from a dedicated CAT interface.
+- **Limitations:** Only supported radio models and interfaces are usable.; The program controls a transceiver; it does not supply an RF receiver, modem or logging suite by itself.
+- **Maintenance:** unverified — Product documentation reviewed; a current dated release or lifecycle commitment has not been established for this record.
+- [Official project](https://www.w1hkj.org/) · [Official installation / downloads](https://www.w1hkj.org/files/flrig/) · [Repository](https://github.com/w1hkj/flrig)
+- **Sources:** [Official documentation and distribution evidence](https://www.w1hkj.org/) (2026-11-15; identity, features, platforms, downloads); [Official documentation and distribution evidence](https://github.com/w1hkj/flrig) (2026-11-15; identity, features, license)
+
+## Radio Programming
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=science%2Fradio-programming)
+
+### CHIRP
+
+Radio-memory programming tool supporting many handheld and mobile transceivers through model-specific drivers.
+
+- **Platforms:** Windows, macOS, Linux. **License:** GPL-3.0. **Pricing model:** free.
+- **Pick for:** Manage channel memories consistently across supported radios using one programming interface.
+- **Compare when:** Exact model, firmware variant and programming cable must match the documented support list.
+- **Strengths:** Manage channel memories consistently across supported radios using one programming interface.
+- **Limitations:** Exact model, firmware variant and programming cable must match the documented support list.; Some legacy-supported radios remain unvalidated in current builds and individual features vary by model.
+- **Maintenance:** unverified — Product documentation reviewed; a current dated release or lifecycle commitment has not been established for this record.
+- [Official project](https://chirpmyradio.com/) · [Official installation / downloads](https://chirpmyradio.com/projects/chirp/wiki/Download)
+- **Sources:** [Official documentation and distribution evidence](https://chirpmyradio.com/) (2026-11-15; identity, features, license, pricing, platforms, downloads); [Official documentation and distribution evidence](https://chirpmyradio.com/projects/chirp/wiki/FAQ) (2026-11-15; license, platforms, features); [Official documentation and distribution evidence](https://chirpmyradio.com/projects/chirp/wiki/Download) (2026-11-15; downloads)
+### qdmr
+
+Linux and macOS editor for supported DMR radio codeplugs and contact databases.
+
+- **Platforms:** Linux, macOS. **License:** GPL-3.0-or-later. **Pricing model:** unknown.
+- **Pick for:** Use a native Linux/macOS workflow for DMR radios explicitly supported by the project.
+- **Compare when:** Support covers a defined subset of DMR models, with model-specific limitations.
+- **Strengths:** Use a native Linux/macOS workflow for DMR radios explicitly supported by the project.
+- **Limitations:** Support covers a defined subset of DMR models, with model-specific limitations.; A codeplug from a different model or firmware is not automatically compatible.
+- **Maintenance:** active — Official release feed contains Version 0.15.1 with an updated timestamp of 2026-06-20. This is release-channel activity evidence, not proof of a stable build, installed compatibility or security testing. ([evidence](https://github.com/hmatuschek/qdmr/releases.atom))
+- [Official project](https://dm3mat.darc.de/qdmr/) · [Official installation / downloads](https://github.com/hmatuschek/qdmr/releases) · [Repository](https://github.com/hmatuschek/qdmr)
+- **Sources:** [Official documentation and distribution evidence](https://dm3mat.darc.de/qdmr/) (2026-11-15; identity, features, license, downloads); [Official documentation and distribution evidence](https://github.com/hmatuschek/qdmr) (2026-11-15; platforms, features, license, downloads); [Official release or lifecycle evidence](https://github.com/hmatuschek/qdmr/releases.atom) (2026-11-15; maintenance)
+
+## Radio Protocol Analysis
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=science%2Fradio-protocol-analysis)
+
+### inspectrum
+
+Offline signal viewer for examining recorded IQ data, symbol timing and modulation.
+
+- **Platforms:** Linux, macOS, Windows. **License:** GPL-3.0. **Pricing model:** unknown.
+- **Pricing details:** Source and package-manager installation paths are documented; packaged distribution pricing was not separately established.
+- **Pick for:** Inspect recorded signals carefully before designing a decoder or GNU Radio flowgraph.
+- **Compare when:** Works on captured sample files rather than serving as a full live radio console.
+- **Strengths:** Inspect recorded signals carefully before designing a decoder or GNU Radio flowgraph.
+- **Limitations:** Works on captured sample files rather than serving as a full live radio console.; Interpretation and protocol decoding remain separate tasks; sample format and rate must be known.
+- **Maintenance:** active — Official release feed contains Version 0.4.0 with an updated timestamp of 2025-12-06. This is release-channel activity evidence, not proof of a stable build, installed compatibility or security testing. ([evidence](https://github.com/miek/inspectrum/releases.atom))
+- [Official project](https://github.com/miek/inspectrum) · [Official installation / downloads](https://github.com/miek/inspectrum) · [Repository](https://github.com/miek/inspectrum)
+- **Sources:** [Official documentation and distribution evidence](https://github.com/miek/inspectrum) (2026-11-15; identity, features, platforms, license, downloads); [Official release or lifecycle evidence](https://github.com/miek/inspectrum/releases.atom) (2026-11-15; maintenance)
+### Universal Radio Hacker
+
+Graphical toolkit for inspecting captured wireless signals, interpreting protocol fields and testing owned radio devices.
+
+- **Platforms:** Windows, macOS, Linux, FreeBSD. **License:** GPL-3.0. **Pricing model:** unknown.
+- **Pick for:** Investigate an unfamiliar device protocol by connecting signal samples to decoded message fields.
+- **Compare when:** Device drivers and a compatible SDR are required for live acquisition.
+- **Strengths:** Investigate an unfamiliar device protocol by connecting signal samples to decoded message fields.
+- **Limitations:** Device drivers and a compatible SDR are required for live acquisition.; Automated interpretation still needs protocol knowledge; decoded bits do not prove a correct message model.
+- **Maintenance:** active — Official release feed contains v2.10.0 with an updated timestamp of 2025-12-17. This is release-channel activity evidence, not proof of a stable build, installed compatibility or security testing. ([evidence](https://github.com/jopohl/urh/releases.atom))
+- [Official project](https://github.com/jopohl/urh) · [Official installation / downloads](https://github.com/jopohl/urh/releases) · [Repository](https://github.com/jopohl/urh)
+- **Sources:** [Official documentation and distribution evidence](https://github.com/jopohl/urh) (2026-11-15; identity, features, platforms, license, downloads); [Official release or lifecycle evidence](https://github.com/jopohl/urh/releases.atom) (2026-11-15; maintenance)
+
 ## Remote Sensing
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=science%2Fremote-sensing)
 
 ### ESA SNAP
 
@@ -822,7 +1889,87 @@ Remote-sensing toolkit exposing image-processing applications through command li
 - [Official project](https://www.orfeo-toolbox.org/) · [Official installation / downloads](https://www.orfeo-toolbox.org/download/) · [Repository](https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb)
 - **Sources:** [Official product documentation](https://www.orfeo-toolbox.org/) (2026-11-14; features, identity, platforms); [Official download and distribution documentation](https://www.orfeo-toolbox.org/download/) (2026-11-14; downloads, platforms); [Official upstream license text](https://gitlab.orfeo-toolbox.org/orfeotoolbox/otb/-/raw/develop/LICENSE) (2026-11-14; license)
 
+## Robotics Offline Programming
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=science%2Frobotics-offline-programming)
+
+### RoboDK
+
+Industrial-robot simulation and offline programming software with robot libraries and controller post-processors.
+
+- **Platforms:** Windows, macOS, Linux. **License:** Proprietary RoboDK license. **Pricing model:** paid.
+- **Pricing details:** Paid licenses; time-limited evaluation and constrained program generation should not be represented as unrestricted free production use.
+- **Pick for:** Prepare robot machining or manufacturing programs through a visual workcell and controller-specific post-processors.
+- **Compare when:** Free/trial output is limited, and commercial programming needs the appropriate license.
+- **Strengths:** Prepare robot machining or manufacturing programs through a visual workcell and controller-specific post-processors.
+- **Limitations:** Free/trial output is limited, and commercial programming needs the appropriate license.; Simulation does not replace calibration, controller verification or physical workcell validation.
+- **Maintenance:** unverified — Product documentation reviewed; a current dated release or lifecycle commitment has not been established for this record.
+- [Official project](https://robodk.com/) · [Official installation / downloads](https://robodk.com/download)
+- **Sources:** [Official documentation and distribution evidence](https://robodk.com/) (2026-11-15; identity, features); [Official documentation and distribution evidence](https://robodk.com/download) (2026-11-15; downloads, platforms, pricing); [Official documentation and distribution evidence](https://robodk.com/pricing) (2026-11-15; license, pricing)
+
+## Robotics Simulation
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=science%2Frobotics-simulation)
+
+### CoppeliaSim
+
+Robot simulation environment with scene editing, scripting, multiple physics options and external control APIs.
+
+- **Platforms:** Windows, macOS, Linux. **License:** Proprietary Pro/Lite and restricted Edu licenses; components have separate terms. **Pricing model:** mixed.
+- **Pricing details:** Commercial editions and restricted educational edition differ; non-profit or research status alone does not qualify for Edu.
+- **Pick for:** Prototype robots and automation scenes when flexible scripting and external control are central.
+- **Compare when:** Edu use is restricted to qualifying schools/universities; general research institutions and companies are explicitly excluded.
+- **Strengths:** Prototype robots and automation scenes when flexible scripting and external control are central.
+- **Limitations:** Edu use is restricted to qualifying schools/universities; general research institutions and companies are explicitly excluded.; Controller and physics models still require validation against the real hardware.
+- **Maintenance:** unverified — Product documentation reviewed; a current dated release or lifecycle commitment has not been established for this record.
+- [Official project](https://www.coppeliarobotics.com/) · [Official installation / downloads](https://www.coppeliarobotics.com/#download)
+- **Sources:** [Official documentation and distribution evidence](https://www.coppeliarobotics.com/) (2026-11-15; identity, features, platforms, downloads, pricing); [Official documentation and distribution evidence](https://manual.coppeliarobotics.com/en/licensing.htm?height=620&iframe=true&width=1280) (2026-11-15; license, pricing); [Official documentation and distribution evidence](https://manual.coppeliarobotics.com/en/coppeliaSimLibrary.htm) (2026-11-15; features, platforms)
+### Gazebo
+
+Modular robotics simulator for physics, sensors and robot-world interaction, commonly integrated with ROS workflows.
+
+- **Platforms:** Linux, macOS, Windows. **License:** Apache-2.0; component licenses apply. **Pricing model:** unknown.
+- **Compatibility details:** Linux is primary; Windows support is experimental and current macOS GUI has documented instability.
+- **Pick for:** Develop modular robot simulations when ROS integration and configurable sensors matter.
+- **Compare when:** Linux is the primary supported platform; Windows is experimental and macOS GUI stability is qualified in the current guide.
+- **Strengths:** Develop modular robot simulations when ROS integration and configurable sensors matter.
+- **Limitations:** Linux is the primary supported platform; Windows is experimental and macOS GUI stability is qualified in the current guide.; Gazebo releases and ROS distributions must be paired deliberately; old Gazebo Classic tutorials can describe a different product generation.
+- **Maintenance:** unverified — Product documentation reviewed; a current dated release or lifecycle commitment has not been established for this record.
+- [Official project](https://gazebosim.org/) · [Official installation / downloads](https://gazebosim.org/docs/latest/install/) · [Repository](https://github.com/gazebosim/gz-sim)
+- **Sources:** [Official documentation and distribution evidence](https://github.com/gazebosim/gz-sim) (2026-11-15; identity, features, license, downloads); [Official documentation and distribution evidence](https://gazebosim.org/docs/latest/getstarted/) (2026-11-15; platforms, features, downloads); [Official documentation and distribution evidence](https://gazebosim.org/docs/latest/install/) (2026-11-15; platforms, downloads)
+### Webots
+
+Robot simulation environment with editable worlds, sensors, actuators and controller programming.
+
+- **Platforms:** Windows, macOS, Linux. **License:** Apache-2.0. **Pricing model:** unknown.
+- **Pick for:** Build a complete robot experiment with supplied models and an integrated simulator/editor.
+- **Compare when:** Simulation fidelity depends on models, sensor assumptions and controller timing.
+- **Strengths:** Build a complete robot experiment with supplied models and an integrated simulator/editor.
+- **Limitations:** Simulation fidelity depends on models, sensor assumptions and controller timing.; Nightly builds and stable releases serve different purposes; check the chosen version for course or deployment consistency.
+- **Maintenance:** active — Official release feed contains Webots Nightly Build (13-11-2026) with an updated timestamp of 2026-11-13. This is release-channel activity evidence, not proof of a stable build, installed compatibility or security testing. ([evidence](https://github.com/cyberbotics/webots/releases.atom))
+- [Official project](https://cyberbotics.com/) · [Official installation / downloads](https://github.com/cyberbotics/webots/releases) · [Repository](https://github.com/cyberbotics/webots)
+- **Sources:** [Official documentation and distribution evidence](https://github.com/cyberbotics/webots) (2026-11-15; identity, features, license, downloads); [Official documentation and distribution evidence](https://github.com/cyberbotics/webots/releases/expanded_assets/nightly_13_11_2026) (2026-11-15; platforms, downloads); [Official release or lifecycle evidence](https://github.com/cyberbotics/webots/releases.atom) (2026-11-15; maintenance)
+
+## Satellite Reception
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=science%2Fsatellite-reception)
+
+### SatDump
+
+Satellite reception and decoding suite with live SDR processing, recorded-input pipelines and image products.
+
+- **Platforms:** Windows, macOS, Linux. **License:** GPL-3.0. **Pricing model:** unknown.
+- **Pick for:** Process supported satellite downlinks from receiver samples through to decoded products in one workflow.
+- **Compare when:** A suitable antenna, front end and supported satellite signal are necessary for reception.
+- **Strengths:** Process supported satellite downlinks from receiver samples through to decoded products in one workflow.
+- **Limitations:** A suitable antenna, front end and supported satellite signal are necessary for reception.; Not every satellite or signal is supported, and high-bandwidth pipelines can need significant CPU and storage.
+- **Maintenance:** unverified — The reviewed official release feed's newest observed entry is Release 1.2.2 (updated 2024-11-29). Recent maintenance remains unverified; this does not prove the project is abandoned. ([evidence](https://github.com/SatDump/SatDump/releases.atom))
+- [Official project](https://github.com/SatDump/SatDump) · [Official installation / downloads](https://github.com/SatDump/SatDump/releases) · [Repository](https://github.com/SatDump/SatDump)
+- **Sources:** [Official documentation and distribution evidence](https://github.com/SatDump/SatDump) (2026-11-15; identity, features, platforms, license, downloads); [Official documentation and distribution evidence](https://github.com/SatDump/SatDump/releases/expanded_assets/1.2.2) (2026-11-15; platforms, downloads); [Official release or lifecycle evidence](https://github.com/SatDump/SatDump/releases.atom) (2026-11-15; maintenance)
+
 ## Satellite Tracking
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=science%2Fsatellite-tracking)
 
 ### Gpredict
 
@@ -837,8 +1984,23 @@ Satellite-tracking application for predicting orbital passes and inspecting sate
 - **Maintenance:** active — The official release feed contains 'Gpredict 2.7' with an updated timestamp of 2026-11-14T21:28:46Z. This is a maintenance signal, not an installation or stability test. ([evidence](https://github.com/csete/gpredict/releases.atom))
 - [Official project](https://oz9aec.dk/gpredict/) · [Official installation / downloads](https://oz9aec.dk/gpredict/download.php) · [Repository](https://github.com/csete/gpredict)
 - **Sources:** [Official product documentation](https://oz9aec.dk/gpredict/) (2026-11-14; features, identity, license, pricing); [Official upstream README](https://raw.githubusercontent.com/csete/gpredict/HEAD/README) (2026-11-14; features, identity, platforms); [Official upstream license text](https://raw.githubusercontent.com/csete/gpredict/HEAD/COPYING) (2026-11-14; license); [Official download and distribution documentation](https://oz9aec.dk/gpredict/download.php) (2026-11-14; downloads, platforms); [Official upstream release activity feed](https://github.com/csete/gpredict/releases.atom) (2026-11-14; maintenance)
+### PreviSat
+
+Satellite observation planner that predicts passes, transits and selected satellite flares from orbital elements.
+
+- **Platforms:** Windows, macOS, Linux. **License:** GNU GPL. **Pricing model:** free.
+- **Compatibility details:** Current prebuilt packages emphasize Windows and Linux; macOS is described as a source-build platform.
+- **Pick for:** Plan visual satellite observations with explicit pass and sky-position predictions.
+- **Compare when:** Prediction accuracy depends on current orbital elements and a correctly specified observing site.
+- **Strengths:** Plan visual satellite observations with explicit pass and sky-position predictions.
+- **Limitations:** Prediction accuracy depends on current orbital elements and a correctly specified observing site.; It is an observation planner, not a satellite signal decoder or SDR hardware controller.
+- **Maintenance:** unverified — Product documentation reviewed; a current dated release or lifecycle commitment has not been established for this record.
+- [Official project](https://previsat.sourceforge.net/) · [Official installation / downloads](https://previsat.sourceforge.net/download.html)
+- **Sources:** [Official documentation and distribution evidence](https://previsat.sourceforge.net/) (2026-11-15; identity, features, license, pricing, platforms, downloads); [Official documentation and distribution evidence](https://previsat.sourceforge.net/features.html) (2026-11-15; features, platforms); [Official documentation and distribution evidence](https://previsat.sourceforge.net/download.html) (2026-11-15; downloads, platforms)
 
 ## Scientific image analysis
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=science%2Fscientific-image-analysis)
 
 ### Fiji
 
@@ -866,6 +2028,8 @@ Python-based multidimensional image viewer with layers and a scientific plugin e
 - **Sources:** [Official project README](https://raw.githubusercontent.com/napari/napari/HEAD/README.md) (2026-11-14; identity, features); [Upstream license terms](https://raw.githubusercontent.com/napari/napari/HEAD/LICENSE) (2026-11-14; license); [Official installation and download information](https://napari.org/stable/tutorials/fundamentals/installation.html) (2026-11-14; identity, downloads); [Official installation and download information](https://napari.org/stable/getting_started/installation.html) (2026-11-14; identity, downloads, platforms); [Official repository activity feed](https://github.com/napari/napari/commits/HEAD.atom) (2026-11-14; maintenance); [Official pricing or distribution documentation](https://napari.org/workshops/extend/gui/) (2026-11-14; pricing)
 
 ## Scientific plotting
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=science%2Fscientific-plotting)
 
 ### gnuplot
 
@@ -918,6 +2082,8 @@ Scientific plotting application with a graphical document model and scriptable o
 
 ## Scientific visualization
 
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=science%2Fscientific-visualization)
+
 ### ParaView
 
 Scientific visualization application for inspecting and analyzing numerical datasets.
@@ -943,7 +2109,405 @@ Scientific visualization and analysis application for large simulation datasets.
 - [Official project](https://visit-dav.github.io/visit-website/) · [Official installation / downloads](https://visit-dav.github.io/visit-website/releases-as-tables/) · [Repository](https://github.com/visit-dav/visit)
 - **Sources:** [Official project documentation](https://visit-dav.github.io/visit-website/) (2026-11-14; identity, features, platforms, license, pricing); [Official project README](https://raw.githubusercontent.com/visit-dav/visit/HEAD/README.md) (2026-11-14; identity, features, license); [Upstream license terms](https://raw.githubusercontent.com/visit-dav/visit/HEAD/LICENSE) (2026-11-14; license); [Official project documentation](https://visit-dav.github.io/visit-website/releases-as-tables/) (2026-11-14; identity, features, platforms, downloads); [Official repository activity feed](https://github.com/visit-dav/visit/commits/HEAD.atom) (2026-11-14; maintenance)
 
+## Sdr Development
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=science%2Fsdr-development)
+
+### GNU Radio
+
+Signal-processing toolkit and graphical flowgraph environment for building and exploring software-defined radio systems.
+
+- **Platforms:** Windows, macOS, Linux. **License:** GPL-3.0; component licenses vary. **Pricing model:** free.
+- **Pricing details:** Free source and community distributions; hardware and optional commercial support are separate.
+- **Pick for:** Build a custom DSP chain when a fixed receiver application cannot express the experiment.
+- **Compare when:** Hardware support depends on installed drivers and out-of-tree modules.
+- **Strengths:** Build a custom DSP chain when a fixed receiver application cannot express the experiment.
+- **Limitations:** Hardware support depends on installed drivers and out-of-tree modules.; GNU Radio 4 release candidates and the established 3.x ecosystem have different APIs and module compatibility.
+- **Maintenance:** active — Official homepage announces GNU Radio 4.0.0-RC3 dated October 13, 2026. This is a release candidate and is distinct from the established 3.x distribution. ([evidence](https://www.gnuradio.org/))
+- [Official project](https://www.gnuradio.org/) · [Official installation / downloads](https://wiki.gnuradio.org/index.php/InstallingGR) · [Repository](https://github.com/gnuradio/gnuradio)
+- **Sources:** [Official documentation and distribution evidence](https://www.gnuradio.org/) (2026-11-15; identity, features, platforms, pricing, downloads, maintenance); [Official documentation and distribution evidence](https://github.com/gnuradio/gnuradio) (2026-11-15; features, license, downloads); [Official release or lifecycle evidence](https://www.gnuradio.org/) (2026-11-15; maintenance)
+
+## Sdr Receivers
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=science%2Fsdr-receivers)
+
+### CubicSDR
+
+Cross-platform graphical receiver with multiple demodulators and SoapySDR device integration.
+
+- **Platforms:** Windows, macOS, Linux. **License:** GPL-2.0-or-later. **Pricing model:** unknown.
+- **Pick for:** Explore multiple signals with a visual receiver organized around demodulator regions.
+- **Compare when:** SoapySDR plugins and audio configuration determine device availability.
+- **Strengths:** Explore multiple signals with a visual receiver organized around demodulator regions.
+- **Limitations:** SoapySDR plugins and audio configuration determine device availability.; Published packages can trail source development; check the selected binary and device combination.
+- **Maintenance:** active — Official release feed contains v0.3.0-sdrplay-test2: v0.3.0 sdrplay test build 2 with an updated timestamp of 2026-11-13. This is release-channel activity evidence, not proof of a stable build, installed compatibility or security testing. ([evidence](https://github.com/cjcliffe/CubicSDR/releases.atom))
+- [Official project](https://github.com/cjcliffe/CubicSDR) · [Official installation / downloads](https://github.com/cjcliffe/CubicSDR/releases) · [Repository](https://github.com/cjcliffe/CubicSDR)
+- **Sources:** [Official documentation and distribution evidence](https://github.com/cjcliffe/CubicSDR) (2026-11-15; identity, features, platforms, license, downloads); [Official release or lifecycle evidence](https://github.com/cjcliffe/CubicSDR/releases.atom) (2026-11-15; maintenance)
+### Gqrx
+
+GNU Radio and Qt receiver for AM, FM, SSB, spectrum inspection and audio recording.
+
+- **Platforms:** Linux, macOS, Windows. **License:** GPL-3.0 with separately licensed components. **Pricing model:** unknown.
+- **Pick for:** Use a focused graphical receiver when GNU Radio flowgraph development would be unnecessary.
+- **Compare when:** Hardware compatibility follows the installed gr-osmosdr drivers.
+- **Strengths:** Use a focused graphical receiver when GNU Radio flowgraph development would be unnecessary.
+- **Limitations:** Hardware compatibility follows the installed gr-osmosdr drivers.; Windows distribution and Linux/macOS packaging differ; select the installation path documented for the target OS.
+- **Maintenance:** unverified — The reviewed official release feed's newest observed entry is Gqrx SDR 2.17.7 (updated 2025-05-27). Recent maintenance remains unverified; this does not prove the project is abandoned. ([evidence](https://github.com/gqrx-sdr/gqrx/releases.atom))
+- [Official project](https://www.gqrx.dk/) · [Official installation / downloads](https://github.com/gqrx-sdr/gqrx/releases) · [Repository](https://github.com/gqrx-sdr/gqrx)
+- **Sources:** [Official documentation and distribution evidence](https://www.gqrx.dk/) (2026-11-15; identity, features, license, downloads); [Official documentation and distribution evidence](https://github.com/gqrx-sdr/gqrx) (2026-11-15; features, platforms, license, downloads); [Official documentation and distribution evidence](https://github.com/gqrx-sdr/gqrx/releases/expanded_assets/v2.17.7) (2026-11-15; platforms, downloads); [Official release or lifecycle evidence](https://github.com/gqrx-sdr/gqrx/releases.atom) (2026-11-15; maintenance)
+### HDSDR
+
+Windows receiver application with ExtIO hardware interfaces, IQ recording and configurable spectrum displays.
+
+- **Platforms:** Windows. **License:** Freeware; detailed source/redistribution terms not established. **Pricing model:** free.
+- **Pick for:** Use established ExtIO-compatible radio hardware through a compact Windows receiver.
+- **Compare when:** Hardware functionality depends on the matching ExtIO DLL.
+- **Strengths:** Use established ExtIO-compatible radio hardware through a compact Windows receiver.
+- **Limitations:** Hardware functionality depends on the matching ExtIO DLL.; It is a Windows application, and transmit support is basic and device-dependent.
+- **Maintenance:** unverified — Product documentation reviewed; a current dated release or lifecycle commitment has not been established for this record.
+- [Official project](https://www.hdsdr.de/) · [Official installation / downloads](https://www.hdsdr.de/)
+- **Sources:** [Official documentation and distribution evidence](https://www.hdsdr.de/) (2026-11-15; identity, features, platforms, pricing, downloads)
+### SDR Console
+
+Windows radio console combining multiple receivers, recording, memories and support for selected SDR transceivers.
+
+- **Platforms:** Windows. **License:** Vendor terms: free hobby/educational use; commercial licensing separate. **Pricing model:** mixed.
+- **Pricing details:** No charge for hobby and educational uses described by the vendor; check commercial licensing for business deployment.
+- **Pick for:** Choose a Windows station console for multi-receiver listening, recording and supported transceiver control.
+- **Compare when:** Commercial use is separately licensed.
+- **Strengths:** Choose a Windows station console for multi-receiver listening, recording and supported transceiver control.
+- **Limitations:** Commercial use is separately licensed.; Transmit support is limited to documented devices; a supported receiver does not imply every transmit feature.
+- **Maintenance:** unverified — Product documentation reviewed; a current dated release or lifecycle commitment has not been established for this record.
+- [Official project](https://www.sdr-radio.com/) · [Official installation / downloads](https://www.sdr-radio.com/download)
+- **Sources:** [Official documentation and distribution evidence](https://www.sdr-radio.com/) (2026-11-15; identity, features, platforms); [Official documentation and distribution evidence](https://www.sdr-radio.com/legal) (2026-11-15; license, pricing); [Official documentation and distribution evidence](https://www.sdr-radio.com/download) (2026-11-15; downloads, platforms)
+### SDR#
+
+Windows SDR receiver centered on Airspy hardware, tunable DSP and a third-party plugin ecosystem.
+
+- **Platforms:** Windows. **License:** Vendor-distributed application; exact redistribution terms not established in reviewed page. **Pricing model:** unknown.
+- **Pricing details:** Hardware and third-party extensions are separate; no universal software price/licensing statement was established here.
+- **Pick for:** Operate Airspy-oriented receiving workflows with a familiar Windows DSP interface.
+- **Compare when:** The main desktop receiver is a Windows application; Linux SPY Server is a separate component.
+- **Strengths:** Operate Airspy-oriented receiving workflows with a familiar Windows DSP interface.
+- **Limitations:** The main desktop receiver is a Windows application; Linux SPY Server is a separate component.; Third-party plugins and community packages can have different compatibility and support.
+- **Maintenance:** unverified — Product documentation reviewed; a current dated release or lifecycle commitment has not been established for this record.
+- [Official project](https://airspy.com/download/) · [Official installation / downloads](https://airspy.com/download/)
+- **Sources:** [Official documentation and distribution evidence](https://airspy.com/download/) (2026-11-15; identity, features, platforms, downloads)
+### SDR++
+
+Modular SDR receiver with multiple tuners, spectrum/waterfall views and support for many radio front ends.
+
+- **Platforms:** Windows, macOS, Linux, FreeBSD. **License:** GPL-3.0. **Pricing model:** unknown.
+- **Pricing details:** Hardware is separate; the reviewed documentation establishes open-source distribution but not a universal packaged-software pricing policy.
+- **Pick for:** Use several receive channels through one modular, cross-platform radio interface.
+- **Compare when:** The project directs users to frequently updated nightly builds; release-channel maturity must be checked.
+- **Strengths:** Use several receive channels through one modular, cross-platform radio interface.
+- **Limitations:** The project directs users to frequently updated nightly builds; release-channel maturity must be checked.; Driver, sample-rate and device-module compatibility determine which hardware functions work.
+- **Maintenance:** active — Official release feed contains SDR++ Nightly Build (currently 1.3.2) with an updated timestamp of 2026-11-07. This is release-channel activity evidence, not proof of a stable build, installed compatibility or security testing. ([evidence](https://github.com/AlexandreRouma/SDRPlusPlus/releases.atom))
+- [Official project](https://www.sdrpp.org/) · [Official installation / downloads](https://github.com/AlexandreRouma/SDRPlusPlus/releases) · [Repository](https://github.com/AlexandreRouma/SDRPlusPlus)
+- **Sources:** [Official documentation and distribution evidence](https://www.sdrpp.org/) (2026-11-15; identity, features, platforms, downloads); [Official documentation and distribution evidence](https://github.com/AlexandreRouma/SDRPlusPlus) (2026-11-15; features, license, downloads); [Official release or lifecycle evidence](https://github.com/AlexandreRouma/SDRPlusPlus/releases.atom) (2026-11-15; maintenance)
+### SDRangel
+
+Plugin-based receiver, transmitter and signal-analysis workbench for compatible SDR devices.
+
+- **Platforms:** Windows, macOS, Linux. **License:** GPL-3.0. **Pricing model:** unknown.
+- **Pick for:** Explore several modulation types and device channels in a single experimental workbench.
+- **Compare when:** The project explicitly positions itself for experimentation rather than mission-critical production.
+- **Strengths:** Explore several modulation types and device channels in a single experimental workbench.
+- **Limitations:** The project explicitly positions itself for experimentation rather than mission-critical production.; Transmitting requires compatible hardware and a properly configured signal chain; receive-only devices cannot transmit.
+- **Maintenance:** active — Official release feed contains New Demodulator and Modulator for popular Digital Speech modes with an updated timestamp of 2026-11-14. This is release-channel activity evidence, not proof of a stable build, installed compatibility or security testing. ([evidence](https://github.com/f4exb/sdrangel/releases.atom))
+- [Official project](https://github.com/f4exb/sdrangel) · [Official installation / downloads](https://github.com/f4exb/sdrangel/releases) · [Repository](https://github.com/f4exb/sdrangel)
+- **Sources:** [Official documentation and distribution evidence](https://github.com/f4exb/sdrangel) (2026-11-15; identity, features, license); [Official documentation and distribution evidence](https://github.com/f4exb/sdrangel/wiki) (2026-11-15; platforms, downloads, features); [Official documentation and distribution evidence](https://github.com/f4exb/sdrangel/wiki/Quick-start) (2026-11-15; features); [Official release or lifecycle evidence](https://github.com/f4exb/sdrangel/releases.atom) (2026-11-15; maintenance)
+### SDRconnect
+
+Cross-platform SDRplay receiver application with graphical and headless operation.
+
+- **Platforms:** Windows, macOS, Linux. **License:** SDRplay proprietary end-user license. **Pricing model:** free.
+- **Pricing details:** Software is no charge under vendor terms; supported SDRplay hardware is required.
+- **Pick for:** Choose the vendor-supported cross-platform path for supported SDRplay receivers.
+- **Compare when:** The vendor excludes the original RSP1 from supported devices.
+- **Strengths:** Choose the vendor-supported cross-platform path for supported SDRplay receivers.
+- **Limitations:** The vendor excludes the original RSP1 from supported devices.; Linux support is specifically tested against listed Ubuntu LTS versions; other distributions need dependency work.
+- **Maintenance:** unverified — Product documentation reviewed; a current dated release or lifecycle commitment has not been established for this record.
+- [Official project](https://www.sdrplay.com/sdrconnect/) · [Official installation / downloads](https://www.sdrplay.com/sdrconnect/)
+- **Sources:** [Official documentation and distribution evidence](https://www.sdrplay.com/sdrconnect/) (2026-11-15; identity, features, platforms, downloads); [Official documentation and distribution evidence](https://www.sdrplay.com/software/install.sh) (2026-11-15; license, pricing); [Official documentation and distribution evidence](https://sdrplay.com/download/sdrconnect-windows-x64/) (2026-11-15; downloads, pricing)
+### SDRuno
+
+Legacy Windows receiver software for SDRplay devices, retained for established station setups.
+
+- **Platforms:** Windows. **License:** SDRplay proprietary end-user license. **Pricing model:** free.
+- **Pricing details:** No-charge vendor software for permitted SDRplay hardware uses; receiver hardware is separate.
+- **Pick for:** Retain access to an established SDRuno configuration when migration is not yet practical.
+- **Compare when:** The vendor explicitly marks SDRuno as end of life.
+- **Strengths:** Retain access to an established SDRuno configuration when migration is not yet practical.
+- **Limitations:** The vendor explicitly marks SDRuno as end of life.; New SDRplay workflows should compare SDRconnect and verify exact hardware support before migration.
+- **Maintenance:** discontinued — The current vendor page explicitly identifies SDRuno as end of life; retain as a legacy option rather than a current-development recommendation. ([evidence](https://www.sdrplay.com/sdruno/))
+- [Official project](https://www.sdrplay.com/sdruno/) · [Official installation / downloads](https://www.sdrplay.com/sdruno/)
+- **Sources:** [Official documentation and distribution evidence](https://www.sdrplay.com/sdruno/) (2026-11-15; identity, features, downloads, maintenance); [Official documentation and distribution evidence](https://www.sdrplay.com/software/install.sh) (2026-11-15; license, pricing); [Official documentation and distribution evidence](https://sdrplay.com/download/sdruno-installer/) (2026-11-15; platforms, downloads, maintenance); [Official release or lifecycle evidence](https://www.sdrplay.com/sdruno/) (2026-11-15; maintenance)
+
+## Sequence alignment
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=science%2Fsequence-alignment)
+
+### AliView
+
+Focused sequence-alignment viewer and editor with navigation and editing tools for large biological alignments.
+
+- **Platforms:** Windows, macOS, Linux. **License:** GNU GPL v3. **Pricing model:** unknown.
+- **Pricing details:** No complete price or distribution-cost statement was established from the reviewed primary sources; check the selected distribution route.
+- **Pick for:** Choose AliView for direct inspection and editing of alignment files.
+- **Compare when:** External aligners must be installed and configured separately where used.
+- **Strengths:** Choose AliView for direct inspection and editing of alignment files.; Its focused interface suits checking an alignment before phylogenetic analysis.
+- **Limitations:** External aligners must be installed and configured separately where used.; The Java runtime and package instructions differ by platform.
+- **Maintenance:** active — Official page identifies AliView 1.33 dated 28 September 2026. ([evidence](https://ormbunkar.se/aliview/))
+- [Official project](https://ormbunkar.se/aliview/) · [Official installation / downloads](https://ormbunkar.se/aliview/) · [Repository](https://github.com/AliView/AliView)
+- **Sources:** [Official product documentation](https://ormbunkar.se/aliview/) (2026-11-15; identity, features, license, downloads, platforms, maintenance); [Official upstream documentation](https://raw.githubusercontent.com/AliView/AliView/HEAD/LICENSE) (2026-11-15; license)
+### Jalview
+
+Graphical multiple-sequence alignment editor linking sequence annotations, analysis and molecular structure views.
+
+- **Platforms:** Windows, macOS, Linux. **License:** GNU GPL; exact version not established in the reviewed product page. **Pricing model:** free.
+- **Pick for:** Choose Jalview for interpreting and editing an alignment alongside biological annotations.
+- **Compare when:** External databases and alignment services may require a network connection.
+- **Strengths:** Choose Jalview for interpreting and editing an alignment alongside biological annotations.; A dedicated alignment workspace offers more inspection controls than a general text editor.
+- **Limitations:** External databases and alignment services may require a network connection.; Interpret an alignment with biological context; visual editing can change downstream phylogenetic conclusions.
+- **Maintenance:** unverified — Current release cadence or an explicit maintenance commitment was not established by the reviewed sources. Availability alone is not a maintenance guarantee.
+- [Official project](https://www.jalview.org/) · [Official installation / downloads](https://www.jalview.org/download/)
+- **Sources:** [Official product documentation](https://www.jalview.org/) (2026-11-15; identity, features, license, pricing); [Official product documentation](https://www.jalview.org/download/) (2026-11-15; downloads, platforms)
+### MAFFT
+
+Multiple-sequence alignment program offering several alignment strategies and incremental sequence-addition workflows.
+
+- **Platforms:** Windows, macOS, Linux. **License:** BSD for core source without extensions; GPL for Windows packages and separate notices for bundled extensions. **Pricing model:** unknown.
+- **Pricing details:** No complete price or distribution-cost statement was established from the reviewed primary sources; check the selected distribution route.
+- **Pick for:** Choose MAFFT when alignment strategy should be selected for dataset size and expected homology.
+- **Compare when:** Package licenses differ; do not apply the core BSD label to every bundled binary.
+- **Strengths:** Choose MAFFT when alignment strategy should be selected for dataset size and expected homology.; Its command-line workflows suit reproducible alignment preparation.
+- **Limitations:** Package licenses differ; do not apply the core BSD label to every bundled binary.; Inspect difficult regions and justify strategy choices before downstream inference.
+- **Maintenance:** unverified — Current release cadence or an explicit maintenance commitment was not established by the reviewed sources. Availability alone is not a maintenance guarantee.
+- [Official project](https://mafft.cbrc.jp/alignment/software/) · [Official installation / downloads](https://mafft.cbrc.jp/alignment/software/)
+- **Sources:** [Official product documentation](https://mafft.cbrc.jp/alignment/software/) (2026-11-15; identity, features, license, downloads, platforms)
+
+## Sequence processing pipelines
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=science%2Fsequence-processing)
+
+### BEDTools
+
+Command-line genomic interval operations for intersecting, merging, counting and comparing annotated regions.
+
+- **Platforms:** Linux, macOS. **License:** MIT License in current upstream source; stable documentation retains an older GPLv2 statement. **Pricing model:** free.
+- **Pick for:** Choose BEDTools when a question can be expressed as relationships between genomic intervals.
+- **Compare when:** BED, GFF and other formats use different coordinate conventions; incorrect conversion can shift results.
+- **Strengths:** Choose BEDTools when a question can be expressed as relationships between genomic intervals.; Command-line composition makes region-level analyses inspectable and repeatable.
+- **Limitations:** BED, GFF and other formats use different coordinate conventions; incorrect conversion can shift results.; The stable documentation and current source disagree on the historical license label; check the specific release for redistribution.
+- **Maintenance:** unverified — Current release cadence or an explicit maintenance commitment was not established by the reviewed sources. Availability alone is not a maintenance guarantee.
+- [Official project](https://bedtools.readthedocs.io/) · [Official installation / downloads](https://bedtools.readthedocs.io/en/latest/content/installation.html) · [Repository](https://github.com/arq5x/bedtools2)
+- **Sources:** [Official product documentation](https://bedtools.readthedocs.io/) (2026-11-15; identity, features, pricing); [Official product documentation](https://bedtools.readthedocs.io/en/latest/content/installation.html) (2026-11-15; downloads, platforms); [Official upstream documentation](https://raw.githubusercontent.com/arq5x/bedtools2/HEAD/README.md) (2026-11-15; license); [Official upstream documentation](https://raw.githubusercontent.com/arq5x/bedtools2/HEAD/LICENSE) (2026-11-15; license)
+### minimap2
+
+Command-line sequence mapper for long reads, spliced alignments and assembly-to-reference comparisons.
+
+- **Platforms:** Linux. **License:** MIT License. **Pricing model:** unknown.
+- **Compatibility details:** The reviewed binary installation route is Linux x64. No unsupported native Windows or macOS binary claim is made.
+- **Pricing details:** No complete price or distribution-cost statement was established from the reviewed primary sources; check the selected distribution route.
+- **Pick for:** Choose minimap2 when long reads or assembled sequences must be aligned to a reference.
+- **Compare when:** Choose a preset that matches the read technology and analysis purpose.
+- **Strengths:** Choose minimap2 when long reads or assembled sequences must be aligned to a reference.; Its documented presets separate materially different mapping tasks.
+- **Limitations:** Choose a preset that matches the read technology and analysis purpose.; This record verifies the published Linux binary route; other build environments require separate platform confirmation.
+- **Maintenance:** active — Official release feed entry 'Minimap2-2.31 (r1302)' was updated 2026-05-20T13:54:05Z. This is a dated maintenance signal, not an installation or quality benchmark. ([evidence](https://github.com/lh3/minimap2/releases.atom))
+- [Official project](https://github.com/lh3/minimap2) · [Official installation / downloads](https://github.com/lh3/minimap2/releases) · [Repository](https://github.com/lh3/minimap2)
+- **Sources:** [Official upstream documentation](https://raw.githubusercontent.com/lh3/minimap2/HEAD/README.md) (2026-11-15; identity, features, platforms, downloads); [Official upstream documentation](https://raw.githubusercontent.com/lh3/minimap2/HEAD/LICENSE.txt) (2026-11-15; license); [Official release activity feed](https://github.com/lh3/minimap2/releases.atom) (2026-11-15; maintenance)
+### SAMtools
+
+Command-line tools for working with sequencing alignments in SAM, BAM and CRAM formats.
+
+- **Platforms:** Linux, macOS, Windows. **License:** MIT/Expat License. **Pricing model:** free.
+- **Compatibility details:** Command-line software. Linux/macOS installation and Windows MSYS2/MINGW64 build instructions differ.
+- **Pick for:** Choose SAMtools for reproducible processing of alignment files before visualization or downstream analysis.
+- **Compare when:** Native Windows builds use the documented MSYS2/MINGW64 development environment rather than a conventional desktop installer.
+- **Strengths:** Choose SAMtools for reproducible processing of alignment files before visualization or downstream analysis.; Its format-oriented commands combine naturally with mapping and variant-analysis pipelines.
+- **Limitations:** Native Windows builds use the documented MSYS2/MINGW64 development environment rather than a conventional desktop installer.; Coordinate, reference and sorting assumptions must remain consistent across a pipeline.
+- **Maintenance:** active — Official release feed entry '1.25' was updated 2026-10-27T12:04:57Z. This is a dated maintenance signal, not an installation or quality benchmark. ([evidence](https://github.com/samtools/samtools/releases.atom))
+- [Official project](https://www.htslib.org/) · [Official installation / downloads](https://www.htslib.org/download/) · [Repository](https://github.com/samtools/samtools)
+- **Sources:** [Official product documentation](https://www.htslib.org/) (2026-11-15; identity, features); [Official product documentation](https://www.htslib.org/download/) (2026-11-15; downloads); [Official upstream documentation](https://raw.githubusercontent.com/samtools/samtools/HEAD/README.md) (2026-11-15; license, pricing); [Official upstream documentation](https://raw.githubusercontent.com/samtools/samtools/HEAD/INSTALL) (2026-11-15; platforms); [Official release activity feed](https://github.com/samtools/samtools/releases.atom) (2026-11-15; maintenance)
+### SeqKit
+
+Standalone command-line toolkit for filtering, transforming, inspecting and extracting FASTA and FASTQ sequences.
+
+- **Platforms:** Windows, macOS, Linux, FreeBSD. **License:** MIT License. **Pricing model:** free.
+- **Pick for:** Choose SeqKit for small composable sequence-file operations without setting up a full workbench.
+- **Compare when:** It manipulates sequences; it does not establish biological validity or replace a mapper or assembler.
+- **Strengths:** Choose SeqKit for small composable sequence-file operations without setting up a full workbench.; Official self-contained binaries simplify installing the same workflow across supported systems.
+- **Limitations:** It manipulates sequences; it does not establish biological validity or replace a mapper or assembler.; Check strand, coordinate and identifier conventions when combining commands.
+- **Maintenance:** active — Official release feed entry 'SeqKit v2.14.0' was updated 2026-09-24T07:39:21Z. This is a dated maintenance signal, not an installation or quality benchmark. ([evidence](https://github.com/shenwei356/seqkit/releases.atom))
+- [Official project](https://bioinf.shenwei.me/seqkit/) · [Official installation / downloads](https://bioinf.shenwei.me/seqkit/download/) · [Repository](https://github.com/shenwei356/seqkit)
+- **Sources:** [Official product documentation](https://bioinf.shenwei.me/seqkit/) (2026-11-15; identity, features, license, platforms); [Official product documentation](https://bioinf.shenwei.me/seqkit/download/) (2026-11-15; downloads, platforms, pricing); [Official release activity feed](https://github.com/shenwei356/seqkit/releases.atom) (2026-11-15; maintenance)
+
+## Sequence quality control
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=science%2Fsequence-quality-control)
+
+### fastp
+
+Command-line FASTQ preprocessing tool combining quality filtering, adapter trimming and per-run reports.
+
+- **Platforms:** Linux, macOS. **License:** MIT License. **Pricing model:** unknown.
+- **Pricing details:** No complete price or distribution-cost statement was established from the reviewed primary sources; check the selected distribution route.
+- **Pick for:** Choose fastp when preprocessing and immediate quality summaries should be recorded in a single scripted step.
+- **Compare when:** Trimming settings can remove meaningful sequence; validate parameters for the library and assay.
+- **Strengths:** Choose fastp when preprocessing and immediate quality summaries should be recorded in a single scripted step.; Its machine-readable reports can feed a broader reporting workflow.
+- **Limitations:** Trimming settings can remove meaningful sequence; validate parameters for the library and assay.; The official prebuilt route is Linux, while macOS instructions describe dependency installation and compilation.
+- **Maintenance:** active — Official release feed entry 'Release fastp v1.4.0' was updated 2026-10-07T00:51:29Z. This is a dated maintenance signal, not an installation or quality benchmark. ([evidence](https://github.com/OpenGene/fastp/releases.atom))
+- [Official project](https://github.com/OpenGene/fastp) · [Official installation / downloads](https://github.com/OpenGene/fastp/releases) · [Repository](https://github.com/OpenGene/fastp)
+- **Sources:** [Official upstream documentation](https://raw.githubusercontent.com/OpenGene/fastp/HEAD/README.md) (2026-11-15; identity, features, downloads, platforms); [Official upstream documentation](https://raw.githubusercontent.com/OpenGene/fastp/HEAD/LICENSE) (2026-11-15; license); [Official release activity feed](https://github.com/OpenGene/fastp/releases.atom) (2026-11-15; maintenance)
+### FastQC
+
+Sequencing quality-control application that produces per-file diagnostic reports for raw read data.
+
+- **Platforms:** Windows, macOS, Linux. **License:** GNU GPL v3 or later. **Pricing model:** unknown.
+- **Pricing details:** No complete price or distribution-cost statement was established from the reviewed primary sources; check the selected distribution route.
+- **Pick for:** Choose FastQC to inspect raw sequencing quality before deciding what preprocessing is appropriate.
+- **Compare when:** Warning thresholds are heuristics; library design can legitimately produce flagged patterns.
+- **Strengths:** Choose FastQC to inspect raw sequencing quality before deciding what preprocessing is appropriate.; Its report modules make possible issues visible for follow-up analysis.
+- **Limitations:** Warning thresholds are heuristics; library design can legitimately produce flagged patterns.; FastQC reports quality characteristics and does not itself clean or correct reads.
+- **Maintenance:** active — Official release feed entry 'v0.13.0' was updated 2026-10-02T12:55:25Z. This is a dated maintenance signal, not an installation or quality benchmark. ([evidence](https://github.com/s-andrews/FastQC/releases.atom))
+- [Official project](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) · [Official installation / downloads](https://www.bioinformatics.babraham.ac.uk/projects/download.html#fastqc) · [Repository](https://github.com/s-andrews/FastQC)
+- **Sources:** [Official product documentation](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) (2026-11-15; identity, features, license); [Official product documentation](https://www.bioinformatics.babraham.ac.uk/projects/download.html#fastqc) (2026-11-15; downloads, platforms); [Official upstream documentation](https://raw.githubusercontent.com/s-andrews/FastQC/HEAD/README.md) (2026-11-15; features, platforms); [Official release activity feed](https://github.com/s-andrews/FastQC/releases.atom) (2026-11-15; maintenance)
+### MultiQC
+
+Report aggregator that combines outputs from sequencing and bioinformatics tools into one navigable project report.
+
+- **Platforms:** Windows, macOS, Linux. **License:** GNU GPL v3 or later. **Pricing model:** unknown.
+- **Compatibility details:** Python command-line application. Follow the current package/runtime instructions; container images are Linux images, not native Windows desktop installers.
+- **Pricing details:** No complete price or distribution-cost statement was established from the reviewed primary sources; check the selected distribution route.
+- **Pick for:** Choose MultiQC when many per-sample or per-tool reports need a shared overview.
+- **Compare when:** It summarizes existing tool outputs rather than performing the underlying quality measurements.
+- **Strengths:** Choose MultiQC when many per-sample or per-tool reports need a shared overview.; Aggregation helps spot inconsistent samples across a sequencing project.
+- **Limitations:** It summarizes existing tool outputs rather than performing the underlying quality measurements.; Module support and sample naming affect which results are recognized and grouped.
+- **Maintenance:** active — Official release feed entry 'v1.35' was updated 2026-05-13T01:00:41Z. This is a dated maintenance signal, not an installation or quality benchmark. ([evidence](https://github.com/MultiQC/MultiQC/releases.atom))
+- [Official project](https://seqera.io/multiqc/) · [Official installation / downloads](https://docs.seqera.io/multiqc/getting_started/installation) · [Repository](https://github.com/MultiQC/MultiQC)
+- **Sources:** [Official upstream documentation](https://raw.githubusercontent.com/MultiQC/MultiQC/HEAD/README.md) (2026-11-15; identity, features, license); [Official product documentation](https://docs.seqera.io/multiqc/getting_started/installation) (2026-11-15; downloads, platforms); [Official release activity feed](https://github.com/MultiQC/MultiQC/releases.atom) (2026-11-15; maintenance)
+
+## Sequence analysis workbenches
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=science%2Fsequence-workbenches)
+
+### Geneious Prime
+
+Commercial molecular-biology workbench combining sequence analysis, cloning design, mapping and data management.
+
+- **Platforms:** Windows, macOS, Linux. **License:** Proprietary Geneious Prime license. **Pricing model:** subscription.
+- **Pricing details:** Personal and team subscriptions differ; academic/student eligibility and cloud workspace entitlements require checking the current plan.
+- **Pick for:** Choose Geneious Prime when a laboratory values an integrated graphical environment and supported workflow management.
+- **Compare when:** Subscription terms, academic eligibility and cloud features differ by plan.
+- **Strengths:** Choose Geneious Prime when a laboratory values an integrated graphical environment and supported workflow management.; Multiple sequence-analysis stages can share projects and annotations.
+- **Limitations:** Subscription terms, academic eligibility and cloud features differ by plan.; Bundled or plugin algorithms still need scientific validation and may have separate requirements.
+- **Maintenance:** unverified — Current release cadence or an explicit maintenance commitment was not established by the reviewed sources. Availability alone is not a maintenance guarantee.
+- [Official project](https://www.geneious.com/features/prime) · [Official installation / downloads](https://www.geneious.com/updates)
+- **Sources:** [Official product documentation](https://www.geneious.com/features/prime) (2026-11-15; identity, features); [Official product documentation](https://www.geneious.com/updates) (2026-11-15; downloads, platforms); [Official product documentation](https://www.geneious.com/pricing) (2026-11-15; pricing, license, platforms)
+### SnapGene
+
+Molecular cloning and sequence-design application with plasmid maps, procedure simulation and recorded edit history.
+
+- **Platforms:** Windows, macOS, Linux. **License:** Proprietary SnapGene license; free Viewer mode with reduced capabilities. **Pricing model:** freemium.
+- **Pricing details:** Free Viewer mode is limited; cloning design and the full application require a subscription.
+- **Pick for:** Choose SnapGene for visual cloning design and a traceable sequence-construction record.
+- **Compare when:** Cloning design requires the paid subscription; Viewer mode does not preserve all editing/design functions.
+- **Strengths:** Choose SnapGene for visual cloning design and a traceable sequence-construction record.; Free Viewer mode helps collaborators inspect and annotate shared files.
+- **Limitations:** Cloning design requires the paid subscription; Viewer mode does not preserve all editing/design functions.; Current Linux support is restricted to specified Ubuntu releases; ARM Linux is not supported in the reviewed requirements.
+- **Maintenance:** unverified — Current release cadence or an explicit maintenance commitment was not established by the reviewed sources. Availability alone is not a maintenance guarantee.
+- [Official project](https://www.snapgene.com/) · [Official installation / downloads](https://www.snapgene.com/support/downloads)
+- **Sources:** [Official product documentation](https://www.snapgene.com/) (2026-11-15; identity, features, pricing); [Official product documentation](https://www.snapgene.com/pricing) (2026-11-15; pricing, license, platforms); [Official product documentation](https://support.snapgene.com/hc/en-us/articles/10304161780628-Download-Install-and-Activate-SnapGene) (2026-11-15; downloads); [Official product documentation](https://support.snapgene.com/hc/en-us/articles/10242532604180-What-are-the-System-and-Hardware-Requirements-for-SnapGene) (2026-11-15; platforms)
+### Unipro UGENE
+
+Integrated sequence-analysis workbench with alignments, annotations, workflows and external bioinformatics tools.
+
+- **Platforms:** Windows, macOS, Linux. **License:** GNU GPL v2. **Pricing model:** free.
+- **Pick for:** Choose UGENE when several sequence tasks should share a graphical project workspace.
+- **Compare when:** External algorithms and reference databases can require separate packages and substantial storage.
+- **Strengths:** Choose UGENE when several sequence tasks should share a graphical project workspace.; Its bundled tools provide a practical entry point before maintaining separate command-line pipelines.
+- **Limitations:** External algorithms and reference databases can require separate packages and substantial storage.; Validate each analysis method and workflow; one interface does not make different algorithms interchangeable.
+- **Maintenance:** active — Official homepage dates UGENE 53.1 to March 2026. ([evidence](https://ugene.net/))
+- [Official project](https://ugene.net/) · [Official installation / downloads](https://ugene.net/download-all.html) · [Repository](https://github.com/ugeneunipro/ugene)
+- **Sources:** [Official product documentation](https://ugene.net/) (2026-11-15; identity, features, platforms, pricing, maintenance); [Official product documentation](https://ugene.net/download-all.html) (2026-11-15; downloads, platforms, license); [Official feature documentation](https://ugene.net/key_features.html) (2026-11-15; features)
+
+## Serial Terminals
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=science%2Fserial-terminals)
+
+### CoolTerm
+
+Serial-port terminal for exchanging text and binary data with embedded devices, instruments and controllers.
+
+- **Platforms:** Windows, macOS, Linux. **License:** Freeware; developer terms apply. **Pricing model:** free.
+- **Pick for:** Use a straightforward graphical terminal for hardware serial traffic without terminal-emulation features.
+- **Compare when:** It does not emulate a full terminal such as VT100.
+- **Strengths:** Use a straightforward graphical terminal for hardware serial traffic without terminal-emulation features.
+- **Limitations:** It does not emulate a full terminal such as VT100.; Linux and Raspberry Pi builds receive only limited testing according to the developer.
+- **Maintenance:** unverified — Product documentation reviewed; a current dated release or lifecycle commitment has not been established for this record.
+- [Official project](https://freeware.the-meiers.org/) · [Official installation / downloads](https://freeware.the-meiers.org/)
+- **Sources:** [Official documentation and distribution evidence](https://freeware.the-meiers.org/) (2026-11-15; identity, features, platforms, pricing, downloads)
+### CuteCom
+
+Qt serial terminal aimed at hardware developers, with separate command input, receive output and reusable sessions.
+
+- **Platforms:** Linux. **License:** GPL-3.0. **Pricing model:** unknown.
+- **Compatibility details:** Linux is the current tested target; old pages describe additional OSes that the current README marks untested.
+- **Pick for:** Use a Linux graphical terminal when command history and separate output are easier than terminal emulation.
+- **Compare when:** Current maintained documentation identifies Linux as tested; other Unix ports are untested.
+- **Strengths:** Use a Linux graphical terminal when command history and separate output are easier than terminal emulation.
+- **Limitations:** Current maintained documentation identifies Linux as tested; other Unix ports are untested.; It is a serial debugging utility rather than an SSH or terminal-emulation suite.
+- **Maintenance:** unverified — Product documentation reviewed; a current dated release or lifecycle commitment has not been established for this record.
+- [Official project](https://gitlab.com/cutecom/cutecom) · [Official installation / downloads](https://gitlab.com/cutecom/cutecom) · [Repository](https://gitlab.com/cutecom/cutecom)
+- **Sources:** [Official documentation and distribution evidence](https://gitlab.com/cutecom/cutecom/-/blob/master/README.md) (2026-11-15; identity, features, platforms, license, downloads)
+### Tera Term
+
+Windows terminal emulator with serial and SSH connections and a macro language for repeatable sessions.
+
+- **Platforms:** Windows. **License:** BSD-style Tera Term license. **Pricing model:** free.
+- **Pick for:** Combine a conventional terminal emulator with scriptable Windows serial and SSH workflows.
+- **Compare when:** Its macro language and settings are specific to Tera Term.
+- **Strengths:** Combine a conventional terminal emulator with scriptable Windows serial and SSH workflows.
+- **Limitations:** Its macro language and settings are specific to Tera Term.; It targets Windows; users needing the same interface across OSes should compare alternatives.
+- **Maintenance:** active — Official release feed contains Tera Term 5.7.1 with an updated timestamp of 2026-10-09. This is release-channel activity evidence, not proof of a stable build, installed compatibility or security testing. ([evidence](https://github.com/TeraTermProject/teraterm/releases.atom))
+- [Official project](https://teratermproject.github.io/) · [Official installation / downloads](https://github.com/TeraTermProject/teraterm/releases) · [Repository](https://github.com/TeraTermProject/teraterm)
+- **Sources:** [Official documentation and distribution evidence](https://teratermproject.github.io/) (2026-11-15; identity, features, license, platforms, downloads); [Official documentation and distribution evidence](https://github.com/TeraTermProject/teraterm) (2026-11-15; features, pricing, license); [Official release or lifecycle evidence](https://github.com/TeraTermProject/teraterm/releases.atom) (2026-11-15; maintenance)
+
+## Sheet nesting
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=science%2Fsheet-nesting)
+
+### Deepnest Next
+
+Desktop nesting application from the Deepnest Next community for arranging vector parts on sheets and merging shared cut lines.
+
+- **Platforms:** Windows, macOS, Linux. **License:** MIT for the reviewed deepnest desktop repository; bundled components have separate licenses. **Pricing model:** unknown.
+- **Compatibility details:** This record covers the released deepnest desktop repository, not the separate rewrite named deepnest-next.
+- **Pricing details:** No complete price or distribution-cost statement was established from the reviewed primary sources; check the selected distribution route.
+- **Pick for:** Choose this desktop Deepnest fork when sheet layout and common-line cutting matter more than full CAD authoring.
+- **Compare when:** DXF conversion can involve an external conversion route; assess the file-handling path for sensitive drawings.
+- **Strengths:** Choose this desktop Deepnest fork when sheet layout and common-line cutting matter more than full CAD authoring.; It adds a local application workflow around irregular-part nesting.
+- **Limitations:** DXF conversion can involve an external conversion route; assess the file-handling path for sensitive drawings.; The separate in-development deepnest-next 2 repository has different licensing and must not be treated as the same released package.
+- **Maintenance:** unverified — Current release cadence or an explicit maintenance commitment was not established by the reviewed sources. Availability alone is not a maintenance guarantee.
+- [Official project](https://github.com/deepnest-next/deepnest) · [Official installation / downloads](https://github.com/deepnest-next/deepnest/releases) · [Repository](https://github.com/deepnest-next/deepnest)
+- **Sources:** [Official upstream documentation](https://raw.githubusercontent.com/deepnest-next/deepnest/HEAD/README.md) (2026-11-15; identity, features, license); [Official upstream documentation](https://github.com/deepnest-next/deepnest/releases) (2026-11-15; downloads, platforms)
+### SVGNest
+
+Browser-based vector nesting application for packing irregular SVG shapes into a selected material boundary.
+
+- **Platforms:** Web. **License:** MIT License. **Pricing model:** free.
+- **Pick for:** Choose SVGNest when SVG parts need a quick nesting pass in a browser.
+- **Compare when:** Convert text and shapes into suitable paths and verify units before cutting.
+- **Strengths:** Choose SVGNest when SVG parts need a quick nesting pass in a browser.; A focused open implementation makes its input and spacing assumptions visible.
+- **Limitations:** Convert text and shapes into suitable paths and verify units before cutting.; Nesting is an optimization heuristic; a generated layout is not a guarantee of globally minimal material use.
+- **Maintenance:** unverified — Current release cadence or an explicit maintenance commitment was not established by the reviewed sources. Availability alone is not a maintenance guarantee.
+- [Official project](https://svgnest.com/) · [Official installation / downloads](https://github.com/Jack000/SVGnest) · [Repository](https://github.com/Jack000/SVGnest)
+- **Sources:** [Official product documentation](https://svgnest.com/) (2026-11-15; identity, features, pricing, downloads, platforms); [Official upstream documentation](https://raw.githubusercontent.com/Jack000/SVGnest/HEAD/readme.md) (2026-11-15; features, platforms); [Official upstream documentation](https://raw.githubusercontent.com/Jack000/SVGnest/HEAD/LICENSE.txt) (2026-11-15; license)
+
 ## Simulation Preprocessing
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=science%2Fsimulation-preprocessing)
 
 ### SALOME
 
@@ -960,6 +2524,8 @@ Engineering platform for preparing geometric models, generating meshes and inspe
 - **Sources:** [Official product documentation](https://www.salome-platform.org/) (2026-11-14; features, identity, maintenance); [Official product documentation](https://www.salome-platform.org/?page_id=19) (2026-11-14; features, identity, license); [Official product documentation](https://www.salome-platform.org/?page_id=2430) (2026-11-14; downloads, platforms)
 
 ## Statistics
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=science%2Fstatistics)
 
 ### GNU PSPP
 
@@ -1014,6 +2580,8 @@ Programming environment for statistical computing, graphics and a broad ecosyste
 
 ## Surface Analysis
 
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=science%2Fsurface-analysis)
+
 ### Gwyddion
 
 Scientific application for visualizing and analyzing scanning-probe microscopy and other surface-height data.
@@ -1028,6 +2596,8 @@ Scientific application for visualizing and analyzing scanning-probe microscopy a
 - **Sources:** [Official product documentation](https://gwyddion.net/) (2026-11-14; downloads, features, identity, license, maintenance, platforms, pricing)
 
 ## Systems Simulation
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=science%2Fsystems-simulation)
 
 ### OpenModelica
 
@@ -1045,6 +2615,8 @@ Modelica-based environment for modeling, compiling and simulating equation-based
 
 ## Terrain analysis
 
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=science%2Fterrain-analysis)
+
 ### SAGA GIS
 
 Geoscientific analysis application with tools for terrain and raster processing.
@@ -1059,6 +2631,8 @@ Geoscientific analysis application with tools for terrain and raster processing.
 - **Sources:** [Official project documentation](https://saga-gis.sourceforge.io/) (2026-11-14; identity, features); [Official project documentation](https://sourceforge.net/projects/saga-gis/) (2026-11-14; identity, features, platforms, license, pricing); [Official project documentation](https://saga-gis.sourceforge.io/en/index.html) (2026-11-14; identity, features); [Official project documentation](https://sourceforge.net/projects/saga-gis/files/) (2026-11-14; identity, features, downloads); [Official repository activity feed](https://github.com/saga-gis/saga-gis/commits/HEAD.atom) (2026-11-14; maintenance)
 
 ## Virtual Globes
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=science%2Fvirtual-globes)
 
 ### Marble
 
@@ -1075,6 +2649,8 @@ Virtual-globe and map application for exploring geography with multiple map them
 - **Sources:** [Official product documentation](https://marble.kde.org/) (2026-11-14; features, identity, platforms); [Official download and distribution documentation](https://marble.kde.org/install.php) (2026-11-14; downloads, platforms); [Official licensing and terms](https://raw.githubusercontent.com/KDE/marble/HEAD/LICENSES/LGPL-2.1-or-later.txt) (2026-11-14; license); [Official upstream release activity feed](https://github.com/KDE/marble/releases.atom) (2026-11-14; maintenance)
 
 ## Visual data mining and analysis
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=science%2Fvisual-data-analysis)
 
 ### Orange Data Mining
 

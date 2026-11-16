@@ -4,9 +4,11 @@ Connect machines, inspect traffic and work remotely.
 
 [Browse in Athena](https://herbertofury.github.io/Athena/#software?family=networking) · [Catalog](Software-Catalog) · [Method](Software-Methodology)
 
-83 applications. Reviewed 2026-11-15; individual records identify inherited research.
+92 applications. Reviewed 2026-11-15; individual records identify inherited research.
 
 ## Bandwidth Accounting
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=networking%2Fbandwidth-accounting)
 
 ### vnStat
 
@@ -24,6 +26,8 @@ Interface-traffic accounting tool storing bandwidth usage totals over time.
 
 ## Bandwidth limits and prioritization
 
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=networking%2Fbandwidth-control)
+
 ### NetLimiter
 
 Windows application for per-program traffic monitoring, limits and network rules.
@@ -38,6 +42,8 @@ Windows application for per-program traffic monitoring, limits and network rules
 - **Sources:** [Official project documentation](https://www.netlimiter.com/) (2026-11-14; identity, features, platforms, pricing); [Official download or installation landing page](https://www.netlimiter.com/download) (2026-11-14; downloads); [Official application license agreement](https://netlimiter.com/eula) (2026-11-14; license)
 
 ## BitTorrent clients
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=networking%2Fbittorrent-clients)
 
 ### Deluge
 
@@ -81,6 +87,8 @@ BitTorrent client offering native interfaces and a daemon with remote management
 
 ## Cloud Storage Clients
 
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=networking%2Fcloud-storage-clients)
+
 ### Rclone Browser
 
 Desktop graphical front end for browsing and transferring data through rclone remotes.
@@ -95,7 +103,9 @@ Desktop graphical front end for browsing and transferring data through rclone re
 - [Official project](https://github.com/kapitainsky/RcloneBrowser) · [Official installation / downloads](https://github.com/kapitainsky/RcloneBrowser) · [Repository](https://github.com/kapitainsky/RcloneBrowser)
 - **Sources:** [Official project feature documentation](https://raw.githubusercontent.com/kapitainsky/RcloneBrowser/HEAD/README.md) (2026-11-14; features, identity, platforms); [Official application license text](https://raw.githubusercontent.com/kapitainsky/RcloneBrowser/HEAD/LICENSE) (2026-11-14; license); [Official download or installation landing page](https://github.com/kapitainsky/RcloneBrowser) (2026-11-14; downloads, identity); [Official release activity or lifecycle basis](https://github.com/kapitainsky/RcloneBrowser/releases.atom) (2026-11-14; maintenance)
 
-## Dns Filtering
+## DNS filtering
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=networking%2Fdns-filtering)
 
 ### AdGuard Home
 
@@ -124,7 +134,9 @@ Linux-hosted DNS sinkhole with a browser dashboard and optional DHCP service.
 - [Official project](https://github.com/pi-hole/pi-hole) · [Official installation / downloads](https://github.com/pi-hole/pi-hole) · [Repository](https://github.com/pi-hole/pi-hole)
 - **Sources:** [Official project feature documentation](https://raw.githubusercontent.com/pi-hole/pi-hole/HEAD/README.md) (2026-11-14; features, identity, platforms, pricing); [Official application license text](https://raw.githubusercontent.com/pi-hole/pi-hole/HEAD/LICENSE) (2026-11-14; license); [Official download or installation landing page](https://github.com/pi-hole/pi-hole) (2026-11-14; downloads, identity); [Official release activity or lifecycle basis](https://github.com/pi-hole/pi-hole/releases.atom) (2026-11-14; maintenance)
 
-## Dns Servers
+## DNS servers
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=networking%2Fdns-servers)
 
 ### Technitium DNS Server
 
@@ -155,6 +167,8 @@ Validating recursive DNS resolver with caching and DNSSEC verification.
 
 ## Download managers
 
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=networking%2Fdownload-managers)
+
 ### aria2
 
 Command-line download utility supporting HTTP, FTP, BitTorrent, Metalink, and segmented transfers.
@@ -182,7 +196,9 @@ Desktop download manager using aria2 with HTTP, FTP, BitTorrent, and magnet supp
 - [Official project](https://motrix.app/) · [Official installation / downloads](https://github.com/agalwood/Motrix/releases) · [Repository](https://github.com/agalwood/Motrix)
 - **Sources:** [Official repository metadata: identity, license detection and activity](https://api.github.com/repos/agalwood/Motrix) (2026-11-14; identity, maintenance); [Official project README](https://raw.githubusercontent.com/agalwood/Motrix/HEAD/README.md) (2026-11-14; identity, features, platforms); [Official license text](https://raw.githubusercontent.com/agalwood/Motrix/HEAD/LICENSE) (2026-11-14; license); [Official official documentation](https://motrix.app/) (2026-11-14; identity, features); [Official release inspected: v2.4.1](https://github.com/agalwood/Motrix/releases/tag/v2.4.1) (2026-11-14; downloads, maintenance, platforms); [Public upstream app/package distribution: availability without payment or authentication checked](https://github.com/agalwood/Motrix/releases/download/v2.4.1/Motrix-2.4.1-x64.dmg) (2026-11-14; downloads, pricing)
 
-## Encrypted Dns
+## Encrypted DNS
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=networking%2Fencrypted-dns)
 
 ### dnscrypt-proxy
 
@@ -211,6 +227,8 @@ Command-line DNS-over-HTTPS client with NextDNS policy integration and split-DNS
 - **Sources:** [Official project feature documentation](https://raw.githubusercontent.com/nextdns/nextdns/HEAD/README.md) (2026-11-14; features, identity); [Official supported-platform and installation documentation](https://github.com/nextdns/nextdns/releases.atom) (2026-11-14; maintenance, platforms); [Official application license text](https://raw.githubusercontent.com/nextdns/nextdns/HEAD/LICENSE) (2026-11-14; license); [Official price or edition-policy statement](https://nextdns.io/pricing) (2026-11-14; pricing); [Official download or installation landing page](https://github.com/nextdns/nextdns) (2026-11-14; downloads, identity)
 
 ## Remote file transfer
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=networking%2Ffile-transfer)
 
 ### Cyberduck
 
@@ -265,6 +283,8 @@ SFTP, SCP, WebDAV and S3 plus automation
 
 ## Local network file sharing
 
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=networking%2Flocal-file-sharing)
+
 ### LocalSend
 
 Local network file transfer
@@ -280,6 +300,8 @@ Local network file transfer
 - **Sources:** [Official capabilities and practical usage basis](https://github.com/localsend/localsend) (2026-11-15; features, identity, platforms); [Official platform and free-of-charge FAQ](https://localsend.org/) (2026-11-14; platforms, pricing); [Official LocalSend downloads](https://localsend.org/download) (2026-11-14; downloads, platforms)
 
 ## Media downloading
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=networking%2Fmedia-downloads)
 
 ### Streamlink
 
@@ -309,6 +331,8 @@ Command-line media downloader with site extractors, format selection, and post-p
 - **Sources:** [Official repository metadata: identity, license detection and activity](https://api.github.com/repos/yt-dlp/yt-dlp) (2026-11-14; identity, maintenance, license); [Official project README](https://raw.githubusercontent.com/yt-dlp/yt-dlp/HEAD/README.md) (2026-11-14; identity, features, downloads); [Official release inspected: 2026.10.26](https://github.com/yt-dlp/yt-dlp/releases/tag/2026.10.26) (2026-11-14; downloads, maintenance, platforms); [Public upstream app/package distribution: availability without payment or authentication checked](https://github.com/yt-dlp/yt-dlp/releases/download/2026.10.26/yt-dlp.exe) (2026-11-14; downloads, pricing)
 
 ## Private mesh networks
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=networking%2Fmesh-vpn)
 
 ### Nebula
 
@@ -360,7 +384,9 @@ Software-defined networking platform connecting devices through virtual networks
 - [Official project](https://www.zerotier.com/) · [Official installation / downloads](https://www.zerotier.com/download/) · [Repository](https://github.com/zerotier/ZeroTierOne)
 - **Sources:** [Official project documentation](https://www.zerotier.com/) (2026-11-14; identity, features); [Official source repository and README](https://github.com/zerotier/ZeroTierOne) (2026-11-14; identity, features, platforms); [Official download or installation landing page](https://www.zerotier.com/download/) (2026-11-14; downloads); [Official source license](https://raw.githubusercontent.com/zerotier/ZeroTierOne/HEAD/LICENSE.txt) (2026-11-14; license); [Official release activity](https://github.com/zerotier/ZeroTierOne/releases.atom) (2026-11-14; maintenance); [Official distribution price or edition policy](https://www.zerotier.com/pricing/) (2026-11-14; pricing)
 
-## Mesh Vpn Control
+## Mesh VPN control planes
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=networking%2Fmesh-vpn-control)
 
 ### Headscale
 
@@ -377,6 +403,8 @@ Self-hosted implementation of the Tailscale coordination server for controlled t
 - **Sources:** [Official project feature documentation](https://raw.githubusercontent.com/juanfont/headscale/HEAD/README.md) (2026-11-14; features, identity); [Official supported-platform and installation documentation](https://headscale.net/stable/setup/install/official/) (2026-11-14; downloads, platforms); [Official application license text](https://raw.githubusercontent.com/juanfont/headscale/HEAD/LICENSE) (2026-11-14; license); [Official project identity and product page](https://headscale.net/) (2026-11-14; identity); [Official release activity or lifecycle basis](https://github.com/juanfont/headscale/releases.atom) (2026-11-14; maintenance)
 
 ## Network discovery and diagnostics
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=networking%2Fnetwork-diagnostics)
 
 ### Angry IP Scanner
 
@@ -466,6 +494,8 @@ Interactive network diagnostic tool combining traceroute and ping-style statisti
 
 ## Network Speed Tests
 
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=networking%2Fnetwork-speed-tests)
+
 ### LibreSpeed
 
 Self-hosted browser speed test with upload, download, latency and optional results storage.
@@ -494,6 +524,8 @@ Browser-based throughput test that can be served from a local web server.
 - **Sources:** [Official project feature documentation](https://raw.githubusercontent.com/openspeedtest/Speed-Test/HEAD/README.md) (2026-11-14; features, identity, platforms, pricing); [Official application license text](https://raw.githubusercontent.com/openspeedtest/Speed-Test/HEAD/License.md) (2026-11-14; license); [Official download or installation landing page](https://github.com/openspeedtest/Speed-Test) (2026-11-14; downloads); [Official project identity and product page](https://openspeedtest.com/) (2026-11-14; identity, maintenance)
 
 ## Packet capture analysis
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=networking%2Fpacket-analysis)
 
 ### Termshark
 
@@ -524,6 +556,8 @@ Packet analysis, filters and protocol dissectors
 
 ## Packet Capture
 
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=networking%2Fpacket-capture)
+
 ### tcpdump
 
 Command-line packet capture and inspection tool built around libpcap capture filters.
@@ -539,6 +573,8 @@ Command-line packet capture and inspection tool built around libpcap capture fil
 - **Sources:** [Official project feature documentation](https://raw.githubusercontent.com/the-tcpdump-group/tcpdump/HEAD/README.md) (2026-11-14; features, identity, platforms); [Official application license text](https://raw.githubusercontent.com/the-tcpdump-group/tcpdump/HEAD/LICENSE) (2026-11-14; license); [Official download or installation landing page](https://github.com/the-tcpdump-group/tcpdump) (2026-11-14; downloads); [Official project identity and product page](https://www.tcpdump.org/) (2026-11-14; identity); [Official release activity or lifecycle basis](https://github.com/the-tcpdump-group/tcpdump/releases.atom) (2026-11-14; maintenance)
 
 ## Peer File Transfer
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=networking%2Fpeer-file-transfer)
 
 ### croc
 
@@ -592,6 +628,8 @@ Browser-based file sharing for nearby devices, paired devices and temporary tran
 - **Sources:** [Official project feature documentation](https://raw.githubusercontent.com/schlagmichdoch/PairDrop/HEAD/README.md) (2026-11-14; features, identity, platforms); [Official application license text](https://raw.githubusercontent.com/schlagmichdoch/PairDrop/HEAD/LICENSE) (2026-11-14; license); [Official download or installation landing page](https://github.com/schlagmichdoch/PairDrop) (2026-11-14; downloads); [Official project identity and product page](https://pairdrop.net/) (2026-11-14; identity); [Official release activity or lifecycle basis](https://github.com/schlagmichdoch/PairDrop/releases.atom) (2026-11-14; maintenance)
 
 ## Remote desktop
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=networking%2Fremote-desktop)
 
 ### AnyDesk
 
@@ -704,6 +742,8 @@ RDP server for Unix-like systems that allows compatible clients to open graphica
 
 ## Mounted remote storage
 
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=networking%2Fremote-filesystems)
+
 ### Mountain Duck
 
 Desktop tool that mounts supported remote storage as a local filesystem view.
@@ -745,6 +785,8 @@ Windows port of SSHFS for presenting an SSH/SFTP directory as a mapped drive.
 
 ## Remote management
 
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=networking%2Fremote-management)
+
 ### MeshCentral
 
 Self-hosted device management platform with browser-based remote desktop, terminal and file access.
@@ -759,6 +801,8 @@ Self-hosted device management platform with browser-based remote desktop, termin
 - **Sources:** [Official project documentation](https://github.com/Ylianst/MeshCentral) (2026-11-14; identity, features, platforms); [Official download or installation landing page](https://github.com/Ylianst/MeshCentral#installation) (2026-11-14; downloads); [Official source license](https://raw.githubusercontent.com/Ylianst/MeshCentral/HEAD/LICENSE) (2026-11-14; license); [Official release activity](https://github.com/Ylianst/MeshCentral/releases.atom) (2026-11-14; maintenance)
 
 ## SSH clients and servers
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=networking%2Fsecure-shell)
 
 ### MobaXterm
 
@@ -800,6 +844,8 @@ SSH terminal and transfer companions
 
 ## Self Hosted File Servers
 
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=networking%2Fself-hosted-file-servers)
+
 ### copyparty
 
 Self-hosted file server with a browser interface and resumable upload and download workflows.
@@ -829,6 +875,8 @@ Managed file-transfer server connecting standard protocols to local or cloud sto
 
 ## Service Monitoring
 
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=networking%2Fservice-monitoring)
+
 ### Uptime Kuma
 
 Self-hosted availability monitor with status pages and notification integrations.
@@ -844,6 +892,8 @@ Self-hosted availability monitor with status pages and notification integrations
 - **Sources:** [Official project feature documentation](https://raw.githubusercontent.com/louislam/uptime-kuma/HEAD/README.md) (2026-11-14; features, identity, platforms); [Official application license text](https://raw.githubusercontent.com/louislam/uptime-kuma/HEAD/LICENSE) (2026-11-14; license); [Official download or installation landing page](https://github.com/louislam/uptime-kuma) (2026-11-14; downloads, identity); [Official release activity or lifecycle basis](https://github.com/louislam/uptime-kuma/releases.atom) (2026-11-14; maintenance)
 
 ## Traffic and connection monitoring
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=networking%2Ftraffic-monitoring)
 
 ### bandwhich
 
@@ -921,7 +971,52 @@ Lists TCP/UDP endpoints and owning processes.
 - [Official project](https://learn.microsoft.com/en-us/sysinternals/downloads/tcpview) · [Official installation / downloads](https://learn.microsoft.com/en-us/sysinternals/downloads/tcpview)
 - **Sources:** [Official release or lifecycle evidence](https://learn.microsoft.com/en-us/sysinternals/downloads/tcpview) (2026-11-15; downloads, features, identity, maintenance, platforms); [Microsoft Sysinternals license terms](https://learn.microsoft.com/en-us/sysinternals/license-terms) (2026-11-15; license); [Microsoft application archive publicly available without payment](https://download.sysinternals.com/files/TCPView.zip) (2026-11-15; downloads, pricing)
 
+## Voice over IP clients
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=networking%2Fvoip-clients)
+
+### Linphone
+
+SIP softphone for internet voice/video calls and messaging through compatible providers or PBX systems.
+
+- **Platforms:** Windows, macOS, Linux. **License:** GPL-3.0 client; related SDK/server components have separate licenses and commercial options. **Pricing model:** free.
+- **Pricing details:** The app and community SIP service are free; commercial support, custom licensing and telephony-provider charges are separate.
+- **Pick for:** Choose for an open-source cross-platform SIP client with documented provider interoperability.
+- **Compare when:** Compare MicroSIP for a Windows-focused footprint or Zoiper when commercial provisioning and integrations are decisive.
+- **Strengths:** Can use an existing SIP provider or PBX rather than a single closed calling network.; Official clients cover the major desktop systems and have an optional commercial support path.
+- **Limitations:** A SIP account or compatible calling endpoint is required; ordinary telephone calling depends on a provider.; The web edition is still under development, and supported encryption/features depend on the peer and server.
+- **Maintenance:** unverified — Product documentation reviewed; a current dated release or lifecycle commitment has not been established for this record.
+- [Official project](https://www.linphone.org/) · [Official installation / downloads](https://www.linphone.org/en/download/) · [Repository](https://gitlab.linphone.org/BC/public/linphone-desktop)
+- **Sources:** [Official documentation and distribution evidence](https://www.linphone.org/) (2026-11-15; identity, features, pricing); [Official documentation and distribution evidence](https://www.linphone.org/en/download/) (2026-11-15; downloads, platforms); [Official documentation and distribution evidence](https://www.linphone.org/en/faq/) (2026-11-15; features, license, pricing)
+### MicroSIP
+
+Windows SIP softphone with portable configuration, voice/video calling and compatibility with standard PBX services.
+
+- **Platforms:** Windows. **License:** GPL-2.0. **Pricing model:** unknown.
+- **Pick for:** Choose for a focused Windows SIP endpoint with portable settings.
+- **Compare when:** Compare cross-platform clients for native Linux/macOS deployment and verify PBX transfer and encryption compatibility.
+- **Strengths:** Portable configuration and a focused Windows interface suit existing SIP deployments.; Can make direct IP-to-IP calls as well as register with a provider or PBX.
+- **Limitations:** Native support is Windows; other desktop operating systems depend on Wine rather than equivalent native packages.; Calls to normal telephone numbers require a VoIP provider, and transfer behavior depends on PBX support.
+- **Maintenance:** unverified — Product documentation reviewed; a current dated release or lifecycle commitment has not been established for this record.
+- [Official project](https://www.microsip.org/) · [Official installation / downloads](https://www.microsip.org/downloads)
+- **Sources:** [Official documentation and distribution evidence](https://www.microsip.org/) (2026-11-15; identity, features, license, platforms); [Official documentation and distribution evidence](https://www.microsip.org/downloads) (2026-11-15; downloads, platforms); [Official documentation and distribution evidence](https://www.microsip.org/faq) (2026-11-15; features)
+### Zoiper
+
+Commercial SIP softphone with a limited free non-commercial edition and paid business calling integrations.
+
+- **Platforms:** Windows, macOS, Linux. **License:** Proprietary Zoiper license terms. **Pricing model:** freemium.
+- **Pricing details:** Free edition is for non-commercial use; business use and advanced features require the applicable paid edition. Provider fees are separate.
+- **Pick for:** Choose when business integrations and commercial support justify a paid SIP client.
+- **Compare when:** Compare Linphone or MicroSIP when unrestricted free client use and open source are priorities.
+- **Strengths:** Supports an existing SIP provider while offering a commercial support and deployment path.; Paid editions consolidate contact lookup, recording and business call controls.
+- **Limitations:** The free edition is restricted to non-commercial use and basic functionality.; Calling charges, PBX compatibility and security features depend on both edition and provider; not every advertised feature is in the free client.
+- **Maintenance:** unverified — Product documentation reviewed; a current dated release or lifecycle commitment has not been established for this record.
+- [Official project](https://www.zoiper.com/) · [Official installation / downloads](https://www.zoiper.com/en/voip-softphone/download/current)
+- **Sources:** [Official documentation and distribution evidence](https://www.zoiper.com/) (2026-11-15; identity, features, platforms); [Official documentation and distribution evidence](https://www.zoiper.com/en/voip-softphone/download/current) (2026-11-15; downloads, pricing, platforms); [Official documentation and distribution evidence](https://www.zoiper.com/en/zoiper-general-terms) (2026-11-15; license, pricing)
+
 ## VPN clients and protocols
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=networking%2Fvpn)
 
 ### OpenVPN Community
 
@@ -974,7 +1069,9 @@ VPN protocol and implementations for encrypted network tunnels.
 - [Official project](https://github.com/WireGuard/wireguard-tools) · [Official installation / downloads](https://github.com/WireGuard/wireguard-tools) · [Repository](https://github.com/WireGuard/wireguard-tools)
 - **Sources:** [Official project documentation](https://github.com/WireGuard/wireguard-tools) (2026-11-14; identity, features, platforms, downloads); [Official source license](https://raw.githubusercontent.com/WireGuard/wireguard-tools/HEAD/COPYING) (2026-11-14; license); [Official release activity](https://github.com/WireGuard/wireguard-tools/releases.atom) (2026-11-14; maintenance)
 
-## Vpn Clients
+## VPN clients
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=networking%2Fvpn-clients)
 
 ### OpenConnect
 
@@ -989,8 +1086,48 @@ Multi-protocol SSL VPN client interoperating with several enterprise VPN gateway
 - **Maintenance:** unverified — Current official download/platform documentation was reviewed; the older GitHub mirror release feed does not establish current activity at the canonical GitLab upstream. ([evidence](https://www.infradead.org/openconnect/download.html))
 - [Official project](https://www.infradead.org/openconnect/) · [Official installation / downloads](https://www.infradead.org/openconnect/download.html) · [Repository](https://gitlab.com/openconnect/openconnect)
 - **Sources:** [Official project feature documentation](https://raw.githubusercontent.com/openconnect/openconnect/HEAD/README.md) (2026-11-14; features, identity, license); [Official supported-platform and installation documentation](https://www.infradead.org/openconnect/platforms.html) (2026-11-14; platforms); [Official download or installation landing page](https://www.infradead.org/openconnect/download.html) (2026-11-14; downloads, maintenance); [Official project identity and product page](https://www.infradead.org/openconnect/) (2026-11-14; identity)
+### OpenVPN Connect
+
+Official OpenVPN desktop client for importing connection profiles and connecting to compatible managed VPN servers.
+
+- **Platforms:** Windows, macOS. **License:** Vendor client terms; exact component licensing not fully established. **Pricing model:** free.
+- **Pricing details:** Client is free; VPN hosting, server licenses and service subscriptions are separate.
+- **Pick for:** Use the vendor-supported profile workflow for an existing compatible VPN service.
+- **Compare when:** The client does not supply a VPN server or subscription.
+- **Strengths:** Use the vendor-supported profile workflow for an existing compatible VPN service.
+- **Limitations:** The client does not supply a VPN server or subscription.; Only one server connection is active at a time; Linux uses the separate OpenVPN 3 client path.
+- **Maintenance:** unverified — Product documentation reviewed; a current dated release or lifecycle commitment has not been established for this record.
+- [Official project](https://openvpn.net/client/) · [Official installation / downloads](https://openvpn.net/client/)
+- **Sources:** [Official documentation and distribution evidence](https://openvpn.net/client/) (2026-11-15; identity, features, platforms, downloads); [Official documentation and distribution evidence](https://openvpn.net/as-docs/windows/) (2026-11-15; pricing, platforms); [Official documentation and distribution evidence](https://openvpn.net/as-docs/macos/) (2026-11-15; pricing, platforms); [Official documentation and distribution evidence](https://openvpn.net/connect-docs/windows-faq/) (2026-11-15; features, platforms)
+### Tunnelblick
+
+Open-source macOS interface for managing OpenVPN configurations and connections.
+
+- **Platforms:** macOS. **License:** GPL-2.0. **Pricing model:** free.
+- **Pick for:** Use an open macOS frontend for existing OpenVPN profiles without purchasing a separate client.
+- **Compare when:** A compatible VPN server and configuration are required.
+- **Strengths:** Use an open macOS frontend for existing OpenVPN profiles without purchasing a separate client.
+- **Limitations:** A compatible VPN server and configuration are required.; macOS networking changes and profile options must match the selected stable release.
+- **Maintenance:** active — Official release feed contains Tunnelblick 10.1beta04 (build 6620) with an updated timestamp of 2026-11-07. This is release-channel activity evidence, not proof of a stable build, installed compatibility or security testing. ([evidence](https://github.com/Tunnelblick/Tunnelblick/releases.atom))
+- [Official project](https://tunnelblick.net/) · [Official installation / downloads](https://tunnelblick.net/downloads.html) · [Repository](https://github.com/Tunnelblick/Tunnelblick)
+- **Sources:** [Official documentation and distribution evidence](https://tunnelblick.net/) (2026-11-15; identity, features, platforms, license, pricing, downloads); [Official release or lifecycle evidence](https://github.com/Tunnelblick/Tunnelblick/releases.atom) (2026-11-15; maintenance)
+### Viscosity
+
+Native Windows and macOS OpenVPN client with connection editing, routing, DNS controls and scripting.
+
+- **Platforms:** Windows, macOS. **License:** Proprietary SparkLabs license. **Pricing model:** paid.
+- **Pricing details:** One-time client purchase with trial; service or server costs are separate.
+- **Pick for:** Choose a polished client when advanced OpenVPN routing, simultaneous tunnels and managed settings matter.
+- **Compare when:** The client license does not include a VPN server or service.
+- **Strengths:** Choose a polished client when advanced OpenVPN routing, simultaneous tunnels and managed settings matter.
+- **Limitations:** The client license does not include a VPN server or service.; Advanced routing and DNS rules still need network knowledge; a GUI does not validate a complex topology.
+- **Maintenance:** unverified — Product documentation reviewed; a current dated release or lifecycle commitment has not been established for this record.
+- [Official project](https://www.sparklabs.com/viscosity/) · [Official installation / downloads](https://www.sparklabs.com/viscosity/download/)
+- **Sources:** [Official documentation and distribution evidence](https://www.sparklabs.com/viscosity/) (2026-11-15; identity, features, platforms, license, pricing, downloads)
 
 ## Web browsers
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=networking%2Fweb-browsers)
 
 ### Brave
 
@@ -1127,6 +1264,34 @@ Firefox-derived browser emphasizing workspaces, compact layouts and side-by-side
 
 ## Wireless Diagnostics
 
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=networking%2Fwireless-diagnostics)
+
+### Kismet
+
+Passive wireless discovery and monitoring system for supported Wi-Fi, Bluetooth and other RF capture sources.
+
+- **Platforms:** Linux, macOS, Windows, Web. **License:** GPL-2.0; some components use permissive licenses. **Pricing model:** free.
+- **Compatibility details:** Linux is most compatible; macOS has a different capture scope; Windows uses WSL with remote capture.
+- **Pick for:** Inspect an authorized wireless environment using supported capture hardware and a browser dashboard.
+- **Compare when:** Capture capabilities depend strongly on adapter, driver and OS; Linux has the broadest support.
+- **Strengths:** Inspect an authorized wireless environment using supported capture hardware and a browser dashboard.
+- **Limitations:** Capture capabilities depend strongly on adapter, driver and OS; Linux has the broadest support.; Windows operation uses WSL/remote capture rather than equivalent native radio-driver support.
+- **Maintenance:** active — Official release feed contains kismet-2026-10-R1 with an updated timestamp of 2026-10-29. This is release-channel activity evidence, not proof of a stable build, installed compatibility or security testing. ([evidence](https://github.com/kismetwireless/kismet/releases.atom))
+- [Official project](https://www.kismetwireless.net/) · [Official installation / downloads](https://www.kismetwireless.net/downloads/) · [Repository](https://github.com/kismetwireless/kismet)
+- **Sources:** [Official documentation and distribution evidence](https://www.kismetwireless.net/) (2026-11-15; identity, features, platforms, pricing, downloads); [Official documentation and distribution evidence](https://raw.githubusercontent.com/kismetwireless/kismet/master/LICENSE) (2026-11-15; license); [Official release or lifecycle evidence](https://github.com/kismetwireless/kismet/releases.atom) (2026-11-15; maintenance)
+### NetSpot
+
+Wi-Fi inspection, site-survey and predictive-planning application with editions for different project sizes.
+
+- **Platforms:** Windows, macOS. **License:** Proprietary NetSpot license. **Pricing model:** freemium.
+- **Pricing details:** Free inspection and paid editions have different survey/planning limits; commercial usage rights depend on edition.
+- **Pick for:** Map wireless coverage and plan access-point placement when raw channel lists are insufficient.
+- **Compare when:** Survey, planning, project limits and commercial rights vary by edition.
+- **Strengths:** Map wireless coverage and plan access-point placement when raw channel lists are insufficient.
+- **Limitations:** Survey, planning, project limits and commercial rights vary by edition.; Adapter capabilities and careful measurement placement determine the usefulness of a survey.
+- **Maintenance:** unverified — Product documentation reviewed; a current dated release or lifecycle commitment has not been established for this record.
+- [Official project](https://www.netspotapp.com/) · [Official installation / downloads](https://www.netspotapp.com/downloads.html)
+- **Sources:** [Official documentation and distribution evidence](https://www.netspotapp.com/) (2026-11-15; identity, features, platforms, pricing, downloads); [Official documentation and distribution evidence](https://www.netspotapp.com/netspotpro.html) (2026-11-15; license, pricing)
 ### wavemon
 
 Terminal wireless monitor showing signal, noise, device settings and packet statistics.
@@ -1140,3 +1305,16 @@ Terminal wireless monitor showing signal, noise, device settings and packet stat
 - **Maintenance:** active — Official release-feed entry '0.9.7' updated 2026-02-08. Feed activity can include prereleases; it does not establish installed stability. ([evidence](https://github.com/uoaerg/wavemon/releases.atom))
 - [Official project](https://github.com/uoaerg/wavemon) · [Official installation / downloads](https://github.com/uoaerg/wavemon) · [Repository](https://github.com/uoaerg/wavemon)
 - **Sources:** [Official project feature documentation](https://raw.githubusercontent.com/uoaerg/wavemon/HEAD/README.md) (2026-11-14; features, identity, platforms); [Official application license text](https://raw.githubusercontent.com/uoaerg/wavemon/HEAD/LICENSE) (2026-11-14; license); [Official download or installation landing page](https://github.com/uoaerg/wavemon) (2026-11-14; downloads, identity); [Official release activity or lifecycle basis](https://github.com/uoaerg/wavemon/releases.atom) (2026-11-14; maintenance)
+### WiFi Explorer
+
+macOS Wi-Fi scanner that shows channel overlap, signal history and detailed network capabilities.
+
+- **Platforms:** macOS. **License:** Proprietary Intuitibits license. **Pricing model:** paid.
+- **Pricing details:** Paid macOS standard edition with a short trial; Pro and Windows products have separate scope and licenses.
+- **Pick for:** Diagnose nearby Wi-Fi configuration and channel overlap through the Mac’s built-in adapter.
+- **Compare when:** Standard WiFi Explorer differs from the separate Pro products and Windows edition.
+- **Strengths:** Diagnose nearby Wi-Fi configuration and channel overlap through the Mac’s built-in adapter.
+- **Limitations:** Standard WiFi Explorer differs from the separate Pro products and Windows edition.; Adapter and OS limitations affect visible networks and passive capture; it is not a full site-survey heatmap tool.
+- **Maintenance:** unverified — Product documentation reviewed; a current dated release or lifecycle commitment has not been established for this record.
+- [Official project](https://www.intuitibits.com/products/wifiexplorer/) · [Official installation / downloads](https://www.intuitibits.com/products/wifiexplorer/)
+- **Sources:** [Official documentation and distribution evidence](https://www.intuitibits.com/products/wifiexplorer/) (2026-11-15; identity, features, platforms, license, pricing, downloads)

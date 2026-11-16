@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "reviewed_at": "2026-11-14",
+  "reviewed_at": "2026-11-15",
   "applications": [
     {
       "id": "neovim",
@@ -1632,7 +1632,8 @@
       ],
       "alternatives": [
         "fzf",
-        "fd"
+        "fd",
+        "GNU grep"
       ],
       "recommendation": {
         "pick_for": "Search a large source tree for identifiers or patterns from the terminal.",
@@ -7548,7 +7549,8 @@
       "features": [
         "Local chat",
         "Model management",
-        "Document context"
+        "Document context",
+        "PDF document collections with local embedding and source references"
       ],
       "strengths": [
         "Local model chat and document context are combined in a desktop-oriented workflow."
@@ -7559,14 +7561,18 @@
         "Repository activity is older than one year; current maintenance has not been established."
       ],
       "use_cases": [
-        "Experiment with local conversational models through a desktop interface."
+        "Experiment with local conversational models through a desktop interface.",
+        "Ask questions about a PDF collection offline after preparing local models."
       ],
       "tags": [
         "local-ai-clients",
         "ai",
         "local-chat",
         "model-management",
-        "document-context"
+        "document-context",
+        "offline-pdf-chat",
+        "pdf",
+        "rag"
       ],
       "alternatives": [
         "Jan",
@@ -7631,10 +7637,42 @@
             "downloads",
             "pricing"
           ]
+        },
+        {
+          "url": "https://docs.gpt4all.io/gpt4all_desktop/localdocs.html",
+          "label": "Official LocalDocs workflow and on-device indexing",
+          "checked_at": "2026-11-15",
+          "supports": [
+            "features"
+          ]
+        },
+        {
+          "url": "https://docs.gpt4all.io/gpt4all_desktop/settings.html",
+          "label": "Official PDF file support and off-device embedding switch",
+          "checked_at": "2026-11-15",
+          "supports": [
+            "features"
+          ]
         }
       ],
       "evidence_status": "official-docs-reviewed",
-      "pricing_notes": "An official public app/package distribution was accessible without payment or authentication. Optional paid editions, hosted services, models and third-party dependencies retain separate terms."
+      "pricing_notes": "An official public app/package distribution was accessible without payment or authentication. Optional paid editions, hosted services, models and third-party dependencies retain separate terms.",
+      "capabilities": [
+        {
+          "id": "offline-pdf-chat",
+          "conditions": [
+            "Download a compatible local chat model and the embedding model before disconnecting.",
+            "Keep Use Nomic Embed API off and use a local model for the chat."
+          ],
+          "limitations": [
+            "LocalDocs retrieves selected text snippets; it does not guarantee complete-document coverage or correct answers."
+          ],
+          "source_urls": [
+            "https://docs.gpt4all.io/gpt4all_desktop/localdocs.html",
+            "https://docs.gpt4all.io/gpt4all_desktop/settings.html"
+          ]
+        }
+      ]
     },
     {
       "id": "anythingllm",
@@ -7652,11 +7690,13 @@
       ],
       "license": "MIT",
       "license_kind": "open-source",
-      "pricing_model": "free",
+      "pricing_model": "freemium",
       "features": [
         "Document retrieval",
         "Provider connections",
-        "Workspace organization"
+        "Workspace organization",
+        "PDF chat through attachments or retrieval",
+        "Local embedding and local language-model providers"
       ],
       "strengths": [
         "Document ingestion and retrieval can be organized into separate workspaces."
@@ -7666,14 +7706,18 @@
         "Software licensing does not cover model weights, optional hosted services, or provider usage charges; verify those separately."
       ],
       "use_cases": [
-        "Ask questions over a controlled document collection with an explicit model provider."
+        "Ask questions over a controlled document collection with an explicit model provider.",
+        "Ask questions about local PDF documents offline with local providers."
       ],
       "tags": [
         "document-ai",
         "ai",
         "document-retrieval",
         "provider-connections",
-        "workspace-organization"
+        "workspace-organization",
+        "offline-pdf-chat",
+        "pdf",
+        "rag"
       ],
       "alternatives": [
         "GPT4All",
@@ -7702,12 +7746,12 @@
         },
         {
           "url": "https://raw.githubusercontent.com/Mintplex-Labs/anything-llm/HEAD/README.md",
-          "label": "Official project README",
-          "checked_at": "2026-11-14",
+          "label": "Official PDF support and desktop distributions",
+          "checked_at": "2026-11-15",
           "supports": [
-            "identity",
-            "features",
             "downloads",
+            "features",
+            "identity",
             "platforms"
           ]
         },
@@ -7738,10 +7782,73 @@
             "downloads",
             "pricing"
           ]
+        },
+        {
+          "url": "https://docs.anythingllm.com/installation-desktop/privacy",
+          "label": "Official desktop offline operation and telemetry policy",
+          "checked_at": "2026-11-15",
+          "supports": [
+            "features"
+          ]
+        },
+        {
+          "url": "https://docs.anythingllm.com/setup/embedder-configuration/local/built-in",
+          "label": "Official local embedder and first-use model download",
+          "checked_at": "2026-11-15",
+          "supports": [
+            "features"
+          ]
+        },
+        {
+          "url": "https://docs.anythingllm.com/setup/llm-configuration/local/built-in",
+          "label": "Official local LLM provider and model setup",
+          "checked_at": "2026-11-15",
+          "supports": [
+            "features"
+          ]
+        },
+        {
+          "url": "https://docs.anythingllm.com/chatting-with-documents/introduction",
+          "label": "Official attachment and retrieval context limits",
+          "checked_at": "2026-11-15",
+          "supports": [
+            "features"
+          ]
+        },
+        {
+          "url": "https://docs.anythingllm.com/pro/overview",
+          "label": "Official free core and optional Desktop Pro limits",
+          "checked_at": "2026-11-15",
+          "supports": [
+            "pricing",
+            "features",
+            "platforms"
+          ]
         }
       ],
       "evidence_status": "official-docs-reviewed",
-      "pricing_notes": "An official public app/package distribution was accessible without payment or authentication. Optional paid editions, hosted services, models and third-party dependencies retain separate terms."
+      "pricing_notes": "Core desktop document chat is free; optional Desktop Pro subscriptions raise limits on additional Magic features. External provider fees remain separate.",
+      "platform_notes": "Desktop is a single-user app on Windows, macOS and Linux. Shared browser access and multi-user controls use the Docker deployment; documented Pro feature availability is Windows and macOS.",
+      "capabilities": [
+        {
+          "id": "offline-pdf-chat",
+          "conditions": [
+            "Use the desktop app with a local LLM, local embedder and local vector database.",
+            "Download models, run the first embedding and prepare any optional reranker before disconnecting; avoid remote providers and web-connected agents."
+          ],
+          "limitations": [
+            "Retrieval sends selected chunks to the model; attached documents are constrained by its context window.",
+            "The built-in embedding model is primarily trained on English; test retrieval quality for other languages."
+          ],
+          "source_urls": [
+            "https://raw.githubusercontent.com/Mintplex-Labs/anything-llm/HEAD/README.md",
+            "https://docs.anythingllm.com/installation-desktop/privacy",
+            "https://docs.anythingllm.com/setup/embedder-configuration/local/built-in",
+            "https://docs.anythingllm.com/setup/llm-configuration/local/built-in",
+            "https://docs.anythingllm.com/chatting-with-documents/introduction"
+          ]
+        }
+      ]
     },
     {
       "id": "open-webui",

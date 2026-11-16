@@ -4,9 +4,11 @@ Inspect, maintain and understand your computer.
 
 [Browse in Athena](https://herbertofury.github.io/Athena/#software?family=system) · [Catalog](Software-Catalog) · [Method](Software-Methodology)
 
-80 applications. Reviewed 2026-11-15; individual records identify inherited research.
+89 applications. Reviewed 2026-11-15; individual records identify inherited research.
 
 ## File, registry and process tracing
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=system%2Factivity-tracing)
 
 ### Process Monitor
 
@@ -21,8 +23,34 @@ Real-time filesystem, Registry and process/thread activity with filters and stac
 - **Maintenance:** active — Official product page lists a release published 2026-11-05. Release date reviewed; application not executed. ([evidence](https://learn.microsoft.com/en-us/sysinternals/downloads/procmon))
 - [Official project](https://learn.microsoft.com/en-us/sysinternals/downloads/procmon) · [Official installation / downloads](https://learn.microsoft.com/en-us/sysinternals/downloads/procmon)
 - **Sources:** [Official release or lifecycle evidence](https://learn.microsoft.com/en-us/sysinternals/downloads/procmon) (2026-11-15; downloads, features, identity, maintenance, platforms); [Microsoft Sysinternals license terms](https://learn.microsoft.com/en-us/sysinternals/license-terms) (2026-11-15; license); [Microsoft application archive publicly available without payment](https://download.sysinternals.com/files/ProcessMonitor.zip) (2026-11-15; downloads, pricing)
+### strace
+
+Linux command-line tracer for system calls, signals and process-kernel interactions.
+
+- **Platforms:** Linux. **License:** LGPL-2.1-or-later; test suite GPL-2.0-or-later. **Pricing model:** unknown.
+- **Pick for:** Find missing files, failing syscalls or unexpected process interactions without modifying the application source.
+- **Compare when:** Tracing changes execution timing and can produce large amounts of sensitive output.
+- **Strengths:** Find missing files, failing syscalls or unexpected process interactions without modifying the application source.
+- **Limitations:** Tracing changes execution timing and can produce large amounts of sensitive output.; Attaching to processes requires suitable permissions and is not a substitute for a language-level profiler.
+- **Maintenance:** active — Official release feed contains strace 7.3 with an updated timestamp of 2026-10-22. This is release-channel activity evidence, not proof of a stable build, installed compatibility or security testing. ([evidence](https://github.com/strace/strace/releases.atom))
+- [Official project](https://strace.io/) · [Official installation / downloads](https://strace.io/) · [Repository](https://github.com/strace/strace)
+- **Sources:** [Official documentation and distribution evidence](https://strace.io/) (2026-11-15; identity, features); [Official documentation and distribution evidence](https://github.com/strace/strace) (2026-11-15; license, platforms, downloads); [Official release or lifecycle evidence](https://github.com/strace/strace/releases.atom) (2026-11-15; maintenance)
+### Sysdig OSS
+
+Linux system-call capture and troubleshooting tool with container context and reusable trace files.
+
+- **Platforms:** Linux. **License:** Apache-2.0 userspace; drivers and dependencies have separate licenses. **Pricing model:** unknown.
+- **Pick for:** Inspect process and container behavior from captured operating-system events.
+- **Compare when:** Capture depends on a compatible kernel driver or probe and appropriate privileges.
+- **Strengths:** Inspect process and container behavior from captured operating-system events.
+- **Limitations:** Capture depends on a compatible kernel driver or probe and appropriate privileges.; Event capture can be high-volume and may include application data; filter scope and retention should fit the investigation.
+- **Maintenance:** active — Official release feed contains 0.41.4 with an updated timestamp of 2026-01-29. This is release-channel activity evidence, not proof of a stable build, installed compatibility or security testing. ([evidence](https://github.com/draios/sysdig/releases.atom))
+- [Official project](https://github.com/draios/sysdig) · [Official installation / downloads](https://github.com/draios/sysdig/releases) · [Repository](https://github.com/draios/sysdig)
+- **Sources:** [Official documentation and distribution evidence](https://github.com/draios/sysdig) (2026-11-15; identity, features, platforms, license, downloads); [Official release or lifecycle evidence](https://github.com/draios/sysdig/releases.atom) (2026-11-15; maintenance)
 
 ## Boot Media
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=system%2Fboot-media)
 
 ### balenaEtcher
 
@@ -78,6 +106,8 @@ Boot-menu utility that starts several ISO and other supported image files from o
 
 ## Cache and temporary file cleanup
 
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=system%2Fcleanup)
+
 ### BleachBit
 
 Application-specific cleanup definitions
@@ -93,6 +123,8 @@ Application-specific cleanup definitions
 - **Sources:** [Official license and preview-before-delete workflow](https://github.com/bleachbit/bleachbit) (2026-11-15; features, identity, license); [Official selected-cleanup capabilities and no-charge distribution](https://www.bleachbit.org/) (2026-11-15; features, identity, platforms, pricing); [Official desktop distribution channels](https://www.bleachbit.org/download) (2026-11-15; downloads, platforms, pricing); [Official current and legacy Windows requirements](https://www.bleachbit.org/download/windows) (2026-11-15; downloads, platforms)
 
 ## Desktop container environments
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=system%2Fcontainer-environments)
 
 ### Colima
 
@@ -171,6 +203,8 @@ Desktop application for local Kubernetes and container management.
 
 ## Container Management
 
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=system%2Fcontainer-management)
+
 ### Portainer Community Edition
 
 Self-hosted container-management interface for homelabs; CE 2.45 is the final Community Edition line.
@@ -186,6 +220,8 @@ Self-hosted container-management interface for homelabs; CE 2.45 is the final Co
 - **Sources:** [Official project feature documentation](https://raw.githubusercontent.com/portainer/portainer/HEAD/README.md) (2026-11-14; features, identity, platforms, pricing); [Official supported-platform and installation documentation](https://docs.portainer.io/start/install-ce/server/docker/linux) (2026-11-14; downloads, platforms); [Official application license text](https://raw.githubusercontent.com/portainer/portainer/HEAD/LICENSE) (2026-11-14; license); [Official project identity and product page](https://github.com/portainer/portainer) (2026-11-14; identity); [Official release activity or lifecycle basis](https://www.portainer.io/blog/portainer-3-is-kubernetes-first-not-kubernetes-only) (2026-11-14; features, maintenance)
 
 ## Fan and cooling controls
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=system%2Fcooling-control)
 
 ### CoolerControl
 
@@ -226,6 +262,8 @@ Command-line control and monitoring for supported liquid coolers, power supplies
 
 ## Reproducible development machines
 
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=system%2Fdevelopment-environments)
+
 ### Vagrant
 
 Command-line environment manager that describes repeatable virtual-machine development setups.
@@ -240,6 +278,8 @@ Command-line environment manager that describes repeatable virtual-machine devel
 - **Sources:** [Official project documentation](https://developer.hashicorp.com/vagrant) (2026-11-14; identity, features, platforms); [Official source repository and README](https://github.com/hashicorp/vagrant) (2026-11-14; identity, features, platforms); [Official download or installation landing page](https://developer.hashicorp.com/vagrant/downloads) (2026-11-14; downloads); [Official source license](https://raw.githubusercontent.com/hashicorp/vagrant/HEAD/LICENSE) (2026-11-14; license); [Official release activity](https://github.com/hashicorp/vagrant/releases.atom) (2026-11-14; maintenance); [HashiCorp Vagrant end-of-life and MIT transition announcement](https://discuss.hashicorp.com/t/vagrant-is-moving-to-an-open-source-model/78189) (2026-11-14; maintenance, license); [Official public application distribution](https://github.com/hashicorp/vagrant/releases/expanded_assets/2.4.10.dev%2B000834-2757db88) (2026-11-14; pricing)
 
 ## Monitor brightness controls
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=system%2Fdisplay-controls)
 
 ### MonitorControl
 
@@ -281,6 +321,21 @@ Tray brightness controls
 
 ## Firmware Updates
 
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=system%2Ffirmware-updates)
+
+### flashrom
+
+Command-line utility for identifying, reading, writing, verifying and erasing supported flash chips through supported programmers.
+
+- **Platforms:** Linux, macOS, FreeBSD, Windows. **License:** GPL-2.0. **Pricing model:** unknown.
+- **Compatibility details:** Windows support is partial and does not provide internal BIOS programming.
+- **Pick for:** Work with a documented flash-chip/programmer combination when vendor firmware utilities do not cover the lab workflow.
+- **Compare when:** The project warns against unsupported laptop use because embedded-controller interactions can damage operation.
+- **Strengths:** Work with a documented flash-chip/programmer combination when vendor firmware utilities do not cover the lab workflow.
+- **Limitations:** The project warns against unsupported laptop use because embedded-controller interactions can damage operation.; Windows support is partial and excludes internal programmers; firmware writing requires exact hardware and image compatibility.
+- **Maintenance:** active — Official release feed contains v1.8.0 with an updated timestamp of 2026-08-27. This is release-channel activity evidence, not proof of a stable build, installed compatibility or security testing. ([evidence](https://github.com/flashrom/flashrom/releases.atom))
+- [Official project](https://www.flashrom.org/) · [Official installation / downloads](https://www.flashrom.org/) · [Repository](https://github.com/flashrom/flashrom)
+- **Sources:** [Official documentation and distribution evidence](https://www.flashrom.org/) (2026-11-15; identity, features, platforms, downloads); [Official documentation and distribution evidence](https://github.com/flashrom/flashrom) (2026-11-15; license, features); [Official release or lifecycle evidence](https://github.com/flashrom/flashrom/releases.atom) (2026-11-15; maintenance)
 ### fwupd
 
 Firmware update service connecting supported Linux hardware to vendor-provided update metadata.
@@ -297,6 +352,20 @@ Firmware update service connecting supported Linux hardware to vendor-provided u
 
 ## GPU power and performance controls
 
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=system%2Fgpu-controls)
+
+### CoreCtrl
+
+GNU/Linux hardware-control application using profiles for supported GPU and CPU settings.
+
+- **Platforms:** Linux. **License:** GPL-3.0-or-later. **Pricing model:** free.
+- **Pick for:** Apply per-application hardware profiles on a supported Linux system.
+- **Compare when:** The project is in maintenance mode and explicitly plans no new features or hardware support.
+- **Strengths:** Apply per-application hardware profiles on a supported Linux system.
+- **Limitations:** The project is in maintenance mode and explicitly plans no new features or hardware support.; AMD support has model/driver limitations, and newer hardware is not guaranteed; compare LACT for current-device needs.
+- **Maintenance:** active — The project remains available for fixes, but its current README explicitly limits development to maintenance and rules out new features or hardware support. ([evidence](https://gitlab.com/corectrl/corectrl/))
+- [Official project](https://gitlab.com/corectrl/corectrl) · [Official installation / downloads](https://gitlab.com/corectrl/corectrl/-/wikis/Installation) · [Repository](https://gitlab.com/corectrl/corectrl)
+- **Sources:** [Official documentation and distribution evidence](https://gitlab.com/corectrl/corectrl/) (2026-11-15; identity, features, platforms, license, pricing, maintenance); [Official release or lifecycle evidence](https://gitlab.com/corectrl/corectrl/) (2026-11-15; maintenance); [Official documentation and distribution evidence](https://gitlab.com/corectrl/corectrl/-/raw/master/README.md) (2026-11-15; features, platforms, maintenance, downloads)
 ### LACT
 
 Linux GPU configuration and monitoring application for supported hardware.
@@ -309,8 +378,23 @@ Linux GPU configuration and monitoring application for supported hardware.
 - **Maintenance:** active — Official release feed contains activity dated 2026-11-09. This may include prereleases and is not a runtime or stability certification. ([evidence](https://github.com/ilya-zlobintsev/LACT/releases.atom))
 - [Official project](https://github.com/ilya-zlobintsev/LACT) · [Official installation / downloads](https://github.com/ilya-zlobintsev/LACT/releases) · [Repository](https://github.com/ilya-zlobintsev/LACT)
 - **Sources:** [Official project documentation](https://github.com/ilya-zlobintsev/LACT) (2026-11-14; identity, features, platforms); [Official download or installation landing page](https://github.com/ilya-zlobintsev/LACT/releases) (2026-11-14; downloads); [Official source license](https://raw.githubusercontent.com/ilya-zlobintsev/LACT/HEAD/LICENSE) (2026-11-14; license); [Official release activity](https://github.com/ilya-zlobintsev/LACT/releases.atom) (2026-11-14; maintenance); [Official public application distribution](https://github.com/ilya-zlobintsev/LACT/releases/expanded_assets/test-build) (2026-11-14; pricing)
+### MSI Afterburner
+
+Windows graphics-card tuning and monitoring utility with configurable fan curves and supported-card controls.
+
+- **Platforms:** Windows. **License:** Vendor-distributed freeware; exact redistribution terms were not established in reviewed documentation. **Pricing model:** free.
+- **Pricing details:** Afterburner is free. Promotional third-party trials elsewhere on the vendor page are separate products.
+- **Pick for:** Monitor and tune a supported Windows graphics card through an established desktop interface.
+- **Compare when:** Available controls vary by GPU, driver and board firmware.
+- **Strengths:** Monitor and tune a supported Windows graphics card through an established desktop interface.
+- **Limitations:** Available controls vary by GPU, driver and board firmware.; Tuning outcomes depend on the individual card; vendor claims are not a stability or performance benchmark for the user’s hardware.
+- **Maintenance:** unverified — Product documentation reviewed; a current dated release or lifecycle commitment has not been established for this record.
+- [Official project](https://www.msi.com/Landing/afterburner/graphics-cards) · [Official installation / downloads](https://www.msi.com/Landing/afterburner/graphics-cards)
+- **Sources:** [Official documentation and distribution evidence](https://www.msi.com/Landing/afterburner/graphics-cards) (2026-11-15; identity, features, platforms, license, pricing, downloads)
 
 ## Hardware identification
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=system%2Fhardware-identification)
 
 ### CPU-X
 
@@ -363,6 +447,8 @@ Linux system information and benchmarking application with generated hardware re
 
 ## Hardware Inventory
 
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=system%2Fhardware-inventory)
+
 ### hw-probe
 
 Hardware snapshot utility that connects device information and logs with a community hardware database.
@@ -392,6 +478,8 @@ Command-line system-information script for readable hardware and operating-syste
 
 ## Hardware sensor monitoring
 
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=system%2Fhardware-monitoring)
+
 ### HWiNFO
 
 Windows hardware identification, sensor monitoring and reporting utility.
@@ -420,6 +508,8 @@ Temperature, fan, clock and voltage sensors
 
 ## Infrastructure Monitoring
 
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=system%2Finfrastructure-monitoring)
+
 ### Netdata
 
 System and service monitoring platform with local metric collection, dashboards and alerts.
@@ -436,6 +526,8 @@ System and service monitoring platform with local metric collection, dashboards 
 
 ## Log Analysis
 
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=system%2Flog-analysis)
+
 ### lnav
 
 Terminal log viewer that merges supported logs by time and exposes structured querying.
@@ -451,6 +543,8 @@ Terminal log viewer that merges supported logs by time and exposes structured qu
 - **Sources:** [Official project feature documentation](https://raw.githubusercontent.com/tstack/lnav/HEAD/README.md) (2026-11-14; features, identity, platforms); [Official application license text](https://raw.githubusercontent.com/tstack/lnav/HEAD/LICENSE) (2026-11-14; license); [Official download or installation landing page](https://github.com/tstack/lnav) (2026-11-14; downloads, identity); [Official release activity or lifecycle basis](https://github.com/tstack/lnav/releases.atom) (2026-11-14; maintenance)
 
 ## Memory diagnostics
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=system%2Fmemory-diagnostics)
 
 ### MemTest86
 
@@ -480,6 +574,8 @@ Standalone bootable memory tester supporting documented PC architectures outside
 - **Sources:** [Official project documentation](https://memtest.org/) (2026-11-14; downloads, features, identity, platforms, pricing); [Official source repository and README](https://github.com/memtest86plus/memtest86plus) (2026-11-14; identity, features, platforms); [Official source license](https://raw.githubusercontent.com/memtest86plus/memtest86plus/HEAD/LICENSE) (2026-11-14; license); [Official release activity](https://github.com/memtest86plus/memtest86plus/releases.atom) (2026-11-14; maintenance)
 
 ## Application package management
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=system%2Fpackage-managers)
 
 ### Scoop
 
@@ -523,6 +619,8 @@ Package discovery, installation and upgrades
 
 ## Performance History
 
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=system%2Fperformance-history)
+
 ### atop
 
 Linux process and system monitor with recorded activity for later investigation.
@@ -552,6 +650,8 @@ Linux performance-tool suite including sar, iostat, mpstat and pidstat.
 
 ## Power Management
 
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=system%2Fpower-management)
+
 ### PowerTOP
 
 Linux power diagnostic utility with interactive inspection of power-management settings.
@@ -580,6 +680,8 @@ Linux laptop power-management service with configurable AC and battery profiles.
 - **Sources:** [Official project feature documentation](https://raw.githubusercontent.com/linrunner/TLP/HEAD/README.rst) (2026-11-14; features, identity, platforms); [Official application license text](https://raw.githubusercontent.com/linrunner/TLP/HEAD/LICENSE) (2026-11-14; license); [Official download or installation landing page](https://github.com/linrunner/TLP) (2026-11-14; downloads); [Official project identity and product page](https://linrunner.de/tlp/) (2026-11-14; identity); [Official release activity or lifecycle basis](https://github.com/linrunner/TLP/releases.atom) (2026-11-14; maintenance)
 
 ## Process inspection and management
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=system%2Fprocess-management)
 
 ### ListDLLs
 
@@ -635,6 +737,8 @@ Detailed resources, process inspection and debugging
 - **Sources:** [Official project and current requirements](https://github.com/winsiderss/systeminformer) (2026-11-15; features, identity, platforms); [Official capabilities, no-charge distribution and handle-closure warning](https://systeminformer.com/) (2026-11-15; features, identity, pricing); [Official download channels and current Windows support](https://systeminformer.com/downloads) (2026-11-15; downloads, platforms); [Official MIT license](https://raw.githubusercontent.com/winsiderss/systeminformer/master/LICENSE.txt) (2026-11-15; license); [Official plugin and administrative-rights limitations](https://systeminformer.com/readme) (2026-11-15; features)
 
 ## System and GPU resource monitoring
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=system%2Fresource-monitoring)
 
 ### bottom
 
@@ -699,6 +803,21 @@ Terminal GPU monitor supporting multiple GPU vendors through platform interfaces
 
 ## RGB lighting controls
 
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=system%2Frgb-lighting)
+
+### Artemis RGB
+
+Plugin-based RGB lighting application with layered effects and conditions driven by games and desktop data.
+
+- **Platforms:** Windows, Linux. **License:** PolyForm Noncommercial 1.0.0. **Pricing model:** free.
+- **Pricing details:** No-charge noncommercial use under PolyForm terms; do not classify as unrestricted open source.
+- **Pick for:** Create detailed reactive lighting profiles when plugin extensibility and conditional layers matter.
+- **Compare when:** The source license is noncommercial, not a general open-source grant.
+- **Strengths:** Create detailed reactive lighting profiles when plugin extensibility and conditional layers matter.
+- **Limitations:** The source license is noncommercial, not a general open-source grant.; Builds are prerelease and device plugins have uneven hardware testing; Linux setup is less polished than Windows.
+- **Maintenance:** unverified — The reviewed official release feed's newest observed entry is Artemis 2 (updated 2023-05-24). Recent maintenance remains unverified; this does not prove the project is abandoned. ([evidence](https://github.com/Artemis-RGB/Artemis/releases.atom))
+- [Official project](https://artemis-rgb.com/) · [Official installation / downloads](https://wiki.artemis-rgb.com/) · [Repository](https://github.com/Artemis-RGB/Artemis)
+- **Sources:** [Official documentation and distribution evidence](https://artemis-rgb.com/) (2026-11-15; identity, features, pricing); [Official documentation and distribution evidence](https://raw.githubusercontent.com/Artemis-RGB/Artemis/master/LICENSE) (2026-11-15; license); [Official documentation and distribution evidence](https://wiki.artemis-rgb.com/) (2026-11-15; platforms, downloads); [Official documentation and distribution evidence](https://github.com/Artemis-RGB/Artemis) (2026-11-15; features); [Official release or lifecycle evidence](https://github.com/Artemis-RGB/Artemis/releases.atom) (2026-11-15; maintenance)
 ### OpenRGB
 
 Cross-vendor RGB lighting control application for supported computer components and peripherals.
@@ -711,8 +830,24 @@ Cross-vendor RGB lighting control application for supported computer components 
 - **Maintenance:** unverified — Official project documentation retrieved; release cadence and installed behavior have not been audited.
 - [Official project](https://openrgb.org/) · [Official installation / downloads](https://openrgb.org/releases.html)
 - **Sources:** [Official project documentation](https://openrgb.org/) (2026-11-14; identity, features, platforms, license); [Official download or installation landing page](https://openrgb.org/releases.html) (2026-11-14; downloads, pricing)
+### SignalRGB
+
+Cross-brand lighting and desktop-device control app with effects, game integrations and optional paid content.
+
+- **Platforms:** Windows, Linux. **License:** Proprietary WhirlwindFX software terms. **Pricing model:** freemium.
+- **Compatibility details:** Windows distribution and Linux beta have different maturity; verify device support for the selected OS.
+- **Pricing details:** Free core application; Pro is a subscription and Light Points purchase individual content.
+- **Pick for:** Coordinate supported RGB devices through one effect canvas and device-control application.
+- **Compare when:** Exact device support matters, and other lighting software can compete for control.
+- **Strengths:** Coordinate supported RGB devices through one effect canvas and device-control application.
+- **Limitations:** Exact device support matters, and other lighting software can compete for control.; Linux is explicitly a beta distribution; Pro subscriptions and individual content purchases unlock different extras.
+- **Maintenance:** unverified — Product documentation reviewed; a current dated release or lifecycle commitment has not been established for this record.
+- [Official project](https://signalrgb.com/) · [Official installation / downloads](https://signalrgb.com/)
+- **Sources:** [Official documentation and distribution evidence](https://signalrgb.com/) (2026-11-15; identity, features, platforms, pricing, downloads); [Official documentation and distribution evidence](https://signalrgb.com/devices) (2026-11-15; features); [Official documentation and distribution evidence](https://signalrgb.com/pricing/) (2026-11-15; license, pricing); [Official documentation and distribution evidence](https://signalrgb.com/linux) (2026-11-15; platforms, downloads)
 
 ## Server Administration
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=system%2Fserver-administration)
 
 ### Cockpit
 
@@ -743,6 +878,8 @@ Modular browser-based administration tool for Unix-like operating systems and co
 
 ## Startup and persistence inventory
 
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=system%2Fstartup-management)
+
 ### Autoruns
 
 Broad startup persistence inventory
@@ -759,6 +896,8 @@ Broad startup persistence inventory
 
 ## Storage Activity
 
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=system%2Fstorage-activity)
+
 ### iotop-c
 
 Terminal monitor for identifying Linux processes generating storage I/O.
@@ -774,6 +913,8 @@ Terminal monitor for identifying Linux processes generating storage I/O.
 - **Sources:** [Official project feature documentation](https://raw.githubusercontent.com/Tomas-M/iotop/HEAD/README.md) (2026-11-14; features, identity, platforms); [Official application license text](https://raw.githubusercontent.com/Tomas-M/iotop/HEAD/LICENSE) (2026-11-14; license); [Official download or installation landing page](https://github.com/Tomas-M/iotop) (2026-11-14; downloads, identity); [Official release activity or lifecycle basis](https://github.com/Tomas-M/iotop/releases.atom) (2026-11-14; maintenance)
 
 ## Storage benchmarks
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=system%2Fstorage-benchmarks)
 
 ### CrystalDiskMark
 
@@ -814,6 +955,8 @@ Configurable I/O workload generator and benchmark for storage testing.
 
 ## Storage Diagnostics
 
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=system%2Fstorage-diagnostics)
+
 ### nvme-cli
 
 Command-line management and diagnostic tool for NVMe storage and supported fabric connections.
@@ -829,6 +972,8 @@ Command-line management and diagnostic tool for NVMe storage and supported fabri
 - **Sources:** [Official project feature documentation](https://raw.githubusercontent.com/linux-nvme/nvme-cli/HEAD/README.md) (2026-11-14; features, identity, platforms); [Official application license text](https://raw.githubusercontent.com/linux-nvme/nvme-cli/HEAD/LICENSE) (2026-11-14; license); [Official download or installation landing page](https://github.com/linux-nvme/nvme-cli) (2026-11-14; downloads, identity); [Official release activity or lifecycle basis](https://github.com/linux-nvme/nvme-cli/releases.atom) (2026-11-14; maintenance)
 
 ## Drive health and SMART diagnostics
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=system%2Fstorage-health)
 
 ### CrystalDiskInfo
 
@@ -870,6 +1015,8 @@ Disk health tools for reading SMART information and running supported device sel
 
 ## Stress testing
 
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=system%2Fstress-testing)
+
 ### OCCT
 
 Hardware stability testing and monitoring application for CPU, GPU and memory workloads.
@@ -896,6 +1043,8 @@ System stress tool with many CPU, memory, filesystem and kernel exercise workloa
 - **Sources:** [Official project documentation](https://github.com/ColinIanKing/stress-ng) (2026-11-14; features, identity, platforms, pricing); [Official download or installation landing page](https://github.com/ColinIanKing/stress-ng/releases) (2026-11-14; downloads); [Official source license](https://raw.githubusercontent.com/ColinIanKing/stress-ng/HEAD/COPYING) (2026-11-14; license); [Official release activity](https://github.com/ColinIanKing/stress-ng/releases.atom) (2026-11-14; maintenance)
 
 ## System snapshots and rollback
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=system%2Fsystem-snapshots)
 
 ### Snapper
 
@@ -924,6 +1073,8 @@ Linux system restore snapshots using rsync or supported Btrfs layouts.
 
 ## Application uninstallers
 
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=system%2Funinstallers)
+
 ### Bulk Crap Uninstaller
 
 Batch uninstall orchestration and leftover review
@@ -951,8 +1102,24 @@ Built-in uninstaller followed by leftover scan; Hunter Mode
 - [Official project](https://www.revouninstaller.com/products/revo-uninstaller-free/) · [Official installation / downloads](https://www.revouninstaller.com/products/revo-uninstaller-free/)
 - **Sources:** [Official Free/Pro comparison, uninstall workflow, requirements and downloads](https://www.revouninstaller.com/products/revo-uninstaller-free/) (2026-11-15; downloads, features, identity, platforms, pricing); [LicenseAgreement.txt inside the official Free Portable distribution](https://revouninstaller.b-cdn.net/ruf272/RevoUninstaller_Portable.zip) (2026-11-15; downloads, license, pricing)
 
-## Usb Sharing
+## USB device sharing
 
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=system%2Fusb-sharing)
+
+### USB Network Gate
+
+Cross-platform USB-over-network application for sharing supported peripherals with remote computers.
+
+- **Platforms:** Windows, macOS, Linux. **License:** Proprietary Electronic Team software terms. **Pricing model:** unknown.
+- **Compatibility details:** Vendor Linux requirements list distributions newer than the stated kernel range; verify actual kernel compatibility before selecting.
+- **Pricing details:** The current product homepage advertises free use, while the vendor purchase page still lists personal/corporate licenses. Edition applicability was not resolved; do not assume a universal free or paid policy.
+- **Pick for:** Evaluate remote USB access when the peripheral must stay physically attached to another host.
+- **Compare when:** Device compatibility and network timing must be checked with the intended workload.
+- **Strengths:** Evaluate remote USB access when the peripheral must stay physically attached to another host.
+- **Limitations:** Device compatibility and network timing must be checked with the intended workload.; The current Linux page lists a kernel support range only through 5.x, so current-distribution compatibility is unresolved.
+- **Maintenance:** unverified — Product documentation reviewed; a current dated release or lifecycle commitment has not been established for this record.
+- [Official project](https://www.electronic.us/products/usb-over-ethernet/) · [Official installation / downloads](https://www.electronic.us/products/usb-over-ethernet/download/)
+- **Sources:** [Official documentation and distribution evidence](https://www.electronic.us/products/usb-over-ethernet/) (2026-11-15; identity, features, platforms, pricing, downloads); [Official documentation and distribution evidence](https://www.electronic.us/products/usb-over-ethernet/download/) (2026-11-15; downloads, platforms); [Official documentation and distribution evidence](https://www.electronic.us/products/usb-over-ethernet/purchase/) (2026-11-15; pricing, license)
 ### usbipd-win
 
 Windows USB/IP host service for sharing local USB devices with other machines and WSL 2.
@@ -966,8 +1133,23 @@ Windows USB/IP host service for sharing local USB devices with other machines an
 - **Maintenance:** active — Official release-feed entry 'usbipd-win 5.3.0' updated 2025-10-11. Feed activity can include prereleases; it does not establish installed stability. ([evidence](https://github.com/dorssel/usbipd-win/releases.atom))
 - [Official project](https://github.com/dorssel/usbipd-win) · [Official installation / downloads](https://github.com/dorssel/usbipd-win) · [Repository](https://github.com/dorssel/usbipd-win)
 - **Sources:** [Official project feature documentation](https://raw.githubusercontent.com/dorssel/usbipd-win/HEAD/README.md) (2026-11-14; features, identity, platforms); [Official application license text](https://raw.githubusercontent.com/dorssel/usbipd-win/HEAD/COPYING.md) (2026-11-14; license); [Official download or installation landing page](https://github.com/dorssel/usbipd-win) (2026-11-14; downloads, identity); [Official release activity or lifecycle basis](https://github.com/dorssel/usbipd-win/releases.atom) (2026-11-14; maintenance)
+### VirtualHere
+
+USB-over-network server and client software that makes a supported remote USB device available to another computer.
+
+- **Platforms:** Windows, macOS, Linux. **License:** Proprietary VirtualHere license. **Pricing model:** paid.
+- **Pricing details:** Per-server perpetual license with trial; client is free and may be installed on multiple machines.
+- **Pick for:** Attach a USB peripheral to a nearby server while using it from another supported computer.
+- **Compare when:** Device behavior depends on latency, bandwidth and driver compatibility.
+- **Strengths:** Attach a USB peripheral to a nearby server while using it from another supported computer.
+- **Limitations:** Device behavior depends on latency, bandwidth and driver compatibility.; The server license is hardware-bound and nontransferable; the client is free but does not eliminate server licensing.
+- **Maintenance:** unverified — Product documentation reviewed; a current dated release or lifecycle commitment has not been established for this record.
+- [Official project](https://www.virtualhere.com/) · [Official installation / downloads](https://www.virtualhere.com/)
+- **Sources:** [Official documentation and distribution evidence](https://www.virtualhere.com/) (2026-11-15; identity, features, platforms, downloads); [Official documentation and distribution evidence](https://www.virtualhere.com/purchase) (2026-11-15; license, pricing)
 
 ## Virtual machine environments
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=system%2Fvirtual-machines)
 
 ### GNOME Boxes
 

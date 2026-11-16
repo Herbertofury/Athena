@@ -1,0 +1,347 @@
+{
+  "recipes": [
+    {
+      "id": "plan-a-project-on-your-desktop",
+      "title": "Plan a project on your desktop",
+      "description": "Choose by scheduling depth, file interchange and whether a text-based model is useful. These local planners do not imply the collaboration features of their separate cloud products.",
+      "picks": [
+        {
+          "app_id": "ganttproject",
+          "label": "Local Gantt planning",
+          "reason": "Task dependencies, baselines and resource-load views cover everyday individual scheduling.",
+          "tradeoff": "Shared editing requires a separate collaboration arrangement."
+        },
+        {
+          "app_id": "projectlibre",
+          "label": "Critical path and cost controls",
+          "reason": "Desktop combines critical-path analysis, work breakdown, baselines and earned-value views.",
+          "tradeoff": "Validate imported Microsoft Project files; portfolio features belong to a separate cloud product."
+        },
+        {
+          "app_id": "taskjuggler",
+          "label": "Constraint-driven text models",
+          "reason": "Declarative schedules can account for resource constraints and be regenerated from versioned source.",
+          "tradeoff": "Learning the scheduling language takes more effort than dragging a bar on a chart."
+        }
+      ]
+    },
+    {
+      "id": "schedule-shared-project-resources",
+      "title": "Schedule people across projects",
+      "description": "Distinguish calculated capacity-aware scheduling from a shared timeline. Start with the real constraints and test a representative plan.",
+      "picks": [
+        {
+          "app_id": "projeqtor",
+          "label": "Shared resource planning",
+          "reason": "Portfolio planning and capacity allocation are central to its documented project controls.",
+          "tradeoff": "A configured server and an agreed project process are necessary."
+        },
+        {
+          "app_id": "taskjuggler",
+          "label": "Reproducible capacity model",
+          "reason": "Resource constraints and scheduling rules can be expressed as reviewable text.",
+          "tradeoff": "Technical modeling is required and collaborative editing is external."
+        },
+        {
+          "app_id": "openproject",
+          "label": "Shared work-package plans",
+          "reason": "Dependencies, work packages and project discussions live in one team service.",
+          "tradeoff": "Do not assume every enterprise scheduling or portfolio feature is in Community."
+        }
+      ]
+    },
+    {
+      "id": "run-a-self-hosted-product-backlog",
+      "title": "Run a self-hosted product backlog",
+      "description": "Pick the workflow first: Scrum ceremonies, cycles and product documents, or configurable issue states.",
+      "picks": [
+        {
+          "app_id": "taiga",
+          "label": "Scrum and Kanban teams",
+          "reason": "Backlogs, sprints, stories and burndown views follow familiar agile planning workflows.",
+          "tradeoff": "Several services must be deployed and maintained."
+        },
+        {
+          "app_id": "plane",
+          "label": "Cycles and product context",
+          "reason": "Cycles, modules and pages connect planned work with product documentation.",
+          "tradeoff": "Edition limits and operational requirements need review."
+        },
+        {
+          "app_id": "redmine",
+          "label": "Configurable issue workflows",
+          "reason": "Custom fields, role controls, wikis and repository integrations suit structured project tracking.",
+          "tradeoff": "Ruby deployment and plugin compatibility require technical ownership."
+        }
+      ]
+    },
+    {
+      "id": "host-your-own-kanban-boards",
+      "title": "Host your own Kanban boards",
+      "description": "Compare board scope and licensing before committing a team or inviting external clients.",
+      "picks": [
+        {
+          "app_id": "kanboard",
+          "label": "Focused WIP workflow",
+          "reason": "A compact board with work-in-progress limits and event actions suits a deliberate small workflow.",
+          "tradeoff": "The project is explicitly in maintenance mode."
+        },
+        {
+          "app_id": "wekan",
+          "label": "Imports and broad board features",
+          "reason": "Swimlanes, custom fields, rules and imports support richer board organization.",
+          "tradeoff": "Its larger feature and deployment surface needs administration."
+        },
+        {
+          "app_id": "planka",
+          "label": "Real-time internal collaboration",
+          "reason": "Cards, comments and attachments provide a direct shared board experience.",
+          "tradeoff": "Community terms restrict some external commercial and hosted uses; check the exact license."
+        }
+      ]
+    },
+    {
+      "id": "track-personal-tasks-and-time-locally",
+      "title": "Track personal tasks and time locally",
+      "description": "These tools cover different parts of a personal workflow; select a visual task tree, a terminal task list, or interval tracking.",
+      "picks": [
+        {
+          "app_id": "task-coach",
+          "label": "Desktop task trees",
+          "reason": "Nested tasks and effort records keep detailed personal work in a local GUI.",
+          "tradeoff": "Use current package instructions because older website release text is stale."
+        },
+        {
+          "app_id": "taskwarrior",
+          "label": "Automated terminal tasks",
+          "reason": "Filters, reports and hooks integrate task lists with shell workflows.",
+          "tradeoff": "Command syntax replaces a visual planning interface."
+        },
+        {
+          "app_id": "timewarrior",
+          "label": "Tagged time intervals",
+          "reason": "CLI timers, backfill and reports complement a Taskwarrior workflow.",
+          "tradeoff": "Team approvals and invoicing are separate concerns."
+        },
+        {
+          "app_id": "timetagger",
+          "label": "Visual time timeline",
+          "reason": "Editable intervals, tags and PDF/CSV reports suit a personal or freelance timesheet.",
+          "tradeoff": "Running the local web service still takes setup."
+        }
+      ]
+    },
+    {
+      "id": "choose-a-self-hosted-business-system",
+      "title": "Choose a self-hosted business system",
+      "description": "Define accounting localization, stock processes and implementation capacity before selecting a general ERP. The guide compares documented scope rather than certifying regulatory compliance.",
+      "picks": [
+        {
+          "app_id": "erpnext",
+          "label": "Integrated business operations",
+          "reason": "Accounting, purchasing, inventory and manufacturing are available in one Frappe-based suite.",
+          "tradeoff": "Implementation and localization are substantial work."
+        },
+        {
+          "app_id": "dolibarr",
+          "label": "Modular small-business workflows",
+          "reason": "ERP and CRM modules can be introduced around the processes a smaller organization needs.",
+          "tradeoff": "Specialized modules and hosted services may have separate costs."
+        },
+        {
+          "app_id": "tryton",
+          "label": "Modular ERP with desktop client",
+          "reason": "A native client and browser access share modular accounting, stock and manufacturing services.",
+          "tradeoff": "The desktop client still requires an administered Tryton server."
+        },
+        {
+          "app_id": "odoo-community",
+          "label": "Community application ecosystem",
+          "reason": "The LGPL Community edition provides a base for integrated business applications.",
+          "tradeoff": "Enterprise-only modules and capabilities must be checked separately."
+        },
+        {
+          "app_id": "apache-ofbiz",
+          "label": "Custom business foundations",
+          "reason": "A Java business framework supports teams developing their own operational applications.",
+          "tradeoff": "This is an implementation project, not a turnkey accounting download."
+        }
+      ]
+    },
+    {
+      "id": "manage-parts-assets-or-expiring-stock",
+      "title": "Manage parts, assets or expiring stock",
+      "description": "Inventory software is specialized: components, assigned IT equipment and warehouse lots represent different records and transactions.",
+      "picks": [
+        {
+          "app_id": "inventree",
+          "label": "Components and assemblies",
+          "reason": "Parts, BOMs, suppliers and build stock connect component availability to assembly work.",
+          "tradeoff": "Financial accounting and retail checkout are separate systems."
+        },
+        {
+          "app_id": "part-db",
+          "label": "Electronics bench inventory",
+          "reason": "Datasheets, component parameters, labels and KiCad integration suit electronic parts.",
+          "tradeoff": "External suppliers or AI services may have their own access and pricing terms."
+        },
+        {
+          "app_id": "snipe-it",
+          "label": "Assigned IT equipment",
+          "reason": "Check-in/check-out records show who holds equipment, licenses and accessories.",
+          "tradeoff": "It is an asset register rather than a warehouse fulfillment system."
+        },
+        {
+          "app_id": "openboxes",
+          "label": "Lots and warehouse movements",
+          "reason": "Facilities, shipments, lot identifiers and expiry dates fit distribution workflows.",
+          "tradeoff": "Deployment and warehouse process training are required."
+        }
+      ]
+    },
+    {
+      "id": "choose-a-self-hosted-crm",
+      "title": "Choose a self-hosted CRM",
+      "description": "Compare configurable business records, prebuilt sales/service processes and developer-defined applications.",
+      "picks": [
+        {
+          "app_id": "suitecrm",
+          "label": "Sales and service processes",
+          "reason": "Contacts, opportunities, quotations and service records support an established CRM workflow.",
+          "tradeoff": "Review the current 8.x compatibility and migration documentation."
+        },
+        {
+          "app_id": "espocrm",
+          "label": "Custom entities and fields",
+          "reason": "A configurable data model and REST interface adapt customer records to a particular business.",
+          "tradeoff": "Advanced extensions and cloud hosting can add fees."
+        },
+        {
+          "app_id": "twenty",
+          "label": "CRM applications as code",
+          "reason": "Custom objects, workflows, SDK and CLI tooling fit a developer-owned CRM implementation.",
+          "tradeoff": "Enterprise files have commercial terms and customization needs technical ownership."
+        }
+      ]
+    },
+    {
+      "id": "issue-invoices-from-your-own-server",
+      "title": "Issue invoices from your own server",
+      "description": "Check the actual billing workflow, branding restrictions and local e-invoice obligations before moving customer data.",
+      "picks": [
+        {
+          "app_id": "invoiceplane",
+          "label": "Focused quotes and invoices",
+          "reason": "Customer records, templates, quotes and payment tracking cover a compact billing workflow.",
+          "tradeoff": "Advanced automation and full accounting are outside its main scope."
+        },
+        {
+          "app_id": "solidinvoice",
+          "label": "Recurring billing under MIT",
+          "reason": "Recurring invoices, contacts and payment links are available through a self-hosted application.",
+          "tradeoff": "Payment gateways and operational support have separate costs."
+        },
+        {
+          "app_id": "invoice-ninja",
+          "label": "Broader billing and client portal",
+          "reason": "Recurring invoices, expenses, payment gateways and desktop clients connect to a billing server.",
+          "tradeoff": "Elastic License restrictions and paid branding removal need review."
+        }
+      ]
+    },
+    {
+      "id": "keep-small-business-books-under-your-control",
+      "title": "Keep small-business books under your control",
+      "description": "Choose between an offline single-user program, a shared browser application and a larger ERP. Verify accounting localization against the business’s requirements.",
+      "picks": [
+        {
+          "app_id": "manager-io",
+          "label": "Offline single-user bookkeeping",
+          "reason": "The free desktop edition keeps accounting available without a subscription or network connection.",
+          "tradeoff": "Multi-user arrangements differ and the FSL includes a noncompete restriction."
+        },
+        {
+          "app_id": "frappe-books",
+          "label": "Self-hosted browser bookkeeping",
+          "reason": "The current Frappe application combines ledgers, invoices, stock and point-of-sale records.",
+          "tradeoff": "The previous Electron desktop application is end-of-life; the successor requires a server."
+        },
+        {
+          "app_id": "erpnext",
+          "label": "Accounting within a full ERP",
+          "reason": "Financial records connect to purchasing, inventory and manufacturing workflows.",
+          "tradeoff": "Implementation effort is greater than a focused bookkeeping application."
+        }
+      ]
+    },
+    {
+      "id": "budget-or-account-with-local-data",
+      "title": "Budget or account with local data",
+      "description": "An envelope budget and a double-entry journal solve different problems; choose the data-entry model you will maintain consistently.",
+      "picks": [
+        {
+          "app_id": "actual-budget",
+          "label": "Envelope budgeting",
+          "reason": "Local-first budgets and transaction imports support a planned allocation of personal spending.",
+          "tradeoff": "Bank-data integrations and hosted sync may incur separate costs."
+        },
+        {
+          "app_id": "hledger",
+          "label": "Versioned plain-text accounting",
+          "reason": "Text journals and scriptable reports make double-entry records inspectable and reproducible.",
+          "tradeoff": "Learning journal syntax and accounting rules takes commitment."
+        },
+        {
+          "app_id": "gnucash",
+          "label": "Graphical double-entry accounts",
+          "reason": "A graphical accounting workflow is suitable when text journals are not the preferred entry method.",
+          "tradeoff": "Budgeting behavior differs from an envelope-first application."
+        }
+      ]
+    },
+    {
+      "id": "build-internal-business-tools",
+      "title": "Build internal business tools",
+      "description": "Start with where the data lives and who maintains the tool: spreadsheet-style records, no-code databases or interfaces over existing services.",
+      "picks": [
+        {
+          "app_id": "grist",
+          "label": "Relational spreadsheets",
+          "reason": "Typed tables, Python formulas, linked views and access rules add structure to spreadsheet-style editing.",
+          "tradeoff": "Its relational document model differs from a conventional spreadsheet grid."
+        },
+        {
+          "app_id": "baserow",
+          "label": "No-code database applications",
+          "reason": "Tables, relationships, forms and an application builder support data-centered workflows.",
+          "tradeoff": "Premium and enterprise functionality have separate commercial licenses."
+        },
+        {
+          "app_id": "appsmith",
+          "label": "Interfaces over existing systems",
+          "reason": "Widgets, database/API connectors and JavaScript build admin tools around current infrastructure.",
+          "tradeoff": "Queries, credentials and access controls require developer ownership."
+        }
+      ]
+    },
+    {
+      "id": "run-a-small-shop-point-of-sale",
+      "title": "Run a small-shop point of sale",
+      "description": "Test the actual receipt printer, barcode reader, payment arrangement and local fiscal requirements before production use.",
+      "picks": [
+        {
+          "app_id": "opensourcepos",
+          "label": "Browser-based register",
+          "reason": "Item stock, customer records, receipts and sales reports can run on a local web server.",
+          "tradeoff": "Its MIT-derived license requires visible footer attribution, and peripherals need validation."
+        },
+        {
+          "app_id": "chromis-pos",
+          "label": "Desktop till and back office",
+          "reason": "A desktop register with receipt layouts, barcode support and kitchen-display integration targets shop hardware.",
+          "tradeoff": "Recent maintenance was not established from the older release listing."
+        }
+      ]
+    }
+  ]
+}

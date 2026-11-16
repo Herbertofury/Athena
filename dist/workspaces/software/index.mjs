@@ -1,4 +1,4 @@
-import {FILTERS, indexCatalog, parseState, encodeState, normalizeState, queryCatalog, queryResearch, safeLink, comparisonRows, alternativeTarget} from './model.mjs';
+import {FILTERS, indexCatalog, parseState, encodeState, normalizeState, queryCatalog, queryResearch, relatedGuides, queryGuides, safeLink, comparisonRows, alternativeTarget} from './model.mjs';
 
 function element(tag, attrs = {}, ...children) {
   const e = document.createElement(tag);
@@ -19,6 +19,7 @@ const LABELS = {family: 'Explore a family', category: 'Task category', platform:
 export async function mount({container, search = '', state: saved = {}, route = '', signal, theme = 'dark', navigate, setState, notify = () => {}}) {
   const root = container.shadowRoot || container.attachShadow({mode: 'open'});
   let disposed = false, catalog, index, limit = 24, rows = [], lastOpener = null;
+  let guideQuery = '', guideLimit = 12;
   let state = parseState(route, saved?.filters);
   state.q = String(search || state.q).slice(0, 300);
   let selected = new Set(Array.isArray(saved?.selected) ? saved.selected.filter(x => typeof x === 'string').slice(0, 4) : []);
@@ -32,6 +33,18 @@ export async function mount({container, search = '', state: saved = {}, route = 
     element('div', {id: 'research-records'}));
   root.querySelector('.method').before(research);
   const $ = id => root.getElementById(id);
+  const suggestions = element('section', {id: 'suggested-guides', class: 'guide-suggestions', hidden: '', 'aria-label': 'Related decision guides'});
+  $('guide').before(suggestions);
+  const guideDirectory = element('details', {id: 'guide-directory', class: 'guide-directory'},
+    element('summary', {id: 'guide-directory-title'}, 'Explore decision guides'),
+    element('p', {class: 'muted'}, 'Find a task and compare the choices, reasons and tradeoffs. Your operating system, license, pricing and maintenance filters apply.'),
+    element('label', {for: 'guide-search'}, 'Find a decision guide',
+      element('input', {id: 'guide-search', type: 'search', placeholder: 'Try radio, sequence analysis, project planning…', autocomplete: 'off'})),
+    element('p', {id: 'guide-directory-count', class: 'muted', role: 'status', 'aria-live': 'polite'}),
+    element('div', {id: 'guide-directory-results', class: 'guide-directory-results'}),
+    element('button', {id: 'guide-directory-more', type: 'button', hidden: ''}, 'Show more decision guides'));
+  $('filters').after(guideDirectory);
+  $('guide').tabIndex = -1;
   $('detail-title').tabIndex = -1;
   const byId = new Map(), byCategory = new Map();
   function setTheme(value) { container.dataset.theme = value === 'light' ? 'light' : 'dark'; }
@@ -132,7 +145,25 @@ export async function mount({container, search = '', state: saved = {}, route = 
       ['Maintenance evidence', [app.maintenance.status + ' · reviewed ' + app.maintenance.checked_at, app.maintenance.note]],
     ];
     for (const [title, values] of sections) body.append(element('section', {class: 'detail-section'}, element('h3', {}, title), list(values)));
+    if (app.capabilities?.length) {
+      const support = element('section', {class: 'detail-section documented-capabilities'}, element('h3', {}, 'Documented task support'));
+      for (const capability of app.capabilities) {
+        const definition = catalog.capabilities.find(c => c.id === capability.id);
+        support.append(element('h4', {}, definition.label), element('p', {}, definition.description),
+          element('strong', {}, 'Required setup'), list(capability.conditions),
+          element('strong', {}, 'Task limits'), list(capability.limitations),
+          element('p', {}, capability.source_urls.map((url, i) => link('Task evidence ' + (i + 1) + ' ↗ ', url))));
+      }
+      body.append(support);
+    }
     if (app.maintenance.source_url) body.append(element('p', {}, link('Maintenance evidence source ↗', app.maintenance.source_url)));
+    for (const evaluation of (catalog.evaluations || []).filter(e => (app.evaluation_ids || []).includes(e.id))) {
+      body.append(element('section', {class: 'detail-section scoped-measurements'},
+        element('h3', {}, 'Scoped measurement: ' + evaluation.title),
+        element('p', {}, evaluation.summary), list(evaluation.limitations),
+        element('p', {}, link('Read results and method ↗ ', evaluation.report_url),
+          link('Raw measurements ↗ ', evaluation.data_url), link('Reproduce this experiment ↗', evaluation.script_url))));
+    }
     if (app.alternative_ids.length || app.alternatives_outside_catalog.length) {
       const alternatives = element('section', {class: 'detail-section'}, element('h3', {}, 'Alternatives to investigate'));
       for (const id of app.alternative_ids) alternatives.append(element('button', {type: 'button', onclick: () => showDetails(byId.get(id))}, byId.get(id).name));
@@ -140,7 +171,7 @@ export async function mount({container, search = '', state: saved = {}, route = 
       body.append(alternatives);
     }
     const sources = element('section', {class: 'detail-section'}, element('h3', {}, 'Sources and provenance'));
-    sources.append(element('p', {}, app.evidence_status === 'legacy-research' ? app.legacy_evidence_status : 'Official documentation reviewed. This record does not claim an installation, audit or benchmark.'));
+    sources.append(element('p', {}, app.evidence_status === 'legacy-research' ? app.legacy_evidence_status : 'Official documentation reviewed. Any separately measured comparison above applies only to its stated versions, workload and environment. Other capabilities have not been installed, audited or benchmarked in this review.'));
     for (const s of app.sources) sources.append(element('p', {}, link(s.label, s.url), element('small', {}, ' · ' + s.checked_at + ' · supports: ' + s.supports.join(', '))));
     sources.append(element('p', {class: 'muted'}, 'Source record: ' + app.origin));
     for (const enrichment of app.metadata_enrichments || []) sources.append(element('p', {class: 'muted'}, 'Metadata refreshed ' + enrichment.reviewed_at + ': ' + enrichment.fields.join(', ') + ' · ' + enrichment.origin));
@@ -176,13 +207,35 @@ export async function mount({container, search = '', state: saved = {}, route = 
         element('p', {}, p.reason), element('small', {}, 'Tradeoff: ' + p.tradeoff)));
     }
   }
+  function renderGuideDirectory() {
+    $('guide-directory-title').textContent = `Explore all ${catalog.recipes.length} decision guides`;
+    if (!guideDirectory.open) return;
+    const eligible = queryCatalog(index, {...state, q: '', family: '', category: '', task: ''}, catalog);
+    const matches = queryGuides(catalog, guideQuery, new Set(eligible.map(app => app.id)));
+    $('guide-directory-count').textContent = `${matches.length} decision guide${matches.length === 1 ? '' : 's'} with choices matching your filters`;
+    $('guide-directory-results').replaceChildren(...matches.slice(0, guideLimit).map(({recipe, available}) =>
+      element('article', {class: 'guide-directory-card'},
+        element('button', {type: 'button', onclick: () => {
+          guideDirectory.open = false; update({task: recipe.id}); $('guide').focus();
+        }}, recipe.title),
+        element('p', {}, recipe.description),
+        element('small', {class: 'muted'}, `${available} of ${recipe.picks.length} choices match your filters`))));
+    if (!matches.length) $('guide-directory-results').append(element('p', {class: 'muted'}, 'No guide matches this search and these filters. Try another task or broaden the filters.'));
+    $('guide-directory-more').hidden = matches.length <= guideLimit;
+    $('guide-directory-more').textContent = `Show ${Math.min(12, matches.length - guideLimit)} more decision guides`;
+  }
   function render() {
     if (disposed) return;
-    renderFilters(); selectionBar();
+    renderFilters(); selectionBar(); renderGuideDirectory();
     const related = (byCategory.get(state.category)?.related_category_ids || []).map(id => byCategory.get(id)).filter(Boolean);
     $('related-tasks').hidden = !related.length;
     $('related-tasks').replaceChildren(...(related.length ? [element('span', {class: 'muted'}, 'Related tasks:'), ...related.map(c => element('button', {type: 'button', onclick: () => update({family: c.family, category: c.id, task: '', q: ''})}, c.name))] : []));
     rows = queryCatalog(index, state, catalog);
+    const matchingGuides = state.q && !state.task ? relatedGuides(catalog, rows) : [];
+    suggestions.hidden = !matchingGuides.length;
+    suggestions.replaceChildren(...(matchingGuides.length ? [element('p', {class: 'muted'}, 'Task guides containing your results'),
+      ...matchingGuides.map(({recipe, matched}) => element('button', {type: 'button', onclick: () => update({task: recipe.id})},
+        recipe.title + ' · ' + matched + ' matching choice' + (matched === 1 ? '' : 's')))] : []));
     renderGuide();
     $('result-count').textContent = `${rows.length.toLocaleString()} of ${catalog.applications.length.toLocaleString()} tools` + (state.q ? ' matching “' + state.q + '”' : '');
     $('result-context').textContent = state.task ? 'Task-guide order is an editorial fit to these constraints.' : alternativeTarget(state.q) ? 'Explicitly researched alternatives to ' + alternativeTarget(state.q) + '; your filters still apply.' : 'Use filters to narrow the task. Open a tool to inspect evidence and alternatives.';
@@ -212,6 +265,9 @@ export async function mount({container, search = '', state: saved = {}, route = 
   const quickIds = ['protect-personal-files', 'understand-disk-space', 'support-a-remote-pc', 'run-local-language-models', 'manage-modded-game-setups', 'trim-convert-and-inspect-media', 'choose-code-editor'];
   for (const recipe of quickIds.map(id => catalog.recipes.find(r => r.id === id)).filter(Boolean)) $('quick-tasks').append(element('button', {type: 'button', onclick: () => update({task: recipe.id})}, recipe.title));
   $('sort').addEventListener('change', e => update({sort: e.target.value}));
+  guideDirectory.addEventListener('toggle', () => {if (!disposed) renderGuideDirectory();});
+  $('guide-search').addEventListener('input', e => {guideQuery = e.target.value.slice(0, 300); guideLimit = 12; renderGuideDirectory();});
+  $('guide-directory-more').addEventListener('click', () => {guideLimit += 12; renderGuideDirectory();});
   research.addEventListener('toggle', () => {if (!disposed) render();});
   $('reset').addEventListener('click', reset);
   $('more').addEventListener('click', () => {limit += 24; render();});

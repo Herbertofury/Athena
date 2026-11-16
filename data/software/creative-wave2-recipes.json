@@ -1,0 +1,421 @@
+{
+  "recipes": [
+    {
+      "id": "wave2-select-sequence-workbench",
+      "title": "Choose a graphical sequence-analysis and cloning workbench",
+      "description": "Match the workbench to the laboratory task: broad sequence analysis, supported project workflows, or visual cloning design.",
+      "picks": [
+        {
+          "app_id": "ugene",
+          "label": "Open graphical analysis workspace",
+          "reason": "Combines sequence viewing, annotation, alignment tools and visual workflows.",
+          "tradeoff": "External tools and reference databases add dependencies; validate each selected method."
+        },
+        {
+          "app_id": "geneious-prime",
+          "label": "Supported integrated laboratory workflow",
+          "reason": "Brings mapping, alignment, cloning, automation and project management into a commercial desktop environment.",
+          "tradeoff": "Subscriptions, cloud entitlements and academic eligibility differ by plan."
+        },
+        {
+          "app_id": "snapgene",
+          "label": "Visual cloning design and documentation",
+          "reason": "Plasmid maps, cloning simulation and edit history make construct design inspectable.",
+          "tradeoff": "Free Viewer mode supports inspection and annotation; full cloning design requires a paid subscription."
+        }
+      ]
+    },
+    {
+      "id": "wave2-prepare-sequence-alignments",
+      "title": "Create and inspect biological sequence alignments",
+      "description": "Distinguish alignment computation from manual inspection. Difficult regions and biological assumptions still need review before tree inference.",
+      "picks": [
+        {
+          "app_id": "mafft",
+          "label": "Scriptable alignment generation",
+          "reason": "Offers several sequence-alignment strategies and workflows for adding sequences to an existing alignment.",
+          "tradeoff": "Strategy choice and package licenses vary; inspect ambiguous alignment regions."
+        },
+        {
+          "app_id": "jalview",
+          "label": "Alignment interpretation with annotations",
+          "reason": "Links alignment editing and analysis with biological annotations and molecular structure views.",
+          "tradeoff": "Some services require a network connection, and external analyses have their own assumptions."
+        },
+        {
+          "app_id": "aliview",
+          "label": "Focused alignment inspection",
+          "reason": "Provides a dedicated viewer/editor with navigation suited to checking alignment columns and sequence labels.",
+          "tradeoff": "External aligners and Java packaging require separate setup."
+        }
+      ]
+    },
+    {
+      "id": "wave2-infer-evolutionary-trees",
+      "title": "Choose a phylogenetic inference method and interface",
+      "description": "Choose by statistical question and workflow, then check models, support and uncertainty. These tools do not establish one universally best tree.",
+      "picks": [
+        {
+          "app_id": "iq-tree",
+          "label": "Model-aware maximum likelihood",
+          "reason": "Combines maximum-likelihood inference, model selection, branch support and checkpointing.",
+          "tradeoff": "Alignment quality and model assumptions remain critical; complex models can consume substantial resources."
+        },
+        {
+          "app_id": "raxml-ng",
+          "label": "Explicit scripted likelihood searches",
+          "reason": "Provides tree-search, parameter-optimization and bootstrap controls for reproducible analyses.",
+          "tradeoff": "Windows uses WSL; search replicates and settings must be justified."
+        },
+        {
+          "app_id": "mega",
+          "label": "Graphical molecular-evolution analysis",
+          "reason": "Presents evolutionary distances and tree methods in an integrated graphical environment.",
+          "tradeoff": "Its no-charge terms are limited to research and education, with redistribution restrictions."
+        },
+        {
+          "app_id": "beast2",
+          "label": "Bayesian dated-tree models",
+          "reason": "Samples trees and parameters to represent posterior uncertainty in time-aware evolutionary models.",
+          "tradeoff": "Check priors, convergence, effective sample sizes and independent chains before interpretation."
+        },
+        {
+          "app_id": "figtree",
+          "label": "Display an already inferred tree",
+          "reason": "Provides branch/node display and annotation controls for tree figures.",
+          "tradeoff": "It is a viewer; it does not infer trees or diagnose MCMC convergence."
+        }
+      ]
+    },
+    {
+      "id": "wave2-inspect-genomic-evidence",
+      "title": "Inspect reads, genome annotations and assembly graphs",
+      "description": "Pick the data representation first: mapped reads, curated annotations, complex genome views or assembly-graph connectivity.",
+      "picks": [
+        {
+          "app_id": "igv",
+          "label": "Locus-level read and track review",
+          "reason": "Displays aligned-read and genomic-track evidence in a local desktop session.",
+          "tradeoff": "Large datasets need valid indexes and compatible reference coordinates."
+        },
+        {
+          "app_id": "jbrowse-desktop",
+          "label": "Extensible complex genome views",
+          "reason": "Supports a pluggable desktop workspace with multiple genomic representations.",
+          "tradeoff": "Plugins and input formats need preparation; the separate web deployment is a different product route."
+        },
+        {
+          "app_id": "artemis",
+          "label": "Genome annotation curation",
+          "reason": "Combines sequence-feature inspection with editing and comparative tools.",
+          "tradeoff": "Java and optional database workflows add setup requirements."
+        },
+        {
+          "app_id": "tablet",
+          "label": "Focused assembly and alignment viewing",
+          "reason": "Concentrates on visual review of sequencing assemblies and mapped reads.",
+          "tradeoff": "A visible pattern still needs an appropriate analytical method before drawing conclusions."
+        },
+        {
+          "app_id": "bandage",
+          "label": "Assembly-graph connectivity",
+          "reason": "Shows connections and branches that disappear in a flat contig file.",
+          "tradeoff": "Current packages differ by platform, and graph topology alone does not prove assembly correctness."
+        }
+      ]
+    },
+    {
+      "id": "wave2-check-sequencing-quality",
+      "title": "Inspect, preprocess and summarize sequencing quality",
+      "description": "These tools cover complementary stages: diagnose raw reads, apply justified preprocessing, then compare results across samples.",
+      "picks": [
+        {
+          "app_id": "fastqc",
+          "label": "Per-file diagnostic reports",
+          "reason": "Reports sequencing quality and composition patterns before or after preprocessing.",
+          "tradeoff": "Warning thresholds are heuristics and can reflect legitimate assay properties."
+        },
+        {
+          "app_id": "fastp",
+          "label": "Preprocessing with recorded reports",
+          "reason": "Combines quality filtering, adapter trimming and HTML/JSON reporting in a scripted step.",
+          "tradeoff": "Trimming can remove useful sequence; tune settings for the actual library."
+        },
+        {
+          "app_id": "multiqc",
+          "label": "Cross-sample report aggregation",
+          "reason": "Collects supported tool outputs into a project-level overview.",
+          "tradeoff": "It does not perform the underlying measurements; module recognition and sample naming affect aggregation."
+        }
+      ]
+    },
+    {
+      "id": "wave2-transform-genomic-files",
+      "title": "Select a command-line tool for a genomic file operation",
+      "description": "Choose by data model instead of treating every sequence utility as interchangeable.",
+      "picks": [
+        {
+          "app_id": "seqkit",
+          "label": "FASTA and FASTQ sequences",
+          "reason": "Filters, transforms, extracts and summarizes sequence records with self-contained executables.",
+          "tradeoff": "Check identifiers, strand handling and coordinate conventions."
+        },
+        {
+          "app_id": "samtools",
+          "label": "SAM, BAM and CRAM alignments",
+          "reason": "Sorts, indexes, filters and converts mapped-read alignment files.",
+          "tradeoff": "Reference and sorting assumptions must match downstream tools; Windows setup differs."
+        },
+        {
+          "app_id": "bedtools",
+          "label": "Genomic interval relationships",
+          "reason": "Intersects, merges and compares regions such as genes, peaks and coverage intervals.",
+          "tradeoff": "BED and GFF coordinate conventions differ; current source and older docs also carry different license labels."
+        },
+        {
+          "app_id": "minimap2",
+          "label": "Mapping long reads or assemblies",
+          "reason": "Aligns sequence data to a reference using task-specific presets.",
+          "tradeoff": "It is a mapper rather than a general file editor; this record verifies the published Linux binary route."
+        }
+      ]
+    },
+    {
+      "id": "wave2-select-bim-authoring",
+      "title": "Choose a BIM authoring environment",
+      "description": "Start with team deliverables, native operating-system needs, exchange formats and the authoring model.",
+      "picks": [
+        {
+          "app_id": "autodesk-revit",
+          "label": "Revit-centered multidisciplinary delivery",
+          "reason": "Connects architectural, structural and building-services models with documentation.",
+          "tradeoff": "Native Windows requirement and separately licensed collaboration services can affect the toolchain."
+        },
+        {
+          "app_id": "archicad",
+          "label": "Architectural BIM on Windows or Mac",
+          "reason": "Combines architectural modeling, documentation and team workflows with native desktop options.",
+          "tradeoff": "Plan entitlements and consultant exchange requirements need agreement before a project starts."
+        },
+        {
+          "app_id": "bricscad-bim",
+          "label": "DWG-based transition into BIM",
+          "reason": "Places building-modeling and IFC tools alongside familiar DWG drafting workflows.",
+          "tradeoff": "Some integrations vary by OS; perpetual and subscription entitlements differ."
+        },
+        {
+          "app_id": "bonsai",
+          "label": "Open IFC authoring inside Blender",
+          "reason": "Creates native IFC data with linked drawings, schedules and Python automation.",
+          "tradeoff": "It requires compatible Blender and is labeled alpha; test exchange and workflow stability on representative projects."
+        }
+      ]
+    },
+    {
+      "id": "wave2-review-ifc-and-city-models",
+      "title": "Review IFC deliverables and city-scale semantic models",
+      "description": "A dedicated viewer suits reviewers who do not need a full authoring license. Check format coverage and paid extensions before selecting one.",
+      "picks": [
+        {
+          "app_id": "bimvision",
+          "label": "Focused IFC stakeholder review",
+          "reason": "Provides building geometry and property inspection with a free core viewer.",
+          "tradeoff": "Optional plugins have separate licenses and the installer flow requests an email address."
+        },
+        {
+          "app_id": "kit-model-viewer",
+          "label": "IFC, gbXML and CityGML review",
+          "reason": "Connects building-scale and city-scale semantic formats with property and relationship inspection.",
+          "tradeoff": "Requires Windows runtime components; open plugin code does not imply an open-source application license."
+        },
+        {
+          "app_id": "bonsai",
+          "label": "Review that may become IFC authoring",
+          "reason": "Native IFC editing can help when inspection uncovers data that must be changed.",
+          "tradeoff": "A Blender extension and alpha authoring workflow bring more setup than a standalone viewer."
+        }
+      ]
+    },
+    {
+      "id": "wave2-plan-interiors-and-concepts",
+      "title": "Plan interior layouts and architectural concepts",
+      "description": "Match the tool to the level of design detail: rooms and furniture, flexible spatial concepts or data-rich building models.",
+      "picks": [
+        {
+          "app_id": "sweet-home-3d",
+          "label": "Rooms and furniture",
+          "reason": "Links a floor plan with three-dimensional furniture placement and interior views.",
+          "tradeoff": "Free and paid distributions bundle different assets; it is not a full building-engineering system."
+        },
+        {
+          "app_id": "sketchup",
+          "label": "Flexible spatial concept modeling",
+          "reason": "Supports direct 3D modeling with extensions and plan-dependent documentation tools.",
+          "tradeoff": "Desktop subscriptions, web access and Studio features have different capabilities and terms."
+        },
+        {
+          "app_id": "bonsai",
+          "label": "Concepts that need native IFC data",
+          "reason": "Connects geometry with building classifications, properties and coordinated documentation.",
+          "tradeoff": "Requires Blender and familiarity with IFC/BIM workflows; current Studio is alpha."
+        }
+      ]
+    },
+    {
+      "id": "wave2-model-building-energy",
+      "title": "Choose a building-energy modeling workflow",
+      "description": "Separate the simulation engine from graphical model preparation and from legacy project compatibility.",
+      "picks": [
+        {
+          "app_id": "energyplus",
+          "label": "Detailed simulation engine",
+          "reason": "Provides whole-building thermal and HVAC simulation for scripted or interface-driven workflows.",
+          "tradeoff": "Requires carefully prepared geometry, schedules, weather and system assumptions."
+        },
+        {
+          "app_id": "openstudio-application",
+          "label": "Open graphical EnergyPlus workflow",
+          "reason": "Adds graphical model editing and compatible simulation components around the OpenStudio ecosystem.",
+          "tradeoff": "Application, SDK and SketchUp plugin are separate products; verify release compatibility."
+        },
+        {
+          "app_id": "designbuilder",
+          "label": "Commercial integrated performance analysis",
+          "reason": "Combines model preparation with licensed energy, daylight, HVAC and other analysis modules.",
+          "tradeoff": "Required modules affect cost; results still depend on validated model assumptions."
+        },
+        {
+          "app_id": "equest",
+          "label": "Existing DOE-2 project compatibility",
+          "reason": "Supports established eQUEST models, wizards and energy-efficiency comparisons.",
+          "tradeoff": "The public download is older and current maintenance is unverified; confirm project and compliance requirements."
+        }
+      ]
+    },
+    {
+      "id": "wave2-plan-professional-lighting",
+      "title": "Choose a lighting and luminaire planning tool",
+      "description": "Both tools offer a free core, but manufacturer participation and paid extensions change practical project coverage.",
+      "picks": [
+        {
+          "app_id": "dialux-evo",
+          "label": "Luminaire-based lighting design",
+          "reason": "Covers indoor, outdoor, street and emergency lighting calculations and documentation.",
+          "tradeoff": "Non-member luminaires and some export/productivity features require paid plans."
+        },
+        {
+          "app_id": "relux-desktop",
+          "label": "Lighting with sensor planning",
+          "reason": "Combines artificial-light/daylight calculations with luminaire and sensor planning.",
+          "tradeoff": "Non-member product presentation and specialist extensions have separate licensing; native Windows is required."
+        }
+      ]
+    },
+    {
+      "id": "wave2-model-life-cycle-impacts",
+      "title": "Choose a desktop life-cycle assessment workflow",
+      "description": "Software choice does not supply the inventory data or settle model assumptions. Compare database access, scripting needs and model transparency.",
+      "picks": [
+        {
+          "app_id": "openlca",
+          "label": "Graphical multi-database LCA work",
+          "reason": "Provides process networks, impact assessment and exchange with several LCA data ecosystems.",
+          "tradeoff": "Commercial background databases and services may cost extra despite the free application."
+        },
+        {
+          "app_id": "activity-browser",
+          "label": "Brightway-connected analysis",
+          "reason": "Brings graphical project and inventory editing to the Python/Brightway ecosystem.",
+          "tradeoff": "Environment compatibility and separately licensed datasets require setup and review."
+        }
+      ]
+    },
+    {
+      "id": "wave2-generate-cnc-toolpaths",
+      "title": "Choose CAD/CAM software for a CNC project",
+      "description": "Match the design source, required machining strategies, machine output and edition restrictions before generating a job.",
+      "picks": [
+        {
+          "app_id": "estlcam",
+          "label": "Compact 2D and 3D preparation",
+          "reason": "Generates toolpaths from drawings, meshes and images with an optional compatible control workflow.",
+          "tradeoff": "Free mode adds file-operation delays; paid version 13 updates have a one-year entitlement period."
+        },
+        {
+          "app_id": "carbide-create",
+          "label": "Integrated design for Carbide machines",
+          "reason": "Combines vector drawing, simulation and 2D/2.5D machining in Core.",
+          "tradeoff": "Standard G-code for other machines and advanced 3D work require Pro."
+        },
+        {
+          "app_id": "vcarve",
+          "label": "Decorative routing and signs",
+          "reason": "Provides V-carving, decorative toolpaths and machining of imported relief models.",
+          "tradeoff": "It is a paid Windows product; the trial cannot cut arbitrary user-created designs."
+        },
+        {
+          "app_id": "deskproto",
+          "label": "Imported geometry to machining",
+          "reason": "Offers a permanent free entry point and paid advanced/multi-axis editions.",
+          "tradeoff": "Edition capabilities and the selected postprocessor must match the machine."
+        },
+        {
+          "app_id": "blendercam",
+          "label": "Blender-centered CAM",
+          "reason": "Keeps geometry and toolpath work in the Fabex CNC Blender extension.",
+          "tradeoff": "Requires compatible Blender/dependencies and careful postprocessor validation."
+        },
+        {
+          "app_id": "kiri-moto",
+          "label": "Multiple fabrication processes",
+          "reason": "Provides browser, desktop and local-server routes for milling, laser and printing preparation.",
+          "tradeoff": "Machine profiles and deployment-specific storage behavior need verification."
+        }
+      ]
+    },
+    {
+      "id": "wave2-nest-vector-parts",
+      "title": "Arrange vector parts on sheet material",
+      "description": "Nesting tools propose layouts; verify paths, units, spacing and the downstream cutting process before using the result.",
+      "picks": [
+        {
+          "app_id": "svgnest",
+          "label": "Browser-based SVG nesting",
+          "reason": "Packs irregular SVG parts with spacing, rotation and part-in-part controls.",
+          "tradeoff": "Input geometry must be prepared as suitable paths, and heuristic nesting does not guarantee a global optimum."
+        },
+        {
+          "app_id": "deepnest-next",
+          "label": "Desktop nesting and shared cuts",
+          "reason": "Adds a desktop workflow with common-line merging and DXF conversion.",
+          "tradeoff": "Confirm any external conversion path; the released MIT desktop repository differs from the separate rewrite."
+        }
+      ]
+    },
+    {
+      "id": "wave2-prepare-laser-jobs",
+      "title": "Choose software for preparing and sending laser jobs",
+      "description": "Start with the controller, then decide whether integrated drawing, engraving preparation or a free focused sender is the priority.",
+      "picks": [
+        {
+          "app_id": "lightburn",
+          "label": "Integrated multi-controller workflow",
+          "reason": "Combines layout, editing, job settings and supported controller communication.",
+          "tradeoff": "Core/Pro compatibility depends on controller type; current Linux support is limited to legacy releases."
+        },
+        {
+          "app_id": "lasergrbl",
+          "label": "Free GRBL-focused Windows workflow",
+          "reason": "Prepares raster engraving jobs and sends them to compatible GRBL controllers.",
+          "tradeoff": "It is not a universal laser driver; verify the actual machine and material settings."
+        },
+        {
+          "app_id": "kiri-moto",
+          "label": "Fabrication preparation in a browser",
+          "reason": "Can prepare laser jobs alongside milling and 3D-printing workflows.",
+          "tradeoff": "Generated jobs still require a compatible machine profile and sending/control route."
+        }
+      ]
+    }
+  ]
+}

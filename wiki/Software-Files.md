@@ -8,6 +8,8 @@ Find, organize, transfer, protect and recover files.
 
 ## Archive creation and extraction
 
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=files%2Farchives)
+
 ### 7-Zip
 
 Archive creation and extraction
@@ -73,6 +75,8 @@ Windows archive utility for creating RAR archives and working with many archive 
 
 ## Data recovery
 
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=files%2Fdata-recovery)
+
 ### DMDE
 
 Disk editor and recovery tool with filesystem reconstruction and RAID capabilities.
@@ -136,6 +140,8 @@ Partition recovery utility for diagnosing lost partitions and repairing supporte
 
 ## System imaging and recovery
 
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=files%2Fdisk-imaging)
+
 ### Clonezilla
 
 Bootable disk imaging and cloning suite for partition and machine recovery.
@@ -189,6 +195,8 @@ Windows endpoint backup software supporting system, volume and file recovery.
 
 ## Duplicate detection
 
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=files%2Fduplicate-detection)
+
 ### Czkawka / Krokiet
 
 Duplicate and similar-image discovery
@@ -240,6 +248,8 @@ Command-line duplicate scanner with optional deletion and link-based consolidati
 - **Sources:** [Official project documentation](https://codeberg.org/jbruchon/jdupes) (2026-11-14; identity, features, platforms, license); [Official download or installation landing page](https://codeberg.org/jbruchon/jdupes/releases) (2026-11-14; downloads, pricing)
 
 ## Graphical file managers
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=files%2Ffile-managers)
 
 ### Directory Opus
 
@@ -405,6 +415,8 @@ Portable Windows file manager with tabs, scripting and detailed file search.
 
 ## Quick file previews
 
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=files%2Ffile-preview)
+
 ### QuickLook
 
 Spacebar file previews
@@ -420,6 +432,8 @@ Spacebar file previews
 - **Sources:** [Official preview capabilities, distribution options, free-use statement and license](https://github.com/QL-Win/QuickLook) (2026-11-15; downloads, features, identity, license, platforms, pricing)
 
 ## File and folder search
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=files%2Ffile-search)
 
 ### broot
 
@@ -448,6 +462,8 @@ Fast indexed filename search
 - **Sources:** [Preserved original research source](https://www.voidtools.com/support/everything/) (2026-11-14; identity, features); [Official capabilities and practical usage basis](https://www.voidtools.com/faq/) (2026-11-15; features, platforms, pricing); [Official stable and beta download portal](https://www.voidtools.com/downloads/) (2026-11-14; downloads); [Official license text accompanying the distributed binary](https://www.voidtools.com/License.txt) (2026-11-15; license)
 
 ## File synchronization
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=files%2Ffile-synchronization)
 
 ### FreeFileSync
 
@@ -503,6 +519,8 @@ Two-way file synchronizer that reconciles changes made independently in two dire
 
 ## Filesystem Bridges
 
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=files%2Ffilesystem-bridges)
+
 ### WinBtrfs
 
 Windows filesystem driver for reading and writing Btrfs volumes.
@@ -532,6 +550,8 @@ Windows filesystem runtime that lets user-mode software expose storage as ordina
 
 ## Client-server backup
 
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=files%2Fnetwork-backup)
+
 ### UrBackup
 
 Client/server backup system combining file and supported image backup workflows.
@@ -546,6 +566,8 @@ Client/server backup system combining file and supported image backup workflows.
 - **Sources:** [Official project documentation](https://www.urbackup.org/) (2026-11-14; identity, features, platforms); [Official source repository and README](https://github.com/uroni/urbackup_backend) (2026-11-14; identity, features, platforms); [Official download or installation landing page](https://www.urbackup.org/download.html) (2026-11-14; downloads, pricing); [Official source license](https://raw.githubusercontent.com/uroni/urbackup_backend/HEAD/COPYING) (2026-11-14; license); [Official release activity](https://github.com/uroni/urbackup_backend/releases.atom) (2026-11-14; maintenance)
 
 ## Partition Management
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=files%2Fpartition-management)
 
 ### DiskGenius
 
@@ -588,6 +610,8 @@ Graphical partition editor available as a Linux application and a bootable recov
 - **Sources:** [Official project feature documentation](https://gparted.org/) (2026-11-14; features, identity, license, maintenance, platforms, pricing); [Official download or installation landing page](https://gparted.org/download.php) (2026-11-14; downloads)
 
 ## Disk space analysis
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=files%2Fstorage-analysis)
 
 ### duf
 
@@ -667,6 +691,8 @@ Disk-space analyzer with a visual treemap; Windows and separate WizTreeMac editi
 
 ## Terminal file managers
 
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=files%2Fterminal-file-managers)
+
 ### lf
 
 Terminal file manager written in Go with configurable commands and a client/server design.
@@ -717,6 +743,8 @@ Terminal file manager written in Rust with asynchronous operations and configura
 - **Sources:** [Official project documentation](https://yazi-rs.github.io/) (2026-11-14; identity, features); [Official source repository and README](https://github.com/sxyazi/yazi) (2026-11-14; identity, features, platforms); [Official download or installation landing page](https://yazi-rs.github.io/docs/installation/) (2026-11-14; downloads); [Official source license](https://raw.githubusercontent.com/sxyazi/yazi/HEAD/LICENSE) (2026-11-14; license); [Official release activity](https://github.com/sxyazi/yazi/releases.atom) (2026-11-14; maintenance); [Official public application distribution](https://github.com/sxyazi/yazi/releases/expanded_assets/nightly) (2026-11-14; pricing)
 
 ## Versioned file backup
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=files%2Fversioned-backup)
 
 ### Arq Backup
 
