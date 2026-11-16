@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "classification": "Preservation replay of unchanged official documentation example; not live API evidence",
+  "base_commit": "9ff4679a30baa1840bb16c357d0bb3f0866b88d6",
+  "original_receipt": "after.json",
+  "original_receipt_sha256": "04c75f2737fd498c5f2007a996dd63d06c0c5bf96599e1c82bb57baad8fd244e",
+  "current_receipt": "current-after.json",
+  "current_receipt_sha256": "131e3d9134e8fe65662b60cc6f64a5a2b1318c02cc49678da816ba5a4e9014ca",
+  "original_implementation_sha256": "b522913010d9ca91f6e39f0338323a72809df169da4234a34e2937c78f783948",
+  "current_implementation_sha256": "a4d690e7b129e86fe44dbfe042afdfdc3f407608854653d5070ec1d360e9859b",
+  "projection_receipt_identical_except_implementation_sha256": true,
+  "fixture_sha256": "d2a3a025a50184b5b1309c9246d2d698eaeab3fb18405249b32f79d16e068153",
+  "acceptance": {
+    "live_api": false,
+    "media_fetched": false,
+    "rendering": false,
+    "target": false
+  },
+  "preserved_artifacts": {
+    "after.json": "04c75f2737fd498c5f2007a996dd63d06c0c5bf96599e1c82bb57baad8fd244e",
+    "before.json": "99f48be17f47f288bb0215b14e6dba1f76dc0e1b6034449ceb96026d5f4dd70e",
+    "public-validation-2026-11-11.json": "df45af71c23388f3532edcccd0c82918757e8d66bd9a9b36cbb69e36b09915fd",
+    "fixtures/official-component-example.json": "d2a3a025a50184b5b1309c9246d2d698eaeab3fb18405249b32f79d16e068153",
+    "fixtures/LICENSE-CODE": "ef75c87c20a645242bc8316055d642105b3e93f5aad95a66e734169728661c72",
+    "probe.py": "80cb5cf8626d0dfeb524e0874afae550fdb5748cf494c74ba02699f67591c33f"
+  }
+}

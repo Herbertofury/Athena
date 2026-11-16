@@ -1,0 +1,55 @@
+{
+  "all_media_unfetched": true,
+  "api_response_observed": false,
+  "classification": "official documentation code example in synthetic message envelope; not a live Discord message",
+  "component_count": 15,
+  "component_types": {
+    "1": 1,
+    "10": 3,
+    "11": 1,
+    "12": 1,
+    "14": 2,
+    "17": 1,
+    "2": 4,
+    "9": 2
+  },
+  "envelope": {
+    "channel_id": "2",
+    "creator_identity_invented": false,
+    "message_id": "1",
+    "source_component_value_unchanged": true,
+    "synthetic": true
+  },
+  "event_count": 50,
+  "fixture_bytes": 2235,
+  "fixture_sha256": "d2a3a025a50184b5b1309c9246d2d698eaeab3fb18405249b32f79d16e068153",
+  "full_support_accepted": false,
+  "implementation_sha256": "b522913010d9ca91f6e39f0338323a72809df169da4234a34e2937c78f783948",
+  "input_raw_projection_sha256": "27098c2e7cc88079fd030b93539b36af4f7fc4b67a6f6b3005e2579553468bcc",
+  "limits": [
+    "Markdown links stay within text, not separate link events.",
+    "Source artwork URLs are references, not decoded or played media.",
+    "No account, message history, grants, authorization parity or target acceptance."
+  ],
+  "link_event_count": 4,
+  "media_reference_count": 4,
+  "media_spoiler_states": [
+    false,
+    false,
+    false,
+    true
+  ],
+  "media_url_sha256_in_order": [
+    "f23fb415bf9e297556c79e7e8bc2f40ee27195c8e92af6345b38e015aa36ae6f",
+    "d00994e7282e7f47450596cbfd4f4e540bc9078b34c0e0a508d6e36d82df4724",
+    "7b97243424403ccac4a30d91464b06f74ef6c400170d7502cd0a6423c8b82623",
+    "131fba5a8bc5c46f038f6fb6d78b81a6fe7a3e81555a90e2c66ed3be088674a4"
+  ],
+  "network_used": false,
+  "projection_complete": false,
+  "provider_rendering_verified": false,
+  "schema_version": 1,
+  "text_characters": 246,
+  "text_event_count": 7,
+  "text_sha256": "6d86f37c0606e060a0cd97c3a864ef3c066194774cbd03ae78977ed94a79f120"
+}

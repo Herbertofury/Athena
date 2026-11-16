@@ -1,0 +1,68 @@
+[
+  {
+    "id": "DCE11001",
+    "title": "Discord component link previews",
+    "url": "https://docs.discord.com/developers/link-previews/component-embeds",
+    "observed_version": "Current official guide checked 2026-11-11",
+    "topic": "discord-component-embed-projection",
+    "note": "Display-only component previews and published example; this investigation does not run the Discord crawler or fetch example artwork.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 14,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "DCE11002",
+    "title": "Discord message embed structure",
+    "url": "https://docs.discord.com/developers/resources/message",
+    "observed_version": "Current official schema checked 2026-11-11",
+    "topic": "discord-component-embed-projection",
+    "note": "The components embed type carries its own components array, distinct from top-level message components and ordinary rich embeds.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 14,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "DCE11003",
+    "title": "Pinned official component-embed source example",
+    "url": "https://github.com/discord/discord-api-docs/blob/36adecb2e0bbbf500c430147ef4acbe9aa1a389e/developers/link-previews/component-embeds.mdx",
+    "observed_version": "Pinned source commit 36adecb2e0bbbf500c430147ef4acbe9aa1a389e",
+    "topic": "discord-component-embed-projection",
+    "note": "Exact Full Example code sample captured, compared with rendered documentation, and replayed with an explicitly synthetic message envelope.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 14,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "DCE11004",
+    "title": "Discord documentation licensing",
+    "url": "https://github.com/discord/discord-api-docs/blob/36adecb2e0bbbf500c430147ef4acbe9aa1a389e/README.md",
+    "observed_version": "Pinned source commit 36adecb2e0bbbf500c430147ef4acbe9aa1a389e",
+    "topic": "discord-component-embed-projection",
+    "note": "README assigns code samples to MIT and prose to CC-BY-SA-4.0. Included JSON fixture carries the complete MIT notice; no full source prose is republished.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 14,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "DCE11005",
+    "title": "Discord guild channel visibility boundary",
+    "url": "https://docs.discord.com/developers/resources/guild#get-guild-channels",
+    "observed_version": "Documented HTTP change scheduled for 2026-11-16",
+    "topic": "discord-component-embed-projection",
+    "note": "Missing channels after permission filtering cannot establish deletion. No channel collector, bot permission, opt-in or API call added.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 14,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "DCE11006",
+    "title": "Discord platform change log",
+    "url": "https://docs.discord.com/developers/change-log",
+    "observed_version": "October 5 component-preview announcement; August 12 channel-obfuscation announcement",
+    "topic": "discord-component-embed-projection",
+    "note": "Component embeds use a distinct embed representation. Channel obfuscation announcement gives November 16 HTTP transition; checked November 11, not observed live behavior.",
+    "checked_at": "2026-11-11",
+    "review_after_days": 14,
+    "evidence": "primary_documented"
+  }
+]
