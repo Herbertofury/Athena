@@ -78,7 +78,7 @@ One actual form submission attempted fresh unauthenticated public collection, bu
 
 ## Fresh existing Rust collector verification · 2026-10-28
 
-[Sanitized CLI, queue and independent readback evidence](https://github.com/Herbertofury/Engineering-Atlas/tree/fdb5e8d4f6337922c3f227e737c59d557fcba34f/experiments/project-raw-live-lab). Four actual public CLI requests and one queued-worker request retained five complete-response generations for the selected Sodium/Lithium/Iris cases. Missing-project requests failed explicitly without replacing earlier snapshots. Twelve loopback checks bound the compact worker receipt and saved-response HTTP output to reopened original bytes.
+[Sanitized CLI, queue and independent readback evidence](https://github.com/Herbertofury/Athena/tree/5a107cdf6cf9b6911fedc5ba4f2a20c939d9c485/migration/engineering-atlas/historical-evidence/169d7630a29c06a74182509f884640466241730e). Four actual public CLI requests and one queued-worker request retained five complete-response generations for the selected Sodium/Lithium/Iris cases. Missing-project requests failed explicitly without replacing earlier snapshots. Twelve loopback checks bound the compact worker receipt and saved-response HTTP output to reopened original bytes.
 
 The newer Sodium response changed its public download counter, so its different hash remains a distinct observation rather than being normalized into equal-work evidence. Raw bodies remain local; only hashes, counts and sanitized outcomes are published. This closes selected fresh CLI/worker provider-execution gaps, not full catalogue, creator-membership, linked-media, authenticated or native-GUI acceptance. Browser navigation to the executor localhost was refused in that pass; the failure remains recorded.
 
@@ -93,3 +93,9 @@ The links above now use content-identical Athena copies, verified by Git blob/tr
 - Original: `https://github.com/Herbertofury/Engineering-Atlas/tree/03f10eeca4c2eced6bb33d97dbdd3e695a8ae000/experiments/project-identity-lab`; identical tree object: `4c1160a162722b7d037921cfe5b4267714332904`.
 - Original: `https://github.com/Herbertofury/Engineering-Atlas/tree/c610c81bc0c947f7f1d979e67a5da6eb1f888df3/experiments/project-raw-lab`; identical tree object: `83ac815f338edcc767ea007c0e71ce88c5f3177a`.
 - Original: `https://github.com/Herbertofury/Engineering-Atlas/tree/690a5993c05cb7c34f1872d6a52235363c1a53b0/experiments/job-label-lab`; identical tree object: `ac4ca0bb2febdcb4740de9d9651da3f78924a891`.
+
+## Preserved historical snapshot provenance
+
+The linked snapshots preserve exact historical evidence, including failed experiments. They are inert archives, not current recommendations or standalone runnable checkouts. Original source references remain below; no source repository has been deleted.
+
+- Original: `https://github.com/Herbertofury/Engineering-Atlas/tree/fdb5e8d4f6337922c3f227e737c59d557fcba34f/experiments/project-raw-live-lab`; preserved tree object: `169d7630a29c06a74182509f884640466241730e`.

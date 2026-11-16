@@ -1,0 +1,70 @@
+{
+  "checked_at": "2026-10-27T12:47:33.557894+00:00",
+  "scope": "Actual upstream parsing component on three retained public records; not provider/UI/storage-throughput latency",
+  "timings": [
+    {
+      "source": "hls",
+      "repeat": 0,
+      "bytes": 4670,
+      "baseline_median_ns": 23615.675,
+      "candidate_median_ns": 10185.705,
+      "ratio_of_medians": 2.3185115806907817,
+      "candidate_pair_wins": 20,
+      "pairs": 20
+    },
+    {
+      "source": "rustsec",
+      "repeat": 0,
+      "bytes": 3155,
+      "baseline_median_ns": 17501.885000000002,
+      "candidate_median_ns": 8510.825,
+      "ratio_of_medians": 2.0564263746464064,
+      "candidate_pair_wins": 18,
+      "pairs": 20
+    },
+    {
+      "source": "serde-json",
+      "repeat": 0,
+      "bytes": 1976,
+      "baseline_median_ns": 10877.099999999999,
+      "candidate_median_ns": 4959.055,
+      "ratio_of_medians": 2.193381601938272,
+      "candidate_pair_wins": 20,
+      "pairs": 20
+    },
+    {
+      "source": "hls",
+      "repeat": 1,
+      "bytes": 4670,
+      "baseline_median_ns": 24146.705,
+      "candidate_median_ns": 11935.73,
+      "ratio_of_medians": 2.023060592020765,
+      "candidate_pair_wins": 20,
+      "pairs": 20
+    },
+    {
+      "source": "rustsec",
+      "repeat": 1,
+      "bytes": 3155,
+      "baseline_median_ns": 16415.745,
+      "candidate_median_ns": 9583.654999999999,
+      "ratio_of_medians": 1.7128898108289583,
+      "candidate_pair_wins": 17,
+      "pairs": 20
+    },
+    {
+      "source": "serde-json",
+      "repeat": 1,
+      "bytes": 1976,
+      "baseline_median_ns": 10399.18,
+      "candidate_median_ns": 5222.629999999999,
+      "ratio_of_medians": 1.9911768591686567,
+      "candidate_pair_wins": 20,
+      "pairs": 20
+    }
+  ],
+  "binaries": {
+    "upstream_validation_lab": "3df2fe926b68e731a4502227e0854b9c287594416a460df0ffffbdd1b17ce7e2",
+    "upstream_validation_allocations": "ca26c08b03389663f446662e1679323c7f9a19a03fecb9d3281b40068b23c2e5"
+  }
+}

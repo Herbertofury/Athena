@@ -1,0 +1,13 @@
+   Compiling atlas-lab v0.1.0 (/workspace/scratch/c648c483d888/engineering-atlas/apps/atlas-lab)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.81s
+     Running unittests examples/upstream_validation_lab.rs (engineering-atlas/apps/atlas-lab/target/debug/examples/upstream_validation_lab-5047b1773e9d3863)
+
+running 5 tests
+test tests::commit_contract_matches ... ok
+test tests::schema_binding_duplicates_and_invalid_unicode ... ok
+test tests::complete_bytes_and_numeric_boundaries ... ok
+test tests::recursive_depth_and_size_guard ... ok
+test tests::generated_single_escape_differential_stress ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 3.24s
+

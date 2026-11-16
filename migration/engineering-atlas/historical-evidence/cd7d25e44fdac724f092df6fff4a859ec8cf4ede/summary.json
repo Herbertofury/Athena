@@ -1,0 +1,172 @@
+{
+  "schema_version": 1,
+  "scope": "Generated full-data Node preparation plus unchanged complete receiver; not browser/target-project acceptance",
+  "node_version": "24.22.1",
+  "passes": [
+    {
+      "name": "pass1",
+      "samples": 30,
+      "complete_parity": true,
+      "workloads": [
+        {
+          "count": 200,
+          "metadata_bytes": 8192,
+          "baseline": {
+            "prepare_ms": 28.715113000000002,
+            "prepare_and_verify_ms": 46.27955499999999,
+            "peak_rss_kib": 49516,
+            "encoding_buffer_bytes": 1668001
+          },
+          "budgeted": {
+            "prepare_ms": 24.749904,
+            "prepare_and_verify_ms": 38.315023,
+            "peak_rss_kib": 49280,
+            "encoding_buffer_bytes": 1843202
+          }
+        },
+        {
+          "count": 1000,
+          "metadata_bytes": 8192,
+          "baseline": {
+            "prepare_ms": 101.775938,
+            "prepare_and_verify_ms": 159.379401,
+            "peak_rss_kib": 102236,
+            "encoding_buffer_bytes": 8340001
+          },
+          "budgeted": {
+            "prepare_ms": 110.02681800000002,
+            "prepare_and_verify_ms": 187.168466,
+            "peak_rss_kib": 100352,
+            "encoding_buffer_bytes": 9216002
+          }
+        },
+        {
+          "count": 1000,
+          "metadata_bytes": 65536,
+          "baseline": {
+            "prepare_ms": 812.4802639999999,
+            "prepare_and_verify_ms": 1175.004306,
+            "peak_rss_kib": 546136,
+            "encoding_buffer_bytes": 65684001
+          },
+          "budgeted": {
+            "prepare_ms": 696.567215,
+            "prepare_and_verify_ms": 989.808674,
+            "peak_rss_kib": 495232,
+            "encoding_buffer_bytes": 66560002
+          }
+        }
+      ]
+    },
+    {
+      "name": "pass2",
+      "samples": 30,
+      "complete_parity": true,
+      "workloads": [
+        {
+          "count": 200,
+          "metadata_bytes": 8192,
+          "baseline": {
+            "prepare_ms": 26.744268000000005,
+            "prepare_and_verify_ms": 45.699884,
+            "peak_rss_kib": 49448,
+            "encoding_buffer_bytes": 1668001
+          },
+          "budgeted": {
+            "prepare_ms": 31.40340100000003,
+            "prepare_and_verify_ms": 57.18738300000001,
+            "peak_rss_kib": 49152,
+            "encoding_buffer_bytes": 1843202
+          }
+        },
+        {
+          "count": 1000,
+          "metadata_bytes": 8192,
+          "baseline": {
+            "prepare_ms": 267.56670299999996,
+            "prepare_and_verify_ms": 454.54862499999996,
+            "peak_rss_kib": 102152,
+            "encoding_buffer_bytes": 8340001
+          },
+          "budgeted": {
+            "prepare_ms": 200.368401,
+            "prepare_and_verify_ms": 416.55564400000003,
+            "peak_rss_kib": 100224,
+            "encoding_buffer_bytes": 9216002
+          }
+        },
+        {
+          "count": 1000,
+          "metadata_bytes": 65536,
+          "baseline": {
+            "prepare_ms": 687.945391,
+            "prepare_and_verify_ms": 1042.509037,
+            "peak_rss_kib": 545664,
+            "encoding_buffer_bytes": 65684001
+          },
+          "budgeted": {
+            "prepare_ms": 539.048816,
+            "prepare_and_verify_ms": 852.810382,
+            "peak_rss_kib": 495488,
+            "encoding_buffer_bytes": 66560002
+          }
+        }
+      ]
+    },
+    {
+      "name": "pass3",
+      "samples": 30,
+      "complete_parity": true,
+      "workloads": [
+        {
+          "count": 200,
+          "metadata_bytes": 8192,
+          "baseline": {
+            "prepare_ms": 21.073553000000004,
+            "prepare_and_verify_ms": 35.307305000000014,
+            "peak_rss_kib": 49548,
+            "encoding_buffer_bytes": 1668001
+          },
+          "budgeted": {
+            "prepare_ms": 21.142178000000015,
+            "prepare_and_verify_ms": 36.016704000000004,
+            "peak_rss_kib": 49152,
+            "encoding_buffer_bytes": 1843202
+          }
+        },
+        {
+          "count": 1000,
+          "metadata_bytes": 8192,
+          "baseline": {
+            "prepare_ms": 72.862794,
+            "prepare_and_verify_ms": 124.994483,
+            "peak_rss_kib": 102208,
+            "encoding_buffer_bytes": 8340001
+          },
+          "budgeted": {
+            "prepare_ms": 71.215172,
+            "prepare_and_verify_ms": 115.955424,
+            "peak_rss_kib": 100096,
+            "encoding_buffer_bytes": 9216002
+          }
+        },
+        {
+          "count": 1000,
+          "metadata_bytes": 65536,
+          "baseline": {
+            "prepare_ms": 786.085786,
+            "prepare_and_verify_ms": 1264.694116,
+            "peak_rss_kib": 546536,
+            "encoding_buffer_bytes": 65684001
+          },
+          "budgeted": {
+            "prepare_ms": 559.328387,
+            "prepare_and_verify_ms": 946.4163759999999,
+            "peak_rss_kib": 495488,
+            "encoding_buffer_bytes": 66560002
+          }
+        }
+      ]
+    }
+  ]
+}

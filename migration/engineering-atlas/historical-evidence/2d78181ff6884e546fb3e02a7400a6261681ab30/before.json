@@ -1,0 +1,50 @@
+{
+  "fixture_mode": "generated identity mutations of retained public card; no provider requests",
+  "cases": [
+    {
+      "case": "wrong source video",
+      "baseline_accepted": true,
+      "current_accepted": true
+    },
+    {
+      "case": "duplicate source ID",
+      "baseline_accepted": true,
+      "current_accepted": true
+    },
+    {
+      "case": "wrong card identity",
+      "baseline_accepted": true,
+      "current_accepted": true
+    },
+    {
+      "case": "wrong player video",
+      "baseline_accepted": true,
+      "current_accepted": true
+    },
+    {
+      "case": "wrong cover video",
+      "baseline_accepted": true,
+      "current_accepted": true
+    },
+    {
+      "case": "unreviewed source route",
+      "baseline_accepted": true,
+      "current_accepted": true
+    },
+    {
+      "case": "empty player list",
+      "baseline_accepted": true,
+      "current_accepted": true
+    },
+    {
+      "case": "multiple unrelated players",
+      "baseline_accepted": true,
+      "current_accepted": true
+    },
+    {
+      "case": "unrelated gallery thumbnail",
+      "baseline_accepted": true,
+      "current_accepted": true
+    }
+  ]
+}
