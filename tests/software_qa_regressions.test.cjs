@@ -107,6 +107,8 @@ test('everyday task phrasing retrieves relevant tools without treating disk as a
   assert.equal(find('I want to program in Python').some(a => ['ruff', 'gnu-radio'].includes(a.id)), false,
     'A language-specific editing request must not be displaced by a linter or a Python-based radio toolkit');
   assert.ok(find('Python linter').some(a => a.id === 'ruff'), 'Linting remains a distinct discoverable task');
+  assert.ok(find('program in C#').some(a => a.id === 'jetbrains-rider'), 'Verified Rider language support must be discoverable');
+  assert.equal(find('program in C#').some(a => a.id === 'ilspy'), false, 'Decompilation is not C# authoring');
 });
 
 test('specialist task wording resolves radio, robotics and validation without dropping qualifiers', async () => {
@@ -402,9 +404,11 @@ test('natural task search recovers video editing, PC backup and C++ development'
 test('exact product names lead their aliases and alternatives in product searches', async () => {
   const {indexCatalog, queryCatalog, parseState} = await model;
   const index = indexCatalog(catalog);
-  for (const [q, id] of [['Firefox', 'firefox'], ['Process Explorer', 'process-explorer'], ['Letos', 'letos']]) {
+  for (const [q, id] of [['Firefox', 'firefox'], ['Process Explorer', 'process-explorer'], ['Letos', 'letos'], ['3D Slicer', '3d-slicer']]) {
     assert.equal(queryCatalog(index, {...parseState(), q}, catalog)[0]?.id, id, q);
   }
+  assert.equal(queryCatalog(index, {...parseState(), q: '3D Slicer', platform: 'FreeBSD'}, catalog).some(a => a.id === '3d-slicer'), false);
+  assert.equal(queryCatalog(index, {...parseState(), q: '3D printing'}, catalog).some(a => a.id === '3d-slicer'), false);
 });
 
 test('obsolete deep-link filters are cleared without changing a valid query or platform', async () => {

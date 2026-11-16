@@ -47,6 +47,22 @@ remaining gaps and any failed or inconclusive observations.
 
 Research writes the three `*-wave2-expanded.json` partitions and matching decision-guide files. Integration owns shared taxonomy, builders, runtime behavior, tests, generated output and publication. New categories should form useful comparison sets where possible. Application count alone is not a quality measure.
 
+## Integrated research outcome
+
+The reviewed integration on **2026-11-16** contains **1,069 applications, 373 categories and 203 decision guides**. Against the saved baseline, that adds **333 applications, 87 categories and 118 guides** while preserving all 736 prior application identities. Source URL and alternative-link totals are recomputed in [coverage.json](coverage.json); [expansion-progress.json](expansion-progress.json) records the exact before/after comparison, including the added identities.
+
+Comparison depth improved in **34 of the original 112 single-application categories**. The integrated snapshot still has **102 single-application categories**, including new specialist tasks. The research backlog therefore prioritizes peer comparisons and unresolved evidence, rather than assuming that broad family coverage establishes a complete workflow. The [refresh queue](refresh-queue.json) identifies the current licensing, pricing, maintenance and source-age work; the [coverage priorities](../../data/software/coverage-priorities.json) distinguish established domains from the next research questions.
+
+The three specialist partitions contribute 112 creative/scientific, 118 development/business/gaming and 102 systems/communication/radio records. The separately documented GNU grep record completes the 333 additions. The records retain official distribution routes, claim-specific primary sources, host and edition restrictions, conditional recommendations, and explicit unknowns. Independent source reviews and their limits are recorded in [systems-final-review.json](systems-final-review.json), [creative-review-report.json](creative-review-report.json), [development-audit.json](development-audit.json) and [rider-source-review.json](rider-source-review.json).
+
+The interface now includes a searchable, paginated decision-guide directory with operating-system, license, pricing and maintenance constraints retained when a guide opens. All current categories have explicit readable labels; existing category IDs and aliases remain stable. Nine capability assertions distinguish documented offline PDF chat, recorded-audio restoration and live microphone filtering. The [search experiment](search-benchmark.md) remains one measured comparison with an independent output oracle and environmental limits, not a general product performance ranking.
+
+## Recovery and publication
+
+An interrupted large-file upload left the generated catalog bundle unavailable in the remote checkpoint. The source records, research evidence, application changes and Wiki pages were recovered from uploaded Git objects. Rebuilding reproduced the 1,019-application checkpoint's exact catalog blob before the remaining research was restored and integrated.
+
+Repository-hosted software preparation regenerates the catalog and related Wiki pages from canonical source files, then refreshes only the four software runtime allowlist hashes. This makes the large generated bundle reproducible without manually retransmitting it. Preparation does not by itself establish a release: the final branch must pass its source, preservation, search, runtime and link checks, followed by verification of the served catalog and the actual live GitHub Wiki. Current publication results belong in the final verification receipt; this research summary does not claim that those pending checks have already passed.
+
 ## Next
 
 Execute the highest verifiable rung: sourced expansion, measurable comparison-depth improvements, integration and live publication. All required publication actions are authorized by the user's request.

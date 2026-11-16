@@ -8,11 +8,13 @@ on:
       - 'data/software/**'
       - 'src/software/**'
       - 'scripts/build_software_catalog.py'
+      - 'scripts/prepare_software_publication.py'
       - 'scripts/check_software_links.py'
       - 'scripts/report_software_coverage.py'
       - 'scripts/software_browser_checks.cjs'
       - 'tests/software*'
       - '.github/workflows/athena-software-audit.yml'
+      - '.github/workflows/athena-software-prepare.yml'
 permissions:
   contents: read
 concurrency:

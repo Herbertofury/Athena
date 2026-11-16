@@ -1,0 +1,1489 @@
+{
+  "schema_version": 1,
+  "reviewed_at": "2026-11-16",
+  "scope": "Targeted final systems lifecycle/platform/licensing review, Rider language metadata, and independent development/creative source and model QA",
+  "methodology": [
+    "Rechecked primary official sources; preserve prior source history and add dated observations.",
+    "Retain hashes and paraphrased findings; do not republish full third-party pages.",
+    "HTTP reachability is recorded separately from claim interpretation and does not establish installed compatibility."
+  ],
+  "observations": [
+    {
+      "app_id": "wsjt-x",
+      "url": "https://wsjtx.github.io/wsjtx/",
+      "checked_at": "2026-11-16",
+      "supports": [
+        "identity",
+        "features",
+        "platforms",
+        "maintenance"
+      ],
+      "observed_facts": [
+        "Official project homepage identifies WSJT-X 3.0.2 released 18 June 2026 and desktop support for Windows, macOS and Linux."
+      ],
+      "retrieval": {
+        "method": "HTTP GET",
+        "http_status": 200,
+        "final_url": "https://wsjtx.github.io/wsjtx/",
+        "retrieved_at": "2026-11-16T18:15:17.311289+00:00",
+        "sha256": "938f666beb4be11fd70e92b79031ca2f956a6d8a7cde8b24ee1c0ce5cf186fbb",
+        "byte_length": 11204
+      }
+    },
+    {
+      "app_id": "wsjt-x",
+      "url": "https://wsjtx.github.io/wsjtx/downloads.html",
+      "checked_at": "2026-11-16",
+      "supports": [
+        "platforms",
+        "downloads"
+      ],
+      "observed_facts": [
+        "Official distribution page links platform-specific installers and Linux packages."
+      ],
+      "retrieval": {
+        "method": "HTTP GET",
+        "http_status": 200,
+        "final_url": "https://wsjtx.github.io/wsjtx/downloads.html",
+        "retrieved_at": "2026-11-16T18:15:17.322979+00:00",
+        "sha256": "75bc4f204e4175b5e0df287ce641b4d444f4127fdae9bd2783b873bfca08c816",
+        "byte_length": 6175
+      }
+    },
+    {
+      "app_id": "sdruno",
+      "url": "https://www.sdrplay.com/sdruno/",
+      "checked_at": "2026-11-16",
+      "supports": [
+        "maintenance"
+      ],
+      "observed_facts": [
+        "Vendor explicitly identifies SDRuno as end of life while preserving installer and manual access."
+      ],
+      "retrieval": {
+        "method": "HTTP GET",
+        "http_status": 200,
+        "final_url": "https://sdrplay.com/sdruno/",
+        "retrieved_at": "2026-11-16T18:15:24.663116+00:00",
+        "sha256": "c631110d99bd97117d67bf3e46538120f6d5134218e8bc2148b598e98ed76589",
+        "byte_length": 127240
+      }
+    },
+    {
+      "app_id": "sdrconnect",
+      "url": "https://www.sdrplay.com/sdrconnect/",
+      "checked_at": "2026-11-16",
+      "supports": [
+        "platforms",
+        "downloads"
+      ],
+      "observed_facts": [
+        "Vendor lists Windows, Intel and ARM macOS, and Linux packages; the original RSP1 is excluded. Ubuntu LTS is the tested Linux distribution family."
+      ],
+      "retrieval": {
+        "method": "HTTP GET",
+        "http_status": 200,
+        "final_url": "https://sdrplay.com/sdrconnect/",
+        "retrieved_at": "2026-11-16T18:15:23.147160+00:00",
+        "sha256": "e84ef8c6df1acf53f36be8553efd1312cd14efcb307111b5cc0a16e137f2544b",
+        "byte_length": 135650
+      }
+    },
+    {
+      "app_id": "corectrl",
+      "url": "https://gitlab.com/corectrl/corectrl/-/raw/master/README.md",
+      "checked_at": "2026-11-16",
+      "supports": [
+        "features",
+        "platforms",
+        "maintenance",
+        "downloads"
+      ],
+      "observed_facts": [
+        "Current README limits work to maintenance and bug fixes, with no new features or hardware support. Its Installation section lists distribution packages, including packages maintained independently."
+      ],
+      "retrieval": {
+        "method": "HTTP GET",
+        "http_status": 200,
+        "final_url": "https://gitlab.com/corectrl/corectrl/-/raw/master/README.md",
+        "retrieved_at": "2026-11-16T18:15:18.676867+00:00",
+        "sha256": "4bff2afcec408c0eccd8095b98e6a60467a118df3b2c3e3e4c9e11e9dcf28e83",
+        "byte_length": 4939
+      }
+    },
+    {
+      "app_id": "openscap",
+      "url": "https://github.com/OpenSCAP/openscap",
+      "checked_at": "2026-11-16",
+      "supports": [
+        "features",
+        "license",
+        "platforms"
+      ],
+      "observed_facts": [
+        "Current README explicitly voids Microsoft Windows support and identifies the SCAP command-line toolkit."
+      ],
+      "retrieval": {
+        "method": "HTTP GET",
+        "http_status": 200,
+        "final_url": "https://github.com/OpenSCAP/openscap",
+        "retrieved_at": "2026-11-16T18:15:17.416425+00:00",
+        "sha256": "e71f8d1109c1fbffe683550f02700a9295c4f1ddb5b8c3b2df327ce340383694",
+        "byte_length": 312901
+      }
+    },
+    {
+      "app_id": "js8call",
+      "url": "https://js8call.com/",
+      "checked_at": "2026-11-16",
+      "supports": [
+        "identity",
+        "features",
+        "platforms",
+        "downloads",
+        "maintenance"
+      ],
+      "observed_facts": [
+        "Official homepage directs users to JS8Call-Improved, identifies release 3.0.3 dated 12 July 2026, and lists Windows, macOS and Linux."
+      ],
+      "retrieval": {
+        "method": "HTTP GET",
+        "http_status": 200,
+        "final_url": "https://js8call.com/",
+        "retrieved_at": "2026-11-16T18:15:18.363226+00:00",
+        "sha256": "39016401c70c5cb7f41d5d4e7e7175fe051bc8f024f14413596acfba2a24caa6",
+        "byte_length": 16440
+      }
+    },
+    {
+      "app_id": "artemis-rgb",
+      "url": "https://raw.githubusercontent.com/Artemis-RGB/Artemis/master/LICENSE",
+      "checked_at": "2026-11-16",
+      "supports": [
+        "license"
+      ],
+      "observed_facts": [
+        "The license is PolyForm Noncommercial 1.0.0, with permitted noncommercial uses; this is not an unrestricted open-source license."
+      ],
+      "retrieval": {
+        "method": "HTTP GET",
+        "http_status": 200,
+        "final_url": "https://raw.githubusercontent.com/Artemis-RGB/Artemis/master/LICENSE",
+        "retrieved_at": "2026-11-16T18:15:17.099198+00:00",
+        "sha256": "ffcca38841adb694b6f380647e15f17c446a4d1656fed51a1e2041d064c94cc8",
+        "byte_length": 4563
+      }
+    },
+    {
+      "app_id": "artemis-rgb",
+      "url": "https://artemis-rgb.com/",
+      "checked_at": "2026-11-16",
+      "supports": [
+        "identity"
+      ],
+      "observed_facts": [
+        "Retrieved a minimal JavaScript application shell; current pricing cannot be established from its static text."
+      ],
+      "retrieval": {
+        "method": "HTTP GET",
+        "http_status": 200,
+        "final_url": "https://artemis-rgb.com/",
+        "retrieved_at": "2026-11-16T18:15:17.178444+00:00",
+        "sha256": "93b528ef8b210ac6501f969fc391eef4ad44a8e73fb5b961496e01daaff2f2aa",
+        "byte_length": 434
+      }
+    },
+    {
+      "app_id": "signalrgb",
+      "url": "https://signalrgb.com/linux/",
+      "checked_at": "2026-11-16",
+      "supports": [
+        "platforms",
+        "downloads"
+      ],
+      "observed_facts": [
+        "Official Linux page identifies a beta with listed Arch and Debian-family distributions, minimum OS requirements, and hardware/feature compatibility caveats."
+      ],
+      "retrieval": {
+        "method": "HTTP GET",
+        "http_status": 200,
+        "final_url": "https://signalrgb.com/linux/",
+        "retrieved_at": "2026-11-16T18:15:17.279251+00:00",
+        "sha256": "7f89d0470f34ba25afa08beec7737e9b0719a411615272b6e7f20d2a247340f5",
+        "byte_length": 86983
+      }
+    },
+    {
+      "app_id": "signalrgb",
+      "url": "https://signalrgb.com/terms/",
+      "checked_at": "2026-11-16",
+      "supports": [
+        "license",
+        "pricing"
+      ],
+      "observed_facts": [
+        "Vendor terms grant use for personal, noncommercial purposes; Pro subscriptions and Light Points have separate terms."
+      ],
+      "retrieval": {
+        "method": "HTTP GET",
+        "http_status": 200,
+        "final_url": "https://signalrgb.com/terms/",
+        "retrieved_at": "2026-11-16T18:15:20.963486+00:00",
+        "sha256": "f2cbeadc486ba7cc38b7af761d18889df3dbe5db2b8686285783a73243c6f33d",
+        "byte_length": 80363
+      }
+    },
+    {
+      "app_id": "chirp",
+      "url": "https://chirpmyradio.com/projects/chirp/wiki/Download",
+      "checked_at": "2026-11-16",
+      "supports": [
+        "downloads",
+        "platforms",
+        "features",
+        "maintenance",
+        "pricing"
+      ],
+      "observed_facts": [
+        "Official download page distinguishes maintained current CHIRP from legacy builds that receive no further updates. Windows ARM compatibility is reported by users but not guaranteed."
+      ],
+      "retrieval": {
+        "method": "HTTP GET",
+        "http_status": 200,
+        "final_url": "https://chirpmyradio.com/projects/chirp/wiki/Download",
+        "retrieved_at": "2026-11-16T18:15:20.917557+00:00",
+        "sha256": "f85f78738dd6dccb84fb3d1841d0372623b0bb034f927bb815fa15c112326c8d",
+        "byte_length": 35422
+      }
+    },
+    {
+      "app_id": "openocd",
+      "url": "https://github.com/openocd-org/openocd/blob/master/COPYING",
+      "checked_at": "2026-11-16",
+      "supports": [
+        "license"
+      ],
+      "observed_facts": [
+        "Official read-only mirror specifies GPL-2.0-or-later and points to additional per-file licensing rules."
+      ],
+      "retrieval": {
+        "method": "HTTP GET",
+        "http_status": 200,
+        "final_url": "https://github.com/openocd-org/openocd/blob/master/COPYING",
+        "retrieved_at": "2026-11-16T18:15:21.208028+00:00",
+        "sha256": "3065ec9ddd2d034455229f5abfe6f5e3e2187ab11efa138549cbb2be121b6a35",
+        "byte_length": 170628
+      }
+    },
+    {
+      "app_id": "openocd",
+      "url": "https://openocd.org/doc/html/index.html",
+      "checked_at": "2026-11-16",
+      "supports": [
+        "maintenance"
+      ],
+      "observed_facts": [
+        "Current user guide identifies itself as 0.12.0+dev documentation dated 16 November 2026. This does not establish a new stable release."
+      ],
+      "retrieval": {
+        "method": "HTTP GET",
+        "http_status": 200,
+        "final_url": "https://openocd.org/doc/html/index.html",
+        "retrieved_at": "2026-11-16T18:15:20.792806+00:00",
+        "sha256": "6afc000f4b548b9b132f4db74967c6d2024d6a11637f6f576be7884fb6444e69",
+        "byte_length": 44353
+      }
+    },
+    {
+      "app_id": "usb-network-gate",
+      "url": "https://www.electronic.us/products/usb-over-ethernet/",
+      "checked_at": "2026-11-16",
+      "supports": [
+        "platforms",
+        "pricing",
+        "features"
+      ],
+      "observed_facts": [
+        "Homepage advertises free access while listing Linux kernel support only through 5.x; neither establishes compatibility with current 6.x kernels."
+      ],
+      "retrieval": {
+        "method": "HTTP GET",
+        "http_status": 200,
+        "final_url": "https://www.electronic.us/products/usb-over-ethernet/",
+        "retrieved_at": "2026-11-16T18:15:21.445974+00:00",
+        "sha256": "795822d74d380d04b16598481e9bca370ca7ed698d1c12e9836874048eea120e",
+        "byte_length": 778082
+      }
+    },
+    {
+      "app_id": "usb-network-gate",
+      "url": "https://www.electronic.us/products/usb-over-ethernet/purchase/",
+      "checked_at": "2026-11-16",
+      "supports": [
+        "license",
+        "pricing"
+      ],
+      "observed_facts": [
+        "Vendor purchase page offers priced single-system and corporate licenses. Applicability alongside the free homepage offer remains unresolved."
+      ],
+      "retrieval": {
+        "method": "HTTP GET",
+        "http_status": 200,
+        "final_url": "https://www.electronic.us/products/usb-over-ethernet/purchase/",
+        "retrieved_at": "2026-11-16T18:15:21.451316+00:00",
+        "sha256": "ec071a77f662a0c2005aabe0533d2e8ed50f2ece566830d0ee03b5dd3f43bf06",
+        "byte_length": 488136
+      }
+    },
+    {
+      "app_id": "fluffychat",
+      "url": "https://www.matrix.org/blog/2026/10/30/this-week-in-matrix-2026-10-30/",
+      "checked_at": "2026-11-16",
+      "supports": [
+        "platforms",
+        "downloads"
+      ],
+      "observed_facts": [
+        "The FluffyChat maintainer announcement calls the new Windows and macOS distributions beta; macOS uses a capacity-limited TestFlight group."
+      ],
+      "retrieval": {
+        "method": "HTTP GET",
+        "http_status": 200,
+        "final_url": "https://www.matrix.org/blog/2026/10/30/this-week-in-matrix-2026-10-30/",
+        "retrieved_at": "2026-11-16T18:15:22.160923+00:00",
+        "sha256": "d799131ae975ee818569e56fd2349555698e7922cd9c5472e134dea7be00aced",
+        "byte_length": 64319
+      }
+    },
+    {
+      "app_id": "fldigi",
+      "url": "https://github.com/w1hkj/fldigi",
+      "checked_at": "2026-11-16",
+      "supports": [
+        "license",
+        "features"
+      ],
+      "observed_facts": [
+        "Current official repository identifies GPL-3.0 licensing; older manual wording must not override the source license."
+      ],
+      "retrieval": {
+        "method": "HTTP GET",
+        "http_status": 200,
+        "final_url": "https://github.com/w1hkj/fldigi",
+        "retrieved_at": "2026-11-16T18:15:21.761629+00:00",
+        "sha256": "399cddd4250267414070100abe2d480f6ebaa37911047400c7dfb7f7b5f52d2c",
+        "byte_length": 231512
+      }
+    },
+    {
+      "app_id": "jetbrains-rider",
+      "url": "https://www.jetbrains.com/rider/features/",
+      "checked_at": "2026-11-16",
+      "supports": [
+        "features",
+        "platforms"
+      ],
+      "observed_facts": [
+        "Official product features explicitly name C#, F# and VB.NET support on Windows, macOS and Linux."
+      ],
+      "retrieval": {
+        "method": "HTTP GET",
+        "http_status": 200,
+        "final_url": "https://www.jetbrains.com/rider/features/",
+        "retrieved_at": "2026-11-16T18:15:24.674651+00:00",
+        "sha256": "32a08fae7b1bf3a45e9709fc223f05a516386d7617de90492d26c1fa3e0d0188",
+        "byte_length": 59750
+      }
+    }
+  ],
+  "application_count": 102,
+  "guide_count": 30,
+  "corrections": [
+    {
+      "app_id": "wsjt-x",
+      "change": "Replace the retired SourceForge download route with current official GitHub Pages distribution and dated release evidence."
+    },
+    {
+      "app_id": "corectrl",
+      "change": "Point downloads to the actual README installation section; retain maintenance-only limitation."
+    },
+    {
+      "app_id": "artemis-rgb",
+      "change": "Keep source-available noncommercial licensing separate from unresolved current distribution pricing."
+    },
+    {
+      "app_id": "signalrgb",
+      "change": "Use actual vendor terms as license evidence and surface the personal/noncommercial restriction."
+    },
+    {
+      "app_id": "chirp",
+      "change": "Expose current-versus-legacy maintenance and Windows ARM compatibility boundaries."
+    },
+    {
+      "app_id": "openocd",
+      "change": "Cite exact GPL-2.0-or-later declaration and distinguish current development documentation from a stable release."
+    },
+    {
+      "app_id": "js8call",
+      "change": "Use canonical HTTPS homepage and document dated release activity of the continuation."
+    }
+  ],
+  "tests": [
+    {
+      "command": "node --test tests/software_catalog.test.cjs tests/software_qa_regressions.test.cjs",
+      "result": "passed",
+      "tests": 37,
+      "failures": 0,
+      "scope": "Pure model and LinkeDOM regression tests; not browser rendering or installed application testing."
+    },
+    {
+      "method": "Independent model queries against builder.load_catalog() without rewriting generated files",
+      "result": "passed",
+      "catalog_applications": 1019,
+      "positive_queries": [
+        {
+          "query": "program in C#",
+          "expected": "jetbrains-rider",
+          "results": 1,
+          "top_ids": [
+            "jetbrains-rider"
+          ]
+        },
+        {
+          "query": "program in Python",
+          "expected": "thonny",
+          "results": 4,
+          "top_ids": [
+            "positron",
+            "spyder",
+            "thonny",
+            "marimo"
+          ]
+        },
+        {
+          "query": "I want to program in Python",
+          "expected": "thonny",
+          "results": 4,
+          "top_ids": [
+            "positron",
+            "spyder",
+            "thonny",
+            "marimo"
+          ]
+        },
+        {
+          "query": "C# IDE",
+          "expected": "jetbrains-rider",
+          "results": 2,
+          "top_ids": [
+            "jetbrains-rider",
+            "ilspy"
+          ]
+        },
+        {
+          "query": "software defined radio",
+          "expected": "sdrpp",
+          "results": 29,
+          "top_ids": [
+            "sdr-console",
+            "sdrsharp",
+            "sdrpp",
+            "cubicsdr",
+            "gnu-radio"
+          ]
+        },
+        {
+          "query": "software-defined radio",
+          "expected": "gqrx",
+          "results": 29,
+          "top_ids": [
+            "sdr-console",
+            "sdrsharp",
+            "sdrpp",
+            "cubicsdr",
+            "gnu-radio"
+          ]
+        },
+        {
+          "query": "simulate industrial robots",
+          "expected": "robodk",
+          "results": 4,
+          "top_ids": [
+            "coppeliasim",
+            "gazebo",
+            "webots",
+            "robodk"
+          ]
+        },
+        {
+          "query": "validate GitHub Actions",
+          "expected": "actionlint",
+          "results": 1,
+          "top_ids": [
+            "actionlint"
+          ]
+        },
+        {
+          "query": "chat with PDF offline",
+          "expected": "gpt4all",
+          "results": 3,
+          "top_ids": [
+            "anythingllm",
+            "gpt4all",
+            "lm-studio"
+          ]
+        },
+        {
+          "query": "remove background noise",
+          "expected": "audacity",
+          "results": 2,
+          "top_ids": [
+            "audacity",
+            "reaper"
+          ]
+        },
+        {
+          "query": "remove duplicate photos",
+          "expected": "dupeguru",
+          "results": 2,
+          "top_ids": [
+            "czkawka---krokiet",
+            "dupeguru"
+          ]
+        },
+        {
+          "query": "scan documents",
+          "expected": "naps2",
+          "results": 4,
+          "top_ids": [
+            "abbyy-finereader-pdf",
+            "naps2",
+            "ocrmypdf",
+            "tesseract"
+          ]
+        },
+        {
+          "query": "extract Unity game assets",
+          "expected": "assetripper",
+          "results": 1,
+          "top_ids": [
+            "assetripper"
+          ]
+        },
+        {
+          "query": "record my screen",
+          "expected": "obs-studio",
+          "results": 6,
+          "top_ids": [
+            "screentogif",
+            "vokoscreenng",
+            "obs-studio",
+            "sharex",
+            "playwright"
+          ]
+        },
+        {
+          "query": "make a disk image",
+          "expected": "clonezilla",
+          "results": 17,
+          "top_ids": [
+            "clonezilla",
+            "diskgenius",
+            "gnome-disks",
+            "macrium-reflect",
+            "rescuezilla"
+          ]
+        },
+        {
+          "query": "MATLAB alternative",
+          "expected": "gnu-octave",
+          "results": 4,
+          "top_ids": [
+            "gnu-octave",
+            "jupyterlab",
+            "scilab",
+            "wolfram-mathematica"
+          ]
+        },
+        {
+          "query": "Photoshop alternatives",
+          "expected": "gimp",
+          "results": 3,
+          "top_ids": [
+            "affinity",
+            "gimp",
+            "krita"
+          ]
+        },
+        {
+          "query": "Signal",
+          "expected": "signal",
+          "results": 26,
+          "top_ids": [
+            "signal",
+            "signalrgb",
+            "digilent-waveforms",
+            "openhantek6022",
+            "pulseview"
+          ]
+        },
+        {
+          "query": "CHIRP",
+          "expected": "chirp",
+          "results": 1,
+          "top_ids": [
+            "chirp"
+          ]
+        },
+        {
+          "query": "JS8Call",
+          "expected": "js8call",
+          "results": 1,
+          "top_ids": [
+            "js8call"
+          ]
+        },
+        {
+          "query": "WSJT-X",
+          "expected": "wsjt-x",
+          "results": 2,
+          "top_ids": [
+            "wsjt-x",
+            "jtdx"
+          ]
+        },
+        {
+          "query": "Python linter",
+          "expected": "ruff",
+          "results": 1,
+          "top_ids": [
+            "ruff"
+          ]
+        }
+      ],
+      "negative_qualifier_queries": 3,
+      "platform_guide_checks": [
+        "Windows",
+        "Linux",
+        "macOS"
+      ],
+      "other_assertions": [
+        "No ILSpy for C# authoring",
+        "No guides for empty eligibility",
+        "Offline PDF guide discoverability",
+        "No catalog mutation"
+      ]
+    },
+    {
+      "method": "Independent final application snapshot checks against live model and builder.load_catalog()",
+      "catalog_applications": 1069,
+      "catalog_decision_guides": 173,
+      "result": "passed",
+      "queries": {
+        "remove background noise": [
+          "acoustica",
+          "adobe-audition",
+          "audacity",
+          "izotope-rx",
+          "reaper"
+        ],
+        "reduce microphone noise": [
+          "easy-effects"
+        ],
+        "program in C#": [
+          "jetbrains-rider"
+        ]
+      },
+      "capability_provenance_checks": [
+        {
+          "app_id": "easy-effects",
+          "capability": "live-audio-noise-suppression",
+          "source_count": 4
+        },
+        {
+          "app_id": "izotope-rx",
+          "capability": "recorded-audio-noise-reduction",
+          "source_count": 1
+        },
+        {
+          "app_id": "acoustica",
+          "capability": "recorded-audio-noise-reduction",
+          "source_count": 2
+        },
+        {
+          "app_id": "adobe-audition",
+          "capability": "recorded-audio-noise-reduction",
+          "source_count": 1
+        }
+      ],
+      "scope": "Semantic query direction and provenance integrity; no installed audio testing or browser rendering.",
+      "snapshot_note": "Checked after final application additions and before the creative guide expansion finished; the guide count is a point-in-time observation."
+    },
+    {
+      "method": "Owned-file JSON parsing, identity preservation against the current Git baseline, and git diff --check",
+      "result": "passed",
+      "json_files": 6,
+      "systems_applications_preserved": 102,
+      "systems_guides_preserved": 30,
+      "existing_development_partition_changed_ids": [
+        "jetbrains-rider"
+      ],
+      "scope": "Confirms narrow edit scope and retained systems identities; no generated catalog or external publication was changed by this review."
+    }
+  ],
+  "reviewed_files": [
+    {
+      "path": "src/software/model.mjs",
+      "sha256": "dd953a19a49cbad767897f6ea2fefcc7e7790a34ab38d88ef9ae80c6f54c548b"
+    },
+    {
+      "path": "src/software/index.mjs",
+      "sha256": "f35e6e78ff51e9c73d6dc7aa47b367a312fae066da3cf4e54491419cc70f7e69"
+    },
+    {
+      "path": "data/software/systems-wave2-expanded.json",
+      "sha256": "11b57d1a798966284adfe9016a9f831a5e972b60d3913abb074dab9dad72643b"
+    },
+    {
+      "path": "data/software/systems-wave2-recipes.json",
+      "sha256": "b682c1f09bacda5d9c98589b622e490969df3779ab6bf24125c19897d50af2dd"
+    }
+  ],
+  "limitations": [
+    "Systems review preserved all 102 rows and 30 guides; it focuses on the listed lifecycle, license and compatibility risks, not a fresh exhaustive review of every claim.",
+    "The 19 successful HTTP retrievals are point-in-time observations and do not replace the whole-catalog link audit.",
+    "Cross-agent source checks are recorded separately below when complete."
+  ],
+  "independent_development_review": {
+    "scope": "12 existing high-risk records plus eight newly restored records; focused edition, license, platform and lifecycle boundaries. Not a full install or feature audit.",
+    "retrievals": [
+      {
+        "app_id": "frappe-books",
+        "url": "https://raw.githubusercontent.com/frappe/frappe-books/develop/README.md",
+        "checked_at": "2026-11-16",
+        "http_status": 200,
+        "final_url": "https://raw.githubusercontent.com/frappe/frappe-books/develop/README.md",
+        "sha256": "b7580fb774321abbc2e39009e6b6e2ddbad7257245be9206c0c99b01f75f32e2",
+        "byte_length": 4177,
+        "retrieved_at": "2026-11-16T18:16:57.976650+00:00"
+      },
+      {
+        "app_id": "frappe-books",
+        "url": "https://raw.githubusercontent.com/frappe/frappe-books/develop/license.txt",
+        "checked_at": "2026-11-16",
+        "http_status": 200,
+        "final_url": "https://raw.githubusercontent.com/frappe/frappe-books/develop/license.txt",
+        "sha256": "8486a10c4393cee1c25392769ddd3b2d6c242d6ec7928e1414efff7dfb2f07ef",
+        "byte_length": 34523,
+        "retrieved_at": "2026-11-16T18:16:57.999686+00:00"
+      },
+      {
+        "app_id": "appsmith",
+        "url": "https://raw.githubusercontent.com/appsmithorg/appsmith/release/README.md",
+        "checked_at": "2026-11-16",
+        "http_status": 200,
+        "final_url": "https://raw.githubusercontent.com/appsmithorg/appsmith/release/README.md",
+        "sha256": "72cc207105ff9cd86cbaba208369c5a325612b667bb0a73fd50a537a3d16635e",
+        "byte_length": 54357,
+        "retrieved_at": "2026-11-16T18:16:58.020163+00:00"
+      },
+      {
+        "app_id": "appsmith",
+        "url": "https://raw.githubusercontent.com/appsmithorg/appsmith/release/LICENSE",
+        "checked_at": "2026-11-16",
+        "http_status": 200,
+        "final_url": "https://raw.githubusercontent.com/appsmithorg/appsmith/release/LICENSE",
+        "sha256": "566320e116dc7f9ee1846e2e7b0d3e39ecb74468e56b8542d7fb3e2322fae3b3",
+        "byte_length": 11310,
+        "retrieved_at": "2026-11-16T18:16:57.951196+00:00"
+      },
+      {
+        "app_id": "questdb",
+        "url": "https://raw.githubusercontent.com/questdb/questdb/master/README.md",
+        "checked_at": "2026-11-16",
+        "http_status": 200,
+        "final_url": "https://raw.githubusercontent.com/questdb/questdb/master/README.md",
+        "sha256": "d85c508fd47434729c07af97928d01b1cd54bf14af90b0c6c982c36a3c302c5d",
+        "byte_length": 57096,
+        "retrieved_at": "2026-11-16T18:16:58.000858+00:00"
+      },
+      {
+        "app_id": "questdb",
+        "url": "https://raw.githubusercontent.com/questdb/questdb/master/LICENSE.txt",
+        "checked_at": "2026-11-16",
+        "http_status": 200,
+        "final_url": "https://raw.githubusercontent.com/questdb/questdb/master/LICENSE.txt",
+        "sha256": "58d1e17ffe5109a7ae296caafcadfdbe6a7d176f0bc4ab01e12a689b0499d8bd",
+        "byte_length": 11357,
+        "retrieved_at": "2026-11-16T18:16:57.983032+00:00"
+      },
+      {
+        "app_id": "flyway",
+        "url": "https://raw.githubusercontent.com/flyway/flyway/main/README.md",
+        "checked_at": "2026-11-16",
+        "http_status": 200,
+        "final_url": "https://raw.githubusercontent.com/flyway/flyway/main/README.md",
+        "sha256": "180d1b38b7c507f3e2521f7b5fe0ac779d8ce9164da69568da033a9adb76435a",
+        "byte_length": 4470,
+        "retrieved_at": "2026-11-16T18:16:57.989655+00:00"
+      },
+      {
+        "app_id": "flyway",
+        "url": "https://raw.githubusercontent.com/flyway/flyway/main/LICENSE.md",
+        "checked_at": "2026-11-16",
+        "http_status": 200,
+        "final_url": "https://raw.githubusercontent.com/flyway/flyway/main/LICENSE.md",
+        "sha256": "ae106d1b123c196a0c05465637292c69ae42f49725ce46b93abba84572ab14f0",
+        "byte_length": 10533,
+        "retrieved_at": "2026-11-16T18:16:57.973405+00:00"
+      },
+      {
+        "app_id": "liquibase",
+        "url": "https://raw.githubusercontent.com/liquibase/liquibase/main/README.md",
+        "checked_at": "2026-11-16",
+        "http_status": 200,
+        "final_url": "https://raw.githubusercontent.com/liquibase/liquibase/main/README.md",
+        "sha256": "dace8ce6a0f4f42a2ec38d3d6f8d6a0768d07af96abab2b81d4cb6dc10eb31a0",
+        "byte_length": 8196,
+        "retrieved_at": "2026-11-16T18:16:57.990843+00:00"
+      },
+      {
+        "app_id": "liquibase",
+        "url": "https://raw.githubusercontent.com/liquibase/liquibase/main/LICENSE.txt",
+        "checked_at": "2026-11-16",
+        "http_status": 200,
+        "final_url": "https://raw.githubusercontent.com/liquibase/liquibase/main/LICENSE.txt",
+        "sha256": "06a5644579563750de2a41006d75d2fe40149e22f90aea9d5fe919095f43a508",
+        "byte_length": 3688,
+        "retrieved_at": "2026-11-16T18:16:57.937529+00:00"
+      },
+      {
+        "app_id": "atlas",
+        "url": "https://raw.githubusercontent.com/ariga/atlas/master/README.md",
+        "checked_at": "2026-11-16",
+        "http_status": 200,
+        "final_url": "https://raw.githubusercontent.com/ariga/atlas/master/README.md",
+        "sha256": "8bfb6beac92426d01ba81ca614a3736730816be19a9ffec2c45851524f722eab",
+        "byte_length": 18353,
+        "retrieved_at": "2026-11-16T18:16:57.996564+00:00"
+      },
+      {
+        "app_id": "atlas",
+        "url": "https://raw.githubusercontent.com/ariga/atlas/master/LICENSE",
+        "checked_at": "2026-11-16",
+        "http_status": 200,
+        "final_url": "https://raw.githubusercontent.com/ariga/atlas/master/LICENSE",
+        "sha256": "58d1e17ffe5109a7ae296caafcadfdbe6a7d176f0bc4ab01e12a689b0499d8bd",
+        "byte_length": 11357,
+        "retrieved_at": "2026-11-16T18:16:57.959225+00:00"
+      },
+      {
+        "app_id": "atlas",
+        "url": "https://atlasgo.io/community-edition",
+        "checked_at": "2026-11-16",
+        "http_status": 200,
+        "final_url": "https://atlasgo.io/community-edition",
+        "sha256": "0fde6e700b77b05d84155803b0d5954e992b38763b51022b2cf15065a466eb83",
+        "byte_length": 89606,
+        "retrieved_at": "2026-11-16T18:17:03.787373+00:00"
+      },
+      {
+        "app_id": "kestra",
+        "url": "https://raw.githubusercontent.com/kestra-io/kestra/develop/README.md",
+        "checked_at": "2026-11-16",
+        "http_status": 200,
+        "final_url": "https://raw.githubusercontent.com/kestra-io/kestra/develop/README.md",
+        "sha256": "7a5e7b2a455732a1aabf8154b4217deefc1d48aea3fc5c9ebeed1e3f47ce9a12",
+        "byte_length": 22585,
+        "retrieved_at": "2026-11-16T18:17:03.063356+00:00"
+      },
+      {
+        "app_id": "kestra",
+        "url": "https://raw.githubusercontent.com/kestra-io/kestra/develop/LICENSE",
+        "checked_at": "2026-11-16",
+        "http_status": 200,
+        "final_url": "https://raw.githubusercontent.com/kestra-io/kestra/develop/LICENSE",
+        "sha256": "e3bf9bde61f66360a28222b262422f456143e6d796a3b30349d54971dbb8db1b",
+        "byte_length": 10767,
+        "retrieved_at": "2026-11-16T18:17:03.051224+00:00"
+      },
+      {
+        "app_id": "dbt-core",
+        "url": "https://raw.githubusercontent.com/dbt-labs/dbt-core/main/README.md",
+        "checked_at": "2026-11-16",
+        "http_status": 200,
+        "final_url": "https://raw.githubusercontent.com/dbt-labs/dbt-core/main/README.md",
+        "sha256": "a003fe448ca06aebb748467227d2dc8b8be263173c6c070400efb95dfb9cb618",
+        "byte_length": 4412,
+        "retrieved_at": "2026-11-16T18:17:02.994483+00:00"
+      },
+      {
+        "app_id": "dbt-core",
+        "url": "https://www.getdbt.com/dbt-fusion-engine-license-agreement",
+        "checked_at": "2026-11-16",
+        "http_status": 200,
+        "final_url": "https://www.getdbt.com/dbt-product-license-agreement",
+        "sha256": "c55b0f42b29646eca08a02b29a4b866e7816fd0967a7bc63cf21ea1a25f3d58c",
+        "byte_length": 804846,
+        "retrieved_at": "2026-11-16T18:17:08.963659+00:00"
+      },
+      {
+        "app_id": "metabase",
+        "url": "https://raw.githubusercontent.com/metabase/metabase/master/README.md",
+        "checked_at": "2026-11-16",
+        "http_status": 200,
+        "final_url": "https://raw.githubusercontent.com/metabase/metabase/master/README.md",
+        "sha256": "37214e0d5d01741dcfac8c3d47c399f8883e26f1bc07280eb4ef86e947b16d5f",
+        "byte_length": 5924,
+        "retrieved_at": "2026-11-16T18:17:02.991910+00:00"
+      },
+      {
+        "app_id": "metabase",
+        "url": "https://raw.githubusercontent.com/metabase/metabase/master/LICENSE.txt",
+        "checked_at": "2026-11-16",
+        "http_status": 200,
+        "final_url": "https://raw.githubusercontent.com/metabase/metabase/master/LICENSE.txt",
+        "sha256": "da3c9b0046ee968890e5f973e69a09c6e8fe7911a9bae3cb17d5109b5c7d8d75",
+        "byte_length": 855,
+        "retrieved_at": "2026-11-16T18:17:02.976369+00:00"
+      },
+      {
+        "app_id": "langfuse",
+        "url": "https://raw.githubusercontent.com/langfuse/langfuse/main/README.md",
+        "checked_at": "2026-11-16",
+        "http_status": 200,
+        "final_url": "https://raw.githubusercontent.com/langfuse/langfuse/main/README.md",
+        "sha256": "1dae4f71cec43ff4aa0b1309f450d019f1600ecc241d1374fad898a8b3c3abf0",
+        "byte_length": 58395,
+        "retrieved_at": "2026-11-16T18:17:03.032561+00:00"
+      },
+      {
+        "app_id": "langfuse",
+        "url": "https://raw.githubusercontent.com/langfuse/langfuse/main/LICENSE",
+        "checked_at": "2026-11-16",
+        "http_status": 200,
+        "final_url": "https://raw.githubusercontent.com/langfuse/langfuse/main/LICENSE",
+        "sha256": "9ee6ca42e813fb58bcad18bed834438503bcc997da3b452d3f9ad4af4292b6b3",
+        "byte_length": 1646,
+        "retrieved_at": "2026-11-16T18:17:03.023159+00:00"
+      },
+      {
+        "app_id": "argilla",
+        "url": "https://raw.githubusercontent.com/argilla-io/argilla/develop/README.md",
+        "checked_at": "2026-11-16",
+        "http_status": 200,
+        "final_url": "https://raw.githubusercontent.com/argilla-io/argilla/develop/README.md",
+        "sha256": "98e8326c9261d7b491670bb69c093bb78d41265fa94fdbd359dc3a46b2d98e34",
+        "byte_length": 9279,
+        "retrieved_at": "2026-11-16T18:17:03.059445+00:00"
+      },
+      {
+        "app_id": "argilla",
+        "url": "https://raw.githubusercontent.com/argilla-io/argilla/develop/LICENSE",
+        "checked_at": "2026-11-16",
+        "http_status": 200,
+        "final_url": "https://raw.githubusercontent.com/argilla-io/argilla/develop/LICENSE",
+        "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+        "byte_length": 11357,
+        "retrieved_at": "2026-11-16T18:17:03.064369+00:00"
+      },
+      {
+        "app_id": "buzz",
+        "url": "https://raw.githubusercontent.com/chidiwilliams/buzz/main/README.md",
+        "checked_at": "2026-11-16",
+        "http_status": 200,
+        "final_url": "https://raw.githubusercontent.com/chidiwilliams/buzz/main/README.md",
+        "sha256": "78a7b2086566f9a775a25a50a13bc0d8626b3750c2dbc40f431dfd5825b9a58d",
+        "byte_length": 5505,
+        "retrieved_at": "2026-11-16T18:17:03.034859+00:00"
+      },
+      {
+        "app_id": "buzz",
+        "url": "https://raw.githubusercontent.com/chidiwilliams/buzz/main/LICENSE",
+        "checked_at": "2026-11-16",
+        "http_status": 200,
+        "final_url": "https://raw.githubusercontent.com/chidiwilliams/buzz/main/LICENSE",
+        "sha256": "b0e7c03b4dce66170d7c321949a9dbaf74da0c911e475046b24ef7d5a2210bbd",
+        "byte_length": 1071,
+        "retrieved_at": "2026-11-16T18:17:06.773702+00:00"
+      }
+    ],
+    "findings": [
+      {
+        "app_id": "liquibase",
+        "outcome": "confirmed",
+        "note": "Current source license is FSL-1.1-ALv2 with later Apache conversion; source-available classification is retained."
+      },
+      {
+        "app_id": "atlas",
+        "outcome": "corrected-and-rechecked",
+        "note": "Rechecked the saved record: community-edition source now explicitly supports license, alongside the Apache source LICENSE.",
+        "original_finding": "Community documentation distinguishes minimal Apache build and proprietary standard/MSA features. Add license support to that source annotation."
+      },
+      {
+        "app_id": "flyway",
+        "outcome": "confirmed",
+        "note": "Apache source, Redgate distribution distinction and desktop platform claims are supported by the official README/license and product documentation."
+      },
+      {
+        "app_id": "dbt-core",
+        "outcome": "corrected-and-rechecked",
+        "note": "Rechecked the saved record: maintenance now cites v2.0.0 released 14 September 2026; a separate current Apache source-license citation is present.",
+        "source_url": "https://github.com/dbt-labs/dbt/releases/tag/v2.0.0",
+        "original_finding": "The record covers Rust v2, while original maintenance evidence referenced Python v1. Replace with v2.0.0 release and explicitly annotate Apache-source licensing evidence."
+      },
+      {
+        "app_id": "argilla",
+        "outcome": "confirmed",
+        "note": "README explicitly limits future work to fixes and patches; the limitation remains visible."
+      },
+      {
+        "app_id": "buzz",
+        "outcome": "corrected-and-rechecked",
+        "note": "Rechecked the saved record: v1.4.5 Intel and Apple Silicon packages are separated from the current main-branch Apple Silicon policy.",
+        "source_url": "https://github.com/chidiwilliams/buzz/releases/tag/v1.4.5",
+        "original_finding": "Release 1.4.5 is still the published latest and supports Intel Mac; the main branch Apple Silicon requirement must not be described as applying to every current published package."
+      },
+      {
+        "app_id": "frappe-books",
+        "outcome": "confirmed",
+        "note": "Current repository documents the Frappe server application and AGPL license, supporting a browser-hosted product distinction from the old Electron app."
+      },
+      {
+        "app_id": "langfuse",
+        "outcome": "confirmed",
+        "note": "MIT source excludes enterprise directories; service deployment and SDK roles are separate."
+      },
+      {
+        "app_id": "metabase",
+        "outcome": "confirmed",
+        "note": "Repository LICENSE distinguishes AGPL and commercial/enterprise sources; browser/service deployment is qualified."
+      },
+      {
+        "app_id": "appsmith",
+        "outcome": "confirmed",
+        "note": "Community Apache source is identified separately from commercial plans and browser/service deployment."
+      },
+      {
+        "app_id": "kestra",
+        "outcome": "confirmed",
+        "note": "Apache source and local Docker quick start support the browser/server deployment description; paid enterprise remains distinct."
+      },
+      {
+        "app_id": "questdb",
+        "outcome": "confirmed",
+        "note": "README distinguishes open-source manual Parquet conversion from Enterprise tiering, and native Apple Silicon from Docker-based alternatives."
+      },
+      {
+        "app_id": "devbox",
+        "outcome": "confirmed",
+        "note": "Official installation documentation explicitly separates native Linux/macOS from Windows through WSL2.",
+        "source_url": "https://github.com/jetify-com/docs/blob/main/docs/devbox/installing-devbox.mdx"
+      },
+      {
+        "app_id": "nix",
+        "outcome": "corrected-and-rechecked",
+        "note": "Rechecked the saved record: maintenance identifies 2.35.0 released 22 June 2026.",
+        "source_url": "https://nix.dev/manual/nix/2.35/release-notes/rl-2.35.html",
+        "original_finding": "Official manual dates release 2.35.0 to 22 June 2026; replace the vague year-only maintenance note."
+      },
+      {
+        "app_id": "evidence-core",
+        "outcome": "confirmed",
+        "note": "August 2026 announcement distinguishes Core local framework/CLI from Studio hosted controls and analytics agent; CLI docs list host architectures.",
+        "source_urls": [
+          "https://evidence.dev/blog/evidence-core",
+          "https://docs.evidence.dev/cli"
+        ]
+      },
+      {
+        "app_id": "npm-cli",
+        "outcome": "confirmed",
+        "note": "CLI LICENSE identifies Artistic-2.0 and separates dependencies and registry service terms.",
+        "source_url": "https://github.com/npm/cli/blob/latest/LICENSE"
+      },
+      {
+        "app_id": "cvat",
+        "outcome": "corrected-and-rechecked",
+        "note": "Rechecked the saved record: explicit free Community evidence is attached to README; LICENSE now supports licensing only.",
+        "source_url": "https://github.com/cvat-ai/cvat/blob/develop/README.md",
+        "original_finding": "README explicitly identifies Community as free and supports audio/3D annotation; price evidence belongs to README rather than the MIT permission text."
+      },
+      {
+        "app_id": "special-k",
+        "outcome": "confirmed",
+        "note": "README documents conditional Wine/DXVK use with per-game configuration; record correctly avoids claiming native Linux or universal compatibility.",
+        "source_url": "https://github.com/SpecialKO/SpecialK/blob/main/README.md"
+      },
+      {
+        "app_id": "ludusavi",
+        "outcome": "confirmed",
+        "note": "README supports Windows/macOS/Linux packages, registry saves and Proton/Steam Deck support with a manifest-driven workflow.",
+        "source_url": "https://github.com/mtkennerly/ludusavi/blob/master/README.md"
+      },
+      {
+        "app_id": "game-backup-monitor",
+        "outcome": "corrected-and-rechecked",
+        "note": "Rechecked the saved record: feature-complete scope with maintenance/minor updates, Windows 11 testing, Windows 10 testing limit and .NET Framework 4.8 are explicit.",
+        "source_url": "https://mikemaximus.github.io/gbm-web/",
+        "original_finding": "Homepage calls the application feature-complete with maintenance/minor updates; Windows 10 is no longer tested, while Windows 11 and .NET 4.8 are current targets."
+      }
+    ],
+    "reviewed_at": "2026-11-16",
+    "sampled_applications": 20,
+    "corrected_records": 6,
+    "unresolved_findings": 0,
+    "reviewed_file": {
+      "path": "data/software/development-wave2-expanded.json",
+      "sha256": "1aeb85c8e856a7e496731370b2a5e5e5306540f216e8b384be7afd3382d44ae9",
+      "application_count": 118
+    }
+  },
+  "independent_creative_review": {
+    "reviewed_at": "2026-11-16",
+    "scope": "Eight high-risk record checks plus four audio capability assertions, covering 11 distinct applications. This is a source/metadata sample, not installed feature testing.",
+    "sampled_unique_applications": 11,
+    "findings": [
+      {
+        "app_id": "webodm",
+        "outcome": "confirmed",
+        "note": "Current WebODM repository documents AGPLv3, ODX rather than ODM, free current official installers, and independence from OpenDroneMap. The record preserves those identity boundaries.",
+        "source_url": "https://raw.githubusercontent.com/WebODM/WebODM/master/README.md"
+      },
+      {
+        "app_id": "figtree",
+        "outcome": "corrected-and-rechecked",
+        "note": "Current README identifies PearTree as successor. The application source header explicitly declares GPL-2.0-or-later; the saved record now cites that source, qualifies bundled dependencies, and does not treat the May beta as continuing support.",
+        "source_urls": [
+          "https://raw.githubusercontent.com/rambaut/figtree/master/README.md",
+          "https://raw.githubusercontent.com/rambaut/figtree/master/src/figtree/application/FigTreeApplication.java"
+        ]
+      },
+      {
+        "app_id": "peartree",
+        "outcome": "corrected-and-rechecked",
+        "note": "MIT source and browser/native desktop scope confirmed; v1.3.2 assets are dated 13 October 2026. Pricing provenance was moved from the MIT/readme claim to the public distribution, and pricing notes limit the no-purchase observation to those packages and local browser app.",
+        "source_urls": [
+          "https://raw.githubusercontent.com/artic-network/peartree/main/README.md",
+          "https://github.com/artic-network/peartree/releases/tag/v1.3.2"
+        ]
+      },
+      {
+        "app_id": "flow5",
+        "outcome": "confirmed",
+        "note": "Official v7.58 release notes date the release to 25 October 2026, end future Linux packages and Intel Mac packages after this release, and identify removed optimization and advanced fuselage tools. These boundaries are exposed in the record.",
+        "source_url": "https://flow5.tech/docs/releasenotes.html"
+      },
+      {
+        "app_id": "hec-ras",
+        "outcome": "confirmed",
+        "note": "Official distribution separates Windows graphical software from Linux compute engines and WSL invocation. Government terms restrict modification and reverse engineering; free public availability is not classified as open source.",
+        "source_urls": [
+          "https://www.hec.usace.army.mil/software/hec-ras/download.aspx",
+          "https://www.hec.usace.army.mil/software/terms_and_conditions.aspx"
+        ]
+      },
+      {
+        "app_id": "balabolka",
+        "outcome": "confirmed",
+        "note": "Current official terms restrict free use to noncommercial work and require licenses for commercial organizations and paid distribution of generated audio. Application and voice rights remain separate.",
+        "source_url": "https://www.cross-plus-a.com/license.htm"
+      },
+      {
+        "app_id": "firecapture",
+        "outcome": "confirmed",
+        "note": "Official terms grant private use, prohibit commercial use, and require permission for alteration or redistribution. The record classifies the application as proprietary and limits its recommendation accordingly.",
+        "source_url": "https://firecapture.de/license.html"
+      },
+      {
+        "app_id": "acoustica",
+        "outcome": "confirmed",
+        "note": "Official documentation separates perpetual Standard/Premium/Ultimate entitlements and explicitly labels x86-64 Linux support a public beta. Restoration and host-plugin capabilities are recorded without inferring system-wide microphone routing.",
+        "source_urls": [
+          "https://acondigital.com/products/acoustica/",
+          "https://acondigital.com/acoustica8-linux/"
+        ]
+      }
+    ],
+    "audio_capabilities": [
+      {
+        "app_id": "easy-effects",
+        "capability": "live-audio-noise-suppression",
+        "outcome": "confirmed",
+        "note": "Upstream manual explicitly routes microphone audio through processing before a recording application. RNNoise/DeepFilterNet documentation, separately installed models, package dependencies and hardware-default routing restrictions support the saved conditions.",
+        "source_urls": [
+          "https://wwmm.github.io/easyeffects/",
+          "https://wwmm.github.io/easyeffects/plugins/rnnoise.html",
+          "https://wwmm.github.io/easyeffects/plugins/deepfilternet.html",
+          "https://raw.githubusercontent.com/wwmm/easyeffects/master/README.md"
+        ]
+      },
+      {
+        "app_id": "izotope-rx",
+        "capability": "recorded-audio-noise-reduction",
+        "outcome": "confirmed",
+        "note": "Vendor tutorial documents recorded Spectral De-noise, learning a representative noise selection, previewing output and listening to noise-only output. Edition limits remain explicit and no operating-system microphone setup is claimed.",
+        "source_url": "https://www.izotope.com/community/blog/how-to-clean-up-voice-recordings-video-podcasts"
+      },
+      {
+        "app_id": "acoustica",
+        "capability": "recorded-audio-noise-reduction",
+        "outcome": "confirmed",
+        "note": "Vendor product and Linux-beta pages support recorded restoration with edition-specific in-app and plugin entitlements. The saved assertion does not equate real-time preview or DAW operation with system-wide microphone filtering.",
+        "source_urls": [
+          "https://acondigital.com/products/acoustica/",
+          "https://acondigital.com/acoustica8-linux/"
+        ]
+      },
+      {
+        "app_id": "adobe-audition",
+        "capability": "recorded-audio-noise-reduction",
+        "outcome": "confirmed",
+        "note": "Adobe reference documents Waveform Editor noise prints, Noise Reduction and DeNoise, with matching-source and artifact considerations. The record limits the assertion to file/session restoration.",
+        "source_url": "https://helpx.adobe.com/audition/desktop/effects-reference/noise-reduction-restoration-effects.html"
+      }
+    ],
+    "retrievals": [
+      {
+        "app_id": "webodm",
+        "url": "https://raw.githubusercontent.com/WebODM/WebODM/master/README.md",
+        "retrieval": {
+          "method": "HTTP GET",
+          "http_status": 200,
+          "final_url": "https://raw.githubusercontent.com/WebODM/WebODM/master/README.md",
+          "retrieved_at": "2026-11-16T18:20:42.992476+00:00",
+          "sha256": "ebec9c3e5db513af8b20e08eb4b321acaaf929b3267f8e96a221af6db8cddd56",
+          "byte_length": 2355
+        }
+      },
+      {
+        "app_id": "figtree",
+        "url": "https://raw.githubusercontent.com/rambaut/figtree/master/README.md",
+        "retrieval": {
+          "method": "HTTP GET",
+          "http_status": 200,
+          "final_url": "https://raw.githubusercontent.com/rambaut/figtree/master/README.md",
+          "retrieved_at": "2026-11-16T18:20:43.128299+00:00",
+          "sha256": "760d3316f225f5418051e6e37b8cb1cbbb312893f41aafccbfd6e82dbd3590d0",
+          "byte_length": 527
+        }
+      },
+      {
+        "app_id": "peartree",
+        "url": "https://raw.githubusercontent.com/artic-network/peartree/main/README.md",
+        "retrieval": {
+          "method": "HTTP GET",
+          "http_status": 200,
+          "final_url": "https://raw.githubusercontent.com/artic-network/peartree/main/README.md",
+          "retrieved_at": "2026-11-16T18:20:43.097476+00:00",
+          "sha256": "5ffc739739fddd3a218f3fb2210f36f4cab883a64a27da6990816be72eb8a617",
+          "byte_length": 8518
+        }
+      },
+      {
+        "app_id": "peartree",
+        "url": "https://github.com/artic-network/peartree/releases/tag/v1.3.2",
+        "retrieval": {
+          "method": "HTTP GET",
+          "http_status": 200,
+          "final_url": "https://github.com/artic-network/peartree/releases/tag/v1.3.2",
+          "retrieved_at": "2026-11-16T18:20:39.371797+00:00",
+          "sha256": "90ae2724771c7c310cd49274461ddd4927d39e030ad8b93d4eb4f9e2ab50ad0a",
+          "byte_length": 150573
+        }
+      },
+      {
+        "app_id": "flow5",
+        "url": "https://flow5.tech/docs/releasenotes.html",
+        "retrieval": {
+          "method": "HTTP GET",
+          "http_status": 200,
+          "final_url": "https://flow5.tech/docs/releasenotes.html",
+          "retrieved_at": "2026-11-16T18:20:40.695516+00:00",
+          "sha256": "a2c06644ce334dd01edb7be4e77740fd2292707b9b1c54d79c4a02ed5f6bcb1b",
+          "byte_length": 219505
+        }
+      },
+      {
+        "app_id": "hec-ras",
+        "url": "https://www.hec.usace.army.mil/software/hec-ras/download.aspx",
+        "retrieval": {
+          "method": "HTTP GET",
+          "http_status": 200,
+          "final_url": "https://www.hec.usace.army.mil/software/hec-ras/download.aspx",
+          "retrieved_at": "2026-11-16T18:20:40.271138+00:00",
+          "sha256": "508ee94c0aeb35a9510b69e316f200fd9df122a17e8cc09fc679accc47cdc7da",
+          "byte_length": 34893
+        }
+      },
+      {
+        "app_id": "hec-ras",
+        "url": "https://www.hec.usace.army.mil/software/terms_and_conditions.aspx",
+        "retrieval": {
+          "method": "HTTP GET",
+          "http_status": 200,
+          "final_url": "https://www.hec.usace.army.mil/software/terms_and_conditions.aspx",
+          "retrieved_at": "2026-11-16T18:20:40.267501+00:00",
+          "sha256": "97023bd8af6047de39c245647e6c0d072587ed76c94e9ef3eac03c3e6f365781",
+          "byte_length": 28479
+        }
+      },
+      {
+        "app_id": "balabolka",
+        "url": "https://www.cross-plus-a.com/license.htm",
+        "retrieval": {
+          "method": "HTTP GET",
+          "http_status": 200,
+          "final_url": "https://www.cross-plus-a.com/license.htm",
+          "retrieved_at": "2026-11-16T18:20:45.417669+00:00",
+          "sha256": "d98b1ed9f641e1ba8c55e56b28de3974da19cfc58e778c38af97c6437d8b29e7",
+          "byte_length": 11246
+        }
+      },
+      {
+        "app_id": "firecapture",
+        "url": "https://firecapture.de/license.html",
+        "retrieval": {
+          "method": "HTTP GET",
+          "http_status": 200,
+          "final_url": "https://firecapture.de/license.html",
+          "retrieved_at": "2026-11-16T18:20:44.434504+00:00",
+          "sha256": "a7a3ac83c958d104ea225351a2f79a83cb5c45f155ad3199bbd313b11f0a1217",
+          "byte_length": 2579
+        }
+      },
+      {
+        "app_id": "acoustica",
+        "url": "https://acondigital.com/products/acoustica/",
+        "retrieval": {
+          "method": "HTTP GET",
+          "http_status": 200,
+          "final_url": "https://acondigital.com/products/acoustica/",
+          "retrieved_at": "2026-11-16T18:20:44.453030+00:00",
+          "sha256": "0f61d4ee408e9d78ecc43fc276027b6fb209a927df0ebf6074036c2f2fb89bd4",
+          "byte_length": 255374
+        }
+      },
+      {
+        "app_id": "easy-effects",
+        "url": "https://raw.githubusercontent.com/wwmm/easyeffects/master/README.md",
+        "retrieval": {
+          "method": "HTTP GET",
+          "http_status": 200,
+          "final_url": "https://raw.githubusercontent.com/wwmm/easyeffects/master/README.md",
+          "retrieved_at": "2026-11-16T18:20:49.343950+00:00",
+          "sha256": "10679ed3312d54dccc665ee011484d2e693bed215a6373b45fcf932e594f9756",
+          "byte_length": 8212
+        }
+      },
+      {
+        "app_id": "easy-effects",
+        "url": "https://wwmm.github.io/easyeffects/",
+        "retrieval": {
+          "method": "HTTP GET",
+          "http_status": 200,
+          "final_url": "https://wwmm.github.io/easyeffects/",
+          "retrieved_at": "2026-11-16T18:20:50.359153+00:00",
+          "sha256": "3945620a423875f42481c5c087d074782f0ba4fa80f34b0b1170039fbdae5f8b",
+          "byte_length": 37841
+        }
+      },
+      {
+        "app_id": "izotope-rx",
+        "url": "https://www.izotope.com/products/rx-advanced",
+        "retrieval": {
+          "method": "HTTP GET",
+          "http_status": 200,
+          "final_url": "https://www.izotope.com/products/rx-advanced",
+          "retrieved_at": "2026-11-16T18:20:51.609452+00:00",
+          "sha256": "4c5436915789fe322ab01fbca7b14a089c2a4603ebacd5422e8fa6716ef8cb08",
+          "byte_length": 1493108
+        }
+      },
+      {
+        "app_id": "adobe-audition",
+        "url": "https://helpx.adobe.com/audition/desktop/effects-reference/noise-reduction-restoration-effects.html",
+        "retrieval": {
+          "method": "HTTP GET",
+          "http_status": 200,
+          "final_url": "https://helpx.adobe.com/audition/desktop/effects-reference/noise-reduction-restoration-effects.html",
+          "retrieved_at": "2026-11-16T18:20:50.597587+00:00",
+          "sha256": "f879e3163834bb601f9a43911192c5b2842bbdde1a6cd0b3e5dbdc5d6cb871c4",
+          "byte_length": 330571
+        }
+      },
+      {
+        "app_id": "figtree",
+        "url": "https://raw.githubusercontent.com/rambaut/figtree/master/src/figtree/application/FigTreeApplication.java",
+        "retrieval": {
+          "method": "HTTP GET",
+          "http_status": 200,
+          "final_url": "https://raw.githubusercontent.com/rambaut/figtree/master/src/figtree/application/FigTreeApplication.java",
+          "retrieved_at": "2026-11-16T18:21:32.896041+00:00",
+          "sha256": "ef611fd47b926d85fc0c6b07285ea15f35f14f5f69a0ac438982a81fd18def38",
+          "byte_length": 17401
+        }
+      },
+      {
+        "app_id": "easy-effects",
+        "url": "https://wwmm.github.io/easyeffects/plugins/rnnoise.html",
+        "retrieval": {
+          "method": "HTTP GET",
+          "http_status": 200,
+          "final_url": "https://wwmm.github.io/easyeffects/plugins/rnnoise.html",
+          "retrieved_at": "2026-11-16T18:22:49.915721+00:00",
+          "sha256": "c312fd147a45a4aae4c4e1b6b7d360a1dc41a8e96dacee0b49253437919b17f6",
+          "byte_length": 38519
+        }
+      },
+      {
+        "app_id": "easy-effects",
+        "url": "https://wwmm.github.io/easyeffects/plugins/deepfilternet.html",
+        "retrieval": {
+          "method": "HTTP GET",
+          "http_status": 200,
+          "final_url": "https://wwmm.github.io/easyeffects/plugins/deepfilternet.html",
+          "retrieved_at": "2026-11-16T18:22:49.851421+00:00",
+          "sha256": "fb40f431f5a9e2edf259dda055de19bbaba796b4ee009c2df982d9d6fb3388a2",
+          "byte_length": 40890
+        }
+      },
+      {
+        "app_id": "izotope-rx",
+        "url": "https://www.izotope.com/community/blog/how-to-clean-up-voice-recordings-video-podcasts",
+        "retrieval": {
+          "method": "HTTP GET",
+          "http_status": 200,
+          "final_url": "https://www.izotope.com/community/blog/how-to-clean-up-voice-recordings-video-podcasts",
+          "retrieved_at": "2026-11-16T18:22:50.738543+00:00",
+          "sha256": "f296ce341de06b90950a610e70a17d9536b058ad2462ffeae2b0d52fe98dfb61",
+          "byte_length": 1011910
+        }
+      },
+      {
+        "app_id": "acoustica",
+        "url": "https://acondigital.com/acoustica8-linux/",
+        "retrieval": {
+          "method": "HTTP GET",
+          "http_status": 200,
+          "final_url": "https://acondigital.com/acoustica8-linux/",
+          "retrieved_at": "2026-11-16T18:22:49.677121+00:00",
+          "sha256": "aa2002590b21186dd4910973b27cea286605fa51e6a701d66d4500e89c0ae850",
+          "byte_length": 65672
+        }
+      }
+    ],
+    "unresolved_findings": 0,
+    "reviewed_file": {
+      "path": "data/software/creative-wave2-expanded.json",
+      "sha256": "594360da04e03b2db843542b0b81b2e87dd211c93fa0a5cbffa27dfffb0c86ea",
+      "application_count": 112
+    }
+  },
+  "source_receipt_counts": {
+    "systems_and_rider": 19,
+    "development": 25,
+    "creative": 19,
+    "total": 63
+  }
+}

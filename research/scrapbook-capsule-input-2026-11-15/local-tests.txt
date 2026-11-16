@@ -1,0 +1,32 @@
+test_capsule_hash_not_substitute_for_selected_value_hash (test_capsule_cli.CapsuleCLI.test_capsule_hash_not_substitute_for_selected_value_hash) ... ok
+test_corrupt_unrelated_entry_refuses_without_bundle (test_capsule_cli.CapsuleCLI.test_corrupt_unrelated_entry_refuses_without_bundle) ... ok
+test_existing_destination_and_wrong_mode_unchanged (test_capsule_cli.CapsuleCLI.test_existing_destination_and_wrong_mode_unchanged) ... ok
+test_manual_asset_review_still_required (test_capsule_cli.CapsuleCLI.test_manual_asset_review_still_required) ... ok
+test_missing_or_unrepresentable_value_refuses (test_capsule_cli.CapsuleCLI.test_missing_or_unrepresentable_value_refuses) ... ok
+test_valid_capsule_matches_raw_bundle_and_preserves_source (test_capsule_cli.CapsuleCLI.test_valid_capsule_matches_raw_bundle_and_preserves_source) ... ok
+test_all_nine_modes_preserved_without_normal_downgrade (test_convert.BlendTests.test_all_nine_modes_preserved_without_normal_downgrade) ... ok
+test_blend_bundle_retains_bytes_and_recomputes_version (test_convert.BlendTests.test_blend_bundle_retains_bytes_and_recomputes_version) ... ok
+test_review_wrong_unknown_and_nonstring_modes_refused (test_convert.BlendTests.test_review_wrong_unknown_and_nonstring_modes_refused) ... ok
+test_nine_origins_absolute_affine_corners_reflections_skew_stickers (test_convert.OriginTests.test_nine_origins_absolute_affine_corners_reflections_skew_stickers) ... ok
+test_origin_offset_clipping_refused (test_convert.OriginTests.test_origin_offset_clipping_refused) ... ok
+test_actual_js_schema_and_native_sqlite_roundtrip (test_convert.Tests.test_actual_js_schema_and_native_sqlite_roundtrip) ... ok
+test_affine_corners_signed_nonuniform_intrinsics_and_explicit_filters (test_convert.Tests.test_affine_corners_signed_nonuniform_intrinsics_and_explicit_filters) ... ok
+test_bounds_clipping_and_duplicate_json_refused (test_convert.Tests.test_bounds_clipping_and_duplicate_json_refused) ... ok
+test_bundle_recompute_and_tamper_refusal (test_convert.Tests.test_bundle_recompute_and_tamper_refusal) ... ok
+test_duplicates_centers_sticker_width_and_deterministic_ids (test_convert.Tests.test_duplicates_centers_sticker_width_and_deterministic_ids) ... ok
+test_equal_order_on_same_surface_refused_not_reordered_by_uuid (test_convert.Tests.test_equal_order_on_same_surface_refused_not_reordered_by_uuid) ... ok
+test_new_private_bundle_preserves_exact_source_and_refuses_overwrite (test_convert.Tests.test_new_private_bundle_preserves_exact_source_and_refuses_overwrite) ... ok
+test_non_neutral_unknown_missing_asset_and_mapping_refused (test_convert.Tests.test_non_neutral_unknown_missing_asset_and_mapping_refused) ... ok
+test_nonzero_blur_refused_even_uniform_or_equal_size (test_convert.Tests.test_nonzero_blur_refused_even_uniform_or_equal_size) ... ok
+test_skew_bounds_detect_clipping_naive_unskewed_bounds_miss (test_convert.Tests.test_skew_bounds_detect_clipping_naive_unskewed_bounds_miss) ... ok
+test_changed_catalog_refused_read_only (test_verify_cli.VerifyCLI.test_changed_catalog_refused_read_only) ... ok
+test_existing_creation_command_remains_compatible (test_verify_cli.VerifyCLI.test_existing_creation_command_remains_compatible) ... ok
+test_incomplete_bundle_refused_read_only (test_verify_cli.VerifyCLI.test_incomplete_bundle_refused_read_only) ... ok
+test_modes_and_irrelevant_inputs_rejected (test_verify_cli.VerifyCLI.test_modes_and_irrelevant_inputs_rejected) ... ok
+test_tampered_workspace_fails_without_repair_or_overwrite (test_verify_cli.VerifyCLI.test_tampered_workspace_fails_without_repair_or_overwrite) ... ok
+test_verify_reports_limits_and_preserves_every_byte (test_verify_cli.VerifyCLI.test_verify_reports_limits_and_preserves_every_byte) ... ok
+
+----------------------------------------------------------------------
+Ran 27 tests in 1.808s
+
+OK

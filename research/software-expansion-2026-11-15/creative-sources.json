@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "reviewed_at": "2026-11-15",
+  "reviewed_at": "2026-11-16",
   "scope": "Creative, productivity and scientific software expansion wave 2",
-  "phase": "continuation-integration",
-  "application_count": 80,
-  "recipe_count": 15,
+  "phase": "recovered-checkpoint-and-completed-specialist-comparisons",
+  "application_count": 112,
+  "recipe_count": 45,
   "methodology": [
     "Primary developer, institute, repository, license, documentation and release sources were read.",
     "Source observations are concise factual paraphrases with retrieval hashes. Failed endpoints are retained only in retrievals, never as evidence.",
@@ -434,7 +434,7 @@
     },
     {
       "app_id": "figtree",
-      "reviewed_at": "2026-11-15",
+      "reviewed_at": "2026-11-16",
       "observations": [
         {
           "url": "https://tree.bio.ed.ac.uk/software/figtree/",
@@ -469,6 +469,41 @@
             "status": 200,
             "final_url": "https://github.com/rambaut/figtree/releases.atom",
             "sha256": "ebb39de46dee495c222815ae51a757058814649f9ae83cb9aec5357c739a1f91"
+          }
+        },
+        {
+          "url": "https://github.com/rambaut/figtree",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity",
+            "features",
+            "maintenance"
+          ],
+          "observed_facts": [
+            "The upstream README states that FigTree has been superseded by PearTree and links to artic-network/peartree and peartree.live"
+          ],
+          "retrieval": {
+            "method": "primary-page web retrieval",
+            "source_ref": "turn165view0",
+            "observation_sha256": "45b07fb67f3d86b874be43f18734d7f025c886bbc087035002594706255f71ed",
+            "hash_scope": "Analyst paraphrase, not raw page bytes"
+          }
+        },
+        {
+          "url": "https://github.com/rambaut/figtree/blob/master/src/figtree/application/FigTreeApplication.java",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "license"
+          ],
+          "observed_facts": [
+            "The main application source header grants GPL version 2 or any later version",
+            "Bundled dependency licenses may differ"
+          ],
+          "retrieval": {
+            "method": "primary-page web retrieval",
+            "source_ref": "turn165view1",
+            "observation_sha256": "d13c2b27e33626c104ddd507421767fc5ae9455701e09e2db741a1c098319942",
+            "hash_scope": "Analyst paraphrase, not raw page bytes"
           }
         }
       ],
@@ -3131,7 +3166,7 @@
     },
     {
       "app_id": "easy-effects",
-      "reviewed_at": "2026-11-15",
+      "reviewed_at": "2026-11-16",
       "observations": [
         {
           "url": "https://github.com/wwmm/easyeffects/blob/master/README.md",
@@ -3150,6 +3185,77 @@
           "retrieval": {
             "method": "GitHub connector file retrieval",
             "blob_sha": "2978709643370ea48595f221d2524b73908c2338"
+          }
+        },
+        {
+          "url": "https://wwmm.github.io/easyeffects/",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "features"
+          ],
+          "observed_facts": [
+            "EasyEffects applies effects to PipeWire applications and can process microphone audio before sending it to a recording application"
+          ],
+          "retrieval": {
+            "method": "primary-page web retrieval",
+            "source_ref": "turn160view0",
+            "observation_sha256": "3adbb60e43d9c486e4adb9b7578b04f8c4a75f57e8fa6112bc81ec53e6655da0",
+            "hash_scope": "Analyst paraphrase, not raw page bytes"
+          }
+        },
+        {
+          "url": "https://wwmm.github.io/easyeffects/plugins/rnnoise.html",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "features"
+          ],
+          "observed_facts": [
+            "The Noise Reduction effect uses RNNoise with a standard model and permits importing custom models"
+          ],
+          "retrieval": {
+            "method": "primary-page web retrieval",
+            "source_ref": "turn163view3",
+            "observation_sha256": "fccd0822b0c511774f20276375dc9b33e47581263fc2862c468b69154935b7b3",
+            "hash_scope": "Analyst paraphrase, not raw page bytes"
+          }
+        },
+        {
+          "url": "https://wwmm.github.io/easyeffects/plugins/deepfilternet.html",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "features"
+          ],
+          "observed_facts": [
+            "Deep Noise Remover offers DeepFilterNet or DPDFNet models with separate dependencies",
+            "Excessive attenuation can remove wanted audio"
+          ],
+          "retrieval": {
+            "method": "primary-page web retrieval",
+            "source_ref": "turn163view4",
+            "observation_sha256": "5d7242cd5b15511282f10d748d6b44b3cece86ccb70104b3c5bd1946765d5028",
+            "hash_scope": "Analyst paraphrase, not raw page bytes"
+          }
+        },
+        {
+          "url": "https://github.com/wwmm/easyeffects",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "features",
+            "platforms",
+            "license",
+            "downloads"
+          ],
+          "observed_facts": [
+            "EasyEffects requires PipeWire and selected effect dependencies",
+            "Some distribution builds omit plugins; the Flatpak includes them",
+            "Upstream says to keep real hardware as the default rather than EasyEffects virtual devices",
+            "The software is GPL-3.0-or-later"
+          ],
+          "retrieval": {
+            "method": "primary-page web retrieval",
+            "source_ref": "turn164view1",
+            "observation_sha256": "c05f155b516d014c82e9879e5c29329dd92009267bbae63e5b7bab62ac251c2d",
+            "hash_scope": "Analyst paraphrase, not raw page bytes"
           }
         }
       ],
@@ -3210,7 +3316,7 @@
     },
     {
       "app_id": "izotope-rx",
-      "reviewed_at": "2026-11-15",
+      "reviewed_at": "2026-11-16",
       "observations": [
         {
           "url": "https://www.izotope.com/products/rx-advanced",
@@ -3245,13 +3351,30 @@
             "method": "web source retrieval",
             "source_ref": "turn17view0"
           }
+        },
+        {
+          "url": "https://www.izotope.com/community/blog/how-to-clean-up-voice-recordings-video-podcasts",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "features"
+          ],
+          "observed_facts": [
+            "The developer demonstrates loading a recording into RX, learning a noise profile and applying Spectral De-noise",
+            "Preview and noise-only monitoring help detect removal of wanted speech"
+          ],
+          "retrieval": {
+            "method": "primary-page web retrieval",
+            "source_ref": "turn161view3",
+            "observation_sha256": "bed25c8c5b82ecc3a7b28002df9856ee4a2063cb2a3ab9a4f55e3131b0e872c5",
+            "hash_scope": "Analyst paraphrase, not raw page bytes"
+          }
         }
       ],
       "editorial_basis": "Workflow recommendations are editorial comparisons of documented capabilities and constraints; no application execution or superiority benchmark is claimed."
     },
     {
       "app_id": "acoustica",
-      "reviewed_at": "2026-11-15",
+      "reviewed_at": "2026-11-16",
       "observations": [
         {
           "url": "https://acondigital.com/products/acoustica/",
@@ -3286,13 +3409,54 @@
             "method": "web source retrieval",
             "source_ref": "turn27view1"
           }
+        },
+        {
+          "url": "https://acondigital.com/products/acoustica/",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity",
+            "features",
+            "platforms",
+            "downloads",
+            "pricing"
+          ],
+          "observed_facts": [
+            "Acoustica includes recorded-audio editing and restoration",
+            "Standard has in-app restoration while Premium/Ultimate add separately described modules and DAW plugins",
+            "The product advertises a paid perpetual license and a trial"
+          ],
+          "retrieval": {
+            "method": "primary-page web retrieval",
+            "source_ref": "turn163view2",
+            "observation_sha256": "7da93cd63784a1c8946967defe0b5c4774f0e719fbbffe00fbd867e10c4a231a",
+            "hash_scope": "Analyst paraphrase, not raw page bytes"
+          }
+        },
+        {
+          "url": "https://acondigital.com/acoustica8-linux/",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "platforms",
+            "downloads",
+            "features"
+          ],
+          "observed_facts": [
+            "The developer labels Linux Acoustica 8 a public beta",
+            "It offers the editor and edition-dependent plugins for supported Linux packages"
+          ],
+          "retrieval": {
+            "method": "primary-page web retrieval",
+            "source_ref": "turn163view1",
+            "observation_sha256": "a8b7e472f929c52cdc63e8240f55030c7b511138a7ccd22703bbc6ffe4c0c73c",
+            "hash_scope": "Analyst paraphrase, not raw page bytes"
+          }
         }
       ],
       "editorial_basis": "Workflow recommendations are editorial comparisons of documented capabilities and constraints; no application execution or superiority benchmark is claimed."
     },
     {
       "app_id": "adobe-audition",
-      "reviewed_at": "2026-11-15",
+      "reviewed_at": "2026-11-16",
       "observations": [
         {
           "url": "https://www.adobe.com/products/audition.html",
@@ -3348,6 +3512,24 @@
           "retrieval": {
             "method": "web source retrieval",
             "source_ref": "turn17view1"
+          }
+        },
+        {
+          "url": "https://helpx.adobe.com/audition/desktop/effects-reference/noise-reduction-restoration-effects.html",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "features"
+          ],
+          "observed_facts": [
+            "Adobe documents recorded-noise restoration in the Waveform and Multitrack editors",
+            "Noise Reduction uses a captured noise print and is an offline Waveform process",
+            "The documentation warns that excessive reduction can create artifacts"
+          ],
+          "retrieval": {
+            "method": "primary-page web retrieval",
+            "source_ref": "turn161view2",
+            "observation_sha256": "53befc63dc785a91bbd4f654c036bf9b2d129378482989c3757af828a9f4d49e",
+            "hash_scope": "Analyst paraphrase, not raw page bytes"
           }
         }
       ],
@@ -3870,7 +4052,7 @@
     },
     {
       "app_id": "dragonframe",
-      "reviewed_at": "2026-11-15",
+      "reviewed_at": "2026-11-16",
       "observations": [
         {
           "url": "https://www.dragonframe.com/dragonframe-software/",
@@ -3919,6 +4101,40 @@
           "retrieval": {
             "method": "web source retrieval",
             "source_ref": "turn16view3"
+          }
+        },
+        {
+          "url": "https://www.dragonframe.com/faq/",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "license"
+          ],
+          "observed_facts": [
+            "The current FAQ describes per-seat activation and one-computer-at-a-time use",
+            "Its EULA link points to a PDF titled Dragonframe 5"
+          ],
+          "retrieval": {
+            "method": "primary-page web retrieval",
+            "source_ref": "turn138view3",
+            "observation_sha256": "f9a8e557424b58c86b291ea31311c3d8d26744a13c525c9fd78e41afe95a0f90",
+            "hash_scope": "Analyst paraphrase, not raw page bytes"
+          }
+        },
+        {
+          "url": "https://www.dragonframe.com/download/Dragonframe5_EULA.pdf",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "license"
+          ],
+          "observed_facts": [
+            "The developer-linked Dragonframe 5 EULA grants a limited nonexclusive license",
+            "It permits activation on two machines with only one used at a time"
+          ],
+          "retrieval": {
+            "method": "primary-page web retrieval",
+            "source_ref": "turn141view2",
+            "observation_sha256": "01daf18fc9256fb446c07ba88795e93dc97934bd66fe74ca16a9d352b1025535",
+            "hash_scope": "Analyst paraphrase, not raw page bytes"
           }
         }
       ],
@@ -4089,7 +4305,7 @@
     },
     {
       "app_id": "balabolka",
-      "reviewed_at": "2026-11-15",
+      "reviewed_at": "2026-11-16",
       "observations": [
         {
           "url": "https://www.cross-plus-a.com/balabolka.htm",
@@ -4138,6 +4354,24 @@
           "retrieval": {
             "method": "web source retrieval",
             "source_ref": "turn16view4"
+          }
+        },
+        {
+          "url": "https://www.cross-plus-a.com/license.htm",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "license",
+            "pricing"
+          ],
+          "observed_facts": [
+            "Balabolka is free for noncommercial use; commercial organizations and distribution on paid audio platforms require a commercial license",
+            "Voice rights are separate and the ordinary license excludes embedding the utilities in other products"
+          ],
+          "retrieval": {
+            "method": "primary-page web retrieval",
+            "source_ref": "turn141view0",
+            "observation_sha256": "94c6c493c27b5ca2c624604739eba2c84d350b377fc7b9c4fac477280325dd98",
+            "hash_scope": "Analyst paraphrase, not raw page bytes"
           }
         }
       ],
@@ -4264,6 +4498,2093 @@
         }
       ],
       "editorial_basis": "Workflow recommendations are editorial comparisons of documented capabilities and constraints; no application execution or superiority benchmark is claimed."
+    },
+    {
+      "app_id": "su2",
+      "reviewed_at": "2026-11-16",
+      "observations": [
+        {
+          "url": "https://su2code.github.io/",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity",
+            "features"
+          ],
+          "observed_facts": [
+            "Project describes an open-source multiphysics simulation and design suite."
+          ],
+          "retrieval": {
+            "method": "primary-page web retrieval",
+            "source_ref": "turn94search31",
+            "observation_sha256": "5028117aa3a23f9cfd9b29f9087766cb4ba661066e0568042faebd32bb19ce44",
+            "hash_scope": "Analyst paraphrase, not raw page bytes"
+          }
+        },
+        {
+          "url": "https://su2code.github.io/download.html",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "downloads",
+            "platforms",
+            "license",
+            "pricing"
+          ],
+          "observed_facts": [
+            "Downloads cover Windows, macOS and Linux under LGPL 2.1, with serial and MPI routes.",
+            "The download page warns that discrete adjoint is absent from prebuilt executables."
+          ],
+          "retrieval": {
+            "method": "primary-page web retrieval",
+            "source_ref": "turn96view0",
+            "observation_sha256": "723bc8f39de80003621ab5582f6beffe268b70b7d5fa400fcff3cebc3082251a",
+            "hash_scope": "Analyst paraphrase, not raw page bytes"
+          }
+        }
+      ],
+      "editorial_basis": "Recommendations compare documented workflow fit and requirements; no executable was run and no independent performance, accuracy or security benchmark is claimed."
+    },
+    {
+      "app_id": "simflow",
+      "reviewed_at": "2026-11-16",
+      "observations": [
+        {
+          "url": "https://sim-flow.com/",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity",
+            "features",
+            "platforms"
+          ],
+          "observed_facts": [
+            "Official site describes OpenFOAM-based CFD and native Windows, Linux and Apple Silicon macOS support."
+          ],
+          "retrieval": {
+            "method": "primary-page web retrieval",
+            "source_ref": "turn94search2",
+            "observation_sha256": "e23b0d5ebf6b8f9df77d981b564ea966a8c16f27755426429ea2bc73243fbbf4",
+            "hash_scope": "Analyst paraphrase, not raw page bytes"
+          }
+        },
+        {
+          "url": "https://sim-flow.com/download-simflow/",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "downloads",
+            "platforms"
+          ],
+          "observed_facts": [
+            "Official download page provides desktop installation routes."
+          ],
+          "retrieval": {
+            "method": "primary-page web retrieval",
+            "source_ref": "turn94search1",
+            "observation_sha256": "aa07a6a525b8d91e348c300f016524bd25f73474e4d78cff4625c321a6669a78",
+            "hash_scope": "Analyst paraphrase, not raw page bytes"
+          }
+        },
+        {
+          "url": "https://sim-flow.com/pricing-plans/",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "pricing",
+            "license",
+            "features"
+          ],
+          "observed_facts": [
+            "Free is limited to 200,000 mesh nodes and one CPU; paid single-seat and floating plans expand scale and support.",
+            "Annual subscriptions and separately quoted perpetual licenses are offered."
+          ],
+          "retrieval": {
+            "method": "primary-page web retrieval",
+            "source_ref": "turn96view1",
+            "observation_sha256": "2c9bfd71289f7fc6916074aba80604efc304b6fd9275184081332423c2d9c784",
+            "hash_scope": "Analyst paraphrase, not raw page bytes"
+          }
+        },
+        {
+          "url": "https://sim-flow.com/user-license-agreement/",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "license",
+            "pricing"
+          ],
+          "observed_facts": [
+            "SimFlow grants a limited proprietary license and restricts modification and redistribution",
+            "Evaluation mode is free and time-unlimited",
+            "The agreement permits commercial, academic and personal purposes in either mode"
+          ],
+          "retrieval": {
+            "method": "primary-page web retrieval",
+            "source_ref": "turn170view0",
+            "observation_sha256": "93dca9064469f88dbbca40c64b702065f7833d029d6fbae07cda63f132d0e011",
+            "hash_scope": "Analyst paraphrase, not raw page bytes"
+          }
+        }
+      ],
+      "editorial_basis": "Recommendations compare documented workflow fit and requirements; no executable was run and no independent performance, accuracy or security benchmark is claimed."
+    },
+    {
+      "app_id": "calculix",
+      "reviewed_at": "2026-11-16",
+      "observations": [
+        {
+          "url": "https://www.calculix.de/",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity",
+            "features",
+            "platforms",
+            "license",
+            "pricing",
+            "downloads"
+          ],
+          "observed_facts": [
+            "Official page documents the solver and pre/postprocessor, Linux and Windows, static/dynamic/thermal capabilities and GPL version 2 or later.",
+            "Download navigation is provided on the project homepage."
+          ],
+          "retrieval": {
+            "method": "primary-page web retrieval",
+            "source_ref": "turn96view2",
+            "observation_sha256": "a2faeeee26f62dedaf11c83ce872ed4dfaf10c63aca8a9456ace26cc9dfdad3d",
+            "hash_scope": "Analyst paraphrase, not raw page bytes"
+          }
+        },
+        {
+          "url": "https://github.com/Dhondtguido/CalculiX",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity",
+            "license"
+          ],
+          "observed_facts": [
+            "Maintainer repository identifies the CalculiX source and GPL-2.0 licensing."
+          ],
+          "retrieval": {
+            "method": "primary-page web retrieval",
+            "source_ref": "turn94search29",
+            "observation_sha256": "1e703b20cf4ac1bac296382bfd7239c74d8fb3a65849bcbf54604da76120218b",
+            "hash_scope": "Analyst paraphrase, not raw page bytes"
+          }
+        }
+      ],
+      "editorial_basis": "Recommendations compare documented workflow fit and requirements; no executable was run and no independent performance, accuracy or security benchmark is claimed."
+    },
+    {
+      "app_id": "code-aster",
+      "reviewed_at": "2026-11-16",
+      "observations": [
+        {
+          "url": "https://code-aster.org/en/product/main",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity",
+            "features",
+            "license"
+          ],
+          "observed_facts": [
+            "EDF describes mechanics, thermodynamics, dynamic and nonlinear analysis under GPL, plus SALOME-MECA and AsterStudy integration."
+          ],
+          "retrieval": {
+            "method": "primary-page web retrieval",
+            "source_ref": "turn102view2",
+            "observation_sha256": "6190055f79bc8a6ba882068c3302f8541aee22d8cee38d44383027c44f1ebf5d",
+            "hash_scope": "Analyst paraphrase, not raw page bytes"
+          }
+        },
+        {
+          "url": "https://open-simulation-center.org/downloads/code_aster",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "downloads",
+            "pricing"
+          ],
+          "observed_facts": [
+            "EDF software portal offers solver and SALOME-MECA download routes and describes free access."
+          ],
+          "retrieval": {
+            "method": "primary-page web retrieval",
+            "source_ref": "turn120search1",
+            "observation_sha256": "cc1ba2c4cc3213395c994c36275149427b9a409ea1907e5bd798178f27fedd77",
+            "hash_scope": "Analyst paraphrase, not raw page bytes"
+          }
+        },
+        {
+          "url": "https://open-simulation-center.org/downloads/code_aster/code_aster/17.3.1",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "platforms",
+            "downloads"
+          ],
+          "observed_facts": [
+            "Official distribution page lists Debian Linux and container packages."
+          ],
+          "retrieval": {
+            "method": "primary-page web retrieval",
+            "source_ref": "turn120search3",
+            "observation_sha256": "551c8c7aafa1b448aa2a88bfa258b3db7448f02ffb20a6ec6644757cf334dcee",
+            "hash_scope": "Analyst paraphrase, not raw page bytes"
+          }
+        },
+        {
+          "url": "https://simulease.com/en/download/",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "platforms",
+            "downloads"
+          ],
+          "observed_facts": [
+            "Maintained Windows port distributor provides separate code_aster MSI and SALOME-MECA packages."
+          ],
+          "retrieval": {
+            "method": "primary-page web retrieval",
+            "source_ref": "turn120search8",
+            "observation_sha256": "896d539a91a4b28b45d0521ca13a867de161aeeb9730339dd4b747ceb8240ad1",
+            "hash_scope": "Analyst paraphrase, not raw page bytes"
+          }
+        }
+      ],
+      "editorial_basis": "Recommendations compare documented workflow fit and requirements; no executable was run and no independent performance, accuracy or security benchmark is claimed."
+    },
+    {
+      "app_id": "hec-ras",
+      "reviewed_at": "2026-11-16",
+      "observations": [
+        {
+          "url": "https://www.hec.usace.army.mil/software/hec-ras/default.aspx",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity",
+            "features"
+          ],
+          "observed_facts": [
+            "Official product page lists steady/unsteady flow, sediment, stormwater pipe networks and water-quality modeling."
+          ],
+          "retrieval": {
+            "method": "primary-page web retrieval",
+            "source_ref": "turn97search8",
+            "observation_sha256": "ed5fa30209999185d2f33c717fbb0aa60ed6e3cb45dc5e26f6b6ca9abd9c59d0",
+            "hash_scope": "Analyst paraphrase, not raw page bytes"
+          }
+        },
+        {
+          "url": "https://www.hec.usace.army.mil/software/hec-ras/download.aspx",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "downloads",
+            "platforms",
+            "pricing"
+          ],
+          "observed_facts": [
+            "Download page states free use, Windows desktop support and Linux compute engines only."
+          ],
+          "retrieval": {
+            "method": "primary-page web retrieval",
+            "source_ref": "turn97search0",
+            "observation_sha256": "8590c4c487cd04fdc4d89f47dd76680e2c8bdb5eeef07bff5554eed7a03a9aad",
+            "hash_scope": "Analyst paraphrase, not raw page bytes"
+          }
+        },
+        {
+          "url": "https://www.hec.usace.army.mil/software/terms_and_conditions.aspx",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "license"
+          ],
+          "observed_facts": [
+            "HEC grants use/copy/distribution under its terms but prohibits modifying, decompiling and reverse engineering its software."
+          ],
+          "retrieval": {
+            "method": "primary-page web retrieval",
+            "source_ref": "turn97search1",
+            "observation_sha256": "bc723bd2995098762ccb2cf772cbe82f6df33b1ccd7c8cfd45b51911bafd6500",
+            "hash_scope": "Analyst paraphrase, not raw page bytes"
+          }
+        }
+      ],
+      "editorial_basis": "Recommendations compare documented workflow fit and requirements; no executable was run and no independent performance, accuracy or security benchmark is claimed."
+    },
+    {
+      "app_id": "epanet",
+      "reviewed_at": "2026-11-16",
+      "observations": [
+        {
+          "url": "https://www.epa.gov/water-research/epanet",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity",
+            "features",
+            "license",
+            "platforms",
+            "downloads",
+            "pricing"
+          ],
+          "observed_facts": [
+            "EPA describes public-domain Windows software for drinking-water network hydraulics and quality, with desktop downloads, toolkit and the linked EPA repository."
+          ],
+          "retrieval": {
+            "method": "primary-page web retrieval",
+            "source_ref": "turn97search2",
+            "observation_sha256": "fc085562f0bfbcabf0fedb49847dd507e1b5146037a9551f3244fc9a54c72d31",
+            "hash_scope": "Analyst paraphrase, not raw page bytes"
+          }
+        }
+      ],
+      "editorial_basis": "Recommendations compare documented workflow fit and requirements; no executable was run and no independent performance, accuracy or security benchmark is claimed."
+    },
+    {
+      "app_id": "epa-swmm",
+      "reviewed_at": "2026-11-16",
+      "observations": [
+        {
+          "url": "https://www.epa.gov/water-research/storm-water-management-model-swmm",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity",
+            "features",
+            "pricing",
+            "license",
+            "platforms",
+            "downloads",
+            "maintenance"
+          ],
+          "observed_facts": [
+            "EPA describes freely available open-source drainage modeling, maintains the project, and supplies Windows installers plus separate engine and GUI source archives."
+          ],
+          "retrieval": {
+            "method": "primary-page web retrieval",
+            "source_ref": "turn97search3",
+            "observation_sha256": "e876079cffdde2e699a607c7588d66d3c4baed99c415b05fbe9c9f65dfc4b531",
+            "hash_scope": "Analyst paraphrase, not raw page bytes"
+          }
+        }
+      ],
+      "editorial_basis": "Recommendations compare documented workflow fit and requirements; no executable was run and no independent performance, accuracy or security benchmark is claimed."
+    },
+    {
+      "app_id": "modflow6",
+      "reviewed_at": "2026-11-16",
+      "observations": [
+        {
+          "url": "https://www.usgs.gov/software/modflow-6-usgs-modular-hydrologic-model",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity",
+            "features",
+            "maintenance"
+          ],
+          "observed_facts": [
+            "USGS describes MODFLOW 6 and related programs and dates version 6.8.1 to September 23, 2026."
+          ],
+          "retrieval": {
+            "method": "primary-page web retrieval",
+            "source_ref": "turn97search4",
+            "observation_sha256": "4c09dfbfda967d1421cea4f2f2a83b7f2879f89c6b21b4650077131046db79e4",
+            "hash_scope": "Analyst paraphrase, not raw page bytes"
+          }
+        },
+        {
+          "url": "https://github.com/MODFLOW-ORG/executables",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "downloads",
+            "platforms"
+          ],
+          "observed_facts": [
+            "MODFLOW organization distributes Windows, macOS and Linux executables and points to versioned releases."
+          ],
+          "retrieval": {
+            "method": "primary-page web retrieval",
+            "source_ref": "turn97search5",
+            "observation_sha256": "372533cbf7794fb57085377b1a91906eb483acec37e36419e2c024e4b8ff6aca",
+            "hash_scope": "Analyst paraphrase, not raw page bytes"
+          }
+        },
+        {
+          "url": "https://github.com/MODFLOW-ORG/modflow6/blob/develop/LICENSE.md",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "license",
+            "pricing"
+          ],
+          "observed_facts": [
+            "License states US public-domain status and CC0 waiver worldwide, subject to otherwise-noted components."
+          ],
+          "retrieval": {
+            "method": "primary-page web retrieval",
+            "source_ref": "turn113search0",
+            "observation_sha256": "d981a235f0fd4bde4a72c2f708b3454fbcc0c07e1a1e49dfa8eefd28a3b867bf",
+            "hash_scope": "Analyst paraphrase, not raw page bytes"
+          }
+        },
+        {
+          "url": "https://github.com/MODFLOW-ORG/modflow6/releases",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "downloads",
+            "maintenance"
+          ],
+          "observed_facts": [
+            "The official release feed lists the approved USGS MODFLOW 6.8.2 release on 30 October 2026 and provides distribution assets"
+          ],
+          "retrieval": {
+            "method": "primary-page web retrieval",
+            "source_ref": "turn169view4",
+            "observation_sha256": "d74ff84f99bb9334033529375ea1e6d764e09f2404d9736b25faddd27641f21c",
+            "hash_scope": "Analyst paraphrase, not raw page bytes"
+          }
+        }
+      ],
+      "editorial_basis": "Recommendations compare documented workflow fit and requirements; no executable was run and no independent performance, accuracy or security benchmark is claimed."
+    },
+    {
+      "app_id": "gromacs",
+      "reviewed_at": "2026-11-16",
+      "observations": [
+        {
+          "url": "https://www.gromacs.org/about.html",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity",
+            "features",
+            "license"
+          ],
+          "observed_facts": [
+            "Official documentation describes molecular simulation, trajectory analysis, CPU/GPU execution and LGPL 2.1 or later."
+          ],
+          "retrieval": {
+            "method": "primary-page web retrieval",
+            "source_ref": "turn115view2",
+            "observation_sha256": "8a05f0859f8e06fdcaf58bb0da07d26afb7000b48634d256df4f33a67edbf902",
+            "hash_scope": "Analyst paraphrase, not raw page bytes"
+          }
+        },
+        {
+          "url": "https://www.gromacs.org/",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "pricing",
+            "maintenance"
+          ],
+          "observed_facts": [
+            "Project states free/open-source availability and a GROMACS 2026.4 release dated October 2, 2026."
+          ],
+          "retrieval": {
+            "method": "primary-page web retrieval",
+            "source_ref": "turn102view3",
+            "observation_sha256": "f12692908fde712e188023bb5e1db2dd2db400904660d122c618571bd5eb4ae0",
+            "hash_scope": "Analyst paraphrase, not raw page bytes"
+          }
+        },
+        {
+          "url": "https://manual.gromacs.org/current/install-guide/index.html",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "platforms",
+            "downloads"
+          ],
+          "observed_facts": [
+            "Installation guide covers source builds on Linux, macOS and Windows with architecture/compiler requirements."
+          ],
+          "retrieval": {
+            "method": "primary-page web retrieval",
+            "source_ref": "turn98search36",
+            "observation_sha256": "f5a87097936a7ecc29b58c28869db9da2c505343e097710a10c5d8c429536227",
+            "hash_scope": "Analyst paraphrase, not raw page bytes"
+          }
+        },
+        {
+          "url": "https://manual.gromacs.org/current/download.html",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "downloads"
+          ],
+          "observed_facts": [
+            "Official download route is linked from the project homepage."
+          ],
+          "retrieval": {
+            "method": "primary-page web retrieval",
+            "source_ref": "turn117view4",
+            "observation_sha256": "f095acfbf569e47c4d614c13bd3e73f8c3484745367aeb0a2ed5ca9923194263",
+            "hash_scope": "Analyst paraphrase, not raw page bytes"
+          }
+        },
+        {
+          "url": "https://gitlab.com/gromacs/gromacs",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity"
+          ],
+          "observed_facts": [
+            "The GitLab project identifies itself as the GROMACS molecular simulation toolkit"
+          ],
+          "retrieval": {
+            "method": "primary-page web retrieval",
+            "source_ref": "turn168view2",
+            "observation_sha256": "5dac6c83551b5c18ccb62431714770fe19f9ae95bc4221ab73be7657c1cd4ad5",
+            "hash_scope": "Analyst paraphrase, not raw page bytes"
+          }
+        }
+      ],
+      "editorial_basis": "Recommendations compare documented workflow fit and requirements; no executable was run and no independent performance, accuracy or security benchmark is claimed."
+    },
+    {
+      "app_id": "lammps",
+      "reviewed_at": "2026-11-16",
+      "observations": [
+        {
+          "url": "https://www.lammps.org/download/",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity",
+            "downloads",
+            "platforms",
+            "license",
+            "pricing"
+          ],
+          "observed_facts": [
+            "Official download routes cover Windows, Linux and macOS and describe GPLv2 distribution."
+          ],
+          "retrieval": {
+            "method": "primary-page web retrieval",
+            "source_ref": "turn98search8",
+            "observation_sha256": "53e162a2b88474e58e111678c1aa87c10889641b74f433058d82909e4b22bc97",
+            "hash_scope": "Analyst paraphrase, not raw page bytes"
+          }
+        },
+        {
+          "url": "https://docs.lammps.org/Install.html",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "features",
+            "downloads"
+          ],
+          "observed_facts": [
+            "Documentation explains installation paths and feature limitations of precompiled executables."
+          ],
+          "retrieval": {
+            "method": "primary-page web retrieval",
+            "source_ref": "turn98search13",
+            "observation_sha256": "d2df314eb9fb2b800be67c3f16dfa2846fa3be47e29bd98a9cfb5de9c517d280",
+            "hash_scope": "Analyst paraphrase, not raw page bytes"
+          }
+        },
+        {
+          "url": "https://lammps-gui.lammps.org/installation.html",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "features",
+            "platforms"
+          ],
+          "observed_facts": [
+            "GUI documentation describes bundled executable packages for Windows, Linux and macOS."
+          ],
+          "retrieval": {
+            "method": "primary-page web retrieval",
+            "source_ref": "turn98search21",
+            "observation_sha256": "355ece23806f689ecafad430c41a1fea25b5d9639829fbad474956f748b80396",
+            "hash_scope": "Analyst paraphrase, not raw page bytes"
+          }
+        },
+        {
+          "url": "https://www.lammps.org/",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity",
+            "features",
+            "maintenance"
+          ],
+          "observed_facts": [
+            "LAMMPS describes classical molecular dynamics for materials, biomolecules, polymers and coarse-grained particles",
+            "The official news lists a feature release dated 13 November 2026"
+          ],
+          "retrieval": {
+            "method": "primary-page web retrieval",
+            "source_ref": "turn169view3",
+            "observation_sha256": "1bbd5613e392dbce43a1e26597af0d35d1264f2a43edb039ade4bdac83fa804d",
+            "hash_scope": "Analyst paraphrase, not raw page bytes"
+          }
+        }
+      ],
+      "editorial_basis": "Recommendations compare documented workflow fit and requirements; no executable was run and no independent performance, accuracy or security benchmark is claimed."
+    },
+    {
+      "app_id": "vmd",
+      "reviewed_at": "2026-11-16",
+      "observations": [
+        {
+          "url": "https://www.ks.uiuc.edu/Research/vmd/",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity",
+            "features",
+            "platforms",
+            "pricing"
+          ],
+          "observed_facts": [
+            "Project describes molecular visualization, no-charge distribution with source, and Windows, macOS and Unix support."
+          ],
+          "retrieval": {
+            "method": "primary-page web retrieval",
+            "source_ref": "turn98search1",
+            "observation_sha256": "c574c4f50ce653ff206d47c7ec7ff1b3664e667a2390a059bc5e907dcf42adc8",
+            "hash_scope": "Analyst paraphrase, not raw page bytes"
+          }
+        },
+        {
+          "url": "https://www.ks.uiuc.edu/Development/Download/download.cgi?PackageName=VMD",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "downloads",
+            "platforms"
+          ],
+          "observed_facts": [
+            "Official download page separates production and experimental platform builds."
+          ],
+          "retrieval": {
+            "method": "primary-page web retrieval",
+            "source_ref": "turn98search2",
+            "observation_sha256": "c9b5f724f356375cc55543313f693d8dd3f771e2866eea2ead32b50e0b8be231",
+            "hash_scope": "Analyst paraphrase, not raw page bytes"
+          }
+        },
+        {
+          "url": "https://www.ks.uiuc.edu/Research/vmd/current/LICENSE.html",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "license",
+            "pricing"
+          ],
+          "observed_facts": [
+            "Main VMD uses a custom license restricting uses and redistribution; most plugins use a separate UIUC open-source license."
+          ],
+          "retrieval": {
+            "method": "primary-page web retrieval",
+            "source_ref": "turn102view4",
+            "observation_sha256": "97fa2e43afc055456b6c7626768127d5610babfc82ca7bf8a02f1d19851f149c",
+            "hash_scope": "Analyst paraphrase, not raw page bytes"
+          }
+        }
+      ],
+      "editorial_basis": "Recommendations compare documented workflow fit and requirements; no executable was run and no independent performance, accuracy or security benchmark is claimed."
+    },
+    {
+      "app_id": "xflr5",
+      "reviewed_at": "2026-11-16",
+      "observations": [
+        {
+          "url": "https://www.xflr5.tech/",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity",
+            "features",
+            "maintenance"
+          ],
+          "observed_facts": [
+            "The developer describes low-Reynolds-number airfoil and aircraft analysis",
+            "The project states that it closed on 30 June 2026 and points to flow5"
+          ],
+          "retrieval": {
+            "method": "primary-page web retrieval",
+            "source_ref": "turn104search1",
+            "observation_sha256": "04ddd7876f1ec9edc88618facc8347fc289d7a26313e4d2c8a4f1f0c7e56fa58",
+            "hash_scope": "Analyst paraphrase, not raw page bytes"
+          }
+        },
+        {
+          "url": "https://sourceforge.net/projects/xflr5/",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "license",
+            "platforms",
+            "downloads",
+            "maintenance"
+          ],
+          "observed_facts": [
+            "The maintainer project lists GPL version 3, Linux, Mac and Windows",
+            "Its status is Abandoned and last update is 30 June 2026"
+          ],
+          "retrieval": {
+            "method": "primary-page web retrieval",
+            "source_ref": "turn140view0",
+            "observation_sha256": "6af72fbc3a78edcf5801b928cfe1f9911bcc62c9e22e383f7ab85919f8bd1915",
+            "hash_scope": "Analyst paraphrase, not raw page bytes"
+          }
+        },
+        {
+          "url": "https://sourceforge.net/projects/xflr5/",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "license",
+            "platforms",
+            "downloads",
+            "maintenance",
+            "pricing"
+          ],
+          "observed_facts": [
+            "The maintainer project lists GPL-3.0 and Linux, Mac and Windows",
+            "Its public download has no purchase requirement",
+            "The status is Abandoned and last update is 30 June 2026"
+          ],
+          "retrieval": {
+            "method": "primary-page web retrieval",
+            "source_ref": "turn140view0",
+            "observation_sha256": "248b66b99f5bcad70c6820c01edecd759f8000bd2ab2d52978260045ccbc2d66",
+            "hash_scope": "Analyst paraphrase, not raw page bytes"
+          }
+        },
+        {
+          "url": "https://sourceforge.net/projects/xflr5/files/",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "downloads"
+          ],
+          "observed_facts": [
+            "The official maintainer file archive contains the legacy XFLR5 distribution"
+          ],
+          "retrieval": {
+            "method": "primary-page web retrieval",
+            "source_ref": "turn169view0",
+            "observation_sha256": "05449ef17f0315c8af01a85fedc98a4d5fa63fb17217cf8169c8f9c315db37fc",
+            "hash_scope": "Analyst paraphrase, not raw page bytes"
+          }
+        }
+      ],
+      "editorial_basis": "Recommendations compare documented workflow fit and requirements; no executable was run and no independent performance, accuracy or security benchmark is claimed."
+    },
+    {
+      "app_id": "flow5",
+      "reviewed_at": "2026-11-16",
+      "observations": [
+        {
+          "url": "https://github.com/techwinder/flow5",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity",
+            "features",
+            "license"
+          ],
+          "observed_facts": [
+            "The repository identifies flow5 as version 7 of XFLR5 under GPL-3.0",
+            "The README provides airfoil and plane calculation API examples"
+          ],
+          "retrieval": {
+            "method": "primary-page web retrieval",
+            "source_ref": "turn142view2",
+            "observation_sha256": "0dd0a114749d01de802dd325f906904b31939acabda9493ffe12633c1c2a134d",
+            "hash_scope": "Analyst paraphrase, not raw page bytes"
+          }
+        },
+        {
+          "url": "https://flow5.tech/",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "features",
+            "downloads",
+            "pricing"
+          ],
+          "observed_facts": [
+            "The official site presents the open-source potential-flow solver and its distribution route"
+          ],
+          "retrieval": {
+            "method": "primary-page web retrieval",
+            "source_ref": "turn112search5",
+            "observation_sha256": "3351951cd5fcc1619d472be1b1fb8d3e1e9476bf79a37b80edf8e2c2f92ed02c",
+            "hash_scope": "Analyst paraphrase, not raw page bytes"
+          }
+        },
+        {
+          "url": "https://flow5.tech/docs/releasenotes.html",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "maintenance",
+            "platforms",
+            "features"
+          ],
+          "observed_facts": [
+            "Release 7.58 is dated 25 October 2026",
+            "The Intel Mac package is the last x86 release and future Linux packages end",
+            "Plane optimization and advanced fuselage editing were removed"
+          ],
+          "retrieval": {
+            "method": "primary-page web retrieval",
+            "source_ref": "turn142view0",
+            "observation_sha256": "b92a4f908a4d413db5716e1df50c9522590d11cfc0a6874e7e8ed25842255f91",
+            "hash_scope": "Analyst paraphrase, not raw page bytes"
+          }
+        }
+      ],
+      "editorial_basis": "Recommendations compare documented workflow fit and requirements; no executable was run and no independent performance, accuracy or security benchmark is claimed."
+    },
+    {
+      "app_id": "whitebox-workflows",
+      "reviewed_at": "2026-11-16",
+      "observations": [
+        {
+          "url": "https://www.whiteboxgeo.com/products-wbw.html",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity",
+            "features",
+            "pricing",
+            "platforms"
+          ],
+          "observed_facts": [
+            "The current Next Gen product uses local Rust-backed geospatial processing through Python and R",
+            "The product gives pip installation for whitebox_workflows and lists R 4.6 Windows and macOS ARM64 binaries",
+            "The core is free and Pro is separate"
+          ],
+          "retrieval": {
+            "method": "primary-page web retrieval",
+            "source_ref": "turn143view2",
+            "observation_sha256": "158c4816503279487148c011d390694c782b6e227840bdddf0a7d768fd0261ed",
+            "hash_scope": "Analyst paraphrase, not raw page bytes"
+          }
+        },
+        {
+          "url": "https://www.whiteboxgeo.com/manuals/api/python/licensing.html",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "license",
+            "pricing"
+          ],
+          "observed_facts": [
+            "The open tier is dual MIT or Apache-2.0",
+            "Pro functionality requires proprietary licensing and activation"
+          ],
+          "retrieval": {
+            "method": "primary-page web retrieval",
+            "source_ref": "turn102view1",
+            "observation_sha256": "9065fda1c05cd73ec18ca1bb194d7cc02d9a5fe0910fc01d60704d3b51bccde4",
+            "hash_scope": "Analyst paraphrase, not raw page bytes"
+          }
+        },
+        {
+          "url": "https://pypi.org/project/whitebox-workflows/",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "downloads",
+            "platforms"
+          ],
+          "observed_facts": [
+            "Published wheels include Windows x64, macOS ARM64 and Linux x64 variants"
+          ],
+          "retrieval": {
+            "method": "primary-page web retrieval",
+            "source_ref": "turn132view0",
+            "observation_sha256": "1eedd2f22fd5a19cba7b954cd110d18feeee0621bb38548e946e0beb5e801dde",
+            "hash_scope": "Analyst paraphrase, not raw page bytes"
+          }
+        },
+        {
+          "url": "https://github.com/jblindsay/whitebox_next_gen",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity",
+            "license"
+          ],
+          "observed_facts": [
+            "The maintainer repository provides the Next Gen open-source implementation"
+          ],
+          "retrieval": {
+            "method": "primary-page web retrieval",
+            "source_ref": "turn131search2",
+            "observation_sha256": "2a9c32493ca0aff01244cc824d170cf49f6f94f84f2080afa4b5d245eb62a8db",
+            "hash_scope": "Analyst paraphrase, not raw page bytes"
+          }
+        }
+      ],
+      "editorial_basis": "Recommendations compare documented workflow fit and requirements; no executable was run and no independent performance, accuracy or security benchmark is claimed."
+    },
+    {
+      "app_id": "gephi",
+      "reviewed_at": "2026-11-16",
+      "observations": [
+        {
+          "url": "https://gephi.org/desktop/",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity",
+            "features",
+            "maintenance",
+            "downloads"
+          ],
+          "observed_facts": [
+            "The desktop product provides layouts, network statistics, filters, tabular data and visual export",
+            "The roadmap updated in August 2026 lists undo/redo and temporal-graph improvements as outstanding"
+          ],
+          "retrieval": {
+            "method": "primary-page web retrieval",
+            "source_ref": "turn129view1",
+            "observation_sha256": "e66a911b0db383ba70d12cbe32f22217aff5ed9fa79bdd05f882bac8e0fd6cce",
+            "hash_scope": "Analyst paraphrase, not raw page bytes"
+          }
+        },
+        {
+          "url": "https://gephi.org/legal/",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "license",
+            "pricing"
+          ],
+          "observed_facts": [
+            "Gephi is free software available under CDDL-1.0 or GPL-3.0"
+          ],
+          "retrieval": {
+            "method": "primary-page web retrieval",
+            "source_ref": "turn101search5",
+            "observation_sha256": "5a30e5376dc675319e5dd1eae48881c43641d5730278163d009e270aff84513a",
+            "hash_scope": "Analyst paraphrase, not raw page bytes"
+          }
+        },
+        {
+          "url": "https://docs.gephi.org/desktop/User_Manual/Supported_Systems/",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "platforms",
+            "downloads"
+          ],
+          "observed_facts": [
+            "The documentation lists Windows and macOS installers and Linux distribution options"
+          ],
+          "retrieval": {
+            "method": "primary-page web retrieval",
+            "source_ref": "turn101search2",
+            "observation_sha256": "cfd0c8f548d78b379321a49794a7389f3e9a348d431793f9a7301b84306157fa",
+            "hash_scope": "Analyst paraphrase, not raw page bytes"
+          }
+        }
+      ],
+      "editorial_basis": "Recommendations compare documented workflow fit and requirements; no executable was run and no independent performance, accuracy or security benchmark is claimed."
+    },
+    {
+      "app_id": "cytoscape",
+      "reviewed_at": "2026-11-16",
+      "observations": [
+        {
+          "url": "https://desktop.cytoscape.org/",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity",
+            "features",
+            "pricing"
+          ],
+          "observed_facts": [
+            "Cytoscape is a free open-source platform for complex network visualization and analysis",
+            "Its biological-network focus extends to other network types"
+          ],
+          "retrieval": {
+            "method": "primary-page web retrieval",
+            "source_ref": "turn101search23",
+            "observation_sha256": "5cf2b13e023ba4f705a31e28a0fe757a16413c011e12d338ebf61a098b5790c1",
+            "hash_scope": "Analyst paraphrase, not raw page bytes"
+          }
+        },
+        {
+          "url": "https://cytoscape.org/download.html",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "license",
+            "downloads"
+          ],
+          "observed_facts": [
+            "The desktop distribution identifies LGPL-2.1 licensing and download/source routes"
+          ],
+          "retrieval": {
+            "method": "primary-page web retrieval",
+            "source_ref": "turn121view2",
+            "observation_sha256": "734f6a5ce5ec505cb92b9ee7f089e7c93f3d28efb6c2eaca08ba918a90425972",
+            "hash_scope": "Analyst paraphrase, not raw page bytes"
+          }
+        },
+        {
+          "url": "https://cytoscape.org/download-platforms.html",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "platforms",
+            "downloads"
+          ],
+          "observed_facts": [
+            "The official download matrix provides Windows, macOS and Linux distributions"
+          ],
+          "retrieval": {
+            "method": "primary-page web retrieval",
+            "source_ref": "turn101search21",
+            "observation_sha256": "5174a9410d484dbff4ab5a747ad6277d9e5d6c91eee01eb120fa1ae089d8572c",
+            "hash_scope": "Analyst paraphrase, not raw page bytes"
+          }
+        },
+        {
+          "url": "https://github.com/cytoscape/cytoscape",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity"
+          ],
+          "observed_facts": [
+            "The official Cytoscape repository identifies the network-analysis and visualization platform"
+          ],
+          "retrieval": {
+            "method": "primary-page web retrieval",
+            "source_ref": "turn168view1",
+            "observation_sha256": "554b6bb707af6465b65527d76d5a9ea6fdc48828bd8810f6c247f4ae4753e7e0",
+            "hash_scope": "Analyst paraphrase, not raw page bytes"
+          }
+        }
+      ],
+      "editorial_basis": "Recommendations compare documented workflow fit and requirements; no executable was run and no independent performance, accuracy or security benchmark is claimed."
+    },
+    {
+      "app_id": "openrefine",
+      "reviewed_at": "2026-11-16",
+      "observations": [
+        {
+          "url": "https://openrefine.org/",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity",
+            "features"
+          ],
+          "observed_facts": [
+            "The project describes facets, clustering, transformations and reconciliation",
+            "Data runs locally unless an operation uses an external service"
+          ],
+          "retrieval": {
+            "method": "primary-page web retrieval",
+            "source_ref": "turn129view2",
+            "observation_sha256": "dbdf86a5b88a84651c2e0e2c452a21cfb45c171ff14595d7777864a67ece7ac3",
+            "hash_scope": "Analyst paraphrase, not raw page bytes"
+          }
+        },
+        {
+          "url": "https://openrefine.org/download",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "license",
+            "platforms",
+            "pricing",
+            "downloads",
+            "maintenance"
+          ],
+          "observed_facts": [
+            "The download page identifies free BSD-licensed distributions for Windows, macOS and Linux",
+            "Version 3.10.0 is dated 26 February 2026"
+          ],
+          "retrieval": {
+            "method": "primary-page web retrieval",
+            "source_ref": "turn101search0",
+            "observation_sha256": "3ef2184b2b68345e409c5d5ff8628381b30670dafba4553aa5fe657e80738780",
+            "hash_scope": "Analyst paraphrase, not raw page bytes"
+          }
+        }
+      ],
+      "editorial_basis": "Recommendations compare documented workflow fit and requirements; no executable was run and no independent performance, accuracy or security benchmark is claimed."
+    },
+    {
+      "app_id": "knime",
+      "reviewed_at": "2026-11-16",
+      "observations": [
+        {
+          "url": "https://www.knime.com/knime-analytics-platform/",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity",
+            "features",
+            "pricing"
+          ],
+          "observed_facts": [
+            "The desktop Analytics Platform is free and open source",
+            "It provides visual data preparation, analytics and machine-learning workflows"
+          ],
+          "retrieval": {
+            "method": "primary-page web retrieval",
+            "source_ref": "turn104search17",
+            "observation_sha256": "37cc69c3c0ef2862f7ab25088e1b9b76ae86190da25811bc2f6a33a92bde74a9",
+            "hash_scope": "Analyst paraphrase, not raw page bytes"
+          }
+        },
+        {
+          "url": "https://www.knime.com/downloads/full-license",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "license"
+          ],
+          "observed_facts": [
+            "The license is GPL version 3 with KNIME additional permissions",
+            "Separate node and integration licenses may apply"
+          ],
+          "retrieval": {
+            "method": "primary-page web retrieval",
+            "source_ref": "turn112search6",
+            "observation_sha256": "f6ba18b9ab394b13ea1c6664c4493895f37d819e8f6b49e0e5622e98ba18ee8e",
+            "hash_scope": "Analyst paraphrase, not raw page bytes"
+          }
+        },
+        {
+          "url": "https://docs.knime.com/ap/latest/analytics_platform_installation_guide/index.html",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "platforms",
+            "downloads"
+          ],
+          "observed_facts": [
+            "The installation guide covers Windows, macOS and Linux desktop installation"
+          ],
+          "retrieval": {
+            "method": "primary-page web retrieval",
+            "source_ref": "turn104search12",
+            "observation_sha256": "07a85feef655702fbdbedd1837b32a71693938af91b7af864a3ef61067156fd2",
+            "hash_scope": "Analyst paraphrase, not raw page bytes"
+          }
+        },
+        {
+          "url": "https://www.knime.com/downloads",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "downloads"
+          ],
+          "observed_facts": [
+            "Official platform downloads are available through the KNIME download portal"
+          ],
+          "retrieval": {
+            "method": "primary-page web retrieval",
+            "source_ref": "turn104search9",
+            "observation_sha256": "df5476f1e166cdd5381c68ece7be289048419ca741c6c66c209464ace8d894e2",
+            "hash_scope": "Analyst paraphrase, not raw page bytes"
+          }
+        },
+        {
+          "url": "https://www.knime.com/knime-hub-pricing",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "pricing"
+          ],
+          "observed_facts": [
+            "Hub collaboration and deployment offerings have separate pricing from the free desktop platform"
+          ],
+          "retrieval": {
+            "method": "primary-page web retrieval",
+            "source_ref": "turn104search36",
+            "observation_sha256": "a93be26ab2c19b22b1105a053e2eaf09a0e5bac079dbeb6991c668a01fad22b2",
+            "hash_scope": "Analyst paraphrase, not raw page bytes"
+          }
+        }
+      ],
+      "editorial_basis": "Recommendations compare documented workflow fit and requirements; no executable was run and no independent performance, accuracy or security benchmark is claimed."
+    },
+    {
+      "app_id": "gretl",
+      "reviewed_at": "2026-11-16",
+      "observations": [
+        {
+          "url": "https://gretl.sourceforge.net/",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity",
+            "features",
+            "license",
+            "pricing",
+            "platforms",
+            "downloads",
+            "maintenance"
+          ],
+          "observed_facts": [
+            "Gretl is a free open-source econometrics package under the GNU GPL for Windows, macOS and Linux",
+            "The official page lists GUI, command line, Hansl scripting, regression, panel and time-series estimators",
+            "Release 2026d is dated 29 October 2026"
+          ],
+          "retrieval": {
+            "method": "primary-page web retrieval",
+            "source_ref": "turn129view0",
+            "observation_sha256": "d2746d1b11bb123079628bac169265f0ecccaf07d2570a1449c140f0ecf64e6b",
+            "hash_scope": "Analyst paraphrase, not raw page bytes"
+          }
+        }
+      ],
+      "editorial_basis": "Recommendations compare documented workflow fit and requirements; no executable was run and no independent performance, accuracy or security benchmark is claimed."
+    },
+    {
+      "app_id": "originpro",
+      "reviewed_at": "2026-11-16",
+      "observations": [
+        {
+          "url": "https://www.originlab.com/index.aspx?go=Products/Origin",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity",
+            "features"
+          ],
+          "observed_facts": [
+            "Origin and OriginPro provide scientific plotting, fitting, templates and analysis integration",
+            "Advanced tools vary by edition"
+          ],
+          "retrieval": {
+            "method": "primary-page web retrieval",
+            "source_ref": "turn117view1",
+            "observation_sha256": "ca1098ac6548331c102d4038f5ddf6b7ec27ab4e6e4b84b3490ced84fcff7ff0",
+            "hash_scope": "Analyst paraphrase, not raw page bytes"
+          }
+        },
+        {
+          "url": "https://www.originlab.com/try",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "downloads",
+            "pricing"
+          ],
+          "observed_facts": [
+            "The official download offers a 21-day trial before a paid license is needed"
+          ],
+          "retrieval": {
+            "method": "primary-page web retrieval",
+            "source_ref": "turn104search7",
+            "observation_sha256": "58d63fd37204890a95ce46d5d079bff67302a945e3e0ef027543d0f0d7bb0474",
+            "hash_scope": "Analyst paraphrase, not raw page bytes"
+          }
+        },
+        {
+          "url": "https://www.originlab.com/Index.aspx?go=PURCHASE&pid=1775",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "license"
+          ],
+          "observed_facts": [
+            "The OriginLab EULA grants a restricted software license with seat and activation terms"
+          ],
+          "retrieval": {
+            "method": "primary-page web retrieval",
+            "source_ref": "turn113search13",
+            "observation_sha256": "a55be3366c672e0bae6c04dcc78348df7e363773bb78e6531e0cca71cec41f26",
+            "hash_scope": "Analyst paraphrase, not raw page bytes"
+          }
+        },
+        {
+          "url": "https://www.originlab.com/index.aspx?go=Support/DocumentationAndHelpCenter/Installation/SystemRequirements",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "platforms"
+          ],
+          "observed_facts": [
+            "Current Origin and OriginPro require x64 Windows 10 or 11",
+            "The Mac guidance runs Windows through Boot Camp or a virtual machine rather than a native macOS build"
+          ],
+          "retrieval": {
+            "method": "primary-page web retrieval",
+            "source_ref": "turn138view2",
+            "observation_sha256": "457d5201ac9fb405bd9b067e5ec72319e503766a6bc5e66520f9f3e83463c0bb",
+            "hash_scope": "Analyst paraphrase, not raw page bytes"
+          }
+        }
+      ],
+      "editorial_basis": "Recommendations compare documented workflow fit and requirements; no executable was run and no independent performance, accuracy or security benchmark is claimed."
+    },
+    {
+      "app_id": "astrodmx-capture",
+      "reviewed_at": "2026-11-16",
+      "observations": [
+        {
+          "url": "https://www.astrodmx-capture.org.uk/",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity",
+            "features"
+          ],
+          "observed_facts": [
+            "The official site describes an astronomical image capture application"
+          ],
+          "retrieval": {
+            "method": "primary-page web retrieval",
+            "source_ref": "turn105search1",
+            "observation_sha256": "1145c4070fdec29b9ad280718ef4794166ae402faa6ff44acebe53f10392e269",
+            "hash_scope": "Analyst paraphrase, not raw page bytes"
+          }
+        },
+        {
+          "url": "https://www.astrodmx-capture.org.uk/documentation-main-functionality/",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "features"
+          ],
+          "observed_facts": [
+            "The documentation describes acquisition functions and camera controls"
+          ],
+          "retrieval": {
+            "method": "primary-page web retrieval",
+            "source_ref": "turn105search6",
+            "observation_sha256": "a3f5aefb879b3450034606d4a50039cf0c993ce8c55de35c47e616054ee31bd4",
+            "hash_scope": "Analyst paraphrase, not raw page bytes"
+          }
+        },
+        {
+          "url": "https://www.astrodmx-capture.org.uk/astrodmx-capture-downloads/",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "platforms",
+            "downloads",
+            "license",
+            "pricing",
+            "maintenance"
+          ],
+          "observed_facts": [
+            "Current downloads cover Windows, macOS Intel and Apple Silicon, and Linux x86 and ARM configurations",
+            "The page states that ChromeOS development and support have ended",
+            "The software is available without a purchase and the license restricts redistribution, repackaging and sale"
+          ],
+          "retrieval": {
+            "method": "primary-page web retrieval",
+            "source_ref": "turn105search0",
+            "observation_sha256": "38ccb3b272e9af59b9abee1677b438fd65280c0e50015059fbc515c12b583021",
+            "hash_scope": "Analyst paraphrase, not raw page bytes"
+          }
+        }
+      ],
+      "editorial_basis": "Recommendations compare documented workflow fit and requirements; no executable was run and no independent performance, accuracy or security benchmark is claimed."
+    },
+    {
+      "app_id": "firecapture",
+      "reviewed_at": "2026-11-16",
+      "observations": [
+        {
+          "url": "https://firecapture.de/",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity",
+            "features",
+            "platforms",
+            "downloads",
+            "pricing"
+          ],
+          "observed_facts": [
+            "The developer distributes free FireCapture packages for supported desktop platforms and camera combinations",
+            "The site publishes a camera support matrix and acquisition features"
+          ],
+          "retrieval": {
+            "method": "primary-page web retrieval",
+            "source_ref": "turn130view2",
+            "observation_sha256": "300a83b61547ecd2b78c548d2f9c97b4918ac849d6f6bf7e42eb9f186c628c45",
+            "hash_scope": "Analyst paraphrase, not raw page bytes"
+          }
+        },
+        {
+          "url": "https://firecapture.de/license.html",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "license"
+          ],
+          "observed_facts": [
+            "The developer permits private use and prohibits commercial use, modification and unauthorized redistribution"
+          ],
+          "retrieval": {
+            "method": "primary-page web retrieval",
+            "source_ref": "turn127view1",
+            "observation_sha256": "bf50732d42b75158d4668aeb6978493fa1a3c8409fa07da89f6f5b395b4f07b0",
+            "hash_scope": "Analyst paraphrase, not raw page bytes"
+          }
+        }
+      ],
+      "editorial_basis": "Recommendations compare documented workflow fit and requirements; no executable was run and no independent performance, accuracy or security benchmark is claimed."
+    },
+    {
+      "app_id": "sharpcap",
+      "reviewed_at": "2026-11-16",
+      "observations": [
+        {
+          "url": "https://www.sharpcap.co.uk/",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity",
+            "features"
+          ],
+          "observed_facts": [
+            "SharpCap provides astronomical acquisition and live stacking"
+          ],
+          "retrieval": {
+            "method": "primary-page web retrieval",
+            "source_ref": "turn105search28",
+            "observation_sha256": "f9a757da2951b1cb85d7bc80b9d1d2196d065860a049cbc83082860441c9efca",
+            "hash_scope": "Analyst paraphrase, not raw page bytes"
+          }
+        },
+        {
+          "url": "https://www.sharpcap.co.uk/feature-comparison",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "features",
+            "pricing"
+          ],
+          "observed_facts": [
+            "The comparison distinguishes free functionality from Pro features"
+          ],
+          "retrieval": {
+            "method": "primary-page web retrieval",
+            "source_ref": "turn105search24",
+            "observation_sha256": "acdda42c885bc8f36c55a5827b420815b047d5e5bcd095847e835f8246cea2ec",
+            "hash_scope": "Analyst paraphrase, not raw page bytes"
+          }
+        },
+        {
+          "url": "https://downloads.sharpcap.co.uk/",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "downloads",
+            "platforms"
+          ],
+          "observed_facts": [
+            "Official Windows downloads use the same application installer for free and Pro usage"
+          ],
+          "retrieval": {
+            "method": "primary-page web retrieval",
+            "source_ref": "turn105search2",
+            "observation_sha256": "65bcb65e61237d85d9163e61d796dd564ba22e350c626fdd25b50b7263659e95",
+            "hash_scope": "Analyst paraphrase, not raw page bytes"
+          }
+        },
+        {
+          "url": "https://www.sharpcap.co.uk/sharpcap/sharpcap-pro/premium",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "license",
+            "pricing",
+            "features"
+          ],
+          "observed_facts": [
+            "A personal Pro license is annual and limited to the documented household/primary-user scope",
+            "Educational or commercial multi-computer use requires a site-license discussion",
+            "Pro testing without a license disables saving when using a real camera"
+          ],
+          "retrieval": {
+            "method": "primary-page web retrieval",
+            "source_ref": "turn141view1",
+            "observation_sha256": "7e835d411d1b75612a3b3737eac963f49715ca3475bbd03e0bcd813b46bf7444",
+            "hash_scope": "Analyst paraphrase, not raw page bytes"
+          }
+        },
+        {
+          "url": "https://www.sharpcap.co.uk/sharpcap/downloads/",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "maintenance",
+            "platforms"
+          ],
+          "observed_facts": [
+            "The downloads page lists version 4.1.14325.0 dated 30 October 2026"
+          ],
+          "retrieval": {
+            "method": "primary-page web retrieval",
+            "source_ref": "turn117view2",
+            "observation_sha256": "af0a321dac71dcd8f1ba141771703b338d5e0eac1734dcdb21eaa5dbeafc3bb1",
+            "hash_scope": "Analyst paraphrase, not raw page bytes"
+          }
+        }
+      ],
+      "editorial_basis": "Recommendations compare documented workflow fit and requirements; no executable was run and no independent performance, accuracy or security benchmark is claimed."
+    },
+    {
+      "app_id": "peartree",
+      "reviewed_at": "2026-11-16",
+      "observations": [
+        {
+          "url": "https://github.com/artic-network/peartree",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity",
+            "features",
+            "license",
+            "platforms"
+          ],
+          "observed_facts": [
+            "The MIT-licensed project identifies PearTree as the successor to FigTree",
+            "It provides local browser processing, tree and metadata controls, exports and desktop distribution"
+          ],
+          "retrieval": {
+            "method": "primary-page web retrieval",
+            "source_ref": "turn143view1",
+            "observation_sha256": "ca96736b4d77097cbb8ccbe4a35c06959f806ba6397279ffbbf78292a6ad6be7",
+            "hash_scope": "Analyst paraphrase, not raw page bytes"
+          }
+        },
+        {
+          "url": "https://github.com/artic-network/peartree/releases",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "downloads",
+            "platforms",
+            "maintenance"
+          ],
+          "observed_facts": [
+            "Version 1.3.2 was released on 13 October 2026",
+            "Assets include macOS universal, Windows x64 and Linux x64 packages plus the web application"
+          ],
+          "retrieval": {
+            "method": "primary-page web retrieval",
+            "source_ref": "turn142view1",
+            "observation_sha256": "46b474ec9027fbb8587fe0abaa85e08cc0c9e03e651d5d54e71308bd4e6630c2",
+            "hash_scope": "Analyst paraphrase, not raw page bytes"
+          }
+        },
+        {
+          "url": "https://beast.community/peartree_tutorial.html",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "features"
+          ],
+          "observed_facts": [
+            "The maintainer tutorial demonstrates annotated phylogenetic tree visualization with PearTree"
+          ],
+          "retrieval": {
+            "method": "primary-page web retrieval",
+            "source_ref": "turn108search34",
+            "observation_sha256": "a14367d16fee2c0a1d89733c73f6ef8b7f3457df27bc9d8d8f7fa6dc6b7ae8b7",
+            "hash_scope": "Analyst paraphrase, not raw page bytes"
+          }
+        },
+        {
+          "url": "https://github.com/artic-network/peartree/releases",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "downloads",
+            "platforms",
+            "maintenance",
+            "pricing"
+          ],
+          "observed_facts": [
+            "Version 1.3.2 was released on 13 October 2026 with Mac, Windows and Linux packages",
+            "The public release links provide downloads without a purchase step; this is the no-charge distribution scope assessed here"
+          ],
+          "retrieval": {
+            "method": "primary-page web retrieval",
+            "source_ref": "turn142view1",
+            "observation_sha256": "34579e88f54ffa6930df2c04029444214d0cd14f50b65ce0a523f28ad70abcc5",
+            "hash_scope": "Analyst paraphrase, not raw page bytes"
+          }
+        }
+      ],
+      "editorial_basis": "Recommendations compare documented workflow fit and requirements; no executable was run and no independent performance, accuracy or security benchmark is claimed."
+    },
+    {
+      "app_id": "cantabile",
+      "reviewed_at": "2026-11-16",
+      "observations": [
+        {
+          "url": "https://www.cantabilesoftware.com/compare",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity",
+            "features",
+            "platforms",
+            "pricing"
+          ],
+          "observed_facts": [
+            "Lite is free and hosts VST2/VST3 instruments and effects",
+            "Solo adds recording, set lists and more MIDI controls; Performer adds performance states",
+            "Current requirements are 64-bit Windows 10 Anniversary Update or Windows 11"
+          ],
+          "retrieval": {
+            "method": "primary-page web retrieval",
+            "source_ref": "turn147view0",
+            "observation_sha256": "043fad3cdff533c39057ddfea653e01948daea200ec6fa6dcf3ec496ddf16ddc",
+            "hash_scope": "Analyst paraphrase, not raw page bytes"
+          }
+        },
+        {
+          "url": "https://www.cantabilesoftware.com/download/",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "downloads"
+          ],
+          "observed_facts": [
+            "The official download includes the three editions and a paid-edition trial"
+          ],
+          "retrieval": {
+            "method": "primary-page web retrieval",
+            "source_ref": "turn105search3",
+            "observation_sha256": "61003b13aa66e279ec04fe250100c42a2f48773fa803be61a9c2fe179ad7e0ef",
+            "hash_scope": "Analyst paraphrase, not raw page bytes"
+          }
+        },
+        {
+          "url": "https://www.cantabilesoftware.com/license",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "license"
+          ],
+          "observed_facts": [
+            "The proprietary agreement grants a limited nonexclusive software license and restricts redistribution and modification"
+          ],
+          "retrieval": {
+            "method": "primary-page web retrieval",
+            "source_ref": "turn150view0",
+            "observation_sha256": "33762831cfe89d7338f34fa1ad24a91b42f8536f8fecd0c84fd12d016fff5d35",
+            "hash_scope": "Analyst paraphrase, not raw page bytes"
+          }
+        }
+      ],
+      "editorial_basis": "Recommendations compare documented workflow fit and requirements; no executable was run and no independent performance, accuracy or security benchmark is claimed."
+    },
+    {
+      "app_id": "element",
+      "reviewed_at": "2026-11-16",
+      "observations": [
+        {
+          "url": "https://kushview.net/element/",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity",
+            "features"
+          ],
+          "observed_facts": [
+            "Element is a modular audio host for desktop plugin routing"
+          ],
+          "retrieval": {
+            "method": "primary-page web retrieval",
+            "source_ref": "turn106search5",
+            "observation_sha256": "4f3e6c38b3637330ee7a8eeceded6c14984d71a8f50af6fed21701265cdb168e",
+            "hash_scope": "Analyst paraphrase, not raw page bytes"
+          }
+        },
+        {
+          "url": "https://kushview.net/element/download/",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "features",
+            "platforms",
+            "downloads",
+            "pricing"
+          ],
+          "observed_facts": [
+            "The download page lists supported plugin families and Windows, macOS and Linux",
+            "Its public build is free, functional and non-expiring but trails paid update channels",
+            "Supporter and membership options fund earlier updates"
+          ],
+          "retrieval": {
+            "method": "primary-page web retrieval",
+            "source_ref": "turn148view0",
+            "observation_sha256": "06b31487d85dfc9d7a787c21bc3c63e99755a0bc48e7eee2343d48ba12ecf617",
+            "hash_scope": "Analyst paraphrase, not raw page bytes"
+          }
+        },
+        {
+          "url": "https://kushview.net/article/element-memberships/",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "license",
+            "pricing"
+          ],
+          "observed_facts": [
+            "The developer states that Element source is GPLv3 and free builds remain available",
+            "Memberships add earlier builds, support and optional extras"
+          ],
+          "retrieval": {
+            "method": "primary-page web retrieval",
+            "source_ref": "turn147view1",
+            "observation_sha256": "d1c9f81b4ede762812181035b3d5edf11d3ad608a86eb9ff6b9635c022df55c7",
+            "hash_scope": "Analyst paraphrase, not raw page bytes"
+          }
+        },
+        {
+          "url": "https://github.com/kushview/element",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "features",
+            "platforms",
+            "license"
+          ],
+          "observed_facts": [
+            "The official repository documents platform-specific plugin support and source licensing"
+          ],
+          "retrieval": {
+            "method": "primary-page web retrieval",
+            "source_ref": "turn106search8",
+            "observation_sha256": "93389c470b95c31aea0fb5912be9c4c6d1ddddac413dc2e023b3907ee3f6709d",
+            "hash_scope": "Analyst paraphrase, not raw page bytes"
+          }
+        }
+      ],
+      "editorial_basis": "Recommendations compare documented workflow fit and requirements; no executable was run and no independent performance, accuracy or security benchmark is claimed."
+    },
+    {
+      "app_id": "xld",
+      "reviewed_at": "2026-11-16",
+      "observations": [
+        {
+          "url": "https://tmkk.undo.jp/xld/index_e.html",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity",
+            "features",
+            "platforms",
+            "downloads",
+            "pricing"
+          ],
+          "observed_facts": [
+            "The developer describes a Mac application with Intel, PowerPC and Apple Silicon support",
+            "It offers multiple conversion formats, CD extraction, cue splitting and a command-line program",
+            "Downloads and optional donations are provided"
+          ],
+          "retrieval": {
+            "method": "primary-page web retrieval",
+            "source_ref": "turn151view2",
+            "observation_sha256": "42bd58fe99b61163c41d7b379d72f0ae5a77b7c489d8db0385df19d8f1b12520",
+            "hash_scope": "Analyst paraphrase, not raw page bytes"
+          }
+        },
+        {
+          "url": "https://sourceforge.net/projects/xld/",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "license",
+            "downloads"
+          ],
+          "observed_facts": [
+            "The maintainer-owned SourceForge project labels its license OSL-3.0",
+            "That metadata alone does not settle every bundled component license"
+          ],
+          "retrieval": {
+            "method": "primary-page web retrieval",
+            "source_ref": "turn148view3",
+            "observation_sha256": "ff1efd7ff78fcbb2de7ef0886762d5b302123bb6a9d4e508887880661154110f",
+            "hash_scope": "Analyst paraphrase, not raw page bytes"
+          }
+        },
+        {
+          "url": "https://sourceforge.net/p/xld/code/HEAD/tree/",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity"
+          ],
+          "observed_facts": [
+            "The project source repository belongs to the same tmkk maintainer and exposes the XLD source tree"
+          ],
+          "retrieval": {
+            "method": "primary-page web retrieval",
+            "source_ref": "turn151view0",
+            "observation_sha256": "31e20eee4fc43b7eb95890b628ead656c6d3a57795d5b7564cc80e380a4bd7a2",
+            "hash_scope": "Analyst paraphrase, not raw page bytes"
+          }
+        },
+        {
+          "url": "https://sourceforge.net/projects/xld/files/",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "downloads"
+          ],
+          "observed_facts": [
+            "The maintainer file archive is publicly browsable and contains XLD distributions"
+          ],
+          "retrieval": {
+            "method": "primary-page web retrieval",
+            "source_ref": "turn169view1",
+            "observation_sha256": "95dc4ac567120d0c8b90f0cce083fb736bdc67faff2882252bb9f961dfbf094d",
+            "hash_scope": "Analyst paraphrase, not raw page bytes"
+          }
+        }
+      ],
+      "editorial_basis": "Recommendations compare documented workflow fit and requirements; no executable was run and no independent performance, accuracy or security benchmark is claimed."
+    },
+    {
+      "app_id": "dbpoweramp",
+      "reviewed_at": "2026-11-16",
+      "observations": [
+        {
+          "url": "https://www.dbpoweramp.com/dmc",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity",
+            "features",
+            "platforms",
+            "downloads",
+            "pricing"
+          ],
+          "observed_facts": [
+            "The product offers Windows and macOS conversion with CD Ripper and a 21-day trial",
+            "It includes batch folder filtering, metadata integration and optional DSP",
+            "Additional codecs and automation can differ by platform"
+          ],
+          "retrieval": {
+            "method": "primary-page web retrieval",
+            "source_ref": "turn150view1",
+            "observation_sha256": "97384949dacbc2dc56fb5cd80078c6b638f06d5e7c1d7c972391bef1c24969d7",
+            "hash_scope": "Analyst paraphrase, not raw page bytes"
+          }
+        },
+        {
+          "url": "https://www.dbpoweramp.com/download",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "downloads"
+          ],
+          "observed_facts": [
+            "Official trial download routes are provided for Windows and Mac"
+          ],
+          "retrieval": {
+            "method": "primary-page web retrieval",
+            "source_ref": "turn106search19",
+            "observation_sha256": "70ebec4474ae509c6b38968bca48e92c1cb07a9b51948cebc3458936bb13819b",
+            "hash_scope": "Analyst paraphrase, not raw page bytes"
+          }
+        },
+        {
+          "url": "https://www.dbpoweramp.com/purchase",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "pricing"
+          ],
+          "observed_facts": [
+            "The official purchase page sells Music Converter licenses"
+          ],
+          "retrieval": {
+            "method": "primary-page web retrieval",
+            "source_ref": "turn106search46",
+            "observation_sha256": "ae120436c14732d4cb986529c1d919bc306501852d7a407670a16b4dc4dfbc0f",
+            "hash_scope": "Analyst paraphrase, not raw page bytes"
+          }
+        }
+      ],
+      "editorial_basis": "Recommendations compare documented workflow fit and requirements; no executable was run and no independent performance, accuracy or security benchmark is claimed."
+    },
+    {
+      "app_id": "elan",
+      "reviewed_at": "2026-11-16",
+      "observations": [
+        {
+          "url": "https://archive.mpi.nl/tla/elan",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity",
+            "features",
+            "platforms",
+            "license"
+          ],
+          "observed_facts": [
+            "ELAN annotates audio and video using time-aligned and hierarchical tiers, vocabularies and EAF XML",
+            "The official page lists Windows, macOS and Linux and GPL 3 source licensing"
+          ],
+          "retrieval": {
+            "method": "primary-page web retrieval",
+            "source_ref": "turn151view1",
+            "observation_sha256": "21b6b0d9831e503384c033847bd360e0034dbad9b4e47ea54ba9cc79e05a37c3",
+            "hash_scope": "Analyst paraphrase, not raw page bytes"
+          }
+        },
+        {
+          "url": "https://archive.mpi.nl/tla/elan/download",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "downloads",
+            "platforms",
+            "pricing"
+          ],
+          "observed_facts": [
+            "The institute provides current installers and source downloads without a purchase requirement",
+            "Version 7.1 packages bundle Java 26 and list Windows, Mac processor and Linux requirements"
+          ],
+          "retrieval": {
+            "method": "primary-page web retrieval",
+            "source_ref": "turn153view0",
+            "observation_sha256": "f6cb87665c67e76908b8852227046325b4dd9df942183597118450691b84f511",
+            "hash_scope": "Analyst paraphrase, not raw page bytes"
+          }
+        }
+      ],
+      "editorial_basis": "Recommendations compare documented workflow fit and requirements; no executable was run and no independent performance, accuracy or security benchmark is claimed."
+    },
+    {
+      "app_id": "google-earth-pro",
+      "reviewed_at": "2026-11-16",
+      "observations": [
+        {
+          "url": "https://earth.google.com/intl/en_us/versions/",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity",
+            "features",
+            "pricing",
+            "platforms"
+          ],
+          "observed_facts": [
+            "The official versions page describes Google Earth Pro as free for PC, Mac and Linux with advanced desktop functionality"
+          ],
+          "retrieval": {
+            "method": "primary-page web retrieval",
+            "source_ref": "turn112search2",
+            "observation_sha256": "fd9af65a0528283a709da81ae7a80efd77bb8e1d20ac339577c065647e0b9d28",
+            "hash_scope": "Analyst paraphrase, not raw page bytes"
+          }
+        },
+        {
+          "url": "https://www.google.com/earth/desktop/",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "features"
+          ],
+          "observed_facts": [
+            "The official desktop product describes GIS import/export and historical imagery"
+          ],
+          "retrieval": {
+            "method": "primary-page web retrieval",
+            "source_ref": "turn112search1",
+            "observation_sha256": "f7e0fe4d49586f772e4748dc73715e2e2d398e007e43065b0d5a469d29562b20",
+            "hash_scope": "Analyst paraphrase, not raw page bytes"
+          }
+        },
+        {
+          "url": "https://support.google.com/earth/answer/168344?hl=en",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "downloads",
+            "platforms",
+            "maintenance"
+          ],
+          "observed_facts": [
+            "Official installers cover Windows, macOS and Linux",
+            "Google announces that desktop downloads will no longer be available from 25 June 2027"
+          ],
+          "retrieval": {
+            "method": "primary-page web retrieval",
+            "source_ref": "turn155view1",
+            "observation_sha256": "d30ea1341d5e27c0343b53c65be86b40483c8cc6949021b10cce61efc3d0ef04",
+            "hash_scope": "Analyst paraphrase, not raw page bytes"
+          }
+        },
+        {
+          "url": "https://www.google.com/help/terms_maps-earth/",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "license"
+          ],
+          "observed_facts": [
+            "Google grants a conditional license and restricts redistribution, bulk downloading and certain derivative uses",
+            "Public display requires appropriate attribution"
+          ],
+          "retrieval": {
+            "method": "primary-page web retrieval",
+            "source_ref": "turn155view0",
+            "observation_sha256": "1a62046113cbad0b4e8f24a790db3b1144d76d8fe77ff482a58df62433464a45",
+            "hash_scope": "Analyst paraphrase, not raw page bytes"
+          }
+        }
+      ],
+      "editorial_basis": "Recommendations compare documented workflow fit and requirements; no executable was run and no independent performance, accuracy or security benchmark is claimed."
+    },
+    {
+      "app_id": "textaloud",
+      "reviewed_at": "2026-11-16",
+      "observations": [
+        {
+          "url": "https://nextup.com/TextAloud/",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity",
+            "features",
+            "platforms"
+          ],
+          "observed_facts": [
+            "TextAloud converts documents and selected Windows text to speech and audio files",
+            "It provides word highlighting, batch conversion and optional voices"
+          ],
+          "retrieval": {
+            "method": "primary-page web retrieval",
+            "source_ref": "turn147view3",
+            "observation_sha256": "61a7096d6f81bac59712d9615586e04db27200d9bccf8ad8d3f3a81c085e6ac7",
+            "hash_scope": "Analyst paraphrase, not raw page bytes"
+          }
+        },
+        {
+          "url": "https://nextup.com/download.html",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "downloads"
+          ],
+          "observed_facts": [
+            "The official download page provides the TextAloud trial"
+          ],
+          "retrieval": {
+            "method": "primary-page web retrieval",
+            "source_ref": "turn148view1",
+            "observation_sha256": "a341db89b8a7a8ed622bfdc59c285072785d22f4e602df285266ea02a198817b",
+            "hash_scope": "Analyst paraphrase, not raw page bytes"
+          }
+        },
+        {
+          "url": "https://nextup.com/TextAloud/pricing.html",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "license",
+            "pricing"
+          ],
+          "observed_facts": [
+            "The paid Windows application is offered as a single-user license with no annual fee or subscription"
+          ],
+          "retrieval": {
+            "method": "primary-page web retrieval",
+            "source_ref": "turn153view1",
+            "observation_sha256": "0b16b36454353b9e08e4c6f088a1d70a645b83c29350d94c6401173ea144400e",
+            "hash_scope": "Analyst paraphrase, not raw page bytes"
+          }
+        },
+        {
+          "url": "https://nextup.com/acapela/",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "license"
+          ],
+          "observed_facts": [
+            "The optional Acapela voices are limited to NextUp products",
+            "Generated audio is licensed for personal use; professional or commercial use needs separate discussion"
+          ],
+          "retrieval": {
+            "method": "primary-page web retrieval",
+            "source_ref": "turn155view2",
+            "observation_sha256": "8a7f1685d5325aa1aada10586bb786709a73b27cdb810af7b21f771901b12735",
+            "hash_scope": "Analyst paraphrase, not raw page bytes"
+          }
+        }
+      ],
+      "editorial_basis": "Recommendations compare documented workflow fit and requirements; no executable was run and no independent performance, accuracy or security benchmark is claimed."
+    },
+    {
+      "app_id": "tracker",
+      "reviewed_at": "2026-11-16",
+      "observations": [
+        {
+          "url": "https://opensourcephysics.github.io/tracker-website/",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity",
+            "features",
+            "platforms",
+            "license",
+            "pricing",
+            "downloads"
+          ],
+          "observed_facts": [
+            "The free open-source GPL-3 tool provides desktop installers, motion tracking, calibration, model overlays and fitting",
+            "It bundles Java and a video engine and documents codec conversion requirements"
+          ],
+          "retrieval": {
+            "method": "primary-page web retrieval",
+            "source_ref": "turn147view2",
+            "observation_sha256": "f58fcf8b432fd18c32bf465ad38b218df5575488b5de9e3e69a0cf7c22f75133",
+            "hash_scope": "Analyst paraphrase, not raw page bytes"
+          }
+        },
+        {
+          "url": "https://github.com/OpenSourcePhysics/tracker",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity",
+            "license"
+          ],
+          "observed_facts": [
+            "The official product links to this source repository"
+          ],
+          "retrieval": {
+            "method": "primary-page web retrieval",
+            "source_ref": "turn150view2",
+            "observation_sha256": "caec350cce84d8e3207a4c54647373a22e65cddb2d725b01a6b7412395f68a9c",
+            "hash_scope": "Analyst paraphrase, not raw page bytes"
+          }
+        }
+      ],
+      "editorial_basis": "Recommendations compare documented workflow fit and requirements; no executable was run and no independent performance, accuracy or security benchmark is claimed."
     }
   ],
   "candidate_decisions": [
@@ -4288,6 +6609,42 @@
       "candidate": "MUSCLE",
       "decision": "deferred-pending-platform-verification",
       "reason": "Current README and GPLv3 license were observed, but native release-platform details need a further primary-source check."
+    },
+    {
+      "candidate": "FigTree",
+      "decision": "retain-legacy-and-add-successor",
+      "reason": "The current README explicitly names PearTree as successor. Existing FigTree identity is retained, its GPL-2.0-or-later application license is evidenced by the source header, and current support is not assumed.",
+      "source_url": "https://github.com/rambaut/figtree"
+    },
+    {
+      "candidate": "XFLR5",
+      "decision": "retain-legacy-with-discontinued-status",
+      "reason": "The official project closed on 30 June 2026. flow5 is included as successor with its own packaging constraints.",
+      "source_url": "https://www.xflr5.tech/"
+    },
+    {
+      "candidate": "Google Earth Pro",
+      "decision": "include-with-announced-download-retirement",
+      "reason": "Current desktop installers exist, but the official help page announces the end of downloads on 25 June 2027. This is not represented as an already-removed download.",
+      "source_url": "https://support.google.com/earth/answer/168344?hl=en"
+    },
+    {
+      "candidate": "X Lossless Decoder license",
+      "decision": "retain-explicit-license-uncertainty",
+      "reason": "Maintainer project metadata lists OSL-3.0, but the complete source/package and codec license set was not reconciled; no GPL classification is inferred.",
+      "source_url": "https://sourceforge.net/projects/xld/"
+    },
+    {
+      "candidate": "dBpoweramp license",
+      "decision": "retain-explicit-license-uncertainty",
+      "reason": "Official commercial purchase and trial routes were confirmed; a complete EULA was not retrieved, so license_kind remains unknown.",
+      "source_url": "https://www.dbpoweramp.com/dmc"
+    },
+    {
+      "candidate": "Dragonframe public EULA",
+      "decision": "disclose-version-boundary",
+      "reason": "The current FAQ links Dragonframe5_EULA.pdf. Its proprietary licensing is verified, but exact agreement coverage for the current 2026 release is not assumed.",
+      "source_url": "https://www.dragonframe.com/faq/"
     }
   ],
   "retrievals": [
@@ -6967,5 +9324,10 @@
       "sha256": "ebb39de46dee495c222815ae51a757058814649f9ae83cb9aec5357c739a1f91",
       "bytes": 5681
     }
-  ]
+  ],
+  "recipe_review": {
+    "reviewed_at": "2026-11-16",
+    "new_guides": 30,
+    "basis": "Conditional task fit from cited application evidence; multi-stage guides explicitly distinguish complementary tools from direct alternatives. No comparative runtime or accuracy benchmark is implied."
+  }
 }

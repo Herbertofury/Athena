@@ -175,8 +175,68 @@ fn versioned(
     })
 }
 impl Store {
+    /// Whole native bookmark library from one read transaction; never partial.
+    pub fn soundtrack_library(&self) -> Result<Vec<VersionedSoundtrack>> {
+        let tx = self.db.unchecked_transaction()?;
+        let schema: i64 = tx.query_row("PRAGMA user_version", [], |r| r.get(0))?;
+        if !matches!(schema, 4..=15) {
+            return Err("Explicit upgrade-soundtracks required".into());
+        }
+        let keys = tx
+            .prepare(
+                "SELECT theme_id,room_id FROM soundtracks ORDER BY theme_id,room_id LIMIT 1001",
+            )?
+            .query_map([], |r| Ok((r.get::<_, String>(0)?, r.get::<_, String>(1)?)))?
+            .collect::<rusqlite::Result<Vec<_>>>()?;
+        if keys.len() > 1000 {
+            return Err("Native library exceeds 1000 records; no partial result".into());
+        }
+        let mut result = Vec::with_capacity(keys.len());
+        for (theme, room) in keys {
+            let value = read_checked(&tx, &theme, &room)?;
+            result.push(versioned(&theme, &room, value)?);
+        }
+        tx.commit()?;
+        Ok(result)
+    }
     pub fn soundtrack_versioned(&self, theme: &str, room: &str) -> Result<VersionedSoundtrack> {
         versioned(theme, room, self.soundtrack_native(theme, room)?)
+    }
+    /// Clear one local override only when the caller reviewed its current token.
+    pub fn compare_clear_soundtrack(
+        &mut self,
+        expected: &str,
+        theme: &str,
+        room: &str,
+    ) -> Result<Option<VersionedSoundtrack>> {
+        if !nonempty(theme, 200) || !nonempty(room, 200) {
+            return Err("Invalid room identity".into());
+        }
+        let tx = self
+            .db
+            .transaction_with_behavior(rusqlite::TransactionBehavior::Immediate)?;
+        let known: bool = tx.query_row(
+            "SELECT EXISTS(SELECT 1 FROM rooms WHERE theme_id=?1 AND id=?2)",
+            params![theme, room],
+            |r| r.get(0),
+        )?;
+        if !known {
+            return Err("Unknown room".into());
+        }
+        let current = read_checked(&tx, theme, room)?;
+        let had_value = current.is_some();
+        if versioned(theme, room, current)?.version != expected {
+            return Ok(None);
+        }
+        let result = versioned(theme, room, None)?;
+        if had_value {
+            tx.execute(
+                "DELETE FROM soundtracks WHERE theme_id=?1 AND room_id=?2",
+                params![theme, room],
+            )?;
+            tx.commit()?;
+        }
+        Ok(Some(result))
     }
     pub fn compare_assign_soundtrack(
         &mut self,

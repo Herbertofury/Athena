@@ -3,7 +3,7 @@
 
 Reviewed 2026-10-28. Project-neutral evidence guide, not a universal stack ranking.
 
-[Full experiment directory](Engineering-Experiment-Evidence) · [Live isolated laboratory](https://herbertofury.github.io/Athena/engineering/docs/card-receiver-lab/) · [Pinned code, raw samples and reproducibility](https://github.com/Herbertofury/Engineering-Atlas/tree/00b2635fad181821402f0b360baa604c4e568243/experiments/worker-bundle-lab)
+[Full experiment directory](Engineering-Experiment-Evidence) · [Live isolated laboratory](https://herbertofury.github.io/Athena/engineering/docs/card-receiver-lab/) · [Pinned code, raw samples and reproducibility](https://github.com/Herbertofury/Athena/tree/d1d6d998ba38d2fcedd140c48e3c5d21e132f671/engineering/experiments/worker-bundle-lab)
 
 ## Read this first
 
@@ -52,4 +52,12 @@ The staging CLI left both published entrypoints byte-identical; both pinned comp
 
 ## Before adoption anywhere else
 
-Compare against that project's current implementation, complete data, access/security requirements, memory, input latency and durability contracts. A generated benchmark here is not sufficient. Do not lower acceptance requirements to manufacture a repair: [the journal now binds repair lineage to the exact saved policy](https://github.com/Herbertofury/Engineering-Atlas/tree/6bc6810f45ce648ff5ce0d7958d62c09f9754789/experiments/gate-policy-lab).
+Compare against that project's current implementation, complete data, access/security requirements, memory, input latency and durability contracts. A generated benchmark here is not sufficient. Do not lower acceptance requirements to manufacture a repair: [the journal now binds repair lineage to the exact saved policy](https://github.com/Herbertofury/Athena/tree/d1d6d998ba38d2fcedd140c48e3c5d21e132f671/engineering/experiments/gate-policy-lab).
+
+
+## Preserved evidence link provenance
+
+The links above now use content-identical Athena copies, verified by Git blob/tree identity on 2026-11-15. Original revision citations remain below as provenance, not runtime dependencies. This does not certify source-repository deletion readiness. Other historical links on this page remain unchanged where exact replacement was not verified.
+
+- Original: `https://github.com/Herbertofury/Engineering-Atlas/tree/00b2635fad181821402f0b360baa604c4e568243/experiments/worker-bundle-lab`; identical tree object: `f31ffbcda753ba959536138edc7125050ff4196f`.
+- Original: `https://github.com/Herbertofury/Engineering-Atlas/tree/6bc6810f45ce648ff5ce0d7958d62c09f9754789/experiments/gate-policy-lab`; identical tree object: `0e335e988b83d4481e58b54c9645aac4f2785520`.

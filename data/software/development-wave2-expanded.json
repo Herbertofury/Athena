@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "reviewed_at": "2026-11-15",
+  "reviewed_at": "2026-11-16",
   "applications": [
     {
       "id": "ganttproject",
@@ -6870,11 +6870,12 @@
         {
           "url": "https://atlasgo.io/community-edition",
           "label": "Documented deployment and platform scope",
-          "checked_at": "2026-11-15",
+          "checked_at": "2026-11-16",
           "supports": [
             "platforms",
             "pricing",
-            "downloads"
+            "downloads",
+            "license"
           ]
         },
         {
@@ -7391,9 +7392,9 @@
       },
       "maintenance": {
         "status": "active",
-        "checked_at": "2026-11-15",
-        "note": "Official release v1.12.7 is dated 2026-11-12; installation and performance were not independently tested.",
-        "source_url": "https://github.com/dbt-labs/dbt/releases/tag/v1.12.7"
+        "checked_at": "2026-11-16",
+        "source_url": "https://github.com/dbt-labs/dbt/releases/tag/v2.0.0",
+        "note": "Official v2.0.0 release was published September 14, 2026. This supports the v2 line described here; the separate v1 Python Core release is not used to establish v2 maintenance."
       },
       "sources": [
         {
@@ -7433,12 +7434,20 @@
           ]
         },
         {
-          "url": "https://github.com/dbt-labs/dbt/releases/tag/v1.12.7",
-          "label": "Official dated release",
-          "checked_at": "2026-11-15",
+          "url": "https://github.com/dbt-labs/dbt/releases/tag/v2.0.0",
+          "label": "Official dated release for the documented v2 line",
+          "checked_at": "2026-11-16",
           "supports": [
             "maintenance",
             "downloads"
+          ]
+        },
+        {
+          "url": "https://raw.githubusercontent.com/dbt-labs/dbt/main/LICENSE",
+          "label": "Official Apache source license, separate from product distribution terms",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "license"
           ]
         }
       ],
@@ -9375,7 +9384,7 @@
         "macOS",
         "Linux"
       ],
-      "platform_notes": "Current official README covers Windows, Linux and Apple Silicon macOS. Intel Macs require the older 1.4.5 release.",
+      "platform_notes": "Published v1.4.5 includes both Intel and Apple Silicon macOS packages alongside Windows and Linux. The current main-branch README describes Apple Silicon for subsequent macOS development and names v1.4.5 as the last Intel release.",
       "official_url": "https://github.com/chidiwilliams/buzz",
       "download_url": "https://sourceforge.net/projects/buzz-captions/files/",
       "repository_url": "https://github.com/chidiwilliams/buzz",
@@ -9392,7 +9401,7 @@
       ],
       "limitations": [
         "Models require downloads and sufficient local resources",
-        "Current macOS version requires Apple Silicon; older Intel support stopped at 1.4.5"
+        "Intel Mac users must choose the v1.4.5 package; current main-branch/source-build policy differs from that published release."
       ],
       "use_cases": [
         "offline speech transcription",
@@ -9462,10 +9471,11 @@
         {
           "url": "https://github.com/chidiwilliams/buzz/releases/tag/v1.4.5",
           "label": "Official dated release",
-          "checked_at": "2026-11-15",
+          "checked_at": "2026-11-16",
           "supports": [
             "maintenance",
-            "downloads"
+            "downloads",
+            "platforms"
           ]
         }
       ],
@@ -10934,6 +10944,1794 @@
         }
       ],
       "evidence_status": "official-docs-reviewed"
+    },
+    {
+      "id": "devbox",
+      "name": "Devbox",
+      "family": "development",
+      "category": "environment-management",
+      "summary": "Project-specific development shells that declare operating-system tools in a JSON file and resolve them through Nix.",
+      "platforms": [
+        "Windows",
+        "macOS",
+        "Linux"
+      ],
+      "platform_notes": "Linux and macOS packages; Windows uses WSL2 rather than a native Windows shell. Nix provides the underlying package store.",
+      "license": "Apache-2.0",
+      "features": [
+        "Versioned devbox.json tool definitions",
+        "Isolated project shells",
+        "Command and service workflows",
+        "Devcontainer and Dockerfile generation"
+      ],
+      "strengths": [
+        "Declares system-level tools together instead of manually managing conflicting installations",
+        "A JSON entry point reduces the initial Nix configuration work"
+      ],
+      "limitations": [
+        "Shell isolation does not provide a virtual-machine security boundary",
+        "Package availability and reproducibility still depend on the selected Nix packages and recorded versions"
+      ],
+      "use_cases": [
+        "reproduce project toolchains",
+        "try command-line tools in an isolated shell"
+      ],
+      "alternatives": [
+        "Nix",
+        "mise",
+        "Pixi"
+      ],
+      "recommendation": {
+        "pick_for": "A team wants a declared local toolchain with a simpler entry point than writing Nix expressions.",
+        "compare_when": "Use Nix directly for detailed packaging control; compare DDEV or Lando when the main need is a running web-service stack."
+      },
+      "official_url": "https://www.jetify.com/devbox/",
+      "download_url": "https://github.com/jetify-com/devbox#installing-devbox",
+      "repository_url": "https://github.com/jetify-com/devbox",
+      "license_kind": "open-source",
+      "pricing_model": "unknown",
+      "pricing_notes": "Open-source code and a public installation route are documented. A separate explicit pricing statement for the current distribution was not established in this review.",
+      "tags": [
+        "environment-management",
+        "reproduce project toolchains",
+        "try command-line tools in an isolated shell"
+      ],
+      "evidence_status": "official-docs-reviewed",
+      "sources": [
+        {
+          "url": "https://github.com/jetify-com/devbox/blob/main/README.md",
+          "label": "Official project documentation",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity",
+            "features",
+            "platforms",
+            "downloads"
+          ]
+        },
+        {
+          "url": "https://github.com/jetify-com/devbox/blob/main/LICENSE",
+          "label": "Official application and dependency licensing",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "license"
+          ]
+        },
+        {
+          "url": "https://github.com/jetify-com/docs/blob/main/docs/devbox/installing-devbox.mdx",
+          "label": "Official operating-system requirements",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "platforms",
+            "downloads"
+          ]
+        },
+        {
+          "url": "https://github.com/jetify-com/devbox/releases/tag/0.21.0",
+          "label": "Official dated release and distribution",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "maintenance",
+            "downloads"
+          ]
+        }
+      ],
+      "maintenance": {
+        "status": "active",
+        "checked_at": "2026-11-16",
+        "source_url": "https://github.com/jetify-com/devbox/releases/tag/0.21.0",
+        "note": "Official release 0.21.0 is dated 2026-11-13. This is a release observation; installation and performance were not independently tested."
+      }
+    },
+    {
+      "id": "ddev",
+      "name": "DDEV",
+      "family": "development",
+      "category": "local-web-development",
+      "summary": "Container-based local web development with per-project PHP, database and web-server configuration.",
+      "platforms": [
+        "Windows",
+        "macOS",
+        "Linux"
+      ],
+      "platform_notes": "Requires a supported Docker provider; official instructions cover Windows/WSL2, macOS and Linux on supported architectures.",
+      "license": "Apache-2.0",
+      "features": [
+        "Per-project PHP and database versions",
+        "Trusted local HTTPS",
+        "Xdebug and database snapshots",
+        "CMS quickstarts and service add-ons"
+      ],
+      "strengths": [
+        "Common CMS development services have a documented, repeatable setup",
+        "Project configuration can travel with the repository"
+      ],
+      "limitations": [
+        "Docker provider requirements and licensing are separate from DDEV",
+        "A local development stack is not automatically a production hosting configuration"
+      ],
+      "use_cases": [
+        "develop WordPress locally",
+        "reproduce Drupal and PHP development environments"
+      ],
+      "alternatives": [
+        "Lando",
+        "Devbox"
+      ],
+      "recommendation": {
+        "pick_for": "You need a documented local PHP/CMS environment with databases, HTTPS and debugging included.",
+        "compare_when": "Compare Lando for its broader recipe and service composition; choose Devbox when you mainly need tools in a shell."
+      },
+      "official_url": "https://ddev.com/",
+      "download_url": "https://docs.ddev.com/en/stable/users/install/ddev-installation/",
+      "repository_url": "https://github.com/ddev/ddev",
+      "license_kind": "open-source",
+      "pricing_model": "free",
+      "pricing_notes": "The local open-source application is available without a license fee. Optional hosting, support, dependencies and infrastructure have separate terms.",
+      "tags": [
+        "local-web-development",
+        "develop WordPress locally",
+        "reproduce Drupal and PHP development environments"
+      ],
+      "evidence_status": "official-docs-reviewed",
+      "sources": [
+        {
+          "url": "https://github.com/ddev/ddev/blob/main/README.md",
+          "label": "Official project documentation",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity",
+            "features",
+            "platforms",
+            "downloads",
+            "pricing"
+          ]
+        },
+        {
+          "url": "https://github.com/ddev/ddev/blob/main/LICENSE",
+          "label": "Official application and dependency licensing",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "license"
+          ]
+        },
+        {
+          "url": "https://docs.ddev.com/en/stable/users/install/ddev-installation/",
+          "label": "Official installation requirements",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "platforms",
+            "downloads"
+          ]
+        },
+        {
+          "url": "https://github.com/ddev/ddev/releases/tag/v1.25.5",
+          "label": "Official dated release and distribution",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "maintenance",
+            "downloads"
+          ]
+        }
+      ],
+      "maintenance": {
+        "status": "active",
+        "checked_at": "2026-11-16",
+        "source_url": "https://github.com/ddev/ddev/releases/tag/v1.25.5",
+        "note": "Official release v1.25.5 is dated 2026-10-26. This is a release observation; installation and performance were not independently tested."
+      }
+    },
+    {
+      "id": "lando",
+      "name": "Lando",
+      "family": "development",
+      "category": "local-web-development",
+      "summary": "Local development environment manager that assembles container services, commands and application recipes in a Landofile.",
+      "platforms": [
+        "Windows",
+        "macOS",
+        "Linux"
+      ],
+      "platform_notes": "Official installer supports Windows, macOS and Linux; Docker-based services require the supported engine and host configuration.",
+      "license": "MIT",
+      "features": [
+        "Application recipes for common web stacks",
+        "Per-project service composition",
+        "Project commands and build steps",
+        "Proxy routes and hosting integrations"
+      ],
+      "strengths": [
+        "A Landofile captures service setup and project-specific commands together",
+        "Recipes offer a starting point while allowing lower-level customization"
+      ],
+      "limitations": [
+        "Docker setup and service resource use remain part of the workflow",
+        "Plugin, engine and recipe versions can affect an existing project"
+      ],
+      "use_cases": [
+        "share a local web stack",
+        "configure multi-service development projects"
+      ],
+      "alternatives": [
+        "DDEV",
+        "Devbox"
+      ],
+      "recommendation": {
+        "pick_for": "Your web project needs a repeatable collection of services and custom developer commands.",
+        "compare_when": "Compare DDEV for a focused CMS workflow or plain shell environment tools for projects without service containers."
+      },
+      "official_url": "https://lando.dev/",
+      "download_url": "https://docs.lando.dev/install/",
+      "repository_url": "https://github.com/lando/lando",
+      "license_kind": "open-source",
+      "pricing_model": "free",
+      "pricing_notes": "The local open-source application is available without a license fee. Optional hosting, support, dependencies and infrastructure have separate terms.",
+      "tags": [
+        "local-web-development",
+        "share a local web stack",
+        "configure multi-service development projects"
+      ],
+      "evidence_status": "official-docs-reviewed",
+      "sources": [
+        {
+          "url": "https://github.com/lando/lando/blob/main/README.md",
+          "label": "Official project documentation",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity",
+            "features",
+            "platforms",
+            "downloads",
+            "pricing"
+          ]
+        },
+        {
+          "url": "https://github.com/lando/lando/blob/main/LICENSE",
+          "label": "Official application and dependency licensing",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "license"
+          ]
+        },
+        {
+          "url": "https://docs.lando.dev/install/",
+          "label": "Official platform installation routes",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "platforms",
+            "downloads"
+          ]
+        },
+        {
+          "url": "https://github.com/lando/lando/releases/tag/v3.26.9",
+          "label": "Official dated release and distribution",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "maintenance",
+            "downloads"
+          ]
+        }
+      ],
+      "maintenance": {
+        "status": "active",
+        "checked_at": "2026-11-16",
+        "source_url": "https://github.com/lando/lando/releases/tag/v3.26.9",
+        "note": "Official release v3.26.9 is dated 2026-08-20. This is a release observation; installation and performance were not independently tested."
+      }
+    },
+    {
+      "id": "direnv",
+      "name": "direnv",
+      "family": "development",
+      "category": "environment-management",
+      "summary": "Shell extension that loads and unloads approved project environment variables when the working directory changes.",
+      "platforms": [
+        "macOS",
+        "Linux",
+        "FreeBSD"
+      ],
+      "platform_notes": "Unix-like systems with a supported shell; shell hooks are required. The release also publishes FreeBSD binaries.",
+      "license": "MIT",
+      "features": [
+        "Directory-specific .envrc files",
+        "Explicit authorization before loading",
+        "Environment restoration on directory exit",
+        "Shell hooks and standard-library helpers"
+      ],
+      "strengths": [
+        "Project settings follow directory changes without modifying the global shell profile",
+        "Small CLI integrates with existing shells and language environment managers"
+      ],
+      "limitations": [
+        "An approved .envrc executes shell code; review the actual project file before authorizing it",
+        "It does not install a complete toolchain or isolate processes by itself"
+      ],
+      "use_cases": [
+        "load per-project environment variables",
+        "switch shell environments automatically"
+      ],
+      "alternatives": [
+        "mise",
+        "Devbox",
+        "Nix"
+      ],
+      "recommendation": {
+        "pick_for": "You already have a shell and toolchain and want project variables to appear and disappear automatically.",
+        "compare_when": "Use Devbox, Nix or mise alongside or instead of it when tools themselves must also be installed and versioned."
+      },
+      "official_url": "https://direnv.net/",
+      "download_url": "https://direnv.net/docs/installation.html",
+      "repository_url": "https://github.com/direnv/direnv",
+      "license_kind": "open-source",
+      "pricing_model": "unknown",
+      "pricing_notes": "Open-source code and a public installation route are documented. A separate explicit pricing statement for the current distribution was not established in this review.",
+      "tags": [
+        "environment-management",
+        "load per-project environment variables",
+        "switch shell environments automatically"
+      ],
+      "evidence_status": "official-docs-reviewed",
+      "sources": [
+        {
+          "url": "https://github.com/direnv/direnv/blob/master/README.md",
+          "label": "Official project documentation",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity",
+            "features",
+            "platforms",
+            "downloads"
+          ]
+        },
+        {
+          "url": "https://github.com/direnv/direnv/blob/master/LICENSE",
+          "label": "Official application and dependency licensing",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "license"
+          ]
+        },
+        {
+          "url": "https://github.com/direnv/direnv/releases/tag/v2.38.2",
+          "label": "Official dated release and distribution",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "maintenance",
+            "downloads"
+          ]
+        }
+      ],
+      "maintenance": {
+        "status": "active",
+        "checked_at": "2026-11-16",
+        "source_url": "https://github.com/direnv/direnv/releases/tag/v2.38.2",
+        "note": "Official release v2.38.2 is dated 2026-10-10. This is a release observation; installation and performance were not independently tested."
+      }
+    },
+    {
+      "id": "nix",
+      "name": "Nix",
+      "family": "development",
+      "category": "environment-management",
+      "summary": "Declarative package manager and build system for reproducible development environments and isolated package stores.",
+      "platforms": [
+        "Windows",
+        "macOS",
+        "Linux"
+      ],
+      "platform_notes": "Official installation covers Linux and macOS; Windows runs Nix inside WSL2. Nix the package manager does not require installing NixOS.",
+      "license": "LGPL-2.1",
+      "features": [
+        "Declarative development shells",
+        "Version-pinned dependency graphs",
+        "Isolated package store",
+        "Build expressions and binary caches"
+      ],
+      "strengths": [
+        "System tools and libraries can be described in one reproducible dependency model",
+        "Multiple package versions can coexist without a conventional global installation"
+      ],
+      "limitations": [
+        "The Nix language and packaging model introduce a substantial learning curve",
+        "Reproducibility depends on pinned inputs and build behavior; it is not guaranteed by a package-manager label alone"
+      ],
+      "use_cases": [
+        "create reproducible development shells",
+        "package software with explicit dependencies"
+      ],
+      "alternatives": [
+        "Devbox",
+        "Pixi",
+        "mise"
+      ],
+      "recommendation": {
+        "pick_for": "You need detailed control over reproducible toolchains, packages and build dependencies.",
+        "compare_when": "Compare Devbox for a simpler shell configuration or language-focused managers for narrower projects."
+      },
+      "official_url": "https://nixos.org/",
+      "download_url": "https://nix.dev/install-nix",
+      "repository_url": "https://github.com/NixOS/nix",
+      "license_kind": "open-source",
+      "pricing_model": "unknown",
+      "pricing_notes": "Open-source code and a public installation route are documented. A separate explicit pricing statement for the current distribution was not established in this review.",
+      "tags": [
+        "environment-management",
+        "create reproducible development shells",
+        "package software with explicit dependencies"
+      ],
+      "evidence_status": "official-docs-reviewed",
+      "sources": [
+        {
+          "url": "https://github.com/NixOS/nix/blob/master/README.md",
+          "label": "Official project documentation",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity",
+            "features",
+            "platforms",
+            "downloads"
+          ]
+        },
+        {
+          "url": "https://github.com/NixOS/nix/blob/master/COPYING",
+          "label": "Official application and dependency licensing",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "license"
+          ]
+        },
+        {
+          "url": "https://nix.dev/install-nix",
+          "label": "Official installation and host scope",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "platforms",
+            "downloads"
+          ]
+        },
+        {
+          "url": "https://nix.dev/manual/nix/2.35/release-notes/rl-2.35.html",
+          "label": "Official dated release notes",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "maintenance",
+            "features"
+          ]
+        }
+      ],
+      "maintenance": {
+        "status": "active",
+        "checked_at": "2026-11-16",
+        "source_url": "https://nix.dev/manual/nix/2.35/release-notes/rl-2.35.html",
+        "note": "Official Nix manual dates the 2.35.0 release notes June 22, 2026. This documents a maintained release line; installation and performance were not independently tested."
+      }
+    },
+    {
+      "id": "sqlpage",
+      "name": "SQLPage",
+      "family": "development",
+      "category": "data-app-frameworks",
+      "summary": "SQL-driven web application server that turns queries into forms, tables, charts and data-editing pages.",
+      "platforms": [
+        "Windows",
+        "macOS",
+        "Linux",
+        "Web"
+      ],
+      "platform_notes": "Local executable or container serves browser pages. Release binaries cover Linux/Windows x86-64 and Apple Silicon macOS; Intel Macs use Homebrew and may require a source build.",
+      "license": "MIT",
+      "features": [
+        "SQL-defined UI components",
+        "Database-backed forms and updates",
+        "SQLite, PostgreSQL, MySQL, SQL Server and ODBC connections",
+        "Authentication components and OIDC integration"
+      ],
+      "strengths": [
+        "SQL practitioners can build a small data application without maintaining a separate JavaScript frontend",
+        "A standalone server and SQL files keep deployment inputs visible"
+      ],
+      "limitations": [
+        "Application authors still own SQL permissions, authentication configuration and data validation",
+        "Connector drivers and platform architecture can require additional setup"
+      ],
+      "use_cases": [
+        "build a database-backed internal tool",
+        "publish forms and charts from SQL"
+      ],
+      "alternatives": [
+        "Evidence Core",
+        "Appsmith",
+        "Grist"
+      ],
+      "recommendation": {
+        "pick_for": "You want a small data-centric web application and prefer defining its behavior in SQL.",
+        "compare_when": "Compare Evidence Core for analytical reports or Appsmith when a visual application builder fits the team better."
+      },
+      "official_url": "https://sql-page.com/",
+      "download_url": "https://sql-page.com/your-first-sql-website/",
+      "repository_url": "https://github.com/sqlpage/SQLPage",
+      "license_kind": "open-source",
+      "pricing_model": "free",
+      "pricing_notes": "The local open-source application is available without a license fee. Optional hosting, support, dependencies and infrastructure have separate terms.",
+      "tags": [
+        "data-app-frameworks",
+        "build a database-backed internal tool",
+        "publish forms and charts from SQL"
+      ],
+      "evidence_status": "official-docs-reviewed",
+      "sources": [
+        {
+          "url": "https://github.com/sqlpage/SQLPage/blob/main/README.md",
+          "label": "Official project documentation",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity",
+            "features",
+            "platforms",
+            "downloads"
+          ]
+        },
+        {
+          "url": "https://github.com/sqlpage/SQLPage/blob/main/LICENSE.txt",
+          "label": "Official application and dependency licensing",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "license",
+            "pricing"
+          ]
+        },
+        {
+          "url": "https://sql-page.com/your-first-sql-website/",
+          "label": "Official free software tutorial and platform qualifications",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "downloads",
+            "platforms",
+            "pricing"
+          ]
+        },
+        {
+          "url": "https://sql-page.com/sso/",
+          "label": "Official authentication setup",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "features"
+          ]
+        },
+        {
+          "url": "https://github.com/sqlpage/SQLPage/releases/tag/v0.48.0",
+          "label": "Official dated release and distribution",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "maintenance",
+            "downloads"
+          ]
+        }
+      ],
+      "maintenance": {
+        "status": "active",
+        "checked_at": "2026-11-16",
+        "source_url": "https://github.com/sqlpage/SQLPage/releases/tag/v0.48.0",
+        "note": "Official release v0.48.0 is dated 2026-11-12. This is a release observation; installation and performance were not independently tested."
+      }
+    },
+    {
+      "id": "evidence-core",
+      "name": "Evidence Core",
+      "family": "development",
+      "category": "business-intelligence",
+      "summary": "Code-based framework for analytical reports and data applications built with SQL, Markdown and reusable components.",
+      "platforms": [
+        "Windows",
+        "macOS",
+        "Linux",
+        "Web"
+      ],
+      "platform_notes": "Local CLI supports Windows x64, macOS Intel/Apple Silicon, and Linux x64/ARM64; deployed reports are accessed through a browser.",
+      "license": "MIT",
+      "features": [
+        "SQL and Markdown reports",
+        "Reusable metrics and visual components",
+        "Local development and validation CLI",
+        "Self-hosting and optional Evidence Studio publishing"
+      ],
+      "strengths": [
+        "Report definitions can be versioned and reviewed with the rest of a project",
+        "Connects explanatory narrative with analytical queries and reusable metrics"
+      ],
+      "limitations": [
+        "Evidence Studio hosting, agent and governance features are separate from the MIT framework",
+        "Existing projects need to distinguish current Core syntax and deployment from the previous framework"
+      ],
+      "use_cases": [
+        "publish analytical reports as code",
+        "version SQL dashboards"
+      ],
+      "alternatives": [
+        "Metabase",
+        "Apache Superset",
+        "SQLPage"
+      ],
+      "recommendation": {
+        "pick_for": "You want analytical reports in reviewable source files and can maintain a local or hosted deployment.",
+        "compare_when": "Compare Metabase or Superset for a browser-oriented BI authoring workflow and verify any Studio-only requirements."
+      },
+      "official_url": "https://evidence.dev/",
+      "download_url": "https://docs.evidence.dev/cli",
+      "repository_url": "https://github.com/evidence-dev/evidence",
+      "license_kind": "open-source",
+      "pricing_model": "unknown",
+      "pricing_notes": "Open-source code and a public installation route are documented. A separate explicit pricing statement for the current distribution was not established in this review.",
+      "tags": [
+        "business-intelligence",
+        "publish analytical reports as code",
+        "version SQL dashboards"
+      ],
+      "evidence_status": "official-docs-reviewed",
+      "sources": [
+        {
+          "url": "https://github.com/evidence-dev/evidence/blob/main/README.md",
+          "label": "Official project documentation",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity",
+            "features",
+            "platforms",
+            "downloads"
+          ]
+        },
+        {
+          "url": "https://github.com/evidence-dev/evidence/blob/main/LICENSE",
+          "label": "Official application and dependency licensing",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "license"
+          ]
+        },
+        {
+          "url": "https://docs.evidence.dev/cli",
+          "label": "Official CLI and supported platforms",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "platforms",
+            "downloads",
+            "features"
+          ]
+        },
+        {
+          "url": "https://evidence.dev/blog/evidence-core",
+          "label": "Official Core launch and Studio distinction",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity",
+            "features",
+            "maintenance"
+          ]
+        }
+      ],
+      "maintenance": {
+        "status": "active",
+        "checked_at": "2026-11-16",
+        "source_url": "https://evidence.dev/blog/evidence-core",
+        "note": "The official August 26, 2026 announcement introduces Evidence Core and distinguishes it from hosted Evidence Studio. The older repository package release is not used as evidence for this newer CLI."
+      }
+    },
+    {
+      "id": "deno",
+      "name": "Deno",
+      "family": "development",
+      "category": "javascript-runtimes",
+      "summary": "JavaScript, TypeScript and WebAssembly runtime with explicit permissions and integrated developer tools.",
+      "platforms": [
+        "Windows",
+        "macOS",
+        "Linux"
+      ],
+      "platform_notes": "Official installation and release packages cover supported Windows, macOS and Linux architectures; check runtime version and native dependencies.",
+      "license": "MIT",
+      "features": [
+        "JavaScript and TypeScript execution",
+        "Explicit runtime permission controls",
+        "Built-in formatting, linting and tests",
+        "Web-standard APIs and package compatibility"
+      ],
+      "strengths": [
+        "Combines a runtime and common development tasks in one CLI",
+        "Permission prompts make requested filesystem and network access visible"
+      ],
+      "limitations": [
+        "Node compatibility still needs testing against the application and its native modules",
+        "Permissions are not a substitute for auditing code or a complete hostile-code sandbox"
+      ],
+      "use_cases": [
+        "run TypeScript tools",
+        "build web services with explicit permissions"
+      ],
+      "alternatives": [
+        "Bun"
+      ],
+      "recommendation": {
+        "pick_for": "You want TypeScript execution, integrated tooling and an explicit runtime permission model.",
+        "compare_when": "Compare Bun for its integrated package and runtime workflow; test existing Node applications rather than assuming compatibility."
+      },
+      "official_url": "https://deno.com/",
+      "download_url": "https://github.com/denoland/deno#installation",
+      "repository_url": "https://github.com/denoland/deno",
+      "license_kind": "open-source",
+      "pricing_model": "unknown",
+      "pricing_notes": "Open-source code and a public installation route are documented. A separate explicit pricing statement for the current distribution was not established in this review.",
+      "tags": [
+        "javascript-runtimes",
+        "run TypeScript tools",
+        "build web services with explicit permissions"
+      ],
+      "evidence_status": "official-docs-reviewed",
+      "sources": [
+        {
+          "url": "https://github.com/denoland/deno/blob/main/README.md",
+          "label": "Official project documentation",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity",
+            "features",
+            "platforms",
+            "downloads"
+          ]
+        },
+        {
+          "url": "https://github.com/denoland/deno/blob/main/LICENSE.md",
+          "label": "Official application and dependency licensing",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "license"
+          ]
+        },
+        {
+          "url": "https://docs.deno.com/runtime/",
+          "label": "Official runtime features",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "features"
+          ]
+        },
+        {
+          "url": "https://github.com/denoland/deno/releases/tag/v2.9.8",
+          "label": "Official dated release and distribution",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "maintenance",
+            "downloads"
+          ]
+        }
+      ],
+      "maintenance": {
+        "status": "active",
+        "checked_at": "2026-11-16",
+        "source_url": "https://github.com/denoland/deno/releases/tag/v2.9.8",
+        "note": "Official release v2.9.8 is dated 2026-10-21. This is a release observation; installation and performance were not independently tested."
+      }
+    },
+    {
+      "id": "bun",
+      "name": "Bun",
+      "family": "development",
+      "category": "javascript-runtimes",
+      "summary": "JavaScript and TypeScript toolkit combining a runtime, package manager, bundler and test runner.",
+      "platforms": [
+        "Windows",
+        "macOS",
+        "Linux"
+      ],
+      "platform_notes": "Official README lists Windows, Linux and macOS x64/ARM64. Linux kernel and x64 CPU requirements vary by build and must be checked.",
+      "license": "MIT core; JavaScriptCore/WebKit and bundled dependencies retain their own licenses",
+      "features": [
+        "JavaScript and TypeScript runtime",
+        "Package and script management",
+        "Bundling",
+        "Integrated test runner"
+      ],
+      "strengths": [
+        "One executable covers several stages of a JavaScript project workflow",
+        "Can be evaluated incrementally as a package manager or runtime"
+      ],
+      "limitations": [
+        "Node API and native-module compatibility should be validated on the actual application",
+        "No general speed ranking is established here; performance depends on workload and configuration"
+      ],
+      "use_cases": [
+        "run and bundle TypeScript projects",
+        "combine JavaScript dependency management and tests"
+      ],
+      "alternatives": [
+        "Deno",
+        "pnpm",
+        "npm CLI"
+      ],
+      "recommendation": {
+        "pick_for": "You want to evaluate a single toolkit for runtime, dependencies, building and testing.",
+        "compare_when": "Compare Deno for permission-oriented execution and pnpm/npm for a package-manager change that keeps the existing runtime."
+      },
+      "official_url": "https://bun.com/",
+      "download_url": "https://bun.com/docs/installation",
+      "repository_url": "https://github.com/oven-sh/bun",
+      "license_kind": "open-source",
+      "pricing_model": "unknown",
+      "pricing_notes": "Open-source code and a public installation route are documented. A separate explicit pricing statement for the current distribution was not established in this review.",
+      "tags": [
+        "javascript-runtimes",
+        "run and bundle TypeScript projects",
+        "combine JavaScript dependency management and tests"
+      ],
+      "evidence_status": "official-docs-reviewed",
+      "sources": [
+        {
+          "url": "https://github.com/oven-sh/bun/blob/main/README.md",
+          "label": "Official project documentation",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity",
+            "features",
+            "platforms",
+            "downloads"
+          ]
+        },
+        {
+          "url": "https://github.com/oven-sh/bun/blob/main/LICENSE.md",
+          "label": "Official application and dependency licensing",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "license"
+          ]
+        },
+        {
+          "url": "https://github.com/oven-sh/bun/releases/tag/bun-v1.4.4",
+          "label": "Official dated release and distribution",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "maintenance",
+            "downloads"
+          ]
+        }
+      ],
+      "maintenance": {
+        "status": "active",
+        "checked_at": "2026-11-16",
+        "source_url": "https://github.com/oven-sh/bun/releases/tag/bun-v1.4.4",
+        "note": "Official release bun-v1.4.4 is dated 2026-10-22. This is a release observation; installation and performance were not independently tested."
+      }
+    },
+    {
+      "id": "yarn",
+      "name": "Yarn",
+      "family": "development",
+      "category": "package-managers",
+      "summary": "Modern JavaScript package manager with workspaces, extensible commands and configurable dependency installation strategies.",
+      "platforms": [
+        "Windows",
+        "macOS",
+        "Linux"
+      ],
+      "platform_notes": "Requires a supported Node.js version; official documentation covers Corepack-based project setup. Portable package scripts target Windows, macOS and Linux.",
+      "license": "BSD-2-Clause",
+      "features": [
+        "Monorepo workspaces",
+        "Plug’n’Play or node_modules installs",
+        "Plugins and constraints",
+        "Portable package-script shell"
+      ],
+      "strengths": [
+        "Dependency strategy and package-manager version can be recorded per project",
+        "Workspace and constraint tools support coordinated multi-package repositories"
+      ],
+      "limitations": [
+        "Modern Yarn differs from Yarn Classic and may require a migration",
+        "Plug’n’Play can expose tool assumptions about node_modules; integration must be checked"
+      ],
+      "use_cases": [
+        "manage JavaScript monorepos",
+        "enforce dependency rules across workspaces"
+      ],
+      "alternatives": [
+        "pnpm",
+        "npm CLI",
+        "Bun"
+      ],
+      "recommendation": {
+        "pick_for": "A JavaScript monorepo needs workspace tooling and deliberate control over dependency resolution.",
+        "compare_when": "Compare pnpm or npm when conventional node_modules behavior and existing CI integration dominate the decision."
+      },
+      "aliases": [
+        "Yarn Berry",
+        "modern Yarn"
+      ],
+      "official_url": "https://yarnpkg.com/",
+      "download_url": "https://yarnpkg.com/getting-started/install",
+      "repository_url": "https://github.com/yarnpkg/berry",
+      "license_kind": "open-source",
+      "pricing_model": "unknown",
+      "pricing_notes": "Open-source code and a public installation route are documented. A separate explicit pricing statement for the current distribution was not established in this review.",
+      "tags": [
+        "package-managers",
+        "manage JavaScript monorepos",
+        "enforce dependency rules across workspaces"
+      ],
+      "evidence_status": "official-docs-reviewed",
+      "sources": [
+        {
+          "url": "https://github.com/yarnpkg/berry/blob/master/README.md",
+          "label": "Official project documentation",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity",
+            "features",
+            "platforms",
+            "downloads"
+          ]
+        },
+        {
+          "url": "https://github.com/yarnpkg/berry/blob/master/LICENSE.md",
+          "label": "Official application and dependency licensing",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "license"
+          ]
+        },
+        {
+          "url": "https://yarnpkg.com/getting-started/install",
+          "label": "Official project installation",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "platforms",
+            "downloads"
+          ]
+        },
+        {
+          "url": "https://yarnpkg.com/features/pnp",
+          "label": "Official dependency resolution behavior",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "features"
+          ]
+        },
+        {
+          "url": "https://github.com/yarnpkg/berry/releases/tag/%40yarnpkg/cli/4.18.1",
+          "label": "Official dated release and distribution",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "maintenance",
+            "downloads"
+          ]
+        }
+      ],
+      "maintenance": {
+        "status": "active",
+        "checked_at": "2026-11-16",
+        "source_url": "https://github.com/yarnpkg/berry/releases/tag/%40yarnpkg/cli/4.18.1",
+        "note": "Official release @yarnpkg/cli/4.18.1 is dated 2026-09-24. This is a release observation; installation and performance were not independently tested."
+      }
+    },
+    {
+      "id": "npm-cli",
+      "name": "npm CLI",
+      "family": "development",
+      "category": "package-managers",
+      "summary": "Command-line package manager distributed with Node.js for installing, publishing and scripting JavaScript packages.",
+      "platforms": [
+        "Windows",
+        "macOS",
+        "Linux"
+      ],
+      "platform_notes": "Runs on supported Node.js versions; the official installation guide covers Windows, macOS and Linux. CLI compatibility depends on the selected Node/npm release pair.",
+      "license": "Artistic-2.0 for the CLI; dependencies and registry service have separate terms",
+      "features": [
+        "Dependency installation and lockfiles",
+        "Workspace operations",
+        "Package scripts and publishing",
+        "Reproducible CI installs with npm ci"
+      ],
+      "strengths": [
+        "Bundled with common Node.js distributions and widely documented",
+        "A standard package.json workflow minimizes extra package-manager setup"
+      ],
+      "limitations": [
+        "The open-source CLI does not imply free private registry or organizational services",
+        "Install scripts, dependency updates and runtime compatibility need project policy"
+      ],
+      "use_cases": [
+        "install JavaScript dependencies",
+        "publish npm packages",
+        "reproduce locked CI dependencies"
+      ],
+      "alternatives": [
+        "pnpm",
+        "Yarn",
+        "Bun"
+      ],
+      "recommendation": {
+        "pick_for": "You need the standard Node.js package workflow without adding another package-manager dependency.",
+        "compare_when": "Compare pnpm for shared dependency storage or Yarn for its workspace and resolution models."
+      },
+      "aliases": [
+        "npm"
+      ],
+      "official_url": "https://docs.npmjs.com/cli/",
+      "download_url": "https://docs.npmjs.com/downloading-and-installing-node-js-and-npm",
+      "repository_url": "https://github.com/npm/cli",
+      "license_kind": "open-source",
+      "pricing_model": "unknown",
+      "pricing_notes": "Open-source code and a public installation route are documented. A separate explicit pricing statement for the current distribution was not established in this review.",
+      "tags": [
+        "package-managers",
+        "install JavaScript dependencies",
+        "publish npm packages",
+        "reproduce locked CI dependencies"
+      ],
+      "evidence_status": "official-docs-reviewed",
+      "sources": [
+        {
+          "url": "https://github.com/npm/cli/blob/latest/README.md",
+          "label": "Official project documentation",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity",
+            "features",
+            "platforms",
+            "downloads"
+          ]
+        },
+        {
+          "url": "https://github.com/npm/cli/blob/latest/LICENSE",
+          "label": "Official application and dependency licensing",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "license"
+          ]
+        },
+        {
+          "url": "https://docs.npmjs.com/downloading-and-installing-node-js-and-npm",
+          "label": "Official installation and Node.js requirement",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "platforms",
+            "downloads"
+          ]
+        },
+        {
+          "url": "https://docs.npmjs.com/cli/v12/commands/npm-ci",
+          "label": "Official locked CI installation behavior",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "features"
+          ]
+        },
+        {
+          "url": "https://github.com/npm/cli/releases/tag/v12.2.2",
+          "label": "Official dated release and distribution",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "maintenance",
+            "downloads"
+          ]
+        }
+      ],
+      "maintenance": {
+        "status": "active",
+        "checked_at": "2026-11-16",
+        "source_url": "https://github.com/npm/cli/releases/tag/v12.2.2",
+        "note": "Official release v12.2.2 is dated 2026-11-04. This is a release observation; installation and performance were not independently tested."
+      }
+    },
+    {
+      "id": "jujutsu",
+      "name": "Jujutsu",
+      "family": "development",
+      "category": "version-control",
+      "summary": "Version-control system with a Git-backed storage model, automatic working-copy snapshots and an operation log.",
+      "platforms": [
+        "Windows",
+        "macOS",
+        "Linux"
+      ],
+      "platform_notes": "Official releases provide Windows, macOS and Linux binaries. The current storage backend uses Git while higher-level metadata is stored separately.",
+      "license": "Apache-2.0",
+      "features": [
+        "Working-copy-as-commit model",
+        "Operation log and undo",
+        "Automatic descendant rebasing",
+        "Git remote interoperability"
+      ],
+      "strengths": [
+        "Change editing and recovery are explicit parts of the command model",
+        "Git-backed repositories allow adoption alongside existing hosting"
+      ],
+      "limitations": [
+        "Bookmarks, conflicts and working-copy semantics differ from ordinary Git commands",
+        "Some replication features are explicitly experimental; interoperability does not mean every Git tool understands Jujutsu metadata"
+      ],
+      "use_cases": [
+        "manage stacked code changes",
+        "review and undo version-control operations"
+      ],
+      "alternatives": [
+        "Git Cola",
+        "lazygit",
+        "Fossil"
+      ],
+      "recommendation": {
+        "pick_for": "You want a different local change-editing workflow while keeping Git-based repositories and hosting.",
+        "compare_when": "Use a Git GUI when the team needs conventional Git semantics; compare Fossil for integrated project hosting."
+      },
+      "aliases": [
+        "jj"
+      ],
+      "official_url": "https://www.jj-vcs.dev/",
+      "download_url": "https://docs.jj-vcs.dev/latest/install-and-setup/",
+      "repository_url": "https://github.com/jj-vcs/jj",
+      "license_kind": "open-source",
+      "pricing_model": "unknown",
+      "pricing_notes": "Open-source code and a public installation route are documented. A separate explicit pricing statement for the current distribution was not established in this review.",
+      "tags": [
+        "version-control",
+        "manage stacked code changes",
+        "review and undo version-control operations"
+      ],
+      "evidence_status": "official-docs-reviewed",
+      "sources": [
+        {
+          "url": "https://github.com/jj-vcs/jj/blob/main/README.md",
+          "label": "Official project documentation",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity",
+            "features",
+            "platforms",
+            "downloads"
+          ]
+        },
+        {
+          "url": "https://github.com/jj-vcs/jj/blob/main/LICENSE",
+          "label": "Official application and dependency licensing",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "license"
+          ]
+        },
+        {
+          "url": "https://github.com/jj-vcs/jj/releases/tag/v0.47.1",
+          "label": "Official dated release and distribution",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "maintenance",
+            "downloads"
+          ]
+        }
+      ],
+      "maintenance": {
+        "status": "active",
+        "checked_at": "2026-11-16",
+        "source_url": "https://github.com/jj-vcs/jj/releases/tag/v0.47.1",
+        "note": "Official release v0.47.1 is dated 2026-11-05. This is a release observation; installation and performance were not independently tested."
+      }
+    },
+    {
+      "id": "git-cola",
+      "name": "Git Cola",
+      "family": "development",
+      "category": "git-clients",
+      "summary": "Qt-based Git desktop client for reviewing diffs, staging changes and navigating repository history.",
+      "platforms": [
+        "Windows",
+        "macOS",
+        "Linux"
+      ],
+      "platform_notes": "Official instructions cover Linux, macOS and Windows. Git, Python and a supported Qt binding are required unless provided by the selected package.",
+      "license": "GPL-2.0",
+      "features": [
+        "Interactive staging and diff review",
+        "Commit and branch operations",
+        "Git DAG history browser",
+        "Configurable keyboard-driven interface"
+      ],
+      "strengths": [
+        "Uses ordinary local Git repositories without requiring a hosting account",
+        "A focused GUI exposes staging and history beside command-line workflows"
+      ],
+      "limitations": [
+        "Python/Qt packaging differs between operating systems",
+        "Users still need to understand Git operations such as reset, rebase and merge"
+      ],
+      "use_cases": [
+        "stage selected Git changes",
+        "review local repository history"
+      ],
+      "alternatives": [
+        "Git Extensions",
+        "GitHub Desktop",
+        "lazygit"
+      ],
+      "recommendation": {
+        "pick_for": "You want an open-source desktop Git interface that works with existing local repositories.",
+        "compare_when": "Compare Git Extensions for its Windows workflow or lazygit for a terminal interface."
+      },
+      "official_url": "https://git-cola.gitlab.io/",
+      "download_url": "https://github.com/git-cola/git-cola#installation",
+      "repository_url": "https://github.com/git-cola/git-cola",
+      "license_kind": "open-source",
+      "pricing_model": "unknown",
+      "pricing_notes": "Open-source code and a public installation route are documented. A separate explicit pricing statement for the current distribution was not established in this review.",
+      "tags": [
+        "git-clients",
+        "stage selected Git changes",
+        "review local repository history"
+      ],
+      "evidence_status": "official-docs-reviewed",
+      "sources": [
+        {
+          "url": "https://github.com/git-cola/git-cola/blob/main/README.md",
+          "label": "Official project documentation",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity",
+            "features",
+            "platforms",
+            "downloads"
+          ]
+        },
+        {
+          "url": "https://github.com/git-cola/git-cola/blob/main/LICENSE",
+          "label": "Official application and dependency licensing",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "license"
+          ]
+        },
+        {
+          "url": "https://github.com/git-cola/git-cola/blob/main/docs/git-cola.rst",
+          "label": "Official Git Cola commands and staging documentation",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "features"
+          ]
+        },
+        {
+          "url": "https://github.com/git-cola/git-cola/releases/tag/v4.19.0",
+          "label": "Official dated release and distribution",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "maintenance",
+            "downloads"
+          ]
+        }
+      ],
+      "maintenance": {
+        "status": "active",
+        "checked_at": "2026-11-16",
+        "source_url": "https://github.com/git-cola/git-cola/releases/tag/v4.19.0",
+        "note": "Official release v4.19.0 is dated 2026-07-12. This is a release observation; installation and performance were not independently tested."
+      }
+    },
+    {
+      "id": "fossil",
+      "name": "Fossil",
+      "family": "development",
+      "category": "version-control",
+      "summary": "Distributed version-control system that bundles project tickets, wiki, forum and a web interface into a self-contained executable.",
+      "platforms": [
+        "Windows",
+        "macOS",
+        "Linux"
+      ],
+      "platform_notes": "Official project documents standalone executables for Windows, macOS and Linux; source builds are also available.",
+      "license": "BSD-2-Clause",
+      "features": [
+        "Distributed source history",
+        "Integrated tickets, wiki and forum",
+        "Built-in web interface",
+        "SQLite repository storage and autosync"
+      ],
+      "strengths": [
+        "A project can retain code and collaboration records together",
+        "Small self-hosted deployments need fewer separate applications"
+      ],
+      "limitations": [
+        "Its repository format and workflow differ from Git",
+        "GitHub mirroring does not make all Fossil tickets and wiki data native Git objects"
+      ],
+      "use_cases": [
+        "self-host a complete small project",
+        "keep source and project documentation together"
+      ],
+      "alternatives": [
+        "Jujutsu",
+        "Git Cola",
+        "Redmine"
+      ],
+      "recommendation": {
+        "pick_for": "You want an integrated, self-hosted source and project-history system in one executable.",
+        "compare_when": "Compare Git-backed tools when existing Git hosting, CI or contributor expectations are the deciding constraint."
+      },
+      "official_url": "https://fossil-scm.org/home/doc/trunk/www/index.wiki",
+      "download_url": "https://fossil-scm.org/home/uv/download.html",
+      "repository_url": "https://fossil-scm.org/home",
+      "license_kind": "open-source",
+      "pricing_model": "free",
+      "pricing_notes": "The local open-source application is available without a license fee. Optional hosting, support, dependencies and infrastructure have separate terms.",
+      "tags": [
+        "version-control",
+        "self-host a complete small project",
+        "keep source and project documentation together"
+      ],
+      "evidence_status": "official-docs-reviewed",
+      "sources": [
+        {
+          "url": "https://fossil-scm.org/home/doc/trunk/www/index.wiki",
+          "label": "Official project overview",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity",
+            "features",
+            "platforms",
+            "pricing"
+          ]
+        },
+        {
+          "url": "https://fossil-scm.org/home/doc/trunk/COPYRIGHT-BSD2.txt",
+          "label": "Official BSD licensing terms",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "license"
+          ]
+        },
+        {
+          "url": "https://fossil-scm.org/home/uv/download.html",
+          "label": "Official download route",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "downloads"
+          ]
+        },
+        {
+          "url": "https://fossil-scm.org/home/doc/trunk/www/changes.wiki",
+          "label": "Official dated release history",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "maintenance"
+          ]
+        }
+      ],
+      "maintenance": {
+        "status": "active",
+        "checked_at": "2026-11-16",
+        "source_url": "https://fossil-scm.org/home/doc/trunk/www/changes.wiki",
+        "note": "Official changelog lists release 2.28 on March 11, 2026 and a separate pending 2.29 section. Pending work is not presented as a released version."
+      }
+    },
+    {
+      "id": "ludusavi",
+      "name": "Ludusavi",
+      "family": "gaming",
+      "category": "game-save-backup",
+      "summary": "Game-save backup and restoration application with a portable desktop interface, CLI and community-maintained game manifest.",
+      "platforms": [
+        "Windows",
+        "macOS",
+        "Linux"
+      ],
+      "platform_notes": "Official releases provide Windows, macOS and Linux packages; documentation includes Steam Deck, Proton saves and Windows-registry saves.",
+      "license": "MIT",
+      "features": [
+        "Game-save discovery from a manifest",
+        "GUI and scriptable CLI",
+        "File and Windows registry backups",
+        "Custom game definitions and launcher integration"
+      ],
+      "strengths": [
+        "Brings save locations from multiple game stores into one backup workflow",
+        "Custom entries and CLI automation cover games outside the default manifest"
+      ],
+      "limitations": [
+        "Manifest coverage and detected save locations need checking for the actual game",
+        "A backup on the same disk is not protection from disk loss; test restoration and choose separate storage"
+      ],
+      "use_cases": [
+        "back up PC game saves",
+        "transfer game saves between installations"
+      ],
+      "alternatives": [
+        "Game Backup Monitor",
+        "Kopia"
+      ],
+      "recommendation": {
+        "pick_for": "You need a cross-platform, game-aware backup interface with command-line automation.",
+        "compare_when": "Compare Game Backup Monitor for automatic backup on game exit and a general backup application for whole user folders."
+      },
+      "official_url": "https://github.com/mtkennerly/ludusavi",
+      "download_url": "https://github.com/mtkennerly/ludusavi/releases",
+      "repository_url": "https://github.com/mtkennerly/ludusavi",
+      "license_kind": "open-source",
+      "pricing_model": "unknown",
+      "pricing_notes": "Open-source code and a public installation route are documented. A separate explicit pricing statement for the current distribution was not established in this review.",
+      "tags": [
+        "game-save-backup",
+        "back up PC game saves",
+        "transfer game saves between installations"
+      ],
+      "evidence_status": "official-docs-reviewed",
+      "sources": [
+        {
+          "url": "https://github.com/mtkennerly/ludusavi/blob/master/README.md",
+          "label": "Official project documentation",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity",
+            "features",
+            "platforms",
+            "downloads"
+          ]
+        },
+        {
+          "url": "https://github.com/mtkennerly/ludusavi/blob/master/LICENSE",
+          "label": "Official application and dependency licensing",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "license"
+          ]
+        },
+        {
+          "url": "https://github.com/mtkennerly/ludusavi/blob/master/docs/help/backup-validation.md",
+          "label": "Official restoration and validation guidance",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "features"
+          ]
+        },
+        {
+          "url": "https://github.com/mtkennerly/ludusavi/releases/tag/v0.31.0",
+          "label": "Official dated release and distribution",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "maintenance",
+            "downloads"
+          ]
+        }
+      ],
+      "maintenance": {
+        "status": "active",
+        "checked_at": "2026-11-16",
+        "source_url": "https://github.com/mtkennerly/ludusavi/releases/tag/v0.31.0",
+        "note": "Official release v0.31.0 is dated 2026-04-04. This is a release observation; installation and performance were not independently tested."
+      }
+    },
+    {
+      "id": "game-backup-monitor",
+      "name": "Game Backup Monitor",
+      "family": "gaming",
+      "category": "game-save-backup",
+      "summary": "Desktop monitor that detects configured games and creates compressed save backups after a play session ends.",
+      "platforms": [
+        "Windows",
+        "Linux"
+      ],
+      "platform_notes": "Windows uses .NET Framework 4.8; current upstream testing targets Windows 11 and no longer covers Windows 10. Linux uses Mono. Native macOS support is not documented.",
+      "license": "GPL-3.0",
+      "features": [
+        "Game-process monitoring",
+        "Automatic save backups after exit",
+        "7-Zip archives",
+        "Custom game definitions and backup history"
+      ],
+      "strengths": [
+        "A game-exit trigger reduces reliance on remembering a manual backup",
+        "Custom definitions support games and other applications beyond the supplied list"
+      ],
+      "limitations": [
+        "Process detection and save paths must match each game configuration",
+        "Cloud synchronization needs an external storage arrangement and conflict handling",
+        "Upstream considers the application feature-complete: major new features are not planned, while maintenance and minor updates continue."
+      ],
+      "use_cases": [
+        "automatically back up saves after playing",
+        "maintain compressed game-save history"
+      ],
+      "alternatives": [
+        "Ludusavi",
+        "Kopia"
+      ],
+      "recommendation": {
+        "pick_for": "You want a background desktop workflow that saves a backup when a configured game exits.",
+        "compare_when": "Compare Ludusavi for broader store-aware scanning, macOS packages and scriptable one-off backups."
+      },
+      "official_url": "https://mikemaximus.github.io/gbm-web/",
+      "download_url": "https://github.com/MikeMaximus/gbm/releases",
+      "repository_url": "https://github.com/MikeMaximus/gbm",
+      "license_kind": "open-source",
+      "pricing_model": "unknown",
+      "pricing_notes": "Open-source code and a public installation route are documented. A separate explicit pricing statement for the current distribution was not established in this review.",
+      "tags": [
+        "game-save-backup",
+        "automatically back up saves after playing",
+        "maintain compressed game-save history"
+      ],
+      "evidence_status": "official-docs-reviewed",
+      "sources": [
+        {
+          "url": "https://github.com/MikeMaximus/gbm/blob/master/README.md",
+          "label": "Official project documentation",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity",
+            "features",
+            "platforms",
+            "downloads"
+          ]
+        },
+        {
+          "url": "https://github.com/MikeMaximus/gbm/blob/master/LICENSE",
+          "label": "Official application and dependency licensing",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "license"
+          ]
+        },
+        {
+          "url": "https://mikemaximus.github.io/gbm-web/manual.html",
+          "label": "Official backup workflow and history documentation",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "features"
+          ]
+        },
+        {
+          "url": "https://github.com/MikeMaximus/gbm/releases/tag/v1.4.5",
+          "label": "Official dated release and distribution",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "maintenance",
+            "downloads"
+          ]
+        },
+        {
+          "url": "https://mikemaximus.github.io/gbm-web/",
+          "label": "Official maintenance scope and current Windows testing requirements",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity",
+            "platforms",
+            "maintenance"
+          ]
+        }
+      ],
+      "maintenance": {
+        "status": "active",
+        "checked_at": "2026-11-16",
+        "source_url": "https://github.com/MikeMaximus/gbm/releases/tag/v1.4.5",
+        "note": "Official v1.4.5 release is dated June 30, 2026. The project homepage describes feature-complete status with continuing maintenance/minor updates rather than major new development."
+      }
+    },
+    {
+      "id": "cvat",
+      "name": "CVAT Community",
+      "family": "ai",
+      "category": "data-labeling",
+      "summary": "Self-hosted browser application for collaborative image, video, audio and 3D annotation with dataset import/export and APIs.",
+      "platforms": [
+        "Web"
+      ],
+      "platform_notes": "Docker/Compose server accessed through a browser; upstream primarily tests Chromium-based browsers. Firefox has caveats and Safari/WebKit is not supported.",
+      "license": "MIT core; some serverless assets and dependencies have separate licenses",
+      "features": [
+        "Image, video, audio and point-cloud annotation",
+        "Task and team workflows",
+        "Dataset import and export",
+        "REST API, Python SDK and model-assisted annotation"
+      ],
+      "strengths": [
+        "A visual annotation workflow covers both individual frames and structured datasets",
+        "Self-hosting gives the team control over storage and service configuration"
+      ],
+      "limitations": [
+        "Operating the full server stack requires backups, upgrades and resource planning",
+        "Hosted/Enterprise features such as some quality-control UI and built-in models are not automatically included in Community"
+      ],
+      "use_cases": [
+        "label computer-vision datasets",
+        "coordinate image and video annotators"
+      ],
+      "alternatives": [
+        "Label Studio",
+        "Argilla"
+      ],
+      "recommendation": {
+        "pick_for": "A team needs a self-hosted visual annotation platform with standard dataset formats and APIs.",
+        "compare_when": "Compare Label Studio for a different multi-modal task model and Argilla for text-feedback workflows; verify edition-specific features."
+      },
+      "aliases": [
+        "CVAT",
+        "Computer Vision Annotation Tool"
+      ],
+      "official_url": "https://www.cvat.ai/",
+      "download_url": "https://docs.cvat.ai/docs/administration/community/basics/installation/",
+      "pricing_notes": "Community is explicitly free and self-hosted. CVAT Online, Enterprise and annotation services have separate plans and limits.",
+      "repository_url": "https://github.com/cvat-ai/cvat",
+      "license_kind": "open-source",
+      "pricing_model": "free",
+      "tags": [
+        "data-labeling",
+        "label computer-vision datasets",
+        "coordinate image and video annotators"
+      ],
+      "evidence_status": "official-docs-reviewed",
+      "sources": [
+        {
+          "url": "https://github.com/cvat-ai/cvat/blob/develop/README.md",
+          "label": "Official project documentation",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity",
+            "features",
+            "platforms",
+            "downloads",
+            "pricing"
+          ]
+        },
+        {
+          "url": "https://github.com/cvat-ai/cvat/blob/develop/LICENSE",
+          "label": "Official application and dependency licensing",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "license"
+          ]
+        },
+        {
+          "url": "https://docs.cvat.ai/docs/administration/community/basics/installation/",
+          "label": "Official Community installation",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "platforms",
+            "downloads"
+          ]
+        },
+        {
+          "url": "https://github.com/cvat-ai/cvat/releases/tag/v2.83.0",
+          "label": "Official dated release and distribution",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "maintenance",
+            "downloads"
+          ]
+        }
+      ],
+      "maintenance": {
+        "status": "active",
+        "checked_at": "2026-11-16",
+        "source_url": "https://github.com/cvat-ai/cvat/releases/tag/v2.83.0",
+        "note": "Official release v2.83.0 is dated 2026-11-12. This is a release observation; installation and performance were not independently tested."
+      }
+    },
+    {
+      "id": "special-k",
+      "name": "Special K",
+      "family": "gaming",
+      "category": "game-graphics-tools",
+      "summary": "PC game modification framework with frame pacing controls, HDR tools, display overrides and game-specific fixes.",
+      "platforms": [
+        "Windows",
+        "Linux"
+      ],
+      "platform_notes": "Windows is the primary native target. Upstream documents conditional Wine/DXVK use on Linux with per-game configuration; this is not native Linux or universal game compatibility.",
+      "license": "GPL-3.0 for the injection framework; bundled utilities and dependencies retain their notices",
+      "features": [
+        "Frame-rate limiting and pacing controls",
+        "HDR retrofit and screenshots",
+        "Display and rendering overrides",
+        "Game-specific compatibility adjustments"
+      ],
+      "strengths": [
+        "Combines several rendering and presentation controls in an in-game interface",
+        "Documented game-specific fixes can address issues absent from a game settings menu"
+      ],
+      "limitations": [
+        "Compatibility is per game and rendering API; anti-cheat and multiplayer policies can prohibit injected tools",
+        "Stable and experimental channels differ; no universal performance gain is promised"
+      ],
+      "use_cases": [
+        "adjust PC game frame pacing",
+        "evaluate HDR retrofit for a supported game"
+      ],
+      "alternatives": [
+        "ReShade",
+        "MangoHud"
+      ],
+      "recommendation": {
+        "pick_for": "A supported single-player game needs a documented rendering, HDR or frame-pacing adjustment.",
+        "compare_when": "Compare ReShade for post-processing shaders and a monitoring overlay when the goal is measurement alone."
+      },
+      "official_url": "https://www.special-k.info/",
+      "download_url": "https://www.special-k.info/#download",
+      "repository_url": "https://github.com/SpecialKO/SpecialK",
+      "license_kind": "open-source",
+      "pricing_model": "unknown",
+      "pricing_notes": "Open-source code and a public installation route are documented. A separate explicit pricing statement for the current distribution was not established in this review.",
+      "tags": [
+        "game-graphics-tools",
+        "adjust PC game frame pacing",
+        "evaluate HDR retrofit for a supported game"
+      ],
+      "evidence_status": "official-docs-reviewed",
+      "sources": [
+        {
+          "url": "https://github.com/SpecialKO/SpecialK/blob/main/README.md",
+          "label": "Official project documentation",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity",
+            "features",
+            "platforms",
+            "downloads"
+          ]
+        },
+        {
+          "url": "https://github.com/SpecialKO/SpecialK/blob/main/LICENSE",
+          "label": "Official application and dependency licensing",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "license"
+          ]
+        },
+        {
+          "url": "https://www.special-k.info/",
+          "label": "Official feature overview and download channels",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity",
+            "features",
+            "downloads"
+          ]
+        },
+        {
+          "url": "https://wiki.special-k.info/SpecialK/Local",
+          "label": "Official per-game installation and compatibility cautions",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "features"
+          ]
+        },
+        {
+          "url": "https://github.com/SpecialKO/SpecialK/releases/tag/SK_26_10_10",
+          "label": "Official dated release and distribution",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "maintenance",
+            "downloads"
+          ]
+        }
+      ],
+      "maintenance": {
+        "status": "active",
+        "checked_at": "2026-11-16",
+        "source_url": "https://github.com/SpecialKO/SpecialK/releases/tag/SK_26_10_10",
+        "note": "Official release SK_26_10_10 is dated 2026-10-16. This is a release observation; installation and performance were not independently tested."
+      }
     }
   ]
 }

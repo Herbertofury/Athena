@@ -1,0 +1,314 @@
+{
+  "harness": "atlas-event-log-render-v1",
+  "source_module": "/Engineering-Atlas/media-lab/event-log-benchmark.4137320f52fd7de9.js",
+  "started_at": "2026-10-28T00:44:14.195Z",
+  "scope": "original retained public event sequence",
+  "repeat": 1,
+  "event_count": 34,
+  "complete_json_bytes": 8280,
+  "complete": true,
+  "samples": [
+    {
+      "round": 0,
+      "strategy": "full_history",
+      "synchronous_render_ms": 3.5,
+      "frame_ready_proxy_ms": 1199.0999999940395,
+      "scroll_frame_wait_ms": [
+        599.4000000059605,
+        597.1000000238419,
+        599.8999999761581,
+        600.9000000059605,
+        599.5999999940395,
+        598.7000000178814,
+        603,
+        613.1999999880791
+      ],
+      "heap_before": 4571711,
+      "heap_after": 4732435,
+      "log_text_code_units_written": 156267,
+      "dom_text_nodes": 1,
+      "complete_output_equal": true
+    },
+    {
+      "round": 0,
+      "strategy": "append",
+      "synchronous_render_ms": 2.2000000178813934,
+      "frame_ready_proxy_ms": 1199.5999999940395,
+      "scroll_frame_wait_ms": [
+        183.19999998807907,
+        600.2000000178814,
+        599.7999999821186,
+        600.2000000178814,
+        600.4000000059605,
+        600.0999999940395,
+        599.2999999821186,
+        601
+      ],
+      "heap_before": 2354684,
+      "heap_after": 2401630,
+      "log_text_code_units_written": 8281,
+      "dom_text_nodes": 36,
+      "complete_output_equal": true
+    },
+    {
+      "round": 1,
+      "strategy": "append",
+      "synchronous_render_ms": 0.5999999940395355,
+      "frame_ready_proxy_ms": 1216.3999999761581,
+      "scroll_frame_wait_ms": [
+        185,
+        751.6999999880791,
+        1025.300000011921,
+        35.5,
+        718,
+        604.9000000059605,
+        532.9000000059605,
+        599.3000000119209
+      ],
+      "heap_before": 2346778,
+      "heap_after": 2388990,
+      "log_text_code_units_written": 8281,
+      "dom_text_nodes": 36,
+      "complete_output_equal": true
+    },
+    {
+      "round": 1,
+      "strategy": "full_history",
+      "synchronous_render_ms": 4.800000011920929,
+      "frame_ready_proxy_ms": 463.5,
+      "scroll_frame_wait_ms": [
+        846.6999999880791,
+        151.40000000596046,
+        599.4000000059605,
+        619.6999999880791,
+        595.4000000059605,
+        583.4000000059605,
+        600,
+        616.4000000059605
+      ],
+      "heap_before": 3322530,
+      "heap_after": 3484330,
+      "log_text_code_units_written": 156267,
+      "dom_text_nodes": 1,
+      "complete_output_equal": true
+    },
+    {
+      "round": 2,
+      "strategy": "full_history",
+      "synchronous_render_ms": 1.2999999821186066,
+      "frame_ready_proxy_ms": 1616.5,
+      "scroll_frame_wait_ms": [
+        179.2999999821186,
+        602.4000000059605,
+        598.6999999880791,
+        598.5,
+        599,
+        601,
+        599.5,
+        601.4000000059605
+      ],
+      "heap_before": 3487146,
+      "heap_after": 3652474,
+      "log_text_code_units_written": 156267,
+      "dom_text_nodes": 1,
+      "complete_output_equal": true
+    },
+    {
+      "round": 2,
+      "strategy": "append",
+      "synchronous_render_ms": 0.5,
+      "frame_ready_proxy_ms": 1199.5,
+      "scroll_frame_wait_ms": [
+        201,
+        599.5,
+        599.9000000059605,
+        599.4000000059605,
+        600.1999999880791,
+        602.8000000119209,
+        598.0999999940395,
+        600.5
+      ],
+      "heap_before": 3655334,
+      "heap_after": 3732771,
+      "log_text_code_units_written": 8281,
+      "dom_text_nodes": 36,
+      "complete_output_equal": true
+    },
+    {
+      "round": 3,
+      "strategy": "append",
+      "synchronous_render_ms": 0.7999999821186066,
+      "frame_ready_proxy_ms": 1371.5,
+      "scroll_frame_wait_ms": [
+        197.69999998807907,
+        384.19999998807907,
+        599.3000000119209,
+        599.8000000119209,
+        599.6999999880791,
+        600,
+        616.5,
+        599.8000000119209
+      ],
+      "heap_before": 4602347,
+      "heap_after": 4644323,
+      "log_text_code_units_written": 8281,
+      "dom_text_nodes": 36,
+      "complete_output_equal": true
+    },
+    {
+      "round": 3,
+      "strategy": "full_history",
+      "synchronous_render_ms": 0.9000000059604645,
+      "frame_ready_proxy_ms": 1199.5999999940395,
+      "scroll_frame_wait_ms": [
+        183.59999999403954,
+        599.9000000059605,
+        600,
+        599.5,
+        600.2999999821186,
+        599.5,
+        600.5,
+        598.6000000238419
+      ],
+      "heap_before": 4646955,
+      "heap_after": 4045767,
+      "log_text_code_units_written": 156267,
+      "dom_text_nodes": 1,
+      "complete_output_equal": true
+    },
+    {
+      "round": 4,
+      "strategy": "full_history",
+      "synchronous_render_ms": 0.699999988079071,
+      "frame_ready_proxy_ms": 1201.2999999821186,
+      "scroll_frame_wait_ms": [
+        200.09999999403954,
+        601.4000000059605,
+        1012.9000000059605,
+        185.2999999821186,
+        598.6000000238419,
+        620.0999999940395,
+        578.9000000059605,
+        600.4000000059605
+      ],
+      "heap_before": 4048443,
+      "heap_after": 4210975,
+      "log_text_code_units_written": 156267,
+      "dom_text_nodes": 1,
+      "complete_output_equal": true
+    },
+    {
+      "round": 4,
+      "strategy": "append",
+      "synchronous_render_ms": 0.5,
+      "frame_ready_proxy_ms": 1615.0999999940395,
+      "scroll_frame_wait_ms": [
+        184.09999999403954,
+        599.5,
+        600.5999999940395,
+        599.2000000178814,
+        600.0999999940395,
+        599.8000000119209,
+        601.3999999761581,
+        597.5
+      ],
+      "heap_before": 3282569,
+      "heap_after": 3324841,
+      "log_text_code_units_written": 8281,
+      "dom_text_nodes": 36,
+      "complete_output_equal": true
+    },
+    {
+      "round": 5,
+      "strategy": "append",
+      "synchronous_render_ms": 0.800000011920929,
+      "frame_ready_proxy_ms": 1200.0999999940395,
+      "scroll_frame_wait_ms": [
+        183.2000000178814,
+        616,
+        601.1999999880791,
+        600.0999999940395,
+        602.5,
+        595.7000000178814,
+        600.5,
+        599
+      ],
+      "heap_before": 3327541,
+      "heap_after": 3650673,
+      "log_text_code_units_written": 8281,
+      "dom_text_nodes": 36,
+      "complete_output_equal": true
+    },
+    {
+      "round": 5,
+      "strategy": "full_history",
+      "synchronous_render_ms": 3.300000011920929,
+      "frame_ready_proxy_ms": 1199.4000000059605,
+      "scroll_frame_wait_ms": [
+        183,
+        600,
+        599.8000000119209,
+        599.4000000059605,
+        619.4000000059605,
+        600.0999999940395,
+        598.9000000059605,
+        598.2999999821186
+      ],
+      "heap_before": 3653989,
+      "heap_after": 4731540,
+      "log_text_code_units_written": 156267,
+      "dom_text_nodes": 1,
+      "complete_output_equal": true
+    },
+    {
+      "round": 6,
+      "strategy": "full_history",
+      "synchronous_render_ms": 1.7000000178813934,
+      "frame_ready_proxy_ms": 1379.5999999940395,
+      "scroll_frame_wait_ms": [
+        597.7999999821186,
+        600.5,
+        600.8999999761581,
+        598.4000000059605,
+        600.5999999940395,
+        599.9000000059605,
+        600,
+        599
+      ],
+      "heap_before": 4734216,
+      "heap_after": 4317176,
+      "log_text_code_units_written": 156267,
+      "dom_text_nodes": 1,
+      "complete_output_equal": true
+    },
+    {
+      "round": 6,
+      "strategy": "append",
+      "synchronous_render_ms": 0.5,
+      "frame_ready_proxy_ms": 1216.4000000059605,
+      "scroll_frame_wait_ms": [
+        183.40000000596046,
+        600.1999999880791,
+        599.3000000119209,
+        599.2999999821186,
+        600.8000000119209,
+        599.6999999880791,
+        599.8999999761581,
+        599.2000000178814
+      ],
+      "heap_before": 4319808,
+      "heap_after": 4361788,
+      "log_text_code_units_written": 8281,
+      "dom_text_nodes": 36,
+      "complete_output_equal": true
+    }
+  ],
+  "limitations": [
+    "Event-log component only; not full card/media loading or target-project acceptance",
+    "Double-rAF is a scheduling proxy, not physical paint",
+    "Heap snapshots when exposed are not peak memory and can be coarse or GC-dependent",
+    "Same immutable records and full visible JSON; no truncation, sampling or omitted events",
+    "One browser/environment; no general best-method ranking"
+  ],
+  "finished_at": "2026-10-28T00:45:55.109Z"
+}

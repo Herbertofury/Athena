@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "reviewed_at": "2026-11-15",
+  "reviewed_at": "2026-11-16",
   "scope": "Communications, radio, industrial/device workflows and systems comparison gaps",
   "phase": "integrated-primary-source-audit",
   "application_count": 102,
@@ -269,7 +269,7 @@
     },
     {
       "app_id": "fluffychat",
-      "reviewed_at": "2026-11-15",
+      "reviewed_at": "2026-11-16",
       "observations": [
         {
           "url": "https://fluffychat.im/",
@@ -359,6 +359,25 @@
             "sha256": "469b799fc2ab1e2fb955c3063426c7853241b890b01dfdd39ae54e42a7dc9ef6",
             "byte_length": 6911,
             "placeholder": false
+          }
+        },
+        {
+          "url": "https://www.matrix.org/blog/2026/10/30/this-week-in-matrix-2026-10-30/",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "platforms",
+            "downloads"
+          ],
+          "observed_facts": [
+            "The FluffyChat maintainer announcement calls the new Windows and macOS distributions beta; macOS uses a capacity-limited TestFlight group."
+          ],
+          "retrieval": {
+            "method": "HTTP GET",
+            "http_status": 200,
+            "final_url": "https://www.matrix.org/blog/2026/10/30/this-week-in-matrix-2026-10-30/",
+            "retrieved_at": "2026-11-16T18:15:22.160923+00:00",
+            "sha256": "d799131ae975ee818569e56fd2349555698e7922cd9c5472e134dea7be00aced",
+            "byte_length": 64319
           }
         }
       ],
@@ -2639,7 +2658,7 @@
     },
     {
       "app_id": "sdruno",
-      "reviewed_at": "2026-11-15",
+      "reviewed_at": "2026-11-16",
       "observations": [
         {
           "url": "https://www.sdrplay.com/sdruno/",
@@ -2714,13 +2733,31 @@
             "byte_length": 127240,
             "placeholder": false
           }
+        },
+        {
+          "url": "https://www.sdrplay.com/sdruno/",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "maintenance"
+          ],
+          "observed_facts": [
+            "Vendor explicitly identifies SDRuno as end of life while preserving installer and manual access."
+          ],
+          "retrieval": {
+            "method": "HTTP GET",
+            "http_status": 200,
+            "final_url": "https://sdrplay.com/sdruno/",
+            "retrieved_at": "2026-11-16T18:15:24.663116+00:00",
+            "sha256": "c631110d99bd97117d67bf3e46538120f6d5134218e8bc2148b598e98ed76589",
+            "byte_length": 127240
+          }
         }
       ],
       "editorial_basis": "Selection guidance compares documented task fit and limitations. No application was executed; no independent speed, reliability, privacy or security benchmark is claimed."
     },
     {
       "app_id": "sdrconnect",
-      "reviewed_at": "2026-11-15",
+      "reviewed_at": "2026-11-16",
       "observations": [
         {
           "url": "https://www.sdrplay.com/sdrconnect/",
@@ -2780,6 +2817,25 @@
             "sha256": "c28c7719f8b7e78429a11b1eb14d6233ed5f5e8fab66e39f321f8e1dc68ba7c6",
             "byte_length": 105237,
             "placeholder": false
+          }
+        },
+        {
+          "url": "https://www.sdrplay.com/sdrconnect/",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "platforms",
+            "downloads"
+          ],
+          "observed_facts": [
+            "Vendor lists Windows, Intel and ARM macOS, and Linux packages; the original RSP1 is excluded. Ubuntu LTS is the tested Linux distribution family."
+          ],
+          "retrieval": {
+            "method": "HTTP GET",
+            "http_status": 200,
+            "final_url": "https://sdrplay.com/sdrconnect/",
+            "retrieved_at": "2026-11-16T18:15:23.147160+00:00",
+            "sha256": "e84ef8c6df1acf53f36be8553efd1312cd14efcb307111b5cc0a16e137f2544b",
+            "byte_length": 135650
           }
         }
       ],
@@ -3023,7 +3079,7 @@
     },
     {
       "app_id": "wsjt-x",
-      "reviewed_at": "2026-11-15",
+      "reviewed_at": "2026-11-16",
       "observations": [
         {
           "url": "https://github.com/WSJTX/wsjtx",
@@ -3064,6 +3120,46 @@
             "byte_length": 1578,
             "placeholder": false,
             "web_retrieval_note": "Official project page was a placeholder in direct HTTP; primary developer repository is the usable identity source and platform claim requires focused recheck."
+          }
+        },
+        {
+          "url": "https://wsjtx.github.io/wsjtx/",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity",
+            "features",
+            "platforms",
+            "maintenance"
+          ],
+          "observed_facts": [
+            "Official project homepage identifies WSJT-X 3.0.2 released 18 June 2026 and desktop support for Windows, macOS and Linux."
+          ],
+          "retrieval": {
+            "method": "HTTP GET",
+            "http_status": 200,
+            "final_url": "https://wsjtx.github.io/wsjtx/",
+            "retrieved_at": "2026-11-16T18:15:17.311289+00:00",
+            "sha256": "938f666beb4be11fd70e92b79031ca2f956a6d8a7cde8b24ee1c0ce5cf186fbb",
+            "byte_length": 11204
+          }
+        },
+        {
+          "url": "https://wsjtx.github.io/wsjtx/downloads.html",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "platforms",
+            "downloads"
+          ],
+          "observed_facts": [
+            "Official distribution page links platform-specific installers and Linux packages."
+          ],
+          "retrieval": {
+            "method": "HTTP GET",
+            "http_status": 200,
+            "final_url": "https://wsjtx.github.io/wsjtx/downloads.html",
+            "retrieved_at": "2026-11-16T18:15:17.322979+00:00",
+            "sha256": "75bc4f204e4175b5e0df287ce641b4d444f4127fdae9bd2783b873bfca08c816",
+            "byte_length": 6175
           }
         }
       ],
@@ -3118,7 +3214,7 @@
     },
     {
       "app_id": "js8call",
-      "reviewed_at": "2026-11-15",
+      "reviewed_at": "2026-11-16",
       "observations": [
         {
           "url": "http://js8call.com/",
@@ -3162,13 +3258,35 @@
             "byte_length": 311250,
             "placeholder": false
           }
+        },
+        {
+          "url": "https://js8call.com/",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity",
+            "features",
+            "platforms",
+            "downloads",
+            "maintenance"
+          ],
+          "observed_facts": [
+            "Official homepage directs users to JS8Call-Improved, identifies release 3.0.3 dated 12 July 2026, and lists Windows, macOS and Linux."
+          ],
+          "retrieval": {
+            "method": "HTTP GET",
+            "http_status": 200,
+            "final_url": "https://js8call.com/",
+            "retrieved_at": "2026-11-16T18:15:18.363226+00:00",
+            "sha256": "39016401c70c5cb7f41d5d4e7e7175fe051bc8f024f14413596acfba2a24caa6",
+            "byte_length": 16440
+          }
         }
       ],
       "editorial_basis": "Selection guidance compares documented task fit and limitations. No application was executed; no independent speed, reliability, privacy or security benchmark is claimed."
     },
     {
       "app_id": "fldigi",
-      "reviewed_at": "2026-11-15",
+      "reviewed_at": "2026-11-16",
       "observations": [
         {
           "url": "https://www.w1hkj.org/",
@@ -3210,6 +3328,25 @@
             "sha256": "b790392e3995267e25fc92a796d744518afda725c995175dff5bf86498f827a8",
             "byte_length": 231547,
             "placeholder": false
+          }
+        },
+        {
+          "url": "https://github.com/w1hkj/fldigi",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "license",
+            "features"
+          ],
+          "observed_facts": [
+            "Current official repository identifies GPL-3.0 licensing; older manual wording must not override the source license."
+          ],
+          "retrieval": {
+            "method": "HTTP GET",
+            "http_status": 200,
+            "final_url": "https://github.com/w1hkj/fldigi",
+            "retrieved_at": "2026-11-16T18:15:21.761629+00:00",
+            "sha256": "399cddd4250267414070100abe2d480f6ebaa37911047400c7dfb7f7b5f52d2c",
+            "byte_length": 231512
           }
         }
       ],
@@ -3491,7 +3628,7 @@
     },
     {
       "app_id": "chirp",
-      "reviewed_at": "2026-11-15",
+      "reviewed_at": "2026-11-16",
       "observations": [
         {
           "url": "https://chirpmyradio.com/",
@@ -3546,6 +3683,28 @@
             "Current official distribution instructions were reviewed."
           ],
           "retrieval": {}
+        },
+        {
+          "url": "https://chirpmyradio.com/projects/chirp/wiki/Download",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "downloads",
+            "platforms",
+            "features",
+            "maintenance",
+            "pricing"
+          ],
+          "observed_facts": [
+            "Official download page distinguishes maintained current CHIRP from legacy builds that receive no further updates. Windows ARM compatibility is reported by users but not guaranteed."
+          ],
+          "retrieval": {
+            "method": "HTTP GET",
+            "http_status": 200,
+            "final_url": "https://chirpmyradio.com/projects/chirp/wiki/Download",
+            "retrieved_at": "2026-11-16T18:15:20.917557+00:00",
+            "sha256": "f85f78738dd6dccb84fb3d1841d0372623b0bb034f927bb815fa15c112326c8d",
+            "byte_length": 35422
+          }
         }
       ],
       "editorial_basis": "Selection guidance compares documented task fit and limitations. No application was executed; no independent speed, reliability, privacy or security benchmark is claimed."
@@ -5297,7 +5456,7 @@
     },
     {
       "app_id": "openocd",
-      "reviewed_at": "2026-11-15",
+      "reviewed_at": "2026-11-16",
       "observations": [
         {
           "url": "https://openocd.org/",
@@ -5332,6 +5491,42 @@
           ],
           "retrieval": {
             "web_retrieval_note": "Official distribution guide read through primary-source search."
+          }
+        },
+        {
+          "url": "https://github.com/openocd-org/openocd/blob/master/COPYING",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "license"
+          ],
+          "observed_facts": [
+            "Official read-only mirror specifies GPL-2.0-or-later and points to additional per-file licensing rules."
+          ],
+          "retrieval": {
+            "method": "HTTP GET",
+            "http_status": 200,
+            "final_url": "https://github.com/openocd-org/openocd/blob/master/COPYING",
+            "retrieved_at": "2026-11-16T18:15:21.208028+00:00",
+            "sha256": "3065ec9ddd2d034455229f5abfe6f5e3e2187ab11efa138549cbb2be121b6a35",
+            "byte_length": 170628
+          }
+        },
+        {
+          "url": "https://openocd.org/doc/html/index.html",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "maintenance"
+          ],
+          "observed_facts": [
+            "Current user guide identifies itself as 0.12.0+dev documentation dated 16 November 2026. This does not establish a new stable release."
+          ],
+          "retrieval": {
+            "method": "HTTP GET",
+            "http_status": 200,
+            "final_url": "https://openocd.org/doc/html/index.html",
+            "retrieved_at": "2026-11-16T18:15:20.792806+00:00",
+            "sha256": "6afc000f4b548b9b132f4db74967c6d2024d6a11637f6f576be7884fb6444e69",
+            "byte_length": 44353
           }
         }
       ],
@@ -5432,7 +5627,7 @@
     },
     {
       "app_id": "openscap",
-      "reviewed_at": "2026-11-15",
+      "reviewed_at": "2026-11-16",
       "observations": [
         {
           "url": "https://www.open-scap.org/",
@@ -5510,6 +5705,26 @@
             "sha256": "7a5b7c2e9bc15c8885dfdc3d09da9e7dca6475819bc646488002049267fc897f",
             "byte_length": 13778,
             "placeholder": false
+          }
+        },
+        {
+          "url": "https://github.com/OpenSCAP/openscap",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "features",
+            "license",
+            "platforms"
+          ],
+          "observed_facts": [
+            "Current README explicitly voids Microsoft Windows support and identifies the SCAP command-line toolkit."
+          ],
+          "retrieval": {
+            "method": "HTTP GET",
+            "http_status": 200,
+            "final_url": "https://github.com/OpenSCAP/openscap",
+            "retrieved_at": "2026-11-16T18:15:17.416425+00:00",
+            "sha256": "e71f8d1109c1fbffe683550f02700a9295c4f1ddb5b8c3b2df327ce340383694",
+            "byte_length": 312901
           }
         }
       ],
@@ -5967,7 +6182,7 @@
     },
     {
       "app_id": "signalrgb",
-      "reviewed_at": "2026-11-15",
+      "reviewed_at": "2026-11-16",
       "observations": [
         {
           "url": "https://signalrgb.com/",
@@ -6032,13 +6247,51 @@
             "byte_length": 86983,
             "placeholder": false
           }
+        },
+        {
+          "url": "https://signalrgb.com/linux/",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "platforms",
+            "downloads"
+          ],
+          "observed_facts": [
+            "Official Linux page identifies a beta with listed Arch and Debian-family distributions, minimum OS requirements, and hardware/feature compatibility caveats."
+          ],
+          "retrieval": {
+            "method": "HTTP GET",
+            "http_status": 200,
+            "final_url": "https://signalrgb.com/linux/",
+            "retrieved_at": "2026-11-16T18:15:17.279251+00:00",
+            "sha256": "7f89d0470f34ba25afa08beec7737e9b0719a411615272b6e7f20d2a247340f5",
+            "byte_length": 86983
+          }
+        },
+        {
+          "url": "https://signalrgb.com/terms/",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "license",
+            "pricing"
+          ],
+          "observed_facts": [
+            "Vendor terms grant use for personal, noncommercial purposes; Pro subscriptions and Light Points have separate terms."
+          ],
+          "retrieval": {
+            "method": "HTTP GET",
+            "http_status": 200,
+            "final_url": "https://signalrgb.com/terms/",
+            "retrieved_at": "2026-11-16T18:15:20.963486+00:00",
+            "sha256": "f2cbeadc486ba7cc38b7af761d18889df3dbe5db2b8686285783a73243c6f33d",
+            "byte_length": 80363
+          }
         }
       ],
       "editorial_basis": "Selection guidance compares documented task fit and limitations. No application was executed; no independent speed, reliability, privacy or security benchmark is claimed."
     },
     {
       "app_id": "artemis-rgb",
-      "reviewed_at": "2026-11-15",
+      "reviewed_at": "2026-11-16",
       "observations": [
         {
           "url": "https://artemis-rgb.com/",
@@ -6127,13 +6380,49 @@
             "byte_length": 1267,
             "placeholder": false
           }
+        },
+        {
+          "url": "https://raw.githubusercontent.com/Artemis-RGB/Artemis/master/LICENSE",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "license"
+          ],
+          "observed_facts": [
+            "The license is PolyForm Noncommercial 1.0.0, with permitted noncommercial uses; this is not an unrestricted open-source license."
+          ],
+          "retrieval": {
+            "method": "HTTP GET",
+            "http_status": 200,
+            "final_url": "https://raw.githubusercontent.com/Artemis-RGB/Artemis/master/LICENSE",
+            "retrieved_at": "2026-11-16T18:15:17.099198+00:00",
+            "sha256": "ffcca38841adb694b6f380647e15f17c446a4d1656fed51a1e2041d064c94cc8",
+            "byte_length": 4563
+          }
+        },
+        {
+          "url": "https://artemis-rgb.com/",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity"
+          ],
+          "observed_facts": [
+            "Retrieved a minimal JavaScript application shell; current pricing cannot be established from its static text."
+          ],
+          "retrieval": {
+            "method": "HTTP GET",
+            "http_status": 200,
+            "final_url": "https://artemis-rgb.com/",
+            "retrieved_at": "2026-11-16T18:15:17.178444+00:00",
+            "sha256": "93b528ef8b210ac6501f969fc391eef4ad44a8e73fb5b961496e01daaff2f2aa",
+            "byte_length": 434
+          }
         }
       ],
       "editorial_basis": "Selection guidance compares documented task fit and limitations. No application was executed; no independent speed, reliability, privacy or security benchmark is claimed."
     },
     {
       "app_id": "corectrl",
-      "reviewed_at": "2026-11-15",
+      "reviewed_at": "2026-11-16",
       "observations": [
         {
           "url": "https://gitlab.com/corectrl/corectrl/",
@@ -6183,6 +6472,27 @@
             "sha256": "4bff2afcec408c0eccd8095b98e6a60467a118df3b2c3e3e4c9e11e9dcf28e83",
             "byte_length": 4939,
             "placeholder": false
+          }
+        },
+        {
+          "url": "https://gitlab.com/corectrl/corectrl/-/raw/master/README.md",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "features",
+            "platforms",
+            "maintenance",
+            "downloads"
+          ],
+          "observed_facts": [
+            "Current README limits work to maintenance and bug fixes, with no new features or hardware support. Its Installation section lists distribution packages, including packages maintained independently."
+          ],
+          "retrieval": {
+            "method": "HTTP GET",
+            "http_status": 200,
+            "final_url": "https://gitlab.com/corectrl/corectrl/-/raw/master/README.md",
+            "retrieved_at": "2026-11-16T18:15:18.676867+00:00",
+            "sha256": "4bff2afcec408c0eccd8095b98e6a60467a118df3b2c3e3e4c9e11e9dcf28e83",
+            "byte_length": 4939
           }
         }
       ],
@@ -6332,7 +6642,7 @@
     },
     {
       "app_id": "usb-network-gate",
-      "reviewed_at": "2026-11-15",
+      "reviewed_at": "2026-11-16",
       "observations": [
         {
           "url": "https://www.electronic.us/products/usb-over-ethernet/",
@@ -6385,6 +6695,45 @@
             "sha256": "ec071a77f662a0c2005aabe0533d2e8ed50f2ece566830d0ee03b5dd3f43bf06",
             "byte_length": 488136,
             "placeholder": false
+          }
+        },
+        {
+          "url": "https://www.electronic.us/products/usb-over-ethernet/",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "platforms",
+            "pricing",
+            "features"
+          ],
+          "observed_facts": [
+            "Homepage advertises free access while listing Linux kernel support only through 5.x; neither establishes compatibility with current 6.x kernels."
+          ],
+          "retrieval": {
+            "method": "HTTP GET",
+            "http_status": 200,
+            "final_url": "https://www.electronic.us/products/usb-over-ethernet/",
+            "retrieved_at": "2026-11-16T18:15:21.445974+00:00",
+            "sha256": "795822d74d380d04b16598481e9bca370ca7ed698d1c12e9836874048eea120e",
+            "byte_length": 778082
+          }
+        },
+        {
+          "url": "https://www.electronic.us/products/usb-over-ethernet/purchase/",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "license",
+            "pricing"
+          ],
+          "observed_facts": [
+            "Vendor purchase page offers priced single-system and corporate licenses. Applicability alongside the free homepage offer remains unresolved."
+          ],
+          "retrieval": {
+            "method": "HTTP GET",
+            "http_status": 200,
+            "final_url": "https://www.electronic.us/products/usb-over-ethernet/purchase/",
+            "retrieved_at": "2026-11-16T18:15:21.451316+00:00",
+            "sha256": "ec071a77f662a0c2005aabe0533d2e8ed50f2ece566830d0ee03b5dd3f43bf06",
+            "byte_length": 488136
           }
         }
       ],
@@ -10786,5 +11135,6 @@
       "http_status": 403,
       "error": "HTTP Error 403: Forbidden"
     }
-  ]
+  ],
+  "final_review": "systems-final-review.json"
 }

@@ -25,6 +25,8 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.13'
+      - name: Record actual Python SQLite runtime
+        run: python -c "import json,sqlite3,sys; print(json.dumps({'python':sys.version,'sqlite':sqlite3.sqlite_version,'source_id':sqlite3.connect(':memory:').execute('select sqlite_source_id()').fetchone()[0],'wal_recovery_allowed':sqlite3.sqlite_version_info >= (3,54,0)}))"
       - uses: dtolnay/rust-toolchain@master
         with:
           toolchain: '1.99.1'
@@ -38,6 +40,21 @@ jobs:
         run: cargo clippy --locked --manifest-path crates/athena-foundry-store/Cargo.toml --all-targets -- -D warnings
       - name: Build local bridge executable
         run: cargo build --locked --manifest-path crates/athena-foundry-store/Cargo.toml
+      - name: Build unified evidence and authoring engine
+        run: cargo build --locked --manifest-path engineering/apps/atlas-lab/Cargo.toml
+      - name: Build and extract unsigned candidate from exact current binaries
+        run: python scripts/package_candidate.py --binary crates/athena-foundry-store/target/debug/athena-foundry-store${{ runner.os == 'Windows' && '.exe' || '' }} --engine engineering/apps/atlas-lab/target/debug/atlas-lab${{ runner.os == 'Windows' && '.exe' || '' }} --platform ${{ runner.os == 'Windows' && 'windows' || 'linux' }} --output candidate-artifact --extract-to candidate-extracted
+      - name: Unified dual-store HTTP acceptance
+        env:
+          ATHENA_UNIFIED_ENGINE: ${{ github.workspace }}/engineering/apps/atlas-lab/target/debug/atlas-lab${{ runner.os == 'Windows' && '.exe' || '' }}
+          ATHENA_FOUNDRY_STORE_BINARY: ${{ github.workspace }}/crates/athena-foundry-store/target/debug/athena-foundry-store${{ runner.os == 'Windows' && '.exe' || '' }}
+        run: python native/foundry/tests/unified_http.py
+      - name: Portable unified process acceptance outside checkout
+        env:
+          ATHENA_UNIFIED_ENGINE: ${{ github.workspace }}/engineering/apps/atlas-lab/target/debug/atlas-lab${{ runner.os == 'Windows' && '.exe' || '' }}
+          ATHENA_FOUNDRY_STORE_BINARY: ${{ github.workspace }}/crates/athena-foundry-store/target/debug/athena-foundry-store${{ runner.os == 'Windows' && '.exe' || '' }}
+          ATHENA_PORTABLE_UNIFIED: '1'
+        run: python native/foundry/tests/unified_http.py
       - name: Native authoring and real HTTP SQLite integration
         run: npm run test:foundry-native
       - if: runner.os == 'Linux'
@@ -50,6 +67,8 @@ jobs:
           python3 -m unittest discover -s tools/foundry-recovery/capsule -p 'test_*.py'
           python3 -m unittest discover -s tools/foundry-recovery/archive -p 'test_*.py' -v
           python3 -m unittest discover -s tools/foundry-recovery/scrapbook -p 'test_*.py'
+      - name: Scrapbook capsule conversion and read-only verification CLI
+        run: python -m unittest discover -s tools/foundry-recovery/scrapbook -p 'test_*cli.py' -v
       - name: Standalone SQLite recovery and handle lifetime
         run: python -m unittest discover -s tools/foundry-recovery/sqlite -v
       - name: Separate original native snapshot preservation
@@ -60,6 +79,18 @@ jobs:
         run: npx playwright install chromium
       - name: Browser to native SQLite acceptance
         run: node scripts/test_foundry_native_browser.mjs
+      - name: Unified Lab and Foundry browser acceptance
+        env:
+          ATHENA_PORTABLE_UNIFIED: '1'
+          ATHENA_UNIFIED_ENGINE: ${{ github.workspace }}/engineering/apps/atlas-lab/target/debug/atlas-lab${{ runner.os == 'Windows' && '.exe' || '' }}
+        run: node scripts/test_foundry_native_browser.mjs
+      - name: Extracted candidate archive actual browser acceptance
+        env:
+          ATHENA_UNIFIED_ENGINE: ${{ github.workspace }}/engineering/apps/atlas-lab/target/debug/atlas-lab${{ runner.os == 'Windows' && '.exe' || '' }}
+          ATHENA_TEST_PORTABLE_PACKAGE: ${{ github.workspace }}/candidate-extracted
+        run: |
+          node scripts/test_foundry_native_browser.mjs
+          python -B candidate-extracted/launch.py --verify-only
       - name: Bounded authoring and oversized recovery in Chromium
         run: |
           node scripts/test_foundry_capacity_browser.mjs
@@ -84,12 +115,21 @@ jobs:
         env:
           ATHENA_BROWSER_OUTPUT: browser-results/foundry-drag-grid
         run: node scripts/test_foundry_drag_grid_browser.cjs
+      - name: Retain only fully tested unsigned evaluation bundle
+        uses: actions/upload-artifact@v4
+        with:
+          name: athena-unified-candidate-${{ matrix.os }}
+          path: candidate-artifact/
+          retention-days: 14
+          if-no-files-found: error
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: native-foundry-${{ matrix.os }}
           path: |
             browser-results/foundry-native/
+            browser-results/unified-native/
+            browser-results/portable-artifact/
             browser-results/foundry-capacity/
             browser-results/foundry-local-image/
             browser-results/foundry-video-routing/

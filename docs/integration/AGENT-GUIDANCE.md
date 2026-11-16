@@ -40,3 +40,7 @@ A real read-only pass on public Noxviola main `424f49946956de6ce36b6212c7682d46e
 ## Scope and security
 
 No fleet writes, source deletion, archive/visibility changes, new credentials, grants, external skill execution or private-data publication are part of this slice. No root AGENTS.md or personal assistant instructions are changed. Existing consumers keep their known-good Foundry pins until reviewed migration, rather than a blind rename that loses authority boundaries.
+
+## Fresh two-consumer inventory
+
+The [Bloom-and-Boom / Modhunter review](../../guidance/evidence/bloom-modhunter-retirement-review-2026-11-15.md) and [sanitized receipt](../../guidance/evidence/bloom-modhunter-consumer-audit-2026-11-15.json) verify two additional public main snapshots. Both retain intact 16-file Agent-Foundry pins; read-only Athena transition proposals are conflict-free, not applied or behaviorally accepted. Local guidance routing, historical skill/CI references and project-owned skills are classified separately. No consumer was changed and no runtime failure is inferred from a legacy URL. Fleet, skill propagation, history and retirement gates remain open.

@@ -55,7 +55,7 @@ class PreconnectTests(contracts.unittest.TestCase):
    with guard:active+=1;maximum=max(maximum,active)
    entered.set();self.assertTrue(release.wait(3))
    with guard:active-=1
-   return contracts.subprocess.CompletedProcess(args[0],0,stdout='{}',stderr='')
+   return contracts.subprocess.CompletedProcess(args[0],0,stdout=b'{}',stderr=b'')
   with patch.object(m.subprocess,'run',run),concurrent.futures.ThreadPoolExecutor() as pool:
    first=pool.submit(self.server.cli,'status');self.assertTrue(entered.wait(2))
    second=pool.submit(self.server.cli,'status')

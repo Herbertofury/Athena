@@ -86,10 +86,37 @@ fn run() -> Result<()> {
                 serde_json::to_string(&Store::open(p)?.assign_native(&v)?)?
             );
         }
+        "list-native-soundtracks" if args.len() == 3 => println!(
+            "{}",
+            serde_json::to_string(&Store::open(p)?.soundtrack_library()?)?
+        ),
         "read-native-versioned" if args.len() == 5 => println!(
             "{}",
             serde_json::to_string(&Store::open(p)?.soundtrack_versioned(&args[3], &args[4])?)?
         ),
+        "compare-clear-soundtrack" if args.len() == 3 => {
+            #[derive(serde::Deserialize)]
+            #[serde(deny_unknown_fields)]
+            struct Request {
+                expected: String,
+                theme_id: String,
+                room_id: String,
+            }
+            let mut input = String::new();
+            std::io::stdin().take(4097).read_to_string(&mut input)?;
+            if input.len() > 4096 {
+                return Err("Clear request exceeds limit".into());
+            }
+            let req: Request = serde_json::from_str(&input)?;
+            println!(
+                "{}",
+                serde_json::to_string(&Store::open(p)?.compare_clear_soundtrack(
+                    &req.expected,
+                    &req.theme_id,
+                    &req.room_id
+                )?)?
+            );
+        }
         "compare-assign-soundtrack" if args.len() == 3 => {
             #[derive(serde::Deserialize)]
             #[serde(deny_unknown_fields)]

@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "reviewed_at": "2026-11-15",
+  "reviewed_at": "2026-11-16",
   "applications": [
     {
       "id": "signal",
@@ -3900,9 +3900,9 @@
       "license": "GPL-3.0",
       "license_kind": "open-source",
       "pricing_model": "free",
-      "official_url": "https://github.com/WSJTX/wsjtx",
+      "official_url": "https://wsjtx.github.io/wsjtx/",
       "repository_url": "https://github.com/WSJTX/wsjtx",
-      "download_url": "https://wsjt.sourceforge.io/wsjtx.html",
+      "download_url": "https://wsjtx.github.io/wsjtx/downloads.html",
       "features": [
         "FT8 and FT4 contacts",
         "Q65 and other weak-signal modes",
@@ -3936,10 +3936,10 @@
       },
       "evidence_status": "official-docs-reviewed",
       "maintenance": {
-        "status": "unverified",
-        "checked_at": "2026-11-15",
-        "note": "Product documentation reviewed; a current dated release or lifecycle commitment has not been established for this record.",
-        "source_url": null
+        "status": "active",
+        "checked_at": "2026-11-16",
+        "note": "The official project homepage identifies WSJT-X 3.0.2 released 18 June 2026. This records dated release activity, not installed validation or an independent performance assessment.",
+        "source_url": "https://wsjtx.github.io/wsjtx/"
       },
       "sources": [
         {
@@ -3954,12 +3954,23 @@
           ]
         },
         {
-          "url": "https://wsjt.sourceforge.io/wsjtx.html",
-          "label": "Official documentation and distribution evidence",
-          "checked_at": "2026-11-15",
+          "url": "https://wsjtx.github.io/wsjtx/",
+          "label": "Current official homepage and dated release",
+          "checked_at": "2026-11-16",
           "supports": [
+            "identity",
+            "features",
             "platforms",
-            "downloads"
+            "maintenance"
+          ]
+        },
+        {
+          "url": "https://wsjtx.github.io/wsjtx/downloads.html",
+          "label": "Official Windows, macOS and Linux distribution routes",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "downloads",
+            "platforms"
           ]
         }
       ]
@@ -4056,7 +4067,7 @@
       "license": "GPL-3.0; Qt dependencies use their own licenses",
       "license_kind": "open-source",
       "pricing_model": "unknown",
-      "official_url": "http://js8call.com/",
+      "official_url": "https://js8call.com/",
       "repository_url": "https://github.com/JS8Call-improved/JS8Call-improved",
       "download_url": "https://github.com/JS8Call-improved/JS8Call-improved/releases",
       "features": [
@@ -4092,21 +4103,22 @@
       },
       "evidence_status": "official-docs-reviewed",
       "maintenance": {
-        "status": "unverified",
-        "checked_at": "2026-11-15",
-        "note": "Product documentation reviewed; a current dated release or lifecycle commitment has not been established for this record.",
-        "source_url": null
+        "status": "active",
+        "checked_at": "2026-11-16",
+        "note": "The official JS8Call homepage names the JS8Call-Improved continuation and release 3.0.3 dated 12 July 2026. This is source-level release evidence; radio interoperability was not tested.",
+        "source_url": "https://js8call.com/"
       },
       "sources": [
         {
-          "url": "http://js8call.com/",
-          "label": "Official documentation and distribution evidence",
-          "checked_at": "2026-11-15",
+          "url": "https://js8call.com/",
+          "label": "Official continuation identity, platforms and dated release",
+          "checked_at": "2026-11-16",
           "supports": [
-            "identity",
+            "downloads",
             "features",
-            "platforms",
-            "downloads"
+            "identity",
+            "maintenance",
+            "platforms"
           ]
         },
         {
@@ -4641,7 +4653,7 @@
       ],
       "limitations": [
         "Exact model, firmware variant and programming cable must match the documented support list.",
-        "Some legacy-supported radios remain unvalidated in current builds and individual features vary by model."
+        "Some models have not been validated in current builds; legacy CHIRP receives no new models or fixes, and individual radio features vary."
       ],
       "use_cases": [
         "Maintain radio channel memories",
@@ -4663,10 +4675,10 @@
       },
       "evidence_status": "official-docs-reviewed",
       "maintenance": {
-        "status": "unverified",
-        "checked_at": "2026-11-15",
-        "note": "Product documentation reviewed; a current dated release or lifecycle commitment has not been established for this record.",
-        "source_url": null
+        "status": "active",
+        "checked_at": "2026-11-16",
+        "note": "The official download page explicitly identifies current CHIRP as actively maintained and separates the unmaintained legacy distribution. This is a current project policy observation, not a claim about a specific installed build.",
+        "source_url": "https://chirpmyradio.com/projects/chirp/wiki/Download"
       },
       "sources": [
         {
@@ -4694,13 +4706,18 @@
         },
         {
           "url": "https://chirpmyradio.com/projects/chirp/wiki/Download",
-          "label": "Official documentation and distribution evidence",
-          "checked_at": "2026-11-15",
+          "label": "Current versus legacy builds, requirements and maintenance policy",
+          "checked_at": "2026-11-16",
           "supports": [
-            "downloads"
+            "downloads",
+            "features",
+            "maintenance",
+            "platforms",
+            "pricing"
           ]
         }
-      ]
+      ],
+      "platform_notes": "Current CHIRP targets Windows 10 and later on Intel 64-bit, macOS Big Sur and later on Intel/Apple Silicon, and Linux with Python 3. Windows ARM emulation is not guaranteed; CHIRP-legacy is no longer updated."
     },
     {
       "id": "qdmr",
@@ -7245,7 +7262,7 @@
       "license_kind": "open-source",
       "pricing_model": "unknown",
       "official_url": "https://openocd.org/",
-      "repository_url": null,
+      "repository_url": "https://github.com/openocd-org/openocd",
       "download_url": "https://www.openocd.org/pages/getting-openocd.html",
       "features": [
         "JTAG/SWD target access",
@@ -7281,9 +7298,9 @@
       "evidence_status": "official-docs-reviewed",
       "maintenance": {
         "status": "unverified",
-        "checked_at": "2026-11-15",
-        "note": "Product documentation reviewed; a current dated release or lifecycle commitment has not been established for this record.",
-        "source_url": null
+        "checked_at": "2026-11-16",
+        "note": "The current official user guide identifies 0.12.0+dev documentation dated 16 November 2026. A new stable release and support commitment have not been established by this observation.",
+        "source_url": "https://openocd.org/doc/html/index.html"
       },
       "sources": [
         {
@@ -7304,6 +7321,22 @@
             "downloads",
             "platforms",
             "license"
+          ]
+        },
+        {
+          "url": "https://github.com/openocd-org/openocd/blob/master/COPYING",
+          "label": "Official mirror licensing declaration",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "license"
+          ]
+        },
+        {
+          "url": "https://openocd.org/doc/html/index.html",
+          "label": "Dated development-version documentation",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "maintenance"
           ]
         }
       ]
@@ -8288,7 +8321,7 @@
         "Windows",
         "Linux"
       ],
-      "license": "Proprietary WhirlwindFX software terms",
+      "license": "Proprietary WhirlwindFX terms; personal, noncommercial use",
       "license_kind": "proprietary",
       "pricing_model": "freemium",
       "official_url": "https://signalrgb.com/",
@@ -8305,7 +8338,8 @@
       ],
       "limitations": [
         "Exact device support matters, and other lighting software can compete for control.",
-        "Linux is explicitly a beta distribution; Pro subscriptions and individual content purchases unlock different extras."
+        "Linux is explicitly a beta distribution; Pro subscriptions and individual content purchases unlock different extras.",
+        "The standard platform license is limited to personal, noncommercial purposes; a Pro subscription does not establish commercial-use permission."
       ],
       "use_cases": [
         "Synchronize RGB across device brands",
@@ -8358,17 +8392,25 @@
           "label": "Official documentation and distribution evidence",
           "checked_at": "2026-11-15",
           "supports": [
-            "license",
             "pricing"
           ]
         },
         {
           "url": "https://signalrgb.com/linux",
-          "label": "Official documentation and distribution evidence",
-          "checked_at": "2026-11-15",
+          "label": "Official Linux beta distributions and compatibility limits",
+          "checked_at": "2026-11-16",
           "supports": [
-            "platforms",
-            "downloads"
+            "downloads",
+            "platforms"
+          ]
+        },
+        {
+          "url": "https://signalrgb.com/terms/",
+          "label": "Official platform use, subscription and virtual-content terms",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "license",
+            "pricing"
           ]
         }
       ],
@@ -8387,7 +8429,7 @@
       ],
       "license": "PolyForm Noncommercial 1.0.0",
       "license_kind": "source-available",
-      "pricing_model": "free",
+      "pricing_model": "unknown",
       "official_url": "https://artemis-rgb.com/",
       "repository_url": "https://github.com/Artemis-RGB/Artemis",
       "download_url": "https://wiki.artemis-rgb.com/",
@@ -8436,14 +8478,13 @@
           "checked_at": "2026-11-15",
           "supports": [
             "identity",
-            "features",
-            "pricing"
+            "features"
           ]
         },
         {
           "url": "https://raw.githubusercontent.com/Artemis-RGB/Artemis/master/LICENSE",
-          "label": "Official documentation and distribution evidence",
-          "checked_at": "2026-11-15",
+          "label": "PolyForm Noncommercial source license",
+          "checked_at": "2026-11-16",
           "supports": [
             "license"
           ]
@@ -8474,7 +8515,7 @@
           ]
         }
       ],
-      "pricing_notes": "No-charge noncommercial use under PolyForm terms; do not classify as unrestricted open source."
+      "pricing_notes": "The noncommercial source license is verified, but current binary distribution pricing was not established from the reviewed static product page."
     },
     {
       "id": "corectrl",
@@ -8490,7 +8531,7 @@
       "pricing_model": "free",
       "official_url": "https://gitlab.com/corectrl/corectrl",
       "repository_url": "https://gitlab.com/corectrl/corectrl",
-      "download_url": "https://gitlab.com/corectrl/corectrl/-/wikis/Installation",
+      "download_url": "https://gitlab.com/corectrl/corectrl#installation",
       "features": [
         "Application-based hardware profiles",
         "Supported GPU controls",
@@ -8553,13 +8594,13 @@
         },
         {
           "url": "https://gitlab.com/corectrl/corectrl/-/raw/master/README.md",
-          "label": "Official documentation and distribution evidence",
-          "checked_at": "2026-11-15",
+          "label": "Current README installation instructions and maintenance policy",
+          "checked_at": "2026-11-16",
           "supports": [
+            "downloads",
             "features",
-            "platforms",
             "maintenance",
-            "downloads"
+            "platforms"
           ]
         }
       ]

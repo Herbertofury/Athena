@@ -34,6 +34,13 @@ These packages were researched, not benchmarked or accepted as Atlas dependencie
 
 ## Cover-only extraction is not complete-media coverage · 2026-10-27
 
-[Static Codeberg source review](https://github.com/Herbertofury/Engineering-Atlas/blob/144868ae595d2faa18dbb865228785920a9bc2b7/research/2026-10-27-gallery-cover-scope.md) records master checkpoint 46163680fda0cbc976790d5678095d02b39d2b3e separately from stable gallery-dl 1.32.18. The dedicated highlight-cover path deliberately omits story items and changes cover metadata. Such a result must remain covers-only, not an empty complete story or a reason to erase a complete snapshot. Source inspection only: no extractor execution, provider requests, credential/session export, performance ranking or target-project recommendation.
+[Static Codeberg source review](https://github.com/Herbertofury/Athena/blob/d1d6d998ba38d2fcedd140c48e3c5d21e132f671/engineering/research/2026-10-27-gallery-cover-scope.md) records master checkpoint 46163680fda0cbc976790d5678095d02b39d2b3e separately from stable gallery-dl 1.32.18. The dedicated highlight-cover path deliberately omits story items and changes cover metadata. Such a result must remain covers-only, not an empty complete story or a reason to erase a complete snapshot. Source inspection only: no extractor execution, provider requests, credential/session export, performance ranking or target-project recommendation.
 
 [Nexus source and license review](https://github.com/Herbertofury/Athena/blob/main/engineering/research/2026-10-27-nexus-reuse-review.md) retains the package/license mismatch and partial-result boundaries; no SDK acceptance is implied.
+
+
+## Preserved evidence link provenance
+
+The links above now use content-identical Athena copies, verified by Git blob/tree identity on 2026-11-15. Original revision citations remain below as provenance, not runtime dependencies. This does not certify source-repository deletion readiness. Other historical links on this page remain unchanged where exact replacement was not verified.
+
+- Original: `https://github.com/Herbertofury/Engineering-Atlas/blob/144868ae595d2faa18dbb865228785920a9bc2b7/research/2026-10-27-gallery-cover-scope.md`; identical blob object: `33c6d8214283328ad462924e0ded0d367c663742`.

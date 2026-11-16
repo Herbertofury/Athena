@@ -1,0 +1,475 @@
+{
+  "schema_version": 1,
+  "reviewed_at": "2026-11-16T19:39:30.238853+00:00",
+  "scope": "Independent final catalog model, source-boundary sample, preservation and bounded publication-preparation review. No repository publication or installed application verification is claimed by this receipt.",
+  "environment": {
+    "node": "v24.22.1",
+    "python": "3.12.14"
+  },
+  "counts": {
+    "applications": 1069,
+    "new_applications": 964,
+    "preserved_pc_records": 105,
+    "preserved_cleanup_records": 66,
+    "baseline_categories": 42,
+    "categories": 373,
+    "families": 10,
+    "source_urls": 4355,
+    "alternative_links": 2476,
+    "unresolved_alternative_mentions": 73,
+    "legacy_records_enriched": 68,
+    "use_cases": 1958,
+    "decision_guides": 203,
+    "capability_assertions": 9,
+    "applications_with_documented_capabilities": 9,
+    "measured_comparisons": 1,
+    "related_research_records": 94,
+    "preserved_cleanup_unranked": 3,
+    "preserved_cleanup_excluded": 1,
+    "by_family": {
+      "ai": 28,
+      "creative": 142,
+      "development": 185,
+      "files": 65,
+      "gaming": 55,
+      "networking": 92,
+      "productivity": 151,
+      "science": 208,
+      "security": 54,
+      "system": 89
+    },
+    "by_platform": {
+      "Bootable": 7,
+      "FreeBSD": 58,
+      "Linux": 817,
+      "Web": 110,
+      "Windows": 893,
+      "macOS": 749
+    },
+    "by_maintenance": {
+      "active": 650,
+      "discontinued": 2,
+      "unverified": 417
+    },
+    "by_license": {
+      "mixed": 49,
+      "open-source": 824,
+      "proprietary": 150,
+      "source-available": 17,
+      "unknown": 29
+    },
+    "by_pricing": {
+      "free": 596,
+      "freemium": 118,
+      "mixed": 51,
+      "paid": 35,
+      "subscription": 18,
+      "unknown": 251
+    }
+  },
+  "preservation": {
+    "published_application_id_count": 736,
+    "retained_application_ids": 736,
+    "missing_application_ids": [],
+    "original_research_snapshot_hashes": [
+      {
+        "path": "research/windows-utilities-2026-11-14/catalog.json",
+        "expected_sha256": "b692af67c01ff54e4eae5b638768544656f4b3e12950c0dc20523c6ea32b00c2",
+        "actual_sha256": "b692af67c01ff54e4eae5b638768544656f4b3e12950c0dc20523c6ea32b00c2",
+        "matches": true
+      },
+      {
+        "path": "research/developer-cleanup-2026-11-14/catalog.json",
+        "expected_sha256": "86918545f7ad39aa8d5682c7afd87babd72523dc9c71ab510b96c10c30e6ae97",
+        "actual_sha256": "86918545f7ad39aa8d5682c7afd87babd72523dc9c71ab510b96c10c30e6ae97",
+        "matches": true
+      },
+      {
+        "path": "data/creative-ai-tools.json",
+        "expected_sha256": "2d807f2ef7bfe5c28ea7742df7182ae77bda57e09bc356be674d9d8159a700d5",
+        "actual_sha256": "2d807f2ef7bfe5c28ea7742df7182ae77bda57e09bc356be674d9d8159a700d5",
+        "matches": true
+      },
+      {
+        "path": "engineering/data/research-catalog.json",
+        "expected_sha256": "eb304c0395adad82b45e12d3da0fc545b28cc012d6f0dac18d95de0d19266a2e",
+        "actual_sha256": "eb304c0395adad82b45e12d3da0fc545b28cc012d6f0dac18d95de0d19266a2e",
+        "matches": true
+      }
+    ]
+  },
+  "test_runs": [
+    {
+      "command": "npm run test:software",
+      "phase": "initial regenerated final catalog",
+      "python_tests": 21,
+      "python_failures": 0,
+      "javascript_tests": 37,
+      "javascript_failures": 1,
+      "finding": "Only the catalog public-runtime hash remained at the checkpoint value. Integration refreshed the four software runtime hashes."
+    },
+    {
+      "command": "npm run test:software",
+      "phase": "after integration fixes and runtime preparation",
+      "python_tests": 23,
+      "python_failures": 0,
+      "javascript_tests": 37,
+      "javascript_failures": 0,
+      "exit_code": 0,
+      "log_sha256": "7f5f6f46660f05b96cc3080f285a93b7519fb0c4e79071d5200726d3c1b2e4b8"
+    }
+  ],
+  "independent_model_checks": {
+    "method": "Call the actual pure query model with independently chosen task phrases; compare every decision guide against its explicit ordered picks and independent platform/license/pricing/maintenance filters; check every product name against its known application identity.",
+    "input_catalog_sha256": "bd037887c0c2e5a4bb3b51703d7579c145c9711ff8c7b509ca6ba34a8f8d8aaf",
+    "positive_queries": [
+      {
+        "query": "program in C#",
+        "expected": "jetbrains-rider",
+        "found": true,
+        "count": 1,
+        "first_ids": [
+          "jetbrains-rider"
+        ]
+      },
+      {
+        "query": "program in Python",
+        "expected": "thonny",
+        "found": true,
+        "count": 4,
+        "first_ids": [
+          "positron",
+          "spyder",
+          "thonny",
+          "marimo"
+        ]
+      },
+      {
+        "query": "software-defined radio",
+        "expected": "sdrpp",
+        "found": true,
+        "count": 29,
+        "first_ids": [
+          "sdr-console",
+          "sdrsharp",
+          "sdrpp",
+          "cubicsdr",
+          "gnu-radio",
+          "gqrx"
+        ]
+      },
+      {
+        "query": "simulate industrial robots",
+        "expected": "robodk",
+        "found": true,
+        "count": 4,
+        "first_ids": [
+          "coppeliasim",
+          "gazebo",
+          "webots",
+          "robodk"
+        ]
+      },
+      {
+        "query": "validate GitHub Actions",
+        "expected": "actionlint",
+        "found": true,
+        "count": 1,
+        "first_ids": [
+          "actionlint"
+        ]
+      },
+      {
+        "query": "computational fluid dynamics",
+        "expected": "su2",
+        "found": true,
+        "count": 3,
+        "first_ids": [
+          "openfoam",
+          "simflow",
+          "su2"
+        ]
+      },
+      {
+        "query": "finite element",
+        "expected": "calculix",
+        "found": true,
+        "count": 6,
+        "first_ids": [
+          "calculix",
+          "code-aster",
+          "elmer",
+          "febio",
+          "gmsh",
+          "salome"
+        ]
+      },
+      {
+        "query": "water distribution",
+        "expected": "epanet",
+        "found": true,
+        "count": 1,
+        "first_ids": [
+          "epanet"
+        ]
+      },
+      {
+        "query": "molecular dynamics",
+        "expected": "gromacs",
+        "found": true,
+        "count": 4,
+        "first_ids": [
+          "gromacs",
+          "lammps",
+          "ovito",
+          "vmd"
+        ]
+      },
+      {
+        "query": "astronomical camera",
+        "expected": "sharpcap",
+        "found": true,
+        "count": 4,
+        "first_ids": [
+          "astrodmx-capture",
+          "firecapture",
+          "sharpcap",
+          "phd2"
+        ]
+      },
+      {
+        "query": "project environment",
+        "expected": "devbox",
+        "found": true,
+        "count": 25,
+        "first_ids": [
+          "devbox",
+          "direnv",
+          "mise",
+          "pixi",
+          "pyenv",
+          "pyenv-win"
+        ]
+      },
+      {
+        "query": "game saves",
+        "expected": "ludusavi",
+        "found": true,
+        "count": 2,
+        "first_ids": [
+          "game-backup-monitor",
+          "ludusavi"
+        ]
+      },
+      {
+        "query": "dataset annotation",
+        "expected": "cvat",
+        "found": true,
+        "count": 4,
+        "first_ids": [
+          "argilla",
+          "label-studio",
+          "sonic-annotator",
+          "cvat"
+        ]
+      }
+    ],
+    "negative_qualifier_queries": [
+      {
+        "query": "chat with PDF offline unsupported-fixture-format",
+        "count": 0
+      },
+      {
+        "query": "program in C# unsupported-fixture-language",
+        "count": 0
+      },
+      {
+        "query": "remove background noise unsupported-fixture-format",
+        "count": 0
+      },
+      {
+        "query": "simulate industrial robots unsupported-fixture-controller",
+        "count": 0
+      }
+    ],
+    "guide_filter_combinations": 2436,
+    "guide_filter_failures": [],
+    "directory_filter_cases": 12,
+    "directory_filter_failures": [],
+    "initial_exact_product_name_checks": 1069,
+    "initial_exact_product_name_failures": [
+      {
+        "id": "3d-slicer",
+        "name": "3D Slicer",
+        "first": "orcaslicer"
+      }
+    ],
+    "initial_guide_search_checks": [
+      {
+        "query": "CFD",
+        "expected": "wave2-choose-cfd-workflow",
+        "found": true,
+        "count": 2
+      },
+      {
+        "query": "water",
+        "expected": "wave2-model-water-systems",
+        "found": true,
+        "count": 2
+      },
+      {
+        "query": "night sky",
+        "expected": "wave2-capture-the-night-sky",
+        "found": false,
+        "count": 0
+      },
+      {
+        "query": "local web development",
+        "expected": "wave2-run-a-local-web-development-stack",
+        "found": true,
+        "count": 1
+      },
+      {
+        "query": "game saves",
+        "expected": "wave2-back-up-pc-game-saves",
+        "found": true,
+        "count": 2
+      },
+      {
+        "query": "offline PDF",
+        "expected": "chat-with-pdf-offline",
+        "found": true,
+        "count": 1
+      }
+    ],
+    "post_fix_recheck": {
+      "reviewed_at": "2026-11-16T19:38:59.865Z",
+      "catalog_sha256": "c6a2ee866796c76001e65e94d42b5aa0d24deccc444e13c18dc46ca219ed2f20",
+      "model_sha256": "9e898a3dd78477c55979edfb725ef63e591c29f163a76223c9a97f6409f20efe",
+      "exact_name_checks": 1069,
+      "failures": [],
+      "three_d_slicer": {
+        "name": [
+          "3d-slicer",
+          "orcaslicer",
+          "cura",
+          "kiri-moto"
+        ],
+        "id": [
+          "3d-slicer",
+          "orcaslicer",
+          "cura",
+          "kiri-moto"
+        ],
+        "unsupported_platform": [],
+        "generic_printing": [
+          "orcaslicer",
+          "prusaslicer",
+          "cura"
+        ]
+      },
+      "night_sky_guide_ids": [
+        "wave2-capture-the-night-sky"
+      ],
+      "csharp_authoring": [
+        "jetbrains-rider"
+      ],
+      "negative_pdf": [],
+      "recorded_noise": [
+        "acoustica",
+        "adobe-audition",
+        "audacity",
+        "izotope-rx",
+        "reaper"
+      ],
+      "live_noise": [
+        "easy-effects"
+      ]
+    },
+    "mutation_observed": false
+  },
+  "resolved_findings": [
+    {
+      "id": "exact-product-intent-collision",
+      "severity": "functional",
+      "before": "The exact product query 3D Slicer was narrowed to 3D-printing tools and excluded the medical-imaging product.",
+      "change": "Integration bypasses task-intent narrowing for an exact known product name, alias or ID while preserving explicit filters.",
+      "after": "All 1069 exact application names lead with the expected identity; 3D Slicer ID/name succeed, unsupported FreeBSD still yields no match, and generic 3D printing excludes the medical application."
+    },
+    {
+      "id": "night-sky-guide-discovery",
+      "severity": "usability",
+      "before": "The night-sky capture guide was unreachable by the plain-language guide query night sky.",
+      "change": "Integration added that task phrase to the astronomical capture guide description.",
+      "after": "The guide search returns wave2-capture-the-night-sky."
+    },
+    {
+      "id": "runtime-hash-after-regeneration",
+      "severity": "publication-gate",
+      "before": "The generated catalog hash did not match the checkpoint runtime allowlist.",
+      "change": "The bounded preparation helper refreshed the four software runtime hashes.",
+      "after": "The software runtime allowlist test passes."
+    }
+  ],
+  "primary_source_sample": [
+    {
+      "app_id": "google-earth-pro",
+      "url": "https://support.google.com/earth/answer/168344?hl=en",
+      "outcome": "confirmed",
+      "paraphrase": "The official help page announces the end of new desktop downloads on 25 June 2027 and currently lists Windows, Mac and Linux direct installers."
+    },
+    {
+      "app_id": "special-k",
+      "url": "https://github.com/SpecialKO/SpecialK/blob/main/README.md",
+      "outcome": "confirmed",
+      "paraphrase": "The official README describes Windows as the native target and conditional Wine/DXVK operation on Linux, requiring UsingWINE=true in the per-game configuration."
+    },
+    {
+      "app_id": "nix",
+      "url": "https://nix.dev/install-nix",
+      "outcome": "confirmed",
+      "paraphrase": "Official installation instructions distinguish Linux, macOS and Windows through WSL2; the catalog preserves that Windows qualification."
+    },
+    {
+      "app_id": "gromacs",
+      "url": "https://manual.gromacs.org/current/install-guide/index.html",
+      "outcome": "confirmed",
+      "paraphrase": "The official manual documents native Windows, macOS and Linux builds and backend-dependent acceleration requirements. These do not establish a universal performance ranking."
+    },
+    {
+      "app_id": "gromacs",
+      "url": "https://www.gromacs.org/",
+      "outcome": "confirmed",
+      "paraphrase": "The official homepage dates the 2026.4 release announcement to 2 October 2026, supporting the catalog maintenance observation."
+    }
+  ],
+  "source_sample_method": "Primary pages opened through web retrieval on 2026-11-16. Only paraphrased observations are stored here; no raw-page hashes or complete third-party text are claimed.",
+  "publication_preparation_review": {
+    "outcome": "no defect found",
+    "checks": [
+      "Exactly four pre-existing software runtime entries must be present once each before their hashes are refreshed.",
+      "The helper does not add runtime entries or change unrelated runtime hashes.",
+      "Hosted workflow limits writes to the verified repository and software feature-branch prefix.",
+      "Only explicit software output, coverage, Wiki and config paths are staged.",
+      "Software tests execute before the generated commit.",
+      "The branch name passes through a quoted environment variable and the push is not forced."
+    ],
+    "integration_requirement": "Run PR checks on the generated branch head after the preparation job; a GITHUB_TOKEN push does not itself guarantee new check runs."
+  },
+  "reviewed_file_sha256": {
+    "src/software/model.mjs": "9e898a3dd78477c55979edfb725ef63e591c29f163a76223c9a97f6409f20efe",
+    "src/software/index.mjs": "f35e6e78ff51e9c73d6dc7aa47b367a312fae066da3cf4e54491419cc70f7e69",
+    "scripts/prepare_software_publication.py": "24f54a3bb61aa00d6a7ff572a12b43785c6ef970876e80cdd9e43e1799b1632a",
+    ".github/workflows/athena-software-prepare.yml": "d66858864e83315be9b920e1aadaf6b3b4fd80d16a6d5dc2902ddbf05e7bb123",
+    "tests/software_qa_regressions.test.cjs": "edfad290bc3e7ad0e0fb87b13952144d41de3f301493ceab81ec173e9eccb4cc",
+    "tests/software_catalog_test.py": "3f32d8a50d4e9f6b64ab7f81293a11ce3fb03ec26f7e63cdea993ad53846ee65",
+    "dist/workspaces/software/catalog.json": "c6a2ee866796c76001e65e94d42b5aa0d24deccc444e13c18dc46ca219ed2f20"
+  },
+  "remaining_review_findings": [],
+  "limits": [
+    "Model and LinkeDOM checks do not establish Chromium rendering, accessibility-tree behavior or native focus trapping; those remain in hosted browser acceptance.",
+    "The five primary-source observations concern four applications and do not constitute a source-by-source re-audit of the entire catalog.",
+    "No proprietary installer, scientific simulation, audio quality result or game injection behavior was executed.",
+    "HTTP reachability, hosted checks, Pages publication and live Wiki verification are handled by the integration and link-audit workstreams."
+  ]
+}

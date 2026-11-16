@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "reviewed_at": "2026-11-15",
+  "reviewed_at": "2026-11-16",
   "applications": [
     {
       "id": "ugene",
@@ -391,7 +391,6 @@
         "science",
         "phylogenetics",
         "bioinformatics",
-        "phylogenetics",
         "maximum-likelihood",
         "command-line"
       ],
@@ -492,7 +491,6 @@
         "science",
         "phylogenetics",
         "bioinformatics",
-        "phylogenetics",
         "maximum-likelihood",
         "wsl"
       ],
@@ -644,15 +642,15 @@
       "category": "phylogenetics",
       "official_url": "https://tree.bio.ed.ac.uk/software/figtree/",
       "download_url": "https://github.com/rambaut/figtree/releases",
-      "summary": "Graphical viewer for displaying, annotating and exporting phylogenetic trees, including summarized BEAST results.",
+      "summary": "Legacy phylogenetic tree viewer for annotating and exporting inferred trees; upstream now directs new users to its successor PearTree.",
       "repository_url": "https://github.com/rambaut/figtree",
       "platforms": [
         "Windows",
         "macOS",
         "Linux"
       ],
-      "license": "License classification not confirmed in the reviewed primary documentation",
-      "license_kind": "unknown",
+      "license": "GPL-2.0-or-later for application source; bundled dependencies have their own terms",
+      "license_kind": "open-source",
       "pricing_model": "unknown",
       "features": [
         "Phylogenetic tree visualization",
@@ -660,10 +658,11 @@
         "Export of annotated tree figures"
       ],
       "strengths": [
-        "Choose FigTree to prepare readable figures from an already inferred phylogenetic tree.",
+        "Useful for reproducing an established FigTree figure or continuing a compatible legacy analysis.",
         "Its support for annotated BEAST trees is useful after Bayesian analysis."
       ],
       "limitations": [
+        "The upstream README says FigTree is superseded by PearTree; compare the successor for new projects.",
         "It visualizes supplied trees; it does not replace inference or convergence diagnostics.",
         "The original project page warns that polish and completeness reflect a research tool developed for its author’s needs."
       ],
@@ -676,17 +675,17 @@
         "phylogenetics",
         "bioinformatics",
         "tree-viewer",
-        "phylogenetics",
         "figures"
       ],
       "alternatives": [
+        "PearTree",
         "MEGA",
         "Dendroscope",
         "Jalview"
       ],
       "recommendation": {
-        "pick_for": "Choose FigTree to prepare readable figures from an already inferred phylogenetic tree.",
-        "compare_when": "It visualizes supplied trees; it does not replace inference or convergence diagnostics."
+        "pick_for": "Useful for reproducing an established FigTree figure or continuing a compatible legacy analysis.",
+        "compare_when": "The upstream README says FigTree is superseded by PearTree; compare the successor for new projects."
       },
       "aliases": [],
       "sources": [
@@ -708,15 +707,33 @@
           "supports": [
             "maintenance"
           ]
+        },
+        {
+          "url": "https://github.com/rambaut/figtree",
+          "label": "Official documentation reviewed for this claim",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity",
+            "features",
+            "maintenance"
+          ]
+        },
+        {
+          "url": "https://github.com/rambaut/figtree/blob/master/src/figtree/application/FigTreeApplication.java",
+          "label": "Official documentation reviewed for this claim",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "license"
+          ]
         }
       ],
       "evidence_status": "official-docs-reviewed",
       "pricing_notes": "No complete price or distribution-cost statement was established from the reviewed primary sources; check the selected distribution route.",
       "maintenance": {
-        "status": "active",
-        "checked_at": "2026-11-15",
-        "note": "Official release feed entry 'FigTree v1.5.0-beta1' was updated 2026-05-26T22:17:43Z. This is a dated maintenance signal, not an installation or quality benchmark.",
-        "source_url": "https://github.com/rambaut/figtree/releases.atom"
+        "status": "unverified",
+        "checked_at": "2026-11-16",
+        "note": "A May 2026 beta exists, but the current upstream README says FigTree is superseded by PearTree. This is not evidence of ongoing FigTree support.",
+        "source_url": "https://github.com/rambaut/figtree"
       }
     },
     {
@@ -3251,7 +3268,6 @@
       "tags": [
         "science",
         "lighting-design",
-        "lighting-design",
         "photometry",
         "luminaires",
         "daylight"
@@ -3340,7 +3356,6 @@
       "tags": [
         "science",
         "lighting-design",
-        "lighting-design",
         "sensors",
         "photometry",
         "luminaires"
@@ -3424,7 +3439,6 @@
         "science",
         "life-cycle-assessment",
         "lca",
-        "life-cycle-assessment",
         "sustainability",
         "footprint"
       ],
@@ -4818,6 +4832,41 @@
             "license",
             "downloads"
           ]
+        },
+        {
+          "url": "https://wwmm.github.io/easyeffects/",
+          "label": "Official documentation reviewed for this claim",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "features"
+          ]
+        },
+        {
+          "url": "https://wwmm.github.io/easyeffects/plugins/rnnoise.html",
+          "label": "Official documentation reviewed for this claim",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "features"
+          ]
+        },
+        {
+          "url": "https://wwmm.github.io/easyeffects/plugins/deepfilternet.html",
+          "label": "Official documentation reviewed for this claim",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "features"
+          ]
+        },
+        {
+          "url": "https://github.com/wwmm/easyeffects",
+          "label": "Official documentation reviewed for this claim",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "features",
+            "platforms",
+            "license",
+            "downloads"
+          ]
         }
       ],
       "evidence_status": "official-docs-reviewed",
@@ -4827,7 +4876,27 @@
         "note": "Official distribution and capability documentation reviewed; a dated maintenance conclusion was not established.",
         "source_url": null
       },
-      "pricing_notes": "Distribution packages and Flatpak are documented; no separate commercial entitlement was assessed."
+      "pricing_notes": "Distribution packages and Flatpak are documented; no separate commercial entitlement was assessed.",
+      "capabilities": [
+        {
+          "id": "live-audio-noise-suppression",
+          "conditions": [
+            "Use Linux with PipeWire and route the intended recording or calling application through EasyEffects input processing.",
+            "Enable RNNoise or a supported Deep Noise Remover model with the required plugin/model dependencies installed.",
+            "Keep real hardware as the system default input/output, following the upstream routing warning."
+          ],
+          "limitations": [
+            "A package can omit effect dependencies; a listed feature is not proof that it is installed or enabled locally.",
+            "Check the destination application actually receives the processed microphone and evaluate latency and speech artifacts on the local setup."
+          ],
+          "source_urls": [
+            "https://wwmm.github.io/easyeffects/",
+            "https://wwmm.github.io/easyeffects/plugins/rnnoise.html",
+            "https://wwmm.github.io/easyeffects/plugins/deepfilternet.html",
+            "https://github.com/wwmm/easyeffects"
+          ]
+        }
+      ]
     },
     {
       "id": "equalizer-apo",
@@ -5037,6 +5106,14 @@
           "supports": [
             "license"
           ]
+        },
+        {
+          "url": "https://www.izotope.com/community/blog/how-to-clean-up-voice-recordings-video-podcasts",
+          "label": "Official documentation reviewed for this claim",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "features"
+          ]
         }
       ],
       "evidence_status": "official-docs-reviewed",
@@ -5046,7 +5123,23 @@
         "note": "Official distribution and capability documentation reviewed; a dated maintenance conclusion was not established.",
         "source_url": null
       },
-      "pricing_notes": "Paid edition-based software; compare exact module entitlements and available purchase or bundle plans."
+      "pricing_notes": "Paid edition-based software; compare exact module entitlements and available purchase or bundle plans.",
+      "capabilities": [
+        {
+          "id": "recorded-audio-noise-reduction",
+          "conditions": [
+            "Use an RX edition that includes the required restoration module; standalone editor and plugin entitlements vary by edition.",
+            "For the documented Spectral De-noise workflow, load recorded audio, learn representative noise and preview the reduction."
+          ],
+          "limitations": [
+            "This assertion concerns recorded-audio repair; it does not establish a system-wide live microphone filter.",
+            "Excessive reduction can remove wanted speech or introduce artifacts; inspect the noise-only preview and retain the original recording."
+          ],
+          "source_urls": [
+            "https://www.izotope.com/community/blog/how-to-clean-up-voice-recordings-video-podcasts"
+          ]
+        }
+      ]
     },
     {
       "id": "acoustica",
@@ -5099,23 +5192,33 @@
       "aliases": [],
       "sources": [
         {
-          "url": "https://acondigital.com/products/acoustica/",
-          "label": "Official documentation",
-          "checked_at": "2026-11-15",
-          "supports": [
-            "identity",
-            "features",
-            "pricing",
-            "platforms",
-            "downloads"
-          ]
-        },
-        {
           "url": "https://acondigital.com/plug-in-eula",
           "label": "Official documentation",
           "checked_at": "2026-11-15",
           "supports": [
             "license"
+          ]
+        },
+        {
+          "url": "https://acondigital.com/products/acoustica/",
+          "label": "Official documentation reviewed for this claim",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity",
+            "features",
+            "platforms",
+            "downloads",
+            "pricing"
+          ]
+        },
+        {
+          "url": "https://acondigital.com/acoustica8-linux/",
+          "label": "Official documentation reviewed for this claim",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "platforms",
+            "downloads",
+            "features"
           ]
         }
       ],
@@ -5126,7 +5229,24 @@
         "note": "Official distribution and capability documentation reviewed; a dated maintenance conclusion was not established.",
         "source_url": null
       },
-      "pricing_notes": "Paid perpetual editions with a 30-day trial; module bundles vary by edition."
+      "pricing_notes": "Paid perpetual editions with a 30-day trial; module bundles vary by edition.",
+      "capabilities": [
+        {
+          "id": "recorded-audio-noise-reduction",
+          "conditions": [
+            "Choose an edition containing the restoration tools needed for the recording; Standard in-app tools and Premium/Ultimate plugin entitlements differ.",
+            "Use the editor or a supported host for the selected restoration module; Linux distributions are explicitly a public beta."
+          ],
+          "limitations": [
+            "This documents recorded-audio cleanup; a DAW plugin or real-time preview alone does not establish system-wide microphone filtering.",
+            "Noise reduction can change desirable audio; audition representative sections and preserve an untreated original."
+          ],
+          "source_urls": [
+            "https://acondigital.com/products/acoustica/",
+            "https://acondigital.com/acoustica8-linux/"
+          ]
+        }
+      ]
     },
     {
       "id": "adobe-audition",
@@ -5212,6 +5332,14 @@
           "supports": [
             "license"
           ]
+        },
+        {
+          "url": "https://helpx.adobe.com/audition/desktop/effects-reference/noise-reduction-restoration-effects.html",
+          "label": "Official documentation reviewed for this claim",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "features"
+          ]
         }
       ],
       "evidence_status": "official-docs-reviewed",
@@ -5220,7 +5348,23 @@
         "checked_at": "2026-11-15",
         "note": "Official requirements document release 27.0 in November 2026.",
         "source_url": "https://helpx.adobe.com/audition/desktop/introduction/system-requirements.html"
-      }
+      },
+      "capabilities": [
+        {
+          "id": "recorded-audio-noise-reduction",
+          "conditions": [
+            "Open the recording in Audition and select the restoration effect appropriate to the noise.",
+            "The documented Noise Reduction process uses a representative noise-only selection to capture a noise print in the Waveform Editor."
+          ],
+          "limitations": [
+            "This records documented file/session restoration, not an operating-system microphone-filter setup.",
+            "Noise prints must match the noise and sample type; strong reduction can alter desired audio or introduce artifacts."
+          ],
+          "source_urls": [
+            "https://helpx.adobe.com/audition/desktop/effects-reference/noise-reduction-restoration-effects.html"
+          ]
+        }
+      ]
     },
     {
       "id": "tenacity",
@@ -6210,8 +6354,8 @@
         "macOS",
         "Linux"
       ],
-      "license": "Commercial license; full license terms not independently reviewed",
-      "license_kind": "unknown",
+      "license": "Proprietary Dragonframe license; the current FAQ links a Dragonframe 5 EULA, so confirm the selected release agreement",
+      "license_kind": "proprietary",
       "pricing_model": "paid",
       "summary": "Stop-motion production software combining camera capture, animation review, exposure planning and optional motion-control hardware.",
       "features": [
@@ -6225,7 +6369,8 @@
       ],
       "limitations": [
         "Supported cameras and separate motion-control hardware determine available controls.",
-        "The trial adds watermarks and limits captures; paid licensing is required for unrestricted production."
+        "The trial adds watermarks and limits captures; paid licensing is required for unrestricted production.",
+        "The public FAQ links an older Dragonframe 5 EULA; confirm current-release and educational-license conditions in the installer before deployment."
       ],
       "use_cases": [
         "Stop-motion animation",
@@ -6275,6 +6420,22 @@
           "checked_at": "2026-11-15",
           "supports": [
             "pricing"
+          ]
+        },
+        {
+          "url": "https://www.dragonframe.com/faq/",
+          "label": "Official documentation reviewed for this claim",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "license"
+          ]
+        },
+        {
+          "url": "https://www.dragonframe.com/download/Dragonframe5_EULA.pdf",
+          "label": "Official documentation reviewed for this claim",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "license"
           ]
         }
       ],
@@ -6665,21 +6826,21 @@
           ]
         },
         {
-          "url": "https://www.cross-plus-a.com/license.htm",
-          "label": "Official documentation",
-          "checked_at": "2026-11-15",
-          "supports": [
-            "license",
-            "pricing"
-          ]
-        },
-        {
           "url": "https://www.cross-plus-a.com/bfaq.htm",
           "label": "Official documentation",
           "checked_at": "2026-11-15",
           "supports": [
             "platforms",
             "features"
+          ]
+        },
+        {
+          "url": "https://www.cross-plus-a.com/license.htm",
+          "label": "Official documentation reviewed for this claim",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "license",
+            "pricing"
           ]
         }
       ],
@@ -6923,6 +7084,2957 @@
         "checked_at": "2026-11-15",
         "note": "Official downloads list a November 2026 release.",
         "source_url": "https://support.freedomscientific.com/Downloads/ZoomText"
+      }
+    },
+    {
+      "id": "su2",
+      "name": "SU2",
+      "family": "science",
+      "category": "computational-fluid-dynamics",
+      "summary": "Command-line multiphysics simulation and aerodynamic design suite with adjoint-based optimization workflows.",
+      "official_url": "https://su2code.github.io/",
+      "download_url": "https://su2code.github.io/download.html",
+      "repository_url": "https://github.com/su2code/SU2",
+      "platforms": [
+        "Windows",
+        "macOS",
+        "Linux"
+      ],
+      "license": "GNU LGPL 2.1",
+      "license_kind": "open-source",
+      "pricing_model": "free",
+      "features": [
+        "Compressible and incompressible flow solvers",
+        "Adjoint-based design optimization",
+        "MPI parallel execution and test cases"
+      ],
+      "strengths": [
+        "Choose SU2 for scripted aerodynamic studies and gradient-based shape optimization.",
+        "Configuration files and published test cases make repeatable solver studies practical."
+      ],
+      "limitations": [
+        "Prebuilt executables omit discrete-adjoint functionality; build from source when that capability is required.",
+        "Mesh convergence, boundary conditions and physical model selection need independent validation."
+      ],
+      "use_cases": [
+        "Run aerodynamic CFD",
+        "Optimize aerodynamic shapes",
+        "Script multiphysics simulations"
+      ],
+      "tags": [
+        "computational-fluid-dynamics",
+        "run aerodynamic cfd",
+        "optimize aerodynamic shapes",
+        "script multiphysics simulations"
+      ],
+      "alternatives": [
+        "OpenFOAM Foundation",
+        "SimFlow",
+        "flow5"
+      ],
+      "recommendation": {
+        "pick_for": "Choose SU2 for scripted aerodynamic studies and gradient-based shape optimization.",
+        "compare_when": "Prebuilt executables omit discrete-adjoint functionality; build from source when that capability is required."
+      },
+      "aliases": [],
+      "sources": [
+        {
+          "url": "https://su2code.github.io/",
+          "label": "Official documentation reviewed for this claim",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity",
+            "features"
+          ]
+        },
+        {
+          "url": "https://su2code.github.io/download.html",
+          "label": "Official documentation reviewed for this claim",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "downloads",
+            "platforms",
+            "license",
+            "pricing"
+          ]
+        }
+      ],
+      "evidence_status": "official-docs-reviewed",
+      "maintenance": {
+        "status": "unverified",
+        "checked_at": "2026-11-16",
+        "note": "Official features and distribution routes were reviewed; a dated maintenance commitment was not established.",
+        "source_url": null
+      }
+    },
+    {
+      "id": "simflow",
+      "name": "SimFlow",
+      "family": "science",
+      "category": "computational-fluid-dynamics",
+      "summary": "Desktop OpenFOAM interface for preparing geometry and meshes, setting up flow models, and inspecting simulation results.",
+      "official_url": "https://sim-flow.com/",
+      "download_url": "https://sim-flow.com/download-simflow/",
+      "repository_url": null,
+      "platforms": [
+        "Windows",
+        "macOS",
+        "Linux"
+      ],
+      "license": "Commercial SimFlow license; bundled open-source solvers retain their own licenses",
+      "license_kind": "proprietary",
+      "pricing_model": "freemium",
+      "features": [
+        "Geometry import and mesh preparation",
+        "Steady and transient flow models",
+        "Heat transfer and multiphase models",
+        "Local and HPC execution"
+      ],
+      "strengths": [
+        "Choose SimFlow when a graphical CFD setup workflow is preferable to editing solver dictionaries directly.",
+        "Its free tier is useful for learning and evaluating small cases before selecting a paid entitlement."
+      ],
+      "limitations": [
+        "The reviewed free plan caps models at 200,000 mesh nodes and one CPU; commercial plans remove those limits.",
+        "macOS support is for Apple Silicon; validate the selected OpenFOAM version and hardware combination."
+      ],
+      "use_cases": [
+        "Set up CFD graphically",
+        "Learn flow simulation",
+        "Prepare OpenFOAM cases"
+      ],
+      "tags": [
+        "computational-fluid-dynamics",
+        "set up cfd graphically",
+        "learn flow simulation",
+        "prepare openfoam cases"
+      ],
+      "alternatives": [
+        "OpenFOAM Foundation",
+        "SU2"
+      ],
+      "recommendation": {
+        "pick_for": "Choose SimFlow when a graphical CFD setup workflow is preferable to editing solver dictionaries directly.",
+        "compare_when": "The reviewed free plan caps models at 200,000 mesh nodes and one CPU; commercial plans remove those limits."
+      },
+      "aliases": [],
+      "sources": [
+        {
+          "url": "https://sim-flow.com/",
+          "label": "Official documentation reviewed for this claim",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity",
+            "features",
+            "platforms"
+          ]
+        },
+        {
+          "url": "https://sim-flow.com/download-simflow/",
+          "label": "Official documentation reviewed for this claim",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "downloads",
+            "platforms"
+          ]
+        },
+        {
+          "url": "https://sim-flow.com/pricing-plans/",
+          "label": "Official documentation reviewed for this claim",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "pricing",
+            "license",
+            "features"
+          ]
+        },
+        {
+          "url": "https://sim-flow.com/user-license-agreement/",
+          "label": "Official documentation reviewed for this claim",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "license",
+            "pricing"
+          ]
+        }
+      ],
+      "evidence_status": "official-docs-reviewed",
+      "maintenance": {
+        "status": "unverified",
+        "checked_at": "2026-11-16",
+        "note": "Official features and distribution routes were reviewed; a dated maintenance commitment was not established.",
+        "source_url": null
+      },
+      "platform_notes": "Native macOS route requires Apple Silicon; older x86-only documentation describes earlier releases.",
+      "pricing_notes": "The free Evaluation mode is time-unlimited and the agreement permits commercial, academic and personal use, subject to its functional limits; paid entitlements remove selected restrictions."
+    },
+    {
+      "id": "calculix",
+      "name": "CalculiX",
+      "family": "science",
+      "category": "finite-element-analysis",
+      "summary": "Structural finite-element solver and interactive pre/postprocessor for linear, nonlinear, dynamic and thermal analyses.",
+      "official_url": "https://www.calculix.de/",
+      "download_url": "https://www.calculix.de/",
+      "repository_url": "https://github.com/Dhondtguido/CalculiX",
+      "platforms": [
+        "Windows",
+        "Linux"
+      ],
+      "license": "GNU GPL 2.0 or later",
+      "license_kind": "open-source",
+      "pricing_model": "free",
+      "features": [
+        "Linear and nonlinear finite-element analysis",
+        "Static, dynamic and thermal solutions",
+        "Abaqus-style input syntax",
+        "Independent solver and pre/postprocessor"
+      ],
+      "strengths": [
+        "Choose CalculiX for inspectable structural analyses using text input decks and a separate solver.",
+        "Its documented input style supports workflows with compatible external preprocessors."
+      ],
+      "limitations": [
+        "Input syntax familiarity does not guarantee compatibility with every Abaqus feature.",
+        "Element choice, material laws, contacts and mesh convergence must be checked for the specific study."
+      ],
+      "use_cases": [
+        "Analyze structural deformation",
+        "Run thermal finite-element models",
+        "Automate structural solver cases"
+      ],
+      "tags": [
+        "finite-element-analysis",
+        "analyze structural deformation",
+        "run thermal finite-element models",
+        "automate structural solver cases"
+      ],
+      "alternatives": [
+        "Elmer FEM",
+        "code_aster",
+        "FEBio"
+      ],
+      "recommendation": {
+        "pick_for": "Choose CalculiX for inspectable structural analyses using text input decks and a separate solver.",
+        "compare_when": "Input syntax familiarity does not guarantee compatibility with every Abaqus feature."
+      },
+      "aliases": [],
+      "sources": [
+        {
+          "url": "https://www.calculix.de/",
+          "label": "Official documentation reviewed for this claim",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity",
+            "features",
+            "platforms",
+            "license",
+            "pricing",
+            "downloads"
+          ]
+        },
+        {
+          "url": "https://github.com/Dhondtguido/CalculiX",
+          "label": "Official documentation reviewed for this claim",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity",
+            "license"
+          ]
+        }
+      ],
+      "evidence_status": "official-docs-reviewed",
+      "maintenance": {
+        "status": "unverified",
+        "checked_at": "2026-11-16",
+        "note": "Official features and distribution routes were reviewed; a dated maintenance commitment was not established.",
+        "source_url": null
+      }
+    },
+    {
+      "id": "code-aster",
+      "name": "code_aster",
+      "family": "science",
+      "category": "finite-element-analysis",
+      "summary": "EDF structural-mechanics and thermomechanics solver with nonlinear models and optional SALOME-MECA graphical preparation.",
+      "official_url": "https://code-aster.org/en",
+      "download_url": "https://open-simulation-center.org/downloads/code_aster",
+      "repository_url": "https://gitlab.com/codeaster/src",
+      "platforms": [
+        "Linux",
+        "Windows"
+      ],
+      "license": "GNU GPL; exact version should be checked for the selected distribution",
+      "license_kind": "open-source",
+      "pricing_model": "free",
+      "features": [
+        "Nonlinear structural and thermal analysis",
+        "Dynamics and soil-structure interaction",
+        "Fatigue and fracture modeling",
+        "Python-driven studies and AsterStudy integration"
+      ],
+      "strengths": [
+        "Choose code_aster for detailed structural or coupled thermomechanical studies with documented numerical methods.",
+        "SALOME-MECA offers graphical study preparation around the same solver."
+      ],
+      "limitations": [
+        "Linux and Windows packages come through different build routes; verify version, features and qualification for the chosen package.",
+        "A large modeling vocabulary and dependencies make installation and study validation substantial tasks."
+      ],
+      "use_cases": [
+        "Model nonlinear structural behavior",
+        "Analyze thermomechanical coupling",
+        "Prepare finite-element studies"
+      ],
+      "tags": [
+        "finite-element-analysis",
+        "model nonlinear structural behavior",
+        "analyze thermomechanical coupling",
+        "prepare finite-element studies"
+      ],
+      "alternatives": [
+        "CalculiX",
+        "Elmer FEM",
+        "FEBio"
+      ],
+      "recommendation": {
+        "pick_for": "Choose code_aster for detailed structural or coupled thermomechanical studies with documented numerical methods.",
+        "compare_when": "Linux and Windows packages come through different build routes; verify version, features and qualification for the chosen package."
+      },
+      "aliases": [],
+      "sources": [
+        {
+          "url": "https://code-aster.org/en/product/main",
+          "label": "Official documentation reviewed for this claim",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity",
+            "features",
+            "license"
+          ]
+        },
+        {
+          "url": "https://open-simulation-center.org/downloads/code_aster",
+          "label": "Official documentation reviewed for this claim",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "downloads",
+            "pricing"
+          ]
+        },
+        {
+          "url": "https://open-simulation-center.org/downloads/code_aster/code_aster/17.3.1",
+          "label": "Official documentation reviewed for this claim",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "platforms",
+            "downloads"
+          ]
+        },
+        {
+          "url": "https://simulease.com/en/download/",
+          "label": "Official documentation reviewed for this claim",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "platforms",
+            "downloads"
+          ]
+        }
+      ],
+      "evidence_status": "official-docs-reviewed",
+      "maintenance": {
+        "status": "unverified",
+        "checked_at": "2026-11-16",
+        "note": "Official features and distribution routes were reviewed; a dated maintenance commitment was not established.",
+        "source_url": null
+      },
+      "platform_notes": "Native upstream Linux route; Windows uses a separately maintained port and must be assessed by package/version, not assumed identical."
+    },
+    {
+      "id": "hec-ras",
+      "name": "HEC-RAS",
+      "family": "science",
+      "category": "river-hydraulics",
+      "summary": "River and floodplain modeling environment for steady/unsteady hydraulics, sediment transport and related water-quality studies.",
+      "official_url": "https://www.hec.usace.army.mil/software/hec-ras/",
+      "download_url": "https://www.hec.usace.army.mil/software/hec-ras/download.aspx",
+      "repository_url": null,
+      "platforms": [
+        "Windows",
+        "Linux"
+      ],
+      "license": "HEC proprietary terms of use; modification and reverse engineering are restricted",
+      "license_kind": "proprietary",
+      "pricing_model": "free",
+      "features": [
+        "One-dimensional steady flow",
+        "One- and two-dimensional unsteady flow",
+        "Sediment transport and mobile beds",
+        "Water-temperature and quality modeling"
+      ],
+      "strengths": [
+        "Choose HEC-RAS when the primary question concerns river hydraulics or floodplain inundation.",
+        "The integrated hydraulic workflow connects geometry, simulation and mapped interpretation."
+      ],
+      "limitations": [
+        "The desktop graphical interface requires Windows; the Linux distribution contains compute engines only.",
+        "HEC does not provide routine user support to non-USACE users; calibrated inputs and engineering review remain necessary."
+      ],
+      "use_cases": [
+        "Model river flow",
+        "Estimate floodplain inundation",
+        "Study sediment transport"
+      ],
+      "tags": [
+        "river-hydraulics",
+        "model river flow",
+        "estimate floodplain inundation",
+        "study sediment transport"
+      ],
+      "alternatives": [
+        "EPA SWMM",
+        "MODFLOW 6",
+        "QGIS"
+      ],
+      "recommendation": {
+        "pick_for": "Choose HEC-RAS when the primary question concerns river hydraulics or floodplain inundation.",
+        "compare_when": "The desktop graphical interface requires Windows; the Linux distribution contains compute engines only."
+      },
+      "aliases": [],
+      "sources": [
+        {
+          "url": "https://www.hec.usace.army.mil/software/hec-ras/default.aspx",
+          "label": "Official documentation reviewed for this claim",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity",
+            "features"
+          ]
+        },
+        {
+          "url": "https://www.hec.usace.army.mil/software/hec-ras/download.aspx",
+          "label": "Official documentation reviewed for this claim",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "downloads",
+            "platforms",
+            "pricing"
+          ]
+        },
+        {
+          "url": "https://www.hec.usace.army.mil/software/terms_and_conditions.aspx",
+          "label": "Official documentation reviewed for this claim",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "license"
+          ]
+        }
+      ],
+      "evidence_status": "official-docs-reviewed",
+      "maintenance": {
+        "status": "unverified",
+        "checked_at": "2026-11-16",
+        "note": "Official features and distribution routes were reviewed; a dated maintenance commitment was not established.",
+        "source_url": null
+      },
+      "platform_notes": "Windows GUI; Linux compute engines only, with a distinct WSL setup when invoked on Windows."
+    },
+    {
+      "id": "epanet",
+      "name": "EPANET",
+      "family": "science",
+      "category": "water-distribution-modeling",
+      "summary": "EPA model for pressurized drinking-water networks, hydraulic behavior and the movement of water-quality constituents.",
+      "official_url": "https://www.epa.gov/water-research/epanet",
+      "download_url": "https://www.epa.gov/water-research/epanet",
+      "repository_url": "https://github.com/USEPA/EPANET2.2",
+      "platforms": [
+        "Windows"
+      ],
+      "license": "Public domain software as described by the EPA",
+      "license_kind": "open-source",
+      "pricing_model": "free",
+      "features": [
+        "Pipe-network hydraulic simulation",
+        "Water-quality constituent transport",
+        "Tank and pump operation studies",
+        "Programmer toolkit"
+      ],
+      "strengths": [
+        "Choose EPANET for water-distribution pipes, pumps and tanks rather than open-channel flood hydraulics.",
+        "The toolkit supports repeating network scenarios programmatically."
+      ],
+      "limitations": [
+        "The EPA desktop package is Windows-based; library builds and third-party interfaces are separate distributions.",
+        "Network calibration, demand patterns and water-quality assumptions strongly affect interpretation."
+      ],
+      "use_cases": [
+        "Model drinking-water networks",
+        "Evaluate pump and tank operations",
+        "Study distribution-system water quality"
+      ],
+      "tags": [
+        "water-distribution-modeling",
+        "model drinking-water networks",
+        "evaluate pump and tank operations",
+        "study distribution-system water quality"
+      ],
+      "alternatives": [
+        "EPA SWMM",
+        "HEC-RAS",
+        "MODFLOW 6"
+      ],
+      "recommendation": {
+        "pick_for": "Choose EPANET for water-distribution pipes, pumps and tanks rather than open-channel flood hydraulics.",
+        "compare_when": "The EPA desktop package is Windows-based; library builds and third-party interfaces are separate distributions."
+      },
+      "aliases": [],
+      "sources": [
+        {
+          "url": "https://www.epa.gov/water-research/epanet",
+          "label": "Official documentation reviewed for this claim",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity",
+            "features",
+            "license",
+            "platforms",
+            "downloads",
+            "pricing"
+          ]
+        }
+      ],
+      "evidence_status": "official-docs-reviewed",
+      "maintenance": {
+        "status": "unverified",
+        "checked_at": "2026-11-16",
+        "note": "Official features and distribution routes were reviewed; a dated maintenance commitment was not established.",
+        "source_url": null
+      }
+    },
+    {
+      "id": "epa-swmm",
+      "name": "EPA SWMM",
+      "family": "science",
+      "category": "stormwater-modeling",
+      "summary": "Storm Water Management Model for rainfall runoff, drainage-system hydraulics and pollutant-load scenarios.",
+      "official_url": "https://www.epa.gov/water-research/storm-water-management-model-swmm",
+      "download_url": "https://www.epa.gov/water-research/storm-water-management-model-swmm",
+      "repository_url": "https://github.com/USEPA/Stormwater-Management-Model",
+      "platforms": [
+        "Windows"
+      ],
+      "license": "Open-source software; check component license files for redistribution details",
+      "license_kind": "open-source",
+      "pricing_model": "free",
+      "features": [
+        "Rainfall-runoff modeling",
+        "Storm, combined and sanitary drainage",
+        "Water-quality simulation",
+        "Green and gray infrastructure scenarios"
+      ],
+      "strengths": [
+        "Choose SWMM for urban catchments and drainage networks where rainfall runoff and sewer hydraulics interact.",
+        "It provides a specific modeling vocabulary for evaluating drainage-control alternatives."
+      ],
+      "limitations": [
+        "The cited EPA graphical installer is for Windows; cross-platform computational-engine builds are a separate route.",
+        "Event data, infiltration parameters and drainage geometry require calibration and scenario review."
+      ],
+      "use_cases": [
+        "Model stormwater runoff",
+        "Evaluate drainage networks",
+        "Compare green-infrastructure scenarios"
+      ],
+      "tags": [
+        "stormwater-modeling",
+        "model stormwater runoff",
+        "evaluate drainage networks",
+        "compare green-infrastructure scenarios"
+      ],
+      "alternatives": [
+        "EPANET",
+        "HEC-RAS",
+        "MODFLOW 6"
+      ],
+      "recommendation": {
+        "pick_for": "Choose SWMM for urban catchments and drainage networks where rainfall runoff and sewer hydraulics interact.",
+        "compare_when": "The cited EPA graphical installer is for Windows; cross-platform computational-engine builds are a separate route."
+      },
+      "aliases": [],
+      "sources": [
+        {
+          "url": "https://www.epa.gov/water-research/storm-water-management-model-swmm",
+          "label": "Official documentation reviewed for this claim",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity",
+            "features",
+            "pricing",
+            "license",
+            "platforms",
+            "downloads",
+            "maintenance"
+          ]
+        }
+      ],
+      "evidence_status": "official-docs-reviewed",
+      "maintenance": {
+        "status": "unverified",
+        "checked_at": "2026-11-16",
+        "note": "Official features and distribution routes were reviewed; a dated maintenance commitment was not established.",
+        "source_url": null
+      },
+      "platform_notes": "Windows GUI distribution recorded here; the computational engine is portable and has separate build requirements."
+    },
+    {
+      "id": "modflow6",
+      "name": "MODFLOW 6",
+      "family": "science",
+      "category": "groundwater-modeling",
+      "summary": "USGS modular simulator for groundwater flow and coupled hydrologic models, with related tools for setup, budgets and visualization.",
+      "official_url": "https://www.usgs.gov/software/modflow-6-usgs-modular-hydrologic-model",
+      "download_url": "https://github.com/MODFLOW-ORG/modflow6/releases",
+      "repository_url": "https://github.com/MODFLOW-ORG/modflow6",
+      "platforms": [
+        "Windows",
+        "macOS",
+        "Linux"
+      ],
+      "license": "Public domain in the United States; CC0 1.0 worldwide dedication unless otherwise noted",
+      "license_kind": "open-source",
+      "pricing_model": "free",
+      "features": [
+        "Groundwater-flow simulation",
+        "Multiple model instances and exchanges",
+        "Transport and coupled hydrologic workflows",
+        "Interfaces to FloPy, ModelMuse and budget tools"
+      ],
+      "strengths": [
+        "Choose MODFLOW 6 for aquifer and groundwater-system simulations with explicit model packages and exchanges.",
+        "Its related setup and post-processing tools support reproducible model workflows."
+      ],
+      "limitations": [
+        "It is a numerical model engine; graphical preparation and visualization require related applications.",
+        "Hydrogeologic conceptual models, parameter estimation and calibration are separate scientific tasks."
+      ],
+      "use_cases": [
+        "Simulate aquifer flow",
+        "Build coupled groundwater models",
+        "Analyze groundwater budgets"
+      ],
+      "tags": [
+        "groundwater-modeling",
+        "simulate aquifer flow",
+        "build coupled groundwater models",
+        "analyze groundwater budgets"
+      ],
+      "alternatives": [
+        "HEC-RAS",
+        "EPA SWMM",
+        "QGIS"
+      ],
+      "recommendation": {
+        "pick_for": "Choose MODFLOW 6 for aquifer and groundwater-system simulations with explicit model packages and exchanges.",
+        "compare_when": "It is a numerical model engine; graphical preparation and visualization require related applications."
+      },
+      "aliases": [],
+      "sources": [
+        {
+          "url": "https://www.usgs.gov/software/modflow-6-usgs-modular-hydrologic-model",
+          "label": "Official documentation reviewed for this claim",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity",
+            "features",
+            "maintenance"
+          ]
+        },
+        {
+          "url": "https://github.com/MODFLOW-ORG/executables",
+          "label": "Official documentation reviewed for this claim",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "downloads",
+            "platforms"
+          ]
+        },
+        {
+          "url": "https://github.com/MODFLOW-ORG/modflow6/blob/develop/LICENSE.md",
+          "label": "Official documentation reviewed for this claim",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "license",
+            "pricing"
+          ]
+        },
+        {
+          "url": "https://github.com/MODFLOW-ORG/modflow6/releases",
+          "label": "Official documentation reviewed for this claim",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "downloads",
+            "maintenance"
+          ]
+        }
+      ],
+      "evidence_status": "official-docs-reviewed",
+      "maintenance": {
+        "status": "active",
+        "checked_at": "2026-11-16",
+        "note": "The official repository lists approved USGS release 6.8.2 on 30 October 2026.",
+        "source_url": "https://github.com/MODFLOW-ORG/modflow6/releases"
+      }
+    },
+    {
+      "id": "gromacs",
+      "name": "GROMACS",
+      "family": "science",
+      "category": "molecular-dynamics",
+      "summary": "Molecular-dynamics suite for preparing, simulating and analyzing biomolecular and other particle systems.",
+      "official_url": "https://www.gromacs.org/",
+      "download_url": "https://manual.gromacs.org/current/download.html",
+      "repository_url": "https://gitlab.com/gromacs/gromacs",
+      "platforms": [
+        "Windows",
+        "macOS",
+        "Linux"
+      ],
+      "license": "GNU LGPL 2.1 or later",
+      "license_kind": "open-source",
+      "pricing_model": "free",
+      "features": [
+        "Molecular-dynamics simulation",
+        "Trajectory analysis",
+        "CPU and GPU execution",
+        "MPI and single-workstation parallelism"
+      ],
+      "strengths": [
+        "Choose GROMACS for biomolecular simulations whose force fields and workflows match its supported methods.",
+        "Integrated setup and trajectory tools keep simulation and analysis in a documented workflow."
+      ],
+      "limitations": [
+        "Build options and accelerator support depend on the operating system, compiler and selected backend.",
+        "Force-field suitability, equilibration, sampling and uncertainty require scientific validation."
+      ],
+      "use_cases": [
+        "Simulate proteins and membranes",
+        "Analyze molecular trajectories",
+        "Run GPU molecular dynamics"
+      ],
+      "tags": [
+        "molecular-dynamics",
+        "simulate proteins and membranes",
+        "analyze molecular trajectories",
+        "run gpu molecular dynamics"
+      ],
+      "alternatives": [
+        "LAMMPS",
+        "VMD",
+        "UCSF ChimeraX"
+      ],
+      "recommendation": {
+        "pick_for": "Choose GROMACS for biomolecular simulations whose force fields and workflows match its supported methods.",
+        "compare_when": "Build options and accelerator support depend on the operating system, compiler and selected backend."
+      },
+      "aliases": [],
+      "sources": [
+        {
+          "url": "https://www.gromacs.org/about.html",
+          "label": "Official documentation reviewed for this claim",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity",
+            "features",
+            "license"
+          ]
+        },
+        {
+          "url": "https://www.gromacs.org/",
+          "label": "Official documentation reviewed for this claim",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "pricing",
+            "maintenance"
+          ]
+        },
+        {
+          "url": "https://manual.gromacs.org/current/install-guide/index.html",
+          "label": "Official documentation reviewed for this claim",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "platforms",
+            "downloads"
+          ]
+        },
+        {
+          "url": "https://manual.gromacs.org/current/download.html",
+          "label": "Official documentation reviewed for this claim",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "downloads"
+          ]
+        },
+        {
+          "url": "https://gitlab.com/gromacs/gromacs",
+          "label": "Official documentation reviewed for this claim",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity"
+          ]
+        }
+      ],
+      "evidence_status": "official-docs-reviewed",
+      "maintenance": {
+        "status": "active",
+        "checked_at": "2026-11-16",
+        "note": "Official homepage dates GROMACS 2026.4 to October 2, 2026.",
+        "source_url": "https://www.gromacs.org/"
+      }
+    },
+    {
+      "id": "lammps",
+      "name": "LAMMPS",
+      "family": "science",
+      "category": "molecular-dynamics",
+      "summary": "Particle and molecular-dynamics simulation package with extensible interaction models for materials and related research.",
+      "official_url": "https://www.lammps.org/",
+      "download_url": "https://www.lammps.org/download/",
+      "repository_url": "https://github.com/lammps/lammps",
+      "platforms": [
+        "Windows",
+        "macOS",
+        "Linux"
+      ],
+      "license": "GNU GPL v2",
+      "license_kind": "open-source",
+      "pricing_model": "free",
+      "features": [
+        "Particle simulation input scripts",
+        "Extensible interaction styles and packages",
+        "Parallel simulation",
+        "Optional LAMMPS-GUI interface"
+      ],
+      "strengths": [
+        "Choose LAMMPS for materials or particle simulations where a supported interaction style matches the study.",
+        "Explicit packages and input scripts expose the computational assumptions for review."
+      ],
+      "limitations": [
+        "Prebuilt packages vary in included features; an optional package may require a different build.",
+        "A potential model or force field must be validated for the material and scale being studied."
+      ],
+      "use_cases": [
+        "Simulate atomistic materials",
+        "Model particle systems",
+        "Script molecular-dynamics runs"
+      ],
+      "tags": [
+        "molecular-dynamics",
+        "simulate atomistic materials",
+        "model particle systems",
+        "script molecular-dynamics runs"
+      ],
+      "alternatives": [
+        "GROMACS",
+        "VMD",
+        "OVITO"
+      ],
+      "recommendation": {
+        "pick_for": "Choose LAMMPS for materials or particle simulations where a supported interaction style matches the study.",
+        "compare_when": "Prebuilt packages vary in included features; an optional package may require a different build."
+      },
+      "aliases": [],
+      "sources": [
+        {
+          "url": "https://www.lammps.org/download/",
+          "label": "Official documentation reviewed for this claim",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity",
+            "downloads",
+            "platforms",
+            "license",
+            "pricing"
+          ]
+        },
+        {
+          "url": "https://docs.lammps.org/Install.html",
+          "label": "Official documentation reviewed for this claim",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "features",
+            "downloads"
+          ]
+        },
+        {
+          "url": "https://lammps-gui.lammps.org/installation.html",
+          "label": "Official documentation reviewed for this claim",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "features",
+            "platforms"
+          ]
+        },
+        {
+          "url": "https://www.lammps.org/",
+          "label": "Official documentation reviewed for this claim",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity",
+            "features",
+            "maintenance"
+          ]
+        }
+      ],
+      "evidence_status": "official-docs-reviewed",
+      "maintenance": {
+        "status": "active",
+        "checked_at": "2026-11-16",
+        "note": "The official project news lists a feature release on 13 November 2026.",
+        "source_url": "https://www.lammps.org/"
+      }
+    },
+    {
+      "id": "vmd",
+      "name": "VMD",
+      "family": "science",
+      "category": "particle-analysis",
+      "summary": "Visual Molecular Dynamics viewer for molecular structures, trajectories, analysis scripts and rendered scientific figures.",
+      "official_url": "https://www.ks.uiuc.edu/Research/vmd/",
+      "download_url": "https://www.ks.uiuc.edu/Development/Download/download.cgi?PackageName=VMD",
+      "repository_url": null,
+      "platforms": [
+        "Windows",
+        "macOS",
+        "Linux"
+      ],
+      "license": "University of Illinois VMD license; source available with use and redistribution restrictions",
+      "license_kind": "source-available",
+      "pricing_model": "free",
+      "features": [
+        "Molecular structure visualization",
+        "Trajectory animation and analysis",
+        "Scripting and plugins",
+        "Scientific rendering"
+      ],
+      "strengths": [
+        "Choose VMD for inspecting and analyzing molecular-dynamics trajectories with domain-specific visualization tools.",
+        "Its scripting and plugin system suits repeatable analyses of many frames."
+      ],
+      "limitations": [
+        "The no-fee license covers academic, research and internal business use with separate commercial/distribution restrictions.",
+        "Stable and test builds differ across platforms; check architecture and plugin support before adopting a workflow."
+      ],
+      "use_cases": [
+        "Inspect molecular trajectories",
+        "Visualize molecular structures",
+        "Render simulation figures"
+      ],
+      "tags": [
+        "particle-analysis",
+        "inspect molecular trajectories",
+        "visualize molecular structures",
+        "render simulation figures"
+      ],
+      "alternatives": [
+        "OVITO",
+        "UCSF ChimeraX",
+        "PyMOL"
+      ],
+      "recommendation": {
+        "pick_for": "Choose VMD for inspecting and analyzing molecular-dynamics trajectories with domain-specific visualization tools.",
+        "compare_when": "The no-fee license covers academic, research and internal business use with separate commercial/distribution restrictions."
+      },
+      "aliases": [],
+      "sources": [
+        {
+          "url": "https://www.ks.uiuc.edu/Research/vmd/",
+          "label": "Official documentation reviewed for this claim",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity",
+            "features",
+            "platforms",
+            "pricing"
+          ]
+        },
+        {
+          "url": "https://www.ks.uiuc.edu/Development/Download/download.cgi?PackageName=VMD",
+          "label": "Official documentation reviewed for this claim",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "downloads",
+            "platforms"
+          ]
+        },
+        {
+          "url": "https://www.ks.uiuc.edu/Research/vmd/current/LICENSE.html",
+          "label": "Official documentation reviewed for this claim",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "license",
+            "pricing"
+          ]
+        }
+      ],
+      "evidence_status": "official-docs-reviewed",
+      "maintenance": {
+        "status": "unverified",
+        "checked_at": "2026-11-16",
+        "note": "Official features and distribution routes were reviewed; a dated maintenance commitment was not established.",
+        "source_url": null
+      },
+      "pricing_notes": "No fee for the uses allowed by the cited VMD license; this is not an unrestricted commercial or redistribution entitlement."
+    },
+    {
+      "id": "xflr5",
+      "name": "XFLR5",
+      "family": "science",
+      "category": "aerodynamic-analysis",
+      "summary": "Legacy airfoil, wing and aircraft potential-flow analysis with integrated geometry and result views; development ended in June 2026.",
+      "official_url": "https://www.xflr5.tech/",
+      "download_url": "https://sourceforge.net/projects/xflr5/files/",
+      "repository_url": "https://sourceforge.net/p/xflr5/code/",
+      "platforms": [
+        "Windows",
+        "macOS",
+        "Linux"
+      ],
+      "license": "GPL-3.0",
+      "license_kind": "open-source",
+      "pricing_model": "free",
+      "features": [
+        "XFoil airfoil analysis",
+        "Wing lifting-line and vortex-lattice methods",
+        "Integrated pre- and post-processing"
+      ],
+      "strengths": [
+        "Useful for reproducing established XFLR5 projects and teaching workflows",
+        "Makes approximate aerodynamic methods accessible in a desktop workspace"
+      ],
+      "limitations": [
+        "The project closed on 30 June 2026; compare flow5 before starting a new workflow",
+        "Potential-flow and low-Reynolds-number methods have physical limits and do not replace validated viscous CFD"
+      ],
+      "use_cases": [
+        "Legacy aerodynamic projects",
+        "Airfoil polar exploration",
+        "Wing analysis education"
+      ],
+      "tags": [
+        "aerodynamic-analysis",
+        "legacy aerodynamic projects",
+        "airfoil polar exploration",
+        "wing analysis education"
+      ],
+      "alternatives": [
+        "flow5",
+        "SU2",
+        "OpenFOAM"
+      ],
+      "recommendation": {
+        "pick_for": "Useful for reproducing established XFLR5 projects and teaching workflows",
+        "compare_when": "The project closed on 30 June 2026; compare flow5 before starting a new workflow"
+      },
+      "aliases": [],
+      "sources": [
+        {
+          "url": "https://www.xflr5.tech/",
+          "label": "Official documentation reviewed for this claim",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity",
+            "features",
+            "maintenance"
+          ]
+        },
+        {
+          "url": "https://sourceforge.net/projects/xflr5/",
+          "label": "Official documentation reviewed for this claim",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "license",
+            "platforms",
+            "downloads",
+            "maintenance",
+            "pricing"
+          ]
+        },
+        {
+          "url": "https://sourceforge.net/projects/xflr5/files/",
+          "label": "Official documentation reviewed for this claim",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "downloads"
+          ]
+        }
+      ],
+      "evidence_status": "official-docs-reviewed",
+      "maintenance": {
+        "status": "discontinued",
+        "checked_at": "2026-11-16",
+        "note": "The developer closed the project on 30 June 2026; the official distribution is marked Abandoned.",
+        "source_url": "https://www.xflr5.tech/"
+      },
+      "pricing_notes": "The archived official public distribution is available without a purchase; support and future releases are not included."
+    },
+    {
+      "id": "flow5",
+      "name": "flow5",
+      "family": "science",
+      "category": "aerodynamic-analysis",
+      "summary": "Open-source successor to XFLR5 for preliminary potential-flow analysis of aircraft, wings and other lifting surfaces.",
+      "official_url": "https://flow5.tech/",
+      "download_url": "https://flow5.tech/",
+      "repository_url": "https://github.com/techwinder/flow5",
+      "platforms": [
+        "Windows",
+        "macOS",
+        "Linux"
+      ],
+      "license": "GPL-3.0",
+      "license_kind": "open-source",
+      "pricing_model": "free",
+      "features": [
+        "Integrated geometry and meshing",
+        "Potential-flow and stability analysis",
+        "C++ API examples",
+        "Airfoil and aircraft result inspection"
+      ],
+      "strengths": [
+        "A maintained migration candidate for XFLR5-style preliminary aircraft analysis",
+        "Provides a scripting/API route alongside the graphical workflow"
+      ],
+      "limitations": [
+        "Version 7.58 is the final Intel Mac binary; the developer says no future Linux packages will be released, so those platforms require an explicit package/source strategy",
+        "Potential-flow approximations require independent validation; v7.58 removed plane optimization and the advanced fuselage editor"
+      ],
+      "use_cases": [
+        "Preliminary wing design",
+        "XFLR5 workflow migration",
+        "Aerodynamic parameter studies"
+      ],
+      "tags": [
+        "aerodynamic-analysis",
+        "preliminary wing design",
+        "xflr5 workflow migration",
+        "aerodynamic parameter studies"
+      ],
+      "alternatives": [
+        "XFLR5",
+        "SU2",
+        "OpenFOAM"
+      ],
+      "recommendation": {
+        "pick_for": "A maintained migration candidate for XFLR5-style preliminary aircraft analysis",
+        "compare_when": "Version 7.58 is the final Intel Mac binary; the developer says no future Linux packages will be released, so those platforms require an explicit package/source strategy"
+      },
+      "aliases": [],
+      "sources": [
+        {
+          "url": "https://github.com/techwinder/flow5",
+          "label": "Official documentation reviewed for this claim",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity",
+            "features",
+            "license"
+          ]
+        },
+        {
+          "url": "https://flow5.tech/",
+          "label": "Official documentation reviewed for this claim",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "features",
+            "downloads",
+            "pricing"
+          ]
+        },
+        {
+          "url": "https://flow5.tech/docs/releasenotes.html",
+          "label": "Official documentation reviewed for this claim",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "maintenance",
+            "platforms",
+            "features"
+          ]
+        }
+      ],
+      "evidence_status": "official-docs-reviewed",
+      "maintenance": {
+        "status": "active",
+        "checked_at": "2026-11-16",
+        "note": "Release 7.58 is dated 25 October 2026; future Linux binaries and Intel Mac packaging are ending.",
+        "source_url": "https://flow5.tech/docs/releasenotes.html"
+      }
+    },
+    {
+      "id": "whitebox-workflows",
+      "name": "Whitebox Workflows Next Gen",
+      "family": "science",
+      "category": "terrain-analysis",
+      "summary": "Local geospatial processing through Python and R, with an open tool core and separately licensed Pro workflows.",
+      "official_url": "https://www.whiteboxgeo.com/products-wbw.html",
+      "download_url": "https://pypi.org/project/whitebox-workflows/",
+      "repository_url": "https://github.com/jblindsay/whitebox_next_gen",
+      "platforms": [
+        "Windows",
+        "macOS",
+        "Linux"
+      ],
+      "license": "Open tier: MIT or Apache-2.0; Pro features: proprietary entitlement and EULA",
+      "license_kind": "mixed",
+      "pricing_model": "freemium",
+      "features": [
+        "Terrain and hydrological processing",
+        "LiDAR and raster analysis",
+        "Python and R interfaces",
+        "Local execution and reusable scripts"
+      ],
+      "strengths": [
+        "Fits scripted terrain and watershed processing alongside an existing GIS",
+        "Separates a free open core from optional Pro workflows"
+      ],
+      "limitations": [
+        "Python and R have different binary support: current Python wheels cover Windows x64, macOS ARM64 and Linux x64; the R page lists Windows and macOS ARM64 for R 4.6",
+        "The Next Gen rewrite changes interfaces; confirm the package version and examples together",
+        "Pro workflows require a separate entitlement"
+      ],
+      "use_cases": [
+        "Automated DEM processing",
+        "Watershed preprocessing",
+        "Scripted LiDAR workflows"
+      ],
+      "tags": [
+        "terrain-analysis",
+        "automated dem processing",
+        "watershed preprocessing",
+        "scripted lidar workflows"
+      ],
+      "alternatives": [
+        "SAGA GIS",
+        "GRASS GIS",
+        "QGIS"
+      ],
+      "recommendation": {
+        "pick_for": "Fits scripted terrain and watershed processing alongside an existing GIS",
+        "compare_when": "Python and R have different binary support: current Python wheels cover Windows x64, macOS ARM64 and Linux x64; the R page lists Windows and macOS ARM64 for R 4.6"
+      },
+      "aliases": [
+        "Whitebox Workflows",
+        "Whitebox Next Gen",
+        "WbW"
+      ],
+      "sources": [
+        {
+          "url": "https://www.whiteboxgeo.com/products-wbw.html",
+          "label": "Official documentation reviewed for this claim",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity",
+            "features",
+            "pricing",
+            "platforms"
+          ]
+        },
+        {
+          "url": "https://www.whiteboxgeo.com/manuals/api/python/licensing.html",
+          "label": "Official documentation reviewed for this claim",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "license",
+            "pricing"
+          ]
+        },
+        {
+          "url": "https://pypi.org/project/whitebox-workflows/",
+          "label": "Official documentation reviewed for this claim",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "downloads",
+            "platforms"
+          ]
+        },
+        {
+          "url": "https://github.com/jblindsay/whitebox_next_gen",
+          "label": "Official documentation reviewed for this claim",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity",
+            "license"
+          ]
+        }
+      ],
+      "evidence_status": "official-docs-reviewed",
+      "maintenance": {
+        "status": "unverified",
+        "checked_at": "2026-11-16",
+        "note": "Official features and distribution routes were reviewed; a dated maintenance commitment was not established.",
+        "source_url": null
+      }
+    },
+    {
+      "id": "gephi",
+      "name": "Gephi",
+      "family": "science",
+      "category": "network-analysis",
+      "summary": "Interactive graph exploration and network visualization with layouts, statistics, filtering and publication exports.",
+      "official_url": "https://gephi.org/desktop/",
+      "download_url": "https://gephi.org/desktop/",
+      "repository_url": "https://github.com/gephi/gephi",
+      "platforms": [
+        "Windows",
+        "macOS",
+        "Linux"
+      ],
+      "license": "Dual CDDL-1.0 or GPL-3.0",
+      "license_kind": "open-source",
+      "pricing_model": "free",
+      "features": [
+        "Graph layouts and visual styling",
+        "Centrality and community statistics",
+        "Filtering and data laboratory",
+        "SVG, PDF and PNG output"
+      ],
+      "strengths": [
+        "Fits exploratory relationship maps and network figures",
+        "Lets analysts inspect attributes and topology before exporting a styled view"
+      ],
+      "limitations": [
+        "The published roadmap still lists full undo/redo and improved temporal-graph controls as unfinished; save project versions",
+        "A visually prominent cluster is not by itself a validated causal or statistical conclusion"
+      ],
+      "use_cases": [
+        "Relationship-map exploration",
+        "Network figure preparation",
+        "Community structure inspection"
+      ],
+      "tags": [
+        "network-analysis",
+        "relationship-map exploration",
+        "network figure preparation",
+        "community structure inspection"
+      ],
+      "alternatives": [
+        "Cytoscape",
+        "Orange"
+      ],
+      "recommendation": {
+        "pick_for": "Fits exploratory relationship maps and network figures",
+        "compare_when": "The published roadmap still lists full undo/redo and improved temporal-graph controls as unfinished; save project versions"
+      },
+      "aliases": [],
+      "sources": [
+        {
+          "url": "https://gephi.org/desktop/",
+          "label": "Official documentation reviewed for this claim",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity",
+            "features",
+            "maintenance",
+            "downloads"
+          ]
+        },
+        {
+          "url": "https://gephi.org/legal/",
+          "label": "Official documentation reviewed for this claim",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "license",
+            "pricing"
+          ]
+        },
+        {
+          "url": "https://docs.gephi.org/desktop/User_Manual/Supported_Systems/",
+          "label": "Official documentation reviewed for this claim",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "platforms",
+            "downloads"
+          ]
+        }
+      ],
+      "evidence_status": "official-docs-reviewed",
+      "maintenance": {
+        "status": "active",
+        "checked_at": "2026-11-16",
+        "note": "The official desktop roadmap is dated August 2026; this is evidence of project activity, not a support guarantee.",
+        "source_url": "https://gephi.org/desktop/"
+      }
+    },
+    {
+      "id": "cytoscape",
+      "name": "Cytoscape",
+      "family": "science",
+      "category": "network-analysis",
+      "summary": "Desktop network analysis and visualization that combines graph topology with biological and other attribute data.",
+      "official_url": "https://cytoscape.org/",
+      "download_url": "https://cytoscape.org/download-platforms.html",
+      "repository_url": "https://github.com/cytoscape/cytoscape",
+      "platforms": [
+        "Windows",
+        "macOS",
+        "Linux"
+      ],
+      "license": "LGPL-2.1; third-party apps have their own terms",
+      "license_kind": "open-source",
+      "pricing_model": "free",
+      "features": [
+        "Network and attribute integration",
+        "Interactive visual mapping",
+        "App-based analysis extensions",
+        "Desktop network export"
+      ],
+      "strengths": [
+        "Fits biological interaction networks with attached experimental measurements",
+        "Extensible desktop workflows can connect analysis methods and network presentation"
+      ],
+      "limitations": [
+        "App compatibility, external services and their licenses must be checked independently",
+        "Network interpretation depends on identifier matching, source data and the chosen analysis"
+      ],
+      "use_cases": [
+        "Biological interaction maps",
+        "Attribute-driven network figures",
+        "Network-analysis extensions"
+      ],
+      "tags": [
+        "network-analysis",
+        "biological interaction maps",
+        "attribute-driven network figures",
+        "network-analysis extensions"
+      ],
+      "alternatives": [
+        "Gephi",
+        "Orange"
+      ],
+      "recommendation": {
+        "pick_for": "Fits biological interaction networks with attached experimental measurements",
+        "compare_when": "App compatibility, external services and their licenses must be checked independently"
+      },
+      "aliases": [],
+      "sources": [
+        {
+          "url": "https://desktop.cytoscape.org/",
+          "label": "Official documentation reviewed for this claim",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity",
+            "features",
+            "pricing"
+          ]
+        },
+        {
+          "url": "https://cytoscape.org/download.html",
+          "label": "Official documentation reviewed for this claim",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "license",
+            "downloads"
+          ]
+        },
+        {
+          "url": "https://cytoscape.org/download-platforms.html",
+          "label": "Official documentation reviewed for this claim",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "platforms",
+            "downloads"
+          ]
+        },
+        {
+          "url": "https://github.com/cytoscape/cytoscape",
+          "label": "Official documentation reviewed for this claim",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity"
+          ]
+        }
+      ],
+      "evidence_status": "official-docs-reviewed",
+      "maintenance": {
+        "status": "unverified",
+        "checked_at": "2026-11-16",
+        "note": "Official features and distribution routes were reviewed; a dated maintenance commitment was not established.",
+        "source_url": null
+      }
+    },
+    {
+      "id": "openrefine",
+      "name": "OpenRefine",
+      "family": "productivity",
+      "category": "data-cleaning",
+      "summary": "Local tabular-data cleanup with facets, clustering, transformations and optional reconciliation against external knowledge services.",
+      "official_url": "https://openrefine.org/",
+      "download_url": "https://openrefine.org/download",
+      "repository_url": "https://github.com/OpenRefine/OpenRefine",
+      "platforms": [
+        "Windows",
+        "macOS",
+        "Linux"
+      ],
+      "license": "BSD-3-Clause",
+      "license_kind": "open-source",
+      "pricing_model": "free",
+      "features": [
+        "Facets and value clustering",
+        "Recorded transformation history",
+        "Reconciliation services",
+        "Tabular import and export"
+      ],
+      "strengths": [
+        "Fits inspectable cleanup of inconsistent names and categorical fields",
+        "Recorded operations help repeat and audit a cleanup workflow"
+      ],
+      "limitations": [
+        "The local interface uses a browser; optional reconciliation and fetching can transmit selected data to services",
+        "Clustering proposes similar values and still needs human review before merging"
+      ],
+      "use_cases": [
+        "Messy spreadsheet cleanup",
+        "Entity reconciliation",
+        "Repeatable data normalization"
+      ],
+      "tags": [
+        "data-cleaning",
+        "messy spreadsheet cleanup",
+        "entity reconciliation",
+        "repeatable data normalization"
+      ],
+      "alternatives": [
+        "KNIME Analytics Platform",
+        "Orange"
+      ],
+      "recommendation": {
+        "pick_for": "Fits inspectable cleanup of inconsistent names and categorical fields",
+        "compare_when": "The local interface uses a browser; optional reconciliation and fetching can transmit selected data to services"
+      },
+      "aliases": [],
+      "sources": [
+        {
+          "url": "https://openrefine.org/",
+          "label": "Official documentation reviewed for this claim",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity",
+            "features"
+          ]
+        },
+        {
+          "url": "https://openrefine.org/download",
+          "label": "Official documentation reviewed for this claim",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "license",
+            "platforms",
+            "pricing",
+            "downloads",
+            "maintenance"
+          ]
+        }
+      ],
+      "evidence_status": "official-docs-reviewed",
+      "maintenance": {
+        "status": "active",
+        "checked_at": "2026-11-16",
+        "note": "The official download page dates version 3.10.0 to 26 February 2026.",
+        "source_url": "https://openrefine.org/download"
+      }
+    },
+    {
+      "id": "knime",
+      "name": "KNIME Analytics Platform",
+      "family": "science",
+      "category": "visual-data-analysis",
+      "summary": "Visual desktop workflows for data preparation, analysis and machine learning, with optional code and external integrations.",
+      "official_url": "https://www.knime.com/knime-analytics-platform/",
+      "download_url": "https://www.knime.com/downloads",
+      "repository_url": null,
+      "platforms": [
+        "Windows",
+        "macOS",
+        "Linux"
+      ],
+      "license": "GPL-3.0 with KNIME additional permissions; extensions and integrations may use separate terms",
+      "license_kind": "open-source",
+      "pricing_model": "free",
+      "features": [
+        "Node-based data workflows",
+        "Data transformation and modeling",
+        "Python and R integration",
+        "Reusable analysis components"
+      ],
+      "strengths": [
+        "Fits repeatable data pipelines for people who prefer a visual graph of processing steps",
+        "Combines desktop analysis with code where a node alone is insufficient"
+      ],
+      "limitations": [
+        "Free desktop licensing does not include every Hub, sharing or deployment service",
+        "Extensions, external databases and Python/R environments introduce version and license dependencies"
+      ],
+      "use_cases": [
+        "Visual ETL workflows",
+        "Repeatable analytical pipelines",
+        "Mixed code and graphical analysis"
+      ],
+      "tags": [
+        "visual-data-analysis",
+        "visual etl workflows",
+        "repeatable analytical pipelines",
+        "mixed code and graphical analysis"
+      ],
+      "alternatives": [
+        "Orange",
+        "OpenRefine",
+        "R"
+      ],
+      "recommendation": {
+        "pick_for": "Fits repeatable data pipelines for people who prefer a visual graph of processing steps",
+        "compare_when": "Free desktop licensing does not include every Hub, sharing or deployment service"
+      },
+      "aliases": [],
+      "sources": [
+        {
+          "url": "https://www.knime.com/knime-analytics-platform/",
+          "label": "Official documentation reviewed for this claim",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity",
+            "features",
+            "pricing"
+          ]
+        },
+        {
+          "url": "https://www.knime.com/downloads/full-license",
+          "label": "Official documentation reviewed for this claim",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "license"
+          ]
+        },
+        {
+          "url": "https://docs.knime.com/ap/latest/analytics_platform_installation_guide/index.html",
+          "label": "Official documentation reviewed for this claim",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "platforms",
+            "downloads"
+          ]
+        },
+        {
+          "url": "https://www.knime.com/downloads",
+          "label": "Official documentation reviewed for this claim",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "downloads"
+          ]
+        },
+        {
+          "url": "https://www.knime.com/knime-hub-pricing",
+          "label": "Official documentation reviewed for this claim",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "pricing"
+          ]
+        }
+      ],
+      "evidence_status": "official-docs-reviewed",
+      "maintenance": {
+        "status": "unverified",
+        "checked_at": "2026-11-16",
+        "note": "Official features and distribution routes were reviewed; a dated maintenance commitment was not established.",
+        "source_url": null
+      }
+    },
+    {
+      "id": "gretl",
+      "name": "Gretl",
+      "family": "science",
+      "category": "econometrics",
+      "summary": "Graphical and scriptable econometric analysis for regression, time series and panel data.",
+      "official_url": "https://gretl.sourceforge.net/",
+      "download_url": "https://gretl.sourceforge.net/",
+      "repository_url": null,
+      "platforms": [
+        "Windows",
+        "macOS",
+        "Linux"
+      ],
+      "license": "GNU GPL; exact version should be checked in the installed source/package",
+      "license_kind": "open-source",
+      "pricing_model": "free",
+      "features": [
+        "Regression and likelihood estimation",
+        "Time-series and panel-data methods",
+        "Hansl scripting and command-line interface",
+        "Statistical data import"
+      ],
+      "strengths": [
+        "Fits econometrics teaching and inspectable applied models with a graphical entry point",
+        "Hansl scripts let analysts preserve and rerun the modeling steps"
+      ],
+      "limitations": [
+        "Its model selection and diagnostics require statistical judgment",
+        "Confirm the exact GPL version and package dependencies for redistribution"
+      ],
+      "use_cases": [
+        "Econometrics teaching",
+        "Panel-data analysis",
+        "Scripted time-series models"
+      ],
+      "tags": [
+        "econometrics",
+        "econometrics teaching",
+        "panel-data analysis",
+        "scripted time-series models"
+      ],
+      "alternatives": [
+        "R",
+        "JASP",
+        "PSPP"
+      ],
+      "recommendation": {
+        "pick_for": "Fits econometrics teaching and inspectable applied models with a graphical entry point",
+        "compare_when": "Its model selection and diagnostics require statistical judgment"
+      },
+      "aliases": [
+        "GNU Regression Econometrics and Time-series Library"
+      ],
+      "sources": [
+        {
+          "url": "https://gretl.sourceforge.net/",
+          "label": "Official documentation reviewed for this claim",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity",
+            "features",
+            "license",
+            "pricing",
+            "platforms",
+            "downloads",
+            "maintenance"
+          ]
+        }
+      ],
+      "evidence_status": "official-docs-reviewed",
+      "maintenance": {
+        "status": "active",
+        "checked_at": "2026-11-16",
+        "note": "The official project page dates release 2026d to 29 October 2026.",
+        "source_url": "https://gretl.sourceforge.net/"
+      }
+    },
+    {
+      "id": "originpro",
+      "name": "OriginPro",
+      "family": "science",
+      "category": "curve-fitting",
+      "summary": "Commercial Windows data analysis and scientific graphing with curve fitting, statistical tools and reusable analysis templates.",
+      "official_url": "https://www.originlab.com/index.aspx?go=Products/Origin",
+      "download_url": "https://www.originlab.com/try",
+      "repository_url": null,
+      "platforms": [
+        "Windows"
+      ],
+      "license": "Proprietary OriginLab software license; edition, seat and subscription/perpetual terms apply",
+      "license_kind": "proprietary",
+      "pricing_model": "paid",
+      "features": [
+        "Curve and surface fitting",
+        "Peak analysis and statistics",
+        "Publication graph customization",
+        "Templates, recalculation and Python/R integration"
+      ],
+      "strengths": [
+        "Fits laboratories that need graphical fitting and publication plots within one supported desktop product",
+        "Templates and recalculation can standardize repeated analyses"
+      ],
+      "limitations": [
+        "Native current releases require 64-bit Windows; using a Mac requires a separate Windows environment",
+        "Origin and OriginPro have different analysis features; confirm the exact edition and license scope",
+        "A fit is only as defensible as its model, constraints and residual analysis"
+      ],
+      "use_cases": [
+        "Scientific curve fitting",
+        "Repeated laboratory reports",
+        "Peak and surface analysis"
+      ],
+      "tags": [
+        "curve-fitting",
+        "scientific curve fitting",
+        "repeated laboratory reports",
+        "peak and surface analysis"
+      ],
+      "alternatives": [
+        "Fityk",
+        "LabPlot",
+        "SciDAVis"
+      ],
+      "recommendation": {
+        "pick_for": "Fits laboratories that need graphical fitting and publication plots within one supported desktop product",
+        "compare_when": "Native current releases require 64-bit Windows; using a Mac requires a separate Windows environment"
+      },
+      "aliases": [],
+      "sources": [
+        {
+          "url": "https://www.originlab.com/index.aspx?go=Products/Origin",
+          "label": "Official documentation reviewed for this claim",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity",
+            "features"
+          ]
+        },
+        {
+          "url": "https://www.originlab.com/try",
+          "label": "Official documentation reviewed for this claim",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "downloads",
+            "pricing"
+          ]
+        },
+        {
+          "url": "https://www.originlab.com/Index.aspx?go=PURCHASE&pid=1775",
+          "label": "Official documentation reviewed for this claim",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "license"
+          ]
+        },
+        {
+          "url": "https://www.originlab.com/index.aspx?go=Support/DocumentationAndHelpCenter/Installation/SystemRequirements",
+          "label": "Official documentation reviewed for this claim",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "platforms"
+          ]
+        }
+      ],
+      "evidence_status": "official-docs-reviewed",
+      "maintenance": {
+        "status": "unverified",
+        "checked_at": "2026-11-16",
+        "note": "Official features and distribution routes were reviewed; a dated maintenance commitment was not established.",
+        "source_url": null
+      }
+    },
+    {
+      "id": "astrodmx-capture",
+      "name": "AstroDMx Capture",
+      "family": "science",
+      "category": "astronomical-capture",
+      "summary": "Astronomical camera capture across supported desktop platforms, with camera-specific controls and image/video acquisition.",
+      "official_url": "https://www.astrodmx-capture.org.uk/",
+      "download_url": "https://www.astrodmx-capture.org.uk/astrodmx-capture-downloads/",
+      "repository_url": null,
+      "platforms": [
+        "Windows",
+        "macOS",
+        "Linux"
+      ],
+      "license": "Proprietary license; redistribution, repackaging and sale are restricted",
+      "license_kind": "proprietary",
+      "pricing_model": "free",
+      "features": [
+        "Astronomical image and video capture",
+        "Camera controls and acquisition settings",
+        "Multiple desktop processor builds"
+      ],
+      "strengths": [
+        "Fits camera acquisition when the specific camera SDK is supported on the chosen operating system",
+        "Offers native Linux and Mac routes in addition to Windows"
+      ],
+      "limitations": [
+        "ChromeOS development and support ended; an old ChromeOS download is not current compatibility",
+        "Camera model and driver support varies by operating system and processor",
+        "Capture does not replace calibration, stacking and image processing"
+      ],
+      "use_cases": [
+        "Planetary video capture",
+        "Linux astronomy acquisition",
+        "Multi-platform camera control"
+      ],
+      "tags": [
+        "astronomical-capture",
+        "planetary video capture",
+        "linux astronomy acquisition",
+        "multi-platform camera control"
+      ],
+      "alternatives": [
+        "FireCapture",
+        "SharpCap",
+        "N.I.N.A."
+      ],
+      "recommendation": {
+        "pick_for": "Fits camera acquisition when the specific camera SDK is supported on the chosen operating system",
+        "compare_when": "ChromeOS development and support ended; an old ChromeOS download is not current compatibility"
+      },
+      "aliases": [],
+      "sources": [
+        {
+          "url": "https://www.astrodmx-capture.org.uk/",
+          "label": "Official documentation reviewed for this claim",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity",
+            "features"
+          ]
+        },
+        {
+          "url": "https://www.astrodmx-capture.org.uk/documentation-main-functionality/",
+          "label": "Official documentation reviewed for this claim",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "features"
+          ]
+        },
+        {
+          "url": "https://www.astrodmx-capture.org.uk/astrodmx-capture-downloads/",
+          "label": "Official documentation reviewed for this claim",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "platforms",
+            "downloads",
+            "license",
+            "pricing",
+            "maintenance"
+          ]
+        }
+      ],
+      "evidence_status": "official-docs-reviewed",
+      "maintenance": {
+        "status": "unverified",
+        "checked_at": "2026-11-16",
+        "note": "Official features and distribution routes were reviewed; a dated maintenance commitment was not established.",
+        "source_url": null
+      }
+    },
+    {
+      "id": "firecapture",
+      "name": "FireCapture",
+      "family": "science",
+      "category": "astronomical-capture",
+      "summary": "Astronomical video acquisition focused on high-frame-rate planetary, lunar and solar capture with supported cameras.",
+      "official_url": "https://firecapture.de/",
+      "download_url": "https://firecapture.de/",
+      "repository_url": null,
+      "platforms": [
+        "Windows",
+        "macOS",
+        "Linux"
+      ],
+      "license": "Proprietary private-use license; commercial use and unauthorized redistribution are prohibited",
+      "license_kind": "proprietary",
+      "pricing_model": "free",
+      "features": [
+        "Camera acquisition controls",
+        "Planetary capture workflow",
+        "Camera and filter support",
+        "Plugin interfaces"
+      ],
+      "strengths": [
+        "Fits private planetary capture when the camera and platform appear in the support matrix",
+        "Offers several desktop and processor packages for supported devices"
+      ],
+      "limitations": [
+        "The license expressly prohibits commercial use; no commercial entitlement was established in this review",
+        "Support for a camera on Windows does not imply support on Mac or Linux",
+        "Capture quality still depends on optics, exposure, seeing and later processing"
+      ],
+      "use_cases": [
+        "Private planetary imaging",
+        "Lunar video acquisition",
+        "Supported astronomy camera control"
+      ],
+      "tags": [
+        "astronomical-capture",
+        "private planetary imaging",
+        "lunar video acquisition",
+        "supported astronomy camera control"
+      ],
+      "alternatives": [
+        "AstroDMx Capture",
+        "SharpCap"
+      ],
+      "recommendation": {
+        "pick_for": "Fits private planetary capture when the camera and platform appear in the support matrix",
+        "compare_when": "The license expressly prohibits commercial use; no commercial entitlement was established in this review"
+      },
+      "aliases": [],
+      "sources": [
+        {
+          "url": "https://firecapture.de/",
+          "label": "Official documentation reviewed for this claim",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity",
+            "features",
+            "platforms",
+            "downloads",
+            "pricing"
+          ]
+        },
+        {
+          "url": "https://firecapture.de/license.html",
+          "label": "Official documentation reviewed for this claim",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "license"
+          ]
+        }
+      ],
+      "evidence_status": "official-docs-reviewed",
+      "maintenance": {
+        "status": "unverified",
+        "checked_at": "2026-11-16",
+        "note": "Official features and distribution routes were reviewed; a dated maintenance commitment was not established.",
+        "source_url": null
+      }
+    },
+    {
+      "id": "sharpcap",
+      "name": "SharpCap",
+      "family": "science",
+      "category": "astronomical-capture",
+      "summary": "Windows astronomical imaging with camera capture and live stacking; selected alignment and processing functions require SharpCap Pro.",
+      "official_url": "https://www.sharpcap.co.uk/",
+      "download_url": "https://downloads.sharpcap.co.uk/",
+      "repository_url": null,
+      "platforms": [
+        "Windows"
+      ],
+      "license": "Proprietary free edition and paid personal Pro license; organizational site terms differ",
+      "license_kind": "proprietary",
+      "pricing_model": "freemium",
+      "features": [
+        "Astronomical camera acquisition",
+        "Live stacking",
+        "Camera testing modes",
+        "Optional Pro alignment and processing"
+      ],
+      "strengths": [
+        "Fits Windows electronically assisted astronomy and live image accumulation",
+        "Free functionality and built-in test cameras allow a workflow check before a Pro purchase"
+      ],
+      "limitations": [
+        "Some polar-alignment and live-processing functions require an annual Pro license",
+        "Testing Pro functions with a real camera without a license disables saving for that session",
+        "Personal license scope differs from multi-computer educational or commercial use"
+      ],
+      "use_cases": [
+        "Live-stacked sky viewing",
+        "Windows astronomy capture",
+        "Polar-alignment workflow"
+      ],
+      "tags": [
+        "astronomical-capture",
+        "live-stacked sky viewing",
+        "windows astronomy capture",
+        "polar-alignment workflow"
+      ],
+      "alternatives": [
+        "FireCapture",
+        "AstroDMx Capture",
+        "N.I.N.A."
+      ],
+      "recommendation": {
+        "pick_for": "Fits Windows electronically assisted astronomy and live image accumulation",
+        "compare_when": "Some polar-alignment and live-processing functions require an annual Pro license"
+      },
+      "aliases": [],
+      "sources": [
+        {
+          "url": "https://www.sharpcap.co.uk/",
+          "label": "Official documentation reviewed for this claim",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity",
+            "features"
+          ]
+        },
+        {
+          "url": "https://www.sharpcap.co.uk/feature-comparison",
+          "label": "Official documentation reviewed for this claim",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "features",
+            "pricing"
+          ]
+        },
+        {
+          "url": "https://downloads.sharpcap.co.uk/",
+          "label": "Official documentation reviewed for this claim",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "downloads",
+            "platforms"
+          ]
+        },
+        {
+          "url": "https://www.sharpcap.co.uk/sharpcap/sharpcap-pro/premium",
+          "label": "Official documentation reviewed for this claim",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "license",
+            "pricing",
+            "features"
+          ]
+        },
+        {
+          "url": "https://www.sharpcap.co.uk/sharpcap/downloads/",
+          "label": "Official documentation reviewed for this claim",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "maintenance",
+            "platforms"
+          ]
+        }
+      ],
+      "evidence_status": "official-docs-reviewed",
+      "maintenance": {
+        "status": "active",
+        "checked_at": "2026-11-16",
+        "note": "The official downloads page lists version 4.1.14325.0 on 30 October 2026.",
+        "source_url": "https://www.sharpcap.co.uk/sharpcap/downloads/"
+      }
+    },
+    {
+      "id": "peartree",
+      "name": "PearTree",
+      "family": "science",
+      "category": "phylogenetics",
+      "summary": "Phylogenetic tree viewer and FigTree successor with local browser operation and native desktop packages.",
+      "official_url": "https://peartree.live/",
+      "download_url": "https://github.com/artic-network/peartree/releases",
+      "repository_url": "https://github.com/artic-network/peartree",
+      "platforms": [
+        "Windows",
+        "macOS",
+        "Linux",
+        "Web"
+      ],
+      "license": "MIT",
+      "license_kind": "open-source",
+      "pricing_model": "free",
+      "features": [
+        "Newick and NEXUS tree viewing",
+        "Annotation and metadata mapping",
+        "Subtree exploration and temporal views",
+        "SVG and PNG export"
+      ],
+      "strengths": [
+        "A current starting point for FigTree-style tree presentation and annotation",
+        "Desktop packages and local browser processing provide several ways to inspect a tree"
+      ],
+      "limitations": [
+        "It displays and analyzes supplied trees; it does not replace sequence alignment or phylogenetic inference",
+        "Time-tree interpretation and root-to-tip patterns depend on valid metadata and the underlying model"
+      ],
+      "use_cases": [
+        "Phylogenetic tree figures",
+        "FigTree workflow migration",
+        "Annotated tree exploration"
+      ],
+      "tags": [
+        "phylogenetics",
+        "phylogenetic tree figures",
+        "figtree workflow migration",
+        "annotated tree exploration"
+      ],
+      "alternatives": [
+        "FigTree",
+        "MEGA",
+        "Jalview"
+      ],
+      "recommendation": {
+        "pick_for": "A current starting point for FigTree-style tree presentation and annotation",
+        "compare_when": "It displays and analyzes supplied trees; it does not replace sequence alignment or phylogenetic inference"
+      },
+      "aliases": [],
+      "sources": [
+        {
+          "url": "https://github.com/artic-network/peartree",
+          "label": "Official documentation reviewed for this claim",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity",
+            "features",
+            "license",
+            "platforms"
+          ]
+        },
+        {
+          "url": "https://beast.community/peartree_tutorial.html",
+          "label": "Official documentation reviewed for this claim",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "features"
+          ]
+        },
+        {
+          "url": "https://github.com/artic-network/peartree/releases",
+          "label": "Official documentation reviewed for this claim",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "downloads",
+            "platforms",
+            "maintenance",
+            "pricing"
+          ]
+        }
+      ],
+      "evidence_status": "official-docs-reviewed",
+      "maintenance": {
+        "status": "active",
+        "checked_at": "2026-11-16",
+        "note": "The upstream release feed lists version 1.3.2 on 13 October 2026 with desktop packages.",
+        "source_url": "https://github.com/artic-network/peartree/releases"
+      },
+      "pricing_notes": "The reviewed public GitHub desktop packages and local browser app have no purchase requirement; paid support or third-party distribution is not assessed."
+    },
+    {
+      "id": "cantabile",
+      "name": "Cantabile",
+      "family": "creative",
+      "category": "audio-plugin-hosts",
+      "summary": "Windows host for playing audio instruments and effects live, with free Lite and paid editions for performance management.",
+      "official_url": "https://www.cantabilesoftware.com/",
+      "download_url": "https://www.cantabilesoftware.com/download/",
+      "repository_url": null,
+      "platforms": [
+        "Windows"
+      ],
+      "license": "Proprietary Topten Software license",
+      "license_kind": "proprietary",
+      "pricing_model": "freemium",
+      "features": [
+        "VST2 and VST3 hosting",
+        "Audio and MIDI routing",
+        "Multi-channel audio",
+        "Paid set lists, recording and performance states"
+      ],
+      "strengths": [
+        "Fits a Windows live-performance rig built around instrument and effect plugins",
+        "The free Lite edition permits basic hosting before selecting paid performance features"
+      ],
+      "limitations": [
+        "Current releases require 64-bit Windows 10 Anniversary Update or Windows 11",
+        "Set lists, advanced routing and state management differ across Lite, Solo and Performer",
+        "Latency and reliability depend on the audio driver, buffer and plugins; test the complete set before a performance"
+      ],
+      "use_cases": [
+        "Live VST instruments",
+        "Keyboard performance rigs",
+        "Audio plugin routing"
+      ],
+      "tags": [
+        "audio-plugin-hosts",
+        "live vst instruments",
+        "keyboard performance rigs",
+        "audio plugin routing"
+      ],
+      "alternatives": [
+        "Carla",
+        "Element (Kushview)"
+      ],
+      "recommendation": {
+        "pick_for": "Fits a Windows live-performance rig built around instrument and effect plugins",
+        "compare_when": "Current releases require 64-bit Windows 10 Anniversary Update or Windows 11"
+      },
+      "aliases": [],
+      "sources": [
+        {
+          "url": "https://www.cantabilesoftware.com/compare",
+          "label": "Official documentation reviewed for this claim",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity",
+            "features",
+            "platforms",
+            "pricing"
+          ]
+        },
+        {
+          "url": "https://www.cantabilesoftware.com/download/",
+          "label": "Official documentation reviewed for this claim",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "downloads"
+          ]
+        },
+        {
+          "url": "https://www.cantabilesoftware.com/license",
+          "label": "Official documentation reviewed for this claim",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "license"
+          ]
+        }
+      ],
+      "evidence_status": "official-docs-reviewed",
+      "maintenance": {
+        "status": "unverified",
+        "checked_at": "2026-11-16",
+        "note": "Official features and distribution routes were reviewed; a dated maintenance commitment was not established.",
+        "source_url": null
+      }
+    },
+    {
+      "id": "element",
+      "name": "Element (Kushview)",
+      "family": "creative",
+      "category": "audio-plugin-hosts",
+      "summary": "Open-source modular audio plugin host for routing instruments and effects on desktop systems.",
+      "official_url": "https://kushview.net/element/",
+      "download_url": "https://kushview.net/element/download/",
+      "repository_url": "https://github.com/kushview/element",
+      "platforms": [
+        "Windows",
+        "macOS",
+        "Linux"
+      ],
+      "license": "GPL-3.0; hosted plugins and optional add-ons have separate terms",
+      "license_kind": "open-source",
+      "pricing_model": "mixed",
+      "features": [
+        "Graph-style audio and MIDI routing",
+        "VST, VST3, AU, LV2 and CLAP hosting where supported",
+        "Standalone modular host",
+        "Saved plugin graphs"
+      ],
+      "strengths": [
+        "Fits reusable modular routing without needing a full recording workstation",
+        "A fully functional free public build is available alongside paid update channels"
+      ],
+      "limitations": [
+        "The free public channel trails supporter/nightly updates by a version or two; paid options change delivery timing, not a documented core feature lock",
+        "Plugin format support varies by OS and plugin architecture; AU is a Mac format",
+        "Installed plugins retain their own licensing and system requirements"
+      ],
+      "use_cases": [
+        "Modular plugin racks",
+        "Cross-platform audio routing",
+        "Reusable effect chains"
+      ],
+      "tags": [
+        "audio-plugin-hosts",
+        "modular plugin racks",
+        "cross-platform audio routing",
+        "reusable effect chains"
+      ],
+      "alternatives": [
+        "Carla",
+        "Cantabile"
+      ],
+      "recommendation": {
+        "pick_for": "Fits reusable modular routing without needing a full recording workstation",
+        "compare_when": "The free public channel trails supporter/nightly updates by a version or two; paid options change delivery timing, not a documented core feature lock"
+      },
+      "aliases": [
+        "Kushview Element"
+      ],
+      "sources": [
+        {
+          "url": "https://kushview.net/element/",
+          "label": "Official documentation reviewed for this claim",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity",
+            "features"
+          ]
+        },
+        {
+          "url": "https://kushview.net/element/download/",
+          "label": "Official documentation reviewed for this claim",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "features",
+            "platforms",
+            "downloads",
+            "pricing"
+          ]
+        },
+        {
+          "url": "https://kushview.net/article/element-memberships/",
+          "label": "Official documentation reviewed for this claim",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "license",
+            "pricing"
+          ]
+        },
+        {
+          "url": "https://github.com/kushview/element",
+          "label": "Official documentation reviewed for this claim",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "features",
+            "platforms",
+            "license"
+          ]
+        }
+      ],
+      "evidence_status": "official-docs-reviewed",
+      "maintenance": {
+        "status": "unverified",
+        "checked_at": "2026-11-16",
+        "note": "Official features and distribution routes were reviewed; a dated maintenance commitment was not established.",
+        "source_url": null
+      }
+    },
+    {
+      "id": "xld",
+      "name": "X Lossless Decoder",
+      "family": "creative",
+      "category": "audio-conversion",
+      "summary": "Mac audio conversion and CD extraction with cue-sheet splitting, multiple codecs and command-line use.",
+      "official_url": "https://tmkk.undo.jp/xld/index_e.html",
+      "download_url": "https://sourceforge.net/projects/xld/files/",
+      "repository_url": "https://sourceforge.net/p/xld/code/",
+      "platforms": [
+        "macOS"
+      ],
+      "license": "License unresolved: maintainer project metadata lists OSL-3.0; installed-source and bundled-codec terms need reconciliation",
+      "license_kind": "unknown",
+      "pricing_model": "free",
+      "features": [
+        "Lossless audio decoding and conversion",
+        "Cue-sheet track splitting",
+        "Audio CD extraction",
+        "GUI and command-line operation"
+      ],
+      "strengths": [
+        "Fits Mac lossless-library conversion and cue-based album splitting",
+        "Offers a focused audio workflow without requiring a general multimedia command line"
+      ],
+      "limitations": [
+        "macOS only; some codecs and plugins need additional dependencies",
+        "The project license metadata was observed, but the complete installed-source and codec license set was not independently verified",
+        "Changing lossless containers preserves source quality only when processing settings do not alter the samples"
+      ],
+      "use_cases": [
+        "Mac lossless audio conversion",
+        "Cue-sheet album splitting",
+        "Audio CD extraction"
+      ],
+      "tags": [
+        "audio-conversion",
+        "mac lossless audio conversion",
+        "cue-sheet album splitting",
+        "audio cd extraction"
+      ],
+      "alternatives": [
+        "fre:ac",
+        "dBpoweramp Music Converter",
+        "FFmpeg"
+      ],
+      "recommendation": {
+        "pick_for": "Fits Mac lossless-library conversion and cue-based album splitting",
+        "compare_when": "macOS only; some codecs and plugins need additional dependencies"
+      },
+      "aliases": [
+        "XLD"
+      ],
+      "sources": [
+        {
+          "url": "https://tmkk.undo.jp/xld/index_e.html",
+          "label": "Official documentation reviewed for this claim",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity",
+            "features",
+            "platforms",
+            "downloads",
+            "pricing"
+          ]
+        },
+        {
+          "url": "https://sourceforge.net/projects/xld/",
+          "label": "Official documentation reviewed for this claim",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "license",
+            "downloads"
+          ]
+        },
+        {
+          "url": "https://sourceforge.net/p/xld/code/HEAD/tree/",
+          "label": "Official documentation reviewed for this claim",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity"
+          ]
+        },
+        {
+          "url": "https://sourceforge.net/projects/xld/files/",
+          "label": "Official documentation reviewed for this claim",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "downloads"
+          ]
+        }
+      ],
+      "evidence_status": "official-docs-reviewed",
+      "maintenance": {
+        "status": "unverified",
+        "checked_at": "2026-11-16",
+        "note": "Official features and distribution routes were reviewed; a dated maintenance commitment was not established.",
+        "source_url": null
+      }
+    },
+    {
+      "id": "dbpoweramp",
+      "name": "dBpoweramp Music Converter",
+      "family": "creative",
+      "category": "audio-conversion",
+      "summary": "Commercial Windows and Mac audio conversion and CD-ripping suite with batch processing, metadata tools and DSP options.",
+      "official_url": "https://www.dbpoweramp.com/dmc",
+      "download_url": "https://www.dbpoweramp.com/download",
+      "repository_url": null,
+      "platforms": [
+        "Windows",
+        "macOS"
+      ],
+      "license": "Commercial software license; complete EULA was not independently retrieved",
+      "license_kind": "unknown",
+      "pricing_model": "paid",
+      "features": [
+        "Batch audio conversion",
+        "CD Ripper included",
+        "Metadata and file-manager integration",
+        "Optional DSP during conversion"
+      ],
+      "strengths": [
+        "Fits GUI-based library conversion and CD extraction with repeatable presets",
+        "Folder filters and file-manager integration support routine collection maintenance"
+      ],
+      "limitations": [
+        "A 21-day trial is offered; ongoing paid edition and platform entitlements need checking at purchase",
+        "DSP normalization, resampling and lossy encoding can alter samples or quality; retain archival originals",
+        "Some extra codecs and automation routes are Windows-only"
+      ],
+      "use_cases": [
+        "Batch audio-library conversion",
+        "CD collection digitization",
+        "Metadata-oriented conversion"
+      ],
+      "tags": [
+        "audio-conversion",
+        "batch audio-library conversion",
+        "cd collection digitization",
+        "metadata-oriented conversion"
+      ],
+      "alternatives": [
+        "fre:ac",
+        "X Lossless Decoder",
+        "FFmpeg"
+      ],
+      "recommendation": {
+        "pick_for": "Fits GUI-based library conversion and CD extraction with repeatable presets",
+        "compare_when": "A 21-day trial is offered; ongoing paid edition and platform entitlements need checking at purchase"
+      },
+      "aliases": [],
+      "sources": [
+        {
+          "url": "https://www.dbpoweramp.com/dmc",
+          "label": "Official documentation reviewed for this claim",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity",
+            "features",
+            "platforms",
+            "downloads",
+            "pricing"
+          ]
+        },
+        {
+          "url": "https://www.dbpoweramp.com/download",
+          "label": "Official documentation reviewed for this claim",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "downloads"
+          ]
+        },
+        {
+          "url": "https://www.dbpoweramp.com/purchase",
+          "label": "Official documentation reviewed for this claim",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "pricing"
+          ]
+        }
+      ],
+      "evidence_status": "official-docs-reviewed",
+      "maintenance": {
+        "status": "unverified",
+        "checked_at": "2026-11-16",
+        "note": "Official features and distribution routes were reviewed; a dated maintenance commitment was not established.",
+        "source_url": null
+      }
+    },
+    {
+      "id": "elan",
+      "name": "ELAN",
+      "family": "science",
+      "category": "phonetics-analysis",
+      "summary": "Audio and video annotation tool with synchronized, hierarchical tiers for linguistic and multimodal research.",
+      "official_url": "https://archive.mpi.nl/tla/elan",
+      "download_url": "https://archive.mpi.nl/tla/elan/download",
+      "repository_url": null,
+      "platforms": [
+        "Windows",
+        "macOS",
+        "Linux"
+      ],
+      "license": "GPL-3.0",
+      "license_kind": "open-source",
+      "pricing_model": "free",
+      "features": [
+        "Time-aligned annotation tiers",
+        "Hierarchical annotations and controlled vocabularies",
+        "Synchronized video views",
+        "Unicode EAF XML documents"
+      ],
+      "strengths": [
+        "Fits language, gesture and interaction annotation across synchronized media",
+        "Tier relationships and controlled vocabularies support structured annotation projects"
+      ],
+      "limitations": [
+        "Media playback depends on OS frameworks and codec support; verify the recording format before annotating a corpus",
+        "It complements acoustic measurement software rather than replacing pitch, formant or spectral analysis",
+        "The current packages bundle Java and have platform-specific 64-bit requirements"
+      ],
+      "use_cases": [
+        "Language corpus annotation",
+        "Gesture and speech alignment",
+        "Multimodal research coding"
+      ],
+      "tags": [
+        "phonetics-analysis",
+        "language corpus annotation",
+        "gesture and speech alignment",
+        "multimodal research coding"
+      ],
+      "alternatives": [
+        "Praat",
+        "Sonic Visualiser"
+      ],
+      "recommendation": {
+        "pick_for": "Fits language, gesture and interaction annotation across synchronized media",
+        "compare_when": "Media playback depends on OS frameworks and codec support; verify the recording format before annotating a corpus"
+      },
+      "aliases": [],
+      "sources": [
+        {
+          "url": "https://archive.mpi.nl/tla/elan",
+          "label": "Official documentation reviewed for this claim",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity",
+            "features",
+            "platforms",
+            "license"
+          ]
+        },
+        {
+          "url": "https://archive.mpi.nl/tla/elan/download",
+          "label": "Official documentation reviewed for this claim",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "downloads",
+            "platforms",
+            "pricing"
+          ]
+        }
+      ],
+      "evidence_status": "official-docs-reviewed",
+      "maintenance": {
+        "status": "unverified",
+        "checked_at": "2026-11-16",
+        "note": "Official features and distribution routes were reviewed; a dated maintenance commitment was not established.",
+        "source_url": null
+      }
+    },
+    {
+      "id": "google-earth-pro",
+      "name": "Google Earth Pro",
+      "family": "science",
+      "category": "virtual-globes",
+      "summary": "Desktop globe and imagery viewer with GIS import/export and historical imagery; Google has announced an end to new desktop downloads in June 2027.",
+      "official_url": "https://www.google.com/earth/desktop/",
+      "download_url": "https://support.google.com/earth/answer/168344?hl=en",
+      "repository_url": null,
+      "platforms": [
+        "Windows",
+        "macOS",
+        "Linux"
+      ],
+      "license": "Proprietary Google terms and Google Earth additional terms; imagery permissions and attribution apply",
+      "license_kind": "proprietary",
+      "pricing_model": "free",
+      "features": [
+        "Globe and historical imagery viewing",
+        "KML and map-layer creation",
+        "GIS data import/export",
+        "Desktop map annotation"
+      ],
+      "strengths": [
+        "Fits visual geographic context and inspection of KML overlays",
+        "Available desktop packages include Windows, Mac and Linux"
+      ],
+      "limitations": [
+        "Google says desktop downloads end on 25 June 2027; plan future access and an alternative workflow",
+        "Imagery and map content have attribution, redistribution and bulk-download restrictions",
+        "Visible imagery may be outdated or inaccurate and is not survey-grade evidence"
+      ],
+      "use_cases": [
+        "KML overlay inspection",
+        "Historical imagery exploration",
+        "Geographic presentation context"
+      ],
+      "tags": [
+        "virtual-globes",
+        "kml overlay inspection",
+        "historical imagery exploration",
+        "geographic presentation context"
+      ],
+      "alternatives": [
+        "Marble",
+        "QGIS"
+      ],
+      "recommendation": {
+        "pick_for": "Fits visual geographic context and inspection of KML overlays",
+        "compare_when": "Google says desktop downloads end on 25 June 2027; plan future access and an alternative workflow"
+      },
+      "aliases": [],
+      "sources": [
+        {
+          "url": "https://earth.google.com/intl/en_us/versions/",
+          "label": "Official documentation reviewed for this claim",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity",
+            "features",
+            "pricing",
+            "platforms"
+          ]
+        },
+        {
+          "url": "https://www.google.com/earth/desktop/",
+          "label": "Official documentation reviewed for this claim",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "features"
+          ]
+        },
+        {
+          "url": "https://support.google.com/earth/answer/168344?hl=en",
+          "label": "Official documentation reviewed for this claim",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "downloads",
+            "platforms",
+            "maintenance"
+          ]
+        },
+        {
+          "url": "https://www.google.com/help/terms_maps-earth/",
+          "label": "Official documentation reviewed for this claim",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "license"
+          ]
+        }
+      ],
+      "evidence_status": "official-docs-reviewed",
+      "maintenance": {
+        "status": "unverified",
+        "checked_at": "2026-11-16",
+        "note": "Current desktop installers remain available, but Google has announced that downloads end on 25 June 2027; ongoing desktop development is not assumed.",
+        "source_url": "https://support.google.com/earth/answer/168344?hl=en"
+      }
+    },
+    {
+      "id": "textaloud",
+      "name": "TextAloud",
+      "family": "productivity",
+      "category": "speech-synthesis",
+      "summary": "Windows text-to-speech reader for documents, selected text and audio-file creation, with optional separately licensed voices.",
+      "official_url": "https://nextup.com/TextAloud/",
+      "download_url": "https://nextup.com/download.html",
+      "repository_url": null,
+      "platforms": [
+        "Windows"
+      ],
+      "license": "Commercial single-user software license; optional voice and generated-audio rights are separate",
+      "license_kind": "proprietary",
+      "pricing_model": "paid",
+      "features": [
+        "Document and selected-text reading",
+        "Word highlighting",
+        "Audio-file and batch conversion",
+        "Optional premium voices"
+      ],
+      "strengths": [
+        "Fits listening to documents and proofreading text on Windows",
+        "Can use the resident Windows voice before buying optional voices"
+      ],
+      "limitations": [
+        "The application purchase does not grant unrestricted rights to every voice or generated audio file",
+        "The cited Acapela offering allows personal use of generated audio and works only in NextUp products; commercial use needs separate terms",
+        "Browser and Word extensions should be checked against the current host versions"
+      ],
+      "use_cases": [
+        "Listening to documents",
+        "Read-aloud proofreading",
+        "Personal spoken reading files"
+      ],
+      "tags": [
+        "speech-synthesis",
+        "listening to documents",
+        "read-aloud proofreading",
+        "personal spoken reading files"
+      ],
+      "alternatives": [
+        "Balabolka",
+        "Speech Note"
+      ],
+      "recommendation": {
+        "pick_for": "Fits listening to documents and proofreading text on Windows",
+        "compare_when": "The application purchase does not grant unrestricted rights to every voice or generated audio file"
+      },
+      "aliases": [],
+      "sources": [
+        {
+          "url": "https://nextup.com/TextAloud/",
+          "label": "Official documentation reviewed for this claim",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity",
+            "features",
+            "platforms"
+          ]
+        },
+        {
+          "url": "https://nextup.com/download.html",
+          "label": "Official documentation reviewed for this claim",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "downloads"
+          ]
+        },
+        {
+          "url": "https://nextup.com/TextAloud/pricing.html",
+          "label": "Official documentation reviewed for this claim",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "license",
+            "pricing"
+          ]
+        },
+        {
+          "url": "https://nextup.com/acapela/",
+          "label": "Official documentation reviewed for this claim",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "license"
+          ]
+        }
+      ],
+      "evidence_status": "official-docs-reviewed",
+      "maintenance": {
+        "status": "unverified",
+        "checked_at": "2026-11-16",
+        "note": "Official features and distribution routes were reviewed; a dated maintenance commitment was not established.",
+        "source_url": null
+      }
+    },
+    {
+      "id": "tracker",
+      "name": "Tracker",
+      "family": "science",
+      "category": "video-motion-analysis",
+      "summary": "Physics-oriented video analysis that measures motion and overlays kinematic or dynamic models on recorded footage.",
+      "official_url": "https://opensourcephysics.github.io/tracker-website/",
+      "download_url": "https://opensourcephysics.github.io/tracker-website/",
+      "repository_url": "https://github.com/OpenSourcePhysics/tracker",
+      "platforms": [
+        "Windows",
+        "macOS",
+        "Linux"
+      ],
+      "license": "GPL-3.0",
+      "license_kind": "open-source",
+      "pricing_model": "free",
+      "features": [
+        "Manual and automatic motion tracking",
+        "Calibrated coordinates and vector overlays",
+        "Particle-model comparison",
+        "Curve fitting and data export"
+      ],
+      "strengths": [
+        "Fits physics teaching and reproducible motion measurements from video",
+        "Model overlays let students compare a calculated path with observed motion"
+      ],
+      "limitations": [
+        "Calibration, camera perspective, motion blur and timing affect every derived measurement",
+        "Some codecs need conversion; the documentation recommends a constant-frame-rate conversion route for unsupported video",
+        "Desktop installer versions differ across platforms, so check the package and upgrade route"
+      ],
+      "use_cases": [
+        "Video physics experiments",
+        "Motion tracking education",
+        "Model-to-observation comparisons"
+      ],
+      "tags": [
+        "video-motion-analysis",
+        "video physics experiments",
+        "motion tracking education",
+        "model-to-observation comparisons"
+      ],
+      "alternatives": [
+        "Fiji",
+        "LabPlot"
+      ],
+      "recommendation": {
+        "pick_for": "Fits physics teaching and reproducible motion measurements from video",
+        "compare_when": "Calibration, camera perspective, motion blur and timing affect every derived measurement"
+      },
+      "aliases": [],
+      "sources": [
+        {
+          "url": "https://opensourcephysics.github.io/tracker-website/",
+          "label": "Official documentation reviewed for this claim",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity",
+            "features",
+            "platforms",
+            "license",
+            "pricing",
+            "downloads"
+          ]
+        },
+        {
+          "url": "https://github.com/OpenSourcePhysics/tracker",
+          "label": "Official documentation reviewed for this claim",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity",
+            "license"
+          ]
+        }
+      ],
+      "evidence_status": "official-docs-reviewed",
+      "maintenance": {
+        "status": "unverified",
+        "checked_at": "2026-11-16",
+        "note": "Official features and distribution routes were reviewed; a dated maintenance commitment was not established.",
+        "source_url": null
       }
     }
   ]

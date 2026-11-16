@@ -100,6 +100,17 @@ fn catalog(text: &str) -> Result<Catalog> {
 impl Store {
     /// Creates a new file exclusively; refuses existing files and removes nothing on error.
     pub fn create(path: &Path) -> Result<Self> {
+        // Refuse all preexisting SQLite recovery state before creating the main file.
+        // This is a preflight for trusted directories, not an atomic family lock.
+        for suffix in ["", "-wal", "-shm", "-journal"] {
+            let mut member = path.as_os_str().to_os_string();
+            member.push(suffix);
+            match std::fs::symlink_metadata(Path::new(&member)) {
+                Ok(_) => return Err("New database requires an empty destination family".into()),
+                Err(error) if error.kind() == std::io::ErrorKind::NotFound => {}
+                Err(error) => return Err(error.into()),
+            }
+        }
         let c = catalog(CATALOG)?;
         let mut options = std::fs::OpenOptions::new();
         options.write(true).create_new(true);
@@ -138,7 +149,20 @@ impl Store {
     }
     /// Opens an existing Athena store. Never creates, seeds, migrates or changes journal mode.
     pub fn open(path: &Path) -> Result<Self> {
-        let db = Connection::open_with_flags(path, OpenFlags::SQLITE_OPEN_READ_WRITE)?;
+        Self::open_budgeted(path, None)
+    }
+    /// Cooperative SQLite VM deadline; not an OS I/O or hard process deadline.
+    pub fn open_with_budget(path: &Path, budget: Duration) -> Result<Self> {
+        if budget.is_zero() {
+            return Err("Expired native operation budget".into());
+        }
+        Self::open_budgeted(path, Some(std::time::Instant::now() + budget))
+    }
+    fn open_budgeted(path: &Path, deadline: Option<std::time::Instant>) -> Result<Self> {
+        let mut db = Connection::open_with_flags(path, OpenFlags::SQLITE_OPEN_READ_WRITE)?;
+        if let Some(deadline) = deadline {
+            db.progress_handler(1000, Some(move || std::time::Instant::now() >= deadline))?;
+        }
         let version: i64 = db.query_row("PRAGMA user_version", [], |r| r.get(0))?;
         if !matches!(version, 1..=15) {
             return Err("Unsupported database schema; no migration performed".into());
@@ -1177,3 +1201,34 @@ impl Store {
 }
 
 pub mod music_import;
+
+#[cfg(test)]
+mod operation_budget_tests {
+    use super::*;
+    #[test]
+    fn cooperative_sql_deadline_interrupts_and_preserves_database() {
+        let path = std::env::temp_dir().join(format!(
+            "athena-budget-{}-{}.sqlite",
+            std::process::id(),
+            std::time::SystemTime::now()
+                .duration_since(std::time::UNIX_EPOCH)
+                .unwrap()
+                .as_nanos()
+        ));
+        drop(Store::create(&path).unwrap());
+        let before = std::fs::read(&path).unwrap();
+        assert!(Store::open_with_budget(&path, Duration::ZERO).is_err());
+        let store = Store::open_with_budget(&path, Duration::from_millis(500)).unwrap();
+        let start = std::time::Instant::now();
+        let result=store.db.query_row("WITH RECURSIVE n(x) AS (VALUES(1) UNION ALL SELECT x+1 FROM n WHERE x<1000000000) SELECT sum(x) FROM n",[],|row|row.get::<_,i64>(0));
+        assert!(result.unwrap_err().to_string().contains("interrupted"));
+        assert!(start.elapsed() < Duration::from_secs(10));
+        drop(store);
+        assert_eq!(std::fs::read(&path).unwrap(), before);
+        assert_eq!(
+            Store::open(&path).unwrap().summary().unwrap().integrity,
+            "ok"
+        );
+        std::fs::remove_file(path).unwrap();
+    }
+}

@@ -4,7 +4,11 @@
   "files": [
     {
       "path": "app.js",
-      "sha256": "439588f7f2fc3ddf002d79824510cfa1c0c48e1ab47623a2a6b655baa73769ca"
+      "sha256": "a9749ac0c6b816b81e4f1e00ea3c96766b55eadfa8cc857925ce1ea02a56415d"
+    },
+    {
+      "path": "assets/athena-fox-owl-original.png",
+      "sha256": "0d7f695927834090c34e2afdb0904161f19eca46f3438773d133c39323609639"
     },
     {
       "path": "catalog.js",
@@ -16,7 +20,7 @@
     },
     {
       "path": "index.html",
-      "sha256": "b95597d554e463d1f243ecc59f4541a5bd0d79b9bbf1b2d4b364c245f49979c6"
+      "sha256": "13aa4f934ef83478ac5c0dac7677c6b4c21c063b7d7117a464a27f6a76b72c0f"
     },
     {
       "path": "native-store-bootstrap.js",
@@ -35,8 +39,20 @@
       "sha256": "c7bbf00e0f9f71fa168c5e18044a44cc59ea5d224b60ec41d926b917e1eb2977"
     },
     {
+      "path": "shared/artifact-store.mjs",
+      "sha256": "83f6f50e0c80df217703717e089223cd2e80143075526a4bf81ce167b174e698"
+    },
+    {
+      "path": "simulations.css",
+      "sha256": "96050c6b22469fd3fa0b45c52408762da88a0bf7868f3961ccb348c5553bbf11"
+    },
+    {
+      "path": "simulations.js",
+      "sha256": "0acd50a2f27dbcbcabd3053eae9ba404edc04a8049410c374ddafd9f2ff1b6f9"
+    },
+    {
       "path": "styles.css",
-      "sha256": "bf7fb56b9403fe8a865771cd7b3cd766a52aeea5460541ec29d145fcfd8f7107"
+      "sha256": "bc30956f4a97cb4824af3d7863ed8e3644e604fdb68931d0e8466a799fceb0de"
     },
     {
       "path": "workshops/cloud/learner-pack.zip",
@@ -67,12 +83,20 @@
       "sha256": "8a14dec17d4d816de53d325a94ee0dd00ac0bc8a0a26a756af58998173157cdb"
     },
     {
+      "path": "workspaces/continuity/artifacts.mjs",
+      "sha256": "6424ef812fbd1db7fe5b4f0344fa894e20d1db5f625df7b931a28ceab6f3f641"
+    },
+    {
       "path": "workspaces/continuity/context.mjs",
       "sha256": "29ceebf3080b947d9ba7013d4f20c842832850a2d1433cd08f12fb1afd974ead"
     },
     {
+      "path": "workspaces/continuity/import.mjs",
+      "sha256": "bb4876827885d6e7afb930e5da5fcaf8dacbca6ef73541ff07657028bd883aa2"
+    },
+    {
       "path": "workspaces/continuity/index.mjs",
-      "sha256": "18d528c3c8e3feaa6ed6fb2402019eed1c32b4beb4763139c46509936dcaabd0"
+      "sha256": "bd03703439a00773b722393657357721ad0faf02a0aa366579032ad52d837cd4"
     },
     {
       "path": "workspaces/continuity/model.mjs",
@@ -372,7 +396,7 @@
     },
     {
       "path": "workspaces/foundry/native-asset-library.mjs",
-      "sha256": "2cf2e249dc0ce4d8a5f53bec10a415f3b93391e2257cbf18cfec6b9aeb7720c1"
+      "sha256": "6c0fe469d4049d8f2875c79354e8633d39466d509aad669dd8f100091461a22b"
     },
     {
       "path": "workspaces/foundry/native-backup.mjs",
@@ -384,7 +408,7 @@
     },
     {
       "path": "workspaces/foundry/native-ecology.mjs",
-      "sha256": "b855df07924c41817e8371759962d97d36c86665357bc391a917ed6883ec049e"
+      "sha256": "e2a60a173efeef2f1ede1d860e417bd12599599ba2a48f54b29cc0b5fcb3694e"
     },
     {
       "path": "workspaces/foundry/native-environment.mjs",
@@ -464,19 +488,35 @@
     },
     {
       "path": "workspaces/software/catalog.json",
-      "sha256": "4b30cd29ed627d575d0574e9a4a5b37776e3b333eaf438aad634057fad56df5f"
+      "sha256": "c2b6af8a973a3dd58f9b1fe259eb5bc4cac70b65bb912968647aa7c545fabff2"
     },
     {
       "path": "workspaces/software/index.mjs",
-      "sha256": "f35e6e78ff51e9c73d6dc7aa47b367a312fae066da3cf4e54491419cc70f7e69"
+      "sha256": "ee74ab61882a526a0d331aa90198771ded80049f3894c6742e4109585cf1fd6c"
     },
     {
       "path": "workspaces/software/model.mjs",
-      "sha256": "dd953a19a49cbad767897f6ea2fefcc7e7790a34ab38d88ef9ae80c6f54c548b"
+      "sha256": "ef08147df62f1a4c6319e17503f3a9d5584e6ba4c4a3ef33727282068eca6abd"
     },
     {
       "path": "workspaces/software/style.css",
-      "sha256": "4c3be98c853faef766eb0d7e6924456daecba5d83ce07c0ef5391ee633b1aff8"
+      "sha256": "9add15b17765aabe8dc14420afa7ec4fd9d0098f244413a30c74cbec1693a8b2"
+    },
+    {
+      "path": "workspaces/projects/model.mjs",
+      "sha256": "fa8bcbc86fff739c2694400c535b145e0ebb0e09d99d1e23076f0512ec7cc145"
+    },
+    {
+      "path": "workspaces/projects/index.mjs",
+      "sha256": "f25696c5bbd625a6c1e6c3e6aa86f7b5bb437713b6cd46ef7a19b8da9cbf1638"
+    },
+    {
+      "path": "workspaces/projects/import.mjs",
+      "sha256": "2706f344951566e053b9b4f20cd9822bf5888960cfdb9b18044b717a63d3cca4"
+    },
+    {
+      "path": "workspaces/projects/style.css",
+      "sha256": "a6a6ee3881c67059fda86916167bfcd72563ea4dd61a777ad0566e1b7a6c941b"
     }
   ]
 }

@@ -201,6 +201,8 @@ export function normalizeState(state, catalog) {
   return {state: next, removed};
 }
 export function queryCatalog(index, state, catalog) {
+  const exact = fold(state.q).trim();
+  const productQuery = exact && index.some(row => row.name === exact || row.aliases.includes(exact) || fold(row.app.id) === exact);
   const target = alternativeTarget(state.q);
   const targetRow = target ? index.find(r => r.name === target || fold(r.app.id) === target || r.aliases.includes(target)) : null;
   const alternativeIds = new Set(targetRow?.app.alternative_ids || []);
@@ -208,7 +210,10 @@ export function queryCatalog(index, state, catalog) {
     if ((targetRow && (row.app.alternative_ids || []).includes(targetRow.app.id)) || (row.app.alternatives || []).some(n => fold(n) === target)) alternativeIds.add(row.app.id);
   }
   if (targetRow) alternativeIds.delete(targetRow.app.id);
-  const intent = target ? null : taskIntent(state.q);
+  // A product can have a name that is also a task phrase: 3D Slicer is a
+  // medical-imaging application. Resolve complete known names before narrowing
+  // generic requests such as "3D printing". Explicit filters still apply.
+  const intent = target || productQuery ? null : taskIntent(state.q);
   const tokens = (target ? [] : terms(intent?.query ?? state.q)).map(group => group.map(pattern));
   const task = catalog.recipes.find(r => r.id === state.task);
   const picks = new Map((task?.picks || []).map((p, i) => [p.app_id, i]));
@@ -222,8 +227,7 @@ export function queryCatalog(index, state, catalog) {
         state.pricing && a.pricing_model !== state.pricing || state.maintenance && a.maintenance.status !== state.maintenance ||
         state.task && (!task || !picks.has(a.id))) continue;
     if (!tokens.every(group => group.some(re => re.test(row.text)))) continue;
-    const exact = fold(state.q).trim();
-    const score = (row.name === exact ? 200 : row.aliases.includes(exact) ? 150 : 0) + (intent?.score?.(row) || 0) + tokens.reduce((n, group) => n + (group.some(re => re.test(row.name)) ? 20 : group.some(re => re.test(row.category)) ? 12 : group.some(re => re.test(row.tasks)) ? 6 : 1), 0);
+    const score = (row.name === exact || fold(a.id) === exact ? 200 : row.aliases.includes(exact) ? 150 : 0) + (intent?.score?.(row) || 0) + tokens.reduce((n, group) => n + (group.some(re => re.test(row.name)) ? 20 : group.some(re => re.test(row.category)) ? 12 : group.some(re => re.test(row.tasks)) ? 6 : 1), 0);
     rows.push({app: a, score});
   }
   rows.sort((a, b) => {

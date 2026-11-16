@@ -1,0 +1,5 @@
+# Read-only MusicHub migration reconciliation
+
+Native migration acceptance implementation,2026-11-15. Reuses original MusicHub converter and existing bounded SQLite snapshot capture rather than reconstructing either. New operator command compares all mapped bookmark fields and reports exact/missing/different counts, without opening source database paths in SQLite or publishing values. Full contract: [music recovery guide](../../tools/foundry-recovery/music/README.md).
+
+Local19 tests pass including real CLI subprocesses and a real Rust-created schema15 snapshot using pre-existing binary SHA256 `f76da70849bb53aa75f13f28484383bbaa65f089f0de38245515dd1c22c7d6e0`. Local current-source compilation is unavailable (`cargo` absent). Existing Windows/Linux CI builds the exact source and runs these tests; verify hosted results separately. Six new regressions use explicitly synthetic schema-shaped fixtures, while the all34-room acceptance uses the real native store. No source-provider requests or owner inputs were used. No deletion readiness is asserted.

@@ -5,6 +5,11 @@ import pathlib,hashlib,sqlite3,tempfile,os,argparse,json
 from contextlib import closing
 LIMIT=64*1024*1024
 SUFFIXES=('', '-wal', '-shm', '-journal')
+def destination_clear(destination):
+ # A new main file beside old recovery state is not a new SQLite destination.
+ # Trusted private directories are required; these checks do not defeat path races.
+ if any(os.path.lexists(str(destination)+suffix) for suffix in SUFFIXES):
+  raise FileExistsError('Destination database or sidecar already exists; preserve it and choose a new name')
 def capture(source):
  result={};total=0
  for suffix in SUFFIXES:
@@ -28,8 +33,13 @@ def prepare(source,destination,scratch,quiescent=False):
  source=pathlib.Path(source);destination=pathlib.Path(destination);scratch=pathlib.Path(scratch)
  reserved={pathlib.Path(str(source.resolve())+suffix) for suffix in SUFFIXES}
  if destination.resolve() in reserved:raise ValueError('Destination must not be the source or any source sidecar path')
- if destination.exists() or destination.is_symlink():raise FileExistsError('Destination already exists')
- first=capture(source);identity=digest(first)
+ destination_clear(destination)
+ first=capture(source)
+ # CVE-2026-119375: staging does not fix a vulnerable Python-linked SQLite.
+ # Refuse WAL before any sqlite3.connect, even if Rust bundles a patched copy.
+ if '-wal' in first and sqlite3.sqlite_version_info < (3,54,0):
+  raise ValueError('WAL recovery requires Python-linked SQLite 3.54.0 or newer; use a patched runtime or an independently prepared standalone backup')
+ identity=digest(first)
  if digest(capture(source))!=identity:raise ValueError('Source changed while capturing; retry after quiescing')
  # SQLite touches only disposable staged copies, never original database/sidecars.
  with tempfile.TemporaryDirectory(prefix='foundry-stage-',dir=scratch) as temporary:
@@ -46,6 +56,7 @@ def prepare(source,destination,scratch,quiescent=False):
   if digest(capture(source))!=identity:raise ValueError('Source changed during preparation; destination not created')
   payload=target.read_bytes()
   if payload[18:20]!=b'\x01\x01':raise ValueError('Standalone rollback-journal backup required')
+  destination_clear(destination)
   created=False
   try:
    with os.fdopen(os.open(destination, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o600), 'wb') as f:
@@ -53,6 +64,6 @@ def prepare(source,destination,scratch,quiescent=False):
   except BaseException:
    if created:destination.unlink()
    raise
- return {'prepared':True,'private_user_data':True,'source_unchanged_at_checks':True,'source_file_hashes':identity,'destination_sha256':hashlib.sha256(payload).hexdigest(),'destination_bytes':len(payload),'source_wal_present':'-wal' in first,'lossless_app_migration':False}
+ return {'prepared':True,'sqlite_runtime':sqlite3.sqlite_version,'private_user_data':True,'source_unchanged_at_checks':True,'source_file_hashes':identity,'destination_sha256':hashlib.sha256(payload).hexdigest(),'destination_bytes':len(payload),'source_wal_present':'-wal' in first,'lossless_app_migration':False}
 if __name__=='__main__':
  p=argparse.ArgumentParser();p.add_argument('--source',required=True);p.add_argument('--destination',required=True);p.add_argument('--scratch',required=True);p.add_argument('--source-quiescent',action='store_true');a=p.parse_args();print(json.dumps(prepare(a.source,a.destination,a.scratch,a.source_quiescent)))

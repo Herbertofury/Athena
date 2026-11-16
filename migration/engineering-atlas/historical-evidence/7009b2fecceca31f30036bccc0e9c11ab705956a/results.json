@@ -1,0 +1,301 @@
+{
+  "checked_at": "2026-10-28T07:21:42.913Z",
+  "runtime": "v24.22.1",
+  "scope": "Node generated-fixture validation only; no browser visibility, input, memory or target-project performance claim",
+  "production_harness_changed": false,
+  "samples": [
+    {
+      "count": 1,
+      "bytes": 64,
+      "round": 0,
+      "lane": "baseline",
+      "validation_ms": 0.17317899999999042,
+      "complete_parity": true
+    },
+    {
+      "count": 1,
+      "bytes": 64,
+      "round": 0,
+      "lane": "verified",
+      "validation_ms": 0.7185970000000026,
+      "complete_parity": true
+    },
+    {
+      "count": 1,
+      "bytes": 64,
+      "round": 1,
+      "lane": "verified",
+      "validation_ms": 0.31870899999999835,
+      "complete_parity": true
+    },
+    {
+      "count": 1,
+      "bytes": 64,
+      "round": 1,
+      "lane": "baseline",
+      "validation_ms": 0.028392999999994117,
+      "complete_parity": true
+    },
+    {
+      "count": 1,
+      "bytes": 64,
+      "round": 2,
+      "lane": "baseline",
+      "validation_ms": 0.03060299999999927,
+      "complete_parity": true
+    },
+    {
+      "count": 1,
+      "bytes": 64,
+      "round": 2,
+      "lane": "verified",
+      "validation_ms": 0.26138699999999915,
+      "complete_parity": true
+    },
+    {
+      "count": 1,
+      "bytes": 64,
+      "round": 3,
+      "lane": "verified",
+      "validation_ms": 0.5006829999999951,
+      "complete_parity": true
+    },
+    {
+      "count": 1,
+      "bytes": 64,
+      "round": 3,
+      "lane": "baseline",
+      "validation_ms": 0.01049000000000433,
+      "complete_parity": true
+    },
+    {
+      "count": 200,
+      "bytes": 8192,
+      "round": 0,
+      "lane": "baseline",
+      "validation_ms": 0.11965299999999957,
+      "complete_parity": true
+    },
+    {
+      "count": 200,
+      "bytes": 8192,
+      "round": 0,
+      "lane": "verified",
+      "validation_ms": 7.257202999999976,
+      "complete_parity": true
+    },
+    {
+      "count": 200,
+      "bytes": 8192,
+      "round": 1,
+      "lane": "verified",
+      "validation_ms": 9.102465999999993,
+      "complete_parity": true
+    },
+    {
+      "count": 200,
+      "bytes": 8192,
+      "round": 1,
+      "lane": "baseline",
+      "validation_ms": 0.3578369999999893,
+      "complete_parity": true
+    },
+    {
+      "count": 200,
+      "bytes": 8192,
+      "round": 2,
+      "lane": "baseline",
+      "validation_ms": 0.0922819999999831,
+      "complete_parity": true
+    },
+    {
+      "count": 200,
+      "bytes": 8192,
+      "round": 2,
+      "lane": "verified",
+      "validation_ms": 12.12419700000001,
+      "complete_parity": true
+    },
+    {
+      "count": 200,
+      "bytes": 8192,
+      "round": 3,
+      "lane": "verified",
+      "validation_ms": 8.363410999999985,
+      "complete_parity": true
+    },
+    {
+      "count": 200,
+      "bytes": 8192,
+      "round": 3,
+      "lane": "baseline",
+      "validation_ms": 0.08976499999999987,
+      "complete_parity": true
+    },
+    {
+      "count": 200,
+      "bytes": 65536,
+      "round": 0,
+      "lane": "baseline",
+      "validation_ms": 0.31476100000008955,
+      "complete_parity": true
+    },
+    {
+      "count": 200,
+      "bytes": 65536,
+      "round": 0,
+      "lane": "verified",
+      "validation_ms": 276.177993,
+      "complete_parity": true
+    },
+    {
+      "count": 200,
+      "bytes": 65536,
+      "round": 1,
+      "lane": "verified",
+      "validation_ms": 544.5268979999998,
+      "complete_parity": true
+    },
+    {
+      "count": 200,
+      "bytes": 65536,
+      "round": 1,
+      "lane": "baseline",
+      "validation_ms": 1.0381099999999606,
+      "complete_parity": true
+    },
+    {
+      "count": 200,
+      "bytes": 65536,
+      "round": 2,
+      "lane": "baseline",
+      "validation_ms": 3.3283409999999094,
+      "complete_parity": true
+    },
+    {
+      "count": 200,
+      "bytes": 65536,
+      "round": 2,
+      "lane": "verified",
+      "validation_ms": 151.99910799999998,
+      "complete_parity": true
+    },
+    {
+      "count": 200,
+      "bytes": 65536,
+      "round": 3,
+      "lane": "verified",
+      "validation_ms": 195.33241999999973,
+      "complete_parity": true
+    },
+    {
+      "count": 200,
+      "bytes": 65536,
+      "round": 3,
+      "lane": "baseline",
+      "validation_ms": 0.22005300000000716,
+      "complete_parity": true
+    }
+  ],
+  "failures": [
+    {
+      "name": "metadata_tail",
+      "baseline_accepted": true,
+      "candidate_error": "Complete metadata mismatch",
+      "damaged_fixture": {
+        "records": [
+          {
+            "id": "card-000000",
+            "title": "Discovery 0001",
+            "description": "A complete generated record. Exact identity and full metadata retained.",
+            "metadata": "card-000000|abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcZ"
+          },
+          {
+            "id": "card-000001",
+            "title": "Discovery 0002",
+            "description": "A complete generated record. Exact identity and full metadata retained.",
+            "metadata": "card-000001|abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcd"
+          }
+        ],
+        "dataset": {
+          "count": 2,
+          "metadata_bytes_per_record": 512,
+          "serialized_bytes": 1321,
+          "sha256": "010ab7d40dc621ae9d8b1afcebe634f33a11692e7d38c1f92ca4c77d5d2f0aca",
+          "generation_ms": 0.055970000000343134,
+          "serialization_ms": 0.009618999999929656,
+          "encoding_ms": 0.02547099999992497,
+          "digest_ms": 2.1504989999998543,
+          "hash_ms": 2.185588999999709
+        },
+        "preparation_ms": 2.241559000000052
+      }
+    },
+    {
+      "name": "digest",
+      "baseline_accepted": true,
+      "candidate_error": "Complete dataset digest mismatch",
+      "damaged_fixture": {
+        "records": [
+          {
+            "id": "card-000000",
+            "title": "Discovery 0001",
+            "description": "A complete generated record. Exact identity and full metadata retained.",
+            "metadata": "card-000000|abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcd"
+          },
+          {
+            "id": "card-000001",
+            "title": "Discovery 0002",
+            "description": "A complete generated record. Exact identity and full metadata retained.",
+            "metadata": "card-000001|abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcd"
+          }
+        ],
+        "dataset": {
+          "count": 2,
+          "metadata_bytes_per_record": 512,
+          "serialized_bytes": 1321,
+          "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+          "generation_ms": 0.055970000000343134,
+          "serialization_ms": 0.009618999999929656,
+          "encoding_ms": 0.02547099999992497,
+          "digest_ms": 2.1504989999998543,
+          "hash_ms": 2.185588999999709
+        },
+        "preparation_ms": 2.241559000000052
+      }
+    },
+    {
+      "name": "byte_count",
+      "baseline_accepted": true,
+      "candidate_error": "Serialized byte count mismatch",
+      "damaged_fixture": {
+        "records": [
+          {
+            "id": "card-000000",
+            "title": "Discovery 0001",
+            "description": "A complete generated record. Exact identity and full metadata retained.",
+            "metadata": "card-000000|abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcd"
+          },
+          {
+            "id": "card-000001",
+            "title": "Discovery 0002",
+            "description": "A complete generated record. Exact identity and full metadata retained.",
+            "metadata": "card-000001|abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcdefgh01234567abcd"
+          }
+        ],
+        "dataset": {
+          "count": 2,
+          "metadata_bytes_per_record": 512,
+          "serialized_bytes": 1322,
+          "sha256": "010ab7d40dc621ae9d8b1afcebe634f33a11692e7d38c1f92ca4c77d5d2f0aca",
+          "generation_ms": 0.055970000000343134,
+          "serialization_ms": 0.009618999999929656,
+          "encoding_ms": 0.02547099999992497,
+          "digest_ms": 2.1504989999998543,
+          "hash_ms": 2.185588999999709
+        },
+        "preparation_ms": 2.241559000000052
+      }
+    }
+  ]
+}

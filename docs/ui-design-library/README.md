@@ -53,3 +53,5 @@ Current inventory and inspection limits: [Keshav study queue](kshv-study-queue.m
 - [Deployed viewer source](viewer-source-study.md): verified routing, lazy loading, modal and motion mechanics, plus unresolved acceptance tests.
 
 - [Bencho and BestSaaSWebDesigns](bencho-and-saas.md): additional owner-selected follows, bounded official-source research and original implementation plans.
+
+- [Storage management source study](storage-management-study.md): sucodeee/MetalForge reference, licensing boundary, original read-only Storage Observatory experiment and production acceptance backlog. Not a native disk scanner or cleanup tool.

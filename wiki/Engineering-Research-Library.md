@@ -858,7 +858,7 @@ Provider headers outrank a local budget; reset is epoch seconds and retry-after 
 
 [GUIFlow incremental inference](https://arxiv.org/html/2610.34959v1) · Preprint submitted 2026-10-26.
 
-FLOPs ratios differ from wall-clock latency, and quality varies by model. Research only. Checked 2026-10-27; review after 30 days. [Scoped assessment](https://github.com/Herbertofury/Engineering-Atlas/blob/3af95c984d7fe9a50298a19604dfe4f96a400803/research/2026-10-27-inference-and-nvm-scope.md).
+FLOPs ratios differ from wall-clock latency, and quality varies by model. Research only. Checked 2026-10-27; review after 30 days. [Scoped assessment](https://github.com/Herbertofury/Athena/blob/d1d6d998ba38d2fcedd140c48e3c5d21e132f671/engineering/research/2026-10-27-inference-and-nvm-scope.md).
 
 ## FLINT01
 
@@ -869,4 +869,12 @@ Hardware-specific persistent-memory study, not a SQLite replacement result. Rese
 
 ## Model-extraction count pressure · 2026-10-27
 
-[Primary-paper screening and acceptance boundary](https://github.com/Herbertofury/Engineering-Atlas/blob/beb354be5dd5321ab7931270329dfd37023ff3be/research/2026-10-27-extraction-count-pressure.md): PAD01 remains an unreplicated research risk, not a ranking or target-project recommendation. The source register now contains 135 unique IDs. Schema validity, provenance and completeness require separate evidence. No inference service or author prototype was executed.
+[Primary-paper screening and acceptance boundary](https://github.com/Herbertofury/Athena/blob/d1d6d998ba38d2fcedd140c48e3c5d21e132f671/engineering/research/2026-10-27-extraction-count-pressure.md): PAD01 remains an unreplicated research risk, not a ranking or target-project recommendation. The source register now contains 135 unique IDs. Schema validity, provenance and completeness require separate evidence. No inference service or author prototype was executed.
+
+
+## Preserved evidence link provenance
+
+The links above now use content-identical Athena copies, verified by Git blob/tree identity on 2026-11-15. Original revision citations remain below as provenance, not runtime dependencies. This does not certify source-repository deletion readiness. Other historical links on this page remain unchanged where exact replacement was not verified.
+
+- Original: `https://github.com/Herbertofury/Engineering-Atlas/blob/beb354be5dd5321ab7931270329dfd37023ff3be/research/2026-10-27-extraction-count-pressure.md`; identical blob object: `4cb198204dffb4316da18db34c8aa7660e91fbb5`.
+- Original: `https://github.com/Herbertofury/Engineering-Atlas/blob/3af95c984d7fe9a50298a19604dfe4f96a400803/research/2026-10-27-inference-and-nvm-scope.md`; identical blob object: `3a00330c165bd1dfc453f2fd6ad30992f7c8f1d5`.

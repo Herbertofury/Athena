@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "reviewed_at": "2026-11-15",
+  "reviewed_at": "2026-11-16",
   "baseline_application_count": 736,
-  "application_count": 100,
-  "guide_count": 13,
+  "application_count": 118,
+  "guide_count": 41,
   "method": "Official product, installation, pricing and license documents reviewed. Source HTTP status and hashes are retrieval observations, not installation tests. Recommendations are conditional editorial judgments about documented scope; no performance or universal-best ranking is inferred. Full upstream bodies remain scratch intermediates.",
   "exclusions": [
     {
@@ -57,7 +57,12 @@
     "gaming/mod-managers": "Mod Managers",
     "gaming/emulation-frontends": "Emulation Frontends",
     "development/graphics-debugging": "Graphics Debugging",
-    "development/build-systems": "Build Systems"
+    "development/build-systems": "Build Systems",
+    "development/local-web-development": "Local Web Development",
+    "development/data-app-frameworks": "Data App Frameworks",
+    "development/javascript-runtimes": "JavaScript Runtimes",
+    "development/version-control": "Version Control",
+    "gaming/game-save-backup": "Game Save Backup"
   },
   "applications": [
     {
@@ -6614,7 +6619,7 @@
     },
     {
       "app_id": "atlas",
-      "reviewed_at": "2026-11-15",
+      "reviewed_at": "2026-11-16",
       "assessment": "Inspected the official Community Edition distinction. Apache repository licensing does not describe all standard distributed features.",
       "selected_sources": [
         {
@@ -6647,11 +6652,12 @@
         {
           "url": "https://atlasgo.io/community-edition",
           "label": "Documented deployment and platform scope",
-          "checked_at": "2026-11-15",
+          "checked_at": "2026-11-16",
           "supports": [
             "platforms",
             "pricing",
-            "downloads"
+            "downloads",
+            "license"
           ]
         },
         {
@@ -6720,8 +6726,17 @@
           "final_url": "https://atlasgo.io/getting-started#installation",
           "bytes": 453677,
           "sha256": "867837a6d1f266985d9f67dd9a16a86b061ab1339ddff76a3cf92cc8dc1f952a"
+        },
+        {
+          "url": "https://atlasgo.io/community-edition",
+          "reviewed_at": "2026-11-16",
+          "status": 200,
+          "final_url": "https://atlasgo.io/community-edition",
+          "bytes": 89606,
+          "sha256": "0fde6e700b77b05d84155803b0d5954e992b38763b51022b2cf15065a466eb83"
         }
-      ]
+      ],
+      "independent_review": "Cross-reviewed against primary sources by systems QA; edition, release-line, maintenance-scope and source-claim qualifications corrected where relevant."
     },
     {
       "app_id": "apache-airflow",
@@ -7152,7 +7167,7 @@
     },
     {
       "app_id": "dbt-core",
-      "reviewed_at": "2026-11-15",
+      "reviewed_at": "2026-11-16",
       "assessment": "Current official upstream redirects from dbt-core to dbt and identifies a Rust v2 main branch, Apache source and separately licensed product distribution. Avoided treating the old Python Core packaging as the current universal install.",
       "selected_sources": [
         {
@@ -7192,12 +7207,20 @@
           ]
         },
         {
-          "url": "https://github.com/dbt-labs/dbt/releases/tag/v1.12.7",
-          "label": "Official dated release",
-          "checked_at": "2026-11-15",
+          "url": "https://github.com/dbt-labs/dbt/releases/tag/v2.0.0",
+          "label": "Official dated release for the documented v2 line",
+          "checked_at": "2026-11-16",
           "supports": [
             "maintenance",
             "downloads"
+          ]
+        },
+        {
+          "url": "https://raw.githubusercontent.com/dbt-labs/dbt/main/LICENSE",
+          "label": "Official Apache source license, separate from product distribution terms",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "license"
           ]
         }
       ],
@@ -7254,8 +7277,27 @@
           "final_url": "https://www.getdbt.com/dbt-product-license-agreement",
           "bytes": 804846,
           "sha256": "479586bde0c262dfd037e04b90bb874bd7bfe564d196f522ef9cbcabaaf66af5"
+        },
+        {
+          "label": "dbt-v2-release",
+          "url": "https://api.github.com/repos/dbt-labs/dbt/releases/tags/v2.0.0",
+          "reviewed_at": "2026-11-16",
+          "status": 200,
+          "final_url": "https://api.github.com/repos/dbt-labs/dbt/releases/tags/v2.0.0",
+          "bytes": 41621,
+          "sha256": "9ba09c41874655e01a4cc8145cb734584dde502f9c8674404889f2b3cbc5b02d"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/dbt-labs/dbt/main/LICENSE",
+          "reviewed_at": "2026-11-16",
+          "status": 200,
+          "final_url": "https://raw.githubusercontent.com/dbt-labs/dbt/main/LICENSE",
+          "bytes": 11343,
+          "sha256": "aaec0fc491a8093b76b7301f6168b9ac05b0fd20e8ea717f7d90691b3b7d8772"
         }
-      ]
+      ],
+      "correction": "Distinguished released artifact evidence from a different source branch or major version.",
+      "independent_review": "Cross-reviewed against primary sources by systems QA; edition, release-line, maintenance-scope and source-claim qualifications corrected where relevant."
     },
     {
       "app_id": "meltano",
@@ -9073,7 +9115,7 @@
     },
     {
       "app_id": "buzz",
-      "reviewed_at": "2026-11-15",
+      "reviewed_at": "2026-11-16",
       "assessment": "Official product, installation and licensing sources reviewed; selection advice is editorial inference from documented scope, not a benchmark.",
       "selected_sources": [
         {
@@ -9116,10 +9158,11 @@
         {
           "url": "https://github.com/chidiwilliams/buzz/releases/tag/v1.4.5",
           "label": "Official dated release",
-          "checked_at": "2026-11-15",
+          "checked_at": "2026-11-16",
           "supports": [
             "maintenance",
-            "downloads"
+            "downloads",
+            "platforms"
           ]
         }
       ],
@@ -9181,8 +9224,18 @@
           "final_url": "https://sourceforge.net/projects/buzz-captions/files/",
           "bytes": 112342,
           "sha256": "a062e7d40e2359aad32263f57956fa0a499283818be2ccfc8e0564d038ede46c"
+        },
+        {
+          "label": "buzz-release",
+          "url": "https://api.github.com/repos/chidiwilliams/buzz/releases/tags/v1.4.5",
+          "reviewed_at": "2026-11-16",
+          "status": 200,
+          "final_url": "https://api.github.com/repos/chidiwilliams/buzz/releases/tags/v1.4.5",
+          "bytes": 14322,
+          "sha256": "ce97930437eda037d892dafb38c805a5d3c1e1c9b3cf1451ec980355ad91d098"
         }
-      ]
+      ],
+      "correction": "Distinguished released artifact evidence from a different source branch or major version."
     },
     {
       "app_id": "melonloader",
@@ -10400,6 +10453,1848 @@
           "url": "https://buck2.build/docs/getting_started/",
           "reviewed_at": "2026-11-15",
           "status": null
+        }
+      ]
+    },
+    {
+      "app_id": "devbox",
+      "reviewed_at": "2026-11-16",
+      "assessment": "Official sources reviewed. Recommendations are conditional editorial judgments about documented fit; no installed compatibility, performance or universal-best ranking is asserted.",
+      "selected_sources": [
+        {
+          "url": "https://github.com/jetify-com/devbox/blob/main/README.md",
+          "label": "Official project documentation",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity",
+            "features",
+            "platforms",
+            "downloads"
+          ]
+        },
+        {
+          "url": "https://github.com/jetify-com/devbox/blob/main/LICENSE",
+          "label": "Official application and dependency licensing",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "license"
+          ]
+        },
+        {
+          "url": "https://github.com/jetify-com/docs/blob/main/docs/devbox/installing-devbox.mdx",
+          "label": "Official operating-system requirements",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "platforms",
+            "downloads"
+          ]
+        },
+        {
+          "url": "https://github.com/jetify-com/devbox/releases/tag/0.21.0",
+          "label": "Official dated release and distribution",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "maintenance",
+            "downloads"
+          ]
+        }
+      ],
+      "observations": [
+        {
+          "url": "https://api.github.com/repos/jetify-com/devbox",
+          "reviewed_at": "2026-11-16",
+          "status": 200,
+          "final_url": "https://api.github.com/repos/jetify-com/devbox",
+          "bytes": 6436,
+          "sha256": "243f69b3ed79f6eb6ae7a84c2ac73a17e16f19aaf0d0c22b9387a849e24f1215"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/jetify-com/devbox/main/README.md",
+          "reviewed_at": "2026-11-16",
+          "status": 200,
+          "final_url": "https://raw.githubusercontent.com/jetify-com/devbox/main/README.md",
+          "bytes": 6875,
+          "sha256": "c81e17bac594bef3aeda9f5ab97a54cad1dd52d5dbcb0fbd9ba500fce31ba451"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/jetify-com/devbox/main/LICENSE",
+          "reviewed_at": "2026-11-16",
+          "status": 200,
+          "final_url": "https://raw.githubusercontent.com/jetify-com/devbox/main/LICENSE",
+          "bytes": 11356,
+          "sha256": "43070e2d4e532684de521b885f385d0841030efa2b1a20bafb76133a5e1379c1"
+        },
+        {
+          "url": "https://api.github.com/repos/jetify-com/devbox/releases/latest",
+          "reviewed_at": "2026-11-16",
+          "status": 200,
+          "final_url": "https://api.github.com/repos/jetify-com/devbox/releases/latest",
+          "bytes": 14537,
+          "sha256": "4919047a618140bed77353f01e439125217f7e94256f8748d0ab213c182147ec"
+        },
+        {
+          "label": "devbox-platforms",
+          "url": "https://raw.githubusercontent.com/jetify-com/docs/main/docs/devbox/installing-devbox.mdx",
+          "reviewed_at": "2026-11-16",
+          "status": 200,
+          "final_url": "https://raw.githubusercontent.com/jetify-com/docs/main/docs/devbox/installing-devbox.mdx",
+          "bytes": 4709,
+          "sha256": "7a7f3eab088d7080f8a31fcb36a81f58617a4923ba0387e488362b9af35a792d"
+        },
+        {
+          "url": "https://github.com/jetify-com/devbox#installing-devbox",
+          "reviewed_at": "2026-11-16",
+          "status": 200,
+          "final_url": "https://github.com/jetify-com/devbox#installing-devbox",
+          "bytes": 345685,
+          "sha256": "6e29fca770d766fa16f3acd8e0aba8a156e850537b4287cfbcac9a7aa0d7ccba"
+        },
+        {
+          "url": "https://www.jetify.com/devbox/",
+          "reviewed_at": "2026-11-16",
+          "status": 200,
+          "final_url": "https://www.jetify.com/devbox",
+          "bytes": 404602,
+          "sha256": "1430ed5d8e492d8c4eb13c3a19361cc893b33b000658b5eac2c39662038dea9e"
+        }
+      ]
+    },
+    {
+      "app_id": "ddev",
+      "reviewed_at": "2026-11-16",
+      "assessment": "Official sources reviewed. Recommendations are conditional editorial judgments about documented fit; no installed compatibility, performance or universal-best ranking is asserted.",
+      "selected_sources": [
+        {
+          "url": "https://github.com/ddev/ddev/blob/main/README.md",
+          "label": "Official project documentation",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity",
+            "features",
+            "platforms",
+            "downloads",
+            "pricing"
+          ]
+        },
+        {
+          "url": "https://github.com/ddev/ddev/blob/main/LICENSE",
+          "label": "Official application and dependency licensing",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "license"
+          ]
+        },
+        {
+          "url": "https://docs.ddev.com/en/stable/users/install/ddev-installation/",
+          "label": "Official installation requirements",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "platforms",
+            "downloads"
+          ]
+        },
+        {
+          "url": "https://github.com/ddev/ddev/releases/tag/v1.25.5",
+          "label": "Official dated release and distribution",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "maintenance",
+            "downloads"
+          ]
+        }
+      ],
+      "observations": [
+        {
+          "url": "https://api.github.com/repos/ddev/ddev",
+          "reviewed_at": "2026-11-16",
+          "status": 200,
+          "final_url": "https://api.github.com/repos/ddev/ddev",
+          "bytes": 5978,
+          "sha256": "83965957168e8cb0461bbc3c59bb0fecebeb4e5247373895f60f3ba3991bffbc"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/ddev/ddev/main/README.md",
+          "reviewed_at": "2026-11-16",
+          "status": 200,
+          "final_url": "https://raw.githubusercontent.com/ddev/ddev/main/README.md",
+          "bytes": 7505,
+          "sha256": "a66d5b1ec1e5fa6802aa2bfd7ac498c7a7909e24691089e1c74e3fe19d77a105"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/ddev/ddev/main/LICENSE",
+          "reviewed_at": "2026-11-16",
+          "status": 200,
+          "final_url": "https://raw.githubusercontent.com/ddev/ddev/main/LICENSE",
+          "bytes": 11357,
+          "sha256": "b40930bbcf80744c86c46a12bc9da056641d722716c378f5659b9e555ef833e1"
+        },
+        {
+          "url": "https://api.github.com/repos/ddev/ddev/releases/latest",
+          "reviewed_at": "2026-11-16",
+          "status": 200,
+          "final_url": "https://api.github.com/repos/ddev/ddev/releases/latest",
+          "bytes": 84544,
+          "sha256": "3a94f7c98006adfce64995561c7a5b74fb91e1e69221db918e5a09a2dd6ccef9"
+        },
+        {
+          "url": "https://ddev.com/",
+          "reviewed_at": "2026-11-16",
+          "status": 200,
+          "final_url": "https://ddev.com/",
+          "bytes": 240131,
+          "sha256": "85219ad742d3c1406ac2513fcd7d356ae05fd8e27cab4995de41a5569854716c"
+        },
+        {
+          "url": "https://docs.ddev.com/en/stable/users/install/ddev-installation/",
+          "reviewed_at": "2026-11-16",
+          "status": 200,
+          "final_url": "https://docs.ddev.com/en/stable/users/install/ddev-installation/",
+          "bytes": 106667,
+          "sha256": "c82e786ef2cf1f5427c7a44fefd015cd847fe772585581ddf716f11700500f15"
+        }
+      ]
+    },
+    {
+      "app_id": "lando",
+      "reviewed_at": "2026-11-16",
+      "assessment": "Official sources reviewed. Recommendations are conditional editorial judgments about documented fit; no installed compatibility, performance or universal-best ranking is asserted.",
+      "selected_sources": [
+        {
+          "url": "https://github.com/lando/lando/blob/main/README.md",
+          "label": "Official project documentation",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity",
+            "features",
+            "platforms",
+            "downloads",
+            "pricing"
+          ]
+        },
+        {
+          "url": "https://github.com/lando/lando/blob/main/LICENSE",
+          "label": "Official application and dependency licensing",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "license"
+          ]
+        },
+        {
+          "url": "https://docs.lando.dev/install/",
+          "label": "Official platform installation routes",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "platforms",
+            "downloads"
+          ]
+        },
+        {
+          "url": "https://github.com/lando/lando/releases/tag/v3.26.9",
+          "label": "Official dated release and distribution",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "maintenance",
+            "downloads"
+          ]
+        }
+      ],
+      "observations": [
+        {
+          "url": "https://api.github.com/repos/lando/lando",
+          "reviewed_at": "2026-11-16",
+          "status": 200,
+          "final_url": "https://api.github.com/repos/lando/lando",
+          "bytes": 6038,
+          "sha256": "b3ba5785cfec1215dbd86190bcc4a1e60692ef3ec7dffba5d673f83375779113"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/lando/lando/main/README.md",
+          "reviewed_at": "2026-11-16",
+          "status": 200,
+          "final_url": "https://raw.githubusercontent.com/lando/lando/main/README.md",
+          "bytes": 5290,
+          "sha256": "8cff7df1a28fdeea07d51a3ae1675da2764ab72ff2f088d556d1e06380e5d35c"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/lando/lando/main/LICENSE",
+          "reviewed_at": "2026-11-16",
+          "status": 200,
+          "final_url": "https://raw.githubusercontent.com/lando/lando/main/LICENSE",
+          "bytes": 1071,
+          "sha256": "e04cfb1e54089bbb1ee1400c446dbc4e075d7c399295013c2ddd598a4bd77ecf"
+        },
+        {
+          "url": "https://api.github.com/repos/lando/lando/releases/latest",
+          "reviewed_at": "2026-11-16",
+          "status": 200,
+          "final_url": "https://api.github.com/repos/lando/lando/releases/latest",
+          "bytes": 2401,
+          "sha256": "54a64df5a66b0fc5cd7961caaab2fd73c3f29b9736ccd5e60d5c00b2ec7b4421"
+        },
+        {
+          "label": "lando-install",
+          "url": "https://docs.lando.dev/install/",
+          "reviewed_at": "2026-11-16",
+          "status": 200,
+          "final_url": "https://docs.lando.dev/install/",
+          "bytes": 77616,
+          "sha256": "a5fd194d811ef0ecb313ce079e5d565223a2816e5e6898e50aa7d78e6b6e7071"
+        },
+        {
+          "url": "https://lando.dev/",
+          "reviewed_at": "2026-11-16",
+          "status": 200,
+          "final_url": "https://www.lando.dev/",
+          "bytes": 47717,
+          "sha256": "928001784273f45786011cbad3efed59b5c8e6971b8a687815eb8d364ab1d069"
+        }
+      ]
+    },
+    {
+      "app_id": "direnv",
+      "reviewed_at": "2026-11-16",
+      "assessment": "Official sources reviewed. Recommendations are conditional editorial judgments about documented fit; no installed compatibility, performance or universal-best ranking is asserted.",
+      "selected_sources": [
+        {
+          "url": "https://github.com/direnv/direnv/blob/master/README.md",
+          "label": "Official project documentation",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity",
+            "features",
+            "platforms",
+            "downloads"
+          ]
+        },
+        {
+          "url": "https://github.com/direnv/direnv/blob/master/LICENSE",
+          "label": "Official application and dependency licensing",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "license"
+          ]
+        },
+        {
+          "url": "https://github.com/direnv/direnv/releases/tag/v2.38.2",
+          "label": "Official dated release and distribution",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "maintenance",
+            "downloads"
+          ]
+        }
+      ],
+      "observations": [
+        {
+          "url": "https://api.github.com/repos/direnv/direnv",
+          "reviewed_at": "2026-11-16",
+          "status": 200,
+          "final_url": "https://api.github.com/repos/direnv/direnv",
+          "bytes": 6026,
+          "sha256": "58c9a4012f5faa440eca673179a8553d0f582ce9c39b4b0cad827d2ba49d2d8d"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/direnv/direnv/master/README.md",
+          "reviewed_at": "2026-11-16",
+          "status": 200,
+          "final_url": "https://raw.githubusercontent.com/direnv/direnv/master/README.md",
+          "bytes": 8199,
+          "sha256": "0746f90b525f10fa8aa0d73864e17167cd22260462537e6033c56ee35af098ba"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/direnv/direnv/master/LICENSE",
+          "reviewed_at": "2026-11-16",
+          "status": 200,
+          "final_url": "https://raw.githubusercontent.com/direnv/direnv/master/LICENSE",
+          "bytes": 1081,
+          "sha256": "573de0461625352c50c47a63e7506873bf93d1a8a96bd29c3fef115ff3ed6b48"
+        },
+        {
+          "url": "https://api.github.com/repos/direnv/direnv/releases/latest",
+          "reviewed_at": "2026-11-16",
+          "status": 200,
+          "final_url": "https://api.github.com/repos/direnv/direnv/releases/latest",
+          "bytes": 41404,
+          "sha256": "c97af989c8b84df995b8ee8472efabbf2f69e5e24339590667b804eddf2069a1"
+        },
+        {
+          "url": "https://direnv.net/",
+          "reviewed_at": "2026-11-16",
+          "status": 200,
+          "final_url": "https://direnv.net/",
+          "bytes": 13254,
+          "sha256": "8e88a5f075dc93c3983eb0de0bd4ed2507c1809e56b46f57bcac494cd974a1b9"
+        },
+        {
+          "url": "https://direnv.net/docs/installation.html",
+          "reviewed_at": "2026-11-16",
+          "status": 200,
+          "final_url": "https://direnv.net/docs/installation.html",
+          "bytes": 4404,
+          "sha256": "b30c7852fe87b5a2727ec74b5fe97350fd43754f6a7dbf3bb6c08b3e175e52a7"
+        }
+      ]
+    },
+    {
+      "app_id": "nix",
+      "reviewed_at": "2026-11-16",
+      "assessment": "Official sources reviewed. Recommendations are conditional editorial judgments about documented fit; no installed compatibility, performance or universal-best ranking is asserted.",
+      "selected_sources": [
+        {
+          "url": "https://github.com/NixOS/nix/blob/master/README.md",
+          "label": "Official project documentation",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity",
+            "features",
+            "platforms",
+            "downloads"
+          ]
+        },
+        {
+          "url": "https://github.com/NixOS/nix/blob/master/COPYING",
+          "label": "Official application and dependency licensing",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "license"
+          ]
+        },
+        {
+          "url": "https://nix.dev/install-nix",
+          "label": "Official installation and host scope",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "platforms",
+            "downloads"
+          ]
+        },
+        {
+          "url": "https://nix.dev/manual/nix/2.35/release-notes/rl-2.35.html",
+          "label": "Official dated release notes",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "maintenance",
+            "features"
+          ]
+        }
+      ],
+      "observations": [
+        {
+          "url": "https://api.github.com/repos/NixOS/nix",
+          "reviewed_at": "2026-11-16",
+          "status": 200,
+          "final_url": "https://api.github.com/repos/NixOS/nix",
+          "bytes": 5902,
+          "sha256": "9ac6ab6728d3e0726b119a6dd3d5f2762dea65676065b7f549ce42c75f97b80d"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/NixOS/nix/master/README.md",
+          "reviewed_at": "2026-11-16",
+          "status": 200,
+          "final_url": "https://raw.githubusercontent.com/NixOS/nix/master/README.md",
+          "bytes": 2140,
+          "sha256": "e7343b7d008763547860aa32f87a580c95819123dd07c9cb3fe9a47f0d23c15f"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/NixOS/nix/master/LICENSE",
+          "reviewed_at": "2026-11-16",
+          "error": "HTTP Error 404: Not Found"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/NixOS/nix/master/LICENSE.md",
+          "reviewed_at": "2026-11-16",
+          "error": "HTTP Error 404: Not Found"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/NixOS/nix/master/COPYING",
+          "reviewed_at": "2026-11-16",
+          "status": 200,
+          "final_url": "https://raw.githubusercontent.com/NixOS/nix/master/COPYING",
+          "bytes": 26419,
+          "sha256": "20e50fe7aae3e56378ebf0417d9de904f55a0e61e4df315333e632a4d3555d95"
+        },
+        {
+          "url": "https://api.github.com/repos/NixOS/nix/releases/latest",
+          "reviewed_at": "2026-11-16",
+          "error": "HTTP Error 404: Not Found"
+        },
+        {
+          "label": "nix-install",
+          "url": "https://nix.dev/install-nix",
+          "reviewed_at": "2026-11-16",
+          "status": 200,
+          "final_url": "https://nix.dev/install-nix",
+          "bytes": 31495,
+          "sha256": "e359d1e3ef7e6327f2060c04d1c43998ac36642841aab2062f970ad11d77f2f0"
+        },
+        {
+          "label": "nix-release",
+          "url": "https://nix.dev/manual/nix/2.35/release-notes/rl-2.35.html",
+          "reviewed_at": "2026-11-16",
+          "status": 200,
+          "final_url": "https://nix.dev/manual/nix/2.35/release-notes/rl-2.35.html",
+          "bytes": 59510,
+          "sha256": "09df91a94c7fd233d8b0c39a7b1ee57b301a55f2ead59360073e6ec30edc1dd1"
+        },
+        {
+          "url": "https://nixos.org/",
+          "reviewed_at": "2026-11-16",
+          "status": 200,
+          "final_url": "https://nixos.org/",
+          "bytes": 64222,
+          "sha256": "241d7402168d19e53681321dd3d39e614a37f0a8242ea25a935808e630dc8767"
+        }
+      ],
+      "independent_review": "Cross-reviewed against primary sources by systems QA; edition, release-line, maintenance-scope and source-claim qualifications corrected where relevant."
+    },
+    {
+      "app_id": "sqlpage",
+      "reviewed_at": "2026-11-16",
+      "assessment": "Official sources reviewed. Recommendations are conditional editorial judgments about documented fit; no installed compatibility, performance or universal-best ranking is asserted.",
+      "selected_sources": [
+        {
+          "url": "https://github.com/sqlpage/SQLPage/blob/main/README.md",
+          "label": "Official project documentation",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity",
+            "features",
+            "platforms",
+            "downloads"
+          ]
+        },
+        {
+          "url": "https://github.com/sqlpage/SQLPage/blob/main/LICENSE.txt",
+          "label": "Official application and dependency licensing",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "license",
+            "pricing"
+          ]
+        },
+        {
+          "url": "https://sql-page.com/your-first-sql-website/",
+          "label": "Official free software tutorial and platform qualifications",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "downloads",
+            "platforms",
+            "pricing"
+          ]
+        },
+        {
+          "url": "https://sql-page.com/sso/",
+          "label": "Official authentication setup",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "features"
+          ]
+        },
+        {
+          "url": "https://github.com/sqlpage/SQLPage/releases/tag/v0.48.0",
+          "label": "Official dated release and distribution",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "maintenance",
+            "downloads"
+          ]
+        }
+      ],
+      "observations": [
+        {
+          "url": "https://api.github.com/repos/sqlpage/SQLPage",
+          "reviewed_at": "2026-11-16",
+          "status": 200,
+          "final_url": "https://api.github.com/repos/sqlpage/SQLPage",
+          "bytes": 6164,
+          "sha256": "80774b282186d78989ddf564898a1e19252905774905a3cbbe7eabbfa4c48abc"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/sqlpage/SQLPage/main/README.md",
+          "reviewed_at": "2026-11-16",
+          "status": 200,
+          "final_url": "https://raw.githubusercontent.com/sqlpage/SQLPage/main/README.md",
+          "bytes": 19964,
+          "sha256": "f7e44ef931c1f375ecd4823dd75db0eb2bb91f033804dcb4b4d2f259df38a915"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/sqlpage/SQLPage/main/LICENSE",
+          "reviewed_at": "2026-11-16",
+          "error": "HTTP Error 404: Not Found"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/sqlpage/SQLPage/main/LICENSE.md",
+          "reviewed_at": "2026-11-16",
+          "error": "HTTP Error 404: Not Found"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/sqlpage/SQLPage/main/COPYING",
+          "reviewed_at": "2026-11-16",
+          "error": "HTTP Error 404: Not Found"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/sqlpage/SQLPage/main/LICENSE.txt",
+          "reviewed_at": "2026-11-16",
+          "status": 200,
+          "final_url": "https://raw.githubusercontent.com/sqlpage/SQLPage/main/LICENSE.txt",
+          "bytes": 1070,
+          "sha256": "9809766ebda83276892816cec11a3e1c938b3a71ace3db1f20ff028be8055e7c"
+        },
+        {
+          "url": "https://api.github.com/repos/sqlpage/SQLPage/releases/latest",
+          "reviewed_at": "2026-11-16",
+          "status": 200,
+          "final_url": "https://api.github.com/repos/sqlpage/SQLPage/releases/latest",
+          "bytes": 19704,
+          "sha256": "26d459158e0a52ba6d0d658e48765777ca2774d3ccbda3b095ce8e008354db56"
+        },
+        {
+          "url": "https://sql-page.com/",
+          "reviewed_at": "2026-11-16",
+          "status": 200,
+          "final_url": "https://sql-page.com/",
+          "bytes": 54456,
+          "sha256": "bd17302fc164c87e318170f0f131bbd388d220e0172a5a8f9cea7b16d8eea9e9"
+        },
+        {
+          "url": "https://sql-page.com/sso/",
+          "reviewed_at": "2026-11-16",
+          "status": 200,
+          "final_url": "https://sql-page.com/sso/",
+          "bytes": 28553,
+          "sha256": "940700bc95df6d7554e85ee0e1dd7347f7015d850e05d338a381dcc5a10e38c2"
+        },
+        {
+          "url": "https://sql-page.com/your-first-sql-website/",
+          "reviewed_at": "2026-11-16",
+          "status": 200,
+          "final_url": "https://sql-page.com/your-first-sql-website/",
+          "bytes": 38880,
+          "sha256": "5ceb064b7fc584a4bcfebe37401f7727e100d2e12b7fedbec84ad7ca375b0d93"
+        }
+      ]
+    },
+    {
+      "app_id": "evidence-core",
+      "reviewed_at": "2026-11-16",
+      "assessment": "Official sources reviewed. Recommendations are conditional editorial judgments about documented fit; no installed compatibility, performance or universal-best ranking is asserted.",
+      "selected_sources": [
+        {
+          "url": "https://github.com/evidence-dev/evidence/blob/main/README.md",
+          "label": "Official project documentation",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity",
+            "features",
+            "platforms",
+            "downloads"
+          ]
+        },
+        {
+          "url": "https://github.com/evidence-dev/evidence/blob/main/LICENSE",
+          "label": "Official application and dependency licensing",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "license"
+          ]
+        },
+        {
+          "url": "https://docs.evidence.dev/cli",
+          "label": "Official CLI and supported platforms",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "platforms",
+            "downloads",
+            "features"
+          ]
+        },
+        {
+          "url": "https://evidence.dev/blog/evidence-core",
+          "label": "Official Core launch and Studio distinction",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity",
+            "features",
+            "maintenance"
+          ]
+        }
+      ],
+      "observations": [
+        {
+          "url": "https://api.github.com/repos/evidence-dev/evidence",
+          "reviewed_at": "2026-11-16",
+          "status": 200,
+          "final_url": "https://api.github.com/repos/evidence-dev/evidence",
+          "bytes": 6727,
+          "sha256": "0f595f37babc99f49f1650769de0bd132f61e167aaba361e377449a80a863518"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/evidence-dev/evidence/main/README.md",
+          "reviewed_at": "2026-11-16",
+          "status": 200,
+          "final_url": "https://raw.githubusercontent.com/evidence-dev/evidence/main/README.md",
+          "bytes": 1899,
+          "sha256": "bc2d095ba469ef9bd8278716c8ed4ed0e780461ce97a8fd479eced1da51c3d52"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/evidence-dev/evidence/main/LICENSE",
+          "reviewed_at": "2026-11-16",
+          "status": 200,
+          "final_url": "https://raw.githubusercontent.com/evidence-dev/evidence/main/LICENSE",
+          "bytes": 1065,
+          "sha256": "818e8dba24d293850aa1f7804d330512fdf29c5cd2b304235602d3176084534c"
+        },
+        {
+          "url": "https://api.github.com/repos/evidence-dev/evidence/releases/latest",
+          "reviewed_at": "2026-11-16",
+          "status": 200,
+          "final_url": "https://api.github.com/repos/evidence-dev/evidence/releases/latest",
+          "bytes": 2259,
+          "sha256": "f32b70dbc40d70bdb5512b167239470de235592a2c9e09ffff5425b1a56ca885"
+        },
+        {
+          "label": "evidence-cli",
+          "url": "https://docs.evidence.dev/cli",
+          "reviewed_at": "2026-11-16",
+          "status": 200,
+          "final_url": "https://docs.evidence.dev/cli",
+          "bytes": 229786,
+          "sha256": "f32fb07af9858d9021d05d580127d1f5ef8c58bb02db142775e61bde31497b34"
+        },
+        {
+          "label": "evidence-release-blog",
+          "url": "https://evidence.dev/blog/evidence-core",
+          "reviewed_at": "2026-11-16",
+          "status": 200,
+          "final_url": "https://evidence.dev/blog/evidence-core",
+          "bytes": 50583,
+          "sha256": "351529af6a8dc742cf53f9c9dcc083c85f68afd92fac07b102d073bd894e7113"
+        },
+        {
+          "url": "https://evidence.dev/",
+          "reviewed_at": "2026-11-16",
+          "status": 200,
+          "final_url": "https://evidence.dev/",
+          "bytes": 200725,
+          "sha256": "a766aa751f090faec789f09ceb66243f01673888634549bfdd40fe6c3fe45788"
+        }
+      ]
+    },
+    {
+      "app_id": "deno",
+      "reviewed_at": "2026-11-16",
+      "assessment": "Official sources reviewed. Recommendations are conditional editorial judgments about documented fit; no installed compatibility, performance or universal-best ranking is asserted.",
+      "selected_sources": [
+        {
+          "url": "https://github.com/denoland/deno/blob/main/README.md",
+          "label": "Official project documentation",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity",
+            "features",
+            "platforms",
+            "downloads"
+          ]
+        },
+        {
+          "url": "https://github.com/denoland/deno/blob/main/LICENSE.md",
+          "label": "Official application and dependency licensing",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "license"
+          ]
+        },
+        {
+          "url": "https://docs.deno.com/runtime/",
+          "label": "Official runtime features",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "features"
+          ]
+        },
+        {
+          "url": "https://github.com/denoland/deno/releases/tag/v2.9.8",
+          "label": "Official dated release and distribution",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "maintenance",
+            "downloads"
+          ]
+        }
+      ],
+      "observations": [
+        {
+          "url": "https://api.github.com/repos/denoland/deno",
+          "reviewed_at": "2026-11-16",
+          "status": 200,
+          "final_url": "https://api.github.com/repos/denoland/deno",
+          "bytes": 6077,
+          "sha256": "e3c3134ddb5f6eae4e56a3df4f2fff7264bee9241ee421f0e949dcffe656ed41"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/denoland/deno/main/README.md",
+          "reviewed_at": "2026-11-16",
+          "status": 200,
+          "final_url": "https://raw.githubusercontent.com/denoland/deno/main/README.md",
+          "bytes": 3807,
+          "sha256": "83a959d62dea940f94ce1b50024928e34afb447de35197b7ea1d944fd6dbbcf7"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/denoland/deno/main/LICENSE",
+          "reviewed_at": "2026-11-16",
+          "error": "HTTP Error 404: Not Found"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/denoland/deno/main/LICENSE.md",
+          "reviewed_at": "2026-11-16",
+          "status": 200,
+          "final_url": "https://raw.githubusercontent.com/denoland/deno/main/LICENSE.md",
+          "bytes": 1074,
+          "sha256": "f62497fffecc0852960c8d3e6934b9db86d16396e9b604072e923892cae3a588"
+        },
+        {
+          "url": "https://api.github.com/repos/denoland/deno/releases/latest",
+          "reviewed_at": "2026-11-16",
+          "status": 200,
+          "final_url": "https://api.github.com/repos/denoland/deno/releases/latest",
+          "bytes": 96774,
+          "sha256": "39b0a473dbe0c49381313a4a0a1360b11abba7d31f99607f6e02744a42339fe7"
+        },
+        {
+          "url": "https://deno.com/",
+          "reviewed_at": "2026-11-16",
+          "status": 200,
+          "final_url": "https://deno.com/",
+          "bytes": 286124,
+          "sha256": "f5be56f6dd05d6f09658f9f7af8e7eec4b1305c71ab20465810ea7ebc54acf86"
+        },
+        {
+          "url": "https://docs.deno.com/runtime/",
+          "reviewed_at": "2026-11-16",
+          "status": 200,
+          "final_url": "https://docs.deno.com/runtime/",
+          "bytes": 99708,
+          "sha256": "c9ba53adf4073cb9ff99b0b0345a7a85f95cdc938983f7b4a1a4d331d164f728"
+        },
+        {
+          "url": "https://github.com/denoland/deno#installation",
+          "reviewed_at": "2026-11-16",
+          "status": 200,
+          "final_url": "https://github.com/denoland/deno#installation",
+          "bytes": 299057,
+          "sha256": "c1d30efeaa7e6cac1ea2b54077fb3a1f7d32a3894c48e5eb7b1f6b5ea983047c"
+        }
+      ]
+    },
+    {
+      "app_id": "bun",
+      "reviewed_at": "2026-11-16",
+      "assessment": "Official sources reviewed. Recommendations are conditional editorial judgments about documented fit; no installed compatibility, performance or universal-best ranking is asserted.",
+      "selected_sources": [
+        {
+          "url": "https://github.com/oven-sh/bun/blob/main/README.md",
+          "label": "Official project documentation",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity",
+            "features",
+            "platforms",
+            "downloads"
+          ]
+        },
+        {
+          "url": "https://github.com/oven-sh/bun/blob/main/LICENSE.md",
+          "label": "Official application and dependency licensing",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "license"
+          ]
+        },
+        {
+          "url": "https://github.com/oven-sh/bun/releases/tag/bun-v1.4.4",
+          "label": "Official dated release and distribution",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "maintenance",
+            "downloads"
+          ]
+        }
+      ],
+      "observations": [
+        {
+          "url": "https://api.github.com/repos/oven-sh/bun",
+          "reviewed_at": "2026-11-16",
+          "status": 200,
+          "final_url": "https://api.github.com/repos/oven-sh/bun",
+          "bytes": 6024,
+          "sha256": "feaa5ab27d59ed86422d5640ce44e0dd7df8da7dad3cb7de4329e7fc03b0ae7c"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/oven-sh/bun/main/README.md",
+          "reviewed_at": "2026-11-16",
+          "status": 200,
+          "final_url": "https://raw.githubusercontent.com/oven-sh/bun/main/README.md",
+          "bytes": 26209,
+          "sha256": "d92061a62c132844b11565ef0f96d1c178863832ea4670e96b22ac2a7cb1225c"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/oven-sh/bun/main/LICENSE",
+          "reviewed_at": "2026-11-16",
+          "error": "HTTP Error 404: Not Found"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/oven-sh/bun/main/LICENSE.md",
+          "reviewed_at": "2026-11-16",
+          "status": 200,
+          "final_url": "https://raw.githubusercontent.com/oven-sh/bun/main/LICENSE.md",
+          "bytes": 15913,
+          "sha256": "0d52cd72a9606a93d32b5e7adb4cf172444b9426d4030afa9f92766384a799ec"
+        },
+        {
+          "url": "https://api.github.com/repos/oven-sh/bun/releases/latest",
+          "reviewed_at": "2026-11-16",
+          "status": 200,
+          "final_url": "https://api.github.com/repos/oven-sh/bun/releases/latest",
+          "bytes": 62727,
+          "sha256": "361585f139912016d5d58a6d4f37624c2d128c45c30f9a61a069c2499a8f81cb"
+        },
+        {
+          "url": "https://bun.com/",
+          "reviewed_at": "2026-11-16",
+          "status": 200,
+          "final_url": "https://bun.com/",
+          "bytes": 251460,
+          "sha256": "9e44db9a95b005758078dff71ba84424f95b335a0acfcb927079e56b9e476790"
+        },
+        {
+          "url": "https://bun.com/docs/installation",
+          "reviewed_at": "2026-11-16",
+          "status": 200,
+          "final_url": "https://bun.com/docs/installation",
+          "bytes": 195529,
+          "sha256": "e66c2d0388136c8cb744f97440281edd38c425ad74e60b3f2bdcbae0fce39659"
+        }
+      ]
+    },
+    {
+      "app_id": "yarn",
+      "reviewed_at": "2026-11-16",
+      "assessment": "Official sources reviewed. Recommendations are conditional editorial judgments about documented fit; no installed compatibility, performance or universal-best ranking is asserted.",
+      "selected_sources": [
+        {
+          "url": "https://github.com/yarnpkg/berry/blob/master/README.md",
+          "label": "Official project documentation",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity",
+            "features",
+            "platforms",
+            "downloads"
+          ]
+        },
+        {
+          "url": "https://github.com/yarnpkg/berry/blob/master/LICENSE.md",
+          "label": "Official application and dependency licensing",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "license"
+          ]
+        },
+        {
+          "url": "https://yarnpkg.com/getting-started/install",
+          "label": "Official project installation",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "platforms",
+            "downloads"
+          ]
+        },
+        {
+          "url": "https://yarnpkg.com/features/pnp",
+          "label": "Official dependency resolution behavior",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "features"
+          ]
+        },
+        {
+          "url": "https://github.com/yarnpkg/berry/releases/tag/%40yarnpkg/cli/4.18.1",
+          "label": "Official dated release and distribution",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "maintenance",
+            "downloads"
+          ]
+        }
+      ],
+      "observations": [
+        {
+          "url": "https://api.github.com/repos/yarnpkg/berry",
+          "reviewed_at": "2026-11-16",
+          "status": 200,
+          "final_url": "https://api.github.com/repos/yarnpkg/berry",
+          "bytes": 6115,
+          "sha256": "f0a06017f5af5db30d0910b2ffa1a11d7b1f2d9142b754b97524eca48ea73a9f"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/yarnpkg/berry/master/README.md",
+          "reviewed_at": "2026-11-16",
+          "status": 200,
+          "final_url": "https://raw.githubusercontent.com/yarnpkg/berry/master/README.md",
+          "bytes": 17475,
+          "sha256": "67c93fc2af0b3248e537a222f5c8633b3b3382e36f778207bfa646d4b1915ec0"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/yarnpkg/berry/master/LICENSE",
+          "reviewed_at": "2026-11-16",
+          "error": "HTTP Error 404: Not Found"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/yarnpkg/berry/master/LICENSE.md",
+          "reviewed_at": "2026-11-16",
+          "status": 200,
+          "final_url": "https://raw.githubusercontent.com/yarnpkg/berry/master/LICENSE.md",
+          "bytes": 1336,
+          "sha256": "238d933f5c226cc197bd1dae2ad0c468e157b4cba8ed844f81549ba6db777dc4"
+        },
+        {
+          "url": "https://api.github.com/repos/yarnpkg/berry/releases/latest",
+          "reviewed_at": "2026-11-16",
+          "status": 200,
+          "final_url": "https://api.github.com/repos/yarnpkg/berry/releases/latest",
+          "bytes": 2143,
+          "sha256": "d0144279cae5780be94560711d548407e7428bed2bb489aa9028c24e62bcfd8c"
+        },
+        {
+          "label": "yarn-install",
+          "url": "https://yarnpkg.com/getting-started/install",
+          "reviewed_at": "2026-11-16",
+          "status": 200,
+          "final_url": "https://yarnpkg.com/getting-started/install",
+          "bytes": 33978,
+          "sha256": "625642bc61c99101c8e4cf10b04a36a5cace2fa29e2be2e64302144a12b59c1e"
+        },
+        {
+          "url": "https://yarnpkg.com/",
+          "reviewed_at": "2026-11-16",
+          "status": 200,
+          "final_url": "https://yarnpkg.com/",
+          "bytes": 24819,
+          "sha256": "aec98ed1d0fd7fdf262b9a8c8e129f92e5e7c6048d766679c7780d2830961bd5"
+        },
+        {
+          "url": "https://yarnpkg.com/features/pnp",
+          "reviewed_at": "2026-11-16",
+          "status": 200,
+          "final_url": "https://yarnpkg.com/features/pnp",
+          "bytes": 52174,
+          "sha256": "7886149ca4e4fe8ae4671f43f4deef40970f0ce1070d83279e5962a4ddfc33b0"
+        }
+      ]
+    },
+    {
+      "app_id": "npm-cli",
+      "reviewed_at": "2026-11-16",
+      "assessment": "Official sources reviewed. Recommendations are conditional editorial judgments about documented fit; no installed compatibility, performance or universal-best ranking is asserted.",
+      "selected_sources": [
+        {
+          "url": "https://github.com/npm/cli/blob/latest/README.md",
+          "label": "Official project documentation",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity",
+            "features",
+            "platforms",
+            "downloads"
+          ]
+        },
+        {
+          "url": "https://github.com/npm/cli/blob/latest/LICENSE",
+          "label": "Official application and dependency licensing",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "license"
+          ]
+        },
+        {
+          "url": "https://docs.npmjs.com/downloading-and-installing-node-js-and-npm",
+          "label": "Official installation and Node.js requirement",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "platforms",
+            "downloads"
+          ]
+        },
+        {
+          "url": "https://docs.npmjs.com/cli/v12/commands/npm-ci",
+          "label": "Official locked CI installation behavior",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "features"
+          ]
+        },
+        {
+          "url": "https://github.com/npm/cli/releases/tag/v12.2.2",
+          "label": "Official dated release and distribution",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "maintenance",
+            "downloads"
+          ]
+        }
+      ],
+      "observations": [
+        {
+          "url": "https://api.github.com/repos/npm/cli",
+          "reviewed_at": "2026-11-16",
+          "status": 200,
+          "final_url": "https://api.github.com/repos/npm/cli",
+          "bytes": 5691,
+          "sha256": "f4bb93d594ff50e922435c72d7f5239f15b6290a642819a572a580b33b2b217c"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/npm/cli/latest/README.md",
+          "reviewed_at": "2026-11-16",
+          "status": 200,
+          "final_url": "https://raw.githubusercontent.com/npm/cli/latest/README.md",
+          "bytes": 3352,
+          "sha256": "4c8033d19dbb94ea04739f077aaf17b8d24b9d7f1a49db50d61f7d37509fba19"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/npm/cli/latest/LICENSE",
+          "reviewed_at": "2026-11-16",
+          "status": 200,
+          "final_url": "https://raw.githubusercontent.com/npm/cli/latest/LICENSE",
+          "bytes": 9742,
+          "sha256": "7610d223851f421d315df5e77974f1c68a04b97e02060e5bbbcf13d95e3ca257"
+        },
+        {
+          "url": "https://api.github.com/repos/npm/cli/releases/latest",
+          "reviewed_at": "2026-11-16",
+          "status": 200,
+          "final_url": "https://api.github.com/repos/npm/cli/releases/latest",
+          "bytes": 4807,
+          "sha256": "2265a7326a185a0bdce16169df5adf98277c130cfd5f118131c74dec634e6651"
+        },
+        {
+          "label": "npm-install",
+          "url": "https://docs.npmjs.com/downloading-and-installing-node-js-and-npm",
+          "reviewed_at": "2026-11-16",
+          "status": 200,
+          "final_url": "https://docs.npmjs.com/downloading-and-installing-node-js-and-npm/",
+          "bytes": 519976,
+          "sha256": "21452ae235ecc4d53a56af2ba1f11a147ecbeea4e13ad8b02a933fcc80591f66"
+        },
+        {
+          "url": "https://docs.npmjs.com/cli/",
+          "reviewed_at": "2026-11-16",
+          "status": 200,
+          "final_url": "https://docs.npmjs.com/cli/",
+          "bytes": 58,
+          "sha256": "299c174d74dc15802c4a09418b6743a979bb1398dd23c225d8e28a3235a2783b"
+        },
+        {
+          "url": "https://docs.npmjs.com/cli/v12/commands/npm-ci",
+          "reviewed_at": "2026-11-16",
+          "status": 200,
+          "final_url": "https://docs.npmjs.com/cli/v12/commands/npm-ci/",
+          "bytes": 594399,
+          "sha256": "1493f5905c76cad2a175ed05e7dd4080329a8ba6a541ed8a350ee64a98ed02e7"
+        }
+      ]
+    },
+    {
+      "app_id": "jujutsu",
+      "reviewed_at": "2026-11-16",
+      "assessment": "Official sources reviewed. Recommendations are conditional editorial judgments about documented fit; no installed compatibility, performance or universal-best ranking is asserted.",
+      "selected_sources": [
+        {
+          "url": "https://github.com/jj-vcs/jj/blob/main/README.md",
+          "label": "Official project documentation",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity",
+            "features",
+            "platforms",
+            "downloads"
+          ]
+        },
+        {
+          "url": "https://github.com/jj-vcs/jj/blob/main/LICENSE",
+          "label": "Official application and dependency licensing",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "license"
+          ]
+        },
+        {
+          "url": "https://github.com/jj-vcs/jj/releases/tag/v0.47.1",
+          "label": "Official dated release and distribution",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "maintenance",
+            "downloads"
+          ]
+        }
+      ],
+      "observations": [
+        {
+          "url": "https://api.github.com/repos/jj-vcs/jj",
+          "reviewed_at": "2026-11-16",
+          "status": 200,
+          "final_url": "https://api.github.com/repos/jj-vcs/jj",
+          "bytes": 6028,
+          "sha256": "9981354eddc4e1a1d0f6a918255a700700450b45fa6ee4f771a4b6267b78f852"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/jj-vcs/jj/main/README.md",
+          "reviewed_at": "2026-11-16",
+          "status": 200,
+          "final_url": "https://raw.githubusercontent.com/jj-vcs/jj/main/README.md",
+          "bytes": 17865,
+          "sha256": "bb15d6a36dfc429c0073a61daa06ef4b445dcedaf2acb8e01b91f9528077ac08"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/jj-vcs/jj/main/LICENSE",
+          "reviewed_at": "2026-11-16",
+          "status": 200,
+          "final_url": "https://raw.githubusercontent.com/jj-vcs/jj/main/LICENSE",
+          "bytes": 11358,
+          "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+        },
+        {
+          "url": "https://api.github.com/repos/jj-vcs/jj/releases/latest",
+          "reviewed_at": "2026-11-16",
+          "status": 200,
+          "final_url": "https://api.github.com/repos/jj-vcs/jj/releases/latest",
+          "bytes": 14575,
+          "sha256": "c64bc001d33f727a3e7183005c18b31b2c6ae345f5ff10ba5075885f9ef7f86c"
+        },
+        {
+          "url": "https://docs.jj-vcs.dev/latest/install-and-setup/",
+          "reviewed_at": "2026-11-16",
+          "status": 200,
+          "final_url": "https://docs.jj-vcs.dev/latest/install-and-setup/",
+          "bytes": 70426,
+          "sha256": "e4b4d4b3e3e9934637e06722646bf505620c752d87b628ef186b64e93d0d655a"
+        },
+        {
+          "url": "https://www.jj-vcs.dev/",
+          "reviewed_at": "2026-11-16",
+          "status": 200,
+          "final_url": "https://www.jj-vcs.dev/",
+          "bytes": 703,
+          "sha256": "73a975e8bb936560504923ed532066262d8afd538b8f5ac64c840fa250fe5db9"
+        }
+      ]
+    },
+    {
+      "app_id": "git-cola",
+      "reviewed_at": "2026-11-16",
+      "assessment": "Official sources reviewed. Recommendations are conditional editorial judgments about documented fit; no installed compatibility, performance or universal-best ranking is asserted.",
+      "selected_sources": [
+        {
+          "url": "https://github.com/git-cola/git-cola/blob/main/README.md",
+          "label": "Official project documentation",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity",
+            "features",
+            "platforms",
+            "downloads"
+          ]
+        },
+        {
+          "url": "https://github.com/git-cola/git-cola/blob/main/LICENSE",
+          "label": "Official application and dependency licensing",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "license"
+          ]
+        },
+        {
+          "url": "https://github.com/git-cola/git-cola/blob/main/docs/git-cola.rst",
+          "label": "Official Git Cola commands and staging documentation",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "features"
+          ]
+        },
+        {
+          "url": "https://github.com/git-cola/git-cola/releases/tag/v4.19.0",
+          "label": "Official dated release and distribution",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "maintenance",
+            "downloads"
+          ]
+        }
+      ],
+      "observations": [
+        {
+          "url": "https://api.github.com/repos/git-cola/git-cola",
+          "reviewed_at": "2026-11-16",
+          "status": 200,
+          "final_url": "https://api.github.com/repos/git-cola/git-cola",
+          "bytes": 6405,
+          "sha256": "dc513127e5760eda4e90396dc9a7507834b40412e43bfe0b613b3613c254ea9e"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/git-cola/git-cola/main/README.md",
+          "reviewed_at": "2026-11-16",
+          "status": 200,
+          "final_url": "https://raw.githubusercontent.com/git-cola/git-cola/main/README.md",
+          "bytes": 16374,
+          "sha256": "560f7bc30b30470f1f11b8bc82485fa75cfc53963b2df9c6ab201bf051595ac1"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/git-cola/git-cola/main/LICENSE",
+          "reviewed_at": "2026-11-16",
+          "status": 200,
+          "final_url": "https://raw.githubusercontent.com/git-cola/git-cola/main/LICENSE",
+          "bytes": 17987,
+          "sha256": "ab15fd526bd8dd18a9e77ebc139656bf4d33e97fc7238cd11bf60e2b9b8666c6"
+        },
+        {
+          "url": "https://api.github.com/repos/git-cola/git-cola/releases/latest",
+          "reviewed_at": "2026-11-16",
+          "status": 200,
+          "final_url": "https://api.github.com/repos/git-cola/git-cola/releases/latest",
+          "bytes": 3792,
+          "sha256": "f1820d56eed1e0fdcde931ce4152cd1637a309b247e7d19f058c630526b10aae"
+        },
+        {
+          "url": "https://git-cola.gitlab.io/",
+          "reviewed_at": "2026-11-16",
+          "status": 200,
+          "final_url": "https://git-cola.gitlab.io/",
+          "bytes": 2551,
+          "sha256": "f5e0cd98259119382a1dc2e57d738b4a5e1d7e7d39e7414a3fb2ddf123953ff0"
+        },
+        {
+          "url": "https://github.com/git-cola/git-cola#installation",
+          "reviewed_at": "2026-11-16",
+          "status": 200,
+          "final_url": "https://github.com/git-cola/git-cola#installation",
+          "bytes": 397279,
+          "sha256": "3935fb2732295948095b97dea483d12614f5d66b9b8e6c188b23fedb7cc16f39"
+        }
+      ]
+    },
+    {
+      "app_id": "fossil",
+      "reviewed_at": "2026-11-16",
+      "assessment": "Official sources reviewed. Recommendations are conditional editorial judgments about documented fit; no installed compatibility, performance or universal-best ranking is asserted.",
+      "selected_sources": [
+        {
+          "url": "https://fossil-scm.org/home/doc/trunk/www/index.wiki",
+          "label": "Official project overview",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity",
+            "features",
+            "platforms",
+            "pricing"
+          ]
+        },
+        {
+          "url": "https://fossil-scm.org/home/doc/trunk/COPYRIGHT-BSD2.txt",
+          "label": "Official BSD licensing terms",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "license"
+          ]
+        },
+        {
+          "url": "https://fossil-scm.org/home/uv/download.html",
+          "label": "Official download route",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "downloads"
+          ]
+        },
+        {
+          "url": "https://fossil-scm.org/home/doc/trunk/www/changes.wiki",
+          "label": "Official dated release history",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "maintenance"
+          ]
+        }
+      ],
+      "observations": [
+        {
+          "label": "fossil-home",
+          "url": "https://fossil-scm.org/home/doc/trunk/www/index.wiki",
+          "reviewed_at": "2026-11-16",
+          "status": 200,
+          "final_url": "https://fossil-scm.org/home/doc/trunk/www/index.wiki",
+          "bytes": 31649,
+          "sha256": "2a86a06faaa7558dca21c691f6b63712fb9c2e872dd3abd85f758b61125a57e9"
+        },
+        {
+          "label": "fossil-license",
+          "url": "https://fossil-scm.org/home/doc/trunk/COPYRIGHT-BSD2.txt",
+          "reviewed_at": "2026-11-16",
+          "status": 200,
+          "final_url": "https://fossil-scm.org/home/doc/trunk/COPYRIGHT-BSD2.txt",
+          "bytes": 27593,
+          "sha256": "4eb0624a97eb268211662675447843ea29fafaf9b5b3d36692841438de0cd724"
+        },
+        {
+          "label": "fossil-download",
+          "url": "https://fossil-scm.org/home/uv/download.html",
+          "reviewed_at": "2026-11-16",
+          "status": 200,
+          "final_url": "https://fossil-scm.org/home/uv/download.html",
+          "bytes": 27008,
+          "sha256": "10d1f25714ecc5e95c55d86c4c8035c2e5d4e5bc57f9a01ecf67a56ccaf34d1a"
+        },
+        {
+          "url": "https://fossil-scm.org/home/doc/trunk/COPYRIGHT-BSD2.txt",
+          "reviewed_at": "2026-11-16",
+          "status": 200,
+          "final_url": "https://fossil-scm.org/home/doc/trunk/COPYRIGHT-BSD2.txt",
+          "bytes": 27593,
+          "sha256": "9ea7c8f7c2b2f29f9c2b91d236b2ac16ddb187af3ee36e47d3f3dbae489e4bb5"
+        },
+        {
+          "url": "https://fossil-scm.org/home/doc/trunk/www/changes.wiki",
+          "reviewed_at": "2026-11-16",
+          "status": 200,
+          "final_url": "https://fossil-scm.org/home/doc/trunk/www/changes.wiki",
+          "bytes": 171879,
+          "sha256": "82f1a99d739f361e2930b6413a07a915b9ebf4e8d253f126cbb4f2d03df11143"
+        },
+        {
+          "url": "https://fossil-scm.org/home/doc/trunk/www/index.wiki",
+          "reviewed_at": "2026-11-16",
+          "status": 200,
+          "final_url": "https://fossil-scm.org/home/doc/trunk/www/index.wiki",
+          "bytes": 31649,
+          "sha256": "464252a21d6879635f92ea867356eee0494d3cd95c207ad5a0022051fd7c86a1"
+        },
+        {
+          "url": "https://fossil-scm.org/home/uv/download.html",
+          "reviewed_at": "2026-11-16",
+          "status": 200,
+          "final_url": "https://fossil-scm.org/home/uv/download.html",
+          "bytes": 27008,
+          "sha256": "3f64ca0edcdec003103c420e1e560b651ab58fdab096cd9c3c4ac4c74223a293"
+        }
+      ]
+    },
+    {
+      "app_id": "ludusavi",
+      "reviewed_at": "2026-11-16",
+      "assessment": "Official sources reviewed. Recommendations are conditional editorial judgments about documented fit; no installed compatibility, performance or universal-best ranking is asserted.",
+      "selected_sources": [
+        {
+          "url": "https://github.com/mtkennerly/ludusavi/blob/master/README.md",
+          "label": "Official project documentation",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity",
+            "features",
+            "platforms",
+            "downloads"
+          ]
+        },
+        {
+          "url": "https://github.com/mtkennerly/ludusavi/blob/master/LICENSE",
+          "label": "Official application and dependency licensing",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "license"
+          ]
+        },
+        {
+          "url": "https://github.com/mtkennerly/ludusavi/blob/master/docs/help/backup-validation.md",
+          "label": "Official restoration and validation guidance",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "features"
+          ]
+        },
+        {
+          "url": "https://github.com/mtkennerly/ludusavi/releases/tag/v0.31.0",
+          "label": "Official dated release and distribution",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "maintenance",
+            "downloads"
+          ]
+        }
+      ],
+      "observations": [
+        {
+          "url": "https://api.github.com/repos/mtkennerly/ludusavi",
+          "reviewed_at": "2026-11-16",
+          "status": 200,
+          "final_url": "https://api.github.com/repos/mtkennerly/ludusavi",
+          "bytes": 5376,
+          "sha256": "ca5c00f6f2df683f00f876519dd190adb1601b384f00c67a099f04844e03defe"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/mtkennerly/ludusavi/master/README.md",
+          "reviewed_at": "2026-11-16",
+          "status": 200,
+          "final_url": "https://raw.githubusercontent.com/mtkennerly/ludusavi/master/README.md",
+          "bytes": 7131,
+          "sha256": "cfc6e6fc7c6a913387f7096d9677e7ea8e256800313c5b74ad1170046404651a"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/mtkennerly/ludusavi/master/LICENSE",
+          "reviewed_at": "2026-11-16",
+          "status": 200,
+          "final_url": "https://raw.githubusercontent.com/mtkennerly/ludusavi/master/LICENSE",
+          "bytes": 1089,
+          "sha256": "dba5a9bdc2280142b90a68fcd76134f48e6c765f14bfde7356b19b55370b27aa"
+        },
+        {
+          "url": "https://api.github.com/repos/mtkennerly/ludusavi/releases/latest",
+          "reviewed_at": "2026-11-16",
+          "status": 200,
+          "final_url": "https://api.github.com/repos/mtkennerly/ludusavi/releases/latest",
+          "bytes": 11898,
+          "sha256": "c0b758ecd0668ca51b2958341dec03de78fdf6ebc43f8f496e8a9b7b9bbd0ece"
+        },
+        {
+          "url": "https://github.com/mtkennerly/ludusavi",
+          "reviewed_at": "2026-11-16",
+          "status": 200,
+          "final_url": "https://github.com/mtkennerly/ludusavi",
+          "bytes": 292030,
+          "sha256": "de7da51ea0014f2da865fecd333d409a8a05c2df6dab42d4399262d4ad5a58b2"
+        },
+        {
+          "url": "https://github.com/mtkennerly/ludusavi/releases",
+          "reviewed_at": "2026-11-16",
+          "status": 200,
+          "final_url": "https://github.com/mtkennerly/ludusavi/releases",
+          "bytes": 472632,
+          "sha256": "987eb359089bc77dc0276990669e2d8f35966d108392129f301c25146571ae37"
+        }
+      ]
+    },
+    {
+      "app_id": "game-backup-monitor",
+      "reviewed_at": "2026-11-16",
+      "assessment": "Official sources reviewed. Recommendations are conditional editorial judgments about documented fit; no installed compatibility, performance or universal-best ranking is asserted.",
+      "selected_sources": [
+        {
+          "url": "https://github.com/MikeMaximus/gbm/blob/master/README.md",
+          "label": "Official project documentation",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity",
+            "features",
+            "platforms",
+            "downloads"
+          ]
+        },
+        {
+          "url": "https://github.com/MikeMaximus/gbm/blob/master/LICENSE",
+          "label": "Official application and dependency licensing",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "license"
+          ]
+        },
+        {
+          "url": "https://mikemaximus.github.io/gbm-web/manual.html",
+          "label": "Official backup workflow and history documentation",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "features"
+          ]
+        },
+        {
+          "url": "https://github.com/MikeMaximus/gbm/releases/tag/v1.4.5",
+          "label": "Official dated release and distribution",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "maintenance",
+            "downloads"
+          ]
+        },
+        {
+          "url": "https://mikemaximus.github.io/gbm-web/",
+          "label": "Official maintenance scope and current Windows testing requirements",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity",
+            "platforms",
+            "maintenance"
+          ]
+        }
+      ],
+      "observations": [
+        {
+          "url": "https://api.github.com/repos/MikeMaximus/gbm",
+          "reviewed_at": "2026-11-16",
+          "status": 200,
+          "final_url": "https://api.github.com/repos/MikeMaximus/gbm",
+          "bytes": 5358,
+          "sha256": "ec85bf6230f15a02f1d5077653a053ea905fcaa4c7d320a63324eedbe1fdd4eb"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/MikeMaximus/gbm/master/README.md",
+          "reviewed_at": "2026-11-16",
+          "status": 200,
+          "final_url": "https://raw.githubusercontent.com/MikeMaximus/gbm/master/README.md",
+          "bytes": 1538,
+          "sha256": "53930ec3586e93e12be0f6b77332976dc098be2494f3ff71051f0187f06c9da8"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/MikeMaximus/gbm/master/LICENSE",
+          "reviewed_at": "2026-11-16",
+          "status": 200,
+          "final_url": "https://raw.githubusercontent.com/MikeMaximus/gbm/master/LICENSE",
+          "bytes": 35147,
+          "sha256": "8ceb4b9ee5adedde47b31e975c1d90c73ad27b6b165a1dcd80c7c545eb65b903"
+        },
+        {
+          "url": "https://api.github.com/repos/MikeMaximus/gbm/releases/latest",
+          "reviewed_at": "2026-11-16",
+          "status": 200,
+          "final_url": "https://api.github.com/repos/MikeMaximus/gbm/releases/latest",
+          "bytes": 11862,
+          "sha256": "0da846786ace1663e11acb37329087cbc2dbe5194f20b52f8423938ab8f441ea"
+        },
+        {
+          "url": "https://github.com/MikeMaximus/gbm/releases",
+          "reviewed_at": "2026-11-16",
+          "status": 200,
+          "final_url": "https://github.com/MikeMaximus/gbm/releases",
+          "bytes": 409072,
+          "sha256": "699292d8957cf13529fa705594ae0a647443a067d5686d72071c0c9fad521706"
+        },
+        {
+          "url": "https://mikemaximus.github.io/gbm-web/",
+          "reviewed_at": "2026-11-16",
+          "status": 200,
+          "final_url": "https://mikemaximus.github.io/gbm-web/",
+          "bytes": 6119,
+          "sha256": "5524726cc2ba681e21a598806e2f849707bf16e261294a722cab584c3e8977db"
+        },
+        {
+          "url": "https://mikemaximus.github.io/gbm-web/manual.html",
+          "reviewed_at": "2026-11-16",
+          "status": 200,
+          "final_url": "https://mikemaximus.github.io/gbm-web/manual.html",
+          "bytes": 119988,
+          "sha256": "f5ed877cebc8b4ac0291554f2a2b0d457f92f85a76b37ec2d63af0f2b41137fe"
+        }
+      ],
+      "independent_review": "Cross-reviewed against primary sources by systems QA; edition, release-line, maintenance-scope and source-claim qualifications corrected where relevant."
+    },
+    {
+      "app_id": "cvat",
+      "reviewed_at": "2026-11-16",
+      "assessment": "Official sources reviewed. Recommendations are conditional editorial judgments about documented fit; no installed compatibility, performance or universal-best ranking is asserted.",
+      "selected_sources": [
+        {
+          "url": "https://github.com/cvat-ai/cvat/blob/develop/README.md",
+          "label": "Official project documentation",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity",
+            "features",
+            "platforms",
+            "downloads",
+            "pricing"
+          ]
+        },
+        {
+          "url": "https://github.com/cvat-ai/cvat/blob/develop/LICENSE",
+          "label": "Official application and dependency licensing",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "license"
+          ]
+        },
+        {
+          "url": "https://docs.cvat.ai/docs/administration/community/basics/installation/",
+          "label": "Official Community installation",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "platforms",
+            "downloads"
+          ]
+        },
+        {
+          "url": "https://github.com/cvat-ai/cvat/releases/tag/v2.83.0",
+          "label": "Official dated release and distribution",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "maintenance",
+            "downloads"
+          ]
+        }
+      ],
+      "observations": [
+        {
+          "url": "https://api.github.com/repos/cvat-ai/cvat",
+          "reviewed_at": "2026-11-16",
+          "status": 200,
+          "final_url": "https://api.github.com/repos/cvat-ai/cvat",
+          "bytes": 6513,
+          "sha256": "4ad1028c11af0bacbedaf0300ab2d57e7b4a2ecd7382c5b00a9f6ef8f72a94e1"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/cvat-ai/cvat/develop/README.md",
+          "reviewed_at": "2026-11-16",
+          "status": 200,
+          "final_url": "https://raw.githubusercontent.com/cvat-ai/cvat/develop/README.md",
+          "bytes": 14214,
+          "sha256": "52abb2393f8e49b6b88b233dd671913cb8338e248658e17a5ab0105d80f00f0e"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/cvat-ai/cvat/develop/LICENSE",
+          "reviewed_at": "2026-11-16",
+          "status": 200,
+          "final_url": "https://raw.githubusercontent.com/cvat-ai/cvat/develop/LICENSE",
+          "bytes": 1123,
+          "sha256": "f0c98c1710670f97a3dfab70829ec8739c12898463a6eb1bbddfc21821ae9c63"
+        },
+        {
+          "url": "https://api.github.com/repos/cvat-ai/cvat/releases/latest",
+          "reviewed_at": "2026-11-16",
+          "status": 200,
+          "final_url": "https://api.github.com/repos/cvat-ai/cvat/releases/latest",
+          "bytes": 2476,
+          "sha256": "2b8b49483213b7aeb767534ab5379ad7132488195875930fd8efd5b40b67c8ed"
+        },
+        {
+          "url": "https://docs.cvat.ai/docs/administration/community/basics/installation/",
+          "reviewed_at": "2026-11-16",
+          "status": 200,
+          "final_url": "https://docs.cvat.ai/docs/administration/community/basics/installation/",
+          "bytes": 186761,
+          "sha256": "341a1f274b6f938c0efe8105f040e58d25c4a38346cfe9ad75ce71f2b18e9577"
+        },
+        {
+          "url": "https://www.cvat.ai/",
+          "reviewed_at": "2026-11-16",
+          "status": 200,
+          "final_url": "https://www.cvat.ai/",
+          "bytes": 170772,
+          "sha256": "3d7a2adc6cf76c1f21fc6013c9af3f2f301156562cf1c5484b242da0b9cc6874"
+        }
+      ],
+      "independent_review": "Cross-reviewed against primary sources by systems QA; edition, release-line, maintenance-scope and source-claim qualifications corrected where relevant."
+    },
+    {
+      "app_id": "special-k",
+      "reviewed_at": "2026-11-16",
+      "assessment": "Official sources reviewed. Recommendations are conditional editorial judgments about documented fit; no installed compatibility, performance or universal-best ranking is asserted.",
+      "selected_sources": [
+        {
+          "url": "https://github.com/SpecialKO/SpecialK/blob/main/README.md",
+          "label": "Official project documentation",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity",
+            "features",
+            "platforms",
+            "downloads"
+          ]
+        },
+        {
+          "url": "https://github.com/SpecialKO/SpecialK/blob/main/LICENSE",
+          "label": "Official application and dependency licensing",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "license"
+          ]
+        },
+        {
+          "url": "https://www.special-k.info/",
+          "label": "Official feature overview and download channels",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "identity",
+            "features",
+            "downloads"
+          ]
+        },
+        {
+          "url": "https://wiki.special-k.info/SpecialK/Local",
+          "label": "Official per-game installation and compatibility cautions",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "features"
+          ]
+        },
+        {
+          "url": "https://github.com/SpecialKO/SpecialK/releases/tag/SK_26_10_10",
+          "label": "Official dated release and distribution",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "maintenance",
+            "downloads"
+          ]
+        }
+      ],
+      "observations": [
+        {
+          "url": "https://api.github.com/repos/SpecialKO/SpecialK",
+          "reviewed_at": "2026-11-16",
+          "status": 200,
+          "final_url": "https://api.github.com/repos/SpecialKO/SpecialK",
+          "bytes": 6386,
+          "sha256": "5f73755af015e009b1933efe7cc326236a64ab5a4d6aa61381a198628109f71d"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/SpecialKO/SpecialK/main/README.md",
+          "reviewed_at": "2026-11-16",
+          "status": 200,
+          "final_url": "https://raw.githubusercontent.com/SpecialKO/SpecialK/main/README.md",
+          "bytes": 3925,
+          "sha256": "0c877eeb49e3fdc6c1db6f55450de26b8c40e14a4eb4d75198d27a5e77e9f8b2"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/SpecialKO/SpecialK/main/LICENSE",
+          "reviewed_at": "2026-11-16",
+          "status": 200,
+          "final_url": "https://raw.githubusercontent.com/SpecialKO/SpecialK/main/LICENSE",
+          "bytes": 35149,
+          "sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986"
+        },
+        {
+          "url": "https://api.github.com/repos/SpecialKO/SpecialK/releases/latest",
+          "reviewed_at": "2026-11-16",
+          "status": 200,
+          "final_url": "https://api.github.com/repos/SpecialKO/SpecialK/releases/latest",
+          "bytes": 3899,
+          "sha256": "7751fec36552d3ca62cdf789bad4d8bc78cf54038bf903f68b28f7d375eaeab9"
+        },
+        {
+          "label": "special-k-site",
+          "url": "https://www.special-k.info/",
+          "reviewed_at": "2026-11-16",
+          "status": 200,
+          "final_url": "https://www.special-k.info/",
+          "bytes": 11000,
+          "sha256": "e5a160f80273ec02c5a7c50eb6e24eb3e9e56f58f571ec3dc4f61716d8dfe298"
+        },
+        {
+          "label": "special-k-local",
+          "url": "https://wiki.special-k.info/SpecialK/Local",
+          "reviewed_at": "2026-11-16",
+          "status": 200,
+          "final_url": "https://wiki.special-k.info/SpecialK/Local",
+          "bytes": 21457,
+          "sha256": "87a1cdbf5b15cb395b62aacac04d17d92f7d8dc0b62d0690822b201a3381bfe0"
+        },
+        {
+          "url": "https://www.special-k.info/#download",
+          "reviewed_at": "2026-11-16",
+          "status": 200,
+          "final_url": "https://www.special-k.info/#download",
+          "bytes": 11000,
+          "sha256": "e5a160f80273ec02c5a7c50eb6e24eb3e9e56f58f571ec3dc4f61716d8dfe298"
         }
       ]
     }

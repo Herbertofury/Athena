@@ -14,7 +14,7 @@ import unicodedata
 from urllib.parse import urlsplit, urlunsplit
 
 ROOT = Path(__file__).resolve().parents[1]
-REVIEWED = "2026-11-15"
+REVIEWED = "2026-11-16"
 LEGACY = "research/windows-utilities-2026-11-14/catalog.json"
 BASELINE = "research/software-expansion-2026-11-14/baseline.json"
 REPORTS = "research/software-expansion-2026-11-15"

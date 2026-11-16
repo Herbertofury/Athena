@@ -185,3 +185,177 @@ Optional `assetLibrary` (`--disable-foundry-module assetLibrary`) adapts origina
 Adding explicitly adopts existing format6 for older rooms and supplies only the appropriate defaults for formats6–11. Existing objects, room data, presets and environment targets are retained. A dangling target is never repaired by reusing its deleted ID; UUID/current-target collisions fail. The room cap is100 instances. One addition creates one Undo step. Catalog selection/update is not a persistence operation, and removed/stale room buttons cannot add to the next room.
 
 Tests: `node --test native/foundry/tests/asset-library.test.mjs` with the current native CLI via `ATHENA_FOUNDRY_STORE_BINARY`; includes actual mounted add/edit to SQLite save/reopen. Actual Chromium: `CHROMIUM_PATH=/path/to/headless_shell node scripts/test_foundry_asset_library_browser.cjs`, using neutral catalog objects and no external requests.
+
+## Native soundtrack library
+
+`athena-foundry-store list-native-soundtracks SELECTED.sqlite3` returns all stored bookmark records in deterministic `(theme_id, room_id)` order. Each entry uses the same `{value, version}` contract as the existing per-room read, preserving source provenance and exact optional milliseconds. A single read transaction covers enumeration and validation, so concurrent writers cannot produce a mixed-generation library. Schemas4–15 are supported; older schemas require explicit upgrade, not automatic migration. Empty is `[]`. More than1000 records or any invalid record fails the complete operation rather than returning a partial library. This is not a pagination API.
+
+The existing local profile also exposes `GET /__native/soundtracks`, requiring the same native header/host/origin admission as per-room metadata. Query parameters are not accepted. Existing4MB response and15-second subprocess limits remain. The endpoint is read-only and opens no provider/player. Public Pages do not call it. No settings, capabilities, sign-in or network permissions are expanded.
+
+This enables native cross-room library access without knowing each room in advance. It does not yet add an app-wide library panel, provider search, playback, or source-deletion readiness. Stored URLs/labels are private local metadata and should not be published.
+
+### Clear one local soundtrack assignment
+
+The native CLI accepts `compare-clear-soundtrack DATABASE` with JSON stdin containing exactly `expected`, `theme_id` and `room_id`. Obtain the current room token with `read-native-versioned` first. The authenticated local bridge exposes `POST /__native/clear-soundtrack` with body `{ "theme_id": "…", "room_id": "…" }` and the same Host/Origin/native-header/JSON framing checks and `If-Match` token requirement as assignment writes.
+
+This is an explicit local configuration removal, not an automatic cleanup. A matching token removes only that room's bookmark and returns `null` with the new ETag; stale tokens return HTTP409 without changes. A repeated clear with the current empty token is a no-write success. Unknown rooms and unsupported schemas are rejected. Schemas4–15 are supported without an implicit upgrade. Other rooms, workspace layouts and external providers are not changed. This operation does not sign out, revoke grants, delete remote media or stop an already-playing player.
+
+There is no new UI control in this pass. Consumers should retain/export the old assignment before requesting removal if they want to undo it; workspace revision history is not a soundtrack-undo log. Only invoke on an explicit user action, never as a background migration side effect.
+
+Synthetic acceptance uses the actual Rust executable through the bridge handler for schema4 and15, including wrong origin, missing token, stale token, malformed request, successful removal, unchanged unrelated room and idempotence. Transport is in-memory, not an owner-device/browser test. A Rust regression also verifies closed/reopened persistence and unknown-room refusal. The initial Python fixture assumed every schema-upgrade command emits JSON; commands with empty stdout exposed that harness assumption, corrected before final tests. No product validation was relaxed.
+
+## Portable native profile, independent of the checkout
+
+Build the store from reviewed Athena source first, then explicitly supply its
+SHA-256 and platform. This builder copies **only unchanged published allowlisted
+runtime files**, the existing bridge, launcher and selected executable. It does
+not change the runtime allowlist or include any database, token or user profile.
+
+```sh
+python3 -B scripts/package_native.py --source dist --binary /path/to/athena-foundry-store --binary-sha256 VERIFIED_SHA256 --platform linux --output /new/portable-athena
+python3 /new/portable-athena/launch.py --verify-only
+python3 /new/portable-athena/launch.py --database /private/existing-athena.sqlite3
+```
+
+For Windows use `--platform windows`, the compiled `.exe`, and `python` where
+appropriate. Python 3.11+ remains required; this is not a standalone installer or
+bundled Python distribution. The launcher prints a loopback URL to open manually;
+it does not open a browser, install software, sign in, start automatically,
+create/upgrade a database or change security settings. The supplied database must
+already exist **outside** the bundle. Existing bridge admission/schema rules apply.
+Ctrl+C closes the bridge. All authored changes occur only through existing app
+operations against that explicitly selected database.
+
+Before launch, every packaged file is checked for exact size/hash and inventory;
+unlisted files (including accidentally copied databases), symlinks, corruption,
+missing files and platform mismatch refuse. `--verify-only` never executes the
+binary or opens a database. The integrity manifest is not a signature or proof of
+binary authenticity: obtain the executable from your reviewed build, not an
+unknown download. Checks do not protect against hostile concurrent file mutation.
+
+Destination creation is exclusive. A packaging I/O failure may leave a partial
+**new** output directory for inspection; it never replaces an existing destination.
+Keep data outside the bundle and rebuild into a new directory for an update. No
+original repository, historical source, private backup or input file is removed.
+The native browser harness now runs its complete synthetic editing, persistence,
+conflict and restart flows through this portable launcher outside the checkout on
+hosted Windows/Linux; this remains distinct from the owner's installed desktop
+acceptance and complete source-repository retirement.
+
+Retained acceptance failure: initial portable-native run `43707165315` passed the
+complete Ubuntu browser flow, while Windows refused runtime hashes during Python
+package tests before reaching browser launch. Windows checkout line-ending
+conversion changed runtime bytes. `.gitattributes` now preserves `dist/**` as
+exact Git blob bytes on checkout. No hash check was weakened and no published
+runtime asset or allowlist was rewritten to accommodate altered bytes.
+
+### Explicit first-run creation
+
+For a new installation, create a separate new database without manually invoking
+the store's migration sequence:
+
+```sh
+python3 /new/portable-athena/launch.py --create-database /private/new-athena.sqlite3
+python3 /new/portable-athena/launch.py --database /private/new-athena.sqlite3
+```
+
+Creation is explicit and separate from launch, verify-only and opening an existing
+store. It runs the bundled native init/upgrade sequence in a private temporary
+sibling directory, checks schema15 and integrity, then publishes through an
+exclusive hard link. Existing destinations, symlinks, paths inside the bundle,
+missing parents and unsupported hard-link filesystems refuse. No fallback rename
+or overwrite occurs. Failed setup removes only its owned staging directory;
+original files and any destination created concurrently remain untouched.
+
+Each native step has a15-second deadline. The supplied executable must still be
+trusted reviewed code; hashes do not sandbox it. This creates a fresh empty
+workspace with catalog metadata, not a migration of old user data. Existing DBs
+are never upgraded automatically. POSIX private-file modes originate from the
+native creator; Windows ACL privacy and sudden-power-loss publication durability
+remain separate acceptance concerns. Synthetic regressions cover actual native
+creation/reopen, timeout cleanup, concurrent destination, unsupported hard links
+and path refusal. Hosted UI acceptance uses this explicit first-run command.
+
+### Whole native database backup outside the checkout
+
+Stop Athena and every other writer to the selected database first, then explicitly
+request a new private backup:
+
+```sh
+python3 /portable-athena/launch.py --backup-database /private/athena.sqlite3 --backup-destination /private/new-backup.sqlite3 --source-quiescent
+```
+
+This uses the existing reviewed SQLite recovery helper, included byte-for-byte and
+covered by package hashes. It captures the database and available WAL/SHM bytes
+under the existing combined64MiB budget, detects changes across repeated captures,
+and refuses rollback journals. SQLite opens only disposable staged copies, never
+the original. The helper prepares and integrity-checks a standalone snapshot;
+the native executable checks its supported schema/integrity before exclusive
+publication. All tables are preserved, including workspace history, soundtracks
+and catalog metadata, unlike a workspace-only JSON export. No restore is performed.
+
+The quiescence flag is an operator assertion, **not a live-backup guarantee**.
+Byte comparisons cannot defeat a concurrent writer or an attacker changing and
+restoring files between checks. There is no global source lock; do not use this
+while the app is running. Capture/preparation is bounded by30 seconds, native
+validation by15 seconds. Existing targets, source/sidecar aliases, symlinks,
+internal package paths and unsupported hard links refuse. Failures remove only
+owned temporary staging; sources and racing destinations stay untouched.
+
+The receipt prints checksum/size and verification states, not labels or records.
+The backup itself contains private application data; keep it private and review
+before sharing. POSIX creation modes are retained; Windows ACL and power-loss
+publication durability are not certified. No credential/session discovery or
+source-repository deletion is part of this operation.
+
+Synthetic tests compare the complete SQL contents of a populated WAL-backed native
+store with its backup and verify original DB/WAL/SHM hashes remain unchanged. They
+also cover CLI use, corruption, quiescence, timeout cleanup, destination races and
+no-overwrite. The hosted portable browser flow verifies a stopped-profile backup
+retains the workspace and soundtrack library written through the actual UI.
+
+### Historical-writer local acceptance checkpoint
+
+The [2026-11-15 historical-writer receipt](../../research/native-historical-writers-2026-11-15/README.md)
+records eight successful Linux local runs of the optional tests above, using
+separately rebuilt retained source checkpoints for schema4–11 against upgraded
+schema5–12 stores. Exact source inventories and executable hashes are retained.
+This is not Windows historical acceptance or verified distributed-release identity;
+normal hosted CI still correctly leaves these tests ignored without their fixtures.
+
+### SQLite runtime prerequisite for WAL recovery
+
+The portable backup helper refuses captured WAL files unless **Python's linked
+SQLite is3.54.0 or newer**, before opening any captured database. Rust's bundled
+SQLite version does not establish Python's version. `--verify-only` prints the
+actual Python SQLite version and eligibility; successful receipts record it too.
+Older runtimes still support the guarded standalone-file path. Do not discard
+sidecars to bypass refusal. Use a patched runtime or an independently prepared
+standalone backup. Packages built before this guard must be rebuilt to include it.
+See the [advisory assessment](../../research/python-sqlite-wal-advisory-2026-11-15/README.md).
+Tests on older Python SQLite now verify WAL refusal, not successful WAL recovery;
+previous dated WAL-success evidence is not a current security qualification.
+
+### Explicit upgrade to a separate database
+
+For a stopped native database at schema 2–15, the portable launcher can prepare a
+**new upgraded copy**, leaving the source untouched:
+
+```
+python -B launch.py --upgrade-copy /external/old.sqlite --backup-destination /external/new.sqlite --source-quiescent
+```
+
+This is not startup auto-upgrade, restore, or an in-place migration. The destination
+must not exist. The existing 64 MiB guarded snapshot preparation runs first; a
+captured WAL still requires Python-linked SQLite 3.54.0+. Only the staged copy is
+upgraded through the published native schema commands (15-second limit each).
+Final schema/integrity, standalone state and original byte hashes are checked
+before exclusive publication. Failures clean only the private staging directory;
+an existing/racing destination is never overwritten. Keep the old database and
+choose the new path explicitly when launching. Quiescence assertions and sampled
+hash checks do not make this safe with concurrent writers.
+
+[Upgrade-copy evidence and scope](../../research/portable-upgrade-copy-2026-11-15/README.md)
+
+### Current-theme catalog search
+The native Asset Library filters catalog entries by name, shape and role. All whitespace-separated terms must match, case-insensitively. Search stays in the current theme, retains the instance limit, and does not change layouts, selection or history. It is session-only and clearing it restores the full current-theme catalog. Filtered-out stale buttons cannot add objects.

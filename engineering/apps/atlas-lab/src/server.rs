@@ -2,7 +2,7 @@
 use crate::jobs::{Job, Queue};
 use axum::{
     Json, Router,
-    extract::{DefaultBodyLimit, Path as RoutePath, Request, State},
+    extract::{DefaultBodyLimit, Path as RoutePath, Query, Request, State},
     http::{HeaderMap, StatusCode, header},
     middleware::{self, Next},
     response::{Html, IntoResponse, Response},
@@ -51,7 +51,8 @@ fn permitted(headers: &HeaderMap, write: bool) -> bool {
 async fn guard(request: Request, next: Next) -> Response {
     if !permitted(
         request.headers(),
-        request.method() != axum::http::Method::GET,
+        request.method() != axum::http::Method::GET
+            && !request.uri().path().starts_with("/__native/"),
     ) {
         return StatusCode::FORBIDDEN.into_response();
     }
@@ -66,7 +67,7 @@ async fn guard(request: Request, next: Next) -> Response {
 async fn runtime_info(State(app): State<App>) -> Json<serde_json::Value> {
     Json(serde_json::json!({"application":"Athena", "api_version":1,
         "engine_instance":app.engine_instance,"loopback_only":true,"same_origin_only":true,
-        "external_media":false,"overview_strategy":if app.overview_candidate {"validated-raw-candidate"} else {"baseline"},
+        "learning_history_url":"/learning","migration_readiness_url":"/migration","external_media":false,"overview_strategy":if app.overview_candidate {"validated-raw-candidate"} else {"baseline"},
         "runtime_manifest_sha256":app.runtime_assets.as_ref().map(|assets|assets.manifest_sha256.as_str())}))
 }
 async fn runtime_asset(State(app): State<App>, request: Request) -> Response {
@@ -164,6 +165,78 @@ impl ArchiveKind {
         }
     }
 }
+#[derive(serde::Deserialize)]
+#[serde(deny_unknown_fields)]
+struct ProjectHistoryQuery {
+    before: Option<i64>,
+    limit: Option<usize>,
+}
+async fn project_history_response(
+    State(app): State<App>,
+    RoutePath(id): RoutePath<String>,
+    Query(query): Query<ProjectHistoryQuery>,
+) -> Result<Json<crate::snapshots::ProjectHistoryPage>, StatusCode> {
+    archive_history_response(app, id, query, ArchiveKind::Project).await
+}
+async fn version_history_response(
+    State(app): State<App>,
+    RoutePath(id): RoutePath<String>,
+    Query(query): Query<ProjectHistoryQuery>,
+) -> Result<Json<crate::snapshots::ProjectHistoryPage>, StatusCode> {
+    archive_history_response(app, id, query, ArchiveKind::Version).await
+}
+async fn upstream_history_response(
+    State(app): State<App>,
+    RoutePath(id): RoutePath<String>,
+    Query(query): Query<ProjectHistoryQuery>,
+) -> Result<Json<crate::snapshots::ProjectHistoryPage>, StatusCode> {
+    archive_history_response(app, id, query, ArchiveKind::Upstream).await
+}
+async fn archive_history_response(
+    app: App,
+    id: String,
+    query: ProjectHistoryQuery,
+    kind: ArchiveKind,
+) -> Result<Json<crate::snapshots::ProjectHistoryPage>, StatusCode> {
+    let limit = query.limit.unwrap_or(50);
+    if !(1..=100).contains(&limit) || query.before.is_some_and(|value| value < 1) {
+        return Err(StatusCode::BAD_REQUEST);
+    }
+    match kind {
+        ArchiveKind::Project => {
+            crate::modrinth::projects_url(std::slice::from_ref(&id))
+                .map_err(|_| StatusCode::BAD_REQUEST)?;
+        }
+        ArchiveKind::Version => {
+            crate::modrinth_versions::versions_url(std::slice::from_ref(&id))
+                .map_err(|_| StatusCode::BAD_REQUEST)?;
+        }
+        ArchiveKind::Upstream => {
+            crate::upstream_reviews::Source::parse(&id).map_err(|_| StatusCode::BAD_REQUEST)?;
+        }
+    }
+    let permit = app
+        .db_slots
+        .try_acquire_owned()
+        .map_err(|_| StatusCode::TOO_MANY_REQUESTS)?;
+    tokio::task::spawn_blocking(move || {
+        let _permit = permit;
+        let store = crate::snapshots::SnapshotStore::open(&app.path)
+            .map_err(|_| StatusCode::INTERNAL_SERVER_ERROR)?;
+        let page = match kind {
+            ArchiveKind::Project => store.modrinth_project_history(&id, query.before, limit),
+            ArchiveKind::Version => store.modrinth_version_history(&id, query.before, limit),
+            ArchiveKind::Upstream => store.upstream_history(
+                crate::upstream_reviews::Source::parse(&id).map_err(|_| StatusCode::BAD_REQUEST)?,
+                query.before,
+                limit,
+            ),
+        };
+        page.map(Json).map_err(|_| StatusCode::UNPROCESSABLE_ENTITY)
+    })
+    .await
+    .map_err(|_| StatusCode::INTERNAL_SERVER_ERROR)?
+}
 async fn saved_project_response(
     State(app): State<App>,
     RoutePath(id): RoutePath<String>,
@@ -187,6 +260,41 @@ async fn saved_archive_response(
     id: String,
     kind: ArchiveKind,
 ) -> Result<Response, StatusCode> {
+    saved_archive_at(app, id, kind, None).await
+}
+async fn saved_project_generation_response(
+    State(app): State<App>,
+    RoutePath((id, generation)): RoutePath<(String, i64)>,
+) -> Result<Response, StatusCode> {
+    if generation < 1 {
+        return Err(StatusCode::BAD_REQUEST);
+    }
+    saved_archive_at(app, id, ArchiveKind::Project, Some(generation)).await
+}
+async fn saved_version_generation_response(
+    State(app): State<App>,
+    RoutePath((id, generation)): RoutePath<(String, i64)>,
+) -> Result<Response, StatusCode> {
+    if generation < 1 {
+        return Err(StatusCode::BAD_REQUEST);
+    }
+    saved_archive_at(app, id, ArchiveKind::Version, Some(generation)).await
+}
+async fn saved_upstream_generation_response(
+    State(app): State<App>,
+    RoutePath((id, generation)): RoutePath<(String, i64)>,
+) -> Result<Response, StatusCode> {
+    if generation < 1 {
+        return Err(StatusCode::BAD_REQUEST);
+    }
+    saved_archive_at(app, id, ArchiveKind::Upstream, Some(generation)).await
+}
+async fn saved_archive_at(
+    app: App,
+    id: String,
+    kind: ArchiveKind,
+    selected_generation: Option<i64>,
+) -> Result<Response, StatusCode> {
     match kind {
         ArchiveKind::Project => {
             crate::modrinth::projects_url(std::slice::from_ref(&id))
@@ -209,18 +317,36 @@ async fn saved_archive_response(
         let store = crate::snapshots::SnapshotStore::open(&app.path)
             .map_err(|_| StatusCode::INTERNAL_SERVER_ERROR)?;
         let stored = match kind {
-            ArchiveKind::Project => store.latest_modrinth_project_snapshot(&id).map(|snapshot| {
-                snapshot.map(|(generation, record)| (generation, record.raw_json().to_owned()))
-            }),
-            ArchiveKind::Version => store.latest_modrinth_version_snapshot(&id).map(|snapshot| {
-                snapshot.map(|(generation, record)| (generation, record.payload.get().to_owned()))
-            }),
-            ArchiveKind::Upstream => store
-                .latest_upstream_snapshot(
-                    crate::upstream_reviews::Source::parse(&id)
-                        .map_err(|_| StatusCode::BAD_REQUEST)?,
-                )
-                .map(|snapshot| snapshot.map(|(generation, record)| (generation, record.payload))),
+            ArchiveKind::Project => {
+                let selected = match selected_generation {
+                    Some(generation) => store.modrinth_project_generation(&id, generation),
+                    None => store.latest_modrinth_project_snapshot(&id),
+                };
+                selected.map(|snapshot| {
+                    snapshot.map(|(generation, record)| (generation, record.raw_json().to_owned()))
+                })
+            }
+            ArchiveKind::Version => {
+                let selected = match selected_generation {
+                    Some(generation) => store.modrinth_version_generation(&id, generation),
+                    None => store.latest_modrinth_version_snapshot(&id),
+                };
+                selected.map(|snapshot| {
+                    snapshot
+                        .map(|(generation, record)| (generation, record.payload.get().to_owned()))
+                })
+            }
+            ArchiveKind::Upstream => {
+                let source = crate::upstream_reviews::Source::parse(&id)
+                    .map_err(|_| StatusCode::BAD_REQUEST)?;
+                let selected = match selected_generation {
+                    Some(generation) => store.upstream_generation(source, generation),
+                    None => store.latest_upstream_snapshot(source),
+                };
+                selected.map(|snapshot| {
+                    snapshot.map(|(generation, record)| (generation, record.payload))
+                })
+            }
         };
         let (generation, payload) = stored
             .map_err(|_| StatusCode::UNPROCESSABLE_ENTITY)?
@@ -324,6 +450,26 @@ fn persist_experiment(
         }
         Err(()) => {
             output["error"]="Could not append the experiment journal; raw evidence is retained in this job result".into();
+            (false, output)
+        }
+    }
+}
+fn persist_complete_dedup(
+    path: &Path,
+    run: &crate::experiment_runner::RunOutput,
+) -> (bool, serde_json::Value) {
+    let mut output = serde_json::json!({"experiment":run,"acceptance_policy":crate::experiment_runner::policy().snapshot()});
+    match crate::journal::Journal::open(path)
+        .map_err(|_| ())
+        .and_then(|mut journal| journal.record_run(run).map_err(|_| ()))
+    {
+        Ok(id) => {
+            output["experiment_id"] = id.into();
+            output["experiment_id_text"] = id.to_string().into();
+            (run.completed, output)
+        }
+        Err(()) => {
+            output["error"]="Could not append complete experiment history; raw evidence remains in this job result".into();
             (false, output)
         }
     }
@@ -464,8 +610,7 @@ fn worker(path: PathBuf, stop: Arc<AtomicBool>, status: Arc<AtomicU8>, wake: Rec
                     }),
                     Job::ReviewUpstream {source}=>upstream_job(&path,source,&mut upstream_client,&stop),
                     Job::DedupExperiment=>crate::experiment_runner::run_builtin(||stop.load(Ordering::Relaxed)).map(|run|{
-                        let output=serde_json::json!({"experiment":run});
-                        persist_experiment(&path,run.completed,output,&run.evidence,&crate::experiment_runner::policy())
+                        persist_complete_dedup(&path,&run)
                     }).map_err(|_|"Built-in experiment configuration rejected"),
                     Job::VersionValidationExperiment {version}=>saved_version_experiment(&path,version,&stop),
                 };
@@ -489,10 +634,10 @@ fn worker(path: PathBuf, stop: Arc<AtomicBool>, status: Arc<AtomicU8>, wake: Rec
     }
 }
 pub async fn serve(path: PathBuf) -> Result<(), Box<dyn std::error::Error>> {
-    serve_strategy(path, false, None).await
+    serve_strategy(path, false, None, None).await
 }
 pub async fn serve_candidate(path: PathBuf) -> Result<(), Box<dyn std::error::Error>> {
-    serve_strategy(path, true, None).await
+    serve_strategy(path, true, None, None).await
 }
 pub async fn serve_athena(
     path: PathBuf,
@@ -500,13 +645,25 @@ pub async fn serve_athena(
 ) -> Result<(), Box<dyn std::error::Error>> {
     let assets =
         crate::athena_assets::RuntimeAssets::load(&public).map_err(std::io::Error::other)?;
-    serve_strategy(path, false, Some(Arc::new(assets))).await
+    serve_strategy(path, false, Some(Arc::new(assets)), None).await
+}
+pub async fn serve_unified(
+    path: PathBuf,
+    public: PathBuf,
+    foundry: PathBuf,
+) -> Result<(), Box<dyn std::error::Error>> {
+    let foundry = crate::foundry_native::validate(&foundry, &path, &public)?;
+    let assets =
+        crate::athena_assets::RuntimeAssets::load(&public).map_err(std::io::Error::other)?;
+    serve_strategy(path, false, Some(Arc::new(assets)), Some(foundry)).await
 }
 async fn serve_strategy(
     path: PathBuf,
     overview_candidate: bool,
     runtime_assets: Option<Arc<crate::athena_assets::RuntimeAssets>>,
+    foundry: Option<PathBuf>,
 ) -> Result<(), Box<dyn std::error::Error>> {
+    let path_for_history = path.clone();
     let engine_instance = new_engine_instance()?;
     Queue::open(&path)?;
     let listener = tokio::net::TcpListener::bind(HOST).await?;
@@ -574,12 +731,26 @@ async fn serve_strategy(
     let app = static_router
         .route("/api/runtime", get(runtime_info))
         .route("/api/project-archive/{id}", get(saved_project_response))
+        .route("/api/project-history/{id}", get(project_history_response))
+        .route(
+            "/api/project-archive/{id}/{generation}",
+            get(saved_project_generation_response),
+        )
         .route("/api/version-archive/{id}", get(saved_version_response))
+        .route(
+            "/api/version-archive/{id}/{generation}",
+            get(saved_version_generation_response),
+        )
+        .route("/api/version-history/{id}", get(version_history_response))
         .route("/api/upstream-archive/{id}", get(saved_upstream_response))
+        .route(
+            "/api/upstream-archive/{id}/{generation}",
+            get(saved_upstream_generation_response),
+        )
+        .route("/api/upstream-history/{id}", get(upstream_history_response))
         .route("/api/overview", get(overview))
         .route("/api/jobs", post(enqueue))
         .layer(DefaultBodyLimit::max(4096))
-        .layer(middleware::from_fn(guard))
         .with_state(App {
             engine_instance,
             runtime_assets,
@@ -589,6 +760,24 @@ async fn serve_strategy(
             overview_candidate,
             db_slots: Arc::new(tokio::sync::Semaphore::new(4)),
         });
+    let app = app
+        .merge(crate::learning_history::router(path_for_history))
+        .merge(crate::migration_readiness::router());
+    let unified = foundry.is_some();
+    let app = if let Some(path) = foundry {
+        app.merge(crate::foundry_native::router(path))
+    } else {
+        app
+    };
+    let app = if unified {
+        app.layer(middleware::from_fn(|request:Request,next:Next|async move {
+        let mut response=guard(request,next).await;
+        response.headers_mut().insert(header::CONTENT_SECURITY_POLICY,"default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' blob:; media-src 'self' blob:; connect-src 'self'; frame-ancestors 'none'; base-uri 'none'; form-action 'self'".parse().unwrap());
+        response
+    }))
+    } else {
+        app.layer(middleware::from_fn(guard))
+    };
     println!(
         "Athena Lab local interface: {ORIGIN}. Press Ctrl+C to stop. No remote access is enabled."
     );
@@ -619,6 +808,171 @@ mod tests {
             );
             assert!(seen.insert(value));
         }
+    }
+
+    #[test]
+    fn upstream_history_retains_exact_generations_without_fallback() {
+        use crate::upstream_reviews::{Source, response_meta, tests::fixture};
+        let path = std::env::temp_dir().join(format!(
+            "athena-upstream-history-{}-{}.sqlite",
+            std::process::id(),
+            std::time::SystemTime::now()
+                .duration_since(std::time::UNIX_EPOCH)
+                .unwrap()
+                .as_nanos()
+        ));
+        let first = fixture("v1.7.4");
+        let mut store = crate::snapshots::SnapshotStore::open(&path).unwrap();
+        for body in [&first, &fixture("v1.7.5")] {
+            store
+                .save_upstream(
+                    Source::Hls,
+                    body,
+                    &response_meta(200, &HeaderMap::new(), 10000, 0),
+                )
+                .unwrap();
+        }
+        store.record_upstream_failure(Source::Hls).unwrap();
+        drop(store);
+        let store = crate::snapshots::SnapshotStore::open(&path).unwrap();
+        let page = store.upstream_history(Source::Hls, None, 1).unwrap();
+        assert_eq!(page.entries[0].generation, "2");
+        assert_eq!(page.next_before.as_deref(), Some("2"));
+        let older = store.upstream_history(Source::Hls, Some(2), 1).unwrap();
+        assert_eq!(older.entries[0].generation, "1");
+        assert!(older.next_before.is_none());
+        assert!(
+            store
+                .upstream_history(Source::RustSec, None, 1)
+                .unwrap()
+                .entries
+                .is_empty()
+        );
+        assert!(store.upstream_history(Source::Hls, None, 101).is_err());
+        assert!(store.upstream_history(Source::Hls, Some(0), 1).is_err());
+        assert!(store.upstream_generation(Source::Hls, 0).is_err());
+        assert_eq!(
+            store
+                .upstream_generation(Source::Hls, 1)
+                .unwrap()
+                .unwrap()
+                .1
+                .payload
+                .as_bytes(),
+            first
+        );
+        assert!(
+            store
+                .upstream_generation(Source::RustSec, 1)
+                .unwrap()
+                .is_none()
+        );
+        assert!(store.upstream_generation(Source::Hls, 3).unwrap().is_none());
+        drop(store);
+        let (wake, _receiver) = std::sync::mpsc::sync_channel(1);
+        let app = App {
+            engine_instance: "0".repeat(32),
+            runtime_assets: None,
+            path: path.clone(),
+            worker_status: Arc::new(AtomicU8::new(1)),
+            wake,
+            overview_candidate: false,
+            db_slots: Arc::new(tokio::sync::Semaphore::new(4)),
+        };
+        tokio::runtime::Builder::new_multi_thread()
+            .worker_threads(2)
+            .enable_all()
+            .build()
+            .unwrap()
+            .block_on(async {
+                let response = saved_upstream_generation_response(
+                    State(app.clone()),
+                    RoutePath(("hls".into(), 1)),
+                )
+                .await
+                .unwrap();
+                assert_eq!(response.headers()["x-atlas-generation"], "1");
+                assert_eq!(
+                    response.headers()["x-atlas-payload-sha256"],
+                    crate::build_identity::sha256_hex(&first)
+                );
+                assert_eq!(
+                    axum::body::to_bytes(response.into_body(), 2097152)
+                        .await
+                        .unwrap()
+                        .as_ref(),
+                    first
+                );
+                for (id, generation, expected) in [
+                    ("hls", 0, StatusCode::BAD_REQUEST),
+                    ("hls", 3, StatusCode::NOT_FOUND),
+                    ("rustsec", 1, StatusCode::NOT_FOUND),
+                    ("unknown", 1, StatusCode::BAD_REQUEST),
+                ] {
+                    assert_eq!(
+                        saved_upstream_generation_response(
+                            State(app.clone()),
+                            RoutePath((id.into(), generation))
+                        )
+                        .await
+                        .unwrap_err(),
+                        expected
+                    );
+                }
+                let page = upstream_history_response(
+                    State(app.clone()),
+                    RoutePath("hls".into()),
+                    Query(ProjectHistoryQuery {
+                        before: None,
+                        limit: Some(1),
+                    }),
+                )
+                .await
+                .unwrap()
+                .0;
+                assert_eq!(page.entries[0].generation, "2");
+                assert_eq!(
+                    upstream_history_response(
+                        State(app.clone()),
+                        RoutePath("unknown".into()),
+                        Query(ProjectHistoryQuery {
+                            before: None,
+                            limit: None
+                        })
+                    )
+                    .await
+                    .unwrap_err(),
+                    StatusCode::BAD_REQUEST
+                );
+                for body in ["{}".to_owned(), "x".repeat(4194305)] {
+                    let c = rusqlite::Connection::open(&path).unwrap();
+                    c.execute("UPDATE snapshots SET payload=?1 WHERE generation=1", [body])
+                        .unwrap();
+                    drop(c);
+                    assert_eq!(
+                        saved_upstream_generation_response(
+                            State(app.clone()),
+                            RoutePath(("hls".into(), 1))
+                        )
+                        .await
+                        .unwrap_err(),
+                        StatusCode::UNPROCESSABLE_ENTITY
+                    );
+                    let latest =
+                        saved_upstream_response(State(app.clone()), RoutePath("hls".into()))
+                            .await
+                            .unwrap();
+                    assert_eq!(latest.headers()["x-atlas-generation"], "2");
+                }
+                assert_eq!(app.db_slots.available_permits(), 4);
+            });
+        assert_eq!(
+            crate::snapshots::SnapshotStore::open(&path)
+                .unwrap()
+                .attempts()
+                .unwrap(),
+            3
+        );
     }
 
     #[test]
@@ -758,6 +1112,16 @@ mod tests {
             db_slots: Arc::new(tokio::sync::Semaphore::new(4)),
         };
         tokio::runtime::Builder::new_multi_thread().worker_threads(2).enable_all().build().unwrap().block_on(async {
+            let history=version_history_response(State(app.clone()),RoutePath(id.clone()),Query(ProjectHistoryQuery{before:None,limit:Some(1)})).await.unwrap().0;
+            assert_eq!(history.entries.len(),1);
+            assert_eq!(history.entries[0].generation,version_generation.to_string());
+            assert!(history.next_before.is_none());
+            let selected=saved_version_generation_response(State(app.clone()),RoutePath((id.clone(),version_generation))).await.unwrap();
+            assert_eq!(axum::body::to_bytes(selected.into_body(),4096).await.unwrap().as_ref(),version.as_bytes());
+            for missing in [project_generation,version_generation+100] {
+                assert_eq!(saved_version_generation_response(State(app.clone()),RoutePath((id.clone(),missing))).await.unwrap_err(),StatusCode::NOT_FOUND);
+            }
+            assert_eq!(saved_version_generation_response(State(app.clone()),RoutePath((id.clone(),0))).await.unwrap_err(),StatusCode::BAD_REQUEST);
             for (kind, expected, generation) in [(ArchiveKind::Project, project, project_generation),(ArchiveKind::Version, version, version_generation)] {
                 let response = saved_archive_response(app.clone(), id.clone(), kind).await.unwrap();
                 assert_eq!(response.headers()["x-atlas-archive-kind"], kind.label());
@@ -933,5 +1297,219 @@ mod tests {
         assert!(!permitted(&h, true));
         h.insert(header::ORIGIN, ORIGIN.parse().unwrap());
         assert!(permitted(&h, true));
+    }
+}
+
+#[cfg(test)]
+mod project_generation_tests {
+    use super::*;
+    #[test]
+    fn explicit_archive_endpoint_preserves_bytes_and_rejects_missing_generation() {
+        let directory = std::env::temp_dir().join(format!(
+            "athena-history-endpoint-{}-{}",
+            std::process::id(),
+            std::time::SystemTime::now()
+                .duration_since(std::time::UNIX_EPOCH)
+                .unwrap()
+                .as_nanos()
+        ));
+        std::fs::create_dir(&directory).unwrap();
+        let path = directory.join("fixture.sqlite");
+        let mut store = crate::snapshots::SnapshotStore::open(&path).unwrap();
+        let body = r#" {"id":"AANobbMI","slug":"sodium","title":"Old 雪","description":"fixture","project_type":"mod","versions":[],"unknown":null} "#;
+        let generation = store
+            .save_modrinth_project_record(
+                "sodium",
+                &crate::modrinth::parse_project_record(body.as_bytes(), "sodium").unwrap(),
+            )
+            .unwrap();
+        let newer = body.replace("Old 雪", "New ❄");
+        store
+            .save_modrinth_project_record(
+                "sodium",
+                &crate::modrinth::parse_project_record(newer.as_bytes(), "sodium").unwrap(),
+            )
+            .unwrap();
+        drop(store);
+        let (wake, _receiver) = std::sync::mpsc::sync_channel(1);
+        let app = App {
+            engine_instance: "0".repeat(32),
+            runtime_assets: None,
+            path,
+            worker_status: Arc::new(AtomicU8::new(1)),
+            wake,
+            overview_candidate: false,
+            db_slots: Arc::new(tokio::sync::Semaphore::new(4)),
+        };
+        tokio::runtime::Builder::new_multi_thread()
+            .worker_threads(2)
+            .enable_all()
+            .build()
+            .unwrap()
+            .block_on(async {
+                let page = project_history_response(
+                    State(app.clone()),
+                    RoutePath("AANobbMI".into()),
+                    Query(ProjectHistoryQuery {
+                        before: None,
+                        limit: Some(1),
+                    }),
+                )
+                .await
+                .unwrap()
+                .0;
+                assert_eq!(page.entries.len(), 1);
+                assert_eq!(page.next_before.as_deref(), Some("2"));
+                let older = project_history_response(
+                    State(app.clone()),
+                    RoutePath("AANobbMI".into()),
+                    Query(ProjectHistoryQuery {
+                        before: Some(2),
+                        limit: Some(1),
+                    }),
+                )
+                .await
+                .unwrap()
+                .0;
+                assert_eq!(older.entries[0].generation, generation.to_string());
+                assert!(older.next_before.is_none());
+                let missing = project_history_response(
+                    State(app.clone()),
+                    RoutePath("OTHER123".into()),
+                    Query(ProjectHistoryQuery {
+                        before: None,
+                        limit: None,
+                    }),
+                )
+                .await
+                .unwrap()
+                .0;
+                assert!(missing.entries.is_empty());
+                assert_eq!(
+                    project_history_response(
+                        State(app.clone()),
+                        RoutePath("AANobbMI".into()),
+                        Query(ProjectHistoryQuery {
+                            before: Some(0),
+                            limit: None
+                        })
+                    )
+                    .await
+                    .unwrap_err(),
+                    StatusCode::BAD_REQUEST
+                );
+                for uri in ["/?before=nope", "/?limit=1&limit=2", "/?unknown=1"] {
+                    assert!(
+                        Query::<ProjectHistoryQuery>::try_from_uri(&uri.parse().unwrap()).is_err()
+                    );
+                }
+                let response = saved_project_generation_response(
+                    State(app.clone()),
+                    RoutePath(("AANobbMI".into(), generation)),
+                )
+                .await
+                .unwrap();
+                assert_eq!(
+                    response.headers()["x-atlas-generation"],
+                    generation.to_string()
+                );
+                assert_eq!(
+                    response.headers()["x-atlas-payload-sha256"],
+                    crate::build_identity::sha256_hex(body.as_bytes())
+                );
+                assert_eq!(
+                    axum::body::to_bytes(response.into_body(), 4096)
+                        .await
+                        .unwrap()
+                        .as_ref(),
+                    body.as_bytes()
+                );
+                for invalid in [0, -1] {
+                    assert_eq!(
+                        saved_project_generation_response(
+                            State(app.clone()),
+                            RoutePath(("AANobbMI".into(), invalid))
+                        )
+                        .await
+                        .unwrap_err(),
+                        StatusCode::BAD_REQUEST
+                    );
+                }
+                assert_eq!(
+                    saved_project_generation_response(
+                        State(app.clone()),
+                        RoutePath(("AANobbMI".into(), generation + 100))
+                    )
+                    .await
+                    .unwrap_err(),
+                    StatusCode::NOT_FOUND
+                );
+                assert_eq!(
+                    saved_project_generation_response(
+                        State(app.clone()),
+                        RoutePath(("OTHER123".into(), generation))
+                    )
+                    .await
+                    .unwrap_err(),
+                    StatusCode::NOT_FOUND
+                );
+            });
+        std::fs::remove_dir_all(directory).unwrap();
+    }
+}
+
+#[cfg(test)]
+mod complete_dedup_history_tests {
+    use super::*;
+    #[test]
+    fn cancelled_run_is_retained_and_journal_failure_keeps_job_evidence() {
+        let path = std::env::temp_dir().join(format!(
+            "athena-complete-dedup-{}-{}.sqlite",
+            std::process::id(),
+            std::time::SystemTime::now()
+                .duration_since(std::time::UNIX_EPOCH)
+                .unwrap()
+                .as_nanos()
+        ));
+        std::fs::OpenOptions::new()
+            .create_new(true)
+            .write(true)
+            .open(&path)
+            .unwrap();
+        let run = crate::experiment_runner::run_builtin(|| true).unwrap();
+        let (completed, output) = persist_complete_dedup(&path, &run);
+        assert!(!completed);
+        let id = output["experiment_id_text"]
+            .as_str()
+            .unwrap()
+            .parse::<i64>()
+            .unwrap();
+        assert_eq!(
+            crate::journal::Journal::read_run(&path, id).unwrap(),
+            serde_json::to_value(&run).unwrap()
+        );
+        let c = rusqlite::Connection::open(&path).unwrap();
+        c.execute_batch("CREATE TRIGGER refuse_new_run BEFORE INSERT ON experiment_runs BEGIN SELECT RAISE(ABORT,'injected synthetic failure'); END;").unwrap();
+        drop(c);
+        let (completed, output) = persist_complete_dedup(&path, &run);
+        assert!(!completed);
+        assert!(output.get("experiment_id_text").is_none());
+        assert_eq!(output["experiment"], serde_json::to_value(&run).unwrap());
+        assert!(output["error"].is_string());
+        let c = rusqlite::Connection::open(&path).unwrap();
+        assert_eq!(
+            c.query_row("SELECT count(*) FROM experiments", [], |r| r
+                .get::<_, i64>(0))
+                .unwrap(),
+            1
+        );
+        assert_eq!(
+            c.query_row("SELECT count(*) FROM experiment_runs", [], |r| r
+                .get::<_, i64>(0))
+                .unwrap(),
+            1
+        );
+        drop(c);
+        std::fs::remove_file(path).unwrap();
     }
 }

@@ -13274,7 +13274,7 @@
       "license_kind": "proprietary",
       "pricing_model": "mixed",
       "features": [
-        ".NET tooling",
+        "C#, F# and VB.NET editing, code insight and .NET tooling",
         "Debugger and tests",
         "Game-engine integrations"
       ],
@@ -13285,14 +13285,17 @@
         "Free non-commercial licensing has eligibility conditions; commercial work requires the appropriate subscription."
       ],
       "use_cases": [
-        "Develop and debug .NET or supported game-engine projects with integrated language tooling."
+        "Develop and debug C#, F# or VB.NET projects with .NET and supported game-engine integrations."
       ],
       "tags": [
         "development",
         "dotnet-ides",
         ".net-tooling",
         "debugger-and-tests",
-        "game-engine-integrations"
+        "game-engine-integrations",
+        "C#",
+        "F#",
+        "VB.NET"
       ],
       "alternatives": [
         "Visual Studio Code",
@@ -13334,6 +13337,15 @@
           "checked_at": "2026-11-14",
           "supports": [
             "license"
+          ]
+        },
+        {
+          "url": "https://www.jetbrains.com/rider/features/",
+          "label": "Official supported languages, project types and desktop platforms",
+          "checked_at": "2026-11-16",
+          "supports": [
+            "features",
+            "platforms"
           ]
         }
       ],

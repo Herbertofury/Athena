@@ -83,3 +83,31 @@ eight non-normal SQLite save/reload round trips, rejection before schema14,
 missing/incorrect review, unsupported modes and bundle integrity. This verifies
 metadata/persistence, **not** source-to-target rendered pixel parity or readiness
 to delete source data. No real private scrapbook was imported by these tests.
+
+### Verify a retained scrapbook bundle without importing it
+
+From the repository root, use the exact catalog retained with the reviewed conversion:
+
+```sh
+python3 tools/foundry-recovery/scrapbook/convert.py --catalog /path/to/reviewed-catalog.json --verify-bundle /path/to/private-bundle
+```
+
+This read-only command verifies the four-file bundle, exact source/mapping/workspace/catalog digests, deterministic conversion and truthful manifest limits. It reports verified row count and partial compatibility; it does not import into a live store, repair files or prove original visual fidelity. Keep the matching catalog: a changed catalog is refused, not silently substituted. Missing, tampered or inconsistent bundles fail nonzero and remain unchanged. Verification must not be combined with creation arguments. The existing --source/--mapping/--new-bundle creation command is unchanged.
+
+Six real CLI subprocess tests use synthetic fixtures and check byte-for-byte preservation on success and failure, tampering, catalog drift, missing files, argument modes and existing creation compatibility. No private data or native owner-device acceptance is claimed.
+
+### Convert directly from a preserved original-value capsule
+
+```
+python3 scrapbook/convert.py --catalog CATALOG.json --source PRESERVED-CAPSULE.json --mapping REVIEWED.json --new-bundle NEW-PRIVATE-DIRECTORY --capsule
+```
+
+Explicit `--capsule` validates every entry using the shared original-value capsule implementation, then selects only `ff-scrapbook-layout`. Music conversion uses the same extraction helper. The mapping hash must identify the selected raw scrapbook string encoded as UTF-8, not the enclosing capsule. Existing geometry, asset, surface, anchor and blend review requirements remain mandatory. No review is invented from a checksum.
+
+The four-file bundle retains exact selected scrapbook UTF-8 bytes, not unrelated capsule values. Keep the entire original capsule separately; it is never modified or replaced. Bundle verification stays unchanged and recomputes the same workspace as raw-input mode. `--capsule` is rejected in verify-only mode. Missing/tampered values, non-UTF8-representable selected strings, size violations and existing destinations refuse. Unrelated lone-surrogate strings remain preserved in the capsule. No browser reads, live imports, provider requests or source artwork occur, and visual fidelity/deletion readiness remain unverified.
+
+### Compare migrated Scrapbook placements
+
+[Read-only Scrapbook reconciliation](scrapbook/RECONCILIATION.md) verifies a reviewed bundle against a standalone native snapshot and reports exact, missing and different mapped placements without opening the original database in SQLite. This is semantic migration evidence, not visual acceptance or retirement clearance.
+
+[Scrapbook merge planning](scrapbook/MERGE-PLAN.md) can prepare a new private candidate that preserves unrelated native layouts and refuses conflicting IDs/stacking. It never applies the candidate or overwrites the original database.

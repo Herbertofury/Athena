@@ -70,20 +70,20 @@ class GovernanceCases:
         lock = governance.load_json(self.target / governance.LOCK, {})
         self.assertRegex(lock["sourceCommit"], r"^[a-f0-9]{40}$")
         self.assertFalse(lock["sourceWorkingTreeDirty"])
-        self.assertEqual(governance.checked_release(self.source)["invariantIds"], [int(x) for x in __import__("re").findall(r"^## (\d+)\. ", (ROOT / "PRODUCT_INVARIANTS.md").read_text(), __import__("re").M)])
+        self.assertEqual(governance.checked_release(self.source)["invariantIds"], [int(x) for x in __import__("re").findall(r"^## (\d+)\. ", (ROOT / "PRODUCT_INVARIANTS.md").read_text(encoding="utf-8"), __import__("re").M)])
         self.assertLess((self.target / "AGENTS.md").stat().st_size, 4000)
 
     def test_claude_import_and_shared_core_are_not_duplicated(self):
         self.adopted()
-        self.assertEqual((self.target / "CLAUDE.md").read_text(), "@AGENTS.md\n")
-        self.assertNotIn("Aggressively", (self.target / "AGENTS.md").read_text())
-        self.assertIn("Aggressively, eagerly, ambitiously, intelligently, creatively, and relentlessly with self agency", (self.target / governance.SNAPSHOT / "AGENTS-adapter.md").read_text())
+        self.assertEqual((self.target / "CLAUDE.md").read_text(encoding="utf-8"), "@AGENTS.md\n")
+        self.assertNotIn("Aggressively", (self.target / "AGENTS.md").read_text(encoding="utf-8"))
+        self.assertIn("Aggressively, eagerly, ambitiously, intelligently, creatively, and relentlessly with self agency", (self.target / governance.SNAPSHOT / "AGENTS-adapter.md").read_text(encoding="utf-8"))
 
     def test_existing_claude_is_preserved_and_flagged(self):
         path = self.target / "CLAUDE.md"
         path.write_text("Private local details\n")
         actions = governance.apply(self.source, self.target)
-        self.assertEqual(path.read_text(), "Private local details\n")
+        self.assertEqual(path.read_text(encoding="utf-8"), "Private local details\n")
         self.assertTrue(any(x["action"] == "review" and x["path"] == "CLAUDE.md" for x in actions))
 
     def test_versioned_update_preserves_custom_root(self):
@@ -180,7 +180,22 @@ class AthenaMigrationBoundaryTests(GovernanceCases, unittest.TestCase):
         self.assertEqual(lock["sourceRepository"],"https://github.com/Herbertofury/Athena")
         self.assertEqual(governance.SNAPSHOT,".agents/athena")
         self.assertFalse((self.target/".agent-foundry").exists())
-        self.assertIn(".agents/athena/AGENTS-adapter.md",(self.target/"AGENTS.md").read_text())
+        self.assertIn(".agents/athena/AGENTS-adapter.md",(self.target/"AGENTS.md").read_text(encoding="utf-8"))
 
 if __name__ == "__main__":
     unittest.main()
+
+class CanonicalPathTests(unittest.TestCase):
+    def test_target_and_child_use_same_resolved_basis(self):
+        from unittest.mock import patch
+        with tempfile.TemporaryDirectory() as temporary:
+            target=Path(temporary)/'consumer';target.mkdir()
+            alias=Path(temporary)/'ALIAS'
+            original=Path.resolve
+            def resolve(path,*args,**kwargs):
+                if path==alias:return original(target,*args,**kwargs)
+                if path.is_relative_to(alias):return original(target/path.relative_to(alias),*args,**kwargs)
+                return original(path,*args,**kwargs)
+            with patch.object(Path,'resolve',resolve):
+                self.assertEqual(governance.safe_path(alias,'nested/file.md'),alias/'nested/file.md')
+                with self.assertRaises(ValueError):governance.safe_path(alias,'../escape.md')

@@ -54,3 +54,82 @@ The public Noxviola transition receipt is a real selected-consumer plan, not a c
 Explicit `repository_governance.py apply` stages the complete write set before changing snapshots, commits the adoption lock last, and rolls back committed writes if an I/O exception or handled keyboard interruption occurs. It preserves project-owned instructions and refuses legacy adoption as before. If rollback itself fails or a committed destination changed concurrently, it reports failure and retains a local `.athena-adoption-*` recovery directory containing original bytes and a path index. Keep that directory private and inspect it before any retry; it is not a public evidence artifact.
 
 This is **exception rollback, not crash-atomic or power-loss-durable storage**. Serialize writers and use a stable checkout. Abrupt process termination, hostile filesystem mutation and hardware failure still require backup/recovery procedures. No real consumer was changed to qualify this implementation; injected-failure tests operate only on disposable fixture repositories.
+
+## Inspect policy changes before any transition
+
+`python guidance/tools/review_policy_changes.py --target /explicit/legacy-consumer`
+compares the 16 known legacy policy snapshots with the checked Athena release.
+Default JSON contains only fixed relative paths, hashes, observed changes and pin
+matches. Add `--include-content` to explicitly include local unified text diffs;
+these can reveal private local edits, so keep that report local. Reports never
+include root/nested project instructions or echo unrecognized lock path names.
+
+This is a review companion, not an apply patch or proof of policy equivalence.
+Missing or locally edited files stay explicit and untouched. Unknown lock entries
+are counted, not silently accepted. Foreign locks, links/junctions, nonregular
+files, invalid UTF-8 and excessive input are refused. Read budgets are 1 MiB per
+file and 8 MiB total; no truncation is presented as a complete comparison. LF and
+CRLF policy text is compared using the existing portable manifest convention.
+Use a stable checkout: concurrent mutations are not a snapshot guarantee. No
+network access, fleet scan, source execution, consumer write or retirement
+certification occurs. Existing transition/adoption restrictions remain unchanged.
+
+## Recoverable local Git history checkpoint
+
+`python guidance/tools/history_bundle.py --source /explicit/repository --output /outside/source/new.bundle`
+creates a local bundle of every locally available ref plus HEAD, restores it into
+an independent temporary bare repository, checks complete object connectivity,
+and compares exact refs/HEAD before publishing the new bundle. Source files and
+refs are not modified. No checkout, source execution, remote refresh or upload
+occurs; lazy fetching is disabled. Shallow history, replacements and grafts are
+rejected. Existing outputs are never overwritten; the verified file is published
+with an exclusive hard link, so the output filesystem must support hard links.
+POSIX mode 0600 is requested; this is not a Windows ACL guarantee.
+
+Keep the bundle private until complete history rights and private-data review.
+The summary emits only head/hash/count/verification flags, not names or content.
+Uncommitted files, reflogs, unreachable objects, LFS objects, submodule repositories,
+wiki, releases and external dependencies remain separate gates. A local recovery
+check is neither an off-machine durable backup nor repository-deletion approval.
+Temporary restore files are removed after the check; the final bundle is retained.
+Use a stable source. Ref changes during capture are rejected, but concurrent
+history/working-tree changes are not a full filesystem snapshot guarantee.
+
+Git bundle refs retain object IDs, not symbolic alias configuration. The isolated
+restore uses a detached HEAD; branch checkout and symbolic remote-HEAD settings
+need separate restoration if required. This is Git object/history recovery, not
+a complete clone configuration backup.
+
+## Self-contained history recovery capsule
+
+`history_capsule.py` adds the metadata absent from a plain Git bundle: exact local
+ref object IDs, symbolic aliases, attached/detached HEAD and object format. It
+stores those with the bundle in a private ZIP and independently verifies recovery
+before exclusively publishing the new file. It reuses `history_bundle.py` rather
+than changing the earlier bundle or any source repository.
+
+```sh
+python guidance/tools/history_capsule.py create --source /selected/repo --output /outside/source/new-capsule.zip
+python guidance/tools/history_capsule.py verify /selected/capsule.zip
+python guidance/tools/history_capsule.py restore /selected/capsule.zip --destination /new/empty-path.git
+```
+
+Verification needs no original checkout. Restore creates a **new bare repository**,
+never checks out or executes source, refuses existing destinations, restores exact
+symbolic targets/HEAD, checks all object connectivity and compares metadata.
+A failed restore can leave a new partial destination for inspection; do not treat
+it as verified or overwrite an existing repository. The capsule is never changed.
+POSIX destination mode 0700 is requested, not a Windows ACL guarantee.
+
+The ZIP accepts exactly two stored members; encryption, unexpected/duplicate
+members, wrong hashes, unsafe refs and alias cycles are rejected. Budgets are
+32 MiB bundle, 1 MiB manifest and 10,000 refs. Larger collections need an explicit
+larger-capacity design, not truncation. Digests detect internal inconsistency, not
+independent authenticity: an adversary can rewrite both manifest and payload.
+Do not trust or execute a recovered source merely because verification passes.
+
+Names and full historical content are inside the private capsule. Keep it private
+until rights and sensitive-data review; default stdout reports counts/hash only.
+Git LFS content, submodule repositories, working changes, reflogs, unreachable
+objects, remote freshness, wiki, release assets and consumer dependencies remain
+separate gates. This improves history recovery, **not deletion readiness**.

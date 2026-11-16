@@ -23,6 +23,40 @@ impl Scratch {
 }
 impl Drop for Scratch {
     fn drop(&mut self) {
+        if std::thread::panicking()
+            && let Some(directory) = std::env::var_os("ATHENA_SYNTHETIC_FAILURE_DIR")
+        {
+            // Only this test-created fixture family, never arbitrary app databases.
+            let directory = PathBuf::from(directory).join(self.0.file_name().unwrap());
+            if std::fs::create_dir_all(&directory).is_ok() {
+                for suffix in ["", "-wal", "-shm", "-journal"] {
+                    let source = PathBuf::from(format!("{}{suffix}", self.0.display()));
+                    let Ok(metadata) = std::fs::symlink_metadata(&source) else {
+                        continue;
+                    };
+                    if !metadata.is_file() || metadata.len() > 16 * 1024 * 1024 {
+                        continue;
+                    }
+                    let Ok(input) = std::fs::File::open(&source) else {
+                        continue;
+                    };
+                    let Ok(mut output) = OpenOptions::new()
+                        .write(true)
+                        .create_new(true)
+                        .open(directory.join(format!("fixture.sqlite{suffix}")))
+                    else {
+                        continue;
+                    };
+                    use std::io::Read;
+                    let result = std::io::copy(&mut input.take(16 * 1024 * 1024), &mut output);
+                    eprintln!("Synthetic fixture copy {suffix:?}: {result:?}");
+                }
+                eprintln!(
+                    "Best-effort synthetic failure fixture (possibly incomplete) in {}",
+                    directory.display()
+                );
+            }
+        }
         let _ = std::fs::remove_file(&self.0);
     }
 }
@@ -207,6 +241,12 @@ fn concurrent_snapshot_writers_preserve_complete_history_and_attempt_pairing() {
         connection
             .pragma_update(None, "journal_mode", mode)
             .unwrap();
+        let runtime: (String, String) = connection
+            .query_row("SELECT sqlite_version(),sqlite_source_id()", [], |r| {
+                Ok((r.get(0)?, r.get(1)?))
+            })
+            .unwrap();
+        eprintln!("{}", serde_json::json!({"runtime":runtime,"mode":mode}));
         drop(connection);
         // Open serially so the concurrent phase tests writes, not schema setup.
         let stores: Vec<_> = (0..4)
@@ -219,18 +259,24 @@ fn concurrent_snapshot_writers_preserve_complete_history_and_attempt_pairing() {
                 scope.spawn(move || {
                     start.wait();
                     let mut committed = Vec::new();
+                    let mut reports = Vec::new();
                     for observation in 0..16 {
                         // Generated content: preserve whitespace, Unicode and a number
                         // that cannot be represented exactly by an IEEE-754 double.
                         let raw = format!(r#" {{"id":"AANobbMI","slug":"sodium","title":"Generated concurrent fixture","description":"not live data","project_type":"mod","versions":[],"future":{{"writer":{writer},"observation":{observation},"integer":18446744073709551617,"text":"雪🔥","empty":[],"nullable":null}}}} "#);
                         let record = atlas_lab::modrinth::parse_project_record(raw.as_bytes(), "sodium").unwrap();
-                        let generation = store.save_modrinth_project_record("sodium", &record).unwrap();
+                        let (result, report) = store.save_modrinth_project_record_diagnosed("sodium", &record);
+                        reports.push(serde_json::json!({"mode": mode, "writer": writer,
+                            "observation": observation, "report": report}));
+                        if result.is_err() { eprintln!("{}", serde_json::json!({"write_reports": reports})); }
+                        let generation = result.unwrap();
                         if let Some((previous, _)) = committed.last() {
                             assert!(generation > *previous);
                         }
                         committed.push((generation, raw));
                     }
                     store.record_project_raw_failure("sodium").unwrap();
+                    eprintln!("{}", serde_json::json!({"write_reports": reports}));
                     committed
                 })
             }).collect();
@@ -283,5 +329,43 @@ fn concurrent_snapshot_writers_preserve_complete_history_and_attempt_pairing() {
                 .unwrap(),
             mode.to_lowercase()
         );
+    }
+}
+
+#[test]
+fn held_writer_reports_busy_without_partial_snapshot_then_explicit_call_succeeds() {
+    for mode in ["DELETE", "WAL"] {
+        let scratch = Scratch::new();
+        let blocker = rusqlite::Connection::open(&scratch.0).unwrap();
+        blocker.pragma_update(None, "journal_mode", mode).unwrap();
+        let mut store = SnapshotStore::open(&scratch.0).unwrap();
+        blocker.execute_batch("BEGIN IMMEDIATE").unwrap();
+        let raw = br#"{"id":"AANobbMI","slug":"sodium","title":"Generated busy fixture","description":"not live data","project_type":"mod","versions":[]}"#;
+        let record = atlas_lab::modrinth::parse_project_record(raw, "sodium").unwrap();
+        let (result, report) = store.save_modrinth_project_record_diagnosed("sodium", &record);
+        let error = result.unwrap_err();
+        assert!(matches!(error.downcast_ref::<rusqlite::Error>(),
+            Some(rusqlite::Error::SqliteFailure(e, _)) if e.code == rusqlite::ErrorCode::DatabaseBusy));
+        assert!(report.autocommit_after);
+        assert_eq!(report.stages.last().unwrap().stage, "payload_insert");
+        assert_eq!(report.stages.last().unwrap().sqlite_extended_code, Some(5));
+        eprintln!(
+            "{}",
+            serde_json::json!({"mode": mode, "held_writer": report})
+        );
+        assert_eq!(store.attempts().unwrap(), 0);
+        assert!(
+            store
+                .latest_modrinth_project_record("AANobbMI")
+                .unwrap()
+                .is_none()
+        );
+        blocker.execute_batch("ROLLBACK").unwrap();
+        let (result, report) = store.save_modrinth_project_record_diagnosed("sodium", &record);
+        assert!(result.is_ok());
+        assert!(report.autocommit_after);
+        assert!(report.stages.iter().all(|stage| stage.succeeded));
+        assert_eq!(report.stages.len(), 4);
+        assert_eq!(store.attempts().unwrap(), 1);
     }
 }

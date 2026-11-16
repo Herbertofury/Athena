@@ -2,7 +2,52 @@
 use crate::modrinth::Project;
 use rusqlite::{Connection, OptionalExtension, TransactionBehavior, params};
 use std::path::Path;
+#[derive(Debug, serde::Serialize)]
+pub struct SnapshotWriteStage {
+    pub stage: &'static str,
+    pub elapsed_micros: u64,
+    pub succeeded: bool,
+    pub sqlite_extended_code: Option<i32>,
+}
+#[derive(Debug, serde::Serialize)]
+pub struct SnapshotWriteReport {
+    pub stages: Vec<SnapshotWriteStage>,
+    pub autocommit_after: bool,
+}
+fn write_stage<T>(
+    diagnostics: &mut Option<Vec<SnapshotWriteStage>>,
+    stage: &'static str,
+    operation: impl FnOnce() -> rusqlite::Result<T>,
+) -> rusqlite::Result<T> {
+    let started = diagnostics.as_ref().map(|_| std::time::Instant::now());
+    let result = operation();
+    if let (Some(events), Some(started)) = (diagnostics, started) {
+        let code = match &result {
+            Err(rusqlite::Error::SqliteFailure(error, _)) => Some(error.extended_code),
+            _ => None,
+        };
+        events.push(SnapshotWriteStage {
+            stage,
+            elapsed_micros: started.elapsed().as_micros().min(u64::MAX as u128) as u64,
+            succeeded: result.is_ok(),
+            sqlite_extended_code: code,
+        });
+    }
+    result
+}
 pub struct SnapshotStore(Connection);
+#[derive(Debug, serde::Serialize)]
+pub struct ProjectHistoryEntry {
+    pub generation: String,
+    pub observed_at: String,
+    pub stored_bytes: i64,
+}
+#[derive(Debug, serde::Serialize)]
+pub struct ProjectHistoryPage {
+    pub entries: Vec<ProjectHistoryEntry>,
+    pub next_before: Option<String>,
+    pub scope: &'static str,
+}
 impl SnapshotStore {
     pub fn open(path: &Path) -> rusqlite::Result<Self> {
         let c = Connection::open(path)?;
@@ -159,7 +204,24 @@ impl SnapshotStore {
         &self,
         source: crate::upstream_reviews::Source,
     ) -> Result<Option<(i64, crate::upstream_reviews::Record)>, Box<dyn std::error::Error>> {
-        self.latest_upstream_raw_snapshot(source)?
+        self.upstream_snapshot_at(source, None)
+    }
+    pub fn upstream_generation(
+        &self,
+        source: crate::upstream_reviews::Source,
+        generation: i64,
+    ) -> Result<Option<(i64, crate::upstream_reviews::Record)>, Box<dyn std::error::Error>> {
+        if generation < 1 {
+            return Err("Invalid upstream archive generation".into());
+        }
+        self.upstream_snapshot_at(source, Some(generation))
+    }
+    fn upstream_snapshot_at(
+        &self,
+        source: crate::upstream_reviews::Source,
+        generation: Option<i64>,
+    ) -> Result<Option<(i64, crate::upstream_reviews::Record)>, Box<dyn std::error::Error>> {
+        self.upstream_raw_snapshot_at(source, generation)?
             .map(|(generation, payload)| {
                 if generation < 1 {
                     return Err("Invalid upstream archive generation".into());
@@ -175,7 +237,14 @@ impl SnapshotStore {
         &self,
         source: crate::upstream_reviews::Source,
     ) -> rusqlite::Result<Option<(i64, String)>> {
-        self.0.query_row("SELECT generation,CASE WHEN typeof(payload)='text' AND octet_length(payload)>4194304 THEN NULL ELSE payload END FROM snapshots WHERE provider='github-upstream' AND canonical_id=?1 ORDER BY generation DESC LIMIT 1",[source.id()],|r| {
+        self.upstream_raw_snapshot_at(source, None)
+    }
+    fn upstream_raw_snapshot_at(
+        &self,
+        source: crate::upstream_reviews::Source,
+        generation: Option<i64>,
+    ) -> rusqlite::Result<Option<(i64, String)>> {
+        self.0.query_row("SELECT generation,CASE WHEN typeof(payload)='text' AND octet_length(payload)>4194304 THEN NULL ELSE payload END FROM snapshots WHERE provider='github-upstream' AND canonical_id=?1 AND (?2 IS NULL OR generation=?2) ORDER BY generation DESC LIMIT 1",params![source.id(),generation],|r| {
             let body:String=r.get(1)?;
             if body.len()>crate::upstream_reviews::MAX_BODY as usize {
                 return Err(rusqlite::Error::FromSqlConversionFailure(1,rusqlite::types::Type::Text,Box::new(std::io::Error::new(std::io::ErrorKind::InvalidData,"Stored upstream payload exceeds read budget"))));
@@ -188,14 +257,39 @@ impl SnapshotStore {
         requested: &str,
         record: &crate::modrinth::ProjectRecord,
     ) -> Result<i64, Box<dyn std::error::Error>> {
-        // Private immutable envelope was parsed once; rebind the current request.
-        // No unchecked constructor or mutable payload accessor is exposed.
+        self.save_project_record_internal(requested, record, &mut None)
+    }
+    /// Opt-in non-sensitive diagnostics; errors and transaction semantics unchanged.
+    pub fn save_modrinth_project_record_diagnosed(
+        &mut self,
+        requested: &str,
+        record: &crate::modrinth::ProjectRecord,
+    ) -> (Result<i64, Box<dyn std::error::Error>>, SnapshotWriteReport) {
+        let mut diagnostics = Some(Vec::new());
+        let result = self.save_project_record_internal(requested, record, &mut diagnostics);
+        let report = SnapshotWriteReport {
+            stages: diagnostics.unwrap_or_default(),
+            autocommit_after: self.0.is_autocommit(),
+        };
+        (result, report)
+    }
+    fn save_project_record_internal(
+        &mut self,
+        requested: &str,
+        record: &crate::modrinth::ProjectRecord,
+        diagnostics: &mut Option<Vec<SnapshotWriteStage>>,
+    ) -> Result<i64, Box<dyn std::error::Error>> {
+        // Immutable envelope and exact request binding remain unchanged.
         record.bind_request(requested)?;
-        let tx = self.0.transaction()?;
-        tx.execute("INSERT INTO snapshots(provider,canonical_id,payload) VALUES('modrinth-project-raw',?1,?2)",params![record.project().id,record.raw_json()])?;
+        let tx = write_stage(diagnostics, "begin", || self.0.transaction())?;
+        write_stage(diagnostics, "payload_insert", || {
+            tx.execute("INSERT INTO snapshots(provider,canonical_id,payload) VALUES('modrinth-project-raw',?1,?2)",params![record.project().id,record.raw_json()])
+        })?;
         let generation = tx.last_insert_rowid();
-        tx.execute("INSERT INTO collection_attempts(requested_id,outcome,generation) VALUES(?1,'success',?2)",params![format!("modrinth-project-raw:{requested}"),generation])?;
-        tx.commit()?;
+        write_stage(diagnostics, "attempt_insert", || {
+            tx.execute("INSERT INTO collection_attempts(requested_id,outcome,generation) VALUES(?1,'success',?2)",params![format!("modrinth-project-raw:{requested}"),generation])
+        })?;
+        write_stage(diagnostics, "commit", || tx.commit())?;
         Ok(generation)
     }
     pub fn latest_modrinth_project_record(
@@ -210,11 +304,29 @@ impl SnapshotStore {
         &self,
         id: &str,
     ) -> Result<Option<(i64, crate::modrinth::ProjectRecord)>, Box<dyn std::error::Error>> {
+        self.modrinth_project_snapshot_at(id, None)
+    }
+    /// Return only the explicitly selected historical generation; never fall back.
+    pub fn modrinth_project_generation(
+        &self,
+        id: &str,
+        generation: i64,
+    ) -> Result<Option<(i64, crate::modrinth::ProjectRecord)>, Box<dyn std::error::Error>> {
+        if generation < 1 {
+            return Err("Invalid archive generation".into());
+        }
+        self.modrinth_project_snapshot_at(id, Some(generation))
+    }
+    fn modrinth_project_snapshot_at(
+        &self,
+        id: &str,
+        generation: Option<i64>,
+    ) -> Result<Option<(i64, crate::modrinth::ProjectRecord)>, Box<dyn std::error::Error>> {
         crate::modrinth::projects_url(&[id.to_owned()])?;
         // Four MiB in the database encoding admits every valid two-MiB UTF-8
         // record even in a UTF-16 database. Parsing still enforces two MiB UTF-8.
         // Reject grossly oversized stored values before copying TEXT into Rust.
-        let stored:Option<(i64,Option<String>)>=self.0.query_row("SELECT generation,CASE WHEN octet_length(payload)<=4194304 THEN payload ELSE NULL END FROM snapshots WHERE provider='modrinth-project-raw' AND canonical_id=?1 ORDER BY generation DESC LIMIT 1",[id],|r|Ok((r.get(0)?,r.get(1)?))).optional()?;
+        let stored:Option<(i64,Option<String>)>=self.0.query_row("SELECT generation,CASE WHEN octet_length(payload)<=4194304 THEN payload ELSE NULL END FROM snapshots WHERE provider='modrinth-project-raw' AND canonical_id=?1 AND (?2 IS NULL OR generation=?2) ORDER BY generation DESC LIMIT 1",params![id,generation],|r|Ok((r.get(0)?,r.get(1)?))).optional()?;
         stored
             .map(|(generation, text)| {
                 if generation < 1 {
@@ -226,6 +338,79 @@ impl SnapshotStore {
                 Ok((generation, record))
             })
             .transpose()
+    }
+    /// Bounded metadata only; listing never parses or returns archived payloads.
+    pub fn modrinth_project_history(
+        &self,
+        id: &str,
+        before: Option<i64>,
+        limit: usize,
+    ) -> Result<ProjectHistoryPage, Box<dyn std::error::Error>> {
+        crate::modrinth::projects_url(&[id.to_owned()])?;
+        self.archive_history("modrinth-project-raw", id, before, limit)
+    }
+    pub fn modrinth_version_history(
+        &self,
+        id: &str,
+        before: Option<i64>,
+        limit: usize,
+    ) -> Result<ProjectHistoryPage, Box<dyn std::error::Error>> {
+        crate::modrinth_versions::versions_url(&[id.to_owned()])?;
+        self.archive_history("modrinth-version", id, before, limit)
+    }
+    pub fn upstream_history(
+        &self,
+        source: crate::upstream_reviews::Source,
+        before: Option<i64>,
+        limit: usize,
+    ) -> Result<ProjectHistoryPage, Box<dyn std::error::Error>> {
+        self.archive_history("github-upstream", source.id(), before, limit)
+    }
+    fn archive_history(
+        &self,
+        provider: &str,
+        id: &str,
+        before: Option<i64>,
+        limit: usize,
+    ) -> Result<ProjectHistoryPage, Box<dyn std::error::Error>> {
+        if !(1..=100).contains(&limit) || before.is_some_and(|value| value < 1) {
+            return Err("Invalid project history cursor or page size".into());
+        }
+        let mut statement = self.0.prepare(
+            "SELECT generation,CASE WHEN length(observed_at)<=64 THEN observed_at ELSE NULL END,octet_length(payload) FROM snapshots WHERE provider=?4 AND canonical_id=?1 AND (?2 IS NULL OR generation<?2) ORDER BY generation DESC LIMIT ?3"
+        )?;
+        let rows =
+            statement.query_map(params![id, before, (limit + 1) as i64, provider], |row| {
+                Ok((
+                    row.get::<_, i64>(0)?,
+                    row.get::<_, Option<String>>(1)?,
+                    row.get::<_, i64>(2)?,
+                ))
+            })?;
+        let mut entries = Vec::new();
+        for row in rows {
+            let (generation, observed_at, stored_bytes) = row?;
+            if generation < 1 || stored_bytes < 0 {
+                return Err("Invalid stored project history metadata".into());
+            }
+            entries.push(ProjectHistoryEntry {
+                generation: generation.to_string(),
+                observed_at: observed_at.ok_or("Invalid stored project observation timestamp")?,
+                stored_bytes,
+            });
+        }
+        let has_more = entries.len() > limit;
+        entries.truncate(limit);
+        let next_before = if has_more {
+            entries.last().map(|entry| entry.generation.clone())
+        } else {
+            None
+        };
+        Ok(ProjectHistoryPage {
+            entries,
+            next_before,
+            scope: "Stored metadata only, not payload validation, completeness or source truth. Byte counts use database encoding. Keyset pages exclude newer insertions after the selected cursor.",
+        })
     }
     pub fn record_project_raw_failure(
         &self,
@@ -390,9 +575,29 @@ impl SnapshotStore {
         id: &str,
     ) -> Result<Option<(i64, crate::modrinth_versions::VersionRecord)>, Box<dyn std::error::Error>>
     {
+        self.modrinth_version_snapshot_at(id, None)
+    }
+    pub fn modrinth_version_generation(
+        &self,
+        id: &str,
+        generation: i64,
+    ) -> Result<Option<(i64, crate::modrinth_versions::VersionRecord)>, Box<dyn std::error::Error>>
+    {
+        if generation < 1 {
+            return Err("Invalid version archive generation".into());
+        }
+        self.modrinth_version_snapshot_at(id, Some(generation))
+    }
+    fn modrinth_version_snapshot_at(
+        &self,
+        id: &str,
+        generation: Option<i64>,
+    ) -> Result<Option<(i64, crate::modrinth_versions::VersionRecord)>, Box<dyn std::error::Error>>
+    {
+        crate::modrinth_versions::versions_url(&[id.to_owned()])?;
         // Reuse the project archive's encoded-size bound before copying TEXT.
         // Four MiB admits valid two-MiB UTF-8 payloads in UTF-16 databases.
-        let stored:Option<(i64,Option<String>)>=self.0.query_row("SELECT generation,CASE WHEN octet_length(payload)<=4194304 THEN payload ELSE NULL END FROM snapshots WHERE provider='modrinth-version' AND canonical_id=?1 ORDER BY generation DESC LIMIT 1",[id],|r|Ok((r.get(0)?,r.get(1)?))).optional()?;
+        let stored:Option<(i64,Option<String>)>=self.0.query_row("SELECT generation,CASE WHEN octet_length(payload)<=4194304 THEN payload ELSE NULL END FROM snapshots WHERE provider='modrinth-version' AND canonical_id=?1 AND (?2 IS NULL OR generation=?2) ORDER BY generation DESC LIMIT 1",params![id,generation],|r|Ok((r.get(0)?,r.get(1)?))).optional()?;
         stored
             .map(|(generation, body)| {
                 if generation < 1 {

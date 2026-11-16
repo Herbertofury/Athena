@@ -1,0 +1,5 @@
+Initial local full Rust suite stopped at oversized_library_refuses_instead_of_truncating:
+SqliteFailure ConstraintViolation787 FOREIGN KEY constraint failed.
+Synthetic oversized fixture attempted soundtrack rows without parent rooms.
+Fixed fixture by adding matching synthetic rooms, not disabling foreign keys.
+This was a test-fixture failure, retained rather than claimed first-pass success.

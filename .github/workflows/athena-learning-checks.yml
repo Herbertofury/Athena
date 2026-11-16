@@ -21,6 +21,8 @@ jobs:
       - run: npm ci --ignore-scripts
       - run: npm run build
       - run: npm test
+      - name: Test isolated read-only storage experiment
+        run: node --test experiments/storage-observatory/*.test.mjs
       - name: Generated curriculum is current
         run: git diff --exit-code -- src dist/catalog.js docs/certificates docs/shared docs/paths docs/README.md wiki
       - name: Install browser for actual runtime checks
@@ -28,9 +30,16 @@ jobs:
       - name: Verify progress import persistence and recovery in Chromium
         run: node scripts/test_progress_import_browser.cjs
       - name: Verify native project continuity
-        run: node scripts/test_continuity_browser.cjs
+        run: |
+          node scripts/test_continuity_browser.cjs
+          node scripts/test_continuity_import_browser.cjs
+          node scripts/test_continuity_artifacts_browser.cjs
+      - name: Verify native project browser
+        run: node scripts/test_projects_browser.cjs
       - name: Verify native guidance reader and reference exports
         run: node scripts/test_guidance_browser.cjs
+      - name: Verify safe browser-only training missions
+        run: node scripts/test_simulations_browser.cjs
       - name: Test unified public app in Chromium
         run: npm run test:browser
       - uses: actions/upload-artifact@v4
@@ -39,3 +48,6 @@ jobs:
           name: athena-browser-evidence
           path: browser-results
           if-no-files-found: ignore
+
+
+

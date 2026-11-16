@@ -4,11 +4,9 @@ Manage, modify, create, stream and preserve games.
 
 [Browse in Athena](https://herbertofury.github.io/Athena/#software?family=gaming) · [Catalog](Software-Catalog) · [Method](Software-Methodology)
 
-52 applications. Reviewed 2026-11-15; individual records identify inherited research.
+44 applications. Reviewed 2026-11-15; individual records identify inherited research.
 
 ## Console emulation
-
-[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=gaming%2Fconsole-emulation)
 
 ### Dolphin
 
@@ -91,8 +89,6 @@ PlayStation 3 emulator and debugger with a published game-compatibility database
 
 ## Controller mapping and input
 
-[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=gaming%2Fcontroller-tools)
-
 ### AntiMicroX
 
 Graphical utility mapping gamepad inputs to keyboard, mouse, scripts, and macros.
@@ -122,36 +118,6 @@ Controller mapping tool focused on gyro aiming, flick stick, and advanced input 
 
 ## Emulation platforms and frontends
 
-[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=gaming%2Femulation-frontends)
-
-### ES-DE
-
-Game-library frontend for browsing and launching configured emulators, games and applications.
-
-- **Platforms:** Windows, macOS, Linux. **License:** MIT for desktop source; bundled assets/dependencies retain notices. **Pricing model:** free.
-- **Compatibility details:** Official site provides Windows, macOS Intel/Apple Silicon and Linux x64/ARM/Steam Deck downloads.
-- **Pricing details:** Windows, macOS and Linux releases are free and fully open source; Android is a distinct paid partially closed distribution and is excluded here.
-- **Pick for:** You want a themed controller-first library over installed emulators and games.
-- **Compare when:** Compare Playnite for PC-store libraries and RetroArch when an integrated core ecosystem matters.
-- **Strengths:** A controller-oriented library can span several systems; Desktop packages are provided for common PC operating systems
-- **Limitations:** Does not supply games, firmware or every emulator; Metadata and emulator setup still require configuration
-- **Maintenance:** unverified — Official product and installation material reviewed; a recent dated release was not established for this product scope.
-- [Official project](https://es-de.org/) · [Official installation / downloads](https://es-de.org/) · [Repository](https://gitlab.com/es-de/emulationstation-de)
-- **Sources:** [Official product overview](https://es-de.org/) (2026-11-15; identity, features, platforms, pricing, downloads); [Official licensing terms](https://gitlab.com/es-de/emulationstation-de/-/raw/master/LICENSE) (2026-11-15; license)
-### Pegasus Frontend
-
-Customizable game frontend for browsing libraries and launching separately installed emulators.
-
-- **Platforms:** Windows, macOS, Linux. **License:** GPL-3.0-or-later; some included logos/assets have separate restrictions. **Pricing model:** free.
-- **Compatibility details:** README documents Windows, Linux and macOS; platform-specific packages and notes are linked.
-- **Pricing details:** Official project explicitly commits to remaining free and open source.
-- **Pick for:** You want extensive control over a game-library frontend’s layout and behavior.
-- **Compare when:** Choose ES-DE when preconfigured system support and downloadable themes reduce setup work.
-- **Strengths:** Themes can change the entire interface; Existing game metadata can be reused
-- **Limitations:** Emulators and games are configured separately; Deep theme customization requires QML knowledge
-- **Maintenance:** unverified — Official release weekly_2024w38 is dated 2024-10-05; installation and performance were not independently tested. ([evidence](https://github.com/mmatyas/pegasus-frontend/releases/tag/weekly_2024w38))
-- [Official project](https://github.com/mmatyas/pegasus-frontend) · [Official installation / downloads](https://github.com/mmatyas/pegasus-frontend/releases) · [Repository](https://github.com/mmatyas/pegasus-frontend)
-- **Sources:** [Official product overview](https://github.com/mmatyas/pegasus-frontend) (2026-11-15; identity, features); [Official project documentation](https://raw.githubusercontent.com/mmatyas/pegasus-frontend/master/README.md) (2026-11-15; identity, features, downloads, platforms, pricing); [Official licensing terms](https://raw.githubusercontent.com/mmatyas/pegasus-frontend/master/LICENSE.md) (2026-11-15; license); [Official download or installation entry point](https://github.com/mmatyas/pegasus-frontend/releases) (2026-11-15; downloads); [Official dated release](https://github.com/mmatyas/pegasus-frontend/releases/tag/weekly_2024w38) (2026-11-15; maintenance, downloads)
 ### RetroArch
 
 Frontend for Libretro cores with controller configuration, shaders, save states, and unified menus.
@@ -167,8 +133,6 @@ Frontend for Libretro cores with controller configuration, shaders, save states,
 - **Sources:** [Official repository metadata: identity, license detection and activity](https://api.github.com/repos/libretro/RetroArch) (2026-11-14; identity, maintenance, license); [Official project README](https://raw.githubusercontent.com/libretro/RetroArch/HEAD/README.md) (2026-11-14; features, identity, platforms); [Official official documentation](https://www.retroarch.com/) (2026-11-14; identity, features); [Official release inspected: v1.22.2](https://github.com/libretro/RetroArch/releases/tag/v1.22.2) (2026-11-14; downloads, maintenance); [Public upstream source distribution; compiled binary packaging is separate](https://github.com/libretro/RetroArch/releases/download/v1.22.2/retroarch-sourceonly-1.22.2.tar.xz) (2026-11-14; downloads, pricing)
 
 ## Game Asset Tools
-
-[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=gaming%2Fgame-asset-tools)
 
 ### AssetRipper
 
@@ -257,8 +221,6 @@ Reader and writer for Unity asset bundles and serialized files, aimed at modding
 
 ## Game Engines
 
-[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=gaming%2Fgame-engines)
-
 ### Defold
 
 Game engine and editor with Lua scripting, component-based scenes and cross-platform build tools.
@@ -344,28 +306,7 @@ C# game engine with the Game Studio editor, asset management and configurable re
 - [Official project](https://www.stride3d.net/) · [Official installation / downloads](https://www.stride3d.net/download/) · [Repository](https://github.com/stride3d/stride)
 - **Sources:** [Official project README: documented behavior and installation](https://raw.githubusercontent.com/stride3d/stride/HEAD/README.md) (2026-11-14; downloads, features, identity, license, platforms); [Official license text or upstream licensing metadata](https://raw.githubusercontent.com/stride3d/stride/master/LICENSE.md) (2026-11-14; license); [Official downloads or installation instructions](https://www.stride3d.net/download/) (2026-11-14; downloads); [Official documentation: Game Studio authoring is supported on Windows; exported game target support is a separate claim.](https://doc.stride3d.net/4.3/en/manual/requirements/) (2026-11-14; platforms); [Public upstream app/package distribution: unauthenticated availability checked](https://github.com/stride3d/stride/releases/download/releases%2F4.4.2/Stride.UI.4.4.2.nupkg) (2026-11-14; downloads, pricing); [Observed upstream release record and date](https://github.com/stride3d/stride/releases/tag/releases/4.4.2) (2026-11-14; downloads, maintenance)
 
-## Game Graphics Tools
-
-[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=gaming%2Fgame-graphics-tools)
-
-### ReShade
-
-Post-processing injector for games and video applications using configurable shader effects.
-
-- **Platforms:** Windows. **License:** BSD-3-Clause; specified portions also MIT. **Pricing model:** free.
-- **Compatibility details:** Windows-focused injected runtime; supported graphics API and application requirements must be checked.
-- **Pricing details:** Official project distributes code and installer without a product fee; shader packs may have their own terms.
-- **Pick for:** You want supported post-processing effects for a game or video application.
-- **Compare when:** Check the specific game’s compatibility and rules; debugging and recording tools solve different tasks.
-- **Strengths:** Adds an effect pipeline without modifying a game’s source; Presets can be adjusted through the in-game overlay
-- **Limitations:** Depth access and effect compatibility depend on the application; Multiplayer/anti-cheat policies may restrict injected tools
-- **Maintenance:** unverified — Official product and installation material reviewed; a recent dated release was not established for this product scope.
-- [Official project](https://github.com/crosire/reshade) · [Official installation / downloads](https://reshade.me/) · [Repository](https://github.com/crosire/reshade)
-- **Sources:** [Official product overview](https://github.com/crosire/reshade) (2026-11-15; identity, features); [Official project documentation](https://raw.githubusercontent.com/crosire/reshade/main/README.md) (2026-11-15; identity, features, downloads); [Official licensing terms](https://raw.githubusercontent.com/crosire/reshade/main/LICENSE.md) (2026-11-15; license); [Documented deployment and platform scope](https://reshade.me/) (2026-11-15; platforms, pricing, downloads)
-
 ## Game library managers
-
-[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=gaming%2Fgame-library-managers)
 
 ### Heroic Games Launcher
 
@@ -408,8 +349,6 @@ Open-source game library manager with integrations, metadata, extensions, and fu
 
 ## Remote game streaming
 
-[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=gaming%2Fgame-streaming)
-
 ### Moonlight
 
 Desktop client for streaming games and applications from compatible hosts such as Sunshine.
@@ -438,8 +377,6 @@ Self-hosted game-streaming host compatible with Moonlight clients and supported 
 - **Sources:** [Official repository metadata: identity, license detection and activity](https://api.github.com/repos/SunshineStream/Sunshine) (2026-11-14; identity, maintenance, license); [Official project README](https://raw.githubusercontent.com/SunshineStream/Sunshine/HEAD/README.md) (2026-11-14; identity, features, platforms); [Official official documentation](https://app.lizardbyte.dev/Sunshine/) (2026-11-14; identity, features); [Official canonical official documentation](https://sunshine.lizardbyte.dev/) (2026-11-14; identity, features, platforms, downloads); [Official release inspected: v2026.914.233613](https://github.com/SunshineStream/Sunshine/releases/tag/v2026.914.233613) (2026-11-14; downloads, maintenance, platforms); [Public upstream app/package distribution: availability without payment or authentication checked](https://github.com/SunshineStream/Sunshine/releases/download/v2026.914.233613/Sunshine-Windows-AMD64-lite.zip) (2026-11-14; downloads, pricing)
 
 ## Interactive Fiction
-
-[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=gaming%2Finteractive-fiction)
 
 ### Ren'Py
 
@@ -471,8 +408,6 @@ Passage-based authoring application for interactive stories that export to HTML.
 - **Sources:** [Official project README: documented behavior and installation](https://raw.githubusercontent.com/klembot/twinejs/HEAD/README.md) (2026-11-14; downloads, features, identity, platforms); [Official license text or upstream licensing metadata](https://raw.githubusercontent.com/klembot/twinejs/HEAD/LICENSE) (2026-11-14; license); [Official downloads or installation instructions](https://github.com/klembot/twinejs/releases) (2026-11-14; downloads); [Public upstream app/package distribution: unauthenticated availability checked](https://github.com/klembot/twinejs/releases/download/2.12.1/Twine-2.12.1-Linux-arm64.zip) (2026-11-14; downloads, pricing); [Observed upstream release record and date](https://github.com/klembot/twinejs/releases/tag/2.12.1) (2026-11-14; downloads, maintenance)
 
 ## Level Editors
-
-[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=gaming%2Flevel-editors)
 
 ### LDtk
 
@@ -533,8 +468,6 @@ Three-dimensional brush-map editor for Quake-engine-based games with texture and
 
 ## Minecraft launchers
 
-[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=gaming%2Fminecraft-launchers)
-
 ### Modrinth App
 
 Desktop launcher for managing Minecraft modpacks, instances, and content from Modrinth.
@@ -564,8 +497,6 @@ Minecraft Java launcher with separate instances, mod management, and modpack imp
 
 ## Mod managers
 
-[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=gaming%2Fmod-managers)
-
 ### Mod Organizer 2
 
 Mod manager using a virtual filesystem for supported games, with profiles and conflict inspection.
@@ -579,20 +510,6 @@ Mod manager using a virtual filesystem for supported games, with profiles and co
 - **Maintenance:** active — Repository not archived; latest repository push observed 2026-10-05. Activity is not a runtime, security, or support guarantee. ([evidence](https://api.github.com/repos/ModOrganizer2/modorganizer))
 - [Official project](https://www.modorganizer.org/) · [Official installation / downloads](https://github.com/ModOrganizer2/modorganizer/releases) · [Repository](https://github.com/ModOrganizer2/modorganizer)
 - **Sources:** [Official repository metadata: identity, license detection and activity](https://api.github.com/repos/ModOrganizer2/modorganizer) (2026-11-14; identity, maintenance, license); [Official project README](https://raw.githubusercontent.com/ModOrganizer2/modorganizer/HEAD/readme.md) (2026-11-14; identity, features); [Official official documentation](https://www.modorganizer.org/) (2026-11-14; identity, features); [Official release inspected: v2.5.2](https://github.com/ModOrganizer2/modorganizer/releases/tag/v2.5.2) (2026-11-14; downloads, maintenance, platforms); [Public upstream app/package distribution: availability without payment or authentication checked](https://github.com/ModOrganizer2/modorganizer/releases/download/v2.5.2/Mod.Organizer-2.5.2.7z) (2026-11-14; downloads, pricing)
-### r2modman
-
-Mod manager for supported Thunderstore games with profiles, configuration editing and updates.
-
-- **Platforms:** Windows, Linux. **License:** MIT. **Pricing model:** free.
-- **Compatibility details:** Official documentation supports Windows and Linux, including Steam Deck packaging; macOS is not claimed.
-- **Pricing details:** Official release packages and source are free under MIT.
-- **Pick for:** Your game uses a supported Thunderstore ecosystem and you want manageable profiles.
-- **Compare when:** Use the manager required by the game’s specific mod ecosystem.
-- **Strengths:** Profiles keep different supported mod setups separate; Shared profiles include mod and configuration selections
-- **Limitations:** Only supported games and distributions are covered; Game, loader and mod changes can still break a profile
-- **Maintenance:** active — Official release v3.2.21 is dated 2026-10-30; installation and performance were not independently tested. ([evidence](https://github.com/ebkr/r2modmanPlus/releases/tag/v3.2.21))
-- [Official project](https://github.com/ebkr/r2modmanPlus) · [Official installation / downloads](https://github.com/ebkr/r2modmanPlus/releases/latest) · [Repository](https://github.com/ebkr/r2modmanPlus)
-- **Sources:** [Official product overview](https://github.com/ebkr/r2modmanPlus) (2026-11-15; identity, features); [Official project documentation](https://raw.githubusercontent.com/ebkr/r2modmanPlus/develop/README.md) (2026-11-15; identity, features, downloads, platforms, pricing); [Official licensing terms](https://raw.githubusercontent.com/ebkr/r2modmanPlus/develop/LICENSE) (2026-11-15; license); [Official download or installation entry point](https://github.com/ebkr/r2modmanPlus/releases/latest) (2026-11-15; downloads); [Official dated release](https://github.com/ebkr/r2modmanPlus/releases/tag/v3.2.21) (2026-11-15; maintenance, downloads)
 ### Vortex
 
 Nexus Mods desktop mod manager with game extensions, deployment, profiles, and collection support.
@@ -606,24 +523,8 @@ Nexus Mods desktop mod manager with game extensions, deployment, profiles, and c
 - **Maintenance:** active — Repository not archived; latest repository push observed 2026-11-14. Activity is not a runtime, security, or support guarantee. ([evidence](https://api.github.com/repos/Nexus-Mods/Vortex))
 - [Official project](https://www.nexusmods.com:443/vortex) · [Official installation / downloads](https://github.com/Nexus-Mods/Vortex/releases) · [Repository](https://github.com/Nexus-Mods/Vortex)
 - **Sources:** [Official repository metadata: identity, license detection and activity](https://api.github.com/repos/Nexus-Mods/Vortex) (2026-11-14; identity, maintenance, license); [Official project README](https://raw.githubusercontent.com/Nexus-Mods/Vortex/HEAD/README.md) (2026-11-14; identity, features); [Official official documentation](https://www.nexusmods.com:443/vortex) (2026-11-14; identity, features); [Official release inspected: v2.10.1](https://github.com/Nexus-Mods/Vortex/releases/tag/v2.10.1) (2026-11-14; downloads, maintenance, platforms); [Public upstream app/package distribution: availability without payment or authentication checked](https://github.com/Nexus-Mods/Vortex/releases/download/v2.10.1/vortex-setup-2.10.1.exe) (2026-11-14; downloads, pricing)
-### Wabbajack
-
-Automated modlist installer that recreates supported curated game setups from original download sources.
-
-- **Platforms:** Windows. **License:** GPL-3.0 code; generated modlists have separate CC BY-NC-SA terms. **Pricing model:** free.
-- **Compatibility details:** Official user setup targets Windows; individual modlists specify their own requirements.
-- **Pricing details:** Wabbajack is free; games, original mod sources and optional services can have separate costs.
-- **Pick for:** You want a supported curated modlist and can follow its game and storage requirements.
-- **Compare when:** Use a general mod manager for a setup you want to assemble and update independently.
-- **Strengths:** A defined list can reproduce a complex supported setup; Original mod assets are not bundled into the installer
-- **Limitations:** Large lists need storage, matching game versions and author-specific instructions; Some sources require accounts or optional paid download services
-- **Maintenance:** active — Official release 4.3.2.2 is dated 2026-11-05; installation and performance were not independently tested. ([evidence](https://github.com/wabbajack-tools/wabbajack/releases/tag/4.3.2.2))
-- [Official project](https://www.wabbajack.org/) · [Official installation / downloads](https://www.wabbajack.org/) · [Repository](https://github.com/wabbajack-tools/wabbajack)
-- **Sources:** [Official product overview](https://www.wabbajack.org/) (2026-11-15; identity, features, downloads); [Official project documentation](https://raw.githubusercontent.com/wabbajack-tools/wabbajack/main/README.md) (2026-11-15; identity, features, downloads, pricing); [Official licensing terms](https://raw.githubusercontent.com/wabbajack-tools/wabbajack/main/LICENSE.txt) (2026-11-15; license); [Documented deployment and platform scope](https://wiki.wabbajack.org/user_documentation/Installing%20a%20Modlist.html) (2026-11-15; platforms); [Official dated release](https://github.com/wabbajack-tools/wabbajack/releases/tag/4.3.2.2) (2026-11-15; maintenance, downloads)
 
 ## Game modding utilities
-
-[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=gaming%2Fmodding-tools)
 
 ### BepInEx
 
@@ -651,20 +552,6 @@ Load Order Optimisation Tool for supported Bethesda games using metadata and plu
 - **Maintenance:** active — Repository not archived; latest repository push observed 2026-11-05. Activity is not a runtime, security, or support guarantee. ([evidence](https://api.github.com/repos/loot/loot))
 - [Official project](https://loot.github.io/) · [Official installation / downloads](https://github.com/loot/loot/releases) · [Repository](https://github.com/loot/loot)
 - **Sources:** [Official repository metadata: identity, license detection and activity](https://api.github.com/repos/loot/loot) (2026-11-14; identity, maintenance, license); [Official project README](https://raw.githubusercontent.com/loot/loot/HEAD/README.md) (2026-11-14; identity, features); [Official official documentation](https://loot.github.io/) (2026-11-14; identity, features); [Official release inspected: 0.29.2](https://github.com/loot/loot/releases/tag/0.29.2) (2026-11-14; downloads, maintenance, platforms); [Public upstream app/package distribution: availability without payment or authentication checked](https://github.com/loot/loot/releases/download/0.29.2/loot_0.29.2-win64.7z) (2026-11-14; downloads, pricing)
-### MelonLoader
-
-Mod loader and API for supported Unity games using Mono or IL2CPP runtimes.
-
-- **Platforms:** Windows, macOS, Linux. **License:** Apache-2.0; bundled dependencies retain their licenses. **Pricing model:** free.
-- **Compatibility details:** Official README offers Windows, Linux and macOS installers; runtime and game compatibility still vary by platform.
-- **Pricing details:** Public installer, release packages and source are free; individual game and mod requirements are separate.
-- **Pick for:** A game and its mod community explicitly support MelonLoader.
-- **Compare when:** Use the loader required by the particular game and mod rather than treating loaders as interchangeable.
-- **Strengths:** A common framework supports many Unity mod ecosystems; Logging and developer APIs help diagnose mod loading
-- **Limitations:** Game and Unity-version compatibility vary; Multiplayer protections and game updates may block or break mods
-- **Maintenance:** active — Official release v0.7.3 is dated 2026-05-14; installation and performance were not independently tested. ([evidence](https://github.com/LavaGang/MelonLoader/releases/tag/v0.7.3))
-- [Official project](https://github.com/LavaGang/MelonLoader) · [Official installation / downloads](https://github.com/LavaGang/MelonLoader#how-to-use-the-installer) · [Repository](https://github.com/LavaGang/MelonLoader)
-- **Sources:** [Official product overview](https://github.com/LavaGang/MelonLoader) (2026-11-15; identity, features); [Official project documentation](https://raw.githubusercontent.com/LavaGang/MelonLoader/master/README.md) (2026-11-15; identity, features, downloads, platforms, pricing); [Official licensing terms](https://raw.githubusercontent.com/LavaGang/MelonLoader/master/LICENSE.md) (2026-11-15; license); [Official download or installation entry point](https://github.com/LavaGang/MelonLoader#how-to-use-the-installer) (2026-11-15; downloads); [Official dated release](https://github.com/LavaGang/MelonLoader/releases/tag/v0.7.3) (2026-11-15; maintenance, downloads)
 ### REFramework
 
 Modding framework for supported RE Engine games with scripting, plugins, and runtime tools.
@@ -679,34 +566,6 @@ Modding framework for supported RE Engine games with scripting, plugins, and run
 - **Maintenance:** active — Repository not archived; latest repository push observed 2026-11-12. Activity is not a runtime, security, or support guarantee. ([evidence](https://api.github.com/repos/praydog/REFramework))
 - [Official project](https://github.com/praydog/REFramework) · [Official installation / downloads](https://github.com/praydog/REFramework/releases) · [Repository](https://github.com/praydog/REFramework)
 - **Sources:** [Official repository metadata: identity, license detection and activity](https://api.github.com/repos/praydog/REFramework) (2026-11-14; identity, maintenance, license); [Official project README](https://raw.githubusercontent.com/praydog/REFramework/HEAD/README.md) (2026-11-14; identity, features); [Official release inspected: v1.5.9.1](https://github.com/praydog/REFramework/releases/tag/v1.5.9.1) (2026-11-14; downloads, maintenance); [Public upstream app/package distribution: availability without payment or authentication checked](https://github.com/praydog/REFramework/releases/download/v1.5.9.1/DD2.zip) (2026-11-14; downloads, pricing); [Official source: The official release workflow builds Windows DLL distributions; Linux use is via the separate Proton compatibility route.](https://raw.githubusercontent.com/praydog/REFramework/master/.github/workflows/dev-release.yml) (2026-11-14; platforms)
-### Reloaded-II
-
-Mod loading and management framework for supported native x86/x64 games and applications.
-
-- **Platforms:** Windows, Linux. **License:** GPL-3.0. **Pricing model:** free.
-- **Compatibility details:** Windows native; official Linux support guide uses Wine/Proton. macOS is only reportedly working through Wine and is not claimed here.
-- **Pricing details:** Official project explicitly describes itself as fully free and open source.
-- **Pick for:** Your game has a Reloaded-II mod ecosystem and documented setup.
-- **Compare when:** Use the game-specific loader when its APIs and compatibility differ.
-- **Strengths:** Combines a launcher interface with an extensible mod framework; Community packages can target games beyond one engine
-- **Limitations:** Native application is Windows; Linux uses Wine/Proton; Compatibility depends on game, mod and runtime versions
-- **Maintenance:** active — Official release 1.31.0 is dated 2026-09-23; installation and performance were not independently tested. ([evidence](https://github.com/Reloaded-Project/Reloaded-II/releases/tag/1.31.0))
-- [Official project](https://github.com/Reloaded-Project/Reloaded-II) · [Official installation / downloads](https://reloaded-project.github.io/Reloaded-II/QuickStart/) · [Repository](https://github.com/Reloaded-Project/Reloaded-II)
-- **Sources:** [Official product overview](https://github.com/Reloaded-Project/Reloaded-II) (2026-11-15; identity, features); [Official project documentation](https://raw.githubusercontent.com/Reloaded-Project/Reloaded-II/master/README.md) (2026-11-15; identity, features, downloads, pricing); [Official licensing terms](https://raw.githubusercontent.com/Reloaded-Project/Reloaded-II/master/LICENSE.md) (2026-11-15; license); [Documented deployment and platform scope](https://reloaded-project.github.io/Reloaded-II/) (2026-11-15; platforms); [Official download or installation entry point](https://reloaded-project.github.io/Reloaded-II/QuickStart/) (2026-11-15; downloads); [Official dated release](https://github.com/Reloaded-Project/Reloaded-II/releases/tag/1.31.0) (2026-11-15; maintenance, downloads)
-### SMAPI
-
-Stardew Valley mod framework with loading, compatibility checks, logs and save backups.
-
-- **Platforms:** Windows, macOS, Linux. **License:** LGPL-3.0. **Pricing model:** free.
-- **Compatibility details:** Official documentation explicitly addresses Linux, macOS and Windows compatibility.
-- **Pricing details:** Public framework source and release packages are free; the base game is a separate purchase.
-- **Pick for:** You want to use Stardew Valley mods that require SMAPI.
-- **Compare when:** Other loaders target different games; follow the requirements of the intended mod.
-- **Strengths:** Game-specific APIs simplify Stardew Valley mod integration; Logs and compatibility notices support troubleshooting
-- **Limitations:** Requires matching Stardew Valley and mod versions; Backups and compatibility checks cannot guarantee every mod combination works
-- **Maintenance:** active — Official release 4.5.2 is dated 2026-03-22; installation and performance were not independently tested. ([evidence](https://github.com/Pathoschild/SMAPI/releases/tag/4.5.2))
-- [Official project](https://github.com/Pathoschild/SMAPI) · [Official installation / downloads](https://github.com/Pathoschild/SMAPI/releases/latest) · [Repository](https://github.com/Pathoschild/SMAPI)
-- **Sources:** [Official product overview](https://github.com/Pathoschild/SMAPI) (2026-11-15; identity, features); [Official project documentation](https://raw.githubusercontent.com/Pathoschild/SMAPI/develop/docs/README.md) (2026-11-15; identity, features, downloads, platforms); [Official licensing terms](https://raw.githubusercontent.com/Pathoschild/SMAPI/develop/LICENSE.txt) (2026-11-15; license); [Distribution and pricing qualification](https://github.com/Pathoschild/SMAPI/releases/latest) (2026-11-15; pricing, downloads); [Official dated release](https://github.com/Pathoschild/SMAPI/releases/tag/4.5.2) (2026-11-15; maintenance, downloads)
 ### Wrye Bash
 
 Mod management and compatibility-patching tool for supported Bethesda games.
@@ -735,8 +594,6 @@ Plugin record viewer and editor for supported Bethesda games with conflict analy
 - **Sources:** [Official repository metadata: identity, license detection and activity](https://api.github.com/repos/TES5Edit/TES5Edit) (2026-11-14; identity, maintenance, license); [Official project README](https://raw.githubusercontent.com/TES5Edit/TES5Edit/HEAD/README.md) (2026-11-14; identity, features); [Official official documentation](https://tes5edit.github.io/) (2026-11-14; identity, features); [Official release inspected: xedit-4.1.5f](https://github.com/TES5Edit/TES5Edit/releases/tag/xedit-4.1.5f) (2026-11-14; downloads, maintenance); [Public upstream app/package distribution: availability without payment or authentication checked](https://github.com/TES5Edit/TES5Edit/releases/download/xedit-4.1.5f/xEdit.4.1.5f.7z) (2026-11-14; downloads, pricing); [Official source: The official xEdit documentation describes Windows installation and runtime requirements.](https://tes5edit.github.io/docs/2-overview.html) (2026-11-14; platforms)
 
 ## Windows game compatibility on Linux
-
-[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=gaming%2Fwindows-compatibility)
 
 ### Bottles
 
