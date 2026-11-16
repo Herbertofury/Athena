@@ -37,6 +37,16 @@ const {chromium}=require('playwright');
   const motionPositions=new Set();for(let i=0;i<12;i++){await page.waitForTimeout(16);motionPositions.add(await actor.evaluate(el=>el.style.transform));assert(await actor.evaluate(el=>{const a=el.getBoundingClientRect(),s=el.parentElement.getBoundingClientRect();return a.left>=s.left-1&&a.top>=s.top-1&&a.right<=s.right+1&&a.bottom<=s.bottom+1}), 'rotating motion form crossed stage boundary')}
   assert(motionPositions.size>1,'post-release throw must actually animate, not pass as stationary');
   await page.setViewportSize({width:360,height:700});await page.waitForTimeout(100);assert(await actor.evaluate(el=>{const a=el.getBoundingClientRect(),s=el.parentElement.getBoundingClientRect();return a.width<=110&&a.right<=s.right+1&&a.bottom<=s.bottom+1}));
+  const rotationReceipts=[];
+  for(const rotation of [-90,-45,45,90]){
+   await page.evaluate(rotation=>{const id=themes[0].objects[0].id;window.rotatedLayout={version:6,themeId:themes[0].id,roomId:themes[0].rooms[0].id,placements:{a:{objectId:id,x:1,y:1,pinned:false,rotation}}};adapter.update(rotatedLayout)},rotation);
+   const receipt=await actor.evaluate(el=>{const r=el.getBoundingClientRect(),s=el.parentElement.getBoundingClientRect();return {baseWidth:el.offsetWidth,baseHeight:el.offsetHeight,width:r.width,height:r.height,transform:getComputedStyle(el).transform,inside:r.left>=s.left-1&&r.top>=s.top-1&&r.right<=s.right+1&&r.bottom<=s.bottom+1}});
+   assert.equal(receipt.baseWidth,80);assert.equal(receipt.baseHeight,150);const rad=rotation*Math.PI/180;assert(Math.abs(receipt.width-(Math.abs(80*Math.cos(rad))+Math.abs(150*Math.sin(rad))))<.1);assert(Math.abs(receipt.height-(Math.abs(150*Math.cos(rad))+Math.abs(80*Math.sin(rad))))<.1);assert(receipt.inside);rotationReceipts.push({rotation,...receipt});
+  }
+  const rotatedInput=await page.evaluate(()=>JSON.stringify(rotatedLayout));
+  await page.locator('[data-ecology-motion]').check();const rotatedBox=await actor.boundingBox();await page.mouse.move(rotatedBox.x+rotatedBox.width/2,rotatedBox.y+rotatedBox.height/2);await page.mouse.down();await page.mouse.move(rotatedBox.x+rotatedBox.width/2-35,rotatedBox.y+rotatedBox.height/2-25,{steps:3});await page.mouse.up();
+  const rotatedMotion=new Set();for(let i=0;i<16;i++){await page.waitForTimeout(16);rotatedMotion.add(await actor.evaluate(el=>el.style.transform));assert(await actor.evaluate(el=>{const a=el.getBoundingClientRect(),s=el.parentElement.getBoundingClientRect();return a.left>=s.left-1&&a.top>=s.top-1&&a.right<=s.right+1&&a.bottom<=s.bottom+1}),'authored rotating form crossed stage boundary')}
+  assert(rotatedMotion.size>1,'authored rotation throw must animate');await page.locator('[data-ecology-motion]').uncheck();assert.match(await actor.evaluate(el=>el.style.transform),/rotate\(90deg\)/);assert.equal(await page.evaluate(()=>JSON.stringify(rotatedLayout)),rotatedInput);
   // Controlled solid colors test the compositor, not original artwork/backdrop parity.
   await page.evaluate(()=>{
    const id=themes[0].objects[0].id;window.blendFixture={version:6,themeId:themes[0].id,roomId:themes[0].rooms[0].id,placements:{a:{objectId:id,x:.2,y:.2,pinned:false,blendMode:'multiply'},b:{objectId:id,x:.3,y:.2,pinned:false,blendMode:'multiply'}}};
@@ -54,6 +64,6 @@ const {chromium}=require('playwright');
   const blendPixels={};for(const [mode,expected] of [['normal',128],['multiply',64],['screen',192]]){const receipt=await sampleOverlap(mode);blendPixels[mode]=receipt;for(let c=0;c<3;c++){assert(Math.abs(receipt.single[c]-128)<=1,'blend escaped isolated preview');assert(Math.abs(receipt.overlap[c]-expected)<=1,'overlap blend pixel mismatch')}assert.equal(receipt.overlap[3],255)}
   await page.evaluate(()=>{blendFixture.placements.a.blendMode='url(https://example.invalid/blend)';adapter.update(blendFixture)});assert.equal(await page.locator('[data-ecology-object]').first().evaluate(el=>getComputedStyle(el).mixBlendMode),'normal');
   await page.waitForTimeout(100);assert.deepEqual(outside,[]);await page.click('[data-ecology-close]');assert.equal(await actor.count(),0);
-  console.log(JSON.stringify({actualChromium:true,before,shapes,blendPixels,keyboardMovement:true,inputUnchanged:true,closeClean:true,motionPositions:motionPositions.size,outsideRequests:outside.length}));
+  console.log(JSON.stringify({actualChromium:true,before,shapes,blendPixels,rotationReceipts,rotatedMotion:rotatedMotion.size,keyboardMovement:true,inputUnchanged:true,closeClean:true,motionPositions:motionPositions.size,outsideRequests:outside.length}));
  }finally{if(browser)await browser.close();server.close()}
 })().catch(e=>{console.error(e);process.exitCode=1});
