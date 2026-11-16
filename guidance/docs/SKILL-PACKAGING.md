@@ -1,0 +1,15 @@
+# Explicit native Skill source archives
+
+`python guidance/tools/package_skill.py --source PATH --output NEW_DIRECTORY --source-url https://github.com/OWNER/REPO --revision FULL_COMMIT`
+
+This native Athena tool covers the per-Skill archive/receipt portion of Agent-Foundry's pinned `tools/package_skills.py` capability (source commit `87166b5f6a621c61b90bbbfe90835a3752c1c51b`). It is a new bounded implementation, not an automatic migration or installer. It does not package the currently held sanitized source publication or change any consumer.
+
+One explicitly selected Skill is structurally checked using existing Athena preflight. The existing portable component, nonlinked/reparse-path, case-alias and source byte guards apply. Current preflight limits are 2,000 entries and 25 MiB; archive output is additionally capped at 40 MiB. These are accepted inventory/output budgets, not a hard process-heap bound: directory enumeration precedes its count check, and source snapshots/archive coexist in memory. ZIP names include the Skill root. Members use stored compression, sorted names, fixed timestamps and normalized regular-file mode, so identical accepted bytes produce identical archive bytes independent of filesystem mode/mtime and zlib versions. This is archive determinism, not reproducible executable builds.
+
+The source is re-read and compared before publication. The output must be a new directory outside the source, in an existing trusted parent. Existing output is never replaced/deleted. `release-receipt.json` is written after `skill.zip`; any failure retains partial output for inspection and never claims completion. A partially written receipt may exist, so file presence alone is never completion: require a successful process result and valid receipt with matching archive/file hashes. A receipt records exact per-file and archive hashes, source attribution and explicit limitations. Source URL/revision are caller declarations, not fetched verification, signatures or attestation. Nothing here grants redistribution rights: review code, models/assets, personal data and component terms before sharing.
+
+Trusted, quiescent directories are required. This is not an adversarial concurrent-filesystem sandbox, power-loss-atomic publish or hostile archive extractor. No files are extracted, no Skill instructions/scripts executed, and no client/global configuration changed. Source directories are never modified. Windows symlink creation may be unavailable; tests record that skip rather than imply the case ran.
+
+Synthetic regressions cover exact deterministic roundtrip, source preservation, existing/nested output refusal, portable names and pinned metadata validation, changed-source rejection, symlink refusal and retained partial failure. Hosted Windows/Linux results must qualify the exact commit before cross-platform acceptance is claimed.
+
+Still separate: actual installed-client behavior, symlink synchronization, multi-target state, legacy management adoption, hosted release attestations and complete source retirement. Original repositories and private recovery remain preserved.
