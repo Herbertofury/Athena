@@ -1,7 +1,12 @@
 use athena_foundry_store::{Store, music_import::MusicImport};
 static NEXT_PATH: std::sync::atomic::AtomicU64 = std::sync::atomic::AtomicU64::new(0);
 fn path() -> std::path::PathBuf {
-    path_at(std::time::SystemTime::now().duration_since(std::time::UNIX_EPOCH).unwrap().as_nanos())
+    path_at(
+        std::time::SystemTime::now()
+            .duration_since(std::time::UNIX_EPOCH)
+            .unwrap()
+            .as_nanos(),
+    )
 }
 fn path_at(timestamp: u128) -> std::path::PathBuf {
     std::env::temp_dir().join(format!(
@@ -95,8 +100,13 @@ fn oversized_library_refuses_instead_of_truncating() {
 
 #[test]
 fn concurrent_fixture_paths_are_unique() {
-    let threads: Vec<_> = (0..16).map(|_| std::thread::spawn(|| (0..100).map(|_| path_at(123)).collect::<Vec<_>>())).collect();
-    let paths: Vec<_> = threads.into_iter().flat_map(|t| t.join().unwrap()).collect();
+    let threads: Vec<_> = (0..16)
+        .map(|_| std::thread::spawn(|| (0..100).map(|_| path_at(123)).collect::<Vec<_>>()))
+        .collect();
+    let paths: Vec<_> = threads
+        .into_iter()
+        .flat_map(|t| t.join().unwrap())
+        .collect();
     let unique: std::collections::HashSet<_> = paths.iter().collect();
     assert_eq!(unique.len(), paths.len());
 }
