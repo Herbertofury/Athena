@@ -153,3 +153,12 @@ real IndexedDB/reload/download, concurrent appends, injected quota rollback/no o
 blobs, corruption refusal, 100-revision/64-MiB admission, and hostile HTML as inert
 bytes. Require that exact candidate's hosted tests before delivery. None of this
 certifies installed-provider capture, user-data migration or source retirement.
+
+## Artifact revision metadata search
+
+After explicitly opening the journal, search historical filenames, MIME labels or
+SHA-256 substrings without reading stored file contents. The current artifact name
+remains visible above matching revisions; the count states how many revisions match.
+Filtering does not change the selected retention target, stored revisions or prepared
+download links. Clear the query to restore the full list. This is metadata discovery,
+not content indexing, preview, a storage refresh or complete Output Vault parity.
