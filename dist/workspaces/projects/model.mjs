@@ -16,4 +16,23 @@ export function change(value,id,input,now=Date.now()){
  project.revisions.push({...structuredClone(input),at:now});return validate(next);
 }
 export function archive(value,id){const next=validate(value),p=next.entries.find(p=>p.id===id);if(!p)throw Error('Unknown project');p.archived=!p.archived;return next;}
-export function browse(value,{query='',ownership='',stage='',archived=false}={}){const q=query.toLowerCase();return validate(value).entries.filter(p=>{const r=p.revisions.at(-1);return p.archived===archived&&(!ownership||r.ownership===ownership)&&(!stage||r.stage===stage)&&Object.values(r).join(' ').toLowerCase().includes(q);}).sort((a,b)=>b.revisions.at(-1).at-a.revisions.at(-1).at||a.id.localeCompare(b.id));}
+// Search only the declared project text fields; unknown imported metadata stays
+// preserved but is not accidentally exposed as search evidence.
+export const searchableFields=['name','ownership','stage','goal','next','blockers','decisions','resources','source','version','release'];
+export function matchingRevisions(project,query,{history=false}={}){
+ const q=String(query).trim().toLowerCase();if(!q)return [];
+ const found=[];
+ for(let index=project.revisions.length-1;index>=0;index--){
+  if(!history&&index!==project.revisions.length-1)break;
+  const revision=project.revisions[index];
+  const fields=searchableFields.filter(key=>revision[key].toLowerCase().includes(q));
+  if(fields.length)found.push({index,fields});
+ }
+ return found;
+}
+export function browse(value,{query='',ownership='',stage='',archived=false,history=false}={}){
+ const q=String(query).trim();return validate(value).entries.filter(p=>{
+  const r=p.revisions.at(-1);
+  return p.archived===archived&&(!ownership||r.ownership===ownership)&&(!stage||r.stage===stage)&&(!q||matchingRevisions(p,q,{history}).length>0);
+ }).sort((a,b)=>b.revisions.at(-1).at-a.revisions.at(-1).at||a.id.localeCompare(b.id));
+}
