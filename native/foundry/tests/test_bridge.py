@@ -18,6 +18,9 @@ class Tests(unittest.TestCase):
  def tearDown(self):self.server.shutdown();self.thread.join();self.server.server_close();self.tmp.cleanup()
  def request(self,method='GET',path='/__native/backup',body=None,headers=None):
   h={'Host':self.server.host,'Origin':self.server.origin,'X-Athena-Native':'1'};h.update(headers or {});c=http.client.HTTPConnection('127.0.0.1',self.server.server_port,timeout=5);c.request(method,path,body=body.encode('utf8') if isinstance(body,str) else body,headers=h);r=c.getresponse();result=(r.status,r.read(),dict(r.getheaders()));c.close();return result
+ def test_project_comparison_exact_static_bytes_and_database_unchanged(self):
+  before=self.db.read_bytes();status,body,_=self.request(path='/workspaces/projects/compare.mjs')
+  self.assertEqual(status,200);self.assertEqual(body,(ROOT.parents[1]/'dist/workspaces/projects/compare.mjs').read_bytes());self.assertEqual(self.db.read_bytes(),before)
  def test_layers_explicit_disable_and_reviewed_static_module(self):
   self.server.shutdown();self.thread.join();self.server.server_close()
   self.server=m.Bridge(BIN,self.db,ROOT.parents[1]/'dist',disable_foundry_modules=['layers']);self.thread=threading.Thread(target=self.server.serve_forever);self.thread.start()
