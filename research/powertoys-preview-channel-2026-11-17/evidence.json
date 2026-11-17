@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "reviewed_at": "2026-11-17",
+  "application_id": "powertoys",
+  "tag": "v0.103.3151",
+  "release_date": "2026-11-13",
+  "channel": "development-preview",
+  "prerelease": true,
+  "evidence_status": "official-docs-reviewed",
+  "sources": {
+    "release": "https://github.com/microsoft/PowerToys/releases/tag/v0.103.3151",
+    "license": "https://github.com/microsoft/PowerToys/blob/v0.103.3151/LICENSE"
+  },
+  "root_license": "MIT",
+  "retained_code": false,
+  "runtime_tested": false,
+  "benchmarked": false,
+  "catalog_modified": false,
+  "comparison_files": [
+    "data/software/legacy-systems-enrichment.json",
+    "research/terminal-servicing-risks-2026-11-15/README.md",
+    "research/git-windows-release-risks-2026-11-15/README.md"
+  ],
+  "next_acceptance": [
+    "Inspect exact chart renderer and extension contracts before reuse",
+    "Test missing/invalid samples and accessible alternatives",
+    "Measure equivalent first-sample latency, update cost and memory",
+    "Review component-specific licenses and supported platforms"
+  ]
+}
