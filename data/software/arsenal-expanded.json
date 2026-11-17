@@ -1,0 +1,124 @@
+{
+  "schema_version": 1,
+  "reviewed_at": "2026-11-17",
+  "applications": [
+    {
+      "id": "hd2-arsenal",
+      "name": "HD2 Arsenal",
+      "aliases": [
+        "Arsenal",
+        "HD2Arsenal"
+      ],
+      "family": "gaming",
+      "category": "mod-managers",
+      "summary": "Helldivers 2 mod library, profiles, deployment, pack builder and lobby loadout coordination. Documentation reviewed; installation and implementation not verified.",
+      "license": "Application license unverified; official release repository says development is private",
+      "license_kind": "unknown",
+      "pricing_model": "free",
+      "pricing_notes": "Official site describes Arsenal as free. Nexus Premium-gated integrations have separate account requirements.",
+      "platforms": [
+        "Windows",
+        "Linux"
+      ],
+      "platform_notes": "Official site lists Windows, Linux and SteamOS; no installation tested.",
+      "official_url": "https://rsnl.gg/",
+      "download_url": "https://rsnl.gg/downloads",
+      "repository_url": "https://github.com/Orbit-Studios/hd2arsenal-release",
+      "features": [
+        "Shared library with profile-specific choices",
+        "Deployment status and option-aware conflict inspection",
+        "Separators, tag filters and list minimap",
+        "Mod pack builder and lobby loadout sync"
+      ],
+      "strengths": [
+        "Explicit Library/profile separation",
+        "Visual deployment and organization affordances"
+      ],
+      "limitations": [
+        "Release-only public repository, not application source",
+        "No independent runtime, performance or security verification",
+        "Lobby mod sharing documented as Nexus-identity-dependent",
+        "Interrupted deploy can leave inconsistent files according to documentation"
+      ],
+      "use_cases": [
+        "Helldivers 2 mod management",
+        "Mod manager design research"
+      ],
+      "tags": [
+        "gaming",
+        "modding",
+        "profiles",
+        "deployment",
+        "visual-organization"
+      ],
+      "alternatives": [
+        "Mod Organizer 2",
+        "Vortex"
+      ],
+      "recommendation": {
+        "pick_for": "Inspecting Helldivers 2-specific management workflows and source-attributed design patterns.",
+        "compare_when": "Verify installation, compatibility and recovery on owned fixtures before daily use; other games need their own adapters."
+      },
+      "maintenance": {
+        "status": "unverified",
+        "checked_at": "2026-11-17",
+        "note": "Official release list shows 0.37.2; release activity does not establish support quality.",
+        "source_url": "https://github.com/Orbit-Studios/hd2arsenal-release/releases"
+      },
+      "sources": [
+        {
+          "url": "https://rsnl.gg/",
+          "label": "Official identity, platform and free-distribution claims",
+          "checked_at": "2026-11-17",
+          "supports": [
+            "identity",
+            "platforms",
+            "pricing",
+            "downloads"
+          ]
+        },
+        {
+          "url": "https://docs.rsnl.gg/mod-management",
+          "label": "Official management workflows",
+          "checked_at": "2026-11-17",
+          "supports": [
+            "features"
+          ]
+        },
+        {
+          "url": "https://github.com/Orbit-Studios/hd2arsenal-release",
+          "label": "Official release-only repository; private development",
+          "checked_at": "2026-11-17",
+          "supports": [
+            "identity"
+          ]
+        },
+        {
+          "url": "https://docs.rsnl.gg/mod-builder",
+          "label": "Official pack-builder workflow",
+          "checked_at": "2026-11-17",
+          "supports": [
+            "features"
+          ]
+        },
+        {
+          "url": "https://docs.rsnl.gg/lobby/mod-sync",
+          "label": "Official lobby synchronization workflow",
+          "checked_at": "2026-11-17",
+          "supports": [
+            "features"
+          ]
+        },
+        {
+          "url": "https://github.com/Herbertofury/Athena/blob/study/hd2-arsenal-20261117/research/hd2-arsenal-study-2026-11-17/README.md",
+          "label": "Athena documented workflow study and adoption tests",
+          "checked_at": "2026-11-17",
+          "supports": [
+            "features"
+          ]
+        }
+      ],
+      "evidence_status": "official-docs-reviewed"
+    }
+  ]
+}
