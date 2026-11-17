@@ -778,7 +778,7 @@
         {
           "url": "https://learn.microsoft.com/en-us/windows/powertoys/install",
           "label": "Microsoft installation and system requirements",
-          "checked_at": "2026-11-14",
+          "checked_at": "2026-11-17",
           "supports": [
             "downloads",
             "platforms"
@@ -799,15 +799,32 @@
           "supports": [
             "features"
           ]
+        },
+        {
+          "url": "https://learn.microsoft.com/en-us/windows/powertoys/workspaces",
+          "label": "Official Workspaces capture, launch-status, cancellation and re-capture boundaries",
+          "checked_at": "2026-11-17",
+          "supports": [
+            "features"
+          ]
+        },
+        {
+          "url": "https://github.com/microsoft/PowerToys/blob/main/LICENSE",
+          "label": "Microsoft PowerToys MIT license",
+          "checked_at": "2026-11-17",
+          "supports": [
+            "license"
+          ]
         }
       ],
       "repository_url": "https://github.com/microsoft/PowerToys",
       "limitations": [
         "Some utilities cannot interact with elevated applications unless PowerToys has matching privileges.",
-        "Global shortcuts and enabled modules can overlap with existing software; configure the tools you actually need."
+        "Global shortcuts and enabled modules can overlap with existing software; configure the tools you actually need.",
+        "Workspaces re-capture removes prior command-line arguments/settings; review before saving. Elevated apps have documented positioning limitations. Layout restoration is not recovery of unsaved documents."
       ],
       "recommendation": {
-        "pick_for": "Choose PowerToys when several focused Windows utilities—such as window layouts, keyboard remapping and bulk renaming—fit your workflow.",
+        "pick_for": "Choose PowerToys when several focused Windows utilities—such as window layouts, keyboard remapping and bulk renaming—fit your workflow. Workspaces can restore a project-specific application layout; inspect per-app launch status and cancellation rather than treating a shortcut as proof every app opened.",
         "compare_when": "Compare standalone tools such as Everything or AutoHotkey when a single task or a custom automation needs deeper control."
       }
     },

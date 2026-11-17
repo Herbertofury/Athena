@@ -35,3 +35,7 @@ python3 scripts/report_software_coverage.py --output software-refresh-report.jso
 Review the generated app data and Wiki, update the explicit public runtime allowlist for reviewed runtime changes, and retain verification evidence. The existing GitHub Wiki workflow publishes managed pages after merge; a local Wiki directory alone does not prove the live Wiki changed.
 
 See [selection methodology](../../wiki/Software-Methodology.md) and [expansion evidence](../../research/software-expansion-2026-11-14/README.md).
+
+## Focused workflow studies
+
+- [PowerToys Workspaces: project launch status, cancellation and configuration preservation](../../research/powertoys-workspaces-2026-11-17/README.md).
