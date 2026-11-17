@@ -39,3 +39,25 @@ Project JSON export/import retains saved experiments using the existing schema.
 
 No source retirement, cross-device durability or automatic project execution is
 claimed. The initial experiments can support games or non-game applications.
+
+## Pillar: independent capabilities, useful composition
+
+Every optional feature should work independently where its purpose permits, avoid
+conflicting state ownership, and gain value through explicit composition. Disabling,
+missing or breaking one optional feature must not disable unrelated work. Shared
+mandatory infrastructure can still fail: state that dependency honestly rather
+than claiming absolute fault immunity. The owner referenced Apex/Dynamic CAS as
+motivation; this document makes no claims about their historical implementation.
+
+Acceptance for each feature includes standalone use, combined use, disabled sibling,
+failed sibling and recovery, with checks for data retention and duplicate effects.
+Creative briefs now include these design/test prompts. In Projects, the companion
+is dynamically imported behind a failure boundary; missing/invalid optional code
+shows a local unavailable message while project tools continue. A session toggle
+hides the companion without deleting its drafts or changing project data. Ordinary
+project editing does not depend on creative code. Loading completion after unmount
+is ignored. Existing save errors and project-editor conflict guards still apply.
+
+This is one concrete boundary, not certification that all Athena features or all
+other repositories already meet the pillar. Cross-product dependency and shared
+state audits remain open acceptance work.

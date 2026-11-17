@@ -31,6 +31,9 @@ export function brief(value,id,lens,referenceId='') {
  `Smallest playable/usable test: [One interaction, limited scope, and a baseline to compare.]`,
  `Success signal: [Observable user outcome and measurement; choose a threshold before testing.]`,
  `Tradeoff / failure signal: [Complexity, performance, fairness, accessibility, or scope risk.]`,
+ `Independent mode: [Verify the feature works without optional sibling features.]`,
+ `Composition: [Define explicit shared inputs/outputs and prove the combined experience adds value without conflicts.]`,
+ `Failure isolation: [Disable or fail each optional dependency; confirm unrelated features and user data remain usable.]`,
  `Keep unchanged: [Name the original vision and constraints this test must respect.]`,
  `Evidence / result: [Not tested. Record observations separately from interpretation.]`,
  `Decision: [Keep, revise, park, or reject after review. No automatic execution.]`].join('\n\n');
