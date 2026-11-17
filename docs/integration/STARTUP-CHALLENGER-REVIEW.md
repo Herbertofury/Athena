@@ -100,3 +100,5 @@ The unified Rust profile still bypasses this bridge and explicitly rejects the n
 setting rather than silently ignoring it. Integration into that profile remains
 open. HTTPS/static deployments retain local-only startup checks. Real Chromium UI
 acceptance remains separate from actual bridge/HTTP/backend network verification.
+
+The static bootstrap defaults the fresh-review capability off, even on loopback. Only the actual Python bridge replaces its fixed capability marker in served bytes. Static HTTP servers and the unsupported unified Rust profile therefore do not probe a nonexistent endpoint. The disabled result is local; it is not a failed network refresh. The canonical on-disk package/hash remains unchanged by serving the marker substitution.

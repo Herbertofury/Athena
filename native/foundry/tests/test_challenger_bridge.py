@@ -2,7 +2,7 @@ import os,unittest,tempfile,pathlib,importlib.util,subprocess,threading,http.cli
 from unittest.mock import patch
 ROOT=pathlib.Path(__file__).resolve().parents[1];spec=importlib.util.spec_from_file_location('challenger_bridge',ROOT/'bridge.py');bridge=importlib.util.module_from_spec(spec);spec.loader.exec_module(bridge)
 spec=importlib.util.spec_from_file_location('challenger_service',ROOT/'challenger_service.py');service=importlib.util.module_from_spec(spec);spec.loader.exec_module(service)
-BIN=os.environ.get('ATHENA_FOUNDRY_STORE_BINARY',str(ROOT.parents[1]/'crates/athena-foundry-store/target/debug/athena-foundry-store'))
+BIN=os.environ.get('ATHENA_FOUNDRY_STORE_BINARY',str(ROOT.parents[1]/'crates/athena-foundry-store/target/debug'/('athena-foundry-store.exe' if os.name=='nt' else 'athena-foundry-store')))
 class Tests(unittest.TestCase):
  def test_service_rejects_nonpublic_paths_and_bounds(self):
   for values in [('http://localhost/x',),('a/..',),('a/a','a/b','a/c','a/d')]:
@@ -49,5 +49,6 @@ class Tests(unittest.TestCase):
     status,body=request('/__native/challenger-review',{'X-Athena-Native':'1'});self.assertEqual(status,200);self.assertEqual(json.loads(body)['status'],'disabled')
     self.assertEqual(request('/__native/challenger-review?repo=private/data',{'X-Athena-Native':'1'})[0],400)
     self.assertEqual(request('/__native/challenger-review',{'X-Athena-Native':'1'},'POST')[0],404)
+    self.assertIn(b'if(!true)return',request('/native-store-bootstrap.js')[1]);
     self.assertEqual(request('/index.html')[0],200);self.assertEqual(db.read_bytes(),before)
    finally:server.shutdown();thread.join();server.server_close()

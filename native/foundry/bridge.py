@@ -70,6 +70,9 @@ class Bridge(ThreadingMixIn,HTTPServer):
             marker=b'/* FOUNDRY_STARTUP_MODULES */{}'
             if payload.count(marker)!=1:raise ValueError('Unsupported native bootstrap profile marker')
             self.files['/native-store-bootstrap.js']=(payload.replace(marker,json.dumps(disabled,separators=(',',':')).encode()),kind)
+        payload,kind=self.files['/native-store-bootstrap.js']
+        marker=b'/* NATIVE_CHALLENGER_ENABLED */false'
+        if payload.count(marker)==1:self.files['/native-store-bootstrap.js']=(payload.replace(marker,b'true'),kind)
         status=json.loads(self.cli('status'))
         self.schema=status.get('schema')
         if self.schema not in (2,3,4,5,6,7,8,9,10,11,12,13,14,15):raise ValueError('Database requires explicit backup upgrade before launch')
