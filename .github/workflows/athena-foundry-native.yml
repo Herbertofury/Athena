@@ -84,6 +84,10 @@ jobs:
           ATHENA_PORTABLE_UNIFIED: '1'
           ATHENA_UNIFIED_ENGINE: ${{ github.workspace }}/engineering/apps/atlas-lab/target/debug/atlas-lab${{ runner.os == 'Windows' && '.exe' || '' }}
         run: node scripts/test_foundry_native_browser.mjs
+      - name: Native axis alignment actual browser acceptance
+        env:
+          ATHENA_BROWSER_OUTPUT: browser-results/foundry-axis-alignment
+        run: node scripts/test_foundry_axis_alignment_browser.cjs
       - name: Extracted candidate archive actual browser acceptance
         env:
           ATHENA_UNIFIED_ENGINE: ${{ github.workspace }}/engineering/apps/atlas-lab/target/debug/atlas-lab${{ runner.os == 'Windows' && '.exe' || '' }}
@@ -136,4 +140,5 @@ jobs:
             browser-results/foundry-asset-library/
             browser-results/foundry-drag-offset/
             browser-results/foundry-drag-grid/
+            browser-results/foundry-axis-alignment/
           if-no-files-found: error

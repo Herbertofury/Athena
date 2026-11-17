@@ -108,3 +108,15 @@ export function fitBaseToSurface({width,height,baseWidth,baseHeight,scaleX=1,sca
  const base=Math.max(baseWidth,baseHeight),fit=Math.min(3,Math.max(.05,Math.min((width-24)/base,(height-24)/base)));
  return {scaleX:fit*(scaleX<0?-1:1),scaleY:fit*(scaleY<0?-1:1)};
 }
+
+/** Native center coordinates adapted from source alignSelected's 8px base-box inset. */
+export function alignBaseToSurface({alignment,width,height,baseWidth,baseHeight,scaleX=1,scaleY=1}){
+ if(!['left','center','right','top','middle','bottom'].includes(alignment))throw Error('Unsupported alignment.');
+ if(![width,height,baseWidth,baseHeight].every(n=>typeof n==='number'&&Number.isFinite(n)&&n>0)||![scaleX,scaleY].every(n=>typeof n==='number'&&Number.isFinite(n)&&n!==0))throw Error('Visible surface and base dimensions are required.');
+ const horizontal=['left','center','right'].includes(alignment),axis=horizontal?'x':'y';
+ if(alignment==='center'||alignment==='middle')return {[axis]:.5};
+ const extent=horizontal?width:height,size=(horizontal?baseWidth:baseHeight)*Math.abs(horizontal?scaleX:scaleY);
+ if(!Number.isFinite(size)||size+16>extent)throw Error('Selected scaled base box does not fit the 8px inset on this axis. Resize explicitly first.');
+ const near=(8+size/2)/extent;
+ return {[axis]:alignment==='left'||alignment==='top'?near:1-near};
+}
