@@ -44,3 +44,17 @@ No fleet writes, source deletion, archive/visibility changes, new credentials, g
 ## Fresh two-consumer inventory
 
 The [Bloom-and-Boom / Modhunter review](../../guidance/evidence/bloom-modhunter-retirement-review-2026-11-15.md) and [sanitized receipt](../../guidance/evidence/bloom-modhunter-consumer-audit-2026-11-15.json) verify two additional public main snapshots. Both retain intact 16-file Agent-Foundry pins; read-only Athena transition proposals are conflict-free, not applied or behaviorally accepted. Local guidance routing, historical skill/CI references and project-owned skills are classified separately. No consumer was changed and no runtime failure is inferred from a legacy URL. Fleet, skill propagation, history and retirement gates remain open.
+
+## Filtered reference-pack selection
+
+The native library can select or remove all standards matching the shared search
+without altering hidden selections. Global select-all and clear remain explicitly
+separate actions. No-match and already-applied actions are disabled; search alone
+never persists changes. Exports retain the complete selected documents and source
+hashes, including selections outside the current filter. This builds reference
+packs only: no instructions are installed, consumer pins changed or tools executed.
+
+Persistence requires a positive host acknowledgement. A rejected, missing or
+throwing storage callback leaves the in-memory selection usable and exportable,
+with an explicit unsaved warning rather than a false success message. Browser
+storage and the existing source-retirement acceptance limits remain unchanged.
