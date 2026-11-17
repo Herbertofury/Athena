@@ -1,0 +1,222 @@
+{
+  "schema_version": 1,
+  "reviewed_at": "2026-11-17",
+  "applications": [
+    {
+      "id": "amd-vivado",
+      "name": "AMD Vivado Design Suite",
+      "family": "science",
+      "category": "fpga-design-suites",
+      "summary": "AMD's integrated FPGA and adaptive-SoC development environment for design entry, synthesis, implementation/place-and-route and verification on supported AMD devices.",
+      "license": "Proprietary AMD EULA; device and feature access is controlled by the selected license tier.",
+      "license_kind": "proprietary",
+      "pricing_model": "mixed",
+      "official_url": "https://www.amd.com/en/products/software/adaptive-socs-and-fpgas/vivado.html",
+      "download_url": "https://www.amd.com/en/support/downloads.html",
+      "repository_url": null,
+      "platforms": [
+        "Windows",
+        "Linux"
+      ],
+      "platform_notes": "Vivado 2026.2 supports Windows 11 24H2/25H2 and selected 64-bit Linux distributions. Check the release-specific OS matrix before installing; macOS is not listed as a supported host for the current release.",
+      "pricing_notes": "Starting with 2026.1, BASIC is a $0 annual tier with renewal; CORE and PRO are annual subscription tiers; ENTERPRISE and GOLD are perpetual tiers. Device coverage and features vary by tier; confirm current prices and target-device eligibility with AMD.",
+      "features": [
+        "Integrated design entry and RTL synthesis",
+        "FPGA implementation including placement and routing",
+        "Verification and simulation tools in the design environment",
+        "Support for AMD FPGAs and adaptive SoCs including Versal families",
+        "Selectable device families and tool components during installation"
+      ],
+      "strengths": [
+        "Integrated vendor-supported flow for AMD FPGA and adaptive-SoC devices",
+        "Current 2026.2 release includes new device support and implementation improvements",
+        "Tiered licensing includes a free entry-level BASIC option for eligible devices"
+      ],
+      "limitations": [
+        "Proprietary and tied to AMD device families",
+        "License tiers differ in supported devices and features; the free BASIC tier is not equivalent to full-featured tiers",
+        "Large toolchain and device packages require substantial storage and compatible host OS versions"
+      ],
+      "use_cases": [
+        "AMD FPGA development",
+        "Versal adaptive-SoC design",
+        "RTL synthesis and implementation",
+        "FPGA timing closure",
+        "vendor-specific hardware verification"
+      ],
+      "tags": [
+        "fpga",
+        "amd",
+        "versal",
+        "synthesis",
+        "place-and-route",
+        "hardware-design"
+      ],
+      "alternatives": [
+        "Altera Quartus Prime Lite Edition",
+        "OSS CAD Suite",
+        "Yosys"
+      ],
+      "recommendation": {
+        "pick_for": "Choose Vivado when the target is an AMD FPGA or adaptive SoC and you need AMD's integrated synthesis, implementation and verification flow.",
+        "compare_when": "Compare the exact license tier and device support before committing; consider Quartus for Altera devices or an open-source flow only when the target architecture is supported."
+      },
+      "maintenance": {
+        "status": "active",
+        "checked_at": "2026-11-17",
+        "note": "AMD's official product page identifies Vivado 2026.2 as available; the 2026.2 release and supported-OS documentation were published on 2026-11-11.",
+        "source_url": "https://www.amd.com/en/products/software/adaptive-socs-and-fpgas/vivado.html"
+      },
+      "sources": [
+        {
+          "url": "https://www.amd.com/en/products/software/adaptive-socs-and-fpgas/vivado.html",
+          "label": "Official product overview and current 2026.2 release information",
+          "checked_at": "2026-11-17",
+          "supports": [
+            "identity",
+            "features",
+            "maintenance"
+          ]
+        },
+        {
+          "url": "https://www.amd.com/en/products/software/adaptive-socs-and-fpgas/vivado/vivado-licensing-options.html",
+          "label": "Official 2026.1+ license tiers and pricing model",
+          "checked_at": "2026-11-17",
+          "supports": [
+            "license",
+            "pricing"
+          ]
+        },
+        {
+          "url": "https://docs.amd.com/r/en-US/ug973-vivado-release-notes-install-license/Supported-Operating-Systems",
+          "label": "Official Vivado 2026.2 host operating-system matrix",
+          "checked_at": "2026-11-17",
+          "supports": [
+            "platforms"
+          ]
+        },
+        {
+          "url": "https://docs.amd.com/r/en-US/ug973-vivado-release-notes-install-license/Download-the-Installation-File",
+          "label": "Official Vivado installer and download instructions",
+          "checked_at": "2026-11-17",
+          "supports": [
+            "downloads"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "altera-quartus-prime-lite",
+      "name": "Altera Quartus Prime Lite Edition",
+      "family": "science",
+      "category": "fpga-design-suites",
+      "summary": "Free entry-level edition of the Altera Quartus Prime FPGA design suite for selected devices, providing essential design tools and a basic compile flow.",
+      "license": "Proprietary Altera software terms; Lite Edition is a free download and does not require a license file.",
+      "license_kind": "proprietary",
+      "pricing_model": "free",
+      "official_url": "https://www.altera.com/products/software-tools/quartus-prime",
+      "download_url": "https://www.altera.com/products/software-tools/quartus-prime",
+      "repository_url": null,
+      "platforms": [
+        "Windows",
+        "Linux"
+      ],
+      "platform_notes": "Altera's 25.3 installation documentation dated 2026-10-19 describes Windows and Linux installation. Exact supported OS versions and device files vary by release; consult the current Altera OS and device-support matrices.",
+      "pricing_notes": "Lite Edition is free and does not require a license file. Standard and Pro are separate paid editions; Pro has a limited free mode for Cyclone 10 GX only. Edition features and device support are not interchangeable.",
+      "features": [
+        "Integrated FPGA design environment for design entry, synthesis, optimization and verification",
+        "Basic compile flow and essential design tools in the Lite edition",
+        "Starter simulation and Signal Tap support as listed on the current product page",
+        "Selected high-volume Altera FPGA and CPLD device families",
+        "Windows and Linux installation paths"
+      ],
+      "strengths": [
+        "No-cost entry point for supported Altera devices",
+        "No license-file setup is required for the Lite edition",
+        "Vendor-aligned design and compile workflow for Altera FPGA hardware"
+      ],
+      "limitations": [
+        "Lite supports selected devices and a limited feature set compared with Standard and Pro",
+        "High-end device families and advanced features may require another edition",
+        "Check the exact device-support table and OS matrix for the release being installed; the current Pro release number must not be assumed to apply to Lite"
+      ],
+      "use_cases": [
+        "Altera FPGA development",
+        "Cyclone and MAX device design",
+        "FPGA RTL synthesis and compilation",
+        "basic FPGA verification",
+        "vendor-specific hardware implementation"
+      ],
+      "tags": [
+        "fpga",
+        "altera",
+        "quartus",
+        "synthesis",
+        "timing-analysis",
+        "hardware-design"
+      ],
+      "alternatives": [
+        "AMD Vivado Design Suite",
+        "OSS CAD Suite",
+        "Yosys"
+      ],
+      "recommendation": {
+        "pick_for": "Choose Quartus Prime Lite when your target is explicitly supported by the Lite device matrix and you want a free Altera design environment.",
+        "compare_when": "Compare Standard or Pro only if the required device family or feature is excluded from Lite; compare Vivado for AMD devices and open-source tools only for supported architectures."
+      },
+      "maintenance": {
+        "status": "active",
+        "checked_at": "2026-11-17",
+        "note": "Altera's current product page lists Lite alongside Standard and Pro; its Quartus Prime 25.3 installation and licensing documentation was updated on 2026-10-19. The latest Lite-specific release number was not independently confirmed.",
+        "source_url": "https://docs.altera.com/r/docs/683472/25.3/altera-fpga-software-installation-and-licensing/document-revision-history-for-altera-fpga-software-installation-and-licensing"
+      },
+      "sources": [
+        {
+          "url": "https://www.altera.com/products/software-tools/quartus-prime",
+          "label": "Current official Quartus product page and edition feature overview",
+          "checked_at": "2026-11-17",
+          "supports": [
+            "identity",
+            "features",
+            "pricing",
+            "maintenance"
+          ]
+        },
+        {
+          "url": "https://docs.altera.com/r/docs/683472/25.3/altera-fpga-software-installation-and-licensing/quartus-prime-software-license",
+          "label": "Official Lite, Standard and Pro licensing distinctions",
+          "checked_at": "2026-11-17",
+          "supports": [
+            "license",
+            "pricing"
+          ]
+        },
+        {
+          "url": "https://docs.altera.com/r/docs/683472/25.3/altera-fpga-software-installation-and-licensing/operating-system-requirements",
+          "label": "Official Quartus Prime 25.3 host prerequisites",
+          "checked_at": "2026-11-17",
+          "supports": [
+            "platforms"
+          ]
+        },
+        {
+          "url": "https://docs.altera.com/r/docs/683472/25.3/altera-fpga-software-installation-and-licensing/accessing-the-quartus-prime-installer",
+          "label": "Official Windows and Linux installer instructions",
+          "checked_at": "2026-11-17",
+          "supports": [
+            "downloads",
+            "platforms"
+          ]
+        },
+        {
+          "url": "https://docs.altera.com/r/docs/683472/25.3/altera-fpga-software-installation-and-licensing/document-revision-history-for-altera-fpga-software-installation-and-licensing",
+          "label": "Official 2026-10-19 documentation revision history",
+          "checked_at": "2026-11-17",
+          "supports": [
+            "maintenance"
+          ]
+        }
+      ]
+    }
+  ]
+}
