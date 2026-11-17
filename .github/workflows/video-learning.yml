@@ -1,0 +1,19 @@
+name: Video learning evidence contracts
+on:
+  pull_request:
+    paths:
+      - 'scripts/video_learning.py'
+      - 'tests/video_learning_test.py'
+      - '.github/workflows/video-learning.yml'
+jobs:
+  test:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m unittest discover -s tests -p video_learning_test.py -v
