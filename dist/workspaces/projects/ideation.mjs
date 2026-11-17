@@ -46,3 +46,23 @@ export function retainBrief(value,id,text,now=Date.now()) {
  if(resources.length>10000)throw Error('Experiment exceeds project resource capacity. Shorten it or export a separate brief; nothing was saved.');
  return change(data,id,{...r,resources},now);
 }
+
+// Descriptive comparison of user-entered observations, never a causal verdict.
+export function compareExperiment(input) {
+ const required=(key)=>{const value=input?.[key];if(typeof value!=='string'||!value.trim()||value.length>2000)throw Error('Record '+key+' (maximum 2000 characters)');return value.trim();};
+ const samples=key=>{const raw=required(key),parts=raw.split(/[\s,]+/);if(parts.length>200)throw Error('Use at most 200 samples per condition');const values=parts.map(part=>{if(!/^[+-]?(?:\d+(?:\.\d*)?|\.\d+)(?:e[+-]?\d+)?$/i.test(part))throw Error('Samples must be finite numbers separated by commas or spaces');const n=Number(part);if(!Number.isFinite(n))throw Error('Samples must be finite');return n;});return values;};
+ const hypothesis=required('hypothesis'),metric=required('metric'),unit=required('unit'),baselineBuild=required('baselineBuild'),variantBuild=required('variantBuild'),conditions=required('conditions'),observations=required('observations');
+ if(!['higher','lower'].includes(input.direction))throw Error('Choose the desired metric direction');
+ if(typeof input.threshold!=='string'||!input.threshold.trim())throw Error('Set the absolute improvement threshold');
+ const threshold=Number(input.threshold);if(!Number.isFinite(threshold)||threshold<0)throw Error('Threshold must be a finite nonnegative number');
+ if(!['undecided','keep','revise','park','reject'].includes(input.decision))throw Error('Choose a review decision');
+ const baseline=samples('baseline'),variant=samples('variant');
+ const mean=values=>{let sum=0,correction=0;for(const n of values){const part=n/values.length-correction,total=sum+part;correction=(total-sum)-part;sum=total;}return sum;};
+ const baselineMean=mean(baseline),variantMean=mean(variant),delta=variantMean-baselineMean,improvement=input.direction==='higher'?delta:-delta;
+ if(![baselineMean,variantMean,delta,improvement].every(Number.isFinite))throw Error('Metric magnitude exceeds comparison capacity');
+ const comparisonTolerance=2*Number.EPSILON*Math.max(Math.abs(baselineMean),Math.abs(variantMean),threshold);
+ return {schema:1,kind:'user-recorded-experiment',hypothesis,metric,unit,baselineBuild,variantBuild,conditions,observations,
+  baseline,variant,direction:input.direction,threshold,baselineMean,variantMean,delta,improvement,
+  comparisonTolerance,criterionMet:improvement>=threshold||(improvement>0&&threshold-improvement<=comparisonTolerance),decision:input.decision,
+  limitations:['Criterion comparison allows the reported floating-point tolerance; differences within that tolerance are not distinguishable by this calculation.','User-entered observations, not independently verified telemetry.','Arithmetic mean comparison only; no statistical significance, causal attribution, fairness, enjoyment or general improvement is established.','Threshold timing is not verified. Record whether it was chosen before testing.','Review unmatched conditions, sample counts, regressions and qualitative feedback before adopting; no automatic adoption.']};
+}

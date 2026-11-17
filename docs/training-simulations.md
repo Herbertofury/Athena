@@ -48,3 +48,26 @@ The new hardware mission gathers service-history and telemetry evidence in eithe
 - [AWS IAM security best practices](https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html), retrieved 2026-11-16. Least privilege and permission validation inform the new synthetic report-reader model. It does not execute IAM or Azure RBAC, implement all authorization layers, or establish AWS/Azure exam alignment. Other pathway associations are broad introductory curriculum links, not verified objective-by-objective mappings.
 
 All scenarios, observations and feedback are original synthetic material. No exam dumps, vendor course text, OS image or physical repair procedure is bundled. Full course coverage and real practical mastery remain open work.
+
+## Growing playable experiment: primary purpose
+
+The Athena game is intended primarily as an evolving, playable testbed for learning
+how to make games better, analogous to Athena testing and improving code, projects
+and applications. The existing Greek-mythology action/RTS direction and independent
+mode depth remain; this clarification does not replace them or the separate space
+ARPG idea. Current teaching missions are not that playable action/RTS runtime.
+
+The improvement loop is: preserve an enjoyable baseline; state a falsifiable
+hypothesis; change a bounded mechanic; play both versions under recorded conditions;
+retain raw performance observations and qualitative feedback; review regressions;
+then explicitly keep, revise, park or reject. Retain rejected results and the original
+vision. Shared rewards, endgame and combinations are experiments, not automatically
+successful designs. Isolated numeric gains do not establish more enjoyable play.
+
+The Projects creative companion now supports manually recorded baseline/variant
+comparisons with build identifiers, units, raw samples, conditions, confounds and a
+user decision. Saving appends immutable history. It does not launch a playable build,
+capture telemetry, prove statistical significance or automatically adopt a change.
+Next acceptance: actual original playable vertical slice, deterministic seeds/build
+identity, opt-in local event capture, performance/interaction tests, counterbalanced
+playtests and explicit rollback/adoption. No game runtime delivery is claimed here.

@@ -61,3 +61,17 @@ is ignored. Existing save errors and project-editor conflict guards still apply.
 This is one concrete boundary, not certification that all Athena features or all
 other repositories already meet the pillar. Cross-product dependency and shared
 state audits remain open acceptance work.
+
+## Observation and improvement loop
+
+The optional native panel accepts user-recorded baseline/variant samples, build
+identifiers, units, desired direction, an absolute improvement threshold, conditions,
+qualitative observations/confounds and a review decision. It retains raw samples and
+shows arithmetic means, signed change and whether the selected threshold is met.
+Preview does not write. Explicit save appends a result to immutable project history;
+ordinary project fields and decisions are not replaced. Empty/nonfinite/oversized
+samples and overflow refuse the report. A passing threshold is not a proven game
+improvement, statistical significance, causal result, or automatic adoption. The
+app cannot verify when a threshold was selected or whether entered samples are real.
+This is also useful for code/UI experiments. It does not claim live integration
+with the planned Athena game; see training-simulations.md for that distinction.
