@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "scope": "Starter map; not exhaustive coverage or an execution receipt",
+  "workflows": [
+    {
+      "id": "guidance-library",
+      "entryPoint": "#guidance",
+      "sources": [
+        "scripts/build_guidance.py"
+      ],
+      "checks": [
+        "tests/guidance.test.cjs",
+        "scripts/test_guidance_browser.cjs"
+      ],
+      "expected": "Search, select, export and reload retain exact source attribution; exporting never installs a Skill."
+    },
+    {
+      "id": "governance-adoption",
+      "entryPoint": "Explicit local plan/apply/status CLI",
+      "sources": [
+        "guidance/tools/repository_governance.py"
+      ],
+      "checks": [
+        "guidance/tests/test_repository_governance.py",
+        "guidance/tests/test_adoption_transaction.py"
+      ],
+      "expected": "Digest drift fails; project-owned files survive; injected write failures preserve recoverable state."
+    },
+    {
+      "id": "progress-import",
+      "entryPoint": "Learning progress import",
+      "sources": [
+        "dist/app.js"
+      ],
+      "checks": [
+        "scripts/test_progress_import_browser.cjs"
+      ],
+      "expected": "Invalid input is rejected without losing existing progress; accepted data survives reload."
+    },
+    {
+      "id": "foundry-save",
+      "entryPoint": "#foundry",
+      "sources": [
+        "crates/athena-foundry-store/Cargo.toml"
+      ],
+      "checks": [
+        "scripts/test_foundry_save_outcome_browser.mjs"
+      ],
+      "expected": "A durable save result controls success feedback; failure is visible rather than reported as saved."
+    },
+    {
+      "id": "application-runtime",
+      "entryPoint": "Unified workspace navigation",
+      "sources": [
+        "scripts/test_unified_browser.cjs"
+      ],
+      "checks": [
+        "tests/browser_runner.test.cjs",
+        "scripts/test_unified_browser.cjs"
+      ],
+      "expected": "Build, static browser and native runtime stages remain separately reported; no deployment is implied."
+    }
+  ]
+}
