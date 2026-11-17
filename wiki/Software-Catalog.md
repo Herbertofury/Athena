@@ -2,9 +2,9 @@
 
 [Open the integrated software workspace](https://herbertofury.github.io/Athena/#software).
 
-Reviewed 2026-11-16. **1069 applications**, **373 task categories**, **10 families**, **4355 distinct cited source URLs**, **2476 explicit alternative links**, and **203 task decision guides**.
+Reviewed 2026-11-16. **1070 applications**, **373 task categories**, **10 families**, **4360 distinct cited source URLs**, **2478 explicit alternative links**, and **203 task decision guides**.
 
-The PC application catalog grew from 105 records and 42 categories. 964 researched records were added, and 68 original records received dated metadata enrichments. The original cleanup snapshot (66 main candidates, three unranked and one excluded), 105-entry Windows research catalog, creative-AI research and engineering library are retained byte for byte. Their records are not counted again to inflate this expansion. The workspace separately exposes 94 preserved cleanup and creative-AI research records. Dated availability reviews identify 2 unavailable historical sources; those records stay searchable with their original data and evidence, while unavailable outward links are disabled.
+The PC application catalog grew from 105 records and 42 categories. 965 researched records were added, and 68 original records received dated metadata enrichments. The original cleanup snapshot (66 main candidates, three unranked and one excluded), 105-entry Windows research catalog, creative-AI research and engineering library are retained byte for byte. Their records are not counted again to inflate this expansion. The workspace separately exposes 94 preserved cleanup and creative-AI research records. Dated availability reviews identify 2 unavailable historical sources; those records stay searchable with their original data and evidence, while unavailable outward links are disabled.
 
 ## Find the right tool
 
@@ -24,7 +24,7 @@ The catalog currently carries **9 documented task assertions** with required set
 | [Networks & remote access](Software-Networking) | 92 | 30 |
 | [Productivity & accessibility](Software-Productivity) | 151 | 56 |
 | [Creative & multimedia](Software-Creative) | 142 | 59 |
-| [Development & automation](Software-Development) | 185 | 45 |
+| [Development & automation](Software-Development) | 186 | 45 |
 | [AI & local models](Software-Ai) | 28 | 8 |
 | [Gaming & modding](Software-Gaming) | 55 | 15 |
 | [Science & specialized work](Software-Science) | 208 | 86 |

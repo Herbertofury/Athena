@@ -1,0 +1,18 @@
+name: REA study contract
+on:
+  push:
+    paths: ['research/rea-source-study-2026-11-17/**', 'data/software/rea-expanded.json', 'tests/rea_study_test.py', '.github/workflows/rea-study-contract.yml']
+  pull_request:
+    paths: ['research/rea-source-study-2026-11-17/**', 'data/software/rea-expanded.json', 'tests/rea_study_test.py', '.github/workflows/rea-study-contract.yml']
+permissions:
+  contents: read
+jobs:
+  contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - run: python3 scripts/build_software_catalog.py --check
+      - run: python3 -m unittest discover -s tests -p rea_study_test.py

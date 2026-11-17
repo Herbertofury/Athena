@@ -1,0 +1,789 @@
+{
+  "schema_version": 1,
+  "tool_id": "rea",
+  "name": "REA: Reverse Engineer Anything",
+  "repository_url": "https://github.com/morluto/rea",
+  "commit": "d5a942177fad030d3caf0f8d39856c116e3e5cda",
+  "package_version": "6.9.0",
+  "reviewed_at": "2026-11-17",
+  "study_status": "partial-source-review",
+  "runtime_status": "not-installed-or-executed",
+  "source_files": [
+    {
+      "path": "package.json",
+      "url": "https://github.com/morluto/rea/blob/d5a942177fad030d3caf0f8d39856c116e3e5cda/package.json#L1-L75",
+      "sha256": "5d6835e8cc5d1fd022ca7878cec80d470f244450007fa52b1ffa13a61de30355",
+      "reviewed_lines": [
+        1,
+        75
+      ],
+      "total_lines": 463,
+      "coverage": "selected-lines-reviewed",
+      "runtime_tested": false
+    },
+    {
+      "path": "LICENSE",
+      "url": "https://github.com/morluto/rea/blob/d5a942177fad030d3caf0f8d39856c116e3e5cda/LICENSE#L1-L21",
+      "sha256": "798f9e4d18e49b30bf2f12696c8ced73dc4e1413da375a333d01281543a1ea8b",
+      "reviewed_lines": [
+        1,
+        21
+      ],
+      "total_lines": 21,
+      "coverage": "selected-lines-reviewed",
+      "runtime_tested": false
+    },
+    {
+      "path": "THIRD_PARTY_NOTICES.md",
+      "url": "https://github.com/morluto/rea/blob/d5a942177fad030d3caf0f8d39856c116e3e5cda/THIRD_PARTY_NOTICES.md#L1-L60",
+      "sha256": "451c79668b69ec00d36fb370e84da029231fa71af2b35447678f577329db3116",
+      "reviewed_lines": [
+        1,
+        60
+      ],
+      "total_lines": 137,
+      "coverage": "selected-lines-reviewed",
+      "runtime_tested": false
+    },
+    {
+      "path": "README.md",
+      "url": "https://github.com/morluto/rea/blob/d5a942177fad030d3caf0f8d39856c116e3e5cda/README.md#L1-L230",
+      "sha256": "67eae8610dec9a721962dbccf92a53718acb1d1f5888ffc183ab93d4eb95e240",
+      "reviewed_lines": [
+        1,
+        230
+      ],
+      "total_lines": 491,
+      "coverage": "selected-lines-reviewed",
+      "runtime_tested": false
+    },
+    {
+      "path": "src/composition/binary.ts",
+      "url": "https://github.com/morluto/rea/blob/d5a942177fad030d3caf0f8d39856c116e3e5cda/src/composition/binary.ts#L1-L105",
+      "sha256": "d9bf9129441b2aae0eb91f70ff2cd022aa2f9d9afe905de20d0912b44f11c531",
+      "reviewed_lines": [
+        1,
+        105
+      ],
+      "total_lines": 194,
+      "coverage": "selected-lines-reviewed",
+      "runtime_tested": false
+    },
+    {
+      "path": "src/application/binary/LazyAnalysisProvider.ts",
+      "url": "https://github.com/morluto/rea/blob/d5a942177fad030d3caf0f8d39856c116e3e5cda/src/application/binary/LazyAnalysisProvider.ts#L1-L65",
+      "sha256": "9fce1f2e26223717ff25af6bcf61ff45dcff3193bb40b612b0b75e89cc6f61f4",
+      "reviewed_lines": [
+        1,
+        65
+      ],
+      "total_lines": 65,
+      "coverage": "selected-lines-reviewed",
+      "runtime_tested": false
+    },
+    {
+      "path": "src/server/ProgressiveToolCatalog.ts",
+      "url": "https://github.com/morluto/rea/blob/d5a942177fad030d3caf0f8d39856c116e3e5cda/src/server/ProgressiveToolCatalog.ts#L1-L165",
+      "sha256": "c7dfde922a34dfcb2016b39d028ac8e6aadfc13f274fb55403f5adecf2df80bc",
+      "reviewed_lines": [
+        1,
+        165
+      ],
+      "total_lines": 165,
+      "coverage": "selected-lines-reviewed",
+      "runtime_tested": false
+    },
+    {
+      "path": "src/contracts/catalog/catalogDiscovery.ts",
+      "url": "https://github.com/morluto/rea/blob/d5a942177fad030d3caf0f8d39856c116e3e5cda/src/contracts/catalog/catalogDiscovery.ts#L1-L85",
+      "sha256": "77777d3b658c297f3d50b1d5af9dfc085157a2c3717331077f8f3c2bf0dfb74e",
+      "reviewed_lines": [
+        1,
+        85
+      ],
+      "total_lines": 118,
+      "coverage": "selected-lines-reviewed",
+      "runtime_tested": false
+    },
+    {
+      "path": "src/application/investigation/EvidenceLedger.ts",
+      "url": "https://github.com/morluto/rea/blob/d5a942177fad030d3caf0f8d39856c116e3e5cda/src/application/investigation/EvidenceLedger.ts#L1-L160",
+      "sha256": "508e88d0a3419adfaffdbaf3bdf1a5dc78fa519fbdbc1f1bf423394970889cfd",
+      "reviewed_lines": [
+        1,
+        160
+      ],
+      "total_lines": 738,
+      "coverage": "selected-lines-reviewed",
+      "runtime_tested": false
+    },
+    {
+      "path": "src/domain/evidence.ts",
+      "url": "https://github.com/morluto/rea/blob/d5a942177fad030d3caf0f8d39856c116e3e5cda/src/domain/evidence.ts#L1-L130",
+      "sha256": "09712e266c22434721dfd44b923a223fdb8d3a0cbb7f4cbf58f700a3ecf902ca",
+      "reviewed_lines": [
+        1,
+        130
+      ],
+      "total_lines": 640,
+      "coverage": "selected-lines-reviewed",
+      "runtime_tested": false
+    },
+    {
+      "path": "src/domain/residualUnknown.ts",
+      "url": "https://github.com/morluto/rea/blob/d5a942177fad030d3caf0f8d39856c116e3e5cda/src/domain/residualUnknown.ts#L1-L105",
+      "sha256": "2f41e44e2da78c151d9a8248cc2b7d5a990055010c327acca3c3221f6d487e11",
+      "reviewed_lines": [
+        1,
+        105
+      ],
+      "total_lines": 402,
+      "coverage": "selected-lines-reviewed",
+      "runtime_tested": false
+    },
+    {
+      "path": "src/application/investigation/EvidenceLedger.residualUnknown.test.ts",
+      "url": "https://github.com/morluto/rea/blob/d5a942177fad030d3caf0f8d39856c116e3e5cda/src/application/investigation/EvidenceLedger.residualUnknown.test.ts#L1-L95",
+      "sha256": "f7384e399a265801f3e70aa273946e96a3212b166b0e05ecd59c80f241aa6818",
+      "reviewed_lines": [
+        1,
+        95
+      ],
+      "total_lines": 502,
+      "coverage": "selected-lines-reviewed",
+      "runtime_tested": false
+    },
+    {
+      "path": "src/server/ToolResultDelivery.partialRetention.test.ts",
+      "url": "https://github.com/morluto/rea/blob/d5a942177fad030d3caf0f8d39856c116e3e5cda/src/server/ToolResultDelivery.partialRetention.test.ts#L1-L79",
+      "sha256": "fceed0ae352dfc1a577828a13e0ef4552eaba2067c4016521a6c5eb7eb746c30",
+      "reviewed_lines": [
+        1,
+        79
+      ],
+      "total_lines": 79,
+      "coverage": "selected-lines-reviewed",
+      "runtime_tested": false
+    },
+    {
+      "path": "src/server/externalMutationAdmission.ts",
+      "url": "https://github.com/morluto/rea/blob/d5a942177fad030d3caf0f8d39856c116e3e5cda/src/server/externalMutationAdmission.ts#L1-L100",
+      "sha256": "8c301bd2806642341be0344c30d1b844f0dd4cb8388458077755d4d1a6a8353e",
+      "reviewed_lines": [
+        1,
+        100
+      ],
+      "total_lines": 122,
+      "coverage": "selected-lines-reviewed",
+      "runtime_tested": false
+    },
+    {
+      "path": "src/process/ProcessOwnershipEvidence.ts",
+      "url": "https://github.com/morluto/rea/blob/d5a942177fad030d3caf0f8d39856c116e3e5cda/src/process/ProcessOwnershipEvidence.ts#L1-L65",
+      "sha256": "8af58850b79e0a05de6ce460d4581ed68c39a3aa44d5ce140c986aa6bd855247",
+      "reviewed_lines": [
+        1,
+        65
+      ],
+      "total_lines": 429,
+      "coverage": "selected-lines-reviewed",
+      "runtime_tested": false
+    },
+    {
+      "path": "src/application/javascript/JavaScriptRuntimeReconciliationService.ts",
+      "url": "https://github.com/morluto/rea/blob/d5a942177fad030d3caf0f8d39856c116e3e5cda/src/application/javascript/JavaScriptRuntimeReconciliationService.ts#L1-L96",
+      "sha256": "cd5e79f06c43c855d8a417abe3ed72f58ffc0ac7d386cd6c46b4b640c2d9e2cc",
+      "reviewed_lines": [
+        1,
+        96
+      ],
+      "total_lines": 96,
+      "coverage": "selected-lines-reviewed",
+      "runtime_tested": false
+    },
+    {
+      "path": "src/application/ReferenceSourceImportPolicy.ts",
+      "url": "https://github.com/morluto/rea/blob/d5a942177fad030d3caf0f8d39856c116e3e5cda/src/application/ReferenceSourceImportPolicy.ts#L1-L85",
+      "sha256": "7c569c830a676c91392418bdcf9537c1237e5101949e661e129c272cc0e799dc",
+      "reviewed_lines": [
+        1,
+        85
+      ],
+      "total_lines": 410,
+      "coverage": "selected-lines-reviewed",
+      "runtime_tested": false
+    },
+    {
+      "path": "src/ghidra/GhidraProvider.ts",
+      "url": "https://github.com/morluto/rea/blob/d5a942177fad030d3caf0f8d39856c116e3e5cda/src/ghidra/GhidraProvider.ts#L1-L90",
+      "sha256": "de170f8a3c69f71329c35e3250f6cfdbdafdc196d5e09690e219b6268b918cb6",
+      "reviewed_lines": [
+        1,
+        90
+      ],
+      "total_lines": 833,
+      "coverage": "selected-lines-reviewed",
+      "runtime_tested": false
+    },
+    {
+      "path": "docs/reference/mcp-contracts.md",
+      "url": "https://github.com/morluto/rea/blob/d5a942177fad030d3caf0f8d39856c116e3e5cda/docs/reference/mcp-contracts.md#L1904-L1922",
+      "sha256": "5bbcb4f618a699c8cc3ea5130f85358c5816d55031559ae7f86526ac8d92c335",
+      "reviewed_lines": [
+        1904,
+        1922
+      ],
+      "total_lines": 2489,
+      "coverage": "selected-lines-reviewed",
+      "runtime_tested": false
+    },
+    {
+      "path": "docs/guides/javascript/javascript-application-workflows.md",
+      "url": "https://github.com/morluto/rea/blob/d5a942177fad030d3caf0f8d39856c116e3e5cda/docs/guides/javascript/javascript-application-workflows.md#L700-L706",
+      "sha256": "d9342238b8fd53a6baee10aa470fcb3a032c8da47c6587ddea88b858f7eadf7f",
+      "reviewed_lines": [
+        700,
+        706
+      ],
+      "total_lines": 706,
+      "coverage": "selected-lines-reviewed",
+      "runtime_tested": false
+    }
+  ],
+  "claims": [
+    {
+      "id": "shared-cli-mcp-composition",
+      "finding": "CLI/MCP binary sessions share provider-selection and evidence semantics at one composition point.",
+      "classification": "source-observed",
+      "source_paths": [
+        "src/composition/binary.ts"
+      ],
+      "athena_application": "Give Athena one domain service behind UI, CLI and Hermes adapters; test matching errors and cancellation across adapters.",
+      "application_status": "proposed-not-implemented"
+    },
+    {
+      "id": "progressive-catalog",
+      "finding": "Cold tool visibility changes only after the discovery response fits its budget; excluded families cannot be re-enabled by discovery.",
+      "classification": "source-observed",
+      "source_paths": [
+        "src/server/ProgressiveToolCatalog.ts",
+        "src/contracts/catalog/catalogDiscovery.ts"
+      ],
+      "athena_application": "Use scoped on-demand schemas for Athena agents; benchmark actual tokens and task quality rather than claiming free usage.",
+      "application_status": "proposed-not-implemented"
+    },
+    {
+      "id": "lazy-providers",
+      "finding": "Provider metadata is available before implementation load; a rejected load clears the cached promise for retry.",
+      "classification": "source-observed",
+      "source_paths": [
+        "src/application/binary/LazyAnalysisProvider.ts"
+      ],
+      "athena_application": "Keep database browsing cheap; load analysis engines only when an authorized job needs them.",
+      "application_status": "proposed-not-implemented"
+    },
+    {
+      "id": "bounded-ledger",
+      "finding": "Ledger validates sealed evidence, returns duplicate on identical semantic IDs, and budgets retained representation before committing.",
+      "classification": "source-observed",
+      "source_paths": [
+        "src/application/investigation/EvidenceLedger.ts"
+      ],
+      "athena_application": "Deduplicate by semantic identity and bind analysis to target digest, provider/version and parameters, not filenames alone.",
+      "application_status": "proposed-not-implemented"
+    },
+    {
+      "id": "unknowns-first-class",
+      "finding": "Residual unknowns include revision digests, relationships, required authority/confidence/environment and evidence-qualified resolution.",
+      "classification": "source-observed",
+      "source_paths": [
+        "src/domain/residualUnknown.ts",
+        "src/application/investigation/EvidenceLedger.residualUnknown.test.ts"
+      ],
+      "athena_application": "Store unresolved questions alongside findings; do not convert an untested hypothesis into curriculum fact or parity completion.",
+      "application_status": "proposed-not-implemented"
+    },
+    {
+      "id": "partial-outcome-retention",
+      "finding": "Partial-result delivery tests distinguish retained, unretained and unknown-retention evidence after later errors.",
+      "classification": "source-observed",
+      "source_paths": [
+        "src/server/ToolResultDelivery.partialRetention.test.ts",
+        "src/server/externalMutationAdmission.ts"
+      ],
+      "athena_application": "Athena job history should preserve completed effects after cancel/failure and avoid blind retries.",
+      "application_status": "proposed-not-implemented"
+    },
+    {
+      "id": "process-identity",
+      "finding": "Ownership evidence separates process generation identity, run tokens and unresolved relations; host table coverage remains unreported.",
+      "classification": "source-observed",
+      "source_paths": [
+        "src/process/ProcessOwnershipEvidence.ts"
+      ],
+      "athena_application": "Do not kill a reused PID or infer complete process coverage from a snapshot.",
+      "application_status": "proposed-not-implemented"
+    },
+    {
+      "id": "static-runtime-separation",
+      "finding": "Runtime reconciliation resolves and validates static/runtime evidence identities; docs limit observations to observed versions and environments.",
+      "classification": "source-observed",
+      "source_paths": [
+        "src/application/javascript/JavaScriptRuntimeReconciliationService.ts",
+        "docs/guides/javascript/javascript-application-workflows.md"
+      ],
+      "athena_application": "Browser parity needs actual code evidence plus reproducible runtime cases; matching screenshots or a source graph is insufficient.",
+      "application_status": "proposed-not-implemented"
+    },
+    {
+      "id": "scoped-reconstruction",
+      "finding": "An overall structural-function claim includes its constituent dimensions and active scoped unknowns; correlation is not causality.",
+      "classification": "source-observed",
+      "source_paths": [
+        "docs/reference/mcp-contracts.md"
+      ],
+      "athena_application": "Mod semantic changelogs and parity reports need per-dimension completeness and unresolved-field reporting.",
+      "application_status": "proposed-not-implemented"
+    },
+    {
+      "id": "license-boundary",
+      "finding": "REA is MIT, but dependency/engine notices identify separate licenses and recorded notice gaps.",
+      "classification": "source-observed",
+      "source_paths": [
+        "LICENSE",
+        "THIRD_PARTY_NOTICES.md"
+      ],
+      "athena_application": "Track REA, external engines and analyzed artifacts as separate license/provenance records; no blanket rights inheritance.",
+      "application_status": "proposed-not-implemented"
+    }
+  ],
+  "coverage_queue": [
+    {
+      "module": "src/adb",
+      "file_count": 23,
+      "selected_reviewed_files": [],
+      "status": "queued",
+      "next_action": "Review implementation and tests; evaluate on owned fixtures before recommending runtime use."
+    },
+    {
+      "module": "src/android",
+      "file_count": 26,
+      "selected_reviewed_files": [],
+      "status": "queued",
+      "next_action": "Review implementation and tests; evaluate on owned fixtures before recommending runtime use."
+    },
+    {
+      "module": "src/apkSignature",
+      "file_count": 11,
+      "selected_reviewed_files": [],
+      "status": "queued",
+      "next_action": "Review implementation and tests; evaluate on owned fixtures before recommending runtime use."
+    },
+    {
+      "module": "src/apktool",
+      "file_count": 19,
+      "selected_reviewed_files": [],
+      "status": "queued",
+      "next_action": "Review implementation and tests; evaluate on owned fixtures before recommending runtime use."
+    },
+    {
+      "module": "src/application",
+      "file_count": 707,
+      "selected_reviewed_files": [
+        "src/application/binary/LazyAnalysisProvider.ts",
+        "src/application/investigation/EvidenceLedger.ts",
+        "src/application/investigation/EvidenceLedger.residualUnknown.test.ts",
+        "src/application/javascript/JavaScriptRuntimeReconciliationService.ts",
+        "src/application/ReferenceSourceImportPolicy.ts"
+      ],
+      "status": "partially-reviewed",
+      "next_action": "Review implementation and tests; evaluate on owned fixtures before recommending runtime use."
+    },
+    {
+      "module": "src/artifacts",
+      "file_count": 180,
+      "selected_reviewed_files": [],
+      "status": "queued",
+      "next_action": "Review implementation and tests; evaluate on owned fixtures before recommending runtime use."
+    },
+    {
+      "module": "src/browser",
+      "file_count": 215,
+      "selected_reviewed_files": [],
+      "status": "queued",
+      "next_action": "Review implementation and tests; evaluate on owned fixtures before recommending runtime use."
+    },
+    {
+      "module": "src/captures",
+      "file_count": 4,
+      "selected_reviewed_files": [],
+      "status": "queued",
+      "next_action": "Review implementation and tests; evaluate on owned fixtures before recommending runtime use."
+    },
+    {
+      "module": "src/cli",
+      "file_count": 112,
+      "selected_reviewed_files": [],
+      "status": "queued",
+      "next_action": "Review implementation and tests; evaluate on owned fixtures before recommending runtime use."
+    },
+    {
+      "module": "src/composition",
+      "file_count": 49,
+      "selected_reviewed_files": [
+        "src/composition/binary.ts"
+      ],
+      "status": "partially-reviewed",
+      "next_action": "Review implementation and tests; evaluate on owned fixtures before recommending runtime use."
+    },
+    {
+      "module": "src/compression",
+      "file_count": 3,
+      "selected_reviewed_files": [],
+      "status": "queued",
+      "next_action": "Review implementation and tests; evaluate on owned fixtures before recommending runtime use."
+    },
+    {
+      "module": "src/config",
+      "file_count": 55,
+      "selected_reviewed_files": [],
+      "status": "queued",
+      "next_action": "Review implementation and tests; evaluate on owned fixtures before recommending runtime use."
+    },
+    {
+      "module": "src/contracts",
+      "file_count": 147,
+      "selected_reviewed_files": [
+        "src/contracts/catalog/catalogDiscovery.ts"
+      ],
+      "status": "partially-reviewed",
+      "next_action": "Review implementation and tests; evaluate on owned fixtures before recommending runtime use."
+    },
+    {
+      "module": "src/cutter",
+      "file_count": 9,
+      "selected_reviewed_files": [],
+      "status": "queued",
+      "next_action": "Review implementation and tests; evaluate on owned fixtures before recommending runtime use."
+    },
+    {
+      "module": "src/desktop",
+      "file_count": 75,
+      "selected_reviewed_files": [],
+      "status": "queued",
+      "next_action": "Review implementation and tests; evaluate on owned fixtures before recommending runtime use."
+    },
+    {
+      "module": "src/domain",
+      "file_count": 1615,
+      "selected_reviewed_files": [
+        "src/domain/evidence.ts",
+        "src/domain/residualUnknown.ts"
+      ],
+      "status": "partially-reviewed",
+      "next_action": "Review implementation and tests; evaluate on owned fixtures before recommending runtime use."
+    },
+    {
+      "module": "src/dotnet",
+      "file_count": 38,
+      "selected_reviewed_files": [],
+      "status": "queued",
+      "next_action": "Review implementation and tests; evaluate on owned fixtures before recommending runtime use."
+    },
+    {
+      "module": "src/electron",
+      "file_count": 10,
+      "selected_reviewed_files": [],
+      "status": "queued",
+      "next_action": "Review implementation and tests; evaluate on owned fixtures before recommending runtime use."
+    },
+    {
+      "module": "src/erlang",
+      "file_count": 5,
+      "selected_reviewed_files": [],
+      "status": "queued",
+      "next_action": "Review implementation and tests; evaluate on owned fixtures before recommending runtime use."
+    },
+    {
+      "module": "src/evm",
+      "file_count": 17,
+      "selected_reviewed_files": [],
+      "status": "queued",
+      "next_action": "Review implementation and tests; evaluate on owned fixtures before recommending runtime use."
+    },
+    {
+      "module": "src/filesystem",
+      "file_count": 18,
+      "selected_reviewed_files": [],
+      "status": "queued",
+      "next_action": "Review implementation and tests; evaluate on owned fixtures before recommending runtime use."
+    },
+    {
+      "module": "src/firmware",
+      "file_count": 18,
+      "selected_reviewed_files": [],
+      "status": "queued",
+      "next_action": "Review implementation and tests; evaluate on owned fixtures before recommending runtime use."
+    },
+    {
+      "module": "src/flutter",
+      "file_count": 9,
+      "selected_reviewed_files": [],
+      "status": "queued",
+      "next_action": "Review implementation and tests; evaluate on owned fixtures before recommending runtime use."
+    },
+    {
+      "module": "src/frida",
+      "file_count": 4,
+      "selected_reviewed_files": [],
+      "status": "queued",
+      "next_action": "Review implementation and tests; evaluate on owned fixtures before recommending runtime use."
+    },
+    {
+      "module": "src/gdb",
+      "file_count": 4,
+      "selected_reviewed_files": [],
+      "status": "queued",
+      "next_action": "Review implementation and tests; evaluate on owned fixtures before recommending runtime use."
+    },
+    {
+      "module": "src/ghidra",
+      "file_count": 113,
+      "selected_reviewed_files": [
+        "src/ghidra/GhidraProvider.ts"
+      ],
+      "status": "partially-reviewed",
+      "next_action": "Review implementation and tests; evaluate on owned fixtures before recommending runtime use."
+    },
+    {
+      "module": "src/go",
+      "file_count": 9,
+      "selected_reviewed_files": [],
+      "status": "queued",
+      "next_action": "Review implementation and tests; evaluate on owned fixtures before recommending runtime use."
+    },
+    {
+      "module": "src/gpu",
+      "file_count": 19,
+      "selected_reviewed_files": [],
+      "status": "queued",
+      "next_action": "Review implementation and tests; evaluate on owned fixtures before recommending runtime use."
+    },
+    {
+      "module": "src/hopper",
+      "file_count": 46,
+      "selected_reviewed_files": [],
+      "status": "queued",
+      "next_action": "Review implementation and tests; evaluate on owned fixtures before recommending runtime use."
+    },
+    {
+      "module": "src/hopperPaths",
+      "file_count": 5,
+      "selected_reviewed_files": [],
+      "status": "queued",
+      "next_action": "Review implementation and tests; evaluate on owned fixtures before recommending runtime use."
+    },
+    {
+      "module": "src/ida",
+      "file_count": 41,
+      "selected_reviewed_files": [],
+      "status": "queued",
+      "next_action": "Review implementation and tests; evaluate on owned fixtures before recommending runtime use."
+    },
+    {
+      "module": "src/il2cpp",
+      "file_count": 15,
+      "selected_reviewed_files": [],
+      "status": "queued",
+      "next_action": "Review implementation and tests; evaluate on owned fixtures before recommending runtime use."
+    },
+    {
+      "module": "src/inspector",
+      "file_count": 12,
+      "selected_reviewed_files": [],
+      "status": "queued",
+      "next_action": "Review implementation and tests; evaluate on owned fixtures before recommending runtime use."
+    },
+    {
+      "module": "src/javascript",
+      "file_count": 38,
+      "selected_reviewed_files": [],
+      "status": "queued",
+      "next_action": "Review implementation and tests; evaluate on owned fixtures before recommending runtime use."
+    },
+    {
+      "module": "src/jeb",
+      "file_count": 8,
+      "selected_reviewed_files": [],
+      "status": "queued",
+      "next_action": "Review implementation and tests; evaluate on owned fixtures before recommending runtime use."
+    },
+    {
+      "module": "src/kernel",
+      "file_count": 8,
+      "selected_reviewed_files": [],
+      "status": "queued",
+      "next_action": "Review implementation and tests; evaluate on owned fixtures before recommending runtime use."
+    },
+    {
+      "module": "src/kuna",
+      "file_count": 33,
+      "selected_reviewed_files": [],
+      "status": "queued",
+      "next_action": "Review implementation and tests; evaluate on owned fixtures before recommending runtime use."
+    },
+    {
+      "module": "src/main",
+      "file_count": 12,
+      "selected_reviewed_files": [],
+      "status": "queued",
+      "next_action": "Review implementation and tests; evaluate on owned fixtures before recommending runtime use."
+    },
+    {
+      "module": "src/model",
+      "file_count": 7,
+      "selected_reviewed_files": [],
+      "status": "queued",
+      "next_action": "Review implementation and tests; evaluate on owned fixtures before recommending runtime use."
+    },
+    {
+      "module": "src/native",
+      "file_count": 178,
+      "selected_reviewed_files": [],
+      "status": "queued",
+      "next_action": "Review implementation and tests; evaluate on owned fixtures before recommending runtime use."
+    },
+    {
+      "module": "src/objdump",
+      "file_count": 2,
+      "selected_reviewed_files": [],
+      "status": "queued",
+      "next_action": "Review implementation and tests; evaluate on owned fixtures before recommending runtime use."
+    },
+    {
+      "module": "src/pcap",
+      "file_count": 15,
+      "selected_reviewed_files": [],
+      "status": "queued",
+      "next_action": "Review implementation and tests; evaluate on owned fixtures before recommending runtime use."
+    },
+    {
+      "module": "src/platform",
+      "file_count": 1,
+      "selected_reviewed_files": [],
+      "status": "queued",
+      "next_action": "Review implementation and tests; evaluate on owned fixtures before recommending runtime use."
+    },
+    {
+      "module": "src/ports",
+      "file_count": 64,
+      "selected_reviewed_files": [],
+      "status": "queued",
+      "next_action": "Review implementation and tests; evaluate on owned fixtures before recommending runtime use."
+    },
+    {
+      "module": "src/process",
+      "file_count": 190,
+      "selected_reviewed_files": [
+        "src/process/ProcessOwnershipEvidence.ts"
+      ],
+      "status": "partially-reviewed",
+      "next_action": "Review implementation and tests; evaluate on owned fixtures before recommending runtime use."
+    },
+    {
+      "module": "src/providers",
+      "file_count": 23,
+      "selected_reviewed_files": [],
+      "status": "queued",
+      "next_action": "Review implementation and tests; evaluate on owned fixtures before recommending runtime use."
+    },
+    {
+      "module": "src/python",
+      "file_count": 8,
+      "selected_reviewed_files": [],
+      "status": "queued",
+      "next_action": "Review implementation and tests; evaluate on owned fixtures before recommending runtime use."
+    },
+    {
+      "module": "src/reference",
+      "file_count": 12,
+      "selected_reviewed_files": [],
+      "status": "queued",
+      "next_action": "Review implementation and tests; evaluate on owned fixtures before recommending runtime use."
+    },
+    {
+      "module": "src/resources",
+      "file_count": 40,
+      "selected_reviewed_files": [],
+      "status": "queued",
+      "next_action": "Review implementation and tests; evaluate on owned fixtures before recommending runtime use."
+    },
+    {
+      "module": "src/rizin",
+      "file_count": 4,
+      "selected_reviewed_files": [],
+      "status": "queued",
+      "next_action": "Review implementation and tests; evaluate on owned fixtures before recommending runtime use."
+    },
+    {
+      "module": "src/rust",
+      "file_count": 5,
+      "selected_reviewed_files": [],
+      "status": "queued",
+      "next_action": "Review implementation and tests; evaluate on owned fixtures before recommending runtime use."
+    },
+    {
+      "module": "src/server",
+      "file_count": 75,
+      "selected_reviewed_files": [
+        "src/server/ProgressiveToolCatalog.ts",
+        "src/server/ToolResultDelivery.partialRetention.test.ts",
+        "src/server/externalMutationAdmission.ts"
+      ],
+      "status": "partially-reviewed",
+      "next_action": "Review implementation and tests; evaluate on owned fixtures before recommending runtime use."
+    },
+    {
+      "module": "src/signals",
+      "file_count": 4,
+      "selected_reviewed_files": [],
+      "status": "queued",
+      "next_action": "Review implementation and tests; evaluate on owned fixtures before recommending runtime use."
+    },
+    {
+      "module": "src/sqlite",
+      "file_count": 9,
+      "selected_reviewed_files": [],
+      "status": "queued",
+      "next_action": "Review implementation and tests; evaluate on owned fixtures before recommending runtime use."
+    },
+    {
+      "module": "src/v8",
+      "file_count": 7,
+      "selected_reviewed_files": [],
+      "status": "queued",
+      "next_action": "Review implementation and tests; evaluate on owned fixtures before recommending runtime use."
+    },
+    {
+      "module": "src/wasm",
+      "file_count": 18,
+      "selected_reviewed_files": [],
+      "status": "queued",
+      "next_action": "Review implementation and tests; evaluate on owned fixtures before recommending runtime use."
+    },
+    {
+      "module": "src/windows",
+      "file_count": 7,
+      "selected_reviewed_files": [],
+      "status": "queued",
+      "next_action": "Review implementation and tests; evaluate on owned fixtures before recommending runtime use."
+    }
+  ],
+  "limits": [
+    "No complete repository review claimed. Selected line ranges are explicit.",
+    "No upstream test suite or analysis engine was executed.",
+    "Catalog ingestion is not installed runtime integration or autonomous learning.",
+    "No measured token savings, performance parity, arbitrary decompilation, or reconstruction guarantee.",
+    "No REA implementation or third-party analyzed target assets copied into Athena."
+  ]
+}

@@ -4,7 +4,7 @@ Write, inspect, test and deliver software and workflows.
 
 [Browse in Athena](https://herbertofury.github.io/Athena/#software?family=development) · [Catalog](Software-Catalog) · [Method](Software-Methodology)
 
-185 applications. Reviewed 2026-11-16; individual records identify inherited research.
+186 applications. Reviewed 2026-11-16; individual records identify inherited research.
 
 ## Analytical databases
 
@@ -2235,6 +2235,20 @@ Command-line framework for binary inspection, disassembly, patching, debugging, 
 - **Maintenance:** active — Repository not archived; latest repository push observed 2026-11-14. Activity is not a runtime, security, or support guarantee. ([evidence](https://api.github.com/repos/radareorg/radare2))
 - [Official project](https://www.radare.org/) · [Official installation / downloads](https://github.com/radareorg/radare2/releases) · [Repository](https://github.com/radareorg/radare2)
 - **Sources:** [Official repository metadata: identity, license detection and activity](https://api.github.com/repos/radareorg/radare2) (2026-11-14; identity, maintenance); [Official project README](https://raw.githubusercontent.com/radareorg/radare2/HEAD/README.md) (2026-11-14; identity, features, downloads, platforms); [Official license text](https://raw.githubusercontent.com/radareorg/radare2/HEAD/COPYING.md) (2026-11-14; license); [Official official documentation](https://www.radare.org/) (2026-11-14; identity, features); [Official release inspected: 6.2.6](https://github.com/radareorg/radare2/releases/tag/6.2.6) (2026-11-14; downloads, maintenance, platforms); [Public upstream app/package distribution: availability without payment or authentication checked](https://github.com/radareorg/radare2/releases/download/6.2.6/radare2-6.2.6-w64.zip) (2026-11-15; downloads, pricing)
+### REA: Reverse Engineer Anything
+
+Local CLI and MCP orchestration for source, binary and application investigation with evidence records and explicit unresolved questions.
+
+- **Platforms:** Windows, macOS, Linux. **License:** MIT (REA); external engines and analyzed artifacts retain separate terms. **Pricing model:** free.
+- **Compatibility details:** Provider and operation support differs by host. Read pinned provider prerequisites; this study did not run installers or engines.
+- **Pricing details:** REA source is MIT; optional external commercial engines require their own licenses. No paid engine entitlement included.
+- **Pick for:** An authorized software investigation needs a consistent agent-facing interface and evidence trail across analysis providers.
+- **Compare when:** Use underlying engines directly when their interactive workflow is more appropriate; benchmark REA with owned fixtures first.
+- **Strengths:** Explicit evidence and unresolved-question models; Separates transport adapters from analysis providers
+- **Limitations:** Selected source review only; no independent runtime or security certification; Depends on separately installed providers for many operations; Static evidence does not prove full behavior or recovered source equivalence; Per-platform and external engine restrictions apply
+- **Maintenance:** unverified — Source snapshot d5a942177fad030d3caf0f8d39856c116e3e5cda, package 6.9.0 inspected; no release installation or ongoing-maintenance guarantee. ([evidence](https://github.com/morluto/rea/blob/d5a942177fad030d3caf0f8d39856c116e3e5cda/package.json))
+- [Official project](https://rea.tools/) · [Official installation / downloads](https://github.com/morluto/rea) · [Repository](https://github.com/morluto/rea)
+- **Sources:** [Pinned official scope and provider prerequisites](https://github.com/morluto/rea/blob/d5a942177fad030d3caf0f8d39856c116e3e5cda/README.md) (2026-11-17; identity, features, platforms, downloads); [REA MIT license](https://github.com/morluto/rea/blob/d5a942177fad030d3caf0f8d39856c116e3e5cda/LICENSE) (2026-11-17; license, pricing); [Separate engine and dependency terms](https://github.com/morluto/rea/blob/d5a942177fad030d3caf0f8d39856c116e3e5cda/THIRD_PARTY_NOTICES.md) (2026-11-17; license, pricing); [Official package identity and version](https://github.com/morluto/rea/blob/d5a942177fad030d3caf0f8d39856c116e3e5cda/package.json) (2026-11-17; identity, maintenance); [Athena original source study, adoption backlog and teaching exercise](https://github.com/Herbertofury/Athena/blob/feat/rea-source-study-20261117/research/rea-source-study-2026-11-17/README.md) (2026-11-17; features)
 
 ## Shell prompts and customization
 
