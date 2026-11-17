@@ -20,7 +20,7 @@ For authorized mod-manager installation studies, combine scoped file/registry/pr
 
 1. Use a Windows 11 test machine and an owned toy named-pipe server/client. Pin the tool build and record the executable signature/hash locally before launch.
 2. Define the expected event sequence from fixture behavior, with successful connection, missing server, permission-denied connection, restart and cancellation cases. Avoid real credentials and production endpoints.
-3. Restrict the acquisition to that process tree and temporary fixture directory. Keep native trace files local; exported summaries use synthetic identifiers only.
+3. Scope the acquisition to the owned process tree. Apply temporary-directory filters to filesystem events only; IPC events use pipe/mailslot paths and need their own transport-specific filters. Keep native trace files local; exported summaries use synthetic identifiers only.
 4. Confirm observed event classes and counts against independent fixture logs. Record missed events, dropped events, capture duration and CPU/storage overhead without extrapolating to all applications.
 5. Run an unrelated toy process simultaneously to check scope and whether filter changes merely affect display rather than collection. Filter visibility must never be presented as proof that unshown data was not captured.
 6. Stop the capture, verify completion, and explicitly clean up only the owned fixture. Keep trace retention finite and inspect/redact before any sharing.
