@@ -14,3 +14,15 @@ was transmitted. Sources are public GitHub REST endpoints recorded individually.
 Response digests refer to exact retrieved JSON bytes, which are not republished in
 full. Commit identity and release label are separate observations. Neither receipt
 includes source-code inspection, installer execution, benchmark or capability proof.
+
+## Actual native startup chain
+
+- `native-bridge-failure-2026-11-17.json`: explicit public Rust repo configured at
+  native launch; HTTP status endpoint returned the child backend's unavailable
+  transport observation. Store bytes unchanged; core bridge remained functional.
+- `native-bridge-observed-2026-11-17.json`: a separate explicit native launch returned
+  observed metadata, exact commit and pinned NOASSERTION license; latest release
+  remained unknown. Four requests,16.74 seconds. Store bytes unchanged.
+
+These validate actual Python bridge→subprocess→public API→HTTP receipt integration,
+not a mocked transport. They do not establish visual Chromium or owner-device QA.

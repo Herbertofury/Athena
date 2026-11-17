@@ -1,4 +1,5 @@
 """Explicit local-only Athena profile; fixed executable/database, no arbitrary commands or paths."""
+import importlib.util
 import argparse,json,mimetypes,pathlib,subprocess,threading,hashlib,re,time,secrets
 from http.server import BaseHTTPRequestHandler,HTTPServer
 from socketserver import ThreadingMixIn
@@ -31,7 +32,14 @@ class Bridge(ThreadingMixIn,HTTPServer):
     def process_request_thread(self,request,client_address):
         try:super().process_request_thread(request,client_address)
         finally:self.handler_slots.release()
-    def __init__(self,binary,database,runtime,legacy_source=None,import_destination=None,disable_foundry_modules=()):
+    def __init__(self,binary,database,runtime,legacy_source=None,import_destination=None,disable_foundry_modules=(),challenger_repositories=()):
+        self.challenger=None
+        self.challenger_status={'status':'disabled','public_repositories':[],'report':None}
+        if challenger_repositories:
+            try:
+                spec=importlib.util.spec_from_file_location('athena_challenger_service',pathlib.Path(__file__).with_name('challenger_service.py'));module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module)
+                self.challenger=module.ChallengerService(challenger_repositories)
+            except (ImportError,OSError,ValueError,AttributeError,SyntaxError):self.challenger_status={'status':'unavailable','public_repositories':[],'report':None}
         self.handler_slots=threading.BoundedSemaphore(self.max_handlers)
         self.operation_lock=threading.RLock()
         if any(name not in FOUNDRY_MODULES for name in disable_foundry_modules):raise ValueError('Unknown Foundry module')
@@ -67,6 +75,10 @@ class Bridge(ThreadingMixIn,HTTPServer):
         if self.schema not in (2,3,4,5,6,7,8,9,10,11,12,13,14,15):raise ValueError('Database requires explicit backup upgrade before launch')
         super().__init__(('127.0.0.1',0),Handler)
         self.origin=f'http://127.0.0.1:{self.server_port}';self.host=f'127.0.0.1:{self.server_port}'
+        if self.challenger:self.challenger.start()
+    def server_close(self):
+        if self.challenger:self.challenger.close()
+        super().server_close()
     def fingerprint(self):
         p=self.legacy_source
         if p is None or p.is_symlink():raise ValueError('No stable configured source')
@@ -137,6 +149,9 @@ class Handler(BaseHTTPRequestHandler):
         if not self.valid():return self.reply(403)
         parsed=urlsplit(self.path)
         if parsed.scheme or parsed.netloc or parsed.query or parsed.fragment:return self.reply(400)
+        if parsed.path=='/__native/challenger-review':
+            if not self.valid(api=True):return self.reply(403)
+            return self.reply(200,json.dumps(self.server.challenger.snapshot() if self.server.challenger else self.server.challenger_status))
         if parsed.path=='/__native/legacy-review':
             if not self.valid(api=True):return self.reply(403)
             if self.server.legacy_source is None:return self.reply(409,'{"error":"Legacy import not configured. Operator must select source and NEW destination at launch."}')
@@ -260,8 +275,8 @@ class Handler(BaseHTTPRequestHandler):
             return self.reply(200,'{"saved":true}',etag=result['version'])
         except (ValueError,UnicodeError,subprocess.TimeoutExpired,TimeoutError):return self.reply(422,'{"error":"Native save rejected"}')
 def main():
-    p=argparse.ArgumentParser();p.add_argument('--binary',required=True);p.add_argument('--database',required=True);p.add_argument('--runtime',default=str(pathlib.Path(__file__).resolve().parents[2]/'dist'));p.add_argument('--legacy-source');p.add_argument('--import-destination');p.add_argument('--disable-foundry-module',action='append',default=[],choices=FOUNDRY_MODULES);a=p.parse_args()
-    server=Bridge(a.binary,a.database,a.runtime,a.legacy_source,a.import_destination,a.disable_foundry_module);print(server.origin+'/#build',flush=True)
+    p=argparse.ArgumentParser();p.add_argument('--binary',required=True);p.add_argument('--database',required=True);p.add_argument('--runtime',default=str(pathlib.Path(__file__).resolve().parents[2]/'dist'));p.add_argument('--legacy-source');p.add_argument('--import-destination');p.add_argument('--disable-foundry-module',action='append',default=[],choices=FOUNDRY_MODULES);p.add_argument('--challenger-public-repo',action='append',default=[],help='Opt in: send only this public GitHub owner/repository ID for one background refresh per launch');a=p.parse_args()
+    server=Bridge(a.binary,a.database,a.runtime,a.legacy_source,a.import_destination,a.disable_foundry_module,a.challenger_public_repo);print(server.origin+'/#build',flush=True)
     try:server.serve_forever()
     finally:server.server_close()
 if __name__=='__main__':main()

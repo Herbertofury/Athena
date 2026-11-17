@@ -1,0 +1,42 @@
+{
+  "scope": "Actual native Python bridge HTTP to spawned backend to public GitHub API; no browser UI acceptance",
+  "elapsed_seconds": 5.546463920996757,
+  "database_unchanged": true,
+  "result": {
+    "status": "completed",
+    "public_repositories": [
+      "rust-lang/rust"
+    ],
+    "report": {
+      "schema": 1,
+      "kind": "athena-public-challenger-source-review",
+      "search": null,
+      "repositories": [
+        {
+          "repository": "rust-lang/rust",
+          "status": "transport_unavailable",
+          "commit": null,
+          "license": null,
+          "release": null
+        }
+      ],
+      "evidence": [
+        {
+          "status": null,
+          "outcome": "transport_unavailable",
+          "source": "https://api.github.com/repos/rust-lang/rust",
+          "checked_at": "2026-11-17T04:32:14.906453+00:00"
+        }
+      ],
+      "limitations": [
+        "Public GitHub metadata only, not source-code inspection or proof of superiority.",
+        "License metadata is not a reuse authorization; review the exact license and compatibility.",
+        "Latest release means the GitHub latest-release endpoint, not every tag/prerelease or newest commit.",
+        "No credentials, private-project reads, installations or automatic adoption.",
+        "30-second request-admission budget and per-request socket timeout; not a hard whole-process deadline."
+      ],
+      "requests": 1,
+      "elapsed_seconds": 5.0174821999971755
+    }
+  }
+}

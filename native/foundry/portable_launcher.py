@@ -256,10 +256,11 @@ def fork_checkpoint(root,data,source,destination,quiescent=False):
 
 def main():
     sys.dont_write_bytecode=True
-    p=argparse.ArgumentParser(description=__doc__);p.add_argument('--database');p.add_argument('--journal');p.add_argument('--checkpoint-directory');p.add_argument('--fork-checkpoint');p.add_argument('--working-directory');p.add_argument('--create-database');p.add_argument('--backup-database');p.add_argument('--upgrade-copy');p.add_argument('--backup-destination');p.add_argument('--source-quiescent',action='store_true');p.add_argument('--verify-only',action='store_true');a=p.parse_args()
+    p=argparse.ArgumentParser(description=__doc__);p.add_argument('--database');p.add_argument('--journal');p.add_argument('--checkpoint-directory');p.add_argument('--fork-checkpoint');p.add_argument('--working-directory');p.add_argument('--create-database');p.add_argument('--backup-database');p.add_argument('--upgrade-copy');p.add_argument('--backup-destination');p.add_argument('--source-quiescent',action='store_true');p.add_argument('--verify-only',action='store_true');p.add_argument('--challenger-public-repo',action='append',default=[],help='Opt in to public GitHub source refresh; Python bridge profile only');a=p.parse_args()
     root=pathlib.Path(__file__).resolve().parent
     try:
         data=verify(root)
+        if a.challenger_public_repo and data.get('engine'):p.error('Fresh public-source review currently requires the standalone Python bridge profile')
         if sum((bool(a.database),bool(a.create_database),bool(a.backup_database),bool(a.upgrade_copy),bool(a.fork_checkpoint),a.verify_only))!=1:raise ValueError('Choose one operation')
         if bool(a.backup_database or a.upgrade_copy)!=bool(a.backup_destination) or (a.source_quiescent and not (a.backup_database or a.upgrade_copy or a.checkpoint_directory or a.fork_checkpoint)):raise ValueError('Backup arguments required together')
         if bool(a.fork_checkpoint)!=bool(a.working_directory):raise ValueError('Fork requires a new working directory')
@@ -289,13 +290,14 @@ def main():
             if not journal.exists():destination_clear(journal)
             # Engine performs symmetric sidecar/hardlink ownership and schema checks
             # before opening either store. No proxy or security settings changed.
+            if a.challenger_public_repo:raise ValueError('Public source refresh is not integrated with the unified Rust profile')
             command=[str(root/data['engine']),'serve-unified',str(journal),str(root/'runtime'),str(database)]
             if sys.platform=='win32':
                 spec=importlib.util.spec_from_file_location('athena_owned_process',root/'portable_process.py');owned=importlib.util.module_from_spec(spec);spec.loader.exec_module(owned)
                 raise SystemExit(owned.run_windows(command))
             os.execv(command[0],command)
         spec=importlib.util.spec_from_file_location('athena_portable_bridge',root/'bridge.py');bridge=importlib.util.module_from_spec(spec);spec.loader.exec_module(bridge)
-        server=bridge.Bridge(root/data['binary'],database,root/'runtime')
+        server=bridge.Bridge(root/data['binary'],database,root/'runtime',challenger_repositories=a.challenger_public_repo)
     except (OSError,ValueError,KeyError,TypeError,subprocess.SubprocessError):p.exit(2,'Launch refused: verify package, platform and external existing database. WAL recovery requires Python SQLite 3.54.0+. No automatic repair or existing-database upgrade.\n')
     print(server.origin+'/#build',flush=True)
     try:server.serve_forever()

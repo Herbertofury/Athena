@@ -24,9 +24,39 @@ export async function reviewQueueInSlices(catalog,projects,signal) {
  initial.projectsConsidered=initial.items.length;initial.projectsDeferred=Math.max(0,entries.length-20);return initial;
 }
 
-export async function mountStartupReview({host,projects,fetcher=fetch,signal,timeoutMs=8000}) {
+export async function mountNativeReview(host,reader,{signal,pollMs=1500,maxPolls=26,requestMs=3000}={}) {
+ const el=(tag,text)=>{const n=document.createElement(tag);if(text!==undefined)n.textContent=text;return n;};
+ const section=el('details'),summary=el('summary','Fresh public-source review: checking native settings…'),body=el('div');section.append(summary,body);host.append(section);
+ for(let i=0;i<maxPolls;i++){
+  if(signal?.aborted)return;
+  const controller=new AbortController(),abort=()=>controller.abort();signal?.addEventListener('abort',abort,{once:true});let timer;
+  try{
+   const timeout=new Promise((_,reject)=>{timer=setTimeout(()=>{controller.abort();reject(Error('timeout'));},requestMs);});
+   const value=await Promise.race([reader({signal:controller.signal}),timeout]);if(signal?.aborted)return;
+   if(!value||!['disabled','pending','completed','unavailable','stopped'].includes(value.status)||!Array.isArray(value.public_repositories)||value.public_repositories.length>3)throw Error('Invalid native status');
+   body.replaceChildren();body.append(el('p','Only explicitly configured public repository IDs are sent to GitHub. Project goals stay local. Launch settings apply to this native session only.'));
+   if(value.status==='disabled'){summary.textContent='Fresh public-source review: disabled';body.append(el('p','To opt in, launch the Python native bridge with --challenger-public-repo owner/repository (up to three). Offline/local discovery still works. Unified Rust profile is not connected.'));return;}
+   body.append(el('p','Configured public sources: '+value.public_repositories.join(', ')));
+   if(value.status==='completed'){
+    const report=value.report;if(report?.kind!=='athena-public-challenger-source-review'||!Array.isArray(report.repositories)||report.repositories.length>3)throw Error('Invalid source receipt');
+    summary.textContent='Fresh public-source review: receipt ready';
+    for(const record of report.repositories){const row=el('section');row.append(el('h3',record.repository),el('p',`Status: ${record.status}. Commit: ${record.commit?.sha||'unknown'}. License: ${record.license?.spdx_id||'unknown; no permission inferred'}. Release: ${record.release?.tag||'unknown'}.`));body.append(row);}
+    const evidence=el('pre',JSON.stringify(report,null,2));body.append(el('p','Metadata observations are not source-code inspection, reuse approval or proof of a better implementation.'),evidence);return;
+   }
+   if(value.status!=='pending'){summary.textContent='Fresh public-source review unavailable';body.append(el('p','Continue with local references. No retry or project change was performed.'));return;}
+   summary.textContent='Fresh public-source review: background request running';
+  }catch{if(!signal?.aborted){summary.textContent='Fresh public-source review unavailable';body.append(el('p','Native bridge could not provide a result. Local discovery and other workspaces remain available.'));}return;}
+  finally{clearTimeout(timer);signal?.removeEventListener('abort',abort);}
+  await new Promise(resolve=>setTimeout(resolve,pollMs));
+ }
+ if(signal?.aborted)return;
+ summary.textContent='Fresh public-source review: status polling paused';body.append(el('p','Polling budget reached; no automatic retry. Reopen the app to inspect the native session result.'));
+}
+
+export async function mountStartupReview({host,projects,fetcher=fetch,signal,timeoutMs=8000,nativeReader=globalThis.AthenaNativeStore?.reviewChallengers}) {
  const el=(tag,text)=>{const n=document.createElement(tag);if(text!==undefined)n.textContent=text;return n;};
  const details=el('details'),summary=el('summary','Startup comparison review: checking local references…'),body=el('div');details.append(summary,body);host.append(details);
+ if(typeof nativeReader==='function')void mountNativeReview(host,nativeReader,{signal}).catch(()=>{});
  const controller=new AbortController();let disposed=false;
  const close=()=>{disposed=true;controller.abort();};signal?.addEventListener('abort',close,{once:true});if(signal?.aborted)close();
  let timer;const timed=new Promise((_,reject)=>{timer=setTimeout(()=>{controller.abort();reject(Error('timeout'));},timeoutMs);});

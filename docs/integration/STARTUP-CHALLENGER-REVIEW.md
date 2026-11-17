@@ -37,7 +37,7 @@ reasons. Continue independent work when discovery is unavailable rather than sta
 
 ## Remaining acceptance
 
-Fresh upstream discovery requires an authorized backend/connector, network budget,
+Broader fresh-source discovery requires additional authorized adapters, network budgets,
 source adapters, cancellation and privacy boundary. Actual code inspection, license
 reuse decisions and same-workload comparisons remain required for adoption. Native
 startup queue does not complete those steps. Persistent review outcomes, broader
@@ -68,5 +68,35 @@ observation; release tag/date is independently observed via GitHub's latest-rele
 endpoint, not assumed equal to the default-branch commit. `NOASSERTION`, missing or
 custom licenses remain unreviewed. Source code is not downloaded/executed. Search
 covers only the first three updated matches, not best-quality ranking or exhaustive
-coverage. Output refuses overwrite. The native startup queue does not yet invoke
-this backend or import receipts: both are explicit remaining integration work.
+coverage. Output refuses overwrite. The Python native bridge can invoke this backend using explicit public settings
+below. Arbitrary receipt imports and unified-Rust integration remain open.
+
+## Opt-in native startup connection (Python bridge profile)
+
+The standalone native bridge now accepts explicit settings at launch:
+
+```sh
+python3 native/foundry/bridge.py --binary /path/to/athena-foundry-store --database /path/to/store.sqlite --challenger-public-repo rust-lang/rust
+# Verified standalone portable package:
+python3 launch.py --database /path/to/store.sqlite --challenger-public-repo rust-lang/rust
+```
+
+Repeat the public-repository flag for up to three IDs. Omit it for no outbound source
+refresh. The setting is launch-scoped, not silently persisted or derived from goals.
+The service starts one separate backend process per native launch, uses only those
+IDs, and terminates it at35 seconds or bridge shutdown. Failures remain optional.
+No credentials or user project text enter the backend. No browser endpoint accepts
+new repositories or queries. A same-origin/header-gated GET returns only its status
+and public receipt; page reloads poll the existing result, not repeat upstream work.
+
+The startup UI independently polls this status with finite request/poll budgets,
+shows configured public IDs, commit/license/release observations and complete raw
+receipt, and keeps the original local queue usable. A completed receipt can contain
+network failures or unknown metadata; it is not success/adoption proof. Helper files
+are included in package integrity manifests; the child uses Python `-B` so it does
+not dirty the verified package with bytecode caches.
+
+The unified Rust profile still bypasses this bridge and explicitly rejects the new
+setting rather than silently ignoring it. Integration into that profile remains
+open. HTTPS/static deployments retain local-only startup checks. Real Chromium UI
+acceptance remains separate from actual bridge/HTTP/backend network verification.
