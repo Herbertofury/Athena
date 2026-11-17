@@ -34,3 +34,7 @@ Legitimate debuggers, monitoring software and security products can interact wit
 The rendered PE-sieve and System Informer release dates omitted a year, so full publication dates remain unverified here. No software was downloaded, installed or executed; no service or driver was configured; no process was terminated or dumped. No benchmark, detection-rate comparison or exhaustive protection claim is made.
 
 A future authorized lab comparison should retain benign examples and measure false positives, missing events and overhead. It must distinguish upstream claims, actual observations and interpretation. This note changes no catalog records, runtime configuration or manifest.
+
+## Follow-up evidence
+
+[Process Monitor IPC and current Windows support](../procmon-ipc-2026-11-17/README.md) separates the current documented build from the earlier IPC feature introduction and defines an owned-fixture acceptance plan. It adds no tracing or production access.
