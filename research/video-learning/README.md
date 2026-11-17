@@ -37,5 +37,9 @@ The `#video` native workspace opens the normalized importer JSON in memory only,
 searches every cue and renders 50 at a time with original timestamp links. It never
 loads source media automatically, uploads captions, persists them in browser storage,
 or grants curriculum credit. Clear/navigation invalidates pending imports. Exported
-JSON remains on the user's disk. The Python reviewer proposal flow remains separate;
-channel acquisition, native review authoring and visual/video evidence are still pending.
+JSON remains on the user's disk. The native evidence form exports a review JSON compatible with the Python `--review`
+validator: source kind, five problem-solving phases with observed/inferred/unknown
+classification and cue IDs, learning objectives and an original safe exercise. It does
+not invent analysis or grant mastery. Native review drafts reset on successful import,
+Clear or navigation; export before leaving. Channel acquisition and visual/video
+evidence are still pending.
