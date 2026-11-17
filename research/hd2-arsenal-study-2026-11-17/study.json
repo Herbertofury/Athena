@@ -1,0 +1,273 @@
+{
+  "schema_version": 1,
+  "product": "HD2 Arsenal",
+  "reviewed_at": "2026-11-17",
+  "version_context": "Official site lists 0.37.2; documentation targets 0.36 and later",
+  "official_url": "https://rsnl.gg/",
+  "repository_url": "https://github.com/Orbit-Studios/hd2arsenal-release",
+  "coverage": {
+    "documentation": "reviewed bounded pages",
+    "application_source": "unavailable: official README says development private",
+    "installation": "not inspected; authorized local computer offline; web download restricted",
+    "runtime": "not run",
+    "license": "application redistribution/source reuse terms unverified"
+  },
+  "sources": [
+    {
+      "id": "lobby/mod-sync",
+      "url": "https://docs.rsnl.gg/lobby/mod-sync",
+      "checked_at": "2026-11-17",
+      "artifact_sha256": "fcf02021ac5f826f1324772da4d60025f7fcf0efe93c0b4d1f96368719349af3",
+      "bytes": 83028,
+      "evidence_kind": "official-documentation",
+      "coverage": "read; runtime and implementation not verified"
+    },
+    {
+      "id": "mod-builder",
+      "url": "https://docs.rsnl.gg/mod-builder",
+      "checked_at": "2026-11-17",
+      "artifact_sha256": "f79333d02c834eea0a249c102d23b226205081621fad1dcd43c74ed86f3f571c",
+      "bytes": 108729,
+      "evidence_kind": "official-documentation",
+      "coverage": "read; runtime and implementation not verified"
+    },
+    {
+      "id": "mod-builder/manifest",
+      "url": "https://docs.rsnl.gg/mod-builder/manifest",
+      "checked_at": "2026-11-17",
+      "artifact_sha256": "abcc95ccb0b580ceb40e98c41cd3d81ab9f2dd17585b20ebb013eca299cc8b40",
+      "bytes": 119247,
+      "evidence_kind": "official-documentation",
+      "coverage": "read; runtime and implementation not verified"
+    },
+    {
+      "id": "mod-builder/options",
+      "url": "https://docs.rsnl.gg/mod-builder/options",
+      "checked_at": "2026-11-17",
+      "artifact_sha256": "190f28241091df7dec972b68168afebda80cf3ed6a28e4db35b90f96d8fbfb48",
+      "bytes": 88429,
+      "evidence_kind": "official-documentation",
+      "coverage": "read; runtime and implementation not verified"
+    },
+    {
+      "id": "mod-builder/projects",
+      "url": "https://docs.rsnl.gg/mod-builder/projects",
+      "checked_at": "2026-11-17",
+      "artifact_sha256": "a159854a54d3f858f2c0cf4d596b9c3a01c7270e3aff0f2a97360723444cf616",
+      "bytes": 93519,
+      "evidence_kind": "official-documentation",
+      "coverage": "read; runtime and implementation not verified"
+    },
+    {
+      "id": "mod-management",
+      "url": "https://docs.rsnl.gg/mod-management",
+      "checked_at": "2026-11-17",
+      "artifact_sha256": "8c8e63eea35733df3694db2fc01967d11eca94a4f8af6dca0a010181d385407c",
+      "bytes": 92308,
+      "evidence_kind": "official-documentation",
+      "coverage": "read; runtime and implementation not verified"
+    },
+    {
+      "id": "mod-management/actions",
+      "url": "https://docs.rsnl.gg/mod-management/actions",
+      "checked_at": "2026-11-17",
+      "artifact_sha256": "a57b3dd6c98e0854f386b888504d6a2d46da13f67bfc53821c42b533710de577",
+      "bytes": 114251,
+      "evidence_kind": "official-documentation",
+      "coverage": "read; runtime and implementation not verified"
+    },
+    {
+      "id": "mod-management/adding-mods",
+      "url": "https://docs.rsnl.gg/mod-management/adding-mods",
+      "checked_at": "2026-11-17",
+      "artifact_sha256": "6fbdf3e74bb8c6b9b8e653531efca8f68814a5023e0f0b47bbd1d6e3dc6f87d9",
+      "bytes": 108800,
+      "evidence_kind": "official-documentation",
+      "coverage": "read; runtime and implementation not verified"
+    },
+    {
+      "id": "mod-management/deployment",
+      "url": "https://docs.rsnl.gg/mod-management/deployment",
+      "checked_at": "2026-11-17",
+      "artifact_sha256": "d5d8ce080225c2f41149c683bdc316030b1dbbdb0dc30ff5d54970d6d26f8644",
+      "bytes": 101799,
+      "evidence_kind": "official-documentation",
+      "coverage": "read; runtime and implementation not verified"
+    },
+    {
+      "id": "mod-management/organization",
+      "url": "https://docs.rsnl.gg/mod-management/organization",
+      "checked_at": "2026-11-17",
+      "artifact_sha256": "655ab99d559efd17fbad99c8c6ffb220eeff88b3eef18f6cf252640023f5fc1b",
+      "bytes": 99040,
+      "evidence_kind": "official-documentation",
+      "coverage": "read; runtime and implementation not verified"
+    },
+    {
+      "id": "mod-management/profiles",
+      "url": "https://docs.rsnl.gg/mod-management/profiles",
+      "checked_at": "2026-11-17",
+      "artifact_sha256": "d0505960699b2894d06268bde6ea182276d1dff87f6d86a73ba6b9af004622ea",
+      "bytes": 87796,
+      "evidence_kind": "official-documentation",
+      "coverage": "read; runtime and implementation not verified"
+    },
+    {
+      "id": "quick-start",
+      "url": "https://docs.rsnl.gg/quick-start",
+      "checked_at": "2026-11-17",
+      "artifact_sha256": "6422446e4b19749ab40435e4a1349414ef29996278b4f363965aeb26afb10fbf",
+      "bytes": 93920,
+      "evidence_kind": "official-documentation",
+      "coverage": "read; runtime and implementation not verified"
+    }
+  ],
+  "findings": [
+    {
+      "id": "library-profile-boundary",
+      "source_ids": [
+        "mod-management/profiles"
+      ],
+      "documented_observation": "Library metadata and files are shared; membership, enable state, options and load order belong to a profile.",
+      "proposed_application": "Use normalized content/version records and separate profile state, not duplicate files for every tab.",
+      "acceptance": "Rename a shared item in two profiles; independently change options; removing one profile preserves files and the other profile.",
+      "adoption_status": "proposed-not-implemented"
+    },
+    {
+      "id": "deployment-is-not-selection",
+      "source_ids": [
+        "mod-management/deployment"
+      ],
+      "documented_observation": "Selecting a profile does not install it; the game reflects the last successful deployment.",
+      "proposed_application": "Expose selected profile, deployed profile and dirty changes separately. Persist an operation journal and snapshot digest before file writes.",
+      "acceptance": "Switch profiles without deploy; UI must not claim the selected profile is active in-game. Interrupted deployment becomes unknown/partial, never green.",
+      "adoption_status": "proposed-not-implemented"
+    },
+    {
+      "id": "cancellation-recovery",
+      "source_ids": [
+        "mod-management/deployment"
+      ],
+      "documented_observation": "Documentation warns that cancelling during copy can leave game files inconsistent; removal of a deployed mod triggers a purge.",
+      "proposed_application": "Improve with scoped ownership manifests, staged writes, recoverable backups and a preview of removal effects. Do not adopt broad destructive purge blindly.",
+      "acceptance": "Inject failure at every copy/rename boundary; preserve unmanaged files; restart must offer resume or rollback with honest status.",
+      "adoption_status": "proposed-not-implemented"
+    },
+    {
+      "id": "visual-state",
+      "source_ids": [
+        "mod-management"
+      ],
+      "documented_observation": "Thumbnail rings distinguish deployed, changed and not deployed; images can be previewed.",
+      "proposed_application": "Carry visual deployment state into existing health/media pillars, with text and accessible icons, not color alone. Unknown and failed are additional states.",
+      "acceptance": "Keyboard and screen-reader inspection identifies every state; stale external edits cannot retain a verified indicator.",
+      "adoption_status": "proposed-not-implemented"
+    },
+    {
+      "id": "organizing-minimap",
+      "source_ids": [
+        "mod-management/organization"
+      ],
+      "documented_observation": "Per-view separators have colors, section tint, exportable styles and a scroll minimap. Search and tag filters coexist.",
+      "proposed_application": "Use stable IDs and scroll anchors in virtualized lists; provide saved views, tabs, separators and section navigation on deep black surfaces.",
+      "acceptance": "At 100k synthetic records preserve selected IDs and scroll anchor after filter, toggle, update and separator move; measure p95 frame/search latency.",
+      "adoption_status": "proposed-not-implemented"
+    },
+    {
+      "id": "explicit-bulk-actions",
+      "source_ids": [
+        "mod-management/actions"
+      ],
+      "documented_observation": "Selection supports batch operations; rapid toggles are batched, and mixed enabled selection follows a majority rule.",
+      "proposed_application": "Keep batching, but prefer explicit Enable selected / Disable selected instead of surprising majority toggles. Snapshot selected IDs before asynchronous work.",
+      "acceptance": "Change search during batch action; only original chosen IDs change. Repeated clicks do not duplicate jobs.",
+      "adoption_status": "proposed-not-implemented"
+    },
+    {
+      "id": "conflict-context",
+      "source_ids": [
+        "mod-management/actions"
+      ],
+      "documented_observation": "Conflict details identify overlapping patches, their order and option/sub-option location; overlap is advisory rather than proof of incompatibility.",
+      "proposed_application": "Separate path overlap from semantic record conflict, dependency failure and community crash evidence. Preserve user override for advisories.",
+      "acceptance": "Two intentional overrides remain runnable; disabled option files do not create active conflicts; every alert exposes its evidence and winning record/file.",
+      "adoption_status": "proposed-not-implemented"
+    },
+    {
+      "id": "download-state-machine",
+      "source_ids": [
+        "mod-management/adding-mods"
+      ],
+      "documented_observation": "Download queue distinguishes pending, running, complete and failed; completed update controls become install actions.",
+      "proposed_application": "Keep fetched, verified, staged, installed and deployed states separate. Preserve provenance and resumability; do not equate successful transfer with successful installation.",
+      "acceptance": "Simulate auth expiry, duplicate NXM input, corrupt archive, restart and update conflict; no false installed badge or lost retry details.",
+      "adoption_status": "proposed-not-implemented"
+    },
+    {
+      "id": "portable-loadouts",
+      "source_ids": [
+        "lobby/mod-sync"
+      ],
+      "documented_observation": "Lobby loads retain ordering and option choices, but share only mods with Nexus identifiers.",
+      "proposed_application": "Adopt provider-neutral, content-version-pinned loadout manifests with source capability adapters, without redistributing restricted payloads.",
+      "acceptance": "A mixed-source loadout resolves exact versions or reports unavailable; local modifications and missing rights remain visible instead of silently substituted.",
+      "adoption_status": "proposed-not-implemented"
+    },
+    {
+      "id": "builder-data-separation",
+      "source_ids": [
+        "mod-builder"
+      ],
+      "documented_observation": "Current builder separates folder structure from option definitions and keeps editor state apart from built manifests.",
+      "proposed_application": "Separate reusable recipe/asset graphs, presentation state and executable package manifests in Athena Foundry.",
+      "acceptance": "Export/import preserves editor layout and option mapping while clean distributable output excludes editor-only metadata.",
+      "adoption_status": "proposed-not-implemented"
+    },
+    {
+      "id": "manifest-compatibility",
+      "source_ids": [
+        "mod-builder/manifest"
+      ],
+      "documented_observation": "Manifest V1 identifies packs by GUID and uses relative include paths. Description is required but may be empty.",
+      "proposed_application": "Implement a separately tested compatibility adapter after obtaining package fixtures; validate archive traversal, case collisions and missing includes in addition to documented fields.",
+      "acceptance": "Owned fixture round-trip preserves GUID, empty descriptions, included paths and options; malicious absolute, parent traversal or symlink escapes are rejected.",
+      "adoption_status": "proposed-not-implemented"
+    },
+    {
+      "id": "draft-versus-build",
+      "source_ids": [
+        "mod-builder/projects"
+      ],
+      "documented_observation": "Project export can preserve work that would fail build validation; hard errors and optional warnings are different.",
+      "proposed_application": "Save imperfect drafts without losing ideas; validate before execution/export and make warnings actionable. Keep schema migration reversible.",
+      "acceptance": "Save an incomplete draft, restart, correct it and build; migration failure leaves original intact; warning override does not bypass structural errors.",
+      "adoption_status": "proposed-not-implemented"
+    },
+    {
+      "id": "option-relations",
+      "source_ids": [
+        "mod-builder/options"
+      ],
+      "documented_observation": "Options map folders independently; folder renaming updates include paths and deletion clears affected mappings.",
+      "proposed_application": "Represent relationships with stable references and explicit missing-target diagnostics, not fragile display-name joins.",
+      "acceptance": "Rename a nested folder shared by options and verify all relations; delete/undo restores mapping without silently selecting a different asset.",
+      "adoption_status": "proposed-not-implemented"
+    },
+    {
+      "id": "teaching-in-context",
+      "source_ids": [
+        "quick-start"
+      ],
+      "documented_observation": "Replayable tutorial follows import, downloads, profile organization, deployment and launch.",
+      "proposed_application": "Use resumable task-specific walkthroughs with owned fixtures and verifiable checkpoints; show real progress rather than scripted success.",
+      "acceptance": "Cancel tutorial halfway, return later, and resume from actual stored state without modifying a real game.",
+      "adoption_status": "proposed-not-implemented"
+    }
+  ],
+  "release_artifact": {
+    "url": "https://github.com/Orbit-Studios/hd2arsenal-release/releases/download/v0.37.2/HD2Arsenal-Setup-0.37.2.exe",
+    "reported_sha256": "8b29f9a75e171a6b3059b0e4f673c12e099d09bfe349b5dcb5e70736ecbdcc57",
+    "hash_status": "reported by GitHub expanded-assets page; no local bytes verified",
+    "source_url": "https://github.com/Orbit-Studios/hd2arsenal-release/releases/expanded_assets/v0.37.2"
+  }
+}

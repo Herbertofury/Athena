@@ -4,18 +4,18 @@
   "review_interval_days": 90,
   "scope": "Research work queue. Unknown fields and review age do not establish inactivity, insecurity or inferior quality.",
   "counts": {
-    "applications": 1069,
-    "new_applications": 964,
+    "applications": 1070,
+    "new_applications": 965,
     "preserved_pc_records": 105,
     "preserved_cleanup_records": 66,
     "baseline_categories": 42,
     "categories": 373,
     "families": 10,
-    "source_urls": 4355,
-    "alternative_links": 2476,
+    "source_urls": 4361,
+    "alternative_links": 2478,
     "unresolved_alternative_mentions": 73,
     "legacy_records_enriched": 68,
-    "use_cases": 1958,
+    "use_cases": 1960,
     "decision_guides": 203,
     "capability_assertions": 9,
     "applications_with_documented_capabilities": 9,
@@ -29,7 +29,7 @@
       "creative": 142,
       "development": 185,
       "files": 65,
-      "gaming": 55,
+      "gaming": 56,
       "networking": 92,
       "productivity": 151,
       "science": 208,
@@ -39,25 +39,25 @@
     "by_platform": {
       "Bootable": 7,
       "FreeBSD": 58,
-      "Linux": 817,
+      "Linux": 818,
       "Web": 110,
-      "Windows": 893,
+      "Windows": 894,
       "macOS": 749
     },
     "by_maintenance": {
       "active": 650,
       "discontinued": 2,
-      "unverified": 417
+      "unverified": 418
     },
     "by_license": {
       "mixed": 49,
       "open-source": 824,
       "proprietary": 150,
       "source-available": 17,
-      "unknown": 29
+      "unknown": 30
     },
     "by_pricing": {
-      "free": 596,
+      "free": 597,
       "freemium": 118,
       "mixed": 51,
       "paid": 35,
@@ -65,7 +65,7 @@
       "unknown": 251
     }
   },
-  "records_needing_research": 570,
+  "records_needing_research": 571,
   "refresh_queue": [
     {
       "app_id": "010-editor",
@@ -2263,6 +2263,17 @@
         "distribution pricing unresolved",
         "dated maintenance evidence unresolved",
         "preserved record needs field-specific source mapping: license, platforms"
+      ]
+    },
+    {
+      "app_id": "hd2-arsenal",
+      "name": "HD2 Arsenal",
+      "origin": "data/software/arsenal-expanded.json",
+      "latest_source_review": "2026-11-17",
+      "review_age_days": 0,
+      "reasons": [
+        "license classification unresolved",
+        "dated maintenance evidence unresolved"
       ]
     },
     {

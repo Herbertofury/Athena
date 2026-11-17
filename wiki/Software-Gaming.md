@@ -4,7 +4,7 @@ Manage, modify, create, stream and preserve games.
 
 [Browse in Athena](https://herbertofury.github.io/Athena/#software?family=gaming) · [Catalog](Software-Catalog) · [Method](Software-Methodology)
 
-55 applications. Reviewed 2026-11-16; individual records identify inherited research.
+56 applications. Reviewed 2026-11-16; individual records identify inherited research.
 
 ## Console emulation
 
@@ -613,6 +613,20 @@ Minecraft Java launcher with separate instances, mod management, and modpack imp
 
 [Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=gaming%2Fmod-managers)
 
+### HD2 Arsenal
+
+Helldivers 2 mod library, profiles, deployment, pack builder and lobby loadout coordination. Documentation reviewed; installation and implementation not verified.
+
+- **Platforms:** Windows, Linux. **License:** Application license unverified; official release repository says development is private. **Pricing model:** free.
+- **Compatibility details:** Official site lists Windows, Linux and SteamOS; no installation tested.
+- **Pricing details:** Official site describes Arsenal as free. Nexus Premium-gated integrations have separate account requirements.
+- **Pick for:** Inspecting Helldivers 2-specific management workflows and source-attributed design patterns.
+- **Compare when:** Verify installation, compatibility and recovery on owned fixtures before daily use; other games need their own adapters.
+- **Strengths:** Explicit Library/profile separation; Visual deployment and organization affordances
+- **Limitations:** Release-only public repository, not application source; No independent runtime, performance or security verification; Lobby mod sharing documented as Nexus-identity-dependent; Interrupted deploy can leave inconsistent files according to documentation
+- **Maintenance:** unverified — Official release list shows 0.37.2; release activity does not establish support quality. ([evidence](https://github.com/Orbit-Studios/hd2arsenal-release/releases))
+- [Official project](https://rsnl.gg/) · [Official installation / downloads](https://rsnl.gg/downloads) · [Repository](https://github.com/Orbit-Studios/hd2arsenal-release)
+- **Sources:** [Official identity, platform and free-distribution claims](https://rsnl.gg/) (2026-11-17; identity, platforms, pricing, downloads); [Official management workflows](https://docs.rsnl.gg/mod-management) (2026-11-17; features); [Official release-only repository; private development](https://github.com/Orbit-Studios/hd2arsenal-release) (2026-11-17; identity); [Official pack-builder workflow](https://docs.rsnl.gg/mod-builder) (2026-11-17; features); [Official lobby synchronization workflow](https://docs.rsnl.gg/lobby/mod-sync) (2026-11-17; features); [Athena documented workflow study and adoption tests](https://github.com/Herbertofury/Athena/blob/study/hd2-arsenal-20261117/research/hd2-arsenal-study-2026-11-17/README.md) (2026-11-17; features)
 ### Mod Organizer 2
 
 Mod manager using a virtual filesystem for supported games, with profiles and conflict inspection.
