@@ -43,3 +43,43 @@ classification and cue IDs, learning objectives and an original safe exercise. I
 not invent analysis or grant mastery. Native review drafts reset on successful import,
 Clear or navigation; export before leaving. Channel acquisition and visual/video
 evidence are still pending.
+
+## Channel catalogue coverage, not transcript acquisition
+
+`python3 scripts/video_channel.py channel-export.json --output new-study-queue.json`
+validates an explicitly supplied, bounded API export. Input is an object containing
+`channel` (one `channels.list` item with ID and `contentDetails.relatedPlaylists.uploads`)
+and `pages` in request order. Each page contains `playlist_id`, `request_page_token`
+(null for the first page), and the original `playlistItems.list` `response` requested
+with `part=snippet,contentDetails` and up to 50 results. Set `full_response_export: true`
+only when the response is unabridged (no partial `fields` projection or removed
+pagination fields). Otherwise absent continuation metadata is explicitly unverified,
+not assumed terminal. This flag is an exporter assertion, not independent verification.
+Retain this export privately.
+No credentials, API request, media fetch or social follow occurs in this offline tool.
+It refuses overwrite and does not fabricate absent pages.
+
+The queue uses `contentDetails.videoId` (or `snippet.resourceId.videoId`), not the
+playlist-item ID; it rejects conflicting identities, broken token chains, repeated
+items/tokens, wrong playlists and non-playlist responses. Missing video identities
+remain unresolved entries. A pending next token means more pages are required.
+Even a terminal response means only API-visible exported uploads, not every
+historical/private/deleted video or a temporally atomic snapshot. A refreshed crawl
+must reconcile changes rather than silently claim completeness. Imported videos
+start `not-acquired` / `not-studied`; neither metadata nor a caption-track listing
+contains a studied transcript.
+
+Official references reviewed 2026-11-17:
+- [Search list](https://developers.google.com/youtube/v3/docs/search/list): channelId
+  with type=video has a 500-result ceiling unless specified ownership filters apply.
+  Do not use this as an exhaustive channel inventory.
+- [Sample requests](https://developers.google.com/youtube/data/sample_requests):
+  discover the uploads playlist through channel contentDetails and enumerate it.
+- [Playlist items](https://developers.google.com/youtube/v3/docs/playlistItems/list):
+  process pagination and distinguish item identity from video identity.
+- [Caption listing](https://developers.google.com/youtube/v3/docs/captions/list):
+  track metadata is not caption content; authorized download is a separate operation.
+
+This implementation still lacks authenticated API acquisition, durable refresh jobs,
+full BugX enumeration, caption-export materialization and channel-wide progress UI.
+The two documented video studies remain the only transcript studies claimed here.

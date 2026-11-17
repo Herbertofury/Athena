@@ -3,6 +3,8 @@ on:
   pull_request:
     paths:
       - 'scripts/video_learning.py'
+      - 'scripts/video_channel.py'
+      - 'tests/video_channel_test.py'
       - 'tests/video_learning_test.py'
       - 'tests/video-workspace.test.cjs'
       - 'dist/workspaces/video/**'
@@ -19,6 +21,7 @@ jobs:
         with:
           python-version: '3.12'
       - run: python -m unittest discover -s tests -p video_learning_test.py -v
+      - run: python -m unittest discover -s tests -p video_channel_test.py -v
       - uses: actions/setup-node@v4
         with:
           node-version: '24'
