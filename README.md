@@ -22,6 +22,8 @@ Read the [product vision](wiki/Athena-Vision.md) and [actual integration evidenc
 
 ## Start here
 
+- [Online income research](research/online-income-2026-11-17/README.md): verified sources, opportunity costs, a no-spend pilot and explicit unverified trading claims.
+
 - [Software discovery](https://herbertofury.github.io/Athena/#software): integrated task search, platform/license/pricing filters, conditional recommendations and side-by-side comparison. [Catalog and live Wiki](https://github.com/Herbertofury/Athena/wiki/Software-Catalog) · [Sourced database](data/software/) · [Methodology](wiki/Software-Methodology.md).
 - [Learning library](docs/README.md): 13 certificate pathways, shared lessons and guided capstones.
 - [Native Foundry profile](native/foundry/README.md): optional local authoring storage, recovery and explicit local media controls.
