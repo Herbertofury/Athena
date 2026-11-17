@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "reviewed_at": "2026-11-17",
+  "scope": "Independent primary-source checks prompted by a ChatGPT Pro security/privacy research pass. Not hands-on testing or a security ranking.",
+  "checks": [
+    {
+      "id": "SEC-SOURCE-1",
+      "claim": "Windows Sandbox default networking/clipboard enabled",
+      "source_url": "https://learn.microsoft.com/en-us/windows/security/application-security/application-isolation/windows-sandbox/windows-sandbox-configure-using-wsb-file",
+      "evidence_method": "official documentation retrieved using web search",
+      "verification_status": "source-supported",
+      "execution_tested": false
+    },
+    {
+      "id": "SEC-SOURCE-2",
+      "claim": "VeraCrypt BSD platform support, qualified by version",
+      "source_url": "https://veracrypt.io/en/Supported%20Operating%20Systems.html",
+      "evidence_method": "official documentation retrieved using web search",
+      "verification_status": "source-supported",
+      "execution_tested": false
+    },
+    {
+      "id": "SEC-SOURCE-3",
+      "claim": "SDelete 2.06 released March 5 2026",
+      "source_url": "https://learn.microsoft.com/en-us/sysinternals/downloads/sdelete",
+      "evidence_method": "official documentation retrieved using web search",
+      "verification_status": "source-supported",
+      "execution_tested": false
+    },
+    {
+      "id": "SEC-SOURCE-4",
+      "claim": "ClamAV 1.5.4 in official current EOL/version documents",
+      "source_url": "https://docs.clamav.net/faq/faq-eol.html",
+      "evidence_method": "official documentation retrieved using web search",
+      "verification_status": "source-supported",
+      "execution_tested": false
+    },
+    {
+      "id": "SEC-SOURCE-5",
+      "claim": "VeraCrypt portable mode on Windows needs administrator privileges, can leave registry evidence and uses a driver. Driver unloading has documented exceptions.",
+      "source_url": "https://veracrypt.io/en/Portable%20Mode.html",
+      "evidence_method": "official documentation opened and read",
+      "verification_status": "source-supported",
+      "execution_tested": false
+    },
+    {
+      "id": "SEC-SOURCE-6",
+      "claim": "KeePassXC stores settings and application state separately; KPXC_CONFIG and KPXC_CONFIG_LOCAL can override their paths. The selected KDBX database location alone does not prove all state is portable.",
+      "source_url": "https://keepassxc.org/docs/KeePassXC_UserGuide",
+      "evidence_method": "official user guide, User Settings Locations and Storing Your Database sections read",
+      "verification_status": "source-supported; final sentence is implementation inference",
+      "execution_tested": false
+    }
+  ],
+  "unknowns": [
+    "Complete residue behavior across launch, update, crash and uninstall",
+    "Current platform-specific driver/service and admin boundaries beyond the cited documentation",
+    "Actual performance, reliability, malware detection or exploit resistance",
+    "All 25 Pro-generated product writeups require individual claim review before catalog promotion"
+  ],
+  "portability_contract": {
+    "distinct_fields": [
+      "binary",
+      "database",
+      "configuration",
+      "application_state",
+      "cache",
+      "logs",
+      "temporary_files",
+      "registry_residue",
+      "drivers",
+      "services",
+      "admin_required"
+    ],
+    "rule": "Never collapse an extracted executable or selectable vault location into an unqualified portable=true claim.",
+    "test_status": "not-run",
+    "suggested_tests": [
+      "Use only synthetic credentials and disposable test data on isolated owned test machines.",
+      "Set data/configuration/state paths explicitly; inventory writes outside the portable folder during first launch, normal use, shutdown, restart and update.",
+      "Move the complete folder to a second compatible machine and verify configuration and synthetic data survive.",
+      "Inspect driver/service/registry effects separately; retain a documented OS-integration exception rather than promising zero residue.",
+      "Test backup restoration separately from synchronization and encryption."
+    ]
+  }
+}
