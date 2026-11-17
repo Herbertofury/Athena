@@ -30,3 +30,12 @@ Tests: `python3 -m unittest discover -s tests -p video_learning_test.py -v`.
 The first primary-source study is [BugX's backup recovery narrative](bugx-backup-case.md), with timestamp references, fictionalized-story status and an original exercise proposal. This is one video, not channel-wide completion.
 
 A second [automation identity and failed-update case](bugx-identity-case.md) supplies failure-path exercise ideas and records a visible transcript gap. Both studies distinguish illustrative stories from verified incident reports.
+
+## Native study desk
+
+The `#video` native workspace opens the normalized importer JSON in memory only,
+searches every cue and renders 50 at a time with original timestamp links. It never
+loads source media automatically, uploads captions, persists them in browser storage,
+or grants curriculum credit. Clear/navigation invalidates pending imports. Exported
+JSON remains on the user's disk. The Python reviewer proposal flow remains separate;
+channel acquisition, native review authoring and visual/video evidence are still pending.
