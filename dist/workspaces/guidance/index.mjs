@@ -1,3 +1,4 @@
+import {attachConsumerAudit} from './consumer-audit.mjs';
 import {validateCatalog,findDocuments,exportPacket,exportMarkdown} from './model.mjs';
 export async function mount({container,search='',theme='dark',signal,state={},setState=()=>true}={}){
  const root=container.shadowRoot||container.attachShadow({mode:'open'}),cleanup=[],urls=new Set();let disposed=false,catalog=null,query=search,selected=new Set(),current='',saved=true;
@@ -21,6 +22,7 @@ export async function mount({container,search='',theme='dark',signal,state={},se
  const status=element('p','','status');status.setAttribute('role','status');status.setAttribute('aria-live','polite');const columns=element('div',undefined,'columns'),list=element('div',undefined,'standards'),reader=element('article',undefined,'reader');list.setAttribute('aria-label','Guidance standards');reader.setAttribute('aria-label','Selected standard');columns.append(list,reader);
  const note=element('details',undefined,'boundary');note.append(element('summary','What this does and does not do'),element('p','This reader and its exports do not modify any repository, install Skills, execute guidance or grant access. Existing Agent-Foundry consumers keep their known-good pins pending reviewed migration. Full source migration and repository deletion readiness are not claimed.'));
  shell.replaceChildren(intro,bar,status,columns,note);
+ const auditHost=element('section',undefined,'boundary');shell.append(auditHost);const auditView=attachConsumerAudit({host:auditHost,signal});cleanup.push(()=>auditView.unmount());
  function persist(){saved=setState({current,selected:[...selected]})!==false;}
  function updateStatus(){status.textContent=`${selected.size} selected · ${findDocuments(catalog,query).length} of ${catalog.documents.length} standards match.`+(saved?' Selection is saved in this browser.':' Selection could not be saved. Export it before leaving this page.');json.disabled=markdown.disabled=selected.size===0;}
  function showDocument(){const d=catalog.documents.find(d=>d.id===current);reader.replaceChildren();if(!d)return;const title=element('h3',d.title);const link=element('a','View canonical source');link.href=d.sourceUrl;link.target='_blank';link.rel='noopener noreferrer';reader.append(title,link,element('p',`${d.sourcePath} · SHA-256 ${d.sha256}`,'digest'));
