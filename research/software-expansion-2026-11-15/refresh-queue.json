@@ -4,18 +4,18 @@
   "review_interval_days": 90,
   "scope": "Research work queue. Unknown fields and review age do not establish inactivity, insecurity or inferior quality.",
   "counts": {
-    "applications": 1069,
-    "new_applications": 964,
+    "applications": 1070,
+    "new_applications": 965,
     "preserved_pc_records": 105,
     "preserved_cleanup_records": 66,
     "baseline_categories": 42,
     "categories": 373,
     "families": 10,
-    "source_urls": 4355,
-    "alternative_links": 2476,
-    "unresolved_alternative_mentions": 73,
+    "source_urls": 4360,
+    "alternative_links": 2478,
+    "unresolved_alternative_mentions": 74,
     "legacy_records_enriched": 68,
-    "use_cases": 1958,
+    "use_cases": 1961,
     "decision_guides": 203,
     "capability_assertions": 9,
     "applications_with_documented_capabilities": 9,
@@ -27,7 +27,7 @@
     "by_family": {
       "ai": 28,
       "creative": 142,
-      "development": 185,
+      "development": 186,
       "files": 65,
       "gaming": 55,
       "networking": 92,
@@ -39,25 +39,25 @@
     "by_platform": {
       "Bootable": 7,
       "FreeBSD": 58,
-      "Linux": 817,
+      "Linux": 818,
       "Web": 110,
-      "Windows": 893,
-      "macOS": 749
+      "Windows": 894,
+      "macOS": 750
     },
     "by_maintenance": {
       "active": 650,
       "discontinued": 2,
-      "unverified": 417
+      "unverified": 418
     },
     "by_license": {
       "mixed": 49,
-      "open-source": 824,
+      "open-source": 825,
       "proprietary": 150,
       "source-available": 17,
       "unknown": 29
     },
     "by_pricing": {
-      "free": 596,
+      "free": 597,
       "freemium": 118,
       "mixed": 51,
       "paid": 35,
@@ -65,7 +65,7 @@
       "unknown": 251
     }
   },
-  "records_needing_research": 570,
+  "records_needing_research": 571,
   "refresh_queue": [
     {
       "app_id": "010-editor",
@@ -4412,6 +4412,16 @@
       ]
     },
     {
+      "app_id": "rea",
+      "name": "REA: Reverse Engineer Anything",
+      "origin": "data/software/rea-expanded.json",
+      "latest_source_review": "2026-11-17",
+      "review_age_days": 0,
+      "reasons": [
+        "dated maintenance evidence unresolved"
+      ]
+    },
+    {
       "app_id": "realityscan-desktop",
       "name": "RealityScan Desktop",
       "origin": "data/software/creative-wave2-expanded.json",
@@ -6075,6 +6085,12 @@
       "name": "Hamlib",
       "mentioned_by": [
         "flrig"
+      ]
+    },
+    {
+      "name": "IDA",
+      "mentioned_by": [
+        "rea"
       ]
     },
     {

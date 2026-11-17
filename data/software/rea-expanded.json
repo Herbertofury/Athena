@@ -1,0 +1,124 @@
+{
+  "schema_version": 1,
+  "reviewed_at": "2026-11-17",
+  "applications": [
+    {
+      "id": "rea",
+      "name": "REA: Reverse Engineer Anything",
+      "aliases": [
+        "REA",
+        "rea-agents"
+      ],
+      "family": "development",
+      "category": "reverse-engineering",
+      "summary": "Local CLI and MCP orchestration for source, binary and application investigation with evidence records and explicit unresolved questions.",
+      "license": "MIT (REA); external engines and analyzed artifacts retain separate terms",
+      "license_kind": "open-source",
+      "pricing_model": "free",
+      "pricing_notes": "REA source is MIT; optional external commercial engines require their own licenses. No paid engine entitlement included.",
+      "platforms": [
+        "Windows",
+        "macOS",
+        "Linux"
+      ],
+      "platform_notes": "Provider and operation support differs by host. Read pinned provider prerequisites; this study did not run installers or engines.",
+      "official_url": "https://rea.tools/",
+      "download_url": "https://github.com/morluto/rea",
+      "repository_url": "https://github.com/morluto/rea",
+      "features": [
+        "CLI and MCP sharing binary-session composition",
+        "Provider-backed binary investigation and static application analysis",
+        "Digest-bound evidence and residual unknown history",
+        "Progressive tool discovery and lazy provider loading",
+        "Static/runtime evidence reconciliation"
+      ],
+      "strengths": [
+        "Explicit evidence and unresolved-question models",
+        "Separates transport adapters from analysis providers"
+      ],
+      "limitations": [
+        "Selected source review only; no independent runtime or security certification",
+        "Depends on separately installed providers for many operations",
+        "Static evidence does not prove full behavior or recovered source equivalence",
+        "Per-platform and external engine restrictions apply"
+      ],
+      "use_cases": [
+        "authorized reverse engineering",
+        "application behavior investigation",
+        "source-backed feature research"
+      ],
+      "tags": [
+        "reverse-engineering",
+        "evidence",
+        "mcp",
+        "static-analysis",
+        "binary-analysis",
+        "research"
+      ],
+      "alternatives": [
+        "Ghidra",
+        "IDA",
+        "Cutter"
+      ],
+      "recommendation": {
+        "pick_for": "An authorized software investigation needs a consistent agent-facing interface and evidence trail across analysis providers.",
+        "compare_when": "Use underlying engines directly when their interactive workflow is more appropriate; benchmark REA with owned fixtures first."
+      },
+      "maintenance": {
+        "status": "unverified",
+        "checked_at": "2026-11-17",
+        "note": "Source snapshot d5a942177fad030d3caf0f8d39856c116e3e5cda, package 6.9.0 inspected; no release installation or ongoing-maintenance guarantee.",
+        "source_url": "https://github.com/morluto/rea/blob/d5a942177fad030d3caf0f8d39856c116e3e5cda/package.json"
+      },
+      "sources": [
+        {
+          "url": "https://github.com/morluto/rea/blob/d5a942177fad030d3caf0f8d39856c116e3e5cda/README.md",
+          "label": "Pinned official scope and provider prerequisites",
+          "checked_at": "2026-11-17",
+          "supports": [
+            "identity",
+            "features",
+            "platforms",
+            "downloads"
+          ]
+        },
+        {
+          "url": "https://github.com/morluto/rea/blob/d5a942177fad030d3caf0f8d39856c116e3e5cda/LICENSE",
+          "label": "REA MIT license",
+          "checked_at": "2026-11-17",
+          "supports": [
+            "license",
+            "pricing"
+          ]
+        },
+        {
+          "url": "https://github.com/morluto/rea/blob/d5a942177fad030d3caf0f8d39856c116e3e5cda/THIRD_PARTY_NOTICES.md",
+          "label": "Separate engine and dependency terms",
+          "checked_at": "2026-11-17",
+          "supports": [
+            "license",
+            "pricing"
+          ]
+        },
+        {
+          "url": "https://github.com/morluto/rea/blob/d5a942177fad030d3caf0f8d39856c116e3e5cda/package.json",
+          "label": "Official package identity and version",
+          "checked_at": "2026-11-17",
+          "supports": [
+            "identity",
+            "maintenance"
+          ]
+        },
+        {
+          "url": "https://github.com/Herbertofury/Athena/blob/feat/rea-source-study-20261117/research/rea-source-study-2026-11-17/README.md",
+          "label": "Athena original source study, adoption backlog and teaching exercise",
+          "checked_at": "2026-11-17",
+          "supports": [
+            "features"
+          ]
+        }
+      ],
+      "evidence_status": "official-docs-reviewed"
+    }
+  ]
+}
