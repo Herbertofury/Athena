@@ -1,0 +1,43 @@
+{
+  "reviewed_at": "2026-11-17",
+  "product_id": "powertoys",
+  "release": {
+    "tag": "v0.102.3101",
+    "published_at": "2026-11-06T09:54:30Z",
+    "prerelease": false,
+    "url": "https://github.com/microsoft/PowerToys/releases/tag/v0.102.3101"
+  },
+  "sources": [
+    {
+      "url": "https://github.com/microsoft/PowerToys/pull/51789",
+      "supports": "Pairing trust-check change and author-reported unavailable build/inconclusive regression reproduction"
+    },
+    {
+      "url": "https://github.com/microsoft/PowerToys/pull/51940",
+      "supports": "Maintainer explanation of managed/native diagnostic reporting repair"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/windows/powertoys/install",
+      "supports": "Windows minimum versions, x64/ARM64, installation channels; not Windows lifecycle policy"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/microsoft/PowerToys/v0.102.3101/LICENSE",
+      "supports": "Release-pinned MIT license; component reuse needs separate review"
+    }
+  ],
+  "evidence_limitations": [
+    "No installation, native test, independent security audit or performance comparison",
+    "Maintainer statements are not reproduced results",
+    "Stable hotfix is distinct from preview-channel and Workspaces studies"
+  ],
+  "related_active_work": [
+    {
+      "pull_request": 287,
+      "scope": "Workspaces catalog enrichment; do not overwrite or duplicate its generated catalog"
+    },
+    {
+      "pull_request": 291,
+      "scope": "Development preview chart study; do not promote to stable"
+    }
+  ]
+}
