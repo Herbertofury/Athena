@@ -42,3 +42,31 @@ source adapters, cancellation and privacy boundary. Actual code inspection, lice
 reuse decisions and same-workload comparisons remain required for adoption. Native
 startup queue does not complete those steps. Persistent review outcomes, broader
 project coverage and direct task-scoped source refresh remain future work.
+
+## Fresh public GitHub backend (explicit CLI, not automatic startup network)
+
+`scripts/refresh_challenger_sources.py` is a callable Python backend and command-line
+entry point for bounded live source metadata. It reuses existing URL-audit status
+classification. It accepts only explicit public repository IDs or an explicit public
+search query; it never reads goals, chat, local repositories or credentials.
+
+```sh
+python3 scripts/refresh_challenger_sources.py --repo rust-lang/rust --refresh --output new-review.json
+python3 scripts/refresh_challenger_sources.py --public-query 'browser sidebar rust' --refresh --output new-search.json
+```
+
+The switch explicitly sends only those IDs/query words to GitHub. Fixed HTTPS API
+host, no redirects, no authorization token, one-megabyte responses, up to three
+repositories and four observations each (plus one discovery request), per-request
+socket timeout and30-second request-admission budget. Socket timeouts are not a hard
+whole-process deadline. Results distinguish denied/rate-limited/missing/unknown and
+budget exhaustion without inventing an empty result or a license permission.
+
+Receipts retain source URLs, observation times and response digests. Repository
+identity/public visibility is checked before follow-ups. Commit SHA pins the license
+observation; release tag/date is independently observed via GitHub's latest-release
+endpoint, not assumed equal to the default-branch commit. `NOASSERTION`, missing or
+custom licenses remain unreviewed. Source code is not downloaded/executed. Search
+covers only the first three updated matches, not best-quality ranking or exhaustive
+coverage. Output refuses overwrite. The native startup queue does not yet invoke
+this backend or import receipts: both are explicit remaining integration work.
