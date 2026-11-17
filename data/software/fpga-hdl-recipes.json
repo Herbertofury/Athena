@@ -1,0 +1,72 @@
+{
+  "recipes": [
+    {
+      "id": "build-an-open-source-fpga-toolchain",
+      "title": "Build an open-source FPGA toolchain",
+      "description": "Choose a flow by target-device support, HDL dialect, implementation stage and required verification. This guide separates synthesis, place-and-route, formal checking and waveform inspection; a toolchain bundle does not make every device backend production-ready.",
+      "picks": [
+        {
+          "app_id": "oss-cad-suite",
+          "label": "Start with a bundled toolchain",
+          "reason": "Provides coordinated binaries for synthesis, formal verification, place-and-route, programming and testing across Windows, macOS and Linux.",
+          "tradeoff": "Component versions and supported FPGA architectures vary; confirm your board and exact backend before relying on it."
+        },
+        {
+          "app_id": "yosys",
+          "label": "Scriptable RTL synthesis",
+          "reason": "Permissively licensed synthesis framework with Verilog support and a synthesizable SystemVerilog subset.",
+          "tradeoff": "Does not alone provide a complete FPGA implementation flow or universal device support."
+        },
+        {
+          "app_id": "nextpnr",
+          "label": "Open-source implementation",
+          "reason": "Timing-driven place-and-route for several Lattice, Gowin and other documented architectures.",
+          "tradeoff": "Architecture databases and bitstream tools are separate; some backends remain experimental."
+        },
+        {
+          "app_id": "symbiyosys",
+          "label": "Add formal property checking",
+          "reason": "Adds solver-backed formal verification to supported Yosys designs.",
+          "tradeoff": "Results depend on correct assumptions, properties and solver configuration; it is not a simulator."
+        }
+      ]
+    },
+    {
+      "id": "choose-an-hdl-simulator-and-debugger",
+      "title": "Choose an HDL simulator and debugger",
+      "description": "Start with the design language and simulator semantics, then choose a testbench framework and waveform viewer. A verification framework is not a simulator, and a waveform viewer does not execute a design.",
+      "picks": [
+        {
+          "app_id": "ghdl",
+          "label": "VHDL simulation",
+          "reason": "Analyzes, compiles and simulates VHDL with native-code backends on Windows, macOS and Linux.",
+          "tradeoff": "VHDL-2008/2019 support is partial; synthesis integration is experimental."
+        },
+        {
+          "app_id": "icarus-verilog",
+          "label": "Event-driven Verilog simulation",
+          "reason": "Provides a simple compiler-plus-VVP runtime for supported Verilog and a growing SystemVerilog subset.",
+          "tradeoff": "SystemVerilog support is incomplete; it is not a full vendor simulator."
+        },
+        {
+          "app_id": "verilator",
+          "label": "Compiled SystemVerilog and lint",
+          "reason": "Generates C++/SystemC models and supports lint, coverage and compiled simulation workflows.",
+          "tradeoff": "Requires a C++/SystemC harness and is not a traditional event-driven simulator."
+        },
+        {
+          "app_id": "cocotb",
+          "label": "Python testbenches",
+          "reason": "Lets teams write reusable Python testbenches against supported simulators.",
+          "tradeoff": "A compatible simulator and interface are still required; simulator-specific limitations apply."
+        },
+        {
+          "app_id": "gtkwave",
+          "label": "Inspect waveform traces",
+          "reason": "Views common VCD, FST and GHW trace files from HDL simulation runs.",
+          "tradeoff": "It only inspects traces and does not simulate or verify the design."
+        }
+      ]
+    }
+  ]
+}
