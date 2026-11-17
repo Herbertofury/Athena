@@ -18,3 +18,19 @@ export function exportPacket(catalog,ids){
  return {schema:1,kind:'athena-guidance-reference-pack',version:catalog.version,sourceRepository:catalog.sourceRepository,sourceRevision:catalog.sourceRevision,legacySourceCommit:catalog.legacySourceCommit,scope:'Reference only. Does not install instructions, execute tools, grant permissions or override project-owned guidance.',documents};
 }
 export function exportMarkdown(packet){return ['# Athena guidance reference pack',`Version: ${packet.version}`,`Source: ${packet.sourceRepository}`,`Revision identity: ${packet.sourceRevision}`,`Original source commit: ${packet.legacySourceCommit}`,packet.scope,...packet.documents.flatMap(d=>[`\n---\nSource: ${d.sourceUrl}`,`Path: ${d.sourcePath}`,`SHA-256: ${d.sha256}\n`,d.text])].join('\n\n');}
+
+// Verify a detached snapshot before the native reader admits complete standards.
+// A matching catalog hash proves consistency, not publisher authenticity.
+export async function verifyCatalog(value, subtle = globalThis.crypto?.subtle){
+ const checked = validateCatalog(value);
+ const snapshot = {...checked, documents:checked.documents.map(item=>Object.freeze({...item}))};
+ Object.freeze(snapshot.documents);Object.freeze(snapshot);
+ if(!subtle || typeof subtle.digest !== 'function')throw Error('Guidance integrity verification is unavailable. No standards were opened.');
+ const encoder = new TextEncoder();
+ for(const item of snapshot.documents){
+  const digest = await subtle.digest('SHA-256',encoder.encode(item.text));
+  const hex = Array.from(new Uint8Array(digest),byte=>byte.toString(16).padStart(2,'0')).join('');
+  if(hex !== item.sha256)throw Error('Guidance integrity mismatch. No standards were opened.');
+ }
+ return snapshot;
+}
