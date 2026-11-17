@@ -1,0 +1,72 @@
+{
+  "schema": 1,
+  "kind": "athena-public-challenger-source-review",
+  "search": null,
+  "repositories": [
+    {
+      "repository": "rust-lang/rust",
+      "status": "metadata_observed",
+      "commit": {
+        "sha": "5df8c02afdf6b882bc301442cea70f026e3d3974",
+        "source": "https://github.com/rust-lang/rust/commit/5df8c02afdf6b882bc301442cea70f026e3d3974"
+      },
+      "license": {
+        "spdx_id": "NOASSERTION",
+        "name": "Other",
+        "blob_sha": "1b5ec8b78e237b5c3b3d812a7c0a6589d0f7161d",
+        "ref": "5df8c02afdf6b882bc301442cea70f026e3d3974",
+        "source": "https://api.github.com/repos/rust-lang/rust/license?ref=5df8c02afdf6b882bc301442cea70f026e3d3974",
+        "reuse_decision": "unreviewed"
+      },
+      "release": {
+        "tag": "1.100.0",
+        "published_at": "2026-11-12T18:19:42Z",
+        "draft": false,
+        "prerelease": false,
+        "source": "https://api.github.com/repos/rust-lang/rust/releases/latest"
+      },
+      "source": "https://github.com/rust-lang/rust",
+      "archived": false,
+      "default_branch": "main",
+      "pushed_at": "2026-11-17T03:30:44Z"
+    }
+  ],
+  "evidence": [
+    {
+      "status": 200,
+      "outcome": "observed",
+      "sha256": "3fc8126532293ce25894628ca02986d778ccabb15868182a42631262c62233c3",
+      "source": "https://api.github.com/repos/rust-lang/rust",
+      "checked_at": "2026-11-17T04:21:53.541490+00:00"
+    },
+    {
+      "status": 200,
+      "outcome": "observed",
+      "sha256": "74016be38d8e570157e98bfb6cd0864fd9270eb4d9e8a8730e89fa7224c5d31c",
+      "source": "https://api.github.com/repos/rust-lang/rust/commits/main",
+      "checked_at": "2026-11-17T04:21:57.142787+00:00"
+    },
+    {
+      "status": 200,
+      "outcome": "observed",
+      "sha256": "f98451090bbe938b1192760d506660d3c6069a53915e6a7f601edc8f6f601686",
+      "source": "https://api.github.com/repos/rust-lang/rust/license?ref=5df8c02afdf6b882bc301442cea70f026e3d3974",
+      "checked_at": "2026-11-17T04:22:00.268189+00:00"
+    },
+    {
+      "status": 200,
+      "outcome": "observed",
+      "sha256": "0fa5b6048c91795558ca3e60e7954456fe4ce37de34f2ec5dbbcb46efe9c373f",
+      "source": "https://api.github.com/repos/rust-lang/rust/releases/latest",
+      "checked_at": "2026-11-17T04:22:02.742209+00:00"
+    }
+  ],
+  "limitations": [
+    "Public GitHub metadata only, not source-code inspection or proof of superiority.",
+    "License metadata is not a reuse authorization; review the exact license and compatibility.",
+    "Latest release means the GitHub latest-release endpoint, not every tag/prerelease or newest commit.",
+    "No credentials, private-project reads, installations or automatic adoption."
+  ],
+  "requests": 4,
+  "elapsed_seconds": 14.269900996994693
+}

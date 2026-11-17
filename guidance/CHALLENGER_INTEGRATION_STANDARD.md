@@ -37,3 +37,21 @@ Once the high-value search space is covered and the integration set is actionabl
 
 ## Acceptance
 A challenger pass succeeds when it materially changes confidence, design, or implementation—or establishes with evidence that custom implementation remains the strongest route.
+
+## Resume/startup review
+
+Before continuing a repository task, read its backlog, current implementation and
+previous challenger decisions. Check for comparable or stronger maintained features
+and implementations relevant to that task. Reuse the existing source catalog and
+prior evidence; refresh stale or missing load-bearing claims with primary sources,
+actual code where available, version/date and license. Record what can be learned,
+reused or composed, what to improve beyond the current baseline, and what remains
+unknown. This is additive improvement, not an instruction to replace the project.
+
+Keep this pass bounded and nonblocking: once there is enough evidence, implement
+and test. If discovery is unavailable, record the gap and continue independent
+already-authorized work. Never invent superiority, silently copy restricted code,
+transmit private project context, install a candidate or expand authority merely
+because a search found it. Show adopt/adapt/compose/reject/unresolved decisions and
+verify equivalent outputs, compatibility and user-valued performance before claiming
+an improvement. A bundled startup catalog match is a queue item, not fresh research.

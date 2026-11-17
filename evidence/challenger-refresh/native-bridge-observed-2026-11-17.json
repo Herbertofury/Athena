@@ -1,0 +1,77 @@
+{
+  "scope": "Actual native Python bridge HTTP to spawned backend to public GitHub API; no browser UI acceptance",
+  "elapsed_seconds": 16.743480778997764,
+  "database_unchanged": true,
+  "result": {
+    "status": "completed",
+    "public_repositories": [
+      "rust-lang/rust"
+    ],
+    "report": {
+      "schema": 1,
+      "kind": "athena-public-challenger-source-review",
+      "search": null,
+      "repositories": [
+        {
+          "repository": "rust-lang/rust",
+          "status": "metadata_observed",
+          "commit": {
+            "sha": "5df8c02afdf6b882bc301442cea70f026e3d3974",
+            "source": "https://github.com/rust-lang/rust/commit/5df8c02afdf6b882bc301442cea70f026e3d3974"
+          },
+          "license": {
+            "spdx_id": "NOASSERTION",
+            "name": "Other",
+            "blob_sha": "1b5ec8b78e237b5c3b3d812a7c0a6589d0f7161d",
+            "ref": "5df8c02afdf6b882bc301442cea70f026e3d3974",
+            "source": "https://api.github.com/repos/rust-lang/rust/license?ref=5df8c02afdf6b882bc301442cea70f026e3d3974",
+            "reuse_decision": "unreviewed"
+          },
+          "release": null,
+          "source": "https://github.com/rust-lang/rust",
+          "archived": false,
+          "default_branch": "main",
+          "pushed_at": "2026-11-17T03:30:44Z"
+        }
+      ],
+      "evidence": [
+        {
+          "status": 200,
+          "outcome": "observed",
+          "sha256": "019b0b1e69a5a273c205a3681fa4f0755da598594a886c6925a8df2f1211797d",
+          "source": "https://api.github.com/repos/rust-lang/rust",
+          "checked_at": "2026-11-17T04:33:45.849312+00:00"
+        },
+        {
+          "status": 200,
+          "outcome": "observed",
+          "sha256": "74016be38d8e570157e98bfb6cd0864fd9270eb4d9e8a8730e89fa7224c5d31c",
+          "source": "https://api.github.com/repos/rust-lang/rust/commits/main",
+          "checked_at": "2026-11-17T04:33:49.845018+00:00"
+        },
+        {
+          "status": 200,
+          "outcome": "observed",
+          "sha256": "f98451090bbe938b1192760d506660d3c6069a53915e6a7f601edc8f6f601686",
+          "source": "https://api.github.com/repos/rust-lang/rust/license?ref=5df8c02afdf6b882bc301442cea70f026e3d3974",
+          "checked_at": "2026-11-17T04:33:52.912807+00:00"
+        },
+        {
+          "status": null,
+          "outcome": "transport_unavailable",
+          "source": "https://api.github.com/repos/rust-lang/rust/releases/latest",
+          "checked_at": "2026-11-17T04:33:57.920744+00:00"
+        }
+      ],
+      "limitations": [
+        "Public GitHub metadata only, not source-code inspection or proof of superiority.",
+        "License metadata is not a reuse authorization; review the exact license and compatibility.",
+        "Latest release means the GitHub latest-release endpoint, not every tag/prerelease or newest commit.",
+        "No credentials, private-project reads, installations or automatic adoption.",
+        "30-second request-admission budget and per-request socket timeout; not a hard whole-process deadline."
+      ],
+      "requests": 4,
+      "elapsed_seconds": 16.22789141999965
+    }
+  }
+}

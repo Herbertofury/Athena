@@ -1,0 +1,121 @@
+{
+  "schema": 1,
+  "kind": "athena-public-challenger-source-review",
+  "search": {
+    "query": "browser sidebar rust",
+    "outcome": "observed",
+    "total_count": 13,
+    "incomplete": false,
+    "scope": "First three updated public search results, not comprehensive or ranked quality."
+  },
+  "repositories": [
+    {
+      "repository": "magnetite-browser/magnetite",
+      "status": "metadata_observed",
+      "commit": null,
+      "license": null,
+      "release": null,
+      "source": "https://github.com/magnetite-browser/magnetite",
+      "archived": false,
+      "default_branch": "main",
+      "pushed_at": "2026-11-17T01:18:45Z"
+    },
+    {
+      "repository": "DanielCarmingham/dextui",
+      "status": "transport_unavailable",
+      "commit": null,
+      "license": null,
+      "release": null
+    },
+    {
+      "repository": "Sm0r3s-source/pteron",
+      "status": "metadata_observed",
+      "commit": {
+        "sha": "4ef9aeb3a3081ae975a7741f10d1276dcdf9b6e7",
+        "source": "https://github.com/Sm0r3s-source/pteron/commit/4ef9aeb3a3081ae975a7741f10d1276dcdf9b6e7"
+      },
+      "license": {
+        "spdx_id": "MPL-2.0",
+        "name": "Mozilla Public License 2.0",
+        "blob_sha": "d8b475b6e17e390d702c9be4d3a735c7622b9735",
+        "ref": "4ef9aeb3a3081ae975a7741f10d1276dcdf9b6e7",
+        "source": "https://api.github.com/repos/Sm0r3s-source/pteron/license?ref=4ef9aeb3a3081ae975a7741f10d1276dcdf9b6e7",
+        "reuse_decision": "unreviewed"
+      },
+      "release": null,
+      "source": "https://github.com/Sm0r3s-source/pteron",
+      "archived": false,
+      "default_branch": "main",
+      "pushed_at": "2026-11-16T22:27:29Z"
+    }
+  ],
+  "evidence": [
+    {
+      "status": 200,
+      "outcome": "observed",
+      "sha256": "a7f5a1a07223ab158265799ea5efcaca7f36ce6ba3bde288e05cecebb3122c3d",
+      "source": "https://api.github.com/search/repositories?q=browser%20sidebar%20rust%20is%3Apublic&per_page=3&sort=updated&order=desc",
+      "checked_at": "2026-11-17T04:23:19.740506+00:00"
+    },
+    {
+      "status": 200,
+      "outcome": "observed",
+      "sha256": "34007c2e051cf28090c6a14ede9a2b7a23cf3317e5579133da3470d520500865",
+      "source": "https://api.github.com/repos/magnetite-browser/magnetite",
+      "checked_at": "2026-11-17T04:23:22.424815+00:00"
+    },
+    {
+      "status": null,
+      "outcome": "transport_unavailable",
+      "source": "https://api.github.com/repos/magnetite-browser/magnetite/commits/main",
+      "checked_at": "2026-11-17T04:23:27.432229+00:00"
+    },
+    {
+      "status": null,
+      "outcome": "transport_unavailable",
+      "source": "https://api.github.com/repos/magnetite-browser/magnetite/releases/latest",
+      "checked_at": "2026-11-17T04:23:32.439601+00:00"
+    },
+    {
+      "status": null,
+      "outcome": "transport_unavailable",
+      "source": "https://api.github.com/repos/DanielCarmingham/dextui",
+      "checked_at": "2026-11-17T04:23:37.444048+00:00"
+    },
+    {
+      "status": 200,
+      "outcome": "observed",
+      "sha256": "32d243e99d9365a7a4d687295d2288556da584d22f397ae87dccad355574128d",
+      "source": "https://api.github.com/repos/Sm0r3s-source/pteron",
+      "checked_at": "2026-11-17T04:23:39.051708+00:00"
+    },
+    {
+      "status": 200,
+      "outcome": "observed",
+      "sha256": "97cfa91535762ff3f93ef795f0cc5baca89d7a2758ccdeb28b6b5853cc8d116b",
+      "source": "https://api.github.com/repos/Sm0r3s-source/pteron/commits/main",
+      "checked_at": "2026-11-17T04:23:42.802041+00:00"
+    },
+    {
+      "status": 200,
+      "outcome": "observed",
+      "sha256": "1f2cdd0c0827bdf03cb11ffb6e240aeee3ec5f9facabe28128b0af49f23ec3d2",
+      "source": "https://api.github.com/repos/Sm0r3s-source/pteron/license?ref=4ef9aeb3a3081ae975a7741f10d1276dcdf9b6e7",
+      "checked_at": "2026-11-17T04:23:45.697008+00:00"
+    },
+    {
+      "status": null,
+      "outcome": "transport_unavailable",
+      "source": "https://api.github.com/repos/Sm0r3s-source/pteron/releases/latest",
+      "checked_at": "2026-11-17T04:23:46.659487+00:00"
+    }
+  ],
+  "limitations": [
+    "Public GitHub metadata only, not source-code inspection or proof of superiority.",
+    "License metadata is not a reuse authorization; review the exact license and compatibility.",
+    "Latest release means the GitHub latest-release endpoint, not every tag/prerelease or newest commit.",
+    "No credentials, private-project reads, installations or automatic adoption."
+  ],
+  "requests": 9,
+  "elapsed_seconds": 30.00684435699077
+}

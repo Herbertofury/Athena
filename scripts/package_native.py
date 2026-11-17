@@ -55,6 +55,9 @@ def package(source,binary,expected_sha,output,platform,engine=None,engine_sha=No
     copy(binary,exe,expected_sha)
     if os.name=='posix':(output/exe).chmod(0o700)
     copy(ROOT/'native/foundry/bridge.py','bridge.py')
+    copy(ROOT/'native/foundry/challenger_service.py','challenger_service.py')
+    copy(ROOT/'scripts/refresh_challenger_sources.py','refresh_challenger_sources.py')
+    copy(ROOT/'scripts/check_software_links.py','check_software_links.py')
     copy(ROOT/'native/foundry/portable_launcher.py','launch.py')
     copy(ROOT/'tools/foundry-recovery/sqlite/prepare.py','sqlite_backup.py')
     receipt={'schema':1,'platform':platform,'binary':exe,'files':files,'database_included':False,
