@@ -1,0 +1,66 @@
+{
+  "checked_at": "2026-11-17",
+  "method": "Independent reading of official source pages; not execution of third-party applications",
+  "base_commit": "22aeac716a8bb642e5269fdc8b3c38b99055bad6",
+  "new_products": 0,
+  "checks": [
+    {
+      "product_id": "syncthing",
+      "url": "https://docs.syncthing.net/users/versioning.html",
+      "facts": [
+        "Versioning defaults to off.",
+        "Versioning applies to incoming remote changes, not local edits."
+      ],
+      "integration": "existing legacy record enriched"
+    },
+    {
+      "product_id": "duplicati",
+      "url": "https://github.com/duplicati/documentation/blob/main/duplicati-programs/server.md",
+      "facts": [
+        "--portable-mode uses a data directory beside program files.",
+        "--server-datafolder and DUPLICATI_HOME select data location."
+      ],
+      "integration": "existing legacy record enriched"
+    },
+    {
+      "product_id": "rclone",
+      "url": "https://rclone.org/commands/rclone_sync/",
+      "facts": [
+        "Sync can delete destination files.",
+        "Copy avoids deletion of destination-only files; dry-run or interactive previews sync."
+      ],
+      "integration": "existing legacy record enriched"
+    },
+    {
+      "product_id": "photorec",
+      "url": "https://www.cgsecurity.org/wiki/PhotoRec",
+      "facts": [
+        "Source access is read-only.",
+        "Recovered output must not be written to the original partition."
+      ],
+      "integration": "already correctly represented; no duplicate or metadata churn"
+    },
+    {
+      "product_id": null,
+      "url": "https://www.sqlite.org/backup.html",
+      "facts": [
+        "Online Backup API copies a live database into another database."
+      ],
+      "integration": "application-backup guidance only; not a new software product"
+    },
+    {
+      "product_id": null,
+      "url": "https://www.sqlite.org/wal.html",
+      "facts": [
+        "WAL is persistent database state; separating it from the database can lose committed transactions or corrupt data."
+      ],
+      "integration": "application-backup guidance only; not a new software product"
+    }
+  ],
+  "unverified": [
+    "The rest of the 15-tool research dossier",
+    "Current pricing and licensing outside these facts",
+    "Whole-folder portability and recovery reliability",
+    "Live Windows recovery and failure injection"
+  ]
+}

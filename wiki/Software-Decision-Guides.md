@@ -4,6 +4,18 @@
 
 These are conditional editorial recommendations based on cited product capabilities. They are not benchmark results. Ranking applies only to the stated task and constraints; prices and exact OS requirements need a final upstream check before purchase or installation.
 
+## Separate synchronization from recoverable history
+
+Choose a workflow by what it preserves after deletion or overwrite, not by whether it copies files. Documentation review is not a restore test.
+
+[Compare these choices in Athena](https://herbertofury.github.io/Athena/#software?task=separate-sync-from-recovery)
+
+| Fit | Tool | Why choose it | Tradeoff |
+| --- | --- | --- | --- |
+| Continuous peer synchronization | [Syncthing](https://github.com/syncthing/syncthing) | Keeps selected device folders synchronized; optional per-folder versioning archives changes received from other devices. | Versioning is off by default and does not preserve the prior version of a local edit on that same device. |
+| Explicit copy versus mirror transfer | [rclone](https://github.com/rclone/rclone) | Choose copy when destination-only files must remain, or sync when mirroring is genuinely intended. | Sync may delete destination files; inspect --dry-run before use. A transfer alone does not establish historical recovery. |
+| Versioned backup with explicit data placement | [Duplicati](https://github.com/duplicati/duplicati) | Provides encrypted incremental backups; documented portable mode places server data beside the program files. | Keep backup credentials and test restoration and folder relocation; portable-mode documentation is not a full no-outside-writes audit. |
+
 ## Chat with PDF documents offline
 
 Prepare models before disconnecting, choose local processing at every stage, and inspect cited passages. These documented configurations have not been installed or quality-benchmarked in this research pass.
