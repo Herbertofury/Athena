@@ -32,9 +32,9 @@ async function check(name,fn){report.current=name;await fn();report.checks.push(
     const horizontal=['left','center','right'].includes(alignment),axis=horizontal?'x':'y',size=(horizontal?d.bw:d.bh)*.5,extent=horizontal?d.width:d.height;
     assert(size+16<=extent,JSON.stringify(d));const near=(8+size/2)/extent,expected=100*(['center','middle'].includes(alignment)?.5:['left','top'].includes(alignment)?near:1-near);
     await one('[data-align-selected="'+alignment+'"]').click();
-    const x=Number(await one('[data-inspect-x]').inputValue()),y=Number(await one('[data-inspect-y]').inputValue());assert(Math.abs((horizontal?x:y)-expected)<.001);assert.equal(horizontal?y:x,horizontal?oldY:oldX);
-    if(Math.abs((horizontal?oldX:oldY)-expected)>=.001){await one('[data-undo]').click();assert.equal(Number(await one('[data-inspect-x]').inputValue()),oldX);assert.equal(Number(await one('[data-inspect-y]').inputValue()),oldY);}
-    report.measurements.push({scope,alignment,dimensions:d,x,y,expected});
+    const x=Number(await one('[data-inspect-x]').inputValue()),y=Number(await one('[data-inspect-y]').inputValue());const displayedExpected=Math.round(expected*100)/100;assert.equal(horizontal?x:y,displayedExpected,JSON.stringify({scope,alignment,d,x,y,expected}));const authored=await page.locator('.foundry-object').evaluateAll((os,{id,axis})=>{const n=os.find(o=>o.dataset.id===id),value=n.style[axis==='x'?'left':'top'];return Number(value.match(/(-?[0-9.]+)%/)[1]);},{id,axis});assert(Math.abs(authored-expected)<.0001,JSON.stringify({scope,alignment,authored,expected}));assert.equal(horizontal?y:x,horizontal?oldY:oldX);
+    if((horizontal?oldX:oldY)!==displayedExpected){await one('[data-undo]').click();assert.equal(Number(await one('[data-inspect-x]').inputValue()),oldX);assert.equal(Number(await one('[data-inspect-y]').inputValue()),oldY);}
+    report.measurements.push({scope,alignment,dimensions:d,x,y,expected,authored});
    }
   }
  });
