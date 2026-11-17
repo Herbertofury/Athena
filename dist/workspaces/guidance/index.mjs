@@ -1,4 +1,4 @@
-import {validateCatalog,findDocuments,exportPacket,exportMarkdown} from './model.mjs';
+import {verifyCatalog,findDocuments,exportPacket,exportMarkdown} from './model.mjs';
 export async function mount({container,search='',theme='dark',signal,state={},setState=()=>true}={}){
  const root=container.shadowRoot||container.attachShadow({mode:'open'}),cleanup=[],urls=new Set();let disposed=false,catalog=null,query=search,selected=new Set(),current='',saved=true;
  const style=document.createElement('link');style.rel='stylesheet';style.href=new URL('./style.css',import.meta.url).href;
@@ -11,15 +11,15 @@ export async function mount({container,search='',theme='dark',signal,state={},se
  shell.append(element('p','Loading the versioned Athena guidance library…','status'));
  if(signal?.aborted){unmount();return {ready:false,unmount,setTheme,setSearch(){}};}
  try{
-  const response=await fetch(new URL('./catalog.json',import.meta.url),{signal});if(!response.ok)throw Error('Catalog HTTP '+response.status);catalog=validateCatalog(await response.json());
+  const response=await fetch(new URL('./catalog.json',import.meta.url),{signal});if(!response.ok)throw Error('Catalog HTTP '+response.status);catalog=await verifyCatalog(await response.json());
   if(disposed)return {ready:false,unmount,setTheme,setSearch(){}};
   const restored=state||{};selected=new Set(Array.isArray(restored.selected)?restored.selected.filter(id=>catalog.documents.some(d=>d.id===id)):[]);current=catalog.documents.some(d=>d.id===restored.current)?restored.current:catalog.documents[0].id;
  }catch(error){if(!disposed)shell.replaceChildren(element('h2','Guidance could not load'),element('p',error.message+' Your other Athena workspaces remain available. Retry by reopening this workspace.','status'));return {ready:false,unmount,setTheme,setSearch(){}};}
  const intro=element('header',undefined,'intro');intro.append(element('p','SHARED KNOWLEDGE · LOCAL OWNERSHIP','eyebrow'),element('h2','Build once. Carry the understanding.'),element('p','A living engineering core for your projects. Explore the complete standards, choose what is useful, and export a source-attributed reference pack. Your project rules remain yours.'));
- const identity=element('p',`Athena guidance ${catalog.version} · ${catalog.documents.length} complete standards · source digests retained`,'identity');intro.append(identity);
+ const identity=element('p',`Athena guidance ${catalog.version} · ${catalog.documents.length} complete standards · text SHA-256 verified`,'identity');intro.append(identity);
  const bar=element('div',undefined,'toolbar'),all=element('button','Select all standards'),clear=element('button','Clear selection'),json=element('button','Export selected JSON'),markdown=element('button','Export selected Markdown');bar.append(all,clear,json,markdown);
  const status=element('p','','status');status.setAttribute('role','status');status.setAttribute('aria-live','polite');const columns=element('div',undefined,'columns'),list=element('div',undefined,'standards'),reader=element('article',undefined,'reader');list.setAttribute('aria-label','Guidance standards');reader.setAttribute('aria-label','Selected standard');columns.append(list,reader);
- const note=element('details',undefined,'boundary');note.append(element('summary','What this does and does not do'),element('p','This reader and its exports do not modify any repository, install Skills, execute guidance or grant access. Existing Agent-Foundry consumers keep their known-good pins pending reviewed migration. Full source migration and repository deletion readiness are not claimed.'));
+ const note=element('details',undefined,'boundary');note.append(element('summary','What this does and does not do'),element('p','Matching hashes establish catalog/text consistency, not a signature or proof of publisher authenticity. This reader and its exports do not modify any repository, install Skills, execute guidance or grant access. Existing Agent-Foundry consumers keep their known-good pins pending reviewed migration. Full source migration and repository deletion readiness are not claimed.'));
  shell.replaceChildren(intro,bar,status,columns,note);
  function persist(){saved=setState({current,selected:[...selected]})!==false;}
  function updateStatus(){status.textContent=`${selected.size} selected · ${findDocuments(catalog,query).length} of ${catalog.documents.length} standards match.`+(saved?' Selection is saved in this browser.':' Selection could not be saved. Export it before leaving this page.');json.disabled=markdown.disabled=selected.size===0;}
