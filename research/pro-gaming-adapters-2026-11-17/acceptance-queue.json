@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "tests": [
+    {
+      "id": "CF-01",
+      "status": "not-run",
+      "acceptance": "Exercise invalid/missing API-key 401 in a fixture; keep last-good data and show actionable auth state, no bypass."
+    },
+    {
+      "id": "CF-02",
+      "status": "not-run",
+      "acceptance": "Redact credential header values from errors, request logs, traces and exports; disallow credential-bearing download URLs in persisted records."
+    },
+    {
+      "id": "MR-01",
+      "status": "not-run",
+      "acceptance": "Apply response rate-limit headers across concurrent jobs; retry without duplicate record insertion."
+    },
+    {
+      "id": "MR-02",
+      "status": "not-run",
+      "acceptance": "Change project slug while retaining stable source ID; preserve version/file hash and do not create duplicate project."
+    },
+    {
+      "id": "FILE-01",
+      "status": "not-run",
+      "acceptance": "Support multiple files/addons per release with explicit selection; do not guess correct asset from filename alone."
+    },
+    {
+      "id": "FILE-02",
+      "status": "not-run",
+      "acceptance": "Reject truncated/hash-mismatched downloads without modifying known-good installation."
+    },
+    {
+      "id": "PORT-01",
+      "status": "not-run",
+      "acceptance": "Run first launch, settings, cache, logs, downloads and updates under a disposable filesystem write trace; all owned data remains under portable root unless explicitly opted out."
+    },
+    {
+      "id": "PORT-02",
+      "status": "not-run",
+      "acceptance": "Move a stopped portable folder to a new path with spaces/non-ASCII characters; restart and resolve relative paths."
+    },
+    {
+      "id": "PORT-03",
+      "status": "not-run",
+      "acceptance": "Deny writes to portable root and surface an actionable error rather than silently falling back to AppData."
+    },
+    {
+      "id": "PORT-04",
+      "status": "not-run",
+      "acceptance": "Interrupt update before commit; retain/recover previous executable and data without overwriting unrelated files."
+    },
+    {
+      "id": "PORT-05",
+      "status": "not-run",
+      "acceptance": "Attempt destination collision during import/restore; preserve both source and existing destination, require explicit safe selection."
+    },
+    {
+      "id": "PORT-06",
+      "status": "not-run",
+      "acceptance": "Copy to another account/machine with dummy credentials only; require reauthentication where encryption is device-bound, never downgrade to plaintext."
+    }
+  ]
+}

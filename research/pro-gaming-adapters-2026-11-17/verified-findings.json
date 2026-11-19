@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "scope": "Research evidence, not runtime catalog or implemented adapters",
+  "records": [
+    {
+      "id": "curseforge-cdn-key-2026",
+      "provider": "CurseForge",
+      "source": "https://blog.curseforge.com/introducing-api-key-authentication-for-curseforge-file-downloads/",
+      "source_published": "2026-06-10",
+      "claim": "Official announcement schedules API-key enforcement for direct edge.forgecdn.net downloads from July 16, 2026, with HTTP 401 for missing/invalid keys. x-api-key header is preferred to query parameters because URLs can leak through logs/history.",
+      "implication": "Treat authentication failure separately from removed files and retain last-good metadata; never synthesize alternate CDN URLs to bypass restrictions.",
+      "verification_gap": "Announcement reviewed, enforcement not live-tested; no key obtained or transmitted.",
+      "reviewed_at": "2026-11-17",
+      "evidence_status": "official-documentation-reviewed",
+      "runtime_tested": false
+    },
+    {
+      "id": "modrinth-client-contract",
+      "provider": "Modrinth",
+      "source": "https://docs.modrinth.com/api/",
+      "claim": "Documentation describes per-IP 300 requests/minute, response limit/remaining/reset headers, uniquely identifying User-Agent, stable IDs rather than mutable slugs, and SHA-1/SHA-512 file identities. PAT/OAuth scopes restrict authenticated operations.",
+      "implication": "Persist source IDs separately from display slugs; throttle according to current response headers rather than a permanent hardcoded quota. Preserve file hashes and distinguish rate-limit and scope errors.",
+      "verification_gap": "Documentation reviewed; authenticated requests, quota behavior, and current installed adapter not live-tested.",
+      "reviewed_at": "2026-11-17",
+      "evidence_status": "official-documentation-reviewed",
+      "runtime_tested": false
+    },
+    {
+      "id": "prism-portable-data",
+      "provider": "Prism Launcher",
+      "source": "https://www.prismlauncher.org/wiki/getting-started/data-location/",
+      "claim": "Portable Windows/Linux data lives inside the PrismLauncher folder; ordinary installations use OS data directories. Launcher-managed Java, cache, logs, instances, assets and metadata are separate internal folders.",
+      "implication": "Portable acceptance must cover every owned data class, not only executable and saves. External runtimes or user-selected paths need explicit treatment.",
+      "verification_gap": "Documentation reviewed; actual process writes and relocation not tested.",
+      "reviewed_at": "2026-11-17",
+      "evidence_status": "official-documentation-reviewed",
+      "runtime_tested": false
+    },
+    {
+      "id": "playnite-portable-library",
+      "provider": "Playnite",
+      "source": "https://api.playnite.link/docs/manual/gettingStarted/helpAndTroubleshooting/faq.html",
+      "claim": "Portable library defaults to application-relative library; portable config.json is beside the application. Installed defaults use AppData. Documentation warns against combining library folders from different instances, and notes plugin-dependent account handling.",
+      "implication": "Use explicit non-destructive destination preflight and separate credential portability from library portability. Do not merge two stores by copying files over each other.",
+      "verification_gap": "Documentation reviewed; copy/restore, plugin credentials, and filesystem effects not tested.",
+      "reviewed_at": "2026-11-17",
+      "evidence_status": "official-documentation-reviewed",
+      "runtime_tested": false
+    }
+  ]
+}
