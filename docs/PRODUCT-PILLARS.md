@@ -50,6 +50,19 @@ Persist user work and view preferences appropriately in portable app-owned stora
 
 **Acceptance backlog:** verify search/sort/filter composition, empty/unknown/stale states, marking/undo, interrupted save/restart, snapshot changes, bulk-selection scope, keyboard/focus and reduced-motion behavior. Measure representative large-list input/frame latency and memory against the baseline. Test actual workflows rather than claiming delight, accessibility or unlimited scale from screenshots.
 
+## P10 — Clickable, verified online provenance
+Displayed entities that exist online should provide a clear, keyboard-accessible route to their actual source: names, author labels/avatars, projects, mods, suggested products, games, original characters, credits and images where a verified source exists. Prefer canonical entity-specific deep links over generic homepages or search results. Keep project identity, creator identity and the particular work distinct; do not infer ownership from a matching name or repurpose an image URL as proof of its creator.
+
+Expose relevant version/release, changelog, download, dependency, fix and attribution destinations alongside the entity when known, clearly labeling what each link opens. Preserve source provenance and review freshness. Let users choose among verified alternate sources and see which is canonical or preferred, without silently changing authority or substituting unofficial mirrors.
+
+Never invent URLs or make an unverified match look authoritative. Clearly mark unknown, ambiguous, inaccessible, removed or unverified destinations, retain last-known provenance where useful and distinguish a search/discovery action from a confirmed source link. Missing access is not proof of deletion or a ban.
+
+Use safe URL parsing and explicit supported schemes; reject executable/script URLs and treat local/custom-protocol actions separately. Avoid exposing credentials, tokens or private paths in links, analytics, previews or referrers; do not forward account access to a different host. Opening a source is user-directed, not automatic login, download, installation, background browsing or permission to copy media. Handle redirects and changed domains cautiously, with source identity and destination visible.
+
+Make links understandable without relying on color, with visible focus and descriptive accessible names; avatars/images need meaningful labels. Keep row selection, marking, drag controls and link activation distinct so navigation cannot silently modify user work. Preserve accessible reading and avoid making an entire complicated row one ambiguous link.
+
+**Acceptance backlog:** verify identity-specific destinations, alternate-source choice, missing/stale/blocked states, version-to-file mapping, attribution accuracy, keyboard/screen-reader behavior and safe handling of malformed URLs, redirects and secret-bearing inputs. Check actual shipped navigation without claiming that every entity has a known source or that every external site is reachable. Domain-specific data models remain in their owning repositories.
+
 ## Project-specific goal index — not global pillars
 These links retain project ownership and acceptance detail; they do not impose their features on unrelated repositories.
 
@@ -64,7 +77,7 @@ These links retain project ownership and acceptance detail; they do not impose t
 ## Adoption register and maintenance
 | Area | Verified storage / next owner | Status |
 |---|---|---|
-| Athena | This register, product vision and integration evidence | Nine universal principles; separate project-goal navigation, no universal runtime audit claimed |
+| Athena | This register, product vision and integration evidence | Ten universal principles; separate project-goal navigation, no universal runtime audit claimed |
 | Shared mod database | Modding-Knowledge owns typed relationship/follow/release contracts | Consumer integration and full provider coverage require separate evidence |
 | MO2R | Linked workspaces/native-parity docs and existing issues #1/#2/#5/#8/#11/#12 | Detailed goals saved; Windows/native implementation acceptance remains open |
 | External CAS | Linked photo goal and existing acceptance checklist | Detailed goals saved, not implemented photo reconstruction |
