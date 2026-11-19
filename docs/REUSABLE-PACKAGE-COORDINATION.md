@@ -1,0 +1,23 @@
+# Reusable package coordination — Athena project goal
+
+Accepted goal, 2026-11-19. **Backlog, not an implemented universal package manager.** The shared design rule is [P8](PRODUCT-PILLARS.md#p8--modular-features-and-safe-independent-evolution); this document assigns Athena-specific coordination. Preserve existing implementations and private acceptance holds.
+
+## Intent and ownership
+Make compatible feature, game and ability packages discoverable, reusable, selectively installable and removable across participating repositories/apps. Users can choose only what they need while the rest of an app remains usable. Athena tracks authoritative package versions, consuming apps and compatibility evidence, and coordinates reviewed updates. It must not become a mandatory online dependency for local app startup or independently installed features.
+
+## Existing source and limits
+Reviewed [Feature Foundry README](https://github.com/Herbertofury/Feature-Foundry/blob/main/README.md): Living World studio modules include worlds/rooms, ecology, mascot, media, music and native persistence. These are reuse candidates, **not evidence of a hot-swappable cross-app package contract**. Athena's [preservation README](../feature-foundry/README.md) records preserved historical source and explicitly separates preservation from integration. Private native integration work does not establish public dynamic-package support. Keep original source, licenses, ownership and acceptance evidence intact; do not replace existing modules merely to introduce a framework.
+
+## Implementation and acceptance backlog
+- [ ] Inventory actual module boundaries and consumers before designing a minimal contract. Trial one genuinely reusable feature in two compatible hosts, not a large speculative framework.
+- [ ] Define stable package identity, publisher/provenance, exact version/hash, contract/ABI/schema versions, OS/architecture/runtime requirements, host capabilities, required/optional dependencies, conflicts, permissions, license and data ownership. Unknown compatibility must not be represented as supported.
+- [ ] Maintain installed and available versions separately; pin known-good versions, track consumers and show compatibility/update plans. Use event-driven bounded refresh and offline cached metadata with visible freshness, not constant polling.
+- [ ] Support selective install/enable/disable/remove with an explicit dependency plan. Refuse removal of required dependencies or offer a clearly reviewed cascade; do not silently remove other features. Retain user data by default, with export/reinstall compatibility and separately authorized deletion.
+- [ ] Stage and verify supported downloads, integrity and provenance before activation; avoid executing arbitrary untrusted packages. Least-privilege capabilities and appropriate process/runtime isolation must contain faults. Metadata and hashes alone do not prove safety.
+- [ ] Specify prepare/start/quiesce/stop/dispose and state handoff. Cancel owned work and release listeners, timers, resources and handles before unloading. Admit live hot-drop only for explicitly supported contracts; otherwise require a safe restart, clearly stated before applying.
+- [ ] Coordinate upgrades as staged transactions with compatibility checks, preserved prior artifacts/data and migration receipts. Test rollback, failure between stages, interrupted restart, disk-full and schema downgrade limits. Never promise rollback where migration is irreversible.
+- [ ] Test host-alone operation, independent package operation where meaningful, missing optional components, dependency version mismatch, fault isolation, stale controls and install/update/remove/reinstall cycles. Run consumer contract and integration regressions, including preserved user settings/saves.
+- [ ] Measure installed/download size, startup and interaction latency, frame time, memory and idle CPU/wakeups before/after; include disabled/uninstalled baselines. Set product-specific budgets and report tradeoffs instead of promising zero overhead.
+- [ ] Record exact tested host/package/version combinations and shipped versus synthetic evidence. Do not mark compatibility, hot-unload or universal reuse complete from one fixture or metadata-only registry.
+
+No installation, background watch, update dispatch, permission grant or runtime activation is created by this document.
