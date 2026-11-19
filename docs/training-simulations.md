@@ -48,3 +48,17 @@ The new hardware mission gathers service-history and telemetry evidence in eithe
 - [AWS IAM security best practices](https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html), retrieved 2026-11-16. Least privilege and permission validation inform the new synthetic report-reader model. It does not execute IAM or Azure RBAC, implement all authorization layers, or establish AWS/Azure exam alignment. Other pathway associations are broad introductory curriculum links, not verified objective-by-objective mappings.
 
 All scenarios, observations and feedback are original synthetic material. No exam dumps, vendor course text, OS image or physical repair procedure is bundled. Full course coverage and real practical mastery remain open work.
+
+
+## Roaming creature reward POIs — approved goal, not implemented (2026-11-19)
+
+Add optional moving points of interest on large creatures: airborne birds and eventually colossal roaming giants. Reach an attached, clearly marked object by platforming/climbing, then **hit that object to collect a substantial in-game XP/points reward**. The intended feel mixes playful traversal with roguelite run decisions, especially Megabonk-like experiences; Shadow of the Colossus is a scale/climbing inspiration, not permission to copy characters, art or code. This records a requested goal, not verified capabilities of either reference game.
+
+- [ ] Reconcile existing movement, moving-platform collision, creature rigs, reward ledgers and run lifecycle before implementation; research reusable existing solutions first.
+- [ ] Prototype one optional slow ground giant with a marked reward object, two approach routes, safe exit and seed-varied route placement. Reuse suitable authorized assets/data for variation without treating reuse as a ceiling on quality or new features.
+- [ ] Make boarding, movement-relative footing, climbing/jumping, hit registration and payoff legible and fun; provide reachable alternatives for differing mobility/builds and accessibility needs. Missing an optional encounter must not block a run.
+- [ ] Define meaningful high rewards balanced against time, traversal difficulty and combat risk. Commit one reward per stable run/creature/object identity; repeated hits, reconnect, reload and overlapping collection must not duplicate it.
+- [ ] Test missed jumps, safe recovery, camera/readability, creature bounds/despawn, pause/death/restart, simultaneous collection where multiplayer exists, and low/high mobility. Preserve saves, unrelated world/player state and prior progression.
+- [ ] Record exact-build performance and actual player enjoyment/playtests; expand to flying creatures and larger multi-stage giants only after the bounded first slice works. Do not mark the goal complete from a mockup, menu, static giant or simulated reward alone.
+
+**Athena scope:** planned Greek-mythology action roguelite, with original mythic creature/companion presentation. Preserve independent RTS depth and optional cross-mode rewards; do not force platforming into RTS or learning missions. These are gameplay rewards, not course-completion, certification or proof of mastery. Existing teaching simulations remain unchanged.
