@@ -106,14 +106,18 @@ def build():
     def copy(path,source):emit(path,source.read_bytes(),source)
     # Research keeps the exact pure query/comparison module and content snapshot.
     r=SOURCE/'explorer';src=(r/'explorer.mjs').read_text();split=src.index("const $ =")
-    imports=src[:split].replace('./__CORE__','./explorer-core.mjs');code=src[split:]
+    imports=src[:split].replace('./__CORE__','./explorer-core.mjs')+"import {mountBackup} from './shortlist-backup.mjs';\n";code=src[split:]
     code=replace(code,'document.getElementById(id)','root.getElementById(id)')
     code=replace(code,"let state = parseState(location.search);","let state = parseState(route.includes('?')?route.slice(route.indexOf('?')+1):typeof initialState==='string'?initialState:initialState?.query||'');\nif(search!==undefined)state.q=String(search).slice(0,300);")
     code=replace(code,"history.replaceState(null, '', location.pathname + (query ? '?' + query : '') + location.hash);","navigate?.('#research?'+(query||'q='),{replace:true});")
     code=replace(code,"window.addEventListener('popstate', () => { state = parseState(location.search); render(); });",'// The Athena shell owns history and route changes.')
     code=replace(code,"fetch($('app').dataset.catalog)","fetch(new URL('./catalog.json',import.meta.url),{signal:lifetime.signal})")
     code=replace(code,'let catalog;','let catalog,loaded=false;')
-    code=replace(code,'renderStats(); bindEvents(); render();','renderStats(); bindEvents(); render(); loaded=true;')
+    code=replace(code,'renderStats(); bindEvents(); render();',"""renderStats(); bindEvents(); render(); loaded=true;
+    mountBackup({root,catalog,signal:lifetime.signal,getIds:()=>shortlist,getStored:()=>localStorage.getItem('engineering-atlas-shortlist-v1'),replaceIds:ids=>{
+      try{localStorage.setItem('engineering-atlas-shortlist-v1',JSON.stringify(ids));}catch{throw new Error('Browser storage could not save the backup. Your shortlist is unchanged.');}
+      shortlist=ids;$('shortlist-count').textContent=shortlist.length;render();
+    },download});""")
     code=replace(code,'catalog = await response.json();','catalog = await response.json(); if(disposed)return;')
     code=replace(code,"  } catch (error) {\n    $('result-count')","  } catch (error) {\n    if(disposed)return;\n    $('result-count')")
     code=replace(code,"navigator.clipboard.writeText(location.href)","navigator.clipboard.writeText(shareURL())")
@@ -137,6 +141,7 @@ def build():
 '''
     emit(Path('research/index.mjs'),pre+code+post,r/'explorer.mjs')
     copy(Path('research/explorer-core.mjs'),r/'explorer-core.mjs')
+    copy(Path('research/shortlist-backup.mjs'),ROOT/'native/research/shortlist-backup.mjs')
     manifest=json.loads((r/'build-manifest.json').read_text());catalog=next(p for p in manifest['files'] if re.fullmatch(r'docs/explorer/catalog\.[a-f0-9]+\.json',p))
     copy(Path('research/catalog.json'),ROOT/'engineering'/catalog)
     # Media reuses official players, complete receipts and the existing codec/player state machines.

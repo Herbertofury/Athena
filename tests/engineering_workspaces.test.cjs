@@ -87,3 +87,17 @@ test('Research renders preserved Athena evidence links while keeping original At
   assert.ok([...root.querySelectorAll('a[href]')].every(link=>!link.href.includes('Herbertofury/Engineering-Atlas')));assert.equal(env.calls.length,1);
  }finally{controller?.unmount();env.restore();}
 });
+
+ test('Native Research mounts backup controls and preserves snapshot recovery boundary',async()=>{
+ const env=setup();let controller;
+ try{controller=await(await component('research')).mount({container:env.container});const root=env.container.shadowRoot;
+ assert.ok(root.querySelector('[data-backup-export]'));assert.ok(root.querySelector('[data-backup-file]'));
+ assert.equal(root.querySelector('[data-backup-restore]').hidden,true);
+ const catalog=JSON.parse(fs.readFileSync(path.join(base,'research/catalog.json'))),id=catalog.entries[1].id;
+ const text=JSON.stringify({format:'athena-research-shortlist',version:1,catalog_snapshot:catalog.snapshot_date,candidate_ids:[id]});
+ const file=root.querySelector('[data-backup-file]');Object.defineProperty(file,'files',{value:[{size:text.length,text:async()=>text}]});file.dispatchEvent(new env.window.Event('change'));await new Promise(r=>setImmediate(r));
+ root.querySelector('[data-backup-restore]').click();assert.deepEqual(controller.exportState().shortlist,[id]);
+ controller.unmount();assert.equal(root.childNodes.length,0);
+ controller=await(await component('research')).mount({container:env.container});assert.deepEqual(controller.exportState().shortlist,[id]);
+ }finally{controller?.unmount();env.restore();}
+ });

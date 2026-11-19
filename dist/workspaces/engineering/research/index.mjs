@@ -2,6 +2,7 @@ import {parseState, encodeState, queryCatalog, repositorySignal, communityScore,
   evidenceFor, cohortFor, measurement, exportCSV, safeURL, ratingURL, COMMUNITY_PRIOR, publicationYearMatches,
   testPlanFor, plansForCandidate, buildTestPlanProposal} from './explorer-core.mjs';
 
+import {mountBackup} from './shortlist-backup.mjs';
 
 export async function mount({container,search,theme="dark",notify:hostNotify,navigate,state:initialState,route="",signal:outerSignal}={}){
 
@@ -379,6 +380,10 @@ async function main() {
     } catch { shortlist = []; }
     $('shortlist-count').textContent = shortlist.length;
     renderStats(); bindEvents(); render(); loaded=true;
+    mountBackup({root,catalog,signal:lifetime.signal,getIds:()=>shortlist,getStored:()=>localStorage.getItem('engineering-atlas-shortlist-v1'),replaceIds:ids=>{
+      try{localStorage.setItem('engineering-atlas-shortlist-v1',JSON.stringify(ids));}catch{throw new Error('Browser storage could not save the backup. Your shortlist is unchanged.');}
+      shortlist=ids;$('shortlist-count').textContent=shortlist.length;render();
+    },download});
   } catch (error) {
     if(disposed)return;
     $('result-count').textContent = 'Catalog could not be loaded.';
