@@ -46,7 +46,15 @@ Verified repository goal: [photo-to-Sim and CC-aware milestones](https://github.
 | MO2R | Linked workspaces/native-parity docs and existing issues #1/#2/#5/#8/#11/#12 | Detailed goals saved; Windows/native implementation acceptance remains open |
 | External CAS | Linked photo goal and existing acceptance checklist | Detailed goals saved, not implemented photo reconstruction |
 | Design sources | Linked memories Aesthetics register | Inspiration/rights and project-identity requirements recorded |
-| Other consumers | Apply relevant pillars to ModHunter, GameSync/Next, Enderloom, Noxviola, Sims tools and JetSetCraft | Audit each current authoritative branch, not just archived copies |
+| Modding-Knowledge local adoption | [Scoped pillar backlog](https://github.com/Herbertofury/Modding-Knowledge/blob/main/docs/shared-product-pillars-20261119.md) | Saved and exact-content verified 2026-11-19; implementation/acceptance remains separate |
+| GameSync-Next local adoption | [Scoped pillar backlog](https://github.com/Herbertofury/GameSync-Next/blob/main/docs/shared-product-pillars-20261119.md) | Saved and exact-content verified 2026-11-19; implementation/acceptance remains separate |
+| Modhunter local adoption | [Scoped pillar backlog](https://github.com/Herbertofury/Modhunter/blob/main/docs/shared-product-pillars-20261119.md) | Saved and exact-content verified 2026-11-19; implementation/acceptance remains separate |
+| Enderloom local adoption | [Scoped pillar backlog](https://github.com/Herbertofury/Enderloom/blob/main/docs/shared-product-pillars-20261119.md) | Saved and exact-content verified 2026-11-19; implementation/acceptance remains separate |
+| Noxviola local adoption | [Scoped pillar backlog](https://github.com/Herbertofury/Noxviola/blob/main/docs/shared-product-pillars-20261119.md) | Saved and exact-content verified 2026-11-19; implementation/acceptance remains separate |
+| JetSetCraft local adoption | [Scoped pillar backlog](https://github.com/Herbertofury/JetSetCraft/blob/main/docs/shared-product-pillars-20261119.md) | Saved and exact-content verified 2026-11-19; implementation/acceptance remains separate |
+| External-CAS local adoption | [Scoped pillar backlog](https://github.com/Herbertofury/External-CAS/blob/main/docs/shared-product-pillars-20261119.md) | Saved and exact-content verified 2026-11-19; implementation/acceptance remains separate |
+| Sims4Foundry local adoption | [Scoped pillar backlog](https://github.com/Herbertofury/Sims4Foundry/blob/main/docs/shared-product-pillars-20261119.md) | Saved and exact-content verified 2026-11-19; implementation/acceptance remains separate |
+| TD1-Occult-Hybrid-Apex local adoption | [Scoped pillar backlog](https://github.com/Herbertofury/TD1-Occult-Hybrid-Apex/blob/main/docs/shared-product-pillars-20261119.md) | Saved and exact-content verified 2026-11-19; implementation/acceptance remains separate |
 
 - [ ] Maintain a per-pillar/per-consumer matrix: owner, authoritative revision, planned/partial/tested/shipped status, exact test evidence and unresolved limits.
 - [ ] Link this register from relevant local backlogs; preserve more specific/latest user directions rather than replacing them with generic text.
