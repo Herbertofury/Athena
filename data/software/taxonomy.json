@@ -151,7 +151,18 @@
     "winscp": "networking/file-transfer",
     "wireshark": "networking/packet-analysis",
     "yara-x": "security/file-pattern-matching",
-    "zoxide": "development/terminal-utilities"
+    "zoxide": "development/terminal-utilities",
+    "yosys": "science/rtl-synthesis",
+    "nextpnr": "science/fpga-place-and-route",
+    "ghdl": "science/hdl-simulation",
+    "icarus-verilog": "science/hdl-simulation",
+    "verilator": "science/hdl-simulation",
+    "cocotb": "science/hdl-verification",
+    "symbiyosys": "science/hdl-formal-verification",
+    "gtkwave": "science/hdl-waveform-analysis",
+    "oss-cad-suite": "science/fpga-toolchain-distributions",
+    "amd-vivado": "science/fpga-design-suites",
+    "altera-quartus-prime-lite": "science/fpga-design-suites"
   },
   "category_labels": {
     "ai/ai-command-line": "AI command-line assistants",
@@ -526,6 +537,14 @@
     "system/system-snapshots": "System snapshots and rollback",
     "system/uninstallers": "Application uninstallers",
     "system/usb-sharing": "USB device sharing",
-    "system/virtual-machines": "Virtual machine environments"
+    "system/virtual-machines": "Virtual machine environments",
+    "science/rtl-synthesis": "RTL synthesis",
+    "science/fpga-place-and-route": "FPGA place and route",
+    "science/hdl-simulation": "HDL simulation",
+    "science/hdl-verification": "HDL verification and testbenches",
+    "science/hdl-formal-verification": "Formal hardware verification",
+    "science/hdl-waveform-analysis": "HDL waveform analysis",
+    "science/fpga-toolchain-distributions": "FPGA toolchain distributions",
+    "science/fpga-design-suites": "Vendor FPGA design suites"
   }
 }

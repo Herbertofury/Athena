@@ -34,4 +34,6 @@ python3 scripts/report_software_coverage.py --output software-refresh-report.jso
 
 Review the generated app data and Wiki, update the explicit public runtime allowlist for reviewed runtime changes, and retain verification evidence. The existing GitHub Wiki workflow publishes managed pages after merge; a local Wiki directory alone does not prove the live Wiki changed.
 
+The FPGA/HDL expansion separates RTL synthesis, place-and-route, simulation, Python testbenches, formal property checking and waveform inspection. It also distinguishes AMD Vivado licensing from Altera Quartus Prime Lite's free-but-device-limited edition. No physical FPGA board validation is implied; exact target-device support and bitstream flow must be checked before a recommendation is made. See the dated [FPGA/HDL source review](../../research/software-expansion-2026-11-17/fpga-hdl-research.md) for source-level scope and unresolved validation.
+
 See [selection methodology](../../wiki/Software-Methodology.md) and [expansion evidence](../../research/software-expansion-2026-11-14/README.md).
