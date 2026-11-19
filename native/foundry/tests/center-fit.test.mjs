@@ -15,3 +15,29 @@ test('actual mount center and fit preserve scoped identity and appearance with s
 test('center retains v1; fit explicitly adopts v2, pinned filtered and missing-anchor edits refuse',async()=>{const s=await setup(mount,{foundryModules:allOff});geometry(s);try{const q=x=>s.document.querySelector(x),id=q('[data-inspect-object]').value;q('[data-center-selected]').click();assert.equal(s.mounted.exportState().active.version,1);q('[data-fit-selected]').click();assert.equal(s.mounted.exportState().active.version,2);q('[data-inspect-pin]').checked=true;q('[data-inspect-pin]').dispatchEvent(new s.window.Event('change'));let before=JSON.stringify(s.mounted.exportState());q('[data-center-selected]').click();q('[data-fit-selected]').click();assert.equal(JSON.stringify(s.mounted.exportState()),before);q('[data-inspect-pin]').checked=false;q('[data-inspect-pin]').dispatchEvent(new s.window.Event('change'));s.mounted.setSearch('missing-filter');before=JSON.stringify(s.mounted.exportState());q('[data-center-selected]').click();q('[data-fit-selected]').click();assert.equal(JSON.stringify(s.mounted.exportState()),before);}finally{s.mounted.unmount();}const {m,a,id}=fixture();a.placements[id].anchor='missing';const t=await setup(mount,{foundryModules:allOff,state:m.workspace({version:11,active:a,layouts:{}})});geometry(t);try{const before=JSON.stringify(t.mounted.exportState());t.document.querySelector('[data-center-selected]').click();t.document.querySelector('[data-fit-selected]').click();assert.equal(JSON.stringify(t.mounted.exportState()),before);}finally{t.mounted.unmount();}});
 
 test('zero-size surface refuses safely without writes',async()=>{const s=await setup(mount,{foundryModules:allOff});geometry(s);try{const q=x=>s.document.querySelector(x);Object.defineProperty(q('.foundry-scene'),'clientWidth',{get:()=>0});const before=JSON.stringify(s.mounted.exportState()),count=s.writes.length;q('[data-center-selected]').click();q('[data-fit-selected]').click();assert.equal(JSON.stringify(s.mounted.exportState()),before);assert.equal(s.writes.length,count);}finally{s.mounted.unmount();}});
+
+import {alignBaseToSurface} from '../../../dist/workspaces/foundry/layout-state.mjs';
+test('six native axis alignments retain scaled base-box margins and mirror signs',()=>{
+ const args={width:800,height:420,baseWidth:110,baseHeight:150,scaleX:-2,scaleY:.5};
+ for(const [alignment,expected]of [['left',{x:118/800}],['center',{x:.5}],['right',{x:1-118/800}],['top',{y:45.5/420}],['middle',{y:.5}],['bottom',{y:1-45.5/420}]])assert.deepEqual(alignBaseToSurface({...args,alignment}),expected);
+ for(const bad of [{alignment:'invalid'},{width:0},{baseWidth:NaN},{scaleY:Infinity},{width:100},{scaleX:1e308}])assert.throws(()=>alignBaseToSurface({...args,alignment:'left',...bad}));
+ assert.deepEqual(alignBaseToSurface({...args,width:100,alignment:'center'}),{x:.5});
+});
+test('native alignment changes only requested axis, preserves saved state and has exact Undo/Redo',async()=>{
+ const {m,a,id}=fixture(),s=await setup(mount,{foundryModules:allOff,state:m.workspace({version:11,active:a,layouts:{},savedLayouts:[{name:'unchanged',layout:a}]})});geometry(s);
+ try{const q=x=>s.document.querySelector(x);q('[data-inspect-object]').value=id;q('[data-inspect-object]').dispatchEvent(new s.window.Event('change'));
+ for(const alignment of ['left','center','right','top','middle','bottom']){
+  const before=m.encodeWorkspace(s.mounted.exportState()),p=s.mounted.exportState().active.placements[id],change=alignBaseToSurface({alignment,width:240,height:600,baseWidth:110,baseHeight:150,scaleX:p.scaleX,scaleY:p.scaleY});
+  q(`[data-align-selected="${alignment}"]`).click();assert.deepEqual(s.mounted.exportState().active.placements[id],{...p,...change});assert.deepEqual(s.mounted.exportState().savedLayouts,[{name:'unchanged',layout:a}]);
+  const after=m.encodeWorkspace(s.mounted.exportState()),count=s.writes.length;q(`[data-align-selected="${alignment}"]`).click();assert.equal(s.writes.length,count);q('[data-undo]').click();assert.equal(m.encodeWorkspace(s.mounted.exportState()),before);q('[data-redo]').click();assert.equal(m.encodeWorkspace(s.mounted.exportState()),after);
+ }
+ }finally{s.mounted.unmount();}
+});
+test('alignment refuses pinned filtered oversized and zero-size geometry without writes or adoption',async()=>{
+ const s=await setup(mount,{foundryModules:allOff});geometry(s);try{const q=x=>s.document.querySelector(x),before=JSON.stringify(s.mounted.exportState());
+ Object.defineProperty(q('.foundry-scene'),'clientWidth',{configurable:true,get:()=>100});q('[data-align-selected="left"]').click();assert.equal(JSON.stringify(s.mounted.exportState()),before);assert.equal(s.writes.length,0);
+ Object.defineProperty(q('.foundry-scene'),'clientWidth',{configurable:true,get:()=>0});q('[data-align-selected="right"]').click();assert.equal(s.writes.length,0);
+ Object.defineProperty(q('.foundry-scene'),'clientWidth',{configurable:true,get:()=>800});q('[data-inspect-pin]').checked=true;q('[data-inspect-pin]').dispatchEvent(new s.window.Event('change'));const pinned=JSON.stringify(s.mounted.exportState()),count=s.writes.length;q('[data-align-selected="bottom"]').click();assert.equal(JSON.stringify(s.mounted.exportState()),pinned);assert.equal(s.writes.length,count);
+ q('[data-inspect-pin]').checked=false;q('[data-inspect-pin]').dispatchEvent(new s.window.Event('change'));s.mounted.setSearch('missing');const filtered=JSON.stringify(s.mounted.exportState()),n=s.writes.length;q('[data-align-selected="top"]').click();assert.equal(JSON.stringify(s.mounted.exportState()),filtered);assert.equal(s.writes.length,n);
+ }finally{s.mounted.unmount();}
+});
