@@ -24,6 +24,15 @@ Carry features through useful end-to-end workflows, including interruption, reco
 ## P7 — Preserve identity and accessible design
 Improve visual quality, accessibility, clarity and responsive feedback while preserving each project's established colors/design identity. Black is the default base, not permission to erase meaningful colors or force one generic theme. Preserve user customizations and avoid disruptive redesigns; product-specific opt-in or compatibility requirements live with that product. Study design sources without copying reserved assets, templates or model weights.
 
+## P8 — Modular features and safe independent evolution
+Organize features into cohesive, clearly owned modules with explicit responsibilities and minimal coupling. Each feature should work independently where its purpose permits, with required dependencies declared and optional integrations failing gracefully. Standalone operation complements, but does not replace, the ability to change, upgrade, test or replace one feature without unintended changes to others.
+
+Use stable, documented interfaces and versioned data/contracts at real boundaries. Keep feature internals private; avoid hidden shared mutable state, circular dependencies and cross-feature access to another module's storage or implementation details. Reuse appropriate common services without turning them into a tightly coupled central dependency. Choose the simplest sufficient boundaries: modularity does not require microservices, a plugin framework for every function, duplicate implementations or speculative abstractions.
+
+Before changing a feature, identify its consumers and compatibility obligations. Test the module in isolation, its interface contracts, affected integrations and regression behavior of neighboring features. Include disabled/missing optional components, failure, cancellation, restart and upgrade scenarios where applicable. Make schema/configuration changes explicit and safely migratable, with preserved original data, tested recovery or rollback paths and clearly stated irreversible limits. Breaking changes need an intentional migration plan rather than silent ripple effects.
+
+**Acceptance backlog:** record module ownership, public contracts, dependency direction, relevant contract/regression/integration tests and migration evidence for each scoped change. Demonstrate that unrelated user workflows and stored data remain intact; document justified coupling and remaining risks. This is a design and verification target, not an absolute guarantee that a change can never affect another feature, and not a claim that existing repositories already meet it.
+
 ## Project-specific goal index — not global pillars
 These links retain project ownership and acceptance detail; they do not impose their features on unrelated repositories.
 
@@ -37,7 +46,7 @@ These links retain project ownership and acceptance detail; they do not impose t
 ## Adoption register and maintenance
 | Area | Verified storage / next owner | Status |
 |---|---|---|
-| Athena | This register, product vision and integration evidence | Seven universal principles; separate project-goal navigation, no universal runtime audit claimed |
+| Athena | This register, product vision and integration evidence | Eight universal principles; separate project-goal navigation, no universal runtime audit claimed |
 | Shared mod database | Modding-Knowledge owns typed relationship/follow/release contracts | Consumer integration and full provider coverage require separate evidence |
 | MO2R | Linked workspaces/native-parity docs and existing issues #1/#2/#5/#8/#11/#12 | Detailed goals saved; Windows/native implementation acceptance remains open |
 | External CAS | Linked photo goal and existing acceptance checklist | Detailed goals saved, not implemented photo reconstruction |
