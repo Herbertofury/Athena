@@ -135,6 +135,16 @@ c.execute('UPDATE experiment_runs SET output=? WHERE experiment_id=?',(raw,int(s
   assert.equal(stored.version,9);assert.equal(stored.active.time,'night');
   assert.ok(Object.values(stored.active.placements).some(p=>p.rotation===45 && p.transformOrigin==='tr'),JSON.stringify(stored.active.placements));
  });
+ await check('Native snapshot comparison tracks edits and Undo without automatic writes',async()=>{
+  const prior=cli('load-backup');
+  assert.match(await page.locator('[data-native-comparison]').textContent(),/matches/);
+  await page.locator('select[data-time]').selectOption('dusk');
+  assert.match(await page.locator('[data-native-comparison]').textContent(),/differs/);
+  assert.equal(cli('load-backup'),prior);
+  await page.locator('[data-undo]').click();
+  assert.match(await page.locator('[data-native-comparison]').textContent(),/matches/);
+  assert.equal(cli('load-backup'),prior);
+ });
  await check('Named layouts keep independent multi-room transforms and scopes through native storage',async()=>{
   const firstRoom=await page.locator('select[data-room-select]').inputValue();
   await page.locator('[data-inspect-scale-x]').fill('-2');await page.locator('[data-inspect-scale-y]').fill('0.5');await page.locator('[data-inspect-transform]').click();
@@ -149,8 +159,15 @@ c.execute('UPDATE experiment_runs SET output=? WHERE experiment_id=?',(raw,int(s
   assert.equal(await page.locator('select[data-time]').inputValue(),'night');
   assert.equal(await page.locator('[data-inspect-scale-x]').inputValue(),'-2');assert.equal(await page.locator('[data-inspect-scale-y]').inputValue(),'0.5');
   assert.equal(await page.locator('[data-inspect-scope]').inputValue(),'sticker');
+  await page.locator('[data-preset-name]').fill('Synthetic dusk room');await page.locator('[data-preset-rename]').click();
+  assert.equal(await page.locator('[data-preset-select] option:checked').textContent(),'Synthetic night room');
+  await page.locator('[data-preset-name]').fill('Renamed night room');await page.locator('[data-preset-rename]').click();
+  assert.equal(await page.locator('[data-preset-select] option:checked').textContent(),'Renamed night room');
+  assert.match(await page.locator('[data-native-comparison]').textContent(),/differs/);
+  await page.locator('[data-undo]').click();assert.equal(await page.locator('[data-preset-select] option:checked').textContent(),'Synthetic night room');
+  await page.locator('[data-redo]').click();assert.equal(await page.locator('[data-preset-select] option:checked').textContent(),'Renamed night room');
   await page.locator('[data-native-save]').click();await page.locator('[data-native-save]:not(:disabled)').waitFor();await page.locator('[data-native-status]').filter({hasText:'saved to native SQLite'}).waitFor();
-  const backup=JSON.parse(cli('load-backup'));assert.equal(backup.savedLayouts.length,2);assert.deepEqual(backup.savedLayouts.map(p=>p.name),['Synthetic night room','Synthetic dusk room']);
+  const backup=JSON.parse(cli('load-backup'));assert.equal(backup.savedLayouts.length,2);assert.deepEqual(backup.savedLayouts.map(p=>p.name),['Renamed night room','Synthetic dusk room']);
   const night=backup.savedLayouts[0].layout,dusk=backup.savedLayouts[1].layout;assert.equal(night.roomId,firstRoom);assert.equal(dusk.roomId,secondRoom);assert.equal(dusk.time,'dusk');
   assert.ok(Object.values(night.placements).some(p=>p.rotation===45&&p.scaleX===-2&&p.scaleY===.5&&p.scope==='sticker'&&p.anchor==='scene'&&p.transformOrigin==='tr'));
   assert.ok(Object.values(dusk.placements).some(p=>p.rotation===-30));assert.equal(backup.layouts[secondRoom].time,'dusk');
@@ -193,6 +210,7 @@ c.execute('UPDATE experiment_runs SET output=? WHERE experiment_id=?',(raw,int(s
  await check('Restarted named layouts can be removed and undone without mutating native backup',async()=>{
   const committed=cli('load-backup');
   assert.equal(await page.locator('[data-preset-select] option').count(),2);
+  assert.equal(await page.locator('[data-preset-select] option').nth(0).textContent(),'Renamed night room');
   await page.locator('[data-preset-select]').selectOption({label:'Synthetic dusk room'});await page.locator('[data-preset-load]').click();
   assert.equal(await page.locator('select[data-time]').inputValue(),'dusk');assert.equal(await page.locator('[data-inspect-rotation]').inputValue(),'-30');
   await page.locator('[data-preset-select]').selectOption({label:'Synthetic dusk room'});await page.locator('[data-preset-remove]').click();assert.equal(await page.locator('[data-preset-select] option').count(),1);
