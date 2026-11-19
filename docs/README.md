@@ -52,4 +52,4 @@ Start with [The Packet Trail](paths/packet-trail.md) for a coherent applied netw
 
 ## Cross-project product requirements
 
-[Product pillars and adoption register](PRODUCT-PILLARS.md) records portable storage, responsive event-driven work, Relationships, notifications, creative reuse, deep gameplay, project-specific UI, MO2R workflows and External CAS. Requirements and per-project evidence are distinct from shipped completion.
+[Universal engineering pillars](PRODUCT-PILLARS.md) apply across repositories. Its separate project-goal index links domain-specific requirements to their owning repositories; MO2R features, External CAS photo fitting and game mechanics are not global pillars. Requirements and acceptance evidence remain distinct from shipped completion.
