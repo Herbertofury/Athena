@@ -39,6 +39,15 @@ Before changing a feature, identify its consumers and compatibility obligations.
 
 **Acceptance backlog:** record module ownership, public contracts, dependency direction, relevant contract/regression/integration tests and migration evidence for each scoped change. Demonstrate that unrelated user workflows and stored data remain intact; document justified coupling and remaining risks. This is a design and verification target, not an absolute guarantee that a change can never affect another feature, and not a claim that existing repositories already meet it.
 
+## P9 — Delightful, actionable lists and visible progress
+Treat lists and reports as useful interactive workspaces, not static walls of text. Provide relevant search, stable sorting, composable filters, categories, clear selection and reversible user markings. Let people find, inspect, prioritize and finish work with satisfying, proportionate visual feedback and meaningful progress. Preserve each project's identity; do not force game mechanics or identical controls onto every list.
+
+Keep original evidence and machine findings separate from user status, notes and decisions. A checked item is user-marked progress, not proof of a successful repair or independently verified result. Define honest totals and denominators, distinguish filtered counts from overall progress, and never silently change underlying files or operational state through sorting, filtering or marking. Make bulk actions explicit and reversible, with stale-selection protection.
+
+Persist user work and view preferences appropriately in portable app-owned storage, expose save failures, and support recovery/export/import with stable identities and source-revision awareness. Provide keyboard operation, screen-reader labels and progress announcements, non-color status cues, reduced-motion preferences and optional/non-disruptive celebration. Large lists need bounded parsing/indexing, responsive search, virtualized or paged rendering where appropriate, cancellation and fair background work, without dropping findings.
+
+**Acceptance backlog:** verify search/sort/filter composition, empty/unknown/stale states, marking/undo, interrupted save/restart, snapshot changes, bulk-selection scope, keyboard/focus and reduced-motion behavior. Measure representative large-list input/frame latency and memory against the baseline. Test actual workflows rather than claiming delight, accessibility or unlimited scale from screenshots.
+
 ## Project-specific goal index — not global pillars
 These links retain project ownership and acceptance detail; they do not impose their features on unrelated repositories.
 
@@ -53,7 +62,7 @@ These links retain project ownership and acceptance detail; they do not impose t
 ## Adoption register and maintenance
 | Area | Verified storage / next owner | Status |
 |---|---|---|
-| Athena | This register, product vision and integration evidence | Eight universal principles; separate project-goal navigation, no universal runtime audit claimed |
+| Athena | This register, product vision and integration evidence | Nine universal principles; separate project-goal navigation, no universal runtime audit claimed |
 | Shared mod database | Modding-Knowledge owns typed relationship/follow/release contracts | Consumer integration and full provider coverage require separate evidence |
 | MO2R | Linked workspaces/native-parity docs and existing issues #1/#2/#5/#8/#11/#12 | Detailed goals saved; Windows/native implementation acceptance remains open |
 | External CAS | Linked photo goal and existing acceptance checklist | Detailed goals saved, not implemented photo reconstruction |
