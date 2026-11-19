@@ -44,3 +44,21 @@ No fleet writes, source deletion, archive/visibility changes, new credentials, g
 ## Fresh two-consumer inventory
 
 The [Bloom-and-Boom / Modhunter review](../../guidance/evidence/bloom-modhunter-retirement-review-2026-11-15.md) and [sanitized receipt](../../guidance/evidence/bloom-modhunter-consumer-audit-2026-11-15.json) verify two additional public main snapshots. Both retain intact 16-file Agent-Foundry pins; read-only Athena transition proposals are conflict-free, not applied or behaviorally accepted. Local guidance routing, historical skill/CI references and project-owned skills are classified separately. No consumer was changed and no runtime failure is inferred from a legacy URL. Fleet, skill propagation, history and retirement gates remain open.
+
+## Native local consumer-audit review
+
+The Guidance workspace can inspect a JSON report emitted by
+`guidance/tools/audit_consumers.py` through an explicit local-file picker. It displays
+reported checkout revisions, pin states/issues, tracked/uninspected coverage and
+complete per-consumer evidence. This is report inspection, not running an audit,
+verifying its authenticity or determining retirement readiness. Even a report with
+no remaining consumer work cannot establish complete migration or safe deletion.
+
+Reports stay in this view only: no uploads, persistence, checkout access, pin changes
+or automatic actions. Original file bytes remain untouched. Clear removes the view;
+route teardown discards it. Malformed replacements keep the previous valid report;
+newer selections and Clear supersede pending reads. UTF-8 JSON admission is bounded
+to 2 MiB and 100 consumers, with explicit array limits and no truncation. Duplicate
+keys, ambiguous numeric normalization and excessive nesting are refused. Paths and
+other reported strings are inert text, never executed or opened as links. Source
+retirement and complete consumer adoption remain separate acceptance gates.
