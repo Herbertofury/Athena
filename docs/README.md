@@ -49,3 +49,7 @@ Start with [The Packet Trail](paths/packet-trail.md) for a coherent applied netw
 ## Software discovery
 
 - [Catalog and application families](https://herbertofury.github.io/Athena/#software)
+
+## Cross-project product requirements
+
+[Product pillars and adoption register](PRODUCT-PILLARS.md) records portable storage, responsive event-driven work, Relationships, notifications, creative reuse, deep gameplay, project-specific UI, MO2R workflows and External CAS. Requirements and per-project evidence are distinct from shipped completion.
