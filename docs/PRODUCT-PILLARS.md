@@ -39,7 +39,9 @@ Before changing a feature, identify its consumers and compatibility obligations.
 
 **Acceptance backlog:** record module ownership, public contracts, dependency direction, relevant contract/regression/integration tests and migration evidence for each scoped change. Demonstrate that unrelated user workflows and stored data remain intact; document justified coupling and remaining risks. This is a design and verification target, not an absolute guarantee that a change can never affect another feature, and not a claim that existing repositories already meet it.
 
-## P9 — Delightful, actionable lists and visible progress
+## P9 — Explorable content, actionable lists and visible progress
+Apply this principle to text-heavy content across all projects, not only lists: make appropriate documents, logs, reports and knowledge explorable, navigable and actionable while preserving a faithful original/raw view and accessible linear reading. Use headings, outlines, cross-links, search, expandable detail and relevant actions where they help; no forced gimmicks or transformation that conceals meaning or provenance.
+
 Treat lists and reports as useful interactive workspaces, not static walls of text. Provide relevant search, stable sorting, composable filters, categories, clear selection and reversible user markings. Let people find, inspect, prioritize and finish work with satisfying, proportionate visual feedback and meaningful progress. Preserve each project's identity; do not force game mechanics or identical controls onto every list.
 
 Keep original evidence and machine findings separate from user status, notes and decisions. A checked item is user-marked progress, not proof of a successful repair or independently verified result. Define honest totals and denominators, distinguish filtered counts from overall progress, and never silently change underlying files or operational state through sorting, filtering or marking. Make bulk actions explicit and reversible, with stale-selection protection.
