@@ -1,0 +1,67 @@
+{
+  "reviewed_at": "2026-11-17",
+  "applications": [
+    {
+      "id": "syncthing",
+      "limitations": [
+        "Deletions and unwanted changes can propagate to other devices; synchronization alone is not an independent backup.",
+        "Peers need connectivity and time online to exchange changes; desktop tray applications are separate projects from the core daemon.",
+        "File versioning is disabled by default and cannot archive an earlier version when the file is changed locally on the same device."
+      ],
+      "sources": [
+        {
+          "url": "https://docs.syncthing.net/users/versioning.html",
+          "label": "Official current file-versioning defaults and remote-change boundary",
+          "checked_at": "2026-11-17",
+          "supports": [
+            "features"
+          ]
+        }
+      ],
+      "features": [
+        "Peer-to-peer continuous synchronization",
+        "File versioning can archive older files received from other devices; it is configured per folder and per device."
+      ]
+    },
+    {
+      "id": "duplicati",
+      "limitations": [
+        "Cloud storage limits and provider charges remain separate from the backup client.",
+        "Backup encryption credentials and a tested restore procedure are essential; optional management features have separate free and paid plans.",
+        "Portable mode documents server-data placement, not proof that every cache, temporary file, credential or OS artifact stays in one folder; relocation and restore still need testing."
+      ],
+      "sources": [
+        {
+          "url": "https://github.com/duplicati/documentation/blob/main/duplicati-programs/server.md",
+          "label": "Official server data-location and portable-mode documentation",
+          "checked_at": "2026-11-17",
+          "supports": [
+            "features"
+          ]
+        }
+      ],
+      "features": [
+        "Encrypted incremental cloud backup",
+        "The documented --portable-mode places its data folder in a data directory beside the program files; --server-datafolder or DUPLICATI_HOME can explicitly select the server data location."
+      ]
+    },
+    {
+      "id": "rclone",
+      "limitations": [
+        "Sync operations can delete destination files to match the source; review the direction and use the documented dry-run option for unfamiliar jobs.",
+        "Provider API limits, credentials, storage charges and filesystem differences still apply; this is primarily a command-line workflow.",
+        "For a transfer that must retain destination-only files, use copy rather than sync; preview sync with --dry-run or --interactive because sync may delete destination files."
+      ],
+      "sources": [
+        {
+          "url": "https://rclone.org/commands/rclone_sync/",
+          "label": "Official sync deletion semantics and preview guidance",
+          "checked_at": "2026-11-17",
+          "supports": [
+            "features"
+          ]
+        }
+      ]
+    }
+  ]
+}

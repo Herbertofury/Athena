@@ -1,0 +1,29 @@
+{
+  "recipes": [
+    {
+      "id": "separate-sync-from-recovery",
+      "title": "Separate synchronization from recoverable history",
+      "description": "Choose a workflow by what it preserves after deletion or overwrite, not by whether it copies files. Documentation review is not a restore test.",
+      "picks": [
+        {
+          "app_id": "syncthing",
+          "label": "Continuous peer synchronization",
+          "reason": "Keeps selected device folders synchronized; optional per-folder versioning archives changes received from other devices.",
+          "tradeoff": "Versioning is off by default and does not preserve the prior version of a local edit on that same device."
+        },
+        {
+          "app_id": "rclone",
+          "label": "Explicit copy versus mirror transfer",
+          "reason": "Choose copy when destination-only files must remain, or sync when mirroring is genuinely intended.",
+          "tradeoff": "Sync may delete destination files; inspect --dry-run before use. A transfer alone does not establish historical recovery."
+        },
+        {
+          "app_id": "duplicati",
+          "label": "Versioned backup with explicit data placement",
+          "reason": "Provides encrypted incremental backups; documented portable mode places server data beside the program files.",
+          "tradeoff": "Keep backup credentials and test restoration and folder relocation; portable-mode documentation is not a full no-outside-writes audit."
+        }
+      ]
+    }
+  ]
+}
