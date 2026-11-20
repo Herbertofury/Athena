@@ -142,7 +142,7 @@ class IntegrationRegressions(unittest.TestCase):
 class SourceAuditRegressions(unittest.TestCase):
     """Exercise the command's exit status and receipt without any network access."""
 
-    def audit(self, active_uses_missing_url=False, unavailable_history=False, recovered=False, excluded_unavailable=False):
+    def audit(self, active_uses_missing_url=False, unavailable_history=False, recovered=False, excluded_unavailable=False, missing_status=404):
         missing = "https://projects.example/historical-exclusion"
         current = "https://projects.example/current-application"
         catalog = {
@@ -158,7 +158,7 @@ class SourceAuditRegressions(unittest.TestCase):
                 "availability": {"status": "unavailable", "checked_at": "2026-11-16"}}]
 
         def observed(url, timeout=15):
-            status = 404 if url == missing and not recovered else 200
+            status = missing_status if url == missing and not recovered else 200
             return {
                 "url": url, "status": status, "outcome": links.classify(status),
                 "checked_at": "2026-11-15T00:00:00+00:00", "final_url": url, "method": "HEAD",
@@ -172,6 +172,11 @@ class SourceAuditRegressions(unittest.TestCase):
             with patch.object(sys, "argv", arguments), patch.object(links, "check_url", side_effect=observed), contextlib.redirect_stdout(io.StringIO()):
                 status = links.main()
             return status, json.loads(report_path.read_text())
+
+    def test_confirmed_current_410_still_fails_strict_gate(self):
+        status, report = self.audit(active_uses_missing_url=True, missing_status=410)
+        self.assertEqual(status, 1)
+        self.assertEqual(report["actionable_not_found"], 1)
 
     def test_known_excluded_404_is_retained_but_does_not_fail_current_catalog_gate(self):
         status, report = self.audit()

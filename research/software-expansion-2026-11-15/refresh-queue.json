@@ -4,18 +4,18 @@
   "review_interval_days": 90,
   "scope": "Research work queue. Unknown fields and review age do not establish inactivity, insecurity or inferior quality.",
   "counts": {
-    "applications": 1069,
-    "new_applications": 964,
+    "applications": 1073,
+    "new_applications": 968,
     "preserved_pc_records": 105,
     "preserved_cleanup_records": 66,
     "baseline_categories": 42,
-    "categories": 373,
+    "categories": 374,
     "families": 10,
-    "source_urls": 4355,
+    "source_urls": 4368,
     "alternative_links": 2476,
     "unresolved_alternative_mentions": 73,
     "legacy_records_enriched": 68,
-    "use_cases": 1958,
+    "use_cases": 1959,
     "decision_guides": 203,
     "capability_assertions": 9,
     "applications_with_documented_capabilities": 9,
@@ -31,7 +31,7 @@
       "files": 65,
       "gaming": 55,
       "networking": 92,
-      "productivity": 151,
+      "productivity": 155,
       "science": 208,
       "security": 54,
       "system": 89
@@ -39,33 +39,33 @@
     "by_platform": {
       "Bootable": 7,
       "FreeBSD": 58,
-      "Linux": 817,
+      "Linux": 820,
       "Web": 110,
-      "Windows": 893,
-      "macOS": 749
+      "Windows": 897,
+      "macOS": 752
     },
     "by_maintenance": {
-      "active": 650,
+      "active": 651,
       "discontinued": 2,
-      "unverified": 417
+      "unverified": 420
     },
     "by_license": {
       "mixed": 49,
-      "open-source": 824,
-      "proprietary": 150,
+      "open-source": 827,
+      "proprietary": 151,
       "source-available": 17,
       "unknown": 29
     },
     "by_pricing": {
-      "free": 596,
+      "free": 597,
       "freemium": 118,
       "mixed": 51,
       "paid": 35,
       "subscription": 18,
-      "unknown": 251
+      "unknown": 254
     }
   },
-  "records_needing_research": 570,
+  "records_needing_research": 573,
   "refresh_queue": [
     {
       "app_id": "010-editor",
@@ -116,6 +116,17 @@
       "reasons": [
         "dated maintenance evidence unresolved",
         "preserved record needs field-specific source mapping: license"
+      ]
+    },
+    {
+      "app_id": "ace-by-daisy-app",
+      "name": "Ace by DAISY App",
+      "origin": "data/software/document-validation-expanded.json",
+      "latest_source_review": "2026-11-19",
+      "review_age_days": 0,
+      "reasons": [
+        "distribution pricing unresolved",
+        "dated maintenance evidence unresolved"
       ]
     },
     {
@@ -1491,6 +1502,17 @@
       "latest_source_review": "2026-11-16",
       "review_age_days": 0,
       "reasons": [
+        "dated maintenance evidence unresolved"
+      ]
+    },
+    {
+      "app_id": "epubcheck",
+      "name": "EPUBCheck",
+      "origin": "data/software/document-validation-expanded.json",
+      "latest_source_review": "2026-11-19",
+      "review_age_days": 0,
+      "reasons": [
+        "distribution pricing unresolved",
         "dated maintenance evidence unresolved"
       ]
     },
@@ -5557,6 +5579,17 @@
       ]
     },
     {
+      "app_id": "verapdf",
+      "name": "veraPDF",
+      "origin": "data/software/document-validation-expanded.json",
+      "latest_source_review": "2026-11-19",
+      "review_age_days": 0,
+      "reasons": [
+        "distribution pricing unresolved",
+        "dated maintenance evidence unresolved"
+      ]
+    },
+    {
       "app_id": "vesta",
       "name": "VESTA",
       "origin": "data/software/creative-expanded.json",
@@ -5693,8 +5726,8 @@
       "app_id": "webots",
       "name": "Webots",
       "origin": "data/software/systems-wave2-expanded.json",
-      "latest_source_review": "2026-11-15",
-      "review_age_days": 1,
+      "latest_source_review": "2026-11-20",
+      "review_age_days": 0,
       "reasons": [
         "distribution pricing unresolved"
       ]

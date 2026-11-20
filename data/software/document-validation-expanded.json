@@ -1,0 +1,349 @@
+{
+  "schema_version": 1,
+  "reviewed_at": "2026-11-19",
+  "applications": [
+    {
+      "id": "ace-by-daisy-app",
+      "name": "Ace by DAISY App",
+      "family": "productivity",
+      "category": "document-validation",
+      "summary": "EPUB accessibility evaluation GUI, with violations, metadata, outlines and image reports; export report ZIP.",
+      "official_url": "https://daisy.github.io/ace/getting-started/ace-app/",
+      "download_url": "https://daisy.github.io/ace/getting-started/ace-app/",
+      "repository_url": "https://github.com/daisy/ace-gui",
+      "platforms": [
+        "Windows",
+        "macOS",
+        "Linux"
+      ],
+      "platform_notes": "Official Intel and ARM64 NSIS installers; also macOS and Linux builds. Windows installation documented, not a folder-portable distribution. Report path is configurable in Settings; full settings/cache/log confinement not established.",
+      "license": "MIT, with copyright and permission notice retention.",
+      "license_kind": "open-source",
+      "pricing_model": "unknown",
+      "features": [
+        "EPUB accessibility evaluation GUI, with violations, metadata, outlines and image reports; export report ZIP."
+      ],
+      "strengths": [
+        "Use for EPUB accessibility report review."
+      ],
+      "limitations": [
+        "Windows installation documented, not a folder-portable distribution. Report path is configurable in Settings; full settings/cache/log confinement not established.",
+        "Documentation reviewed only; not installed, benchmarked or certified. Automated checks do not replace human accessibility review.",
+        "Exact supported Windows build floor",
+        "Complete settings/cache/log/temp paths",
+        "Signed executable verification",
+        "Real assistive-technology compatibility"
+      ],
+      "use_cases": [
+        "Review document publishing outputs before distribution"
+      ],
+      "tags": [
+        "documents",
+        "validation",
+        "accessibility",
+        "epub"
+      ],
+      "alternatives": [],
+      "recommendation": {
+        "pick_for": "Choose for the specific validation scope documented above.",
+        "compare_when": "Compare file format, manual-review needs, Windows prerequisites and portable-state requirements; these tools are not interchangeable."
+      },
+      "maintenance": {
+        "status": "unverified",
+        "checked_at": "2026-11-19",
+        "note": "Documentation links v1.4.6; observation is not independent executable inspection. Dated maintenance remains unverified.",
+        "source_url": "https://daisy.github.io/ace/getting-started/ace-app/"
+      },
+      "sources": [
+        {
+          "url": "https://daisy.github.io/ace/getting-started/ace-app/",
+          "label": "Official purpose evidence",
+          "checked_at": "2026-11-19",
+          "supports": [
+            "downloads",
+            "features",
+            "identity",
+            "maintenance",
+            "platforms"
+          ]
+        },
+        {
+          "url": "https://github.com/daisy/ace-gui/blob/master/LICENSE",
+          "label": "Official license evidence",
+          "checked_at": "2026-11-19",
+          "supports": [
+            "license"
+          ]
+        }
+      ],
+      "evidence_status": "official-docs-reviewed"
+    },
+    {
+      "id": "pac-pdf-accessibility-checker",
+      "name": "PDF Accessibility Checker (PAC)",
+      "family": "productivity",
+      "category": "document-validation",
+      "summary": "PDF accessibility checks, including locally executed AI assistance. Vendor states processing is local and no Internet access; not independently network-tested.",
+      "official_url": "https://pac.pdf-accessibility.org/en/download",
+      "download_url": "https://pac.pdf-accessibility.org/en/download",
+      "repository_url": null,
+      "platforms": [
+        "Windows"
+      ],
+      "platform_notes": "Windows 10/11 and .NET Framework 4.8 or newer. EXE and administrative MSI offered. Current EXE/MSI installation differs from historical ZIP downloads; no current folder-portable guarantee established.",
+      "license": "Vendor general terms apply; section7.2 disallows own-server downloads without written permission. Do not mirror installer in Athena.",
+      "license_kind": "proprietary",
+      "pricing_model": "free",
+      "features": [
+        "PDF accessibility checks, including locally executed AI assistance. Vendor states processing is local and no Internet access; not independently network-tested."
+      ],
+      "strengths": [
+        "Use for Windows PDF accessibility inspection."
+      ],
+      "limitations": [
+        "Current EXE/MSI installation differs from historical ZIP downloads; no current folder-portable guarantee established.",
+        "Documentation reviewed only; not installed, benchmarked or certified. Automated checks do not replace human accessibility review.",
+        "Full current settings/log/cache paths",
+        "Actual UI assistive-technology acceptance",
+        "Installer signatures and hashes",
+        "No hands-on accuracy or security audit",
+        "Vendor general terms apply; section7.2 disallows own-server downloads without written permission. Do not mirror installer in Athena.",
+        "Vendor states the PAC user interface is mostly, but not completely, accessible; see its linked accessibility conformance report."
+      ],
+      "use_cases": [
+        "Review document publishing outputs before distribution"
+      ],
+      "tags": [
+        "documents",
+        "validation",
+        "accessibility",
+        "pdf"
+      ],
+      "alternatives": [],
+      "recommendation": {
+        "pick_for": "Choose for the specific validation scope documented above.",
+        "compare_when": "Compare file format, manual-review needs, Windows prerequisites and portable-state requirements; these tools are not interchangeable."
+      },
+      "maintenance": {
+        "status": "active",
+        "checked_at": "2026-11-19",
+        "note": "Download label PAC 2026.1.2; release notes name 26.1.2.0, dated 2026-11-17, fixing certain annotated PDF problems.",
+        "source_url": "https://pac.pdf-accessibility.org/en/resources/release-notes"
+      },
+      "sources": [
+        {
+          "url": "https://pac.pdf-accessibility.org/en/resources/faq",
+          "label": "Official purpose evidence",
+          "checked_at": "2026-11-19",
+          "supports": [
+            "features",
+            "identity",
+            "pricing"
+          ]
+        },
+        {
+          "url": "https://pac.pdf-accessibility.org/en/download",
+          "label": "Official windows evidence",
+          "checked_at": "2026-11-19",
+          "supports": [
+            "downloads",
+            "features",
+            "platforms"
+          ]
+        },
+        {
+          "url": "https://pac.pdf-accessibility.org/en/resources/release-notes",
+          "label": "Official version observed evidence",
+          "checked_at": "2026-11-19",
+          "supports": [
+            "maintenance"
+          ]
+        },
+        {
+          "url": "https://pac.pdf-accessibility.org/en/resources/general-terms",
+          "label": "Official license evidence",
+          "checked_at": "2026-11-19",
+          "supports": [
+            "license"
+          ]
+        }
+      ],
+      "evidence_status": "official-docs-reviewed"
+    },
+    {
+      "id": "verapdf",
+      "name": "veraPDF",
+      "family": "productivity",
+      "category": "document-validation",
+      "summary": "PDF/A conformance and PDF/UA parts1/2 machine checks; not a substitute for human accessibility review.",
+      "official_url": "https://verapdf.org/home/",
+      "download_url": "https://docs.verapdf.org/install/",
+      "repository_url": null,
+      "platforms": [
+        "Windows",
+        "macOS",
+        "Linux"
+      ],
+      "platform_notes": "Java installer ZIP includes vera-install.bat; CLI and GUI installed below selected location in bin. Configuration XML may reside under installation config or user-directory verapdf. Folder-only state is not assured. Official config documentation shows C:\\Users\\<User name>\\AppData\\Roaming\\verapdf\\config as a Windows example; verapdf --config reports the effective location. This is a documented example, not a universal measured path.",
+      "license": "Dual GPLv3-or-later or MPLv2-or-later.",
+      "license_kind": "open-source",
+      "pricing_model": "unknown",
+      "features": [
+        "PDF/A conformance and PDF/UA parts1/2 machine checks; not a substitute for human accessibility review."
+      ],
+      "strengths": [
+        "Use for PDF/A and PDF/UA machine-rule validation."
+      ],
+      "limitations": [
+        "Configuration XML may reside under installation config or user-directory verapdf. Folder-only state is not assured.",
+        "Documentation reviewed only; not installed, benchmarked or certified. Automated checks do not replace human accessibility review.",
+        "Current stable version and date not pinned",
+        "Exact current Java/Windows floor",
+        "Effective config precedence and temp paths",
+        "Runtime accuracy/performance"
+      ],
+      "use_cases": [
+        "Review document publishing outputs before distribution"
+      ],
+      "tags": [
+        "documents",
+        "validation",
+        "accessibility",
+        "pdf"
+      ],
+      "alternatives": [],
+      "recommendation": {
+        "pick_for": "Choose for the specific validation scope documented above.",
+        "compare_when": "Compare file format, manual-review needs, Windows prerequisites and portable-state requirements; these tools are not interchangeable."
+      },
+      "maintenance": {
+        "status": "unverified",
+        "checked_at": "2026-11-19",
+        "note": "Current stable release version/date not pinned in this pass. Dated maintenance remains unverified.",
+        "source_url": "https://verapdf.org/home/"
+      },
+      "sources": [
+        {
+          "url": "https://verapdf.org/home/",
+          "label": "Official purpose evidence",
+          "checked_at": "2026-11-19",
+          "supports": [
+            "features",
+            "identity",
+            "license"
+          ]
+        },
+        {
+          "url": "https://docs.verapdf.org/install/",
+          "label": "Official windows evidence",
+          "checked_at": "2026-11-19",
+          "supports": [
+            "downloads",
+            "platforms"
+          ]
+        },
+        {
+          "url": "https://docs.verapdf.org/cli/config/",
+          "label": "Official portable evidence",
+          "checked_at": "2026-11-19",
+          "supports": [
+            "features"
+          ]
+        }
+      ],
+      "evidence_status": "official-docs-reviewed"
+    },
+    {
+      "id": "epubcheck",
+      "name": "EPUBCheck",
+      "family": "productivity",
+      "category": "document-validation",
+      "summary": "EPUB2/3 structural conformance CLI; W3C project maintained by DAISY. Not complete accessibility certification.",
+      "official_url": "https://www.w3.org/publishing/epubcheck/",
+      "download_url": "https://www.w3.org/publishing/epubcheck/docs/installation/",
+      "repository_url": "https://github.com/w3c/epubcheck",
+      "platforms": [
+        "Windows",
+        "macOS",
+        "Linux"
+      ],
+      "platform_notes": "Java-based command-line distribution. Documentation specifies Java7+; this is documentation evidence, not recommendation to install obsolete Java. ZIP can be relocated if epubcheck.jar and lib stay together; external Java runtime remains prerequisite. Complete cache/temp/registry confinement unverified.",
+      "license": "BSD-3-Clause (release v5.4.0 LICENSE.md; official landing page conflicts by stating MIT)",
+      "license_kind": "open-source",
+      "pricing_model": "unknown",
+      "features": [
+        "EPUB2/3 structural conformance CLI; W3C project maintained by DAISY. Not complete accessibility certification."
+      ],
+      "strengths": [
+        "Use for EPUB structural conformance validation."
+      ],
+      "limitations": [
+        "ZIP can be relocated if epubcheck.jar and lib stay together; external Java runtime remains prerequisite. Complete cache/temp/registry confinement unverified.",
+        "Documentation reviewed only; not installed, benchmarked or certified. Automated checks do not replace human accessibility review.",
+        "Exact tested Windows matrix",
+        "Current supported Java runtime selection",
+        "Whole-folder state and temporary paths",
+        "Cryptographic release signature policy",
+        "Official product landing page says MIT, but v5.4.0 LICENSE.md contains BSD-3-Clause terms. Use the release-pinned license and inspect dependency notices before redistribution."
+      ],
+      "use_cases": [
+        "Review document publishing outputs before distribution"
+      ],
+      "tags": [
+        "documents",
+        "validation",
+        "accessibility",
+        "epub"
+      ],
+      "alternatives": [],
+      "recommendation": {
+        "pick_for": "Choose for the specific validation scope documented above.",
+        "compare_when": "Compare file format, manual-review needs, Windows prerequisites and portable-state requirements; these tools are not interchangeable."
+      },
+      "maintenance": {
+        "status": "unverified",
+        "checked_at": "2026-11-19",
+        "note": "Repository calls v5.4.0 production-ready; EPUB3 checked against EPUB3.4. Dated maintenance remains unverified.",
+        "source_url": "https://github.com/w3c/epubcheck"
+      },
+      "sources": [
+        {
+          "url": "https://www.w3.org/publishing/epubcheck/",
+          "label": "Official purpose evidence",
+          "checked_at": "2026-11-19",
+          "supports": [
+            "features",
+            "identity"
+          ]
+        },
+        {
+          "url": "https://github.com/w3c/epubcheck",
+          "label": "Official version observed evidence",
+          "checked_at": "2026-11-19",
+          "supports": [
+            "maintenance"
+          ]
+        },
+        {
+          "url": "https://www.w3.org/publishing/epubcheck/docs/installation/",
+          "label": "Official windows evidence",
+          "checked_at": "2026-11-19",
+          "supports": [
+            "downloads",
+            "features",
+            "platforms"
+          ]
+        },
+        {
+          "url": "https://github.com/w3c/epubcheck/blob/v5.4.0/LICENSE.md",
+          "label": "Release-pinned BSD-3-Clause license; takes precedence over conflicting marketing page",
+          "checked_at": "2026-11-19",
+          "supports": [
+            "license"
+          ]
+        }
+      ],
+      "evidence_status": "official-docs-reviewed"
+    }
+  ]
+}

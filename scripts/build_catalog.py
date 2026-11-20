@@ -120,3 +120,9 @@ for name, target in [("docs/README.md", "https://herbertofury.github.io/Athena/#
   for family, label in [("System", "System and hardware"), ("Files", "Files, backup and recovery"), ("Security", "Security and privacy"), ("Networking", "Networks and remote access"), ("Productivity", "Productivity and accessibility"), ("Creative", "Creative and multimedia"), ("Development", "Development and automation"), ("Ai", "AI and local models"), ("Gaming", "Gaming and modding"), ("Science", "Science and specialized work")]:
    links += "- [" + label + "](Software-" + family + ")\n"
  destination.write_text(destination.read_text() + links)
+
+# Keep universal requirements discoverable after every clean catalog rebuild.
+# This navigation is generated here; the requirements remain in PRODUCT-PILLARS.md.
+pillars_navigation = '\n## Cross-project product requirements\n\n[Universal engineering pillars](PRODUCT-PILLARS.md) apply across repositories. Its separate project-goal index links domain-specific requirements to their owning repositories; MO2R features, External CAS photo fitting and game mechanics are not global pillars. Requirements and acceptance evidence remain distinct from shipped completion.\n'
+destination = R / "docs/README.md"
+destination.write_text(destination.read_text() + pillars_navigation)
