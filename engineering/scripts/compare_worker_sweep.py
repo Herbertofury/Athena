@@ -2,17 +2,16 @@
 """Evaluate a complete 4/8/16/32/64 sweep against explicit budgets; never certify a release."""
 import argparse
 import json
-import math
 import statistics
 from pathlib import Path
-from compare_benchmarks import compare, validate, decode_record
+from compare_benchmarks import compare, validate, decode_record, finite_number, checked_metric
 
 COUNTS = (4, 8, 16, 32, 64)
 METRICS = ('peak_memory_mb', 'peak_handles', 'ui_latency_ms', 'cancel_latency_ms')
 
 
 def positive(value, name, allow_zero=False):
-    if isinstance(value, bool) or not isinstance(value, (int, float)) or not math.isfinite(value):
+    if not finite_number(value):
         raise ValueError(f'{name} must be a finite number')
     if value < 0 or (value == 0 and not allow_zero):
         raise ValueError(f'{name} is outside its permitted range')
@@ -28,7 +27,7 @@ def resources(record):
             if metric not in sample:
                 raise ValueError(f'missing resource observation: {metric}')
             values.append(positive(sample[metric], metric, allow_zero=True))
-        result[metric] = {'max': max(values), 'median': statistics.median(values)}
+        result[metric] = {'max': max(values), 'median': checked_metric(statistics.median(values), f'{metric} median')}
     return result
 
 
