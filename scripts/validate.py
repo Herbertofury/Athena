@@ -1,4 +1,5 @@
 import json,pathlib,re
+from documentation_links import local_target
 R=pathlib.Path(__file__).resolve().parents[1];d=json.loads((R/'src/catalog.json').read_text());ids={l['id'] for l in d['lessons']}
 assert len(d['certifications'])==13 and len(ids)==len(d['lessons'])==98
 assert sum(len(c['domains']) for c in d['certifications'])==74
@@ -19,7 +20,8 @@ for l in d['lessons']:
  assert (R/f'wiki/shared-{l["id"]}.md').exists()
 for p in (R/'docs').rglob('*.md'):
  for link in re.findall(r'\]\(([^)]+)\)',p.read_text()):
-  if not link.startswith(('http','#')): assert (p.parent/link).exists(),(p,link)
+  target = local_target(p, link)
+  if target is not None: assert target.exists(), (p, link)
 html=(R/'dist/index.html').read_text()
 for src in re.findall(r'(?:src|href)="([^"]+)"',html):
  if src.endswith(('.js','.css')):assert (R/'dist'/src).exists(),src

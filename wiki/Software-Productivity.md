@@ -4,7 +4,7 @@ Read, write, organize knowledge and make computing accessible.
 
 [Browse in Athena](https://herbertofury.github.io/Athena/#software?family=productivity) · [Catalog](Software-Catalog) · [Method](Software-Methodology)
 
-151 applications. Reviewed 2026-11-16; individual records identify inherited research.
+155 applications. Reviewed 2026-11-16; individual records identify inherited research.
 
 ## Academic writing
 
@@ -458,6 +458,63 @@ Document conversion tool connecting markup, office and publishing formats.
 - **Maintenance:** active — Official repository commit activity observed on 2026-11-14 (UTC). Activity is not a runtime or platform-compatibility test. ([evidence](https://github.com/jgm/pandoc/commit/616faaad43e19c6c0d7631c73fffd1e6d3a38cde))
 - [Official project](https://pandoc.org/) · [Official installation / downloads](https://pandoc.org/installing.html) · [Repository](https://github.com/jgm/pandoc)
 - **Sources:** [Official project documentation](https://pandoc.org/) (2026-11-14; identity, features, license, pricing); [Official project README](https://raw.githubusercontent.com/jgm/pandoc/HEAD/README.md) (2026-11-14; identity, features, license); [Official installation and download information](https://pandoc.org/installing.html) (2026-11-14; identity, downloads, platforms, license); [Official repository activity feed](https://github.com/jgm/pandoc/commits/HEAD.atom) (2026-11-14; maintenance)
+
+## Document Validation
+
+[Browse this task in Athena](https://herbertofury.github.io/Athena/#software?category=productivity%2Fdocument-validation)
+
+### Ace by DAISY App
+
+EPUB accessibility evaluation GUI, with violations, metadata, outlines and image reports; export report ZIP.
+
+- **Platforms:** Windows, macOS, Linux. **License:** MIT, with copyright and permission notice retention.. **Pricing model:** unknown.
+- **Compatibility details:** Official Intel and ARM64 NSIS installers; also macOS and Linux builds. Windows installation documented, not a folder-portable distribution. Report path is configurable in Settings; full settings/cache/log confinement not established.
+- **Pick for:** Choose for the specific validation scope documented above.
+- **Compare when:** Compare file format, manual-review needs, Windows prerequisites and portable-state requirements; these tools are not interchangeable.
+- **Strengths:** Use for EPUB accessibility report review.
+- **Limitations:** Windows installation documented, not a folder-portable distribution. Report path is configurable in Settings; full settings/cache/log confinement not established.; Documentation reviewed only; not installed, benchmarked or certified. Automated checks do not replace human accessibility review.; Exact supported Windows build floor; Complete settings/cache/log/temp paths; Signed executable verification; Real assistive-technology compatibility
+- **Maintenance:** unverified — Documentation links v1.4.6; observation is not independent executable inspection. Dated maintenance remains unverified. ([evidence](https://daisy.github.io/ace/getting-started/ace-app/))
+- [Official project](https://daisy.github.io/ace/getting-started/ace-app/) · [Official installation / downloads](https://daisy.github.io/ace/getting-started/ace-app/) · [Repository](https://github.com/daisy/ace-gui)
+- **Sources:** [Official purpose evidence](https://daisy.github.io/ace/getting-started/ace-app/) (2026-11-19; downloads, features, identity, maintenance, platforms); [Official license evidence](https://github.com/daisy/ace-gui/blob/master/LICENSE) (2026-11-19; license)
+### EPUBCheck
+
+EPUB2/3 structural conformance CLI; W3C project maintained by DAISY. Not complete accessibility certification.
+
+- **Platforms:** Windows, macOS, Linux. **License:** BSD-3-Clause (release v5.4.0 LICENSE.md; official landing page conflicts by stating MIT). **Pricing model:** unknown.
+- **Compatibility details:** Java-based command-line distribution. Documentation specifies Java7+; this is documentation evidence, not recommendation to install obsolete Java. ZIP can be relocated if epubcheck.jar and lib stay together; external Java runtime remains prerequisite. Complete cache/temp/registry confinement unverified.
+- **Pick for:** Choose for the specific validation scope documented above.
+- **Compare when:** Compare file format, manual-review needs, Windows prerequisites and portable-state requirements; these tools are not interchangeable.
+- **Strengths:** Use for EPUB structural conformance validation.
+- **Limitations:** ZIP can be relocated if epubcheck.jar and lib stay together; external Java runtime remains prerequisite. Complete cache/temp/registry confinement unverified.; Documentation reviewed only; not installed, benchmarked or certified. Automated checks do not replace human accessibility review.; Exact tested Windows matrix; Current supported Java runtime selection; Whole-folder state and temporary paths; Cryptographic release signature policy; Official product landing page says MIT, but v5.4.0 LICENSE.md contains BSD-3-Clause terms. Use the release-pinned license and inspect dependency notices before redistribution.
+- **Maintenance:** unverified — Repository calls v5.4.0 production-ready; EPUB3 checked against EPUB3.4. Dated maintenance remains unverified. ([evidence](https://github.com/w3c/epubcheck))
+- [Official project](https://www.w3.org/publishing/epubcheck/) · [Official installation / downloads](https://www.w3.org/publishing/epubcheck/docs/installation/) · [Repository](https://github.com/w3c/epubcheck)
+- **Sources:** [Official purpose evidence](https://www.w3.org/publishing/epubcheck/) (2026-11-19; features, identity); [Official version observed evidence](https://github.com/w3c/epubcheck) (2026-11-19; maintenance); [Official windows evidence](https://www.w3.org/publishing/epubcheck/docs/installation/) (2026-11-19; downloads, features, platforms); [Release-pinned BSD-3-Clause license; takes precedence over conflicting marketing page](https://github.com/w3c/epubcheck/blob/v5.4.0/LICENSE.md) (2026-11-19; license)
+### PDF Accessibility Checker (PAC)
+
+PDF accessibility checks, including locally executed AI assistance. Vendor states processing is local and no Internet access; not independently network-tested.
+
+- **Platforms:** Windows. **License:** Vendor general terms apply; section7.2 disallows own-server downloads without written permission. Do not mirror installer in Athena.. **Pricing model:** free.
+- **Compatibility details:** Windows 10/11 and .NET Framework 4.8 or newer. EXE and administrative MSI offered. Current EXE/MSI installation differs from historical ZIP downloads; no current folder-portable guarantee established.
+- **Pick for:** Choose for the specific validation scope documented above.
+- **Compare when:** Compare file format, manual-review needs, Windows prerequisites and portable-state requirements; these tools are not interchangeable.
+- **Strengths:** Use for Windows PDF accessibility inspection.
+- **Limitations:** Current EXE/MSI installation differs from historical ZIP downloads; no current folder-portable guarantee established.; Documentation reviewed only; not installed, benchmarked or certified. Automated checks do not replace human accessibility review.; Full current settings/log/cache paths; Actual UI assistive-technology acceptance; Installer signatures and hashes; No hands-on accuracy or security audit; Vendor general terms apply; section7.2 disallows own-server downloads without written permission. Do not mirror installer in Athena.; Vendor states the PAC user interface is mostly, but not completely, accessible; see its linked accessibility conformance report.
+- **Maintenance:** active — Download label PAC 2026.1.2; release notes name 26.1.2.0, dated 2026-11-17, fixing certain annotated PDF problems. ([evidence](https://pac.pdf-accessibility.org/en/resources/release-notes))
+- [Official project](https://pac.pdf-accessibility.org/en/download) · [Official installation / downloads](https://pac.pdf-accessibility.org/en/download)
+- **Sources:** [Official purpose evidence](https://pac.pdf-accessibility.org/en/resources/faq) (2026-11-19; features, identity, pricing); [Official windows evidence](https://pac.pdf-accessibility.org/en/download) (2026-11-19; downloads, features, platforms); [Official version observed evidence](https://pac.pdf-accessibility.org/en/resources/release-notes) (2026-11-19; maintenance); [Official license evidence](https://pac.pdf-accessibility.org/en/resources/general-terms) (2026-11-19; license)
+### veraPDF
+
+PDF/A conformance and PDF/UA parts1/2 machine checks; not a substitute for human accessibility review.
+
+- **Platforms:** Windows, macOS, Linux. **License:** Dual GPLv3-or-later or MPLv2-or-later.. **Pricing model:** unknown.
+- **Compatibility details:** Java installer ZIP includes vera-install.bat; CLI and GUI installed below selected location in bin. Configuration XML may reside under installation config or user-directory verapdf. Folder-only state is not assured. Official config documentation shows C:\Users\<User name>\AppData\Roaming\verapdf\config as a Windows example; verapdf --config reports the effective location. This is a documented example, not a universal measured path.
+- **Pick for:** Choose for the specific validation scope documented above.
+- **Compare when:** Compare file format, manual-review needs, Windows prerequisites and portable-state requirements; these tools are not interchangeable.
+- **Strengths:** Use for PDF/A and PDF/UA machine-rule validation.
+- **Limitations:** Configuration XML may reside under installation config or user-directory verapdf. Folder-only state is not assured.; Documentation reviewed only; not installed, benchmarked or certified. Automated checks do not replace human accessibility review.; Current stable version and date not pinned; Exact current Java/Windows floor; Effective config precedence and temp paths; Runtime accuracy/performance
+- **Maintenance:** unverified — Current stable release version/date not pinned in this pass. Dated maintenance remains unverified. ([evidence](https://verapdf.org/home/))
+- [Official project](https://verapdf.org/home/) · [Official installation / downloads](https://docs.verapdf.org/install/)
+- **Sources:** [Official purpose evidence](https://verapdf.org/home/) (2026-11-19; features, identity, license); [Official windows evidence](https://docs.verapdf.org/install/) (2026-11-19; downloads, platforms); [Official portable evidence](https://docs.verapdf.org/cli/config/) (2026-11-19; features)
 
 ## E-book libraries and editing
 

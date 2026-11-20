@@ -13,4 +13,25 @@ class WikiTests(unittest.TestCase):
   with tempfile.TemporaryDirectory() as d:
    s=pathlib.Path(d)/'s';t=pathlib.Path(d)/'t';s.mkdir();t.mkdir();(s/'A.md').write_text('One');m.sync(s,t);(s/'A.md').write_text('Two');m.sync(s,t);self.assertEqual((t/'A.md').read_text(),'Two');(t/'A.md').write_text('Manual');
    with self.assertRaises(ValueError):m.sync(s,t)
+class DocumentationLinkTests(unittest.TestCase):
+ def test_url_path_fragment_and_query(self):
+  import sys
+  sys.path.insert(0,str(pathlib.Path('scripts').resolve()))
+  from documentation_links import local_target
+  with tempfile.TemporaryDirectory() as d:
+   p=pathlib.Path(d)/'guide.md'; target=p.parent/'PRODUCT-PILLARS.md';target.touch()
+   for suffix in ['', '#p8--modular-features-and-safe-independent-evolution','?view=1#p8']:
+    self.assertEqual(local_target(p,'PRODUCT-PILLARS.md'+suffix),target)
+    self.assertTrue(local_target(p,'PRODUCT-PILLARS.md'+suffix).exists())
+   self.assertFalse(local_target(p,'missing.md#section').exists())
+   self.assertFalse(local_target(p,'http-not-a-scheme.md#section').exists())
+ def test_encoded_punctuation_and_external_urls(self):
+  import sys
+  sys.path.insert(0,str(pathlib.Path('scripts').resolve()))
+  from documentation_links import local_target
+  p=pathlib.Path('/tmp/docs/guide.md')
+  self.assertEqual(local_target(p,'a%23b%3Fc%20d.md#anchor'),p.parent/'a#b?c d.md')
+  self.assertEqual(local_target(p,'../README.md#top'),p.parent/'../README.md')
+  for url in ['#section','?view=1#section','https://example.test/a#b','HTTP://example.test/a','//example.test/a','mailto:a@example.test']:
+   self.assertIsNone(local_target(p,url))
 if __name__=='__main__':unittest.main()
