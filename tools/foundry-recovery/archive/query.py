@@ -12,6 +12,7 @@ import sys
 MAX_FILE = 64 * 1024 * 1024
 MAX_ROWS = 1000
 MAX_VALUE = 4096
+MAX_HISTORY_PAYLOAD = 256 * 1024
 MAX_OUTPUT = 4 * 1024 * 1024
 FIELDS = {
     'artist_worlds': ('id artist_id name variant description palette material_language shape_language lighting ui_language mascot guardrail raw_json', 'id artist_id name variant'),
@@ -87,10 +88,12 @@ def expected_columns(table):
     return cols
 
 
-def inspect(source, tables=None, *, private_export=False, destination=None, artist_id=None):
+def inspect(source, tables=None, *, private_export=False, destination=None, artist_id=None, history_payloads=False):
     selected = tuple(tables or FIELDS)
     if len(set(selected)) != len(selected) or any(t not in FIELDS for t in selected):
         raise Refusal('Select unique supported table families only.')
+    if history_payloads and (not private_export or selected != ('history',) or artist_id is not None):
+        raise Refusal('History payloads require explicit, history-only private export.')
     if artist_id is not None:
         if not tables or 'history' in selected:
             raise Refusal('Artist filtering requires explicit supported artist table selections; history has no artist field.')
@@ -112,6 +115,9 @@ def inspect(source, tables=None, *, private_export=False, destination=None, arti
         raise Refusal('Destination requires explicit private-export mode.')
     source = safe_path(source)
     target = destination_path(source, destination) if private_export else None
+    if history_payloads and any(marker.is_file() or marker.is_symlink() or (marker / 'HEAD').is_file()
+                                for marker in (parent / '.git' for parent in target.parents)):
+        raise Refusal('Private history cannot be written inside a Git checkout.')
     before = fingerprint(source)
     db = None
     rows = {}
@@ -155,18 +161,23 @@ def inspect(source, tables=None, *, private_export=False, destination=None, arti
             counts[table] = count
             if not private_export:
                 continue
-            projected = FIELDS[table][1].split()
+            projected = FIELDS[table][0 if history_payloads else 1].split()
+            limits = [MAX_HISTORY_PAYLOAD if c == 'payload_json' else MAX_VALUE for c in projected]
             maxima = ','.join(f'coalesce(max(length(cast("{c}" AS blob))),0)' for c in projected)
-            if any(n > MAX_VALUE for n in db.execute(f'SELECT {maxima} FROM "{table}"{where}', parameters).fetchone()):
+            sizes = db.execute(f'SELECT {maxima} FROM "{table}"{where}', parameters).fetchone()
+            if any(n > limit for n, limit in zip(sizes, limits)):
                 raise Refusal('Projected value exceeds the bounded byte limit.')
             sql = 'SELECT ' + ','.join(f'"{c}"' for c in projected) + f' FROM "{table}"{where} ORDER BY id LIMIT {MAX_ROWS + 1}'
             rows[table] = []
             for values in db.execute(sql, parameters):
-                for name, value in zip(projected, values):
+                for name, value, limit in zip(projected, values, limits):
                     expected = int if table == 'history' and name in ('id', 'created_at') else str
                     if type(value) is not expected:
                         raise Refusal('Projected record has an unsupported value type.')
-                export_bytes += sum(len(v.encode('utf8')) if isinstance(v, str) else 24 for v in values)
+                    size = len(value.encode('utf8')) if isinstance(value, str) else 24
+                    if size > limit:
+                        raise Refusal('Projected text exceeds its UTF-8 byte limit.')
+                    export_bytes += size
                 if export_bytes > MAX_OUTPUT // 2:
                     raise Refusal('Projected records exceed the export allocation bound.')
                 rows[table].append(dict(zip(projected, values)))
@@ -175,10 +186,16 @@ def inspect(source, tables=None, *, private_export=False, destination=None, arti
             db.close()
     if fingerprint(source) != before:
         raise Refusal('Source changed; no export is accepted.')
-    receipt = {'schema': 1, 'mode': 'private-export' if private_export else 'counts', 'counts': counts,
-               'projected_columns': {t: FIELDS[t][1].split() for t in selected}, 'lossless_migration': False}
+    receipt = {'schema': 2 if history_payloads else 1,
+               'mode': 'private-history-preservation' if history_payloads else 'private-export' if private_export else 'counts',
+               'counts': counts, 'projected_columns': {t: FIELDS[t][0 if history_payloads else 1].split() for t in selected},
+               'lossless_migration': False}
     if private_export:
-        data = json.dumps({'privacy': 'PRIVATE: arbitrary labels and metadata may contain secrets; never publish without review.', 'schema': 1, 'tables': rows}, ensure_ascii=False, separators=(',', ':')).encode('utf8')
+        archive = {'privacy': 'PRIVATE: arbitrary labels and metadata may contain secrets; never publish without review.', 'schema': receipt['schema'], 'tables': rows}
+        if history_payloads:
+            archive['kind'] = 'original-foundry-history-preservation'
+            archive['privacy'] = 'PRIVATE: original payloads may contain credentials or personal data; keep offline and do not publish.'
+        data = json.dumps(archive, ensure_ascii=False, separators=(',', ':')).encode('utf8')
         if len(data) > MAX_OUTPUT:
             raise Refusal('Export exceeds bounded output size.')
         fd = os.open(target, os.O_WRONLY | os.O_CREAT | os.O_EXCL | getattr(os, 'O_NOFOLLOW', 0), 0o600)
@@ -218,10 +235,12 @@ def main(argv=None):
     parser.add_argument('--table', action='append', choices=tuple(FIELDS))
     parser.add_argument('--artist-id', help='Exact artist identifier; requires explicit artist-family tables. Value is never echoed.')
     parser.add_argument('--private-export', action='store_true')
+    parser.add_argument('--history-payloads', action='store_true', help='Preserve original raw history as private text; requires a history-only private export.')
     parser.add_argument('--destination')
     args = parser.parse_args(argv)
     try:
-        result = inspect(args.source, args.table, private_export=args.private_export, destination=args.destination, artist_id=args.artist_id)
+        result = inspect(args.source, args.table, private_export=args.private_export, destination=args.destination,
+                         artist_id=args.artist_id, history_payloads=args.history_payloads)
     except (OSError, sqlite3.Error, Refusal, ValueError, OverflowError):
         # Intentionally do not echo database errors, file paths, table contents or input values.
         print(json.dumps({'ok': False, 'error': 'Archive inspection refused. Check standalone schema1 source, bounds and exclusive destination; no source changes authorized.'}))
