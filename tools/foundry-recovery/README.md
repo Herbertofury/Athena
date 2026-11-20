@@ -20,6 +20,12 @@ Stop the original application, explicitly select that file, and choose a new pri
 
 This performs a bounded (16 MiB) byte-for-byte copy with an SHA-256 receipt, exclusive output and file sync. Source bytes are checked before/after and output bytes rechecked. Malformed, empty or non-UTF8 files are preserved without interpreting or repairing them. Failed output is removed only if this operation created it; existing files are never overwritten. No directory scanning, default app-data access, JSON reserialization, provider access or automatic import occurs. The CLI does not log paths or values.
 
+Retain the printed receipt separately from the copy. Verify the copy later, even if the original is unavailable:
+
+    python3 snapshot/preserve.py --verify-copy PRIVATE-SNAPSHOT.json --expected-sha256 RECEIPT_SHA256 --expected-bytes RECEIPT_BYTES
+
+Both values must come from the original trusted receipt, not a fresh digest of the copy. This opens only the explicitly selected regular copy for reading and fails without modifying it if the recorded size or SHA-256 differs. It does not parse the bytes, authenticate the receipt, verify scene behavior, or import a native snapshot.
+
 Keep original files and receipts private. This is not a live/concurrent snapshot guarantee, credential backup, authenticity proof or scene conversion. Source `readState` is diagnostic metadata and omits full authored scene information. The six synthetic tests cover byte fidelity, source changes, size limits, exclusive writes, failure cleanup and no content/path logging; Windows ACL equivalence and complete original-data migration are not asserted.
 
 ## Prepare original SQLite safely

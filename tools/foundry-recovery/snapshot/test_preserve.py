@@ -43,4 +43,34 @@ class SnapshotRecovery(unittest.TestCase):
     result=subprocess.run([sys.executable,str(pathlib.Path(p.__file__)),'--source',str(src),'--destination',str(dst),*extra],capture_output=True,text=True,timeout=10)
     self.assertEqual(result.returncode,0 if extra else 1)
     self.assertNotIn('PRIVATE_PATH',result.stdout+result.stderr);self.assertNotIn('SYNTHETIC_PRIVATE_CONTENT',result.stdout+result.stderr)
+ def test_copy_verifies_after_original_is_unavailable(self):
+  with tempfile.TemporaryDirectory() as d:
+   root=pathlib.Path(d);src=root/'source';dst=root/'copy'
+   for raw in [b'broken\xff\x00', b'']:
+    src.write_bytes(raw);receipt=p.preserve(src,dst,True);src.unlink()
+    before=dst.stat()
+    self.assertEqual(p.verify_copy(dst,receipt['sha256'],receipt['bytes']),
+                     {'copy_matches_receipt':True,'bytes':len(raw),'native_import':False,'snapshot_semantics_verified':False})
+    self.assertEqual(dst.read_bytes(),raw);self.assertEqual(dst.stat().st_mtime_ns,before.st_mtime_ns);dst.unlink()
+ def test_retained_size_and_digest_must_both_match(self):
+  with tempfile.TemporaryDirectory() as d:
+   path=pathlib.Path(d)/'copy';path.write_bytes(b'wrong')
+   digest=hashlib.sha256(b'right').hexdigest()
+   with self.assertRaises(ValueError):p.verify_copy(path,digest,5)
+   with self.assertRaises(ValueError):p.verify_copy(path,hashlib.sha256(b'wrong').hexdigest(),4)
+   for invalid_digest,invalid_size in [('g'*64,5),(digest,True),(digest,-1),(digest,p.LIMIT+1)]:
+    with self.assertRaises(ValueError):p.verify_copy(path,invalid_digest,invalid_size)
+   self.assertEqual(path.read_bytes(),b'wrong')
+ def test_cli_verifies_without_writing_copy_and_refuses_mixed_modes(self):
+  with tempfile.TemporaryDirectory() as d:
+   root=pathlib.Path(d);path=root/'PRIVATE_PATH';path.write_bytes(b'SYNTHETIC_PRIVATE_CONTENT');out=root/'out'
+   cmd=[sys.executable,p.__file__,'--verify-copy',str(path),'--expected-sha256',hashlib.sha256(path.read_bytes()).hexdigest(),'--expected-bytes',str(len(path.read_bytes()))]
+   for extra,code in [([],0),(['--destination',str(out)],2),(['--source',str(path)],2),(['--source-quiescent'],2),(['--expected-bytes','0'],1)]:
+    result=subprocess.run(cmd+extra,capture_output=True,text=True,timeout=10)
+    self.assertEqual(result.returncode,code)
+    if not code:self.assertTrue(json.loads(result.stdout)['copy_matches_receipt'])
+    self.assertNotIn('PRIVATE_PATH',result.stdout+result.stderr)
+    self.assertNotIn('SYNTHETIC_PRIVATE_CONTENT',result.stdout+result.stderr)
+    self.assertFalse(out.exists())
+   self.assertEqual(path.read_bytes(),b'SYNTHETIC_PRIVATE_CONTENT')
 if __name__=='__main__':unittest.main()
