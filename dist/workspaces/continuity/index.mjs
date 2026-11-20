@@ -1,3 +1,4 @@
+import {impact} from './impact.mjs';
 import {attachArtifacts} from './artifacts.mjs';
 import {fresh, validate, apply, visible} from './model.mjs';
 import {parseBackup, mergeBackup, MAX_IMPORT_BYTES} from './import.mjs';
@@ -5,14 +6,14 @@ import {compileContext, contextMarkdown} from './context.mjs';
 
 export function mount({container, state, search = '', setState, signal, theme = 'dark'}) {
   const root = container.shadowRoot || container.attachShadow({mode: 'open'});
-  let data, error = '', disposed = false, showIgnored = false, editing = null, project = '';
+  let data, error = '', disposed = false, showIgnored = false, editing = null, project = '', impactId = null;
   const urls = new Set();
   try { data = state === undefined ? fresh() : validate(state); }
   catch (exception) { error = 'Stored continuity data could not be opened. It has not been overwritten: ' + exception.message; data = null; }
   root.innerHTML = `<h2>Project continuity</h2><p>Source-attributed decisions, next actions, resources and blockers shared in Athena. Manual local notes, not an automatic chat capture or a verified completion detector. Do not paste credentials.</p><p id="notice" role="status"></p>
     <form><label>Project<input name="project" required maxlength="200"></label><label>Kind<select name="kind"><option value="decision">Decision</option><option value="next-action">Next action</option><option value="resource">Resource</option><option value="blocker">Blocker</option></select></label><label>Note<textarea name="text" required maxlength="10000"></textarea></label><label>Source URL (optional HTTPS)<input name="source" type="url"></label><button type="submit">Save note</button><button type="button" id="cancel" hidden>Cancel revision</button></form>
     <section class="context-panel" aria-labelledby="context-title"><h3 id="context-title">Reusable project context</h3><p>Explicit links keep the evidence revision you reviewed. Changed sources are advisory, never automatic verdicts. Cross-project dependencies remain included, even when an upstream note is ignored.</p><label>Project context<select id="project-context" aria-label="Project context"><option value="">All projects</option></select></label><p id="context-summary" role="status"></p><ul id="context-warnings"></ul><button id="export-context">Export context Markdown</button><details><summary>Inspect complete context packet</summary><pre id="context-packet"></pre></details></section>
-    <label>Import local continuity backup<input id="import-backup" type="file" accept="application/json,.json"></label><p>Import adds missing notes and retains identical notes. Conflicting IDs or metadata refuse the whole import. Export your current notes first. Import is limited to 16 MiB and 100 total notes for this interface; larger backups are refused, never truncated. No provider data is fetched. Use one Athena tab for editing; other tabs are not synchronized.</p><button id="ignored">Show ignored</button><button id="export">Export local continuity JSON</button><p>Notes remain in this browser. Export separately for backup; browser storage is not a remote backup. Sources are claims, not automatically trusted facts.</p><section id="entries" aria-label="Continuity entries"></section><section id="artifact-journal"></section>`;
+    <section id="impact-panel" class="context-panel" aria-labelledby="impact-title" hidden><h3 id="impact-title" tabindex="-1">Downstream evidence impact</h3><p id="impact-summary" role="status"></p><div id="impact-content"></div><button id="close-impact" type="button">Close impact review</button></section><label>Import local continuity backup<input id="import-backup" type="file" accept="application/json,.json"></label><p>Import adds missing notes and retains identical notes. Conflicting IDs or metadata refuse the whole import. Export your current notes first. Import is limited to 16 MiB and 100 total notes for this interface; larger backups are refused, never truncated. No provider data is fetched. Use one Athena tab for editing; other tabs are not synchronized.</p><button id="ignored">Show ignored</button><button id="export">Export local continuity JSON</button><p>Notes remain in this browser. Export separately for backup; browser storage is not a remote backup. Sources are claims, not automatically trusted facts.</p><section id="entries" aria-label="Continuity entries"></section><section id="artifact-journal"></section>`;
   const style = document.createElement('link'); style.rel = 'stylesheet'; style.href = new URL('./style.css', import.meta.url).href; root.prepend(style);
   const $ = selector => root.querySelector(selector), form = $('form'), notice = $('#notice');
   const artifacts = attachArtifacts({host:$('#artifact-journal'),signal});
@@ -22,6 +23,22 @@ export function mount({container, state, search = '', setState, signal, theme = 
     const item = element('button', label); item.type = 'button'; item.dataset.action = action; item.dataset.id = id;
     if (dependencyId) item.dataset.dependencyId = dependencyId;
     return item;
+  }
+  function renderImpact() {
+    const panel = $('#impact-panel'); panel.hidden = impactId === null;
+    if (impactId === null) return;
+    const report = impact(data, impactId), content = $('#impact-content'); content.replaceChildren();
+    $('#impact-summary').textContent = `${report.target?.project || report.id}: ${report.coverage.downstreamEntries} downstream note(s), ${report.coverage.directDependents} direct, across ${report.projects.length} project(s).`;
+    content.append(element('p', 'Explicit local links only, including ignored notes. A changed source is advisory, not proof that dependent work is wrong. Inspection does not mark evidence reviewed or update projects.'));
+    if (!report.dependents.length) content.append(element('p', 'No downstream links recorded. This is not proof of no real-world impact.'));
+    for (const dependent of report.dependents) {
+      const item = element('details');
+      item.append(element('summary', `${dependent.project} · ${dependent.kind} · ${dependent.distance === 1 ? 'direct' : dependent.distance + ' links away'}${dependent.ignored ? ' · ignored note retained' : ''}`));
+      item.append(element('p', `Note ${dependent.id}; via ${dependent.via}; current revision ${dependent.currentRevision}`), element('pre', dependent.currentEvidence.text));
+      if (dependent.currentEvidence.source) item.append(element('p', 'Source: ' + dependent.currentEvidence.source));
+      content.append(item);
+    }
+    const exact = element('details'); exact.append(element('summary', 'Inspect exact links and reviewed evidence'), element('pre', JSON.stringify(report, null, 2))); content.append(exact);
   }
   function renderContext() {
     const selector = $('#project-context'); selector.replaceChildren();
@@ -50,7 +67,7 @@ export function mount({container, state, search = '', setState, signal, theme = 
       const revision = entry.revisions.at(-1); article.append(element('pre', revision.text));
       if (revision.source) { const link = element('a', 'Source: ' + revision.source); link.href = revision.source; link.target = '_blank'; link.rel = 'noopener noreferrer'; article.append(link); }
       const history = element('details'); history.append(element('summary', entry.revisions.length + ' immutable revision(s) and policy history'), element('pre', JSON.stringify({revisions: entry.revisions, history: entry.history}, null, 2))); article.append(history);
-      for (const [action, label] of [['revise', 'Revise'], ['pin', entry.pinned ? 'Unpin' : 'Pin'], ['ignore', entry.ignored ? 'Restore' : 'Ignore']]) article.append(button(action, label, entry.id));
+      for (const [action, label] of [['impact', 'Inspect downstream impact'], ['revise', 'Revise'], ['pin', entry.pinned ? 'Unpin' : 'Pin'], ['ignore', entry.ignored ? 'Restore' : 'Ignore']]) article.append(button(action, label, entry.id));
       const dependencies = element('details'); dependencies.append(element('summary', `Evidence links (${(entry.dependencies || []).length})`));
       for (const reference of entry.dependencies || []) {
         const dependency = byId.get(reference.id), row = element('div'); row.className = 'dependency';
@@ -69,16 +86,18 @@ export function mount({container, state, search = '', setState, signal, theme = 
       const link = button('link', 'Link current evidence revision', entry.id); link.disabled = !selector.options.length; selector.disabled = link.disabled; dependencies.append(link); article.append(dependencies); list.append(article);
     }
     if (!rows.length) list.textContent = 'No matching entries. Missing evidence does not mean work is complete.';
-    renderContext();
+    renderContext(); renderImpact();
     if (restoreFocus) [...list.querySelectorAll('button[data-action]')].find(item => item.dataset.action === restoreFocus.action && item.dataset.id === restoreFocus.id && item.dataset.dependencyId === restoreFocus.dependencyId)?.focus();
   }
   function commit(action) {
-    try {
-      data = apply(data, action);
-      const saved = setState?.(data);
-      notice.textContent = saved === true ? 'Saved in this browser. Export a backup.' : 'Not saved to durable browser storage. Keep this page open and export the local draft.';
-      render(); return true;
-    } catch (exception) { notice.textContent = exception.message; return false; }
+    try { data = apply(data, action); }
+    catch (exception) { notice.textContent = exception.message; return false; }
+    let saved = false;
+    try { saved = setState?.(data) === true; } catch { /* Retain and render the admitted draft. */ }
+    notice.textContent = saved ? 'Saved in this browser. Export a backup.' : 'Not saved to durable browser storage. Keep this page open and export the local draft.';
+    try { render(); }
+    catch { notice.textContent = saved ? 'Note saved, but display failed. Reload to inspect stored notes.' : 'Local draft retained, but display failed. Keep this page open and export the draft.'; }
+    return true;
   }
   function cancelRevision() { editing = null; form.reset(); form.elements.project.disabled = false; form.elements.kind.disabled = false; $('#cancel').hidden = true; }
   form.onsubmit = event => {
@@ -87,9 +106,12 @@ export function mount({container, state, search = '', setState, signal, theme = 
     if (commit({type: editing ? 'revise' : 'add', id: editing || crypto.randomUUID(), project: fields.project.value, kind: fields.kind.value, text: fields.text.value, source: fields.source.value})) cancelRevision();
   };
   $('#cancel').onclick = cancelRevision;
+  $('#close-impact').onclick = () => { if (disposed || !data) return; const previous = impactId; impactId = null; renderImpact(); ([...root.querySelectorAll('button[data-action=impact]')].find(item => item.dataset.id === previous) || $('#ignored')).focus(); };
   $('#entries').onclick = event => {
     const target = event.target.closest('button[data-action]'); if (!target || disposed || !data) return;
-    if (target.dataset.action === 'revise') {
+    if (target.dataset.action === 'impact') {
+      impactId = target.dataset.id; renderImpact(); $('#impact-title').focus();
+    } else if (target.dataset.action === 'revise') {
       const entry = data.entries.find(item => item.id === target.dataset.id); editing = entry.id;
       form.elements.project.value = entry.project; form.elements.kind.value = entry.kind; form.elements.project.disabled = true; form.elements.kind.disabled = true;
       form.elements.text.value = entry.revisions.at(-1).text; form.elements.source.value = entry.revisions.at(-1).source; $('#cancel').hidden = false; form.elements.text.focus();

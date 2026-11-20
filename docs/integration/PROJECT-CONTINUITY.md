@@ -153,3 +153,20 @@ real IndexedDB/reload/download, concurrent appends, injected quota rollback/no o
 blobs, corruption refusal, 100-revision/64-MiB admission, and hostile HTML as inert
 bytes. Require that exact candidate's hosted tests before delivery. None of this
 certifies installed-provider capture, user-data migration or source retirement.
+
+## Native downstream-impact review
+
+Each note offers **Inspect downstream impact**. The native read-only panel shares
+its exact graph implementation with the existing local review CLI, rather than
+maintaining a second set of dependency semantics. It shows direct and transitive
+explicit dependents across projects, including ignored notes, one deterministic
+shortest path, and the full retained links/reviewed evidence. Cycles terminate;
+changed/missing baselines remain advisory, not automated compatibility judgments.
+
+Inspection does not save state, mark a baseline reviewed, revise a note or trigger
+an update. It includes the full local collection even if search hides some notes;
+close returns focus to the originating button when visible. The panel refreshes
+after local changes. Zero recorded dependents does not establish real-world safety.
+No inferred relationships, external traffic, private dataset import or source
+retirement claim. Large-scale UI performance and full Constellation parity remain
+separate acceptance work.
