@@ -2,9 +2,9 @@ name: Athena engineering checks
 on:
   push:
     branches: [main]
-    paths: ["engineering/**", "migration/engineering-atlas/**", "scripts/verify_atlas_cutover.py", ".github/workflows/athena-engineering-checks.yml"]
+    paths: ["engineering/**", "migration/engineering-atlas/**", "scripts/verify_atlas_cutover.py", "tests/atlas_cutover_test.py", ".github/workflows/athena-engineering-checks.yml"]
   pull_request:
-    paths: ["engineering/**", "migration/engineering-atlas/**", "scripts/verify_atlas_cutover.py", ".github/workflows/athena-engineering-checks.yml"]
+    paths: ["engineering/**", "migration/engineering-atlas/**", "scripts/verify_atlas_cutover.py", "tests/atlas_cutover_test.py", ".github/workflows/athena-engineering-checks.yml"]
   workflow_dispatch:
 permissions:
   contents: read
@@ -29,7 +29,9 @@ jobs:
         run: npm ci --ignore-scripts
       - name: Verify migration completeness
         working-directory: .
-        run: python scripts/verify_atlas_cutover.py
+        run: |
+          python -m unittest discover -s tests -p atlas_cutover_test.py -v
+          python scripts/verify_atlas_cutover.py
       - name: Check source register and internal links
         run: python scripts/check_research.py
       - name: Verify research catalog and generated Explorer
