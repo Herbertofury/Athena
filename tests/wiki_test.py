@@ -13,6 +13,25 @@ class WikiTests(unittest.TestCase):
   with tempfile.TemporaryDirectory() as d:
    s=pathlib.Path(d)/'s';t=pathlib.Path(d)/'t';s.mkdir();t.mkdir();(s/'A.md').write_text('One');m.sync(s,t);(s/'A.md').write_text('Two');m.sync(s,t);self.assertEqual((t/'A.md').read_text(),'Two');(t/'A.md').write_text('Manual');
    with self.assertRaises(ValueError):m.sync(s,t)
+class CatalogNavigationTests(unittest.TestCase):
+ def test_clean_and_repeated_build_preserve_pillars_navigation(self):
+  import shutil,subprocess,sys
+  root=pathlib.Path(__file__).resolve().parents[1]
+  expected=(root/'docs/README.md').read_text().split('\n## Cross-project product requirements')[1]
+  with tempfile.TemporaryDirectory() as d:
+   target=pathlib.Path(d)
+   for directory in ['scripts','src','research','workshops']:
+    shutil.copytree(root/directory,target/directory,ignore=shutil.ignore_patterns('__pycache__'))
+   (target/'dist').mkdir()
+   for attempt in range(2):
+    subprocess.run([sys.executable,str(target/'scripts/build_catalog.py')],check=True,capture_output=True)
+    readme=(target/'docs/README.md').read_text()
+    self.assertEqual(readme.count('## Cross-project product requirements'),1)
+    self.assertEqual(readme.split('\n## Cross-project product requirements')[1],expected)
+    self.assertIn('[Universal engineering pillars](PRODUCT-PILLARS.md)',readme)
+    generated={str(p.relative_to(target)):p.read_bytes() for folder in ['docs','wiki','dist'] for p in (target/folder).rglob('*') if p.is_file()}
+    if attempt: self.assertEqual(generated,previous)
+    previous=generated
 class DocumentationLinkTests(unittest.TestCase):
  def test_url_path_fragment_and_query(self):
   import sys
