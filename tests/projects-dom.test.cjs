@@ -34,3 +34,46 @@ test('selected export includes exactly one durable revision history and refuses 
   assert.equal(await blob.text(),expected);assert.equal(writes,0);
  }finally{mounted.unmount();URL.createObjectURL=oldCreate;URL.revokeObjectURL=oldRevoke;}
 });
+
+test('24-card pages retain order, current detail and focus; search reaches unrendered matches',async()=>{
+ const {browse}=await import('../dist/workspaces/projects/model.mjs');
+ const state={schema:1,entries:Array.from({length:100},(_,n)=>({
+  id:'p-'+String(n).padStart(3,'0'),archived:n%27===26,
+  revisions:Array.from({length:6},(_,r)=>({...fields,name:'Sample project '+n,goal:n===0?'Deep specific match':'Shared project text.',at:Math.floor(n/2)*6+r}))
+ }))};
+ const expected=browse(state).map(p=>p.id);
+ const x=await setup(()=>true,state),q=s=>x.root.querySelector(s);
+ const doc=x.root.host.ownerDocument;
+ const previousFocus=doc.defaultView.HTMLElement.prototype.focus;
+ let focused;
+ doc.defaultView.HTMLElement.prototype.focus=function(){focused=this;};
+ try {
+  const cards=()=>[...x.root.querySelectorAll('[data-project]')].map(n=>n.dataset.project);
+  const count=q('#count'), more=q('#more');
+  assert.equal(count.getAttribute('role'),'status');
+  assert.equal(more.getAttribute('aria-controls'),'cards');
+  assert.equal(more.textContent,'Show next 24 projects');
+  assert.match(count.textContent,/Showing 24 of 97 matching/);
+  assert.deepEqual(cards(),expected.slice(0,24));
+  const first=q('[data-project]');first.querySelector('button').onclick();
+  const detail=q('#detail h3');assert.equal(focused,detail);
+  more.onclick();assert.equal(focused.closest('[data-project]').dataset.project,expected[24]);
+  assert.equal(q('#detail h3'),detail);assert.equal(q('[data-project]'),first);
+  while(!more.hidden)more.onclick();
+  assert.deepEqual(cards(),expected);
+  assert.match(count.textContent,/Showing 97 of 97 matching/);
+  const target=expected[71];
+  q('[data-project="'+target+'"] button').onclick();
+  assert.equal(focused,q('#detail h3'));
+  assert.equal(x.root.querySelectorAll('#detail pre').length,6);
+  x.mounted.setSearch('');
+  assert.equal(q('[data-project]'),first);
+  x.mounted.setSearch('deep specific match');
+  assert.deepEqual(cards(),['p-000']);assert.equal(more.hidden,true);
+  x.mounted.setSearch('not found');assert.deepEqual(cards(),[]);assert.equal(more.hidden,true);
+  x.mounted.setSearch('');assert.deepEqual(cards(),expected.slice(0,24));
+  assert.equal(x.calls.length,0);
+ } finally {
+  doc.defaultView.HTMLElement.prototype.focus=previousFocus;x.mounted.unmount();
+ }
+});
