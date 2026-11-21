@@ -1286,14 +1286,15 @@ Start with the database engine and whether the task is browsing, querying, or ad
 
 ## Choose a local AI interface or inference runtime
 
-Choose the model and memory budget first, then the interface and deployment control you need. No hardware benchmark or model-quality winner is claimed.
+Start with the model architecture and weight format, then check RAM or VRAM, the accelerator backend, and whether you need a desktop interface or an API. A file extension alone does not guarantee compatibility. No hardware benchmark or model-quality winner is claimed.
 
 [Compare these choices in Athena](https://herbertofury.github.io/Athena/#software?task=run-local-language-models)
 
 | Fit | Tool | Why choose it | Tradeoff |
 | --- | --- | --- | --- |
-| Managed models and local API | [Ollama](https://ollama.com/) | Model management and an application-facing API simplify supported local-model workflows. | Model memory needs, acceleration support, optional cloud use, and model licenses must be checked. |
-| Detailed runtime control | [llama.cpp](https://github.com/ggml-org/llama.cpp) | Explicit GGUF files and hardware backends suit users who want direct inference configuration. | Build options and supported architectures require more technical decisions. |
+| Managed models and local API | [Ollama](https://ollama.com/) | Choose this for a managed local API or to import a compatible GGUF file or supported Safetensors model directory. | Ollama does not quantize GGUF on import. Confirm your GPU and model support, memory budget, model license, and whether any cloud features are enabled. |
+| Detailed runtime control | [llama.cpp](https://github.com/ggml-org/llama.cpp) | Use this for direct GGUF loading with CPU or an available Metal, CUDA, or Vulkan backend. | Check the model architecture and quantization plus the exact OS and backend build. Format or driver support is not a speed guarantee. |
+| Linux GPU Safetensors model serving | [vLLM](https://vllm.ai/) | Choose this for an API server on a supported Linux GPU when the model architecture and Safetensors weights are supported. | Check drivers, GPU support and VRAM, including room for the context cache. No native Windows support; GGUF is experimental and uses a separate plugin. |
 | Desktop chat interface | [Jan](https://www.jan.ai/) | A graphical workspace offers local models alongside configured external providers. | Privacy and cost depend on which provider and model are selected. |
 | Questions over documents | [AnythingLLM](https://anythingllm.com/) | Document ingestion and retrieval can be organized into dedicated workspaces. | A local installation can still send data to configured external embedding or model services. |
 
