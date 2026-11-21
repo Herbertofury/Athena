@@ -23,4 +23,27 @@ await recipient.close();
 await page.getByRole('link',{name:'Project continuity',exact:true}).click();await page.getByRole('link',{name:'Project browser',exact:true}).click();await page.getByRole('button',{name:'Open Space ARPG'}).waitFor();
 fs.mkdirSync('browser-results',{recursive:true});await page.setViewportSize({width:390,height:844});await page.screenshot({path:'browser-results/project-browser-mobile.png',fullPage:true});assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));await page.setViewportSize({width:1440,height:1000});await page.screenshot({path:'browser-results/project-browser-desktop.png',fullPage:true});
 await page.evaluate(()=>{Storage.prototype.setItem=function(){throw Error('quota');};});await page.getByRole('button',{name:'New project',exact:true}).click();await page.getByLabel('Project name',{exact:true}).fill('Unsaved idea');await page.getByRole('button',{name:'Save project',exact:true}).click();await page.getByText('Not saved. Keep this page open and export your draft before leaving.',{exact:true}).waitFor();const [draft]=await Promise.all([page.waitForEvent('download'),page.getByRole('button',{name:'Export projects',exact:true}).click()]);assert.equal(JSON.parse(fs.readFileSync(await draft.path())).entries.length,3);
+const pagedContext=await browser.newContext({viewport:{width:1440,height:1000}});
+try {
+ const paged=await pagedContext.newPage();
+ const pagedErrors=[];paged.on('pageerror',error=>pagedErrors.push(error.message));
+ const rootState={schema:1,workspaces:{projects:{schema:1,entries:Array.from({length:28},(_,i)=>({
+  id:'project-'+i,archived:false,revisions:[{name:'Fixture project '+i,ownership:'own',stage:'idea',goal:'No outside work',next:'',blockers:'',decisions:'',resources:'',source:'',version:'',release:'',at:i}]
+ }))}}};
+ await paged.addInitScript(({origin,rootState})=>{if(location.origin===origin)localStorage.setItem('athena-workspaces-v1',JSON.stringify(rootState));},{origin,rootState});
+ await paged.goto(origin+'/#projects');
+ const pageCount=paged.getByText(/^Showing 24 of 28 matching/), more=paged.getByRole('button',{name:'Show next 4 projects',exact:true});
+ await pageCount.waitFor();assert.equal(await paged.locator('[data-project]').count(),24);
+ await paged.getByRole('button',{name:'Open Fixture project 27',exact:true}).click();
+ await paged.locator('#detail h3').evaluate(el=>{el.dataset.focusTest='unchanged';});
+ await more.focus();await paged.keyboard.press('Enter');
+ await paged.getByText(/^Showing 28 of 28 matching/).waitFor();
+ assert.equal(await paged.locator('[data-project]').count(),28);
+ assert.equal(await paged.getByRole('button',{name:'Open Fixture project 3',exact:true}).evaluate(el=>el===el.getRootNode().activeElement),true);
+ assert.equal(await paged.locator('#detail h3').getAttribute('data-focus-test'),'unchanged');
+ await paged.locator('#search').fill('fixture project 0');
+ await paged.getByRole('button',{name:'Open Fixture project 0',exact:true}).waitFor();
+ assert.equal(await paged.locator('[data-project]').count(),1);
+ assert.deepEqual(pagedErrors,[]);
+}finally{await pagedContext.close();}
 assert.deepEqual(externalRequests,[]);assert.deepEqual(errors,[]);console.log('PASS project browser create/edit/reload, own/followed filter, archive/restore, cancel, export/import, navigation, mobile layout, quota-failure draft export');}finally{await browser?.close();server.close();}})().catch(e=>{console.error(e);process.exitCode=1;});
