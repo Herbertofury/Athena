@@ -6,6 +6,14 @@ Nothing is automatically followed on social accounts, polled or synchronized. Ve
 
 The workspace has a separate schema-1 state under `projects`. Unknown fields survive validation/import. Imports refuse conflicts atomically, admit at most 100 projects / 16 MiB, and never silently truncate. Quota failures preserve the full in-memory draft for export. Use one editing tab; cross-tab compare-and-swap is not provided. Invalid persisted schemas disable mutation rather than overwriting existing data.
 
+## Browse large project collections
+
+The list opens with up to 24 matching projects. **Show next** appends more in
+the same most-recent-first order and sends keyboard focus to the first newly
+shown project. The result count reports both displayed and total matches.
+Search and filters still inspect every latest project revision, even records
+not displayed yet. Opening a project does not redraw its surrounding cards.
+
 ## Transfer only one saved project
 
 Open the intended project and choose **Review portable copy**. The preview
