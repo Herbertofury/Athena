@@ -23,6 +23,7 @@ Read the [product vision](wiki/Athena-Vision.md) and [actual integration evidenc
 ## Start here
 
 - [Software discovery](https://herbertofury.github.io/Athena/#software): integrated task search, platform/license/pricing filters, conditional recommendations and side-by-side comparison. [Catalog and live Wiki](https://github.com/Herbertofury/Athena/wiki/Software-Catalog) · [Sourced database](data/software/) · [Methodology](wiki/Software-Methodology.md).
+- [Video learning evidence pipeline](research/video-learning/README.md): local caption import and timestamp-linked curriculum proposals; full-channel study remains in progress.
 - [Learning library](docs/README.md): 13 certificate pathways, shared lessons and guided capstones.
 - [Native Foundry profile](native/foundry/README.md): optional local authoring storage, recovery and explicit local media controls.
 - [Local Rust/SQLite evidence engine](docs/athena-local-runtime.md): native collection, archives and bounded experiments in the same shell.
