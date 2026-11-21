@@ -77,3 +77,30 @@ test('24-card pages retain order, current detail and focus; search reaches unren
   doc.defaultView.HTMLElement.prototype.focus=previousFocus;x.mounted.unmount();
  }
 });
+
+test('workspace focus rings keep the dark color and clear 3:1 on known light surfaces',()=>{
+ const {readFileSync}=require('node:fs'),{join}=require('node:path');
+ const css=readFileSync(join(__dirname,'../dist/workspaces/projects/style.css'),'utf8');
+ const shell=readFileSync(join(__dirname,'../dist/styles.css'),'utf8');
+ const dark=css.match(/^:host\{([^}]+)\}/)[1];
+ const light=css.match(/:host\(\[data-theme=light\]\)\{color:([^}]+)\}/)[1];
+ const color=(block,name)=>block.match(new RegExp('--'+name+':(#[a-f0-9]{6})','i'))[1];
+ const luma=hex=>hex.slice(1).match(/../g).map(c=>parseInt(c,16)/255)
+  .map(c=>c<=0.04045?c/12.92:((c+0.055)/1.055)**2.4)
+  .reduce((total,c,i)=>total+c*[0.2126,0.7152,0.0722][i],0);
+ const contrast=(a,b)=>{const nums=[luma(a)+0.05,luma(b)+0.05];return Math.max(...nums)/Math.min(...nums);};
+ const darkRing=color(dark,'focus-outline'),lightRing=color(light,'accent');
+ assert.equal(darkRing,'#bdb0ff');
+ assert.match(light,/--focus-outline:var\(--accent\)/);
+ assert.match(css,/h3\[tabindex="-1"\]:focus-visible\{outline:3px solid var\(--focus-outline\);outline-offset:3px\}/);
+ assert.match(css,/@media\(forced-colors:active\)\{:host,:host\(\[data-theme=light\]\)\{--focus-outline:CanvasText\}\}/);
+ assert.doesNotMatch(css,/forced-color-adjust\s*:\s*none/);
+ const darkPanel=color(dark,'panel'),lightPanel=color(light,'panel');
+ const lightHero=css.match(/:host\(\[data-theme=light\]\) header\{background:(#[a-f0-9]{6})\}/i)[1];
+ const lightBackdrop=color(shell.match(/body\.light\{([^}]+)\}/)[1],'bg');
+ assert.ok(contrast(darkRing,darkPanel)>=3);
+ for(const surface of [lightPanel,lightHero,lightBackdrop]){
+  assert.ok(contrast(darkRing,surface)<3);
+  assert.ok(contrast(lightRing,surface)>=3);
+ }
+});
