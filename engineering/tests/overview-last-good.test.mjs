@@ -22,3 +22,20 @@ test('failed preparation cannot poison keyed reuse on the next successful refres
  app.render({counts:{succeeded:1},jobs:[job(1,'succeeded',{error:'VERIFIED NEXT RESULT'})]});
  assert.equal(app.get('jobs').firstChild,node,'unchanged successful cards must still be reused');
 });
+
+test('Lab offers only exact retained DedupExperiment record links and never guesses a numeric binding',()=>{
+ const app=mountSource(source,input),id='9007199254740993';
+ const experiment={decision:'unproven',reason:'Fixture only',evidence:{trials:[],stress_cases:0}};
+ const result=extra=>({experiment,experiment_id:9007199254740992,...extra});
+ const links=()=>app.get('jobs').firstChild.children.filter(x=>x.tag==='a');
+ const render=(value,state='succeeded',kind='DedupExperiment')=>app.render({counts:{[state]:1},jobs:[{...job(1,state,value),job:kind}]});
+ render(result({experiment_id_text:id}));
+ assert.deepEqual(links().map(a=>[a.textContent,a.href]),[['Review saved experiment '+id,'/learning#'+id]]);
+ const card=app.get('jobs').firstChild;render(result({experiment_id_text:id}));assert.equal(app.get('jobs').firstChild,card);
+ for(const bad of [undefined,9007199254740992,'0','01','1\n','9223372036854775808','1?redirect=bad.invalid']){
+  render(result({experiment_id_text:bad}));assert.equal(links().length,0);
+ }
+ render(result({experiment_id_text:id}),'running');assert.equal(links().length,0);
+ render(result({experiment_id_text:id}),'succeeded','AnotherJob');assert.equal(links().length,0);
+ render(result({experiment_id_text:id}),'failed');assert.equal(links()[0].href,'/learning#'+id);
+});

@@ -62,6 +62,9 @@ c.commit();c.close()`,path.join(out,'fixture.sqlite'),String(seedBase)],{encodin
      assert.equal(overview.jobs[0].state,'succeeded');assert.ok(overview.jobs[0].result.experiment.evidence.trials.length>0);assert.ok(overview.jobs[0].result.experiment_id);report.job=overview.jobs[0];
      await stop();const restarted=await start();assert.notEqual(restarted.engine_instance,identity.engine_instance);report.secondEngine=restarted.engine_instance;
      assert.deepEqual(JSON.parse((await request('/api/overview')).body).jobs[0],report.job);await verifyProjectArchives();
+     const retainedId=report.job.result.experiment_id_text;assert.match(retainedId,/^[1-9][0-9]{0,18}$/);
+     const stored=await request('/api/learning/history/'+retainedId);assert.equal(stored.status,200);
+     const selected=JSON.parse(stored.body);assert.equal(selected.id,retainedId);assert.equal(selected.run_state,'retained');assert.deepEqual(JSON.parse(selected.run),report.job.result.experiment);
    });
    await check('Read-only Learning history pages retain exact decimal keyset and omit evidence bodies',async()=>{seedLearningBrowseFixtures();await verifyLearningPageReceipts();});
    await verifyFinalDatabase();report.result='pass';return;
@@ -143,6 +146,22 @@ c.commit();c.close()`,path.join(out,'fixture.sqlite'),String(seedBase)],{encodin
   }finally{page.off('request',observe);}
  });
  await check('Native bounded experiment writes a durable job and preserves raw evidence',async()=>{await page.locator('.workspace-container [data-panel="experiments"]').click();await page.locator('.workspace-container #run-experiment').click();await page.locator('.workspace-container #experiment-status').filter({hasText:'queued'}).waitFor();await page.locator('.workspace-container [data-panel="overview"]').click();let overview;for(let i=0;i<120;i++){overview=JSON.parse((await request('/api/overview')).body);if(overview.jobs[0]&&['succeeded','failed'].includes(overview.jobs[0].state))break;await wait(150);}assert.equal(overview.jobs.length,1);assert.equal(overview.jobs[0].state,'succeeded');assert.ok(overview.jobs[0].result.experiment.evidence.trials.length>0);assert.ok(overview.jobs[0].result.experiment_id);report.job=overview.jobs[0];await page.waitForFunction(()=>document.querySelector('.workspace-container').shadowRoot.getElementById('completed').textContent==='1');await page.locator('.workspace-container .job summary').click();assert.match(await page.locator('.workspace-container .job pre').textContent(),/acceptance_policy/);});
+ await check('Lab opens only the exact saved Learning record and Back preserves the durable job',async()=>{
+  const id=report.job.result.experiment_id_text;assert.match(id,/^[1-9][0-9]{0,18}$/);
+  const record=page.getByRole('link',{name:'Review saved experiment '+id,exact:true});
+  assert.equal(await record.getAttribute('href'),'/learning#'+id);
+  await record.focus();assert.equal(await record.evaluate(el=>el===el.getRootNode().activeElement),true);
+  const exactRead=page.waitForRequest(r=>r.url()===origin+'/api/learning/history/'+id&&r.method()==='GET');
+  await record.click();await exactRead;
+  await page.getByRole('heading',{name:'Experiment '+id,exact:true}).waitFor();
+  const run=page.locator('#detail summary').filter({hasText:'Complete run'});
+  const retained=JSON.parse((await request('/api/learning/history/'+id)).body);assert.equal(retained.id,id);
+  await run.click();assert.equal(await page.locator('#detail pre').last().textContent(),retained.run);
+  assert.deepEqual(JSON.parse(retained.run),report.job.result.experiment);
+  assert.equal(new URL(page.url()).hash,'#'+id);
+  await page.goBack();await page.getByRole('link',{name:'Review saved experiment '+id,exact:true}).waitFor();
+  assert.deepEqual(JSON.parse((await request('/api/overview')).body).jobs[0],report.job);
+ });
  await page.screenshot({path:path.join(out,'lab-dark.png'),fullPage:true});
  await check('Shared navigation retains Lab state and Research styles under strict CSP',async()=>{await workspace('research');assert.match(await page.locator('.workspace-container #result-count').textContent(),/283/);assert.equal(await page.locator('.workspace-container .research-card').first().evaluate(el=>getComputedStyle(el).borderRadius),'8px');await workspace('media');assert.ok(await page.locator('.workspace-container article.card').count()>0);assert.equal(await page.locator('.workspace-container #load-media').isDisabled(),true);assert.equal(await page.locator('.workspace-container .player-controls button:not([disabled])').count(),0);assert.match(await page.locator('.workspace-container #status').textContent(),/disabled to keep third-party code/);await workspace('lab');await page.waitForFunction(()=>document.querySelector('.workspace-container').shadowRoot.getElementById('completed').textContent==='1');await page.locator('#theme').click();await page.screenshot({path:path.join(out,'lab-light.png'),fullPage:true});});
  await check('Controlled engine restart preserves SQLite jobs, experiment journal and exact archive',async()=>{await stop();const before=JSON.stringify(report.job);const restarted=await start();assert.notEqual(restarted.engine_instance,identity.engine_instance);const overview=JSON.parse((await request('/api/overview')).body);assert.equal(JSON.stringify(overview.jobs[0]),before);await verifyProjectArchives();report.secondEngine=restarted.engine_instance;await page.reload();await page.waitForFunction(()=>document.querySelector('.workspace-container')?.shadowRoot?.getElementById('completed')?.textContent==='1');});

@@ -31,6 +31,7 @@ export async function mount({container,search='',theme='dark',route='#lab',state
  for(const button of writeControls)button.disabled=true;
  async function submitJob(job){if(!controller.ready||disposed)throw new Error('Local engine initialization is incomplete; no job was submitted.');pendingSubmissions++;try{return await originalSubmitJob(job,{fetchImpl:(url,options)=>fetch(url,{...options,signal:AbortSignal.any([options.signal,lifetime.signal])})});}catch(error){warning=error.message;throw error;}finally{pendingSubmissions--;}}
  const elements=new Map([...root.querySelectorAll('[id]')].map(el=>[el.id,el]));const $ = id => elements.get(id);
+const exactPositiveId=value=>typeof value==='string'&&value===value.trim()&&/^[1-9][0-9]{0,18}$/.test(value)&&BigInt(value)<=9223372036854775807n;
 const renderedJobs = new Map();
 let emptyNode = null;
 let renderedInstance = null;
@@ -66,7 +67,10 @@ function render(data,instance=null) {
   if(new Set(identities).size!==identities.length)throw new Error('Repeated job identities; previous results are retained.');
   const nodes=[],nextRenderedJobs=new Map();
   if(!data.jobs.length){if(!emptyNode){emptyNode=text('div','','empty');emptyNode.append(text('strong','Your first experiment starts with a question.'),text('span','Open Collection to retrieve public project metadata.'));}nodes.push(emptyNode);}
-  for(const [index,job] of data.jobs.entries()){const identity=identities[index];const signature=job.state+':'+job.attempt;const prior=reuse?renderedJobs.get(identity):null;if(prior&&prior.signature===signature){nextRenderedJobs.set(identity,prior);nodes.push(prior.node);continue;}const e=text('article','','job');const top=text('div','','job-top');
+  for(const [index,job] of data.jobs.entries()){const identity=identities[index];
+    const receipt=job.result?.experiment_id_text;
+    const experimentId=job.job==='DedupExperiment'&&(job.state==='succeeded'||job.state==='failed')&&job.result?.experiment&&exactPositiveId(receipt)?receipt:'';
+    const signature=job.state+':'+job.attempt+':'+experimentId;const prior=reuse?renderedJobs.get(identity):null;if(prior&&prior.signature===signature){nextRenderedJobs.set(identity,prior);nodes.push(prior.node);continue;}const e=text('article','','job');const top=text('div','','job-top');
     const name=jobLabel(job.job);
     top.append(text('h3',name),text('span',job.state.toUpperCase(),'badge '+job.state));e.append(top,text('p','Job '+identity+' · attempt '+job.attempt));
     if(job.result?.project){const p=job.result.project;e.append(text('p',p.title+' · '+p.id+' · '+p.versions.length+' version IDs'));}
@@ -75,6 +79,7 @@ function render(data,instance=null) {
     if(job.result?.version_collection){const v=job.result.version_collection;e.append(text('p',v.records.length+' versions saved · '+v.missing_ids.length+' missing · complete JSON retained locally'));if(v.missing_ids.length)e.append(text('p','Partial result. Missing version IDs: '+v.missing_ids.join(', '),'error'));}
     if(job.result?.upstream_review){const u=job.result.upstream_review;e.append(text('p',u.repository+' · '+(u.revision||u.state||'No new observation')),text('p',u.comparison?'Comparison: '+u.comparison+' · observed '+u.observed_at_utc+' UTC':(u.error||'No new observation')),text('p','Observation only, not an upgrade or security clearance.'));}
     if(job.result?.experiment){const run=job.result.experiment;const decision=typeof run.decision==='string'?run.decision:Object.keys(run.decision)[0];e.append(text('p',run.evidence.trials.length+' timed pairs · '+run.evidence.stress_cases+' stress cases · '+run.reason),text('p','Gate: '+decision+' · execution is not promotion.'));}
+    if(experimentId){const review=text('a','Review saved experiment '+experimentId);review.href='/learning#'+experimentId;e.append(review);}
     if(job.result?.error)e.append(text('p',job.result.error,'error'));
     if(job.result){const d=document.createElement('details');d.append(text('summary','Inspect recorded result'),text('pre',JSON.stringify(job.result,null,2)));e.append(d);}
     nextRenderedJobs.set(identity,{signature,node:e});nodes.push(e);
@@ -103,10 +108,9 @@ $('upstream-form').addEventListener('submit',async e=>{e.preventDefault();const 
 
 $('project-archive-form').addEventListener('submit',async e=>{e.preventDefault();const button=e.currentTarget.querySelector('button');if(button.disabled)return;button.disabled=true;const status=$('project-archive-status');status.classList.remove('error');status.textContent='Queuing complete received project JSON for local storage…';try{const job=await submitJob(projectArchiveJob($('project-archive-id').value));status.textContent='Job '+job.id+' queued. Overview will show a hash/generation receipt; original JSON stays in local snapshots.';await refresh();}catch(error){status.textContent=error.message;status.classList.add('error');}finally{button.disabled=false;}});
 
-const validArchiveGeneration=value=>typeof value==='string'&&value===value.trim()&&/^[1-9][0-9]{0,18}$/.test(value)&&BigInt(value)<=9223372036854775807n;
 const archiveSelection=createArchiveSelection(({kind,id,generation},options)=>{
  if(generation==='')return loadSavedArchive(kind,id,options);
- if(!validArchiveGeneration(generation)){
+ if(!exactPositiveId(generation)){
   throw Error('Enter a positive decimal generation up to 9223372036854775807 without signs or leading zeros, or leave it blank for newest.');
  }
  // The base reader builds and validates the fixed, same-origin kind/ID path.
@@ -180,11 +184,11 @@ async function savedGenerationPage({kind,id,before},{signal}){
  if(!Array.isArray(page?.entries)||page.entries.length>HISTORY_PAGE_SIZE)invalid();
  let previous=before;
  for(const row of page.entries){
-  if(!validArchiveGeneration(row?.generation)||(previous!==null&&BigInt(row.generation)>=BigInt(previous))||
+  if(!exactPositiveId(row?.generation)||(previous!==null&&BigInt(row.generation)>=BigInt(previous))||
      typeof row.observed_at!=='string'||row.observed_at.length>64||!Number.isSafeInteger(row.stored_bytes)||row.stored_bytes<0)invalid();
   previous=row.generation;
  }
- if(page.next_before!==null&&(!validArchiveGeneration(page.next_before)||page.entries.length!==HISTORY_PAGE_SIZE||page.next_before!==previous))invalid();
+ if(page.next_before!==null&&(!exactPositiveId(page.next_before)||page.entries.length!==HISTORY_PAGE_SIZE||page.next_before!==previous))invalid();
  return page;
 }
 function attachArchiveHistory(list){
