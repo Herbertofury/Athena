@@ -1,9 +1,15 @@
 """Offline target checks: an archive map is neither a redirect nor proof of HTTP availability."""
+from collections import Counter
 import hashlib
+from html.parser import HTMLParser
+import io
 import importlib.util
 import json
 from pathlib import Path
+import re
+import tarfile
 import unittest
+import zipfile
 from urllib.parse import unquote, urlsplit
 ROOT = Path(__file__).resolve().parents[1]
 SNAPSHOT = ROOT / 'migration/engineering-atlas/metadata-2026-11-14'
@@ -23,6 +29,43 @@ class PublishedTargets(unittest.TestCase):
                     self.assertTrue((ROOT / 'wiki' / (page + '.md')).is_file(), page)
                 elif not parts.scheme:
                     self.assertTrue((ROOT / destination).is_file(), destination)
+    def test_historical_pages_map_covers_actual_atlas_anchors(self):
+        work = ROOT / "migration/engineering-atlas/verification-2026-11-07"
+        archive = (work / "engineering-atlas-pages-089b4ec.zip").read_bytes()
+        digest = "645b9e78b496471eaeca7c1f4f7be217ab9cfbd9769b9ac7f8879f04745d2009"
+        self.assertEqual(hashlib.sha256(archive).hexdigest(), digest)
+        legacy = "https://github.com/Herbertofury/Engineering-Atlas"
+        class OriginalAnchors(HTMLParser):
+            def __init__(self):
+                super().__init__()
+                self.targets = []
+            def handle_starttag(self, tag, attrs):
+                if tag == "a":
+                    self.targets.extend(value for key, value in attrs if key == "href"
+                                        and value and (value == legacy or value.startswith(legacy + "/")))
+        served, templates = Counter(), Counter()
+        with zipfile.ZipFile(io.BytesIO(archive)) as outer:
+            self.assertEqual(outer.namelist(), ["artifact.tar"])
+            with tarfile.open(fileobj=io.BytesIO(outer.read("artifact.tar")), mode="r:") as tar:
+                for item in tar:
+                    if item.isfile() and item.name.endswith(".html"):
+                        page = OriginalAnchors()
+                        page.feed(tar.extractfile(item).read().decode("utf-8"))
+                        (templates if item.name.endswith(".template.html") else served).update(page.targets)
+        report = (work / "PAGES-LINK-RECOVERY.md").read_text(encoding="utf-8")
+        targets = re.findall(r"^## `(https://github[.]com/Herbertofury/Engineering-Atlas[^`]*)`$", report, re.M)
+        self.assertEqual(len(targets), 9)
+        self.assertEqual(set(targets), set(served))
+        self.assertTrue(set(templates) <= set(served))
+        self.assertEqual(sum(served.values()), 13)
+        self.assertEqual(sum(templates.values()), 10)
+        self.assertEqual(report.count("[Read the exact retained Git object]"), 4)
+        self.assertEqual(report.count("[Restore the exact object from the Athena-hosted source bundle]"), 5)
+        self.assertIn(digest, report)
+        self.assertIn("not browser or external-link acceptance", report)
+        overview = (work.parent / "README.md").read_text(encoding="utf-8")
+        self.assertIn("(verification-2026-11-07/PAGES-LINK-RECOVERY.md)", overview)
+
 SPEC = importlib.util.spec_from_file_location("atlas_source_links", ROOT / "scripts/reconcile_atlas_source_links.py")
 mapper = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(mapper)
