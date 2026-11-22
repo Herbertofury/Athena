@@ -115,7 +115,7 @@ test('Lab opens an exact saved archive generation without rounding, latest fallb
  }finally{c?.unmount();e.restore();}
 });
 
-test('Editing the exact generation cancels a pending local read without replacing the verified view',async()=>{
+test('Editing the archive ID or generation cancels a pending read and an idle type change keeps last good',async()=>{
  const id='AANobbMI',old='{"keep":"last good"}',obsolete='{"wrong":"late"}';
  const payload=(generation,text)=>new Response(text,{headers:{'content-type':'application/json',
   'x-atlas-archive-kind':'project','x-atlas-canonical-id':id,'x-atlas-generation':generation,
@@ -134,14 +134,24 @@ test('Editing the exact generation cancels a pending local read without replacin
   Object.defineProperty(q('saved-archive-kind'),'value',{value:'project',configurable:true});q('saved-archive-id').value=id;
   const fire=event=>form.dispatchEvent(new e.window.Event(event,{bubbles:true,cancelable:true}));
   field.value='1';fire('submit');await waitFor(()=>!button.disabled);q('close-saved-archive').click();
-  field.value='2';fire('submit');await waitFor(()=>!!complete);
-  field.value='3';field.dispatchEvent(new e.window.Event('input',{bubbles:true}));
-  assert.equal(signal.aborted,true);
-  assert.equal(button.disabled,false);
-  assert.match(q('saved-archive-status').textContent,/Pending load cancelled/);
-  assert.equal(e.requests.filter(r=>r.url.includes('-archive/')).length,2);
-  complete();await tick();await tick();
-  assert.equal(dialog.open,false);q('show-last-archive').click();
+  for(const [fieldId,value,fieldLabel] of [['saved-archive-generation','3','generation'],['saved-archive-id','ABCDEFGH','ID']]){
+   field.value='2';q('saved-archive-id').value=id;complete=null;
+   const before=e.requests.filter(r=>r.url.includes('-archive/')).length;
+   fire('submit');await waitFor(()=>!!complete);
+   const changed=q(fieldId);changed.value=value;changed.dispatchEvent(new e.window.Event('input',{bubbles:true}));
+   assert.equal(signal.aborted,true);
+   assert.equal(button.disabled,false);
+   assert.match(q('saved-archive-status').textContent,new RegExp('Archive '+fieldLabel+' changed. Pending load cancelled'));
+   assert.equal(e.requests.filter(r=>r.url.includes('-archive/')).length,before+1);
+   complete();await tick();await tick();
+   assert.equal(dialog.open,false);q('show-last-archive').click();
+   assert.equal(q('saved-archive-text').textContent,old);q('close-saved-archive').click();
+  }
+  Object.defineProperty(q('saved-archive-kind'),'value',{value:'version',configurable:true});
+  q('saved-archive-kind').dispatchEvent(new e.window.Event('change'));
+  assert.equal(q('saved-archive-status').textContent,'Archive type changed. The previous verified response remains available with its original type.');
+  q('show-last-archive').click();
+  assert.match(q('saved-archive-title').textContent,/^project /);
   assert.equal(q('saved-archive-text').textContent,old);
  }finally{c?.unmount();e.restore();}
 });

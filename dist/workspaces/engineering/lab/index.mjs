@@ -126,14 +126,18 @@ $('saved-archive-dialog').addEventListener('cancel',cancelPendingArchiveViewer);
 $('saved-archive-dialog').addEventListener('close',cancelPendingArchiveViewer);
 $('download-saved-archive').addEventListener('click',()=>{const record=archiveSelection.last;if(!record)return;const url=createObjectURL(new Blob([record.bytes],{type:'application/json'}));const a=document.createElement('a');a.href=url;a.download=(record.kind==='upstream'?'github-upstream':'modrinth-'+record.kind)+'-'+record.id+'-generation-'+record.generation+'.json';a.click();setTimeout(()=>revokeObjectURL(url),1000);});
 
-function cancelChangedArchiveSelection(){
- if(!archiveSelection.pending)return;
+function cancelChangedArchiveSelection(message){
  archiveSelection.cancel();$('saved-archive-form').querySelector('button').disabled=false;$('cancel-archive-load').disabled=true;
- $('saved-archive-status').textContent='Archive selection changed. Pending load cancelled; the previous verified response remains available.';
+ $('saved-archive-status').textContent=message;
 }
-$('saved-archive-kind').addEventListener('change',cancelChangedArchiveSelection);
-$('saved-archive-id').addEventListener('input',cancelChangedArchiveSelection);
-$('saved-archive-generation').addEventListener('input',cancelChangedArchiveSelection);
+$('saved-archive-kind').addEventListener('change',()=>{
+ cancelChangedArchiveSelection('Archive type changed. The previous verified response remains available with its original type.');
+});
+for(const field of ['id','generation']){
+ $('saved-archive-'+field).addEventListener('input',()=>{
+  if(archiveSelection.pending)cancelChangedArchiveSelection('Archive '+(field==='id'?'ID':field)+' changed. Pending load cancelled; the previous verified response remains available.');
+ });
+}
 
  cancelArchive=()=>archiveSelection.cancel();cancelOverview=()=>overviewController?.abort();
  if(warning)$('workspace-warning').textContent=warning;
