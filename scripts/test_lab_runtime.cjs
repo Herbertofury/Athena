@@ -30,6 +30,25 @@ async function verifyFinalDatabase(){await check('Final SQLite integrity and exa
 
  }
  const seed=spawnSync('python3',['-c',`import sqlite3,sys\nc=sqlite3.connect(sys.argv[1]);c.execute('CREATE TABLE snapshots(generation INTEGER PRIMARY KEY,provider TEXT NOT NULL,canonical_id TEXT NOT NULL,observed_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,payload TEXT NOT NULL)');c.executemany("INSERT INTO snapshots(generation,provider,canonical_id,payload) VALUES(?,'modrinth-project-raw','SHARED01',?)",[(int(sys.argv[2]),sys.argv[3]),(int(sys.argv[4]),sys.argv[5])] + [(i,sys.argv[3]) for i in range(1,13)]);c.commit();c.close()`,path.join(out,'fixture.sqlite'),earlier,project,later,latest],{encoding:'utf8'});assert.equal(seed.status,0,seed.stderr);
+ const seedBase=9007199254740993n,oldCursor=String(seedBase+2n),nearest=String(seedBase+21n);
+ function seedLearningBrowseFixtures(){
+  // This script's disposable fixture only; no library import or additional job.
+  const seeded=spawnSync('python3',['-c',`import sqlite3,sys
+c=sqlite3.connect(sys.argv[1]); base=int(sys.argv[2])
+c.executemany("INSERT INTO experiments(id,recorded_at,candidate,baseline,evidence,decision) VALUES(?,?,?,?,?,?)",[(base+i,'2026-11-22', 'Older-only lab fixture' if i==0 else 'AA first-page fixture' if i==3 else 'ZZ browse fixture '+str(i),'Synthetic baseline','{}','unproven') for i in range(22)])
+c.commit();c.close()`,path.join(out,'fixture.sqlite'),String(seedBase)],{encoding:'utf8'});
+  assert.equal(seeded.status,0,seeded.stderr);
+ }
+ async function verifyLearningPageReceipts(){
+  const head=await request('/api/learning/history');
+  assert.equal(head.status,200);
+  const first=JSON.parse(head.body);assert.equal(first.records.length,20);assert.equal(first.records[0].id,nearest);assert.equal(first.next_before,oldCursor);
+  assert.equal(first.records.some(x=>x.candidate==='Older-only lab fixture'),false);
+  const tail=await request('/api/learning/history?before='+oldCursor);assert.equal(tail.status,200);
+  const old=JSON.parse(tail.body);assert.equal(old.next_before,null);assert.equal(old.records[1].id,String(seedBase));
+  assert.equal(old.records[1].candidate,'Older-only lab fixture');
+  assert.ok([...first.records,...old.records].every(row=>!Object.hasOwn(row,'run')&&!Object.hasOwn(row,'evidence')));
+ }
  const identity=await start();assert.equal(identity.runtime_manifest_sha256,report.packageSHA256);report.firstEngine=identity.engine_instance;
  await check('Served shell and every allowlisted runtime file match package bytes',async()=>{const manifest=JSON.parse(fs.readFileSync(path.join(pkg,'athena-runtime-manifest.json')));for(const file of manifest.files){if(file.path==='.nojekyll')continue;const r=await request('/'+file.path);assert.equal(r.status,200,file.path);assert.equal(hash(r.body),file.sha256,file.path);assert.equal(r.headers['x-athena-asset-sha256'],file.sha256);assert.equal(r.headers['x-athena-runtime-sha256'],report.packageSHA256);assert.equal(r.headers['cache-control'],'no-store');assert.equal(r.headers['x-content-type-options'],'nosniff');}report.verifiedAssets=manifest.files.length-1;});
  await check('Loopback API keeps strict Host, Origin, custom-header and no-CORS protections',async()=>{const job='"DedupExperiment"';for(const headers of [{},{Origin:'https://evil.invalid','X-Atlas-Request':'local-ui'},{Origin:origin},{Origin:origin,'X-Atlas-Request':'wrong'},{Origin:origin,'X-Atlas-Request':'local-ui',Host:'evil.invalid'}])assert.equal((await request('/api/jobs',{method:'POST',headers:{'Content-Type':'application/json',...headers},body:job})).status,403);assert.equal((await request('/api/overview',{headers:{Host:'evil.invalid'}})).status,403);assert.equal((await request('/api/jobs',{method:'OPTIONS',headers:{Origin:'https://evil.invalid'}})).status,403);const r=await request('/');assert.equal(r.headers['access-control-allow-origin'],undefined);assert.match(r.headers['content-security-policy'],/script-src 'self'; style-src 'self'/);assert.doesNotMatch(r.headers['content-security-policy'],/unsafe-inline|unsafe-eval|https:/);for(const p of ['/fixture.sqlite','/../fixture.sqlite','/%2e%2e/fixture.sqlite','/.git/config','/api/no-such-endpoint'])assert.equal((await request(p)).status,404,p);});
@@ -44,6 +63,7 @@ async function verifyFinalDatabase(){await check('Final SQLite integrity and exa
      await stop();const restarted=await start();assert.notEqual(restarted.engine_instance,identity.engine_instance);report.secondEngine=restarted.engine_instance;
      assert.deepEqual(JSON.parse((await request('/api/overview')).body).jobs[0],report.job);await verifyProjectArchives();
    });
+   await check('Read-only Learning history pages retain exact decimal keyset and omit evidence bodies',async()=>{seedLearningBrowseFixtures();await verifyLearningPageReceipts();});
    await verifyFinalDatabase();report.result='pass';return;
  }
  browser=await chromium.launch({headless:true,...(process.env.CHROMIUM_PATH?{executablePath:process.env.CHROMIUM_PATH}:{}),env:{...process.env,XDG_CONFIG_HOME:path.join(out,'chromium-config'),XDG_CACHE_HOME:path.join(out,'chromium-cache')}});report.browser=await browser.version();const context=await browser.newContext({viewport:{width:1440,height:1000},reducedMotion:'reduce',acceptDownloads:true});await context.route('**/*',route=>{if(new URL(route.request().url()).origin!==origin){report.outsideRequests.push(route.request().url());return route.abort();}return route.continue();});await context.exposeBinding('__recordAthenaCSP',(_source,value)=>report.cspViolations.push(value));await context.addInitScript(()=>{window.__athenaCSP=[];document.addEventListener('securitypolicyviolation',e=>{const value={directive:e.effectiveDirective,blocked:e.blockedURI};window.__athenaCSP.push(value);window.__recordAthenaCSP(value);});});page=await context.newPage();page.on('pageerror',error=>report.errors.push(error.message));
@@ -126,5 +146,37 @@ async function verifyFinalDatabase(){await check('Final SQLite integrity and exa
  await page.screenshot({path:path.join(out,'lab-dark.png'),fullPage:true});
  await check('Shared navigation retains Lab state and Research styles under strict CSP',async()=>{await workspace('research');assert.match(await page.locator('.workspace-container #result-count').textContent(),/283/);assert.equal(await page.locator('.workspace-container .research-card').first().evaluate(el=>getComputedStyle(el).borderRadius),'8px');await workspace('media');assert.ok(await page.locator('.workspace-container article.card').count()>0);assert.equal(await page.locator('.workspace-container #load-media').isDisabled(),true);assert.equal(await page.locator('.workspace-container .player-controls button:not([disabled])').count(),0);assert.match(await page.locator('.workspace-container #status').textContent(),/disabled to keep third-party code/);await workspace('lab');await page.waitForFunction(()=>document.querySelector('.workspace-container').shadowRoot.getElementById('completed').textContent==='1');await page.locator('#theme').click();await page.screenshot({path:path.join(out,'lab-light.png'),fullPage:true});});
  await check('Controlled engine restart preserves SQLite jobs, experiment journal and exact archive',async()=>{await stop();const before=JSON.stringify(report.job);const restarted=await start();assert.notEqual(restarted.engine_instance,identity.engine_instance);const overview=JSON.parse((await request('/api/overview')).body);assert.equal(JSON.stringify(overview.jobs[0]),before);await verifyProjectArchives();report.secondEngine=restarted.engine_instance;await page.reload();await page.waitForFunction(()=>document.querySelector('.workspace-container')?.shadowRoot?.getElementById('completed')?.textContent==='1');});
+ await check('Native Learning History sorts and searches only loaded summaries, preserving selection and pins',async()=>{
+  seedLearningBrowseFixtures();await verifyLearningPageReceipts();
+  const requests=[];const observe=req=>{if(req.url().startsWith(origin+'/api/'))requests.push([req.method(),req.url().slice(origin.length)]);};
+  page.on('request',observe);
+  try{
+   await page.goto(origin+'/learning');
+   const records=page.locator('#records li:visible'),status=page.locator('#history-results');
+   const search=page.getByLabel('Search loaded history',{exact:true}),sort=page.getByLabel('Sort loaded history',{exact:true});
+   await status.filter({hasText:'20 of 20 loaded'}).waitFor();
+   assert.equal(await records.first().getAttribute('data-record-id'),nearest);
+   await sort.selectOption('candidate');
+   assert.match(await records.first().textContent(),/AA first-page fixture/);
+   await records.first().getByRole('button').click();
+   await page.locator('#detail .record-panel').waitFor();
+   await page.getByRole('button',{name:'Pin selected record',exact:true}).click();
+   const pinned=await page.locator('#comparison-status').textContent(),last=await page.locator('#detail').textContent();
+   const before=requests.length;
+   await search.fill('older-only');assert.equal(await records.count(),0);assert.match(await status.textContent(),/Older unloaded records may still match/);
+   assert.equal(await search.evaluate(el=>document.activeElement===el),true);
+   await sort.focus();await sort.selectOption('older');assert.equal(await sort.evaluate(el=>document.activeElement===el),true);
+   assert.equal(requests.length,before);assert.equal(await page.locator('#detail').textContent(),last);
+   const more=page.getByRole('button',{name:'Load older records',exact:true});
+   await more.click();
+   const match=records.getByRole('button',{name:/Older-only lab fixture/});await match.waitFor();
+   assert.equal(await records.first().getAttribute('data-record-id'),String(seedBase));
+   assert.equal(await match.evaluate(el=>document.activeElement===el),true);
+   assert.deepEqual(requests.slice(before),[['GET','/api/learning/history?before='+oldCursor]]);
+   assert.equal(await page.locator('#comparison-status').textContent(),pinned);
+   await search.fill('#'+nearest);assert.equal(await records.count(),1);assert.equal(await records.first().getAttribute('data-record-id'),nearest);
+   assert.equal(requests.length,before+1);
+  }finally{page.off('request',observe);}
+ });
  assert.deepEqual(await page.evaluate(()=>window.__athenaCSP),[]);assert.deepEqual(report.cspViolations,[]);assert.deepEqual(report.errors,[]);assert.deepEqual(report.outsideRequests,[]);await verifyFinalDatabase();report.result='pass';
 })().catch(async error=>{report.result='failed';report.failure=error.stack;process.exitCode=1;if(page){try{report.failureView=await page.evaluate(()=>({hash:location.hash,status:document.querySelector('.workspace-status')?.textContent,content:document.querySelector('.workspace-container')?.shadowRoot?.innerHTML?.slice(-20000),csp:window.__athenaCSP}));await page.screenshot({path:path.join(out,'failure.png'),fullPage:true});}catch{}}}).finally(async()=>{await browser?.close();await stop();if(serverLog!==undefined)fs.closeSync(serverLog);report.finished=new Date().toISOString();if(fs.existsSync(out))fs.writeFileSync(path.join(out,'report.json'),JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify(report,null,2));});
