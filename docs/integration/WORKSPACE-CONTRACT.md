@@ -65,3 +65,16 @@ Keep write controls unavailable until module initialization is complete. Navigat
 The Rust engine serves a frozen, manifest-verified runtime package under strict same-origin script/style/connect policies. Workspace CSS is a local external stylesheet, not injected inline styles. Third-party Media preview and player code stays disabled on this database-privileged origin. This boundary must not be weakened to obtain a passing browser test.
 
 `npm run test:browser` now verifies both generated adapters, runs static-app Chromium acceptance, runs locked Rust tests/clippy/build using the pinned project toolchain, packages the reviewed public asset allowlist, and runs full compiled-engine Chromium acceptance. Logs and reports are retained under `browser-results`. `npm run test:browser:static` is explicitly the smaller static-only check. Neither command deploys or changes repository settings.
+
+### Local report workspace
+
+`#storage` mounts `dist/workspaces/storage/index.mjs` in the main shell. It
+accepts only an explicitly selected Athena Storage Observatory v1 JSON report
+(up to 64 KiB), as described by the independent measured-root experiment.
+Imported labels render as text, reports are always labeled unverified and are
+cleared on route teardown or the Clear button. Shared search filters category
+labels only; it never changes the totals. The separate allocation/logical
+lenses reuse the same report and do not imply free/reclaimable space. No data is
+sent to the native host or retained as workspace settings. The Python bridge
+serves only the three reviewed static assets; there is no directory scanner,
+filesystem picker beyond the browser file input, or localhost API for storage.

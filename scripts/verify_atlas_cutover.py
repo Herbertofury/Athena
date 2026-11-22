@@ -9,6 +9,19 @@ import tempfile
 ROOT = Path(__file__).resolve().parents[1]
 SNAPSHOT = Path('migration/engineering-atlas/cutover-2026-11-13')
 
+def source_tree(directory, revision):
+    entries = subprocess.check_output(
+        ['git', '-C', directory, 'ls-tree', '-r', '-z', '--full-tree', revision]
+    )
+    tree = {}
+    for entry in entries.split(b'\0')[:-1]:
+        metadata, path = entry.split(b'\t', 1)
+        _, kind, oid = metadata.split()
+        if kind != b'blob':
+            raise ValueError(f'Unsupported source tree entry: {path!r} ({kind!r})')
+        tree[path] = oid.decode('ascii')
+    return tree
+
 def verify(root=ROOT):
     manifest = json.loads((root / SNAPSHOT / 'source-manifest.json').read_text())
     rows = manifest['files']
@@ -30,15 +43,23 @@ def verify(root=ROOT):
         subprocess.run(['git','-C',directory,'fetch',str(root / SNAPSHOT / 'history-delta.bundle'),'+refs/*:refs/*'],check=True,capture_output=True)
         subprocess.run(['git','-C',directory,'fsck','--full'],check=True,capture_output=True)
         refs = json.loads((root / SNAPSHOT / 'source-refs.json').read_text())
+        revision = manifest['source_revision']
+        if [row['sha'] for row in refs if row['ref'] == 'refs/heads/main'] != [revision]:
+            raise ValueError('Manifest revision does not match retained source main')
         for ref in refs:
             actual = subprocess.check_output(['git','-C',directory,'rev-parse',ref['ref']],text=True).strip()
             if actual != ref['sha']:
                 raise ValueError(f'Ref mismatch: {ref["ref"]}')
-        tracked = subprocess.check_output(['git','-C',directory,'ls-tree','-r','--name-only',manifest['source_revision']],text=True).splitlines()
-        if set(tracked) != seen:
+        tracked = source_tree(directory, revision)
+        if tracked.keys() != {path.encode('utf-8') for path in seen}:
             raise ValueError('Source tree inventory mismatch')
         for row in rows:
-            data = subprocess.check_output(['git','-C',directory,'show',row['source_blob']])
+            oid = tracked[row['source_path'].encode('utf-8')]
+            if oid != row['source_blob']:
+                raise ValueError(f'Source path/blob mismatch: {row["source_path"]}')
+            data = subprocess.check_output(['git','-C',directory,'cat-file','blob',oid])
+            if len(data) != row['bytes']:
+                raise ValueError(f'Source byte count mismatch: {row["source_path"]}')
             if hashlib.sha256(data).hexdigest() != row['source_sha256']:
                 raise ValueError(f'Source hash mismatch: {row["source_path"]}')
     return {'source_revision':manifest['source_revision'],'files':len(rows),'refs':len(refs),'source_recovery':'verified','native_acceptance':'not established by this check'}
