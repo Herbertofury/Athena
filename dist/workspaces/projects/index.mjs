@@ -1,4 +1,4 @@
-import {empty,validate,change,archive,createBrowseIndex,stages,matchingSavedRevisions} from './model.mjs';
+import {empty,validate,change,archive,createBrowseIndex,stages,matchingSavedRevisions,createProjectReference} from './model.mjs';
 import {parseBackup,mergeBackup,MAX_IMPORT_BYTES} from './import.mjs';
 const PAGE=24;
 export function mount({container,state,setState,search='',signal,theme='dark',readSavedProject}){
@@ -85,13 +85,16 @@ export function mount({container,state,setState,search='',signal,theme='dark',re
   history.ontoggle=()=>{
    if(!history.open||disposed||!history.isConnected)return;
    history.ontoggle=null;
-   const list=el('div');history.append(list);
+   const list=el('div');history.append(el('p','Links open the address recorded in that revision; availability is not checked.'),list);
    let next=project.revisions.length;
    const more=button('Show more saved revisions',()=>append(true));history.append(more);
    function append(moveFocus){
     let first;
     for(let count=0;count<PAGE&&next;count++){
-     const rev=el('pre',JSON.stringify(project.revisions[--next],null,2));rev.tabIndex=-1;list.append(rev);first??=rev;
+     const saved=project.revisions[--next],section=el('section');
+     section.dataset.savedRevision=String(next+1);section.setAttribute('aria-label','Saved revision '+(next+1));
+     const references=[['official source',saved.source],['release reference',saved.release]].map(([label,value])=>createProjectReference(document,`Open revision ${next+1} ${label} (new tab)`,value)).filter(Boolean);
+     const rev=el('pre',JSON.stringify(saved,null,2));rev.tabIndex=-1;section.append(...references,rev);list.append(section);first??=references[0]??rev;
     }
     if(moveFocus)first?.focus();
     more.hidden=!next;
