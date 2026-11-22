@@ -45,8 +45,43 @@ async function runMediaBrowserChecks({page,origin,root,report,check}){
       assert.equal(result.cards,2);assert.equal(result.pendingImages,4);assert.equal(result.automaticImages,0);assert.equal(result.players,0);report.nexusLargePreview=result;
     }finally{await page.unroute(fixtureUrl,handler);}
   });
+  await check('Native Media reviews manually supplied mod cues without creating player, write, or provider activity',async()=>{
+    const fixtureUrl=origin+'/workspaces/engineering/media/public-fixtures.json';
+    const fixture=route=>route.fulfill({status:200,contentType:'application/json',body:JSON.stringify({schema_version:1,access:'public-only',private_data_included:false,cards:[]})});
+    await page.route(fixtureUrl,fixture);
+    const external=[],seen=request=>{const url=new URL(request.url());if(url.origin!==origin)external.push(url.origin);};
+    page.on('request',seen);
+    const host=page.locator('[data-cue-browser-fixture]'),panel=host.locator('#video-mod-cues');
+    let original;
+    try{
+      original=await page.evaluate(()=>localStorage.getItem('athena-workspaces-v1'));
+      await page.evaluate(async()=>{
+        const {mount}=await import('/workspaces/engineering/media/index.mjs');
+        const container=document.createElement('section');container.dataset.cueBrowserFixture='';document.body.append(container);
+        container.cueController=await mount({container,route:'#media?q='});
+      });
+      assert.equal(await panel.locator('form').count(),0);
+      await panel.getByText('Review mod cues from a video',{exact:true}).click();
+      await panel.getByLabel('Video or post URL').fill('https://youtu.be/f0iYkTUx5Rs?si=discard');
+      await panel.getByLabel('Local timestamped cues').fill('0:41.091..0:43.4 | visible | Example title\n0:44 | inferred | <img src=x onerror=alert(1)>');
+      await panel.getByRole('button',{name:'Review local cues'}).click();
+      await panel.getByText(/Inference, unconfirmed/).waitFor();
+      assert.equal(await panel.locator('img,video,audio,iframe').count(),0);
+      assert.equal(await panel.getByRole('link',{name:'Open supplied YouTube source'}).getAttribute('href'),'https://www.youtube.com/watch?v=f0iYkTUx5Rs');
+      const json=JSON.parse(await panel.locator('pre').textContent());
+      assert.deepEqual(json.cues.map(cue=>[cue.basis,cue.start_ms,cue.end_ms]),[['visible',41091,43400],['inferred',44000,null]]);
+      await panel.getByLabel('Local timestamped cues').fill('changed draft');
+      assert.equal(await panel.locator('pre').count(),0);
+      assert.equal(await page.evaluate(()=>localStorage.getItem('athena-workspaces-v1')),original);
+      assert.deepEqual(external,[]);
+      report.manualVideoModCues={rows:2,externalRequests:0,workspaceUnchanged:true,scope:'synthetic manually attributed cues, no media or mod discovery'};
+    }finally{
+      await page.evaluate(()=>{const el=document.querySelector('[data-cue-browser-fixture]');el?.cueController?.unmount();el?.remove();});
+      page.off('request',seen);await page.unroute(fixtureUrl,fixture);
+    }
+  });
   await check('Media served correction modules match the reviewed runtime bytes',async()=>{
-    const names=['index.mjs','event-log-view.mjs','media-event-recorder.mjs','media-core.mjs'];
+    const names=['index.mjs','event-log-view.mjs','media-event-recorder.mjs','media-core.mjs','video-mod-evidence.mjs'];
     const identities=await page.evaluate(async names=>{
       const result={};for(const name of names){const response=await fetch('/workspaces/engineering/media/'+name,{cache:'no-store'});if(!response.ok)throw Error('Media module unavailable: '+name);const bytes=await response.arrayBuffer();result[name]=Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',bytes)),b=>b.toString(16).padStart(2,'0')).join('');}return result;
     },names);
