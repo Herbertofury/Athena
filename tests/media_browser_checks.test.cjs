@@ -5,17 +5,20 @@ const root=path.resolve(__dirname,'../dist');
 const origin='http://127.0.0.1:12345';
 const hashes=()=>Object.fromEntries(['index.mjs','event-log-view.mjs','media-event-recorder.mjs','media-core.mjs','video-mod-evidence.mjs'].map(name=>[name,crypto.createHash('sha256').update(fs.readFileSync(path.join(root,'workspaces/engineering/media',name))).digest('hex')]));
 function prepared(){return [{cards:2,pendingImages:4,automaticImages:0,players:0,fixtureSHA256:'auto'},hashes(),{events:260,state:{render_failures:2},exactVisibleJSON:true},['youtube','native','hls'].map(mode=>({mode,viewRenderFailures:mode==='youtube'?1:0,retainedFailureCount:1,newAttemptPlayingCallbacks:1,calls:{play:0},fixtureSHA256:'1'.repeat(64)}))];}
-function cueSequence({playerCount=0,workspaceAfter='unchanged',externalRequest,sourceHref='https://www.youtube.com/watch?v=f0iYkTUx5Rs',cues=[{basis:'visible',start_ms:41091,end_ms:43400},{basis:'inferred',start_ms:44000,end_ms:null}],stalePreviewCount=0}={}){
+function cueSequence({playerCount=0,workspaceAfter='unchanged',externalRequest,sourceHref='https://www.youtube.com/watch?v=f0iYkTUx5Rs',cues=[{basis:'visible',start_ms:41091,end_ms:43400},{basis:'inferred',start_ms:44000,end_ms:null}],stalePreviewCount=0,staleTimedActions=0,reviewSource='https://www.youtube.com/watch?v=f0iYkTUx5Rs',
+ openedEarly=[],openArgs=['https://youtu.be/f0iYkTUx5Rs?t=0m41s','_blank','noopener,noreferrer']}={}){
  return [
   ['evaluate',null,'unchanged'],['evaluate','.shell > #main',undefined],
   ['count','#video-mod-cues -> form',0],['click','Review mod cues from a video'],
-  ['fill','Video or post URL','https://youtu.be/f0iYkTUx5Rs?si=discard'],
+  ['fill','Video or post URL','https://youtu.be/f0iYkTUx5Rs?si=discard&t=1m02s#old'],
   ['fill','Local timestamped cues','0:41.091..0:43.4 | visible | Example title\n0:44 | inferred | <img src=x onerror=alert(1)>'],
   ['click','button:Review local cues'],['waitFor','/Inference, unconfirmed/'],
   ['count','#video-mod-cues -> img,video,audio,iframe',playerCount],
   ['href','link:Open supplied YouTube source',sourceHref],
-  ['textContent','#video-mod-cues -> pre',JSON.stringify({cues})],
+  ['textContent','#video-mod-cues -> pre',JSON.stringify({source:{url:reviewSource},cues})],
+  ['evaluate',null,openedEarly],['click','button:Open video at cue on line 1 on YouTube'],['evaluate',null,[openArgs]],
   ['fill','Local timestamped cues','changed draft'],['count','#video-mod-cues -> pre',stalePreviewCount],
+  ['count','button:/Open video at cue/',staleTimedActions],
   ['evaluate',null,workspaceAfter,externalRequest]
  ];
 }
@@ -55,7 +58,7 @@ async function invoke(values,stats={},cueOptions){const names=[],report={},cue=c
 test('CI browser coverage validates all five result groups before reporting them',async()=>{
  const result=await invoke(prepared());assert.equal(result.names.length,5);assert.match(result.names[1],/manually supplied mod cues/);assert.equal(result.index,4);
  assert.equal(result.report.mediaTerminalStates.length,3);assert.equal(result.report.mediaRecovery.exactVisibleJSON,true);
- assert.deepEqual(result.report.manualVideoModCues,{rows:2,externalRequests:0,workspaceUnchanged:true,scope:'synthetic manually attributed cues, no media or mod discovery'});
+ assert.deepEqual(result.report.manualVideoModCues,{rows:2,externalRequests:0,workspaceUnchanged:true,timedOpenIntent:true,scope:'synthetic manually attributed cues and intercepted open, no media or mod discovery'});
  assert.deepEqual(result.stats,{routes:2,unroutes:2,subscribed:1,cleanup:1,unsubscribed:1});
 });
 test('CI assertions reject changed served module bytes',async()=>{const values=prepared();values[1]['event-log-view.mjs']='0'.repeat(64);await assert.rejects(()=>invoke(values),{code:'ERR_ASSERTION'});});
@@ -64,7 +67,9 @@ test('Cue browser fixture rejects dirty state, player, provider request, wrong r
  for (const [options,actual] of [
   [{playerCount:1},1],[{workspaceAfter:'changed'},'changed'],[{externalRequest:'https://www.youtube.com/watch?v=f0iYkTUx5Rs'},['https://www.youtube.com']],
   [{sourceHref:'https://youtu.be/f0iYkTUx5Rs'},'https://youtu.be/f0iYkTUx5Rs'],
-  [{cues:[]},[]],[{stalePreviewCount:1},1]
+  [{cues:[]},[]],[{stalePreviewCount:1},1],[{staleTimedActions:1},1],
+  [{reviewSource:'https://youtu.be/f0iYkTUx5Rs?t=0m41s'},'https://youtu.be/f0iYkTUx5Rs?t=0m41s'],
+  [{openedEarly:[['unwanted']]},[['unwanted']]],[{openArgs:['https://youtu.be/f0iYkTUx5Rs?t=0m42s','_blank','noopener,noreferrer']},[['https://youtu.be/f0iYkTUx5Rs?t=0m42s','_blank','noopener,noreferrer']]]
  ]){
   const stats={};await assert.rejects(()=>invoke(prepared(),stats,options),error=>{assert.equal(error.code,'ERR_ASSERTION');assert.deepEqual(error.actual,actual);return true;});
   assert.deepEqual(stats,{routes:2,unroutes:2,subscribed:1,cleanup:1,unsubscribed:1});
