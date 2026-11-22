@@ -31,6 +31,10 @@ The bundle preserves original commits, authors and refs. It does not accept the 
 
 The [historical Pages link recovery map](verification-2026-11-07/PAGES-LINK-RECOVERY.md) gives exact Athena copies or local bundle restore targets for the nine original Atlas GitHub destinations in that artifact. The original ZIP remains unchanged. This does not establish active website, provider playback, or source retirement readiness.
 
+### Wikimedia Commons: retained authoring source
+
+The historical citation `https://github.com/Herbertofury/Engineering-Atlas/wiki/Wikimedia-Commons-Adapter-Research` is unchanged in the archived wiki. The original hosted wiki revision is unavailable in the retained wiki history and was not tested. Use the [retained Wikimedia Commons research Markdown](https://github.com/Herbertofury/Athena/blob/ce6229e6844ddfa4a62cde6d53bfad425e25a1b7/engineering/docs/adapters/wikimedia-commons.md) to read the exact authoring source instead. The archived Atlas page map explicitly binds that source to the historical wiki title, and Atlas source revision `db5a18b65ccb2a71cf28a018ba30fcac40b2431e` and the pinned Athena path hold the same Git blob, `6ab1a7bb512f9f8d86711fe40b9a363e2b59783e`. This is a source link, not a recovered hosted wiki revision, a Pages deployment, or retirement clearance.
+
 ## Name and compatibility
 
 Current interfaces are Athena-branded. The internal `atlas-lab` Rust crate, CLI and database path remain unchanged to avoid silently breaking scripts, saved data or experiment identities. Historic evidence retains original names. Research code lives under `engineering/`; run its existing tools from that directory.
