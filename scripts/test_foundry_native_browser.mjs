@@ -1,3 +1,4 @@
+import {readLearningUiOnce,readLearningOverviewOnce,readAcceptedReceipt} from './foundry-learning-diagnostic.mjs';
 import {decodeJobReceipt} from '../engineering/apps/atlas-lab/ui/job-submit.mjs';
 // Bounded real-browser/native-process acceptance. Only synthetic data is used.
 import assert from 'node:assert/strict';
@@ -312,8 +313,31 @@ c.execute('UPDATE experiment_runs SET output=? WHERE experiment_id=?',(raw,int(s
   await page.locator('#records li').first().waitFor();
   const beforeRuns=await (await fetch(origin+'/api/learning/history')).json();
   let submissions=0;await page.route('**/api/jobs',async route=>{submissions++;await route.continue();});
-  await page.locator('#run-experiment').click();await page.locator('#run-experiment').evaluate(button=>button.click());
-  await page.locator('#run-status').filter({hasText:'Complete experiment history is retained'}).waitFor({timeout:90000});
+  let observedAcceptedId=null,status5xx=null;
+  const observeResponse=response=>{
+   const url=new URL(response.url()), method=response.request().method(), status=response.status();
+   if(url.origin!==origin)return;
+   if(method==='POST'&&url.pathname==='/api/jobs'&&status===200){
+    void readAcceptedReceipt(response).then(id=>{observedAcceptedId=id;});
+   }else if(method==='GET'&&/^\/api\/learning\/jobs\/[1-9]\d{0,18}$/.test(url.pathname)&&status>=500&&status<=599){
+    status5xx={status,id:url.pathname.split('/').at(-1)};
+   }
+  };
+  page.on('response',observeResponse);
+  try{
+   await page.locator('#run-experiment').click();await page.locator('#run-experiment').evaluate(button=>button.click());
+   await page.locator('#run-status').filter({hasText:'Complete experiment history is retained'}).waitFor({timeout:90000});
+  }catch(error){
+   if(status5xx){
+    const id=observedAcceptedId===status5xx.id?observedAcceptedId:null;
+    const [ui,queue]=await Promise.all([
+     readLearningUiOnce(page),
+     readLearningOverviewOnce(origin,id)
+    ]);
+    report.learningJobDiagnostic={phase:'await-retained-job',category:'job-status-http-5xx',status:status5xx.status,acceptanceMatched:id!==null,ui,queue};
+   }
+   throw error;
+  }finally{page.off('response',observeResponse);}
   assert.equal(submissions,1);await page.unroute('**/api/jobs');
   const afterRuns=await (await fetch(origin+'/api/learning/history')).json();
   assert.equal(afterRuns.records.length,beforeRuns.records.length+1);

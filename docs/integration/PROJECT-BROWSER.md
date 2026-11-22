@@ -6,6 +6,32 @@ Nothing is automatically followed on social accounts, polled or synchronized. Ve
 
 The workspace has a separate schema-1 state under `projects`. Unknown fields survive validation/import. Imports refuse conflicts atomically, admit at most 100 projects / 16 MiB, and never silently truncate. Quota failures preserve the full in-memory draft for export. Use one editing tab; cross-tab compare-and-swap is not provided. Invalid persisted schemas disable mutation rather than overwriting existing data.
 
+## Browse large project collections
+
+The list opens with up to 24 matching projects. **Show next** appends more in
+the same most-recent-first order and sends keyboard focus to the first newly
+shown project. The result count reports both displayed and total matches.
+Search and filters still inspect every latest project revision, even records
+not displayed yet. Opening a project does not redraw its surrounding cards.
+
+## Transfer only one saved project
+
+Open the intended project and choose **Review portable copy**. The preview
+identifies the exact project ID, date and revision count. Inspect the exact
+JSON before downloading: it contains only this durable project (all dated
+revisions, links and project-level metadata). Other projects, workspace
+settings, learning data and Continuity notes are not included. The file is
+plain text, not an online share or a sync connection. If the selected saved
+project changes after review, Athena rejects the export and asks you to review
+again. Unsaved editor changes are not exported through this path.
+
+To reopen the file in another local profile, choose **Import backup**, inspect
+the proposed additions, and confirm. Identical projects are a no-op. Conflicts
+are refused; imports do not overwrite an existing ID. The browser store is
+checked again at confirmation and requires confirmed readback; this is not a
+cross-tab lock. The existing full-workspace export remains available, including
+its documented draft-recovery behavior.
+
 ## Verification
 
 - `node --test tests/projects.test.cjs`: revision, ownership, filters, reversible archive, malformed/unsafe URLs, serialization, additive/duplicate/conflicting import.

@@ -1,6 +1,14 @@
 # Storage management: source study and original experiment
 
-Checked 2026-11-16. Owner request: use sucodeee's storage-management reference for Athena. Tracker: [Athena #269](https://github.com/Herbertofury/Athena/issues/269). Status: reference inspected; original read-only experiment implemented locally; production storage management remains open.
+Owner request: use sucodeee's storage-management reference for Athena. Tracker: [Athena #269](https://github.com/Herbertofury/Athena/issues/269).
+
+## Current implementation · 2026-11-21
+
+[Merged Athena #318](https://github.com/Herbertofury/Athena/pull/318) adds **Storage Observatory** to the main app at `#storage`. The [workspace contract](../integration/WORKSPACE-CONTRACT.md) describes the read-only view; the [optional one-shot Linux CLI](../../experiments/storage-observatory/README.md#optional-measured-root-report-linux) is run separately on a directory the operator explicitly selects. The app reads two selected report files in memory only. It never starts a scan, saves or uploads a report, or performs cleanup.
+
+Capped, denied or otherwise incomplete traversal stays **observed only**. The app shows differences only for two complete, compatible reports after the operator confirms the same folder and settings; the v1 format cannot verify that identity. Logical and uniquely attributed allocation are not free or reclaimable space. The measured CLI is Linux-only; a passing Windows app build is not a Windows scanner result.
+
+The source and demo notes below record the original study as it stood on 2026-11-16.
 
 ## Evidence ledger
 
@@ -20,7 +28,7 @@ The editor exposes light/dark/page-following appearance; Twinkle, Fireflies, Dri
 
 Transferable ideas: visually rich but legible capacity allocation, coordinated list/chart selection, explicit loading/completion states, extensible category metadata, configurable motion and appearance, concise contextual recommendations. Avoid importing the dangerous implication that a pretty Clear caches button proves safe cleanup. Real cleanup needs per-resource ownership, exclusion rules, recoverability and authorization.
 
-## Original Athena experiment
+## Original Athena experiment · 2026-11-16
 
 [Storage Observatory](../../experiments/storage-observatory/index.html) is new semantic HTML/CSS/JavaScript, not a recreation of proprietary source. It deliberately uses a distinct band-based allocation layout, not copied LED assets or shaders. It includes:
 
@@ -31,9 +39,9 @@ Transferable ideas: visually rich but legible capacity allocation, coordinated l
 - Invalid input preserves the prior snapshot. Repeated/reset imports use a generation guard so a slow older read cannot overwrite newer state. Reset and reload discard imported data.
 - Responsive layout and reduced-motion handling. No external assets, font downloads, trackers, WebGL or animation loop.
 
-Important limits: calculated unallocated capacity is NOT a measured free-space value. No scanner, duplicate finder, native filesystem bridge, delete control, cache cleanup, scheduler, persistent storage or integration into the production navigation is implemented. It is a separate experiment pending review, not a shipped storage manager.
+Original demo limits: calculated unallocated capacity is NOT a measured free-space value. No scanner, duplicate finder, native filesystem bridge, delete control, cache cleanup, scheduler, persistent storage or integration into the production navigation is implemented. It is a separate experiment pending review, not a shipped storage manager.
 
-## Verification
+## Original experiment verification · 2026-11-16
 
 Run from repository root: `node --test experiments/storage-observatory/*.test.mjs` (uses the existing linkedom dev dependency).
 
@@ -41,7 +49,7 @@ Six tests pass: coherent demo allocation; source trust downgrade/metadata discar
 
 A local HTTP server started, but Cloud Browser could not reach `http://127.0.0.1:8768/experiments/storage-observatory/` (`ERR_CONNECTION_REFUSED`). Thus no rendered experiment screenshot, real keyboard/assistive-technology test, narrow-screen visual acceptance, or browser performance result is claimed. Source reference screenshots are not experiment acceptance. Full Athena regression suite was not run for this isolated experiment.
 
-## Production implementation gates / to-do
+## Follow-up gates / to-do
 
 - [x] Record source, precise access boundary, attribution, licensing constraints and original experiment.
 - [x] Implement/test bounded read-only visualization and local untrusted snapshot import.
@@ -52,4 +60,4 @@ A local HTTP server started, but Cloud Browser could not reach `http://127.0.0.1
 - [ ] Prove imported reports cannot inject paths/actions and scanning cannot escape authorized roots; compare fixture totals against independent filesystem measurements on Windows and Linux. Add overlapping-category and live-file-change cases.
 - [ ] Add useful project-aware breakdowns and history only after measured data works. Never label all caches/build outputs disposable; active database snapshots or downloaded licensed assets may be irreplaceable.
 - [ ] If cleanup is later requested, design a separate preview/confirmation/recoverable-operation layer with revalidation, ownership proofs, busy-file handling and rollback. Permanent deletion requires action-time confirmation. This study authorizes no cleanup.
-- [ ] Review original implementation visually and with actual Athena workloads, then integrate into production UI. No source retirement, merge, deployment, continuous follow, or native storage acceptance is implied.
+- [ ] Review the merged workspace visually and with actual Athena workloads. The merge is not a deployment, source retirement, continuous monitor, or native Windows storage acceptance.
