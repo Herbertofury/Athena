@@ -23,6 +23,31 @@ await recipient.close();
 await page.getByRole('link',{name:'Project continuity',exact:true}).click();await page.getByRole('link',{name:'Project browser',exact:true}).click();await page.getByRole('button',{name:'Open Space ARPG'}).waitFor();
 fs.mkdirSync('browser-results',{recursive:true});await page.setViewportSize({width:390,height:844});await page.screenshot({path:'browser-results/project-browser-mobile.png',fullPage:true});assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));await page.setViewportSize({width:1440,height:1000});await page.screenshot({path:'browser-results/project-browser-desktop.png',fullPage:true});
 await page.evaluate(()=>{Storage.prototype.setItem=function(){throw Error('quota');};});await page.getByRole('button',{name:'New project',exact:true}).click();await page.getByLabel('Project name',{exact:true}).fill('Unsaved idea');await page.getByRole('button',{name:'Save project',exact:true}).click();await page.getByText('Not saved. Keep this page open and export your draft before leaving.',{exact:true}).waitFor();const [draft]=await Promise.all([page.waitForEvent('download'),page.getByRole('button',{name:'Export projects',exact:true}).click()]);assert.equal(JSON.parse(fs.readFileSync(await draft.path())).entries.length,3);
+const concurrent=await browser.newContext();try{
+ const writer=await concurrent.newPage(),stale=await concurrent.newPage();
+ for(const tab of [writer,stale]){
+  await tab.goto(origin+'/#projects');
+  await tab.getByRole('heading',{name:'Project browser',exact:true}).last().waitFor();
+ }
+ async function newProject(tab,name){
+  await tab.getByRole('button',{name:'New project',exact:true}).click();
+  await tab.getByLabel('Project name',{exact:true}).fill(name);
+  await tab.getByRole('button',{name:'Save project',exact:true}).click();
+ }
+ await writer.evaluate(()=>localStorage.setItem('athena-workspaces-v1',JSON.stringify({schema:1,workspaces:{continuity:{fixtureMarker:'must survive'}}})));
+ await newProject(writer,'Newer saved project');
+ await writer.getByText('Saved in this browser. Export a backup.',{exact:true}).waitFor();
+ const persisted=await writer.evaluate(()=>localStorage.getItem('athena-workspaces-v1'));
+ assert.equal(JSON.parse(persisted).workspaces.continuity.fixtureMarker,'must survive');
+ await newProject(stale,'Stale unsaved proposal');
+ await stale.getByText('Not saved. Saved Projects changed. Export your draft before reloading Athena.',{exact:true}).waitFor();
+ assert.equal(await writer.evaluate(()=>localStorage.getItem('athena-workspaces-v1')),persisted);
+ const [copy]=await Promise.all([stale.waitForEvent('download'),stale.getByRole('button',{name:'Export projects',exact:true}).click()]);
+ assert.equal(JSON.parse(fs.readFileSync(await copy.path())).entries[0].revisions[0].name,'Stale unsaved proposal');
+ await stale.reload();
+ await stale.getByRole('button',{name:'Open Newer saved project',exact:true}).waitFor();
+ assert.equal(await stale.getByRole('button',{name:'Open Stale unsaved proposal',exact:true}).count(),0);
+}finally{await concurrent.close();}
 const rootState={schema:1,workspaces:{projects:{schema:1,entries:Array.from({length:28},(_,i)=>({
  id:'project-'+i,archived:false,revisions:[{name:'Fixture project '+i,ownership:'own',stage:'idea',goal:'No outside work',next:'',blockers:'',decisions:'',resources:'',source:'',version:'',release:'',at:i}]
 }))}}};
