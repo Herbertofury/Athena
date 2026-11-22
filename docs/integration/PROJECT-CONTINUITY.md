@@ -153,3 +153,18 @@ real IndexedDB/reload/download, concurrent appends, injected quota rollback/no o
 blobs, corruption refusal, 100-revision/64-MiB admission, and hostile HTML as inert
 bytes. Require that exact candidate's hosted tests before delivery. None of this
 certifies installed-provider capture, user-data migration or source retirement.
+
+
+## Keeping drafts and saved workspaces separate
+
+Continuity writes compare the last confirmed Continuity snapshot with browser
+storage before writing. If a newer Continuity snapshot is detected, Athena
+refuses the write and keeps the local draft exportable. Export it before
+reloading. A successful note or import save retains the current Projects and
+other unrelated workspace data. A failed import remains a local draft and is
+not confirmation that anything was saved.
+
+Use one editing tab. This check does not lock browser storage, synchronize
+tabs, or make simultaneous reads and writes atomic. Browser quota, invalid
+persisted data and unconfirmed readback do not promote a local draft to the
+last confirmed save. No background sync is introduced.
