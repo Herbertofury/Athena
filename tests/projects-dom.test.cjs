@@ -183,7 +183,7 @@ test('searches only confirmed snapshots, lazily discloses raw saved rows, and pr
   search('needle');assert.equal(card(),null);
   scope('history');assert.equal(card().querySelector('h3').textContent,'Current catalog');
   card().querySelector('button').onclick();
-  assert.equal(q('[aria-label="Matching saved revisions"] li').textContent,'Revision 2 (historical): Project name, Goal');
+  assert.equal(q('[aria-label="Matching saved revisions"] [data-matching-fields]').textContent,'Revision 2 (historical): Project name, Goal');
   assert.equal(q('#detail img'),null);assert.doesNotMatch(q('#detail').textContent,/needle <img src=x>|Unindexed private metadata/);
   const raw=q('#saved-history');assert.equal(raw.querySelectorAll('pre').length,0);
   raw.open=true;raw.ontoggle();
