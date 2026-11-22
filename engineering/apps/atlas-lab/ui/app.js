@@ -74,9 +74,23 @@ $('upstream-form').addEventListener('submit',async e=>{e.preventDefault();const 
 
 $('project-archive-form').addEventListener('submit',async e=>{e.preventDefault();const button=e.currentTarget.querySelector('button');if(button.disabled)return;button.disabled=true;const status=$('project-archive-status');status.classList.remove('error');status.textContent='Queuing complete received project JSON for local storage…';try{const job=await submitJob(projectArchiveJob($('project-archive-id').value));status.textContent='Job '+job.id+' queued. Overview will show a hash/generation receipt; original JSON stays in local snapshots.';await refresh();}catch(error){status.textContent=error.message;status.classList.add('error');}finally{button.disabled=false;}});
 
-const archiveSelection=createArchiveSelection(({kind,id},options)=>loadSavedArchive(kind,id,options));
+const archiveSelection=createArchiveSelection(({kind,id,generation},options)=>{
+ if(generation==='')return loadSavedArchive(kind,id,options);
+ if(typeof generation!=='string'||generation!==generation.trim()||!/^[1-9][0-9]{0,18}$/.test(generation)||BigInt(generation)>9223372036854775807n){
+  throw Error('Enter a positive decimal generation up to 9223372036854775807 without signs or leading zeros, or leave it blank for newest.');
+ }
+ // The base reader builds and validates the fixed, same-origin kind/ID path.
+ // Appending a validated decimal string preserves every SQLite integer digit.
+ return loadSavedArchive(kind,id,{...options,fetchImpl:async(path,request)=>{
+  const response=await fetch(path+'/'+generation,request);
+  const fault=response.status===404?'This saved generation was not found. The latest response was not opened.':
+   response.ok&&response.headers.get('x-atlas-generation')!==generation?'Saved-response generation mismatch. No archive was opened.':'';
+  if(fault){try{Promise.resolve(response.body?.cancel()).catch(()=>{});}catch{} throw Error(fault);}
+  return response;
+ }});
+});
 function showSavedArchive(){const record=archiveSelection.last;if(!record)return;$('saved-archive-title').textContent=record.kind+' '+record.id+' · generation '+record.generation;$('saved-archive-meta').textContent=record.bytes.byteLength+' bytes · SHA-256 '+record.hash;$('saved-archive-text').textContent=record.text;if(!$('saved-archive-dialog').open)$('saved-archive-dialog').showModal();}
-$('saved-archive-form').addEventListener('submit',async e=>{e.preventDefault();const button=e.currentTarget.querySelector('button'),status=$('saved-archive-status');button.disabled=true;$('cancel-archive-load').disabled=false;status.classList.remove('error');status.textContent='Reading and verifying local bytes; previous verified response is retained…';try{const result=await archiveSelection.load({kind:$('saved-archive-kind').value,id:$('saved-archive-id').value.trim()});if(result.status!=='ready')return;$('show-last-archive').disabled=false;status.textContent='Exact saved JSON verified. Provider markup is displayed only as text.';showSavedArchive();}catch(error){status.textContent=error.message;status.classList.add('error');}finally{button.disabled=archiveSelection.pending;$('cancel-archive-load').disabled=!archiveSelection.pending;}});
+$('saved-archive-form').addEventListener('submit',async e=>{e.preventDefault();const button=e.currentTarget.querySelector('button'),status=$('saved-archive-status');button.disabled=true;$('cancel-archive-load').disabled=false;status.classList.remove('error');status.textContent='Reading and verifying local bytes; previous verified response is retained…';try{const result=await archiveSelection.load({kind:$('saved-archive-kind').value,id:$('saved-archive-id').value.trim(),generation:$('saved-archive-generation').value});if(result.status!=='ready')return;$('show-last-archive').disabled=false;status.textContent='Exact saved JSON verified. Provider markup is displayed only as text.';showSavedArchive();}catch(error){status.textContent=error.message;status.classList.add('error');}finally{button.disabled=archiveSelection.pending;$('cancel-archive-load').disabled=!archiveSelection.pending;}});
 $('cancel-archive-load').addEventListener('click',()=>{archiveSelection.cancel();$('saved-archive-form').querySelector('button').disabled=false;$('cancel-archive-load').disabled=true;$('saved-archive-status').textContent='Load cancelled. The previous verified response remains available.';});
 $('show-last-archive').addEventListener('click',showSavedArchive);
 function cancelPendingArchiveViewer(){if(!archiveSelection.pending)return;archiveSelection.cancel();$('saved-archive-form').querySelector('button').disabled=false;$('cancel-archive-load').disabled=true;$('saved-archive-status').textContent='Viewer closed; pending load cancelled. The previous verified response remains available.';}
@@ -85,4 +99,11 @@ $('saved-archive-dialog').addEventListener('cancel',cancelPendingArchiveViewer);
 $('saved-archive-dialog').addEventListener('close',cancelPendingArchiveViewer);
 $('download-saved-archive').addEventListener('click',()=>{const record=archiveSelection.last;if(!record)return;const url=URL.createObjectURL(new Blob([record.bytes],{type:'application/json'}));const a=document.createElement('a');a.href=url;a.download=(record.kind==='upstream'?'github-upstream':'modrinth-'+record.kind)+'-'+record.id+'-generation-'+record.generation+'.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);});
 
-$('saved-archive-kind').addEventListener('change',()=>{archiveSelection.cancel();$('saved-archive-form').querySelector('button').disabled=false;$('cancel-archive-load').disabled=true;$('saved-archive-status').textContent='Archive type changed. The previous verified response remains available with its original type.';});
+function cancelChangedArchiveSelection(){
+ if(!archiveSelection.pending)return;
+ archiveSelection.cancel();$('saved-archive-form').querySelector('button').disabled=false;$('cancel-archive-load').disabled=true;
+ $('saved-archive-status').textContent='Archive selection changed. Pending load cancelled; the previous verified response remains available.';
+}
+$('saved-archive-kind').addEventListener('change',cancelChangedArchiveSelection);
+$('saved-archive-id').addEventListener('input',cancelChangedArchiveSelection);
+$('saved-archive-generation').addEventListener('input',cancelChangedArchiveSelection);
