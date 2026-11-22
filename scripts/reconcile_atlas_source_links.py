@@ -12,6 +12,10 @@ ROOT = Path(__file__).resolve().parents[1]
 SNAPSHOT = Path('migration/engineering-atlas/metadata-2026-11-14')
 ATHENA = 'https://github.com/Herbertofury/Athena'
 PAGES = 'https://herbertofury.github.io/Athena/'
+# The Pages preview does not publish engineering/docs/. These are reviewed
+# historical snapshots, not an implicit mapping for other repository files.
+ARCHIVE_REVISION = 'af594fd2cdd5c00f01178ee353965a54b01b05d7'
+ARCHIVED_PAGES_ASSETS = {'card-receiver-lab/receiver.de24fd43535f3039.js'}
 
 def reconcile(row, root=ROOT):
     result = dict(row)
@@ -61,9 +65,13 @@ def reconcile(row, root=ROOT):
             query = '?' + url.query if url.query else ''
             file_target('dist/workspaces/engineering/' + route + '/index.mjs', PAGES + '#' + route + query,
                         'native workspace route; old Pages URL does not redirect')
+        elif relative in ARCHIVED_PAGES_ASSETS:
+            retained = 'engineering/docs/' + relative
+            file_target(retained, ATHENA + '/blob/' + ARCHIVE_REVISION + '/' + retained,
+                        'commit-pinned historical asset; not a served Pages path')
         else:
-            file_target('engineering/docs/' + relative, PAGES + 'engineering/docs/' + relative,
-                        'preserved static asset; not a native workspace route')
+            result.update(classification='unresolved Pages asset; source citation retained',
+                          target_check='no reviewed archived asset or native workspace mapping')
     return result
 
 def update(root=ROOT, check=False):
