@@ -53,3 +53,105 @@ test('Native Lab rejects malformed count maps before replacing last-good cards a
   assert.equal(r.getElementById('pending').textContent,'3');assert.equal(r.getElementById('completed').textContent,'7');assert.equal(r.querySelector('.job'),node);
  }finally{c?.unmount();e.restore();}
 });
+
+test('Lab opens an exact saved archive generation without rounding, latest fallback or loss of the last verified receipt',async()=>{
+ const exact='9007199254740993',max='9223372036854775807';
+ const historical='{"id":"AANobbMI","unknown":18446744073709551617,"markup":"<script>inert</script> 雪"}';
+ const payload=(kind,id,generation,text)=>new Response(text,{headers:{
+  'content-type':'application/json','x-atlas-archive-kind':kind,'x-atlas-canonical-id':id,
+  'x-atlas-generation':generation,'x-atlas-payload-sha256':require('node:crypto').createHash('sha256').update(text).digest('hex')
+ }});
+ const e=setup(undefined,url=>{
+  switch(String(url)){
+   case '/api/project-archive/AANobbMI/'+exact:return payload('project','AANobbMI',exact,historical);
+   case '/api/project-archive/AANobbMI/3':return payload('project','AANobbMI','4','{"wrong":"not requested"}');
+   case '/api/project-archive/AANobbMI/2':return new Response('not found',{status:404});
+   case '/api/project-archive/AANobbMI':return payload('project','AANobbMI','9007199254740994','{"newest":true}');
+   case '/api/version-archive/AANobbMI/'+max:return payload('version','AANobbMI',max,'{"version":true}');
+   case '/api/upstream-archive/hls/1':return payload('upstream','hls','1','{"upstream":true}');
+  }
+ });let c;
+ try{
+  c=await(await import(moduleURL)).mount({container:e.container});
+  const root=e.container.shadowRoot,q=id=>root.getElementById(id),form=q('saved-archive-form'),button=form.querySelector('button'),field=q('saved-archive-generation'),dialog=q('saved-archive-dialog');
+  assert.ok(field,'exact generation control');
+  assert.match(root.querySelector('label[for="saved-archive-generation"]').textContent,/optional/i);
+  dialog.showModal=function(){this.open=true;};dialog.close=function(){this.open=false;};
+  const type=value=>Object.defineProperty(q('saved-archive-kind'),'value',{value,configurable:true});
+  const submit=async generation=>{
+   field.value=generation;form.dispatchEvent(new e.window.Event('submit',{bubbles:true,cancelable:true}));
+   await waitFor(()=>!button.disabled);
+  };
+  const reads=()=>e.requests.filter(r=>r.url.includes('-archive/'));
+  const lastText=q('saved-archive-text'),status=q('saved-archive-status');
+  type('project');q('saved-archive-id').value='AANobbMI';
+  assert.equal(reads().length,0);
+  await submit(exact);
+  assert.equal(reads().at(-1).url,'/api/project-archive/AANobbMI/'+exact);
+  assert.equal(reads().at(-1).options.credentials,'same-origin');
+  assert.equal(reads().at(-1).options.redirect,'error');
+  assert.equal(lastText.textContent,historical);
+  assert.match(q('saved-archive-title').textContent,new RegExp(exact+'$'));
+  assert.equal(lastText.querySelector('script'),null);
+  q('close-saved-archive').click();
+  for(const [generation,message] of [['2',/not found.*latest/i],['3',/generation mismatch/i]]){
+   await submit(generation);assert.match(status.textContent,message);
+   assert.equal(lastText.textContent,historical);assert.equal(dialog.open,false);
+  }
+  assert.deepEqual(reads().map(r=>r.url),[exact,'2','3'].map(g=>'/api/project-archive/AANobbMI/'+g));
+  for(const bad of ['-1','+1','0','0001','1.2','1e3',' ','\n1','1\n','1\r','1\t','1/2','1?before=2','9223372036854775808','99999999999999999999']){
+   const before=reads().length;await submit(bad);assert.match(status.textContent,/positive decimal/i);
+   assert.equal(reads().length,before);assert.equal(lastText.textContent,historical);
+  }
+  q('show-last-archive').click();assert.equal(dialog.open,true);assert.equal(lastText.textContent,historical);
+  q('close-saved-archive').click();await submit('');assert.equal(lastText.textContent,'{"newest":true}');
+  q('close-saved-archive').click();type('version');await submit(max);
+  assert.equal(reads().at(-1).url,'/api/version-archive/AANobbMI/'+max);
+  assert.equal(lastText.textContent,'{"version":true}');
+  q('close-saved-archive').click();type('upstream');q('saved-archive-id').value='hls';await submit('1');
+  assert.equal(reads().at(-1).url,'/api/upstream-archive/hls/1');
+  assert.equal(lastText.textContent,'{"upstream":true}');
+  assert.ok(e.requests.every(request=>request.url.startsWith('/api/')&&(!request.options.method||request.options.method==='GET')));
+ }finally{c?.unmount();e.restore();}
+});
+
+test('Editing the archive ID or generation cancels a pending read and an idle type change keeps last good',async()=>{
+ const id='AANobbMI',old='{"keep":"last good"}',obsolete='{"wrong":"late"}';
+ const payload=(generation,text)=>new Response(text,{headers:{'content-type':'application/json',
+  'x-atlas-archive-kind':'project','x-atlas-canonical-id':id,'x-atlas-generation':generation,
+  'x-atlas-payload-sha256':require('node:crypto').createHash('sha256').update(text).digest('hex')
+ }});
+ let complete,signal;
+ const e=setup(undefined,(url,request)=>{
+  if(url==='/api/project-archive/'+id+'/1')return payload('1',old);
+  if(url==='/api/project-archive/'+id+'/2'){signal=request.signal;return new Promise(resolve=>complete=()=>resolve(payload('2',obsolete)));}
+ });let c;
+ try{
+  c=await(await import(moduleURL)).mount({container:e.container});
+  const root=e.container.shadowRoot,q=id=>root.getElementById(id),form=q('saved-archive-form'),button=form.querySelector('button');
+  const field=q('saved-archive-generation'),dialog=q('saved-archive-dialog');
+  dialog.showModal=function(){this.open=true;};dialog.close=function(){this.open=false;};
+  Object.defineProperty(q('saved-archive-kind'),'value',{value:'project',configurable:true});q('saved-archive-id').value=id;
+  const fire=event=>form.dispatchEvent(new e.window.Event(event,{bubbles:true,cancelable:true}));
+  field.value='1';fire('submit');await waitFor(()=>!button.disabled);q('close-saved-archive').click();
+  for(const [fieldId,value,fieldLabel] of [['saved-archive-generation','3','generation'],['saved-archive-id','ABCDEFGH','ID']]){
+   field.value='2';q('saved-archive-id').value=id;complete=null;
+   const before=e.requests.filter(r=>r.url.includes('-archive/')).length;
+   fire('submit');await waitFor(()=>!!complete);
+   const changed=q(fieldId);changed.value=value;changed.dispatchEvent(new e.window.Event('input',{bubbles:true}));
+   assert.equal(signal.aborted,true);
+   assert.equal(button.disabled,false);
+   assert.match(q('saved-archive-status').textContent,new RegExp('Archive '+fieldLabel+' changed. Pending load cancelled'));
+   assert.equal(e.requests.filter(r=>r.url.includes('-archive/')).length,before+1);
+   complete();await tick();await tick();
+   assert.equal(dialog.open,false);q('show-last-archive').click();
+   assert.equal(q('saved-archive-text').textContent,old);q('close-saved-archive').click();
+  }
+  Object.defineProperty(q('saved-archive-kind'),'value',{value:'version',configurable:true});
+  q('saved-archive-kind').dispatchEvent(new e.window.Event('change'));
+  assert.equal(q('saved-archive-status').textContent,'Archive type changed. The previous verified response remains available with its original type.');
+  q('show-last-archive').click();
+  assert.match(q('saved-archive-title').textContent,/^project /);
+  assert.equal(q('saved-archive-text').textContent,old);
+ }finally{c?.unmount();e.restore();}
+});
