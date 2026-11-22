@@ -156,6 +156,48 @@ c.execute('UPDATE experiment_runs SET output=? WHERE experiment_id=?',(raw,int(s
   assert.ok(Object.values(night.placements).some(p=>p.rotation===45&&p.scaleX===-2&&p.scaleY===.5&&p.scope==='sticker'&&p.anchor==='scene'&&p.transformOrigin==='tr'));
   assert.ok(Object.values(dusk.placements).some(p=>p.rotation===-30));assert.equal(backup.layouts[secondRoom].time,'dusk');
  });
+ await check('Review retained session state without saving or discarding inspector inputs',async()=>{
+  const time=page.locator('select[data-time]'),draft=page.locator('[data-inspect-rotation]');
+  assert.equal(await time.inputValue(),'night');
+  await time.selectOption('dawn');
+  await draft.fill('123');
+  const history=page.locator('[data-session-history-list]');
+  const row=history.locator('button[data-history-id]').filter({hasText:/^\d+\. past:/}).last();
+  const review=row.locator('..').getByRole('button',{name:/^Review session state \d+$/});
+  const summary=page.getByRole('region',{name:'Reviewed session state',exact:true});
+  const workspaceState=()=>page.evaluate(()=>localStorage.getItem('athena-workspaces-v1'));
+  const beforeReview=await workspaceState(),committed=cli('load-backup'),database=fs.readFileSync(db);
+  assert.equal(JSON.parse(beforeReview).workspaces.build.active.time,'dawn');
+  const writes=[];
+  const observeWrite=request=>{if(!['GET','HEAD','OPTIONS'].includes(request.method()))writes.push(request.url());};
+  page.on('request',observeWrite);
+  try{
+   await review.click();await summary.waitFor({state:'visible'});
+   const heading=summary.getByRole('heading',{level:3});
+   assert.equal(await heading.evaluate(el=>el===el.getRootNode().activeElement),true,'review transfers focus to summary');
+   assert.match(await summary.textContent(),/Active room time: night/);
+   await summary.getByText('Synthetic night room',{exact:true}).waitFor({state:'visible'});
+   await summary.getByText('Synthetic dusk room',{exact:true}).waitFor({state:'visible'});
+   assert.match(await summary.textContent(),/Jumping replaces the whole workspace and may discard unapplied inspector inputs/);
+   assert.equal(await time.inputValue(),'dawn');assert.equal(await draft.inputValue(),'123');
+   await summary.getByRole('button',{name:'Close review',exact:true}).click();
+   await summary.waitFor({state:'hidden'});
+   assert.equal(await review.evaluate(el=>el===el.getRootNode().activeElement),true,'close restores focus to the same Review button');
+   assert.equal(await draft.inputValue(),'123');
+   assert.equal(await workspaceState(),beforeReview,'review and close do not touch browser authoring data');
+   assert.deepEqual(writes,[],'review and close issue no write requests');
+   assert.equal(cli('load-backup'),committed);
+   assert.deepEqual(fs.readFileSync(db),database);
+   await review.click();await summary.getByRole('button',{name:'Jump to reviewed state',exact:true}).click();
+   await summary.waitFor({state:'hidden'});
+   assert.equal(await time.inputValue(),'night');assert.equal(await draft.inputValue(),'45');
+   assert.equal(await page.locator('[data-redo]').isEnabled(),true);
+   assert.equal(JSON.parse(await workspaceState()).workspaces.build.active.time,'night');
+   assert.deepEqual(writes,[],'an explicit session jump writes only browser authoring data');
+   assert.equal(cli('load-backup'),committed);
+   assert.deepEqual(fs.readFileSync(db),database);
+  }finally{page.off('request',observeWrite);}
+ });
  const stored=JSON.parse(cli('load-backup'));
  await check('Fresh browser context restores persisted native data, not old browser storage',async()=>{
   await context.close();context=await browser.newContext({viewport:{width:1440,height:1000}});

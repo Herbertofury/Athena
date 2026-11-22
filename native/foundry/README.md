@@ -166,6 +166,15 @@ Tests: `node --test native/foundry/tests/transform-gizmo.test.mjs`. Actual brows
 ### Optional session history navigator
 
 `--disable-foundry-module sessionHistory` removes the navigator without removing core Undo/Redo. Adapted from reviewed original `prototype-v24.ts` functions `jumpHistory` and `renderHistory` (632–634), it lists retained past/current/future workspace states and restores one selected state in one host-save attempt. Entries show native theme/room IDs and chronological ordinals, not fabricated original action labels or timestamps. This is session-only, not SQLite recovery history. It preserves future Redo, existing count/character pruning, whole-workspace identity, and oversized recovery-only behavior. Stale entry epochs are refused. Unsaved inspector inputs are not snapshots; selecting another state replaces those inputs, while the current disabled entry does nothing. No original assets or user records are included.
+Choose **Review** beside a past or future state to see its recorded room,
+time, object and room-layout counts, inspector side and named layouts before
+jumping. Review only reads the retained snapshot; it does not replace the
+scene, clear inspector fields, save or add history. The review closes if the
+workspace history changes. **Jump to reviewed state** uses the existing
+explicit whole-workspace restore and may discard unapplied inspector inputs.
+This is a preview summary, not a full diff, native SQLite inspection or
+export.
+
 ### Original semantic metadata authoring
 
 The independently removable `semanticRoom` module accepts explicitly selected, bounded local snapshots. The original UTF-8 bytes retain their separate exact export. An explicit Apply changes only the chosen unique record's role, physics classification, visible flag and mapping-lock flag, adapted from original `prototype-v24.ts`684–685 and the enums at `index.html`410. Existing unsupported classification strings remain unchanged unless the user deliberately chooses a supported replacement. Names may repeat; IDs identify records.
