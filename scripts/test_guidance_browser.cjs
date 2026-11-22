@@ -13,6 +13,25 @@ const http=require('node:http'),fs=require('node:fs'),path=require('node:path'),
   const [download]=await Promise.all([page.waitForEvent('download'),page.getByRole('button',{name:'Export selected JSON',exact:true}).click()]);const packet=JSON.parse(fs.readFileSync(await download.path(),'utf8'));
   assert.equal(packet.documents.length,16);assert(packet.scope.includes('Does not install'));assert(packet.documents.every(d=>d.sha256.length===64&&d.text&&d.sourcePath.startsWith('guidance/')));
   await page.reload();await page.getByRole('checkbox').first().waitFor();assert.equal(await page.getByRole('checkbox',{checked:true}).count(),16);
+  await page.getByRole('button',{name:'Athena Product Invariants',exact:true}).click();
+  const outline=page.locator('details[aria-label="Sections in selected standard"]');
+  const sectionName='19. Project to-do awareness without task drift';
+  const selectedBytes=await page.evaluate(()=>localStorage.getItem('athena-workspaces-v1')),currentUrl=page.url(),outlineRequests=[];
+  const observe=request=>outlineRequests.push(request.url());page.on('request',observe);
+  try{
+   await outline.getByText('Jump to a section',{exact:true}).click();
+   assert.equal(await outline.getByRole('button').count(),19);
+   const item=outline.getByRole('button',{name:sectionName,exact:true});
+   await item.focus();await page.keyboard.press('Enter');
+   const heading=page.getByRole('heading',{name:sectionName,exact:true});
+   assert.equal(await heading.evaluate(el=>el===el.getRootNode().activeElement),true);
+   const visible=await heading.evaluate(el=>{const r=el.getBoundingClientRect();return r.top<innerHeight&&r.bottom>0;});assert.equal(visible,true);
+   await heading.locator('..').getByRole('button',{name:'Back to sections',exact:true}).click();
+   assert.equal(await item.evaluate(el=>el===el.getRootNode().activeElement),true);
+   assert.equal(page.url(),currentUrl);
+   assert.equal(await page.evaluate(()=>localStorage.getItem('athena-workspaces-v1')),selectedBytes);
+   assert.deepEqual(outlineRequests,[]);
+  }finally{page.off('request',observe);}
   await page.locator('#search').fill('sensitive actions');await page.getByRole('button',{name:'Authorization & Runtime Control Standard',exact:true}).click();await page.getByRole('heading',{name:'Authorization & Runtime Control Standard',exact:true}).waitFor();
   assert.equal(await page.getByRole('link',{name:'View canonical source',exact:true}).getAttribute('href'),'https://github.com/Herbertofury/Athena/blob/main/guidance/AUTHORIZATION_CONTROL_STANDARD.md');
   await page.locator('#search').fill('synthetic impossible phrase');await page.getByText('No matching standards. Clear the shared search to see the complete library.',{exact:true}).waitFor();assert.equal(await page.getByRole('checkbox').count(),0);

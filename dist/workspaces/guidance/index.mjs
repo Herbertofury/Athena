@@ -24,7 +24,41 @@ export async function mount({container,search='',theme='dark',signal,state={},se
  function persist(){saved=setState({current,selected:[...selected]})!==false;}
  function updateStatus(){status.textContent=`${selected.size} selected · ${findDocuments(catalog,query).length} of ${catalog.documents.length} standards match.`+(saved?' Selection is saved in this browser.':' Selection could not be saved. Export it before leaving this page.');json.disabled=markdown.disabled=selected.size===0;}
  function showDocument(){const d=catalog.documents.find(d=>d.id===current);reader.replaceChildren();if(!d)return;const title=element('h3',d.title);const link=element('a','View canonical source');link.href=d.sourceUrl;link.target='_blank';link.rel='noopener noreferrer';reader.append(title,link,element('p',`${d.sourcePath} · SHA-256 ${d.sha256}`,'digest'));
-  const source=element('div',undefined,'document');for(const [i,line] of d.text.split('\n').entries()){if(i===0&&line==='# '+d.title)continue;const h=/^(#{1,6})\s+(.+)$/.exec(line);source.append(element(h?'h4':'p',h?h[2]:line.replace(/<code>(.*?)<\/code>/g,'`$1`')));}reader.append(source);
+  const source=element('div',undefined,'document'),sections=[];let body=source,fence=null;
+  for(const [i,line] of d.text.split('\n').entries()){
+   if(i===0&&line==='# '+d.title)continue;
+   const mark=/^ {0,3}(\x60{3,}|~{3,})(.*)$/.exec(line);
+   const literal=Boolean(fence||mark);
+   if(mark){
+    if(!fence&&(mark[1][0]==='~'||!mark[2].includes('\x60')))fence=mark[1];
+    else if(fence&&mark[1][0]===fence[0]&&mark[1].length>=fence.length&&!mark[2].trim())fence=null;
+   }
+   const h=!literal&&/^(#{1,6})\s+(.+)$/.exec(line);
+   if(h){
+    const heading=element('h4',h[2].trim());body=element('section');body.append(heading);source.append(body);
+    if(sections.length<65)sections.push({heading,body});
+   }else body.append(element('p',literal?line:line.replace(/<code>(.*?)<\/code>/g,'\x60$1\x60')));
+  }
+  if(sections.length){
+   const outline=element('details',undefined,'section-outline'),list=element('ol');
+   outline.setAttribute('aria-label','Sections in selected standard');
+   outline.append(element('summary','Jump to a section'),list);
+   const visible=sections.slice(0,64),counts=new Map();
+   for(const {heading} of visible){const name=heading.textContent;counts.set(name,(counts.get(name)||0)+1);}
+   const live=node=>!disposed&&current===d.id&&outline.isConnected&&node.isConnected;
+   for(const [i,{heading,body}] of visible.entries()){
+    const item=element('li'),name=heading.textContent;
+    const jump=element('button',counts.get(name)>1?name+' (section '+(i+1)+')':name);
+    jump.type='button';heading.tabIndex=-1;
+    jump.onclick=()=>{if(live(heading))heading.focus();};
+    const back=element('button','Back to sections');back.type='button';
+    back.onclick=()=>{if(live(jump)){outline.open=true;jump.focus();}};
+    item.append(jump);list.append(item);body.insertBefore(back,heading.nextSibling);
+   }
+   if(sections.length>64)outline.append(element('p','Only the first 64 headings are indexed. The complete standard remains below.'));
+   reader.append(outline);
+  }
+  reader.append(source);
  }
  function renderList(){list.replaceChildren();const matches=findDocuments(catalog,query);if(!matches.length)list.append(element('p','No matching standards. Clear the shared search to see the complete library.'));for(const d of matches){const row=element('div',undefined,'standard');row.dataset.document=d.id;const label=element('label'),check=document.createElement('input');check.type='checkbox';check.checked=selected.has(d.id);check.setAttribute('aria-label','Include '+d.title);check.onchange=()=>{check.checked?selected.add(d.id):selected.delete(d.id);persist();updateStatus();};label.append(check);const open=element('button',d.title);open.setAttribute('aria-pressed',String(current===d.id));open.onclick=()=>{current=d.id;persist();renderList();showDocument();};row.append(label,open);list.append(row);}updateStatus();}
  function download(kind){try{const packet=exportPacket(catalog,[...selected]),text=kind==='json'?JSON.stringify(packet,null,2):exportMarkdown(packet),url=URL.createObjectURL(new Blob([text],{type:kind==='json'?'application/json':'text/markdown'}));urls.add(url);const a=document.createElement('a');a.href=url;a.download=`athena-guidance-${catalog.version}.${kind==='json'?'json':'md'}`;shell.append(a);a.click();a.remove();status.textContent=`Exported ${packet.documents.length} complete standards with source paths and hashes. Reference only; no repository changed.`;}catch(error){status.textContent=error.message;}}
