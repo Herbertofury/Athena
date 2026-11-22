@@ -32,8 +32,28 @@ checked again at confirmation and requires confirmed readback; this is not a
 cross-tab lock. The existing full-workspace export remains available, including
 its documented draft-recovery behavior.
 
+## Compare two saved revisions
+
+Open **Compare saved revisions** in a project’s detail to choose any two
+saved revision numbers. The latest two are selected first. Changed fields
+show exact before and after values, including empty fields. Original save
+order is preserved even when timestamps tie or go backward. You can reverse
+the pair or compare a revision with itself.
+
+Athena reads the selected project's saved snapshot when this panel first
+opens. Reopen the project to refresh the snapshot. Failed-save drafts and unknown extension fields are not compared. If that
+snapshot is unavailable, Athena does not substitute draft history. This is
+an optional read-only tool: the raw history and edit/backup controls still
+work without it. It does not restore revisions, compare repository files,
+send data, or establish Constellation parity.
+
+The design is complementary to the retained Project Constellation working-set
+and disposition history implementation (project-memory-core.js at
+82cea48448219c57fad8e0c22e986c8f56913286). No upstream code was copied.
+
 ## Verification
 
 - `node --test tests/projects.test.cjs`: revision, ownership, filters, reversible archive, malformed/unsafe URLs, serialization, additive/duplicate/conflicting import.
+- `node --test tests/project-compare.test.cjs`: revision comparisons, durable-only display, and optional failure isolation.
 - `node scripts/test_projects_browser.cjs`: Chromium create/edit/reload, filters, archive/restore, cancel, export/import, route navigation, responsive screenshot and failed-storage draft export. Included in learning CI. Local browser execution blocked by Chromium singleton socket EPERM, including escalation; no local browser pass claimed.
 - No game implementation is included. The owner's space action-RPG is a concept to track, not built content.

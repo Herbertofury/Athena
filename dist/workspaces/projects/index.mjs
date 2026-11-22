@@ -52,6 +52,15 @@ export function mount({container,state,setState,search='',signal,theme='dark',re
   detail.append(button('Edit project',()=>edit(p.id)),button(p.archived?'Restore project':'Archive project',()=>{save(archive(data,p.id));$('#archived').focus();}));
   if(typeof readSavedProject==='function'){const action=button('Review portable copy',()=>reviewTransfer(p.id));action.dataset.transferProject=p.id;detail.append(action);}
   const history=el('details');history.append(el('summary',`${p.revisions.length} saved revision(s)`));for(const rev of [...p.revisions].reverse())history.append(el('pre',JSON.stringify(rev,null,2)));detail.append(history);
+  const compareHost=el('div');detail.append(compareHost);
+  import('./compare.mjs').then(({mountComparison})=>{
+   if(disposed||!compareHost.isConnected)return;
+   mountComparison(compareHost,()=>{
+    const saved=typeof readSavedProject==='function'?readSavedProject(p.id):JSON.parse(committed).entries.find(entry=>entry.id===p.id);
+    if(!saved||saved.id!==p.id)return null;
+    return validate({schema:1,entries:[saved]}).entries[0];
+   });
+  }).catch(()=>{if(!disposed&&compareHost.isConnected)compareHost.textContent='Optional revision comparison unavailable; project history remains usable.';});
  }
  $('#new').onclick=()=>edit(null);$('#cancel').onclick=cancel;
  form.onsubmit=e=>{e.preventDefault();if(!data||disposed)return;try{const input=Object.fromEntries(fields.map(k=>[k,form.elements[k].value]));const id=editing||crypto.randomUUID();const next=change(data,id,input);selected=id;save(next);cancel();}catch(e){notice.textContent=e.message;}};
