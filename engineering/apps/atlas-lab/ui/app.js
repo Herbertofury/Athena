@@ -6,9 +6,11 @@ const $ = id => document.getElementById(id);
 const renderedJobs = new Map();
 let emptyNode = null;
 let renderedInstance = null;
+let clearArchiveHistory=()=>{};
 const panels = new Set(['overview','collectors','experiments']);
 function showPanel(name) {
   if (!panels.has(name)) name='overview';
+  if(name!=='collectors')clearArchiveHistory();
   document.querySelectorAll('.panel').forEach(p=>p.hidden=p.id!==name);
   document.querySelectorAll('[data-panel]').forEach(b=>b.setAttribute('aria-current',b.dataset.panel===name?'page':'false'));
 }
@@ -74,9 +76,10 @@ $('upstream-form').addEventListener('submit',async e=>{e.preventDefault();const 
 
 $('project-archive-form').addEventListener('submit',async e=>{e.preventDefault();const button=e.currentTarget.querySelector('button');if(button.disabled)return;button.disabled=true;const status=$('project-archive-status');status.classList.remove('error');status.textContent='Queuing complete received project JSON for local storage…';try{const job=await submitJob(projectArchiveJob($('project-archive-id').value));status.textContent='Job '+job.id+' queued. Overview will show a hash/generation receipt; original JSON stays in local snapshots.';await refresh();}catch(error){status.textContent=error.message;status.classList.add('error');}finally{button.disabled=false;}});
 
+const validArchiveGeneration=value=>typeof value==='string'&&value===value.trim()&&/^[1-9][0-9]{0,18}$/.test(value)&&BigInt(value)<=9223372036854775807n;
 const archiveSelection=createArchiveSelection(({kind,id,generation},options)=>{
  if(generation==='')return loadSavedArchive(kind,id,options);
- if(typeof generation!=='string'||generation!==generation.trim()||!/^[1-9][0-9]{0,18}$/.test(generation)||BigInt(generation)>9223372036854775807n){
+ if(!validArchiveGeneration(generation)){
   throw Error('Enter a positive decimal generation up to 9223372036854775807 without signs or leading zeros, or leave it blank for newest.');
  }
  // The base reader builds and validates the fixed, same-origin kind/ID path.
@@ -104,10 +107,100 @@ function cancelChangedArchiveSelection(message){
  $('saved-archive-status').textContent=message;
 }
 $('saved-archive-kind').addEventListener('change',()=>{
+ clearArchiveHistory();
  cancelChangedArchiveSelection('Archive type changed. The previous verified response remains available with its original type.');
 });
 for(const field of ['id','generation']){
  $('saved-archive-'+field).addEventListener('input',()=>{
+  if(field==='id')clearArchiveHistory();
   if(archiveSelection.pending)cancelChangedArchiveSelection('Archive '+(field==='id'?'ID':field)+' changed. Pending load cancelled; the previous verified response remains available.');
  });
 }
+
+// A single explicitly requested metadata page; the verified raw viewer stays separate.
+const HISTORY_PAGE_SIZE=12,HISTORY_BYTES=16*1024;
+async function savedGenerationPage({kind,id,before},{signal}){
+ if(!['project','version','upstream'].includes(kind))throw Error('Choose a saved project, version or upstream archive.');
+ if(kind==='upstream'){
+  if(!['rustsec','hls','serde-json'].includes(id))throw Error('Choose one saved fixed upstream source: rustsec, hls or serde-json.');
+ }else if(!/^[A-Za-z0-9]{8}$/.test(id))throw Error('Enter one saved canonical eight-character ID.');
+ const query=new URLSearchParams({limit:String(HISTORY_PAGE_SIZE)});
+ if(before!==null)query.set('before',before);
+ const deadline=AbortSignal.any([signal,AbortSignal.timeout(10000)]);
+ const response=await fetch('/api/'+kind+'-history/'+id+'?'+query,{signal:deadline,cache:'no-store',redirect:'error',credentials:'same-origin'});
+ const reader=response.body?.getReader();
+ if(!reader)throw Error('Saved-generation metadata is unavailable.');
+ const buffer=new Uint8Array(HISTORY_BYTES);let size=0,done=false;
+ try{
+  if(deadline.aborted)throw deadline.reason;
+  if(!response.ok)throw Error('Saved-generation metadata is unavailable ('+response.status+').');
+  if(!/^application\/json(?:\s*;\s*charset=utf-8)?$/i.test(response.headers.get('content-type')||''))throw Error('Unexpected saved-generation metadata content type.');
+  for(;;){
+   const part=await reader.read();
+   if(deadline.aborted)throw deadline.reason;
+   if(part.done){done=true;break;}
+   if(size+part.value.byteLength>HISTORY_BYTES)throw Error('Saved-generation metadata exceeds the size budget.');
+   buffer.set(part.value,size);size+=part.value.byteLength;
+  }
+ }finally{
+  if(!done){try{Promise.resolve(reader.cancel()).catch(()=>{});}catch{}}
+  reader.releaseLock();
+ }
+ let page;
+ try{page=JSON.parse(new TextDecoder('utf-8',{fatal:true}).decode(buffer.subarray(0,size)));}
+ catch{throw Error('Invalid saved-generation metadata.');}
+ const invalid=()=>{throw Error('Invalid saved-generation metadata.');};
+ if(!Array.isArray(page?.entries)||page.entries.length>HISTORY_PAGE_SIZE)invalid();
+ let previous=before;
+ for(const row of page.entries){
+  if(!validArchiveGeneration(row?.generation)||(previous!==null&&BigInt(row.generation)>=BigInt(previous))||
+     typeof row.observed_at!=='string'||row.observed_at.length>64||!Number.isSafeInteger(row.stored_bytes)||row.stored_bytes<0)invalid();
+  previous=row.generation;
+ }
+ if(page.next_before!==null&&(!validArchiveGeneration(page.next_before)||page.entries.length!==HISTORY_PAGE_SIZE||page.next_before!==previous))invalid();
+ return page;
+}
+function attachArchiveHistory(list){
+ const panel=$('saved-archive-history'),open=$('list-saved-generations'),older=$('older-saved-generations'),dismiss=$('dismiss-saved-generations'),status=$('saved-archive-history-status');
+ const target=()=>({kind:$('saved-archive-kind').value,id:$('saved-archive-id').value.trim()});
+ const selection=createArchiveSelection(savedGenerationPage);
+ let next=null,identity=null;
+ const same=value=>{const active=target();return value?.kind===active.kind&&value.id===active.id;};
+ const controls=()=>{open.disabled=selection.pending;older.disabled=selection.pending||next===null;};
+ clearArchiveHistory=()=>{
+  selection.cancel();next=null;identity=null;list.replaceChildren();status.textContent='';panel.hidden=true;open.setAttribute('aria-expanded','false');controls();
+ };
+ async function show(before){
+  if(selection.pending||(before!==null&&(before!==next||!same(identity))))return;
+  const value=target();
+  panel.hidden=false;open.setAttribute('aria-expanded','true');status.textContent='Reading stored metadata only…';
+  const task=selection.load({...value,before});controls();
+  try{
+   const received=await task;
+   if(received.status!=='ready'||!same(value)||panel.hidden)return;
+   const page=received.record;
+   const nodes=page.entries.map(row=>{
+    const item=text('li',''),button=text('button','Open generation '+row.generation);button.type='button';
+    button.addEventListener('click',()=>{
+     if(!list.contains(item)||!same(value)||panel.hidden)return;
+     $('saved-archive-generation').value=row.generation;
+     $('saved-archive-form').requestSubmit();
+    });
+    item.append(button,text('p',row.observed_at+' · '+row.stored_bytes+' stored bytes'));
+    return item;
+   });
+   list.replaceChildren(...nodes);identity=value;next=page.next_before;
+   status.textContent=nodes.length?'Showing '+nodes.length+' saved '+(before===null?'generations.':'older generations.'):'No retained generations for that saved record.';
+   // Move keyboard focus into a replaced page rather than leaving it on disabled Older.
+   if(before!==null)nodes[0]?.querySelector('button').focus();
+  }catch(error){
+   if(!same(value)||panel.hidden)return;
+   status.textContent=error.message+(list.childElementCount?' The previous page remains available.':'');
+  }finally{controls();}
+ }
+ open.addEventListener('click',()=>show(null));
+ older.addEventListener('click',()=>{if(next!==null)show(next);});
+ dismiss.addEventListener('click',()=>{clearArchiveHistory();open.focus();});
+}
+const historyList=$('saved-archive-history-list');
+if(historyList?.replaceChildren)attachArchiveHistory(historyList);

@@ -89,7 +89,7 @@ def build():
  async function submitJob(job){if(!controller.ready||disposed)throw new Error('Local engine initialization is incomplete; no job was submitted.');pendingSubmissions++;try{return await originalSubmitJob(job,{fetchImpl:(url,options)=>fetch(url,{...options,signal:AbortSignal.any([options.signal,lifetime.signal])})});}catch(error){warning=error.message;throw error;}finally{pendingSubmissions--;}}
  '''.replace('MARKUP',json.dumps(html)).replace('CURSEFORGE_PREVIEW',json.dumps(cf_preview['preview']))
     footer='''
- cancelArchive=()=>archiveSelection.cancel();cancelOverview=()=>overviewController?.abort();
+ cancelArchive=()=>{archiveSelection.cancel();clearArchiveHistory();};cancelOverview=()=>overviewController?.abort();
  if(warning)$('workspace-warning').textContent=warning;
  function applySearch(){const terms=query.toLocaleLowerCase().split(/\\s+/).filter(Boolean);let shown=0;for(const job of root.querySelectorAll('.job')){job.hidden=!terms.every(term=>job.textContent.toLocaleLowerCase().includes(term));if(!job.hidden)shown++;}const status=root.getElementById('lab-search-status');if(status)status.textContent=query?shown+' matching recent jobs. Search does not change the durable journal.':'';}
  applySearch();controller.ready=!disposed;if(controller.ready)for(const button of writeControls)button.disabled=false;return controller;

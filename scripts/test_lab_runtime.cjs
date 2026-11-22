@@ -19,8 +19,17 @@ async function verifyFinalDatabase(){await check('Final SQLite integrity and exa
   const exactResponse=await request('/api/project-archive/SHARED01/'+earlier);
   assert.equal(exactResponse.body.toString(),project);assert.equal(exactResponse.headers['x-atlas-generation'],earlier);
   assert.equal((await request('/api/project-archive/SHARED01/'+missing)).status,404);
+  const head=await request('/api/project-history/SHARED01?limit=12');
+  assert.equal(head.status,200);
+  const history=JSON.parse(head.body);assert.deepEqual(history.entries.slice(0,2).map(row=>row.generation),[later,earlier]);
+  assert.equal(history.entries.length,12);assert.equal(history.next_before,'3');
+  assert.ok(history.entries.every(row=>!Object.hasOwn(row,'payload')&&Number.isSafeInteger(row.stored_bytes)));
+  const tail=await request('/api/project-history/SHARED01?limit=12&before='+history.next_before);
+  assert.equal(tail.status,200);const older=JSON.parse(tail.body);
+  assert.deepEqual(older.entries.map(row=>row.generation),['2','1']);assert.equal(older.next_before,null);
+
  }
- const seed=spawnSync('python3',['-c',`import sqlite3,sys\nc=sqlite3.connect(sys.argv[1]);c.execute('CREATE TABLE snapshots(generation INTEGER PRIMARY KEY,provider TEXT NOT NULL,canonical_id TEXT NOT NULL,observed_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,payload TEXT NOT NULL)');c.executemany("INSERT INTO snapshots(generation,provider,canonical_id,payload) VALUES(?,'modrinth-project-raw','SHARED01',?)",[(int(sys.argv[2]),sys.argv[3]),(int(sys.argv[4]),sys.argv[5])]);c.commit();c.close()`,path.join(out,'fixture.sqlite'),earlier,project,later,latest],{encoding:'utf8'});assert.equal(seed.status,0,seed.stderr);
+ const seed=spawnSync('python3',['-c',`import sqlite3,sys\nc=sqlite3.connect(sys.argv[1]);c.execute('CREATE TABLE snapshots(generation INTEGER PRIMARY KEY,provider TEXT NOT NULL,canonical_id TEXT NOT NULL,observed_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,payload TEXT NOT NULL)');c.executemany("INSERT INTO snapshots(generation,provider,canonical_id,payload) VALUES(?,'modrinth-project-raw','SHARED01',?)",[(int(sys.argv[2]),sys.argv[3]),(int(sys.argv[4]),sys.argv[5])] + [(i,sys.argv[3]) for i in range(1,13)]);c.commit();c.close()`,path.join(out,'fixture.sqlite'),earlier,project,later,latest],{encoding:'utf8'});assert.equal(seed.status,0,seed.stderr);
  const identity=await start();assert.equal(identity.runtime_manifest_sha256,report.packageSHA256);report.firstEngine=identity.engine_instance;
  await check('Served shell and every allowlisted runtime file match package bytes',async()=>{const manifest=JSON.parse(fs.readFileSync(path.join(pkg,'athena-runtime-manifest.json')));for(const file of manifest.files){if(file.path==='.nojekyll')continue;const r=await request('/'+file.path);assert.equal(r.status,200,file.path);assert.equal(hash(r.body),file.sha256,file.path);assert.equal(r.headers['x-athena-asset-sha256'],file.sha256);assert.equal(r.headers['x-athena-runtime-sha256'],report.packageSHA256);assert.equal(r.headers['cache-control'],'no-store');assert.equal(r.headers['x-content-type-options'],'nosniff');}report.verifiedAssets=manifest.files.length-1;});
  await check('Loopback API keeps strict Host, Origin, custom-header and no-CORS protections',async()=>{const job='"DedupExperiment"';for(const headers of [{},{Origin:'https://evil.invalid','X-Atlas-Request':'local-ui'},{Origin:origin},{Origin:origin,'X-Atlas-Request':'wrong'},{Origin:origin,'X-Atlas-Request':'local-ui',Host:'evil.invalid'}])assert.equal((await request('/api/jobs',{method:'POST',headers:{'Content-Type':'application/json',...headers},body:job})).status,403);assert.equal((await request('/api/overview',{headers:{Host:'evil.invalid'}})).status,403);assert.equal((await request('/api/jobs',{method:'OPTIONS',headers:{Origin:'https://evil.invalid'}})).status,403);const r=await request('/');assert.equal(r.headers['access-control-allow-origin'],undefined);assert.match(r.headers['content-security-policy'],/script-src 'self'; style-src 'self'/);assert.doesNotMatch(r.headers['content-security-policy'],/unsafe-inline|unsafe-eval|https:/);for(const p of ['/fixture.sqlite','/../fixture.sqlite','/%2e%2e/fixture.sqlite','/.git/config','/api/no-such-endpoint'])assert.equal((await request(p)).status,404,p);});
@@ -67,6 +76,51 @@ async function verifyFinalDatabase(){await check('Final SQLite integrity and exa
   await reopen();assert.equal(await text.textContent(),project);assert.ok((await title.textContent()).endsWith(earlier));await close();
   await generation.fill('');await input.fill('MISSING1');await submit.click();await status.filter({hasText:'No archived response'}).waitFor();
   await reopen();assert.equal(await text.textContent(),project);await close();
+ });
+ await check('Native saved-generation list reads bounded metadata only and reopens exact retained bytes',async()=>{
+  const input=page.locator('.workspace-container #saved-archive-id');
+  const generation=page.getByLabel('Saved generation (optional)',{exact:true});
+  const open=page.getByRole('button',{name:'List saved generations',exact:true});
+  const panel=page.getByRole('region',{name:'Saved generations',exact:true});
+  const old=page.getByRole('button',{name:'Older generations',exact:true});
+  const dismiss=page.getByRole('button',{name:'Close generation list',exact:true});
+  const rows=panel.getByRole('listitem');
+  const dialog=page.locator('.workspace-container #saved-archive-dialog');
+  const archive=page.locator('.workspace-container #saved-archive-text');
+  let reads=[];const observe=r=>{if(r.url().includes('-history/')||r.url().includes('-archive/'))reads.push([r.method(),r.url()]);};page.on('request',observe);
+  try{
+   await input.fill('SHARED01');assert.deepEqual(reads,[]);
+   await open.click();await panel.getByRole('button',{name:'Open generation '+earlier,exact:true}).waitFor();
+   assert.equal(await rows.count(),12);assert.deepEqual(reads,[['GET',origin+'/api/project-history/SHARED01?limit=12']]);
+   const selected=panel.getByRole('button',{name:'Open generation '+earlier,exact:true});
+   await selected.click();await dialog.waitFor({state:'visible'});
+   assert.equal(await generation.inputValue(),earlier);assert.equal(await archive.textContent(),project);
+   assert.deepEqual(reads.at(-1),['GET',origin+'/api/project-archive/SHARED01/'+earlier]);
+   await page.locator('.workspace-container #close-saved-archive').click();
+   await old.click();const first=panel.getByRole('button',{name:'Open generation 2',exact:true});await first.waitFor();
+   assert.equal(await rows.count(),2);assert.equal(await old.isDisabled(),true);
+   assert.equal(await first.evaluate(el=>el===el.getRootNode().activeElement),true);
+   assert.deepEqual(reads.at(-1),['GET',origin+'/api/project-history/SHARED01?limit=12&before=3']);
+   await dismiss.click();await panel.waitFor({state:'hidden'});
+   assert.equal(await open.evaluate(el=>el===el.getRootNode().activeElement),true);
+   assert.equal(await generation.inputValue(),earlier);
+
+   let release;const delay=new Promise(r=>{release=r});
+   const route=origin+'/api/project-history/SHARED01?limit=12';
+   const hold=async request=>{await delay;try{await request.continue();}catch{}};
+   await page.route(route,hold);
+   try{
+    const request=page.waitForRequest(req=>req.url()===route);
+    await open.click();await request;
+    await input.fill('MISSING1');await panel.waitFor({state:'hidden'});
+    release();
+    await open.click();
+    await panel.getByRole('status').filter({hasText:'No retained generations'}).waitFor();
+    assert.equal(await rows.count(),0);
+   }finally{release();await page.unroute(route,hold);}
+   assert.equal(reads.every(([method])=>method==='GET'),true);
+   assert.equal(reads.filter(([,url])=>url.includes('-archive/')).length,1);
+  }finally{page.off('request',observe);}
  });
  await check('Native bounded experiment writes a durable job and preserves raw evidence',async()=>{await page.locator('.workspace-container [data-panel="experiments"]').click();await page.locator('.workspace-container #run-experiment').click();await page.locator('.workspace-container #experiment-status').filter({hasText:'queued'}).waitFor();await page.locator('.workspace-container [data-panel="overview"]').click();let overview;for(let i=0;i<120;i++){overview=JSON.parse((await request('/api/overview')).body);if(overview.jobs[0]&&['succeeded','failed'].includes(overview.jobs[0].state))break;await wait(150);}assert.equal(overview.jobs.length,1);assert.equal(overview.jobs[0].state,'succeeded');assert.ok(overview.jobs[0].result.experiment.evidence.trials.length>0);assert.ok(overview.jobs[0].result.experiment_id);report.job=overview.jobs[0];await page.waitForFunction(()=>document.querySelector('.workspace-container').shadowRoot.getElementById('completed').textContent==='1');await page.locator('.workspace-container .job summary').click();assert.match(await page.locator('.workspace-container .job pre').textContent(),/acceptance_policy/);});
  await page.screenshot({path:path.join(out,'lab-dark.png'),fullPage:true});
