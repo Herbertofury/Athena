@@ -233,11 +233,26 @@ def build():
     code=replace(code," finally{previewBusy=false;$('retry-media')"," finally{previewBusy=false;if(!disposed)$('retry-media')")
     code=code.replace('URL.createObjectURL(','createObjectURL(').replace('URL.revokeObjectURL(','revokeObjectURL(').replace('atlas-real-media-receipt.json','athena-media-receipt.json')
     html=body(m/'index.template.html')
+    html=replace(html,'<section id="cards"','<details class="receipt" id="video-mod-cues"><summary>Review mod cues from a video</summary><div id="video-mod-cue-body"></div></details><section id="cards"')
     html=html.replace('<a href="?event_view=baseline">Baseline event view</a>','<button type="button" data-event-mode="baseline">Baseline event view</button>').replace('<a href="?event_view=bounded">Test bounded event view</a>','<button type="button" data-event-mode="bounded">Test bounded event view</button>')
     html=html.replace('<section id="cards"','<p id="search-status" role="status"></p><section id="cards"')
     pre=imports+'\nexport async function mount({container,search="",theme="dark",notify,navigate,state:initialState,route="",signal:outerSignal}={}){\n'+LIFECYCLE
     emit(Path('media/style.css'),scoped_css(m/'media.css','media'),m/'media.css')
     pre+='  root.innerHTML='+json.dumps(html)+';const sheet=document.createElement("link");sheet.rel="stylesheet";sheet.href=new URL("./style.css",import.meta.url).href;root.prepend(sheet);setTheme(theme);\n'
+    pre+='''
+  const cuePanel=root.getElementById('video-mod-cues'),cueBody=root.getElementById('video-mod-cue-body');
+  let cueMounted=false,cueLoading=false;
+  cuePanel.addEventListener('toggle',async()=>{
+    if(!cuePanel.open||disposed||cueMounted||cueLoading)return;
+    cueLoading=true;cueBody.textContent='Opening local cue review…';
+    try{
+      const {mountVideoModEvidence}=await import('./video-mod-evidence.mjs');
+      if(disposed)return;
+      cueBody.replaceChildren();cleanups.push(mountVideoModEvidence(cueBody).dispose);cueMounted=true;
+    }catch{if(!disposed)cueBody.textContent='Local cue review is unavailable. Close and reopen it to retry; other media tools still work.';}
+    finally{cueLoading=false;}
+  });
+'''
     pre+='  let blockedReceipt=null;const savedReceipt=initialState?.receipt?.schema_version===1 && Array.isArray(initialState.receipt.events)?JSON.parse(JSON.stringify(initialState.receipt)):null;\n'
     pre+='  root.addEventListener("click",e=>{const button=e.target.closest?.("[data-event-mode]");if(button){const params=new URLSearchParams({event_view:button.dataset.eventMode,q:search});navigate?.("#media?"+params);}});\n'
     post='''
@@ -252,7 +267,7 @@ def build():
 }
 '''
     emit(Path('media/index.mjs'),pre+code+post,m/'media.js')
-    deps=['compare.mjs','local-compare.mjs','gallery-comparison.mjs','media-event-recorder.mjs','media-events.mjs','bilibili-player.mjs','resource-loader.mjs','media-core.mjs','event-log-view.mjs','public-fixtures.json','vendor/hls-1.7.3.min.js','vendor/HLS-LICENSE.txt','vendor/provenance.json']
+    deps=['compare.mjs','local-compare.mjs','gallery-comparison.mjs','video-mod-evidence.mjs','media-event-recorder.mjs','media-events.mjs','bilibili-player.mjs','resource-loader.mjs','media-core.mjs','event-log-view.mjs','public-fixtures.json','vendor/hls-1.7.3.min.js','vendor/HLS-LICENSE.txt','vendor/provenance.json']
     for name in deps:copy(Path('media')/name,m/name)
     p=m/'preview-loader.mjs';s=p.read_text();s=replace(s,'{concurrency=4,','{signal=null,concurrency=4,');s=replace(s,"if(timer!==null)clearTimer(timer);timer=null;ok?resolve():reject(error);","if(timer!==null)clearTimer(timer);timer=null;signal?.removeEventListener('abort',onAbort);ok?resolve():reject(error);")
     s=replace(s,'    timer=setTimer(()=>{',"    const onAbort=()=>{try{entry.image.removeAttribute('src');}catch{notify('image_abort_cleanup_failed',{source:entry.image.dataset.source,attempt:entry.attempts});}finish(false,Error('Workspace unloaded'));};\n    if(signal?.aborted){onAbort();return;}signal?.addEventListener('abort',onAbort,{once:true});\n    timer=setTimer(()=>{")

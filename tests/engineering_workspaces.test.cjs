@@ -125,3 +125,28 @@ test('Research reference guides use existing search without changing ranked cand
   assert.deepEqual(env.calls.map(String),[pathToFileURL(path.join(base,'research/catalog.json')).href]);
  }finally{controller?.unmount();env.restore();}
 });
+
+test('generated Media mounts manual mod cue review lazily without mixing it into the media receipt',async()=>{
+ const env=setup();let controller;
+ try{
+  controller=await(await component('media')).mount({container:env.container});
+  const root=env.container.shadowRoot, panel=root.getElementById('video-mod-cues');
+  assert.equal(controller.ready,true);
+  assert.equal(panel.querySelector('form'),null);
+  const receipt=JSON.stringify(controller.exportState()),requests=env.calls.length;
+  panel.open=true;panel.dispatchEvent(new env.window.Event('toggle'));
+  let form;
+  for(let i=0;i<100&&!form;i++){form=panel.querySelector('form');if(!form)await new Promise(resolve=>setTimeout(resolve,5));}
+  assert.ok(form,panel.textContent);
+  form.querySelector('[name="source"]').value='https://x.com/Example/status/1000000';
+  form.querySelector('[name="notes"]').value='0:41.091..0:43.4 | inferred | User clue only';
+  form.dispatchEvent(new env.window.Event('submit'));
+  assert.match(panel.textContent,/Inference, unconfirmed/);
+  assert.equal(JSON.parse(panel.querySelector('pre').textContent).cues[0].start_ms,41091);
+  assert.equal(panel.querySelector('video,audio,iframe,img'),null);
+  assert.equal(env.calls.length,requests);
+  assert.equal(JSON.stringify(controller.exportState()),receipt);
+  controller.unmount();
+  assert.equal(root.childNodes.length,0);
+ }finally{controller?.unmount();env.restore();}
+});
