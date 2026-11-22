@@ -39,7 +39,7 @@ test('24-card pages retain order, current detail and focus; search reaches unren
  const {browse}=await import('../dist/workspaces/projects/model.mjs');
  const state={schema:1,entries:Array.from({length:100},(_,n)=>({
   id:'p-'+String(n).padStart(3,'0'),archived:n%27===26,
-  revisions:Array.from({length:6},(_,r)=>({...fields,name:'Sample project '+n,goal:n===0?'Deep specific match':'Shared project text.',at:Math.floor(n/2)*6+r}))
+  revisions:Array.from({length:6},(_,r)=>({...fields,name:'Sample project '+n,goal:n===0?'Deep specific match':n===3&&r===0?'Deep historical match':'Shared project text.',at:Math.floor(n/2)*6+r}))
  }))};
  const expected=browse(state).map(p=>p.id);
  const x=await setup(()=>true,state),q=s=>x.root.querySelector(s);
@@ -65,12 +65,16 @@ test('24-card pages retain order, current detail and focus; search reaches unren
   const target=expected[71];
   q('[data-project="'+target+'"] button').onclick();
   assert.equal(focused,q('#detail h3'));
-  assert.equal(x.root.querySelectorAll('#detail pre').length,6);
+  const raw=q('#saved-history');assert.equal(raw.querySelectorAll('pre').length,0);
+  raw.open=true;raw.ontoggle();assert.equal(raw.querySelectorAll('pre').length,6);
   x.mounted.setSearch('');
   assert.equal(q('[data-project]'),first);
   x.mounted.setSearch('deep specific match');
   assert.deepEqual(cards(),['p-000']);assert.equal(more.hidden,true);
   x.mounted.setSearch('not found');assert.deepEqual(cards(),[]);assert.equal(more.hidden,true);
+  x.mounted.setSearch('deep historical match');assert.deepEqual(cards(),[]);
+  q('#history-search').onchange({target:{value:'history'}});assert.deepEqual(cards(),['p-003']);
+  q('#history-search').onchange({target:{value:'current'}});assert.deepEqual(cards(),[]);
   x.mounted.setSearch('');assert.deepEqual(cards(),expected.slice(0,24));
   assert.equal(x.calls.length,0);
  } finally {
@@ -165,5 +169,62 @@ test('a confirmed backup import becomes the base of the next guarded edit',async
   x.root.querySelector('[data-project="added"] button').onclick();
   [...x.root.querySelectorAll('#detail button')].find(button=>button.textContent==='Archive project').onclick();
   assert.equal(x.calls[1][1].reviewedProjectMutation,expected);
+ }finally{x.mounted.unmount();}
+});
+
+test('searches only confirmed snapshots, lazily discloses raw saved rows, and preserves rejected drafts',async()=>{
+ const entries=Array.from({length:27},(_,i)=>({...fields,name:i===1?'Long-lost Needle':'Current catalog',goal:i===1?'needle <img src=x>':'Exact literal data',at:i,extensionSecret:'Unindexed private metadata'}));
+ const before={schema:1,entries:[{id:'sample',archived:false,revisions:entries}]};
+ const x=await setup(()=>false,before),q=s=>x.root.querySelector(s);
+ const search=x.mounted.setSearch,scope=value=>q('#history-search').onchange({target:{value}});
+ const card=()=>q('[data-project="sample"]');
+ const clickDetail=label=>[...x.root.querySelectorAll('#detail button')].find(button=>button.textContent===label).onclick();
+ try{
+  search('needle');assert.equal(card(),null);
+  scope('history');assert.equal(card().querySelector('h3').textContent,'Current catalog');
+  card().querySelector('button').onclick();
+  assert.equal(q('[aria-label="Matching saved revisions"] li').textContent,'Revision 2 (historical): Project name, Goal');
+  assert.equal(q('#detail img'),null);assert.doesNotMatch(q('#detail').textContent,/needle <img src=x>|Unindexed private metadata/);
+  const raw=q('#saved-history');assert.equal(raw.querySelectorAll('pre').length,0);
+  raw.open=true;raw.ontoggle();
+  assert.equal(raw.querySelectorAll('pre').length,24);assert.equal(JSON.parse(raw.querySelector('pre').textContent).at,26);
+  raw.querySelector('button').onclick();assert.equal(raw.querySelectorAll('pre').length,27);
+  assert.equal(JSON.parse(raw.querySelectorAll('pre')[25].textContent).extensionSecret,'Unindexed private metadata');
+  assert.equal(x.calls.length,0);
+  clickDetail('Archive project');assert.equal(x.calls.length,1);assert.equal(x.calls[0][0].entries[0].archived,true);
+  assert.match(q('#notice').textContent,/Not saved/);assert.ok(card());
+  q('#archived').onclick();assert.equal(card(),null);
+  scope('current');search('');assert.ok(card(),'draft browsing remains available without a query');
+  q('#archived').onclick();search('Unindexed private metadata');assert.equal(card(),null);
+  scope('history');assert.equal(card(),null);assert.equal(x.calls.length,1);
+ }finally{x.mounted.unmount();}
+});
+
+test('retrying a rejected Archive or Restore from saved search keeps the labeled intent',async()=>{
+ for(const archived of [false,true]){
+  const before=await backup('Kept project');before.entries[0].archived=archived;
+  const x=await setup(()=>false,before),q=s=>x.root.querySelector(s);
+  const expectedBase=JSON.stringify(before),label=archived?'Restore project':'Archive project';
+  try{
+   if(archived)q('#archived').onclick();
+   x.mounted.setSearch('kept project');
+   q('[data-project="Kept project"] button').onclick();
+   const action=()=>[...x.root.querySelectorAll('#detail button')].find(button=>button.textContent===label);
+   action().onclick();
+   assert.match(q('#notice').textContent,/Not saved/);
+   assert.equal(x.calls[0][0].entries[0].archived,!archived);
+   action().onclick();
+   assert.equal(x.calls[1][0].entries[0].archived,!archived,'retry must keep the labeled '+label+' intent');
+   assert.deepEqual(x.calls.map(([,opts])=>opts.reviewedProjectMutation),[expectedBase,expectedBase]);
+  }finally{x.mounted.unmount();}
+ }
+});
+
+test('Projects search scope keeps an exact accessible label independent of its options',async()=>{
+ const x=await setup(),select=x.root.querySelector('#history-search');
+ try{
+  assert.equal(select.getAttribute('aria-label'),'Project search scope');
+  assert.deepEqual([...select.querySelectorAll('option')].map(option=>[option.value,option.textContent]),
+   [['current','Current revision'],['history','All saved revisions']]);
  }finally{x.mounted.unmount();}
 });

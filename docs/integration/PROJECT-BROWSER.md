@@ -11,8 +11,29 @@ The workspace has a separate schema-1 state under `projects`. Unknown fields sur
 The list opens with up to 24 matching projects. **Show next** appends more in
 the same most-recent-first order and sends keyboard focus to the first newly
 shown project. The result count reports both displayed and total matches.
-Search and filters still inspect every latest project revision, even records
-not displayed yet. Opening a project does not redraw its surrounding cards.
+Search and filters inspect the full collection, even records not displayed yet.
+Ownership, stage and archived filters apply to the current project. Opening a
+project does not redraw its surrounding cards.
+
+## Search saved revision history
+
+Use Athena's search field to find text in the latest saved revision, or choose
+**All saved revisions** under **Project search scope** to include older saved
+names, notes, decisions, blockers and release references. Matching cards still
+show the current saved project. Opening a result lists the exact revision
+numbers and matching field labels without exposing the old text automatically.
+Open the saved history disclosure to read the exact revision JSON in groups of
+24, newest first.
+
+Search uses the last confirmed Projects snapshot opened or saved in this
+workspace. Reload to see edits made in another tab. Rejected drafts remain
+available for export and in the default draft view with no search text; they never show
+as saved search results. Imported extension fields are preserved but are not
+searched or listed as matching fields. Scope defaults to **Current revision**
+on mount; neither the scope nor the query writes to project storage. There
+are no network requests or background indexing. This is local substring search
+within a declared text field, not a general-purpose search index or permission
+to restore old revisions.
 
 ## Transfer only one saved project
 

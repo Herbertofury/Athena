@@ -62,7 +62,10 @@ test('missing optional comparison module leaves raw history and guarded edits us
   try{
    const root=container.shadowRoot;root.querySelector('[aria-label="Open Project"]').onclick();
    await waitFor(()=>root.querySelector('#detail').textContent.includes('Optional revision comparison unavailable'));
-   assert.equal(root.querySelectorAll('#detail pre').length,2);
+   const history=root.querySelector('#saved-history');
+   assert.equal(history.querySelectorAll('pre').length,0);
+   history.open=true;history.ontoggle();
+   assert.equal(history.querySelectorAll('pre').length,2);
    [...root.querySelectorAll('#detail button')].find(b=>b.textContent==='Archive project').onclick();
    assert.equal(saves[0][0].entries[0].archived,true);
    assert.equal(saves[0][1].reviewedProjectMutation,JSON.stringify(state));
