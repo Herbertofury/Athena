@@ -25,6 +25,17 @@ python guidance/tools/audit_consumers.py --target /path/to/consumer
 
 The audit verifies known lock identities, complete snapshot paths, digest drift and tracked old-source references without changing repositories or emitting file contents. Local instructions remain local. It reports uninspected paths; references can be provenance rather than active dependencies. This is not a deletion approval, automatic fleet discovery, or a migration writer. See [the Noxviola public-checkout receipt](evidence/noxviola-consumer-audit-2026-11-15.json). That one target is not the fleet.
 
+For an Athena lock, identical managed policy text and its claimed source pin
+are reported separately. `athena-pin-matches` requires all 16 installed
+snapshots to match, the supported digest format and release version, and the
+recorded revision to match the selected local Git checkout's committed policy
+manifest and bytes. `athena-canonical-bytes-match` means the installed bytes
+match but the selected checkout does not prove that exact pin. A different
+historical revision or a source export without Git history is not itself a
+damaged installation. To qualify a different pin, select its exact local
+checkout with `--source /chosen/Athena/guidance`; no network lookup is made.
+That evidence does not authenticate the checkout or prove client behavior.
+
 ## Provenance and rights
 
 Ported with the repository owner's authorization from Herbertofury/Agent-Foundry commit `87166b5f6a621c61b90bbbfe90835a3752c1c51b`. This port contains its owner-authored governance standards, repository governance implementation, the small standard-library JSON helper and related tests, adapted to Athena identity. Original source inventory and SHA-256 hashes are retained in [the source inventory](registry/agent-foundry-source-inventory.json). Protocol registry is a preserved source snapshot, not a freshly reverified claim.

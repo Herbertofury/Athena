@@ -7,10 +7,11 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import os
 import re
 import subprocess
 from pathlib import Path
-from repository_governance import POLICY_FILES, checked_release, content, safe_path
+from repository_governance import MANIFEST, POLICY_FILES, checked_release, content, safe_path
 
 ATHENA = 'https://github.com/Herbertofury/Athena'
 LEGACY = 'https://github.com/Herbertofury/Agent-Foundry'
@@ -28,6 +29,59 @@ def git(target, *args):
 
 def expected_paths(prefix):
     return {f'{prefix}/'+('AGENTS-adapter.md' if path.startswith('templates/') else path): path for path in POLICY_FILES}
+
+def source_git(source, *args, batch=None):
+    # Inspect only the selected local checkout. No credential prompt, object
+    # replacement, implicit fetch or index stat-cache update.
+    env = {**os.environ, 'GIT_NO_LAZY_FETCH': '1', 'GIT_NO_REPLACE_OBJECTS': '1',
+           'GIT_OPTIONAL_LOCKS': '0', 'GIT_TERMINAL_PROMPT': '0'}
+    result = subprocess.run(['git', '-C', str(source), *args], input=batch,
+                            capture_output=True, env=env)
+    if result.returncode:
+        raise ValueError('selected source Git evidence unavailable')
+    return result.stdout
+
+def selected_head(source):
+    try:
+        head = source_git(source, 'rev-parse', '--verify', 'HEAD').decode('ascii').strip()
+        return head if re.fullmatch(r'[a-f0-9]{40}', head) else None
+    except (OSError, ValueError):
+        return None
+
+def committed_release_matches(source, head, manifest):
+    # Bound local blob reads to the version lock and the fixed public policy core.
+    try:
+        prefix = source_git(source, 'rev-parse', '--show-prefix').removesuffix(b'\n').removesuffix(b'\r')
+        if b'\n' in prefix or b'\r' in prefix:
+            return False
+        names = [MANIFEST, *POLICY_FILES]
+        specs = b''.join(head.encode('ascii')+b':'+prefix+name.encode('ascii')+b'\n' for name in names)
+        meta = source_git(source, 'cat-file', '--batch-check=%(objecttype) %(objectsize)', batch=specs).splitlines()
+        if len(meta) != len(names) or any(not re.fullmatch(rb'blob [0-9]{1,7}', row) for row in meta):
+            return False
+        sizes = [int(row.split()[1]) for row in meta]
+        if any(size > 1024 * 1024 for size in sizes):
+            return False
+        blobs = source_git(source, 'cat-file', '--batch', batch=specs)
+        start = 0
+        for name, size in zip(names, sizes):
+            newline = blobs.index(b'\n', start)
+            header = blobs[start:newline].split()
+            if len(header) != 3 or header[1] != b'blob' or int(header[2]) != size:
+                return False
+            start = newline + 1
+            raw = blobs[start:start+size]
+            if blobs[start+size:start+size+1] != b'\n':
+                return False
+            start += size + 1
+            if name == MANIFEST:
+                if json.loads(raw) != manifest:
+                    return False
+            elif sha(raw.replace(b'\r\n',b'\n').replace(b'\r',b'\n')) != manifest['files'][name]:
+                return False
+        return start == len(blobs)
+    except (OSError, ValueError, KeyError, TypeError):
+        return False
 
 def inspect_lock(source, target, kind):
     legacy = kind == 'legacy'
@@ -56,7 +110,8 @@ def inspect_lock(source, target, kind):
         if result['sourceCommit'] != inventory['sourceCommit']:
             result['issues'].append('source revision differs from preserved migration inventory')
     else:
-        expected = checked_release(source)['files']
+        manifest = checked_release(source)
+        expected = manifest['files']
     paths = expected_paths(prefix)
     if set(lock['files']) != set(paths):
         result['issues'].append('managed path set differs from complete core')
@@ -72,7 +127,34 @@ def inspect_lock(source, target, kind):
         result['issues'].append('local snapshots changed or missing; do not overwrite')
     if any(not row['matchesPreservedCanonical'] for row in result['snapshots']):
         result['issues'].append('source pin needs canonical reconciliation')
-    result['state'] = 'needs-review' if result['issues'] else ('legacy-migration-required' if legacy else 'athena-pin-matches')
+    if legacy:
+        result['state'] = 'needs-review' if result['issues'] else 'legacy-migration-required'
+        return result
+    result['policyBytesMatch'] = (set(lock['files']) == set(paths) and
+        all(row['matchesPreservedCanonical'] and row['state'] == 'unchanged' for row in result['snapshots']))
+    head = selected_head(source)
+    result['selectedSourceCommit'] = head
+    pin = 'claim-unverified'
+    bad_digest = lock.get('digestFormat') != manifest['digestFormat']
+    wrong_version = head is not None and head == result['sourceCommit'] and result['version'] != manifest['version']
+    if bad_digest or wrong_version:
+        if bad_digest:
+            result['issues'].append('digestFormat differs from supported policy digest convention')
+        if wrong_version:
+            result['issues'].append('version differs from the selected source release')
+        pin = 'claim-metadata-mismatch'
+    elif result['version'] and result['sourceCommit'] and lock.get('sourceWorkingTreeDirty') is False:
+        if head is None:
+            pin = 'selected-revision-unavailable'
+        elif head != result['sourceCommit']:
+            pin = 'different-revision'
+        elif committed_release_matches(source, head, manifest):
+            pin = 'verified-selected-revision'
+        else:
+            pin = 'selected-source-drift'
+    result['sourcePinStatus'] = pin
+    result['state'] = ('needs-review' if result['issues'] else 'athena-pin-matches'
+                       if pin == 'verified-selected-revision' else 'athena-canonical-bytes-match')
     return result
 
 def audit(source, target, label):
@@ -101,7 +183,7 @@ def audit(source, target, label):
             'referenceDisposition':'Unreviewed references may be provenance rather than active dependencies; review before rewriting.',
             'legacyRetirementReady':False,'retirementReason':'This audit cannot prove source history, releases, wiki, runtime parity or unseen consumers reconciled.',
             'locks':locks,'legacyReferences':references,'scannedTextFiles':scanned,'uninspectedPaths':skipped,
-            'remainingConsumerWork':bool(references or any(x['state'] in ('needs-review','foreign-or-invalid','legacy-migration-required') for x in locks)),
+            'remainingConsumerWork':bool(references or any(x['state'] in ('needs-review','foreign-or-invalid','legacy-migration-required','athena-canonical-bytes-match') for x in locks)),
             'writesPerformed':False}
 
 def main():
