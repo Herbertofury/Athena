@@ -1,6 +1,6 @@
 const {test}=require('node:test'),assert=require('node:assert/strict'),{parseHTML}=require('linkedom');
 const fields={name:'Project',ownership:'own',stage:'idea',goal:'A goal',next:'',blockers:'',decisions:'',resources:'',source:'',version:'',release:''};
-async function setup(save=()=>true,state){const {document}=parseHTML('<html><body><section></section></body></html>');global.document=document;const container=document.querySelector('section'),controller=new AbortController(),calls=[];const {mount}=await import('../dist/workspaces/projects/index.mjs');const mounted=mount({container,state,setState:(data,options)=>{calls.push([structuredClone(data),options]);return save(data);},signal:controller.signal});const root=container.shadowRoot;return {root,calls,mounted,controller,confirm(){root.querySelector('#backup-confirm').onclick();},cancel(){root.querySelector('#backup-cancel').onclick();},load(file){return root.querySelector('#import').onchange({target:{files:[file],value:''}});}};}
+async function setup(save=()=>true,state){const {document}=parseHTML('<html><body><section></section></body></html>');global.document=document;const container=document.querySelector('section'),controller=new AbortController(),calls=[];const {mount}=await import('../dist/workspaces/projects/index.mjs');const mounted=mount({container,state,setState:(data,options)=>{calls.push([structuredClone(data),options]);return save(data,options);},signal:controller.signal});const root=container.shadowRoot;return {root,calls,mounted,controller,confirm(){root.querySelector('#backup-confirm').onclick();},cancel(){root.querySelector('#backup-cancel').onclick();},load(file){return root.querySelector('#import').onchange({target:{files:[file],value:''}});}};}
 async function backup(id){const {empty,change}=await import('../dist/workspaces/projects/model.mjs');return change(empty(),id,{...fields,name:id},1);}
 const file=data=>({size:100,arrayBuffer:async()=>new TextEncoder().encode(JSON.stringify(data)).buffer});
 test('preview shows added names but never writes until explicit confirmation; duplicates and conflicts never write',async()=>{const x=await setup(),data=await backup('a');await x.load(file(data));assert.equal(x.calls.length,0);assert.equal(x.root.querySelector('#backup-review').hidden,false);assert.equal(x.root.querySelector('#backup-projects li').textContent,'a');assert.ok(!x.root.querySelector('[data-project="a"]'));x.confirm();assert.equal(x.calls.length,1);assert.equal(x.calls[0][1].reviewedProjectBackup,'{"schema":1,"entries":[]}');assert.ok(x.root.querySelector('[data-project="a"]'));await x.load(file(data));assert.equal(x.calls.length,1);assert.match(x.root.querySelector('#notice').textContent,/adds nothing/);data.entries[0].revisions[0].name='Conflict';await x.load(file(data));assert.equal(x.calls.length,1);assert.match(x.root.querySelector('#notice').textContent,/Import refused/);x.mounted.unmount();});
@@ -103,4 +103,67 @@ test('workspace focus rings keep the dark color and clear 3:1 on known light sur
   assert.ok(contrast(darkRing,surface)<3);
   assert.ok(contrast(lightRing,surface)>=3);
  }
+});
+
+test('failed Projects edit keeps the last confirmed comparison base for retry and exports the draft',async()=>{
+ const before=await backup('kept'), expected=JSON.stringify(before);
+ let allow=false;
+ const x=await setup((data,opts)=>{
+  assert.equal(opts?.reviewedProjectMutation,expected);
+  if(allow)return true;
+  throw Object.assign(Error('test conflict'),{code:'PROJECT_WRITE_CONFLICT'});
+ },before),q=s=>x.root.querySelector(s);
+ let exported;
+ const oldCreate=URL.createObjectURL,oldRevoke=URL.revokeObjectURL;
+ URL.createObjectURL=b=>{exported=b;return 'blob:test';};URL.revokeObjectURL=()=>{};
+ try {
+  const clickDetail=name=>[...x.root.querySelectorAll('#detail button')].find(button=>button.textContent===name).onclick();
+  q('[data-project="kept"] button').onclick();
+  clickDetail('Archive project');
+  assert.equal(x.calls[0][1]?.reviewedProjectMutation,expected);
+  assert.match(q('#notice').textContent,/Saved Projects changed.*Export/);
+  q('#export').onclick();
+  assert.equal(JSON.parse(await exported.text()).entries[0].archived,true);
+  q('#archived').onclick();
+  q('[data-project="kept"] button').onclick();
+  allow=true;
+  clickDetail('Restore project');
+  assert.equal(x.calls[1][1].reviewedProjectMutation,expected);
+  assert.match(q('#notice').textContent,/Saved in this browser/);
+ } finally {
+  URL.createObjectURL=oldCreate; URL.revokeObjectURL=oldRevoke;x.mounted.unmount();
+ }
+});
+
+test('host storage guard preserves stale newer Projects and unrelated saved workspace bytes',()=>{
+ const {readFileSync}=require('node:fs'),vm=require('node:vm');
+ const app=readFileSync(require('node:path').join(__dirname,'../dist/app.js'),'utf8');
+ const start=app.indexOf('function saveReviewedProjectBackup('),end=app.indexOf('function routeParts(',start);
+ assert.ok(start>=0&&end>start);
+ const old={schema:1,entries:[]};
+ const changed={schema:1,entries:[],backupMetadata:'newer Projects'};
+ const draft={schema:1,entries:[],backupMetadata:'this draft'};
+ const host={workspaceStore:{schema:1,workspaces:{projects:old}}};
+ let durable=JSON.stringify({schema:1,workspaces:{projects:changed,continuity:{notes:'other workspace'}}}),writes=0;
+ host.localStorage={getItem:()=>durable,setItem(_key,value){writes++;durable=value;}};
+ vm.runInNewContext(app.slice(start,end),host);
+ const persistentBefore=durable;
+ assert.throws(()=>host.saveReviewedProjectBackup(draft,JSON.stringify(old),true),{code:'PROJECT_WRITE_CONFLICT'});
+ assert.equal(writes,0);
+ assert.equal(durable,persistentBefore);
+ durable=JSON.stringify({schema:1,workspaces:{projects:old,continuity:{notes:'other workspace'}}});
+ assert.equal(host.saveReviewedProjectBackup(draft,JSON.stringify(old),true),true);
+ assert.deepEqual(JSON.parse(durable).workspaces,{projects:draft,continuity:{notes:'other workspace'}});
+ assert.equal(writes,1);
+});
+
+test('a confirmed backup import becomes the base of the next guarded edit',async()=>{
+ const original=await backup('kept'),added=await backup('added'),x=await setup(()=>true,original);
+ try{
+  await x.load(file(added));x.confirm();
+  const expected=JSON.stringify(x.calls[0][0]);
+  x.root.querySelector('[data-project="added"] button').onclick();
+  [...x.root.querySelectorAll('#detail button')].find(button=>button.textContent==='Archive project').onclick();
+  assert.equal(x.calls[1][1].reviewedProjectMutation,expected);
+ }finally{x.mounted.unmount();}
 });
