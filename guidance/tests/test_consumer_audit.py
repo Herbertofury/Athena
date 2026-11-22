@@ -1,4 +1,5 @@
 import json
+import shutil
 import subprocess
 import sys
 import tempfile
@@ -39,8 +40,68 @@ class ConsumerAuditTests(unittest.TestCase):
   with self.assertRaisesRegex(ValueError,'linked destination'):audit.audit(ROOT,self.target,'test')
  def test_generated_cache_and_environment_files_are_not_read_as_dependencies(self):
   (self.target/'.env').write_text('PRIVATE_FIXTURE_DO_NOT_EMIT');(self.target/'asset.bin').write_bytes(b'\x00\xff');self.commit();report=audit.audit(ROOT,self.target,'test');self.assertIn('.env',report['uninspectedPaths']);self.assertIn('asset.bin',report['uninspectedPaths']);self.assertNotIn('PRIVATE_FIXTURE_DO_NOT_EMIT',json.dumps(report))
+ def athena(self):
+  from repository_governance import apply, MANIFEST, POLICY_FILES
+  source=self.root/'source';source.mkdir();guidance=source/'guidance'
+  for name in [*POLICY_FILES,MANIFEST]:
+   path=guidance/name;path.parent.mkdir(parents=True,exist_ok=True);shutil.copyfile(ROOT/name,path)
+  subprocess.run(['git','init','-q',str(source)],check=True)
+  audit.git(source,'add','.')
+  audit.git(source,'-c','user.name=Fixture','-c','user.email=fixture@example.invalid','commit','-qm','canonical fixture')
+  apply(guidance,self.target)
+  p=self.target/'.athena/governance-lock.json'
+  return guidance,p
  def test_current_athena_pin_and_local_owned_rules_coexist(self):
-  from repository_governance import apply
-  apply(ROOT,self.target);p=self.target/'.athena/governance-lock.json';lock=json.loads(p.read_text());lock['sourceWorkingTreeDirty']=False;p.write_text(json.dumps(lock));before=snapshot(self.target);report=audit.audit(ROOT,self.target,'test');self.assertEqual(report['locks'][1]['state'],'athena-pin-matches')
+  source,p=self.athena();claim=json.loads(p.read_text());self.assertFalse(claim['sourceWorkingTreeDirty'])
+  before=snapshot(self.target);report=audit.audit(source,self.target,'test');row=report['locks'][1]
+  self.assertEqual(row['state'],'athena-pin-matches')
+  self.assertTrue(row['policyBytesMatch']);self.assertEqual(row['sourcePinStatus'],'verified-selected-revision')
+  self.assertEqual(row['selectedSourceCommit'],claim['sourceCommit'])
   self.assertEqual(snapshot(self.target),before);self.assertIn('PRIVATE_FIXTURE_DO_NOT_EMIT',(self.target/'AGENTS.md').read_text())
+  cmd=[sys.executable,str(ROOT/'tools/audit_consumers.py'),'--source',str(source),'--target',str(self.target)]
+  cli=json.loads(subprocess.check_output(cmd))['consumers'][0]
+  self.assertEqual(cli['locks'][1],row);self.assertEqual(snapshot(self.target),before)
+ def test_same_bytes_with_historical_or_unavailable_pin_do_not_verify_current_pin(self):
+  source,p=self.athena();claim=json.loads(p.read_text())
+  # Create a second release with the same canonical policy bytes. The old
+  # version is legitimate for its own commit, not for this selected checkout.
+  from repository_governance import MANIFEST, release
+  (source/MANIFEST).write_text(json.dumps(release(source,'2.1.0')),encoding='utf-8')
+  audit.git(source,'add','.')
+  audit.git(source,'-c','user.name=Fixture','-c','user.email=fixture@example.invalid','commit','-qm','later release with same policy')
+  before=snapshot(self.target);row=audit.audit(source,self.target,'test')['locks'][1]
+  self.assertEqual(row['state'],'athena-canonical-bytes-match')
+  self.assertTrue(row['policyBytesMatch']);self.assertEqual(row['sourcePinStatus'],'different-revision')
+  self.assertEqual(row['sourceCommit'],claim['sourceCommit']);self.assertNotEqual(row['selectedSourceCommit'],claim['sourceCommit'])
+  self.assertEqual(row['version'],claim['version'])
+  audit.git(source,'checkout','--detach',claim['sourceCommit'])
+  historical=audit.audit(source,self.target,'test')['locks'][1]
+  self.assertEqual(historical['state'],'athena-pin-matches');self.assertEqual(historical['sourcePinStatus'],'verified-selected-revision')
+  self.assertEqual(snapshot(self.target),before)
+  export=self.root/'source-export';shutil.copytree(source,export)
+  row=audit.audit(export,self.target,'test')['locks'][1]
+  self.assertEqual(row['state'],'athena-canonical-bytes-match')
+  self.assertTrue(row['policyBytesMatch']);self.assertEqual(row['sourcePinStatus'],'selected-revision-unavailable')
+  self.assertIsNone(row['selectedSourceCommit'])
+ def test_exact_bytes_cannot_clear_wrong_release_or_digest_format(self):
+  source,p=self.athena();claim=json.loads(p.read_text())
+  for key,value in [('version','999.0.0'),('digestFormat','opaque-fixture-private-text')]:
+   with self.subTest(key=key):
+    p.write_text(json.dumps({**claim,key:value}));before=snapshot(self.target);report=audit.audit(source,self.target,'test');row=report['locks'][1]
+    self.assertEqual(row['state'],'needs-review')
+    self.assertTrue(row['policyBytesMatch']);self.assertEqual(row['sourcePinStatus'],'claim-metadata-mismatch')
+    self.assertTrue(any(key in issue for issue in row['issues']))
+    self.assertNotIn('opaque-fixture-private-text',json.dumps(report));self.assertEqual(snapshot(self.target),before)
+ def test_matching_head_claim_does_not_authenticate_dirty_working_policy_bytes(self):
+  from repository_governance import MANIFEST, POLICY_FILES, apply, release
+  source,p=self.athena();claim=json.loads(p.read_text())
+  policy=source/POLICY_FILES[0];policy.write_bytes(policy.read_bytes()+b'\nSynthetic uncommitted policy.\n')
+  next_release=release(source,'99.0.0');(source/MANIFEST).write_text(json.dumps(next_release),encoding='utf-8')
+  apply(source,self.target)
+  altered=json.loads(p.read_text());altered['sourceWorkingTreeDirty']=False;p.write_text(json.dumps(altered))
+  before=snapshot(self.target);row=audit.audit(source,self.target,'test')['locks'][1]
+  self.assertEqual(row['sourceCommit'],claim['sourceCommit'])
+  self.assertEqual(row['state'],'athena-canonical-bytes-match')
+  self.assertTrue(row['policyBytesMatch']);self.assertEqual(row['sourcePinStatus'],'selected-source-drift')
+  self.assertEqual(snapshot(self.target),before)
 if __name__=='__main__':unittest.main()
