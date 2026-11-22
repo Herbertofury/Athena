@@ -16,4 +16,24 @@ export function change(value,id,input,now=Date.now()){
  project.revisions.push({...structuredClone(input),at:now});return validate(next);
 }
 export function archive(value,id){const next=validate(value),p=next.entries.find(p=>p.id===id);if(!p)throw Error('Unknown project');p.archived=!p.archived;return next;}
-export function browse(value,{query='',ownership='',stage='',archived=false}={}){const q=query.toLowerCase();return validate(value).entries.filter(p=>{const r=p.revisions.at(-1);return p.archived===archived&&(!ownership||r.ownership===ownership)&&(!stage||r.stage===stage)&&Object.values(r).join(' ').toLowerCase().includes(q);}).sort((a,b)=>b.revisions.at(-1).at-a.revisions.at(-1).at||a.id.localeCompare(b.id));}
+// The caller's workspace owns a validated snapshot. Retain its latest revisions
+// only for searching and sort once per snapshot; history/export stay unchanged.
+export function createBrowseIndex(snapshot){
+ const items=snapshot.entries.map(project=>({project,latest:project.revisions.at(-1),haystack:null}));
+ items.sort((a,b)=>b.latest.at-a.latest.at||a.project.id.localeCompare(b.project.id));
+ const active=items.reduce((count,{project})=>count+Number(!project.archived),0);
+ return {active,find({query='',ownership='',stage='',archived=false}={}){
+  const q=query.toLowerCase(),result=[];
+  for(const item of items){
+   const {project,latest}=item;
+   if(project.archived!==archived||(ownership&&latest.ownership!==ownership)||(stage&&latest.stage!==stage))continue;
+   if(q){
+    item.haystack??=Object.values(latest).join(' ').toLowerCase();
+    if(!item.haystack.includes(q))continue;
+   }
+   result.push(project);
+  }
+  return result;
+ }};
+}
+export function browse(value,options){return createBrowseIndex(validate(value)).find(options);}

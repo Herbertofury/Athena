@@ -20,3 +20,7 @@
 This page defines the product goal, not delivered feature parity. Learning, Engineering and reviewed Foundry authoring already share the Athena shell; native integration remains partial. The optional local engines have explicit startup and access boundaries. Full source-capability parity, user-data migration, dependency reconciliation and final native acceptance are unfinished. Check [integration evidence](https://github.com/Herbertofury/Athena/blob/main/docs/integration/STATUS.md) for identified revisions, tests and remaining gates.
 
 The highest delivery priority is completing native Athena integration while keeping learning and evidence-led R&D active. Source repositories remain preserved until capabilities, history, wiki/evidence, links, data, tests and dependencies have been reconciled and verified. Each source needs its own deletion-readiness verdict. A merged PR, attractive preview or passing unit test alone is not that verdict; this page does not authorize or announce source deletion.
+
+## Maintained cross-project pillars
+
+See the [product pillars and adoption register](https://github.com/Herbertofury/Athena/blob/main/docs/PRODUCT-PILLARS.md) for the owner's concrete shared requirements and repository-specific evidence. Keep relevant implementations and backlogs aligned without treating saved goals as delivered capabilities.

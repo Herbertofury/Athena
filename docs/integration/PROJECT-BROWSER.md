@@ -6,18 +6,54 @@ Nothing is automatically followed on social accounts, polled or synchronized. Ve
 
 The workspace has a separate schema-1 state under `projects`. Unknown fields survive validation/import. Imports refuse conflicts atomically, admit at most 100 projects / 16 MiB, and never silently truncate. Quota failures preserve the full in-memory draft for export. Use one editing tab; cross-tab compare-and-swap is not provided. Invalid persisted schemas disable mutation rather than overwriting existing data.
 
+## Browse large project collections
+
+The list opens with up to 24 matching projects. **Show next** appends more in
+the same most-recent-first order and sends keyboard focus to the first newly
+shown project. The result count reports both displayed and total matches.
+Search and filters still inspect every latest project revision, even records
+not displayed yet. Opening a project does not redraw its surrounding cards.
+
+## Transfer only one saved project
+
+Open the intended project and choose **Review portable copy**. The preview
+identifies the exact project ID, date and revision count. Inspect the exact
+JSON before downloading: it contains only this durable project (all dated
+revisions, links and project-level metadata). Other projects, workspace
+settings, learning data and Continuity notes are not included. The file is
+plain text, not an online share or a sync connection. If the selected saved
+project changes after review, Athena rejects the export and asks you to review
+again. Unsaved editor changes are not exported through this path.
+
+To reopen the file in another local profile, choose **Import backup**, inspect
+the proposed additions, and confirm. Identical projects are a no-op. Conflicts
+are refused; imports do not overwrite an existing ID. The browser store is
+checked again at confirmation and requires confirmed readback; this is not a
+cross-tab lock. The existing full-workspace export remains available, including
+its documented draft-recovery behavior.
+
+## Compare two saved revisions
+
+Open **Compare saved revisions** in a project’s detail to choose any two
+saved revision numbers. The latest two are selected first. Changed fields
+show exact before and after values, including empty fields. Original save
+order is preserved even when timestamps tie or go backward. You can reverse
+the pair or compare a revision with itself.
+
+Athena reads the selected project's saved snapshot when this panel first
+opens. Reopen the project to refresh the snapshot. Failed-save drafts and unknown extension fields are not compared. If that
+snapshot is unavailable, Athena does not substitute draft history. This is
+an optional read-only tool: the raw history and edit/backup controls still
+work without it. It does not restore revisions, compare repository files,
+send data, or establish Constellation parity.
+
+The design is complementary to the retained Project Constellation working-set
+and disposition history implementation (project-memory-core.js at
+82cea48448219c57fad8e0c22e986c8f56913286). No upstream code was copied.
+
 ## Verification
 
 - `node --test tests/projects.test.cjs`: revision, ownership, filters, reversible archive, malformed/unsafe URLs, serialization, additive/duplicate/conflicting import.
+- `node --test tests/project-compare.test.cjs`: revision comparisons, durable-only display, and optional failure isolation.
 - `node scripts/test_projects_browser.cjs`: Chromium create/edit/reload, filters, archive/restore, cancel, export/import, route navigation, responsive screenshot and failed-storage draft export. Included in learning CI. Local browser execution blocked by Chromium singleton socket EPERM, including escalation; no local browser pass claimed.
 - No game implementation is included. The owner's space action-RPG is a concept to track, not built content.
-
-## Read-only saved-revision comparison
-
-Project details offer **Compare saved revisions**, separately from raw history. Select two retained revision numbers to see exact before/after values for the eleven known project fields. Default selection is the latest pair; identical or reversed selections are allowed. Saved sequence is authoritative even if timestamps repeat or go backwards. Empty fields are labeled, source strings remain inert text, and unknown imported extension fields stay stored but are explicitly outside this comparison.
-
-The comparison is lazy and optional. Missing module/failure leaves the project editor and raw history usable. It does not save, restore, fetch, export, migrate schemas or compare repository code. Private history never leaves the workspace. No source retirement is authorized by this slice.
-
-Source inspection: Project-Constellation `extension/src/project-memory-core.js` at `82cea48448219c57fad8e0c22e986c8f56913286`, lines 72–86, compiles working sets and bounded disposition history. Athena's existing `model.mjs` preserves immutable project-content revisions. This is an original complementary comparison UI, not a claim that Constellation already had equivalent before/after functionality, and no upstream implementation was copied. Existing source licensing caution in PROJECT-CONTINUITY.md remains.
-
-Verify with `node --test tests/project-compare.test.cjs` and `node scripts/test_projects_browser.cjs`. The browser flow includes an actual edit then comparison/reselection. Pending PR276 history search and PR288 creative companion integrate separately: retain this optional host after raw-history rendering when composing them. No pending branch was overwritten.
