@@ -8,16 +8,46 @@ const recordId=value=>typeof value==='string'&&value===value.trim()&&/^[1-9][0-9
 const pinButton=document.querySelector('#pin-comparison'), clearButton=document.querySelector('#clear-comparison'), comparisonStatus=document.querySelector('#comparison-status');
 function element(tag,text){const node=document.createElement(tag);node.textContent=text;return node;}
 async function json(url){const response=await fetch(url,{cache:'no-store',credentials:'same-origin',redirect:'error',signal:AbortSignal.timeout(8000)});if(!response.ok)throw new Error(`Request failed (${response.status}). Your records were not changed.`);return response.json();}
+const MAX_RETAINED_TEXT_BYTES = 2097152;
 function display(text){return text===null?'Not retained, unsupported, or over the display budget.':text;}
 function checkedRecord(data,expected){
  if(!recordId(data?.id)||data.id!==expected)throw new Error('Saved record identity does not match the requested experiment.');
- for(const key of ['evidence','run'])if(data[key]!==null&&(typeof data[key]!=='string'||data[key].length>2097152))throw new Error('Record exceeds the comparison display budget.');
+ for(const key of ['evidence','run'])if(data[key]!==null&&(typeof data[key]!=='string'||data[key].length>MAX_RETAINED_TEXT_BYTES))throw new Error('Record exceeds the comparison display budget.');
  return data;
+}
+function textSection(data,pane,label,field,suffix){
+ const section=element('details',''),value=data[field];
+ const button=element('button',`Download ${label} text`);
+ button.type='button';button.disabled=value===null;
+ button.setAttribute('aria-label',`Download ${pane.toLowerCase()} experiment ${data.id}: ${label} text`);
+ const status=element('p','');status.setAttribute('role','status');
+ button.addEventListener('click',()=>{
+  if(button.disabled||!button.isConnected||data!==(pane==='Pinned'?pinned:current))return;
+  let url,link;
+  try{
+   if(!value.isWellFormed())throw Error('The retained text could not be encoded exactly.');
+   const bytes=new Blob([value],{type:'text/plain;charset=utf-8'});
+   if(bytes.size>MAX_RETAINED_TEXT_BYTES)throw Error('The retained text exceeds the download limit.');
+   url=URL.createObjectURL(bytes);
+   link=element('a','');link.href=url;link.download=`athena-experiment-${data.id}-${suffix}.txt`;
+   section.append(link);link.click();
+   status.textContent='Download requested. Keep this local evidence private unless you intend to share it.';
+  }catch{
+   status.textContent='Text was not downloaded. The retained record was not changed.';
+  }finally{
+   link?.remove();
+   if(url)setTimeout(()=>URL.revokeObjectURL(url),1500);
+  }
+ });
+ const pre=element('pre',display(value));pre.tabIndex=0;
+ section.append(element('summary',label),button,status,pre);
+ return section;
 }
 function recordPanel(data,label){
  const panel=element('article','');panel.className='record-panel';panel.dataset.recordId=data.id;
- panel.append(element('h3',`${label} · Experiment ${data.id}`),element('p',`${data.recorded_at} · ${data.decision}`),element('p',data.scope));
- for(const [label,value] of [['Evidence',data.evidence],['Complete run',data.run]]){const section=element('details','');section.append(element('summary',label));const pre=element('pre',display(value));pre.tabIndex=0;section.append(pre);panel.append(section);}return panel;
+ panel.append(element('h3',`${label} · Experiment ${data.id}`),element('p',`${data.recorded_at} · ${data.decision}`),element('p',data.scope),
+  textSection(data,label,'Evidence','evidence','evidence'),textSection(data,label,'Complete run','run','complete-run'));
+ return panel;
 }
 function render(){
  const active=loaded.get(current?.id)?.button??null;
@@ -26,6 +56,7 @@ function render(){
  comparisonStatus.textContent=pinned?`Pinned experiment ${pinned.id} for this page only. Select another record to compare; reload clears the pin.`:'No comparison pinned. Select a record, then pin it. No experiment runs from these controls.';
  if(!current)return;
  detail.replaceChildren(element('h2',pinned?'Compare retained evidence':`Experiment ${current.id}`));
+ detail.append(element('p','Downloads contain the exact text returned by this local record, not the original archive file. They may contain private information.'));
  if(pinned){
   detail.append(element('p','Side-by-side records, not a controlled benchmark or a recommendation. Check workload, environment, correctness and failures before interpreting differences.'));
   const state=pinned.id===current.id?'Same record selected. Choose a different experiment.': ['evidence','run'].map(key=>`${key}: ${pinned[key]===null||current[key]===null?'comparison unavailable (missing or over budget)':pinned[key]===current[key]?'retained text identical':'retained text differs'}`).join(' · ');
