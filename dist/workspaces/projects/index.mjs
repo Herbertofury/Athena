@@ -75,9 +75,58 @@ export function mount({container,state,setState,search='',signal,theme='dark',re
  function showMatchingRevisions(detail,project){
   const matches=matchingSavedRevisions(project,search);
   const region=el('section');region.setAttribute('aria-label','Matching saved revisions');
-  region.append(el('h4','Matching saved revisions'),el('p','Current project filters stay in effect. Search does not restore or edit old content.'));
-  const list=el('ul');for(const {index,fields} of matches)list.append(el('li',`Revision ${index+1} (${index===project.revisions.length-1?'current':'historical'}): ${fields.map(key=>fieldLabels[key]).join(', ')}`));
-  region.append(list);detail.append(region);
+  const status=el('p');status.setAttribute('role','status');
+  const list=el('ul'),review=el('section');review.hidden=true;review.setAttribute('aria-label','Reviewed saved revision');
+  let shown=0,opener=null;
+  const live=()=>!disposed&&region.isConnected&&selected===project.id;
+  function close(focus){
+   review.hidden=true;review.replaceChildren();
+   if(focus&&opener?.isConnected)opener.focus();
+   opener=null;
+  }
+  function open(index,from){
+   if(!live()||!list.contains(from))return;
+   close(false);
+   const saved=project.revisions[index];
+   try{
+    if(typeof readSavedProject==='function'){
+     const durable=readSavedProject(project.id);
+     if(durable?.id!==project.id||!Array.isArray(durable.revisions)||JSON.stringify(durable.revisions[index])!==JSON.stringify(saved))
+      throw Error('Saved revision changed');
+    }
+   }catch{
+    status.textContent='This saved revision cannot be verified. Reopen the project and search again.';return;
+   }
+   opener=from;status.textContent=`Showing ${shown} of ${matches.length} matching saved revisions.`;
+   const heading=el('h4',`Revision ${index+1}: ${saved.name}`);heading.tabIndex=-1;
+   review.append(heading,el('p',`Saved ${savedDate(saved.at)}. Read-only review; nothing was restored or changed. Recorded links have not been checked.`));
+   const descriptions=el('dl');
+   for(const key of ['ownership','stage','goal','next','blockers','decisions','resources','version']){
+    const value=el('dd');value.append(el('p',saved[key]||'Not recorded'));descriptions.append(el('dt',fieldLabels[key]),value);
+   }
+   review.append(descriptions);
+   for(const [key,label] of [['source','official source'],['release','release reference']]){
+    const link=createProjectReference(document,`Open reviewed revision ${index+1} ${label} (new tab)`,saved[key]);if(link)review.append(link);
+   }
+   const dismiss=button('Close revision review',()=>{if(live()&&review.contains(dismiss))close(true);});review.append(dismiss);
+   review.hidden=false;heading.focus();
+  }
+  const more=button('',()=>{if(live())append(true);});
+  function append(focus){
+   let first;
+   for(const {index,fields} of matches.slice(shown,shown+PAGE)){
+    const item=el('li'),labels=el('span',`Revision ${index+1} (${index===project.revisions.length-1?'current':'historical'}): ${fields.map(key=>fieldLabels[key]).join(', ')}`);
+    labels.dataset.matchingFields='';
+    const action=button(`Review revision ${index+1}`,()=>open(index,action));action.dataset.matchRevision=String(index+1);
+    item.append(labels,action);list.append(item);first??=action;shown++;
+   }
+   const remaining=matches.length-shown;
+   status.textContent=`Showing ${shown} of ${matches.length} matching saved revisions.`;
+   more.hidden=!remaining;more.textContent=`Show next ${Math.min(PAGE,remaining)} matching revisions`;
+   if(focus)first?.focus();
+  }
+  region.append(el('h4','Matching saved revisions'),el('p','Current project filters stay in effect. Review opens a saved copy without restoring or editing it.'),status,list,more,review);
+  detail.append(region);append(false);
  }
  function appendSavedHistory(detail,project){
   const history=el('details');history.id='saved-history';
