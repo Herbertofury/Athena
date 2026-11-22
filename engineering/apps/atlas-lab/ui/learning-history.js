@@ -7,10 +7,10 @@ const loaded=new Map(),collator=new Intl.Collator('en',{sensitivity:'base',numer
 const recordId=value=>typeof value==='string'&&value===value.trim()&&/^[1-9][0-9]{0,18}$/.test(value)&&BigInt(value)<=9223372036854775807n;
 const pinButton=document.querySelector('#pin-comparison'), clearButton=document.querySelector('#clear-comparison'), comparisonStatus=document.querySelector('#comparison-status');
 function element(tag,text){const node=document.createElement(tag);node.textContent=text;return node;}
-async function json(url){const response=await fetch(url,{cache:'no-store',credentials:'same-origin',signal:AbortSignal.timeout(8000)});if(!response.ok)throw new Error(`Request failed (${response.status}). Your records were not changed.`);return response.json();}
+async function json(url){const response=await fetch(url,{cache:'no-store',credentials:'same-origin',redirect:'error',signal:AbortSignal.timeout(8000)});if(!response.ok)throw new Error(`Request failed (${response.status}). Your records were not changed.`);return response.json();}
 function display(text){return text===null?'Not retained, unsupported, or over the display budget.':text;}
-function checkedRecord(data){
- if(!data||typeof data.id!=='string'||! /^[1-9][0-9]{0,18}$/.test(data.id))throw new Error('Unsupported record identity.');
+function checkedRecord(data,expected){
+ if(!recordId(data?.id)||data.id!==expected)throw new Error('Saved record identity does not match the requested experiment.');
  for(const key of ['evidence','run'])if(data[key]!==null&&(typeof data[key]!=='string'||data[key].length>2097152))throw new Error('Record exceeds the comparison display budget.');
  return data;
 }
@@ -35,7 +35,7 @@ function render(){
 }
 pinButton.addEventListener('click',()=>{if(!current)return;pinned=current;render();});
 clearButton.addEventListener('click',()=>{pinned=null;render();});
-async function show(id){const token=++selection;current=null;render();detail.replaceChildren(element('h2',`Experiment ${id}`),element('p','Loading recorded evidence…'));try{const data=checkedRecord(await json(`/api/learning/history/${id}`));if(token!==selection)return;current=data;render();history.replaceState(null,'',`/learning#${id}`);}catch(error){if(token===selection){current=null;render();detail.replaceChildren(element('h2','Unable to read this record'),element('p',error.message));}}}
+async function show(id){const token=++selection;current=null;render();detail.replaceChildren(element('h2',`Experiment ${id}`),element('p','Loading recorded evidence…'));try{const data=checkedRecord(await json(`/api/learning/history/${id}`),id);if(token!==selection)return;current=data;render();history.replaceState(null,'',`/learning#${id}`);}catch(error){if(token===selection){current=null;render();detail.replaceChildren(element('h2','Unable to read this record'),element('p',error.message));}}}
 function updateLoadedHistory(){
  const focused=document.activeElement,terms=search.value.slice(0,256).toLowerCase().trim().split(/\s+/).filter(Boolean);
  const rows=[...loaded.values()],order=sort.value;
@@ -87,7 +87,7 @@ async function load(){
  finally{if(epoch===listEpoch){loading=false;more.disabled=false;if(moreFocused&&!more.hidden&&document.activeElement===document.body)more.focus();}}
 }
 search.addEventListener('input',updateLoadedHistory);sort.addEventListener('change',updateLoadedHistory);
-more.addEventListener('click',load);load();if(/^#[1-9][0-9]*$/.test(location.hash))show(location.hash.slice(1));
+more.addEventListener('click',load);load();if(recordId(location.hash.slice(1)))show(location.hash.slice(1));
 
 const runButton=document.querySelector('#run-experiment'), runStatus=document.querySelector('#run-status');
 runButton.addEventListener('click',async()=>{

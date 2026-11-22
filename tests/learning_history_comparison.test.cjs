@@ -104,3 +104,12 @@ test('strict descending exact IDs reject a reversed page without changing prior 
  assert.deepEqual(visible(d).slice(-2),['Newer boundary / Baseline','Older boundary / Baseline']);
  assert.deepEqual(app.calls.map(x=>x.url),[url,next,next]);
 });
+
+test('an exact learning selection refuses a different returned experiment ID without pinning it',async()=>{
+ const app=mount(),d=app.document;await settle();
+ app.pending.set('/api/learning/history/1',Promise.resolve({ok:true,json:async()=>app.rows['2']}));
+ d.querySelector('#records [data-record-id="1"] button').click();await settle();
+ assert.match(d.querySelector('#detail').textContent,/identity does not match/i);
+ assert.equal(d.querySelector('#pin-comparison').disabled,true);
+ assert.equal(d.querySelector('#detail pre'),null);
+});
