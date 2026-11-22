@@ -1,6 +1,6 @@
-// Manual source cues only. No fetch, media loading, persistence, or inferred identity.
+// Manual source cues only. No fetch, media loading, automatic persistence, or inferred identity.
 const labels=Object.freeze({visible:'User-marked visible text',spoken:'User-marked spoken name',inferred:'Inference, unconfirmed'});
-const noteLimit=32_768,rowLimit=64;
+const noteLimit=32_768,rowLimit=64, fileByteLimit=256*1024;
 // Google publishes the minute/second form on youtu.be. Leave longer review
 // offsets as evidence only instead of assuming an undocumented URL syntax.
 const linkedStartLimitMs=3_600_000;
@@ -58,22 +58,70 @@ export function reviewVideoModCues(sourceText,notes){
  if(!cues.length)throw Error('Enter at least one local cue.');
  return {schema:1,kind:'manual-video-mod-cues',source,verification:'user-supplied-unverified',cues};
 }
+// Re-derive the schema and identity from the same local parser used for new
+// reviews. Formatting and consistent edits are fine; no input becomes trusted.
+const exactKeys=(value,keys)=>value&&typeof value==='object'&&!Array.isArray(value)&&
+ Object.keys(value).length===keys.length&&keys.every(key=>Object.hasOwn(value,key));
+export function parseVideoModCueFile(bytes){
+ const invalid=()=>Error('Invalid reviewed cue file. Use UTF-8 cue JSON up to 256 KiB with consistent source and cue fields, still marked unverified.');
+ try{
+  if(!(bytes instanceof Uint8Array)||bytes.byteLength>fileByteLimit)throw invalid();
+  const json=new TextDecoder('utf-8',{fatal:true}).decode(bytes),data=JSON.parse(json);
+  if(!exactKeys(data,['schema','kind','source','verification','cues'])||data.schema!==1||
+     data.kind!=='manual-video-mod-cues'||data.verification!=='user-supplied-unverified'||
+     !Array.isArray(data.cues)||!data.cues.length||data.cues.length>rowLimit)throw invalid();
+  const source=canonicalSource(data.source?.url),sourceKeys=Object.keys(source);
+  if(!exactKeys(data.source,sourceKeys)||sourceKeys.some(key=>data.source[key]!==source[key]))throw invalid();
+  let draft='',prior=0;
+  for(const cue of data.cues){
+   if(!exactKeys(cue,['line','span','start_ms','end_ms','basis','text'])||!Number.isSafeInteger(cue.line)||
+      cue.line<=prior||cue.line>noteLimit||typeof cue.span!=='string'||cue.span.length>45||
+      !Object.hasOwn(labels,cue.basis)||typeof cue.basis!=='string'||
+      typeof cue.text!=='string'||cue.text.length>512)throw invalid();
+   draft+=(prior?'\n':'')+'\n'.repeat(cue.line-prior-1)+cue.span+'|'+cue.basis+'|'+cue.text;
+   prior=cue.line;
+  }
+  const record=reviewVideoModCues(source.url,draft);
+  if(record.cues.length!==data.cues.length||record.cues.some((cue,index)=>
+     Object.keys(cue).some(key=>!Object.is(cue[key],data.cues[index][key]))))throw invalid();
+  // JSON.parse alone would silently accept a last-key-wins spoof. Scan the
+  // lexical string tokens only after the bounded, known schema is verified.
+  const containers=[];
+  for(const [token,quoted,keyEnd] of json.matchAll(/("(?:[^"\\]|\\.)*")(\s*:)?|[{}\[\]]/g)){
+   if(keyEnd){
+    const key=JSON.parse(quoted),keys=containers.at(-1);
+    if(keys.has(key))throw invalid();
+    keys.add(key);
+   }else if(token==='{')containers.push(new Set());
+   else if(token==='[')containers.push(null);
+   else if(token==='}'||token===']')containers.pop();
+  }
+  return record;
+ }catch{throw invalid();}
+}
+
 export function mountVideoModEvidence(host){
  const doc=host.ownerDocument;
  const form=doc.createElement('form');
  form.innerHTML='<p>Review timestamped mod clues you already collected. One per line: <code>0:12..0:14 | visible | Example mod name</code>. Use <code>visible</code>, <code>spoken</code>, or <code>inferred</code>. Only your labels are recorded; Athena does not identify or verify a mod.</p><p><label>Video or post URL <input type="url" name="source" maxlength="2048" required></label></p><p><label>Local timestamped cues <textarea name="notes" maxlength="32768" rows="5" required></textarea></label></p><button type="submit">Review local cues</button><button type="button" data-clear>Clear preview</button>';
+ const reopen=doc.createElement('p');
+ reopen.innerHTML='<label>Reopen reviewed cue JSON <input type="file" accept="application/json,.json" data-reopen-cues></label>';
+ const fileInput=reopen.querySelector('input');
  const status=doc.createElement('p'),result=doc.createElement('div');
  const source=form.querySelector('[name="source"]'),notes=form.querySelector('[name="notes"]');
  status.setAttribute('role','status');
- status.textContent='Local session only. Nothing is fetched, uploaded or saved.';
- let disposed=false;
- function clear(){if(disposed)return;result.replaceChildren();status.textContent='Preview cleared. Inputs are retained.';}
- function edited(){if(!disposed&&result.childNodes.length){result.replaceChildren();status.textContent='Inputs changed. Review them again.';}}
- function render(event){
-  event.preventDefault();if(disposed)return;
-  result.replaceChildren();
-  try{
-   const review=reviewVideoModCues(source.value,notes.value);
+ status.textContent='Local session only. Nothing is fetched, uploaded or saved automatically.';
+ let disposed=false,generation=0;
+ const downloads=new Map();
+ function clear(){if(disposed)return;generation++;result.replaceChildren();status.textContent='Preview cleared. Inputs are retained.';}
+ function edited(){
+  if(disposed)return;
+  generation++;
+  if(result.childNodes.length)result.replaceChildren();
+  status.textContent='Inputs changed. Review them again.';
+ }
+ function show(review,reopened=false){
+   result.replaceChildren();
    const link=doc.createElement('a');link.href=review.source.url;link.target='_blank';link.rel='noopener noreferrer';
    link.textContent='Open supplied '+review.source.provider+' source';
    const list=doc.createElement('ol');
@@ -99,14 +147,46 @@ export function mountVideoModEvidence(host){
     result.append(hint);
    }
    const details=doc.createElement('details'),summary=doc.createElement('summary'),pre=doc.createElement('pre');
-   summary.textContent='Inspect structured cue evidence';pre.textContent=JSON.stringify(review,null,2);
-   details.append(summary,pre);result.append(link,list,details);
+   const serialized=JSON.stringify(review,null,2);
+   summary.textContent='Inspect structured cue evidence';pre.textContent=serialized;
+   const download=doc.createElement('button');download.type='button';download.textContent='Download reviewed cue JSON';
+   download.onclick=()=>{
+    if(disposed||!result.contains(download))return;
+    try{
+     const url=URL.createObjectURL(new Blob([serialized+'\n'],{type:'application/json'}));
+     downloads.set(url,setTimeout(()=>{downloads.delete(url);URL.revokeObjectURL(url);},1000));
+     const a=doc.createElement('a');a.href=url;a.download='athena-video-mod-cues.json';a.click();
+    }catch{status.textContent='Cue download could not start. The reviewed evidence is still displayed.';}
+   };
+   details.append(summary,pre);result.append(link,list,download,details);
    const inferred=review.cues.filter(cue=>cue.basis==='inferred').length;
-   status.textContent=review.cues.length+' cue(s), '+inferred+' marked inferred. Not verified mod identities or download links.';
-  }catch(error){status.textContent=error.message;}
+   status.textContent=(reopened?'Reopened local file. Draft unchanged. ':'')+review.cues.length+' cue(s), '+inferred+
+     ' marked inferred. Not verified mod identities or download links.';
  }
- const button=form.querySelector('[data-clear]');
- form.addEventListener('submit',render);form.addEventListener('input',edited);button.addEventListener('click',clear);
- host.append(form,status,result);
- return {dispose(){if(disposed)return;disposed=true;form.removeEventListener('submit',render);form.removeEventListener('input',edited);button.removeEventListener('click',clear);form.remove();status.remove();result.remove();}};
+ function render(event){
+  event.preventDefault();if(disposed)return;generation++;result.replaceChildren();
+  try{show(reviewVideoModCues(source.value,notes.value));}
+  catch(error){status.textContent=error.message;}
+ }
+ async function readFile(){
+  const file=fileInput.files?.[0];fileInput.value='';
+  if(disposed||!file)return;
+  const ticket=++generation;
+  try{
+   if(file.size>fileByteLimit)throw Error();
+   const buffer=await file.arrayBuffer();
+   if(disposed||ticket!==generation)return;
+   show(parseVideoModCueFile(new Uint8Array(buffer)),true);
+  }catch{
+   if(!disposed&&ticket===generation)status.textContent='Cue file refused. Use valid unverified Athena cue JSON up to 256 KiB. Draft and any previous review are unchanged.';
+  }
+ }
+ const button=form.querySelector('[data-clear]');form.addEventListener('submit',render);form.addEventListener('input',edited);button.addEventListener('click',clear);
+ fileInput.addEventListener('change',readFile);host.append(form,reopen,status,result);
+ return {dispose(){
+  if(disposed)return;disposed=true;generation++;
+  for(const [url,timer] of downloads){clearTimeout(timer);URL.revokeObjectURL(url);}downloads.clear();
+  form.removeEventListener('submit',render);form.removeEventListener('input',edited);button.removeEventListener('click',clear);
+  fileInput.removeEventListener('change',readFile);form.remove();reopen.remove();status.remove();result.remove();
+ }};
 }

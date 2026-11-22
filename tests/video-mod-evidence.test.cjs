@@ -106,3 +106,87 @@ test('timed actions open only on activation, and only for YouTube offsets below 
   }
  }finally{tray?.dispose();window.open=oldOpen;globalThis.fetch=oldFetch;}
 });
+
+test('explicit download and reopen losslessly preserve the reviewed artifact and leave local drafts intact',async()=>{
+ const {mountVideoModEvidence}=await import(modulePath);
+ const {document,Event,window}=parseHTML('<body><section></section></body>'),host=document.querySelector('section');
+ const view=mountVideoModEvidence(host),downloads=[],blobs=new Map(),revoked=[],settle=()=>new Promise(resolve=>setImmediate(resolve));
+ const old={create:URL.createObjectURL,revoke:URL.revokeObjectURL,fetch:globalThis.fetch,open:window.open};
+ const create=document.createElement.bind(document);
+ document.createElement=(tag,...opts)=>{const node=create(tag,...opts);
+  if(tag==='a')node.click=()=>downloads.push({href:node.href,name:node.download});return node;
+ };
+ URL.createObjectURL=blob=>{const url='blob:synthetic-'+blobs.size;blobs.set(url,blob);return url;};
+ URL.revokeObjectURL=url=>revoked.push(url);
+ globalThis.fetch=()=>assert.fail('Local portability does not fetch');
+ window.open=()=>assert.fail('Local portability does not navigate');
+ try{
+  const file=host.querySelector('input[type="file"][data-reopen-cues]');
+  assert.ok(file,'the reviewer can reopen a selected portable cue file');
+  const form=host.querySelector('form'),url=form.querySelector('[name="source"]'),draft=form.querySelector('[name="notes"]');
+  const preview=()=>host.querySelector('pre')?.textContent;
+  const state=()=>host.querySelector('[role="status"]')?.textContent;
+  const load=(size,arrayBuffer)=>{
+   Object.defineProperty(file,'files',{configurable:true,value:[{size,arrayBuffer}]});
+   file.dispatchEvent(new Event('change'));
+  };
+  url.value=source+'&session=not-retained';
+  draft.value='0:41.091..0:43.4 | visible | Exact α\n\n0:44 | inferred | <img src=x>';
+  form.dispatchEvent(new Event('submit'));
+  const review=preview(),exportButton=[...host.querySelectorAll('button')].find(x=>x.textContent==='Download reviewed cue JSON');
+  assert.ok(exportButton);assert.deepEqual(downloads,[]);
+  exportButton.click();
+  assert.equal(downloads[0].name,'athena-video-mod-cues.json');
+  const selected=blobs.get(downloads[0].href);
+  assert.equal(await selected.text(),review+'\n');assert.doesNotMatch(review,/not-retained/);
+  url.value='https://x.com/Example/status/2000';draft.value='local draft, not part of the chosen file';
+  form.dispatchEvent(new Event('input'));assert.equal(preview(),undefined);
+  exportButton.click();assert.equal(downloads.length,1,'an edited review cannot still export stale bytes');
+  load(selected.size,()=>selected.arrayBuffer());await settle();
+  assert.equal(preview(),review);assert.match(state(),/Reopened local file. Draft unchanged/);
+  assert.equal(url.value,'https://x.com/Example/status/2000');assert.match(draft.value,/local draft/);
+  assert.match(host.textContent,/Inference, unconfirmed/);
+  assert.equal(host.querySelector('img,iframe,video,audio'),null);
+  const wrong=new Blob([review.replace('user-supplied-unverified','official')]);
+  load(wrong.size,()=>wrong.arrayBuffer());await settle();
+  assert.match(state(),/Cue file refused/);assert.equal(preview(),review);assert.match(draft.value,/local draft/);
+  load(256*1024+1,()=>assert.fail('Oversized file must not be read'));await settle();
+  assert.match(state(),/Cue file refused/);assert.equal(preview(),review);
+  let release;
+  load(selected.size,()=>new Promise(resolve=>{release=resolve;}));
+  draft.value='0:25 | spoken | Newer draft';form.dispatchEvent(new Event('input'));
+  form.dispatchEvent(new Event('submit'));
+  release(await selected.arrayBuffer());await settle();
+  assert.match(preview(),/Newer draft/);assert.doesNotMatch(preview(),/Exact α/);
+  load(selected.size,()=>new Promise(resolve=>{release=resolve;}));
+  view.dispose();release(await selected.arrayBuffer());await settle();
+  assert.equal(host.children.length,0);assert.deepEqual(revoked,[downloads[0].href]);
+ }finally{view.dispose();URL.createObjectURL=old.create;URL.revokeObjectURL=old.revoke;globalThis.fetch=old.fetch;window.open=old.open;}
+});
+
+test('portable cue parser accepts structurally valid manual edits but never promotes them',async()=>{
+ const {reviewVideoModCues,parseVideoModCueFile}=await import(modulePath);
+ assert.equal(typeof parseVideoModCueFile,'function','reviewed structured evidence has a checked re-entry path');
+ const encode=value=>new TextEncoder().encode(JSON.stringify(value));
+ const original=reviewVideoModCues('https://www.bilibili.com/video/BV1xx411c7mD/?p=2&session=discard','\n0:41.091..0:43.4 | visible | 名称 α\n\n1:07 | spoken | mentioned "name"\n0:20.8 | inferred | Possible | not confirmed');
+ assert.deepEqual(parseVideoModCueFile(encode(original)),original);
+ const edited={...original,cues:original.cues.map((x,i)=>i===0?{...x,text:'A corrected manual cue'}:x)};
+ assert.deepEqual(parseVideoModCueFile(encode(edited)),edited);
+ assert.equal(parseVideoModCueFile(encode(edited)).verification,'user-supplied-unverified');
+ const bad=[
+  {...original,verification:'official'}, {...original,schema:2}, {...original,extra:'must not be discarded'},
+  {...original,source:{...original.source,part:3}},
+  {...original,source:{...original.source,url:original.source.url+'&session=not-retained'}},
+  {...original,cues:[{...original.cues[0],start_ms:41092}]},
+  {...original,cues:[{...original.cues[0],line:40000}]},
+  {...original,cues:[{...original.cues[0],basis:'official'}]},
+  {...original,cues:[...original.cues].reverse()},
+  {...original,cues:[original.cues[0],original.cues[0]]},
+  {...original,cues:[{...original.cues[0],release_url:'https://example.invalid/official'}]}
+ ];
+ for(const value of bad)assert.throws(()=>parseVideoModCueFile(encode(value)),/Invalid reviewed cue file/);
+ const duplicate=JSON.stringify(original).replace('"verification":','"\\u0076erification":"official","verification":');
+ assert.throws(()=>parseVideoModCueFile(new TextEncoder().encode(duplicate)),/Invalid reviewed cue file/);
+ assert.throws(()=>parseVideoModCueFile(new Uint8Array([255])),/Invalid reviewed cue file/);
+ assert.throws(()=>parseVideoModCueFile(new Uint8Array(256*1024+1)),/Invalid reviewed cue file/);
+});

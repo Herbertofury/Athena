@@ -1,12 +1,15 @@
 /* Unit tests for browser-check assertions/wiring. These do not run Chromium. */
 const test=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto');
 const {runMediaBrowserChecks}=require('../scripts/media_browser_checks.cjs');
+const {Readable}=require('node:stream');
 const root=path.resolve(__dirname,'../dist');
 const origin='http://127.0.0.1:12345';
 const hashes=()=>Object.fromEntries(['index.mjs','event-log-view.mjs','media-event-recorder.mjs','media-core.mjs','video-mod-evidence.mjs'].map(name=>[name,crypto.createHash('sha256').update(fs.readFileSync(path.join(root,'workspaces/engineering/media',name))).digest('hex')]));
 function prepared(){return [{cards:2,pendingImages:4,automaticImages:0,players:0,fixtureSHA256:'auto'},hashes(),{events:260,state:{render_failures:2},exactVisibleJSON:true},['youtube','native','hls'].map(mode=>({mode,viewRenderFailures:mode==='youtube'?1:0,retainedFailureCount:1,newAttemptPlayingCallbacks:1,calls:{play:0},fixtureSHA256:'1'.repeat(64)}))];}
 function cueSequence({playerCount=0,workspaceAfter='unchanged',externalRequest,sourceHref='https://www.youtube.com/watch?v=f0iYkTUx5Rs',cues=[{basis:'visible',start_ms:41091,end_ms:43400},{basis:'inferred',start_ms:44000,end_ms:null}],stalePreviewCount=0,staleTimedActions=0,reviewSource='https://www.youtube.com/watch?v=f0iYkTUx5Rs',
- openedEarly=[],openArgs=['https://youtu.be/f0iYkTUx5Rs?t=0m41s','_blank','noopener,noreferrer']}={}){
+ openedEarly=[],openArgs=['https://youtu.be/f0iYkTUx5Rs?t=0m41s','_blank','noopener,noreferrer'],
+ reopenedText,downloadedText,reopenedDraft='changed draft'}={}){
+ const reviewed=JSON.stringify({source:{url:reviewSource},cues}),file={name:'athena-video-mod-cues.json',mimeType:'application/json'};
  return [
   ['evaluate',null,'unchanged'],['evaluate','.shell > #main',undefined],
   ['count','#video-mod-cues -> form',0],['click','Review mod cues from a video'],
@@ -15,11 +18,18 @@ function cueSequence({playerCount=0,workspaceAfter='unchanged',externalRequest,s
   ['click','button:Review local cues'],['waitFor','/Inference, unconfirmed/'],
   ['count','#video-mod-cues -> img,video,audio,iframe',playerCount],
   ['href','link:Open supplied YouTube source',sourceHref],
-  ['textContent','#video-mod-cues -> pre',JSON.stringify({source:{url:reviewSource},cues})],
+  ['textContent','#video-mod-cues -> pre',reviewed],
   ['evaluate',null,openedEarly],['click','button:Open video at cue on line 1 on YouTube'],['evaluate',null,[openArgs]],
+  ['url',null,origin+'/#media'],['event','download',downloadedText??reviewed+'\n'],['click','button:Download reviewed cue JSON'],
   ['fill','Local timestamped cues','changed draft'],['count','#video-mod-cues -> pre',stalePreviewCount],
   ['count','button:/Open video at cue/',staleTimedActions],
-  ['evaluate',null,workspaceAfter,externalRequest]
+  ['select','Reopen reviewed cue JSON',{...file,buffer:Buffer.from(reviewed+'\n')}],
+  ['waitFor','/Reopened local file. Draft unchanged/'],
+  ['textContent','#video-mod-cues -> pre',reopenedText??reviewed],['inputValue','Local timestamped cues',reopenedDraft],
+  ['select','Reopen reviewed cue JSON',{...file,buffer:Buffer.from(JSON.stringify({...JSON.parse(reviewed),verification:'official'}))}],
+  ['waitFor','/Cue file refused/'],
+  ['textContent','#video-mod-cues -> pre',reviewed],['inputValue','Local timestamped cues','changed draft'],
+  ['url',null,origin+'/#media'],['evaluate',null,workspaceAfter,externalRequest]
  ];
 }
 async function invoke(values,stats={},cueOptions){const names=[],report={},cue=cueSequence(cueOptions);let index=0,fixtureSHA,active,listener,cueStarted=false;
@@ -36,6 +46,7 @@ async function invoke(values,stats={},cueOptions){const names=[],report={},cue=c
   getByRole:(role,{name})=>{assert.equal(key,'#video-mod-cues');return locator(role+':'+name);},
   count:async()=>step('count',key),click:async()=>step('click',key),waitFor:async()=>step('waitFor',key),
   fill:async(value)=>assert.equal(value,step('fill',key)),textContent:async()=>step('textContent',key),
+  inputValue:async()=>step('inputValue',key),setInputFiles:async value=>assert.deepEqual(value,step('select',key)),
   getAttribute:async(name)=>{assert.equal(name,'href');return step('href',key);}
  });
  await runMediaBrowserChecks({root,report,origin,page:{
@@ -44,6 +55,8 @@ async function invoke(values,stats={},cueOptions){const names=[],report={},cue=c
   on:(event,handler)=>{assert.equal(event,'request');assert.ok(active);assert.equal(listener,undefined);listener=handler;cueStarted=true;stats.subscribed=(stats.subscribed||0)+1;},
   off:(event,handler)=>{assert.equal(event,'request');assert.equal(handler,listener);listener=undefined;stats.unsubscribed=(stats.unsubscribed||0)+1;},
   locator:(target)=>{assert.equal(target,'[data-cue-browser-fixture]');assert.ok(listener);return locator(target);},
+  url:()=>step('url',null),
+  waitForEvent:async type=>{const bytes=step('event',type);return {suggestedFilename:()=>'athena-video-mod-cues.json',createReadStream:async()=>Readable.from([Buffer.from(bytes)])};},
   evaluate:async(fn,args)=>{
    if(listener){if(String(fn).includes('cueController?.unmount()')){stats.cleanup=(stats.cleanup||0)+1;return;}
     if(args)assert.match(String(fn),/document\.querySelector\(selector\)[\s\S]*main\.append\(container\)/);
@@ -58,7 +71,7 @@ async function invoke(values,stats={},cueOptions){const names=[],report={},cue=c
 test('CI browser coverage validates all five result groups before reporting them',async()=>{
  const result=await invoke(prepared());assert.equal(result.names.length,5);assert.match(result.names[1],/manually supplied mod cues/);assert.equal(result.index,4);
  assert.equal(result.report.mediaTerminalStates.length,3);assert.equal(result.report.mediaRecovery.exactVisibleJSON,true);
- assert.deepEqual(result.report.manualVideoModCues,{rows:2,externalRequests:0,workspaceUnchanged:true,timedOpenIntent:true,scope:'synthetic manually attributed cues and intercepted open, no media or mod discovery'});
+ assert.deepEqual(result.report.manualVideoModCues,{rows:2,externalRequests:0,workspaceUnchanged:true,timedOpenIntent:true,portableRoundTrip:true,scope:'synthetic manually attributed cues, intercepted timed open, and local round trip; no media or mod discovery'});
  assert.deepEqual(result.stats,{routes:2,unroutes:2,subscribed:1,cleanup:1,unsubscribed:1});
 });
 test('CI assertions reject changed served module bytes',async()=>{const values=prepared();values[1]['event-log-view.mjs']='0'.repeat(64);await assert.rejects(()=>invoke(values),{code:'ERR_ASSERTION'});});
@@ -69,6 +82,7 @@ test('Cue browser fixture rejects dirty state, player, provider request, wrong r
   [{sourceHref:'https://youtu.be/f0iYkTUx5Rs'},'https://youtu.be/f0iYkTUx5Rs'],
   [{cues:[]},[]],[{stalePreviewCount:1},1],[{staleTimedActions:1},1],
   [{reviewSource:'https://youtu.be/f0iYkTUx5Rs?t=0m41s'},'https://youtu.be/f0iYkTUx5Rs?t=0m41s'],
+  [{downloadedText:'truncated artifact'},'truncated artifact'],[{reopenedText:'wrong cue'},'wrong cue'],[{reopenedDraft:'overwritten draft'},'overwritten draft'],
   [{openedEarly:[['unwanted']]},[['unwanted']]],[{openArgs:['https://youtu.be/f0iYkTUx5Rs?t=0m42s','_blank','noopener,noreferrer']},[['https://youtu.be/f0iYkTUx5Rs?t=0m42s','_blank','noopener,noreferrer']]]
  ]){
   const stats={};await assert.rejects(()=>invoke(prepared(),stats,options),error=>{assert.equal(error.code,'ERR_ASSERTION');assert.deepEqual(error.actual,actual);return true;});
