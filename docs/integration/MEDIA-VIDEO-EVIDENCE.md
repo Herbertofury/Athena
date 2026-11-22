@@ -14,9 +14,20 @@ Athena preserves supplied order, time points/ranges, literal cue text (apart fro
 declared evidence basis. The reviewer marks every cue unverified; especially
 do not turn an inference into a mod match or download link. The clickable
 source uses only the accepted provider identity, retaining Bilibili part
-when supplied. A source link does not prove post media exists or seek
-support. Broken or ambiguous inputs refuse review without rendering a partial
-result. The structured evidence is available for manual inspection and copy.
+when supplied. Broken or ambiguous inputs refuse review without rendering a
+partial result. The structured evidence is available for manual inspection and
+copy.
+
+For a YouTube cue starting before one hour, **Open video at cue** opens a new
+tab only when selected. It asks YouTube to start the full video at the start
+of the cue, rounded down to the preceding whole second; it does not stop at a
+range's end or verify playback. The review keeps the canonical source URL and
+original millisecond timing unchanged. YouTube cues at one hour or later,
+Bilibili videos and X posts retain the plain source link only. YouTube's
+[sharing documentation](https://support.google.com/youtube/answer/57741?co=GENIE.Platform%3DDesktop&hl=en)
+describes sharing from a start time, and [Google for Developers](https://developers.google.com/web/shows/lazyweb/2015/episode-9#supercharging_page_load)
+publishes matching minute/second links. [Bilibili's documentation](https://player.bilibili.com/)
+describes times for its embed player, not the plain source URL used here.
 
 This is a bounded session-only step toward reviewing previously collected
 video evidence. It does not read frames, crawl channels, parse unannotated

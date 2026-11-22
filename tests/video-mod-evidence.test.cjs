@@ -67,3 +67,42 @@ test('cue preview keeps content inert, clears edited previews explicitly, and do
   form.dispatchEvent(new Event('submit'));assert.equal(host.childNodes.length,0);
  }finally{tray?.dispose();globalThis.fetch=oldFetch;}
 });
+
+test('timed actions open only on activation, and only for YouTube offsets below one hour',async()=>{
+ const {mountVideoModEvidence}=await import(modulePath);
+ const {document,Event,window}=parseHTML('<body><section></section></body>'),host=document.querySelector('section');
+ const oldOpen=window.open,oldFetch=globalThis.fetch,opened=[];
+ window.open=(...args)=>opened.push(args);
+ globalThis.fetch=()=>assert.fail('Cue review must not fetch');
+ let tray;
+ try{
+  tray=mountVideoModEvidence(host);
+  const form=host.querySelector('form'),url=form.querySelector('[name="source"]'),notes=form.querySelector('[name="notes"]');
+  const buttons=()=>[...host.querySelectorAll('ol button')];
+  const review=(value)=>{url.value=value;form.dispatchEvent(new Event('submit'));};
+  notes.value=['0:00.3 | visible | Zero','0:41.999..0:44.123 | inferred | Start only','59:59.999 | spoken | Cap minus one','1:00:00 | visible | At cap','23:59:59.999 | visible | Still valid evidence'].join('\n');
+  review('https://youtu.be/f0iYkTUx5Rs?t=3m21s&si=discard#ignore');
+  assert.equal(buttons().length,3);
+  assert.equal(host.querySelectorAll('a').length,1,'No outbound timed href is inserted before clicking');
+  assert.deepEqual(opened,[]);
+  for(const button of buttons()){
+   assert.equal(button.getAttribute('type'),'button');
+   button.click();
+  }
+  assert.deepEqual(opened,['0m00s','0m41s','59m59s'].map(t=>['https://youtu.be/f0iYkTUx5Rs?t='+t,'_blank','noopener,noreferrer']));
+  const reviewJson=JSON.parse(host.querySelector('pre').textContent);
+  assert.equal(reviewJson.source.url,source);
+  assert.deepEqual(reviewJson.cues.map(cue=>[cue.start_ms,cue.end_ms]),[[300,null],[41999,44123],[3599999,null],[3600000,null],[86399999,null]]);
+  const stale=buttons()[0];form.dispatchEvent(new Event('input'));stale.click();
+  assert.equal(buttons().length,0);assert.equal(opened.length,3);
+  for(const [input,plain] of [
+   ['https://www.bilibili.com/video/BV1xx411c7mD/?p=2&unused=discard','https://www.bilibili.com/video/BV1xx411c7mD/?p=2'],
+   ['https://twitter.com/example/status/10000?s=20','https://x.com/example/status/10000']
+  ]){
+   review(input);
+   assert.equal(buttons().length,0);
+   assert.equal(host.querySelector('a').getAttribute('href'),plain);
+   assert.equal(opened.length,3);
+  }
+ }finally{tray?.dispose();window.open=oldOpen;globalThis.fetch=oldFetch;}
+});

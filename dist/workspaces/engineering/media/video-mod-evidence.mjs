@@ -1,6 +1,9 @@
 // Manual source cues only. No fetch, media loading, persistence, or inferred identity.
 const labels=Object.freeze({visible:'User-marked visible text',spoken:'User-marked spoken name',inferred:'Inference, unconfirmed'});
 const noteLimit=32_768,rowLimit=64;
+// Google publishes the minute/second form on youtu.be. Leave longer review
+// offsets as evidence only instead of assuming an undocumented URL syntax.
+const linkedStartLimitMs=3_600_000;
 const sourceError=()=>Error('Use a YouTube video, Bilibili video, or X post HTTPS URL without credentials.');
 
 function canonicalSource(input){
@@ -75,7 +78,25 @@ export function mountVideoModEvidence(host){
    link.textContent='Open supplied '+review.source.provider+' source';
    const list=doc.createElement('ol');
    for(const cue of review.cues){
-    const entry=doc.createElement('li');entry.textContent=cue.span+' · '+labels[cue.basis]+' · '+cue.text;list.append(entry);
+    const entry=doc.createElement('li');entry.textContent=cue.span+' · '+labels[cue.basis]+' · '+cue.text;
+    if(review.source.provider==='YouTube'&&cue.start_ms<linkedStartLimitMs){
+     const open=doc.createElement('button');
+     open.type='button';open.textContent='Open video at cue';
+     open.setAttribute('aria-label','Open video at cue on line '+cue.line+' on YouTube');
+     open.onclick=()=>{
+      if(disposed||!result.contains(open))return;
+      const seconds=Math.floor(cue.start_ms/1000);
+      const offset=Math.floor(seconds/60)+'m'+String(seconds%60).padStart(2,'0')+'s';
+      doc.defaultView?.open('https://youtu.be/'+review.source.id+'?t='+offset,'_blank','noopener,noreferrer');
+     };
+     entry.append(doc.createTextNode(' '),open);
+    }
+    list.append(entry);
+   }
+   if(review.source.provider==='YouTube'){
+    const hint=doc.createElement('p');
+    hint.textContent='Timed YouTube links open the full video at the cue start, rounded down to the whole second. For offsets of one hour or more, use the source link and seek manually.';
+    result.append(hint);
    }
    const details=doc.createElement('details'),summary=doc.createElement('summary'),pre=doc.createElement('pre');
    summary.textContent='Inspect structured cue evidence';pre.textContent=JSON.stringify(review,null,2);
