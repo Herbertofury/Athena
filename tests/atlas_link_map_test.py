@@ -1,4 +1,5 @@
 """Offline target checks: an archive map is neither a redirect nor proof of HTTP availability."""
+import hashlib
 import importlib.util
 import json
 from pathlib import Path
@@ -44,10 +45,23 @@ class MappingSemantics(unittest.TestCase):
     def test_research_routes_keep_query_instead_of_losing_selection(self):
         row = self.mapped('https://herbertofury.github.io/Engineering-Atlas/explorer/?plan=planned-agent-protocol-v1#catalog')
         self.assertEqual(row['preserved_or_native_destination'], mapper.PAGES + '#research?plan=planned-agent-protocol-v1')
-    def test_static_asset_is_not_falsely_replaced_with_homepage(self):
+    def test_static_asset_targets_exact_archived_blob_instead_of_unshipped_pages_path(self):
         suffix = 'card-receiver-lab/receiver.de24fd43535f3039.js'
+        relative = 'engineering/docs/' + suffix
         row = self.mapped('https://herbertofury.github.io/Engineering-Atlas/' + suffix)
-        self.assertEqual(row['preserved_or_native_destination'], mapper.PAGES + 'engineering/docs/' + suffix)
+        self.assertEqual(row['preserved_or_native_destination'],
+                         mapper.ATHENA + '/blob/af594fd2cdd5c00f01178ee353965a54b01b05d7/' + relative)
+        self.assertIn('not a served Pages path', row['classification'])
+        source_files = json.loads((ROOT / 'migration/engineering-atlas/cutover-2026-11-13/source-manifest.json').read_text())['files']
+        original = next(value for value in source_files if value['source_path'] == 'docs/' + suffix)
+        self.assertEqual(original['relation'], 'exact')
+        self.assertEqual(original['source_blob'], '1d166a6819a6e527109f512ac99b9377b5ea5c05')
+        self.assertEqual(hashlib.sha256((ROOT / relative).read_bytes()).hexdigest(), original['source_sha256'])
+    def test_other_static_files_are_not_assumed_to_have_a_pages_or_archive_target(self):
+        row = self.mapped('https://herbertofury.github.io/Engineering-Atlas/card-receiver-lab/index.html')
+        self.assertTrue((ROOT / 'engineering/docs/card-receiver-lab/index.html').is_file())
+        self.assertIsNone(row['preserved_or_native_destination'])
+        self.assertTrue(row['classification'].startswith('unresolved'))
     def test_creation_route_is_not_a_preserved_issue_body(self):
         row = self.mapped('https://github.com/Herbertofury/Engineering-Atlas/issues/new/choose')
         self.assertEqual(row['preserved_or_native_destination'], mapper.ATHENA + '/issues/new/choose')

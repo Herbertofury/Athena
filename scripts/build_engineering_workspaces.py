@@ -97,6 +97,64 @@ def scoped_css(path,kind):
     return s
 
 
+# Native-only link metadata, rendered without fetching provider content.
+RESEARCH_SOURCE_GUIDES=r'''const sourceGuides = [
+  {
+    title: 'Software comparison references',
+    revision: 'cc5690a31637c8b04e2aea6c4a55463e20643a2d',
+    directory: 'rammcodes-tool-references-2026-11-21',
+    summary: 'Compare evidence traceability, clean-room feature behavior, owned-component porting and profile-first optimization. Upstream descriptions are not Athena test results.',
+    topics: [
+      ['REA', 'https://rea.tools/', 'Reverse Engineer Anything'],
+      ['Craft Anything', 'https://github.com/storytold/craft-anything'],
+      ['rust-anything', 'https://github.com/erkamyaman/rust-anything'],
+      ['fast-anything', 'https://github.com/EL4CTEO/fast-anything'],
+    ],
+  },
+  {
+    title: 'UI design reference comparison',
+    revision: '605d95155b3bd3ba40a36bea9fc215eef020e436',
+    directory: 'ui-reference-comparison-2026-11-21',
+    summary: 'Study hierarchy, design critique, restrained texture and component states. Keep the existing brand; check contrast, keyboard focus and reduced motion before changing a screen.',
+    topics: [
+      ['UberDesigner', 'https://uberdesigner.ai/', 'Haelith, Haelith Landing'],
+      ['Unslop', 'https://github.com/heydamir/unslop'],
+      ['Grainient Supply', 'https://grainient.supply/', 'Gradient Supply'],
+      ['HorizonX', 'https://horizonx.so/', 'Horizon X'],
+      ['Cue Design', 'https://www.cuedesign.space/', 'Cuedesign'],
+    ],
+  },
+];
+const references = element('details', {id: 'source-reference-guides', class: 'layer-guide'},
+  element('summary', {}, 'Source reference guides'),
+  element('p', {}, 'Published source notes only. No benchmark ranking, comparison shortlist or software installation. Outward links open only when chosen.'),
+  element('p', {id: 'source-reference-count', role: 'status', 'aria-live': 'polite'}),
+  element('ul', {id: 'source-reference-results'}));
+$('catalog').querySelector('.search-row').after(references);
+
+const referenceTokens = value => String(value).normalize('NFKC').toLowerCase().split(/[^\p{L}\p{N}]+/u).filter(Boolean);
+let previousReferenceQuery;
+function renderReferenceGuides(query) {
+  if (previousReferenceQuery === query) return;
+  previousReferenceQuery = query;
+  const tokens = referenceTokens(query);
+  const matches = sourceGuides.filter(guide => {
+    const searchable = referenceTokens([guide.title, guide.summary, ...guide.topics.flatMap(([name, , aliases]) => [name, aliases])].join(' '));
+    return tokens.every(token => searchable.some(value => value.includes(token)));
+  });
+  if (tokens.length && matches.length) references.open = true;
+  $('source-reference-count').textContent = matches.length
+    ? matches.length + ' source reference guide' + (matches.length === 1 ? '' : 's')
+    : 'No source reference guide matches this search.';
+  $('source-reference-results').replaceChildren(...matches.map(guide => {
+    const target = REPO + '/blob/' + guide.revision + '/research/' + guide.directory + '/README.md';
+    const names = guide.topics.flatMap(([name, url], i) => i ? [' · ', link(name, url)] : [link(name, url)]);
+    return element('li', {class: 'reference-guide'},
+      element('h3', {}, link(guide.title, target)), element('p', {}, guide.summary), element('p', {}, ...names));
+  }));
+}
+'''
+
 def build():
     outputs={};origins=[]
     def emit(path,data,source=None):
@@ -108,7 +166,13 @@ def build():
     r=SOURCE/'explorer';src=(r/'explorer.mjs').read_text();split=src.index("const $ =")
     imports=src[:split].replace('./__CORE__','./explorer-core.mjs');code=src[split:]
     code=replace(code,'document.getElementById(id)','root.getElementById(id)')
+    repo_marker="const REPO = 'https://github.com/Herbertofury/Athena';"
+    code=replace(code,repo_marker,repo_marker+'\n'+RESEARCH_SOURCE_GUIDES.rstrip())
+    ref_query_marker="  if ($('search').value !== state.q) $('search').value = state.q;"
+    code=replace(code,ref_query_marker,ref_query_marker+'\n  renderReferenceGuides(state.q);')
     code=replace(code,"let state = parseState(location.search);","let state = parseState(route.includes('?')?route.slice(route.indexOf('?')+1):typeof initialState==='string'?initialState:initialState?.query||'');\nif(search!==undefined)state.q=String(search).slice(0,300);")
+    initial_query="if(search!==undefined)state.q=String(search).slice(0,300);"
+    code=replace(code,initial_query,initial_query+'\nrenderReferenceGuides(state.q);')
     code=replace(code,"history.replaceState(null, '', location.pathname + (query ? '?' + query : '') + location.hash);","navigate?.('#research?'+(query||'q='),{replace:true});")
     code=replace(code,"window.addEventListener('popstate', () => { state = parseState(location.search); render(); });",'// The Athena shell owns history and route changes.')
     code=replace(code,"fetch($('app').dataset.catalog)","fetch(new URL('./catalog.json',import.meta.url),{signal:lifetime.signal})")
@@ -169,11 +233,26 @@ def build():
     code=replace(code," finally{previewBusy=false;$('retry-media')"," finally{previewBusy=false;if(!disposed)$('retry-media')")
     code=code.replace('URL.createObjectURL(','createObjectURL(').replace('URL.revokeObjectURL(','revokeObjectURL(').replace('atlas-real-media-receipt.json','athena-media-receipt.json')
     html=body(m/'index.template.html')
+    html=replace(html,'<section id="cards"','<details class="receipt" id="video-mod-cues"><summary>Review mod cues from a video</summary><div id="video-mod-cue-body"></div></details><section id="cards"')
     html=html.replace('<a href="?event_view=baseline">Baseline event view</a>','<button type="button" data-event-mode="baseline">Baseline event view</button>').replace('<a href="?event_view=bounded">Test bounded event view</a>','<button type="button" data-event-mode="bounded">Test bounded event view</button>')
     html=html.replace('<section id="cards"','<p id="search-status" role="status"></p><section id="cards"')
     pre=imports+'\nexport async function mount({container,search="",theme="dark",notify,navigate,state:initialState,route="",signal:outerSignal}={}){\n'+LIFECYCLE
     emit(Path('media/style.css'),scoped_css(m/'media.css','media'),m/'media.css')
     pre+='  root.innerHTML='+json.dumps(html)+';const sheet=document.createElement("link");sheet.rel="stylesheet";sheet.href=new URL("./style.css",import.meta.url).href;root.prepend(sheet);setTheme(theme);\n'
+    pre+='''
+  const cuePanel=root.getElementById('video-mod-cues'),cueBody=root.getElementById('video-mod-cue-body');
+  let cueMounted=false,cueLoading=false;
+  cuePanel.addEventListener('toggle',async()=>{
+    if(!cuePanel.open||disposed||cueMounted||cueLoading)return;
+    cueLoading=true;cueBody.textContent='Opening local cue review…';
+    try{
+      const {mountVideoModEvidence}=await import('./video-mod-evidence.mjs');
+      if(disposed)return;
+      cueBody.replaceChildren();cleanups.push(mountVideoModEvidence(cueBody).dispose);cueMounted=true;
+    }catch{if(!disposed)cueBody.textContent='Local cue review is unavailable. Close and reopen it to retry; other media tools still work.';}
+    finally{cueLoading=false;}
+  });
+'''
     pre+='  let blockedReceipt=null;const savedReceipt=initialState?.receipt?.schema_version===1 && Array.isArray(initialState.receipt.events)?JSON.parse(JSON.stringify(initialState.receipt)):null;\n'
     pre+='  root.addEventListener("click",e=>{const button=e.target.closest?.("[data-event-mode]");if(button){const params=new URLSearchParams({event_view:button.dataset.eventMode,q:search});navigate?.("#media?"+params);}});\n'
     post='''
@@ -188,7 +267,7 @@ def build():
 }
 '''
     emit(Path('media/index.mjs'),pre+code+post,m/'media.js')
-    deps=['compare.mjs','local-compare.mjs','gallery-comparison.mjs','media-event-recorder.mjs','media-events.mjs','bilibili-player.mjs','resource-loader.mjs','media-core.mjs','event-log-view.mjs','public-fixtures.json','vendor/hls-1.7.3.min.js','vendor/HLS-LICENSE.txt','vendor/provenance.json']
+    deps=['compare.mjs','local-compare.mjs','gallery-comparison.mjs','video-mod-evidence.mjs','media-event-recorder.mjs','media-events.mjs','bilibili-player.mjs','resource-loader.mjs','media-core.mjs','event-log-view.mjs','public-fixtures.json','vendor/hls-1.7.3.min.js','vendor/HLS-LICENSE.txt','vendor/provenance.json']
     for name in deps:copy(Path('media')/name,m/name)
     p=m/'preview-loader.mjs';s=p.read_text();s=replace(s,'{concurrency=4,','{signal=null,concurrency=4,');s=replace(s,"if(timer!==null)clearTimer(timer);timer=null;ok?resolve():reject(error);","if(timer!==null)clearTimer(timer);timer=null;signal?.removeEventListener('abort',onAbort);ok?resolve():reject(error);")
     s=replace(s,'    timer=setTimer(()=>{',"    const onAbort=()=>{try{entry.image.removeAttribute('src');}catch{notify('image_abort_cleanup_failed',{source:entry.image.dataset.source,attempt:entry.attempts});}finish(false,Error('Workspace unloaded'));};\n    if(signal?.aborted){onAbort();return;}signal?.addEventListener('abort',onAbort,{once:true});\n    timer=setTimer(()=>{")

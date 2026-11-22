@@ -78,7 +78,8 @@ def check_url(url, timeout=15):
         with _locks[urlsplit(target).hostname]:
             opener = build_opener(PublicRedirect())
             # HEAD first avoids fetching large binaries. A bounded GET retries
-            # common HEAD refusals and soft CDN behavior; no response is saved.
+            # common HEAD refusals and soft CDN behavior, including 410 responses
+            # that disagree with GET; confirmed GET 404/410 still fail strict audit.
             for method in ("HEAD", "GET"):
                 entry["method"] = method
                 try:
@@ -93,7 +94,8 @@ def check_url(url, timeout=15):
                         break
                 except HTTPError as e:
                     entry.update(status=e.code, final_url=e.geturl())
-                    if method == "HEAD" and e.code in {400, 403, 404, 405, 406, 501}:
+                    if method == "HEAD" and e.code in {400, 403, 404, 405, 406, 410, 501}:
+                        entry["head_status"] = e.code
                         continue
                     break
             entry["outcome"] = classify(entry["status"])

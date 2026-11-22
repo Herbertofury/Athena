@@ -33,7 +33,18 @@ Projection allowlist:
 - `music_routes`: id, artist_id, label, status
 - `history`: id, event_type, created_at
 
-`raw_json`, `payload_json`, URL and Spotify URI columns, notes, routing and other unlisted descriptions are never projected. **This is not sanitization or proof of nonsensitive content.** Any identifier, label, mode, event type or timestamp can itself contain private information or secrets. Only select data you are authorized to inspect. The output remains private and must not be uploaded, committed, shared or used as a public fixture without a separate review and authorization. Arbitrary text is not classified or scrubbed.
+`raw_json`, `payload_json`, URL and Spotify URI columns, notes, routing and other unlisted descriptions are not projected by the default metadata export. **This is not sanitization or proof of nonsensitive content.** Any identifier, label, mode, event type or timestamp can itself contain private information or secrets. Only select data you are authorized to inspect. The output remains private and must not be uploaded, committed, shared or used as a public fixture without a separate review and authorization. Arbitrary text is not classified or scrubbed.
+
+### Explicit raw history preservation
+
+Only if you need to retain the original history text, use a history-only selection from an independently prepared standalone backup and write to a new private path outside your repository:
+
+```sh
+python3 tools/foundry-recovery/archive/query.py --source PREPARED.sqlite --table history \
+  --private-export --history-payloads --destination NEW-PRIVATE-HISTORY.json
+```
+
+The distinct schema-2 artifact retains the original ID, type, timestamp and exact SQLite text value of each payload, with no repair, interpretation, replay or import. Rows are exported by ascending original ID, the source's autoincremented insertion sequence, not by wall-clock timestamp; timestamps can tie or move backwards and are kept unchanged. Preserve the original SQLite backup too. Raw text can contain credentials and personal data; keep the export offline and never publish it. This export requires POSIX mode 0600 and refuses non-POSIX systems, including native Windows; destinations inside Git checkouts are refused, and the stdout receipt contains no rows. The history payload limit is 256 KiB per row, with the existing overall output, input and row bounds retained; an over-limit row refuses the whole operation. This is not an Athena-native history format, a complete database migration, or a way around the standalone backup requirement.
 
 ## Safety and limits
 

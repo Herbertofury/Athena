@@ -2,21 +2,21 @@
 
 [Catalog](Software-Catalog) · [Decision guides](Software-Decision-Guides) · [Method](Software-Methodology)
 
-Reviewed 2026-11-16. The integrated catalog contains **1069 applications in 373 categories**. It is a substantial expansion, not a claim of complete software coverage. 102 categories currently contain one application and need stronger comparison sets.
+Reviewed 2026-11-16. The integrated catalog contains **1073 applications in 374 categories**. It is a substantial expansion, not a claim of complete software coverage. 102 categories currently contain one application and need stronger comparison sets.
 
 ## Evidence that remains open
 
 | Field | Unresolved records |
 | --- | ---: |
-| Pricing model | 251 |
+| Pricing model | 254 |
 | License classification | 29 |
-| Dated maintenance evidence | 417 |
+| Dated maintenance evidence | 420 |
 
 The counts overlap. Unknown pricing can mean that free source code was verified but the distribution terms were not established. Unverified maintenance is not the same as an abandoned project. All nonlegacy records with known licensing, pricing, platform or download claims must include corresponding source annotations; the build rejects missing mappings. An annotation identifies the source's intended role and is not a substitute for reading it.
 
 There are also 73 mentions of alternatives outside this catalog. The refresh queue records their names and referring records as research leads; they are not counted as verified applications or promoted to ranked choices.
 
-The [machine-readable refresh queue](https://github.com/Herbertofury/Athena/blob/main/research/software-expansion-2026-11-15/refresh-queue.json) contains 570 records needing more research and 0 source URLs due for review. Every cited source has its own age: checking a homepage again does not refresh an older license or platform document. Run `python3 scripts/report_software_coverage.py --output software-refresh-report.json` to recompute the queue using today's date. Pull requests and the weekly source audit retain this report alongside HTTP outcomes and real-browser evidence. A 90-day review interval is a scheduling policy, not a factual expiration date.
+The [machine-readable refresh queue](https://github.com/Herbertofury/Athena/blob/main/research/software-expansion-2026-11-15/refresh-queue.json) contains 573 records needing more research and 0 source URLs due for review. Every cited source has its own age: checking a homepage again does not refresh an older license or platform document. Run `python3 scripts/report_software_coverage.py --output software-refresh-report.json` to recompute the queue using today's date. Pull requests and the weekly source audit retain this report alongside HTTP outcomes and real-browser evidence. A 90-day review interval is a scheduling policy, not a factual expiration date.
 
 ## Next coverage areas
 

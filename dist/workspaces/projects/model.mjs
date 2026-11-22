@@ -15,24 +15,50 @@ export function change(value,id,input,now=Date.now()){
  let project=next.entries.find(p=>p.id===id);if(!project){project={id,archived:false,revisions:[]};next.entries.push(project);}
  project.revisions.push({...structuredClone(input),at:now});return validate(next);
 }
-export function archive(value,id){const next=validate(value),p=next.entries.find(p=>p.id===id);if(!p)throw Error('Unknown project');p.archived=!p.archived;return next;}
-// Search only the declared project text fields; unknown imported metadata stays
-// preserved but is not accidentally exposed as search evidence.
-export const searchableFields=['name','ownership','stage','goal','next','blockers','decisions','resources','source','version','release'];
-export function matchingRevisions(project,query,{history=false}={}){
- const q=String(query).trim().toLowerCase();if(!q)return [];
- const found=[];
- for(let index=project.revisions.length-1;index>=0;index--){
-  if(!history&&index!==project.revisions.length-1)break;
-  const revision=project.revisions[index];
-  const fields=searchableFields.filter(key=>revision[key].toLowerCase().includes(q));
-  if(fields.length)found.push({index,fields});
+export function archive(value,id,archived){
+ const next=validate(value),p=next.entries.find(p=>p.id===id);
+ if(!p)throw Error('Unknown project');
+ if(archived!==undefined&&typeof archived!=='boolean')throw Error('Invalid archive state');
+ p.archived=archived??!p.archived;
+ return next;
+}
+// Only declared text is searchable; unknown backup fields stay untouched and private.
+const searchableFields=['name','ownership','stage','goal','next','blockers','decisions','resources','source','version','release'];
+const queryText=query=>String(query).trim().toLowerCase();
+function hasHistoricalMatch(project,q){
+ for(let i=project.revisions.length-2;i>=0;i--){
+  const revision=project.revisions[i];
+  if(searchableFields.some(key=>revision[key].toLowerCase().includes(q)))return true;
  }
- return found;
+ return false;
 }
-export function browse(value,{query='',ownership='',stage='',archived=false,history=false}={}){
- const q=String(query).trim();return validate(value).entries.filter(p=>{
-  const r=p.revisions.at(-1);
-  return p.archived===archived&&(!ownership||r.ownership===ownership)&&(!stage||r.stage===stage)&&(!q||matchingRevisions(p,q,{history}).length>0);
- }).sort((a,b)=>b.revisions.at(-1).at-a.revisions.at(-1).at||a.id.localeCompare(b.id));
+export function matchingSavedRevisions(project,query){
+ const q=queryText(query),matches=[];
+ if(!q)return matches;
+ for(let i=project.revisions.length-1;i>=0;i--){
+  const fields=searchableFields.filter(key=>project.revisions[i][key].toLowerCase().includes(q));
+  if(fields.length)matches.push({index:i,fields});
+ }
+ return matches;
 }
+// Sort once for a validated workspace snapshot. Do not preindex older revision
+// bodies; only an explicit historical query scans them after current filters.
+export function createBrowseIndex(snapshot){
+ const items=snapshot.entries.map(project=>({project,latest:project.revisions.at(-1),searchable:null}));
+ items.sort((a,b)=>b.latest.at-a.latest.at||a.project.id.localeCompare(b.project.id));
+ const active=items.reduce((count,{project})=>count+Number(!project.archived),0);
+ return {active,find({query='',ownership='',stage='',archived=false,history=false}={}){
+  const q=queryText(query),result=[];
+  for(const item of items){
+   const {project,latest}=item;
+   if(project.archived!==archived||(ownership&&latest.ownership!==ownership)||(stage&&latest.stage!==stage))continue;
+   if(q){
+    item.searchable??=searchableFields.map(key=>latest[key].toLowerCase());
+    if(!item.searchable.some(text=>text.includes(q))&&(!history||!hasHistoricalMatch(project,q)))continue;
+   }
+   result.push(project);
+  }
+  return result;
+ }};
+}
+export function browse(value,options){return createBrowseIndex(validate(value)).find(options);}

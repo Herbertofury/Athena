@@ -87,3 +87,66 @@ test('Research renders preserved Athena evidence links while keeping original At
   assert.ok([...root.querySelectorAll('a[href]')].every(link=>!link.href.includes('Herbertofury/Engineering-Atlas')));assert.equal(env.calls.length,1);
  }finally{controller?.unmount();env.restore();}
 });
+
+test('Research reference guides use existing search without changing ranked candidates or fetching providers',async()=>{
+ const env=setup();let controller;
+ try{
+  controller=await(await component('research')).mount({container:env.container});
+  const root=env.container.shadowRoot,panel=root.getElementById('source-reference-guides');
+  const ranked=()=>[...root.querySelectorAll('[data-candidate]')].map(card=>card.dataset.candidate);
+  const initialRanked=ranked();
+  const catalog=JSON.parse(fs.readFileSync(path.join(base,'research/catalog.json'),'utf8'));
+  const {parseState,queryCatalog}=await import(pathToFileURL(path.join(base,'research/explorer-core.mjs')).href);
+  assert.deepEqual(initialRanked,queryCatalog(catalog,parseState('')).visible.map(card=>card.id));
+  assert.equal(panel.querySelector('summary').textContent,'Source reference guides');
+  assert.equal(panel.querySelectorAll('li').length,2);
+  const links=[...panel.querySelectorAll('a[href]')];
+  assert.equal(links.length,11);assert.ok(links.every(x=>x.getAttribute('rel')==='noopener noreferrer'));
+  assert.equal(links.find(x=>x.textContent==='Cue Design').getAttribute('href'),'https://www.cuedesign.space/');
+  assert.equal(panel.querySelector('button,iframe,img,[download]'),null);
+  const searchCases=[
+   ['Reverse Engineer Anything','Software comparison references'],['ｒｕｓｔ anything','Software comparison references'],
+   ['FAST-ANYTHING','Software comparison references'],['Craft Anything','Software comparison references'],
+   ['Haelith','UI design reference comparison'],['Gradient Supply','UI design reference comparison'],
+   ['Horizon X','UI design reference comparison'],['Cuedesign','UI design reference comparison'],['Unslop','UI design reference comparison'],
+  ];
+  for(const [query,title] of searchCases){
+   controller.setSearch(query);
+   assert.deepEqual([...panel.querySelectorAll('h3')].map(el=>el.textContent),[title],query);
+   assert.deepEqual(ranked(),queryCatalog(catalog,parseState(controller.exportState().query)).visible.map(card=>card.id),query);
+  }
+  controller.setSearch('Cue Kit');
+  assert.equal(panel.querySelectorAll('li').length,0,'separate MIT kit must not alias to paid Cue Design');
+  assert.match(panel.querySelector('[role=status]').textContent,/No source reference guide/);
+  controller.setSearch('');
+  assert.equal(panel.querySelectorAll('li').length,2);
+  assert.deepEqual(ranked(),initialRanked);
+  assert.deepEqual(controller.exportState().shortlist,[]);
+  assert.deepEqual(env.calls.map(String),[pathToFileURL(path.join(base,'research/catalog.json')).href]);
+ }finally{controller?.unmount();env.restore();}
+});
+
+test('generated Media mounts manual mod cue review lazily without mixing it into the media receipt',async()=>{
+ const env=setup();let controller;
+ try{
+  controller=await(await component('media')).mount({container:env.container});
+  const root=env.container.shadowRoot, panel=root.getElementById('video-mod-cues');
+  assert.equal(controller.ready,true);
+  assert.equal(panel.querySelector('form'),null);
+  const receipt=JSON.stringify(controller.exportState()),requests=env.calls.length;
+  panel.open=true;panel.dispatchEvent(new env.window.Event('toggle'));
+  let form;
+  for(let i=0;i<100&&!form;i++){form=panel.querySelector('form');if(!form)await new Promise(resolve=>setTimeout(resolve,5));}
+  assert.ok(form,panel.textContent);
+  form.querySelector('[name="source"]').value='https://x.com/Example/status/1000000';
+  form.querySelector('[name="notes"]').value='0:41.091..0:43.4 | inferred | User clue only';
+  form.dispatchEvent(new env.window.Event('submit'));
+  assert.match(panel.textContent,/Inference, unconfirmed/);
+  assert.equal(JSON.parse(panel.querySelector('pre').textContent).cues[0].start_ms,41091);
+  assert.equal(panel.querySelector('video,audio,iframe,img'),null);
+  assert.equal(env.calls.length,requests);
+  assert.equal(JSON.stringify(controller.exportState()),receipt);
+  controller.unmount();
+  assert.equal(root.childNodes.length,0);
+ }finally{controller?.unmount();env.restore();}
+});

@@ -7,6 +7,7 @@ from pathlib import Path
 import sqlite3
 import stat
 import tempfile
+from types import SimpleNamespace
 import unittest
 from unittest.mock import patch
 
@@ -47,6 +48,71 @@ class ArchiveTests(unittest.TestCase):
         self.assertEqual(stat.S_IMODE(dest.stat().st_mode),0o600);self.assertTrue(receipt['exported']);self.assertEqual(self.db.read_bytes(),self.original)
         with self.assertRaises(q.Refusal):q.inspect(self.db,['history'],private_export=True,destination=dest)
         self.assertEqual(dest.read_text(),data)
+    def test_explicit_history_preservation_retains_raw_rows_in_id_order(self):
+        payload = '{ "value": "' + ('é' * 33000) + '" }\n'
+        rows = [
+            (7, 'SYNTHETIC_HISTORY_TYPE', payload, 1456789012),
+            (8, 'SYNTHETIC_CLOCK_ROLLBACK', '{ "x": 1, "x": 9007199254740993 }\r\n', 1456789000),
+            (12, 'SYNTHETIC_SAME_SECOND', ' [44,  false] ', 1456789012),
+        ]
+        with sqlite3.connect(self.db) as c:
+            c.execute('UPDATE history SET id=?,event_type=?,payload_json=?,created_at=?', rows[0])
+            c.executemany('INSERT INTO history(id,event_type,payload_json,created_at) VALUES(?,?,?,?)',
+                          reversed(rows[1:]))
+        self.assertGreater(len(payload.encode('utf8')), 64*1024)
+        before = self.db.read_bytes()
+        dest = self.root/'private-history.json'
+        out = io.StringIO()
+        args = ['--source', str(self.db), '--table', 'history', '--private-export',
+                '--history-payloads', '--destination', str(dest)]
+        with contextlib.redirect_stdout(out):
+            self.assertEqual(q.main(args), 0)
+        original_output = dest.read_bytes()
+        receipt = json.loads(out.getvalue())
+        data = json.loads(original_output)
+        self.assertEqual(receipt['schema'], 2)
+        self.assertEqual(receipt['counts'], {'history': 3})
+        self.assertFalse(receipt['lossless_migration'])
+        self.assertEqual(data['kind'], 'original-foundry-history-preservation')
+        self.assertEqual(data['tables']['history'], [
+            dict(id=i, event_type=kind, payload_json=raw, created_at=stamp)
+            for i, kind, raw, stamp in rows
+        ])
+        self.assertNotIn('SYNTHETIC_', out.getvalue())
+        self.assertNotIn('9007199254740993', out.getvalue())
+        self.assertNotIn(str(self.db), out.getvalue())
+        self.assertEqual(stat.S_IMODE(dest.stat().st_mode), 0o600)
+        refused = io.StringIO()
+        with contextlib.redirect_stdout(refused):
+            self.assertEqual(q.main(args), 1)
+        self.assertNotIn(str(dest), refused.getvalue())
+        self.assertEqual(dest.read_bytes(), original_output)
+        self.assertEqual(self.db.read_bytes(), before)
+    def test_history_preservation_refuses_non_posix_before_writing(self):
+        dest = self.root/'private-history.json'
+        with patch.object(q, 'os', SimpleNamespace(name='nt')):
+            with self.assertRaisesRegex(q.Refusal, 'POSIX'):
+                q.inspect(self.db, ['history'], private_export=True, destination=dest, history_payloads=True)
+        self.assertFalse(dest.exists())
+        self.assertEqual(self.db.read_bytes(), self.original)
+    def test_history_preservation_refuses_mixed_modes_and_over_bound(self):
+        dest=self.root/'history.json'
+        for selection, private_export in [(None,True),(['history','music_routes'],True),(['history'],False)]:
+            with self.subTest(selection=selection, private_export=private_export), self.assertRaises(q.Refusal):
+                q.inspect(self.db,selection,private_export=private_export,destination=dest,history_payloads=True)
+            self.assertFalse(dest.exists())
+        (self.root/'.git').write_text('gitdir: test-fixture')
+        with self.assertRaises(q.Refusal):
+            q.inspect(self.db,['history'],private_export=True,destination=dest,history_payloads=True)
+        self.assertFalse(dest.exists())
+        (self.root/'.git').unlink()
+        with sqlite3.connect(self.db) as c:
+            c.execute('UPDATE history SET payload_json=?',('é'*(q.MAX_HISTORY_PAYLOAD//2+1),))
+        before=self.db.read_bytes()
+        with self.assertRaises(q.Refusal):
+            q.inspect(self.db,['history'],private_export=True,destination=dest,history_payloads=True)
+        self.assertFalse(dest.exists())
+        self.assertEqual(self.db.read_bytes(),before)
     def test_wal_sidecars_journal_symlinks_reserved_destinations(self):
         for suffix in ('-wal','-shm','-journal'):
             side=Path(str(self.db)+suffix);side.write_bytes(b'fixture')

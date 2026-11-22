@@ -7,7 +7,8 @@ export function mount({container, state, search = '', setState, signal, theme = 
   const root = container.shadowRoot || container.attachShadow({mode: 'open'});
   let data, error = '', disposed = false, showIgnored = false, editing = null, project = '';
   const urls = new Set();
-  try { data = state === undefined ? fresh() : validate(state); }
+  let committed;
+  try { data = state === undefined ? fresh() : validate(state); committed=JSON.stringify(state)??''; }
   catch (exception) { error = 'Stored continuity data could not be opened. It has not been overwritten: ' + exception.message; data = null; }
   root.innerHTML = `<h2>Project continuity</h2><p>Source-attributed decisions, next actions, resources and blockers shared in Athena. Manual local notes, not an automatic chat capture or a verified completion detector. Do not paste credentials.</p><p id="notice" role="status"></p>
     <form><label>Project<input name="project" required maxlength="200"></label><label>Kind<select name="kind"><option value="decision">Decision</option><option value="next-action">Next action</option><option value="resource">Resource</option><option value="blocker">Blocker</option></select></label><label>Note<textarea name="text" required maxlength="10000"></textarea></label><label>Source URL (optional HTTPS)<input name="source" type="url"></label><button type="submit">Save note</button><button type="button" id="cancel" hidden>Cancel revision</button></form>
@@ -72,11 +73,18 @@ export function mount({container, state, search = '', setState, signal, theme = 
     renderContext();
     if (restoreFocus) [...list.querySelectorAll('button[data-action]')].find(item => item.dataset.action === restoreFocus.action && item.dataset.id === restoreFocus.id && item.dataset.dependencyId === restoreFocus.dependencyId)?.focus();
   }
+  function persistDraft() {
+    try {
+      const saved = setState?.(data,{reviewedContinuityWrite:committed}) === true;
+      if (saved) committed = JSON.stringify(data);
+      return {saved, conflict:false};
+    } catch (exception) { return {saved:false, conflict:exception?.code==='CONTINUITY_WRITE_CONFLICT'}; }
+  }
   function commit(action) {
     try {
       data = apply(data, action);
-      const saved = setState?.(data);
-      notice.textContent = saved === true ? 'Saved in this browser. Export a backup.' : 'Not saved to durable browser storage. Keep this page open and export the local draft.';
+      const {saved,conflict} = persistDraft();
+      notice.textContent = saved ? 'Saved in this browser. Export a backup.' : conflict ? 'Not saved. Saved Continuity changed. Export the local draft before reloading Athena.' : 'Not saved to durable browser storage. Keep this page open and export the local draft.';
       render(); return true;
     } catch (exception) { notice.textContent = exception.message; return false; }
   }
@@ -111,9 +119,8 @@ export function mount({container, state, search = '', setState, signal, theme = 
       // Merge against the current draft after the read, never a stale captured state.
       const result = mergeBackup(data, incoming);
       data = result.data;
-      let saved = false;
-      try { saved = setState?.(data); } catch { /* Keep the admitted draft exportable. */ }
-      notice.textContent = saved === true ? `Imported ${result.added} notes; ${result.unchanged} identical notes retained. Saved in this browser. Export a backup.` : 'Import is not saved to durable browser storage. Keep this page open and export the local draft.';
+      const {saved,conflict} = persistDraft();
+      notice.textContent = saved ? `Imported ${result.added} notes; ${result.unchanged} identical notes retained. Saved in this browser. Export a backup.` : conflict ? 'Import not saved. Saved Continuity changed. Export the local draft before reloading Athena.' : 'Import is not saved to durable browser storage. Keep this page open and export the local draft.';
       try { render(); } catch { notice.textContent = saved === true ? 'Import saved, but display failed. Reload to inspect the stored notes.' : 'Import draft retained, but display failed. Keep this page open and export the local draft.'; }
     } catch {
       if (!disposed && generation === importGeneration) notice.textContent = 'Import refused: use a valid UTF-8 Continuity backup up to 16 MiB and 100 total notes, without conflicting IDs, duplicate keys, lossy numbers or metadata. Existing notes were not changed.';
