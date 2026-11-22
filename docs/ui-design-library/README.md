@@ -45,6 +45,7 @@ Current inventory and inspection limits: [Keshav study queue](kshv-study-queue.m
 
 ## Evidence collected
 
+- [Five UI references: source comparison](../../research/ui-reference-comparison-2026-11-21/README.md): official-source patterns and tradeoffs, not product adoption or a redesign.
 - [Source studies](source-studies.md): pinned Gradii and Colors source, with durability and licensing caveats; Three.js official study candidates.
 - [Rendered observations](visual-studies.md): Compact and Sieve composition plus proposed original implementation plans. Behavior and performance remain untested.
 - [Complete sandbox queue](kshv-study-queue.md): all 18 indexed examples; catalog evidence states are authoritative.

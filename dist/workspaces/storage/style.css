@@ -1,0 +1,13 @@
+:host{display:block;color:#e6edff;--panel:#131e36;--line:#7586a570;--muted:#b9c5da;--focus:#b0dfff}
+:host([data-theme=light]){color:#142138;--panel:#edf2fa;--line:#63769d;--muted:#334465;--focus:#1d3d84}
+.deck{display:grid;gap:1rem;border:1px solid var(--line);border-radius:1.25rem;padding:clamp(1rem,4vw,2rem)}
+header p{margin:.25rem 0;color:var(--muted)}h2{margin:.3rem 0}.eyebrow{font-size:.78rem;letter-spacing:.12em}
+.import,fieldset{display:flex;flex-wrap:wrap;align-items:center;gap:.75rem;border:0;padding:0;margin:0}
+button,input{font:inherit;color:inherit;max-width:100%}button{border:1px solid var(--line);border-radius:.55rem;background:var(--panel);padding:.45rem .65rem;text-align:left;cursor:pointer}button[disabled]{opacity:.6;cursor:default}
+button:focus-visible,input:focus-visible{outline:3px solid var(--focus);outline-offset:3px}button[aria-pressed=true]{border:2px solid var(--focus)}
+.summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(12rem,100%),1fr));gap:.55rem}.summary article{min-width:0;border:1px solid var(--line);background:var(--panel);padding:.65rem;border-radius:.75rem}.summary h3{font-size:.82rem;margin:0;color:var(--muted)}.summary article p{font-weight:700;margin:.25rem 0;overflow-wrap:anywhere}
+#rows{list-style:none;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(16rem,100%),1fr));gap:.65rem}#rows:empty,#error:empty,#detail:empty,#evidence:empty{display:none}.category{display:flex;gap:.5rem;justify-content:space-between;width:100%;overflow-wrap:anywhere;align-items:baseline}meter{width:100%;accent-color:var(--focus)}#detail,#row-count{color:var(--muted)}
+
+.coverage{margin:0 0 1rem;padding:.75rem 1rem;border:1px solid currentColor;border-radius:.75rem}.coverage h3,.coverage p{margin:.35rem 0}.coverage[data-state=partial]{border-left-width:.4rem}
+
+.compare-box{margin-top:26px;padding:16px;border:1px solid var(--line,#36415d);border-radius:14px}.compare-box [hidden]{display:none}#comparison-values{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:10px;margin:12px 0}.comparison-result-card{padding:12px;border:1px solid var(--line,#36415d);border-radius:12px}.comparison-result-card h4{margin:0 0 4px}.compare-box label{display:block;margin-top:10px}#compare-same{width:auto}#compare-metrics:empty{display:none}
