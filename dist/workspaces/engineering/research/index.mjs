@@ -22,9 +22,65 @@ export async function mount({container,search,theme="dark",notify:hostNotify,nav
   root.addEventListener("click",e=>{const a=e.target.closest?.("a[href]");if(!a)return;const href=a.getAttribute("href");if(href.startsWith("?")){e.preventDefault();state=parseState(href.split("#")[0]);render();}else if(href.startsWith("#")){e.preventDefault();root.getElementById(href.slice(1))?.scrollIntoView?.({block:"start"});}});
 const $ = id => root.getElementById(id);
 const REPO = 'https://github.com/Herbertofury/Athena';
+const sourceGuides = [
+  {
+    title: 'Software comparison references',
+    revision: 'cc5690a31637c8b04e2aea6c4a55463e20643a2d',
+    directory: 'rammcodes-tool-references-2026-11-21',
+    summary: 'Compare evidence traceability, clean-room feature behavior, owned-component porting and profile-first optimization. Upstream descriptions are not Athena test results.',
+    topics: [
+      ['REA', 'https://rea.tools/', 'Reverse Engineer Anything'],
+      ['Craft Anything', 'https://github.com/storytold/craft-anything'],
+      ['rust-anything', 'https://github.com/erkamyaman/rust-anything'],
+      ['fast-anything', 'https://github.com/EL4CTEO/fast-anything'],
+    ],
+  },
+  {
+    title: 'UI design reference comparison',
+    revision: '605d95155b3bd3ba40a36bea9fc215eef020e436',
+    directory: 'ui-reference-comparison-2026-11-21',
+    summary: 'Study hierarchy, design critique, restrained texture and component states. Keep the existing brand; check contrast, keyboard focus and reduced motion before changing a screen.',
+    topics: [
+      ['UberDesigner', 'https://uberdesigner.ai/', 'Haelith, Haelith Landing'],
+      ['Unslop', 'https://github.com/heydamir/unslop'],
+      ['Grainient Supply', 'https://grainient.supply/', 'Gradient Supply'],
+      ['HorizonX', 'https://horizonx.so/', 'Horizon X'],
+      ['Cue Design', 'https://www.cuedesign.space/', 'Cuedesign'],
+    ],
+  },
+];
+const references = element('details', {id: 'source-reference-guides', class: 'layer-guide'},
+  element('summary', {}, 'Source reference guides'),
+  element('p', {}, 'Published source notes only. No benchmark ranking, comparison shortlist or software installation. Outward links open only when chosen.'),
+  element('p', {id: 'source-reference-count', role: 'status', 'aria-live': 'polite'}),
+  element('ul', {id: 'source-reference-results'}));
+$('catalog').querySelector('.search-row').after(references);
+
+const referenceTokens = value => String(value).normalize('NFKC').toLowerCase().split(/[^\p{L}\p{N}]+/u).filter(Boolean);
+let previousReferenceQuery;
+function renderReferenceGuides(query) {
+  if (previousReferenceQuery === query) return;
+  previousReferenceQuery = query;
+  const tokens = referenceTokens(query);
+  const matches = sourceGuides.filter(guide => {
+    const searchable = referenceTokens([guide.title, guide.summary, ...guide.topics.flatMap(([name, , aliases]) => [name, aliases])].join(' '));
+    return tokens.every(token => searchable.some(value => value.includes(token)));
+  });
+  if (tokens.length && matches.length) references.open = true;
+  $('source-reference-count').textContent = matches.length
+    ? matches.length + ' source reference guide' + (matches.length === 1 ? '' : 's')
+    : 'No source reference guide matches this search.';
+  $('source-reference-results').replaceChildren(...matches.map(guide => {
+    const target = REPO + '/blob/' + guide.revision + '/research/' + guide.directory + '/README.md';
+    const names = guide.topics.flatMap(([name, url], i) => i ? [' · ', link(name, url)] : [link(name, url)]);
+    return element('li', {class: 'reference-guide'},
+      element('h3', {}, link(guide.title, target)), element('p', {}, guide.summary), element('p', {}, ...names));
+  }));
+}
 let catalog,loaded=false;
 let state = parseState(route.includes('?')?route.slice(route.indexOf('?')+1):typeof initialState==='string'?initialState:initialState?.query||'');
 if(search!==undefined)state.q=String(search).slice(0,300);
+renderReferenceGuides(state.q);
 let shortlist = [];
 let visibleQuery;
 let toastTimer;
@@ -288,6 +344,7 @@ function render() {
   renderNavigation();
   for (const key of ['layer', 'kind', 'maturity', 'evidence', 'year', 'track', 'plan', 'sort']) $(key).value = state[key];
   if ($('search').value !== state.q) $('search').value = state.q;
+  renderReferenceGuides(state.q);
   const isBenchmark = ['external', 'measured'].includes(state.sort);
   $('cohort-control').hidden = !isBenchmark;
   populateSelect('cohort', catalog.results.cohorts.filter(c => c.evidence === (state.sort === 'measured' ? 'atlas_measured' : 'external_reported'))
