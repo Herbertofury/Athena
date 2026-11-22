@@ -29,6 +29,8 @@ git bundle list-heads engineering-atlas-history.bundle
 
 The bundle preserves original commits, authors and refs. It does not accept the unfinished branches into Athena main. To examine a candidate, create a local branch from its exact saved ref after fetching the bundle. No account credentials are included.
 
+The [historical Pages link recovery map](verification-2026-11-07/PAGES-LINK-RECOVERY.md) gives exact Athena copies or local bundle restore targets for the nine original Atlas GitHub destinations in that artifact. The original ZIP remains unchanged. This does not establish active website, provider playback, or source retirement readiness.
+
 ## Name and compatibility
 
 Current interfaces are Athena-branded. The internal `atlas-lab` Rust crate, CLI and database path remain unchanged to avoid silently breaking scripts, saved data or experiment identities. Historic evidence retains original names. Research code lives under `engineering/`; run its existing tools from that directory.
