@@ -44,6 +44,13 @@ try{
   assert.equal(workspaces.continuity.entries.length,c);
  };
  const saveStatus='Saved in this browser. Export a backup.';
+ const openSoftware=async()=>{
+  const tab=await shared.newPage();tab.on('pageerror',error=>errors.push(error.message));
+  await tab.goto(origin+'/#software');
+  await tab.locator('.software-card').first().waitFor();
+  return tab;
+ };
+ const olderSoftware=await openSoftware();
  const projectTab=await open('projects'),notesTab=await open('continuity');
  await addProject(projectTab,'Preserve newer Projects');
  await addNote(notesTab,'Save from older Continuity');
@@ -55,6 +62,26 @@ try{
  await notesTab.getByText(saveStatus,{exact:true}).waitFor();
  await addProject(projectTab,'Projects inverse order');
  await count(projectTab,2,2);
+ // Software's actual host-owned navigation export previously replayed a stale
+ // tab-wide envelope, overwriting durable Projects and Continuity together.
+ const beforeTeardown=JSON.parse(await bytes(projectTab));
+ assert.equal(Object.hasOwn(beforeTeardown.workspaces,'software'),false);
+ await olderSoftware.locator('nav [data-nav=projects]').click();
+ await olderSoftware.getByRole('button',{name:'Open Projects inverse order',exact:true}).waitFor();
+ const afterTeardown=JSON.parse(await bytes(olderSoftware));
+ assert.ok(afterTeardown.workspaces.software,'generic navigation export persisted');
+ const {software:_software,...untouched}=afterTeardown.workspaces;
+ assert.deepEqual({...afterTeardown,workspaces:untouched},beforeTeardown);
+ const staleSoftware=await openSoftware(),winningSoftware=await openSoftware();
+ await winningSoftware.locator('#search').fill('Blender');
+ await winningSoftware.waitForFunction(key=>JSON.parse(localStorage.getItem(key)).workspaces.software.filters.q==='Blender',key);
+ const winnerBytes=await bytes(winningSoftware);
+ await staleSoftware.locator('#search').fill('Krita');
+ await staleSoftware.getByText(/Saved workspace changed.*Export your local draft/i).waitFor();
+ assert.equal(await bytes(staleSoftware),winnerBytes);
+ await staleSoftware.locator('nav [data-nav=projects]').click();
+ await staleSoftware.getByRole('button',{name:'Open Projects inverse order',exact:true}).waitFor();
+ assert.equal(await bytes(staleSoftware),winnerBytes,'same-workspace stale navigation export stays refused');
  const stale=await open('continuity');
  await addNote(notesTab,'Winning saved note');
  await notesTab.getByText(saveStatus,{exact:true}).waitFor();
