@@ -81,11 +81,19 @@ export function createLayoutHistory(model,limit=50,characterBudget=50*WORKSPACE_
  const past=[],future=[],budget=characterBudget;let serial=0,currentId=0,epoch=0;
  const copy=value=>{const text=model.encodeRecoveryWorkspace(value);return {value:model.workspace(JSON.parse(text)),size:text.length};};
  const trim=()=>{while(past.length+future.length>1&&[...past,...future].reduce((n,v)=>n+v.size,0)>budget){if(past.length)past.shift();else future.shift();}};
+ function inspect(id,expectedEpoch){
+  if(expectedEpoch!==epoch)throw Error('History changed; select a current entry.');
+  const target=past.find(e=>e.id===id)||future.find(e=>e.id===id);
+  if(!target)throw Error('History entry is no longer retained.');
+  const {active,layouts,savedLayouts,view}=target.value;
+  return {time:active.time,placements:Object.keys(active.placements).length,rooms:Object.keys(layouts).length,
+   namedLayouts:savedLayouts.map(layout=>layout.name),dock:view.inspectorDock};
+ }
  return {
   record(value){const entry=copy(value);past.push({...entry,id:currentId});currentId=++serial;epoch++;if(past.length>limit)past.shift();future.length=0;trim();},
   undo(value){if(!past.length)return null;const current=copy(value),restored=copy(past.at(-1).value).value;future.push({...current,id:currentId});currentId=past.at(-1).id;past.pop();epoch++;trim();return restored;},
   redo(value){if(!future.length)return null;const current=copy(value),restored=copy(future.at(-1).value).value;past.push({...current,id:currentId});currentId=future.at(-1).id;future.pop();epoch++;if(past.length>limit)past.shift();trim();return restored;},
-  list(value){const meta=(entry,state)=>({id:entry.id,state,themeId:entry.value.active.themeId,roomId:entry.value.active.roomId});return {epoch,entries:[...past.map(e=>meta(e,'past')),meta({id:currentId,value},'current'),...future.slice().reverse().map(e=>meta(e,'future'))]};},
+  list(value){const meta=(entry,state)=>({id:entry.id,state,themeId:entry.value.active.themeId,roomId:entry.value.active.roomId});return {epoch,inspect,entries:[...past.map(e=>meta(e,'past')),meta({id:currentId,value},'current'),...future.slice().reverse().map(e=>meta(e,'future'))]};},
   jump(value,id,expectedEpoch){
    if(expectedEpoch!==epoch)throw Error('History changed; select a current entry.');
    if(id===currentId)return null;

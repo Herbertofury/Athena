@@ -13,3 +13,52 @@ test('disabled session navigator leaves authoring and Undo fully functional',asy
 test('metadata listing never validates or copies workspace payloads',()=>{let copies=0;const watched={...model,encodeRecoveryWorkspace(v){copies++;return model.encodeRecoveryWorkspace(v);}},h=createLayoutHistory(watched),state=model.workspace({version:1,active:model.initial(),layouts:{}});h.record(state);const before=copies;const metadata={active:state.active,get layouts(){throw Error('payload accessed');},get savedLayouts(){throw Error('payload accessed');}};assert.equal(h.list(metadata).entries.length,2);assert.equal(copies,before);});
 import {fullWorkspace} from './fixtures/capacity-workspace.mjs';
 test('direct session jumps retain oversized recovery snapshots without host writes',async()=>{const initial=fullWorkspace(model,catalog.themes),s=await setup(initial);try{const before=JSON.stringify(s.api.exportState());s.one('[data-preset-remove]').click();const reduced=JSON.stringify(s.api.exportState());assert.notEqual(reduced,before);assert.equal(s.writes.length,0);[...s.document.querySelectorAll('[data-history-id]')][0].click();assert.equal(JSON.stringify(s.api.exportState()),before);assert.equal(s.writes.length,0);assert.equal(s.one('[data-redo]').disabled,false);[...s.document.querySelectorAll('[data-history-id]')].at(-1).click();assert.equal(JSON.stringify(s.api.exportState()),reduced);assert.equal(s.writes.length,0);assert.match(s.one('.foundry-status').textContent,/recovery draft/);}finally{s.api.unmount();}});
+
+test('review a retained Foundry state without changing the scene, unsaved inputs or saved bytes',async()=>{
+ const s=await setup();
+ try{
+  s.one('[data-preset-name]').value='<img src=x> original layout';s.one('[data-preset-save]').click();
+  s.change('[data-time]','night');s.change('[data-room-select]',s.a2.roomId);
+  s.one('[data-inspect-rotation]').value='123';
+  const before=canonical(s.api.exportState()),writes=s.writes.length;
+  const reviews=[...s.document.querySelectorAll('[data-history-review]')],preview=s.one('[data-session-history-review]');
+  assert.ok(reviews.length>1);assert.equal(preview.hidden,true);
+  reviews[1].click();
+  assert.equal(preview.hidden,false);
+  assert.match(preview.textContent,new RegExp(s.a.roomId));
+  assert.match(preview.textContent,/day/i);
+  assert.deepEqual([...preview.querySelectorAll('ul ul li')].map(row=>row.textContent),['<img src=x> original layout']);
+  assert.equal(preview.querySelector('img'),null);
+  assert.equal(s.one('[data-inspect-rotation]').value,'123');
+  assert.deepEqual(canonical(s.api.exportState()),before);assert.equal(s.writes.length,writes);
+  preview.querySelector('[data-close-history-review]').click();
+  assert.equal(preview.hidden,true);
+  reviews[1].click();
+  const jump=preview.querySelector('[data-jump-reviewed-history]');
+  s.change('[data-time]','night');
+  assert.equal(preview.hidden,true);
+  const after=canonical(s.api.exportState()),afterWrites=s.writes.length;
+  jump.click();reviews[1].click();
+  assert.equal(preview.hidden,true);assert.equal(s.writes.length,afterWrites);assert.deepEqual(canonical(s.api.exportState()),after);
+  [...s.document.querySelectorAll('[data-history-review]')][1].click();preview.querySelector('[data-jump-reviewed-history]').click();
+  assert.equal(s.api.exportState().active.roomId,s.a.roomId);assert.equal(s.writes.length,afterWrites+1);
+  assert.equal(s.one('[data-redo]').disabled,false);
+ }finally{s.api.unmount();}
+});
+
+test('snapshot review returns fresh scalars and labels only, rejects stale or pruned IDs and does not re-encode',()=>{
+ let encodes=0;
+ const probe={...model,encodeRecoveryWorkspace(value){encodes++;return model.encodeRecoveryWorkspace(value);}};
+ const h=createLayoutHistory(probe,2);
+ const a=room(0,0,.2),workspace=model.workspace({version:11,active:a,layouts:{},savedLayouts:[{name:'Review locally',layout:a}]});
+ h.record(workspace);
+ const listing=h.list(workspace),id=listing.entries[0].id,retained=h.retainedCharacters,observed=encodes;
+ const summary=listing.inspect(id,listing.epoch);
+ assert.deepEqual(summary,{time:'day',placements:1,rooms:1,namedLayouts:['Review locally'],dock:'right'});
+ summary.namedLayouts[0]='cannot change the stored snapshot';
+ assert.deepEqual(listing.inspect(id,listing.epoch).namedLayouts,['Review locally']);
+ assert.equal(encodes,observed);assert.equal(h.retainedCharacters,retained);assert.equal(h.canRedo,false);
+ h.record(workspace);h.record(workspace);
+ assert.throws(()=>listing.inspect(id,listing.epoch),/History changed/);
+ const now=h.list(workspace);assert.throws(()=>now.inspect(id,now.epoch),/no longer retained/);
+});
