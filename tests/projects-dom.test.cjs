@@ -219,3 +219,12 @@ test('retrying a rejected Archive or Restore from saved search keeps the labeled
   }finally{x.mounted.unmount();}
  }
 });
+
+test('Projects search scope keeps an exact accessible label independent of its options',async()=>{
+ const x=await setup(),select=x.root.querySelector('#history-search');
+ try{
+  assert.equal(select.getAttribute('aria-label'),'Project search scope');
+  assert.deepEqual([...select.querySelectorAll('option')].map(option=>[option.value,option.textContent]),
+   [['current','Current revision'],['history','All saved revisions']]);
+ }finally{x.mounted.unmount();}
+});
