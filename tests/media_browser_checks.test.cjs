@@ -7,7 +7,7 @@ const hashes=()=>Object.fromEntries(['index.mjs','event-log-view.mjs','media-eve
 function prepared(){return [{cards:2,pendingImages:4,automaticImages:0,players:0,fixtureSHA256:'auto'},hashes(),{events:260,state:{render_failures:2},exactVisibleJSON:true},['youtube','native','hls'].map(mode=>({mode,viewRenderFailures:mode==='youtube'?1:0,retainedFailureCount:1,newAttemptPlayingCallbacks:1,calls:{play:0},fixtureSHA256:'1'.repeat(64)}))];}
 function cueSequence({playerCount=0,workspaceAfter='unchanged',externalRequest,sourceHref='https://www.youtube.com/watch?v=f0iYkTUx5Rs',cues=[{basis:'visible',start_ms:41091,end_ms:43400},{basis:'inferred',start_ms:44000,end_ms:null}],stalePreviewCount=0}={}){
  return [
-  ['evaluate',null,'unchanged'],['evaluate',null,undefined],
+  ['evaluate',null,'unchanged'],['evaluate','.shell > #main',undefined],
   ['count','#video-mod-cues -> form',0],['click','Review mod cues from a video'],
   ['fill','Video or post URL','https://youtu.be/f0iYkTUx5Rs?si=discard'],
   ['fill','Local timestamped cues','0:41.091..0:43.4 | visible | Example title\n0:44 | inferred | <img src=x onerror=alert(1)>'],
@@ -41,8 +41,11 @@ async function invoke(values,stats={},cueOptions){const names=[],report={},cue=c
   on:(event,handler)=>{assert.equal(event,'request');assert.ok(active);assert.equal(listener,undefined);listener=handler;cueStarted=true;stats.subscribed=(stats.subscribed||0)+1;},
   off:(event,handler)=>{assert.equal(event,'request');assert.equal(handler,listener);listener=undefined;stats.unsubscribed=(stats.unsubscribed||0)+1;},
   locator:(target)=>{assert.equal(target,'[data-cue-browser-fixture]');assert.ok(listener);return locator(target);},
-  evaluate:async(fn)=>{
-   if(listener){if(String(fn).includes('cueController?.unmount()')){stats.cleanup=(stats.cleanup||0)+1;return;}return step('evaluate',null);}
+  evaluate:async(fn,args)=>{
+   if(listener){if(String(fn).includes('cueController?.unmount()')){stats.cleanup=(stats.cleanup||0)+1;return;}
+    if(args)assert.match(String(fn),/document\.querySelector\(selector\)[\s\S]*main\.append\(container\)/);
+    return step('evaluate',args??null);
+   }
    const value=values[index++];if(value?.fixtureSHA256==='auto')return {...value,fixtureSHA256:fixtureSHA};return value;
   }
  },check:async(name,fn)=>{await fn();names.push(name);}});

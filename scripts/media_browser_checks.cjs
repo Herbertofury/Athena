@@ -55,11 +55,15 @@ async function runMediaBrowserChecks({page,origin,root,report,check}){
     let original;
     try{
       original=await page.evaluate(()=>localStorage.getItem('athena-workspaces-v1'));
-      await page.evaluate(async()=>{
+      await page.evaluate(async selector=>{
+        // Keep the disposable fixture in the normal content column. A body
+        // child can sit under the fixed sidebar and cannot receive real clicks.
+        const main=document.querySelector(selector);
+        if(!main)throw Error('Missing Athena content column for cue fixture');
         const {mount}=await import('/workspaces/engineering/media/index.mjs');
-        const container=document.createElement('section');container.dataset.cueBrowserFixture='';document.body.append(container);
+        const container=document.createElement('section');container.dataset.cueBrowserFixture='';main.append(container);
         container.cueController=await mount({container,route:'#media?q='});
-      });
+      },'.shell > #main');
       assert.equal(await panel.locator('form').count(),0);
       await panel.getByText('Review mod cues from a video',{exact:true}).click();
       await panel.getByLabel('Video or post URL').fill('https://youtu.be/f0iYkTUx5Rs?si=discard');
