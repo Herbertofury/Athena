@@ -4,6 +4,12 @@ export const empty = () => ({schema:1,entries:[]});
 const txt=(x,max=10000)=>{if(typeof x!=='string'||x.length>max)throw Error('Invalid or oversized project text');return x;};
 const required=(x,max)=>{txt(x,max);if(!x.trim())throw Error('Project name is required');return x;};
 function url(x){txt(x,2000);if(!x)return x;const u=new URL(x);if(u.protocol!=='https:'||u.username||u.password)throw Error('Use an HTTPS source without credentials');return x;}
+// Presentation uses the same HTTPS and credential policy as saved project data.
+export function createProjectReference(doc,label,value){
+ try{if(!url(value))return null;}catch{return null;}
+ const link=doc.createElement('a');link.textContent=label;link.href=value;link.target='_blank';link.rel='noopener noreferrer';
+ return link;
+}
 function fields(p){required(p.name,200);if(!['own','followed'].includes(p.ownership)||!stages.includes(p.stage))throw Error('Invalid project type or stage');for(const k of ['goal','next','blockers','decisions','resources'])txt(p[k]);url(p.source);txt(p.version,200);url(p.release);return p;}
 export function validate(value){
  if(!value||value.schema!==1||!Array.isArray(value.entries))throw Error('Unsupported projects backup');
