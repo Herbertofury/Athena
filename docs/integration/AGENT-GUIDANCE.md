@@ -44,3 +44,18 @@ No fleet writes, source deletion, archive/visibility changes, new credentials, g
 ## Fresh two-consumer inventory
 
 The [Bloom-and-Boom / Modhunter review](../../guidance/evidence/bloom-modhunter-retirement-review-2026-11-15.md) and [sanitized receipt](../../guidance/evidence/bloom-modhunter-consumer-audit-2026-11-15.json) verify two additional public main snapshots. Both retain intact 16-file Agent-Foundry pins; read-only Athena transition proposals are conflict-free, not applied or behaviorally accepted. Local guidance routing, historical skill/CI references and project-owned skills are classified separately. No consumer was changed and no runtime failure is inferred from a legacy URL. Fleet, skill propagation, history and retirement gates remain open.
+
+## Native catalog integrity admission
+
+Before opening the reader, Athena verifies SHA-256 over the exact UTF-8 text of
+all standards in a detached catalog snapshot. Any mismatch or unavailable verifier
+refuses the complete catalog, with no selectable standards or export controls and
+no saved-selection writes. Verification does not normalize whitespace or newlines.
+The admitted document records and array are frozen; source text cannot be changed
+in place after the asynchronous check. Route teardown still cancels presentation.
+
+This establishes consistency between text and the catalog's retained digests, not
+a signature, independent publisher authenticity or protection against an attacker
+replacing both text and hashes. Canonical build checks and release provenance remain
+separate gates. No private rules are fetched or uploaded, no Skills are installed,
+and this check does not establish source-retirement readiness.
