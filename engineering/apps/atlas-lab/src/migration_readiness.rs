@@ -143,6 +143,9 @@ mod tests {
             .block_on(axum::body::to_bytes(response.into_body(), 1024))
             .unwrap();
         assert_eq!(&body[..], ATLAS_RECEIPT.as_bytes());
-        assert_eq!(atlas_receipt("{}").status(), StatusCode::SERVICE_UNAVAILABLE);
+        assert_eq!(
+            atlas_receipt("{}").status(),
+            StatusCode::SERVICE_UNAVAILABLE
+        );
     }
 }
