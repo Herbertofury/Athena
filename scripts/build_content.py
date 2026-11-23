@@ -287,6 +287,11 @@ from network_content import LESSONS
 modules.extend(LESSONS)
 from workshop_content import LESSONS as WORKSHOP_LESSONS
 modules.extend(WORKSHOP_LESSONS)
+# Evidence-led income research extends the existing career lesson, not exam scope.
+portfolio = next(item for item in modules if item['id'] == 'portfolio')
+portfolio['explain'].append('Online income claims need evidence, not excitement. A public story about profitable AI trading is not an audited result. Verify provider identity, eligibility, rights, complete costs and collected revenue. Separate service/product income from speculative capital at risk; never treat a paper simulation as live profit.')
+portfolio['lab'].append('Design a no-spend two-hour synthetic portfolio pilot. Record buyer problem, acceptance test, platform/payment fees, unpaid selling and support time, rights, unknown eligibility and a stop rule. Calculate net cash and effective hourly return only from observed results. Do not connect wallets, buy plans, apply, publish or contact clients as part of this exercise.')
+portfolio['sources'].extend(['https://www.cftc.gov/PressRoom/PressReleases/8854-24', 'https://gumroad.com/help/article/66-gumroads-fees'])
 # Balance answer positions deterministically; choices retain their meaning.
 for i, item in enumerate(modules):
     correct=item['options'].pop(item['answer'])
