@@ -36,6 +36,14 @@ const {chromium}=require('playwright');
   await page.locator('[data-ecology-motion]').check();const dragBox=await actor.boundingBox();await page.mouse.move(dragBox.x+dragBox.width/2,dragBox.y+dragBox.height/2);await page.mouse.down();await page.mouse.move(dragBox.x+dragBox.width/2+35,dragBox.y+dragBox.height/2+25,{steps:3});await page.mouse.up();
   const motionPositions=new Set();for(let i=0;i<12;i++){await page.waitForTimeout(16);motionPositions.add(await actor.evaluate(el=>el.style.transform));assert(await actor.evaluate(el=>{const a=el.getBoundingClientRect(),s=el.parentElement.getBoundingClientRect();return a.left>=s.left-1&&a.top>=s.top-1&&a.right<=s.right+1&&a.bottom<=s.bottom+1}), 'rotating motion form crossed stage boundary')}
   assert(motionPositions.size>1,'post-release throw must actually animate, not pass as stationary');
+  // Real mouse capture is relinquished when keyboard control interrupts a drag.
+  await page.locator('[data-ecology-motion]').uncheck();
+  await actor.evaluate(el=>{window.captureIds=[];el.addEventListener('gotpointercapture',e=>captureIds.push(e.pointerId))});
+  await actor.focus();const captureBox=await actor.boundingBox();await page.mouse.move(captureBox.x+captureBox.width/2,captureBox.y+captureBox.height/2);await page.mouse.down();await page.mouse.move(captureBox.x+captureBox.width/2-8,captureBox.y+captureBox.height/2-8);
+  assert(await actor.evaluate(el=>captureIds.some(id=>el.hasPointerCapture(id))),'real mouse must acquire capture');
+  await page.keyboard.press('ArrowLeft');
+  assert(await actor.evaluate(el=>captureIds.every(id=>!el.hasPointerCapture(id))),'keyboard interruption must release capture');
+  const interruptedTransform=await actor.evaluate(el=>el.style.transform);await page.mouse.move(captureBox.x+10,captureBox.y+10);await page.mouse.up();assert.equal(await actor.evaluate(el=>el.style.transform),interruptedTransform);
   await page.setViewportSize({width:360,height:700});await page.waitForTimeout(100);assert(await actor.evaluate(el=>{const a=el.getBoundingClientRect(),s=el.parentElement.getBoundingClientRect();return a.width<=110&&a.right<=s.right+1&&a.bottom<=s.bottom+1}));
   const rotationReceipts=[];
   for(const rotation of [-90,-45,45,90]){
