@@ -110,17 +110,46 @@ async fn record(
     .await
     .map_err(|_| StatusCode::INTERNAL_SERVER_ERROR)?
 }
+// A job result can survive a partial journal recovery even when its linked
+// experiment or complete run does not. Check availability without loading either
+// body, using the same read snapshot as the queue receipt.
+fn complete_history(c: &Connection, id: i64) -> rusqlite::Result<bool> {
+    if !exists(c, "experiments")? || !exists(c, "experiment_runs")? {
+        return Ok(false);
+    }
+    c.query_row(
+        "SELECT EXISTS(
+            SELECT 1 FROM experiments e JOIN experiment_runs r ON r.experiment_id=e.id
+            WHERE e.id=?1 AND r.schema_version=1
+              AND typeof(e.evidence)='text' AND length(CAST(e.evidence AS BLOB)) BETWEEN 1 AND 2097152
+              AND typeof(r.output)='text' AND length(CAST(r.output AS BLOB)) BETWEEN 1 AND 2097152
+        )",
+        [id],
+        |r| r.get(0),
+    )
+}
 fn job_status(path: &std::path::Path, id: i64) -> rusqlite::Result<Option<serde_json::Value>> {
     let c = connection(path)?;
-    let row:Option<(String,Option<String>)>=c.query_row("SELECT state,CASE WHEN length(CAST(result AS BLOB))<=2097152 THEN result END FROM jobs WHERE id=?1 AND payload='\"DedupExperiment\"'",[id],|r|Ok((r.get(0)?,r.get(1)?))).optional()?;
+    let tx = c.unchecked_transaction()?;
+    let row:Option<(String,Option<String>)>=tx.query_row("SELECT state,CASE WHEN length(CAST(result AS BLOB))<=2097152 THEN result END FROM jobs WHERE id=?1 AND payload='\"DedupExperiment\"'",[id],|r|Ok((r.get(0)?,r.get(1)?))).optional()?;
     let Some((state, raw)) = row else {
         return Ok(None);
     };
     let result = raw.and_then(|text| serde_json::from_str::<serde_json::Value>(&text).ok());
-    let experiment_id = result
+    let referenced_id = result
         .as_ref()
         .and_then(|r| r["experiment_id_text"].as_str())
-        .filter(|id| id.parse::<i64>().is_ok_and(|n| n > 0));
+        .and_then(|raw| {
+            raw.parse::<i64>()
+                .ok()
+                .filter(|id| *id > 0 && id.to_string() == raw)
+        });
+    let experiment_id = match referenced_id {
+        Some(id) if matches!(state.as_str(), "succeeded" | "failed") => {
+            complete_history(&tx, id)?.then(|| id.to_string())
+        }
+        _ => None,
+    };
     Ok(Some(
         serde_json::json!({"id":id.to_string(),"state":state,"experiment_id":experiment_id,"history_retained":experiment_id.is_some()}),
     ))
@@ -230,5 +259,72 @@ mod tests {
         assert!(detail(&p, 99).unwrap().is_none());
         assert_eq!(std::fs::read(&p).unwrap(), before);
         std::fs::remove_file(p).unwrap();
+    }
+    #[test]
+    fn job_status_checks_complete_retained_history_instead_of_only_trusting_pointer() {
+        let mut bytes = [0u8; 8];
+        getrandom::fill(&mut bytes).unwrap();
+        let nonce = u64::from_ne_bytes(bytes);
+        let dir = std::env::temp_dir().join(format!("athena-job-history-{nonce:016x}"));
+        std::fs::create_dir(&dir).unwrap();
+        let p = dir.join("test.sqlite");
+        let c = Connection::open(&p).unwrap();
+        c.execute_batch(
+            "CREATE TABLE jobs(id INTEGER PRIMARY KEY,payload TEXT,state TEXT,result TEXT);
+             CREATE TABLE experiments(id INTEGER PRIMARY KEY,recorded_at TEXT,decision TEXT,evidence TEXT);
+             INSERT INTO experiments VALUES
+               (9007199254740993,'now','blocked','{}'),(2,'now','blocked','{}'),
+               (3,'now','blocked','{}'),(4,'now','blocked','{}'),(5,'now','blocked','');",
+        )
+        .unwrap();
+        for (job, state, target) in [
+            (1, "succeeded", "9007199254740993"),
+            (2, "failed", "2"),
+            (3, "succeeded", "3"),
+            (4, "succeeded", "4"),
+            (5, "succeeded", "5"),
+            (6, "succeeded", "999"),
+            (7, "succeeded", "+9007199254740993"),
+            (8, "running", "9007199254740993"),
+            (9, "failed", "9007199254740993"),
+        ] {
+            c.execute(
+                "INSERT INTO jobs VALUES(?1,?2,?3,?4)",
+                params![
+                    job,
+                    r#""DedupExperiment""#,
+                    state,
+                    serde_json::json!({"experiment_id_text":target}).to_string()
+                ],
+            )
+            .unwrap();
+        }
+        // Legacy journal has no complete-run table.
+        let legacy = job_status(&p, 1).unwrap().unwrap();
+        assert_eq!(legacy["history_retained"], false);
+        c.execute_batch(
+            "CREATE TABLE experiment_runs(experiment_id INTEGER PRIMARY KEY,schema_version INTEGER,output TEXT);
+             INSERT INTO experiment_runs VALUES
+               (9007199254740993,1,'{}'),(3,2,'{}'),
+               (4,1,replace(hex(zeroblob(1048577)),'00','ab')),(5,1,'{}');",
+        )
+        .unwrap();
+        drop(c);
+        let before = std::fs::read(&p).unwrap();
+        for id in 1..=9 {
+            let receipt = job_status(&p, id).unwrap().unwrap();
+            let expected = id == 1 || id == 9;
+            assert_eq!(receipt["history_retained"], expected, "job {id}");
+            if expected {
+                assert_eq!(receipt["experiment_id"], "9007199254740993");
+            } else {
+                assert!(receipt["experiment_id"].is_null(), "job {id}");
+            }
+        }
+        let partial = detail(&p, 2).unwrap().unwrap();
+        assert_eq!(partial["evidence"], "{}");
+        assert!(partial["run"].is_null());
+        assert_eq!(std::fs::read(&p).unwrap(), before);
+        std::fs::remove_dir_all(dir).unwrap();
     }
 }
