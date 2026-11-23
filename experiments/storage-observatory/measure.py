@@ -171,6 +171,8 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('root', help='Explicitly selected named absolute directory')
     parser.add_argument('--category', metavar='LABEL=DIRECT_CHILD', action='append', default=[])
+    parser.add_argument('--require-complete', action='store_true',
+                        help='Return 3 for a partial observation and still emit its JSON for review.')
     args = parser.parse_args()
     try:
         report = measure(args.root, categories(args.category))
@@ -178,7 +180,7 @@ def main():
     except (OSError, ValueError):
         print('Observation refused: select an accessible standalone Linux directory and valid category bindings.', file=sys.stderr)
         return 2
-    return 0
+    return 3 if args.require_complete and report['partial'] else 0
 
 
 if __name__ == '__main__':
