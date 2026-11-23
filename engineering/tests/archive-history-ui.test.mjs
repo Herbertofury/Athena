@@ -62,3 +62,43 @@ test('invalid targets, oversized pages and lossy numeric generations fail closed
  s.q('saved-archive-kind').value='version';s.q('saved-archive-id').value='SHARED01';s.q('list-saved-generations').click();await tick();assert.equal(s.calls.at(-1)[0],'/api/version-history/SHARED01?limit=12');assert.match(s.q('saved-archive-history-status').textContent,/size budget/);
  s.q('list-saved-generations').click();await tick();assert.equal(rows(s).length,0);assert.match(s.q('saved-archive-history-status').textContent,/Invalid/);
 });
+test('Previous returns to the exact retained metadata page without fetch, loss or stale action',async()=>{
+ const middle=Array.from({length:12},(_,i)=>entry(String(BigInt(cursor)-1n-BigInt(i))));
+ const last=middle.at(-1).generation,tail=String(BigInt(last)-1n);
+ const s=await fixture(path=>path.endsWith('before='+last)?newPage([entry(tail)]):
+   path.endsWith('before='+cursor)?newPage(middle,last):newPage(first,cursor));
+ const previous=s.q('previous-saved-generations'), olderButton=s.q('older-saved-generations');
+ assert.equal(previous.disabled,true);
+ s.q('list-saved-generations').click();await tick();olderButton.click();await tick();olderButton.click();await tick();
+ const stale=rows(s)[0].querySelector('button');
+ assert.match(stale.textContent,new RegExp(tail));assert.equal(s.calls.length,3);
+ previous.click();await tick();
+ stale.click();await tick();
+ assert.equal(s.calls.length,3);assert.equal(s.verified.length,0);
+ assert.match(rows(s)[0].textContent,new RegExp(middle[0].generation));
+ assert.match(s.q('saved-archive-history-status').textContent,/no new read/i);
+ previous.click();await tick();
+ assert.equal(s.calls.length,3);assert.match(rows(s)[0].textContent,new RegExp(newer));assert.equal(previous.disabled,true);
+ olderButton.click();await tick();
+ assert.equal(s.calls[3][0],'/api/project-history/SHARED01?limit=12&before='+cursor);
+ s.q('saved-archive-id').value='OTHER001';s.q('saved-archive-id').dispatchEvent(new s.window.Event('input'));
+ assert.equal(previous.disabled,true);assert.equal(rows(s).length,0);
+});
+test('Previous history is capped and retained across a failed deliberate Older request',async()=>{
+ let fail=false;
+ const s=await fixture(route=>{
+   if(fail)return new Response('{}',{status:429});
+   const match=route.match(/&before=(\d+)$/),head=match?BigInt(match[1])-1n:1000n;
+   const entries=Array.from({length:12},(_,i)=>entry(String(head-BigInt(i))));
+   return newPage(entries,entries.at(-1).generation);
+ });
+ const previous=s.q('previous-saved-generations'),olderButton=s.q('older-saved-generations');
+ s.q('list-saved-generations').click();await tick();
+ for(let i=0;i<10;i++){olderButton.click();await tick();}
+ assert.match(rows(s)[0].textContent,/880/);
+ fail=true;olderButton.click();await tick();
+ assert.match(rows(s)[0].textContent,/880/);
+ for(let i=0;i<8;i++){assert.equal(previous.disabled,false);previous.click();}
+ assert.match(rows(s)[0].textContent,/976/);assert.equal(previous.disabled,true);
+ assert.equal(s.calls.length,12);
+});
