@@ -10,7 +10,26 @@ const workspaces={__proto__:null,storage:{title:'Storage Observatory',kicker:'AT
 let mountedWorkspace=null;
 let workspaceStore={schema:1,workspaces:{}};
 try{const saved=localStorage.getItem('athena-workspaces-v1');if(saved){const parsed=JSON.parse(saved);if(parsed.schema===1&&parsed.workspaces&&typeof parsed.workspaces==='object'&&!Array.isArray(parsed.workspaces))workspaceStore=parsed;}}catch(error){toast('Workspace settings could not be loaded. Existing learning progress is separate.');}
-function saveWorkspace(id,value){try{if(!value||typeof value!=='object'||Array.isArray(value))throw Error('Expected a workspace settings object.');const text=JSON.stringify(value);if(text.length>250000)throw Error('Workspace settings exceed the local safety limit.');workspaceStore.workspaces[id]=JSON.parse(text);localStorage.setItem('athena-workspaces-v1',JSON.stringify(workspaceStore));return true;}catch(error){toast('Workspace settings were not saved: '+error.message);return false;}}
+function saveWorkspace(id,value){
+ const key='athena-workspaces-v1';
+ try{
+  if(!value||typeof value!=='object'||Array.isArray(value))throw Error('Expected a workspace settings object.');
+  const text=JSON.stringify(value);
+  if(text.length>250000)throw Error('Workspace settings exceed the local safety limit.');
+  // A preference save owns only its own workspace. A sibling tab may have
+  // committed a project or note since this tab was opened.
+  const raw=localStorage.getItem(key);
+  const latest=raw===null?{schema:1,workspaces:{}}:JSON.parse(raw);
+  if(latest?.schema!==1||!latest.workspaces||typeof latest.workspaces!=='object'||Array.isArray(latest.workspaces))
+   throw Error('Existing workspace settings could not be verified. Reload before retrying.');
+  const merged={...latest,workspaces:{...latest.workspaces,[id]:JSON.parse(text)}};
+  const encoded=JSON.stringify(merged);
+  localStorage.setItem(key,encoded);
+  if(localStorage.getItem(key)!==encoded)throw Error('Browser storage did not confirm the save.');
+  workspaceStore=merged;
+  return true;
+ }catch(error){toast('Workspace settings were not saved: '+error.message);return false;}
+}
 // Explicit Projects writes compare only Projects and keep the current saved workspace envelope.
 function saveReviewedProjectBackup(value,expected,editing=false){
  const key='athena-workspaces-v1';
