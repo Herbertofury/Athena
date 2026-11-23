@@ -1,0 +1,928 @@
+{
+  "schema_version": 1,
+  "reviewed_at": "2026-11-17",
+  "applications": [
+    {
+      "id": "yosys",
+      "name": "Yosys",
+      "family": "science",
+      "category": "rtl-synthesis",
+      "summary": "Open-source framework for RTL synthesis that transforms supported Verilog designs into technology-independent or target-specific netlists through scriptable synthesis passes.",
+      "license": "ISC",
+      "license_kind": "open-source",
+      "pricing_model": "free",
+      "official_url": "https://yosyshq.net/yosys/",
+      "download_url": "https://yosyshq.net/yosys/download.html",
+      "repository_url": "https://github.com/YosysHQ/yosys",
+      "platforms": [
+        "Windows",
+        "macOS",
+        "Linux"
+      ],
+      "platform_notes": "The official OSS CAD Suite provides Windows x64, macOS Intel/Apple Silicon and Linux x64/ARM64 bundles. Direct source-build guidance emphasizes Linux and macOS; check the current bundle matrix for exact host requirements.",
+      "pricing_notes": "The Yosys open-source project is free. The separate commercial Tabby CAD Suite is a different product with additional parsers and features.",
+      "features": [
+        "Scriptable RTL synthesis passes and technology mapping",
+        "Extensive Verilog-2005 support",
+        "Synthesizable SystemVerilog subset through sv-elab and slang integrations",
+        "JSON netlist output for downstream implementation tools",
+        "Integration with nextpnr and Yosys-based formal verification"
+      ],
+      "strengths": [
+        "Permissively licensed, inspectable synthesis flow",
+        "Synthesis can be automated and extended with custom passes",
+        "Available in the cross-platform OSS CAD Suite distribution"
+      ],
+      "limitations": [
+        "SystemVerilog support is a synthesizable subset, not full language coverage",
+        "FPGA implementation still needs a supported architecture backend, place-and-route and bitstream tooling",
+        "Bundled third-party libraries can have their own license terms"
+      ],
+      "use_cases": [
+        "RTL synthesis",
+        "FPGA synthesis",
+        "Verilog hardware design",
+        "digital logic research",
+        "scriptable ASIC synthesis flows"
+      ],
+      "tags": [
+        "rtl-synthesis",
+        "fpga",
+        "verilog",
+        "systemverilog",
+        "netlist",
+        "open-source-eda"
+      ],
+      "alternatives": [
+        "AMD Vivado Design Suite",
+        "Altera Quartus Prime Lite Edition"
+      ],
+      "recommendation": {
+        "pick_for": "Choose Yosys for an open-source, scriptable RTL synthesis stage when the HDL subset and target-device flow are supported.",
+        "compare_when": "Compare vendor suites when you need proprietary device support, integrated IP catalogs, vendor-specific timing closure or broader language support."
+      },
+      "maintenance": {
+        "status": "active",
+        "checked_at": "2026-11-17",
+        "note": "Official Yosys v0.71 release was published on 2026-11-12. This establishes upstream release activity, not local installation or hardware validation.",
+        "source_url": "https://github.com/YosysHQ/yosys/releases/tag/v0.71"
+      },
+      "sources": [
+        {
+          "url": "https://github.com/YosysHQ/yosys",
+          "label": "Official source repository, feature overview and license",
+          "checked_at": "2026-11-17",
+          "supports": [
+            "identity",
+            "features",
+            "license",
+            "pricing"
+          ]
+        },
+        {
+          "url": "https://yosyshq.net/yosys/download.html",
+          "label": "Official downloads and packaged platform guidance",
+          "checked_at": "2026-11-17",
+          "supports": [
+            "downloads",
+            "platforms"
+          ]
+        },
+        {
+          "url": "https://github.com/YosysHQ/yosys/releases/tag/v0.71",
+          "label": "Official v0.71 release",
+          "checked_at": "2026-11-17",
+          "supports": [
+            "maintenance",
+            "downloads"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "nextpnr",
+      "name": "nextpnr",
+      "family": "science",
+      "category": "fpga-place-and-route",
+      "summary": "Vendor-neutral, timing-driven open-source FPGA place-and-route tool that implements synthesized netlists for supported device architectures.",
+      "license": "ISC",
+      "license_kind": "open-source",
+      "pricing_model": "free",
+      "official_url": "https://github.com/YosysHQ/nextpnr",
+      "download_url": "https://github.com/YosysHQ/nextpnr/releases",
+      "repository_url": "https://github.com/YosysHQ/nextpnr",
+      "platforms": [
+        "Windows",
+        "macOS",
+        "Linux"
+      ],
+      "platform_notes": "The project documents source builds on Linux, macOS and Windows; Windows builds use MSVC with vcpkg guidance. Architecture backends and their chip databases must be installed separately.",
+      "pricing_notes": "Free and open-source software; no paid license is required for the upstream project.",
+      "features": [
+        "Timing-driven FPGA placement and routing",
+        "Optional graphical interface",
+        "Architecture backends for Lattice iCE40, ECP5 and Nexus",
+        "Backends for Gowin, NanoXplore NG-Ultra and Cologne Chip GateMate",
+        "Experimental backends for selected Cyclone V, MachXO2 and Xilinx 7-series devices",
+        "Generic architecture backend for custom devices"
+      ],
+      "strengths": [
+        "Provides an open-source implementation stage for supported FPGA families",
+        "Can be built for one or several architecture backends",
+        "Works with Yosys synthesis and separate community-maintained device databases"
+      ],
+      "limitations": [
+        "Not an HDL simulator, synthesis engine or universal bitstream programmer",
+        "Device support depends on external architecture databases and bitstream tools",
+        "Several backends are explicitly experimental and should not be treated as production-equivalent to vendor suites",
+        "Source builds require a modern C++ toolchain, CMake, Python, Boost and Eigen"
+      ],
+      "use_cases": [
+        "FPGA place and route",
+        "timing-driven FPGA implementation",
+        "open-source FPGA toolchains",
+        "custom FPGA architecture research"
+      ],
+      "tags": [
+        "fpga",
+        "place-and-route",
+        "timing-driven",
+        "lattice",
+        "gowin",
+        "open-source-eda"
+      ],
+      "alternatives": [
+        "AMD Vivado Design Suite",
+        "Altera Quartus Prime Lite Edition"
+      ],
+      "recommendation": {
+        "pick_for": "Choose nextpnr when your exact FPGA family has a supported backend and you want a scriptable open-source place-and-route stage.",
+        "compare_when": "Compare the vendor suite when the device is unsupported, a backend is experimental, or vendor IP and sign-off tooling are required."
+      },
+      "maintenance": {
+        "status": "active",
+        "checked_at": "2026-11-17",
+        "note": "Official nextpnr-0.11.1 release was published on 2026-08-11; the upstream README continues to distinguish stable and experimental architecture backends.",
+        "source_url": "https://github.com/YosysHQ/nextpnr/releases/tag/nextpnr-0.11.1"
+      },
+      "sources": [
+        {
+          "url": "https://github.com/YosysHQ/nextpnr",
+          "label": "Official project README, supported architectures and build guidance",
+          "checked_at": "2026-11-17",
+          "supports": [
+            "identity",
+            "features",
+            "platforms",
+            "pricing"
+          ]
+        },
+        {
+          "url": "https://github.com/YosysHQ/nextpnr/blob/main/COPYING",
+          "label": "Official ISC license text",
+          "checked_at": "2026-11-17",
+          "supports": [
+            "license"
+          ]
+        },
+        {
+          "url": "https://github.com/YosysHQ/nextpnr/releases/tag/nextpnr-0.11.1",
+          "label": "Official nextpnr-0.11.1 release",
+          "checked_at": "2026-11-17",
+          "supports": [
+            "downloads",
+            "maintenance"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ghdl",
+      "name": "GHDL",
+      "family": "science",
+      "category": "hdl-simulation",
+      "summary": "Open-source VHDL analyzer, compiler and native-code simulator, with experimental synthesis support and integrations for mixed-tool verification workflows.",
+      "license": "GPL-2.0",
+      "license_kind": "open-source",
+      "pricing_model": "free",
+      "official_url": "https://ghdl.github.io/ghdl/",
+      "download_url": "https://github.com/ghdl/ghdl/releases",
+      "repository_url": "https://github.com/ghdl/ghdl",
+      "platforms": [
+        "Windows",
+        "macOS",
+        "Linux"
+      ],
+      "platform_notes": "The project documents Linux, Windows and macOS support. Windows packages are available through MSYS2 and WinGet; macOS users can use Homebrew or build from source. Backend and package availability varies.",
+      "pricing_notes": "Free and open-source software under GPL-2.0.",
+      "features": [
+        "Analyze, elaborate, compile and simulate VHDL designs",
+        "Full support for VHDL-1987, 1993 and 2002 with partial support for VHDL-2008 and 2019",
+        "Native-code simulation using GCC, LLVM or the mcode backend",
+        "Write GHW, VCD and FST waveform files",
+        "Co-simulation interfaces including VPI and VHPIDIRECT",
+        "Experimental synthesis and integration with Yosys through ghdl-yosys-plugin"
+      ],
+      "strengths": [
+        "Native-code simulation is useful for large VHDL designs",
+        "Runs on Windows, macOS and Linux",
+        "Can integrate with cocotb, Yosys and VHDL verification frameworks"
+      ],
+      "limitations": [
+        "VHDL-2008 and VHDL-2019 support is partial, not complete",
+        "Not a Verilog or SystemVerilog simulator",
+        "Synthesis and the GHDL-to-Yosys synthesis integration are explicitly experimental",
+        "VPI co-simulation does not expose every VHDL-specific construct"
+      ],
+      "use_cases": [
+        "VHDL simulation",
+        "VHDL analysis and elaboration",
+        "VHDL regression testing",
+        "VHDL co-simulation",
+        "VHDL synthesis research"
+      ],
+      "tags": [
+        "vhdl",
+        "hdl",
+        "simulation",
+        "compiler",
+        "waveforms",
+        "open-source-eda"
+      ],
+      "alternatives": [
+        "Icarus Verilog",
+        "Verilator",
+        "AMD Vivado Design Suite"
+      ],
+      "recommendation": {
+        "pick_for": "Choose GHDL when the design is VHDL-first and you need an open-source analyzer, compiler and simulator across desktop operating systems.",
+        "compare_when": "Compare Icarus Verilog or Verilator for Verilog/SystemVerilog projects, and verify the exact VHDL revision before adopting a design."
+      },
+      "maintenance": {
+        "status": "active",
+        "checked_at": "2026-11-17",
+        "note": "Official v6.0.0 release was published on 2026-03-07 and the upstream repository received a source commit on 2026-11-17. This is project activity evidence, not proof that every package manager carries the latest build.",
+        "source_url": "https://github.com/ghdl/ghdl/releases/tag/v6.0.0"
+      },
+      "sources": [
+        {
+          "url": "https://github.com/ghdl/ghdl",
+          "label": "Official project README, language support and platform guidance",
+          "checked_at": "2026-11-17",
+          "supports": [
+            "identity",
+            "features",
+            "platforms",
+            "pricing"
+          ]
+        },
+        {
+          "url": "https://github.com/ghdl/ghdl/blob/master/COPYING.md",
+          "label": "Official GPL version 2 license",
+          "checked_at": "2026-11-17",
+          "supports": [
+            "license"
+          ]
+        },
+        {
+          "url": "https://github.com/ghdl/ghdl/releases/tag/v6.0.0",
+          "label": "Official GHDL v6.0.0 release",
+          "checked_at": "2026-11-17",
+          "supports": [
+            "downloads",
+            "maintenance"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "icarus-verilog",
+      "name": "Icarus Verilog",
+      "family": "science",
+      "category": "hdl-simulation",
+      "summary": "Open-source Verilog compiler and VVP runtime for event-driven digital logic simulation, with a growing but incomplete SystemVerilog subset.",
+      "license": "GPL-2.0",
+      "license_kind": "open-source",
+      "pricing_model": "free",
+      "official_url": "https://steveicarus.github.io/iverilog/",
+      "download_url": "https://github.com/steveicarus/iverilog/releases",
+      "repository_url": "https://github.com/steveicarus/iverilog",
+      "platforms": [
+        "Windows",
+        "macOS",
+        "Linux"
+      ],
+      "platform_notes": "The project documents source builds across Unix-like systems and Windows cross-compilation; macOS-specific build notes are included. Check current package availability and compiler dependencies for the target host.",
+      "pricing_notes": "Free and open-source software under GPL-2.0.",
+      "features": [
+        "Compile Verilog source with the iverilog command-line compiler",
+        "Run compiled simulation output through the VVP runtime",
+        "VPI interface for simulator integrations",
+        "Generate waveform output including VCD and FST",
+        "Support for a growing subset of SystemVerilog"
+      ],
+      "strengths": [
+        "Straightforward compiler-plus-runtime command-line workflow",
+        "Useful for event-driven Verilog simulation and automated regression tests",
+        "Can serve as a simulator backend for cocotb"
+      ],
+      "limitations": [
+        "The project does not claim complete support for every Verilog feature",
+        "SystemVerilog support is a growing subset and unsupported constructs can block a design",
+        "Not a full FPGA synthesis, place-and-route or vendor implementation suite"
+      ],
+      "use_cases": [
+        "Verilog simulation",
+        "event-driven HDL simulation",
+        "RTL regression tests",
+        "VPI-based simulator integration",
+        "beginner digital logic simulation"
+      ],
+      "tags": [
+        "verilog",
+        "systemverilog",
+        "hdl",
+        "simulation",
+        "vvp",
+        "open-source-eda"
+      ],
+      "alternatives": [
+        "Verilator",
+        "GHDL",
+        "AMD Vivado Design Suite"
+      ],
+      "recommendation": {
+        "pick_for": "Choose Icarus Verilog for an open-source, event-driven Verilog simulation workflow when its supported language subset fits the design.",
+        "compare_when": "Compare Verilator for compiled SystemVerilog workflows, GHDL for VHDL, or a vendor simulator when broader language and IP support is required."
+      },
+      "maintenance": {
+        "status": "active",
+        "checked_at": "2026-11-17",
+        "note": "Official v13_0 release was published on 2026-03-02. Confirm the version in the chosen OS package before relying on newer language features.",
+        "source_url": "https://github.com/steveicarus/iverilog/releases/tag/v13_0"
+      },
+      "sources": [
+        {
+          "url": "https://github.com/steveicarus/iverilog",
+          "label": "Official source repository and language support notes",
+          "checked_at": "2026-11-17",
+          "supports": [
+            "identity",
+            "features",
+            "platforms",
+            "pricing"
+          ]
+        },
+        {
+          "url": "https://github.com/steveicarus/iverilog/blob/master/COPYING",
+          "label": "Official GPL version 2 license",
+          "checked_at": "2026-11-17",
+          "supports": [
+            "license"
+          ]
+        },
+        {
+          "url": "https://github.com/steveicarus/iverilog/releases/tag/v13_0",
+          "label": "Official Icarus Verilog v13_0 release",
+          "checked_at": "2026-11-17",
+          "supports": [
+            "downloads",
+            "maintenance"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "verilator",
+      "name": "Verilator",
+      "family": "science",
+      "category": "hdl-simulation",
+      "summary": "Open-source Verilog and SystemVerilog compiler and lint engine that generates C++ or SystemC models for compiled simulation.",
+      "license": "LGPL-3.0-only OR Artistic-2.0",
+      "license_kind": "open-source",
+      "pricing_model": "free",
+      "official_url": "https://verilator.org/guide/latest/",
+      "download_url": "https://github.com/verilator/verilator",
+      "repository_url": "https://github.com/verilator/verilator",
+      "platforms": [
+        "Windows",
+        "macOS",
+        "Linux"
+      ],
+      "platform_notes": "Linux and macOS are documented build targets. Windows users are directed toward WSL2 for the most reliable experience; Cygwin and native MSVC output are possible but not regularly tested by the project.",
+      "pricing_notes": "Free software under LGPL-3.0-only or Artistic-2.0; commercial support is separate from the upstream tool.",
+      "features": [
+        "Compile supported Verilog and SystemVerilog designs into C++ or SystemC models",
+        "Lint RTL and report language or structural issues",
+        "Generate coverage instrumentation and waveform tracing",
+        "Use compiled models in custom C++/SystemC simulation harnesses",
+        "Support multithreaded generated models"
+      ],
+      "strengths": [
+        "Combines linting with compiled simulation and coverage workflows",
+        "Useful for large regression environments that integrate with C++ or SystemC",
+        "Upstream documentation is versioned and actively maintained"
+      ],
+      "limitations": [
+        "Not a traditional event-driven simulator; simulation requires a wrapper or harness",
+        "Language-feature support should be checked against the exact design and current documentation",
+        "Windows native and Cygwin paths are less regularly tested than WSL2"
+      ],
+      "use_cases": [
+        "SystemVerilog linting",
+        "compiled RTL simulation",
+        "C++ hardware models",
+        "SystemC simulation",
+        "HDL coverage and waveform tracing"
+      ],
+      "tags": [
+        "verilog",
+        "systemverilog",
+        "hdl",
+        "lint",
+        "compiled-simulation",
+        "systemc"
+      ],
+      "alternatives": [
+        "Icarus Verilog",
+        "GHDL",
+        "AMD Vivado Design Suite"
+      ],
+      "recommendation": {
+        "pick_for": "Choose Verilator when a Verilog/SystemVerilog project benefits from compiled C++ or SystemC models, linting and coverage instrumentation.",
+        "compare_when": "Compare Icarus or a vendor event-driven simulator when simulator semantics, direct interactive simulation or broader language-feature coverage are more important."
+      },
+      "maintenance": {
+        "status": "active",
+        "checked_at": "2026-11-17",
+        "note": "The official documentation identifies the 5.054 series and the upstream repository received a source commit on 2026-11-17. A source commit is not itself a tagged stable release.",
+        "source_url": "https://github.com/verilator/verilator/commit/8d39b26906b819c59294de34ef1bb800d572d652"
+      },
+      "sources": [
+        {
+          "url": "https://verilator.org/guide/latest/overview.html",
+          "label": "Official overview and compiled simulation model",
+          "checked_at": "2026-11-17",
+          "supports": [
+            "identity",
+            "features"
+          ]
+        },
+        {
+          "url": "https://verilator.org/guide/latest/copyright.html",
+          "label": "Official dual-license statement",
+          "checked_at": "2026-11-17",
+          "supports": [
+            "license",
+            "pricing"
+          ]
+        },
+        {
+          "url": "https://verilator.org/guide/latest/faq.html",
+          "label": "Official Windows support and platform caveats",
+          "checked_at": "2026-11-17",
+          "supports": [
+            "platforms"
+          ]
+        },
+        {
+          "url": "https://github.com/verilator/verilator/commit/8d39b26906b819c59294de34ef1bb800d572d652",
+          "label": "Upstream source activity on 2026-11-17",
+          "checked_at": "2026-11-17",
+          "supports": [
+            "maintenance",
+            "downloads"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cocotb",
+      "name": "cocotb",
+      "family": "science",
+      "category": "hdl-verification",
+      "summary": "Python-based coroutine co-simulation testbench framework for verifying VHDL and Verilog/SystemVerilog RTL through simulator interfaces.",
+      "license": "BSD-3-Clause",
+      "license_kind": "open-source",
+      "pricing_model": "free",
+      "official_url": "https://www.cocotb.org/",
+      "download_url": "https://pypi.org/project/cocotb/",
+      "repository_url": "https://github.com/cocotb/cocotb",
+      "platforms": [
+        "Windows",
+        "macOS",
+        "Linux"
+      ],
+      "platform_notes": "Official platform guidance targets 64-bit Windows, macOS and Linux with standard CPython. Simulator availability and support vary by operating system and simulator interface.",
+      "pricing_notes": "Free and open source under BSD-3-Clause; project sponsorship is optional and is not a software subscription.",
+      "features": [
+        "Write RTL testbenches in Python rather than HDL-specific testbench languages",
+        "Coroutine-based concurrency and reusable test components",
+        "Co-simulation through VPI, VHPI or FLI interfaces",
+        "Built-in runner and machine-readable test reporting for CI",
+        "Documented simulator integrations include Icarus Verilog, GHDL, Verilator and commercial simulators"
+      ],
+      "strengths": [
+        "Lets software developers reuse Python libraries and test patterns for hardware verification",
+        "Supports randomized and reusable testbench workflows",
+        "Integrates with common continuous-integration systems"
+      ],
+      "limitations": [
+        "Does not simulate or synthesize HDL; a compatible simulator must be installed separately",
+        "Simulator-specific limitations and interface support differ; for example, GHDL's VPI path cannot expose every VHDL-specific construct",
+        "Only 64-bit Python and simulator environments are supported by current platform guidance"
+      ],
+      "use_cases": [
+        "Python RTL testbenches",
+        "HDL co-simulation",
+        "randomized hardware testing",
+        "CI-based hardware verification",
+        "reusable bus and protocol test components"
+      ],
+      "tags": [
+        "python",
+        "hdl",
+        "verification",
+        "testbench",
+        "cosimulation",
+        "vpi",
+        "vhpi",
+        "fli"
+      ],
+      "alternatives": [
+        "VUnit",
+        "OSVVM",
+        "UVVM"
+      ],
+      "recommendation": {
+        "pick_for": "Choose cocotb when you want Python-driven testbenches for a supported VHDL or Verilog/SystemVerilog simulator.",
+        "compare_when": "Compare HDL-native verification frameworks when a project depends on a specific VHDL or SystemVerilog methodology, or use formal verification when properties must be proven rather than sampled by simulation."
+      },
+      "maintenance": {
+        "status": "active",
+        "checked_at": "2026-11-17",
+        "note": "Official cocotb v2.1.0 release was published on 2026-08-30; the stable documentation provides current platform and simulator compatibility guidance.",
+        "source_url": "https://github.com/cocotb/cocotb/releases/tag/v2.1.0"
+      },
+      "sources": [
+        {
+          "url": "https://docs.cocotb.org/en/stable/",
+          "label": "Official project overview, Python testbench model and free BSD licensing",
+          "checked_at": "2026-11-17",
+          "supports": [
+            "identity",
+            "features",
+            "license",
+            "pricing"
+          ]
+        },
+        {
+          "url": "https://docs.cocotb.org/en/stable/platform_support.html",
+          "label": "Official 64-bit operating-system support matrix",
+          "checked_at": "2026-11-17",
+          "supports": [
+            "platforms"
+          ]
+        },
+        {
+          "url": "https://docs.cocotb.org/en/stable/simulator_support.html",
+          "label": "Official simulator compatibility and known limitations",
+          "checked_at": "2026-11-17",
+          "supports": [
+            "features",
+            "platforms"
+          ]
+        },
+        {
+          "url": "https://github.com/cocotb/cocotb/releases/tag/v2.1.0",
+          "label": "Official cocotb v2.1.0 release",
+          "checked_at": "2026-11-17",
+          "supports": [
+            "downloads",
+            "maintenance"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "symbiyosys",
+      "name": "SymbiYosys (SBY)",
+      "family": "science",
+      "category": "hdl-formal-verification",
+      "summary": "Yosys-based formal hardware verification front-end that orchestrates property-checking and cover workflows through configurable solver engines.",
+      "license": "ISC",
+      "license_kind": "open-source",
+      "pricing_model": "free",
+      "official_url": "https://yosyshq.readthedocs.io/projects/sby/en/latest/",
+      "download_url": "https://github.com/YosysHQ/oss-cad-suite-build/releases/latest",
+      "repository_url": "https://github.com/YosysHQ/sby",
+      "platforms": [
+        "Windows",
+        "macOS",
+        "Linux"
+      ],
+      "platform_notes": "The upstream OSS CAD Suite packages SBY for Windows x64, macOS and Linux distributions. Building a standalone flow requires compatible Yosys and solver dependencies; verify the exact engine and host support.",
+      "pricing_notes": "The SBY front-end is free and open source. Solver engines and bundled dependencies have their own licensing and availability terms.",
+      "features": [
+        "Front-end driver for Yosys-based formal hardware verification",
+        "Configurable formal engines and solver-backed workflows",
+        "Property checking and cover-trace generation for supported designs",
+        "Integration with the Yosys and OSS CAD Suite toolchain"
+      ],
+      "strengths": [
+        "Adds formal verification to an open-source RTL workflow",
+        "Can complement simulation by checking explicitly stated properties under defined assumptions",
+        "ISC-licensed front-end and a packaged OSS CAD Suite installation path"
+      ],
+      "limitations": [
+        "Formal results depend on correct properties, assumptions, models and solver configuration",
+        "Solver engines and external dependencies have separate license terms",
+        "Not an HDL waveform simulator, synthesis engine or FPGA place-and-route tool",
+        "The upstream repository now uses the SBY name; older material commonly says SymbiYosys"
+      ],
+      "use_cases": [
+        "formal hardware verification",
+        "RTL property checking",
+        "bounded model checking",
+        "cover trace exploration",
+        "Yosys verification workflows"
+      ],
+      "tags": [
+        "formal-verification",
+        "hdl",
+        "rtl",
+        "yosys",
+        "model-checking",
+        "sby"
+      ],
+      "aliases": [
+        "SBY"
+      ],
+      "alternatives": [
+        "Commercial RTL formal verification suites",
+        "AMD Vivado Design Suite"
+      ],
+      "recommendation": {
+        "pick_for": "Choose SBY when you have a Yosys-compatible RTL design and want solver-backed formal property checking or cover workflows.",
+        "compare_when": "Compare vendor-integrated formal tools when the design relies on proprietary language features, vendor IP models or a commercial verification methodology."
+      },
+      "maintenance": {
+        "status": "active",
+        "checked_at": "2026-11-17",
+        "note": "The upstream repository received a merge commit on 2026-11-16 that renamed the project presentation to SBY. The documentation and older ecosystem references may still use SymbiYosys.",
+        "source_url": "https://github.com/YosysHQ/sby/commit/b21f778333efc1e7c33fe22b56d43f87e4f759d4"
+      },
+      "sources": [
+        {
+          "url": "https://yosyshq.readthedocs.io/projects/sby/en/latest/",
+          "label": "Official SBY documentation and verification workflow",
+          "checked_at": "2026-11-17",
+          "supports": [
+            "identity",
+            "features"
+          ]
+        },
+        {
+          "url": "https://github.com/YosysHQ/sby",
+          "label": "Official SBY repository and OSS CAD Suite installation route",
+          "checked_at": "2026-11-17",
+          "supports": [
+            "identity",
+            "downloads",
+            "pricing"
+          ]
+        },
+        {
+          "url": "https://github.com/YosysHQ/sby/blob/main/COPYING",
+          "label": "Official ISC license text",
+          "checked_at": "2026-11-17",
+          "supports": [
+            "license"
+          ]
+        },
+        {
+          "url": "https://github.com/YosysHQ/sby/commit/b21f778333efc1e7c33fe22b56d43f87e4f759d4",
+          "label": "Upstream project rename and source activity",
+          "checked_at": "2026-11-17",
+          "supports": [
+            "maintenance"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "gtkwave",
+      "name": "GTKWave",
+      "family": "science",
+      "category": "hdl-waveform-analysis",
+      "summary": "Digital waveform viewer for inspecting simulator traces including VCD/EVCD, FST, GHW and other supported trace formats.",
+      "license": "GPL-2.0",
+      "license_kind": "open-source",
+      "pricing_model": "free",
+      "official_url": "https://gtkwave.sourceforge.net/",
+      "download_url": "https://gtkwave.sourceforge.net/",
+      "repository_url": "https://github.com/gtkwave/gtkwave",
+      "platforms": [
+        "Windows",
+        "macOS",
+        "Linux"
+      ],
+      "platform_notes": "The project describes Unix and Win32 support and documents source builds on Linux and macOS. The official site warns that its older macOS binary is not compatible with current macOS releases; newer macOS use may require a community Homebrew tap or a source build.",
+      "pricing_notes": "Free and open source under GPL-2.0.",
+      "features": [
+        "View VCD and EVCD traces",
+        "Read FST, GHW, LXT, LXT2 and VZT formats",
+        "Inspect signal transitions and timing relationships",
+        "Save and reopen waveform-view layouts"
+      ],
+      "strengths": [
+        "Supports common waveform formats emitted by several HDL simulators",
+        "Useful alongside GHDL, Icarus Verilog and Verilator",
+        "Open-source viewer with both a long-lived LTS distribution and a current development repository"
+      ],
+      "limitations": [
+        "Viewer only; a simulator or hardware capture tool must produce the trace file",
+        "VCD can be slower and more memory-intensive than FST for large traces",
+        "The legacy macOS binary may not run on current macOS; check the current build route"
+      ],
+      "use_cases": [
+        "HDL waveform inspection",
+        "VCD debugging",
+        "FST trace analysis",
+        "digital logic timing review",
+        "simulation debugging"
+      ],
+      "tags": [
+        "waveform-viewer",
+        "hdl",
+        "vcd",
+        "fst",
+        "ghw",
+        "digital-logic"
+      ],
+      "alternatives": [
+        "Surfer"
+      ],
+      "recommendation": {
+        "pick_for": "Choose GTKWave when you need a free desktop viewer for supported HDL simulator waveform files.",
+        "compare_when": "Compare newer waveform viewers when you need a modern interface, a specific trace format or a maintained native macOS package."
+      },
+      "maintenance": {
+        "status": "active",
+        "checked_at": "2026-11-17",
+        "note": "The upstream GitHub development repository received a commit on 2026-11-03; the official site lists GTKWave LTS 3.3.128. Treat the LTS download and current development branch as distinct release channels.",
+        "source_url": "https://github.com/gtkwave/gtkwave/commit/e40ba7937336824f12f7db870ea36f6f090dd90d"
+      },
+      "sources": [
+        {
+          "url": "https://gtkwave.sourceforge.net/",
+          "label": "Official product overview, LTS downloads and platform notes",
+          "checked_at": "2026-11-17",
+          "supports": [
+            "identity",
+            "platforms",
+            "downloads",
+            "pricing"
+          ]
+        },
+        {
+          "url": "https://gtkwave.github.io/gtkwave/intro/formats.html",
+          "label": "Official documentation for supported waveform formats",
+          "checked_at": "2026-11-17",
+          "supports": [
+            "features"
+          ]
+        },
+        {
+          "url": "https://github.com/gtkwave/gtkwave/blob/master/LICENSE",
+          "label": "Official GNU GPL version 2 license",
+          "checked_at": "2026-11-17",
+          "supports": [
+            "license"
+          ]
+        },
+        {
+          "url": "https://github.com/gtkwave/gtkwave/commit/e40ba7937336824f12f7db870ea36f6f090dd90d",
+          "label": "Upstream development activity on 2026-11-03",
+          "checked_at": "2026-11-17",
+          "supports": [
+            "maintenance"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "oss-cad-suite",
+      "name": "OSS CAD Suite",
+      "family": "science",
+      "category": "fpga-toolchain-distributions",
+      "summary": "Multi-platform binary distribution that packages open-source digital-design tools for RTL synthesis, formal verification, FPGA place-and-route, programming and testing.",
+      "license": "Mixed component-specific licenses; bundled tools retain their own license terms and notices.",
+      "license_kind": "mixed",
+      "pricing_model": "free",
+      "official_url": "https://github.com/YosysHQ/oss-cad-suite-build",
+      "download_url": "https://github.com/YosysHQ/oss-cad-suite-build/releases/latest",
+      "repository_url": "https://github.com/YosysHQ/oss-cad-suite-build",
+      "platforms": [
+        "Windows",
+        "macOS",
+        "Linux"
+      ],
+      "platform_notes": "Official bundles include Windows x64, macOS Intel and Apple Silicon, and Linux x64/ARM64. The maintainers recommend WSL with the Linux x64 package for the best Windows experience; architecture and tool support vary by release.",
+      "pricing_notes": "Free binary distribution of open-source tools. Individual bundled components have independent licenses; the separate Tabby CAD Suite is a commercial offering.",
+      "features": [
+        "Packages tools for RTL synthesis, formal verification, place-and-route, FPGA programming and testing",
+        "Supports workflows involving Verilog, Migen and Amaranth HDLs",
+        "Provides a shared environment setup script and packaged dependencies",
+        "Includes a Python environment for supported LiteX and related scripts"
+      ],
+      "strengths": [
+        "Reduces the work of assembling and configuring a multi-tool open-source EDA environment",
+        "Provides ready-to-run bundles for Windows, macOS and Linux architectures",
+        "Makes the Yosys, nextpnr and SBY ecosystem easier to try as a coordinated toolchain"
+      ],
+      "limitations": [
+        "A binary distribution, not a unified graphical IDE or a single simulator",
+        "Tool versions, target-device support and component licenses remain independent",
+        "Some FPGA families require external databases, programmers or vendor tools",
+        "For Windows, the maintainers recommend WSL for the best experience"
+      ],
+      "use_cases": [
+        "open-source FPGA toolchain setup",
+        "digital logic development environment",
+        "RTL synthesis and verification bundle",
+        "FPGA programming tools",
+        "reproducible EDA environment"
+      ],
+      "tags": [
+        "fpga",
+        "eda",
+        "toolchain",
+        "rtl",
+        "yosys",
+        "nextpnr",
+        "open-source"
+      ],
+      "alternatives": [
+        "AMD Vivado Design Suite",
+        "Altera Quartus Prime Lite Edition"
+      ],
+      "recommendation": {
+        "pick_for": "Choose OSS CAD Suite when you want a ready-to-run collection of open-source digital-design tools without assembling every dependency yourself.",
+        "compare_when": "Compare a vendor suite when you need guaranteed support for a particular FPGA family, proprietary IP integration or a vendor-specific implementation flow."
+      },
+      "maintenance": {
+        "status": "active",
+        "checked_at": "2026-11-17",
+        "note": "The official nightly distribution published a release dated 2026-11-17. Component versions and architecture support can change independently within the bundle.",
+        "source_url": "https://github.com/YosysHQ/oss-cad-suite-build/releases/tag/2026-11-17"
+      },
+      "sources": [
+        {
+          "url": "https://github.com/YosysHQ/oss-cad-suite-build",
+          "label": "Official distribution overview, tool scope and platform matrix",
+          "checked_at": "2026-11-17",
+          "supports": [
+            "identity",
+            "features",
+            "platforms",
+            "pricing"
+          ]
+        },
+        {
+          "url": "https://github.com/YosysHQ/oss-cad-suite-build/releases/tag/2026-11-17",
+          "label": "Official 2026-11-17 binary distribution release",
+          "checked_at": "2026-11-17",
+          "supports": [
+            "downloads",
+            "maintenance"
+          ]
+        },
+        {
+          "url": "https://github.com/YosysHQ/yosys/blob/main/COPYING",
+          "label": "Example bundled Yosys component license",
+          "checked_at": "2026-11-17",
+          "supports": [
+            "license"
+          ]
+        },
+        {
+          "url": "https://github.com/YosysHQ/nextpnr/blob/main/COPYING",
+          "label": "Example bundled nextpnr component license",
+          "checked_at": "2026-11-17",
+          "supports": [
+            "license"
+          ]
+        },
+        {
+          "url": "https://github.com/YosysHQ/sby/blob/main/COPYING",
+          "label": "Example bundled SBY component license",
+          "checked_at": "2026-11-17",
+          "supports": [
+            "license"
+          ]
+        }
+      ]
+    }
+  ]
+}

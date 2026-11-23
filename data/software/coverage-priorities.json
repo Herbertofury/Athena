@@ -1,7 +1,17 @@
 {
-  "reviewed_at": "2026-11-16",
+  "reviewed_at": "2026-11-17",
   "meaning": "Research backlog informed by the integrated second expansion. These are remaining evidence and coverage tasks, not verified recommendations or a claim that the taxonomy is complete. Counts describe the reviewed snapshot; generated coverage and refresh reports remain authoritative.",
   "priorities": [
+    {
+      "area": "FPGA, RTL and HDL toolchain validation",
+      "tasks": [
+        "Verify exact FPGA board and silicon support across Yosys/nextpnr architecture databases and vendor suites",
+        "Reproduce one complete Verilog and one VHDL flow from source through bitstream generation and programming",
+        "Compare HDL language subsets, simulator semantics, formal engines and waveform formats with fixed fixtures",
+        "Record vendor edition, device family, host OS and license constraints separately"
+      ],
+      "next_evidence": "A sourced initial catalog now covers Yosys, nextpnr, GHDL, Icarus Verilog, Verilator, cocotb, SBY, GTKWave, OSS CAD Suite, Vivado and Quartus Prime Lite. These are documentation-level product records, not board-tested compatibility claims. Next select representative supported boards and preserve exact tool versions, device databases, synthesis logs, timing reports, bitstream hashes and safe programming acceptance. Experimental architecture backends and proprietary IP remain explicit limitations."
+    },
     {
       "area": "Complete evidence and lifecycle reviews",
       "tasks": [
