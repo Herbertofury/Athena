@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "reviewed_at": "2026-11-17",
+  "product": "Process Monitor for Windows",
+  "documented_current_version": "4.13",
+  "product_page_published": "2026-11-05",
+  "documented_ipc_introduction": {"version": "4.1", "date": "2026-08-19", "event_classes": ["named pipes", "mailslots"]},
+  "license_classification": "proprietary Sysinternals terms; not the separate Linux project license",
+  "sources": [
+    "https://learn.microsoft.com/en-us/sysinternals/downloads/procmon",
+    "https://learn.microsoft.com/en-us/sysinternals/",
+    "https://learn.microsoft.com/en-us/sysinternals/license-terms"
+  ],
+  "platforms_documented": ["Windows 11 and higher", "Windows Server 2019 and higher"],
+  "runtime_status": "not-run",
+  "integration_status": "proposed-not-implemented",
+  "unknowns": ["4.13-specific release changes", "actual fixture event coverage", "runtime overhead", "Hermes transport and authentication behavior"]
+}
