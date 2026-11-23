@@ -165,45 +165,63 @@ async function savedGenerationPage({kind,id,before},{signal}){
  return page;
 }
 function attachArchiveHistory(list){
- const panel=$('saved-archive-history'),open=$('list-saved-generations'),older=$('older-saved-generations'),dismiss=$('dismiss-saved-generations'),status=$('saved-archive-history-status');
+ const panel=$('saved-archive-history'),open=$('list-saved-generations'),older=$('older-saved-generations'),previous=$('previous-saved-generations'),dismiss=$('dismiss-saved-generations'),status=$('saved-archive-history-status');
  const target=()=>({kind:$('saved-archive-kind').value,id:$('saved-archive-id').value.trim()});
  const selection=createArchiveSelection(savedGenerationPage);
- let next=null,identity=null;
+ const cached=[];
+ let current=null,identity=null;
  const same=value=>{const active=target();return value?.kind===active.kind&&value.id===active.id;};
- const controls=()=>{open.disabled=selection.pending;older.disabled=selection.pending||next===null;};
- clearArchiveHistory=()=>{
-  selection.cancel();next=null;identity=null;list.replaceChildren();status.textContent='';panel.hidden=true;open.setAttribute('aria-expanded','false');controls();
+ const controls=()=>{
+  open.disabled=selection.pending;
+  older.disabled=selection.pending||current===null||current.next_before===null;
+  previous.disabled=selection.pending||cached.length===0;
  };
+ clearArchiveHistory=()=>{
+  selection.cancel();cached.length=0;current=null;identity=null;list.replaceChildren();status.textContent='';panel.hidden=true;open.setAttribute('aria-expanded','false');controls();
+ };
+ function display(page,value,message,focus){
+  const nodes=page.entries.map(row=>{
+   const item=text('li',''),button=text('button','Open generation '+row.generation);button.type='button';
+   button.addEventListener('click',()=>{
+    if(!list.contains(item)||!same(value)||panel.hidden)return;
+    $('saved-archive-generation').value=row.generation;
+    $('saved-archive-form').requestSubmit();
+   });
+   item.append(button,text('p',row.observed_at+' · '+row.stored_bytes+' stored bytes'));
+   return item;
+  });
+  list.replaceChildren(...nodes);identity=value;current=page;
+  status.textContent=nodes.length?message(nodes.length):'No retained generations for that saved record.';
+  controls();
+  if(focus)(nodes[0]?.querySelector('button')??open).focus();
+ }
  async function show(before){
-  if(selection.pending||(before!==null&&(before!==next||!same(identity))))return;
+  if(selection.pending||(before!==null&&(before!==current?.next_before||!same(identity))))return;
   const value=target();
   panel.hidden=false;open.setAttribute('aria-expanded','true');status.textContent='Reading stored metadata only…';
   const task=selection.load({...value,before});controls();
   try{
    const received=await task;
    if(received.status!=='ready'||!same(value)||panel.hidden)return;
-   const page=received.record;
-   const nodes=page.entries.map(row=>{
-    const item=text('li',''),button=text('button','Open generation '+row.generation);button.type='button';
-    button.addEventListener('click',()=>{
-     if(!list.contains(item)||!same(value)||panel.hidden)return;
-     $('saved-archive-generation').value=row.generation;
-     $('saved-archive-form').requestSubmit();
-    });
-    item.append(button,text('p',row.observed_at+' · '+row.stored_bytes+' stored bytes'));
-    return item;
-   });
-   list.replaceChildren(...nodes);identity=value;next=page.next_before;
-   status.textContent=nodes.length?'Showing '+nodes.length+' saved '+(before===null?'generations.':'older generations.'):'No retained generations for that saved record.';
-   // Move keyboard focus into a replaced page rather than leaving it on disabled Older.
-   if(before!==null)nodes[0]?.querySelector('button').focus();
+   if(before===null)cached.length=0;
+   else {
+    cached.push(current);
+    // History metadata only: at most eight prior pages, each bounded to 16 KiB.
+    if(cached.length>8)cached.shift();
+   }
+   display(received.record,value,n=>'Showing '+n+' saved '+(before===null?'generations.':'older generations.'),before!==null);
   }catch(error){
    if(!same(value)||panel.hidden)return;
    status.textContent=error.message+(list.childElementCount?' The previous page remains available.':'');
   }finally{controls();}
  }
  open.addEventListener('click',()=>show(null));
- older.addEventListener('click',()=>{if(next!==null)show(next);});
+ older.addEventListener('click',()=>{const before=current?.next_before;if(before)show(before);});
+ previous.addEventListener('click',()=>{
+  if(selection.pending||!cached.length||!same(identity)||panel.hidden)return;
+  const page=cached.pop();
+  display(page,identity,n=>'Showing '+n+' generations from a previously loaded page. No new read.',true);
+ });
  dismiss.addEventListener('click',()=>{clearArchiveHistory();open.focus();});
 }
 const historyList=$('saved-archive-history-list');
