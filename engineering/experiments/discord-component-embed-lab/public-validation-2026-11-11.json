@@ -1,0 +1,215 @@
+{
+  "schema_version": 1,
+  "checked_at": "2026-11-11",
+  "classification": "Official public documentation code sample; NOT a live Discord message or API fixture",
+  "source_base_commit": "7ba88d30229f3073c9aa738f087b9199ffae16ae",
+  "source_ids": [
+    "DCE11001",
+    "DCE11002",
+    "DCE11003",
+    "DCE11004",
+    "DCE11005",
+    "DCE11006"
+  ],
+  "upstream": {
+    "official_page": "https://docs.discord.com/developers/link-previews/component-embeds",
+    "source_url": "https://github.com/discord/discord-api-docs/blob/36adecb2e0bbbf500c430147ef4acbe9aa1a389e/developers/link-previews/component-embeds.mdx",
+    "source_commit": "36adecb2e0bbbf500c430147ef4acbe9aa1a389e",
+    "source_blob_sha1_verified": "e10583d3d67c887ebffc1e3a939d79137372d993"
+  },
+  "captures": [
+    {
+      "requested_url": "https://docs.discord.com/developers/link-previews/component-embeds",
+      "final_url": "https://docs.discord.com/developers/link-previews/component-embeds",
+      "status": 200,
+      "captured_at_utc": "2026-11-11T11:02:34.278527+00:00",
+      "headers": {
+        "date": "Wed, 11 Nov 2026 11:02:34 GMT",
+        "content-type": "text/html; charset=utf-8",
+        "cache-control": "public, max-age=3600",
+        "last-modified": "Tue, 10 Nov 2026 22:50:35 GMT"
+      },
+      "sha256": "839dcbfe5618f1d300baa24626f8304b11c23ff92ca30609204cbf4d2d66b7bf",
+      "bytes": 338284,
+      "user_agent": "Athena-public-documentation-research/1.0",
+      "max_bytes": 4000000
+    },
+    {
+      "url": "https://api.github.com/repos/discord/discord-api-docs/git/trees/main?recursive=1",
+      "status": 200,
+      "captured_at_utc": "2026-11-11T11:03:03.834246+00:00",
+      "sha256": "b9368e4263c0c2b27c5286cb800ded9c920092f8c18b089c366dbdb5b5c8bf9f",
+      "bytes": 200220,
+      "headers": {
+        "date": "Wed, 11 Nov 2026 11:03:03 GMT",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "public, max-age=60, s-maxage=60",
+        "etag": "W/\"f9f1df63d4a97deab4cae66518e19292d53d0bda23f69de800500a65b5363760\"",
+        "last-modified": "Wed, 11 Nov 2026 01:29:51 GMT"
+      }
+    },
+    {
+      "url": "https://raw.githubusercontent.com/discord/discord-api-docs/36adecb2e0bbbf500c430147ef4acbe9aa1a389e/developers/link-previews/component-embeds.mdx",
+      "revision": "36adecb2e0bbbf500c430147ef4acbe9aa1a389e",
+      "status": 200,
+      "captured_at_utc": "2026-11-11T11:03:19.354808+00:00",
+      "sha256": "c949708581566a22e02d6d3ce2d4308e952daf92c8bf695046363a3e69ab5377",
+      "bytes": 10496,
+      "headers": {
+        "cache-control": "max-age=300",
+        "content-type": "text/plain; charset=utf-8",
+        "etag": "\"0c1e045cc0275eedfe80fd39bb634b4626eb79ac82e478d564cfe9e0ad7aa4b7\"",
+        "date": "Wed, 11 Nov 2026 11:03:19 GMT",
+        "content-length": "10496"
+      }
+    },
+    {
+      "url": "https://raw.githubusercontent.com/discord/discord-api-docs/36adecb2e0bbbf500c430147ef4acbe9aa1a389e/LICENSE",
+      "revision": "36adecb2e0bbbf500c430147ef4acbe9aa1a389e",
+      "status": 200,
+      "captured_at_utc": "2026-11-11T11:03:21.822246+00:00",
+      "sha256": "7abe19ec9bb73b36141b999b861d24ad855e808bafe0f81e84cce28556f6c297",
+      "bytes": 20131,
+      "headers": {
+        "cache-control": "max-age=300",
+        "content-type": "text/plain; charset=utf-8",
+        "etag": "\"7a2abb8f8c057c2a887257579333368552163a046b62884506d7ee654e85cfd8\"",
+        "date": "Wed, 11 Nov 2026 11:03:21 GMT",
+        "content-length": "20131"
+      }
+    },
+    {
+      "url": "https://raw.githubusercontent.com/discord/discord-api-docs/36adecb2e0bbbf500c430147ef4acbe9aa1a389e/LICENSE-CODE",
+      "revision": "36adecb2e0bbbf500c430147ef4acbe9aa1a389e",
+      "status": 200,
+      "captured_at_utc": "2026-11-11T11:03:25.506959+00:00",
+      "sha256": "ef75c87c20a645242bc8316055d642105b3e93f5aad95a66e734169728661c72",
+      "bytes": 1063,
+      "headers": {
+        "cache-control": "max-age=300",
+        "content-type": "text/plain; charset=utf-8",
+        "etag": "\"85332bd65efc1db49dc49fbf44a4e6c96f6323ad6fe7af7ad5193c033f18d8a2\"",
+        "date": "Wed, 11 Nov 2026 11:03:25 GMT",
+        "content-length": "1063"
+      }
+    },
+    {
+      "url": "https://api.github.com/repos/discord/discord-api-docs/commits/main",
+      "status": 200,
+      "captured_at_utc": "2026-11-11T11:03:51.654195+00:00",
+      "sha256": "6883261463ecf7ef4fa1cd59a39e87c3289b833e265102598eddd452f5d76841",
+      "bytes": 16618,
+      "headers": {
+        "date": "Wed, 11 Nov 2026 11:03:51 GMT",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "public, max-age=60, s-maxage=60",
+        "etag": "W/\"6883261463ecf7ef4fa1cd59a39e87c3289b833e265102598eddd452f5d76841\"",
+        "last-modified": "Tue, 10 Nov 2026 22:37:35 GMT",
+        "content-length": "16618"
+      }
+    },
+    {
+      "url": "https://raw.githubusercontent.com/discord/discord-api-docs/36adecb2e0bbbf500c430147ef4acbe9aa1a389e/README.md",
+      "status": 200,
+      "captured_at_utc": "2026-11-11T11:03:54.036007+00:00",
+      "sha256": "629081d4fa77acbbed6382e003d1c00138206934b476e0fd8f8c82817dd5e1c1",
+      "bytes": 2886,
+      "headers": {
+        "cache-control": "max-age=300",
+        "content-type": "text/plain; charset=utf-8",
+        "etag": "\"ccc765ae32eabee6fea4932b6d56172fdf829614c0001f9fa12029d72b41aaa9\"",
+        "date": "Wed, 11 Nov 2026 11:03:54 GMT",
+        "content-length": "2886"
+      }
+    }
+  ],
+  "artifacts": {
+    "official-component-embeds.html": {
+      "bytes": 338284,
+      "sha256": "839dcbfe5618f1d300baa24626f8304b11c23ff92ca30609204cbf4d2d66b7bf"
+    },
+    "official-component-embeds.mdx": {
+      "bytes": 10496,
+      "sha256": "c949708581566a22e02d6d3ce2d4308e952daf92c8bf695046363a3e69ab5377"
+    },
+    "full-example-script-exact.json": {
+      "bytes": 2126,
+      "sha256": "ff5b3fb0c7af5c849ab18c4233bcaa2371c6fa9df04096b46139b1cf59aad875"
+    },
+    "full-example-payload.json": {
+      "bytes": 2235,
+      "sha256": "d2a3a025a50184b5b1309c9246d2d698eaeab3fb18405249b32f79d16e068153"
+    },
+    "LICENSE-CODE": {
+      "bytes": 1063,
+      "sha256": "ef75c87c20a645242bc8316055d642105b3e93f5aad95a66e734169728661c72"
+    },
+    "README.md": {
+      "bytes": 2886,
+      "sha256": "629081d4fa77acbbed6382e003d1c00138206934b476e0fd8f8c82817dd5e1c1"
+    }
+  },
+  "transformation": [
+    "Extract Full Example fenced HTML from exact pinned MDX.",
+    "Extract its application/json script text without executing it.",
+    "Parse and reformat JSON; all component fields/values unchanged.",
+    "Distribute only code sample JSON with MIT notice, not full documentation prose.",
+    "Replay source component unchanged inside a synthetic message with id 1, channel_id 2, empty content and embeds[0].type components. No sender, account, guild, message timestamp or real API observation invented."
+  ],
+  "rendered_example_matches_pinned_source": true,
+  "fixture": {
+    "path": "fixtures/official-component-example.json",
+    "bytes": 2235,
+    "sha256": "d2a3a025a50184b5b1309c9246d2d698eaeab3fb18405249b32f79d16e068153",
+    "license": "MIT",
+    "notice": "fixtures/LICENSE-CODE",
+    "author": "Discord",
+    "source_example_not_live_response": true
+  },
+  "source_inventory": {
+    "component_nodes": 15,
+    "component_type_counts": {
+      "1": 1,
+      "2": 4,
+      "9": 2,
+      "10": 3,
+      "11": 1,
+      "12": 1,
+      "14": 2,
+      "17": 1
+    },
+    "text_displays": 3,
+    "media_references": 4,
+    "link_references": 6,
+    "unique_media_urls": 4,
+    "unique_link_urls": 5,
+    "counts_scope": "JSON payload only; excludes HTML metadata, markup, and documentation prose"
+  },
+  "comparison": {
+    "before": "before.json",
+    "after": "after.json",
+    "source_component_preserved": true,
+    "original_raw_projection_preserved": true
+  },
+  "acceptance": {
+    "api_response_observed": false,
+    "account_access_used": false,
+    "grant_created": false,
+    "message_collected": false,
+    "invite_or_widget_called": false,
+    "example_link_fetched": false,
+    "media_downloaded": false,
+    "scripts_executed": false,
+    "media_decoded": false,
+    "media_played": false,
+    "provider_rendering_verified": false,
+    "full_support_accepted": false,
+    "target_accepted": false
+  },
+  "limits": [
+    "This measures local projection of an official source-document example, not a live Discord response.",
+    "Source contains 6 link occurrences: 4 button links become link events; 2 Markdown links remain in preserved text.",
+    "Raw capture, provider prose and whole documentation files are excluded; the licensed code fixture is intentionally included for reproducibility.",
+    "Hashes identify captured bytes, not service availability, author verification, grants or full media acceptance."
+  ]
+}
