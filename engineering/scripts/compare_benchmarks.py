@@ -8,6 +8,19 @@ _spec.loader.exec_module(_decoder)
 decode_record=_decoder.decode_receipt
 HASH=re.compile(r'^[0-9a-f]{64}$')
 
+def finite_number(value):
+    if isinstance(value,bool) or not isinstance(value,(int,float)):
+        return False
+    try:
+        return math.isfinite(value)
+    except OverflowError:
+        return False
+
+def checked_metric(value, name, positive=False):
+    if not finite_number(value) or (positive and value<=0):
+        raise ValueError(f'{name} is outside the representable benchmark range')
+    return value
+
 def validate(record):
     if not isinstance(record,dict): raise ValueError('benchmark must be an object')
     if type(record.get('schema')) is not int or record['schema'] != 1: raise ValueError('schema must be integer 1')
@@ -28,7 +41,7 @@ def validate(record):
         pair=s.get('pair_id')
         if not isinstance(pair,str) or not pair or pair in indexed: raise ValueError('pair IDs must be unique strings')
         elapsed=s.get('elapsed_ms')
-        if isinstance(elapsed,bool) or not isinstance(elapsed,(int,float)) or not math.isfinite(elapsed) or elapsed<=0: raise ValueError('elapsed_ms must be finite and positive')
+        if not finite_number(elapsed) or elapsed<=0: raise ValueError('elapsed_ms must be finite and positive')
         if s.get('status')!='complete': raise ValueError('partial/cached-only/error sample cannot establish complete speedup')
         if not HASH.fullmatch(str(s.get('result_sha256',''))): raise ValueError('invalid result hash')
         units=s.get('result_count')
@@ -49,11 +62,17 @@ def compare(baseline,candidate):
         for field in ('result_sha256','result_count','warnings'):
             if a[key][field]!=b[key][field]: raise ValueError(f'output mismatch in pair {key}: {field}')
     old=[a[k]['elapsed_ms'] for k in a];new=[b[k]['elapsed_ms'] for k in a]
-    om,nm=statistics.median(old),statistics.median(new)
+    om=checked_metric(statistics.median(old),'baseline median',positive=True)
+    nm=checked_metric(statistics.median(new),'candidate median',positive=True)
+    saved=checked_metric(om-nm,'median time saved')
+    reduction=checked_metric(100*(saved/om),'median reduction')
+    ratio=checked_metric(om/nm,'ratio of medians',positive=True)
+    paired=[checked_metric(a[k]['elapsed_ms']/b[k]['elapsed_ms'],'paired speedup',positive=True) for k in a]
+    paired_median=checked_metric(statistics.median(paired),'median paired speedup',positive=True)
     return {'kind':baseline['kind'],'condition':baseline['condition'],'pairs':len(a),'complete_output_equivalence':True,
-            'baseline_median_ms':om,'candidate_median_ms':nm,'median_ms_saved':om-nm,
-            'median_elapsed_reduction_percent':100*(om-nm)/om,'ratio_of_medians':om/nm,
-            'median_paired_speedup':statistics.median(a[k]['elapsed_ms']/b[k]['elapsed_ms'] for k in a),
+            'baseline_median_ms':om,'candidate_median_ms':nm,'median_ms_saved':saved,
+            'median_elapsed_reduction_percent':reduction,'ratio_of_medians':ratio,
+            'median_paired_speedup':paired_median,
             'baseline_sample_p95_ms':percentile(old,.95),'candidate_sample_p95_ms':percentile(new,.95),
             'qualification':'Synthetic demonstration only; not a real performance result.' if baseline['kind']=='synthetic' else 'Input-contract comparison only. Review raw traces, normalization, resource/UX budgets and trial protocol before acceptance.'}
 

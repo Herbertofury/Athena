@@ -60,3 +60,26 @@ class BenchmarkWireTests(unittest.TestCase):
             else:
                 self.assertEqual(outputs[0]['suggested_workers_for_review'], 4)
                 self.assertFalse(outputs[0]['accepted_in_application'])
+
+    def test_finite_inputs_that_overflow_derived_metrics_fail_cleanly(self):
+        raw = (ROOT / 'tests/fixtures/synthetic-candidate.json').read_text()
+        for elapsed in (5e-324, 10**400):
+            benchmark = json.loads(raw)
+            benchmark['samples'][0]['elapsed_ms'] = elapsed
+            for optimized in (False, True):
+                result = self.run_cli('compare_benchmarks.py', json.dumps(benchmark), optimized)
+                self.assertEqual(result.returncode, 2, result.stderr)
+                self.assertEqual(result.stdout, '')
+                self.assertNotIn('Traceback', result.stderr)
+        sweep = fixture()
+        for config in [sweep['baseline'], *(row['benchmark'] for row in sweep['candidates'])]:
+            for sample in config['samples']:
+                sample['peak_memory_mb'] = 1e308
+            if len(config['samples']) % 2:
+                config['samples'].append(dict(config['samples'][-1], pair_id='even-median'))
+        for optimized in (False, True):
+            result = self.run_cli('compare_worker_sweep.py', json.dumps(sweep), optimized)
+            self.assertEqual(result.returncode, 2, result.stderr)
+            self.assertEqual(result.stdout, '')
+            self.assertIn('peak_memory_mb median', result.stderr)
+            self.assertNotIn('Traceback', result.stderr)
