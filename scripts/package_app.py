@@ -51,6 +51,20 @@ REQUIRED = ('index.html', 'app.js', 'core.js', 'catalog.js', 'styles.css', 'work
             'workspaces/foundry/style.css',
             'workspaces/foundry/catalog.json',
             'workspaces/foundry/layout-state.mjs',
+            'workspaces/storage/index.mjs',
+            'workspaces/storage/model.mjs',
+            'workspaces/storage/style.css',
+            'workspaces/projects/index.mjs',
+            'workspaces/projects/model.mjs',
+            'workspaces/projects/style.css',
+            'workspaces/projects/import.mjs',
+            'workspaces/projects/compare.mjs',
+            'workspaces/continuity/index.mjs',
+            'workspaces/continuity/model.mjs',
+            'workspaces/continuity/style.css',
+            'workspaces/continuity/import.mjs',
+            'workspaces/continuity/context.mjs',
+            'workspaces/continuity/artifacts.mjs',
             'workspaces/foundry/index.js')
 
 
@@ -125,7 +139,7 @@ def package(source, output, allowlist=None, profile="complete"):
         for generated in ('learn/index.html', '.nojekyll'):
             data=(staged/generated).read_bytes()
             entries.append({'path':generated,'bytes':len(data),'sha256':hashlib.sha256(data).hexdigest(),'origin':'generated'})
-        manifest={'application':'Athena','entry':'index.html','profile':profile,'workspaces':['learning','software','guidance','research','media','lab','cards','audio','receiver','diagnostics','build'],
+        manifest={'application':'Athena','entry':'index.html','profile':profile,'workspaces':['learning','software','guidance','research','media','lab','cards','audio','receiver','diagnostics','storage','projects','continuity','build'],
                   'pending':[] if profile=='complete' else ['Full Foundry parity: original 3D, artist worlds, native persistence and provider authorization'],
                   'verification':'Packaging and file hashes only; functional/browser parity is a separate gate.', 'files':entries}
         (staged/'athena-runtime-manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')
