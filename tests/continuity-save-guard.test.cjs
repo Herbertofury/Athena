@@ -11,7 +11,7 @@ function shared(initial){
   if(fault!=='unconfirmed')raw=value;
  }};
  return {read:()=>raw,writes:()=>writes,setRaw:value=>{raw=value;},fault:kind=>{fault=kind;},tab(initial){
-  const host={workspaceStore:structuredClone(initial),localStorage:storage,toast(){}};
+  const host={workspaceStore:structuredClone(initial),localStorage:storage,workspaceDrafts:new Map(),toast(){}};
   vm.runInNewContext(saveHelpers,host);
   return {host,projects:(next,expected)=>host.saveReviewedProjectBackup(next,JSON.stringify(expected),true),
    continuity:(next,expected)=>host.saveReviewedContinuity?host.saveReviewedContinuity(next,JSON.stringify(expected)??''):host.saveWorkspace('continuity',next)};
@@ -114,8 +114,10 @@ test('generic writes leave malformed, refused or unconfirmed storage and the cac
   assert.equal(tab.host.saveWorkspace('software',value),false);
   assert.equal(db.read(),bytes);
   assert.deepEqual(tab.host.workspaceStore,original);
+  assert.equal(JSON.stringify(tab.host.workspaceDrafts.get('software')),JSON.stringify(value));
  }
  db.fault('');
  assert.equal(tab.host.saveWorkspace('software',value),true);
  assert.deepEqual(JSON.parse(db.read()).workspaces.software,value);
+ assert.equal(tab.host.workspaceDrafts.has('software'),false);
 });
