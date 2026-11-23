@@ -1,0 +1,23 @@
+name: FNV study claim contract
+on:
+  pull_request:
+    paths:
+      - 'experiments/decomp-claim-gate/**'
+      - 'research/fnv-decomp/**'
+      - '.github/workflows/fnv-study-contract.yml'
+  push:
+    paths:
+      - 'experiments/decomp-claim-gate/**'
+      - 'research/fnv-decomp/**'
+      - '.github/workflows/fnv-study-contract.yml'
+permissions:
+  contents: read
+jobs:
+  contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m unittest discover -s experiments/decomp-claim-gate -v
