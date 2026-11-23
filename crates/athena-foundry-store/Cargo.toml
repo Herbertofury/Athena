@@ -4,9 +4,10 @@ version = "0.1.0"
 edition = "2024"
 rust-version = "1.99"
 publish = false
+default-run = "athena-foundry-store"
 
 [dependencies]
-rusqlite = { version = "=0.41.0", features = ["bundled", "hooks"] }
+rusqlite = { version = "=0.41.0", features = ["bundled", "hooks", "backup"] }
 serde = { version = "1", features = ["derive"] }
 serde_json = "=1.0.154"
 url = "=2.5.8"
