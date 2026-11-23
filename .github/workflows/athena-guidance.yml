@@ -1,10 +1,10 @@
 name: Athena Guidance
 on:
   pull_request:
-    paths: ['guidance/**', 'docs/integration/AGENT-GUIDANCE.md', '.github/workflows/athena-guidance.yml']
+    paths: ['AGENTS.md', 'guidance/**', 'docs/integration/AGENT-GUIDANCE.md', '.github/workflows/athena-guidance.yml']
   push:
     branches: [main]
-    paths: ['guidance/**', 'docs/integration/AGENT-GUIDANCE.md', '.github/workflows/athena-guidance.yml']
+    paths: ['AGENTS.md', 'guidance/**', 'docs/integration/AGENT-GUIDANCE.md', '.github/workflows/athena-guidance.yml']
 permissions:
   contents: read
 jobs:
