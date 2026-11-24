@@ -1,4 +1,5 @@
 import {attachArtifacts} from './artifacts.mjs';
+import {hashBytes,LIMITS} from '../../shared/artifact-store.mjs';
 import {fresh, validate, apply, visible} from './model.mjs';
 import {parseBackup, mergeBackup, MAX_IMPORT_BYTES} from './import.mjs';
 import {compileContext, contextMarkdown} from './context.mjs';
@@ -17,6 +18,7 @@ export function mount({container, state, search = '', setState, signal, theme = 
   const style = document.createElement('link'); style.rel = 'stylesheet'; style.href = new URL('./style.css', import.meta.url).href; root.prepend(style);
   const $ = selector => root.querySelector(selector), form = $('form'), notice = $('#notice');
   const artifacts = attachArtifacts({host:$('#artifact-journal'),signal});
+  const artifactCopies = attachArtifactCopyVerifier({host:$('#artifact-journal'),signal});
   notice.textContent = error || 'Ready. No notes are sent to a provider.';
   function element(tag, text) { const item = document.createElement(tag); if (text !== undefined) item.textContent = text; return item; }
   function button(action, label, id, dependencyId) {
@@ -147,9 +149,92 @@ export function mount({container, state, search = '', setState, signal, theme = 
   $('#export').onclick = () => { if (data) download(JSON.stringify(data, null, 2), 'athena-continuity.json', 'application/json'); };
   $('#export-context').onclick = () => { if (data) download(contextMarkdown(compileContext(data, project)), 'athena-project-context.md', 'text/markdown'); };
   if (!data) for (const control of root.querySelectorAll('input,textarea,select,button')) if (!control.closest('#artifact-journal')) control.disabled = true;
-  function unmount() { if (disposed) return; disposed = true; artifacts.dispose(); for (const url of urls) URL.revokeObjectURL(url); root.replaceChildren(); signal?.removeEventListener('abort', unmount); }
+  function unmount() { if (disposed) return; disposed = true; artifactCopies.dispose(); artifacts.dispose(); for (const url of urls) URL.revokeObjectURL(url); root.replaceChildren(); signal?.removeEventListener('abort', unmount); }
   function setTheme(value) { container.dataset.theme = value === 'light' ? 'light' : 'dark'; }
   setTheme(theme); render(); signal?.addEventListener('abort', unmount, {once: true}); if (signal?.aborted) unmount();
   return {ready: !!data, unmount, setTheme, setSearch(value) { search = String(value); render(); }};
 }
 
+
+// Verification works with only an independently retained hash and one chosen
+// file. It deliberately has no journal, fetch, clipboard or persistence handle.
+function attachArtifactCopyVerifier({host,signal}){
+ const view=host.ownerDocument.createElement('details');
+ view.dataset.copyVerifier='';
+ view.innerHTML=`<summary>Verify a copied artifact</summary>
+  <p>Before moving to another browser or computer, keep the revision’s recorded SHA-256 separately from the downloaded file. Use that recorded value to check your copy here, even if the original journal is unavailable. A name or file type is not proof of a match.</p>
+  <form autocomplete="off">
+   <label>Recorded SHA-256<input type="text" maxlength="80" autocomplete="off" spellcheck="false" autocapitalize="off"></label>
+   <label>Choose copied artifact<input type="file"></label>
+   <button type="submit">Compare exact bytes</button>
+   <button type="button">Clear verification</button>
+  </form>
+  <p role="status">Nothing is opened, stored or sent.</p>`;
+ host.append(view);
+ const form=view.querySelector('form'),digest=view.querySelector('input[type=text]'),input=view.querySelector('input[type=file]');
+ const verify=view.querySelector('button[type=submit]'),clear=view.querySelector('button[type=button]'),status=view.querySelector('[role=status]');
+ let disposed=false,busy=false,generation=0;
+ function invalidate(message){
+  generation++;
+  status.textContent=message;
+ }
+ digest.oninput=input.onchange=()=>invalidate('Selection changed. Compare to check the current file and SHA-256.');
+ clear.onclick=()=>{
+  digest.value=input.value='';
+  invalidate('Cleared. Nothing was stored or sent.');
+ };
+ form.onsubmit=async event=>{
+  event.preventDefault();
+  if(disposed||busy)return;
+  const expected=digest.value.trim().toLowerCase(),file=input.files?.[0];
+  if(!/^[a-f0-9]{64}$/.test(expected)){
+   status.textContent='Enter the recorded SHA-256 as 64 hexadecimal characters. No file was read.';return;
+  }
+  if(!file){status.textContent='Choose the local copy to compare. No file was read.';return;}
+  const size=file.size;
+  if(!Number.isSafeInteger(size)||size<1||size>LIMITS.fileBytes){
+   status.textContent='Choose a nonempty copied artifact up to 8 MiB. No file was read.';return;
+  }
+  if(typeof globalThis.crypto?.subtle?.digest!=='function'){
+   status.textContent='SHA-256 is unavailable in this browser context. No file was read.';return;
+  }
+  busy=true;verify.disabled=true;
+  const selected=++generation,live=()=>!disposed&&generation===selected;
+  status.textContent='Checking the selected file locally…';
+  try{
+   let bytes;
+   try{
+    const raw=await file.arrayBuffer();
+    if(!live())return;
+    if(!(raw instanceof ArrayBuffer)||raw.byteLength!==size)throw Error('Invalid read');
+    bytes=new Uint8Array(raw);
+   }catch{
+    if(live())status.textContent='The selected copy could not be read in full. Select it again; nothing was verified.';
+    return;
+   }
+   let actual;
+   try{actual=await hashBytes(bytes);}
+   catch{
+    if(live())status.textContent='SHA-256 could not be computed. Nothing was verified.';
+    return;
+   }
+   if(!live())return;
+   status.textContent=actual===expected
+    ?'Bytes match the recorded SHA-256. This checks byte consistency, not identity or authenticity. Nothing was retained.'
+    :'Bytes do not match the recorded SHA-256. Neither the file nor the expected value was retained.';
+  }finally{
+   busy=false;
+   if(!disposed)verify.disabled=false;
+  }
+ };
+ function dispose(){
+  if(disposed)return;
+  disposed=true;generation++;
+  signal?.removeEventListener('abort',dispose);
+  digest.value=input.value='';
+  view.remove();
+ }
+ signal?.addEventListener('abort',dispose,{once:true});
+ if(signal?.aborted)dispose();
+ return {dispose};
+}

@@ -136,6 +136,10 @@ c.execute('UPDATE experiment_runs SET output=? WHERE experiment_id=?',(raw,int(s
   const {checkNativeProjectRevisionLink}=await import('./test_native_project_revision_link.mjs');
   await checkNativeProjectRevisionLink({browser,origin});
  });
+ if(suppliedPackage)await check('Extracted native Continuity verifies a moved exact artifact copy without opening a journal',async()=>{
+  const {checkNativeContinuityArtifactCopy}=await import('./test_native_continuity_artifact_copy.mjs');
+  await checkNativeContinuityArtifactCopy({browser,origin});
+ });
  if(unified)await check('Real Lab and native Foundry share one verified origin without iframe',async()=>{
   await page.goto(origin+'/#lab');await page.locator('#connection').filter({hasText:'Connected'}).waitFor();
   assert.equal(await page.locator('iframe').count(),0);
