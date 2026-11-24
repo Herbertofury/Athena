@@ -23,3 +23,18 @@ The exact raw samples and tool version are in [receipt.json](receipt.json). Full
 - Reuse in a portable download engine only after same-input comparisons also cover capped streaming, real interruptions, validated checkpoints, cancellation, redirects under provider policy, disk-full/restart, atomic publication and rollback. The fixture intentionally does not replace those application guarantees.
 
 Primary references: [HTTP Semantics, RFC 9110 §13.1.5 and §14](https://www.rfc-editor.org/rfc/rfc9110.html#section-13.1.5), [everything curl: resuming and ranges](https://everything.curl.dev/usingcurl/downloads/resume.html), and [curl CLI manual](https://curl.se/docs/manpage.html).
+
+## Current-release comparison, matched build settings
+
+I built the official curl 8.14.1 and 8.23.0 source archives with the same compiler, link configuration, OpenSSL and zlib, using separate disposable directories and no global install. Both upstream signatures verified against curl's [documented release signing key](https://github.com/curl/curl/blob/curl-8_23_0/docs/VERIFY.md). Source SHA-256: `f4619a1e2474c4bbfedc88a7c2191209c8334b48fa1f4e53fd584cc12e9120dd` (8.14.1), `8dadd7d2536a314f982ad05a651b713f426bf7d02cc2c76cffb9796f2218e6c5` (8.23.0). Upstream lists 8.23.0 as the current regular release in its [release history](https://curl.se/docs/versions.html) at this review.
+
+Both builds used the same configure flags: `--disable-shared --enable-static --with-openssl --with-zlib --without-brotli --without-zstd --without-libpsl --without-nghttp2 --without-libssh2 --disable-ldap --disable-ldaps --without-librtmp`. Their advertised feature sets still differ because the releases themselves differ; these are matching HTTP settings, not identical builds for all protocols. I ran the unchanged fixture four times per release in counterbalanced paired order and a clean process environment. Compare [complete samples](matched-release-comparison.json), not a subset of successful transfers: 576 total curl and in-process controls, all with exact final bytes and original staging preserved.
+
+| Curl case | 8.14.1 median | 8.23.0 median |
+| --- | ---: | ---: |
+| Same version, 206 | 21.358 ms | 22.245 ms |
+| Replaced content, 200 | 19.882 ms | 21.218 ms |
+| No range support, 200 | 21.151 ms | 21.615 ms |
+| Already complete, 416 | 12.905 ms | 14.090 ms |
+
+This measured loopback path established exact correctness on the current release, not a speed gain. The in-process Python control also shifted on several cases and host variation/startup can affect differences of this size. There is no basis here to roll back a dependency, assert a real product regression, or promote it as faster. Next compare persistent libcurl or Rust HTTP under controlled real transfer latencies, with the same completion and rollback gates.
