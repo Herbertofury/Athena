@@ -82,6 +82,22 @@ Keep a single release receipt, not duplicate reports from every tool. Link to ex
 
 Maintain reusable, sanitized benchmark fixtures and evidence in the owning repository and link successful methods or failed hypotheses to Athena's research/backlog. Promote verified gains as the new floor. Future releases should learn from historical regressions, test failures, slow checks and unnecessary duplicate work. Record deferred improvements without blocking a sound release, and prioritize them in later maintenance.
 
+### Lightweight receipt validation (optional CI integration)
+
+Use [release_checkout.py](tools/release_checkout.py) after existing project checks and artifact verification, not as a substitute for them. It is Python standard-library only, performs no network calls, tool installation, subprocess execution or source mutation, and checks a JSON receipt of at most 1 MiB. It can be invoked in a project-specific release workflow using a reviewed pinned copy of the script, with the exact candidate SHA resolved independently by the checkout/CI (not read back from the receipt).
+
+```sh
+python guidance/tools/release_checkout.py --receipt /path/to/release-receipt.json --head "$(git rev-parse HEAD)"
+```
+
+Receipt schema version 1:
+- Required: `schemaVersion: 1`, full `head` and `baseline` commit IDs, `lane` (quick/standard/high-risk), nonempty `scope`, `hard_blockers: []`, and boolean `retained_optimization`.
+- `checks`: map of mandatory check names to objects with `status: "passed"` and nonempty `evidence` pointing to actual results. Minimum check categories: `project_checks`, `workflow_acceptance` (including protected features/data/portability), `integrity_security`, `artifact_rollback`, `review`. High-risk adds `risk_specific`; retained optimization adds `optimization_equivalence`. Include additional mandatory project gates; a failing declared gate is rejected. For docs-only scope, appropriate schema/provenance/content/packaging evidence is sufficient, not a fictitious executable test.
+- `core_tools`: all three named core tools mapped to objects containing `status` (adopted/no_safe_win/not_applicable/deferred), `evidence` with result or reason, and `follow_up` for deferred outcomes. An adopted core change requires `retained_optimization: true`. Optional extra tools, measurements, exact commands, tool versions, artifact digest, elapsed time, rejected candidates and limitations can be linked or stored alongside the receipt per the release evidence requirements.
+- Exit 0 means structural consistency only; exit 1 means a missing/failed gate or inconsistent receipt; exit 2 means unreadable/malformed/oversized input. The validator cannot verify that a linked artifact or claim is genuine, determine risk scope, prove that a tool executed, enforce GitHub branch protection, or establish runtime acceptance. Agents must verify the actual evidence independently.
+
+Regression tests are in [test_release_checkout.py](tests/test_release_checkout.py); run `python -m unittest discover -s guidance/tests -p test_release_checkout.py -v`. Add this inexpensive check to existing release jobs only after project-local validation. Do not duplicate the whole test pipeline or make installation of the 16 tools a universal CI dependency.
+
 ## Release evidence
 
 In the release notes or a repository-local evidence receipt, record: baseline/final SHA; date; tool versions/commits and provenance; per-tool applicability, exact commands and exit status; test inventory/coverage and platform/workflow results; workload/hash or fixture identity; before/after measurements with units, repeats and uncertainty; accepted/rejected candidates and reasons; rollback/fallback instructions; remaining blockers. Keep raw/private logs local and publish only sanitized evidence. Distinguish fixture, real runtime and deployed release verification. Do not publish credentials or source traces. Require an independent test/review of retained optimization results, not a self-declared pass. For a no-change optimization pass, reconcile existing evidence rather than adding a redundant review ceremony.
