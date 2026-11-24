@@ -53,7 +53,7 @@
           "limits": "Host-specific Chrome API and native messaging; not interchangeable with a standalone transfer engine."
         }
       ],
-      "nextAction": "Compare native Rust transfer and existing TypeScript pipeline on the same complete authorized local fixtures; keep host-specific adapters and verified results. Evaluate Ghost Downloader/aria2 through the existing watch catalog."
+      "nextAction": "M1c-d: compare Enderloom, GameSync-Next and other inventoried transfer code with Ghost Downloader 3/aria2; verify hash, range resume, interruption, destination preservation and two consumers. Record strongest implementation/contract only after real matched proof."
     },
     {
       "id": "acquisition.provider-identity",
@@ -94,9 +94,27 @@
           "evidence": "source_inspected_not_runtime_verified",
           "observed": "Provider search/inspection/download resolution interface.",
           "limits": "Asset-specific schema and provider coverage require mapping."
+        },
+        {
+          "repository": "Herbertofury/Minecraft-Mod-Vault",
+          "commit": "c50f67157224734540067c39861ae708340d7797",
+          "path": "PROVIDER-IDENTITY-CONTRACT.md",
+          "source": "https://github.com/Herbertofury/Minecraft-Mod-Vault/blob/c50f67157224734540067c39861ae708340d7797/PROVIDER-IDENTITY-CONTRACT.md",
+          "evidence": "source_inspected_not_runtime_verified",
+          "observed": "Exact Modrinth SHA-512/CurseForge fingerprint identity, compatible file selection and offline library preservation documented.",
+          "limits": "Contract only; verify actual adapters and matched fixtures."
+        },
+        {
+          "repository": "Herbertofury/Modding-Knowledge",
+          "commit": "583eac1505b490fc4bf2cc45b10eb94901436b16",
+          "path": "docs/mod-health-query.md",
+          "source": "https://github.com/Herbertofury/Modding-Knowledge/blob/583eac1505b490fc4bf2cc45b10eb94901436b16/docs/mod-health-query.md",
+          "evidence": "source_inspected_not_runtime_verified",
+          "observed": "Exact-context public health evidence and Rust query contract; successor resolution not implemented.",
+          "limits": "Keep data evidence schema separate from crawling/transfer; test consumers."
         }
       ],
-      "nextAction": "Agree common stable provider-qualified IDs, access/completeness states and response fixtures, then compare overlapping supported providers without flattening game- or asset-specific semantics."
+      "nextAction": "M1a-e in docs/PORTFOLIO-ALIGNMENT.md: Athena coordinates, Modding-Knowledge owns public evidence schema; compare first Modrinth/CurseForge/GitHub/Nexus exact-ID and operation fixtures, prove Enderloom and Modhunter, choose implementation owner only after acceptance."
     },
     {
       "id": "acquisition.web-extraction",
@@ -140,7 +158,7 @@
       "canonicalImplementation": {
         "repository": "Herbertofury/Athena",
         "path": "guidance/tools/release_checkout.py",
-        "commit": "0f06f0b3e1dcce6a3ccf09893b56b5b3fdb13936",
+        "commit": "3509ebf8f8c06ec3305ddd0a7cc0491507eb9741",
         "scope": "Reference receipt validator; structure checks only, not evidence verification or fleet CI adoption."
       },
       "contractRefs": [
@@ -153,6 +171,83 @@
       ],
       "candidates": [],
       "nextAction": "Reuse the maintained Athena policy and pinned validator rather than cloning a different release standard; validate consumer integration and actual acceptance evidence."
+    },
+    {
+      "id": "engineering.browser-runtime-proof",
+      "name": "Reusable isolated browser and native test routes",
+      "status": "comparison_needed",
+      "canonicalImplementation": null,
+      "contractRefs": [
+        "guidance/CLI_FIRST_EXECUTION.md",
+        "guidance/PRE_RELEASE_OPTIMIZATION.md"
+      ],
+      "researchRefs": [
+        "docs/PORTFOLIO-ALIGNMENT.md"
+      ],
+      "candidates": [
+        {
+          "repository": "Herbertofury/Ferrum-Browser",
+          "commit": "687e7a509f8af5ef9401bf905bdc87e32d8645e6",
+          "path": "src/browser/lightpanda.mjs",
+          "source": "https://github.com/Herbertofury/Ferrum-Browser/blob/687e7a509f8af5ef9401bf905bdc87e32d8645e6/src/browser/lightpanda.mjs",
+          "evidence": "source_inspected_not_runtime_verified",
+          "observed": "Isolated CDP/Lightpanda implementation; README documents complementary full Playwright, Electron and Appium lanes.",
+          "limits": "Match full real browser/extension and native evidence; fast lane cannot replace unsupported features."
+        },
+        {
+          "repository": "Herbertofury/Minecraft-Mod-Vault",
+          "commit": "c50f67157224734540067c39861ae708340d7797",
+          "path": "README.md",
+          "source": "https://github.com/Herbertofury/Minecraft-Mod-Vault/blob/c50f67157224734540067c39861ae708340d7797/README.md",
+          "evidence": "source_inspected_not_runtime_verified",
+          "observed": "TestGrid CLI and real process evidence lane documented.",
+          "limits": "Game-specific host proof required; do not equate server logs with full client rendering."
+        }
+      ],
+      "nextAction": "M2: refresh actual toolchains, compare existing host harnesses, trial versioned evidence contract in two compatible consuming repositories."
+    },
+    {
+      "id": "modding.package-index",
+      "name": "Read-only Sims package indexing and preview metadata",
+      "status": "comparison_needed",
+      "canonicalImplementation": null,
+      "contractRefs": [
+        "guidance/CLI_FIRST_EXECUTION.md",
+        "docs/REUSABLE-PACKAGE-COORDINATION.md"
+      ],
+      "researchRefs": [
+        "docs/PORTFOLIO-ALIGNMENT.md"
+      ],
+      "candidates": [
+        {
+          "repository": "Herbertofury/TS4-Accelerator",
+          "commit": "5fa3fb7a9a80cbe9f9f26f1c947c43dee92b9dc7",
+          "path": "README.md",
+          "source": "https://github.com/Herbertofury/TS4-Accelerator/blob/5fa3fb7a9a80cbe9f9f26f1c947c43dee92b9dc7/README.md",
+          "evidence": "source_inspected_not_runtime_verified",
+          "observed": "Recovered DBPF metadata and SQLite cache flow documented.",
+          "limits": "Reconcile source lineage and exact supported formats; full real game behavior unverified."
+        },
+        {
+          "repository": "Herbertofury/External-CAS",
+          "commit": "48bb971359b0306b2ecee39fcc376beaec73d99d",
+          "path": "Cargo.toml",
+          "source": "https://github.com/Herbertofury/External-CAS/blob/48bb971359b0306b2ecee39fcc376beaec73d99d/Cargo.toml",
+          "evidence": "source_inspected_not_runtime_verified",
+          "observed": "Workspace catalog/assets/renderer boundaries declared.",
+          "limits": "Inspect actual parsing, ordering and asset behavior before shared extraction."
+        },
+        {
+          "repository": "Herbertofury/Hover-App",
+          "commit": "81026214982851d67c7d798f32be68d499ce8813",
+          "path": "README.md",
+          "source": "https://github.com/Herbertofury/Hover-App/blob/81026214982851d67c7d798f32be68d499ce8813/README.md",
+          "evidence": "source_inspected_not_runtime_verified",
+          "observed": "Native preview project documents development MSI evidence; tree contains DBPF format code.",
+          "limits": "Compare actual read-only parser and preview contracts, no released parity claim."
+        }
+      ],
+      "nextAction": "M3: inspect DBPF parser and cache call sites, compare exact package inventory, conflicts, malformed input and real CAS/preview acceptance; share versioned core only if no loss."
     }
   ],
   "coverage": {
@@ -161,9 +256,16 @@
       "Enderloom",
       "Modhunter",
       "GameSync-Next",
-      "Gamesync"
+      "Gamesync",
+      "Minecraft-Mod-Vault",
+      "Modding-Knowledge",
+      "Ferrum-Browser",
+      "TS4-Accelerator",
+      "External-CAS",
+      "Hover-App"
     ],
     "partialOnly": true,
-    "unresolved": "Full consumer dependency/call-site inventory, runtime tests, ownership and compatibility of shared packages, Noxviola and other projects remain to be investigated. A source file is not proof of deployed usage."
-  }
+    "unresolved": "Portfolio source triage now covers all 42 repositories (see docs/PORTFOLIO-ALIGNMENT.md); full per-provider call-site inventory, runtime comparisons, exact consumer pins, ownership and compatibility of shared implementations remain open."
+  },
+  "portfolioRoadmap": "docs/PORTFOLIO-ALIGNMENT.md"
 }

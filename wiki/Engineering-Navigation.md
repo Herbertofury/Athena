@@ -77,3 +77,7 @@
 - [Round-three methods and evidence](https://github.com/Herbertofury/Athena/wiki/Engineering-Adapter-Methods-Round-Three)
 - [Bluesky posts, media and follows](https://github.com/Herbertofury/Athena/wiki/Engineering-Adapter-Bluesky)
 - [Other game communities](https://github.com/Herbertofury/Athena/wiki/Engineering-Adapter-Other-Games)
+
+## Portfolio catch-up
+
+- [Portfolio alignment and shared capability milestones](https://github.com/Herbertofury/Athena/wiki/Engineering-Portfolio-Alignment) — prioritized repository tasks and existing local work links.

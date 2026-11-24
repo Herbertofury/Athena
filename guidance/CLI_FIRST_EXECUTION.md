@@ -55,3 +55,7 @@ This policy is an agent instruction and reusable development standard, not proof
 Use the [shared capability coordination policy](../docs/REUSABLE-PACKAGE-COORDINATION.md) and [routing index](registry/shared-capabilities.json) at task start. Reconcile active work and existing source implementations; reuse or improve the strongest verified compatible route rather than create a weaker duplicate. Contribute evidence and improvements back through the owning repository and link them in Athena. Keep this lookup bounded and preserve all project-specific acceptance requirements.
 
 At material task closeout, follow the [wiki closeout and documentation-driven product review](WIKI_CLOSEOUT.md): document actual changed workflows, verify by non-interruptive real application/CLI walkthroughs, repair confusing or redundant steps when safe, and verify required live Wiki publication. Use existing source mirrors and publish routes; do not claim an unverified Wiki is current.
+
+## Portfolio catch-up routing
+
+At substantive task start, consult [Athena's portfolio catch-up and shared capability milestones](../docs/PORTFOLIO-ALIGNMENT.md), find the owning repository's row, and reconcile the linked local issue/roadmap and active checkpoint. Coordinate overlapping work through the existing capability registry; contribute evidence to the authoritative source. Update the owning work record and portfolio status at material closeout. Priorities guide task selection, not unrelated release blockers.

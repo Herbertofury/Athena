@@ -54,3 +54,7 @@ Athena is the canonical coordination and evidence hub for all owned repositories
 - Respect existing authorization, data and distribution boundaries. Preserve local portable storage and offline operation; Athena coordinates engineering, it is not a mandatory remote runtime for consumer apps.
 
 The initial index is a partial source inventory, not a finished shared package manager. No internal implementation is declared superior before matched runtime evidence. The existing package coordination backlog above remains the implementation roadmap; extend it rather than creating another independent tracking system.
+
+## Active portfolio catch-up milestones
+
+Use the [portfolio routing and milestone index](PORTFOLIO-ALIGNMENT.md) for current owner/consumer work, starting with M1 provider/site adapters and transfer. It links existing local issues rather than replacing them. Before introducing another adapter or test harness, compare the recorded candidates and preserve complete per-provider and per-host behavior.
