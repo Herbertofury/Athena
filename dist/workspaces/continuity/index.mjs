@@ -56,7 +56,18 @@ export function mount({container, state, search = '', setState, signal, theme = 
       for (const reference of entry.dependencies || []) {
         const dependency = byId.get(reference.id), row = element('div'); row.className = 'dependency';
         row.append(element('p', `${dependency?.project || reference.id}: reviewed revision ${reference.revision} → observed revision ${dependency?.revisions.length ?? 'missing'}`));
-        const baseline = element('details'); baseline.append(element('summary', 'Reviewed evidence and source'), element('pre', JSON.stringify(dependency?.revisions[reference.revision - 1] || {state: 'unavailable'}, null, 2))); row.append(baseline);
+        const reviewed = dependency?.revisions[reference.revision - 1];
+        const baseline = element('details'); baseline.append(element('summary', 'Reviewed evidence and source'));
+        if (!reviewed) baseline.append(element('p', 'The reviewed revision is unavailable.'));
+        else if (!reviewed.source) baseline.append(element('p', 'No source was saved with this reviewed revision.'));
+        else {
+          // The collection is validated on load and each edit. Never substitute
+          // the linked note's newest source for the evidence actually reviewed.
+          const link = element('a', `Open reviewed revision ${reference.revision} source (new tab)`);
+          link.href = new URL(reviewed.source).href; link.target = '_blank'; link.rel = 'noopener noreferrer';
+          baseline.append(link);
+        }
+        baseline.append(element('pre', JSON.stringify(reviewed || {state: 'unavailable'}, null, 2))); row.append(baseline);
         const review = button('review-dependency', 'Mark latest revision reviewed', entry.id, reference.id); review.disabled = !dependency; row.append(review, button('unlink', 'Unlink evidence', entry.id, reference.id)); dependencies.append(row);
       }
       const label = element('label', 'Link evidence from another note'), selector = element('select'); selector.dataset.linkFor = entry.id;

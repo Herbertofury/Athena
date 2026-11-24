@@ -68,6 +68,16 @@ an optional read-only tool: the raw history and edit/backup controls still
 work without it. It does not restore revisions, compare repository files,
 send data, or establish Constellation parity.
 
+Choose **Prepare comparison receipt** to copy plain JSON containing this
+project's stable ID, the exact two selected revision numbers and timestamps,
+their compared fields, and the list of changed fields. Unlike a project
+backup, this includes no other projects or unknown extension fields. Athena
+rechecks the displayed pair against the saved record before preparing text.
+A newer appended revision does not replace an older selection; a missing or
+changed selected record refuses the receipt. Changing selection or closing
+the panel clears the prepared text. Nothing is copied automatically, saved to
+Athena, sent online, or accepted as a project backup.
+
 The design is complementary to the retained Project Constellation working-set
 and disposition history implementation (project-memory-core.js at
 82cea48448219c57fad8e0c22e986c8f56913286). No upstream code was copied.

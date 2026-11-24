@@ -65,6 +65,8 @@ Keep write controls unavailable until module initialization is complete. Navigat
 The Rust engine serves a frozen, manifest-verified runtime package under strict same-origin script/style/connect policies. Workspace CSS is a local external stylesheet, not injected inline styles. Third-party Media preview and player code stays disabled on this database-privileged origin. This boundary must not be weakened to obtain a passing browser test.
 
 
+In native Lab → Overview, a successful project-archive job with an exact receipt offers **Review saved project**. It reopens the recorded canonical ID and decimal generation from the local journal and requires both the recorded SHA-256 and byte count to match. Missing or changed bytes leave the last verified result available and never trigger a latest-generation fallback or provider request. Receipt review does not write to the journal or imply provider authenticity.
+
 In native Lab → Collection, **List saved generations** opens one metadata-only page for the entered canonical ID and record type. Older pages load only on request. Choosing a generation opens the existing exact-byte verifier; metadata alone is not proof of payload integrity or source truth. The list never collects from a provider or writes the journal.
 
 `npm run test:browser` now verifies both generated adapters, runs static-app Chromium acceptance, runs locked Rust tests/clippy/build using the pinned project toolchain, packages the reviewed public asset allowlist, and runs full compiled-engine Chromium acceptance. Logs and reports are retained under `browser-results`. `npm run test:browser:static` is explicitly the smaller static-only check. Neither command deploys or changes repository settings.

@@ -35,11 +35,27 @@ const exactPositiveId=value=>typeof value==='string'&&value===value.trim()&&/^[1
 const renderedJobs = new Map();
 let emptyNode = null;
 let renderedInstance = null;
-let clearArchiveHistory=()=>{};
+let clearArchiveHistory=()=>{},pendingReceipt=null;
+function projectArchiveReceipt(job){
+  const receipt=job.result?.project_archive;
+  if(job.state!=='succeeded'||!job.job?.CollectModrinthRaw||receipt?.schema_version!==1||
+    receipt.status!=='complete_received_response'||typeof receipt.canonical_id!=='string'||
+    !/^[A-Za-z0-9]{8}$/.test(receipt.canonical_id)||!exactPositiveId(receipt.generation)||
+    typeof receipt.payload_sha256!=='string'||!/^[a-f0-9]{64}$/.test(receipt.payload_sha256)||
+    !Number.isSafeInteger(receipt.payload_bytes)||receipt.payload_bytes<1)return null;
+  return {kind:'project',id:receipt.canonical_id,generation:receipt.generation,hash:receipt.payload_sha256,bytes:receipt.payload_bytes};
+}
+function cancelReceiptReview(message){
+  if(!pendingReceipt)return;
+  const {action,status}=pendingReceipt;pendingReceipt=null;
+  archiveSelection.cancel();action.disabled=false;
+  status.textContent=message;
+}
 const panels = new Set(['overview','collectors','experiments']);
 function showPanel(name) {
   if (!panels.has(name)) name='overview';
   if(name!=='collectors')clearArchiveHistory();
+  if(name!=='overview')cancelReceiptReview('Review cancelled; no new archive was opened.');
   root.querySelectorAll('.panel').forEach(p=>p.hidden=p.id!==name);
   root.querySelectorAll('[data-panel]').forEach(b=>b.setAttribute('aria-current',b.dataset.panel===name?'page':'false'));
 }
@@ -70,12 +86,20 @@ function render(data,instance=null) {
   for(const [index,job] of data.jobs.entries()){const identity=identities[index];
     const receipt=job.result?.experiment_id_text;
     const experimentId=job.job==='DedupExperiment'&&(job.state==='succeeded'||job.state==='failed')&&job.result?.experiment&&exactPositiveId(receipt)?receipt:'';
-    const signature=job.state+':'+job.attempt+':'+experimentId;const prior=reuse?renderedJobs.get(identity):null;if(prior&&prior.signature===signature){nextRenderedJobs.set(identity,prior);nodes.push(prior.node);continue;}const e=text('article','','job');const top=text('div','','job-top');
+    const projectReceipt=projectArchiveReceipt(job);
+    const signature=job.state+':'+job.attempt+':'+experimentId+':'+JSON.stringify(projectReceipt);const prior=reuse?renderedJobs.get(identity):null;if(prior&&prior.signature===signature){nextRenderedJobs.set(identity,prior);nodes.push(prior.node);continue;}const e=text('article','','job');const top=text('div','','job-top');
     const name=jobLabel(job.job);
     top.append(text('h3',name),text('span',job.state.toUpperCase(),'badge '+job.state));e.append(top,text('p','Job '+identity+' · attempt '+job.attempt));
     if(job.result?.project){const p=job.result.project;e.append(text('p',p.title+' · '+p.id+' · '+p.versions.length+' version IDs'));}
     if(job.result?.batch){const b=job.result.batch;e.append(text('p',b.projects.length+' retrieved · '+b.missing_ids.length+' missing from response'));if(b.missing_ids.length)e.append(text('p','Partial result. Missing IDs: '+b.missing_ids.join(', '),'error'));}
     if(job.result?.project_archive){const a=job.result.project_archive;e.append(text('p','Complete project archive · '+a.canonical_id+' · generation '+a.generation+' · '+a.payload_bytes+' bytes retained locally'));}
+    if(projectReceipt){
+      const action=text('button','Review saved project '+projectReceipt.id+' · generation '+projectReceipt.generation);
+      action.type='button';action.dataset.projectArchiveReview='';
+      const status=text('p','');status.setAttribute('role','status');
+      action.addEventListener('click',()=>{if(action.isConnected&&!$('overview').hidden&&!action.disabled)reviewProjectArchive(projectReceipt,action,status);});
+      e.append(action,status);
+    }
     if(job.result?.version_collection){const v=job.result.version_collection;e.append(text('p',v.records.length+' versions saved · '+v.missing_ids.length+' missing · complete JSON retained locally'));if(v.missing_ids.length)e.append(text('p','Partial result. Missing version IDs: '+v.missing_ids.join(', '),'error'));}
     if(job.result?.upstream_review){const u=job.result.upstream_review;e.append(text('p',u.repository+' · '+(u.revision||u.state||'No new observation')),text('p',u.comparison?'Comparison: '+u.comparison+' · observed '+u.observed_at_utc+' UTC':(u.error||'No new observation')),text('p','Observation only, not an upgrade or security clearance.'));}
     if(job.result?.experiment){const run=job.result.experiment;const decision=typeof run.decision==='string'?run.decision:Object.keys(run.decision)[0];e.append(text('p',run.evidence.trials.length+' timed pairs · '+run.evidence.stress_cases+' stress cases · '+run.reason),text('p','Gate: '+decision+' · execution is not promotion.'));}
@@ -89,6 +113,8 @@ function render(data,instance=null) {
   const container=$('jobs');let cursor=container.firstChild;
   for(const node of nodes){if(node===cursor){cursor=cursor.nextSibling;}else{container.insertBefore(node,cursor);}}
   while(cursor){const next=cursor.nextSibling;cursor.remove();cursor=next;}
+  if(pendingReceipt&&(instance!==renderedInstance||!pendingReceipt.action.isConnected))
+    cancelReceiptReview('Review cancelled because Overview changed. Reopen the saved receipt.');
   renderedJobs.clear();for(const [identity,record] of nextRenderedJobs)renderedJobs.set(identity,record);
   renderedInstance=instance;
   $('pending').textContent=metrics.pending;$('completed').textContent=metrics.completed;$('failed').textContent=metrics.failed;
@@ -108,21 +134,40 @@ $('upstream-form').addEventListener('submit',async e=>{e.preventDefault();const 
 
 $('project-archive-form').addEventListener('submit',async e=>{e.preventDefault();const button=e.currentTarget.querySelector('button');if(button.disabled)return;button.disabled=true;const status=$('project-archive-status');status.classList.remove('error');status.textContent='Queuing complete received project JSON for local storage…';try{const job=await submitJob(projectArchiveJob($('project-archive-id').value));status.textContent='Job '+job.id+' queued. Overview will show a hash/generation receipt; original JSON stays in local snapshots.';await refresh();}catch(error){status.textContent=error.message;status.classList.add('error');}finally{button.disabled=false;}});
 
-const archiveSelection=createArchiveSelection(({kind,id,generation},options)=>{
+const archiveSelection=createArchiveSelection(async({kind,id,generation,hash,bytes},options)=>{
  if(generation==='')return loadSavedArchive(kind,id,options);
  if(!exactPositiveId(generation)){
   throw Error('Enter a positive decimal generation up to 9223372036854775807 without signs or leading zeros, or leave it blank for newest.');
  }
  // The base reader builds and validates the fixed, same-origin kind/ID path.
  // Appending a validated decimal string preserves every SQLite integer digit.
- return loadSavedArchive(kind,id,{...options,fetchImpl:async(path,request)=>{
+ const record=await loadSavedArchive(kind,id,{...options,fetchImpl:async(path,request)=>{
   const response=await fetch(path+'/'+generation,request);
   const fault=response.status===404?'This saved generation was not found. The latest response was not opened.':
-   response.ok&&response.headers.get('x-atlas-generation')!==generation?'Saved-response generation mismatch. No archive was opened.':'';
+   response.ok&&response.headers.get('x-atlas-generation')!==generation?'Saved-response generation mismatch. No archive was opened.':
+   response.ok&&hash&&response.headers.get('x-atlas-payload-sha256')!==hash?'Saved response does not match the recorded receipt hash. No archive was opened.':'';
   if(fault){try{Promise.resolve(response.body?.cancel()).catch(()=>{});}catch{} throw Error(fault);}
   return response;
  }});
+ if(bytes!==undefined&&record.bytes.byteLength!==bytes)throw Error('Saved response does not match the recorded receipt byte count. No archive was opened.');
+ return record;
 });
+async function reviewProjectArchive(target,action,status){
+ cancelReceiptReview('Review replaced by a newer selection.');
+ const pending={action,status};pendingReceipt=pending;action.disabled=true;
+ status.textContent='Checking the recorded generation and SHA-256 against the retained bytes…';
+ try{
+  const result=await archiveSelection.load(target);
+  if(pendingReceipt!==pending||result.status!=='ready'||!action.isConnected)return;
+  $('show-last-archive').disabled=false;
+  status.textContent='Recorded receipt verified. Original JSON is shown as text.';
+  showSavedArchive();
+ }catch(error){
+  if(pendingReceipt===pending&&action.isConnected)status.textContent=error.message;
+ }finally{
+  if(pendingReceipt===pending){pendingReceipt=null;action.disabled=false;}
+ }
+}
 function showSavedArchive(){const record=archiveSelection.last;if(!record)return;$('saved-archive-title').textContent=record.kind+' '+record.id+' · generation '+record.generation;$('saved-archive-meta').textContent=record.bytes.byteLength+' bytes · SHA-256 '+record.hash;$('saved-archive-text').textContent=record.text;if(!$('saved-archive-dialog').open)$('saved-archive-dialog').showModal();}
 $('saved-archive-form').addEventListener('submit',async e=>{e.preventDefault();const button=e.currentTarget.querySelector('button'),status=$('saved-archive-status');button.disabled=true;$('cancel-archive-load').disabled=false;status.classList.remove('error');status.textContent='Reading and verifying local bytes; previous verified response is retained…';try{const result=await archiveSelection.load({kind:$('saved-archive-kind').value,id:$('saved-archive-id').value.trim(),generation:$('saved-archive-generation').value});if(result.status!=='ready')return;$('show-last-archive').disabled=false;status.textContent='Exact saved JSON verified. Provider markup is displayed only as text.';showSavedArchive();}catch(error){status.textContent=error.message;status.classList.add('error');}finally{button.disabled=archiveSelection.pending;$('cancel-archive-load').disabled=!archiveSelection.pending;}});
 $('cancel-archive-load').addEventListener('click',()=>{archiveSelection.cancel();$('saved-archive-form').querySelector('button').disabled=false;$('cancel-archive-load').disabled=true;$('saved-archive-status').textContent='Load cancelled. The previous verified response remains available.';});
