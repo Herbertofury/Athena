@@ -7,7 +7,7 @@ from pathlib import Path
 
 CORE = ("shrink-anything", "fast-anything", "rust-anything")
 GATES = ("project_checks", "workflow_acceptance", "artifact_integrity",
-         "artifact_rollback", "review")
+         "artifact_rollback", "review", "stack_freshness")
 LANES = ("quick", "standard", "high-risk")
 OUTCOMES = ("adopted", "no_safe_win", "not_applicable")
 
@@ -25,8 +25,8 @@ def validate(receipt, head):
     if not isinstance(receipt, dict):
         return ["receipt must be an object"]
     problems = []
-    if type(receipt.get("schemaVersion")) is not int or receipt["schemaVersion"] != 2:
-        problems.append("schemaVersion must be 2")
+    if type(receipt.get("schemaVersion")) is not int or receipt["schemaVersion"] != 3:
+        problems.append("schemaVersion must be 3")
     if not valid_sha(head) or receipt.get("head") != head:
         problems.append("head must match the independently supplied full candidate SHA")
     if not valid_sha(receipt.get("baseline")):

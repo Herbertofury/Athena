@@ -14,7 +14,7 @@ HEAD = "a" * 40
 
 def receipt():
     return {
-        "schemaVersion": 2, "head": HEAD, "baseline": "b" * 40,
+        "schemaVersion": 3, "head": HEAD, "baseline": "b" * 40,
         "lane": "standard", "scope": "synthetic fixture", "hard_blockers": [],
         "retained_optimization": False,
         "checks": {name: {"status": "passed", "evidence": "fixture"} for name in GATES},
@@ -76,7 +76,15 @@ class ReleaseCheckoutTests(unittest.TestCase):
 
     def test_legacy_schema_rejected(self):
         r = receipt()
-        r["schemaVersion"] = 1
+        for version in (1, 2):
+            r["schemaVersion"] = version
+            self.assertTrue(validate(r, HEAD))
+
+    def test_stack_freshness_required(self):
+        r = receipt()
+        del r["checks"]["stack_freshness"]
+        self.assertTrue(validate(r, HEAD))
+        r["checks"]["stack_freshness"] = {"status": "failed", "evidence": "fixture"}
         self.assertTrue(validate(r, HEAD))
 
     def test_high_risk_requires_extra_proof(self):
