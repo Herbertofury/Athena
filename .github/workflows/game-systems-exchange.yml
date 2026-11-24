@@ -1,0 +1,37 @@
+name: Game Systems Exchange validation
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'guidance/registry/shared-capabilities.json'
+      - 'guidance/schemas/**'
+      - 'docs/GAME-SYSTEMS-EXCHANGE.md'
+      - 'scripts/validate_game_systems.py'
+      - 'tests/test_game_systems_registry.py'
+      - '.github/workflows/game-systems-exchange.yml'
+  pull_request:
+    paths:
+      - 'guidance/registry/shared-capabilities.json'
+      - 'guidance/schemas/**'
+      - 'docs/GAME-SYSTEMS-EXCHANGE.md'
+      - 'scripts/validate_game_systems.py'
+      - 'tests/test_game_systems_registry.py'
+      - '.github/workflows/game-systems-exchange.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: '3.12'
+      - name: Validate source-pinned game capabilities
+        run: python scripts/validate_game_systems.py
+      - name: Test registry and schema contracts
+        run: python -m unittest discover -s tests -p test_game_systems_registry.py -v
