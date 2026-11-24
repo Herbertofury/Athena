@@ -7,8 +7,12 @@ export function attachObjectKeys({host,workspace,signal}) {
  const shown=control=>control&&!control.disabled&&!control.closest('[hidden]')&&control.getAttribute('aria-disabled')!=='true';
  function closeActorContext(restore=false){
   if(!menu)return;
-  const previous=opener;opener=null;roomObserver?.disconnect();roomObserver=null;menu.remove();menu=null;
+  // Removing a focused descendant synchronously dispatches focusout in Blink.
+  // Release ownership first so that handler cannot remove the same DOM twice.
+  const previous=opener,closing=menu;opener=null;menu=null;
+  roomObserver?.disconnect();roomObserver=null;
   doc.removeEventListener('pointerdown',outside,true);
+  closing.remove();
   if(restore&&ownedActor(previous)===previous)previous.focus({preventScroll:true});
  }
  const outside=e=>{if(!menu?.contains(e.target))closeActorContext();};

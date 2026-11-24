@@ -117,3 +117,35 @@ test('catalog actor text stays inert, and moving focus outside dismisses without
   assert.equal(s.menu(),null);assert.equal(s.focus,outside);assert.equal(s.writes.length,0);
  }finally{s.dispose();}
 });
+
+test('focused native menu close is reentrant-safe when Chromium synchronously dispatches focusout',async()=>{
+ const s=await setup();
+ try{
+  const opener=s.actor();opener.focus();
+  const prior=JSON.stringify(s.mounted.exportState());
+  for(const action of ['activate layer','Escape']){
+   s.event(opener,'keydown',{key:'F10',shiftKey:true});
+   const menu=s.menu();assert.ok(menu);
+   s.event(s.focus,'keydown',{key:'End'});
+   const active=s.focus;assert.equal(active.textContent,'Reveal in Room layers');
+   const actualRemove=menu.remove.bind(menu);
+   let removals=0;
+   menu.remove=function(){
+    const parent=this.parentNode;
+    // Blink RemoveChild clears descendant focus before unlinking, dispatching
+    // sync focusout. An inner removal changes the parent during the outer call.
+    if(++removals===1)s.event(active,'focusout',{relatedTarget:null});
+    if(this.parentNode!==parent)throw new DOMException('Parent changed during focused removal','NotFoundError');
+    return actualRemove();
+   };
+   if(action==='Escape')s.event(active,'keydown',{key:'Escape'});
+   else active.click();
+   assert.equal(s.menu(),null);
+   assert.equal(removals,1);
+   if(action==='Escape')assert.equal(s.focus,opener);
+   else assert.equal(s.focus.closest('[data-layer-id]').dataset.layerId,opener.dataset.id);
+  }
+  assert.equal(JSON.stringify(s.mounted.exportState()),prior);
+  assert.equal(s.writes.length,0);assert.equal(s.reads.length,1);
+ }finally{s.dispose();}
+});
