@@ -18,6 +18,8 @@ Priority P0 means start/reconcile first because of broad dependencies or concret
 
 ## M1 — provider and site adapters: first cross-repository execution lane
 
+**Active coordination issue:** [Athena #363](https://github.com/Herbertofury/Athena/issues/363). Existing consumer trackers are linked from the repository assignments below.
+
 **Current fragmentation is confirmed, best implementation is not yet established.** Athena's [collection contract](../engineering/docs/adapters/contract.md) distinguishes provider-qualified IDs, media roles, access state and completeness; its [adapter lab](../engineering/docs/adapters/README.md) reports 426 researched scopes and limited operation-level real evidence. Minecraft Mod Vault's [identity contract](https://github.com/Herbertofury/Minecraft-Mod-Vault/blob/main/PROVIDER-IDENTITY-CONTRACT.md) adds exact-file anchors and compatibility. Modding-Knowledge's [health query contract](https://github.com/Herbertofury/Modding-Knowledge/blob/main/docs/mod-health-query.md) already defines exact-context public claims. Reuse these; don't design another incompatible schema.
 
 - [ ] **M1a — inventory/contract.** Athena coordinates; Enderloom, Modhunter, Minecraft-Mod-Vault, Gamesync, GameSync-Next, Noxviola, MediaForge and UltraDeck identify real source/call sites, version, provider IDs, operations (discover, metadata, files, update, media, follow, download), authorization, supported runtime, full/partial/unknown states and existing tests. Modding-Knowledge maintains source/evidence schema. Use [shared capabilities](../guidance/registry/shared-capabilities.json). Do not duplicate existing adapter lab catalog.
