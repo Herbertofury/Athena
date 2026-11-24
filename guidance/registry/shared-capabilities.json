@@ -379,9 +379,9 @@
         },
         {
           "repository": "Herbertofury/CrownFold",
-          "commit": "ea4c966a828376702a8dec5e0ce3c97a505b32b",
+          "commit": "ea4c966a828376702a8dec0d5ce3c97a505b32b1",
           "path": "src/war.mjs",
-          "source": "https://github.com/Herbertofury/CrownFold/blob/ea4c966a828376702a8dec5e0ce3c97a505b32b/src/war.mjs",
+          "source": "https://github.com/Herbertofury/CrownFold/blob/ea4c966a828376702a8dec0d5ce3c97a505b32b1/src/war.mjs",
           "evidence": "source_inspected_not_runtime_verified",
           "observed": "Source comments and deterministic rift-surge/war simulation state document same-seed/same-action reproducibility.",
           "limits": "RTS campaign simulation, not a roguelike run manager; verify the full seed ingress and save lifecycle separately."
@@ -430,9 +430,9 @@
         },
         {
           "repository": "Herbertofury/CrownFold",
-          "commit": "ea4c966a828376702a8dec5e0ce3c97a505b32b",
+          "commit": "ea4c966a828376702a8dec0d5ce3c97a505b32b1",
           "path": "src/war.mjs",
-          "source": "https://github.com/Herbertofury/CrownFold/blob/ea4c966a828376702a8dec5e0ce3c97a505b32b/src/war.mjs",
+          "source": "https://github.com/Herbertofury/CrownFold/blob/ea4c966a828376702a8dec0d5ce3c97a505b32b1/src/war.mjs",
           "evidence": "source_inspected_not_runtime_verified",
           "observed": "Five authored war campaigns, enemy doctrines, sortie/expedition catalogs and objective phases.",
           "limits": "RTS objective graphs are not automatically card-game encounters or roguelike room graphs."
@@ -481,9 +481,9 @@
         },
         {
           "repository": "Herbertofury/CrownFold",
-          "commit": "ea4c966a828376702a8dec5e0ce3c97a505b32b",
+          "commit": "ea4c966a828376702a8dec0d5ce3c97a505b32b1",
           "path": "src/lineage.mjs",
-          "source": "https://github.com/Herbertofury/CrownFold/blob/ea4c966a828376702a8dec5e0ce3c97a505b32b/src/lineage.mjs",
+          "source": "https://github.com/Herbertofury/CrownFold/blob/ea4c966a828376702a8dec0d5ce3c97a505b32b1/src/lineage.mjs",
           "evidence": "source_inspected_not_runtime_verified",
           "observed": "Ten authored research/technology cards, three equipped slots, allowlisted migration and four explicit pairwise synergy recipes.",
           "limits": "Technology/research loadout cards are not a deckbuilder with draw, hand, discard, turn stack or card-play resolution."
@@ -508,9 +508,9 @@
       "candidates": [
         {
           "repository": "Herbertofury/CrownFold",
-          "commit": "ea4c966a828376702a8dec5e0ce3c97a505b32b",
+          "commit": "ea4c966a828376702a8dec0d5ce3c97a505b32b1",
           "path": "src/lineage.mjs",
-          "source": "https://github.com/Herbertofury/CrownFold/blob/ea4c966a828376702a8dec5e0ce3c97a505b32b/src/lineage.mjs",
+          "source": "https://github.com/Herbertofury/CrownFold/blob/ea4c966a828376702a8dec0d5ce3c97a505b32b1/src/lineage.mjs",
           "evidence": "source_inspected_not_runtime_verified",
           "observed": "Research/technology card catalog with costs, unlocks, equip limits and cross-card synergy; useful card metadata precedent.",
           "limits": "Not a full card game: no deck draw, hand, discard zones, turn engine or card-play resolution."
@@ -634,9 +634,9 @@
         },
         {
           "repository": "Herbertofury/CrownFold",
-          "commit": "ea4c966a828376702a8dec5e0ce3c97a505b32b",
+          "commit": "ea4c966a828376702a8dec0d5ce3c97a505b32b1",
           "path": "src/lineage.mjs",
-          "source": "https://github.com/Herbertofury/CrownFold/blob/ea4c966a828376702a8dec5e0ce3c97a505b32b/src/lineage.mjs",
+          "source": "https://github.com/Herbertofury/CrownFold/blob/ea4c966a828376702a8dec0d5ce3c97a505b32b1/src/lineage.mjs",
           "evidence": "source_inspected_not_runtime_verified",
           "observed": "migrateLineage allowlists known research IDs, deduplicates researched/equipped entries and caps equipped technology slots.",
           "limits": "This is a small subsystem migration, not proof of complete game save migration/rollback."
@@ -676,9 +676,9 @@
         },
         {
           "repository": "Herbertofury/CrownFold",
-          "commit": "ea4c966a828376702a8dec5e0ce3c97a505b32b",
+          "commit": "ea4c966a828376702a8dec0d5ce3c97a505b32b1",
           "path": "src/lineage.mjs",
-          "source": "https://github.com/Herbertofury/CrownFold/blob/ea4c966a828376702a8dec5e0ce3c97a505b32b/src/lineage.mjs",
+          "source": "https://github.com/Herbertofury/CrownFold/blob/ea4c966a828376702a8dec0d5ce3c97a505b32b1/src/lineage.mjs",
           "evidence": "source_inspected_not_runtime_verified",
           "observed": "Research cards, limited equipped slots and named pairwise synergies are a loadout/combination pattern.",
           "limits": "Persistent research unlocks and RTS equipment differ from a roguelike deck that changes during a run."

@@ -50,7 +50,7 @@ def validate(data: object) -> list[str]:
                 errors.append(f"{label}: invalid repository")
             if not isinstance(commit, str) or not SHA_RE.fullmatch(commit):
                 errors.append(f"{label}: commit must be a full 40-character SHA")
-            if not isinstance(path, str) or path.startswith("/") or ".." in Path(path).parts:
+            if not isinstance(path, str) or path.startswith("/") or "\\" in path or any(part in ("", ".", "..") for part in Path(path).parts):
                 errors.append(f"{label}: invalid repository path")
             expected = f"https://github.com/{repo}/blob/{commit}/{path}"
             if candidate.get("source") != expected:

@@ -4,7 +4,7 @@ on:
     branches: [main]
     paths: ["engineering/**", "migration/engineering-atlas/**", "scripts/verify_atlas_cutover.py", "tests/atlas_cutover_test.py", "docs/GAME-SYSTEMS-EXCHANGE.md", "docs/REUSABLE-PACKAGE-COORDINATION.md", "docs/PORTFOLIO-ALIGNMENT.md", "guidance/registry/shared-capabilities.json", "guidance/schemas/**", "scripts/validate_game_systems.py", "tests/test_game_systems_registry.py", "AGENTS.md", "wiki/Engineering-Game-Systems-Exchange.md", "wiki/Engineering-Home.md", "wiki/Engineering-Navigation.md", ".github/workflows/athena-engineering-checks.yml"]
   pull_request:
-    paths: ["engineering/**", "migration/engineering-atlas/**", "scripts/verify_atlas_cutover.py", "tests/atlas_cutover_test.py", ".github/workflows/athena-engineering-checks.yml"]
+    paths: ["engineering/**", "migration/engineering-atlas/**", "scripts/verify_atlas_cutover.py", "tests/atlas_cutover_test.py", "docs/GAME-SYSTEMS-EXCHANGE.md", "docs/REUSABLE-PACKAGE-COORDINATION.md", "docs/PORTFOLIO-ALIGNMENT.md", "guidance/registry/shared-capabilities.json", "guidance/schemas/**", "scripts/validate_game_systems.py", "tests/test_game_systems_registry.py", "AGENTS.md", "wiki/Engineering-Game-Systems-Exchange.md", "wiki/Engineering-Home.md", "wiki/Engineering-Navigation.md", ".github/workflows/athena-engineering-checks.yml"]
   workflow_dispatch:
 permissions:
   contents: read
