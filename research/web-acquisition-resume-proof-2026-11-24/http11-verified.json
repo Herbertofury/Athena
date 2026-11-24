@@ -1,0 +1,384 @@
+{
+  "connection_reuse": {
+    "casesPerConnection": 4,
+    "clientsWithSinglePortForAllFourCases": 9
+  },
+  "curl": "curl 8.23.0 (x86_64-pc-linux-gnu) libcurl/8.23.0 OpenSSL/3.5.7 zlib/1.3.1 libidn2/2.3.8",
+  "python": "3.12.14",
+  "results": {
+    "curl/already_complete": {
+      "combined_median_ms": 14.002,
+      "launches_ms": [
+        [
+          14.165,
+          14.676,
+          16.479,
+          26.302,
+          15.245,
+          13.921,
+          14.553,
+          13.807,
+          13.888
+        ],
+        [
+          13.948,
+          13.228,
+          13.763,
+          14.056,
+          12.858,
+          14.595,
+          13.8,
+          13.888,
+          14.541
+        ]
+      ],
+      "preservedOriginal": true,
+      "responseBytes": 0,
+      "resultSha256": "cdb6556f0d2583e6e855cd9a1d940d2f7d02dbda08c7be368e4a4a5a6a594554",
+      "status": 416
+    },
+    "curl/no_ranges": {
+      "combined_median_ms": 23.608,
+      "launches_ms": [
+        [
+          47.582,
+          39.949,
+          24.755,
+          35.452,
+          36.451,
+          26.678,
+          22.462,
+          20.757,
+          21.812
+        ],
+        [
+          28.359,
+          39.262,
+          19.119,
+          26.747,
+          18.618,
+          21.206,
+          20.478,
+          20.769,
+          21.427
+        ]
+      ],
+      "preservedOriginal": true,
+      "responseBytes": 8388608,
+      "resultSha256": "cdb6556f0d2583e6e855cd9a1d940d2f7d02dbda08c7be368e4a4a5a6a594554",
+      "status": 200
+    },
+    "curl/replaced": {
+      "combined_median_ms": 21.605,
+      "launches_ms": [
+        [
+          52.933,
+          45.93,
+          23.189,
+          24.54,
+          21.552,
+          20.152,
+          24.059,
+          21.658,
+          29.142
+        ],
+        [
+          20.915,
+          42.392,
+          19.546,
+          18.445,
+          21.339,
+          28.682,
+          18.539,
+          19.156,
+          21.259
+        ]
+      ],
+      "preservedOriginal": true,
+      "responseBytes": 8388608,
+      "resultSha256": "8c40c78b13db288b92afda490caa70abb8cdf470489e69356ada2539276ede33",
+      "status": 200
+    },
+    "curl/unchanged": {
+      "combined_median_ms": 24.252,
+      "launches_ms": [
+        [
+          73.991,
+          34.547,
+          30.686,
+          30.47,
+          22.968,
+          32.222,
+          32.823,
+          23.916,
+          56.539
+        ],
+        [
+          24.588,
+          22.8,
+          30.526,
+          22.106,
+          20.034,
+          21.126,
+          23.744,
+          20.884,
+          23.122
+        ]
+      ],
+      "preservedOriginal": true,
+      "responseBytes": 5242880,
+      "resultSha256": "cdb6556f0d2583e6e855cd9a1d940d2f7d02dbda08c7be368e4a4a5a6a594554",
+      "status": 206
+    },
+    "python_fresh/already_complete": {
+      "combined_median_ms": 8.687,
+      "launches_ms": [
+        [
+          9.499,
+          8.659,
+          8.714,
+          20.689,
+          9.267,
+          8.609,
+          8.987,
+          8.959,
+          9.04
+        ],
+        [
+          7.962,
+          8.217,
+          8.781,
+          8.052,
+          8.124,
+          8.61,
+          8.477,
+          8.137,
+          8.797
+        ]
+      ],
+      "preservedOriginal": true,
+      "responseBytes": 0,
+      "resultSha256": "cdb6556f0d2583e6e855cd9a1d940d2f7d02dbda08c7be368e4a4a5a6a594554",
+      "status": 416
+    },
+    "python_fresh/no_ranges": {
+      "combined_median_ms": 14.62,
+      "launches_ms": [
+        [
+          15.524,
+          22.656,
+          17.699,
+          13.48,
+          14.736,
+          24.592,
+          20.56,
+          15.876,
+          14.392
+        ],
+        [
+          18.287,
+          14.505,
+          12.708,
+          15.224,
+          12.748,
+          12.255,
+          12.255,
+          13.282,
+          12.335
+        ]
+      ],
+      "preservedOriginal": true,
+      "responseBytes": 8388608,
+      "resultSha256": "cdb6556f0d2583e6e855cd9a1d940d2f7d02dbda08c7be368e4a4a5a6a594554",
+      "status": 200
+    },
+    "python_fresh/replaced": {
+      "combined_median_ms": 14.05,
+      "launches_ms": [
+        [
+          12.732,
+          21.562,
+          29.852,
+          20.35,
+          15.756,
+          14.405,
+          13.811,
+          17.356,
+          14.179
+        ],
+        [
+          12.985,
+          22.702,
+          14.014,
+          12.663,
+          12.344,
+          13.704,
+          13.421,
+          13.985,
+          14.086
+        ]
+      ],
+      "preservedOriginal": true,
+      "responseBytes": 8388608,
+      "resultSha256": "8c40c78b13db288b92afda490caa70abb8cdf470489e69356ada2539276ede33",
+      "status": 200
+    },
+    "python_fresh/unchanged": {
+      "combined_median_ms": 16.511,
+      "launches_ms": [
+        [
+          48.201,
+          20.865,
+          14.767,
+          18.644,
+          16.176,
+          16.951,
+          15.613,
+          16.846,
+          17.979
+        ],
+        [
+          17.223,
+          14.623,
+          14.355,
+          16.089,
+          13.539,
+          14.563,
+          16.917,
+          15.824,
+          20.584
+        ]
+      ],
+      "preservedOriginal": true,
+      "responseBytes": 5242880,
+      "resultSha256": "cdb6556f0d2583e6e855cd9a1d940d2f7d02dbda08c7be368e4a4a5a6a594554",
+      "status": 206
+    },
+    "python_persistent/already_complete": {
+      "combined_median_ms": 8.107,
+      "launches_ms": [
+        [
+          10.423,
+          8.094,
+          9.009,
+          8.432,
+          7.86,
+          7.794,
+          8.869,
+          8.493,
+          17.3
+        ],
+        [
+          7.987,
+          7.744,
+          7.48,
+          8.223,
+          7.591,
+          7.644,
+          8.121,
+          8.225,
+          7.46
+        ]
+      ],
+      "preservedOriginal": true,
+      "responseBytes": 0,
+      "resultSha256": "cdb6556f0d2583e6e855cd9a1d940d2f7d02dbda08c7be368e4a4a5a6a594554",
+      "status": 416
+    },
+    "python_persistent/no_ranges": {
+      "combined_median_ms": 12.402,
+      "launches_ms": [
+        [
+          10.258,
+          12.521,
+          14.437,
+          12.465,
+          13.064,
+          13.972,
+          14.155,
+          12.436,
+          17.742
+        ],
+        [
+          12.225,
+          11.481,
+          12.452,
+          11.318,
+          11.094,
+          12.367,
+          12.015,
+          11.251,
+          11.166
+        ]
+      ],
+      "preservedOriginal": true,
+      "responseBytes": 8388608,
+      "resultSha256": "cdb6556f0d2583e6e855cd9a1d940d2f7d02dbda08c7be368e4a4a5a6a594554",
+      "status": 200
+    },
+    "python_persistent/replaced": {
+      "combined_median_ms": 12.524,
+      "launches_ms": [
+        [
+          10.863,
+          10.857,
+          15.379,
+          14.05,
+          13.756,
+          12.911,
+          20.086,
+          12.141,
+          16.341
+        ],
+        [
+          12.906,
+          13.41,
+          11.929,
+          11.794,
+          11.008,
+          12.912,
+          11.841,
+          11.763,
+          11.383
+        ]
+      ],
+      "preservedOriginal": true,
+      "responseBytes": 8388608,
+      "resultSha256": "8c40c78b13db288b92afda490caa70abb8cdf470489e69356ada2539276ede33",
+      "status": 200
+    },
+    "python_persistent/unchanged": {
+      "combined_median_ms": 15.776,
+      "launches_ms": [
+        [
+          27.302,
+          32.037,
+          17.59,
+          15.909,
+          16.185,
+          14.96,
+          14.365,
+          21.27,
+          14.484
+        ],
+        [
+          15.151,
+          15.12,
+          14.363,
+          16.718,
+          14.703,
+          15.642,
+          13.976,
+          16.168,
+          16.678
+        ]
+      ],
+      "preservedOriginal": true,
+      "responseBytes": 5242880,
+      "resultSha256": "cdb6556f0d2583e6e855cd9a1d940d2f7d02dbda08c7be368e4a4a5a6a594554",
+      "status": 206
+    }
+  },
+  "scope": "loopback_request_and_response_http11_verified",
+  "verified_transfers": 216
+}
