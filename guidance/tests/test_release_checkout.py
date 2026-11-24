@@ -14,11 +14,11 @@ HEAD = "a" * 40
 
 def receipt():
     return {
-        "schemaVersion": 1, "head": HEAD, "baseline": "b" * 40,
+        "schemaVersion": 2, "head": HEAD, "baseline": "b" * 40,
         "lane": "standard", "scope": "synthetic fixture", "hard_blockers": [],
         "retained_optimization": False,
         "checks": {name: {"status": "passed", "evidence": "fixture"} for name in GATES},
-        "core_tools": {name: {"status": "no_safe_win", "evidence": "fixture"} for name in CORE},
+        "core_tools": {name: {"status": "no_safe_win", "evidence": "fixture", "tool_version": "fixture", "command": name + " fixture"} for name in CORE},
     }
 
 
@@ -44,12 +44,40 @@ class ReleaseCheckoutTests(unittest.TestCase):
         del r["core_tools"][CORE[0]]
         self.assertTrue(validate(r, HEAD))
 
-    def test_deferred_requires_followup(self):
+    def test_deferred_core_blocks_even_with_followup(self):
         r = receipt()
         r["core_tools"][CORE[0]]["status"] = "deferred"
-        self.assertTrue(validate(r, HEAD))
         r["core_tools"][CORE[0]]["follow_up"] = "fixture backlog"
+        self.assertTrue(validate(r, HEAD))
+
+    def test_failed_core_blocks(self):
+        r = receipt()
+        r["core_tools"][CORE[0]]["status"] = "failed"
+        self.assertTrue(validate(r, HEAD))
+
+    def test_completed_core_requires_version_and_command(self):
+        for field in ("tool_version", "command"):
+            r = receipt()
+            del r["core_tools"][CORE[0]][field]
+            self.assertTrue(validate(r, HEAD))
+
+    def test_not_applicable_requires_reason(self):
+        r = receipt()
+        r["core_tools"][CORE[0]] = {"status": "not_applicable", "evidence": "fixture: unsupported runtime"}
         self.assertEqual(validate(r, HEAD), [])
+        r["core_tools"][CORE[0]]["evidence"] = ""
+        self.assertTrue(validate(r, HEAD))
+
+    def test_security_opt_in_is_advisory(self):
+        for status in ("not_run", "failed", "findings", "blocked", "passed"):
+            r = receipt()
+            r["security_audits"] = {"safe-anything": {"status": status}}
+            self.assertEqual(validate(r, HEAD), [])
+
+    def test_legacy_schema_rejected(self):
+        r = receipt()
+        r["schemaVersion"] = 1
+        self.assertTrue(validate(r, HEAD))
 
     def test_high_risk_requires_extra_proof(self):
         r = receipt()

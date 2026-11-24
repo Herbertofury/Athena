@@ -6,10 +6,10 @@ import re
 from pathlib import Path
 
 CORE = ("shrink-anything", "fast-anything", "rust-anything")
-GATES = ("project_checks", "workflow_acceptance", "integrity_security",
+GATES = ("project_checks", "workflow_acceptance", "artifact_integrity",
          "artifact_rollback", "review")
 LANES = ("quick", "standard", "high-risk")
-OUTCOMES = ("adopted", "no_safe_win", "not_applicable", "deferred")
+OUTCOMES = ("adopted", "no_safe_win", "not_applicable")
 
 
 def nonempty(value):
@@ -25,8 +25,8 @@ def validate(receipt, head):
     if not isinstance(receipt, dict):
         return ["receipt must be an object"]
     problems = []
-    if type(receipt.get("schemaVersion")) is not int or receipt["schemaVersion"] != 1:
-        problems.append("schemaVersion must be 1")
+    if type(receipt.get("schemaVersion")) is not int or receipt["schemaVersion"] != 2:
+        problems.append("schemaVersion must be 2")
     if not valid_sha(head) or receipt.get("head") != head:
         problems.append("head must match the independently supplied full candidate SHA")
     if not valid_sha(receipt.get("baseline")):
@@ -51,8 +51,9 @@ def validate(receipt, head):
         status = result.get("status")
         if status not in OUTCOMES or not nonempty(result.get("evidence")):
             problems.append(f"{name}: valid outcome and evidence/reason required")
-        if status == "deferred" and not nonempty(result.get("follow_up")):
-            problems.append(f"{name}: deferred outcome requires follow_up")
+        if status in ("adopted", "no_safe_win"):
+            if not nonempty(result.get("tool_version")) or not nonempty(result.get("command")):
+                problems.append(f"{name}: completed assessment requires tool version and command")
         adopted |= status == "adopted"
     retained = receipt.get("retained_optimization")
     if type(retained) is not bool or (adopted and retained is not True):
@@ -69,6 +70,7 @@ def validate(receipt, head):
     for name, result in checks.items():
         if not isinstance(result, dict) or result.get("status") != "passed" or not nonempty(result.get("evidence")):
             problems.append(f"declared mandatory gate incomplete: {name}")
+    # Security audits are an optional advisory map, never a required gate.
     return list(dict.fromkeys(problems))
 
 

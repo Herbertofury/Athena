@@ -5,7 +5,7 @@ Athena's shared repository-alignment and reusable-agent capability. The first na
 - [Repository guidance and explicit adoption](docs/REPOSITORY-GOVERNANCE.md)
 - [Shared adapter](templates/AGENTS.repository.md)
 - [Product invariants](PRODUCT_INVARIANTS.md)
-- [Risk-routed pre-release checkout and zero-loss optimization](PRE_RELEASE_OPTIMIZATION.md) — [16-tool catalog](registry/release-checkout-tools.json) and [dependency-free receipt validator](tools/release_checkout.py)
+- [Risk-routed pre-release checkout and zero-loss optimization](PRE_RELEASE_OPTIMIZATION.md) — [17-tool catalog (mandatory core optimization; opt-in security)](registry/release-checkout-tools.json) and [dependency-free receipt validator](tools/release_checkout.py)
 - [Machine-readable governance release](registry/repository-governance.json)
 - [Migration/retirement ledger](../docs/integration/AGENT-GUIDANCE.md)
 

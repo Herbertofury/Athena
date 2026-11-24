@@ -1,7 +1,7 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "reviewedOn": "2026-11-24",
-  "purpose": "Risk-routed tool selection; not a version lock, installation manifest, or runtime acceptance claim.",
+  "purpose": "Mandatory named optimization assessments; risk-routed functional verification; dedicated security audits explicitly opt-in and advisory.",
   "tools": [
     {
       "id": "shrink-anything",
@@ -9,7 +9,8 @@
       "lane": "core",
       "trigger": "Changed supported source, dependencies or release assets",
       "use": "Scan/weigh; cut only with strong tests; verify/undo.",
-      "versionPolicy": "Review and pin per project before execution; reuse validated local equivalent where appropriate."
+      "versionPolicy": "Review and pin the named tool before execution; exact unchanged-input evidence reuse allowed; no deferred or substitute assessment.",
+      "releasePolicy": "mandatory_when_applicable"
     },
     {
       "id": "fast-anything",
@@ -17,7 +18,8 @@
       "lane": "core",
       "trigger": "Changed executable paths on supported non-Rust runtimes",
       "use": "Profile once; port only a material hotspot; verify/bench/disable.",
-      "versionPolicy": "Review and pin per project before execution; reuse validated local equivalent where appropriate."
+      "versionPolicy": "Review and pin the named tool before execution; exact unchanged-input evidence reuse allowed; no deferred or substitute assessment.",
+      "releasePolicy": "mandatory_when_applicable"
     },
     {
       "id": "rust-anything",
@@ -25,7 +27,8 @@
       "lane": "core",
       "trigger": "Eligible non-Rust hotspot or migration boundary",
       "use": "Compare alternatives against the same baseline; record/diff/fuzz/bench/gate.",
-      "versionPolicy": "Review and pin per project before execution; reuse validated local equivalent where appropriate."
+      "versionPolicy": "Review and pin the named tool before execution; exact unchanged-input evidence reuse allowed; no deferred or substitute assessment.",
+      "releasePolicy": "mandatory_when_applicable"
     },
     {
       "id": "criterion",
@@ -33,7 +36,8 @@
       "lane": "targeted",
       "trigger": "Rust algorithm, allocation or throughput hot path",
       "use": "Existing representative microbenchmarks; measure noise; confirm end-to-end.",
-      "versionPolicy": "Review and pin per project before execution; reuse validated local equivalent where appropriate."
+      "versionPolicy": "Review and pin per project before execution; reuse validated local equivalent where appropriate.",
+      "releasePolicy": "risk_routed"
     },
     {
       "id": "hyperfine",
@@ -41,7 +45,8 @@
       "lane": "targeted",
       "trigger": "CLI, startup, batch or packaging performance changed",
       "use": "Repeated warm/cold equivalent command benchmarks; export results.",
-      "versionPolicy": "Review and pin per project before execution; reuse validated local equivalent where appropriate."
+      "versionPolicy": "Review and pin per project before execution; reuse validated local equivalent where appropriate.",
+      "releasePolicy": "risk_routed"
     },
     {
       "id": "tracy",
@@ -49,7 +54,8 @@
       "lane": "deep",
       "trigger": "Frame/tick latency, GPU, allocation or concurrency bottleneck",
       "use": "Use existing instrumentation or isolated profiling; no production telemetry.",
-      "versionPolicy": "Review and pin per project before execution; reuse validated local equivalent where appropriate."
+      "versionPolicy": "Review and pin per project before execution; reuse validated local equivalent where appropriate.",
+      "releasePolicy": "risk_routed"
     },
     {
       "id": "cargo-bloat",
@@ -57,7 +63,8 @@
       "lane": "targeted",
       "trigger": "Rust release binary size or dependency/feature growth",
       "use": "Inspect supported native release builds; reuse existing build artifacts.",
-      "versionPolicy": "Review and pin per project before execution; reuse validated local equivalent where appropriate."
+      "versionPolicy": "Review and pin per project before execution; reuse validated local equivalent where appropriate.",
+      "releasePolicy": "risk_routed"
     },
     {
       "id": "cargo-machete",
@@ -65,7 +72,8 @@
       "lane": "targeted",
       "trigger": "Rust manifests/dependencies or broad refactor",
       "use": "Advisory unused dependency scan; confirm feature/target/dynamic use before removal.",
-      "versionPolicy": "Review and pin per project before execution; reuse validated local equivalent where appropriate."
+      "versionPolicy": "Review and pin per project before execution; reuse validated local equivalent where appropriate.",
+      "releasePolicy": "risk_routed"
     },
     {
       "id": "cargo-nextest",
@@ -73,15 +81,17 @@
       "lane": "fast",
       "trigger": "Rust tests where already configured or parity is proven",
       "use": "Reuse cached builds; preserve test inventory, doctests and feature/platform coverage.",
-      "versionPolicy": "Review and pin per project before execution; reuse validated local equivalent where appropriate."
+      "versionPolicy": "Review and pin per project before execution; reuse validated local equivalent where appropriate.",
+      "releasePolicy": "risk_routed"
     },
     {
       "id": "cargo-deny",
       "upstream": "https://github.com/EmbarkStudios/cargo-deny",
-      "lane": "fast",
-      "trigger": "Rust dependency and release supply-chain review",
+      "lane": "security-opt-in",
+      "trigger": "Explicit owner opt-in only; Rust dependency and release supply-chain review",
       "use": "Check relevant lockfiles against reviewed security/license/source policy; do not auto-fix.",
-      "versionPolicy": "Review and pin per project before execution; reuse validated local equivalent where appropriate."
+      "versionPolicy": "Review and pin per project before execution; reuse validated local equivalent where appropriate.",
+      "releasePolicy": "explicit_opt_in_advisory"
     },
     {
       "id": "cargo-fuzz",
@@ -89,7 +99,8 @@
       "lane": "deep",
       "trigger": "Changed untrusted-input parsers, codecs, native boundaries or security-critical algorithms",
       "use": "Existing corpus replay and short targeted fuzz; longer jobs off critical path; supported toolchain only.",
-      "versionPolicy": "Review and pin per project before execution; reuse validated local equivalent where appropriate."
+      "versionPolicy": "Review and pin per project before execution; reuse validated local equivalent where appropriate.",
+      "releasePolicy": "risk_routed"
     },
     {
       "id": "miri",
@@ -97,7 +108,8 @@
       "lane": "deep",
       "trigger": "Changed unsafe Rust, ownership/aliasing or concurrency-sensitive pure Rust",
       "use": "Targeted supported tests using pinned separate nightly; not proof of native FFI or all UB.",
-      "versionPolicy": "Review and pin per project before execution; reuse validated local equivalent where appropriate."
+      "versionPolicy": "Review and pin per project before execution; reuse validated local equivalent where appropriate.",
+      "releasePolicy": "risk_routed"
     },
     {
       "id": "knip",
@@ -105,7 +117,8 @@
       "lane": "targeted",
       "trigger": "Changed JS/TS dependency, import/export or build structure",
       "use": "Configured read-only scan; confirm runtime/convention entry points before removal.",
-      "versionPolicy": "Review and pin per project before execution; reuse validated local equivalent where appropriate."
+      "versionPolicy": "Review and pin per project before execution; reuse validated local equivalent where appropriate.",
+      "releasePolicy": "risk_routed"
     },
     {
       "id": "playwright",
@@ -113,15 +126,17 @@
       "lane": "fast",
       "trigger": "Web UI or browser-based flows",
       "use": "Reuse existing focused smoke and affected E2E; broader browser matrix when warranted.",
-      "versionPolicy": "Review and pin per project before execution; reuse validated local equivalent where appropriate."
+      "versionPolicy": "Review and pin per project before execution; reuse validated local equivalent where appropriate.",
+      "releasePolicy": "risk_routed"
     },
     {
       "id": "semgrep",
       "upstream": "https://github.com/semgrep/semgrep",
-      "lane": "fast",
-      "trigger": "Changed code in supported languages and security review",
+      "lane": "security-opt-in",
+      "trigger": "Explicit owner opt-in only; Changed code in supported languages and security review",
       "use": "Pinned reviewed local rules, no uploads/credentials; targeted scan plus full relevant coverage as needed.",
-      "versionPolicy": "Review and pin per project before execution; reuse validated local equivalent where appropriate."
+      "versionPolicy": "Review and pin per project before execution; reuse validated local equivalent where appropriate.",
+      "releasePolicy": "explicit_opt_in_advisory"
     },
     {
       "id": "difftastic",
@@ -129,7 +144,17 @@
       "lane": "fast",
       "trigger": "Nontrivial source diff or automated rewrite",
       "use": "Structural review alongside ordinary Git diff; not a correctness or security gate by itself.",
-      "versionPolicy": "Review and pin per project before execution; reuse validated local equivalent where appropriate."
+      "versionPolicy": "Review and pin per project before execution; reuse validated local equivalent where appropriate.",
+      "releasePolicy": "risk_routed"
+    },
+    {
+      "id": "safe-anything",
+      "upstream": "https://github.com/erkamyaman/safe-anything",
+      "lane": "security-opt-in",
+      "releasePolicy": "explicit_opt_in_advisory",
+      "trigger": "Explicit owner opt-in only",
+      "use": "Scoped offline JSON scan for code, secrets, agent/MCP config and other configuration; online OSV dependency lookup requires separate authorization; advisory findings only.",
+      "versionPolicy": "Review and pin per project before execution; no auto-install or automatic release gate."
     }
   ]
 }
