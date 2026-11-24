@@ -1,7 +1,8 @@
-import {empty,validate,change,archive,createBrowseIndex,stages,matchingSavedRevisions,createProjectReference} from './model.mjs';
+import {empty,validate,change,archive,createBrowseIndex,stages,matchingSavedRevisions,createProjectReference,canonicalProjectValue,savedProjectKey,
+ savedRevisionKey,parseSavedRevisionRoute,savedRevisionHref} from './model.mjs';
 import {parseBackup,mergeBackup,MAX_IMPORT_BYTES} from './import.mjs';
 const PAGE=24;
-export function mount({container,state,setState,search='',signal,theme='dark',readSavedProject}){
+export function mount({container,state,setState,search='',signal,theme='dark',readSavedProject,route=''}){
  const root=container.shadowRoot||container.attachShadow({mode:'open'});let data,disposed=false,selected=null,editing=null,generation=0,review=null,portable=null,ownership='',stage='',archived=false,searchHistory=false;const urls=new Set();
  let browseIndex,savedIndex,savedProjects,rows=[],shown=0,limit=PAGE;
  let failure='',committed;try{prepareData(state===undefined?empty():validate(state));rememberSaved();}catch(e){failure='Stored projects could not be opened and have not been overwritten. '+e.message;}
@@ -11,6 +12,85 @@ export function mount({container,state,setState,search='',signal,theme='dark',re
  const fieldLabels={name:'Project name',ownership:'Ownership',stage:'Stage',goal:'Goal',next:'Next actions',blockers:'Blockers',decisions:'Decisions',resources:'Resources and inspiration',source:'Official source',version:'Observed version',release:'Release reference'};
  const el=(tag,text)=>{const n=document.createElement(tag);if(text!==undefined)n.textContent=text;return n;};
  const button=(label,fn)=>{const b=el('button',label);b.type='button';b.onclick=fn;return b;};
+ const routeView=el('section');routeView.id='saved-revision-route';
+ routeView.setAttribute('aria-label','Linked saved revision');routeView.hidden=true;
+ notice.after(routeView);
+ let routeOperation=0;
+ const projectKeys=new Map();
+ const localKey=id=>{
+  if(!projectKeys.has(id))projectKeys.set(id,savedProjectKey(id));
+  return projectKeys.get(id);
+ };
+ function durableRevision(id,ordinal){
+  if(typeof readSavedProject!=='function')return null;
+  const project=readSavedProject(id);
+  if(project?.id!==id||!Array.isArray(project.revisions)||ordinal>project.revisions.length)return null;
+  return validate({schema:1,entries:[project]}).entries[0].revisions[ordinal-1];
+ }
+ function revisionLinkAction(project,revision,ordinal){
+  const info=el('span');info.setAttribute('role','status');
+  const prepare=button('Prepare local link to revision '+ordinal,async()=>{
+   if(disposed||prepare.disabled||!prepare.isConnected)return;
+   prepare.disabled=true;
+   try{
+    const original=canonicalProjectValue(revision),saved=durableRevision(project.id,ordinal);
+    if(!saved||canonicalProjectValue(saved)!==original)throw Error('Saved revision changed.');
+    const [key,binding]=await Promise.all([localKey(project.id),savedRevisionKey(project.id,ordinal,saved)]);
+    if(disposed||!prepare.isConnected)return;
+    const again=durableRevision(project.id,ordinal);
+    if(!again||canonicalProjectValue(again)!==original)throw Error('Saved revision changed.');
+    const link=el('a','Open local link to revision '+ordinal);link.href=savedRevisionHref(ordinal,key,binding);
+    link.dataset.savedRevisionLink='';
+    info.replaceChildren(link,el('span',' Works only where this exact revision is already saved. Treat this locator as private; it is not a share or access control.'));
+    link.focus({preventScroll:true});
+   }catch{
+    if(!disposed&&prepare.isConnected)info.textContent='Could not prepare an exact local link. Reopen the saved project and try again.';
+   }finally{if(!disposed&&prepare.isConnected)prepare.disabled=false;}
+  });
+  prepare.dataset.prepareSavedRevisionLink='';
+  return [prepare,info];
+ }
+ async function openRevisionRoute(value){
+  const operation=++routeOperation;
+  routeView.replaceChildren();routeView.hidden=true;
+  let locator;
+  try{locator=parseSavedRevisionRoute(value);}catch(error){
+   routeView.hidden=false;routeView.append(el('p',error.message));return;
+  }
+  if(!locator||disposed)return;
+  const heading=el('h3','Linked saved revision'),status=el('p','Finding the exact saved revision in this browser…');
+  status.setAttribute('role','status');routeView.append(heading,status);routeView.hidden=false;
+  const current=()=>!disposed&&routeOperation===operation;
+  try{
+   if(!savedProjects||typeof readSavedProject!=='function')throw Error('Unavailable');
+   const matches=[],ids=[...savedProjects.keys()];
+   for(let start=0;start<ids.length;start+=16){
+    const batch=ids.slice(start,start+16);
+    const keys=await Promise.all(batch.map(localKey));
+    if(!current())return;
+    batch.forEach((id,index)=>{if(keys[index]===locator.projectKey)matches.push(id);});
+   }
+   if(matches.length!==1)throw Error('Unavailable');
+   const [id]=matches,saved=durableRevision(id,locator.ordinal);
+   if(!saved||await savedRevisionKey(id,locator.ordinal,saved)!==locator.revisionKey)throw Error('Unavailable');
+   if(!current())return;
+   const again=durableRevision(id,locator.ordinal);
+   if(!again||canonicalProjectValue(again)!==canonicalProjectValue(saved))throw Error('Unavailable');
+   heading.textContent='Saved revision '+locator.ordinal+': '+saved.name;
+   status.textContent='Read-only. Nothing was edited, restored, shared or saved. Recorded links have not been checked.';
+   const description=el('dl');
+   for(const key of ['ownership','stage','goal','next','blockers','decisions','resources','version']){
+    description.append(el('dt',fieldLabels[key]),el('dd',saved[key]||'Not recorded'));
+   }
+   routeView.append(el('p','Saved '+savedDate(saved.at)+'.'),description);
+   for(const [key,label] of [['source','official source'],['release','release reference']]){
+    const link=createProjectReference(document,'Open linked revision '+label+' (new tab)',saved[key]);if(link)routeView.append(link);
+   }
+  }catch{
+   if(current())status.textContent='The exact saved revision is unavailable here. Nothing was substituted. If it was just saved in another tab, reload and try again.';
+  }
+ }
+
  function prepareData(next){browseIndex=createBrowseIndex(next);data=next;}
  function rememberSaved(){committed=JSON.stringify(data);savedIndex=browseIndex;savedProjects=new Map(data.entries.map(p=>[p.id,p]));}
  function resultIndex(){return searchHistory||String(search).trim()?savedIndex:browseIndex;}
@@ -143,7 +223,7 @@ export function mount({container,state,setState,search='',signal,theme='dark',re
      const saved=project.revisions[--next],section=el('section');
      section.dataset.savedRevision=String(next+1);section.setAttribute('aria-label','Saved revision '+(next+1));
      const references=[['official source',saved.source],['release reference',saved.release]].map(([label,value])=>createProjectReference(document,`Open revision ${next+1} ${label} (new tab)`,value)).filter(Boolean);
-     const rev=el('pre',JSON.stringify(saved,null,2));rev.tabIndex=-1;section.append(...references,rev);list.append(section);first??=references[0]??rev;
+     const rev=el('pre',JSON.stringify(saved,null,2));rev.tabIndex=-1;section.append(...references,rev);if(typeof readSavedProject==='function')section.append(...revisionLinkAction(project,saved,next+1));list.append(section);first??=references[0]??rev;
     }
     if(moveFocus)first?.focus();
     more.hidden=!next;
@@ -242,6 +322,6 @@ export function mount({container,state,setState,search='',signal,theme='dark',re
   }catch(e){if(!disposed&&token===generation)notice.textContent='Import refused; existing projects unchanged. '+e.message;}
  };
  if(!data){notice.textContent=failure;for(const n of root.querySelectorAll('input,select,button,textarea'))n.disabled=true;}else{notice.textContent='Ready. Nothing is sent to a provider.';render();}
- function unmount(){if(disposed)return;disposed=true;generation++;review=null;for(const url of urls)URL.revokeObjectURL(url);root.replaceChildren();signal?.removeEventListener('abort',unmount);}
- function setTheme(t){container.dataset.theme=t==='light'?'light':'dark';}setTheme(theme);signal?.addEventListener('abort',unmount,{once:true});if(signal?.aborted)unmount();return {ready:!!data,unmount,setTheme,setSearch(q){const next=String(q);if(next!==search){search=next;resetList();}}};
+ function unmount(){if(disposed)return;disposed=true;generation++;routeOperation++;projectKeys.clear();review=null;for(const url of urls)URL.revokeObjectURL(url);root.replaceChildren();signal?.removeEventListener('abort',unmount);}
+ function setTheme(t){container.dataset.theme=t==='light'?'light':'dark';}setTheme(theme);signal?.addEventListener('abort',unmount,{once:true});if(signal?.aborted)unmount();else void openRevisionRoute(route);return {ready:!!data,unmount,setTheme,setRoute(value){void openRevisionRoute(value);},setSearch(q){const next=String(q);if(next!==search){search=next;resetList();}}};
 }

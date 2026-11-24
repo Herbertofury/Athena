@@ -132,6 +132,10 @@ c.execute('UPDATE experiment_runs SET output=? WHERE experiment_id=?',(raw,int(s
   const {checkNativeReceiverFileReview}=await import('./test_native_receiver_file_review.mjs');
   await checkNativeReceiverFileReview({browser,origin});
  });
+ if(suppliedPackage)await check('Extracted native Projects opens only an exact linked saved revision without changing drafts',async()=>{
+  const {checkNativeProjectRevisionLink}=await import('./test_native_project_revision_link.mjs');
+  await checkNativeProjectRevisionLink({browser,origin});
+ });
  if(unified)await check('Real Lab and native Foundry share one verified origin without iframe',async()=>{
   await page.goto(origin+'/#lab');await page.locator('#connection').filter({hasText:'Connected'}).waitFor();
   assert.equal(await page.locator('iframe').count(),0);
