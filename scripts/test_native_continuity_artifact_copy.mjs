@@ -48,11 +48,17 @@ export async function checkNativeContinuityArtifactCopy({browser,origin}){
   await first.waitFor();
   const expected=(await first.textContent()).match(/SHA-256 ([a-f0-9]{64})/)[1];
   assert.equal(expected,createHash('sha256').update(old).digest('hex'));
-  const target=journal.getByLabel('Artifact target',{exact:true});
-  await target.selectOption({index:1});
+  // The wrapping label also contains the select's dynamic option names.
+  const target=journal.locator('select[data-artifact-target]');
+  const savedOption=target.locator('option').filter({hasText:/^synthetic-source\.bin$/});
+  const id=await savedOption.getAttribute('value');
+  assert.match(id,/^[a-f0-9-]{36}$/);
+  await target.selectOption(id);
+  assert.equal(await target.inputValue(),id);
   await pick(newer);await retained.click();
   const latest=history.locator('p').filter({hasText:/^Revision 2:/});
   await latest.waitFor();
+  assert.equal(await history.locator(':scope > section').count(),1);
   assert.doesNotMatch(await latest.textContent(),new RegExp(expected));
   const [download]=await Promise.all([source.waitForEvent('download'),first.getByRole('button',{name:'Download exact revision',exact:true}).click()]);
   const exact=fs.readFileSync(await download.path());
@@ -67,12 +73,13 @@ export async function checkNativeContinuityArtifactCopy({browser,origin}){
   assert.deepEqual(before.observed,{opens:0,writes:0});
   const requests=[];destination.on('request',request=>requests.push(request.url()));
   const view=local.locator('[data-copy-verifier]');
-  await view.getByText('Verify a copied artifact',{exact:true}).click();
+  await view.locator(':scope > summary').filter({hasText:/^Verify a copied artifact$/}).click();
   const expectedHash=view.getByLabel('Recorded SHA-256',{exact:true});
   const selected=view.getByLabel('Choose copied artifact',{exact:true});
   const verify=view.getByRole('button',{name:'Compare exact bytes',exact:true});
   const result=view.getByRole('status');
   await expectedHash.fill(expected.toUpperCase());
+  await selected.waitFor({state:'visible'});
   await selected.setInputFiles({name:'moved-copy.bin',mimeType:'application/octet-stream',buffer:exact});
   assert.doesNotMatch(await result.textContent(),/^Bytes match/);
   await verify.click();
