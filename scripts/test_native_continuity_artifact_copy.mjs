@@ -35,6 +35,12 @@ export async function checkNativeContinuityArtifactCopy({browser,origin}){
   await journal.getByRole('button',{name:'Open local artifact journal',exact:true}).click();
   const retained=journal.getByRole('button',{name:'Retain selected file as a revision',exact:true});
   const choose=journal.getByLabel('Choose artifact file',{exact:true});
+  // setInputFiles does not wait for a real user-accessible control. Observe
+  // complete async IndexedDB admission before injecting the chosen file.
+  const status=journal.locator('[data-artifact-status]');
+  await status.filter({hasText:/^(Local journal opened\. Select a file and explicitly retain it\.|Local journal unavailable; no file retained\.)$/}).waitFor();
+  assert.equal(await status.textContent(),'Local journal opened. Select a file and explicitly retain it.');
+  await choose.waitFor({state:'visible'});
   const pick=buffer=>choose.setInputFiles({name:'synthetic-source.bin',mimeType:'application/octet-stream',buffer});
   const history=journal.locator('[data-artifact-history]');
   await pick(old);await retained.click();
