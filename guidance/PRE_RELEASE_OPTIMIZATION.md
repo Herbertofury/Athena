@@ -26,6 +26,10 @@ This separation does not authorize deliberately introducing known exploitable de
 - After reviewing and pinning the exact distribution, use a scoped read-only scan of an authorized disposable checkout, for example `safe-anything . --offline --json`. Offline mode skips OSV dependency checking; online dependency scanning transmits package names/versions to OSV and needs separate authorization for that external access. Do not scan private home directories, credentials, or unrelated repositories.
 - Keep redacted reports local; triage false positives and skipped/unsupported paths. Upstream excludes some generated files, binaries and large files; zero findings do not certify safety. Do not blindly apply suggested fixes, install MCP globally or upload SARIF. If the owner requests CI integration, use a separate manually invoked advisory job, with reviewed pinned code and no required release status. No such workflow is installed by this policy.
 
+## Execution route
+
+Follow the [CLI-first non-interruptive execution standard](CLI_FIRST_EXECUTION.md) throughout checkout: prefer native commands and structured APIs, use tested CLI-Anything harnesses for missing supported interfaces, and reserve foreground desktop interaction for explicitly authorized unavoidable cases. Preserve real runtime evidence using isolated test sessions where possible. No additional universal harness-installation gate is introduced.
+
 ## Sequence
 
 1. Establish a clean, recoverable baseline of the exact release candidate: commit SHA, supported platforms, toolchain, original test inventory, builds, native/browser/game workflows, representative workloads, expected outputs/side effects, package size and applicable performance/resource metrics. If the baseline fails, diagnose first. Check dynamic loading, reflection, plugin registries, serialization, compatibility paths, external asset links, and generated data.
