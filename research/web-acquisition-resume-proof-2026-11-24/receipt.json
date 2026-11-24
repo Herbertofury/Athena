@@ -1,0 +1,170 @@
+{
+  "curl": "curl 8.14.1 (x86_64-pc-linux-gnu) libcurl/8.14.1 OpenSSL/3.5.7 zlib/1.3.1 brotli/1.1.0 zstd/1.5.7 libidn2/2.3.8 libpsl/0.21.2 libssh2/1.11.1 nghttp2/1.64.0 nghttp3/1.8.0 librtmp/2.3 OpenLDAP/2.6.10",
+  "prefixBytes": 3145728,
+  "python": "3.12.14",
+  "results": {
+    "curl/already_complete": {
+      "max_ms": 19.044,
+      "median_ms": 15.916,
+      "min_ms": 15.475,
+      "preservedOriginal": true,
+      "responseBytes": 0,
+      "resultSha256": "cdb6556f0d2583e6e855cd9a1d940d2f7d02dbda08c7be368e4a4a5a6a594554",
+      "samples_ms": [
+        16.872,
+        18.509,
+        15.905,
+        19.044,
+        17.911,
+        15.916,
+        15.63,
+        15.833,
+        15.475
+      ],
+      "status": 416
+    },
+    "curl/no_ranges": {
+      "max_ms": 71.993,
+      "median_ms": 29.574,
+      "min_ms": 21.071,
+      "preservedOriginal": true,
+      "responseBytes": 8388608,
+      "resultSha256": "cdb6556f0d2583e6e855cd9a1d940d2f7d02dbda08c7be368e4a4a5a6a594554",
+      "samples_ms": [
+        71.993,
+        44.53,
+        27.415,
+        32.709,
+        25.493,
+        21.071,
+        40.088,
+        29.574,
+        24.919
+      ],
+      "status": 200
+    },
+    "curl/replaced": {
+      "max_ms": 73.598,
+      "median_ms": 25.399,
+      "min_ms": 21.321,
+      "preservedOriginal": true,
+      "responseBytes": 8388608,
+      "resultSha256": "8c40c78b13db288b92afda490caa70abb8cdf470489e69356ada2539276ede33",
+      "samples_ms": [
+        73.598,
+        51.551,
+        33.205,
+        25.334,
+        26.127,
+        24.675,
+        21.321,
+        24.396,
+        25.399
+      ],
+      "status": 200
+    },
+    "curl/unchanged": {
+      "max_ms": 142.239,
+      "median_ms": 24.869,
+      "min_ms": 22.889,
+      "preservedOriginal": true,
+      "responseBytes": 5242880,
+      "resultSha256": "cdb6556f0d2583e6e855cd9a1d940d2f7d02dbda08c7be368e4a4a5a6a594554",
+      "samples_ms": [
+        142.239,
+        47.335,
+        25.996,
+        24.487,
+        24.555,
+        24.869,
+        23.448,
+        22.889,
+        28.049
+      ],
+      "status": 206
+    },
+    "python/already_complete": {
+      "max_ms": 9.525,
+      "median_ms": 8.517,
+      "min_ms": 7.657,
+      "preservedOriginal": true,
+      "responseBytes": 0,
+      "resultSha256": "cdb6556f0d2583e6e855cd9a1d940d2f7d02dbda08c7be368e4a4a5a6a594554",
+      "samples_ms": [
+        9.172,
+        9.525,
+        8.517,
+        8.543,
+        7.657,
+        8.635,
+        8.497,
+        8.334,
+        7.918
+      ],
+      "status": 416
+    },
+    "python/no_ranges": {
+      "max_ms": 18.487,
+      "median_ms": 15.87,
+      "min_ms": 13.285,
+      "preservedOriginal": true,
+      "responseBytes": 8388608,
+      "resultSha256": "cdb6556f0d2583e6e855cd9a1d940d2f7d02dbda08c7be368e4a4a5a6a594554",
+      "samples_ms": [
+        18.487,
+        15.87,
+        13.285,
+        15.917,
+        16.707,
+        15.999,
+        15.692,
+        13.828,
+        15.112
+      ],
+      "status": 200
+    },
+    "python/replaced": {
+      "max_ms": 16.975,
+      "median_ms": 14.691,
+      "min_ms": 12.905,
+      "preservedOriginal": true,
+      "responseBytes": 8388608,
+      "resultSha256": "8c40c78b13db288b92afda490caa70abb8cdf470489e69356ada2539276ede33",
+      "samples_ms": [
+        16.975,
+        12.905,
+        15.765,
+        13.436,
+        14.941,
+        14.02,
+        14.56,
+        14.691,
+        15.545
+      ],
+      "status": 200
+    },
+    "python/unchanged": {
+      "max_ms": 34.344,
+      "median_ms": 15.351,
+      "min_ms": 13.951,
+      "preservedOriginal": true,
+      "responseBytes": 5242880,
+      "resultSha256": "cdb6556f0d2583e6e855cd9a1d940d2f7d02dbda08c7be368e4a4a5a6a594554",
+      "samples_ms": [
+        34.344,
+        15.351,
+        15.188,
+        13.951,
+        16.338,
+        15.476,
+        14.105,
+        19.137,
+        14.49
+      ],
+      "status": 206
+    }
+  },
+  "rounds": 9,
+  "scope": "synthetic_loopback_http11_exact_bytes_no_external_network",
+  "totalBytes": 8388608
+}
