@@ -144,6 +144,10 @@ c.execute('UPDATE experiment_runs SET output=? WHERE experiment_id=?',(raw,int(s
   const {checkNativeContinuityBackupReader}=await import('./test_native_continuity_backup_reader.mjs');
   await checkNativeContinuityBackupReader({browser,origin});
  });
+ if(suppliedPackage)await check('Extracted native Theme Atlas discovers inactive scenes offline without editing or saving',async()=>{
+  const {checkNativeFoundryThemeAtlas}=await import('./test_native_foundry_theme_atlas.mjs');
+  await checkNativeFoundryThemeAtlas({browser,origin});
+ });
  if(unified)await check('Real Lab and native Foundry share one verified origin without iframe',async()=>{
   await page.goto(origin+'/#lab');await page.locator('#connection').filter({hasText:'Connected'}).waitFor();
   assert.equal(await page.locator('iframe').count(),0);

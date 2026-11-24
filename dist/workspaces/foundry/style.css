@@ -50,3 +50,10 @@
 .foundry-workspace[data-foundry-canvas-only=true]>.foundry-grid{display:block!important}
 .foundry-workspace[data-foundry-canvas-only=true]>.foundry-grid>aside{display:none!important}
 .foundry-workspace[data-foundry-canvas-only=true]>.foundry-grid>.foundry-scene{height:min(70vh,800px);min-height:300px}
+
+[data-foundry-module=themeAtlas] summary{cursor:pointer;font-weight:700}
+[data-theme-atlas-results]{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(15rem,100%),1fr));gap:.5rem;list-style:none;padding:0}
+[data-theme-atlas-results] li{display:grid;gap:.2rem;align-content:start}
+[data-theme-atlas-results] button,[data-theme-atlas-room-id]{text-align:left;overflow-wrap:anywhere}
+[data-theme-atlas-results] small{padding-inline:.35rem}
+[data-theme-atlas-inspect]{overflow-wrap:anywhere}
