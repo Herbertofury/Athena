@@ -120,6 +120,10 @@ c.execute('UPDATE experiment_runs SET output=? WHERE experiment_id=?',(raw,int(s
   const {checkNativeFoundryFullscreen}=await import('./test_native_foundry_fullscreen.mjs');
   report.foundryFullscreen=await checkNativeFoundryFullscreen({browser,origin});
  });
+ if(suppliedPackage)await check('Extracted native Foundry repeats one chosen video and naturally ends when repeat is off',async()=>{
+  const {checkNativeFoundryVideoLoop}=await import('./test_native_foundry_video_loop.mjs');
+  await checkNativeFoundryVideoLoop({browser,origin});
+ });
  if(unified)await check('Real Lab and native Foundry share one verified origin without iframe',async()=>{
   await page.goto(origin+'/#lab');await page.locator('#connection').filter({hasText:'Connected'}).waitFor();
   assert.equal(await page.locator('iframe').count(),0);
