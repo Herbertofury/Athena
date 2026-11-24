@@ -15,3 +15,7 @@ New consumers use `.agents/athena/` and `.athena/governance-lock.json`. Existing
 Legacy `.agent-foundry/governance-lock.json` consumers remain untouched. A subsequent reviewed migration must reconcile their previous source pins and local edits, update their import paths and validate each project; this initial port deliberately refuses automatic co-installation. It does not remove the legacy lock or change other repositories.
 
 Policy wording is repository engineering guidance, not a new authorization grant or a replacement for platform controls. Sensitive actions still need the applicable approval. Athena may explain experimental alternatives and user tradeoffs without pretending an unverified result is proven.
+
+## Additive owner directives
+
+When adopting guidance into a new repository, append project-owned root AGENTS.md references to the [CLI-first execution standard](../CLI_FIRST_EXECUTION.md) and [pre-release optimization standard](../PRE_RELEASE_OPTIMIZATION.md), without replacing local instructions or editing pinned snapshots. Apply the CLI-first rule to all tasks and release checks; these additive policies are outside the versioned 16-document snapshot bundle. Existing external host/branch permissions still apply.
