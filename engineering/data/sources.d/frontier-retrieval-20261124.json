@@ -1,0 +1,123 @@
+[
+  {
+    "id": "FNTR001",
+    "title": "RAG-Anything upstream documentation",
+    "url": "https://github.com/HKUDS/RAG-Anything/blob/main/README.md",
+    "observed_version": "Documentation blob c055b1c47c8a438b05176f483d009682e9fe711c (not a verified package version)",
+    "topic": "frontier-retrieval-data",
+    "note": "Multimodal retrieval over images, tables, equations and documents using LightRAG; configurable parsing/model pipeline.",
+    "checked_at": "2026-11-24",
+    "review_after_days": 14,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "FNTR002",
+    "title": "Docling upstream documentation",
+    "url": "https://github.com/docling-project/docling/blob/main/README.md",
+    "observed_version": "Documentation blob 9eb5780e933f3ff23319b542d00e0fe46f8b7a45 (not a verified package version)",
+    "topic": "frontier-retrieval-data",
+    "note": "Document conversion with layout-aware parsing and structured outputs; relevant to mixed-format research and wiki ingestion.",
+    "checked_at": "2026-11-24",
+    "review_after_days": 14,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "FNTR003",
+    "title": "MinerU upstream documentation",
+    "url": "https://github.com/opendatalab/MinerU/blob/master/README.md",
+    "observed_version": "Documentation blob 816f0a74e045dc285eda7e9f19b75d23507cd8ba (not a verified package version)",
+    "topic": "frontier-retrieval-data",
+    "note": "Document extraction toolkit with structured parsing; check exact major-version interfaces and runtime dependencies before adoption.",
+    "checked_at": "2026-11-24",
+    "review_after_days": 14,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "FNTR004",
+    "title": "USearch upstream documentation",
+    "url": "https://github.com/unum-cloud/USearch/blob/main/README.md",
+    "observed_version": "Documentation blob 1b0ad3ebf69eb988381f4689c6c58ff581161ced (not a verified package version)",
+    "topic": "frontier-retrieval-data",
+    "note": "Compact approximate nearest-neighbor search library with multi-language bindings.",
+    "checked_at": "2026-11-24",
+    "review_after_days": 14,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "FNTR005",
+    "title": "Meilisearch upstream documentation",
+    "url": "https://github.com/meilisearch/meilisearch/blob/main/README.md",
+    "observed_version": "Documentation blob 79acbdb77f559fe965c8f0e41b5e9a334ddb63bc (not a verified package version)",
+    "topic": "frontier-retrieval-data",
+    "note": "Search engine candidate for typo-tolerant and hybrid user-facing catalog search.",
+    "checked_at": "2026-11-24",
+    "review_after_days": 14,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "FNTR006",
+    "title": "Quickwit upstream documentation",
+    "url": "https://github.com/quickwit-oss/quickwit/blob/main/README.md",
+    "observed_version": "Documentation blob 4c63f4a78866f9174e1c759ec41b814b2e6540ff (not a verified package version)",
+    "topic": "frontier-retrieval-data",
+    "note": "Distributed search/index engine for large observability and log workloads.",
+    "checked_at": "2026-11-24",
+    "review_after_days": 14,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "FNTR007",
+    "title": "Candle upstream documentation",
+    "url": "https://github.com/huggingface/candle/blob/main/README.md",
+    "observed_version": "Documentation blob 9f9e09d384643c227972151e58817873db9c89b2 (not a verified package version)",
+    "topic": "frontier-retrieval-data",
+    "note": "Rust machine-learning framework; local inference candidate with hardware-dependent backends.",
+    "checked_at": "2026-11-24",
+    "review_after_days": 14,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "FNTR008",
+    "title": "Text Embeddings Inference upstream documentation",
+    "url": "https://github.com/huggingface/text-embeddings-inference/blob/main/README.md",
+    "observed_version": "Documentation blob 69e06b298b5281e9634ae8a578923d2813ea7256 (not a verified package version)",
+    "topic": "frontier-retrieval-data",
+    "note": "Dedicated embedding inference serving system; candidate for batching and accelerator utilization.",
+    "checked_at": "2026-11-24",
+    "review_after_days": 14,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "FNTR009",
+    "title": "Arrow Rust upstream documentation",
+    "url": "https://github.com/apache/arrow-rs/blob/main/README.md",
+    "observed_version": "Documentation blob 360bb010de026b0b0f17acf4a2aa88c2b472a29a (not a verified package version)",
+    "topic": "frontier-retrieval-data",
+    "note": "Rust columnar memory and data interoperability implementation.",
+    "checked_at": "2026-11-24",
+    "review_after_days": 14,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "FNTR011",
+    "title": "OpenDAL upstream documentation",
+    "url": "https://github.com/apache/opendal/blob/main/README.md",
+    "observed_version": "Documentation blob 2d697c4528884b529885011b90b00ba90c32997a (not a verified package version)",
+    "topic": "frontier-retrieval-data",
+    "note": "Unified data-access library for multiple storage backends; candidate for shared transfer and storage adapters.",
+    "checked_at": "2026-11-24",
+    "review_after_days": 14,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "FNTR012",
+    "title": "Zenoh upstream documentation",
+    "url": "https://github.com/eclipse-zenoh/zenoh/blob/main/README.md",
+    "observed_version": "Documentation blob d6d8378816cad5c540afcdcdd38aaaf3cd0d3a49 (not a verified package version)",
+    "topic": "frontier-retrieval-data",
+    "note": "Data communication middleware candidate for distributed services and worker coordination.",
+    "checked_at": "2026-11-24",
+    "review_after_days": 14,
+    "evidence": "primary_documented"
+  }
+]
