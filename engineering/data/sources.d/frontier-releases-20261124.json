@@ -1,0 +1,222 @@
+[
+  {
+    "id": "FNTRLS001",
+    "title": "Sodium GitHub release",
+    "url": "https://github.com/CaffeineMC/sodium/releases/tag/mc26.3-0.9.3",
+    "observed_version": "mc26.3-0.9.3; published 2026-11-21",
+    "topic": "frontier-release-observation",
+    "note": "Client rendering; inspect game/loader-specific release channel and newer beta separately. GitHub releases/latest only, not every package channel.",
+    "checked_at": "2026-11-24",
+    "review_after_days": 7,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "FNTRLS002",
+    "title": "VulkanMod GitHub release",
+    "url": "https://github.com/xCollateral/VulkanMod/releases/tag/0.6.0",
+    "observed_version": "0.6.0; published 2026-03-04",
+    "topic": "frontier-release-observation",
+    "note": "Minecraft Vulkan renderer; do not assume newest release supports the user's fixed AoA game/loader. GitHub releases/latest only, not every package channel.",
+    "checked_at": "2026-11-24",
+    "review_after_days": 7,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "FNTRLS003",
+    "title": "Zed GitHub release",
+    "url": "https://github.com/zed-industries/zed/releases/tag/v1.29.3",
+    "observed_version": "v1.29.3; published 2026-11-20",
+    "topic": "frontier-release-observation",
+    "note": "Native UI architecture study; editor release is not a standalone GPUI crate version. GitHub releases/latest only, not every package channel.",
+    "checked_at": "2026-11-24",
+    "review_after_days": 7,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "FNTRLS004",
+    "title": "Iced GitHub release",
+    "url": "https://github.com/iced-rs/iced/releases/tag/0.14.0",
+    "observed_version": "0.14.0; published 2025-12-07",
+    "topic": "frontier-release-observation",
+    "note": "Native GUI; verify crates.io package and target platform separately. GitHub releases/latest only, not every package channel.",
+    "checked_at": "2026-11-24",
+    "review_after_days": 7,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "FNTRLS005",
+    "title": "Dioxus GitHub release",
+    "url": "https://github.com/DioxusLabs/dioxus/releases/tag/v0.7.10",
+    "observed_version": "v0.7.10; published 2026-07-30",
+    "topic": "frontier-release-observation",
+    "note": "Rust UI and application framework; verify package and renderer compatibility. GitHub releases/latest only, not every package channel.",
+    "checked_at": "2026-11-24",
+    "review_after_days": 7,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "FNTRLS006",
+    "title": "Servo GitHub release",
+    "url": "https://github.com/servo/servo/releases/tag/v0.8.0",
+    "observed_version": "v0.8.0; published 2026-11-09",
+    "topic": "frontier-release-observation",
+    "note": "Embeddable browser-engine contender; verify required browser features before promotion. GitHub releases/latest only, not every package channel.",
+    "checked_at": "2026-11-24",
+    "review_after_days": 7,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "FNTRLS007",
+    "title": "RAG-Anything GitHub release",
+    "url": "https://github.com/HKUDS/RAG-Anything/releases/tag/v1.4.4",
+    "observed_version": "v1.4.4; published 2026-10-28",
+    "topic": "frontier-release-observation",
+    "note": "Multimodal retrieval; verify PyPI and parser/model dependencies separately. GitHub releases/latest only, not every package channel.",
+    "checked_at": "2026-11-24",
+    "review_after_days": 7,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "FNTRLS008",
+    "title": "Docling GitHub release",
+    "url": "https://github.com/docling-project/docling/releases/tag/v2.152.0",
+    "observed_version": "v2.152.0; published 2026-11-23",
+    "topic": "frontier-release-observation",
+    "note": "Structured document parser; evaluate format coverage and local runtime. GitHub releases/latest only, not every package channel.",
+    "checked_at": "2026-11-24",
+    "review_after_days": 7,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "FNTRLS009",
+    "title": "USearch GitHub release",
+    "url": "https://github.com/unum-cloud/USearch/releases/tag/v2.26.6",
+    "observed_version": "v2.26.6; published 2026-10-25",
+    "topic": "frontier-release-observation",
+    "note": "Vector retrieval library; verify bindings and package version per language. GitHub releases/latest only, not every package channel.",
+    "checked_at": "2026-11-24",
+    "review_after_days": 7,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "FNTRLS010",
+    "title": "Meilisearch GitHub release",
+    "url": "https://github.com/meilisearch/meilisearch/releases/tag/v1.58.0",
+    "observed_version": "v1.58.0; published 2026-11-23",
+    "topic": "frontier-release-observation",
+    "note": "Search engine; verify index/storage migration and deployment cost. GitHub releases/latest only, not every package channel.",
+    "checked_at": "2026-11-24",
+    "review_after_days": 7,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "FNTRLS011",
+    "title": "prek GitHub release",
+    "url": "https://github.com/j178/prek/releases/tag/v0.5.11",
+    "observed_version": "v0.5.11; published 2026-11-16",
+    "topic": "frontier-release-observation",
+    "note": "Developer hook acceleration; preserve complete hook output and check inventory. GitHub releases/latest only, not every package channel.",
+    "checked_at": "2026-11-24",
+    "review_after_days": 7,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "FNT2026001",
+    "title": "Rust 1.100.0",
+    "url": "https://blog.rust-lang.org/2026/11/12/Rust-1.100.0/",
+    "observed_version": "1.100.0 stable, 2026-11-12",
+    "topic": "frontier-release-and-methods",
+    "note": "New stable allocator and DropGuard APIs; Cargo now reports unused dependencies and changes build-directory cache organization. This directly overlaps the mandatory shrink/dependency and parallel-worktree workflows.",
+    "checked_at": "2026-11-24",
+    "review_after_days": 14,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "FNT2026002",
+    "title": "Rust parallel frontend on nightly",
+    "url": "https://blog.rust-lang.org/2026/11/16/enabling-parallel-frontend-on-nightly/",
+    "observed_version": "nightly-2026-11-14 default enable; announcement 2026-11-16",
+    "topic": "frontier-release-and-methods",
+    "note": "Compiler team reports leaf-crate check mean 44.23% shorter at eight frontend threads, but complete cargo check on Cargo itself improved from 36.7s to 30.8s on an eight-core machine. Incremental gains were much smaller; increased memory and known reproducibility/diagnostic-order issues remain.",
+    "checked_at": "2026-11-24",
+    "review_after_days": 14,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "FNT2026003",
+    "title": "Rust 1.100 release notes",
+    "url": "https://doc.rust-lang.org/releases.html",
+    "observed_version": "1.100.0 section, 2026-11-12",
+    "topic": "frontier-release-and-methods",
+    "note": "Stable sample-profile optimization flag is documented. Compare supported profile collection, sample mapping, held-out runtime performance and binary/maintenance costs before using.",
+    "checked_at": "2026-11-24",
+    "review_after_days": 14,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "FNT2026004",
+    "title": "Node.js 26 LTS",
+    "url": "https://nodejs.org/en/blog/release/v26.13.1",
+    "observed_version": "26.13.1 LTS, 2026-11-11",
+    "topic": "frontier-release-and-methods",
+    "note": "Current observed LTS-line release includes dependency refreshes such as SQLite 3.54.1 and Undici 8.12.4; compare complete network, storage and extension/native-addon workflows.",
+    "checked_at": "2026-11-24",
+    "review_after_days": 14,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "FNT2026005",
+    "title": "Node.js 27 alpha",
+    "url": "https://nodejs.org/en/download/archive/v27.0.0-alpha.0.1.1",
+    "observed_version": "27.0.0-alpha.0.1.1, archive updated 2026-11-16",
+    "topic": "frontier-release-and-methods",
+    "note": "Early-test alpha, not production release; archive lists V8 15.6.75.50. Candidate for isolated runtime benchmark, not automatic rollout.",
+    "checked_at": "2026-11-24",
+    "review_after_days": 14,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "FNT2026006",
+    "title": "Node.js 27 initial alpha migration details",
+    "url": "https://nodejs.org/en/blog/release/v27.0.0-alpha.0.0.0",
+    "observed_version": "27.0.0-alpha.0.0.0, 2026-10-29",
+    "topic": "frontier-release-and-methods",
+    "note": "V8 serialization format and default memory behavior change. Protect stored caches, workers and memory limits, and compare native addon compatibility. Newest version may require migration/repair rather than a blind update.",
+    "checked_at": "2026-11-24",
+    "review_after_days": 14,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "FNT2026007",
+    "title": "TypeScript native compiler",
+    "url": "https://devblogs.microsoft.com/typescript/announcing-typescript-7-0/",
+    "observed_version": "7.0 announcement, 2026-07-08 (not a November patch-version claim)",
+    "topic": "frontier-release-and-methods",
+    "note": "Microsoft describes a Go-native compiler with shared-memory multithreading and reports typical eight-to-twelvefold full-build gains. Confirm current installed package version, diagnostic/declaration equivalence, project references and extension integration.",
+    "checked_at": "2026-11-24",
+    "review_after_days": 14,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "FNT2026008",
+    "title": "Sodium frontier beta",
+    "url": "https://github.com/CaffeineMC/sodium/releases/tag/mc26.3-0.9.4-beta.1",
+    "observed_version": "mc26.3-0.9.4-beta.1, observed 2026-11-23",
+    "topic": "frontier-release-and-methods",
+    "note": "Beta notes report a terrain visibility fix; evaluate exact Minecraft 26.3 target only. Study compatible backports for fixed older targets.",
+    "checked_at": "2026-11-24",
+    "review_after_days": 14,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "FNT2026009",
+    "title": "Firecrawl Rust SDK registry",
+    "url": "https://docs.rs/crate/firecrawl/latest",
+    "observed_version": "2.21.8 observed, 2026-10-20",
+    "topic": "frontier-release-and-methods",
+    "note": "Rust SDK has independent package release channel from Firecrawl Local and repository server release. Verify current registry version and actual supported API before adoption.",
+    "checked_at": "2026-11-24",
+    "review_after_days": 14,
+    "evidence": "primary_documented"
+  }
+]
