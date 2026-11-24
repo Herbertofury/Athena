@@ -1,7 +1,7 @@
 import {attachArtifacts} from './artifacts.mjs';
 import {hashBytes,LIMITS} from '../../shared/artifact-store.mjs';
 import {fresh, validate, apply, visible} from './model.mjs';
-import {parseBackup, mergeBackup, MAX_IMPORT_BYTES} from './import.mjs';
+import {parseBackup, mergeBackup, MAX_IMPORT_BYTES, MAX_IMPORT_NOTES} from './import.mjs';
 import {compileContext, contextMarkdown} from './context.mjs';
 
 export function mount({container, state, search = '', setState, signal, theme = 'dark'}) {
@@ -19,6 +19,7 @@ export function mount({container, state, search = '', setState, signal, theme = 
   const $ = selector => root.querySelector(selector), form = $('form'), notice = $('#notice');
   const artifacts = attachArtifacts({host:$('#artifact-journal'),signal});
   const artifactCopies = attachArtifactCopyVerifier({host:$('#artifact-journal'),signal});
+  const backupReader = attachBackupReader({anchor:$('#export'),signal});
   notice.textContent = error || 'Ready. No notes are sent to a provider.';
   function element(tag, text) { const item = document.createElement(tag); if (text !== undefined) item.textContent = text; return item; }
   function button(action, label, id, dependencyId) {
@@ -148,8 +149,8 @@ export function mount({container, state, search = '', setState, signal, theme = 
   }
   $('#export').onclick = () => { if (data) download(JSON.stringify(data, null, 2), 'athena-continuity.json', 'application/json'); };
   $('#export-context').onclick = () => { if (data) download(contextMarkdown(compileContext(data, project)), 'athena-project-context.md', 'text/markdown'); };
-  if (!data) for (const control of root.querySelectorAll('input,textarea,select,button')) if (!control.closest('#artifact-journal')) control.disabled = true;
-  function unmount() { if (disposed) return; disposed = true; artifactCopies.dispose(); artifacts.dispose(); for (const url of urls) URL.revokeObjectURL(url); root.replaceChildren(); signal?.removeEventListener('abort', unmount); }
+  if (!data) for (const control of root.querySelectorAll('input,textarea,select,button')) if (!control.closest('#artifact-journal,[data-continuity-backup-reader]')) control.disabled = true;
+  function unmount() { if (disposed) return; disposed = true; backupReader.dispose(); artifactCopies.dispose(); artifacts.dispose(); for (const url of urls) URL.revokeObjectURL(url); root.replaceChildren(); signal?.removeEventListener('abort', unmount); }
   function setTheme(value) { container.dataset.theme = value === 'light' ? 'light' : 'dark'; }
   setTheme(theme); render(); signal?.addEventListener('abort', unmount, {once: true}); if (signal?.aborted) unmount();
   return {ready: !!data, unmount, setTheme, setSearch(value) { search = String(value); render(); }};
@@ -233,6 +234,117 @@ function attachArtifactCopyVerifier({host,signal}){
   signal?.removeEventListener('abort',dispose);
   digest.value=input.value='';
   view.remove();
+ }
+ signal?.addEventListener('abort',dispose,{once:true});
+ if(signal?.aborted)dispose();
+ return {dispose};
+}
+
+// Review a user-chosen backup on its own terms. No live notes, persistence
+// hooks, journal access, external links or provider APIs enter this controller.
+function attachBackupReader({anchor,signal}){
+ const doc=anchor.ownerDocument,view=doc.createElement('details');
+ view.dataset.continuityBackupReader='';
+ view.innerHTML=`<summary>Review a Continuity backup without importing</summary>
+  <p>Open a local Athena Continuity JSON backup to inspect its notes and recorded sources. This is a read-only view of that file, separate from live notes and the artifact journal. Not a Constellation import.</p>
+  <form autocomplete="off">
+   <label>Choose Continuity backup to review<input type="file" accept="application/json,.json"></label>
+   <button type="submit">Open backup read-only</button>
+   <button type="button" data-backup-review-clear>Clear backup review</button>
+  </form>
+  <p role="status">No backup selected.</p>
+  <section data-backup-review-content hidden>
+   <label>Note in reviewed backup<select data-backup-note aria-label="Note in reviewed backup"></select></label>
+   <p><button type="button" data-backup-rev-prev>Previous backup revision</button>
+   <button type="button" data-backup-rev-next>Next backup revision</button></p>
+   <section data-backup-note-view aria-label="Selected backup revision"></section>
+   <h4>Dependency references recorded in the backup</h4>
+   <p>These references are recorded at backup time, not reconstructed for the selected note revision. Only the exact reviewed target revision from this file is shown.</p>
+   <p><button type="button" data-backup-dep-prev>Previous backup reference</button>
+   <button type="button" data-backup-dep-next>Next backup reference</button></p>
+   <section data-backup-dependency-view aria-label="Recorded backup dependency"></section>
+  </section>`;
+ anchor.after(view);
+ const $=s=>view.querySelector(s),form=$('form'),input=$('input[type=file]'),open=$('button[type=submit]'),status=$('[role=status]');
+ const chooser=$('[data-backup-note]'),content=$('[data-backup-review-content]'),evidence=$('[data-backup-note-view]'),linked=$('[data-backup-dependency-view]');
+ const old=$('[data-backup-rev-prev]'),newer=$('[data-backup-rev-next]'),back=$('[data-backup-dep-prev]'),forward=$('[data-backup-dep-next]');
+ let snapshot=null,byId=null,noteIndex=0,revisionIndex=0,refIndex=0,busy=false,disposed=false,generation=0;
+ function text(tag,value){const e=doc.createElement(tag);e.textContent=value;return e;}
+ const notice=message=>{status.textContent=message;};
+ function showRevision(region,record){
+  const source=record.source;
+  const label=typeof source==='string'&&source?source:(source==null||source===''?'Not recorded':'Unrecognized source field');
+  region.append(text('p','Recorded time: '+record.at+' (Unix milliseconds)'),text('p','Recorded source: '+label),text('pre',record.text));
+ }
+ function render(){
+  const entry=snapshot?.entries[noteIndex],ref=entry?.dependencies?.[refIndex],count=entry?.dependencies?.length??0;
+  evidence.replaceChildren();linked.replaceChildren();content.hidden=!entry;
+  if(!entry)return;
+  const item=entry.revisions[revisionIndex];
+  evidence.append(text('h4','Revision '+(revisionIndex+1)+' of '+entry.revisions.length+' · '+entry.project),
+   text('p','Note '+entry.id+' · '+entry.kind+(entry.ignored?' · ignored':'')+(entry.pinned?' · pinned':'')));
+  showRevision(evidence,item);
+  old.disabled=revisionIndex===0;newer.disabled=revisionIndex===entry.revisions.length-1;
+  back.disabled=refIndex===0;forward.disabled=refIndex+1>=count;
+  if(!ref){linked.append(text('p','No dependency references recorded for this note.'));return;}
+  const target=byId.get(ref.id),reviewed=target?.revisions[ref.revision-1];
+  linked.append(text('h5','Reference '+(refIndex+1)+' of '+count),
+   text('p','Referenced note '+ref.id+' · reviewed revision '+ref.revision+(target?' · '+target.project:'')));
+  if(!target){linked.append(text('p','Missing note in this backup. No replacement was shown.'));return;}
+  if(!reviewed){linked.append(text('p','Recorded revision is missing. No replacement was shown.'));return;}
+  showRevision(linked,reviewed);
+ }
+ function publish(candidate){
+  snapshot=candidate;byId=new Map(candidate.entries.map(entry=>[entry.id,entry]));noteIndex=refIndex=0;
+  revisionIndex=candidate.entries.length?candidate.entries[0].revisions.length-1:0;
+  chooser.replaceChildren();
+  candidate.entries.forEach((entry,i)=>{const option=text('option',entry.project+' · '+entry.kind+' · '+entry.id);option.value=String(i);chooser.append(option);});
+  chooser.value='0';render();
+ }
+ chooser.onchange=()=>{
+  const index=Number(chooser.value);
+  if(disposed||!Number.isInteger(index)||index<0||!snapshot?.entries[index])return;
+  noteIndex=index;revisionIndex=snapshot.entries[index].revisions.length-1;refIndex=0;render();
+ };
+ function step(isReference,delta){
+  if(disposed||!snapshot?.entries[noteIndex])return;
+  const entry=snapshot.entries[noteIndex],items=isReference?entry.dependencies??[]:entry.revisions;
+  const next=(isReference?refIndex:revisionIndex)+delta;
+  if(next<0||next>=items.length)return;
+  if(isReference)refIndex=next;else revisionIndex=next;render();
+ }
+ old.onclick=()=>step(false,-1);newer.onclick=()=>step(false,1);
+ back.onclick=()=>step(true,-1);forward.onclick=()=>step(true,1);
+ input.onchange=()=>{generation++;notice('Selection changed. Open it read-only when ready. The existing review is unchanged.');};
+ function clear(){
+  generation++;snapshot=byId=null;input.value='';chooser.replaceChildren();render();notice('No backup selected.');
+ }
+ $('[data-backup-review-clear]').onclick=clear;
+ form.onsubmit=async event=>{
+  event.preventDefault();
+  if(disposed||busy)return;
+  const file=input.files?.[0],size=file?.size;
+  const refusal='Backup not opened. Select a valid UTF-8 Athena Continuity JSON backup (up to 16 MiB and 100 notes). The existing review is unchanged.';
+  if(!file||typeof file.name!=='string'||!/\.json$/i.test(file.name)||(file.type!==''&&file.type!=='application/json')||!Number.isSafeInteger(size)||size<1||size>MAX_IMPORT_BYTES){
+   notice(refusal);return;
+  }
+  const token=++generation,live=()=>!disposed&&token===generation;
+  busy=true;open.disabled=true;notice('Reading the selected backup locally…');
+  try{
+   const raw=await file.arrayBuffer();
+   if(!live())return;
+   if(!(raw instanceof ArrayBuffer)||raw.byteLength!==size)throw Error('Incomplete read');
+   const parsed=parseBackup(new Uint8Array(raw));
+   if(parsed.entries.length>MAX_IMPORT_NOTES)throw Error('Too many notes');
+   if(!live())return;
+   publish(parsed);input.value='';
+   notice('Backup opened: '+parsed.entries.length+' notes. Read-only. Nothing was imported, changed or sent.');
+  }catch{if(live())notice(refusal);}
+  finally{busy=false;if(!disposed)open.disabled=false;}
+ };
+ function dispose(){
+  if(disposed)return;
+  disposed=true;clear();view.remove();signal?.removeEventListener('abort',dispose);
  }
  signal?.addEventListener('abort',dispose,{once:true});
  if(signal?.aborted)dispose();

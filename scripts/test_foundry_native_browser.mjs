@@ -140,6 +140,10 @@ c.execute('UPDATE experiment_runs SET output=? WHERE experiment_id=?',(raw,int(s
   const {checkNativeContinuityArtifactCopy}=await import('./test_native_continuity_artifact_copy.mjs');
   await checkNativeContinuityArtifactCopy({browser,origin});
  });
+ if(suppliedPackage)await check('Extracted native Continuity reviews a moved backup without substituting live notes',async()=>{
+  const {checkNativeContinuityBackupReader}=await import('./test_native_continuity_backup_reader.mjs');
+  await checkNativeContinuityBackupReader({browser,origin});
+ });
  if(unified)await check('Real Lab and native Foundry share one verified origin without iframe',async()=>{
   await page.goto(origin+'/#lab');await page.locator('#connection').filter({hasText:'Connected'}).waitFor();
   assert.equal(await page.locator('iframe').count(),0);
