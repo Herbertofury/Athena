@@ -69,6 +69,18 @@ In native Lab → Overview, a successful project-archive job with an exact recei
 
 In native Lab → Collection, **List saved generations** opens one metadata-only page for the entered canonical ID and record type. Older pages load only on request. Choosing a generation opens the existing exact-byte verifier; metadata alone is not proof of payload integrity or source truth. The list never collects from a provider or writes the journal.
 
+### Verify a saved Lab archive after export
+
+**Available in:** the [unsigned Athena portable preview](https://github.com/Herbertofury/Athena/actions/runs/45471876024#artifacts), evaluated on Windows and Linux. This is not a released or deployed build. This workflow requires an already-retained archive with an exact generation; a new preview does not ship with your archives.
+
+1. In native **Lab**, open the saved archive for the exact generation from **Overview** or **Collection** as described above.
+2. Choose **Download exact JSON** to save the original bytes. Choose **Download provenance** separately and keep that receipt beside the JSON. Opening the archive does not download either file.
+3. If you move or rename the JSON, compare the SHA-256 of its new path with the receipt’s `payload.sha256`. On PowerShell, use `(Get-FileHash -LiteralPath './renamed.json' -Algorithm SHA256).Hash.ToLowerInvariant()`. On Linux, use `sha256sum -- ./renamed.json`. Read the selected generation from `archive.generation`, which is stored as text so large IDs remain exact. Compare the original byte length with `payload.byte_length` if needed.
+
+Different saved generations can contain identical JSON. The checksum validates the bytes against the local receipt; it does not identify a generation by itself and does not certify the upstream author or archive authenticity. If Lab shows **Saved-response hash mismatch**, it does not offer a receipt for that response. Close the review without downloading to leave the archive unchanged. If you paired the wrong receipt and file, return to the intended generation and export both again.
+
+[Exact behavior test](https://github.com/Herbertofury/Athena/blob/e82fe7da0b1ff9bf5914f3cc8c0a023f05aa9fe4/scripts/test_native_lab_archive_provenance.mjs) · [Windows and Linux artifact evidence](https://github.com/Herbertofury/Athena/actions/runs/45471876024#artifacts)
+
 `npm run test:browser` now verifies both generated adapters, runs static-app Chromium acceptance, runs locked Rust tests/clippy/build using the pinned project toolchain, packages the reviewed public asset allowlist, and runs full compiled-engine Chromium acceptance. Logs and reports are retained under `browser-results`. `npm run test:browser:static` is explicitly the smaller static-only check. Neither command deploys or changes repository settings.
 
 ### Local report workspace
