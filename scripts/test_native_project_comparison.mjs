@@ -76,8 +76,12 @@ export async function checkNativeProjectComparison({browser,origin,temporary}){
   assert.equal(await detail.locator('img,iframe').count(),0);
 
   await detail.getByText('Compare saved revisions',{exact:true}).click();
-  await receipt.waitFor({state:'hidden'});
-  assert.equal(await receipt.evaluate(el=>el.value),'');
+  // A closed ancestor hides the textarea before the queued details toggle
+  // handler runs. Wait for the application's own hide marker, not geometry.
+  await detail.locator('textarea[data-comparison-receipt][hidden]').waitFor({state:'attached'});
+  assert.equal(await receipt.isVisible(),false);
+  assert.deepEqual(await receipt.evaluate(el=>({open:el.closest('details').open,value:el.value})),
+   {open:false,value:''});
   await page.getByRole('button',{name:'Show archived',exact:true}).click();
   receipt=await show(archivedId);
   await prepare.click();
