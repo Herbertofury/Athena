@@ -1,0 +1,42 @@
+{
+  "checked_at": "2026-10-27T10:21:37.511815+00:00",
+  "baseline_study_commit": "7d74b122b550993d7be7905f3ff1091a56337497",
+  "rustc": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+  "source_sha256": "0bfa53d6c0159d06680aba6d5d26a39edefd5d0e82a6b027d57732bec82e96ea",
+  "binary_sha256": "0d76493c781cbe66b9111774a03c413d071c4f9ca0303da34fc177438f0d8fb1",
+  "lock_sha256": "4a57e69532dc4d11d80bd527b17d52a42b346fb5fca4fcaccb7d973c4e0c2dd3",
+  "lz4_flex": "0.14.0",
+  "verified_features": [
+    "default",
+    "safe-encode",
+    "safe-decode",
+    "checked-decode",
+    "std",
+    "alloc",
+    "frame"
+  ],
+  "api_used": "block::compress and bounded block::decompress_into into a newly zero-initialized buffer; frame API not timed",
+  "sample_counts": [
+    56,
+    56
+  ],
+  "complete_bytes_equal": true,
+  "all_rollback_integrity_checks": true,
+  "zstd_context_frame_parity_checks": 56,
+  "test_functions": 4,
+  "generated_lz4_cases": 10000,
+  "generated_zstd_context_cases": 10000,
+  "clippy": true,
+  "fmt": true,
+  "audit": {
+    "mode": "cached --no-fetch",
+    "database_commit": "3279c99911354c400e1d41e47c7d60e39258b147",
+    "dependencies": 47,
+    "known_vulnerabilities": 0,
+    "warnings": {},
+    "freshness": "A prior fetch failed; not a fresh audit claim",
+    "upstream_advisory_review": "GHSA-vvp9-7p8x-rfvv affects <= 0.11.5 and 0.12.0; tested 0.14.0 is outside stated affected ranges"
+  },
+  "scope": "isolated storage component; app dependencies and database unchanged; no target adoption",
+  "registry_source_revision": "1bffdcbbf906a234b913937cb2f57c0245915038"
+}

@@ -1,0 +1,22 @@
+[
+  {
+    "mode": "serve",
+    "writer": {
+      "commits": 1276,
+      "busy": 0
+    },
+    "inconsistent": 146,
+    "scope": "Isolated synthetic terminal-state writer against replay-expanded private copy; not user data mutation",
+    "binary_sha256": "3d5f8b93c8101af4844c0ce8e4f31bca3a34332f1c3385355e164be1251bbb48"
+  },
+  {
+    "mode": "serve-candidate",
+    "writer": {
+      "commits": 571,
+      "busy": 0
+    },
+    "inconsistent": 167,
+    "scope": "Isolated synthetic terminal-state writer against replay-expanded private copy; not user data mutation",
+    "binary_sha256": "3d5f8b93c8101af4844c0ce8e4f31bca3a34332f1c3385355e164be1251bbb48"
+  }
+]

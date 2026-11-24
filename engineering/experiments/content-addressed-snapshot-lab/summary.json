@@ -1,0 +1,141 @@
+{
+  "schema_version": 1,
+  "scope": "Five retained public generations; actual SnapshotStore methods versus isolated addressed store; 80-row case is generated replay",
+  "runs": [
+    {
+      "name": "pass1",
+      "implementation": "initial header-writing reopen",
+      "samples": 28,
+      "full_payload_history_parity": true,
+      "medians": [
+        {
+          "replay_factor": 1,
+          "lane": "baseline",
+          "setup_ns": 6376734,
+          "parse_write_commit_ns": 12106044,
+          "reopen_latest_verify_ns": 734517,
+          "database_bytes": 73728
+        },
+        {
+          "replay_factor": 1,
+          "lane": "addressed",
+          "setup_ns": 10835430,
+          "parse_write_commit_ns": 12348569,
+          "reopen_latest_verify_ns": 2461390,
+          "database_bytes": 65536
+        },
+        {
+          "replay_factor": 16,
+          "lane": "baseline",
+          "setup_ns": 6437781,
+          "parse_write_commit_ns": 224509254,
+          "reopen_latest_verify_ns": 632202,
+          "database_bytes": 880640
+        },
+        {
+          "replay_factor": 16,
+          "lane": "addressed",
+          "setup_ns": 12248483,
+          "parse_write_commit_ns": 211839170,
+          "reopen_latest_verify_ns": 3655476,
+          "database_bytes": 86016
+        }
+      ],
+      "sources": {
+        "source_sha256": "5a708fe699b776678a4832088f4a0e9cd1ac48c4eb3e40ec41d081e826f9cfa4",
+        "candidate_sha256": "5eb210597c86338c1716ffb1fff95d11a0caa9e34782d723450ae6c969361fa0",
+        "baseline_sha256": "849a4df734b1ac1856004ab74246ce3b122367f2ceb78c4cfcc8a012b2983f2c"
+      }
+    },
+    {
+      "name": "pass2",
+      "implementation": "repaired creation-only format marker",
+      "samples": 28,
+      "full_payload_history_parity": true,
+      "medians": [
+        {
+          "replay_factor": 1,
+          "lane": "baseline",
+          "setup_ns": 7242937,
+          "parse_write_commit_ns": 13506966,
+          "reopen_latest_verify_ns": 509769,
+          "database_bytes": 73728
+        },
+        {
+          "replay_factor": 1,
+          "lane": "addressed",
+          "setup_ns": 12373453,
+          "parse_write_commit_ns": 15357598,
+          "reopen_latest_verify_ns": 713033,
+          "database_bytes": 65536
+        },
+        {
+          "replay_factor": 16,
+          "lane": "baseline",
+          "setup_ns": 6204544,
+          "parse_write_commit_ns": 194850665,
+          "reopen_latest_verify_ns": 598480,
+          "database_bytes": 880640
+        },
+        {
+          "replay_factor": 16,
+          "lane": "addressed",
+          "setup_ns": 9632803,
+          "parse_write_commit_ns": 182163937,
+          "reopen_latest_verify_ns": 695665,
+          "database_bytes": 86016
+        }
+      ],
+      "sources": {
+        "source_sha256": "5a708fe699b776678a4832088f4a0e9cd1ac48c4eb3e40ec41d081e826f9cfa4",
+        "candidate_sha256": "13be9b95a14dc6690d0914acd735842f09cc731f894d81684b0099c8df7f09b6",
+        "baseline_sha256": "849a4df734b1ac1856004ab74246ce3b122367f2ceb78c4cfcc8a012b2983f2c"
+      }
+    },
+    {
+      "name": "pass3",
+      "implementation": "repaired creation-only format marker",
+      "samples": 28,
+      "full_payload_history_parity": true,
+      "medians": [
+        {
+          "replay_factor": 1,
+          "lane": "baseline",
+          "setup_ns": 8089847,
+          "parse_write_commit_ns": 12254736,
+          "reopen_latest_verify_ns": 550182,
+          "database_bytes": 73728
+        },
+        {
+          "replay_factor": 1,
+          "lane": "addressed",
+          "setup_ns": 10742621,
+          "parse_write_commit_ns": 12693744,
+          "reopen_latest_verify_ns": 798519,
+          "database_bytes": 65536
+        },
+        {
+          "replay_factor": 16,
+          "lane": "baseline",
+          "setup_ns": 6645358,
+          "parse_write_commit_ns": 206543784,
+          "reopen_latest_verify_ns": 578244,
+          "database_bytes": 880640
+        },
+        {
+          "replay_factor": 16,
+          "lane": "addressed",
+          "setup_ns": 10528241,
+          "parse_write_commit_ns": 176666145,
+          "reopen_latest_verify_ns": 650291,
+          "database_bytes": 86016
+        }
+      ],
+      "sources": {
+        "source_sha256": "5a708fe699b776678a4832088f4a0e9cd1ac48c4eb3e40ec41d081e826f9cfa4",
+        "candidate_sha256": "13be9b95a14dc6690d0914acd735842f09cc731f894d81684b0099c8df7f09b6",
+        "baseline_sha256": "849a4df734b1ac1856004ab74246ce3b122367f2ceb78c4cfcc8a012b2983f2c"
+      }
+    }
+  ]
+}

@@ -1,0 +1,279 @@
+{
+  "checked_at": "2026-10-28T01:53:28.391538+00:00",
+  "scope": "real loopback HTTP, compiled assets and negative security controls; fixture-prepared completed jobs; no provider requests or native-browser claim",
+  "binary_sha256": "90b9ea03a5dc62e2b118f32f7823c82cdef388fab46101e4edbfabb10d00bb34",
+  "harness_sha256": "3a7fe737c022937d000c21229c7e15b7cf1fcc1e5f4a4c8654b4a2c2136ce947",
+  "checks": [
+    {
+      "name": "index.html status",
+      "observed": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "index.html exact bytes",
+      "observed": "e2c32661fb62e046d50ca31c0f8d7cd64bd99286d2529ace427bdd2a809d5200",
+      "expected": "e2c32661fb62e046d50ca31c0f8d7cd64bd99286d2529ace427bdd2a809d5200",
+      "passed": true
+    },
+    {
+      "name": "index.html no-store",
+      "observed": "no-store",
+      "expected": "no-store",
+      "passed": true
+    },
+    {
+      "name": "index.html nosniff",
+      "observed": "nosniff",
+      "expected": "nosniff",
+      "passed": true
+    },
+    {
+      "name": "index.html frame isolation",
+      "observed": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "app.js status",
+      "observed": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "app.js exact bytes",
+      "observed": "9187be0019952103851ca7a6975578b5aa661f35756ee2661aafa06b6dcb2c80",
+      "expected": "9187be0019952103851ca7a6975578b5aa661f35756ee2661aafa06b6dcb2c80",
+      "passed": true
+    },
+    {
+      "name": "app.js no-store",
+      "observed": "no-store",
+      "expected": "no-store",
+      "passed": true
+    },
+    {
+      "name": "app.js nosniff",
+      "observed": "nosniff",
+      "expected": "nosniff",
+      "passed": true
+    },
+    {
+      "name": "app.js frame isolation",
+      "observed": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "collection-input.mjs status",
+      "observed": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "collection-input.mjs exact bytes",
+      "observed": "5b41b415a4bd05c74df76e45bffa48f13b5d61aac709c533c50e3c3b4b41241c",
+      "expected": "5b41b415a4bd05c74df76e45bffa48f13b5d61aac709c533c50e3c3b4b41241c",
+      "passed": true
+    },
+    {
+      "name": "collection-input.mjs no-store",
+      "observed": "no-store",
+      "expected": "no-store",
+      "passed": true
+    },
+    {
+      "name": "collection-input.mjs nosniff",
+      "observed": "nosniff",
+      "expected": "nosniff",
+      "passed": true
+    },
+    {
+      "name": "collection-input.mjs frame isolation",
+      "observed": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "style.css status",
+      "observed": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "style.css exact bytes",
+      "observed": "52e404065e4ca824aaed3e8e34b407416656ddd0907aa14df0e5a2ed03bb8f35",
+      "expected": "52e404065e4ca824aaed3e8e34b407416656ddd0907aa14df0e5a2ed03bb8f35",
+      "passed": true
+    },
+    {
+      "name": "style.css no-store",
+      "observed": "no-store",
+      "expected": "no-store",
+      "passed": true
+    },
+    {
+      "name": "style.css nosniff",
+      "observed": "nosniff",
+      "expected": "nosniff",
+      "passed": true
+    },
+    {
+      "name": "style.css frame isolation",
+      "observed": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "spoofed Host rejected",
+      "observed": 403,
+      "expected": 403,
+      "passed": true
+    },
+    {
+      "name": "missing Origin rejected",
+      "observed": 403,
+      "expected": 403,
+      "passed": true
+    },
+    {
+      "name": "foreign Origin rejected",
+      "observed": 403,
+      "expected": 403,
+      "passed": true
+    },
+    {
+      "name": "missing request marker rejected",
+      "observed": 403,
+      "expected": 403,
+      "passed": true
+    },
+    {
+      "name": "invalid archive identity rejected",
+      "observed": 400,
+      "expected": 400,
+      "passed": true
+    },
+    {
+      "name": "invalid archive identity rejected",
+      "observed": 400,
+      "expected": 400,
+      "passed": true
+    },
+    {
+      "name": "invalid archive identity rejected",
+      "observed": 400,
+      "expected": 400,
+      "passed": true
+    },
+    {
+      "name": "invalid archive identity rejected",
+      "observed": 400,
+      "expected": 400,
+      "passed": true
+    },
+    {
+      "name": "unrecognized archive field rejected",
+      "observed": 422,
+      "expected": 422,
+      "passed": true
+    },
+    {
+      "name": "unrecognized archive field rejected",
+      "observed": 422,
+      "expected": 422,
+      "passed": true
+    },
+    {
+      "name": "malformed JSON rejected",
+      "observed": 400,
+      "expected": 400,
+      "passed": true
+    },
+    {
+      "name": "oversized request rejected",
+      "observed": 413,
+      "expected": 413,
+      "passed": true
+    },
+    {
+      "name": "overview status",
+      "observed": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "job count unchanged",
+      "observed": 6,
+      "expected": 6,
+      "passed": true
+    },
+    {
+      "name": "no pending provider jobs",
+      "observed": 0,
+      "expected": 0,
+      "passed": true
+    },
+    {
+      "name": "no cross-origin read grant",
+      "observed": false,
+      "expected": false,
+      "passed": true
+    },
+    {
+      "name": "compact receipt has canonical identity",
+      "observed": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "generation remains a string",
+      "observed": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "raw payload not copied into job output",
+      "observed": false,
+      "expected": false,
+      "passed": true
+    },
+    {
+      "name": "compact receipt has canonical identity",
+      "observed": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "generation remains a string",
+      "observed": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "raw payload not copied into job output",
+      "observed": false,
+      "expected": false,
+      "passed": true
+    },
+    {
+      "name": "compact receipt has canonical identity",
+      "observed": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "generation remains a string",
+      "observed": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "raw payload not copied into job output",
+      "observed": false,
+      "expected": false,
+      "passed": true
+    }
+  ],
+  "completed": true
+}

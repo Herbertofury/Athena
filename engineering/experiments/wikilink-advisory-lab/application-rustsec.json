@@ -1,0 +1,23 @@
+{
+  "comparison": "revision_changed",
+  "generation": "5",
+  "observed_at_utc": "2026-10-28 09:25:42",
+  "payload_bytes": 3159,
+  "payload_sha256": "628326a458d25ee4b03d63780dff8d9b0654e39ff603343dbef016bf69bbd496",
+  "previous_generation": "2",
+  "provider_timestamp": "2026-10-28T08:50:03Z",
+  "repository": "RustSec/advisory-db",
+  "response": {
+    "api_version_requested": "2026-03-10",
+    "api_version_selected": "2026-03-10",
+    "next_allowed_epoch": 1793179542,
+    "rate_limited": false,
+    "remaining": 59,
+    "status": 200
+  },
+  "revision": "40f5be6fb12ed93fc591bf4ab23b7d793b3f2239",
+  "scope": "Fixed public upstream observation; not registry-newest, installed version, signature verification, security clearance or automatic adoption. Complete original JSON retained locally; no assets downloaded.",
+  "source_id": "rustsec",
+  "source_url": "https://github.com/rustsec/advisory-db/commit/40f5be6fb12ed93fc591bf4ab23b7d793b3f2239",
+  "timestamp_kind": "commit_committer_date"
+}

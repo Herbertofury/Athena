@@ -1,0 +1,47 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "Feature Foundry",
+  "version": "24.0.0",
+  "identifier": "com.featurefoundry.livingworld",
+  "build": {
+    "beforeDevCommand": "npm run dev -- --port 1420",
+    "devUrl": "http://127.0.0.1:1420",
+    "beforeBuildCommand": "npm run build",
+    "frontendDist": "../dist"
+  },
+  "app": {
+    "windows": [
+      {
+        "label": "main",
+        "title": "Feature Foundry",
+        "width": 1536,
+        "height": 1024,
+        "minWidth": 1120,
+        "minHeight": 720,
+        "center": true,
+        "decorations": false,
+        "resizable": true,
+        "fullscreen": false,
+        "visible": true
+      }
+    ],
+    "security": {
+      "csp": "default-src 'self' customprotocol: asset:; connect-src 'self' ipc: http://ipc.localhost https://accounts.spotify.com https://api.spotify.com https://api.music.apple.com; img-src 'self' asset: data: blob: https://is1-ssl.mzstatic.com https://i.scdn.co; media-src 'self' asset: data: blob: https:; frame-src https://www.youtube-nocookie.com; style-src 'self' 'unsafe-inline'; script-src 'self' https://js-cdn.music.apple.com; font-src 'self' data:"
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": "all",
+    "category": "DeveloperTool",
+    "shortDescription": "Cinematic living-world studio",
+    "longDescription": "A GPU-accelerated, interactive living-world studio with themes, intelligent objects, mascots, physics, weather, sound, and native persistence.",
+    "copyright": "Copyright 2026 Feature Foundry",
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.icns",
+      "icons/icon.ico"
+    ]
+  }
+}

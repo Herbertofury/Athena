@@ -1,0 +1,63 @@
+{
+  "checked_at": "2026-10-27T08:20:59.905960+00:00",
+  "scope": "actual loopback worker with a retained real public response; cancellation uses a labeled generated augmentation, not a second real source",
+  "binary_sha256": "9042bde2482887ae402dae71e0ab8deb78b1188451d206450e9f94e8df327162",
+  "checks": [
+    {
+      "name": "same-origin request guard",
+      "observed": 403,
+      "expected": 403,
+      "passed": true
+    },
+    {
+      "name": "foreign Origin rejected",
+      "observed": 403,
+      "expected": 403,
+      "passed": true
+    },
+    {
+      "name": "foreign Host rejected",
+      "observed": 403,
+      "expected": 403,
+      "passed": true
+    },
+    {
+      "name": "unknown executable request rejected",
+      "observed": 422,
+      "expected": 422,
+      "passed": true
+    },
+    {
+      "name": "extra command field rejected",
+      "observed": 422,
+      "expected": 422,
+      "passed": true
+    },
+    {
+      "name": "noncanonical version rejected",
+      "observed": 400,
+      "expected": 400,
+      "passed": true
+    },
+    {
+      "name": "body budget preserved",
+      "observed": 413,
+      "expected": 413,
+      "passed": true
+    },
+    {
+      "name": "served asset exact /",
+      "observed": "4d938c0035de32c2e3ec673146794c14e91e82e33c9fa365ed7e0ed9fbf6753c",
+      "expected": "4d938c0035de32c2e3ec673146794c14e91e82e33c9fa365ed7e0ed9fbf6753c",
+      "passed": true
+    },
+    {
+      "name": "no-store /",
+      "observed": false,
+      "expected": true,
+      "passed": false
+    }
+  ],
+  "completed": false,
+  "error": "('no-store /', False, True)"
+}

@@ -1,0 +1,230 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-10-28",
+  "scope": "Round-two adapter research, browser observations and isolated extraction lab; no GameSync Next changes",
+  "baseMainCommit": "c643141a81921ea015f07a62a592999a3dea0200",
+  "baseWikiCommit": "3403788e762ee1e6df7e349ecb8931376be5df23",
+  "catalogCounts": {
+    "entries": 346,
+    "families": {
+      "mod-hosts": 210,
+      "paid-platforms": 37,
+      "regional": 43,
+      "social-and-publishing": 51,
+      "specialist-sites": 5
+    },
+    "serviceKinds": {
+      "file_host_or_storage": 8,
+      "funding_or_integration_reference": 2,
+      "platform_or_host_scope": 293,
+      "reference_or_tool_only": 43
+    },
+    "sources": 1130,
+    "protocols": 3,
+    "newAuthenticatedAcceptances": 0,
+    "gameScopeRecords": 179,
+    "gameResearchSources": 420,
+    "newGameResearchServices": 86,
+    "newGameResearchAuthenticatedAcceptances": 0,
+    "authenticatedSampleInspections": 3,
+    "round2CandidateScopes": 104,
+    "round2NewCanonicalServices": 98,
+    "round2MethodRecipes": 71,
+    "entriesWithOperationEvidence": 346,
+    "round2ScopedBrowserProviders": 5,
+    "round2PositiveSignedInProviders": 2,
+    "round2VerifiedBrowserArchiveTransfers": 2
+  },
+  "methodCounts": {
+    "bundles": 7,
+    "candidateScopes": 104,
+    "newCanonicalServices": 98,
+    "sourceRecords": 379,
+    "gameSourceRecords": 367,
+    "browserSourceRecords": 12,
+    "upstreamSourceRecordsMerged": 4,
+    "inspectedScopes": 161,
+    "methodRecipes": 71,
+    "browserScopedRecipes": 5,
+    "retainedFailureRecords": 91,
+    "catalogEntriesWithMethodRefs": 82,
+    "catalogEntriesWithOperationEvidence": 346,
+    "newFullSupportAcceptances": 0,
+    "newRound2BundleAuthenticatedAcceptances": 0
+  },
+  "checks": {
+    "researchStructure": {
+      "passed": true,
+      "sources": 1529,
+      "markdownFiles": 151,
+      "staleSourceIds": []
+    },
+    "pythonTests": {
+      "passed": 212,
+      "failed": 0,
+      "labTestsIncluded": 24
+    },
+    "javascriptContractFiles": {
+      "passed": 24,
+      "failed": 0
+    },
+    "researchExplorerGenerated": true,
+    "cardAssetIdentity": true,
+    "mediaAssetIdentity": true,
+    "syntheticBenchmarkCompleteEquivalence": true,
+    "actualFixtureReplay": {
+      "families": 8,
+      "cases": 9,
+      "normalizedRecords": 27,
+      "assertionsPassed": 16,
+      "deterministicSecondReplay": true
+    },
+    "wikiProjection": {
+      "mappedPages": 43,
+      "exactLocalMatch": true,
+      "livePublicationForThisRevision": "verified_separate_wiki_methods_publication_receipt",
+      "exactPublishedPages": 43
+    },
+    "gitDiffWhitespace": true
+  },
+  "audit": {
+    "allFindingsResolved": true,
+    "remediations": [
+      "Capability-bearing QQ query values removed from manifest and sanitizer hardened",
+      "Historical Patreon status dated explicitly",
+      "Current replay hashes and receipt regenerated",
+      "Executable lab usage and private-fixture handling documented",
+      "Offline transfer scope distinguished from successful browser delivery"
+    ],
+    "publicationPrivacy": "No credentials, cookies, private account lists, paid bodies, raw HTML captures or downloaded mod binaries included. Temporary media query values removed from published browser receipts.",
+    "fullSupportAccepted": false,
+    "preservedConcurrentSourceIds": [
+      "PROCMEM01",
+      "ENCODE01",
+      "ENCODE02",
+      "RSEC0414"
+    ]
+  },
+  "hashes": {
+    "data/site-adapter-catalog.json": "1ebc1aa90485097f1af86fe2e0f138d604cc27e78a966a505b841f93e7f09210",
+    "data/sources.json": "ccaa495477f0bdf53c75458633c611bbeb5673665314f155772851121d5222f6",
+    "experiments/site-adapter-discovery/method-research-round2-2026-10-28.json": "7506cfc30ead24b70d0ec755552098f30a1e4e75f8a3f8945bb94728fc1f19ef",
+    "experiments/site-extraction-lab/extractors.py": "2ca3ff4b1645930709ca58eb37f742cca917df4c78dc93ab9c7008475659d188",
+    "experiments/site-extraction-lab/replay.py": "1aa9a05e49bad35f4c20d444e11070f2438e58899deb5d73b7554f21af486229",
+    "experiments/site-extraction-lab/live-replay-receipt.json": "182d745d5758450d9234988e10c1b7cf61d9d4eacb3d2cc8812112be76ebdf69",
+    "experiments/site-extraction-lab/replay-validation.json": "e58bfdc771d2c6229e2a694e2e483ed6bf65d7adb9e71389715eb961d7230a53"
+  },
+  "initialBaseMainCommit": "f54cd77dd51303149732f8d136f82b4bbe914f0b",
+  "mainReconciliation": {
+    "newBase": "c643141a81921ea015f07a62a592999a3dea0200",
+    "upstreamPathsPreserved": 97,
+    "sourceIdsMerged": [
+      "ENCODE01",
+      "ENCODE02",
+      "RSEC0414"
+    ],
+    "sources": 1529
+  },
+  "mainPublication": {
+    "status": "blocked_after_rejected_connector_write",
+    "reportedReason": "user rejected MCP tool call",
+    "alternateMainWriteAttempted": false
+  },
+  "repositoryPublicationFollowup20261031": {
+    "recordedAt": "2026-10-31",
+    "status": "merged_to_main_main_ci_pending",
+    "branch": "research/site-adapters-2026-10-31",
+    "headCommit": "03c2af5a6ba9683c0955422dd73c81c0895e3e09",
+    "pullRequest": "https://github.com/Herbertofury/Engineering-Atlas/pull/3",
+    "textFiles": 50,
+    "fullUiReadbacks": 50,
+    "catalogSha256": "587541035a801f554ad69db09c1b197a09f75807e44866d59c87f7c8b82c255b",
+    "ciObserved": {
+      "preMergeChecksPassed": 6,
+      "preMergeChecksTotal": 6,
+      "checks": [
+        {
+          "name": "check push",
+          "status": "passed",
+          "duration": "16s"
+        },
+        {
+          "name": "check PR",
+          "status": "passed",
+          "duration": "15s"
+        },
+        {
+          "name": "Rust Linux push",
+          "status": "passed",
+          "duration": "2m"
+        },
+        {
+          "name": "Rust Linux PR",
+          "status": "passed",
+          "duration": "1m"
+        },
+        {
+          "name": "Rust Windows push",
+          "status": "passed",
+          "duration": "3m"
+        },
+        {
+          "name": "Rust Windows PR",
+          "status": "passed",
+          "duration": "4m"
+        }
+      ],
+      "mainCiStatus": "pending_observation_after_final_cleanup_head",
+      "mainCiPassVerified": false
+    },
+    "mainMergeCommit": "e0a85ad24e480f002a7d645d55f9692ffa757ab4",
+    "sourceRegister": {
+      "records": 1778,
+      "duplicateIds": 0,
+      "newRecords": 414
+    },
+    "catalog": {
+      "entries": 349,
+      "embeddedSources": 1143
+    },
+    "parserEvidence": {
+      "october28CoreFamilies": 8,
+      "october28ActualCases": 9,
+      "october28NormalizedRecords": 27,
+      "itchActualDomSamples": 2,
+      "itchDefensiveTests": 9,
+      "fullSupportAccepted": false
+    },
+    "wikiUpdatesObserved": [
+      {
+        "page": "Site-Adapter-Coverage",
+        "url": "https://github.com/Herbertofury/Engineering-Atlas/wiki/Site-Adapter-Coverage",
+        "state": "saved_and_full_ui_text_verified",
+        "sha256": "e68c0ef1441280e9ed7e423aad49cd7a2a9aef8e50ed7edb150a7c3d9f55e231"
+      },
+      {
+        "page": "Paid-Platform-Adapters",
+        "url": "https://github.com/Herbertofury/Engineering-Atlas/wiki/Paid-Platform-Adapters",
+        "state": "saved_and_full_ui_text_verified",
+        "sha256": "7365ee7ea8cc136887701e9ab7d92b246e67a6f14f5eec43dc55d00da37f00b8"
+      },
+      {
+        "page": "Adapter-Itch-io",
+        "url": "https://github.com/Herbertofury/Engineering-Atlas/wiki/Adapter-Itch-io",
+        "state": "saved_and_full_ui_text_verified",
+        "sha256": "a4f305cfc3131bd94b48caff4198afde90faf3031f8622d7fb2f07211f6b305e"
+      },
+      {
+        "page": "_Sidebar",
+        "state": "saved_and_full_ui_text_verified",
+        "sha256": "acdc707791f5ef45c730632e68faefac0b3c064942dca259dfd843266d371dfa"
+      }
+    ],
+    "unverifiedWikiPagesNotPromoted": true,
+    "deferredHistoricalScreenshots": [
+      "wiki-live-2026-10-28.jpg",
+      "wiki-methods-live-2026-10-28.jpg"
+    ],
+    "historicalBlockedAttemptsPreserved": true
+  }
+}

@@ -1,0 +1,372 @@
+{
+  "additional_top_level_fields": [
+    "additional_categories",
+    "approved",
+    "body_url",
+    "categories",
+    "client_side",
+    "color",
+    "discord_url",
+    "donation_urls",
+    "downloads",
+    "environment",
+    "followers",
+    "game_versions",
+    "issues_url",
+    "license",
+    "loaders",
+    "moderator_message",
+    "monetization_status",
+    "organization",
+    "published",
+    "queued",
+    "raw_icon_url",
+    "requested_status",
+    "server_side",
+    "source_url",
+    "status",
+    "team",
+    "thread_id",
+    "updated",
+    "wiki_url"
+  ],
+  "database_bytes": {
+    "complete": 225280,
+    "projection": 212992
+  },
+  "failed_refresh_retained_last_good": true,
+  "limitations": [
+    "Outputs differ in coverage; timings are costs, not a fair speed ranking",
+    "One local filesystem, sequential paired requests; not target hardware throughput",
+    "No power-loss, native UI, peak-memory, authenticated or exhaustive platform acceptance"
+  ],
+  "project_id": "AANobbMI",
+  "reopened_exact_wire_equal": true,
+  "samples": [
+    {
+      "complete_existing_projection_equal": true,
+      "end_to_end_ns": 2013191,
+      "exact_original_wire_retained": false,
+      "lane": "projection",
+      "parse_ns": 62864,
+      "round": 0,
+      "warmup": true,
+      "write_and_commit_ns": 1944881
+    },
+    {
+      "complete_existing_projection_equal": true,
+      "end_to_end_ns": 2404974,
+      "exact_original_wire_retained": true,
+      "lane": "complete",
+      "parse_ns": 39255,
+      "round": 0,
+      "warmup": true,
+      "write_and_commit_ns": 2359583
+    },
+    {
+      "complete_existing_projection_equal": true,
+      "end_to_end_ns": 1849448,
+      "exact_original_wire_retained": true,
+      "lane": "complete",
+      "parse_ns": 36246,
+      "round": 1,
+      "warmup": true,
+      "write_and_commit_ns": 1807262
+    },
+    {
+      "complete_existing_projection_equal": true,
+      "end_to_end_ns": 2042424,
+      "exact_original_wire_retained": false,
+      "lane": "projection",
+      "parse_ns": 41288,
+      "round": 1,
+      "warmup": true,
+      "write_and_commit_ns": 1988480
+    },
+    {
+      "complete_existing_projection_equal": true,
+      "end_to_end_ns": 1842485,
+      "exact_original_wire_retained": false,
+      "lane": "projection",
+      "parse_ns": 199913,
+      "round": 2,
+      "warmup": true,
+      "write_and_commit_ns": 1633713
+    },
+    {
+      "complete_existing_projection_equal": true,
+      "end_to_end_ns": 1554911,
+      "exact_original_wire_retained": true,
+      "lane": "complete",
+      "parse_ns": 36544,
+      "round": 2,
+      "warmup": true,
+      "write_and_commit_ns": 1511834
+    },
+    {
+      "complete_existing_projection_equal": true,
+      "end_to_end_ns": 3991037,
+      "exact_original_wire_retained": true,
+      "lane": "complete",
+      "parse_ns": 31888,
+      "round": 3,
+      "warmup": true,
+      "write_and_commit_ns": 3950999
+    },
+    {
+      "complete_existing_projection_equal": true,
+      "end_to_end_ns": 1456569,
+      "exact_original_wire_retained": false,
+      "lane": "projection",
+      "parse_ns": 30305,
+      "round": 3,
+      "warmup": true,
+      "write_and_commit_ns": 1420653
+    },
+    {
+      "complete_existing_projection_equal": true,
+      "end_to_end_ns": 1576596,
+      "exact_original_wire_retained": false,
+      "lane": "projection",
+      "parse_ns": 32767,
+      "round": 4,
+      "warmup": false,
+      "write_and_commit_ns": 1538022
+    },
+    {
+      "complete_existing_projection_equal": true,
+      "end_to_end_ns": 1873293,
+      "exact_original_wire_retained": true,
+      "lane": "complete",
+      "parse_ns": 31181,
+      "round": 4,
+      "warmup": false,
+      "write_and_commit_ns": 1834998
+    },
+    {
+      "complete_existing_projection_equal": true,
+      "end_to_end_ns": 1765212,
+      "exact_original_wire_retained": true,
+      "lane": "complete",
+      "parse_ns": 28104,
+      "round": 5,
+      "warmup": false,
+      "write_and_commit_ns": 1729677
+    },
+    {
+      "complete_existing_projection_equal": true,
+      "end_to_end_ns": 1754844,
+      "exact_original_wire_retained": false,
+      "lane": "projection",
+      "parse_ns": 31033,
+      "round": 5,
+      "warmup": false,
+      "write_and_commit_ns": 1717732
+    },
+    {
+      "complete_existing_projection_equal": true,
+      "end_to_end_ns": 1984006,
+      "exact_original_wire_retained": false,
+      "lane": "projection",
+      "parse_ns": 37248,
+      "round": 6,
+      "warmup": false,
+      "write_and_commit_ns": 1940582
+    },
+    {
+      "complete_existing_projection_equal": true,
+      "end_to_end_ns": 1794786,
+      "exact_original_wire_retained": true,
+      "lane": "complete",
+      "parse_ns": 67996,
+      "round": 6,
+      "warmup": false,
+      "write_and_commit_ns": 1722322
+    },
+    {
+      "complete_existing_projection_equal": true,
+      "end_to_end_ns": 2884641,
+      "exact_original_wire_retained": true,
+      "lane": "complete",
+      "parse_ns": 35882,
+      "round": 7,
+      "warmup": false,
+      "write_and_commit_ns": 2842838
+    },
+    {
+      "complete_existing_projection_equal": true,
+      "end_to_end_ns": 2522806,
+      "exact_original_wire_retained": false,
+      "lane": "projection",
+      "parse_ns": 35168,
+      "round": 7,
+      "warmup": false,
+      "write_and_commit_ns": 2483717
+    },
+    {
+      "complete_existing_projection_equal": true,
+      "end_to_end_ns": 2956238,
+      "exact_original_wire_retained": false,
+      "lane": "projection",
+      "parse_ns": 39057,
+      "round": 8,
+      "warmup": false,
+      "write_and_commit_ns": 2912133
+    },
+    {
+      "complete_existing_projection_equal": true,
+      "end_to_end_ns": 4989791,
+      "exact_original_wire_retained": true,
+      "lane": "complete",
+      "parse_ns": 190741,
+      "round": 8,
+      "warmup": false,
+      "write_and_commit_ns": 4793393
+    },
+    {
+      "complete_existing_projection_equal": true,
+      "end_to_end_ns": 3125350,
+      "exact_original_wire_retained": true,
+      "lane": "complete",
+      "parse_ns": 67046,
+      "round": 9,
+      "warmup": false,
+      "write_and_commit_ns": 3052667
+    },
+    {
+      "complete_existing_projection_equal": true,
+      "end_to_end_ns": 2522261,
+      "exact_original_wire_retained": false,
+      "lane": "projection",
+      "parse_ns": 35323,
+      "round": 9,
+      "warmup": false,
+      "write_and_commit_ns": 2482584
+    },
+    {
+      "complete_existing_projection_equal": true,
+      "end_to_end_ns": 2221195,
+      "exact_original_wire_retained": false,
+      "lane": "projection",
+      "parse_ns": 36001,
+      "round": 10,
+      "warmup": false,
+      "write_and_commit_ns": 2180930
+    },
+    {
+      "complete_existing_projection_equal": true,
+      "end_to_end_ns": 2382069,
+      "exact_original_wire_retained": true,
+      "lane": "complete",
+      "parse_ns": 37818,
+      "round": 10,
+      "warmup": false,
+      "write_and_commit_ns": 2339065
+    },
+    {
+      "complete_existing_projection_equal": true,
+      "end_to_end_ns": 1891966,
+      "exact_original_wire_retained": true,
+      "lane": "complete",
+      "parse_ns": 32443,
+      "round": 11,
+      "warmup": false,
+      "write_and_commit_ns": 1854236
+    },
+    {
+      "complete_existing_projection_equal": true,
+      "end_to_end_ns": 1652147,
+      "exact_original_wire_retained": false,
+      "lane": "projection",
+      "parse_ns": 30290,
+      "round": 11,
+      "warmup": false,
+      "write_and_commit_ns": 1617891
+    },
+    {
+      "complete_existing_projection_equal": true,
+      "end_to_end_ns": 2103287,
+      "exact_original_wire_retained": false,
+      "lane": "projection",
+      "parse_ns": 36294,
+      "round": 12,
+      "warmup": false,
+      "write_and_commit_ns": 2062770
+    },
+    {
+      "complete_existing_projection_equal": true,
+      "end_to_end_ns": 1345211,
+      "exact_original_wire_retained": true,
+      "lane": "complete",
+      "parse_ns": 34640,
+      "round": 12,
+      "warmup": false,
+      "write_and_commit_ns": 1307005
+    },
+    {
+      "complete_existing_projection_equal": true,
+      "end_to_end_ns": 1139440,
+      "exact_original_wire_retained": true,
+      "lane": "complete",
+      "parse_ns": 31305,
+      "round": 13,
+      "warmup": false,
+      "write_and_commit_ns": 1103790
+    },
+    {
+      "complete_existing_projection_equal": true,
+      "end_to_end_ns": 1644653,
+      "exact_original_wire_retained": false,
+      "lane": "projection",
+      "parse_ns": 31433,
+      "round": 13,
+      "warmup": false,
+      "write_and_commit_ns": 1608602
+    },
+    {
+      "complete_existing_projection_equal": true,
+      "end_to_end_ns": 1491769,
+      "exact_original_wire_retained": false,
+      "lane": "projection",
+      "parse_ns": 38559,
+      "round": 14,
+      "warmup": false,
+      "write_and_commit_ns": 1448746
+    },
+    {
+      "complete_existing_projection_equal": true,
+      "end_to_end_ns": 1678958,
+      "exact_original_wire_retained": true,
+      "lane": "complete",
+      "parse_ns": 38412,
+      "round": 14,
+      "warmup": false,
+      "write_and_commit_ns": 1635174
+    },
+    {
+      "complete_existing_projection_equal": true,
+      "end_to_end_ns": 1789208,
+      "exact_original_wire_retained": true,
+      "lane": "complete",
+      "parse_ns": 34230,
+      "round": 15,
+      "warmup": false,
+      "write_and_commit_ns": 1750011
+    },
+    {
+      "complete_existing_projection_equal": true,
+      "end_to_end_ns": 1582348,
+      "exact_original_wire_retained": false,
+      "lane": "projection",
+      "parse_ns": 75040,
+      "round": 15,
+      "warmup": false,
+      "write_and_commit_ns": 1504022
+    }
+  ],
+  "snapshot_write_policy": "Existing SnapshotStore synchronous FULL, atomic snapshot/attempt transaction",
+  "source_bytes": 12840,
+  "source_mode": "retained public response; no new provider request",
+  "source_sha256": "80b9186e951352b4b265e20cf6e5f57c8646f11b09d6f3a1a8492046acfaf9c0",
+  "typed_projection_bytes": 11401
+}

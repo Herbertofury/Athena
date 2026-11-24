@@ -1,0 +1,96 @@
+{
+  "scope": "Three fresh processes per strategy/case, five measured reads each after two warmups; descriptive statistics only",
+  "cases": [
+    {
+      "id": "AANobbMI",
+      "chunkSize": 1,
+      "currentMedianOfMediansMs": 5.836793,
+      "candidateMedianOfMediansMs": 4.9375009999999975,
+      "candidateTimeRatio": 0.8459270356169899,
+      "currentMedianRssKiB": 49396,
+      "candidateMedianRssKiB": 49820,
+      "completeParity": true
+    },
+    {
+      "id": "AANobbMI",
+      "chunkSize": 64,
+      "currentMedianOfMediansMs": 0.854676000000012,
+      "candidateMedianOfMediansMs": 1.0572350000000057,
+      "candidateTimeRatio": 1.2370009219868008,
+      "currentMedianRssKiB": 42048,
+      "candidateMedianRssKiB": 42160,
+      "completeParity": true
+    },
+    {
+      "id": "AANobbMI",
+      "chunkSize": 16384,
+      "currentMedianOfMediansMs": 0.45394999999999186,
+      "candidateMedianOfMediansMs": 0.344161999999983,
+      "candidateTimeRatio": 0.7581495759444634,
+      "currentMedianRssKiB": 40376,
+      "candidateMedianRssKiB": 40248,
+      "completeParity": true
+    },
+    {
+      "id": "YL57xq9U",
+      "chunkSize": 1,
+      "currentMedianOfMediansMs": 5.284159000000017,
+      "candidateMedianOfMediansMs": 5.83211799999998,
+      "candidateTimeRatio": 1.10369843148171,
+      "currentMedianRssKiB": 49768,
+      "candidateMedianRssKiB": 49720,
+      "completeParity": true
+    },
+    {
+      "id": "YL57xq9U",
+      "chunkSize": 64,
+      "currentMedianOfMediansMs": 0.8704040000000077,
+      "candidateMedianOfMediansMs": 1.157991999999993,
+      "candidateTimeRatio": 1.3304074889361523,
+      "currentMedianRssKiB": 41400,
+      "candidateMedianRssKiB": 41272,
+      "completeParity": true
+    },
+    {
+      "id": "YL57xq9U",
+      "chunkSize": 16384,
+      "currentMedianOfMediansMs": 0.6523269999999854,
+      "candidateMedianOfMediansMs": 0.7609120000000047,
+      "candidateTimeRatio": 1.1664579267760213,
+      "currentMedianRssKiB": 39784,
+      "candidateMedianRssKiB": 39864,
+      "completeParity": true
+    },
+    {
+      "id": "gvQqBUqZ",
+      "chunkSize": 1,
+      "currentMedianOfMediansMs": 4.165499999999952,
+      "candidateMedianOfMediansMs": 2.937418000000008,
+      "candidateTimeRatio": 0.7051777697755472,
+      "currentMedianRssKiB": 49720,
+      "candidateMedianRssKiB": 48952,
+      "completeParity": true
+    },
+    {
+      "id": "gvQqBUqZ",
+      "chunkSize": 64,
+      "currentMedianOfMediansMs": 1.7788160000000062,
+      "candidateMedianOfMediansMs": 0.6667200000000122,
+      "candidateTimeRatio": 0.3748111103115836,
+      "currentMedianRssKiB": 40888,
+      "candidateMedianRssKiB": 40892,
+      "completeParity": true
+    },
+    {
+      "id": "gvQqBUqZ",
+      "chunkSize": 16384,
+      "currentMedianOfMediansMs": 0.28014500000000453,
+      "candidateMedianOfMediansMs": 0.3486199999999968,
+      "candidateTimeRatio": 1.2444269931642227,
+      "currentMedianRssKiB": 40116,
+      "candidateMedianRssKiB": 39992,
+      "completeParity": true
+    }
+  ],
+  "promotion": "not accepted; browser target evidence missing and inspect all time/memory regressions"
+}

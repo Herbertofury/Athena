@@ -1,0 +1,206 @@
+{
+  "schema": 1,
+  "entries": [
+    {
+      "id": "manual:curseforge:1720674:dynamic-cas-companion",
+      "archived": false,
+      "sourceReview": {
+        "reviewedUtcDate": "2026-11-22",
+        "projectIdentity": {
+          "provider": "CurseForge",
+          "projectId": "1720674",
+          "game": "sims4",
+          "scope": "In-game CAS mod",
+          "url": "https://www.curseforge.com/sims4/mods/dynamic-cas-columns"
+        },
+        "creatorAccounts": [
+          {
+            "provider": "CurseForge",
+            "account": "maru",
+            "url": "https://www.curseforge.com/members/maru/projects",
+            "evidence": "https://www.curseforge.com/sims4/mods/dynamic-cas-columns"
+          },
+          {
+            "provider": "Patreon",
+            "account": "marumaruSIMSMOD",
+            "url": "https://www.patreon.com/cw/marumaruSIMSMOD",
+            "evidence": "https://www.patreon.com/marumaruSIMSMOD/posts/cc-list-mover-174372555"
+          }
+        ],
+        "identityEvidence": [
+          {
+            "source": "https://www.curseforge.com/sims4/mods/dynamic-cas-columns",
+            "linksTo": [
+              "https://www.patreon.com/marumaruSIMSMOD/posts/cc-list-mover-174372555",
+              "https://www.patreon.com/marumaruSIMSMOD/posts/cas-tooltip-174022486"
+            ]
+          },
+          {
+            "source": "https://www.patreon.com/marumaruSIMSMOD/posts/cc-list-mover-174372555",
+            "linksTo": [
+              "https://www.curseforge.com/sims4/mods/dynamic-cas-columns"
+            ]
+          }
+        ],
+        "documentedRelationships": [
+          {
+            "type": "uses_tool_for_name_preparation",
+            "targetId": "manual:patreon:174022486:cas-tooltip-studio",
+            "source": "https://www.curseforge.com/sims4/mods/dynamic-cas-columns",
+            "scope": "Documented CC and preset name search features; not evidence of an unconditional base mod dependency"
+          }
+        ],
+        "observedFile": {
+          "fileId": "9746859",
+          "filename": "maru_DCC261122.zip",
+          "platformUploadDate": "2026-11-22",
+          "listedGameVersion": "1.129.39",
+          "fileChangelog": "not provided",
+          "url": "https://www.curseforge.com/sims4/mods/dynamic-cas-columns/files/9746859",
+          "uploader": "maru"
+        }
+      },
+      "revisions": [
+        {
+          "at": 1795305600000,
+          "name": "Dynamic CAS Companion",
+          "ownership": "followed",
+          "stage": "research",
+          "goal": "Track the official Create-a-Sim catalog and custom-content discovery source.",
+          "next": "Read the exact file page and treat its listed game version as metadata. Evaluate later changes only against verified evidence.",
+          "blockers": "No file-specific changelog is published. No package was downloaded or tested. Actual game compatibility is unverified.",
+          "decisions": "Keep the November 22 file separate from older project-level update notes and author-described speed changes.",
+          "resources": "The Source link opens the project. The Release link opens official file metadata, not a direct binary download.",
+          "source": "https://www.curseforge.com/sims4/mods/dynamic-cas-columns",
+          "version": "CurseForge file 9746859 · listed for The Sims 4 1.129.39",
+          "release": "https://www.curseforge.com/sims4/mods/dynamic-cas-columns/files/9746859"
+        }
+      ]
+    },
+    {
+      "id": "manual:patreon:174372555:cc-list-mover",
+      "archived": false,
+      "sourceReview": {
+        "reviewedUtcDate": "2026-11-22",
+        "projectIdentity": {
+          "provider": "Patreon",
+          "postId": "174372555",
+          "scope": "Standalone Windows package management tool",
+          "url": "https://www.patreon.com/marumaruSIMSMOD/posts/cc-list-mover-174372555"
+        },
+        "creatorAccounts": [
+          {
+            "provider": "CurseForge",
+            "account": "maru",
+            "url": "https://www.curseforge.com/members/maru/projects",
+            "evidence": "https://www.curseforge.com/sims4/mods/dynamic-cas-columns"
+          },
+          {
+            "provider": "Patreon",
+            "account": "marumaruSIMSMOD",
+            "url": "https://www.patreon.com/cw/marumaruSIMSMOD",
+            "evidence": "https://www.patreon.com/marumaruSIMSMOD/posts/cc-list-mover-174372555"
+          }
+        ],
+        "identityEvidence": [
+          {
+            "source": "https://www.curseforge.com/sims4/mods/dynamic-cas-columns",
+            "linksTo": [
+              "https://www.patreon.com/marumaruSIMSMOD/posts/cc-list-mover-174372555",
+              "https://www.patreon.com/marumaruSIMSMOD/posts/cas-tooltip-174022486"
+            ]
+          },
+          {
+            "source": "https://www.patreon.com/marumaruSIMSMOD/posts/cc-list-mover-174372555",
+            "linksTo": [
+              "https://www.curseforge.com/sims4/mods/dynamic-cas-columns"
+            ]
+          }
+        ],
+        "documentedRelationships": [
+          {
+            "type": "requires_for_documented_workflow",
+            "targetId": "manual:curseforge:1720674:dynamic-cas-companion",
+            "source": "https://www.patreon.com/marumaruSIMSMOD/posts/cc-list-mover-174372555",
+            "scope": "DCC with its CC List feature creates the selection list"
+          }
+        ]
+      },
+      "revisions": [
+        {
+          "at": 1795305600000,
+          "name": "CC List Mover",
+          "ownership": "followed",
+          "stage": "research",
+          "goal": "Review item selection versus whole Package file moves and restoration.",
+          "next": "Use disposable original fixtures to verify that a merged package discloses all sibling items before any file move.",
+          "blockers": "The author says dependencies are not detected and an import clears the temporary DCC list entries. No files or real profiles were used.",
+          "decisions": "The documented Mover workflow requires Dynamic CAS Companion with its CC List feature. Do not reverse that dependency.",
+          "resources": "This reference points to the public project post, not an attachment or an exact tested Windows version.",
+          "source": "https://www.patreon.com/marumaruSIMSMOD/posts/cc-list-mover-174372555",
+          "version": "",
+          "release": ""
+        }
+      ]
+    },
+    {
+      "id": "manual:patreon:174022486:cas-tooltip-studio",
+      "archived": false,
+      "sourceReview": {
+        "reviewedUtcDate": "2026-11-22",
+        "projectIdentity": {
+          "provider": "Patreon",
+          "postId": "174022486",
+          "scope": "Standalone Windows CC naming utility",
+          "url": "https://www.patreon.com/marumaruSIMSMOD/posts/cas-tooltip-174022486"
+        },
+        "creatorAccounts": [
+          {
+            "provider": "CurseForge",
+            "account": "maru",
+            "url": "https://www.curseforge.com/members/maru/projects",
+            "evidence": "https://www.curseforge.com/sims4/mods/dynamic-cas-columns"
+          },
+          {
+            "provider": "Patreon",
+            "account": "marumaruSIMSMOD",
+            "url": "https://www.patreon.com/cw/marumaruSIMSMOD",
+            "evidence": "https://www.patreon.com/marumaruSIMSMOD/posts/cc-list-mover-174372555"
+          }
+        ],
+        "identityEvidence": [
+          {
+            "source": "https://www.curseforge.com/sims4/mods/dynamic-cas-columns",
+            "linksTo": [
+              "https://www.patreon.com/marumaruSIMSMOD/posts/cc-list-mover-174372555",
+              "https://www.patreon.com/marumaruSIMSMOD/posts/cas-tooltip-174022486"
+            ]
+          },
+          {
+            "source": "https://www.patreon.com/marumaruSIMSMOD/posts/cc-list-mover-174372555",
+            "linksTo": [
+              "https://www.curseforge.com/sims4/mods/dynamic-cas-columns"
+            ]
+          }
+        ],
+        "documentedRelationships": []
+      },
+      "revisions": [
+        {
+          "at": 1795305600000,
+          "name": "CAS Tooltip Studio",
+          "ownership": "followed",
+          "stage": "research",
+          "goal": "Review a package naming workflow that distinguishes previews, separate output and backup-and-replace.",
+          "next": "Try separate output on an original disposable sample to ensure an unchanged original and a clearly labeled edited copy.",
+          "blockers": "No package or tooling was tested. The author warns against keeping original and edited copies active together.",
+          "decisions": "The author says the standalone tool does not require DCC. DCC documents its use to prepare names for certain search and tooltip features.",
+          "resources": "This reference points only to the public project post, not an attachment or a tested exact version.",
+          "source": "https://www.patreon.com/marumaruSIMSMOD/posts/cas-tooltip-174022486",
+          "version": "",
+          "release": ""
+        }
+      ]
+    }
+  ]
+}

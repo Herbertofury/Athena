@@ -1,0 +1,48 @@
+name: Athena wiki
+on:
+  push:
+    branches: [main]
+    paths: ['wiki/**', 'scripts/sync_wiki.py', '.github/workflows/athena-wiki.yml']
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: athena-wiki
+  cancel-in-progress: false
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Sync with ephemeral repository token
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GIT_TERMINAL_PROMPT: '0'
+        shell: bash
+        run: |
+          set -euo pipefail
+          askpass="$RUNNER_TEMP/athena-wiki-askpass.sh"
+          trap 'rm -f "$askpass"' EXIT
+          cat > "$askpass" <<'SH'
+          #!/bin/sh
+          case "$1" in
+            *Username*) printf '%s\n' 'x-access-token' ;;
+            *) printf '%s\n' "$GH_TOKEN" ;;
+          esac
+          SH
+          chmod 700 "$askpass"
+          export GIT_ASKPASS="$askpass"
+          git clone "https://github.com/${GITHUB_REPOSITORY}.wiki.git" "$RUNNER_TEMP/athena-wiki"
+          python scripts/sync_wiki.py wiki "$RUNNER_TEMP/athena-wiki"
+          cd "$RUNNER_TEMP/athena-wiki"
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add --all
+          if git diff --cached --quiet; then echo 'Wiki already matches.'; exit 0; fi
+          git commit -m 'Update Athena learning and research wiki'
+          git push origin HEAD

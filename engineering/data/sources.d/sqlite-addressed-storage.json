@@ -1,0 +1,24 @@
+[
+  {
+    "id": "SQLAPPID01",
+    "title": "SQLite application format identifier",
+    "url": "https://www.sqlite.org/pragma.html#pragma_application_id",
+    "observed_version": "Official documentation checked 2026-10-28",
+    "topic": "storage",
+    "note": "Application ID is a database-header field; the isolated candidate assigns it only during initial creation and tests read-only reopen byte stability.",
+    "checked_at": "2026-10-28",
+    "review_after_days": 90,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "SQLROWID01",
+    "title": "SQLite WITHOUT ROWID tradeoffs",
+    "url": "https://www.sqlite.org/withoutrowid.html",
+    "observed_version": "Official documentation checked 2026-10-28",
+    "topic": "storage",
+    "note": "Official guidance distinguishes small non-integer-key records from large rows; no universal speed claim or local WITHOUT ROWID result.",
+    "checked_at": "2026-10-28",
+    "review_after_days": 90,
+    "evidence": "primary_documented"
+  }
+]

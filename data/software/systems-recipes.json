@@ -1,0 +1,328 @@
+{
+  "recipes": [
+    {
+      "id": "protect-personal-files",
+      "title": "Keep recoverable versions of personal files",
+      "description": "Choose by operating system, interface preference, and where encrypted backup history will be stored.",
+      "picks": [
+        {
+          "app_id": "restic",
+          "label": "Open-source CLI fit",
+          "reason": "Encrypted, versioned backups across supported local and remote storage backends.",
+          "tradeoff": "Requires command-line setup and an independently tested restore process."
+        },
+        {
+          "app_id": "vorta",
+          "label": "Linux and Mac desktop fit",
+          "reason": "Puts Borg profiles, schedules and archive restoration behind a desktop interface.",
+          "tradeoff": "Depends on Borg compatibility and does not provide native Windows support."
+        },
+        {
+          "app_id": "arq-backup",
+          "label": "Premium desktop fit",
+          "reason": "Windows and macOS application for encrypted backups to selected local or cloud destinations.",
+          "tradeoff": "Software licensing and storage-provider charges may be separate."
+        }
+      ]
+    },
+    {
+      "id": "image-a-pc",
+      "title": "Prepare a complete PC recovery image",
+      "description": "Disk imaging protects an operating-system installation; keep personal-file backups and restore tests as separate requirements.",
+      "picks": [
+        {
+          "app_id": "rescuezilla",
+          "label": "Graphical boot-media fit",
+          "reason": "Creates and restores disk images through a GUI with Clonezilla image compatibility.",
+          "tradeoff": "Requires booting recovery media and selecting the destination carefully."
+        },
+        {
+          "app_id": "clonezilla",
+          "label": "Deployment specialist",
+          "reason": "Provides disk and partition imaging with specialist deployment workflows.",
+          "tradeoff": "The boot-media workflow and many options require more familiarity."
+        },
+        {
+          "app_id": "macrium-reflect",
+          "label": "Premium Windows fit",
+          "reason": "Integrates Windows image backups and rescue-media recovery.",
+          "tradeoff": "Commercial edition and subscription terms apply."
+        }
+      ]
+    },
+    {
+      "id": "recover-lost-files",
+      "title": "Choose a recovery tool by failure type",
+      "description": "A failing device, lost partition, and missing file metadata need different tools; recover output to separate storage.",
+      "picks": [
+        {
+          "app_id": "gnu-ddrescue",
+          "label": "Read-error imaging",
+          "reason": "Copies readable areas of damaged media and records a resumable recovery map.",
+          "tradeoff": "It copies sectors; it does not reconstruct a lost filesystem or undelete files."
+        },
+        {
+          "app_id": "testdisk",
+          "label": "Lost-partition specialist",
+          "reason": "Investigates missing partitions and supported damaged filesystem structures.",
+          "tradeoff": "Repair modes can modify disk metadata; work from an image when practical."
+        },
+        {
+          "app_id": "photorec",
+          "label": "Signature-carving fit",
+          "reason": "Looks for supported file content even when directory metadata is unusable.",
+          "tradeoff": "Recovered files can lose their original names and folder layout."
+        },
+        {
+          "app_id": "dmde",
+          "label": "Advanced graphical recovery",
+          "reason": "Offers filesystem reconstruction, disk inspection and RAID-related recovery.",
+          "tradeoff": "Free-edition limits and advanced editing risks require review."
+        }
+      ]
+    },
+    {
+      "id": "understand-disk-space",
+      "title": "Find what is consuming disk space",
+      "description": "Start with measurement and file review before choosing anything to delete.",
+      "picks": [
+        {
+          "app_id": "wiztree",
+          "label": "Windows NTFS specialist",
+          "reason": "Combines a treemap with Windows NTFS metadata scanning.",
+          "tradeoff": "Commercial use requires the appropriate license; WizTreeMac has different behavior."
+        },
+        {
+          "app_id": "windirstat",
+          "label": "Open-source Windows fit",
+          "reason": "Shows a Windows directory-size breakdown and treemap.",
+          "tradeoff": "A size visualization does not establish whether a file is disposable."
+        },
+        {
+          "app_id": "ncdu",
+          "label": "Terminal and SSH fit",
+          "reason": "Provides interactive directory-size navigation without a graphical desktop.",
+          "tradeoff": "Permissions limit visibility, and live files may change during a scan."
+        }
+      ]
+    },
+    {
+      "id": "manage-many-folders",
+      "title": "Manage files across several folders",
+      "description": "Compare graphical dual-pane workflows with terminal-first navigation.",
+      "picks": [
+        {
+          "app_id": "double-commander",
+          "label": "Open-source dual-pane fit",
+          "reason": "Offers a commander-style graphical interface across supported desktop platforms.",
+          "tradeoff": "Advanced operations and plugins still have a learning curve."
+        },
+        {
+          "app_id": "directory-opus",
+          "label": "Premium Windows workflow",
+          "reason": "Offers extensive Windows file-management customization and automation.",
+          "tradeoff": "Commercial licensing and configuration effort apply."
+        },
+        {
+          "app_id": "yazi",
+          "label": "Terminal workflow fit",
+          "reason": "Combines asynchronous terminal navigation with configurable file previews.",
+          "tradeoff": "Preview helpers and terminal image support need compatible setup."
+        }
+      ]
+    },
+    {
+      "id": "support-a-remote-pc",
+      "title": "Help someone on a remote computer",
+      "description": "Match the connection model to the user’s setup and who operates the coordination service.",
+      "picks": [
+        {
+          "app_id": "rustdesk",
+          "label": "Self-hosting fit",
+          "reason": "Supports remote desktop and file transfer with optional self-hosted coordination.",
+          "tradeoff": "Operating a server and unattended-access policy adds administration."
+        },
+        {
+          "app_id": "anydesk",
+          "label": "Commercial support fit",
+          "reason": "Provides a cross-platform remote-support workflow with commercial administration options.",
+          "tradeoff": "Professional use requires the appropriate license."
+        },
+        {
+          "app_id": "remmina",
+          "label": "Linux multi-protocol fit",
+          "reason": "Collects RDP, VNC and SSH connection profiles in one Linux desktop client.",
+          "tradeoff": "It needs an existing remote server and suitable protocol plugins."
+        }
+      ]
+    },
+    {
+      "id": "connect-private-devices",
+      "title": "Connect private devices across networks",
+      "description": "Mesh networking connects devices; it is distinct from buying an Internet exit VPN service.",
+      "picks": [
+        {
+          "app_id": "tailscale",
+          "label": "Managed coordination fit",
+          "reason": "Automates private WireGuard-based device connectivity with identity and access policies.",
+          "tradeoff": "Hosted coordination and plan-specific limits apply."
+        },
+        {
+          "app_id": "netbird",
+          "label": "Self-hosted coordination fit",
+          "reason": "Combines peer networking and access controls with a self-hosting path.",
+          "tradeoff": "Running the management infrastructure adds operational work."
+        },
+        {
+          "app_id": "wireguard",
+          "label": "Manual tunnel specialist",
+          "reason": "Supplies focused encrypted tunnels with explicit peer configuration.",
+          "tradeoff": "Identity management, discovery and routing must be designed separately."
+        }
+      ]
+    },
+    {
+      "id": "organize-passwords",
+      "title": "Replace reused passwords with a vault",
+      "description": "Choose between a locally controlled database and a hosted synchronization and sharing workflow.",
+      "picks": [
+        {
+          "app_id": "keepassxc",
+          "label": "Local encrypted vault",
+          "reason": "Keeps a cross-platform encrypted password database under the user’s control.",
+          "tradeoff": "Sync, backups and recovery must be arranged deliberately."
+        },
+        {
+          "app_id": "bitwarden",
+          "label": "Hosted sharing fit",
+          "reason": "Offers cross-platform vault access and a free entry tier with optional paid sharing features.",
+          "tradeoff": "Advanced account and organization features vary by plan."
+        },
+        {
+          "app_id": "1password",
+          "label": "Premium shared-vault fit",
+          "reason": "Provides integrated desktop and browser workflows for family and team vaults.",
+          "tradeoff": "Requires an ongoing subscription and account recovery planning."
+        }
+      ]
+    },
+    {
+      "id": "encrypt-files-before-sync",
+      "title": "Encrypt files before storing or sharing them",
+      "description": "Select a file vault, mounted container, or command-line envelope according to how applications access the data.",
+      "picks": [
+        {
+          "app_id": "cryptomator",
+          "label": "Cloud-folder fit",
+          "reason": "Encrypts files individually before a supported sync client uploads the vault.",
+          "tradeoff": "Cloud synchronization conflicts and separate mobile terms still matter."
+        },
+        {
+          "app_id": "veracrypt",
+          "label": "Mounted-container fit",
+          "reason": "Lets desktop applications use a mounted encrypted volume.",
+          "tradeoff": "Container synchronization and recovery planning need care."
+        },
+        {
+          "app_id": "age",
+          "label": "Scripted-file fit",
+          "reason": "Encrypts file streams for explicit recipients or a passphrase.",
+          "tradeoff": "Secret keys and recipients are managed outside a graphical vault."
+        }
+      ]
+    },
+    {
+      "id": "try-another-operating-system",
+      "title": "Run another operating system in a virtual machine",
+      "description": "Match host architecture, desired guest, and setup complexity.",
+      "picks": [
+        {
+          "app_id": "virtualbox",
+          "label": "General desktop lab",
+          "reason": "Provides a cross-platform graphical VM workflow with snapshots and virtual networks.",
+          "tradeoff": "Guest architecture support and Extension Pack licensing must be checked."
+        },
+        {
+          "app_id": "utm",
+          "label": "Mac emulation fit",
+          "reason": "Provides a Mac interface to virtualization and architecture emulation.",
+          "tradeoff": "Acceleration depends on backend and host/guest architecture."
+        },
+        {
+          "app_id": "multipass",
+          "label": "Ubuntu CLI fit",
+          "reason": "Launches Ubuntu virtual machines with optional cloud-init configuration.",
+          "tradeoff": "Focused on Ubuntu rather than arbitrary guest operating systems."
+        },
+        {
+          "app_id": "gnome-boxes",
+          "label": "Simple Linux desktop fit",
+          "reason": "Offers a streamlined GNOME workflow to download and create desktop guests.",
+          "tradeoff": "Advanced hypervisor controls are less exposed than in virt-manager."
+        }
+      ]
+    },
+    {
+      "id": "diagnose-hardware-health",
+      "title": "Inspect hardware before changing settings",
+      "description": "Separate component identification, disk health indicators, and stress testing.",
+      "picks": [
+        {
+          "app_id": "hwinfo",
+          "label": "Windows sensor fit",
+          "reason": "Combines detailed hardware inventory with sensor monitoring and logging.",
+          "tradeoff": "Sensor availability is hardware-specific and commercial use has separate terms."
+        },
+        {
+          "app_id": "hardinfo2",
+          "label": "Linux report fit",
+          "reason": "Generates hardware and software information reports with optional benchmark tasks.",
+          "tradeoff": "Synthetic benchmark results need workload context."
+        },
+        {
+          "app_id": "smartmontools",
+          "label": "Storage-health specialist",
+          "reason": "Reads supported drive health data and self-test logs through smartctl and smartd.",
+          "tradeoff": "Controllers can hide data, and a passing health check does not guarantee future reliability."
+        },
+        {
+          "app_id": "memtest86-plus",
+          "label": "Bootable RAM specialist",
+          "reason": "Exercises supported system memory outside the installed OS.",
+          "tradeoff": "Requires boot media and cannot rule out every intermittent hardware problem."
+        }
+      ]
+    },
+    {
+      "id": "investigate-a-slow-network",
+      "title": "Investigate a slow or unstable network",
+      "description": "Measure the path, controlled throughput, and per-process usage separately.",
+      "picks": [
+        {
+          "app_id": "trippy",
+          "label": "Interactive path fit",
+          "reason": "Shows route-level latency and probe statistics in a terminal.",
+          "tradeoff": "Intermediate routers can rate-limit replies without dropping application traffic."
+        },
+        {
+          "app_id": "iperf3",
+          "label": "Controlled throughput fit",
+          "reason": "Measures a configured client/server network workload.",
+          "tradeoff": "Needs a test process at both endpoints and is not a speed test of every application."
+        },
+        {
+          "app_id": "netlimiter",
+          "label": "Windows per-app control",
+          "reason": "Tracks per-application traffic and allows bandwidth rules.",
+          "tradeoff": "Commercial licensing applies and rules can affect application behavior."
+        },
+        {
+          "app_id": "nethogs",
+          "label": "Linux per-process view",
+          "reason": "Groups live bandwidth by the responsible process.",
+          "tradeoff": "Needs capture privileges and is not a long-term accounting database."
+        }
+      ]
+    }
+  ]
+}

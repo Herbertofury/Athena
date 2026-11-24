@@ -1,0 +1,123 @@
+[
+  {
+    "id": "SRCSETWPT01",
+    "title": "WPT srcset splitting and parsing cases",
+    "url": "https://github.com/web-platform-tests/wpt/blob/f7dbbacc9cb1e9466504ca9dfec71646bab8ab5c/html/semantics/embedded-content/the-img-element/srcset/parse-a-srcset-attribute.html",
+    "observed_version": "File last changed at f7dbbacc9cb1e9466504ca9dfec71646bab8ab5c on 2015-04-01; bytes verified against current capture",
+    "topic": "srcset-tokenization",
+    "note": "236 upstream HTML cases; only 24 splitting-loop raw-token expectations are checked locally. No scripts, browser selection or remaining 212 descriptor cases executed.",
+    "checked_at": "2026-11-07",
+    "review_after_days": 90,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "SRCSETPYPI01",
+    "title": "Python srcset package metadata",
+    "url": "https://pypi.org/project/srcset/0.2.0/",
+    "observed_version": "0.2.0 released 2026-10-22; Python >=3.10; Beta",
+    "topic": "srcset-tokenization",
+    "note": "No runtime dependencies declared. Package was not installed or executed; release artifact/source-byte equivalence was not verified.",
+    "checked_at": "2026-11-07",
+    "review_after_days": 90,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "SRCSETPYSCAN01",
+    "title": "Python srcset ASCII scanner",
+    "url": "https://github.com/JaviLianes8/srcset/blob/cbfefc37831b2d826ba03986c86933c5995f06e7/src/srcset/_scan.py",
+    "observed_version": "Source revision cbfefc37831b2d826ba03986c86933c5995f06e7, 2026-10-14",
+    "topic": "srcset-tokenization",
+    "note": "Private raw scanner uses ASCII/state boundaries. Source inspection only; importing private API was rejected as a fragile dependency.",
+    "checked_at": "2026-11-07",
+    "review_after_days": 90,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "SRCSETPYPARSE01",
+    "title": "Python srcset public parser",
+    "url": "https://github.com/JaviLianes8/srcset/blob/cbfefc37831b2d826ba03986c86933c5995f06e7/src/srcset/_parse.py",
+    "observed_version": "Source revision cbfefc37831b2d826ba03986c86933c5995f06e7",
+    "topic": "srcset-tokenization",
+    "note": "Public parse validates and drops invalid descriptors, changing the existing descriptor-opaque URL projection. Candidate for a separately scoped validation upgrade, not adopted here.",
+    "checked_at": "2026-11-07",
+    "review_after_days": 90,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "SRCSETPYLIC01",
+    "title": "Python srcset license",
+    "url": "https://github.com/JaviLianes8/srcset/blob/cbfefc37831b2d826ba03986c86933c5995f06e7/LICENSE",
+    "observed_version": "MIT license at the inspected source revision",
+    "topic": "srcset-tokenization",
+    "note": "No license fee. No upstream code or package artifact copied into Atlas.",
+    "checked_at": "2026-11-07",
+    "review_after_days": 90,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "SRCSETJSREL01",
+    "title": "JavaScript srcset release",
+    "url": "https://github.com/sindresorhus/srcset/releases/tag/v5.0.3",
+    "observed_version": "5.0.3 released 2026-01-12",
+    "topic": "srcset-tokenization",
+    "note": "Recent source activity was observed in September 2026. Maintenance activity is not correctness acceptance.",
+    "checked_at": "2026-11-07",
+    "review_after_days": 90,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "SRCSETJSSRC01",
+    "title": "JavaScript srcset parser source",
+    "url": "https://github.com/sindresorhus/srcset/blob/ba98493d7a940dc43be6089824fc60b870c94784/index.js",
+    "observed_version": "Source revision ba98493d7a940dc43be6089824fc60b870c94784, 2026-09-18",
+    "topic": "srcset-tokenization",
+    "note": "Loose regex and Unicode whitespace differ from the targeted ASCII boundaries. Strict mode uses authoring checks; adding an ESM runtime boundary was not justified. Source inspected, not executed.",
+    "checked_at": "2026-11-07",
+    "review_after_days": 90,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "SRCSETJSLIC01",
+    "title": "JavaScript srcset license",
+    "url": "https://github.com/sindresorhus/srcset/blob/ba98493d7a940dc43be6089824fc60b870c94784/license",
+    "observed_version": "MIT license at the inspected source revision",
+    "topic": "srcset-tokenization",
+    "note": "No license fee. No upstream code or package artifact copied into Atlas.",
+    "checked_at": "2026-11-07",
+    "review_after_days": 90,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "SRCSETPRETREL01",
+    "title": "Prettier parse-srcset release",
+    "url": "https://github.com/prettier/parse-srcset/releases/tag/v3.1.0",
+    "observed_version": "3.1.0 released 2023-07-07",
+    "topic": "srcset-tokenization",
+    "note": "Latest observed HEAD remained the release-era source; no recent-maintenance claim made.",
+    "checked_at": "2026-11-07",
+    "review_after_days": 90,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "SRCSETPRETSRC01",
+    "title": "Prettier parse-srcset parser source",
+    "url": "https://github.com/prettier/parse-srcset/blob/c5594a45f587029b43d9b422dfc0bad6bfd2b175/index.js",
+    "observed_version": "Source revision c5594a45f587029b43d9b422dfc0bad6bfd2b175, 2023-07-07",
+    "topic": "srcset-tokenization",
+    "note": "Direct adoption rejected: empty/all-invalid results and invalid descriptors can throw with raw input in the message. ESM integration and different recovery semantics are additional costs. Source inspected, not executed.",
+    "checked_at": "2026-11-07",
+    "review_after_days": 90,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "SRCSETPRETLIC01",
+    "title": "Prettier parse-srcset license",
+    "url": "https://github.com/prettier/parse-srcset/blob/c5594a45f587029b43d9b422dfc0bad6bfd2b175/license",
+    "observed_version": "MIT license at the inspected source revision",
+    "topic": "srcset-tokenization",
+    "note": "No license fee. No upstream code or package artifact copied into Atlas.",
+    "checked_at": "2026-11-07",
+    "review_after_days": 90,
+    "evidence": "primary_documented"
+  }
+]

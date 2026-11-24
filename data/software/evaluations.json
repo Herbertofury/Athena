@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "evaluations": [
+    {
+      "id": "fixed-string-search-20261115",
+      "title": "Fixed-string search with equivalent output",
+      "app_ids": [
+        "gnu-grep",
+        "ripgrep"
+      ],
+      "tool_app_ids": {
+        "gnu-grep": "gnu-grep",
+        "ripgrep-auto": "ripgrep",
+        "ripgrep-one-thread": "ripgrep"
+      },
+      "measured_at": "2026-11-15T03:16:21.856639+00:00",
+      "summary": "On these four synthetic warm-cache Linux workloads, ripgrep had lower median time on selective and no-match searches; dense-output timings overlapped. Complete outputs and exit codes matched an independent oracle in every run.",
+      "limitations": [
+        "One shared Linux container; scheduler load, CPU quota, filesystem and caching can change results.",
+        "Synthetic plain-text workloads with no symlinks, binary data, regular expressions, encoding conversion or real repository ignore policy.",
+        "Exact installed versions and executable hashes are recorded; results do not compare every current release or platform.",
+        "No RAM, energy, security, accessibility, cold-cache or universal speed ranking is measured."
+      ],
+      "report_path": "research/software-expansion-2026-11-15/search-benchmark.md",
+      "data_path": "research/software-expansion-2026-11-15/search-benchmark.json",
+      "script_path": "scripts/benchmark_software_search.py",
+      "data_sha256": "4f0e1332ddfdd0997d21cb07c78493add242a50dfe2650c86a90583652e101a1",
+      "script_sha256": "985e057ef764267c822ead907c9098cb38f29a99da4f429d16d2abd9079036be"
+    }
+  ]
+}

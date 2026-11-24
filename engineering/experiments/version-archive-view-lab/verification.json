@@ -1,0 +1,28 @@
+{
+  "scope": "Actual local application feature; generated UI events are not native-browser acceptance",
+  "baseline_commit": "fc410df3ce331bb8e1c5b1debd24f06c75cdf45b",
+  "version_http_checks": 71,
+  "existing_project_http_checks": 73,
+  "existing_project_javascript_checks": 8,
+  "rust_unit": 133,
+  "rust_integration": 9,
+  "example_tests": 25,
+  "node_tests": 244,
+  "python_tests_normal": 237,
+  "python_tests_optimized": 237,
+  "clippy_all_targets": "passed",
+  "source_database_and_snapshots_unchanged": true,
+  "initial_reader_failures": 4,
+  "initial_close_viewer_failure": 1,
+  "sources": {
+    "apps/atlas-lab/src/server.rs": "8d3fa83d5c3fcd60f7c17af309a5a9b95132ef6c6bc1c418b5432ca774140867",
+    "apps/atlas-lab/ui/archive-view.mjs": "8d12afe11c5cc1929c66106c5c3e7a966c09f05bdb7223824dbe9089c7c99489",
+    "apps/atlas-lab/ui/app.js": "8f5ac93506cf86cbd413aea52661ae08195ad7901f19e18660a1f544b1e72e70",
+    "apps/atlas-lab/ui/index.html": "e6d3557f8d85e37b0a1c1b90f4b4d87e38cf2d099e7fae6129db7626ecfe88c9",
+    "apps/atlas-lab/Cargo.lock": "4ba18f93c261a48a42ea595be3f8a37b6d9c419912d7e7875204ac0641e2dd85",
+    "tests/version-archive-view.test.mjs": "fea716313d9400e94e439e812ce1a153d5d85b5a120c4861469dfa599cf79ed6",
+    "tests/version-archive-ui.test.mjs": "401b770fe79d6fa7cca55b07c484822ab560573958b30323ce8b53f623d786b0"
+  },
+  "browser_acceptance": "blocked; not claimed",
+  "promotion": "No external project changes or candidate dependency upgrade"
+}

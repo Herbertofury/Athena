@@ -1,0 +1,24 @@
+[
+  {
+    "id": "SQLINT01",
+    "title": "SQLite rowid and declared integer primary keys",
+    "url": "https://sqlite.org/rowidtable.html",
+    "observed_version": "Official documentation checked 2026-10-29",
+    "topic": "storage",
+    "note": "Declared INTEGER PRIMARY KEY aliases rowid; this does not establish a universal layout speedup.",
+    "checked_at": "2026-10-29",
+    "review_after_days": 90,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "SQLFK01",
+    "title": "SQLite foreign-key requirements",
+    "url": "https://sqlite.org/foreignkeys.html",
+    "observed_version": "Official documentation checked 2026-10-29",
+    "topic": "storage",
+    "note": "Named parent keys and per-connection enforcement remain explicit in the isolated compact-layout experiment.",
+    "checked_at": "2026-10-29",
+    "review_after_days": 90,
+    "evidence": "primary_documented"
+  }
+]

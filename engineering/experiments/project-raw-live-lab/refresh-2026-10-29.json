@@ -1,0 +1,20 @@
+{
+  "checked_at": "2026-10-29T20:42:57.851207+00:00",
+  "scope": "Actual Rust public CLI request against an isolated copy of retained-public and generated test snapshots; original database read-only",
+  "binary_sha256": "54560c637a01fd627505be2cbff00eb323bace0216b5258340564cbabfce98db",
+  "exit_code": 1,
+  "prior_rows": 6,
+  "after_rows": 6,
+  "prior_rows_exactly_retained": true,
+  "source_database_unchanged": true,
+  "last_attempt": "failure",
+  "integrity_check": "ok",
+  "network_success": false,
+  "fresh_empty_database_attempt": {
+    "success": false,
+    "snapshot_rows": 0,
+    "failure_recorded": true,
+    "failure_category": "connection timeout"
+  },
+  "copied_database_attempt_failure_category": "connection timeout"
+}

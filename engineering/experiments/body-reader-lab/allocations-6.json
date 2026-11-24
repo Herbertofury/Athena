@@ -1,0 +1,784 @@
+{
+  "compiler": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+  "complete": true,
+  "counter_sha256": "be6e4c674e4388763ffce5f273cf5aba80dfb06abf7b52502615025cd1c0ce3c",
+  "harness_sha256": "d4a10388aeba29f2f1009373751d24716f292649fde327a40d82cb4ec1b390c6",
+  "input_bytes": 0,
+  "input_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "lock_sha256": "4ba18f93c261a48a42ea595be3f8a37b6d9c419912d7e7875204ac0641e2dd85",
+  "profile": "release",
+  "reader_sha256": "6a0d0ddd4ea83f7351d28de8205556bb71c0ed89204ca2b21f2f9997da57d171",
+  "samples": [
+    {
+      "advertised_length": null,
+      "allocations": {
+        "allocation_calls": 0,
+        "held_requested_rust_bytes_above_start": 0,
+        "peak_requested_rust_bytes_above_start": 0,
+        "reallocation_calls": 0,
+        "total_successfully_requested_bytes": 0
+      },
+      "complete_bytes_equal": true,
+      "fragment_bytes": 1,
+      "hint_mode": "unknown",
+      "lane": "baseline",
+      "output_capacity": 0,
+      "start_live_requested_bytes": 842
+    },
+    {
+      "advertised_length": null,
+      "allocations": {
+        "allocation_calls": 0,
+        "held_requested_rust_bytes_above_start": 0,
+        "peak_requested_rust_bytes_above_start": 0,
+        "reallocation_calls": 0,
+        "total_successfully_requested_bytes": 0
+      },
+      "complete_bytes_equal": true,
+      "fragment_bytes": 1,
+      "hint_mode": "unknown",
+      "lane": "reserved",
+      "output_capacity": 0,
+      "start_live_requested_bytes": 2507
+    },
+    {
+      "advertised_length": null,
+      "allocations": {
+        "allocation_calls": 0,
+        "held_requested_rust_bytes_above_start": 0,
+        "peak_requested_rust_bytes_above_start": 0,
+        "reallocation_calls": 0,
+        "total_successfully_requested_bytes": 0
+      },
+      "complete_bytes_equal": true,
+      "fragment_bytes": 1,
+      "hint_mode": "unknown",
+      "lane": "adaptive",
+      "output_capacity": 0,
+      "start_live_requested_bytes": 4044
+    },
+    {
+      "advertised_length": 0,
+      "allocations": {
+        "allocation_calls": 0,
+        "held_requested_rust_bytes_above_start": 0,
+        "peak_requested_rust_bytes_above_start": 0,
+        "reallocation_calls": 0,
+        "total_successfully_requested_bytes": 0
+      },
+      "complete_bytes_equal": true,
+      "fragment_bytes": 1,
+      "hint_mode": "exact",
+      "lane": "baseline",
+      "output_capacity": 0,
+      "start_live_requested_bytes": 5581
+    },
+    {
+      "advertised_length": 0,
+      "allocations": {
+        "allocation_calls": 0,
+        "held_requested_rust_bytes_above_start": 0,
+        "peak_requested_rust_bytes_above_start": 0,
+        "reallocation_calls": 0,
+        "total_successfully_requested_bytes": 0
+      },
+      "complete_bytes_equal": true,
+      "fragment_bytes": 1,
+      "hint_mode": "exact",
+      "lane": "reserved",
+      "output_capacity": 0,
+      "start_live_requested_bytes": 7116
+    },
+    {
+      "advertised_length": 0,
+      "allocations": {
+        "allocation_calls": 0,
+        "held_requested_rust_bytes_above_start": 0,
+        "peak_requested_rust_bytes_above_start": 0,
+        "reallocation_calls": 0,
+        "total_successfully_requested_bytes": 0
+      },
+      "complete_bytes_equal": true,
+      "fragment_bytes": 1,
+      "hint_mode": "exact",
+      "lane": "adaptive",
+      "output_capacity": 0,
+      "start_live_requested_bytes": 8779
+    },
+    {
+      "advertised_length": 2097152,
+      "allocations": {
+        "allocation_calls": 0,
+        "held_requested_rust_bytes_above_start": 0,
+        "peak_requested_rust_bytes_above_start": 0,
+        "reallocation_calls": 0,
+        "total_successfully_requested_bytes": 0
+      },
+      "complete_bytes_equal": true,
+      "fragment_bytes": 1,
+      "hint_mode": "overstated",
+      "lane": "baseline",
+      "output_capacity": 0,
+      "start_live_requested_bytes": 10314
+    },
+    {
+      "advertised_length": 2097152,
+      "allocations": {
+        "allocation_calls": 1,
+        "held_requested_rust_bytes_above_start": 2097152,
+        "peak_requested_rust_bytes_above_start": 2097152,
+        "reallocation_calls": 0,
+        "total_successfully_requested_bytes": 2097152
+      },
+      "complete_bytes_equal": true,
+      "fragment_bytes": 1,
+      "hint_mode": "overstated",
+      "lane": "reserved",
+      "output_capacity": 2097152,
+      "start_live_requested_bytes": 11854
+    },
+    {
+      "advertised_length": 2097152,
+      "allocations": {
+        "allocation_calls": 0,
+        "held_requested_rust_bytes_above_start": 0,
+        "peak_requested_rust_bytes_above_start": 0,
+        "reallocation_calls": 0,
+        "total_successfully_requested_bytes": 0
+      },
+      "complete_bytes_equal": true,
+      "fragment_bytes": 1,
+      "hint_mode": "overstated",
+      "lane": "adaptive",
+      "output_capacity": 0,
+      "start_live_requested_bytes": 13394
+    },
+    {
+      "advertised_length": 0,
+      "allocations": {
+        "allocation_calls": 0,
+        "held_requested_rust_bytes_above_start": 0,
+        "peak_requested_rust_bytes_above_start": 0,
+        "reallocation_calls": 0,
+        "total_successfully_requested_bytes": 0
+      },
+      "complete_bytes_equal": true,
+      "fragment_bytes": 1,
+      "hint_mode": "understated",
+      "lane": "baseline",
+      "output_capacity": 0,
+      "start_live_requested_bytes": 15190
+    },
+    {
+      "advertised_length": 0,
+      "allocations": {
+        "allocation_calls": 0,
+        "held_requested_rust_bytes_above_start": 0,
+        "peak_requested_rust_bytes_above_start": 0,
+        "reallocation_calls": 0,
+        "total_successfully_requested_bytes": 0
+      },
+      "complete_bytes_equal": true,
+      "fragment_bytes": 1,
+      "hint_mode": "understated",
+      "lane": "reserved",
+      "output_capacity": 0,
+      "start_live_requested_bytes": 16731
+    },
+    {
+      "advertised_length": 0,
+      "allocations": {
+        "allocation_calls": 0,
+        "held_requested_rust_bytes_above_start": 0,
+        "peak_requested_rust_bytes_above_start": 0,
+        "reallocation_calls": 0,
+        "total_successfully_requested_bytes": 0
+      },
+      "complete_bytes_equal": true,
+      "fragment_bytes": 1,
+      "hint_mode": "understated",
+      "lane": "adaptive",
+      "output_capacity": 0,
+      "start_live_requested_bytes": 18272
+    },
+    {
+      "advertised_length": null,
+      "allocations": {
+        "allocation_calls": 0,
+        "held_requested_rust_bytes_above_start": 0,
+        "peak_requested_rust_bytes_above_start": 0,
+        "reallocation_calls": 0,
+        "total_successfully_requested_bytes": 0
+      },
+      "complete_bytes_equal": true,
+      "fragment_bytes": 31,
+      "hint_mode": "unknown",
+      "lane": "baseline",
+      "output_capacity": 0,
+      "start_live_requested_bytes": 19813
+    },
+    {
+      "advertised_length": null,
+      "allocations": {
+        "allocation_calls": 0,
+        "held_requested_rust_bytes_above_start": 0,
+        "peak_requested_rust_bytes_above_start": 0,
+        "reallocation_calls": 0,
+        "total_successfully_requested_bytes": 0
+      },
+      "complete_bytes_equal": true,
+      "fragment_bytes": 31,
+      "hint_mode": "unknown",
+      "lane": "reserved",
+      "output_capacity": 0,
+      "start_live_requested_bytes": 21350
+    },
+    {
+      "advertised_length": null,
+      "allocations": {
+        "allocation_calls": 0,
+        "held_requested_rust_bytes_above_start": 0,
+        "peak_requested_rust_bytes_above_start": 0,
+        "reallocation_calls": 0,
+        "total_successfully_requested_bytes": 0
+      },
+      "complete_bytes_equal": true,
+      "fragment_bytes": 31,
+      "hint_mode": "unknown",
+      "lane": "adaptive",
+      "output_capacity": 0,
+      "start_live_requested_bytes": 22887
+    },
+    {
+      "advertised_length": 0,
+      "allocations": {
+        "allocation_calls": 0,
+        "held_requested_rust_bytes_above_start": 0,
+        "peak_requested_rust_bytes_above_start": 0,
+        "reallocation_calls": 0,
+        "total_successfully_requested_bytes": 0
+      },
+      "complete_bytes_equal": true,
+      "fragment_bytes": 31,
+      "hint_mode": "exact",
+      "lane": "baseline",
+      "output_capacity": 0,
+      "start_live_requested_bytes": 24424
+    },
+    {
+      "advertised_length": 0,
+      "allocations": {
+        "allocation_calls": 0,
+        "held_requested_rust_bytes_above_start": 0,
+        "peak_requested_rust_bytes_above_start": 0,
+        "reallocation_calls": 0,
+        "total_successfully_requested_bytes": 0
+      },
+      "complete_bytes_equal": true,
+      "fragment_bytes": 31,
+      "hint_mode": "exact",
+      "lane": "reserved",
+      "output_capacity": 0,
+      "start_live_requested_bytes": 25959
+    },
+    {
+      "advertised_length": 0,
+      "allocations": {
+        "allocation_calls": 0,
+        "held_requested_rust_bytes_above_start": 0,
+        "peak_requested_rust_bytes_above_start": 0,
+        "reallocation_calls": 0,
+        "total_successfully_requested_bytes": 0
+      },
+      "complete_bytes_equal": true,
+      "fragment_bytes": 31,
+      "hint_mode": "exact",
+      "lane": "adaptive",
+      "output_capacity": 0,
+      "start_live_requested_bytes": 28006
+    },
+    {
+      "advertised_length": 2097152,
+      "allocations": {
+        "allocation_calls": 0,
+        "held_requested_rust_bytes_above_start": 0,
+        "peak_requested_rust_bytes_above_start": 0,
+        "reallocation_calls": 0,
+        "total_successfully_requested_bytes": 0
+      },
+      "complete_bytes_equal": true,
+      "fragment_bytes": 31,
+      "hint_mode": "overstated",
+      "lane": "baseline",
+      "output_capacity": 0,
+      "start_live_requested_bytes": 29541
+    },
+    {
+      "advertised_length": 2097152,
+      "allocations": {
+        "allocation_calls": 1,
+        "held_requested_rust_bytes_above_start": 2097152,
+        "peak_requested_rust_bytes_above_start": 2097152,
+        "reallocation_calls": 0,
+        "total_successfully_requested_bytes": 2097152
+      },
+      "complete_bytes_equal": true,
+      "fragment_bytes": 31,
+      "hint_mode": "overstated",
+      "lane": "reserved",
+      "output_capacity": 2097152,
+      "start_live_requested_bytes": 31081
+    },
+    {
+      "advertised_length": 2097152,
+      "allocations": {
+        "allocation_calls": 0,
+        "held_requested_rust_bytes_above_start": 0,
+        "peak_requested_rust_bytes_above_start": 0,
+        "reallocation_calls": 0,
+        "total_successfully_requested_bytes": 0
+      },
+      "complete_bytes_equal": true,
+      "fragment_bytes": 31,
+      "hint_mode": "overstated",
+      "lane": "adaptive",
+      "output_capacity": 0,
+      "start_live_requested_bytes": 32621
+    },
+    {
+      "advertised_length": 0,
+      "allocations": {
+        "allocation_calls": 0,
+        "held_requested_rust_bytes_above_start": 0,
+        "peak_requested_rust_bytes_above_start": 0,
+        "reallocation_calls": 0,
+        "total_successfully_requested_bytes": 0
+      },
+      "complete_bytes_equal": true,
+      "fragment_bytes": 31,
+      "hint_mode": "understated",
+      "lane": "baseline",
+      "output_capacity": 0,
+      "start_live_requested_bytes": 34161
+    },
+    {
+      "advertised_length": 0,
+      "allocations": {
+        "allocation_calls": 0,
+        "held_requested_rust_bytes_above_start": 0,
+        "peak_requested_rust_bytes_above_start": 0,
+        "reallocation_calls": 0,
+        "total_successfully_requested_bytes": 0
+      },
+      "complete_bytes_equal": true,
+      "fragment_bytes": 31,
+      "hint_mode": "understated",
+      "lane": "reserved",
+      "output_capacity": 0,
+      "start_live_requested_bytes": 35702
+    },
+    {
+      "advertised_length": 0,
+      "allocations": {
+        "allocation_calls": 0,
+        "held_requested_rust_bytes_above_start": 0,
+        "peak_requested_rust_bytes_above_start": 0,
+        "reallocation_calls": 0,
+        "total_successfully_requested_bytes": 0
+      },
+      "complete_bytes_equal": true,
+      "fragment_bytes": 31,
+      "hint_mode": "understated",
+      "lane": "adaptive",
+      "output_capacity": 0,
+      "start_live_requested_bytes": 37243
+    },
+    {
+      "advertised_length": null,
+      "allocations": {
+        "allocation_calls": 0,
+        "held_requested_rust_bytes_above_start": 0,
+        "peak_requested_rust_bytes_above_start": 0,
+        "reallocation_calls": 0,
+        "total_successfully_requested_bytes": 0
+      },
+      "complete_bytes_equal": true,
+      "fragment_bytes": 4096,
+      "hint_mode": "unknown",
+      "lane": "baseline",
+      "output_capacity": 0,
+      "start_live_requested_bytes": 38784
+    },
+    {
+      "advertised_length": null,
+      "allocations": {
+        "allocation_calls": 0,
+        "held_requested_rust_bytes_above_start": 0,
+        "peak_requested_rust_bytes_above_start": 0,
+        "reallocation_calls": 0,
+        "total_successfully_requested_bytes": 0
+      },
+      "complete_bytes_equal": true,
+      "fragment_bytes": 4096,
+      "hint_mode": "unknown",
+      "lane": "reserved",
+      "output_capacity": 0,
+      "start_live_requested_bytes": 40321
+    },
+    {
+      "advertised_length": null,
+      "allocations": {
+        "allocation_calls": 0,
+        "held_requested_rust_bytes_above_start": 0,
+        "peak_requested_rust_bytes_above_start": 0,
+        "reallocation_calls": 0,
+        "total_successfully_requested_bytes": 0
+      },
+      "complete_bytes_equal": true,
+      "fragment_bytes": 4096,
+      "hint_mode": "unknown",
+      "lane": "adaptive",
+      "output_capacity": 0,
+      "start_live_requested_bytes": 41858
+    },
+    {
+      "advertised_length": 0,
+      "allocations": {
+        "allocation_calls": 0,
+        "held_requested_rust_bytes_above_start": 0,
+        "peak_requested_rust_bytes_above_start": 0,
+        "reallocation_calls": 0,
+        "total_successfully_requested_bytes": 0
+      },
+      "complete_bytes_equal": true,
+      "fragment_bytes": 4096,
+      "hint_mode": "exact",
+      "lane": "baseline",
+      "output_capacity": 0,
+      "start_live_requested_bytes": 43395
+    },
+    {
+      "advertised_length": 0,
+      "allocations": {
+        "allocation_calls": 0,
+        "held_requested_rust_bytes_above_start": 0,
+        "peak_requested_rust_bytes_above_start": 0,
+        "reallocation_calls": 0,
+        "total_successfully_requested_bytes": 0
+      },
+      "complete_bytes_equal": true,
+      "fragment_bytes": 4096,
+      "hint_mode": "exact",
+      "lane": "reserved",
+      "output_capacity": 0,
+      "start_live_requested_bytes": 44930
+    },
+    {
+      "advertised_length": 0,
+      "allocations": {
+        "allocation_calls": 0,
+        "held_requested_rust_bytes_above_start": 0,
+        "peak_requested_rust_bytes_above_start": 0,
+        "reallocation_calls": 0,
+        "total_successfully_requested_bytes": 0
+      },
+      "complete_bytes_equal": true,
+      "fragment_bytes": 4096,
+      "hint_mode": "exact",
+      "lane": "adaptive",
+      "output_capacity": 0,
+      "start_live_requested_bytes": 46465
+    },
+    {
+      "advertised_length": 2097152,
+      "allocations": {
+        "allocation_calls": 0,
+        "held_requested_rust_bytes_above_start": 0,
+        "peak_requested_rust_bytes_above_start": 0,
+        "reallocation_calls": 0,
+        "total_successfully_requested_bytes": 0
+      },
+      "complete_bytes_equal": true,
+      "fragment_bytes": 4096,
+      "hint_mode": "overstated",
+      "lane": "baseline",
+      "output_capacity": 0,
+      "start_live_requested_bytes": 48000
+    },
+    {
+      "advertised_length": 2097152,
+      "allocations": {
+        "allocation_calls": 1,
+        "held_requested_rust_bytes_above_start": 2097152,
+        "peak_requested_rust_bytes_above_start": 2097152,
+        "reallocation_calls": 0,
+        "total_successfully_requested_bytes": 2097152
+      },
+      "complete_bytes_equal": true,
+      "fragment_bytes": 4096,
+      "hint_mode": "overstated",
+      "lane": "reserved",
+      "output_capacity": 2097152,
+      "start_live_requested_bytes": 49540
+    },
+    {
+      "advertised_length": 2097152,
+      "allocations": {
+        "allocation_calls": 0,
+        "held_requested_rust_bytes_above_start": 0,
+        "peak_requested_rust_bytes_above_start": 0,
+        "reallocation_calls": 0,
+        "total_successfully_requested_bytes": 0
+      },
+      "complete_bytes_equal": true,
+      "fragment_bytes": 4096,
+      "hint_mode": "overstated",
+      "lane": "adaptive",
+      "output_capacity": 0,
+      "start_live_requested_bytes": 51080
+    },
+    {
+      "advertised_length": 0,
+      "allocations": {
+        "allocation_calls": 0,
+        "held_requested_rust_bytes_above_start": 0,
+        "peak_requested_rust_bytes_above_start": 0,
+        "reallocation_calls": 0,
+        "total_successfully_requested_bytes": 0
+      },
+      "complete_bytes_equal": true,
+      "fragment_bytes": 4096,
+      "hint_mode": "understated",
+      "lane": "baseline",
+      "output_capacity": 0,
+      "start_live_requested_bytes": 53644
+    },
+    {
+      "advertised_length": 0,
+      "allocations": {
+        "allocation_calls": 0,
+        "held_requested_rust_bytes_above_start": 0,
+        "peak_requested_rust_bytes_above_start": 0,
+        "reallocation_calls": 0,
+        "total_successfully_requested_bytes": 0
+      },
+      "complete_bytes_equal": true,
+      "fragment_bytes": 4096,
+      "hint_mode": "understated",
+      "lane": "reserved",
+      "output_capacity": 0,
+      "start_live_requested_bytes": 55185
+    },
+    {
+      "advertised_length": 0,
+      "allocations": {
+        "allocation_calls": 0,
+        "held_requested_rust_bytes_above_start": 0,
+        "peak_requested_rust_bytes_above_start": 0,
+        "reallocation_calls": 0,
+        "total_successfully_requested_bytes": 0
+      },
+      "complete_bytes_equal": true,
+      "fragment_bytes": 4096,
+      "hint_mode": "understated",
+      "lane": "adaptive",
+      "output_capacity": 0,
+      "start_live_requested_bytes": 56726
+    },
+    {
+      "advertised_length": null,
+      "allocations": {
+        "allocation_calls": 0,
+        "held_requested_rust_bytes_above_start": 0,
+        "peak_requested_rust_bytes_above_start": 0,
+        "reallocation_calls": 0,
+        "total_successfully_requested_bytes": 0
+      },
+      "complete_bytes_equal": true,
+      "fragment_bytes": 65536,
+      "hint_mode": "unknown",
+      "lane": "baseline",
+      "output_capacity": 0,
+      "start_live_requested_bytes": 58267
+    },
+    {
+      "advertised_length": null,
+      "allocations": {
+        "allocation_calls": 0,
+        "held_requested_rust_bytes_above_start": 0,
+        "peak_requested_rust_bytes_above_start": 0,
+        "reallocation_calls": 0,
+        "total_successfully_requested_bytes": 0
+      },
+      "complete_bytes_equal": true,
+      "fragment_bytes": 65536,
+      "hint_mode": "unknown",
+      "lane": "reserved",
+      "output_capacity": 0,
+      "start_live_requested_bytes": 59804
+    },
+    {
+      "advertised_length": null,
+      "allocations": {
+        "allocation_calls": 0,
+        "held_requested_rust_bytes_above_start": 0,
+        "peak_requested_rust_bytes_above_start": 0,
+        "reallocation_calls": 0,
+        "total_successfully_requested_bytes": 0
+      },
+      "complete_bytes_equal": true,
+      "fragment_bytes": 65536,
+      "hint_mode": "unknown",
+      "lane": "adaptive",
+      "output_capacity": 0,
+      "start_live_requested_bytes": 61341
+    },
+    {
+      "advertised_length": 0,
+      "allocations": {
+        "allocation_calls": 0,
+        "held_requested_rust_bytes_above_start": 0,
+        "peak_requested_rust_bytes_above_start": 0,
+        "reallocation_calls": 0,
+        "total_successfully_requested_bytes": 0
+      },
+      "complete_bytes_equal": true,
+      "fragment_bytes": 65536,
+      "hint_mode": "exact",
+      "lane": "baseline",
+      "output_capacity": 0,
+      "start_live_requested_bytes": 62878
+    },
+    {
+      "advertised_length": 0,
+      "allocations": {
+        "allocation_calls": 0,
+        "held_requested_rust_bytes_above_start": 0,
+        "peak_requested_rust_bytes_above_start": 0,
+        "reallocation_calls": 0,
+        "total_successfully_requested_bytes": 0
+      },
+      "complete_bytes_equal": true,
+      "fragment_bytes": 65536,
+      "hint_mode": "exact",
+      "lane": "reserved",
+      "output_capacity": 0,
+      "start_live_requested_bytes": 64413
+    },
+    {
+      "advertised_length": 0,
+      "allocations": {
+        "allocation_calls": 0,
+        "held_requested_rust_bytes_above_start": 0,
+        "peak_requested_rust_bytes_above_start": 0,
+        "reallocation_calls": 0,
+        "total_successfully_requested_bytes": 0
+      },
+      "complete_bytes_equal": true,
+      "fragment_bytes": 65536,
+      "hint_mode": "exact",
+      "lane": "adaptive",
+      "output_capacity": 0,
+      "start_live_requested_bytes": 65948
+    },
+    {
+      "advertised_length": 2097152,
+      "allocations": {
+        "allocation_calls": 0,
+        "held_requested_rust_bytes_above_start": 0,
+        "peak_requested_rust_bytes_above_start": 0,
+        "reallocation_calls": 0,
+        "total_successfully_requested_bytes": 0
+      },
+      "complete_bytes_equal": true,
+      "fragment_bytes": 65536,
+      "hint_mode": "overstated",
+      "lane": "baseline",
+      "output_capacity": 0,
+      "start_live_requested_bytes": 67483
+    },
+    {
+      "advertised_length": 2097152,
+      "allocations": {
+        "allocation_calls": 1,
+        "held_requested_rust_bytes_above_start": 2097152,
+        "peak_requested_rust_bytes_above_start": 2097152,
+        "reallocation_calls": 0,
+        "total_successfully_requested_bytes": 2097152
+      },
+      "complete_bytes_equal": true,
+      "fragment_bytes": 65536,
+      "hint_mode": "overstated",
+      "lane": "reserved",
+      "output_capacity": 2097152,
+      "start_live_requested_bytes": 69023
+    },
+    {
+      "advertised_length": 2097152,
+      "allocations": {
+        "allocation_calls": 0,
+        "held_requested_rust_bytes_above_start": 0,
+        "peak_requested_rust_bytes_above_start": 0,
+        "reallocation_calls": 0,
+        "total_successfully_requested_bytes": 0
+      },
+      "complete_bytes_equal": true,
+      "fragment_bytes": 65536,
+      "hint_mode": "overstated",
+      "lane": "adaptive",
+      "output_capacity": 0,
+      "start_live_requested_bytes": 70563
+    },
+    {
+      "advertised_length": 0,
+      "allocations": {
+        "allocation_calls": 0,
+        "held_requested_rust_bytes_above_start": 0,
+        "peak_requested_rust_bytes_above_start": 0,
+        "reallocation_calls": 0,
+        "total_successfully_requested_bytes": 0
+      },
+      "complete_bytes_equal": true,
+      "fragment_bytes": 65536,
+      "hint_mode": "understated",
+      "lane": "baseline",
+      "output_capacity": 0,
+      "start_live_requested_bytes": 72103
+    },
+    {
+      "advertised_length": 0,
+      "allocations": {
+        "allocation_calls": 0,
+        "held_requested_rust_bytes_above_start": 0,
+        "peak_requested_rust_bytes_above_start": 0,
+        "reallocation_calls": 0,
+        "total_successfully_requested_bytes": 0
+      },
+      "complete_bytes_equal": true,
+      "fragment_bytes": 65536,
+      "hint_mode": "understated",
+      "lane": "reserved",
+      "output_capacity": 0,
+      "start_live_requested_bytes": 73644
+    },
+    {
+      "advertised_length": 0,
+      "allocations": {
+        "allocation_calls": 0,
+        "held_requested_rust_bytes_above_start": 0,
+        "peak_requested_rust_bytes_above_start": 0,
+        "reallocation_calls": 0,
+        "total_successfully_requested_bytes": 0
+      },
+      "complete_bytes_equal": true,
+      "fragment_bytes": 65536,
+      "hint_mode": "understated",
+      "lane": "adaptive",
+      "output_capacity": 0,
+      "start_live_requested_bytes": 75185
+    }
+  ],
+  "schema_version": 1,
+  "scope": "Generated fragmentation of full retained bytes; requested Rust allocations only, not real HTTP, RSS or speed; baseline adds only checked limit arithmetic for safe experiment bounds",
+  "target": "x86_64-unknown-linux-gnu"
+}

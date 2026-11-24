@@ -1,0 +1,42 @@
+{
+  "scope": "actual baseline/candidate callback execution with generated delivery fixtures; retained record count, not browser heap bytes",
+  "baseline_commit": "e1400186505647d8eea4d066982aac76d154d69d",
+  "cases": [
+    {
+      "kind": "longtask",
+      "window": "no run",
+      "delivered": 100003,
+      "baseline_retained": 100003,
+      "candidate_retained": 0,
+      "complete_in_scope_output_equal": true,
+      "retained_projection_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "kind": "longtask",
+      "window": "completed run, delayed delivery",
+      "delivered": 100003,
+      "baseline_retained": 100003,
+      "candidate_retained": 3,
+      "complete_in_scope_output_equal": true,
+      "retained_projection_sha256": "5fc09402d5c8da749cde8c548cde64cee52f215cc8fef53ff8adefd35d2171d3"
+    },
+    {
+      "kind": "event",
+      "window": "no run",
+      "delivered": 100003,
+      "baseline_retained": 100003,
+      "candidate_retained": 0,
+      "complete_in_scope_output_equal": true,
+      "retained_projection_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "kind": "event",
+      "window": "completed run, delayed delivery",
+      "delivered": 100003,
+      "baseline_retained": 100003,
+      "candidate_retained": 3,
+      "complete_in_scope_output_equal": true,
+      "retained_projection_sha256": "dfc691005faa2a32696454d2c7522531f357b27d1dacadaff9fcde9c5a6c7033"
+    }
+  ]
+}

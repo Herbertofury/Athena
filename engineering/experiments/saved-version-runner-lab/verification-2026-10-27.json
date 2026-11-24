@@ -1,0 +1,51 @@
+{
+  "checked_at": "2026-10-27T09:02:28.940434+00:00",
+  "binary_sha256": "0339c44482d59a54dc2e92764d3c0e8e3eb9adf253b1bbb31d68c64b1340ba02",
+  "lock_sha256": "4ba18f93c261a48a42ea595be3f8a37b6d9c419912d7e7875204ac0641e2dd85",
+  "runner_source_sha256": "82fdabd9aa9bedb5bc6d555ed2445db0098b54fa0a8682f165602c56355b5b65",
+  "candidate_source_sha256": "ff7077b96d46840d958820fd97aa4c2936c84076dfa67aaf4f3fa98d3f24e95d",
+  "http_harness_sha256": "99d767ddf2aa4665725ee89a182487379a60ef830e72c725478b921a88f638fc",
+  "runtime_environment": "linux-x86_64; atlas-lab 0.1.0; rustc 1.99.1 (58cf8f9c3 2026-10-13); target:x86_64-unknown-linux-gnu; profile:release; opt:3; flags-sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855; lock-sha256:4ba18f93c261a48a42ea595be3f8a37b6d9c419912d7e7875204ac0641e2dd85; bounded shared-process version worker; runner:82fdabd9aa9bedb5bc6d555ed2445db0098b54fa0a8682f165602c56355b5b65",
+  "real_response_source": {
+    "canonical_id": "g6ju16VJ",
+    "generation": "2",
+    "payload_bytes": 1894,
+    "payload_sha256": "14246a8756f2d70400a680ad2a4eaab4c92ffe42c644839702542857d55a7eb8",
+    "project_id": "AANobbMI",
+    "provenance": "local stored Modrinth-version snapshot; selected once at worker start"
+  },
+  "real_run_elapsed_ms": 184,
+  "cancelled_fixture_samples": [
+    {
+      "completed_iterations": 48,
+      "elapsed_ns": 2358359,
+      "equal_complete_output": true,
+      "phase": "warmup",
+      "round": 0,
+      "strategy": "baseline"
+    }
+  ],
+  "counts": {
+    "new_http_checks": 47,
+    "legacy_http_checks": 23,
+    "rust_unit": 73,
+    "rust_integration": 4,
+    "candidate_example": 4,
+    "node_tests": 48,
+    "python_tests": 53
+  },
+  "audit": {
+    "tool": "cargo-audit 0.22.2; no binary scanning",
+    "tool_binary_sha256": "663251e833b2c8f94a912d04ad445bb1bfc5d15de951688eb492d15bd4e64877",
+    "database_commit": "3279c99911354c400e1d41e47c7d60e39258b147",
+    "dependencies": 185,
+    "known_vulnerabilities": 0,
+    "warnings": {}
+  },
+  "limits": [
+    "Loopback HTTP and static DOM wiring verified; native browser visual/input QA remains unverified",
+    "Cancellation input is a generated augmentation, not another real provider response",
+    "Partial failures remain local; full source text and test databases are not published",
+    "No app-default parser promotion or general autonomous code rewriting"
+  ]
+}

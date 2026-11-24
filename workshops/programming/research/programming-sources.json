@@ -1,0 +1,91 @@
+{
+  "checked": "2026-11-07",
+  "method": "Opened official Python documentation pages through web research; no copied tutorial exercises.",
+  "version_note": "Documentation currently identifies Python 3.12.16; execution used Python 3.12.14 and stable APIs shared across that series.",
+  "sources": [
+    {
+      "id": "intro",
+      "url": "https://docs.python.org/3.12/tutorial/introduction.html",
+      "publisher": "Python Software Foundation",
+      "status": "opened",
+      "supports": "Values, operators, integers and strings; original cents examples."
+    },
+    {
+      "id": "flow",
+      "url": "https://docs.python.org/3.12/tutorial/controlflow.html",
+      "publisher": "Python Software Foundation",
+      "status": "opened",
+      "supports": "Conditions, loops, functions and control flow; original trace/invariant."
+    },
+    {
+      "id": "data",
+      "url": "https://docs.python.org/3.12/tutorial/datastructures.html",
+      "publisher": "Python Software Foundation",
+      "status": "opened",
+      "supports": "Lists, dictionaries, sets, sorting; original grouping and identity rules."
+    },
+    {
+      "id": "errors",
+      "url": "https://docs.python.org/3.12/tutorial/errors.html",
+      "publisher": "Python Software Foundation",
+      "status": "opened",
+      "supports": "Exceptions and targeted error handling, separate from unfinished code."
+    },
+    {
+      "id": "tests",
+      "url": "https://docs.python.org/3.12/library/unittest.html",
+      "publisher": "Python Software Foundation",
+      "status": "opened",
+      "supports": "unittest cases, assertions and suites; original visible acceptance tests."
+    },
+    {
+      "id": "csv",
+      "url": "https://docs.python.org/3.12/library/csv.html",
+      "publisher": "Python Software Foundation",
+      "status": "opened",
+      "supports": "CSV reader, quoting, newline handling and strict parsing option."
+    },
+    {
+      "id": "json",
+      "url": "https://docs.python.org/3.12/library/json.html",
+      "publisher": "Python Software Foundation",
+      "status": "opened",
+      "supports": "JSON decode/encode, object_pairs_hook, parse_constant, allow_nan."
+    },
+    {
+      "id": "cli",
+      "url": "https://docs.python.org/3.12/library/argparse.html",
+      "publisher": "Python Software Foundation",
+      "status": "opened",
+      "supports": "argparse constrained choices and usage/error handling."
+    },
+    {
+      "id": "modules",
+      "url": "https://docs.python.org/3.12/tutorial/modules.html",
+      "publisher": "Python Software Foundation",
+      "status": "opened",
+      "supports": "Module boundaries and explicit script entry points."
+    },
+    {
+      "id": "io",
+      "url": "https://docs.python.org/3.12/tutorial/inputoutput.html",
+      "publisher": "Python Software Foundation",
+      "status": "opened",
+      "supports": "Text files, explicit encoding and context managers."
+    },
+    {
+      "id": "float",
+      "url": "https://docs.python.org/3.12/tutorial/floatingpoint.html",
+      "publisher": "Python Software Foundation",
+      "status": "opened",
+      "supports": "Floating-point approximation; exact integer cents are a scoped design choice."
+    },
+    {
+      "id": "copy",
+      "url": "https://docs.python.org/3.12/library/copy.html",
+      "publisher": "Python Software Foundation",
+      "status": "opened",
+      "supports": "Assignment, shallow copies and nested aliasing."
+    }
+  ]
+}

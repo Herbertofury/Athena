@@ -1,0 +1,19 @@
+name: Windows utility table
+on:
+  pull_request:
+    paths: ['research/windows-utilities-2026-11-14/**', 'tests/windows-utility-catalog.test.cjs', 'scripts/windows-utility-table-browser.cjs', '.github/workflows/windows-utility-table.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  table:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm ci
+      - run: node --test tests/windows-utility-catalog.test.cjs
+      - run: npx playwright install --with-deps chromium
+      - run: node scripts/windows-utility-table-browser.cjs

@@ -1,0 +1,18 @@
+{
+  "checked_at": "2026-10-26T23:14:40Z",
+  "scope": "Selected advisory package-name triage, NOT complete dependency audit",
+  "lock_sha256": "73d3d3dc18c501a9c6125169dbd160094db0ed98ff4d35f985dc53398a3d6f1a",
+  "lock_package_count": 179,
+  "package_presence": {
+    "zstd": false,
+    "zstd-safe": false,
+    "pingora-core": false,
+    "rustpython-vm": false,
+    "libcrux-ml-dsa": false
+  },
+  "sources": [
+    "https://rustsec.org/advisories/",
+    "https://rustsec.org/advisories/RUSTSEC-2026-0391.html",
+    "https://github.com/video-dev/hls.js/security"
+  ]
+}

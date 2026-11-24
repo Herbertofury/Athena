@@ -1,0 +1,43 @@
+{
+  "harness": "atlas-native-preview-timeout-v1",
+  "generated_stalled_decode": true,
+  "network_requests": false,
+  "first": {
+    "total": 1,
+    "decoded": 0,
+    "failed": 1,
+    "unattempted": 0,
+    "report_errors": 0,
+    "attempted": 1
+  },
+  "sourceDetached": true,
+  "identityRetained": true,
+  "lateStillFailed": true,
+  "retry": {
+    "total": 1,
+    "decoded": 1,
+    "failed": 0,
+    "unattempted": 0,
+    "report_errors": 0,
+    "attempted": 1
+  },
+  "width": 1,
+  "height": 1,
+  "events": [
+    {
+      "type": "image_failed",
+      "source": "data:image/svg+xml,%3Csvg xmlns=\"http://www.w3.org/2000/svg\" width=\"1\" height=\"1\"/%3E",
+      "attempt": 1
+    },
+    {
+      "type": "image_decoded",
+      "source": "data:image/svg+xml,%3Csvg xmlns=\"http://www.w3.org/2000/svg\" width=\"1\" height=\"1\"/%3E",
+      "width": 1,
+      "height": 1,
+      "elapsed_ms": 0.5,
+      "attempt": 2
+    }
+  ],
+  "passed": true,
+  "limits": "Actual DOM removal and native data-image retry; no live provider timeout or socket cancellation timing."
+}

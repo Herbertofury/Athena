@@ -1,0 +1,58 @@
+{
+  "schema": 1,
+  "label": "Synthetic baseline - no real application measured",
+  "source_revision": "synthetic-baseline",
+  "kind": "synthetic",
+  "condition": "cold",
+  "environment_id": "synthetic-unit-test",
+  "workload_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "normalization": {
+    "name": "synthetic-records",
+    "version": "1",
+    "excluded_fields": [
+      "observed_at"
+    ]
+  },
+  "samples": [
+    {
+      "pair_id": "pair-1",
+      "elapsed_ms": 100,
+      "status": "complete",
+      "result_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "result_count": 100,
+      "warnings": []
+    },
+    {
+      "pair_id": "pair-2",
+      "elapsed_ms": 120,
+      "status": "complete",
+      "result_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "result_count": 100,
+      "warnings": []
+    },
+    {
+      "pair_id": "pair-3",
+      "elapsed_ms": 110,
+      "status": "complete",
+      "result_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "result_count": 100,
+      "warnings": []
+    },
+    {
+      "pair_id": "pair-4",
+      "elapsed_ms": 130,
+      "status": "complete",
+      "result_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "result_count": 100,
+      "warnings": []
+    },
+    {
+      "pair_id": "pair-5",
+      "elapsed_ms": 140,
+      "status": "complete",
+      "result_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "result_count": 100,
+      "warnings": []
+    }
+  ]
+}

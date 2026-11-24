@@ -1,0 +1,1068 @@
+{
+  "checked_at": "2026-10-28T11:44:21.277584+00:00",
+  "scope": "actual loopback worker with retained public input and old journal migration; cancellation uses a generated augmentation, not a second real source",
+  "binary_sha256": "38629af7aa4c8b2463c1f8087f55da51e279ebcc858970c02a54ef733e3dcf5f",
+  "checks": [
+    {
+      "name": "same-origin request guard",
+      "observed": 403,
+      "expected": 403,
+      "passed": true
+    },
+    {
+      "name": "foreign Origin rejected",
+      "observed": 403,
+      "expected": 403,
+      "passed": true
+    },
+    {
+      "name": "foreign Host rejected",
+      "observed": 403,
+      "expected": 403,
+      "passed": true
+    },
+    {
+      "name": "unknown executable request rejected",
+      "observed": 422,
+      "expected": 422,
+      "passed": true
+    },
+    {
+      "name": "extra command field rejected",
+      "observed": 422,
+      "expected": 422,
+      "passed": true
+    },
+    {
+      "name": "noncanonical version rejected",
+      "observed": 400,
+      "expected": 400,
+      "passed": true
+    },
+    {
+      "name": "body budget preserved",
+      "observed": 413,
+      "expected": 413,
+      "passed": true
+    },
+    {
+      "name": "served asset exact /",
+      "observed": "6c10bd36fe52bdfbaa7b4decc4e9fda0054b8f2edd5b51d1f25a315ec62bbd0a",
+      "expected": "6c10bd36fe52bdfbaa7b4decc4e9fda0054b8f2edd5b51d1f25a315ec62bbd0a",
+      "passed": true
+    },
+    {
+      "name": "no-store /",
+      "observed": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "served asset exact /app.js",
+      "observed": "b32369d81e65634fbe3f4b87b48755ebef27b397d095051a1606d431962aa490",
+      "expected": "b32369d81e65634fbe3f4b87b48755ebef27b397d095051a1606d431962aa490",
+      "passed": true
+    },
+    {
+      "name": "no-store /app.js",
+      "observed": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "served asset exact /collection-input.mjs",
+      "observed": "0c5346c5b1fa3e3c1d17ecdcdab075b8437c341c1b1eea2c6cc502dcdc315b53",
+      "expected": "0c5346c5b1fa3e3c1d17ecdcdab075b8437c341c1b1eea2c6cc502dcdc315b53",
+      "passed": true
+    },
+    {
+      "name": "no-store /collection-input.mjs",
+      "observed": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "missing source request queues a fixed job",
+      "observed": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "missing source is failure, not empty success",
+      "observed": "failed",
+      "expected": "failed",
+      "passed": true
+    },
+    {
+      "name": "missing source is actionable",
+      "observed": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "saved-version experiment accepted",
+      "observed": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "real saved-record execution completes",
+      "observed": "succeeded",
+      "expected": "succeeded",
+      "passed": true
+    },
+    {
+      "name": "complete is explicit",
+      "observed": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "timed pairs",
+      "observed": 20,
+      "expected": 20,
+      "passed": true
+    },
+    {
+      "name": "warmup pairs retained",
+      "observed": 4,
+      "expected": 4,
+      "passed": true
+    },
+    {
+      "name": "raw strategy samples retained",
+      "observed": 48,
+      "expected": 48,
+      "passed": true
+    },
+    {
+      "name": "all timed iterations completed",
+      "observed": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "run-specific generated stress cases",
+      "observed": 10000,
+      "expected": 10000,
+      "passed": true
+    },
+    {
+      "name": "complete output parity",
+      "observed": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "source hash matches stored exact payload",
+      "observed": "9c7011ca9a0ead246b4b9d37aa768e446ae8e35ea1cba68d96feb6e2f0994724",
+      "expected": "9c7011ca9a0ead246b4b9d37aa768e446ae8e35ea1cba68d96feb6e2f0994724",
+      "passed": true
+    },
+    {
+      "name": "generation is exact string",
+      "observed": "3",
+      "expected": "3",
+      "passed": true
+    },
+    {
+      "name": "compiled runner identity",
+      "observed": "82fdabd9aa9bedb5bc6d555ed2445db0098b54fa0a8682f165602c56355b5b65",
+      "expected": "82fdabd9aa9bedb5bc6d555ed2445db0098b54fa0a8682f165602c56355b5b65",
+      "passed": true
+    },
+    {
+      "name": "actual compiler identity retained",
+      "observed": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "dependency lock identity retained",
+      "observed": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "release profile recorded",
+      "observed": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "measurement harness fingerprint recorded",
+      "observed": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "compiled candidate identity",
+      "observed": "fixed-fields:ff7077b96d46840d958820fd97aa4c2936c84076dfa67aaf4f3fa98d3f24e95d:validator:6ad7e142a62e7575553b132e563a554e233197d880b192837c8a187646e2696d",
+      "expected": "fixed-fields:ff7077b96d46840d958820fd97aa4c2936c84076dfa67aaf4f3fa98d3f24e95d:validator:6ad7e142a62e7575553b132e563a554e233197d880b192837c8a187646e2696d",
+      "passed": true
+    },
+    {
+      "name": "missing acceptance evidence blocks promotion",
+      "observed": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "process peak memory stays unmeasured",
+      "observed": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "journal record present",
+      "observed": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "generated cancellation fixture accepted",
+      "observed": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "cooperative shutdown",
+      "observed": 0,
+      "expected": 0,
+      "passed": true
+    },
+    {
+      "name": "cancelled run not successful",
+      "observed": "failed",
+      "expected": "failed",
+      "passed": true
+    },
+    {
+      "name": "cancel reason retained",
+      "observed": "Cancelled",
+      "expected": "Cancelled",
+      "passed": true
+    },
+    {
+      "name": "partial run is not complete",
+      "observed": false,
+      "expected": false,
+      "passed": true
+    },
+    {
+      "name": "partial sample iteration bounds",
+      "observed": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "previous completed result unchanged",
+      "observed": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "snapshot count unchanged by experiments",
+      "observed": 5,
+      "expected": 5,
+      "passed": true
+    },
+    {
+      "name": "no collection attempts added",
+      "observed": 4,
+      "expected": 4,
+      "passed": true
+    },
+    {
+      "name": "existing and both new experiment journals retained",
+      "observed": 4,
+      "expected": 4,
+      "passed": true
+    },
+    {
+      "name": "legacy journal row unchanged 1",
+      "observed": [
+        1,
+        "2026-10-27 09:37:09",
+        "fixed-fields:ff7077b96d46840d958820fd97aa4c2936c84076dfa67aaf4f3fa98d3f24e95d:validator:6e86c120a224a6f75bdb2b627808618a3c8e078ba0b6eecd02fb104e7a004415",
+        "value-tree:c97bf4a26e1ec2132ff7d22b0d2ed9b8d228917cae72368f8c1ba663535e104c",
+        "{\"candidate_revision\":\"fixed-fields:ff7077b96d46840d958820fd97aa4c2936c84076dfa67aaf4f3fa98d3f24e95d:validator:6e86c120a224a6f75bdb2b627808618a3c8e078ba0b6eecd02fb104e7a004415\",\"baseline_revision\":\"value-tree:c97bf4a26e1ec2132ff7d22b0d2ed9b8d228917cae72368f8c1ba663535e104c\",\"workload_id\":\"version:g6ju16VJ:sha256:14246a8756f2d70400a680ad2a4eaab4c92ffe42c644839702542857d55a7eb8:iterations:100\",\"environment_id\":\"linux-x86_64; atlas-lab 0.1.0; rustc 1.99.1 (58cf8f9c3 2026-10-13); target:x86_64-unknown-linux-gnu; profile:release; opt:3; flags-sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855; lock-sha256:4ba18f93c261a48a42ea595be3f8a37b6d9c419912d7e7875204ac0641e2dd85; bounded shared-process version worker; runner:82fdabd9aa9bedb5bc6d555ed2445db0098b54fa0a8682f165602c56355b5b65\",\"trials\":[{\"baseline_ns\":1311032,\"candidate_ns\":1352614,\"equal_complete_output\":true,\"peak_bytes\":0,\"cancelled_cleanly\":null},{\"baseline_ns\":906930,\"candidate_ns\":624257,\"equal_complete_output\":true,\"peak_bytes\":0,\"cancelled_cleanly\":null},{\"baseline_ns\":1538224,\"candidate_ns\":1664760,\"equal_complete_output\":true,\"peak_bytes\":0,\"cancelled_cleanly\":null},{\"baseline_ns\":718906,\"candidate_ns\":455374,\"equal_complete_output\":true,\"peak_bytes\":0,\"cancelled_cleanly\":null},{\"baseline_ns\":698878,\"candidate_ns\":1075813,\"equal_complete_output\":true,\"peak_bytes\":0,\"cancelled_cleanly\":null},{\"baseline_ns\":836413,\"candidate_ns\":897751,\"equal_complete_output\":true,\"peak_bytes\":0,\"cancelled_cleanly\":null},{\"baseline_ns\":2665638,\"candidate_ns\":796924,\"equal_complete_output\":true,\"peak_bytes\":0,\"cancelled_cleanly\":null},{\"baseline_ns\":3750852,\"candidate_ns\":415655,\"equal_complete_output\":true,\"peak_bytes\":0,\"cancelled_cleanly\":null},{\"baseline_ns\":4096162,\"candidate_ns\":423272,\"equal_complete_output\":true,\"peak_bytes\":0,\"cancelled_cleanly\":null},{\"baseline_ns\":2363884,\"candidate_ns\":9069719,\"equal_complete_output\":true,\"peak_bytes\":0,\"cancelled_cleanly\":null},{\"baseline_ns\":1935834,\"candidate_ns\":610158,\"equal_complete_output\":true,\"peak_bytes\":0,\"cancelled_cleanly\":null},{\"baseline_ns\":1706268,\"candidate_ns\":594377,\"equal_complete_output\":true,\"peak_bytes\":0,\"cancelled_cleanly\":null},{\"baseline_ns\":2731246,\"candidate_ns\":538470,\"equal_complete_output\":true,\"peak_bytes\":0,\"cancelled_cleanly\":null},{\"baseline_ns\":2329873,\"candidate_ns\":1012904,\"equal_complete_output\":true,\"peak_bytes\":0,\"cancelled_cleanly\":null},{\"baseline_ns\":2463646,\"candidate_ns\":1106350,\"equal_complete_output\":true,\"peak_bytes\":0,\"cancelled_cleanly\":null},{\"baseline_ns\":869920,\"candidate_ns\":828817,\"equal_complete_output\":true,\"peak_bytes\":0,\"cancelled_cleanly\":null},{\"baseline_ns\":1758255,\"candidate_ns\":666551,\"equal_complete_output\":true,\"peak_bytes\":0,\"cancelled_cleanly\":null},{\"baseline_ns\":1374245,\"candidate_ns\":910924,\"equal_complete_output\":true,\"peak_bytes\":0,\"cancelled_cleanly\":null},{\"baseline_ns\":1395724,\"candidate_ns\":703307,\"equal_complete_output\":true,\"peak_bytes\":0,\"cancelled_cleanly\":null},{\"baseline_ns\":707223,\"candidate_ns\":753509,\"equal_complete_output\":true,\"peak_bytes\":0,\"cancelled_cleanly\":null}],\"stress_cases\":10000,\"stress_failures\":0}",
+        "{\"Incomplete\":\"Missing repeated timing, stress or memory measurements\"}",
+        null
+      ],
+      "expected": [
+        1,
+        "2026-10-27 09:37:09",
+        "fixed-fields:ff7077b96d46840d958820fd97aa4c2936c84076dfa67aaf4f3fa98d3f24e95d:validator:6e86c120a224a6f75bdb2b627808618a3c8e078ba0b6eecd02fb104e7a004415",
+        "value-tree:c97bf4a26e1ec2132ff7d22b0d2ed9b8d228917cae72368f8c1ba663535e104c",
+        "{\"candidate_revision\":\"fixed-fields:ff7077b96d46840d958820fd97aa4c2936c84076dfa67aaf4f3fa98d3f24e95d:validator:6e86c120a224a6f75bdb2b627808618a3c8e078ba0b6eecd02fb104e7a004415\",\"baseline_revision\":\"value-tree:c97bf4a26e1ec2132ff7d22b0d2ed9b8d228917cae72368f8c1ba663535e104c\",\"workload_id\":\"version:g6ju16VJ:sha256:14246a8756f2d70400a680ad2a4eaab4c92ffe42c644839702542857d55a7eb8:iterations:100\",\"environment_id\":\"linux-x86_64; atlas-lab 0.1.0; rustc 1.99.1 (58cf8f9c3 2026-10-13); target:x86_64-unknown-linux-gnu; profile:release; opt:3; flags-sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855; lock-sha256:4ba18f93c261a48a42ea595be3f8a37b6d9c419912d7e7875204ac0641e2dd85; bounded shared-process version worker; runner:82fdabd9aa9bedb5bc6d555ed2445db0098b54fa0a8682f165602c56355b5b65\",\"trials\":[{\"baseline_ns\":1311032,\"candidate_ns\":1352614,\"equal_complete_output\":true,\"peak_bytes\":0,\"cancelled_cleanly\":null},{\"baseline_ns\":906930,\"candidate_ns\":624257,\"equal_complete_output\":true,\"peak_bytes\":0,\"cancelled_cleanly\":null},{\"baseline_ns\":1538224,\"candidate_ns\":1664760,\"equal_complete_output\":true,\"peak_bytes\":0,\"cancelled_cleanly\":null},{\"baseline_ns\":718906,\"candidate_ns\":455374,\"equal_complete_output\":true,\"peak_bytes\":0,\"cancelled_cleanly\":null},{\"baseline_ns\":698878,\"candidate_ns\":1075813,\"equal_complete_output\":true,\"peak_bytes\":0,\"cancelled_cleanly\":null},{\"baseline_ns\":836413,\"candidate_ns\":897751,\"equal_complete_output\":true,\"peak_bytes\":0,\"cancelled_cleanly\":null},{\"baseline_ns\":2665638,\"candidate_ns\":796924,\"equal_complete_output\":true,\"peak_bytes\":0,\"cancelled_cleanly\":null},{\"baseline_ns\":3750852,\"candidate_ns\":415655,\"equal_complete_output\":true,\"peak_bytes\":0,\"cancelled_cleanly\":null},{\"baseline_ns\":4096162,\"candidate_ns\":423272,\"equal_complete_output\":true,\"peak_bytes\":0,\"cancelled_cleanly\":null},{\"baseline_ns\":2363884,\"candidate_ns\":9069719,\"equal_complete_output\":true,\"peak_bytes\":0,\"cancelled_cleanly\":null},{\"baseline_ns\":1935834,\"candidate_ns\":610158,\"equal_complete_output\":true,\"peak_bytes\":0,\"cancelled_cleanly\":null},{\"baseline_ns\":1706268,\"candidate_ns\":594377,\"equal_complete_output\":true,\"peak_bytes\":0,\"cancelled_cleanly\":null},{\"baseline_ns\":2731246,\"candidate_ns\":538470,\"equal_complete_output\":true,\"peak_bytes\":0,\"cancelled_cleanly\":null},{\"baseline_ns\":2329873,\"candidate_ns\":1012904,\"equal_complete_output\":true,\"peak_bytes\":0,\"cancelled_cleanly\":null},{\"baseline_ns\":2463646,\"candidate_ns\":1106350,\"equal_complete_output\":true,\"peak_bytes\":0,\"cancelled_cleanly\":null},{\"baseline_ns\":869920,\"candidate_ns\":828817,\"equal_complete_output\":true,\"peak_bytes\":0,\"cancelled_cleanly\":null},{\"baseline_ns\":1758255,\"candidate_ns\":666551,\"equal_complete_output\":true,\"peak_bytes\":0,\"cancelled_cleanly\":null},{\"baseline_ns\":1374245,\"candidate_ns\":910924,\"equal_complete_output\":true,\"peak_bytes\":0,\"cancelled_cleanly\":null},{\"baseline_ns\":1395724,\"candidate_ns\":703307,\"equal_complete_output\":true,\"peak_bytes\":0,\"cancelled_cleanly\":null},{\"baseline_ns\":707223,\"candidate_ns\":753509,\"equal_complete_output\":true,\"peak_bytes\":0,\"cancelled_cleanly\":null}],\"stress_cases\":10000,\"stress_failures\":0}",
+        "{\"Incomplete\":\"Missing repeated timing, stress or memory measurements\"}",
+        null
+      ],
+      "passed": true
+    },
+    {
+      "name": "legacy acceptance policy remains unknown 1",
+      "observed": null,
+      "expected": null,
+      "passed": true
+    },
+    {
+      "name": "legacy journal row unchanged 2",
+      "observed": [
+        2,
+        "2026-10-27 09:37:09",
+        "fixed-fields:ff7077b96d46840d958820fd97aa4c2936c84076dfa67aaf4f3fa98d3f24e95d:validator:6e86c120a224a6f75bdb2b627808618a3c8e078ba0b6eecd02fb104e7a004415",
+        "value-tree:c97bf4a26e1ec2132ff7d22b0d2ed9b8d228917cae72368f8c1ba663535e104c",
+        "{\"candidate_revision\":\"fixed-fields:ff7077b96d46840d958820fd97aa4c2936c84076dfa67aaf4f3fa98d3f24e95d:validator:6e86c120a224a6f75bdb2b627808618a3c8e078ba0b6eecd02fb104e7a004415\",\"baseline_revision\":\"value-tree:c97bf4a26e1ec2132ff7d22b0d2ed9b8d228917cae72368f8c1ba663535e104c\",\"workload_id\":\"version:QATEST00:sha256:afca0d8bf5e2e0a64b75e6b45a599e9d116a1dbd44f72279d97d5078e90d9214:iterations:100\",\"environment_id\":\"linux-x86_64; atlas-lab 0.1.0; rustc 1.99.1 (58cf8f9c3 2026-10-13); target:x86_64-unknown-linux-gnu; profile:release; opt:3; flags-sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855; lock-sha256:4ba18f93c261a48a42ea595be3f8a37b6d9c419912d7e7875204ac0641e2dd85; bounded shared-process version worker; runner:82fdabd9aa9bedb5bc6d555ed2445db0098b54fa0a8682f165602c56355b5b65\",\"trials\":[],\"stress_cases\":0,\"stress_failures\":0}",
+        "{\"Incomplete\":\"Missing repeated timing, stress or memory measurements\"}",
+        null
+      ],
+      "expected": [
+        2,
+        "2026-10-27 09:37:09",
+        "fixed-fields:ff7077b96d46840d958820fd97aa4c2936c84076dfa67aaf4f3fa98d3f24e95d:validator:6e86c120a224a6f75bdb2b627808618a3c8e078ba0b6eecd02fb104e7a004415",
+        "value-tree:c97bf4a26e1ec2132ff7d22b0d2ed9b8d228917cae72368f8c1ba663535e104c",
+        "{\"candidate_revision\":\"fixed-fields:ff7077b96d46840d958820fd97aa4c2936c84076dfa67aaf4f3fa98d3f24e95d:validator:6e86c120a224a6f75bdb2b627808618a3c8e078ba0b6eecd02fb104e7a004415\",\"baseline_revision\":\"value-tree:c97bf4a26e1ec2132ff7d22b0d2ed9b8d228917cae72368f8c1ba663535e104c\",\"workload_id\":\"version:QATEST00:sha256:afca0d8bf5e2e0a64b75e6b45a599e9d116a1dbd44f72279d97d5078e90d9214:iterations:100\",\"environment_id\":\"linux-x86_64; atlas-lab 0.1.0; rustc 1.99.1 (58cf8f9c3 2026-10-13); target:x86_64-unknown-linux-gnu; profile:release; opt:3; flags-sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855; lock-sha256:4ba18f93c261a48a42ea595be3f8a37b6d9c419912d7e7875204ac0641e2dd85; bounded shared-process version worker; runner:82fdabd9aa9bedb5bc6d555ed2445db0098b54fa0a8682f165602c56355b5b65\",\"trials\":[],\"stress_cases\":0,\"stress_failures\":0}",
+        "{\"Incomplete\":\"Missing repeated timing, stress or memory measurements\"}",
+        null
+      ],
+      "passed": true
+    },
+    {
+      "name": "legacy acceptance policy remains unknown 2",
+      "observed": null,
+      "expected": null,
+      "passed": true
+    },
+    {
+      "name": "HTTP and stored acceptance policy agree 3",
+      "observed": {
+        "schema_version": 1,
+        "evaluator_version": 1,
+        "minimum_pairs_decimal": "15",
+        "minimum_stress_cases_decimal": "10000",
+        "minimum_speedup_text": "1.1",
+        "minimum_speedup_bits_hex": "3ff199999999999a",
+        "memory_budget_bytes_decimal": "67108864"
+      },
+      "expected": {
+        "evaluator_version": 1,
+        "memory_budget_bytes_decimal": "67108864",
+        "minimum_pairs_decimal": "15",
+        "minimum_speedup_bits_hex": "3ff199999999999a",
+        "minimum_speedup_text": "1.1",
+        "minimum_stress_cases_decimal": "10000",
+        "schema_version": 1
+      },
+      "passed": true
+    },
+    {
+      "name": "policy float bits remain exact text 3",
+      "observed": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "HTTP and stored acceptance policy agree 4",
+      "observed": {
+        "schema_version": 1,
+        "evaluator_version": 1,
+        "minimum_pairs_decimal": "15",
+        "minimum_stress_cases_decimal": "10000",
+        "minimum_speedup_text": "1.1",
+        "minimum_speedup_bits_hex": "3ff199999999999a",
+        "memory_budget_bytes_decimal": "67108864"
+      },
+      "expected": {
+        "evaluator_version": 1,
+        "memory_budget_bytes_decimal": "67108864",
+        "minimum_pairs_decimal": "15",
+        "minimum_speedup_bits_hex": "3ff199999999999a",
+        "minimum_speedup_text": "1.1",
+        "minimum_stress_cases_decimal": "10000",
+        "schema_version": 1
+      },
+      "passed": true
+    },
+    {
+      "name": "policy float bits remain exact text 4",
+      "observed": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "SQLite integrity",
+      "observed": "ok",
+      "expected": "ok",
+      "passed": true
+    }
+  ],
+  "completed": true,
+  "real_saved_record_job": {
+    "acceptance_policy": {
+      "evaluator_version": 1,
+      "memory_budget_bytes_decimal": "67108864",
+      "minimum_pairs_decimal": "15",
+      "minimum_speedup_bits_hex": "3ff199999999999a",
+      "minimum_speedup_text": "1.1",
+      "minimum_stress_cases_decimal": "10000",
+      "schema_version": 1
+    },
+    "experiment": {
+      "completed": true,
+      "decision": {
+        "Incomplete": "Missing repeated timing, stress or memory measurements"
+      },
+      "elapsed_ms": 197,
+      "evidence": {
+        "baseline_revision": "value-tree:c97bf4a26e1ec2132ff7d22b0d2ed9b8d228917cae72368f8c1ba663535e104c",
+        "candidate_revision": "fixed-fields:ff7077b96d46840d958820fd97aa4c2936c84076dfa67aaf4f3fa98d3f24e95d:validator:6ad7e142a62e7575553b132e563a554e233197d880b192837c8a187646e2696d",
+        "environment_id": "linux-x86_64; atlas-lab 0.1.0; rustc 1.99.1 (58cf8f9c3 2026-10-13); target:x86_64-unknown-linux-gnu; profile:release; opt:3; flags-sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855; lock-sha256:4ba18f93c261a48a42ea595be3f8a37b6d9c419912d7e7875204ac0641e2dd85; bounded shared-process version worker; runner:82fdabd9aa9bedb5bc6d555ed2445db0098b54fa0a8682f165602c56355b5b65",
+        "stress_cases": 10000,
+        "stress_failures": 0,
+        "trials": [
+          {
+            "baseline_ns": 831472,
+            "cancelled_cleanly": null,
+            "candidate_ns": 546033,
+            "equal_complete_output": true,
+            "peak_bytes": 0
+          },
+          {
+            "baseline_ns": 846606,
+            "cancelled_cleanly": null,
+            "candidate_ns": 496808,
+            "equal_complete_output": true,
+            "peak_bytes": 0
+          },
+          {
+            "baseline_ns": 810225,
+            "cancelled_cleanly": null,
+            "candidate_ns": 1082496,
+            "equal_complete_output": true,
+            "peak_bytes": 0
+          },
+          {
+            "baseline_ns": 1193373,
+            "cancelled_cleanly": null,
+            "candidate_ns": 394905,
+            "equal_complete_output": true,
+            "peak_bytes": 0
+          },
+          {
+            "baseline_ns": 669002,
+            "cancelled_cleanly": null,
+            "candidate_ns": 934430,
+            "equal_complete_output": true,
+            "peak_bytes": 0
+          },
+          {
+            "baseline_ns": 684080,
+            "cancelled_cleanly": null,
+            "candidate_ns": 537319,
+            "equal_complete_output": true,
+            "peak_bytes": 0
+          },
+          {
+            "baseline_ns": 740947,
+            "cancelled_cleanly": null,
+            "candidate_ns": 633078,
+            "equal_complete_output": true,
+            "peak_bytes": 0
+          },
+          {
+            "baseline_ns": 1186536,
+            "cancelled_cleanly": null,
+            "candidate_ns": 461089,
+            "equal_complete_output": true,
+            "peak_bytes": 0
+          },
+          {
+            "baseline_ns": 722733,
+            "cancelled_cleanly": null,
+            "candidate_ns": 428447,
+            "equal_complete_output": true,
+            "peak_bytes": 0
+          },
+          {
+            "baseline_ns": 701633,
+            "cancelled_cleanly": null,
+            "candidate_ns": 477602,
+            "equal_complete_output": true,
+            "peak_bytes": 0
+          },
+          {
+            "baseline_ns": 788381,
+            "cancelled_cleanly": null,
+            "candidate_ns": 606704,
+            "equal_complete_output": true,
+            "peak_bytes": 0
+          },
+          {
+            "baseline_ns": 675760,
+            "cancelled_cleanly": null,
+            "candidate_ns": 431680,
+            "equal_complete_output": true,
+            "peak_bytes": 0
+          },
+          {
+            "baseline_ns": 864307,
+            "cancelled_cleanly": null,
+            "candidate_ns": 437255,
+            "equal_complete_output": true,
+            "peak_bytes": 0
+          },
+          {
+            "baseline_ns": 868111,
+            "cancelled_cleanly": null,
+            "candidate_ns": 399684,
+            "equal_complete_output": true,
+            "peak_bytes": 0
+          },
+          {
+            "baseline_ns": 2267358,
+            "cancelled_cleanly": null,
+            "candidate_ns": 492845,
+            "equal_complete_output": true,
+            "peak_bytes": 0
+          },
+          {
+            "baseline_ns": 724920,
+            "cancelled_cleanly": null,
+            "candidate_ns": 972903,
+            "equal_complete_output": true,
+            "peak_bytes": 0
+          },
+          {
+            "baseline_ns": 758045,
+            "cancelled_cleanly": null,
+            "candidate_ns": 401802,
+            "equal_complete_output": true,
+            "peak_bytes": 0
+          },
+          {
+            "baseline_ns": 870448,
+            "cancelled_cleanly": null,
+            "candidate_ns": 437445,
+            "equal_complete_output": true,
+            "peak_bytes": 0
+          },
+          {
+            "baseline_ns": 766272,
+            "cancelled_cleanly": null,
+            "candidate_ns": 407655,
+            "equal_complete_output": true,
+            "peak_bytes": 0
+          },
+          {
+            "baseline_ns": 776221,
+            "cancelled_cleanly": null,
+            "candidate_ns": 424764,
+            "equal_complete_output": true,
+            "peak_bytes": 0
+          }
+        ],
+        "workload_id": "version:1rb9wI5K:sha256:9c7011ca9a0ead246b4b9d37aa768e446ae8e35ea1cba68d96feb6e2f0994724:iterations:100"
+      },
+      "first_failure": null,
+      "iterations_per_sample": 100,
+      "limitations": [
+        "Stored snapshot provenance is recorded, not independently authenticated by this run",
+        "Generated stress augmentations are separate from the unchanged stored timing input",
+        "No network, storage or UI speedup is measured here",
+        "Build fingerprints do not establish identical CPUs, host load or isolation",
+        "Peak process memory and per-strategy cancellation acceptance are unmeasured; no promotion",
+        "Failure payloads remain in the local database; review before any publication",
+        "Only fixed compiled strategies run; no source rewriting, arbitrary executable or deployment"
+      ],
+      "reason": "Completed",
+      "runner_revision": "82fdabd9aa9bedb5bc6d555ed2445db0098b54fa0a8682f165602c56355b5b65",
+      "samples": [
+        {
+          "completed_iterations": 100,
+          "elapsed_ns": 899020,
+          "equal_complete_output": true,
+          "phase": "warmup",
+          "round": 0,
+          "strategy": "baseline"
+        },
+        {
+          "completed_iterations": 100,
+          "elapsed_ns": 712969,
+          "equal_complete_output": true,
+          "phase": "warmup",
+          "round": 0,
+          "strategy": "candidate"
+        },
+        {
+          "completed_iterations": 100,
+          "elapsed_ns": 408063,
+          "equal_complete_output": true,
+          "phase": "warmup",
+          "round": 1,
+          "strategy": "candidate"
+        },
+        {
+          "completed_iterations": 100,
+          "elapsed_ns": 867009,
+          "equal_complete_output": true,
+          "phase": "warmup",
+          "round": 1,
+          "strategy": "baseline"
+        },
+        {
+          "completed_iterations": 100,
+          "elapsed_ns": 805676,
+          "equal_complete_output": true,
+          "phase": "warmup",
+          "round": 2,
+          "strategy": "baseline"
+        },
+        {
+          "completed_iterations": 100,
+          "elapsed_ns": 400039,
+          "equal_complete_output": true,
+          "phase": "warmup",
+          "round": 2,
+          "strategy": "candidate"
+        },
+        {
+          "completed_iterations": 100,
+          "elapsed_ns": 408346,
+          "equal_complete_output": true,
+          "phase": "warmup",
+          "round": 3,
+          "strategy": "candidate"
+        },
+        {
+          "completed_iterations": 100,
+          "elapsed_ns": 703297,
+          "equal_complete_output": true,
+          "phase": "warmup",
+          "round": 3,
+          "strategy": "baseline"
+        },
+        {
+          "completed_iterations": 100,
+          "elapsed_ns": 831472,
+          "equal_complete_output": true,
+          "phase": "timing",
+          "round": 4,
+          "strategy": "baseline"
+        },
+        {
+          "completed_iterations": 100,
+          "elapsed_ns": 546033,
+          "equal_complete_output": true,
+          "phase": "timing",
+          "round": 4,
+          "strategy": "candidate"
+        },
+        {
+          "completed_iterations": 100,
+          "elapsed_ns": 496808,
+          "equal_complete_output": true,
+          "phase": "timing",
+          "round": 5,
+          "strategy": "candidate"
+        },
+        {
+          "completed_iterations": 100,
+          "elapsed_ns": 846606,
+          "equal_complete_output": true,
+          "phase": "timing",
+          "round": 5,
+          "strategy": "baseline"
+        },
+        {
+          "completed_iterations": 100,
+          "elapsed_ns": 810225,
+          "equal_complete_output": true,
+          "phase": "timing",
+          "round": 6,
+          "strategy": "baseline"
+        },
+        {
+          "completed_iterations": 100,
+          "elapsed_ns": 1082496,
+          "equal_complete_output": true,
+          "phase": "timing",
+          "round": 6,
+          "strategy": "candidate"
+        },
+        {
+          "completed_iterations": 100,
+          "elapsed_ns": 394905,
+          "equal_complete_output": true,
+          "phase": "timing",
+          "round": 7,
+          "strategy": "candidate"
+        },
+        {
+          "completed_iterations": 100,
+          "elapsed_ns": 1193373,
+          "equal_complete_output": true,
+          "phase": "timing",
+          "round": 7,
+          "strategy": "baseline"
+        },
+        {
+          "completed_iterations": 100,
+          "elapsed_ns": 669002,
+          "equal_complete_output": true,
+          "phase": "timing",
+          "round": 8,
+          "strategy": "baseline"
+        },
+        {
+          "completed_iterations": 100,
+          "elapsed_ns": 934430,
+          "equal_complete_output": true,
+          "phase": "timing",
+          "round": 8,
+          "strategy": "candidate"
+        },
+        {
+          "completed_iterations": 100,
+          "elapsed_ns": 537319,
+          "equal_complete_output": true,
+          "phase": "timing",
+          "round": 9,
+          "strategy": "candidate"
+        },
+        {
+          "completed_iterations": 100,
+          "elapsed_ns": 684080,
+          "equal_complete_output": true,
+          "phase": "timing",
+          "round": 9,
+          "strategy": "baseline"
+        },
+        {
+          "completed_iterations": 100,
+          "elapsed_ns": 740947,
+          "equal_complete_output": true,
+          "phase": "timing",
+          "round": 10,
+          "strategy": "baseline"
+        },
+        {
+          "completed_iterations": 100,
+          "elapsed_ns": 633078,
+          "equal_complete_output": true,
+          "phase": "timing",
+          "round": 10,
+          "strategy": "candidate"
+        },
+        {
+          "completed_iterations": 100,
+          "elapsed_ns": 461089,
+          "equal_complete_output": true,
+          "phase": "timing",
+          "round": 11,
+          "strategy": "candidate"
+        },
+        {
+          "completed_iterations": 100,
+          "elapsed_ns": 1186536,
+          "equal_complete_output": true,
+          "phase": "timing",
+          "round": 11,
+          "strategy": "baseline"
+        },
+        {
+          "completed_iterations": 100,
+          "elapsed_ns": 722733,
+          "equal_complete_output": true,
+          "phase": "timing",
+          "round": 12,
+          "strategy": "baseline"
+        },
+        {
+          "completed_iterations": 100,
+          "elapsed_ns": 428447,
+          "equal_complete_output": true,
+          "phase": "timing",
+          "round": 12,
+          "strategy": "candidate"
+        },
+        {
+          "completed_iterations": 100,
+          "elapsed_ns": 477602,
+          "equal_complete_output": true,
+          "phase": "timing",
+          "round": 13,
+          "strategy": "candidate"
+        },
+        {
+          "completed_iterations": 100,
+          "elapsed_ns": 701633,
+          "equal_complete_output": true,
+          "phase": "timing",
+          "round": 13,
+          "strategy": "baseline"
+        },
+        {
+          "completed_iterations": 100,
+          "elapsed_ns": 788381,
+          "equal_complete_output": true,
+          "phase": "timing",
+          "round": 14,
+          "strategy": "baseline"
+        },
+        {
+          "completed_iterations": 100,
+          "elapsed_ns": 606704,
+          "equal_complete_output": true,
+          "phase": "timing",
+          "round": 14,
+          "strategy": "candidate"
+        },
+        {
+          "completed_iterations": 100,
+          "elapsed_ns": 431680,
+          "equal_complete_output": true,
+          "phase": "timing",
+          "round": 15,
+          "strategy": "candidate"
+        },
+        {
+          "completed_iterations": 100,
+          "elapsed_ns": 675760,
+          "equal_complete_output": true,
+          "phase": "timing",
+          "round": 15,
+          "strategy": "baseline"
+        },
+        {
+          "completed_iterations": 100,
+          "elapsed_ns": 864307,
+          "equal_complete_output": true,
+          "phase": "timing",
+          "round": 16,
+          "strategy": "baseline"
+        },
+        {
+          "completed_iterations": 100,
+          "elapsed_ns": 437255,
+          "equal_complete_output": true,
+          "phase": "timing",
+          "round": 16,
+          "strategy": "candidate"
+        },
+        {
+          "completed_iterations": 100,
+          "elapsed_ns": 399684,
+          "equal_complete_output": true,
+          "phase": "timing",
+          "round": 17,
+          "strategy": "candidate"
+        },
+        {
+          "completed_iterations": 100,
+          "elapsed_ns": 868111,
+          "equal_complete_output": true,
+          "phase": "timing",
+          "round": 17,
+          "strategy": "baseline"
+        },
+        {
+          "completed_iterations": 100,
+          "elapsed_ns": 2267358,
+          "equal_complete_output": true,
+          "phase": "timing",
+          "round": 18,
+          "strategy": "baseline"
+        },
+        {
+          "completed_iterations": 100,
+          "elapsed_ns": 492845,
+          "equal_complete_output": true,
+          "phase": "timing",
+          "round": 18,
+          "strategy": "candidate"
+        },
+        {
+          "completed_iterations": 100,
+          "elapsed_ns": 972903,
+          "equal_complete_output": true,
+          "phase": "timing",
+          "round": 19,
+          "strategy": "candidate"
+        },
+        {
+          "completed_iterations": 100,
+          "elapsed_ns": 724920,
+          "equal_complete_output": true,
+          "phase": "timing",
+          "round": 19,
+          "strategy": "baseline"
+        },
+        {
+          "completed_iterations": 100,
+          "elapsed_ns": 758045,
+          "equal_complete_output": true,
+          "phase": "timing",
+          "round": 20,
+          "strategy": "baseline"
+        },
+        {
+          "completed_iterations": 100,
+          "elapsed_ns": 401802,
+          "equal_complete_output": true,
+          "phase": "timing",
+          "round": 20,
+          "strategy": "candidate"
+        },
+        {
+          "completed_iterations": 100,
+          "elapsed_ns": 437445,
+          "equal_complete_output": true,
+          "phase": "timing",
+          "round": 21,
+          "strategy": "candidate"
+        },
+        {
+          "completed_iterations": 100,
+          "elapsed_ns": 870448,
+          "equal_complete_output": true,
+          "phase": "timing",
+          "round": 21,
+          "strategy": "baseline"
+        },
+        {
+          "completed_iterations": 100,
+          "elapsed_ns": 766272,
+          "equal_complete_output": true,
+          "phase": "timing",
+          "round": 22,
+          "strategy": "baseline"
+        },
+        {
+          "completed_iterations": 100,
+          "elapsed_ns": 407655,
+          "equal_complete_output": true,
+          "phase": "timing",
+          "round": 22,
+          "strategy": "candidate"
+        },
+        {
+          "completed_iterations": 100,
+          "elapsed_ns": 424764,
+          "equal_complete_output": true,
+          "phase": "timing",
+          "round": 23,
+          "strategy": "candidate"
+        },
+        {
+          "completed_iterations": 100,
+          "elapsed_ns": 776221,
+          "equal_complete_output": true,
+          "phase": "timing",
+          "round": 23,
+          "strategy": "baseline"
+        }
+      ],
+      "source": {
+        "canonical_id": "1rb9wI5K",
+        "generation": "3",
+        "payload_bytes": 1600,
+        "payload_sha256": "9c7011ca9a0ead246b4b9d37aa768e446ae8e35ea1cba68d96feb6e2f0994724",
+        "project_id": "gvQqBUqZ",
+        "provenance": "local stored Modrinth-version snapshot; selected once at worker start"
+      },
+      "warmup_trials": [
+        {
+          "baseline_ns": 899020,
+          "cancelled_cleanly": null,
+          "candidate_ns": 712969,
+          "equal_complete_output": true,
+          "peak_bytes": 0
+        },
+        {
+          "baseline_ns": 867009,
+          "cancelled_cleanly": null,
+          "candidate_ns": 408063,
+          "equal_complete_output": true,
+          "peak_bytes": 0
+        },
+        {
+          "baseline_ns": 805676,
+          "cancelled_cleanly": null,
+          "candidate_ns": 400039,
+          "equal_complete_output": true,
+          "peak_bytes": 0
+        },
+        {
+          "baseline_ns": 703297,
+          "cancelled_cleanly": null,
+          "candidate_ns": 408346,
+          "equal_complete_output": true,
+          "peak_bytes": 0
+        }
+      ]
+    },
+    "experiment_id": 3
+  },
+  "generated_fixture_cancelled_job": {
+    "acceptance_policy": {
+      "evaluator_version": 1,
+      "memory_budget_bytes_decimal": "67108864",
+      "minimum_pairs_decimal": "15",
+      "minimum_speedup_bits_hex": "3ff199999999999a",
+      "minimum_speedup_text": "1.1",
+      "minimum_stress_cases_decimal": "10000",
+      "schema_version": 1
+    },
+    "experiment": {
+      "completed": false,
+      "decision": {
+        "Incomplete": "Missing repeated timing, stress or memory measurements"
+      },
+      "elapsed_ms": 4,
+      "evidence": {
+        "baseline_revision": "value-tree:c97bf4a26e1ec2132ff7d22b0d2ed9b8d228917cae72368f8c1ba663535e104c",
+        "candidate_revision": "fixed-fields:ff7077b96d46840d958820fd97aa4c2936c84076dfa67aaf4f3fa98d3f24e95d:validator:6ad7e142a62e7575553b132e563a554e233197d880b192837c8a187646e2696d",
+        "environment_id": "linux-x86_64; atlas-lab 0.1.0; rustc 1.99.1 (58cf8f9c3 2026-10-13); target:x86_64-unknown-linux-gnu; profile:release; opt:3; flags-sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855; lock-sha256:4ba18f93c261a48a42ea595be3f8a37b6d9c419912d7e7875204ac0641e2dd85; bounded shared-process version worker; runner:82fdabd9aa9bedb5bc6d555ed2445db0098b54fa0a8682f165602c56355b5b65",
+        "stress_cases": 0,
+        "stress_failures": 0,
+        "trials": [],
+        "workload_id": "version:QATEST00:sha256:402e288564b2e3702c8c0123c10e7f7a613214f9ffdb910ac6635f0c9ea371ca:iterations:100"
+      },
+      "first_failure": null,
+      "iterations_per_sample": 100,
+      "limitations": [
+        "Stored snapshot provenance is recorded, not independently authenticated by this run",
+        "Generated stress augmentations are separate from the unchanged stored timing input",
+        "No network, storage or UI speedup is measured here",
+        "Build fingerprints do not establish identical CPUs, host load or isolation",
+        "Peak process memory and per-strategy cancellation acceptance are unmeasured; no promotion",
+        "Failure payloads remain in the local database; review before any publication",
+        "Only fixed compiled strategies run; no source rewriting, arbitrary executable or deployment"
+      ],
+      "reason": "Cancelled",
+      "runner_revision": "82fdabd9aa9bedb5bc6d555ed2445db0098b54fa0a8682f165602c56355b5b65",
+      "samples": [
+        {
+          "completed_iterations": 89,
+          "elapsed_ns": 3969165,
+          "equal_complete_output": true,
+          "phase": "warmup",
+          "round": 0,
+          "strategy": "baseline"
+        }
+      ],
+      "source": {
+        "canonical_id": "QATEST00",
+        "generation": "5",
+        "payload_bytes": 67187,
+        "payload_sha256": "402e288564b2e3702c8c0123c10e7f7a613214f9ffdb910ac6635f0c9ea371ca",
+        "project_id": "gvQqBUqZ",
+        "provenance": "local stored Modrinth-version snapshot; selected once at worker start"
+      },
+      "warmup_trials": []
+    },
+    "experiment_id": 4
+  }
+}

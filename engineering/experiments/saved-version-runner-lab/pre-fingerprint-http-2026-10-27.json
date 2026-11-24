@@ -1,0 +1,912 @@
+{
+  "checked_at": "2026-10-27T08:23:37.968348+00:00",
+  "scope": "actual loopback worker with a retained real public response; cancellation uses a labeled generated augmentation, not a second real source",
+  "binary_sha256": "9042bde2482887ae402dae71e0ab8deb78b1188451d206450e9f94e8df327162",
+  "checks": [
+    {
+      "name": "same-origin request guard",
+      "observed": 403,
+      "expected": 403,
+      "passed": true
+    },
+    {
+      "name": "foreign Origin rejected",
+      "observed": 403,
+      "expected": 403,
+      "passed": true
+    },
+    {
+      "name": "foreign Host rejected",
+      "observed": 403,
+      "expected": 403,
+      "passed": true
+    },
+    {
+      "name": "unknown executable request rejected",
+      "observed": 422,
+      "expected": 422,
+      "passed": true
+    },
+    {
+      "name": "extra command field rejected",
+      "observed": 422,
+      "expected": 422,
+      "passed": true
+    },
+    {
+      "name": "noncanonical version rejected",
+      "observed": 400,
+      "expected": 400,
+      "passed": true
+    },
+    {
+      "name": "body budget preserved",
+      "observed": 413,
+      "expected": 413,
+      "passed": true
+    },
+    {
+      "name": "served asset exact /",
+      "observed": "4d938c0035de32c2e3ec673146794c14e91e82e33c9fa365ed7e0ed9fbf6753c",
+      "expected": "4d938c0035de32c2e3ec673146794c14e91e82e33c9fa365ed7e0ed9fbf6753c",
+      "passed": true
+    },
+    {
+      "name": "no-store /",
+      "observed": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "served asset exact /app.js",
+      "observed": "aeb06a9b59668ae654ebedd31984bcf2fa4a7054cea9709af01e670389693c2e",
+      "expected": "aeb06a9b59668ae654ebedd31984bcf2fa4a7054cea9709af01e670389693c2e",
+      "passed": true
+    },
+    {
+      "name": "no-store /app.js",
+      "observed": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "served asset exact /collection-input.mjs",
+      "observed": "fb0d88c5856e442ab7709ca121e27c208cebca334649dea952ac158aa43be6bb",
+      "expected": "fb0d88c5856e442ab7709ca121e27c208cebca334649dea952ac158aa43be6bb",
+      "passed": true
+    },
+    {
+      "name": "no-store /collection-input.mjs",
+      "observed": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "missing source request queues a fixed job",
+      "observed": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "missing source is failure, not empty success",
+      "observed": "failed",
+      "expected": "failed",
+      "passed": true
+    },
+    {
+      "name": "missing source is actionable",
+      "observed": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "saved-version experiment accepted",
+      "observed": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "real saved-record execution completes",
+      "observed": "succeeded",
+      "expected": "succeeded",
+      "passed": true
+    },
+    {
+      "name": "complete is explicit",
+      "observed": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "timed pairs",
+      "observed": 20,
+      "expected": 20,
+      "passed": true
+    },
+    {
+      "name": "warmup pairs retained",
+      "observed": 4,
+      "expected": 4,
+      "passed": true
+    },
+    {
+      "name": "raw strategy samples retained",
+      "observed": 48,
+      "expected": 48,
+      "passed": true
+    },
+    {
+      "name": "all timed iterations completed",
+      "observed": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "run-specific generated stress cases",
+      "observed": 10000,
+      "expected": 10000,
+      "passed": true
+    },
+    {
+      "name": "complete output parity",
+      "observed": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "source hash matches stored exact payload",
+      "observed": "14246a8756f2d70400a680ad2a4eaab4c92ffe42c644839702542857d55a7eb8",
+      "expected": "14246a8756f2d70400a680ad2a4eaab4c92ffe42c644839702542857d55a7eb8",
+      "passed": true
+    },
+    {
+      "name": "generation is exact string",
+      "observed": "2",
+      "expected": "2",
+      "passed": true
+    },
+    {
+      "name": "compiled runner identity",
+      "observed": "a5dfd9d5fba6372c872922d5e157c441b71f2dc4bafa682cb52f72f97a732155",
+      "expected": "a5dfd9d5fba6372c872922d5e157c441b71f2dc4bafa682cb52f72f97a732155",
+      "passed": true
+    },
+    {
+      "name": "compiled candidate identity",
+      "observed": "fixed-fields:ff7077b96d46840d958820fd97aa4c2936c84076dfa67aaf4f3fa98d3f24e95d",
+      "expected": "fixed-fields:ff7077b96d46840d958820fd97aa4c2936c84076dfa67aaf4f3fa98d3f24e95d",
+      "passed": true
+    },
+    {
+      "name": "missing acceptance evidence blocks promotion",
+      "observed": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "process peak memory stays unmeasured",
+      "observed": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "journal record present",
+      "observed": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "generated cancellation fixture accepted",
+      "observed": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "cooperative shutdown",
+      "observed": 0,
+      "expected": 0,
+      "passed": true
+    },
+    {
+      "name": "cancelled run not successful",
+      "observed": "failed",
+      "expected": "failed",
+      "passed": true
+    },
+    {
+      "name": "cancel reason retained",
+      "observed": "Cancelled",
+      "expected": "Cancelled",
+      "passed": true
+    },
+    {
+      "name": "partial run is not complete",
+      "observed": false,
+      "expected": false,
+      "passed": true
+    },
+    {
+      "name": "partial sample iteration bounds",
+      "observed": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "previous completed result unchanged",
+      "observed": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "snapshot count unchanged by experiments",
+      "observed": 4,
+      "expected": 4,
+      "passed": true
+    },
+    {
+      "name": "no collection attempts added",
+      "observed": 4,
+      "expected": 4,
+      "passed": true
+    },
+    {
+      "name": "both experiment journals retained",
+      "observed": 2,
+      "expected": 2,
+      "passed": true
+    },
+    {
+      "name": "SQLite integrity",
+      "observed": "ok",
+      "expected": "ok",
+      "passed": true
+    }
+  ],
+  "completed": true,
+  "real_saved_record_job": {
+    "experiment": {
+      "completed": true,
+      "decision": {
+        "Incomplete": "Missing repeated timing, stress or memory measurements"
+      },
+      "elapsed_ms": 169,
+      "evidence": {
+        "baseline_revision": "value-tree:c97bf4a26e1ec2132ff7d22b0d2ed9b8d228917cae72368f8c1ba663535e104c",
+        "candidate_revision": "fixed-fields:ff7077b96d46840d958820fd97aa4c2936c84076dfa67aaf4f3fa98d3f24e95d",
+        "environment_id": "linux-x86_64; atlas-lab 0.1.0; bounded shared-process version worker",
+        "stress_cases": 10000,
+        "stress_failures": 0,
+        "trials": [
+          {
+            "baseline_ns": 725142,
+            "cancelled_cleanly": null,
+            "candidate_ns": 407990,
+            "equal_complete_output": true,
+            "peak_bytes": 0
+          },
+          {
+            "baseline_ns": 1380395,
+            "cancelled_cleanly": null,
+            "candidate_ns": 402427,
+            "equal_complete_output": true,
+            "peak_bytes": 0
+          },
+          {
+            "baseline_ns": 2525767,
+            "cancelled_cleanly": null,
+            "candidate_ns": 795711,
+            "equal_complete_output": true,
+            "peak_bytes": 0
+          },
+          {
+            "baseline_ns": 980405,
+            "cancelled_cleanly": null,
+            "candidate_ns": 449003,
+            "equal_complete_output": true,
+            "peak_bytes": 0
+          },
+          {
+            "baseline_ns": 662318,
+            "cancelled_cleanly": null,
+            "candidate_ns": 557714,
+            "equal_complete_output": true,
+            "peak_bytes": 0
+          },
+          {
+            "baseline_ns": 701189,
+            "cancelled_cleanly": null,
+            "candidate_ns": 477728,
+            "equal_complete_output": true,
+            "peak_bytes": 0
+          },
+          {
+            "baseline_ns": 683102,
+            "cancelled_cleanly": null,
+            "candidate_ns": 437387,
+            "equal_complete_output": true,
+            "peak_bytes": 0
+          },
+          {
+            "baseline_ns": 732313,
+            "cancelled_cleanly": null,
+            "candidate_ns": 635497,
+            "equal_complete_output": true,
+            "peak_bytes": 0
+          },
+          {
+            "baseline_ns": 682377,
+            "cancelled_cleanly": null,
+            "candidate_ns": 437716,
+            "equal_complete_output": true,
+            "peak_bytes": 0
+          },
+          {
+            "baseline_ns": 983788,
+            "cancelled_cleanly": null,
+            "candidate_ns": 588516,
+            "equal_complete_output": true,
+            "peak_bytes": 0
+          },
+          {
+            "baseline_ns": 666550,
+            "cancelled_cleanly": null,
+            "candidate_ns": 418584,
+            "equal_complete_output": true,
+            "peak_bytes": 0
+          },
+          {
+            "baseline_ns": 655022,
+            "cancelled_cleanly": null,
+            "candidate_ns": 425896,
+            "equal_complete_output": true,
+            "peak_bytes": 0
+          },
+          {
+            "baseline_ns": 788966,
+            "cancelled_cleanly": null,
+            "candidate_ns": 484557,
+            "equal_complete_output": true,
+            "peak_bytes": 0
+          },
+          {
+            "baseline_ns": 679226,
+            "cancelled_cleanly": null,
+            "candidate_ns": 711063,
+            "equal_complete_output": true,
+            "peak_bytes": 0
+          },
+          {
+            "baseline_ns": 661217,
+            "cancelled_cleanly": null,
+            "candidate_ns": 739245,
+            "equal_complete_output": true,
+            "peak_bytes": 0
+          },
+          {
+            "baseline_ns": 805258,
+            "cancelled_cleanly": null,
+            "candidate_ns": 1031485,
+            "equal_complete_output": true,
+            "peak_bytes": 0
+          },
+          {
+            "baseline_ns": 701346,
+            "cancelled_cleanly": null,
+            "candidate_ns": 418108,
+            "equal_complete_output": true,
+            "peak_bytes": 0
+          },
+          {
+            "baseline_ns": 1015217,
+            "cancelled_cleanly": null,
+            "candidate_ns": 445524,
+            "equal_complete_output": true,
+            "peak_bytes": 0
+          },
+          {
+            "baseline_ns": 642829,
+            "cancelled_cleanly": null,
+            "candidate_ns": 419886,
+            "equal_complete_output": true,
+            "peak_bytes": 0
+          },
+          {
+            "baseline_ns": 693551,
+            "cancelled_cleanly": null,
+            "candidate_ns": 476795,
+            "equal_complete_output": true,
+            "peak_bytes": 0
+          }
+        ],
+        "workload_id": "version:g6ju16VJ:sha256:14246a8756f2d70400a680ad2a4eaab4c92ffe42c644839702542857d55a7eb8:iterations:100"
+      },
+      "first_failure": null,
+      "iterations_per_sample": 100,
+      "limitations": [
+        "Stored snapshot provenance is recorded, not independently authenticated by this run",
+        "Generated stress augmentations are separate from the unchanged stored timing input",
+        "No network, storage or UI speedup is measured here",
+        "Peak process memory and per-strategy cancellation acceptance are unmeasured; no promotion",
+        "Failure payloads remain in the local database; review before any publication",
+        "Only fixed compiled strategies run; no source rewriting, arbitrary executable or deployment"
+      ],
+      "reason": "Completed",
+      "runner_revision": "a5dfd9d5fba6372c872922d5e157c441b71f2dc4bafa682cb52f72f97a732155",
+      "samples": [
+        {
+          "completed_iterations": 100,
+          "elapsed_ns": 776912,
+          "equal_complete_output": true,
+          "phase": "warmup",
+          "round": 0,
+          "strategy": "baseline"
+        },
+        {
+          "completed_iterations": 100,
+          "elapsed_ns": 429103,
+          "equal_complete_output": true,
+          "phase": "warmup",
+          "round": 0,
+          "strategy": "candidate"
+        },
+        {
+          "completed_iterations": 100,
+          "elapsed_ns": 407569,
+          "equal_complete_output": true,
+          "phase": "warmup",
+          "round": 1,
+          "strategy": "candidate"
+        },
+        {
+          "completed_iterations": 100,
+          "elapsed_ns": 1125811,
+          "equal_complete_output": true,
+          "phase": "warmup",
+          "round": 1,
+          "strategy": "baseline"
+        },
+        {
+          "completed_iterations": 100,
+          "elapsed_ns": 775855,
+          "equal_complete_output": true,
+          "phase": "warmup",
+          "round": 2,
+          "strategy": "baseline"
+        },
+        {
+          "completed_iterations": 100,
+          "elapsed_ns": 455495,
+          "equal_complete_output": true,
+          "phase": "warmup",
+          "round": 2,
+          "strategy": "candidate"
+        },
+        {
+          "completed_iterations": 100,
+          "elapsed_ns": 435549,
+          "equal_complete_output": true,
+          "phase": "warmup",
+          "round": 3,
+          "strategy": "candidate"
+        },
+        {
+          "completed_iterations": 100,
+          "elapsed_ns": 660805,
+          "equal_complete_output": true,
+          "phase": "warmup",
+          "round": 3,
+          "strategy": "baseline"
+        },
+        {
+          "completed_iterations": 100,
+          "elapsed_ns": 725142,
+          "equal_complete_output": true,
+          "phase": "timing",
+          "round": 4,
+          "strategy": "baseline"
+        },
+        {
+          "completed_iterations": 100,
+          "elapsed_ns": 407990,
+          "equal_complete_output": true,
+          "phase": "timing",
+          "round": 4,
+          "strategy": "candidate"
+        },
+        {
+          "completed_iterations": 100,
+          "elapsed_ns": 402427,
+          "equal_complete_output": true,
+          "phase": "timing",
+          "round": 5,
+          "strategy": "candidate"
+        },
+        {
+          "completed_iterations": 100,
+          "elapsed_ns": 1380395,
+          "equal_complete_output": true,
+          "phase": "timing",
+          "round": 5,
+          "strategy": "baseline"
+        },
+        {
+          "completed_iterations": 100,
+          "elapsed_ns": 2525767,
+          "equal_complete_output": true,
+          "phase": "timing",
+          "round": 6,
+          "strategy": "baseline"
+        },
+        {
+          "completed_iterations": 100,
+          "elapsed_ns": 795711,
+          "equal_complete_output": true,
+          "phase": "timing",
+          "round": 6,
+          "strategy": "candidate"
+        },
+        {
+          "completed_iterations": 100,
+          "elapsed_ns": 449003,
+          "equal_complete_output": true,
+          "phase": "timing",
+          "round": 7,
+          "strategy": "candidate"
+        },
+        {
+          "completed_iterations": 100,
+          "elapsed_ns": 980405,
+          "equal_complete_output": true,
+          "phase": "timing",
+          "round": 7,
+          "strategy": "baseline"
+        },
+        {
+          "completed_iterations": 100,
+          "elapsed_ns": 662318,
+          "equal_complete_output": true,
+          "phase": "timing",
+          "round": 8,
+          "strategy": "baseline"
+        },
+        {
+          "completed_iterations": 100,
+          "elapsed_ns": 557714,
+          "equal_complete_output": true,
+          "phase": "timing",
+          "round": 8,
+          "strategy": "candidate"
+        },
+        {
+          "completed_iterations": 100,
+          "elapsed_ns": 477728,
+          "equal_complete_output": true,
+          "phase": "timing",
+          "round": 9,
+          "strategy": "candidate"
+        },
+        {
+          "completed_iterations": 100,
+          "elapsed_ns": 701189,
+          "equal_complete_output": true,
+          "phase": "timing",
+          "round": 9,
+          "strategy": "baseline"
+        },
+        {
+          "completed_iterations": 100,
+          "elapsed_ns": 683102,
+          "equal_complete_output": true,
+          "phase": "timing",
+          "round": 10,
+          "strategy": "baseline"
+        },
+        {
+          "completed_iterations": 100,
+          "elapsed_ns": 437387,
+          "equal_complete_output": true,
+          "phase": "timing",
+          "round": 10,
+          "strategy": "candidate"
+        },
+        {
+          "completed_iterations": 100,
+          "elapsed_ns": 635497,
+          "equal_complete_output": true,
+          "phase": "timing",
+          "round": 11,
+          "strategy": "candidate"
+        },
+        {
+          "completed_iterations": 100,
+          "elapsed_ns": 732313,
+          "equal_complete_output": true,
+          "phase": "timing",
+          "round": 11,
+          "strategy": "baseline"
+        },
+        {
+          "completed_iterations": 100,
+          "elapsed_ns": 682377,
+          "equal_complete_output": true,
+          "phase": "timing",
+          "round": 12,
+          "strategy": "baseline"
+        },
+        {
+          "completed_iterations": 100,
+          "elapsed_ns": 437716,
+          "equal_complete_output": true,
+          "phase": "timing",
+          "round": 12,
+          "strategy": "candidate"
+        },
+        {
+          "completed_iterations": 100,
+          "elapsed_ns": 588516,
+          "equal_complete_output": true,
+          "phase": "timing",
+          "round": 13,
+          "strategy": "candidate"
+        },
+        {
+          "completed_iterations": 100,
+          "elapsed_ns": 983788,
+          "equal_complete_output": true,
+          "phase": "timing",
+          "round": 13,
+          "strategy": "baseline"
+        },
+        {
+          "completed_iterations": 100,
+          "elapsed_ns": 666550,
+          "equal_complete_output": true,
+          "phase": "timing",
+          "round": 14,
+          "strategy": "baseline"
+        },
+        {
+          "completed_iterations": 100,
+          "elapsed_ns": 418584,
+          "equal_complete_output": true,
+          "phase": "timing",
+          "round": 14,
+          "strategy": "candidate"
+        },
+        {
+          "completed_iterations": 100,
+          "elapsed_ns": 425896,
+          "equal_complete_output": true,
+          "phase": "timing",
+          "round": 15,
+          "strategy": "candidate"
+        },
+        {
+          "completed_iterations": 100,
+          "elapsed_ns": 655022,
+          "equal_complete_output": true,
+          "phase": "timing",
+          "round": 15,
+          "strategy": "baseline"
+        },
+        {
+          "completed_iterations": 100,
+          "elapsed_ns": 788966,
+          "equal_complete_output": true,
+          "phase": "timing",
+          "round": 16,
+          "strategy": "baseline"
+        },
+        {
+          "completed_iterations": 100,
+          "elapsed_ns": 484557,
+          "equal_complete_output": true,
+          "phase": "timing",
+          "round": 16,
+          "strategy": "candidate"
+        },
+        {
+          "completed_iterations": 100,
+          "elapsed_ns": 711063,
+          "equal_complete_output": true,
+          "phase": "timing",
+          "round": 17,
+          "strategy": "candidate"
+        },
+        {
+          "completed_iterations": 100,
+          "elapsed_ns": 679226,
+          "equal_complete_output": true,
+          "phase": "timing",
+          "round": 17,
+          "strategy": "baseline"
+        },
+        {
+          "completed_iterations": 100,
+          "elapsed_ns": 661217,
+          "equal_complete_output": true,
+          "phase": "timing",
+          "round": 18,
+          "strategy": "baseline"
+        },
+        {
+          "completed_iterations": 100,
+          "elapsed_ns": 739245,
+          "equal_complete_output": true,
+          "phase": "timing",
+          "round": 18,
+          "strategy": "candidate"
+        },
+        {
+          "completed_iterations": 100,
+          "elapsed_ns": 1031485,
+          "equal_complete_output": true,
+          "phase": "timing",
+          "round": 19,
+          "strategy": "candidate"
+        },
+        {
+          "completed_iterations": 100,
+          "elapsed_ns": 805258,
+          "equal_complete_output": true,
+          "phase": "timing",
+          "round": 19,
+          "strategy": "baseline"
+        },
+        {
+          "completed_iterations": 100,
+          "elapsed_ns": 701346,
+          "equal_complete_output": true,
+          "phase": "timing",
+          "round": 20,
+          "strategy": "baseline"
+        },
+        {
+          "completed_iterations": 100,
+          "elapsed_ns": 418108,
+          "equal_complete_output": true,
+          "phase": "timing",
+          "round": 20,
+          "strategy": "candidate"
+        },
+        {
+          "completed_iterations": 100,
+          "elapsed_ns": 445524,
+          "equal_complete_output": true,
+          "phase": "timing",
+          "round": 21,
+          "strategy": "candidate"
+        },
+        {
+          "completed_iterations": 100,
+          "elapsed_ns": 1015217,
+          "equal_complete_output": true,
+          "phase": "timing",
+          "round": 21,
+          "strategy": "baseline"
+        },
+        {
+          "completed_iterations": 100,
+          "elapsed_ns": 642829,
+          "equal_complete_output": true,
+          "phase": "timing",
+          "round": 22,
+          "strategy": "baseline"
+        },
+        {
+          "completed_iterations": 100,
+          "elapsed_ns": 419886,
+          "equal_complete_output": true,
+          "phase": "timing",
+          "round": 22,
+          "strategy": "candidate"
+        },
+        {
+          "completed_iterations": 100,
+          "elapsed_ns": 476795,
+          "equal_complete_output": true,
+          "phase": "timing",
+          "round": 23,
+          "strategy": "candidate"
+        },
+        {
+          "completed_iterations": 100,
+          "elapsed_ns": 693551,
+          "equal_complete_output": true,
+          "phase": "timing",
+          "round": 23,
+          "strategy": "baseline"
+        }
+      ],
+      "source": {
+        "canonical_id": "g6ju16VJ",
+        "generation": "2",
+        "payload_bytes": 1894,
+        "payload_sha256": "14246a8756f2d70400a680ad2a4eaab4c92ffe42c644839702542857d55a7eb8",
+        "project_id": "AANobbMI",
+        "provenance": "local stored Modrinth-version snapshot; selected once at worker start"
+      },
+      "warmup_trials": [
+        {
+          "baseline_ns": 776912,
+          "cancelled_cleanly": null,
+          "candidate_ns": 429103,
+          "equal_complete_output": true,
+          "peak_bytes": 0
+        },
+        {
+          "baseline_ns": 1125811,
+          "cancelled_cleanly": null,
+          "candidate_ns": 407569,
+          "equal_complete_output": true,
+          "peak_bytes": 0
+        },
+        {
+          "baseline_ns": 775855,
+          "cancelled_cleanly": null,
+          "candidate_ns": 455495,
+          "equal_complete_output": true,
+          "peak_bytes": 0
+        },
+        {
+          "baseline_ns": 660805,
+          "cancelled_cleanly": null,
+          "candidate_ns": 435549,
+          "equal_complete_output": true,
+          "peak_bytes": 0
+        }
+      ]
+    },
+    "experiment_id": 1
+  },
+  "generated_fixture_cancelled_job": {
+    "experiment": {
+      "completed": false,
+      "decision": {
+        "Incomplete": "Missing repeated timing, stress or memory measurements"
+      },
+      "elapsed_ms": 1,
+      "evidence": {
+        "baseline_revision": "value-tree:c97bf4a26e1ec2132ff7d22b0d2ed9b8d228917cae72368f8c1ba663535e104c",
+        "candidate_revision": "fixed-fields:ff7077b96d46840d958820fd97aa4c2936c84076dfa67aaf4f3fa98d3f24e95d",
+        "environment_id": "linux-x86_64; atlas-lab 0.1.0; bounded shared-process version worker",
+        "stress_cases": 0,
+        "stress_failures": 0,
+        "trials": [],
+        "workload_id": "version:QATEST00:sha256:afca0d8bf5e2e0a64b75e6b45a599e9d116a1dbd44f72279d97d5078e90d9214:iterations:100"
+      },
+      "first_failure": null,
+      "iterations_per_sample": 100,
+      "limitations": [
+        "Stored snapshot provenance is recorded, not independently authenticated by this run",
+        "Generated stress augmentations are separate from the unchanged stored timing input",
+        "No network, storage or UI speedup is measured here",
+        "Peak process memory and per-strategy cancellation acceptance are unmeasured; no promotion",
+        "Failure payloads remain in the local database; review before any publication",
+        "Only fixed compiled strategies run; no source rewriting, arbitrary executable or deployment"
+      ],
+      "reason": "Cancelled",
+      "runner_revision": "a5dfd9d5fba6372c872922d5e157c441b71f2dc4bafa682cb52f72f97a732155",
+      "samples": [
+        {
+          "completed_iterations": 28,
+          "elapsed_ns": 1137486,
+          "equal_complete_output": true,
+          "phase": "warmup",
+          "round": 0,
+          "strategy": "baseline"
+        }
+      ],
+      "source": {
+        "canonical_id": "QATEST00",
+        "generation": "4",
+        "payload_bytes": 67473,
+        "payload_sha256": "afca0d8bf5e2e0a64b75e6b45a599e9d116a1dbd44f72279d97d5078e90d9214",
+        "project_id": "AANobbMI",
+        "provenance": "local stored Modrinth-version snapshot; selected once at worker start"
+      },
+      "warmup_trials": []
+    },
+    "experiment_id": 2
+  }
+}

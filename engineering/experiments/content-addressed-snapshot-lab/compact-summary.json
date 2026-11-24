@@ -1,0 +1,271 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-29",
+  "scope": "Actual SnapshotStore versus isolated text-hash and binary-hash/integer-reference layouts; no migration",
+  "samples": 324,
+  "promoted": false,
+  "runs": [
+    {
+      "receipt": "compact-pass1.json",
+      "receipt_sha256": "25303bb21172d19d1d87ec30dde99db495c0ff2283125397eb75afcbbf9ab491",
+      "medians": [
+        {
+          "workload": "retained",
+          "lane": "baseline",
+          "samples": 12,
+          "parse_write_commit_ns": 15184971.0,
+          "reopen_latest_verify_ns": 676747.0,
+          "database_bytes": 73728.0
+        },
+        {
+          "workload": "retained",
+          "lane": "addressed",
+          "samples": 12,
+          "parse_write_commit_ns": 16393323.5,
+          "reopen_latest_verify_ns": 685025.0,
+          "database_bytes": 65536.0
+        },
+        {
+          "workload": "retained",
+          "lane": "compact",
+          "samples": 12,
+          "parse_write_commit_ns": 15362600.0,
+          "reopen_latest_verify_ns": 696692.5,
+          "database_bytes": 65536.0
+        },
+        {
+          "workload": "duplicate_replay",
+          "lane": "baseline",
+          "samples": 12,
+          "parse_write_commit_ns": 245825239.0,
+          "reopen_latest_verify_ns": 840871.5,
+          "database_bytes": 880640.0
+        },
+        {
+          "workload": "duplicate_replay",
+          "lane": "addressed",
+          "samples": 12,
+          "parse_write_commit_ns": 216435164.5,
+          "reopen_latest_verify_ns": 798354.5,
+          "database_bytes": 86016.0
+        },
+        {
+          "workload": "duplicate_replay",
+          "lane": "compact",
+          "samples": 12,
+          "parse_write_commit_ns": 212920302.0,
+          "reopen_latest_verify_ns": 752912.5,
+          "database_bytes": 81920.0
+        },
+        {
+          "workload": "unique_augmented_replay",
+          "lane": "baseline",
+          "samples": 12,
+          "parse_write_commit_ns": 244858733.5,
+          "reopen_latest_verify_ns": 802555.0,
+          "database_bytes": 880640.0
+        },
+        {
+          "workload": "unique_augmented_replay",
+          "lane": "addressed",
+          "samples": 12,
+          "parse_write_commit_ns": 250502717.0,
+          "reopen_latest_verify_ns": 935536.0,
+          "database_bytes": 909312.0
+        },
+        {
+          "workload": "unique_augmented_replay",
+          "lane": "compact",
+          "samples": 12,
+          "parse_write_commit_ns": 247190932.5,
+          "reopen_latest_verify_ns": 1044843.0,
+          "database_bytes": 897024.0
+        }
+      ],
+      "harness_archive": "initial-source/compact-harness-v3.rs"
+    },
+    {
+      "receipt": "compact-pass2.json",
+      "receipt_sha256": "a8493f8a8a83a2ea8d944aa4b2315d6edd015559f93bb3a164e372a6005b9fee",
+      "medians": [
+        {
+          "workload": "retained",
+          "lane": "baseline",
+          "samples": 12,
+          "parse_write_commit_ns": 24451618.5,
+          "reopen_latest_verify_ns": 535513.0,
+          "database_bytes": 73728.0
+        },
+        {
+          "workload": "retained",
+          "lane": "addressed",
+          "samples": 12,
+          "parse_write_commit_ns": 23440234.5,
+          "reopen_latest_verify_ns": 668623.5,
+          "database_bytes": 65536.0
+        },
+        {
+          "workload": "retained",
+          "lane": "compact",
+          "samples": 12,
+          "parse_write_commit_ns": 24900181.5,
+          "reopen_latest_verify_ns": 612243.0,
+          "database_bytes": 65536.0
+        },
+        {
+          "workload": "duplicate_replay",
+          "lane": "baseline",
+          "samples": 12,
+          "parse_write_commit_ns": 229085986.0,
+          "reopen_latest_verify_ns": 606950.0,
+          "database_bytes": 880640.0
+        },
+        {
+          "workload": "duplicate_replay",
+          "lane": "addressed",
+          "samples": 12,
+          "parse_write_commit_ns": 218835169.5,
+          "reopen_latest_verify_ns": 687788.0,
+          "database_bytes": 86016.0
+        },
+        {
+          "workload": "duplicate_replay",
+          "lane": "compact",
+          "samples": 12,
+          "parse_write_commit_ns": 218647574.0,
+          "reopen_latest_verify_ns": 799516.5,
+          "database_bytes": 81920.0
+        },
+        {
+          "workload": "unique_augmented_replay",
+          "lane": "baseline",
+          "samples": 12,
+          "parse_write_commit_ns": 234101835.0,
+          "reopen_latest_verify_ns": 673217.5,
+          "database_bytes": 880640.0
+        },
+        {
+          "workload": "unique_augmented_replay",
+          "lane": "addressed",
+          "samples": 12,
+          "parse_write_commit_ns": 241929347.0,
+          "reopen_latest_verify_ns": 669837.0,
+          "database_bytes": 909312.0
+        },
+        {
+          "workload": "unique_augmented_replay",
+          "lane": "compact",
+          "samples": 12,
+          "parse_write_commit_ns": 247920695.5,
+          "reopen_latest_verify_ns": 775968.5,
+          "database_bytes": 897024.0
+        }
+      ]
+    },
+    {
+      "receipt": "compact-pass3.json",
+      "receipt_sha256": "048a662bd3b768e4b9124499e2789a85d41b4cd42a632cd1876c03a61dba2fcb",
+      "medians": [
+        {
+          "workload": "retained",
+          "lane": "baseline",
+          "samples": 12,
+          "parse_write_commit_ns": 13217287.5,
+          "reopen_latest_verify_ns": 518431.5,
+          "database_bytes": 73728.0
+        },
+        {
+          "workload": "retained",
+          "lane": "addressed",
+          "samples": 12,
+          "parse_write_commit_ns": 11084602.5,
+          "reopen_latest_verify_ns": 623173.5,
+          "database_bytes": 65536.0
+        },
+        {
+          "workload": "retained",
+          "lane": "compact",
+          "samples": 12,
+          "parse_write_commit_ns": 13056731.5,
+          "reopen_latest_verify_ns": 611820.5,
+          "database_bytes": 65536.0
+        },
+        {
+          "workload": "duplicate_replay",
+          "lane": "baseline",
+          "samples": 12,
+          "parse_write_commit_ns": 271624170.0,
+          "reopen_latest_verify_ns": 655805.0,
+          "database_bytes": 880640.0
+        },
+        {
+          "workload": "duplicate_replay",
+          "lane": "addressed",
+          "samples": 12,
+          "parse_write_commit_ns": 236011007.5,
+          "reopen_latest_verify_ns": 1084555.0,
+          "database_bytes": 86016.0
+        },
+        {
+          "workload": "duplicate_replay",
+          "lane": "compact",
+          "samples": 12,
+          "parse_write_commit_ns": 234199122.0,
+          "reopen_latest_verify_ns": 930595.5,
+          "database_bytes": 81920.0
+        },
+        {
+          "workload": "unique_augmented_replay",
+          "lane": "baseline",
+          "samples": 12,
+          "parse_write_commit_ns": 315982477.5,
+          "reopen_latest_verify_ns": 873294.0,
+          "database_bytes": 880640.0
+        },
+        {
+          "workload": "unique_augmented_replay",
+          "lane": "addressed",
+          "samples": 12,
+          "parse_write_commit_ns": 362051687.0,
+          "reopen_latest_verify_ns": 986382.5,
+          "database_bytes": 909312.0
+        },
+        {
+          "workload": "unique_augmented_replay",
+          "lane": "compact",
+          "samples": 12,
+          "parse_write_commit_ns": 352420042.0,
+          "reopen_latest_verify_ns": 946541.0,
+          "database_bytes": 897024.0
+        }
+      ]
+    }
+  ],
+  "limitations": [
+    "Combined layout change, not independent ablation of binary hashes and integer references",
+    "Generated duplicate and unique replays are not live collection streams",
+    "All-unique storage remains larger than the actual baseline; read and write timing has regressions",
+    "Physical power loss and Windows performance untested"
+  ],
+  "recovery_receipts": [
+    "compact-comparison-crash-addressed.json",
+    "compact-comparison-crash-compact.json"
+  ],
+  "memory_receipts": [
+    "compact-comparison-memory-addressed.json",
+    "compact-comparison-memory-compact.json"
+  ],
+  "binary_sha256": "9a9e2729244071a16de1306a77ae188c948051c8cd01c2d1de3cd145fff6418a",
+  "verification": {
+    "rust_unit_tests": 126,
+    "rust_integration_tests": 8,
+    "harness_tests": 2,
+    "python_tests": 216,
+    "python_optimized_tests": 216,
+    "clippy": "all targets, warnings denied",
+    "process_interruptions": 24,
+    "fresh_memory_children": 16,
+    "shared_runner_default_rechecked": true,
+    "format_isolation": "closed fixture databases unchanged in both directions"
+  }
+}

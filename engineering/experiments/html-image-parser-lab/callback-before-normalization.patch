@@ -1,0 +1,35 @@
+--- baseline/src/provider-media.js
++++ candidate/src/provider-media.js
+@@ -459,17 +459,26 @@
+   }
+   return uniqueItems(regions.flatMap(r=>extractCurseForgeRegionImages(r.text,sourceUrl,context,identity,r.source)));
+ }
++// Isolated callback-parser image lane; all provider guards below remain unchanged.
++const { Parser: HtmlParser } = require('htmlparser2');
++function standardImageTokens(html) {
++  const images=[];
++  const parser=new HtmlParser({onopentag(name,attributes){if(name==='img')images.push(attributes);}}, {decodeEntities:true});
++  parser.end(String(html||''));
++  return images;
++}
+ function extractProviderImages(html, sourceUrl, context, provider, identity) {
+   if(provider==='curseforge')return extractCurseForgeImages(html,sourceUrl,context,identity);
+   if(!['mcpedl','modbay','fourthwall','booth','afdian','patreon','minecraft-marketplace','kofi','itch','gumroad','alltheysm','github','gitlab','hangar','spigot','bukkit','builtbybit','nexusmods','moddb','polymart'].includes(provider))return [];
+-  const region=scopedProviderRegion(html,provider,context),expected=context.title||'',out=[];const imageTag=/<img\b[^>]*>/ig;let m;
+-  while((m=imageTag.exec(region))){
+-    const tag=m[0],alt=attrValue(tag,'alt')||attrValue(tag,'title'),cls=`${attrValue(tag,'class')} ${attrValue(tag,'id')}`;
+-    const declaredW=Number(attrValue(tag,'width'))||0,declaredH=Number(attrValue(tag,'height'))||0;
++  const region=scopedProviderRegion(html,provider,context),expected=context.title||'',out=[];
++  for(const attributes of standardImageTokens(region)){
++    const attr=name=>Object.hasOwn(attributes,name)?attributes[name]:'';
++    const alt=attr('alt')||attr('title'),cls=`${attr('class')} ${attr('id')}`;
++    const declaredW=Number(attr('width'))||0,declaredH=Number(attr('height'))||0;
+     const variants=[];
+     const push=(raw,width=0,priority=0)=>{const u=absolute(raw,sourceUrl);if(u&&providerImageAllowed(provider,u))variants.push({url:u,width:Number(width)||0,priority})};
+-    push(attrValue(tag,'data-original'),declaredW,50);push(attrValue(tag,'data-lazy-src'),declaredW,40);push(attrValue(tag,'data-src'),declaredW,30);push(attrValue(tag,'src'),declaredW,20);
+-    const srcset=attrValue(tag,'srcset')||attrValue(tag,'data-srcset');if(srcset)for(const bit of srcset.split(',')){const parts=bit.trim().split(/\s+/),raw=parts[0],desc=parts[1]||'';let w=0;if(/\d+w$/i.test(desc))w=parseInt(desc,10)||0;else if(/[\d.]+x$/i.test(desc))w=Math.round((parseFloat(desc)||1)*Math.max(1,declaredW||600));push(raw,w,35)}
++    push(attr('data-original'),declaredW,50);push(attr('data-lazy-src'),declaredW,40);push(attr('data-src'),declaredW,30);push(attr('src'),declaredW,20);
++    const srcset=attr('srcset')||attr('data-srcset');if(srcset)for(const bit of srcset.split(',')){const parts=bit.trim().split(/\s+/),raw=parts[0],desc=parts[1]||'';let w=0;if(/\d+w$/i.test(desc))w=parseInt(desc,10)||0;else if(/[\d.]+x$/i.test(desc))w=Math.round((parseFloat(desc)||1)*Math.max(1,declaredW||600));push(raw,w,35)}
+     if(!variants.length)continue;
+     const uniq=[...new Map(variants.map(v=>[v.url,v])).values()];
+     const full=[...uniq].sort((a,b)=>(b.priority-a.priority)||((b.width||0)-(a.width||0)))[0];

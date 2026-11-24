@@ -1,0 +1,15 @@
+node_modules/
+.npm-cache/
+*.log
+__pycache__/
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfplan
+.openai/
+release-evidence/
+browser-results/
+public/
+
+# Local native builds and synthetic integration outputs
+/crates/athena-foundry-store/target/

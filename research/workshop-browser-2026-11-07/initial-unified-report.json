@@ -1,0 +1,44 @@
+{
+  "kind": "Static browser plus actual pinned Rust/browser acceptance",
+  "started": "2026-11-07T18:20:18.726Z",
+  "steps": [
+    {
+      "name": "research-media-reproducibility",
+      "exitCode": 0,
+      "signal": null,
+      "error": null,
+      "log": "research-media-reproducibility.log"
+    },
+    {
+      "name": "lab-reproducibility",
+      "exitCode": 0,
+      "signal": null,
+      "error": null,
+      "log": "lab-reproducibility.log"
+    },
+    {
+      "name": "standalone-media-reproducibility",
+      "exitCode": 0,
+      "signal": null,
+      "error": null,
+      "log": "standalone-media-reproducibility.log"
+    },
+    {
+      "name": "static-browser",
+      "exitCode": 0,
+      "signal": null,
+      "error": null,
+      "log": "static-browser.log"
+    },
+    {
+      "name": "workshop-browser",
+      "exitCode": 1,
+      "signal": null,
+      "error": null,
+      "log": "workshop-browser.log"
+    }
+  ],
+  "result": "failed",
+  "failure": "workshop-browser did not pass; see /home/runner/work/Athena/Athena/browser-results/workshop-browser.log",
+  "finished": "2026-11-07T18:20:24.743Z"
+}

@@ -1,0 +1,19 @@
+{
+  "kind": "partial public unified app",
+  "local_js_tests": 50,
+  "wiki_tests": 3,
+  "fixture_tests": 7,
+  "actual_loopback_tests": 8,
+  "packaging_tests": 10,
+  "native_browser": {
+    "result": "blocked before page load",
+    "installed_version": "Chromium 155.0.8059.79",
+    "error": "socket() failed: Operation not permitted",
+    "attempts": 2,
+    "escalation_attempted": true,
+    "no_bypass": true
+  },
+  "foundry": "excluded pending private-to-public approval",
+  "hosted_app": "not verified; Pages setup pending",
+  "note": "CI actual-browser receipt supersedes only the local browser block when it passes."
+}

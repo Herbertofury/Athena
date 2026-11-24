@@ -1,0 +1,78 @@
+const {chromium}=require('playwright');const http=require('node:http'),fs=require('node:fs'),path=require('node:path'),assert=require('node:assert/strict');
+(async()=>{const root=path.resolve('dist');const server=http.createServer((req,res)=>{res.setHeader('Content-Security-Policy',"default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'none'");const p=path.resolve(root,'.'+decodeURIComponent(new URL(req.url,'http://local').pathname));if(!p.startsWith(root+path.sep)&&p!==root){res.writeHead(403).end();return;}const f=p===root?path.join(root,'index.html'):p;try{res.setHeader('Content-Type',f.endsWith('.mjs')||f.endsWith('.js')?'text/javascript':f.endsWith('.css')?'text/css':f.endsWith('.json')?'application/json':'text/html');res.end(fs.readFileSync(f));}catch{res.writeHead(404).end();}});await new Promise(r=>server.listen(0,'127.0.0.1',r));let browser;try{browser=await chromium.launch({executablePath:process.env.CHROMIUM_PATH||undefined,headless:true,args:['--no-sandbox']});const context=await browser.newContext();const origin=`http://127.0.0.1:${server.address().port}`;const externalRequests=[];await context.route('**/*',route=>{const url=new URL(route.request().url());if(url.origin!==origin){externalRequests.push(url.href);return route.abort();}return route.continue();});await context.addInitScript(()=>{globalThis.__athenaCspViolations=[];document.addEventListener('securitypolicyviolation',event=>globalThis.__athenaCspViolations.push({blockedURI:event.blockedURI,directive:event.violatedDirective}));});const page=await context.newPage();const errors=[];page.on('pageerror',e=>errors.push(e.message));await page.goto(`http://127.0.0.1:${server.address().port}/#continuity`);await page.getByRole('heading',{name:'Project continuity',exact:true}).last().waitFor();await page.waitForFunction(()=>{const b=document.querySelector('.workspace-container')?.shadowRoot?.querySelector('button[type=submit]');return b&&getComputedStyle(b).borderRadius==='9px';});await page.getByLabel('Project',{exact:true}).fill('Synthetic integration');await page.getByLabel('Note',{exact:true}).fill('<script>untrusted fixture</script>');await page.getByLabel('Source URL (optional HTTPS)').fill('https://example.org/fixture');await page.getByRole('button',{name:'Save note',exact:true}).click();await page.getByText('Saved in this browser. Export a backup.',{exact:true}).waitFor();assert.deepEqual(await page.evaluate(()=>globalThis.__athenaCspViolations),[],'startup/save must not attempt blocked resources');await page.reload();await page.getByRole('button',{name:'Revise',exact:true}).click();await page.getByLabel('Note',{exact:true}).fill('Revised fixture');await page.getByRole('button',{name:'Save note',exact:true}).click();await page.getByRole('button',{name:'Ignore',exact:true}).click();await page.getByText('No matching entries. Missing evidence does not mean work is complete.').waitFor();await page.getByRole('button',{name:'Show ignored',exact:true}).click();await page.getByRole('button',{name:'Restore',exact:true}).click();await page.getByRole('button',{name:'Pin',exact:true}).click();await page.locator('nav [data-nav=media]').click();await page.getByRole('link',{name:'Project continuity',exact:true}).click();await page.getByRole('button',{name:'Unpin',exact:true}).waitFor();const saved=await page.evaluate(()=>JSON.parse(localStorage.getItem('athena-workspaces-v1')).workspaces.continuity);assert.equal(saved.entries[0].revisions.length,2);assert.equal(saved.entries[0].revisions[0].text,'<script>untrusted fixture</script>');assert.equal(saved.entries[0].ignored,false);await page.getByLabel('Project',{exact:true}).fill('Shared source');await page.getByLabel('Note',{exact:true}).fill('Shared baseline');await page.getByLabel('Source URL (optional HTTPS)').fill('https://example.org/shared');await page.getByRole('button',{name:'Save note',exact:true}).click();
+const ids=await page.evaluate(()=>JSON.parse(localStorage.getItem('athena-workspaces-v1')).workspaces.continuity.entries.map(e=>e.id));
+const first=page.locator('article[data-entry-id="'+ids[0]+'"]'),second=page.locator('article[data-entry-id="'+ids[1]+'"]');
+await first.getByText('Evidence links (0)',{exact:true}).click();await first.getByLabel('Link evidence from another note').selectOption(ids[1]);await first.getByRole('button',{name:'Link current evidence revision',exact:true}).click();
+await second.getByRole('button',{name:'Revise',exact:true}).click();await page.getByLabel('Note',{exact:true}).fill('Shared changed');await page.getByRole('button',{name:'Save note',exact:true}).click();
+await page.getByLabel('Project context',{exact:true}).selectOption('Synthetic integration');await page.locator('#context-warnings').getByText(/Evidence changed from reviewed revision 1 to observed revision 2/).waitFor();
+const packet=JSON.parse(await page.locator('#context-packet').textContent());assert.equal(packet.entries.length,2);assert.equal(packet.links[0].reviewedEvidence.text,'Shared baseline');
+const [download]=await Promise.all([page.waitForEvent('download'),page.getByRole('button',{name:'Export context Markdown',exact:true}).click()]);const markdown=fs.readFileSync(await download.path(),'utf8');assert(markdown.includes('Shared baseline'));assert(markdown.includes('Shared changed'));assert(markdown.includes('https://example.org/shared'));
+await page.reload();await page.locator('#context-warnings').getByText(/Evidence changed from reviewed revision 1 to observed revision 2/).waitFor();await first.getByText('Evidence links (1)',{exact:true}).click();await first.getByRole('button',{name:'Mark latest revision reviewed',exact:true}).click();await page.locator('#context-warnings').getByText(/No changed or missing linked evidence detected/).waitFor();
+const backup=await page.evaluate(()=>JSON.parse(localStorage.getItem('athena-workspaces-v1')).workspaces.continuity);
+await page.getByLabel('Import local continuity backup').setInputFiles({name:'synthetic-continuity.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(backup))});
+await page.getByText('Imported 0 notes; 2 identical notes retained. Saved in this browser. Export a backup.',{exact:true}).waitFor();
+backup.entries[0].pinned=!backup.entries[0].pinned;
+await page.getByLabel('Import local continuity backup').setInputFiles({name:'conflict.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(backup))});
+await page.getByText(/Import refused:/).waitFor();
+assert.notEqual(await page.evaluate(()=>JSON.parse(localStorage.getItem('athena-workspaces-v1')).workspaces.continuity.entries[0].pinned),backup.entries[0].pinned);
+const shared=await browser.newContext();
+try{
+ await shared.route('**/*',route=>{const url=new URL(route.request().url());if(url.origin!==origin){externalRequests.push(url.href);return route.abort();}return route.continue();});
+ const key='athena-workspaces-v1';
+ const open=async route=>{
+  const tab=await shared.newPage();
+  tab.on('pageerror',error=>errors.push(error.message));
+  await tab.goto(origin+'/#'+route);
+  await tab.getByRole('heading',{name:route==='projects'?'Project browser':'Project continuity',exact:true}).last().waitFor();
+  return tab;
+ };
+ const addNote=async(tab,label)=>{
+  await tab.getByLabel('Project',{exact:true}).fill('Continuity fixture');
+  await tab.getByLabel('Note',{exact:true}).fill(label);
+  await tab.getByRole('button',{name:'Save note',exact:true}).click();
+ };
+ const addProject=async(tab,label)=>{
+  await tab.getByRole('button',{name:'New project',exact:true}).click();
+  await tab.getByLabel('Project name',{exact:true}).fill(label);
+  await tab.getByRole('button',{name:'Save project',exact:true}).click();
+  await tab.getByText('Saved in this browser. Export a backup.',{exact:true}).waitFor();
+ };
+ const bytes=tab=>tab.evaluate(key=>localStorage.getItem(key),key);
+ const count=async(tab,p,c)=>{
+  const {workspaces}=JSON.parse(await bytes(tab));
+  assert.equal(workspaces.projects.entries.length,p);
+  assert.equal(workspaces.continuity.entries.length,c);
+ };
+ const saveStatus='Saved in this browser. Export a backup.';
+ const projectTab=await open('projects'),notesTab=await open('continuity');
+ await addProject(projectTab,'Preserve newer Projects');
+ await addNote(notesTab,'Save from older Continuity');
+ await notesTab.getByText(saveStatus,{exact:true}).waitFor();
+ await count(notesTab,1,1);
+ await projectTab.reload();
+ await projectTab.getByRole('button',{name:'Open Preserve newer Projects',exact:true}).waitFor();
+ await addNote(notesTab,'Continuity inverse order');
+ await notesTab.getByText(saveStatus,{exact:true}).waitFor();
+ await addProject(projectTab,'Projects inverse order');
+ await count(projectTab,2,2);
+ const stale=await open('continuity');
+ await addNote(notesTab,'Winning saved note');
+ await notesTab.getByText(saveStatus,{exact:true}).waitFor();
+ const winner=await bytes(notesTab);
+ await addNote(stale,'Export stale draft');
+ await stale.getByText('Not saved. Saved Continuity changed. Export the local draft before reloading Athena.',{exact:true}).waitFor();
+ assert.equal(await bytes(stale),winner);
+ const [staleCopy]=await Promise.all([stale.waitForEvent('download'),stale.getByRole('button',{name:'Export local continuity JSON',exact:true}).click()]);
+ assert.ok(JSON.parse(fs.readFileSync(await staleCopy.path(),'utf8')).entries.some(entry=>entry.revisions.at(-1).text==='Export stale draft'));
+ await stale.reload();
+ await stale.getByText('Winning saved note',{exact:true}).waitFor();
+ assert.equal(await stale.getByText('Export stale draft',{exact:true}).count(),0);
+ await count(stale,2,3);
+ const malformed='{corrupt fixture';
+ await stale.evaluate(({key,malformed})=>localStorage.setItem(key,malformed),{key,malformed});
+ await addNote(stale,'Not written to corrupt storage');
+ await stale.getByText('Not saved to durable browser storage. Keep this page open and export the local draft.',{exact:true}).waitFor();
+ assert.equal(await bytes(stale),malformed);
+}finally{await shared.close();}
+await page.evaluate(()=>{Storage.prototype.setItem=function(){throw Error('Synthetic quota failure');};});await page.getByLabel('Project',{exact:true}).fill('Unsaved draft');await page.getByLabel('Note',{exact:true}).fill('Keep this exportable after a quota failure');await page.getByRole('button',{name:'Save note',exact:true}).click();await page.getByText('Not saved to durable browser storage. Keep this page open and export the local draft.',{exact:true}).waitFor();const [draftDownload]=await Promise.all([page.waitForEvent('download'),page.getByRole('button',{name:'Export local continuity JSON',exact:true}).click()]);const draft=JSON.parse(fs.readFileSync(await draftDownload.path(),'utf8'));assert.equal(draft.entries.length,3);assert.equal(draft.entries[2].revisions[0].text,'Keep this exportable after a quota failure');assert.equal(await page.evaluate(()=>JSON.parse(localStorage.getItem('athena-workspaces-v1')).workspaces.continuity.entries.length),2);assert.deepEqual(externalRequests,[],'Continuity startup, save, reload and export must not attempt external requests');assert.deepEqual(await page.evaluate(()=>globalThis.__athenaCspViolations),[],'reloaded Continuity must not attempt CSP-blocked resources');assert.deepEqual(errors,[]);console.log('PASS native continuity plus cross-project revision links, stale advisory, baseline/current Markdown download, persistence and manual review; synthetic local fixture only');}finally{await browser?.close();server.close();}})().catch(e=>{console.error(e);process.exitCode=1;});
+

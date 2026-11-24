@@ -1,0 +1,97 @@
+{
+  "checked": "2026-11-07",
+  "method": "Opened official sources through web research. No provider consoles, account data or cloud APIs accessed.",
+  "source_scope": "Sources support concepts and attributed vendor examples. All fixture schemas, rates, identifiers and exercises are original instructional choices, not provider API emulations.",
+  "sources": [
+    {
+      "id": "nist",
+      "url": "https://csrc.nist.gov/pubs/sp/800/145/final",
+      "status": "opened",
+      "supports": "Five essential characteristics, three service models and four deployment models."
+    },
+    {
+      "id": "nist_pdf",
+      "url": "https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-145.pdf",
+      "status": "opened",
+      "supports": "Official full definition and scope; NIST publication states it is not subject to copyright."
+    },
+    {
+      "id": "aws_shared",
+      "url": "https://aws.amazon.com/compliance/shared-responsibility-model/",
+      "status": "opened",
+      "supports": "Provider infrastructure versus customer-controlled security responsibilities, varying by service."
+    },
+    {
+      "id": "azure_shared",
+      "url": "https://learn.microsoft.com/en-us/azure/security/fundamentals/shared-responsibility",
+      "status": "opened",
+      "supports": "Illustrative responsibility split and retained data, identity and configuration duties."
+    },
+    {
+      "id": "hierarchy",
+      "url": "https://docs.cloud.google.com/resource-manager/docs/cloud-platform-resource-hierarchy",
+      "status": "opened",
+      "supports": "Google Cloud parent-child organization, folder and project hierarchy and inheritance."
+    },
+    {
+      "id": "scope",
+      "url": "https://learn.microsoft.com/en-us/azure/role-based-access-control/scope-overview",
+      "status": "opened",
+      "supports": "Azure role-assignment scopes and why narrower resource scope limits affected resources."
+    },
+    {
+      "id": "network",
+      "url": "https://docs.aws.amazon.com/vpc/latest/userguide/vpc-security-groups.html",
+      "status": "opened",
+      "supports": "AWS security-group purpose and service-specific stateful behavior, not reproduced by the local gates."
+    },
+    {
+      "id": "storage",
+      "url": "https://learn.microsoft.com/en-us/azure/architecture/storage/storage-get-started",
+      "status": "opened",
+      "supports": "Object, file and block storage interface examples."
+    },
+    {
+      "id": "object",
+      "url": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html",
+      "status": "opened",
+      "supports": "S3 as an object-storage service, with access and lifecycle choices."
+    },
+    {
+      "id": "scaling",
+      "url": "https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-scale-based-on-demand.html",
+      "status": "opened",
+      "supports": "Dynamic scaling policies, targets and bounds; local formula is an original simplified model."
+    },
+    {
+      "id": "zones",
+      "url": "https://docs.aws.amazon.com/whitepapers/latest/aws-fault-isolation-boundaries/availability-zones.html",
+      "status": "opened",
+      "supports": "Availability Zone isolation and architecture-dependent resilience; no probability or SLA claim."
+    },
+    {
+      "id": "recovery",
+      "url": "https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/disaster-recovery-dr-objectives.html",
+      "status": "opened",
+      "supports": "Separate RTO and RPO definitions and their distinction from observations."
+    },
+    {
+      "id": "recovery_plan",
+      "url": "https://docs.aws.amazon.com/wellarchitected/latest/framework/rel_planning_for_recovery_objective_defined_recovery.html",
+      "status": "opened",
+      "supports": "Business/dependency-based recovery targets and the need to verify recovery methods."
+    },
+    {
+      "id": "budget",
+      "url": "https://docs.aws.amazon.com/cost-management/latest/userguide/budgets-managing-costs.html",
+      "status": "opened",
+      "supports": "Budget information and notification delay; thresholds are not instant hard caps."
+    },
+    {
+      "id": "changes",
+      "url": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-changesets.html",
+      "status": "opened",
+      "supports": "Previewing change sets before execution does not guarantee successful update."
+    }
+  ]
+}

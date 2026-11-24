@@ -1,0 +1,86 @@
+{
+  "checked_at": "2026-10-28",
+  "user_facing_date": "2026-10-27 America/Denver",
+  "scope": "Small public HTTP observations. No account login, native follow mutation, attachment download, media decode or target-app comparison was performed.",
+  "method": "Public HTTPS GET with an identified EngineeringAtlasResearch User-Agent; HTML structure and strictly decoded JSON-LD inspected. No private endpoints or credentials used.",
+  "observations": [
+    {
+      "site": "dwemer-mods",
+      "url": "https://dwemermods.com/mods/5467",
+      "status": 200,
+      "body_sha256": "072498191027a78c0159dda9c4bc4e9dfc27952be5ffd7ee6cd0e7da2a66dfda",
+      "observed": {
+        "structured_type": "CreativeWork",
+        "fields": ["name", "description", "url", "image", "datePublished", "dateModified", "author.name"],
+        "original_author_name": "CinnaMewRoll",
+        "listing_uploader_profile": "https://dwemermods.com/users/ericthehushed",
+        "uploader_name": "Ericthehushed",
+        "uploader_avatar_is_default": true,
+        "author_uploader_are_distinct": true
+      },
+      "not_established": ["original author's stable account ID", "original author's portrait", "full rendered body", "complete gallery", "file download", "native following"]
+    },
+    {
+      "site": "wcif",
+      "url": "https://wcif.cc/creators",
+      "status": 200,
+      "body_sha256": "d7005515e59e6bab1424e30106916c5ec706531670e1974513b75f3a5f81889b",
+      "observed": {
+        "creator_table_shell": true,
+        "loading_placeholder_in_initial_html": true,
+        "creator_rows_recovered_from_initial_html": false,
+        "source_and_social_columns": true
+      },
+      "not_established": ["rendered creator list", "pagination", "stable creator IDs", "native follows", "hosted downloads", "original-provider entitlement"]
+    },
+    {
+      "site": "plumbdex",
+      "url": "https://dev-pd.gametimedev.de/creators",
+      "status": 200,
+      "body_sha256": "50129ccb34660e4864ab93b3acbf5aaabbea68de5732c14e62555b95bc9b706d",
+      "observed": {
+        "creator_links_in_initial_html": true,
+        "creator_avatar_urls_in_initial_html": true,
+        "angular_ng_state_keys": ["wikiHost", "siteOrigin", "__nghData__"],
+        "full_creator_api_payload_established": false
+      },
+      "not_established": ["stable public API", "all directory pages", "native follows", "account access"]
+    },
+    {
+      "site": "plumbdex",
+      "url": "https://dev-pd.gametimedev.de/creators/148dazed",
+      "status": 200,
+      "observed": {
+        "profile_identity": true,
+        "sign_in_to_follow_control": true,
+        "source_link": true,
+        "associated_file_links": true,
+        "show_more_control": true,
+        "possible_incorrect_creator_match_notice": true
+      },
+      "not_established": ["full associated-file pagination", "native follow write/read-back", "downloadable mod payloads"]
+    },
+    {
+      "site": "ts4-rebels",
+      "url": "https://ts4rebels.cc",
+      "status": 200,
+      "body_sha256": "de1545c105a82c4743bf7d7f24a4f5ff8356c4ecc92c8a299b32ab07191c8ac7",
+      "observed": {
+        "forum_index": true,
+        "topic_pagination": true,
+        "topic_and_post_links": true,
+        "feed_links_advertised": true,
+        "guest_hidden_link_markers": true,
+        "session_parameters_redacted": true
+      },
+      "not_established": ["feed response", "authenticated topic access", "hidden links", "attachment download", "native author follow"]
+    }
+  ],
+  "retained_failures": [
+    {"url": "https://dev-pd.gametimedev.de/creators", "method": "search-service open", "outcome": "not accessible in that tool; separate public HTTP fetch succeeded"},
+    {"url": "https://ts4rebels.cc/about-us", "method": "public HTTP GET", "outcome": "404 despite recent indexed first-party text; root independently returned 200"},
+    {"url": "https://wcif.cc/creators", "method": "public HTML inspection", "outcome": "loading shell, not a complete creator extraction"}
+  ],
+  "publication_hygiene": "No raw HTML, session parameters, credentials, private post bodies, paid media or signed file URLs included. Body hashes identify a single observed response and can change with normal page updates.",
+  "acceptance": "Research evidence only; no new adapter accepted in GameSync Next."
+}

@@ -1,0 +1,60 @@
+{
+  "schema": 1,
+  "source": "Herbertofury/Feature-Foundry",
+  "kind": "reviewed documentation content and sanitized provenance; NOT a Git history bundle",
+  "original_git_history_recoverable": false,
+  "source_commits": [
+    "cbc84c492437de72d1bb1f42bc62fda802f77157",
+    "7f0eb686ecf256e8f6690d7507ff0e3b5e03e098",
+    "07d66bde6b758992d04a6b580f159599c705de55"
+  ],
+  "excluded": [
+    "author and committer identities",
+    "commit messages and timestamps",
+    "signatures and raw Git objects",
+    "private issue content",
+    "private or identifying metadata outside reviewed text",
+    "unlicensed assets"
+  ],
+  "review": {
+    "paths": [
+      "README.md",
+      "docs/competitive-landscape.md"
+    ],
+    "license": "MIT; preserved LICENSE",
+    "credential_and_private_identifier_scan": "no matching credential/private-share/identity content in selected text",
+    "scope": "Only reviewed documentation changes; no original README surrounding private identifiers reintroduced"
+  },
+  "files": [
+    {
+      "path": "LICENSE",
+      "bytes": 1072,
+      "sha256": "d59d2cb7bda078bc472e5c2c1b68350509b31523cb63318647c05704878743b5"
+    },
+    {
+      "path": "README.addition.md",
+      "bytes": 218,
+      "sha256": "23d5811f9519dce9c67d8cf4ebcb1db054590a890e11c4d68ac8e0519fe07e35"
+    },
+    {
+      "path": "README.md",
+      "bytes": 1837,
+      "sha256": "bee33a3b08e7d69694d723c62deb473cf2da7d414e7831d42bca4be435170230"
+    },
+    {
+      "path": "competitive-landscape.final.md",
+      "bytes": 3702,
+      "sha256": "76807ae7dc5945685635dd9632ea87a8097cfd1d66af1e3b511b32ffd81db950"
+    },
+    {
+      "path": "competitive-landscape.initial.md",
+      "bytes": 1967,
+      "sha256": "b926d3796b1cd65dc18ad71e609b582c7ebb53cba2a9e2f8b4ec83ac29473cb1"
+    },
+    {
+      "path": "patches.json",
+      "bytes": 5248,
+      "sha256": "67abe28d965cb4c27a4e5fdb25a01e9c0a14ad08ee46b101edd1bc393f952835"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "baseline_commit": "dbafcb04499a186deb013923c34f13fdc292f318",
+  "new_baseline_failures": 3,
+  "focused_tests": 5,
+  "generated_engine_replacements": 1000,
+  "complete_generated_cards_checked": 50000,
+  "full_node_passes": 278,
+  "python_passes": 237,
+  "python_optimized_passes": 237,
+  "rust_unit_passes": 141,
+  "rust_integration_passes": 9,
+  "clippy_all_targets": "passed",
+  "native_browser_accepted": false,
+  "source_hashes": {
+    "apps/atlas-lab/ui/app.js": "b2d5e1307be1f66d152d8350b3d9dff9846936f891fff11abd3fecbfd9d6042d",
+    "apps/atlas-lab/src/server.rs": "442bad336abfed80317f87477536465a81db6e2ad83a974130264acb99efe583",
+    "apps/atlas-lab/Cargo.toml": "b7e5274bb2478cbdfc79f8d40908912bd7740c45a211126642834e0b4215a3a4",
+    "apps/atlas-lab/Cargo.lock": "4185f6275edcfb8060e621f8d68a7ae9950332ec81dc760a7e9839552397edb3",
+    "experiments/job-identity-lab/render-harness.mjs": "e183aa04356ca60dfbd8608ff264787eb8b2b824937fedfff6f785107dcf231b",
+    "tests/overview-engine-identity.test.mjs": "adab59beadeaa5dd93255b774b91d4a017e7d710387a9baacc74b7b6c4978943"
+  }
+}

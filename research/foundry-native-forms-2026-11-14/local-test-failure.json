@@ -1,0 +1,8 @@
+{
+  "stage": "initial node regression",
+  "tests": 192,
+  "passed": 191,
+  "failed": 1,
+  "failure": "New theme palette test retained the first option because the Linkedom select-value shim sequentially toggled option.selected.",
+  "fix": "Remove selected attributes first, then set the one selected option. Production selector unchanged."
+}

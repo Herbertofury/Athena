@@ -1,0 +1,732 @@
+[
+  {
+    "name": "iframe",
+    "markup": "<iframe><img class=\"gallery\" src=\"https://staticdelivery.nexusmods.com/mods/1704/images/123456/fixture.png\" alt=\"Hidden\"></iframe>",
+    "count": 0,
+    "alt": null,
+    "outputs": {
+      "baseline": {
+        "gallery": [
+          {
+            "url": "https://staticdelivery.nexusmods.com/mods/1704/images/123456/fixture.png",
+            "previewUrl": "",
+            "posterUrl": "",
+            "alt": "Hidden",
+            "width": 0,
+            "height": 0,
+            "role": "gallery",
+            "mediaType": "image",
+            "source": "nexusmods-scoped-project-media",
+            "provider": "nexusmods",
+            "confidence": 100,
+            "identity": 100
+          }
+        ],
+        "correct": false
+      },
+      "sax": {
+        "gallery": [],
+        "correct": true
+      },
+      "callback": {
+        "gallery": [],
+        "correct": true
+      }
+    }
+  },
+  {
+    "name": "noembed",
+    "markup": "<noembed><img class=\"gallery\" src=\"https://staticdelivery.nexusmods.com/mods/1704/images/123456/fixture.png\" alt=\"Hidden\"></noembed>",
+    "count": 0,
+    "alt": null,
+    "outputs": {
+      "baseline": {
+        "gallery": [
+          {
+            "url": "https://staticdelivery.nexusmods.com/mods/1704/images/123456/fixture.png",
+            "previewUrl": "",
+            "posterUrl": "",
+            "alt": "Hidden",
+            "width": 0,
+            "height": 0,
+            "role": "gallery",
+            "mediaType": "image",
+            "source": "nexusmods-scoped-project-media",
+            "provider": "nexusmods",
+            "confidence": 100,
+            "identity": 100
+          }
+        ],
+        "correct": false
+      },
+      "sax": {
+        "gallery": [],
+        "correct": true
+      },
+      "callback": {
+        "gallery": [],
+        "correct": true
+      }
+    }
+  },
+  {
+    "name": "noframes",
+    "markup": "<noframes><img class=\"gallery\" src=\"https://staticdelivery.nexusmods.com/mods/1704/images/123456/fixture.png\" alt=\"Hidden\"></noframes>",
+    "count": 0,
+    "alt": null,
+    "outputs": {
+      "baseline": {
+        "gallery": [
+          {
+            "url": "https://staticdelivery.nexusmods.com/mods/1704/images/123456/fixture.png",
+            "previewUrl": "",
+            "posterUrl": "",
+            "alt": "Hidden",
+            "width": 0,
+            "height": 0,
+            "role": "gallery",
+            "mediaType": "image",
+            "source": "nexusmods-scoped-project-media",
+            "provider": "nexusmods",
+            "confidence": 100,
+            "identity": 100
+          }
+        ],
+        "correct": false
+      },
+      "sax": {
+        "gallery": [],
+        "correct": true
+      },
+      "callback": {
+        "gallery": [],
+        "correct": true
+      }
+    }
+  },
+  {
+    "name": "textarea",
+    "markup": "<textarea><img class=\"gallery\" src=\"https://staticdelivery.nexusmods.com/mods/1704/images/123456/fixture.png\" alt=\"Hidden\"></textarea>",
+    "count": 0,
+    "alt": null,
+    "outputs": {
+      "baseline": {
+        "gallery": [
+          {
+            "url": "https://staticdelivery.nexusmods.com/mods/1704/images/123456/fixture.png",
+            "previewUrl": "",
+            "posterUrl": "",
+            "alt": "Hidden",
+            "width": 0,
+            "height": 0,
+            "role": "gallery",
+            "mediaType": "image",
+            "source": "nexusmods-scoped-project-media",
+            "provider": "nexusmods",
+            "confidence": 100,
+            "identity": 100
+          }
+        ],
+        "correct": false
+      },
+      "sax": {
+        "gallery": [],
+        "correct": true
+      },
+      "callback": {
+        "gallery": [],
+        "correct": true
+      }
+    }
+  },
+  {
+    "name": "style",
+    "markup": "<style><img class=\"gallery\" src=\"https://staticdelivery.nexusmods.com/mods/1704/images/123456/fixture.png\" alt=\"Hidden\"></style>",
+    "count": 0,
+    "alt": null,
+    "outputs": {
+      "baseline": {
+        "gallery": [
+          {
+            "url": "https://staticdelivery.nexusmods.com/mods/1704/images/123456/fixture.png",
+            "previewUrl": "",
+            "posterUrl": "",
+            "alt": "Hidden",
+            "width": 0,
+            "height": 0,
+            "role": "gallery",
+            "mediaType": "image",
+            "source": "nexusmods-scoped-project-media",
+            "provider": "nexusmods",
+            "confidence": 100,
+            "identity": 100
+          }
+        ],
+        "correct": false
+      },
+      "sax": {
+        "gallery": [],
+        "correct": true
+      },
+      "callback": {
+        "gallery": [],
+        "correct": true
+      }
+    }
+  },
+  {
+    "name": "self-closing script in HTML",
+    "markup": "<script/><img class=\"gallery\" src=\"https://staticdelivery.nexusmods.com/mods/1704/images/123456/fixture.png\" alt=\"Hidden\"></script>",
+    "count": 0,
+    "alt": null,
+    "outputs": {
+      "baseline": {
+        "gallery": [
+          {
+            "url": "https://staticdelivery.nexusmods.com/mods/1704/images/123456/fixture.png",
+            "previewUrl": "",
+            "posterUrl": "",
+            "alt": "Hidden",
+            "width": 0,
+            "height": 0,
+            "role": "gallery",
+            "mediaType": "image",
+            "source": "nexusmods-scoped-project-media",
+            "provider": "nexusmods",
+            "confidence": 100,
+            "identity": 100
+          }
+        ],
+        "correct": false
+      },
+      "sax": {
+        "gallery": [],
+        "correct": true
+      },
+      "callback": {
+        "gallery": [],
+        "correct": true
+      }
+    }
+  },
+  {
+    "name": "null replacement",
+    "markup": "<img class=\"gallery\" src=\"https://staticdelivery.nexusmods.com/mods/1704/images/123456/fixture.png\" alt=\"a\u0000b\">",
+    "count": 1,
+    "alt": "a�b",
+    "outputs": {
+      "baseline": {
+        "gallery": [
+          {
+            "url": "https://staticdelivery.nexusmods.com/mods/1704/images/123456/fixture.png",
+            "previewUrl": "",
+            "posterUrl": "",
+            "alt": "a\u0000b",
+            "width": 0,
+            "height": 0,
+            "role": "gallery",
+            "mediaType": "image",
+            "source": "nexusmods-scoped-project-media",
+            "provider": "nexusmods",
+            "confidence": 100,
+            "identity": 100
+          }
+        ],
+        "correct": false
+      },
+      "sax": {
+        "gallery": [
+          {
+            "url": "https://staticdelivery.nexusmods.com/mods/1704/images/123456/fixture.png",
+            "previewUrl": "",
+            "posterUrl": "",
+            "alt": "a�b",
+            "width": 0,
+            "height": 0,
+            "role": "gallery",
+            "mediaType": "image",
+            "source": "nexusmods-scoped-project-media",
+            "provider": "nexusmods",
+            "confidence": 100,
+            "identity": 100
+          }
+        ],
+        "correct": true
+      },
+      "callback": {
+        "gallery": [
+          {
+            "url": "https://staticdelivery.nexusmods.com/mods/1704/images/123456/fixture.png",
+            "previewUrl": "",
+            "posterUrl": "",
+            "alt": "a\u0000b",
+            "width": 0,
+            "height": 0,
+            "role": "gallery",
+            "mediaType": "image",
+            "source": "nexusmods-scoped-project-media",
+            "provider": "nexusmods",
+            "confidence": 100,
+            "identity": 100
+          }
+        ],
+        "correct": false
+      }
+    }
+  },
+  {
+    "name": "duplicate attribute keeps first",
+    "markup": "<img class=\"gallery\" src=\"https://staticdelivery.nexusmods.com/mods/1704/images/123456/fixture.png\" alt=\"First\" alt=\"Second\">",
+    "count": 1,
+    "alt": "First",
+    "outputs": {
+      "baseline": {
+        "gallery": [
+          {
+            "url": "https://staticdelivery.nexusmods.com/mods/1704/images/123456/fixture.png",
+            "previewUrl": "",
+            "posterUrl": "",
+            "alt": "First",
+            "width": 0,
+            "height": 0,
+            "role": "gallery",
+            "mediaType": "image",
+            "source": "nexusmods-scoped-project-media",
+            "provider": "nexusmods",
+            "confidence": 100,
+            "identity": 100
+          }
+        ],
+        "correct": true
+      },
+      "sax": {
+        "gallery": [
+          {
+            "url": "https://staticdelivery.nexusmods.com/mods/1704/images/123456/fixture.png",
+            "previewUrl": "",
+            "posterUrl": "",
+            "alt": "First",
+            "width": 0,
+            "height": 0,
+            "role": "gallery",
+            "mediaType": "image",
+            "source": "nexusmods-scoped-project-media",
+            "provider": "nexusmods",
+            "confidence": 100,
+            "identity": 100
+          }
+        ],
+        "correct": true
+      },
+      "callback": {
+        "gallery": [
+          {
+            "url": "https://staticdelivery.nexusmods.com/mods/1704/images/123456/fixture.png",
+            "previewUrl": "",
+            "posterUrl": "",
+            "alt": "First",
+            "width": 0,
+            "height": 0,
+            "role": "gallery",
+            "mediaType": "image",
+            "source": "nexusmods-scoped-project-media",
+            "provider": "nexusmods",
+            "confidence": 100,
+            "identity": 100
+          }
+        ],
+        "correct": true
+      }
+    }
+  },
+  {
+    "name": "ambiguous named reference",
+    "markup": "<img class=\"gallery\" src=\"https://staticdelivery.nexusmods.com/mods/1704/images/123456/fixture.png\" alt=\"&notit;\">",
+    "count": 1,
+    "alt": "&notit;",
+    "outputs": {
+      "baseline": {
+        "gallery": [
+          {
+            "url": "https://staticdelivery.nexusmods.com/mods/1704/images/123456/fixture.png",
+            "previewUrl": "",
+            "posterUrl": "",
+            "alt": "&notit;",
+            "width": 0,
+            "height": 0,
+            "role": "gallery",
+            "mediaType": "image",
+            "source": "nexusmods-scoped-project-media",
+            "provider": "nexusmods",
+            "confidence": 100,
+            "identity": 100
+          }
+        ],
+        "correct": true
+      },
+      "sax": {
+        "gallery": [
+          {
+            "url": "https://staticdelivery.nexusmods.com/mods/1704/images/123456/fixture.png",
+            "previewUrl": "",
+            "posterUrl": "",
+            "alt": "&notit;",
+            "width": 0,
+            "height": 0,
+            "role": "gallery",
+            "mediaType": "image",
+            "source": "nexusmods-scoped-project-media",
+            "provider": "nexusmods",
+            "confidence": 100,
+            "identity": 100
+          }
+        ],
+        "correct": true
+      },
+      "callback": {
+        "gallery": [
+          {
+            "url": "https://staticdelivery.nexusmods.com/mods/1704/images/123456/fixture.png",
+            "previewUrl": "",
+            "posterUrl": "",
+            "alt": "&notit;",
+            "width": 0,
+            "height": 0,
+            "role": "gallery",
+            "mediaType": "image",
+            "source": "nexusmods-scoped-project-media",
+            "provider": "nexusmods",
+            "confidence": 100,
+            "identity": 100
+          }
+        ],
+        "correct": true
+      }
+    }
+  },
+  {
+    "name": "literal CRLF",
+    "markup": "<img class=\"gallery\" src=\"https://staticdelivery.nexusmods.com/mods/1704/images/123456/fixture.png\" alt=\"a\r\nb\">",
+    "count": 1,
+    "alt": "a\nb",
+    "outputs": {
+      "baseline": {
+        "gallery": [
+          {
+            "url": "https://staticdelivery.nexusmods.com/mods/1704/images/123456/fixture.png",
+            "previewUrl": "",
+            "posterUrl": "",
+            "alt": "a\r\nb",
+            "width": 0,
+            "height": 0,
+            "role": "gallery",
+            "mediaType": "image",
+            "source": "nexusmods-scoped-project-media",
+            "provider": "nexusmods",
+            "confidence": 100,
+            "identity": 100
+          }
+        ],
+        "correct": false
+      },
+      "sax": {
+        "gallery": [
+          {
+            "url": "https://staticdelivery.nexusmods.com/mods/1704/images/123456/fixture.png",
+            "previewUrl": "",
+            "posterUrl": "",
+            "alt": "a\nb",
+            "width": 0,
+            "height": 0,
+            "role": "gallery",
+            "mediaType": "image",
+            "source": "nexusmods-scoped-project-media",
+            "provider": "nexusmods",
+            "confidence": 100,
+            "identity": 100
+          }
+        ],
+        "correct": true
+      },
+      "callback": {
+        "gallery": [
+          {
+            "url": "https://staticdelivery.nexusmods.com/mods/1704/images/123456/fixture.png",
+            "previewUrl": "",
+            "posterUrl": "",
+            "alt": "a\r\nb",
+            "width": 0,
+            "height": 0,
+            "role": "gallery",
+            "mediaType": "image",
+            "source": "nexusmods-scoped-project-media",
+            "provider": "nexusmods",
+            "confidence": 100,
+            "identity": 100
+          }
+        ],
+        "correct": false
+      }
+    }
+  },
+  {
+    "name": "literal CR",
+    "markup": "<img class=\"gallery\" src=\"https://staticdelivery.nexusmods.com/mods/1704/images/123456/fixture.png\" alt=\"a\rb\">",
+    "count": 1,
+    "alt": "a\nb",
+    "outputs": {
+      "baseline": {
+        "gallery": [
+          {
+            "url": "https://staticdelivery.nexusmods.com/mods/1704/images/123456/fixture.png",
+            "previewUrl": "",
+            "posterUrl": "",
+            "alt": "a\rb",
+            "width": 0,
+            "height": 0,
+            "role": "gallery",
+            "mediaType": "image",
+            "source": "nexusmods-scoped-project-media",
+            "provider": "nexusmods",
+            "confidence": 100,
+            "identity": 100
+          }
+        ],
+        "correct": false
+      },
+      "sax": {
+        "gallery": [
+          {
+            "url": "https://staticdelivery.nexusmods.com/mods/1704/images/123456/fixture.png",
+            "previewUrl": "",
+            "posterUrl": "",
+            "alt": "a\nb",
+            "width": 0,
+            "height": 0,
+            "role": "gallery",
+            "mediaType": "image",
+            "source": "nexusmods-scoped-project-media",
+            "provider": "nexusmods",
+            "confidence": 100,
+            "identity": 100
+          }
+        ],
+        "correct": true
+      },
+      "callback": {
+        "gallery": [
+          {
+            "url": "https://staticdelivery.nexusmods.com/mods/1704/images/123456/fixture.png",
+            "previewUrl": "",
+            "posterUrl": "",
+            "alt": "a\rb",
+            "width": 0,
+            "height": 0,
+            "role": "gallery",
+            "mediaType": "image",
+            "source": "nexusmods-scoped-project-media",
+            "provider": "nexusmods",
+            "confidence": 100,
+            "identity": 100
+          }
+        ],
+        "correct": false
+      }
+    }
+  },
+  {
+    "name": "numeric CR",
+    "markup": "<img class=\"gallery\" src=\"https://staticdelivery.nexusmods.com/mods/1704/images/123456/fixture.png\" alt=\"a&#13;b\">",
+    "count": 1,
+    "alt": "a\rb",
+    "outputs": {
+      "baseline": {
+        "gallery": [
+          {
+            "url": "https://staticdelivery.nexusmods.com/mods/1704/images/123456/fixture.png",
+            "previewUrl": "",
+            "posterUrl": "",
+            "alt": "a&#13;b",
+            "width": 0,
+            "height": 0,
+            "role": "gallery",
+            "mediaType": "image",
+            "source": "nexusmods-scoped-project-media",
+            "provider": "nexusmods",
+            "confidence": 100,
+            "identity": 100
+          }
+        ],
+        "correct": false
+      },
+      "sax": {
+        "gallery": [
+          {
+            "url": "https://staticdelivery.nexusmods.com/mods/1704/images/123456/fixture.png",
+            "previewUrl": "",
+            "posterUrl": "",
+            "alt": "a\rb",
+            "width": 0,
+            "height": 0,
+            "role": "gallery",
+            "mediaType": "image",
+            "source": "nexusmods-scoped-project-media",
+            "provider": "nexusmods",
+            "confidence": 100,
+            "identity": 100
+          }
+        ],
+        "correct": true
+      },
+      "callback": {
+        "gallery": [
+          {
+            "url": "https://staticdelivery.nexusmods.com/mods/1704/images/123456/fixture.png",
+            "previewUrl": "",
+            "posterUrl": "",
+            "alt": "a\rb",
+            "width": 0,
+            "height": 0,
+            "role": "gallery",
+            "mediaType": "image",
+            "source": "nexusmods-scoped-project-media",
+            "provider": "nexusmods",
+            "confidence": 100,
+            "identity": 100
+          }
+        ],
+        "correct": true
+      }
+    }
+  },
+  {
+    "name": "numeric NULL",
+    "markup": "<img class=\"gallery\" src=\"https://staticdelivery.nexusmods.com/mods/1704/images/123456/fixture.png\" alt=\"a&#0;b\">",
+    "count": 1,
+    "alt": "a�b",
+    "outputs": {
+      "baseline": {
+        "gallery": [
+          {
+            "url": "https://staticdelivery.nexusmods.com/mods/1704/images/123456/fixture.png",
+            "previewUrl": "",
+            "posterUrl": "",
+            "alt": "a&#0;b",
+            "width": 0,
+            "height": 0,
+            "role": "gallery",
+            "mediaType": "image",
+            "source": "nexusmods-scoped-project-media",
+            "provider": "nexusmods",
+            "confidence": 100,
+            "identity": 100
+          }
+        ],
+        "correct": false
+      },
+      "sax": {
+        "gallery": [
+          {
+            "url": "https://staticdelivery.nexusmods.com/mods/1704/images/123456/fixture.png",
+            "previewUrl": "",
+            "posterUrl": "",
+            "alt": "a�b",
+            "width": 0,
+            "height": 0,
+            "role": "gallery",
+            "mediaType": "image",
+            "source": "nexusmods-scoped-project-media",
+            "provider": "nexusmods",
+            "confidence": 100,
+            "identity": 100
+          }
+        ],
+        "correct": true
+      },
+      "callback": {
+        "gallery": [
+          {
+            "url": "https://staticdelivery.nexusmods.com/mods/1704/images/123456/fixture.png",
+            "previewUrl": "",
+            "posterUrl": "",
+            "alt": "a�b",
+            "width": 0,
+            "height": 0,
+            "role": "gallery",
+            "mediaType": "image",
+            "source": "nexusmods-scoped-project-media",
+            "provider": "nexusmods",
+            "confidence": 100,
+            "identity": 100
+          }
+        ],
+        "correct": true
+      }
+    }
+  },
+  {
+    "name": "mixed newline",
+    "markup": "<img class=\"gallery\" src=\"https://staticdelivery.nexusmods.com/mods/1704/images/123456/fixture.png\" alt=\"a\r\n&#13;b\">",
+    "count": 1,
+    "alt": "a\n\rb",
+    "outputs": {
+      "baseline": {
+        "gallery": [
+          {
+            "url": "https://staticdelivery.nexusmods.com/mods/1704/images/123456/fixture.png",
+            "previewUrl": "",
+            "posterUrl": "",
+            "alt": "a\r\n&#13;b",
+            "width": 0,
+            "height": 0,
+            "role": "gallery",
+            "mediaType": "image",
+            "source": "nexusmods-scoped-project-media",
+            "provider": "nexusmods",
+            "confidence": 100,
+            "identity": 100
+          }
+        ],
+        "correct": false
+      },
+      "sax": {
+        "gallery": [
+          {
+            "url": "https://staticdelivery.nexusmods.com/mods/1704/images/123456/fixture.png",
+            "previewUrl": "",
+            "posterUrl": "",
+            "alt": "a\n\rb",
+            "width": 0,
+            "height": 0,
+            "role": "gallery",
+            "mediaType": "image",
+            "source": "nexusmods-scoped-project-media",
+            "provider": "nexusmods",
+            "confidence": 100,
+            "identity": 100
+          }
+        ],
+        "correct": true
+      },
+      "callback": {
+        "gallery": [
+          {
+            "url": "https://staticdelivery.nexusmods.com/mods/1704/images/123456/fixture.png",
+            "previewUrl": "",
+            "posterUrl": "",
+            "alt": "a\r\n\rb",
+            "width": 0,
+            "height": 0,
+            "role": "gallery",
+            "mediaType": "image",
+            "source": "nexusmods-scoped-project-media",
+            "provider": "nexusmods",
+            "confidence": 100,
+            "identity": 100
+          }
+        ],
+        "correct": false
+      }
+    }
+  }
+]

@@ -1,0 +1,182 @@
+{
+  "canonical_id": "g6ju16VJ",
+  "complete": true,
+  "input_bytes": 132995,
+  "limitations": [
+    "Full-byte comparison included in both timers",
+    "No network or UI acceptance; optional persistence receipt is separate from parser timings",
+    "Candidate still isolated from application collector"
+  ],
+  "persistence": null,
+  "scope": "actual Atlas version-parser component on a retained public response; not promoted",
+  "trials": [
+    {
+      "baseline_100_ns": 10641066,
+      "candidate_100_ns": 9988782,
+      "full_payload_and_binding_equal": true,
+      "round": 0,
+      "warmup": true
+    },
+    {
+      "baseline_100_ns": 18749593,
+      "candidate_100_ns": 7984299,
+      "full_payload_and_binding_equal": true,
+      "round": 1,
+      "warmup": true
+    },
+    {
+      "baseline_100_ns": 14170725,
+      "candidate_100_ns": 99740844,
+      "full_payload_and_binding_equal": true,
+      "round": 2,
+      "warmup": true
+    },
+    {
+      "baseline_100_ns": 24149610,
+      "candidate_100_ns": 8702271,
+      "full_payload_and_binding_equal": true,
+      "round": 3,
+      "warmup": true
+    },
+    {
+      "baseline_100_ns": 8898781,
+      "candidate_100_ns": 8594239,
+      "full_payload_and_binding_equal": true,
+      "round": 4,
+      "warmup": false
+    },
+    {
+      "baseline_100_ns": 14052369,
+      "candidate_100_ns": 11350075,
+      "full_payload_and_binding_equal": true,
+      "round": 5,
+      "warmup": false
+    },
+    {
+      "baseline_100_ns": 19711619,
+      "candidate_100_ns": 184690626,
+      "full_payload_and_binding_equal": true,
+      "round": 6,
+      "warmup": false
+    },
+    {
+      "baseline_100_ns": 15260482,
+      "candidate_100_ns": 9232218,
+      "full_payload_and_binding_equal": true,
+      "round": 7,
+      "warmup": false
+    },
+    {
+      "baseline_100_ns": 15296020,
+      "candidate_100_ns": 7489562,
+      "full_payload_and_binding_equal": true,
+      "round": 8,
+      "warmup": false
+    },
+    {
+      "baseline_100_ns": 14435202,
+      "candidate_100_ns": 8843413,
+      "full_payload_and_binding_equal": true,
+      "round": 9,
+      "warmup": false
+    },
+    {
+      "baseline_100_ns": 19590805,
+      "candidate_100_ns": 8294820,
+      "full_payload_and_binding_equal": true,
+      "round": 10,
+      "warmup": false
+    },
+    {
+      "baseline_100_ns": 9103554,
+      "candidate_100_ns": 7052685,
+      "full_payload_and_binding_equal": true,
+      "round": 11,
+      "warmup": false
+    },
+    {
+      "baseline_100_ns": 14462715,
+      "candidate_100_ns": 6986904,
+      "full_payload_and_binding_equal": true,
+      "round": 12,
+      "warmup": false
+    },
+    {
+      "baseline_100_ns": 8588582,
+      "candidate_100_ns": 6578225,
+      "full_payload_and_binding_equal": true,
+      "round": 13,
+      "warmup": false
+    },
+    {
+      "baseline_100_ns": 8077479,
+      "candidate_100_ns": 6933865,
+      "full_payload_and_binding_equal": true,
+      "round": 14,
+      "warmup": false
+    },
+    {
+      "baseline_100_ns": 13461770,
+      "candidate_100_ns": 10026226,
+      "full_payload_and_binding_equal": true,
+      "round": 15,
+      "warmup": false
+    },
+    {
+      "baseline_100_ns": 14170297,
+      "candidate_100_ns": 7603154,
+      "full_payload_and_binding_equal": true,
+      "round": 16,
+      "warmup": false
+    },
+    {
+      "baseline_100_ns": 9209026,
+      "candidate_100_ns": 8327403,
+      "full_payload_and_binding_equal": true,
+      "round": 17,
+      "warmup": false
+    },
+    {
+      "baseline_100_ns": 8485559,
+      "candidate_100_ns": 11038800,
+      "full_payload_and_binding_equal": true,
+      "round": 18,
+      "warmup": false
+    },
+    {
+      "baseline_100_ns": 14429614,
+      "candidate_100_ns": 7777790,
+      "full_payload_and_binding_equal": true,
+      "round": 19,
+      "warmup": false
+    },
+    {
+      "baseline_100_ns": 10034021,
+      "candidate_100_ns": 10592108,
+      "full_payload_and_binding_equal": true,
+      "round": 20,
+      "warmup": false
+    },
+    {
+      "baseline_100_ns": 8317146,
+      "candidate_100_ns": 7111684,
+      "full_payload_and_binding_equal": true,
+      "round": 21,
+      "warmup": false
+    },
+    {
+      "baseline_100_ns": 13726149,
+      "candidate_100_ns": 7953766,
+      "full_payload_and_binding_equal": true,
+      "round": 22,
+      "warmup": false
+    },
+    {
+      "baseline_100_ns": 7561965,
+      "candidate_100_ns": 7082599,
+      "full_payload_and_binding_equal": true,
+      "round": 23,
+      "warmup": false
+    }
+  ]
+}

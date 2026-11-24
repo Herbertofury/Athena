@@ -1,0 +1,3562 @@
+[
+  {
+    "session": 0,
+    "kind": "baseline",
+    "sample": 0,
+    "pre_submit_delay_ms": 70.0,
+    "queue_to_claim_ms": 925,
+    "request_to_completion_ms": 1760.295871,
+    "events": [
+      [
+        "queued",
+        1793072079155
+      ],
+      [
+        "claimed",
+        1793072080080
+      ],
+      [
+        "succeeded",
+        1793072080899
+      ]
+    ],
+    "complete_job": {
+      "attempt": 1,
+      "id": 1,
+      "job": "DedupExperiment",
+      "result": {
+        "experiment": {
+          "completed": true,
+          "decision": {
+            "Incomplete": "Missing repeated timing, stress or memory measurements"
+          },
+          "elapsed_ms": 817,
+          "evidence": {
+            "baseline_revision": "linear-unique-v1",
+            "candidate_revision": "indexed-unique-v1",
+            "environment_id": "linux-x86_64; atlas-lab 0.1.0; bounded shared-process worker",
+            "stress_cases": 10000,
+            "stress_failures": 0,
+            "trials": [
+              {
+                "baseline_ns": 46554470,
+                "cancelled_cleanly": null,
+                "candidate_ns": 210132,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 33854968,
+                "cancelled_cleanly": null,
+                "candidate_ns": 202227,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 33332628,
+                "cancelled_cleanly": null,
+                "candidate_ns": 231437,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 36632857,
+                "cancelled_cleanly": null,
+                "candidate_ns": 250814,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 41092273,
+                "cancelled_cleanly": null,
+                "candidate_ns": 167592,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 36198595,
+                "cancelled_cleanly": null,
+                "candidate_ns": 122547,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 33758998,
+                "cancelled_cleanly": null,
+                "candidate_ns": 260489,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 34556534,
+                "cancelled_cleanly": null,
+                "candidate_ns": 145811,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 40120601,
+                "cancelled_cleanly": null,
+                "candidate_ns": 176807,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 35285155,
+                "cancelled_cleanly": null,
+                "candidate_ns": 159660,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 45005559,
+                "cancelled_cleanly": null,
+                "candidate_ns": 1388734,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 39286208,
+                "cancelled_cleanly": null,
+                "candidate_ns": 123834,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 31919774,
+                "cancelled_cleanly": null,
+                "candidate_ns": 173628,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 33998401,
+                "cancelled_cleanly": null,
+                "candidate_ns": 122935,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 37778855,
+                "cancelled_cleanly": null,
+                "candidate_ns": 320173,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              }
+            ],
+            "workload_id": "generated-6000-ids-mod-4001-v1"
+          },
+          "first_failure": null,
+          "limitations": [
+            "Generated identifiers, not a target application corpus",
+            "Peak memory is unmeasured; review eligibility remains blocked",
+            "Cooperative runner cancellation is tested separately, not asserted as per-strategy acceptance",
+            "Timing shares a local service process; no isolated-host or whole-app speed claim",
+            "Only built-in strategies run; no source rewriting, external candidates or deployment"
+          ],
+          "reason": "Completed",
+          "warmup_trials": [
+            {
+              "baseline_ns": 40157652,
+              "cancelled_cleanly": null,
+              "candidate_ns": 419385,
+              "equal_complete_output": true,
+              "peak_bytes": 0
+            },
+            {
+              "baseline_ns": 33413893,
+              "cancelled_cleanly": null,
+              "candidate_ns": 142473,
+              "equal_complete_output": true,
+              "peak_bytes": 0
+            }
+          ]
+        },
+        "experiment_id": 1
+      },
+      "state": "succeeded"
+    }
+  },
+  {
+    "session": 0,
+    "kind": "baseline",
+    "sample": 1,
+    "pre_submit_delay_ms": 230.0,
+    "queue_to_claim_ms": 752,
+    "request_to_completion_ms": 1582.842487,
+    "events": [
+      [
+        "queued",
+        1793072081147
+      ],
+      [
+        "claimed",
+        1793072081899
+      ],
+      [
+        "succeeded",
+        1793072082727
+      ]
+    ],
+    "complete_job": {
+      "attempt": 1,
+      "id": 2,
+      "job": "DedupExperiment",
+      "result": {
+        "experiment": {
+          "completed": true,
+          "decision": {
+            "Incomplete": "Missing repeated timing, stress or memory measurements"
+          },
+          "elapsed_ms": 826,
+          "evidence": {
+            "baseline_revision": "linear-unique-v1",
+            "candidate_revision": "indexed-unique-v1",
+            "environment_id": "linux-x86_64; atlas-lab 0.1.0; bounded shared-process worker",
+            "stress_cases": 10000,
+            "stress_failures": 0,
+            "trials": [
+              {
+                "baseline_ns": 33712440,
+                "cancelled_cleanly": null,
+                "candidate_ns": 243127,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 39659659,
+                "cancelled_cleanly": null,
+                "candidate_ns": 288789,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 38463404,
+                "cancelled_cleanly": null,
+                "candidate_ns": 207391,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 38328822,
+                "cancelled_cleanly": null,
+                "candidate_ns": 164855,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 37102417,
+                "cancelled_cleanly": null,
+                "candidate_ns": 205593,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 31001588,
+                "cancelled_cleanly": null,
+                "candidate_ns": 189846,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 35426924,
+                "cancelled_cleanly": null,
+                "candidate_ns": 315637,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 34909678,
+                "cancelled_cleanly": null,
+                "candidate_ns": 276740,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 30287606,
+                "cancelled_cleanly": null,
+                "candidate_ns": 247074,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 47049906,
+                "cancelled_cleanly": null,
+                "candidate_ns": 144619,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 31867594,
+                "cancelled_cleanly": null,
+                "candidate_ns": 188887,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 33085456,
+                "cancelled_cleanly": null,
+                "candidate_ns": 145020,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 39214392,
+                "cancelled_cleanly": null,
+                "candidate_ns": 187086,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 40704392,
+                "cancelled_cleanly": null,
+                "candidate_ns": 302067,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 43514711,
+                "cancelled_cleanly": null,
+                "candidate_ns": 208371,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              }
+            ],
+            "workload_id": "generated-6000-ids-mod-4001-v1"
+          },
+          "first_failure": null,
+          "limitations": [
+            "Generated identifiers, not a target application corpus",
+            "Peak memory is unmeasured; review eligibility remains blocked",
+            "Cooperative runner cancellation is tested separately, not asserted as per-strategy acceptance",
+            "Timing shares a local service process; no isolated-host or whole-app speed claim",
+            "Only built-in strategies run; no source rewriting, external candidates or deployment"
+          ],
+          "reason": "Completed",
+          "warmup_trials": [
+            {
+              "baseline_ns": 53893451,
+              "cancelled_cleanly": null,
+              "candidate_ns": 249929,
+              "equal_complete_output": true,
+              "peak_bytes": 0
+            },
+            {
+              "baseline_ns": 36546900,
+              "cancelled_cleanly": null,
+              "candidate_ns": 142515,
+              "equal_complete_output": true,
+              "peak_bytes": 0
+            }
+          ]
+        },
+        "experiment_id": 2
+      },
+      "state": "succeeded"
+    }
+  },
+  {
+    "session": 0,
+    "kind": "baseline",
+    "sample": 2,
+    "pre_submit_delay_ms": 410.0,
+    "queue_to_claim_ms": 586,
+    "request_to_completion_ms": 1388.849461,
+    "events": [
+      [
+        "queued",
+        1793072083141
+      ],
+      [
+        "claimed",
+        1793072083727
+      ],
+      [
+        "succeeded",
+        1793072084524
+      ]
+    ],
+    "complete_job": {
+      "attempt": 1,
+      "id": 3,
+      "job": "DedupExperiment",
+      "result": {
+        "experiment": {
+          "completed": true,
+          "decision": {
+            "Incomplete": "Missing repeated timing, stress or memory measurements"
+          },
+          "elapsed_ms": 795,
+          "evidence": {
+            "baseline_revision": "linear-unique-v1",
+            "candidate_revision": "indexed-unique-v1",
+            "environment_id": "linux-x86_64; atlas-lab 0.1.0; bounded shared-process worker",
+            "stress_cases": 10000,
+            "stress_failures": 0,
+            "trials": [
+              {
+                "baseline_ns": 40380815,
+                "cancelled_cleanly": null,
+                "candidate_ns": 275238,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 39184335,
+                "cancelled_cleanly": null,
+                "candidate_ns": 141358,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 37069885,
+                "cancelled_cleanly": null,
+                "candidate_ns": 385926,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 39169562,
+                "cancelled_cleanly": null,
+                "candidate_ns": 201750,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 33994811,
+                "cancelled_cleanly": null,
+                "candidate_ns": 192497,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 33686952,
+                "cancelled_cleanly": null,
+                "candidate_ns": 310623,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 36869484,
+                "cancelled_cleanly": null,
+                "candidate_ns": 450743,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 34976999,
+                "cancelled_cleanly": null,
+                "candidate_ns": 261510,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 39738685,
+                "cancelled_cleanly": null,
+                "candidate_ns": 188516,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 35888853,
+                "cancelled_cleanly": null,
+                "candidate_ns": 141571,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 34380628,
+                "cancelled_cleanly": null,
+                "candidate_ns": 214731,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 39100536,
+                "cancelled_cleanly": null,
+                "candidate_ns": 142580,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 31781776,
+                "cancelled_cleanly": null,
+                "candidate_ns": 271101,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 30296580,
+                "cancelled_cleanly": null,
+                "candidate_ns": 166845,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 43814433,
+                "cancelled_cleanly": null,
+                "candidate_ns": 201618,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              }
+            ],
+            "workload_id": "generated-6000-ids-mod-4001-v1"
+          },
+          "first_failure": null,
+          "limitations": [
+            "Generated identifiers, not a target application corpus",
+            "Peak memory is unmeasured; review eligibility remains blocked",
+            "Cooperative runner cancellation is tested separately, not asserted as per-strategy acceptance",
+            "Timing shares a local service process; no isolated-host or whole-app speed claim",
+            "Only built-in strategies run; no source rewriting, external candidates or deployment"
+          ],
+          "reason": "Completed",
+          "warmup_trials": [
+            {
+              "baseline_ns": 37972048,
+              "cancelled_cleanly": null,
+              "candidate_ns": 356176,
+              "equal_complete_output": true,
+              "peak_bytes": 0
+            },
+            {
+              "baseline_ns": 31630508,
+              "cancelled_cleanly": null,
+              "candidate_ns": 175837,
+              "equal_complete_output": true,
+              "peak_bytes": 0
+            }
+          ]
+        },
+        "experiment_id": 3
+      },
+      "state": "succeeded"
+    }
+  },
+  {
+    "session": 0,
+    "kind": "baseline",
+    "sample": 3,
+    "pre_submit_delay_ms": 130.0,
+    "queue_to_claim_ms": 863,
+    "request_to_completion_ms": 1659.540161,
+    "events": [
+      [
+        "queued",
+        1793072084662
+      ],
+      [
+        "claimed",
+        1793072085525
+      ],
+      [
+        "succeeded",
+        1793072086300
+      ]
+    ],
+    "complete_job": {
+      "attempt": 1,
+      "id": 4,
+      "job": "DedupExperiment",
+      "result": {
+        "experiment": {
+          "completed": true,
+          "decision": {
+            "Incomplete": "Missing repeated timing, stress or memory measurements"
+          },
+          "elapsed_ms": 773,
+          "evidence": {
+            "baseline_revision": "linear-unique-v1",
+            "candidate_revision": "indexed-unique-v1",
+            "environment_id": "linux-x86_64; atlas-lab 0.1.0; bounded shared-process worker",
+            "stress_cases": 10000,
+            "stress_failures": 0,
+            "trials": [
+              {
+                "baseline_ns": 33031889,
+                "cancelled_cleanly": null,
+                "candidate_ns": 213243,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 32531612,
+                "cancelled_cleanly": null,
+                "candidate_ns": 253558,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 37596913,
+                "cancelled_cleanly": null,
+                "candidate_ns": 797150,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 32331229,
+                "cancelled_cleanly": null,
+                "candidate_ns": 143966,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 34935536,
+                "cancelled_cleanly": null,
+                "candidate_ns": 191151,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 34209618,
+                "cancelled_cleanly": null,
+                "candidate_ns": 260057,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 35495272,
+                "cancelled_cleanly": null,
+                "candidate_ns": 189603,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 35180628,
+                "cancelled_cleanly": null,
+                "candidate_ns": 146407,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 34428861,
+                "cancelled_cleanly": null,
+                "candidate_ns": 193765,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 33903497,
+                "cancelled_cleanly": null,
+                "candidate_ns": 144588,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 31984379,
+                "cancelled_cleanly": null,
+                "candidate_ns": 262561,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 35722043,
+                "cancelled_cleanly": null,
+                "candidate_ns": 228631,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 35025382,
+                "cancelled_cleanly": null,
+                "candidate_ns": 193834,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 33791644,
+                "cancelled_cleanly": null,
+                "candidate_ns": 185389,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 40865218,
+                "cancelled_cleanly": null,
+                "candidate_ns": 193575,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              }
+            ],
+            "workload_id": "generated-6000-ids-mod-4001-v1"
+          },
+          "first_failure": null,
+          "limitations": [
+            "Generated identifiers, not a target application corpus",
+            "Peak memory is unmeasured; review eligibility remains blocked",
+            "Cooperative runner cancellation is tested separately, not asserted as per-strategy acceptance",
+            "Timing shares a local service process; no isolated-host or whole-app speed claim",
+            "Only built-in strategies run; no source rewriting, external candidates or deployment"
+          ],
+          "reason": "Completed",
+          "warmup_trials": [
+            {
+              "baseline_ns": 37360742,
+              "cancelled_cleanly": null,
+              "candidate_ns": 287763,
+              "equal_complete_output": true,
+              "peak_bytes": 0
+            },
+            {
+              "baseline_ns": 42042756,
+              "cancelled_cleanly": null,
+              "candidate_ns": 140865,
+              "equal_complete_output": true,
+              "peak_bytes": 0
+            }
+          ]
+        },
+        "experiment_id": 4
+      },
+      "state": "succeeded"
+    }
+  },
+  {
+    "session": 0,
+    "kind": "baseline",
+    "sample": 4,
+    "pre_submit_delay_ms": 310.0,
+    "queue_to_claim_ms": 667,
+    "request_to_completion_ms": 1480.100949,
+    "events": [
+      [
+        "queued",
+        1793072086633
+      ],
+      [
+        "claimed",
+        1793072087300
+      ],
+      [
+        "succeeded",
+        1793072088102
+      ]
+    ],
+    "complete_job": {
+      "attempt": 1,
+      "id": 5,
+      "job": "DedupExperiment",
+      "result": {
+        "experiment": {
+          "completed": true,
+          "decision": {
+            "Incomplete": "Missing repeated timing, stress or memory measurements"
+          },
+          "elapsed_ms": 801,
+          "evidence": {
+            "baseline_revision": "linear-unique-v1",
+            "candidate_revision": "indexed-unique-v1",
+            "environment_id": "linux-x86_64; atlas-lab 0.1.0; bounded shared-process worker",
+            "stress_cases": 10000,
+            "stress_failures": 0,
+            "trials": [
+              {
+                "baseline_ns": 30888280,
+                "cancelled_cleanly": null,
+                "candidate_ns": 218053,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 37393951,
+                "cancelled_cleanly": null,
+                "candidate_ns": 167560,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 37755229,
+                "cancelled_cleanly": null,
+                "candidate_ns": 267993,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 31718604,
+                "cancelled_cleanly": null,
+                "candidate_ns": 139782,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 41138471,
+                "cancelled_cleanly": null,
+                "candidate_ns": 212154,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 33618725,
+                "cancelled_cleanly": null,
+                "candidate_ns": 170325,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 37780903,
+                "cancelled_cleanly": null,
+                "candidate_ns": 204945,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 38237136,
+                "cancelled_cleanly": null,
+                "candidate_ns": 346534,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 39482105,
+                "cancelled_cleanly": null,
+                "candidate_ns": 230391,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 34155390,
+                "cancelled_cleanly": null,
+                "candidate_ns": 266494,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 39270331,
+                "cancelled_cleanly": null,
+                "candidate_ns": 203651,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 30168567,
+                "cancelled_cleanly": null,
+                "candidate_ns": 147991,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 37914612,
+                "cancelled_cleanly": null,
+                "candidate_ns": 274450,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 37909846,
+                "cancelled_cleanly": null,
+                "candidate_ns": 329279,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 30118043,
+                "cancelled_cleanly": null,
+                "candidate_ns": 191890,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              }
+            ],
+            "workload_id": "generated-6000-ids-mod-4001-v1"
+          },
+          "first_failure": null,
+          "limitations": [
+            "Generated identifiers, not a target application corpus",
+            "Peak memory is unmeasured; review eligibility remains blocked",
+            "Cooperative runner cancellation is tested separately, not asserted as per-strategy acceptance",
+            "Timing shares a local service process; no isolated-host or whole-app speed claim",
+            "Only built-in strategies run; no source rewriting, external candidates or deployment"
+          ],
+          "reason": "Completed",
+          "warmup_trials": [
+            {
+              "baseline_ns": 40116594,
+              "cancelled_cleanly": null,
+              "candidate_ns": 447323,
+              "equal_complete_output": true,
+              "peak_bytes": 0
+            },
+            {
+              "baseline_ns": 40754439,
+              "cancelled_cleanly": null,
+              "candidate_ns": 851528,
+              "equal_complete_output": true,
+              "peak_bytes": 0
+            }
+          ]
+        },
+        "experiment_id": 5
+      },
+      "state": "succeeded"
+    }
+  },
+  {
+    "session": 1,
+    "kind": "candidate",
+    "sample": 0,
+    "pre_submit_delay_ms": 70.0,
+    "queue_to_claim_ms": 1,
+    "request_to_completion_ms": 724.092151,
+    "events": [
+      [
+        "queued",
+        1793072089239
+      ],
+      [
+        "claimed",
+        1793072089240
+      ],
+      [
+        "succeeded",
+        1793072089946
+      ]
+    ],
+    "complete_job": {
+      "attempt": 1,
+      "id": 1,
+      "job": "DedupExperiment",
+      "result": {
+        "experiment": {
+          "completed": true,
+          "decision": {
+            "Incomplete": "Missing repeated timing, stress or memory measurements"
+          },
+          "elapsed_ms": 705,
+          "evidence": {
+            "baseline_revision": "linear-unique-v1",
+            "candidate_revision": "indexed-unique-v1",
+            "environment_id": "linux-x86_64; atlas-lab 0.1.0; bounded shared-process worker",
+            "stress_cases": 10000,
+            "stress_failures": 0,
+            "trials": [
+              {
+                "baseline_ns": 33194848,
+                "cancelled_cleanly": null,
+                "candidate_ns": 233654,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 33532293,
+                "cancelled_cleanly": null,
+                "candidate_ns": 134101,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 35866911,
+                "cancelled_cleanly": null,
+                "candidate_ns": 187881,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 31115168,
+                "cancelled_cleanly": null,
+                "candidate_ns": 133347,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 30535110,
+                "cancelled_cleanly": null,
+                "candidate_ns": 186335,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 28972866,
+                "cancelled_cleanly": null,
+                "candidate_ns": 130540,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 30421177,
+                "cancelled_cleanly": null,
+                "candidate_ns": 402743,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 30022241,
+                "cancelled_cleanly": null,
+                "candidate_ns": 488234,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 29457431,
+                "cancelled_cleanly": null,
+                "candidate_ns": 228959,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 35193708,
+                "cancelled_cleanly": null,
+                "candidate_ns": 132606,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 32420372,
+                "cancelled_cleanly": null,
+                "candidate_ns": 173906,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 28862118,
+                "cancelled_cleanly": null,
+                "candidate_ns": 130911,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 29156605,
+                "cancelled_cleanly": null,
+                "candidate_ns": 305107,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 32081894,
+                "cancelled_cleanly": null,
+                "candidate_ns": 133182,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 30297945,
+                "cancelled_cleanly": null,
+                "candidate_ns": 176609,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              }
+            ],
+            "workload_id": "generated-6000-ids-mod-4001-v1"
+          },
+          "first_failure": null,
+          "limitations": [
+            "Generated identifiers, not a target application corpus",
+            "Peak memory is unmeasured; review eligibility remains blocked",
+            "Cooperative runner cancellation is tested separately, not asserted as per-strategy acceptance",
+            "Timing shares a local service process; no isolated-host or whole-app speed claim",
+            "Only built-in strategies run; no source rewriting, external candidates or deployment"
+          ],
+          "reason": "Completed",
+          "warmup_trials": [
+            {
+              "baseline_ns": 34265256,
+              "cancelled_cleanly": null,
+              "candidate_ns": 629361,
+              "equal_complete_output": true,
+              "peak_bytes": 0
+            },
+            {
+              "baseline_ns": 31614513,
+              "cancelled_cleanly": null,
+              "candidate_ns": 150518,
+              "equal_complete_output": true,
+              "peak_bytes": 0
+            }
+          ]
+        },
+        "experiment_id": 1
+      },
+      "state": "succeeded"
+    }
+  },
+  {
+    "session": 1,
+    "kind": "candidate",
+    "sample": 1,
+    "pre_submit_delay_ms": 230.0,
+    "queue_to_claim_ms": 0,
+    "request_to_completion_ms": 725.453636,
+    "events": [
+      [
+        "queued",
+        1793072090196
+      ],
+      [
+        "claimed",
+        1793072090196
+      ],
+      [
+        "succeeded",
+        1793072090914
+      ]
+    ],
+    "complete_job": {
+      "attempt": 1,
+      "id": 2,
+      "job": "DedupExperiment",
+      "result": {
+        "experiment": {
+          "completed": true,
+          "decision": {
+            "Incomplete": "Missing repeated timing, stress or memory measurements"
+          },
+          "elapsed_ms": 716,
+          "evidence": {
+            "baseline_revision": "linear-unique-v1",
+            "candidate_revision": "indexed-unique-v1",
+            "environment_id": "linux-x86_64; atlas-lab 0.1.0; bounded shared-process worker",
+            "stress_cases": 10000,
+            "stress_failures": 0,
+            "trials": [
+              {
+                "baseline_ns": 33307252,
+                "cancelled_cleanly": null,
+                "candidate_ns": 376841,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 31515579,
+                "cancelled_cleanly": null,
+                "candidate_ns": 281712,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 47294393,
+                "cancelled_cleanly": null,
+                "candidate_ns": 286563,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 29427018,
+                "cancelled_cleanly": null,
+                "candidate_ns": 151932,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 29578678,
+                "cancelled_cleanly": null,
+                "candidate_ns": 233475,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 30179871,
+                "cancelled_cleanly": null,
+                "candidate_ns": 406844,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 30200227,
+                "cancelled_cleanly": null,
+                "candidate_ns": 299825,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 29646853,
+                "cancelled_cleanly": null,
+                "candidate_ns": 277084,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 29785964,
+                "cancelled_cleanly": null,
+                "candidate_ns": 335514,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 30170174,
+                "cancelled_cleanly": null,
+                "candidate_ns": 175925,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 35135560,
+                "cancelled_cleanly": null,
+                "candidate_ns": 218438,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 30299462,
+                "cancelled_cleanly": null,
+                "candidate_ns": 151714,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 30764971,
+                "cancelled_cleanly": null,
+                "candidate_ns": 234956,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 29563766,
+                "cancelled_cleanly": null,
+                "candidate_ns": 262712,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 32055165,
+                "cancelled_cleanly": null,
+                "candidate_ns": 278568,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              }
+            ],
+            "workload_id": "generated-6000-ids-mod-4001-v1"
+          },
+          "first_failure": null,
+          "limitations": [
+            "Generated identifiers, not a target application corpus",
+            "Peak memory is unmeasured; review eligibility remains blocked",
+            "Cooperative runner cancellation is tested separately, not asserted as per-strategy acceptance",
+            "Timing shares a local service process; no isolated-host or whole-app speed claim",
+            "Only built-in strategies run; no source rewriting, external candidates or deployment"
+          ],
+          "reason": "Completed",
+          "warmup_trials": [
+            {
+              "baseline_ns": 31361248,
+              "cancelled_cleanly": null,
+              "candidate_ns": 551222,
+              "equal_complete_output": true,
+              "peak_bytes": 0
+            },
+            {
+              "baseline_ns": 33118219,
+              "cancelled_cleanly": null,
+              "candidate_ns": 174423,
+              "equal_complete_output": true,
+              "peak_bytes": 0
+            }
+          ]
+        },
+        "experiment_id": 2
+      },
+      "state": "succeeded"
+    }
+  },
+  {
+    "session": 1,
+    "kind": "candidate",
+    "sample": 2,
+    "pre_submit_delay_ms": 410.0,
+    "queue_to_claim_ms": 1,
+    "request_to_completion_ms": 710.469011,
+    "events": [
+      [
+        "queued",
+        1793072091333
+      ],
+      [
+        "claimed",
+        1793072091334
+      ],
+      [
+        "succeeded",
+        1793072092039
+      ]
+    ],
+    "complete_job": {
+      "attempt": 1,
+      "id": 3,
+      "job": "DedupExperiment",
+      "result": {
+        "experiment": {
+          "completed": true,
+          "decision": {
+            "Incomplete": "Missing repeated timing, stress or memory measurements"
+          },
+          "elapsed_ms": 703,
+          "evidence": {
+            "baseline_revision": "linear-unique-v1",
+            "candidate_revision": "indexed-unique-v1",
+            "environment_id": "linux-x86_64; atlas-lab 0.1.0; bounded shared-process worker",
+            "stress_cases": 10000,
+            "stress_failures": 0,
+            "trials": [
+              {
+                "baseline_ns": 31281692,
+                "cancelled_cleanly": null,
+                "candidate_ns": 273795,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 31039939,
+                "cancelled_cleanly": null,
+                "candidate_ns": 149189,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 30132426,
+                "cancelled_cleanly": null,
+                "candidate_ns": 234625,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 30321105,
+                "cancelled_cleanly": null,
+                "candidate_ns": 155588,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 33068915,
+                "cancelled_cleanly": null,
+                "candidate_ns": 273614,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 32339881,
+                "cancelled_cleanly": null,
+                "candidate_ns": 130581,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 34929831,
+                "cancelled_cleanly": null,
+                "candidate_ns": 352917,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 30735338,
+                "cancelled_cleanly": null,
+                "candidate_ns": 275600,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 30066283,
+                "cancelled_cleanly": null,
+                "candidate_ns": 165667,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 29814428,
+                "cancelled_cleanly": null,
+                "candidate_ns": 168785,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 31126660,
+                "cancelled_cleanly": null,
+                "candidate_ns": 189023,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 29411922,
+                "cancelled_cleanly": null,
+                "candidate_ns": 128340,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 29219113,
+                "cancelled_cleanly": null,
+                "candidate_ns": 263588,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 32320167,
+                "cancelled_cleanly": null,
+                "candidate_ns": 129554,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 34892780,
+                "cancelled_cleanly": null,
+                "candidate_ns": 276152,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              }
+            ],
+            "workload_id": "generated-6000-ids-mod-4001-v1"
+          },
+          "first_failure": null,
+          "limitations": [
+            "Generated identifiers, not a target application corpus",
+            "Peak memory is unmeasured; review eligibility remains blocked",
+            "Cooperative runner cancellation is tested separately, not asserted as per-strategy acceptance",
+            "Timing shares a local service process; no isolated-host or whole-app speed claim",
+            "Only built-in strategies run; no source rewriting, external candidates or deployment"
+          ],
+          "reason": "Completed",
+          "warmup_trials": [
+            {
+              "baseline_ns": 35911960,
+              "cancelled_cleanly": null,
+              "candidate_ns": 350153,
+              "equal_complete_output": true,
+              "peak_bytes": 0
+            },
+            {
+              "baseline_ns": 28910576,
+              "cancelled_cleanly": null,
+              "candidate_ns": 149451,
+              "equal_complete_output": true,
+              "peak_bytes": 0
+            }
+          ]
+        },
+        "experiment_id": 3
+      },
+      "state": "succeeded"
+    }
+  },
+  {
+    "session": 1,
+    "kind": "candidate",
+    "sample": 3,
+    "pre_submit_delay_ms": 130.0,
+    "queue_to_claim_ms": 1,
+    "request_to_completion_ms": 723.452791,
+    "events": [
+      [
+        "queued",
+        1793072092175
+      ],
+      [
+        "claimed",
+        1793072092176
+      ],
+      [
+        "succeeded",
+        1793072092882
+      ]
+    ],
+    "complete_job": {
+      "attempt": 1,
+      "id": 4,
+      "job": "DedupExperiment",
+      "result": {
+        "experiment": {
+          "completed": true,
+          "decision": {
+            "Incomplete": "Missing repeated timing, stress or memory measurements"
+          },
+          "elapsed_ms": 705,
+          "evidence": {
+            "baseline_revision": "linear-unique-v1",
+            "candidate_revision": "indexed-unique-v1",
+            "environment_id": "linux-x86_64; atlas-lab 0.1.0; bounded shared-process worker",
+            "stress_cases": 10000,
+            "stress_failures": 0,
+            "trials": [
+              {
+                "baseline_ns": 34418138,
+                "cancelled_cleanly": null,
+                "candidate_ns": 275935,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 30639292,
+                "cancelled_cleanly": null,
+                "candidate_ns": 150142,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 32625617,
+                "cancelled_cleanly": null,
+                "candidate_ns": 253086,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 36490266,
+                "cancelled_cleanly": null,
+                "candidate_ns": 148551,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 28494919,
+                "cancelled_cleanly": null,
+                "candidate_ns": 225974,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 30240112,
+                "cancelled_cleanly": null,
+                "candidate_ns": 152594,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 30520326,
+                "cancelled_cleanly": null,
+                "candidate_ns": 217971,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 29929573,
+                "cancelled_cleanly": null,
+                "candidate_ns": 242535,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 29975818,
+                "cancelled_cleanly": null,
+                "candidate_ns": 237291,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 29607857,
+                "cancelled_cleanly": null,
+                "candidate_ns": 152694,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 29569668,
+                "cancelled_cleanly": null,
+                "candidate_ns": 568770,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 32603262,
+                "cancelled_cleanly": null,
+                "candidate_ns": 152488,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 32597286,
+                "cancelled_cleanly": null,
+                "candidate_ns": 211557,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 31162512,
+                "cancelled_cleanly": null,
+                "candidate_ns": 154838,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 28485665,
+                "cancelled_cleanly": null,
+                "candidate_ns": 215097,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              }
+            ],
+            "workload_id": "generated-6000-ids-mod-4001-v1"
+          },
+          "first_failure": null,
+          "limitations": [
+            "Generated identifiers, not a target application corpus",
+            "Peak memory is unmeasured; review eligibility remains blocked",
+            "Cooperative runner cancellation is tested separately, not asserted as per-strategy acceptance",
+            "Timing shares a local service process; no isolated-host or whole-app speed claim",
+            "Only built-in strategies run; no source rewriting, external candidates or deployment"
+          ],
+          "reason": "Completed",
+          "warmup_trials": [
+            {
+              "baseline_ns": 30443463,
+              "cancelled_cleanly": null,
+              "candidate_ns": 295378,
+              "equal_complete_output": true,
+              "peak_bytes": 0
+            },
+            {
+              "baseline_ns": 36274489,
+              "cancelled_cleanly": null,
+              "candidate_ns": 151681,
+              "equal_complete_output": true,
+              "peak_bytes": 0
+            }
+          ]
+        },
+        "experiment_id": 4
+      },
+      "state": "succeeded"
+    }
+  },
+  {
+    "session": 1,
+    "kind": "candidate",
+    "sample": 4,
+    "pre_submit_delay_ms": 310.0,
+    "queue_to_claim_ms": 0,
+    "request_to_completion_ms": 711.390309,
+    "events": [
+      [
+        "queued",
+        1793072093211
+      ],
+      [
+        "claimed",
+        1793072093211
+      ],
+      [
+        "succeeded",
+        1793072093917
+      ]
+    ],
+    "complete_job": {
+      "attempt": 1,
+      "id": 5,
+      "job": "DedupExperiment",
+      "result": {
+        "experiment": {
+          "completed": true,
+          "decision": {
+            "Incomplete": "Missing repeated timing, stress or memory measurements"
+          },
+          "elapsed_ms": 705,
+          "evidence": {
+            "baseline_revision": "linear-unique-v1",
+            "candidate_revision": "indexed-unique-v1",
+            "environment_id": "linux-x86_64; atlas-lab 0.1.0; bounded shared-process worker",
+            "stress_cases": 10000,
+            "stress_failures": 0,
+            "trials": [
+              {
+                "baseline_ns": 32841395,
+                "cancelled_cleanly": null,
+                "candidate_ns": 240365,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 31495127,
+                "cancelled_cleanly": null,
+                "candidate_ns": 150639,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 37469545,
+                "cancelled_cleanly": null,
+                "candidate_ns": 291856,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 31261224,
+                "cancelled_cleanly": null,
+                "candidate_ns": 277943,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 31730953,
+                "cancelled_cleanly": null,
+                "candidate_ns": 230783,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 30287346,
+                "cancelled_cleanly": null,
+                "candidate_ns": 150383,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 31153665,
+                "cancelled_cleanly": null,
+                "candidate_ns": 218639,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 29461406,
+                "cancelled_cleanly": null,
+                "candidate_ns": 231652,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 28979880,
+                "cancelled_cleanly": null,
+                "candidate_ns": 220776,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 31402338,
+                "cancelled_cleanly": null,
+                "candidate_ns": 275163,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 33895450,
+                "cancelled_cleanly": null,
+                "candidate_ns": 317142,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 30613200,
+                "cancelled_cleanly": null,
+                "candidate_ns": 155566,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 31275013,
+                "cancelled_cleanly": null,
+                "candidate_ns": 208212,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 30586169,
+                "cancelled_cleanly": null,
+                "candidate_ns": 152573,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 31180020,
+                "cancelled_cleanly": null,
+                "candidate_ns": 285841,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              }
+            ],
+            "workload_id": "generated-6000-ids-mod-4001-v1"
+          },
+          "first_failure": null,
+          "limitations": [
+            "Generated identifiers, not a target application corpus",
+            "Peak memory is unmeasured; review eligibility remains blocked",
+            "Cooperative runner cancellation is tested separately, not asserted as per-strategy acceptance",
+            "Timing shares a local service process; no isolated-host or whole-app speed claim",
+            "Only built-in strategies run; no source rewriting, external candidates or deployment"
+          ],
+          "reason": "Completed",
+          "warmup_trials": [
+            {
+              "baseline_ns": 32214913,
+              "cancelled_cleanly": null,
+              "candidate_ns": 277324,
+              "equal_complete_output": true,
+              "peak_bytes": 0
+            },
+            {
+              "baseline_ns": 33210297,
+              "cancelled_cleanly": null,
+              "candidate_ns": 150054,
+              "equal_complete_output": true,
+              "peak_bytes": 0
+            }
+          ]
+        },
+        "experiment_id": 5
+      },
+      "state": "succeeded"
+    }
+  },
+  {
+    "session": 2,
+    "kind": "candidate",
+    "sample": 0,
+    "pre_submit_delay_ms": 70.0,
+    "queue_to_claim_ms": 1,
+    "request_to_completion_ms": 801.662264,
+    "events": [
+      [
+        "queued",
+        1793072094032
+      ],
+      [
+        "claimed",
+        1793072094033
+      ],
+      [
+        "succeeded",
+        1793072094813
+      ]
+    ],
+    "complete_job": {
+      "attempt": 1,
+      "id": 1,
+      "job": "DedupExperiment",
+      "result": {
+        "experiment": {
+          "completed": true,
+          "decision": {
+            "Incomplete": "Missing repeated timing, stress or memory measurements"
+          },
+          "elapsed_ms": 779,
+          "evidence": {
+            "baseline_revision": "linear-unique-v1",
+            "candidate_revision": "indexed-unique-v1",
+            "environment_id": "linux-x86_64; atlas-lab 0.1.0; bounded shared-process worker",
+            "stress_cases": 10000,
+            "stress_failures": 0,
+            "trials": [
+              {
+                "baseline_ns": 35442859,
+                "cancelled_cleanly": null,
+                "candidate_ns": 800776,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 39993936,
+                "cancelled_cleanly": null,
+                "candidate_ns": 131503,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 33159535,
+                "cancelled_cleanly": null,
+                "candidate_ns": 175699,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 34971316,
+                "cancelled_cleanly": null,
+                "candidate_ns": 127528,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 36867933,
+                "cancelled_cleanly": null,
+                "candidate_ns": 237231,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 34166845,
+                "cancelled_cleanly": null,
+                "candidate_ns": 219384,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 37436151,
+                "cancelled_cleanly": null,
+                "candidate_ns": 180995,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 39309040,
+                "cancelled_cleanly": null,
+                "candidate_ns": 160625,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 35297123,
+                "cancelled_cleanly": null,
+                "candidate_ns": 175798,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 35408054,
+                "cancelled_cleanly": null,
+                "candidate_ns": 213370,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 35322479,
+                "cancelled_cleanly": null,
+                "candidate_ns": 203860,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 31598524,
+                "cancelled_cleanly": null,
+                "candidate_ns": 129629,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 33983714,
+                "cancelled_cleanly": null,
+                "candidate_ns": 178081,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 34922915,
+                "cancelled_cleanly": null,
+                "candidate_ns": 234297,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 36483605,
+                "cancelled_cleanly": null,
+                "candidate_ns": 179421,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              }
+            ],
+            "workload_id": "generated-6000-ids-mod-4001-v1"
+          },
+          "first_failure": null,
+          "limitations": [
+            "Generated identifiers, not a target application corpus",
+            "Peak memory is unmeasured; review eligibility remains blocked",
+            "Cooperative runner cancellation is tested separately, not asserted as per-strategy acceptance",
+            "Timing shares a local service process; no isolated-host or whole-app speed claim",
+            "Only built-in strategies run; no source rewriting, external candidates or deployment"
+          ],
+          "reason": "Completed",
+          "warmup_trials": [
+            {
+              "baseline_ns": 33947967,
+              "cancelled_cleanly": null,
+              "candidate_ns": 271878,
+              "equal_complete_output": true,
+              "peak_bytes": 0
+            },
+            {
+              "baseline_ns": 34390731,
+              "cancelled_cleanly": null,
+              "candidate_ns": 405384,
+              "equal_complete_output": true,
+              "peak_bytes": 0
+            }
+          ]
+        },
+        "experiment_id": 1
+      },
+      "state": "succeeded"
+    }
+  },
+  {
+    "session": 2,
+    "kind": "candidate",
+    "sample": 1,
+    "pre_submit_delay_ms": 230.0,
+    "queue_to_claim_ms": 0,
+    "request_to_completion_ms": 780.961795,
+    "events": [
+      [
+        "queued",
+        1793072095067
+      ],
+      [
+        "claimed",
+        1793072095067
+      ],
+      [
+        "succeeded",
+        1793072095834
+      ]
+    ],
+    "complete_job": {
+      "attempt": 1,
+      "id": 2,
+      "job": "DedupExperiment",
+      "result": {
+        "experiment": {
+          "completed": true,
+          "decision": {
+            "Incomplete": "Missing repeated timing, stress or memory measurements"
+          },
+          "elapsed_ms": 766,
+          "evidence": {
+            "baseline_revision": "linear-unique-v1",
+            "candidate_revision": "indexed-unique-v1",
+            "environment_id": "linux-x86_64; atlas-lab 0.1.0; bounded shared-process worker",
+            "stress_cases": 10000,
+            "stress_failures": 0,
+            "trials": [
+              {
+                "baseline_ns": 34968264,
+                "cancelled_cleanly": null,
+                "candidate_ns": 374749,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 33377070,
+                "cancelled_cleanly": null,
+                "candidate_ns": 178497,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 31876016,
+                "cancelled_cleanly": null,
+                "candidate_ns": 229823,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 35441391,
+                "cancelled_cleanly": null,
+                "candidate_ns": 151607,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 41176746,
+                "cancelled_cleanly": null,
+                "candidate_ns": 236740,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 30006912,
+                "cancelled_cleanly": null,
+                "candidate_ns": 157236,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 37088902,
+                "cancelled_cleanly": null,
+                "candidate_ns": 345699,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 33823099,
+                "cancelled_cleanly": null,
+                "candidate_ns": 152383,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 32301742,
+                "cancelled_cleanly": null,
+                "candidate_ns": 233840,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 36221773,
+                "cancelled_cleanly": null,
+                "candidate_ns": 250513,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 33570940,
+                "cancelled_cleanly": null,
+                "candidate_ns": 233761,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 30671567,
+                "cancelled_cleanly": null,
+                "candidate_ns": 155870,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 43133991,
+                "cancelled_cleanly": null,
+                "candidate_ns": 229689,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 34403241,
+                "cancelled_cleanly": null,
+                "candidate_ns": 211535,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 34976232,
+                "cancelled_cleanly": null,
+                "candidate_ns": 231248,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              }
+            ],
+            "workload_id": "generated-6000-ids-mod-4001-v1"
+          },
+          "first_failure": null,
+          "limitations": [
+            "Generated identifiers, not a target application corpus",
+            "Peak memory is unmeasured; review eligibility remains blocked",
+            "Cooperative runner cancellation is tested separately, not asserted as per-strategy acceptance",
+            "Timing shares a local service process; no isolated-host or whole-app speed claim",
+            "Only built-in strategies run; no source rewriting, external candidates or deployment"
+          ],
+          "reason": "Completed",
+          "warmup_trials": [
+            {
+              "baseline_ns": 36015488,
+              "cancelled_cleanly": null,
+              "candidate_ns": 231888,
+              "equal_complete_output": true,
+              "peak_bytes": 0
+            },
+            {
+              "baseline_ns": 33930726,
+              "cancelled_cleanly": null,
+              "candidate_ns": 153422,
+              "equal_complete_output": true,
+              "peak_bytes": 0
+            }
+          ]
+        },
+        "experiment_id": 2
+      },
+      "state": "succeeded"
+    }
+  },
+  {
+    "session": 2,
+    "kind": "candidate",
+    "sample": 2,
+    "pre_submit_delay_ms": 410.0,
+    "queue_to_claim_ms": 0,
+    "request_to_completion_ms": 807.979023,
+    "events": [
+      [
+        "queued",
+        1793072096260
+      ],
+      [
+        "claimed",
+        1793072096260
+      ],
+      [
+        "succeeded",
+        1793072097064
+      ]
+    ],
+    "complete_job": {
+      "attempt": 1,
+      "id": 3,
+      "job": "DedupExperiment",
+      "result": {
+        "experiment": {
+          "completed": true,
+          "decision": {
+            "Incomplete": "Missing repeated timing, stress or memory measurements"
+          },
+          "elapsed_ms": 802,
+          "evidence": {
+            "baseline_revision": "linear-unique-v1",
+            "candidate_revision": "indexed-unique-v1",
+            "environment_id": "linux-x86_64; atlas-lab 0.1.0; bounded shared-process worker",
+            "stress_cases": 10000,
+            "stress_failures": 0,
+            "trials": [
+              {
+                "baseline_ns": 36027084,
+                "cancelled_cleanly": null,
+                "candidate_ns": 550356,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 32822425,
+                "cancelled_cleanly": null,
+                "candidate_ns": 348027,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 33862094,
+                "cancelled_cleanly": null,
+                "candidate_ns": 307175,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 34727051,
+                "cancelled_cleanly": null,
+                "candidate_ns": 155123,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 33084573,
+                "cancelled_cleanly": null,
+                "candidate_ns": 221969,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 31696078,
+                "cancelled_cleanly": null,
+                "candidate_ns": 151745,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 37539875,
+                "cancelled_cleanly": null,
+                "candidate_ns": 245308,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 32162860,
+                "cancelled_cleanly": null,
+                "candidate_ns": 130896,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 36400057,
+                "cancelled_cleanly": null,
+                "candidate_ns": 178349,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 32522167,
+                "cancelled_cleanly": null,
+                "candidate_ns": 148831,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 36282215,
+                "cancelled_cleanly": null,
+                "candidate_ns": 183008,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 38582336,
+                "cancelled_cleanly": null,
+                "candidate_ns": 322903,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 35745432,
+                "cancelled_cleanly": null,
+                "candidate_ns": 268999,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 34699060,
+                "cancelled_cleanly": null,
+                "candidate_ns": 132037,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 40923186,
+                "cancelled_cleanly": null,
+                "candidate_ns": 198178,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              }
+            ],
+            "workload_id": "generated-6000-ids-mod-4001-v1"
+          },
+          "first_failure": null,
+          "limitations": [
+            "Generated identifiers, not a target application corpus",
+            "Peak memory is unmeasured; review eligibility remains blocked",
+            "Cooperative runner cancellation is tested separately, not asserted as per-strategy acceptance",
+            "Timing shares a local service process; no isolated-host or whole-app speed claim",
+            "Only built-in strategies run; no source rewriting, external candidates or deployment"
+          ],
+          "reason": "Completed",
+          "warmup_trials": [
+            {
+              "baseline_ns": 36998055,
+              "cancelled_cleanly": null,
+              "candidate_ns": 454175,
+              "equal_complete_output": true,
+              "peak_bytes": 0
+            },
+            {
+              "baseline_ns": 54680115,
+              "cancelled_cleanly": null,
+              "candidate_ns": 153482,
+              "equal_complete_output": true,
+              "peak_bytes": 0
+            }
+          ]
+        },
+        "experiment_id": 3
+      },
+      "state": "succeeded"
+    }
+  },
+  {
+    "session": 2,
+    "kind": "candidate",
+    "sample": 3,
+    "pre_submit_delay_ms": 130.0,
+    "queue_to_claim_ms": 1,
+    "request_to_completion_ms": 783.116921,
+    "events": [
+      [
+        "queued",
+        1793072097200
+      ],
+      [
+        "claimed",
+        1793072097201
+      ],
+      [
+        "succeeded",
+        1793072097978
+      ]
+    ],
+    "complete_job": {
+      "attempt": 1,
+      "id": 4,
+      "job": "DedupExperiment",
+      "result": {
+        "experiment": {
+          "completed": true,
+          "decision": {
+            "Incomplete": "Missing repeated timing, stress or memory measurements"
+          },
+          "elapsed_ms": 776,
+          "evidence": {
+            "baseline_revision": "linear-unique-v1",
+            "candidate_revision": "indexed-unique-v1",
+            "environment_id": "linux-x86_64; atlas-lab 0.1.0; bounded shared-process worker",
+            "stress_cases": 10000,
+            "stress_failures": 0,
+            "trials": [
+              {
+                "baseline_ns": 35783855,
+                "cancelled_cleanly": null,
+                "candidate_ns": 577990,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 32651627,
+                "cancelled_cleanly": null,
+                "candidate_ns": 154707,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 38829080,
+                "cancelled_cleanly": null,
+                "candidate_ns": 1392366,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 32046746,
+                "cancelled_cleanly": null,
+                "candidate_ns": 154890,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 40932967,
+                "cancelled_cleanly": null,
+                "candidate_ns": 220713,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 38528482,
+                "cancelled_cleanly": null,
+                "candidate_ns": 558172,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 32011079,
+                "cancelled_cleanly": null,
+                "candidate_ns": 267373,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 31351090,
+                "cancelled_cleanly": null,
+                "candidate_ns": 237971,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 36141152,
+                "cancelled_cleanly": null,
+                "candidate_ns": 217664,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 31038465,
+                "cancelled_cleanly": null,
+                "candidate_ns": 283643,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 34143169,
+                "cancelled_cleanly": null,
+                "candidate_ns": 237490,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 35363042,
+                "cancelled_cleanly": null,
+                "candidate_ns": 150195,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 31134857,
+                "cancelled_cleanly": null,
+                "candidate_ns": 329588,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 34659591,
+                "cancelled_cleanly": null,
+                "candidate_ns": 149656,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 33284459,
+                "cancelled_cleanly": null,
+                "candidate_ns": 272329,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              }
+            ],
+            "workload_id": "generated-6000-ids-mod-4001-v1"
+          },
+          "first_failure": null,
+          "limitations": [
+            "Generated identifiers, not a target application corpus",
+            "Peak memory is unmeasured; review eligibility remains blocked",
+            "Cooperative runner cancellation is tested separately, not asserted as per-strategy acceptance",
+            "Timing shares a local service process; no isolated-host or whole-app speed claim",
+            "Only built-in strategies run; no source rewriting, external candidates or deployment"
+          ],
+          "reason": "Completed",
+          "warmup_trials": [
+            {
+              "baseline_ns": 42966453,
+              "cancelled_cleanly": null,
+              "candidate_ns": 232819,
+              "equal_complete_output": true,
+              "peak_bytes": 0
+            },
+            {
+              "baseline_ns": 35244968,
+              "cancelled_cleanly": null,
+              "candidate_ns": 154957,
+              "equal_complete_output": true,
+              "peak_bytes": 0
+            }
+          ]
+        },
+        "experiment_id": 4
+      },
+      "state": "succeeded"
+    }
+  },
+  {
+    "session": 2,
+    "kind": "candidate",
+    "sample": 4,
+    "pre_submit_delay_ms": 310.0,
+    "queue_to_claim_ms": 0,
+    "request_to_completion_ms": 814.858938,
+    "events": [
+      [
+        "queued",
+        1793072098297
+      ],
+      [
+        "claimed",
+        1793072098297
+      ],
+      [
+        "succeeded",
+        1793072099090
+      ]
+    ],
+    "complete_job": {
+      "attempt": 1,
+      "id": 5,
+      "job": "DedupExperiment",
+      "result": {
+        "experiment": {
+          "completed": true,
+          "decision": {
+            "Incomplete": "Missing repeated timing, stress or memory measurements"
+          },
+          "elapsed_ms": 792,
+          "evidence": {
+            "baseline_revision": "linear-unique-v1",
+            "candidate_revision": "indexed-unique-v1",
+            "environment_id": "linux-x86_64; atlas-lab 0.1.0; bounded shared-process worker",
+            "stress_cases": 10000,
+            "stress_failures": 0,
+            "trials": [
+              {
+                "baseline_ns": 36195414,
+                "cancelled_cleanly": null,
+                "candidate_ns": 878339,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 32641786,
+                "cancelled_cleanly": null,
+                "candidate_ns": 179132,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 34166148,
+                "cancelled_cleanly": null,
+                "candidate_ns": 421421,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 36061113,
+                "cancelled_cleanly": null,
+                "candidate_ns": 403554,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 33514354,
+                "cancelled_cleanly": null,
+                "candidate_ns": 960715,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 53573846,
+                "cancelled_cleanly": null,
+                "candidate_ns": 165895,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 33792013,
+                "cancelled_cleanly": null,
+                "candidate_ns": 251682,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 40588721,
+                "cancelled_cleanly": null,
+                "candidate_ns": 155045,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 36579473,
+                "cancelled_cleanly": null,
+                "candidate_ns": 219264,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 33150304,
+                "cancelled_cleanly": null,
+                "candidate_ns": 154769,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 31346586,
+                "cancelled_cleanly": null,
+                "candidate_ns": 223669,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 35703592,
+                "cancelled_cleanly": null,
+                "candidate_ns": 153936,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 32560166,
+                "cancelled_cleanly": null,
+                "candidate_ns": 295095,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 35175186,
+                "cancelled_cleanly": null,
+                "candidate_ns": 320806,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 36544480,
+                "cancelled_cleanly": null,
+                "candidate_ns": 228917,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              }
+            ],
+            "workload_id": "generated-6000-ids-mod-4001-v1"
+          },
+          "first_failure": null,
+          "limitations": [
+            "Generated identifiers, not a target application corpus",
+            "Peak memory is unmeasured; review eligibility remains blocked",
+            "Cooperative runner cancellation is tested separately, not asserted as per-strategy acceptance",
+            "Timing shares a local service process; no isolated-host or whole-app speed claim",
+            "Only built-in strategies run; no source rewriting, external candidates or deployment"
+          ],
+          "reason": "Completed",
+          "warmup_trials": [
+            {
+              "baseline_ns": 34047138,
+              "cancelled_cleanly": null,
+              "candidate_ns": 347243,
+              "equal_complete_output": true,
+              "peak_bytes": 0
+            },
+            {
+              "baseline_ns": 32774543,
+              "cancelled_cleanly": null,
+              "candidate_ns": 179129,
+              "equal_complete_output": true,
+              "peak_bytes": 0
+            }
+          ]
+        },
+        "experiment_id": 5
+      },
+      "state": "succeeded"
+    }
+  },
+  {
+    "session": 3,
+    "kind": "baseline",
+    "sample": 0,
+    "pre_submit_delay_ms": 70.0,
+    "queue_to_claim_ms": 903,
+    "request_to_completion_ms": 1655.249663,
+    "events": [
+      [
+        "queued",
+        1793072099226
+      ],
+      [
+        "claimed",
+        1793072100129
+      ],
+      [
+        "succeeded",
+        1793072100860
+      ]
+    ],
+    "complete_job": {
+      "attempt": 1,
+      "id": 1,
+      "job": "DedupExperiment",
+      "result": {
+        "experiment": {
+          "completed": true,
+          "decision": {
+            "Incomplete": "Missing repeated timing, stress or memory measurements"
+          },
+          "elapsed_ms": 729,
+          "evidence": {
+            "baseline_revision": "linear-unique-v1",
+            "candidate_revision": "indexed-unique-v1",
+            "environment_id": "linux-x86_64; atlas-lab 0.1.0; bounded shared-process worker",
+            "stress_cases": 10000,
+            "stress_failures": 0,
+            "trials": [
+              {
+                "baseline_ns": 33589805,
+                "cancelled_cleanly": null,
+                "candidate_ns": 219052,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 32193275,
+                "cancelled_cleanly": null,
+                "candidate_ns": 139143,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 31602703,
+                "cancelled_cleanly": null,
+                "candidate_ns": 194379,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 31540362,
+                "cancelled_cleanly": null,
+                "candidate_ns": 122236,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 31515431,
+                "cancelled_cleanly": null,
+                "candidate_ns": 236634,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 32630518,
+                "cancelled_cleanly": null,
+                "candidate_ns": 123309,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 33464796,
+                "cancelled_cleanly": null,
+                "candidate_ns": 209020,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 30630759,
+                "cancelled_cleanly": null,
+                "candidate_ns": 436366,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 30359752,
+                "cancelled_cleanly": null,
+                "candidate_ns": 260620,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 31290291,
+                "cancelled_cleanly": null,
+                "candidate_ns": 122730,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 32052950,
+                "cancelled_cleanly": null,
+                "candidate_ns": 183645,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 31920627,
+                "cancelled_cleanly": null,
+                "candidate_ns": 123830,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 29080031,
+                "cancelled_cleanly": null,
+                "candidate_ns": 180588,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 31852120,
+                "cancelled_cleanly": null,
+                "candidate_ns": 121515,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 33979099,
+                "cancelled_cleanly": null,
+                "candidate_ns": 271656,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              }
+            ],
+            "workload_id": "generated-6000-ids-mod-4001-v1"
+          },
+          "first_failure": null,
+          "limitations": [
+            "Generated identifiers, not a target application corpus",
+            "Peak memory is unmeasured; review eligibility remains blocked",
+            "Cooperative runner cancellation is tested separately, not asserted as per-strategy acceptance",
+            "Timing shares a local service process; no isolated-host or whole-app speed claim",
+            "Only built-in strategies run; no source rewriting, external candidates or deployment"
+          ],
+          "reason": "Completed",
+          "warmup_trials": [
+            {
+              "baseline_ns": 35108412,
+              "cancelled_cleanly": null,
+              "candidate_ns": 536407,
+              "equal_complete_output": true,
+              "peak_bytes": 0
+            },
+            {
+              "baseline_ns": 32753732,
+              "cancelled_cleanly": null,
+              "candidate_ns": 144116,
+              "equal_complete_output": true,
+              "peak_bytes": 0
+            }
+          ]
+        },
+        "experiment_id": 1
+      },
+      "state": "succeeded"
+    }
+  },
+  {
+    "session": 3,
+    "kind": "baseline",
+    "sample": 1,
+    "pre_submit_delay_ms": 230.0,
+    "queue_to_claim_ms": 739,
+    "request_to_completion_ms": 1517.584926,
+    "events": [
+      [
+        "queued",
+        1793072101122
+      ],
+      [
+        "claimed",
+        1793072101861
+      ],
+      [
+        "succeeded",
+        1793072102626
+      ]
+    ],
+    "complete_job": {
+      "attempt": 1,
+      "id": 2,
+      "job": "DedupExperiment",
+      "result": {
+        "experiment": {
+          "completed": true,
+          "decision": {
+            "Incomplete": "Missing repeated timing, stress or memory measurements"
+          },
+          "elapsed_ms": 763,
+          "evidence": {
+            "baseline_revision": "linear-unique-v1",
+            "candidate_revision": "indexed-unique-v1",
+            "environment_id": "linux-x86_64; atlas-lab 0.1.0; bounded shared-process worker",
+            "stress_cases": 10000,
+            "stress_failures": 0,
+            "trials": [
+              {
+                "baseline_ns": 29719303,
+                "cancelled_cleanly": null,
+                "candidate_ns": 230813,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 30357049,
+                "cancelled_cleanly": null,
+                "candidate_ns": 146342,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 30654543,
+                "cancelled_cleanly": null,
+                "candidate_ns": 236182,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 29801002,
+                "cancelled_cleanly": null,
+                "candidate_ns": 140995,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 33660269,
+                "cancelled_cleanly": null,
+                "candidate_ns": 398660,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 31804877,
+                "cancelled_cleanly": null,
+                "candidate_ns": 144500,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 32492780,
+                "cancelled_cleanly": null,
+                "candidate_ns": 318488,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 32626558,
+                "cancelled_cleanly": null,
+                "candidate_ns": 170119,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 32490642,
+                "cancelled_cleanly": null,
+                "candidate_ns": 235222,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 29963374,
+                "cancelled_cleanly": null,
+                "candidate_ns": 351716,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 32195130,
+                "cancelled_cleanly": null,
+                "candidate_ns": 204776,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 30439335,
+                "cancelled_cleanly": null,
+                "candidate_ns": 231078,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 79950127,
+                "cancelled_cleanly": null,
+                "candidate_ns": 239011,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 32487285,
+                "cancelled_cleanly": null,
+                "candidate_ns": 148932,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 29105943,
+                "cancelled_cleanly": null,
+                "candidate_ns": 236061,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              }
+            ],
+            "workload_id": "generated-6000-ids-mod-4001-v1"
+          },
+          "first_failure": null,
+          "limitations": [
+            "Generated identifiers, not a target application corpus",
+            "Peak memory is unmeasured; review eligibility remains blocked",
+            "Cooperative runner cancellation is tested separately, not asserted as per-strategy acceptance",
+            "Timing shares a local service process; no isolated-host or whole-app speed claim",
+            "Only built-in strategies run; no source rewriting, external candidates or deployment"
+          ],
+          "reason": "Completed",
+          "warmup_trials": [
+            {
+              "baseline_ns": 37353441,
+              "cancelled_cleanly": null,
+              "candidate_ns": 280217,
+              "equal_complete_output": true,
+              "peak_bytes": 0
+            },
+            {
+              "baseline_ns": 36253906,
+              "cancelled_cleanly": null,
+              "candidate_ns": 159986,
+              "equal_complete_output": true,
+              "peak_bytes": 0
+            }
+          ]
+        },
+        "experiment_id": 2
+      },
+      "state": "succeeded"
+    }
+  },
+  {
+    "session": 3,
+    "kind": "baseline",
+    "sample": 2,
+    "pre_submit_delay_ms": 410.0,
+    "queue_to_claim_ms": 578,
+    "request_to_completion_ms": 1307.24639,
+    "events": [
+      [
+        "queued",
+        1793072103049
+      ],
+      [
+        "claimed",
+        1793072103627
+      ],
+      [
+        "succeeded",
+        1793072104333
+      ]
+    ],
+    "complete_job": {
+      "attempt": 1,
+      "id": 3,
+      "job": "DedupExperiment",
+      "result": {
+        "experiment": {
+          "completed": true,
+          "decision": {
+            "Incomplete": "Missing repeated timing, stress or memory measurements"
+          },
+          "elapsed_ms": 705,
+          "evidence": {
+            "baseline_revision": "linear-unique-v1",
+            "candidate_revision": "indexed-unique-v1",
+            "environment_id": "linux-x86_64; atlas-lab 0.1.0; bounded shared-process worker",
+            "stress_cases": 10000,
+            "stress_failures": 0,
+            "trials": [
+              {
+                "baseline_ns": 30663284,
+                "cancelled_cleanly": null,
+                "candidate_ns": 247642,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 31491192,
+                "cancelled_cleanly": null,
+                "candidate_ns": 142988,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 32753858,
+                "cancelled_cleanly": null,
+                "candidate_ns": 391724,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 31349708,
+                "cancelled_cleanly": null,
+                "candidate_ns": 148193,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 32268649,
+                "cancelled_cleanly": null,
+                "candidate_ns": 240416,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 33185468,
+                "cancelled_cleanly": null,
+                "candidate_ns": 145672,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 31670162,
+                "cancelled_cleanly": null,
+                "candidate_ns": 218991,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 31692117,
+                "cancelled_cleanly": null,
+                "candidate_ns": 191368,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 30049599,
+                "cancelled_cleanly": null,
+                "candidate_ns": 615807,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 30736016,
+                "cancelled_cleanly": null,
+                "candidate_ns": 167985,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 30044446,
+                "cancelled_cleanly": null,
+                "candidate_ns": 216432,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 29714408,
+                "cancelled_cleanly": null,
+                "candidate_ns": 144956,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 31806317,
+                "cancelled_cleanly": null,
+                "candidate_ns": 239570,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 32933645,
+                "cancelled_cleanly": null,
+                "candidate_ns": 259224,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 32153111,
+                "cancelled_cleanly": null,
+                "candidate_ns": 618819,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              }
+            ],
+            "workload_id": "generated-6000-ids-mod-4001-v1"
+          },
+          "first_failure": null,
+          "limitations": [
+            "Generated identifiers, not a target application corpus",
+            "Peak memory is unmeasured; review eligibility remains blocked",
+            "Cooperative runner cancellation is tested separately, not asserted as per-strategy acceptance",
+            "Timing shares a local service process; no isolated-host or whole-app speed claim",
+            "Only built-in strategies run; no source rewriting, external candidates or deployment"
+          ],
+          "reason": "Completed",
+          "warmup_trials": [
+            {
+              "baseline_ns": 32878297,
+              "cancelled_cleanly": null,
+              "candidate_ns": 257601,
+              "equal_complete_output": true,
+              "peak_bytes": 0
+            },
+            {
+              "baseline_ns": 32475517,
+              "cancelled_cleanly": null,
+              "candidate_ns": 141953,
+              "equal_complete_output": true,
+              "peak_bytes": 0
+            }
+          ]
+        },
+        "experiment_id": 3
+      },
+      "state": "succeeded"
+    }
+  },
+  {
+    "session": 3,
+    "kind": "baseline",
+    "sample": 3,
+    "pre_submit_delay_ms": 130.0,
+    "queue_to_claim_ms": 844,
+    "request_to_completion_ms": 1576.735089,
+    "events": [
+      [
+        "queued",
+        1793072104489
+      ],
+      [
+        "claimed",
+        1793072105333
+      ],
+      [
+        "succeeded",
+        1793072106047
+      ]
+    ],
+    "complete_job": {
+      "attempt": 1,
+      "id": 4,
+      "job": "DedupExperiment",
+      "result": {
+        "experiment": {
+          "completed": true,
+          "decision": {
+            "Incomplete": "Missing repeated timing, stress or memory measurements"
+          },
+          "elapsed_ms": 713,
+          "evidence": {
+            "baseline_revision": "linear-unique-v1",
+            "candidate_revision": "indexed-unique-v1",
+            "environment_id": "linux-x86_64; atlas-lab 0.1.0; bounded shared-process worker",
+            "stress_cases": 10000,
+            "stress_failures": 0,
+            "trials": [
+              {
+                "baseline_ns": 33350031,
+                "cancelled_cleanly": null,
+                "candidate_ns": 218389,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 29555623,
+                "cancelled_cleanly": null,
+                "candidate_ns": 203032,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 31186591,
+                "cancelled_cleanly": null,
+                "candidate_ns": 277856,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 29852776,
+                "cancelled_cleanly": null,
+                "candidate_ns": 146374,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 32222317,
+                "cancelled_cleanly": null,
+                "candidate_ns": 240664,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 31499259,
+                "cancelled_cleanly": null,
+                "candidate_ns": 148839,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 30774849,
+                "cancelled_cleanly": null,
+                "candidate_ns": 223158,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 31164736,
+                "cancelled_cleanly": null,
+                "candidate_ns": 145140,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 34397667,
+                "cancelled_cleanly": null,
+                "candidate_ns": 216303,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 30306551,
+                "cancelled_cleanly": null,
+                "candidate_ns": 147845,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 30264130,
+                "cancelled_cleanly": null,
+                "candidate_ns": 300909,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 42559035,
+                "cancelled_cleanly": null,
+                "candidate_ns": 176910,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 31813057,
+                "cancelled_cleanly": null,
+                "candidate_ns": 220654,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 35097117,
+                "cancelled_cleanly": null,
+                "candidate_ns": 141805,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 31172093,
+                "cancelled_cleanly": null,
+                "candidate_ns": 635801,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              }
+            ],
+            "workload_id": "generated-6000-ids-mod-4001-v1"
+          },
+          "first_failure": null,
+          "limitations": [
+            "Generated identifiers, not a target application corpus",
+            "Peak memory is unmeasured; review eligibility remains blocked",
+            "Cooperative runner cancellation is tested separately, not asserted as per-strategy acceptance",
+            "Timing shares a local service process; no isolated-host or whole-app speed claim",
+            "Only built-in strategies run; no source rewriting, external candidates or deployment"
+          ],
+          "reason": "Completed",
+          "warmup_trials": [
+            {
+              "baseline_ns": 29905826,
+              "cancelled_cleanly": null,
+              "candidate_ns": 287338,
+              "equal_complete_output": true,
+              "peak_bytes": 0
+            },
+            {
+              "baseline_ns": 34292676,
+              "cancelled_cleanly": null,
+              "candidate_ns": 140648,
+              "equal_complete_output": true,
+              "peak_bytes": 0
+            }
+          ]
+        },
+        "experiment_id": 4
+      },
+      "state": "succeeded"
+    }
+  },
+  {
+    "session": 3,
+    "kind": "baseline",
+    "sample": 4,
+    "pre_submit_delay_ms": 310.0,
+    "queue_to_claim_ms": 667,
+    "request_to_completion_ms": 1379.997034,
+    "events": [
+      [
+        "queued",
+        1793072106380
+      ],
+      [
+        "claimed",
+        1793072107047
+      ],
+      [
+        "succeeded",
+        1793072107744
+      ]
+    ],
+    "complete_job": {
+      "attempt": 1,
+      "id": 5,
+      "job": "DedupExperiment",
+      "result": {
+        "experiment": {
+          "completed": true,
+          "decision": {
+            "Incomplete": "Missing repeated timing, stress or memory measurements"
+          },
+          "elapsed_ms": 696,
+          "evidence": {
+            "baseline_revision": "linear-unique-v1",
+            "candidate_revision": "indexed-unique-v1",
+            "environment_id": "linux-x86_64; atlas-lab 0.1.0; bounded shared-process worker",
+            "stress_cases": 10000,
+            "stress_failures": 0,
+            "trials": [
+              {
+                "baseline_ns": 30784640,
+                "cancelled_cleanly": null,
+                "candidate_ns": 351153,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 33025062,
+                "cancelled_cleanly": null,
+                "candidate_ns": 153492,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 35423490,
+                "cancelled_cleanly": null,
+                "candidate_ns": 344408,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 32628789,
+                "cancelled_cleanly": null,
+                "candidate_ns": 147167,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 29550364,
+                "cancelled_cleanly": null,
+                "candidate_ns": 257232,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 32972623,
+                "cancelled_cleanly": null,
+                "candidate_ns": 286733,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 29060734,
+                "cancelled_cleanly": null,
+                "candidate_ns": 226097,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 32339409,
+                "cancelled_cleanly": null,
+                "candidate_ns": 147336,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 32757956,
+                "cancelled_cleanly": null,
+                "candidate_ns": 220007,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 32202475,
+                "cancelled_cleanly": null,
+                "candidate_ns": 192019,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 31838520,
+                "cancelled_cleanly": null,
+                "candidate_ns": 202123,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 30789437,
+                "cancelled_cleanly": null,
+                "candidate_ns": 146565,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 28598473,
+                "cancelled_cleanly": null,
+                "candidate_ns": 222603,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 30352810,
+                "cancelled_cleanly": null,
+                "candidate_ns": 144527,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              },
+              {
+                "baseline_ns": 30631661,
+                "cancelled_cleanly": null,
+                "candidate_ns": 207150,
+                "equal_complete_output": true,
+                "peak_bytes": 0
+              }
+            ],
+            "workload_id": "generated-6000-ids-mod-4001-v1"
+          },
+          "first_failure": null,
+          "limitations": [
+            "Generated identifiers, not a target application corpus",
+            "Peak memory is unmeasured; review eligibility remains blocked",
+            "Cooperative runner cancellation is tested separately, not asserted as per-strategy acceptance",
+            "Timing shares a local service process; no isolated-host or whole-app speed claim",
+            "Only built-in strategies run; no source rewriting, external candidates or deployment"
+          ],
+          "reason": "Completed",
+          "warmup_trials": [
+            {
+              "baseline_ns": 30426329,
+              "cancelled_cleanly": null,
+              "candidate_ns": 295751,
+              "equal_complete_output": true,
+              "peak_bytes": 0
+            },
+            {
+              "baseline_ns": 31518735,
+              "cancelled_cleanly": null,
+              "candidate_ns": 142759,
+              "equal_complete_output": true,
+              "peak_bytes": 0
+            }
+          ]
+        },
+        "experiment_id": 5
+      },
+      "state": "succeeded"
+    }
+  }
+]

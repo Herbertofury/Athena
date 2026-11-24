@@ -1,0 +1,95 @@
+FEFE.FFF..
+======================================================================
+ERROR: test_ascii_bounded_content_length (test_request_framing.Tests.test_ascii_bounded_content_length) (value='²')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<checkout>/native/foundry/tests/test_request_framing.py", line 30, in test_ascii_bounded_content_length
+    h=self.handler();h.headers.replace_header('Content-Length',value);self.rejected(h,411)
+                                                                      ^^^^^^^^^^^^^^^^^^^^
+  File "<checkout>/native/foundry/tests/test_request_framing.py", line 16, in rejected
+    h.do_POST();self.assertEqual(h.reply.call_args.args[0],code);h.server.cli.assert_not_called();self.assertTrue(h.close_connection)
+    ^^^^^^^^^^^
+  File "<checkout>/native/foundry/bridge.py", line 196, in do_POST
+    length=int(lengths[0])
+           ^^^^^^^^^^^^^^^
+ValueError: invalid literal for int() with base 10: '²'
+
+======================================================================
+ERROR: test_ascii_bounded_content_length (test_request_framing.Tests.test_ascii_bounded_content_length) (value='99999999999999999999')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<checkout>/native/foundry/tests/test_request_framing.py", line 30, in test_ascii_bounded_content_length
+    h=self.handler();h.headers.replace_header('Content-Length',value);self.rejected(h,411)
+                                                                      ^^^^^^^^^^^^^^^^^^^^
+  File "<checkout>/native/foundry/tests/test_request_framing.py", line 16, in rejected
+    h.do_POST();self.assertEqual(h.reply.call_args.args[0],code);h.server.cli.assert_not_called();self.assertTrue(h.close_connection)
+    ^^^^^^^^^^^
+  File "<checkout>/native/foundry/bridge.py", line 196, in do_POST
+    length=int(lengths[0])
+           ^^^^^^^^^^^^^^^
+ValueError: Exceeds the limit (4300 digits) for integer string conversion: value has 5000 digits; use sys.set_int_max_str_digits() to increase the limit
+
+======================================================================
+FAIL: test_any_transfer_encoding_header_rejected (test_request_framing.Tests.test_any_transfer_encoding_header_rejected) (value='')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<checkout>/native/foundry/tests/test_request_framing.py", line 26, in test_any_transfer_encoding_header_rejected
+    h=self.handler();h.headers['Transfer-Encoding']=value;self.rejected(h,415)
+                                                          ^^^^^^^^^^^^^^^^^^^^
+  File "<checkout>/native/foundry/tests/test_request_framing.py", line 16, in rejected
+    h.do_POST();self.assertEqual(h.reply.call_args.args[0],code);h.server.cli.assert_not_called();self.assertTrue(h.close_connection)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 200 != 415
+
+======================================================================
+FAIL: test_ascii_bounded_content_length (test_request_framing.Tests.test_ascii_bounded_content_length) (value='１２')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<checkout>/native/foundry/tests/test_request_framing.py", line 30, in test_ascii_bounded_content_length
+    h=self.handler();h.headers.replace_header('Content-Length',value);self.rejected(h,411)
+                                                                      ^^^^^^^^^^^^^^^^^^^^
+  File "<checkout>/native/foundry/tests/test_request_framing.py", line 16, in rejected
+    h.do_POST();self.assertEqual(h.reply.call_args.args[0],code);h.server.cli.assert_not_called();self.assertTrue(h.close_connection)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 400 != 411
+
+======================================================================
+FAIL: test_duplicate_content_type_is_ambiguous (test_request_framing.Tests.test_duplicate_content_type_is_ambiguous) (value='application/json')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<checkout>/native/foundry/tests/test_request_framing.py", line 22, in test_duplicate_content_type_is_ambiguous
+    h=self.handler();h.headers['Content-Type']=value;self.rejected(h,415)
+                                                     ^^^^^^^^^^^^^^^^^^^^
+  File "<checkout>/native/foundry/tests/test_request_framing.py", line 16, in rejected
+    h.do_POST();self.assertEqual(h.reply.call_args.args[0],code);h.server.cli.assert_not_called();self.assertTrue(h.close_connection)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 200 != 415
+
+======================================================================
+FAIL: test_duplicate_content_type_is_ambiguous (test_request_framing.Tests.test_duplicate_content_type_is_ambiguous) (value='text/plain')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<checkout>/native/foundry/tests/test_request_framing.py", line 22, in test_duplicate_content_type_is_ambiguous
+    h=self.handler();h.headers['Content-Type']=value;self.rejected(h,415)
+                                                     ^^^^^^^^^^^^^^^^^^^^
+  File "<checkout>/native/foundry/tests/test_request_framing.py", line 16, in rejected
+    h.do_POST();self.assertEqual(h.reply.call_args.args[0],code);h.server.cli.assert_not_called();self.assertTrue(h.close_connection)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 200 != 415
+
+======================================================================
+FAIL: test_duplicate_content_type_is_ambiguous (test_request_framing.Tests.test_duplicate_content_type_is_ambiguous) (value='')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<checkout>/native/foundry/tests/test_request_framing.py", line 22, in test_duplicate_content_type_is_ambiguous
+    h=self.handler();h.headers['Content-Type']=value;self.rejected(h,415)
+                                                     ^^^^^^^^^^^^^^^^^^^^
+  File "<checkout>/native/foundry/tests/test_request_framing.py", line 16, in rejected
+    h.do_POST();self.assertEqual(h.reply.call_args.args[0],code);h.server.cli.assert_not_called();self.assertTrue(h.close_connection)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 200 != 415
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.003s
+
+FAILED (failures=5, errors=2)

@@ -1,0 +1,620 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light"><title>Athena Programming Workshop</title><style>html{font-family:system-ui,sans-serif;line-height:1.65;color:#172439;background:#f6f8fc}body{margin:0}main,header,footer{max-width:76ch;margin:auto;padding:1.5rem}h1,h2,h3{line-height:1.2}h2{margin-top:2.5rem}a{color:#124ba0;text-underline-offset:.2em}a:focus,summary:focus{outline:3px solid #9d4b00;outline-offset:4px}section{scroll-margin-top:1rem}pre{background:#e8edf5;padding:1rem;overflow:auto;border-radius:.4rem;white-space:pre-wrap;overflow-wrap:anywhere}code{font-family:ui-monospace,monospace;font-size:.95em}details{padding:.7rem 1rem;margin:1rem 0;border:1px solid #9baac0;border-radius:.4rem;background:white}summary{font-weight:650;cursor:pointer}.scope{border-left:4px solid #325681;padding:1rem;background:#e8edf5}.skip{position:absolute;left:-999rem}.skip:focus{left:1rem;top:1rem;background:white;padding:.5rem}li{margin:.4rem 0}.top{font-size:.9rem}@media print{html{background:white}main,header,footer{padding:0}pre,details{break-inside:avoid}a{color:inherit}summary{display:none}details>*{display:block!important}.skip,.top{display:none}}</style></head><body><a class="skip" href="#main">Skip to lessons and projects</a><header id="top"><p>Athena · Offline learner pack</p><h1>Small Programs, Clear Contracts</h1><p>Eight lessons, 24 original checks, four demonstrations and two editable Python projects.</p><p class="scope">The starter functions intentionally fail until you implement them. The supplied reference passing is not your grade. No accounts, network services, payments or administrator access are needed. This is a beginner foundation, not complete programming or job readiness.</p><nav aria-label="Study guide contents"><h2>Contents</h2><ol>
+<li><a href="#prog-values-contract">Give every value a meaning and a unit</a></li>
+<li><a href="#prog-trace-control">Trace a loop before trusting its output</a></li>
+<li><a href="#prog-functions-state">Build small functions without hidden state</a></li>
+<li><a href="#prog-collections-identity">Choose collections from identity and order</a></li>
+<li><a href="#prog-validation-errors">Reject bad input without hiding the reason</a></li>
+<li><a href="#prog-files-cli">Move structured data through a small command-line program</a></li>
+<li><a href="#prog-tests-debug">Make a test distinguish a real mistake</a></li>
+<li><a href="#prog-project-delivery">Finish a small program someone else can verify</a></li>
+<li><a href="#project-guide">Run the projects</a></li>
+<li><a href="#quotes-contract">Repair Quotes contract</a></li>
+<li><a href="#events-contract">Event Summary contract</a></li>
+<li><a href="#worksheet">Evidence worksheet</a></li>
+<li><a href="#answers">Prediction key</a></li>
+<li><a href="#coverage">Coverage and limits</a></li>
+</ol></nav><p>Read this file directly in a browser, without a server or internet connection. Source reference links require internet only if you choose to open them. Code lives alongside this guide in the extracted pack. Python 3.12.14/Linux was tested; other systems remain unverified.</p></header><main id="main">
+<section id="prog-values-contract" aria-labelledby="prog-values-contract-title"><h2 id="prog-values-contract-title">Give every value a meaning and a unit</h2><p>Start a repair-quote calculator with explicit types, bounds and expected results.</p><h3>You will learn to</h3><ul>
+<li>Distinguish text, integer counts and display strings.</li>
+<li>Keep amount arithmetic in explicit integer cents for the project.</li>
+<li>Write a function contract before its implementation.</li>
+</ul><h3>Learn</h3>
+<p>A useful program starts with a question precise enough to answer. Our fictional repair workshop needs a subtotal for supplied line items, not a payment system. Each line has a stock identifier, a quantity and a price in cents. Before writing code, decide the allowed input, the output and the behavior for invalid data. These choices form the program’s contract.</p>
+<p>The text &quot;3&quot; and the integer 3 are different values. Repeating text and multiplying a quantity are different operations even when the same symbol appears. Conversion should happen at a defined boundary with validation, not everywhere a value is used. A display string such as &quot;49.97&quot; is for a reader; it is not the internal arithmetic representation in this project.</p>
+<p>Use whole-number cents for the quote’s exact additions and multiplications. Two items at 1250 cents produce 2500 cents. This avoids binary floating-point approximation for this narrow arithmetic. Real currency systems also need currency identity, rounding rules, tax, discounts and other requirements. Integer cents is a project decision, not a claim that every financial domain has two decimal places.</p>
+<p>State bounds deliberately. Quantity is an integer from 1 to 1000; unit_cents is an integer from 0 to 1000000. Zero-price items are valid, but zero quantity is not a line item under this contract. Python treats booleans as related to integers, so the validator requires an exact integer type rather than accepting true as one unit.</p>
+<p>A contract also describes what does not change. validate_item returns a new flat dictionary and leaves the caller’s input untouched. Errors should be explicit rather than silently replacing invalid data with zero. The visible tests encode those decisions so that implementation and expectations can be discussed independently.</p>
+<p>Open projects/repair_quotes/starter.py and implement one function at a time. The placeholders intentionally fail until you replace them. The reference file is available for comparison after you have tried the exercise. Do not copy a passing test result into your evidence as proof that you personally implemented the function; distinguish your work from running the supplied solution.</p>
+<h3>Worked example</h3><p>For a line with sku=FILTER, quantity=2 and unit_cents=1250, the line subtotal is 2500 cents. format_cents(5) must produce &quot;0.05&quot;, not &quot;0.5&quot;. The validator rejects quantity=true even though a casual arithmetic expression might treat it as 1. These are explicit product choices tested at their boundaries. The program never charges anyone or contacts a merchant.</p>
+<pre><code>quantity = 2
+unit_cents = 1250
+line_cents = quantity * unit_cents
+# line_cents is 2500; its unit is cents.
+display = f&quot;{line_cents // 100}.{line_cents % 100:02d}&quot;
+# display is &quot;25.00&quot;, a presentation string.</code></pre>
+<p>These snippets illustrate the lesson. Complete runnable programs are in the projects and examples folders.</p><h3>Practice safely</h3><ol>
+<li>Read the Repair Quotes contract before opening the reference solution.</li>
+<li>Write examples for smallest, largest, zero-price and invalid-quantity inputs.</li>
+<li>Implement format_cents and validate_item in a private copy of starter.py.</li>
+<li>Run the starter acceptance tests and inspect the first relevant failure.</li>
+<li>Explain why True, 1, 1.0 and &quot;1&quot; are not interchangeable under this contract.</li>
+<li>Record what you implemented and what you only observed in the reference.</li>
+</ol><h3>Three original checks</h3>
+<p><strong>Check 1: Which value is the quote project’s internal representation of a 12.50 unit price?</strong></p><ol type="A">
+<li>The integer 1250 with the unit cents</li>
+<li>The string &quot;12.50&quot;</li>
+<li>A currency symbol alone</li>
+<li>The boolean True</li>
+</ol><details><summary>Show answer and reasoning</summary><p>A. The integer 1250 with the unit cents The contract uses integer cents for arithmetic and a separate formatting function for display.</p></details>
+<p><strong>Check 2: Why is quantity=true rejected?</strong></p><ol type="A">
+<li>Booleans cannot exist in Python</li>
+<li>The contract requires an exact integer count, not a truth value</li>
+<li>Every quantity must be text</li>
+<li>It prevents all possible financial errors</li>
+</ol><details><summary>Show answer and reasoning</summary><p>B. The contract requires an exact integer count, not a truth value Explicit type requirements prevent accidental coercion. This is a narrow input rule, not a complete financial control.</p></details>
+<p><strong>Check 3: What should format_cents(5) return?</strong></p><ol type="A">
+<li>&quot;5.00&quot;</li>
+<li>&quot;0.5&quot;</li>
+<li>&quot;0.05&quot;</li>
+<li>The integer 5</li>
+</ol><details><summary>Show answer and reasoning</summary><p>C. &quot;0.05&quot; Five cents needs two fractional display digits. Internal and presentation values are separate.</p></details>
+<h3>Evidence to keep</h3><ul>
+<li>A written input/output/error contract.</li>
+<li>Your two implemented starter functions and actual test result.</li>
+<li>Boundary examples with explicit units.</li>
+</ul><h3>Limits</h3><p>This is fictional subtotal arithmetic, not pricing advice, tax calculation, billing, payment processing or a complete currency library.</p><h3>Official references</h3><ul>
+<li><a href="https://docs.python.org/3.12/tutorial/introduction.html">https://docs.python.org/3.12/tutorial/introduction.html</a></li>
+<li><a href="https://docs.python.org/3.12/tutorial/floatingpoint.html">https://docs.python.org/3.12/tutorial/floatingpoint.html</a></li>
+</ul><p class="top"><a href="#top">Back to contents</a></p></section>
+<section id="prog-trace-control" aria-labelledby="prog-trace-control-title"><h2 id="prog-trace-control-title">Trace a loop before trusting its output</h2><p>Build the subtotal by maintaining a simple invariant at every step.</p><h3>You will learn to</h3><ul>
+<li>Explain branch and loop behavior in a small trace.</li>
+<li>Use a running-total invariant and a defined empty case.</li>
+<li>Choose boundary tests that expose off-by-one and reset errors.</li>
+</ul><h3>Learn</h3>
+<p>A program follows the control flow that its code expresses, not the intention in a comment. Conditions select a path; a loop repeats a body for a sequence of inputs. Indentation defines blocks in Python. When a result surprises you, trace the values before and after each relevant statement rather than changing several lines at once.</p>
+<p>For the quote, initialize subtotal to zero before the loop. For each validated line, compute quantity times unit_cents and add that line amount once. A useful invariant is: after processing the first k lines, subtotal equals their sum. At the start k is zero and the empty sum is zero. After the last line, the invariant gives the desired total.</p>
+<p>The location of an assignment matters. Resetting subtotal to zero inside the loop discards earlier work. Returning from inside the loop can stop after the first item. Including the last index twice can double-count. A three-line example often reveals these errors more clearly than a large file, because you can calculate each intermediate value by hand.</p>
+<p>Define the empty case on purpose. Under this contract, an empty quote is valid and returns zero lines, zero units, zero subtotal and an empty grouping. That differs from an empty event summary’s mean, which is absent rather than zero. Similar-looking empty inputs can require different outputs because the questions differ.</p>
+<p>Avoid modifying the sequence you are iterating over unless the behavior is deliberately designed. Here the input stays unchanged while separate accumulators build the answer. This makes the trace easier to explain and keeps a second caller from seeing unexpected edits. The next lessons extend the accumulators to grouped results.</p>
+<p>The supplied trace_total example runs only fixed invented values and prints every step. Predict it before running. Seeing the expected final number once is useful, but the invariant explains why the algorithm should work for other allowed cases. Later tests exercise a bounded set of quantities and prices; they are evidence, not a proof over every possible program.</p>
+<h3>Worked example</h3><p>The three fixture line amounts are 2500, 1497 and 1000 cents. The running totals are 2500, 3997 and 4997. If a loop resets the total on each iteration, the final value becomes 1000, a plausible-looking but wrong amount. The empty quote returns zero without entering the loop. Both the multi-line trace and empty case are required evidence.</p>
+<pre><code>subtotal = 0
+for quantity, unit_cents in [(2, 1250), (3, 499), (1, 1000)]:
+    line_cents = quantity * unit_cents
+    subtotal += line_cents
+# After each iteration: 2500, 3997, 4997.</code></pre>
+<p>These snippets illustrate the lesson. Complete runnable programs are in the projects and examples folders.</p><h3>Practice safely</h3><ol>
+<li>Write the before, line amount and after values for all three fixture lines.</li>
+<li>Run python3 examples/trace_total.py and compare the trace.</li>
+<li>Explain the loop invariant in your own words.</li>
+<li>Predict the result if initialization or return is moved inside the loop, without changing the reference.</li>
+<li>Implement the ungrouped subtotal and unit count in your starter.</li>
+<li>Test empty, one-line and multi-line input before adding grouping.</li>
+</ol><h3>Three original checks</h3>
+<p><strong>Check 1: After two fixture lines, what is the subtotal?</strong></p><ol type="A">
+<li>1497</li>
+<li>2500</li>
+<li>4997</li>
+<li>3997</li>
+</ol><details><summary>Show answer and reasoning</summary><p>D. 3997 The first two line amounts are 2500 and 1497, so their sum is 3997.</p></details>
+<p><strong>Check 2: What does resetting subtotal inside every iteration usually do in this algorithm?</strong></p><ol type="A">
+<li>Discard earlier accumulated work</li>
+<li>Preserve every previous line</li>
+<li>Validate all input</li>
+<li>Sort the rows</li>
+</ol><details><summary>Show answer and reasoning</summary><p>A. Discard earlier accumulated work The running total must survive from one iteration to the next.</p></details>
+<p><strong>Check 3: Why test the empty quote?</strong></p><ol type="A">
+<li>It proves all large inputs are fast</li>
+<li>It defines the zero-work path without entering the loop</li>
+<li>It removes the need for bounds</li>
+<li>It makes every empty metric equal zero</li>
+</ol><details><summary>Show answer and reasoning</summary><p>B. It defines the zero-work path without entering the loop Empty behavior is part of the contract and can expose initialization or return mistakes.</p></details>
+<h3>Evidence to keep</h3><ul>
+<li>A hand-calculated and executed three-step trace.</li>
+<li>A stated invariant and empty-case result.</li>
+<li>Starter tests for zero, one and multiple lines.</li>
+</ul><h3>Limits</h3><p>The fixed trace is not a performance benchmark or a proof that any arbitrary loop is correct.</p><h3>Official references</h3><ul>
+<li><a href="https://docs.python.org/3.12/tutorial/controlflow.html">https://docs.python.org/3.12/tutorial/controlflow.html</a></li>
+<li><a href="https://docs.python.org/3.12/library/unittest.html">https://docs.python.org/3.12/library/unittest.html</a></li>
+</ul><p class="top"><a href="#top">Back to contents</a></p></section>
+<section id="prog-functions-state" aria-labelledby="prog-functions-state-title"><h2 id="prog-functions-state-title">Build small functions without hidden state</h2><p>Separate calculation from I/O and avoid accidental mutation through aliases.</p><h3>You will learn to</h3><ul>
+<li>Give each function a focused input/output contract.</li>
+<li>Distinguish returning a value from printing it.</li>
+<li>Recognize aliasing and the limits of a shallow copy.</li>
+</ul><h3>Learn</h3>
+<p>A function is a named operation with inputs and a result or effect. Small functions let you reason about one decision at a time. validate_item checks a row; quote_total calculates a summary; format_cents creates a display string. A command-line wrapper decides when to read a fixture and print JSON. Combining all those jobs in one loop makes failures harder to isolate.</p>
+<p>Returning a value lets another function or test inspect and reuse it. Printing produces output for a user or another process. A calculator that only prints a number is harder to combine with grouping or formatting. Our project functions return ordinary data and do not read files, make requests or print; the wrapper owns those I/O choices.</p>
+<p>Prefer explicit arguments over hidden global configuration for this exercise. A function whose result depends on a mutable global counter can change behavior across tests or repeated runs. A fresh accumulator inside each call prevents one summary from leaking into the next. Repeating the same pure calculation should produce an equal result without altering the supplied input.</p>
+<p>Assignment can create another name for the same object. If alias = original, changing a mutable object through either name affects the shared object. A shallow copy creates a new outer container but can still share nested items. In the supplied example, copying a list of dictionaries does not automatically copy each dictionary.</p>
+<p>Copy only what the contract requires. The quote and event rows contain flat primitive values, so building a fresh dictionary is sufficient for those rows. A future nested schema would need its own mutation policy. Deep copying everything is not a universal fix; it can duplicate data that should remain shared and add cost without clarifying ownership.</p>
+<p>Modules help organize related functions. Importing a module should not unexpectedly run the CLI or overwrite a file. The provided scripts use an explicit main entry point. Their import paths are fixed to the bundled learner or reference module; this is a convenience for the exercise, not a sandbox for arbitrary untrusted code.</p>
+<h3>Worked example</h3><p>original is a list containing {quantity:1}. alias refers to that same list. shallow = list(original) creates a different list, but shallow[0] and original[0] still refer to the same dictionary. Setting shallow[0][quantity] to 3 changes original too. A separate list made from new flat dictionaries keeps quantity=1 in this example. The aliasing demo reports all three relationships instead of claiming every copy is independent.</p>
+<pre><code>original = [{&quot;quantity&quot;: 1}]
+shallow = list(original)
+separate = [dict(row) for row in original]
+shallow[0][&quot;quantity&quot;] = 3
+# original[0][&quot;quantity&quot;] is now 3.
+# separate[0][&quot;quantity&quot;] is still 1.</code></pre>
+<p>These snippets illustrate the lesson. Complete runnable programs are in the projects and examples folders.</p><h3>Practice safely</h3><ol>
+<li>Predict python3 examples/aliasing_demo.py before running it.</li>
+<li>Explain which objects are shared and which are new.</li>
+<li>Keep project calculations free of printing and file access.</li>
+<li>Add or run an input-not-mutated test for your starter.</li>
+<li>Call your summary twice, then call it with empty input to check for leaked accumulators.</li>
+<li>Explain why the flat-row copy policy must be revisited if nested data is added.</li>
+</ol><h3>Three original checks</h3>
+<p><strong>Check 1: Why do project functions return data instead of only printing it?</strong></p><ol type="A">
+<li>Because printing never works</li>
+<li>To guarantee zero memory use</li>
+<li>So callers and tests can inspect and reuse the result</li>
+<li>To avoid defining an output contract</li>
+</ol><details><summary>Show answer and reasoning</summary><p>C. So callers and tests can inspect and reuse the result Returning separates calculation from presentation and makes composition easier.</p></details>
+<p><strong>Check 2: After shallow = list(original), are nested dictionaries necessarily independent?</strong></p><ol type="A">
+<li>Yes, every copy is deep</li>
+<li>Only their values are always encrypted</li>
+<li>Lists cannot contain dictionaries</li>
+<li>No, nested objects may still be shared</li>
+</ol><details><summary>Show answer and reasoning</summary><p>D. No, nested objects may still be shared A new outer list does not automatically duplicate its nested items.</p></details>
+<p><strong>Check 3: Which design best avoids one summary leaking into the next?</strong></p><ol type="A">
+<li>A fresh accumulator created for each call</li>
+<li>A shared mutable global accumulator</li>
+<li>An unexplained cache of old results</li>
+<li>Returning before every loop</li>
+</ol><details><summary>Show answer and reasoning</summary><p>A. A fresh accumulator created for each call Local per-call state keeps independent calculations separate under this project’s contract.</p></details>
+<h3>Evidence to keep</h3><ul>
+<li>Executed aliasing predictions and explanations.</li>
+<li>Input-mutation and repeated-call test results.</li>
+<li>A function diagram separating calculation from I/O.</li>
+</ul><h3>Limits</h3><p>These conventions support small pure programs; they do not eliminate all shared-state, concurrency or object-lifecycle problems.</p><h3>Official references</h3><ul>
+<li><a href="https://docs.python.org/3.12/tutorial/modules.html">https://docs.python.org/3.12/tutorial/modules.html</a></li>
+<li><a href="https://docs.python.org/3.12/library/copy.html">https://docs.python.org/3.12/library/copy.html</a></li>
+</ul><p class="top"><a href="#top">Back to contents</a></p></section>
+<section id="prog-collections-identity" aria-labelledby="prog-collections-identity-title"><h2 id="prog-collections-identity-title">Choose collections from identity and order</h2><p>Group legitimate repeated items while rejecting conflicting event identities.</p><h3>You will learn to</h3><ul>
+<li>Use lists, dictionaries and sets for distinct purposes.</li>
+<li>Distinguish repeated business lines from duplicate delivery.</li>
+<li>Make output ordering and tie breaking explicit.</li>
+</ul><h3>Learn</h3>
+<p>A list preserves a sequence of items. A dictionary maps a key to a value. A set records unique membership. Choose from the operation you need, not from which syntax looks shortest. The quote needs to preserve line count while grouping by stock identifier; the event summary needs to identify repeated delivery of the same event.</p>
+<p>Repeated keys do not always mean duplicate data. Two FILTER lines can represent legitimate separate quantities, even at different prices in this project. Group them by adding quantity and line subtotal. Replacing one row with the last row would lose work. The output deliberately avoids inventing a single unit price for a group that may contain several prices.</p>
+<p>Event identity has a different contract. An identical repeated event_id is one logical event delivered twice, so it should not inflate event metrics. The same ID with different normalized content is a conflict and causes rejection. Never apply one generic “remove duplicates” rule to every dataset without understanding what its keys mean.</p>
+<p>Dictionaries make identity lookup direct and clear for these bounded inputs. This can avoid repeatedly scanning the already-seen list, although exact runtime depends on implementation and workload. The project has at most 200 event rows; clarity and correctness matter more than claiming a large performance improvement from a tiny fixture.</p>
+<p>Deterministic output makes tests and diffs easier to interpret. Quote groups are sorted by SKU. Event groups are sorted by label using Python’s ordinary string ordering, not locale-specific human collation. Slowest events are sorted by descending duration, with event_id ascending as an explicit tie-breaker. Do not leave a tie to accidental input order.</p>
+<p>Keep validation and aggregation connected. Before inserting an event into the ID map, validate its shape and values. A conflicting duplicate must not silently overwrite an earlier event. Both projects return newly constructed summaries and leave input lists and rows unchanged, so callers can compare before and after safely.</p>
+<h3>Worked example</h3><p>The quote has FILTER twice: 2×1250 plus 1×1000 gives quantity 3 and subtotal 3500, not the last row’s 1000. The event fixture has five delivered rows but four distinct IDs. EVT-001 is repeated identically and counted once. EVT-001 and EVT-004 both take 100 ms, so EVT-001 precedes EVT-004 when the slowest list reaches that tie. A changed duration under EVT-001 is rejected as a conflict.</p>
+<pre><code>seen = {}
+for event in validated_events:
+    event_id = event[&quot;event_id&quot;]
+    if event_id in seen and seen[event_id] != event:
+        raise ValueError(&quot;conflicting duplicate event_id&quot;)
+    seen[event_id] = dict(event)
+# Identical repeated IDs remain one logical event.</code></pre>
+<p>These snippets illustrate the lesson. Complete runnable programs are in the projects and examples folders.</p><h3>Practice safely</h3><ol>
+<li>Explain why quote SKU repetition and event-ID repetition follow different rules.</li>
+<li>Implement quote grouping without dropping repeated lines.</li>
+<li>Implement event deduplication with explicit conflict rejection.</li>
+<li>Predict all group and slowest-event orders before running the reference.</li>
+<li>Run reversed-input tests and verify the summary remains equal.</li>
+<li>State why these bounded tests are not a production performance benchmark.</li>
+</ol><h3>Three original checks</h3>
+<p><strong>Check 1: Two FILTER quote lines have different unit prices. What does this contract require?</strong></p><ol type="A">
+<li>Keep only the last line</li>
+<li>Add their quantities and line subtotals without inventing one price</li>
+<li>Reject all repetition</li>
+<li>Count the group as one unit</li>
+</ol><details><summary>Show answer and reasoning</summary><p>B. Add their quantities and line subtotals without inventing one price Repeated quote lines are legitimate input under this contract; the group reports totals.</p></details>
+<p><strong>Check 2: The same event ID arrives with a different duration. What should happen?</strong></p><ol type="A">
+<li>Silently overwrite the old event</li>
+<li>Count it as an identical duplicate</li>
+<li>Reject the conflicting identity</li>
+<li>Delete every event</li>
+</ol><details><summary>Show answer and reasoning</summary><p>C. Reject the conflicting identity Conflicting content under one logical identity must not disappear silently.</p></details>
+<p><strong>Check 3: Why specify an event-ID tie-breaker for equal durations?</strong></p><ol type="A">
+<li>To prove the service is fast</li>
+<li>To hide failed events</li>
+<li>To change duration units</li>
+<li>To make output deterministic independent of input order</li>
+</ol><details><summary>Show answer and reasoning</summary><p>D. To make output deterministic independent of input order Explicit tie rules make repeated results and tests stable.</p></details>
+<h3>Evidence to keep</h3><ul>
+<li>Correct grouped quote totals and deduplicated event counts.</li>
+<li>A rejected conflict case.</li>
+<li>Order-invariance and tie-breaking tests.</li>
+</ul><h3>Limits</h3><p>The grouping and deduplication contracts are local teaching choices, not universal business rules or distributed exactly-once guarantees.</p><h3>Official references</h3><ul>
+<li><a href="https://docs.python.org/3.12/tutorial/datastructures.html">https://docs.python.org/3.12/tutorial/datastructures.html</a></li>
+<li><a href="https://docs.python.org/3.12/library/unittest.html">https://docs.python.org/3.12/library/unittest.html</a></li>
+</ul><p class="top"><a href="#top">Back to contents</a></p></section>
+<section id="prog-validation-errors" aria-labelledby="prog-validation-errors-title"><h2 id="prog-validation-errors-title">Reject bad input without hiding the reason</h2><p>Separate syntax, schema and meaning, then make failure behavior testable.</p><h3>You will learn to</h3><ul>
+<li>Distinguish parsing from domain validation.</li>
+<li>Reject ambiguous keys, malformed numbers and unsupported data.</li>
+<li>Handle expected input errors without swallowing programming defects.</li>
+</ul><h3>Learn</h3>
+<p>Parsing answers whether text follows a representation’s grammar. Validation asks whether the resulting values meet your program’s contract. Valid JSON can still contain the wrong root type, a negative quantity or an unknown field. CSV can have correct quoting but an invalid status. Keep these questions separate so an error points to the right layer.</p>
+<p>Be explicit about acceptance rather than guessing what a user meant. Quote rows require exactly three keys; event rows require four. The JSON parser rejects duplicate keys, because silently taking one value can hide contradictory input. Both parsers have byte and row limits appropriate to these small exercises. These bounds are teaching controls, not a complete hostile-input defense.</p>
+<p>CSV cells start as text. The event duration column accepts ASCII digit text in a bounded length, then converts it to an integer and checks the numeric range. It does not accept a sign, decimal point, spaces or a look-alike Unicode digit. These strict rules are stated in the project contract; other products may intentionally choose different input conventions.</p>
+<p>Choose meaningful failure behavior. The quote rejects the entire invalid input rather than returning a partial subtotal that looks complete. The event summary rejects a conflicting ID rather than silently discarding one version. Error messages help locate the issue, but callers should not depend on every word of a message unless that wording is part of the public contract.</p>
+<p>Use exception handling at a boundary where you can respond appropriately. The CLI reports expected validation failures and exits nonzero. It does not catch every exception and print a success-shaped empty report. During development, a traceback for an unexpected bug is useful evidence. Hiding it behind a generic “all fine” response makes debugging harder.</p>
+<p>Do not evaluate data as program code. JSON and CSV parsing do not require eval, shell commands or importing a filename supplied by the data. The supplied runner chooses between fixed local starter/reference modules and fixed synthetic fixtures. Running your edited Python still uses your normal permissions; only run code you wrote or trust, because the exercise runner is not a security sandbox.</p>
+<h3>Worked example</h3><p>The quote parser rejects an item that contains quantity twice, even if both values are integers. The event parser accepts a quoted label containing a comma because CSV quoting defines one field, but rejects duration=&quot;1.5&quot; because this contract requires integer milliseconds. If row 3 is invalid, returning totals for rows 1 and 2 without an error would misrepresent the requested report. Tests therefore expect ValueError for the whole input.</p>
+<pre><code>if type(quantity) is not int or not 1 &lt;= quantity &lt;= 1000:
+    raise ValueError(&quot;quantity must be an integer from 1 to 1000&quot;)
+# Parse first, then validate the domain.
+# Do not replace invalid quantities with zero.</code></pre>
+<p>These snippets illustrate the lesson. Complete runnable programs are in the projects and examples folders.</p><h3>Practice safely</h3><ol>
+<li>List syntax, schema and meaning errors for each project.</li>
+<li>Implement expected ValueError paths without returning partial success.</li>
+<li>Run duplicate-key, wrong-root, invalid-status and conflicting-ID tests.</li>
+<li>Explain why broad except-and-ignore would conceal useful evidence.</li>
+<li>Keep all fixture data synthetic and never insert commands into input files.</li>
+<li>Record one validation rule that is specific to this project rather than a universal rule.</li>
+</ol><h3>Three original checks</h3>
+<p><strong>Check 1: A JSON document parses but contains quantity=-1. Which layer rejects it?</strong></p><ol type="A">
+<li>Domain/schema validation</li>
+<li>DNS</li>
+<li>Only text encoding</li>
+<li>No layer can reject parsed JSON</li>
+</ol><details><summary>Show answer and reasoning</summary><p>A. Domain/schema validation Representation syntax and allowed business values are separate checks.</p></details>
+<p><strong>Check 2: An invalid late row is encountered. What does the quote contract require?</strong></p><ol type="A">
+<li>Return a partial subtotal as if complete</li>
+<li>Reject the input with a defined error</li>
+<li>Ignore the row silently</li>
+<li>Change the quantity to zero</li>
+</ol><details><summary>Show answer and reasoning</summary><p>B. Reject the input with a defined error A partial success-shaped answer would hide missing work.</p></details>
+<p><strong>Check 3: Why avoid catching every exception and returning an empty report?</strong></p><ol type="A">
+<li>Because empty reports are always illegal</li>
+<li>Because Python cannot catch errors</li>
+<li>Because it can hide programming defects and misstate failure as success</li>
+<li>Because errors should be sent to strangers</li>
+</ol><details><summary>Show answer and reasoning</summary><p>C. Because it can hide programming defects and misstate failure as success Expected input errors can be handled clearly while unexpected defects remain visible during development.</p></details>
+<h3>Evidence to keep</h3><ul>
+<li>A categorized invalid-input checklist.</li>
+<li>Actual negative-case test results.</li>
+<li>A boundary error policy without partial-success ambiguity.</li>
+</ul><h3>Limits</h3><p>These bounded parsers are not a security audit, arbitrary-file ingestion service or guarantee against every malicious input.</p><h3>Official references</h3><ul>
+<li><a href="https://docs.python.org/3.12/tutorial/errors.html">https://docs.python.org/3.12/tutorial/errors.html</a></li>
+<li><a href="https://docs.python.org/3.12/library/json.html">https://docs.python.org/3.12/library/json.html</a></li>
+<li><a href="https://docs.python.org/3.12/library/csv.html">https://docs.python.org/3.12/library/csv.html</a></li>
+</ul><p class="top"><a href="#top">Back to contents</a></p></section>
+<section id="prog-files-cli" aria-labelledby="prog-files-cli-title"><h2 id="prog-files-cli-title">Move structured data through a small command-line program</h2><p>Use standard parsers, explicit encoding and a predictable output contract.</p><h3>You will learn to</h3><ul>
+<li>Read CSV quoting correctly and distinguish strings from parsed values.</li>
+<li>Separate modules, the CLI wrapper and file I/O.</li>
+<li>Verify a local JSON round-trip without overwriting user files.</li>
+</ul><h3>Learn</h3>
+<p>Files carry bytes; a text encoding turns those bytes into characters. This workshop uses UTF-8 explicitly. Structured formats add another layer: CSV describes rows and quoting, while JSON describes values and containers. Neither format should be interpreted by ad hoc string operations when a supported parser can express the rules.</p>
+<p>Splitting a CSV line on every comma is not a CSV parser. A quoted label such as &quot;repair, detail&quot; is one field. The event project uses the standard CSV reader and requires an exact header and column count. It then converts only the duration field under its explicit lexical rules. Header-only input is a valid empty dataset here; a blank data row is not.</p>
+<p>Keep the command-line wrapper small. It chooses a fixed project and implementation, reads one bounded bundled fixture, calls pure functions and writes one JSON result to standard output. Expected input problems go to standard error with a nonzero exit status. This makes the result easier for a person or another program to distinguish from an error.</p>
+<p>The wrapper defaults to your starter, so an unfinished implementation reports that it is unfinished. Selecting reference is an explicit way to see the supplied solution’s behavior, not a claim that your starter passed. Importing a reference module does not run the CLI or create a file because execution is guarded by its entry point.</p>
+<p>The JSON round-trip example writes one invented report to a new temporary directory, reads it back and compares the logical result. It exercises actual local I/O while protecting existing files. It removes only that created directory on normal completion. This does not test atomic replacement, power-loss durability, permissions or an independent backup.</p>
+<p>A report should state units and scope. The event mean is a floating-point millisecond value for the supplied distinct events, not an SLO or production latency guarantee. An empty dataset has mean=None because no observations exist. Serializing that value to JSON gives null. Zero milliseconds would falsely suggest an observed average of zero.</p>
+<h3>Worked example</h3><p>The fixture’s quoted repair, detail label remains one field, so the parser produces five rows. After identity deduplication there are four events, total duration 800 ms and mean 200.0 ms. The quote CLI prints subtotal_cents=4997 and display_subtotal=&quot;49.97&quot;. The JSON example separately verifies a temporary file round-trip. None of these commands reads a personal file or contacts a service.</p>
+<pre><code>import csv
+import io
+rows = list(csv.reader(io.StringIO(&#x27;label,duration_ms\n&quot;repair, detail&quot;,200\n&#x27;), strict=True))
+# rows[1] is [&quot;repair, detail&quot;, &quot;200&quot;].
+# The duration is still text until deliberately converted.</code></pre>
+<p>These snippets illustrate the lesson. Complete runnable programs are in the projects and examples folders.</p><h3>Practice safely</h3><ol>
+<li>Run each project CLI with --implementation reference and inspect its JSON.</li>
+<li>Run the default starter CLI and distinguish an unfinished result from a reference pass.</li>
+<li>Implement CSV parsing with the standard library, not split(&quot;,&quot;).</li>
+<li>Run python3 examples/json_roundtrip.py and record its narrow real-I/O result.</li>
+<li>Explain stdout, stderr and exit status for the provided wrapper.</li>
+<li>Check that an empty event summary uses null/None for the absent mean.</li>
+</ol><h3>Three original checks</h3>
+<p><strong>Check 1: How many fields are in the CSV row &quot;repair, detail&quot;,200?</strong></p><ol type="A">
+<li>Three because there are two commas</li>
+<li>One because all text is quoted</li>
+<li>It must be executed to know</li>
+<li>Two under the quoted CSV grammar</li>
+</ol><details><summary>Show answer and reasoning</summary><p>D. Two under the quoted CSV grammar The comma inside the quoted label belongs to that field.</p></details>
+<p><strong>Check 2: What does selecting --implementation reference prove?</strong></p><ol type="A">
+<li>The supplied reference’s behavior on that fixture</li>
+<li>Your starter is complete</li>
+<li>Every future input is valid</li>
+<li>The project was published</li>
+</ol><details><summary>Show answer and reasoning</summary><p>A. The supplied reference’s behavior on that fixture Reference execution and learner implementation are different evidence.</p></details>
+<p><strong>Check 3: Why is the empty event mean None/null instead of zero?</strong></p><ol type="A">
+<li>JSON cannot represent zero</li>
+<li>There are no observations from which to compute a mean</li>
+<li>All missing data should be a string</li>
+<li>It means the program crashed</li>
+</ol><details><summary>Show answer and reasoning</summary><p>B. There are no observations from which to compute a mean Absence of a measurement differs from a measured value of zero.</p></details>
+<h3>Evidence to keep</h3><ul>
+<li>Actual JSON outputs from both reference CLIs.</li>
+<li>Correct quoted-field handling and empty-data behavior.</li>
+<li>A temporary JSON write/read result with scope stated.</li>
+</ul><h3>Limits</h3><p>The CLI reads only fixed fixtures. No arbitrary files, network service, spreadsheet formula execution, production monitoring or deployment is involved.</p><h3>Official references</h3><ul>
+<li><a href="https://docs.python.org/3.12/library/csv.html">https://docs.python.org/3.12/library/csv.html</a></li>
+<li><a href="https://docs.python.org/3.12/tutorial/inputoutput.html">https://docs.python.org/3.12/tutorial/inputoutput.html</a></li>
+<li><a href="https://docs.python.org/3.12/library/argparse.html">https://docs.python.org/3.12/library/argparse.html</a></li>
+</ul><p class="top"><a href="#top">Back to contents</a></p></section>
+<section id="prog-tests-debug" aria-labelledby="prog-tests-debug-title"><h2 id="prog-tests-debug-title">Make a test distinguish a real mistake</h2><p>Use boundaries, regressions and invariants instead of collecting green badges.</p><h3>You will learn to</h3><ul>
+<li>Read a failing assertion and form a small debugging hypothesis.</li>
+<li>Write a regression that fails on a known defect.</li>
+<li>Use deterministic property checks without claiming exhaustive proof.</li>
+</ul><h3>Learn</h3>
+<p>A test compares observed behavior with an expectation. A passing test is useful only if the expectation matches the intended contract and the test actually reaches the relevant behavior. “The program ran” is weaker than checking the exact subtotal, output shape, duplicate policy and input preservation.</p>
+<p>Start with one small failing case. Read the assertion, input and traceback; reproduce it; state a hypothesis; change one relevant cause; then rerun the focused test and the full project suite. Do not rewrite the expected value merely because the implementation produced something different. If the contract is wrong, revise it deliberately and explain the consequences.</p>
+<p>The bug-hunt example uses floor division for a mean. For durations 1 and 2, that returns 1 instead of the required 1.5. A fixture whose mean is already an integer would miss the defect. The supplied regression explicitly distinguishes the buggy and corrected functions. This is a concrete reason to choose cases that exercise a difference.</p>
+<p>Boundary tests explore the edges of allowed input: zero-price, minimum/maximum quantity, just-outside bounds, empty data, duplicate IDs, malformed CSV and a conflicting late row. A negative test should verify the intended failure, not accept any unrelated crash as success. Here public validation failures are ValueError; unfinished starters raise NotImplementedError and therefore do not accidentally satisfy those tests.</p>
+<p>Useful properties complement exact examples. Reversing valid quote rows should preserve the summary. Adding an identical event delivery should increase duplicate_rows without changing unique metrics. A bounded grid of quantities and prices checks the multiplication rule across more than one example. Such loops cover the chosen finite cases, not all inputs or all future changes.</p>
+<p>Keep test state isolated. Each test gets fresh data where mutation matters, and reference functions do not retain mutable accumulators. The project acceptance suites are visible and can run against either implementation. The pack’s overall checks validate the supplied references and that the starters remain intentionally unfinished; they are not a score of your personal coding skill.</p>
+<h3>Worked example</h3><p>buggy_mean([1,2]) returns 1; corrected_mean([1,2]) returns 1.5. The regression expects 1.5 and must fail on the former. Event Summary’s fractional-mean test preserves this distinction. A different test verifies input order independence, and another verifies that a duplicate event with changed duration raises ValueError. These checks target different contracts; none should be replaced by “result is truthy.”</p>
+<pre><code>expected = 1.5
+buggy = sum([1, 2]) // len([1, 2])
+corrected = sum([1, 2]) / len([1, 2])
+assert buggy != expected  # The chosen case exposes the known defect.
+assert corrected == expected</code></pre>
+<p>These snippets illustrate the lesson. Complete runnable programs are in the projects and examples folders.</p><h3>Practice safely</h3><ol>
+<li>Run python3 examples/bug_hunt.py and explain the distinguishing fixture.</li>
+<li>Implement one starter function, then run its focused and full acceptance cases.</li>
+<li>Record the first failure, your hypothesis, the change and the result.</li>
+<li>Add one new meaningful test without weakening the existing tests.</li>
+<li>Explain the difference between an exact example and an order-invariance property.</li>
+<li>Keep starter failures separate from reference verification in your evidence journal.</li>
+</ol><h3>Three original checks</h3>
+<p><strong>Check 1: Which input exposes truncation in a mean calculated with //?</strong></p><ol type="A">
+<li>[2, 2]</li>
+<li>[] alone</li>
+<li>[1, 2]</li>
+<li>Any filename</li>
+</ol><details><summary>Show answer and reasoning</summary><p>C. [1, 2] Its correct mean is fractional, so floor division produces a distinguishable wrong result.</p></details>
+<p><strong>Check 2: A test fails because the implementation disagrees with the contract. What is the best first response?</strong></p><ol type="A">
+<li>Change the expected value immediately</li>
+<li>Delete the test</li>
+<li>Hide the exception</li>
+<li>Reproduce the small case and examine the contract and implementation</li>
+</ol><details><summary>Show answer and reasoning</summary><p>D. Reproduce the small case and examine the contract and implementation Debugging starts by understanding the discrepancy, not removing the evidence.</p></details>
+<p><strong>Check 3: A bounded property test passes on 25 cases. What does it establish?</strong></p><ol type="A">
+<li>Evidence for those cases and the tested property</li>
+<li>A proof over every possible input</li>
+<li>Guaranteed production safety</li>
+<li>That no more tests are useful</li>
+</ol><details><summary>Show answer and reasoning</summary><p>A. Evidence for those cases and the tested property Finite checks are valuable evidence with a defined scope, not universal proof.</p></details>
+<h3>Evidence to keep</h3><ul>
+<li>A regression that distinguishes the known buggy mean.</li>
+<li>Your own failure/hypothesis/change/retest record.</li>
+<li>An additional boundary or property test with a reason.</li>
+</ul><h3>Limits</h3><p>Visible tests are not exhaustive, independently assessed or a security certification. Passing the supplied solution does not grade the learner’s implementation.</p><h3>Official references</h3><ul>
+<li><a href="https://docs.python.org/3.12/library/unittest.html">https://docs.python.org/3.12/library/unittest.html</a></li>
+<li><a href="https://docs.python.org/3.12/tutorial/errors.html">https://docs.python.org/3.12/tutorial/errors.html</a></li>
+<li><a href="https://docs.python.org/3.12/tutorial/floatingpoint.html">https://docs.python.org/3.12/tutorial/floatingpoint.html</a></li>
+</ul><p class="top"><a href="#top">Back to contents</a></p></section>
+<section id="prog-project-delivery" aria-labelledby="prog-project-delivery-title"><h2 id="prog-project-delivery-title">Finish a small program someone else can verify</h2><p>Turn two editable projects into a precise, honest portfolio handoff.</p><h3>You will learn to</h3><ul>
+<li>Complete both starter contracts without relying on hidden behavior.</li>
+<li>Package commands, assumptions and evidence for another reader.</li>
+<li>Separate a tested local project from production readiness.</li>
+</ul><h3>Learn</h3>
+<p>Finishing a small program means more than making the happy path work once. Another person should be able to understand its purpose, allowed inputs, failure behavior, execution command, test command and limits. A compact README and a few meaningful examples often demonstrate more practical ability than a long list of technologies.</p>
+<p>Complete Repair Quotes first: validation, exact cents arithmetic, grouping, formatting and bounded JSON. Then complete Event Summary: CSV parsing, normalization, identity conflicts, aggregation and deterministic ordering. The later project reuses principles while changing the data model. Explain why repeated SKUs and repeated event IDs intentionally behave differently.</p>
+<p>Use the reference solution as a study resource, not a substitute for explanation. If you consult it, note which part clarified your thinking, close it and reproduce the idea in your own implementation. Being able to predict a new case and explain a failure is stronger evidence than copying code until all tests turn green.</p>
+<p>Before delivery, run the starter acceptance suites against your completed files, run both CLI fixtures through the starter and preserve exact commands and results. Do not relabel reference output as starter output. The supplied placeholders are intentionally unfinished in the distributed pack, so initial red tests are expected. Your evidence begins when your own code changes.</p>
+<p>Keep the scope modest and truthful. These programs calculate fictional subtotals and summarize bounded synthetic events. They have no account system, payment flow, database service, network endpoint, packaging installer or cloud deployment. A command-line project can be complete within that scope without being enterprise-ready or a full programming education.</p>
+<p>Choose one next extension only after the baseline passes. Examples are a new deterministic report field or a clearly specified filter. Write acceptance criteria first, identify existing behavior that must remain, add tests and implement the change. Real financial rules, untrusted uploads, arbitrary paths or external services require new requirements and safety work rather than a casual switch in this exercise.</p>
+<h3>Worked example</h3><p>A trustworthy handoff says: “My starter implementations pass the 21 quote and 23 event acceptance tests on my recorded Python version. The quote fixture totals 4997 cents; the event fixture has four unique events, one duplicate delivery and an 800 ms total. I added a test for my chosen boundary. The tools use fixed synthetic input, are not payment or monitoring systems, and have not been deployed.” Change that statement if any part was not actually run or if you used only the reference.</p>
+<pre><code># After implementing the starter functions:
+# python3 projects/repair_quotes/check.py
+# python3 projects/event_summary/check.py
+# python3 scripts/run_project.py repair_quotes
+# python3 scripts/run_project.py event_summary
+# Preserve your actual outputs and explain their limits.</code></pre>
+<p>These snippets illustrate the lesson. Complete runnable programs are in the projects and examples folders.</p><h3>Practice safely</h3><ol>
+<li>Complete both starter files in a private study copy of the pack.</li>
+<li>Run all 44 visible acceptance tests against your implementations, not only reference.</li>
+<li>Run both default CLI commands and compare to the documented fixture results.</li>
+<li>Add one original regression or property test and explain its purpose.</li>
+<li>Write a short README/handoff with versions, commands, results and limitations.</li>
+<li>Choose one small extension and specify it before changing code.</li>
+</ol><h3>Three original checks</h3>
+<p><strong>Check 1: Which portfolio claim is most trustworthy?</strong></p><ol type="A">
+<li>Production-ready because the reference passed</li>
+<li>Exact tested behavior, commands and known limits for your own implementation</li>
+<li>A list of frameworks not used</li>
+<li>A guarantee that all inputs are safe</li>
+</ol><details><summary>Show answer and reasoning</summary><p>B. Exact tested behavior, commands and known limits for your own implementation Precise evidence lets another person evaluate the work without inflated claims.</p></details>
+<p><strong>Check 2: When should a new extension’s acceptance criteria be written?</strong></p><ol type="A">
+<li>Only after it breaks existing behavior</li>
+<li>Never for small programs</li>
+<li>Before implementation, alongside the existing invariants to preserve</li>
+<li>Only if a cloud service is used</li>
+</ol><details><summary>Show answer and reasoning</summary><p>C. Before implementation, alongside the existing invariants to preserve Explicit criteria make the change reviewable and testable.</p></details>
+<p><strong>Check 3: The distributed starter tests fail with NotImplementedError. What does that mean?</strong></p><ol type="A">
+<li>The reference tests necessarily failed</li>
+<li>The operating system must be reinstalled</li>
+<li>The tests should be deleted</li>
+<li>The learning placeholders still need implementation</li>
+</ol><details><summary>Show answer and reasoning</summary><p>D. The learning placeholders still need implementation The starter is deliberately unfinished so the learner has real work to implement.</p></details>
+<h3>Evidence to keep</h3><ul>
+<li>Both learner acceptance suites and fixture outputs, or an honest unrun label.</li>
+<li>One new test with reasoning.</li>
+<li>A reproducible scoped project handoff.</li>
+</ul><h3>Limits</h3><p>This module is a Python programming foundation, not a full computer-science curriculum, language certification, web-service deployment or job-readiness assessment.</p><h3>Official references</h3><ul>
+<li><a href="https://docs.python.org/3.12/tutorial/modules.html">https://docs.python.org/3.12/tutorial/modules.html</a></li>
+<li><a href="https://docs.python.org/3.12/library/unittest.html">https://docs.python.org/3.12/library/unittest.html</a></li>
+<li><a href="https://docs.python.org/3.12/library/argparse.html">https://docs.python.org/3.12/library/argparse.html</a></li>
+</ul><p class="top"><a href="#top">Back to contents</a></p></section>
+<section id="project-guide" aria-labelledby="project-guide-title"><h2 id="project-guide-title">Project guide</h2>
+<p>These projects teach programming by making you implement functions, not only run a demonstration. Both use synthetic data bundled with the pack. They require Python 3.10 or later and no packages beyond its standard library. Commands below start in the extracted pack directory.</p>
+<h3>Safe working boundary</h3>
+<p>Make a study copy of the pack and edit only your own starter and optional new test files. Do not supply personal files, credentials or real financial data. The supplied wrapper reads only the two fixed fixture names and prints JSON; it has no arbitrary path or network option. The JSON round-trip example creates a private temporary directory and cleans up only its own file. No command changes OS settings, installs anything, scans targets or touches production services.</p>
+<p>Python runs with your normal account permissions. Importing the editable starter executes Python code; the runner is <strong>not a sandbox</strong>. Review your edits and never paste untrusted code into the starter or tests. No administrator command is needed. The supplied functions perform pure transformations; the runner owns the small amount of file I/O.</p>
+<p>If Python is unavailable, trace the fixtures on paper using the worksheet and answer key. Clearly label those results as predictions rather than execution. Stop when an error is unclear; do not bypass OS protections to make an exercise run.</p>
+<h3>Project 1: Repair Quotes</h3>
+<ol>
+<li>Read the contract. Predict the three line subtotals and group totals before running anything.</li>
+<li>Open <code>projects/repair_quotes/starter.py</code>. Implement <code>format_cents</code>, then <code>validate_item</code>. Keep return values separate from printing.</li>
+<li>Run <code>python3 projects/repair_quotes/check.py</code>. Initially some or all tests will error. Read the named assertion and traceback; focus on the functions you have implemented.</li>
+<li>Implement <code>quote_total</code>, including empty input, grouping, ordering and no mutation.</li>
+<li>Implement <code>parse_quote_json</code>, including the duplicate-key and nonstandard-number hooks. Use the official JSON reference linked in the lesson.</li>
+<li>Run all 21 visible acceptance tests, then the fixture command:</li>
+</ol>
+<pre><code>python3 projects/repair_quotes/check.py
+python3 scripts/run_project.py repair_quotes</code></pre>
+<p>The fixture output must include <code>subtotal_cents: 4997</code>, <code>unit_count: 6</code>, <code>line_count: 3</code>, and <code>display_subtotal: &quot;49.97&quot;</code>. The BRUSH group has 3 units/1497 cents; FILTER has 3 units/3500 cents. The JSON key order is not semantically important, but the group-list order is specified.</p>
+<p><strong>Hints, not the solution:</strong> start with exact keys and types; compute each line once; initialize accumulators outside the loop; sort only when constructing output; reject invalid input rather than inventing a default value. Use <code>object_pairs_hook</code> when decoding JSON to detect duplicate member names before a dictionary loses that information.</p>
+<h3>Project 2: Event Summary</h3>
+<ol>
+<li>Read the contract. Count delivered rows separately from unique IDs.</li>
+<li>Implement <code>validate_event</code>, then <code>parse_events_csv</code>. Use the CSV library rather than splitting on commas; one label contains a quoted comma.</li>
+<li>Implement <code>summarize_events</code>: build a dictionary keyed by event ID, reject conflicting content and calculate aggregates from unique events.</li>
+<li>Make output order explicit. The tie-breaker for equal duration is ascending event ID.</li>
+<li>Run all 23 visible acceptance tests, then the fixture command:</li>
+</ol>
+<pre><code>python3 projects/event_summary/check.py
+python3 scripts/run_project.py event_summary</code></pre>
+<p>Expect 5 input rows, 4 unique events, 1 duplicate row, 3 successes, 1 failure, total duration 800 ms and mean 200.0 ms. The slowest IDs are EVT-002, EVT-003, EVT-001. Empty input has mean <code>null</code> in JSON (<code>None</code> in Python), not zero.</p>
+<p><strong>Hints:</strong> define identity before deduplication; equality of normalized full event dictionaries distinguishes a repeated delivery from a conflict; group only the distinct events; a sort key can express descending duration and ascending ID; use <code>/</code> rather than <code>//</code> for the mean.</p>
+<h3>Reference solutions and four demonstrations</h3>
+<p>Try first, then consult only the reference function you need. Record which parts you consulted. Compare behavior and explain it rather than copying blindly.</p>
+<pre><code>python3 projects/repair_quotes/check.py --target reference
+python3 projects/event_summary/check.py --target reference
+python3 scripts/run_project.py repair_quotes --implementation reference
+python3 scripts/run_project.py event_summary --implementation reference
+python3 examples/trace_total.py
+python3 examples/aliasing_demo.py
+python3 examples/bug_hunt.py
+python3 examples/json_roundtrip.py</code></pre>
+<p>The check commands return exit code 0 when all tests pass and 1 when any fail. The fixed project wrapper returns 2 for an unfinished starter or rejected fixture input. Unexpected programming exceptions are not silently treated as valid data. The bug demonstration prints evidence of a known faulty mean and its correction; it does not make the entire pack&#x27;s test suite intentionally fail.</p>
+<h3>How to debug without weakening the contract</h3>
+<p>Preserve the failing input. Say what you expected and why, what happened, and your smallest explanation. Change one cause and rerun the focused case plus the full suite. Do not change an expected result only to match your implementation. If the specification itself appears wrong, write down the conflict before changing both.</p>
+<p>Add a new test in your own file. The <code>specs.py</code> modules expose <code>make_suite(candidate)</code> so their same contract can test either implementation. For a portfolio extension, keep the original tests unchanged and add a clearly named new test for the new requirement.</p>
+<p>Use the worksheet to record actual commands and outputs. The answer key explains core predictions without replacing the implementation exercise.</p>
+</section>
+<section id="quotes-contract" aria-labelledby="quotes-contract-title"><h2 id="quotes-contract-title">Repair Quotes contract</h2>
+<p>This is a fictional subtotal calculator. There is no seller, charge, tax, discount, currency conversion or payment integration. Names and prices are synthetic. All four functions return data, do not print, do not read files and do not mutate their inputs. Invalid input raises <code>ValueError</code> (including its subclasses); exact error wording is not part of the contract.</p>
+<h3>validate_item(item)</h3>
+<p>Input is a dictionary with exactly <code>sku</code>, <code>quantity</code>, <code>unit_cents</code>. No extra or missing keys are accepted.</p>
+<ul>
+<li><code>sku</code>: string of 1–20 ASCII uppercase letters A–Z, digits 0–9 or hyphens. No trimming or case conversion is performed.</li>
+<li><code>quantity</code>: exact Python <code>int</code>, from 1 through 1000 inclusive. Booleans, floats and numeric strings are rejected.</li>
+<li><code>unit_cents</code>: exact <code>int</code>, from 0 through 1,000,000 inclusive. Zero is allowed. Booleans are rejected.</li>
+</ul>
+<p>Return a new flat dictionary with those three validated values. It must compare equal to valid input but must not be the same dictionary object.</p>
+<h3>quote_total(items)</h3>
+<p>Input is a list of at most 100 validated-or-unvalidated item dictionaries; validate every row. Empty input is valid. Return a new dictionary with exactly these fields:</p>
+<ul>
+<li><code>line_count</code>: number of input rows, integer.</li>
+<li><code>unit_count</code>: sum of quantities, integer.</li>
+<li><code>subtotal_cents</code>: sum of quantity × unit_cents across all rows, integer.</li>
+<li><code>by_sku</code>: list sorted by SKU in ordinary Python string order. Each member has <code>sku</code>, aggregate <code>quantity</code> and aggregate <code>subtotal_cents</code>.</li>
+</ul>
+<p>Repeated SKUs are legitimate lines, including lines with different unit prices. Add their quantities and individual line subtotals. Do not deduplicate them or invent a single group price. An empty list produces 0, 0, 0 and <code>[]</code>. The maximum allowed subtotal is 100,000,000,000 cents. Reversing input order preserves the full summary. No partly computed answer is returned if a late row is invalid.</p>
+<h3>format_cents(cents)</h3>
+<p>Input is an exact <code>int</code> from 0 through 100,000,000,000 inclusive. Return a decimal display string with exactly two fractional digits and no currency symbol or grouping commas. Examples: 0 → <code>&quot;0.00&quot;</code>; 5 → <code>&quot;0.05&quot;</code>; 4997 → <code>&quot;49.97&quot;</code>. Keep integer arithmetic; avoid converting through a binary float.</p>
+<h3>parse_quote_json(text)</h3>
+<p>Input is a Python string whose UTF-8 encoding is at most 8192 bytes, inclusive. Decode JSON, require a list of at most 100 rows and validate every item using the contract above. Return a new list of fresh validated dictionaries.</p>
+<p>Reject duplicate JSON object member names at any level, even if values match. Reject the nonstandard <code>NaN</code>, <code>Infinity</code> and <code>-Infinity</code> forms accepted by some decoder defaults. Reject malformed JSON, invalid row shape/types/bounds and a non-list root. JSON numbers such as <code>1.0</code> do not become integer quantities merely because their value is whole. Empty JSON list <code>[]</code> is valid. Byte length, not character count, is the limit.</p>
+<p>A bounded parser is not a universal hostile-input defense. This teaching program only consumes the bundled synthetic fixture through its wrapper. It is not an upload endpoint or a financial system.</p>
+<h3>Fixture and checkpoints</h3>
+<p><code>fixtures/quote.json</code> contains FILTER 2 × 1250, BRUSH 3 × 499, FILTER 1 × 1000. Line amounts are 2500, 1497 and 1000; total is 4997 cents. FILTER aggregates to quantity 3/subtotal 3500; BRUSH to quantity 3/subtotal 1497. Group order is BRUSH, FILTER.</p>
+<p>Milestones: (1) validate and format, (2) trace and total, (3) group, (4) parse bounded structured input, (5) run all acceptance tests and explain one new boundary case. Read the visible <code>specs.py</code>; 21 tests include multiple subcases, not merely 21 input values.</p>
+</section>
+<section id="events-contract" aria-labelledby="events-contract-title"><h2 id="events-contract-title">Event Summary contract</h2>
+<p>Summarize a bounded synthetic event dataset. This is not telemetry collection, production monitoring, a log-upload service or a distributed delivery guarantee. All three functions return data, do not print or read files and leave caller-owned inputs unchanged. Invalid input raises <code>ValueError</code> (including subclasses); exact wording is not required.</p>
+<h3>validate_event(event)</h3>
+<p>Input is a dictionary with exactly <code>event_id</code>, <code>label</code>, <code>duration_ms</code>, <code>status</code>.</p>
+<ul>
+<li><code>event_id</code>: string matching <code>EVT-</code> followed by 3–6 ASCII digits. No case conversion or trimming.</li>
+<li><code>label</code>: Python string with 1–40 characters, no leading/trailing whitespace and no characters U+0000 through U+001F. This is a deliberately narrow character policy, not a general Unicode sanitization rule. Internal ordinary spaces and commas are allowed. Length counts Python string characters, not encoded bytes or displayed glyphs.</li>
+<li><code>duration_ms</code>: exact Python <code>int</code> from 0 through 600000 inclusive. Booleans, floats and numeric strings are rejected by this function.</li>
+<li><code>status</code>: exactly the string <code>ok</code> or <code>failed</code>.</li>
+</ul>
+<p>Return a new flat dictionary containing the four normalized fields. No data transformation beyond the separately specified CSV duration conversion is performed.</p>
+<h3>parse_events_csv(text)</h3>
+<p>Input is a string of at most 16384 UTF-8 bytes, inclusive. Use the standard CSV reader with strict parsing enabled and newline-preserving text input. The first record must be exactly these columns in this order:</p>
+<pre><code>event_id,label,duration_ms,status</code></pre>
+<p>At most 200 data records are allowed. Each has exactly four fields. Duration text must be 1–6 ASCII digits, then convert to integer and validate the row. Leading zeros are allowed; signs, surrounding spaces, decimals, exponent notation and non-ASCII digits are not. The numeric upper bound remains 600000. A correctly quoted comma is part of the label, not a fifth field. CSV syntax failures reported by the strict reader are rejected. This does not claim to implement every possible external CSV dialect or RFC rule.</p>
+<p>Header-only input is valid and returns <code>[]</code>. Empty input, wrong header order, extra or missing columns and blank data records are rejected. A normal final line terminator is not an extra blank record. A byte order mark is not silently removed from the exact header. Do not replace parsing with <code>split(&#x27;,&#x27;)</code>.</p>
+<h3>summarize_events(events, slowest_limit=3)</h3>
+<p>Input is a list of at most 200 events, each validated. <code>slowest_limit</code> is an exact integer from 0 through 10 inclusive. Default is 3; booleans are rejected.</p>
+<p>An identical normalized event with the same ID is repeated delivery of one logical event. Count it only once in all event metrics. The same ID with any different normalized field is a conflict and raises <code>ValueError</code>. Do not silently overwrite conflicting content. Duplicate counting applies only to event IDs in this project, not quote SKUs.</p>
+<p>Return a dictionary with:</p>
+<ul>
+<li><code>input_rows</code>: count of supplied rows.</li>
+<li><code>unique_events</code>: count of distinct valid event IDs.</li>
+<li><code>duplicate_rows</code>: input_rows minus unique_events.</li>
+<li><code>successes</code> and <code>failures</code>: counts across unique events.</li>
+<li><code>total_duration_ms</code>: sum across unique events.</li>
+<li><code>mean_duration_ms</code>: total divided by unique count using ordinary Python division, or <code>None</code> for no events. The float is an approximate summary, not an exact currency amount.</li>
+<li><code>by_label</code>: list of dictionaries with <code>label</code>, <code>events</code>, <code>failures</code>, <code>duration_ms</code>, computed from unique events, sorted by ordinary Python string order of label, not locale collation.</li>
+<li><code>slowest</code>: up to slowest_limit dictionaries with <code>event_id</code>, <code>duration_ms</code>. Sort descending by duration, then ascending by event ID. A limit of 0 returns an empty list.</li>
+</ul>
+<p>Empty input has zero counts and total, <code>None</code> mean and empty group/slowest lists. Reversing input preserves the full result. Each call creates fresh accumulators; inputs and earlier results remain unchanged.</p>
+<h3>Fixture and checkpoints</h3>
+<p>The five data rows include an identical repeat of EVT-001. Four unique durations are 100, 400, 200 and 100 ms: total 800, mean 200.0. Three unique events succeed, one fails. The slowest default IDs are EVT-002 (400), EVT-003 (200), EVT-001 (100); EVT-001 wins its tie with EVT-004.</p>
+<p>Groups in order: inspection, 1 event/1 failure/400 ms; repair, 2 events/0 failures/200 ms; repair, detail, 1 event/0 failures/200 ms. The last label contains a comma.</p>
+<p>Milestones: (1) validate, (2) parse and convert, (3) establish identity, (4) aggregate, (5) order deterministically, (6) pass the 23 visible tests and explain an additional meaningful case. Tests include multiple subcases.</p>
+</section>
+<section id="worksheet" aria-labelledby="worksheet-title"><h2 id="worksheet-title">Evidence worksheet</h2>
+<p>Name or study label: __________  Date: __________  Python version / OS: __________</p>
+<p>Mark each result <strong>predicted</strong>, <strong>executed reference</strong>, or <strong>executed my starter</strong>. If you consulted a solution, say which function and what you learned. Keep private data out of the worksheet.</p>
+<h3>1. Values and contracts</h3>
+<ul>
+<li>What are the types and units of quantity, unit_cents, subtotal_cents and display_subtotal?</li>
+<li>Why do <code>True</code>, <code>1</code>, <code>1.0</code> and <code>&quot;1&quot;</code> behave differently under the exact quantity contract?</li>
+<li>Write valid smallest/largest examples and three rejected inputs. What should each return or raise?</li>
+<li>Explain why cents fit this fictional calculation but do not solve every real currency problem.</li>
+</ul>
+<h3>2. Trace before running</h3>
+<p>For each quote fixture row, record quantity, unit cents, line cents, subtotal before and subtotal after. Predict the empty-list result. Explain the invariant. Predict a reset-inside-loop defect and an early-return defect before testing your hypothesis in a separate scratch example.</p>
+<h3>3. Ownership and functions</h3>
+<p>Draw the list/dictionary objects in the aliasing demonstration. Which names share each object? Why is a shallow outer-list copy insufficient? Why is a new flat dictionary sufficient only for this row schema? Show a no-mutation test on your own implementation.</p>
+<h3>4. Identity and ordering</h3>
+<p>Calculate quote groups. Explain why two FILTER lines are retained. Calculate distinct event counts and explain why the repeated EVT-001 is collapsed. Construct one conflict with the same event ID and different duration. State the expected error. Predict groups and the equal-duration tie order after reversing the input.</p>
+<h3>5. Input boundaries</h3>
+<p>Predict the outcome of: missing JSON key; extra key; duplicate JSON member name; <code>NaN</code>; whole-looking float quantity; CSV quoted comma; empty CSV; header-only CSV; a blank data row; duration <code>+5</code>, <code>005</code>, <code>5.0</code>, or <code>600001</code>; a conflicting event ID.</p>
+<p>Explain which layer parses syntax, which validates shape and meaning, and which calculates results. Which error is unfinished learner code rather than invalid input? Do not hide all exceptions under one generic result.</p>
+<h3>6. Debugging journal</h3>
+<ul>
+<li>Exact command and smallest failing input:</li>
+<li>Expected result and contract/source of that expectation:</li>
+<li>Observed result and error:</li>
+<li>Hypothesis:</li>
+<li>Smallest change:</li>
+<li>Focused retest and full-suite result:</li>
+<li>What remains untested:</li>
+</ul>
+<p>Use [1,2] to explain why floor division is wrong for a fractional mean. Supply a second case that exposes a different potential defect. Avoid tests that only check that some output exists.</p>
+<h3>7. Capstone delivery</h3>
+<p>Complete both starter files. Preserve actual output from their acceptance suites and default CLI commands. Include one new boundary or property test without weakening the original tests. Write a short handoff with purpose, functions, input/output/error contracts, environment, commands, results, solution use and limits.</p>
+<p>Select one small extension, such as reporting the count of zero-priced lines or adding a separately specified event-status filter. Before coding, specify its inputs, output, invalid cases and old behavior it must preserve. Add tests first. Do not extend into payments, external uploads, live monitoring or arbitrary file processing as part of this pack.</p>
+<h3>Reflection rubric, not certification</h3>
+<ul>
+<li><strong>Explain:</strong> can I predict a new case and state why it follows from the contract?</li>
+<li><strong>Implement:</strong> did my own starter pass all visible cases, and can I explain its structure?</li>
+<li><strong>Investigate:</strong> can I reproduce a defect and show a meaningful regression?</li>
+<li><strong>Deliver:</strong> can someone rerun my work from the recorded commands?</li>
+<li><strong>Limit:</strong> can I say what I did not test or learn here?</li>
+</ul>
+<p>A reference-only run is a useful study step, not a completed implementation. Passing visible tests is finite evidence, not proof of complete correctness or job readiness.</p>
+</section>
+<section id="answers" aria-labelledby="answers-title"><h2 id="answers-title">Prediction key</h2>
+<p>Use after making your predictions. Full reference implementations are deliberately separate from this explanation.</p>
+<h3>Types and arithmetic</h3>
+<p>Quantity and unit price are exact integers; their units are units and cents per unit. The product is cents. Display text is a string and does not replace the numeric amount. <code>True</code> is related to integers in Python, but this contract rejects it with an exact type check. <code>1.0</code> and <code>&quot;1&quot;</code> have different types. Boundary decisions come from the stated contract, not accidental coercion.</p>
+<p>The three line subtotals are 2500, 1497, 1000. Running totals are 2500, 3997, 4997. The empty list has all zero counts and an empty grouping. Resetting inside the loop loses prior amounts; returning inside it can ignore later lines. At each iteration, subtotal equals the sum of all rows processed so far.</p>
+<p>Integer cents avoids floating approximation for this exact sum/product, but this pack has no currencies, rounding policies, tax, exchange rates or payment behavior. The event mean is a different question and can be fractional.</p>
+<h3>Aliasing and state</h3>
+<p>An alias names the same list. A shallow list copy has a new outer list but still shares inner dictionaries. Changing its first dictionary also changes the original. A list of new flat dictionaries does not share those dictionaries, so its quantity remains 1 while the original becomes 3. This is only sufficient because nested mutable values are absent. Per-call accumulators and fresh result dictionaries prevent later calls from changing earlier results under this schema.</p>
+<h3>Identity</h3>
+<p>BRUSH totals 3 units/1497 cents; FILTER totals 3 units/3500 cents. A repeated stock item is not automatically a duplicate mistake. The two FILTER prices differ, so the grouped result reports totals and no invented unit price.</p>
+<p>Five event deliveries represent four unique IDs. EVT-001 repeats identically. Unique durations sum to 800 ms, average 200.0; there are 3 successes and 1 failure. Groups sort as inspection, repair, repair, detail. The last item is one label containing a comma. Slowest order is EVT-002, EVT-003, EVT-001, EVT-004; default output takes the first three. Reversing input does not change this. A changed duration for EVT-001 conflicts with its identity and raises <code>ValueError</code>.</p>
+<h3>Validation</h3>
+<p>Missing/extra JSON fields, duplicate member names, <code>NaN</code> and float quantities are rejected. Syntax success alone is not semantic validation. Quoted CSV commas are valid inside a field. Empty CSV is rejected; header-only CSV gives no events. A blank data record is invalid. <code>+5</code> and <code>5.0</code> fail the duration text rule; <code>005</code> becomes 5; <code>600001</code> parses as integer but fails the numeric bound. The file byte limits and row limits are separate checks.</p>
+<p><code>NotImplementedError</code> means a starter placeholder still needs implementation. It is not a corrupt fixture. Targeted input errors should not hide unrelated defects. The wrapper reports anticipated invalid input or unfinished work, but lets unexpected exceptions remain visible for debugging.</p>
+<h3>Tests and delivery</h3>
+<p>For [1,2], <code>//</code> gives 1 while <code>/</code> gives 1.5. Testing only [2,2] would miss the defect. Useful additional cases include a zero-price line, maximum allowed count, mutation check, repeated identical event or equal-duration ordering. Choose an expectation independently from the code being tested.</p>
+<p>The distributed references have 21 quote and 23 event tests. Tests contain subcases, so test count is not input coverage. The learner starters initially fail intentionally. After your own implementation, record which commands passed, on which version, and what you consulted. A finite passing suite is not an independent assessment, universal correctness proof, certification or production approval.</p>
+</section>
+<section id="coverage" aria-labelledby="coverage-title"><h2 id="coverage-title">Coverage and limits</h2>
+<h3>What is included</h3>
+<p>Eight connected lessons teach typed values and units, explicit contracts, conditions/loops and invariants, focused functions, pure calculation versus I/O, aliasing and shallow copies, lists/dictionaries/identity, deterministic sorting, validation and targeted exceptions, bounded JSON/CSV parsing, simple command-line structure, regression/property examples and reproducible delivery.</p>
+<p>Two <strong>editable</strong> projects supply real starter functions, written contracts, visible acceptance suites and separate reference implementations. Four runnable demonstrations show a loop trace, aliasing, a distinguishing regression and an actual temporary-file JSON round trip. All inputs are invented. The worksheet offers a no-execution path and explicitly labels its limitations.</p>
+<h3>Evidence and honest interpretation</h3>
+<p>The reference solutions are tested against 44 named acceptance tests with multiple subcases. Additional pack-level checks validate structure, outputs, boundaries and the supplied examples. The distributed learner starters are deliberately unimplemented and should fail their acceptance tests until edited. Pack integrity checks are not learner grades; they check that the teaching material is distributed consistently.</p>
+<p>The content contains 24 original multiple-choice reasoning checks with explanations. They are learning prompts, not official exam questions. The existing Athena schema shows only eight primary checks, one per lesson. Sixteen supplemental checks and eight worked-code snippets need explicit UI support; all are available in this standalone pack. There is no claim of publication or a new live navigation route.</p>
+<h3>What is not covered</h3>
+<p>This does not complete Python or computer-science education. Major gaps include deeper algorithms and complexity analysis, recursion, object-oriented design, type checking, concurrency/async, networking, databases, web/mobile development, packaging and dependency management, version-control practice, deployment, observability, comprehensive accessibility testing and production threat modeling.</p>
+<p>The programs are not billing/payment software, live monitoring, robust public upload endpoints, or sandboxes for untrusted Python. Bounds and validation are teaching contracts, not a comprehensive security boundary. No external service, administrator privilege, credential or paid product is needed. There is no credential/exam mapping, exam readiness score, accreditation or job-readiness assertion.</p>
+<h3>Verified environment and sources</h3>
+<p>Execution uses Python 3.12.14 on Linux. Python 3.10+ is a design target, but other interpreter versions and operating systems are not verified. Official Python documentation pages were opened on 2026-11-07; current 3.12 documentation identifies patch version 3.12.16. Used APIs are stable within that series. Original content and tests are not endorsed by the Python Software Foundation.</p>
+<p>The source register records the specific pages and claims supported. Official references support language/library behavior; the project bounds, duplicate policy and fictional data are original instructional choices.</p>
+</section>
+</main><footer><p>Original instructional material · 2026-11-07. No external fonts, scripts, analytics or network dependencies.</p><p><a href="#top">Back to contents</a></p></footer></body></html>

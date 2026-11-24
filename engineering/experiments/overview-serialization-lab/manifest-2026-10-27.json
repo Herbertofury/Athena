@@ -1,0 +1,12 @@
+{
+  "checked_at": "2026-10-27",
+  "scope": "Database identities observed after the completed run, not before-run hashes",
+  "database_sha256_after_run": {
+    "actual_live_queue": "0854597a8a4b428f9a70fa8b02d26f304695d884105d85792bfe8ee2c076e287",
+    "replay_1": "f83470570fa4d2bc6166f7258e0cb5bdf5323373fc0005117ae7e0515a075831",
+    "replay_10": "e586efc44146db7aee202ce45dd2b2880d52fd943d733fc86cebfe9ccb41ce66",
+    "replay_50": "d77f46fe0ba86b7740b6860caee7dd7609d2668ff120471c524d3d0c68432c0b"
+  },
+  "production_http_route": "unchanged baseline overview",
+  "interpretation": "Candidate remains isolated pending HTTP/UX and additional stability acceptance; no cross-project promotion"
+}

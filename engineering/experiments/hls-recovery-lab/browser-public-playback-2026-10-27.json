@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "harness": "atlas-real-media-v6-hls-recovery",
+  "source_module": "/Engineering-Atlas/media-lab/media.be1b3d363a27304e.js",
+  "started_at": "2026-10-27T09:57:30.270Z",
+  "user_agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36",
+  "source_mode": "dated public snapshots",
+  "events": [
+    {
+      "type": "fixture_parsed",
+      "at_ms": 670.4000000059605,
+      "elapsed_ms": 133.59999999403954,
+      "bytes": 20294
+    },
+    {
+      "type": "metadata_dom_ready",
+      "at_ms": 674.0999999940395,
+      "elapsed_ms": 3.0999999940395355,
+      "cards": 4,
+      "gallery_images": 19,
+      "video_entries": 18
+    },
+    {
+      "type": "playback_engine_selected",
+      "at_ms": 20502.19999998808,
+      "card_id": "steam:620",
+      "engine": "hlsjs"
+    },
+    {
+      "type": "hls_library_ready",
+      "at_ms": 20679.90000000596,
+      "version": "1.7.3",
+      "elapsed_ms": 176.09999999403954
+    },
+    {
+      "type": "video_loadedmetadata",
+      "at_ms": 20919.09999999404,
+      "card_id": "steam:620",
+      "video_id": "5787",
+      "current_time": 0,
+      "video_width": 940,
+      "video_height": 529,
+      "engine": "hlsjs",
+      "elapsed_ms": 420
+    },
+    {
+      "type": "video_canplay",
+      "at_ms": 20941.80000001192,
+      "card_id": "steam:620",
+      "video_id": "5787",
+      "current_time": 0,
+      "video_width": 940,
+      "video_height": 529,
+      "engine": "hlsjs",
+      "elapsed_ms": 442.7000000178814
+    },
+    {
+      "type": "video_playing",
+      "at_ms": 38967,
+      "card_id": "steam:620",
+      "video_id": "5787",
+      "current_time": 0,
+      "video_width": 940,
+      "video_height": 529,
+      "engine": "hlsjs",
+      "elapsed_ms": 18467.90000000596
+    },
+    {
+      "type": "video_pause",
+      "at_ms": 39367.90000000596,
+      "card_id": "steam:620",
+      "video_id": "5787",
+      "current_time": 0.25136,
+      "video_width": 940,
+      "video_height": 529,
+      "engine": "hlsjs",
+      "elapsed_ms": 18868.80000001192
+    }
+  ],
+  "acceptance": "not a target-project performance comparison",
+  "fixture_sha256": "09bc53f20b0f552b6beae9c5c87c6662f94299ec4cb665b153d9e05196ef0348",
+  "fixture_counts": {
+    "cards": 4,
+    "gallery_images": 19,
+    "video_entries": 18
+  }
+}

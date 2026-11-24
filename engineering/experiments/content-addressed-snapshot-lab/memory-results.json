@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "receipts": [
+    {
+      "path": "memory-pass1.json",
+      "complete": true,
+      "samples": 8,
+      "role": "launcher-inclusive preliminary; no isolated backend-memory ranking"
+    },
+    {
+      "path": "memory-pass2.json",
+      "complete": true,
+      "samples": 8,
+      "role": "post-exec self observations with complete history verification"
+    },
+    {
+      "path": "memory-pass3.json",
+      "complete": true,
+      "samples": 8,
+      "role": "post-exec self observations with complete history verification"
+    },
+    {
+      "path": "memory-pass4.json",
+      "complete": true,
+      "samples": 8,
+      "role": "post-exec self observations with complete history verification"
+    },
+    {
+      "path": "memory-pass5.json",
+      "complete": true,
+      "samples": 8,
+      "role": "post-exec self observations with complete history verification"
+    }
+  ],
+  "launch_control": [
+    {
+      "mode": "preexec",
+      "exit": 0,
+      "peak_rss_kib": 6112
+    },
+    {
+      "mode": "preexec",
+      "exit": 0,
+      "peak_rss_kib": 6112
+    },
+    {
+      "mode": "preexec",
+      "exit": 0,
+      "peak_rss_kib": 6112
+    },
+    {
+      "mode": "normal",
+      "exit": 0,
+      "peak_rss_kib": 9344
+    },
+    {
+      "mode": "normal",
+      "exit": 0,
+      "peak_rss_kib": 9344
+    },
+    {
+      "mode": "normal",
+      "exit": 0,
+      "peak_rss_kib": 9344
+    }
+  ],
+  "limits": "Wait4 includes launcher lifetime. Self VmHWM is approximate, rollup instantaneous; not browser or physical peak-memory acceptance."
+}

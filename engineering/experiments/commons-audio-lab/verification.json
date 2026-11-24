@@ -1,0 +1,50 @@
+{
+  "scope": "Real public MediaWiki metadata and source CDN file; server-side decode only, no browser playing claim",
+  "page_id": "76730271",
+  "api_bytes": 724,
+  "api_sha256": "832183d4aced737f88cb1ed8a80b19f3441724c65c965e8ec61c40874849649a",
+  "download": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/e/e3/Example_sound_file_in_Ogg_Vorbis_format.ogg",
+    "status": 200,
+    "bytes": 153301,
+    "content_type": "application/ogg",
+    "sha1": "b1d7ed47d3fba1305b638b8c16ccc70a2c1a5988",
+    "sha256": "c001d8980f0b964000a28a99c5cab3809ef65ecf1ba0ae00bc57cb1fc1440754"
+  },
+  "api_size_and_sha1_match": true,
+  "decode_exit": 0,
+  "probe": {
+    "programs": [],
+    "stream_groups": [],
+    "streams": [
+      {
+        "codec_name": "vorbis",
+        "codec_type": "audio",
+        "sample_rate": "44100",
+        "channels": 2
+      }
+    ],
+    "format": {
+      "format_name": "ogg",
+      "duration": "3.703583",
+      "size": "153301"
+    }
+  },
+  "source_license_observed": "CC0 1.0, uploader own work; description revision 1236898397",
+  "author_observed": "K6ka",
+  "browser_loaded": false,
+  "actually_playing_verified": false,
+  "normalizer_scope": "isolated single-current-file prototype; no default app integration",
+  "strict_json_decoder_reused": "experiments/upstream-validation-lab/receipt_gate.py",
+  "normalizer_sha256": "f9f10b9bcaa2c02840eb5df0a8ee2344ca73f9d7bf58b6a086454e6abf9d987e",
+  "focused_tests_passed": 7,
+  "initial_js_duplicate_key_regression": "failed; JSON.parse projection accepted contradictory duplicate pageid; unpublished candidate retained privately",
+  "initial_js_source_sha256": "ab8ff2e477fc99bf868f1ec3da4cbcf2ad4c83ff58c9184bafbed726ac7f9f19",
+  "ffprobe": "ffprobe version 7.1.5-0+deb13u1 Copyright (c) 2007-2026 the FFmpeg developers",
+  "ffmpeg": "ffmpeg version 7.1.5-0+deb13u1 Copyright (c) 2000-2026 the FFmpeg developers",
+  "python_tests_passed": 234,
+  "python_optimized_tests_passed": 234,
+  "node_tests_passed": 221,
+  "wiki_projection_pages": 41,
+  "wiki_projection_check": "passed locally; not published"
+}

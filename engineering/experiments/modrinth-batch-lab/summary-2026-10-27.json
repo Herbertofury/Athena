@@ -1,0 +1,46 @@
+{
+  "checked_at": "2026-10-27",
+  "header": {
+    "ids": [
+      "AANobbMI",
+      "gvQqBUqZ",
+      "YL57xq9U"
+    ],
+    "kind": "header",
+    "limits": [
+      "Network/CDN state is uncontrolled",
+      "No image/video download or full description-body collection",
+      "No peak-memory or UI measurement",
+      "Only this Atlas collector, not another project's baseline",
+      "Fresh TLS client per sample; inter-request cooldown is included, initial cooldown is outside timing"
+    ],
+    "maximum_requests": 20,
+    "pairs": 5,
+    "schema_version": 1,
+    "scope": "live public network comparison of Atlas typed project projection"
+  },
+  "complete": true,
+  "source_base_commit": "079ebd0077d391381d6f63206a395814965e2fcc",
+  "raw_jsonl_sha256": "346413ce0ffca062ae7d21314ecba2458f6b6370f4d1e11b627c0ad678020a07",
+  "source_sha256": {
+    "src/modrinth.rs": "338c4d0acef422faeddb7500b93a334c725dc1b3c38d5eb221adff6a08d477b0",
+    "src/snapshots.rs": "be9b6072b46d8cf9d149187c956f3fc3bbce65b091546e94e87c1a4124a79dc6",
+    "src/main.rs": "587d0200d404dbcfa27025d0a021dcd572d70e52d906130cad10a1fa7a0197d2",
+    "examples/modrinth_batch_lab.rs": "55cc9142cb05774ad8efcd567c6614e74858ac6c339263f9d016efcbd5023c9f"
+  },
+  "strategies": {
+    "single": {
+      "median_ms": 4575.897941,
+      "request_count_per_three_projects": 3
+    },
+    "batch": {
+      "median_ms": 4121.5335079999995,
+      "request_count_per_three_projects": 1
+    }
+  },
+  "all_five_complete_projection_pairs_equal": true,
+  "timing_acceptance": "Exploratory, noisy; batch faster in 3 of five paired rounds. Request-count reduction verified; no universal speed claim.",
+  "batch_faster_pairs": 3,
+  "benchmark_binary_sha256": "3bbcf5addcd8a17d5f607e5a35eeb84018f1950a53380400e1a1002d0e4ea717",
+  "post_benchmark_change": "Added a test-only 1000-case permutation regression; measured collection and transport implementation unchanged."
+}

@@ -1,0 +1,3371 @@
+{
+  "schema_version": 1,
+  "checked_at": "2026-10-27",
+  "baseline_commit": "5b8b11cabc1b80a476de7d13e59de92170608665",
+  "environment": {
+    "system": "Linux",
+    "release": "6.18.55",
+    "machine": "x86_64",
+    "rss_unit": "KiB; child /proc/self/status VmHWM is primary, wait4 retained as diagnostic"
+  },
+  "binary_sha256": "41321518fc03aeaa0b36da89cf2a60aa06b379245bcf039047b34536dc225d0c",
+  "input_capture_sha256": "c9b13e344bd5c840a33db517bc91c8f3bd49ae54c2a6cec0d89ea66ded354163",
+  "source_sha256": {
+    "src/jobs.rs": "8162b553daa463ac02bf60e1b3d3274fd3c276131009f464f7a94356494155e7",
+    "src/validated_raw.rs": "6e86c120a224a6f75bdb2b627808618a3c8e078ba0b6eecd02fb104e7a004415",
+    "examples/overview_lab.rs": "b0186dde7f1230cebfb486f1989b12c485b488af7bfc02c7ed84e46d09e3e269"
+  },
+  "samples": [
+    {
+      "iterations": 10,
+      "limitations": [
+        "Replayed queue history, not live production load",
+        "Retains first output for full-byte stability checks outside timer",
+        "RSS includes process startup, SQLite, validator, output and retained reference",
+        "OS/filesystem cache uncontrolled; not cold-disk measurement",
+        "No UI or network request timing"
+      ],
+      "process_peak_rss_kib": 3764,
+      "samples": [
+        {
+          "elapsed_ns": 337083,
+          "full_output_stable": true,
+          "iteration": 0,
+          "output_bytes": 13005
+        },
+        {
+          "elapsed_ns": 177072,
+          "full_output_stable": true,
+          "iteration": 1,
+          "output_bytes": 13005
+        },
+        {
+          "elapsed_ns": 169788,
+          "full_output_stable": true,
+          "iteration": 2,
+          "output_bytes": 13005
+        },
+        {
+          "elapsed_ns": 198394,
+          "full_output_stable": true,
+          "iteration": 3,
+          "output_bytes": 13005
+        },
+        {
+          "elapsed_ns": 163957,
+          "full_output_stable": true,
+          "iteration": 4,
+          "output_bytes": 13005
+        },
+        {
+          "elapsed_ns": 209095,
+          "full_output_stable": true,
+          "iteration": 5,
+          "output_bytes": 13005
+        },
+        {
+          "elapsed_ns": 308122,
+          "full_output_stable": true,
+          "iteration": 6,
+          "output_bytes": 13005
+        },
+        {
+          "elapsed_ns": 170880,
+          "full_output_stable": true,
+          "iteration": 7,
+          "output_bytes": 13005
+        },
+        {
+          "elapsed_ns": 314656,
+          "full_output_stable": true,
+          "iteration": 8,
+          "output_bytes": 13005
+        },
+        {
+          "elapsed_ns": 165266,
+          "full_output_stable": true,
+          "iteration": 9,
+          "output_bytes": 13005
+        }
+      ],
+      "strategy": "baseline",
+      "workload": "actual_live_queue",
+      "pair": 0,
+      "wait4_peak_rss_kib": 13312,
+      "complete_output_sha256": "b8ad5899e66e08b898e5879ab64aca7fd559050f2a5dbfe2cb3096ad52bff2b7",
+      "raw_output_sha256": "b8ad5899e66e08b898e5879ab64aca7fd559050f2a5dbfe2cb3096ad52bff2b7",
+      "process_user_seconds": 0.002802,
+      "process_system_seconds": 0.003172
+    },
+    {
+      "iterations": 10,
+      "limitations": [
+        "Replayed queue history, not live production load",
+        "Retains first output for full-byte stability checks outside timer",
+        "RSS includes process startup, SQLite, validator, output and retained reference",
+        "OS/filesystem cache uncontrolled; not cold-disk measurement",
+        "No UI or network request timing"
+      ],
+      "process_peak_rss_kib": 3732,
+      "samples": [
+        {
+          "elapsed_ns": 139832,
+          "full_output_stable": true,
+          "iteration": 0,
+          "output_bytes": 13005
+        },
+        {
+          "elapsed_ns": 44886,
+          "full_output_stable": true,
+          "iteration": 1,
+          "output_bytes": 13005
+        },
+        {
+          "elapsed_ns": 40634,
+          "full_output_stable": true,
+          "iteration": 2,
+          "output_bytes": 13005
+        },
+        {
+          "elapsed_ns": 37818,
+          "full_output_stable": true,
+          "iteration": 3,
+          "output_bytes": 13005
+        },
+        {
+          "elapsed_ns": 39328,
+          "full_output_stable": true,
+          "iteration": 4,
+          "output_bytes": 13005
+        },
+        {
+          "elapsed_ns": 38591,
+          "full_output_stable": true,
+          "iteration": 5,
+          "output_bytes": 13005
+        },
+        {
+          "elapsed_ns": 38491,
+          "full_output_stable": true,
+          "iteration": 6,
+          "output_bytes": 13005
+        },
+        {
+          "elapsed_ns": 37995,
+          "full_output_stable": true,
+          "iteration": 7,
+          "output_bytes": 13005
+        },
+        {
+          "elapsed_ns": 38062,
+          "full_output_stable": true,
+          "iteration": 8,
+          "output_bytes": 13005
+        },
+        {
+          "elapsed_ns": 37732,
+          "full_output_stable": true,
+          "iteration": 9,
+          "output_bytes": 13005
+        }
+      ],
+      "strategy": "candidate",
+      "workload": "actual_live_queue",
+      "pair": 0,
+      "wait4_peak_rss_kib": 13312,
+      "complete_output_sha256": "b8ad5899e66e08b898e5879ab64aca7fd559050f2a5dbfe2cb3096ad52bff2b7",
+      "raw_output_sha256": "e664f6f72bc4e4b740e57a26cd19c6864003c4cdf6ab2e8b5e0bbc4b68b80e01",
+      "process_user_seconds": 0.0031739999999999997,
+      "process_system_seconds": 0.0
+    },
+    {
+      "iterations": 10,
+      "limitations": [
+        "Replayed queue history, not live production load",
+        "Retains first output for full-byte stability checks outside timer",
+        "RSS includes process startup, SQLite, validator, output and retained reference",
+        "OS/filesystem cache uncontrolled; not cold-disk measurement",
+        "No UI or network request timing"
+      ],
+      "process_peak_rss_kib": 3728,
+      "samples": [
+        {
+          "elapsed_ns": 296639,
+          "full_output_stable": true,
+          "iteration": 0,
+          "output_bytes": 13005
+        },
+        {
+          "elapsed_ns": 50996,
+          "full_output_stable": true,
+          "iteration": 1,
+          "output_bytes": 13005
+        },
+        {
+          "elapsed_ns": 72860,
+          "full_output_stable": true,
+          "iteration": 2,
+          "output_bytes": 13005
+        },
+        {
+          "elapsed_ns": 40084,
+          "full_output_stable": true,
+          "iteration": 3,
+          "output_bytes": 13005
+        },
+        {
+          "elapsed_ns": 88602,
+          "full_output_stable": true,
+          "iteration": 4,
+          "output_bytes": 13005
+        },
+        {
+          "elapsed_ns": 39890,
+          "full_output_stable": true,
+          "iteration": 5,
+          "output_bytes": 13005
+        },
+        {
+          "elapsed_ns": 38445,
+          "full_output_stable": true,
+          "iteration": 6,
+          "output_bytes": 13005
+        },
+        {
+          "elapsed_ns": 38119,
+          "full_output_stable": true,
+          "iteration": 7,
+          "output_bytes": 13005
+        },
+        {
+          "elapsed_ns": 39310,
+          "full_output_stable": true,
+          "iteration": 8,
+          "output_bytes": 13005
+        },
+        {
+          "elapsed_ns": 37974,
+          "full_output_stable": true,
+          "iteration": 9,
+          "output_bytes": 13005
+        }
+      ],
+      "strategy": "candidate",
+      "workload": "actual_live_queue",
+      "pair": 1,
+      "wait4_peak_rss_kib": 13312,
+      "complete_output_sha256": "b8ad5899e66e08b898e5879ab64aca7fd559050f2a5dbfe2cb3096ad52bff2b7",
+      "raw_output_sha256": "e664f6f72bc4e4b740e57a26cd19c6864003c4cdf6ab2e8b5e0bbc4b68b80e01",
+      "process_user_seconds": 0.0,
+      "process_system_seconds": 0.0034839999999999997
+    },
+    {
+      "iterations": 10,
+      "limitations": [
+        "Replayed queue history, not live production load",
+        "Retains first output for full-byte stability checks outside timer",
+        "RSS includes process startup, SQLite, validator, output and retained reference",
+        "OS/filesystem cache uncontrolled; not cold-disk measurement",
+        "No UI or network request timing"
+      ],
+      "process_peak_rss_kib": 3828,
+      "samples": [
+        {
+          "elapsed_ns": 292541,
+          "full_output_stable": true,
+          "iteration": 0,
+          "output_bytes": 13005
+        },
+        {
+          "elapsed_ns": 241474,
+          "full_output_stable": true,
+          "iteration": 1,
+          "output_bytes": 13005
+        },
+        {
+          "elapsed_ns": 168917,
+          "full_output_stable": true,
+          "iteration": 2,
+          "output_bytes": 13005
+        },
+        {
+          "elapsed_ns": 156445,
+          "full_output_stable": true,
+          "iteration": 3,
+          "output_bytes": 13005
+        },
+        {
+          "elapsed_ns": 156984,
+          "full_output_stable": true,
+          "iteration": 4,
+          "output_bytes": 13005
+        },
+        {
+          "elapsed_ns": 153917,
+          "full_output_stable": true,
+          "iteration": 5,
+          "output_bytes": 13005
+        },
+        {
+          "elapsed_ns": 153095,
+          "full_output_stable": true,
+          "iteration": 6,
+          "output_bytes": 13005
+        },
+        {
+          "elapsed_ns": 284915,
+          "full_output_stable": true,
+          "iteration": 7,
+          "output_bytes": 13005
+        },
+        {
+          "elapsed_ns": 157101,
+          "full_output_stable": true,
+          "iteration": 8,
+          "output_bytes": 13005
+        },
+        {
+          "elapsed_ns": 164304,
+          "full_output_stable": true,
+          "iteration": 9,
+          "output_bytes": 13005
+        }
+      ],
+      "strategy": "baseline",
+      "workload": "actual_live_queue",
+      "pair": 1,
+      "wait4_peak_rss_kib": 13312,
+      "complete_output_sha256": "b8ad5899e66e08b898e5879ab64aca7fd559050f2a5dbfe2cb3096ad52bff2b7",
+      "raw_output_sha256": "b8ad5899e66e08b898e5879ab64aca7fd559050f2a5dbfe2cb3096ad52bff2b7",
+      "process_user_seconds": 0.0,
+      "process_system_seconds": 0.004913
+    },
+    {
+      "iterations": 10,
+      "limitations": [
+        "Replayed queue history, not live production load",
+        "Retains first output for full-byte stability checks outside timer",
+        "RSS includes process startup, SQLite, validator, output and retained reference",
+        "OS/filesystem cache uncontrolled; not cold-disk measurement",
+        "No UI or network request timing"
+      ],
+      "process_peak_rss_kib": 3848,
+      "samples": [
+        {
+          "elapsed_ns": 264419,
+          "full_output_stable": true,
+          "iteration": 0,
+          "output_bytes": 13005
+        },
+        {
+          "elapsed_ns": 209309,
+          "full_output_stable": true,
+          "iteration": 1,
+          "output_bytes": 13005
+        },
+        {
+          "elapsed_ns": 171420,
+          "full_output_stable": true,
+          "iteration": 2,
+          "output_bytes": 13005
+        },
+        {
+          "elapsed_ns": 160655,
+          "full_output_stable": true,
+          "iteration": 3,
+          "output_bytes": 13005
+        },
+        {
+          "elapsed_ns": 186708,
+          "full_output_stable": true,
+          "iteration": 4,
+          "output_bytes": 13005
+        },
+        {
+          "elapsed_ns": 155323,
+          "full_output_stable": true,
+          "iteration": 5,
+          "output_bytes": 13005
+        },
+        {
+          "elapsed_ns": 150719,
+          "full_output_stable": true,
+          "iteration": 6,
+          "output_bytes": 13005
+        },
+        {
+          "elapsed_ns": 195511,
+          "full_output_stable": true,
+          "iteration": 7,
+          "output_bytes": 13005
+        },
+        {
+          "elapsed_ns": 153109,
+          "full_output_stable": true,
+          "iteration": 8,
+          "output_bytes": 13005
+        },
+        {
+          "elapsed_ns": 151265,
+          "full_output_stable": true,
+          "iteration": 9,
+          "output_bytes": 13005
+        }
+      ],
+      "strategy": "baseline",
+      "workload": "actual_live_queue",
+      "pair": 2,
+      "wait4_peak_rss_kib": 13312,
+      "complete_output_sha256": "b8ad5899e66e08b898e5879ab64aca7fd559050f2a5dbfe2cb3096ad52bff2b7",
+      "raw_output_sha256": "b8ad5899e66e08b898e5879ab64aca7fd559050f2a5dbfe2cb3096ad52bff2b7",
+      "process_user_seconds": 0.004213,
+      "process_system_seconds": 0.0
+    },
+    {
+      "iterations": 10,
+      "limitations": [
+        "Replayed queue history, not live production load",
+        "Retains first output for full-byte stability checks outside timer",
+        "RSS includes process startup, SQLite, validator, output and retained reference",
+        "OS/filesystem cache uncontrolled; not cold-disk measurement",
+        "No UI or network request timing"
+      ],
+      "process_peak_rss_kib": 3732,
+      "samples": [
+        {
+          "elapsed_ns": 96028,
+          "full_output_stable": true,
+          "iteration": 0,
+          "output_bytes": 13005
+        },
+        {
+          "elapsed_ns": 347933,
+          "full_output_stable": true,
+          "iteration": 1,
+          "output_bytes": 13005
+        },
+        {
+          "elapsed_ns": 47077,
+          "full_output_stable": true,
+          "iteration": 2,
+          "output_bytes": 13005
+        },
+        {
+          "elapsed_ns": 38683,
+          "full_output_stable": true,
+          "iteration": 3,
+          "output_bytes": 13005
+        },
+        {
+          "elapsed_ns": 39399,
+          "full_output_stable": true,
+          "iteration": 4,
+          "output_bytes": 13005
+        },
+        {
+          "elapsed_ns": 84422,
+          "full_output_stable": true,
+          "iteration": 5,
+          "output_bytes": 13005
+        },
+        {
+          "elapsed_ns": 38795,
+          "full_output_stable": true,
+          "iteration": 6,
+          "output_bytes": 13005
+        },
+        {
+          "elapsed_ns": 38105,
+          "full_output_stable": true,
+          "iteration": 7,
+          "output_bytes": 13005
+        },
+        {
+          "elapsed_ns": 38381,
+          "full_output_stable": true,
+          "iteration": 8,
+          "output_bytes": 13005
+        },
+        {
+          "elapsed_ns": 66533,
+          "full_output_stable": true,
+          "iteration": 9,
+          "output_bytes": 13005
+        }
+      ],
+      "strategy": "candidate",
+      "workload": "actual_live_queue",
+      "pair": 2,
+      "wait4_peak_rss_kib": 13312,
+      "complete_output_sha256": "b8ad5899e66e08b898e5879ab64aca7fd559050f2a5dbfe2cb3096ad52bff2b7",
+      "raw_output_sha256": "e664f6f72bc4e4b740e57a26cd19c6864003c4cdf6ab2e8b5e0bbc4b68b80e01",
+      "process_user_seconds": 0.003218,
+      "process_system_seconds": 0.0
+    },
+    {
+      "iterations": 10,
+      "limitations": [
+        "Replayed queue history, not live production load",
+        "Retains first output for full-byte stability checks outside timer",
+        "RSS includes process startup, SQLite, validator, output and retained reference",
+        "OS/filesystem cache uncontrolled; not cold-disk measurement",
+        "No UI or network request timing"
+      ],
+      "process_peak_rss_kib": 3616,
+      "samples": [
+        {
+          "elapsed_ns": 96635,
+          "full_output_stable": true,
+          "iteration": 0,
+          "output_bytes": 13005
+        },
+        {
+          "elapsed_ns": 47558,
+          "full_output_stable": true,
+          "iteration": 1,
+          "output_bytes": 13005
+        },
+        {
+          "elapsed_ns": 40110,
+          "full_output_stable": true,
+          "iteration": 2,
+          "output_bytes": 13005
+        },
+        {
+          "elapsed_ns": 38396,
+          "full_output_stable": true,
+          "iteration": 3,
+          "output_bytes": 13005
+        },
+        {
+          "elapsed_ns": 38370,
+          "full_output_stable": true,
+          "iteration": 4,
+          "output_bytes": 13005
+        },
+        {
+          "elapsed_ns": 36902,
+          "full_output_stable": true,
+          "iteration": 5,
+          "output_bytes": 13005
+        },
+        {
+          "elapsed_ns": 38236,
+          "full_output_stable": true,
+          "iteration": 6,
+          "output_bytes": 13005
+        },
+        {
+          "elapsed_ns": 37114,
+          "full_output_stable": true,
+          "iteration": 7,
+          "output_bytes": 13005
+        },
+        {
+          "elapsed_ns": 93996,
+          "full_output_stable": true,
+          "iteration": 8,
+          "output_bytes": 13005
+        },
+        {
+          "elapsed_ns": 39210,
+          "full_output_stable": true,
+          "iteration": 9,
+          "output_bytes": 13005
+        }
+      ],
+      "strategy": "candidate",
+      "workload": "actual_live_queue",
+      "pair": 3,
+      "wait4_peak_rss_kib": 13312,
+      "complete_output_sha256": "b8ad5899e66e08b898e5879ab64aca7fd559050f2a5dbfe2cb3096ad52bff2b7",
+      "raw_output_sha256": "e664f6f72bc4e4b740e57a26cd19c6864003c4cdf6ab2e8b5e0bbc4b68b80e01",
+      "process_user_seconds": 0.0,
+      "process_system_seconds": 0.004347
+    },
+    {
+      "iterations": 10,
+      "limitations": [
+        "Replayed queue history, not live production load",
+        "Retains first output for full-byte stability checks outside timer",
+        "RSS includes process startup, SQLite, validator, output and retained reference",
+        "OS/filesystem cache uncontrolled; not cold-disk measurement",
+        "No UI or network request timing"
+      ],
+      "process_peak_rss_kib": 3824,
+      "samples": [
+        {
+          "elapsed_ns": 333144,
+          "full_output_stable": true,
+          "iteration": 0,
+          "output_bytes": 13005
+        },
+        {
+          "elapsed_ns": 186086,
+          "full_output_stable": true,
+          "iteration": 1,
+          "output_bytes": 13005
+        },
+        {
+          "elapsed_ns": 303429,
+          "full_output_stable": true,
+          "iteration": 2,
+          "output_bytes": 13005
+        },
+        {
+          "elapsed_ns": 213725,
+          "full_output_stable": true,
+          "iteration": 3,
+          "output_bytes": 13005
+        },
+        {
+          "elapsed_ns": 162626,
+          "full_output_stable": true,
+          "iteration": 4,
+          "output_bytes": 13005
+        },
+        {
+          "elapsed_ns": 160989,
+          "full_output_stable": true,
+          "iteration": 5,
+          "output_bytes": 13005
+        },
+        {
+          "elapsed_ns": 683403,
+          "full_output_stable": true,
+          "iteration": 6,
+          "output_bytes": 13005
+        },
+        {
+          "elapsed_ns": 178255,
+          "full_output_stable": true,
+          "iteration": 7,
+          "output_bytes": 13005
+        },
+        {
+          "elapsed_ns": 229374,
+          "full_output_stable": true,
+          "iteration": 8,
+          "output_bytes": 13005
+        },
+        {
+          "elapsed_ns": 219460,
+          "full_output_stable": true,
+          "iteration": 9,
+          "output_bytes": 13005
+        }
+      ],
+      "strategy": "baseline",
+      "workload": "actual_live_queue",
+      "pair": 3,
+      "wait4_peak_rss_kib": 13312,
+      "complete_output_sha256": "b8ad5899e66e08b898e5879ab64aca7fd559050f2a5dbfe2cb3096ad52bff2b7",
+      "raw_output_sha256": "b8ad5899e66e08b898e5879ab64aca7fd559050f2a5dbfe2cb3096ad52bff2b7",
+      "process_user_seconds": 0.006036,
+      "process_system_seconds": 0.0
+    },
+    {
+      "iterations": 10,
+      "limitations": [
+        "Replayed queue history, not live production load",
+        "Retains first output for full-byte stability checks outside timer",
+        "RSS includes process startup, SQLite, validator, output and retained reference",
+        "OS/filesystem cache uncontrolled; not cold-disk measurement",
+        "No UI or network request timing"
+      ],
+      "process_peak_rss_kib": 3888,
+      "samples": [
+        {
+          "elapsed_ns": 265478,
+          "full_output_stable": true,
+          "iteration": 0,
+          "output_bytes": 13005
+        },
+        {
+          "elapsed_ns": 215924,
+          "full_output_stable": true,
+          "iteration": 1,
+          "output_bytes": 13005
+        },
+        {
+          "elapsed_ns": 696667,
+          "full_output_stable": true,
+          "iteration": 2,
+          "output_bytes": 13005
+        },
+        {
+          "elapsed_ns": 1523273,
+          "full_output_stable": true,
+          "iteration": 3,
+          "output_bytes": 13005
+        },
+        {
+          "elapsed_ns": 203894,
+          "full_output_stable": true,
+          "iteration": 4,
+          "output_bytes": 13005
+        },
+        {
+          "elapsed_ns": 164996,
+          "full_output_stable": true,
+          "iteration": 5,
+          "output_bytes": 13005
+        },
+        {
+          "elapsed_ns": 199607,
+          "full_output_stable": true,
+          "iteration": 6,
+          "output_bytes": 13005
+        },
+        {
+          "elapsed_ns": 1130736,
+          "full_output_stable": true,
+          "iteration": 7,
+          "output_bytes": 13005
+        },
+        {
+          "elapsed_ns": 207231,
+          "full_output_stable": true,
+          "iteration": 8,
+          "output_bytes": 13005
+        },
+        {
+          "elapsed_ns": 162984,
+          "full_output_stable": true,
+          "iteration": 9,
+          "output_bytes": 13005
+        }
+      ],
+      "strategy": "baseline",
+      "workload": "actual_live_queue",
+      "pair": 4,
+      "wait4_peak_rss_kib": 13312,
+      "complete_output_sha256": "b8ad5899e66e08b898e5879ab64aca7fd559050f2a5dbfe2cb3096ad52bff2b7",
+      "raw_output_sha256": "b8ad5899e66e08b898e5879ab64aca7fd559050f2a5dbfe2cb3096ad52bff2b7",
+      "process_user_seconds": 0.003061,
+      "process_system_seconds": 0.005689
+    },
+    {
+      "iterations": 10,
+      "limitations": [
+        "Replayed queue history, not live production load",
+        "Retains first output for full-byte stability checks outside timer",
+        "RSS includes process startup, SQLite, validator, output and retained reference",
+        "OS/filesystem cache uncontrolled; not cold-disk measurement",
+        "No UI or network request timing"
+      ],
+      "process_peak_rss_kib": 3716,
+      "samples": [
+        {
+          "elapsed_ns": 97796,
+          "full_output_stable": true,
+          "iteration": 0,
+          "output_bytes": 13005
+        },
+        {
+          "elapsed_ns": 48066,
+          "full_output_stable": true,
+          "iteration": 1,
+          "output_bytes": 13005
+        },
+        {
+          "elapsed_ns": 39313,
+          "full_output_stable": true,
+          "iteration": 2,
+          "output_bytes": 13005
+        },
+        {
+          "elapsed_ns": 243169,
+          "full_output_stable": true,
+          "iteration": 3,
+          "output_bytes": 13005
+        },
+        {
+          "elapsed_ns": 43551,
+          "full_output_stable": true,
+          "iteration": 4,
+          "output_bytes": 13005
+        },
+        {
+          "elapsed_ns": 38057,
+          "full_output_stable": true,
+          "iteration": 5,
+          "output_bytes": 13005
+        },
+        {
+          "elapsed_ns": 39325,
+          "full_output_stable": true,
+          "iteration": 6,
+          "output_bytes": 13005
+        },
+        {
+          "elapsed_ns": 38346,
+          "full_output_stable": true,
+          "iteration": 7,
+          "output_bytes": 13005
+        },
+        {
+          "elapsed_ns": 37518,
+          "full_output_stable": true,
+          "iteration": 8,
+          "output_bytes": 13005
+        },
+        {
+          "elapsed_ns": 131382,
+          "full_output_stable": true,
+          "iteration": 9,
+          "output_bytes": 13005
+        }
+      ],
+      "strategy": "candidate",
+      "workload": "actual_live_queue",
+      "pair": 4,
+      "wait4_peak_rss_kib": 13312,
+      "complete_output_sha256": "b8ad5899e66e08b898e5879ab64aca7fd559050f2a5dbfe2cb3096ad52bff2b7",
+      "raw_output_sha256": "e664f6f72bc4e4b740e57a26cd19c6864003c4cdf6ab2e8b5e0bbc4b68b80e01",
+      "process_user_seconds": 0.00201,
+      "process_system_seconds": 0.0069039999999999995
+    },
+    {
+      "iterations": 10,
+      "limitations": [
+        "Replayed queue history, not live production load",
+        "Retains first output for full-byte stability checks outside timer",
+        "RSS includes process startup, SQLite, validator, output and retained reference",
+        "OS/filesystem cache uncontrolled; not cold-disk measurement",
+        "No UI or network request timing"
+      ],
+      "process_peak_rss_kib": 3792,
+      "samples": [
+        {
+          "elapsed_ns": 428959,
+          "full_output_stable": true,
+          "iteration": 0,
+          "output_bytes": 12972
+        },
+        {
+          "elapsed_ns": 180663,
+          "full_output_stable": true,
+          "iteration": 1,
+          "output_bytes": 12972
+        },
+        {
+          "elapsed_ns": 219868,
+          "full_output_stable": true,
+          "iteration": 2,
+          "output_bytes": 12972
+        },
+        {
+          "elapsed_ns": 1349564,
+          "full_output_stable": true,
+          "iteration": 3,
+          "output_bytes": 12972
+        },
+        {
+          "elapsed_ns": 194499,
+          "full_output_stable": true,
+          "iteration": 4,
+          "output_bytes": 12972
+        },
+        {
+          "elapsed_ns": 168479,
+          "full_output_stable": true,
+          "iteration": 5,
+          "output_bytes": 12972
+        },
+        {
+          "elapsed_ns": 160578,
+          "full_output_stable": true,
+          "iteration": 6,
+          "output_bytes": 12972
+        },
+        {
+          "elapsed_ns": 159647,
+          "full_output_stable": true,
+          "iteration": 7,
+          "output_bytes": 12972
+        },
+        {
+          "elapsed_ns": 186822,
+          "full_output_stable": true,
+          "iteration": 8,
+          "output_bytes": 12972
+        },
+        {
+          "elapsed_ns": 159095,
+          "full_output_stable": true,
+          "iteration": 9,
+          "output_bytes": 12972
+        }
+      ],
+      "strategy": "baseline",
+      "workload": "replay_1",
+      "pair": 0,
+      "wait4_peak_rss_kib": 13312,
+      "complete_output_sha256": "704b54a135e21037fb5cc405b2132e0de5f429202724e8592cec1e22c411b9e9",
+      "raw_output_sha256": "704b54a135e21037fb5cc405b2132e0de5f429202724e8592cec1e22c411b9e9",
+      "process_user_seconds": 0.0067789999999999994,
+      "process_system_seconds": 0.0
+    },
+    {
+      "iterations": 10,
+      "limitations": [
+        "Replayed queue history, not live production load",
+        "Retains first output for full-byte stability checks outside timer",
+        "RSS includes process startup, SQLite, validator, output and retained reference",
+        "OS/filesystem cache uncontrolled; not cold-disk measurement",
+        "No UI or network request timing"
+      ],
+      "process_peak_rss_kib": 3680,
+      "samples": [
+        {
+          "elapsed_ns": 103756,
+          "full_output_stable": true,
+          "iteration": 0,
+          "output_bytes": 12972
+        },
+        {
+          "elapsed_ns": 59721,
+          "full_output_stable": true,
+          "iteration": 1,
+          "output_bytes": 12972
+        },
+        {
+          "elapsed_ns": 47414,
+          "full_output_stable": true,
+          "iteration": 2,
+          "output_bytes": 12972
+        },
+        {
+          "elapsed_ns": 38974,
+          "full_output_stable": true,
+          "iteration": 3,
+          "output_bytes": 12972
+        },
+        {
+          "elapsed_ns": 42891,
+          "full_output_stable": true,
+          "iteration": 4,
+          "output_bytes": 12972
+        },
+        {
+          "elapsed_ns": 39488,
+          "full_output_stable": true,
+          "iteration": 5,
+          "output_bytes": 12972
+        },
+        {
+          "elapsed_ns": 123419,
+          "full_output_stable": true,
+          "iteration": 6,
+          "output_bytes": 12972
+        },
+        {
+          "elapsed_ns": 78029,
+          "full_output_stable": true,
+          "iteration": 7,
+          "output_bytes": 12972
+        },
+        {
+          "elapsed_ns": 40011,
+          "full_output_stable": true,
+          "iteration": 8,
+          "output_bytes": 12972
+        },
+        {
+          "elapsed_ns": 38672,
+          "full_output_stable": true,
+          "iteration": 9,
+          "output_bytes": 12972
+        }
+      ],
+      "strategy": "candidate",
+      "workload": "replay_1",
+      "pair": 0,
+      "wait4_peak_rss_kib": 13312,
+      "complete_output_sha256": "704b54a135e21037fb5cc405b2132e0de5f429202724e8592cec1e22c411b9e9",
+      "raw_output_sha256": "8cb98829a5d77630568a86d88ecc6a246bbc2d1ae80501606e40270202067adc",
+      "process_user_seconds": 0.0032329999999999998,
+      "process_system_seconds": 0.0
+    },
+    {
+      "iterations": 10,
+      "limitations": [
+        "Replayed queue history, not live production load",
+        "Retains first output for full-byte stability checks outside timer",
+        "RSS includes process startup, SQLite, validator, output and retained reference",
+        "OS/filesystem cache uncontrolled; not cold-disk measurement",
+        "No UI or network request timing"
+      ],
+      "process_peak_rss_kib": 3728,
+      "samples": [
+        {
+          "elapsed_ns": 96575,
+          "full_output_stable": true,
+          "iteration": 0,
+          "output_bytes": 12972
+        },
+        {
+          "elapsed_ns": 56607,
+          "full_output_stable": true,
+          "iteration": 1,
+          "output_bytes": 12972
+        },
+        {
+          "elapsed_ns": 39756,
+          "full_output_stable": true,
+          "iteration": 2,
+          "output_bytes": 12972
+        },
+        {
+          "elapsed_ns": 38761,
+          "full_output_stable": true,
+          "iteration": 3,
+          "output_bytes": 12972
+        },
+        {
+          "elapsed_ns": 38411,
+          "full_output_stable": true,
+          "iteration": 4,
+          "output_bytes": 12972
+        },
+        {
+          "elapsed_ns": 38677,
+          "full_output_stable": true,
+          "iteration": 5,
+          "output_bytes": 12972
+        },
+        {
+          "elapsed_ns": 37042,
+          "full_output_stable": true,
+          "iteration": 6,
+          "output_bytes": 12972
+        },
+        {
+          "elapsed_ns": 37647,
+          "full_output_stable": true,
+          "iteration": 7,
+          "output_bytes": 12972
+        },
+        {
+          "elapsed_ns": 37360,
+          "full_output_stable": true,
+          "iteration": 8,
+          "output_bytes": 12972
+        },
+        {
+          "elapsed_ns": 38421,
+          "full_output_stable": true,
+          "iteration": 9,
+          "output_bytes": 12972
+        }
+      ],
+      "strategy": "candidate",
+      "workload": "replay_1",
+      "pair": 1,
+      "wait4_peak_rss_kib": 13312,
+      "complete_output_sha256": "704b54a135e21037fb5cc405b2132e0de5f429202724e8592cec1e22c411b9e9",
+      "raw_output_sha256": "8cb98829a5d77630568a86d88ecc6a246bbc2d1ae80501606e40270202067adc",
+      "process_user_seconds": 0.005148,
+      "process_system_seconds": 0.0
+    },
+    {
+      "iterations": 10,
+      "limitations": [
+        "Replayed queue history, not live production load",
+        "Retains first output for full-byte stability checks outside timer",
+        "RSS includes process startup, SQLite, validator, output and retained reference",
+        "OS/filesystem cache uncontrolled; not cold-disk measurement",
+        "No UI or network request timing"
+      ],
+      "process_peak_rss_kib": 3764,
+      "samples": [
+        {
+          "elapsed_ns": 259587,
+          "full_output_stable": true,
+          "iteration": 0,
+          "output_bytes": 12972
+        },
+        {
+          "elapsed_ns": 211495,
+          "full_output_stable": true,
+          "iteration": 1,
+          "output_bytes": 12972
+        },
+        {
+          "elapsed_ns": 159983,
+          "full_output_stable": true,
+          "iteration": 2,
+          "output_bytes": 12972
+        },
+        {
+          "elapsed_ns": 158278,
+          "full_output_stable": true,
+          "iteration": 3,
+          "output_bytes": 12972
+        },
+        {
+          "elapsed_ns": 155622,
+          "full_output_stable": true,
+          "iteration": 4,
+          "output_bytes": 12972
+        },
+        {
+          "elapsed_ns": 154012,
+          "full_output_stable": true,
+          "iteration": 5,
+          "output_bytes": 12972
+        },
+        {
+          "elapsed_ns": 150634,
+          "full_output_stable": true,
+          "iteration": 6,
+          "output_bytes": 12972
+        },
+        {
+          "elapsed_ns": 191432,
+          "full_output_stable": true,
+          "iteration": 7,
+          "output_bytes": 12972
+        },
+        {
+          "elapsed_ns": 192260,
+          "full_output_stable": true,
+          "iteration": 8,
+          "output_bytes": 12972
+        },
+        {
+          "elapsed_ns": 222625,
+          "full_output_stable": true,
+          "iteration": 9,
+          "output_bytes": 12972
+        }
+      ],
+      "strategy": "baseline",
+      "workload": "replay_1",
+      "pair": 1,
+      "wait4_peak_rss_kib": 13312,
+      "complete_output_sha256": "704b54a135e21037fb5cc405b2132e0de5f429202724e8592cec1e22c411b9e9",
+      "raw_output_sha256": "704b54a135e21037fb5cc405b2132e0de5f429202724e8592cec1e22c411b9e9",
+      "process_user_seconds": 0.0043349999999999994,
+      "process_system_seconds": 0.0
+    },
+    {
+      "iterations": 10,
+      "limitations": [
+        "Replayed queue history, not live production load",
+        "Retains first output for full-byte stability checks outside timer",
+        "RSS includes process startup, SQLite, validator, output and retained reference",
+        "OS/filesystem cache uncontrolled; not cold-disk measurement",
+        "No UI or network request timing"
+      ],
+      "process_peak_rss_kib": 3764,
+      "samples": [
+        {
+          "elapsed_ns": 519476,
+          "full_output_stable": true,
+          "iteration": 0,
+          "output_bytes": 12972
+        },
+        {
+          "elapsed_ns": 218297,
+          "full_output_stable": true,
+          "iteration": 1,
+          "output_bytes": 12972
+        },
+        {
+          "elapsed_ns": 166262,
+          "full_output_stable": true,
+          "iteration": 2,
+          "output_bytes": 12972
+        },
+        {
+          "elapsed_ns": 187067,
+          "full_output_stable": true,
+          "iteration": 3,
+          "output_bytes": 12972
+        },
+        {
+          "elapsed_ns": 217101,
+          "full_output_stable": true,
+          "iteration": 4,
+          "output_bytes": 12972
+        },
+        {
+          "elapsed_ns": 302074,
+          "full_output_stable": true,
+          "iteration": 5,
+          "output_bytes": 12972
+        },
+        {
+          "elapsed_ns": 158088,
+          "full_output_stable": true,
+          "iteration": 6,
+          "output_bytes": 12972
+        },
+        {
+          "elapsed_ns": 280071,
+          "full_output_stable": true,
+          "iteration": 7,
+          "output_bytes": 12972
+        },
+        {
+          "elapsed_ns": 1449723,
+          "full_output_stable": true,
+          "iteration": 8,
+          "output_bytes": 12972
+        },
+        {
+          "elapsed_ns": 174759,
+          "full_output_stable": true,
+          "iteration": 9,
+          "output_bytes": 12972
+        }
+      ],
+      "strategy": "baseline",
+      "workload": "replay_1",
+      "pair": 2,
+      "wait4_peak_rss_kib": 13312,
+      "complete_output_sha256": "704b54a135e21037fb5cc405b2132e0de5f429202724e8592cec1e22c411b9e9",
+      "raw_output_sha256": "704b54a135e21037fb5cc405b2132e0de5f429202724e8592cec1e22c411b9e9",
+      "process_user_seconds": 0.008331,
+      "process_system_seconds": 0.0
+    },
+    {
+      "iterations": 10,
+      "limitations": [
+        "Replayed queue history, not live production load",
+        "Retains first output for full-byte stability checks outside timer",
+        "RSS includes process startup, SQLite, validator, output and retained reference",
+        "OS/filesystem cache uncontrolled; not cold-disk measurement",
+        "No UI or network request timing"
+      ],
+      "process_peak_rss_kib": 3724,
+      "samples": [
+        {
+          "elapsed_ns": 94251,
+          "full_output_stable": true,
+          "iteration": 0,
+          "output_bytes": 12972
+        },
+        {
+          "elapsed_ns": 56098,
+          "full_output_stable": true,
+          "iteration": 1,
+          "output_bytes": 12972
+        },
+        {
+          "elapsed_ns": 40087,
+          "full_output_stable": true,
+          "iteration": 2,
+          "output_bytes": 12972
+        },
+        {
+          "elapsed_ns": 38793,
+          "full_output_stable": true,
+          "iteration": 3,
+          "output_bytes": 12972
+        },
+        {
+          "elapsed_ns": 38323,
+          "full_output_stable": true,
+          "iteration": 4,
+          "output_bytes": 12972
+        },
+        {
+          "elapsed_ns": 38883,
+          "full_output_stable": true,
+          "iteration": 5,
+          "output_bytes": 12972
+        },
+        {
+          "elapsed_ns": 38386,
+          "full_output_stable": true,
+          "iteration": 6,
+          "output_bytes": 12972
+        },
+        {
+          "elapsed_ns": 37979,
+          "full_output_stable": true,
+          "iteration": 7,
+          "output_bytes": 12972
+        },
+        {
+          "elapsed_ns": 37867,
+          "full_output_stable": true,
+          "iteration": 8,
+          "output_bytes": 12972
+        },
+        {
+          "elapsed_ns": 38987,
+          "full_output_stable": true,
+          "iteration": 9,
+          "output_bytes": 12972
+        }
+      ],
+      "strategy": "candidate",
+      "workload": "replay_1",
+      "pair": 2,
+      "wait4_peak_rss_kib": 13312,
+      "complete_output_sha256": "704b54a135e21037fb5cc405b2132e0de5f429202724e8592cec1e22c411b9e9",
+      "raw_output_sha256": "8cb98829a5d77630568a86d88ecc6a246bbc2d1ae80501606e40270202067adc",
+      "process_user_seconds": 0.0029939999999999997,
+      "process_system_seconds": 0.002368
+    },
+    {
+      "iterations": 10,
+      "limitations": [
+        "Replayed queue history, not live production load",
+        "Retains first output for full-byte stability checks outside timer",
+        "RSS includes process startup, SQLite, validator, output and retained reference",
+        "OS/filesystem cache uncontrolled; not cold-disk measurement",
+        "No UI or network request timing"
+      ],
+      "process_peak_rss_kib": 3644,
+      "samples": [
+        {
+          "elapsed_ns": 327418,
+          "full_output_stable": true,
+          "iteration": 0,
+          "output_bytes": 12972
+        },
+        {
+          "elapsed_ns": 66087,
+          "full_output_stable": true,
+          "iteration": 1,
+          "output_bytes": 12972
+        },
+        {
+          "elapsed_ns": 42220,
+          "full_output_stable": true,
+          "iteration": 2,
+          "output_bytes": 12972
+        },
+        {
+          "elapsed_ns": 38044,
+          "full_output_stable": true,
+          "iteration": 3,
+          "output_bytes": 12972
+        },
+        {
+          "elapsed_ns": 39147,
+          "full_output_stable": true,
+          "iteration": 4,
+          "output_bytes": 12972
+        },
+        {
+          "elapsed_ns": 38836,
+          "full_output_stable": true,
+          "iteration": 5,
+          "output_bytes": 12972
+        },
+        {
+          "elapsed_ns": 38995,
+          "full_output_stable": true,
+          "iteration": 6,
+          "output_bytes": 12972
+        },
+        {
+          "elapsed_ns": 38344,
+          "full_output_stable": true,
+          "iteration": 7,
+          "output_bytes": 12972
+        },
+        {
+          "elapsed_ns": 37307,
+          "full_output_stable": true,
+          "iteration": 8,
+          "output_bytes": 12972
+        },
+        {
+          "elapsed_ns": 37027,
+          "full_output_stable": true,
+          "iteration": 9,
+          "output_bytes": 12972
+        }
+      ],
+      "strategy": "candidate",
+      "workload": "replay_1",
+      "pair": 3,
+      "wait4_peak_rss_kib": 13312,
+      "complete_output_sha256": "704b54a135e21037fb5cc405b2132e0de5f429202724e8592cec1e22c411b9e9",
+      "raw_output_sha256": "8cb98829a5d77630568a86d88ecc6a246bbc2d1ae80501606e40270202067adc",
+      "process_user_seconds": 0.008343,
+      "process_system_seconds": 0.0
+    },
+    {
+      "iterations": 10,
+      "limitations": [
+        "Replayed queue history, not live production load",
+        "Retains first output for full-byte stability checks outside timer",
+        "RSS includes process startup, SQLite, validator, output and retained reference",
+        "OS/filesystem cache uncontrolled; not cold-disk measurement",
+        "No UI or network request timing"
+      ],
+      "process_peak_rss_kib": 3840,
+      "samples": [
+        {
+          "elapsed_ns": 291600,
+          "full_output_stable": true,
+          "iteration": 0,
+          "output_bytes": 12972
+        },
+        {
+          "elapsed_ns": 176373,
+          "full_output_stable": true,
+          "iteration": 1,
+          "output_bytes": 12972
+        },
+        {
+          "elapsed_ns": 222065,
+          "full_output_stable": true,
+          "iteration": 2,
+          "output_bytes": 12972
+        },
+        {
+          "elapsed_ns": 577161,
+          "full_output_stable": true,
+          "iteration": 3,
+          "output_bytes": 12972
+        },
+        {
+          "elapsed_ns": 169742,
+          "full_output_stable": true,
+          "iteration": 4,
+          "output_bytes": 12972
+        },
+        {
+          "elapsed_ns": 158810,
+          "full_output_stable": true,
+          "iteration": 5,
+          "output_bytes": 12972
+        },
+        {
+          "elapsed_ns": 155064,
+          "full_output_stable": true,
+          "iteration": 6,
+          "output_bytes": 12972
+        },
+        {
+          "elapsed_ns": 407911,
+          "full_output_stable": true,
+          "iteration": 7,
+          "output_bytes": 12972
+        },
+        {
+          "elapsed_ns": 257974,
+          "full_output_stable": true,
+          "iteration": 8,
+          "output_bytes": 12972
+        },
+        {
+          "elapsed_ns": 161698,
+          "full_output_stable": true,
+          "iteration": 9,
+          "output_bytes": 12972
+        }
+      ],
+      "strategy": "baseline",
+      "workload": "replay_1",
+      "pair": 3,
+      "wait4_peak_rss_kib": 13312,
+      "complete_output_sha256": "704b54a135e21037fb5cc405b2132e0de5f429202724e8592cec1e22c411b9e9",
+      "raw_output_sha256": "704b54a135e21037fb5cc405b2132e0de5f429202724e8592cec1e22c411b9e9",
+      "process_user_seconds": 0.005469,
+      "process_system_seconds": 0.0
+    },
+    {
+      "iterations": 10,
+      "limitations": [
+        "Replayed queue history, not live production load",
+        "Retains first output for full-byte stability checks outside timer",
+        "RSS includes process startup, SQLite, validator, output and retained reference",
+        "OS/filesystem cache uncontrolled; not cold-disk measurement",
+        "No UI or network request timing"
+      ],
+      "process_peak_rss_kib": 3820,
+      "samples": [
+        {
+          "elapsed_ns": 254794,
+          "full_output_stable": true,
+          "iteration": 0,
+          "output_bytes": 12972
+        },
+        {
+          "elapsed_ns": 172290,
+          "full_output_stable": true,
+          "iteration": 1,
+          "output_bytes": 12972
+        },
+        {
+          "elapsed_ns": 190022,
+          "full_output_stable": true,
+          "iteration": 2,
+          "output_bytes": 12972
+        },
+        {
+          "elapsed_ns": 163081,
+          "full_output_stable": true,
+          "iteration": 3,
+          "output_bytes": 12972
+        },
+        {
+          "elapsed_ns": 156788,
+          "full_output_stable": true,
+          "iteration": 4,
+          "output_bytes": 12972
+        },
+        {
+          "elapsed_ns": 198038,
+          "full_output_stable": true,
+          "iteration": 5,
+          "output_bytes": 12972
+        },
+        {
+          "elapsed_ns": 176750,
+          "full_output_stable": true,
+          "iteration": 6,
+          "output_bytes": 12972
+        },
+        {
+          "elapsed_ns": 196183,
+          "full_output_stable": true,
+          "iteration": 7,
+          "output_bytes": 12972
+        },
+        {
+          "elapsed_ns": 152932,
+          "full_output_stable": true,
+          "iteration": 8,
+          "output_bytes": 12972
+        },
+        {
+          "elapsed_ns": 267243,
+          "full_output_stable": true,
+          "iteration": 9,
+          "output_bytes": 12972
+        }
+      ],
+      "strategy": "baseline",
+      "workload": "replay_1",
+      "pair": 4,
+      "wait4_peak_rss_kib": 13312,
+      "complete_output_sha256": "704b54a135e21037fb5cc405b2132e0de5f429202724e8592cec1e22c411b9e9",
+      "raw_output_sha256": "704b54a135e21037fb5cc405b2132e0de5f429202724e8592cec1e22c411b9e9",
+      "process_user_seconds": 0.004994,
+      "process_system_seconds": 0.0
+    },
+    {
+      "iterations": 10,
+      "limitations": [
+        "Replayed queue history, not live production load",
+        "Retains first output for full-byte stability checks outside timer",
+        "RSS includes process startup, SQLite, validator, output and retained reference",
+        "OS/filesystem cache uncontrolled; not cold-disk measurement",
+        "No UI or network request timing"
+      ],
+      "process_peak_rss_kib": 3632,
+      "samples": [
+        {
+          "elapsed_ns": 95419,
+          "full_output_stable": true,
+          "iteration": 0,
+          "output_bytes": 12972
+        },
+        {
+          "elapsed_ns": 55164,
+          "full_output_stable": true,
+          "iteration": 1,
+          "output_bytes": 12972
+        },
+        {
+          "elapsed_ns": 41013,
+          "full_output_stable": true,
+          "iteration": 2,
+          "output_bytes": 12972
+        },
+        {
+          "elapsed_ns": 39132,
+          "full_output_stable": true,
+          "iteration": 3,
+          "output_bytes": 12972
+        },
+        {
+          "elapsed_ns": 37312,
+          "full_output_stable": true,
+          "iteration": 4,
+          "output_bytes": 12972
+        },
+        {
+          "elapsed_ns": 38999,
+          "full_output_stable": true,
+          "iteration": 5,
+          "output_bytes": 12972
+        },
+        {
+          "elapsed_ns": 37315,
+          "full_output_stable": true,
+          "iteration": 6,
+          "output_bytes": 12972
+        },
+        {
+          "elapsed_ns": 67867,
+          "full_output_stable": true,
+          "iteration": 7,
+          "output_bytes": 12972
+        },
+        {
+          "elapsed_ns": 40377,
+          "full_output_stable": true,
+          "iteration": 8,
+          "output_bytes": 12972
+        },
+        {
+          "elapsed_ns": 36955,
+          "full_output_stable": true,
+          "iteration": 9,
+          "output_bytes": 12972
+        }
+      ],
+      "strategy": "candidate",
+      "workload": "replay_1",
+      "pair": 4,
+      "wait4_peak_rss_kib": 13312,
+      "complete_output_sha256": "704b54a135e21037fb5cc405b2132e0de5f429202724e8592cec1e22c411b9e9",
+      "raw_output_sha256": "8cb98829a5d77630568a86d88ecc6a246bbc2d1ae80501606e40270202067adc",
+      "process_user_seconds": 0.002822,
+      "process_system_seconds": 0.0
+    },
+    {
+      "iterations": 10,
+      "limitations": [
+        "Replayed queue history, not live production load",
+        "Retains first output for full-byte stability checks outside timer",
+        "RSS includes process startup, SQLite, validator, output and retained reference",
+        "OS/filesystem cache uncontrolled; not cold-disk measurement",
+        "No UI or network request timing"
+      ],
+      "process_peak_rss_kib": 5084,
+      "samples": [
+        {
+          "elapsed_ns": 3800107,
+          "full_output_stable": true,
+          "iteration": 0,
+          "output_bytes": 129236
+        },
+        {
+          "elapsed_ns": 3553407,
+          "full_output_stable": true,
+          "iteration": 1,
+          "output_bytes": 129236
+        },
+        {
+          "elapsed_ns": 3821914,
+          "full_output_stable": true,
+          "iteration": 2,
+          "output_bytes": 129236
+        },
+        {
+          "elapsed_ns": 3208032,
+          "full_output_stable": true,
+          "iteration": 3,
+          "output_bytes": 129236
+        },
+        {
+          "elapsed_ns": 6724851,
+          "full_output_stable": true,
+          "iteration": 4,
+          "output_bytes": 129236
+        },
+        {
+          "elapsed_ns": 7828979,
+          "full_output_stable": true,
+          "iteration": 5,
+          "output_bytes": 129236
+        },
+        {
+          "elapsed_ns": 2367546,
+          "full_output_stable": true,
+          "iteration": 6,
+          "output_bytes": 129236
+        },
+        {
+          "elapsed_ns": 3019659,
+          "full_output_stable": true,
+          "iteration": 7,
+          "output_bytes": 129236
+        },
+        {
+          "elapsed_ns": 3570594,
+          "full_output_stable": true,
+          "iteration": 8,
+          "output_bytes": 129236
+        },
+        {
+          "elapsed_ns": 3465626,
+          "full_output_stable": true,
+          "iteration": 9,
+          "output_bytes": 129236
+        }
+      ],
+      "strategy": "baseline",
+      "workload": "replay_10",
+      "pair": 0,
+      "wait4_peak_rss_kib": 13440,
+      "complete_output_sha256": "3cfcc6db6df522dca69d897e4d86155954ce3b3f72e994e5ec848e7c0429a96e",
+      "raw_output_sha256": "3cfcc6db6df522dca69d897e4d86155954ce3b3f72e994e5ec848e7c0429a96e",
+      "process_user_seconds": 0.035379,
+      "process_system_seconds": 0.011116
+    },
+    {
+      "iterations": 10,
+      "limitations": [
+        "Replayed queue history, not live production load",
+        "Retains first output for full-byte stability checks outside timer",
+        "RSS includes process startup, SQLite, validator, output and retained reference",
+        "OS/filesystem cache uncontrolled; not cold-disk measurement",
+        "No UI or network request timing"
+      ],
+      "process_peak_rss_kib": 4104,
+      "samples": [
+        {
+          "elapsed_ns": 523948,
+          "full_output_stable": true,
+          "iteration": 0,
+          "output_bytes": 129236
+        },
+        {
+          "elapsed_ns": 1040366,
+          "full_output_stable": true,
+          "iteration": 1,
+          "output_bytes": 129236
+        },
+        {
+          "elapsed_ns": 2094215,
+          "full_output_stable": true,
+          "iteration": 2,
+          "output_bytes": 129236
+        },
+        {
+          "elapsed_ns": 273540,
+          "full_output_stable": true,
+          "iteration": 3,
+          "output_bytes": 129236
+        },
+        {
+          "elapsed_ns": 240702,
+          "full_output_stable": true,
+          "iteration": 4,
+          "output_bytes": 129236
+        },
+        {
+          "elapsed_ns": 239259,
+          "full_output_stable": true,
+          "iteration": 5,
+          "output_bytes": 129236
+        },
+        {
+          "elapsed_ns": 266780,
+          "full_output_stable": true,
+          "iteration": 6,
+          "output_bytes": 129236
+        },
+        {
+          "elapsed_ns": 258170,
+          "full_output_stable": true,
+          "iteration": 7,
+          "output_bytes": 129236
+        },
+        {
+          "elapsed_ns": 949622,
+          "full_output_stable": true,
+          "iteration": 8,
+          "output_bytes": 129236
+        },
+        {
+          "elapsed_ns": 359312,
+          "full_output_stable": true,
+          "iteration": 9,
+          "output_bytes": 129236
+        }
+      ],
+      "strategy": "candidate",
+      "workload": "replay_10",
+      "pair": 0,
+      "wait4_peak_rss_kib": 13824,
+      "complete_output_sha256": "3cfcc6db6df522dca69d897e4d86155954ce3b3f72e994e5ec848e7c0429a96e",
+      "raw_output_sha256": "453f230c77c6be36ffd396bd2404a388129ca4dcf9aa335ea12ecae18d41d323",
+      "process_user_seconds": 0.007486,
+      "process_system_seconds": 0.0027819999999999998
+    },
+    {
+      "iterations": 10,
+      "limitations": [
+        "Replayed queue history, not live production load",
+        "Retains first output for full-byte stability checks outside timer",
+        "RSS includes process startup, SQLite, validator, output and retained reference",
+        "OS/filesystem cache uncontrolled; not cold-disk measurement",
+        "No UI or network request timing"
+      ],
+      "process_peak_rss_kib": 3988,
+      "samples": [
+        {
+          "elapsed_ns": 1085275,
+          "full_output_stable": true,
+          "iteration": 0,
+          "output_bytes": 129236
+        },
+        {
+          "elapsed_ns": 1298058,
+          "full_output_stable": true,
+          "iteration": 1,
+          "output_bytes": 129236
+        },
+        {
+          "elapsed_ns": 533210,
+          "full_output_stable": true,
+          "iteration": 2,
+          "output_bytes": 129236
+        },
+        {
+          "elapsed_ns": 376239,
+          "full_output_stable": true,
+          "iteration": 3,
+          "output_bytes": 129236
+        },
+        {
+          "elapsed_ns": 286428,
+          "full_output_stable": true,
+          "iteration": 4,
+          "output_bytes": 129236
+        },
+        {
+          "elapsed_ns": 394605,
+          "full_output_stable": true,
+          "iteration": 5,
+          "output_bytes": 129236
+        },
+        {
+          "elapsed_ns": 250166,
+          "full_output_stable": true,
+          "iteration": 6,
+          "output_bytes": 129236
+        },
+        {
+          "elapsed_ns": 305832,
+          "full_output_stable": true,
+          "iteration": 7,
+          "output_bytes": 129236
+        },
+        {
+          "elapsed_ns": 1048804,
+          "full_output_stable": true,
+          "iteration": 8,
+          "output_bytes": 129236
+        },
+        {
+          "elapsed_ns": 541714,
+          "full_output_stable": true,
+          "iteration": 9,
+          "output_bytes": 129236
+        }
+      ],
+      "strategy": "candidate",
+      "workload": "replay_10",
+      "pair": 1,
+      "wait4_peak_rss_kib": 14336,
+      "complete_output_sha256": "3cfcc6db6df522dca69d897e4d86155954ce3b3f72e994e5ec848e7c0429a96e",
+      "raw_output_sha256": "453f230c77c6be36ffd396bd2404a388129ca4dcf9aa335ea12ecae18d41d323",
+      "process_user_seconds": 0.004129,
+      "process_system_seconds": 0.005046999999999999
+    },
+    {
+      "iterations": 10,
+      "limitations": [
+        "Replayed queue history, not live production load",
+        "Retains first output for full-byte stability checks outside timer",
+        "RSS includes process startup, SQLite, validator, output and retained reference",
+        "OS/filesystem cache uncontrolled; not cold-disk measurement",
+        "No UI or network request timing"
+      ],
+      "process_peak_rss_kib": 5024,
+      "samples": [
+        {
+          "elapsed_ns": 3026628,
+          "full_output_stable": true,
+          "iteration": 0,
+          "output_bytes": 129236
+        },
+        {
+          "elapsed_ns": 2813140,
+          "full_output_stable": true,
+          "iteration": 1,
+          "output_bytes": 129236
+        },
+        {
+          "elapsed_ns": 3635083,
+          "full_output_stable": true,
+          "iteration": 2,
+          "output_bytes": 129236
+        },
+        {
+          "elapsed_ns": 3922370,
+          "full_output_stable": true,
+          "iteration": 3,
+          "output_bytes": 129236
+        },
+        {
+          "elapsed_ns": 2653037,
+          "full_output_stable": true,
+          "iteration": 4,
+          "output_bytes": 129236
+        },
+        {
+          "elapsed_ns": 2507963,
+          "full_output_stable": true,
+          "iteration": 5,
+          "output_bytes": 129236
+        },
+        {
+          "elapsed_ns": 4160173,
+          "full_output_stable": true,
+          "iteration": 6,
+          "output_bytes": 129236
+        },
+        {
+          "elapsed_ns": 2934709,
+          "full_output_stable": true,
+          "iteration": 7,
+          "output_bytes": 129236
+        },
+        {
+          "elapsed_ns": 3451091,
+          "full_output_stable": true,
+          "iteration": 8,
+          "output_bytes": 129236
+        },
+        {
+          "elapsed_ns": 3995409,
+          "full_output_stable": true,
+          "iteration": 9,
+          "output_bytes": 129236
+        }
+      ],
+      "strategy": "baseline",
+      "workload": "replay_10",
+      "pair": 1,
+      "wait4_peak_rss_kib": 14336,
+      "complete_output_sha256": "3cfcc6db6df522dca69d897e4d86155954ce3b3f72e994e5ec848e7c0429a96e",
+      "raw_output_sha256": "3cfcc6db6df522dca69d897e4d86155954ce3b3f72e994e5ec848e7c0429a96e",
+      "process_user_seconds": 0.034464,
+      "process_system_seconds": 0.0031119999999999997
+    },
+    {
+      "iterations": 10,
+      "limitations": [
+        "Replayed queue history, not live production load",
+        "Retains first output for full-byte stability checks outside timer",
+        "RSS includes process startup, SQLite, validator, output and retained reference",
+        "OS/filesystem cache uncontrolled; not cold-disk measurement",
+        "No UI or network request timing"
+      ],
+      "process_peak_rss_kib": 5056,
+      "samples": [
+        {
+          "elapsed_ns": 3450798,
+          "full_output_stable": true,
+          "iteration": 0,
+          "output_bytes": 129236
+        },
+        {
+          "elapsed_ns": 2214017,
+          "full_output_stable": true,
+          "iteration": 1,
+          "output_bytes": 129236
+        },
+        {
+          "elapsed_ns": 2629558,
+          "full_output_stable": true,
+          "iteration": 2,
+          "output_bytes": 129236
+        },
+        {
+          "elapsed_ns": 3790790,
+          "full_output_stable": true,
+          "iteration": 3,
+          "output_bytes": 129236
+        },
+        {
+          "elapsed_ns": 2806999,
+          "full_output_stable": true,
+          "iteration": 4,
+          "output_bytes": 129236
+        },
+        {
+          "elapsed_ns": 2901902,
+          "full_output_stable": true,
+          "iteration": 5,
+          "output_bytes": 129236
+        },
+        {
+          "elapsed_ns": 3960153,
+          "full_output_stable": true,
+          "iteration": 6,
+          "output_bytes": 129236
+        },
+        {
+          "elapsed_ns": 3634020,
+          "full_output_stable": true,
+          "iteration": 7,
+          "output_bytes": 129236
+        },
+        {
+          "elapsed_ns": 4659808,
+          "full_output_stable": true,
+          "iteration": 8,
+          "output_bytes": 129236
+        },
+        {
+          "elapsed_ns": 4980933,
+          "full_output_stable": true,
+          "iteration": 9,
+          "output_bytes": 129236
+        }
+      ],
+      "strategy": "baseline",
+      "workload": "replay_10",
+      "pair": 2,
+      "wait4_peak_rss_kib": 14336,
+      "complete_output_sha256": "3cfcc6db6df522dca69d897e4d86155954ce3b3f72e994e5ec848e7c0429a96e",
+      "raw_output_sha256": "3cfcc6db6df522dca69d897e4d86155954ce3b3f72e994e5ec848e7c0429a96e",
+      "process_user_seconds": 0.034845,
+      "process_system_seconds": 0.007062
+    },
+    {
+      "iterations": 10,
+      "limitations": [
+        "Replayed queue history, not live production load",
+        "Retains first output for full-byte stability checks outside timer",
+        "RSS includes process startup, SQLite, validator, output and retained reference",
+        "OS/filesystem cache uncontrolled; not cold-disk measurement",
+        "No UI or network request timing"
+      ],
+      "process_peak_rss_kib": 4004,
+      "samples": [
+        {
+          "elapsed_ns": 603872,
+          "full_output_stable": true,
+          "iteration": 0,
+          "output_bytes": 129236
+        },
+        {
+          "elapsed_ns": 454299,
+          "full_output_stable": true,
+          "iteration": 1,
+          "output_bytes": 129236
+        },
+        {
+          "elapsed_ns": 275362,
+          "full_output_stable": true,
+          "iteration": 2,
+          "output_bytes": 129236
+        },
+        {
+          "elapsed_ns": 389159,
+          "full_output_stable": true,
+          "iteration": 3,
+          "output_bytes": 129236
+        },
+        {
+          "elapsed_ns": 465672,
+          "full_output_stable": true,
+          "iteration": 4,
+          "output_bytes": 129236
+        },
+        {
+          "elapsed_ns": 247612,
+          "full_output_stable": true,
+          "iteration": 5,
+          "output_bytes": 129236
+        },
+        {
+          "elapsed_ns": 368883,
+          "full_output_stable": true,
+          "iteration": 6,
+          "output_bytes": 129236
+        },
+        {
+          "elapsed_ns": 251482,
+          "full_output_stable": true,
+          "iteration": 7,
+          "output_bytes": 129236
+        },
+        {
+          "elapsed_ns": 242471,
+          "full_output_stable": true,
+          "iteration": 8,
+          "output_bytes": 129236
+        },
+        {
+          "elapsed_ns": 238909,
+          "full_output_stable": true,
+          "iteration": 9,
+          "output_bytes": 129236
+        }
+      ],
+      "strategy": "candidate",
+      "workload": "replay_10",
+      "pair": 2,
+      "wait4_peak_rss_kib": 14336,
+      "complete_output_sha256": "3cfcc6db6df522dca69d897e4d86155954ce3b3f72e994e5ec848e7c0429a96e",
+      "raw_output_sha256": "453f230c77c6be36ffd396bd2404a388129ca4dcf9aa335ea12ecae18d41d323",
+      "process_user_seconds": 0.006928999999999999,
+      "process_system_seconds": 0.0
+    },
+    {
+      "iterations": 10,
+      "limitations": [
+        "Replayed queue history, not live production load",
+        "Retains first output for full-byte stability checks outside timer",
+        "RSS includes process startup, SQLite, validator, output and retained reference",
+        "OS/filesystem cache uncontrolled; not cold-disk measurement",
+        "No UI or network request timing"
+      ],
+      "process_peak_rss_kib": 4036,
+      "samples": [
+        {
+          "elapsed_ns": 449460,
+          "full_output_stable": true,
+          "iteration": 0,
+          "output_bytes": 129236
+        },
+        {
+          "elapsed_ns": 599837,
+          "full_output_stable": true,
+          "iteration": 1,
+          "output_bytes": 129236
+        },
+        {
+          "elapsed_ns": 322273,
+          "full_output_stable": true,
+          "iteration": 2,
+          "output_bytes": 129236
+        },
+        {
+          "elapsed_ns": 631408,
+          "full_output_stable": true,
+          "iteration": 3,
+          "output_bytes": 129236
+        },
+        {
+          "elapsed_ns": 289899,
+          "full_output_stable": true,
+          "iteration": 4,
+          "output_bytes": 129236
+        },
+        {
+          "elapsed_ns": 240308,
+          "full_output_stable": true,
+          "iteration": 5,
+          "output_bytes": 129236
+        },
+        {
+          "elapsed_ns": 240983,
+          "full_output_stable": true,
+          "iteration": 6,
+          "output_bytes": 129236
+        },
+        {
+          "elapsed_ns": 253632,
+          "full_output_stable": true,
+          "iteration": 7,
+          "output_bytes": 129236
+        },
+        {
+          "elapsed_ns": 346867,
+          "full_output_stable": true,
+          "iteration": 8,
+          "output_bytes": 129236
+        },
+        {
+          "elapsed_ns": 240809,
+          "full_output_stable": true,
+          "iteration": 9,
+          "output_bytes": 129236
+        }
+      ],
+      "strategy": "candidate",
+      "workload": "replay_10",
+      "pair": 3,
+      "wait4_peak_rss_kib": 14464,
+      "complete_output_sha256": "3cfcc6db6df522dca69d897e4d86155954ce3b3f72e994e5ec848e7c0429a96e",
+      "raw_output_sha256": "453f230c77c6be36ffd396bd2404a388129ca4dcf9aa335ea12ecae18d41d323",
+      "process_user_seconds": 0.006673999999999999,
+      "process_system_seconds": 0.0
+    },
+    {
+      "iterations": 10,
+      "limitations": [
+        "Replayed queue history, not live production load",
+        "Retains first output for full-byte stability checks outside timer",
+        "RSS includes process startup, SQLite, validator, output and retained reference",
+        "OS/filesystem cache uncontrolled; not cold-disk measurement",
+        "No UI or network request timing"
+      ],
+      "process_peak_rss_kib": 5092,
+      "samples": [
+        {
+          "elapsed_ns": 8062738,
+          "full_output_stable": true,
+          "iteration": 0,
+          "output_bytes": 129236
+        },
+        {
+          "elapsed_ns": 7073792,
+          "full_output_stable": true,
+          "iteration": 1,
+          "output_bytes": 129236
+        },
+        {
+          "elapsed_ns": 2160376,
+          "full_output_stable": true,
+          "iteration": 2,
+          "output_bytes": 129236
+        },
+        {
+          "elapsed_ns": 2291215,
+          "full_output_stable": true,
+          "iteration": 3,
+          "output_bytes": 129236
+        },
+        {
+          "elapsed_ns": 2190970,
+          "full_output_stable": true,
+          "iteration": 4,
+          "output_bytes": 129236
+        },
+        {
+          "elapsed_ns": 2195257,
+          "full_output_stable": true,
+          "iteration": 5,
+          "output_bytes": 129236
+        },
+        {
+          "elapsed_ns": 3367886,
+          "full_output_stable": true,
+          "iteration": 6,
+          "output_bytes": 129236
+        },
+        {
+          "elapsed_ns": 2220003,
+          "full_output_stable": true,
+          "iteration": 7,
+          "output_bytes": 129236
+        },
+        {
+          "elapsed_ns": 2165129,
+          "full_output_stable": true,
+          "iteration": 8,
+          "output_bytes": 129236
+        },
+        {
+          "elapsed_ns": 1820312,
+          "full_output_stable": true,
+          "iteration": 9,
+          "output_bytes": 129236
+        }
+      ],
+      "strategy": "baseline",
+      "workload": "replay_10",
+      "pair": 3,
+      "wait4_peak_rss_kib": 14464,
+      "complete_output_sha256": "3cfcc6db6df522dca69d897e4d86155954ce3b3f72e994e5ec848e7c0429a96e",
+      "raw_output_sha256": "3cfcc6db6df522dca69d897e4d86155954ce3b3f72e994e5ec848e7c0429a96e",
+      "process_user_seconds": 0.03725,
+      "process_system_seconds": 0.0
+    },
+    {
+      "iterations": 10,
+      "limitations": [
+        "Replayed queue history, not live production load",
+        "Retains first output for full-byte stability checks outside timer",
+        "RSS includes process startup, SQLite, validator, output and retained reference",
+        "OS/filesystem cache uncontrolled; not cold-disk measurement",
+        "No UI or network request timing"
+      ],
+      "process_peak_rss_kib": 5020,
+      "samples": [
+        {
+          "elapsed_ns": 2337926,
+          "full_output_stable": true,
+          "iteration": 0,
+          "output_bytes": 129236
+        },
+        {
+          "elapsed_ns": 1907463,
+          "full_output_stable": true,
+          "iteration": 1,
+          "output_bytes": 129236
+        },
+        {
+          "elapsed_ns": 1736014,
+          "full_output_stable": true,
+          "iteration": 2,
+          "output_bytes": 129236
+        },
+        {
+          "elapsed_ns": 2084677,
+          "full_output_stable": true,
+          "iteration": 3,
+          "output_bytes": 129236
+        },
+        {
+          "elapsed_ns": 2250038,
+          "full_output_stable": true,
+          "iteration": 4,
+          "output_bytes": 129236
+        },
+        {
+          "elapsed_ns": 2016248,
+          "full_output_stable": true,
+          "iteration": 5,
+          "output_bytes": 129236
+        },
+        {
+          "elapsed_ns": 2107944,
+          "full_output_stable": true,
+          "iteration": 6,
+          "output_bytes": 129236
+        },
+        {
+          "elapsed_ns": 2527320,
+          "full_output_stable": true,
+          "iteration": 7,
+          "output_bytes": 129236
+        },
+        {
+          "elapsed_ns": 3406859,
+          "full_output_stable": true,
+          "iteration": 8,
+          "output_bytes": 129236
+        },
+        {
+          "elapsed_ns": 2758618,
+          "full_output_stable": true,
+          "iteration": 9,
+          "output_bytes": 129236
+        }
+      ],
+      "strategy": "baseline",
+      "workload": "replay_10",
+      "pair": 4,
+      "wait4_peak_rss_kib": 14464,
+      "complete_output_sha256": "3cfcc6db6df522dca69d897e4d86155954ce3b3f72e994e5ec848e7c0429a96e",
+      "raw_output_sha256": "3cfcc6db6df522dca69d897e4d86155954ce3b3f72e994e5ec848e7c0429a96e",
+      "process_user_seconds": 0.021734,
+      "process_system_seconds": 0.0048779999999999995
+    },
+    {
+      "iterations": 10,
+      "limitations": [
+        "Replayed queue history, not live production load",
+        "Retains first output for full-byte stability checks outside timer",
+        "RSS includes process startup, SQLite, validator, output and retained reference",
+        "OS/filesystem cache uncontrolled; not cold-disk measurement",
+        "No UI or network request timing"
+      ],
+      "process_peak_rss_kib": 4016,
+      "samples": [
+        {
+          "elapsed_ns": 903041,
+          "full_output_stable": true,
+          "iteration": 0,
+          "output_bytes": 129236
+        },
+        {
+          "elapsed_ns": 359670,
+          "full_output_stable": true,
+          "iteration": 1,
+          "output_bytes": 129236
+        },
+        {
+          "elapsed_ns": 277717,
+          "full_output_stable": true,
+          "iteration": 2,
+          "output_bytes": 129236
+        },
+        {
+          "elapsed_ns": 241944,
+          "full_output_stable": true,
+          "iteration": 3,
+          "output_bytes": 129236
+        },
+        {
+          "elapsed_ns": 245358,
+          "full_output_stable": true,
+          "iteration": 4,
+          "output_bytes": 129236
+        },
+        {
+          "elapsed_ns": 1902620,
+          "full_output_stable": true,
+          "iteration": 5,
+          "output_bytes": 129236
+        },
+        {
+          "elapsed_ns": 324734,
+          "full_output_stable": true,
+          "iteration": 6,
+          "output_bytes": 129236
+        },
+        {
+          "elapsed_ns": 258484,
+          "full_output_stable": true,
+          "iteration": 7,
+          "output_bytes": 129236
+        },
+        {
+          "elapsed_ns": 241594,
+          "full_output_stable": true,
+          "iteration": 8,
+          "output_bytes": 129236
+        },
+        {
+          "elapsed_ns": 241657,
+          "full_output_stable": true,
+          "iteration": 9,
+          "output_bytes": 129236
+        }
+      ],
+      "strategy": "candidate",
+      "workload": "replay_10",
+      "pair": 4,
+      "wait4_peak_rss_kib": 14464,
+      "complete_output_sha256": "3cfcc6db6df522dca69d897e4d86155954ce3b3f72e994e5ec848e7c0429a96e",
+      "raw_output_sha256": "453f230c77c6be36ffd396bd2404a388129ca4dcf9aa335ea12ecae18d41d323",
+      "process_user_seconds": 0.007423,
+      "process_system_seconds": 0.00324
+    },
+    {
+      "iterations": 10,
+      "limitations": [
+        "Replayed queue history, not live production load",
+        "Retains first output for full-byte stability checks outside timer",
+        "RSS includes process startup, SQLite, validator, output and retained reference",
+        "OS/filesystem cache uncontrolled; not cold-disk measurement",
+        "No UI or network request timing"
+      ],
+      "process_peak_rss_kib": 11196,
+      "samples": [
+        {
+          "elapsed_ns": 12215031,
+          "full_output_stable": true,
+          "iteration": 0,
+          "output_bytes": 645996
+        },
+        {
+          "elapsed_ns": 9821307,
+          "full_output_stable": true,
+          "iteration": 1,
+          "output_bytes": 645996
+        },
+        {
+          "elapsed_ns": 11494876,
+          "full_output_stable": true,
+          "iteration": 2,
+          "output_bytes": 645996
+        },
+        {
+          "elapsed_ns": 9845708,
+          "full_output_stable": true,
+          "iteration": 3,
+          "output_bytes": 645996
+        },
+        {
+          "elapsed_ns": 11631676,
+          "full_output_stable": true,
+          "iteration": 4,
+          "output_bytes": 645996
+        },
+        {
+          "elapsed_ns": 10912983,
+          "full_output_stable": true,
+          "iteration": 5,
+          "output_bytes": 645996
+        },
+        {
+          "elapsed_ns": 8656289,
+          "full_output_stable": true,
+          "iteration": 6,
+          "output_bytes": 645996
+        },
+        {
+          "elapsed_ns": 10458145,
+          "full_output_stable": true,
+          "iteration": 7,
+          "output_bytes": 645996
+        },
+        {
+          "elapsed_ns": 12026127,
+          "full_output_stable": true,
+          "iteration": 8,
+          "output_bytes": 645996
+        },
+        {
+          "elapsed_ns": 10681251,
+          "full_output_stable": true,
+          "iteration": 9,
+          "output_bytes": 645996
+        }
+      ],
+      "strategy": "baseline",
+      "workload": "replay_50",
+      "pair": 0,
+      "wait4_peak_rss_kib": 14464,
+      "complete_output_sha256": "a523198628c5aad62568425063fa1571b509fccd65aacd4b86949cc72a596ea7",
+      "raw_output_sha256": "a523198628c5aad62568425063fa1571b509fccd65aacd4b86949cc72a596ea7",
+      "process_user_seconds": 0.07971,
+      "process_system_seconds": 0.036591
+    },
+    {
+      "iterations": 10,
+      "limitations": [
+        "Replayed queue history, not live production load",
+        "Retains first output for full-byte stability checks outside timer",
+        "RSS includes process startup, SQLite, validator, output and retained reference",
+        "OS/filesystem cache uncontrolled; not cold-disk measurement",
+        "No UI or network request timing"
+      ],
+      "process_peak_rss_kib": 5568,
+      "samples": [
+        {
+          "elapsed_ns": 2606994,
+          "full_output_stable": true,
+          "iteration": 0,
+          "output_bytes": 645996
+        },
+        {
+          "elapsed_ns": 1550272,
+          "full_output_stable": true,
+          "iteration": 1,
+          "output_bytes": 645996
+        },
+        {
+          "elapsed_ns": 2106641,
+          "full_output_stable": true,
+          "iteration": 2,
+          "output_bytes": 645996
+        },
+        {
+          "elapsed_ns": 2181189,
+          "full_output_stable": true,
+          "iteration": 3,
+          "output_bytes": 645996
+        },
+        {
+          "elapsed_ns": 4614130,
+          "full_output_stable": true,
+          "iteration": 4,
+          "output_bytes": 645996
+        },
+        {
+          "elapsed_ns": 1824695,
+          "full_output_stable": true,
+          "iteration": 5,
+          "output_bytes": 645996
+        },
+        {
+          "elapsed_ns": 1529580,
+          "full_output_stable": true,
+          "iteration": 6,
+          "output_bytes": 645996
+        },
+        {
+          "elapsed_ns": 1881912,
+          "full_output_stable": true,
+          "iteration": 7,
+          "output_bytes": 645996
+        },
+        {
+          "elapsed_ns": 2254323,
+          "full_output_stable": true,
+          "iteration": 8,
+          "output_bytes": 645996
+        },
+        {
+          "elapsed_ns": 2448512,
+          "full_output_stable": true,
+          "iteration": 9,
+          "output_bytes": 645996
+        }
+      ],
+      "strategy": "candidate",
+      "workload": "replay_50",
+      "pair": 0,
+      "wait4_peak_rss_kib": 17704,
+      "complete_output_sha256": "a523198628c5aad62568425063fa1571b509fccd65aacd4b86949cc72a596ea7",
+      "raw_output_sha256": "45f7e51403242f5ee67767607eeec942e6e3eee4ce55d310edbd2959e718b76c",
+      "process_user_seconds": 0.021825,
+      "process_system_seconds": 0.0068189999999999995
+    },
+    {
+      "iterations": 10,
+      "limitations": [
+        "Replayed queue history, not live production load",
+        "Retains first output for full-byte stability checks outside timer",
+        "RSS includes process startup, SQLite, validator, output and retained reference",
+        "OS/filesystem cache uncontrolled; not cold-disk measurement",
+        "No UI or network request timing"
+      ],
+      "process_peak_rss_kib": 5480,
+      "samples": [
+        {
+          "elapsed_ns": 3146521,
+          "full_output_stable": true,
+          "iteration": 0,
+          "output_bytes": 645996
+        },
+        {
+          "elapsed_ns": 2233053,
+          "full_output_stable": true,
+          "iteration": 1,
+          "output_bytes": 645996
+        },
+        {
+          "elapsed_ns": 1950767,
+          "full_output_stable": true,
+          "iteration": 2,
+          "output_bytes": 645996
+        },
+        {
+          "elapsed_ns": 3061802,
+          "full_output_stable": true,
+          "iteration": 3,
+          "output_bytes": 645996
+        },
+        {
+          "elapsed_ns": 2790433,
+          "full_output_stable": true,
+          "iteration": 4,
+          "output_bytes": 645996
+        },
+        {
+          "elapsed_ns": 1931867,
+          "full_output_stable": true,
+          "iteration": 5,
+          "output_bytes": 645996
+        },
+        {
+          "elapsed_ns": 2296138,
+          "full_output_stable": true,
+          "iteration": 6,
+          "output_bytes": 645996
+        },
+        {
+          "elapsed_ns": 2580113,
+          "full_output_stable": true,
+          "iteration": 7,
+          "output_bytes": 645996
+        },
+        {
+          "elapsed_ns": 1693235,
+          "full_output_stable": true,
+          "iteration": 8,
+          "output_bytes": 645996
+        },
+        {
+          "elapsed_ns": 2787207,
+          "full_output_stable": true,
+          "iteration": 9,
+          "output_bytes": 645996
+        }
+      ],
+      "strategy": "candidate",
+      "workload": "replay_50",
+      "pair": 1,
+      "wait4_peak_rss_kib": 20000,
+      "complete_output_sha256": "a523198628c5aad62568425063fa1571b509fccd65aacd4b86949cc72a596ea7",
+      "raw_output_sha256": "45f7e51403242f5ee67767607eeec942e6e3eee4ce55d310edbd2959e718b76c",
+      "process_user_seconds": 0.018098,
+      "process_system_seconds": 0.011394
+    },
+    {
+      "iterations": 10,
+      "limitations": [
+        "Replayed queue history, not live production load",
+        "Retains first output for full-byte stability checks outside timer",
+        "RSS includes process startup, SQLite, validator, output and retained reference",
+        "OS/filesystem cache uncontrolled; not cold-disk measurement",
+        "No UI or network request timing"
+      ],
+      "process_peak_rss_kib": 11148,
+      "samples": [
+        {
+          "elapsed_ns": 16302345,
+          "full_output_stable": true,
+          "iteration": 0,
+          "output_bytes": 645996
+        },
+        {
+          "elapsed_ns": 16722537,
+          "full_output_stable": true,
+          "iteration": 1,
+          "output_bytes": 645996
+        },
+        {
+          "elapsed_ns": 17168049,
+          "full_output_stable": true,
+          "iteration": 2,
+          "output_bytes": 645996
+        },
+        {
+          "elapsed_ns": 17258680,
+          "full_output_stable": true,
+          "iteration": 3,
+          "output_bytes": 645996
+        },
+        {
+          "elapsed_ns": 17078611,
+          "full_output_stable": true,
+          "iteration": 4,
+          "output_bytes": 645996
+        },
+        {
+          "elapsed_ns": 15961086,
+          "full_output_stable": true,
+          "iteration": 5,
+          "output_bytes": 645996
+        },
+        {
+          "elapsed_ns": 14032214,
+          "full_output_stable": true,
+          "iteration": 6,
+          "output_bytes": 645996
+        },
+        {
+          "elapsed_ns": 18239463,
+          "full_output_stable": true,
+          "iteration": 7,
+          "output_bytes": 645996
+        },
+        {
+          "elapsed_ns": 14300062,
+          "full_output_stable": true,
+          "iteration": 8,
+          "output_bytes": 645996
+        },
+        {
+          "elapsed_ns": 15687041,
+          "full_output_stable": true,
+          "iteration": 9,
+          "output_bytes": 645996
+        }
+      ],
+      "strategy": "baseline",
+      "workload": "replay_50",
+      "pair": 1,
+      "wait4_peak_rss_kib": 20836,
+      "complete_output_sha256": "a523198628c5aad62568425063fa1571b509fccd65aacd4b86949cc72a596ea7",
+      "raw_output_sha256": "a523198628c5aad62568425063fa1571b509fccd65aacd4b86949cc72a596ea7",
+      "process_user_seconds": 0.138734,
+      "process_system_seconds": 0.034018
+    },
+    {
+      "iterations": 10,
+      "limitations": [
+        "Replayed queue history, not live production load",
+        "Retains first output for full-byte stability checks outside timer",
+        "RSS includes process startup, SQLite, validator, output and retained reference",
+        "OS/filesystem cache uncontrolled; not cold-disk measurement",
+        "No UI or network request timing"
+      ],
+      "process_peak_rss_kib": 11180,
+      "samples": [
+        {
+          "elapsed_ns": 33312579,
+          "full_output_stable": true,
+          "iteration": 0,
+          "output_bytes": 645996
+        },
+        {
+          "elapsed_ns": 25816315,
+          "full_output_stable": true,
+          "iteration": 1,
+          "output_bytes": 645996
+        },
+        {
+          "elapsed_ns": 16172970,
+          "full_output_stable": true,
+          "iteration": 2,
+          "output_bytes": 645996
+        },
+        {
+          "elapsed_ns": 14545437,
+          "full_output_stable": true,
+          "iteration": 3,
+          "output_bytes": 645996
+        },
+        {
+          "elapsed_ns": 14491555,
+          "full_output_stable": true,
+          "iteration": 4,
+          "output_bytes": 645996
+        },
+        {
+          "elapsed_ns": 14431699,
+          "full_output_stable": true,
+          "iteration": 5,
+          "output_bytes": 645996
+        },
+        {
+          "elapsed_ns": 16010313,
+          "full_output_stable": true,
+          "iteration": 6,
+          "output_bytes": 645996
+        },
+        {
+          "elapsed_ns": 19116238,
+          "full_output_stable": true,
+          "iteration": 7,
+          "output_bytes": 645996
+        },
+        {
+          "elapsed_ns": 15096563,
+          "full_output_stable": true,
+          "iteration": 8,
+          "output_bytes": 645996
+        },
+        {
+          "elapsed_ns": 13922078,
+          "full_output_stable": true,
+          "iteration": 9,
+          "output_bytes": 645996
+        }
+      ],
+      "strategy": "baseline",
+      "workload": "replay_50",
+      "pair": 2,
+      "wait4_peak_rss_kib": 20944,
+      "complete_output_sha256": "a523198628c5aad62568425063fa1571b509fccd65aacd4b86949cc72a596ea7",
+      "raw_output_sha256": "a523198628c5aad62568425063fa1571b509fccd65aacd4b86949cc72a596ea7",
+      "process_user_seconds": 0.167572,
+      "process_system_seconds": 0.026444
+    },
+    {
+      "iterations": 10,
+      "limitations": [
+        "Replayed queue history, not live production load",
+        "Retains first output for full-byte stability checks outside timer",
+        "RSS includes process startup, SQLite, validator, output and retained reference",
+        "OS/filesystem cache uncontrolled; not cold-disk measurement",
+        "No UI or network request timing"
+      ],
+      "process_peak_rss_kib": 5524,
+      "samples": [
+        {
+          "elapsed_ns": 2250823,
+          "full_output_stable": true,
+          "iteration": 0,
+          "output_bytes": 645996
+        },
+        {
+          "elapsed_ns": 2830382,
+          "full_output_stable": true,
+          "iteration": 1,
+          "output_bytes": 645996
+        },
+        {
+          "elapsed_ns": 5332758,
+          "full_output_stable": true,
+          "iteration": 2,
+          "output_bytes": 645996
+        },
+        {
+          "elapsed_ns": 2870374,
+          "full_output_stable": true,
+          "iteration": 3,
+          "output_bytes": 645996
+        },
+        {
+          "elapsed_ns": 2458793,
+          "full_output_stable": true,
+          "iteration": 4,
+          "output_bytes": 645996
+        },
+        {
+          "elapsed_ns": 2608481,
+          "full_output_stable": true,
+          "iteration": 5,
+          "output_bytes": 645996
+        },
+        {
+          "elapsed_ns": 3270541,
+          "full_output_stable": true,
+          "iteration": 6,
+          "output_bytes": 645996
+        },
+        {
+          "elapsed_ns": 3990016,
+          "full_output_stable": true,
+          "iteration": 7,
+          "output_bytes": 645996
+        },
+        {
+          "elapsed_ns": 2512751,
+          "full_output_stable": true,
+          "iteration": 8,
+          "output_bytes": 645996
+        },
+        {
+          "elapsed_ns": 2439539,
+          "full_output_stable": true,
+          "iteration": 9,
+          "output_bytes": 645996
+        }
+      ],
+      "strategy": "candidate",
+      "workload": "replay_50",
+      "pair": 2,
+      "wait4_peak_rss_kib": 20944,
+      "complete_output_sha256": "a523198628c5aad62568425063fa1571b509fccd65aacd4b86949cc72a596ea7",
+      "raw_output_sha256": "45f7e51403242f5ee67767607eeec942e6e3eee4ce55d310edbd2959e718b76c",
+      "process_user_seconds": 0.027215999999999997,
+      "process_system_seconds": 0.011748
+    },
+    {
+      "iterations": 10,
+      "limitations": [
+        "Replayed queue history, not live production load",
+        "Retains first output for full-byte stability checks outside timer",
+        "RSS includes process startup, SQLite, validator, output and retained reference",
+        "OS/filesystem cache uncontrolled; not cold-disk measurement",
+        "No UI or network request timing"
+      ],
+      "process_peak_rss_kib": 5532,
+      "samples": [
+        {
+          "elapsed_ns": 3894587,
+          "full_output_stable": true,
+          "iteration": 0,
+          "output_bytes": 645996
+        },
+        {
+          "elapsed_ns": 2267627,
+          "full_output_stable": true,
+          "iteration": 1,
+          "output_bytes": 645996
+        },
+        {
+          "elapsed_ns": 4150436,
+          "full_output_stable": true,
+          "iteration": 2,
+          "output_bytes": 645996
+        },
+        {
+          "elapsed_ns": 7246100,
+          "full_output_stable": true,
+          "iteration": 3,
+          "output_bytes": 645996
+        },
+        {
+          "elapsed_ns": 3425972,
+          "full_output_stable": true,
+          "iteration": 4,
+          "output_bytes": 645996
+        },
+        {
+          "elapsed_ns": 2566175,
+          "full_output_stable": true,
+          "iteration": 5,
+          "output_bytes": 645996
+        },
+        {
+          "elapsed_ns": 3359700,
+          "full_output_stable": true,
+          "iteration": 6,
+          "output_bytes": 645996
+        },
+        {
+          "elapsed_ns": 4069625,
+          "full_output_stable": true,
+          "iteration": 7,
+          "output_bytes": 645996
+        },
+        {
+          "elapsed_ns": 2129302,
+          "full_output_stable": true,
+          "iteration": 8,
+          "output_bytes": 645996
+        },
+        {
+          "elapsed_ns": 1691415,
+          "full_output_stable": true,
+          "iteration": 9,
+          "output_bytes": 645996
+        }
+      ],
+      "strategy": "candidate",
+      "workload": "replay_50",
+      "pair": 3,
+      "wait4_peak_rss_kib": 20944,
+      "complete_output_sha256": "a523198628c5aad62568425063fa1571b509fccd65aacd4b86949cc72a596ea7",
+      "raw_output_sha256": "45f7e51403242f5ee67767607eeec942e6e3eee4ce55d310edbd2959e718b76c",
+      "process_user_seconds": 0.029626,
+      "process_system_seconds": 0.015418999999999999
+    },
+    {
+      "iterations": 10,
+      "limitations": [
+        "Replayed queue history, not live production load",
+        "Retains first output for full-byte stability checks outside timer",
+        "RSS includes process startup, SQLite, validator, output and retained reference",
+        "OS/filesystem cache uncontrolled; not cold-disk measurement",
+        "No UI or network request timing"
+      ],
+      "process_peak_rss_kib": 11208,
+      "samples": [
+        {
+          "elapsed_ns": 19675136,
+          "full_output_stable": true,
+          "iteration": 0,
+          "output_bytes": 645996
+        },
+        {
+          "elapsed_ns": 20009464,
+          "full_output_stable": true,
+          "iteration": 1,
+          "output_bytes": 645996
+        },
+        {
+          "elapsed_ns": 15158528,
+          "full_output_stable": true,
+          "iteration": 2,
+          "output_bytes": 645996
+        },
+        {
+          "elapsed_ns": 14467292,
+          "full_output_stable": true,
+          "iteration": 3,
+          "output_bytes": 645996
+        },
+        {
+          "elapsed_ns": 13317583,
+          "full_output_stable": true,
+          "iteration": 4,
+          "output_bytes": 645996
+        },
+        {
+          "elapsed_ns": 14490628,
+          "full_output_stable": true,
+          "iteration": 5,
+          "output_bytes": 645996
+        },
+        {
+          "elapsed_ns": 15958031,
+          "full_output_stable": true,
+          "iteration": 6,
+          "output_bytes": 645996
+        },
+        {
+          "elapsed_ns": 14679542,
+          "full_output_stable": true,
+          "iteration": 7,
+          "output_bytes": 645996
+        },
+        {
+          "elapsed_ns": 20929279,
+          "full_output_stable": true,
+          "iteration": 8,
+          "output_bytes": 645996
+        },
+        {
+          "elapsed_ns": 18596089,
+          "full_output_stable": true,
+          "iteration": 9,
+          "output_bytes": 645996
+        }
+      ],
+      "strategy": "baseline",
+      "workload": "replay_50",
+      "pair": 3,
+      "wait4_peak_rss_kib": 20944,
+      "complete_output_sha256": "a523198628c5aad62568425063fa1571b509fccd65aacd4b86949cc72a596ea7",
+      "raw_output_sha256": "a523198628c5aad62568425063fa1571b509fccd65aacd4b86949cc72a596ea7",
+      "process_user_seconds": 0.14990399999999998,
+      "process_system_seconds": 0.029408999999999998
+    },
+    {
+      "iterations": 10,
+      "limitations": [
+        "Replayed queue history, not live production load",
+        "Retains first output for full-byte stability checks outside timer",
+        "RSS includes process startup, SQLite, validator, output and retained reference",
+        "OS/filesystem cache uncontrolled; not cold-disk measurement",
+        "No UI or network request timing"
+      ],
+      "process_peak_rss_kib": 11192,
+      "samples": [
+        {
+          "elapsed_ns": 19214993,
+          "full_output_stable": true,
+          "iteration": 0,
+          "output_bytes": 645996
+        },
+        {
+          "elapsed_ns": 12377323,
+          "full_output_stable": true,
+          "iteration": 1,
+          "output_bytes": 645996
+        },
+        {
+          "elapsed_ns": 11266362,
+          "full_output_stable": true,
+          "iteration": 2,
+          "output_bytes": 645996
+        },
+        {
+          "elapsed_ns": 42373212,
+          "full_output_stable": true,
+          "iteration": 3,
+          "output_bytes": 645996
+        },
+        {
+          "elapsed_ns": 14644473,
+          "full_output_stable": true,
+          "iteration": 4,
+          "output_bytes": 645996
+        },
+        {
+          "elapsed_ns": 9234809,
+          "full_output_stable": true,
+          "iteration": 5,
+          "output_bytes": 645996
+        },
+        {
+          "elapsed_ns": 12089000,
+          "full_output_stable": true,
+          "iteration": 6,
+          "output_bytes": 645996
+        },
+        {
+          "elapsed_ns": 10444359,
+          "full_output_stable": true,
+          "iteration": 7,
+          "output_bytes": 645996
+        },
+        {
+          "elapsed_ns": 8872637,
+          "full_output_stable": true,
+          "iteration": 8,
+          "output_bytes": 645996
+        },
+        {
+          "elapsed_ns": 9985200,
+          "full_output_stable": true,
+          "iteration": 9,
+          "output_bytes": 645996
+        }
+      ],
+      "strategy": "baseline",
+      "workload": "replay_50",
+      "pair": 4,
+      "wait4_peak_rss_kib": 20944,
+      "complete_output_sha256": "a523198628c5aad62568425063fa1571b509fccd65aacd4b86949cc72a596ea7",
+      "raw_output_sha256": "a523198628c5aad62568425063fa1571b509fccd65aacd4b86949cc72a596ea7",
+      "process_user_seconds": 0.11587,
+      "process_system_seconds": 0.046502999999999996
+    },
+    {
+      "iterations": 10,
+      "limitations": [
+        "Replayed queue history, not live production load",
+        "Retains first output for full-byte stability checks outside timer",
+        "RSS includes process startup, SQLite, validator, output and retained reference",
+        "OS/filesystem cache uncontrolled; not cold-disk measurement",
+        "No UI or network request timing"
+      ],
+      "process_peak_rss_kib": 5580,
+      "samples": [
+        {
+          "elapsed_ns": 6475841,
+          "full_output_stable": true,
+          "iteration": 0,
+          "output_bytes": 645996
+        },
+        {
+          "elapsed_ns": 3701214,
+          "full_output_stable": true,
+          "iteration": 1,
+          "output_bytes": 645996
+        },
+        {
+          "elapsed_ns": 5201202,
+          "full_output_stable": true,
+          "iteration": 2,
+          "output_bytes": 645996
+        },
+        {
+          "elapsed_ns": 2082942,
+          "full_output_stable": true,
+          "iteration": 3,
+          "output_bytes": 645996
+        },
+        {
+          "elapsed_ns": 4794398,
+          "full_output_stable": true,
+          "iteration": 4,
+          "output_bytes": 645996
+        },
+        {
+          "elapsed_ns": 5067931,
+          "full_output_stable": true,
+          "iteration": 5,
+          "output_bytes": 645996
+        },
+        {
+          "elapsed_ns": 2367856,
+          "full_output_stable": true,
+          "iteration": 6,
+          "output_bytes": 645996
+        },
+        {
+          "elapsed_ns": 4083741,
+          "full_output_stable": true,
+          "iteration": 7,
+          "output_bytes": 645996
+        },
+        {
+          "elapsed_ns": 3722600,
+          "full_output_stable": true,
+          "iteration": 8,
+          "output_bytes": 645996
+        },
+        {
+          "elapsed_ns": 5675731,
+          "full_output_stable": true,
+          "iteration": 9,
+          "output_bytes": 645996
+        }
+      ],
+      "strategy": "candidate",
+      "workload": "replay_50",
+      "pair": 4,
+      "wait4_peak_rss_kib": 20944,
+      "complete_output_sha256": "a523198628c5aad62568425063fa1571b509fccd65aacd4b86949cc72a596ea7",
+      "raw_output_sha256": "45f7e51403242f5ee67767607eeec942e6e3eee4ce55d310edbd2959e718b76c",
+      "process_user_seconds": 0.027121,
+      "process_system_seconds": 0.027101
+    }
+  ],
+  "pairs": [
+    {
+      "workload": "actual_live_queue",
+      "pair": 0,
+      "complete_output_equal": true
+    },
+    {
+      "workload": "actual_live_queue",
+      "pair": 1,
+      "complete_output_equal": true
+    },
+    {
+      "workload": "actual_live_queue",
+      "pair": 2,
+      "complete_output_equal": true
+    },
+    {
+      "workload": "actual_live_queue",
+      "pair": 3,
+      "complete_output_equal": true
+    },
+    {
+      "workload": "actual_live_queue",
+      "pair": 4,
+      "complete_output_equal": true
+    },
+    {
+      "workload": "replay_1",
+      "pair": 0,
+      "complete_output_equal": true
+    },
+    {
+      "workload": "replay_1",
+      "pair": 1,
+      "complete_output_equal": true
+    },
+    {
+      "workload": "replay_1",
+      "pair": 2,
+      "complete_output_equal": true
+    },
+    {
+      "workload": "replay_1",
+      "pair": 3,
+      "complete_output_equal": true
+    },
+    {
+      "workload": "replay_1",
+      "pair": 4,
+      "complete_output_equal": true
+    },
+    {
+      "workload": "replay_10",
+      "pair": 0,
+      "complete_output_equal": true
+    },
+    {
+      "workload": "replay_10",
+      "pair": 1,
+      "complete_output_equal": true
+    },
+    {
+      "workload": "replay_10",
+      "pair": 2,
+      "complete_output_equal": true
+    },
+    {
+      "workload": "replay_10",
+      "pair": 3,
+      "complete_output_equal": true
+    },
+    {
+      "workload": "replay_10",
+      "pair": 4,
+      "complete_output_equal": true
+    },
+    {
+      "workload": "replay_50",
+      "pair": 0,
+      "complete_output_equal": true
+    },
+    {
+      "workload": "replay_50",
+      "pair": 1,
+      "complete_output_equal": true
+    },
+    {
+      "workload": "replay_50",
+      "pair": 2,
+      "complete_output_equal": true
+    },
+    {
+      "workload": "replay_50",
+      "pair": 3,
+      "complete_output_equal": true
+    },
+    {
+      "workload": "replay_50",
+      "pair": 4,
+      "complete_output_equal": true
+    }
+  ],
+  "complete": true,
+  "limits": [
+    "No HTTP/client parse/UI timings",
+    "Three replay histories are generated from real public metadata; actual_live_queue is the prior real HTTP job database",
+    "OS page cache uncontrolled; every sample reconstructs the complete response, no result cache",
+    "Peak RSS includes process startup, SQLite and a retained first-output reference",
+    "Candidate is isolated; HTTP route unchanged",
+    "No cross-project recommendation or generic autonomous optimization claim"
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "commit": "87bfe64fbfe989f867ef9759b4bcaf6c3ddc8c12",
+  "harness": "atlas-real-media-v11-event-integration",
+  "fixture_sha256": "2aa0668aba0eb29c69faf368fab206369718335be7f47bc0c6592236e79d1aba",
+  "fixture_counts": {
+    "cards": 5,
+    "gallery_images": 19,
+    "video_entries": 19
+  },
+  "visible_log_matches_full_export": true,
+  "baseline_events": 26,
+  "bounded_events": 33,
+  "bounded_text_nodes": 3,
+  "baseline_text_nodes": 1,
+  "preview_initial": {
+    "attempted": 23,
+    "decoded": 22,
+    "failed": 1
+  },
+  "explicit_retry": {
+    "attempted": 1,
+    "decoded_total": 22,
+    "failed": 1
+  },
+  "failed_source": "https://i.ytimg.com/vi/M7lc1UVf-VE/hqdefault.jpg",
+  "steam_playback": {
+    "observed_time_seconds": 11.696445,
+    "paused_at_observation": false,
+    "ready_state": 4,
+    "width": 940,
+    "height": 529,
+    "subsequently_paused": true
+  },
+  "history_back_preserved_bounded_events": true,
+  "speedup_claimed": false,
+  "limitations": [
+    "Different media actions and network/cache conditions; timing values are not paired speedup evidence",
+    "One YouTube preview remained failed, not silently omitted",
+    "DOM insertion faults were generated unit tests, not live browser outages",
+    "No peak-memory, INP or physical paint measurement"
+  ],
+  "files": {
+    "baseline-browser.json": "54ce699e91650a64f3226fe8cd9c186bcc989d81df3c4f7001f254e317437580",
+    "baseline-export.json": "e3cd96f4b29eb4233defc77ee9d2701740348807b5ac114e7dba39d13b673293",
+    "bounded-browser.json": "22b8f849b1a3229d9735610f6061381b67e94ff4002b911eb3404ce47cacca9a",
+    "bounded-export.json": "6fc4c117d34a17948841094c49c69bbff04c8c82edc1e11bdc1fb892faff0064"
+  }
+}

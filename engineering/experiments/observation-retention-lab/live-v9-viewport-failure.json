@@ -1,0 +1,225 @@
+{
+  "schema_version": 1,
+  "harness": "atlas-card-density-v9-late-evidence",
+  "scope": "measured_browser_generated_workload",
+  "operation": "metadata",
+  "performance_start_ms": 121190.40000000596,
+  "performance_end_ms": 121736.40000000596,
+  "started_at": "2026-10-28T01:12:23.200Z",
+  "environment": {
+    "user_agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36",
+    "viewport": [
+      1180,
+      757
+    ],
+    "device_pixel_ratio": 1,
+    "supported_entry_types": [
+      "element",
+      "event",
+      "first-input",
+      "interaction-contentful-paint",
+      "largest-contentful-paint",
+      "layout-shift",
+      "long-animation-frame",
+      "longtask",
+      "mark",
+      "measure",
+      "navigation",
+      "paint",
+      "resource",
+      "soft-navigation",
+      "visibility-state"
+    ],
+    "content_visibility_supported": true
+  },
+  "preparation": {
+    "strategy": "main",
+    "request_to_ready_ms": 8.5,
+    "measured_preparation_ms": 1.800000011920929,
+    "unattributed_roundtrip_overhead_ms": 6.699999988079071
+  },
+  "dataset": {
+    "count": 200,
+    "metadata_bytes_per_record": 512,
+    "serialized_bytes": 132001,
+    "sha256": "05d0e7b140547471963f6752b85a74a4d076c4ab1135e82dd72f7bb4c704a53c",
+    "generation_ms": 0.4000000059604645,
+    "serialization_ms": 0.4000000059604645,
+    "encoding_ms": 0.7999999821186066,
+    "digest_ms": 0.20000001788139343,
+    "hash_ms": 1.4000000059604645
+  },
+  "samples": [],
+  "complete": false,
+  "limitations": [
+    "Double-rAF is a scheduling proxy, not direct physical-paint timing",
+    "Scroll frame wait is not INP; observed Event Timing entries are separate and thresholded at 16 ms, not a complete INP score",
+    "No images, networking or peak-memory measurements",
+    "Grouped and metadata-only candidates retain all fields; neither is virtualization or a proven improvement",
+    "Input observations are thresholded and bounded to the run window, not a complete INP result",
+    "Both variants retain all card fields in the DOM",
+    "No comparison to a target project baseline",
+    "Worker lane applies to initial data preparation; incremental per-sample reset still uses the original main-thread setup outside its timer",
+    "Structured clone, worker startup and validation are included in request-to-ready overhead; no transfer-only claim",
+    "Bounded generated workload; not universal best-method evidence"
+  ],
+  "error": "Workload viewport must be fully visible before measurement.",
+  "observed_input_events": [
+    {
+      "name": "pointerout",
+      "start_ms": 120160.29999998212,
+      "duration_ms": 1568,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 120160.29999998212,
+      "duration_ms": 1568,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 120160.29999998212,
+      "duration_ms": 1568,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 120160.29999998212,
+      "duration_ms": 1568,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerover",
+      "start_ms": 120160.29999998212,
+      "duration_ms": 1568,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 120160.29999998212,
+      "duration_ms": 1568,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseout",
+      "start_ms": 120160.29999998212,
+      "duration_ms": 1568,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseover",
+      "start_ms": 120160.29999998212,
+      "duration_ms": 1568,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerout",
+      "start_ms": 120217.79999998212,
+      "duration_ms": 2112,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 120217.79999998212,
+      "duration_ms": 2112,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerover",
+      "start_ms": 120217.79999998212,
+      "duration_ms": 2112,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 120217.79999998212,
+      "duration_ms": 2112,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 120217.79999998212,
+      "duration_ms": 2112,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseout",
+      "start_ms": 120217.79999998212,
+      "duration_ms": 2112,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseover",
+      "start_ms": 120217.79999998212,
+      "duration_ms": 2112,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerdown",
+      "start_ms": 121173.90000000596,
+      "duration_ms": 1752,
+      "interaction_id": 2497
+    },
+    {
+      "name": "mousedown",
+      "start_ms": 121173.90000000596,
+      "duration_ms": 1752,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerup",
+      "start_ms": 121188.59999999404,
+      "duration_ms": 1744,
+      "interaction_id": 2497
+    },
+    {
+      "name": "mouseup",
+      "start_ms": 121188.59999999404,
+      "duration_ms": 1744,
+      "interaction_id": 0
+    },
+    {
+      "name": "click",
+      "start_ms": 121188.59999999404,
+      "duration_ms": 1744,
+      "interaction_id": 2497
+    },
+    {
+      "name": "pointerout",
+      "start_ms": 121380.59999999404,
+      "duration_ms": 1552,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerleave",
+      "start_ms": 121380.59999999404,
+      "duration_ms": 1552,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerover",
+      "start_ms": 121380.59999999404,
+      "duration_ms": 1552,
+      "interaction_id": 0
+    },
+    {
+      "name": "pointerenter",
+      "start_ms": 121380.59999999404,
+      "duration_ms": 1552,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseout",
+      "start_ms": 121380.59999999404,
+      "duration_ms": 1552,
+      "interaction_id": 0
+    },
+    {
+      "name": "mouseover",
+      "start_ms": 121380.59999999404,
+      "duration_ms": 1552,
+      "interaction_id": 0
+    }
+  ]
+}

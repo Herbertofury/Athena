@@ -1,0 +1,55 @@
+name: Athena Pages
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: athena-pages
+  cancel-in-progress: false
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - run: npm ci --ignore-scripts
+      - run: npm test
+      - name: Verify runtime in actual Chromium
+        run: |
+          npx playwright install --with-deps chromium
+          npm run test:browser
+      - name: Package one public Athena app
+        run: python3 scripts/package_app.py --profile public-preview --allowlist config/runtime-public-preview.json --output public
+      - uses: actions/configure-pages@v5
+        with:
+          enablement: false
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: public
+      - name: Publish
+        id: deployment
+        uses: actions/deploy-pages@v4
+      - name: Verify the published software workspace
+        env:
+          ATHENA_SOFTWARE_BASE_URL: ${{ steps.deployment.outputs.page_url }}
+          ATHENA_SOFTWARE_BROWSER_OUTPUT: browser-results/software-live
+        run: npm run test:software:browser
+      - name: Retain live publication evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: athena-software-live-verification
+          path: browser-results/software-live/
+          if-no-files-found: ignore

@@ -1,0 +1,22 @@
+{
+  "implementation_commit": "3679eddc3a9335b3def7d12e1b70c362552bbd45",
+  "loaded_harness": "atlas-card-density-v9-late-evidence",
+  "loaded_script": "lab.8f03d20c9b72c340.js",
+  "browser_complete_samples": 6,
+  "cards_per_sample": 200,
+  "metadata_bytes_per_card": 512,
+  "all_complete_card_output_equal": true,
+  "current_and_last_completed_byte_equal": true,
+  "input_records_in_each": 600,
+  "completed_receipt_sha256": "a6dd6311b54ba5e157f9e39e91817fdd212d4b63a832568bd2e3e73c4337e050",
+  "failure_error": "Workload viewport must be fully visible before measurement.",
+  "failure_samples": 0,
+  "last_good_after_failure_byte_equal": true,
+  "stop_control_acceptance": "not established; intended stop attempt instead hit viewport guard",
+  "ci_run": 40613236675,
+  "ci_conclusion": "success",
+  "pages_run": 40613236824,
+  "pages_conclusion": "success",
+  "served_byte_hash_recheck": "blocked by executor network/sandbox startup; remote source and loaded module identity verified",
+  "physical_paint_INP_peak_memory_acceptance": false
+}

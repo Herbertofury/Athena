@@ -1,0 +1,125 @@
+{
+  "scope": "Generated scanner-output fixtures; no untrusted binaries or real vulnerabilities executed",
+  "results": [
+    {
+      "case": "count-False",
+      "fixture_wire": "{\"database\": {\"advisory-count\": 1380, \"last-commit\": null, \"last-updated\": null}, \"lockfile\": {\"dependency-count\": 185}, \"settings\": {\"target_arch\": [], \"target_os\": [], \"severity\": null, \"ignore\": [], \"informational_warnings\": [\"unmaintained\", \"unsound\", \"notice\"]}, \"vulnerabilities\": {\"found\": false, \"count\": false, \"list\": []}, \"warnings\": {}}",
+      "lanes": {
+        "baseline": {
+          "accepted": true,
+          "all_clear": true
+        },
+        "repaired": {
+          "accepted": false,
+          "error": "Invalid vulnerability result types",
+          "raw_retained": true
+        }
+      }
+    },
+    {
+      "case": "count-0.0",
+      "fixture_wire": "{\"database\": {\"advisory-count\": 1380, \"last-commit\": null, \"last-updated\": null}, \"lockfile\": {\"dependency-count\": 185}, \"settings\": {\"target_arch\": [], \"target_os\": [], \"severity\": null, \"ignore\": [], \"informational_warnings\": [\"unmaintained\", \"unsound\", \"notice\"]}, \"vulnerabilities\": {\"found\": false, \"count\": 0.0, \"list\": []}, \"warnings\": {}}",
+      "lanes": {
+        "baseline": {
+          "accepted": true,
+          "all_clear": true
+        },
+        "repaired": {
+          "accepted": false,
+          "error": "Invalid vulnerability result types",
+          "raw_retained": true
+        }
+      }
+    },
+    {
+      "case": "found-True",
+      "fixture_wire": "{\"database\": {\"advisory-count\": 1380, \"last-commit\": null, \"last-updated\": null}, \"lockfile\": {\"dependency-count\": 185}, \"settings\": {\"target_arch\": [], \"target_os\": [], \"severity\": null, \"ignore\": [], \"informational_warnings\": [\"unmaintained\", \"unsound\", \"notice\"]}, \"vulnerabilities\": {\"found\": true, \"count\": 0, \"list\": []}, \"warnings\": {}}",
+      "lanes": {
+        "baseline": {
+          "accepted": true,
+          "all_clear": true
+        },
+        "repaired": {
+          "accepted": false,
+          "error": "Contradictory vulnerability result",
+          "raw_retained": true
+        }
+      }
+    },
+    {
+      "case": "list-[{'advisory': {'id': 'fixture-only'}}]",
+      "fixture_wire": "{\"database\": {\"advisory-count\": 1380, \"last-commit\": null, \"last-updated\": null}, \"lockfile\": {\"dependency-count\": 185}, \"settings\": {\"target_arch\": [], \"target_os\": [], \"severity\": null, \"ignore\": [], \"informational_warnings\": [\"unmaintained\", \"unsound\", \"notice\"]}, \"vulnerabilities\": {\"found\": false, \"count\": 0, \"list\": [{\"advisory\": {\"id\": \"fixture-only\"}}]}, \"warnings\": {}}",
+      "lanes": {
+        "baseline": {
+          "accepted": true,
+          "all_clear": true
+        },
+        "repaired": {
+          "accepted": false,
+          "error": "Contradictory vulnerability result",
+          "raw_retained": true
+        }
+      }
+    },
+    {
+      "case": "duplicate-count",
+      "fixture_wire": "{\"database\": {\"advisory-count\": 1380, \"last-commit\": null, \"last-updated\": null}, \"lockfile\": {\"dependency-count\": 185}, \"settings\": {\"target_arch\": [], \"target_os\": [], \"severity\": null, \"ignore\": [], \"informational_warnings\": [\"unmaintained\", \"unsound\", \"notice\"]}, \"vulnerabilities\": {\"found\": false, \"count\": 1, \"count\": 0, \"list\": []}, \"warnings\": {}}",
+      "lanes": {
+        "baseline": {
+          "accepted": true,
+          "all_clear": true
+        },
+        "repaired": {
+          "accepted": false,
+          "error": "Duplicate JSON object key",
+          "raw_retained": true
+        }
+      }
+    },
+    {
+      "case": "nonfinite-extra",
+      "fixture_wire": "{\"database\": {\"advisory-count\": 1380, \"last-commit\": null, \"last-updated\": null}, \"lockfile\": {\"dependency-count\": 185}, \"settings\": {\"target_arch\": [], \"target_os\": [], \"severity\": null, \"ignore\": [], \"informational_warnings\": [\"unmaintained\", \"unsound\", \"notice\"]}, \"vulnerabilities\": {\"found\": false, \"count\": 0, \"list\": []}, \"warnings\": {}, \"extra\": NaN}",
+      "lanes": {
+        "baseline": {
+          "accepted": true,
+          "all_clear": true
+        },
+        "repaired": {
+          "accepted": false,
+          "error": "Non-finite JSON number",
+          "raw_retained": true
+        }
+      }
+    },
+    {
+      "case": "overflow-extra",
+      "fixture_wire": "{\"database\": {\"advisory-count\": 1380, \"last-commit\": null, \"last-updated\": null}, \"lockfile\": {\"dependency-count\": 185}, \"settings\": {\"target_arch\": [], \"target_os\": [], \"severity\": null, \"ignore\": [], \"informational_warnings\": [\"unmaintained\", \"unsound\", \"notice\"]}, \"vulnerabilities\": {\"found\": false, \"count\": 0, \"list\": []}, \"warnings\": {}, \"extra\": 1e9999}",
+      "lanes": {
+        "baseline": {
+          "accepted": true,
+          "all_clear": true
+        },
+        "repaired": {
+          "accepted": false,
+          "error": "Non-finite JSON number",
+          "raw_retained": true
+        }
+      }
+    },
+    {
+      "case": "missing-warnings",
+      "fixture_wire": "{\"database\": {\"advisory-count\": 1380, \"last-commit\": null, \"last-updated\": null}, \"lockfile\": {\"dependency-count\": 185}, \"settings\": {\"target_arch\": [], \"target_os\": [], \"severity\": null, \"ignore\": [], \"informational_warnings\": [\"unmaintained\", \"unsound\", \"notice\"]}, \"vulnerabilities\": {\"found\": false, \"count\": 0, \"list\": []}}",
+      "lanes": {
+        "baseline": {
+          "accepted": true,
+          "all_clear": true
+        },
+        "repaired": {
+          "accepted": false,
+          "error": "Invalid warnings result",
+          "raw_retained": true
+        }
+      }
+    }
+  ]
+}

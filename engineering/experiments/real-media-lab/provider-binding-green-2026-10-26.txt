@@ -1,0 +1,21 @@
+✔ all selected source galleries and trailers survive normalization (4.861676ms)
+✔ rejects active protocols, credentials and deceptive media hosts (0.284907ms)
+✔ original and preview URLs remain distinct (0.727499ms)
+✔ private fixture state cannot silently enter public demo (1.129899ms)
+✔ duplicate canonical identities are rejected (2.341806ms)
+✔ unavailable gallery coverage remains explicit (0.57357ms)
+✔ source links cannot execute script or leave the provider allowlist (0.446363ms)
+✔ media cannot be borrowed from an unrelated provider card (0.706955ms)
+✔ card source belongs to the declared provider (1.065783ms)
+✔ player kind cannot cross the provider boundary (0.856471ms)
+✔ unknown player kinds fail closed (1.363197ms)
+✔ optional trailer posters are provider-bound too (1.192326ms)
+✔ fixture validation is lossless and does not mutate input (1.793408ms)
+ℹ tests 13
+ℹ suites 0
+ℹ pass 13
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 202.16692

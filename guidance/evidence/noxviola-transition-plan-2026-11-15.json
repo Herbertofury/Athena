@@ -1,0 +1,154 @@
+{
+  "schemaVersion": 1,
+  "targetHead": "424f49946956de6ce36b6212c7682d46e179f228",
+  "proposalOnly": true,
+  "writesPerformed": false,
+  "sourceVersion": "1.1.2",
+  "destinationVersion": "2.0.1",
+  "conflicts": [],
+  "candidateForHumanReview": true,
+  "mappings": [
+    {
+      "legacyPath": ".agents/foundry/PRODUCT_INVARIANTS.md",
+      "proposedPath": ".agents/athena/PRODUCT_INVARIANTS.md",
+      "wantedSha256": "2aa314e0fa97257800efedea3255c37d967e9f60d37e97ec5ff1b7f0a22624ff",
+      "destinationState": "absent",
+      "legacyDisposition": "preserve until explicitly reviewed transition and rollback are verified"
+    },
+    {
+      "legacyPath": ".agents/foundry/MODERNIZATION_STANDARD.md",
+      "proposedPath": ".agents/athena/MODERNIZATION_STANDARD.md",
+      "wantedSha256": "4fcdb3683fd5c7e2d44aa94e04ac9271986616e410ce9047b9810d726ffd0d7a",
+      "destinationState": "absent",
+      "legacyDisposition": "preserve until explicitly reviewed transition and rollback are verified"
+    },
+    {
+      "legacyPath": ".agents/foundry/DESIGN_QUALITY_STANDARD.md",
+      "proposedPath": ".agents/athena/DESIGN_QUALITY_STANDARD.md",
+      "wantedSha256": "403bf05fa52ff93eab3d8f3ea2d9849bd94b7442ddcef6de2b31659f66755bd4",
+      "destinationState": "absent",
+      "legacyDisposition": "preserve until explicitly reviewed transition and rollback are verified"
+    },
+    {
+      "legacyPath": ".agents/foundry/FAILURE_INTELLIGENCE_STANDARD.md",
+      "proposedPath": ".agents/athena/FAILURE_INTELLIGENCE_STANDARD.md",
+      "wantedSha256": "81dc3d42f6adc8fb8f84472c2de101749c4530f0aa61dbd1e3e3bfad438355a3",
+      "destinationState": "absent",
+      "legacyDisposition": "preserve until explicitly reviewed transition and rollback are verified"
+    },
+    {
+      "legacyPath": ".agents/foundry/CHALLENGER_INTEGRATION_STANDARD.md",
+      "proposedPath": ".agents/athena/CHALLENGER_INTEGRATION_STANDARD.md",
+      "wantedSha256": "99896ab140c00f9b3f3cb2faeee7e6861bf8f405121dd3db207efdb663958ba8",
+      "destinationState": "absent",
+      "legacyDisposition": "preserve until explicitly reviewed transition and rollback are verified"
+    },
+    {
+      "legacyPath": ".agents/foundry/PERFORMANCE_ACCEPTANCE.md",
+      "proposedPath": ".agents/athena/PERFORMANCE_ACCEPTANCE.md",
+      "wantedSha256": "23e7c95eeee89c1540b49b57b87010f8e84defd34f21c50c2de2d70ac7dea7d6",
+      "destinationState": "absent",
+      "legacyDisposition": "preserve until explicitly reviewed transition and rollback are verified"
+    },
+    {
+      "legacyPath": ".agents/foundry/RUNTIME_PROOF.md",
+      "proposedPath": ".agents/athena/RUNTIME_PROOF.md",
+      "wantedSha256": "d3970caf1cbf96100676ca31468f46e3caed53592428c0a8087beba2717fe9e4",
+      "destinationState": "absent",
+      "legacyDisposition": "preserve until explicitly reviewed transition and rollback are verified"
+    },
+    {
+      "legacyPath": ".agents/foundry/DURABLE_EXECUTION_STANDARD.md",
+      "proposedPath": ".agents/athena/DURABLE_EXECUTION_STANDARD.md",
+      "wantedSha256": "6da5a7d93dc5af9b7364e584efb32cc47773ea0da248e3ae69c36ced08ced22d",
+      "destinationState": "absent",
+      "legacyDisposition": "preserve until explicitly reviewed transition and rollback are verified"
+    },
+    {
+      "legacyPath": ".agents/foundry/EVALUATION_STANDARD.md",
+      "proposedPath": ".agents/athena/EVALUATION_STANDARD.md",
+      "wantedSha256": "52039bfe00137c3f878c69e30e2404d1a7230411e58a8052a76b822ae094190c",
+      "destinationState": "absent",
+      "legacyDisposition": "preserve until explicitly reviewed transition and rollback are verified"
+    },
+    {
+      "legacyPath": ".agents/foundry/OBSERVABILITY_STANDARD.md",
+      "proposedPath": ".agents/athena/OBSERVABILITY_STANDARD.md",
+      "wantedSha256": "2ecb83035924f46d55520e4fdca968314b6e840d137e1d98d4e7e15454b83dc1",
+      "destinationState": "absent",
+      "legacyDisposition": "preserve until explicitly reviewed transition and rollback are verified"
+    },
+    {
+      "legacyPath": ".agents/foundry/INTEROPERABILITY_STANDARD.md",
+      "proposedPath": ".agents/athena/INTEROPERABILITY_STANDARD.md",
+      "wantedSha256": "4490366e63a7ce096ad50456cf4301c41127491d0a5eee968bb193cb36797cf3",
+      "destinationState": "absent",
+      "legacyDisposition": "preserve until explicitly reviewed transition and rollback are verified"
+    },
+    {
+      "legacyPath": ".agents/foundry/AUTHORIZATION_CONTROL_STANDARD.md",
+      "proposedPath": ".agents/athena/AUTHORIZATION_CONTROL_STANDARD.md",
+      "wantedSha256": "9ad50fbc2b1d82af1a528ac0f4186740f310e7755a70bb033a265c3d6766c8ca",
+      "destinationState": "absent",
+      "legacyDisposition": "preserve until explicitly reviewed transition and rollback are verified"
+    },
+    {
+      "legacyPath": ".agents/foundry/THIRD_PARTY_SKILL_SECURITY.md",
+      "proposedPath": ".agents/athena/THIRD_PARTY_SKILL_SECURITY.md",
+      "wantedSha256": "0d640f0cfa8da1a3a51199e32a1618d38e6934cca6060c2fd38096cabcd10665",
+      "destinationState": "absent",
+      "legacyDisposition": "preserve until explicitly reviewed transition and rollback are verified"
+    },
+    {
+      "legacyPath": ".agents/foundry/SUPPLY_CHAIN_STANDARD.md",
+      "proposedPath": ".agents/athena/SUPPLY_CHAIN_STANDARD.md",
+      "wantedSha256": "f5a68ceb55fb11b03b9ce60b23e6b0e37e16aa47c8653b36730339cbfb8b6a12",
+      "destinationState": "absent",
+      "legacyDisposition": "preserve until explicitly reviewed transition and rollback are verified"
+    },
+    {
+      "legacyPath": ".agents/foundry/DISTRIBUTION_STANDARD.md",
+      "proposedPath": ".agents/athena/DISTRIBUTION_STANDARD.md",
+      "wantedSha256": "0c4e8b2790738f46e445664d62ef8706065c9a45ec695d63add93372246e8afc",
+      "destinationState": "absent",
+      "legacyDisposition": "preserve until explicitly reviewed transition and rollback are verified"
+    },
+    {
+      "legacyPath": ".agents/foundry/AGENTS-adapter.md",
+      "proposedPath": ".agents/athena/AGENTS-adapter.md",
+      "wantedSha256": "b0884785208d594454dd9ea35e5701cbce2df85f6328b2ee3bcff5a84c3908d8",
+      "destinationState": "absent",
+      "legacyDisposition": "preserve until explicitly reviewed transition and rollback are verified"
+    }
+  ],
+  "referenceReview": [
+    {
+      "path": ".agent-foundry/governance-lock.json",
+      "sha256": "6b3f678a8238a0dba57ff517fd55776194cf6bdf599313714f1f709f2c16bacb",
+      "reason": "classify historical reference versus active dependency; no automatic replacement"
+    },
+    {
+      "path": ".agents/foundry/AGENTS-adapter.md",
+      "sha256": "15c80d7805f48075fa76fa4d0c5a0394e107e5f5ad1c1ef862d6fbb5a1a9a258",
+      "reason": "classify historical reference versus active dependency; no automatic replacement"
+    },
+    {
+      "path": "AGENTS.md",
+      "sha256": "79612bbe28cbfacdbd00a72382154ba9d556b3c96c54369de3c02440f096c82b",
+      "reason": "classify historical reference versus active dependency; no automatic replacement"
+    }
+  ],
+  "uninspectedPaths": [
+    "most-useless-ai-medal.png",
+    "most-wasteful-token-wasting-pos-medal.png"
+  ],
+  "preservation": "All root/nested AGENTS.md, overrides, CLAUDE.md, legacy files and locks remain unchanged.",
+  "requiredNextSteps": [
+    "Review semantic policy changes and project-specific authority.",
+    "Review the complete reference list, unsupported files and external consumers.",
+    "Authorize one concrete consumer transition; prepare tested rollback before any write.",
+    "Verify that consumer in its actual harness before removing legacy dependencies."
+  ],
+  "retirementReady": false,
+  "applySupported": false
+}

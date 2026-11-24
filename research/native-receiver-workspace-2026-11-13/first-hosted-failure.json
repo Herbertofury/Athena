@@ -1,0 +1,9 @@
+{
+  "head": "70a38248732ff4b3c1c08ac08b8a4fe48be0ba2d",
+  "run": 43526865919,
+  "artifact": 14085656900,
+  "artifact_sha256": "8a329f1f4efd00e6cadb72fa8f0007da9b2034cefffae459a9cc2127af1aacec",
+  "result": "failed",
+  "finding": "After one completed main-thread run, starting a worker run retained the old completion status during calibration, while its new receipt correctly said incomplete. Browser completion wait saw stale status.",
+  "repair": "Reset visible status/summary at accepted run start. Browser additionally waits for current execution receipt.complete, preserving full parity assertions. Unit regression asserts current calibration/progress state."
+}

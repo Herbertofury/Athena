@@ -1,0 +1,145 @@
+[
+  {
+    "id": "PP31001",
+    "title": "Paid-platform screenshot research: https://pawchive.pw/",
+    "url": "https://pawchive.pw/",
+    "observed_version": "Public representation inspected 2026-10-31; direct_public_page_observed",
+    "topic": "site-adapters",
+    "note": "Self-description: contributor-uploaded mirror archive based on Kemono, naming Patreon, Pixiv Fanbox and Discord. No source-service rights or completeness established. Evidence scope: blocked_partial_or_discovery. No authenticated operation or complete support acceptance inferred.",
+    "checked_at": "2026-10-31",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "PP31002",
+    "title": "Paid-platform screenshot research: https://pawchive.pw/favorites",
+    "url": "https://pawchive.pw/favorites",
+    "observed_version": "Public representation inspected 2026-10-31; direct_public_redirect_observed",
+    "topic": "site-adapters",
+    "note": "Redirects to https://pawchive.pw/account/login?location=/favorites; account favorites gate observed, no login or import tested. Evidence scope: blocked_partial_or_discovery. No authenticated operation or complete support acceptance inferred.",
+    "checked_at": "2026-10-31",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "PP31003",
+    "title": "Paid-platform screenshot research: https://pawchive.pw/api/schema",
+    "url": "https://pawchive.pw/api/schema",
+    "observed_version": "Public representation inspected 2026-10-31; direct_public_shell_observed",
+    "topic": "site-adapters",
+    "note": "API documentation page embeds /api/swagger_schema. No readable API schema extracted. Evidence scope: blocked_partial_or_discovery. No authenticated operation or complete support acceptance inferred.",
+    "checked_at": "2026-10-31",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "PP31004",
+    "title": "Paid-platform screenshot research: https://pawchive.pw/api/swagger_schema",
+    "url": "https://pawchive.pw/api/swagger_schema",
+    "observed_version": "Public representation inspected 2026-10-31; no_readable_body",
+    "topic": "site-adapters",
+    "note": "Swagger iframe yielded no readable lines; no endpoint contract or implementation accepted. Evidence scope: blocked_partial_or_discovery. No authenticated operation or complete support acceptance inferred.",
+    "checked_at": "2026-10-31",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "PP31005",
+    "title": "Paid-platform screenshot research: https://hy.page/",
+    "url": "https://hy.page/",
+    "observed_version": "Public representation inspected 2026-10-31; direct_redirect_and_public_marketing_observed",
+    "topic": "site-adapters",
+    "note": "Current root redirects to Hyax. Destination markets memberships and digital/physical products; it is not proof that historical HYPAGE creator URLs or member content still work. Evidence scope: blocked_partial_or_discovery. No authenticated operation or complete support acceptance inferred.",
+    "checked_at": "2026-10-31",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "PP31006",
+    "title": "Paid-platform screenshot research: https://hy.page/help",
+    "url": "https://hy.page/help",
+    "observed_version": "Public representation inspected 2026-10-31; tool_inaccessible",
+    "topic": "site-adapters",
+    "note": "No readable help body; historical HYPAGE API/content/login/media operations remain unresolved. Evidence scope: blocked_partial_or_discovery. No authenticated operation or complete support acceptance inferred.",
+    "checked_at": "2026-10-31",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "PP31007",
+    "title": "Paid-platform screenshot research: https://en.tipeee.com/become-a-creator",
+    "url": "https://en.tipeee.com/become-a-creator",
+    "observed_version": "Public representation inspected 2026-10-31; search_extract_only_for_feature_claims_direct_image_shell",
+    "topic": "site-adapters",
+    "note": "Search extract mentions posts/exclusive content; direct page supplies only an image. Precise feature claims require readable current documentation. Evidence scope: blocked_partial_or_discovery. No authenticated operation or complete support acceptance inferred.",
+    "checked_at": "2026-10-31",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "PP31008",
+    "title": "Paid-platform screenshot research: https://blog.tipeee.com/pourquoi-et-comment-utiliser-les-news/",
+    "url": "https://blog.tipeee.com/pourquoi-et-comment-utiliser-les-news/",
+    "observed_version": "Public representation inspected 2026-10-31; official_search_extract_direct_redirect_inaccessible",
+    "topic": "site-adapters",
+    "note": "Official indexed article describes News gated by tip amount/reward and resources including video/photo gallery/audio/PDF; direct old URL redirects to inaccessible https://en.tipeee.com/blog. Documented lead, not executed content evidence. Evidence scope: blocked_partial_or_discovery. No authenticated operation or complete support acceptance inferred.",
+    "checked_at": "2026-10-31",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "PP31009",
+    "title": "Paid-platform screenshot research: https://blog.tipeee.com/decouvrez-nos-features-essentielles/",
+    "url": "https://blog.tipeee.com/decouvrez-nos-features-essentielles/",
+    "observed_version": "Public representation inspected 2026-10-31; official_search_extract_only",
+    "topic": "site-adapters",
+    "note": "Indexed official article distinguishes public/gated News and automatic email delivery of digital rewards; current direct section unverified. Evidence scope: blocked_partial_or_discovery. No authenticated operation or complete support acceptance inferred.",
+    "checked_at": "2026-10-31",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "PP31010",
+    "title": "Paid-platform screenshot research: https://en.tipeee.com/terms",
+    "url": "https://en.tipeee.com/terms",
+    "observed_version": "Public representation inspected 2026-10-31; direct_image_shell_search_extract_only",
+    "topic": "site-adapters",
+    "note": "Indexed terms retain creator ownership; no precise current reader API contract obtained. Evidence scope: blocked_partial_or_discovery. No authenticated operation or complete support acceptance inferred.",
+    "checked_at": "2026-10-31",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "PP31011",
+    "title": "Paid-platform screenshot research: https://help.buymeacoffee.com/en/articles/4371724-create-and-publish-your-first-post",
+    "url": "https://help.buymeacoffee.com/en/articles/4371724-create-and-publish-your-first-post",
+    "observed_version": "Public representation inspected 2026-10-31; direct_official_documentation",
+    "topic": "site-adapters",
+    "note": "September 1, 2026 post guide; title/description, visibility, albums, audio and external video embeds. Evidence scope: primary_documentation. No authenticated operation or complete support acceptance inferred.",
+    "checked_at": "2026-10-31",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "PP31012",
+    "title": "Paid-platform screenshot research: https://help.buymeacoffee.com/en/articles/6264548-how-to-publish-an-audio-post",
+    "url": "https://help.buymeacoffee.com/en/articles/6264548-how-to-publish-an-audio-post",
+    "observed_version": "Public representation inspected 2026-10-31; direct_official_documentation",
+    "topic": "site-adapters",
+    "note": "Audio upload/recording and membership-level restriction documented; no reader request executed. Evidence scope: primary_documentation. No authenticated operation or complete support acceptance inferred.",
+    "checked_at": "2026-10-31",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "PP31013",
+    "title": "Paid-platform screenshot research: https://gumroad.com/help/article/198-your-gumroad-library",
+    "url": "https://gumroad.com/help/article/198-your-gumroad-library",
+    "observed_version": "Public representation inspected 2026-10-31; official_search_extract_direct_no_readable_body",
+    "topic": "site-adapters",
+    "note": "Indexed Library help is a discovery lead, direct body unavailable. Evidence scope: blocked_partial_or_discovery. No authenticated operation or complete support acceptance inferred.",
+    "checked_at": "2026-10-31",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  }
+]

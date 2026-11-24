@@ -1,0 +1,187 @@
+{
+  "canonical_id": "1rb9wI5K",
+  "complete": true,
+  "input_bytes": 1600,
+  "limitations": [
+    "Full-byte comparison included in both timers",
+    "No network or UI acceptance; optional persistence receipt is separate from parser timings",
+    "Candidate still isolated from application collector"
+  ],
+  "persistence": {
+    "configured_durable_write_ns": 1473063,
+    "exact_payload_after_reopen": true,
+    "integrity_check": "ok",
+    "last_good_after_recorded_failure": true
+  },
+  "scope": "actual Atlas version-parser component on a retained public response; not promoted",
+  "trials": [
+    {
+      "baseline_100_ns": 676982,
+      "candidate_100_ns": 416221,
+      "full_payload_and_binding_equal": true,
+      "round": 0,
+      "warmup": true
+    },
+    {
+      "baseline_100_ns": 639349,
+      "candidate_100_ns": 398921,
+      "full_payload_and_binding_equal": true,
+      "round": 1,
+      "warmup": true
+    },
+    {
+      "baseline_100_ns": 840792,
+      "candidate_100_ns": 909801,
+      "full_payload_and_binding_equal": true,
+      "round": 2,
+      "warmup": true
+    },
+    {
+      "baseline_100_ns": 637604,
+      "candidate_100_ns": 489849,
+      "full_payload_and_binding_equal": true,
+      "round": 3,
+      "warmup": true
+    },
+    {
+      "baseline_100_ns": 615022,
+      "candidate_100_ns": 407703,
+      "full_payload_and_binding_equal": true,
+      "round": 4,
+      "warmup": false
+    },
+    {
+      "baseline_100_ns": 637884,
+      "candidate_100_ns": 474194,
+      "full_payload_and_binding_equal": true,
+      "round": 5,
+      "warmup": false
+    },
+    {
+      "baseline_100_ns": 622663,
+      "candidate_100_ns": 444467,
+      "full_payload_and_binding_equal": true,
+      "round": 6,
+      "warmup": false
+    },
+    {
+      "baseline_100_ns": 632613,
+      "candidate_100_ns": 459738,
+      "full_payload_and_binding_equal": true,
+      "round": 7,
+      "warmup": false
+    },
+    {
+      "baseline_100_ns": 783312,
+      "candidate_100_ns": 401833,
+      "full_payload_and_binding_equal": true,
+      "round": 8,
+      "warmup": false
+    },
+    {
+      "baseline_100_ns": 612665,
+      "candidate_100_ns": 412955,
+      "full_payload_and_binding_equal": true,
+      "round": 9,
+      "warmup": false
+    },
+    {
+      "baseline_100_ns": 689789,
+      "candidate_100_ns": 419384,
+      "full_payload_and_binding_equal": true,
+      "round": 10,
+      "warmup": false
+    },
+    {
+      "baseline_100_ns": 668741,
+      "candidate_100_ns": 398921,
+      "full_payload_and_binding_equal": true,
+      "round": 11,
+      "warmup": false
+    },
+    {
+      "baseline_100_ns": 607767,
+      "candidate_100_ns": 415094,
+      "full_payload_and_binding_equal": true,
+      "round": 12,
+      "warmup": false
+    },
+    {
+      "baseline_100_ns": 631694,
+      "candidate_100_ns": 400250,
+      "full_payload_and_binding_equal": true,
+      "round": 13,
+      "warmup": false
+    },
+    {
+      "baseline_100_ns": 622424,
+      "candidate_100_ns": 421823,
+      "full_payload_and_binding_equal": true,
+      "round": 14,
+      "warmup": false
+    },
+    {
+      "baseline_100_ns": 782119,
+      "candidate_100_ns": 474310,
+      "full_payload_and_binding_equal": true,
+      "round": 15,
+      "warmup": false
+    },
+    {
+      "baseline_100_ns": 825337,
+      "candidate_100_ns": 511115,
+      "full_payload_and_binding_equal": true,
+      "round": 16,
+      "warmup": false
+    },
+    {
+      "baseline_100_ns": 1582618,
+      "candidate_100_ns": 537029,
+      "full_payload_and_binding_equal": true,
+      "round": 17,
+      "warmup": false
+    },
+    {
+      "baseline_100_ns": 632138,
+      "candidate_100_ns": 506044,
+      "full_payload_and_binding_equal": true,
+      "round": 18,
+      "warmup": false
+    },
+    {
+      "baseline_100_ns": 989624,
+      "candidate_100_ns": 391203,
+      "full_payload_and_binding_equal": true,
+      "round": 19,
+      "warmup": false
+    },
+    {
+      "baseline_100_ns": 717300,
+      "candidate_100_ns": 433228,
+      "full_payload_and_binding_equal": true,
+      "round": 20,
+      "warmup": false
+    },
+    {
+      "baseline_100_ns": 1752329,
+      "candidate_100_ns": 429322,
+      "full_payload_and_binding_equal": true,
+      "round": 21,
+      "warmup": false
+    },
+    {
+      "baseline_100_ns": 1509481,
+      "candidate_100_ns": 699466,
+      "full_payload_and_binding_equal": true,
+      "round": 22,
+      "warmup": false
+    },
+    {
+      "baseline_100_ns": 760220,
+      "candidate_100_ns": 429780,
+      "full_payload_and_binding_equal": true,
+      "round": 23,
+      "warmup": false
+    }
+  ]
+}

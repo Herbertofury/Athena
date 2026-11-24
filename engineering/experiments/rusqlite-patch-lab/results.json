@@ -1,0 +1,73 @@
+{
+  "checked_at": "2026-10-29",
+  "baseline_atlas_commit": "10d5fa6f919b2ec16de48e3ed28e621e05ef158d",
+  "upstream": {
+    "release": {
+      "tag": "v0.41.1",
+      "published_at": "2026-10-28T17:59:01Z",
+      "url": "https://github.com/rusqlite/rusqlite/releases/tag/v0.41.1"
+    },
+    "base": "a60e76b5e86ee60442213efe79758a6c2ca8cf3d",
+    "candidate": "18ee76dbb976d5ef7e37ad5a8fffae678ca21a78"
+  },
+  "candidate_registry_sha256": "da9bba6f3506135e120a6586df05be18b48d18896600646a4bec8f993d91a594",
+  "lock_package_changes": [
+    "rusqlite"
+  ],
+  "unchanged_application_files": 46,
+  "baseline_manifest_sha256": "adf4871f051831276de1a9422b9579915f9362ed76bcef937f31aac7b86711df",
+  "candidate_manifest_sha256": "8c76fb5db26c73fe73a7e3ed6c68b56f29d194e5438b6580f583ceaf2b9df9b3",
+  "baseline_lock_sha256": "4ba18f93c261a48a42ea595be3f8a37b6d9c419912d7e7875204ac0641e2dd85",
+  "candidate_lock_sha256": "cc811788ff81bacce40239340a99793998d33a80756e8e7fc53c8505ed67a617",
+  "probe_source_sha256": "283ab7dd8c3a7533eb88048d233146ed07982091b6b717e9fc8b6cad19897336",
+  "probe": [
+    {
+      "version": "0.41.0",
+      "extra_check": false,
+      "observations": {
+        "unknown_pragma_rejected": true,
+        "malformed_pragma_rejected": true,
+        "empty_and_integer_values_exact": true
+      },
+      "stdout": "{\"unknown_pragma_rejected\":true,\"malformed_pragma_rejected\":true,\"empty_and_integer_values_exact\":true}\n",
+      "manifest_sha256": "2b016abc47fc41ef22b22052082c6c727cd7df277aacbe7922023ef2ff18bf3b",
+      "lock_sha256": "e94d9400547bf58d240ff6ce7aebaa8bed95c54e3a96ab64a758bd58c573bb51"
+    },
+    {
+      "version": "0.41.1",
+      "extra_check": false,
+      "observations": {
+        "unknown_pragma_rejected": false,
+        "malformed_pragma_rejected": true,
+        "empty_and_integer_values_exact": true
+      },
+      "stdout": "{\"unknown_pragma_rejected\":false,\"malformed_pragma_rejected\":true,\"empty_and_integer_values_exact\":true}\n",
+      "manifest_sha256": "6175286cffe2e777a1c02d40ff50beaef32d2ffeffee49b8662cbb2feffd7e11",
+      "lock_sha256": "f389e29f56bb2fd209753d109bd5138f657bae08a0f7be4d7e385fe672cb1b65"
+    },
+    {
+      "version": "0.41.1",
+      "extra_check": true,
+      "observations": {
+        "unknown_pragma_rejected": true,
+        "malformed_pragma_rejected": true,
+        "empty_and_integer_values_exact": true
+      },
+      "stdout": "{\"unknown_pragma_rejected\":true,\"malformed_pragma_rejected\":true,\"empty_and_integer_values_exact\":true}\n",
+      "manifest_sha256": "5655aa85ca50b4fa66304b4dc0b75c3390bc769569c707c3163f36d76f1eccb8",
+      "lock_sha256": "f389e29f56bb2fd209753d109bd5138f657bae08a0f7be4d7e385fe672cb1b65"
+    }
+  ],
+  "candidate_checks": {
+    "rust_unit": 132,
+    "integration": 9,
+    "example_tests": 24,
+    "example_suites": 8,
+    "clippy_all_targets": "passed",
+    "host": "Linux; Rust 1.99.1; two Cargo build jobs",
+    "candidate_windows": "not run",
+    "timing_memory_comparison": "not run"
+  },
+  "decision": "Hold as isolated candidate; no demonstrated target benefit; application remains pinned to 0.41.0",
+  "scope": "Actual application correctness regression plus generated PRAGMA behavior probe; no performance or physical power-loss claim"
+}

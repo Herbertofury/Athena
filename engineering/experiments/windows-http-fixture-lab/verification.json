@@ -1,0 +1,28 @@
+{
+  "failed_commit": "bb0b46bd62a2f66b6c046c063a22b0a5d7e2a436",
+  "failed_run": 40969023842,
+  "failed_job": 123780763863,
+  "observed_platform": "windows-latest",
+  "observed_errors": [
+    "Accepted fixture socket read returned OS 10035 WouldBlock",
+    "Client then observed OS 10054 ConnectionReset"
+  ],
+  "failure_log_sha256": "3a16d37bd57702cd38e14bc234f4b5eda0c3a286c01411715ab995f1505ccca0",
+  "local_reproduction": "Explicit nonblocking accepted socket with delayed byte; failed before repair, passed after",
+  "repetitions": 20,
+  "tests_per_repeat": 5,
+  "transport_cases": 12,
+  "production_classifier_unchanged": true,
+  "client_timeouts_milliseconds": {
+    "body_reader_http": 250,
+    "collection_failure_test": 200
+  },
+  "socket_read_write_timeouts_seconds": 1,
+  "retained_source_sha256": {
+    "apps/atlas-lab/examples/body_reader_http.rs": "0b5b7353fff80cc29061321a8749b7b8828852abe969d27530b86256666b749f",
+    "apps/atlas-lab/src/collection_failure.rs": "ee62c6092205274470da40dd621c832f9a837bcc48c45d61e946bfef2cebf314",
+    "apps/atlas-lab/src/public_http.rs": "c09668f695f8c79693ec9248abd2a9b1ca2e36bf612bc2a70df76be278e81941",
+    "apps/atlas-lab/Cargo.lock": "4ba18f93c261a48a42ea595be3f8a37b6d9c419912d7e7875204ac0641e2dd85"
+  },
+  "scope": "Owned fixture portability repair, not a provider, dependency, production timeout or performance change"
+}

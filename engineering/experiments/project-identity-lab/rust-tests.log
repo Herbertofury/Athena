@@ -1,0 +1,116 @@
+   Compiling atlas-lab v0.1.0 (/workspace/scratch/c648c483d888/engineering-atlas/apps/atlas-lab)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 3.49s
+     Running unittests src/lib.rs (engineering-atlas/apps/atlas-lab/target/debug/deps/atlas_lab-dd4e7b91c9921dd9)
+
+running 86 tests
+test collection_failure::tests::malformed_json_and_unknown_details_are_not_echoed ... ok
+test collection_failure::tests::controlled_failures_keep_distinct_categories ... ok
+test collection::tests::preserves_order_case_unicode_and_large_ids ... ok
+test experiment_runner::tests::oversized_configuration_is_rejected_before_work ... ok
+test experiment_runner::tests::cancellation_retains_completed_trials ... ok
+test experiment_runner::tests::exhausted_budget_never_claims_completion ... ok
+test experiment_runner::tests::complete_run_reports_actual_counts_without_blessing_missing_evidence ... ok
+test experiment_runner::tests::failed_warmup_is_stabilization_not_missing_evidence ... ok
+test jobs::tests::batch_jobs_validate_and_deduplicate_without_reordering ... ok
+test experiment_runner::tests::stress_failure_retains_exact_reproducer ... ok
+test jobs::tests::no_arbitrary_urls_or_commands ... ok
+test jobs::tests::expired_claim_cannot_finish_before_reclaim ... ok
+test jobs::tests::duplicate_pending_jobs_share_one_record ... ok
+test modrinth::tests::absent_body_is_distinct_from_empty_and_invalid_body_is_rejected ... ok
+test modrinth::tests::accepts_id_or_slug ... ok
+test jobs::tests::crash_recovery_fences_stale_worker ... ok
+test jobs::tests::saved_version_jobs_are_bounded_deduplicated_and_reject_extra_fields ... ok
+test jobs::tests::upstream_jobs_accept_only_fixed_public_sources ... ok
+test jobs::tests::version_collection_is_bounded_durable_and_not_an_arbitrary_request ... ok
+test modrinth::tests::batch_preserves_request_order_and_explicit_missing ... ok
+test jobs::tests::raw_overview_worker_status_is_serialized_not_concatenated ... ok
+test modrinth::tests::batch_rejects_duplicates_unknown_ids_and_invalid_later_records ... ok
+test jobs::tests::raw_overview_retains_complete_outputs_and_rejects_corruption ... ok
+test modrinth::tests::batch_limits_and_query_are_unambiguous ... ok
+test modrinth::tests::eight_character_slug_is_not_misclassified_as_canonical_id ... ok
+test modrinth::tests::rejects_url_path_query_and_unicode_injection ... ok
+test modrinth::tests::missing_gallery_is_unknown_not_verified_empty ... ok
+test modrinth::tests::requires_complete_typed_metadata ... ok
+test modrinth::tests::gallery_is_not_silently_capped_at_eight ... ok
+test modrinth::tests::single_response_binds_request_without_folding_canonical_id ... ok
+test modrinth_versions::tests::preserves_original_payload_unknown_fields_and_nulls ... ok
+test modrinth_versions::tests::orders_requested_ids_and_keeps_missing_explicit ... ok
+test modrinth::tests::limits_body_before_json_parse ... ok
+test server::tests::partial_batch_is_not_reported_as_success ... ok
+test server::tests::provider_wait_preserves_long_cooldown_and_cancellation ... ok
+test modrinth_versions::tests::rejects_corrupt_oversized_duplicate_and_unrequested_results ... ok
+test server::tests::rejects_cross_site_and_dns_rebinding ... ok
+test snapshots::tests::canonical_id_survives_slug_change ... ok
+test snapshots::tests::database_failure_rolls_back_earlier_batch_rows ... ok
+test snapshots::tests::failure_preserves_last_verified_generation ... ok
+test server::tests::queued_version_receipts_preserve_full_bytes_and_last_good ... ok
+test snapshots::tests::invalid_batch_cannot_partially_commit ... ok
+test snapshots::tests::mismatched_single_response_cannot_write_or_replace_a_generation ... ok
+test snapshots::tests::invalid_snapshot_does_not_replace_good_one ... ok
+test snapshots::tests::partial_batch_keeps_last_good_and_records_each_identity ... ok
+test snapshots::tests::upstream_provider_cooldown_survives_reopen ... ok
+test snapshots::tests::upstream_budget_is_bounded_and_interruption_fails_closed ... ok
+test snapshots::tests::version_lookup_rejects_misbound_stored_identity ... ok
+test tests::cancellation_failure_requires_repair ... ok
+test tests::excess_memory_requires_repair ... ok
+test tests::fast_wrong_goes_to_stabilization ... ok
+test tests::healthy_is_review_only ... ok
+test tests::invalid_policy_fails_closed ... ok
+test snapshots::tests::upstream_snapshots_preserve_bytes_states_and_failures ... ok
+test tests::journal_preserves_failure_and_repair ... ok
+test tests::no_memory_measurement_blocks_review ... ok
+test tests::legacy_evidence_defaults_and_early_failure_gate ... ok
+test tests::one_tail_regression_is_not_hidden ... ok
+test tests::repair_cannot_change_the_workload_to_hide_failure ... ok
+test tests::same_revision_rejected ... ok
+test tests::repair_lineage_rejects_changed_environment ... ok
+test tests::stress_failure_not_hidden_by_few_trials ... ok
+test tests::unknown_cancellation_is_not_a_success ... ok
+test tests::unknown_fields_are_rejected_in_experiment_evidence ... ok
+test tests::zero_duration_is_not_infinite_speedup ... ok
+test upstream_reviews::tests::commit_checkpoint_is_one_exact_commit ... ok
+test upstream_reviews::tests::exact_body_and_identity_are_preserved ... ok
+test upstream_reviews::tests::fixed_sources_reject_urls_and_unknown_routes ... ok
+test upstream_reviews::tests::reset_is_epoch_time_and_retry_after_is_seconds ... ok
+test validated_raw::tests::preserves_every_original_byte_in_valid_value ... ok
+test validated_raw::tests::repairs_raw_only_validation_gaps ... ok
+test modrinth::tests::long_body_is_retained_exactly_without_executing_markup ... ok
+test server::tests::normal_provider_slot_does_not_return_early ... ok
+test version_experiment_runner::tests::hash_matches_known_standard_vector ... ok
+test version_experiment_runner::tests::interrupted_sample_is_retained_without_fabricated_pair ... ok
+test collection_failure::tests::transport_error_does_not_expose_attached_url ... ok
+test version_experiment_runner::tests::complete_run_keeps_raw_samples_and_blocks_promotion ... ok
+test version_experiment_runner::tests::known_failure_is_stabilize_even_before_a_complete_pair ... ok
+test version_experiment_runner::tests::rejects_wrong_identity_generation_and_oversize_input ... ok
+test version_experiment_runner::tests::zero_time_budget_retains_zero_iteration_receipt ... ok
+test modrinth::tests::an_immediate_second_call_is_rejected_before_transport ... ok
+test validated_raw::tests::matches_depth_boundaries_and_malformed_json ... ok
+test server::tests::oversized_result_fails_explicitly_instead_of_looping_on_finalization ... ok
+test modrinth::tests::thousand_batch_permutations_preserve_complete_project_projection ... ok
+test collection::tests::generated_differential_stress ... ok
+test validated_raw::tests::ten_thousand_structured_cases_and_mutations_match ... ok
+
+test result: ok. 86 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.61s
+
+     Running unittests src/main.rs (engineering-atlas/apps/atlas-lab/target/debug/deps/atlas_lab-423e38c38c591af5)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/persistence.rs (engineering-atlas/apps/atlas-lab/target/debug/deps/persistence-19951e8a7d409990)
+
+running 4 tests
+test snapshots_survive_close_reopen_and_failure ... ok
+test batch_survives_reopen_without_replacing_missing_project ... ok
+test separate_connections_cannot_claim_the_same_live_job ... ok
+test version_payloads_survive_reopen_missing_refresh_and_failed_transaction ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+   Doc-tests atlas_lab
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+

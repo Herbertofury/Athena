@@ -1,0 +1,42 @@
+   Compiling atlas-lab v0.1.0 (engineering-atlas/apps/atlas-lab)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 5.80s
+     Running unittests src/lib.rs (engineering-atlas/apps/atlas-lab/target/debug/deps/atlas_lab-dd4e7b91c9921dd9)
+
+running 3 tests
+test snapshots::durability_contract_regression::opened_store_requests_extra_sync ... FAILED
+test jobs::durability_contract_regression::opened_store_requests_extra_sync ... FAILED
+test journal::opened_journal_requests_extra_sync ... FAILED
+
+failures:
+
+---- snapshots::durability_contract_regression::opened_store_requests_extra_sync stdout ----
+
+thread 'snapshots::durability_contract_regression::opened_store_requests_extra_sync' (803) panicked at src/snapshots.rs:740:9:
+assertion `left == right` failed
+  left: 2
+ right: 3
+
+---- jobs::durability_contract_regression::opened_store_requests_extra_sync stdout ----
+
+thread 'jobs::durability_contract_regression::opened_store_requests_extra_sync' (801) panicked at src/jobs.rs:529:9:
+assertion `left == right` failed
+  left: 2
+ right: 3
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+---- journal::opened_journal_requests_extra_sync stdout ----
+
+thread 'journal::opened_journal_requests_extra_sync' (802) panicked at src/lib.rs:188:9:
+assertion `left == right` failed
+  left: 2
+ right: 3
+
+
+failures:
+    jobs::durability_contract_regression::opened_store_requests_extra_sync
+    journal::opened_journal_requests_extra_sync
+    snapshots::durability_contract_regression::opened_store_requests_extra_sync
+
+test result: FAILED. 0 passed; 3 failed; 0 ignored; 0 measured; 102 filtered out; finished in 0.01s
+
+error: test failed, to rerun pass `--lib`

@@ -1,0 +1,115 @@
+{
+  "harness": "atlas-event-log-recovery-v1",
+  "source_module": "/Engineering-Atlas/media-lab/event-log-benchmark.6b7f61be3311a983.js",
+  "checked_at": "2026-10-28T05:23:21.275Z",
+  "scope": "generated structural faults on actual browser DOM; no provider requests",
+  "complete": true,
+  "baseline": [
+    {
+      "scenario": "first segment",
+      "generated_fault": true,
+      "initial_attempt_rejected": true,
+      "previous_text_and_count_retained": true,
+      "retry_error": null,
+      "complete_output_equal": false,
+      "count": 1,
+      "expected_count": 1,
+      "passed": false
+    },
+    {
+      "scenario": "entry-count boundary",
+      "generated_fault": true,
+      "initial_attempt_rejected": true,
+      "previous_text_and_count_retained": true,
+      "retry_error": null,
+      "complete_output_equal": true,
+      "count": 65,
+      "expected_count": 65,
+      "passed": true
+    },
+    {
+      "scenario": "text-size boundary",
+      "generated_fault": true,
+      "initial_attempt_rejected": true,
+      "previous_text_and_count_retained": true,
+      "retry_error": null,
+      "complete_output_equal": false,
+      "count": 2,
+      "expected_count": 2,
+      "passed": false
+    }
+  ],
+  "repaired": [
+    {
+      "scenario": "first segment",
+      "generated_fault": true,
+      "initial_attempt_rejected": true,
+      "previous_text_and_count_retained": true,
+      "retry_error": null,
+      "complete_output_equal": true,
+      "count": 1,
+      "expected_count": 1,
+      "passed": true
+    },
+    {
+      "scenario": "entry-count boundary",
+      "generated_fault": true,
+      "initial_attempt_rejected": true,
+      "previous_text_and_count_retained": true,
+      "retry_error": null,
+      "complete_output_equal": true,
+      "count": 65,
+      "expected_count": 65,
+      "passed": true
+    },
+    {
+      "scenario": "text-size boundary",
+      "generated_fault": true,
+      "initial_attempt_rejected": true,
+      "previous_text_and_count_retained": true,
+      "retry_error": null,
+      "complete_output_equal": true,
+      "count": 2,
+      "expected_count": 2,
+      "passed": true
+    }
+  ],
+  "control": [
+    {
+      "scenario": "first segment",
+      "generated_fault": true,
+      "initial_attempt_rejected": true,
+      "previous_text_and_count_retained": true,
+      "retry_error": null,
+      "complete_output_equal": true,
+      "count": 1,
+      "expected_count": 1,
+      "passed": true
+    },
+    {
+      "scenario": "entry-count boundary",
+      "generated_fault": true,
+      "initial_attempt_rejected": true,
+      "previous_text_and_count_retained": true,
+      "retry_error": null,
+      "complete_output_equal": true,
+      "count": 65,
+      "expected_count": 65,
+      "passed": true
+    },
+    {
+      "scenario": "text-size boundary",
+      "generated_fault": true,
+      "initial_attempt_rejected": true,
+      "previous_text_and_count_retained": true,
+      "retry_error": null,
+      "complete_output_equal": true,
+      "count": 2,
+      "expected_count": 2,
+      "passed": true
+    }
+  ],
+  "baseline_failure_reproduced": true,
+  "repaired_all_passed": true,
+  "control_all_passed": true
+}

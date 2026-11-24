@@ -1,0 +1,77 @@
+{
+  "reviewedAt": "2026-11-07T04:51:59Z",
+  "scope": "Official source retrieval and original authored teaching, not exhaustive protocol specification or exam mapping.",
+  "sources": [
+    {
+      "url": "https://www.rfc-editor.org/rfc/rfc4632",
+      "purpose": "CIDR and prefix model",
+      "status": "retrieved"
+    },
+    {
+      "url": "https://www.rfc-editor.org/rfc/rfc1034",
+      "purpose": "DNS concepts; updated by later RFCs",
+      "status": "retrieved"
+    },
+    {
+      "url": "https://www.rfc-editor.org/rfc/rfc2308",
+      "purpose": "Negative caching; updated by later RFCs",
+      "status": "retrieved"
+    },
+    {
+      "url": "https://www.rfc-editor.org/rfc/rfc2131",
+      "purpose": "DHCPv4 model; updated by later RFCs",
+      "status": "retrieved"
+    },
+    {
+      "url": "https://www.rfc-editor.org/rfc/rfc3927",
+      "purpose": "IPv4 link-local scope",
+      "status": "retrieved"
+    },
+    {
+      "url": "https://www.rfc-editor.org/rfc/rfc826",
+      "purpose": "ARP next-hop address resolution",
+      "status": "retrieved"
+    },
+    {
+      "url": "https://www.rfc-editor.org/rfc/rfc1918",
+      "purpose": "Private address space",
+      "status": "retrieved"
+    },
+    {
+      "url": "https://www.rfc-editor.org/rfc/rfc9293",
+      "purpose": "TCP specification",
+      "status": "retrieved"
+    },
+    {
+      "url": "https://www.rfc-editor.org/rfc/rfc9846",
+      "purpose": "Current retrieved TLS 1.3 specification; obsoletes RFC 8446",
+      "status": "retrieved"
+    },
+    {
+      "url": "https://www.rfc-editor.org/rfc/rfc9110.html",
+      "purpose": "HTTP semantics",
+      "status": "retrieved"
+    },
+    {
+      "url": "https://docs.python.org/3/library/ipaddress.html",
+      "purpose": "Address-library validation",
+      "status": "retrieved"
+    },
+    {
+      "url": "https://docs.python.org/3/library/http.server.html",
+      "purpose": "Teaching server API and production warning",
+      "status": "retrieved"
+    },
+    {
+      "url": "https://docs.python.org/3/library/http.client.html",
+      "purpose": "HTTP client API",
+      "status": "retrieved"
+    }
+  ],
+  "retrievalNotes": [
+    "The /rfc/rfc9110 URL timed out; the official .html form was retrieved.",
+    "RFC 5737 retrieval was rate-limited; no retry used. Examples use established documentation ranges, never actual network targets.",
+    "The Microsoft TCP troubleshooting URL was inaccessible through the retrieval tool and removed from the new lesson source list.",
+    "RFC 8446 page reports it obsolete by RFC 9846; both were checked and teaching source updated."
+  ]
+}

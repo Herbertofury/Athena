@@ -1,0 +1,76 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-10-28",
+  "scope": "Connection outcomes from this assisted research session; no platform-wide support acceptance",
+  "privateAccountIdentifiersPublished": false,
+  "credentialsPublished": false,
+  "cookiesPublished": false,
+  "signedUrlsPublished": false,
+  "browserInventory": {
+    "available": [
+      "remote Chrome via supported browser control"
+    ],
+    "localOperaConnectionFound": false,
+    "localChromeProfileConnectionFound": false,
+    "inventoryIsSessionSpecific": true,
+    "pluginSearchResult": "No local Opera/Chrome connector surfaced in the available plugin search. Another cloud browser does not attach a local profile."
+  },
+  "sites": [
+    {
+      "site": "modcollective",
+      "origin": "https://www.modcollective.gg",
+      "status": "authenticated_fixture_observed",
+      "method": "Secure Google sign-in and the destination free-member continuation",
+      "positiveSignals": [
+        "Notifications and ModQ controls after hydration",
+        "Account-scoped free-download quota",
+        "Authorized free-download event completed"
+      ],
+      "receipt": "modcollective-browser-2026-10-28.json",
+      "nativeFollowMutation": false,
+      "membershipPurchase": false,
+      "fullSupportAccepted": false
+    },
+    {
+      "site": "github-wiki",
+      "origin": "https://github.com",
+      "returnUrl": "https://github.com/Herbertofury/Engineering-Atlas/wiki/Site-Adapters",
+      "status": "signed_in_publication_pending",
+      "positiveSignals": [
+        "Edit and New page controls on the wiki"
+      ],
+      "publicationVerifiedByThisSession": false
+    },
+    {
+      "site": "loverslab",
+      "origin": "https://www.loverslab.com",
+      "status": "blocked_by_tool_policy_before_login",
+      "authenticated": false,
+      "retryViaAlternateRouteAttempted": false,
+      "siteAvailabilityConclusion": "not established"
+    },
+    {
+      "site": "f95zone",
+      "origin": "https://f95zone.to",
+      "returnUrl": "https://f95zone.to/threads/the-sims-4-nsfw-modding.73299/page-681",
+      "status": "blocked_by_tool_policy_before_login",
+      "authenticated": false,
+      "retryViaAlternateRouteAttempted": false,
+      "siteAvailabilityConclusion": "not established"
+    }
+  ],
+  "browserFailure": {
+    "status": "browser_backend_unavailable",
+    "observedAfter": "Completed Mod Collective free-file download; creator-profile navigation began",
+    "failedOperations": [
+      "Creator-profile URL/DOM observation",
+      "Browser diagnostic documentation request",
+      "Browser runtime reset request"
+    ],
+    "eachTimeoutSeconds": 300,
+    "successfulEarlierObservationsPreserved": true,
+    "siteFailureInferred": false
+  },
+  "remainingLoginQueue": "See docs/adapters/authenticated-research.md and the game guides. An observed login route is not an authenticated fixture.",
+  "retryRule": "Use a supported secure sign-in prompt for an observed permitted login screen. Verify the destination after callback. Do not reuse credentials from chat, export browser cookies, or retry an explicit tool policy block through another surface."
+}

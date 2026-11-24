@@ -1,0 +1,325 @@
+{
+  "date": "2026-10-26",
+  "evidence": "measured_local_generated_workload",
+  "harness_sha256": "9cb9675ae7bbafff6a2c0bcf4bcae1eb1bc401e6b9c144a4567896551689817d",
+  "implementation_sha256": "8b1a61e238235d0b3b9780925637e19441f7cdd115034182ed2f43bdb0584fec",
+  "environment": {
+    "python": "3.12.14",
+    "system": "Linux",
+    "machine": "x86_64"
+  },
+  "rounds": 9,
+  "iterations_per_sample": 1,
+  "order_seed": 20261026,
+  "memory_measured": false,
+  "workloads": {
+    "sparse_1000": {
+      "count": 1000,
+      "result_count": 20,
+      "result_sha256": "b0691bb9fd0b38bed25e839cbf4a533585147b677760c1016b706dd7cbb9e4a1",
+      "input_sha256": "ab0af9282023109ad1fe5329ebdff2e38652ea402f7e9cd23a771d46a3c425ee",
+      "grid_info": {
+        "fallback": false,
+        "cells": 5188,
+        "candidate_pairs": 20
+      },
+      "round_orders": [
+        [
+          "grid",
+          "brute_force"
+        ],
+        [
+          "brute_force",
+          "grid"
+        ],
+        [
+          "brute_force",
+          "grid"
+        ],
+        [
+          "grid",
+          "brute_force"
+        ],
+        [
+          "brute_force",
+          "grid"
+        ],
+        [
+          "brute_force",
+          "grid"
+        ],
+        [
+          "grid",
+          "brute_force"
+        ],
+        [
+          "brute_force",
+          "grid"
+        ],
+        [
+          "brute_force",
+          "grid"
+        ]
+      ],
+      "timings_ms": {
+        "brute_force": [
+          104.053686,
+          96.733806,
+          112.548796,
+          85.887083,
+          98.269297,
+          103.141386,
+          101.050528,
+          116.736416,
+          108.409874
+        ],
+        "grid": [
+          5.571079,
+          4.976181,
+          5.484162,
+          4.450026,
+          5.865979,
+          5.28729,
+          4.481293,
+          8.680455,
+          3.723191
+        ]
+      },
+      "median_ms": {
+        "brute_force": 103.141386,
+        "grid": 5.28729
+      }
+    },
+    "dense_500": {
+      "count": 500,
+      "result_count": 54058,
+      "result_sha256": "6c3e58e88d3a254e07882d9dc2767bbe48f980ccf12f2cf32440a142c9144d21",
+      "input_sha256": "d2a464c5863adb8c941563c2038677b9a127355e057dc56d513af5991b0c35c0",
+      "grid_info": {
+        "fallback": false,
+        "cells": 35,
+        "candidate_pairs": 88196
+      },
+      "round_orders": [
+        [
+          "brute_force",
+          "grid"
+        ],
+        [
+          "brute_force",
+          "grid"
+        ],
+        [
+          "brute_force",
+          "grid"
+        ],
+        [
+          "grid",
+          "brute_force"
+        ],
+        [
+          "grid",
+          "brute_force"
+        ],
+        [
+          "grid",
+          "brute_force"
+        ],
+        [
+          "grid",
+          "brute_force"
+        ],
+        [
+          "brute_force",
+          "grid"
+        ],
+        [
+          "grid",
+          "brute_force"
+        ]
+      ],
+      "timings_ms": {
+        "brute_force": [
+          36.654181,
+          43.362182,
+          36.988604,
+          37.276768,
+          42.978197,
+          37.94919,
+          35.919052,
+          38.903344,
+          33.453468
+        ],
+        "grid": [
+          162.916119,
+          159.313458,
+          174.16187,
+          172.915119,
+          157.041387,
+          157.615462,
+          155.797718,
+          169.670403,
+          155.635205
+        ]
+      },
+      "median_ms": {
+        "brute_force": 37.276768,
+        "grid": 159.313458
+      }
+    },
+    "mixed_radius_500": {
+      "count": 500,
+      "result_count": 9080,
+      "result_sha256": "2cf2fd81c8f56cf0c2c1ff3e8c5383b4c71ea2f45a2bd727cba9202d0f03d978",
+      "input_sha256": "d931d0ade9d35231fba15fa967025903ad4eb0369374aecc0c8722ed241fe3ff",
+      "grid_info": {
+        "fallback": false,
+        "cells": 7403,
+        "candidate_pairs": 11187
+      },
+      "round_orders": [
+        [
+          "brute_force",
+          "grid"
+        ],
+        [
+          "grid",
+          "brute_force"
+        ],
+        [
+          "brute_force",
+          "grid"
+        ],
+        [
+          "grid",
+          "brute_force"
+        ],
+        [
+          "brute_force",
+          "grid"
+        ],
+        [
+          "brute_force",
+          "grid"
+        ],
+        [
+          "brute_force",
+          "grid"
+        ],
+        [
+          "grid",
+          "brute_force"
+        ],
+        [
+          "brute_force",
+          "grid"
+        ]
+      ],
+      "timings_ms": {
+        "brute_force": [
+          36.948321,
+          31.08903,
+          37.114919,
+          32.850053,
+          34.976914,
+          41.759218,
+          30.572785,
+          40.864941,
+          34.361177
+        ],
+        "grid": [
+          247.449438,
+          279.286403,
+          236.934841,
+          252.644271,
+          259.247131,
+          251.480829,
+          269.89865,
+          244.628438,
+          277.28166
+        ]
+      },
+      "median_ms": {
+        "brute_force": 34.976914,
+        "grid": 252.644271
+      }
+    },
+    "huge_radius_fallback": {
+      "count": 200,
+      "result_count": 204,
+      "result_sha256": "7f3cb2df25675c2a47ad9a2df1e14f279efba7470fdd4be5242eb93be8ef45e0",
+      "input_sha256": "05a5bf3080190af01abbf6b6c62fd2c06fecad2daa3f3510378fb8e4fd6ff87b",
+      "grid_info": {
+        "fallback": true,
+        "reason": "cell budget"
+      },
+      "round_orders": [
+        [
+          "brute_force",
+          "grid"
+        ],
+        [
+          "brute_force",
+          "grid"
+        ],
+        [
+          "brute_force",
+          "grid"
+        ],
+        [
+          "grid",
+          "brute_force"
+        ],
+        [
+          "brute_force",
+          "grid"
+        ],
+        [
+          "brute_force",
+          "grid"
+        ],
+        [
+          "brute_force",
+          "grid"
+        ],
+        [
+          "brute_force",
+          "grid"
+        ],
+        [
+          "brute_force",
+          "grid"
+        ]
+      ],
+      "timings_ms": {
+        "brute_force": [
+          4.679423,
+          4.026573,
+          3.893966,
+          4.774752,
+          5.076621,
+          5.014016,
+          4.98762,
+          4.676345,
+          8.782299
+        ],
+        "grid": [
+          3.984565,
+          4.428049,
+          3.691382,
+          3.714072,
+          4.442604,
+          5.466721,
+          6.320494,
+          9.888126,
+          6.252463
+        ]
+      },
+      "median_ms": {
+        "brute_force": 4.774752,
+        "grid": 4.442604
+      }
+    }
+  },
+  "qualification": "Integer-lattice generated inputs only. Not Jolt, Bevy, GPU, continuous collision, real physics or application acceptance."
+}

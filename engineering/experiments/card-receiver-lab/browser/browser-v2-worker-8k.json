@@ -1,0 +1,269 @@
+{
+  "harness": "atlas-complete-receiver-v2-callback-clock",
+  "started_at": "2026-10-28T08:29:25.232Z",
+  "scope": "Generated browser receiver validation; no target acceptance",
+  "count": 200,
+  "bytes": 8192,
+  "execution": "worker",
+  "complete": true,
+  "samples": [
+    {
+      "round": 0,
+      "lane": "whole",
+      "request_ms": 232.29999995231628,
+      "validation_ms": 58.59999996423721,
+      "frame_waits_ms": [
+        12.300000011920929,
+        6.099999964237213,
+        15.700000047683716,
+        16.69999998807907,
+        40.5,
+        8.099999964237213,
+        1,
+        20.100000023841858,
+        13.199999988079071,
+        19.400000035762787,
+        14.699999988079071,
+        16.099999964237213,
+        18.600000023841858,
+        15.300000011920929,
+        16.099999964237213
+      ],
+      "complete_parity": true,
+      "post_sample_calibration": {
+        "scope": "empty-frame scheduling check; not physical paint",
+        "waits_ms": [
+          2.299999952316284,
+          16,
+          16.900000035762787,
+          16.599999964237213,
+          19.80000001192093,
+          12.699999988079071,
+          28.200000047683716,
+          5.799999952316284
+        ],
+        "complete": true,
+        "reliable": true,
+        "slow_count": 0,
+        "threshold_ms": 200,
+        "reason": null
+      }
+    },
+    {
+      "round": 0,
+      "lane": "bounded",
+      "request_ms": 86.59999996423721,
+      "validation_ms": 14.5,
+      "frame_waits_ms": [
+        24.69999998807907,
+        8.5,
+        16.30000001192093,
+        17.19999998807907,
+        20.19999998807907
+      ],
+      "complete_parity": true,
+      "post_sample_calibration": {
+        "scope": "empty-frame scheduling check; not physical paint",
+        "waits_ms": [
+          9.699999988079071,
+          17.69999998807907,
+          12.100000023841858,
+          16.69999998807907,
+          16.899999976158142,
+          16.5,
+          16.5,
+          17.80000001192093
+        ],
+        "complete": true,
+        "reliable": true,
+        "slow_count": 0,
+        "threshold_ms": 200,
+        "reason": null
+      }
+    },
+    {
+      "round": 1,
+      "lane": "bounded",
+      "request_ms": 108.09999996423721,
+      "validation_ms": 34.10000002384186,
+      "frame_waits_ms": [
+        15.300000011920929,
+        16.5,
+        16.30000001192093,
+        16.599999964237213,
+        17.400000035762787,
+        15.699999988079071,
+        19.30000001192093
+      ],
+      "complete_parity": true,
+      "post_sample_calibration": {
+        "scope": "empty-frame scheduling check; not physical paint",
+        "waits_ms": [
+          6.5,
+          15.900000035762787,
+          16.80000001192093,
+          16.599999964237213,
+          16.80000001192093,
+          16.80000001192093,
+          17.099999964237213,
+          17.5
+        ],
+        "complete": true,
+        "reliable": true,
+        "slow_count": 0,
+        "threshold_ms": 200,
+        "reason": null
+      }
+    },
+    {
+      "round": 1,
+      "lane": "whole",
+      "request_ms": 176.19999998807907,
+      "validation_ms": 71.5,
+      "frame_waits_ms": [
+        16.099999964237213,
+        16.400000035762787,
+        16.299999952316284,
+        16.80000001192093,
+        17,
+        18.900000035762787,
+        15.5,
+        16.799999952316284,
+        15.100000023841858,
+        17,
+        16
+      ],
+      "complete_parity": true,
+      "post_sample_calibration": {
+        "scope": "empty-frame scheduling check; not physical paint",
+        "waits_ms": [
+          6.600000023841858,
+          17.5,
+          16.69999998807907,
+          17.19999998807907,
+          15.800000011920929,
+          15.800000011920929,
+          17.69999998807907,
+          16.19999998807907
+        ],
+        "complete": true,
+        "reliable": true,
+        "slow_count": 0,
+        "threshold_ms": 200,
+        "reason": null
+      }
+    },
+    {
+      "round": 2,
+      "lane": "whole",
+      "request_ms": 161.5999999642372,
+      "validation_ms": 50.19999998807907,
+      "frame_waits_ms": [
+        16.19999998807907,
+        18.30000001192093,
+        14.699999988079071,
+        16.80000001192093,
+        16.600000023841858,
+        17.099999964237213,
+        16.600000023841858,
+        16.099999964237213,
+        16.600000023841858,
+        18.899999976158142
+      ],
+      "complete_parity": true,
+      "post_sample_calibration": {
+        "scope": "empty-frame scheduling check; not physical paint",
+        "waits_ms": [
+          6.900000035762787,
+          17,
+          17.099999964237213,
+          15.600000023841858,
+          17,
+          16.69999998807907,
+          16.600000023841858,
+          17.399999976158142
+        ],
+        "complete": true,
+        "reliable": true,
+        "slow_count": 0,
+        "threshold_ms": 200,
+        "reason": null
+      }
+    },
+    {
+      "round": 2,
+      "lane": "bounded",
+      "request_ms": 88.09999996423721,
+      "validation_ms": 22.19999998807907,
+      "frame_waits_ms": [
+        16.399999976158142,
+        16.399999976158142,
+        16.700000047683716,
+        16.099999964237213,
+        17.80000001192093,
+        16.69999998807907
+      ],
+      "complete_parity": true,
+      "post_sample_calibration": {
+        "scope": "empty-frame scheduling check; not physical paint",
+        "waits_ms": [
+          8.399999976158142,
+          20.19999998807907,
+          12.600000023841858,
+          11.199999988079071,
+          16.80000001192093,
+          16.80000001192093,
+          16.899999976158142,
+          17.30000001192093
+        ],
+        "complete": true,
+        "reliable": true,
+        "slow_count": 0,
+        "threshold_ms": 200,
+        "reason": null
+      }
+    }
+  ],
+  "limitations": [
+    "Frame gaps are scheduling observations, not INP or physical paint",
+    "No heap/RSS or provider-media measurement",
+    "Worker request duration includes startup, full input clone and full returned-record clone",
+    "Preparation and post-validation parity check are outside sample timers",
+    "Main-thread synchronous serialization cannot be interrupted mid-call; cancellation is checked at the next boundary"
+  ],
+  "calibration": {
+    "scope": "empty-frame scheduling check; not physical paint",
+    "waits_ms": [
+      6.199999988079071,
+      16.900000035762787,
+      17.19999998807907,
+      16.5,
+      18.100000023841858,
+      14.899999976158142,
+      16.600000023841858,
+      17.099999964237213
+    ],
+    "complete": true,
+    "reliable": true,
+    "slow_count": 0,
+    "threshold_ms": 200,
+    "reason": null
+  },
+  "dataset": {
+    "count": 200,
+    "metadata_bytes_per_record": 8192,
+    "serialized_bytes": 1668001,
+    "sha256": "b6fb077f6be7e0af3734bdde69d1a995e469574253cb55ffe72b99d148ec6344",
+    "generation_ms": 10.300000011920929,
+    "serialization_ms": 24.5,
+    "encoding_ms": 16.5,
+    "digest_ms": 6.5,
+    "hash_ms": 47.5
+  },
+  "focus_state": {
+    "started_focused": true,
+    "focus_lost": false,
+    "focused_now": true
+  },
+  "finished_at": "2026-10-28T08:29:27.107Z"
+}

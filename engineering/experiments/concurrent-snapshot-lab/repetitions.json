@@ -1,0 +1,176 @@
+{
+  "checked_at": "2026-10-29T22:40:32.683316+00:00",
+  "scope": "Generated four-writer actual SnapshotStore integration; DELETE and WAL; not a performance comparison or physical power-loss test",
+  "binary_sha256": "7eb4e39e4051c28733101860fa603252ece990b53c02eea0aa2eef4c101a0f0f",
+  "source_sha256": {
+    "apps/atlas-lab/tests/persistence.rs": "b69867474049b4c673be13fca46b437f6628efd131cfc9475d94f7b77787db4e",
+    "apps/atlas-lab/src/snapshots.rs": "a72fb3ebc8f9e3a9040e6b9ae9437ca8353fcde3ba1a81e69fcf3493d3426a62",
+    "apps/atlas-lab/src/storage_connection.rs": "9a56cfb68858623237244d15fcc85a9d601bd84dd997cde68f631bb8c7484c55",
+    "apps/atlas-lab/Cargo.lock": "4ba18f93c261a48a42ea595be3f8a37b6d9c419912d7e7875204ac0641e2dd85"
+  },
+  "writes_per_run": 128,
+  "failure_attempts_per_run": 8,
+  "samples": [
+    {
+      "run": 0,
+      "exit_code": 0,
+      "passed": true,
+      "elapsed_seconds": 0.06979169195983559,
+      "stdout": "\nrunning 1 test\ntest concurrent_snapshot_writers_preserve_complete_history_and_attempt_pairing ... ok\n\ntest result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 5 filtered out; finished in 0.06s\n\n",
+      "stderr": ""
+    },
+    {
+      "run": 1,
+      "exit_code": 0,
+      "passed": true,
+      "elapsed_seconds": 0.06908530800137669,
+      "stdout": "\nrunning 1 test\ntest concurrent_snapshot_writers_preserve_complete_history_and_attempt_pairing ... ok\n\ntest result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 5 filtered out; finished in 0.06s\n\n",
+      "stderr": ""
+    },
+    {
+      "run": 2,
+      "exit_code": 0,
+      "passed": true,
+      "elapsed_seconds": 0.5787106520147063,
+      "stdout": "\nrunning 1 test\ntest concurrent_snapshot_writers_preserve_complete_history_and_attempt_pairing ... ok\n\ntest result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 5 filtered out; finished in 0.56s\n\n",
+      "stderr": ""
+    },
+    {
+      "run": 3,
+      "exit_code": 0,
+      "passed": true,
+      "elapsed_seconds": 0.06941618700511754,
+      "stdout": "\nrunning 1 test\ntest concurrent_snapshot_writers_preserve_complete_history_and_attempt_pairing ... ok\n\ntest result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 5 filtered out; finished in 0.06s\n\n",
+      "stderr": ""
+    },
+    {
+      "run": 4,
+      "exit_code": 0,
+      "passed": true,
+      "elapsed_seconds": 0.053367774991784245,
+      "stdout": "\nrunning 1 test\ntest concurrent_snapshot_writers_preserve_complete_history_and_attempt_pairing ... ok\n\ntest result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 5 filtered out; finished in 0.05s\n\n",
+      "stderr": ""
+    },
+    {
+      "run": 5,
+      "exit_code": 0,
+      "passed": true,
+      "elapsed_seconds": 0.3317225920036435,
+      "stdout": "\nrunning 1 test\ntest concurrent_snapshot_writers_preserve_complete_history_and_attempt_pairing ... ok\n\ntest result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 5 filtered out; finished in 0.21s\n\n",
+      "stderr": ""
+    },
+    {
+      "run": 6,
+      "exit_code": 0,
+      "passed": true,
+      "elapsed_seconds": 0.060935697983950377,
+      "stdout": "\nrunning 1 test\ntest concurrent_snapshot_writers_preserve_complete_history_and_attempt_pairing ... ok\n\ntest result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 5 filtered out; finished in 0.06s\n\n",
+      "stderr": ""
+    },
+    {
+      "run": 7,
+      "exit_code": 0,
+      "passed": true,
+      "elapsed_seconds": 0.053201953996904194,
+      "stdout": "\nrunning 1 test\ntest concurrent_snapshot_writers_preserve_complete_history_and_attempt_pairing ... ok\n\ntest result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 5 filtered out; finished in 0.05s\n\n",
+      "stderr": ""
+    },
+    {
+      "run": 8,
+      "exit_code": 0,
+      "passed": true,
+      "elapsed_seconds": 0.10375474096508697,
+      "stdout": "\nrunning 1 test\ntest concurrent_snapshot_writers_preserve_complete_history_and_attempt_pairing ... ok\n\ntest result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 5 filtered out; finished in 0.06s\n\n",
+      "stderr": ""
+    },
+    {
+      "run": 9,
+      "exit_code": 0,
+      "passed": true,
+      "elapsed_seconds": 0.0408816669951193,
+      "stdout": "\nrunning 1 test\ntest concurrent_snapshot_writers_preserve_complete_history_and_attempt_pairing ... ok\n\ntest result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 5 filtered out; finished in 0.04s\n\n",
+      "stderr": ""
+    },
+    {
+      "run": 10,
+      "exit_code": 0,
+      "passed": true,
+      "elapsed_seconds": 0.05067794001661241,
+      "stdout": "\nrunning 1 test\ntest concurrent_snapshot_writers_preserve_complete_history_and_attempt_pairing ... ok\n\ntest result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 5 filtered out; finished in 0.04s\n\n",
+      "stderr": ""
+    },
+    {
+      "run": 11,
+      "exit_code": 0,
+      "passed": true,
+      "elapsed_seconds": 0.07139087101677433,
+      "stdout": "\nrunning 1 test\ntest concurrent_snapshot_writers_preserve_complete_history_and_attempt_pairing ... ok\n\ntest result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 5 filtered out; finished in 0.07s\n\n",
+      "stderr": ""
+    },
+    {
+      "run": 12,
+      "exit_code": 0,
+      "passed": true,
+      "elapsed_seconds": 0.07826152996858582,
+      "stdout": "\nrunning 1 test\ntest concurrent_snapshot_writers_preserve_complete_history_and_attempt_pairing ... ok\n\ntest result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 5 filtered out; finished in 0.07s\n\n",
+      "stderr": ""
+    },
+    {
+      "run": 13,
+      "exit_code": 0,
+      "passed": true,
+      "elapsed_seconds": 0.08822864602552727,
+      "stdout": "\nrunning 1 test\ntest concurrent_snapshot_writers_preserve_complete_history_and_attempt_pairing ... ok\n\ntest result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 5 filtered out; finished in 0.08s\n\n",
+      "stderr": ""
+    },
+    {
+      "run": 14,
+      "exit_code": 0,
+      "passed": true,
+      "elapsed_seconds": 0.0776074540335685,
+      "stdout": "\nrunning 1 test\ntest concurrent_snapshot_writers_preserve_complete_history_and_attempt_pairing ... ok\n\ntest result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 5 filtered out; finished in 0.07s\n\n",
+      "stderr": ""
+    },
+    {
+      "run": 15,
+      "exit_code": 0,
+      "passed": true,
+      "elapsed_seconds": 0.06276046397397295,
+      "stdout": "\nrunning 1 test\ntest concurrent_snapshot_writers_preserve_complete_history_and_attempt_pairing ... ok\n\ntest result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 5 filtered out; finished in 0.06s\n\n",
+      "stderr": ""
+    },
+    {
+      "run": 16,
+      "exit_code": 0,
+      "passed": true,
+      "elapsed_seconds": 0.06788155401591212,
+      "stdout": "\nrunning 1 test\ntest concurrent_snapshot_writers_preserve_complete_history_and_attempt_pairing ... ok\n\ntest result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 5 filtered out; finished in 0.06s\n\n",
+      "stderr": ""
+    },
+    {
+      "run": 17,
+      "exit_code": 0,
+      "passed": true,
+      "elapsed_seconds": 0.06826201395597309,
+      "stdout": "\nrunning 1 test\ntest concurrent_snapshot_writers_preserve_complete_history_and_attempt_pairing ... ok\n\ntest result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 5 filtered out; finished in 0.06s\n\n",
+      "stderr": ""
+    },
+    {
+      "run": 18,
+      "exit_code": 0,
+      "passed": true,
+      "elapsed_seconds": 0.0842758750077337,
+      "stdout": "\nrunning 1 test\ntest concurrent_snapshot_writers_preserve_complete_history_and_attempt_pairing ... ok\n\ntest result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 5 filtered out; finished in 0.07s\n\n",
+      "stderr": ""
+    },
+    {
+      "run": 19,
+      "exit_code": 0,
+      "passed": true,
+      "elapsed_seconds": 0.059364893997553736,
+      "stdout": "\nrunning 1 test\ntest concurrent_snapshot_writers_preserve_complete_history_and_attempt_pairing ... ok\n\ntest result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 5 filtered out; finished in 0.05s\n\n",
+      "stderr": ""
+    }
+  ],
+  "complete": true
+}

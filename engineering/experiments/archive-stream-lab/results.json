@@ -1,0 +1,69 @@
+{
+  "baseline": [
+    {
+      "bytes": 262144,
+      "chunks": 262144,
+      "hash": "4faefc17489e430dbbf53d9bda451d56f07a1bd65bef805d73057e2575cf79ea",
+      "elapsedMs": 476.614964,
+      "startHeap": 8144672,
+      "peakSampledHeap": 102389224,
+      "peakRss": 192368,
+      "scope": "Generated one-byte stream through actual archive loader; not browser or provider performance"
+    },
+    {
+      "bytes": 262144,
+      "chunks": 262144,
+      "hash": "4faefc17489e430dbbf53d9bda451d56f07a1bd65bef805d73057e2575cf79ea",
+      "elapsedMs": 595.59651,
+      "startHeap": 8133272,
+      "peakSampledHeap": 103812704,
+      "peakRss": 194348,
+      "scope": "Generated one-byte stream through actual archive loader; not browser or provider performance"
+    },
+    {
+      "bytes": 262144,
+      "chunks": 262144,
+      "hash": "4faefc17489e430dbbf53d9bda451d56f07a1bd65bef805d73057e2575cf79ea",
+      "elapsedMs": 419.959471,
+      "startHeap": 8113272,
+      "peakSampledHeap": 102772152,
+      "peakRss": 193648,
+      "scope": "Generated one-byte stream through actual archive loader; not browser or provider performance"
+    }
+  ],
+  "candidate": [
+    {
+      "bytes": 262144,
+      "chunks": 262144,
+      "hash": "4faefc17489e430dbbf53d9bda451d56f07a1bd65bef805d73057e2575cf79ea",
+      "elapsedMs": 137.587759,
+      "startHeap": 8096192,
+      "peakSampledHeap": 9962768,
+      "peakRss": 49988,
+      "scope": "Generated one-byte stream through actual archive loader; not browser or provider performance"
+    },
+    {
+      "bytes": 262144,
+      "chunks": 262144,
+      "hash": "4faefc17489e430dbbf53d9bda451d56f07a1bd65bef805d73057e2575cf79ea",
+      "elapsedMs": 168.47232400000001,
+      "startHeap": 8125504,
+      "peakSampledHeap": 9920640,
+      "peakRss": 49260,
+      "scope": "Generated one-byte stream through actual archive loader; not browser or provider performance"
+    },
+    {
+      "bytes": 262144,
+      "chunks": 262144,
+      "hash": "4faefc17489e430dbbf53d9bda451d56f07a1bd65bef805d73057e2575cf79ea",
+      "elapsedMs": 167.14707600000003,
+      "startHeap": 8114944,
+      "peakSampledHeap": 9919616,
+      "peakRss": 49700,
+      "scope": "Generated one-byte stream through actual archive loader; not browser or provider performance"
+    }
+  ],
+  "scope": "Generated pathological stream through the actual loader in fresh Node processes. RSS is Linux KiB; heap samples are bytes, not exact peak. Not browser or normal-provider throughput.",
+  "baseline_sha256": "2901250fa1dd62aefc880631c780c837f10bc6878a4062bdd5fcf72e9f646a25",
+  "current_sha256": "64a177caba0e3bbc89733769fa5755460a95a79b1686770270d94fb0e36a3057"
+}

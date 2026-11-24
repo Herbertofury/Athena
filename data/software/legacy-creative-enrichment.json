@@ -1,0 +1,1267 @@
+{
+  "schema_version": 1,
+  "reviewed_at": "2026-11-14",
+  "purpose": "Source-backed metadata enrichment for preserved legacy creative applications; no new applications or rank changes. Fields omitted here retain their prior values.",
+  "applications": [
+    {
+      "id": "blender",
+      "platforms": [
+        "Windows",
+        "macOS",
+        "Linux"
+      ],
+      "download_url": "https://www.blender.org/download/",
+      "platform_notes": "The official installation manual documents all three desktop systems and links the download page. Check the current release's hardware requirements; older LTS builds may differ.",
+      "pricing_model": "free",
+      "sources": [
+        {
+          "url": "https://docs.blender.org/manual/en/latest/getting_started/installing/index.html",
+          "label": "Official installation manual",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "identity",
+            "platforms",
+            "downloads"
+          ]
+        },
+        {
+          "url": "https://raw.githubusercontent.com/blender/blender/HEAD/README.md",
+          "label": "Official source mirror README",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "identity",
+            "pricing",
+            "license"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "krita",
+      "platforms": [
+        "Windows",
+        "macOS",
+        "Linux"
+      ],
+      "download_url": "https://krita.org/en/download/",
+      "platform_notes": "Free official desktop installers and AppImage; optional paid store distribution supports development.",
+      "pricing_model": "free",
+      "repository_url": "https://invent.kde.org/graphics/krita",
+      "sources": [
+        {
+          "url": "https://krita.org/en/download/",
+          "label": "Official downloads and requirements",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "identity",
+            "platforms",
+            "downloads",
+            "pricing"
+          ]
+        },
+        {
+          "url": "https://invent.kde.org/graphics/krita",
+          "label": "Verified official source repository",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "identity"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "kdenlive",
+      "platforms": [
+        "Windows",
+        "macOS",
+        "Linux"
+      ],
+      "download_url": "https://kdenlive.org/download/",
+      "platform_notes": "Official stable packages include Windows, Linux AppImage/Flatpak, and both Apple Silicon and Intel macOS builds. Daily builds are separately identified as testing releases.",
+      "pricing_model": "free",
+      "repository_url": "https://invent.kde.org/multimedia/kdenlive",
+      "sources": [
+        {
+          "url": "https://kdenlive.org/download/",
+          "label": "Official stable and development downloads",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "identity",
+            "platforms",
+            "downloads"
+          ]
+        },
+        {
+          "url": "https://kdenlive.org/about/",
+          "label": "Official project history and purpose",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "identity",
+            "pricing"
+          ]
+        },
+        {
+          "url": "https://invent.kde.org/multimedia/kdenlive",
+          "label": "Verified official source repository",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "identity"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "audacity",
+      "platforms": [
+        "Windows",
+        "macOS",
+        "Linux"
+      ],
+      "download_url": "https://www.audacityteam.org/download/",
+      "platform_notes": "Official downloads list Windows x86-64/ARM64, universal macOS, and Linux x86-64/ARM64 AppImages.",
+      "pricing_model": "free",
+      "repository_url": "https://github.com/audacity/audacity",
+      "sources": [
+        {
+          "url": "https://www.audacityteam.org/download/",
+          "label": "Official desktop downloads",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "identity",
+            "platforms",
+            "downloads"
+          ]
+        },
+        {
+          "url": "https://www.audacityteam.org/",
+          "label": "Official product page",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "identity",
+            "pricing"
+          ]
+        },
+        {
+          "url": "https://github.com/audacity/audacity",
+          "label": "Verified official source repository",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "identity"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "gimp",
+      "platforms": [
+        "Windows",
+        "macOS",
+        "Linux"
+      ],
+      "download_url": "https://www.gimp.org/downloads/",
+      "platform_notes": "Use the official downloads page to select the supported operating system and processor architecture.",
+      "pricing_model": "free",
+      "repository_url": "https://gitlab.gnome.org/GNOME/gimp",
+      "sources": [
+        {
+          "url": "https://www.gimp.org/downloads/",
+          "label": "Official desktop downloads",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "identity",
+            "platforms",
+            "downloads"
+          ]
+        },
+        {
+          "url": "https://www.gimp.org/",
+          "label": "Official product page",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "identity",
+            "pricing",
+            "platforms"
+          ]
+        },
+        {
+          "url": "https://gitlab.gnome.org/GNOME/gimp",
+          "label": "Verified official source repository",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "identity"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "meshlab",
+      "platforms": [
+        "Windows",
+        "macOS",
+        "Linux"
+      ],
+      "download_url": "https://www.meshlab.net/#download",
+      "platform_notes": "MeshLab's README explicitly documents Windows, macOS and Linux. This overlay covers the desktop MeshLab component of the preserved MeshLab / PyMeshLab record.",
+      "repository_url": "https://github.com/cnr-isti-vclab/meshlab",
+      "sources": [
+        {
+          "url": "https://raw.githubusercontent.com/cnr-isti-vclab/meshlab/HEAD/README.md",
+          "label": "Official project README",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "identity",
+            "platforms",
+            "downloads"
+          ]
+        },
+        {
+          "url": "https://www.meshlab.net/",
+          "label": "Official project downloads",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "identity",
+            "downloads"
+          ]
+        },
+        {
+          "url": "https://github.com/cnr-isti-vclab/meshlab",
+          "label": "Verified official source repository",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "identity"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "instant-meshes",
+      "platforms": [
+        "Windows",
+        "macOS",
+        "Linux"
+      ],
+      "download_url": "https://github.com/wjakob/instant-meshes",
+      "platform_notes": "The project README links precompiled Windows, macOS and Linux binaries plus a separate dataset archive.",
+      "repository_url": "https://github.com/wjakob/instant-meshes",
+      "sources": [
+        {
+          "url": "https://raw.githubusercontent.com/wjakob/instant-meshes/HEAD/README.md",
+          "label": "Official README and binary download links",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "identity",
+            "platforms",
+            "downloads"
+          ]
+        },
+        {
+          "url": "https://github.com/wjakob/instant-meshes",
+          "label": "Verified official source repository",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "identity"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "armorpaint",
+      "platforms": [
+        "Windows",
+        "macOS",
+        "Linux"
+      ],
+      "download_url": "https://armorpaint.org/download",
+      "platform_notes": "Official desktop binaries are paid; source code is available to build. Current macOS packages target Apple Silicon; Windows and Linux packages are x64.",
+      "pricing_model": "mixed",
+      "repository_url": "https://git.armorpaint.org/",
+      "official_url": "https://armorpaint.org/",
+      "sources": [
+        {
+          "url": "https://armorpaint.org/",
+          "label": "Official product page",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "identity",
+            "platforms"
+          ]
+        },
+        {
+          "url": "https://armorpaint.org/download",
+          "label": "Official paid binaries and source access",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "identity",
+            "platforms",
+            "downloads",
+            "pricing"
+          ]
+        },
+        {
+          "url": "https://git.armorpaint.org/",
+          "label": "Current official source repository and build instructions",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "identity",
+            "platforms",
+            "pricing"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "lmms",
+      "platforms": [
+        "Windows",
+        "macOS",
+        "Linux"
+      ],
+      "download_url": "https://lmms.io/download",
+      "platform_notes": "The official download page separates stable releases from nightly builds. Plugin compatibility varies by operating system.",
+      "pricing_model": "free",
+      "repository_url": "https://github.com/LMMS/lmms",
+      "sources": [
+        {
+          "url": "https://lmms.io/download",
+          "label": "Official desktop downloads",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "identity",
+            "platforms",
+            "downloads",
+            "pricing"
+          ]
+        },
+        {
+          "url": "https://lmms.io/",
+          "label": "Official project page",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "identity",
+            "platforms",
+            "pricing"
+          ]
+        },
+        {
+          "url": "https://github.com/LMMS/lmms",
+          "label": "Verified official source repository",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "identity"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "f3d",
+      "platforms": [
+        "Windows",
+        "macOS",
+        "Linux"
+      ],
+      "download_url": "https://f3d.app/download/",
+      "platform_notes": "The current download page provides supported desktop packages and installation choices, replacing the previously unverified installation path.",
+      "repository_url": "https://github.com/f3d-app/f3d",
+      "sources": [
+        {
+          "url": "https://f3d.app/download/",
+          "label": "Official desktop packages and installation options",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "identity",
+            "platforms",
+            "downloads"
+          ]
+        },
+        {
+          "url": "https://github.com/f3d-app/f3d",
+          "label": "Verified official source repository",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "identity"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "shotcut",
+      "platforms": [
+        "Windows",
+        "macOS",
+        "Linux"
+      ],
+      "download_url": "https://shotcut.org/download/",
+      "platform_notes": "Official packages cover Windows, macOS and Linux; legacy operating systems require separately listed older versions.",
+      "pricing_model": "free",
+      "repository_url": "https://github.com/mltframework/shotcut",
+      "sources": [
+        {
+          "url": "https://shotcut.org/download/",
+          "label": "Official downloads and legacy platform notes",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "identity",
+            "platforms",
+            "downloads",
+            "pricing"
+          ]
+        },
+        {
+          "url": "https://github.com/mltframework/shotcut",
+          "label": "Verified official source repository",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "identity"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "handbrake",
+      "platforms": [
+        "Windows",
+        "macOS",
+        "Linux"
+      ],
+      "download_url": "https://handbrake.fr/downloads.php",
+      "platform_notes": "The official download page offers macOS, Windows x64/ARM64 and Linux Flatpak packages, without an account requirement.",
+      "pricing_model": "free",
+      "repository_url": "https://github.com/HandBrake/HandBrake",
+      "sources": [
+        {
+          "url": "https://handbrake.fr/downloads.php",
+          "label": "Official packages and free-download statement",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "identity",
+            "platforms",
+            "downloads",
+            "pricing"
+          ]
+        },
+        {
+          "url": "https://github.com/HandBrake/HandBrake",
+          "label": "Verified official source repository",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "identity"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "rawtherapee",
+      "platforms": [
+        "Windows",
+        "macOS",
+        "Linux"
+      ],
+      "download_url": "https://rawtherapee.com/downloads/",
+      "platform_notes": "Official releases provide Windows, Linux and macOS builds; choose the appropriate processor architecture.",
+      "pricing_model": "free",
+      "repository_url": "https://github.com/RawTherapee/RawTherapee",
+      "official_url": "https://rawtherapee.com/",
+      "sources": [
+        {
+          "url": "https://rawtherapee.com/",
+          "label": "Official project and platform downloads",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "identity",
+            "platforms",
+            "downloads",
+            "pricing"
+          ]
+        },
+        {
+          "url": "https://rawtherapee.com/downloads/",
+          "label": "Official release downloads",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "identity",
+            "downloads"
+          ]
+        },
+        {
+          "url": "https://github.com/RawTherapee/RawTherapee",
+          "label": "Verified official source repository",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "identity"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "freecad",
+      "platforms": [
+        "Windows",
+        "macOS",
+        "Linux"
+      ],
+      "download_url": "https://www.freecad.org/downloads.php",
+      "platform_notes": "Official stable packages include Windows, Apple Silicon/Intel macOS and Linux AppImages. Weekly development builds are separate.",
+      "pricing_model": "free",
+      "repository_url": "https://github.com/FreeCAD/FreeCAD",
+      "sources": [
+        {
+          "url": "https://www.freecad.org/downloads.php",
+          "label": "Official release packages and requirements",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "identity",
+            "platforms",
+            "downloads"
+          ]
+        },
+        {
+          "url": "https://www.freecad.org/features.php",
+          "label": "Official project features and free community model",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "identity",
+            "pricing"
+          ]
+        },
+        {
+          "url": "https://github.com/FreeCAD/FreeCAD",
+          "label": "Verified official source repository",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "identity"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "openscad",
+      "platforms": [
+        "Windows",
+        "macOS",
+        "Linux"
+      ],
+      "download_url": "https://openscad.org/downloads.html",
+      "platform_notes": "The official page separates stable releases, release candidates and development snapshots for each desktop platform.",
+      "pricing_model": "free",
+      "repository_url": "https://github.com/openscad/openscad",
+      "sources": [
+        {
+          "url": "https://openscad.org/downloads.html",
+          "label": "Official desktop downloads",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "identity",
+            "platforms",
+            "downloads"
+          ]
+        },
+        {
+          "url": "https://openscad.org/",
+          "label": "Official project page",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "identity",
+            "platforms",
+            "pricing"
+          ]
+        },
+        {
+          "url": "https://github.com/openscad/openscad",
+          "label": "Verified official source repository",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "identity"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "synfig",
+      "platforms": [
+        "Windows",
+        "macOS",
+        "Linux"
+      ],
+      "download_url": "https://www.synfig.org/download-stable/",
+      "platform_notes": "The publisher explicitly offers a free download; the optional contribution is not mandatory.",
+      "pricing_model": "free",
+      "repository_url": "https://github.com/synfig/synfig",
+      "sources": [
+        {
+          "url": "https://www.synfig.org/",
+          "label": "Official project and desktop platforms",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "identity",
+            "platforms",
+            "pricing"
+          ]
+        },
+        {
+          "url": "https://www.synfig.org/download-stable/",
+          "label": "Official free download and optional contribution",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "identity",
+            "downloads",
+            "pricing"
+          ]
+        },
+        {
+          "url": "https://github.com/synfig/synfig",
+          "label": "Verified official source repository",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "identity"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "opentoonz",
+      "platforms": [
+        "Windows",
+        "macOS",
+        "Linux"
+      ],
+      "download_url": "https://opentoonz.github.io/e/",
+      "platform_notes": "Windows and macOS desktop packages are presented on the official site; Linux build instructions and CI are maintained in the official repository. The separate GTS scanner utility is Windows-only.",
+      "pricing_model": "free",
+      "repository_url": "https://github.com/opentoonz/opentoonz",
+      "sources": [
+        {
+          "url": "https://opentoonz.github.io/e/",
+          "label": "Official downloads and commercial-use statement",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "identity",
+            "platforms",
+            "downloads",
+            "pricing"
+          ]
+        },
+        {
+          "url": "https://raw.githubusercontent.com/opentoonz/opentoonz/HEAD/README.md",
+          "label": "Official README and platform build instructions",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "identity",
+            "platforms"
+          ]
+        },
+        {
+          "url": "https://github.com/opentoonz/opentoonz",
+          "label": "Verified official source repository",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "identity"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "digikam",
+      "platforms": [
+        "Windows",
+        "macOS",
+        "Linux"
+      ],
+      "download_url": "https://www.digikam.org/download/",
+      "platform_notes": "Official packages include Windows, Linux AppImage and separate Apple Silicon/Intel macOS builds.",
+      "pricing_model": "free",
+      "repository_url": "https://invent.kde.org/graphics/digikam",
+      "sources": [
+        {
+          "url": "https://www.digikam.org/download/",
+          "label": "Official desktop packages",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "identity",
+            "platforms",
+            "downloads"
+          ]
+        },
+        {
+          "url": "https://www.digikam.org/",
+          "label": "Official free and open-source project page",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "identity",
+            "pricing"
+          ]
+        },
+        {
+          "url": "https://invent.kde.org/graphics/digikam",
+          "label": "Verified official source repository",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "identity"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "reaper",
+      "platforms": [
+        "Windows",
+        "macOS",
+        "Linux"
+      ],
+      "download_url": "https://www.reaper.fm/download.php",
+      "platform_notes": "The official page documents all three desktop systems and a fully functional 60-day evaluation; ongoing use requires an appropriate paid license.",
+      "pricing_model": "paid",
+      "sources": [
+        {
+          "url": "https://www.reaper.fm/download.php",
+          "label": "Official packages and evaluation terms",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "identity",
+            "platforms",
+            "downloads",
+            "pricing"
+          ]
+        },
+        {
+          "url": "https://www.reaper.fm/purchase.php",
+          "label": "Official paid license options",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "identity",
+            "pricing"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "davinci-resolve",
+      "platforms": [
+        "Windows",
+        "macOS",
+        "Linux"
+      ],
+      "download_url": "https://www.blackmagicdesign.com/products/davinciresolve",
+      "platform_notes": "Free Resolve and paid Studio are separate offerings. Codec, GPU and feature availability must be checked for the chosen operating system and edition.",
+      "pricing_model": "freemium",
+      "sources": [
+        {
+          "url": "https://www.blackmagicdesign.com/products/davinciresolve",
+          "label": "Official downloads, platforms and editions",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "identity",
+            "platforms",
+            "downloads",
+            "pricing"
+          ]
+        },
+        {
+          "url": "https://www.blackmagicdesign.com/products/davinciresolve/studio",
+          "label": "Official Studio edition comparison",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "identity",
+            "pricing",
+            "features"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "natron",
+      "platforms": [
+        "Windows",
+        "macOS",
+        "Linux"
+      ],
+      "download_url": "https://natrongithub.github.io/#download",
+      "platform_notes": "The stable macOS release is Intel-based and uses Rosetta 2 on Apple Silicon; native Apple Silicon support is separately offered as an alpha build.",
+      "pricing_model": "free",
+      "repository_url": "https://github.com/NatronGitHub/Natron",
+      "sources": [
+        {
+          "url": "https://natrongithub.github.io/",
+          "label": "Official downloads and macOS architecture notes",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "identity",
+            "platforms",
+            "downloads"
+          ]
+        },
+        {
+          "url": "https://raw.githubusercontent.com/NatronGitHub/Natron/HEAD/README.md",
+          "label": "Official free project README",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "identity",
+            "platforms",
+            "pricing"
+          ]
+        },
+        {
+          "url": "https://github.com/NatronGitHub/Natron",
+          "label": "Verified official source repository",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "identity"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "meshroom",
+      "platforms": [
+        "Windows",
+        "Linux"
+      ],
+      "download_url": "https://meshroom.org/download/",
+      "platform_notes": "The current official prebuilt downloads are Windows and Linux. Pipeline/plugin hardware requirements are separate from the framework's availability.",
+      "repository_url": "https://github.com/alicevision/Meshroom",
+      "sources": [
+        {
+          "url": "https://meshroom.org/download/",
+          "label": "Official current Windows and Linux packages",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "identity",
+            "platforms",
+            "downloads"
+          ]
+        },
+        {
+          "url": "https://github.com/alicevision/Meshroom",
+          "label": "Verified official source repository",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "identity"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "material-maker",
+      "platforms": [
+        "Windows",
+        "macOS",
+        "Linux"
+      ],
+      "download_url": "https://rodzilla.itch.io/material-maker",
+      "platform_notes": "The developer's official itch.io download lists all three desktop systems with name-your-own-price distribution.",
+      "pricing_model": "free",
+      "repository_url": "https://github.com/rodzill4/material-maker",
+      "sources": [
+        {
+          "url": "https://rodzilla.itch.io/material-maker",
+          "label": "Developer-operated download page",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "identity",
+            "platforms",
+            "downloads",
+            "pricing"
+          ]
+        },
+        {
+          "url": "https://www.materialmaker.org/",
+          "label": "Official project links to developer distribution",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "identity",
+            "downloads"
+          ]
+        },
+        {
+          "url": "https://github.com/rodzill4/material-maker",
+          "label": "Verified official source repository",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "identity"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "blockbench",
+      "platforms": [
+        "Windows",
+        "macOS",
+        "Linux",
+        "Web"
+      ],
+      "download_url": "https://github.com/JannisX11/blockbench/releases",
+      "platform_notes": "Official release assets include Windows installers, macOS disk images and Linux packages; the official site also links the web application.",
+      "pricing_model": "free",
+      "repository_url": "https://github.com/JannisX11/blockbench",
+      "sources": [
+        {
+          "url": "https://blockbench.net/",
+          "label": "Official free software and web-app page",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "identity",
+            "downloads",
+            "pricing",
+            "platforms"
+          ]
+        },
+        {
+          "url": "https://github.com/JannisX11/blockbench/releases",
+          "label": "Official release listing",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "identity",
+            "downloads"
+          ]
+        },
+        {
+          "url": "https://github.com/JannisX11/blockbench/releases/expanded_assets/v5.2.2",
+          "label": "Official release assets for the documented desktop platforms",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "downloads",
+            "platforms"
+          ]
+        },
+        {
+          "url": "https://github.com/JannisX11/blockbench",
+          "label": "Verified official source repository",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "identity"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "libresprite",
+      "platforms": [
+        "Windows",
+        "macOS",
+        "Linux"
+      ],
+      "download_url": "https://github.com/LibreSprite/LibreSprite/releases/latest",
+      "platform_notes": "The project README explicitly lists Windows, macOS and Linux release downloads.",
+      "pricing_model": "free",
+      "repository_url": "https://github.com/LibreSprite/LibreSprite",
+      "sources": [
+        {
+          "url": "https://raw.githubusercontent.com/LibreSprite/LibreSprite/HEAD/README.md",
+          "label": "Official free-software README and platform release links",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "identity",
+            "platforms",
+            "downloads",
+            "pricing"
+          ]
+        },
+        {
+          "url": "https://github.com/LibreSprite/LibreSprite",
+          "label": "Verified official source repository",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "identity"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "fl-studio",
+      "platforms": [
+        "Windows",
+        "macOS"
+      ],
+      "download_url": "https://www.image-line.com/fl-studio/download",
+      "platform_notes": "Paid desktop editions include lifetime updates under the publisher's terms. The trial has separate restrictions; Linux is not listed as a native desktop platform.",
+      "pricing_model": "paid",
+      "sources": [
+        {
+          "url": "https://www.image-line.com/fl-studio/download",
+          "label": "Official Windows and macOS installer and paid-edition statement",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "identity",
+            "platforms",
+            "downloads",
+            "pricing"
+          ]
+        },
+        {
+          "url": "https://www.image-line.com/fl-studio/pricing",
+          "label": "Official paid desktop editions",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "identity",
+            "pricing"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ableton-live",
+      "platforms": [
+        "Windows",
+        "macOS"
+      ],
+      "download_url": "https://www.ableton.com/en/trial/",
+      "platform_notes": "The official desktop trial is time-limited. Paid editions and rent-to-own purchasing are distinct from a free ongoing license.",
+      "pricing_model": "paid",
+      "sources": [
+        {
+          "url": "https://www.ableton.com/en/trial/",
+          "label": "Official desktop trial and limitations",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "identity",
+            "platforms",
+            "downloads",
+            "pricing"
+          ]
+        },
+        {
+          "url": "https://www.ableton.com/en/shop/live/",
+          "label": "Official paid editions and rent-to-own terms",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "identity",
+            "platforms",
+            "pricing"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "houdini",
+      "platforms": [
+        "Windows",
+        "macOS",
+        "Linux"
+      ],
+      "download_url": "https://www.sidefx.com/get/try-houdini/",
+      "platform_notes": "Apprentice is the free learning edition, with noncommercial and file/output restrictions. Current Houdini requirements list Windows 11, Apple Silicon macOS and supported Linux distributions.",
+      "pricing_model": "freemium",
+      "sources": [
+        {
+          "url": "https://www.sidefx.com/Support/system-requirements/",
+          "label": "Official current system requirements",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "identity",
+            "platforms"
+          ]
+        },
+        {
+          "url": "https://www.sidefx.com/get/try-houdini/",
+          "label": "Official Apprentice download and license restrictions",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "identity",
+            "platforms",
+            "downloads",
+            "pricing"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "marmoset-toolbag",
+      "platforms": [
+        "Windows",
+        "macOS"
+      ],
+      "download_url": "https://docs.marmoset.co/docs/starting-a-free-trial/",
+      "platform_notes": "Official installers are supplied through a Marmoset account. Perpetual and subscription licenses are offered; the free trial lasts 30 days. Check GPU requirements for the selected version.",
+      "pricing_model": "mixed",
+      "sources": [
+        {
+          "url": "https://docs.marmoset.co/docs/system-requirements/",
+          "label": "Official Windows and macOS requirements",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "identity",
+            "platforms"
+          ]
+        },
+        {
+          "url": "https://docs.marmoset.co/docs/starting-a-free-trial/",
+          "label": "Official installer access and trial instructions",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "identity",
+            "platforms",
+            "downloads",
+            "pricing"
+          ]
+        },
+        {
+          "url": "https://marmoset.co/shop/",
+          "label": "Official perpetual and subscription license choices",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "identity",
+            "pricing"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pencil2d",
+      "platforms": [
+        "Windows",
+        "macOS",
+        "Linux"
+      ],
+      "download_url": "https://www.pencil2d.org/download/",
+      "platform_notes": "Official stable downloads cover Windows, macOS and Linux; alternative and legacy packages are listed separately.",
+      "pricing_model": "free",
+      "repository_url": "https://github.com/pencil2d/pencil",
+      "sources": [
+        {
+          "url": "https://www.pencil2d.org/download/",
+          "label": "Official desktop and legacy downloads",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "identity",
+            "platforms",
+            "downloads"
+          ]
+        },
+        {
+          "url": "https://www.pencil2d.org/",
+          "label": "Official free commercial-use statement",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "identity",
+            "platforms",
+            "pricing"
+          ]
+        },
+        {
+          "url": "https://github.com/pencil2d/pencil",
+          "label": "Verified official source repository",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "identity"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pureref",
+      "platforms": [
+        "Windows",
+        "macOS",
+        "Linux"
+      ],
+      "download_url": "https://www.pureref.com/download.php",
+      "platform_notes": "Personal-use contributions and paid commercial licenses have different terms. The official download page lists Windows, macOS and Linux packages.",
+      "pricing_model": "mixed",
+      "sources": [
+        {
+          "url": "https://www.pureref.com/download.php",
+          "label": "Official platform packages and license options",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "identity",
+            "platforms",
+            "downloads",
+            "pricing"
+          ]
+        },
+        {
+          "url": "https://www.pureref.com/license.php",
+          "label": "Official personal and commercial license terms",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "identity",
+            "license",
+            "pricing"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "wings3d",
+      "platforms": [
+        "Windows",
+        "macOS",
+        "Linux"
+      ],
+      "download_url": "https://www.wings3d.com/download-2/",
+      "platform_notes": "The current download page lists Windows, Apple Silicon macOS and Linux packages, with release-specific operating-system requirements.",
+      "pricing_model": "free",
+      "repository_url": "https://github.com/dgud/wings",
+      "sources": [
+        {
+          "url": "https://www.wings3d.com/download-2/",
+          "label": "Official current download page",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "identity",
+            "platforms",
+            "downloads"
+          ]
+        },
+        {
+          "url": "https://www.wings3d.com/",
+          "label": "Official free personal/commercial use statement",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "identity",
+            "pricing"
+          ]
+        },
+        {
+          "url": "https://github.com/dgud/wings",
+          "label": "Verified official source repository",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "identity"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "substance-painter",
+      "platforms": [
+        "Windows",
+        "macOS",
+        "Linux"
+      ],
+      "download_url": "https://www.adobe.com/products/substance3d/apps/painter.html",
+      "platform_notes": "Adobe's requirements distinguish Linux Enterprise and Steam distribution. Paid subscriptions and the Steam perpetual edition have different update, asset and service entitlements; verify the appropriate edition before purchase.",
+      "pricing_model": "mixed",
+      "sources": [
+        {
+          "url": "https://experienceleague.adobe.com/en/docs/substance-3d-painter/using/getting-started/system-requirements",
+          "label": "Official hardware and edition-specific platform requirements",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "identity",
+            "platforms"
+          ]
+        },
+        {
+          "url": "https://www.adobe.com/products/substance3d/apps/painter.html",
+          "label": "Official application and trial entry point",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "identity",
+            "downloads"
+          ]
+        },
+        {
+          "url": "https://store.steampowered.com/app/4329260/Substance_3D_Painter_2026/",
+          "label": "Adobe-operated Steam product listing and license choices",
+          "checked_at": "2026-11-14",
+          "supports": [
+            "identity",
+            "platforms",
+            "pricing"
+          ]
+        }
+      ]
+    }
+  ]
+}

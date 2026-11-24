@@ -1,0 +1,136 @@
+{
+  "recipes": [
+    {
+      "id": "choose-code-editor",
+      "title": "Choose an editor for your programming workflow",
+      "description": "Match graphical tooling, terminal habits, and licensing preferences. These are workflow choices based on documented features, not measured speed rankings.",
+      "picks": [
+        {"app_id":"vscode","label":"Broad graphical tooling","reason":"Integrated debugging, terminals, source control, and extensions support many languages in one workspace.","tradeoff":"The official Microsoft binary has different terms from the MIT-licensed Code-OSS source; extensions have their own licenses."},
+        {"app_id":"neovim","label":"Custom terminal workflow","reason":"Lua configuration and an embeddable API suit users who want to assemble a keyboard-driven environment.","tradeoff":"Modal editing and plugin configuration require learning and ongoing choices."},
+        {"app_id":"helix","label":"Integrated terminal features","reason":"Multiple selections, Tree-sitter editing, and built-in LSP support provide a cohesive terminal editing model.","tradeoff":"Its selection-first controls differ from Vim and GUI editors."},
+        {"app_id":"sublime-text","label":"Paid text-editing focus","reason":"Multiple selections and project navigation suit intensive text manipulation in a graphical editor.","tradeoff":"Continued use requires a paid license, and deeper IDE features can require plugins."}
+      ]
+    },
+    {
+      "id":"python-learning-and-analysis",
+      "title":"Pick a Python workspace for learning or analysis",
+      "description":"A debugger for learning, an interactive scientific IDE, and notebooks solve different problems.",
+      "picks":[
+        {"app_id":"thonny","label":"Learn program execution","reason":"Its teaching-focused debugger exposes expression evaluation and variable state.","tradeoff":"Larger multi-language projects may need a broader development environment."},
+        {"app_id":"spyder","label":"Inspect scientific variables","reason":"An IPython console and variable explorer support array and dataframe investigation beside scripts.","tradeoff":"Scientific dependencies and environment selection must be kept consistent."},
+        {"app_id":"jupyterlab","label":"Combine code and explanation","reason":"Notebooks keep narrative, code, outputs, and data exploration together.","tradeoff":"Kernel and execution-order state need discipline for reproducible results."}
+      ]
+    },
+    {
+      "id":"git-review-workflow",
+      "title":"Review changes and manage Git history",
+      "description":"Choose by operating system and preference for a terminal, a guided client, or deeper graphical history tools.",
+      "picks":[
+        {"app_id":"lazygit","label":"Terminal Git workflow","reason":"Status, diffs, staging, branches, and rebasing remain accessible from a keyboard-driven interface.","tradeoff":"The visual interface does not remove the need to understand history-changing operations."},
+        {"app_id":"github-desktop","label":"Guided commits","reason":"Visual diffs and a focused commit workflow help users review what they are about to commit.","tradeoff":"Official distributions support Windows and macOS; advanced Git actions may need the CLI."},
+        {"app_id":"git-extensions","label":"Windows repository inspection","reason":"A commit graph, branch tools, and Windows integration support detailed repository work.","tradeoff":"Windows prerequisites and Git configuration still need setup."},
+        {"app_id":"fork","label":"Paid desktop history tools","reason":"Visual interactive rebase, image diffs, and a merge helper suit users who want a dedicated Git GUI.","tradeoff":"Windows/macOS only, with a paid license following evaluation."}
+      ]
+    },
+    {
+      "id":"debug-api-requests",
+      "title":"Build API collections or inspect live HTTP behavior",
+      "description":"Sending a request, maintaining a test collection, and intercepting application traffic are distinct tasks.",
+      "picks":[
+        {"app_id":"bruno","label":"Version API collections","reason":"Local plain-text collections can live with the application repository and be reviewed in Git.","tradeoff":"Some advanced and team features belong to paid editions."},
+        {"app_id":"xh","label":"Standalone request CLI","reason":"Concise request syntax and formatted responses suit quick terminal investigation.","tradeoff":"Not every HTTPie option or behavior is implemented."},
+        {"app_id":"mitmproxy","label":"Inspect and replay traffic","reason":"An intercepting proxy with scripting supports repeatable HTTP debugging of authorized targets.","tradeoff":"HTTPS interception requires explicit certificate trust and deliberate target configuration."},
+        {"app_id":"http-toolkit","label":"Visual application interception","reason":"Application integrations and request filtering help inspect supported HTTP clients through a GUI.","tradeoff":"Advanced features and target integrations vary by plan and environment."}
+      ]
+    },
+    {
+      "id":"choose-database-client",
+      "title":"Inspect a local database or manage several engines",
+      "description":"Start with the database engine and whether the task is browsing, querying, or administration.",
+      "picks":[
+        {"app_id":"db-browser-sqlite","label":"Local SQLite files","reason":"Visual tables and SQL execution let users inspect a SQLite file without a server.","tradeoff":"This is a SQLite-focused tool, not a multi-engine administration suite."},
+        {"app_id":"dbeaver","label":"Several database engines","reason":"Drivers, SQL editing, and data browsing share one cross-platform interface.","tradeoff":"Enterprise and cloud features can differ between Community and paid products."},
+        {"app_id":"pgadmin","label":"PostgreSQL administration","reason":"PostgreSQL-specific object and server tooling provides dedicated administrative context.","tradeoff":"It is specialized for PostgreSQL rather than every database engine."},
+        {"app_id":"jetbrains-datagrip","label":"Integrated SQL development","reason":"Schema-aware SQL and interactive data tools suit database-centric development work.","tradeoff":"Free non-commercial eligibility and commercial subscriptions have different conditions."}
+      ]
+    },
+    {
+      "id":"run-local-language-models",
+      "title":"Choose a local AI interface or inference runtime",
+      "description":"Start with the model architecture and weight format, then check RAM or VRAM, the accelerator backend, and whether you need a desktop interface or an API. A file extension alone does not guarantee compatibility. No hardware benchmark or model-quality winner is claimed.",
+      "picks":[
+        {"app_id":"ollama","label":"Managed models and local API","reason":"Choose this for a managed local API or to import a compatible GGUF file or supported Safetensors model directory.","tradeoff":"Ollama does not quantize GGUF on import. Confirm your GPU and model support, memory budget, model license, and whether any cloud features are enabled."},
+        {"app_id":"llama-cpp","label":"Detailed runtime control","reason":"Use this for direct GGUF loading with CPU or an available Metal, CUDA, or Vulkan backend.","tradeoff":"Check the model architecture and quantization plus the exact OS and backend build. Format or driver support is not a speed guarantee."},
+        {"app_id":"vllm","label":"Linux GPU Safetensors model serving","reason":"Choose this for an API server on a supported Linux GPU when the model architecture and Safetensors weights are supported.","tradeoff":"Check drivers, GPU support and VRAM, including room for the context cache. No native Windows support; GGUF is experimental and uses a separate plugin."},
+        {"app_id":"jan","label":"Desktop chat interface","reason":"A graphical workspace offers local models alongside configured external providers.","tradeoff":"Privacy and cost depend on which provider and model are selected."},
+        {"app_id":"anythingllm","label":"Questions over documents","reason":"Document ingestion and retrieval can be organized into dedicated workspaces.","tradeoff":"A local installation can still send data to configured external embedding or model services."}
+      ]
+    },
+    {
+      "id":"automate-routine-work",
+      "title":"Automate service flows or repetitive typing",
+      "description":"Use a flow engine for events and integrations, and a desktop text expander for repeated text. These tools can be complementary.",
+      "picks":[
+        {"app_id":"node-red","label":"Event and device flows","reason":"Visual message flows and reusable nodes support service, API, and device integration.","tradeoff":"Installed nodes, credentials, and exposed endpoints require maintenance."},
+        {"app_id":"n8n","label":"Internal service workflows","reason":"Visual integration steps and custom code can be combined in hosted or self-hosted workflows.","tradeoff":"Its Sustainable Use and enterprise licenses are source-available, with restrictions beyond standard open-source licenses."},
+        {"app_id":"activepieces","label":"Connector-based automation","reason":"Reusable pieces and visual flows support common service integrations.","tradeoff":"Community and enterprise portions use different licensing and features."},
+        {"app_id":"espanso","label":"Cross-application snippets","reason":"Typed triggers expand reusable text across supported desktop applications.","tradeoff":"Input permissions and application compatibility vary by operating system."}
+      ]
+    },
+    {
+      "id":"manage-modded-game-setups",
+      "title":"Choose tools for a modded game setup",
+      "description":"Match the game and mod ecosystem before choosing a manager; an editor or conflict checker complements deployment rather than replacing it.",
+      "picks":[
+        {"app_id":"mod-organizer-2","label":"Profiles and virtual files","reason":"Virtual-filesystem deployment separates managed mods from original files for supported games.","tradeoff":"Game support and a correct load order still need explicit verification."},
+        {"app_id":"vortex","label":"Nexus-centered workflows","reason":"Game extensions, deployment, and profiles integrate with supported Nexus Mods workflows.","tradeoff":"Extension support, filesystem requirements, and site account features vary."},
+        {"app_id":"prismlauncher","label":"Isolated Minecraft instances","reason":"Separate instances organize Minecraft versions, loaders, Java settings, and modpacks.","tradeoff":"The game account and all selected Java, loader, and mod versions must be compatible."},
+        {"app_id":"xedit","label":"Bethesda record conflicts","reason":"Record-level views reveal plugin conflicts before creating a compatibility patch.","tradeoff":"This is a specialist editor; incorrect changes can damage a load order and require backups."}
+      ]
+    },
+    {
+      "id":"choose-console-emulator",
+      "title":"Choose an emulator for the console and title",
+      "description":"Console coverage is the first filter. Then consult each project's game compatibility and setup documentation; game and firmware data are separate.",
+      "picks":[
+        {"app_id":"dolphin","label":"GameCube and Wii","reason":"Controls and graphics configuration are specialized for GameCube and Wii software.","tradeoff":"Per-game compatibility and required controller behavior vary."},
+        {"app_id":"pcsx2","label":"PlayStation 2","reason":"PS2-specific configuration and rendering options support a large range of title-specific setups.","tradeoff":"A suitable BIOS and game data are required, and performance depends on the title and hardware."},
+        {"app_id":"rpcs3","label":"PlayStation 3","reason":"The project documents title compatibility and per-game configuration for PS3 emulation.","tradeoff":"Hardware demands are substantial for some titles; the official download page was blocked to this research environment."},
+        {"app_id":"retroarch","label":"Unified multi-core frontend","reason":"A common interface shares controller and display configuration across compatible Libretro cores.","tradeoff":"Every core has separate compatibility and licensing; a frontend does not make all consoles equivalent."}
+      ]
+    },
+    {
+      "id":"investigate-application-performance",
+      "title":"Find the source of slow frames or expensive code",
+      "description":"Match the measurement tool to the layer being investigated and use a reproducible workload.",
+      "picks":[
+        {"app_id":"renderdoc","label":"Rendering pipeline inspection","reason":"A captured frame exposes resource contents, shaders, and pipeline state for supported APIs.","tradeoff":"Use supported applications and APIs; upstream support is focused on programs you create."},
+        {"app_id":"tracy","label":"Instrumented native programs","reason":"CPU, memory, and synchronization events can be correlated on detailed timelines.","tradeoff":"Instrumentation needs integration and can influence the measured workload."},
+        {"app_id":"perfetto","label":"Correlate system traces","reason":"Trace timelines and SQL analysis support multiple event sources in one investigation.","tradeoff":"System-wide recording is platform-specific; viewers and analysis tools have broader support."},
+        {"app_id":"speedscope","label":"Inspect sampled stacks","reason":"Interactive profile views help examine expensive call paths in an imported profile.","tradeoff":"It is a viewer, so a separate profiler must first capture compatible data."}
+      ]
+    },
+    {
+      "id":"choose-download-workflow",
+      "title":"Choose a download tool for the transfer type",
+      "description":"Select by protocol and automation needs, then use official sources and content you have permission to download.",
+      "picks":[
+        {"app_id":"aria2","label":"Automated resumable transfers","reason":"Several transfer protocols and an RPC interface suit scripted download queues.","tradeoff":"Remote-control interfaces need deliberate configuration and access protection."},
+        {"app_id":"motrix","label":"Desktop transfer queue","reason":"An aria2-based engine is exposed through a graphical queue.","tradeoff":"Site-specific logins or restrictions may need a different workflow."},
+        {"app_id":"qbittorrent","label":"BitTorrent transfers","reason":"Desktop and optional web interfaces provide torrent management and transfer controls.","tradeoff":"Optional plugins and remote web access introduce additional configuration choices."},
+        {"app_id":"yt-dlp","label":"Permitted media extraction","reason":"Site extractors, format selection, and FFmpeg integration support repeatable media workflows.","tradeoff":"Extractor compatibility changes with websites, and access rights remain separate from technical support."}
+      ]
+    },
+    {
+      "id":"choose-browser-workflow",
+      "title":"Choose a browser by workflow and privacy needs",
+      "description":"Browser engine, tab organization, defaults, and network routing are separate choices. No browser is claimed universally fastest or safest.",
+      "picks":[
+        {"app_id":"firefox","label":"Independent browser engine","reason":"Gecko and Firefox's extension ecosystem offer an alternative to Chromium-based products.","tradeoff":"Test required sites and extensions against the chosen browser and settings."},
+        {"app_id":"vivaldi","label":"Organize many web tasks","reason":"Tab workspaces, tiling, and panels support many concurrent websites in one interface.","tradeoff":"The full browser has proprietary terms and more configuration choices."},
+        {"app_id":"librewolf","label":"Privacy-oriented defaults","reason":"A Firefox-derived configuration includes privacy settings and a content blocker.","tradeoff":"Stricter defaults and DRM choices can reduce compatibility with some sites."},
+        {"app_id":"tor-browser","label":"Tor routing and onion sites","reason":"The browser and Tor routing are configured together for a coordinated privacy workflow.","tradeoff":"Expect network and site-compatibility tradeoffs; extra plugins or identifying account use can undermine privacy."}
+      ]
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+[
+  {
+    "id": "WINSOCKACCEPT29",
+    "title": "Microsoft Winsock accept semantics",
+    "url": "https://learn.microsoft.com/en-us/windows/win32/api/winsock2/nf-winsock2-accept",
+    "observed_version": "Official accept documentation",
+    "topic": "http-test-correctness",
+    "note": "Accepted socket properties inform the portable fixture setup.",
+    "checked_at": "2026-10-29",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "RUSTSOCKET29",
+    "title": "Rust TcpStream blocking mode control",
+    "url": "https://doc.rust-lang.org/std/net/struct.TcpStream.html#method.set_nonblocking",
+    "observed_version": "Rust std 1.99.1 observed",
+    "topic": "http-test-correctness",
+    "note": "Explicit blocking mode and separate I/O timeout settings; owned fixture correction.",
+    "checked_at": "2026-10-29",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  }
+]

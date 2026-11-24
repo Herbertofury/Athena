@@ -1,0 +1,18 @@
+✔ baseline handler retains settled timers and cannot retry a failed image (4.234608ms)
+✔ successful and failed attempts clear timers; explicit retry preserves successes (2.307349ms)
+✔ timeout retains explicit failure and ignores a late decode completion (0.656543ms)
+✔ synchronous decode errors clear timers too (0.845074ms)
+✔ concurrency never exceeds the selected bounded worker count (1.810781ms)
+✔ invalid budgets fail instead of silently changing required work (0.519743ms)
+✔ a rejection without an Error is still a failed decode (0.535849ms)
+✔ observer failure is recorded without turning a good decode into a bad image (1.526667ms)
+✔ repeated failures keep constant-time counters consistent until recovery (0.758084ms)
+✔ retained baseline can consume its only load before metadata arrives; new markup starts disabled (1.669946ms)
+ℹ tests 10
+ℹ suites 0
+ℹ pass 10
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 165.923281

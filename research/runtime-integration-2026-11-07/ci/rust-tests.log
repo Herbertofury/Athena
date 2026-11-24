@@ -1,0 +1,618 @@
+info: syncing channel updates for 1.99.1-x86_64-unknown-linux-gnu
+info: latest update on 2026-10-15 for version 1.99.1 (58cf8f9c3 2026-10-13)
+info: downloading 5 components
+warn: the missing active toolchain `1.99.1-x86_64-unknown-linux-gnu` has been auto-installed
+warn: this might cause rustup commands to take longer time to finish than expected
+info: you may opt out with `RUSTUP_AUTO_INSTALL=0` or `rustup set auto-install disable`
+    Updating crates.io index
+ Downloading crates ...
+  Downloaded atomic-waker v1.1.2
+  Downloaded subtle v2.6.1
+  Downloaded block-buffer v0.12.1
+  Downloaded futures-task v0.3.34
+  Downloaded try-lock v0.2.5
+  Downloaded dunce v1.0.5
+  Downloaded untrusted v0.9.0
+  Downloaded cfg_aliases v0.2.2
+  Downloaded futures-sink v0.3.34
+  Downloaded form_urlencoded v1.2.2
+  Downloaded futures-core v0.3.34
+  Downloaded cfg-if v1.0.5
+  Downloaded crypto-common v0.2.2
+  Downloaded tinystr v0.8.5
+  Downloaded errno v0.3.14
+  Downloaded axum-core v0.5.6
+  Downloaded smallvec v1.16.4
+  Downloaded fallible-streaming-iterator v0.1.9
+  Downloaded cmake v0.1.58
+  Downloaded digest v0.11.3
+  Downloaded displaydoc v0.2.7
+  Downloaded futures-io v0.3.34
+  Downloaded fallible-iterator v0.3.0
+  Downloaded find-msvc-tools v0.1.15
+  Downloaded tokio-macros v2.7.2
+  Downloaded bitflags v2.13.2
+  Downloaded cpufeatures v0.3.1
+  Downloaded chacha20 v0.10.2
+  Downloaded futures-channel v0.3.34
+  Downloaded foldhash v0.2.0
+  Downloaded fs_extra v1.3.0
+  Downloaded http-body-util v0.1.5
+  Downloaded http-body v1.1.0
+  Downloaded pin-project-lite v0.2.17
+  Downloaded getrandom v0.2.17
+  Downloaded tower-http v0.6.11
+  Downloaded sync_wrapper v1.0.2
+  Downloaded tower-layer v0.3.3
+  Downloaded tower-service v0.3.3
+  Downloaded utf8_iter v1.0.4
+  Downloaded stable_deref_trait v1.2.1
+  Downloaded zerofrom v0.1.8
+  Downloaded idna_adapter v1.2.2
+  Downloaded signal-hook-registry v1.4.8
+  Downloaded want v0.3.2
+  Downloaded zerofrom-derive v0.1.8
+  Downloaded bytes v1.12.1
+  Downloaded yoke-derive v0.8.4
+  Downloaded httpdate v1.0.3
+  Downloaded itoa v1.0.18
+  Downloaded potential_utf v0.1.6
+  Downloaded rustc-hash v2.1.3
+  Downloaded lru-slab v0.1.3
+  Downloaded mime v0.3.17
+  Downloaded openssl-probe v0.2.2
+  Downloaded percent-encoding v2.3.2
+  Downloaded rand_pcg v0.10.2
+  Downloaded serde_urlencoded v0.7.1
+  Downloaded writeable v0.6.4
+  Downloaded zeroize v1.9.1
+  Downloaded zerovec-derive v0.11.7
+  Downloaded zmij v1.0.23
+  Downloaded getrandom v0.4.3
+  Downloaded hashlink v0.12.2
+  Downloaded ipnet v2.12.2
+  Downloaded shlex v2.0.1
+  Downloaded unicode-ident v1.0.27
+  Downloaded thiserror v2.0.21
+  Downloaded thiserror-impl v2.0.21
+  Downloaded synstructure v0.14.0
+  Downloaded yoke v0.8.4
+  Downloaded matchit v0.8.4
+  Downloaded pkg-config v0.3.34
+  Downloaded rustls-native-certs v0.8.5
+  Downloaded serde_path_to_error v0.1.20
+  Downloaded slab v0.4.12
+  Downloaded tokio-rustls v0.26.6
+  Downloaded base64 v0.23.1
+  Downloaded httparse v1.10.1
+  Downloaded hybrid-array v0.4.15
+  Downloaded hyper-rustls v0.27.10
+  Downloaded jobserver v0.1.35
+  Downloaded litemap v0.8.3
+  Downloaded once_cell v1.21.4
+  Downloaded quote v1.0.47
+  Downloaded rand_core v0.10.1
+  Downloaded rustls-pki-types v1.15.1
+  Downloaded serde_core v1.0.229
+  Downloaded serde_derive v1.0.229
+  Downloaded icu_provider v2.4.0
+  Downloaded quinn-udp v0.5.16
+  Downloaded rustls-platform-verifier v0.7.1
+  Downloaded ryu v1.0.23
+  Downloaded sha2 v0.11.1
+  Downloaded socket2 v0.6.5
+  Downloaded tinyvec v1.13.3
+  Downloaded tracing-core v0.1.36
+  Downloaded icu_locale_core v2.4.0
+  Downloaded icu_normalizer_data v2.4.0
+  Downloaded proc-macro2 v1.0.107
+  Downloaded rustls-webpki v0.103.16
+  Downloaded url v2.5.8
+  Downloaded log v0.4.34
+  Downloaded serde v1.0.229
+  Downloaded tower v0.5.3
+  Downloaded zerotrie v0.2.5
+  Downloaded axum v0.8.9
+  Downloaded cc v1.10.0
+  Downloaded hashbrown v0.17.1
+  Downloaded icu_collections v2.4.0
+  Downloaded memchr v2.8.3
+  Downloaded mio v1.2.4
+  Downloaded quinn v0.11.12
+  Downloaded rand v0.10.3
+  Downloaded typenum v1.20.1
+  Downloaded zerovec v0.11.9
+  Downloaded http v1.5.0
+  Downloaded futures-util v0.3.34
+  Downloaded hyper-util v0.1.21
+  Downloaded icu_properties v2.4.0
+  Downloaded idna v1.1.0
+  Downloaded reqwest v0.13.5
+  Downloaded aws-lc-rs v1.18.2
+  Downloaded hyper v1.12.0
+  Downloaded serde_json v1.0.154
+  Downloaded icu_properties_data v2.4.0
+  Downloaded rusqlite v0.41.0
+  Downloaded vcpkg v0.2.15
+  Downloaded quinn-proto v0.11.19
+  Downloaded syn v3.0.9
+  Downloaded rustls v0.23.46
+  Downloaded tracing v0.1.44
+  Downloaded icu_normalizer v2.4.0
+  Downloaded libc v0.2.191
+  Downloaded tokio v1.54.1
+  Downloaded ring v0.17.14
+  Downloaded libsqlite3-sys v0.39.1
+  Downloaded aws-lc-sys v0.46.0
+   Compiling proc-macro2 v1.0.107
+   Compiling quote v1.0.47
+   Compiling unicode-ident v1.0.27
+   Compiling libc v0.2.191
+   Compiling syn v3.0.9
+   Compiling jobserver v0.1.35
+   Compiling find-msvc-tools v0.1.15
+   Compiling shlex v2.0.1
+   Compiling cc v1.10.0
+   Compiling pkg-config v0.3.34
+   Compiling stable_deref_trait v1.2.1
+   Compiling pin-project-lite v0.2.17
+   Compiling synstructure v0.14.0
+   Compiling itoa v1.0.18
+   Compiling bytes v1.12.1
+   Compiling cmake v0.1.58
+   Compiling zerofrom-derive v0.1.8
+   Compiling yoke-derive v0.8.4
+   Compiling zerovec-derive v0.11.7
+   Compiling zerofrom v0.1.8
+   Compiling yoke v0.8.4
+   Compiling displaydoc v0.2.7
+   Compiling once_cell v1.21.4
+   Compiling zerovec v0.11.9
+   Compiling dunce v1.0.5
+   Compiling futures-core v0.3.34
+   Compiling fs_extra v1.3.0
+   Compiling aws-lc-sys v0.46.0
+   Compiling smallvec v1.16.4
+   Compiling errno v0.3.14
+   Compiling signal-hook-registry v1.4.8
+   Compiling tinystr v0.8.5
+   Compiling tokio-macros v2.7.2
+   Compiling http v1.5.0
+   Compiling mio v1.2.4
+   Compiling socket2 v0.6.5
+   Compiling litemap v0.8.3
+   Compiling zeroize v1.9.1
+   Compiling aws-lc-rs v1.18.2
+   Compiling log v0.4.34
+   Compiling writeable v0.6.4
+   Compiling icu_locale_core v2.4.0
+   Compiling tokio v1.54.1
+   Compiling http-body v1.1.0
+   Compiling potential_utf v0.1.6
+   Compiling tracing-core v0.1.36
+   Compiling zerotrie v0.2.5
+   Compiling percent-encoding v2.3.2
+   Compiling memchr v2.8.3
+   Compiling icu_normalizer_data v2.4.0
+   Compiling futures-sink v0.3.34
+   Compiling utf8_iter v1.0.4
+   Compiling icu_properties_data v2.4.0
+   Compiling icu_collections v2.4.0
+   Compiling icu_provider v2.4.0
+   Compiling tracing v0.1.44
+   Compiling rustls-pki-types v1.15.1
+   Compiling futures-io v0.3.34
+   Compiling httparse v1.10.1
+   Compiling futures-task v0.3.34
+   Compiling serde_core v1.0.229
+   Compiling tower-service v0.3.3
+   Compiling slab v0.4.12
+   Compiling typenum v1.20.1
+   Compiling hybrid-array v0.4.15
+   Compiling futures-util v0.3.34
+   Compiling rustls v0.23.46
+   Compiling try-lock v0.2.5
+   Compiling untrusted v0.9.0
+   Compiling want v0.3.2
+   Compiling icu_properties v2.4.0
+   Compiling icu_normalizer v2.4.0
+   Compiling form_urlencoded v1.2.2
+   Compiling sync_wrapper v1.0.2
+   Compiling tower-layer v0.3.3
+   Compiling subtle v2.6.1
+   Compiling atomic-waker v1.1.2
+   Compiling httpdate v1.0.3
+   Compiling hyper v1.12.0
+   Compiling idna_adapter v1.2.2
+   Compiling crypto-common v0.2.2
+   Compiling block-buffer v0.12.1
+   Compiling futures-channel v0.3.34
+   Compiling base64 v0.23.1
+   Compiling ipnet v2.12.2
+   Compiling vcpkg v0.2.15
+   Compiling zmij v1.0.23
+   Compiling serde v1.0.229
+   Compiling cfg-if v1.0.5
+   Compiling libsqlite3-sys v0.39.1
+   Compiling hyper-util v0.1.21
+   Compiling digest v0.11.3
+   Compiling idna v1.1.0
+   Compiling tower v0.5.3
+   Compiling http-body-util v0.1.5
+   Compiling serde_derive v1.0.229
+   Compiling cpufeatures v0.3.1
+   Compiling openssl-probe v0.2.2
+   Compiling serde_json v1.0.154
+   Compiling foldhash v0.2.0
+   Compiling bitflags v2.13.2
+   Compiling hashbrown v0.17.1
+   Compiling rustls-native-certs v0.8.5
+   Compiling sha2 v0.11.1
+   Compiling url v2.5.8
+   Compiling rustls-webpki v0.103.16
+   Compiling ryu v1.0.23
+   Compiling mime v0.3.17
+   Compiling getrandom v0.4.3
+   Compiling axum-core v0.5.6
+   Compiling serde_urlencoded v0.7.1
+   Compiling tokio-rustls v0.26.6
+   Compiling hyper-rustls v0.27.10
+   Compiling rustls-platform-verifier v0.7.1
+   Compiling tower-http v0.6.11
+   Compiling atlas-lab v0.1.0 (<REPOSITORY>/engineering/apps/atlas-lab)
+   Compiling hashlink v0.12.2
+   Compiling serde_path_to_error v0.1.20
+   Compiling matchit v0.8.4
+   Compiling fallible-streaming-iterator v0.1.9
+   Compiling fallible-iterator v0.3.0
+   Compiling axum v0.8.9
+   Compiling rusqlite v0.41.0
+   Compiling reqwest v0.13.5
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 56.34s
+     Running unittests src/lib.rs (<TEST_TMP>/target/debug/deps/atlas_lab-54628d6a02dcfb23)
+
+running 144 tests
+test athena_assets::tests::symlink_assets_are_rejected ... ok
+test athena_assets::tests::frozen_allowlist_never_serves_unlisted_files_or_later_changes ... ok
+test collection::tests::preserves_order_case_unicode_and_large_ids ... ok
+test collection_failure::tests::controlled_failures_keep_distinct_categories ... ok
+test collection_failure::tests::fixture_headers_accept_fragmented_complete_request ... ok
+test collection_failure::tests::fixture_headers_require_terminator_and_bounded_input ... ok
+test collection_failure::tests::malformed_json_and_unknown_details_are_not_echoed ... ok
+test athena_assets::tests::manifest_rejects_duplicates_reserved_paths_and_bad_hashes ... ok
+test collection_failure::tests::wrapped_transport_and_cyclic_causes_are_bounded_and_private ... ok
+test collection_failure::tests::transport_error_does_not_expose_attached_url ... ok
+test compact_addressed_candidate::tests::binary_key_constraints_and_integer_references_are_enforced ... ok
+test compact_addressed_candidate::tests::duplicate_bytes_share_payload_but_keep_every_observation ... ok
+test compact_addressed_candidate::tests::borrowed_comparison_rejects_wrong_types_and_oversized_values ... ok
+test compact_addressed_candidate::tests::forced_collision_and_failed_attempt_roll_back_all_new_state ... ok
+test compact_addressed_candidate::tests::identity_and_tampering_fail_closed ... ok
+test compact_addressed_candidate::tests::existing_application_database_is_rejected_without_schema_changes ... ok
+test compact_addressed_candidate::tests::reopening_for_read_does_not_write_the_database_header ... ok
+test compact_addressed_candidate::tests::other_experimental_format_is_rejected_without_changes ... ok
+test content_addressed_candidate::tests::borrowed_comparison_rejects_wrong_types_and_oversized_values ... ok
+test content_addressed_candidate::tests::duplicate_bytes_share_payload_but_keep_every_observation ... ok
+test content_addressed_candidate::tests::existing_application_database_is_rejected_without_schema_changes ... ok
+test content_addressed_candidate::tests::forced_collision_and_failed_attempt_roll_back_all_new_state ... ok
+test content_addressed_candidate::tests::identity_and_tampering_fail_closed ... ok
+test content_addressed_candidate::tests::reopening_for_read_does_not_write_the_database_header ... ok
+test compact_addressed_candidate::tests::repeated_changed_generations_keep_exact_history_and_recover_after_rejection ... ok
+test experiment_runner::tests::cancellation_retains_completed_trials ... ok
+test experiment_runner::tests::complete_run_reports_actual_counts_without_blessing_missing_evidence ... ok
+test experiment_runner::tests::exhausted_budget_never_claims_completion ... ok
+test experiment_runner::tests::failed_warmup_is_stabilization_not_missing_evidence ... ok
+test experiment_runner::tests::oversized_configuration_is_rejected_before_work ... ok
+test experiment_runner::tests::shared_input_keeps_complete_original_fixture_and_bounds ... ok
+test experiment_runner::tests::stress_failure_retains_exact_reproducer ... ok
+test jobs::durability_contract_regression::opened_store_requests_extra_sync ... ok
+test jobs::tests::batch_jobs_validate_and_deduplicate_without_reordering ... ok
+test jobs::tests::complete_project_job_is_bounded_and_keeps_legacy_jobs_distinct ... ok
+test jobs::tests::crash_recovery_fences_stale_worker ... ok
+test jobs::tests::duplicate_pending_jobs_share_one_record ... ok
+test jobs::tests::expired_claim_cannot_finish_before_reclaim ... ok
+test jobs::tests::no_arbitrary_urls_or_commands ... ok
+test jobs::tests::overview_retains_exact_text_ids_without_changing_legacy_numeric_fields ... ok
+test jobs::tests::raw_overview_retains_complete_outputs_and_rejects_corruption ... ok
+test jobs::tests::raw_overview_worker_status_is_serialized_not_concatenated ... ok
+test jobs::tests::saved_version_jobs_are_bounded_deduplicated_and_reject_extra_fields ... ok
+test jobs::tests::upstream_jobs_accept_only_fixed_public_sources ... ok
+test jobs::tests::version_collection_is_bounded_durable_and_not_an_arbitrary_request ... ok
+test journal::opened_journal_requests_extra_sync ... ok
+test modrinth::owned_capacity_tests::excess_capacity_is_not_retained_in_the_archive_envelope ... ok
+test modrinth::tests::absent_body_is_distinct_from_empty_and_invalid_body_is_rejected ... ok
+test modrinth::tests::accepts_id_or_slug ... ok
+test modrinth::tests::an_immediate_second_call_is_rejected_before_transport ... ok
+test modrinth::tests::batch_limits_and_query_are_unambiguous ... ok
+test modrinth::tests::batch_preserves_request_order_and_explicit_missing ... ok
+test modrinth::tests::batch_rejects_duplicates_unknown_ids_and_invalid_later_records ... ok
+test modrinth::tests::complete_project_record_keeps_existing_bounds_and_identity_rejections ... ok
+test modrinth::tests::complete_project_record_preserves_unknown_fields_and_wire_whitespace ... ok
+test modrinth::tests::eight_character_slug_is_not_misclassified_as_canonical_id ... ok
+test modrinth::tests::gallery_is_not_silently_capped_at_eight ... ok
+test modrinth::tests::limits_body_before_json_parse ... ok
+test modrinth::tests::long_body_is_retained_exactly_without_executing_markup ... ok
+test modrinth::tests::missing_gallery_is_unknown_not_verified_empty ... ok
+test modrinth::tests::rejects_url_path_query_and_unicode_injection ... ok
+test modrinth::tests::requires_complete_typed_metadata ... ok
+test modrinth::tests::single_response_binds_request_without_folding_canonical_id ... ok
+test content_addressed_candidate::tests::repeated_changed_generations_keep_exact_history_and_recover_after_rejection ... ok
+test modrinth_versions::tests::orders_requested_ids_and_keeps_missing_explicit ... ok
+test modrinth_versions::tests::preserves_original_payload_unknown_fields_and_nulls ... ok
+test modrinth_versions::tests::rejects_corrupt_oversized_duplicate_and_unrequested_results ... ok
+test project_archive::tests::complete_bytes_stay_local_and_output_is_only_a_bound_receipt ... ok
+test project_archive::tests::invalid_input_cannot_reach_fetch ... ok
+test project_archive::tests::transport_and_mismatched_record_failures_keep_last_good_without_secret_details ... ok
+test server::tests::engine_instances_are_bounded_public_namespaces ... ok
+test server::tests::normal_provider_slot_does_not_return_early ... ok
+test collection_failure::tests::body_read_timeout_keeps_safe_timeout_category ... ok
+test server::tests::partial_batch_is_not_reported_as_success ... ok
+test server::tests::provider_wait_preserves_long_cooldown_and_cancellation ... ok
+test server::tests::queued_version_receipts_preserve_full_bytes_and_last_good ... ok
+test server::tests::rejects_cross_site_and_dns_rebinding ... ok
+test server::tests::saved_archive_routes_keep_namespaces_and_exact_bytes ... ok
+test server::tests::upstream_archive_route_returns_only_bound_saved_evidence ... ok
+test snapshots::durability_contract_regression::opened_store_requests_extra_sync ... ok
+test snapshots::tests::canonical_id_survives_slug_change ... ok
+test snapshots::tests::complete_project_attempt_failure_rolls_back_the_snapshot ... ok
+test snapshots::tests::complete_project_lookup_rejects_corrupt_identity ... ok
+test snapshots::tests::complete_project_storage_retains_raw_bytes_and_last_good_separately ... ok
+test snapshots::tests::database_failure_rolls_back_earlier_batch_rows ... ok
+test server::tests::oversized_result_fails_explicitly_instead_of_looping_on_finalization ... ok
+test snapshots::tests::failure_preserves_last_verified_generation ... ok
+test snapshots::tests::invalid_batch_cannot_partially_commit ... ok
+test snapshots::tests::invalid_snapshot_does_not_replace_good_one ... ok
+test snapshots::tests::mismatched_single_response_cannot_write_or_replace_a_generation ... ok
+test snapshots::tests::partial_batch_keeps_last_good_and_records_each_identity ... ok
+test snapshots::tests::project_read_rejects_oversized_stored_text_before_raw_parse ... ok
+test snapshots::tests::upstream_archive_snapshot_binds_source_generation_and_complete_bytes ... ok
+test snapshots::tests::upstream_budget_is_bounded_and_interruption_fails_closed ... ok
+test snapshots::tests::upstream_provider_cooldown_survives_reopen ... ok
+test snapshots::tests::upstream_read_enforces_utf8_payload_limit ... ok
+test snapshots::tests::upstream_read_rejects_grossly_oversized_stored_text ... ok
+test snapshots::tests::encoded_size_guard_keeps_valid_utf16_database_records ... ok
+test snapshots::tests::upstream_snapshots_preserve_bytes_states_and_failures ... ok
+test snapshots::tests::upstream_refresh_keeps_wrong_type_failure_and_prior_rows ... ok
+test snapshots::tests::version_lookup_rejects_misbound_stored_identity ... ok
+test snapshots::version_read_boundary_regression::nonpositive_version_generation_is_not_accepted ... ok
+test snapshots::version_read_boundary_regression::oversized_version_is_rejected_by_storage_read_guard ... ok
+test collection::tests::generated_differential_stress ... ok
+test storage_connection::tests::disk_reopen_preserves_rows_and_journal_mode ... ok
+test storage_connection::tests::refuses_configuration_inside_transaction ... ok
+test storage_connection::tests::rejects_relaxed_or_missing_contract ... ok
+test tests::cancellation_failure_requires_repair ... ok
+test tests::every_acceptance_requirement_is_bound_to_repair_lineage ... ok
+test tests::excess_memory_requires_repair ... ok
+test tests::fast_wrong_goes_to_stabilization ... ok
+test tests::healthy_is_review_only ... ok
+test tests::invalid_policy_fails_closed ... ok
+test snapshots::tests::upstream_utf16_storage_keeps_complete_valid_utf8_payload ... ok
+test tests::journal_preserves_failure_and_repair ... ok
+test tests::legacy_evidence_defaults_and_early_failure_gate ... ok
+test tests::no_memory_measurement_blocks_review ... ok
+test tests::one_tail_regression_is_not_hidden ... ok
+test tests::policy_snapshot_roundtrips_invalid_float_bits_and_large_limits ... ok
+test tests::journal_policy_survives_reopen_and_legacy_rows_remain_unknown ... ok
+test tests::repair_cannot_change_the_workload_to_hide_failure ... ok
+test tests::repair_cannot_relax_acceptance_policy ... ok
+test tests::same_revision_rejected ... ok
+test tests::stress_failure_not_hidden_by_few_trials ... ok
+test tests::unknown_cancellation_is_not_a_success ... ok
+test tests::unknown_fields_are_rejected_in_experiment_evidence ... ok
+test tests::zero_duration_is_not_infinite_speedup ... ok
+test tests::repair_lineage_rejects_changed_environment ... ok
+test upstream_reviews::tests::commit_checkpoint_is_one_exact_commit ... ok
+test upstream_reviews::tests::fixed_sources_reject_urls_and_unknown_routes ... ok
+test upstream_reviews::tests::reset_is_epoch_time_and_retry_after_is_seconds ... ok
+test upstream_reviews::tests::exact_body_and_identity_are_preserved ... ok
+test validated_raw::tests::preserves_every_original_byte_in_valid_value ... ok
+test validated_raw::tests::repairs_raw_only_validation_gaps ... ok
+test validated_raw::tests::matches_depth_boundaries_and_malformed_json ... ok
+test snapshots::version_read_boundary_regression::utf16_version_storage_retains_exact_utf8_payload_after_reopen ... ok
+test version_experiment_runner::tests::hash_matches_known_standard_vector ... ok
+test version_experiment_runner::tests::interrupted_sample_is_retained_without_fabricated_pair ... ok
+test version_experiment_runner::tests::complete_run_keeps_raw_samples_and_blocks_promotion ... ok
+test version_experiment_runner::tests::rejects_wrong_identity_generation_and_oversize_input ... ok
+test version_experiment_runner::tests::known_failure_is_stabilize_even_before_a_complete_pair ... ok
+test version_experiment_runner::tests::zero_time_budget_retains_zero_iteration_receipt ... ok
+test modrinth::tests::thousand_batch_permutations_preserve_complete_project_projection ... ok
+test validated_raw::tests::ten_thousand_structured_cases_and_mutations_match ... ok
+
+test result: ok. 144 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 1.41s
+
+     Running unittests src/main.rs (<TEST_TMP>/target/debug/deps/atlas_lab-be9e4095a5646cc1)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/persistence.rs (<TEST_TMP>/target/debug/deps/persistence-b598448180a35354)
+
+running 6 tests
+test batch_survives_reopen_without_replacing_missing_project ... ok
+test complete_project_json_survives_reopen_without_projection_loss ... ok
+test separate_connections_cannot_claim_the_same_live_job ... ok
+test snapshots_survive_close_reopen_and_failure ... ok
+test version_payloads_survive_reopen_missing_refresh_and_failed_transaction ... ok
+test concurrent_snapshot_writers_preserve_complete_history_and_attempt_pairing ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.16s
+
+     Running tests/project_ownership.rs (<TEST_TMP>/target/debug/deps/project_ownership-69186ecf8529aa4e)
+
+running 3 tests
+test owned_input_retains_all_bytes_and_the_original_allocation ... ok
+test owned_string_storage_path_keeps_utf8_and_unknown_values ... ok
+test owned_input_keeps_identical_rejections ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests examples/addressed_payload_allocations.rs (<TEST_TMP>/target/debug/examples/addressed_payload_allocations-f2a7f72d79f0b9eb)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests examples/addressed_snapshot_crash_probe.rs (<TEST_TMP>/target/debug/examples/addressed_snapshot_crash_probe-45f0fb39bdc7bf80)
+
+running 2 tests
+test linux_memory::tests::missing_duplicate_invalid_units_and_values_fail_closed ... ok
+test linux_memory::tests::parses_only_requested_field_and_converts_kib ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests examples/addressed_snapshot_lab.rs (<TEST_TMP>/target/debug/examples/addressed_snapshot_lab-535cba278cb6831e)
+
+running 2 tests
+test tests::reserved_fields_and_invalid_bounds_fail_closed ... ok
+test tests::duplicate_and_unique_controls_preserve_original_wire_content ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests examples/body_projection_lab.rs (<TEST_TMP>/target/debug/examples/body_projection_lab-3eac9fe70f6ea6ae)
+
+running 11 tests
+test baseline::tests::accepts_id_or_slug ... ok
+test baseline::tests::batch_preserves_request_order_and_explicit_missing ... ok
+test baseline::tests::batch_rejects_duplicates_unknown_ids_and_invalid_later_records ... ok
+test baseline::tests::gallery_is_not_silently_capped_at_eight ... ok
+test baseline::tests::missing_gallery_is_unknown_not_verified_empty ... ok
+test baseline::tests::rejects_url_path_query_and_unicode_injection ... ok
+test baseline::tests::requires_complete_typed_metadata ... ok
+test baseline::tests::batch_limits_and_query_are_unambiguous ... ok
+test baseline::tests::limits_body_before_json_parse ... ok
+test baseline::tests::an_immediate_second_call_is_rejected_before_transport ... ok
+test baseline::tests::thousand_batch_permutations_preserve_complete_project_projection ... ok
+
+test result: ok. 11 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.37s
+
+     Running unittests examples/body_reader_allocations.rs (<TEST_TMP>/target/debug/examples/body_reader_allocations-6afe0275ef3bb47d)
+
+running 3 tests
+test reader::tests::impossible_budget_rejected_before_reading ... ok
+test reader::tests::interrupted_first_read_and_misleading_empty_hint_preserve_data ... ok
+test reader::tests::full_bytes_and_bounds_match_across_hints ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running unittests examples/body_reader_http.rs (<TEST_TMP>/target/debug/examples/body_reader_http-0413fc99d21714dc)
+
+running 5 tests
+test reader::tests::impossible_budget_rejected_before_reading ... ok
+test reader::tests::interrupted_first_read_and_misleading_empty_hint_preserve_data ... ok
+test reader::tests::full_bytes_and_bounds_match_across_hints ... ok
+test budget_tests::impossible_budget_is_rejected_without_empty_success ... ok
+test budget_tests::accepted_nonblocking_socket_waits_for_delayed_request_bytes ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.05s
+
+     Running unittests examples/compact_addressed_lab.rs (<TEST_TMP>/target/debug/examples/compact_addressed_lab-7071f432ed9c5455)
+
+running 2 tests
+test tests::reserved_fields_and_invalid_bounds_fail_closed ... ok
+test tests::duplicate_and_unique_controls_preserve_original_wire_content ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests examples/dedup_process_probe.rs (<TEST_TMP>/target/debug/examples/dedup_process_probe-b58e3cf544a21c88)
+
+running 2 tests
+test linux_memory::tests::missing_duplicate_invalid_units_and_values_fail_closed ... ok
+test linux_memory::tests::parses_only_requested_field_and_converts_kib ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests examples/modrinth_batch_lab.rs (<TEST_TMP>/target/debug/examples/modrinth_batch_lab-7f697a265241d352)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests examples/overview_lab.rs (<TEST_TMP>/target/debug/examples/overview_lab-4b0f78d872d7853a)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests examples/project_archive_queue_lab.rs (<TEST_TMP>/target/debug/examples/project_archive_queue_lab-c764dd351cb8948f)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests examples/project_identity_lab.rs (<TEST_TMP>/target/debug/examples/project_identity_lab-775125b5aba41b1d)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests examples/project_ownership_allocations.rs (<TEST_TMP>/target/debug/examples/project_ownership_allocations-125d19d0dff9bf62)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests examples/project_ownership_lab.rs (<TEST_TMP>/target/debug/examples/project_ownership_lab-019435f98b195aca)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests examples/project_process_memory_lab.rs (<TEST_TMP>/target/debug/examples/project_process_memory_lab-aa53a2a02f03d44f)
+
+running 2 tests
+test linux_memory::tests::missing_duplicate_invalid_units_and_values_fail_closed ... ok
+test linux_memory::tests::parses_only_requested_field_and_converts_kib ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests examples/project_raw_lab.rs (<TEST_TMP>/target/debug/examples/project_raw_lab-22d3a662b9c67559)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests examples/raw_value_probe.rs (<TEST_TMP>/target/debug/examples/raw_value_probe-9249774cafb457a1)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests examples/upstream_read_allocations.rs (<TEST_TMP>/target/debug/examples/upstream_read_allocations-33e000ab5f0448b4)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests examples/upstream_validation_allocations.rs (<TEST_TMP>/target/debug/examples/upstream_validation_allocations-1a43d14c8fe47dcf)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests examples/upstream_validation_lab.rs (<TEST_TMP>/target/debug/examples/upstream_validation_lab-9faaa4f557dd6c50)
+
+running 5 tests
+test tests::commit_contract_matches ... ok
+test tests::complete_bytes_and_numeric_boundaries ... ok
+test tests::schema_binding_duplicates_and_invalid_unicode ... ok
+test tests::recursive_depth_and_size_guard ... ok
+test tests::generated_single_escape_differential_stress ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 2.15s
+
+     Running unittests examples/version_validation_allocations.rs (<TEST_TMP>/target/debug/examples/version_validation_allocations-9a6cb0ea7883077e)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests examples/version_validation_lab.rs (<TEST_TMP>/target/debug/examples/version_validation_lab-a5e40ef04ef40608)
+
+running 4 tests
+test tests::field_errors_do_not_echo_fixture_payloads ... ok
+test tests::known_and_unknown_validation_and_duplicate_semantics ... ok
+test tests::field_types_missing_fields_escaped_keys_and_depth_match ... ok
+test tests::deterministic_complete_payload_stress ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.75s
+

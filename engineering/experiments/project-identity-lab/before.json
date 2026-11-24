@@ -1,0 +1,47 @@
+{
+  "cases": [
+    {
+      "accepted": true,
+      "attempts": 1,
+      "expected_accepted": true,
+      "requested": "AANobbMI",
+      "stored": true
+    },
+    {
+      "accepted": true,
+      "attempts": 1,
+      "expected_accepted": true,
+      "requested": "sodium",
+      "stored": true
+    },
+    {
+      "accepted": true,
+      "attempts": 1,
+      "expected_accepted": true,
+      "requested": "SODIUM",
+      "stored": true
+    },
+    {
+      "accepted": true,
+      "attempts": 1,
+      "expected_accepted": false,
+      "requested": "othermod",
+      "stored": true
+    },
+    {
+      "accepted": true,
+      "attempts": 1,
+      "expected_accepted": false,
+      "requested": "ZZZZZZZZ",
+      "stored": true
+    },
+    {
+      "accepted": true,
+      "attempts": 1,
+      "expected_accepted": false,
+      "requested": "aanobbmi",
+      "stored": true
+    }
+  ],
+  "mode": "offline generated fixtures; no provider requests"
+}

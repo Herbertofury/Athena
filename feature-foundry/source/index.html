@@ -1,0 +1,425 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Feature Foundry Living Theme Worlds - Interactive Concept V24</title>
+  <link rel="stylesheet" href="/src/main.css" />
+</head>
+<body data-theme="frutiger" data-mode="living" data-world="interactive" data-dock-mode="always" data-dock-position="bottom" data-topbar-mode="always" data-rail-mode="always" data-rail-position="left" data-workbar-mode="always" data-worldbar-mode="always" data-clean-view="false" data-time="day" data-world-layout="unified" data-visual-quality-mode="adaptive" data-visual-quality="balanced" data-mascot-resize="false" data-mascot-rotate="true">
+  <div class="ambient-backdrop"></div>
+  <div class="ui-specular-light" id="uiSpecularLight" aria-hidden="true"></div>
+  <canvas class="wallpaper-canvas" id="wallpaperCanvas" aria-label="Animated wallpaper and 3D environment background"></canvas>
+  <div class="surface-overlay-layer" id="surfaceOverlayLayer" aria-hidden="true"><canvas class="surface-wallpaper" id="selectedSurfaceWallpaper"></canvas></div>
+  <video id="wallpaperVideo" muted loop playsinline hidden></video>
+  <div class="app">
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true"></div>
+        <div class="brand-copy"><strong>Feature Foundry</strong><span title="V24 measured-adaptive runtime governor with context-aware actor command surfaces">V24 · Measured-adaptive cinematic studio</span></div>
+      </div>
+      <div class="top-center">
+        <label class="select-shell" title="Choose theme world"><span>◉</span><select id="themeSelect" aria-label="Theme world"></select></label>
+        <label class="select-shell" title="Choose district"><span>⌂</span><select id="districtSelect" aria-label="District"></select></label>
+        <label class="select-shell environment-select" title="Direct the theme weather"><span>☀</span><select id="weatherSelect" aria-label="Theme weather"></select></label>
+        <label class="select-shell environment-select" title="Choose the theme time of day"><span>◐</span><select id="timePresetSelect" aria-label="Theme time of day"><option value="auto">Live time</option><option value="5">Dawn</option><option value="8">Morning</option><option value="12">Noon</option><option value="17">Golden hour</option><option value="19">Dusk</option><option value="22">Night</option><option value="0">Midnight</option></select></label>
+        <div class="status-pill"><span id="clock">12:00 AM</span><span>•</span><span id="weatherTop">24°C Mostly Sunny</span></div>
+        <div class="status-pill"><span class="live-dot"></span><span id="runtimeState">World runtime active</span></div>
+      </div>
+      <div class="top-actions" id="topActions">
+        <div class="history-actions" aria-label="History controls"><button class="icon-button history-button" id="undoButton" title="Undo (Ctrl+Z)" disabled>↶</button><button class="icon-button history-button" id="redoButton" title="Redo (Ctrl+Shift+Z)" disabled>↷</button><span class="history-count" id="historyCount">0/0</span></div>
+        <button class="icon-button" id="environmentButton" data-topbar-item="environment" title="Animated Wallpaper & 3D Environment Studio">▧</button>
+        <button class="icon-button" id="soundToggle" data-topbar-item="music" title="Soundtrack">♫</button>
+        <button class="icon-button" id="worldToggle" data-topbar-item="world" title="Cycle world state">◫</button>
+        <button class="icon-button launcher-item-hidden" id="topRoom" data-topbar-item="room" title="Room Studio" aria-label="Open Room Studio">▣</button>
+        <button class="icon-button launcher-item-hidden" id="topStage" data-topbar-item="stage" title="Theme Stage" aria-label="Open Theme Stage">◩</button>
+        <button class="icon-button launcher-item-hidden" id="studioCleanTop" data-topbar-item="canvas" title="Canvas-only studio view (Tab)" aria-label="Toggle canvas-only studio view">▦</button>
+        <button class="chrome-collapse-button shelf-grip" id="topbarCollapse" data-shelf-grip="topbar" title="Hide top application shelf" aria-label="Hide top application shelf"><span class="collapse-glyph">⌃</span></button>
+        <button class="primary-button" id="editTheme">Edit Theme</button>
+      </div>
+      <button class="shelf-grip" id="topbarPull" data-shelf-grip="topbar" title="Drag top shelf to Expanded, Compact, or Hidden" aria-label="Drag top application shelf to resize its visibility"><span class="collapse-glyph">⌃</span></button>
+    </header>
+
+    <nav class="rail" aria-label="Feature Foundry workspaces">
+      <button class="chrome-collapse-button rail-collapse-button shelf-grip" id="railCollapse" data-shelf-grip="rail" title="Hide navigation shelf or drag it to snap" aria-label="Hide navigation shelf or drag to resize its visibility"><span class="collapse-glyph">‹</span></button>
+      <button class="rail-button active" data-view="dashboard"><span class="ri">⌂</span><span>Home</span></button>
+      <button class="rail-button" data-view="explorer"><span class="ri">✦</span><span>Explorer</span></button>
+      <button class="rail-button" data-view="vault"><span class="ri">◇</span><span>Vault</span></button>
+      <button class="rail-button" data-view="room"><span class="ri">▣</span><span>Rooms</span></button>
+      <button class="rail-button" data-view="themeLab"><span class="ri">◌</span><span>Theme Lab</span></button>
+      <div class="rail-spacer"></div>
+      <button class="rail-button" id="focusShortcut"><span class="ri">⛶</span><span>Focus</span></button>
+      <button class="rail-button" id="settingsButton"><span class="ri">⚙</span><span>Settings</span></button>
+    </nav>
+
+    <section class="shell" id="shell">
+      <div class="full-world-background" id="fullWorldBackground" data-scene="frutiger" aria-hidden="true">
+        <canvas class="cinematic-world-canvas" id="cinematicWorldCanvas" aria-label="Procedurally rendered living theme environment"></canvas>
+        <div class="world-grid full-world-grid"></div>
+        <div class="world-scenery" id="fullScenery"></div>
+        <canvas id="fullFx"></canvas>
+      </div>
+      <aside class="world world-left" id="leftWorld" aria-label="Left living world">
+        <div class="world-grid"></div><div class="world-scenery" id="leftScenery"></div>
+        <canvas id="leftFx"></canvas>
+        <div class="environment-window" id="leftEnvironmentWindow" data-environment-surface="left-window"><canvas id="leftWindowCanvas"></canvas></div>
+        <div class="world-top"><div class="world-title"><strong id="leftDistrict">Horizon Garden</strong><span>Interactive side world</span></div><div class="world-mini"><button class="shelf-grip" data-chrome-toggle="worldbar" data-shelf-grip="worldbar" title="Hide world shelf or drag it to snap"><span class="collapse-glyph">⌃</span></button><button data-side-collapse="left" title="Collapse left side">‹</button><button data-open="vault" title="Add object">＋</button></div></div>
+        <button class="worldbar-reveal shelf-grip" data-reveal="worldbar" data-shelf-grip="worldbar" title="Click or pull down to restore world shelf">⌄</button>
+        <div class="world-hud-column world-hud-left" data-sticker-zone>
+          <article class="world-hud-panel weather-hud">
+            <div class="hud-kicker" id="weatherDistrict">Horizon Vista</div>
+            <div class="hud-weather-row"><strong class="hud-temperature" id="weatherBig">24°C</strong><span class="hud-weather-symbol" data-ui-icon="sun"></span></div>
+            <strong class="hud-primary" id="weatherLabel">Mostly Sunny</strong>
+            <p id="weatherDetail">Soft breeze · 12% humidity</p>
+            <div class="hud-forecast"><span><small>Today</small><b>25° / 16°</b></span><span><small>Tomorrow</small><b>24° / 15°</b></span></div>
+          </article>
+          <article class="world-hud-panel activity-hud">
+            <div class="hud-panel-title"><strong>Activity</strong><span class="hud-live-dot"></span></div>
+            <div class="activity-list" id="activityList"></div>
+            <button class="hud-text-button" data-open="dashboard">View all</button>
+          </article>
+        </div>
+        <div class="object-layer" id="leftObjects"></div>
+        <div class="mascot" id="mascot" title="Drag, throw or click the mascot" role="button" aria-label="Theme mascot"><div class="mascot-art" id="mascotArt"></div><div class="mascot-label" id="mascotLabel">Aero Buddy</div></div>
+      </aside>
+
+      <main class="workbench">
+        <div class="workspace-frame">
+          <div class="workspace-head">
+            <div class="breadcrumb"><span>Feature Foundry</span><span>›</span><strong id="workspaceName">Living Dashboard</strong><span class="value-chip" id="districtChip">Horizon Vista</span></div>
+            <div class="workspace-actions">
+              <div class="segmented" aria-label="Workspace mode">
+                <button class="mode-button active" data-mode="living">Living</button>
+                <button class="mode-button" data-mode="focus">Focus UI</button>
+                <button class="mode-button" data-mode="stage">Theme Stage</button>
+                <button class="mode-button" data-mode="performance">Performance</button>
+              </div>
+              <button class="secondary-button" id="layoutButton">Layout</button>
+              <button class="chrome-collapse-button shelf-grip" id="workbarCollapse" data-shelf-grip="workbar" title="Hide workspace shelf or drag it to snap" aria-label="Hide workspace shelf or drag to resize its visibility"><span class="collapse-glyph">⌃</span></button>
+            </div>
+          </div>
+
+          <div class="workspace-tabs">
+            <button class="tab-button active" data-view="dashboard">Living Dashboard</button>
+            <button class="tab-button" data-view="explorer">Aesthetic Explorer</button>
+            <button class="tab-button" data-view="vault">Asset Vault</button>
+            <button class="tab-button" data-view="room">Room Studio</button>
+            <button class="tab-button" data-view="themeLab">Theme Lab</button>
+          </div>
+
+          <div class="view-stack">
+            <section class="view active" id="view-dashboard">
+              <div class="cinematic-dashboard">
+                <article class="cinematic-command-card" id="cinematicCommandDeck" data-sticker-zone>
+                  <div class="command-card-topline">
+                    <div class="command-welcome"><span class="command-spark" data-ui-icon="spark"></span><span>Welcome back, creator.</span></div>
+                    <div class="command-top-actions"><button class="command-icon-button" data-ui-icon="search" aria-label="Search"></button><button class="command-icon-button" data-ui-icon="close" aria-label="Dismiss greeting"></button><button class="secondary-button" id="customizeDashboard">Customize</button></div>
+                  </div>
+                  <div class="command-title-row">
+                    <div><div class="eyebrow">Living world · current aesthetic</div><h1 class="hero-title" id="heroTheme">Frutiger Aero</h1><p class="hero-copy" id="heroDescription">Optimistic natural technology with bright sky, clear water, living greenery, polished glass and playful eco-futurism.</p></div>
+                    <div class="command-world-orb" aria-hidden="true"><i></i><span></span></div>
+                  </div>
+                  <div class="command-module-grid">
+                    <button class="command-module" data-open="room"><span data-ui-icon="home"></span><strong>Room</strong><small id="commandRoomName">Horizon Vista</small></button>
+                    <button class="command-module" id="commandWeather"><span data-ui-icon="sun"></span><strong>Weather</strong><small id="commandWeatherName">Mostly Sunny</small></button>
+                    <button class="command-module" id="commandSoundtrack"><span data-ui-icon="music"></span><strong>Soundtrack</strong><small>Upbeat & chill</small></button>
+                    <button class="command-module" id="openMascotRegistryHome"><span data-ui-icon="mascot"></span><strong>Mascot</strong><small>Aero Buddy</small></button>
+                    <button class="command-module" data-open="vault"><span data-ui-icon="layers"></span><strong>Objects</strong><small><b id="objectCount">8</b> items</small></button>
+                  </div>
+                  <div class="command-theme-section">
+                    <div class="command-section-head"><div><strong>Recently used themes</strong><small>Complete worlds, not color swaps</small></div><div class="command-carousel-buttons"><button data-ui-icon="chevron-left" aria-label="Previous themes"></button><button data-ui-icon="chevron-right" aria-label="Next themes"></button></div></div>
+                    <div class="command-theme-strip">
+                      <button class="command-theme-card active" data-home-theme="frutiger"><span class="theme-art theme-art-frutiger"></span><strong>Frutiger Aero</strong></button>
+                      <button class="command-theme-card" data-home-theme="pomo"><span class="theme-art theme-art-pomo"></span><strong>Wacky Pomo</strong></button>
+                      <button class="command-theme-card" data-home-theme="diner"><span class="theme-art theme-art-diner"></span><strong>Diner Kitsch</strong></button>
+                      <button class="command-theme-card" data-home-theme="vaporwave"><span class="theme-art theme-art-vaporwave"></span><strong>Vaporwave</strong></button>
+                      <button class="command-theme-card" data-home-theme="memphis"><span class="theme-art theme-art-memphis"></span><strong>Jazz Design</strong></button>
+                    </div>
+                  </div>
+                  <div class="command-status-bar">
+                    <span><b id="fpsMetric">60</b> FPS target</span><span><b id="districtCount">3</b> districts</span><span><b id="worldStateMetric">Play</b> world state</span>
+                    <div class="command-main-actions"><button class="secondary-button" data-open="explorer">Explore aesthetics</button><button class="primary-button" id="surpriseButton">Surprise me</button></div>
+                  </div>
+                </article>
+                <div class="cinematic-lower-deck">
+                  <button class="cinematic-action-card" data-open="vault"><span data-ui-icon="plus"></span><div><strong>Build the world</strong><small>Place intelligent objects, stickers, rooms and imported assets.</small></div></button>
+                  <button class="cinematic-action-card" id="focusQuick"><span data-ui-icon="focus"></span><div><strong>Focused workspace</strong><small>Expand the full professional interface without losing theme identity.</small></div></button>
+                  <button class="cinematic-action-card" id="performanceQuick"><span data-ui-icon="bolt"></span><div><strong>Performance runtime</strong><small>Unmount heavy living systems without hiding tools or content.</small></div></button>
+                  <button class="cinematic-action-card" id="stageQuick"><span data-ui-icon="stage"></span><div><strong>Theme stage</strong><small>Inspect the complete world and environmental composition edge to edge.</small></div></button>
+                </div>
+              </div>
+            </section>
+
+            <section class="view" id="view-explorer">
+              <div class="section-head"><div><div class="eyebrow">Aesthetic Explorer & Mixer</div><h2>Explore complete worlds, not color presets</h2><p>Preview districts, objects, materials, weather, mascots, sounds and interaction styles.</p></div><div class="toolbar"><input class="search" id="themeSearch" placeholder="Search aesthetics, eras, moods..." /><button class="secondary-button" id="randomTheme">Random world</button></div></div>
+              <div class="theme-grid" id="themeGrid"></div>
+              <div class="mix-layout">
+                <article class="glass-card"><div class="section-head"><div><h3>Live Aesthetic Mixer</h3><p>Blend material language without flattening either world.</p></div><span class="value-chip" id="mixLabel">25%</span></div><div class="control-row"><label for="secondaryTheme">Secondary aesthetic</label><select id="secondaryTheme" class="search"></select><span class="value-chip">Layer B</span></div><div class="control-row"><label for="mixRange">Blend intensity</label><input id="mixRange" type="range" min="0" max="100" value="25" /><span class="value-chip" id="mixValue">25%</span></div><div class="hero-actions"><button class="primary-button" id="applyMix">Apply live mix</button><button class="secondary-button" id="clearMix">Clear mix</button></div></article>
+                <article class="glass-card"><div class="eyebrow">Selected world</div><h2 id="selectedThemeTitle">Frutiger Aero</h2><p class="subtle" id="selectedThemeCopy">Natural technology, clear water, sky, glass and hopeful eco-futurism.</p><div class="inspector-list"><div class="inspector-row"><span>Districts</span><strong id="selectedDistricts">Horizon Vista, Aqua Atrium, Cloud Garden</strong></div><div class="inspector-row"><span>Weather</span><strong id="selectedWeather">Sun, bubbles, spring rain</strong></div><div class="inspector-row"><span>Objects</span><strong id="selectedObjects">Orb, bubble chair, eco terminal</strong></div><div class="inspector-row"><span>Playlist</span><strong id="selectedPlaylist">Aero Skyline Mix</strong></div></div></article>
+              </div>
+            </section>
+
+            <section class="view" id="view-vault">
+              <div class="section-head"><div><div class="eyebrow">Asset Vault</div><h2>Every asset is playable, placeable and editable</h2><p>Import images, Blender files, 3D models, audio, stickers and object packs.</p></div><div class="toolbar"><input class="search" id="assetSearch" placeholder="Search assets and affordances..." /><button class="secondary-button" id="floatVault">Float Vault</button><button class="primary-button" id="importAsset">Import asset</button><input id="fileInput" type="file" hidden accept="image/*,.blend,.glb,.gltf,.obj,.fbx,audio/*" /></div></div>
+              <div class="vault-layout">
+                <div><div class="drop-zone" id="dropZone">Drop an image, model or audio file here. Images become cutout-ready objects; 3D files enter the semantic rig pipeline.</div><div class="asset-grid" id="assetGrid"></div></div>
+                <aside class="glass-card inspector"><div class="eyebrow">Asset Intelligence</div><h2 id="assetTitle">Glass Orb</h2><p class="subtle" id="assetDescription">A throwable, bouncy, music-reactive glass object.</p><div class="inspector-list"><div class="inspector-row"><span>Type</span><strong id="assetType">Toy / decor</strong></div><div class="inspector-row"><span>Physics</span><strong id="assetPhysics">Dynamic</strong></div><div class="inspector-row"><span>Affordances</span><strong id="assetAffordances">Throw, bounce, glow</strong></div><div class="inspector-row"><span>Mascot</span><strong id="assetMascot">Chase, tap, carry</strong></div></div><div class="hero-actions"><button class="primary-button" id="addSelectedLeft">Add left</button><button class="secondary-button" id="addSelectedRight">Add right</button><button class="secondary-button" id="addSelectedUI">Place in UI</button><button class="secondary-button" id="pinSelectedSticker">Pin sticker</button></div></aside>
+              </div>
+            </section>
+
+            <section class="view" id="view-room">
+              <div class="section-head"><div><div class="eyebrow">Room Studio</div><h2>Author districts while the real app remains usable</h2><p>Objects, physics and side widths are independent from the central work surface.</p></div><div class="toolbar"><button class="secondary-button" id="resetObjects">Reset room</button><button class="primary-button" data-open="vault">Place object</button></div></div>
+              <div class="room-layout">
+                <div class="room-canvas" id="roomCanvas"><div class="room-object" style="left:13%;bottom:16%">🛋️</div><div class="room-object" style="left:44%;bottom:18%">🔮</div><div class="room-object" style="right:13%;bottom:17%">🌿</div><div class="room-object" style="left:62%;top:24%">📺</div></div>
+                <div class="view-grid"><article class="glass-card"><h3>Workspace boundaries</h3><div class="control-row"><label>Left world</label><input id="leftWidth" type="range" min="0" max="34" value="18" /><span class="value-chip" id="leftWidthValue">18%</span></div><div class="control-row"><label>Right world</label><input id="rightWidth" type="range" min="0" max="34" value="18" /><span class="value-chip" id="rightWidthValue">18%</span></div><div class="control-row"><label>UI protection</label><input type="range" min="70" max="100" value="100" disabled /><span class="value-chip">100%</span></div></article><article class="glass-card"><h3>Selected object</h3><p class="subtle" id="selectedObjectText">Select an object in either living side.</p><div class="hero-actions"><button class="secondary-button" id="repairObject">Repair</button><button class="secondary-button" id="duplicateObject">Duplicate</button><button class="secondary-button" id="deleteObject">Remove</button></div></article><article class="glass-card"><h3>World state</h3><div class="toggle-grid"><button class="toggle active" data-world-state="interactive"><span>Interactive play</span><span class="switch"></span></button><button class="toggle" data-world-state="decor"><span>Decor only</span><span class="switch"></span></button><button class="toggle" data-world-state="off"><span>World off</span><span class="switch"></span></button><button class="toggle active" id="safeZones"><span>Protect UI lanes</span><span class="switch"></span></button><button class="toggle" id="wholeUiObjects"><span>Objects may enter whole UI</span><span class="switch"></span></button><button class="toggle" id="stickerGravityDefault"><span>Sticker gravity default</span><span class="switch"></span></button><button class="toggle" id="splitWorldToggle"><span>Use two independent side worlds</span><span class="switch"></span></button></div></article></div>
+              </div>
+            </section>
+
+            <section class="view" id="view-themeLab">
+              <div class="section-head"><div><div class="eyebrow">Theme Lab</div><h2>Direct the world, interface and ambience separately</h2><p>Theme identity remains in Focus and Performance modes without heavy simulation.</p></div><button class="primary-button" id="saveTheme">Save theme snapshot</button></div>
+              <div class="theme-lab-grid">
+                <article class="glass-card"><h3>Interface material system</h3><div class="palette-row"><label class="color-field">Primary<input id="colorAccent" type="color" value="#71f5cf" /></label><label class="color-field">Secondary<input id="colorAccent2" type="color" value="#61baff" /></label><label class="color-field">Highlight<input id="colorAccent3" type="color" value="#cbff72" /></label></div><div class="control-row"><label>Glass depth</label><input id="glassRange" type="range" min="0" max="100" value="72" /><span class="value-chip" id="glassValue">72%</span></div><div class="control-row"><label>Motion energy</label><input id="motionRange" type="range" min="0" max="100" value="58" /><span class="value-chip" id="motionValue">58%</span></div></article>
+                <article class="glass-card"><h3>Weather & time</h3><div class="toggle-grid" id="weatherButtons"><button class="toggle active" data-weather="sun"><span>Sunny</span><span>☀</span></button><button class="toggle" data-weather="rain"><span>Rain</span><span>☂</span></button><button class="toggle" data-weather="bubbles"><span>Bubbles</span><span>○</span></button><button class="toggle" data-weather="fog"><span>Fog</span><span>≋</span></button></div><div class="control-row"><label>Day / night</label><input id="timeRange" type="range" min="0" max="24" value="14" /><span class="value-chip" id="timeValue">2 PM</span></div></article>
+                <article class="glass-card"><h3>Soundscape</h3><div class="toggle-grid"><button class="toggle active" id="ambienceToggle"><span>Theme ambience</span><span class="switch"></span></button><button class="toggle active" id="reactivityToggle"><span>Music reactivity</span><span class="switch"></span></button><button class="toggle active" id="uiSoundToggle"><span>UI sounds</span><span class="switch"></span></button><button class="toggle" id="duckingToggle"><span>Focus ducking</span><span class="switch"></span></button></div><div class="control-row"><label>Ambience level</label><input id="volumeRange" type="range" min="0" max="100" value="42" /><span class="value-chip" id="volumeValue">42%</span></div></article>
+                <article class="glass-card mascot-settings-card"><div class="section-head"><div><h3>Mascot intelligence</h3><p>GameSync-grade companions using the same placement, transform, pinning and layer system as Object Atlas actors.</p></div><span class="value-chip" id="mascotCountChip">1 active</span></div><div class="toggle-grid mascot-toggle-grid"><button class="toggle active" id="mascotToggle" data-mascot-setting="enabled"><span>Mascots enabled</span><span class="switch"></span></button><button class="toggle active" data-mascot-setting="addRemove"><span>Add and remove</span><span class="switch"></span></button><button class="toggle active" data-mascot-setting="directManipulation"><span>Click-drag placement</span><span class="switch"></span></button><button class="toggle" data-mascot-setting="resize"><span>Resize mascots <small>opt-in</small></span><span class="switch"></span></button><button class="toggle active" data-mascot-setting="rotate"><span>Rotate mascots</span><span class="switch"></span></button><button class="toggle active" data-mascot-setting="pinning"><span>UI pinning</span><span class="switch"></span></button><button class="toggle active" data-mascot-setting="throwPhysics"><span>Throw physics</span><span class="switch"></span></button><button class="toggle active" data-mascot-setting="autonomy"><span>Autonomous behavior</span><span class="switch"></span></button><button class="toggle active" id="objectPlayToggle" data-mascot-setting="objectInteractions"><span>Object and room play</span><span class="switch"></span></button><button class="toggle active" id="cardPlayToggle" data-mascot-setting="uiInteractions"><span>UI surface awareness</span><span class="switch"></span></button><button class="toggle active" data-mascot-setting="musicWeatherReactions"><span>Music, weather and time reactions</span><span class="switch"></span></button><button class="toggle active" data-mascot-setting="speechSound"><span>Speech bubbles and sounds</span><span class="switch"></span></button><button class="toggle active" data-mascot-setting="themeCompanion"><span>Theme companion follows theme</span><span class="switch"></span></button><button class="toggle" id="quietMascotToggle" data-mascot-setting="quietFocus"><span>Quiet focus behavior</span><span class="switch"></span></button></div><div class="hero-actions"><button class="primary-button" id="openMascotRegistry">Open Mascot Registry</button><button class="secondary-button" id="addThemeMascot">Add theme mascot</button><button class="secondary-button" id="dismissSelectedMascot">Dismiss selected</button><button class="secondary-button" id="dismissAllMascots">Dismiss all</button></div><p class="subtle">Every toggle is independent. Mascot resizing is intentionally off by default and can be enabled here without disabling rotation, placement, pinning, autonomy, reactions, or speech.</p></article>
+              </div>
+            </section>
+          </div>
+
+          <div class="workspace-footer"><div class="performance-hud"><span class="perf-state" id="perfState">Living runtime</span><span id="perfDetail">Particles + local physics active</span></div><div class="spectrum" id="footerSpectrum"></div><div><span id="modeHint">F: Focus • P: Performance • L: Living</span></div></div>
+        </div>
+      </main>
+
+      <aside class="world world-right" id="rightWorld" aria-label="Right living world">
+        <div class="world-grid"></div><div class="world-scenery" id="rightScenery"></div>
+        <canvas id="rightFx"></canvas>
+        <div class="environment-window" id="rightEnvironmentWindow" data-environment-surface="right-window"><canvas id="rightWindowCanvas"></canvas></div>
+        <div class="environment-tv" id="environmentTv" data-environment-surface="tv"><canvas id="tvCanvas"></canvas></div>
+        <div class="world-top"><div class="world-title"><strong id="rightDistrict">Aqua Atrium</strong><span>Soundtrack + object play</span></div><div class="world-mini"><button class="shelf-grip" data-chrome-toggle="worldbar" data-shelf-grip="worldbar" title="Hide world shelf or drag it to snap"><span class="collapse-glyph">⌃</span></button><button data-open="themeLab" title="Edit atmosphere">✦</button><button data-side-collapse="right" title="Collapse right side">›</button></div></div>
+        <button class="worldbar-reveal shelf-grip" data-reveal="worldbar" data-shelf-grip="worldbar" title="Click or pull down to restore world shelf">⌄</button>
+        <div class="world-hud-column world-hud-right" data-sticker-zone>
+          <article class="world-hud-panel soundtrack-hud">
+            <div class="hud-panel-title"><div><strong>Soundtrack</strong><small id="playlistName">Aero Skyline Mix</small></div><span class="provider-orb">S</span></div>
+            <div class="now-playing-row"><div class="album-art" aria-hidden="true"><span></span></div><div><strong id="trackName">Ocean Drive</strong><small id="trackArtist">Theme ambience</small></div><button class="hud-icon-button" id="playButton" aria-label="Play soundtrack" data-ui-icon="play"></button></div>
+            <div class="track-progress"><i></i></div>
+            <div class="spectrum" id="spectrum"></div>
+            <button class="hud-text-button" id="musicQuick">Open Music Hub</button>
+          </article>
+          <article class="world-hud-panel quick-hud">
+            <div class="hud-panel-title"><strong>Quick actions</strong><span></span></div>
+            <div class="quick-hud-grid">
+              <button data-open="vault"><span data-ui-icon="plus"></span><small>Add object</small></button>
+              <button data-open="room"><span data-ui-icon="home"></span><small>Change room</small></button>
+              <button id="weatherQuick"><span data-ui-icon="sun"></span><small>Edit weather</small></button>
+            </div>
+          </article>
+        </div>
+        <div class="object-layer" id="rightObjects"></div>
+      </aside>
+    </section>
+  </div>
+
+  <div class="dock-hotspot" id="dockHotspot" aria-hidden="true"></div>
+  <div class="dock" id="dock" aria-label="Quick launcher" data-magnify="true">
+    <button class="dock-grip" id="dockGrip" title="Drag dock to any edge" aria-label="Move dock">⋮⋮</button>
+    <button data-dock-item="home" data-open="dashboard" title="Home">⌂</button>
+    <button data-dock-item="explorer" data-open="explorer" title="Aesthetic Explorer">✦</button>
+    <button data-dock-item="vault" data-open="vault" title="Asset Vault">◇</button>
+    <button class="launcher-item-hidden" data-dock-item="room" data-open="room" title="Room Studio">▣</button>
+    <button data-dock-item="music" id="dockMusic" title="Soundtrack">♫</button>
+    <button data-dock-item="focus" id="dockFocus" title="Focus UI">⛶</button>
+    <button class="launcher-item-hidden" data-dock-item="stage" id="dockStage" title="Theme Stage">◩</button>
+    <button data-dock-item="performance" id="dockPerf" title="Performance Mode">⚡</button>
+    <button data-dock-item="settings" id="dockSettings" title="Layout and bar behavior">⚙</button>
+    <button class="launcher-item-hidden" data-dock-item="canvas" id="studioCleanDock" title="Canvas-only studio view (Tab)">▦</button>
+    <button class="shelf-grip" id="dockCollapse" data-shelf-grip="dock" title="Hide quick shelf or drag it to snap"><span class="collapse-glyph">⌄</span></button>
+  </div>
+
+  <button class="edge-reveal edge-topbar shelf-grip" data-reveal="topbar" data-shelf-grip="topbar" title="Click or pull down to restore top shelf">⌄</button>
+  <button class="edge-reveal edge-rail shelf-grip" data-reveal="rail" data-shelf-grip="rail" title="Click or pull inward to restore navigation shelf">›</button>
+  <button class="edge-reveal edge-workbar shelf-grip" data-reveal="workbar" data-shelf-grip="workbar" title="Click or pull down to restore workspace shelf">⌄</button>
+  <button class="edge-reveal edge-dock shelf-grip" data-reveal="dock" data-shelf-grip="dock" title="Click or pull inward to restore quick shelf">⌃</button>
+  <button class="clean-view-exit" id="cleanViewExit" title="Restore studio interface">Show Studio UI · Tab</button>
+  <div class="shelf-drag-hint" id="shelfDragHint" role="status" aria-live="polite">Pull shelf</div>
+
+  <aside class="drawer" id="drawer" aria-label="Quick controls">
+    <div class="drawer-head"><div><div class="eyebrow">Living workspace controls</div><strong id="drawerTitle">Layout & performance</strong></div><button class="icon-button" id="closeDrawer">×</button></div>
+    <div class="drawer-body">
+      <article class="glass-card workspace-mode-card" id="workspaceModeCard"><h3>Workspace mode</h3><p class="subtle">The central work UI always has visual and input priority.</p><div class="segmented workspace-mode-segmented"><button class="mode-button active" data-mode="living">Living</button><button class="mode-button" data-mode="focus">Focus UI</button><button class="mode-button" data-mode="stage">Theme Stage</button><button class="mode-button" data-mode="performance">Performance</button></div><div class="world-layout-inline"><div class="world-layout-inline-head"><strong>Living world layout</strong><span class="world-layout-status" id="workspaceWorldLayoutStatus">One continuous scene</span></div><div class="segmented world-layout-segmented" id="workspaceWorldLayoutPicker" role="group" aria-label="Living world layout"><button class="world-layout-choice active" id="drawerFullBackgroundToggle" data-world-layout-choice="unified" aria-pressed="true" title="Use one continuous background world behind the left lane, workspace and right lane"><span class="world-layout-glyph" aria-hidden="true"><svg viewBox="0 0 24 18"><rect x="1.5" y="2" width="21" height="14" rx="3"/><path d="M3.5 12c3.2-3.6 5.8-3.6 8.5 0s5.3 3.6 8.5 0"/><path d="M7 3.5v11M17 3.5v11" opacity=".42"/></svg></span><span class="world-layout-choice-copy"><strong>Unified</strong><small>One scene across all regions</small></span></button><button class="world-layout-choice" id="drawerSplitWorldToggle" data-world-layout-choice="split" aria-pressed="false" title="Use one independent living world on the left and another on the right"><span class="world-layout-glyph" aria-hidden="true"><svg viewBox="0 0 24 18"><rect x="1.5" y="2" width="8" height="14" rx="2.5"/><rect x="14.5" y="2" width="8" height="14" rx="2.5"/><path d="M11.7 3.5v11" opacity=".45"/></svg></span><span class="world-layout-choice-copy"><strong>Split left + right</strong><small>Independent side worlds</small></span></button></div></div></article>
+      <article class="glass-card"><h3>Living side widths</h3><div class="control-row"><label>Left</label><input id="drawerLeftWidth" type="range" min="0" max="34" value="18" /><span class="value-chip" id="drawerLeftValue">18%</span></div><div class="control-row"><label>Right</label><input id="drawerRightWidth" type="range" min="0" max="34" value="18" /><span class="value-chip" id="drawerRightValue">18%</span></div><div class="hero-actions"><button class="secondary-button" data-layout="balanced">Balanced</button><button class="secondary-button" data-layout="work">90% UI</button><button class="secondary-button" data-layout="full">Full UI</button></div></article>
+      <article class="glass-card visual-quality-card"><div class="section-head"><div><h3>Visual fidelity</h3><p>Advanced materials, depth, lighting and motion scale without changing layout or hiding content.</p></div><span class="value-chip" id="visualQualityResolved">Balanced</span></div><div class="segmented visual-quality-picker" id="visualQualityPicker" role="group" aria-label="Visual quality"><button class="visual-quality-choice active" data-visual-quality-mode="adaptive" aria-pressed="true">Adaptive</button><button class="visual-quality-choice" data-visual-quality-mode="ultra" aria-pressed="false">Cinematic</button><button class="visual-quality-choice" data-visual-quality-mode="balanced" aria-pressed="false">Balanced</button><button class="visual-quality-choice" data-visual-quality-mode="eco" aria-pressed="false">Eco</button></div><div class="quality-readout"><span><b id="visualQualityMaterial">Layered spectral materials</b><small>Chrome uses dynamic glass; content uses calmer standard surfaces.</small></span><span><b id="visualQualityMotion">Compositor-safe motion</b><small>Transforms and opacity stay smooth; heavy ambience scales by tier.</small></span></div><div class="quality-readout runtime-quality-readout" role="status" aria-live="polite"><span><b id="runtimeFrameMetric">Measuring frame time</b><small>Real frame pacing drives Adaptive mode after warm-up.</small></span><span><b id="runtimeLoopState">Runtime starting</b><small id="runtimeLoopDetail">Scene, physics and mascot owners are centrally governed.</small></span><span><b id="runtimeAdaptiveReason">Hardware seed</b><small>Hysteresis prevents quality oscillation and user-pinned tiers never auto-change.</small></span></div></article>
+      <article class="glass-card chrome-controls"><div class="section-head"><div><h3>Bars, dock and full-view behavior</h3><p>Every control bar can stay visible, reveal on hover, or move completely out of the way.</p></div><span class="value-chip">Apple-style</span></div>
+        <div class="settings-grid">
+          <label>Dock behavior<select id="dockModeSelect"><option value="always">Expanded</option><option value="compact">Compact</option><option value="hover">Reveal on edge hover</option><option value="hidden">Hidden</option></select></label>
+          <label>Dock edge<select id="dockPositionSelect"><option value="bottom">Bottom</option><option value="top">Top</option><option value="left">Left</option><option value="right">Right</option></select></label>
+          <label>Dock size<input id="dockSizeRange" type="range" min="36" max="66" value="48" /><span id="dockSizeValue">48 px</span></label>
+          <label>Dock glass<input id="dockOpacityRange" type="range" min="25" max="100" value="78" /><span id="dockOpacityValue">78%</span></label>
+          <label>Top application bar<select id="topbarModeSelect"><option value="always">Expanded</option><option value="compact">Compact</option><option value="hover">Reveal on hover</option><option value="hidden">Hidden</option></select></label>
+          <label>Navigation rail<select id="railModeSelect"><option value="always">Expanded</option><option value="compact">Icon strip</option><option value="hover">Reveal on hover</option><option value="hidden">Hidden</option></select></label>
+          <label>Rail edge<select id="railPositionSelect"><option value="left">Left</option><option value="right">Right</option></select></label>
+          <label>Workspace toolbars<select id="workbarModeSelect"><option value="always">Expanded</option><option value="compact">Compact title strip</option><option value="hover">Reveal on workspace hover</option><option value="hidden">Hidden</option></select></label>
+          <label>World toolbars<select id="worldbarModeSelect"><option value="always">Expanded</option><option value="compact">Controls only</option><option value="hover">Reveal on world hover</option><option value="hidden">Hidden</option></select></label>
+        </div>
+        <div class="toggle-grid"><button class="toggle active" id="dockMagnifyToggle"><span>Dock icon magnification</span><span class="switch"></span></button><button class="toggle active" id="collapseHideToggle"><span>Collapse buttons fully hide shelves</span><span class="switch"></span></button><button class="toggle active" id="rememberChromeToggle"><span>Remember layout choices</span><span class="switch"></span></button></div>
+        <div class="launcher-customization" aria-label="Toolbar contents customization">
+          <div class="launcher-customization-head"><div><strong>Quick shelf contents</strong><span>Choose and reorder every taskbar shortcut. Room Studio, Theme Stage and Canvas Only are hidden by default.</span></div><div class="launcher-manager-actions"><button class="secondary-button" data-launcher-preset="dock-defaults">Defaults</button><button class="secondary-button" data-launcher-preset="dock-all">Show all</button></div></div>
+          <div class="launcher-item-manager" id="dockItemManager"></div>
+          <div class="launcher-customization-head"><div><strong>Top bar optional actions</strong><span>Put Room Studio, Theme Stage or Canvas Only back on the top bar independently from the quick shelf.</span></div><div class="launcher-manager-actions"><button class="secondary-button" data-launcher-preset="topbar-defaults">Defaults</button><button class="secondary-button" data-launcher-preset="topbar-all">Show all</button></div></div>
+          <div class="launcher-item-manager" id="topbarItemManager"></div>
+        </div>
+        <div class="chrome-presets"><button class="secondary-button" data-chrome-preset="expanded">Expanded Studio</button><button class="secondary-button" data-chrome-preset="compact">Compact Studio</button><button class="primary-button" data-chrome-preset="canvas">Canvas Only</button></div>
+        <div class="shortcut-note"><strong>Retractable Studio Shelves:</strong> click a collapse control to fully hide its shelf by default, or drag the control toward the edge to snap through Expanded, Compact, and Hidden. Pull a recovery tab inward to restore it. Turn off “fully hide” above when you want collapse buttons to use Compact instead. <strong>Tab</strong> still toggles Canvas Only.</div>
+        <div class="hero-actions"><button class="primary-button" id="themeStageButton">Open full Theme Stage</button><button class="secondary-button" id="restoreChromeButton">Restore all bars</button></div>
+      </article>
+      <article class="glass-card"><h3>Runtime gates</h3><div class="toggle-grid"><button class="toggle active" data-world-state="interactive"><span>Interactive</span><span class="switch"></span></button><button class="toggle" data-world-state="decor"><span>Decor only</span><span class="switch"></span></button><button class="toggle" data-world-state="off"><span>World off</span><span class="switch"></span></button><button class="toggle active" id="drawerMascot" data-mascot-setting="enabled"><span>Mascots</span><span class="switch"></span></button></div></article><article class="glass-card mascot-drawer-settings"><div class="section-head"><div><h3>Mascot controls</h3><p>Choose exactly which object-grade editing and living behaviors mascots may use.</p></div><button class="secondary-button" id="drawerOpenMascots">Registry</button></div><div class="toggle-grid"><button class="toggle active" data-mascot-setting="addRemove"><span>Add/remove</span><span class="switch"></span></button><button class="toggle active" data-mascot-setting="directManipulation"><span>Drag and drop</span><span class="switch"></span></button><button class="toggle" data-mascot-setting="resize"><span>Resize mascots <small>off by default</small></span><span class="switch"></span></button><button class="toggle active" data-mascot-setting="rotate"><span>Rotate mascots</span><span class="switch"></span></button><button class="toggle active" data-mascot-setting="pinning"><span>Pin as companion sticker</span><span class="switch"></span></button><button class="toggle active" data-mascot-setting="throwPhysics"><span>Throw/gravity</span><span class="switch"></span></button><button class="toggle active" data-mascot-setting="autonomy"><span>Walk, idle and rare actions</span><span class="switch"></span></button><button class="toggle active" data-mascot-setting="objectInteractions"><span>Use room objects</span><span class="switch"></span></button><button class="toggle active" data-mascot-setting="uiInteractions"><span>Use UI surfaces</span><span class="switch"></span></button><button class="toggle active" data-mascot-setting="musicWeatherReactions"><span>World reactions</span><span class="switch"></span></button><button class="toggle active" data-mascot-setting="speechSound"><span>Speech/sound</span><span class="switch"></span></button><button class="toggle active" data-mascot-setting="themeCompanion"><span>Auto theme companion</span><span class="switch"></span></button><button class="toggle" data-mascot-setting="quietFocus"><span>Quiet in Focus UI</span><span class="switch"></span></button></div></article>
+      <article class="glass-card"><h3>Selected object</h3><p class="subtle" id="drawerObject">No object selected.</p><div class="inspector-list"><div class="inspector-row"><span>Physics</span><strong id="drawerPhysics">Sleeping</strong></div><div class="inspector-row"><span>Integrity</span><strong id="drawerIntegrity">100%</strong></div><div class="inspector-row"><span>Affordances</span><strong id="drawerAffordance">Select an object</strong></div><div class="inspector-row"><span>Placement</span><strong id="drawerScope">World restricted</strong></div><div class="inspector-row"><span>Gravity</span><strong id="drawerGravity">On</strong></div></div><div class="hero-actions"><button class="secondary-button" id="drawerRepair">Repair</button><button class="secondary-button" id="drawerPin">Pin sticker</button><button class="secondary-button" id="drawerPeel">Peel / unpin</button><button class="secondary-button" id="drawerGravityToggle">Toggle gravity</button><button class="secondary-button" id="drawerPlayObject">Play / interact</button><button class="secondary-button" id="drawerDelete">Remove</button></div></article>
+    </div>
+  </aside>
+
+
+
+  <div class="ui-object-layer" id="uiObjectLayer" aria-label="Whole-interface object and scrapbook layer"></div>
+  <div class="object-selection-hud" id="objectSelectionHud" role="toolbar" aria-label="Selected object controls" aria-hidden="true">
+    <span class="object-selection-hud-label" id="objectSelectionHudLabel">No object selected</span>
+    <button id="hudTransform" title="Transform" aria-label="Open precision transform">T</button>
+    <button id="hudLock" title="Lock or unlock" aria-label="Lock or unlock selected object" aria-pressed="false">L</button>
+    <button id="hudPin" data-sticker-action="pin" title="Pin as sticker" aria-label="Pin selected object as a scrapbook sticker"><svg viewBox="0 0 16 16" aria-hidden="true"><path class="icon-fill" d="M2.1 2.3h8.3l3.5 3.5v7.9H2.1z"/><path d="M2.1 2.3h8.3l3.5 3.5v7.9H2.1zM10.4 2.3v3.5h3.5" fill="none" stroke="currentColor" stroke-width="1.15" stroke-linejoin="round"/><circle cx="7.6" cy="6.4" r="2.05" fill="var(--panel-strong)" stroke="currentColor" stroke-width="1.15"/><path d="M7.6 8.4v3.8M6.2 12.2h2.8" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/></svg></button>
+    <button id="hudPeel" data-sticker-action="peel" title="Peel sticker" aria-label="Peel selected scrapbook sticker"><svg viewBox="0 0 16 16" aria-hidden="true"><path class="icon-fill" d="M2.1 2.2h11.8v7.2l-4.4 4.4H2.1z"/><path d="M2.1 2.2h11.8v7.2l-4.4 4.4H2.1z" fill="none" stroke="currentColor" stroke-width="1.15" stroke-linejoin="round"/><path d="M9.5 9.4h4.4l-4.4 4.4c-.9-1.35-.9-2.9 0-4.4z" fill="var(--panel-strong)" stroke="currentColor" stroke-width="1.15" stroke-linejoin="round"/><path d="M8.3 11.5c1.4-.15 2.55-.8 3.35-1.95" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg></button>
+    <button id="hudGravity" title="Gravity off" aria-label="Toggle gravity" aria-pressed="false">G</button>
+    <button id="hudPlay" title="Play or interact" aria-label="Play or interact with selected object">&#9834;</button>
+    <button id="hudRescue" title="Rescue into view" aria-label="Rescue selected object into view">R</button>
+    <button id="hudClose" title="Close controls" aria-label="Close selected object controls">&#215;</button>
+  </div>
+
+
+  <div class="actor-context-menu" id="actorContextMenu" role="menu" aria-label="Actor actions" aria-hidden="true"></div>
+
+  <section class="floating-vault" id="floatingVault" data-tab="atlas" aria-label="Floating Asset Vault and Object Atlas">
+    <header class="floating-vault-head" id="floatingVaultHandle">
+      <div class="floating-vault-title"><span class="vault-gem">◇</span><div><strong>Asset Vault</strong><span>Drag assets directly into worlds, cards or scrapbook zones</span></div></div>
+      <div class="floating-vault-tabs"><button class="active" data-vault-tab="atlas">Object Atlas</button><button data-vault-tab="mascots">Mascots</button><button data-vault-tab="scrapbook">Scrapbook</button><button data-vault-tab="layers">Layers</button><button data-vault-tab="history">History</button><button data-vault-tab="environment">Environment</button><button data-vault-tab="roomai">Room Intelligence</button></div>
+      <div class="floating-window-actions"><button id="vaultMinimize" title="Minimize">—</button><button id="vaultCenter" title="Center window">◎</button><button id="vaultClose" title="Close">×</button></div>
+    </header>
+    <div class="floating-vault-body">
+      <div class="floating-vault-library">
+        <div class="floating-vault-toolbar"><input class="search" id="floatingAssetSearch" placeholder="Search Object Atlas..." /><button class="secondary-button" id="floatingImport">Import</button></div>
+        <div class="floating-vault-grid" id="floatingAssetGrid"></div>
+      </div>
+      <aside class="floating-vault-inspector">
+        <div class="eyebrow" id="floatingAtlasEyebrow">Object Atlas</div><h3 id="floatingAssetTitle">Glass Water Orb</h3>
+        <div class="atlas-hero" id="floatingAssetArt"></div>
+        <p class="subtle" id="floatingAssetCopy">Playable, placeable and sticker-ready.</p>
+        <div class="atlas-badges" id="floatingAssetBadges"></div>
+        <div class="inspector-list atlas-object-only"><div class="inspector-row"><span>Physics</span><strong id="floatingAssetPhysics">Dynamic</strong></div><div class="inspector-row"><span>Interactions</span><strong id="floatingAssetActions">Throw, bounce, glow</strong></div><div class="inspector-row"><span>Media behavior</span><strong id="floatingMediaBehavior">None</strong></div></div>
+        <div class="placement-stack">
+          <label>Drop behavior<select id="vaultPlacementMode"><option value="world">World restricted</option><option value="ui">Whole UI actor</option><option value="sticker">Scrapbook sticker</option></select></label>
+          <button class="toggle scrapbook-only" id="vaultGravityToggle"><span>Gravity after placement</span><span class="switch"></span></button>
+          <div class="vault-drop-copy" id="vaultDropCopy">World restricted keeps objects inside the living side rooms. Choose Whole UI to throw them across cards, or Scrapbook Sticker to pin them to a panel without gravity.</div>
+          <div class="placement-buttons"><button class="secondary-button" id="vaultPlaceLeft">Left world</button><button class="secondary-button" id="vaultPlaceRight">Right world</button><button class="secondary-button" id="vaultPlaceUI">Place center UI</button><button class="primary-button" id="vaultPinWorkspace">Stick to workspace</button></div>
+          <button class="secondary-button atlas-object-only" id="vaultPreviewBehavior">Play selected behavior</button><div class="mascot-registry-actions"><button class="secondary-button" id="mascotCloneSelected">Add another</button><button class="secondary-button" id="mascotDismissSelectedVault">Remove selected mascot</button></div>
+        </div>
+        <section class="transform-panel is-empty" id="transformPanel" aria-label="Precision transform controls">
+          <div class="transform-title-row"><strong>Precision Transform</strong><span class="transform-target" id="transformTarget">Select a placed object</span></div>
+          <div class="transform-grid">
+            <label class="transform-field">X position<input id="transformX" data-transform-control type="number" step="1" value="0" /></label>
+            <label class="transform-field">Y position<input id="transformY" data-transform-control type="number" step="1" value="0" /></label>
+            <label class="transform-field wide">Rotation<div class="transform-input-row"><input id="transformRotation" data-transform-control type="range" min="-180" max="180" step="1" value="0" /><input id="transformRotationNumber" data-transform-control type="number" min="-3600" max="3600" step="1" value="0" /></div></label>
+            <label class="transform-field">Width %<input id="transformScaleX" data-transform-control type="number" min="5" max="800" step="1" value="100" /></label>
+            <label class="transform-field">Height %<input id="transformScaleY" data-transform-control type="number" min="5" max="800" step="1" value="100" /></label>
+            <label class="transform-field wide">Opacity<div class="transform-input-row"><input id="transformOpacity" data-transform-control type="range" min="0" max="100" step="1" value="100" /><input id="transformOpacityNumber" data-transform-control type="number" min="0" max="100" step="1" value="100" /></div></label>
+            <label class="transform-field wide">Blend mode<select id="transformBlend" data-transform-control><option value="normal">Normal</option><option value="multiply">Multiply</option><option value="screen">Screen</option><option value="overlay">Overlay</option><option value="soft-light">Soft Light</option><option value="hard-light">Hard Light</option><option value="difference">Difference</option><option value="color-dodge">Color Dodge</option><option value="luminosity">Luminosity</option></select></label>
+            <label class="transform-field">Skew X°<input id="transformSkewX" data-transform-control type="number" min="-85" max="85" step="1" value="0" /></label>
+            <label class="transform-field">Skew Y°<input id="transformSkewY" data-transform-control type="number" min="-85" max="85" step="1" value="0" /></label>
+          </div>
+          <div class="align-grid" aria-label="Align selected object"><button data-align="left" data-transform-control title="Align left">┃←</button><button data-align="center" data-transform-control title="Align center">↔</button><button data-align="right" data-transform-control title="Align right">→┃</button><button data-align="top" data-transform-control title="Align top">━↑</button><button data-align="middle" data-transform-control title="Align middle">↕</button><button data-align="bottom" data-transform-control title="Align bottom">↓━</button></div>
+          <div><div class="eyebrow" style="margin-bottom:6px">Transform origin</div><div class="anchor-grid" id="transformAnchorGrid">${['tl','tc','tr','ml','mc','mr','bl','bc','br'].map((x,i)=>`<button data-anchor="${x}" data-transform-control class="${x==='mc'?'active':''}" title="Anchor ${x}">${i===4?'●':'·'}</button>`).join('')}</div></div>
+          <div class="filter-grid" aria-label="Image adjustment controls">
+            <label class="filter-row"><span>Brightness</span><input id="transformBrightness" data-transform-control type="range" min="0" max="200" value="100" /><output id="transformBrightnessValue">100%</output></label>
+            <label class="filter-row"><span>Contrast</span><input id="transformContrast" data-transform-control type="range" min="0" max="200" value="100" /><output id="transformContrastValue">100%</output></label>
+            <label class="filter-row"><span>Saturation</span><input id="transformSaturation" data-transform-control type="range" min="0" max="250" value="100" /><output id="transformSaturationValue">100%</output></label>
+            <label class="filter-row"><span>Hue</span><input id="transformHue" data-transform-control type="range" min="-180" max="180" value="0" /><output id="transformHueValue">0°</output></label>
+            <label class="filter-row"><span>Blur</span><input id="transformBlur" data-transform-control type="range" min="0" max="20" step=".5" value="0" /><output id="transformBlurValue">0px</output></label>
+          </div>
+          <div class="transform-buttons"><button id="transformLink" data-transform-control class="active" title="Link width and height">🔗</button><button id="transformFlipX" data-transform-control title="Flip horizontal">⇆</button><button id="transformFlipY" data-transform-control title="Flip vertical">⇅</button><button id="transformRotate90" data-transform-control title="Rotate 90 degrees">↻ 90°</button></div>
+          <div class="transform-buttons"><button id="transformBack" data-transform-control title="Send to back">⇤ Back</button><button id="transformDown" data-transform-control title="Move one layer down">↓ Layer</button><button id="transformUp" data-transform-control title="Move one layer up">↑ Layer</button><button id="transformFront" data-transform-control title="Bring to front">Front ⇥</button></div>
+          <div class="transform-buttons"><button id="transformLock" data-transform-control title="Lock or unlock placement">🔒 Lock</button><button id="transformGravity" data-transform-control title="Toggle gravity">Gravity</button><button id="transformReset" data-transform-control title="Reset visual transform">Reset</button><button id="transformRescue" data-transform-control title="Recover an offscreen or stuck object">Rescue</button></div>
+          <div class="nudge-pad" aria-label="Nudge selected object"><button class="nudge-up" data-nudge="0,-1" data-transform-control>↑</button><button class="nudge-left" data-nudge="-1,0" data-transform-control>←</button><button class="nudge-center" id="transformCenter" data-transform-control title="Center in current surface">◎</button><button class="nudge-right" data-nudge="1,0" data-transform-control>→</button><button class="nudge-down" data-nudge="0,1" data-transform-control>↓</button></div>
+          <div class="transform-buttons"><button id="transformDuplicate" data-transform-control>Duplicate</button><button id="transformPeel" data-transform-control>Peel</button><button id="transformFit" data-transform-control>Fit View</button><button id="transformDelete" data-transform-control>Delete</button></div>
+          <div class="transform-help">Drag corner handles to resize, drag the round handle to rotate, use arrow keys to nudge, Shift for 10 px, Alt while dragging to bypass snapping, and Home to rescue an object that becomes difficult to reach.</div>
+        </section>
+      </aside>
+      <section class="vault-special-panel" id="layersPanel" aria-label="Layers panel">
+        <div class="studio-panel-head"><div><div class="eyebrow">Photoshop-style composition</div><h3>Layers</h3><p class="subtle">Select, hide, lock and drag layers to reorder world objects, UI actors, stickers and environment surfaces.</p></div><div class="hero-actions"><button class="secondary-button" id="layersSelectAll">Select top</button><button class="secondary-button" id="layersRefresh">Refresh</button></div></div>
+        <div class="layer-groups" id="layersList"></div>
+      </section>
+      <section class="vault-special-panel" id="historyPanel" aria-label="History panel">
+        <div class="studio-panel-head"><div><div class="eyebrow">Non-destructive editing</div><h3>History</h3><p class="subtle">Undo or jump back through placements, transforms, pinning, layers, weather, time and environment changes.</p></div><div class="hero-actions"><button class="secondary-button" id="historyUndo">Undo</button><button class="secondary-button" id="historyRedo">Redo</button><button class="secondary-button" id="historyClear">Clear</button></div></div>
+        <div class="history-list" id="historyList"></div>
+      </section>
+      <section class="vault-special-panel" id="environmentPanel" aria-label="Animated wallpaper and 3D environment studio">
+        <div class="studio-panel-head"><div><div class="eyebrow">Wallpaper, skybox & spatial surfaces</div><h3>Animated Wallpaper + 3D Environment Studio</h3><p class="subtle">Use a living background across the full app, outside a window, on a TV, or mapped to the selected surface.</p></div><div class="hero-actions"><button class="secondary-button" id="environmentPause">Pause</button><button class="secondary-button" id="environmentMapper">Map surfaces</button><button class="secondary-button" id="openRoomIntelligence">Room Intelligence</button><button class="primary-button" id="environmentApply">Apply environment</button></div></div>
+        <div class="environment-studio-grid">
+          <div class="environment-controls">
+            <div class="control-pair"><label>Environment type<select id="environmentType"><option value="3d">Procedural 3D environment</option><option value="animated">Animated wallpaper</option><option value="media">Imported image / video</option></select></label><label>Display target<select id="environmentTarget"><option value="full">Full application background</option><option value="left-window">Outside left window</option><option value="right-window">Outside right window</option><option value="both-windows">Both outside windows</option><option value="tv">Theme-world TV screen</option><option value="selected">Selected object / surface</option><option value="off">Off</option></select></label></div>
+            <label>Built-in world<select id="environmentPreset"><option value="cosmic">Orbital Dream Station</option><option value="frutiger">Frutiger Sky Garden</option><option value="aurora">Aurora Cloud Sea</option><option value="ocean">Glass Ocean Habitat</option><option value="vapor">Vaporwave Infinite Grid</option><option value="raincity">Rainy Future City</option><option value="backrooms">Liminal Corridor</option><option value="diner">Neon Highway Diner</option></select></label>
+            <label>Import wallpaper, video, 3D scene or full Blender room<input id="environmentFileInput" type="file" accept="image/*,video/*,.glb,.gltf,.obj,.fbx,.blend,.usdz" /></label>
+            <div class="toggle-grid"><button class="toggle active" id="environmentThemeSync"><span>Follow active theme</span><span class="switch"></span></button><button class="toggle active" id="environmentMotion"><span>Animated motion</span><span class="switch"></span></button><button class="toggle active" id="environmentParallax"><span>Pointer parallax</span><span class="switch"></span></button><button class="toggle active" id="environmentPauseHidden"><span>Pause when hidden</span><span class="switch"></span></button></div>
+            <label class="environment-range"><span>Opacity</span><input id="environmentOpacity" type="range" min="0" max="100" value="82" /><output id="environmentOpacityValue">82%</output></label>
+            <label class="environment-range"><span>Motion speed</span><input id="environmentSpeed" type="range" min="0" max="100" value="42" /><output id="environmentSpeedValue">42</output></label>
+            <label class="environment-range"><span>Field of view</span><input id="environmentFov" type="range" min="35" max="120" value="72" /><output id="environmentFovValue">72°</output></label>
+            <label class="environment-range"><span>Horizon</span><input id="environmentHorizon" type="range" min="15" max="85" value="48" /><output id="environmentHorizonValue">48%</output></label>
+            <label class="environment-range"><span>Floor plane</span><input id="environmentFloor" type="range" min="40" max="95" value="72" /><output id="environmentFloorValue">72%</output></label>
+            <label class="environment-range"><span>Camera yaw</span><input id="environmentYaw" type="range" min="-90" max="90" value="0" /><output id="environmentYawValue">0°</output></label>
+            <label class="environment-range"><span>Camera pitch</span><input id="environmentPitch" type="range" min="-45" max="45" value="-5" /><output id="environmentPitchValue">-5°</output></label>
+            <label class="environment-range"><span>Depth</span><input id="environmentDepth" type="range" min="20" max="160" value="86" /><output id="environmentDepthValue">86</output></label>
+            <div><div class="eyebrow" style="margin-bottom:7px">Space / surface mapper</div><div class="surface-mapper"><label>Backdrop<select data-surface-role="backdrop"><option>Background</option><option>Wall</option><option>Ceiling</option><option>Ignore</option></select></label><label>Perspective plane<select data-surface-role="plane"><option>Floor</option><option>Background</option><option>Wall</option><option>Ignore</option></select></label><label>Left aperture<select data-surface-role="left"><option>Window</option><option>Portal</option><option>Screen</option><option>Ignore</option></select></label><label>Right aperture<select data-surface-role="right"><option>Window</option><option>Portal</option><option>Screen</option><option>Ignore</option></select></label><label>Display surface<select data-surface-role="display"><option>TV</option><option>Screen</option><option>Window</option><option>Ignore</option></select></label><label>Selected object<select data-surface-role="selected"><option>Screen</option><option>Sticker</option><option>Portal</option><option>Ignore</option></select></label></div></div>
+            <div class="environment-help">In the production system these roles bind imported 3D meshes and planes to semantic environment behavior: floor collision, windows and portals, sky/background, walls, ceiling, screens, TVs, no-entry zones, mascot lanes, lighting receivers and physics boundaries.</div>
+          </div>
+          <div class="environment-preview-card"><div class="environment-preview"><canvas id="environmentPreviewCanvas"></canvas><div class="surface-tags"><span class="surface-tag background">BACKGROUND / SKY</span><span class="surface-tag floor">FLOOR</span><span class="surface-tag window">WINDOW</span><span class="surface-tag tv">TV / SCREEN</span></div></div><div class="inspector-list" style="margin-top:11px"><div class="inspector-row"><span>Source</span><strong id="environmentSourceLabel">Procedural · Orbital Dream Station</strong></div><div class="inspector-row"><span>Target</span><strong id="environmentTargetLabel">Full application background</strong></div><div class="inspector-row"><span>Renderer</span><strong id="environmentRendererLabel">Canvas 3D projection</strong></div><div class="inspector-row"><span>Performance</span><strong id="environmentPerformanceLabel">Event-aware · pauses when hidden</strong></div></div></div>
+        </div>
+      </section>
+
+      <section class="vault-special-panel" id="roomIntelligencePanel" aria-label="Blender room intelligence and semantic affordance studio">
+        <div class="studio-panel-head"><div><div class="eyebrow">Full-room import & semantic decomposition</div><h3>Blender Room Intelligence</h3><p class="subtle">Import complete CAS-style rooms, preserve the authored environment, and detach furniture, screens, lights, doors and surfaces into real interactive actors.</p></div><div class="hero-actions"><button class="secondary-button" id="roomRescan">Rescan room</button><button class="secondary-button" id="roomExtractAll">Extract interactables</button><button class="primary-button" id="roomImportButton">Import full Blender room</button><input id="roomFileInput" type="file" hidden accept=".blend,.glb,.gltf,.fbx,.obj,.usdz" /></div></div>
+        <div class="room-intelligence-grid">
+          <div class="room-import-controls">
+            <div class="inspector-list"><div class="inspector-row"><span>Room source</span><strong id="roomSourceLabel">Aero CAS Lounge.blend</strong></div><div class="inspector-row"><span>Scene mode</span><strong id="roomModeLabel">Unified room + detached actors</strong></div><div class="inspector-row"><span>Detected meshes</span><strong id="roomDetectedCount">8 semantic actors</strong></div><div class="inspector-row"><span>Runtime status</span><strong id="roomRuntimeStatus">Ready</strong></div></div>
+            <label>Room import mode<select id="roomImportMode"><option value="unified-detached">Keep full room + detach interactables</option><option value="unified">Keep room as one environment</option><option value="decomposed">Decompose into individual objects</option><option value="background">CAS-style visual background only</option></select></label>
+            <div class="toggle-grid"><button class="toggle active" id="roomKeepUnified"><span>Preserve authored room</span><span class="switch"></span></button><button class="toggle active" id="roomDetachInteractables"><span>Detach interactables</span><span class="switch"></span></button><button class="toggle active" id="roomAutoPhysics"><span>Generate collision + physics</span><span class="switch"></span></button><button class="toggle active" id="roomMascotAffordances"><span>Generate mascot affordances</span><span class="switch"></span></button></div>
+            <div><div class="eyebrow" style="margin-bottom:7px">Import pipeline</div><div class="room-pipeline" id="roomPipeline"><div class="room-stage done" data-room-stage="bridge"><span class="stage-dot">✓</span><strong>Blender bridge</strong><span>scene exported</span></div><div class="room-stage done" data-room-stage="segment"><span class="stage-dot">✓</span><strong>Mesh segmentation</strong><span>actors separated</span></div><div class="room-stage done" data-room-stage="semantic"><span class="stage-dot">✓</span><strong>Semantic analysis</strong><span>roles assigned</span></div><div class="room-stage done" data-room-stage="physics"><span class="stage-dot">✓</span><strong>Physics + navmesh</strong><span>walkable room ready</span></div><div class="room-stage done" data-room-stage="affordance"><span class="stage-dot">✓</span><strong>Affordance graph</strong><span>mascot actions ready</span></div></div></div>
+            <div><div class="eyebrow" style="margin-bottom:7px">Object Atlas drag tray</div><div class="room-asset-tray" id="roomAssetTray" aria-label="Draggable Object Atlas assets for room surfaces"></div></div>
+            <div><div class="eyebrow" style="margin-bottom:7px">Detected room objects</div><div class="room-detected-list" id="detectedRoomObjects"></div></div>
+            <div class="room-atlas-state" id="roomAtlasState">Objects extracted from a room retain their source room, original transform, mesh/material lineage, animation clips, semantic role, collision, anchors and mascot interaction graph.</div>
+          </div>
+          <div class="room-preview-card">
+            <div class="semantic-room-preview" id="semanticRoomPreview" aria-label="Interactive semantic preview of an imported Blender room">
+              <div class="room-wall left" data-room-mesh="wall-left"></div><div class="room-wall back" data-room-mesh="wall-back"></div><div class="room-wall right" data-room-mesh="wall-right"></div>
+              <div class="room-floor-plane room-mesh" data-room-mesh="floor" data-role-label="WALKABLE FLOOR"></div>
+              <div class="room-window-mesh room-mesh" data-room-mesh="window" data-role-label="WINDOW / PORTAL"></div>
+              <div class="room-door room-mesh" data-room-mesh="door" data-role-label="DOOR"></div>
+              <div class="room-sofa room-mesh" data-room-mesh="sofa" data-role-label="COUCH / SEAT"></div>
+              <div class="room-table room-mesh" id="roomTableDropZone" data-room-mesh="table" data-role-label="PLACEABLE SURFACE"></div>
+              <div class="room-table-prop" id="roomTableProp"></div>
+              <div class="room-tv room-mesh" data-room-mesh="tv" data-role-label="TV / SCREEN"></div>
+              <div class="room-lamp room-mesh on" data-room-mesh="lamp" data-role-label="LAMP / LIGHT"></div>
+              <div class="room-preview-mascot" id="roomPreviewMascot" aria-label="Draggable mascot in imported room"><svg viewBox="0 0 100 100" aria-hidden="true" focusable="false"><path d="M50 11c15 0 27 12 27 28v27c0 14-11 24-27 24S23 80 23 66V39c0-16 12-28 27-28z" fill="#e8ffff" stroke="#51bad3" stroke-width="3"/><path d="M32 27c8-8 29-8 37 0" fill="none" stroke="#73e4d7" stroke-width="6" stroke-linecap="round"/><circle cx="40" cy="48" r="6" fill="#12374d"/><circle cx="61" cy="48" r="6" fill="#12374d"/><path d="M42 65c6 5 12 5 17 0" fill="none" stroke="#2a7e92" stroke-width="3" stroke-linecap="round"/><path d="M26 58l-11 9M74 58l11 9" stroke="#51bad3" stroke-width="6" stroke-linecap="round"/></svg></div>
+            </div>
+            <div class="room-preview-tip">Click any detected mesh to inspect it. Click the couch, TV, lamp, door or table to test its primary behavior. Drag Asset Vault items onto the table. The mascot can be dragged manually or sent to semantic anchors.</div>
+            <div class="room-role-inspector">
+              <div class="inspector-list"><div class="inspector-row"><span>Selected mesh</span><strong id="roomSelectedName">Cloud Sofa</strong></div><div class="inspector-row"><span>Semantic role</span><strong id="roomSelectedRole">Couch / Seat</strong></div><div class="inspector-row"><span>Runtime owner</span><strong id="roomSelectedOwner">Room actor + Object Atlas</strong></div><div class="inspector-row"><span>Current state</span><strong id="roomSelectedState">Ready for sit and bounce</strong></div></div>
+              <div class="control-pair"><label>Role<select id="roomRoleSelect"><option>Couch / Seat</option><option>Table / Surface</option><option>TV / Screen</option><option>Lamp / Light</option><option>Window / Portal</option><option>Door</option><option>Floor / Navmesh</option><option>Wall / Collision</option><option>Decoration</option><option>Ignore</option></select></label><label>Physics<select id="roomPhysicsSelect"><option>Static collision</option><option>Dynamic rigid body</option><option>Kinematic articulated</option><option>Soft body</option><option>No collision</option></select></label></div>
+              <div class="affordance-chips" id="roomAffordanceChips"></div>
+              <div class="room-object-actions"><button class="secondary-button" id="roomTestPrimary">Test primary action</button><button class="secondary-button" id="roomSendMascot">Send mascot</button><button class="secondary-button" id="roomPlaceOnSurface">Place selected Atlas asset</button><button class="primary-button" id="roomExtractSelected">Add selected mesh to Object Atlas</button><button class="secondary-button" id="roomToggleVisible">Hide mesh</button><button class="secondary-button" id="roomToggleLock">Lock mapping</button></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </section>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <div id="selfTest">pending</div>
+
+  <script type="module" src="/src/main.ts"></script>
+</body>
+</html>

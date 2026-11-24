@@ -1,0 +1,40 @@
+{
+  "scope": "Actual Atlas fixed jobs through loopback HTTP, generated algorithm workload; no provider requests or target-project transfer",
+  "order": [
+    "baseline",
+    "candidate",
+    "candidate",
+    "baseline"
+  ],
+  "binary_sha256": {
+    "baseline": "1493acf0c20956ca0ed53ad0468b7f253e39a285c6025c6390bad4543e424163",
+    "candidate": "a674d764562d36b9ddda6013479ecd93448a4d4d527a546b605622bce578e0bb"
+  },
+  "samples": 20,
+  "results": {
+    "baseline": {
+      "queue_to_claim_ms": {
+        "median": 745.5,
+        "max": 925,
+        "min": 578
+      },
+      "request_to_completion_ms": {
+        "median": 1547.1600075000001,
+        "max": 1760.295871,
+        "min": 1307.24639
+      }
+    },
+    "candidate": {
+      "queue_to_claim_ms": {
+        "median": 0.5,
+        "max": 1,
+        "min": 0
+      },
+      "request_to_completion_ms": {
+        "median": 753.2077155,
+        "max": 814.858938,
+        "min": 710.469011
+      }
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "kind": "actual Chromium, localhost static app",
+  "started": "2026-11-13T22:53:25.183Z",
+  "checks": [],
+  "limitations": [
+    "No actual provider playback or authenticated API tests",
+    "Feature Foundry integration and verification in progress; not included in this build",
+    "No runtime speedup or complete parity claim"
+  ],
+  "errors": [],
+  "outsideRequests": [],
+  "result": "failed",
+  "failure": "browserType.launch: Executable doesn't exist at /home/agent/.cache/ms-playwright/chromium_headless_shell-1234/chrome-headless-shell-linux64/chrome-headless-shell\n╔════════════════════════════════════════════════════════════╗\n║ Looks like Playwright was just installed or updated.       ║\n║ Please run the following command to download new browsers: ║\n║                                                            ║\n║     npx playwright install                                 ║\n║                                                            ║\n║ <3 Playwright Team                                         ║\n╚════════════════════════════════════════════════════════════╝\n    at /tmp/athena-audio-native/scripts/test_browser.cjs:10:25",
+  "finished": "2026-11-13T22:53:25.201Z"
+}

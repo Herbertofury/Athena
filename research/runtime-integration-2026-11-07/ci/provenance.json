@@ -1,0 +1,124 @@
+{
+  "repository_commit": "74c8191f776838edce29fc56d57c27bf46393a9a",
+  "workflow_run": 42360535804,
+  "workflow_url": "https://github.com/Herbertofury/Athena/actions/runs/42360535804",
+  "artifact": {
+    "id": 13570015396,
+    "name": "athena-browser-evidence",
+    "size_bytes": 5168159,
+    "digest": "sha256:9b3c9fb000aad856db73b01f5d4fd22360210473d73b9ea02aea45d8fe1ea133",
+    "digest_source": "GitHub artifact metadata, independently read",
+    "expires_at": "2027-02-05T09:37:41Z"
+  },
+  "results": {
+    "static_chromium_checks": 9,
+    "rust_backed_chromium_checks": 8,
+    "rust_all_target_tests": 191,
+    "rust_clippy": "passed",
+    "verified_served_assets": 31,
+    "database_integrity": "ok",
+    "database_jobs": 1,
+    "browser": "151.0.7922.34",
+    "csp_violations": 0,
+    "unexpected_external_requests": 0
+  },
+  "identities": {
+    "binarySHA256": "94a19de1d9cf43ffac173f73a4ffc3cec1c524ba6aeafa735363722833185447",
+    "harnessSHA256": "88f07a18fb2a7789f1052e561273f310a447ed344edebbba4587299bd3b72f81",
+    "packageSHA256": "e98a0d006c976761c882a5a0c2142a688f7b668570bac0ad59168bbde5b5f016",
+    "loadedAppSHA256": "0d12940166d5d10ee8b5544f197e6bd34d8d8083ff7dbae318ae0ea655fb66b9"
+  },
+  "sanitization": "Only CI checkout and temporary filesystem prefixes are redacted in text logs. Original and retained SHA-256 values are recorded per file. JSON reports and all evidence values are otherwise retained unchanged. Screenshots and generated database remain in the original CI artifact; no private user database was used.",
+  "files": [
+    {
+      "artifact_path": "unified-acceptance.json",
+      "retained_path": "ci/unified-acceptance.json",
+      "original_sha256": "46354076691adfeccc3437bf71e800e5da9e9e8502bcc6474047111bc38bc12e",
+      "retained_sha256": "46354076691adfeccc3437bf71e800e5da9e9e8502bcc6474047111bc38bc12e",
+      "bytes": 1358,
+      "path_redacted": false
+    },
+    {
+      "artifact_path": "report.json",
+      "retained_path": "ci/static-browser-report.json",
+      "original_sha256": "7fa52777b6745a88989de29b6434773d41bdda6ee542f0e0f478d66dba9c0ceb",
+      "retained_sha256": "7fa52777b6745a88989de29b6434773d41bdda6ee542f0e0f478d66dba9c0ceb",
+      "bytes": 15710,
+      "path_redacted": false
+    },
+    {
+      "artifact_path": "lab-runtime/report.json",
+      "retained_path": "ci/rust-browser-report.json",
+      "original_sha256": "fed33be05ee96ba4c5cb461790b284e8b1ae6ce305d0d6fc5b8de0e9ef7adcdd",
+      "retained_sha256": "fed33be05ee96ba4c5cb461790b284e8b1ae6ce305d0d6fc5b8de0e9ef7adcdd",
+      "bytes": 7744,
+      "path_redacted": false
+    },
+    {
+      "artifact_path": "rust-tests.log",
+      "retained_path": "ci/rust-tests.log",
+      "original_sha256": "281b1cd645144734d7ac4e9ff1ce26241dab6c33bad8d2b39f47b8c48e5d95c7",
+      "retained_sha256": "4b133917dd7b8085927535ce207e036f41e73be4fec74e040fa86361fc7eae11",
+      "bytes": 30310,
+      "path_redacted": true
+    },
+    {
+      "artifact_path": "rust-clippy.log",
+      "retained_path": "ci/rust-clippy.log",
+      "original_sha256": "7971bb79548388ff5009d8ee3f193634964682983d886c929b477687b59643e7",
+      "retained_sha256": "e6e31b6509fd0b9b8613d4f94da2ae8ff31233592ed7953195e3180ea4d69a58",
+      "bytes": 3464,
+      "path_redacted": true
+    },
+    {
+      "artifact_path": "rust-build.log",
+      "retained_path": "ci/rust-build.log",
+      "original_sha256": "a5f4c585ee974ca44916ac30a98bbc189e067a7e0a6bc6d2e8d6bc525be724af",
+      "retained_sha256": "a5f4c585ee974ca44916ac30a98bbc189e067a7e0a6bc6d2e8d6bc525be724af",
+      "bytes": 72,
+      "path_redacted": false
+    },
+    {
+      "artifact_path": "lab-runtime/server.log",
+      "retained_path": "ci/rust-server.log",
+      "original_sha256": "3ebefc5c4080eaf620b92fc423e992ec205ff647e2f46b8b92511a0ab84243db",
+      "retained_sha256": "3ebefc5c4080eaf620b92fc423e992ec205ff647e2f46b8b92511a0ab84243db",
+      "bytes": 206,
+      "path_redacted": false
+    },
+    {
+      "artifact_path": "research-media-reproducibility.log",
+      "retained_path": "ci/research-media-reproducibility.log",
+      "original_sha256": "6dc5adfe9a6e37b3e79663a3c8959ecd1188dd4be7a6be7afeeb14b01c799acd",
+      "retained_sha256": "6dc5adfe9a6e37b3e79663a3c8959ecd1188dd4be7a6be7afeeb14b01c799acd",
+      "bytes": 47,
+      "path_redacted": false
+    },
+    {
+      "artifact_path": "lab-reproducibility.log",
+      "retained_path": "ci/lab-reproducibility.log",
+      "original_sha256": "40323a19d72d8820b18e2c1d45e84840bb9a7314ecd1e5a53bb5bb69954e3675",
+      "retained_sha256": "40323a19d72d8820b18e2c1d45e84840bb9a7314ecd1e5a53bb5bb69954e3675",
+      "bytes": 31,
+      "path_redacted": false
+    },
+    {
+      "artifact_path": "verified-package.log",
+      "retained_path": "ci/verified-package.log",
+      "original_sha256": "485d1a037fc0f0c602949030fccbee32d4d842a39b131f5642e6421265dcc877",
+      "retained_sha256": "899b96a3cc3974a798950b0b0e2e271efff9f453f4e97e5f7bafa8b0608e4136",
+      "bytes": 77,
+      "path_redacted": true
+    }
+  ],
+  "limitations": [
+    "Generated snapshots, not live provider collection",
+    "Controlled restart persistence, not power-loss certification",
+    "No Windows acceptance",
+    "External media disabled in privileged local engine mode",
+    "No actual provider playback or authenticated API tests",
+    "Feature Foundry intentionally excluded pending publication approval",
+    "No runtime speedup or complete parity claim",
+    "GitHub Pages is not configured; this is served loopback CI evidence, not a live hosted-site verification."
+  ]
+}

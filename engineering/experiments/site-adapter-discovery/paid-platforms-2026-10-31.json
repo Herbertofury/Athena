@@ -1,0 +1,714 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-10-31",
+  "scope": "Public documentation and screenshot-derived candidate audit; no new authenticated operations",
+  "sourceRegisterIntegration": "Pending reconciliation; URLs self-contained; no new source-register IDs asserted",
+  "documentation": "docs/adapters/paid-platforms.md",
+  "targets": [
+    {
+      "screenshotLabel": "Pawchive",
+      "existingId": null,
+      "status": "missing_catalog_entry",
+      "finding": "Proposed mirror-provenance candidate; .pw self-description and favorites gate observed. Canonical screenshot origin remains to confirm.",
+      "materialGaps": "No catalog operation evidence: post text, author, avatar, ordered images/video/GIFs, files, following, login and per-object entitlement require separate evidence.",
+      "methodIds": [],
+      "fullSupportAccepted": false,
+      "currentCatalogStatus": "researched_candidate_or_scoped_existing_entry"
+    },
+    {
+      "screenshotLabel": "Kemono (Favorite profiles | Kemono)",
+      "existingId": "kemono",
+      "status": "existing_catalog_entry",
+      "finding": "Mirror candidate only; no readable API body or accepted retrieval.",
+      "materialGaps": "Original author/service ID, mirror ID and import time require separate provenance; favorites import/login and all content operations unverified. Mirror availability is never original entitlement.",
+      "methodIds": [],
+      "fullSupportAccepted": false,
+      "currentCatalogStatus": "researched_candidate_or_scoped_existing_entry"
+    },
+    {
+      "screenshotLabel": "Patreon",
+      "existingId": "patreon",
+      "status": "existing_catalog_entry",
+      "finding": "One scoped browser method; public post plus signed-in locked boundary.",
+      "materialGaps": "Public post127164163 has 1,507 body chars, TwistedMexi avatar, one decoded 1080×608 gallery image and verified 932,816-byte ZIP (six CRC-valid entries). Signed-in post158788471 is only an 894-char teaser. Paid full body/files, videos/GIFs, following/history remain unaccepted.",
+      "methodIds": [
+        "browser/patreon-public127164163-and-locked158788471"
+      ],
+      "fullSupportAccepted": false,
+      "currentCatalogStatus": "researched_candidate_or_scoped_existing_entry"
+    },
+    {
+      "screenshotLabel": "Boosty",
+      "existingId": "boosty",
+      "status": "existing_catalog_entry",
+      "finding": "Three public SSR scopes; FOYM01 is an executed field-extraction method.",
+      "materialGaps": "Omega: 972 normalized text chars, 1 image; Ruins: 9,763 chars, 5 images and 24 audio blocks. Owner ID/avatar locators recorded; bytes/playback not fetched. Third locked scope has zero body chars. Paid/login/follow/video/GIF/file delivery remains unverified.",
+      "methodIds": [
+        "fallout4/FOYM01"
+      ],
+      "fullSupportAccepted": false,
+      "currentCatalogStatus": "researched_candidate_or_scoped_existing_entry"
+    },
+    {
+      "screenshotLabel": "SubscribeStar",
+      "existingId": "subscribestar",
+      "status": "existing_catalog_entry",
+      "finding": "Two scoped methods; one browser public-post guest/signed-in comparison.",
+      "materialGaps": "Post701675: 416 body chars, author-bound 120×120 avatar, eight ordered loaded images in guest and signed-in views. No private paid body/file transfer, video/GIF or follow evidence. API prohibits benefits outside platform; applicable permission needed for an API full-content reader.",
+      "methodIds": [
+        "fallout4/FOYM10",
+        "browser/subscribestar-701675"
+      ],
+      "fullSupportAccepted": false,
+      "currentCatalogStatus": "researched_candidate_or_scoped_existing_entry"
+    },
+    {
+      "screenshotLabel": "Buy Me a Coffee",
+      "existingId": "buy-me-a-coffee",
+      "status": "existing_catalog_entry",
+      "finding": "Official follow and webhook help linked; no content-reading method.",
+      "materialGaps": "Public/supporter/member access distinctions documented. Need actual body/identity/avatar/gallery/video/GIF/file captures and native-follow import/mutation receipts; event webhooks do not supply a patron content reader.",
+      "methodIds": [],
+      "fullSupportAccepted": false,
+      "currentCatalogStatus": "researched_candidate_or_scoped_existing_entry"
+    },
+    {
+      "screenshotLabel": "Afdian",
+      "existingId": "afdian",
+      "status": "existing_catalog_entry",
+      "finding": "Creator order/sponsor API and webhooks documented; no patron-wide reader established.",
+      "materialGaps": "Post text, author/avatar joins, ordered images/video/GIFs, entitled files, login expiry and native following need permitted fixtures; creator API token cannot establish arbitrary fan reading.",
+      "methodIds": [],
+      "fullSupportAccepted": false,
+      "currentCatalogStatus": "researched_candidate_or_scoped_existing_entry"
+    },
+    {
+      "screenshotLabel": "OnlyFans",
+      "existingId": "onlyfans",
+      "status": "existing_catalog_entry",
+      "finding": "Candidate; historical terms fetch unavailable and no accepted reader.",
+      "materialGaps": "All eight requested operation classes remain unverified. Retain manual/open-in-site or metadata candidate until current first-party policy and permitted fixtures establish more; do not infer a public API.",
+      "methodIds": [],
+      "fullSupportAccepted": false,
+      "currentCatalogStatus": "researched_candidate_or_scoped_existing_entry"
+    },
+    {
+      "screenshotLabel": "Fansly",
+      "existingId": "fansly",
+      "status": "existing_catalog_entry",
+      "finding": "Official permission documentation only; no executed method.",
+      "materialGaps": "Timeline visibility and individual media permissions differ. Need author/avatar/text plus each accessible media object, purchased-media versus tier entitlement, login and following fixtures; subscription alone cannot imply every object is accessible.",
+      "methodIds": [],
+      "fullSupportAccepted": false,
+      "currentCatalogStatus": "researched_candidate_or_scoped_existing_entry"
+    },
+    {
+      "screenshotLabel": "Gumroad",
+      "existingId": "gumroad",
+      "status": "existing_catalog_entry",
+      "finding": "Creator product/sales/licensing API plus buyer Library/receipt flow documented.",
+      "materialGaps": "No general buyer-library export accepted. Need entitled receipt/Library fixture, product creator/avatar and description mapping, media order/playback and exact delivered files; following and refunds/revocation untested.",
+      "methodIds": [],
+      "fullSupportAccepted": false,
+      "currentCatalogStatus": "researched_candidate_or_scoped_existing_entry"
+    },
+    {
+      "screenshotLabel": "Library (unidentified)",
+      "existingId": null,
+      "status": "unidentified_label",
+      "finding": "Cannot identify service from generic label; may be a navigation tab rather than platform.",
+      "materialGaps": "No catalog operation evidence: post text, author, avatar, ordered images/video/GIFs, files, following, login and per-object entitlement require separate evidence.",
+      "methodIds": [],
+      "fullSupportAccepted": false,
+      "currentCatalogStatus": "unresolved_label"
+    },
+    {
+      "screenshotLabel": "fanbox.cc / Pixiv FANBOX",
+      "existingId": "pixiv-fanbox",
+      "status": "existing_catalog_entry",
+      "finding": "Official post-style/attachment/follow documentation; no executed method.",
+      "materialGaps": "Blog/Image/File/Text/Video-or-Music documentation does not prove reader extraction. Need author/avatar, body/media ordering, embedded-file delivery, tier/age/login states and following fixtures. Domain alias fanbox.cc must resolve to this service before credential use.",
+      "methodIds": [],
+      "fullSupportAccepted": false,
+      "currentCatalogStatus": "researched_candidate_or_scoped_existing_entry"
+    },
+    {
+      "screenshotLabel": "Tipeee",
+      "existingId": null,
+      "status": "missing_catalog_entry",
+      "finding": "Proposed paid-platform candidate; official indexed News documentation is a lead, current readable section still missing.",
+      "materialGaps": "No catalog operation evidence: post text, author, avatar, ordered images/video/GIFs, files, following, login and per-object entitlement require separate evidence.",
+      "methodIds": [],
+      "fullSupportAccepted": false,
+      "currentCatalogStatus": "researched_candidate_or_scoped_existing_entry"
+    },
+    {
+      "screenshotLabel": "Fourthwall",
+      "existingId": "fourthwall",
+      "status": "existing_catalog_entry",
+      "finding": "Official Memberships List/Get Posts documented; no executed method.",
+      "materialGaps": "Shop-authorized memberships_read API is concrete. Need actual authorized schema response, body/media parity, shop/author/avatar mapping and files. Patron-wide access and following remain unverified; an API key is not ordinary member entitlement.",
+      "methodIds": [],
+      "fullSupportAccepted": false,
+      "currentCatalogStatus": "researched_candidate_or_scoped_existing_entry"
+    },
+    {
+      "screenshotLabel": "HYPAGE",
+      "existingId": null,
+      "status": "missing_catalog_entry",
+      "finding": "Proposed historical paid-platform candidate; root now redirects to Hyax. Do not merge legacy/current service identity without migration evidence.",
+      "materialGaps": "No catalog operation evidence: post text, author, avatar, ordered images/video/GIFs, files, following, login and per-object entitlement require separate evidence.",
+      "methodIds": [],
+      "fullSupportAccepted": false,
+      "currentCatalogStatus": "researched_candidate_or_scoped_existing_entry"
+    },
+    {
+      "screenshotLabel": "itch.io",
+      "existingId": "itch-io",
+      "status": "existing_catalog_entry",
+      "finding": "One semantic-observation/proposed-extractor method, not an executed parser acceptance.",
+      "materialGaps": "Public FlowFit release/team mapping exists; official profile:owned buyer API is concrete. Need actual authorized owned-key pages, download delivery, creator avatar versus game cover, description/devlog body and ordered screenshot/video/GIF fixtures. Native following exists in docs but import/mutation untested.",
+      "methodIds": [
+        "sims4/simrealist-team-news-release"
+      ],
+      "fullSupportAccepted": false,
+      "currentCatalogStatus": "researched_candidate_or_scoped_existing_entry"
+    }
+  ],
+  "sources": [
+    {
+      "url": "https://pawchive.pw/",
+      "state": "direct_public_page_observed",
+      "finding": "Self-description: contributor-uploaded mirror archive based on Kemono, naming Patreon, Pixiv Fanbox and Discord. No source-service rights or completeness established.",
+      "sourceId": "PP31001",
+      "registerId": "PP31001",
+      "readingState": "direct_public_page_observed"
+    },
+    {
+      "url": "https://pawchive.pw/favorites",
+      "state": "direct_public_redirect_observed",
+      "finding": "Redirects to https://pawchive.pw/account/login?location=/favorites; account favorites gate observed, no login or import tested.",
+      "sourceId": "PP31002",
+      "registerId": "PP31002",
+      "readingState": "direct_public_redirect_observed"
+    },
+    {
+      "url": "https://pawchive.pw/api/schema",
+      "state": "direct_public_shell_observed",
+      "finding": "API documentation page embeds /api/swagger_schema. No readable API schema extracted.",
+      "sourceId": "PP31003",
+      "registerId": "PP31003",
+      "readingState": "direct_public_shell_observed"
+    },
+    {
+      "url": "https://pawchive.pw/api/swagger_schema",
+      "state": "no_readable_body",
+      "finding": "Swagger iframe yielded no readable lines; no endpoint contract or implementation accepted.",
+      "sourceId": "PP31004",
+      "registerId": "PP31004",
+      "readingState": "no_readable_body"
+    },
+    {
+      "url": "https://hy.page/",
+      "finalUrl": "https://hyax.com/",
+      "state": "direct_redirect_and_public_marketing_observed",
+      "finding": "Current root redirects to Hyax. Destination markets memberships and digital/physical products; it is not proof that historical HYPAGE creator URLs or member content still work.",
+      "sourceId": "PP31005",
+      "registerId": "PP31005",
+      "readingState": "direct_redirect_and_public_marketing_observed"
+    },
+    {
+      "url": "https://hy.page/help",
+      "state": "tool_inaccessible",
+      "finding": "No readable help body; historical HYPAGE API/content/login/media operations remain unresolved.",
+      "sourceId": "PP31006",
+      "registerId": "PP31006",
+      "readingState": "tool_inaccessible"
+    },
+    {
+      "url": "https://en.tipeee.com/become-a-creator",
+      "state": "search_extract_only_for_feature_claims_direct_image_shell",
+      "finding": "Search extract mentions posts/exclusive content; direct page supplies only an image. Precise feature claims require readable current documentation.",
+      "sourceId": "PP31007",
+      "registerId": "PP31007",
+      "readingState": "search_extract_only_for_feature_claims_direct_image_shell"
+    },
+    {
+      "url": "https://blog.tipeee.com/pourquoi-et-comment-utiliser-les-news/",
+      "state": "official_search_extract_direct_redirect_inaccessible",
+      "finding": "Official indexed article describes News gated by tip amount/reward and resources including video/photo gallery/audio/PDF; direct old URL redirects to inaccessible https://en.tipeee.com/blog. Documented lead, not executed content evidence.",
+      "sourceId": "PP31008",
+      "registerId": "PP31008",
+      "readingState": "official_search_extract_direct_redirect_inaccessible"
+    },
+    {
+      "url": "https://blog.tipeee.com/decouvrez-nos-features-essentielles/",
+      "state": "official_search_extract_only",
+      "finding": "Indexed official article distinguishes public/gated News and automatic email delivery of digital rewards; current direct section unverified.",
+      "sourceId": "PP31009",
+      "registerId": "PP31009",
+      "readingState": "official_search_extract_only"
+    },
+    {
+      "url": "https://en.tipeee.com/terms",
+      "state": "direct_image_shell_search_extract_only",
+      "finding": "Indexed terms retain creator ownership; no precise current reader API contract obtained.",
+      "sourceId": "PP31010",
+      "registerId": "PP31010",
+      "readingState": "direct_image_shell_search_extract_only"
+    },
+    {
+      "url": "https://kemono.cr/documentation/api",
+      "state": "direct_no_readable_body",
+      "finding": "Still zero readable lines on 2026-10-31; no new endpoint/content acceptance.",
+      "sourceId": "AS257",
+      "registerId": "AS257",
+      "readingState": "direct_no_readable_body"
+    },
+    {
+      "url": "https://itch.io/docs/api/serverside",
+      "state": "direct_official_documentation",
+      "finding": "All endpoints authenticated; profile:owned /profile/owned-keys enumerates download keys with game/user records. Pagination must continue until EMPTY page, since short pages can have successors. Ownership endpoint restricted to OAuth app owner-editable games. No API request executed.",
+      "sourceId": "AS255",
+      "registerId": "SA118",
+      "readingState": "direct_official_documentation"
+    },
+    {
+      "url": "https://docs.fourthwall.com/api-reference/membership/posts/list-posts",
+      "state": "direct_official_documentation",
+      "finding": "GET /open-api/v1.1/memberships/posts requires memberships_read (or API key), optional X-ShopId, required state Published/Scheduled/All, page/limit and type filters. Returns typed posts, access tiers/price, description and pagination. No live authorized request.",
+      "sourceId": "AS104",
+      "registerId": "SA055",
+      "readingState": "direct_official_documentation"
+    },
+    {
+      "url": "https://docs.fourthwall.com/api-reference/membership/posts/get-post",
+      "state": "direct_official_documentation",
+      "finding": "GET /open-api/v1.1/memberships/posts/{id}; typed response and documented errors, still no patron-wide or full media fixture.",
+      "sourceId": "AS103",
+      "registerId": "SA054",
+      "readingState": "direct_official_documentation"
+    },
+    {
+      "url": "https://help.buymeacoffee.com/en/articles/4371724-create-and-publish-your-first-post",
+      "state": "direct_official_documentation",
+      "finding": "September 1, 2026 post guide; title/description, visibility, albums, audio and external video embeds.",
+      "sourceId": "PP31011",
+      "registerId": "PP31011",
+      "readingState": "direct_official_documentation"
+    },
+    {
+      "url": "https://help.buymeacoffee.com/en/articles/6264548-how-to-publish-an-audio-post",
+      "state": "direct_official_documentation",
+      "finding": "Audio upload/recording and membership-level restriction documented; no reader request executed.",
+      "sourceId": "PP31012",
+      "registerId": "PP31012",
+      "readingState": "direct_official_documentation"
+    },
+    {
+      "url": "https://help.buymeacoffee.com/en/articles/4604000-how-to-follow-or-unfollow-a-creator",
+      "state": "direct_official_documentation",
+      "finding": "Free follow, login handoff, Following state and Creators I Follow view; follow does not unlock paid posts.",
+      "sourceId": "AS201",
+      "registerId": "AS201",
+      "readingState": "direct_official_documentation"
+    },
+    {
+      "url": "https://guide.afdian.com/creator/developer",
+      "state": "direct_official_documentation",
+      "finding": "Creator order/sponsor schema; sponsor user is not creator identity. No reader endpoint verified.",
+      "sourceId": "AS184",
+      "registerId": "ADP02",
+      "readingState": "direct_official_documentation"
+    },
+    {
+      "url": "https://help.fansly.com/en/articles/10544380-permissions-on-fansly",
+      "state": "direct_official_documentation",
+      "finding": "Object permission alternatives and conjunctions, timeline/public-profile separation and locked text.",
+      "sourceId": "AS209",
+      "registerId": "AS209",
+      "readingState": "direct_official_documentation"
+    },
+    {
+      "url": "https://help.fansly.com/en/articles/12313819-difference-between-following-and-subscribing",
+      "state": "direct_official_documentation",
+      "finding": "Free following differs from paid subscription; subscription auto-follows; some follow actions require existing verified payment method.",
+      "sourceId": "AS210",
+      "registerId": "AS210",
+      "readingState": "direct_official_documentation"
+    },
+    {
+      "url": "https://fanbox.pixiv.help/hc/en-us/articles/360011655774-How-do-I-insert-images-or-files-into-the-post",
+      "state": "direct_official_documentation",
+      "finding": "Mixed Blog content and five post styles documented; no reader schema accepted.",
+      "sourceId": "AS155",
+      "registerId": "SA085",
+      "readingState": "direct_official_documentation"
+    },
+    {
+      "url": "https://fanbox.pixiv.help/hc/en-us/articles/360011057793-What-types-of-attachments-can-I-upload",
+      "state": "direct_official_documentation",
+      "finding": "Upload formats include GIF/video/archive files; format documentation is not playback acceptance.",
+      "sourceId": "AS154",
+      "registerId": "AS154",
+      "readingState": "direct_official_documentation"
+    },
+    {
+      "url": "https://fanbox.pixiv.help/hc/en-us/articles/360000230381-I-want-to-follow-a-creator",
+      "state": "direct_official_documentation",
+      "finding": "Follow button and followed-creator list documented.",
+      "sourceId": "AS152",
+      "registerId": "AS152",
+      "readingState": "direct_official_documentation"
+    },
+    {
+      "url": "https://fanbox.pixiv.help/hc/en-us/articles/360000232262-I-can-t-follow-a-creator-I-m-supporting",
+      "state": "direct_official_documentation",
+      "finding": "Supporting replaces followed status.",
+      "sourceId": "AS153",
+      "registerId": "AS153",
+      "readingState": "direct_official_documentation"
+    },
+    {
+      "url": "https://gumroad.com/api",
+      "state": "direct_no_readable_body",
+      "finding": "No currently readable API schema in this pass.",
+      "sourceId": "AS186",
+      "registerId": "AS186",
+      "readingState": "direct_no_readable_body"
+    },
+    {
+      "url": "https://gumroad.com/help/article/198-your-gumroad-library",
+      "state": "official_search_extract_direct_no_readable_body",
+      "finding": "Indexed Library help is a discovery lead, direct body unavailable.",
+      "sourceId": "PP31013",
+      "registerId": "PP31013",
+      "readingState": "official_search_extract_direct_no_readable_body"
+    },
+    {
+      "url": "https://gumroad.com/help/article/282-how-do-purchases-work-for-my-customers",
+      "state": "official_search_extract_direct_no_readable_body",
+      "finding": "Indexed customer-help lead; direct fetch including .html alias has no readable body.",
+      "sourceId": "AS187",
+      "registerId": "AS187",
+      "readingState": "official_search_extract_direct_no_readable_body"
+    },
+    {
+      "url": "https://onlyfans.com/terms",
+      "state": "non_retryable_tool_error",
+      "finding": "Current first-party permission unresolved; no bypass/retry or third-party API substituted.",
+      "sourceId": "AS279",
+      "registerId": "AS279",
+      "readingState": "non_retryable_tool_error"
+    }
+  ],
+  "documentedMethodDetails": {
+    "afdian": {
+      "resourceRole": "creator commerce, not fan content",
+      "paths": [
+        "/api/open/query-order",
+        "/api/open/query-sponsor"
+      ],
+      "orderPageSize": 50,
+      "sponsorPageSize": 20,
+      "fields": [
+        "data.list",
+        "total_count",
+        "total_page",
+        "user.user_id",
+        "user.name",
+        "user.avatar",
+        "current_plan",
+        "sponsor_plans"
+      ],
+      "identityWarning": "Sponsor user/avatar is not creator/byline",
+      "executed": false
+    },
+    "fourthwall": {
+      "method": "GET",
+      "path": "https://api.fourthwall.com/open-api/v1.1/memberships/posts",
+      "scope": "memberships_read",
+      "headers": [
+        "Authorization",
+        "X-ShopId (optional)"
+      ],
+      "requiredQuery": [
+        "state"
+      ],
+      "query": [
+        "page",
+        "limit",
+        "search_query",
+        "types[]",
+        "ids[]",
+        "tags_ids[]"
+      ],
+      "stateValues": [
+        "Published",
+        "Scheduled",
+        "All"
+      ],
+      "responseFields": [
+        "posts",
+        "pagination.pages",
+        "pagination.limit",
+        "pagination.page",
+        "pagination.total",
+        "id",
+        "title",
+        "description",
+        "type",
+        "access"
+      ],
+      "executed": false
+    },
+    "itch-io": {
+      "dedicatedReceipt": "experiments/site-adapter-discovery/itch-io-research-2026-10-31.json",
+      "ownedKeyTermination": "empty page, not short page",
+      "newScope": "game:view:uploads",
+      "executed": false
+    }
+  },
+  "operationAcceptance": {
+    "text": "requires separate scoped receipt; documentation is not execution",
+    "author": "requires separate scoped receipt; documentation is not execution",
+    "avatar": "requires separate scoped receipt; documentation is not execution",
+    "orderedImages": "requires separate scoped receipt; documentation is not execution",
+    "video": "requires separate scoped receipt; documentation is not execution",
+    "animatedGif": "requires separate scoped receipt; documentation is not execution",
+    "files": "requires separate scoped receipt; documentation is not execution",
+    "nativeFollowingImport": "requires separate scoped receipt; documentation is not execution",
+    "nativeFollowMutation": "requires separate scoped receipt; documentation is not execution",
+    "login": "requires separate scoped receipt; documentation is not execution",
+    "entitlement": "requires separate scoped receipt; documentation is not execution",
+    "history": "requires separate scoped receipt; documentation is not execution"
+  },
+  "newAuthenticatedAcceptances": 0,
+  "newDownloads": 0,
+  "newFollowMutations": 0,
+  "fullSupportAccepted": false,
+  "limitations": [
+    "No GitHub connectors, CLI, remote API or logged-in GitHub access",
+    "No shared browser tabs used",
+    "No original-service credentials transferred to mirrors",
+    "No auth/paywall or tool-policy bypass; LoversLab/F95zone not retried",
+    "Gumroad/OnlyFans unreadable sources preserved as gaps",
+    "Tipeee search extracts are leads, not direct-section verification",
+    "HYPAGE redirect does not prove historical migration",
+    "Pawchive domain canonical identity not inferred across unrelated brand domains",
+    "Catalog additions subsequently authorized: three candidates and dated research references added; central source register and coverage generation delegated to root. No index or commit action."
+  ],
+  "sourceRegistry": [
+    {
+      "id": "PP31001",
+      "registerId": "PP31001",
+      "url": "https://pawchive.pw/",
+      "title": "Paid-platform screenshot research: https://pawchive.pw/",
+      "checkedAt": "2026-10-31",
+      "retrievalStatus": "direct_public_page_observed",
+      "fieldEvidenceClass": "blocked_partial_or_discovery",
+      "topics": [
+        "paid-platforms",
+        "screenshot-coverage-2026-10-31"
+      ],
+      "verificationNote": "Self-description: contributor-uploaded mirror archive based on Kemono, naming Patreon, Pixiv Fanbox and Discord. No source-service rights or completeness established."
+    },
+    {
+      "id": "PP31002",
+      "registerId": "PP31002",
+      "url": "https://pawchive.pw/favorites",
+      "title": "Paid-platform screenshot research: https://pawchive.pw/favorites",
+      "checkedAt": "2026-10-31",
+      "retrievalStatus": "direct_public_redirect_observed",
+      "fieldEvidenceClass": "blocked_partial_or_discovery",
+      "topics": [
+        "paid-platforms",
+        "screenshot-coverage-2026-10-31"
+      ],
+      "verificationNote": "Redirects to https://pawchive.pw/account/login?location=/favorites; account favorites gate observed, no login or import tested."
+    },
+    {
+      "id": "PP31003",
+      "registerId": "PP31003",
+      "url": "https://pawchive.pw/api/schema",
+      "title": "Paid-platform screenshot research: https://pawchive.pw/api/schema",
+      "checkedAt": "2026-10-31",
+      "retrievalStatus": "direct_public_shell_observed",
+      "fieldEvidenceClass": "blocked_partial_or_discovery",
+      "topics": [
+        "paid-platforms",
+        "screenshot-coverage-2026-10-31"
+      ],
+      "verificationNote": "API documentation page embeds /api/swagger_schema. No readable API schema extracted."
+    },
+    {
+      "id": "PP31004",
+      "registerId": "PP31004",
+      "url": "https://pawchive.pw/api/swagger_schema",
+      "title": "Paid-platform screenshot research: https://pawchive.pw/api/swagger_schema",
+      "checkedAt": "2026-10-31",
+      "retrievalStatus": "no_readable_body",
+      "fieldEvidenceClass": "blocked_partial_or_discovery",
+      "topics": [
+        "paid-platforms",
+        "screenshot-coverage-2026-10-31"
+      ],
+      "verificationNote": "Swagger iframe yielded no readable lines; no endpoint contract or implementation accepted."
+    },
+    {
+      "id": "PP31005",
+      "registerId": "PP31005",
+      "url": "https://hy.page/",
+      "title": "Paid-platform screenshot research: https://hy.page/",
+      "checkedAt": "2026-10-31",
+      "retrievalStatus": "direct_redirect_and_public_marketing_observed",
+      "fieldEvidenceClass": "blocked_partial_or_discovery",
+      "topics": [
+        "paid-platforms",
+        "screenshot-coverage-2026-10-31"
+      ],
+      "verificationNote": "Current root redirects to Hyax. Destination markets memberships and digital/physical products; it is not proof that historical HYPAGE creator URLs or member content still work."
+    },
+    {
+      "id": "PP31006",
+      "registerId": "PP31006",
+      "url": "https://hy.page/help",
+      "title": "Paid-platform screenshot research: https://hy.page/help",
+      "checkedAt": "2026-10-31",
+      "retrievalStatus": "tool_inaccessible",
+      "fieldEvidenceClass": "blocked_partial_or_discovery",
+      "topics": [
+        "paid-platforms",
+        "screenshot-coverage-2026-10-31"
+      ],
+      "verificationNote": "No readable help body; historical HYPAGE API/content/login/media operations remain unresolved."
+    },
+    {
+      "id": "PP31007",
+      "registerId": "PP31007",
+      "url": "https://en.tipeee.com/become-a-creator",
+      "title": "Paid-platform screenshot research: https://en.tipeee.com/become-a-creator",
+      "checkedAt": "2026-10-31",
+      "retrievalStatus": "search_extract_only_for_feature_claims_direct_image_shell",
+      "fieldEvidenceClass": "blocked_partial_or_discovery",
+      "topics": [
+        "paid-platforms",
+        "screenshot-coverage-2026-10-31"
+      ],
+      "verificationNote": "Search extract mentions posts/exclusive content; direct page supplies only an image. Precise feature claims require readable current documentation."
+    },
+    {
+      "id": "PP31008",
+      "registerId": "PP31008",
+      "url": "https://blog.tipeee.com/pourquoi-et-comment-utiliser-les-news/",
+      "title": "Paid-platform screenshot research: https://blog.tipeee.com/pourquoi-et-comment-utiliser-les-news/",
+      "checkedAt": "2026-10-31",
+      "retrievalStatus": "official_search_extract_direct_redirect_inaccessible",
+      "fieldEvidenceClass": "blocked_partial_or_discovery",
+      "topics": [
+        "paid-platforms",
+        "screenshot-coverage-2026-10-31"
+      ],
+      "verificationNote": "Official indexed article describes News gated by tip amount/reward and resources including video/photo gallery/audio/PDF; direct old URL redirects to inaccessible https://en.tipeee.com/blog. Documented lead, not executed content evidence."
+    },
+    {
+      "id": "PP31009",
+      "registerId": "PP31009",
+      "url": "https://blog.tipeee.com/decouvrez-nos-features-essentielles/",
+      "title": "Paid-platform screenshot research: https://blog.tipeee.com/decouvrez-nos-features-essentielles/",
+      "checkedAt": "2026-10-31",
+      "retrievalStatus": "official_search_extract_only",
+      "fieldEvidenceClass": "blocked_partial_or_discovery",
+      "topics": [
+        "paid-platforms",
+        "screenshot-coverage-2026-10-31"
+      ],
+      "verificationNote": "Indexed official article distinguishes public/gated News and automatic email delivery of digital rewards; current direct section unverified."
+    },
+    {
+      "id": "PP31010",
+      "registerId": "PP31010",
+      "url": "https://en.tipeee.com/terms",
+      "title": "Paid-platform screenshot research: https://en.tipeee.com/terms",
+      "checkedAt": "2026-10-31",
+      "retrievalStatus": "direct_image_shell_search_extract_only",
+      "fieldEvidenceClass": "blocked_partial_or_discovery",
+      "topics": [
+        "paid-platforms",
+        "screenshot-coverage-2026-10-31"
+      ],
+      "verificationNote": "Indexed terms retain creator ownership; no precise current reader API contract obtained."
+    },
+    {
+      "id": "PP31011",
+      "registerId": "PP31011",
+      "url": "https://help.buymeacoffee.com/en/articles/4371724-create-and-publish-your-first-post",
+      "title": "Paid-platform screenshot research: https://help.buymeacoffee.com/en/articles/4371724-create-and-publish-your-first-post",
+      "checkedAt": "2026-10-31",
+      "retrievalStatus": "direct_official_documentation",
+      "fieldEvidenceClass": "primary_documentation",
+      "topics": [
+        "paid-platforms",
+        "screenshot-coverage-2026-10-31"
+      ],
+      "verificationNote": "September 1, 2026 post guide; title/description, visibility, albums, audio and external video embeds."
+    },
+    {
+      "id": "PP31012",
+      "registerId": "PP31012",
+      "url": "https://help.buymeacoffee.com/en/articles/6264548-how-to-publish-an-audio-post",
+      "title": "Paid-platform screenshot research: https://help.buymeacoffee.com/en/articles/6264548-how-to-publish-an-audio-post",
+      "checkedAt": "2026-10-31",
+      "retrievalStatus": "direct_official_documentation",
+      "fieldEvidenceClass": "primary_documentation",
+      "topics": [
+        "paid-platforms",
+        "screenshot-coverage-2026-10-31"
+      ],
+      "verificationNote": "Audio upload/recording and membership-level restriction documented; no reader request executed."
+    },
+    {
+      "id": "PP31013",
+      "registerId": "PP31013",
+      "url": "https://gumroad.com/help/article/198-your-gumroad-library",
+      "title": "Paid-platform screenshot research: https://gumroad.com/help/article/198-your-gumroad-library",
+      "checkedAt": "2026-10-31",
+      "retrievalStatus": "official_search_extract_direct_no_readable_body",
+      "fieldEvidenceClass": "blocked_partial_or_discovery",
+      "topics": [
+        "paid-platforms",
+        "screenshot-coverage-2026-10-31"
+      ],
+      "verificationNote": "Indexed Library help is a discovery lead, direct body unavailable."
+    }
+  ],
+  "sourceRegistryNote": "New IDs for central registration by root; embedded catalog source records use these IDs. Existing source IDs are reused; old checkedAt fields unchanged.",
+  "catalogIntegration": {
+    "addedIds": [
+      "pawchive",
+      "tipeee",
+      "hypage"
+    ],
+    "updatedExistingIds": [
+      "kemono",
+      "patreon",
+      "boosty",
+      "subscribestar",
+      "buy-me-a-coffee",
+      "afdian",
+      "onlyfans",
+      "fansly",
+      "gumroad",
+      "pixiv-fanbox",
+      "fourthwall",
+      "itch-io"
+    ],
+    "unresolvedScreenshotLabels": [
+      "Library"
+    ],
+    "newSourceCount": 13,
+    "newFullSupportAcceptances": 0,
+    "newAuthenticatedAcceptances": 0
+  },
+  "targetStatusNote": "targets[].status preserves the initial screenshot audit; catalogIntegration records subsequent additions. No acceptance level changed."
+}

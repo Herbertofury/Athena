@@ -1,0 +1,72 @@
+Publication copy: executor path replaced with <repo>; failures unchanged.
+✔ normal event details remain complete and input is not mutated (2.246144ms)
+✖ provider detail keys cannot overwrite event identity or timing (0.905368ms)
+✖ invalid event envelope inputs are rejected explicitly (0.862059ms)
+✖ fatal HLS observer retains event tag separately from provider category (0.879671ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 1
+ℹ fail 3
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 186.520457
+
+✖ failing tests:
+
+test at tests/media-events.test.mjs:11:1
+✖ provider detail keys cannot overwrite event identity or timing (0.905368ms)
+  AssertionError [ERR_ASSERTION]: Missing expected exception.
+      at TestContext.<anonymous> (file://<repo>/tests/media-events.test.mjs:13:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: /reserved/i,
+    operator: 'throws',
+    diff: 'simple'
+  }
+
+test at tests/media-events.test.mjs:15:1
+✖ invalid event envelope inputs are rejected explicitly (0.862059ms)
+  AssertionError [ERR_ASSERTION]: Missing expected exception.
+      at TestContext.<anonymous> (file://<repo>/tests/media-events.test.mjs:16:40)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: undefined,
+    operator: 'throws',
+    diff: 'simple'
+  }
+
+test at tests/media-events.test.mjs:20:1
+✖ fatal HLS observer retains event tag separately from provider category (0.879671ms)
+  AssertionError [ERR_ASSERTION]: HLS caller retains provider category under error_type
+  
+  false !== true
+  
+      at TestContext.<anonymous> (file://<repo>/tests/media-events.test.mjs:22:9)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

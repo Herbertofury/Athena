@@ -1,0 +1,53 @@
+{
+  "harness": "atlas-complete-receiver-v6-late-guard",
+  "started_at": "2026-10-28T08:58:30.239Z",
+  "scope": "Generated browser receiver validation; no target acceptance",
+  "count": 200,
+  "bytes": 65536,
+  "execution": "receipt",
+  "complete": false,
+  "samples": [],
+  "limitations": [
+    "Frame gaps are scheduling observations, not INP or physical paint",
+    "No heap/RSS or provider-media measurement",
+    "Worker request duration includes startup and full input clone; clone mode also clones the full result, transfer mode includes complete output encoding, transfer and decoding",
+    "Receipt mode is validation-only: original complete input stays owned by the main thread; no transformed/new records are produced",
+    "Preparation and post-validation parity check are outside sample timers",
+    "Main-thread synchronous serialization cannot be interrupted mid-call; cancellation is checked at the next boundary"
+  ],
+  "calibration": {
+    "scope": "empty-frame scheduling check; not physical paint",
+    "waits_ms": [
+      6.099999964237213,
+      21.900000035762787,
+      6.599999964237213,
+      15.600000023841858,
+      16,
+      16.30000001192093,
+      17.599999964237213,
+      16.19999998807907
+    ],
+    "complete": true,
+    "reliable": true,
+    "slow_count": 0,
+    "threshold_ms": 200,
+    "reason": null
+  },
+  "dataset": {
+    "count": 200,
+    "metadata_bytes_per_record": 65536,
+    "serialized_bytes": 13136801,
+    "sha256": "b5d35c377c1fccebd3a402772d80402d35114f776ddb9a68166c029497f90230",
+    "generation_ms": 36.799999952316284,
+    "serialization_ms": 75.90000003576279,
+    "encoding_ms": 108.5,
+    "digest_ms": 29.399999976158142,
+    "hash_ms": 213.80000001192093
+  },
+  "error": "Worker cancelled; partial evidence retained",
+  "focus_state": {
+    "started_focused": true,
+    "focus_lost": false,
+    "focused_now": true
+  }
+}

@@ -1,0 +1,627 @@
+[
+  {
+    "id": "cloud-model-contract",
+    "title": "Describe the service before choosing the cloud",
+    "category": "Cloud",
+    "summary": "Separate cloud characteristics, service models and deployment models using one fictional workload.",
+    "explain": [
+      "Cloud is an operating model, not a synonym for any remote computer. NIST describes five essential characteristics: self-service provisioning, broad network access, pooled resources, rapid elasticity and measured use. A hosted server that needs a support ticket for every capacity change may still be useful, but a label alone does not show which cloud characteristics it provides.",
+      "Service models describe what the consumer receives and controls. IaaS provides infrastructure on which the consumer manages operating systems and applications. PaaS offers a managed application platform. SaaS supplies an application the consumer uses. Real solutions combine models, and the boundary depends on the specific service. A convenient service name is not a complete responsibility agreement.",
+      "Deployment models answer a different question. NIST distinguishes private, community, public and hybrid clouds by use and composition. Private does not simply mean physically in your office. Public does not mean your data should be publicly readable. Hybrid is a composition with integration between distinct cloud infrastructures; two unrelated vendor accounts do not by themselves explain an architecture.",
+      "Our fictional workload is a workshop report service. Staff submit small reports; a dashboard reads them; a background job prepares summaries. Start with who uses it, which data is retained, normal and peak demand, downtime tolerance, data-loss tolerance and the team’s operating skills. These requirements help compare options before an attractive product name biases the decision.",
+      "Write a service contract in plain language: what must work, who maintains each part, what can fail, what evidence would demonstrate success and what is out of scope. A managed database may reduce one maintenance burden while adding service limits or recovery choices you still need to understand. Fewer servers to administer does not mean no operational decisions remain.",
+      "This workshop does not open an account or deploy the fictional service. You will classify a workload, calculate bounded scenarios, inspect a local change report and perform one actual temporary-file restore. Those activities build reasoning habits. They do not demonstrate provider-console fluency, real network behavior, service quotas or a successful cloud deployment."
+    ],
+    "example": "The team could run its own application on virtual machines, deploy it to a managed runtime or buy a suitable hosted reporting application. The choice changes control and work, not the underlying need to manage users and data. Record two requirements that favor each option, then one uncertainty to check in current service documentation. Do not infer that the cheapest-looking compute rate answers the entire decision.",
+    "lab": [
+      "Write a five-line description of the fictional report service and its users.",
+      "Explain each NIST characteristic with your own example and counterexample.",
+      "Classify three candidate approaches as IaaS, PaaS or SaaS, noting mixed components.",
+      "State a deployment model separately from the service model.",
+      "List five questions that must be answered before a real deployment.",
+      "Mark the entire cloud deployment as unexecuted in your evidence worksheet."
+    ],
+    "question": "Which statement correctly separates two cloud classifications?",
+    "options": [
+      "IaaS is a service model; public is a deployment model",
+      "IaaS is a deployment model and public is a programming language",
+      "SaaS means every resource is publicly readable",
+      "Private cloud must be in your own office"
+    ],
+    "answer": 0,
+    "why": "Service models describe the delivered capability and control boundary; deployment models describe how cloud infrastructure is used and composed.",
+    "tags": [
+      "cloud-workshop",
+      "cloud",
+      "general-computing"
+    ],
+    "sources": [
+      "https://csrc.nist.gov/pubs/sp/800/145/final",
+      "https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-145.pdf"
+    ],
+    "depth": "applied foundation + offline models and local restore",
+    "estimatedMinutes": 45,
+    "learningGoals": [
+      "Explain the five NIST characteristics in ordinary language.",
+      "Distinguish service model from deployment model.",
+      "Write a workload contract before naming a vendor product."
+    ],
+    "additionalChecks": [
+      {
+        "question": "What does public cloud imply about the fictional reports?",
+        "options": [
+          "They should be public files",
+          "Their access still needs an explicit design",
+          "Their confidentiality no longer matters",
+          "They cannot be encrypted"
+        ],
+        "answer": 1,
+        "why": "Public describes the cloud deployment model, not authorization to expose customer data."
+      },
+      {
+        "question": "Which evidence is missing after completing only this pack?",
+        "options": [
+          "A local calculation",
+          "An original worksheet",
+          "An executed real-cloud deployment and its validation",
+          "A synthetic fixture"
+        ],
+        "answer": 2,
+        "why": "All provider-side labs remain unexecuted; local exercises cannot substitute for deployment evidence."
+      }
+    ],
+    "evidence": [
+      "A workload contract and comparison of three approaches.",
+      "Separate service/deployment classifications with reasons.",
+      "An explicit unexecuted real-cloud status."
+    ],
+    "limitations": "This is a vendor-neutral conceptual foundation. It is not a deployed architecture, procurement recommendation or complete cloud certification curriculum."
+  },
+  {
+    "id": "cloud-responsibility-scope",
+    "title": "Assign responsibility and limit the scope",
+    "category": "Cloud",
+    "summary": "Identify retained duties and compare a narrow resource scope with a broad one.",
+    "explain": [
+      "Shared responsibility is a division of work, not an escape from accountability. AWS describes responsibility for underlying infrastructure separately from customer-controlled components. Microsoft’s matrix likewise keeps data, identities and configuration decisions with the customer while management of operating systems and other layers changes by service model. Read the specific service boundary rather than memorizing one diagram as universal law.",
+      "For our report service, someone must decide who can read reports, remove departing staff, review configuration and verify recovery. A provider can operate a physical host without knowing whether a particular colleague should see a particular report. Make an owner-and-evidence list: task, accountable owner, how completion is checked and when that check happens.",
+      "Resource hierarchies help organize ownership and policy. Google Cloud uses organizations, optional folders and projects; Azure documents management-group, subscription, resource-group and resource scopes. Inherited scope can make a single assignment affect many descendants. These are examples, not interchangeable identifier formats or proof that all policy evaluation rules are the same.",
+      "The offline scope exercise uses invented paths such as academy/dev/reports. It compares whole path segments. A scope of academy/dev includes that report resource but not academy/dev-tools/reports. A careless text-prefix test would confuse those siblings. This is a small programming model of containment, not an IAM simulator that determines effective cloud permissions.",
+      "Scope is only one part of authorization. A real decision also depends on the principal, operation, role or policy, conditions and provider-specific interactions. The exercise creates no role assignment and holds no identity credential. Broadening academy/dev to academy merely shows which invented resources fall under a larger boundary; it does not grant anyone access.",
+      "Least privilege needs a concrete task. If a study role only needs development reports, explain why production reports are outside the task rather than selecting a broad role for convenience. Also plan how legitimate access is reviewed and removed. A narrow diagram with no lifecycle owner is incomplete, while a broad inherited assignment can make a small mistake affect more resources."
+    ],
+    "example": "The narrow scope academy/dev matches one fixture resource. The broad scope academy matches all three: development reports, production reports and development-tool reports. The similar-looking dev-tools segment is not a child of dev. The result reveals containment only. It does not establish actual read permission, evaluate deny policies or authenticate any user.",
+    "lab": [
+      "Assign owners for data access, guest-OS patches in IaaS, service configuration and restore verification.",
+      "Read one provider’s current responsibility guidance and note where the boundary depends on service choice.",
+      "Predict the narrow and broad scope results.",
+      "Run python3 labs/cloud-workshop/run_lab.py scope.",
+      "Explain why dev-tools is not inside dev in the invented model.",
+      "Record what a real authorization test would still need, without creating credentials or grants."
+    ],
+    "question": "A provider maintains physical hosts. Who still decides which staff may read workshop reports?",
+    "options": [
+      "No one",
+      "Every internet user",
+      "Only the hardware manufacturer",
+      "The customer’s authorized data/access owners"
+    ],
+    "answer": 3,
+    "why": "Infrastructure operation does not determine the customer’s intended data audience.",
+    "tags": [
+      "cloud-workshop",
+      "cloud",
+      "general-computing"
+    ],
+    "sources": [
+      "https://aws.amazon.com/compliance/shared-responsibility-model/",
+      "https://learn.microsoft.com/en-us/azure/security/fundamentals/shared-responsibility",
+      "https://docs.cloud.google.com/resource-manager/docs/cloud-platform-resource-hierarchy",
+      "https://learn.microsoft.com/en-us/azure/role-based-access-control/scope-overview"
+    ],
+    "depth": "applied foundation + offline models and local restore",
+    "estimatedMinutes": 45,
+    "learningGoals": [
+      "Name customer duties that do not disappear in a managed service.",
+      "Explain hierarchy and inherited scope without treating vendors as identical.",
+      "Detect a misleading string-prefix scope match in a local model."
+    ],
+    "additionalChecks": [
+      {
+        "question": "Does academy/dev contain academy/dev-tools/reports in the local model?",
+        "options": [
+          "No, because containment compares complete path segments",
+          "Yes, because the text begins similarly",
+          "Only when a credit card is entered",
+          "It proves a provider has denied access"
+        ],
+        "answer": 0,
+        "why": "The segment dev-tools is distinct from dev; a string-prefix shortcut would be misleading."
+      },
+      {
+        "question": "What does the scope exercise prove?",
+        "options": [
+          "Effective Azure, AWS and Google IAM are identical",
+          "Only containment under the invented path contract",
+          "A real role was assigned",
+          "All inherited policies are safe"
+        ],
+        "answer": 1,
+        "why": "It is a bounded local model with no authentication, provider policy evaluation or external changes."
+      }
+    ],
+    "evidence": [
+      "A responsibility-owner checklist.",
+      "Predicted and executed segment-containment results.",
+      "A list of omitted real IAM factors."
+    ],
+    "limitations": "No credentials, roles, policies or permissions are created. The path model does not reproduce any provider’s IAM evaluator or resource identifier grammar."
+  },
+  {
+    "id": "cloud-network-storage",
+    "title": "Trace access and choose a data interface",
+    "category": "Cloud",
+    "summary": "Keep routing, network rules, service behavior, identity and storage semantics distinct.",
+    "explain": [
+      "A request can fail at several layers. A route may be absent, a network rule may exclude traffic, a service may not be listening or the application may reject an identity. Treat these as different hypotheses. Opening a wider network range does not fix a stopped process or missing application permission, and it can create unnecessary exposure.",
+      "AWS security groups are one provider example of controls on associated resources’ traffic. Their rules and stateful behavior are specific to that service. Our exercise does not implement them. It simply receives four explicit boolean assumptions and reports whether all are true. No packet is sent, no firewall is changed and no actual identity is tested.",
+      "Data interfaces also differ. Object storage addresses objects through a service interface, file storage provides shared-file semantics and block storage supplies disk-like blocks for a host or other consumer. Azure documents examples of each; S3 is an object-storage example. Choosing among them starts with how the application reads and writes, not with a generic request for more storage.",
+      "The fictional report documents fit an object-oriented access pattern, while an application that requires a shared filesystem may need a different interface. That is a starting hypothesis, not a universal recommendation. Check update patterns, consistency behavior, metadata, maximum sizes, access controls and integration requirements for the exact service before committing to a design.",
+      "Separate durability, availability and recoverability. Data can remain intact while a service is temporarily unavailable. A highly durable copy can faithfully preserve an accidental overwrite or an unwanted change. Recovery planning therefore needs a usable earlier point, retention decisions and a tested way to restore, not merely confidence that a storage service rarely loses bits.",
+      "In the fixture, the route and network assumptions pass but the service-listening assumption fails. A second case passes those three but fails the identity assumption. Neither result diagnoses a live system. Write what evidence you would collect next, such as authorized service-health observations or an intended user’s access result, without scanning a target or broadening permissions."
+    ],
+    "example": "The network command returns service_listening as the failed baseline assumption and identity_allows for the second case. It does not claim an actual connection was blocked. For storage, write why a report object and a virtual-machine disk have different access patterns. Later, the restore exercise will prove only that a local synthetic earlier copy can be recovered into a new file.",
+    "lab": [
+      "Draw a request path with routing, network, service and identity checkpoints.",
+      "Predict both fixed network-model results.",
+      "Run python3 labs/cloud-workshop/run_lab.py network.",
+      "Choose an object, file or block interface for three invented needs and explain each choice.",
+      "Give an example of durable data that still needs recovery from an earlier point.",
+      "List which network and storage behaviors remain untested in a real cloud."
+    ],
+    "question": "All network assumptions pass, but the service is not listening. What follows?",
+    "options": [
+      "Open every port",
+      "The data must be deleted",
+      "A wider network rule alone does not start the service",
+      "The identity check is proven correct"
+    ],
+    "answer": 2,
+    "why": "Different layers require different evidence and remedies; broad exposure does not repair a stopped service.",
+    "tags": [
+      "cloud-workshop",
+      "cloud",
+      "general-computing"
+    ],
+    "sources": [
+      "https://docs.aws.amazon.com/vpc/latest/userguide/vpc-security-groups.html",
+      "https://learn.microsoft.com/en-us/azure/architecture/storage/storage-get-started",
+      "https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html"
+    ],
+    "depth": "applied foundation + offline models and local restore",
+    "estimatedMinutes": 45,
+    "learningGoals": [
+      "Separate assumed network reachability from authorized application access.",
+      "Compare object, file and block interfaces by workload need.",
+      "Explain why storage durability is not the same as a recoverable backup."
+    ],
+    "additionalChecks": [
+      {
+        "question": "Which interface is most directly disk-like?",
+        "options": [
+          "An email inbox",
+          "Every SaaS application",
+          "An authorization role",
+          "Block storage"
+        ],
+        "answer": 3,
+        "why": "Block storage exposes blocks for a consumer such as a host; object and file interfaces have different semantics."
+      },
+      {
+        "question": "Why can durable storage still need backups or earlier recovery points?",
+        "options": [
+          "An accidental overwrite may itself be stored durably",
+          "Durability prevents all mistakes",
+          "Availability and durability are identical",
+          "Backups always prove zero data loss"
+        ],
+        "answer": 0,
+        "why": "Preserving current bits does not guarantee a usable earlier state or a verified restore process."
+      }
+    ],
+    "evidence": [
+      "An annotated request path and two model outputs.",
+      "Three interface choices with assumptions.",
+      "A durability/availability/recovery distinction."
+    ],
+    "limitations": "No live traffic, provider networking, object-store API or cloud storage durability is tested. The four-gate exercise is not a firewall or full connectivity simulator."
+  },
+  {
+    "id": "cloud-capacity-demand",
+    "title": "Calculate capacity without inventing elasticity",
+    "category": "Cloud",
+    "summary": "Use an explicit target and maximum to understand what scaling can and cannot solve.",
+    "explain": [
+      "Elasticity is the ability to adjust resources as demand changes; it is not unlimited instant capacity. A scaling design needs a signal, a target, minimum and maximum capacity, and assumptions about how additional instances help. A service can add workers while its database, lock or external dependency remains the bottleneck.",
+      "AWS Auto Scaling offers target-tracking and other dynamic policies with service-specific behavior and bounds. We use an original, much simpler arithmetic model: identical replicas appear immediately, distribute work evenly and each have a fixed request-per-minute capacity. The model has no actual utilization metric, warm-up time, queue or cloud quota.",
+      "Write the units before the calculation. At 400 requests per minute per replica and a 50 percent target, the planning allowance is 200 requests per minute per replica. For demand 850, divide by 200 and round upward: five replicas are needed at the target. Rounding down would knowingly omit capacity from the planning calculation.",
+      "The configured maximum is four, so the local plan returns four and marks the target unmet. Their modeled physical capacity is 1600 requests per minute, but the 50 percent planning allowance is only 800. Both statements can be true: the physical ceiling is not exceeded while the desired headroom is missing. Do not label every target miss an observed outage.",
+      "A minimum can preserve baseline capacity during quiet periods; a maximum can limit expansion. Neither is a substitute for understanding cost, startup delay or graceful overload behavior. An apparently generous maximum can still be unreachable if quotas, placement constraints or a downstream service limit intervene. Those real constraints are not represented by the local integer calculation.",
+      "Predict changes before editing a study copy of the fixture. What happens at demand zero, exactly 800, just above 800 or far above physical capacity? Keep the original distribution tests unchanged so your modified scenario is not confused with a broken pack. Record your assumptions and explain why a load test against an authorized deployed service would be a separate, unexecuted activity."
+    ],
+    "example": "The fixed command needs five replicas but plans four. It reports target capacity 800 rpm and physical capacity 1600 rpm for demand 850. target_met is false, physical_capacity_met is true, and capped_by_maximum is true. These are arithmetic outcomes, not provider telemetry or an actual autoscaling event.",
+    "lab": [
+      "Calculate the planning allowance per replica and show the units.",
+      "Predict the needed and capped replica counts for the fixture.",
+      "Run python3 labs/cloud-workshop/run_lab.py scaling.",
+      "Explain how target_met can be false while physical_capacity_met is true.",
+      "In a private fixture copy, compare demand 0, 800, 801 and 1700, recording each prediction.",
+      "Name four real scaling constraints the model omits."
+    ],
+    "question": "At 400 rpm per replica and a 50 percent target, what is the target allowance?",
+    "options": [
+      "50 rpm",
+      "200 rpm",
+      "400 rpm",
+      "800 rpm"
+    ],
+    "answer": 1,
+    "why": "400 multiplied by 0.50 gives 200 requests per minute of planned load per replica.",
+    "tags": [
+      "cloud-workshop",
+      "cloud",
+      "general-computing"
+    ],
+    "sources": [
+      "https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-scale-based-on-demand.html",
+      "https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-145.pdf"
+    ],
+    "depth": "applied foundation + offline models and local restore",
+    "estimatedMinutes": 45,
+    "learningGoals": [
+      "Calculate replicas from demand and per-instance capacity with units.",
+      "Distinguish a utilization target from a physical ceiling.",
+      "Identify omitted startup, quota and dependency constraints."
+    ],
+    "additionalChecks": [
+      {
+        "question": "Demand is 850 rpm and the target allowance is 200 rpm. How many replicas are needed before applying the maximum?",
+        "options": [
+          "Four",
+          "Two",
+          "Five",
+          "Zero"
+        ],
+        "answer": 2,
+        "why": "850/200 is 4.25, which must be rounded up to meet the target."
+      },
+      {
+        "question": "The target is missed but the modeled physical capacity is sufficient. What can you honestly claim?",
+        "options": [
+          "A real outage definitely occurred",
+          "The maximum no longer matters",
+          "The provider has created a fifth instance",
+          "The modeled headroom target is unmet, not that a live outage was observed"
+        ],
+        "answer": 3,
+        "why": "The model distinguishes planning headroom from physical capacity and does not observe or provision a live system."
+      }
+    ],
+    "evidence": [
+      "A unit-labelled capacity calculation.",
+      "Baseline and modified synthetic predictions.",
+      "A list of omitted constraints and an unexecuted load-test label."
+    ],
+    "limitations": "The model is instantaneous, linear and homogeneous. It does not emulate provider scaling algorithms, instance weights, startup time, quotas, latency, queueing or real load-test results."
+  },
+  {
+    "id": "cloud-failure-domains",
+    "title": "Check the capacity that survives a failure",
+    "category": "Cloud",
+    "summary": "Place replicas across invented zones and calculate whether the remaining capacity is useful.",
+    "explain": [
+      "A failure domain is a boundary within which one event can affect several components. Two processes on one host share a host failure. Several hosts in one location can share a power or network dependency. Separating replicas can reduce some shared risks, but the meaningful boundary depends on the system and the failure being considered.",
+      "AWS describes Availability Zones as isolated infrastructure groupings within a Region. Its guidance makes continued operation conditional on correct application architecture. A multi-zone label is therefore not a guarantee that your workload survives a zone loss. Application placement, dependencies, remaining capacity and recovery behavior still matter.",
+      "Our baseline has four identical replicas: two in invented zone-a and two in zone-b. Losing zone-a leaves two replicas. Each supports 400 rpm physically, but at the 50 percent target the survivors offer only 400 rpm of planning allowance. The workload demand is 500 rpm, so it had enough target capacity before the failure but not afterward.",
+      "An alternative places three replicas in each zone. Losing one zone leaves three and 600 rpm of target capacity, enough for the same assumed demand. The comparison demonstrates headroom arithmetic, not that buying two replicas is always the right solution. Other architectures might reduce demand, improve per-instance capacity or accept a different service objective.",
+      "Do not multiply imagined availability percentages and present the result as a measured guarantee. Dependencies can be correlated: a shared database, configuration rollout, identity service or client route can affect replicas in several zones. The local model removes only the named zone’s replicas and assumes all other components work. It has no measured failure rates or durations.",
+      "State the failure scenario precisely and ask what still needs testing. A zone-loss capacity calculation does not validate traffic redirection, health checks, data consistency, session handling or recovery from a regional event. Those require separately authorized real-environment exercises and explicit success criteria. In this pack every such cloud exercise remains unexecuted."
+    ],
+    "example": "Baseline: four replicas supply 800 rpm at the target; after losing zone-a, two supply 400, below demand 500. Alternative: six supply 1200; after the same loss, three supply 600 and meet the modeled target. Neither case measures user-visible availability or proves that failover would happen.",
+    "lab": [
+      "Mark shared dependencies in a sketch of the report service.",
+      "Predict surviving replica counts and target capacity for both placements.",
+      "Run python3 labs/cloud-workshop/run_lab.py failure.",
+      "Explain why two represented zones are insufficient evidence by themselves.",
+      "Write one additional failure scenario that the model cannot answer.",
+      "Label actual failover, consistency and recovery testing unexecuted."
+    ],
+    "question": "Four replicas are split two per zone. One zone fails. How many remain in the model?",
+    "options": [
+      "Two",
+      "Four",
+      "Three",
+      "None necessarily"
+    ],
+    "answer": 0,
+    "why": "The named failed zone loses its two replicas, leaving two under the explicit assumptions.",
+    "tags": [
+      "cloud-workshop",
+      "cloud",
+      "general-computing"
+    ],
+    "sources": [
+      "https://docs.aws.amazon.com/whitepapers/latest/aws-fault-isolation-boundaries/availability-zones.html"
+    ],
+    "depth": "applied foundation + offline models and local restore",
+    "estimatedMinutes": 45,
+    "learningGoals": [
+      "Explain a failure domain without assuming complete independence.",
+      "Calculate surviving capacity rather than counting zones alone.",
+      "Separate a capacity check from an availability or SLA claim."
+    ],
+    "additionalChecks": [
+      {
+        "question": "Why does the six-replica alternative meet the 500 rpm target after a zone loss?",
+        "options": [
+          "It has a cloud label",
+          "Three survivors each provide 200 rpm of target allowance",
+          "It proves all dependencies are independent",
+          "It eliminates the need for recovery planning"
+        ],
+        "answer": 1,
+        "why": "Three times 200 equals 600 rpm, above the assumed demand. That is a capacity result only."
+      },
+      {
+        "question": "Which claim would overstate the exercise?",
+        "options": [
+          "The baseline has insufficient target headroom after the modeled loss",
+          "The alternative has 600 rpm of surviving target capacity",
+          "The exercise proves the production SLA and actual failover",
+          "Real dependency behavior remains untested"
+        ],
+        "answer": 2,
+        "why": "No production service, measured failure rate, SLA calculation or actual failover was exercised."
+      }
+    ],
+    "evidence": [
+      "Two before/after capacity calculations.",
+      "A dependency sketch and one omitted failure scenario.",
+      "A clear separation of model output from availability evidence."
+    ],
+    "limitations": "Invented zones have no provider identity. No failure is induced. Correlated failures, routing, data consistency, health checks and real availability are not modeled or verified."
+  },
+  {
+    "id": "cloud-recovery-objectives",
+    "title": "Measure the recovery gap and verify a local restore",
+    "category": "Cloud",
+    "summary": "Distinguish recovery-time and recovery-point targets, then recover invented data safely.",
+    "explain": [
+      "Recovery objectives translate workload impact into testable targets. RTO concerns the acceptable time from service interruption to restoration. RPO concerns the acceptable gap between the recoverable data point and the incident. They answer different questions: how long service can be unavailable and how much recent work could be missing, expressed here in minutes.",
+      "A target is not a result. Define it with the people affected by downtime and data loss, then test a recovery method against it. An objective written in a diagram does not cause a backup to finish, an operator to be available or an application to restart. Dependencies and restore verification belong in the plan, not as afterthoughts.",
+      "Our invented timeline uses minutes from a fixed origin. The last recoverable point is minute 580, the incident is at 600 and service is restored at 650. The recoverable-data gap is 20 minutes and downtime is 50 minutes. Against RPO 15 and RTO 60, the scenario misses RPO while meeting RTO. Fast enough recovery can still restore data that is too old.",
+      "A backup schedule alone does not prove the most recent point is usable. A job can fail, a copy can be incomplete, an access dependency can be missing or an application can reject restored data. Verify recovery content and application behavior in an appropriate test. The strength of the evidence depends on what was actually restored and checked.",
+      "The separate restore command performs a real but tiny local exercise. It creates an owned temporary directory, writes invented report bytes, copies an earlier version, changes the source and restores the earlier copy into a new file. SHA-256 comparisons verify that the restored bytes match the earlier version, while the current source differs. It then cleans up only its own temporary directory.",
+      "This byte-for-byte local check does not establish cloud storage durability, encrypted-backup key access, database consistency, regional recovery or the fictional timeline’s measured duration. Do not time the tiny file operation and call it the service’s RTO. Keep two evidence labels: a synthetic recovery timeline and an actual local file-restore check. Real-cloud recovery remains unexecuted."
+    ],
+    "example": "The recovery command reports a 20-minute data gap and 50-minute downtime: rpo_met=false, rto_met=true. The restore command independently reports that backup and restored content match the original, current source differs, and the temporary directory was removed. No user file is replaced, no account is contacted and no disaster is caused.",
+    "lab": [
+      "Draw the three timestamps and calculate both intervals before running.",
+      "Run python3 labs/cloud-workshop/run_lab.py recovery.",
+      "Explain why meeting RTO does not imply meeting RPO.",
+      "Run python3 labs/cloud-workshop/run_lab.py restore and inspect all verification flags.",
+      "List three application-level recovery checks that byte equality does not cover.",
+      "Record the timeline as modeled, the file restore as local execution and cloud DR as unexecuted."
+    ],
+    "question": "The last recoverable point is 580 and the incident is 600. What is the data gap?",
+    "options": [
+      "15 minutes",
+      "50 minutes",
+      "60 minutes",
+      "20 minutes"
+    ],
+    "answer": 3,
+    "why": "The incident minus the last recoverable point is 20 minutes.",
+    "tags": [
+      "cloud-workshop",
+      "cloud",
+      "general-computing"
+    ],
+    "sources": [
+      "https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/disaster-recovery-dr-objectives.html",
+      "https://docs.aws.amazon.com/wellarchitected/latest/framework/rel_planning_for_recovery_objective_defined_recovery.html"
+    ],
+    "depth": "applied foundation + offline models and local restore",
+    "estimatedMinutes": 45,
+    "learningGoals": [
+      "Compute downtime and the age of the recoverable data point.",
+      "Compare those observations with separate RTO and RPO targets.",
+      "Verify a real local copy/restore without claiming cloud disaster recovery."
+    ],
+    "additionalChecks": [
+      {
+        "question": "The scenario meets RTO 60 but misses RPO 15. What does that mean?",
+        "options": [
+          "The restored data point is too old despite acceptable modeled downtime",
+          "No recovery happened anywhere",
+          "The two objectives are identical",
+          "A backup always guarantees zero loss"
+        ],
+        "answer": 0,
+        "why": "Downtime is 50 minutes, but the recoverable-data gap is 20, exceeding the 15-minute objective."
+      },
+      {
+        "question": "What does the local restore actually verify?",
+        "options": [
+          "Regional cloud disaster recovery",
+          "Equality of synthetic restored bytes to their earlier copy and cleanup of its temporary directory",
+          "Application-level database consistency",
+          "The production RTO"
+        ],
+        "answer": 1,
+        "why": "The command verifies its own bounded local operation. It cannot establish unexecuted provider-side or application recovery behavior."
+      }
+    ],
+    "evidence": [
+      "A labelled timeline with two objective comparisons.",
+      "Actual local restore output.",
+      "Separate modeled, locally executed and cloud-unexecuted evidence."
+    ],
+    "limitations": "The timeline is synthetic and the restore is a local file copy. No cloud backups, keys, databases, failover, recovery service or real workload RTO/RPO was exercised."
+  },
+  {
+    "id": "cloud-cost-units",
+    "title": "Forecast usage and keep budget alerts in perspective",
+    "category": "Cloud",
+    "summary": "Calculate an explicit fictional bill and compare always-on with scheduled compute.",
+    "explain": [
+      "A cloud estimate is a model of usage and rates, not merely a virtual-machine price. Record the period, compute hours, retained storage, requests or transfers that matter, and the services you left out. A small rate multiplied by an unexpected duration or number of resources can dominate the result. Units make those assumptions inspectable.",
+      "This exercise deliberately uses fictional credits, not currency or any provider’s prices. Three replicas run for 720 hours at five credits per replica-hour: compute costs 10800 credits. Storage contributes 100 GiB-months times two credits, or 200. Transfer contributes 50 GiB times three credits, or 150. The total is 11150 credits against a 10000-credit planning budget.",
+      "The alternative runs those replicas for 160 hours while leaving the same storage and transfer assumptions. Compute becomes 2400 credits and the total becomes 2750. This is not a promise that stopping a real instance eliminates every charge. Attached storage, retained data, networking components or commitments may continue to matter, depending on the exact service and terms.",
+      "A useful estimate shows what changes and what does not. In our comparison only compute hours change. Calling the scheduled plan cheaper is justified within those assumptions; calling it suitable for a round-the-clock service is not. Service availability requirements and operational startup behavior must be considered before changing any real schedule.",
+      "AWS Budgets documents delayed cost information and notifications. A notification threshold therefore must not be treated as a guaranteed instant hard cap. Provider budget actions have their own scope and behavior. This pack neither configures a budget nor stops resources. It simply compares an arithmetic result with a fictional threshold.",
+      "For an eventual authorized cloud lab, establish the account owner, allowed services, total spending limit, cleanup checklist and a method to verify remaining resources and charges. Current prices and free-offer terms would need fresh checking at that time. No free tier is assumed here. All exercises are local and create no billable cloud resources; the estimate itself is not a financial commitment."
+    ],
+    "example": "Always-on totals 11150 fictional credits and exceeds the 10000 threshold by 1150. Scheduled totals 2750 and is 7250 below it. Storage and transfer remain 350 in both. The 720-hour period is a stated 30-day assumption, not every calendar month. No value in this exercise is an AWS, Azure or Google Cloud quote.",
+    "lab": [
+      "Write each quantity with its unit before multiplying.",
+      "Calculate the three cost components and total for both schedules.",
+      "Run python3 labs/cloud-workshop/run_lab.py cost.",
+      "Explain which costs remain when only compute hours change.",
+      "List missing real-estimate items such as request charges, taxes, support or commitments.",
+      "Write a future lab budget/cleanup checklist while marking account and billing work unexecuted."
+    ],
+    "question": "What is the always-on fictional compute cost?",
+    "options": [
+      "2160 credits",
+      "11150 credits",
+      "10800 credits",
+      "150 credits"
+    ],
+    "answer": 2,
+    "why": "Three replicas × 720 hours × five credits per replica-hour equals 10800; storage and transfer are separate.",
+    "tags": [
+      "cloud-workshop",
+      "cloud",
+      "general-computing"
+    ],
+    "sources": [
+      "https://docs.aws.amazon.com/cost-management/latest/userguide/budgets-managing-costs.html"
+    ],
+    "depth": "applied foundation + offline models and local restore",
+    "estimatedMinutes": 45,
+    "learningGoals": [
+      "Multiply compatible usage and rate units.",
+      "Keep continuing storage and transfer costs visible.",
+      "Explain why a budget notification is not an instant spending cap."
+    ],
+    "additionalChecks": [
+      {
+        "question": "Which statement about the scheduled fixture is correct?",
+        "options": [
+          "All costs become zero",
+          "It proves every real instance can stop without consequences",
+          "It uses current vendor prices",
+          "Storage and transfer assumptions remain unchanged"
+        ],
+        "answer": 3,
+        "why": "Only compute hours change in this model; retained storage and transfer still total 350 credits."
+      },
+      {
+        "question": "Can a delayed budget notification be treated as an instant hard spending cap?",
+        "options": [
+          "No; usage and charges can continue before the notification arrives",
+          "Yes, always",
+          "Only if the estimate is small",
+          "It means no cleanup is needed"
+        ],
+        "answer": 0,
+        "why": "Notifications and configured actions have timing and scope limits. A budget alert alone does not guarantee a hard cap."
+      }
+    ],
+    "evidence": [
+      "A unit-labelled two-schedule estimate.",
+      "A missing-cost/assumption list.",
+      "An unexecuted future account/budget/cleanup checklist."
+    ],
+    "limitations": "All rates and credits are invented. This is not a quote, current price comparison, free-tier guarantee, billing action or financial advice. No cloud resource or charge is created."
+  },
+  {
+    "id": "cloud-change-review",
+    "title": "Review a change before calling it a deployment",
+    "category": "Cloud",
+    "summary": "Compare desired state, identify risky changes and deliver an honest evidence packet.",
+    "explain": [
+      "Infrastructure as code describes infrastructure in reviewable form, but a file is not the running environment. Desired configuration, observed state and the actions a tool proposes can differ. A disciplined workflow separates preparing a change, reviewing its consequences, authorizing execution and verifying the result. Each stage needs its own evidence.",
+      "CloudFormation change sets are one provider example of previewing proposed effects before execution. The documentation also warns that a preview does not guarantee a successful update. Our local exercise is simpler: it compares two invented JSON inventories. It never calls CloudFormation, Terraform, another provider API or an apply operation.",
+      "The invented resource schema has id, kind, size and public fields. New IDs are additions; missing IDs are removals. A changed kind is modeled as replacement; other changed fields are modifications. These rules belong only to the teaching schema. A real provider may replace a resource for entirely different property changes, so this report cannot predict its behavior.",
+      "The fixture removes reports storage, adds queue compute and changes web size while making it public. The report highlights possible data/service loss from removal and increased exposure from the public change. It does not decide those changes are authorized or safe. A valid syntax check cannot supply missing business intent, data-retention requirements or an approved audience.",
+      "Build an evidence packet for the fictional service: workload contract, responsibility owners, scope comparison, network assumptions, scaling and failure calculations, recovery timeline, actual local restore and cost estimate. For each item state whether it is a prediction, local execution or unexecuted cloud work. An impressive number of green tests cannot turn a simulation into a deployed system.",
+      "Before any real lab, define an authorized isolated environment, bounded spending, data classification, rollback or recovery method, verification criteria and cleanup. Do not run an apply, grant access or create resources as an extension of this pack. The module ends with a reviewable plan and local evidence, leaving real provisioning, IAM, networking, failover and billing verification explicitly unexecuted."
+    ],
+    "example": "The change report is ordered by resource ID: add queue, remove reports, modify web fields public and size. It carries applied=false and warnings for reports removal and web exposure. Comparing an inventory to itself produces no changes. A reviewed plan is useful preparation, but it is not an executed deployment, a permission grant or a guarantee that a future provider operation succeeds.",
+    "lab": [
+      "Predict the three changes and two risk notes from the fixture.",
+      "Run python3 labs/cloud-workshop/run_lab.py changes.",
+      "Explain why a kind-change replacement rule is only an invented schema rule.",
+      "Complete the cloud evidence worksheet and capstone review.",
+      "Write a short handoff with local commands, actual results, source links and limits.",
+      "List real-cloud provisioning, IAM, network, failover and billing labs as unexecuted."
+    ],
+    "question": "What does applied=false mean in this exercise?",
+    "options": [
+      "The resources were deployed unsuccessfully",
+      "Only a local comparison was produced; no changes were applied",
+      "The public change was approved",
+      "The provider confirmed a rollback"
+    ],
+    "answer": 1,
+    "why": "There is no apply function or provider connection in the pack.",
+    "tags": [
+      "cloud-workshop",
+      "cloud",
+      "general-computing"
+    ],
+    "sources": [
+      "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-changesets.html",
+      "https://docs.aws.amazon.com/wellarchitected/latest/framework/rel_planning_for_recovery_objective_defined_recovery.html"
+    ],
+    "depth": "applied foundation + offline models and local restore",
+    "estimatedMinutes": 45,
+    "learningGoals": [
+      "Distinguish a local desired-state comparison from an executed change.",
+      "Flag removals, replacements and increased exposure for review.",
+      "Combine coverage, assumptions and unexecuted cloud work in a handoff."
+    ],
+    "additionalChecks": [
+      {
+        "question": "Why must removing the reports resource be reviewed?",
+        "options": [
+          "It always lowers risk",
+          "A JSON file guarantees a backup",
+          "It may interrupt service or lose retained data",
+          "The cloud automatically knows the business requirement"
+        ],
+        "answer": 2,
+        "why": "A removal can have consequences beyond syntactic correctness; intent and recovery evidence are required."
+      },
+      {
+        "question": "Which is the most accurate final handoff?",
+        "options": [
+          "Production cloud ready because local tests pass",
+          "A promise of zero future charges",
+          "A provider certification pass",
+          "Precisely scoped local evidence, assumptions and a list of real-cloud labs still unexecuted"
+        ],
+        "answer": 3,
+        "why": "Honest boundaries let another person judge the work without confusing preparation with executed cloud practice."
+      }
+    ],
+    "evidence": [
+      "A reviewed local diff and risk explanation.",
+      "A complete evidence packet and capstone decision.",
+      "A specific list of unexecuted provider-side work."
+    ],
+    "limitations": "No IaC provider, plan API or apply operation is used. This is an invented diff schema, not a deployment preview guaranteed to match any real cloud or a complete cloud certification course."
+  }
+]

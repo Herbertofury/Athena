@@ -1,0 +1,358 @@
+{
+  "checked_at": "2026-10-30T03:50:56.063125+00:00",
+  "scope": "Three retained public upstream snapshots; generated generation, pending-budget and corruption fixtures; no provider request, budget reset, grant or browser acceptance",
+  "binary_sha256": "8935cb205082a9909e567b6000ba83c840fdbc34611cb931a45017e56d4fa63c",
+  "harness_sha256": "9d2d661c290019e2a2863c6d693e92ed92f6a09d3c34b6adecb68ca22a9c2443",
+  "checks": [
+    {
+      "name": "index.html status",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "index.html exact compiled bytes",
+      "actual": "c811a215c5e4459785208d87186ce0b4e2acd207f748955ac38c08e383d47f06",
+      "expected": "c811a215c5e4459785208d87186ce0b4e2acd207f748955ac38c08e383d47f06",
+      "passed": true
+    },
+    {
+      "name": "app.js status",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "app.js exact compiled bytes",
+      "actual": "4e341c4d45678acda1ef01219b583609a9c0de04f38565044baacae8534c97b0",
+      "expected": "4e341c4d45678acda1ef01219b583609a9c0de04f38565044baacae8534c97b0",
+      "passed": true
+    },
+    {
+      "name": "archive-view.mjs status",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "archive-view.mjs exact compiled bytes",
+      "actual": "de52a075043aee965b579e3259ed852dc64a9ba60cceb300d9acefd4c6223228",
+      "expected": "de52a075043aee965b579e3259ed852dc64a9ba60cceb300d9acefd4c6223228",
+      "passed": true
+    },
+    {
+      "name": "collection-input.mjs status",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "collection-input.mjs exact compiled bytes",
+      "actual": "741a0aeb30465b19391358a488a0e019dc9a6aa300088c9addb7388ec23c7ffe",
+      "expected": "741a0aeb30465b19391358a488a0e019dc9a6aa300088c9addb7388ec23c7ffe",
+      "passed": true
+    },
+    {
+      "name": "job-submit.mjs status",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "job-submit.mjs exact compiled bytes",
+      "actual": "06f5785d9ebbab16cd208712183e7fa317ac707d96a48325929b728ba26a2f9f",
+      "expected": "06f5785d9ebbab16cd208712183e7fa317ac707d96a48325929b728ba26a2f9f",
+      "passed": true
+    },
+    {
+      "name": "rustsec status",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "rustsec exact bytes",
+      "actual": "de9b278c09422c0797c3bc46507259eb0bf96694b3d92544ce40ca849edb916b",
+      "expected": "de9b278c09422c0797c3bc46507259eb0bf96694b3d92544ce40ca849edb916b",
+      "passed": true
+    },
+    {
+      "name": "rustsec byte count",
+      "actual": 3155,
+      "expected": 3155,
+      "passed": true
+    },
+    {
+      "name": "rustsec namespace",
+      "actual": "upstream",
+      "expected": "upstream",
+      "passed": true
+    },
+    {
+      "name": "rustsec identity",
+      "actual": "rustsec",
+      "expected": "rustsec",
+      "passed": true
+    },
+    {
+      "name": "rustsec generation",
+      "actual": "2",
+      "expected": "2",
+      "passed": true
+    },
+    {
+      "name": "rustsec digest",
+      "actual": "de9b278c09422c0797c3bc46507259eb0bf96694b3d92544ce40ca849edb916b",
+      "expected": "de9b278c09422c0797c3bc46507259eb0bf96694b3d92544ce40ca849edb916b",
+      "passed": true
+    },
+    {
+      "name": "rustsec no-store",
+      "actual": "no-store",
+      "expected": "no-store",
+      "passed": true
+    },
+    {
+      "name": "rustsec no CORS grant",
+      "actual": false,
+      "expected": false,
+      "passed": true
+    },
+    {
+      "name": "hls status",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "hls exact bytes",
+      "actual": "2a3aa0f30e5d1789cd1a9f34ddce881bf7de74ae91acfc4af42516cd8dd1ff19",
+      "expected": "2a3aa0f30e5d1789cd1a9f34ddce881bf7de74ae91acfc4af42516cd8dd1ff19",
+      "passed": true
+    },
+    {
+      "name": "hls byte count",
+      "actual": 4670,
+      "expected": 4670,
+      "passed": true
+    },
+    {
+      "name": "hls namespace",
+      "actual": "upstream",
+      "expected": "upstream",
+      "passed": true
+    },
+    {
+      "name": "hls identity",
+      "actual": "hls",
+      "expected": "hls",
+      "passed": true
+    },
+    {
+      "name": "hls generation",
+      "actual": "9007199254740993",
+      "expected": "9007199254740993",
+      "passed": true
+    },
+    {
+      "name": "hls digest",
+      "actual": "2a3aa0f30e5d1789cd1a9f34ddce881bf7de74ae91acfc4af42516cd8dd1ff19",
+      "expected": "2a3aa0f30e5d1789cd1a9f34ddce881bf7de74ae91acfc4af42516cd8dd1ff19",
+      "passed": true
+    },
+    {
+      "name": "hls no-store",
+      "actual": "no-store",
+      "expected": "no-store",
+      "passed": true
+    },
+    {
+      "name": "hls no CORS grant",
+      "actual": false,
+      "expected": false,
+      "passed": true
+    },
+    {
+      "name": "serde-json status",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "serde-json exact bytes",
+      "actual": "5f925df075cd26348137226615ad84fa6056430262db0a9d5fdba811c11b5697",
+      "expected": "5f925df075cd26348137226615ad84fa6056430262db0a9d5fdba811c11b5697",
+      "passed": true
+    },
+    {
+      "name": "serde-json byte count",
+      "actual": 1976,
+      "expected": 1976,
+      "passed": true
+    },
+    {
+      "name": "serde-json namespace",
+      "actual": "upstream",
+      "expected": "upstream",
+      "passed": true
+    },
+    {
+      "name": "serde-json identity",
+      "actual": "serde-json",
+      "expected": "serde-json",
+      "passed": true
+    },
+    {
+      "name": "serde-json generation",
+      "actual": "3",
+      "expected": "3",
+      "passed": true
+    },
+    {
+      "name": "serde-json digest",
+      "actual": "5f925df075cd26348137226615ad84fa6056430262db0a9d5fdba811c11b5697",
+      "expected": "5f925df075cd26348137226615ad84fa6056430262db0a9d5fdba811c11b5697",
+      "passed": true
+    },
+    {
+      "name": "serde-json no-store",
+      "actual": "no-store",
+      "expected": "no-store",
+      "passed": true
+    },
+    {
+      "name": "serde-json no CORS grant",
+      "actual": false,
+      "expected": false,
+      "passed": true
+    },
+    {
+      "name": "constructor invalid source",
+      "actual": 400,
+      "expected": 400,
+      "passed": true
+    },
+    {
+      "name": "HLS invalid source",
+      "actual": 400,
+      "expected": 400,
+      "passed": true
+    },
+    {
+      "name": "new-unreviewed invalid source",
+      "actual": 400,
+      "expected": 400,
+      "passed": true
+    },
+    {
+      "name": "AANobbMI invalid source",
+      "actual": 400,
+      "expected": 400,
+      "passed": true
+    },
+    {
+      "name": "Host guard",
+      "actual": 403,
+      "expected": 403,
+      "passed": true
+    },
+    {
+      "name": "read-only route",
+      "actual": 405,
+      "expected": 405,
+      "passed": true
+    },
+    {
+      "name": "wrong-repository rejection",
+      "actual": 422,
+      "expected": 422,
+      "passed": true
+    },
+    {
+      "name": "malformed rejection",
+      "actual": 422,
+      "expected": 422,
+      "passed": true
+    },
+    {
+      "name": "oversized rejection",
+      "actual": 422,
+      "expected": 422,
+      "passed": true
+    },
+    {
+      "name": "original snapshots unchanged",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "attempt history unchanged",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "request budget unchanged",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "jobs unchanged",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "integrity",
+      "actual": "ok",
+      "expected": "ok",
+      "passed": true
+    },
+    {
+      "name": "source database unchanged",
+      "actual": "6d191bf842e28e815dfb0979e6b0d86d247843c52c48816f8145769955f8cb53",
+      "expected": "6d191bf842e28e815dfb0979e6b0d86d247843c52c48816f8145769955f8cb53",
+      "passed": true
+    }
+  ],
+  "complete": true,
+  "reader": {
+    "scope": "Actual JavaScript verifier against owned loopback server; not browser interaction",
+    "complete": true,
+    "records": [
+      {
+        "kind": "upstream",
+        "id": "rustsec",
+        "generation": "2",
+        "bytes": 3155,
+        "sha256": "de9b278c09422c0797c3bc46507259eb0bf96694b3d92544ce40ca849edb916b"
+      },
+      {
+        "kind": "upstream",
+        "id": "hls",
+        "generation": "9007199254740993",
+        "bytes": 4670,
+        "sha256": "2a3aa0f30e5d1789cd1a9f34ddce881bf7de74ae91acfc4af42516cd8dd1ff19"
+      },
+      {
+        "kind": "upstream",
+        "id": "serde-json",
+        "generation": "3",
+        "bytes": 1976,
+        "sha256": "5f925df075cd26348137226615ad84fa6056430262db0a9d5fdba811c11b5697"
+      }
+    ]
+  },
+  "retention": {
+    "scope": "Actual reader over owned HTTP; retained public source data; not browser UI",
+    "complete": true,
+    "failed_source": "hls",
+    "retained_source": "serde-json",
+    "kind": "upstream",
+    "generation": "3",
+    "sha256": "5f925df075cd26348137226615ad84fa6056430262db0a9d5fdba811c11b5697",
+    "bytes": 1976
+  }
+}

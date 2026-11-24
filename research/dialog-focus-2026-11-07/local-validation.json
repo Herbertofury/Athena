@@ -1,0 +1,30 @@
+{
+  "source_base": "131a6cbf35c394fe0b85a3ef95cc34ab382681c8",
+  "original_ci": {
+    "run": 42405012444,
+    "artifact": 13587515228,
+    "artifact_sha256": "240604fdc79f2f3d2e022d0f4226f4bb33cd67461258145c687920d22446335f"
+  },
+  "local_checks": {
+    "javascript_passed": 236,
+    "python_passed": 313,
+    "failures": 0,
+    "skips": 0,
+    "accessibility_focused_passed": 24,
+    "new_regressions": 4,
+    "baseline_regression_failures": 3
+  },
+  "baseline_log": {
+    "original_sha256": "782503701baaac2c1f5eafba35926f394a82724acaaefc8d097dc61cf1fa328d",
+    "retained_sha256": "0f071198fa53fbec27fc2226c487098e92850ab26da562f7c5bdd1961bde16e4",
+    "change": "Local checkout prefix only replaced with <LOCAL_ROOT>."
+  },
+  "app_sha256": "548b9ee7202bc1a05a4d587be9e92b4d166be9f86c85bb7b28279a3b3d49e6c9",
+  "package_manifest_sha256": "44db33abb3311420f1c546f8098f52db4d6ffeb9288f796db18aada105da9df6",
+  "limits": [
+    "No local Chromium execution was attempted.",
+    "Exact corrected browser behavior and later Rust acceptance remain pending new CI.",
+    "No separate reviewer was available because the agent thread limit was reached.",
+    "No accessibility conformance claim."
+  ]
+}

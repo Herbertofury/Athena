@@ -1,0 +1,67 @@
+{
+  "schema": 1,
+  "kind": "native loopback Athena lab adapter",
+  "source_files": [
+    {
+      "path": "engineering/apps/atlas-lab/ui/index.html",
+      "sha256": "05f659169bc9bd82bd9a8537fa314f90301491a5461471bcb7bbc9120fbc5b9d"
+    },
+    {
+      "path": "engineering/apps/atlas-lab/ui/style.css",
+      "sha256": "6477abc25ea2c5c5ce3f11ad4f56cad403791449c0562c1fadfe9925db76522c"
+    },
+    {
+      "path": "engineering/apps/atlas-lab/ui/app.js",
+      "sha256": "3b025f5b7fe8fdbf749338a8375443cd309f13a226f9f7e0c4a879bc319ef00a"
+    },
+    {
+      "path": "engineering/apps/atlas-lab/ui/collection-input.mjs",
+      "sha256": "741a0aeb30465b19391358a488a0e019dc9a6aa300088c9addb7388ec23c7ffe"
+    },
+    {
+      "path": "engineering/apps/atlas-lab/ui/archive-view.mjs",
+      "sha256": "07c05b3224c9ad235f32a51376fc3bb4a337bd1793390c28dbeb893facc9a03e"
+    },
+    {
+      "path": "engineering/apps/atlas-lab/ui/job-submit.mjs",
+      "sha256": "6fcf656f4c19610dfd9c64be8d1f66e068489cb6c213d45b6d22b93e091f59c2"
+    }
+  ],
+  "limits": [
+    "Same-origin loopback runtime only; public static app never probes localhost.",
+    "Generated source UI with retained job/archive validation; no automatic provider collection.",
+    "Switching workspaces cancels receipt/read waits, not durable jobs; unknown submission outcomes require checking Overview.",
+    "CurseForge is a synthetic-only mapper preview; live collection, credential configuration and transport are disabled.",
+    "Shared shell retains only panel and uncertain submission warning, not archived provider JSON."
+  ],
+  "offline_preview": {
+    "kind": "synthetic_curseforge_lab_preview",
+    "liveAcceptance": false,
+    "source_files": [
+      {
+        "path": "scripts/build_curseforge_preview.py",
+        "sha256": "1eaf48194f71a06eb6fa2c172f471458686789190c6db39c894cb0da97181195"
+      },
+      {
+        "path": "engineering/experiments/site-extraction-lab/curseforge.py",
+        "sha256": "1dd9e55674fe380644cc80ba3dd6f3ae41e3c80e93f4b391ac2a4cd48c4fe142"
+      },
+      {
+        "path": "engineering/experiments/site-extraction-lab/extractors.py",
+        "sha256": "6b36db4e9311aabd7467094135db4efdfbe8165a908ae9ff1bb9fa668a83f244"
+      },
+      {
+        "path": "engineering/experiments/site-extraction-lab/fixtures/curseforge-synthetic/project.json",
+        "sha256": "bb705742069fe7b97a3ca538d9444012969ad5e8244ca4ad2b70454d22edf7c5"
+      },
+      {
+        "path": "engineering/experiments/site-extraction-lab/fixtures/curseforge-synthetic/files.json",
+        "sha256": "7c9e407efaf320a2efd3f4e111d64e8c9e4508c708e9bae2409abe11bc7d2ba5"
+      },
+      {
+        "path": "engineering/experiments/site-extraction-lab/fixtures/curseforge-synthetic/description.json",
+        "sha256": "caede8d7f9d0f4c0984a4dfa27fb0fd20f981b3599b199954586515661e6ccec"
+      }
+    ]
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "scope": "generated document and event fixtures; not native OS event verification",
+  "cases": [
+    {
+      "scenario": "visible-unfocused",
+      "generated_fixture": true,
+      "legacy_visibility_only_accepts": true,
+      "repaired_accepts": false,
+      "error": "Browser focus was absent or lost; foreground the workload and start a new run. Partial evidence is retained.",
+      "state": {
+        "started_focused": false,
+        "focus_lost": true,
+        "focused_now": false
+      }
+    },
+    {
+      "scenario": "transient-blur",
+      "generated_fixture": true,
+      "legacy_visibility_only_accepts": true,
+      "repaired_accepts": false,
+      "error": "Browser focus was absent or lost; foreground the workload and start a new run. Partial evidence is retained.",
+      "state": {
+        "started_focused": true,
+        "focus_lost": true,
+        "focused_now": true
+      }
+    },
+    {
+      "scenario": "polling-loss",
+      "generated_fixture": true,
+      "legacy_visibility_only_accepts": true,
+      "repaired_accepts": false,
+      "error": "Browser focus was absent or lost; foreground the workload and start a new run. Partial evidence is retained.",
+      "state": {
+        "started_focused": true,
+        "focus_lost": true,
+        "focused_now": false
+      }
+    },
+    {
+      "scenario": "focused",
+      "generated_fixture": true,
+      "legacy_visibility_only_accepts": true,
+      "repaired_accepts": true,
+      "error": null,
+      "state": {
+        "started_focused": true,
+        "focus_lost": false,
+        "focused_now": true
+      }
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+import ast,copy,json,pathlib
+p=pathlib.Path(__file__).with_name('baseline-run.py.txt');tree=ast.parse(p.read_text())
+loop=next(n for n in ast.walk(tree) if isinstance(n,ast.For) and isinstance(n.target,ast.Name) and n.target.id=='lane')
+start=next(i for i,n in enumerate(loop.body) if isinstance(n,ast.Assign) and any(isinstance(t,ast.Name) and t.id=='data' for t in n.targets))
+end=next(i for i,n in enumerate(loop.body) if isinstance(n,ast.Expr) and isinstance(n.value,ast.Call) and isinstance(n.value.func,ast.Attribute) and n.value.func.attr=='append')
+code=ast.Module(body=loop.body[start+1:end],type_ignores=[])
+valid={'schema_version':1,'lane':'sqlite','workload':'public','rows':256,'write_commit_ns':20,'commit_ns':10,'read_materialize_ns':5,'database_bytes':4096,'payload_bytes':1000,'complete_output_equal':True,'rollback_preserved':True,'integrity':True,'sqlite_version':'3.54.1','redb_version':'4.4.0'}
+cases={'valid':valid}
+for key,value in [('lane','wrong'),('rows',True),('complete_output_equal',False),('rollback_preserved',False),('integrity',False),('schema_version',99),('payload_bytes',1),('sqlite_version','unknown')]:
+ d=copy.deepcopy(valid);d[key]=value;cases[key]=d
+results=[]
+for optimization in (0,2):
+ for name,data in cases.items():
+  try:exec(compile(code,str(p),'exec',optimize=optimization),{'data':data,'lane':'sqlite','case':'public'});accepted=True
+  except (AssertionError,ValueError,KeyError):accepted=False
+  results.append({'optimization':optimization,'case':name,'accepted':accepted})
+pathlib.Path(__file__).with_name('baseline-results-reproduced.json').write_text(json.dumps({'scope':'exact AST-extracted acceptance statements, synthetic malformed receipts; no database benchmark rerun','results':results},indent=2)+'\n')
+print(json.dumps(results))

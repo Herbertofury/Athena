@@ -1,0 +1,1 @@
+(_,data)=>{if(current!==generation)return;if(data.fatal){state.textContent='HLS playback error: '+data.type;event('hls_error',{card_id:card.id,type:data.type,details:data.details});}}

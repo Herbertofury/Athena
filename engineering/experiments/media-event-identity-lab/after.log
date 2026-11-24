@@ -1,0 +1,13 @@
+✔ normal event details remain complete and input is not mutated (2.380027ms)
+✔ provider detail keys cannot overwrite event identity or timing (0.711289ms)
+✔ invalid event envelope inputs are rejected explicitly (0.361517ms)
+✔ fatal HLS observer retains event tag separately from provider category (1.221687ms)
+✔ actual HLS callback: generated fatal fixture preserves both names and ignores stale/nonfatal events (1.522337ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 5
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 186.131009

@@ -1,0 +1,568 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light"><title>Athena Data & SQL Workshop</title><style>html{font-family:system-ui,sans-serif;line-height:1.65;color:#172439;background:#f6f8fc}body{margin:0}main,header,footer{max-width:76ch;margin:auto;padding:1.5rem}h1,h2,h3{line-height:1.2}h2{margin-top:2.5rem}a{color:#124ba0;text-underline-offset:.2em}a:focus,summary:focus{outline:3px solid #9d4b00;outline-offset:4px}section{scroll-margin-top:1rem}pre{background:#e8edf5;padding:1rem;overflow:auto;border-radius:.4rem;white-space:pre-wrap;overflow-wrap:anywhere}code{font-family:ui-monospace,monospace;font-size:.95em}details{padding:.7rem 1rem;margin:1rem 0;border:1px solid #9baac0;border-radius:.4rem;background:white}summary{font-weight:650;cursor:pointer}.scope{border-left:4px solid #325681;padding:1rem;background:#e8edf5}.skip{position:absolute;left:-999rem}.skip:focus{left:1rem;top:1rem;background:white;padding:.5rem}li{margin:.4rem 0}.top{font-size:.9rem}@media print{html{background:white}main,header,footer{padding:0}pre,details{break-inside:avoid}a{color:inherit}summary{display:none}details>*{display:block!important}.skip,.top{display:none}}</style></head><body><a class="skip" href="#main">Skip to lessons and labs</a><header id="top"><p>Athena · Offline learner pack</p><h1>From Rows to Reliable Answers</h1><p>Eight lessons, 24 original checks and eight actual local SQLite/CSV exercises.</p><p class="scope">Only synthetic data and fresh in-memory databases are used. Transaction rollback and temporary CSV export are actually executed locally. Power BI workflows are unexecuted; this is not full PL-300 coverage or readiness.</p><nav aria-label="Study guide contents"><h2>Contents</h2><ol>
+<li><a href="#data-question-grain">Define the question and the row grain</a></li>
+<li><a href="#data-csv-types">Load CSV with explicit types and missing-value rules</a></li>
+<li><a href="#data-filter-population">Filter a population and order it deliberately</a></li>
+<li><a href="#data-null-metrics">Calculate counts and averages without erasing missingness</a></li>
+<li><a href="#data-join-cardinality">Prevent join fan-out from changing the metric</a></li>
+<li><a href="#data-time-series">Build a complete time series with an explicit window</a></li>
+<li><a href="#data-quality-transactions">Use constraints and rollback to protect the dataset</a></li>
+<li><a href="#data-explain-deliver">Deliver a reproducible analysis with honest limits</a></li>
+<li><a href="#lab-guide">Run the local labs</a></li>
+<li><a href="#contracts">Data dictionary and contracts</a></li>
+<li><a href="#worksheet">Evidence worksheet</a></li>
+<li><a href="#answers">Prediction key</a></li>
+<li><a href="#coverage">Coverage and limits</a></li>
+</ol></nav><p>Read this file directly in a browser, without a server or internet connection. Source reference links require internet only if you choose to open them. Code lives alongside this guide in the extracted pack. Python 3.12.14, SQLite 3.53.1/Linux was tested; other systems remain unverified.</p></header><main id="main">
+<section id="data-question-grain" aria-labelledby="data-question-grain-title"><h2 id="data-question-grain-title">Define the question and the row grain</h2><p>Turn an ambiguous service-desk question into a metric contract before querying.</p><h3>You will learn to</h3><ul>
+<li>State what one row represents in each table.</li>
+<li>Specify a metric population, numerator, denominator and snapshot.</li>
+<li>Separate a cohort status measure from events occurring during a period.</li>
+</ul><h3>Learn</h3>
+<p>An analysis begins with a decision and a question, not a chart type. “How are tickets doing?” is too vague to test. Ask which tickets, which period, which status definition, which unit and which audience. A query can run successfully while answering the wrong question, so write the intended interpretation before trusting a result.</p>
+<p>The grain is what one row represents. In this pack, tickets has one current-state row per ticket identifier; touches has one interaction row per interaction identifier; queues has one descriptive row per queue. Multiple touches can belong to one ticket. Those grains are different even when two tables share a ticket_id column.</p>
+<p>Our main population is tickets opened from November 1, 2026 at 00:00 UTC up to, but not including, November 3 at 00:00 UTC. Status and work values come from an invented frozen snapshot labelled November 5. The question is the share of that opening cohort whose snapshot status is closed. It is not the number closed during those two days.</p>
+<p>The CSV has no resolution timestamp, historical status changes or service-level target. Therefore it cannot establish when closure happened, how long resolution took or whether an SLA was met. Do not fill those gaps with assumptions because a dashboard would look more complete. A useful limitation explains exactly which missing field or definition prevents the stronger conclusion.</p>
+<p>Microsoft’s star-schema guidance distinguishes descriptive dimensions from observations or events and emphasizes consistent granularity. The small queue table plays a descriptive role here. This is an introductory relationship design, not a complete Power BI semantic model or a warehouse with historical dimension management. Keep the business meaning ahead of any tool-specific labels.</p>
+<p>Run the profile command to verify nine tickets, nine touches and four queues. Equal row counts do not mean one-to-one relationships: their keys and relationships determine that. Record the source as synthetic fixtures, not real company records. Your final handoff should make the population, grain, time basis and missing evidence easy for someone else to repeat and challenge.</p>
+<h3>Worked example</h3><p>Seven tickets belong to the main opening cohort, and five have closed snapshot status: 5/7, about 71.4%. That does not mean five were resolved inside the reporting window. There are nine total tickets and nine total touch rows, but some tickets have several touches and others none. Matching table counts do not establish matching row identities.</p>
+<pre><code>SELECT COUNT(*) AS all_ticket_rows FROM tickets;
+-- The reporting cohort adds an explicit opened_at interval.
+-- Status describes the frozen synthetic snapshot, not a closure event time.</code></pre>
+<p>SQL snippets illustrate the lesson; complete executable statements are in the queries folder.</p><h3>Practice safely</h3><ol>
+<li>Write the service-desk question in one testable sentence.</li>
+<li>Define the row grain and primary identifier for all three CSV files.</li>
+<li>State the main population, snapshot, numerator and denominator.</li>
+<li>Run python3 labs/data-workshop/run_lab.py profile.</li>
+<li>Name two questions the absent resolution history prevents you answering.</li>
+<li>Record synthetic provenance and avoid claiming real operational performance.</li>
+</ol><h3>Three original checks</h3>
+<p><strong>Check 1: What is the grain of touches?</strong></p><ol type="A">
+<li>One interaction per touch identifier</li>
+<li>One queue</li>
+<li>One current-state ticket</li>
+<li>One reporting month</li>
+</ol><details><summary>Show answer and reasoning</summary><p>A. One interaction per touch identifier Each touch is an interaction and several can belong to one ticket.</p></details>
+<p><strong>Check 2: What does the 5/7 closed share mean here?</strong></p><ol type="A">
+<li>Five tickets necessarily closed during November 1–2</li>
+<li>Five of seven tickets opened in the interval are closed in the frozen snapshot</li>
+<li>Every queue met an SLA</li>
+<li>The average resolution time is known</li>
+</ol><details><summary>Show answer and reasoning</summary><p>B. Five of seven tickets opened in the interval are closed in the frozen snapshot The filter selects an opening cohort; the status field comes from the snapshot, not a closure timestamp.</p></details>
+<p><strong>Check 3: Both tickets and touches contain nine rows. What follows?</strong></p><ol type="A">
+<li>Their relationship must be one-to-one</li>
+<li>All tickets have exactly one touch</li>
+<li>Nothing about cardinality without examining keys and matches</li>
+<li>The data is duplicated</li>
+</ol><details><summary>Show answer and reasoning</summary><p>C. Nothing about cardinality without examining keys and matches Total row counts alone do not reveal how records relate.</p></details>
+<h3>Evidence to keep</h3><ul>
+<li>A complete metric contract.</li>
+<li>Three explicit grain definitions and profile output.</li>
+<li>A list of questions the data cannot answer.</li>
+</ul><h3>Limits</h3><p>The dataset is invented. It contains no resolution history, SLA target or real staff performance evidence; this is not a complete Power BI model.</p><h3>Official references</h3><ul>
+<li><a href="https://learn.microsoft.com/en-us/power-bi/guidance/star-schema">https://learn.microsoft.com/en-us/power-bi/guidance/star-schema</a></li>
+<li><a href="https://www.sqlite.org/lang_select.html">https://www.sqlite.org/lang_select.html</a></li>
+</ul><p class="top"><a href="#top">Back to contents</a></p></section>
+<section id="data-csv-types" aria-labelledby="data-csv-types-title"><h2 id="data-csv-types-title">Load CSV with explicit types and missing-value rules</h2><p>Validate bounded text before inserting it into an in-memory database.</p><h3>You will learn to</h3><ul>
+<li>Treat CSV fields as text until explicitly converted.</li>
+<li>Distinguish missing work minutes from recorded zero.</li>
+<li>Explain what parser checks and database constraints each enforce.</li>
+</ul><h3>Learn</h3>
+<p>CSV is a transport format, not a schema. A field that looks numeric still arrives as text under the normal CSV reader. Quoting can place a comma inside a single field, so splitting each line on commas would break the summary “Screen, hinge.” Use a CSV parser and verify the exact header and number of columns before interpreting values.</p>
+<p>The ticket contract maps an empty work_minutes field to Python None and then SQL NULL. A field containing 0 becomes the integer zero. Empty does not mean no work occurred; it means the value is missing in this dataset. The literal text NULL is rejected rather than quietly treated as missing. These are explicit ingestion choices, not universal CSV rules.</p>
+<p>The loader accepts only bounded fixtures, exact headers, unique primary identifiers, fixed-width valid UTC timestamps, allowed status values and minute values from zero through 1440. It rejects an invalid row instead of silently dropping it. A discarded row would change counts and rates, so any future quarantine policy would need a visible rejection report and reconciliation.</p>
+<p>Database constraints add another line of checking. STRICT tables enforce SQLite’s stricter storage types; primary keys, foreign keys and CHECK constraints express additional rules. STRICT does not mean every input string is rejected: SQLite can perform permitted lossless conversions. The Python parser separately enforces the text grammar and validates actual calendar dates.</p>
+<p>Keep data values separate from SQL syntax by using bound parameters for inserts and filters. A quote in a label should remain data, not change a statement. Parameter binding does not validate business meaning or safely choose arbitrary table names; it addresses how values enter a statement. The pack uses fixed table and query names, with no external database target.</p>
+<p>Every run builds a new in-memory SQLite database from the synthetic CSV files. It does not open an existing database or user spreadsheet. Work in a private pack copy when experimenting, preserve the original fixture and record any changed assumptions. A successful import demonstrates these local contracts only, not a general-purpose pipeline for unknown files or confidential records.</p>
+<h3>Worked example</h3><p>T-003 has recorded work_minutes=0; T-002 and T-005 are open with missing work values; T-009 is closed with missing work. Closing a ticket does not make its missing measurement zero. The quoted comma stays inside T-001’s summary. The loader’s accepted rows and the database’s keys must agree before aggregation begins.</p>
+<pre><code>INSERT INTO tickets
+  (ticket_id, queue_id, opened_at, status, work_minutes, summary)
+VALUES (?, ?, ?, ?, ?, ?);
+-- Python supplies a separate tuple; None becomes SQL NULL.</code></pre>
+<p>SQL snippets illustrate the lesson; complete executable statements are in the queries folder.</p><h3>Practice safely</h3><ol>
+<li>Inspect the exact tickets.csv header and quoted summary.</li>
+<li>Find one recorded zero and one missing work value.</li>
+<li>Read the data dictionary and predict which invalid fields are rejected.</li>
+<li>Run the profile command and the local validation tests.</li>
+<li>In a study copy, test an invalid minute value and explain the error without deleting the row silently.</li>
+<li>Explain what parameter binding, parser validation and constraints each contribute.</li>
+</ol><h3>Three original checks</h3>
+<p><strong>Check 1: How is an empty work_minutes field interpreted by this pack?</strong></p><ol type="A">
+<li>As zero</li>
+<li>As the text NULL</li>
+<li>As proof no work occurred</li>
+<li>As a missing value, stored as SQL NULL</li>
+</ol><details><summary>Show answer and reasoning</summary><p>D. As a missing value, stored as SQL NULL The ingestion contract distinguishes absence from a recorded numeric zero.</p></details>
+<p><strong>Check 2: Why use a CSV parser instead of splitting on commas?</strong></p><ol type="A">
+<li>It correctly handles quoted commas inside a field</li>
+<li>It invents missing data</li>
+<li>It removes all schema validation needs</li>
+<li>It makes every value numeric</li>
+</ol><details><summary>Show answer and reasoning</summary><p>A. It correctly handles quoted commas inside a field The supplied summary contains a quoted comma that belongs inside one field.</p></details>
+<p><strong>Check 3: What do bound SQL parameters do?</strong></p><ol type="A">
+<li>Make the business question automatically correct</li>
+<li>Keep supplied values separate from SQL statement syntax</li>
+<li>Choose any table name safely</li>
+<li>Replace foreign-key checks</li>
+</ol><details><summary>Show answer and reasoning</summary><p>B. Keep supplied values separate from SQL statement syntax Parameter binding controls value insertion; it does not define semantics or replace schema rules.</p></details>
+<h3>Evidence to keep</h3><ul>
+<li>A type/missingness map for the CSV columns.</li>
+<li>Executed parser/database checks.</li>
+<li>A rejected invalid example with its reason.</li>
+</ul><h3>Limits</h3><p>The loader handles this small fixed schema only. It is not a public upload service, arbitrary-file sandbox or production ETL system.</p><h3>Official references</h3><ul>
+<li><a href="https://docs.python.org/3.12/library/csv.html">https://docs.python.org/3.12/library/csv.html</a></li>
+<li><a href="https://docs.python.org/3.12/library/sqlite3.html">https://docs.python.org/3.12/library/sqlite3.html</a></li>
+<li><a href="https://www.sqlite.org/stricttables.html">https://www.sqlite.org/stricttables.html</a></li>
+</ul><p class="top"><a href="#top">Back to contents</a></p></section>
+<section id="data-filter-population" aria-labelledby="data-filter-population-title"><h2 id="data-filter-population-title">Filter a population and order it deliberately</h2><p>Use explicit UTC boundaries and stable ordering to make a cohort reproducible.</p><h3>You will learn to</h3><ul>
+<li>Express a half-open interval with bound values.</li>
+<li>Predict included boundary rows and excluded neighbors.</li>
+<li>Distinguish filtering from display ordering and row limiting.</li>
+</ul><h3>Learn</h3>
+<p>Filtering chooses which records belong in the analysis. The main query uses opened_at greater than or equal to the start and less than the end. This half-open interval includes the first instant and excludes the next period’s first instant, so adjacent periods can meet without counting their shared boundary twice.</p>
+<p>The fixture deliberately tests both edges. T-001 opens exactly at November 1 midnight and is included. T-008 opens one second earlier and is excluded. T-007 opens exactly at November 3 midnight and is excluded from the main interval. Predicting these three rows is a small but powerful check of the intended population.</p>
+<p>All stored timestamps are validated fixed-width UTC strings ending in Z. Under that narrow representation, lexical order matches chronological order. Do not extend that conclusion to mixed formats, offsets, unpadded dates or locale-dependent text. The parser rejects those forms; a real source would need a documented normalization and timezone policy.</p>
+<p>ORDER BY controls how the selected rows are presented, not which rows satisfy the filter. The query orders by opened_at and ticket_id, making ties deterministic. Without an explicit order, do not build a report on whichever row order SQLite happens to return. LIMIT can restrict output, but it is not a random sample or a substitute for a population definition.</p>
+<p>Read the statement in terms of the question: identify the table, select the opening interval, project the needed columns and order the result. The engine may execute it differently internally; the conceptual explanation is not a promise about a query plan. This exercise has tiny data and makes no performance benchmark claim.</p>
+<p>Compare the seven selected identifiers with a hand-built list before calculating a rate. If counts disagree, investigate the boundary or source rule instead of adjusting the expected answer to match. A clear cohort extract is useful evidence for later aggregates and joins, because it lets another reader inspect exactly which tickets contributed.</p>
+<h3>Worked example</h3><p>The main ordered cohort is T-001, T-002, T-003, T-004, T-005, T-009, T-006. T-009 is before T-006 because its opening time is 11:00 versus 20:00 on November 2. The interval includes November 1 midnight and excludes November 3 midnight. Adjacent intervals therefore do not both include T-007.</p>
+<pre><code>SELECT ticket_id, opened_at, status, work_minutes
+FROM tickets
+WHERE opened_at &gt;= :start AND opened_at &lt; :end
+ORDER BY opened_at, ticket_id;</code></pre>
+<p>SQL snippets illustrate the lesson; complete executable statements are in the queries folder.</p><h3>Practice safely</h3><ol>
+<li>Predict inclusion for T-001, T-007 and T-008.</li>
+<li>Write the complete seven-ID cohort in the intended order.</li>
+<li>Run python3 labs/data-workshop/run_lab.py filters.</li>
+<li>Explain why the fixed UTC representation permits text comparison here.</li>
+<li>Contrast ORDER BY, WHERE and LIMIT in ordinary language.</li>
+<li>Record the exact interval and parameters with the output.</li>
+</ol><h3>Three original checks</h3>
+<p><strong>Check 1: Which interval includes the start but excludes the end?</strong></p><ol type="A">
+<li>opened_at &gt; start AND opened_at &lt;= end</li>
+<li>opened_at = end only</li>
+<li>opened_at &gt;= start AND opened_at &lt; end</li>
+<li>Any LIMIT clause</li>
+</ol><details><summary>Show answer and reasoning</summary><p>C. opened_at &gt;= start AND opened_at &lt; end The half-open interval prevents overlap at a shared adjacent-period boundary.</p></details>
+<p><strong>Check 2: Does T-007 at exactly 2026-11-03T00:00:00Z belong in the main cohort?</strong></p><ol type="A">
+<li>Yes</li>
+<li>Only if sorted first</li>
+<li>Its status decides the timestamp boundary</li>
+<li>No, it is exactly the excluded end</li>
+</ol><details><summary>Show answer and reasoning</summary><p>D. No, it is exactly the excluded end The main interval ends immediately before that timestamp.</p></details>
+<p><strong>Check 3: Why specify ticket_id after opened_at in ORDER BY?</strong></p><ol type="A">
+<li>To make ties deterministic</li>
+<li>To change the filter population</li>
+<li>To prove random sampling</li>
+<li>To remove NULL values</li>
+</ol><details><summary>Show answer and reasoning</summary><p>A. To make ties deterministic A stable tie-breaker makes repeated presentation and tests reproducible.</p></details>
+<h3>Evidence to keep</h3><ul>
+<li>A predicted and executed boundary-sensitive cohort.</li>
+<li>Explicit UTC parameters and ordering.</li>
+<li>An explanation of representation limits.</li>
+</ul><h3>Limits</h3><p>Only canonical UTC timestamps are supported. No local-time conversion, daylight-saving analysis, random sampling or performance optimization is demonstrated.</p><h3>Official references</h3><ul>
+<li><a href="https://www.sqlite.org/lang_select.html">https://www.sqlite.org/lang_select.html</a></li>
+<li><a href="https://www.sqlite.org/lang_datefunc.html">https://www.sqlite.org/lang_datefunc.html</a></li>
+</ul><p class="top"><a href="#top">Back to contents</a></p></section>
+<section id="data-null-metrics" aria-labelledby="data-null-metrics-title"><h2 id="data-null-metrics-title">Calculate counts and averages without erasing missingness</h2><p>Use denominator-aware SQL to distinguish rows, observations and absence.</p><h3>You will learn to</h3><ul>
+<li>Explain COUNT(*), COUNT(column), SUM and AVG on this dataset.</li>
+<li>Show why NULL and zero produce different evidence.</li>
+<li>Use a safe denominator and label a cohort rate accurately.</li>
+</ul><h3>Learn</h3>
+<p>An aggregate compresses records, so its definition must preserve what matters. COUNT(*) counts rows. COUNT(work_minutes) counts non-NULL measurements. Those answers differ in this cohort: seven tickets but only four observed work values. Reporting the average without its observation count would hide a major limitation of the data.</p>
+<p>The observed values are 30, 0, 45 and 30 minutes. Their sum is 105 and their average is 26.25. The zero participates because it is a recorded value; the three NULLs do not. Replacing each NULL with zero would change the question and produce 15 minutes per ticket across all seven, an assumption the source does not justify.</p>
+<p>Conditional aggregation counts records matching a definition. The query counts five closed snapshot statuses and divides by seven cohort tickets. Multiplying by 1.0 ensures a real-valued ratio rather than an unintended integer-style result. NULLIF protects an empty denominator; an undefined rate should remain absent rather than be presented as a meaningful zero.</p>
+<p>The empty case is part of the contract. With no matching tickets, row and category counts are zero, while the work sum, observed mean and closed share remain NULL. A group with tickets but no observed work is also different from a group with a recorded total of zero. Keep those distinctions visible in a report or exported data dictionary.</p>
+<p>An average alone does not describe a distribution, explain causation or measure resolution time. This dataset records a snapshot work measure, not a full time history. Differences between queues could reflect missing data, case mix or reporting practice. The tiny fictional sample cannot establish that one real team performs better than another.</p>
+<p>Run the metrics command and reconcile each value to the four observed measurements and seven ticket rows. Then run the groups command to see Repair, Access, Setup and the empty Training queue. Compare each group’s ticket count, observed-value count and missingness before forming a conclusion. Evidence quality belongs beside the metric, not in a footnote that changes its meaning.</p>
+<h3>Worked example</h3><p>Main result: 7 tickets, 5 closed, 4 observed work values, 3 missing, 1 recorded zero, total observed work 105 and mean 26.25. Closed share is 5/7. Access has three tickets but only one observed work value, zero; Training has no cohort tickets and an undefined mean/rate. Those are not equivalent situations.</p>
+<pre><code>SELECT COUNT(*) AS tickets, COUNT(work_minutes) AS observed,
+       SUM(work_minutes) AS observed_total, AVG(work_minutes) AS observed_mean
+FROM tickets
+WHERE opened_at &gt;= :start AND opened_at &lt; :end;</code></pre>
+<p>SQL snippets illustrate the lesson; complete executable statements are in the queries folder.</p><h3>Practice safely</h3><ol>
+<li>Hand-calculate the four observed values, total and mean.</li>
+<li>Run python3 labs/data-workshop/run_lab.py metrics.</li>
+<li>Explain why replacing missing work with zero changes the question.</li>
+<li>Run python3 labs/data-workshop/run_lab.py groups and compare counts with observation counts.</li>
+<li>State the expected empty-cohort rate and mean.</li>
+<li>Write one accurate sentence with a metric and its missing-data caveat.</li>
+</ol><h3>Three original checks</h3>
+<p><strong>Check 1: Why is COUNT(work_minutes) four while COUNT(*) is seven?</strong></p><ol type="A">
+<li>SQLite lost three rows</li>
+<li>Three work values are NULL</li>
+<li>Zero is excluded from COUNT(column)</li>
+<li>Every closed ticket is excluded</li>
+</ol><details><summary>Show answer and reasoning</summary><p>B. Three work values are NULL COUNT(column) counts non-NULL values, including a recorded zero.</p></details>
+<p><strong>Check 2: What is the mean of the observed work values?</strong></p><ol type="A">
+<li>15</li>
+<li>105</li>
+<li>26.25</li>
+<li>0</li>
+</ol><details><summary>Show answer and reasoning</summary><p>C. 26.25 The observed values sum to 105 across four measurements, giving 26.25.</p></details>
+<p><strong>Check 3: What should an empty cohort’s closed share represent?</strong></p><ol type="A">
+<li>A guaranteed zero-percent service outcome</li>
+<li>One hundred percent</li>
+<li>The previous cohort’s result</li>
+<li>An undefined rate, represented as NULL</li>
+</ol><details><summary>Show answer and reasoning</summary><p>D. An undefined rate, represented as NULL There is no denominator, so a meaningful rate cannot be computed for that population.</p></details>
+<h3>Evidence to keep</h3><ul>
+<li>Hand reconciliation of counts and observed metrics.</li>
+<li>Empty and missingness interpretations.</li>
+<li>A caveated summary sentence.</li>
+</ul><h3>Limits</h3><p>No imputation, causal inference, statistical significance or real performance judgment is supported. Work minutes are not resolution duration.</p><h3>Official references</h3><ul>
+<li><a href="https://www.sqlite.org/lang_aggfunc.html">https://www.sqlite.org/lang_aggfunc.html</a></li>
+<li><a href="https://www.sqlite.org/nulls.html">https://www.sqlite.org/nulls.html</a></li>
+</ul><p class="top"><a href="#top">Back to contents</a></p></section>
+<section id="data-join-cardinality" aria-labelledby="data-join-cardinality-title"><h2 id="data-join-cardinality-title">Prevent join fan-out from changing the metric</h2><p>Expose a wrong total, reject a tempting DISTINCT patch and fix the grain.</p><h3>You will learn to</h3><ul>
+<li>Predict one-to-many row multiplication.</li>
+<li>Explain why distinct numeric values are not distinct business records.</li>
+<li>Preaggregate detail rows before joining to a ticket-grain measure.</li>
+</ul><h3>Learn</h3>
+<p>A join combines matching records. When a ticket has several touches, joining its row to each touch repeats its ticket-level fields. This can be useful for an interaction-level question, but summing a repeated ticket measure answers a different question. Before joining, state the expected relationship and the grain of the resulting rows.</p>
+<p>The naive left join expands seven cohort tickets to ten joined rows. T-001 appears twice and T-004 appears three times because of their interactions. Summing ticket work_minutes across those rows produces 225, not the correct 105. The SQL is valid; the metric is wrong because the grain changed.</p>
+<p>COUNT(DISTINCT ticket_id) can recover the number of distinct tickets for that specific count, but it does not repair every repeated measure. SUM(DISTINCT work_minutes) is an especially tempting mistake. T-001 and T-006 legitimately both have 30 minutes. Distinct values collapses them into one 30, producing 75 and undercounting real observations.</p>
+<p>The corrected query first groups touches to one row per ticket, with a touch count and touch-minute sum. Joining that result to tickets preserves the ticket grain. The report then has seven ticket rows, 105 observed ticket work minutes, seven touch rows and 55 touch minutes for the cohort. These are separate measures, not two totals that are required to equal each other.</p>
+<p>Left joins preserve unmatched left records, but later filters can undo that intention. In the queue summary, the date condition is inside the join’s ON clause so Training remains present with zero matched tickets. COUNT(t.ticket_id) counts matches; COUNT(*) would count the placeholder row and misleadingly report one for an empty queue.</p>
+<p>Treat cardinality as something to test, not a relationship icon to trust. Compare before/after row counts, distinct identifiers and known measure totals. Include repeated equal numeric values in a test so a DISTINCT shortcut cannot appear correct by accident. If a new source changes the relationship, revisit the metric definition before shipping a familiar-looking chart.</p>
+<h3>Worked example</h3><p>Naive: 10 rows and repeated work total 225. SUM(DISTINCT work_minutes): 75. Correct preaggregation: 7 ticket rows and 105 work minutes. Touches separately total 7 rows and 55 minutes. The fixture deliberately contains two real 30-minute ticket measurements, which exposes the incorrect distinct-value repair.</p>
+<pre><code>WITH per_ticket AS (
+  SELECT ticket_id, COUNT(*) AS touches, SUM(minutes) AS touch_minutes
+  FROM touches GROUP BY ticket_id
+)
+SELECT COUNT(*) AS ticket_rows, SUM(t.work_minutes) AS work_minutes
+FROM tickets AS t LEFT JOIN per_ticket AS p ON p.ticket_id = t.ticket_id
+WHERE t.opened_at &gt;= :start AND t.opened_at &lt; :end;</code></pre>
+<p>SQL snippets illustrate the lesson; complete executable statements are in the queries folder.</p><h3>Practice safely</h3><ol>
+<li>Predict how many rows T-001 and T-004 produce after the naive join.</li>
+<li>Run python3 labs/data-workshop/run_lab.py joins.</li>
+<li>Reconcile the 225, 75 and 105 totals by hand.</li>
+<li>Explain why two legitimate 30-minute values must both remain.</li>
+<li>Inspect groups.sql and explain why the date filter is in ON and the count uses ticket_id.</li>
+<li>Keep a regression that detects both fan-out and the DISTINCT-value shortcut.</li>
+</ol><h3>Three original checks</h3>
+<p><strong>Check 1: Why does the naive join inflate ticket work?</strong></p><ol type="A">
+<li>Multiple touches repeat the ticket-level measure</li>
+<li>NULL always doubles data</li>
+<li>The CSV reader changes 30 to 60</li>
+<li>All joins are invalid</li>
+</ol><details><summary>Show answer and reasoning</summary><p>A. Multiple touches repeat the ticket-level measure The one-to-many relationship changes the result grain before aggregation.</p></details>
+<p><strong>Check 2: Why is SUM(DISTINCT work_minutes) wrong here?</strong></p><ol type="A">
+<li>It retains every ticket identity</li>
+<li>It removes one of two legitimate equal 30-minute measurements</li>
+<li>It always gives 105</li>
+<li>It only removes missing values</li>
+</ol><details><summary>Show answer and reasoning</summary><p>B. It removes one of two legitimate equal 30-minute measurements Distinct values are not distinct business records; equal measurements can belong to different tickets.</p></details>
+<p><strong>Check 3: How does the corrected query preserve ticket grain?</strong></p><ol type="A">
+<li>By dropping tickets with no touches</li>
+<li>By removing all keys</li>
+<li>By grouping touches to one row per ticket before joining</li>
+<li>By sorting the inflated total</li>
+</ol><details><summary>Show answer and reasoning</summary><p>C. By grouping touches to one row per ticket before joining Preaggregation makes the detail-side relationship at most one matching row per ticket.</p></details>
+<h3>Evidence to keep</h3><ul>
+<li>A fan-out row-count prediction.</li>
+<li>Three explained totals and corrected query output.</li>
+<li>An empty-queue and repeated-value regression.</li>
+</ul><h3>Limits</h3><p>The fixture demonstrates specific join/grain failures. It is not a complete dimensional model, relationship-direction tutorial or Power BI filter-context implementation.</p><h3>Official references</h3><ul>
+<li><a href="https://www.sqlite.org/lang_select.html">https://www.sqlite.org/lang_select.html</a></li>
+<li><a href="https://www.sqlite.org/lang_aggfunc.html">https://www.sqlite.org/lang_aggfunc.html</a></li>
+<li><a href="https://learn.microsoft.com/en-us/power-bi/guidance/star-schema">https://learn.microsoft.com/en-us/power-bi/guidance/star-schema</a></li>
+</ul><p class="top"><a href="#top">Back to contents</a></p></section>
+<section id="data-time-series" aria-labelledby="data-time-series-title"><h2 id="data-time-series-title">Build a complete time series with an explicit window</h2><p>Use a calendar to preserve zero-event days and a window function for a running total.</p><h3>You will learn to</h3><ul>
+<li>Distinguish an absent date from a verified zero count.</li>
+<li>Keep daily and main-cohort windows clearly labelled.</li>
+<li>Use a deterministic cumulative window over grouped daily data.</li>
+</ul><h3>Learn</h3>
+<p>A time series can hide days with no records. Grouping only ticket rows produces dates that exist in the data; it does not prove anything about dates that are absent. A calendar provides the expected reporting dates. A left join can then preserve each date and count its matching tickets, including zero when the source coverage is known.</p>
+<p>The dates exercise intentionally uses a wider interval than the main metrics: November 1 through November 4 UTC, ending exclusively at November 5 midnight. Its calendar contains exactly those four days. The main cohort still ends at November 3 midnight. A total can differ legitimately when the population changes, so print the interval beside the output.</p>
+<p>Daily opening counts are 3, 4, 1 and 0. The November 3 ticket is included in this wider series but excluded from the main cohort. November 4 remains present because it is in the calendar even though no ticket opens that day. In real data, a zero is credible only if ingestion coverage is known; an outage in collection is not automatically zero activity.</p>
+<p>The query first produces one row per day, then applies a running SUM ordered by day with an explicit ROWS frame from the beginning through the current row. The cumulative counts are 3, 7, 8 and 8. The window calculation retains daily rows, unlike a final aggregate that would collapse the entire series to one total.</p>
+<p>This pack uses validated UTC timestamps and UTC-midnight boundaries. It does not convert a local business day, handle daylight-saving changes or align regional calendars. Those are requirements to define before analyzing a real organization’s daily activity. The fixed calendar rejects intervals outside its coverage rather than quietly returning an incomplete series.</p>
+<p>Check the first day, final exclusive boundary, zero day and final cumulative total. Compare the series total with a direct count using the same wider interval, not with the narrower seven-ticket metric. A correct reconciliation uses the same population and unit on both sides. Labeling those choices makes a small chart or table easier to interpret without inventing a trend from four synthetic days.</p>
+<h3>Worked example</h3><p>The wider dates output has November 1: 3, November 2: 4, November 3: 1, November 4: 0; running totals 3, 7, 8, 8. The eight-ticket series is consistent with the seven-ticket main cohort because T-007 is added by the wider window. Neither output is a real demand forecast.</p>
+<pre><code>SELECT day, opened_tickets,
+       SUM(opened_tickets) OVER (
+         ORDER BY day ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW
+       ) AS running_opened_tickets
+FROM daily
+ORDER BY day;
+-- daily is the calendar-based common table expression in dates.sql.</code></pre>
+<p>SQL snippets illustrate the lesson; complete executable statements are in the queries folder.</p><h3>Practice safely</h3><ol>
+<li>Predict all four daily counts and cumulative totals.</li>
+<li>Run python3 labs/data-workshop/run_lab.py dates.</li>
+<li>Explain why its total is eight while the main cohort has seven.</li>
+<li>Distinguish no rows, unknown source coverage and a verified zero day.</li>
+<li>Inspect the explicit window frame and ordering.</li>
+<li>Record UTC and calendar coverage as limits, not hidden assumptions.</li>
+</ol><h3>Three original checks</h3>
+<p><strong>Check 1: Why does November 4 appear with zero tickets?</strong></p><ol type="A">
+<li>The query invents a ticket</li>
+<li>NULL always means zero activity</li>
+<li>The main cohort includes every future day</li>
+<li>The calendar preserves the date and no ticket matches it</li>
+</ol><details><summary>Show answer and reasoning</summary><p>D. The calendar preserves the date and no ticket matches it The known calendar date survives the left join; zero is meaningful under the fixture’s complete synthetic coverage.</p></details>
+<p><strong>Check 2: Why does the dates command total eight rather than seven?</strong></p><ol type="A">
+<li>It uses a wider interval that includes T-007</li>
+<li>A join bug necessarily occurred</li>
+<li>The average was rounded</li>
+<li>The snapshot changed during execution</li>
+</ol><details><summary>Show answer and reasoning</summary><p>A. It uses a wider interval that includes T-007 The daily exercise ends at November 5, while the main cohort ends at November 3.</p></details>
+<p><strong>Check 3: What does the running window SUM preserve?</strong></p><ol type="A">
+<li>Only one final row</li>
+<li>One output row per day with a cumulative value</li>
+<li>A random row order</li>
+<li>A causal forecast</li>
+</ol><details><summary>Show answer and reasoning</summary><p>B. One output row per day with a cumulative value A window function calculates across related rows while retaining the daily result rows.</p></details>
+<h3>Evidence to keep</h3><ul>
+<li>A calendar-based series and cumulative reconciliation.</li>
+<li>Clearly labelled differing windows.</li>
+<li>A source-coverage and timezone caveat.</li>
+</ul><h3>Limits</h3><p>Only the four-day synthetic UTC calendar is supported. No local-time, daylight-saving, forecasting or real ingestion-completeness assessment is performed.</p><h3>Official references</h3><ul>
+<li><a href="https://www.sqlite.org/lang_datefunc.html">https://www.sqlite.org/lang_datefunc.html</a></li>
+<li><a href="https://www.sqlite.org/lang_select.html">https://www.sqlite.org/lang_select.html</a></li>
+</ul><p class="top"><a href="#top">Back to contents</a></p></section>
+<section id="data-quality-transactions" aria-labelledby="data-quality-transactions-title"><h2 id="data-quality-transactions-title">Use constraints and rollback to protect the dataset</h2><p>Reject a broken relationship and verify that a partial import does not remain.</p><h3>You will learn to</h3><ul>
+<li>Verify foreign-key enforcement on the actual connection.</li>
+<li>Observe a real in-memory transaction rollback.</li>
+<li>Separate structural consistency from truth and business validity.</li>
+</ul><h3>Learn</h3>
+<p>Data quality has several layers. A unique identifier can prevent duplicate keys; a foreign key can require a referenced queue to exist; a CHECK constraint can reject an invalid status or minute range. These are useful structural rules, but they do not prove that a report describes reality or that its measurement definition is appropriate.</p>
+<p>SQLite foreign-key enforcement must be enabled and checked for the connection rather than assumed from a schema declaration. The lab sets PRAGMA foreign_keys=ON before loading and verifies the returned setting. It also uses STRICT tables, while the parser handles the tighter source-text rules. Each layer has an explicit purpose and an observable test.</p>
+<p>The quality exercise starts a transaction and inserts a valid synthetic ticket T-900. It then attempts T-901 referencing nonexistent queue Q-Z. That foreign-key failure is expected. The handler explicitly rolls back the transaction, removing the earlier valid insert as well. The database returns to nine tickets, and T-900 is absent.</p>
+<p>A failed statement and a rolled-back batch are not automatically the same event. Error handling must decide and verify the intended transaction outcome. The pack uses explicit BEGIN, COMMIT and ROLLBACK on its owned in-memory database so the boundary is visible. Do not infer behavior for another driver mode or database engine without checking its documentation.</p>
+<p>The command also checks for foreign-key violations and runs an integrity check. An empty violation list and an “ok” result are useful local evidence, not proof of complete business quality. A plausible but wrongly recorded work value can satisfy every schema constraint. Missingness, coverage, reconciliation and stakeholder definitions still need review.</p>
+<p>All mutations occur in a fresh private in-memory database created for this run. No existing database or external service is opened. The exercise is deliberately safe for practicing failure and recovery, but it is not a crash-durability or concurrent-writer test. Preserve the expected failure in your evidence rather than hiding it to make every step look successful.</p>
+<h3>Worked example</h3><p>Before: nine tickets. After a valid insert followed by an invalid queue reference and explicit rollback: nine tickets again, T-900 absent, no foreign-key violations and integrity_check=ok. The invalid batch being rejected is the successful outcome. It proves the bounded rollback behavior actually executed here, not that the source data is true.</p>
+<pre><code>BEGIN;
+-- Insert a valid synthetic row using bound values.
+-- Attempt another row referencing missing queue Q-Z: expected failure.
+ROLLBACK;
+-- The Python handler performs the rollback and verifies the original count.</code></pre>
+<p>SQL snippets illustrate the lesson; complete executable statements are in the queries folder.</p><h3>Practice safely</h3><ol>
+<li>Predict whether T-900 should remain after the intended rollback.</li>
+<li>Run python3 labs/data-workshop/run_lab.py quality.</li>
+<li>Verify the before/after counts, missing batch row and enforcement flag.</li>
+<li>Explain why an error in one statement is not sufficient evidence of full-batch rollback.</li>
+<li>Give a plausible wrong value that could still pass the schema.</li>
+<li>Label this as actual local transactional behavior, not production durability.</li>
+</ol><h3>Three original checks</h3>
+<p><strong>Check 1: Why does the lab check PRAGMA foreign_keys?</strong></p><ol type="A">
+<li>A schema declaration alone is enough in every SQLite connection</li>
+<li>It counts NULL values</li>
+<li>Enforcement must be enabled and verified for the connection</li>
+<li>It deploys a server</li>
+</ol><details><summary>Show answer and reasoning</summary><p>C. Enforcement must be enabled and verified for the connection The lab verifies that the actual connection enforces the declared relationship.</p></details>
+<p><strong>Check 2: After the second insert fails and the whole batch is rolled back, should T-900 remain?</strong></p><ol type="A">
+<li>Yes, because it was valid</li>
+<li>Only if sorted first</li>
+<li>It becomes a NULL row</li>
+<li>No, the transaction rollback removes the batch’s earlier insert too</li>
+</ol><details><summary>Show answer and reasoning</summary><p>D. No, the transaction rollback removes the batch’s earlier insert too The intended atomic batch returns to the pre-transaction state.</p></details>
+<p><strong>Check 3: What does integrity_check=ok fail to prove?</strong></p><ol type="A">
+<li>All business facts and measurement definitions are correct</li>
+<li>The check ran</li>
+<li>The local database passed that structural check</li>
+<li>A result was returned</li>
+</ol><details><summary>Show answer and reasoning</summary><p>A. All business facts and measurement definitions are correct Structural database checks cannot establish the truth or suitability of business data.</p></details>
+<h3>Evidence to keep</h3><ul>
+<li>Actual rollback output and before/after reconciliation.</li>
+<li>Verified enforcement and integrity results.</li>
+<li>A distinction between structural and business quality.</li>
+</ul><h3>Limits</h3><p>This is an owned in-memory transaction, not a live database migration, crash recovery, concurrency test or proof that business facts are correct.</p><h3>Official references</h3><ul>
+<li><a href="https://www.sqlite.org/foreignkeys.html">https://www.sqlite.org/foreignkeys.html</a></li>
+<li><a href="https://www.sqlite.org/lang_transaction.html">https://www.sqlite.org/lang_transaction.html</a></li>
+<li><a href="https://www.sqlite.org/stricttables.html">https://www.sqlite.org/stricttables.html</a></li>
+</ul><p class="top"><a href="#top">Back to contents</a></p></section>
+<section id="data-explain-deliver" aria-labelledby="data-explain-deliver-title"><h2 id="data-explain-deliver-title">Deliver a reproducible analysis with honest limits</h2><p>Export a small result, preserve missing-value semantics and explain the finding.</p><h3>You will learn to</h3><ul>
+<li>Produce and verify a real local CSV export.</li>
+<li>State a supported finding with population and uncertainty.</li>
+<li>Separate SQL foundations from unexecuted Power BI and PL-300 work.</li>
+</ul><h3>Learn</h3>
+<p>A useful analysis handoff lets another person reproduce the result and understand what it means. Include the source description, snapshot, grain, population, SQL, environment, outputs and limitations. A polished number without those details can be less trustworthy than a simple table with a clear definition and a reproducible query.</p>
+<p>The export command runs the queue summary, writes four rows to a CSV inside its own temporary directory, reads them back as text and compares them with the documented representation. SQL NULL becomes an empty CSV field. Counts remain explicit numeric text, including zero for Training. This convention must travel with the file because CSV itself does not preserve SQL types or NULL meaning.</p>
+<p>The temporary export is a practice round trip, not a persistent user report. Its directory is cleaned up and no personal file is overwritten. The pack includes the query and expected results so you can reproduce the process. Do not treat successful byte or field serialization as proof that the underlying metric was well chosen; earlier grain and denominator checks still matter.</p>
+<p>A supported summary is: seven synthetic tickets opened in the main UTC interval; five are closed in the frozen snapshot; observed work averages 26.25 minutes across four measurements, with three missing. A useful next question is why measurements are missing. The data does not support claiming faster resolution, staff superiority, causation or a real operational trend.</p>
+<p>Choose a display that serves the question. A small labelled table can show ticket counts alongside observation counts and missingness. If later creating a chart, state the unit and time window, avoid hiding zero categories and provide a text explanation rather than relying only on color. This module supplies analysis reasoning and an accessible text guide, not a complete dashboard design course.</p>
+<p>PL-300 covers Power BI-specific skills beyond this pack, including Power Query, DAX, semantic modeling, visualization, management and security. No Power BI Desktop or service, DAX measure, refresh, publishing or row-level-security workflow was executed. Use the current official study guide for that broader plan. Finishing these local foundations is progress, not full PL-300 coverage, exam readiness or certification.</p>
+<h3>Worked example</h3><p>The export round trip produces four queue rows. Training has ticket count &quot;0&quot; but empty work sum, mean and rate fields, representing SQL NULL. A good handoff includes that distinction and the differing main/daily intervals. It records local SQLite execution while marking Power BI implementation and assessment as unexecuted.</p>
+<pre><code>-- Reproducible summary comes from queries/groups.sql.
+-- Export uses csv.DictWriter, then reads the file back as text.
+-- Empty exported aggregate fields represent SQL NULL under this contract.
+-- No Power BI dataset or report is published.</code></pre>
+<p>SQL snippets illustrate the lesson; complete executable statements are in the queries folder.</p><h3>Practice safely</h3><ol>
+<li>Run python3 labs/data-workshop/run_lab.py export.</li>
+<li>Verify four rows, round-trip equality, Training’s zero count and empty aggregates.</li>
+<li>Write a one-paragraph finding with denominator, snapshot and missingness.</li>
+<li>Complete the capstone worksheet and include exact SQL/commands.</li>
+<li>Add one original boundary or cardinality test without weakening baseline tests.</li>
+<li>List Power BI and PL-300 areas still unexecuted or uncovered.</li>
+</ol><h3>Three original checks</h3>
+<p><strong>Check 1: What does Training’s empty exported mean field represent?</strong></p><ol type="A">
+<li>A recorded zero-minute mean</li>
+<li>SQL NULL under the documented CSV convention</li>
+<li>A deleted queue</li>
+<li>A guaranteed spreadsheet error</li>
+</ol><details><summary>Show answer and reasoning</summary><p>B. SQL NULL under the documented CSV convention The queue has no cohort observations, so its mean is absent, not zero.</p></details>
+<p><strong>Check 2: Which conclusion is supported?</strong></p><ol type="A">
+<li>A real team is faster than another</li>
+<li>The SQL pass guarantees PL-300 readiness</li>
+<li>The synthetic cohort has five closed snapshot statuses among seven tickets, with stated measurement gaps</li>
+<li>Missing values can be ignored without disclosure</li>
+</ol><details><summary>Show answer and reasoning</summary><p>C. The synthetic cohort has five closed snapshot statuses among seven tickets, with stated measurement gaps The statement stays within the actual population, snapshot and available evidence.</p></details>
+<p><strong>Check 3: Does this pack complete PL-300 preparation?</strong></p><ol type="A">
+<li>Yes, SQL is the whole exam</li>
+<li>Yes, because it exports CSV</li>
+<li>Only the artifact filename matters</li>
+<li>No; Power BI-specific work and broader objectives remain unexecuted or uncovered</li>
+</ol><details><summary>Show answer and reasoning</summary><p>D. No; Power BI-specific work and broader objectives remain unexecuted or uncovered This is a data/SQL foundation, not full Power BI implementation practice or an exam-readiness assessment.</p></details>
+<h3>Evidence to keep</h3><ul>
+<li>Actual local export verification.</li>
+<li>A reproducible, caveated analysis handoff.</li>
+<li>An explicit Power BI/PL-300 gap list.</li>
+</ul><h3>Limits</h3><p>No Power BI software, DAX, refresh, publishing, permissions or exam assessment is performed. This pack does not claim full PL-300 coverage or readiness.</p><h3>Official references</h3><ul>
+<li><a href="https://docs.python.org/3.12/library/csv.html">https://docs.python.org/3.12/library/csv.html</a></li>
+<li><a href="https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/pl-300">https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/pl-300</a></li>
+</ul><p class="top"><a href="#top">Back to contents</a></p></section>
+<section id="lab-guide" aria-labelledby="lab-guide-title"><h2 id="lab-guide-title">Local lab guide</h2>
+<h3>Start safely</h3>
+<p>Use a private study copy. All records, summaries, dates and queues are invented. Every command creates a fresh <code>:memory:</code> SQLite database, loads only the three bundled fixtures and closes its connection. There is no cloud database, email, account, credential or user-data source. No command takes a database path, URL or arbitrary SQL string.</p>
+<p>Python and edited SQL run with normal local permissions, not in a security sandbox. Review your own edits and never paste untrusted SQL or Python. Do not change the connection target, add ATTACH statements, load extensions or point the exercises at existing databases. Schema and transaction changes affect only the new in-memory database. The export command owns its temporary directory and never replaces a personal file.</p>
+<p>Use Python 3.10+ and SQLite 3.37+ with no third-party dependencies. Tested: Python 3.12.14, SQLite 3.53.1, Linux. If your runtime differs, check its version and treat it as unverified. Commands below start in the extracted pack directory. Substitute your platform’s Python 3 launcher if necessary.</p>
+<h3>The analysis contract</h3>
+<p>The main population is tickets opened at or after <strong>2026-11-01T00:00:00Z</strong> and before <strong>2026-11-03T00:00:00Z</strong>. Status and work measurements are from an invented frozen snapshot labelled <strong>2026-11-05T00:00:00Z</strong>. A closed share means closed snapshot statuses within that opening cohort, not closures during the period.</p>
+<p>The dates command alone uses the wider interval November 1 through November 4 UTC, ending exclusively at November 5. It prints its window explicitly. Read the data dictionary and contracts before interpreting counts or rates.</p>
+<h3>1. Profile and grain</h3>
+<pre><code>python3 labs/data-workshop/run_lab.py profile</code></pre>
+<p>Expect 4 queues, 9 tickets and 9 touches. Tickets are one row per current-state ticket; touches are one row per interaction. Equal total counts do not imply a one-to-one relationship. Paper task: annotate each CSV’s identifier and grain, then find a ticket with multiple touches and one with none.</p>
+<h3>2. Boundary-sensitive filters</h3>
+<pre><code>python3 labs/data-workshop/run_lab.py filters</code></pre>
+<p>Expect seven IDs in order: T-001, T-002, T-003, T-004, T-005, T-009, T-006. T-001 is exactly at the included start. T-007 is exactly at the excluded end. T-008 is one second before the start. The query uses bound timestamps, not concatenated SQL.</p>
+<p>Paper task: predict both boundaries and the tie-breaking order. Study-copy variation: add an original test for a different valid interval using <code>lab.query</code>; do not overwrite baseline expected results just to match a change.</p>
+<h3>3. NULL-aware metrics</h3>
+<pre><code>python3 labs/data-workshop/run_lab.py metrics</code></pre>
+<p>Expect 7 tickets, 5 closed statuses, 4 observed work values, 3 missing values and 1 recorded zero. The observed measurements are 30, 0, 45, 30: sum 105 and mean 26.25. Closed share is 5/7, about 71.4%.</p>
+<p>Missing work is not zero. The fixture includes a closed ticket with missing work, so status cannot fill the measurement. Paper task: calculate the different 15-minute result obtained by incorrectly treating all missing values as zero, then explain why it answers a different question. Empty-cohort counts are zero; sum, mean and share remain SQL NULL.</p>
+<h3>4. Grouped summaries and empty categories</h3>
+<pre><code>python3 labs/data-workshop/run_lab.py groups</code></pre>
+<p>Order is Access, Repair, Setup, Training. Access: 3 tickets, 2 closed, 1 observed work value, sum 0, mean 0. Repair: 3 tickets, 2 closed, 2 observed values, sum 60, mean 30. Setup: 1 ticket, 1 closed, 1 observed value, sum 45, mean 45. Training: 0 tickets, 0 closed, 0 observations; work sum, mean and closed share are NULL.</p>
+<p>The date predicate is inside the LEFT JOIN’s ON clause. <code>COUNT(t.ticket_id)</code> counts matching tickets; <code>COUNT(*)</code> would count the unmatched placeholder row. Paper task: explain why an empty queue differs from a queue whose only observed value is zero.</p>
+<h3>5. Join fan-out and the wrong DISTINCT repair</h3>
+<pre><code>python3 labs/data-workshop/run_lab.py joins</code></pre>
+<p>The deliberately naive join produces 10 rows and a repeated ticket-work total of 225. Distinct ticket count is 7, but <code>SUM(DISTINCT work_minutes)</code> is 75 because it collapses two legitimate equal 30-minute observations. The corrected query preaggregates touches per ticket: 7 ticket rows, work total 105, 7 touches and 55 touch minutes.</p>
+<p>Ticket work and touch minutes are separate measurements; they are not required to reconcile to each other. Paper task: explain all three work totals, then show why fixing only the distinct ticket count cannot fix a sum.</p>
+<h3>6. Calendar and cumulative series</h3>
+<pre><code>python3 labs/data-workshop/run_lab.py dates</code></pre>
+<p>This command uses the wider four-day interval. Daily opening counts are 3, 4, 1, 0; running counts are 3, 7, 8, 8. The calendar preserves November 4’s zero. T-007 adds the eighth ticket because November 3 is inside this interval.</p>
+<p>The query uses a grouped daily common table expression, then an explicit running window frame. Its finite calendar covers November 1–4 only and requires midnight UTC boundaries. Intervals outside that coverage are rejected. Paper task: reconcile with a direct count using the same wider interval, not the seven-ticket main cohort.</p>
+<h3>7. Constraints and atomic batch failure</h3>
+<pre><code>python3 labs/data-workshop/run_lab.py quality</code></pre>
+<p>The command verifies foreign-key enforcement, starts a transaction, inserts valid T-900, then attempts T-901 with nonexistent queue Q-Z. The expected foreign-key error triggers an explicit whole-batch rollback. Expect 9 rows before and after, T-900 absent, no foreign-key violations and integrity_check=<code>ok</code>.</p>
+<p>This is an actual in-memory transaction, not a simulation, production migration or crash-durability test. Paper task: distinguish a failed statement from a verified rollback of the whole batch. Identify a plausible incorrect measurement that could still satisfy all schema constraints.</p>
+<h3>8. Actual local CSV export</h3>
+<pre><code>python3 labs/data-workshop/run_lab.py export</code></pre>
+<p>A queue summary is written to and read from an owned temporary CSV. Expect 4 rows, matching text representation and temporary-directory cleanup. Training’s ticket count is the string <code>&quot;0&quot;</code>; its absent aggregates are empty fields. The export contract uses empty aggregate fields for SQL NULL. CSV does not preserve original SQL types automatically.</p>
+<p>The temporary file is intentionally removed after verification; the command does not create a persistent user report. Paper task: specify how a recipient would distinguish zero, NULL and text without an attached dictionary.</p>
+<h3>Practice without changing scope</h3>
+<p>Read the complete SQL in <code>queries/</code>. Each lesson’s snippet explains a part; the files are the executable statements. Make study-copy changes only, preserving <code>:memory:</code> and the fixed paths. Good extensions include a new status-specific count, a missingness rate with an explicit denominator or a regression for an equal-valued repeated measure. Add acceptance criteria before coding.</p>
+<pre><code>python3 -m unittest discover -s tests -v</code></pre>
+<p>The suite checks the distributed fixtures, real SQLite behavior, boundaries, rejected input, constraints, rollback, joins and export. It is not a learner grade or PL-300 readiness test. A deliberate fixture change can invalidate a baseline expectation; record the changed assumption rather than weakening tests to conceal a discrepancy.</p>
+<p>Use the worksheet and answer key. Keep Power BI-specific implementation and real-data analysis explicitly unexecuted.</p>
+</section>
+<section id="contracts" aria-labelledby="contracts-title"><h2 id="contracts-title">Data dictionary and contracts</h2>
+<h3>Provenance and time basis</h3>
+<p>All data is synthetic. The invented snapshot label is 2026-11-05T00:00:00Z. Main cohort: opened_at ≥ 2026-11-01T00:00:00Z and &lt; 2026-11-03T00:00:00Z. The daily exercise alone ends at 2026-11-05T00:00:00Z. Status and cumulative work describe the snapshot, not events that necessarily occurred inside the opening interval. No resolution timestamp, SLA target or status history is available.</p>
+<h3>Tables and grain</h3>
+<ul>
+<li>queues: one descriptive row per queue_id. <code>queue_id</code> matches Q- followed by one uppercase ASCII letter; queue_name is unique, nonempty descriptive text.</li>
+<li>tickets: one current-state row per ticket_id, matching T- plus three ASCII digits. queue_id must refer to queues. opened_at is a valid fixed-width UTC timestamp <code>YYYY-MM-DDTHH:MM:SSZ</code>. status is open or closed. work_minutes is a nullable integer from 0 through 1440. summary is nonempty text. Work is a recorded ticket-level measure, not resolution duration.</li>
+<li>touches: one interaction per touch_id, matching X- plus three ASCII digits. ticket_id refers to tickets. minutes is a non-null integer from 0 through 1440. These interaction minutes are separate measurements, not required to equal ticket work.</li>
+<li>calendar: one row for each UTC date November 1–4, 2026. This is a finite fixture, not a global date dimension.</li>
+</ul>
+<p>Queues and tickets have a one-to-many relationship. Tickets and touches also have one-to-many potential. Some queues have no cohort tickets; some tickets have no touches. Every identifier must be unique within its own table, but identical numeric measurements across different tickets are legitimate.</p>
+<h3>CSV ingestion</h3>
+<p><code>parse_csv(kind, text)</code> supports only queues, tickets and touches, with exact headers and column order shown in the fixtures. Input is a string of at most 32768 UTF-8 bytes and at most 1000 data rows. The CSV reader uses strict mode and newline-preserving input. Malformed CSV reported by that reader, extra/missing columns and duplicate primary identifiers are rejected with ValueError. A normal final newline is not an empty extra record; an actual blank data record is invalid. Header-only input is permitted.</p>
+<p>Fields begin as text. Minutes must be 1–4 ASCII digits and convert to an integer in 0–1440. Signs, spaces, decimals, non-ASCII digits and literal NULL are rejected. Only ticket work_minutes may be empty, mapping to None/SQL NULL. Zero remains zero. Labels are 1–100 trimmed characters with no U+0000–U+001F controls; quoted internal commas are valid. Timestamps must have valid calendar dates and exact UTC Z format; mixed offsets or fractional seconds are not accepted.</p>
+<p>The parser validates one file’s shape and values. Cross-file foreign-key relationships are checked by SQLite during loading. It does not silently discard or impute rows. These are teaching-schema rules, not a universal CSV convention or a public upload security boundary.</p>
+<h3>SQLite construction and lifetime</h3>
+<p>Requires SQLite 3.37+ for STRICT tables. <code>connect()</code> creates only <code>:memory:</code>, enables/verifies foreign keys and loads the bundled schema. <code>load_database()</code> parses the fixed fixtures and loads them in one explicit transaction. A failure rolls the load back and closes the connection. Every CLI command uses a fresh database and closes it in a finally block. No existing database is opened.</p>
+<p>STRICT tables still allow applicable lossless type conversions; they do not replace source-text validation. The schema checks primary/foreign keys, allowed status and minute bounds. Calendar validation is performed by the Python parser, not a comprehensive SQL date constraint.</p>
+<h3>Queries and parameters</h3>
+<p><code>query(conn, name, window)</code> accepts only filters, metrics, groups, joins_naive, joins_correct or dates. Query files are fixed, trusted source capped at 8192 bytes. Window contains exactly start and end, both valid canonical UTC timestamps with start &lt; end. Values are bound separately; they are not concatenated into SQL.</p>
+<p>The dates query additionally requires midnight boundaries and an interval contained in November 1 through November 5 exclusively. It uses the four-row calendar. Other queries can evaluate any valid interval against the fixed dataset. Output is a list of dictionaries. Filters have explicit opened_at/ticket_id order; groups sort by queue_name/queue_id; dates sort by day.</p>
+<p>The templates are trusted teaching code, not a sandbox for arbitrary SQL. Do not add ATTACH, external connections, extension loading or user-file operations. The CLI accepts no arbitrary SQL or file path.</p>
+<h3>Metrics and missingness</h3>
+<p>COUNT(*) counts selected ticket rows; COUNT(work_minutes) counts observed non-NULL measurements, including zero. Work sum/mean use observed values only. Empty population counts are zero; work sum, mean and closed_share are NULL. closed_share uses closed snapshot statuses divided by cohort tickets, with an undefined result for zero denominator. It is not an in-period closure flow, SLA percentage or resolution-time measure.</p>
+<p>The groups query preserves all queues with a LEFT JOIN and date conditions in ON. Training’s zero matched tickets do not make its absent work sum/mean/rate zero. The naive join is intentionally wrong for summing ticket-level work. The corrected join preaggregates touches to one row per ticket.</p>
+<h3>Quality and export exercises</h3>
+<p><code>quality_demo</code> makes and explicitly rolls back an invalid two-row batch inside the owned in-memory database. The first valid insert must not remain. It verifies foreign-key enforcement, unchanged row count, no relationship violations and structural integrity. It does not prove business truth, crash safety or concurrent-writer behavior.</p>
+<p><code>export_demo</code> runs the queue query and uses a standard CSV writer inside a new owned temporary directory. It rereads the output as text, verifies each field against the documented string conversion, and cleans up the directory. None becomes an empty field; numeric values become text. This is a verified practice export, not a persistent output report or unknown-spreadsheet sanitizer.</p>
+</section>
+<section id="worksheet" aria-labelledby="worksheet-title"><h2 id="worksheet-title">Evidence worksheet</h2>
+<p>Study label: __________ Date: __________ Python / SQLite / OS: __________</p>
+<p>For every item mark <strong>predicted</strong>, <strong>executed locally</strong>, or <strong>unexecuted</strong>. Use synthetic data only. Distinguish running a supplied query from writing and explaining your own.</p>
+<h3>1. Question, population and grain</h3>
+<p>Write the question with snapshot, opening interval, numerator, denominator and unit. State what one row means in queues, tickets and touches. Why do equal total table counts not establish a one-to-one relationship? What prevents you from calculating resolution time or closures during the reporting period?</p>
+<h3>2. Types and ingestion</h3>
+<p>Identify the quoted comma, a recorded zero, an open ticket with missing work and a closed ticket with missing work. Explain how CSV text becomes typed values. Predict results for missing/extra header columns, duplicate keys, work value NULL, work value -1 and an invalid calendar date. Which validation occurs before database loading, and which occurs during it?</p>
+<h3>3. Cohort boundary</h3>
+<p>Predict T-001, T-007 and T-008 inclusion. Write all seven main IDs in order. Explain the exclusive end and fixed UTC representation. Preserve actual filter output or label the list as a paper prediction.</p>
+<h3>4. Aggregation</h3>
+<p>Calculate row count, observed count, missing count, zero count, observed sum, mean and closed share. Then calculate the different mean obtained by imputing missing work as zero. Why is that an unsupported change to the question? Compare Access’s recorded zero with Training’s absent aggregates.</p>
+<h3>5. Relationship check</h3>
+<p>Count how many joined rows T-001 and T-004 generate. Reconcile totals 225, 75 and 105. Explain why distinct values are not distinct tickets. Show how preaggregating touches restores ticket grain. Why should touch minutes and ticket work not automatically be forced equal?</p>
+<h3>6. Time series</h3>
+<p>Predict daily and running counts for November 1–4. Explain the wider interval, T-007’s inclusion and the zero day. Name a source-collection failure that could make an apparent zero misleading in real data. State why local timezone and daylight-saving work remain outside scope.</p>
+<h3>7. Quality evidence</h3>
+<p>Record foreign-key setting, before/after ticket counts, T-900 absence, violation list and integrity result. Explain why the expected invalid insert is evidence of a working check. Distinguish a statement error, explicit batch rollback and a crash-durability test.</p>
+<h3>8. Reproducible handoff</h3>
+<p>Run the export and record four rows, text round-trip result and temporary cleanup. Describe the NULL-to-empty convention. Write one accurate paragraph about the cohort with observed-value count and missingness. Avoid real-world performance claims from this synthetic sample.</p>
+<h3>Capstone</h3>
+<p>Create a study-copy extension such as a per-queue missing-work rate. Before writing SQL, specify its numerator, denominator, empty-group result, source grain, interval and order. Add one test that exposes a plausible mistake: equal-valued measures, a boundary timestamp, an empty queue or a NULL observation.</p>
+<p>Deliver your query plus a short report containing:</p>
+<ol>
+<li>Question, synthetic provenance, snapshot and population.</li>
+<li>Grain/relationship sketch and type rules.</li>
+<li>Query file, exact command, runtime versions and actual output.</li>
+<li>Row-count and measure reconciliation.</li>
+<li>Missingness, empty-result and join-cardinality checks.</li>
+<li>A supported finding, an unresolved question and no unsupported causal claim.</li>
+<li>What you wrote yourself, what supplied code you ran and what remains unexecuted.</li>
+<li>Explicit statement that Power BI, Power Query, DAX, refresh, publishing and security workflows were not executed and this is not full PL-300 coverage.</li>
+</ol>
+<p>A passing supplied suite is finite implementation evidence, not a learner grade or certification assessment.</p>
+</section>
+<section id="answers" aria-labelledby="answers-title"><h2 id="answers-title">Prediction key</h2>
+<h3>Grain and population</h3>
+<p>Queues: one description per queue. Tickets: one current-state ticket per identifier. Touches: one interaction per identifier. Nine tickets and nine touches do not imply one-to-one matching. Main cohort opens at or after November 1 midnight UTC and before November 3 midnight. Status is from the invented November 5 snapshot. There is no closure timestamp or SLA target.</p>
+<h3>Input and boundary cases</h3>
+<p>T-001’s summary contains one quoted comma. T-003 has recorded zero work. T-002/T-005 have missing work while open; T-009 has missing work despite closed status. Empty work maps to NULL; literal NULL, negative values, malformed dates and duplicate keys are rejected.</p>
+<p>T-001 is included at the start, T-007 excluded at the end and T-008 excluded just before the start. Ordered cohort: T-001, T-002, T-003, T-004, T-005, T-009, T-006. Canonical UTC text is chronologically sortable here; mixed formats/offsets are not supported by that shortcut.</p>
+<h3>Metrics</h3>
+<p>Seven rows, five closed snapshot statuses, four observed work values, three missing and one recorded zero. Observed values 30, 0, 45, 30 sum to 105 and average 26.25. Replacing missing with zero gives 105/7 = 15, which assumes unobserved work was zero and changes the question. Closed share 5/7 ≈ 71.4% is not an in-period closure count.</p>
+<p>Access has three tickets but only one observed value, zero. Repair has three tickets and two observations totaling 60. Setup has one observation of 45. Training has no cohort tickets: zero counts, but NULL sum/mean/rate. No observations differs from an observed zero.</p>
+<h3>Join trap</h3>
+<p>T-001 repeats twice and T-004 three times. The naive left join has ten rows and sums ticket work as 30+30+0+45+45+45+30 = 225 (NULL contributions omitted). Distinct numeric values 30,0,45 sum to 75, dropping a legitimate second 30. Preaggregating touches retains seven ticket rows and correct ticket work 105, with seven touches totaling 55 minutes as a separate measure.</p>
+<p>A left join’s unmatched placeholder row makes COUNT(*) misleading for an empty queue. Count the matched ticket key, and retain date conditions in ON when preserving every queue is intended.</p>
+<h3>Dates and quality</h3>
+<p>Wider daily counts: 3,4,1,0; running totals: 3,7,8,8. T-007 belongs to this wider interval. November 4 is preserved by the known calendar. Real source completeness would need separate evidence before an absent activity record could be labelled zero.</p>
+<p>The invalid queue reference rejects the second batch row. Explicit rollback also removes T-900, restoring nine tickets. Foreign-key checks are clear and integrity_check is ok. A wrong but allowed minute value could still pass every structural rule; those checks do not prove business truth.</p>
+<h3>Export and capstone</h3>
+<p>Export has four rows and round-trips to the documented text values. Training’s count is &quot;0&quot; while absent aggregates are empty. Its owned temporary directory is removed. No persistent report, external database or Power BI asset is created.</p>
+<p>For a per-queue missingness extension, decide whether the denominator is all cohort tickets and how zero-ticket queues appear. Preserve Training with a left join, count only matched ticket IDs, distinguish NULL work from unmatched rows and leave an undefined empty-group rate absent. Write tests before claiming a reliable result.</p>
+<p>A strong final summary states the synthetic population, snapshot, denominator, observed count and gaps. It does not infer causation, resolution speed, real staff performance or PL-300 readiness.</p>
+</section>
+<section id="coverage" aria-labelledby="coverage-title"><h2 id="coverage-title">Coverage and limits</h2>
+<h3>Included and actually executed</h3>
+<p>Eight lessons cover question/metric contracts, grain, typed CSV ingestion, fixed UTC filters, ordering, NULL-aware aggregates, ratios, dimensions/relationships, left joins, fan-out, preaggregation, calendar completeness, a cumulative window function, constraints, explicit transactions and reproducible export.</p>
+<p>Eight fixed commands execute real local SQLite operations on synthetic fixtures. The quality command performs and verifies a transaction rollback. The export command writes/reads a temporary CSV and verifies cleanup. This is not simulated SQL. It remains bounded local practice, not production workload evidence.</p>
+<p>The pack includes 24 original explained checks, complete SQL files, a data dictionary, worksheet/capstone, answer key and script-free offline guide. Eleven official SQLite, Python and Microsoft sources were opened on 2026-11-07. Examples and tests are original rather than copied exam material.</p>
+<h3>What the dataset cannot answer</h3>
+<p>There is no closure timestamp, historical status sequence, SLA target, real collection process or representative business sample. The main measure concerns closed snapshot statuses among tickets opened in a specified interval. It cannot establish closures during that interval, resolution time, causation, statistical significance or real team performance. Work-minute and touch-minute measures are deliberately separate.</p>
+<h3>Not full PL-300 coverage</h3>
+<p>The official study guide includes Power BI-specific preparation, modeling, visualization/analysis, management and security, with Power Query and DAX skills. This pack provides transferable data/SQL foundations only. It has no objective-by-objective completeness claim, readiness score, official assessment or certification status.</p>
+<p><strong>Unexecuted:</strong> Power BI Desktop/service, Power Query transformations, DAX/filter context, semantic-model implementation, DirectQuery/Import/DirectLake behavior, report/dashboard creation, refresh/gateway setup, publishing, workspace sharing, row-level security and administration. No account, license, permission or external connection was configured.</p>
+<p>Other gaps include production ingestion, large-data optimization, indexing/query plans, concurrent writers, crash durability, warehouse history, deeper dimensional modeling, statistics and comprehensive visualization/accessibility practice.</p>
+<h3>Verification boundaries</h3>
+<p>Tested on Python 3.12.14 with SQLite 3.53.1/Linux. Python 3.10+ and SQLite 3.37+ are design requirements; other combinations are not verified. The SQL dialect is SQLite, not a promise of portability to SQL Server, PostgreSQL or DAX. STRICT tables still allow applicable conversions; Python source validation remains separate.</p>
+<p>Isolated DOM checks verify content compatibility and static guide structure, not real-browser rendering or screen-reader behavior. Current Athena shows one primary check per lesson; 16 supplemental checks and worked SQL snippets need explicit UI support. A distinct path route also needs integration. Nothing is claimed published.</p>
+</section>
+</main><footer><p>Original instructional material · 2026-11-07. No external fonts, scripts, analytics or network dependencies.</p><p><a href="#top">Back to contents</a></p></footer></body></html>

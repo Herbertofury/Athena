@@ -1,0 +1,24 @@
+[
+  {
+    "id": "SRCSET01",
+    "title": "WHATWG HTML image-candidate parsing",
+    "url": "https://html.spec.whatwg.org/multipage/images.html#parse-a-srcset-attribute",
+    "observed_version": "Living Standard, page reports last updated 2026-11-06; section 4.8.4.3.10",
+    "topic": "srcset-recovery",
+    "note": "Primary parsing algorithm recovers around whitespace/comma separators. Atlas retains only a bounded URL projection, not descriptor validation, URL-token comma handling or browser source selection.",
+    "checked_at": "2026-11-07",
+    "review_after_days": 90,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "SRCSETWP01",
+    "title": "RRe36 public WordPress post 7402 replay input",
+    "url": "https://rre36.com/wp-json/wp/v2/posts/7402",
+    "observed_version": "HTTP 200 response observed 2026-11-07; post published 2026-09-16T12:04:15 GMT and modified 2026-09-16T12:11:00 GMT",
+    "topic": "srcset-recovery",
+    "note": "One public JSON response, 15465 bytes, contains one body srcset attribute with six candidates and no observed empty candidate. Raw body remains an external local input; published receipts retain hashes/counts only. Separator mutations are synthetic, not live-source defects.",
+    "checked_at": "2026-11-07",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  }
+]

@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "reviewed_at": "2026-11-16",
+  "scope": "Actionable URL corrections identified during final publication audit",
+  "corrections": [
+    {
+      "app_id": "digilent-waveforms",
+      "source_file": "data/software/systems-wave2-expanded.json",
+      "old_url": "https://lp.digilent.com/complete-waveforms-download/",
+      "new_url": "https://digilent.com/reference/software/waveforms/waveforms-3/previous-versions",
+      "fields": [
+        "download_url",
+        "sources",
+        "maintenance"
+      ],
+      "reason": "The old vendor landing page returned HTTP 404. The official reference index explicitly lists the current version and Windows/macOS/Linux packages, despite its previous-versions path.",
+      "claim_boundary": "The dated March 2026 distribution is documented; ongoing maintenance remains unverified. No installer was downloaded or executed.",
+      "observations": [
+        {
+          "url": "https://lp.digilent.com/complete-waveforms-download/",
+          "checked_at": "2026-11-16T19:54:20.476839+00:00",
+          "status": 404,
+          "outcome": "not_found",
+          "final_url": "https://lp.digilent.com/complete-waveforms-download/",
+          "method": "GET",
+          "elapsed_ms": 8843
+        },
+        {
+          "url": "https://digilent.com/reference/software/waveforms/waveforms-3/previous-versions",
+          "checked_at": "2026-11-16T19:54:29.319812+00:00",
+          "status": 200,
+          "outcome": "reachable",
+          "final_url": "https://digilent.com/reference/software/waveforms/waveforms-3/previous-versions",
+          "method": "HEAD",
+          "content_type": "text/html; charset=utf-8",
+          "elapsed_ms": 4298
+        }
+      ]
+    }
+  ]
+}

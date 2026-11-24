@@ -1,0 +1,36 @@
+{
+  "tested_commit": "1482382fa5c6f6eb33276503b956992c6a069629",
+  "ci_run": "https://github.com/Herbertofury/Athena/actions/runs/42358027074",
+  "artifact_id": 13568064911,
+  "artifact_sha256": "415b17cce7364cd8bc8a2333bbc5a56a14535edd6c3be52206891ca278c96351",
+  "review": {
+    "actual_browser": "Chromium 151.0.7922.34",
+    "checks_passed": 8,
+    "visual_review": [
+      "Research dark",
+      "Research light",
+      "Media dark",
+      "Media light",
+      "Research mobile",
+      "Media mobile",
+      "Home mobile"
+    ],
+    "limited_contrast_scope": "Sampled opaque text/background and gradient endpoint colors, not a full accessibility audit."
+  },
+  "pages": {
+    "run": "https://github.com/Herbertofury/Athena/actions/runs/42358027089",
+    "job_id": 128360278183,
+    "test": "passed",
+    "package": "passed",
+    "configure_pages": "failed",
+    "error": "Get Pages site failed / Not Found",
+    "enablement": false
+  },
+  "private_foundry": "Excluded; publication approval and integration remain pending",
+  "limitations": [
+    "No real provider playback or authenticated API tests",
+    "No native Rust/backend/game parity claim",
+    "No exhaustive certification coverage claim",
+    "No runtime speedup claim"
+  ]
+}

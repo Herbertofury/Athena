@@ -1,0 +1,435 @@
+{
+  "harness": "atlas-complete-receiver-v7-phase-timeline",
+  "started_at": "2026-10-28T10:00:36.699Z",
+  "scope": "Generated browser receiver validation; no target acceptance",
+  "count": 200,
+  "bytes": 65536,
+  "execution": "receipt",
+  "complete": true,
+  "samples": [
+    {
+      "round": 0,
+      "lane": "clone",
+      "request_ms": 316.60000002384186,
+      "validation_ms": 75.5,
+      "transport_encoding_ms": null,
+      "reused_verified_encoding": false,
+      "phase_timeline": {
+        "valid": true,
+        "scope": "Communicating-context monotonic timeline; privacy precision and scheduling apply, not pure CPU/network attribution",
+        "raw": {
+          "request_start": 1793181637081.8,
+          "worker_module_ready": 1793181637246.8,
+          "worker_received": 1793181637247.2,
+          "validation_start": 1793181637271.4001,
+          "validation_end": 1793181637346.9001,
+          "send_start": 1793181637347,
+          "main_received": 1793181637396.8,
+          "main_finished": 1793181637396.8
+        },
+        "phases": {
+          "startup_to_module_ready_ms": 165,
+          "module_ready_to_receive_ms": 0.39990234375,
+          "worker_before_validation_ms": 24.2001953125,
+          "validation_ms": 75.5,
+          "worker_after_validation_ms": 0.099853515625,
+          "response_delivery_ms": 49.800048828125,
+          "main_decode_and_binding_ms": 0
+        },
+        "total_ms": 315
+      },
+      "frame_waits_ms": [
+        20.600000023841858,
+        0.699999988079071,
+        16.599999964237213,
+        16.900000035762787,
+        15.899999976158142,
+        17,
+        21.600000023841858,
+        12.099999964237213,
+        16.900000035762787,
+        20.5,
+        12.5,
+        18.899999976158142,
+        13.800000011920929,
+        16.80000001192093,
+        16.69999998807907,
+        16.80000001192093,
+        16.69999998807907,
+        45.69999998807907
+      ],
+      "complete_parity": true,
+      "post_sample_calibration": {
+        "scope": "empty-frame scheduling check; not physical paint",
+        "waits_ms": [
+          3.800000011920929,
+          7.100000023841858,
+          15.699999988079071,
+          16.599999964237213,
+          17,
+          16.30000001192093,
+          16.600000023841858,
+          17
+        ],
+        "complete": true,
+        "reliable": true,
+        "slow_count": 0,
+        "threshold_ms": 200,
+        "reason": null
+      }
+    },
+    {
+      "round": 0,
+      "lane": "receipt",
+      "request_ms": 116.10000002384186,
+      "validation_ms": 56.80000001192093,
+      "transport_encoding_ms": null,
+      "reused_verified_encoding": false,
+      "phase_timeline": {
+        "valid": true,
+        "scope": "Communicating-context monotonic timeline; privacy precision and scheduling apply, not pure CPU/network attribution",
+        "raw": {
+          "request_start": 1793181637552.9,
+          "worker_module_ready": 1793181637600.4,
+          "worker_received": 1793181637600.8,
+          "validation_start": 1793181637611.5,
+          "validation_end": 1793181637668.3,
+          "send_start": 1793181637668.5,
+          "main_received": 1793181637668.6,
+          "main_finished": 1793181637668.9
+        },
+        "phases": {
+          "startup_to_module_ready_ms": 47.5,
+          "module_ready_to_receive_ms": 0.400146484375,
+          "worker_before_validation_ms": 10.699951171875,
+          "validation_ms": 56.800048828125,
+          "worker_after_validation_ms": 0.199951171875,
+          "response_delivery_ms": 0.10009765625,
+          "main_decode_and_binding_ms": 0.2998046875
+        },
+        "total_ms": 116
+      },
+      "frame_waits_ms": [
+        26.799999952316284,
+        5.600000023841858,
+        16.899999976158142,
+        16.5,
+        16.700000047683716,
+        16.5,
+        17.399999976158142
+      ],
+      "complete_parity": true,
+      "post_sample_calibration": {
+        "scope": "empty-frame scheduling check; not physical paint",
+        "waits_ms": [
+          1.300000011920929,
+          2.599999964237213,
+          16.80000001192093,
+          16.80000001192093,
+          18.30000001192093,
+          15.199999988079071,
+          17.099999964237213,
+          16.80000001192093
+        ],
+        "complete": true,
+        "reliable": true,
+        "slow_count": 0,
+        "threshold_ms": 200,
+        "reason": null
+      }
+    },
+    {
+      "round": 1,
+      "lane": "receipt",
+      "request_ms": 153.60000002384186,
+      "validation_ms": 76.80000001192093,
+      "transport_encoding_ms": null,
+      "reused_verified_encoding": false,
+      "phase_timeline": {
+        "valid": true,
+        "scope": "Communicating-context monotonic timeline; privacy precision and scheduling apply, not pure CPU/network attribution",
+        "raw": {
+          "request_start": 1793181637819.7,
+          "worker_module_ready": 1793181637883.1,
+          "worker_received": 1793181637884,
+          "validation_start": 1793181637895.9,
+          "validation_end": 1793181637972.7,
+          "send_start": 1793181637972.8,
+          "main_received": 1793181637973.1,
+          "main_finished": 1793181637973.2
+        },
+        "phases": {
+          "startup_to_module_ready_ms": 63.400146484375,
+          "module_ready_to_receive_ms": 0.89990234375,
+          "worker_before_validation_ms": 11.89990234375,
+          "validation_ms": 76.800048828125,
+          "worker_after_validation_ms": 0.10009765625,
+          "response_delivery_ms": 0.300048828125,
+          "main_decode_and_binding_ms": 0.099853515625
+        },
+        "total_ms": 153.5
+      },
+      "frame_waits_ms": [
+        31.400000035762787,
+        4.5,
+        13,
+        16.69999998807907,
+        16.600000023841858,
+        16.69999998807907,
+        16.69999998807907,
+        17.100000023841858,
+        16.69999998807907,
+        16.599999964237213
+      ],
+      "complete_parity": true,
+      "post_sample_calibration": {
+        "scope": "empty-frame scheduling check; not physical paint",
+        "waits_ms": [
+          0.699999988079071,
+          5,
+          17.5,
+          16,
+          16.5,
+          16.599999964237213,
+          16.900000035762787,
+          17.099999964237213
+        ],
+        "complete": true,
+        "reliable": true,
+        "slow_count": 0,
+        "threshold_ms": 200,
+        "reason": null
+      }
+    },
+    {
+      "round": 1,
+      "lane": "clone",
+      "request_ms": 167,
+      "validation_ms": 52,
+      "transport_encoding_ms": null,
+      "reused_verified_encoding": false,
+      "phase_timeline": {
+        "valid": true,
+        "scope": "Communicating-context monotonic timeline; privacy precision and scheduling apply, not pure CPU/network attribution",
+        "raw": {
+          "request_start": 1793181638136.3,
+          "worker_module_ready": 1793181638218.2,
+          "worker_received": 1793181638218.8,
+          "validation_start": 1793181638230.3,
+          "validation_end": 1793181638282.3,
+          "send_start": 1793181638282.3,
+          "main_received": 1793181638303.2,
+          "main_finished": 1793181638303.2
+        },
+        "phases": {
+          "startup_to_module_ready_ms": 81.89990234375,
+          "module_ready_to_receive_ms": 0.60009765625,
+          "worker_before_validation_ms": 11.5,
+          "validation_ms": 52,
+          "worker_after_validation_ms": 0,
+          "response_delivery_ms": 20.89990234375,
+          "main_decode_and_binding_ms": 0
+        },
+        "total_ms": 166.89990234375
+      },
+      "frame_waits_ms": [
+        46.799999952316284,
+        2.300000011920929,
+        17.5,
+        15.900000035762787,
+        16.299999952316284,
+        16.80000001192093,
+        16.900000035762787,
+        16.5,
+        18.099999964237213
+      ],
+      "complete_parity": true,
+      "post_sample_calibration": {
+        "scope": "empty-frame scheduling check; not physical paint",
+        "waits_ms": [
+          1.100000023841858,
+          14.699999988079071,
+          16.600000023841858,
+          16.69999998807907,
+          16.80000001192093,
+          16.69999998807907,
+          17,
+          16.899999976158142
+        ],
+        "complete": true,
+        "reliable": true,
+        "slow_count": 0,
+        "threshold_ms": 200,
+        "reason": null
+      }
+    },
+    {
+      "round": 2,
+      "lane": "clone",
+      "request_ms": 178.60000002384186,
+      "validation_ms": 74.90000003576279,
+      "transport_encoding_ms": null,
+      "reused_verified_encoding": false,
+      "phase_timeline": {
+        "valid": true,
+        "scope": "Communicating-context monotonic timeline; privacy precision and scheduling apply, not pure CPU/network attribution",
+        "raw": {
+          "request_start": 1793181638452.9,
+          "worker_module_ready": 1793181638493.7998,
+          "worker_received": 1793181638494.4,
+          "validation_start": 1793181638512.2,
+          "validation_end": 1793181638587.0999,
+          "send_start": 1793181638587.2,
+          "main_received": 1793181638631.1,
+          "main_finished": 1793181638631.1
+        },
+        "phases": {
+          "startup_to_module_ready_ms": 40.89990234375,
+          "module_ready_to_receive_ms": 0.60009765625,
+          "worker_before_validation_ms": 17.800048828125,
+          "validation_ms": 74.89990234375,
+          "worker_after_validation_ms": 0.10009765625,
+          "response_delivery_ms": 43.900146484375,
+          "main_decode_and_binding_ms": 0
+        },
+        "total_ms": 178.2001953125
+      },
+      "frame_waits_ms": [
+        22.30000001192093,
+        10.100000023841858,
+        16.399999976158142,
+        17.5,
+        17.600000023841858,
+        15.899999976158142,
+        16.80000001192093,
+        15.5,
+        22.80000001192093,
+        23.899999976158142
+      ],
+      "complete_parity": true,
+      "post_sample_calibration": {
+        "scope": "empty-frame scheduling check; not physical paint",
+        "waits_ms": [
+          1.0999999642372131,
+          3.600000023841858,
+          16.5,
+          17.69999998807907,
+          16,
+          17.19999998807907,
+          16.700000047683716,
+          15.899999976158142
+        ],
+        "complete": true,
+        "reliable": true,
+        "slow_count": 0,
+        "threshold_ms": 200,
+        "reason": null
+      }
+    },
+    {
+      "round": 2,
+      "lane": "receipt",
+      "request_ms": 165.30000001192093,
+      "validation_ms": 66,
+      "transport_encoding_ms": null,
+      "reused_verified_encoding": false,
+      "phase_timeline": {
+        "valid": true,
+        "scope": "Communicating-context monotonic timeline; privacy precision and scheduling apply, not pure CPU/network attribution",
+        "raw": {
+          "request_start": 1793181638768.4,
+          "worker_module_ready": 1793181638849.9,
+          "worker_received": 1793181638850.6,
+          "validation_start": 1793181638867.5,
+          "validation_end": 1793181638933.4,
+          "send_start": 1793181638933.5,
+          "main_received": 1793181638933.7,
+          "main_finished": 1793181638933.7
+        },
+        "phases": {
+          "startup_to_module_ready_ms": 81.5,
+          "module_ready_to_receive_ms": 0.7001953125,
+          "worker_before_validation_ms": 16.89990234375,
+          "validation_ms": 65.89990234375,
+          "worker_after_validation_ms": 0.10009765625,
+          "response_delivery_ms": 0.199951171875,
+          "main_decode_and_binding_ms": 0
+        },
+        "total_ms": 165.300048828125
+      },
+      "frame_waits_ms": [
+        49.80000001192093,
+        1.600000023841858,
+        15.5,
+        16.5,
+        16.899999976158142,
+        16,
+        16.600000023841858,
+        16.899999976158142,
+        17.19999998807907
+      ],
+      "complete_parity": true,
+      "post_sample_calibration": {
+        "scope": "empty-frame scheduling check; not physical paint",
+        "waits_ms": [
+          1.5,
+          5.5,
+          16.69999998807907,
+          16.69999998807907,
+          16.69999998807907,
+          18.600000023841858,
+          14.800000011920929,
+          16.599999964237213
+        ],
+        "complete": true,
+        "reliable": true,
+        "slow_count": 0,
+        "threshold_ms": 200,
+        "reason": null
+      }
+    }
+  ],
+  "limitations": [
+    "Frame gaps are scheduling observations, not INP or physical paint",
+    "No heap/RSS or provider-media measurement",
+    "Worker request duration includes startup and full input clone; clone mode also clones the full result, transfer mode includes complete output encoding, transfer and decoding",
+    "Receipt mode is validation-only: original complete input stays owned by the main thread; no transformed/new records are produced",
+    "Preparation and post-validation parity check are outside sample timers",
+    "Main-thread synchronous serialization cannot be interrupted mid-call; cancellation is checked at the next boundary"
+  ],
+  "calibration": {
+    "scope": "empty-frame scheduling check; not physical paint",
+    "waits_ms": [
+      2.199999988079071,
+      15.699999988079071,
+      17.19999998807907,
+      16.900000035762787,
+      16.5,
+      16.80000001192093,
+      16,
+      17.5
+    ],
+    "complete": true,
+    "reliable": true,
+    "slow_count": 0,
+    "threshold_ms": 200,
+    "reason": null
+  },
+  "dataset": {
+    "count": 200,
+    "metadata_bytes_per_record": 65536,
+    "serialized_bytes": 13136801,
+    "sha256": "b5d35c377c1fccebd3a402772d80402d35114f776ddb9a68166c029497f90230",
+    "generation_ms": 49.10000002384186,
+    "serialization_ms": 54.69999998807907,
+    "encoding_ms": 100.5,
+    "digest_ms": 26.19999998807907,
+    "hash_ms": 181.39999997615814
+  },
+  "focus_state": {
+    "started_focused": true,
+    "focus_lost": false,
+    "focused_now": true
+  },
+  "finished_at": "2026-10-28T10:00:39.101Z"
+}

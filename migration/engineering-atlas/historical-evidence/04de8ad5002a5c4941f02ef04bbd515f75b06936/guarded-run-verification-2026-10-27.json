@@ -1,0 +1,23 @@
+{
+  "checked_at": "2026-10-27T11:34:26.487097+00:00",
+  "scope": "Actual pinned official cargo-audit invocation plus separate rejected dirty-worktree preflight",
+  "runner_sha256": "f0c721d260175ba64bb6429b2f25fe4cf2aa316d0b97c3ca1f0fa816f14726e6",
+  "dirty_worktree_rejected": true,
+  "dirty_worktree_output_created": false,
+  "dirty_worktree_reason": "Database worktree is not clean",
+  "clean_run_completed": true,
+  "known_match_counts": [
+    0,
+    0,
+    0
+  ],
+  "frozen_inputs_match_receipt": true,
+  "fixture_tests": 7,
+  "limitations": [
+    "Expected database currentness is caller-verified, not discovered by this CLI",
+    "No-fetch prevents advisory fetch; default tool registry checks are not disabled",
+    "Output size is checked after execution, not an operating-system memory/disk sandbox",
+    "This is a trusted analyst CLI, not a remote arbitrary-command endpoint",
+    "Raw stderr can include local paths and must be reviewed before sharing"
+  ]
+}

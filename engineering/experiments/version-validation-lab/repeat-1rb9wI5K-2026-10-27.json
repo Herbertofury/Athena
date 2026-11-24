@@ -1,0 +1,182 @@
+{
+  "canonical_id": "1rb9wI5K",
+  "complete": true,
+  "input_bytes": 1600,
+  "limitations": [
+    "Full-byte comparison included in both timers",
+    "No network or UI acceptance; optional persistence receipt is separate from parser timings",
+    "Candidate still isolated from application collector"
+  ],
+  "persistence": null,
+  "scope": "actual Atlas version-parser component on a retained public response; not promoted",
+  "trials": [
+    {
+      "baseline_100_ns": 759085,
+      "candidate_100_ns": 546160,
+      "full_payload_and_binding_equal": true,
+      "round": 0,
+      "warmup": true
+    },
+    {
+      "baseline_100_ns": 936572,
+      "candidate_100_ns": 413222,
+      "full_payload_and_binding_equal": true,
+      "round": 1,
+      "warmup": true
+    },
+    {
+      "baseline_100_ns": 749833,
+      "candidate_100_ns": 395746,
+      "full_payload_and_binding_equal": true,
+      "round": 2,
+      "warmup": true
+    },
+    {
+      "baseline_100_ns": 695167,
+      "candidate_100_ns": 448804,
+      "full_payload_and_binding_equal": true,
+      "round": 3,
+      "warmup": true
+    },
+    {
+      "baseline_100_ns": 1315696,
+      "candidate_100_ns": 547309,
+      "full_payload_and_binding_equal": true,
+      "round": 4,
+      "warmup": false
+    },
+    {
+      "baseline_100_ns": 696892,
+      "candidate_100_ns": 413739,
+      "full_payload_and_binding_equal": true,
+      "round": 5,
+      "warmup": false
+    },
+    {
+      "baseline_100_ns": 684990,
+      "candidate_100_ns": 452055,
+      "full_payload_and_binding_equal": true,
+      "round": 6,
+      "warmup": false
+    },
+    {
+      "baseline_100_ns": 672945,
+      "candidate_100_ns": 413229,
+      "full_payload_and_binding_equal": true,
+      "round": 7,
+      "warmup": false
+    },
+    {
+      "baseline_100_ns": 756783,
+      "candidate_100_ns": 742399,
+      "full_payload_and_binding_equal": true,
+      "round": 8,
+      "warmup": false
+    },
+    {
+      "baseline_100_ns": 729310,
+      "candidate_100_ns": 381922,
+      "full_payload_and_binding_equal": true,
+      "round": 9,
+      "warmup": false
+    },
+    {
+      "baseline_100_ns": 698455,
+      "candidate_100_ns": 401717,
+      "full_payload_and_binding_equal": true,
+      "round": 10,
+      "warmup": false
+    },
+    {
+      "baseline_100_ns": 860361,
+      "candidate_100_ns": 391069,
+      "full_payload_and_binding_equal": true,
+      "round": 11,
+      "warmup": false
+    },
+    {
+      "baseline_100_ns": 690519,
+      "candidate_100_ns": 387836,
+      "full_payload_and_binding_equal": true,
+      "round": 12,
+      "warmup": false
+    },
+    {
+      "baseline_100_ns": 750923,
+      "candidate_100_ns": 901409,
+      "full_payload_and_binding_equal": true,
+      "round": 13,
+      "warmup": false
+    },
+    {
+      "baseline_100_ns": 705952,
+      "candidate_100_ns": 437180,
+      "full_payload_and_binding_equal": true,
+      "round": 14,
+      "warmup": false
+    },
+    {
+      "baseline_100_ns": 714710,
+      "candidate_100_ns": 653594,
+      "full_payload_and_binding_equal": true,
+      "round": 15,
+      "warmup": false
+    },
+    {
+      "baseline_100_ns": 702653,
+      "candidate_100_ns": 577133,
+      "full_payload_and_binding_equal": true,
+      "round": 16,
+      "warmup": false
+    },
+    {
+      "baseline_100_ns": 724575,
+      "candidate_100_ns": 387755,
+      "full_payload_and_binding_equal": true,
+      "round": 17,
+      "warmup": false
+    },
+    {
+      "baseline_100_ns": 719572,
+      "candidate_100_ns": 411911,
+      "full_payload_and_binding_equal": true,
+      "round": 18,
+      "warmup": false
+    },
+    {
+      "baseline_100_ns": 691373,
+      "candidate_100_ns": 600628,
+      "full_payload_and_binding_equal": true,
+      "round": 19,
+      "warmup": false
+    },
+    {
+      "baseline_100_ns": 739546,
+      "candidate_100_ns": 393056,
+      "full_payload_and_binding_equal": true,
+      "round": 20,
+      "warmup": false
+    },
+    {
+      "baseline_100_ns": 725854,
+      "candidate_100_ns": 417871,
+      "full_payload_and_binding_equal": true,
+      "round": 21,
+      "warmup": false
+    },
+    {
+      "baseline_100_ns": 672670,
+      "candidate_100_ns": 408831,
+      "full_payload_and_binding_equal": true,
+      "round": 22,
+      "warmup": false
+    },
+    {
+      "baseline_100_ns": 792425,
+      "candidate_100_ns": 386908,
+      "full_payload_and_binding_equal": true,
+      "round": 23,
+      "warmup": false
+    }
+  ]
+}

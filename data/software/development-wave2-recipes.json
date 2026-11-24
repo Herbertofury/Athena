@@ -1,0 +1,1065 @@
+{
+  "recipes": [
+    {
+      "id": "plan-a-project-on-your-desktop",
+      "title": "Plan a project on your desktop",
+      "description": "Choose by scheduling depth, file interchange and whether a text-based model is useful. These local planners do not imply the collaboration features of their separate cloud products.",
+      "picks": [
+        {
+          "app_id": "ganttproject",
+          "label": "Local Gantt planning",
+          "reason": "Task dependencies, baselines and resource-load views cover everyday individual scheduling.",
+          "tradeoff": "Shared editing requires a separate collaboration arrangement."
+        },
+        {
+          "app_id": "projectlibre",
+          "label": "Critical path and cost controls",
+          "reason": "Desktop combines critical-path analysis, work breakdown, baselines and earned-value views.",
+          "tradeoff": "Validate imported Microsoft Project files; portfolio features belong to a separate cloud product."
+        },
+        {
+          "app_id": "taskjuggler",
+          "label": "Constraint-driven text models",
+          "reason": "Declarative schedules can account for resource constraints and be regenerated from versioned source.",
+          "tradeoff": "Learning the scheduling language takes more effort than dragging a bar on a chart."
+        }
+      ]
+    },
+    {
+      "id": "schedule-shared-project-resources",
+      "title": "Schedule people across projects",
+      "description": "Distinguish calculated capacity-aware scheduling from a shared timeline. Start with the real constraints and test a representative plan.",
+      "picks": [
+        {
+          "app_id": "projeqtor",
+          "label": "Shared resource planning",
+          "reason": "Portfolio planning and capacity allocation are central to its documented project controls.",
+          "tradeoff": "A configured server and an agreed project process are necessary."
+        },
+        {
+          "app_id": "taskjuggler",
+          "label": "Reproducible capacity model",
+          "reason": "Resource constraints and scheduling rules can be expressed as reviewable text.",
+          "tradeoff": "Technical modeling is required and collaborative editing is external."
+        },
+        {
+          "app_id": "openproject",
+          "label": "Shared work-package plans",
+          "reason": "Dependencies, work packages and project discussions live in one team service.",
+          "tradeoff": "Do not assume every enterprise scheduling or portfolio feature is in Community."
+        }
+      ]
+    },
+    {
+      "id": "run-a-self-hosted-product-backlog",
+      "title": "Run a self-hosted product backlog",
+      "description": "Pick the workflow first: Scrum ceremonies, cycles and product documents, or configurable issue states.",
+      "picks": [
+        {
+          "app_id": "taiga",
+          "label": "Scrum and Kanban teams",
+          "reason": "Backlogs, sprints, stories and burndown views follow familiar agile planning workflows.",
+          "tradeoff": "Several services must be deployed and maintained."
+        },
+        {
+          "app_id": "plane",
+          "label": "Cycles and product context",
+          "reason": "Cycles, modules and pages connect planned work with product documentation.",
+          "tradeoff": "Edition limits and operational requirements need review."
+        },
+        {
+          "app_id": "redmine",
+          "label": "Configurable issue workflows",
+          "reason": "Custom fields, role controls, wikis and repository integrations suit structured project tracking.",
+          "tradeoff": "Ruby deployment and plugin compatibility require technical ownership."
+        }
+      ]
+    },
+    {
+      "id": "host-your-own-kanban-boards",
+      "title": "Host your own Kanban boards",
+      "description": "Compare board scope and licensing before committing a team or inviting external clients.",
+      "picks": [
+        {
+          "app_id": "kanboard",
+          "label": "Focused WIP workflow",
+          "reason": "A compact board with work-in-progress limits and event actions suits a deliberate small workflow.",
+          "tradeoff": "The project is explicitly in maintenance mode."
+        },
+        {
+          "app_id": "wekan",
+          "label": "Imports and broad board features",
+          "reason": "Swimlanes, custom fields, rules and imports support richer board organization.",
+          "tradeoff": "Its larger feature and deployment surface needs administration."
+        },
+        {
+          "app_id": "planka",
+          "label": "Real-time internal collaboration",
+          "reason": "Cards, comments and attachments provide a direct shared board experience.",
+          "tradeoff": "Community terms restrict some external commercial and hosted uses; check the exact license."
+        }
+      ]
+    },
+    {
+      "id": "track-personal-tasks-and-time-locally",
+      "title": "Track personal tasks and time locally",
+      "description": "These tools cover different parts of a personal workflow; select a visual task tree, a terminal task list, or interval tracking.",
+      "picks": [
+        {
+          "app_id": "task-coach",
+          "label": "Desktop task trees",
+          "reason": "Nested tasks and effort records keep detailed personal work in a local GUI.",
+          "tradeoff": "Use current package instructions because older website release text is stale."
+        },
+        {
+          "app_id": "taskwarrior",
+          "label": "Automated terminal tasks",
+          "reason": "Filters, reports and hooks integrate task lists with shell workflows.",
+          "tradeoff": "Command syntax replaces a visual planning interface."
+        },
+        {
+          "app_id": "timewarrior",
+          "label": "Tagged time intervals",
+          "reason": "CLI timers, backfill and reports complement a Taskwarrior workflow.",
+          "tradeoff": "Team approvals and invoicing are separate concerns."
+        },
+        {
+          "app_id": "timetagger",
+          "label": "Visual time timeline",
+          "reason": "Editable intervals, tags and PDF/CSV reports suit a personal or freelance timesheet.",
+          "tradeoff": "Running the local web service still takes setup."
+        }
+      ]
+    },
+    {
+      "id": "choose-a-self-hosted-business-system",
+      "title": "Choose a self-hosted business system",
+      "description": "Define accounting localization, stock processes and implementation capacity before selecting a general ERP. The guide compares documented scope rather than certifying regulatory compliance.",
+      "picks": [
+        {
+          "app_id": "erpnext",
+          "label": "Integrated business operations",
+          "reason": "Accounting, purchasing, inventory and manufacturing are available in one Frappe-based suite.",
+          "tradeoff": "Implementation and localization are substantial work."
+        },
+        {
+          "app_id": "dolibarr",
+          "label": "Modular small-business workflows",
+          "reason": "ERP and CRM modules can be introduced around the processes a smaller organization needs.",
+          "tradeoff": "Specialized modules and hosted services may have separate costs."
+        },
+        {
+          "app_id": "tryton",
+          "label": "Modular ERP with desktop client",
+          "reason": "A native client and browser access share modular accounting, stock and manufacturing services.",
+          "tradeoff": "The desktop client still requires an administered Tryton server."
+        },
+        {
+          "app_id": "odoo-community",
+          "label": "Community application ecosystem",
+          "reason": "The LGPL Community edition provides a base for integrated business applications.",
+          "tradeoff": "Enterprise-only modules and capabilities must be checked separately."
+        },
+        {
+          "app_id": "apache-ofbiz",
+          "label": "Custom business foundations",
+          "reason": "A Java business framework supports teams developing their own operational applications.",
+          "tradeoff": "This is an implementation project, not a turnkey accounting download."
+        }
+      ]
+    },
+    {
+      "id": "manage-parts-assets-or-expiring-stock",
+      "title": "Manage parts, assets or expiring stock",
+      "description": "Inventory software is specialized: components, assigned IT equipment and warehouse lots represent different records and transactions.",
+      "picks": [
+        {
+          "app_id": "inventree",
+          "label": "Components and assemblies",
+          "reason": "Parts, BOMs, suppliers and build stock connect component availability to assembly work.",
+          "tradeoff": "Financial accounting and retail checkout are separate systems."
+        },
+        {
+          "app_id": "part-db",
+          "label": "Electronics bench inventory",
+          "reason": "Datasheets, component parameters, labels and KiCad integration suit electronic parts.",
+          "tradeoff": "External suppliers or AI services may have their own access and pricing terms."
+        },
+        {
+          "app_id": "snipe-it",
+          "label": "Assigned IT equipment",
+          "reason": "Check-in/check-out records show who holds equipment, licenses and accessories.",
+          "tradeoff": "It is an asset register rather than a warehouse fulfillment system."
+        },
+        {
+          "app_id": "openboxes",
+          "label": "Lots and warehouse movements",
+          "reason": "Facilities, shipments, lot identifiers and expiry dates fit distribution workflows.",
+          "tradeoff": "Deployment and warehouse process training are required."
+        }
+      ]
+    },
+    {
+      "id": "choose-a-self-hosted-crm",
+      "title": "Choose a self-hosted CRM",
+      "description": "Compare configurable business records, prebuilt sales/service processes and developer-defined applications.",
+      "picks": [
+        {
+          "app_id": "suitecrm",
+          "label": "Sales and service processes",
+          "reason": "Contacts, opportunities, quotations and service records support an established CRM workflow.",
+          "tradeoff": "Review the current 8.x compatibility and migration documentation."
+        },
+        {
+          "app_id": "espocrm",
+          "label": "Custom entities and fields",
+          "reason": "A configurable data model and REST interface adapt customer records to a particular business.",
+          "tradeoff": "Advanced extensions and cloud hosting can add fees."
+        },
+        {
+          "app_id": "twenty",
+          "label": "CRM applications as code",
+          "reason": "Custom objects, workflows, SDK and CLI tooling fit a developer-owned CRM implementation.",
+          "tradeoff": "Enterprise files have commercial terms and customization needs technical ownership."
+        }
+      ]
+    },
+    {
+      "id": "issue-invoices-from-your-own-server",
+      "title": "Issue invoices from your own server",
+      "description": "Check the actual billing workflow, branding restrictions and local e-invoice obligations before moving customer data.",
+      "picks": [
+        {
+          "app_id": "invoiceplane",
+          "label": "Focused quotes and invoices",
+          "reason": "Customer records, templates, quotes and payment tracking cover a compact billing workflow.",
+          "tradeoff": "Advanced automation and full accounting are outside its main scope."
+        },
+        {
+          "app_id": "solidinvoice",
+          "label": "Recurring billing under MIT",
+          "reason": "Recurring invoices, contacts and payment links are available through a self-hosted application.",
+          "tradeoff": "Payment gateways and operational support have separate costs."
+        },
+        {
+          "app_id": "invoice-ninja",
+          "label": "Broader billing and client portal",
+          "reason": "Recurring invoices, expenses, payment gateways and desktop clients connect to a billing server.",
+          "tradeoff": "Elastic License restrictions and paid branding removal need review."
+        }
+      ]
+    },
+    {
+      "id": "keep-small-business-books-under-your-control",
+      "title": "Keep small-business books under your control",
+      "description": "Choose between an offline single-user program, a shared browser application and a larger ERP. Verify accounting localization against the business’s requirements.",
+      "picks": [
+        {
+          "app_id": "manager-io",
+          "label": "Offline single-user bookkeeping",
+          "reason": "The free desktop edition keeps accounting available without a subscription or network connection.",
+          "tradeoff": "Multi-user arrangements differ and the FSL includes a noncompete restriction."
+        },
+        {
+          "app_id": "frappe-books",
+          "label": "Self-hosted browser bookkeeping",
+          "reason": "The current Frappe application combines ledgers, invoices, stock and point-of-sale records.",
+          "tradeoff": "The previous Electron desktop application is end-of-life; the successor requires a server."
+        },
+        {
+          "app_id": "erpnext",
+          "label": "Accounting within a full ERP",
+          "reason": "Financial records connect to purchasing, inventory and manufacturing workflows.",
+          "tradeoff": "Implementation effort is greater than a focused bookkeeping application."
+        }
+      ]
+    },
+    {
+      "id": "budget-or-account-with-local-data",
+      "title": "Budget or account with local data",
+      "description": "An envelope budget and a double-entry journal solve different problems; choose the data-entry model you will maintain consistently.",
+      "picks": [
+        {
+          "app_id": "actual-budget",
+          "label": "Envelope budgeting",
+          "reason": "Local-first budgets and transaction imports support a planned allocation of personal spending.",
+          "tradeoff": "Bank-data integrations and hosted sync may incur separate costs."
+        },
+        {
+          "app_id": "hledger",
+          "label": "Versioned plain-text accounting",
+          "reason": "Text journals and scriptable reports make double-entry records inspectable and reproducible.",
+          "tradeoff": "Learning journal syntax and accounting rules takes commitment."
+        },
+        {
+          "app_id": "gnucash",
+          "label": "Graphical double-entry accounts",
+          "reason": "A graphical accounting workflow is suitable when text journals are not the preferred entry method.",
+          "tradeoff": "Budgeting behavior differs from an envelope-first application."
+        }
+      ]
+    },
+    {
+      "id": "build-internal-business-tools",
+      "title": "Build internal business tools",
+      "description": "Start with where the data lives and who maintains the tool: spreadsheet-style records, no-code databases or interfaces over existing services.",
+      "picks": [
+        {
+          "app_id": "grist",
+          "label": "Relational spreadsheets",
+          "reason": "Typed tables, Python formulas, linked views and access rules add structure to spreadsheet-style editing.",
+          "tradeoff": "Its relational document model differs from a conventional spreadsheet grid."
+        },
+        {
+          "app_id": "baserow",
+          "label": "No-code database applications",
+          "reason": "Tables, relationships, forms and an application builder support data-centered workflows.",
+          "tradeoff": "Premium and enterprise functionality have separate commercial licenses."
+        },
+        {
+          "app_id": "appsmith",
+          "label": "Interfaces over existing systems",
+          "reason": "Widgets, database/API connectors and JavaScript build admin tools around current infrastructure.",
+          "tradeoff": "Queries, credentials and access controls require developer ownership."
+        }
+      ]
+    },
+    {
+      "id": "run-a-small-shop-point-of-sale",
+      "title": "Run a small-shop point of sale",
+      "description": "Test the actual receipt printer, barcode reader, payment arrangement and local fiscal requirements before production use.",
+      "picks": [
+        {
+          "app_id": "opensourcepos",
+          "label": "Browser-based register",
+          "reason": "Item stock, customer records, receipts and sales reports can run on a local web server.",
+          "tradeoff": "Its MIT-derived license requires visible footer attribution, and peripherals need validation."
+        },
+        {
+          "app_id": "chromis-pos",
+          "label": "Desktop till and back office",
+          "reason": "A desktop register with receipt layouts, barcode support and kitchen-display integration targets shop hardware.",
+          "tradeoff": "Recent maintenance was not established from the older release listing."
+        }
+      ]
+    },
+    {
+      "id": "wave2-choose-a-terminal-workspace",
+      "title": "Choose a terminal workspace",
+      "description": "Separate a terminal emulator from the shell it runs. Decide whether panes, remote sessions, configuration language or a minimal window matter most; GPU acceleration alone does not establish a performance winner.",
+      "picks": [
+        {
+          "app_id": "wezterm",
+          "label": "Integrated terminal workspace",
+          "reason": "Tabs, panes, multiplexing and Lua configuration support a multi-session terminal workflow.",
+          "tradeoff": "Its configuration and built-in session model take time to learn."
+        },
+        {
+          "app_id": "kitty",
+          "label": "Extensible Linux/macOS terminal",
+          "reason": "Kittens and keyboard-oriented terminal features support a configurable workstation.",
+          "tradeoff": "Native Windows support is not established."
+        },
+        {
+          "app_id": "ghostty",
+          "label": "Platform-integrated terminal",
+          "reason": "Native desktop integration and terminal features suit supported macOS and Linux systems.",
+          "tradeoff": "Check platform feature differences and available package routes."
+        },
+        {
+          "app_id": "alacritty",
+          "label": "Focused terminal window",
+          "reason": "A deliberately focused emulator works well with an external shell and multiplexer.",
+          "tradeoff": "Tabs and session management may require other tools."
+        }
+      ]
+    },
+    {
+      "id": "wave2-inspect-and-edit-binary-files",
+      "title": "Inspect and edit binary files",
+      "description": "Choose between direct byte edits, reusable binary structures and a native desktop interface. Preserve an original copy before changing a file.",
+      "picks": [
+        {
+          "app_id": "hxd",
+          "label": "Direct Windows hex editing",
+          "reason": "A Windows hex editor covers byte-level inspection and editing without requiring a template language.",
+          "tradeoff": "Structured parsing and cross-platform workflows need other choices."
+        },
+        {
+          "app_id": "010-editor",
+          "label": "Reusable binary templates",
+          "reason": "Templates expose fields and structures in supported binary formats.",
+          "tradeoff": "It is commercial software and templates still require format knowledge."
+        },
+        {
+          "app_id": "imhex",
+          "label": "Pattern-driven binary analysis",
+          "reason": "A pattern language and visual analysis tools help inspect structured binary data.",
+          "tradeoff": "The broader analysis interface has a learning curve."
+        },
+        {
+          "app_id": "hex-fiend",
+          "label": "Native macOS editor",
+          "reason": "A Mac-focused hex interface fits local inspection of large files.",
+          "tradeoff": "Its platform scope is macOS."
+        }
+      ]
+    },
+    {
+      "id": "wave2-choose-a-computational-notebook",
+      "title": "Choose a computational notebook workflow",
+      "description": "Consider execution order, collaboration artifacts and the surrounding analysis workspace before choosing a notebook interface.",
+      "picks": [
+        {
+          "app_id": "marimo",
+          "label": "Reactive Python notebooks",
+          "reason": "A dependency-aware execution model and Python source files help make state relationships explicit.",
+          "tradeoff": "Reactive behavior differs from a traditional manually executed notebook."
+        },
+        {
+          "app_id": "jupyter-notebook",
+          "label": "Focused notebook interface",
+          "reason": "A familiar notebook document combines code, rich outputs and explanatory text.",
+          "tradeoff": "Execution state and cell order still require discipline."
+        },
+        {
+          "app_id": "jupyterlab",
+          "label": "Larger analysis workspace",
+          "reason": "Notebooks, editors, terminals and extensions can share a workspace.",
+          "tradeoff": "Extensions and multiple tools increase environment-management work."
+        }
+      ]
+    },
+    {
+      "id": "wave2-choose-a-local-sql-engine",
+      "title": "Choose a local SQL engine",
+      "description": "Local transaction storage, file analytics and versioned relational tables are different needs. These tools overlap in SQL access but are not interchangeable database designs.",
+      "picks": [
+        {
+          "app_id": "sqlite-cli",
+          "label": "Small local relational database",
+          "reason": "The CLI operates directly on SQLite files and can be scripted.",
+          "tradeoff": "SQLite concurrency and type behavior should fit the application."
+        },
+        {
+          "app_id": "duckdb",
+          "label": "Analytical queries over local data",
+          "reason": "An in-process analytical engine suits SQL exploration of columnar and tabular files.",
+          "tradeoff": "It is not a replacement for every multi-user transactional service."
+        },
+        {
+          "app_id": "dolt",
+          "label": "Versioned relational data",
+          "reason": "Git-like table history supports branching and reviewing database changes.",
+          "tradeoff": "Its versioning and SQL compatibility require a representative trial."
+        }
+      ]
+    },
+    {
+      "id": "wave2-serve-analytical-or-time-series-data",
+      "title": "Serve analytical or time-series data",
+      "description": "Choose around query shape, ingestion, deployment scale and operational ownership. No common workload benchmark was run for this guide.",
+      "picks": [
+        {
+          "app_id": "clickhouse",
+          "label": "General analytical service",
+          "reason": "A column-oriented database targets large analytical queries and aggregations.",
+          "tradeoff": "Running a shared service requires capacity, storage and upgrade planning."
+        },
+        {
+          "app_id": "questdb",
+          "label": "Timestamp-oriented ingestion",
+          "reason": "Its documented time-series features suit timestamped measurements and events.",
+          "tradeoff": "SQL and storage behavior differ from general-purpose transactional databases."
+        },
+        {
+          "app_id": "duckdb",
+          "label": "Local analytical processing",
+          "reason": "An embedded engine can avoid operating a server for a single-user analytical task.",
+          "tradeoff": "A local embedded workflow does not provide the same shared-service architecture."
+        }
+      ]
+    },
+    {
+      "id": "wave2-browse-databases-with-a-gui",
+      "title": "Browse databases with a GUI",
+      "description": "Verify the actual database driver, authentication method and edition before choosing a client. A client does not replace the database service.",
+      "picks": [
+        {
+          "app_id": "dbgate",
+          "label": "Multiple database types",
+          "reason": "A database browser and query editor supports a mix of engines and local data work.",
+          "tradeoff": "Check each connector and any paid-edition feature requirements."
+        },
+        {
+          "app_id": "beekeeper-studio",
+          "label": "Focused SQL desktop workflow",
+          "reason": "A query-and-table interface suits day-to-day SQL inspection.",
+          "tradeoff": "Community and commercial editions differ."
+        },
+        {
+          "app_id": "dbeaver",
+          "label": "Broad database ecosystem",
+          "reason": "Driver-based connections and data tools cover many database families.",
+          "tradeoff": "Its breadth creates more configuration and interface complexity."
+        }
+      ]
+    },
+    {
+      "id": "wave2-version-database-schema-changes",
+      "title": "Version database schema changes",
+      "description": "Migration style, database support and current licensing matter more than the number of features on a product homepage. Test rollback and drift behavior on a representative schema.",
+      "picks": [
+        {
+          "app_id": "dbmate",
+          "label": "Plain SQL migrations",
+          "reason": "A compact CLI keeps migration files close to ordinary SQL.",
+          "tradeoff": "Advanced orchestration and governance need other systems."
+        },
+        {
+          "app_id": "flyway",
+          "label": "Ordered migration workflow",
+          "reason": "Versioned migrations fit a deployment pipeline with explicit sequence.",
+          "tradeoff": "Database coverage and advanced commands vary by edition."
+        },
+        {
+          "app_id": "liquibase",
+          "label": "Structured changelogs",
+          "reason": "Changesets and changelog formats support explicit database-change history.",
+          "tradeoff": "Current Community uses FSL terms, and rollback is change-dependent."
+        },
+        {
+          "app_id": "atlas",
+          "label": "Desired-state schema planning",
+          "reason": "Declarative models can produce migration plans from a desired schema.",
+          "tradeoff": "Apache Community, standard binaries and Pro capabilities have different scope and terms."
+        }
+      ]
+    },
+    {
+      "id": "wave2-orchestrate-data-jobs",
+      "title": "Orchestrate data jobs",
+      "description": "Compare the unit you want to manage: scheduled DAGs, Python flows, data assets or event-driven workflows. All require operational ownership beyond writing a task.",
+      "picks": [
+        {
+          "app_id": "apache-airflow",
+          "label": "Scheduled task DAGs",
+          "reason": "A mature DAG model and operator ecosystem suit scheduled batch pipelines.",
+          "tradeoff": "A production deployment has several services and scheduling concepts."
+        },
+        {
+          "app_id": "prefect",
+          "label": "Python flow control",
+          "reason": "Python flows and task state help add orchestration around existing Python work.",
+          "tradeoff": "Hosted services and self-managed deployments have different operations and pricing."
+        },
+        {
+          "app_id": "dagster",
+          "label": "Data-asset modeling",
+          "reason": "Asset-oriented orchestration makes produced datasets and dependencies visible.",
+          "tradeoff": "Adopting the asset model may require restructuring existing pipelines."
+        },
+        {
+          "app_id": "kestra",
+          "label": "Declarative event workflows",
+          "reason": "YAML workflow definitions and plugins connect jobs across systems.",
+          "tradeoff": "Plugin behavior and edition-specific capabilities need review."
+        }
+      ]
+    },
+    {
+      "id": "wave2-publish-business-intelligence",
+      "title": "Publish business intelligence reports",
+      "description": "Distinguish browser-built dashboards from reports maintained as source code. Hosting, authentication and advanced governance may belong to a separate edition.",
+      "picks": [
+        {
+          "app_id": "metabase",
+          "label": "Accessible browser exploration",
+          "reason": "A query and dashboard interface helps teams explore connected data.",
+          "tradeoff": "Embedding and governance features can be edition-dependent."
+        },
+        {
+          "app_id": "apache-superset",
+          "label": "Configurable analytical dashboards",
+          "reason": "SQL exploration, charts and dashboards fit an administered BI service.",
+          "tradeoff": "Deployment and semantic configuration require technical ownership."
+        },
+        {
+          "app_id": "evidence-core",
+          "label": "Reports as reviewed code",
+          "reason": "SQL, Markdown and reusable components suit versioned analytical reports.",
+          "tradeoff": "Hosted Studio capabilities are separate from the Core framework."
+        }
+      ]
+    },
+    {
+      "id": "wave2-choose-a-project-test-runner",
+      "title": "Choose a project test runner",
+      "description": "Start with the language and build system. These runners belong to different ecosystems; compare features only after choosing the relevant ecosystem.",
+      "picks": [
+        {
+          "app_id": "pytest",
+          "label": "Python tests and fixtures",
+          "reason": "Fixtures, assertions and plugins fit Python projects.",
+          "tradeoff": "Plugin compatibility and fixture design need maintenance."
+        },
+        {
+          "app_id": "vitest",
+          "label": "Vite-aligned JavaScript tests",
+          "reason": "A test runner integrated with the Vite ecosystem can share project configuration.",
+          "tradeoff": "Existing Jest behavior should be checked during migration."
+        },
+        {
+          "app_id": "jest",
+          "label": "Established JavaScript suites",
+          "reason": "A broad JavaScript testing ecosystem supports existing Jest-based projects.",
+          "tradeoff": "Module-system and transformer configuration can be involved."
+        },
+        {
+          "app_id": "bats-core",
+          "label": "Shell command behavior",
+          "reason": "Bash-based tests can assert command output and exit status.",
+          "tradeoff": "Shell portability still needs testing on the actual target environments."
+        }
+      ]
+    },
+    {
+      "id": "wave2-check-code-and-automation-files",
+      "title": "Check code and automation files before running them",
+      "description": "Use a checker that understands the file language. Static findings are useful evidence, but passing a linter does not establish runtime correctness or security.",
+      "picks": [
+        {
+          "app_id": "ruff",
+          "label": "Python linting and formatting",
+          "reason": "Python-focused lint rules and formatting provide a combined local code-quality tool.",
+          "tradeoff": "Rule configuration and unsafe fixes require deliberate review."
+        },
+        {
+          "app_id": "shellcheck",
+          "label": "Shell-script diagnostics",
+          "reason": "Shell-aware analysis catches quoting and portability issues.",
+          "tradeoff": "It cannot validate every runtime input or external command."
+        },
+        {
+          "app_id": "hadolint",
+          "label": "Dockerfile checks",
+          "reason": "Dockerfile rules and shell analysis support container build-file review.",
+          "tradeoff": "Image behavior and vulnerability status require separate checks."
+        },
+        {
+          "app_id": "actionlint",
+          "label": "GitHub Actions definitions",
+          "reason": "Workflow syntax and expression checking catch errors before a hosted run.",
+          "tradeoff": "External action behavior and credentials are outside static validation."
+        }
+      ]
+    },
+    {
+      "id": "wave2-transform-developer-data-locally",
+      "title": "Transform developer data locally",
+      "description": "Compare isolated utility widgets with a chained transformation workflow. Confirm whether the chosen deployment executes data processing locally before using sensitive input.",
+      "picks": [
+        {
+          "app_id": "it-tools",
+          "label": "Individual developer utilities",
+          "reason": "A collection of encoders, converters and generators covers many small tasks.",
+          "tradeoff": "A selected hosted instance is distinct from self-hosting the application."
+        },
+        {
+          "app_id": "cyberchef",
+          "label": "Repeatable transformation recipes",
+          "reason": "Composable operations make decoding and conversion sequences inspectable.",
+          "tradeoff": "Recipes need validation against the actual input format; a successful decode is not proof of meaning."
+        }
+      ]
+    },
+    {
+      "id": "wave2-evaluate-language-model-applications",
+      "title": "Evaluate language-model applications",
+      "description": "Separate automated evaluation from observing production traces and collecting human review data. Model-based scores need validation against the task you care about.",
+      "picks": [
+        {
+          "app_id": "deepeval",
+          "label": "Automated evaluation cases",
+          "reason": "A test-oriented evaluation library helps define repeatable checks for LLM behavior.",
+          "tradeoff": "Judge models, metric settings and API costs can affect results."
+        },
+        {
+          "app_id": "langfuse",
+          "label": "Traces and evaluation context",
+          "reason": "Observability connects prompts, model calls and evaluation records.",
+          "tradeoff": "Running the platform and handling telemetry data require operational choices."
+        },
+        {
+          "app_id": "label-studio",
+          "label": "Human review datasets",
+          "reason": "Configurable labeling interfaces support human evaluation tasks.",
+          "tradeoff": "Annotation design and reviewer agreement remain part of the methodology."
+        }
+      ]
+    },
+    {
+      "id": "wave2-label-vision-and-text-datasets",
+      "title": "Label vision and text datasets",
+      "description": "Select for annotation modality, export format and reviewer workflow. Verify what the self-hosted edition includes before assuming a hosted demo represents it.",
+      "picks": [
+        {
+          "app_id": "cvat",
+          "label": "Visual annotation workflows",
+          "reason": "Image, video and point-cloud tools plus standard exports fit computer-vision labeling.",
+          "tradeoff": "Community requires an operated server and differs from Online and Enterprise."
+        },
+        {
+          "app_id": "label-studio",
+          "label": "Configurable multi-modal tasks",
+          "reason": "Templates and configurable labeling interfaces adapt to varied annotation work.",
+          "tradeoff": "Complex workflows can require custom configuration and integration."
+        },
+        {
+          "app_id": "argilla",
+          "label": "Text and model feedback",
+          "reason": "Dataset fields and a Python SDK connect text review to programmatic workflows.",
+          "tradeoff": "Upstream limits ongoing work to maintenance rather than new feature development."
+        }
+      ]
+    },
+    {
+      "id": "wave2-transcribe-media-on-your-computer",
+      "title": "Transcribe media on your computer",
+      "description": "Local inference requires the appropriate model files and hardware. Check language and audio quality on your own sample; no accuracy ranking is established here.",
+      "picks": [
+        {
+          "app_id": "buzz",
+          "label": "Desktop transcription and subtitles",
+          "reason": "A GUI, watch folders and subtitle exports suit repeated media workflows.",
+          "tradeoff": "Choose the correct published architecture; v1.4.5 remains the last Intel Mac package."
+        },
+        {
+          "app_id": "whisper-cpp",
+          "label": "Scriptable local inference",
+          "reason": "A native implementation supports CLI and embedded transcription workflows.",
+          "tradeoff": "Model conversion, runtime options and integrations take technical setup."
+        }
+      ]
+    },
+    {
+      "id": "wave2-install-curated-game-modlists",
+      "title": "Install and maintain game modlists",
+      "description": "Start with the exact game and mod ecosystem. A modlist manager cannot promise compatibility between arbitrary lists or replace the author’s installation instructions.",
+      "picks": [
+        {
+          "app_id": "wabbajack",
+          "label": "Curated list installations",
+          "reason": "Automated list installation helps reproduce an author-defined supported setup.",
+          "tradeoff": "Downloads, game versions and required third-party accounts must match the list."
+        },
+        {
+          "app_id": "r2modman",
+          "label": "Thunderstore game profiles",
+          "reason": "Profiles and dependency handling fit supported Thunderstore communities.",
+          "tradeoff": "It does not cover every game or mod distribution site."
+        }
+      ]
+    },
+    {
+      "id": "wave2-choose-a-game-mod-loader",
+      "title": "Choose a game mod loader",
+      "description": "The game and runtime decide which loader is applicable. These are ecosystem-specific foundations rather than interchangeable tools for every game.",
+      "picks": [
+        {
+          "app_id": "smapi",
+          "label": "Stardew Valley mods",
+          "reason": "A game-specific API and loader connect supported Stardew Valley mods.",
+          "tradeoff": "Game and mod versions must be compatible with the installed SMAPI release."
+        },
+        {
+          "app_id": "melonloader",
+          "label": "Supported Unity games",
+          "reason": "A loader and framework support mods for compatible Unity runtimes.",
+          "tradeoff": "Compatibility varies by game and anti-cheat or online policy."
+        },
+        {
+          "app_id": "reloaded-ii",
+          "label": "Executable-specific mod setups",
+          "reason": "A launcher and loader organize configurations for supported PC games.",
+          "tradeoff": "Each mod and game has its own setup and compatibility requirements."
+        }
+      ]
+    },
+    {
+      "id": "wave2-organize-an-emulation-library",
+      "title": "Organize an emulation library",
+      "description": "Distinguish a frontend that launches other software from a framework that also manages emulator cores. Neither provides game files or guarantees a particular game runs.",
+      "picks": [
+        {
+          "app_id": "es-de",
+          "label": "Configured desktop collection",
+          "reason": "A desktop frontend organizes game metadata, themes and launch commands.",
+          "tradeoff": "Emulators and legally obtained game files must be configured separately; Android terms differ."
+        },
+        {
+          "app_id": "pegasus-frontend",
+          "label": "Theme-driven launcher",
+          "reason": "A customizable frontend can unify games and applications under metadata definitions.",
+          "tradeoff": "Theme and launch configuration take manual work."
+        },
+        {
+          "app_id": "retroarch",
+          "label": "Core-based emulation interface",
+          "reason": "A shared frontend provides settings and controls across supported emulator cores.",
+          "tradeoff": "Compatibility depends on the selected core and its requirements."
+        }
+      ]
+    },
+    {
+      "id": "wave2-inspect-graphics-api-frames",
+      "title": "Inspect graphics API frames",
+      "description": "Select by graphics API, operating system and GPU. Capturing a frame is a development or debugging workflow, not a promise to increase frame rate.",
+      "picks": [
+        {
+          "app_id": "renderdoc",
+          "label": "Cross-vendor frame capture",
+          "reason": "A frame debugger exposes graphics API calls and resources on supported APIs.",
+          "tradeoff": "Supported APIs and capture environments must match the application."
+        },
+        {
+          "app_id": "apitrace",
+          "label": "Trace and replay API calls",
+          "reason": "Trace/replay tools help inspect a sequence of graphics calls.",
+          "tradeoff": "The workflow and API coverage differ from a full vendor profiler."
+        },
+        {
+          "app_id": "pix-windows",
+          "label": "DirectX on Windows",
+          "reason": "Microsoft’s tooling supports DirectX analysis on Windows.",
+          "tradeoff": "Its platform and API scope are specific; licensing was not fully classified."
+        },
+        {
+          "app_id": "nsight-graphics",
+          "label": "NVIDIA graphics analysis",
+          "reason": "Vendor tooling provides graphics debugging and profiling for supported NVIDIA hardware.",
+          "tradeoff": "Driver, GPU and API requirements must be checked."
+        }
+      ]
+    },
+    {
+      "id": "wave2-choose-a-build-orchestrator",
+      "title": "Choose a build orchestrator",
+      "description": "Build graphs, language rules and cache infrastructure matter more than a generic speed claim. Compare using the project’s real dependency graph.",
+      "picks": [
+        {
+          "app_id": "bazel",
+          "label": "Explicit multi-language build graph",
+          "reason": "Declared targets and toolchains support cached and reproducible build workflows.",
+          "tradeoff": "Rule ecosystems and dependency declarations require investment."
+        },
+        {
+          "app_id": "buck2",
+          "label": "Large dependency-graph workflows",
+          "reason": "A modern build engine targets incremental execution and programmable rules.",
+          "tradeoff": "Adoption requires compatible rules, toolchains and project migration."
+        },
+        {
+          "app_id": "scons",
+          "label": "Python-defined builds",
+          "reason": "Python build descriptions fit projects needing programmable build logic.",
+          "tradeoff": "Its execution and cache model differ from remote-build-oriented systems."
+        }
+      ]
+    },
+    {
+      "id": "wave2-run-a-local-web-development-stack",
+      "title": "Run a local web development stack",
+      "description": "Decide whether the project primarily needs containers with web services or a shell containing language tools. Docker-provider terms and resource use remain separate.",
+      "picks": [
+        {
+          "app_id": "ddev",
+          "label": "PHP and CMS development",
+          "reason": "Documented local HTTPS, databases, Xdebug and quickstarts support common CMS projects.",
+          "tradeoff": "Requires a supported Docker provider and is primarily a development environment."
+        },
+        {
+          "app_id": "lando",
+          "label": "Custom service recipes",
+          "reason": "A Landofile combines application recipes, services and project commands.",
+          "tradeoff": "Plugins and Docker configuration must match the team environment."
+        },
+        {
+          "app_id": "devbox",
+          "label": "Toolchain-oriented shell",
+          "reason": "A JSON declaration installs project tools through Nix.",
+          "tradeoff": "It does not automatically provide the same container-service topology."
+        }
+      ]
+    },
+    {
+      "id": "wave2-choose-project-environment-control",
+      "title": "Choose project environment control",
+      "description": "Variable loading, tool installation and reproducible package builds are separate layers. Several of these tools can be used together.",
+      "picks": [
+        {
+          "app_id": "direnv",
+          "label": "Automatic project variables",
+          "reason": "Approved environment settings load and unload with directory changes.",
+          "tradeoff": "It executes authorized shell code and does not install a full toolchain itself."
+        },
+        {
+          "app_id": "devbox",
+          "label": "Declared tools with simpler configuration",
+          "reason": "A JSON package list creates a Nix-backed project shell.",
+          "tradeoff": "Package behavior and Windows WSL requirements still apply."
+        },
+        {
+          "app_id": "nix",
+          "label": "Detailed package and build control",
+          "reason": "Declarative dependency models support reproducible shells and custom packages.",
+          "tradeoff": "Its packaging language and store model take more learning."
+        },
+        {
+          "app_id": "mise",
+          "label": "Language tool versions and tasks",
+          "reason": "A project-oriented manager coordinates common developer tool versions and tasks.",
+          "tradeoff": "Backend and tool-specific installation behavior needs checking."
+        }
+      ]
+    },
+    {
+      "id": "wave2-build-a-data-driven-internal-app",
+      "title": "Build a data-driven internal app",
+      "description": "Choose around the main artifact: editable database records, an analytical report, or a visually assembled application. Authentication and database access remain explicit design work.",
+      "picks": [
+        {
+          "app_id": "sqlpage",
+          "label": "SQL-defined forms and pages",
+          "reason": "Queries can produce data-entry forms, tables and charts with a small server.",
+          "tradeoff": "Application permissions and validation must be designed carefully."
+        },
+        {
+          "app_id": "evidence-core",
+          "label": "Analytical narrative and metrics",
+          "reason": "SQL and Markdown reports combine explanation with reusable analytical components.",
+          "tradeoff": "It is report-oriented; Studio features have separate scope."
+        },
+        {
+          "app_id": "appsmith",
+          "label": "Visual application assembly",
+          "reason": "Widgets and data connections support internal tool interfaces.",
+          "tradeoff": "Edition limits and the hosted/self-managed deployment model must fit the project."
+        }
+      ]
+    },
+    {
+      "id": "wave2-choose-an-integrated-javascript-runtime",
+      "title": "Choose an integrated JavaScript runtime",
+      "description": "Evaluate an existing application, its native dependencies and deployment target before replacing a runtime. This is a documented-feature comparison, not a universal speed ranking.",
+      "picks": [
+        {
+          "app_id": "deno",
+          "label": "Explicit permissions and TypeScript tooling",
+          "reason": "Runtime permissions and built-in development commands suit controlled TypeScript execution.",
+          "tradeoff": "Node compatibility and permission settings need testing on the actual application."
+        },
+        {
+          "app_id": "bun",
+          "label": "Runtime plus package and build tools",
+          "reason": "A single toolkit combines JavaScript execution, dependencies, bundling and tests.",
+          "tradeoff": "Check Node/native-module compatibility and the required CPU/platform build."
+        }
+      ]
+    },
+    {
+      "id": "wave2-manage-javascript-project-dependencies",
+      "title": "Manage JavaScript project dependencies",
+      "description": "Package-manager choice affects lockfiles, install scripts and CI behavior. Keep one deliberate project policy and validate changes with the actual dependency tree.",
+      "picks": [
+        {
+          "app_id": "npm-cli",
+          "label": "Standard Node package workflow",
+          "reason": "The bundled CLI offers package scripts, workspaces and locked CI installation.",
+          "tradeoff": "Registry services have separate terms from the open-source CLI."
+        },
+        {
+          "app_id": "pnpm",
+          "label": "Shared package-store workflow",
+          "reason": "A content-addressed store and workspace tooling suit many multi-project setups.",
+          "tradeoff": "Dependencies that assume a flat installation may need fixes."
+        },
+        {
+          "app_id": "yarn",
+          "label": "Configurable resolution and workspaces",
+          "reason": "Modern Yarn offers plugins, constraints and Plug’n’Play or node_modules strategies.",
+          "tradeoff": "Modern Yarn and Classic differ; migration needs compatibility checks."
+        },
+        {
+          "app_id": "bun",
+          "label": "Integrated toolkit adoption",
+          "reason": "Its package manager can be evaluated alongside the runtime and test tools.",
+          "tradeoff": "Adopting one component does not prove the entire toolkit fits a project."
+        }
+      ]
+    },
+    {
+      "id": "wave2-choose-version-control-working-style",
+      "title": "Choose a version-control working style",
+      "description": "Compare a new change model, a conventional Git GUI and a complete repository/project system. Their storage and collaboration semantics differ.",
+      "picks": [
+        {
+          "app_id": "jujutsu",
+          "label": "Git-backed change editing",
+          "reason": "Automatic snapshots, operation history and descendant rebasing suit stacked-change workflows.",
+          "tradeoff": "Higher-level metadata and bookmark semantics differ from ordinary Git."
+        },
+        {
+          "app_id": "git-cola",
+          "label": "Conventional Git with a GUI",
+          "reason": "Diff, staging and history controls work on ordinary local Git repositories.",
+          "tradeoff": "It changes the interface rather than replacing Git’s underlying model."
+        },
+        {
+          "app_id": "fossil",
+          "label": "Integrated project history",
+          "reason": "Source control, tickets, wiki and forum can travel in one self-hosted system.",
+          "tradeoff": "The repository format and collaboration workflow differ from Git."
+        }
+      ]
+    },
+    {
+      "id": "wave2-back-up-pc-game-saves",
+      "title": "Back up PC game saves",
+      "description": "Choose discovery and automation separately, verify a representative restore, and keep a backup copy outside the original disk. Neither application guarantees every game’s save format transfers between systems.",
+      "picks": [
+        {
+          "app_id": "ludusavi",
+          "label": "Cross-store scan and portable backups",
+          "reason": "A game manifest, custom entries and a CLI support manual or scripted save backups.",
+          "tradeoff": "Verify detected paths and restore behavior for each important game."
+        },
+        {
+          "app_id": "game-backup-monitor",
+          "label": "Backup after game exit",
+          "reason": "Process monitoring can create compressed save history after playing.",
+          "tradeoff": "Supported process definitions and paths must be configured; macOS is not documented."
+        }
+      ]
+    },
+    {
+      "id": "wave2-adjust-a-games-rendering-workflow",
+      "title": "Adjust a game’s rendering workflow",
+      "description": "Choose by the exact visual problem and supported game/API. Review multiplayer and anti-cheat restrictions before using injected tools.",
+      "picks": [
+        {
+          "app_id": "special-k",
+          "label": "Presentation, HDR and pacing controls",
+          "reason": "A game modification framework exposes HDR, display and frame-pacing adjustments.",
+          "tradeoff": "Per-game compatibility and stable/experimental differences matter; no general speed gain is promised."
+        },
+        {
+          "app_id": "reshade",
+          "label": "Post-processing shaders",
+          "reason": "A shader injector supports a customizable post-processing pipeline.",
+          "tradeoff": "Game/API compatibility and online restrictions still apply."
+        }
+      ]
+    }
+  ]
+}

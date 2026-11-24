@@ -1,0 +1,326 @@
+{
+  "schema": 1,
+  "kind": "actual Chromium integrated-workshop acceptance",
+  "result": "pass",
+  "started": "2026-11-07T19:12:20.423Z",
+  "root": "/home/runner/work/Athena/Athena/dist",
+  "output": "/home/runner/work/Athena/Athena/browser-results/workshops",
+  "browser": "151.0.7922.34",
+  "checks": [
+    {
+      "name": "exact served files",
+      "result": "pass"
+    },
+    {
+      "name": "catalog counts and directory",
+      "result": "pass"
+    },
+    {
+      "name": "workshop ZIP downloads",
+      "result": "pass"
+    },
+    {
+      "name": "all workshop routes and lessons",
+      "result": "pass"
+    },
+    {
+      "name": "literal worked-code markup is inert",
+      "result": "pass"
+    },
+    {
+      "name": "supplemental checks and unchanged XP",
+      "result": "pass"
+    },
+    {
+      "name": "read and notes persistence",
+      "result": "pass"
+    },
+    {
+      "name": "close and Escape focus",
+      "result": "pass"
+    },
+    {
+      "name": "history Back and Forward",
+      "result": "pass"
+    },
+    {
+      "name": "desktop and mobile layout",
+      "result": "pass"
+    },
+    {
+      "name": "Packet Trail regression",
+      "result": "pass"
+    },
+    {
+      "name": "no external requests or page errors",
+      "result": "pass"
+    }
+  ],
+  "files": [
+    {
+      "name": "index.html",
+      "sha256": "9f0cd9affdcad4760f01b6f78e4a150ab003ac5ad28110e5b4dd63e78ddec521",
+      "loadedSHA256": "9f0cd9affdcad4760f01b6f78e4a150ab003ac5ad28110e5b4dd63e78ddec521"
+    },
+    {
+      "name": "app.js",
+      "sha256": "d7989a8f18fa165a968603a4ee5bf2bd2443d96d987eadd0c47f70eb9602ad48",
+      "loadedSHA256": "d7989a8f18fa165a968603a4ee5bf2bd2443d96d987eadd0c47f70eb9602ad48"
+    },
+    {
+      "name": "catalog.js",
+      "sha256": "97ce633e23cd9bbfa3d980acb7da640b9eacb40fb704a8f429e04cee68dadd5f",
+      "loadedSHA256": "97ce633e23cd9bbfa3d980acb7da640b9eacb40fb704a8f429e04cee68dadd5f"
+    },
+    {
+      "name": "core.js",
+      "sha256": "1fbbb46ff7134ff968a8543aaa967d78b39fd955fcf5b810882039aa61e29803",
+      "loadedSHA256": "1fbbb46ff7134ff968a8543aaa967d78b39fd955fcf5b810882039aa61e29803"
+    },
+    {
+      "name": "workspace-host.js",
+      "sha256": "8a14dec17d4d816de53d325a94ee0dd00ac0bc8a0a26a756af58998173157cdb",
+      "loadedSHA256": "8a14dec17d4d816de53d325a94ee0dd00ac0bc8a0a26a756af58998173157cdb"
+    },
+    {
+      "name": "styles.css",
+      "sha256": "bf7fb56b9403fe8a865771cd7b3cd766a52aeea5460541ec29d145fcfd8f7107",
+      "loadedSHA256": "bf7fb56b9403fe8a865771cd7b3cd766a52aeea5460541ec29d145fcfd8f7107"
+    }
+  ],
+  "screenshots": [
+    {
+      "name": "literal-worked-code-markup.png",
+      "sha256": "9e5c6d72672b16892187c69a594006dd76269231e4bcf2aaaa8a816dc1adbac6"
+    },
+    {
+      "name": "directory-desktop.png",
+      "sha256": "14b315461d5168c5f43df61634267b81d7f5f4c48028b05d4d63d3a870974c5e"
+    },
+    {
+      "name": "security-foundations-desktop.png",
+      "sha256": "413d4f89c188e250fba4a348bfb574d6e8981d7fff66eec1b93c1720c2624d2d"
+    },
+    {
+      "name": "security-foundations-lesson-desktop.png",
+      "sha256": "971360fbe7722eea519d6d1f0c52cb31500127893338716ddf769c3ce2fdf969"
+    },
+    {
+      "name": "systems-workshop-desktop.png",
+      "sha256": "6e5013bdafb0806a10c9917e8d6e19e7a5943ae82d334887708fecadfafa71ae"
+    },
+    {
+      "name": "systems-workshop-lesson-desktop.png",
+      "sha256": "0a73b58be41fb624c6400127e7399308e35ab4b47711815ca3d06424caacf545"
+    },
+    {
+      "name": "programming-workshop-desktop.png",
+      "sha256": "f13da6f8c984bf22a91f4d1d76c5a7783f662fcd00234687f76d9018fddeffbe"
+    },
+    {
+      "name": "programming-workshop-lesson-desktop.png",
+      "sha256": "bab0532de0e4da47e4e2095ce7dc1493a6fa121359cb1a722796b6042683b041"
+    },
+    {
+      "name": "cloud-workshop-desktop.png",
+      "sha256": "b39a7192366288e38abbd6c1715ba512eeab01445b553959a6db05b0509e4b02"
+    },
+    {
+      "name": "cloud-workshop-lesson-desktop.png",
+      "sha256": "640ecd8f57f551e3ce3cff8c5e73167f9fd4b0024db43f30e138ade8e668ca7e"
+    },
+    {
+      "name": "data-workshop-desktop.png",
+      "sha256": "e74a2faf06e2e7efb4c22dd71d8dec72701b78d87ebe46e28dd0894170b7ac18"
+    },
+    {
+      "name": "data-workshop-lesson-desktop.png",
+      "sha256": "f47a857916215509720ce51b97ac19a6fcc3af13c440115fd7b6679af8d04a04"
+    },
+    {
+      "name": "directory-mobile.png",
+      "sha256": "c61dc019272d9409586d343b63ba0156b3dad1619fea8c1539138dadb55d8b22"
+    },
+    {
+      "name": "security-foundations-mobile.png",
+      "sha256": "8fa391cadc582e401338feb4d54aa2c2dc5c30be23683fff13b94ed61a7a47ad"
+    },
+    {
+      "name": "security-foundations-lesson-mobile.png",
+      "sha256": "2bbe0ebd8588b993bc55d9678a93b06c98fcd2dc3d82a295ddc4cbf1704ccdf1"
+    },
+    {
+      "name": "systems-workshop-mobile.png",
+      "sha256": "57bcfa7aa64529e1842074f8e37314346b871cb5eae1b7a5981a087eae5a0699"
+    },
+    {
+      "name": "systems-workshop-lesson-mobile.png",
+      "sha256": "5739a72b9161120b4afd6a94dc5f83e8a2532502214d95da9bfe248d0dc2c3b4"
+    },
+    {
+      "name": "programming-workshop-mobile.png",
+      "sha256": "85ff9abee14394544c3aa10b76e74ca08d42d6f8fc57d670f91d87ac5104667d"
+    },
+    {
+      "name": "programming-workshop-lesson-mobile.png",
+      "sha256": "640a6fd3e71e93a21bc055a8e18e3ee4fc8e21db48586422bddd14fa006c37a9"
+    },
+    {
+      "name": "cloud-workshop-mobile.png",
+      "sha256": "3fad2ba7effe9e197af59a5ffc8530998b1e563f4178b893937ece226758054f"
+    },
+    {
+      "name": "cloud-workshop-lesson-mobile.png",
+      "sha256": "aee42e44b0136df2860be0e84c781416f0bc57600e56a85fbeaced72adff0efc"
+    },
+    {
+      "name": "data-workshop-mobile.png",
+      "sha256": "74196753110654f6fdbacd00d51fa3c400fe1da78db111ec271aa2a3b60037c8"
+    },
+    {
+      "name": "data-workshop-lesson-mobile.png",
+      "sha256": "2ea2ba50f990c6324d6417cb986645f80a70c3a3825ac1ea6a5578a41b605e96"
+    },
+    {
+      "name": "packet-trail-mobile.png",
+      "sha256": "9a67699fe48e317b3788209540e3f4d8e6ec4984989cad673f2b54dbd73692d7"
+    }
+  ],
+  "errors": [],
+  "outsideRequests": [],
+  "cspViolations": [],
+  "failedResponses": [],
+  "limits": [
+    "Local static app only; no live-provider, certification, or real-system execution claims",
+    "Static runner contract tests are not browser evidence"
+  ],
+  "origin": "http://127.0.0.1:44221",
+  "currentCheck": "no external requests or page errors",
+  "totalLessons": 90,
+  "workshopIds": [
+    "security-foundations",
+    "systems-workshop",
+    "programming-workshop",
+    "cloud-workshop",
+    "data-workshop"
+  ],
+  "addedLessons": 42,
+  "downloads": [
+    {
+      "id": "security-foundations",
+      "url": "http://127.0.0.1:44221/workshops/security/learner-pack.zip",
+      "status": 200,
+      "mime": "application/zip",
+      "header": [
+        80,
+        75,
+        3,
+        4
+      ],
+      "size": 99380,
+      "sha256": "f52dc91bdc691bbd9152e147c9db960007262a2807c491f8c872e6fe6b45fb3c"
+    },
+    {
+      "id": "systems-workshop",
+      "url": "http://127.0.0.1:44221/workshops/systems/learner-pack.zip",
+      "status": 200,
+      "mime": "application/zip",
+      "header": [
+        80,
+        75,
+        3,
+        4
+      ],
+      "size": 84672,
+      "sha256": "1be28f1630e72979cf090b3601d4d3249ecc6a686018fc003173490fd0b70a5f"
+    },
+    {
+      "id": "programming-workshop",
+      "url": "http://127.0.0.1:44221/workshops/programming/learner-pack.zip",
+      "status": 200,
+      "mime": "application/zip",
+      "header": [
+        80,
+        75,
+        3,
+        4
+      ],
+      "size": 122045,
+      "sha256": "93f83f0c2ae38854a118742ede3e21a2b696cd0b97d42749288654527dee5f0c"
+    },
+    {
+      "id": "cloud-workshop",
+      "url": "http://127.0.0.1:44221/workshops/cloud/learner-pack.zip",
+      "status": 200,
+      "mime": "application/zip",
+      "header": [
+        80,
+        75,
+        3,
+        4
+      ],
+      "size": 111554,
+      "sha256": "2b9e9fa4922dc9352864b644861dcb95a8a4df56a0641ff7067f4a144cdd385d"
+    },
+    {
+      "id": "data-workshop",
+      "url": "http://127.0.0.1:44221/workshops/data/learner-pack.zip",
+      "status": 200,
+      "mime": "application/zip",
+      "header": [
+        80,
+        75,
+        3,
+        4
+      ],
+      "size": 113183,
+      "sha256": "8d03fb99f97ae6324de1a4cbfcb874d725778f110cb634b1ed9578a6f4711731"
+    }
+  ],
+  "openedLessonIds": [
+    "sec-risk-story",
+    "sec-identity-lifecycle",
+    "sec-data-integrity",
+    "sec-trust-boundaries",
+    "sec-phishing-decisions",
+    "sec-vulnerability-triage",
+    "sec-log-evidence",
+    "sec-incident-decisions",
+    "sec-restore-proof",
+    "sec-governance-proof",
+    "sys-baseline-contract",
+    "sys-paths-bytes",
+    "sys-process-readiness",
+    "sys-capacity-headroom",
+    "sys-config-transactions",
+    "sys-dependencies-retries",
+    "sys-durable-database",
+    "sys-diagnose-evidence",
+    "prog-values-contract",
+    "prog-trace-control",
+    "prog-functions-state",
+    "prog-collections-identity",
+    "prog-validation-errors",
+    "prog-files-cli",
+    "prog-tests-debug",
+    "prog-project-delivery",
+    "cloud-model-contract",
+    "cloud-responsibility-scope",
+    "cloud-network-storage",
+    "cloud-capacity-demand",
+    "cloud-failure-domains",
+    "cloud-recovery-objectives",
+    "cloud-cost-units",
+    "cloud-change-review",
+    "data-question-grain",
+    "data-csv-types",
+    "data-filter-population",
+    "data-null-metrics",
+    "data-join-cardinality",
+    "data-time-series",
+    "data-quality-transactions",
+    "data-explain-deliver"
+  ],
+  "supplementalChecksExercised": 84,
+  "finished": "2026-11-07T19:13:15.229Z"
+}

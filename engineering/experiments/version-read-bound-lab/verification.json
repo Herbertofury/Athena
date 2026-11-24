@@ -1,0 +1,22 @@
+{
+  "baseline_revision": "8a1df7923c70c231023f78e3f52e0d6b2bccac28",
+  "baseline_regressions_failed": 2,
+  "utf16_control_passed": true,
+  "rust_unit_tests_passed": 130,
+  "rust_integration_tests_passed": 8,
+  "clippy": "passed with warnings denied",
+  "release_build": "passed",
+  "actual_http_worker_rejections": 2,
+  "baseline_source_sha256": "849a4df734b1ac1856004ab74246ce3b122367f2ceb78c4cfcc8a012b2983f2c",
+  "current_source_sha256": "a72fb3ebc8f9e3a9040e6b9ae9437ca8353fcde3ba1a81e69fcf3493d3426a62",
+  "limits": [
+    "Generated malformed database fixtures",
+    "No browser acceptance",
+    "No process peak-memory claim",
+    "No new provider requests"
+  ],
+  "node_tests_passed": 214,
+  "python_tests_passed": 227,
+  "archive_http_checks_passed": 73,
+  "javascript_reader_http_checks_passed": 8
+}

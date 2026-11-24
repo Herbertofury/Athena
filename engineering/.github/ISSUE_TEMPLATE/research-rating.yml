@@ -1,0 +1,65 @@
+name: Research experience report
+description: Report experience with one catalog candidate and evaluation track.
+title: "[Research rating] "
+labels: ["research-rating"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Share a public account of your own experience. Explain the version,
+        workload, environment, benefits, and limitations behind the score.
+        Maintainer review is required before this can appear in the explorer.
+        Community reports are separate from reproducible Atlas benchmark results.
+        Keep credentials, private logs, and proprietary data out of this issue.
+        See [the community guide](https://github.com/Herbertofury/Engineering-Atlas/blob/main/docs/research-community.md).
+  - type: input
+    id: candidate_id
+    attributes:
+      label: Candidate ID
+      description: Use the exact candidate ID from the research explorer.
+      placeholder: Exact catalog ID
+    validations:
+      required: true
+  - type: input
+    id: track
+    attributes:
+      label: Evaluation track
+      description: Use the exact evaluation track ID shown for this candidate.
+      placeholder: Exact evaluation track ID
+    validations:
+      required: true
+  - type: dropdown
+    id: rating
+    attributes:
+      label: Rating
+      description: "For this workload: 1 = poor fit, 2 = limited fit, 3 = adequate, 4 = strong fit, 5 = excellent fit. Select your own score."
+      options:
+        - "1"
+        - "2"
+        - "3"
+        - "4"
+        - "5"
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Version used
+      description: Give a release, commit, model configuration, or dated service version; maximum 300 characters.
+      placeholder: Version or revision and relevant configuration
+    validations:
+      required: true
+  - type: textarea
+    id: experience
+    attributes:
+      label: Experience and evidence
+      description: Explain actual use and tradeoffs. Use plain paragraphs or lists without additional level-three headings; maximum 12000 characters.
+      placeholder: |
+        Workload and goal:
+        Environment, hardware, and configuration:
+        What worked and what failed:
+        Alternatives compared and relevant costs:
+        Public evidence or reproducible steps:
+        Any project affiliation or other conflict of interest:
+    validations:
+      required: true

@@ -1,0 +1,392 @@
+[
+  {
+    "id": "sec-risk-story-1",
+    "lessonId": "sec-risk-story",
+    "question": "A contractor leaves but their account still permits booking changes. Which item is the vulnerability?",
+    "options": [
+      "The account remains usable without a valid business need",
+      "The booking service’s business value",
+      "All contractors are attackers",
+      "The cost of cancelling appointments"
+    ],
+    "answer": 0,
+    "why": "The stale access is the weakness. Intent, asset value and consequences are separate parts of the risk story."
+  },
+  {
+    "id": "sec-risk-story-2",
+    "lessonId": "sec-risk-story",
+    "question": "A change log helps discover unauthorized edits. What is its primary purpose in this scenario?",
+    "options": [
+      "It guarantees confidentiality",
+      "Detective",
+      "It eliminates all residual risk",
+      "It transfers legal responsibility"
+    ],
+    "answer": 1,
+    "why": "The log supports detection and investigation. It does not automatically prevent editing or remove responsibility."
+  },
+  {
+    "id": "sec-risk-story-3",
+    "lessonId": "sec-risk-story",
+    "question": "What makes a residual-risk entry useful?",
+    "options": [
+      "A guarantee that nothing bad can happen",
+      "A product name alone",
+      "A stated remaining scenario, owner and review trigger",
+      "A bigger unexplained score"
+    ],
+    "answer": 2,
+    "why": "Residual risk must be understood and owned; a score or product label is not a decision record."
+  },
+  {
+    "id": "sec-identity-lifecycle-1",
+    "lessonId": "sec-identity-lifecycle",
+    "question": "A valid user cannot access another customer’s record. Which security function is deciding?",
+    "options": [
+      "DNS",
+      "Disk encryption alone",
+      "Authentication must always have failed",
+      "Authorization"
+    ],
+    "answer": 3,
+    "why": "The decision concerns an action on an object after an identity is known."
+  },
+  {
+    "id": "sec-identity-lifecycle-2",
+    "lessonId": "sec-identity-lifecycle",
+    "question": "Which pair is not two different factor categories?",
+    "options": [
+      "Two different memorized passwords",
+      "A device-held key and a local activation PIN",
+      "Possession and knowledge",
+      "Possession and a biometric activation factor"
+    ],
+    "answer": 0,
+    "why": "Changing the number of passwords does not change the factor category."
+  },
+  {
+    "id": "sec-identity-lifecycle-3",
+    "lessonId": "sec-identity-lifecycle",
+    "question": "Why test an inactive identity with an otherwise valid role?",
+    "options": [
+      "Because role membership should bypass termination",
+      "Because it checks that lifecycle revocation overrides an old entitlement",
+      "Because successful login proves every permission",
+      "Because auditors need administrator access"
+    ],
+    "answer": 1,
+    "why": "A leaver can retain an old role record. An active-status gate must still prevent access in this toy policy."
+  },
+  {
+    "id": "sec-data-integrity-1",
+    "lessonId": "sec-data-integrity",
+    "question": "A file and its SHA-256 value come from the same untrusted location. Their match establishes what?",
+    "options": [
+      "The file has no malware",
+      "The file is encrypted",
+      "Its bytes match that supplied digest, without independently proving publisher authenticity",
+      "The publisher’s identity is certain"
+    ],
+    "answer": 2,
+    "why": "A digest comparison checks bytes against a reference. The trustworthiness of that reference is a separate question."
+  },
+  {
+    "id": "sec-data-integrity-2",
+    "lessonId": "sec-data-integrity",
+    "question": "Which mechanism uses a shared key to authenticate message bytes?",
+    "options": [
+      "Base64",
+      "A plain checksum without a key",
+      "File compression",
+      "HMAC"
+    ],
+    "answer": 3,
+    "why": "HMAC is keyed. Encoding, compression and unkeyed hashes do not establish the same property."
+  },
+  {
+    "id": "sec-data-integrity-3",
+    "lessonId": "sec-data-integrity",
+    "question": "Why can encryption at rest fail to stop theft through a compromised application?",
+    "options": [
+      "The running application may have legitimate decryption access",
+      "Encryption never works",
+      "Hashing always reveals the key",
+      "A certificate automatically exports all files"
+    ],
+    "answer": 0,
+    "why": "Storage encryption does not remove the application’s authorized data access. Endpoint and application controls still matter."
+  },
+  {
+    "id": "sec-trust-boundaries-1",
+    "lessonId": "sec-trust-boundaries",
+    "question": "A database uses a private IP address. Which conclusion follows?",
+    "options": [
+      "Every internal user is authorized",
+      "It is not by itself proof of access control or safe configuration",
+      "A complete security policy already exists",
+      "TLS is unnecessary"
+    ],
+    "answer": 1,
+    "why": "Address scope and authorization are different properties."
+  },
+  {
+    "id": "sec-trust-boundaries-2",
+    "lessonId": "sec-trust-boundaries",
+    "question": "An allowed network connection proves which result?",
+    "options": [
+      "The intended application action is authorized",
+      "The client is a trustworthy person",
+      "A network rule permits the modeled flow; other checks remain",
+      "The data is backed up"
+    ],
+    "answer": 2,
+    "why": "Reachability is only one gate. Identity, application permissions and business correctness are separate."
+  },
+  {
+    "id": "sec-trust-boundaries-3",
+    "lessonId": "sec-trust-boundaries",
+    "question": "Which test is missing from a plan that checks only approved flows?",
+    "options": [
+      "A scan of unrelated public systems",
+      "A weaker password policy",
+      "A change to the real router",
+      "A check that forbidden flows are denied"
+    ],
+    "answer": 3,
+    "why": "Negative tests show that intended boundaries are actually enforced in the modeled scope."
+  },
+  {
+    "id": "sec-phishing-decisions-1",
+    "lessonId": "sec-phishing-decisions",
+    "question": "A message requests a supplier payment change and supplies a callback number. What is the strongest independent check?",
+    "options": [
+      "Use the established supplier verification process and a previously trusted contact",
+      "Call only that supplied number",
+      "Reply with account credentials",
+      "Approve because the logo looks correct"
+    ],
+    "answer": 0,
+    "why": "An independently established contact/process avoids using attacker-controlled evidence to verify itself."
+  },
+  {
+    "id": "sec-phishing-decisions-2",
+    "lessonId": "sec-phishing-decisions",
+    "question": "A message passes domain authentication. What should you conclude?",
+    "options": [
+      "The business request is definitely safe",
+      "That signal alone does not establish benign intent or authority",
+      "All attachments are harmless",
+      "No further policy applies"
+    ],
+    "answer": 1,
+    "why": "Domain/message authentication is not a guarantee about the request’s purpose or the account holder’s intentions."
+  },
+  {
+    "id": "sec-phishing-decisions-3",
+    "lessonId": "sec-phishing-decisions",
+    "question": "What response best encourages useful early reporting?",
+    "options": [
+      "Blame the person who clicked",
+      "Ask for their password to investigate",
+      "Calmly collect non-secret facts and follow the approved incident process",
+      "Tell everyone the sender is criminal"
+    ],
+    "answer": 2,
+    "why": "Prompt, nonjudgmental reporting helps responders. Secrets and unsupported allegations are unnecessary."
+  },
+  {
+    "id": "sec-vulnerability-triage-1",
+    "lessonId": "sec-vulnerability-triage",
+    "question": "Why can a lower severity finding deserve earlier attention?",
+    "options": [
+      "Scores are useless",
+      "The oldest finding is always worst",
+      "All internal systems are safe",
+      "Exposure, exploitation and business impact can make the local risk higher"
+    ],
+    "answer": 3,
+    "why": "Severity is one input. Local context and threat evidence influence priority."
+  },
+  {
+    "id": "sec-vulnerability-triage-2",
+    "lessonId": "sec-vulnerability-triage",
+    "question": "What should happen after an update reports successful installation?",
+    "options": [
+      "Verify the relevant version/state and affected user workflow",
+      "Declare every risk eliminated",
+      "Delete investigation records",
+      "Disable future monitoring"
+    ],
+    "answer": 0,
+    "why": "Installation is one step. Verification confirms the intended change and checks for regressions."
+  },
+  {
+    "id": "sec-vulnerability-triage-3",
+    "lessonId": "sec-vulnerability-triage",
+    "question": "A temporary access restriction reduces exposure but the vulnerable software remains. What should the record say?",
+    "options": [
+      "The vulnerability is permanently gone",
+      "A time-bounded mitigation, residual risk, owner and follow-up",
+      "No further action exists",
+      "The scanner must be wrong"
+    ],
+    "answer": 1,
+    "why": "A compensating control and a permanent repair are different. Their status should remain explicit."
+  },
+  {
+    "id": "sec-log-evidence-1",
+    "lessonId": "sec-log-evidence",
+    "question": "A failed-login threshold fires. What does that establish?",
+    "options": [
+      "The named user is guilty",
+      "All data was exported",
+      "The stated detection condition was met and needs context",
+      "The device must be wiped"
+    ],
+    "answer": 2,
+    "why": "An alert is a signal for triage, not a verdict or an instruction to destroy evidence."
+  },
+  {
+    "id": "sec-log-evidence-2",
+    "lessonId": "sec-log-evidence",
+    "question": "Why deduplicate the repeated event ID?",
+    "options": [
+      "To hide inconvenient evidence",
+      "Because all logs are false",
+      "To make every alert disappear",
+      "Because repeated collection is not necessarily a new authentication attempt"
+    ],
+    "answer": 3,
+    "why": "The same source event can be delivered twice. Count logical events while retaining provenance."
+  },
+  {
+    "id": "sec-log-evidence-3",
+    "lessonId": "sec-log-evidence",
+    "question": "Which item should be excluded from an ordinary authentication log?",
+    "options": [
+      "A session bearer token",
+      "A timestamp with a time zone",
+      "A success/failure result",
+      "A non-secret event identifier"
+    ],
+    "answer": 0,
+    "why": "A session token can grant access. Logging it creates unnecessary exposure."
+  },
+  {
+    "id": "sec-incident-decisions-1",
+    "lessonId": "sec-incident-decisions",
+    "question": "An export event appears after suspicious access. What is the most defensible statement?",
+    "options": [
+      "A breach of every record is proven",
+      "The export record is concerning; delivery, scope and reliability require verification",
+      "Nothing needs investigation",
+      "Every device must be erased"
+    ],
+    "answer": 1,
+    "why": "The evidence raises concern but does not establish all consequences or justify destructive actions."
+  },
+  {
+    "id": "sec-incident-decisions-2",
+    "lessonId": "sec-incident-decisions",
+    "question": "What is missing if a copy has a hash but no handling record?",
+    "options": [
+      "A guaranteed malware cure",
+      "All useful integrity information",
+      "The history of who collected and handled the evidence",
+      "A need for any further documentation"
+    ],
+    "answer": 2,
+    "why": "Hashes help compare bytes. They do not replace provenance and custody records."
+  },
+  {
+    "id": "sec-incident-decisions-3",
+    "lessonId": "sec-incident-decisions",
+    "question": "Which recovery gate addresses a recurring cause?",
+    "options": [
+      "A screenshot of the login page",
+      "A fast restore alone",
+      "A green progress bar",
+      "Verified removal of stale access plus successful intended workflows"
+    ],
+    "answer": 3,
+    "why": "Restoring service without controlling the entry condition can repeat the incident."
+  },
+  {
+    "id": "sec-restore-proof-1",
+    "lessonId": "sec-restore-proof",
+    "question": "A 20-minute loss window is compared with an RPO of 15 minutes. What is the result?",
+    "options": [
+      "RPO missed by five minutes in this scenario",
+      "RPO met because the restore was fast",
+      "RTO must also fail",
+      "All data is necessarily lost"
+    ],
+    "answer": 0,
+    "why": "The recovery point is older than the stated acceptable loss window. Recovery speed is a different measure."
+  },
+  {
+    "id": "sec-restore-proof-2",
+    "lessonId": "sec-restore-proof",
+    "question": "Why is synchronization alone not sufficient evidence of a backup strategy?",
+    "options": [
+      "Synchronization never transfers data",
+      "It can propagate deletion or corruption to the other copy",
+      "All replicas are offline",
+      "It always proves independence"
+    ],
+    "answer": 1,
+    "why": "Independent recoverable versions and failure-domain separation need deliberate design."
+  },
+  {
+    "id": "sec-restore-proof-3",
+    "lessonId": "sec-restore-proof",
+    "question": "A restored file’s hash matches a trusted original. What remains unproven?",
+    "options": [
+      "Whether those compared bytes match",
+      "The hash comparison result",
+      "Every application dependency and end-to-end recovery workflow",
+      "The fact that the local copy exists"
+    ],
+    "answer": 2,
+    "why": "Byte equality is useful but narrow. It does not validate the full service and all dependencies."
+  },
+  {
+    "id": "sec-governance-proof-1",
+    "lessonId": "sec-governance-proof",
+    "question": "Which item is evidence rather than a policy?",
+    "options": [
+      "Only approved users may access bookings",
+      "All reviews must have an owner",
+      "Compare the staff list with the access list",
+      "A dated review result with recorded decisions and deny-test outputs"
+    ],
+    "answer": 3,
+    "why": "Evidence records actual or explicitly simulated results. A requirement or procedure is not the result."
+  },
+  {
+    "id": "sec-governance-proof-2",
+    "lessonId": "sec-governance-proof",
+    "question": "A provider operates the booking infrastructure. What responsibility may remain with Cedar?",
+    "options": [
+      "Managing its users and permitted data access",
+      "None under any service model",
+      "Physically repairing every provider disk",
+      "Automatically accepting every new term"
+    ],
+    "answer": 0,
+    "why": "Responsibility depends on the service. Customer identity and data-access decisions commonly remain with the customer."
+  },
+  {
+    "id": "sec-governance-proof-3",
+    "lessonId": "sec-governance-proof",
+    "question": "What should a learner conclude after finishing this pack?",
+    "options": [
+      "Complete Security+ readiness is proven",
+      "A bounded foundation has been practiced; objective and practical gaps still need review",
+      "A 30-question result predicts an official score",
+      "All cybersecurity work is now covered"
+    ],
+    "answer": 1,
+    "why": "The lessons build useful foundations without exhaustive objective coverage or independent professional assessment."
+  }
+]

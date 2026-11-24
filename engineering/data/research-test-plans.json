@@ -1,0 +1,1399 @@
+{
+  "schema_version": 1,
+  "reviewed_at": "2026-10-31",
+  "description": "Preregistered comparison proposals with controls, full-output gates, resource metrics and protocols. Every record remains planned; execution metadata and results must be supplied by a separate validated evidence cohort.",
+  "plans": [
+    {
+      "id": "planned-local-catalog-v1",
+      "title": "Local catalog transactions",
+      "priority": 1,
+      "status": "planned",
+      "decision": "which embedded store fits a desktop catalog's durable metadata workload?",
+      "layer_ids": [
+        "local-data-search"
+      ],
+      "candidate_ids": [
+        "sqlite",
+        "redb",
+        "rocksdb",
+        "fjall",
+        "libmdbx",
+        "turso-database"
+      ],
+      "controls": [
+        "The actual target's current embedded store, revision and record/index contract.",
+        "The same committed transaction boundaries and failure model; cache-only completion is not a control.",
+        "Current authoritative catalog. KV and SQL designs are separate cohorts with equivalent application indexes and transaction boundaries."
+      ],
+      "gates": [
+        "identical committed records and warnings after reopen; declared transaction boundaries; no acknowledged-write loss under the selected failure model.",
+        "Fix acknowledged-write durability and ensure error propagation.",
+        "Keep index construction and maintenance inside timing.",
+        "Retain long-reader growth, compaction and corruption cases.",
+        "Never treat technical tags or prereleases as the stable baseline.",
+        "Reject relaxed-acknowledgement gains and candidates missing required SQL/extension/transaction behavior."
+      ],
+      "metrics": [
+        "import-to-durable-completion time, p95/p99 lookup latency, memory, storage amplification, recovery time, and integration burden. A faster cache-only write path is ineligible.",
+        "durable commit-to-visible latency",
+        "p99 reads",
+        "write and storage amplification",
+        "stalls",
+        "recovery time",
+        "full data parity"
+      ],
+      "protocol": [
+        "Compare the current store with SQLite, redb, and RocksDB implementations of the same record and index contract. Use small, typical, and large catalogs; imports, indexed lookups, concurrent readers, deletion, rename, and interrupted transactions. Put shared PostgreSQL service operation in a separate deployment cohort.",
+        "Prerequisites: a publishable representative corpus, pinned source revisions and toolchains, supported target hardware, and an existing complete-output oracle. Declare numeric CPU, queue, memory, disk and responsiveness budgets before execution.",
+        "Workload: Imports, updates, deletes, long readers, conflict bursts, compaction, disk-full and injected write errors, crash/reopen and rollback migration.",
+        "Separate cold and warm conditions and retain at least five independent repeated samples per configuration, including failed or cancelled runs. Record OS, CPU, storage, power mode, thread counts and cache policy.",
+        "Retain full raw outputs, warnings, validation failures, resource traces, configuration and corpus hashes. Apply correctness and resource gates before comparing performance; this plan records no execution or result.",
+        "Primary rationale sources: [IO31017], [IO31018], [IO31021], [IO31022], [IO31035], [IO31036], [IO31037], [IO31038], [IO31050], [IO31051]."
+      ]
+    },
+    {
+      "id": "planned-local-analytics-v1",
+      "title": "Local result analytics under memory pressure",
+      "priority": 1,
+      "status": "planned",
+      "decision": "how should Atlas inspect large benchmark and telemetry datasets on a developer machine?",
+      "layer_ids": [
+        "analytics"
+      ],
+      "candidate_ids": [
+        "duckdb",
+        "polars",
+        "apache-datafusion",
+        "vortex"
+      ],
+      "controls": [
+        "The current complete query implementation over one fixed dataset and memory allowance.",
+        "Hold the storage format fixed when comparing engines; compare Vortex and Parquet as a separate variable."
+      ],
+      "gates": [
+        "full result equivalence, explicit null/number/order semantics, successful out-of-core completion, and identical projections."
+      ],
+      "metrics": [
+        "cold and warmed query time, peak RSS, spill bytes, bytes read, and total analysis time. Retain unsupported-query results instead of shrinking the workload to each engine's strengths."
+      ],
+      "protocol": [
+        "Compare DuckDB, Polars, and DataFusion with equivalent scans, joins, selective filters, and high-cardinality aggregations. Include a corpus larger than the fixed memory allowance. Treat Vortex versus Parquet as a separately declared storage-format variable rather than changing engine and format together."
+      ]
+    },
+    {
+      "id": "planned-json-contract-v2",
+      "title": "Python JSON compatibility and complete application cost",
+      "priority": 1,
+      "status": "planned",
+      "decision": "does a faster parser help the target without changing its data contract?",
+      "layer_ids": [
+        "runtime-foundation",
+        "local-data-search",
+        "portable-features"
+      ],
+      "candidate_ids": [
+        "python-stdlib-json",
+        "orjson",
+        "ultrajson"
+      ],
+      "controls": [
+        "The target's current parser and full input-to-validated-output path.",
+        "Keep the retained warmed JSON measurements as historical evidence in their existing cohorts."
+      ],
+      "gates": [
+        "declared duplicate-key policy, exact required integer behavior, Unicode handling, depth limits, nonfinite-number rules, complete outputs, and failure reporting."
+      ],
+      "metrics": [
+        "input-to-validated-result time, cold cost, memory, and per-case semantic outcomes. A library can be ineligible for one numeric contract while remaining a candidate for another."
+      ],
+      "protocol": [
+        "Extend the earlier stdlib/orjson/ujson study with representative publishable files, cold imports/startup, file I/O, downstream validation, allocations, and peak RSS. Retain the earlier lab's distinct nine operation/workload cohorts; do not mix their warmed samples into new trials."
+      ]
+    },
+    {
+      "id": "planned-file-pipeline-v1",
+      "title": "Complete native file pipeline",
+      "priority": 1,
+      "status": "planned",
+      "decision": "would a language/runtime change improve an actual file-processing journey enough to justify migration?",
+      "layer_ids": [
+        "runtime-foundation",
+        "file-processing"
+      ],
+      "candidate_ids": [
+        "rust",
+        "zig",
+        "go",
+        "walkdir",
+        "ignore-parallel-walk",
+        "notify",
+        "ntfs-usn-reconciliation",
+        "blake3",
+        "fastcdc-rs",
+        "zstandard",
+        "libarchive",
+        "zip-rs"
+      ],
+      "controls": [
+        "The pinned current implementation of the complete scan/import journey.",
+        "A fresh complete inventory with the same hidden-file, ignore, path, metadata, diagnostic and output policy."
+      ],
+      "gates": [
+        "complete output hashes, preserved unreadable-file and malformed-input diagnostics, bounded resource use, cancellation/restart correctness, and target-platform packaging."
+      ],
+      "metrics": [
+        "cold full completion, steady-state completion, p95 UI impact, CPU, I/O, RSS, and build/deployment effort. Microkernel speed alone cannot decide the migration."
+      ],
+      "protocol": [
+        "Compare the pinned current implementation with bounded Rust, Zig, or Go prototypes of one complete scan/import operation. Keep filesystem fixtures, filtering, metadata, archive handling, hashing, warning generation, cancellation, and result serialization fixed. Treat a compiler update separately from a rewrite.",
+        "Split the workload into controlled variables: WalkDir versus `ignore` traversal with all required hidden/ignore filtering explicitly disabled; fresh scan versus watcher/USN reconciliation; hash choice; chunking/delta; compression; and archive implementation. Keep the complete end-to-end run as the deciding outcome. Include symlinks/reparse points, hard links, case/Unicode collisions, unreadable entries, concurrent mutation, archive bombs and traversal attempts. Never infer multi-file durability from a single replacement primitive."
+      ]
+    },
+    {
+      "id": "planned-plugin-boundary-v1",
+      "title": "Portable sandboxed plugin boundary",
+      "priority": 1,
+      "status": "planned",
+      "decision": "can portable plugins retain required behavior within the target's security and latency budget?",
+      "layer_ids": [
+        "plugin-isolation",
+        "portable-features"
+      ],
+      "candidate_ids": [
+        "wasmtime",
+        "wasi-component-async",
+        "spin",
+        "luau",
+        "appcontainer-lpac",
+        "bubblewrap",
+        "wamr"
+      ],
+      "controls": [
+        "The same parser/transform plugin running natively with an explicitly fixed host API.",
+        "Separate in-process VM, native helper process and service deployment cohorts.",
+        "The current runtime with the same validated modules, host ABI, resource limits and granted capabilities.",
+        "Interpreter, AOT and JIT configurations are independent cohorts with compile/setup work counted."
+      ],
+      "gates": [
+        "output parity, declared host capabilities, bounded memory, correct cancellation and traps, and required OS/toolchain support.",
+        "Identical plugin outputs, error/trap transport, validation and permitted host-call behavior.",
+        "Denied file/network/handle operations remain denied, memory/time bounds work and crashed plugins do not corrupt host state.",
+        "Unsupported WASI/Component features are explicit ineligibility, not silently removed functionality."
+      ],
+      "metrics": [
+        "compilation cost separately from startup, boundary-copy cost, throughput, RSS, and portability failures. Host APIs are part of the security boundary and must remain fixed.",
+        "Cold load-to-ready, complete operation p95/p99, host-boundary overhead, compile time, code/runtime size, RSS and recovery latency."
+      ],
+      "protocol": [
+        "Run the same parser/transform plugin natively and in Wasmtime using a fixed WASI component interface. Add Spin only for a service-shaped workload with equivalent networking semantics. Test large streams, cancellation, denied capabilities, malformed inputs, and memory exhaustion.",
+        "Add Luau only as a separate embedded-language configuration with a fixed host API. Compare AppContainer/LPAC on eligible Windows systems and bubblewrap on eligible Linux systems for owned native-helper workloads. Do not treat an in-process VM, a native plugin ABI, an OS sandbox and an updater as equivalent security boundaries. Pin supported WASI/runtime/toolchain combinations; current 0.3 availability does not imply every browser or language path supports it.",
+        "Pin canonical runtime release, compiler, enabled features and host imports. Use the same small and large plugin modules with compute and host-call-heavy work.",
+        "Test malformed modules, traps, infinite loops, allocation growth, invalid handles and cancellation during a host call.",
+        "Count AOT generation and trust/distribution requirements separately; retain runtime validation and current memory-safety fixes.",
+        "Record feature gaps and target platforms. Run repeated calls and teardown/reload cycles to detect leaks and stale handles."
+      ]
+    },
+    {
+      "id": "planned-desktop-slice-v1",
+      "title": "Desktop vertical slice",
+      "priority": 1,
+      "status": "planned",
+      "decision": "which complete desktop configuration meets the application's actual platform and interaction requirements?",
+      "layer_ids": [
+        "desktop-host",
+        "collection-ui"
+      ],
+      "candidate_ids": [
+        "electron",
+        "tauri",
+        "windows-app-sdk",
+        "avalonia",
+        "slint",
+        "egui",
+        "collection-virtualization",
+        "tanstack-virtual",
+        "react"
+      ],
+      "controls": [
+        "The current installed desktop application and its supported OS, accessibility and deployment behavior.",
+        "Keep the UI and native-service contract fixed; shell, renderer, language and virtualization are separate variables."
+      ],
+      "gates": [
+        "feature parity, safe privileged IPC, complete records, accessibility, required webview behavior, and deployment correctness."
+      ],
+      "metrics": [
+        "installed cold startup, input-to-usable and fully verified results, p95 input delay, peak process-tree memory, package size, and maintenance effort. A smaller shell is insufficient if a required workflow fails."
+      ],
+      "protocol": [
+        "Use the same UI and native-service contract for import, full-record search, large-card filtering, keyboard navigation, details, cancellation, durable save/reopen, update, and uninstall. Test supported Windows/macOS/Linux targets separately; include the current application's deployment and accessibility behavior.",
+        "For a Windows-native cohort, add WinUI/Windows App SDK; compare Avalonia, Slint or egui only when the same required feature set can be implemented. Keep renderer, shell and language changes as separate declared variables. Virtualize presentation while retaining the complete collection and stable item identities. Include variable-height rows, media load/error, rapid filter/sort, keyboard focus, selection, screen readers, IME, high DPI and insert/delete while scrolling. TanStack Virtual and native collection virtualization are role-specific tools, not whole-app substitutes."
+      ]
+    },
+    {
+      "id": "planned-frontend-build-v1",
+      "title": "Frontend build and edit loop",
+      "priority": 2,
+      "status": "planned",
+      "decision": "which compatible toolchain reduces the real edit-to-validated-preview loop?",
+      "layer_ids": [
+        "build-toolchain"
+      ],
+      "candidate_ids": [
+        "vite",
+        "rolldown",
+        "rspack",
+        "typescript-native"
+      ],
+      "controls": [
+        "The pinned production and development toolchain for one unchanged application.",
+        "Keep required type checking, emitted behavior and cache conditions equivalent."
+      ],
+      "gates": [
+        "route behavior, asset paths, source maps, type diagnostics, plugin compatibility, and executable output parity."
+      ],
+      "metrics": [
+        "clean builds, incremental rebuilds, HMR-to-usable UI, type-check time, peak RSS, output bytes, and setup effort. Cache state and type-check omission cannot explain a claimed win."
+      ],
+      "protocol": [
+        "Compare pinned production and development builds for one unchanged application. Vite is an application build driver, while Rolldown and Rspack are bundling components: compare complete supported configurations, not unrelated layer names. Include a declared type-checking baseline and, when compatible, TypeScript's native compiler as a separate variable."
+      ]
+    },
+    {
+      "id": "planned-js-service-v1",
+      "title": "JavaScript service runtime",
+      "priority": 2,
+      "status": "planned",
+      "decision": "does Node.js, Bun, or Deno improve a small real service under its required contract?",
+      "layer_ids": [
+        "runtime-foundation",
+        "api-services"
+      ],
+      "candidate_ids": [
+        "nodejs",
+        "bun",
+        "deno"
+      ],
+      "controls": [
+        "The current service runtime with the same supported handler, dependencies and validation.",
+        "Pin framework and runtime independently; a no-op HTTP handler is a separate microbenchmark."
+      ],
+      "gates": [
+        "response/body parity, TLS/auth behavior where required, cancellation, backpressure, dependency compatibility, and preserved errors."
+      ],
+      "metrics": [
+        "p50/p95/p99 request latency, throughput at a fixed error/latency budget, startup, RSS, and deployment burden. A no-op HTTP benchmark is a separate microbenchmark."
+      ],
+      "protocol": [
+        "Run an identical supported handler and dependency set with validation, database calls, structured logging, cancellation, and errors included. Use concurrency and payload distributions representative of the target. Pin framework and runtime versions independently and record unsupported dependencies."
+      ]
+    },
+    {
+      "id": "planned-game-slice-v1",
+      "title": "Game/tool vertical slice",
+      "priority": 2,
+      "status": "planned",
+      "decision": "which engine fits the target's rendering, asset, editing, and export needs?",
+      "layer_ids": [
+        "game-rendering",
+        "asset-pipeline"
+      ],
+      "candidate_ids": [
+        "bevy",
+        "godot",
+        "threejs",
+        "pixijs",
+        "rapier-js"
+      ],
+      "controls": [
+        "The current engine and complete interactive scene using fixed assets, quality and scripted behavior.",
+        "Separate native/browser and 2D/3D cohorts; add equivalent physics only where required."
+      ],
+      "gates": [
+        "visual and behavioral acceptance, import fidelity, input responsiveness, required export formats, target-device operation, and license compatibility."
+      ],
+      "metrics": [
+        "frame-time distribution, load/import time, memory/VRAM, iteration time, binary size, and implementation effort. Missing features are disqualifications, not faster frame times."
+      ],
+      "protocol": [
+        "Implement the same small interactive scene and asset-import workflow in the pinned baseline, Bevy, and Godot where the required target platforms are supported. Fix assets, lighting/quality settings, scripted behaviors, input, animation, and scene complexity. Preserve the target mod/tool ecosystem's pinned compatibility requirements.",
+        "For browser-specific slices, compare complete Three.js or PixiJS configurations in separate 3D/2D cohorts; add Rapier only where equivalent physics is required. Separate renderer/API migration from engine replacement. Record unsupported shaders, post-processing, physics determinism assumptions, browser fallback, context loss and export restrictions as eligibility outcomes. Browser export and native rendering cannot share a frame-time ranking without equivalent hardware and visual work."
+      ]
+    },
+    {
+      "id": "planned-catalog-retrieval-v1",
+      "title": "Labeled catalog retrieval",
+      "priority": 2,
+      "status": "planned",
+      "decision": "which retrieval system best serves the catalog's actual search queries at the required quality?",
+      "layer_ids": [
+        "local-data-search",
+        "api-services"
+      ],
+      "candidate_ids": [
+        "pgvector",
+        "qdrant",
+        "lancedb",
+        "milvus",
+        "sqlite",
+        "tantivy"
+      ],
+      "controls": [
+        "The current search implementation and a SQLite FTS5 or Tantivy lexical reference for exact identifiers, names and paths.",
+        "Use held-out relevance labels with identical corpus, filters and resource limits; keep dense, lexical and hybrid configurations distinct."
+      ],
+      "gates": [
+        "minimum declared recall/relevance, filter correctness, update visibility, and failure/recovery requirements."
+      ],
+      "metrics": [
+        "recall@k, nDCG@10, p95/p99 latency, build/update time, index size, and full-service resource cost. Report the quality/latency tradeoff; do not rank a lower-recall run as an unconditional winner."
+      ],
+      "protocol": [
+        "Compare pgvector, Qdrant, LanceDB, and Milvus using the same corpus, embedding model, ground-truth neighbors, query labels, filter selectivities, updates, and resource limits. Maintain distinct dense, lexical, and hybrid configurations. Preserve code identifiers, exact terms, and tenant boundaries in the test set.",
+        "Keep a SQLite FTS5 or Tantivy lexical baseline for exact identifiers, names and paths. Add semantic or hybrid retrieval only when held-out relevance labels show the extra system is useful. Browser IndexedDB/Dexie persistence is a separate host contract; do not compare its transaction latency to a remote vector service as one storage score."
+      ]
+    },
+    {
+      "id": "planned-local-inference-v1",
+      "title": "Local model inference",
+      "priority": 2,
+      "status": "planned",
+      "decision": "which supported local runtime meets a desktop assistant's response and memory requirements?",
+      "layer_ids": [
+        "ai-tools"
+      ],
+      "candidate_ids": [
+        "llama-cpp",
+        "mlx-lm",
+        "mlc-llm"
+      ],
+      "controls": [
+        "The current supported local runtime on the same hardware/OS and model configuration.",
+        "Fix weights, quantization, tokenizer, context and generation settings; separate loading, prompt processing and generation."
+      ],
+      "gates": [
+        "required task quality, complete output, supported context, deterministic settings where available, memory fit, and target packaging."
+      ],
+      "metrics": [
+        "time to first token, inter-token latency, prompt/decode throughput, peak RAM/VRAM, energy where instrumented, and setup burden. Cross-hardware results need separate cohorts; quantization changes need separate configurations."
+      ],
+      "protocol": [
+        "Compare llama.cpp, MLX LM, and MLC LLM only within hardware/OS combinations each supports. Fix model identity, weights, quantization, tokenizer, context, generation settings, task set, and output-quality gates. Separate initial model loading, prompt processing, and generation."
+      ]
+    },
+    {
+      "id": "planned-desktop-diagnostics-v1",
+      "title": "Desktop profiling effectiveness",
+      "priority": 2,
+      "status": "planned",
+      "decision": "which instrumentation exposes the target's frame, scheduling, allocation, or graphics fault with acceptable overhead?",
+      "layer_ids": [
+        "testing-observability",
+        "collection-ui"
+      ],
+      "candidate_ids": [
+        "tracy",
+        "perfetto",
+        "renderdoc"
+      ],
+      "controls": [
+        "The uninstrumented owned reference scene/import pipeline with seeded known faults.",
+        "Use a common tracing event scope; evaluate RenderDoc frame debugging separately."
+      ],
+      "gates": [
+        "required event/fault visibility, usable saved traces, supported graphics APIs/OS, and bounded capture overhead."
+      ],
+      "metrics": [
+        "diagnosis accuracy/time, frame-time overhead, event loss, trace size, and analysis memory. Do not combine distinct profiler roles into one score."
+      ],
+      "protocol": [
+        "Seed known performance and correctness faults in an owned reference scene/import pipeline. Compare uninstrumented execution with Tracy and Perfetto using a common event scope. Evaluate RenderDoc's frame-debugging task in a separate graphics-debugging cohort; it performs a different job from continuous CPU tracing."
+      ]
+    },
+    {
+      "id": "planned-gpu-serving-v1",
+      "title": "GPU inference serving",
+      "priority": 3,
+      "status": "planned",
+      "decision": "which serving configuration gives the best useful capacity within a latency and quality budget?",
+      "layer_ids": [
+        "ai-tools"
+      ],
+      "candidate_ids": [
+        "vllm",
+        "sglang",
+        "tensorrt-llm"
+      ],
+      "controls": [
+        "The current serving configuration on matching supported GPUs, weights, precision and request traces.",
+        "Separate cold and warm cache lanes and vary attention, speculative decoding or KV caching independently."
+      ],
+      "gates": [
+        "model/output-quality equivalence, request completion, declared latency SLO, memory limits, and timeout accounting."
+      ],
+      "metrics": [
+        "goodput meeting the SLO, time to first token, inter-token tails, GPU memory, energy where measured, and cost per completed valid task. Provisioning and resource spending are separate execution decisions."
+      ],
+      "protocol": [
+        "Compare vLLM, SGLang, and TensorRT-LLM on matching supported GPU configurations, model weights, precision, context lengths, request traces, and batching policies. Run cold and warm cache lanes separately. Introduce attention kernels, speculative decoding, or KV-cache systems one variable at a time."
+      ]
+    },
+    {
+      "id": "planned-agent-protocol-v1",
+      "title": "Coding-agent configurations",
+      "priority": 3,
+      "status": "planned",
+      "decision": "which complete agent configuration resolves target-like work reliably within a fixed budget?",
+      "layer_ids": [
+        "ai-tools"
+      ],
+      "candidate_ids": [
+        "openhands-sdk",
+        "langgraph",
+        "smolagents",
+        "swe-bench-pro-v2",
+        "programbench"
+      ],
+      "controls": [
+        "The current complete model/agent/harness configuration under one fixed benchmark protocol and held-out split.",
+        "Fix reasoning effort, permissions, network, token/time/cost and retry policy; keep different benchmark protocols in separate cohorts."
+      ],
+      "gates": [
+        "pristine independent regrading, held-out tests, sandbox integrity, no target-patch leakage, complete trajectories, and preserved failed attempts."
+      ],
+      "metrics": [
+        "resolved tasks, cost per valid resolution, wall time, intervention count, and uncertainty. A leaderboard report stays external until the matching protocol is reproduced locally."
+      ],
+      "protocol": [
+        "Choose one benchmark protocol and task split per cohort. Compare exact model, reasoning effort, agent/harness, tool permissions, network policy, token/time/cost limits, and retry policy. OpenHands, LangGraph, and smolagents are implementation candidates, not interchangeable evidence for a model ranking. Keep SWE-Bench Pro and ProgramBench results in their own protocols."
+      ]
+    },
+    {
+      "id": "planned-durable-jobs-v1",
+      "title": "Recoverable experiment orchestration",
+      "priority": 3,
+      "status": "planned",
+      "decision": "which workflow system reliably completes Atlas's multi-step jobs under failures?",
+      "layer_ids": [
+        "durable-jobs"
+      ],
+      "candidate_ids": [
+        "temporal",
+        "dbos",
+        "restate"
+      ],
+      "controls": [
+        "The current import, validate, execute and artifact-publish workflow with isolated fixtures.",
+        "Keep idempotent external-effect contracts fixed and self-hosted/managed deployments separate."
+      ],
+      "gates": [
+        "no lost acknowledged job, explicit retry semantics, no unaccounted duplicated effect, recoverable checkpoints, and retained error history."
+      ],
+      "metrics": [
+        "completed jobs, recovery time, p95 orchestration overhead, database/storage growth, and operating effort. Measure self-hosted and managed deployments separately."
+      ],
+      "protocol": [
+        "Implement the same import, validate, execute, and artifact-publish workflow in the current baseline, Temporal, DBOS, and Restate. Use isolated fixtures and idempotent external effects. Inject worker termination, duplicate delivery, service restart, delayed dependencies, and an upgrade between workflow steps."
+      ]
+    },
+    {
+      "id": "planned-release-evidence-v1",
+      "title": "Reproducible release and evidence pipeline",
+      "priority": 3,
+      "status": "planned",
+      "decision": "can the release pipeline produce traceable, verifiable artifacts with acceptable developer cost?",
+      "layer_ids": [
+        "build-toolchain",
+        "secure-updates"
+      ],
+      "candidate_ids": [
+        "dagger",
+        "syft",
+        "sigstore-cosign",
+        "slsa",
+        "osv-scanner",
+        "trivy",
+        "openssf-scorecard",
+        "nix",
+        "diffoscope",
+        "petra-sbom-paper"
+      ],
+      "controls": [
+        "The current complete pipeline with the same checks and required output artifacts.",
+        "Treat pinned Nix builds, dependency scanning and confidential SBOM research as separate configurations or follow-on cohorts."
+      ],
+      "gates": [
+        "identical artifacts or explained reproducible normalization, complete warnings, correct invalidation, tamper/identity rejection, SBOM ground-truth coverage, and safe secret handling."
+      ],
+      "metrics": [
+        "clean/incremental completion, cache correctness, provenance completeness, scan precision/recall, and developer effort. Signing, repository hygiene, and runtime correctness are separate properties."
+      ],
+      "protocol": [
+        "Compare the existing pipeline with a pinned Dagger-based implementation of the same checks and outputs. Generate an SBOM with Syft, verify artifact identity with Cosign, and record applicable SLSA controls. Compare OSV-Scanner and Trivy on the same known dependency fixtures as a separate scanning sub-cohort; keep Scorecard repository checks as contextual signals.",
+        "Include a Nix-pinned environment as its own build configuration and use diffoscope to inspect differing artifacts, with time/space limits for hostile or very large inputs. A Dagger beta belongs in a separate preview lane. Verify actual signer/issuer/digest policy and dependency extraction against ground truth; an attached signature, provenance file or SBOM is not itself a successful verification. Keep PETRA's confidential SBOM exchange protocol as a research follow-on rather than attributing its guarantees to ordinary SBOM generation."
+      ]
+    },
+    {
+      "id": "planned-mod-resolution-v1",
+      "title": "Mod dependency and compatibility planning",
+      "priority": 1,
+      "status": "planned",
+      "decision": "which dependency solver produces correct, understandable and reproducible plans for a pinned game/runtime/loader ecosystem?",
+      "layer_ids": [
+        "dependency-solving",
+        "mod-compatibility"
+      ],
+      "candidate_ids": [
+        "libsolv",
+        "resolvo",
+        "fabric-loader",
+        "neoforge",
+        "bepinex",
+        "pubgrub-rs"
+      ],
+      "controls": [
+        "The current resolver with the same normalized version, feature, conflict, preference and installed-state contract.",
+        "Use exhaustive enumeration as the small-case oracle; retain ecosystem-specific loader fixtures separately.",
+        "The existing solver and exact platform/version/optional-dependency/override policy.",
+        "A small exhaustive reference for bounded graphs and an independent checker for all emitted plans."
+      ],
+      "gates": [
+        "every requested dependency satisfied, all conflicts retained, deterministic preference handling, correct unsatisfiable explanation, cancellation and no mutation before acceptance. Keep large solver output and all warning/error records. Include corrupt metadata, dependency cycles, disappearing versions and game/runtime mismatch.",
+        "Every selected version satisfies all declared constraints and user pins; no omitted optional, prerelease or platform rule.",
+        "Unsatisfiable explanations identify genuine contradictory source constraints and preserve unknown/offline metadata distinctions.",
+        "Solver output remains separate from runtime ABI compatibility and install execution; no fake compatibility guarantee."
+      ],
+      "metrics": [
+        "complete plan latency and tails, peak RSS, explanation accuracy/completeness, decision stability and integration complexity. Then validate selected plans by actual startup/load-order tests in isolated licensed fixtures; solver satisfiability alone does not prove mod compatibility.",
+        "Resolution p50/p95/p99, worst-case budget exhaustion, metadata requests, cache bytes, RSS, valid-plan rate and explanation correctness/completeness."
+      ],
+      "protocol": [
+        "Compare the current resolver, libsolv and Resolvo on a common normalized contract for version ranges, optional dependencies, conflicts, replacements, features, preferred versions and installed state. Use publishable synthetic metadata plus a permitted real corpus; verify small cases with exhaustive enumeration. Fabric, NeoForge and BepInEx define separate compatibility fixtures for their actual ecosystems, not three interchangeable solvers. A migration primer is not proof that a specific stable loader artifact exists.",
+        "Publish deterministic synthetic and real redistributable graphs with satisfiable chains, diamonds, cycles, conflicts, missing metadata and high fan-out.",
+        "Use identical cached metadata for solver-core timing; add cold/offline/slow-provider cases as separate end-to-end cohorts.",
+        "Pin version-selection policy; where multiple plans are valid compare policy satisfaction rather than demanding an arbitrary identical solution.",
+        "Check explanation leaves against original constraints, test localization/readability with representative UI text, and retain solver cancellation or budget failures.",
+        "Feed valid outputs through the same dry-run install planner to expose load-order, rollback and ABI constraints absent from the version graph."
+      ]
+    },
+    {
+      "id": "planned-verified-install-v1",
+      "title": "Verified transfer, installation and rollback",
+      "priority": 1,
+      "status": "planned",
+      "decision": "can a bounded download/update pipeline preserve trusted content and recoverable installation through interruption and adversarial input?",
+      "layer_ids": [
+        "network-sync",
+        "secure-updates",
+        "durable-jobs",
+        "asset-pipeline",
+        "file-processing"
+      ],
+      "candidate_ids": [
+        "http-range-resumption",
+        "reqwest",
+        "bita",
+        "journaled-staged-install",
+        "tuf",
+        "tough",
+        "velopack",
+        "sparkle",
+        "iroh-blobs",
+        "casync"
+      ],
+      "controls": [
+        "The current complete update flow, full download and full reinstall.",
+        "Verify update metadata and platform installation independently before composing passing configurations.",
+        "Current HTTP download and verifier; compare complete manifests/artifacts rather than protocol names alone."
+      ],
+      "gates": [
+        "reject stale/expired or wrong-role metadata, threshold/signature failures, rollback/freeze attempts, untrusted destinations, path escape/reparse races and content mismatches. Never mix bytes from two origin versions after an ETag change or ignored Range. Inject disconnect, cancellation, disk full, process termination and OS restart at every durable transition. Preserve user files and owned-file boundaries; verify final trees and recovery journals. Single-file replacement is not a multi-file transaction or proof of power-loss durability.",
+        "Cryptographic integrity and all required file metadata preserved.",
+        "Check full manifest membership and error reporting.",
+        "Bound root/child/hash-sequence reads and connection attempts.",
+        "Separate server preparation and client completion costs.",
+        "Reject a candidate that only wins with uncounted preparation or omits validation, metadata or complete transfer failures."
+      ],
+      "metrics": [
+        "verified time-to-usable, transferred/written bytes, peak memory/disk, recovery time, unnecessary redownloads and complete error visibility. Publish every failed recovery.",
+        "time to complete verified materialization",
+        "network bytes",
+        "seed-scan and verification CPU",
+        "peak queued memory",
+        "disk amplification",
+        "recovery correctness"
+      ],
+      "protocol": [
+        "Compare the current complete flow with validator-bound HTTP resume, a separately declared bita delta-transfer configuration, and a journaled staging/commit/rollback proposal. Keep full-download and full-reinstall controls. Test TUF/reference or tough metadata verification independently from Velopack/Sparkle platform packaging; then compose only configurations that pass both contracts. Pin stable and prerelease updater channels separately. iroh-blobs is a watchlist follow-on while its current-line production warning remains unresolved.",
+        "Prerequisites: a publishable representative corpus, pinned source revisions and toolchains, supported target hardware, and an existing complete-output oracle. Declare numeric CPU, queue, memory, disk and responsiveness budgets before execution.",
+        "Workload: Related and unrelated releases, shifted files, precompressed archives, missing seeds, changed validators, truncated streams, bad ranges, huge hash-sequence roots and interrupted recovery.",
+        "Separate cold and warm conditions and retain at least five independent repeated samples per configuration, including failed or cancelled runs. Record OS, CPU, storage, power mode, thread counts and cache policy.",
+        "Retain full raw outputs, warnings, validation failures, resource traces, configuration and corpus hashes. Apply correctness and resource gates before comparing performance; this plan records no execution or result.",
+        "Primary rationale sources: [IO31030], [IO31049]."
+      ]
+    },
+    {
+      "id": "planned-extension-lifecycle-v1",
+      "title": "Browser worker and native-message lifecycle",
+      "priority": 1,
+      "status": "planned",
+      "decision": "which extension/core boundary survives browser lifecycle constraints with the required security and complete outputs?",
+      "layer_ids": [
+        "browser-extensions",
+        "portable-features",
+        "local-data-search"
+      ],
+      "candidate_ids": [
+        "mv3-durable-lifecycle",
+        "native-messaging-boundary",
+        "wxt",
+        "comlink",
+        "lit",
+        "dexie",
+        "ajv-standalone",
+        "zod",
+        "dompurify"
+      ],
+      "controls": [
+        "A minimal MV3 implementation with fixed versioned protocol, origin/sender checks and capability allowlists.",
+        "Keep validation transforms, diagnostics and worker contract equivalent; framework, storage and transport changes are independent variables."
+      ],
+      "gates": [
+        "worker termination at every step, browser restart, native disconnect/reconnect, backpressure, cancellation, duplicate delivery, upgrade/version skew, corrupt/truncated frames and oversized payloads. Persist durable state and prove idempotency; a global variable is not a checkpoint. Limit offscreen documents to supported reasons and lifecycle requirements. Include CSP-compatible builds and DOMPurify at the actual untrusted markup boundary; post-sanitization mutation must not reintroduce unsafe markup."
+      ],
+      "metrics": [
+        "correct completed tasks, recovery latency, p95 message/input delay, serialization cost, CPU/memory and full diagnostic parity."
+      ],
+      "protocol": [
+        "Compare a minimal MV3 baseline with WXT as the build/configuration variable. Keep a versioned native-messaging protocol, origin/sender checks and capability allowlists fixed. Compare structured clone, transfer and Comlink only for the same worker contract. Keep UI framework and storage changes separate; evaluate Lit and Dexie where they fit the chosen host. Compare Ajv standalone and Zod only with the same validation, transforms, warnings and diagnostic output. A boolean-only validation fast path belongs in a separate contract from complete error reporting."
+      ]
+    },
+    {
+      "id": "planned-asset-pipeline-v1",
+      "title": "Asset fidelity, decoding and delivery",
+      "priority": 1,
+      "status": "planned",
+      "decision": "which asset transformations improve the complete import-to-frame journey without unacceptable visual or behavioral changes?",
+      "layer_ids": [
+        "asset-pipeline",
+        "game-rendering"
+      ],
+      "candidate_ids": [
+        "blender",
+        "gltf-transform",
+        "meshoptimizer",
+        "basis-universal",
+        "neural-texture-es",
+        "restir-multilayer-splatting-paper",
+        "fastgltf",
+        "ozz-animation",
+        "ktx-software",
+        "jpeg-variable-texture-2026"
+      ],
+      "controls": [
+        "Permitted public assets through the current Blender/export path and complete import-to-frame journey.",
+        "Change one transformation at a time and fix visual/semantic acceptance; neural and paper methods remain separate research lanes.",
+        "The pinned existing glTF loader, optimizer and animation runtime.",
+        "Unchanged public assets as the reference; lossless layout/compression and lossy simplification remain separate cohorts.",
+        "Current engine-supported BC/ASTC/ETC texture path at fixed quality and mip chain.",
+        "KTX 4.4.2 stable and 5.0.0-rc2 are separate configurations; research JPEG is a separate restricted RGB cohort."
+      ],
+      "gates": [
+        "predeclared perceptual and exact semantic checks, complete animation/material behavior, decoder/platform compatibility, retained metadata and verified asset licensing.",
+        "Identical required nodes, material channels, weights, skinning, animations, lights and extensions after full loading.",
+        "Predeclared pose, silhouette and topology tolerances for explicitly lossy variants.",
+        "Malformed documents, missing buffers, sparse accessors, degenerate IK and invalid sizes produce complete errors rather than omitted work.",
+        "Same resolution, orientation, mipmaps, alpha, colorspace, normal/material semantics and declared visual error.",
+        "Actual target loaders validate/decode/upload each format and preserve warnings; unsupported formats remain disqualified.",
+        "All index/cache/mipmap/driver allocations and CPU/GPU transition work count toward totals."
+      ],
+      "metrics": [
+        "network bytes, decode/transcode/upload time, first usable and complete frame, frame tails, CPU/RAM/VRAM and quality error. A smaller compressed file that increases startup or loses required visuals does not automatically win. Retain full quality metrics, per-asset failures and reference renders.",
+        "Bytes-to-ready-scene, parse/decode/upload stages, copied bytes, peak RSS/VRAM, animation p95, pose error and diagnostic completeness.",
+        "Encode cost, compressed/transfer MiB, transcode/upload time, total frame p95/p99, host/VRAM peak, fidelity and interoperability matrix."
+      ],
+      "protocol": [
+        "Run mesh import, animation, texture encoding and texture-device presentation as separate cohorts with their own fidelity contracts. KTX stable and preview, lossless mesh transforms and topology-changing remeshing are distinct configurations.",
+        "Use permitted public assets and a Blender/export baseline. Evaluate glTF Transform, meshoptimizer and Basis Universal one transformation at a time: mesh layout/quantization, geometry compression, texture format/quality and packaging. Fix animations, materials, color spaces, alpha, UVs, morph targets, metadata and target devices. Include unsupported extensions, huge textures, malformed data and cancellation. Neural texture ES and the multilayer ReSTIR paper remain separate research lanes with artifact, license and full-paper review gates; a source abstract is insufficient to import reported results.",
+        "Pin a publishable corpus with external buffers/images, sparse accessors, morph targets, skinned rigs, root motion and empty/degenerate data.",
+        "Measure through the first correct rendered frame, not only JSON parsing. Force equal resource loading and validation options.",
+        "For meshoptimizer keep vertex/index reordering apart from remeshing. Include wires, touching surfaces, gaps and attribute-sensitive assets to expose forbidden losses.",
+        "For ozz compare offline conversion and runtime sampling separately at fixed per-bone/root-motion tolerances; test blend extremes and NaN-prone IK.",
+        "Retain per-case ineligibility and unsupported extension results rather than reducing the corpus to accepted inputs.",
+        "Build public albedo, alpha-edge, normal, ORM, HDR, cubemap and tiled-texture fixtures. Pin codec/tool/build flags and target format.",
+        "Round-trip through the current editor/exporter/engine, including malformed headers, dimensions, truncated levels and unsupported codec identifiers.",
+        "Measure cold caches, steady movement and abrupt camera cuts; include task cancellation and memory pressure.",
+        "For the JPEG research candidate restrict the cohort to supported diffuse RGB, include CUDA/OpenGL transition costs, and retain cache overhead rather than copying kernel-only timing.",
+        "Keep new KTX specification/ABI changes and nondeterministic encoding visible; do not promote the release candidate merely because it is newer."
+      ]
+    },
+    {
+      "id": "planned-native-linking-v1",
+      "title": "Native link compatibility and complete build time",
+      "priority": 1,
+      "status": "planned",
+      "decision": "Does a linker change shorten the actual development loop without changing the deployed binary contract?",
+      "layer_ids": [
+        "build-toolchain"
+      ],
+      "candidate_ids": [
+        "mold",
+        "wild-linker",
+        "mold-parallel-linker-paper"
+      ],
+      "controls": [
+        "Pin the target's current linker, compiler, object files, archives, scripts, LTO mode, exports and link arguments.",
+        "Keep object-cache state and outer build parallelism fixed; lld and GNU ld controls need exact versions even when not individual catalog candidates."
+      ],
+      "gates": [
+        "Identical required exports, TLS, exceptions/unwinding, loading, debugger behavior and application outputs.",
+        "All required platform and linker-script features must pass; unsupported or failed links remain visible and cannot receive a zero-time result."
+      ],
+      "metrics": [
+        "Link-only wall time and peak RSS, complete build/diagnostic completion, output bytes and compatibility failures.",
+        "Report worker scaling and contention separately from single-configuration comparisons."
+      ],
+      "protocol": [
+        "Create small, typical and large target link inputs with hashed object manifests. Include both successful and intentionally invalid links, shared libraries, debug builds and the actual release layout.",
+        "Run cold and warmed filesystem cohorts independently, balance configuration order, and retain repeated samples, commands, stderr, exit status, artifact hashes and machine metadata.",
+        "Treat historical paper reproduction and current mold 3.0.0 versus Wild 0.11.0 as separate cohorts. Do not call Wild incremental. Predeclare the smallest worthwhile full-build improvement and acceptable memory budget before running."
+      ]
+    },
+    {
+      "id": "planned-compiler-cache-v1",
+      "title": "Compiler cache invalidation and real build loops",
+      "priority": 1,
+      "status": "planned",
+      "decision": "Can caching improve repeat builds while preserving every dependency and diagnostic?",
+      "layer_ids": [
+        "build-toolchain"
+      ],
+      "candidate_ids": [
+        "sccache"
+      ],
+      "controls": [
+        "Use the actual uncached build and existing incremental build as separate controls.",
+        "Pin compiler versions, paths, environment and local versus remote cache backend."
+      ],
+      "gates": [
+        "No stale artifact or missed diagnostic after changes to source, generated headers, flags, environment, architecture or toolchain.",
+        "Remote errors, credential failures and cache corruption are diagnosed distinctly from ordinary misses; poisoned artifacts are rejected by the declared trust policy."
+      ],
+      "metrics": [
+        "Clean, repeat and changed-input full build seconds; peak RSS, cache bytes, hit/miss/error counts and invalidation failures."
+      ],
+      "protocol": [
+        "Declare cacheable and uncacheable steps, including Rust final linking. Run empty-cache, same-commit repeat, one-file edit, configuration edit and generated-dependency edit cases.",
+        "Record cache stats plus executable behavior and normalized artifact comparisons. Do not compare a warm remote cache with an uncached clean baseline as the sole headline.",
+        "Set cache storage and network budgets; preregister failure injection, retention and rebuild fallback. Accept only useful full-cycle gains after every invalidation gate passes."
+      ]
+    },
+    {
+      "id": "planned-profile-guided-builds-v1",
+      "title": "Profile-guided builds on held-out application journeys",
+      "priority": 1,
+      "status": "planned",
+      "decision": "Can compiler and post-link optimization improve the current implementation across its real workload?",
+      "layer_ids": [
+        "runtime-foundation",
+        "build-toolchain"
+      ],
+      "candidate_ids": [
+        "llvm-pgo",
+        "llvm-thinlto",
+        "llvm-bolt"
+      ],
+      "controls": [
+        "Pin the current release binary, compiler, linker, numeric flags and application commit.",
+        "Partition training and evaluation datasets before collection; keep PGO, ThinLTO and BOLT changes independent initially."
+      ],
+      "gates": [
+        "Exact required outputs and errors, numeric tolerance, ABI, exceptions, dynamic loading and packaging behavior.",
+        "Training-profile provenance, binary/profile compatibility and successful cold paths; no ignored stale-profile warnings."
+      ],
+      "metrics": [
+        "Held-out full completion, p95/p99 operations, startup, RSS, binary bytes and total profile/build cost.",
+        "Compare supported instruction-cache counters only within the same hardware cohort."
+      ],
+      "protocol": [
+        "Register representative typical, rare and cold journeys plus held-out inputs. Capture unprofiled baseline samples before instrumented training.",
+        "Sweep bounded backend jobs for ThinLTO separately from runtime comparisons. Test cold and warmed backend caches without mixing results.",
+        "Apply BOLT only to eligible symbol/relocation-bearing ELF artifacts; retain original and optimized hashes with a rollback path.",
+        "Before testing, state minimum practical improvement, allowed worst-case regression and amortization horizon for profile maintenance. Publish losing or neutral configurations."
+      ]
+    },
+    {
+      "id": "planned-browser-scheduling-v1",
+      "title": "Complete UI work with responsive scheduling and containment",
+      "priority": 1,
+      "status": "planned",
+      "decision": "Can small scheduling and rendering changes improve interaction while preserving complete collection behavior?",
+      "layer_ids": [
+        "collection-ui"
+      ],
+      "candidate_ids": [
+        "cooperative-task-scheduling",
+        "css-content-visibility",
+        "collection-virtualization",
+        "react"
+      ],
+      "controls": [
+        "Keep the same framework, complete collection, media and operation semantics.",
+        "Vary yielding, containment and virtualization independently before exploring combinations."
+      ],
+      "gates": [
+        "Complete count, ordering, selection, search, export and final output remain identical.",
+        "Focus, IME, find-in-page where required, accessibility, reduced motion, cancellation and superseding generations pass; no stale partial publication."
+      ],
+      "metrics": [
+        "Input p95/p99, long tasks, full operation completion, frame tails, heap/DOM size and layout shifts."
+      ],
+      "protocol": [
+        "Replay typing, scroll and update traces against small, typical and above-memory-pressure collections in pinned supported browsers.",
+        "Feature-detect scheduler.yield and exercise the fallback. Sweep declared chunk budgets while retaining total work; fast partial presentation cannot stand in for completion.",
+        "For content-visibility, declare intrinsic sizes and test expanding media and offscreen focus. Preserve a complete data oracle when comparing virtualization.",
+        "Predeclare the interaction budget and maximum allowed completion or memory regression. Retain browser traces and a reproducible event script."
+      ]
+    },
+    {
+      "id": "planned-client-live-queries-v1",
+      "title": "Live query correctness through optimistic rollback",
+      "priority": 2,
+      "status": "planned",
+      "decision": "Can incremental client queries reduce update cost without confusing displayed, synchronized and committed state?",
+      "layer_ids": [
+        "collection-ui",
+        "local-data-search"
+      ],
+      "candidate_ids": [
+        "tanstack-db"
+      ],
+      "controls": [
+        "Use the current client state/cache implementation and an authoritative server-side or exhaustive reference query.",
+        "Pin matching TanStack packages and documentation, dataset completeness and synchronization mode."
+      ],
+      "gates": [
+        "All required joined and filtered results agree after inserts, updates, deletes, reordering, disconnect and reconnect.",
+        "Optimistic rollback restores correct state after rejection; every acknowledged mutation follows the declared authoritative durability contract."
+      ],
+      "metrics": [
+        "Complete initial load, update-to-correct-view, optimistic display and confirmed visibility separately; heap, network bytes and rollback failures."
+      ],
+      "protocol": [
+        "Generate deterministic operation logs covering multiple collections, joins, high-churn updates, rare deletes and failed optimistic writes.",
+        "Record total source and visible record counts at every checkpoint; paged or partial synchronization must not be compared to a complete-data requirement.",
+        "Inject out-of-order notifications, stale versions and reconnects. Check the complete query result after each stable checkpoint.",
+        "Choose minimum useful update improvement and maximum memory overhead before trial collection; preserve neutral and failing query shapes."
+      ]
+    },
+    {
+      "id": "planned-command-benchmark-methods-v1",
+      "title": "Command and Python benchmark reproducibility",
+      "priority": 1,
+      "status": "planned",
+      "decision": "Can a proposed timing improvement survive correctness checks, independent processes and ordering controls?",
+      "layer_ids": [
+        "testing-observability",
+        "build-toolchain",
+        "runtime-foundation"
+      ],
+      "candidate_ids": [
+        "hyperfine",
+        "pyperf"
+      ],
+      "controls": [
+        "Use pinned commands with exact environment and complete input/output contracts.",
+        "Treat shell behavior, startup, filesystem caches and JIT state as explicit cohort variables."
+      ],
+      "gates": [
+        "Every command's output and expected errors pass an independent oracle; retain failed samples.",
+        "Raw exports parse under the pinned schema, and hashes bind commands, data and artifacts to results."
+      ],
+      "metrics": [
+        "Full command and application time, between-process variability, memory where supported, exit failures and ordering sensitivity."
+      ],
+      "protocol": [
+        "Declare minimum practical effect and repetition structure before execution. Balance order and retain raw samples rather than reporting only a winner.",
+        "Migrate Hyperfine 2.0 commands to explicit shell mode when required and verify its JSON schema. Preserve warmup/preparation commands as part of the protocol.",
+        "Use pyperf independent workers and metadata; inner-loop repetition is not a substitute for independent datasets or fresh processes.",
+        "Confirm promising operation-level results on a complete representative journey. No result or acceptance is created by this plan."
+      ]
+    },
+    {
+      "id": "planned-ecs-scheduling-v1",
+      "title": "ECS layout, mutation and task ownership",
+      "priority": 1,
+      "status": "planned",
+      "decision": "Which layout or scheduler improves complete simulation/editor frames under a fixed concurrency budget?",
+      "layer_ids": [
+        "game-rendering",
+        "asset-pipeline"
+      ],
+      "candidate_ids": [
+        "flecs",
+        "entt",
+        "bevy",
+        "taskflow",
+        "enkits",
+        "essence-ecs-2026"
+      ],
+      "controls": [
+        "The pinned current object/storage layout and current scheduler.",
+        "A simple SoA implementation with the same serial schedule; change layout and scheduling in separate cohorts."
+      ],
+      "gates": [
+        "Identical deterministic state checkpoints, query results, structural mutations and externally visible event ordering.",
+        "No race, stale-handle, missed-completion, duplicated-task or shutdown-lifetime failures; declared nondeterminism remains bounded.",
+        "UI event processing and diagnostics remain enabled throughout background work."
+      ],
+      "metrics": [
+        "Whole-frame p50/p95/p99, query/extraction/merge time, mutation cost, allocations, RSS, UI input latency and processor utilization."
+      ],
+      "protocol": [
+        "Publish a fixed seed and frame trace containing stable entities, sparse/dense component writes, spawn/despawn bursts, hierarchy reparenting and zero-work frames.",
+        "Run serial and fixed worker-count cases at small/typical/large working sets. Keep affinity and total thread budget fixed across nested libraries.",
+        "For Bevy change-summary tests register unchanged-column fraction and count added mutation bookkeeping; do not borrow release-note speed ratios.",
+        "Randomize eligible system order to find hidden dependencies, then benchmark only a validated schedule. Inject job exceptions, blocked workers and shutdown during queued work.",
+        "Repeat complete traces, retain distributions and thermal/driver/CPU settings, and include migration complexity in the decision."
+      ]
+    },
+    {
+      "id": "planned-portable-gpu-contract-v1",
+      "title": "Portable viewport and compute completion",
+      "priority": 2,
+      "status": "planned",
+      "decision": "Can a portable GPU API or shared shader source reduce complete operation cost on the required target backends?",
+      "layer_ids": [
+        "game-rendering",
+        "build-toolchain"
+      ],
+      "candidate_ids": [
+        "sdl3-gpu",
+        "wgpu",
+        "slang-shaders"
+      ],
+      "controls": [
+        "The current complete renderer/compute path at fixed output resolution and visual settings.",
+        "A simple CPU or SDL 2D control where the actual preview workload fits that contract."
+      ],
+      "gates": [
+        "Same geometry, textures, numerical precision, colorspace, output and feature coverage.",
+        "Correct device loss/recovery, resize, unsupported-feature and failed-adapter outcomes; no validation errors.",
+        "Retain all transfer, fence, resource-lifetime, compilation and presentation work."
+      ],
+      "metrics": [
+        "Cold shader/device startup, incremental shader-build time, CPU submission, GPU completion p95/p99, readback, VRAM and image/numerical error."
+      ],
+      "protocol": [
+        "Pin compiler release and language mode separately. Use one public image/scene corpus and declare target-specific shader flags.",
+        "Measure both GPU-resident and readback-required tasks without mixing them. Report total user-operation latency alongside kernel time.",
+        "Test every required native/backend cohort and browser fallback separately, including integrated GPUs and adapter initialization failure.",
+        "Inject resize, device loss, memory pressure and invalid/unsupported shader features; preserve rejection diagnostics."
+      ]
+    },
+    {
+      "id": "planned-image-preview-completion-v1",
+      "title": "Bounded thumbnail and image-transform completion",
+      "priority": 1,
+      "status": "planned",
+      "decision": "Can demand-driven image processing lower thumbnail latency and memory while preserving the full preview contract?",
+      "layer_ids": [
+        "file-processing",
+        "asset-pipeline"
+      ],
+      "candidate_ids": [
+        "libvips"
+      ],
+      "controls": [
+        "The current decode/orient/color/resize/encode implementation and its actual output contract.",
+        "Equal output dimensions, quality, metadata, codec versions and process-wide memory/thread limits."
+      ],
+      "gates": [
+        "Output pixels and required ICC/EXIF/alpha/multipage behavior meet declared equivalence or error bounds.",
+        "Every timed operation reaches a completed sink; graph construction or header reads alone are ineligible.",
+        "Corrupt/truncated/oversized inputs, cancellations and concurrent failures preserve job-specific diagnostics and release resources."
+      ],
+      "metrics": [
+        "Input-to-complete-output p50/p95/p99, CPU seconds, peak RSS, output bytes, foreground event latency and per-case errors."
+      ],
+      "protocol": [
+        "Use public small/large images, tiled and strip TIFFs, JPEG/PNG, multipage/animated inputs and corrupt fixtures relevant to the actual target.",
+        "Vary outer jobs and inner libvips threads at the same aggregate budget; record idle-to-first-preview and sustained batches independently.",
+        "Force all output bytes to a declared memory/file sink. Include filesystem completion separately where durability is part of the target.",
+        "Check thread-owned regions, startup sequencing, concurrent error attribution and bounded memory under cancellation; retain failures in the report."
+      ]
+    },
+    {
+      "id": "planned-video-preview-contract-v1",
+      "title": "AV1 decode, color and presentation",
+      "priority": 2,
+      "status": "planned",
+      "decision": "Which CPU-decoder/render combination meets preview deadlines with unchanged color and visual quality?",
+      "layer_ids": [
+        "asset-pipeline",
+        "game-rendering"
+      ],
+      "candidate_ids": [
+        "dav1d",
+        "libplacebo"
+      ],
+      "controls": [
+        "Current CPU AV1 decoder and preview renderer, fixed streams and output surface format.",
+        "Hardware decoding is a separate cohort with explicit format, transfer and power differences."
+      ],
+      "gates": [
+        "Bit-exact CPU decoding or independently validated allowable differences; correct color primaries, transfer, range, alpha where supported and frame order.",
+        "Fixed scaling/tone-mapping/dithering/temporal operations rather than mixing quality presets.",
+        "Seeks, dropped frames, corrupted packets, flushes and stream changes preserve bounded queues and host resource lifetimes."
+      ],
+      "metrics": [
+        "Decode-to-present p95/p99, dropped/repeated frames, CPU/GPU time, RSS/VRAM, seek recovery, color error and output-format compatibility."
+      ],
+      "protocol": [
+        "Pin public AV1 streams spanning bit depths, subsampling, resolution and difficult tile/frame structures, plus truncated/corrupted samples.",
+        "Vary decoder and renderer separately, with fixed thread limits and decoded surface ownership.",
+        "Include first frame, steady play, rapid seek, resize, temporal-cache reset and memory pressure.",
+        "Record old-CPU instruction coverage and driver/backend failures; do not replace failed configurations with a reduced-quality preset."
+      ]
+    },
+    {
+      "id": "planned-specialized-gpu-research-v1",
+      "title": "Specialized rasterization and curved-surface watch experiments",
+      "priority": 3,
+      "status": "planned",
+      "decision": "Do specialized GPU algorithms help a target viewport under a complete common-feature and fidelity contract?",
+      "layer_ids": [
+        "game-rendering"
+      ],
+      "candidate_ids": [
+        "curast-2026",
+        "adaptive-bezier-2026",
+        "meshoptimizer",
+        "slang-shaders"
+      ],
+      "controls": [
+        "For CuRast: tuned Vulkan rendering of the unchanged same opaque public scene, with the same texture and geometry fidelity.",
+        "For Bezier: current hardware tessellation and Execute Indirect at identical screen-space thresholds; work-graph mode is separate."
+      ],
+      "gates": [
+        "No removed objects, reduced texture cohort, geometry quantization or unsupported materials hidden in comparisons.",
+        "Declared image/geometry error and crack/seam tolerance; target-required features must be present.",
+        "Total host/GPU/runtime allocations, preparation, transfers and frame completion are included; unsupported devices stay visible."
+      ],
+      "metrics": [
+        "Total frame p95/p99, GPU stage time, load-to-ready, peak host/GPU memory, seam pixels, visual error and portability/feature coverage."
+      ],
+      "protocol": [
+        "Register each paper as an unexecuted research hypothesis. Obtain exact artifact revision and legal reusable assets before reproduction.",
+        "For CuRast compare dense and low-triangle workloads with camera cuts, overdraw and texture pressure; separate optional JPEG rendering and retain transparency ineligibility.",
+        "For Bezier use patch boundaries, extreme curvature and near/far camera movement, measuring common fallback and supported work-graph modes without changing error bounds.",
+        "Use repeated runs and full frame distributions, not only source-reported means; include compile/setup and integration cost.",
+        "Do not close the Bezier review gap until the full paper can be read; the present evidence is the author article and artifact."
+      ]
+    },
+    {
+      "id": "planned-bounded-execution-v1",
+      "title": "Bounded CPU and I/O execution",
+      "priority": 1,
+      "status": "planned",
+      "decision": "Can a different execution model reduce full job completion while preserving input responsiveness and bounded resource use?",
+      "layer_ids": [
+        "api-services",
+        "durable-jobs",
+        "file-processing",
+        "network-sync",
+        "runtime-foundation"
+      ],
+      "candidate_ids": [
+        "tokio-bounded-blocking",
+        "rayon",
+        "compio",
+        "liburing",
+        "nodejs",
+        "piscina"
+      ],
+      "controls": [
+        "The target current executor at an exact revision; include a serial control. CPU-pool and OS-I/O experiments use separate configuration cohorts.",
+        "Use the existing main-thread implementation and identical complete transform/output validation.",
+        "Fix the total CPU budget and distinguish cold worker creation from a reused pool."
+      ],
+      "gates": [
+        "Identical records, warnings, validation and hashes.",
+        "Bound running tasks, queued tasks and queued bytes; declare admission/backpressure policy.",
+        "Stopping a blocking task must be tested cooperatively; preserve partial-work recovery.",
+        "Pin OS/kernel/backend/toolchain and include unavailable-feature fallback results.",
+        "Reject a configuration if faster throughput exceeds declared UI/memory limits or cancellation leaves work running without accounting.",
+        "Identical outputs, exception information, ordering requirements and transferred-buffer ownership.",
+        "Queue capacity, cancellation, worker crash/restart and superseding work cannot lose or publish stale results."
+      ],
+      "metrics": [
+        "verified end-to-end completion",
+        "p99 input delay",
+        "peak queued bytes and process-tree RSS",
+        "CPU per completed item",
+        "cancellation-to-quiescence",
+        "Full completion, foreground p99, queue delay, serialization and transfer cost, process-tree RSS and cancel-to-quiescence."
+      ],
+      "protocol": [
+        "Node/Piscina, Tokio/Rayon and completion-based I/O are separate language/runtime configurations. First compare each with its current implementation under the same application contract; do not rank unlike applications by task throughput.",
+        "Prerequisites: a publishable representative corpus, pinned source revisions and toolchains, supported target hardware, and an existing complete-output oracle. Declare numeric CPU, queue, memory, disk and responsiveness budgets before execution.",
+        "Workload: Publishable small/typical/large import corpus mixing network waits, short files, large archives, hash/parse CPU work, cancellation and concurrent foreground interactions.",
+        "Separate cold and warm conditions and retain at least five independent repeated samples per configuration, including failed or cancelled runs. Record OS, CPU, storage, power mode, thread counts and cache policy.",
+        "Retain full raw outputs, warnings, validation failures, resource traces, configuration and corpus hashes. Apply correctness and resource gates before comparing performance; this plan records no execution or result.",
+        "Primary rationale sources: [IO31012], [IO31013], [IO31014], [IO31015], [IO31016], [IO31033], [IO31034].",
+        "Sweep small, medium and large CPU tasks with controlled arrival rates, including overload and large buffers.",
+        "Measure 1, 2 and bounded higher worker counts under the same request or input replay. Do not move asynchronous I/O to workers merely to fill the pool.",
+        "Set maxQueue and idle policy explicitly. Inject worker errors, cancellation and shutdown with pending work; check every accepted job reaches a declared terminal state.",
+        "Preregister foreground-latency and completion budgets plus maximum memory. Reject throughput improvements achieved by unbounded queue growth."
+      ]
+    },
+    {
+      "id": "planned-validated-representation-v1",
+      "title": "Complete validated representations",
+      "priority": 1,
+      "status": "planned",
+      "decision": "Does a parser or persisted representation reduce the complete load/use/save journey?",
+      "layer_ids": [
+        "asset-pipeline",
+        "file-processing",
+        "local-data-search",
+        "portable-features"
+      ],
+      "candidate_ids": [
+        "simdjson",
+        "sonic-rs",
+        "rkyv",
+        "flatbuffers"
+      ],
+      "controls": [
+        "Current JSON parser and storage format. JSON parser swaps and binary-format migrations are separately identified cohorts."
+      ],
+      "gates": [
+        "Preserve all required fields, diagnostics and number semantics.",
+        "Include archive/verifier costs and resource limits.",
+        "Pin schema/format flags and test old-reader/new-writer compatibility.",
+        "Retain migration, corruption and downgrade cases.",
+        "Reject speedups explained by selective projection, unchecked access, dropped diagnostics or unsupported readers."
+      ],
+      "metrics": [
+        "load-to-validated-usable time",
+        "save-to-durable completion",
+        "validation CPU",
+        "peak RSS",
+        "bytes read and written",
+        "semantic failures"
+      ],
+      "protocol": [
+        "Prerequisites: a publishable representative corpus, pinned source revisions and toolchains, supported target hardware, and an existing complete-output oracle. Declare numeric CPU, queue, memory, disk and responsiveness budgets before execution.",
+        "Workload: Complete catalog records, unknown fields, large integers, duplicate keys, Unicode failures, nested data, malformed tails and old/new schemas; include cold and changed-input journeys.",
+        "Separate cold and warm conditions and retain at least five independent repeated samples per configuration, including failed or cancelled runs. Record OS, CPU, storage, power mode, thread counts and cache policy.",
+        "Retain full raw outputs, warnings, validation failures, resource traces, configuration and corpus hashes. Apply correctness and resource gates before comparing performance; this plan records no execution or result.",
+        "Primary rationale sources: [IO31001], [IO31002], [IO31004], [IO31005], [IO31006], [IO31007], [IO31008], [IO31009]."
+      ]
+    },
+    {
+      "id": "planned-allocator-impact-v1",
+      "title": "Allocator impact on the full application",
+      "priority": 1,
+      "status": "planned",
+      "decision": "Does an allocator swap improve a measured allocation-heavy journey without increasing retained memory or integration risk?",
+      "layer_ids": [
+        "file-processing",
+        "runtime-foundation",
+        "testing-observability"
+      ],
+      "candidate_ids": [
+        "mimalloc"
+      ],
+      "controls": [
+        "Exact current application with its existing allocator; build both configurations from the same source/toolchain and security settings."
+      ],
+      "gates": [
+        "Identical complete results and errors.",
+        "Equivalent security mode, allocation failure and foreign allocator ownership.",
+        "Measure idle reclamation and fragmentation after repeated churn.",
+        "Record OS/page settings and all process memory.",
+        "Reject a microbenchmark win that disappears in total latency or increases retained RSS beyond the predeclared budget."
+      ],
+      "metrics": [
+        "end-to-end operation latency",
+        "p99 UI delay",
+        "peak and post-idle RSS",
+        "allocations",
+        "process-tree CPU"
+      ],
+      "protocol": [
+        "Prerequisites: a publishable representative corpus, pinned source revisions and toolchains, supported target hardware, and an existing complete-output oracle. Declare numeric CPU, queue, memory, disk and responsiveness budgets before execution.",
+        "Workload: Repeated large imports, mixed-size record churn, concurrent search, cancellation, reopen and idle phases; include a long-running session rather than isolated allocation loops.",
+        "Separate cold and warm conditions and retain at least five independent repeated samples per configuration, including failed or cancelled runs. Record OS, CPU, storage, power mode, thread counts and cache policy.",
+        "Retain full raw outputs, warnings, validation failures, resource traces, configuration and corpus hashes. Apply correctness and resource gates before comparing performance; this plan records no execution or result.",
+        "Primary rationale sources: [IO31010], [IO31011]."
+      ]
+    },
+    {
+      "id": "planned-codec-complete-pipeline-v1",
+      "title": "Compression under end-to-end resource budgets",
+      "priority": 1,
+      "status": "planned",
+      "decision": "Which eligible codec/configuration improves complete delivery and load time for the actual corpus?",
+      "layer_ids": [
+        "asset-pipeline",
+        "file-processing"
+      ],
+      "candidate_ids": [
+        "zstandard",
+        "lz4",
+        "libdeflate"
+      ],
+      "controls": [
+        "Current codec/settings and an uncompressed control. Required DEFLATE interoperability receives a separate zlib/libdeflate cohort."
+      ],
+      "gates": [
+        "Byte-exact round trips and checksum policy.",
+        "Identical framing, corruption/truncation rejection and decompressed-size ceilings.",
+        "Include dictionary training/distribution and any whole-buffer memory.",
+        "Record codec level, block size, thread count, hardware and cache state.",
+        "Reject ratios or throughput that worsen total completion or require incompatible formats/resource budgets."
+      ],
+      "metrics": [
+        "encode-transfer-verify-decode completion",
+        "compressed bytes",
+        "peak memory",
+        "CPU",
+        "startup/read latency"
+      ],
+      "protocol": [
+        "Prerequisites: a publishable representative corpus, pinned source revisions and toolchains, supported target hardware, and an existing complete-output oracle. Declare numeric CPU, queue, memory, disk and responsiveness budgets before execution.",
+        "Workload: Small metadata, large structured snapshots, text/binary mixtures and already-compressed assets across realistic disk/network rates.",
+        "Separate cold and warm conditions and retain at least five independent repeated samples per configuration, including failed or cancelled runs. Record OS, CPU, storage, power mode, thread counts and cache policy.",
+        "Retain full raw outputs, warnings, validation failures, resource traces, configuration and corpus hashes. Apply correctness and resource gates before comparing performance; this plan records no execution or result.",
+        "Primary rationale sources: [IO31023], [IO31024], [IO31025], [IO31026], [IO31027]."
+      ]
+    },
+    {
+      "id": "planned-sparse-join-aggregate-v1",
+      "title": "Skew-aware join aggregation reproduction",
+      "priority": 2,
+      "status": "planned",
+      "decision": "Does avoiding intermediate join materialization help a real co-occurrence/query workload?",
+      "layer_ids": [
+        "analytics",
+        "local-data-search"
+      ],
+      "candidate_ids": [
+        "tessera-join-aggregate-paper",
+        "duckdb",
+        "sqlite"
+      ],
+      "controls": [
+        "Current engine plan with proper indexes/statistics; pin an identical engine build for the operator-on/off comparison."
+      ],
+      "gates": [
+        "Return the same complete logical result with declared float tolerance and ordering policy.",
+        "Measure cold setup and repeated runs; do not run only slow baselines once.",
+        "Record accelerator availability and test non-AMX fallback.",
+        "Keep thread count, memory and temp-space budgets equal.",
+        "Reject unsupported query semantics or wins against an unrepresentative obsolete baseline."
+      ],
+      "metrics": [
+        "complete query latency",
+        "row/value/overflow parity",
+        "peak RSS",
+        "spill bytes",
+        "CPU utilization"
+      ],
+      "protocol": [
+        "Prerequisites: a publishable representative corpus, pinned source revisions and toolchains, supported target hardware, and an existing complete-output oracle. Declare numeric CPU, queue, memory, disk and responsiveness budgets before execution.",
+        "Workload: Skewed and uniform key distributions, small and large relations, weighted and unweighted counts, thresholds, output spilling and cancellation.",
+        "Separate cold and warm conditions and retain at least five independent repeated samples per configuration, including failed or cancelled runs. Record OS, CPU, storage, power mode, thread counts and cache policy.",
+        "Retain full raw outputs, warnings, validation failures, resource traces, configuration and corpus hashes. Apply correctness and resource gates before comparing performance; this plan records no execution or result.",
+        "Primary rationale sources: [IO31039], [IO31040], [IO31041], [IO31052]."
+      ]
+    },
+    {
+      "id": "planned-profiler-calibration-v1",
+      "title": "Profiler and measurement calibration",
+      "priority": 1,
+      "status": "planned",
+      "decision": "Which measurement method locates an actionable bottleneck while preserving trustworthy elapsed-time and memory results?",
+      "layer_ids": [
+        "testing-observability",
+        "runtime-foundation"
+      ],
+      "candidate_ids": [
+        "samply",
+        "perforator",
+        "codspeed",
+        "perfetto",
+        "tracy",
+        "typecraft-paper",
+        "gigiprofiler-paper",
+        "scalene",
+        "async-profiler"
+      ],
+      "controls": [
+        "The current target profiler and an uninstrumented release build of the same revision.",
+        "One fixed publishable journey corpus with explicit CPU, I/O, allocation and queue-wait perturbations.",
+        "Separate Python and JVM cohorts; use unprofiled full application measurements as performance truth.",
+        "Use owned workloads with planted CPU, copy/allocation and lock bottlenecks plus a blind attribution checklist."
+      ],
+      "gates": [
+        "Preserve complete output and diagnostics; instrumented and uninstrumented behavior must match.",
+        "Record dropped/unresolved samples, privileges, language/ISA support and collection overhead.",
+        "Treat specialized paper reproductions as separate follow-on configurations; no common performance ranking across diagnostic roles.",
+        "Retain sample loss, unsupported events, missing native frames and permission failures.",
+        "No profiler output is treated as proof of correctness or direct evidence of an unprofiled speedup."
+      ],
+      "metrics": [
+        "End-to-end p50/p95/p99 with profiling disabled.",
+        "Profiling CPU/RSS, trace bytes and lost-event counts.",
+        "Correctly localized known perturbations, false diagnoses and time to reproduce.",
+        "Localization accuracy, missed seeded bottlenecks, CPU/RSS and p99 overhead, profile bytes and sample loss."
+      ],
+      "protocol": [
+        "CPU sampling, JVM/Python attribution, resource-wait diagnosis, simulation and heap instruments answer different questions. Compare each instrument against its appropriate disabled/control run and known injected bottleneck; do not produce one universal profiler leaderboard.",
+        "Pin binaries, profiler versions, symbols, hardware and sample rates.",
+        "Use paired/randomized uninstrumented and instrumented runs; keep CPU simulation, walltime and heap metrics in separate cohorts.",
+        "Compare diagnosis usefulness, then validate one change with the original complete workload; preserve failed diagnoses and new regressions.",
+        "Pin interpreter/JVM, extension set, profiler release, sampling rates and event modes. Disable optional networked assistance in the controlled local configuration.",
+        "Alternate profiled and unprofiled runs at matched load; include startup, JIT/GC and steady-state phases without pooling them blindly.",
+        "After a profiler suggests a change, rerun the complete unprofiled journey with output gates. Keep profiling cost and measured improvement separate."
+      ]
+    },
+    {
+      "id": "planned-concurrency-model-v1",
+      "title": "Concurrency optimization correctness",
+      "priority": 1,
+      "status": "planned",
+      "decision": "Can a queue, worker or cancellation change improve complete latency without losing notifications, work or durable state?",
+      "layer_ids": [
+        "testing-observability",
+        "durable-jobs"
+      ],
+      "candidate_ids": [
+        "shuttle",
+        "stateright",
+        "loom",
+        "tla-tlc"
+      ],
+      "controls": [
+        "The exact current queue/state machine with its declared ownership and cancellation semantics.",
+        "A small finite reference model plus production-path stress tests; each tool serves a separate verification role."
+      ],
+      "gates": [
+        "No lost wakeup, double commit, dropped work or acknowledged-state loss in the declared failure corpus.",
+        "Keep randomized coverage distinct from exhaustive bounded checks and unbounded proofs.",
+        "Retain original failing schedules; validate apparent counterexamples against the exact test-model version."
+      ],
+      "metrics": [
+        "Counterexamples found and replay success.",
+        "Explored schedules/states and model coverage limits.",
+        "End-to-end completion and p95 cancellation latency measured separately on the real implementation."
+      ],
+      "protocol": [
+        "Pin the production runtime and all test wrappers, including Shuttle 0.9.9 fixes when selected.",
+        "Exercise cancelled notifications, caught panics, timeout/finish races, duplicate messages, restart and shutdown.",
+        "Record seeds and bounds before runs, retain raw failures, then remeasure the optimized implementation only after correctness gates pass."
+      ]
+    }
+  ]
+}

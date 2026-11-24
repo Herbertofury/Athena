@@ -1,0 +1,119 @@
+{
+  "schema_version": 1,
+  "verified_at": "2026-10-28T05:56:38.962Z",
+  "pull_request": "https://github.com/Herbertofury/Engineering-Atlas/pull/2",
+  "contribution_commit": "fb669fa2ec4e5d59d15bc7fc9d3a7acc422a4c21",
+  "merged_commit": "2274728b9702d81aed1f2b2371317939c6205ff1",
+  "reviewed_tree_sha": "c1309a652e2f0ecf94dd29733157c2ca6979fc53",
+  "pre_merge_validation_runs": [
+    {
+      "id": 40640100715,
+      "url": "https://github.com/Herbertofury/Engineering-Atlas/actions/runs/40640100715",
+      "head_sha": "fb669fa2ec4e5d59d15bc7fc9d3a7acc422a4c21",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 40640089510,
+      "url": "https://github.com/Herbertofury/Engineering-Atlas/actions/runs/40640089510",
+      "head_sha": "fb669fa2ec4e5d59d15bc7fc9d3a7acc422a4c21",
+      "status": "completed",
+      "conclusion": "success"
+    }
+  ],
+  "branch_validation_jobs": [
+    {
+      "name": "Rust lab (ubuntu-latest)",
+      "url": "https://github.com/Herbertofury/Engineering-Atlas/actions/runs/40640089510/job/122655963607",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "check",
+      "url": "https://github.com/Herbertofury/Engineering-Atlas/actions/runs/40640089510/job/122655963843",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Rust lab (windows-latest)",
+      "url": "https://github.com/Herbertofury/Engineering-Atlas/actions/runs/40640089510/job/122655963941",
+      "status": "completed",
+      "conclusion": "success"
+    }
+  ],
+  "pages_deployment": {
+    "id": 40640601802,
+    "url": "https://github.com/Herbertofury/Engineering-Atlas/actions/runs/40640601802",
+    "head_sha": "2274728b9702d81aed1f2b2371317939c6205ff1",
+    "status": "completed",
+    "conclusion": "success",
+    "jobs": [
+      {
+        "name": "build",
+        "url": "https://github.com/Herbertofury/Engineering-Atlas/actions/runs/40640601802/job/122657595534",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "name": "deploy",
+        "url": "https://github.com/Herbertofury/Engineering-Atlas/actions/runs/40640601802/job/122657659115",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "name": "report-build-status",
+        "url": "https://github.com/Herbertofury/Engineering-Atlas/actions/runs/40640601802/job/122657659148",
+        "status": "completed",
+        "conclusion": "success"
+      }
+    ]
+  },
+  "live_site": {
+    "url": "https://herbertofury.github.io/Engineering-Atlas/explorer/",
+    "verified_layer_url": "https://herbertofury.github.io/Engineering-Atlas/explorer/?layer=desktop-host#catalog",
+    "candidates": 215,
+    "unique_primary_urls": 355,
+    "entries_with_2026_publication": 98,
+    "measured_candidates": 3,
+    "layer_choices": 20,
+    "desktop_layer_candidates": 7,
+    "catalog_asset": "catalog.0f5082fc1d6d1c80.json",
+    "https_share_link_clipboard_verified": true,
+    "copied_url": "https://herbertofury.github.io/Engineering-Atlas/explorer/?layer=desktop-host",
+    "screenshot": "stack-live-explorer-2026-10-28.jpg"
+  },
+  "wiki": {
+    "url": "https://github.com/Herbertofury/Engineering-Atlas/wiki/Research-Explorer",
+    "revision": "ee7fa9d87a3b0451f5fdbddab6b3ac39df722077",
+    "receipt": "stack-wiki-publication-2026-10-28.json",
+    "screenshot": "stack-live-wiki-2026-10-28.jpg",
+    "new_pages": 0,
+    "visible_pages": 37,
+    "protected_pages_preserved": 15,
+    "existing_research_copies_byte_identical": 4,
+    "sidebar_unchanged": true,
+    "other_pages_preserved": true
+  },
+  "additional_preview_check": {
+    "check": "Selecting Atlas measurement after a discovery layer clears the layer and chooses one retained cohort.",
+    "outcome": "pass",
+    "cohort": "json-catalog-2000-decode-encode-utf8",
+    "candidates": [
+      "orjson",
+      "ultrajson",
+      "python-stdlib-json"
+    ],
+    "provenance_label_visible": true
+  },
+  "evidence_limits": [
+    "No new candidate benchmark or target adoption is claimed.",
+    "Zero approved community reports; no votes or benchmark rows invented.",
+    "Saved browser-download verification remains unverified as documented in the initial record; export payload and scope tests pass.",
+    "Live layout checks do not establish physical-device compatibility or candidate performance.",
+    "This receipt describes the feature publication revision; later documentation-only evidence commits do not change its catalog or executable assets."
+  ],
+  "screenshot_sha256": {
+    "stack-live-explorer-2026-10-28.jpg": "33f87de284d27725def3e15059609e11056fb1a6efff4d30c39ed4e1198004a3",
+    "stack-live-wiki-2026-10-28.jpg": "352144c79ff0d7f7d9b1660bb170ae8e7004d4cd1ae105b14d83ea8021324403"
+  }
+}

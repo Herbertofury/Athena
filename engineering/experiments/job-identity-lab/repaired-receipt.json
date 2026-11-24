@@ -1,0 +1,80 @@
+{
+  "checked_at": "2026-10-30T02:18:53.853831+00:00",
+  "scope": "Generated high IDs alongside retained public fixture jobs; actual Rust HTTP and served UI in controlled DOM, not native browser paint",
+  "mode": "serve",
+  "binary_sha256": "1b8672417261b58402d2f255cfc67793b59f86b3de3bebd206bf6c2e8c3ac0d9",
+  "harness_sha256": "5b669ea2d1bfc94d2cab60f04bb56a8e45b92b4ada16cd08c2ceb7708dd72165",
+  "expected_ids": [
+    "9223372036854775807",
+    "9007199254740993",
+    "9007199254740992",
+    "3",
+    "2",
+    "1"
+  ],
+  "verification_complete": true,
+  "reported_strategy": "baseline",
+  "renderer": {
+    "scope": "Actual served application source and actual HTTP overview, executed in controlled DOM; not native browser paint",
+    "response_sha256": "119c8e5b5686936e824d95fedb14c3f025dd9fa1369a4fa2c50235d94f2bb95d",
+    "app_sha256": "c1c3fc0b6616bd935051d1bd7ac3bb1fe3300b05ef087d20ab4a15e47c17a600",
+    "input_sha256": "741a0aeb30465b19391358a488a0e019dc9a6aa300088c9addb7388ec23c7ffe",
+    "server_job_count": 6,
+    "received_identities": [
+      {
+        "legacy_js_id": "9223372036854776000",
+        "exact": "9223372036854775807"
+      },
+      {
+        "legacy_js_id": "9007199254740992",
+        "exact": "9007199254740993"
+      },
+      {
+        "legacy_js_id": "9007199254740992",
+        "exact": "9007199254740992"
+      },
+      {
+        "legacy_js_id": "3",
+        "exact": "3"
+      },
+      {
+        "legacy_js_id": "2",
+        "exact": "2"
+      },
+      {
+        "legacy_js_id": "1",
+        "exact": "1"
+      }
+    ],
+    "rendered_card_count": 6,
+    "rendered_id_labels": [
+      "Job 9223372036854775807 \u00b7 attempt 0",
+      "Job 9007199254740993 \u00b7 attempt 0",
+      "Job 9007199254740992 \u00b7 attempt 0",
+      "Job 3 \u00b7 attempt 1",
+      "Job 2 \u00b7 attempt 1",
+      "Job 1 \u00b7 attempt 1"
+    ],
+    "error": null
+  },
+  "rendered_ids": [
+    "9223372036854775807",
+    "9007199254740993",
+    "9007199254740992",
+    "3",
+    "2",
+    "1"
+  ],
+  "application_correct": true,
+  "exact_fields": [
+    "9223372036854775807",
+    "9007199254740993",
+    "9007199254740992",
+    "3",
+    "2",
+    "1"
+  ],
+  "jobs_unchanged": true,
+  "integrity_ok": true,
+  "source_unchanged": true
+}

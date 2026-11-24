@@ -1,0 +1,314 @@
+[
+  {
+    "id": "cloud-model-contract-1",
+    "lessonId": "cloud-model-contract",
+    "question": "Which statement correctly separates two cloud classifications?",
+    "options": [
+      "IaaS is a service model; public is a deployment model",
+      "IaaS is a deployment model and public is a programming language",
+      "SaaS means every resource is publicly readable",
+      "Private cloud must be in your own office"
+    ],
+    "answer": 0,
+    "why": "Service models describe the delivered capability and control boundary; deployment models describe how cloud infrastructure is used and composed."
+  },
+  {
+    "id": "cloud-model-contract-2",
+    "lessonId": "cloud-model-contract",
+    "question": "What does public cloud imply about the fictional reports?",
+    "options": [
+      "They should be public files",
+      "Their access still needs an explicit design",
+      "Their confidentiality no longer matters",
+      "They cannot be encrypted"
+    ],
+    "answer": 1,
+    "why": "Public describes the cloud deployment model, not authorization to expose customer data."
+  },
+  {
+    "id": "cloud-model-contract-3",
+    "lessonId": "cloud-model-contract",
+    "question": "Which evidence is missing after completing only this pack?",
+    "options": [
+      "A local calculation",
+      "An original worksheet",
+      "An executed real-cloud deployment and its validation",
+      "A synthetic fixture"
+    ],
+    "answer": 2,
+    "why": "All provider-side labs remain unexecuted; local exercises cannot substitute for deployment evidence."
+  },
+  {
+    "id": "cloud-responsibility-scope-1",
+    "lessonId": "cloud-responsibility-scope",
+    "question": "A provider maintains physical hosts. Who still decides which staff may read workshop reports?",
+    "options": [
+      "No one",
+      "Every internet user",
+      "Only the hardware manufacturer",
+      "The customer’s authorized data/access owners"
+    ],
+    "answer": 3,
+    "why": "Infrastructure operation does not determine the customer’s intended data audience."
+  },
+  {
+    "id": "cloud-responsibility-scope-2",
+    "lessonId": "cloud-responsibility-scope",
+    "question": "Does academy/dev contain academy/dev-tools/reports in the local model?",
+    "options": [
+      "No, because containment compares complete path segments",
+      "Yes, because the text begins similarly",
+      "Only when a credit card is entered",
+      "It proves a provider has denied access"
+    ],
+    "answer": 0,
+    "why": "The segment dev-tools is distinct from dev; a string-prefix shortcut would be misleading."
+  },
+  {
+    "id": "cloud-responsibility-scope-3",
+    "lessonId": "cloud-responsibility-scope",
+    "question": "What does the scope exercise prove?",
+    "options": [
+      "Effective Azure, AWS and Google IAM are identical",
+      "Only containment under the invented path contract",
+      "A real role was assigned",
+      "All inherited policies are safe"
+    ],
+    "answer": 1,
+    "why": "It is a bounded local model with no authentication, provider policy evaluation or external changes."
+  },
+  {
+    "id": "cloud-network-storage-1",
+    "lessonId": "cloud-network-storage",
+    "question": "All network assumptions pass, but the service is not listening. What follows?",
+    "options": [
+      "Open every port",
+      "The data must be deleted",
+      "A wider network rule alone does not start the service",
+      "The identity check is proven correct"
+    ],
+    "answer": 2,
+    "why": "Different layers require different evidence and remedies; broad exposure does not repair a stopped service."
+  },
+  {
+    "id": "cloud-network-storage-2",
+    "lessonId": "cloud-network-storage",
+    "question": "Which interface is most directly disk-like?",
+    "options": [
+      "An email inbox",
+      "Every SaaS application",
+      "An authorization role",
+      "Block storage"
+    ],
+    "answer": 3,
+    "why": "Block storage exposes blocks for a consumer such as a host; object and file interfaces have different semantics."
+  },
+  {
+    "id": "cloud-network-storage-3",
+    "lessonId": "cloud-network-storage",
+    "question": "Why can durable storage still need backups or earlier recovery points?",
+    "options": [
+      "An accidental overwrite may itself be stored durably",
+      "Durability prevents all mistakes",
+      "Availability and durability are identical",
+      "Backups always prove zero data loss"
+    ],
+    "answer": 0,
+    "why": "Preserving current bits does not guarantee a usable earlier state or a verified restore process."
+  },
+  {
+    "id": "cloud-capacity-demand-1",
+    "lessonId": "cloud-capacity-demand",
+    "question": "At 400 rpm per replica and a 50 percent target, what is the target allowance?",
+    "options": [
+      "50 rpm",
+      "200 rpm",
+      "400 rpm",
+      "800 rpm"
+    ],
+    "answer": 1,
+    "why": "400 multiplied by 0.50 gives 200 requests per minute of planned load per replica."
+  },
+  {
+    "id": "cloud-capacity-demand-2",
+    "lessonId": "cloud-capacity-demand",
+    "question": "Demand is 850 rpm and the target allowance is 200 rpm. How many replicas are needed before applying the maximum?",
+    "options": [
+      "Four",
+      "Two",
+      "Five",
+      "Zero"
+    ],
+    "answer": 2,
+    "why": "850/200 is 4.25, which must be rounded up to meet the target."
+  },
+  {
+    "id": "cloud-capacity-demand-3",
+    "lessonId": "cloud-capacity-demand",
+    "question": "The target is missed but the modeled physical capacity is sufficient. What can you honestly claim?",
+    "options": [
+      "A real outage definitely occurred",
+      "The maximum no longer matters",
+      "The provider has created a fifth instance",
+      "The modeled headroom target is unmet, not that a live outage was observed"
+    ],
+    "answer": 3,
+    "why": "The model distinguishes planning headroom from physical capacity and does not observe or provision a live system."
+  },
+  {
+    "id": "cloud-failure-domains-1",
+    "lessonId": "cloud-failure-domains",
+    "question": "Four replicas are split two per zone. One zone fails. How many remain in the model?",
+    "options": [
+      "Two",
+      "Four",
+      "Three",
+      "None necessarily"
+    ],
+    "answer": 0,
+    "why": "The named failed zone loses its two replicas, leaving two under the explicit assumptions."
+  },
+  {
+    "id": "cloud-failure-domains-2",
+    "lessonId": "cloud-failure-domains",
+    "question": "Why does the six-replica alternative meet the 500 rpm target after a zone loss?",
+    "options": [
+      "It has a cloud label",
+      "Three survivors each provide 200 rpm of target allowance",
+      "It proves all dependencies are independent",
+      "It eliminates the need for recovery planning"
+    ],
+    "answer": 1,
+    "why": "Three times 200 equals 600 rpm, above the assumed demand. That is a capacity result only."
+  },
+  {
+    "id": "cloud-failure-domains-3",
+    "lessonId": "cloud-failure-domains",
+    "question": "Which claim would overstate the exercise?",
+    "options": [
+      "The baseline has insufficient target headroom after the modeled loss",
+      "The alternative has 600 rpm of surviving target capacity",
+      "The exercise proves the production SLA and actual failover",
+      "Real dependency behavior remains untested"
+    ],
+    "answer": 2,
+    "why": "No production service, measured failure rate, SLA calculation or actual failover was exercised."
+  },
+  {
+    "id": "cloud-recovery-objectives-1",
+    "lessonId": "cloud-recovery-objectives",
+    "question": "The last recoverable point is 580 and the incident is 600. What is the data gap?",
+    "options": [
+      "15 minutes",
+      "50 minutes",
+      "60 minutes",
+      "20 minutes"
+    ],
+    "answer": 3,
+    "why": "The incident minus the last recoverable point is 20 minutes."
+  },
+  {
+    "id": "cloud-recovery-objectives-2",
+    "lessonId": "cloud-recovery-objectives",
+    "question": "The scenario meets RTO 60 but misses RPO 15. What does that mean?",
+    "options": [
+      "The restored data point is too old despite acceptable modeled downtime",
+      "No recovery happened anywhere",
+      "The two objectives are identical",
+      "A backup always guarantees zero loss"
+    ],
+    "answer": 0,
+    "why": "Downtime is 50 minutes, but the recoverable-data gap is 20, exceeding the 15-minute objective."
+  },
+  {
+    "id": "cloud-recovery-objectives-3",
+    "lessonId": "cloud-recovery-objectives",
+    "question": "What does the local restore actually verify?",
+    "options": [
+      "Regional cloud disaster recovery",
+      "Equality of synthetic restored bytes to their earlier copy and cleanup of its temporary directory",
+      "Application-level database consistency",
+      "The production RTO"
+    ],
+    "answer": 1,
+    "why": "The command verifies its own bounded local operation. It cannot establish unexecuted provider-side or application recovery behavior."
+  },
+  {
+    "id": "cloud-cost-units-1",
+    "lessonId": "cloud-cost-units",
+    "question": "What is the always-on fictional compute cost?",
+    "options": [
+      "2160 credits",
+      "11150 credits",
+      "10800 credits",
+      "150 credits"
+    ],
+    "answer": 2,
+    "why": "Three replicas × 720 hours × five credits per replica-hour equals 10800; storage and transfer are separate."
+  },
+  {
+    "id": "cloud-cost-units-2",
+    "lessonId": "cloud-cost-units",
+    "question": "Which statement about the scheduled fixture is correct?",
+    "options": [
+      "All costs become zero",
+      "It proves every real instance can stop without consequences",
+      "It uses current vendor prices",
+      "Storage and transfer assumptions remain unchanged"
+    ],
+    "answer": 3,
+    "why": "Only compute hours change in this model; retained storage and transfer still total 350 credits."
+  },
+  {
+    "id": "cloud-cost-units-3",
+    "lessonId": "cloud-cost-units",
+    "question": "Can a delayed budget notification be treated as an instant hard spending cap?",
+    "options": [
+      "No; usage and charges can continue before the notification arrives",
+      "Yes, always",
+      "Only if the estimate is small",
+      "It means no cleanup is needed"
+    ],
+    "answer": 0,
+    "why": "Notifications and configured actions have timing and scope limits. A budget alert alone does not guarantee a hard cap."
+  },
+  {
+    "id": "cloud-change-review-1",
+    "lessonId": "cloud-change-review",
+    "question": "What does applied=false mean in this exercise?",
+    "options": [
+      "The resources were deployed unsuccessfully",
+      "Only a local comparison was produced; no changes were applied",
+      "The public change was approved",
+      "The provider confirmed a rollback"
+    ],
+    "answer": 1,
+    "why": "There is no apply function or provider connection in the pack."
+  },
+  {
+    "id": "cloud-change-review-2",
+    "lessonId": "cloud-change-review",
+    "question": "Why must removing the reports resource be reviewed?",
+    "options": [
+      "It always lowers risk",
+      "A JSON file guarantees a backup",
+      "It may interrupt service or lose retained data",
+      "The cloud automatically knows the business requirement"
+    ],
+    "answer": 2,
+    "why": "A removal can have consequences beyond syntactic correctness; intent and recovery evidence are required."
+  },
+  {
+    "id": "cloud-change-review-3",
+    "lessonId": "cloud-change-review",
+    "question": "Which is the most accurate final handoff?",
+    "options": [
+      "Production cloud ready because local tests pass",
+      "A promise of zero future charges",
+      "A provider certification pass",
+      "Precisely scoped local evidence, assumptions and a list of real-cloud labs still unexecuted"
+    ],
+    "answer": 3,
+    "why": "Honest boundaries let another person judge the work without confusing preparation with executed cloud practice."
+  }
+]

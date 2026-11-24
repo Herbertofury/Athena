@@ -1,0 +1,83 @@
+✔ retained baseline reproduces orphaned timeout script and late ready event (3.642379ms)
+✖ actual HLS loader cleans error and permits one explicit retry (2.459445ms)
+✖ actual HLS loader cleans timeout and permits one explicit retry (1.159069ms)
+✖ actual HLS loader cleans throw and permits one explicit retry (1.504806ms)
+✖ actual HLS loader cleans wrong-identity and permits one explicit retry (1.02696ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 1
+ℹ fail 4
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 167.845177
+
+✖ failing tests:
+
+test at engineering-atlas/tests/hls-recovery.test.mjs:20:64
+✖ actual HLS loader cleans error and permits one explicit retry (2.459445ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  0 !== 1
+  
+      at TestContext.<anonymous> (file://<atlas>/tests/hls-recovery.test.mjs:24:37)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 0,
+    expected: 1,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at engineering-atlas/tests/hls-recovery.test.mjs:20:64
+✖ actual HLS loader cleans timeout and permits one explicit retry (1.159069ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  0 !== 1
+  
+      at TestContext.<anonymous> (file://<atlas>/tests/hls-recovery.test.mjs:24:37)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 0,
+    expected: 1,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at engineering-atlas/tests/hls-recovery.test.mjs:20:64
+✖ actual HLS loader cleans throw and permits one explicit retry (1.504806ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  0 !== 1
+  
+      at TestContext.<anonymous> (file://<atlas>/tests/hls-recovery.test.mjs:24:37)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 0,
+    expected: 1,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at engineering-atlas/tests/hls-recovery.test.mjs:20:64
+✖ actual HLS loader cleans wrong-identity and permits one explicit retry (1.02696ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  0 !== 1
+  
+      at TestContext.<anonymous> (file://<atlas>/tests/hls-recovery.test.mjs:24:37)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 0,
+    expected: 1,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

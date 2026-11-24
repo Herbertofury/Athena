@@ -1,0 +1,164 @@
+{
+  "checked_at": "2026-10-27",
+  "scope": "Real same-process loopback HTTP and public Modrinth batch; not visual browser acceptance",
+  "binary_sha256": "0a8acd70338e42628e8c0a6c9185164190d2ac1560cb41654f03f61522c9ff80",
+  "checks": [
+    {
+      "name": "missing origin rejected",
+      "observed": 403,
+      "expected": 403,
+      "passed": true
+    },
+    {
+      "name": "foreign origin rejected",
+      "observed": 403,
+      "expected": 403,
+      "passed": true
+    },
+    {
+      "name": "wrong host rejected",
+      "observed": 403,
+      "expected": 403,
+      "passed": true
+    },
+    {
+      "name": "duplicate identities rejected",
+      "observed": 400,
+      "expected": 400,
+      "passed": true
+    },
+    {
+      "name": "batch size budget enforced",
+      "observed": 400,
+      "expected": 400,
+      "passed": true
+    },
+    {
+      "name": "arbitrary URL rejected",
+      "observed": 400,
+      "expected": 400,
+      "passed": true
+    },
+    {
+      "name": "request body budget enforced",
+      "observed": 413,
+      "expected": 413,
+      "passed": true
+    },
+    {
+      "name": "disabled experiment remains disabled",
+      "observed": 501,
+      "expected": 501,
+      "passed": true
+    },
+    {
+      "name": "input module served",
+      "observed": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "module type",
+      "observed": "text/javascript",
+      "expected": "text/javascript",
+      "passed": true
+    },
+    {
+      "name": "no-store preserved",
+      "observed": "no-store",
+      "expected": "no-store",
+      "passed": true
+    },
+    {
+      "name": "CSP remains same-origin",
+      "observed": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "HTML uses module entrypoint",
+      "observed": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "batch queued",
+      "observed": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "active duplicate shares job",
+      "observed": 1,
+      "expected": 1,
+      "passed": true
+    },
+    {
+      "name": "real batch job succeeds",
+      "observed": "succeeded",
+      "expected": "succeeded",
+      "passed": true
+    },
+    {
+      "name": "no missing source IDs",
+      "observed": [],
+      "expected": [],
+      "passed": true
+    },
+    {
+      "name": "all identities retained",
+      "observed": [
+        "AANobbMI",
+        "gvQqBUqZ",
+        "YL57xq9U"
+      ],
+      "expected": [
+        "AANobbMI",
+        "gvQqBUqZ",
+        "YL57xq9U"
+      ],
+      "passed": true
+    },
+    {
+      "name": "graceful shutdown",
+      "observed": 0,
+      "expected": 0,
+      "passed": true
+    },
+    {
+      "name": "reopened job state",
+      "observed": "succeeded",
+      "expected": "succeeded",
+      "passed": true
+    },
+    {
+      "name": "complete result survives reopen",
+      "observed": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "SQLite integrity",
+      "observed": "ok",
+      "expected": "ok",
+      "passed": true
+    }
+  ],
+  "projection_counts": [
+    {
+      "id": "AANobbMI",
+      "gallery": 6,
+      "versions": 264
+    },
+    {
+      "id": "gvQqBUqZ",
+      "gallery": 0,
+      "versions": 180
+    },
+    {
+      "id": "YL57xq9U",
+      "gallery": 4,
+      "versions": 243
+    }
+  ]
+}

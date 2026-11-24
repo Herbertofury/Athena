@@ -1,0 +1,131 @@
+{
+  "scope": "Parent-local request times retained independently of rejected cross-context phase attribution",
+  "rows": [
+    {
+      "file": "browser-64k-pass1.json",
+      "lane": "modules",
+      "request_median_ms": 187.4000000357628,
+      "maximum_observed_frame_gap_ms": 36.09999996423721,
+      "rejected_phase_timelines": 0
+    },
+    {
+      "file": "browser-64k-pass1.json",
+      "lane": "esbuild",
+      "request_median_ms": 97.19999998807907,
+      "maximum_observed_frame_gap_ms": 29.80000001192093,
+      "rejected_phase_timelines": 1
+    },
+    {
+      "file": "browser-64k-pass1.json",
+      "lane": "rolldown",
+      "request_median_ms": 97.60000002384186,
+      "maximum_observed_frame_gap_ms": 42,
+      "rejected_phase_timelines": 0
+    },
+    {
+      "file": "browser-64k-pass2.json",
+      "lane": "modules",
+      "request_median_ms": 117.80000001192093,
+      "maximum_observed_frame_gap_ms": 29.30000001192093,
+      "rejected_phase_timelines": 0
+    },
+    {
+      "file": "browser-64k-pass2.json",
+      "lane": "esbuild",
+      "request_median_ms": 97.59999996423721,
+      "maximum_observed_frame_gap_ms": 24.900000035762787,
+      "rejected_phase_timelines": 0
+    },
+    {
+      "file": "browser-64k-pass2.json",
+      "lane": "rolldown",
+      "request_median_ms": 97.10000002384186,
+      "maximum_observed_frame_gap_ms": 24.900000035762787,
+      "rejected_phase_timelines": 0
+    },
+    {
+      "file": "browser-8k-pass1.json",
+      "lane": "modules",
+      "request_median_ms": 91.30000001192093,
+      "maximum_observed_frame_gap_ms": 28.299999952316284,
+      "rejected_phase_timelines": 1
+    },
+    {
+      "file": "browser-8k-pass1.json",
+      "lane": "esbuild",
+      "request_median_ms": 52,
+      "maximum_observed_frame_gap_ms": 17.69999998807907,
+      "rejected_phase_timelines": 0
+    },
+    {
+      "file": "browser-8k-pass1.json",
+      "lane": "rolldown",
+      "request_median_ms": 41.90000003576279,
+      "maximum_observed_frame_gap_ms": 17.80000001192093,
+      "rejected_phase_timelines": 1
+    },
+    {
+      "file": "browser-8k-pass2.json",
+      "lane": "modules",
+      "request_median_ms": 51.19999998807907,
+      "maximum_observed_frame_gap_ms": 16.900000035762787,
+      "rejected_phase_timelines": 0
+    },
+    {
+      "file": "browser-8k-pass2.json",
+      "lane": "esbuild",
+      "request_median_ms": 30.100000023841858,
+      "maximum_observed_frame_gap_ms": 16.599999964237213,
+      "rejected_phase_timelines": 0
+    },
+    {
+      "file": "browser-8k-pass2.json",
+      "lane": "rolldown",
+      "request_median_ms": 32.90000003576279,
+      "maximum_observed_frame_gap_ms": 17.700000047683716,
+      "rejected_phase_timelines": 0
+    }
+  ],
+  "phase_failures": [
+    {
+      "file": "browser-64k-pass1.json",
+      "round": 0,
+      "lane": "esbuild",
+      "reason": "Non-monotonic cross-context anchors; no clamping or phase attribution",
+      "reversals": [
+        {
+          "from": "send_start",
+          "to": "main_received",
+          "delta_ms": -0.000244140625
+        }
+      ]
+    },
+    {
+      "file": "browser-8k-pass1.json",
+      "round": 1,
+      "lane": "rolldown",
+      "reason": "Non-monotonic cross-context anchors; no clamping or phase attribution",
+      "reversals": [
+        {
+          "from": "send_start",
+          "to": "main_received",
+          "delta_ms": -0.000244140625
+        }
+      ]
+    },
+    {
+      "file": "browser-8k-pass1.json",
+      "round": 2,
+      "lane": "modules",
+      "reason": "Non-monotonic cross-context anchors; no clamping or phase attribution",
+      "reversals": [
+        {
+          "from": "send_start",
+          "to": "main_received",
+          "delta_ms": -0.000244140625
+        }
+      ]
+    }
+  ],
+  "phase_failure_cause": "Not established; observed reversals are tiny and retained without clamping"
+}

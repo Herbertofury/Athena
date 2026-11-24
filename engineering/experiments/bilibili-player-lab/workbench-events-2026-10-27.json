@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "harness": "atlas-real-media-v7-bilibili-official",
+  "source_module": "/Engineering-Atlas/media-lab/media.1e8cee967fc5cf08.js",
+  "started_at": "2026-10-27T10:35:32.867Z",
+  "user_agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36",
+  "source_mode": "dated public snapshots",
+  "events": [
+    {
+      "type": "fixture_parsed",
+      "at_ms": 533.4000000059605,
+      "elapsed_ms": 105.69999998807907,
+      "bytes": 21300
+    },
+    {
+      "type": "metadata_dom_ready",
+      "at_ms": 536.6000000238419,
+      "elapsed_ms": 2.800000011920929,
+      "cards": 5,
+      "gallery_images": 19,
+      "video_entries": 19
+    },
+    {
+      "type": "bilibili_frame_requested",
+      "at_ms": 15371.100000023842,
+      "card_id": "bilibili:BV1B7411m7LV",
+      "video_id": "BV1B7411m7LV",
+      "autoplay": false
+    },
+    {
+      "type": "bilibili_frame_loaded",
+      "at_ms": 16646.30000001192,
+      "card_id": "bilibili:BV1B7411m7LV",
+      "video_id": "BV1B7411m7LV",
+      "autoplay": false
+    },
+    {
+      "type": "bilibili_frame_requested",
+      "at_ms": 83373.30000001192,
+      "card_id": "bilibili:BV1B7411m7LV",
+      "video_id": "BV1B7411m7LV",
+      "autoplay": false
+    },
+    {
+      "type": "bilibili_frame_unloaded",
+      "at_ms": 83682.60000002384,
+      "card_id": "bilibili:BV1B7411m7LV"
+    }
+  ],
+  "acceptance": "not a target-project performance comparison",
+  "fixture_sha256": "2aa0668aba0eb29c69faf368fab206369718335be7f47bc0c6592236e79d1aba",
+  "fixture_counts": {
+    "cards": 5,
+    "gallery_images": 19,
+    "video_entries": 19
+  }
+}

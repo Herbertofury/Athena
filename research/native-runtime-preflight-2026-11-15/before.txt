@@ -1,0 +1,77 @@
+FFFFFFFF..
+======================================================================
+FAIL: test_each_missing_core_asset_rejects_before_cli_or_socket (test_runtime_preflight.Tests.test_each_missing_core_asset_rejects_before_cli_or_socket) (name='index.html')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<checkout>/native/foundry/tests/test_runtime_preflight.py", line 19, in test_each_missing_core_asset_rejects_before_cli_or_socket
+    with self.assertRaisesRegex(ValueError,'incomplete.*'+name.replace('.','\\.')):self.bridge()
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_each_missing_core_asset_rejects_before_cli_or_socket (test_runtime_preflight.Tests.test_each_missing_core_asset_rejects_before_cli_or_socket) (name='app.js')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<checkout>/native/foundry/tests/test_runtime_preflight.py", line 19, in test_each_missing_core_asset_rejects_before_cli_or_socket
+    with self.assertRaisesRegex(ValueError,'incomplete.*'+name.replace('.','\\.')):self.bridge()
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_each_missing_core_asset_rejects_before_cli_or_socket (test_runtime_preflight.Tests.test_each_missing_core_asset_rejects_before_cli_or_socket) (name='catalog.js')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<checkout>/native/foundry/tests/test_runtime_preflight.py", line 19, in test_each_missing_core_asset_rejects_before_cli_or_socket
+    with self.assertRaisesRegex(ValueError,'incomplete.*'+name.replace('.','\\.')):self.bridge()
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_each_missing_core_asset_rejects_before_cli_or_socket (test_runtime_preflight.Tests.test_each_missing_core_asset_rejects_before_cli_or_socket) (name='core.js')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<checkout>/native/foundry/tests/test_runtime_preflight.py", line 19, in test_each_missing_core_asset_rejects_before_cli_or_socket
+    with self.assertRaisesRegex(ValueError,'incomplete.*'+name.replace('.','\\.')):self.bridge()
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_each_missing_core_asset_rejects_before_cli_or_socket (test_runtime_preflight.Tests.test_each_missing_core_asset_rejects_before_cli_or_socket) (name='styles.css')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<checkout>/native/foundry/tests/test_runtime_preflight.py", line 19, in test_each_missing_core_asset_rejects_before_cli_or_socket
+    with self.assertRaisesRegex(ValueError,'incomplete.*'+name.replace('.','\\.')):self.bridge()
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_each_missing_core_asset_rejects_before_cli_or_socket (test_runtime_preflight.Tests.test_each_missing_core_asset_rejects_before_cli_or_socket) (name='workspace-host.js')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<checkout>/native/foundry/tests/test_runtime_preflight.py", line 19, in test_each_missing_core_asset_rejects_before_cli_or_socket
+    with self.assertRaisesRegex(ValueError,'incomplete.*'+name.replace('.','\\.')):self.bridge()
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_each_missing_core_asset_rejects_before_cli_or_socket (test_runtime_preflight.Tests.test_each_missing_core_asset_rejects_before_cli_or_socket) (name='native-store-bootstrap.js')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<checkout>/native/foundry/tests/test_runtime_preflight.py", line 19, in test_each_missing_core_asset_rejects_before_cli_or_socket
+    with self.assertRaisesRegex(ValueError,'incomplete.*'+name.replace('.','\\.')):self.bridge()
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_empty_runtime_rejected_before_cli_or_socket (test_runtime_preflight.Tests.test_empty_runtime_rejected_before_cli_or_socket)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<checkout>/native/foundry/tests/test_runtime_preflight.py", line 25, in test_empty_runtime_rejected_before_cli_or_socket
+    with self.assertRaisesRegex(ValueError,'incomplete'):self.bridge()
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.207s
+
+FAILED (failures=8)

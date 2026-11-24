@@ -1,0 +1,74 @@
+   Compiling atlas-lab v0.1.0 (<workspace>/atlas-private-baselines/rusqlite-release-20261029/candidate/apps/atlas-lab)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 4.60s
+     Running unittests examples/addressed_snapshot_lab.rs (engineering-atlas/apps/atlas-lab/target/debug/examples/addressed_snapshot_lab-d40c6112dcc3b4b4)
+
+running 2 tests
+test tests::reserved_fields_and_invalid_bounds_fail_closed ... ok
+test tests::duplicate_and_unique_controls_preserve_original_wire_content ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests examples/body_reader_allocations.rs (engineering-atlas/apps/atlas-lab/target/debug/examples/body_reader_allocations-65a8d3c3233430b1)
+
+running 3 tests
+test reader::tests::impossible_budget_rejected_before_reading ... ok
+test reader::tests::interrupted_first_read_and_misleading_empty_hint_preserve_data ... ok
+test reader::tests::full_bytes_and_bounds_match_across_hints ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running unittests examples/body_reader_http.rs (engineering-atlas/apps/atlas-lab/target/debug/examples/body_reader_http-05ebef77008a2538)
+
+running 4 tests
+test reader::tests::impossible_budget_rejected_before_reading ... ok
+test reader::tests::interrupted_first_read_and_misleading_empty_hint_preserve_data ... ok
+test reader::tests::full_bytes_and_bounds_match_across_hints ... ok
+test budget_tests::impossible_budget_is_rejected_without_empty_success ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.08s
+
+     Running unittests examples/compact_addressed_lab.rs (engineering-atlas/apps/atlas-lab/target/debug/examples/compact_addressed_lab-32eb8bc43bf880b6)
+
+running 2 tests
+test tests::duplicate_and_unique_controls_preserve_original_wire_content ... ok
+test tests::reserved_fields_and_invalid_bounds_fail_closed ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests examples/dedup_process_probe.rs (engineering-atlas/apps/atlas-lab/target/debug/examples/dedup_process_probe-278337b6192779bc)
+
+running 2 tests
+test linux_memory::tests::missing_duplicate_invalid_units_and_values_fail_closed ... ok
+test linux_memory::tests::parses_only_requested_field_and_converts_kib ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests examples/project_process_memory_lab.rs (engineering-atlas/apps/atlas-lab/target/debug/examples/project_process_memory_lab-9bb3114b675126c5)
+
+running 2 tests
+test linux_memory::tests::parses_only_requested_field_and_converts_kib ... ok
+test linux_memory::tests::missing_duplicate_invalid_units_and_values_fail_closed ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests examples/upstream_validation_lab.rs (engineering-atlas/apps/atlas-lab/target/debug/examples/upstream_validation_lab-16da1f0524b21853)
+
+running 5 tests
+test tests::commit_contract_matches ... ok
+test tests::complete_bytes_and_numeric_boundaries ... ok
+test tests::schema_binding_duplicates_and_invalid_unicode ... ok
+test tests::recursive_depth_and_size_guard ... ok
+test tests::generated_single_escape_differential_stress ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 2.70s
+
+     Running unittests examples/version_validation_lab.rs (engineering-atlas/apps/atlas-lab/target/debug/examples/version_validation_lab-0f87e2e659548d53)
+
+running 4 tests
+test tests::field_errors_do_not_echo_fixture_payloads ... ok
+test tests::known_and_unknown_validation_and_duplicate_semantics ... ok
+test tests::field_types_missing_fields_escaped_keys_and_depth_match ... ok
+test tests::deterministic_complete_payload_stress ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.86s
+

@@ -1,0 +1,22 @@
+{
+  "checked_at": "2026-10-27",
+  "baseline_repo": "Herbertofury/Enderloom",
+  "baseline_revision": "fc55c422f93480d75604203b288a837bb87ed623",
+  "baseline_sha256": "51e7b60948dc6be20fed28d1308ef1dd2564ea758a598fe2760a4c8de238efe7",
+  "dependency_lock_sha256": "0cc86258c96f07b8b055b655ba1341afe02d51629897f8fe58a6bb61feb37fe8",
+  "deployment": "None; isolated copies only",
+  "network_during_parser_tests": false,
+  "acceptance": "Generated fixture evidence only; no installed-target, live-provider or full HTML conformance acceptance",
+  "candidate_source_sha256_by_patch": {
+    "sax-image-lane.patch": "6a88a9d3c608bec3abf0d8d87686e45eaafb59278830b95b9c172f8ce7876674",
+    "callback-before-normalization.patch": "b3d060e68f6dcb58d439f24e78ced1216e180cb0f6387f15bb96dd0ba1115065",
+    "callback-repaired.patch": "94edcfac7caeff40e87050c3172941c80eb7af5e32eb0f15b11854447da7a1c9",
+    "streaming-repaired.patch": "fb9b1d3571b8e411323005b576bbb528f16f17dc895ff171c19c49f30ac64330"
+  },
+  "patch_sha256": {
+    "sax-image-lane.patch": "594f936875a1d0472536805928d2b3367eb21e26902038717ccbc34da5f1f00d",
+    "callback-before-normalization.patch": "f2e6221d4a280869779cfe93bf30b5da8816a095218e1ff9d9c7066c22e812ea",
+    "streaming-repaired.patch": "26567db16688fbb1d49f669181a4403e0f4b99ac9113bf4e73201ac9cadc2a74",
+    "callback-repaired.patch": "76d51d786f8fe34f479b693361bce4d65aa395b34511fbb6e3b3f2797801088c"
+  }
+}

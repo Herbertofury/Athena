@@ -1,0 +1,142 @@
+{
+  "reviewedAt": "2026-11-07",
+  "sources": [
+    {
+      "id": "path",
+      "title": "Python 3.12 pathlib: platform-aware paths",
+      "url": "https://docs.python.org/3.12/library/pathlib.html",
+      "status": "opened successfully",
+      "lessonIds": [
+        "sys-paths-bytes",
+        "sys-capacity-headroom"
+      ]
+    },
+    {
+      "id": "lookup",
+      "title": "Linux kernel: pathname lookup",
+      "url": "https://docs.kernel.org/filesystems/path-lookup.html",
+      "status": "opened successfully",
+      "lessonIds": [
+        "sys-paths-bytes"
+      ]
+    },
+    {
+      "id": "os",
+      "title": "Python 3.12 os: filesystem operations and replacement semantics",
+      "url": "https://docs.python.org/3.12/library/os.html",
+      "status": "opened successfully",
+      "lessonIds": [
+        "sys-capacity-headroom",
+        "sys-config-transactions"
+      ]
+    },
+    {
+      "id": "temp",
+      "title": "Python 3.12 tempfile: scoped temporary resources",
+      "url": "https://docs.python.org/3.12/library/tempfile.html",
+      "status": "opened successfully",
+      "lessonIds": [
+        "sys-paths-bytes",
+        "sys-config-transactions"
+      ]
+    },
+    {
+      "id": "process",
+      "title": "Python 3.12 subprocess: communication, timeouts and process lifecycle",
+      "url": "https://docs.python.org/3.12/library/subprocess.html",
+      "status": "opened successfully",
+      "lessonIds": [
+        "sys-process-readiness",
+        "sys-dependencies-retries"
+      ]
+    },
+    {
+      "id": "service",
+      "title": "Microsoft Win32 SERVICE_STATUS: service states",
+      "url": "https://learn.microsoft.com/en-us/windows/win32/api/winsvc/ns-winsvc-service_status",
+      "status": "opened successfully",
+      "lessonIds": [
+        "sys-baseline-contract",
+        "sys-process-readiness",
+        "sys-diagnose-evidence"
+      ]
+    },
+    {
+      "id": "json",
+      "title": "Python 3.12 json: parsing hooks and input considerations",
+      "url": "https://docs.python.org/3.12/library/json.html",
+      "status": "opened successfully",
+      "lessonIds": [
+        "sys-config-transactions"
+      ]
+    },
+    {
+      "id": "graph",
+      "title": "Python 3.12 graphlib: dependency/topological ordering concepts",
+      "url": "https://docs.python.org/3.12/library/graphlib.html",
+      "status": "opened successfully",
+      "lessonIds": [
+        "sys-dependencies-retries"
+      ]
+    },
+    {
+      "id": "sqlite",
+      "title": "Python 3.12 sqlite3: transactions, connection and backup APIs",
+      "url": "https://docs.python.org/3.12/library/sqlite3.html",
+      "status": "opened successfully",
+      "lessonIds": [
+        "sys-baseline-contract",
+        "sys-durable-database",
+        "sys-diagnose-evidence"
+      ]
+    },
+    {
+      "id": "transaction",
+      "title": "SQLite: transaction control and rollback",
+      "url": "https://www.sqlite.org/lang_transaction.html",
+      "status": "opened successfully",
+      "lessonIds": [
+        "sys-dependencies-retries",
+        "sys-durable-database"
+      ]
+    },
+    {
+      "id": "backup",
+      "title": "SQLite: backup API and snapshot copying",
+      "url": "https://www.sqlite.org/backup.html",
+      "status": "opened successfully",
+      "lessonIds": [
+        "sys-durable-database"
+      ]
+    },
+    {
+      "id": "logging",
+      "title": "Python 3.12 logging: event records and configured destinations",
+      "url": "https://docs.python.org/3.12/library/logging.html",
+      "status": "opened successfully",
+      "lessonIds": [
+        "sys-diagnose-evidence"
+      ]
+    }
+  ],
+  "notes": [
+    "Python documentation is pinned to the 3.12 branch; the executed interpreter was 3.12.14. Current documentation showed a later patch version. Only stable APIs used by the actual tests are relied upon.",
+    "Original Cedar Queue scenarios, calculations, retry rules, teaching protocols and configuration schema are authored examples, not vendor recommendations.",
+    "The graph implementation is a transparent deterministic teaching planner, not a claim to invoke graphlib or a system scheduler.",
+    "No certification blueprint mapping was attempted or claimed."
+  ],
+  "retrievalLimits": [
+    {
+      "url": "https://www.freedesktop.org/software/systemd/man/latest/systemd.service.html",
+      "result": "timeout; official search excerpts available but not used as primary implementation evidence"
+    },
+    {
+      "url": "https://www.freedesktop.org/software/systemd/man/latest/systemctl.html",
+      "result": "timeout"
+    },
+    {
+      "url": "https://www.gnu.org/software/coreutils/manual/html_node/df-invocation.html",
+      "result": "timeout; no df command behavior claimed as tested"
+    }
+  ]
+}

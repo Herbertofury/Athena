@@ -1,0 +1,243 @@
+'use strict';
+import {collectionJob,versionExperimentJob,versionCollectionJob,upstreamReviewJob,projectArchiveJob,jobLabel,jobIdentity} from './collection-input.mjs';
+import {createArchiveSelection,loadSavedArchive} from './archive-view.mjs';
+import {submitJob as originalSubmitJob} from './job-submit.mjs';
+
+export async function mount({container,search='',theme='dark',route='#lab',state=null,navigate,signal}={}){
+ if(!container?.attachShadow)throw new TypeError('Workspace container is required');
+ const root=container.shadowRoot||container.attachShadow({mode:'open'}),lifetime=new AbortController(),cleanups=[],urls=new Set(),timers=new Set();
+ let disposed=false,pendingSubmissions=0,warning=state?.submissionWarning||'',currentPanel=new URLSearchParams(route.split('?')[1]||'').get('panel')||state?.panel||'overview',query=String(search||'');
+ const setTimeout=(fn,ms)=>{const id=globalThis.setTimeout(()=>{timers.delete(id);if(!disposed)fn();},ms);timers.add(id);return id;};
+ const clearTimeout=id=>{timers.delete(id);globalThis.clearTimeout(id);};
+ const createObjectURL=blob=>{const url=URL.createObjectURL(blob);urls.add(url);return url;};
+ const revokeObjectURL=url=>{urls.delete(url);URL.revokeObjectURL(url);};
+ function setTheme(v){container.dataset.theme=v==='light'?'light':'dark';}
+ let cancelArchive=()=>{},cancelOverview=()=>{};
+ function unmount(){if(disposed)return;disposed=true;lifetime.abort();cancelOverview();cancelArchive();for(const f of cleanups.splice(0)){try{f();}catch{}}for(const id of timers)globalThis.clearTimeout(id);timers.clear();for(const u of urls)URL.revokeObjectURL(u);urls.clear();root.querySelector('dialog[open]')?.close();root.replaceChildren();signal?.removeEventListener('abort',unmount);}
+ signal?.addEventListener('abort',unmount,{once:true});setTheme(theme);
+ const controller={unmount,setTheme,setSearch(value){query=String(value||'');if(controller.ready&&!disposed)applySearch();},setRoute(value){if(disposed||!controller.ready)return;currentPanel=new URLSearchParams(value.split('?')[1]||'').get('panel')||'overview';showPanel(currentPanel);},ready:false,exportState(){return {panel:currentPanel,submissionWarning:pendingSubmissions?'A submission was still pending when you left. Check Overview before submitting again; the job may already exist.':warning};}};
+ if(signal?.aborted){unmount();return controller;}
+ if(globalThis.location?.origin!=='http://127.0.0.1:41379'){
+   const title=document.createElement('h2');title.textContent='Local evidence engine required';const message=document.createElement('p');message.textContent='This workspace reads and writes your local SQLite journal. Start Athena with serve-athena and its verified package, then open the local Athena address. This public page will not connect to localhost, queue work or create a database.';root.replaceChildren(title,message);return controller;
+ }
+ let info;try{const response=await fetch('/api/runtime',{signal:AbortSignal.any([lifetime.signal,AbortSignal.timeout(15000)]),cache:'no-store',redirect:'error',credentials:'same-origin'});if(!response.ok)throw Error('Local runtime is unavailable.');info=await response.json();if(info.application!=='Athena'||info.api_version!==1||info.same_origin_only!==true||info.loopback_only!==true||!info.runtime_manifest_sha256)throw Error('A verified unified Athena runtime is required.');}catch(error){if(!disposed){root.textContent=error.message;}return controller;}
+ if(disposed)return controller;
+ root.innerHTML="<link rel=\"stylesheet\" href=\"STYLE_URL\"><nav class=\"lab-tabs\" aria-label=\"Laboratory panels\"><button data-panel=\"overview\">Overview</button><button data-panel=\"collectors\">Collection</button><button data-panel=\"experiments\">Experiments</button></nav><p id=\"workspace-warning\" role=\"status\"></p><p id=\"lab-search-status\" role=\"status\"></p>\n<div class=\"shell\">\n<main><section id=\"overview\" class=\"panel\"><div class=\"hero\"><div><p class=\"eyebrow\">OBSERVE. EXPERIMENT. IMPROVE.</p><h1>Better is something<br>you <em>prove.</em></h1><p class=\"intro\">A working place for measured improvements.<br>Keep the evidence. Repair the failures. Protect what works.</p></div><div class=\"orbital\" aria-hidden=\"true\"><div class=\"orbit one\"></div><div class=\"orbit two\"></div><div class=\"orbit three\"></div><span class=\"core\">A</span><span class=\"orbit-label\">EVIDENCE AT THE CORE</span></div></div><div class=\"metrics\"><article><span>Pending work</span><strong id=\"pending\">0</strong><small>Queued + running</small></article><article><span>Completed jobs</span><strong id=\"completed\">0</strong><small>Successful execution, not promotion</small></article><article><span>Needs attention</span><strong id=\"failed\">0</strong><small>Failures remain in the record</small></article></div><div class=\"section-title\"><h2>Recent activity</h2><span>Latest 50 jobs</span></div><p id=\"connection\" role=\"status\">Connecting to the local engine\u2026</p><div id=\"jobs\" class=\"jobs\"></div></section>\n<section id=\"collectors\" class=\"panel\" hidden><p class=\"eyebrow\">PUBLIC DATA, EXPLICIT BOUNDARIES</p><h1>Collection <em>without guesswork.</em></h1><p class=\"intro\">Start with one verified source. Keep successful results when a refresh fails.</p><article class=\"collector-card\"><div class=\"collector-top\"><span class=\"provider-icon\">M</span><div><h2>Modrinth</h2><p>Public project metadata</p></div><span class=\"badge ready\">IMPLEMENTED</span></div><p>Collect the canonical ID, title, description, project type and version IDs for one project or a bounded canonical-ID batch. No account, downloads or private content.</p><form id=\"collect-form\"><label for=\"project\">Project ID, slug, or comma-separated canonical IDs</label><div class=\"input-row\"><input id=\"project\" name=\"project\" value=\"sodium\" maxlength=\"512\" required autocomplete=\"off\"><button class=\"primary\" type=\"submit\">Collect metadata <span>\u2197</span></button></div></form><p id=\"collect-status\" role=\"status\"></p></article><article class=\"collector-card\"><h2>Complete Modrinth project response</h2><p>Optional full-response archive: retain original public JSON, including license, compatibility and future metadata fields. Existing projection collection is unchanged. Overview shows a compact receipt; source JSON stays local. No account or linked-file downloads.</p><form id=\"project-archive-form\"><label for=\"project-archive-id\">One project ID or slug</label><div class=\"input-row\"><input id=\"project-archive-id\" maxlength=\"128\" value=\"sodium\" required autocomplete=\"off\"><button class=\"primary\" type=\"submit\">Archive full response</button></div></form><p id=\"project-archive-status\" role=\"status\"></p></article><article class=\"collector-card\"><h2>Inspect a saved response</h2><p>Read local archived project responses, individual version objects or fixed upstream snapshots without fetching their provider or converting their numbers. Upstream snapshots are saved observations, not a fresh release check. Markup and URLs remain inert text. Download preserves the original bytes.</p><form id=\"saved-archive-form\"><label for=\"saved-archive-kind\">Saved record type</label><select id=\"saved-archive-kind\"><option value=\"project\">Project response</option><option value=\"version\">Version object</option><option value=\"upstream\">Saved upstream response</option></select><label for=\"saved-archive-id\">Canonical project/version ID, or fixed source: rustsec, hls, serde-json</label><input id=\"saved-archive-id\" maxlength=\"32\" placeholder=\"AANobbMI\" required autocomplete=\"off\"><label for=\"saved-archive-generation\">Saved generation (optional)</label><div class=\"input-row\"><input id=\"saved-archive-generation\" maxlength=\"64\" inputmode=\"numeric\" autocomplete=\"off\" aria-describedby=\"saved-archive-generation-help\"><button class=\"primary\" type=\"submit\">View exact saved JSON</button></div><p id=\"saved-archive-generation-help\">Leave blank to open the newest saved response. Enter an exact generation from a receipt, or list the saved generations below.</p></form><button id=\"cancel-archive-load\" disabled type=\"button\">Cancel load</button><button id=\"show-last-archive\" disabled type=\"button\">Show last verified response</button><p id=\"saved-archive-status\" role=\"status\"></p><button id=\"list-saved-generations\" type=\"button\" aria-expanded=\"false\" aria-controls=\"saved-archive-history\">List saved generations</button><section id=\"saved-archive-history\" aria-label=\"Saved generations\" hidden><p>Stored metadata only. Opening a generation separately verifies its original bytes. Byte counts use database encoding.</p><p id=\"saved-archive-history-status\" role=\"status\"></p><ul id=\"saved-archive-history-list\" aria-label=\"Retained generation records\"></ul><button id=\"older-saved-generations\" type=\"button\" disabled>Older generations</button> <button id=\"dismiss-saved-generations\" type=\"button\">Close generation list</button></section></article><article class=\"collector-card\"><h2>Modrinth versions</h2><p>Collect 1\u201320 canonical version IDs from the official public API. Retain full JSON, including compatibility, dependencies, changelog and file metadata. File links are not downloaded or executed. Missing responses retain earlier snapshots.</p><form id=\"version-collect-form\"><label for=\"version-collect-ids\">Comma-separated version IDs</label><div class=\"input-row\"><input id=\"version-collect-ids\" maxlength=\"512\" placeholder=\"g6ju16VJ, Ag5S66CF\" required autocomplete=\"off\"><button class=\"primary\" type=\"submit\">Save version metadata</button></div></form><p id=\"version-collect-status\" role=\"status\"></p></article><article class=\"collector-card\"><h2>Official upstream checkpoints</h2><p>Read a fixed public GitHub commit or latest-release record. Full JSON stays local; revisions and metadata drift are separate observations, not automatic upgrades. No account, token, asset download or prototype execution.</p><form id=\"upstream-form\"><label for=\"upstream-source\">Public source</label><div class=\"input-row\"><select id=\"upstream-source\"><option value=\"rustsec\">RustSec advisory database head</option><option value=\"hls\">HLS.js GitHub latest release</option><option value=\"serde-json\">serde_json GitHub latest release</option></select><button class=\"primary\" type=\"submit\">Check upstream</button></div></form><p id=\"upstream-status\" role=\"status\"></p><p>At most 30 requests per local database/hour, provider cooldowns retained. An interrupted request fails closed for manual reconciliation. GitHub latest release is not necessarily registry-newest or preferred.</p></article><article id=\"curseforge-offline-card\" class=\"collector-card\"><div class=\"collector-top\"><span class=\"provider-icon\" aria-hidden=\"true\">C</span><div><h2>CurseForge</h2><p>Synthetic schema preview \u00b7 live collection disabled</p></div><span class=\"badge\">RESEARCH ONLY</span></div><p id=\"curseforge-access-status\">Live collection is disabled: this app has no approved CurseForge credential configuration or transport. No keys are accepted or stored here. A browser login is not an API grant.</p><p>This example is generated by Athena\u2019s offline mapper from fabricated fixtures. It does not fetch a provider, queue a job, write your journal or prove live support.</p><button id=\"curseforge-live-collect\" type=\"button\" disabled aria-describedby=\"curseforge-access-status\">Live collection unavailable</button> <button id=\"curseforge-preview-toggle\" type=\"button\" aria-expanded=\"false\" aria-controls=\"curseforge-preview-json\">Show synthetic mapping</button><pre id=\"curseforge-preview-json\" hidden tabindex=\"0\" aria-label=\"Synthetic CurseForge mapping, not live data\"></pre></article><div class=\"boundary\"><h3>Coverage is earned, not implied.</h3><p>Creator platforms, social networks and other video/game hosts are planned. Their APIs, access rights and authentication requirements must be evaluated individually. This app does not bypass paid access or promise complete platform coverage.</p></div></section>\n<section id=\"experiments\" class=\"panel\" hidden><p class=\"eyebrow\">REAL IMPLEMENTATIONS. COMPLETE OUTPUTS.</p><h1>Let the evidence <em>decide.</em></h1><p class=\"intro\">Faster but unstable is a repair candidate, not a production release.</p><div class=\"pipeline\"><article><b>01</b><h3>Baseline</h3><p>Record the workload, implementation and environment.</p></article><article><b>02</b><h3>Experiment</h3><p>Measure actual code and compare complete results.</p></article><article><b>03</b><h3>Stabilize</h3><p>Preserve failures. Repair causes. Re-test speed and correctness.</p></article><article><b>04</b><h3>Review</h3><p>Missing evidence blocks eligibility. Passing does not deploy.</p></article></div><article class=\"boundary\"><h2>Exact identifier deduplication</h2><p>The executable CLI lab compares a linear implementation with a hash-indexed implementation while retaining first-seen order and exact strings. The unit suite includes 10,000 generated differential cases.</p><p>Run the fixed comparison in the local queue: up to 15 measured pairs, 10,000 generated stress cases and a cooperative 15-second budget. Raw partial results and failures are retained. Missing memory and per-strategy cancellation evidence still block promotion.</p><button id=\"run-experiment\" class=\"primary\" type=\"button\">Run bounded comparison</button><p id=\"experiment-status\" role=\"status\"></p><a href=\"https://github.com/Herbertofury/Athena/tree/main/engineering/apps/atlas-lab\" target=\"_blank\" rel=\"noopener noreferrer\">Read the implementation and limits \u2197</a></article><article class=\"boundary\"><h2>Saved version validation</h2><p>Compare the baseline and isolated fixed-field parser on one saved Modrinth version, retaining exact JSON and identity. Up to 20 measured pairs, 10,000 generated stress variations and a cooperative 15-second budget. Partial samples remain visible and missing acceptance evidence blocks promotion.</p><p>Save the version first in Collection, or use the collect-modrinth-versions CLI with this same database. This action reads one existing snapshot; it does not fetch a provider or execute arbitrary code.</p><form id=\"version-experiment-form\"><label for=\"version-experiment-id\">Saved version ID</label><div class=\"input-row\"><input id=\"version-experiment-id\" maxlength=\"32\" placeholder=\"Eight-character version ID\" required autocomplete=\"off\"><button class=\"primary\" type=\"submit\">Compare saved version</button></div></form><p id=\"version-experiment-status\" role=\"status\"></p></article><p class=\"disclosure\">No autonomous code generator or self-deployment is configured. This is a functioning foundation, not a claim of general recursive self-improvement.</p></section>\n</main></div><dialog id=\"saved-archive-dialog\" class=\"archive-dialog\" aria-labelledby=\"saved-archive-title\"><h2 id=\"saved-archive-title\"></h2><p id=\"saved-archive-meta\"></p><pre id=\"saved-archive-text\" tabindex=\"0\"></pre><button id=\"download-saved-archive\" type=\"button\">Download exact JSON</button><button id=\"close-saved-archive\" type=\"button\">Close</button></dialog>".replace('STYLE_URL',new URL('./style.css',import.meta.url).href);
+ const cfToggle=root.getElementById('curseforge-preview-toggle'),cfJson=root.getElementById('curseforge-preview-json');
+ cfJson.textContent=JSON.stringify({"evidence": "synthetic_fixtures_only", "liveAcceptance": false, "access": {"state": "missing_key", "responseStatus": null, "networkPerformedByMapper": false, "keyValidityVerified": false, "automaticRetryAllowed": false, "fullSupportAccepted": false}, "receipt": {"kind": "curseforge_project", "identity": {"modId": 700001, "gameId": 432}, "authorIds": [900001], "galleryIds": [3, 2], "logoId": 1, "distributionPermission": {"state": "unknown", "value": null}, "projectSearchAvailability": {"state": "provided", "value": false}, "providedFields": ["authors", "screenshots", "logo", "latestFiles", "allowModDistribution", "isAvailable"], "descriptionPresent": true, "descriptionOwnershipVerified": false, "files": [{"id": 800001, "fileLengthDecimal": "9007199254740993", "availability": {"state": "provided", "value": false}, "earlyAccess": {"state": "provided", "value": true}, "downloadReferenceState": "not_provided", "downloadVerified": false}], "pagination": {"state": "complete_for_captured_query", "index": 0, "pageSize": 50, "resultCount": 1, "totalCount": 1, "completeForQuery": true, "completeImport": false}, "latestFilesAreCompleteHistory": false, "liveAcceptance": false, "fullSupportAccepted": false}},null,2);
+ const toggleCfPreview=()=>{if(disposed)return;cfJson.hidden=!cfJson.hidden;cfToggle.setAttribute('aria-expanded',String(!cfJson.hidden));cfToggle.textContent=cfJson.hidden?'Show synthetic mapping':'Hide synthetic mapping';};
+ cfToggle.addEventListener('click',toggleCfPreview);cleanups.push(()=>cfToggle.removeEventListener('click',toggleCfPreview));
+ const writeControls=[...root.querySelectorAll('#collect-form button,#project-archive-form button,#version-collect-form button,#upstream-form button,#version-experiment-form button,#run-experiment')];
+ for(const button of writeControls)button.disabled=true;
+ async function submitJob(job){if(!controller.ready||disposed)throw new Error('Local engine initialization is incomplete; no job was submitted.');pendingSubmissions++;try{return await originalSubmitJob(job,{fetchImpl:(url,options)=>fetch(url,{...options,signal:AbortSignal.any([options.signal,lifetime.signal])})});}catch(error){warning=error.message;throw error;}finally{pendingSubmissions--;}}
+ const elements=new Map([...root.querySelectorAll('[id]')].map(el=>[el.id,el]));const $ = id => elements.get(id);
+const exactPositiveId=value=>typeof value==='string'&&value===value.trim()&&/^[1-9][0-9]{0,18}$/.test(value)&&BigInt(value)<=9223372036854775807n;
+const renderedJobs = new Map();
+let emptyNode = null;
+let renderedInstance = null;
+let clearArchiveHistory=()=>{};
+const panels = new Set(['overview','collectors','experiments']);
+function showPanel(name) {
+  if (!panels.has(name)) name='overview';
+  if(name!=='collectors')clearArchiveHistory();
+  root.querySelectorAll('.panel').forEach(p=>p.hidden=p.id!==name);
+  root.querySelectorAll('[data-panel]').forEach(b=>b.setAttribute('aria-current',b.dataset.panel===name?'page':'false'));
+}
+root.querySelectorAll('[data-panel]').forEach(b=>b.addEventListener('click',()=>{currentPanel=b.dataset.panel;showPanel(currentPanel);navigate?.('#lab?panel='+currentPanel,{replace:false});}));showPanel(currentPanel);
+function text(tag,value,className) {const e=document.createElement(tag);e.textContent=value;if(className)e.className=className;return e;}
+// SQL GROUP BY omits zero-count states. Only absence means zero: coercing a
+// present value can concatenate strings, hide nulls or display rounded totals.
+function overviewMetrics(data) {
+  const invalid=()=>{throw new Error('Invalid overview counts; previous results are retained.');};
+  if(!data||typeof data!=='object'||Array.isArray(data)||!Array.isArray(data.jobs))invalid();
+  const counts=data.counts;
+  if(!counts||typeof counts!=='object'||Array.isArray(counts))invalid();
+  for(const value of Object.values(counts))if(!Number.isSafeInteger(value)||value<0)invalid();
+  const count=state=>Object.hasOwn(counts,state)?counts[state]:0;
+  const pending=count('queued')+count('running');
+  if(!Number.isSafeInteger(pending))invalid();
+  return {pending,completed:count('succeeded'),failed:count('failed')};
+}
+function render(data,instance=null) {
+  // Validate before preparing cards or committing a new engine/cache identity.
+  const metrics=overviewMetrics(data);
+  if(instance!==null&&!/^[a-f0-9]{32}$/.test(instance))throw new Error('Invalid engine identity; previous results are retained.');
+  const reuse=instance!==null&&instance===renderedInstance;
+  const identities=data.jobs.map(jobIdentity);
+  if(new Set(identities).size!==identities.length)throw new Error('Repeated job identities; previous results are retained.');
+  const nodes=[],nextRenderedJobs=new Map();
+  if(!data.jobs.length){if(!emptyNode){emptyNode=text('div','','empty');emptyNode.append(text('strong','Your first experiment starts with a question.'),text('span','Open Collection to retrieve public project metadata.'));}nodes.push(emptyNode);}
+  for(const [index,job] of data.jobs.entries()){const identity=identities[index];
+    const receipt=job.result?.experiment_id_text;
+    const experimentId=job.job==='DedupExperiment'&&(job.state==='succeeded'||job.state==='failed')&&job.result?.experiment&&exactPositiveId(receipt)?receipt:'';
+    const signature=job.state+':'+job.attempt+':'+experimentId;const prior=reuse?renderedJobs.get(identity):null;if(prior&&prior.signature===signature){nextRenderedJobs.set(identity,prior);nodes.push(prior.node);continue;}const e=text('article','','job');const top=text('div','','job-top');
+    const name=jobLabel(job.job);
+    top.append(text('h3',name),text('span',job.state.toUpperCase(),'badge '+job.state));e.append(top,text('p','Job '+identity+' · attempt '+job.attempt));
+    if(job.result?.project){const p=job.result.project;e.append(text('p',p.title+' · '+p.id+' · '+p.versions.length+' version IDs'));}
+    if(job.result?.batch){const b=job.result.batch;e.append(text('p',b.projects.length+' retrieved · '+b.missing_ids.length+' missing from response'));if(b.missing_ids.length)e.append(text('p','Partial result. Missing IDs: '+b.missing_ids.join(', '),'error'));}
+    if(job.result?.project_archive){const a=job.result.project_archive;e.append(text('p','Complete project archive · '+a.canonical_id+' · generation '+a.generation+' · '+a.payload_bytes+' bytes retained locally'));}
+    if(job.result?.version_collection){const v=job.result.version_collection;e.append(text('p',v.records.length+' versions saved · '+v.missing_ids.length+' missing · complete JSON retained locally'));if(v.missing_ids.length)e.append(text('p','Partial result. Missing version IDs: '+v.missing_ids.join(', '),'error'));}
+    if(job.result?.upstream_review){const u=job.result.upstream_review;e.append(text('p',u.repository+' · '+(u.revision||u.state||'No new observation')),text('p',u.comparison?'Comparison: '+u.comparison+' · observed '+u.observed_at_utc+' UTC':(u.error||'No new observation')),text('p','Observation only, not an upgrade or security clearance.'));}
+    if(job.result?.experiment){const run=job.result.experiment;const decision=typeof run.decision==='string'?run.decision:Object.keys(run.decision)[0];e.append(text('p',run.evidence.trials.length+' timed pairs · '+run.evidence.stress_cases+' stress cases · '+run.reason),text('p','Gate: '+decision+' · execution is not promotion.'));}
+    if(experimentId){const review=text('a','Review saved experiment '+experimentId);review.href='/learning#'+experimentId;e.append(review);}
+    if(job.result?.error)e.append(text('p',job.result.error,'error'));
+    if(job.result){const d=document.createElement('details');d.append(text('summary','Inspect recorded result'),text('pre',JSON.stringify(job.result,null,2)));e.append(d);}
+    nextRenderedJobs.set(identity,{signature,node:e});nodes.push(e);
+  }
+  // Prepare every card before committing metrics or keyed reuse state.
+  // A later malformed record must not poison the next successful refresh.
+  const container=$('jobs');let cursor=container.firstChild;
+  for(const node of nodes){if(node===cursor){cursor=cursor.nextSibling;}else{container.insertBefore(node,cursor);}}
+  while(cursor){const next=cursor.nextSibling;cursor.remove();cursor=next;}
+  renderedJobs.clear();for(const [identity,record] of nextRenderedJobs)renderedJobs.set(identity,record);
+  renderedInstance=instance;
+  $('pending').textContent=metrics.pending;$('completed').textContent=metrics.completed;$('failed').textContent=metrics.failed;
+}
+let fetching=false,overviewController=null;cancelOverview=()=>overviewController?.abort();
+async function refresh(){if(disposed||fetching||document.hidden)return;fetching=true;const controller=new AbortController();overviewController=controller;const timer=setTimeout(()=>controller.abort(new DOMException('Local overview request timed out','TimeoutError')),15000);try{const r=await fetch('/api/overview',{cache:'no-store',signal:controller.signal});if(!r.ok)throw Error('Local engine unavailable ('+r.status+').');const data=await r.json();if(disposed)return;render(data,r.headers?.get('x-atlas-engine-instance')??null);$('connection').textContent='Connected · worker '+data.worker_status+' · refreshed '+new Date().toLocaleTimeString();$('connection').classList.remove('error');applySearch();}catch(e){$('connection').textContent=e.message+' Previous results remain visible.';$('connection').classList.add('error');}finally{clearTimeout(timer);fetching=false;overviewController=null;}}
+$('collect-form').addEventListener('submit',async e=>{e.preventDefault();const button=e.currentTarget.querySelector('button');if(button.disabled)return;button.disabled=true;$('collect-status').textContent='Queuing request…';$('collect-status').classList.remove('error');try{const j=await submitJob(collectionJob($('project').value));$('collect-status').textContent='Job '+j.id+' queued. Follow its result in Overview.';await refresh();}catch(error){$('collect-status').textContent=error.message;$('collect-status').classList.add('error');}finally{button.disabled=false;}});
+await refresh();if(disposed){return controller;}const poll=setInterval(refresh,2500);cleanups.push(()=>clearInterval(poll));document.addEventListener('visibilitychange',refresh);cleanups.push(()=>document.removeEventListener('visibilitychange',refresh));
+
+$('run-experiment').addEventListener('click',async()=>{const button=$('run-experiment');if(button.disabled)return;button.disabled=true;const status=$('experiment-status');status.textContent='Queuing the fixed bounded experiment…';try{const job=await submitJob('DedupExperiment');status.textContent='Job '+job.id+' queued. Review raw evidence and its gate in Overview; no deployment occurs.';await refresh();}catch(error){status.textContent=error.message;}finally{button.disabled=false;}});
+
+$('version-experiment-form').addEventListener('submit',async e=>{e.preventDefault();const button=e.currentTarget.querySelector('button');if(button.disabled)return;button.disabled=true;const status=$('version-experiment-status');status.classList.remove('error');status.textContent='Queuing a fixed comparison of the saved record…';try{const job=await submitJob(versionExperimentJob($('version-experiment-id').value));status.textContent='Job '+job.id+' queued. This does not fetch data or change the default parser.';await refresh();}catch(error){status.textContent=error.message;status.classList.add('error');}finally{button.disabled=false;}});
+
+$('version-collect-form').addEventListener('submit',async e=>{e.preventDefault();const button=e.currentTarget.querySelector('button');if(button.disabled)return;button.disabled=true;const status=$('version-collect-status');status.classList.remove('error');status.textContent='Queuing public version metadata…';try{const job=await submitJob(versionCollectionJob($('version-collect-ids').value));status.textContent='Job '+job.id+' queued. Wait for saved records in Overview before comparing a version in Experiments.';await refresh();}catch(error){status.textContent=error.message;status.classList.add('error');}finally{button.disabled=false;}});
+
+$('upstream-form').addEventListener('submit',async e=>{e.preventDefault();const button=e.currentTarget.querySelector('button');if(button.disabled)return;button.disabled=true;const status=$('upstream-status');status.classList.remove('error');status.textContent='Queuing the fixed public checkpoint…';try{const job=await submitJob(upstreamReviewJob($('upstream-source').value));status.textContent='Job '+job.id+' queued. Results require review; no download or upgrade will run.';await refresh();}catch(error){status.textContent=error.message;status.classList.add('error');}finally{button.disabled=false;}});
+
+$('project-archive-form').addEventListener('submit',async e=>{e.preventDefault();const button=e.currentTarget.querySelector('button');if(button.disabled)return;button.disabled=true;const status=$('project-archive-status');status.classList.remove('error');status.textContent='Queuing complete received project JSON for local storage…';try{const job=await submitJob(projectArchiveJob($('project-archive-id').value));status.textContent='Job '+job.id+' queued. Overview will show a hash/generation receipt; original JSON stays in local snapshots.';await refresh();}catch(error){status.textContent=error.message;status.classList.add('error');}finally{button.disabled=false;}});
+
+const archiveSelection=createArchiveSelection(({kind,id,generation},options)=>{
+ if(generation==='')return loadSavedArchive(kind,id,options);
+ if(!exactPositiveId(generation)){
+  throw Error('Enter a positive decimal generation up to 9223372036854775807 without signs or leading zeros, or leave it blank for newest.');
+ }
+ // The base reader builds and validates the fixed, same-origin kind/ID path.
+ // Appending a validated decimal string preserves every SQLite integer digit.
+ return loadSavedArchive(kind,id,{...options,fetchImpl:async(path,request)=>{
+  const response=await fetch(path+'/'+generation,request);
+  const fault=response.status===404?'This saved generation was not found. The latest response was not opened.':
+   response.ok&&response.headers.get('x-atlas-generation')!==generation?'Saved-response generation mismatch. No archive was opened.':'';
+  if(fault){try{Promise.resolve(response.body?.cancel()).catch(()=>{});}catch{} throw Error(fault);}
+  return response;
+ }});
+});
+function showSavedArchive(){const record=archiveSelection.last;if(!record)return;$('saved-archive-title').textContent=record.kind+' '+record.id+' · generation '+record.generation;$('saved-archive-meta').textContent=record.bytes.byteLength+' bytes · SHA-256 '+record.hash;$('saved-archive-text').textContent=record.text;if(!$('saved-archive-dialog').open)$('saved-archive-dialog').showModal();}
+$('saved-archive-form').addEventListener('submit',async e=>{e.preventDefault();const button=e.currentTarget.querySelector('button'),status=$('saved-archive-status');button.disabled=true;$('cancel-archive-load').disabled=false;status.classList.remove('error');status.textContent='Reading and verifying local bytes; previous verified response is retained…';try{const result=await archiveSelection.load({kind:$('saved-archive-kind').value,id:$('saved-archive-id').value.trim(),generation:$('saved-archive-generation').value});if(result.status!=='ready')return;$('show-last-archive').disabled=false;status.textContent='Exact saved JSON verified. Provider markup is displayed only as text.';showSavedArchive();}catch(error){status.textContent=error.message;status.classList.add('error');}finally{button.disabled=archiveSelection.pending;$('cancel-archive-load').disabled=!archiveSelection.pending;}});
+$('cancel-archive-load').addEventListener('click',()=>{archiveSelection.cancel();$('saved-archive-form').querySelector('button').disabled=false;$('cancel-archive-load').disabled=true;$('saved-archive-status').textContent='Load cancelled. The previous verified response remains available.';});
+$('show-last-archive').addEventListener('click',showSavedArchive);
+function cancelPendingArchiveViewer(){if(!archiveSelection.pending)return;archiveSelection.cancel();$('saved-archive-form').querySelector('button').disabled=false;$('cancel-archive-load').disabled=true;$('saved-archive-status').textContent='Viewer closed; pending load cancelled. The previous verified response remains available.';}
+$('close-saved-archive').addEventListener('click',()=>{cancelPendingArchiveViewer();$('saved-archive-dialog').close();});
+$('saved-archive-dialog').addEventListener('cancel',cancelPendingArchiveViewer);
+$('saved-archive-dialog').addEventListener('close',cancelPendingArchiveViewer);
+$('download-saved-archive').addEventListener('click',()=>{const record=archiveSelection.last;if(!record)return;const url=createObjectURL(new Blob([record.bytes],{type:'application/json'}));const a=document.createElement('a');a.href=url;a.download=(record.kind==='upstream'?'github-upstream':'modrinth-'+record.kind)+'-'+record.id+'-generation-'+record.generation+'.json';a.click();setTimeout(()=>revokeObjectURL(url),1000);});
+
+function cancelChangedArchiveSelection(message){
+ archiveSelection.cancel();$('saved-archive-form').querySelector('button').disabled=false;$('cancel-archive-load').disabled=true;
+ $('saved-archive-status').textContent=message;
+}
+$('saved-archive-kind').addEventListener('change',()=>{
+ clearArchiveHistory();
+ cancelChangedArchiveSelection('Archive type changed. The previous verified response remains available with its original type.');
+});
+for(const field of ['id','generation']){
+ $('saved-archive-'+field).addEventListener('input',()=>{
+  if(field==='id')clearArchiveHistory();
+  if(archiveSelection.pending)cancelChangedArchiveSelection('Archive '+(field==='id'?'ID':field)+' changed. Pending load cancelled; the previous verified response remains available.');
+ });
+}
+
+// A single explicitly requested metadata page; the verified raw viewer stays separate.
+const HISTORY_PAGE_SIZE=12,HISTORY_BYTES=16*1024;
+async function savedGenerationPage({kind,id,before},{signal}){
+ if(!['project','version','upstream'].includes(kind))throw Error('Choose a saved project, version or upstream archive.');
+ if(kind==='upstream'){
+  if(!['rustsec','hls','serde-json'].includes(id))throw Error('Choose one saved fixed upstream source: rustsec, hls or serde-json.');
+ }else if(!/^[A-Za-z0-9]{8}$/.test(id))throw Error('Enter one saved canonical eight-character ID.');
+ const query=new URLSearchParams({limit:String(HISTORY_PAGE_SIZE)});
+ if(before!==null)query.set('before',before);
+ const deadline=AbortSignal.any([signal,AbortSignal.timeout(10000)]);
+ const response=await fetch('/api/'+kind+'-history/'+id+'?'+query,{signal:deadline,cache:'no-store',redirect:'error',credentials:'same-origin'});
+ const reader=response.body?.getReader();
+ if(!reader)throw Error('Saved-generation metadata is unavailable.');
+ const buffer=new Uint8Array(HISTORY_BYTES);let size=0,done=false;
+ try{
+  if(deadline.aborted)throw deadline.reason;
+  if(!response.ok)throw Error('Saved-generation metadata is unavailable ('+response.status+').');
+  if(!/^application\/json(?:\s*;\s*charset=utf-8)?$/i.test(response.headers.get('content-type')||''))throw Error('Unexpected saved-generation metadata content type.');
+  for(;;){
+   const part=await reader.read();
+   if(deadline.aborted)throw deadline.reason;
+   if(part.done){done=true;break;}
+   if(size+part.value.byteLength>HISTORY_BYTES)throw Error('Saved-generation metadata exceeds the size budget.');
+   buffer.set(part.value,size);size+=part.value.byteLength;
+  }
+ }finally{
+  if(!done){try{Promise.resolve(reader.cancel()).catch(()=>{});}catch{}}
+  reader.releaseLock();
+ }
+ let page;
+ try{page=JSON.parse(new TextDecoder('utf-8',{fatal:true}).decode(buffer.subarray(0,size)));}
+ catch{throw Error('Invalid saved-generation metadata.');}
+ const invalid=()=>{throw Error('Invalid saved-generation metadata.');};
+ if(!Array.isArray(page?.entries)||page.entries.length>HISTORY_PAGE_SIZE)invalid();
+ let previous=before;
+ for(const row of page.entries){
+  if(!exactPositiveId(row?.generation)||(previous!==null&&BigInt(row.generation)>=BigInt(previous))||
+     typeof row.observed_at!=='string'||row.observed_at.length>64||!Number.isSafeInteger(row.stored_bytes)||row.stored_bytes<0)invalid();
+  previous=row.generation;
+ }
+ if(page.next_before!==null&&(!exactPositiveId(page.next_before)||page.entries.length!==HISTORY_PAGE_SIZE||page.next_before!==previous))invalid();
+ return page;
+}
+function attachArchiveHistory(list){
+ const panel=$('saved-archive-history'),open=$('list-saved-generations'),older=$('older-saved-generations'),dismiss=$('dismiss-saved-generations'),status=$('saved-archive-history-status');
+ const target=()=>({kind:$('saved-archive-kind').value,id:$('saved-archive-id').value.trim()});
+ const selection=createArchiveSelection(savedGenerationPage);
+ let next=null,identity=null;
+ const same=value=>{const active=target();return value?.kind===active.kind&&value.id===active.id;};
+ const controls=()=>{open.disabled=selection.pending;older.disabled=selection.pending||next===null;};
+ clearArchiveHistory=()=>{
+  selection.cancel();next=null;identity=null;list.replaceChildren();status.textContent='';panel.hidden=true;open.setAttribute('aria-expanded','false');controls();
+ };
+ async function show(before){
+  if(selection.pending||(before!==null&&(before!==next||!same(identity))))return;
+  const value=target();
+  panel.hidden=false;open.setAttribute('aria-expanded','true');status.textContent='Reading stored metadata only…';
+  const task=selection.load({...value,before});controls();
+  try{
+   const received=await task;
+   if(received.status!=='ready'||!same(value)||panel.hidden)return;
+   const page=received.record;
+   const nodes=page.entries.map(row=>{
+    const item=text('li',''),button=text('button','Open generation '+row.generation);button.type='button';
+    button.addEventListener('click',()=>{
+     if(!list.contains(item)||!same(value)||panel.hidden)return;
+     $('saved-archive-generation').value=row.generation;
+     $('saved-archive-form').requestSubmit();
+    });
+    item.append(button,text('p',row.observed_at+' · '+row.stored_bytes+' stored bytes'));
+    return item;
+   });
+   list.replaceChildren(...nodes);identity=value;next=page.next_before;
+   status.textContent=nodes.length?'Showing '+nodes.length+' saved '+(before===null?'generations.':'older generations.'):'No retained generations for that saved record.';
+   // Move keyboard focus into a replaced page rather than leaving it on disabled Older.
+   if(before!==null)nodes[0]?.querySelector('button').focus();
+  }catch(error){
+   if(!same(value)||panel.hidden)return;
+   status.textContent=error.message+(list.childElementCount?' The previous page remains available.':'');
+  }finally{controls();}
+ }
+ open.addEventListener('click',()=>show(null));
+ older.addEventListener('click',()=>{if(next!==null)show(next);});
+ dismiss.addEventListener('click',()=>{clearArchiveHistory();open.focus();});
+}
+const historyList=$('saved-archive-history-list');
+if(historyList?.replaceChildren)attachArchiveHistory(historyList);
+
+ cancelArchive=()=>{archiveSelection.cancel();clearArchiveHistory();};cancelOverview=()=>overviewController?.abort();
+ if(warning)$('workspace-warning').textContent=warning;
+ function applySearch(){const terms=query.toLocaleLowerCase().split(/\s+/).filter(Boolean);let shown=0;for(const job of root.querySelectorAll('.job')){job.hidden=!terms.every(term=>job.textContent.toLocaleLowerCase().includes(term));if(!job.hidden)shown++;}const status=root.getElementById('lab-search-status');if(status)status.textContent=query?shown+' matching recent jobs. Search does not change the durable journal.':'';}
+ applySearch();controller.ready=!disposed;if(controller.ready)for(const button of writeControls)button.disabled=false;return controller;
+}

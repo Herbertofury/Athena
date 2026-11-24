@@ -1,0 +1,77 @@
+{
+  "implementation_commit": "cf6060e4d551ccb16f892227d9526fdde482dc6a",
+  "harness": "atlas-card-density-v11-cadence-guard",
+  "loaded_script": "lab.6e97319b65f25a4e.js",
+  "scope": "actual cloud Chromium controls; generated data, no target recommendation",
+  "receipts": {
+    "v11-background-rejected.json": {
+      "sha256": "ba6bc1890da3c15561dfe384e95597ec4b29b188909d725d6738d25a85378dca",
+      "complete": false,
+      "samples": 0,
+      "error": "Frame calibration exceeded eight-second budget"
+    },
+    "v11-foreground-complete.json": {
+      "sha256": "6fcb74f96217baa5d2a8ce8ba38edcdebcadfc58998635cf3e965d5af11f61db",
+      "complete": true,
+      "samples": 6,
+      "error": null,
+      "strategies": {
+        "containment": {
+          "frame_proxy_median_ms": 44.19999998807907,
+          "synchronous_median_ms": 10.900000005960464
+        },
+        "full_dom": {
+          "frame_proxy_median_ms": 127.09999999403954,
+          "synchronous_median_ms": 9.300000011920929
+        }
+      }
+    },
+    "v11-before-interruption.json": {
+      "sha256": "a7d5ec48d4eb9e3559c2139f043f6dfc29661addb7195d8038d56e8f64ad330d",
+      "complete": true,
+      "samples": 6,
+      "error": null
+    },
+    "v11-interrupted.json": {
+      "sha256": "6e152d0d68a9f8775024f4854d977dc1cb0cedf23a9052f3e9a3989c2e2c5fda",
+      "complete": false,
+      "samples": 1,
+      "error": "Slow empty-frame cadence"
+    },
+    "v11-after-interruption-last-good.json": {
+      "sha256": "a7d5ec48d4eb9e3559c2139f043f6dfc29661addb7195d8038d56e8f64ad330d",
+      "complete": true,
+      "samples": 6,
+      "error": null
+    },
+    "v11-density-200-64k.json": {
+      "sha256": "8cabea23f57895a394f6c2afd27f54f1951c071617fe9d85c89f3387bdd849ab",
+      "complete": true,
+      "samples": 6,
+      "error": null,
+      "strategies": {
+        "full_dom": {
+          "frame_proxy_median_ms": 4871,
+          "synchronous_median_ms": 20.100000023841858
+        },
+        "metadata_containment": {
+          "frame_proxy_median_ms": 265.19999998807907,
+          "synchronous_median_ms": 74
+        }
+      }
+    }
+  },
+  "last_good_byte_identical": true,
+  "last_record_inspected": {
+    "id": "card-000199",
+    "metadata_characters": 65536
+  },
+  "unverified": [
+    "native API focus truthfulness",
+    "physical paint",
+    "INP",
+    "peak memory",
+    "real-media density",
+    "other projects"
+  ]
+}

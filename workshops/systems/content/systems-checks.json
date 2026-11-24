@@ -1,0 +1,314 @@
+[
+  {
+    "id": "sys-baseline-contract-1",
+    "lessonId": "sys-baseline-contract",
+    "question": "A file says workers=20, but the process reports that it retained workers=2 after validation failed. Which value describes effective runtime configuration?",
+    "options": [
+      "2 according to the supplied runtime evidence",
+      "20 because the newest file always wins",
+      "Neither value can ever be known",
+      "The number of CPU cores by definition"
+    ],
+    "answer": 0,
+    "why": "The intended file and accepted runtime state differ. The supplied observation says the process retained 2."
+  },
+  {
+    "id": "sys-baseline-contract-2",
+    "lessonId": "sys-baseline-contract",
+    "question": "Which acceptance criterion best verifies durable work?",
+    "options": [
+      "The window opened",
+      "The saved record remains correct after closing and reopening the data store",
+      "A success message appeared once",
+      "The service has an attractive icon"
+    ],
+    "answer": 1,
+    "why": "Reopening checks a meaningful persistence boundary. A UI or process signal alone does not prove the record was saved."
+  },
+  {
+    "id": "sys-baseline-contract-3",
+    "lessonId": "sys-baseline-contract",
+    "question": "What belongs in a safe change plan?",
+    "options": [
+      "Only the new setting",
+      "A promise that failure is impossible",
+      "A stop condition and feasible rollback with verification",
+      "Permission to change every nearby system"
+    ],
+    "answer": 2,
+    "why": "Boundaries and recovery decisions should be explicit before the change."
+  },
+  {
+    "id": "sys-paths-bytes-1",
+    "lessonId": "sys-paths-bytes",
+    "question": "Why can five text characters occupy six UTF-8 bytes?",
+    "options": [
+      "Every character must use exactly two bytes",
+      "The file is necessarily corrupt",
+      "The filename is included in the content size",
+      "Some characters use more than one encoded byte"
+    ],
+    "answer": 3,
+    "why": "Character counts and encoded byte counts measure different things."
+  },
+  {
+    "id": "sys-paths-bytes-2",
+    "lessonId": "sys-paths-bytes",
+    "question": "A relative path worked in one terminal and failed in another. What should you compare first?",
+    "options": [
+      "The current base/working directory and exact path",
+      "Every disk’s formatting",
+      "The internet connection",
+      "The monitor resolution"
+    ],
+    "answer": 0,
+    "why": "Relative paths are interpreted from a base. A different base can explain the observation without data loss."
+  },
+  {
+    "id": "sys-paths-bytes-3",
+    "lessonId": "sys-paths-bytes",
+    "question": "Two files have equal size. What remains unproven?",
+    "options": [
+      "That their sizes are equal",
+      "That their content bytes are equal",
+      "That size can be measured",
+      "That files can have names"
+    ],
+    "answer": 1,
+    "why": "Equal lengths do not imply equal content. Compare bytes or a suitable trusted digest when required."
+  },
+  {
+    "id": "sys-process-readiness-1",
+    "lessonId": "sys-process-readiness",
+    "question": "A process exists but its work request fails. Which conclusion is justified?",
+    "options": [
+      "The operating system cannot run processes",
+      "All dependencies are healthy",
+      "Process existence does not establish application readiness or useful work",
+      "The process identifier is an authentication credential"
+    ],
+    "answer": 2,
+    "why": "Different health layers need different evidence."
+  },
+  {
+    "id": "sys-process-readiness-2",
+    "lessonId": "sys-process-readiness",
+    "question": "Why does the wrapper keep its own child handle?",
+    "options": [
+      "To terminate any process with the same name",
+      "To avoid collecting exit status",
+      "To grant itself administrator access",
+      "To manage only the exact process it created"
+    ],
+    "answer": 3,
+    "why": "Ownership and an exact handle keep cleanup inside the lab’s scope."
+  },
+  {
+    "id": "sys-process-readiness-3",
+    "lessonId": "sys-process-readiness",
+    "question": "A timeout is reported. What must a supervisor still establish?",
+    "options": [
+      "That the owned child was stopped/reaped as intended",
+      "That every process on the machine stopped",
+      "That no user data exists",
+      "That all future requests will succeed"
+    ],
+    "answer": 0,
+    "why": "A timeout alone is not a cleanup receipt. The wrapper must handle and verify its own child lifecycle."
+  },
+  {
+    "id": "sys-capacity-headroom-1",
+    "lessonId": "sys-capacity-headroom",
+    "question": "A plan has 3 GiB available and needs 3.5 GiB including reserve. What is the result?",
+    "options": [
+      "It fits because final output is only 1 GiB",
+      "A 0.5 GiB shortfall under the stated plan",
+      "The disk is necessarily damaged",
+      "The reserve should silently become zero"
+    ],
+    "answer": 1,
+    "why": "The full peak and reserve matter, not just the final output."
+  },
+  {
+    "id": "sys-capacity-headroom-2",
+    "lessonId": "sys-capacity-headroom",
+    "question": "Many tiny files exhaust a finite file-slot/inode resource. What can still be true?",
+    "options": [
+      "All writes must succeed",
+      "There are no filesystem limits",
+      "Byte capacity remains available",
+      "Every filesystem uses the same inode design"
+    ],
+    "answer": 2,
+    "why": "Different resources can reach their limits independently. Filesystem details vary."
+  },
+  {
+    "id": "sys-capacity-headroom-3",
+    "lessonId": "sys-capacity-headroom",
+    "question": "Which capacity claim is most useful?",
+    "options": [
+      "The disk is big",
+      "40 percent, with no context",
+      "A screenshot with unlabeled units",
+      "Available bytes at a stated time, planned peak and an explicit reserve"
+    ],
+    "answer": 3,
+    "why": "A decision needs measured scope and stated assumptions."
+  },
+  {
+    "id": "sys-config-transactions-1",
+    "lessonId": "sys-config-transactions",
+    "question": "Why reject workers=true when workers expects an integer count?",
+    "options": [
+      "The schema should not silently treat a boolean as a count",
+      "True is not text",
+      "JSON cannot contain booleans",
+      "Every boolean is malicious"
+    ],
+    "answer": 0,
+    "why": "Exact type validation prevents unintended coercion."
+  },
+  {
+    "id": "sys-config-transactions-2",
+    "lessonId": "sys-config-transactions",
+    "question": "What does a no-op result on a repeated identical configuration demonstrate?",
+    "options": [
+      "The whole system is crash-proof",
+      "The chosen operation is idempotent in this tested state",
+      "Every external side effect was undone",
+      "No validation is needed"
+    ],
+    "answer": 1,
+    "why": "The test demonstrates a bounded repeat behavior, not every reliability property."
+  },
+  {
+    "id": "sys-config-transactions-3",
+    "lessonId": "sys-config-transactions",
+    "question": "Atomic replacement of one file proves what about a multi-file migration?",
+    "options": [
+      "Every file commits together",
+      "All rollback is automatic",
+      "Nothing by itself about multi-file transaction atomicity",
+      "The database schema is compatible"
+    ],
+    "answer": 2,
+    "why": "A single-file primitive does not create a transaction across unrelated resources."
+  },
+  {
+    "id": "sys-dependencies-retries-1",
+    "lessonId": "sys-dependencies-retries",
+    "question": "Two independent tasks appear in different valid topological orders. What follows?",
+    "options": [
+      "One order must be malicious",
+      "Dependencies are irrelevant",
+      "They must always execute simultaneously",
+      "Both can be valid if all dependency constraints hold"
+    ],
+    "answer": 3,
+    "why": "A dependency graph often permits several valid linear orders."
+  },
+  {
+    "id": "sys-dependencies-retries-2",
+    "lessonId": "sys-dependencies-retries",
+    "question": "A result is uncertain after a timeout. What is the safe next decision for a consequential operation?",
+    "options": [
+      "Verify the outcome or use an authorized idempotency mechanism before retrying",
+      "Repeat indefinitely",
+      "Assume it failed",
+      "Erase the completion record"
+    ],
+    "answer": 0,
+    "why": "Uncertainty does not prove non-execution. Blind retries can duplicate side effects."
+  },
+  {
+    "id": "sys-dependencies-retries-3",
+    "lessonId": "sys-dependencies-retries",
+    "question": "A prerequisite task fails. What does an ordering-only plan guarantee?",
+    "options": [
+      "That every dependent task is safe",
+      "Only an order, not successful readiness or failure propagation",
+      "Automatic recovery",
+      "A valid business result"
+    ],
+    "answer": 1,
+    "why": "Execution gates and failure handling require more than a topological sort."
+  },
+  {
+    "id": "sys-durable-database-1",
+    "lessonId": "sys-durable-database",
+    "question": "A stock decrement happens, then an error occurs before commit and the code rolls back. What should this lab observe?",
+    "options": [
+      "A permanent decrement without a receipt",
+      "A duplicated receipt",
+      "The pre-transaction stock and receipt state",
+      "Automatic repair of every database"
+    ],
+    "answer": 2,
+    "why": "The explicit rollback should preserve the tested transaction invariant."
+  },
+  {
+    "id": "sys-durable-database-2",
+    "lessonId": "sys-durable-database",
+    "question": "The same job ID arrives with a different payload. What should the lab do?",
+    "options": [
+      "Treat it as the same successful request without checking",
+      "Apply it twice",
+      "Delete all earlier receipts",
+      "Report a conflict instead of silently accepting it"
+    ],
+    "answer": 3,
+    "why": "Deduplication must not hide a changed request under a reused identifier."
+  },
+  {
+    "id": "sys-durable-database-3",
+    "lessonId": "sys-durable-database",
+    "question": "A backup file was created. What stronger evidence does this lab collect?",
+    "options": [
+      "It is reopened and its data/integrity are checked",
+      "Its filename looks right",
+      "The computer stays on",
+      "Its icon changed"
+    ],
+    "answer": 0,
+    "why": "A recoverable backup should be usable and contain the expected state, not merely exist."
+  },
+  {
+    "id": "sys-diagnose-evidence-1",
+    "lessonId": "sys-diagnose-evidence",
+    "question": "A process answers PING while an import reports insufficient staging capacity. What follows?",
+    "options": [
+      "The import must have succeeded",
+      "The process response does not resolve the separate capacity failure",
+      "The database is definitely corrupt",
+      "Increasing workers is guaranteed to help"
+    ],
+    "answer": 1,
+    "why": "Each observation establishes a limited property. Process readiness and storage headroom are separate."
+  },
+  {
+    "id": "sys-diagnose-evidence-2",
+    "lessonId": "sys-diagnose-evidence",
+    "question": "A job has a started event but no completion receipt in the supplied complete fixture. How should its status be reported?",
+    "options": [
+      "Completed because it started",
+      "Deleted from history",
+      "Not established as completed; investigate its outcome",
+      "Always failed in every real system"
+    ],
+    "answer": 2,
+    "why": "A start is not a durable completion. In a real system also consider collection completeness and delays."
+  },
+  {
+    "id": "sys-diagnose-evidence-3",
+    "lessonId": "sys-diagnose-evidence",
+    "question": "Which handoff is strongest?",
+    "options": [
+      "Restarted everything, probably fine",
+      "A tool list with no observations",
+      "A guarantee that the incident can never recur",
+      "The tested scope, evidence, result, rollback status and remaining uncertainty"
+    ],
+    "answer": 3,
+    "why": "A useful handoff helps the next person reproduce the reasoning and understand limits."
+  }
+]

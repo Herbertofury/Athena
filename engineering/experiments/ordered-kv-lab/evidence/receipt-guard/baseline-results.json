@@ -1,0 +1,95 @@
+{
+  "scope": "exact AST-extracted acceptance statements, synthetic malformed receipts; no database benchmark rerun",
+  "results": [
+    {
+      "optimization": 0,
+      "case": "valid",
+      "accepted": true
+    },
+    {
+      "optimization": 0,
+      "case": "lane",
+      "accepted": false
+    },
+    {
+      "optimization": 0,
+      "case": "rows",
+      "accepted": false
+    },
+    {
+      "optimization": 0,
+      "case": "complete_output_equal",
+      "accepted": false
+    },
+    {
+      "optimization": 0,
+      "case": "rollback_preserved",
+      "accepted": false
+    },
+    {
+      "optimization": 0,
+      "case": "integrity",
+      "accepted": false
+    },
+    {
+      "optimization": 0,
+      "case": "schema_version",
+      "accepted": true
+    },
+    {
+      "optimization": 0,
+      "case": "payload_bytes",
+      "accepted": true
+    },
+    {
+      "optimization": 0,
+      "case": "sqlite_version",
+      "accepted": true
+    },
+    {
+      "optimization": 2,
+      "case": "valid",
+      "accepted": true
+    },
+    {
+      "optimization": 2,
+      "case": "lane",
+      "accepted": true
+    },
+    {
+      "optimization": 2,
+      "case": "rows",
+      "accepted": true
+    },
+    {
+      "optimization": 2,
+      "case": "complete_output_equal",
+      "accepted": true
+    },
+    {
+      "optimization": 2,
+      "case": "rollback_preserved",
+      "accepted": true
+    },
+    {
+      "optimization": 2,
+      "case": "integrity",
+      "accepted": true
+    },
+    {
+      "optimization": 2,
+      "case": "schema_version",
+      "accepted": true
+    },
+    {
+      "optimization": 2,
+      "case": "payload_bytes",
+      "accepted": true
+    },
+    {
+      "optimization": 2,
+      "case": "sqlite_version",
+      "accepted": true
+    }
+  ]
+}

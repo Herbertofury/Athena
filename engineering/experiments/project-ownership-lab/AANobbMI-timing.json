@@ -1,0 +1,655 @@
+{
+  "adapter_sha256": "e3f5cf55bcbbfd31625737dbd8bfdcdc2bbde7a3624d7ab0b635b50b1ff4f3bd",
+  "harness_sha256": "c80a0525dcdbc236df87ecb8f971bc9ffc0b2e4e1d34f8a1d3a2732b9bc3b1b6",
+  "input_bytes": 12840,
+  "input_sha256": "80b9186e951352b4b265e20cf6e5f57c8646f11b09d6f3a1a8492046acfaf9c0",
+  "limitations": [
+    "Not network, SQLite, full-UI or durable-write timing",
+    "One host; no universal stack recommendation",
+    "Allocation instrumentation is in a separate executable"
+  ],
+  "project_id": "AANobbMI",
+  "samples": [
+    {
+      "complete_record_equal": true,
+      "elapsed_ns": 115027,
+      "lane": "borrowed_copy",
+      "raw_buffer_reused": false,
+      "round": 0,
+      "warmup": true
+    },
+    {
+      "complete_record_equal": true,
+      "elapsed_ns": 49826,
+      "lane": "owned_reuse",
+      "raw_buffer_reused": true,
+      "round": 0,
+      "warmup": true
+    },
+    {
+      "complete_record_equal": true,
+      "elapsed_ns": 26597,
+      "lane": "owned_reuse",
+      "raw_buffer_reused": true,
+      "round": 1,
+      "warmup": true
+    },
+    {
+      "complete_record_equal": true,
+      "elapsed_ns": 85207,
+      "lane": "borrowed_copy",
+      "raw_buffer_reused": false,
+      "round": 1,
+      "warmup": true
+    },
+    {
+      "complete_record_equal": true,
+      "elapsed_ns": 57266,
+      "lane": "borrowed_copy",
+      "raw_buffer_reused": false,
+      "round": 2,
+      "warmup": true
+    },
+    {
+      "complete_record_equal": true,
+      "elapsed_ns": 23897,
+      "lane": "owned_reuse",
+      "raw_buffer_reused": true,
+      "round": 2,
+      "warmup": true
+    },
+    {
+      "complete_record_equal": true,
+      "elapsed_ns": 22529,
+      "lane": "owned_reuse",
+      "raw_buffer_reused": true,
+      "round": 3,
+      "warmup": true
+    },
+    {
+      "complete_record_equal": true,
+      "elapsed_ns": 23073,
+      "lane": "borrowed_copy",
+      "raw_buffer_reused": false,
+      "round": 3,
+      "warmup": true
+    },
+    {
+      "complete_record_equal": true,
+      "elapsed_ns": 23144,
+      "lane": "borrowed_copy",
+      "raw_buffer_reused": false,
+      "round": 4,
+      "warmup": true
+    },
+    {
+      "complete_record_equal": true,
+      "elapsed_ns": 22187,
+      "lane": "owned_reuse",
+      "raw_buffer_reused": true,
+      "round": 4,
+      "warmup": true
+    },
+    {
+      "complete_record_equal": true,
+      "elapsed_ns": 21798,
+      "lane": "owned_reuse",
+      "raw_buffer_reused": true,
+      "round": 5,
+      "warmup": true
+    },
+    {
+      "complete_record_equal": true,
+      "elapsed_ns": 21434,
+      "lane": "borrowed_copy",
+      "raw_buffer_reused": false,
+      "round": 5,
+      "warmup": true
+    },
+    {
+      "complete_record_equal": true,
+      "elapsed_ns": 22119,
+      "lane": "borrowed_copy",
+      "raw_buffer_reused": false,
+      "round": 6,
+      "warmup": true
+    },
+    {
+      "complete_record_equal": true,
+      "elapsed_ns": 21881,
+      "lane": "owned_reuse",
+      "raw_buffer_reused": true,
+      "round": 6,
+      "warmup": true
+    },
+    {
+      "complete_record_equal": true,
+      "elapsed_ns": 21627,
+      "lane": "owned_reuse",
+      "raw_buffer_reused": true,
+      "round": 7,
+      "warmup": true
+    },
+    {
+      "complete_record_equal": true,
+      "elapsed_ns": 22191,
+      "lane": "borrowed_copy",
+      "raw_buffer_reused": false,
+      "round": 7,
+      "warmup": true
+    },
+    {
+      "complete_record_equal": true,
+      "elapsed_ns": 28196,
+      "lane": "borrowed_copy",
+      "raw_buffer_reused": false,
+      "round": 8,
+      "warmup": false
+    },
+    {
+      "complete_record_equal": true,
+      "elapsed_ns": 88391,
+      "lane": "owned_reuse",
+      "raw_buffer_reused": true,
+      "round": 8,
+      "warmup": false
+    },
+    {
+      "complete_record_equal": true,
+      "elapsed_ns": 23190,
+      "lane": "owned_reuse",
+      "raw_buffer_reused": true,
+      "round": 9,
+      "warmup": false
+    },
+    {
+      "complete_record_equal": true,
+      "elapsed_ns": 42777,
+      "lane": "borrowed_copy",
+      "raw_buffer_reused": false,
+      "round": 9,
+      "warmup": false
+    },
+    {
+      "complete_record_equal": true,
+      "elapsed_ns": 56453,
+      "lane": "borrowed_copy",
+      "raw_buffer_reused": false,
+      "round": 10,
+      "warmup": false
+    },
+    {
+      "complete_record_equal": true,
+      "elapsed_ns": 23752,
+      "lane": "owned_reuse",
+      "raw_buffer_reused": true,
+      "round": 10,
+      "warmup": false
+    },
+    {
+      "complete_record_equal": true,
+      "elapsed_ns": 23237,
+      "lane": "owned_reuse",
+      "raw_buffer_reused": true,
+      "round": 11,
+      "warmup": false
+    },
+    {
+      "complete_record_equal": true,
+      "elapsed_ns": 22176,
+      "lane": "borrowed_copy",
+      "raw_buffer_reused": false,
+      "round": 11,
+      "warmup": false
+    },
+    {
+      "complete_record_equal": true,
+      "elapsed_ns": 21285,
+      "lane": "borrowed_copy",
+      "raw_buffer_reused": false,
+      "round": 12,
+      "warmup": false
+    },
+    {
+      "complete_record_equal": true,
+      "elapsed_ns": 21552,
+      "lane": "owned_reuse",
+      "raw_buffer_reused": true,
+      "round": 12,
+      "warmup": false
+    },
+    {
+      "complete_record_equal": true,
+      "elapsed_ns": 21436,
+      "lane": "owned_reuse",
+      "raw_buffer_reused": true,
+      "round": 13,
+      "warmup": false
+    },
+    {
+      "complete_record_equal": true,
+      "elapsed_ns": 21042,
+      "lane": "borrowed_copy",
+      "raw_buffer_reused": false,
+      "round": 13,
+      "warmup": false
+    },
+    {
+      "complete_record_equal": true,
+      "elapsed_ns": 49283,
+      "lane": "borrowed_copy",
+      "raw_buffer_reused": false,
+      "round": 14,
+      "warmup": false
+    },
+    {
+      "complete_record_equal": true,
+      "elapsed_ns": 20613,
+      "lane": "owned_reuse",
+      "raw_buffer_reused": true,
+      "round": 14,
+      "warmup": false
+    },
+    {
+      "complete_record_equal": true,
+      "elapsed_ns": 20390,
+      "lane": "owned_reuse",
+      "raw_buffer_reused": true,
+      "round": 15,
+      "warmup": false
+    },
+    {
+      "complete_record_equal": true,
+      "elapsed_ns": 100539,
+      "lane": "borrowed_copy",
+      "raw_buffer_reused": false,
+      "round": 15,
+      "warmup": false
+    },
+    {
+      "complete_record_equal": true,
+      "elapsed_ns": 22141,
+      "lane": "borrowed_copy",
+      "raw_buffer_reused": false,
+      "round": 16,
+      "warmup": false
+    },
+    {
+      "complete_record_equal": true,
+      "elapsed_ns": 20232,
+      "lane": "owned_reuse",
+      "raw_buffer_reused": true,
+      "round": 16,
+      "warmup": false
+    },
+    {
+      "complete_record_equal": true,
+      "elapsed_ns": 20852,
+      "lane": "owned_reuse",
+      "raw_buffer_reused": true,
+      "round": 17,
+      "warmup": false
+    },
+    {
+      "complete_record_equal": true,
+      "elapsed_ns": 20064,
+      "lane": "borrowed_copy",
+      "raw_buffer_reused": false,
+      "round": 17,
+      "warmup": false
+    },
+    {
+      "complete_record_equal": true,
+      "elapsed_ns": 20822,
+      "lane": "borrowed_copy",
+      "raw_buffer_reused": false,
+      "round": 18,
+      "warmup": false
+    },
+    {
+      "complete_record_equal": true,
+      "elapsed_ns": 20873,
+      "lane": "owned_reuse",
+      "raw_buffer_reused": true,
+      "round": 18,
+      "warmup": false
+    },
+    {
+      "complete_record_equal": true,
+      "elapsed_ns": 21137,
+      "lane": "owned_reuse",
+      "raw_buffer_reused": true,
+      "round": 19,
+      "warmup": false
+    },
+    {
+      "complete_record_equal": true,
+      "elapsed_ns": 27941,
+      "lane": "borrowed_copy",
+      "raw_buffer_reused": false,
+      "round": 19,
+      "warmup": false
+    },
+    {
+      "complete_record_equal": true,
+      "elapsed_ns": 21733,
+      "lane": "borrowed_copy",
+      "raw_buffer_reused": false,
+      "round": 20,
+      "warmup": false
+    },
+    {
+      "complete_record_equal": true,
+      "elapsed_ns": 58617,
+      "lane": "owned_reuse",
+      "raw_buffer_reused": true,
+      "round": 20,
+      "warmup": false
+    },
+    {
+      "complete_record_equal": true,
+      "elapsed_ns": 44171,
+      "lane": "owned_reuse",
+      "raw_buffer_reused": true,
+      "round": 21,
+      "warmup": false
+    },
+    {
+      "complete_record_equal": true,
+      "elapsed_ns": 27600,
+      "lane": "borrowed_copy",
+      "raw_buffer_reused": false,
+      "round": 21,
+      "warmup": false
+    },
+    {
+      "complete_record_equal": true,
+      "elapsed_ns": 21608,
+      "lane": "borrowed_copy",
+      "raw_buffer_reused": false,
+      "round": 22,
+      "warmup": false
+    },
+    {
+      "complete_record_equal": true,
+      "elapsed_ns": 20815,
+      "lane": "owned_reuse",
+      "raw_buffer_reused": true,
+      "round": 22,
+      "warmup": false
+    },
+    {
+      "complete_record_equal": true,
+      "elapsed_ns": 21130,
+      "lane": "owned_reuse",
+      "raw_buffer_reused": true,
+      "round": 23,
+      "warmup": false
+    },
+    {
+      "complete_record_equal": true,
+      "elapsed_ns": 21534,
+      "lane": "borrowed_copy",
+      "raw_buffer_reused": false,
+      "round": 23,
+      "warmup": false
+    },
+    {
+      "complete_record_equal": true,
+      "elapsed_ns": 21579,
+      "lane": "borrowed_copy",
+      "raw_buffer_reused": false,
+      "round": 24,
+      "warmup": false
+    },
+    {
+      "complete_record_equal": true,
+      "elapsed_ns": 20746,
+      "lane": "owned_reuse",
+      "raw_buffer_reused": true,
+      "round": 24,
+      "warmup": false
+    },
+    {
+      "complete_record_equal": true,
+      "elapsed_ns": 24368,
+      "lane": "owned_reuse",
+      "raw_buffer_reused": true,
+      "round": 25,
+      "warmup": false
+    },
+    {
+      "complete_record_equal": true,
+      "elapsed_ns": 41456,
+      "lane": "borrowed_copy",
+      "raw_buffer_reused": false,
+      "round": 25,
+      "warmup": false
+    },
+    {
+      "complete_record_equal": true,
+      "elapsed_ns": 21911,
+      "lane": "borrowed_copy",
+      "raw_buffer_reused": false,
+      "round": 26,
+      "warmup": false
+    },
+    {
+      "complete_record_equal": true,
+      "elapsed_ns": 20698,
+      "lane": "owned_reuse",
+      "raw_buffer_reused": true,
+      "round": 26,
+      "warmup": false
+    },
+    {
+      "complete_record_equal": true,
+      "elapsed_ns": 20731,
+      "lane": "owned_reuse",
+      "raw_buffer_reused": true,
+      "round": 27,
+      "warmup": false
+    },
+    {
+      "complete_record_equal": true,
+      "elapsed_ns": 20787,
+      "lane": "borrowed_copy",
+      "raw_buffer_reused": false,
+      "round": 27,
+      "warmup": false
+    },
+    {
+      "complete_record_equal": true,
+      "elapsed_ns": 21754,
+      "lane": "borrowed_copy",
+      "raw_buffer_reused": false,
+      "round": 28,
+      "warmup": false
+    },
+    {
+      "complete_record_equal": true,
+      "elapsed_ns": 20564,
+      "lane": "owned_reuse",
+      "raw_buffer_reused": true,
+      "round": 28,
+      "warmup": false
+    },
+    {
+      "complete_record_equal": true,
+      "elapsed_ns": 20470,
+      "lane": "owned_reuse",
+      "raw_buffer_reused": true,
+      "round": 29,
+      "warmup": false
+    },
+    {
+      "complete_record_equal": true,
+      "elapsed_ns": 49037,
+      "lane": "borrowed_copy",
+      "raw_buffer_reused": false,
+      "round": 29,
+      "warmup": false
+    },
+    {
+      "complete_record_equal": true,
+      "elapsed_ns": 21645,
+      "lane": "borrowed_copy",
+      "raw_buffer_reused": false,
+      "round": 30,
+      "warmup": false
+    },
+    {
+      "complete_record_equal": true,
+      "elapsed_ns": 20309,
+      "lane": "owned_reuse",
+      "raw_buffer_reused": true,
+      "round": 30,
+      "warmup": false
+    },
+    {
+      "complete_record_equal": true,
+      "elapsed_ns": 18859,
+      "lane": "owned_reuse",
+      "raw_buffer_reused": true,
+      "round": 31,
+      "warmup": false
+    },
+    {
+      "complete_record_equal": true,
+      "elapsed_ns": 19525,
+      "lane": "borrowed_copy",
+      "raw_buffer_reused": false,
+      "round": 31,
+      "warmup": false
+    },
+    {
+      "complete_record_equal": true,
+      "elapsed_ns": 19048,
+      "lane": "borrowed_copy",
+      "raw_buffer_reused": false,
+      "round": 32,
+      "warmup": false
+    },
+    {
+      "complete_record_equal": true,
+      "elapsed_ns": 18912,
+      "lane": "owned_reuse",
+      "raw_buffer_reused": true,
+      "round": 32,
+      "warmup": false
+    },
+    {
+      "complete_record_equal": true,
+      "elapsed_ns": 18732,
+      "lane": "owned_reuse",
+      "raw_buffer_reused": true,
+      "round": 33,
+      "warmup": false
+    },
+    {
+      "complete_record_equal": true,
+      "elapsed_ns": 156981,
+      "lane": "borrowed_copy",
+      "raw_buffer_reused": false,
+      "round": 33,
+      "warmup": false
+    },
+    {
+      "complete_record_equal": true,
+      "elapsed_ns": 21519,
+      "lane": "borrowed_copy",
+      "raw_buffer_reused": false,
+      "round": 34,
+      "warmup": false
+    },
+    {
+      "complete_record_equal": true,
+      "elapsed_ns": 18841,
+      "lane": "owned_reuse",
+      "raw_buffer_reused": true,
+      "round": 34,
+      "warmup": false
+    },
+    {
+      "complete_record_equal": true,
+      "elapsed_ns": 18709,
+      "lane": "owned_reuse",
+      "raw_buffer_reused": true,
+      "round": 35,
+      "warmup": false
+    },
+    {
+      "complete_record_equal": true,
+      "elapsed_ns": 19416,
+      "lane": "borrowed_copy",
+      "raw_buffer_reused": false,
+      "round": 35,
+      "warmup": false
+    },
+    {
+      "complete_record_equal": true,
+      "elapsed_ns": 19084,
+      "lane": "borrowed_copy",
+      "raw_buffer_reused": false,
+      "round": 36,
+      "warmup": false
+    },
+    {
+      "complete_record_equal": true,
+      "elapsed_ns": 18496,
+      "lane": "owned_reuse",
+      "raw_buffer_reused": true,
+      "round": 36,
+      "warmup": false
+    },
+    {
+      "complete_record_equal": true,
+      "elapsed_ns": 18592,
+      "lane": "owned_reuse",
+      "raw_buffer_reused": true,
+      "round": 37,
+      "warmup": false
+    },
+    {
+      "complete_record_equal": true,
+      "elapsed_ns": 19528,
+      "lane": "borrowed_copy",
+      "raw_buffer_reused": false,
+      "round": 37,
+      "warmup": false
+    },
+    {
+      "complete_record_equal": true,
+      "elapsed_ns": 37608,
+      "lane": "borrowed_copy",
+      "raw_buffer_reused": false,
+      "round": 38,
+      "warmup": false
+    },
+    {
+      "complete_record_equal": true,
+      "elapsed_ns": 19640,
+      "lane": "owned_reuse",
+      "raw_buffer_reused": true,
+      "round": 38,
+      "warmup": false
+    },
+    {
+      "complete_record_equal": true,
+      "elapsed_ns": 18360,
+      "lane": "owned_reuse",
+      "raw_buffer_reused": true,
+      "round": 39,
+      "warmup": false
+    },
+    {
+      "complete_record_equal": true,
+      "elapsed_ns": 22546,
+      "lane": "borrowed_copy",
+      "raw_buffer_reused": false,
+      "round": 39,
+      "warmup": false
+    }
+  ],
+  "scope": "Equal complete records from already owned buffers; input creation excluded equally; eight warmup plus 32 measured alternating pairs"
+}

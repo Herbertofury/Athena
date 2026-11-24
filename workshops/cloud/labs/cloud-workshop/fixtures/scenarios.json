@@ -1,0 +1,9 @@
+{
+  "scope": {"narrow": "academy/dev", "broad": "academy", "resources": ["academy/dev/reports", "academy/prod/reports", "academy/dev-tools/reports"]},
+  "network": {"baseline": {"route_present": true, "network_allows": true, "service_listening": false, "identity_allows": true}, "identity_gap": {"route_present": true, "network_allows": true, "service_listening": true, "identity_allows": false}},
+  "scaling": {"demand_rpm": 850, "capacity_rpm": 400, "target_percent": 50, "minimum": 2, "maximum": 4},
+  "failure": {"baseline": {"placements": ["zone-a", "zone-a", "zone-b", "zone-b"], "failed_zones": ["zone-a"], "demand_rpm": 500, "capacity_rpm": 400, "target_percent": 50}, "improved": {"placements": ["zone-a", "zone-a", "zone-a", "zone-b", "zone-b", "zone-b"], "failed_zones": ["zone-a"], "demand_rpm": 500, "capacity_rpm": 400, "target_percent": 50}},
+  "recovery": {"last_recoverable_minute": 580, "incident_minute": 600, "restored_minute": 650, "rpo_target_minutes": 15, "rto_target_minutes": 60},
+  "cost": {"always_on": {"replicas": 3, "hours": 720, "compute_credits_per_replica_hour": 5, "storage_gib_months": 100, "storage_credits_per_gib_month": 2, "egress_gib": 50, "egress_credits_per_gib": 3, "budget_credits": 10000}, "scheduled": {"replicas": 3, "hours": 160, "compute_credits_per_replica_hour": 5, "storage_gib_months": 100, "storage_credits_per_gib_month": 2, "egress_gib": 50, "egress_credits_per_gib": 3, "budget_credits": 10000}},
+  "changes": {"before": [{"id": "web", "kind": "compute", "size": 2, "public": false}, {"id": "reports", "kind": "storage", "size": 100, "public": false}], "after": [{"id": "web", "kind": "compute", "size": 3, "public": true}, {"id": "queue", "kind": "compute", "size": 1, "public": false}]}
+}

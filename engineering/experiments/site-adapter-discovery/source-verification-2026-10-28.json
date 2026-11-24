@@ -1,0 +1,420 @@
+{
+  "checkedAt": "2026-10-28",
+  "scope": "Focused direct primary-document section review, following broad official search discovery. These are source readings, not live API/authenticated extraction tests.",
+  "records": [
+    {
+      "title": "API Reference",
+      "retrievalStatus": "opened_relevant_sections",
+      "methods": [
+        "open",
+        "find: campaigns.posts",
+        "find: Post v2 Attributes"
+      ],
+      "sectionsRead": [
+        "Introduction retirement notice, line 123",
+        "v2 scopes and explicit field requests, lines 434-465",
+        "v2 campaign/post endpoints, lines 736-742",
+        "Post v2 attributes/relationships and User v2 avatar attributes, lines 1082-1156"
+      ],
+      "notes": "Directly confirmed documented October 7, 2026 v1 retirement, possible granted extension through January 20, 2027, v2 campaign/post endpoints requiring campaigns.posts, explicit fields/includes, HTML/embed attributes and post author relationship. Actual v1 service shutdown or patron authorization to arbitrary campaigns was not tested.",
+      "notEstablished": [
+        "Arbitrary supported-campaign paid reading for ordinary patron tokens",
+        "Complete native attachment extraction",
+        "Any live authenticated API success"
+      ],
+      "url": "https://docs.patreon.com/"
+    },
+    {
+      "title": "Serverside API reference - itch.io",
+      "retrievalStatus": "opened_relevant_sections",
+      "methods": [
+        "open",
+        "find: Lists the download keys"
+      ],
+      "sectionsRead": [
+        "Authentication/scopes, lines 156-190",
+        "profile:owned owned-keys section and sample, lines 285-332",
+        "Subsequent Games section scope boundary, lines 333-347"
+      ],
+      "notes": "Directly confirmed profile:owned /profile/owned-keys; multiple keys per project; page/per_page parameters; continue until empty even after short page; nested game.user.id, username, display_name, url and cover_url distinguish creator from game cover. Games developer/edit-access endpoints are separately labelled. No real buyer index or file download was requested.",
+      "notEstablished": [
+        "Full post/devlog body API",
+        "Complete buyer upload/download inventory",
+        "Native follow mutation API"
+      ],
+      "url": "https://itch.io/docs/api/serverside"
+    },
+    {
+      "title": "开发者 API 和 Webhook",
+      "retrievalStatus": "opened_relevant_sections",
+      "methods": [
+        "open",
+        "open relevant document beginning"
+      ],
+      "sectionsRead": [
+        "Introduction, lines 2-14",
+        "Webhook order context/example and response requirements, lines 16-56",
+        "API credentials and signing introduction, lines 58-69"
+      ],
+      "notes": "Directly confirmed developer dashboard, creator-related order webhooks, historical-order/sponsor queries and developer user_id/API token. These sections do not document an arbitrary patron content reader. Current direct document points dashboard URL at afdian.com, while earlier search extract used afdian.net; use verified current URL.",
+      "notEstablished": [
+        "Fan-wide post/media API",
+        "Author avatar/post-history parser",
+        "Actual account authorization"
+      ],
+      "url": "https://guide.afdian.com/creator/developer"
+    },
+    {
+      "title": "Jinxxy Creator API",
+      "retrievalStatus": "failed_empty",
+      "methods": [
+        "open"
+      ],
+      "sectionsRead": [],
+      "notes": "Direct open returned Total lines: 0 / L0 out of bounds. Prior search extract included schema/auth/rate-limit information, but this focused verification does not promote those exact details to body-confirmed. The official help source below independently confirms creator-store purpose and feature categories.",
+      "notEstablished": [
+        "Current x-api-key header/scopes or 120-request rate limit by direct body retrieval",
+        "Buyer library API",
+        "Live schema/runtime behavior"
+      ],
+      "url": "https://api.creators.jinxxy.com/v1/docs"
+    },
+    {
+      "title": "How can I access the Creator API? – Jinxxy Help Center",
+      "retrievalStatus": "opened_relevant_sections",
+      "methods": [
+        "open"
+      ],
+      "sectionsRead": [
+        "Article body, lines 13-54"
+      ],
+      "notes": "Full short body read. Official help dated July 1, 2024 confirms creator-store REST/OpenAPI integration, products/customers/discount codes/licenses/orders, webhooks, license verification and creator-dashboard credentials. It links to older /docs URL. It does not establish arbitrary buyer-library export or verify current /v1/docs schema fields.",
+      "url": "https://support.jinxxy.com/hc/en-us/articles/28052364650637-How-can-I-access-the-Creator-API"
+    },
+    {
+      "title": "投稿機能の使い方・できること – ファンティアヘルプセンター",
+      "retrievalStatus": "opened_relevant_sections",
+      "methods": [
+        "open",
+        "find: 添付ファイル"
+      ],
+      "sectionsRead": [
+        "Public versus restricted content, lines 337-365",
+        "Restricted-content types and per-content audience selection, lines 444-480"
+      ],
+      "notes": "Direct relevant article body read after large navigation. Confirmed distinct public/restricted portions, text/gallery/attachment/product/embed/blog types, archives in attachment type and per-content plan audience. This supports ordered mixed-body extraction requirements, not an official patron reader API or exact private payload fields.",
+      "url": "https://help.fantia.jp/1626"
+    },
+    {
+      "title": "ファンティアに投稿されている作品はダウンロード・保存出来ますか？ – ファンティアヘルプセンター",
+      "retrievalStatus": "opened_relevant_sections",
+      "methods": [
+        "open",
+        "open at line 325 after find missed body"
+      ],
+      "sectionsRead": [
+        "Exact article body, lines 326-333"
+      ],
+      "notes": "Direct short article body read: downloads allowed; some iOS environments play video/audio rather than downloading. Initial find returned no match despite body existing; targeted line open confirmed it. No arbitrary subscriber access or complete export permission inferred.",
+      "url": "https://help.fantia.jp/1279"
+    },
+    {
+      "title": "商品販売機能とはなんですか？ – ファンティアヘルプセンター",
+      "retrievalStatus": "opened_relevant_sections",
+      "methods": [
+        "open",
+        "open at line 325 after find missed body"
+      ],
+      "sectionsRead": [
+        "Exact article body, lines 326-338"
+      ],
+      "notes": "Directly confirmed one-time goods are distinct from fanclub posts; physical and downloadable goods; downloadable order-history delivery. Do not collapse product ownership into fanclub membership.",
+      "url": "https://help.fantia.jp/1926"
+    },
+    {
+      "title": "動画・音声・画像などのコンテンツがダウンロード・再生できない – ファンティアヘルプセンター",
+      "retrievalStatus": "opened_relevant_sections",
+      "methods": [
+        "open",
+        "open at line 325 after find missed body"
+      ],
+      "sectionsRead": [
+        "Exact troubleshooting body, lines 326-360"
+      ],
+      "notes": "Read ZIP download/extraction versus browser playback and iOS video/audio playback distinction; the article also says uploaded content originates from creators and gives support escalation context. No live download performed.",
+      "url": "https://help.fantia.jp/312"
+    },
+    {
+      "title": "Shopping Guide - BOOTH",
+      "retrievalStatus": "opened_relevant_sections",
+      "methods": [
+        "open"
+      ],
+      "sectionsRead": [
+        "Follow feature, lines 32-35",
+        "Physical goods/delivery distinctions, lines 68-103",
+        "Purchased download products, lines 105-108"
+      ],
+      "notes": "Read official buyer-guide body confirming creator/shop follow discovery and download products from purchase history after payment confirmation. Public catalog or follow does not establish product-file ownership.",
+      "url": "https://booth.pm/customer_guide"
+    },
+    {
+      "title": null,
+      "retrievalStatus": "failed_inaccessible",
+      "methods": [
+        "open"
+      ],
+      "sectionsRead": [],
+      "notes": "This exact short help URL failed. The full canonical slug URL is separately body-confirmed below; do not silently mark this exact failed attempt successful.",
+      "verifiedAlternateUrl": "https://booth.pixiv.help/hc/ja/articles/231285648-%E3%83%95%E3%82%A9%E3%83%AD%E3%83%BC%E3%81%A8%E3%81%AF%E4%BD%95%E3%81%A7%E3%81%99%E3%81%8B",
+      "url": "https://booth.pixiv.help/hc/ja/articles/231285648"
+    },
+    {
+      "title": "フォローとは何ですか？ – BOOTHヘルプセンター",
+      "retrievalStatus": "opened_relevant_sections",
+      "methods": [
+        "open full canonical slug URL"
+      ],
+      "sectionsRead": [
+        "Entire short article, lines 0-3"
+      ],
+      "notes": "Directly read definition: following shops puts their new products in followed-new-products view. Confirms native follow concept, not follow API or automation.",
+      "url": "https://booth.pixiv.help/hc/ja/articles/231285648-%E3%83%95%E3%82%A9%E3%83%AD%E3%83%BC%E3%81%A8%E3%81%AF%E4%BD%95%E3%81%A7%E3%81%99%E3%81%8B"
+    },
+    {
+      "title": "「ダウンロード」商品をダウンロードする方法が知りたい – BOOTHヘルプセンター",
+      "retrievalStatus": "opened_relevant_sections",
+      "methods": [
+        "open; normal redirect to full canonical slug"
+      ],
+      "sectionsRead": [
+        "Entire short article, lines 0-4"
+      ],
+      "notes": "Directly confirmed purchased downloads available through payment-complete email link, purchase history or library. ZIP extraction requirement noted.",
+      "url": "https://booth.pixiv.help/hc/ja/articles/231598787"
+    },
+    {
+      "title": "ダウンロード商品の再ダウンロードはできますか？ – BOOTHヘルプセンター",
+      "retrievalStatus": "opened_relevant_sections",
+      "methods": [
+        "open; normal redirect to full canonical slug"
+      ],
+      "sectionsRead": [
+        "Entire short article, lines 0-3"
+      ],
+      "notes": "Directly confirmed repeat downloads for purchased digital products and loss of download availability if shop owner deletes the file.",
+      "url": "https://booth.pixiv.help/hc/ja/articles/360009206893"
+    },
+    {
+      "title": "What is RSS and how do I use it? | Locals",
+      "retrievalStatus": "opened_relevant_sections",
+      "methods": [
+        "open"
+      ],
+      "sectionsRead": [
+        "Generate RSS link and account-specific/revocation rules, lines 4-29"
+      ],
+      "notes": "Read actual body: browser community login, availability per community, unique account URL, regeneration disables old URL, supporter-access loss stops new updates. No full-history or every-file guarantee; no real secret feed generated.",
+      "url": "https://support.locals.com/en/article/what-is-rss-and-how-do-i-use-it-ekrqi/"
+    },
+    {
+      "title": "How do I add audience-specific content to a post on Substack? – Substack, Inc",
+      "retrievalStatus": "opened_relevant_sections",
+      "methods": [
+        "open"
+      ],
+      "sectionsRead": [
+        "Full short article, lines 1-30"
+      ],
+      "notes": "Read actual body: within-post audience sections for unsubscribed/free/paid/founding groups; web/app reader-specific variants; text/images/embeds; RSS and crawlers receive Not subscribed variant. Does not establish a public paid-reader API.",
+      "url": "https://support.substack.com/hc/en-us/articles/50558240901268-How-do-I-add-audience-specific-content-to-a-post-on-Substack/"
+    },
+    {
+      "url": "https://builtbybit.com/help/developers/v2-api/v2-overview/",
+      "retrievalStatus": "official_page_retrieved_relevant_sections_reviewed",
+      "previousRetrievalStatus": "official_search_excerpt",
+      "sections": [
+        "Access and acceptable use",
+        "Getting started"
+      ],
+      "notes": "Direct open plus find inspected current API-only programmatic policy, some endpoints requiring Ultimate, and current /v2/ base. No token flow or runtime endpoint tested."
+    },
+    {
+      "url": "https://github.com/BuiltByBit/api-openapi-spec/blob/main/spec.yaml",
+      "retrievalStatus": "official_schema_retrieved_selected_sections_reviewed",
+      "previousRetrievalStatus": "official_search_excerpt",
+      "sections": [
+        "info.description",
+        "servers",
+        "tags",
+        "oauth2/token",
+        "resources/discover/licenses"
+      ],
+      "notes": "Directly inspected free-tag versus Ultimate/invite restriction, API server and endpoint families, OAuth token path and paged license endpoint. Resource.Creator, expansion and avatar searches returned no match in this retrieved file; this is not proof of absence from all referenced schemas. Do not cite this as verified exact avatar/Resource.Creator expansion mapping."
+    },
+    {
+      "url": "https://github.com/BuiltByBit/api-openapi-spec",
+      "retrievalStatus": "official_related_schema_sections_reviewed",
+      "previousRetrievalStatus": "official_search_excerpt",
+      "retrievedUrl": "https://github.com/BuiltByBit/api-openapi-spec/blob/main/spec.yaml",
+      "notes": "Repository root was originally a search excerpt; focused pass inspected its site-owned spec.yaml directly. Link the exact file for inspected policy/schema claims rather than imply the whole repository was audited."
+    },
+    {
+      "url": "https://builtbybit.com/help/developers/v2-api/open-api-and-endpoints/",
+      "retrievalStatus": "official_search_excerpt_only",
+      "notes": "Not re-read during focused pass. Original official search excerpt established links to endpoint documentation and official OpenAPI repository. Do not mark page body directly reviewed."
+    },
+    {
+      "url": "https://github.com/SpigotMC/XenforoResourceManagerAPI/blob/master/src/openapi.yaml",
+      "retrievalStatus": "official_schema_retrieved_selected_sections_reviewed",
+      "previousRetrievalStatus": "official_search_excerpt",
+      "sections": [
+        "servers",
+        "getResourcesByAuthor",
+        "getAuthor",
+        "getResourceUpdate",
+        "getResourceUpdates",
+        "ResourceUpdate"
+      ],
+      "notes": "Direct find inspected /simple/0.2 base; author ID plus page for author resources; getAuthor by numeric ID; paged resource updates and resource/update metadata. No getResourceVersions string found; do not invent a complete historical-version/file API from current-version/update fields. Avatar mapping, native follows, download entitlement and runtime behavior remain untested."
+    },
+    {
+      "url": "https://github.com/SpigotMC/XenforoResourceManagerAPI",
+      "retrievalStatus": "official_related_schema_sections_reviewed",
+      "previousRetrievalStatus": "official_search_excerpt",
+      "retrievedUrl": "https://github.com/SpigotMC/XenforoResourceManagerAPI/blob/master/src/openapi.yaml",
+      "notes": "Repository root itself was originally search-only; focused pass inspected the exact official OpenAPI file. Prefer exact file link for API contract citations."
+    },
+    {
+      "url": "https://www.spigotmc.org/wiki/premium-resource-placeholders-identifiers/",
+      "retrievalStatus": "official_search_excerpt_only",
+      "notes": "Not re-read in focused pass. Original official search excerpt supports premium placeholder/resource identification only, not an arbitrary purchased-file download API."
+    },
+    {
+      "url": "https://docs.modrinth.com/api/",
+      "retrievalStatus": "official_page_retrieved_relevant_sections_reviewed",
+      "previousRetrievalStatus": "official_search_excerpt",
+      "sections": [
+        "Ratelimits",
+        "User Agents",
+        "Authentication"
+      ],
+      "notes": "Directly inspected 300 requests/minute per IP, same limit with/without token, returned rate headers, uniquely identifying User-Agent, production host and PAT context. Documentation review does not test current actual throttling or authorize hidden/private content."
+    },
+    {
+      "url": "https://docs.modrinth.com/api/operations/followproject/",
+      "retrievalStatus": "official_page_retrieved_relevant_sections_reviewed",
+      "previousRetrievalStatus": "official_search_excerpt",
+      "sections": [
+        "Follow a project",
+        "Authorizations",
+        "Responses"
+      ],
+      "notes": "Directly inspected POST /project/{id|slug}/follow, TokenAuth and USER_WRITE, 204 success contract. No native mutation was performed."
+    },
+    {
+      "url": "https://docs.modrinth.com/api/operations/getuserprojects/",
+      "retrievalStatus": "official_page_retrieved_relevant_sections_reviewed",
+      "previousRetrievalStatus": "page_retrieved_relevant_section_pending",
+      "sections": [
+        "Get user's projects",
+        "Path parameters",
+        "200 project response"
+      ],
+      "notes": "Direct find inspected GET /user/{id|username}/projects, path identity, returned project base62 ID and team ownership ID. Does not prove every returned member association implies sole authorship."
+    },
+    {
+      "url": "https://docs.modrinth.com/api/operations/getfollowedprojects/",
+      "retrievalStatus": "official_page_retrieved_relevant_sections_reviewed",
+      "previousRetrievalStatus": "official_search_excerpt",
+      "sections": [
+        "Get user's followed projects",
+        "Authorizations"
+      ],
+      "notes": "Directly inspected GET /user/{id|username}/follows with TokenAuth and USER_READ. This documents followed projects; author-follow import is not established. No authenticated import executed."
+    },
+    {
+      "url": "https://partner.steamgames.com/doc/webapi/ISteamRemoteStorage",
+      "retrievalStatus": "official_page_retrieved_relevant_sections_reviewed",
+      "previousRetrievalStatus": "official_search_excerpt",
+      "sections": [
+        "GetPublishedFileDetails",
+        "GetUGCFileDetails"
+      ],
+      "notes": "Directly inspected POST GetPublishedFileDetails/v1 with itemcount and publishedfileids[0] uint64; separate GetUGCFileDetails requires key and app/UGC context. This page did not expose a creator response-field match in find; do not use it alone as proof of the complete Workshop detail response schema. No live API request."
+    },
+    {
+      "url": "https://partner.steamgames.com/doc/webapi/ISteamUser",
+      "retrievalStatus": "official_page_retrieved_relevant_sections_reviewed",
+      "previousRetrievalStatus": "page_retrieved_relevant_section_pending",
+      "sections": [
+        "GetPlayerSummaries",
+        "GetPlayerSummaries example response"
+      ],
+      "notes": "Directly inspected v2 method, key requirement, max 100 SteamIDs and example personaname/profileurl/avatar/avatarmedium/avatarfull. No account profile or actual API lookup tested."
+    },
+    {
+      "url": "https://docs.mod.io/restapi/introduction",
+      "retrievalStatus": "official_page_retrieved_relevant_sections_reviewed",
+      "previousRetrievalStatus": "official_search_excerpt",
+      "sections": [
+        "REST API assigned hosts",
+        "Authentication",
+        "Scopes",
+        "Using an API Key",
+        "Using an Access Token",
+        "Multiple item Responses"
+      ],
+      "notes": "Directly inspected g-/u- assigned API hosts, read-only API key, OAuth read/write scopes, revocation/expiry and standard list metadata. No auth flow, user session or live API request tested."
+    },
+    {
+      "url": "https://docs.mod.io/restapi/docs/get-user-subscriptions",
+      "retrievalStatus": "official_page_retrieved_relevant_sections_reviewed_response_details_partial",
+      "previousRetrievalStatus": "official_search_excerpt",
+      "sections": [
+        "Get User Subscriptions",
+        "Platform filtering note"
+      ],
+      "notes": "Directly inspected GET /me/subscribed for authenticated user's mod subscriptions and platform-targeting game_id requirement. Current directly retrieved page did not expose result_limit/schema details. Original search excerpt said max 100, but direct current pagination page only confirms default 100; revise maximum wording pending exact endpoint/schema proof."
+    },
+    {
+      "url": "https://docs.mod.io/restapi/pagination",
+      "retrievalStatus": "official_page_retrieved_relevant_sections_reviewed",
+      "sections": [
+        "Pagination metadata",
+        "_limit",
+        "_offset"
+      ],
+      "notes": "Directly inspected _offset/_limit and result_count/result_limit/result_offset/result_total, default 100. No explicit maximum found in inspected current text; avoid claiming max 100 from this page."
+    },
+    {
+      "url": "https://github.com/thunderstore-io/Thunderstore",
+      "retrievalStatus": "official_page_retrieved_relevant_sections_reviewed",
+      "previousRetrievalStatus": "official_search_excerpt",
+      "sections": [
+        "README REST API"
+      ],
+      "notes": "Direct find inspected README statement that Swagger is at /api/docs/, active package listing /api/v1/package/ and single-package /api/v1/package/{uuid4}/. No package schema, namespace-avatar fields, pagination or API payload tested."
+    },
+    {
+      "url": "https://www.moddb.com/rss",
+      "retrievalStatus": "official_page_retrieved_relevant_sections_reviewed",
+      "previousRetrievalStatus": "official_search_excerpt",
+      "sections": [
+        "Our Feeds",
+        "Releases",
+        "Articles",
+        "Media"
+      ],
+      "notes": "Directly inspected profile-specific game/mod/engine feed guidance and advertised release/download/news/media feed links. This verifies feed documentation/discovery links, not a fetched RSS payload, author-level feed coverage or complete histories."
+    }
+  ],
+  "correctionsApplied": [
+    "mod.io pagination described as default 100, not verified maximum.",
+    "Unverified BuiltByBit Resource.Creator expansion name removed.",
+    "Spigot resource updates distinguished from an unverified full historical-version API.",
+    "Patreon v1 notice retains account-specific extension exception.",
+    "Jinxxy docs empty body and failed short BOOTH URL retained."
+  ],
+  "runtimeAcceptance": false
+}

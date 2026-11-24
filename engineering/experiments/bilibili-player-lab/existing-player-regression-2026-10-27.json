@@ -1,0 +1,120 @@
+{
+  "schema_version": 1,
+  "harness": "atlas-real-media-v7-bilibili-official",
+  "source_module": "/Engineering-Atlas/media-lab/media.1e8cee967fc5cf08.js",
+  "started_at": "2026-10-27T10:35:32.867Z",
+  "user_agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36",
+  "source_mode": "dated public snapshots",
+  "events": [
+    {
+      "type": "fixture_parsed",
+      "at_ms": 533.4000000059605,
+      "elapsed_ms": 105.69999998807907,
+      "bytes": 21300
+    },
+    {
+      "type": "metadata_dom_ready",
+      "at_ms": 536.6000000238419,
+      "elapsed_ms": 2.800000011920929,
+      "cards": 5,
+      "gallery_images": 19,
+      "video_entries": 19
+    },
+    {
+      "type": "bilibili_frame_requested",
+      "at_ms": 15371.100000023842,
+      "card_id": "bilibili:BV1B7411m7LV",
+      "video_id": "BV1B7411m7LV",
+      "autoplay": false
+    },
+    {
+      "type": "bilibili_frame_loaded",
+      "at_ms": 16646.30000001192,
+      "card_id": "bilibili:BV1B7411m7LV",
+      "video_id": "BV1B7411m7LV",
+      "autoplay": false
+    },
+    {
+      "type": "bilibili_frame_requested",
+      "at_ms": 83373.30000001192,
+      "card_id": "bilibili:BV1B7411m7LV",
+      "video_id": "BV1B7411m7LV",
+      "autoplay": false
+    },
+    {
+      "type": "bilibili_frame_unloaded",
+      "at_ms": 83682.60000002384,
+      "card_id": "bilibili:BV1B7411m7LV"
+    },
+    {
+      "type": "playback_engine_selected",
+      "at_ms": 136779.10000002384,
+      "card_id": "steam:620",
+      "engine": "hlsjs"
+    },
+    {
+      "type": "hls_library_ready",
+      "at_ms": 136991.90000000596,
+      "version": "1.7.3",
+      "elapsed_ms": 212.19999998807907
+    },
+    {
+      "type": "video_loadedmetadata",
+      "at_ms": 137250,
+      "card_id": "steam:620",
+      "video_id": "5787",
+      "current_time": 0,
+      "video_width": 940,
+      "video_height": 529,
+      "engine": "hlsjs",
+      "elapsed_ms": 472.19999998807907
+    },
+    {
+      "type": "video_canplay",
+      "at_ms": 137265.60000002384,
+      "card_id": "steam:620",
+      "video_id": "5787",
+      "current_time": 0,
+      "video_width": 940,
+      "video_height": 529,
+      "engine": "hlsjs",
+      "elapsed_ms": 487.90000000596046
+    },
+    {
+      "type": "youtube_ready",
+      "at_ms": 137674.90000000596,
+      "card_id": "youtube:M7lc1UVf-VE",
+      "video_id": "M7lc1UVf-VE",
+      "elapsed_ms": 585.0999999940395
+    },
+    {
+      "type": "video_playing",
+      "at_ms": 150734,
+      "card_id": "steam:620",
+      "video_id": "5787",
+      "current_time": 0.006215,
+      "video_width": 940,
+      "video_height": 529,
+      "engine": "hlsjs",
+      "elapsed_ms": 13956.299999982119
+    },
+    {
+      "type": "video_pause",
+      "at_ms": 151116,
+      "card_id": "steam:620",
+      "video_id": "5787",
+      "current_time": 0.335092,
+      "video_width": 940,
+      "video_height": 529,
+      "engine": "hlsjs",
+      "elapsed_ms": 14338.299999982119
+    }
+  ],
+  "acceptance": "not a target-project performance comparison",
+  "fixture_sha256": "2aa0668aba0eb29c69faf368fab206369718335be7f47bc0c6592236e79d1aba",
+  "fixture_counts": {
+    "cards": 5,
+    "gallery_images": 19,
+    "video_entries": 19
+  }
+}

@@ -1,0 +1,5 @@
+{
+  "stage": "service fixture precondition",
+  "observed_failure": "empty new job queue",
+  "scope": "The source fixture already contained historical jobs; this was not a service failure. Original database unchanged and owned service stopped."
+}

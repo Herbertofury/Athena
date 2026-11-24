@@ -1,0 +1,35 @@
+{
+  "checked_at": "2026-10-27T10:27:52Z",
+  "scope": "Direct top-level official embed in cloud Chrome, not yet an iframe inside Atlas",
+  "source_documentation": "https://player.bilibili.com/",
+  "player_url": "https://player.bilibili.com/player.html?bvid=BV1B7411m7LV&autoplay=0&poster=1&danmaku=0",
+  "video_id": "BV1B7411m7LV",
+  "initial_observation": "Temporarily displayed Unable to play media before later readiness; retained as transient observation, not a final access denial",
+  "ready_observation": {
+    "paused": true,
+    "autoplay": false,
+    "readyState": 4,
+    "error": null
+  },
+  "after_explicit_play": {
+    "paused": false,
+    "currentTime": 0.218111,
+    "autoplay": false,
+    "readyState": 4
+  },
+  "after_explicit_pause": {
+    "paused": true,
+    "currentTime": 0.419078,
+    "autoplay": false,
+    "readyState": 4
+  },
+  "title": "四月番毒奶安利！四月看这八部动画就够了！！",
+  "creator": "瓶子君152",
+  "access": "anonymous public provider-documentation example; no credentials or grant",
+  "limitations": [
+    "Not full post, gallery, caption or multipart collection",
+    "No account-only access",
+    "Not proof that iframe load means playback",
+    "Atlas-embedded sandboxed route requires a separate deployment test"
+  ]
+}

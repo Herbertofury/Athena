@@ -1,0 +1,22 @@
+{
+  "id": "data-workshop",
+  "title": "Data & SQL Workshop: From Rows to Reliable Answers",
+  "summary": "Eight connected lessons use synthetic CSV and actual local SQLite to teach grain, validation, filters, NULL-aware metrics, joins, time series, quality and reproducible reporting.",
+  "lessonIds": [
+    "data-question-grain",
+    "data-csv-types",
+    "data-filter-population",
+    "data-null-metrics",
+    "data-join-cardinality",
+    "data-time-series",
+    "data-quality-transactions",
+    "data-explain-deliver"
+  ],
+  "prerequisites": [
+    "data-quality",
+    "data-model",
+    "databases"
+  ],
+  "caseIds": [],
+  "limits": "Actual local SQLite/CSV practice only. No Power BI or external database is used; this is not full PL-300 coverage, exam readiness or production assurance."
+}

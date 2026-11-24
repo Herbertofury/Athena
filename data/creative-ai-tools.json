@@ -1,0 +1,916 @@
+{
+  "schemaVersion": 1,
+  "reviewedAt": "2026-11-13",
+  "purpose": "Source-backed evaluation queue, not measured ranking or adoption recommendation",
+  "tools": [
+    {
+      "id": "krita-ai-diffusion",
+      "name": "Krita AI Diffusion",
+      "summary": "Artist-facing inpainting, selection-scoped editing, control layers, live painting, upscaling; GPL-3.0 plugin",
+      "categories": [
+        "graphics-photo"
+      ],
+      "repository": "https://github.com/Acly/krita-ai-diffusion",
+      "setup": "Krita >=5.2; plugin ZIP; configure local server. Upstream recommends NVIDIA >=6GB VRAM, supports CUDA/ROCm/XPU/Apple MPS; CPU slow. Recommendation is not assurance every model fits",
+      "hardware": "Krita >=5.2; plugin ZIP; configure local server. Upstream recommends NVIDIA >=6GB VRAM, supports CUDA/ROCm/XPU/Apple MPS; CPU slow. Recommendation is not assurance every model fits",
+      "limitations": "ComfyUI backend; each selected checkpoint/LoRA has separate terms. Local and cloud modes are distinct No runtime or target comparison performed.",
+      "maintenance": "Source reviewed; exact latest code/model revision and CI must be pinned before execution.",
+      "checkedAt": "2026-11-13",
+      "verification": "source-reviewed",
+      "licenses": {
+        "code": {
+          "name": "GPL-3.0",
+          "scope": "Artist-facing inpainting, selection-scoped editing, control layers, live painting, upscaling; GPL-3.0 plugin",
+          "classification": "open-source",
+          "source": "https://github.com/Acly/krita-ai-diffusion"
+        },
+        "weights": {
+          "name": "Pipeline-dependent",
+          "scope": "ComfyUI backend; each selected checkpoint/LoRA has separate terms. Local and cloud modes are distinct",
+          "classification": "mixed",
+          "source": "https://github.com/Acly/krita-ai-diffusion"
+        }
+      },
+      "sources": [
+        {
+          "url": "https://github.com/Acly/krita-ai-diffusion",
+          "supports": "Official source for license, setup, model or dependency scope described in this entry."
+        },
+        {
+          "url": "https://docs.interstice.cloud/installation/",
+          "supports": "Official source for license, setup, model or dependency scope described in this entry."
+        }
+      ]
+    },
+    {
+      "id": "comfyui",
+      "name": "ComfyUI",
+      "summary": "Reusable graph/API backend; GPL-3.0",
+      "categories": [
+        "graphics-photo"
+      ],
+      "repository": "https://github.com/Comfy-Org/ComfyUI",
+      "setup": "Vendor-specific PyTorch backend; pin core + node versions. Isolate custom nodes as executable code; preserve full workflows/model hashes",
+      "hardware": "Vendor-specific PyTorch backend; pin core + node versions. Isolate custom nodes as executable code; preserve full workflows/model hashes",
+      "limitations": "Does not confer rights to downloaded checkpoints/custom nodes. Hosted/API nodes are not local open models No runtime or target comparison performed.",
+      "maintenance": "Source reviewed; exact latest code/model revision and CI must be pinned before execution.",
+      "checkedAt": "2026-11-13",
+      "verification": "source-reviewed",
+      "licenses": {
+        "code": {
+          "name": "GPL-3.0",
+          "scope": "Reusable graph/API backend; GPL-3.0",
+          "classification": "open-source",
+          "source": "https://github.com/Comfy-Org/ComfyUI"
+        },
+        "weights": {
+          "name": "Pipeline-dependent",
+          "scope": "Does not confer rights to downloaded checkpoints/custom nodes. Hosted/API nodes are not local open models",
+          "classification": "mixed",
+          "source": "https://github.com/Comfy-Org/ComfyUI"
+        }
+      },
+      "sources": [
+        {
+          "url": "https://github.com/Comfy-Org/ComfyUI",
+          "supports": "Official source for license, setup, model or dependency scope described in this entry."
+        },
+        {
+          "url": "https://github.com/Comfy-Org/ComfyUI/blob/master/README.md",
+          "supports": "Official source for license, setup, model or dependency scope described in this entry."
+        }
+      ]
+    },
+    {
+      "id": "invokeai",
+      "name": "InvokeAI",
+      "summary": "Local React UI, canvas, gallery, metadata and reusable node workflows; Apache-2.0 main application, inspect bundled notices",
+      "categories": [
+        "graphics-photo"
+      ],
+      "repository": "https://github.com/invoke-ai/InvokeAI",
+      "setup": "Official launcher; model-dependent hardware. Good canvas/gallery comparison candidate, not measured winner",
+      "hardware": "Official launcher; model-dependent hardware. Good canvas/gallery comparison candidate, not measured winner",
+      "limitations": "Supports permissive and restricted local models plus API-only providers. Classify each configured pipeline separately No runtime or target comparison performed.",
+      "maintenance": "Source reviewed; exact latest code/model revision and CI must be pinned before execution.",
+      "checkedAt": "2026-11-13",
+      "verification": "source-reviewed",
+      "licenses": {
+        "code": {
+          "name": "Apache-2.0",
+          "scope": "Local React UI, canvas, gallery, metadata and reusable node workflows; Apache-2.0 main application, inspect bundled notices",
+          "classification": "open-source",
+          "source": "https://github.com/invoke-ai/InvokeAI"
+        },
+        "weights": {
+          "name": "Pipeline-dependent",
+          "scope": "Supports permissive and restricted local models plus API-only providers. Classify each configured pipeline separately",
+          "classification": "mixed",
+          "source": "https://github.com/invoke-ai/InvokeAI"
+        }
+      },
+      "sources": [
+        {
+          "url": "https://github.com/invoke-ai/InvokeAI",
+          "supports": "Official source for license, setup, model or dependency scope described in this entry."
+        },
+        {
+          "url": "https://github.com/invoke-ai/InvokeAI/blob/main/docs/src/content/docs/start-here/system-requirements.mdx",
+          "supports": "Official source for license, setup, model or dependency scope described in this entry."
+        }
+      ]
+    },
+    {
+      "id": "diffusers",
+      "name": "Diffusers",
+      "summary": "Python pipeline and optimization integration framework; Apache-2.0",
+      "categories": [
+        "graphics-photo"
+      ],
+      "repository": "https://github.com/huggingface/diffusers",
+      "setup": "PyTorch + compatible acceleration; CPU/group offload trades memory against latency. Prefer pinned packaged release over unreviewed main; remote decoding is not fully local inference",
+      "hardware": "PyTorch + compatible acceleration; CPU/group offload trades memory against latency. Prefer pinned packaged release over unreviewed main; remote decoding is not fully local inference",
+      "limitations": "Library license independent of every model, encoder and adapter No runtime or target comparison performed.",
+      "maintenance": "Source reviewed; exact latest code/model revision and CI must be pinned before execution.",
+      "checkedAt": "2026-11-13",
+      "verification": "source-reviewed",
+      "licenses": {
+        "code": {
+          "name": "Apache-2.0",
+          "scope": "Python pipeline and optimization integration framework; Apache-2.0",
+          "classification": "open-source",
+          "source": "https://github.com/huggingface/diffusers"
+        },
+        "weights": {
+          "name": "Pipeline-dependent",
+          "scope": "Library license independent of every model, encoder and adapter",
+          "classification": "mixed",
+          "source": "https://github.com/huggingface/diffusers"
+        }
+      },
+      "sources": [
+        {
+          "url": "https://github.com/huggingface/diffusers",
+          "supports": "Official source for license, setup, model or dependency scope described in this entry."
+        },
+        {
+          "url": "https://github.com/huggingface/diffusers/blob/main/LICENSE",
+          "supports": "Official source for license, setup, model or dependency scope described in this entry."
+        },
+        {
+          "url": "https://github.com/huggingface/diffusers/blob/main/docs/source/en/optimization/memory.md",
+          "supports": "Official source for license, setup, model or dependency scope described in this entry."
+        }
+      ]
+    },
+    {
+      "id": "sam-2-sam-2-1",
+      "name": "SAM 2 / SAM 2.1",
+      "summary": "Promptable segmentation and video mask tracking; Apache-2.0 code AND checkpoints explicitly documented",
+      "categories": [
+        "graphics-photo",
+        "video"
+      ],
+      "repository": "https://github.com/facebookresearch/sam2",
+      "setup": "PyTorch >=2.5.1; CUDA kernel build documented; extension build failure can limit postprocessing. Mask generation, not photo generation; benchmark hair/transparency/occlusion separately",
+      "hardware": "PyTorch >=2.5.1; CUDA kernel build documented; extension build failure can limit postprocessing. Mask generation, not photo generation; benchmark hair/transparency/occlusion separately",
+      "limitations": "Demo fonts separately SIL OFL; dataset license separate from inference artifact No runtime or target comparison performed.",
+      "maintenance": "Source reviewed; exact latest code/model revision and CI must be pinned before execution.",
+      "checkedAt": "2026-11-13",
+      "verification": "source-reviewed",
+      "licenses": {
+        "code": {
+          "name": "Apache-2.0",
+          "scope": "Promptable segmentation and video mask tracking; Apache-2.0 code AND checkpoints explicitly documented",
+          "classification": "open-source",
+          "source": "https://github.com/facebookresearch/sam2"
+        },
+        "weights": {
+          "name": "Apache-2.0",
+          "scope": "Demo fonts separately SIL OFL; dataset license separate from inference artifact",
+          "classification": "open-source",
+          "source": "https://github.com/facebookresearch/sam2"
+        }
+      },
+      "sources": [
+        {
+          "url": "https://github.com/facebookresearch/sam2",
+          "supports": "Official source for license, setup, model or dependency scope described in this entry."
+        }
+      ]
+    },
+    {
+      "id": "rembg",
+      "name": "rembg",
+      "summary": "Batch/API/CLI background removal; MIT application",
+      "categories": [
+        "graphics-photo"
+      ],
+      "repository": "https://github.com/danielgatis/rembg/blob/main/README.md",
+      "setup": "ONNX runtime/model selection; preserve alpha and edge quality. Build explicit approved-model allowlist rather than allowing arbitrary downloads",
+      "hardware": "ONNX runtime/model selection; preserve alpha and edge quality. Build explicit approved-model allowlist rather than allowing arbitrary downloads",
+      "limitations": "Model weights explicitly carry independent licenses; never inherit MIT automatically No runtime or target comparison performed.",
+      "maintenance": "Source reviewed; exact latest code/model revision and CI must be pinned before execution.",
+      "checkedAt": "2026-11-13",
+      "verification": "source-reviewed",
+      "licenses": {
+        "code": {
+          "name": "MIT",
+          "scope": "Batch/API/CLI background removal; MIT application",
+          "classification": "open-source",
+          "source": "https://github.com/danielgatis/rembg/blob/main/README.md"
+        },
+        "weights": {
+          "name": "Pipeline-dependent",
+          "scope": "Model weights explicitly carry independent licenses; never inherit MIT automatically",
+          "classification": "mixed",
+          "source": "https://github.com/danielgatis/rembg/blob/main/README.md"
+        }
+      },
+      "sources": [
+        {
+          "url": "https://github.com/danielgatis/rembg/blob/main/README.md",
+          "supports": "Official source for license, setup, model or dependency scope described in this entry."
+        },
+        {
+          "url": "https://github.com/danielgatis/rembg/blob/main/LICENSE.txt",
+          "supports": "Official source for license, setup, model or dependency scope described in this entry."
+        }
+      ]
+    },
+    {
+      "id": "upscayl",
+      "name": "Upscayl",
+      "summary": "Desktop image enlargement; AGPL-3.0 app/backend",
+      "categories": [
+        "graphics-photo"
+      ],
+      "repository": "https://github.com/upscayl/upscayl",
+      "setup": "Vulkan-compatible GPU required per troubleshooting. Test text, faces, thin lines, false detail and output dimensions; upscale is not factual restoration",
+      "hardware": "Vulkan-compatible GPU required per troubleshooting. Test text, faces, thin lines, false detail and output dimensions; upscale is not factual restoration",
+      "limitations": "Inspect each selected bundled/custom model provenance separately; cloud offering is separate No runtime or target comparison performed.",
+      "maintenance": "Source reviewed; exact latest code/model revision and CI must be pinned before execution.",
+      "checkedAt": "2026-11-13",
+      "verification": "source-reviewed",
+      "licenses": {
+        "code": {
+          "name": "AGPL-3.0",
+          "scope": "Desktop image enlargement; AGPL-3.0 app/backend",
+          "classification": "open-source",
+          "source": "https://github.com/upscayl/upscayl"
+        },
+        "weights": {
+          "name": "Pipeline-dependent",
+          "scope": "Inspect each selected bundled/custom model provenance separately; cloud offering is separate",
+          "classification": "mixed",
+          "source": "https://github.com/upscayl/upscayl"
+        }
+      },
+      "sources": [
+        {
+          "url": "https://github.com/upscayl/upscayl",
+          "supports": "Official source for license, setup, model or dependency scope described in this entry."
+        },
+        {
+          "url": "https://github.com/upscayl/upscayl/blob/main/LICENSE",
+          "supports": "Official source for license, setup, model or dependency scope described in this entry."
+        },
+        {
+          "url": "https://github.com/upscayl/upscayl/wiki/Troubleshooting",
+          "supports": "Official source for license, setup, model or dependency scope described in this entry."
+        }
+      ]
+    },
+    {
+      "id": "bolt-diy",
+      "name": "bolt.diy",
+      "summary": "Prompt-to-web application workspace; MIT",
+      "categories": [
+        "web-design"
+      ],
+      "repository": "https://github.com/stackblitz-labs/bolt.diy",
+      "setup": "Node >=22.12, pnpm >=9.15.9 in inspected README; Docker/desktop routes. Review generated code and sandbox execution. MIT frontend does not make entire service unrestricted/open",
+      "hardware": "Node >=22.12, pnpm >=9.15.9 in inspected README; Docker/desktop routes. Review generated code and sandbox execution. MIT frontend does not make entire service unrestricted/open",
+      "limitations": "Local Ollama/LM Studio and proprietary API providers both supported; WebContainers has separate commercial enterprise terms No runtime or target comparison performed.",
+      "maintenance": "Source reviewed; exact latest code/model revision and CI must be pinned before execution.",
+      "checkedAt": "2026-11-13",
+      "verification": "source-reviewed",
+      "licenses": {
+        "code": {
+          "name": "MIT",
+          "scope": "Prompt-to-web application workspace; MIT",
+          "classification": "open-source",
+          "source": "https://github.com/stackblitz-labs/bolt.diy"
+        },
+        "weights": {
+          "name": "Pipeline-dependent",
+          "scope": "Local Ollama/LM Studio and proprietary API providers both supported; WebContainers has separate commercial enterprise terms",
+          "classification": "mixed",
+          "source": "https://github.com/stackblitz-labs/bolt.diy"
+        }
+      },
+      "sources": [
+        {
+          "url": "https://github.com/stackblitz-labs/bolt.diy",
+          "supports": "Official source for license, setup, model or dependency scope described in this entry."
+        }
+      ]
+    },
+    {
+      "id": "screenshot-to-code",
+      "name": "screenshot-to-code",
+      "summary": "Screenshot/mockup to HTML/React/Vue prototype; MIT application",
+      "categories": [
+        "web-design"
+      ],
+      "repository": "https://github.com/abi/screenshot-to-code",
+      "setup": "FastAPI + React/Vite; optional Chromium preview. Local model route linked but upstream discourages its quality. Measure semantic HTML, accessibility, responsive behavior and editability, not screenshot similarity alone",
+      "hardware": "FastAPI + React/Vite; optional Chromium preview. Local model route linked but upstream discourages its quality. Measure semantic HTML, accessibility, responsive behavior and editability, not screenshot similarity alone",
+      "limitations": "Current documented route requires at least one OpenAI/Anthropic/Gemini API key; optional Replicate. Not a wholly open-source AI stack No runtime or target comparison performed.",
+      "maintenance": "Source reviewed; exact latest code/model revision and CI must be pinned before execution.",
+      "checkedAt": "2026-11-13",
+      "verification": "source-reviewed",
+      "licenses": {
+        "code": {
+          "name": "MIT",
+          "scope": "Screenshot/mockup to HTML/React/Vue prototype; MIT application",
+          "classification": "open-source",
+          "source": "https://github.com/abi/screenshot-to-code"
+        },
+        "weights": {
+          "name": "Pipeline-dependent",
+          "scope": "Current documented route requires at least one OpenAI/Anthropic/Gemini API key; optional Replicate. Not a wholly open-source AI stack",
+          "classification": "mixed",
+          "source": "https://github.com/abi/screenshot-to-code"
+        }
+      },
+      "sources": [
+        {
+          "url": "https://github.com/abi/screenshot-to-code",
+          "supports": "Official source for license, setup, model or dependency scope described in this entry."
+        }
+      ]
+    },
+    {
+      "id": "flux-2-klein-4b",
+      "name": "FLUX.2-klein-4B",
+      "summary": "Exact image-model variant for controlled evaluation; license does not transfer to other variants.",
+      "categories": [
+        "graphics-photo"
+      ],
+      "repository": "https://huggingface.co/black-forest-labs/FLUX.2-klein-4B",
+      "setup": "Text-to-image + multi-reference editing; upstream reports about 13GB VRAM and 4-step sample. Sub-second claims are upstream, not our hardware measurement. Diffusers CPU offload demonstrated. Do not transfer license to 9B/dev variants",
+      "hardware": "Text-to-image + multi-reference editing; upstream reports about 13GB VRAM and 4-step sample. Sub-second claims are upstream, not our hardware measurement. Diffusers CPU offload demonstrated. Do not transfer license to 9B/dev variants",
+      "limitations": "Apache-2.0 weights per official card No runtime or target comparison performed.",
+      "maintenance": "Source reviewed; exact latest code/model revision and CI must be pinned before execution.",
+      "checkedAt": "2026-11-13",
+      "verification": "source-reviewed",
+      "licenses": {
+        "code": {
+          "name": "Not bundled",
+          "scope": "Model artifact entry; use separately licensed inference implementation.",
+          "classification": "not-applicable"
+        },
+        "weights": {
+          "name": "Apache-2.0",
+          "scope": "Apache-2.0 weights per official card",
+          "classification": "open-source",
+          "source": "https://huggingface.co/black-forest-labs/FLUX.2-klein-4B"
+        }
+      },
+      "sources": [
+        {
+          "url": "https://huggingface.co/black-forest-labs/FLUX.2-klein-4B",
+          "supports": "Official source for license, setup, model or dependency scope described in this entry."
+        }
+      ]
+    },
+    {
+      "id": "z-image-turbo",
+      "name": "Z-Image-Turbo",
+      "summary": "Exact image-model variant for controlled evaluation; license does not transfer to other variants.",
+      "categories": [
+        "graphics-photo"
+      ],
+      "repository": "https://huggingface.co/Tongyi-MAI/Z-Image-Turbo",
+      "setup": "6B generation model; upstream reports 8 function evaluations and 16GB consumer fit. H800 latency is not consumer latency. Card lists Edit/Omni-Base as \u201cto be released\u201d; do not mark them downloadable/tested from Turbo availability",
+      "hardware": "6B generation model; upstream reports 8 function evaluations and 16GB consumer fit. H800 latency is not consumer latency. Card lists Edit/Omni-Base as \u201cto be released\u201d; do not mark them downloadable/tested from Turbo availability",
+      "limitations": "Apache-2.0 metadata No runtime or target comparison performed.",
+      "maintenance": "Source reviewed; exact latest code/model revision and CI must be pinned before execution.",
+      "checkedAt": "2026-11-13",
+      "verification": "source-reviewed",
+      "licenses": {
+        "code": {
+          "name": "Not bundled",
+          "scope": "Model artifact entry; use separately licensed inference implementation.",
+          "classification": "not-applicable"
+        },
+        "weights": {
+          "name": "Apache-2.0",
+          "scope": "Apache-2.0 metadata",
+          "classification": "open-source",
+          "source": "https://huggingface.co/Tongyi-MAI/Z-Image-Turbo"
+        }
+      },
+      "sources": [
+        {
+          "url": "https://huggingface.co/Tongyi-MAI/Z-Image-Turbo",
+          "supports": "Official source for license, setup, model or dependency scope described in this entry."
+        }
+      ]
+    },
+    {
+      "id": "qwen-image-base-exact-repository",
+      "name": "Qwen-Image (base exact repository)",
+      "summary": "Exact image-model variant for controlled evaluation; license does not transfer to other variants.",
+      "categories": [
+        "graphics-photo"
+      ],
+      "repository": "https://huggingface.co/Qwen/Qwen-Image",
+      "setup": "20B model: high resource tier, quantify with chosen precision/offload. Candidate for typography/prompt adherence; no accuracy claims established here",
+      "hardware": "20B model: high resource tier, quantify with chosen precision/offload. Candidate for typography/prompt adherence; no accuracy claims established here",
+      "limitations": "Apache-2.0 per official card No runtime or target comparison performed.",
+      "maintenance": "Source reviewed; exact latest code/model revision and CI must be pinned before execution.",
+      "checkedAt": "2026-11-13",
+      "verification": "source-reviewed",
+      "licenses": {
+        "code": {
+          "name": "Not bundled",
+          "scope": "Model artifact entry; use separately licensed inference implementation.",
+          "classification": "not-applicable"
+        },
+        "weights": {
+          "name": "Apache-2.0",
+          "scope": "Apache-2.0 per official card",
+          "classification": "open-source",
+          "source": "https://huggingface.co/Qwen/Qwen-Image"
+        }
+      },
+      "sources": [
+        {
+          "url": "https://huggingface.co/Qwen/Qwen-Image",
+          "supports": "Official source for license, setup, model or dependency scope described in this entry."
+        }
+      ]
+    },
+    {
+      "id": "qwen-image-edit-exact-repository",
+      "name": "Qwen-Image-Edit (exact repository)",
+      "summary": "Exact image-model variant for controlled evaluation; license does not transfer to other variants.",
+      "categories": [
+        "graphics-photo"
+      ],
+      "repository": "https://huggingface.co/Qwen/Qwen-Image-Edit",
+      "setup": "Instruction-based editing; evaluate identity/content retention and changes outside requested region. Do not assume all later Qwen-Image releases retain license",
+      "hardware": "Instruction-based editing; evaluate identity/content retention and changes outside requested region. Do not assume all later Qwen-Image releases retain license",
+      "limitations": "Apache-2.0 per official card No runtime or target comparison performed.",
+      "maintenance": "Source reviewed; exact latest code/model revision and CI must be pinned before execution.",
+      "checkedAt": "2026-11-13",
+      "verification": "source-reviewed",
+      "licenses": {
+        "code": {
+          "name": "Not bundled",
+          "scope": "Model artifact entry; use separately licensed inference implementation.",
+          "classification": "not-applicable"
+        },
+        "weights": {
+          "name": "Apache-2.0",
+          "scope": "Apache-2.0 per official card",
+          "classification": "open-source",
+          "source": "https://huggingface.co/Qwen/Qwen-Image-Edit"
+        }
+      },
+      "sources": [
+        {
+          "url": "https://huggingface.co/Qwen/Qwen-Image-Edit",
+          "supports": "Official source for license, setup, model or dependency scope described in this entry."
+        }
+      ]
+    },
+    {
+      "id": "flux-1-schnell",
+      "name": "FLUX.1-schnell",
+      "summary": "Exact image-model variant for controlled evaluation; license does not transfer to other variants.",
+      "categories": [
+        "graphics-photo"
+      ],
+      "repository": "https://huggingface.co/black-forest-labs/FLUX.1-schnell/blob/main/README.md",
+      "setup": "Reproducible permissive baseline in Diffusers/ComfyUI; full encoder and memory footprint still need measurement",
+      "hardware": "Reproducible permissive baseline in Diffusers/ComfyUI; full encoder and memory footprint still need measurement",
+      "limitations": "Apache-2.0 weights No runtime or target comparison performed.",
+      "maintenance": "Source reviewed; exact latest code/model revision and CI must be pinned before execution.",
+      "checkedAt": "2026-11-13",
+      "verification": "source-reviewed",
+      "licenses": {
+        "code": {
+          "name": "Not bundled",
+          "scope": "Model artifact entry; use separately licensed inference implementation.",
+          "classification": "not-applicable"
+        },
+        "weights": {
+          "name": "Apache-2.0",
+          "scope": "Apache-2.0 weights",
+          "classification": "open-source",
+          "source": "https://huggingface.co/black-forest-labs/FLUX.1-schnell/blob/main/README.md"
+        }
+      },
+      "sources": [
+        {
+          "url": "https://huggingface.co/black-forest-labs/FLUX.1-schnell/blob/main/README.md",
+          "supports": "Official source for license, setup, model or dependency scope described in this entry."
+        }
+      ]
+    },
+    {
+      "id": "ace-step-1-5-local-music-generation",
+      "name": "ACE-Step 1.5: local music generation",
+      "summary": "Code: MIT. Official base and bundled turbo model cards identify MIT weights. Do not confuse the earlier ACE-Step repository's Apache license with 1.5.",
+      "categories": [
+        "music-audio"
+      ],
+      "repository": "https://github.com/ace-step/ACE-Step-1.5",
+      "setup": "Code: MIT. Official base and bundled turbo model cards identify MIT weights. Do not confuse the earlier ACE-Step repository's Apache license with 1.5. Supports text-conditioned songs, references, covers and repainting. Base variants support extraction/completion features absent from turbo/SFT variants. Upstream describes Windows/Linux CUDA, Windows ROCm and Apple Silicon MLX launch paths. Its GPU table starts with 2B turbo, no LM, INT8/offload at \u22646 GB; XL requires \u226512 GB with offload/quantization or \u226520 GB without offload. These are upstream requirements, not measurements here. Current README includes April 2026 XL announcement and profiling script. Exact latest commit/CI health not established. Evaluate first for local songwriting, loops and owned-media transformations. Check lyric intelligibility, structure, reference leakage, seam quality and reproducibility. Do not repeat superiority or seconds-per-song marketing as established performance.",
+      "hardware": "See upstream requirements in setup; all numbers are upstream-reported, not Athena measurements.",
+      "limitations": "No installation, inference, export or target comparison performed. Review exact artifact and dependency licenses before use.",
+      "maintenance": "Documentation reviewed; latest commit/CI and native behavior not established.",
+      "checkedAt": "2026-11-13",
+      "verification": "source-reviewed",
+      "licenses": {
+        "code": {
+          "name": "MIT",
+          "scope": "Application/inference implementation; packaged dependencies separate.",
+          "classification": "open-source",
+          "source": "https://github.com/ace-step/ACE-Step-1.5"
+        },
+        "weights": {
+          "name": "MIT",
+          "scope": "Exact model variant only; downstream and alternate checkpoints need separate review.",
+          "classification": "open-source",
+          "source": "https://huggingface.co/ACE-Step/Ace-Step1.5/tree/main/acestep-v15-turbo"
+        }
+      },
+      "sources": [
+        {
+          "url": "https://github.com/ace-step/ACE-Step-1.5",
+          "supports": "Official documentation, license, model-card or maintenance claim retained in accompanying research report."
+        },
+        {
+          "url": "https://huggingface.co/ACE-Step/acestep-v15-base",
+          "supports": "Official documentation, license, model-card or maintenance claim retained in accompanying research report."
+        },
+        {
+          "url": "https://huggingface.co/ACE-Step/Ace-Step1.5/tree/main/acestep-v15-turbo",
+          "supports": "Official documentation, license, model-card or maintenance claim retained in accompanying research report."
+        }
+      ]
+    },
+    {
+      "id": "whisper-faster-whisper-transcription-subtitles",
+      "name": "Whisper + faster-whisper: transcription/subtitles",
+      "summary": "Whisper explicitly licenses code and weights MIT; faster-whisper implementation is MIT. Alternate converted/distilled checkpoints still need their own model record.",
+      "categories": [
+        "music-audio",
+        "video"
+      ],
+      "repository": "https://github.com/openai/whisper",
+      "setup": "Whisper explicitly licenses code and weights MIT; faster-whisper implementation is MIT. Alternate converted/distilled checkpoints still need their own model record. Whisper upstream VRAM estimates: tiny/base ~1 GB, small ~2 GB, medium ~5 GB, large ~10 GB, turbo ~6 GB. Transcription is not music generation or video editing. faster-whisper offers CPU INT8 and NVIDIA inference; current requirements specify Python \u22653.9, CUDA 12/cuBLAS and cuDNN 9 for GPU. PyAV bundles FFmpeg libraries. Pin CTranslate2 compatibility. Benchmark claims in the upstream table are source-reported, not Athena results. Consume the returned segments generator fully when timing: inference is lazy. Evaluate subtitle word error, timing drift, silence hallucination, language handling, CPU/RAM and VRAM on user-relevant clips. Review subtitles before publishing.",
+      "hardware": "See upstream requirements in setup; all numbers are upstream-reported, not Athena measurements.",
+      "limitations": "No installation, inference, export or target comparison performed. Review exact artifact and dependency licenses before use.",
+      "maintenance": "Documentation reviewed; latest commit/CI and native behavior not established.",
+      "checkedAt": "2026-11-13",
+      "verification": "source-reviewed",
+      "licenses": {
+        "code": {
+          "name": "MIT",
+          "scope": "Application/inference implementation; packaged dependencies separate.",
+          "classification": "open-source",
+          "source": "https://github.com/openai/whisper"
+        },
+        "weights": {
+          "name": "MIT",
+          "scope": "Exact model variant only; downstream and alternate checkpoints need separate review.",
+          "classification": "open-source",
+          "source": "https://github.com/openai/whisper"
+        }
+      },
+      "sources": [
+        {
+          "url": "https://github.com/openai/whisper",
+          "supports": "Official documentation, license, model-card or maintenance claim retained in accompanying research report."
+        },
+        {
+          "url": "https://github.com/SYSTRAN/faster-whisper",
+          "supports": "Official documentation, license, model-card or maintenance claim retained in accompanying research report."
+        },
+        {
+          "url": "https://github.com/SYSTRAN/faster-whisper/blob/master/LICENSE",
+          "supports": "Official documentation, license, model-card or maintenance claim retained in accompanying research report."
+        }
+      ]
+    },
+    {
+      "id": "wan2-2-ti2v-5b-local-video-generation",
+      "name": "Wan2.2 TI2V-5B: local video generation",
+      "summary": "Repository and exact TI2V-5B model card identify Apache-2.0. Record each other checkpoint separately.",
+      "categories": [
+        "video"
+      ],
+      "repository": "https://github.com/Wan-Video/Wan2.2",
+      "setup": "Repository and exact TI2V-5B model card identify Apache-2.0. Record each other checkpoint separately. Text/image-to-video candidate, not a timeline editor. Official offload command requires at least 24 GB VRAM; larger 80 GB configuration can omit offload flags. 720p mode uses 1280\u00d7704 or portrait transpose. Official repository includes inference scripts, task-specific dependencies and tests. Fresh commit/CI activity was not independently audited. Evaluate temporal coherence, identity consistency, prompt adherence, real latency, memory, output decode correctness and failure recovery. Do not present published aesthetic rankings as measured superiority.",
+      "hardware": "See upstream requirements in setup; all numbers are upstream-reported, not Athena measurements.",
+      "limitations": "No installation, inference, export or target comparison performed. Review exact artifact and dependency licenses before use.",
+      "maintenance": "Documentation reviewed; latest commit/CI and native behavior not established.",
+      "checkedAt": "2026-11-13",
+      "verification": "source-reviewed",
+      "licenses": {
+        "code": {
+          "name": "Apache-2.0",
+          "scope": "Application/inference implementation; packaged dependencies separate.",
+          "classification": "open-source",
+          "source": "https://github.com/Wan-Video/Wan2.2"
+        },
+        "weights": {
+          "name": "Apache-2.0",
+          "scope": "Exact model variant only; downstream and alternate checkpoints need separate review.",
+          "classification": "open-source",
+          "source": "https://huggingface.co/Wan-AI/Wan2.2-TI2V-5B"
+        }
+      },
+      "sources": [
+        {
+          "url": "https://github.com/Wan-Video/Wan2.2",
+          "supports": "Official documentation, license, model-card or maintenance claim retained in accompanying research report."
+        },
+        {
+          "url": "https://huggingface.co/Wan-AI/Wan2.2-TI2V-5B",
+          "supports": "Official documentation, license, model-card or maintenance claim retained in accompanying research report."
+        }
+      ]
+    },
+    {
+      "id": "kdenlive-real-editing-host-with-transcription-integration",
+      "name": "Kdenlive: real editing host with transcription integration",
+      "summary": "Useful comparator/host rather than another generation model. Official documentation describes VOSK and Whisper speech-to-text configuration and subtitle workflows.",
+      "categories": [
+        "music-audio",
+        "video"
+      ],
+      "repository": "https://invent.kde.org/multimedia/kdenlive",
+      "setup": "Useful comparator/host rather than another generation model. Official documentation describes VOSK and Whisper speech-to-text configuration and subtitle workflows. Keep editor licensing, transcription engine licensing and downloaded model licensing separate. Exact packaged license/dependency inventory remains to verify before bundling. Current public manual identifies 26.08, evidence of maintained documentation, not verification of local package or native behavior. Test complete edit/export workflow, subtitle timing, proxy media, recoverability, audio sync and project reopen, not just successful model startup.",
+      "hardware": "See upstream requirements in setup; all numbers are upstream-reported, not Athena measurements.",
+      "limitations": "No installation, inference, export or target comparison performed. Review exact artifact and dependency licenses before use.",
+      "maintenance": "Documentation reviewed; latest commit/CI and native behavior not established.",
+      "checkedAt": "2026-11-13",
+      "verification": "source-reviewed",
+      "licenses": {
+        "code": {
+          "name": "Unverified packaged inventory",
+          "scope": "Application/inference implementation; packaged dependencies separate.",
+          "classification": "unverified",
+          "source": "https://docs.kdenlive.org/en/effects_and_filters/speech_to_text.html"
+        },
+        "weights": {
+          "name": "Engine/model-dependent",
+          "scope": "Exact model variant only; downstream and alternate checkpoints need separate review.",
+          "classification": "mixed",
+          "source": "https://docs.kdenlive.org/en/effects_and_filters/speech_to_text.html"
+        }
+      },
+      "sources": [
+        {
+          "url": "https://docs.kdenlive.org/en/effects_and_filters/speech_to_text.html",
+          "supports": "Official documentation, license, model-card or maintenance claim retained in accompanying research report."
+        },
+        {
+          "url": "https://docs.kdenlive.org/en/getting_started/configure_kdenlive/configuration_plugins.html",
+          "supports": "Official documentation, license, model-card or maintenance claim retained in accompanying research report."
+        }
+      ]
+    },
+    {
+      "id": "audiocraft-musicgen-audiogen",
+      "name": "AudioCraft / MusicGen / AudioGen",
+      "summary": "Code MIT; model weights **CC-BY-NC 4.0**. Label noncommercial-weight research, not unrestricted open-source production.",
+      "categories": [
+        "music-audio"
+      ],
+      "repository": "https://github.com/facebookresearch/audiocraft",
+      "setup": "Code MIT; model weights **CC-BY-NC 4.0**. Label noncommercial-weight research, not unrestricted open-source production. Useful text/melody-conditioned music and audio baseline. Model choice and environment requirements must be pinned; no local setup or performance validated. Inspect current dependency/maintenance status before allocating benchmark time. Compare controllability and output quality, not age or popularity.",
+      "hardware": "See upstream requirements in setup; all numbers are upstream-reported, not Athena measurements.",
+      "limitations": "No installation, inference, export or target comparison performed. Restricted model terms: not an unrestricted open-source production candidate.",
+      "maintenance": "Documentation reviewed; latest commit/CI and native behavior not established.",
+      "checkedAt": "2026-11-13",
+      "verification": "source-reviewed",
+      "licenses": {
+        "code": {
+          "name": "MIT",
+          "scope": "Application/inference implementation; packaged dependencies separate.",
+          "classification": "open-source",
+          "source": "https://github.com/facebookresearch/audiocraft"
+        },
+        "weights": {
+          "name": "CC-BY-NC-4.0",
+          "scope": "Exact model variant only; downstream and alternate checkpoints need separate review.",
+          "classification": "restricted",
+          "source": "https://github.com/facebookresearch/audiocraft"
+        }
+      },
+      "sources": [
+        {
+          "url": "https://github.com/facebookresearch/audiocraft",
+          "supports": "Official documentation, license, model-card or maintenance claim retained in accompanying research report."
+        }
+      ]
+    },
+    {
+      "id": "stable-audio-open-1-0",
+      "name": "Stable Audio Open 1.0",
+      "summary": "`stable-audio-tools` code MIT; model card lists **stable-audio-community** license and gated acceptance/data sharing. This is not equivalent to unrestricted MIT weights.",
+      "categories": [
+        "music-audio"
+      ],
+      "repository": "https://huggingface.co/stabilityai/stable-audio-open-1.0",
+      "setup": "`stable-audio-tools` code MIT; model card lists **stable-audio-community** license and gated acceptance/data sharing. This is not equivalent to unrestricted MIT weights. Model card specifies up to 47 seconds stereo 44.1 kHz, with stable-audio-tools or Diffusers. Hardware minimum not established in this pass. Upstream says sound effects/field recordings are stronger than music; realistic vocals unsupported, English descriptions favored. Suitable for sound-design experiments, not the default full-song candidate. Do not accept gated terms or download on behalf of user without appropriate workflow; commercial suitability depends on exact current terms.",
+      "hardware": "See upstream requirements in setup; all numbers are upstream-reported, not Athena measurements.",
+      "limitations": "No installation, inference, export or target comparison performed. Restricted model terms: not an unrestricted open-source production candidate.",
+      "maintenance": "Documentation reviewed; latest commit/CI and native behavior not established.",
+      "checkedAt": "2026-11-13",
+      "verification": "source-reviewed",
+      "licenses": {
+        "code": {
+          "name": "MIT",
+          "scope": "Application/inference implementation; packaged dependencies separate.",
+          "classification": "open-source",
+          "source": "https://huggingface.co/stabilityai/stable-audio-open-1.0"
+        },
+        "weights": {
+          "name": "Stable Audio Community",
+          "scope": "Exact model variant only; downstream and alternate checkpoints need separate review.",
+          "classification": "restricted",
+          "source": "https://huggingface.co/stabilityai/stable-audio-open-1.0"
+        }
+      },
+      "sources": [
+        {
+          "url": "https://huggingface.co/stabilityai/stable-audio-open-1.0",
+          "supports": "Official documentation, license, model-card or maintenance claim retained in accompanying research report."
+        },
+        {
+          "url": "https://github.com/Stability-AI/stable-audio-tools/blob/main/LICENSE",
+          "supports": "Official documentation, license, model-card or maintenance claim retained in accompanying research report."
+        }
+      ]
+    },
+    {
+      "id": "ltx-2-family-ltx-desktop",
+      "name": "LTX-2 family / LTX Desktop",
+      "summary": "LTX-2 code Apache-2.0; separate `LICENSE-2` and `LICENSE-2_x` govern models. The latter defines commercial/noncommercial purposes and entity thresholds. Treat as custom-license/open-weight until exact selected revision is reviewed.",
+      "categories": [
+        "video"
+      ],
+      "repository": "https://github.com/Lightricks/LTX-2",
+      "setup": "LTX-2 code Apache-2.0; separate `LICENSE-2` and `LICENSE-2_x` govern models. The latter defines commercial/noncommercial purposes and entity thresholds. Treat as custom-license/open-weight until exact selected revision is reviewed. Current official quickstart references LTX-2.5 audio-video generation and roughly 66 GiB of model assets; gated download requires accepting model terms. No acceptance performed. Distinguish open local models from Desktop's API-only Pro variants. The Desktop documentation describes local NVIDIA \u226524 GB VRAM (32 GB recommended); this is not a universal minimum for every LTX pipeline. Strong candidate for synchronized audio/video evaluation, not automatically a replacement for an editor. Pin family/version: old LTX-Video OpenRAIL discussions cannot classify all LTX-2 weights.",
+      "hardware": "See upstream requirements in setup; all numbers are upstream-reported, not Athena measurements.",
+      "limitations": "No installation, inference, export or target comparison performed. Restricted model terms: not an unrestricted open-source production candidate.",
+      "maintenance": "Documentation reviewed; latest commit/CI and native behavior not established.",
+      "checkedAt": "2026-11-13",
+      "verification": "source-reviewed",
+      "licenses": {
+        "code": {
+          "name": "Apache-2.0",
+          "scope": "Application/inference implementation; packaged dependencies separate.",
+          "classification": "open-source",
+          "source": "https://github.com/Lightricks/LTX-2"
+        },
+        "weights": {
+          "name": "LTX custom model licenses",
+          "scope": "Exact model variant only; downstream and alternate checkpoints need separate review.",
+          "classification": "restricted",
+          "source": "https://github.com/Lightricks/LTX-2"
+        }
+      },
+      "sources": [
+        {
+          "url": "https://github.com/Lightricks/LTX-2",
+          "supports": "Official documentation, license, model-card or maintenance claim retained in accompanying research report."
+        },
+        {
+          "url": "https://github.com/Lightricks/LTX-2/blob/main/LICENSE-2_x",
+          "supports": "Official documentation, license, model-card or maintenance claim retained in accompanying research report."
+        },
+        {
+          "url": "https://github.com/Lightricks/LTX-Desktop",
+          "supports": "Official documentation, license, model-card or maintenance claim retained in accompanying research report."
+        }
+      ]
+    },
+    {
+      "id": "demucs",
+      "name": "Demucs",
+      "summary": "MIT source-separation baseline. Meta repository explicitly archived Jan 1, 2025. README points to author fork but says it is not actively maintained, with important bug fixes only.",
+      "categories": [
+        "music-audio"
+      ],
+      "repository": "https://github.com/facebookresearch/demucs",
+      "setup": "MIT source-separation baseline. Meta repository explicitly archived Jan 1, 2025. README points to author fork but says it is not actively maintained, with important bug fixes only. Keep as reproducible legacy comparator, not a new actively maintained flagship. Verify exact model licensing and dependency lock before deployment. Evaluate stem leakage, transient preservation, clipping and recombination error on owned audio.",
+      "hardware": "See upstream requirements in setup; all numbers are upstream-reported, not Athena measurements.",
+      "limitations": "No installation, inference, export or target comparison performed. Review exact artifact and dependency licenses before use.",
+      "maintenance": "Archived upstream; bugfix-only fork, not actively maintained.",
+      "checkedAt": "2026-11-13",
+      "verification": "source-reviewed",
+      "licenses": {
+        "code": {
+          "name": "MIT",
+          "scope": "Application/inference implementation; packaged dependencies separate.",
+          "classification": "open-source",
+          "source": "https://github.com/facebookresearch/demucs"
+        },
+        "weights": {
+          "name": "Unverified exact checkpoint",
+          "scope": "Exact model variant only; downstream and alternate checkpoints need separate review.",
+          "classification": "unverified",
+          "source": "https://github.com/facebookresearch/demucs"
+        }
+      },
+      "sources": [
+        {
+          "url": "https://github.com/facebookresearch/demucs",
+          "supports": "Official documentation, license, model-card or maintenance claim retained in accompanying research report."
+        }
+      ]
+    },
+    {
+      "id": "chatterbox",
+      "name": "Chatterbox",
+      "summary": "Code and official model card identify MIT, but current official README explicitly states **retired research, no longer maintained as of August 2026**, with no support/updates.",
+      "categories": [
+        "music-audio"
+      ],
+      "repository": "https://github.com/resemble-ai/chatterbox",
+      "setup": "Code and official model card identify MIT, but current official README explicitly states **retired research, no longer maintained as of August 2026**, with no support/updates. README lists English Turbo/Nano and multilingual variants; Nano CPU throughput figures are publisher claims, not tests here. Useful archival TTS baseline, not a maintained default. Voice cloning must use authorized voices. Measure intelligibility, pronunciation, speaker consistency and watermark preservation; do not imply a code license grants voice/personality rights.",
+      "hardware": "See upstream requirements in setup; all numbers are upstream-reported, not Athena measurements.",
+      "limitations": "No installation, inference, export or target comparison performed. Review exact artifact and dependency licenses before use.",
+      "maintenance": "Retired August 2026 per official README.",
+      "checkedAt": "2026-11-13",
+      "verification": "source-reviewed",
+      "licenses": {
+        "code": {
+          "name": "MIT",
+          "scope": "Application/inference implementation; packaged dependencies separate.",
+          "classification": "open-source",
+          "source": "https://github.com/resemble-ai/chatterbox"
+        },
+        "weights": {
+          "name": "MIT",
+          "scope": "Exact model variant only; downstream and alternate checkpoints need separate review.",
+          "classification": "open-source",
+          "source": "https://huggingface.co/ResembleAI/chatterbox"
+        }
+      },
+      "sources": [
+        {
+          "url": "https://github.com/resemble-ai/chatterbox",
+          "supports": "Official documentation, license, model-card or maintenance claim retained in accompanying research report."
+        },
+        {
+          "url": "https://huggingface.co/ResembleAI/chatterbox",
+          "supports": "Official documentation, license, model-card or maintenance claim retained in accompanying research report."
+        }
+      ]
+    },
+    {
+      "id": "auto-editor",
+      "name": "Auto-Editor",
+      "summary": "Repository is Unlicense/public-domain; online/application assets have a separate proprietary license and released binaries may incorporate other open-source licenses.",
+      "categories": [
+        "video"
+      ],
+      "repository": "https://github.com/wyattblue/auto-editor",
+      "setup": "Repository is Unlicense/public-domain; online/application assets have a separate proprietary license and released binaries may incorporate other open-source licenses. Catalog as deterministic/assisted editing, not generative AI. Do not infer desktop commercial-feature entitlement from source license. Evaluate cut accuracy, preserved speech boundaries, sync and export interoperability; exact build/runtime requirements remain unverified.",
+      "hardware": "See upstream requirements in setup; all numbers are upstream-reported, not Athena measurements.",
+      "limitations": "No installation, inference, export or target comparison performed. Review exact artifact and dependency licenses before use.",
+      "maintenance": "Documentation reviewed; latest commit/CI and native behavior not established.",
+      "checkedAt": "2026-11-13",
+      "verification": "source-reviewed",
+      "licenses": {
+        "code": {
+          "name": "Unlicense",
+          "scope": "Application/inference implementation; packaged dependencies separate.",
+          "classification": "open-source",
+          "source": "https://github.com/wyattblue/auto-editor"
+        },
+        "weights": {
+          "name": "Not applicable",
+          "scope": "Exact model variant only; downstream and alternate checkpoints need separate review.",
+          "classification": "not-applicable"
+        }
+      },
+      "sources": [
+        {
+          "url": "https://github.com/wyattblue/auto-editor",
+          "supports": "Official documentation, license, model-card or maintenance claim retained in accompanying research report."
+        }
+      ]
+    }
+  ]
+}

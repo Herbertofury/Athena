@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "reviewed_at": "2026-11-15",
+  "applications": [
+    {
+      "id": "moneta",
+      "license": "GNU General Public License version 3",
+      "license_kind": "open-source",
+      "sources": [
+        {
+          "url": "https://github.com/forrest-orr/moneta/blob/master/LICENSE",
+          "label": "Upstream Moneta GPL version 3 license",
+          "checked_at": "2026-11-15",
+          "supports": ["license"]
+        },
+        {
+          "url": "https://github.com/forrest-orr/moneta",
+          "label": "Upstream Windows memory-analysis project and usage documentation",
+          "checked_at": "2026-11-15",
+          "supports": ["identity", "features", "platforms"]
+        }
+      ]
+    },
+    {
+      "id": "sigma",
+      "license": "Detection Rule License 1.1 for the rule collection; specification and logo are public domain",
+      "pricing_model": "free",
+      "pricing_notes": "The upstream rule collection is available at no cost. Conversion, collection and SIEM products used with it have separate licenses and operating costs.",
+      "sources": [
+        {
+          "url": "https://github.com/SigmaHQ/sigma",
+          "label": "Official Sigma rule collection and no-cost distribution statement",
+          "checked_at": "2026-11-15",
+          "supports": ["identity", "features", "pricing"]
+        },
+        {
+          "url": "https://github.com/SigmaHQ/sigma/blob/master/LICENSE",
+          "label": "Rule, specification and logo licensing boundaries",
+          "checked_at": "2026-11-15",
+          "supports": ["license"]
+        },
+        {
+          "url": "https://github.com/SigmaHQ/Detection-Rule-License",
+          "label": "Official DRL description and author-attribution requirements",
+          "checked_at": "2026-11-15",
+          "supports": ["license"]
+        }
+      ]
+    },
+    {
+      "id": "volatility3",
+      "license": "Volatility Software License 1.0; custom copyleft terms cover changes and qualifying additions, including dedicated wrappers",
+      "license_kind": "source-available",
+      "pricing_model": "free",
+      "pricing_notes": "The upstream VSL grants no-cost use, sharing and modification under its terms. This classification covers the framework, not commercial training, support or surrounding forensic products.",
+      "sources": [
+        {
+          "url": "https://github.com/volatilityfoundation/volatility3/blob/develop/LICENSE.txt",
+          "label": "Upstream Volatility Software License 1.0 grant and copyleft scope",
+          "checked_at": "2026-11-15",
+          "supports": ["license", "pricing"]
+        },
+        {
+          "url": "https://github.com/volatilityfoundation/volatility3",
+          "label": "Official framework, stable-branch and installation documentation",
+          "checked_at": "2026-11-15",
+          "supports": ["identity", "features", "downloads"]
+        }
+      ]
+    }
+  ]
+}

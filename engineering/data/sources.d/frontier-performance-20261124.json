@@ -1,0 +1,112 @@
+[
+  {
+    "id": "FNTP002",
+    "title": "Lithium upstream documentation",
+    "url": "https://github.com/CaffeineMC/lithium/blob/develop/README.md",
+    "observed_version": "Documentation blob c8fb99db8ecc3eca71abaf3c79021d5586e4467a (not a verified package version)",
+    "topic": "frontier-game-native-performance",
+    "note": "Minecraft game logic performance optimization project.",
+    "checked_at": "2026-11-24",
+    "review_after_days": 14,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "FNTP004",
+    "title": "Filament upstream documentation",
+    "url": "https://github.com/google/filament/blob/main/README.md",
+    "observed_version": "Documentation blob 37fa7665ec3dfe35eccfe746c07c0a11f749f8b6 (not a verified package version)",
+    "topic": "frontier-game-native-performance",
+    "note": "Real-time physically based rendering engine candidate for asset preview or native CAS rendering research.",
+    "checked_at": "2026-11-24",
+    "review_after_days": 14,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "FNTP005",
+    "title": "DirectX Shader Compiler upstream documentation",
+    "url": "https://github.com/microsoft/DirectXShaderCompiler/blob/main/README.md",
+    "observed_version": "Documentation blob afe4c42fee0b3fba4e799cab3d78575e7e8a856e (not a verified package version)",
+    "topic": "frontier-game-native-performance",
+    "note": "Shader compilation toolchain; relevant to shader build/validation and supported target pipelines.",
+    "checked_at": "2026-11-24",
+    "review_after_days": 14,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "FNTP006",
+    "title": "rust-analyzer upstream documentation",
+    "url": "https://github.com/rust-lang/rust-analyzer/blob/master/README.md",
+    "observed_version": "Documentation blob 06d63a2d23a73398c6c3a58381c15cac5dfc59f9 (not a verified package version)",
+    "topic": "frontier-game-native-performance",
+    "note": "Rust language analysis infrastructure; study incremental analysis and fast developer feedback.",
+    "checked_at": "2026-11-24",
+    "review_after_days": 14,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "FNTP007",
+    "title": "Portable SIMD upstream documentation",
+    "url": "https://github.com/rust-lang/portable-simd/blob/main/README.md",
+    "observed_version": "Documentation blob 6f7e402d0587de4090bcb9817b0d2b6cb4b39c6a (not a verified package version)",
+    "topic": "frontier-game-native-performance",
+    "note": "Rust portable SIMD research for data-parallel hot paths.",
+    "checked_at": "2026-11-24",
+    "review_after_days": 14,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "FNTP008",
+    "title": "hashbrown upstream documentation",
+    "url": "https://github.com/rust-lang/hashbrown/blob/main/README.md",
+    "observed_version": "Documentation blob ce19947e4b9cf43874d3cd456e5d5cdcb81486dc (not a verified package version)",
+    "topic": "frontier-game-native-performance",
+    "note": "Rust hash map implementation based on SwissTable design.",
+    "checked_at": "2026-11-24",
+    "review_after_days": 14,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "FNTP009",
+    "title": "Crossbeam upstream documentation",
+    "url": "https://github.com/crossbeam-rs/crossbeam/blob/main/README.md",
+    "observed_version": "Documentation blob c0a7135e2040dabdea63876feca8c3ef2afc3373 (not a verified package version)",
+    "topic": "frontier-game-native-performance",
+    "note": "Rust concurrent data structures and synchronization tools.",
+    "checked_at": "2026-11-24",
+    "review_after_days": 14,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "FNTP010",
+    "title": "Aho-Corasick upstream documentation",
+    "url": "https://github.com/BurntSushi/aho-corasick/blob/master/README.md",
+    "observed_version": "Documentation blob c0f525fdc6be62f0d828258a2de12c3009a8b452 (not a verified package version)",
+    "topic": "frontier-game-native-performance",
+    "note": "Multi-pattern string search library for Rust.",
+    "checked_at": "2026-11-24",
+    "review_after_days": 14,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "FNTP011",
+    "title": "jscpd upstream documentation",
+    "url": "https://github.com/kucherenko/jscpd/blob/master/README.md",
+    "observed_version": "Documentation blob b493c42ea38615beb3ae9a514bb998841d9ff26b (not a verified package version)",
+    "topic": "frontier-game-native-performance",
+    "note": "Duplicate source detection candidate for cross-repository organization.",
+    "checked_at": "2026-11-24",
+    "review_after_days": 14,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "FNTP012",
+    "title": "prek upstream documentation",
+    "url": "https://github.com/j178/prek/blob/main/README.md",
+    "observed_version": "Documentation blob 387798e09094cd308550c74ccea2d6184e37e843 (not a verified package version)",
+    "topic": "frontier-game-native-performance",
+    "note": "Rust implementation of pre-commit-compatible hook tooling.",
+    "checked_at": "2026-11-24",
+    "review_after_days": 14,
+    "evidence": "primary_documented"
+  }
+]

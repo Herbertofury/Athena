@@ -1,0 +1,10 @@
+[
+ {"id":"A1","active":true,"managed_device":true,"role":"receptionist","resource":"bookings","action":"read"},
+ {"id":"A2","active":false,"managed_device":true,"role":"receptionist","resource":"bookings","action":"read"},
+ {"id":"A3","active":true,"managed_device":false,"role":"auditor","resource":"bookings","action":"read"},
+ {"id":"A4","active":true,"managed_device":true,"role":"auditor","resource":"bookings","action":"update"},
+ {"id":"A5","active":true,"managed_device":true,"role":"administrator","resource":"accounts","action":"manage"},
+ {"id":"A6","active":true,"managed_device":true,"role":"administrator","resource":"bookings","action":"export"},
+ {"id":"A7","active":true,"managed_device":true,"role":"backup-service","resource":"backup-snapshot","action":"read"},
+ {"id":"A8","active":true,"managed_device":true,"role":"superuser","resource":"bookings","action":"read"}
+]

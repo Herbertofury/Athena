@@ -1,0 +1,18 @@
+{
+  "kind": "native auxiliary media diagnostics",
+  "source_files": {
+    "event-log-benchmark.js": "79608f57fca58221aaf54e3714652671027b9f8ff2b69629f2cd7caed8ae1281",
+    "preview-timeout-check.js": "a9cdbe545f276769ab4a5485bb4f7c9d8f16f992dad5e50ccfd05f0a37edecf1",
+    "preview-loader.mjs": "2eff415295af840549bf271e0dc328550f94578f30aa5d28daefd0df418ee945",
+    "event-log-recovery.mjs": "b9f6a770f0d29c3963549427c9189100829d87b227cd886a6915340fc38759a9",
+    "event-log-baseline.mjs": "da5c8854c2b145b85f2e1904b12e231ffc2a89b4f0908989968ac1eff97a244a",
+    "event-log-view.mjs": "d335ed418d4f9b5619825fc89f30dd3ad3beffe158f8d49feb9bc9d9a08b77d5",
+    "event-log-fixture.json": "a52b151a701afbc7bc3b6f32b2e79cd43b9fcd815d50da0f38b8c64268d5c7de"
+  },
+  "limits": [
+    "No iframe or automatic runs",
+    "Original full output comparison and recovery algorithms retained",
+    "Generated preview timeout, not provider outage",
+    "Measurements remain environment-specific; no target promotion"
+  ]
+}

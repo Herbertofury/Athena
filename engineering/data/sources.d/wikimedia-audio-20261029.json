@@ -1,0 +1,24 @@
+[
+  {
+    "id": "WIKIIMAGEINFO01",
+    "title": "MediaWiki Imageinfo API",
+    "url": "https://www.mediawiki.org/wiki/API:Imageinfo",
+    "observed_version": "Official API documentation inspected 2026-10-29",
+    "topic": "media-adapters",
+    "note": "Public file metadata, hidden fields and continuation reviewed; no authentication grant.",
+    "checked_at": "2026-10-29",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "WIKIAUDIO01",
+    "title": "Commons public audio fixture description",
+    "url": "https://commons.wikimedia.org/w/index.php?title=File:Example_sound_file_in_Ogg_Vorbis_format.ogg&oldid=1236898397",
+    "observed_version": "Description revision 1236898397; selected file uploaded 2019-02-20",
+    "topic": "media-adapters",
+    "note": "Source asserts own-work creator and CC0; actual API/file/hash/decode checks are separate Atlas evidence.",
+    "checked_at": "2026-10-29",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  }
+]

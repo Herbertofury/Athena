@@ -1,0 +1,127 @@
+{
+  "scope": "Linux local replay with explicit nonblocking socket and delayed byte; not native Windows reproduction",
+  "binary_sha256": "c2b43ddb8c8455d342171bc4b4d392e1e9050ad21604440bc3e5c385766338a3",
+  "complete": true,
+  "samples": [
+    {
+      "run": 0,
+      "exit_code": 0,
+      "stdout": "\nrunning 5 tests\ntest reader::tests::interrupted_first_read_and_misleading_empty_hint_preserve_data ... ok\ntest reader::tests::impossible_budget_rejected_before_reading ... ok\ntest budget_tests::impossible_budget_is_rejected_without_empty_success ... ok\ntest reader::tests::full_bytes_and_bounds_match_across_hints ... ok\ntest budget_tests::accepted_nonblocking_socket_waits_for_delayed_request_bytes ... ok\n\ntest result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.06s\n\n",
+      "stderr": ""
+    },
+    {
+      "run": 1,
+      "exit_code": 0,
+      "stdout": "\nrunning 5 tests\ntest reader::tests::impossible_budget_rejected_before_reading ... ok\ntest reader::tests::interrupted_first_read_and_misleading_empty_hint_preserve_data ... ok\ntest budget_tests::impossible_budget_is_rejected_without_empty_success ... ok\ntest reader::tests::full_bytes_and_bounds_match_across_hints ... ok\ntest budget_tests::accepted_nonblocking_socket_waits_for_delayed_request_bytes ... ok\n\ntest result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.05s\n\n",
+      "stderr": ""
+    },
+    {
+      "run": 2,
+      "exit_code": 0,
+      "stdout": "\nrunning 5 tests\ntest reader::tests::impossible_budget_rejected_before_reading ... ok\ntest reader::tests::interrupted_first_read_and_misleading_empty_hint_preserve_data ... ok\ntest budget_tests::impossible_budget_is_rejected_without_empty_success ... ok\ntest reader::tests::full_bytes_and_bounds_match_across_hints ... ok\ntest budget_tests::accepted_nonblocking_socket_waits_for_delayed_request_bytes ... ok\n\ntest result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.05s\n\n",
+      "stderr": ""
+    },
+    {
+      "run": 3,
+      "exit_code": 0,
+      "stdout": "\nrunning 5 tests\ntest reader::tests::interrupted_first_read_and_misleading_empty_hint_preserve_data ... ok\ntest reader::tests::impossible_budget_rejected_before_reading ... ok\ntest budget_tests::impossible_budget_is_rejected_without_empty_success ... ok\ntest reader::tests::full_bytes_and_bounds_match_across_hints ... ok\ntest budget_tests::accepted_nonblocking_socket_waits_for_delayed_request_bytes ... ok\n\ntest result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.05s\n\n",
+      "stderr": ""
+    },
+    {
+      "run": 4,
+      "exit_code": 0,
+      "stdout": "\nrunning 5 tests\ntest reader::tests::impossible_budget_rejected_before_reading ... ok\ntest reader::tests::interrupted_first_read_and_misleading_empty_hint_preserve_data ... ok\ntest budget_tests::impossible_budget_is_rejected_without_empty_success ... ok\ntest reader::tests::full_bytes_and_bounds_match_across_hints ... ok\ntest budget_tests::accepted_nonblocking_socket_waits_for_delayed_request_bytes ... ok\n\ntest result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.06s\n\n",
+      "stderr": ""
+    },
+    {
+      "run": 5,
+      "exit_code": 0,
+      "stdout": "\nrunning 5 tests\ntest reader::tests::impossible_budget_rejected_before_reading ... ok\ntest reader::tests::interrupted_first_read_and_misleading_empty_hint_preserve_data ... ok\ntest budget_tests::impossible_budget_is_rejected_without_empty_success ... ok\ntest reader::tests::full_bytes_and_bounds_match_across_hints ... ok\ntest budget_tests::accepted_nonblocking_socket_waits_for_delayed_request_bytes ... ok\n\ntest result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.06s\n\n",
+      "stderr": ""
+    },
+    {
+      "run": 6,
+      "exit_code": 0,
+      "stdout": "\nrunning 5 tests\ntest reader::tests::interrupted_first_read_and_misleading_empty_hint_preserve_data ... ok\ntest reader::tests::impossible_budget_rejected_before_reading ... ok\ntest budget_tests::impossible_budget_is_rejected_without_empty_success ... ok\ntest reader::tests::full_bytes_and_bounds_match_across_hints ... ok\ntest budget_tests::accepted_nonblocking_socket_waits_for_delayed_request_bytes ... ok\n\ntest result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.05s\n\n",
+      "stderr": ""
+    },
+    {
+      "run": 7,
+      "exit_code": 0,
+      "stdout": "\nrunning 5 tests\ntest reader::tests::interrupted_first_read_and_misleading_empty_hint_preserve_data ... ok\ntest reader::tests::impossible_budget_rejected_before_reading ... ok\ntest budget_tests::impossible_budget_is_rejected_without_empty_success ... ok\ntest reader::tests::full_bytes_and_bounds_match_across_hints ... ok\ntest budget_tests::accepted_nonblocking_socket_waits_for_delayed_request_bytes ... ok\n\ntest result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.05s\n\n",
+      "stderr": ""
+    },
+    {
+      "run": 8,
+      "exit_code": 0,
+      "stdout": "\nrunning 5 tests\ntest reader::tests::impossible_budget_rejected_before_reading ... ok\ntest reader::tests::interrupted_first_read_and_misleading_empty_hint_preserve_data ... ok\ntest budget_tests::impossible_budget_is_rejected_without_empty_success ... ok\ntest reader::tests::full_bytes_and_bounds_match_across_hints ... ok\ntest budget_tests::accepted_nonblocking_socket_waits_for_delayed_request_bytes ... ok\n\ntest result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.05s\n\n",
+      "stderr": ""
+    },
+    {
+      "run": 9,
+      "exit_code": 0,
+      "stdout": "\nrunning 5 tests\ntest reader::tests::impossible_budget_rejected_before_reading ... ok\ntest reader::tests::interrupted_first_read_and_misleading_empty_hint_preserve_data ... ok\ntest budget_tests::impossible_budget_is_rejected_without_empty_success ... ok\ntest reader::tests::full_bytes_and_bounds_match_across_hints ... ok\ntest budget_tests::accepted_nonblocking_socket_waits_for_delayed_request_bytes ... ok\n\ntest result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.06s\n\n",
+      "stderr": ""
+    },
+    {
+      "run": 10,
+      "exit_code": 0,
+      "stdout": "\nrunning 5 tests\ntest reader::tests::impossible_budget_rejected_before_reading ... ok\ntest reader::tests::interrupted_first_read_and_misleading_empty_hint_preserve_data ... ok\ntest budget_tests::impossible_budget_is_rejected_without_empty_success ... ok\ntest reader::tests::full_bytes_and_bounds_match_across_hints ... ok\ntest budget_tests::accepted_nonblocking_socket_waits_for_delayed_request_bytes ... ok\n\ntest result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.05s\n\n",
+      "stderr": ""
+    },
+    {
+      "run": 11,
+      "exit_code": 0,
+      "stdout": "\nrunning 5 tests\ntest reader::tests::impossible_budget_rejected_before_reading ... ok\ntest reader::tests::interrupted_first_read_and_misleading_empty_hint_preserve_data ... ok\ntest budget_tests::impossible_budget_is_rejected_without_empty_success ... ok\ntest reader::tests::full_bytes_and_bounds_match_across_hints ... ok\ntest budget_tests::accepted_nonblocking_socket_waits_for_delayed_request_bytes ... ok\n\ntest result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.05s\n\n",
+      "stderr": ""
+    },
+    {
+      "run": 12,
+      "exit_code": 0,
+      "stdout": "\nrunning 5 tests\ntest reader::tests::impossible_budget_rejected_before_reading ... ok\ntest reader::tests::interrupted_first_read_and_misleading_empty_hint_preserve_data ... ok\ntest reader::tests::full_bytes_and_bounds_match_across_hints ... ok\ntest budget_tests::impossible_budget_is_rejected_without_empty_success ... ok\ntest budget_tests::accepted_nonblocking_socket_waits_for_delayed_request_bytes ... ok\n\ntest result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.05s\n\n",
+      "stderr": ""
+    },
+    {
+      "run": 13,
+      "exit_code": 0,
+      "stdout": "\nrunning 5 tests\ntest reader::tests::impossible_budget_rejected_before_reading ... ok\ntest reader::tests::interrupted_first_read_and_misleading_empty_hint_preserve_data ... ok\ntest budget_tests::impossible_budget_is_rejected_without_empty_success ... ok\ntest reader::tests::full_bytes_and_bounds_match_across_hints ... ok\ntest budget_tests::accepted_nonblocking_socket_waits_for_delayed_request_bytes ... ok\n\ntest result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.05s\n\n",
+      "stderr": ""
+    },
+    {
+      "run": 14,
+      "exit_code": 0,
+      "stdout": "\nrunning 5 tests\ntest reader::tests::impossible_budget_rejected_before_reading ... ok\ntest reader::tests::interrupted_first_read_and_misleading_empty_hint_preserve_data ... ok\ntest budget_tests::impossible_budget_is_rejected_without_empty_success ... ok\ntest reader::tests::full_bytes_and_bounds_match_across_hints ... ok\ntest budget_tests::accepted_nonblocking_socket_waits_for_delayed_request_bytes ... ok\n\ntest result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.05s\n\n",
+      "stderr": ""
+    },
+    {
+      "run": 15,
+      "exit_code": 0,
+      "stdout": "\nrunning 5 tests\ntest reader::tests::interrupted_first_read_and_misleading_empty_hint_preserve_data ... ok\ntest reader::tests::impossible_budget_rejected_before_reading ... ok\ntest budget_tests::impossible_budget_is_rejected_without_empty_success ... ok\ntest reader::tests::full_bytes_and_bounds_match_across_hints ... ok\ntest budget_tests::accepted_nonblocking_socket_waits_for_delayed_request_bytes ... ok\n\ntest result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.05s\n\n",
+      "stderr": ""
+    },
+    {
+      "run": 16,
+      "exit_code": 0,
+      "stdout": "\nrunning 5 tests\ntest reader::tests::impossible_budget_rejected_before_reading ... ok\ntest reader::tests::interrupted_first_read_and_misleading_empty_hint_preserve_data ... ok\ntest reader::tests::full_bytes_and_bounds_match_across_hints ... ok\ntest budget_tests::impossible_budget_is_rejected_without_empty_success ... ok\ntest budget_tests::accepted_nonblocking_socket_waits_for_delayed_request_bytes ... ok\n\ntest result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.05s\n\n",
+      "stderr": ""
+    },
+    {
+      "run": 17,
+      "exit_code": 0,
+      "stdout": "\nrunning 5 tests\ntest reader::tests::interrupted_first_read_and_misleading_empty_hint_preserve_data ... ok\ntest reader::tests::impossible_budget_rejected_before_reading ... ok\ntest budget_tests::impossible_budget_is_rejected_without_empty_success ... ok\ntest reader::tests::full_bytes_and_bounds_match_across_hints ... ok\ntest budget_tests::accepted_nonblocking_socket_waits_for_delayed_request_bytes ... ok\n\ntest result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.05s\n\n",
+      "stderr": ""
+    },
+    {
+      "run": 18,
+      "exit_code": 0,
+      "stdout": "\nrunning 5 tests\ntest reader::tests::impossible_budget_rejected_before_reading ... ok\ntest reader::tests::interrupted_first_read_and_misleading_empty_hint_preserve_data ... ok\ntest budget_tests::impossible_budget_is_rejected_without_empty_success ... ok\ntest reader::tests::full_bytes_and_bounds_match_across_hints ... ok\ntest budget_tests::accepted_nonblocking_socket_waits_for_delayed_request_bytes ... ok\n\ntest result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.05s\n\n",
+      "stderr": ""
+    },
+    {
+      "run": 19,
+      "exit_code": 0,
+      "stdout": "\nrunning 5 tests\ntest reader::tests::impossible_budget_rejected_before_reading ... ok\ntest reader::tests::interrupted_first_read_and_misleading_empty_hint_preserve_data ... ok\ntest budget_tests::impossible_budget_is_rejected_without_empty_success ... ok\ntest reader::tests::full_bytes_and_bounds_match_across_hints ... ok\ntest budget_tests::accepted_nonblocking_socket_waits_for_delayed_request_bytes ... ok\n\ntest result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.05s\n\n",
+      "stderr": ""
+    }
+  ]
+}

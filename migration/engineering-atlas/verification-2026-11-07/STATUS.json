@@ -1,0 +1,40 @@
+{
+  "scope": "repository and native-wiki migration verification; not hosted/runtime release acceptance",
+  "import_commit": "af594fd2cdd5c00f01178ee353965a54b01b05d7",
+  "exact_import_files": 1703,
+  "source_main_files": 1538,
+  "wiki_pages": 79,
+  "wiki_commit": "39e4ea8dd42dc6cc67aa82f9302bcb035091e25a",
+  "repo_history_commits": 310,
+  "wiki_history_commits": 272,
+  "bundle_recovery": "all refs exact; fsck passed",
+  "open_drafts_preserved": 9,
+  "latest_open_head": "460965fe992f6f43af87de17331cbb94e2118a79",
+  "current_artifacts": 1,
+  "artifact_files_verified_against_source_docs": 272,
+  "deployments_inventoried": 168,
+  "releases": 0,
+  "github_attachment_urls_in_inspected_content": 0,
+  "local_checks": {
+    "python": 325,
+    "javascript": 284,
+    "rust_main": 150,
+    "rust_examples": 25,
+    "rust_storage": 4,
+    "rust_fmt": "passed after formatting repair",
+    "rust_clippy": "passed",
+    "platform": "Linux only",
+    "rust": "1.99.1"
+  },
+  "failures_preserved": [
+    "initial rustfmt finding",
+    "example linker bus error with full filesystem; reproducible build output cleaned and retry passed with debug symbols/incremental builds disabled"
+  ],
+  "gates_open": [
+    "GitHub Pages configuration and actual served/runtime browser verification",
+    "destination Windows Rust CI; root engineering workflow creation denied for missing workflows permission",
+    "recreate/reconcile nine archived drafts in Athena before retiring live source review workflows",
+    "historical source URL citations and external/local-only state review",
+    "old workflow logs are not fully archived; retained workflow summaries and current artifact are preserved"
+  ]
+}

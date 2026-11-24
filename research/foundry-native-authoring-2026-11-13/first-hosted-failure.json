@@ -1,0 +1,15 @@
+{
+  "run": 43530053103,
+  "head": "32ca212613336f2162f5880759b8c4e25ea59ddf",
+  "passed": [
+    "static-browser including native Foundry",
+    "workshop-browser",
+    "accessibility-browser",
+    "rust-tests",
+    "rust-clippy",
+    "rust-build"
+  ],
+  "failed": "verified-package",
+  "reason": "Manifest used stale index.html hash from pre-receiver local checkout. Current-main sidebar bytes restored; package validated locally.",
+  "complete": false
+}

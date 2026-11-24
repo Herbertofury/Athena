@@ -1,0 +1,50 @@
+{
+  "checked_at": "2026-10-28",
+  "scope": "Documentation, source catalog and wiki projection integrity. Not live site acceptance.",
+  "upstream_base": "863506c125d4eeee4aa3e5f9efe1ecd17013b547",
+  "catalog_counts": {
+    "entries": 162,
+    "families": {
+      "mod-hosts": 65,
+      "paid-platforms": 37,
+      "regional": 8,
+      "social-and-publishing": 47,
+      "specialist-sites": 5
+    },
+    "serviceKinds": {
+      "platform_or_host_scope": 149,
+      "reference_or_tool_only": 3,
+      "file_host_or_storage": 8,
+      "funding_or_integration_reference": 2
+    },
+    "sources": 406,
+    "protocols": 3,
+    "newAuthenticatedAcceptances": 0
+  },
+  "research_levels": {
+    "candidate": 63,
+    "public_observed": 36,
+    "primary_documented": 63
+  },
+  "checks": {
+    "research_source_and_local_links": "passed; 349 registered sources; 119 Markdown files; no stale entries on check date",
+    "python_unittest": "74 passed",
+    "javascript_contract_files": "17 passed; node --test tests/*.test.mjs",
+    "card_asset_identity": "passed",
+    "media_asset_identity": "passed",
+    "catalog_unique_ids_sources_required_named_sites": "passed",
+    "source_urls_credential_parameter_scan": "passed",
+    "wiki_projection": "32 mapped pages; deterministic second check passed",
+    "wiki_history_preservation": "Reconciled six richer existing wiki histories into canonical source; pinned receipts retained; unrelated latest wiki page changes preserved"
+  },
+  "retained_preintegration_failures": [
+    "Early source/link checks ran before regional-platforms.md, wiki-sync.md and the dated research note were present; those missing-link errors were corrected before final validation."
+  ],
+  "not_run": [
+    "No new runtime adapter tests",
+    "No authenticated paid/private content acceptance",
+    "No GameSync Next modifications or comparative benchmark",
+    "Rust implementation unchanged; Rust suite not rerun for this documentation-only expansion"
+  ],
+  "wiki_publication": "Prepared locally; authenticated wiki publication and live verification pending."
+}

@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "packages": [
+    {
+      "version": "1.7.3",
+      "tarball": "hls.js-1.7.3.tgz",
+      "integrity": "sha512-MsPlx6yVW4Qv4C7mEVou4/gk/5cN2dVxOTnrNjPSmyH2f0Ln+/UkG10Ax1PE6OvrmTVPKgQYozTtBaPOuCzq7A==",
+      "tarball_sha256": "a7290f1645f7c605baec75638acda6c6f7b08dde8a615c841a19d0e38df88729",
+      "parser_source_sha256": "3007ed079daacd4fa81d96165750a632b61cb59ec9b659884aae0cd28f5c8633",
+      "parser_bundle_sha256": "8ddc36ed0cd454952a7cbda0ef4326848f22557a7871318a83194b5c1ab99733",
+      "distribution_sha256": "a12e7ee1cd64a69dcdb314157e45dafcba705bfb0b1440b7935cb265d374423e",
+      "distribution_sri_sha384": "sha384-cciJ0zi8d1uMKC2zJd7jvPY4HQt7W4ByUI/FlMkltvBi31aW61rcpVBhpmW8/NwX"
+    },
+    {
+      "version": "1.7.4",
+      "tarball": "hls.js-1.7.4.tgz",
+      "integrity": "sha512-3GlxGdPvT2YHvQYOt+yOzT/DEior/qJVNIylHA77kgeoBTdQQqi70GwefNEUmHQeNGyjC8U62+bruqW/Tpm+tg==",
+      "tarball_sha256": "e4ab3d5d13f7cca9ef241d098f39686e19fd451831ba07dc9943482fd5ff75c7",
+      "parser_source_sha256": "77277d66462a54d1e2dec57e4ecd31f51f91f0c2d4d7586214f397a15b25a219",
+      "parser_bundle_sha256": "7425c84f5413ed96100226640dc73d1811cd5b01f38a60f463f925f7c3dc7187",
+      "distribution_sha256": "cfc70cc9e9fc63d071919e087670abc760c8fd1bc889b88588026e4d22193bbe",
+      "distribution_sri_sha384": "sha384-p9vgU/7IYJWd3I4STrtqxqR/2cAQlhIX7D/HrTnIMEjjcUox165b7se7sxmm3zDg"
+    }
+  ],
+  "npm_tarball_integrity_verified": true,
+  "baseline_dist_bundle_matches_existing_vendor": true,
+  "compiler": "esbuild 0.28.2",
+  "runtime": "Node 24.22.1",
+  "full_build_flags": true,
+  "helpers": {
+    "@svta/cml-id3": {
+      "version": "1.0.6",
+      "integrity": "sha512-63j8gkAnPOmOBWlp0hIZPvsIioZttdbg6/TgwITqMYbSLYVJ+6QGa/UtIP0I84NsfstANw6QdCn7i8SS08kn1A=="
+    },
+    "@svta/cml-utils": {
+      "version": "1.5.0",
+      "integrity": "sha512-JMqclD7Akd+GSJiuaYNUHOP2wNtf/nauKeszlYeivSHfi0Lp3pmSW5PXDvJ2dO4aPmmSOQbF0ztTsW9Vcs2Whw=="
+    },
+    "url-toolkit": {
+      "version": "2.2.5",
+      "integrity": "sha512-mtN6xk+Nac+oyJ/PrI7tzfmomRVNFIWKUbG8jdYFt52hxbiReFAXIjYskvu64/dvuW71IcB7lV8l0HvZMac6Jg=="
+    }
+  },
+  "install_scripts_executed": false,
+  "browser_playback_tested": false,
+  "scope": "Exact source parser fixture comparison; not the official Rollup distribution build, complete upstream test suite or target player acceptance",
+  "fresh_source_stage_reproduction": true
+}

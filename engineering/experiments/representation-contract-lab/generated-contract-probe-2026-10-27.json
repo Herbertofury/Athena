@@ -1,0 +1,47 @@
+{
+  "scope": "Own generated exact-rational contract probe; no third-party implementation or performance reproduction",
+  "source": "https://arxiv.org/html/2601.01602v1",
+  "cases": [
+    {
+      "previous": "10",
+      "current": "10.05",
+      "epsilon": "0.1",
+      "transmitted_delta": "0",
+      "restored": "10",
+      "numerically_equal": false
+    },
+    {
+      "previous": "1",
+      "current": "1.1",
+      "epsilon": "0.1",
+      "transmitted_delta": "0",
+      "restored": "1",
+      "numerically_equal": false
+    },
+    {
+      "previous": "10",
+      "current": "9.95",
+      "epsilon": "0.1",
+      "transmitted_delta": "0",
+      "restored": "10",
+      "numerically_equal": false
+    },
+    {
+      "previous": "10",
+      "current": "10.2",
+      "epsilon": "0.1",
+      "transmitted_delta": "1/5",
+      "restored": "51/5",
+      "numerically_equal": true
+    },
+    {
+      "previous": "10",
+      "current": "10.05",
+      "epsilon": "0",
+      "transmitted_delta": "1/20",
+      "restored": "201/20",
+      "numerically_equal": true
+    }
+  ],
+  "conclusion": "Positive thresholding is not universally exact numeric reconstruction; this does not assess every configuration or implementation."
+}

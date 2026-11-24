@@ -1,0 +1,8 @@
+[
+ {"id":"F1","source":"staff","destination":"web","protocol":"tcp","port":443},
+ {"id":"F2","source":"app","destination":"database","protocol":"tcp","port":5432},
+ {"id":"F3","source":"guest","destination":"database","protocol":"tcp","port":5432},
+ {"id":"F4","source":"staff","destination":"database","protocol":"tcp","port":5432},
+ {"id":"F5","source":"staff","destination":"web","protocol":"tcp","port":80},
+ {"id":"F6","source":"web","destination":"staff","protocol":"tcp","port":443}
+]

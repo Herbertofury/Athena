@@ -1,0 +1,45 @@
+{
+  "kind": "actual Chromium, localhost static app",
+  "started": "2026-11-07T08:52:46.091Z",
+  "checks": [
+    {
+      "name": "Learning opens real lesson, retains read state and notes",
+      "result": "pass"
+    },
+    {
+      "name": "Research loads actual catalog within the same document",
+      "result": "pass"
+    },
+    {
+      "name": "Research filters, shortlist and saved query survive workspace switch",
+      "result": "pass"
+    },
+    {
+      "name": "Media loads public source records without automatic provider requests",
+      "result": "pass"
+    },
+    {
+      "name": "Foundry is an explicit pending capability, not a missing private module",
+      "result": "pass"
+    },
+    {
+      "name": "Mobile learning and research fit viewport without page overflow",
+      "result": "pass"
+    }
+  ],
+  "limitations": [
+    "No actual provider playback or authenticated API tests",
+    "Feature Foundry intentionally excluded pending publication approval",
+    "No runtime speedup or complete parity claim"
+  ],
+  "errors": [],
+  "outsideRequests": [],
+  "browser": "151.0.7922.34",
+  "loadedAppSHA256": "b7048e50aa12748a4e250724b8e187fa9e4234ca5057ec78e4261184e6d74ad8",
+  "currentCheck": "Mobile learning and research fit viewport without page overflow",
+  "result": "pass",
+  "finished": "2026-11-07T08:52:49.212Z",
+  "source_run": "https://github.com/Herbertofury/Athena/actions/runs/42357294641",
+  "artifact_sha256": "51a6de5bc2d7508583ef653ab8d79c8d6025138d7b82ad2016556fc40b6d0d03",
+  "visual_review": "Research dark theme contrast defect found in retained screenshots; fixed separately, not covered by these functional checks."
+}

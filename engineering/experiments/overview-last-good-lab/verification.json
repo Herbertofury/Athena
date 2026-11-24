@@ -1,0 +1,22 @@
+{
+  "scope": "Generated corruption alongside retained public fixture jobs; actual HTTP plus controlled DOM; no native browser acceptance",
+  "baseline_commit": "e5531ed534043d81e193cf87db50aa166a8735df",
+  "new_baseline_test_failures": 2,
+  "focused_passes": 9,
+  "full_node_passes": 269,
+  "python_normal_passes": 237,
+  "python_optimized_passes": 237,
+  "rust_unit_passes": 140,
+  "rust_integration_passes": 9,
+  "clippy_all_targets": "passed",
+  "source_sha256": {
+    "apps/atlas-lab/ui/app.js": "54993055ab32dd01e77a84d7834c30c2f7254460802eaaffc1c377790c9837d8",
+    "tests/overview-last-good.test.mjs": "633b7fd59055c2263582c603f41d0e352613e9beafc7c1a00a7a8a0791fe2670",
+    "experiments/overview-last-good-lab/render.mjs": "75e55b3d73d2387f44db2041acaa6903fb036fc3d7864e294a042f16de4ee48c",
+    "experiments/overview-last-good-lab/verify_http.py": "d3f5157e1d9bce9b86cd5e095b875a78ac2b527315a194e4f0de088638f18e24",
+    "experiments/job-identity-lab/render-harness.mjs": "e012e36fb4ba0bac088885c06d100801c4b8782c6ce1a33b76181117bb276277"
+  },
+  "api_or_storage_format_changed": false,
+  "performance_improvement_claimed": false,
+  "harness_revision_note": "Final harness checks source size before hashing and records its own hash. Both original and final repaired runs are retained; fixture and application test semantics unchanged. Final harness also passed with Python optimization."
+}

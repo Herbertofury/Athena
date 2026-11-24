@@ -1,0 +1,47 @@
+{
+  "checked_at": "2026-10-27T10:37:14Z",
+  "code_commit": "34495c1ed86b2f00058d68e6fbfc8a40f6338dd5",
+  "source_module": "media.1e8cee967fc5cf08.js",
+  "scope": "Real documented public Bilibili player inside the sandboxed deployed Atlas iframe; observed through cloud browser DOM and explicit official controls",
+  "initial_players": 0,
+  "initial_loaded_images": 0,
+  "counts": [
+    5,
+    19,
+    19
+  ],
+  "iframe": {
+    "src": "https://player.bilibili.com/player.html?bvid=BV1B7411m7LV&autoplay=0&poster=1&danmaku=0",
+    "sandbox": "allow-scripts allow-same-origin allow-presentation",
+    "allow": "fullscreen; picture-in-picture"
+  },
+  "before_play": {
+    "autoplay": false,
+    "currentTime": 0,
+    "paused": true,
+    "readyState": 4
+  },
+  "after_play": {
+    "autoplay": false,
+    "currentTime": 0.235696,
+    "paused": false,
+    "readyState": 4
+  },
+  "after_pause": {
+    "autoplay": false,
+    "currentTime": 0.338497,
+    "paused": true,
+    "readyState": 4
+  },
+  "parent_label_during_observed_playback": "Official frame loaded. Use its own controls; this page cannot verify playback.",
+  "reload_frame_count": 1,
+  "after_unload_frame_count": 0,
+  "cards_after_unload": 5,
+  "later_frame_count": 0,
+  "late_load_event_after_unload": false,
+  "limitations": [
+    "Manual test observation, not an implemented cross-origin playback-state API",
+    "No complete gallery/caption/multipart or authenticated collection",
+    "No general platform performance or reliability claim"
+  ]
+}

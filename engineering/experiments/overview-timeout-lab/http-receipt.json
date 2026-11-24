@@ -1,0 +1,498 @@
+{
+  "checked_at": "2026-10-29T20:07:06.415287+00:00",
+  "scope": "real loopback archive reads, compiled assets, JavaScript reader and negative security controls; retained public and generated fixtures; no provider requests or native-browser claim",
+  "binary_sha256": "b8695142502ff1e42674e9a436fd171c79ab09d92653944e4dd3811dadac911d",
+  "harness_sha256": "d2563aa3d36a90cefa3c39e205ccc0ca089ccd33493812ea8cb59edd9a072bd4",
+  "checks": [
+    {
+      "name": "index.html status",
+      "observed": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "index.html exact bytes",
+      "observed": "6c10bd36fe52bdfbaa7b4decc4e9fda0054b8f2edd5b51d1f25a315ec62bbd0a",
+      "expected": "6c10bd36fe52bdfbaa7b4decc4e9fda0054b8f2edd5b51d1f25a315ec62bbd0a",
+      "passed": true
+    },
+    {
+      "name": "index.html no-store",
+      "observed": "no-store",
+      "expected": "no-store",
+      "passed": true
+    },
+    {
+      "name": "index.html nosniff",
+      "observed": "nosniff",
+      "expected": "nosniff",
+      "passed": true
+    },
+    {
+      "name": "index.html frame isolation",
+      "observed": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "app.js status",
+      "observed": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "app.js exact bytes",
+      "observed": "77d1932d207b028e41a2ad0c1f284032dac91e6e1269952cbabae8697019852a",
+      "expected": "77d1932d207b028e41a2ad0c1f284032dac91e6e1269952cbabae8697019852a",
+      "passed": true
+    },
+    {
+      "name": "app.js no-store",
+      "observed": "no-store",
+      "expected": "no-store",
+      "passed": true
+    },
+    {
+      "name": "app.js nosniff",
+      "observed": "nosniff",
+      "expected": "nosniff",
+      "passed": true
+    },
+    {
+      "name": "app.js frame isolation",
+      "observed": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "collection-input.mjs status",
+      "observed": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "collection-input.mjs exact bytes",
+      "observed": "0c5346c5b1fa3e3c1d17ecdcdab075b8437c341c1b1eea2c6cc502dcdc315b53",
+      "expected": "0c5346c5b1fa3e3c1d17ecdcdab075b8437c341c1b1eea2c6cc502dcdc315b53",
+      "passed": true
+    },
+    {
+      "name": "collection-input.mjs no-store",
+      "observed": "no-store",
+      "expected": "no-store",
+      "passed": true
+    },
+    {
+      "name": "collection-input.mjs nosniff",
+      "observed": "nosniff",
+      "expected": "nosniff",
+      "passed": true
+    },
+    {
+      "name": "collection-input.mjs frame isolation",
+      "observed": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "style.css status",
+      "observed": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "style.css exact bytes",
+      "observed": "6477abc25ea2c5c5ce3f11ad4f56cad403791449c0562c1fadfe9925db76522c",
+      "expected": "6477abc25ea2c5c5ce3f11ad4f56cad403791449c0562c1fadfe9925db76522c",
+      "passed": true
+    },
+    {
+      "name": "style.css no-store",
+      "observed": "no-store",
+      "expected": "no-store",
+      "passed": true
+    },
+    {
+      "name": "style.css nosniff",
+      "observed": "nosniff",
+      "expected": "nosniff",
+      "passed": true
+    },
+    {
+      "name": "style.css frame isolation",
+      "observed": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "archive-view.mjs status",
+      "observed": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "archive-view.mjs exact bytes",
+      "observed": "64a177caba0e3bbc89733769fa5755460a95a79b1686770270d94fb0e36a3057",
+      "expected": "64a177caba0e3bbc89733769fa5755460a95a79b1686770270d94fb0e36a3057",
+      "passed": true
+    },
+    {
+      "name": "archive-view.mjs no-store",
+      "observed": "no-store",
+      "expected": "no-store",
+      "passed": true
+    },
+    {
+      "name": "archive-view.mjs nosniff",
+      "observed": "nosniff",
+      "expected": "nosniff",
+      "passed": true
+    },
+    {
+      "name": "archive-view.mjs frame isolation",
+      "observed": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "spoofed Host rejected",
+      "observed": 403,
+      "expected": 403,
+      "passed": true
+    },
+    {
+      "name": "missing Origin rejected",
+      "observed": 403,
+      "expected": 403,
+      "passed": true
+    },
+    {
+      "name": "foreign Origin rejected",
+      "observed": 403,
+      "expected": 403,
+      "passed": true
+    },
+    {
+      "name": "missing request marker rejected",
+      "observed": 403,
+      "expected": 403,
+      "passed": true
+    },
+    {
+      "name": "invalid archive identity rejected",
+      "observed": 400,
+      "expected": 400,
+      "passed": true
+    },
+    {
+      "name": "invalid archive identity rejected",
+      "observed": 400,
+      "expected": 400,
+      "passed": true
+    },
+    {
+      "name": "invalid archive identity rejected",
+      "observed": 400,
+      "expected": 400,
+      "passed": true
+    },
+    {
+      "name": "invalid archive identity rejected",
+      "observed": 400,
+      "expected": 400,
+      "passed": true
+    },
+    {
+      "name": "unrecognized archive field rejected",
+      "observed": 422,
+      "expected": 422,
+      "passed": true
+    },
+    {
+      "name": "unrecognized archive field rejected",
+      "observed": 422,
+      "expected": 422,
+      "passed": true
+    },
+    {
+      "name": "malformed JSON rejected",
+      "observed": 400,
+      "expected": 400,
+      "passed": true
+    },
+    {
+      "name": "oversized request rejected",
+      "observed": 413,
+      "expected": 413,
+      "passed": true
+    },
+    {
+      "name": "overview status",
+      "observed": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "job count unchanged",
+      "observed": 6,
+      "expected": 6,
+      "passed": true
+    },
+    {
+      "name": "no pending provider jobs",
+      "observed": 0,
+      "expected": 0,
+      "passed": true
+    },
+    {
+      "name": "no cross-origin read grant",
+      "observed": false,
+      "expected": false,
+      "passed": true
+    },
+    {
+      "name": "compact receipt has canonical identity",
+      "observed": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "generation remains a string",
+      "observed": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "raw payload not copied into job output",
+      "observed": false,
+      "expected": false,
+      "passed": true
+    },
+    {
+      "name": "compact receipt has canonical identity",
+      "observed": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "generation remains a string",
+      "observed": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "raw payload not copied into job output",
+      "observed": false,
+      "expected": false,
+      "passed": true
+    },
+    {
+      "name": "compact receipt has canonical identity",
+      "observed": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "generation remains a string",
+      "observed": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "raw payload not copied into job output",
+      "observed": false,
+      "expected": false,
+      "passed": true
+    },
+    {
+      "name": "AANobbMI archive status",
+      "observed": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "AANobbMI exact source bytes",
+      "observed": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "AANobbMI bound identity",
+      "observed": "AANobbMI",
+      "expected": "AANobbMI",
+      "passed": true
+    },
+    {
+      "name": "AANobbMI source hash",
+      "observed": "80b9186e951352b4b265e20cf6e5f57c8646f11b09d6f3a1a8492046acfaf9c0",
+      "expected": "80b9186e951352b4b265e20cf6e5f57c8646f11b09d6f3a1a8492046acfaf9c0",
+      "passed": true
+    },
+    {
+      "name": "AANobbMI no-store",
+      "observed": "no-store",
+      "expected": "no-store",
+      "passed": true
+    },
+    {
+      "name": "YL57xq9U archive status",
+      "observed": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "YL57xq9U exact source bytes",
+      "observed": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "YL57xq9U bound identity",
+      "observed": "YL57xq9U",
+      "expected": "YL57xq9U",
+      "passed": true
+    },
+    {
+      "name": "YL57xq9U source hash",
+      "observed": "8d9ae282ea19d854f9f0911fac320a4af8d873a3228173e37e5001341afe2996",
+      "expected": "8d9ae282ea19d854f9f0911fac320a4af8d873a3228173e37e5001341afe2996",
+      "passed": true
+    },
+    {
+      "name": "YL57xq9U no-store",
+      "observed": "no-store",
+      "expected": "no-store",
+      "passed": true
+    },
+    {
+      "name": "gvQqBUqZ archive status",
+      "observed": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "gvQqBUqZ exact source bytes",
+      "observed": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "gvQqBUqZ bound identity",
+      "observed": "gvQqBUqZ",
+      "expected": "gvQqBUqZ",
+      "passed": true
+    },
+    {
+      "name": "gvQqBUqZ source hash",
+      "observed": "70080299d623bcd6fa857d09243752e6131377b8fa9cd3fd4da89bb33175caaa",
+      "expected": "70080299d623bcd6fa857d09243752e6131377b8fa9cd3fd4da89bb33175caaa",
+      "passed": true
+    },
+    {
+      "name": "gvQqBUqZ no-store",
+      "observed": "no-store",
+      "expected": "no-store",
+      "passed": true
+    },
+    {
+      "name": "large generation status",
+      "observed": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "large generation remains exact header string",
+      "observed": "9007199254740993",
+      "expected": "9007199254740993",
+      "passed": true
+    },
+    {
+      "name": "generated original bytes preserved",
+      "observed": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "sodium read rejection",
+      "observed": 400,
+      "expected": 400,
+      "passed": true
+    },
+    {
+      "name": "MISS0001 read rejection",
+      "observed": 404,
+      "expected": 404,
+      "passed": true
+    },
+    {
+      "name": "CORRUPT1 read rejection",
+      "observed": 422,
+      "expected": 422,
+      "passed": true
+    },
+    {
+      "name": "BIG00001 read rejection",
+      "observed": 422,
+      "expected": 422,
+      "passed": true
+    },
+    {
+      "name": "archive read Host guard",
+      "observed": 403,
+      "expected": 403,
+      "passed": true
+    }
+  ],
+  "completed": true,
+  "javascript_reader": {
+    "scope": "actual JavaScript reader against owned loopback server; no DOM/native-browser interaction or provider requests",
+    "harness_sha256": "5a66c52bc4bebdf7ff012532f4efc72f7e89ece72492842809fb9ddd1a2d18f6",
+    "reader_sha256": "64a177caba0e3bbc89733769fa5755460a95a79b1686770270d94fb0e36a3057",
+    "checks": [
+      {
+        "id": "AANobbMI",
+        "exact_byte_hash": true,
+        "text_reencodes_exactly": true,
+        "generation": "1",
+        "bytes": 12840
+      },
+      {
+        "id": "YL57xq9U",
+        "exact_byte_hash": true,
+        "text_reencodes_exactly": true,
+        "generation": "2",
+        "bytes": 7267
+      },
+      {
+        "id": "gvQqBUqZ",
+        "exact_byte_hash": true,
+        "text_reencodes_exactly": true,
+        "generation": "3",
+        "bytes": 6200
+      },
+      {
+        "id": "TEST0001",
+        "exact_byte_hash": true,
+        "text_reencodes_exactly": true,
+        "generation": "9007199254740993",
+        "bytes": 217
+      },
+      {
+        "id": "MISS0001",
+        "last_good_retained": true
+      },
+      {
+        "id": "CORRUPT1",
+        "last_good_retained": true
+      },
+      {
+        "id": "BIG00001",
+        "last_good_retained": true
+      },
+      {
+        "cancelled_request_retained_last_good": true
+      }
+    ],
+    "completed": true
+  }
+}

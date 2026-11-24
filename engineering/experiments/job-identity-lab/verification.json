@@ -1,0 +1,24 @@
+{
+  "baseline_commit": "d488555240f1ceb214a8761a2abe899e4aedd1a2",
+  "legacy_fields_and_all_results_equal": true,
+  "baseline_candidate_complete_output_equal": true,
+  "before_cards": 5,
+  "expected_cards": 6,
+  "repaired_cards": 6,
+  "candidate_cards": 6,
+  "before_node_failures": 3,
+  "after_node_tests": 4,
+  "rust_unit": 134,
+  "rust_integration": 9,
+  "node_tests": 262,
+  "python_tests_normal": 237,
+  "python_tests_optimized": 237,
+  "clippy_all_targets": "passed",
+  "scope": "Actual Rust HTTP and served application renderer in controlled DOM; generated high-ID boundary, not native paint or latency acceptance",
+  "sources": {
+    "apps/atlas-lab/src/jobs.rs": "55310c0848bf0385c17e7af4a6ce28d3565a007063f7937195d54cfc5b79d0d2",
+    "apps/atlas-lab/ui/app.js": "c1c3fc0b6616bd935051d1bd7ac3bb1fe3300b05ef087d20ab4a15e47c17a600",
+    "apps/atlas-lab/ui/collection-input.mjs": "741a0aeb30465b19391358a488a0e019dc9a6aa300088c9addb7388ec23c7ffe",
+    "tests/job-identity.test.mjs": "f4ac542009f1a4d7d68644199af85d28705761cb459aea601f66d9636afc9ca9"
+  }
+}

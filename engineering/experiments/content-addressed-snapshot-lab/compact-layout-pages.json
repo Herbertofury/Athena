@@ -1,0 +1,422 @@
+{
+  "scope": "Read-only page accounting of Rust-generated fixture databases; not a timing benchmark",
+  "rows": [
+    {
+      "workload": "retained",
+      "lane": "baseline",
+      "database_bytes": 73728,
+      "database_sha256": "bdc341ac3c3e95494c676929e7e0db399c7945de051bbccb657ed124b22325ce",
+      "inspection_sqlite": "3.53.1",
+      "tables": [
+        {
+          "name": "snapshots",
+          "pages": 15,
+          "bytes": 61440,
+          "payload_bytes": 52260,
+          "unused_bytes": 9041
+        },
+        {
+          "name": "sqlite_schema",
+          "pages": 1,
+          "bytes": 4096,
+          "payload_bytes": 851,
+          "unused_bytes": 3123
+        },
+        {
+          "name": "latest_snapshot",
+          "pages": 1,
+          "bytes": 4096,
+          "payload_bytes": 173,
+          "unused_bytes": 3900
+        },
+        {
+          "name": "collection_attempts",
+          "pages": 1,
+          "bytes": 4096,
+          "payload_bytes": 309,
+          "unused_bytes": 3759
+        }
+      ]
+    },
+    {
+      "workload": "retained",
+      "lane": "addressed",
+      "database_bytes": 65536,
+      "database_sha256": "c086dc9c23dcc262d9dbb90a0a0828b4d81bf76ee11e13a4155abd2fb7344346",
+      "inspection_sqlite": "3.53.1",
+      "tables": [
+        {
+          "name": "payloads",
+          "pages": 11,
+          "bytes": 45056,
+          "payload_bytes": 39425,
+          "unused_bytes": 5528
+        },
+        {
+          "name": "sqlite_schema",
+          "pages": 1,
+          "bytes": 4096,
+          "payload_bytes": 932,
+          "unused_bytes": 3033
+        },
+        {
+          "name": "sqlite_autoindex_payloads_1",
+          "pages": 1,
+          "bytes": 4096,
+          "payload_bytes": 275,
+          "unused_bytes": 3801
+        },
+        {
+          "name": "snapshots",
+          "pages": 1,
+          "bytes": 4096,
+          "payload_bytes": 590,
+          "unused_bytes": 3478
+        },
+        {
+          "name": "latest_snapshot",
+          "pages": 1,
+          "bytes": 4096,
+          "payload_bytes": 173,
+          "unused_bytes": 3900
+        },
+        {
+          "name": "collection_attempts",
+          "pages": 1,
+          "bytes": 4096,
+          "payload_bytes": 309,
+          "unused_bytes": 3759
+        }
+      ]
+    },
+    {
+      "workload": "retained",
+      "lane": "compact",
+      "database_bytes": 65536,
+      "database_sha256": "08204c3b6b19aea18d01883ae78ac27234e7af0a5d73d1d80ad583baa3d87b97",
+      "inspection_sqlite": "3.53.1",
+      "tables": [
+        {
+          "name": "payloads",
+          "pages": 11,
+          "bytes": 45056,
+          "payload_bytes": 39297,
+          "unused_bytes": 5656
+        },
+        {
+          "name": "sqlite_schema",
+          "pages": 1,
+          "bytes": 4096,
+          "payload_bytes": 974,
+          "unused_bytes": 2991
+        },
+        {
+          "name": "sqlite_autoindex_payloads_1",
+          "pages": 1,
+          "bytes": 4096,
+          "payload_bytes": 143,
+          "unused_bytes": 3933
+        },
+        {
+          "name": "snapshots",
+          "pages": 1,
+          "bytes": 4096,
+          "payload_bytes": 268,
+          "unused_bytes": 3800
+        },
+        {
+          "name": "latest_snapshot",
+          "pages": 1,
+          "bytes": 4096,
+          "payload_bytes": 173,
+          "unused_bytes": 3900
+        },
+        {
+          "name": "collection_attempts",
+          "pages": 1,
+          "bytes": 4096,
+          "payload_bytes": 309,
+          "unused_bytes": 3759
+        }
+      ]
+    },
+    {
+      "workload": "duplicate_replay",
+      "lane": "baseline",
+      "database_bytes": 880640,
+      "database_sha256": "78fadea91f389be619a81bf9d06b11edf3616e648bf64301cba74b7a98293be4",
+      "inspection_sqlite": "3.53.1",
+      "tables": [
+        {
+          "name": "snapshots",
+          "pages": 210,
+          "bytes": 860160,
+          "payload_bytes": 836160,
+          "unused_bytes": 22076
+        },
+        {
+          "name": "collection_attempts",
+          "pages": 3,
+          "bytes": 12288,
+          "payload_bytes": 4959,
+          "unused_bytes": 6974
+        },
+        {
+          "name": "sqlite_schema",
+          "pages": 1,
+          "bytes": 4096,
+          "payload_bytes": 851,
+          "unused_bytes": 3123
+        },
+        {
+          "name": "latest_snapshot",
+          "pages": 1,
+          "bytes": 4096,
+          "payload_bytes": 2798,
+          "unused_bytes": 1050
+        }
+      ]
+    },
+    {
+      "workload": "duplicate_replay",
+      "lane": "addressed",
+      "database_bytes": 86016,
+      "database_sha256": "f790bdf0524933fce40defd46bf54133ec587c10a86a97f05fb10bffd7372d35",
+      "inspection_sqlite": "3.53.1",
+      "tables": [
+        {
+          "name": "payloads",
+          "pages": 11,
+          "bytes": 45056,
+          "payload_bytes": 39425,
+          "unused_bytes": 5528
+        },
+        {
+          "name": "snapshots",
+          "pages": 4,
+          "bytes": 16384,
+          "payload_bytes": 9440,
+          "unused_bytes": 6574
+        },
+        {
+          "name": "collection_attempts",
+          "pages": 3,
+          "bytes": 12288,
+          "payload_bytes": 4959,
+          "unused_bytes": 6974
+        },
+        {
+          "name": "sqlite_schema",
+          "pages": 1,
+          "bytes": 4096,
+          "payload_bytes": 932,
+          "unused_bytes": 3033
+        },
+        {
+          "name": "sqlite_autoindex_payloads_1",
+          "pages": 1,
+          "bytes": 4096,
+          "payload_bytes": 275,
+          "unused_bytes": 3801
+        },
+        {
+          "name": "latest_snapshot",
+          "pages": 1,
+          "bytes": 4096,
+          "payload_bytes": 2798,
+          "unused_bytes": 1050
+        }
+      ]
+    },
+    {
+      "workload": "duplicate_replay",
+      "lane": "compact",
+      "database_bytes": 81920,
+      "database_sha256": "eb60db3066caf1a287d65e2172987a3857d96399acbd1799d803b43a946af843",
+      "inspection_sqlite": "3.53.1",
+      "tables": [
+        {
+          "name": "payloads",
+          "pages": 11,
+          "bytes": 45056,
+          "payload_bytes": 39297,
+          "unused_bytes": 5656
+        },
+        {
+          "name": "snapshots",
+          "pages": 3,
+          "bytes": 12288,
+          "payload_bytes": 4288,
+          "unused_bytes": 7645
+        },
+        {
+          "name": "collection_attempts",
+          "pages": 3,
+          "bytes": 12288,
+          "payload_bytes": 4959,
+          "unused_bytes": 6974
+        },
+        {
+          "name": "sqlite_schema",
+          "pages": 1,
+          "bytes": 4096,
+          "payload_bytes": 974,
+          "unused_bytes": 2991
+        },
+        {
+          "name": "sqlite_autoindex_payloads_1",
+          "pages": 1,
+          "bytes": 4096,
+          "payload_bytes": 143,
+          "unused_bytes": 3933
+        },
+        {
+          "name": "latest_snapshot",
+          "pages": 1,
+          "bytes": 4096,
+          "payload_bytes": 2798,
+          "unused_bytes": 1050
+        }
+      ]
+    },
+    {
+      "workload": "unique_augmented_replay",
+      "lane": "baseline",
+      "database_bytes": 880640,
+      "database_sha256": "477cf317055b38d61f2ba41dcd26f1a69617122c81a4717d1cee1907dd86ca4e",
+      "inspection_sqlite": "3.53.1",
+      "tables": [
+        {
+          "name": "snapshots",
+          "pages": 210,
+          "bytes": 860160,
+          "payload_bytes": 838870,
+          "unused_bytes": 19366
+        },
+        {
+          "name": "collection_attempts",
+          "pages": 3,
+          "bytes": 12288,
+          "payload_bytes": 4959,
+          "unused_bytes": 6974
+        },
+        {
+          "name": "sqlite_schema",
+          "pages": 1,
+          "bytes": 4096,
+          "payload_bytes": 851,
+          "unused_bytes": 3123
+        },
+        {
+          "name": "latest_snapshot",
+          "pages": 1,
+          "bytes": 4096,
+          "payload_bytes": 2798,
+          "unused_bytes": 1050
+        }
+      ]
+    },
+    {
+      "workload": "unique_augmented_replay",
+      "lane": "addressed",
+      "database_bytes": 909312,
+      "database_sha256": "66af5c0515332068a90a73566eabfc0911329638b13bfa7a4054d938b017fcc4",
+      "inspection_sqlite": "3.53.1",
+      "tables": [
+        {
+          "name": "payloads",
+          "pages": 210,
+          "bytes": 860160,
+          "payload_bytes": 840070,
+          "unused_bytes": 18166
+        },
+        {
+          "name": "snapshots",
+          "pages": 4,
+          "bytes": 16384,
+          "payload_bytes": 9440,
+          "unused_bytes": 6574
+        },
+        {
+          "name": "sqlite_autoindex_payloads_1",
+          "pages": 3,
+          "bytes": 12288,
+          "payload_bytes": 5519,
+          "unused_bytes": 6497
+        },
+        {
+          "name": "collection_attempts",
+          "pages": 3,
+          "bytes": 12288,
+          "payload_bytes": 4959,
+          "unused_bytes": 6974
+        },
+        {
+          "name": "sqlite_schema",
+          "pages": 1,
+          "bytes": 4096,
+          "payload_bytes": 932,
+          "unused_bytes": 3033
+        },
+        {
+          "name": "latest_snapshot",
+          "pages": 1,
+          "bytes": 4096,
+          "payload_bytes": 2798,
+          "unused_bytes": 1050
+        }
+      ]
+    },
+    {
+      "workload": "unique_augmented_replay",
+      "lane": "compact",
+      "database_bytes": 897024,
+      "database_sha256": "4892534d004c0383b9280a5b0756dec0f0ad8021ec29c3362c7953ffb9903cf9",
+      "inspection_sqlite": "3.53.1",
+      "tables": [
+        {
+          "name": "payloads",
+          "pages": 210,
+          "bytes": 860160,
+          "payload_bytes": 837510,
+          "unused_bytes": 20726
+        },
+        {
+          "name": "snapshots",
+          "pages": 3,
+          "bytes": 12288,
+          "payload_bytes": 4319,
+          "unused_bytes": 7614
+        },
+        {
+          "name": "collection_attempts",
+          "pages": 3,
+          "bytes": 12288,
+          "payload_bytes": 4959,
+          "unused_bytes": 6974
+        },
+        {
+          "name": "sqlite_schema",
+          "pages": 1,
+          "bytes": 4096,
+          "payload_bytes": 974,
+          "unused_bytes": 2991
+        },
+        {
+          "name": "sqlite_autoindex_payloads_1",
+          "pages": 1,
+          "bytes": 4096,
+          "payload_bytes": 2879,
+          "unused_bytes": 969
+        },
+        {
+          "name": "latest_snapshot",
+          "pages": 1,
+          "bytes": 4096,
+          "payload_bytes": 2798,
+          "unused_bytes": 1050
+        }
+      ]
+    }
+  ]
+}

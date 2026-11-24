@@ -1,0 +1,372 @@
+{
+  "additional_top_level_fields": [
+    "additional_categories",
+    "approved",
+    "body_url",
+    "categories",
+    "client_side",
+    "color",
+    "discord_url",
+    "donation_urls",
+    "downloads",
+    "environment",
+    "followers",
+    "game_versions",
+    "issues_url",
+    "license",
+    "loaders",
+    "moderator_message",
+    "monetization_status",
+    "organization",
+    "published",
+    "queued",
+    "raw_icon_url",
+    "requested_status",
+    "server_side",
+    "source_url",
+    "status",
+    "team",
+    "thread_id",
+    "updated",
+    "wiki_url"
+  ],
+  "database_bytes": {
+    "complete": 147456,
+    "projection": 98304
+  },
+  "failed_refresh_retained_last_good": true,
+  "limitations": [
+    "Outputs differ in coverage; timings are costs, not a fair speed ranking",
+    "One local filesystem, sequential paired requests; not target hardware throughput",
+    "No power-loss, native UI, peak-memory, authenticated or exhaustive platform acceptance"
+  ],
+  "project_id": "gvQqBUqZ",
+  "reopened_exact_wire_equal": true,
+  "samples": [
+    {
+      "complete_existing_projection_equal": true,
+      "end_to_end_ns": 1570315,
+      "exact_original_wire_retained": false,
+      "lane": "projection",
+      "parse_ns": 35651,
+      "round": 0,
+      "warmup": true,
+      "write_and_commit_ns": 1531993
+    },
+    {
+      "complete_existing_projection_equal": true,
+      "end_to_end_ns": 1316532,
+      "exact_original_wire_retained": true,
+      "lane": "complete",
+      "parse_ns": 19910,
+      "round": 0,
+      "warmup": true,
+      "write_and_commit_ns": 1294098
+    },
+    {
+      "complete_existing_projection_equal": true,
+      "end_to_end_ns": 1338028,
+      "exact_original_wire_retained": true,
+      "lane": "complete",
+      "parse_ns": 19118,
+      "round": 1,
+      "warmup": true,
+      "write_and_commit_ns": 1316563
+    },
+    {
+      "complete_existing_projection_equal": true,
+      "end_to_end_ns": 1450157,
+      "exact_original_wire_retained": false,
+      "lane": "projection",
+      "parse_ns": 19206,
+      "round": 1,
+      "warmup": true,
+      "write_and_commit_ns": 1428760
+    },
+    {
+      "complete_existing_projection_equal": true,
+      "end_to_end_ns": 1494070,
+      "exact_original_wire_retained": false,
+      "lane": "projection",
+      "parse_ns": 17145,
+      "round": 2,
+      "warmup": true,
+      "write_and_commit_ns": 1474754
+    },
+    {
+      "complete_existing_projection_equal": true,
+      "end_to_end_ns": 1669582,
+      "exact_original_wire_retained": true,
+      "lane": "complete",
+      "parse_ns": 19386,
+      "round": 2,
+      "warmup": true,
+      "write_and_commit_ns": 1646036
+    },
+    {
+      "complete_existing_projection_equal": true,
+      "end_to_end_ns": 1184940,
+      "exact_original_wire_retained": true,
+      "lane": "complete",
+      "parse_ns": 48722,
+      "round": 3,
+      "warmup": true,
+      "write_and_commit_ns": 1133749
+    },
+    {
+      "complete_existing_projection_equal": true,
+      "end_to_end_ns": 1709380,
+      "exact_original_wire_retained": false,
+      "lane": "projection",
+      "parse_ns": 19217,
+      "round": 3,
+      "warmup": true,
+      "write_and_commit_ns": 1687905
+    },
+    {
+      "complete_existing_projection_equal": true,
+      "end_to_end_ns": 1526436,
+      "exact_original_wire_retained": false,
+      "lane": "projection",
+      "parse_ns": 20095,
+      "round": 4,
+      "warmup": false,
+      "write_and_commit_ns": 1503691
+    },
+    {
+      "complete_existing_projection_equal": true,
+      "end_to_end_ns": 1213886,
+      "exact_original_wire_retained": true,
+      "lane": "complete",
+      "parse_ns": 23770,
+      "round": 4,
+      "warmup": false,
+      "write_and_commit_ns": 1185381
+    },
+    {
+      "complete_existing_projection_equal": true,
+      "end_to_end_ns": 1422702,
+      "exact_original_wire_retained": true,
+      "lane": "complete",
+      "parse_ns": 17973,
+      "round": 5,
+      "warmup": false,
+      "write_and_commit_ns": 1401951
+    },
+    {
+      "complete_existing_projection_equal": true,
+      "end_to_end_ns": 1696675,
+      "exact_original_wire_retained": false,
+      "lane": "projection",
+      "parse_ns": 19834,
+      "round": 5,
+      "warmup": false,
+      "write_and_commit_ns": 1674459
+    },
+    {
+      "complete_existing_projection_equal": true,
+      "end_to_end_ns": 2161430,
+      "exact_original_wire_retained": false,
+      "lane": "projection",
+      "parse_ns": 20806,
+      "round": 6,
+      "warmup": false,
+      "write_and_commit_ns": 2137761
+    },
+    {
+      "complete_existing_projection_equal": true,
+      "end_to_end_ns": 1991515,
+      "exact_original_wire_retained": true,
+      "lane": "complete",
+      "parse_ns": 24238,
+      "round": 6,
+      "warmup": false,
+      "write_and_commit_ns": 1962013
+    },
+    {
+      "complete_existing_projection_equal": true,
+      "end_to_end_ns": 2119440,
+      "exact_original_wire_retained": true,
+      "lane": "complete",
+      "parse_ns": 21804,
+      "round": 7,
+      "warmup": false,
+      "write_and_commit_ns": 2094127
+    },
+    {
+      "complete_existing_projection_equal": true,
+      "end_to_end_ns": 1908418,
+      "exact_original_wire_retained": false,
+      "lane": "projection",
+      "parse_ns": 19064,
+      "round": 7,
+      "warmup": false,
+      "write_and_commit_ns": 1886769
+    },
+    {
+      "complete_existing_projection_equal": true,
+      "end_to_end_ns": 1755482,
+      "exact_original_wire_retained": false,
+      "lane": "projection",
+      "parse_ns": 195364,
+      "round": 8,
+      "warmup": false,
+      "write_and_commit_ns": 1499383
+    },
+    {
+      "complete_existing_projection_equal": true,
+      "end_to_end_ns": 1777616,
+      "exact_original_wire_retained": true,
+      "lane": "complete",
+      "parse_ns": 18072,
+      "round": 8,
+      "warmup": false,
+      "write_and_commit_ns": 1756361
+    },
+    {
+      "complete_existing_projection_equal": true,
+      "end_to_end_ns": 1614302,
+      "exact_original_wire_retained": true,
+      "lane": "complete",
+      "parse_ns": 20072,
+      "round": 9,
+      "warmup": false,
+      "write_and_commit_ns": 1590812
+    },
+    {
+      "complete_existing_projection_equal": true,
+      "end_to_end_ns": 1352702,
+      "exact_original_wire_retained": false,
+      "lane": "projection",
+      "parse_ns": 18940,
+      "round": 9,
+      "warmup": false,
+      "write_and_commit_ns": 1331438
+    },
+    {
+      "complete_existing_projection_equal": true,
+      "end_to_end_ns": 2117980,
+      "exact_original_wire_retained": false,
+      "lane": "projection",
+      "parse_ns": 21157,
+      "round": 10,
+      "warmup": false,
+      "write_and_commit_ns": 2093981
+    },
+    {
+      "complete_existing_projection_equal": true,
+      "end_to_end_ns": 1427782,
+      "exact_original_wire_retained": true,
+      "lane": "complete",
+      "parse_ns": 20625,
+      "round": 10,
+      "warmup": false,
+      "write_and_commit_ns": 1403970
+    },
+    {
+      "complete_existing_projection_equal": true,
+      "end_to_end_ns": 1614696,
+      "exact_original_wire_retained": true,
+      "lane": "complete",
+      "parse_ns": 19979,
+      "round": 11,
+      "warmup": false,
+      "write_and_commit_ns": 1591650
+    },
+    {
+      "complete_existing_projection_equal": true,
+      "end_to_end_ns": 1271849,
+      "exact_original_wire_retained": false,
+      "lane": "projection",
+      "parse_ns": 20831,
+      "round": 11,
+      "warmup": false,
+      "write_and_commit_ns": 1248609
+    },
+    {
+      "complete_existing_projection_equal": true,
+      "end_to_end_ns": 1490075,
+      "exact_original_wire_retained": false,
+      "lane": "projection",
+      "parse_ns": 21455,
+      "round": 12,
+      "warmup": false,
+      "write_and_commit_ns": 1465622
+    },
+    {
+      "complete_existing_projection_equal": true,
+      "end_to_end_ns": 1882614,
+      "exact_original_wire_retained": true,
+      "lane": "complete",
+      "parse_ns": 24074,
+      "round": 12,
+      "warmup": false,
+      "write_and_commit_ns": 1855555
+    },
+    {
+      "complete_existing_projection_equal": true,
+      "end_to_end_ns": 1883341,
+      "exact_original_wire_retained": true,
+      "lane": "complete",
+      "parse_ns": 21094,
+      "round": 13,
+      "warmup": false,
+      "write_and_commit_ns": 1859303
+    },
+    {
+      "complete_existing_projection_equal": true,
+      "end_to_end_ns": 1658175,
+      "exact_original_wire_retained": false,
+      "lane": "projection",
+      "parse_ns": 18951,
+      "round": 13,
+      "warmup": false,
+      "write_and_commit_ns": 1636786
+    },
+    {
+      "complete_existing_projection_equal": true,
+      "end_to_end_ns": 1714249,
+      "exact_original_wire_retained": false,
+      "lane": "projection",
+      "parse_ns": 21343,
+      "round": 14,
+      "warmup": false,
+      "write_and_commit_ns": 1690237
+    },
+    {
+      "complete_existing_projection_equal": true,
+      "end_to_end_ns": 1344470,
+      "exact_original_wire_retained": true,
+      "lane": "complete",
+      "parse_ns": 20800,
+      "round": 14,
+      "warmup": false,
+      "write_and_commit_ns": 1321123
+    },
+    {
+      "complete_existing_projection_equal": true,
+      "end_to_end_ns": 1869298,
+      "exact_original_wire_retained": true,
+      "lane": "complete",
+      "parse_ns": 19796,
+      "round": 15,
+      "warmup": false,
+      "write_and_commit_ns": 1846165
+    },
+    {
+      "complete_existing_projection_equal": true,
+      "end_to_end_ns": 2020580,
+      "exact_original_wire_retained": false,
+      "lane": "projection",
+      "parse_ns": 18563,
+      "round": 15,
+      "warmup": false,
+      "write_and_commit_ns": 1998973
+    }
+  ],
+  "snapshot_write_policy": "Existing SnapshotStore synchronous FULL, atomic snapshot/attempt transaction",
+  "source_bytes": 6200,
+  "source_mode": "retained public response; no new provider request",
+  "source_sha256": "70080299d623bcd6fa857d09243752e6131377b8fa9cd3fd4da89bb33175caaa",
+  "typed_projection_bytes": 4830
+}

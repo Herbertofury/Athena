@@ -1,0 +1,5 @@
+{
+ "state":{"system":"Cedar Queue, fictional","configured_workers":20,"effective_workers":2,"config_result":"rejected out-of-range workers; last good retained","worker_probe":"READY then PONG","import_result":"insufficient planned staging capacity","data_store":"synthetic temporary database; no corruption evidence supplied"},
+ "events":[{"job_id":"job-001","event":"accepted"},{"job_id":"job-001","event":"started"},{"job_id":"job-002","event":"accepted"},{"job_id":"job-002","event":"started"}],
+ "receipts":["job-001"]
+}

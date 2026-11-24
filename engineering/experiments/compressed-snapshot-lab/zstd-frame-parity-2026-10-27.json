@@ -1,0 +1,397 @@
+{
+  "scope": "per-record and reused-context Zstd frames on tested corpus only",
+  "checks": [
+    {
+      "run": "reused-context-run",
+      "repeat": 1,
+      "round": 0,
+      "rows": 6,
+      "compressed_frames_equal": true
+    },
+    {
+      "run": "reused-context-run",
+      "repeat": 1,
+      "round": 1,
+      "rows": 6,
+      "compressed_frames_equal": true
+    },
+    {
+      "run": "reused-context-run",
+      "repeat": 1,
+      "round": 2,
+      "rows": 6,
+      "compressed_frames_equal": true
+    },
+    {
+      "run": "reused-context-run",
+      "repeat": 1,
+      "round": 3,
+      "rows": 6,
+      "compressed_frames_equal": true
+    },
+    {
+      "run": "reused-context-run",
+      "repeat": 1,
+      "round": 4,
+      "rows": 6,
+      "compressed_frames_equal": true
+    },
+    {
+      "run": "reused-context-run",
+      "repeat": 1,
+      "round": 5,
+      "rows": 6,
+      "compressed_frames_equal": true
+    },
+    {
+      "run": "reused-context-run",
+      "repeat": 1,
+      "round": 6,
+      "rows": 6,
+      "compressed_frames_equal": true
+    },
+    {
+      "run": "reused-context-run",
+      "repeat": 32,
+      "round": 0,
+      "rows": 192,
+      "compressed_frames_equal": true
+    },
+    {
+      "run": "reused-context-run",
+      "repeat": 32,
+      "round": 1,
+      "rows": 192,
+      "compressed_frames_equal": true
+    },
+    {
+      "run": "reused-context-run",
+      "repeat": 32,
+      "round": 2,
+      "rows": 192,
+      "compressed_frames_equal": true
+    },
+    {
+      "run": "reused-context-run",
+      "repeat": 32,
+      "round": 3,
+      "rows": 192,
+      "compressed_frames_equal": true
+    },
+    {
+      "run": "reused-context-run",
+      "repeat": 32,
+      "round": 4,
+      "rows": 192,
+      "compressed_frames_equal": true
+    },
+    {
+      "run": "reused-context-run",
+      "repeat": 32,
+      "round": 5,
+      "rows": 192,
+      "compressed_frames_equal": true
+    },
+    {
+      "run": "reused-context-run",
+      "repeat": 32,
+      "round": 6,
+      "rows": 192,
+      "compressed_frames_equal": true
+    },
+    {
+      "run": "reused-context-repeat",
+      "repeat": 1,
+      "round": 0,
+      "rows": 6,
+      "compressed_frames_equal": true
+    },
+    {
+      "run": "reused-context-repeat",
+      "repeat": 1,
+      "round": 1,
+      "rows": 6,
+      "compressed_frames_equal": true
+    },
+    {
+      "run": "reused-context-repeat",
+      "repeat": 1,
+      "round": 2,
+      "rows": 6,
+      "compressed_frames_equal": true
+    },
+    {
+      "run": "reused-context-repeat",
+      "repeat": 1,
+      "round": 3,
+      "rows": 6,
+      "compressed_frames_equal": true
+    },
+    {
+      "run": "reused-context-repeat",
+      "repeat": 1,
+      "round": 4,
+      "rows": 6,
+      "compressed_frames_equal": true
+    },
+    {
+      "run": "reused-context-repeat",
+      "repeat": 1,
+      "round": 5,
+      "rows": 6,
+      "compressed_frames_equal": true
+    },
+    {
+      "run": "reused-context-repeat",
+      "repeat": 1,
+      "round": 6,
+      "rows": 6,
+      "compressed_frames_equal": true
+    },
+    {
+      "run": "reused-context-repeat",
+      "repeat": 32,
+      "round": 0,
+      "rows": 192,
+      "compressed_frames_equal": true
+    },
+    {
+      "run": "reused-context-repeat",
+      "repeat": 32,
+      "round": 1,
+      "rows": 192,
+      "compressed_frames_equal": true
+    },
+    {
+      "run": "reused-context-repeat",
+      "repeat": 32,
+      "round": 2,
+      "rows": 192,
+      "compressed_frames_equal": true
+    },
+    {
+      "run": "reused-context-repeat",
+      "repeat": 32,
+      "round": 3,
+      "rows": 192,
+      "compressed_frames_equal": true
+    },
+    {
+      "run": "reused-context-repeat",
+      "repeat": 32,
+      "round": 4,
+      "rows": 192,
+      "compressed_frames_equal": true
+    },
+    {
+      "run": "reused-context-repeat",
+      "repeat": 32,
+      "round": 5,
+      "rows": 192,
+      "compressed_frames_equal": true
+    },
+    {
+      "run": "reused-context-repeat",
+      "repeat": 32,
+      "round": 6,
+      "rows": 192,
+      "compressed_frames_equal": true
+    },
+    {
+      "run": "four-codec-run",
+      "repeat": 1,
+      "round": 0,
+      "rows": 6,
+      "compressed_frames_equal": true
+    },
+    {
+      "run": "four-codec-run",
+      "repeat": 1,
+      "round": 1,
+      "rows": 6,
+      "compressed_frames_equal": true
+    },
+    {
+      "run": "four-codec-run",
+      "repeat": 1,
+      "round": 2,
+      "rows": 6,
+      "compressed_frames_equal": true
+    },
+    {
+      "run": "four-codec-run",
+      "repeat": 1,
+      "round": 3,
+      "rows": 6,
+      "compressed_frames_equal": true
+    },
+    {
+      "run": "four-codec-run",
+      "repeat": 1,
+      "round": 4,
+      "rows": 6,
+      "compressed_frames_equal": true
+    },
+    {
+      "run": "four-codec-run",
+      "repeat": 1,
+      "round": 5,
+      "rows": 6,
+      "compressed_frames_equal": true
+    },
+    {
+      "run": "four-codec-run",
+      "repeat": 1,
+      "round": 6,
+      "rows": 6,
+      "compressed_frames_equal": true
+    },
+    {
+      "run": "four-codec-run",
+      "repeat": 32,
+      "round": 0,
+      "rows": 192,
+      "compressed_frames_equal": true
+    },
+    {
+      "run": "four-codec-run",
+      "repeat": 32,
+      "round": 1,
+      "rows": 192,
+      "compressed_frames_equal": true
+    },
+    {
+      "run": "four-codec-run",
+      "repeat": 32,
+      "round": 2,
+      "rows": 192,
+      "compressed_frames_equal": true
+    },
+    {
+      "run": "four-codec-run",
+      "repeat": 32,
+      "round": 3,
+      "rows": 192,
+      "compressed_frames_equal": true
+    },
+    {
+      "run": "four-codec-run",
+      "repeat": 32,
+      "round": 4,
+      "rows": 192,
+      "compressed_frames_equal": true
+    },
+    {
+      "run": "four-codec-run",
+      "repeat": 32,
+      "round": 5,
+      "rows": 192,
+      "compressed_frames_equal": true
+    },
+    {
+      "run": "four-codec-run",
+      "repeat": 32,
+      "round": 6,
+      "rows": 192,
+      "compressed_frames_equal": true
+    },
+    {
+      "run": "four-codec-repeat",
+      "repeat": 1,
+      "round": 0,
+      "rows": 6,
+      "compressed_frames_equal": true
+    },
+    {
+      "run": "four-codec-repeat",
+      "repeat": 1,
+      "round": 1,
+      "rows": 6,
+      "compressed_frames_equal": true
+    },
+    {
+      "run": "four-codec-repeat",
+      "repeat": 1,
+      "round": 2,
+      "rows": 6,
+      "compressed_frames_equal": true
+    },
+    {
+      "run": "four-codec-repeat",
+      "repeat": 1,
+      "round": 3,
+      "rows": 6,
+      "compressed_frames_equal": true
+    },
+    {
+      "run": "four-codec-repeat",
+      "repeat": 1,
+      "round": 4,
+      "rows": 6,
+      "compressed_frames_equal": true
+    },
+    {
+      "run": "four-codec-repeat",
+      "repeat": 1,
+      "round": 5,
+      "rows": 6,
+      "compressed_frames_equal": true
+    },
+    {
+      "run": "four-codec-repeat",
+      "repeat": 1,
+      "round": 6,
+      "rows": 6,
+      "compressed_frames_equal": true
+    },
+    {
+      "run": "four-codec-repeat",
+      "repeat": 32,
+      "round": 0,
+      "rows": 192,
+      "compressed_frames_equal": true
+    },
+    {
+      "run": "four-codec-repeat",
+      "repeat": 32,
+      "round": 1,
+      "rows": 192,
+      "compressed_frames_equal": true
+    },
+    {
+      "run": "four-codec-repeat",
+      "repeat": 32,
+      "round": 2,
+      "rows": 192,
+      "compressed_frames_equal": true
+    },
+    {
+      "run": "four-codec-repeat",
+      "repeat": 32,
+      "round": 3,
+      "rows": 192,
+      "compressed_frames_equal": true
+    },
+    {
+      "run": "four-codec-repeat",
+      "repeat": 32,
+      "round": 4,
+      "rows": 192,
+      "compressed_frames_equal": true
+    },
+    {
+      "run": "four-codec-repeat",
+      "repeat": 32,
+      "round": 5,
+      "rows": 192,
+      "compressed_frames_equal": true
+    },
+    {
+      "run": "four-codec-repeat",
+      "repeat": 32,
+      "round": 6,
+      "rows": 192,
+      "compressed_frames_equal": true
+    }
+  ]
+}

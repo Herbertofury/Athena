@@ -1,0 +1,94 @@
+{
+  "schema_version": 1,
+  "harness": "atlas-real-media-v5-playback-state",
+  "source_module": "/Engineering-Atlas/media-lab/media.a50519971a6bba6f.js",
+  "started_at": "2026-10-27T06:28:16.071Z",
+  "user_agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36",
+  "source_mode": "dated public snapshots",
+  "events": [
+    {
+      "type": "fixture_parsed",
+      "at_ms": 812.3000000119209,
+      "elapsed_ms": 56.599999994039536,
+      "bytes": 20294
+    },
+    {
+      "type": "metadata_dom_ready",
+      "at_ms": 820.1000000238419,
+      "elapsed_ms": 6,
+      "cards": 4,
+      "gallery_images": 19,
+      "video_entries": 18
+    },
+    {
+      "type": "playback_engine_selected",
+      "at_ms": 10076,
+      "card_id": "steam:620",
+      "engine": "hlsjs"
+    },
+    {
+      "type": "hls_library_ready",
+      "at_ms": 10106.100000023842,
+      "version": "1.7.3",
+      "elapsed_ms": 29.899999976158142
+    },
+    {
+      "type": "video_loadedmetadata",
+      "at_ms": 10412.800000011921,
+      "card_id": "steam:620",
+      "video_id": "5787",
+      "current_time": 0,
+      "video_width": 940,
+      "video_height": 529,
+      "engine": "hlsjs",
+      "elapsed_ms": 337.90000000596046
+    },
+    {
+      "type": "video_canplay",
+      "at_ms": 10431.300000011921,
+      "card_id": "steam:620",
+      "video_id": "5787",
+      "current_time": 0,
+      "video_width": 940,
+      "video_height": 529,
+      "engine": "hlsjs",
+      "elapsed_ms": 356.30000001192093
+    },
+    {
+      "type": "video_playing",
+      "at_ms": 26116,
+      "card_id": "steam:620",
+      "video_id": "5787",
+      "current_time": 0,
+      "video_width": 940,
+      "video_height": 529,
+      "engine": "hlsjs",
+      "elapsed_ms": 16041.09999999404
+    },
+    {
+      "type": "video_pause",
+      "at_ms": 26533.90000000596,
+      "card_id": "steam:620",
+      "video_id": "5787",
+      "current_time": 0.325789,
+      "video_width": 940,
+      "video_height": 529,
+      "engine": "hlsjs",
+      "elapsed_ms": 16459
+    },
+    {
+      "type": "youtube_ready",
+      "at_ms": 53195.30000001192,
+      "card_id": "youtube:M7lc1UVf-VE",
+      "video_id": "M7lc1UVf-VE",
+      "elapsed_ms": 574.9000000059605
+    }
+  ],
+  "acceptance": "not a target-project performance comparison",
+  "fixture_sha256": "09bc53f20b0f552b6beae9c5c87c6662f94299ec4cb665b153d9e05196ef0348",
+  "fixture_counts": {
+    "cards": 4,
+    "gallery_images": 19,
+    "video_entries": 18
+  }
+}

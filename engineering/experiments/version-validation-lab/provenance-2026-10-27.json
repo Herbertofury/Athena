@@ -1,0 +1,138 @@
+{
+  "scope": "isolated comparison against actual Atlas version-parser baseline; not default collector promotion",
+  "baseline_source_commit": "5ff74485f1e87c770adf8e426c3bb723c56340f2",
+  "baseline_source_sha256": "c97bf4a26e1ec2132ff7d22b0d2ed9b8d228917cae72368f8c1ba663535e104c",
+  "candidate_source_sha256": "ff7077b96d46840d958820fd97aa4c2936c84076dfa67aaf4f3fa98d3f24e95d",
+  "timing_harness_sha256": "c235065f21fd78ef139645a881d31ea6fa03b2d11aba27a1cfc716db29413525",
+  "timing_binary_sha256": "09d97f440cfa6d6adafe426c8b4633729a5af614efd9b4cf4c61d79a553aef5f",
+  "allocation_harness_sha256": "9d825e0c805a4aad8b4c7b783e216efb2b4197b23d6d28cf3821bff50b25b61b",
+  "allocation_counter_sha256": "be6e4c674e4388763ffce5f273cf5aba80dfb06abf7b52502615025cd1c0ce3c",
+  "allocation_binary_sha256": "2dcb41902e39de764d31287939cb4b3d015f9692e870b6db980c761a31787e94",
+  "app_lock_sha256": "73d3d3dc18c501a9c6125169dbd160094db0ed98ff4d35f985dc53398a3d6f1a",
+  "environment": {
+    "system": "Linux",
+    "machine": "x86_64",
+    "compiler": "Rust 1.99.1"
+  },
+  "public_response_inputs": [
+    {
+      "id": "Ag5S66CF",
+      "sha256": "bff95882cb0e003ece9e007aaa2ac2af8a72a8e286f276326832f8f59ef87571"
+    },
+    {
+      "id": "g6ju16VJ",
+      "sha256": "14246a8756f2d70400a680ad2a4eaab4c92ffe42c644839702542857d55a7eb8"
+    },
+    {
+      "id": "1rb9wI5K",
+      "sha256": "9c7011ca9a0ead246b4b9d37aa768e446ae8e35ea1cba68d96feb6e2f0994724"
+    }
+  ],
+  "generated_density_inputs": [
+    {
+      "extra_field_bytes": 65536,
+      "sha256": "1b9f460ef1ca0512445261699d8666372605c45d03c93b431862e5c430b46790",
+      "classification": "generated augmentation; not an additional real source response"
+    },
+    {
+      "extra_field_bytes": 131072,
+      "sha256": "faddb990250b3b403904992f439c519b0284889ce7e6d3d1b4738af67a4e2077",
+      "classification": "generated augmentation; not an additional real source response"
+    }
+  ],
+  "initial_rejected_candidate": {
+    "source_sha256": "3bc908d9739b3d49d9c528247e9d10edf4ed81fd4bd8dc94fdf6050e93de7d5b",
+    "harness_sha256": "7611445853341ec16d99c51d1e79d9200c8883b97fc52f9b92c17cac249e660a",
+    "binary_sha256": "92d37cb0734bb599effbeaa3bbf282e84fb455aaf5e006c7f8ad500e8ff36091",
+    "reason": "HashMap-based field lookup was slower on two of three initial public response medians"
+  },
+  "summary": [
+    {
+      "phase": "final",
+      "id": "Ag5S66CF",
+      "pairs": 20,
+      "baseline_median_us": 7.212445,
+      "candidate_median_us": 3.880435,
+      "candidate_faster_pairs": 19,
+      "full_payload_and_binding_equal": true
+    },
+    {
+      "phase": "final",
+      "id": "g6ju16VJ",
+      "pairs": 20,
+      "baseline_median_us": 6.90319,
+      "candidate_median_us": 4.96166,
+      "candidate_faster_pairs": 18,
+      "full_payload_and_binding_equal": true
+    },
+    {
+      "phase": "final",
+      "id": "1rb9wI5K",
+      "pairs": 20,
+      "baseline_median_us": 6.79265,
+      "candidate_median_us": 4.29551,
+      "candidate_faster_pairs": 20,
+      "full_payload_and_binding_equal": true
+    },
+    {
+      "phase": "repeat",
+      "id": "Ag5S66CF",
+      "pairs": 20,
+      "baseline_median_us": 7.35998,
+      "candidate_median_us": 4.965235,
+      "candidate_faster_pairs": 14,
+      "full_payload_and_binding_equal": true
+    },
+    {
+      "phase": "repeat",
+      "id": "g6ju16VJ",
+      "pairs": 20,
+      "baseline_median_us": 9.81586,
+      "candidate_median_us": 5.30059,
+      "candidate_faster_pairs": 18,
+      "full_payload_and_binding_equal": true
+    },
+    {
+      "phase": "repeat",
+      "id": "1rb9wI5K",
+      "pairs": 20,
+      "baseline_median_us": 7.17141,
+      "candidate_median_us": 4.13484,
+      "candidate_faster_pairs": 19,
+      "full_payload_and_binding_equal": true
+    }
+  ],
+  "tests": {
+    "rust_library": 63,
+    "rust_integration": 4,
+    "candidate_example": 4,
+    "generated_stress_cases": 10000,
+    "types_missing_fields_escaped_keys_depth": true,
+    "field_error_echo_guard": true
+  },
+  "raw_results": [
+    "initial-Ag5S66CF-2026-10-27.json",
+    "initial-g6ju16VJ-2026-10-27.json",
+    "initial-1rb9wI5K-2026-10-27.json",
+    "final-Ag5S66CF-2026-10-27.json",
+    "final-g6ju16VJ-2026-10-27.json",
+    "final-1rb9wI5K-2026-10-27.json",
+    "repeat-Ag5S66CF-2026-10-27.json",
+    "repeat-g6ju16VJ-2026-10-27.json",
+    "repeat-1rb9wI5K-2026-10-27.json",
+    "final-allocations-Ag5S66CF-2026-10-27.json",
+    "final-allocations-g6ju16VJ-2026-10-27.json",
+    "final-allocations-1rb9wI5K-2026-10-27.json",
+    "density-timing-65536-2026-10-27.json",
+    "density-timing-131072-2026-10-27.json",
+    "density-allocation-65536-2026-10-27.json",
+    "density-allocation-131072-2026-10-27.json"
+  ],
+  "limits": [
+    "No whole-app network/storage/UI speedup claim",
+    "Measured timing values are averages of 100 parses plus full-byte/binding comparisons",
+    "Requested Rust allocations are not RSS or physical peak memory",
+    "Three public version records are not exhaustive platform coverage",
+    "Error wording is not byte-for-byte identical; failure acceptance and safe-message behavior are tested"
+  ]
+}

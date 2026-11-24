@@ -1,0 +1,81 @@
+{
+  "schema_version": 1,
+  "harness": "atlas-real-media-v3-provider-binding",
+  "source_module": "/Engineering-Atlas/media-lab/media.b900ae7f7a4da761.js",
+  "started_at": "2026-10-26T23:45:48.625Z",
+  "user_agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36",
+  "source_mode": "dated public snapshots",
+  "events": [
+    {
+      "type": "fixture_parsed",
+      "at_ms": 743.9000000059605,
+      "elapsed_ms": 167.80000001192093,
+      "bytes": 20294
+    },
+    {
+      "type": "metadata_dom_ready",
+      "at_ms": 747.4000000059605,
+      "elapsed_ms": 2.800000011920929,
+      "cards": 4,
+      "gallery_images": 19,
+      "video_entries": 18
+    },
+    {
+      "type": "playback_engine_selected",
+      "at_ms": 28170.90000000596,
+      "card_id": "steam:620",
+      "engine": "auto"
+    },
+    {
+      "type": "video_loadedmetadata",
+      "at_ms": 28414.90000000596,
+      "card_id": "steam:620",
+      "video_id": "5787",
+      "current_time": 0,
+      "video_width": 640,
+      "video_height": 360,
+      "engine": "auto",
+      "elapsed_ms": 247.30000001192093
+    },
+    {
+      "type": "video_canplay",
+      "at_ms": 28415.30000001192,
+      "card_id": "steam:620",
+      "video_id": "5787",
+      "current_time": 0,
+      "video_width": 640,
+      "video_height": 360,
+      "engine": "auto",
+      "elapsed_ms": 247.7000000178814
+    },
+    {
+      "type": "video_playing",
+      "at_ms": 34883.80000001192,
+      "card_id": "steam:620",
+      "video_id": "5787",
+      "current_time": 0,
+      "video_width": 640,
+      "video_height": 360,
+      "engine": "auto",
+      "elapsed_ms": 6716.200000017881
+    },
+    {
+      "type": "video_pause",
+      "at_ms": 43483.30000001192,
+      "card_id": "steam:620",
+      "video_id": "5787",
+      "current_time": 8.129647,
+      "video_width": 940,
+      "video_height": 529,
+      "engine": "auto",
+      "elapsed_ms": 15315.700000017881
+    }
+  ],
+  "acceptance": "not a target-project performance comparison",
+  "fixture_sha256": "09bc53f20b0f552b6beae9c5c87c6662f94299ec4cb665b153d9e05196ef0348",
+  "fixture_counts": {
+    "cards": 4,
+    "gallery_images": 19,
+    "video_entries": 18
+  }
+}

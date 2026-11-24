@@ -1,0 +1,26 @@
+{
+  "baseline_commit": "ea3a2d2b808f7940b9887f530ea485ef59baca91",
+  "scope": "Actual local saved-upstream inspector; no new provider request or native-browser acceptance",
+  "initial_feature_failures": 4,
+  "upstream_http_checks": 52,
+  "retained_public_sources": 3,
+  "version_regression_http_checks": 71,
+  "rust_unit": 140,
+  "rust_integration": 9,
+  "clippy_all_targets": "passed",
+  "node_tests": 267,
+  "python_tests_normal": 237,
+  "python_tests_optimized": 237,
+  "provider_budget_and_history_unchanged": true,
+  "sources": {
+    "apps/atlas-lab/src/snapshots.rs": "88b546208e505d0419c55cce7960c62127e404a6e3e214da3418937baea234b1",
+    "apps/atlas-lab/src/server.rs": "261368dab8f1882cefcfc15217a56b58b51ccb1dad41ef1b68f1ac70b17c81df",
+    "apps/atlas-lab/ui/archive-view.mjs": "de52a075043aee965b579e3259ed852dc64a9ba60cceb300d9acefd4c6223228",
+    "apps/atlas-lab/ui/app.js": "4e341c4d45678acda1ef01219b583609a9c0de04f38565044baacae8534c97b0",
+    "apps/atlas-lab/ui/index.html": "c811a215c5e4459785208d87186ce0b4e2acd207f748955ac38c08e383d47f06",
+    "apps/atlas-lab/Cargo.lock": "4ba18f93c261a48a42ea595be3f8a37b6d9c419912d7e7875204ac0641e2dd85",
+    "tests/upstream-archive-view.test.mjs": "e8f44fffdc385b54b5f701583a1286073c48c2da0024436032b55e1fe303fc4f",
+    "tests/version-archive-ui.test.mjs": "2526a195554bee793db6a4117ea61a86eeb9787dbc88f019a6ff6cbb122247c1"
+  },
+  "native_browser": "blocked; not claimed"
+}

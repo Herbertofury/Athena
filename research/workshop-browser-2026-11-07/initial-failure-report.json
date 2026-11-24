@@ -1,0 +1,84 @@
+{
+  "schema": 1,
+  "kind": "actual Chromium integrated-workshop acceptance",
+  "result": "failed",
+  "started": "2026-11-07T18:20:23.468Z",
+  "root": "/home/runner/work/Athena/Athena/dist",
+  "output": "/home/runner/work/Athena/Athena/browser-results/workshops",
+  "browser": "151.0.7922.34",
+  "checks": [
+    {
+      "name": "exact served files",
+      "result": "pass"
+    },
+    {
+      "name": "catalog counts and directory",
+      "result": "failed",
+      "error": "Expected values to be strictly equal:\n\n0 !== 1\n"
+    }
+  ],
+  "files": [
+    {
+      "name": "index.html",
+      "sha256": "9f0cd9affdcad4760f01b6f78e4a150ab003ac5ad28110e5b4dd63e78ddec521",
+      "loadedSHA256": "9f0cd9affdcad4760f01b6f78e4a150ab003ac5ad28110e5b4dd63e78ddec521"
+    },
+    {
+      "name": "app.js",
+      "sha256": "d7989a8f18fa165a968603a4ee5bf2bd2443d96d987eadd0c47f70eb9602ad48",
+      "loadedSHA256": "d7989a8f18fa165a968603a4ee5bf2bd2443d96d987eadd0c47f70eb9602ad48"
+    },
+    {
+      "name": "catalog.js",
+      "sha256": "97ce633e23cd9bbfa3d980acb7da640b9eacb40fb704a8f429e04cee68dadd5f",
+      "loadedSHA256": "97ce633e23cd9bbfa3d980acb7da640b9eacb40fb704a8f429e04cee68dadd5f"
+    },
+    {
+      "name": "core.js",
+      "sha256": "1fbbb46ff7134ff968a8543aaa967d78b39fd955fcf5b810882039aa61e29803",
+      "loadedSHA256": "1fbbb46ff7134ff968a8543aaa967d78b39fd955fcf5b810882039aa61e29803"
+    },
+    {
+      "name": "workspace-host.js",
+      "sha256": "8a14dec17d4d816de53d325a94ee0dd00ac0bc8a0a26a756af58998173157cdb",
+      "loadedSHA256": "8a14dec17d4d816de53d325a94ee0dd00ac0bc8a0a26a756af58998173157cdb"
+    },
+    {
+      "name": "styles.css",
+      "sha256": "bf7fb56b9403fe8a865771cd7b3cd766a52aeea5460541ec29d145fcfd8f7107",
+      "loadedSHA256": "bf7fb56b9403fe8a865771cd7b3cd766a52aeea5460541ec29d145fcfd8f7107"
+    }
+  ],
+  "screenshots": [
+    {
+      "name": "failure.png",
+      "sha256": "4bb1711475d7324952439b7a34041ef4d56c6dfef6e0950f178f45fe12052203"
+    }
+  ],
+  "errors": [],
+  "outsideRequests": [],
+  "cspViolations": [],
+  "failedResponses": [],
+  "limits": [
+    "Local static app only; no live-provider, certification, or real-system execution claims",
+    "Static runner contract tests are not browser evidence"
+  ],
+  "origin": "http://127.0.0.1:45701",
+  "currentCheck": "catalog counts and directory",
+  "totalLessons": 90,
+  "workshopIds": [
+    "security-foundations",
+    "systems-workshop",
+    "programming-workshop",
+    "cloud-workshop",
+    "data-workshop"
+  ],
+  "addedLessons": 42,
+  "failure": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\n0 !== 1\n\n    at /home/runner/work/Athena/Athena/scripts/test_workshops_browser.cjs:64:98\n    at async check (/home/runner/work/Athena/Athena/scripts/test_workshops_browser.cjs:32:61)\n    at async run (/home/runner/work/Athena/Athena/scripts/test_workshops_browser.cjs:58:3)",
+  "failureView": {
+    "hash": "#workshops",
+    "title": "Learn deeply.Build confidently. | Athena",
+    "text": "ONE WORKSPACE · MANY WAYS TO GROWLearn deeply.Build confidently.Athena brings learning and engineering research into one app. Understand the idea, investigate the evidence and verify what works. Feature-work integration is still pending.Continue learning ↗Choose a questExplore workshops✦BUILDUNDERSTANDEXPLORELearnLessons, certificate routes and hands-on foundationsResearchEngineering candidates, comparisons and evidenceBuildFeature workshop integration pendingValidate mediaSource cards, completeness and playback evidenceLocal R&D labDurable job journal, collection and experiments with the local engine13Certificate pathways90Original lessons0Lessons you marked read74Domain roadmaps, not completed coursesA living learning library, not a “master everything” claim. All 13 requested credentials are organized. This release contains 90 original lessons: the existing 48 foundations and Packet Trail lessons plus 42 applied lessons across five workshops. The workshops include 126 original checks (42 primary and 84 supplemental), worked examples, safe offline exercises and evidence worksheets. All 74 credential-domain rows remain roadmaps, not completed exam coverage. Real-cloud labs and Power BI workflows are unexecuted; read marks, XP and reference tests do not establish practical mastery or exam readiness.Pick your next adventureAll 13 quests →◇IT supportGoogle IT Support Professional CertificateProvider course curriculum; no single proctored exam code0/8 intro lessons readExplore →◇IT supportCompTIA A+220-1201 and 220-1202 (V15); current official retrieval pending0/8 intro lessons readExplore →◇NetworkingCompTIA Network+N10-009; official PDF document version 4.0 read0/8 intro lessons readExplore →◇CybersecurityCompTIA Security+SY0-701 (V7) baseline; current official retrieval pending0/6 intro lessons readExplore →◇NetworkingCisco CCNA200-301 v1.10/7 intro lessons readExplore →◇Cloud foundationsAWS Certified Cloud PractitionerCLF-C020/5 intro lessons readExplore →One idea. Many superpowers.Start The Packet Trail →IT foundationsTroubleshoot like an investigatorTurn a vague symptom into a testable hypothesis and a verified repair.Begin lesson →~20 min · original checkIntroductoryNetworkingIPv4 addressing and subnettingCalculate network ranges and understand when a router is needed.Begin lesson →~20 min · original checkIntroductorySecurityAuthentication, authorization and accountingSeparate who you are from what you may do.Begin lesson →~20 min · original checkIntroductoryExport progressImport progress"
+  },
+  "finished": "2026-11-07T18:20:24.728Z"
+}

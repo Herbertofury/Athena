@@ -1,0 +1,11 @@
+# Accepted HTTP fixture socket mode
+
+October 29, 2026. The Windows job in [run 40969023842](https://github.com/Herbertofury/Engineering-Atlas/actions/runs/40969023842) failed while reading the existing loopback fixture's request, before the impossible-body-budget assertion. The server reported OS 10035/WouldBlock; the client then saw a reset. Linux and the other Windows tests passed. This failure occurred on the unchanged 0.41.0 application dependency, not the isolated rusqlite candidate.
+
+The fixture polls a nonblocking listener but assumed the accepted stream would be blocking. [Microsoft documents inherited socket properties](https://learn.microsoft.com/en-us/windows/win32/api/winsock2/nf-winsock2-accept); [Rust documents explicit blocking/nonblocking control](https://doc.rust-lang.org/std/net/struct.TcpStream.html#method.set_nonblocking). Sources: WINSOCKACCEPT29, RUSTSOCKET29.
+
+The example now explicitly sets the accepted stream to blocking mode before its existing one-second I/O timeouts. An inventory found the same assumption in the timeout-classification test, which received the same correction. Both listeners still poll with their existing bounded accept deadlines. Production reader/classifier code, byte limits, 200/250-ms client timeouts and original assertions are unchanged.
+
+A new regression explicitly starts the accepted stream in nonblocking mode and delays the first byte. It [fails before](before-test.log) and [passes after](after-test.log) the repair. This local Linux simulation is distinguished from the actual retained Windows CI failure; it does not claim a native Windows local reproduction. Twenty fresh test processes passed all five example checks, with [raw output retained](repetitions.json).
+
+The rebuilt example also passed [twelve real loopback transport cases](transport.json) using all 12,840 retained public Sodium response bytes: complete length/chunked transfers and truncated, wrong-type, oversized and stalled rejection paths. Those are owned transport fixtures, not fresh Modrinth requests. Full Rust tests and all-target Clippy pass locally. [Failure identity and unchanged limits](verification.json) are retained; subsequent Windows CI must be checked for the repair commit before platform acceptance is claimed.

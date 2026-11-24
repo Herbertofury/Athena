@@ -1,0 +1,94 @@
+{
+  "release": "0.2.0",
+  "python": "3.12.14",
+  "node": "v24.22.1",
+  "command": "npm run build && npm test",
+  "javascriptTests": 22,
+  "wikiTests": 3,
+  "pureFixtureTests": 7,
+  "actualLoopbackTests": 8,
+  "browserMode": "DOM emulation only; no native browser executed",
+  "networkMode": "Actual loopback TCP only; no external traffic, DNS or TLS integration",
+  "inputs": [
+    {
+      "path": "scripts/build_catalog.py",
+      "sha256": "8981419c6d5f1162cd62519b2089960387410f5e56621595b439d3869c60edef"
+    },
+    {
+      "path": "scripts/build_content.py",
+      "sha256": "889b6b27b52f23c7d9d66ad097de5e2f212933e8218b047d46c12b0b0df2f003"
+    },
+    {
+      "path": "scripts/network_content.py",
+      "sha256": "e901d3fa34b9dcaac3b5e75233947e2e0322fe29a601b71f3fb30c3d6a238f98"
+    },
+    {
+      "path": "scripts/sync_wiki.py",
+      "sha256": "ef2a63e898fc82a8c25781590ddbca58fcc8f92189cae8f49be6875eae250513"
+    },
+    {
+      "path": "scripts/validate.py",
+      "sha256": "99b72d2930bb227b3aad36d9310b45bc71630548ed24374b80bcb003e7e806d1"
+    },
+    {
+      "path": "tests/core.test.cjs",
+      "sha256": "2d101d1b90d77635e0159fc90c1387faa22d33ab559cbdd65aa03b5e527c6837"
+    },
+    {
+      "path": "tests/network_fixture_test.py",
+      "sha256": "14416c2af56220d341aba0a42a4c594f7e6284c1dbb3d86b9ff11a55df9b8fc9"
+    },
+    {
+      "path": "tests/network_loopback_test.py",
+      "sha256": "c9bbfcd9f0675211e5aa3b4005a28f89cd9bdcf1d2b8f6455b88c25eeccd0868"
+    },
+    {
+      "path": "tests/ui.test.cjs",
+      "sha256": "0fba542d1d87228847d97690e72db4965699744069c213ad6b4782cd282a69a2"
+    },
+    {
+      "path": "tests/wiki_test.py",
+      "sha256": "a9333d20e4bbc9461fd6218a0a314618fdb968a23f4d0bbdcc1346257ff5f667"
+    },
+    {
+      "path": "labs/network/README.md",
+      "sha256": "77c24741d8cd59054792b17c5224ff86d476a92f8f2324a1c9593690bbd1d0a9"
+    },
+    {
+      "path": "labs/network/evidence-template.md",
+      "sha256": "671408100cc6d3a781abebfebcfd379568fb855dae1e8d13d8a7d08259dab160"
+    },
+    {
+      "path": "labs/network/http_fixture.py",
+      "sha256": "0352acf9a6071587ff5cb2538820955354d765cef3956ba9b4d0e33880f10c69"
+    },
+    {
+      "path": "src/catalog.json",
+      "sha256": "17e06fbd7ac9589c7f514050f0aee998550ce9871d144825f2a9d33ceed81b76"
+    },
+    {
+      "path": "src/lessons.json",
+      "sha256": "c4ece4a4e65f686b0e23e28200695c2ad2a88754e0c4d3dcc5ba3ba53c79d084"
+    },
+    {
+      "path": "dist/app.js",
+      "sha256": "f13aa05814255121b06193dd8cc34452248688376c679fc92a76016422cab01b"
+    },
+    {
+      "path": "dist/catalog.js",
+      "sha256": "c7d886109e3e906383c03ae2700296f035e681ff3787a3dd915f7a2efa3bfb8e"
+    },
+    {
+      "path": "dist/core.js",
+      "sha256": "1fbbb46ff7134ff968a8543aaa967d78b39fd955fcf5b810882039aa61e29803"
+    },
+    {
+      "path": "dist/index.html",
+      "sha256": "fe71ac532076a04c0384b49e26dbf9356c1c800608b264933c068277414b62e5"
+    },
+    {
+      "path": "dist/styles.css",
+      "sha256": "faf5cf3d48c5606a0a6d56422d5b759bb9d389fbe36dc1213a88981989ddd5c4"
+    }
+  ]
+}

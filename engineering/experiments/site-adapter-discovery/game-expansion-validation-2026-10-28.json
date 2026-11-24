@@ -1,0 +1,114 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-10-28",
+  "status": "repository_checks_passed",
+  "scope": "Six-game documentation, machine evidence and one authenticated Mod Collective observation",
+  "baseMainCommit": "910b9b7b6f3ae1214272095029c98de11c1bf781",
+  "integrity": {
+    "uniqueCatalogEntries": 248,
+    "catalogSourceUrls": 791,
+    "allRegisterSources": 1146,
+    "gameResearchSources": 420,
+    "sourceRoles": {
+      "primary_observation": 321,
+      "retrieval_attempt": 99
+    },
+    "allUpstreamSourceRecordsPreserved": true,
+    "authenticatedSampleInspections": 1,
+    "newFullSupportAcceptances": 0,
+    "guideLinksResolve": true,
+    "sourceRefsResolveIncludingDeduplicatedAliases": true,
+    "initialCheckCorrection": "First ad hoc integrity check incorrectly required every source reference to be a canonical catalog ID; it did not account for documented gameResearchSourceRefs URL aliases. It failed at SIMS050. The corrected check resolves those aliases and verifies the unchanged register records."
+  },
+  "checks": [
+    {
+      "name": "research",
+      "command": "python scripts/check_research.py",
+      "exitCode": 0,
+      "outputSummary": "{\n  \"sources\": 1146,\n  \"markdown_files\": 141,\n  \"stale_source_ids\": [],\n  \"scope\": \"Offline structure only; external availability and factual accuracy require review.\"\n}\n"
+    },
+    {
+      "name": "python_tests",
+      "command": "python -m unittest discover -s tests -v",
+      "exitCode": 0,
+      "outputSummary": " ... ok\ntest_duplicate_count_rejected (test_worker_sweep.SweepTests.test_duplicate_count_rejected) ... ok\ntest_equivalence_mismatch_invalidates_sweep (test_worker_sweep.SweepTests.test_equivalence_mismatch_invalidates_sweep) ... ok\ntest_malformed_candidates_and_boolean_schema (test_worker_sweep.SweepTests.test_malformed_candidates_and_boolean_schema) ... ok\ntest_missing_nonfinite_boolean_negative_metrics_rejected (test_worker_sweep.SweepTests.test_missing_nonfinite_boolean_negative_metrics_rejected) ... ok\ntest_missing_or_invalid_budgets_rejected (test_worker_sweep.SweepTests.test_missing_or_invalid_budgets_rejected) ... ok\ntest_near_fastest_prefers_smallest_but_not_slow_configuration (test_worker_sweep.SweepTests.test_near_fastest_prefers_smallest_but_not_slow_configuration) ... ok\ntest_no_improvement_means_no_selection (test_worker_sweep.SweepTests.test_no_improvement_means_no_selection) ... ok\ntest_order_does_not_change_selection (test_worker_sweep.SweepTests.test_order_does_not_change_selection) ... ok\ntest_resource_median_regression_rejected_within_budget (test_worker_sweep.SweepTests.test_resource_median_regression_rejected_within_budget) ... ok\ntest_same_candidate_revision_required (test_worker_sweep.SweepTests.test_same_candidate_revision_required) ... ok\ntest_tail_regression_rejects_candidate (test_worker_sweep.SweepTests.test_tail_regression_rejects_candidate) ... ok\n\n----------------------------------------------------------------------\nRan 176 tests in 0.604s\n\nOK\n"
+    },
+    {
+      "name": "javascript_tests",
+      "command": "node --test tests/*.test.mjs",
+      "exitCode": 0,
+      "outputSummary": "✔ tests/archive-view.test.mjs (171.61864ms)\n✔ tests/bilibili-player.test.mjs (99.268446ms)\n✔ tests/card-lab.test.mjs (201.389557ms)\n✔ tests/card-preparation.test.mjs (187.858633ms)\n✔ tests/collection-input.test.mjs (119.972827ms)\n✔ tests/event-log-recovery.test.mjs (77.26144ms)\n✔ tests/event-log-view.test.mjs (109.699152ms)\n✔ tests/focus-guard.test.mjs (118.85892ms)\n✔ tests/frame-calibration.test.mjs (85.733792ms)\n✔ tests/hls-recovery.test.mjs (97.934523ms)\n✔ tests/job-label.test.mjs (75.425894ms)\n✔ tests/media-events.test.mjs (88.794581ms)\n✔ tests/media-lab.test.mjs (103.182933ms)\n✔ tests/observation-retention.test.mjs (129.030761ms)\n✔ tests/preview-loader.test.mjs (86.277912ms)\n✔ tests/research-explorer.test.mjs (127.122531ms)\n✔ tests/resource-loader.test.mjs (71.238537ms)\n✔ tests/youtube-identity.test.mjs (82.718336ms)\n✔ tests/youtube-recovery.test.mjs (82.575314ms)\nℹ tests 19\nℹ suites 0\nℹ pass 19\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 370.792544\n"
+    },
+    {
+      "name": "explorer",
+      "command": "python scripts/build_research_explorer.py --check",
+      "exitCode": 0,
+      "outputSummary": "{\n  \"entries\": 215,\n  \"sources\": 364,\n  \"cohorts\": 11,\n  \"observations\": 35,\n  \"community_reports\": 0,\n  \"mode\": \"check\"\n}\n"
+    },
+    {
+      "name": "card_assets",
+      "command": "python scripts/build_card_lab.py --check",
+      "exitCode": 0,
+      "outputSummary": "Card lab asset identities verified\n"
+    },
+    {
+      "name": "media_assets",
+      "command": "python scripts/build_media_lab.py --check",
+      "exitCode": 0,
+      "outputSummary": "Media asset identities verified\n"
+    },
+    {
+      "name": "wiki_projection",
+      "command": "python scripts/export_adapter_wiki.py ../Engineering-Atlas.wiki --check",
+      "exitCode": 0,
+      "outputSummary": "{\n  \"mode\": \"check\",\n  \"mapped_pages\": 40,\n  \"different_pages\": [],\n  \"publication_performed\": false\n}\n"
+    },
+    {
+      "name": "diff_whitespace",
+      "command": "git diff --check HEAD",
+      "exitCode": 0,
+      "outputSummary": ""
+    }
+  ],
+  "testTotals": {
+    "pythonTests": 176,
+    "javascriptTestFiles": 19,
+    "sourceRegisterRecords": 1146,
+    "markdownFilesChecked": 141
+  },
+  "wiki": {
+    "publicationStatus": "pending_browser_backend_unavailable",
+    "mappedPages": 40,
+    "projectionCheckPassed": true,
+    "baseCommit": "ee7fa9d87a3b0451f5fdbddab6b3ac39df722077",
+    "unrelatedPagesPreserved": true,
+    "publicationQueue": "wiki-publication-queue-2026-10-28.json",
+    "authenticatedSignInIsNotPublicationProof": true
+  },
+  "sourceReconciliation": {
+    "previousMainBase": "50aba7a38580924cf3df125b7ea10f97444c4af0",
+    "upstreamSourcesPreserved": 726,
+    "newGameSources": 420,
+    "mergeMethod": "Fast-forward main, then additive ID-preserving source-register reconciliation; existing upstream source rows verified unchanged.",
+    "additionalConcurrentBase": "2b89fb1e285dc68234487617f7a5fd04b7503cd0"
+  },
+  "evidenceBoundary": "These offline checks validate repository structure and contracts. They do not establish live support for every catalog site. The independent Mod Collective receipt establishes only its stated body, identity, image and free-file observations.",
+  "gameSyncNextModified": false,
+  "productionAdapterAdoption": false,
+  "rustSourceChangedByThisUpdate": false,
+  "rustSuiteRerunForThisDocumentationUpdate": false,
+  "remoteCIClaimed": false,
+  "priorVerification": {
+    "baseMainCommit": "2b89fb1e285dc68234487617f7a5fd04b7503cd0",
+    "testTotals": {
+      "pythonTests": 166,
+      "javascriptTestFiles": 19,
+      "sourceRegisterRecords": 945,
+      "markdownFilesChecked": 141
+    },
+    "result": "All checks passed before a second concurrent stack-research update arrived."
+  },
+  "publicationPreparationIssues": [
+    "First create_tree call was rejected before execution because the connector tool catalog changed. Branch head was rechecked; concurrent stack-research commits were fetched and preserved before retry."
+  ]
+}

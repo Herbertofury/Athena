@@ -1,0 +1,53 @@
+name: Athena learning checks
+on:
+  push:
+    paths-ignore: ['engineering/**', 'migration/**']
+  pull_request:
+    paths-ignore: ['engineering/**', 'migration/**']
+permissions:
+  contents: read
+jobs:
+  learning:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - run: npm ci --ignore-scripts
+      - run: npm run build
+      - run: npm test
+      - name: Test isolated read-only storage experiment
+        run: node --test experiments/storage-observatory/*.test.mjs
+      - name: Generated curriculum is current
+        run: git diff --exit-code -- src dist/catalog.js docs/certificates docs/shared docs/paths docs/README.md wiki
+      - name: Install browser for actual runtime checks
+        run: npx playwright install --with-deps chromium
+      - name: Verify progress import persistence and recovery in Chromium
+        run: node scripts/test_progress_import_browser.cjs
+      - name: Verify native project continuity
+        run: |
+          node scripts/test_continuity_browser.cjs
+          node scripts/test_continuity_import_browser.cjs
+          node scripts/test_continuity_artifacts_browser.cjs
+      - name: Verify native project browser
+        run: node scripts/test_projects_browser.cjs
+      - name: Verify native guidance reader and reference exports
+        run: node scripts/test_guidance_browser.cjs
+      - name: Verify safe browser-only training missions
+        run: node scripts/test_simulations_browser.cjs
+      - name: Test unified public app in Chromium
+        run: npm run test:browser
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: athena-browser-evidence
+          path: browser-results
+          if-no-files-found: ignore
+
+
+

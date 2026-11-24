@@ -1,0 +1,26 @@
+{
+  "id": "security-foundations",
+  "title": "Security Foundations: Evidence Before Assumptions",
+  "summary": "Ten connected applied lessons: risk, identity, integrity, boundaries, suspicious requests, patch decisions, logs, response, restore and accountable evidence.",
+  "lessonIds": [
+    "sec-risk-story",
+    "sec-identity-lifecycle",
+    "sec-data-integrity",
+    "sec-trust-boundaries",
+    "sec-phishing-decisions",
+    "sec-vulnerability-triage",
+    "sec-log-evidence",
+    "sec-incident-decisions",
+    "sec-restore-proof",
+    "sec-governance-proof"
+  ],
+  "prerequisites": [
+    "identity",
+    "risk",
+    "cryptography",
+    "incident",
+    "resilience"
+  ],
+  "caseIds": [],
+  "limits": "Version-neutral applied beginner practice, not exhaustive Security+ coverage, an official practice exam or proof of job readiness. All fixtures are synthetic. Only the small local file-copy/hash operations are real system operations; no security configuration is changed."
+}

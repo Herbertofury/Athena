@@ -1,0 +1,104 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> athena-learning@0.3.0 test
+> node --test tests/*.test.cjs && python3 tests/wiki_test.py && python3 scripts/validate.py && python3 tests/network_fixture_test.py && python3 tests/network_loopback_test.py && python3 tests/package_app_test.py
+
+✔ unified acceptance uses locked pinned-project Rust and bounded jobs (2.409753ms)
+✔ runtime acceptance cannot silently downgrade to HTTP-only and retains artifacts (0.334039ms)
+✔ packaging uses reviewed public profile without deployment or settings (0.297605ms)
+✔ IPv4 known /26 range (2.617975ms)
+✔ IPv4 boundary and prefix validation (0.50799ms)
+✔ IPv4 bounded property checks (19.303304ms)
+✔ policy truth table (0.376573ms)
+✔ data revenue uses row context after filtering (0.246659ms)
+✔ review scheduling, failed recovery and nonmutation (0.26107ms)
+✔ progress import is constrained and roundtrips (1.471169ms)
+✔ route selection handles default, specific and host prefixes without mutating input (0.291225ms)
+✔ route lookup rejects invalid addresses, prefixes and unaligned networks (1.838289ms)
+✔ route lookup includes exact network and last-address boundaries (0.245457ms)
+✔ Research dark palette covers card, navigation, control and secondary text contrast (14.407834ms)
+✔ Media light palette keeps source identities, placeholders and load controls readable (1.224791ms)
+✔ Media dark placeholder text passes against both retained gradient endpoints (0.306097ms)
+✔ Research mounts actual catalog, filters, shortlist and exports without global routing (209.81944ms)
+✔ Research aborts pending mount without stale DOM writes (7.001169ms)
+✔ Media mounts source records without auto-loading providers, retains receipt on remount (44.03015ms)
+✔ Media official Bilibili frame stays autoplay-off and unloads on workspace exit (4.287652ms)
+✔ Abort stops preview decoding and does not start queued provider requests (1.126374ms)
+✔ Workspace output retains exact source algorithms and public fixture identity (0.971373ms)
+✔ YouTube player construction is explicit, autoplay-off and destroyed on unmount (3.665882ms)
+✔ Native workspace build reproduces every published module and fixture byte (43.236072ms)
+✔ Preview cancellation settles even if a detached image rejects cleanup (0.969871ms)
+✔ Privileged loopback Media retains metadata but disables all external media controls (5.318593ms)
+✔ Research renders preserved Athena evidence links while keeping original Atlas provenance visible (11.93696ms)
+✔ Public Lab does not probe localhost or send any API request (6.733077ms)
+✔ Native Lab uses original job protocol, routes panels locally and cancels polling (36.917303ms)
+✔ Lab preserves uncertain submission warning and never retries a cancelled receipt (4.458006ms)
+✔ Lab retains last-good overview after a malformed later refresh (4.994628ms)
+✔ Lab copies the exact retained validation modules and reproduces output (42.267735ms)
+✔ Pending initialization disables every write and guards even programmatic submission before abort (6.631617ms)
+✔ Every migrated local measurement links to byte-identical immutable Athena evidence with original provenance (6.646618ms)
+✔ Research citation and deterministic-import regressions remain in normal Athena checks (417.517243ms)
+✔ all eight views and 13 tracks render without exception (54.174483ms)
+✔ lesson read, note and check survive close and reload (16.2102ms)
+✔ search filters and clears on navigation (6.151358ms)
+✔ certificate filters, selection and unknown route (8.991495ms)
+✔ malformed stored progress does not prevent learning (9.086017ms)
+✔ review grade disables double answers and advances (4.327671ms)
+✔ skip link focuses without changing app route (3.388797ms)
+✔ navigation exposes current page and selected filters (4.147973ms)
+✔ Packet Trail exposes eight lessons, case selection and honest feedback (13.310925ms)
+✔ route detective computes and validates without creating markup from input (14.978229ms)
+✔ new Packet Trail lesson uses persisted notes and read state (14.751508ms)
+✔ closing a case lesson restores its actual repeated opener (11.225996ms)
+✔ unified routes mount inside the same document and preserve learning state (26.338866ms)
+✔ all unified workspaces use internal routes and independent modules (19.178609ms)
+✔ a missing workspace does not prevent returning to learning (6.153292ms)
+✔ workspace query navigation preserves one mount and restores search scope (7.212905ms)
+✔ learning document handlers ignore light-DOM workspace controls (5.475017ms)
+✔ rapid workspace return restores state after asynchronous export finishes (7.227968ms)
+✔ incomplete workspace shows recovery state instead of falsely claiming loaded (5.109741ms)
+✔ shell views contain no inline scripts or style attributes under strict local CSP (38.336126ms)
+✔ local lab has scoped search and returns safely to learning (16.508246ms)
+✔ workspace host mounts once, forwards current search/theme and cleans up (4.285578ms)
+✔ navigating during module load never mounts the stale module (0.269202ms)
+✔ late mount completion is disposed and cannot replace a newer workspace (0.413649ms)
+✔ load failure is surfaced without a false mounted state (0.991082ms)
+✔ pending search and theme changes reach the completed mount (1.15734ms)
+✔ a new mount waits for previous asynchronous teardown (0.650472ms)
+✔ search shortcut respects shadow-root inputs and modal boundaries (0.262672ms)
+✔ workspace state exports before teardown and same-workspace routes forward (1.416979ms)
+✔ async workspace updates are serialized so older results cannot win (0.393057ms)
+✔ teardown waits for an in-flight update before exporting and unmounting (0.342362ms)
+✔ failed initial setter cleanup cannot orphan the next workspace (1.569637ms)
+✔ restored state is resolved after an earlier asynchronous export (4.595211ms)
+✔ synchronous adapter update errors become rejected promises without breaking the queue (0.388591ms)
+✔ workspace readiness failure stays mounted for recovery without a loaded claim (0.205808ms)
+ℹ tests 70
+ℹ suites 0
+ℹ pass 70
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 567.724881
+...
+----------------------------------------------------------------------
+Ran 3 tests in 0.002s
+
+OK
+Catalog, 13 paths, 74 roadmaps, 48 lessons, shared-lesson wiki parity and documentation links validated. Engineering links require combined-deployment verification.
+.......
+----------------------------------------------------------------------
+Ran 7 tests in 0.000s
+
+OK
+........
+----------------------------------------------------------------------
+Ran 8 tests in 0.115s
+
+OK
+............
+----------------------------------------------------------------------
+Ran 12 tests in 0.036s
+
+OK

@@ -1,0 +1,21 @@
+{
+  "checked_at": "2026-10-30T08:50:46.150228+00:00",
+  "binary_sha256": "405aa5efca4ee8bea1aae597712b720cc5672a05327a041f7ef5d91f0c44bf1e",
+  "harness_sha256": "d3f5157e1d9bce9b86cd5e095b875a78ac2b527315a194e4f0de088638f18e24",
+  "scope": "Actual loopback server; generated malformed results added only to an owned copy with retained public jobs",
+  "complete": true,
+  "served_app_sha256": "54993055ab32dd01e77a84d7834c30c2f7254460802eaaffc1c377790c9837d8",
+  "renderer": {
+    "scope": "Actual HTTP responses and served application in controlled DOM, not native browser",
+    "preparationError": "TypeError: Cannot read properties of null (reading 'length')",
+    "retainedCards": true,
+    "retainedMetrics": true,
+    "recoveredCorrect": true,
+    "cardCount": 6
+  },
+  "application_correct": true,
+  "unrelated_tables_unchanged": true,
+  "integrity_ok": true,
+  "final_jobs_unchanged_by_reads": true,
+  "source_unchanged": true
+}

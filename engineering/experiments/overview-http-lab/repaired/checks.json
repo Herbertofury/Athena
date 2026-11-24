@@ -1,0 +1,1058 @@
+[
+  {
+    "name": "1/0/baseline full count",
+    "passed": true,
+    "observed": 1,
+    "expected": 1
+  },
+  {
+    "name": "1/0/baseline full output parity",
+    "passed": true,
+    "observed": "7fa56265c61001f4b188057aeebbe832a356f9cd94aaf1bd66dd05201d2004ec",
+    "expected": "7fa56265c61001f4b188057aeebbe832a356f9cd94aaf1bd66dd05201d2004ec"
+  },
+  {
+    "name": "1/0/baseline JSON type",
+    "passed": true,
+    "observed": "application/json",
+    "expected": "application/json"
+  },
+  {
+    "name": "1/0/baseline no-store",
+    "passed": true,
+    "observed": "no-store",
+    "expected": "no-store"
+  },
+  {
+    "name": "1/0/baseline nosniff",
+    "passed": true,
+    "observed": "nosniff",
+    "expected": "nosniff"
+  },
+  {
+    "name": "1/0/baseline CSP",
+    "passed": true,
+    "observed": true,
+    "expected": true
+  },
+  {
+    "name": "1/0/baseline foreign host",
+    "passed": true,
+    "observed": 403,
+    "expected": 403
+  },
+  {
+    "name": "1/0/baseline missing write origin",
+    "passed": true,
+    "observed": 403,
+    "expected": 403
+  },
+  {
+    "name": "1/0/baseline visible candidate banner",
+    "passed": true,
+    "observed": false,
+    "expected": false
+  },
+  {
+    "name": "1/0/baseline corrupt stored JSON rejected",
+    "passed": true,
+    "observed": 500,
+    "expected": 500
+  },
+  {
+    "name": "1/0/baseline exact recovery",
+    "passed": true,
+    "observed": "7fa56265c61001f4b188057aeebbe832a356f9cd94aaf1bd66dd05201d2004ec",
+    "expected": "7fa56265c61001f4b188057aeebbe832a356f9cd94aaf1bd66dd05201d2004ec"
+  },
+  {
+    "name": "1/0/baseline approximate process HWM",
+    "diagnostic_only": true,
+    "value": [
+      "VmHWM:\t    7596 kB"
+    ]
+  },
+  {
+    "name": "1/0/baseline clean shutdown",
+    "passed": true,
+    "observed": 0,
+    "expected": 0
+  },
+  {
+    "name": "1/0/baseline integrity",
+    "passed": true,
+    "observed": "ok",
+    "expected": "ok"
+  },
+  {
+    "name": "1/1/candidate full count",
+    "passed": true,
+    "observed": 1,
+    "expected": 1
+  },
+  {
+    "name": "1/1/candidate full output parity",
+    "passed": true,
+    "observed": "7fa56265c61001f4b188057aeebbe832a356f9cd94aaf1bd66dd05201d2004ec",
+    "expected": "7fa56265c61001f4b188057aeebbe832a356f9cd94aaf1bd66dd05201d2004ec"
+  },
+  {
+    "name": "1/1/candidate JSON type",
+    "passed": true,
+    "observed": "application/json",
+    "expected": "application/json"
+  },
+  {
+    "name": "1/1/candidate no-store",
+    "passed": true,
+    "observed": "no-store",
+    "expected": "no-store"
+  },
+  {
+    "name": "1/1/candidate nosniff",
+    "passed": true,
+    "observed": "nosniff",
+    "expected": "nosniff"
+  },
+  {
+    "name": "1/1/candidate CSP",
+    "passed": true,
+    "observed": true,
+    "expected": true
+  },
+  {
+    "name": "1/1/candidate candidate identity",
+    "passed": true,
+    "observed": "validated-raw-candidate",
+    "expected": "validated-raw-candidate"
+  },
+  {
+    "name": "1/1/candidate foreign host",
+    "passed": true,
+    "observed": 403,
+    "expected": 403
+  },
+  {
+    "name": "1/1/candidate missing write origin",
+    "passed": true,
+    "observed": 403,
+    "expected": 403
+  },
+  {
+    "name": "1/1/candidate visible candidate banner",
+    "passed": true,
+    "observed": true,
+    "expected": true
+  },
+  {
+    "name": "1/1/candidate corrupt stored JSON rejected",
+    "passed": true,
+    "observed": 500,
+    "expected": 500
+  },
+  {
+    "name": "1/1/candidate exact recovery",
+    "passed": true,
+    "observed": "7fa56265c61001f4b188057aeebbe832a356f9cd94aaf1bd66dd05201d2004ec",
+    "expected": "7fa56265c61001f4b188057aeebbe832a356f9cd94aaf1bd66dd05201d2004ec"
+  },
+  {
+    "name": "1/1/candidate approximate process HWM",
+    "diagnostic_only": true,
+    "value": [
+      "VmHWM:\t    7572 kB"
+    ]
+  },
+  {
+    "name": "1/1/candidate clean shutdown",
+    "passed": true,
+    "observed": 0,
+    "expected": 0
+  },
+  {
+    "name": "1/1/candidate integrity",
+    "passed": true,
+    "observed": "ok",
+    "expected": "ok"
+  },
+  {
+    "name": "1/2/candidate full count",
+    "passed": true,
+    "observed": 1,
+    "expected": 1
+  },
+  {
+    "name": "1/2/candidate full output parity",
+    "passed": true,
+    "observed": "7fa56265c61001f4b188057aeebbe832a356f9cd94aaf1bd66dd05201d2004ec",
+    "expected": "7fa56265c61001f4b188057aeebbe832a356f9cd94aaf1bd66dd05201d2004ec"
+  },
+  {
+    "name": "1/2/candidate JSON type",
+    "passed": true,
+    "observed": "application/json",
+    "expected": "application/json"
+  },
+  {
+    "name": "1/2/candidate no-store",
+    "passed": true,
+    "observed": "no-store",
+    "expected": "no-store"
+  },
+  {
+    "name": "1/2/candidate nosniff",
+    "passed": true,
+    "observed": "nosniff",
+    "expected": "nosniff"
+  },
+  {
+    "name": "1/2/candidate CSP",
+    "passed": true,
+    "observed": true,
+    "expected": true
+  },
+  {
+    "name": "1/2/candidate candidate identity",
+    "passed": true,
+    "observed": "validated-raw-candidate",
+    "expected": "validated-raw-candidate"
+  },
+  {
+    "name": "1/2/candidate foreign host",
+    "passed": true,
+    "observed": 403,
+    "expected": 403
+  },
+  {
+    "name": "1/2/candidate missing write origin",
+    "passed": true,
+    "observed": 403,
+    "expected": 403
+  },
+  {
+    "name": "1/2/candidate visible candidate banner",
+    "passed": true,
+    "observed": true,
+    "expected": true
+  },
+  {
+    "name": "1/2/candidate corrupt stored JSON rejected",
+    "passed": true,
+    "observed": 500,
+    "expected": 500
+  },
+  {
+    "name": "1/2/candidate exact recovery",
+    "passed": true,
+    "observed": "7fa56265c61001f4b188057aeebbe832a356f9cd94aaf1bd66dd05201d2004ec",
+    "expected": "7fa56265c61001f4b188057aeebbe832a356f9cd94aaf1bd66dd05201d2004ec"
+  },
+  {
+    "name": "1/2/candidate approximate process HWM",
+    "diagnostic_only": true,
+    "value": [
+      "VmHWM:\t    7476 kB"
+    ]
+  },
+  {
+    "name": "1/2/candidate clean shutdown",
+    "passed": true,
+    "observed": 0,
+    "expected": 0
+  },
+  {
+    "name": "1/2/candidate integrity",
+    "passed": true,
+    "observed": "ok",
+    "expected": "ok"
+  },
+  {
+    "name": "1/3/baseline full count",
+    "passed": true,
+    "observed": 1,
+    "expected": 1
+  },
+  {
+    "name": "1/3/baseline full output parity",
+    "passed": true,
+    "observed": "7fa56265c61001f4b188057aeebbe832a356f9cd94aaf1bd66dd05201d2004ec",
+    "expected": "7fa56265c61001f4b188057aeebbe832a356f9cd94aaf1bd66dd05201d2004ec"
+  },
+  {
+    "name": "1/3/baseline JSON type",
+    "passed": true,
+    "observed": "application/json",
+    "expected": "application/json"
+  },
+  {
+    "name": "1/3/baseline no-store",
+    "passed": true,
+    "observed": "no-store",
+    "expected": "no-store"
+  },
+  {
+    "name": "1/3/baseline nosniff",
+    "passed": true,
+    "observed": "nosniff",
+    "expected": "nosniff"
+  },
+  {
+    "name": "1/3/baseline CSP",
+    "passed": true,
+    "observed": true,
+    "expected": true
+  },
+  {
+    "name": "1/3/baseline foreign host",
+    "passed": true,
+    "observed": 403,
+    "expected": 403
+  },
+  {
+    "name": "1/3/baseline missing write origin",
+    "passed": true,
+    "observed": 403,
+    "expected": 403
+  },
+  {
+    "name": "1/3/baseline visible candidate banner",
+    "passed": true,
+    "observed": false,
+    "expected": false
+  },
+  {
+    "name": "1/3/baseline corrupt stored JSON rejected",
+    "passed": true,
+    "observed": 500,
+    "expected": 500
+  },
+  {
+    "name": "1/3/baseline exact recovery",
+    "passed": true,
+    "observed": "7fa56265c61001f4b188057aeebbe832a356f9cd94aaf1bd66dd05201d2004ec",
+    "expected": "7fa56265c61001f4b188057aeebbe832a356f9cd94aaf1bd66dd05201d2004ec"
+  },
+  {
+    "name": "1/3/baseline approximate process HWM",
+    "diagnostic_only": true,
+    "value": [
+      "VmHWM:\t    7708 kB"
+    ]
+  },
+  {
+    "name": "1/3/baseline clean shutdown",
+    "passed": true,
+    "observed": 0,
+    "expected": 0
+  },
+  {
+    "name": "1/3/baseline integrity",
+    "passed": true,
+    "observed": "ok",
+    "expected": "ok"
+  },
+  {
+    "name": "10/0/baseline full count",
+    "passed": true,
+    "observed": 10,
+    "expected": 10
+  },
+  {
+    "name": "10/0/baseline full output parity",
+    "passed": true,
+    "observed": "884c674d1d3231361f1fa10390f72e0750af1ca357270b28fa424f41604f96b3",
+    "expected": "884c674d1d3231361f1fa10390f72e0750af1ca357270b28fa424f41604f96b3"
+  },
+  {
+    "name": "10/0/baseline JSON type",
+    "passed": true,
+    "observed": "application/json",
+    "expected": "application/json"
+  },
+  {
+    "name": "10/0/baseline no-store",
+    "passed": true,
+    "observed": "no-store",
+    "expected": "no-store"
+  },
+  {
+    "name": "10/0/baseline nosniff",
+    "passed": true,
+    "observed": "nosniff",
+    "expected": "nosniff"
+  },
+  {
+    "name": "10/0/baseline CSP",
+    "passed": true,
+    "observed": true,
+    "expected": true
+  },
+  {
+    "name": "10/0/baseline foreign host",
+    "passed": true,
+    "observed": 403,
+    "expected": 403
+  },
+  {
+    "name": "10/0/baseline missing write origin",
+    "passed": true,
+    "observed": 403,
+    "expected": 403
+  },
+  {
+    "name": "10/0/baseline visible candidate banner",
+    "passed": true,
+    "observed": false,
+    "expected": false
+  },
+  {
+    "name": "10/0/baseline corrupt stored JSON rejected",
+    "passed": true,
+    "observed": 500,
+    "expected": 500
+  },
+  {
+    "name": "10/0/baseline exact recovery",
+    "passed": true,
+    "observed": "884c674d1d3231361f1fa10390f72e0750af1ca357270b28fa424f41604f96b3",
+    "expected": "884c674d1d3231361f1fa10390f72e0750af1ca357270b28fa424f41604f96b3"
+  },
+  {
+    "name": "10/0/baseline approximate process HWM",
+    "diagnostic_only": true,
+    "value": [
+      "VmHWM:\t    9240 kB"
+    ]
+  },
+  {
+    "name": "10/0/baseline clean shutdown",
+    "passed": true,
+    "observed": 0,
+    "expected": 0
+  },
+  {
+    "name": "10/0/baseline integrity",
+    "passed": true,
+    "observed": "ok",
+    "expected": "ok"
+  },
+  {
+    "name": "10/1/candidate full count",
+    "passed": true,
+    "observed": 10,
+    "expected": 10
+  },
+  {
+    "name": "10/1/candidate full output parity",
+    "passed": true,
+    "observed": "884c674d1d3231361f1fa10390f72e0750af1ca357270b28fa424f41604f96b3",
+    "expected": "884c674d1d3231361f1fa10390f72e0750af1ca357270b28fa424f41604f96b3"
+  },
+  {
+    "name": "10/1/candidate JSON type",
+    "passed": true,
+    "observed": "application/json",
+    "expected": "application/json"
+  },
+  {
+    "name": "10/1/candidate no-store",
+    "passed": true,
+    "observed": "no-store",
+    "expected": "no-store"
+  },
+  {
+    "name": "10/1/candidate nosniff",
+    "passed": true,
+    "observed": "nosniff",
+    "expected": "nosniff"
+  },
+  {
+    "name": "10/1/candidate CSP",
+    "passed": true,
+    "observed": true,
+    "expected": true
+  },
+  {
+    "name": "10/1/candidate candidate identity",
+    "passed": true,
+    "observed": "validated-raw-candidate",
+    "expected": "validated-raw-candidate"
+  },
+  {
+    "name": "10/1/candidate foreign host",
+    "passed": true,
+    "observed": 403,
+    "expected": 403
+  },
+  {
+    "name": "10/1/candidate missing write origin",
+    "passed": true,
+    "observed": 403,
+    "expected": 403
+  },
+  {
+    "name": "10/1/candidate visible candidate banner",
+    "passed": true,
+    "observed": true,
+    "expected": true
+  },
+  {
+    "name": "10/1/candidate corrupt stored JSON rejected",
+    "passed": true,
+    "observed": 500,
+    "expected": 500
+  },
+  {
+    "name": "10/1/candidate exact recovery",
+    "passed": true,
+    "observed": "884c674d1d3231361f1fa10390f72e0750af1ca357270b28fa424f41604f96b3",
+    "expected": "884c674d1d3231361f1fa10390f72e0750af1ca357270b28fa424f41604f96b3"
+  },
+  {
+    "name": "10/1/candidate approximate process HWM",
+    "diagnostic_only": true,
+    "value": [
+      "VmHWM:\t    8000 kB"
+    ]
+  },
+  {
+    "name": "10/1/candidate clean shutdown",
+    "passed": true,
+    "observed": 0,
+    "expected": 0
+  },
+  {
+    "name": "10/1/candidate integrity",
+    "passed": true,
+    "observed": "ok",
+    "expected": "ok"
+  },
+  {
+    "name": "10/2/candidate full count",
+    "passed": true,
+    "observed": 10,
+    "expected": 10
+  },
+  {
+    "name": "10/2/candidate full output parity",
+    "passed": true,
+    "observed": "884c674d1d3231361f1fa10390f72e0750af1ca357270b28fa424f41604f96b3",
+    "expected": "884c674d1d3231361f1fa10390f72e0750af1ca357270b28fa424f41604f96b3"
+  },
+  {
+    "name": "10/2/candidate JSON type",
+    "passed": true,
+    "observed": "application/json",
+    "expected": "application/json"
+  },
+  {
+    "name": "10/2/candidate no-store",
+    "passed": true,
+    "observed": "no-store",
+    "expected": "no-store"
+  },
+  {
+    "name": "10/2/candidate nosniff",
+    "passed": true,
+    "observed": "nosniff",
+    "expected": "nosniff"
+  },
+  {
+    "name": "10/2/candidate CSP",
+    "passed": true,
+    "observed": true,
+    "expected": true
+  },
+  {
+    "name": "10/2/candidate candidate identity",
+    "passed": true,
+    "observed": "validated-raw-candidate",
+    "expected": "validated-raw-candidate"
+  },
+  {
+    "name": "10/2/candidate foreign host",
+    "passed": true,
+    "observed": 403,
+    "expected": 403
+  },
+  {
+    "name": "10/2/candidate missing write origin",
+    "passed": true,
+    "observed": 403,
+    "expected": 403
+  },
+  {
+    "name": "10/2/candidate visible candidate banner",
+    "passed": true,
+    "observed": true,
+    "expected": true
+  },
+  {
+    "name": "10/2/candidate corrupt stored JSON rejected",
+    "passed": true,
+    "observed": 500,
+    "expected": 500
+  },
+  {
+    "name": "10/2/candidate exact recovery",
+    "passed": true,
+    "observed": "884c674d1d3231361f1fa10390f72e0750af1ca357270b28fa424f41604f96b3",
+    "expected": "884c674d1d3231361f1fa10390f72e0750af1ca357270b28fa424f41604f96b3"
+  },
+  {
+    "name": "10/2/candidate approximate process HWM",
+    "diagnostic_only": true,
+    "value": [
+      "VmHWM:\t    7980 kB"
+    ]
+  },
+  {
+    "name": "10/2/candidate clean shutdown",
+    "passed": true,
+    "observed": 0,
+    "expected": 0
+  },
+  {
+    "name": "10/2/candidate integrity",
+    "passed": true,
+    "observed": "ok",
+    "expected": "ok"
+  },
+  {
+    "name": "10/3/baseline full count",
+    "passed": true,
+    "observed": 10,
+    "expected": 10
+  },
+  {
+    "name": "10/3/baseline full output parity",
+    "passed": true,
+    "observed": "884c674d1d3231361f1fa10390f72e0750af1ca357270b28fa424f41604f96b3",
+    "expected": "884c674d1d3231361f1fa10390f72e0750af1ca357270b28fa424f41604f96b3"
+  },
+  {
+    "name": "10/3/baseline JSON type",
+    "passed": true,
+    "observed": "application/json",
+    "expected": "application/json"
+  },
+  {
+    "name": "10/3/baseline no-store",
+    "passed": true,
+    "observed": "no-store",
+    "expected": "no-store"
+  },
+  {
+    "name": "10/3/baseline nosniff",
+    "passed": true,
+    "observed": "nosniff",
+    "expected": "nosniff"
+  },
+  {
+    "name": "10/3/baseline CSP",
+    "passed": true,
+    "observed": true,
+    "expected": true
+  },
+  {
+    "name": "10/3/baseline foreign host",
+    "passed": true,
+    "observed": 403,
+    "expected": 403
+  },
+  {
+    "name": "10/3/baseline missing write origin",
+    "passed": true,
+    "observed": 403,
+    "expected": 403
+  },
+  {
+    "name": "10/3/baseline visible candidate banner",
+    "passed": true,
+    "observed": false,
+    "expected": false
+  },
+  {
+    "name": "10/3/baseline corrupt stored JSON rejected",
+    "passed": true,
+    "observed": 500,
+    "expected": 500
+  },
+  {
+    "name": "10/3/baseline exact recovery",
+    "passed": true,
+    "observed": "884c674d1d3231361f1fa10390f72e0750af1ca357270b28fa424f41604f96b3",
+    "expected": "884c674d1d3231361f1fa10390f72e0750af1ca357270b28fa424f41604f96b3"
+  },
+  {
+    "name": "10/3/baseline approximate process HWM",
+    "diagnostic_only": true,
+    "value": [
+      "VmHWM:\t    9236 kB"
+    ]
+  },
+  {
+    "name": "10/3/baseline clean shutdown",
+    "passed": true,
+    "observed": 0,
+    "expected": 0
+  },
+  {
+    "name": "10/3/baseline integrity",
+    "passed": true,
+    "observed": "ok",
+    "expected": "ok"
+  },
+  {
+    "name": "50/0/baseline full count",
+    "passed": true,
+    "observed": 50,
+    "expected": 50
+  },
+  {
+    "name": "50/0/baseline full output parity",
+    "passed": true,
+    "observed": "d2ab0d1664b82e39f3f8c9842ce937f46f367d0057b8472174c9ae2c566c4593",
+    "expected": "d2ab0d1664b82e39f3f8c9842ce937f46f367d0057b8472174c9ae2c566c4593"
+  },
+  {
+    "name": "50/0/baseline JSON type",
+    "passed": true,
+    "observed": "application/json",
+    "expected": "application/json"
+  },
+  {
+    "name": "50/0/baseline no-store",
+    "passed": true,
+    "observed": "no-store",
+    "expected": "no-store"
+  },
+  {
+    "name": "50/0/baseline nosniff",
+    "passed": true,
+    "observed": "nosniff",
+    "expected": "nosniff"
+  },
+  {
+    "name": "50/0/baseline CSP",
+    "passed": true,
+    "observed": true,
+    "expected": true
+  },
+  {
+    "name": "50/0/baseline foreign host",
+    "passed": true,
+    "observed": 403,
+    "expected": 403
+  },
+  {
+    "name": "50/0/baseline missing write origin",
+    "passed": true,
+    "observed": 403,
+    "expected": 403
+  },
+  {
+    "name": "50/0/baseline visible candidate banner",
+    "passed": true,
+    "observed": false,
+    "expected": false
+  },
+  {
+    "name": "50/0/baseline corrupt stored JSON rejected",
+    "passed": true,
+    "observed": 500,
+    "expected": 500
+  },
+  {
+    "name": "50/0/baseline exact recovery",
+    "passed": true,
+    "observed": "d2ab0d1664b82e39f3f8c9842ce937f46f367d0057b8472174c9ae2c566c4593",
+    "expected": "d2ab0d1664b82e39f3f8c9842ce937f46f367d0057b8472174c9ae2c566c4593"
+  },
+  {
+    "name": "50/0/baseline approximate process HWM",
+    "diagnostic_only": true,
+    "value": [
+      "VmHWM:\t   15992 kB"
+    ]
+  },
+  {
+    "name": "50/0/baseline clean shutdown",
+    "passed": true,
+    "observed": 0,
+    "expected": 0
+  },
+  {
+    "name": "50/0/baseline integrity",
+    "passed": true,
+    "observed": "ok",
+    "expected": "ok"
+  },
+  {
+    "name": "50/1/candidate full count",
+    "passed": true,
+    "observed": 50,
+    "expected": 50
+  },
+  {
+    "name": "50/1/candidate full output parity",
+    "passed": true,
+    "observed": "d2ab0d1664b82e39f3f8c9842ce937f46f367d0057b8472174c9ae2c566c4593",
+    "expected": "d2ab0d1664b82e39f3f8c9842ce937f46f367d0057b8472174c9ae2c566c4593"
+  },
+  {
+    "name": "50/1/candidate JSON type",
+    "passed": true,
+    "observed": "application/json",
+    "expected": "application/json"
+  },
+  {
+    "name": "50/1/candidate no-store",
+    "passed": true,
+    "observed": "no-store",
+    "expected": "no-store"
+  },
+  {
+    "name": "50/1/candidate nosniff",
+    "passed": true,
+    "observed": "nosniff",
+    "expected": "nosniff"
+  },
+  {
+    "name": "50/1/candidate CSP",
+    "passed": true,
+    "observed": true,
+    "expected": true
+  },
+  {
+    "name": "50/1/candidate candidate identity",
+    "passed": true,
+    "observed": "validated-raw-candidate",
+    "expected": "validated-raw-candidate"
+  },
+  {
+    "name": "50/1/candidate foreign host",
+    "passed": true,
+    "observed": 403,
+    "expected": 403
+  },
+  {
+    "name": "50/1/candidate missing write origin",
+    "passed": true,
+    "observed": 403,
+    "expected": 403
+  },
+  {
+    "name": "50/1/candidate visible candidate banner",
+    "passed": true,
+    "observed": true,
+    "expected": true
+  },
+  {
+    "name": "50/1/candidate corrupt stored JSON rejected",
+    "passed": true,
+    "observed": 500,
+    "expected": 500
+  },
+  {
+    "name": "50/1/candidate exact recovery",
+    "passed": true,
+    "observed": "d2ab0d1664b82e39f3f8c9842ce937f46f367d0057b8472174c9ae2c566c4593",
+    "expected": "d2ab0d1664b82e39f3f8c9842ce937f46f367d0057b8472174c9ae2c566c4593"
+  },
+  {
+    "name": "50/1/candidate approximate process HWM",
+    "diagnostic_only": true,
+    "value": [
+      "VmHWM:\t    9904 kB"
+    ]
+  },
+  {
+    "name": "50/1/candidate clean shutdown",
+    "passed": true,
+    "observed": 0,
+    "expected": 0
+  },
+  {
+    "name": "50/1/candidate integrity",
+    "passed": true,
+    "observed": "ok",
+    "expected": "ok"
+  },
+  {
+    "name": "50/2/candidate full count",
+    "passed": true,
+    "observed": 50,
+    "expected": 50
+  },
+  {
+    "name": "50/2/candidate full output parity",
+    "passed": true,
+    "observed": "d2ab0d1664b82e39f3f8c9842ce937f46f367d0057b8472174c9ae2c566c4593",
+    "expected": "d2ab0d1664b82e39f3f8c9842ce937f46f367d0057b8472174c9ae2c566c4593"
+  },
+  {
+    "name": "50/2/candidate JSON type",
+    "passed": true,
+    "observed": "application/json",
+    "expected": "application/json"
+  },
+  {
+    "name": "50/2/candidate no-store",
+    "passed": true,
+    "observed": "no-store",
+    "expected": "no-store"
+  },
+  {
+    "name": "50/2/candidate nosniff",
+    "passed": true,
+    "observed": "nosniff",
+    "expected": "nosniff"
+  },
+  {
+    "name": "50/2/candidate CSP",
+    "passed": true,
+    "observed": true,
+    "expected": true
+  },
+  {
+    "name": "50/2/candidate candidate identity",
+    "passed": true,
+    "observed": "validated-raw-candidate",
+    "expected": "validated-raw-candidate"
+  },
+  {
+    "name": "50/2/candidate foreign host",
+    "passed": true,
+    "observed": 403,
+    "expected": 403
+  },
+  {
+    "name": "50/2/candidate missing write origin",
+    "passed": true,
+    "observed": 403,
+    "expected": 403
+  },
+  {
+    "name": "50/2/candidate visible candidate banner",
+    "passed": true,
+    "observed": true,
+    "expected": true
+  },
+  {
+    "name": "50/2/candidate corrupt stored JSON rejected",
+    "passed": true,
+    "observed": 500,
+    "expected": 500
+  },
+  {
+    "name": "50/2/candidate exact recovery",
+    "passed": true,
+    "observed": "d2ab0d1664b82e39f3f8c9842ce937f46f367d0057b8472174c9ae2c566c4593",
+    "expected": "d2ab0d1664b82e39f3f8c9842ce937f46f367d0057b8472174c9ae2c566c4593"
+  },
+  {
+    "name": "50/2/candidate approximate process HWM",
+    "diagnostic_only": true,
+    "value": [
+      "VmHWM:\t    9824 kB"
+    ]
+  },
+  {
+    "name": "50/2/candidate clean shutdown",
+    "passed": true,
+    "observed": 0,
+    "expected": 0
+  },
+  {
+    "name": "50/2/candidate integrity",
+    "passed": true,
+    "observed": "ok",
+    "expected": "ok"
+  },
+  {
+    "name": "50/3/baseline full count",
+    "passed": true,
+    "observed": 50,
+    "expected": 50
+  },
+  {
+    "name": "50/3/baseline full output parity",
+    "passed": true,
+    "observed": "d2ab0d1664b82e39f3f8c9842ce937f46f367d0057b8472174c9ae2c566c4593",
+    "expected": "d2ab0d1664b82e39f3f8c9842ce937f46f367d0057b8472174c9ae2c566c4593"
+  },
+  {
+    "name": "50/3/baseline JSON type",
+    "passed": true,
+    "observed": "application/json",
+    "expected": "application/json"
+  },
+  {
+    "name": "50/3/baseline no-store",
+    "passed": true,
+    "observed": "no-store",
+    "expected": "no-store"
+  },
+  {
+    "name": "50/3/baseline nosniff",
+    "passed": true,
+    "observed": "nosniff",
+    "expected": "nosniff"
+  },
+  {
+    "name": "50/3/baseline CSP",
+    "passed": true,
+    "observed": true,
+    "expected": true
+  },
+  {
+    "name": "50/3/baseline foreign host",
+    "passed": true,
+    "observed": 403,
+    "expected": 403
+  },
+  {
+    "name": "50/3/baseline missing write origin",
+    "passed": true,
+    "observed": 403,
+    "expected": 403
+  },
+  {
+    "name": "50/3/baseline visible candidate banner",
+    "passed": true,
+    "observed": false,
+    "expected": false
+  },
+  {
+    "name": "50/3/baseline corrupt stored JSON rejected",
+    "passed": true,
+    "observed": 500,
+    "expected": 500
+  },
+  {
+    "name": "50/3/baseline exact recovery",
+    "passed": true,
+    "observed": "d2ab0d1664b82e39f3f8c9842ce937f46f367d0057b8472174c9ae2c566c4593",
+    "expected": "d2ab0d1664b82e39f3f8c9842ce937f46f367d0057b8472174c9ae2c566c4593"
+  },
+  {
+    "name": "50/3/baseline approximate process HWM",
+    "diagnostic_only": true,
+    "value": [
+      "VmHWM:\t   15968 kB"
+    ]
+  },
+  {
+    "name": "50/3/baseline clean shutdown",
+    "passed": true,
+    "observed": 0,
+    "expected": 0
+  },
+  {
+    "name": "50/3/baseline integrity",
+    "passed": true,
+    "observed": "ok",
+    "expected": "ok"
+  }
+]

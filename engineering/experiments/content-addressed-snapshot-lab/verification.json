@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "regression": {
+    "test": "reopening_for_read_does_not_write_the_database_header",
+    "before": "failed: read-only reopen changed file digest",
+    "repair": "assign application_id only on initial creation",
+    "after": "passed; full file bytes unchanged"
+  },
+  "focused_tests": 6,
+  "generated_history_cases": 1000,
+  "clippy_all_targets": "passed with warnings denied",
+  "unit_and_integration": {
+    "unit_tests": 114,
+    "integration_tests": 8,
+    "failed": 0
+  },
+  "binary_sha256": "8d99c89b771568a6a822e07a0d24e52dc397f28658514e589dd74f68d8ff833b",
+  "compiler": "rustc 1.99.1, release, locked offline build",
+  "scope": "Isolated experiment; original SnapshotStore and app deployment unchanged"
+}

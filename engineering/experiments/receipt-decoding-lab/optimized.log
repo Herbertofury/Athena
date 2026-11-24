@@ -1,0 +1,12 @@
+test_all_retained_receipts_remain_complete (test_receipt_decoding.ReceiptDecodingTests.test_all_retained_receipts_remain_complete) ... ok
+test_ci_discovers_every_javascript_contract (test_receipt_decoding.ReceiptDecodingTests.test_ci_discovers_every_javascript_contract) ... ok
+test_duplicate_keys_at_any_depth_are_rejected (test_receipt_decoding.ReceiptDecodingTests.test_duplicate_keys_at_any_depth_are_rejected) ... ok
+test_malformed_and_concatenated_json_rejected (test_receipt_decoding.ReceiptDecodingTests.test_malformed_and_concatenated_json_rejected) ... ok
+test_nonfinite_constants_and_exponents_are_rejected (test_receipt_decoding.ReceiptDecodingTests.test_nonfinite_constants_and_exponents_are_rejected) ... ok
+test_runner_decodes_before_measurement_acceptance (test_receipt_decoding.ReceiptDecodingTests.test_runner_decodes_before_measurement_acceptance) ... ok
+test_unknown_complete_fields_and_finite_numbers_survive (test_receipt_decoding.ReceiptDecodingTests.test_unknown_complete_fields_and_finite_numbers_survive) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 0.008s
+
+OK

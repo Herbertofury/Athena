@@ -1,0 +1,211 @@
+[
+  {
+    "id": "EV31001",
+    "title": "samply upstream profiler documentation",
+    "url": "https://github.com/mstange/samply",
+    "observed_version": "README reviewed 2026-10-31; release installation references 0.13.1",
+    "topic": "performance-evidence-and-correctness",
+    "note": "CPU sampling, Firefox Profiler integration, symbols and local profile handling reviewed; no execution.",
+    "checked_at": "2026-10-31",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "EV31002",
+    "title": "samply 0.13.1 release",
+    "url": "https://github.com/mstange/samply/releases/tag/samply-v0.13.1",
+    "observed_version": "samply-v0.13.1; GitHub release API published 2025-02-01",
+    "topic": "performance-evidence-and-correctness",
+    "note": "Windows ETW support and symbol/CoreCLR limitations; older release freshly checked, not a 2026 release.",
+    "checked_at": "2026-10-31",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "EV31003",
+    "title": "Perforator architecture and platform requirements",
+    "url": "https://github.com/yandex/perforator",
+    "observed_version": "README reviewed 2026-10-31",
+    "topic": "performance-evidence-and-correctness",
+    "note": "eBPF sampling, supported languages, Linux x86-64 requirements and component-specific licenses; overhead claims remain publisher-reported.",
+    "checked_at": "2026-10-31",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "EV31004",
+    "title": "Perforator v0.1.0 release",
+    "url": "https://github.com/yandex/perforator/releases/tag/v0.1.0",
+    "observed_version": "v0.1.0; published 2026-02-24",
+    "topic": "performance-evidence-and-correctness",
+    "note": "Versioning correction rather than a major-release stability claim; profile timestamp and mismatched-sample fixes reviewed.",
+    "checked_at": "2026-10-31",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "EV31005",
+    "title": "Shuttle randomized concurrency testing",
+    "url": "https://github.com/awslabs/shuttle",
+    "observed_version": "README reviewed 2026-10-31",
+    "topic": "performance-evidence-and-correctness",
+    "note": "Controlled scheduling and deterministic replay; upstream explicitly says passing randomized tests does not prove correctness.",
+    "checked_at": "2026-10-31",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "EV31006",
+    "title": "Shuttle v0.9.9 release",
+    "url": "https://github.com/awslabs/shuttle/releases/tag/v0.9.9",
+    "observed_version": "v0.9.9; published 2026-10-29",
+    "topic": "performance-evidence-and-correctness",
+    "note": "Release API verified fixes to caught-panic lock/channel behavior, atomic fetch_update modeling and Tokio Notify cancellation; dependency versions must align.",
+    "checked_at": "2026-10-31",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "EV31007",
+    "title": "Stateright model checking API",
+    "url": "https://docs.rs/stateright/latest/stateright/",
+    "observed_version": "docs.rs displayed 0.31.0 on 2026-10-31",
+    "topic": "performance-evidence-and-correctness",
+    "note": "Model checker and executable actors; bounded state space is distinct from an unbounded proof.",
+    "checked_at": "2026-10-31",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "EV31008",
+    "title": "Stateright upstream model and liveness limitations",
+    "url": "https://github.com/stateright/stateright",
+    "observed_version": "master ab8c8be9341505e0f71edbe5dd88ed275bd976a4; commit dated 2025-07-27",
+    "topic": "performance-evidence-and-correctness",
+    "note": "README states experimental/incomplete liveness checking. Latest-release API returned 404; documentation and source revision establish the observation, not a new release.",
+    "checked_at": "2026-10-31",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "EV31009",
+    "title": "CodSpeed instrument and CLI contracts",
+    "url": "https://github.com/CodSpeedHQ/codspeed/blob/main/README.md",
+    "observed_version": "README reviewed 2026-10-31",
+    "topic": "performance-evidence-and-correctness",
+    "note": "CPU simulation, walltime and heap-allocation instruments have distinct semantics; ordinary shared VMs can make walltime noisy.",
+    "checked_at": "2026-10-31",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "EV31010",
+    "title": "CodSpeed v5.6.1 release",
+    "url": "https://github.com/CodSpeedHQ/codspeed/releases/tag/v5.6.1",
+    "observed_version": "v5.6.1; published 2026-10-30",
+    "topic": "performance-evidence-and-correctness",
+    "note": "Release API verifies a walltime hang fix for corrupted perf jitdump after Python forks; no Atlas benchmark executed.",
+    "checked_at": "2026-10-31",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "EV31011",
+    "title": "TypeCraft OSDI 2026 publication",
+    "url": "https://www.usenix.org/conference/osdi26/presentation/li-zecheng",
+    "observed_version": "OSDI 2026 proceedings; July 2026; exact publication day not assigned",
+    "topic": "performance-evidence-and-correctness",
+    "note": "Primary publication metadata and type/field attribution method reviewed.",
+    "checked_at": "2026-10-31",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "EV31012",
+    "title": "TypeCraft full paper",
+    "url": "https://www.usenix.org/system/files/osdi26-li-zecheng.pdf",
+    "observed_version": "OSDI 2026 paper, pages 2483-2499",
+    "topic": "performance-evidence-and-correctness",
+    "note": "Read type resolution and limitations: x86 implementation, best coverage for C, reduced coverage for C++/Go, dependence on available DWARF. Results not reproduced.",
+    "checked_at": "2026-10-31",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "EV31013",
+    "title": "Diagnosing Performance Issues in Application-Defined Resources",
+    "url": "https://www.usenix.org/conference/osdi26/presentation/hu-yigong",
+    "observed_version": "OSDI 2026 proceedings; July 2026; exact publication day not assigned",
+    "topic": "performance-evidence-and-correctness",
+    "note": "Paper names gigiprofiler and combines semantic candidate discovery, static validation and runtime resource evidence.",
+    "checked_at": "2026-10-31",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "EV31014",
+    "title": "Application-defined resource diagnosis full paper",
+    "url": "https://www.usenix.org/system/files/osdi26-hu-yigong.pdf",
+    "observed_version": "OSDI 2026 paper, pages 647-664",
+    "topic": "performance-evidence-and-correctness",
+    "note": "Method, resource-event validation, evaluated cases and ablations reviewed; no diagnosis or speed claim reproduced.",
+    "checked_at": "2026-10-31",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "EV31015",
+    "title": "OmniProfiler paper artifact README",
+    "url": "https://github.com/BlizzardLab/OmniProfiler/blob/c3136bf78bc8e74fdd5728be8150999fe82040e0/README.md",
+    "observed_version": "c3136bf78bc8e74fdd5728be8150999fe82040e0; artifact README read at this revision",
+    "topic": "performance-evidence-and-correctness",
+    "note": "Artifact identifies the OSDI paper, calls itself OmniProfiler, and requires LLVM 17 passes, generated source documentation and configured LLM provider; build not attempted.",
+    "checked_at": "2026-10-31",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "EV31016",
+    "title": "Semisolates and Try OSDI 2026 publication",
+    "url": "https://www.usenix.org/conference/osdi26/presentation/lamprou",
+    "observed_version": "OSDI 2026 proceedings; July 2026; exact publication day not assigned",
+    "topic": "performance-evidence-and-correctness",
+    "note": "Effect inspection, selective application and stacking; artifact recognition is not an application acceptance result.",
+    "checked_at": "2026-10-31",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "EV31017",
+    "title": "Semisolates and Try full paper",
+    "url": "https://www.usenix.org/system/files/osdi26-lamprou.pdf",
+    "observed_version": "OSDI 2026 paper, pages 453-471",
+    "topic": "performance-evidence-and-correctness",
+    "note": "Read user/PID namespace restrictions, permissions/IPC caveats and effect-application limitations; no blanket transaction or security guarantee.",
+    "checked_at": "2026-10-31",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "EV31018",
+    "title": "Try upstream safety and platform boundary",
+    "url": "https://github.com/binpash/try",
+    "observed_version": "README reviewed 2026-10-31",
+    "topic": "performance-evidence-and-correctness",
+    "note": "Upstream warns that semisolation is for already-trusted commands; network effects are allowed by default; Linux namespace and OverlayFS requirements apply.",
+    "checked_at": "2026-10-31",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "EV31019",
+    "title": "Try v0.2.1 release",
+    "url": "https://github.com/binpash/try/releases/tag/v0.2.1",
+    "observed_version": "v0.2.1; published 2026-09-15",
+    "topic": "performance-evidence-and-correctness",
+    "note": "Release API reviewed; network-disable option and effect-handling changes. Release is distinct from the paper artifact checkpoint.",
+    "checked_at": "2026-10-31",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  }
+]

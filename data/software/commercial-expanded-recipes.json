@@ -1,0 +1,382 @@
+{
+  "recipes": [
+    {
+      "id": "choose-layered-image-editor",
+      "title": "Choose an editor for layered images and retouching",
+      "description": "Start with the kind of artwork and editable files you must deliver; painting, photo retouching and vector work need different strengths.",
+      "picks": [
+        {
+          "app_id": "adobe-photoshop",
+          "label": "Photoshop document handoff",
+          "reason": "Layered compositing and retouching fit a workflow that exchanges editable Photoshop documents.",
+          "tradeoff": "Subscription and cloud-feature allowances add cost; test required plug-ins and file round trips."
+        },
+        {
+          "app_id": "affinity",
+          "label": "Combined design application",
+          "reason": "Pixel, vector and layout studios suit a mixed design workflow with a free core application.",
+          "tradeoff": "A Canva account is required and optional AI features depend on paid plans; verify client file exchange."
+        },
+        {
+          "app_id": "gimp",
+          "label": "Open-source raster editing",
+          "reason": "A capable candidate for local raster editing when an open-source workflow matters.",
+          "tradeoff": "Check the exact adjustment, color-management and Photoshop interchange requirements."
+        },
+        {
+          "app_id": "krita",
+          "label": "Painting and illustration",
+          "reason": "Brush-focused drawing tools suit illustration and digital painting.",
+          "tradeoff": "A painting workflow is different from photographic catalog management or a full Photoshop handoff."
+        }
+      ]
+    },
+    {
+      "id": "choose-raw-photo-workflow",
+      "title": "Choose a RAW photo development workflow",
+      "description": "Evaluate representative camera files, image organization, tethering needs and the full licensing model before selecting a converter.",
+      "picks": [
+        {
+          "app_id": "adobe-lightroom-classic",
+          "label": "Local catalog and batch editing",
+          "reason": "Combines a local photo catalog with repeatable RAW development.",
+          "tradeoff": "A subscription is required, and Classic uses a different storage model from cloud-centered Lightroom."
+        },
+        {
+          "app_id": "capture-one-pro",
+          "label": "Tethered studio work",
+          "reason": "Tethered capture and controlled color editing suit supported studio camera setups.",
+          "tradeoff": "Check camera support and plan differences; a perpetual license has different update rights."
+        },
+        {
+          "app_id": "dxo-photolab",
+          "label": "Optical corrections with perpetual licensing",
+          "reason": "Camera/lens corrections and RAW processing make it a candidate for a purchased-version workflow.",
+          "tradeoff": "Test exact camera and lens support, GPU requirements and edition-specific features."
+        },
+        {
+          "app_id": "darktable",
+          "label": "Open-source photographic workflow",
+          "reason": "Non-destructive RAW processing suits a local open-source photo workflow.",
+          "tradeoff": "Its processing model and learning curve differ from commercial editors; test your own images."
+        },
+        {
+          "app_id": "rawtherapee",
+          "label": "Detailed RAW development",
+          "reason": "A useful candidate for detailed RAW conversion and adjustment.",
+          "tradeoff": "Choose a separate organizational workflow when its catalog features do not match your archive."
+        }
+      ]
+    },
+    {
+      "id": "choose-video-editing-workflow",
+      "title": "Choose a video editor for real project delivery",
+      "description": "Use representative footage and required export formats; timeline compatibility, color work and hardware matter more than a universal ranking.",
+      "picks": [
+        {
+          "app_id": "davinci-resolve",
+          "label": "Editing with color and finishing",
+          "reason": "A candidate when editing, color and finishing need a coordinated production workflow.",
+          "tradeoff": "Free and Studio capabilities differ, and GPU, codec and platform support need checking."
+        },
+        {
+          "app_id": "adobe-premiere",
+          "label": "Adobe timeline exchange",
+          "reason": "Fits teams that deliver editable Premiere projects and connect to Adobe post-production tools.",
+          "tradeoff": "Subscription and project-sized CPU, GPU and storage needs add cost."
+        },
+        {
+          "app_id": "kdenlive",
+          "label": "Open-source nonlinear editing",
+          "reason": "A general timeline editor for users who want an open-source editing workflow.",
+          "tradeoff": "Evaluate effects, proxy behavior and export results using the intended footage."
+        },
+        {
+          "app_id": "shotcut",
+          "label": "Independent desktop editing",
+          "reason": "A candidate for straightforward editing and media workflows.",
+          "tradeoff": "Complex collaboration and project exchange may require a different editor."
+        }
+      ]
+    },
+    {
+      "id": "choose-motion-graphics-compositor",
+      "title": "Choose tools for motion graphics and visual effects",
+      "description": "Separate animated design, node compositing and three-dimensional scene creation before comparing applications.",
+      "picks": [
+        {
+          "app_id": "adobe-after-effects",
+          "label": "Layered motion design",
+          "reason": "Keyframed layers, animated text and tracking suit motion-design compositions.",
+          "tradeoff": "Subscription, preview memory and render time matter; a video editor is still useful for final assembly."
+        },
+        {
+          "app_id": "natron",
+          "label": "Node-based compositing",
+          "reason": "A node workflow suits assembling image operations into a visual effects graph.",
+          "tradeoff": "Check the required effects, plug-ins and production maintenance needs."
+        },
+        {
+          "app_id": "blender",
+          "label": "Three-dimensional scenes and rendering",
+          "reason": "Use it when the shot needs models, animation, rendered scenes and compositing in one package.",
+          "tradeoff": "Learning a 3D production environment can be disproportionate for a simple title animation."
+        }
+      ]
+    },
+    {
+      "id": "choose-office-document-suite",
+      "title": "Choose a desktop office suite",
+      "description": "Compare required document fidelity, spreadsheet features, collaboration rules and supported operating systems using real files.",
+      "picks": [
+        {
+          "app_id": "microsoft-365-desktop",
+          "label": "Microsoft desktop compatibility",
+          "reason": "Choose when the work depends on Microsoft desktop application features and editable Office handoffs.",
+          "tradeoff": "Use a plan that includes installed apps; recurring cost and Windows/Mac differences remain."
+        },
+        {
+          "app_id": "libreoffice",
+          "label": "Open-source local office work",
+          "reason": "A full local office suite is useful when open formats and independent desktop editing are priorities.",
+          "tradeoff": "Complex Office documents, macros and layouts need file-by-file compatibility checks."
+        },
+        {
+          "app_id": "onlyoffice-desktop",
+          "label": "Office-format editing workflow",
+          "reason": "A candidate for editing familiar document, spreadsheet and presentation formats on the desktop.",
+          "tradeoff": "Confirm required macros, accessibility and complex document features before replacing an established suite."
+        }
+      ]
+    },
+    {
+      "id": "choose-pdf-editing-and-ocr",
+      "title": "Edit PDFs or turn scanned pages into searchable documents",
+      "description": "Identify whether the job is editing existing content, recognizing scans, rearranging pages or running repeated document transformations.",
+      "picks": [
+        {
+          "app_id": "adobe-acrobat-pro",
+          "label": "Broad PDF editing workflow",
+          "reason": "Combines PDF editing, conversion and signing for Acrobat-based document exchange.",
+          "tradeoff": "Requires a subscription; optional AI and service features can have separate entitlements."
+        },
+        {
+          "app_id": "abbyy-finereader-pdf",
+          "label": "OCR-focused conversion",
+          "reason": "A candidate when converting scanned layouts into searchable or editable documents is the main task.",
+          "tradeoff": "Mac and Windows editions differ; automated CLI/RPA use has separate license conditions."
+        },
+        {
+          "app_id": "ocrmypdf",
+          "label": "Repeatable searchable-PDF processing",
+          "reason": "Adds recognition to PDF workflows when a command-line pipeline is appropriate.",
+          "tradeoff": "It does not provide a general visual editor for the original page content."
+        },
+        {
+          "app_id": "pdf-arranger",
+          "label": "Page organization",
+          "reason": "Focused page arrangement can be sufficient for joining, reordering or splitting documents.",
+          "tradeoff": "Choose another tool for OCR or editing text inside a page."
+        },
+        {
+          "app_id": "stirling-pdf",
+          "label": "Many PDF operations in one interface",
+          "reason": "A candidate for a broader set of document transformations through one interface.",
+          "tradeoff": "Deployment, edition and component licensing need review; assess any server exposure."
+        }
+      ]
+    },
+    {
+      "id": "choose-desktop-business-analytics",
+      "title": "Explore business data and build visual reports",
+      "description": "Compare local authoring separately from publishing and team distribution, because those capabilities often have different licenses.",
+      "picks": [
+        {
+          "app_id": "power-bi-desktop",
+          "label": "Free Windows report authoring",
+          "reason": "Build and inspect local Power BI data models and report pages without a paid desktop authoring license.",
+          "tradeoff": "Windows-only desktop; organizational publishing and service sharing require separate entitlements."
+        },
+        {
+          "app_id": "tableau-desktop",
+          "label": "Visual exploration on Windows or Mac",
+          "reason": "The current Free Edition supports local visualization and database/file analysis.",
+          "tradeoff": "Free Edition is for the user’s own internal analysis: no exchange of Tableau content, client outputs or Cloud/Server access; registration and possible reconnection apply."
+        },
+        {
+          "app_id": "orange",
+          "label": "Visual analytical pipelines",
+          "reason": "Graphical workflows suit exploratory data analysis and modeling.",
+          "tradeoff": "It serves a different purpose from enterprise dashboard publishing and governed report distribution."
+        },
+        {
+          "app_id": "jupyterlab",
+          "label": "Programmable and reproducible analysis",
+          "reason": "Notebooks combine code, explanations and plots for custom data work.",
+          "tradeoff": "Requires programming and an explicit process for sharing or deploying interactive reports."
+        }
+      ]
+    },
+    {
+      "id": "choose-numerical-and-symbolic-environment",
+      "title": "Choose a numerical or symbolic computing environment",
+      "description": "Begin with existing code, mathematical methods and required toolboxes; symbolic algebra and numerical engineering are related but distinct needs.",
+      "picks": [
+        {
+          "app_id": "matlab",
+          "label": "Established engineering toolchain",
+          "reason": "Fits laboratories, courses and engineering code that require MATLAB and specific toolboxes.",
+          "tradeoff": "Toolboxes and deployment products can add licenses; Mac and Linux capabilities require checking."
+        },
+        {
+          "app_id": "gnu-octave",
+          "label": "Open-source numerical scripting",
+          "reason": "A candidate for numerical work and compatible portions of MATLAB-style code.",
+          "tradeoff": "Proprietary toolbox behavior and complete MATLAB compatibility are not guaranteed."
+        },
+        {
+          "app_id": "wolfram-mathematica",
+          "label": "Integrated symbolic notebooks",
+          "reason": "Combines symbolic mathematics, numerical evaluation and interactive technical documents.",
+          "tradeoff": "Paid use-class terms and optional online-service entitlements apply."
+        },
+        {
+          "app_id": "sagemath",
+          "label": "Open-source mathematical environment",
+          "reason": "Brings several mathematical systems into a programmable open-source workflow.",
+          "tradeoff": "Installation and differences between underlying systems can require more setup."
+        },
+        {
+          "app_id": "maxima",
+          "label": "Focused symbolic algebra",
+          "reason": "A candidate for symbolic manipulation without a full commercial technical-computing subscription.",
+          "tradeoff": "Compare notebook, plotting and specialized function needs separately."
+        }
+      ]
+    },
+    {
+      "id": "choose-drafting-or-manufacturing-cad",
+      "title": "Choose CAD for drawings, parametric parts or manufacturing",
+      "description": "Pick by the deliverable: a DWG drawing set, a parametric model, a scripted shape or a manufacturing workflow.",
+      "picks": [
+        {
+          "app_id": "autodesk-autocad",
+          "label": "DWG production drafting",
+          "reason": "Fits projects with AutoCAD-specific drawings, conventions and tooling.",
+          "tradeoff": "Subscription or Flex cost and Windows/Mac toolset differences matter."
+        },
+        {
+          "app_id": "qcad",
+          "label": "Focused two-dimensional drafting",
+          "reason": "A candidate when precise 2D drawings are the main output.",
+          "tradeoff": "Community and Professional editions differ; verify required file formats and tools."
+        },
+        {
+          "app_id": "autodesk-fusion",
+          "label": "Connected design and CAM",
+          "reason": "Combines product modeling with manufacturing preparation in one connected workflow.",
+          "tradeoff": "Personal-use eligibility is restricted, and extensions or commercial use can require payment."
+        },
+        {
+          "app_id": "freecad",
+          "label": "Open-source parametric modeling",
+          "reason": "Fits a desktop workflow that values editable parametric models and an open-source environment.",
+          "tradeoff": "Validate workbench maturity, geometry and exported files against the intended production process."
+        },
+        {
+          "app_id": "openscad",
+          "label": "Programmatic solid geometry",
+          "reason": "Useful when repeatable geometric design is best expressed as code and parameters.",
+          "tradeoff": "Its script-based workflow is less suited to direct freeform sculpting or drafting."
+        }
+      ]
+    },
+    {
+      "id": "automate-windows-desktop-tasks",
+      "title": "Automate repeated Windows desktop tasks",
+      "description": "Choose between visual flows, scriptable input and tested automation; account for UI changes and error recovery.",
+      "picks": [
+        {
+          "app_id": "power-automate-desktop",
+          "label": "Visual application workflows",
+          "reason": "Records and composes desktop or browser actions with a Microsoft automation environment.",
+          "tradeoff": "Included attended use has limits; sharing, cloud orchestration and unattended runs need appropriate licenses."
+        },
+        {
+          "app_id": "autohotkey",
+          "label": "Custom shortcuts and input scripts",
+          "reason": "Fits keyboard shortcuts, text automation and small custom Windows scripts.",
+          "tradeoff": "Scripts need maintenance and explicit handling of focus, timing and application changes."
+        },
+        {
+          "app_id": "robot-framework",
+          "label": "Structured automation suites",
+          "reason": "A keyword-driven framework suits repeatable flows with reusable libraries and reports.",
+          "tradeoff": "Library selection and a development environment add setup compared with a recorded desktop flow."
+        }
+      ]
+    },
+    {
+      "id": "run-windows-applications-on-a-mac",
+      "title": "Run Windows applications on a Mac",
+      "description": "Verify the Mac CPU architecture, guest operating system and the actual application before choosing a VM product.",
+      "picks": [
+        {
+          "app_id": "parallels-desktop",
+          "label": "Integrated Mac desktop workflow",
+          "reason": "Guided guest setup and desktop integration suit frequent use of supported Windows applications.",
+          "tradeoff": "Paid product; Windows licensing is separate, and Apple-silicon guest/application limitations remain."
+        },
+        {
+          "app_id": "vmware-desktop-hypervisors",
+          "label": "No-charge Fusion route",
+          "reason": "Fusion is the Mac member of VMware’s currently free desktop hypervisor family.",
+          "tradeoff": "Broadcom account downloads and guest support checks are required; Workstation is the separate Windows/Linux host product."
+        },
+        {
+          "app_id": "utm",
+          "label": "Open-source Mac virtualization interface",
+          "reason": "A candidate for managing supported virtualized or emulated operating systems on a Mac.",
+          "tradeoff": "Virtualization and cross-architecture emulation have different performance and compatibility tradeoffs."
+        }
+      ]
+    },
+    {
+      "id": "choose-vector-and-publication-handoff",
+      "title": "Prepare editable vector artwork and page layouts for collaborators",
+      "description": "The requested delivery format and publication structure should determine whether you need vector illustration, typesetting or a combined design app.",
+      "picks": [
+        {
+          "app_id": "adobe-illustrator",
+          "label": "Native Illustrator vector delivery",
+          "reason": "Fits scalable artwork when collaborators specifically require Illustrator files and workflows.",
+          "tradeoff": "Subscription; document exchange still needs testing for fonts and effects."
+        },
+        {
+          "app_id": "adobe-indesign",
+          "label": "Structured publication production",
+          "reason": "Fits books, magazines and multipage publications requiring InDesign handoff.",
+          "tradeoff": "Subscription and publication training add cost, and linked assets must be managed."
+        },
+        {
+          "app_id": "affinity",
+          "label": "Combined vector and layout work",
+          "reason": "Offers vector, pixel and layout studios in one free-core application.",
+          "tradeoff": "Requires a Canva account and verification of the requested interchange formats."
+        },
+        {
+          "app_id": "inkscape",
+          "label": "Open-source SVG artwork",
+          "reason": "A candidate for scalable vector drawings centered on SVG workflows.",
+          "tradeoff": "Complex Illustrator-specific effects and long-document typesetting are different requirements."
+        },
+        {
+          "app_id": "scribus",
+          "label": "Open-source page layout",
+          "reason": "A candidate for desktop publishing when a local open-source workflow is preferred.",
+          "tradeoff": "Evaluate typography, print settings and handoff requirements on the actual publication."
+        }
+      ]
+    }
+  ]
+}

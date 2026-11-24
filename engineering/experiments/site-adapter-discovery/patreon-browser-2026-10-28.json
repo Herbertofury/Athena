@@ -1,0 +1,140 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-10-28",
+  "site": "patreon",
+  "authenticated": true,
+  "positiveSignedInSignal": "Member navigation and Account menu on target post",
+  "privateAccountIdentifiersPublished": false,
+  "guest": {
+    "sourceUrl": "https://www.patreon.com/TwistedMexi/posts/better-v3-17-rc1-158788471",
+    "locked": true,
+    "attachmentPreviews": [
+      {
+        "hasLink": false,
+        "label": "Attachment preview",
+        "tag": "DIV",
+        "text": "TwistedMexi's Better Exceptions v3.17 RC1.zip"
+      }
+    ],
+    "authorLinks": [
+      {
+        "href": "https://www.patreon.com/TwistedMexi",
+        "name": "TwistedMexi"
+      },
+      {
+        "href": "https://www.patreon.com/TwistedMexi",
+        "name": "TwistedMexi"
+      },
+      {
+        "href": "https://www.patreon.com/TwistedMexi",
+        "name": "TwistedMexi"
+      }
+    ]
+  },
+  "signedIn": {
+    "attachments": [
+      {
+        "element": "DIV",
+        "hasFileLink": false,
+        "name": "TwistedMexi's Better Exceptions v3.17 RC1.zip"
+      }
+    ],
+    "author": "https://www.patreon.com/TwistedMexi",
+    "authorAvatar": [
+      {
+        "assetPath": "/4/patreon-media/p/campaign/863557/ca27b24441a0441da9dfefa2ad7ccfc1/eyJoIjozNjAsInciOjM2MH0%3D/2.jpg",
+        "decoded": true,
+        "deliveryOrigin": "https://c10.patreonusercontent.com",
+        "height": 360,
+        "queryRedacted": true,
+        "width": 360
+      }
+    ],
+    "fullBodySelectorMatched": 0,
+    "joinToUnlockVisible": true,
+    "sourceUrl": "https://www.patreon.com/TwistedMexi/posts/better-v3-17-rc1-158788471",
+    "teaserSelectorMatched": 1,
+    "title": "Better Exceptions v3.17 RC1: Mod Tracking & Report Enhancements",
+    "teaser": {
+      "characters": 894,
+      "sha256": "848c4a6fd0c6591f284a0c644d1f98dfd492d701a51d1f7807dc609f62a9f9f2",
+      "selector": "[data-tag=\"post-card\"] [data-tag=\"teaser-post-content\"]"
+    }
+  },
+  "entitledContentTested": false,
+  "fullSupportAccepted": false,
+  "nativeFollowMutation": false,
+  "nativeFollowImport": false,
+  "publicPost": {
+    "attachments": [
+      {
+        "filename": "TwistedMexi's All Scenarios v3.9 Official.zip",
+        "mediaId": "722305358",
+        "postId": "127164163",
+        "route": "/file"
+      }
+    ],
+    "author": {
+      "avatar": {
+        "assetPath": "/4/patreon-media/p/campaign/863557/ca27b24441a0441da9dfefa2ad7ccfc1/eyJoIjozNjAsInciOjM2MH0%3D/2.jpg",
+        "decoded": true,
+        "deliveryOrigin": "https://c10.patreonusercontent.com",
+        "height": 360,
+        "queryRedacted": true,
+        "width": 360
+      },
+      "name": "TwistedMexi",
+      "profile": "https://www.patreon.com/TwistedMexi"
+    },
+    "bodyMatches": 1,
+    "excludedCommentAvatarCount": 14,
+    "gallery": [
+      {
+        "assetPath": "/4/patreon-media/p/post/127164163/781c464ece4b44b885902e72cfa01f1d/eyJ3IjoxMDgwfQ%3D%3D/1.png",
+        "decoded": true,
+        "deliveryOrigin": "https://c10.patreonusercontent.com",
+        "height": 608,
+        "order": 0,
+        "queryRedacted": true,
+        "width": 1080
+      }
+    ],
+    "postId": "127164163",
+    "sourceUrl": "https://www.patreon.com/TwistedMexi/posts/all-scenarios-v3-127164163",
+    "teaserCount": 0,
+    "title": "All Scenarios v3.9 - August 2026 Patch Update",
+    "body": {
+      "selector": "[data-tag=\"post-card\"] .JRIMpq_postContent",
+      "characters": 1507,
+      "htmlCharacters": 2806,
+      "textSha256": "4e2f149b9f6b723633b0bc4cfce917deaf26026bb19f0de4ab6e86673207e87e",
+      "htmlSha256": "d744dface4972269384469c8af7a2ba24c1853d61a06e5194be38d7607af21c8"
+    },
+    "download": {
+      "bytes": 932816,
+      "sha256": "ea610539d092e2bb55126faa2cb3f5f54385bc6076d6875ddcbedc4a6d06225e",
+      "magicHex": "504b0304",
+      "archiveEntryCount": 6,
+      "archiveUncompressedBytes": 959069,
+      "archiveFilenames": [
+        "Tmex-AllScenarios/",
+        "Tmex-AllScenarios/Delta/",
+        "Tmex-AllScenarios/Delta/tmscenario0.tmdelta",
+        "Tmex-AllScenarios/Delta/tmscenario1.tmdelta",
+        "Tmex-AllScenarios/Tmex-AllScenarios.package",
+        "Tmex-AllScenarios/Tmex-AllScenarios.ts4script"
+      ],
+      "crcValidation": null,
+      "executed": false,
+      "installed": false,
+      "binaryPublished": false,
+      "method": "Normal visible attachment link with download event observed before reading bytes"
+    }
+  },
+  "retainedSelectorFailure": {
+    "selector": "[data-tag=\"gallery-image\"] img",
+    "observedMatches": 0,
+    "reason": "gallery-image is on the img itself in this sample",
+    "correctedSelector": "img[data-tag=\"gallery-image\"]"
+  }
+}

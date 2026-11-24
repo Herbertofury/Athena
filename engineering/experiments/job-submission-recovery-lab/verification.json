@@ -1,0 +1,26 @@
+{
+  "baseline_commit": "cc0826eb3097be3ae1249e935ecc90fdc0f6d22c",
+  "scope": "Actual application enqueue recovery, not browser acceptance",
+  "before_ui_failures": 7,
+  "after_ui_tests": 7,
+  "additional_helper_tests": 7,
+  "native_loopback_checks": 18,
+  "rust_unit": 133,
+  "rust_integration": 9,
+  "clippy_all_targets": "passed",
+  "node_tests": 258,
+  "python_tests_normal": 237,
+  "python_tests_optimized": 237,
+  "automatic_retries": 0,
+  "source_sha256": {
+    "apps/atlas-lab/ui/app.js": "5f630461c6719913eff9966e3035499ea0480af4bd79ec9ba354dfa5e32c52ff",
+    "apps/atlas-lab/ui/job-submit.mjs": "06f5785d9ebbab16cd208712183e7fa317ac707d96a48325929b728ba26a2f9f",
+    "apps/atlas-lab/src/server.rs": "5218382ef979558570c651e682b3c7889aab747973a6bee34c75068cb87b8472",
+    "apps/atlas-lab/Cargo.lock": "4ba18f93c261a48a42ea595be3f8a37b6d9c419912d7e7875204ac0641e2dd85",
+    "tests/job-submit.test.mjs": "7870579452d5a5e188a49a57c5041b023ea1b261ef8fcbaaf28849d9a998f59c",
+    "tests/job-submission-ui.test.mjs": "b87ef46bf81ffcce9c0d82e16330ce5f54824a2ef72494c14872baab43b21309",
+    "experiments/job-submission-recovery-lab/verify_http.py": "0c6cc78861db17da04bf620bda6c797b59efe69094044fef4f14bff86ff7774e",
+    "experiments/job-submission-recovery-lab/transport.mjs": "7ee7efc0f7b747fe261854ba093729bda3a97361b5a7760f0f26acebff066bf5"
+  },
+  "native_browser": "blocked; not claimed"
+}
