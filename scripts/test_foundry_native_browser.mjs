@@ -148,6 +148,10 @@ c.execute('UPDATE experiment_runs SET output=? WHERE experiment_id=?',(raw,int(s
   const {checkNativeFoundryThemeAtlas}=await import('./test_native_foundry_theme_atlas.mjs');
   await checkNativeFoundryThemeAtlas({browser,origin});
  });
+ if(suppliedPackage)await check('Extracted native Foundry exact actor context aids keyboard and pointer without editing',async()=>{
+  const {checkNativeFoundryActorContext}=await import('./test_native_foundry_actor_context.mjs');
+  await checkNativeFoundryActorContext({browser,origin});
+ });
  if(unified)await check('Real Lab and native Foundry share one verified origin without iframe',async()=>{
   await page.goto(origin+'/#lab');await page.locator('#connection').filter({hasText:'Connected'}).waitFor();
   assert.equal(await page.locator('iframe').count(),0);
