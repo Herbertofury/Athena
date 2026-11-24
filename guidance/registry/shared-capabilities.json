@@ -26,24 +26,6 @@
           "limits": "Inspect complete transfer lifecycle and test before extracting or declaring a winner."
         },
         {
-          "repository": "Herbertofury/GameSync-Next",
-          "commit": "ee4fdbab5571c8111291aa58db45c0be920e7665",
-          "path": "apps/asset-orchestrator/src/adapters/base.ts",
-          "source": "https://github.com/Herbertofury/GameSync-Next/blob/ee4fdbab5571c8111291aa58db45c0be920e7665/apps/asset-orchestrator/src/adapters/base.ts",
-          "evidence": "source_inspected_not_runtime_verified",
-          "observed": "TypeScript source adapter and streaming download with computed SHA-256.",
-          "limits": "Verify expected digest, write completion, backpressure, staging and recovery with controlled fixtures."
-        },
-        {
-          "repository": "Herbertofury/GameSync-Next",
-          "commit": "ee4fdbab5571c8111291aa58db45c0be920e7665",
-          "path": "apps/asset-orchestrator/src/pipeline/download.ts",
-          "source": "https://github.com/Herbertofury/GameSync-Next/blob/ee4fdbab5571c8111291aa58db45c0be920e7665/apps/asset-orchestrator/src/pipeline/download.ts",
-          "evidence": "source_inspected_not_runtime_verified",
-          "observed": "Asset vault orchestration, concurrency and deduplication.",
-          "limits": "Scope and actual completeness, non-interruptive operation and permissions need acceptance."
-        },
-        {
           "repository": "Herbertofury/Gamesync",
           "commit": "44d877bde8eb342cec10a63e2d126fbe55a5c8ed",
           "path": "app/modules/core/background/downloads-handler.js",
@@ -51,9 +33,45 @@
           "evidence": "source_inspected_not_runtime_verified",
           "observed": "Browser extension filename routing and native installer handoff.",
           "limits": "Host-specific Chrome API and native messaging; not interchangeable with a standalone transfer engine."
+        },
+        {
+          "repository": "Herbertofury/Athena",
+          "commit": "b18fb0e59438fa840016f7657bf9d44b17400b28",
+          "path": "engineering/experiments/provider-release-contract/verified-transfer.ts",
+          "source": "https://github.com/Herbertofury/Athena/blob/b18fb0e59438fa840016f7657bf9d44b17400b28/engineering/experiments/provider-release-contract/verified-transfer.ts",
+          "evidence": "source_inspected_not_runtime_verified",
+          "observed": "Scoped reusable reference: backpressure-aware pipeline, completed writer, same-filesystem staging, expected size/SHA-256, atomic publication and Retry-After. Four local test groups passed across release and transfer fixtures; committed blobs matched the tested files on Node 22.16.",
+          "limits": "Local fixture/loopback proof only. No resume, live authenticated redirect, throughput or second real-host acceptance claimed."
+        },
+        {
+          "repository": "Herbertofury/GameSync-Next",
+          "commit": "d3117d3c7edddf8e2be99b213feb45aa433053b9",
+          "path": "apps/asset-orchestrator/src/pipeline/download.ts",
+          "source": "https://github.com/Herbertofury/GameSync-Next/blob/d3117d3c7edddf8e2be99b213feb45aa433053b9/apps/asset-orchestrator/src/pipeline/download.ts",
+          "evidence": "source_inspected_not_runtime_verified",
+          "observed": "Adopts exact Athena reference source in both base adapter and pipeline, separates pack/file concurrency, checks incomplete receipts and preserves last-good files.",
+          "limits": "Integration CI failed; logs and step details unavailable. Must repair/qualify before release. Receipt skip uses file sizes, not fresh hash revalidation."
+        },
+        {
+          "repository": "Herbertofury/GameSync-Next",
+          "commit": "d3117d3c7edddf8e2be99b213feb45aa433053b9",
+          "path": "apps/asset-orchestrator/src/adapters/base.ts",
+          "source": "https://github.com/Herbertofury/GameSync-Next/blob/d3117d3c7edddf8e2be99b213feb45aa433053b9/apps/asset-orchestrator/src/adapters/base.ts",
+          "evidence": "source_inspected_not_runtime_verified",
+          "observed": "Uses the shared verified transfer reference rather than the previous duplicated stream writer.",
+          "limits": "Same integration hold; do not treat source adoption as packaged runtime acceptance."
+        },
+        {
+          "repository": "Herbertofury/Minecraft-Mod-Vault",
+          "commit": "c50f67157224734540067c39861ae708340d7797",
+          "path": "devkit-orchestrator/download_transport.go",
+          "source": "https://github.com/Herbertofury/Minecraft-Mod-Vault/blob/c50f67157224734540067c39861ae708340d7797/devkit-orchestrator/download_transport.go",
+          "evidence": "source_inspected_not_runtime_verified",
+          "observed": "Native transfer verification and retry/staging methods inspected; compare exact approved provider file selection and interruption recovery.",
+          "limits": "Preserve authorized provider routes only; do not copy credential/redirect or synthesized CDN behavior without explicit review."
         }
       ],
-      "nextAction": "M1c-d: compare Enderloom, GameSync-Next and other inventoried transfer code with Ghost Downloader 3/aria2; verify hash, range resume, interruption, destination preservation and two consumers. Record strongest implementation/contract only after real matched proof."
+      "nextAction": "M1c-d: qualify GameSync Next integration first, compare Athena scoped transfer reference against native Enderloom/Vault and approved Ghost Downloader 3/aria2 candidates. Verify equivalent hash, interruption/range, recovery, destination and performance evidence in at least two actual hosts. No universal winner yet."
     },
     {
       "id": "acquisition.provider-identity",
@@ -76,15 +94,6 @@
           "evidence": "source_inspected_not_runtime_verified",
           "observed": "Provider capability labels, public-release freshness and bounded Rust adapter protocol.",
           "limits": "Check actual helper implementations and supported provider/version cases."
-        },
-        {
-          "repository": "Herbertofury/Enderloom",
-          "commit": "d1c3e24a75c383bc4b7e1f0ba4cc1a89450d2770",
-          "path": "src/provider-api-fastlane.js",
-          "source": "https://github.com/Herbertofury/Enderloom/blob/d1c3e24a75c383bc4b7e1f0ba4cc1a89450d2770/src/provider-api-fastlane.js",
-          "evidence": "source_inspected_not_runtime_verified",
-          "observed": "Provider-qualified URL mapping and public metadata seed descriptors.",
-          "limits": "Verify final canonical identity and completeness; initial metadata seed is not a complete result."
         },
         {
           "repository": "Herbertofury/GameSync-Next",
@@ -112,9 +121,54 @@
           "evidence": "source_inspected_not_runtime_verified",
           "observed": "Exact-context public health evidence and Rust query contract; successor resolution not implemented.",
           "limits": "Keep data evidence schema separate from crawling/transfer; test consumers."
+        },
+        {
+          "repository": "Herbertofury/Athena",
+          "commit": "b18fb0e59438fa840016f7657bf9d44b17400b28",
+          "path": "engineering/experiments/provider-release-contract/github-release.ts",
+          "source": "https://github.com/Herbertofury/Athena/blob/b18fb0e59438fa840016f7657bf9d44b17400b28/engineering/experiments/provider-release-contract/github-release.ts",
+          "evidence": "source_inspected_not_runtime_verified",
+          "observed": "Reusable exact repo/release/asset identity and provider digest/size assertions; local reference fixtures passed, including invalid identity and ambiguous asset rejection.",
+          "limits": "GitHub stable-release subset; live pagination/auth/redirect and host acceptance open."
+        },
+        {
+          "repository": "Herbertofury/Enderloom",
+          "commit": "f3cf32ff77c6c682eb76ffbaa2a02a612d69babb",
+          "path": "src/provider-api-fastlane.js",
+          "source": "https://github.com/Herbertofury/Enderloom/blob/f3cf32ff77c6c682eb76ffbaa2a02a612d69babb/src/provider-api-fastlane.js",
+          "evidence": "source_inspected_not_runtime_verified",
+          "observed": "Exact Spiget numeric ID, Hangar namespace owner/slug and GitLab ID/path binding before early icon publication; canonical gallery enrichment remains separate.",
+          "limits": "New regression scripts committed; full native and live acceptance open, Hangar live sample not confirmed."
+        },
+        {
+          "repository": "Herbertofury/Enderloom",
+          "commit": "f3cf32ff77c6c682eb76ffbaa2a02a612d69babb",
+          "path": "src/modrinth-batch.js",
+          "source": "https://github.com/Herbertofury/Enderloom/blob/f3cf32ff77c6c682eb76ffbaa2a02a612d69babb/src/modrinth-batch.js",
+          "evidence": "source_inspected_not_runtime_verified",
+          "observed": "Existing case-sensitive exact project ID, slug ambiguity handling, batched metadata lookup and individual fallback; now preserves distinct media URL/explicit raw-preview identities.",
+          "limits": "Keep this maintained implementation; compare batching/complete media against consumers; no full live proof yet."
+        },
+        {
+          "repository": "Herbertofury/GameSync-Next",
+          "commit": "d3117d3c7edddf8e2be99b213feb45aa433053b9",
+          "path": "apps/asset-orchestrator/src/adapters/github.ts",
+          "source": "https://github.com/Herbertofury/GameSync-Next/blob/d3117d3c7edddf8e2be99b213feb45aa433053b9/apps/asset-orchestrator/src/adapters/github.ts",
+          "evidence": "source_inspected_not_runtime_verified",
+          "observed": "Adopts Athena exact identity and expected digest/size; distinguishes access/rate/service errors from missing releases; fallback archive pinned to resolved commit.",
+          "limits": "Integration CI failed with unavailable logs; qualification open."
+        },
+        {
+          "repository": "Herbertofury/GameSync-Next",
+          "commit": "d3117d3c7edddf8e2be99b213feb45aa433053b9",
+          "path": "packages/shared/src/providerProfiles.ts",
+          "source": "https://github.com/Herbertofury/GameSync-Next/blob/d3117d3c7edddf8e2be99b213feb45aa433053b9/packages/shared/src/providerProfiles.ts",
+          "evidence": "source_inspected_not_runtime_verified",
+          "observed": "Broad typed site capability profiles and shared site registry; useful inventory for cross-app feature gaps.",
+          "limits": "Capability labels are not proof that every operation works or is permitted."
         }
       ],
-      "nextAction": "M1a-e in docs/PORTFOLIO-ALIGNMENT.md: Athena coordinates, Modding-Knowledge owns public evidence schema; compare first Modrinth/CurseForge/GitHub/Nexus exact-ID and operation fixtures, prove Enderloom and Modhunter, choose implementation owner only after acceptance."
+      "nextAction": "M1a-e / Athena #363: compare exact operation-level coverage with Modhunter native release methods, Enderloom batch/fast paths, GameSync shared profiles, Vault and Modding-Knowledge. Adopt compatible scoped improvements, preserve native implementations and validate public-live/authorized fixtures; fix failed CI before promotion."
     },
     {
       "id": "acquisition.web-extraction",
@@ -140,16 +194,25 @@
           "limits": "Not approved for reuse as a whole. Compare only authorized parsing and data handling; access-denial behavior and permission compliance require review."
         },
         {
-          "repository": "Herbertofury/Enderloom",
-          "commit": "d1c3e24a75c383bc4b7e1f0ba4cc1a89450d2770",
-          "path": "src/provider-api-fastlane.js",
-          "source": "https://github.com/Herbertofury/Enderloom/blob/d1c3e24a75c383bc4b7e1f0ba4cc1a89450d2770/src/provider-api-fastlane.js",
+          "repository": "Herbertofury/GameSync-Next",
+          "commit": "d3117d3c7edddf8e2be99b213feb45aa433053b9",
+          "path": "packages/shared/src/smartScrape.ts",
+          "source": "https://github.com/Herbertofury/GameSync-Next/blob/d3117d3c7edddf8e2be99b213feb45aa433053b9/packages/shared/src/smartScrape.ts",
           "evidence": "source_inspected_not_runtime_verified",
-          "observed": "Direct API metadata fast path.",
-          "limits": "Not a general crawler; compare equivalent complete provider workloads."
+          "observed": "Existing shared extraction/date/embedded-data handling; review reusable parsing portions.",
+          "limits": "Do not reuse stealth/access-evasion behavior. Preserve provider permissions and complete output."
+        },
+        {
+          "repository": "Herbertofury/Enderloom",
+          "commit": "f3cf32ff77c6c682eb76ffbaa2a02a612d69babb",
+          "path": "src/provider-api-fastlane.js",
+          "source": "https://github.com/Herbertofury/Enderloom/blob/f3cf32ff77c6c682eb76ffbaa2a02a612d69babb/src/provider-api-fastlane.js",
+          "evidence": "source_inspected_not_runtime_verified",
+          "observed": "Repaired response binding before early provider metadata; full page/gallery path remains distinct.",
+          "limits": "No general crawling or full media acceptance claimed."
         }
       ],
-      "nextAction": "Use existing Athena research to compare direct authorized HTTP/extraction with local Firecrawl, Crawl4AI and isolated browser rendering. Preserve real output identity, permissions and completeness."
+      "nextAction": "Compare authorized parsing and provider-specific APIs/metadata before general crawler fallback. Review GameSync/Next site registries, MediaForge and UltraDeck specialized actions, and Noxviola browser integration once actual source is available. Do not replace proven specialized functionality with generic extraction."
     },
     {
       "id": "engineering.release-checkout",
@@ -248,6 +311,30 @@
         }
       ],
       "nextAction": "M3: inspect DBPF parser and cache call sites, compare exact package inventory, conflicts, malformed input and real CAS/preview acceptance; share versioned core only if no loss."
+    },
+    {
+      "id": "acquisition.request-coalescing",
+      "name": "Exact-request coalescing and independent response consumption",
+      "status": "comparison_needed",
+      "canonicalImplementation": null,
+      "contractRefs": [
+        "engineering/docs/adapters/contract.md"
+      ],
+      "researchRefs": [
+        "guidance/registry/web-acquisition-watch.json"
+      ],
+      "candidates": [
+        {
+          "repository": "Herbertofury/Gamesync",
+          "commit": "bce6c1bcb31c63d31c64185fef143a53d9c4d35f",
+          "path": "app/shared/request-dedup-module.js",
+          "source": "https://github.com/Herbertofury/Gamesync/blob/bce6c1bcb31c63d31c64185fef143a53d9c4d35f/app/shared/request-dedup-module.js",
+          "evidence": "source_inspected_not_runtime_verified",
+          "observed": "Maintained active GameSync implementation: normalized header/options identity, independent response bodies, cancellation separation and stale-entry ownership. Both local regression groups passed on Node 22.16; exact source and test blobs matched.",
+          "limits": "Browser integration and memory/throughput comparison open; CI failed with unavailable logs. No unconditional sharing of authenticated requests or forced mutation coalescing."
+        }
+      ],
+      "nextAction": "Evaluate the maintained GameSync module in compatible GameSync Next/browser consumers with equivalent requests, response streams, credentials and cancellation; port behavior/fixtures rather than adding a competing copy. Keep host-specific isolation."
     }
   ],
   "coverage": {
@@ -262,10 +349,14 @@
       "Ferrum-Browser",
       "TS4-Accelerator",
       "External-CAS",
-      "Hover-App"
+      "Hover-App",
+      "MediaForge",
+      "UltraDeck",
+      "Noxviola",
+      "Project-Constellation"
     ],
     "partialOnly": true,
-    "unresolved": "Portfolio source triage now covers all 42 repositories (see docs/PORTFOLIO-ALIGNMENT.md); full per-provider call-site inventory, runtime comparisons, exact consumer pins, ownership and compatibility of shared implementations remain open."
+    "unresolved": "Portfolio triage covers 42 repositories; November 24 acquisition pass inspected provider-related trees in 11 repositories and changed source in Athena, Gamesync, GameSync-Next and Enderloom. Noxviola browser implementation not established on main. Per-provider call-site/operation parity, actual current upstream releases, live/native consumer acceptance and comparable benchmarks remain open; see Athena #363 and adapter contract checkpoint."
   },
   "portfolioRoadmap": "docs/PORTFOLIO-ALIGNMENT.md"
 }
