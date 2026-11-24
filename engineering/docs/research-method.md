@@ -22,6 +22,10 @@ Do not convert “documented,” “new,” or “benchmarked elsewhere” into 
 
 A search snippet is a lead. Read the relevant source section before using a precise claim. A dynamic latest URL can change; record the observed version. Never upgrade a pinned game target just because its documentation landing page moved.
 
+## Frontier-first candidate selection
+
+Start from the strongest technically credible candidates, including current releases, preview/nightly systems, new research, specialized native techniques and hardware acceleration. Do not default to an older, weaker or cheaper tool merely because it is familiar or costs less. Compare premium or higher-resource options when they offer a plausible user-valued advantage, but do not incur cost or grant access without authorization. Preserve no-loss acceptance, target support, total resource budgets and maintainability. Repair the latest eligible version before accepting an older-version hold under the [shared frontier standard](../../guidance/WEB_ACQUISITION_FRONTIER.md). See the [November 24 research expansion](../research/2026-11-24-frontier-index.md) for concrete priorities and dated sources.
+
 ## Freshness
 
 The source register records checked_at (UTC calendar date) and review_after_days. The local checker flags stale entries but does not claim to monitor the internet. Review volatile releases before use; stable principles still need version applicability checks. No automatic recurring research service is implied by this repository.

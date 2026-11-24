@@ -6,15 +6,19 @@
 
 **Build better software. Prove the improvement. Keep the evidence.**
 
-A practical, evolving research library for desktop apps, web services, Minecraft mods, game tooling and asset pipelines. Foundation reviewed October 26; latest stack and methods expansion: **October 31, 2026**. This is a curated foundation, not a claim that every technology has been exhaustively benchmarked.
+A practical, evolving research library for desktop apps, web services, Minecraft mods, game tooling and asset pipelines. Foundation reviewed October 26; latest dated frontier research expansion: **November 24, 2026**. This is a curated foundation, not a claim that every technology has been exhaustively benchmarked.
 
 ## Search and compare the research catalog
 
 [Research Explorer](docs/explorer/index.html) provides field/type/evidence filters, source-backed 2026 candidates, dated GitHub popularity, scoped external benchmarks, retained Atlas measurements and a reproducible test queue. Compare a shortlist and export a test plan. Community reports have a reviewable GitHub submission path; no votes are fabricated.
 
-**Current snapshot:** 283 candidates, 36 papers, 20 stack layers and 38 planned comparisons. The [October 31 research record](research/2026-10-31-stack-expansion.md) adds 68 candidates, 15 existing-entry refreshes and 164 primary-source observations.
+**Explorer snapshot (October 31):** 283 candidates, 36 papers, 20 stack layers and 38 planned comparisons. The [October 31 research record](research/2026-10-31-stack-expansion.md) adds 68 candidates, 15 existing-entry refreshes and 164 primary-source observations.
 
 [Complete catalog](docs/research-catalog.md) · [Ranking methodology](docs/research-explorer.md) · [Planned comparisons](docs/research-test-queue.md) · [Community reports](docs/research-community.md)
+
+## November 24 frontier research expansion
+
+[Frontier engineering intelligence](research/2026-11-24-frontier-index.md) — 64 additional indexed primary-source observations across web acquisition, desktop/rendering, retrieval/data, native performance and current releases. These extend the research library; they are not yet integrated into the generated Explorer candidate snapshot or measured recommendations.
 
 ## Ranked choices and measured experiments
 

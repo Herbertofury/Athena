@@ -5,13 +5,17 @@
 
 ### Better architecture. Better code. Measured results.
 
-A research home for building apps, mods, programs and game tooling. **Reviewed foundation: October 26, 2026; latest contribution: November 2, 2026.** Current methods are evaluated against the actual workload; newest is not automatically best.
+A research home for building apps, mods, programs and game tooling. **Reviewed foundation: October 26, 2026; latest frontier research expansion: November 24, 2026.** Current methods are evaluated against the actual workload; newest is not automatically best.
 
 > A substantial improvement must change the user's end-to-end experience without discarding required behavior, checks or results.
 
 ## Best choices, avoid guidance and measured results
 
 [Ranked recommendations](https://github.com/Herbertofury/Athena/wiki/Engineering-Ranked-Recommendations) brings together the current shortlist, a real three-library JSON experiment, 2026 papers and Codeberg-linked methods. Rankings state their workload and disqualifiers.
+
+## New: November 24 frontier research
+
+[Frontier engineering intelligence](https://github.com/Herbertofury/Athena/wiki/Engineering-Frontier-Research-2026-11-24) — 64 additional indexed primary-source observations, current compiler and release signals, and targeted experiments. No new runtime performance claim.
 
 ## Choose your route
 

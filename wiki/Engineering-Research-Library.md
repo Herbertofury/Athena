@@ -3,7 +3,7 @@
 
 # Primary-source register
 
-Updated through October 27, 2026. Entries retain their individual observed-version and review context; this is not a claim that every source was freshly rechecked today. These sources document behavior; they do not establish local performance wins.
+Historical source summary through October 27, 2026. For all current indexed additions, use the [complete source index](https://github.com/Herbertofury/Athena/blob/main/engineering/data/source-index.json), including the [November 24 frontier expansion](https://github.com/Herbertofury/Athena/wiki/Engineering-Frontier-Research-2026-11-24). Entries retain their individual observed-version and review context; this is not a claim that every source was freshly rechecked today. These sources document behavior; they do not establish local performance wins.
 
 ## E01
 

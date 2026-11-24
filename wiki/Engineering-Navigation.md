@@ -27,6 +27,10 @@
 - [Collection and Media Contract](https://github.com/Herbertofury/Athena/wiki/Engineering-Collection-and-Media-Contract)
 - [Upstream Candidates](https://github.com/Herbertofury/Athena/wiki/Engineering-Adapter-Upstream-Candidates)
 
+### Frontier research
+
+- [November 24 frontier engineering intelligence](https://github.com/Herbertofury/Athena/wiki/Engineering-Frontier-Research-2026-11-24)
+
 ### Research Explorer
 
 - [Explorer guide](https://github.com/Herbertofury/Athena/wiki/Engineering-Research-Explorer)

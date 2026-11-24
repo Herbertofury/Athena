@@ -1,6 +1,6 @@
 # Primary-source register
 
-Updated through October 27, 2026. Entries retain their individual observed-version and review context; this is not a claim that every source was freshly rechecked today. These sources document behavior; they do not establish local performance wins.
+Historical source summary through October 27, 2026. For all current indexed additions, use the [complete source index](../data/source-index.json), including the [November 24 frontier expansion](../research/2026-11-24-frontier-index.md). Entries retain their individual observed-version and review context; this is not a claim that every source was freshly rechecked today. These sources document behavior; they do not establish local performance wins.
 
 ## E01
 
