@@ -82,6 +82,32 @@ c.execute('UPDATE experiment_runs SET output=? WHERE experiment_id=?',(raw,int(s
  page.on('requestfailed',request=>report.networkFailures.push({path:new URL(request.url()).pathname,error:request.failure()?.errorText}));
  page.on('response',response=>{if(response.status()>=400)report.httpFailures.push({path:new URL(response.url()).pathname,status:response.status()})});
  page.setDefaultTimeout(15000);
+ if(unified)await check('Packaged Home opens read-only native Learning History through a verified link',async()=>{
+  const beforeExternal=report.externalRequests.length;
+  const unsafe=[];
+  const observe=request=>{
+   const url=new URL(request.url());
+   if(url.origin===origin&&!['GET','HEAD'].includes(request.method()))unsafe.push(url.pathname);
+  };
+  page.on('request',observe);
+  try{
+   const [runtime]=await Promise.all([
+    page.waitForResponse(response=>response.url()===origin+'/api/runtime'&&response.request().method()==='GET'),
+    page.goto(origin+'/#home')
+   ]);
+   assert.equal(runtime.status(),200);
+   const nav=page.getByRole('navigation',{name:'Main navigation',exact:true});
+   const history=nav.getByRole('link',{name:'Learning History',exact:true});
+   await history.waitFor();
+   assert.equal(await history.count(),1);
+   assert.equal(await history.getAttribute('href'),'/learning');
+   await Promise.all([page.waitForURL(origin+'/learning'),history.click()]);
+   await page.locator('#records li').first().waitFor();
+   assert.equal(await page.locator('iframe').count(),0);
+   assert.deepEqual(unsafe,[]);
+   assert.equal(report.externalRequests.length,beforeExternal);
+  }finally{page.off('request',observe);}
+ });
  if(unified)await check('Real Lab and native Foundry share one verified origin without iframe',async()=>{
   await page.goto(origin+'/#lab');await page.locator('#connection').filter({hasText:'Connected'}).waitFor();
   assert.equal(await page.locator('iframe').count(),0);

@@ -136,6 +136,24 @@ dialog.addEventListener('keydown',e=>{
  if(!controls.includes(current)||(e.shiftKey?current===first:current===last)){e.preventDefault();(e.shiftKey?last:first).focus();}
 });
 function finishLessonClose(){if(dialog.open||!lessonClosePending)return;lessonClosePending=false;const restoreOpener=location.hash===lastLessonRoute&&$('#search').value===lastLessonQuery;if(!restoreOpener)return;render();const indexed=main.querySelectorAll('[data-lesson]')[lastLessonIndex];const opener=indexed?.dataset.lesson===lastLessonId?indexed:[...main.querySelectorAll('[data-lesson]')].find(el=>el.dataset.lesson===lastLessonId);if(opener)opener.focus();else focusView();}function closeLesson(){dialog.close();finishLessonClose();}$('#close-lesson').onclick=closeLesson;dialog.addEventListener('cancel',event=>{event.preventDefault();closeLesson();});dialog.addEventListener('close',finishLessonClose);$('#search').addEventListener('input',render);$('#export').onclick=exportData;$('#import').onchange=e=>handleImport(e.target);$('#theme').onclick=()=>{state.theme=state.theme==='light'?'dark':'light';document.body.classList.toggle('light',state.theme==='light');save();if(mountedWorkspace)Promise.resolve(workspaceHost.setTheme(state.theme)).catch(error=>toast('Workspace theme failed: '+error.message));};window.addEventListener('hashchange',()=>{if(dialog.open)dialog.close();filter='All';const parsed=routeParts();$('#search').value=workspaces[parsed.path.split('/')[0]]?(parsed.params.get('q')||''):'';render();focusView();});document.addEventListener('keydown',e=>{if(e.defaultPrevented||e.isComposing||e.keyCode===229||e.repeat||e.ctrlKey||e.metaKey||e.altKey)return;if(e.key==='Escape'&&e.target===$('#search')&&!dialog.open&&$('#search').value){e.preventDefault();$('#search').value='';render();return;}if(e.key==='/'&&searchShortcutEnabled&&!dialog.open&&!globalThis.AthenaWorkspaceHost.isEditingEvent(e,document)){e.preventDefault();$('#search').focus();}});$('#search-shortcut-enabled').addEventListener('change',()=>{searchShortcutEnabled=$('#search-shortcut-enabled').checked;syncShortcut();try{localStorage.setItem('athena-accessibility-v1',JSON.stringify({searchShortcutEnabled}));toast('Search shortcut '+(searchShortcutEnabled?'enabled.':'disabled.'));}catch{toast('Keyboard preference applies for this session only; browser storage is unavailable.');}});syncShortcut();document.body.classList.toggle('light',state.theme==='light');const initialRoute=routeParts();if(workspaces[initialRoute.path.split('/')[0]])$('#search').value=initialRoute.params.get('q')||'';render();
+
+// The unified engine owns this exact origin. Public Pages, file://, and the
+// standalone native store never make a discovery request from Home.
+async function addNativeLearningHistoryLink(){
+ if(location.origin!=='http://127.0.0.1:41379')return;
+ const home=$('nav[aria-label="Main navigation"] [data-nav="home"]');
+ if(!home)return;
+ try{
+  const response=await fetch('/api/runtime',{method:'GET',credentials:'omit',cache:'no-store',redirect:'error',signal:AbortSignal.timeout(3000)});
+  if(!response.ok)return;
+  const runtime=await response.json();
+  if(runtime?.application!=='Athena'||runtime.api_version!==1||runtime.loopback_only!==true||
+     runtime.same_origin_only!==true||runtime.learning_history_url!=='/learning')return;
+  const link=document.createElement('a');link.href='/learning';link.textContent='Learning History';
+  home.after(link);
+ }catch{/* The other navigation and the current view remain usable. */}
+}
+void addNativeLearningHistoryLink();
 })();
 
 
