@@ -1,0 +1,94 @@
+import copy
+import json
+import subprocess
+import sys
+import tempfile
+import unittest
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent / "../tools"))
+from release_checkout import CORE, GATES, validate
+
+HEAD = "a" * 40
+
+
+def receipt():
+    return {
+        "schemaVersion": 1, "head": HEAD, "baseline": "b" * 40,
+        "lane": "standard", "scope": "synthetic fixture", "hard_blockers": [],
+        "retained_optimization": False,
+        "checks": {name: {"status": "passed", "evidence": "fixture"} for name in GATES},
+        "core_tools": {name: {"status": "no_safe_win", "evidence": "fixture"} for name in CORE},
+    }
+
+
+class ReleaseCheckoutTests(unittest.TestCase):
+    def test_valid_receipt(self):
+        self.assertEqual(validate(receipt(), HEAD), [])
+
+    def test_wrong_head(self):
+        self.assertTrue(validate(receipt(), "c" * 40))
+
+    def test_mandatory_failure(self):
+        r = receipt()
+        r["checks"]["workflow_acceptance"]["status"] = "failed"
+        self.assertTrue(validate(r, HEAD))
+
+    def test_declared_extra_gate_failure(self):
+        r = receipt()
+        r["checks"]["native_game"] = {"status": "blocked", "evidence": "fixture"}
+        self.assertTrue(validate(r, HEAD))
+
+    def test_missing_core_assessment(self):
+        r = receipt()
+        del r["core_tools"][CORE[0]]
+        self.assertTrue(validate(r, HEAD))
+
+    def test_deferred_requires_followup(self):
+        r = receipt()
+        r["core_tools"][CORE[0]]["status"] = "deferred"
+        self.assertTrue(validate(r, HEAD))
+        r["core_tools"][CORE[0]]["follow_up"] = "fixture backlog"
+        self.assertEqual(validate(r, HEAD), [])
+
+    def test_high_risk_requires_extra_proof(self):
+        r = receipt()
+        r["lane"] = "high-risk"
+        self.assertTrue(validate(r, HEAD))
+        r["checks"]["risk_specific"] = {"status": "passed", "evidence": "fixture"}
+        self.assertEqual(validate(r, HEAD), [])
+
+    def test_adopted_requires_equivalence(self):
+        r = receipt()
+        r["core_tools"][CORE[0]]["status"] = "adopted"
+        self.assertTrue(validate(r, HEAD))
+        r["retained_optimization"] = True
+        self.assertTrue(validate(r, HEAD))
+        r["checks"]["optimization_equivalence"] = {"status": "passed", "evidence": "fixture"}
+        self.assertEqual(validate(r, HEAD), [])
+
+    def test_blocker_cannot_be_ignored(self):
+        r = receipt()
+        r["hard_blockers"] = ["fixture blocker"]
+        self.assertTrue(validate(r, HEAD))
+
+    def test_cli_duplicate_keys_refused(self):
+        script = Path(__file__).resolve().parent / "../tools/release_checkout.py"
+        with tempfile.TemporaryDirectory() as temp:
+            path = Path(temp) / "receipt.json"
+            path.write_text('{"head": 1, "head": 2}', encoding="utf-8")
+            p = subprocess.run([sys.executable, str(script), "--receipt", str(path), "--head", HEAD], capture_output=True)
+            self.assertEqual(p.returncode, 2)
+
+    def test_cli_valid_and_mismatch(self):
+        script = Path(__file__).resolve().parent / "../tools/release_checkout.py"
+        with tempfile.TemporaryDirectory() as temp:
+            path = Path(temp) / "receipt.json"
+            path.write_text(json.dumps(receipt()), encoding="utf-8")
+            for head, expected in ((HEAD, 0), ("c" * 40, 1)):
+                p = subprocess.run([sys.executable, str(script), "--receipt", str(path), "--head", head], capture_output=True)
+                self.assertEqual(p.returncode, expected)
+
+
+if __name__ == "__main__":
+    unittest.main()
