@@ -4,6 +4,30 @@ const require=createRequire(new URL('../../../package.json',import.meta.url)),{p
 async function setup(run=mount,options={}){const {document,window}=parseHTML('<html><body><main></main></body></html>');Object.defineProperty(window.HTMLSelectElement.prototype,'value',{configurable:true,get(){return [...this.options].find(o=>o.selected)?.value||this.options[0]?.value||''},set(v){for(const o of this.options)o.removeAttribute('selected');[...this.options].find(o=>o.value===v)?.setAttribute('selected','')}});const controller=new AbortController(),notices=[],writes=[];const old=globalThis.fetch;globalThis.fetch=async()=>({ok:true,json:async()=>catalog});let mounted;try{mounted=await run({container:document.querySelector('main'),signal:controller.signal,notify:v=>notices.push(v),setState:v=>writes.push(v),...options});}finally{globalThis.fetch=old;}return {document,window,mounted,notices,writes,controller,time(v){const e=document.querySelector('[data-time]');e.value=v;e.dispatchEvent(new window.Event('change'))}};}
 const allOff={localImage:false,sessionHistory:false,objectKeys:false,historyKeys:false,canvasView:false,cinema:false,weather:false,backup:false,soundtrack:false,legacyImport:false,ecology:false,assetLibrary:false,localVideo:false,gizmo:false,environment:false,semanticRoom:false,tones:false,layers:false};
 test('actual mount with all optional modules disabled preserves layout authoring and Undo/Redo',async()=>{const s=await setup(mount,{foundryModules:allOff});assert.equal(s.document.querySelector('[data-foundry-module]'),null);assert.deepEqual(s.mounted.getModuleStates(),Object.fromEntries(Object.keys(allOff).map(k=>[k,'disabled'])));s.time('night');assert.equal(s.mounted.exportState().active.time,'night');s.document.querySelector('[data-undo]').click();assert.equal(s.mounted.exportState().active.time,'day');s.document.querySelector('[data-redo]').click();assert.equal(s.mounted.exportState().active.time,'night');assert.equal(s.writes.length,3);s.mounted.unmount();assert.equal(s.document.querySelector('main').children.length,0)});
+test('Theme Atlas respects legacy all-off, an explicit off, and independent opt-in through the mount profile',async()=>{
+ const cases=[
+  {options:{foundryModules:allOff},present:false},
+  {options:{foundryModules:{themeAtlas:false}},present:false},
+  {options:{foundryModules:{...allOff,themeAtlas:true}},present:true,alone:true},
+  {options:{foundryModules:{cinema:false}},present:true},
+  {options:{},present:true},
+ ];
+ for(const {options,present,alone} of cases){
+  const s=await setup(mount,options);
+  try{
+   const host=s.document.querySelector('[data-foundry-module=themeAtlas]');
+   assert.equal(Boolean(host),present,JSON.stringify(options));
+   assert.equal(s.mounted.getModuleStates().themeAtlas,present?'attached':undefined);
+   if(alone)assert.equal(s.document.querySelectorAll('[data-foundry-module]').length,1);
+   if(present)assert.equal(host.querySelector('summary').textContent,'Browse all themes and rooms');
+   assert.equal(s.writes.length,0);
+   s.time('night');
+   assert.equal(s.mounted.exportState().active.time,'night');
+   assert.equal(s.writes.length,1);
+  }finally{s.mounted.unmount();}
+  assert.equal(s.document.querySelector('main').children.length,0);
+ }
+});
 test('disabled previews leave real native backup usable and boundary accurate',async()=>{let saved;const s=await setup(mount,{foundryModules:{...allOff,backup:true},nativeStore:{save:async v=>saved=v,load:async()=>null}});assert.equal(s.document.querySelector('[data-cinema-open]'),null);assert.equal(s.document.querySelector('[data-weather-open]'),null);assert.match(s.document.querySelector('.foundry-boundary').textContent,/native storage capability is supplied/);s.document.querySelector('[data-native-save]').click();await tick();assert.equal(JSON.parse(saved).active.time,'day');s.mounted.unmount()});
 async function fixture(){const dir=await fs.mkdtemp(testTemp('foundry-module-fixture-'));for(const name of ['index.mjs','layout-state.mjs'])await fs.copyFile(new URL(name,base),path.join(dir,name));return {dir,run:(await import(pathToFileURL(path.join(dir,'index.mjs')))).mount};}
 test('physically absent disabled modules do not block mount; enabled missing module reports failure',async()=>{const f=await fixture();try{const s=await setup(f.run,{foundryModules:{...allOff,cinema:true}});assert.match(s.mounted.getModuleStates().cinema,/unavailable/);assert.match(s.document.querySelector('[data-foundry-module=cinema]').textContent,/unavailable/);s.time('night');s.document.querySelector('[data-undo]').click();assert.equal(s.mounted.exportState().active.time,'day');s.mounted.unmount()}finally{await fs.rm(f.dir,{recursive:true})}});

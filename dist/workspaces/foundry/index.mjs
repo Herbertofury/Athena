@@ -218,7 +218,10 @@ export async function mount(context){
  await attach('semanticRoom','./native-semantic-room.mjs','attachSemanticRoom');
  await attach('weather','./native-weather.mjs','attachNativeWeather');
  nativeEcology=await attach('ecology','./native-ecology.mjs','attachNativeEcology',{themes});syncEcology();
- if(!disposed&&!signal.aborted){
+ // A pre-Atlas profile that disables every original module promised core-only
+ // authoring. An explicit Atlas opt-in overrides that legacy profile only.
+ const legacyCoreOnly=Object.values(moduleStates).every(state=>state==='disabled');
+ if(!disposed&&!signal.aborted&&enabled('themeAtlas')&&(!legacyCoreOnly||context.foundryModules?.themeAtlas===true)){
   const host=doc.createElement('section'),controller=new AbortController();
   host.dataset.foundryModule='themeAtlas';root.append(host);
   try{modules.themeAtlas={host,controller,component:attachThemeAtlas({host,themes,signal:controller.signal,active:()=>current})};moduleStates.themeAtlas='attached';}
