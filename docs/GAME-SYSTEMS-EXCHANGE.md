@@ -79,3 +79,7 @@ A Java Forge run manager, a Python desktop-game save ledger, a JavaScript browse
 - **Athena:** maintain the capability registry, schemas, validation and cross-host evidence. The first shared deliverable is a verified contract/fixture in two compatible hosts, not a premature universal game engine.
 
 **Release discipline:** this is a cross-cutting improvement lane, not a reason to hold unrelated releases. Existing project-specific release gates, mandatory optimizations and opt-in security rules remain unchanged.
+
+## 7. Validate the exchange
+
+From the repository root, run `python scripts/validate_game_systems.py` and `python -m unittest discover -s tests -p test_game_systems_registry.py -v`. The dedicated `Game Systems Exchange validation` workflow runs the same checks for relevant pushes and pull requests. These checks validate registry identity/evidence pins and schema JSON structure; they do not prove a game engine, live release, native runtime, benchmark or two-host adoption.
