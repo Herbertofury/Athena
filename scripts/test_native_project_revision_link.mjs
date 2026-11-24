@@ -18,7 +18,8 @@ export async function checkNativeProjectRevisionLink({browser,origin}){
  const scope=page=>page.locator('#main[data-workspace=projects] .workspace-container');
  async function ready(page){
   await page.locator('#main[data-workspace=projects] .workspace-status')
-   .filter({hasText:'Athena projects workspace loaded.'}).waitFor();
+   .filter({hasText:/^Athena project browser workspace loaded\. Search above applies here\.$/}).waitFor();
+  await scope(page).getByRole('button',{name:'New project',exact:true}).waitFor();
  }
  async function populate(page,fixture){
   await page.goto(origin+'/#projects');await ready(page);
