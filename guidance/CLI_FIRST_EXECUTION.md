@@ -49,3 +49,7 @@ For a material workflow or new adapter, record application/version, supported in
 At release checkout, apply [the existing zero-loss optimization policy](PRE_RELEASE_OPTIMIZATION.md) using non-interruptive commands and isolated test sessions. The three mandatory optimizers remain mandatory where applicable, and dedicated security audits remain opt-in. Use the existing risk-based budgets; do not install or build unrelated harnesses simply to tick a box.
 
 This policy is an agent instruction and reusable development standard, not proof of actual tool installation, enforcement by a host, full CLI parity, or access to the owner's physical computer.
+
+## Shared capability lookup before substantial work
+
+Use the [shared capability coordination policy](../docs/REUSABLE-PACKAGE-COORDINATION.md) and [routing index](registry/shared-capabilities.json) at task start. Reconcile active work and existing source implementations; reuse or improve the strongest verified compatible route rather than create a weaker duplicate. Contribute evidence and improvements back through the owning repository and link them in Athena. Keep this lookup bounded and preserve all project-specific acceptance requirements.
