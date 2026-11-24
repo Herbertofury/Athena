@@ -3,7 +3,10 @@ export const RECEIVER_STORAGE_KEY='athena.receiver.last-good.v1';
 const MAX_RECEIPT=262144;
 export function validateReceiverReceipt(text){
  if(typeof text!=='string'||text.length>MAX_RECEIPT)throw Error('Receipt exceeds the 256 KiB text limit.');
- const r=JSON.parse(text),pairs={main:['whole','bounded'],worker:['whole','bounded'],transport:['clone','transfer'],receipt:['clone','receipt'],build:['modules','esbuild','rolldown']};
+ return validateReceiverObject(JSON.parse(text));
+}
+function validateReceiverObject(r){
+ const pairs={main:['whole','bounded'],worker:['whole','bounded'],transport:['clone','transfer'],receipt:['clone','receipt'],build:['modules','esbuild','rolldown']};
  const lanes=pairs[r?.execution];
  if(!r||r.harness!=='athena-native-complete-receiver-v1'||r.complete!==true||r.count!==200||![8192,65536].includes(r.bytes)||!lanes||!Array.isArray(r.samples)||r.samples.length!==lanes.length*3||!/^[a-f0-9]{64}$/.test(r.dataset?.sha256||'')||!Number.isFinite(Date.parse(r.started_at))||!Number.isFinite(Date.parse(r.finished_at)))throw Error('Not a compatible complete receiver receipt.');
  for(let round=0;round<3;round++)for(const lane of lanes){const s=r.samples.filter(s=>s.round===round&&s.lane===lane);if(s.length!==1||s[0].complete_parity!==true||!Number.isFinite(s[0].request_ms)||s[0].request_ms<0)throw Error('Receipt is missing complete lane/round parity.');}
