@@ -1,0 +1,232 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Herbertofury/Athena/blob/main/guidance/schemas/card-definition.schema.json",
+  "title": "Game Card Definition",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "id",
+    "version",
+    "title",
+    "kind",
+    "rarity",
+    "cost",
+    "target",
+    "tags",
+    "effects"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:[._:-][a-z0-9]+)*$"
+    },
+    "version": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 120
+    },
+    "rulesText": {
+      "type": "string",
+      "maxLength": 4000
+    },
+    "kind": {
+      "enum": [
+        "attack",
+        "skill",
+        "power",
+        "curse",
+        "status",
+        "event",
+        "equipment",
+        "modifier"
+      ]
+    },
+    "rarity": {
+      "enum": [
+        "starter",
+        "common",
+        "uncommon",
+        "rare",
+        "epic",
+        "legendary",
+        "cursed",
+        "special"
+      ]
+    },
+    "cost": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "resource",
+        "amount"
+      ],
+      "properties": {
+        "resource": {
+          "type": "string",
+          "minLength": 1
+        },
+        "amount": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "xCost": {
+          "type": "boolean"
+        },
+        "variable": {
+          "type": "boolean"
+        }
+      }
+    },
+    "target": {
+      "enum": [
+        "none",
+        "self",
+        "single_enemy",
+        "all_enemies",
+        "single_ally",
+        "all_allies",
+        "any",
+        "lane",
+        "tile",
+        "selected"
+      ]
+    },
+    "tags": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z0-9._-]+$"
+      }
+    },
+    "effects": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "effectId",
+          "timing"
+        ],
+        "properties": {
+          "effectId": {
+            "type": "string",
+            "pattern": "^[a-z0-9._-]+$"
+          },
+          "timing": {
+            "enum": [
+              "on_draw",
+              "on_play",
+              "on_discard",
+              "on_exhaust",
+              "on_turn_start",
+              "on_turn_end",
+              "on_hit",
+              "on_kill",
+              "on_block",
+              "on_reveal",
+              "on_event"
+            ]
+          },
+          "parameters": {
+            "type": "object"
+          },
+          "order": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "stacking": {
+            "enum": [
+              "stack",
+              "refresh",
+              "replace",
+              "unique",
+              "reject"
+            ]
+          }
+        }
+      }
+    },
+    "triggers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "eventId",
+          "effectId"
+        ],
+        "properties": {
+          "eventId": {
+            "type": "string"
+          },
+          "effectId": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "upgrade": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "fromVersion",
+        "toVersion"
+      ],
+      "properties": {
+        "fromVersion": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "toVersion": {
+          "type": "integer",
+          "minimum": 2
+        },
+        "replacesId": {
+          "type": "string"
+        }
+      }
+    },
+    "art": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "assetId",
+        "source",
+        "license"
+      ],
+      "properties": {
+        "assetId": {
+          "type": "string"
+        },
+        "source": {
+          "type": "string",
+          "format": "uri"
+        },
+        "license": {
+          "type": "string"
+        },
+        "attribution": {
+          "type": "string"
+        },
+        "alt": {
+          "type": "string"
+        }
+      }
+    },
+    "localization": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      }
+    }
+  }
+}

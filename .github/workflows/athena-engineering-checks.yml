@@ -2,7 +2,7 @@ name: Athena engineering checks
 on:
   push:
     branches: [main]
-    paths: ["engineering/**", "migration/engineering-atlas/**", "scripts/verify_atlas_cutover.py", "tests/atlas_cutover_test.py", ".github/workflows/athena-engineering-checks.yml"]
+    paths: ["engineering/**", "migration/engineering-atlas/**", "scripts/verify_atlas_cutover.py", "tests/atlas_cutover_test.py", "docs/GAME-SYSTEMS-EXCHANGE.md", "docs/REUSABLE-PACKAGE-COORDINATION.md", "docs/PORTFOLIO-ALIGNMENT.md", "guidance/registry/shared-capabilities.json", "guidance/schemas/**", "scripts/validate_game_systems.py", "tests/test_game_systems_registry.py", "AGENTS.md", "wiki/Engineering-Game-Systems-Exchange.md", "wiki/Engineering-Home.md", "wiki/Engineering-Navigation.md", ".github/workflows/athena-engineering-checks.yml"]
   pull_request:
     paths: ["engineering/**", "migration/engineering-atlas/**", "scripts/verify_atlas_cutover.py", "tests/atlas_cutover_test.py", ".github/workflows/athena-engineering-checks.yml"]
   workflow_dispatch:
@@ -48,6 +48,11 @@ jobs:
         run: node --test tests/*.test.mjs
       - name: Verify shared GitHub provider release contract
         run: node --experimental-strip-types --test experiments/provider-release-contract/github-release.test.mjs experiments/provider-release-contract/verified-transfer.test.mjs
+      - name: Validate Game Systems Exchange registry
+        working-directory: .
+        run: |
+          python scripts/validate_game_systems.py
+          python -m unittest discover -s tests -p test_game_systems_registry.py -v
       - name: Exercise explicitly synthetic benchmark example
         run: python scripts/compare_benchmarks.py tests/fixtures/synthetic-baseline.json tests/fixtures/synthetic-candidate.json
   rust-lab:

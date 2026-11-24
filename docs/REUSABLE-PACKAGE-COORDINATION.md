@@ -58,3 +58,9 @@ The initial index is a partial source inventory, not a finished shared package m
 ## Active portfolio catch-up milestones
 
 Use the [portfolio routing and milestone index](PORTFOLIO-ALIGNMENT.md) for current owner/consumer work, starting with M1 provider/site adapters and transfer. It links existing local issues rather than replacing them. Before introducing another adapter or test harness, compare the recorded candidates and preserve complete per-provider and per-host behavior.
+
+## Game Systems Exchange — game-specific reusable capabilities
+
+The [Game Systems Exchange](GAME-SYSTEMS-EXCHANGE.md) applies the same zero-loss reuse rules to card games and roguelikes across JetSetCraft, Modhunter, CrownFold and future app modes. The existing shared capability registry remains the single source of truth; it now records gameplay capability IDs, exact source revisions, evidence levels, limitations and consumer routes. The accompanying schemas define versioned package manifests, card definitions, deck state and roguelike run snapshots. They are contracts, not a universal game engine or proof that any current host implements a complete deckbuilder.
+
+Keep deterministic rules, content catalogs, save/progression, reward receipts and UI presentation as separately evaluated capabilities. Share a code package only when languages, runtimes, license and behavior match; otherwise share stable IDs, data schemas, test fixtures and behavioral contracts. A feature is a candidate until tested in its source host; a shared implementation becomes canonical only after two compatible real hosts independently accept it. Existing game economies, host-specific mechanics and save data remain authoritative.

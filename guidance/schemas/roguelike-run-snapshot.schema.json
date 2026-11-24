@@ -1,0 +1,241 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Herbertofury/Athena/blob/main/guidance/schemas/roguelike-run-snapshot.schema.json",
+  "title": "Roguelike Run Snapshot",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "modeId",
+    "runId",
+    "seed",
+    "rng",
+    "rulesetVersion",
+    "contentLock",
+    "phase",
+    "map",
+    "currentNode",
+    "runResources",
+    "runUpgrades",
+    "claimedRewards",
+    "saveRevision"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "modeId": {
+      "type": "string"
+    },
+    "runId": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "seed": {
+      "oneOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "string",
+          "minLength": 1
+        }
+      ]
+    },
+    "rng": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "algorithm",
+        "version"
+      ],
+      "properties": {
+        "algorithm": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        },
+        "streams": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "rulesetVersion": {
+      "type": "string"
+    },
+    "contentLock": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "contentId",
+          "version"
+        ],
+        "properties": {
+          "contentId": {
+            "type": "string"
+          },
+          "version": {
+            "type": "string"
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          }
+        }
+      }
+    },
+    "phase": {
+      "enum": [
+        "preview",
+        "entry",
+        "exploring",
+        "choice",
+        "combat",
+        "boss",
+        "checkpoint",
+        "extraction",
+        "victory",
+        "defeat",
+        "abandoned",
+        "recovery"
+      ]
+    },
+    "map": {
+      "type": "object",
+      "required": [
+        "nodes",
+        "edges"
+      ],
+      "properties": {
+        "nodes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "id",
+              "kind"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "kind": {
+                "type": "string"
+              },
+              "state": {
+                "type": "string"
+              },
+              "prerequisites": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "edges": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "from",
+              "to"
+            ],
+            "properties": {
+              "from": {
+                "type": "string"
+              },
+              "to": {
+                "type": "string"
+              },
+              "requires": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "currentNode": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "runResources": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "number",
+        "minimum": 0
+      }
+    },
+    "runUpgrades": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "version"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "version": {
+            "type": "string"
+          },
+          "rank": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "scope": {
+            "enum": [
+              "run",
+              "persistent"
+            ]
+          }
+        }
+      }
+    },
+    "claimedRewards": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string"
+      }
+    },
+    "checkpoint": {
+      "type": [
+        "object",
+        "null"
+      ]
+    },
+    "outcome": {
+      "enum": [
+        "in_progress",
+        "victory",
+        "defeat",
+        "abandoned"
+      ]
+    },
+    "saveRevision": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "extensions": {
+      "type": "object"
+    }
+  }
+}

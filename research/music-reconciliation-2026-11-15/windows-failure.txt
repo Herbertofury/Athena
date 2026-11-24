@@ -1,6 +1,0 @@
-Head5952870a, run43682212728, Windows job132715065752:
-Synthetic fixture cleanup failed with PermissionError WinError32 on snapshot.sqlite.
-Fixture writers used sqlite3 connection transaction contexts without explicitly
-closing their handles. Corrected fixtures to closing(connection) plus transaction.
-Production reconciliation already used closing on an in-memory connection.
-Linux and learning passed. Failure retained; no unchanged rerun.

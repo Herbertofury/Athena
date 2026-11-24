@@ -1,0 +1,185 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Herbertofury/Athena/blob/main/guidance/schemas/card-game-state.schema.json",
+  "title": "Card Game Runtime State",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "gameId",
+    "runId",
+    "revision",
+    "turn",
+    "phase",
+    "resources",
+    "rng",
+    "zones",
+    "actionLog"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "gameId": {
+      "type": "string"
+    },
+    "runId": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "revision": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "turn": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "phase": {
+      "enum": [
+        "setup",
+        "draw",
+        "player",
+        "resolution",
+        "enemy",
+        "cleanup",
+        "victory",
+        "defeat",
+        "paused"
+      ]
+    },
+    "resources": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "integer",
+        "minimum": 0
+      }
+    },
+    "rng": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "algorithm",
+        "version",
+        "state"
+      ],
+      "properties": {
+        "algorithm": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        },
+        "streams": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "zones": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "draw",
+        "hand",
+        "discard",
+        "exhaust",
+        "removed",
+        "resolving"
+      ],
+      "properties": {
+        "draw": {
+          "$ref": "#/$defs/instances"
+        },
+        "hand": {
+          "$ref": "#/$defs/instances"
+        },
+        "discard": {
+          "$ref": "#/$defs/instances"
+        },
+        "exhaust": {
+          "$ref": "#/$defs/instances"
+        },
+        "removed": {
+          "$ref": "#/$defs/instances"
+        },
+        "resolving": {
+          "$ref": "#/$defs/instances"
+        }
+      }
+    },
+    "actionLog": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "sequence",
+          "actionId",
+          "type"
+        ],
+        "properties": {
+          "sequence": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "actionId": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "payload": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    "extensions": {
+      "type": "object"
+    }
+  },
+  "$defs": {
+    "instances": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "instanceId",
+          "cardId",
+          "cardVersion"
+        ],
+        "properties": {
+          "instanceId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "cardId": {
+            "type": "string"
+          },
+          "cardVersion": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "owner": {
+            "type": "string"
+          },
+          "upgrades": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "modifiers": {
+            "type": "object"
+          }
+        }
+      }
+    }
+  }
+}

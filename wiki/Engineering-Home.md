@@ -35,6 +35,10 @@ A research home for building apps, mods, programs and game tooling. **Reviewed f
 
 [Archive indexing and trustworthy change tracking](https://github.com/Herbertofury/Athena/wiki/Engineering-Archives-and-Change-Tracking): eliminate repeated parsing, bound independent readers, and recover honestly from lost filesystem events.
 
+## Game systems exchange
+
+[Game Systems Exchange](https://github.com/Herbertofury/Athena/wiki/Engineering-Game-Systems-Exchange) coordinates reusable roguelike and card-game mechanics across the app repositories. It distinguishes actual run systems, upgrade drafts, research cards, card presentation and complete deck rules, with versioned contracts and exact evidence.
+
 ## Research desk
 
 [Experiment evidence directory](https://github.com/Herbertofury/Athena/wiki/Engineering-Experiment-Evidence) groups collection, card, storage, parser and recovery studies with raw results, failures and remaining acceptance gates.

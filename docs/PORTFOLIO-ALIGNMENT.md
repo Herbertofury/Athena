@@ -343,3 +343,17 @@ Upstream verified on 2026-11-24: [Rust 1.100.0](https://blog.rust-lang.org/2026/
 At each material checkpoint update the existing owning issue/wiki with what was actually completed, exact source/release and linked receipt; update only the corresponding row/phase here with status and next action. Review portfolio on Athena/agent task start and before relevant release; update stale evidence instead of silently copying old dates. Use current official release metadata and the existing daily acquisition signals. No fixed release deadline or automatic task execution is implied. Do not make all projects wait for M1: land compatible improvements independently. Never close an item from a documentation edit, green build, or untested proposal alone. Optional security audits remain opt-in, CLI-first/non-interruptive execution applies, and all applicable optimization gates and zero-loss fixes remain required.
 
 Current gaps: full source/branch inventory outside selected projects, actual native/worktree state, every dependency's latest compatible channel, exact operation coverage for each adapter, implementation ownership after comparisons, live real benchmarks and consumer adoption all remain open. The empty Hover repo is not a missing app; Hover-App is active. No old sources or local tasks were removed.
+
+## Cross-cutting Game Systems Exchange — non-blocking M5
+
+**Active coordination:** [Athena #364](https://github.com/Herbertofury/Athena/issues/364) · [Game Systems Exchange guide](GAME-SYSTEMS-EXCHANGE.md) · [gameplay capability records](../guidance/registry/shared-capabilities.json).
+
+This lane coordinates reusable card-game and roguelike mechanics without forcing a shared engine or blocking unrelated releases. Initial implementation owners remain JetSetCraft (Rival Rush and the unfinished Adventure Mode), Modhunter (Siege, Atlas Campaign and Shiverfell), and CrownFold (technology-card synergies and deterministic war simulation). Games supplies researched roguelite/card-game references; Athena owns the cross-project registry and schemas.
+
+- [ ] Inventory each project's actual card, run, encounter, reward and progression code plus current local issues before changing it.
+- [ ] Register stable gameplay capability IDs and exact evidence in the existing Athena shared registry.
+- [ ] Trial shared schemas/fixtures in two compatible real hosts before declaring a reusable package or canonical implementation.
+- [ ] When a game feature changes, update its owning issue/docs and Athena's shared record with test commands, exact source revision, limitations and consumers.
+- [ ] Keep card-game rules distinct from UI cards, upgrade drafts and technology/research cards. A complete card engine remains an identified gap, not an existing shipped feature.
+
+M5 is a cross-cutting reuse lane, not a new gate for unrelated project releases. The existing project-local release and acceptance requirements remain authoritative.

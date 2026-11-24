@@ -81,3 +81,6 @@
 ## Portfolio catch-up
 
 - [Portfolio alignment and shared capability milestones](https://github.com/Herbertofury/Athena/wiki/Engineering-Portfolio-Alignment) — prioritized repository tasks and existing local work links.
+
+### Game systems
+- [Game Systems Exchange](https://github.com/Herbertofury/Athena/wiki/Engineering-Game-Systems-Exchange) — shared card-game/roguelike mechanics, source owners, contracts and cross-host acceptance.
