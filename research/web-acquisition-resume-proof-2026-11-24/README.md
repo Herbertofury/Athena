@@ -2,9 +2,11 @@
 
 November 24, 2026. This is a runnable evidence slice for the [web-acquisition benchmark queue](../web-acquisition-frontier-2026-11-24/README.md), not a product integration, package recommendation, or Windows performance result.
 
+**Protocol clarification:** The first fixture sent HTTP/1.1 requests but its standard-library origin kept the default HTTP/1.0 response. The historical timing receipts are preserved as recorded; they are not evidence of an HTTP/1.1 response or connection reuse. The separate test below verifies both explicitly.
+
 ## What passed
 
-`python3 resume_fixture.py` uses only the installed curl CLI, Python standard library and a disposable HTTP/1.1 server bound to an ephemeral local loopback port. There is no external network, real payload, credentials, live account, daemon left running, or installation. A synthetic file has 8 MiB of deterministic content, a saved 3 MiB prefix, and a trusted fixture checksum. There are two distinct versions with the same size. Each backend ran four cases nine times; a result is accepted only after exact full length and SHA-256 match, and every old staged input is checked for byte preservation.
+`python3 resume_fixture.py` uses only the installed curl CLI, Python standard library and a disposable server bound to an ephemeral local loopback port. There is no external network, real payload, credentials, live account, daemon left running, or installation. A synthetic file has 8 MiB of deterministic content, a saved 3 MiB prefix, and a trusted fixture checksum. There are two distinct versions with the same size. Each backend ran four cases nine times; a result is accepted only after exact full length and SHA-256 match, and every old staged input is checked for byte preservation.
 
 | Origin answer | Verified outcome | Response bytes | Python / curl median |
 | --- | --- | ---: | ---: |
@@ -38,3 +40,10 @@ Both builds used the same configure flags: `--disable-shared --enable-static --w
 | Already complete, 416 | 12.905 ms | 14.090 ms |
 
 This measured loopback path established exact correctness on the current release, not a speed gain. The in-process Python control also shifted on several cases and host variation/startup can affect differences of this size. There is no basis here to roll back a dependency, assert a real product regression, or promote it as faster. Next compare persistent libcurl or Rust HTTP under controlled real transfer latencies, with the same completion and rollback gates.
+
+
+## Verified HTTP/1.1 and connection reuse
+
+The [second fixture](verified_http11_fixture.py) explicitly answers in HTTP/1.1 and checks request and response protocol versions. It used curl 8.23.0 and two standard-library paths over the same staging logic: a new connection per request, and one connection reused across four cases. Server-side remote-port evidence confirms all four requests arrived over one TCP connection in each of nine persistent batches per launch. The fresh and CLI clients each used 36 distinct ports per launch. Both independent launches returned exact bytes and preserved all prior partials across 216 transfers; timings and outcomes are in [http11-verified.json](http11-verified.json).
+
+Keep the persistence result separate from the earlier version comparison. This isolates connection reuse as a design option and verifies it actually happened; it does not establish internet speed or justify dropping another backend. A production service also needs bounded idle reuse, timeout and cancellation, redirect/identity handling, and stale-connection and restart tests with equivalent expectations.
