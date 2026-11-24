@@ -25,8 +25,8 @@ def validate(receipt, head):
     if not isinstance(receipt, dict):
         return ["receipt must be an object"]
     problems = []
-    if type(receipt.get("schemaVersion")) is not int or receipt["schemaVersion"] != 3:
-        problems.append("schemaVersion must be 3")
+    if type(receipt.get("schemaVersion")) is not int or receipt["schemaVersion"] != 4:
+        problems.append("schemaVersion must be 4")
     if not valid_sha(head) or receipt.get("head") != head:
         problems.append("head must match the independently supplied full candidate SHA")
     if not valid_sha(receipt.get("baseline")):
@@ -70,6 +70,25 @@ def validate(receipt, head):
     for name, result in checks.items():
         if not isinstance(result, dict) or result.get("status") != "passed" or not nonempty(result.get("evidence")):
             problems.append(f"declared mandatory gate incomplete: {name}")
+    freshness = checks.get("stack_freshness")
+    holds = freshness.get("holds") if isinstance(freshness, dict) else None
+    if not isinstance(holds, list):
+        problems.append("stack_freshness requires an explicit holds list")
+    else:
+        for index, hold in enumerate(holds):
+            label = f"stack_freshness hold {index + 1}"
+            if not isinstance(hold, dict):
+                problems.append(f"{label}: hold must be an object")
+                continue
+            for field in ("component", "retained_version", "candidate_version",
+                          "reason", "repair_evidence", "next_review"):
+                if not nonempty(hold.get(field)):
+                    problems.append(f"{label}: {field} required")
+            if hold.get("repair_status") not in ("attempted_unresolved", "infeasible"):
+                problems.append(f"{label}: completed unsuccessful repair or evidenced infeasibility required")
+            if (nonempty(hold.get("retained_version"))
+                    and hold.get("retained_version") == hold.get("candidate_version")):
+                problems.append(f"{label}: retained and candidate versions must differ")
     # Security audits are an optional advisory map, never a required gate.
     return list(dict.fromkeys(problems))
 

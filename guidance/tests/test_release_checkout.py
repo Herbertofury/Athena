@@ -14,10 +14,10 @@ HEAD = "a" * 40
 
 def receipt():
     return {
-        "schemaVersion": 3, "head": HEAD, "baseline": "b" * 40,
+        "schemaVersion": 4, "head": HEAD, "baseline": "b" * 40,
         "lane": "standard", "scope": "synthetic fixture", "hard_blockers": [],
         "retained_optimization": False,
-        "checks": {name: {"status": "passed", "evidence": "fixture"} for name in GATES},
+        "checks": {name: {"status": "passed", "evidence": "fixture", **({"holds": []} if name == "stack_freshness" else {})} for name in GATES},
         "core_tools": {name: {"status": "no_safe_win", "evidence": "fixture", "tool_version": "fixture", "command": name + " fixture"} for name in CORE},
     }
 
@@ -76,7 +76,7 @@ class ReleaseCheckoutTests(unittest.TestCase):
 
     def test_legacy_schema_rejected(self):
         r = receipt()
-        for version in (1, 2):
+        for version in (1, 2, 3):
             r["schemaVersion"] = version
             self.assertTrue(validate(r, HEAD))
 
@@ -85,6 +85,47 @@ class ReleaseCheckoutTests(unittest.TestCase):
         del r["checks"]["stack_freshness"]
         self.assertTrue(validate(r, HEAD))
         r["checks"]["stack_freshness"] = {"status": "failed", "evidence": "fixture"}
+        self.assertTrue(validate(r, HEAD))
+
+    def test_stack_freshness_requires_explicit_holds(self):
+        r = receipt()
+        del r["checks"]["stack_freshness"]["holds"]
+        self.assertTrue(validate(r, HEAD))
+
+    def test_hold_requires_fix_forward_evidence(self):
+        hold = {
+            "component": "fixture-library", "retained_version": "1.0",
+            "candidate_version": "2.0", "reason": "fixture regression",
+            "repair_status": "attempted_unresolved",
+            "repair_evidence": "fixture repair and failed retest",
+            "next_review": "next upstream release",
+        }
+        r = receipt()
+        r["checks"]["stack_freshness"]["holds"] = [hold]
+        self.assertEqual(validate(r, HEAD), [])
+        for status in ("not_attempted", "deferred", "repaired", None):
+            invalid = copy.deepcopy(r)
+            invalid["checks"]["stack_freshness"]["holds"][0]["repair_status"] = status
+            self.assertTrue(validate(invalid, HEAD))
+        for field in ("component", "retained_version", "candidate_version",
+                      "reason", "repair_evidence", "next_review"):
+            invalid = copy.deepcopy(r)
+            del invalid["checks"]["stack_freshness"]["holds"][0][field]
+            self.assertTrue(validate(invalid, HEAD))
+        invalid = copy.deepcopy(r)
+        invalid["checks"]["stack_freshness"]["holds"][0]["candidate_version"] = "1.0"
+        self.assertTrue(validate(invalid, HEAD))
+
+    def test_infeasible_repair_requires_constraint_evidence(self):
+        r = receipt()
+        r["checks"]["stack_freshness"]["holds"] = [{
+            "component": "fixture-runtime", "retained_version": "1",
+            "candidate_version": "2", "reason": "fixed ABI",
+            "repair_status": "infeasible", "repair_evidence": "fixture target restriction",
+            "next_review": "on supported ABI release",
+        }]
+        self.assertEqual(validate(r, HEAD), [])
+        r["checks"]["stack_freshness"]["holds"][0]["repair_evidence"] = ""
         self.assertTrue(validate(r, HEAD))
 
     def test_high_risk_requires_extra_proof(self):
