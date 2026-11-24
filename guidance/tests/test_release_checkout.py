@@ -14,10 +14,15 @@ HEAD = "a" * 40
 
 def receipt():
     return {
-        "schemaVersion": 4, "head": HEAD, "baseline": "b" * 40,
+        "schemaVersion": 5, "head": HEAD, "baseline": "b" * 40,
         "lane": "standard", "scope": "synthetic fixture", "hard_blockers": [],
         "retained_optimization": False,
-        "checks": {name: {"status": "passed", "evidence": "fixture", **({"holds": []} if name == "stack_freshness" else {})} for name in GATES},
+        "checks": {name: {"status": "passed", "evidence": "fixture", **({"holds": []} if name == "stack_freshness" else {}), **({
+            "documented_head": HEAD, "coverage_evidence": "fixture inventory",
+            "walkthrough_evidence": "fixture walkthrough", "simplification_evidence": "fixture review",
+            "publication": {"mode": "live_wiki", "url": "https://example.test/wiki",
+                            "wiki_commit": "c" * 40, "readback_evidence": "fixture readback"}
+        } if name == "documentation_closeout" else {})} for name in GATES},
         "core_tools": {name: {"status": "no_safe_win", "evidence": "fixture", "tool_version": "fixture", "command": name + " fixture"} for name in CORE},
     }
 
@@ -76,7 +81,7 @@ class ReleaseCheckoutTests(unittest.TestCase):
 
     def test_legacy_schema_rejected(self):
         r = receipt()
-        for version in (1, 2, 3):
+        for version in (1, 2, 3, 4):
             r["schemaVersion"] = version
             self.assertTrue(validate(r, HEAD))
 
@@ -126,6 +131,39 @@ class ReleaseCheckoutTests(unittest.TestCase):
         }]
         self.assertEqual(validate(r, HEAD), [])
         r["checks"]["stack_freshness"]["holds"][0]["repair_evidence"] = ""
+        self.assertTrue(validate(r, HEAD))
+
+    def test_documentation_closeout_mandatory(self):
+        r = receipt()
+        del r["checks"]["documentation_closeout"]
+        self.assertTrue(validate(r, HEAD))
+
+    def test_documentation_closeout_requires_exact_candidate(self):
+        r = receipt()
+        r["checks"]["documentation_closeout"]["documented_head"] = "c" * 40
+        self.assertTrue(validate(r, HEAD))
+
+    def test_documentation_closeout_requires_workflow_and_review(self):
+        for field in ("coverage_evidence", "walkthrough_evidence", "simplification_evidence", "publication"):
+            r = receipt()
+            del r["checks"]["documentation_closeout"][field]
+            self.assertTrue(validate(r, HEAD))
+
+    def test_documentation_live_wiki_needs_publication_proof(self):
+        for field in ("wiki_commit", "url", "readback_evidence"):
+            r = receipt()
+            del r["checks"]["documentation_closeout"]["publication"][field]
+            self.assertTrue(validate(r, HEAD))
+
+    def test_documentation_nonwiki_requires_specific_reason(self):
+        r = receipt()
+        publication = r["checks"]["documentation_closeout"]["publication"]
+        publication["mode"] = "repository_docs"
+        del publication["wiki_commit"]
+        self.assertTrue(validate(r, HEAD))
+        publication["reason"] = "fixture: non-app data deliverable without wiki requirement"
+        self.assertEqual(validate(r, HEAD), [])
+        publication["mode"] = "pending"
         self.assertTrue(validate(r, HEAD))
 
     def test_high_risk_requires_extra_proof(self):

@@ -157,3 +157,8 @@
 - [AI and local models](Software-Ai)
 - [Gaming and modding](Software-Gaming)
 - [Science and specialized work](Software-Science)
+
+
+## Engineering closeout
+
+- [Documentation and release closeout](Engineering-Documentation-Closeout)

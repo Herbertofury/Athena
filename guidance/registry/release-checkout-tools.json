@@ -155,6 +155,78 @@
       "trigger": "Explicit owner opt-in only",
       "use": "Scoped offline JSON scan for code, secrets, agent/MCP config and other configuration; online OSV dependency lookup requires separate authorization; advisory findings only.",
       "versionPolicy": "Review and pin per project before execution; no auto-install or automatic release gate."
+    },
+    {
+      "id": "rag-anything",
+      "upstream": "https://github.com/HKUDS/RAG-Anything",
+      "lane": "deep",
+      "trigger": "Complex multimodal documentation or cross-project knowledge comparison",
+      "use": "Evaluate local authorized indexing and source-grounded retrieval versus exact search; verify parser/model compatibility, no unapproved external model calls.",
+      "releasePolicy": "risk_routed",
+      "versionPolicy": "Review and pin per project before execution; reuse validated local equivalents; documentation outcomes mandatory, individual tool use risk-routed."
+    },
+    {
+      "id": "diagram-design",
+      "upstream": "https://github.com/cathrynlavery/diagram-design",
+      "lane": "targeted",
+      "trigger": "Architecture or workflow diagrams requiring clear polished explanation",
+      "use": "Reviewed local skill and export; headless visual verification; use offline/system fonts and editable sources.",
+      "releasePolicy": "risk_routed",
+      "versionPolicy": "Review and pin per project before execution; reuse validated local equivalents; documentation outcomes mandatory, individual tool use risk-routed."
+    },
+    {
+      "id": "mermaid",
+      "upstream": "https://github.com/mermaid-js/mermaid",
+      "lane": "targeted",
+      "trigger": "Changed workflow, data or architecture diagram",
+      "use": "Text-based source; verify actual Wiki renderer and labels; prefer lightweight when sufficient.",
+      "releasePolicy": "risk_routed",
+      "versionPolicy": "Review and pin per project before execution; reuse validated local equivalents; documentation outcomes mandatory, individual tool use risk-routed."
+    },
+    {
+      "id": "lychee",
+      "upstream": "https://github.com/lycheeverse/lychee",
+      "lane": "fast",
+      "trigger": "Changed docs/wiki links",
+      "use": "Local links first, bounded authorized external checks; triage transient failures.",
+      "releasePolicy": "risk_routed",
+      "versionPolicy": "Review and pin per project before execution; reuse validated local equivalents; documentation outcomes mandatory, individual tool use risk-routed."
+    },
+    {
+      "id": "markdownlint",
+      "upstream": "https://github.com/DavidAnson/markdownlint",
+      "lane": "fast",
+      "trigger": "Changed Markdown",
+      "use": "Focused structural lint with existing rules; don't rewrite valid examples.",
+      "releasePolicy": "risk_routed",
+      "versionPolicy": "Review and pin per project before execution; reuse validated local equivalents; documentation outcomes mandatory, individual tool use risk-routed."
+    },
+    {
+      "id": "vale",
+      "upstream": "https://github.com/vale-cli/vale",
+      "lane": "targeted",
+      "trigger": "Changed substantial prose or terminology",
+      "use": "Local reviewed rules; advisory consistency/readability findings.",
+      "releasePolicy": "risk_routed",
+      "versionPolicy": "Review and pin per project before execution; reuse validated local equivalents; documentation outcomes mandatory, individual tool use risk-routed."
+    },
+    {
+      "id": "jscpd",
+      "upstream": "https://github.com/kucherenko/jscpd",
+      "lane": "targeted",
+      "trigger": "Overlapping code or docs and redundant workflow investigation",
+      "use": "Advisory clone detection; verify callers, behavior and zero-loss equivalence before removal.",
+      "releasePolicy": "risk_routed",
+      "versionPolicy": "Review and pin per project before execution; reuse validated local equivalents; documentation outcomes mandatory, individual tool use risk-routed."
+    },
+    {
+      "id": "mdbook",
+      "upstream": "https://github.com/rust-lang/mdBook",
+      "lane": "targeted",
+      "trigger": "Useful offline manual/searchable guide",
+      "use": "Generate from existing canonical Markdown; no duplicate wiki source.",
+      "releasePolicy": "risk_routed",
+      "versionPolicy": "Review and pin per project before execution; reuse validated local equivalents; documentation outcomes mandatory, individual tool use risk-routed."
     }
   ]
 }

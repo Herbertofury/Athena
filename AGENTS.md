@@ -17,3 +17,7 @@ Follow [Athena's frontier-stack standard](guidance/WEB_ACQUISITION_FRONTIER.md).
 ## Shared capabilities and zero-loss evolution
 
 Consult [Athena's reusable-package coordination](docs/REUSABLE-PACKAGE-COORDINATION.md) and [capability index](guidance/registry/shared-capabilities.json) before substantial implementation. Reuse or improve the strongest verified compatible existing solution; preserve unique local functionality, data and accepted baseline. Contribute verified fixes and evidence at the owning source and link them in Athena. Keep one authoritative record per capability, avoid parallel duplicate work, and record a bounded reuse/drift review within release stack freshness.
+
+## Mandatory wiki closeout and documentation-driven product review
+
+At every material checkpoint and before release follow [Athena's wiki closeout standard](guidance/WIKI_CLOSEOUT.md). Document what the product does and how to use its actual features, verify changed workflows on the real supported deliverable, review and safely repair confusing or redundant work, keep canonical sources and required live Wiki current. Prefer incremental docs and existing tooling; route RAG-Anything, Diagram Design and supporting tools where useful. Preserve all accepted functionality and document unresolved blockers honestly.

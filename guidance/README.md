@@ -5,10 +5,11 @@ Athena's shared repository-alignment and reusable-agent capability. The first na
 - [Repository guidance and explicit adoption](docs/REPOSITORY-GOVERNANCE.md)
 - [Shared adapter](templates/AGENTS.repository.md)
 - [Product invariants](PRODUCT_INVARIANTS.md)
+- [Wiki closeout and documentation-driven product review](WIKI_CLOSEOUT.md) — [feature guide template](templates/WIKI_FEATURE_GUIDE.md), real workflow verification, simplification, and live Wiki parity.
 - [Shared capability coordination](../docs/REUSABLE-PACKAGE-COORDINATION.md) — [reuse and ownership index](registry/shared-capabilities.json); existing research and implementation sources remain authoritative.
 - [Continuous web acquisition and frontier-stack advancement](WEB_ACQUISITION_FRONTIER.md) — [candidate catalog](registry/web-acquisition-watch.json) and mandatory release freshness.
 - [CLI-first non-interruptive execution](CLI_FIRST_EXECUTION.md) — official CLI/API first; CLI-Anything harnesses for missing interfaces; isolated UI verification.
-- [Risk-routed pre-release checkout and zero-loss optimization](PRE_RELEASE_OPTIMIZATION.md) — [17-tool catalog (mandatory core optimization; opt-in security)](registry/release-checkout-tools.json) and [dependency-free receipt validator](tools/release_checkout.py)
+- [Risk-routed pre-release checkout and zero-loss optimization](PRE_RELEASE_OPTIMIZATION.md) — [25-tool catalog (mandatory core optimization; opt-in security)](registry/release-checkout-tools.json) and [dependency-free receipt validator](tools/release_checkout.py)
 - [Machine-readable governance release](registry/repository-governance.json)
 - [Migration/retirement ledger](../docs/integration/AGENT-GUIDANCE.md)
 

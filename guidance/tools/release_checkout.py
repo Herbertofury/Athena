@@ -7,7 +7,7 @@ from pathlib import Path
 
 CORE = ("shrink-anything", "fast-anything", "rust-anything")
 GATES = ("project_checks", "workflow_acceptance", "artifact_integrity",
-         "artifact_rollback", "review", "stack_freshness")
+         "artifact_rollback", "review", "stack_freshness", "documentation_closeout")
 LANES = ("quick", "standard", "high-risk")
 OUTCOMES = ("adopted", "no_safe_win", "not_applicable")
 
@@ -25,8 +25,8 @@ def validate(receipt, head):
     if not isinstance(receipt, dict):
         return ["receipt must be an object"]
     problems = []
-    if type(receipt.get("schemaVersion")) is not int or receipt["schemaVersion"] != 4:
-        problems.append("schemaVersion must be 4")
+    if type(receipt.get("schemaVersion")) is not int or receipt["schemaVersion"] != 5:
+        problems.append("schemaVersion must be 5")
     if not valid_sha(head) or receipt.get("head") != head:
         problems.append("head must match the independently supplied full candidate SHA")
     if not valid_sha(receipt.get("baseline")):
@@ -89,6 +89,29 @@ def validate(receipt, head):
             if (nonempty(hold.get("retained_version"))
                     and hold.get("retained_version") == hold.get("candidate_version")):
                 problems.append(f"{label}: retained and candidate versions must differ")
+    documentation = checks.get("documentation_closeout")
+    if isinstance(documentation, dict):
+        if documentation.get("documented_head") != head:
+            problems.append("documentation_closeout must document the exact candidate head")
+        for field in ("coverage_evidence", "walkthrough_evidence", "simplification_evidence"):
+            if not nonempty(documentation.get(field)):
+                problems.append(f"documentation_closeout: {field} required")
+        publication = documentation.get("publication")
+        if not isinstance(publication, dict):
+            problems.append("documentation_closeout: publication evidence required")
+        else:
+            for field in ("url", "readback_evidence"):
+                if not nonempty(publication.get(field)):
+                    problems.append(f"documentation_closeout publication: {field} required")
+            mode = publication.get("mode")
+            if mode == "live_wiki":
+                if not valid_sha(publication.get("wiki_commit")):
+                    problems.append("documentation_closeout: full published wiki commit required")
+            elif mode == "repository_docs":
+                if not nonempty(publication.get("reason")):
+                    problems.append("documentation_closeout: repository-only scope reason required")
+            else:
+                problems.append("documentation_closeout: valid publication mode required")
     # Security audits are an optional advisory map, never a required gate.
     return list(dict.fromkeys(problems))
 
