@@ -192,8 +192,33 @@ c.execute('UPDATE experiment_runs SET output=? WHERE experiment_id=?',(raw,int(s
   await page.locator('[data-origin-apply]').click();
   assert.equal(await page.locator('[data-inspect-origin]').inputValue(),'tr','origin input immediately after Apply');
   assert.equal(await page.locator('[data-inspect-rotation]').inputValue(),'45','rotation retained after origin upgrade');
-  await page.locator('[data-native-save]').click();
-  await page.locator('[data-native-status]').filter({hasText:'saved to native SQLite'}).waitFor();
+  const saveStatus=page.locator('[data-native-status]').filter({hasText:'saved to native SQLite'});
+  if(suppliedPackage){
+   const action=page.locator('.foundry-workspace [data-inspect-transform]');
+   await action.focus();
+   assert.equal(await action.evaluate(node=>node.getRootNode().activeElement===node),true);
+   await page.evaluate(()=>{
+    const observe=event=>{
+     if(event.key.toLowerCase()!=='s'||!event.ctrlKey)return;
+     document.removeEventListener('keydown',observe,true);
+     // Read the same event after dispatch; capture occurs before Foundry.
+     window.nativeSaveShortcutEvent=event;
+    };
+    document.addEventListener('keydown',observe,true);
+   });
+   const writes=[],downloads=[];
+   const observe=request=>{if(request.method()==='POST'&&new URL(request.url()).pathname==='/__native/backup')writes.push(request.url());};
+   const downloaded=download=>downloads.push(download.suggestedFilename());
+   page.on('request',observe);page.on('download',downloaded);
+   try{
+    await page.keyboard.press('Control+s');
+    await saveStatus.waitFor();
+    assert.equal(await page.evaluate(()=>window.nativeSaveShortcutEvent?.isTrusted&&window.nativeSaveShortcutEvent.defaultPrevented),true);
+    assert.deepEqual(writes,[origin+'/__native/backup']);
+    assert.deepEqual(downloads,[]);
+   }finally{page.off('request',observe);page.off('download',downloaded);}
+  }else await page.locator('[data-native-save]').click();
+  await saveStatus.waitFor();
   const stored=JSON.parse(cli('load-backup'));
   assert.equal(stored.version,9);assert.equal(stored.active.time,'night');
   assert.ok(Object.values(stored.active.placements).some(p=>p.rotation===45 && p.transformOrigin==='tr'),JSON.stringify(stored.active.placements));
