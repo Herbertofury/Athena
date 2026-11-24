@@ -13,3 +13,7 @@ For every task, follow the owner-mandated [Athena CLI-first execution standard](
 ## Continuous frontier modernization and web acquisition
 
 Follow [Athena's frontier-stack standard](guidance/WEB_ACQUISITION_FRONTIER.md). Every release must refresh official stack versions and adopt verified compatible upgrades. If the newest eligible version has a defect, diagnose, attempt a causal repair and retest before holding an older version; document failed repair or evidenced infeasibility and a next review. Do not downgrade merely because the initial upgrade failed. Review crawler/browser/download candidates and compare equivalent workloads. Preserve mandatory optimizers, CLI-first execution and opt-in security auditing.
+
+## Shared capabilities and zero-loss evolution
+
+Consult [Athena's reusable-package coordination](docs/REUSABLE-PACKAGE-COORDINATION.md) and [capability index](guidance/registry/shared-capabilities.json) before substantial implementation. Reuse or improve the strongest verified compatible existing solution; preserve unique local functionality, data and accepted baseline. Contribute verified fixes and evidence at the owning source and link them in Athena. Keep one authoritative record per capability, avoid parallel duplicate work, and record a bounded reuse/drift review within release stack freshness.

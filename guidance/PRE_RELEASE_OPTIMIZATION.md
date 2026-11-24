@@ -28,7 +28,7 @@ This separation does not authorize deliberately introducing known exploitable de
 
 ## Mandatory stack freshness
 
-Before every release, complete the [web acquisition and frontier-stack advancement standard](WEB_ACQUISITION_FRONTIER.md). Refresh official version and channel evidence for the actual shipping stack, adopt verified compatible upgrades with no material regression, and complete the mandatory fix-forward repair procedure before any older-version hold. A hold requires a failed bounded repair with retest evidence or a documented infeasibility constraint, plus a next review. Evaluate stronger relevant crawler/browser/download technology without requiring speculative rewrites. The release receipt must include the `stack_freshness` gate. Dedicated security audits remain opt-in.
+Before every release, complete the [web acquisition and frontier-stack advancement standard](WEB_ACQUISITION_FRONTIER.md). Refresh official version and channel evidence for the actual shipping stack, adopt verified compatible upgrades with no material regression, and complete the mandatory fix-forward repair procedure before any older-version hold. A hold requires a failed bounded repair with retest evidence or a documented infeasibility constraint, plus a next review. Evaluate stronger relevant crawler/browser/download technology without requiring speculative rewrites. The release receipt must include the `stack_freshness` gate, with a bounded reuse/drift review for touched capabilities under the [shared capability coordination policy](../docs/REUSABLE-PACKAGE-COORDINATION.md). Dedicated security audits remain opt-in.
 
 ## Execution route
 

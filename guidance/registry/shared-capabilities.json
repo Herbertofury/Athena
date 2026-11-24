@@ -1,0 +1,169 @@
+{
+  "schemaVersion": 1,
+  "reviewedOn": "2026-11-24",
+  "purpose": "Routing index for overlapping internal capabilities; authoritative implementation and detailed evidence remain at their linked owners. Not a separate upstream technology catalog or a declaration of shared-package parity.",
+  "policy": "docs/REUSABLE-PACKAGE-COORDINATION.md",
+  "capabilities": [
+    {
+      "id": "acquisition.download",
+      "name": "Authorized download and transfer",
+      "status": "comparison_needed",
+      "canonicalImplementation": null,
+      "contractRefs": [
+        "guidance/WEB_ACQUISITION_FRONTIER.md"
+      ],
+      "researchRefs": [
+        "guidance/registry/web-acquisition-watch.json"
+      ],
+      "candidates": [
+        {
+          "repository": "Herbertofury/Enderloom",
+          "commit": "d1c3e24a75c383bc4b7e1f0ba4cc1a89450d2770",
+          "path": "native/src/download/mod.rs",
+          "source": "https://github.com/Herbertofury/Enderloom/blob/d1c3e24a75c383bc4b7e1f0ba4cc1a89450d2770/native/src/download/mod.rs",
+          "evidence": "source_inspected_not_runtime_verified",
+          "observed": "Rust download spec, expected SHA-1/SHA-256/size, partial paths, cancellation and destination locks.",
+          "limits": "Inspect complete transfer lifecycle and test before extracting or declaring a winner."
+        },
+        {
+          "repository": "Herbertofury/GameSync-Next",
+          "commit": "ee4fdbab5571c8111291aa58db45c0be920e7665",
+          "path": "apps/asset-orchestrator/src/adapters/base.ts",
+          "source": "https://github.com/Herbertofury/GameSync-Next/blob/ee4fdbab5571c8111291aa58db45c0be920e7665/apps/asset-orchestrator/src/adapters/base.ts",
+          "evidence": "source_inspected_not_runtime_verified",
+          "observed": "TypeScript source adapter and streaming download with computed SHA-256.",
+          "limits": "Verify expected digest, write completion, backpressure, staging and recovery with controlled fixtures."
+        },
+        {
+          "repository": "Herbertofury/GameSync-Next",
+          "commit": "ee4fdbab5571c8111291aa58db45c0be920e7665",
+          "path": "apps/asset-orchestrator/src/pipeline/download.ts",
+          "source": "https://github.com/Herbertofury/GameSync-Next/blob/ee4fdbab5571c8111291aa58db45c0be920e7665/apps/asset-orchestrator/src/pipeline/download.ts",
+          "evidence": "source_inspected_not_runtime_verified",
+          "observed": "Asset vault orchestration, concurrency and deduplication.",
+          "limits": "Scope and actual completeness, non-interruptive operation and permissions need acceptance."
+        },
+        {
+          "repository": "Herbertofury/Gamesync",
+          "commit": "44d877bde8eb342cec10a63e2d126fbe55a5c8ed",
+          "path": "app/modules/core/background/downloads-handler.js",
+          "source": "https://github.com/Herbertofury/Gamesync/blob/44d877bde8eb342cec10a63e2d126fbe55a5c8ed/app/modules/core/background/downloads-handler.js",
+          "evidence": "source_inspected_not_runtime_verified",
+          "observed": "Browser extension filename routing and native installer handoff.",
+          "limits": "Host-specific Chrome API and native messaging; not interchangeable with a standalone transfer engine."
+        }
+      ],
+      "nextAction": "Compare native Rust transfer and existing TypeScript pipeline on the same complete authorized local fixtures; keep host-specific adapters and verified results. Evaluate Ghost Downloader/aria2 through the existing watch catalog."
+    },
+    {
+      "id": "acquisition.provider-identity",
+      "name": "Provider identity, metadata and release resolution",
+      "status": "comparison_needed",
+      "canonicalImplementation": null,
+      "contractRefs": [
+        "engineering/docs/adapters/contract.md"
+      ],
+      "researchRefs": [
+        "engineering/data/site-adapter-catalog.json",
+        "engineering/data/adapter-research.json"
+      ],
+      "candidates": [
+        {
+          "repository": "Herbertofury/Modhunter",
+          "commit": "30ad245e546f7314f3be86f3c7004c66258110ca",
+          "path": "mo2_update_arsenal/source_adapters.py",
+          "source": "https://github.com/Herbertofury/Modhunter/blob/30ad245e546f7314f3be86f3c7004c66258110ca/mo2_update_arsenal/source_adapters.py",
+          "evidence": "source_inspected_not_runtime_verified",
+          "observed": "Provider capability labels, public-release freshness and bounded Rust adapter protocol.",
+          "limits": "Check actual helper implementations and supported provider/version cases."
+        },
+        {
+          "repository": "Herbertofury/Enderloom",
+          "commit": "d1c3e24a75c383bc4b7e1f0ba4cc1a89450d2770",
+          "path": "src/provider-api-fastlane.js",
+          "source": "https://github.com/Herbertofury/Enderloom/blob/d1c3e24a75c383bc4b7e1f0ba4cc1a89450d2770/src/provider-api-fastlane.js",
+          "evidence": "source_inspected_not_runtime_verified",
+          "observed": "Provider-qualified URL mapping and public metadata seed descriptors.",
+          "limits": "Verify final canonical identity and completeness; initial metadata seed is not a complete result."
+        },
+        {
+          "repository": "Herbertofury/GameSync-Next",
+          "commit": "ee4fdbab5571c8111291aa58db45c0be920e7665",
+          "path": "apps/asset-orchestrator/src/adapters/base.ts",
+          "source": "https://github.com/Herbertofury/GameSync-Next/blob/ee4fdbab5571c8111291aa58db45c0be920e7665/apps/asset-orchestrator/src/adapters/base.ts",
+          "evidence": "source_inspected_not_runtime_verified",
+          "observed": "Provider search/inspection/download resolution interface.",
+          "limits": "Asset-specific schema and provider coverage require mapping."
+        }
+      ],
+      "nextAction": "Agree common stable provider-qualified IDs, access/completeness states and response fixtures, then compare overlapping supported providers without flattening game- or asset-specific semantics."
+    },
+    {
+      "id": "acquisition.web-extraction",
+      "name": "Web extraction and browser routing",
+      "status": "comparison_needed",
+      "canonicalImplementation": null,
+      "contractRefs": [
+        "engineering/docs/adapters/contract.md",
+        "guidance/CLI_FIRST_EXECUTION.md"
+      ],
+      "researchRefs": [
+        "guidance/registry/web-acquisition-watch.json",
+        "engineering/data/research-catalog.json"
+      ],
+      "candidates": [
+        {
+          "repository": "Herbertofury/Gamesync",
+          "commit": "44d877bde8eb342cec10a63e2d126fbe55a5c8ed",
+          "path": "app/shared/smart-scrape.js",
+          "source": "https://github.com/Herbertofury/Gamesync/blob/44d877bde8eb342cec10a63e2d126fbe55a5c8ed/app/shared/smart-scrape.js",
+          "evidence": "source_inspected_not_runtime_verified",
+          "observed": "Existing service-worker extraction and classification source; source review only.",
+          "limits": "Not approved for reuse as a whole. Compare only authorized parsing and data handling; access-denial behavior and permission compliance require review."
+        },
+        {
+          "repository": "Herbertofury/Enderloom",
+          "commit": "d1c3e24a75c383bc4b7e1f0ba4cc1a89450d2770",
+          "path": "src/provider-api-fastlane.js",
+          "source": "https://github.com/Herbertofury/Enderloom/blob/d1c3e24a75c383bc4b7e1f0ba4cc1a89450d2770/src/provider-api-fastlane.js",
+          "evidence": "source_inspected_not_runtime_verified",
+          "observed": "Direct API metadata fast path.",
+          "limits": "Not a general crawler; compare equivalent complete provider workloads."
+        }
+      ],
+      "nextAction": "Use existing Athena research to compare direct authorized HTTP/extraction with local Firecrawl, Crawl4AI and isolated browser rendering. Preserve real output identity, permissions and completeness."
+    },
+    {
+      "id": "engineering.release-checkout",
+      "name": "Shared release policy and receipt validation",
+      "status": "canonical_policy_available",
+      "canonicalImplementation": {
+        "repository": "Herbertofury/Athena",
+        "path": "guidance/tools/release_checkout.py",
+        "commit": "0f06f0b3e1dcce6a3ccf09893b56b5b3fdb13936",
+        "scope": "Reference receipt validator; structure checks only, not evidence verification or fleet CI adoption."
+      },
+      "contractRefs": [
+        "guidance/PRE_RELEASE_OPTIMIZATION.md",
+        "guidance/WEB_ACQUISITION_FRONTIER.md",
+        "guidance/CLI_FIRST_EXECUTION.md"
+      ],
+      "researchRefs": [
+        "guidance/registry/release-checkout-tools.json"
+      ],
+      "candidates": [],
+      "nextAction": "Reuse the maintained Athena policy and pinned validator rather than cloning a different release standard; validate consumer integration and actual acceptance evidence."
+    }
+  ],
+  "coverage": {
+    "inspectedRepositories": [
+      "Athena",
+      "Enderloom",
+      "Modhunter",
+      "GameSync-Next",
+      "Gamesync"
+    ],
+    "partialOnly": true,
+    "unresolved": "Full consumer dependency/call-site inventory, runtime tests, ownership and compatibility of shared packages, Noxviola and other projects remain to be investigated. A source file is not proof of deployed usage."
+  }
+}

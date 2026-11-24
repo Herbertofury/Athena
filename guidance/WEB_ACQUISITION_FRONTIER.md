@@ -24,6 +24,10 @@ The owner requires an actual repair attempt when the newest eligible version exp
 
 Every release receipt must explicitly list all older-version holds (an empty list means no holds), including the repair disposition and supporting evidence. Missing, deferred-without-attempt, or successful-but-discarded repair dispositions do not justify retaining an older version. This is not a mandate to force a new game/runtime target or accept an unsafe or unproven update. It does not change opt-in security auditing or CLI-first requirements.
 
+## Shared capability reuse
+
+Consult the [existing reusable-package coordination policy](../docs/REUSABLE-PACKAGE-COORDINATION.md) and [capability routing index](registry/shared-capabilities.json) before adding a new implementation. Link to existing source and benchmark evidence, coordinate ownership, contribute improvements back to Athena and verify each consuming project independently. No forced fleet migration or new standalone tracking system.
+
 ## Continuous acquisition research
 
 Start with Ghost Downloader 3 and Firecrawl. Maintain a shared candidate catalog with exact upstream links, version channels, documented interfaces, platform support, license/redistribution terms, portable configuration and state, known limits, and measured versus advertised capabilities.
