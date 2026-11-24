@@ -3,16 +3,57 @@ from pathlib import Path
 import argparse,json,re,hashlib
 from build_engineering_workspaces import replace
 ROOT=Path(__file__).resolve().parents[1];SRC=ROOT/'engineering/docs/media-lab';DEST=ROOT/'dist/workspaces/engineering/diagnostics'
+
+COMPARISON_LIFECYCLE="""const $=id=>root.getElementById(id);
+let activeComparison=null;
+function comparisonFrame(run){
+ return new Promise((resolve,reject)=>{
+  const {signal}=run;
+  const stale=()=>signal.aborted||disposed||activeComparison!==run;
+  const reason=()=>signal.reason||Error('Comparison is no longer active.');
+  if(stale()){reject(reason());return;}
+  let settled=false;
+  const finish=(error,time)=>{
+   if(settled)return;
+   settled=true;signal.removeEventListener('abort',abort);
+   if(error)reject(error);else resolve(time);
+  };
+  const id=requestAnimationFrame(time=>finish(stale()?reason():null,time));
+  const abort=()=>{cancelAnimationFrame(id);finish(reason());};
+  signal.addEventListener('abort',abort,{once:true});
+ });
+}
+function interruptComparison(outcome,message){
+ if(!activeComparison||activeComparison.signal.aborted)return;
+ receipt.outcome=outcome;receipt.complete=false;receipt.error=message;receipt.finished_at=new Date().toISOString();
+ activeComparison.abort(Error(message));
+}
+$('cancel-comparison').addEventListener('click',()=>{
+ if(!disposed)interruptComparison('cancelled','Comparison cancelled. Completed samples retained; no winner declared.');
+});"""
 def build():
  files={DEST/n:(SRC/n).read_bytes() for n in ['preview-loader.mjs','event-log-recovery.mjs','event-log-baseline.mjs','event-log-view.mjs','event-log-fixture.json']}
  event=(SRC/'event-log-benchmark.js').read_text();preview=(SRC/'preview-timeout-check.js').read_text();imports='\n'.join(l for code in [event,preview] for l in code.splitlines() if l.startswith('import '));event='\n'.join(l for l in event.splitlines() if not l.startswith('import '));preview='\n'.join(l for l in preview.splitlines() if not l.startswith('import '))
  event=event.replace('receipt=null,hidden=false','receipt=retained.receipt,hidden=false').replace('let recoveryReceipt=null','let recoveryReceipt=retained.recovery')
  event=event.replace('document.getElementById','root.getElementById')
  event=replace(event,"document.addEventListener('visibilitychange',()=>{if(busy&&document.hidden)hidden=true;});","const visibility=()=>{if(busy&&document.hidden)hidden=true;};document.addEventListener('visibilitychange',visibility);cleanups.push(()=>document.removeEventListener('visibilitychange',visibility));")
+ event=replace(event,"const $=id=>root.getElementById(id),frame=()=>new Promise(resolve=>requestAnimationFrame(resolve));",COMPARISON_LIFECYCLE)
+ event=replace(event,"if(busy)return;busy=true;hidden=false;",
+  "if(disposed||busy||previewBusy||$('run').disabled)return;busy=true;hidden=false;const run=new AbortController();activeComparison=run;$('cancel-comparison').disabled=false;")
  event=event.replace('if(busy)return;', 'if(disposed||busy||previewBusy)return;')
+ event=replace(event,'await frame();','await comparisonFrame(run);',count=5)
  event=event.replace('if(document.hidden||hidden)', 'if(disposed||document.hidden||hidden)')
  event=replace(event,"}catch(error){receipt.error=String(error.message);", "}catch(error){if(disposed)return;receipt.error=String(error.message);")
- event=replace(event,'finally{receipt.finished_at=', 'finally{if(disposed)return;receipt.finished_at=')
+ event=replace(event," finally{receipt.finished_at=new Date().toISOString();", '''
+ finally{
+  if(disposed||activeComparison!==run)return;
+  activeComparison=null;
+  if(receipt.outcome==='cancelled')$('workload').replaceChildren();
+  const restoreFocus=root.activeElement===$('cancel-comparison');
+  $('cancel-comparison').disabled=true;
+  receipt.finished_at||=new Date().toISOString();
+''')
+ event=replace(event,"$('recover').disabled=false;busy=false;", "$('recover').disabled=false;busy=false;if(restoreFocus)$('run').focus({preventScroll:true});")
  event=replace(event,"fetch('./event-log-fixture.json')", "fetch(new URL('./event-log-fixture.json',import.meta.url),{signal:lifetime.signal})")
  event=replace(event,"source=await response.json();", "source=await response.json();if(disposed)return {unmount,setTheme,setSearch,ready:false};")
  event=replace(event,"}catch(error){$('status').textContent=error.message;}","}catch(error){if(!disposed)$('status').textContent=error.message;}")
@@ -27,6 +68,8 @@ def build():
  # Child module-scoped nodes are retained only while mounted. No automatic diagnostics.
  markup=(SRC/'event-log-benchmark.template.html').read_text().split('</style>',1)[1].split('<script',1)[0]
  markup=markup.replace('<h1>','<h2>').replace('</h1>','</h2>')
+ markup=replace(markup,'<button id="export" disabled>Export comparison</button>',
+  '<button id="cancel-comparison" type="button" aria-controls="status results" disabled>Cancel comparison</button><button id="export" disabled>Export comparison</button>')
  p=(SRC/'preview-timeout-check.template.html').read_text().split('<body>',1)[1].split('<script',1)[0].replace('<h1>','<h2>').replace('</h1>','</h2>').replace('id="run"','id="preview-run"').replace('id="output"','id="preview-output"')
  markup='<p id="search-status" role="status"></p>'+markup+p
  header=(ROOT/'scripts/card_workspace_header.mjs').read_text().replace('MARKUP',json.dumps(markup))
@@ -35,9 +78,9 @@ def build():
  footer="""
 function setSearch(q){if(!disposed)$('search-status').textContent=String(q||'')?'Diagnostics: event-log rendering, DOM recovery and preview timeout. Search does not filter evidence.':'Native media diagnostics. Explicit actions only; generated tests are not live-provider acceptance.';}
 setSearch(search);
-if(receipt){$('results').textContent=JSON.stringify(receipt,null,2);$('export').disabled=false;$('status').textContent='Previous diagnostic receipt retained; new runs are explicit.';}
+if(receipt){$('results').textContent=JSON.stringify(receipt,null,2);$('export').disabled=false;$('status').textContent=receipt.outcome?receipt.error:'Previous diagnostic receipt retained; new runs are explicit.';}
 if(recoveryReceipt){$('recovery-results').textContent=JSON.stringify(recoveryReceipt,null,2);$('export-recovery').disabled=false;}
-cancelRun=()=>{lifetime.abort();activeImage?.removeAttribute('src');if(busy&&receipt){receipt.complete=false;receipt.error='Navigation interrupted comparison; no winner declared.';}retained={receipt,recovery:recoveryReceipt};};
+cancelRun=()=>{lifetime.abort();activeImage?.removeAttribute('src');interruptComparison('interrupted','Navigation interrupted comparison; no winner declared.');retained={receipt,recovery:recoveryReceipt};};
 return {unmount,setTheme,setSearch,ready:!!source,exportState(){return {available:true};}};
 }
 """
