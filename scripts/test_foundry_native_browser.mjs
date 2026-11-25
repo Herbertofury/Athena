@@ -120,7 +120,10 @@ c.execute('UPDATE experiment_runs SET output=? WHERE experiment_id=?',(raw,int(s
    assert.equal(report.externalRequests.length,0);
   }finally{page.off('request',track);}
  });
- await page.goto(origin+'/#build');await page.locator('.foundry-scene').waitFor();
+ // Exercise actual Foundry readiness rather than waiting for unrelated document assets.
+ await page.goto(origin+'/#build',{waitUntil:'commit'});
+ await page.locator('.foundry-scene').waitFor();
+ await page.locator('.workspace-status').filter({hasText:/workspace loaded/i}).waitFor();
  await check('Native profile loads without iframe or automatic playback',async()=>{
   assert.equal(await page.locator('.foundry-workspace iframe').count(),0);
   await page.locator('[data-native-save]').waitFor();
