@@ -154,3 +154,7 @@ legality. Browser hashing uses Web Crypto; no network connection is needed.
 Select **Roaming Expedition · 20 min** in the standalone Arena. The Crystalback Geode Worm carries a moving mineable crystal node; the Lockbox Loot Goblin flees your approach. Your ordinary weapons damage these targets. Follow the canvas marker or the text direction, then step into the dropped cache to collect XP and crystal or gold. An escaped target or expired cache pays nothing. The resource balance is local to this run and included in its verified portable tape; it is not a shop, a base economy, or cross-game progression.
 
 The opt-in encounter lane derives its choices from the run seed and simulated clock. It does not consume an extra random draw on existing Classic, Marathon, or Endless. Existing tapes are unchanged. Encounter and resource visuals are original Canvas drawings; the offline build does not fetch assets.
+
+### Rift Expedition
+
+**Rift Expedition · 20 min** includes the Roaming Expedition and discoverable portals. Follow a portal marker to choose whether to enter. Seeded side runs last 10, 20, or 30 minutes; you can decline or leave early. The parent run is suspended, including its clock, enemies, player, and random stream. A side run has its own clock, starting kit, health and random stream. Clearing it banks a one-time run-local reward; loss or early departure pays nothing. Your tape can resume a side run and preserves the suspended parent without changing older tape meanings. No store, account, native installation, or network access.
