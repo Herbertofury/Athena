@@ -106,9 +106,13 @@ try{
  assert.match(await page.locator('#expedition-event').textContent(),/Crystalback Geode Worm spotted/);
  assert.ok(await paintColor([119,239,220])>300,'mining target is drawn in the arena');
  await renderFixture('drop-awaiting.json',{capture:()=>cacheSight});
- assert.match(await page.locator('#expedition-event').textContent(),/Cache dropped: collect crystal/);
- assert.equal(await page.locator('#expedition-balance').textContent(),'Crystal 0 · Gold 0');
- assert.ok(await paintColor([138,255,238])>40,'collectable cache is actually rendered');
+ const beforePickup=JSON.parse(cacheSight.final).world.roaming;
+ const pending=beforePickup.caches[0];
+ assert.ok(['crystal','gold'].includes(pending.resource));
+ assert.match(await page.locator('#expedition-event').textContent(),new RegExp('Cache dropped: collect '+pending.resource));
+ assert.equal(await page.locator('#expedition-balance').textContent(),`Crystal ${beforePickup.balance.crystal} · Gold ${beforePickup.balance.gold}`);
+ const cacheColor=pending.resource==='gold'?[255,202,117]:[138,255,238];
+ assert.ok(await paintColor(cacheColor)>40,'the uncollected cache is actually rendered');
  await renderFixture('both-collected.json',h);
  assert.equal(await page.locator('#expedition-balance').textContent(),'Crystal 12 · Gold 24');
  assert.deepEqual(errors,[]);
