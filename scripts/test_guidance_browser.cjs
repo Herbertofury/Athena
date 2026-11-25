@@ -12,6 +12,17 @@ const http=require('node:http'),fs=require('node:fs'),path=require('node:path'),
   await page.getByRole('button',{name:'Select all standards',exact:true}).click();
   const [download]=await Promise.all([page.waitForEvent('download'),page.getByRole('button',{name:'Export selected JSON',exact:true}).click()]);const packet=JSON.parse(fs.readFileSync(await download.path(),'utf8'));
   assert.equal(packet.documents.length,16);assert(packet.scope.includes('Does not install'));assert(packet.documents.every(d=>d.sha256.length===64&&d.text&&d.sourcePath.startsWith('guidance/')));
+  const reviewNet=[];const track=req=>reviewNet.push(req.url());
+  page.on('request',track);
+  await page.getByText('Verify or compare a local guidance pack',{exact:true}).click();
+  const reviewInput=page.getByLabel('Local reference pack JSON');
+  await reviewInput.setInputFiles({name:'exact.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(packet))});
+  await page.getByText('16 of 16 selected standards exactly match. 0 not included in this pack.',{exact:true}).waitFor();
+  const altered=structuredClone(packet);altered.documents[0].text='PRIVATE_FIXTURE_PACK_ORIGINAL';
+  await reviewInput.setInputFiles({name:'altered.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(altered))});
+  await page.getByText('Checksum does not match the pack',{exact:false}).waitFor();
+  assert.equal((await page.locator('.workspace-container').evaluate(el=>el.shadowRoot.textContent)).includes('PRIVATE_FIXTURE_PACK_ORIGINAL'),false);
+  assert.deepEqual(reviewNet,[]);page.off('request',track);
   await page.reload();await page.getByRole('checkbox').first().waitFor();assert.equal(await page.getByRole('checkbox',{checked:true}).count(),16);
   await page.locator('#search').fill('sensitive actions');await page.getByRole('button',{name:'Authorization & Runtime Control Standard',exact:true}).click();await page.getByRole('heading',{name:'Authorization & Runtime Control Standard',exact:true}).waitFor();
   assert.equal(await page.getByRole('link',{name:'View canonical source',exact:true}).getAttribute('href'),'https://github.com/Herbertofury/Athena/blob/main/guidance/AUTHORIZATION_CONTROL_STANDARD.md');
