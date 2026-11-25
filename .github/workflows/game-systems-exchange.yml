@@ -37,5 +37,7 @@ jobs:
           python-version: '3.12'
       - name: Validate source-pinned game capabilities
         run: python scripts/validate_game_systems.py
-      - name: Test registry and schema contracts
-        run: python -m unittest discover -s tests -p test_game_systems_registry.py -v
+      - name: Verify immutable engine source intake
+        run: python scripts/verify_engine_intake.py
+      - name: Test engine intake and registry contracts
+        run: python -m unittest discover -s tests -p 'test_*game_systems*.py' -v && python -m unittest discover -s tests -p test_engine_intake.py -v

@@ -1,0 +1,127 @@
+{
+  "schemaVersion": 1,
+  "packageId": "athena.mascot-open-world",
+  "status": "intake_snapshot",
+  "license": "GPL-3.0-or-later",
+  "upstream": {
+    "repository": "Herbertofury/Gamesync",
+    "commit": "bce6c1bcb31c63d31c64185fef143a53d9c4d35f",
+    "license": "GPL-3.0-or-later"
+  },
+  "files": [
+    {
+      "sourcePath": "app/shared/mascot-games/game-openworld.js",
+      "sourceBlob": "313239010031905568f2349f7d8f43bf4d533fd0",
+      "localPath": "engines/mascot-open-world/upstream/gamesync/game-openworld.js"
+    },
+    {
+      "sourcePath": "app/shared/mascot-games/game-openworld-3d.js",
+      "sourceBlob": "ff803ebcf7e89acf0fde5854e5bff8d2d852eca7",
+      "localPath": "engines/mascot-open-world/upstream/gamesync/game-openworld-3d.js"
+    },
+    {
+      "sourcePath": "app/shared/mascot-games/devroom/ai.js",
+      "sourceBlob": "31cf8afae0e19537b826c01adf59f118de74fbcc",
+      "localPath": "engines/mascot-open-world/upstream/gamesync/devroom/ai.js"
+    },
+    {
+      "sourcePath": "app/shared/mascot-games/devroom/animation-bridge.js",
+      "sourceBlob": "000a7133ea7540f1b15ebd6ab5531536715883d2",
+      "localPath": "engines/mascot-open-world/upstream/gamesync/devroom/animation-bridge.js"
+    },
+    {
+      "sourcePath": "app/shared/mascot-games/devroom/camera.js",
+      "sourceBlob": "396944bee66e109993dc7fbdf41f1d929aa865d6",
+      "localPath": "engines/mascot-open-world/upstream/gamesync/devroom/camera.js"
+    },
+    {
+      "sourcePath": "app/shared/mascot-games/devroom/combat.js",
+      "sourceBlob": "7e259aa189d753516332a94b4032463e81a6ecbb",
+      "localPath": "engines/mascot-open-world/upstream/gamesync/devroom/combat.js"
+    },
+    {
+      "sourcePath": "app/shared/mascot-games/devroom/devroom-lab.html",
+      "sourceBlob": "93225a99b72f5a2596da49f52029f056a9b3260f",
+      "localPath": "engines/mascot-open-world/upstream/gamesync/devroom/devroom-lab.html"
+    },
+    {
+      "sourcePath": "app/shared/mascot-games/devroom/dialog.js",
+      "sourceBlob": "346e36c5c05b229602b6aba7564a0532ac8f4e4e",
+      "localPath": "engines/mascot-open-world/upstream/gamesync/devroom/dialog.js"
+    },
+    {
+      "sourcePath": "app/shared/mascot-games/devroom/index.js",
+      "sourceBlob": "383a8ba9c9c6c4769390426972e1a58ea4edb2ab",
+      "localPath": "engines/mascot-open-world/upstream/gamesync/devroom/index.js"
+    },
+    {
+      "sourcePath": "app/shared/mascot-games/devroom/mission.js",
+      "sourceBlob": "d8fad657dac6ba7a0c55d0eabf2ed81978297729",
+      "localPath": "engines/mascot-open-world/upstream/gamesync/devroom/mission.js"
+    },
+    {
+      "sourcePath": "app/shared/mascot-games/devroom/movement.js",
+      "sourceBlob": "daf45257e1355d3c86e8b0afe4819c5aa9670446",
+      "localPath": "engines/mascot-open-world/upstream/gamesync/devroom/movement.js"
+    },
+    {
+      "sourcePath": "app/shared/mascot-games/devroom/physics.js",
+      "sourceBlob": "1d3f766a2ff8b4def0b0a6acad39028a8c5eb5f9",
+      "localPath": "engines/mascot-open-world/upstream/gamesync/devroom/physics.js"
+    },
+    {
+      "sourcePath": "app/shared/mascot-games/devroom/presets.js",
+      "sourceBlob": "b0165612c92efee75d4d4ce588da2011c1da458d",
+      "localPath": "engines/mascot-open-world/upstream/gamesync/devroom/presets.js"
+    },
+    {
+      "sourcePath": "app/shared/mascot-games/devroom/vehicle.js",
+      "sourceBlob": "8554374c7e8d90f694e90f24327c35260e30732d",
+      "localPath": "engines/mascot-open-world/upstream/gamesync/devroom/vehicle.js"
+    },
+    {
+      "sourcePath": "app/shared/mascot-games/devroom/weather.js",
+      "sourceBlob": "63b0e4e612f4a9a4979aec75ba1afc6b2dfbdbef",
+      "localPath": "engines/mascot-open-world/upstream/gamesync/devroom/weather.js"
+    },
+    {
+      "sourcePath": "app/shared/mascot-games/devroom/world.js",
+      "sourceBlob": "250f4189cd4485e1190655b6ca35cb527d6997e1",
+      "localPath": "engines/mascot-open-world/upstream/gamesync/devroom/world.js"
+    }
+  ],
+  "sharedRuntimePackage": "athena.shared-game-runtime",
+  "consumerComparison": {
+    "repository": "Herbertofury/GameSync-Next",
+    "commit": "d3117d3c7edddf8e2be99b213feb45aa433053b9",
+    "files": [
+      {
+        "file": "game-openworld.js",
+        "sourceBlob": "313239010031905568f2349f7d8f43bf4d533fd0",
+        "consumerBlob": "df5820967e1a843d191a4c0e7fd844eec45268d5",
+        "identical": false
+      },
+      {
+        "file": "game-openworld-3d.js",
+        "sourceBlob": "ff803ebcf7e89acf0fde5854e5bff8d2d852eca7",
+        "consumerBlob": "669a3b07ea21859e2255806526cfcf0ea6449465",
+        "identical": false
+      }
+    ]
+  },
+  "externalDependencies": [
+    {
+      "sourcePath": "app/shared/vendor/three.webgpu.min.js",
+      "sourceBlob": "7bbc0eae60d67f8eda493b81bd336826bc3511ce",
+      "license": "MIT",
+      "copied": false
+    },
+    {
+      "sourcePath": "app/Mascot_Engine.js",
+      "sourceBlob": "ed4b9460e9508f8e718361193d66c473f6eba213",
+      "license": "GPL-3.0-or-later",
+      "copied": false,
+      "role": "mascot actor runtime; evaluate modular GameSync Next alternative"
+    }
+  ]
+}

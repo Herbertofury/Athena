@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "packageId": "athena.shared-game-runtime",
+  "status": "intake_snapshot",
+  "license": "GPL-3.0-or-later",
+  "upstream": {
+    "repository": "Herbertofury/Gamesync",
+    "commit": "bce6c1bcb31c63d31c64185fef143a53d9c4d35f",
+    "license": "GPL-3.0-or-later"
+  },
+  "files": [
+    {
+      "sourcePath": "app/shared/mascot-games/game-core.js",
+      "sourceBlob": "b8e8eb09b0ccff281747669e0976c21e63e8981e",
+      "localPath": "engines/shared-game-runtime/upstream/gamesync/game-core.js"
+    }
+  ],
+  "consumers": [
+    "athena.roguelite",
+    "athena.mascot-open-world"
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "packageId": "athena.roguelite",
+  "status": "intake_snapshot",
+  "license": "GPL-3.0-or-later",
+  "upstream": {
+    "repository": "Herbertofury/Gamesync",
+    "commit": "bce6c1bcb31c63d31c64185fef143a53d9c4d35f",
+    "license": "GPL-3.0-or-later"
+  },
+  "files": [
+    {
+      "sourcePath": "app/shared/mascot-games/game-survivors.js",
+      "sourceBlob": "babfa7bb60ca3f79b750ca99310f361167f06f8e",
+      "localPath": "engines/roguelite/upstream/gamesync/game-survivors.js"
+    }
+  ],
+  "sharedRuntimePackage": "athena.shared-game-runtime",
+  "relatedCandidates": [
+    {
+      "repository": "Herbertofury/JetSetCraft",
+      "commit": "b60dab2c01b9d403a835714fce6e63152619e5d1",
+      "paths": [
+        "src/main/java/com/herberto/jetsetcraft/rush/RushRun.java",
+        "src/main/java/com/herberto/jetsetcraft/rush/RushCircuit.java",
+        "src/main/java/com/herberto/jetsetcraft/rush/RushBuildPaths.java"
+      ],
+      "copied": false
+    },
+    {
+      "repository": "Herbertofury/Modhunter",
+      "commit": "b9b7e688983f0d3d3cc371c1c2e8cc5562467835",
+      "paths": [
+        "mo2_update_arsenal/web/siege.js"
+      ],
+      "copied": false
+    }
+  ]
+}

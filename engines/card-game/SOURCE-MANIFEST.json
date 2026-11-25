@@ -1,0 +1,160 @@
+{
+  "schemaVersion": 1,
+  "packageId": "athena.card-game",
+  "status": "intake_snapshot",
+  "license": "GPL-3.0-or-later",
+  "upstream": {
+    "repository": "Herbertofury/Gamesync",
+    "commit": "bce6c1bcb31c63d31c64185fef143a53d9c4d35f",
+    "license": "GPL-3.0-or-later"
+  },
+  "files": [
+    {
+      "sourcePath": "app/shared/cardgame/adventure.js",
+      "sourceBlob": "bf942b130c257b49c58ca2fc9c3307aac630f175",
+      "localPath": "engines/card-game/upstream/gamesync/adventure.js"
+    },
+    {
+      "sourcePath": "app/shared/cardgame/ai.js",
+      "sourceBlob": "202aa4b6703ba673d2bf1090c38d45a1e438f4ea",
+      "localPath": "engines/card-game/upstream/gamesync/ai.js"
+    },
+    {
+      "sourcePath": "app/shared/cardgame/audio.js",
+      "sourceBlob": "f5e81e3ce02cf9a5f99adc1a8c419d579bbe4195",
+      "localPath": "engines/card-game/upstream/gamesync/audio.js"
+    },
+    {
+      "sourcePath": "app/shared/cardgame/board.js",
+      "sourceBlob": "af1646d89fccd426312f49029e3af511f6205860",
+      "localPath": "engines/card-game/upstream/gamesync/board.js"
+    },
+    {
+      "sourcePath": "app/shared/cardgame/cardgame.css",
+      "sourceBlob": "bcb8a9023d46d98dd6c94ddbd04403a3f1a1c5c1",
+      "localPath": "engines/card-game/upstream/gamesync/cardgame.css"
+    },
+    {
+      "sourcePath": "app/shared/cardgame/cards.js",
+      "sourceBlob": "0fe026f3bac4b7aa1d8be2cedfd7db9ac1a80fc5",
+      "localPath": "engines/card-game/upstream/gamesync/cards.js"
+    },
+    {
+      "sourcePath": "app/shared/cardgame/collection.js",
+      "sourceBlob": "2225c9d8a9b3c7d7c1958cc460c4cdcfaf8b6f20",
+      "localPath": "engines/card-game/upstream/gamesync/collection.js"
+    },
+    {
+      "sourcePath": "app/shared/cardgame/cosmetics.js",
+      "sourceBlob": "c0c57cde378bd194eda1571cdf22fcd5044602d1",
+      "localPath": "engines/card-game/upstream/gamesync/cosmetics.js"
+    },
+    {
+      "sourcePath": "app/shared/cardgame/deck-select.js",
+      "sourceBlob": "6d3b7c9beec5804f5ea000bc3ce8c8cab6bf693f",
+      "localPath": "engines/card-game/upstream/gamesync/deck-select.js"
+    },
+    {
+      "sourcePath": "app/shared/cardgame/deckbuilder.js",
+      "sourceBlob": "d0dabb07805c3c22e5a0b87e9d9f6e895efe824e",
+      "localPath": "engines/card-game/upstream/gamesync/deckbuilder.js"
+    },
+    {
+      "sourcePath": "app/shared/cardgame/developer-db.js",
+      "sourceBlob": "d9ce410cc1ee2e3447ca3bf8d17050c3feaef4b4",
+      "localPath": "engines/card-game/upstream/gamesync/developer-db.js"
+    },
+    {
+      "sourcePath": "app/shared/cardgame/engine.js",
+      "sourceBlob": "c6d6846bdef31be36dcc60e94d3d11fbb91ccb50",
+      "localPath": "engines/card-game/upstream/gamesync/engine.js"
+    },
+    {
+      "sourcePath": "app/shared/cardgame/heroes.js",
+      "sourceBlob": "9f6eefb295a2853de6af0ff7ddb9c1dbf1be4d87",
+      "localPath": "engines/card-game/upstream/gamesync/heroes.js"
+    },
+    {
+      "sourcePath": "app/shared/cardgame/icons.js",
+      "sourceBlob": "dad0e438f6143e7ce29a86875bf59d7a7c0eab7c",
+      "localPath": "engines/card-game/upstream/gamesync/icons.js"
+    },
+    {
+      "sourcePath": "app/shared/cardgame/index.js",
+      "sourceBlob": "b6cffe5bb0695492d2f5fffce6392311b51c83d0",
+      "localPath": "engines/card-game/upstream/gamesync/index.js"
+    },
+    {
+      "sourcePath": "app/shared/cardgame/modes.js",
+      "sourceBlob": "03605222ce9395d7ec3811d193c82bd22d2bf6f5",
+      "localPath": "engines/card-game/upstream/gamesync/modes.js"
+    },
+    {
+      "sourcePath": "app/shared/cardgame/packs.js",
+      "sourceBlob": "381ac339e0e80411d89399f03990017c05244882",
+      "localPath": "engines/card-game/upstream/gamesync/packs.js"
+    },
+    {
+      "sourcePath": "app/shared/cardgame/progression.js",
+      "sourceBlob": "08aca5bb4c3a86c9da62c196fe6bcdcde2da825d",
+      "localPath": "engines/card-game/upstream/gamesync/progression.js"
+    },
+    {
+      "sourcePath": "app/shared/cardgame/screens.js",
+      "sourceBlob": "e7df0457cc081f0c71337ee95488a06607d4d65a",
+      "localPath": "engines/card-game/upstream/gamesync/screens.js"
+    },
+    {
+      "sourcePath": "app/shared/cardgame/settings.js",
+      "sourceBlob": "48ff48fbe32d4dcff3809949476a900c2c045d2f",
+      "localPath": "engines/card-game/upstream/gamesync/settings.js"
+    },
+    {
+      "sourcePath": "app/shared/cardgame/shop.js",
+      "sourceBlob": "adcaf74cbf056c69f94ffc6d95fc197b5bc843be",
+      "localPath": "engines/card-game/upstream/gamesync/shop.js"
+    },
+    {
+      "sourcePath": "app/shared/cardgame/state.js",
+      "sourceBlob": "ec1981043b30234919b95d5130602b3b906e3c64",
+      "localPath": "engines/card-game/upstream/gamesync/state.js"
+    },
+    {
+      "sourcePath": "app/shared/cardgame/vfx.js",
+      "sourceBlob": "8f7a51bb3fc961626082eb9b81282839279a7494",
+      "localPath": "engines/card-game/upstream/gamesync/vfx.js"
+    }
+  ],
+  "consumerComparison": {
+    "repository": "Herbertofury/GameSync-Next",
+    "commit": "d3117d3c7edddf8e2be99b213feb45aa433053b9",
+    "total": 23,
+    "identical": 19,
+    "diverged": [
+      {
+        "file": "board.js",
+        "sourceBlob": "af1646d89fccd426312f49029e3af511f6205860",
+        "consumerBlob": "d8a610f61736a28b6c6c537bb3a557d6dbc1c07a",
+        "identical": false
+      },
+      {
+        "file": "cardgame.css",
+        "sourceBlob": "bcb8a9023d46d98dd6c94ddbd04403a3f1a1c5c1",
+        "consumerBlob": "f09fdf9f24bfc5ed2b57a7fbf5d8f7dc89a1078b",
+        "identical": false
+      },
+      {
+        "file": "deck-select.js",
+        "sourceBlob": "6d3b7c9beec5804f5ea000bc3ce8c8cab6bf693f",
+        "consumerBlob": "2454153d64d7ab301575ca170b1db18c8627eb91",
+        "identical": false
+      },
+      {
+        "file": "screens.js",
+        "sourceBlob": "e7df0457cc081f0c71337ee95488a06607d4d65a",
+        "consumerBlob": "b86f5662883c93766e3e1b3198a6fea1af432406",
+        "identical": false
+      }
+    ]
+  }
+}
