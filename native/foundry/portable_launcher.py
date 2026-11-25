@@ -88,8 +88,9 @@ def verify(root):
 def create_database(root,data,destination):
     destination=external_path(destination)
     root=pathlib.Path(root).absolute()
-    if root in destination.parents or not destination.parent.is_dir() or any(p.is_symlink() for p in (destination,*destination.parents)) or os.path.lexists(destination):
-        raise ValueError('New external database required')
+    if (root in destination.parents or not destination.parent.is_dir() or
+            os.path.lexists(destination) or any(link_or_reparse(p) for p in destination.parents)):
+        raise ValueError('New external database with direct parents required')
     destination_clear(destination)
     binary=root/data['binary']
     # Stage on the destination filesystem. Never upgrade or open an existing target.
@@ -104,10 +105,14 @@ def create_database(root,data,destination):
         status=json.loads(run('status'))
         if status.get('schema')!=15 or status.get('integrity')!='ok':raise ValueError('Native setup verification failed')
         if any(os.path.lexists(str(staged)+suffix) for suffix in ('-wal','-shm','-journal')):raise ValueError('Native setup is not standalone')
-        # Exclusive publication, unlike rename which can replace an existing target.
-        # If hard links are unsupported, refuse rather than degrade to overwrite/copy.
+        # Stage and target are on the same volume. Windows rename refuses an
+        # existing name and needs no hard links (unlike POSIX rename, which can
+        # replace a file). Neither path may degrade to a non-exclusive copy.
         destination_clear(destination)
-        os.link(staged,destination)
+        if os.name=='nt':
+            os.rename(staged,destination)
+        else:
+            os.link(staged,destination)
     return {'created':True,'schema':15,'integrity':'ok','existing_database_modified':False}
 
 def backup_database(root,data,source,destination,quiescent=False,upgrade=False):
