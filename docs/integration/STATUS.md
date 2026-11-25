@@ -41,3 +41,15 @@ The local-engine extension passed [CI run 42360535804](https://github.com/Herber
 
 
 The November 7 configure-pages failure (run42360535726) is retained as historical evidence only; current public delivery is described above.
+
+### Accepted experiment status during journal contention
+
+An accepted experiment's read-only status uses the existing journal busy
+window of up to five seconds, within the UI's eight-second request limit.
+Other history reads keep their one-second window. If SQLite is still busy
+or locked, the status route returns HTTP 503 rather than mislabeling the
+condition as an internal error. This does not reset the job, resubmit an
+experiment, write from a read, or change its journal mode. Other errors and
+missing receipts remain distinguishable. A real DELETE-journal fixture
+holds a writer lock beyond the previous window, then checks the original
+receipt and unmodified database bytes after release.
