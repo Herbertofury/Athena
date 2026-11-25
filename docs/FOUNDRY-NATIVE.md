@@ -94,3 +94,13 @@ every other number. At the numeric limit it renumbers only the selected
 surface in the same order, including hidden objects, without touching other
 surfaces or appearance. Undo restores the exact prior numbers. Choosing an
 edge the object already occupies does not save or consume Undo.
+
+### Audition a local room soundtrack
+
+Under **Selected room soundtrack**, choose a local audio file, then press
+**Play local preview**. The selected file is session-only and stays local.
+It is not a bookmark or an uploaded asset. The player exposes its own pause
+and volume controls, never autoplays, and releases the clip on room change,
+workspace exit, or **Close local preview**. The input accepts nonempty audio
+files up to 64 MiB; decoding still depends on the browser’s codecs. This does
+not add streaming-provider sign-in or playback.

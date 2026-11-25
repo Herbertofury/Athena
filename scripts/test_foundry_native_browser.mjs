@@ -374,6 +374,43 @@ c.execute('UPDATE experiment_runs SET output=? WHERE experiment_id=?',(raw,int(s
   assert.ok(await page.locator('audio,video').evaluateAll(nodes=>nodes.every(node=>node.paused)));
   assert.equal(report.externalRequests.length,beforeExternal,'bookmark workflow must not request a provider');
  });
+ await check('Local soundtrack starts only on Play and stops when leaving its room',async()=>{
+  const select=page.locator('[data-room-select]'),one=await select.inputValue();
+  const two=await select.locator('option').evaluateAll((options,current)=>options.find(o=>o.value!==current)?.value,one);
+  assert.ok(two);
+  const wave=Buffer.alloc(44+32000),sampleRate=8000;
+  wave.write('RIFF',0);wave.writeUInt32LE(wave.length-8,4);wave.write('WAVEfmt ',8);
+  wave.writeUInt32LE(16,16);wave.writeUInt16LE(1,20);wave.writeUInt16LE(1,22);
+  wave.writeUInt32LE(sampleRate,24);wave.writeUInt32LE(sampleRate*2,28);
+  wave.writeUInt16LE(2,32);wave.writeUInt16LE(16,34);wave.write('data',36);wave.writeUInt32LE(wave.length-44,40);
+  for(let i=0;i<(wave.length-44)/2;i++) wave.writeInt16LE(Math.round(600*Math.sin(2*Math.PI*440*i/sampleRate)),44+i*2);
+  const writes=[],observe=request=>{if(!['GET','HEAD'].includes(request.method()))writes.push(request.url());};
+  const external=report.externalRequests.length;
+  page.on('request',observe);
+  try{
+   const picker=page.locator('[data-soundtrack-local-file]');
+   const status=page.locator('[data-soundtrack-local-status]');
+   const player=page.locator('[data-soundtrack-local-player] audio');
+   await picker.setInputFiles({name:'synthetic-audio.wav',mimeType:'audio/wav',buffer:wave});
+   await status.filter({hasText:'Press Play'}).waitFor();
+   assert.equal(await player.evaluate(node=>node.paused&&node.currentTime===0&&!node.autoplay),true);
+   await page.locator('[data-soundtrack-local-play]').click();
+   await status.filter({hasText:'Browser is playing the local preview'}).waitFor();
+   // Check actual playback clock movement, never infer playing from a pending promise.
+   await player.evaluate(node=>new Promise((ok,no)=>{
+    if(node.currentTime>0)return ok();
+    const t=setTimeout(()=>no(Error('Audio clock did not advance')),1000);
+    node.addEventListener('timeupdate',()=>{clearTimeout(t);ok();},{once:true});
+   }));
+   const old=await player.elementHandle();
+   await select.selectOption(two);
+   await status.filter({hasText:'Local preview closed when leaving the room'}).waitFor();
+   assert.equal(await player.count(),0);
+   assert.equal(await old.evaluate(node=>node.paused&&!node.hasAttribute('src')&&!node.isConnected),true);
+   assert.deepEqual(writes,[]);
+   assert.equal(report.externalRequests.length,external);
+  }finally{page.off('request',observe);}
+ });
  if(unified)await check('Native read-only Learning History survives restart and exposes exact retained run',async()=>{
   const runtime=await (await fetch(origin+'/api/runtime')).json();assert.equal(runtime.learning_history_url,'/learning');
   await page.goto(origin+'/learning');await page.locator('#records li').first().waitFor();
