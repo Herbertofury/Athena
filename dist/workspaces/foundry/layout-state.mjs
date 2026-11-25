@@ -42,6 +42,25 @@ export function createLayoutModel(catalog) {
   const version=prior.version;prior.placements[id]={objectId,x:.5,y:.5,pinned:false,rotation:0,scaleX:1,scaleY:1,scope:'world',anchor:null,...(version>=7?{opacity:1,visible:true,zIndex:Math.min(100000,Math.max(0,...Object.values(prior.placements).map(p=>p.zIndex))+1)}:{}),...(version>=8?{skewX:0,skewY:0,brightness:1,contrast:1,saturation:1,hue:0,blur:0}:{}),...(version>=9?{transformOrigin:'mc'}:{}),...(version>=11?{blendMode:'normal'}:{})};return validate(prior);
  }
  function upgradeAppearance(value){const prior=upgradeInstances(value);if(prior.version>=7)return prior;return validate({...prior,version:7,placements:Object.fromEntries(Object.entries(prior.placements).map(([id,p],i)=>[id,{...p,opacity:1,visible:true,zIndex:i+1}]))});}
+ // Compare the same deterministic zIndex/ID order that the world layer renders.
+ function reorderStack(value,id,edge){
+  if(edge!=='front'&&edge!=='back')throw Error('Invalid stack action.');
+  const next=upgradeAppearance(value),selected=Object.hasOwn(next.placements,id)?next.placements[id]:null;
+  if(!selected)throw Error('Selected object is no longer available.');
+  const surface=p=>p.scope==='ui'?'ui':p.scope==='sticker'&&p.anchor!=='scene'?'anchor:'+p.anchor:'scene';
+  const key=surface(selected),peers=Object.entries(next.placements).filter(([,p])=>surface(p)===key)
+   .sort(([a,x],[b,y])=>x.zIndex-y.zIndex||(a<b?-1:a>b?1:0));
+  const front=edge==='front',extreme=front?peers.at(-1):peers[0];
+  if(extreme[0]===id)return null;
+  const free=extreme[1].zIndex+(front?1:-1);
+  if(free>=0&&free<=100000)selected.zIndex=free;
+  else{
+   const others=peers.filter(([peer])=>peer!==id);
+   const reordered=front?[...others,[id,selected]]:[[id,selected],...others];
+   for(const [index,[,placement]] of reordered.entries())placement.zIndex=index;
+  }
+  return validate(next);
+ }
  function upgradeFilters(value){const prior=upgradeAppearance(value);if(prior.version>=8)return prior;return validate({...prior,version:8,placements:Object.fromEntries(Object.entries(prior.placements).map(([id,p])=>[id,{...p,skewX:0,skewY:0,brightness:1,contrast:1,saturation:1,hue:0,blur:0}]))});}
  function upgradeOrigins(value){const prior=upgradeFilters(value);if(prior.version>=9)return prior;return validate({...prior,version:9,placements:Object.fromEntries(Object.entries(prior.placements).map(([id,p])=>[id,{...p,transformOrigin:"mc"}]))});}
  function upgradeBlendModes(value){const prior=upgradeOrigins(value);if(prior.version>=11)return prior;return validate({...prior,version:11,placements:Object.fromEntries(Object.entries(prior.placements).map(([id,p])=>[id,{...p,blendMode:'normal'}]))});}
@@ -71,7 +90,7 @@ export function createLayoutModel(catalog) {
  function parseWorkspace(text){if(typeof text!=='string'||text.length>WORKSPACE_TEXT_LIMIT)throw new Error('Workspace exceeds import limit.');const value=workspace(JSON.parse(text));encodeWorkspace(value);return value;}
  function encodeRecoveryWorkspace(value){const text=JSON.stringify(workspace(value));if(text.length>RECOVERY_TEXT_LIMIT)throw Error('Workspace exceeds bounded recovery limit.');return text;}
  function encodeWorkspace(value){const text=encodeRecoveryWorkspace(value);if(text.length>WORKSPACE_TEXT_LIMIT)throw Error('Workspace exceeds import limit. Reduce room copies or named layouts; the previous workspace is retained.');return text;}
- return {addCatalogObject,blendModes,upgradeBlendModes,validate,upgradeLayout,upgradeScopes,environment,upgradeEnvironment,upgradeInstances,upgradeAppearance,upgradeFilters,upgradeOrigins,workspaceVersion,initial,parse,encode,save,load,view,savedLayouts,workspace,parseWorkspace,encodeWorkspace,encodeRecoveryWorkspace};
+ return {addCatalogObject,blendModes,upgradeBlendModes,validate,upgradeLayout,upgradeScopes,environment,upgradeEnvironment,upgradeInstances,upgradeAppearance,reorderStack,upgradeFilters,upgradeOrigins,workspaceVersion,initial,parse,encode,save,load,view,savedLayouts,workspace,parseWorkspace,encodeWorkspace,encodeRecoveryWorkspace};
 }
 
 /** Bounded session-only rollback. Every retained snapshot is schema validated. */

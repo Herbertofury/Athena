@@ -35,3 +35,31 @@ test('linked scale inputs only change the draft until Apply and preserve indepen
   one(s,'[data-inspect-apply]').click();assert.equal(link.disabled,true);assert.equal(apply.disabled,true);
  }finally{s.mounted.unmount();}
 });
+
+test('stacking at occupied numeric bounds rebases only the selected surface; Undo is exact',async()=>{
+ const {createLayoutModel}=await import('../../../dist/workspaces/foundry/layout-state.mjs');
+ const model=createLayoutModel(catalog.themes),active=model.upgradeAppearance(model.initial());
+ const [base,selected,ui,hidden,anchor]=Object.keys(active.placements),p=active.placements;
+ p[base].zIndex=0;p[selected].zIndex=1;
+ Object.assign(p[ui],{zIndex:0,scope:'ui'});
+ Object.assign(p[hidden],{zIndex:2,visible:false,pinned:true});
+ Object.assign(p[anchor],{zIndex:100000,scope:'sticker',anchor:'inspector'});
+ const s=await setup(mount,{foundryModules:allOff,state:{version:7,active,layouts:{}}});
+ try{
+  const snapshot=state(s);select(s,selected);
+  one(s,'[data-instance-back]').click();let result=s.mounted.exportState().active.placements;
+  assert.deepEqual([result[selected].zIndex,result[base].zIndex,result[hidden].zIndex],[0,1,2]);
+  assert.deepEqual(result[ui],p[ui]);assert.deepEqual(result[anchor],p[anchor]);
+  assert.equal(result[hidden].visible,false);assert.equal(result[hidden].pinned,true);
+  const writes=s.writes.length;one(s,'[data-instance-back]').click();assert.equal(s.writes.length,writes);
+  one(s,'[data-undo]').click();
+  assert.deepEqual(JSON.parse(state(s)).active,JSON.parse(snapshot).active);
+  one(s,'[data-redo]').click();assert.equal(s.mounted.exportState().active.placements[selected].zIndex,0);
+ }finally{s.mounted.unmount();}
+ p[base].zIndex=99999;p[selected].zIndex=99998;p[hidden].zIndex=100000;
+ const front=model.reorderStack(active,selected,'front').placements;
+ assert.deepEqual([front[base].zIndex,front[hidden].zIndex,front[selected].zIndex],[0,1,2]);
+ assert.deepEqual(front[ui],p[ui]);assert.deepEqual(front[anchor],p[anchor]);
+ assert.equal(model.reorderStack(active,hidden,'front'),null);
+ assert.equal(p[hidden].zIndex,100000);
+});

@@ -205,7 +205,25 @@ export async function mount(context){
  one('[data-blend-apply]').addEventListener('click',()=>{if(!selectedObject)return;const next=model.upgradeBlendModes(current);next.placements[selectedObject].blendMode=one('[data-inspect-blend]').value;try{model.validate(next);}catch(e){text(e.message);return;}checkpoint();importGeneration++;current=next;draw();if(save())text('Blend mode applied explicitly in format v11.');});
  one('[data-origin-apply]').addEventListener('click',()=>{if(!selectedObject)return;const next=model.upgradeOrigins(current);next.placements[selectedObject].transformOrigin=one('[data-inspect-origin]').value;try{model.validate(next);}catch(e){text(e.message);return;}checkpoint();importGeneration++;current=next;draw();if(save())text('Transform origin applied (format v9).');});
  one('[data-inspect-filters]').addEventListener('click',()=>{if(!selectedObject)return;const next=model.upgradeFilters(current);try{for(const key of ['skewX','skewY','brightness','contrast','saturation','hue','blur']){const raw=one('[data-filter-'+key.toLowerCase()+']').value;if(!raw.trim())throw Error('All skew/filter values required.');next.placements[selectedObject][key]=Number(raw);}model.validate(next);}catch(e){text('Filters not applied: '+e.message);return;}checkpoint();importGeneration++;current=next;draw();if(save())text('Skew and bounded filters applied to the selected instance.');});
- const appearance=(mode)=>{if(!selectedObject)return;const next=model.upgradeAppearance(current),p=next.placements[selectedObject];if(mode==='apply'){const raw=one('[data-inspect-opacity]').value;if(!raw.trim()){text('Opacity is required.');return;}p.opacity=Number(raw);p.visible=one('[data-inspect-visible]').checked;}else{const surfaceKey=v=>v.scope==='ui'?'ui':v.scope==='sticker'&&v.anchor!=='scene'?v.anchor:'scene';const peers=Object.values(next.placements).filter(v=>surfaceKey(v)===surfaceKey(p));p.zIndex=mode==='front'?Math.max(...peers.map(v=>v.zIndex))+1:Math.min(...peers.map(v=>v.zIndex))-1;if(p.zIndex<0||p.zIndex>100000){text('Stack boundary reached; no changes applied.');return;}}try{model.validate(next);}catch(e){text(e.message);return;}checkpoint();importGeneration++;current=next;draw();if(save())text('Instance appearance updated; hidden instances and references retained.');};
+ const appearance=(mode)=>{
+  if(disposed||signal.aborted||!selectedObject)return;
+  let next;
+  try{
+   if(mode==='apply'){
+    next=model.upgradeAppearance(current);
+    const raw=one('[data-inspect-opacity]').value;
+    if(!raw.trim())throw Error('Opacity is required.');
+    const p=next.placements[selectedObject];
+    p.opacity=Number(raw);p.visible=one('[data-inspect-visible]').checked;
+    next=model.validate(next);
+   }else{
+    next=model.reorderStack(current,selectedObject,mode);
+    if(!next){text('Selected object is already at this edge of its surface.');return;}
+   }
+  }catch(e){text(e.message);return;}
+  checkpoint();importGeneration++;current=next;draw();
+  if(save())text(mode==='apply'?'Instance appearance updated; hidden instances and references retained.':'Object stack reordered on this surface only. Undo restores the previous order.');
+ };
  one('[data-inspect-appearance]').addEventListener('click',()=>appearance('apply'));one('[data-instance-front]').addEventListener('click',()=>appearance('front'));one('[data-instance-back]').addEventListener('click',()=>appearance('back'));
  one('[data-instance-duplicate]').addEventListener('click',()=>{if(!selectedObject)return;const next=model.upgradeInstances(current);if(Object.keys(next.placements).length>=100){text('Instance limit reached; no copy created.');return;}const source=next.placements[selectedObject],id='instance-'+crypto.randomUUID();if(Object.hasOwn(next.placements,id)){text('Instance identity collision; nothing changed. Try again.');return;}next.placements[id]={...source,x:Math.min(.94,source.x+.04),y:Math.min(.94,source.y+.04),pinned:false,...(current.version>=7?{visible:true,zIndex:Math.min(100000,Math.max(...Object.values(next.placements).map(p=>p.zIndex))+1)}:{}),...(source.scope==='sticker'?{scope:'ui',anchor:null}:{})};model.validate(next);checkpoint();importGeneration++;current=next;selectedObject=id;draw();if(save())text('Independent instance created; source and existing environment target unchanged.');});
  one('[data-instance-delete]').addEventListener('click',()=>{if(!selectedObject)return;const next=model.upgradeInstances(current);delete next.placements[selectedObject];model.validate(next);checkpoint();importGeneration++;current=next;selectedObject=null;draw();if(save())text('Selected instance deleted. Environment references are retained as unavailable; Undo restores it.');});
