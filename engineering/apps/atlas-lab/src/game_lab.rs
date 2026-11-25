@@ -1,6 +1,7 @@
 //! Native Athena consumer for the source-pinned, host-neutral game stages.
 //! Route assets are compiled in and allowlisted. No iframe, storage, account,
 //! arbitrary file reads, or local native jobs are attached to these routes.
+//! Explicit game tape downloads and selected local imports remain browser-only.
 use axum::{Router, http::header, response::Html, routing::get};
 use std::sync::OnceLock;
 
@@ -133,7 +134,7 @@ pub(crate) fn router() -> Router {
             "/play/survivor/preview/host.mjs",
             get(|| async {
                 js!(concat!(
-                    "import {createLegacySurvivorRun} from '../src/legacy-survivor-run.mjs';\n",
+                    "import {createRecordedArena,encodeArenaTape,decodeArenaTape,ARENA_TAPE_MAX_BYTES} from '../src/arena-replay.mjs';\n",
                     survivor!("preview/arena-browser.js")
                 ))
             }),
@@ -158,7 +159,13 @@ pub(crate) fn router() -> Router {
             "src/gamesync-upgrade-formulas.mjs",
             "src/upgrade-draft.mjs",
             "src/gamesync-combat-formulas.mjs",
-            "src/legacy-survivor-run.mjs"
+            "src/legacy-survivor-run.mjs",
+            "src/arena-formats.mjs",
+            "src/arena-replay.mjs",
+            "src/roaming-points.mjs",
+            "src/rift-director.mjs",
+            "src/rift-expedition.mjs",
+            "src/rift-session.mjs"
         ]
     );
     let router = route_modules!(

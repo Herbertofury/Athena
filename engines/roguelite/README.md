@@ -24,3 +24,137 @@ Deterministic seeded RNG streams, fixed-step simulation, configurable run profil
 ## Promotion gate
 
 Same seed + ruleset + content lock + action stream must reproduce the same eligible result. Test early/mid/late runs, cancellation, pause/resume, reload, defeat, reward duplication, save migration and complete native/packaged gameplay. No source candidate is selected as universal winner yet.
+
+## Executable intake slice: GameSync survivor spawn director
+
+The native game is not replaced. This optional standalone ESM module extracts
+the original enemy templates and exact spawn/tick formulas from the pinned
+GameSync source, with the original random helper math. It accepts explicit
+host ticks, player positions and an injected random stream. It runs without
+DOM, storage, renderer, game assets or network calls.
+
+`createSpawnDirector({duration, random, checkpoint?})` returns a `step` method
+and a versioned `checkpoint()` receipt. The default duration is the original
+300 seconds. Original one-batch hitch behavior is unchanged; death, movement,
+pauses, weapon effects, rewards and upgrades stay with the host. A host must
+save its own random cursor and replay inputs when restoring. This is a first
+rules-extraction proof, not a canonical engine or a two-host acceptance.
+
+```sh
+node engines/roguelite/tools/build-survivor-spawns.mjs --check
+node --test engines/roguelite/tests/spawn-director.test.mjs
+node engines/roguelite/examples/demo-spawn-lane.mjs 42 300
+```
+
+### Experience pickup and level gates
+
+The separately generated pickup module exposes `spawnExperienceGem` and
+`tickPickupFormulas`. Pass only engine-owned, validated gems and player state:
+these synchronous primitives mutate the arrays and counters in place, just as
+the original game does. Expiry is applied before pickup; magnet movement
+crossing into the pickup radius is collected on a later tick, because the
+original checks the pre-movement distance. Multiple pickups can advance
+multiple gates in a single tick. The returned events preserve their original
+order. No upgrade choices, random draw, audio, combat rewards, or durable
+player progression are executed by the module.
+
+### Movement, dash, contact and drops
+
+`tickPlayerMovement` and `tickEnemyContact` run the exact pinned movement
+and enemy stages on engine-owned state. The host supplies validated player,
+keyboard, enemy, gem, run and tick values. It chooses stage order, applies
+weapons separately and respects terminal state. These primitives keep the
+original order of checks, including contact before a defeated enemy's drop.
+They return particle and audio cues without rendering or playing them.
+Do not use these standalone primitives as a trusted network authority.
+
+```sh
+node engines/roguelite/tools/build-survivor-movement.mjs --check
+node --test engines/roguelite/tests/*.test.mjs
+node engines/roguelite/examples/demo-encounter-lane.mjs
+```
+
+### Legacy level-up choices
+
+`createLegacyUpgradeDirector({random})` rolls three inert display choices
+from the original templates, then applies only a currently offered choice
+to the same player object. Roll after the separately extracted XP gate.
+A newer draft invalidates the old one; one successful choice consumes that
+draft. Hosts must supply validated, mutable player state and own save,
+pause, and network authority. The extracted stat and weapon-addition logic
+does not fire weapons, play sound, or automatically choose an upgrade.
+
+This is the legacy mode: it retains the original JavaScript random-sort
+comparator and is only compared against the same engine/runtime. It does
+not promise unbiased selection or byte-identical cross-JavaScript-runtime
+transcripts. A fair seeded mode should be an explicitly separate version.
+
+### Playable legacy arena
+
+The standalone `createLegacySurvivorRun({random})` wires the exact original
+player, enemy waves, six weapons, projectile pierce / per-target hits, orbit,
+damage numbers, XP and upgrade choices into one five-minute simulation. It
+also runs the original shared **600-particle** lifecycle: effects consume the
+same injected random stream as target selection and upgrades, in the original
+order. The original game's update function and real particle system are
+the independent comparison; test inputs include explicit choices, loss/win
+boundaries, variable seeded waves and full combat, without copying the old
+renderer. `step({dt,keys})` pauses on a pending choice; `choose(id)` accepts
+only an offered choice; `snapshot()` is diagnostic display data, not a save or
+stable authoritative entity ID. This does not write to any app or user profile.
+
+```sh
+node engines/roguelite/tools/build-survivor-combat.mjs --check
+node --test engines/roguelite/tests/legacy-survivor-run.test.mjs
+node engines/roguelite/tools/build-survivor-arena.mjs
+```
+
+Open `Athena-Survivor-Arena.html` in a modern browser directly from disk. This
+original, minimal top-down preview loads no external files, fonts, images or
+sound, makes no network calls and stores nothing. It supports keyboard,
+pause/resume, seeded restart and selectable upgrades. The authored GameSync
+renderer, mascot art, audio, persistence, meta-progression and integration
+into native products are separate acceptance gates, not part of this build.
+
+### Optional endurance formats
+
+Classic remains the exact five-minute source rules. Experiment with separate
+20-, 30-, 60-, or 120-minute Marathon formats, or choose Endless. Marathons
+walk through five spawn-pressure stages; Endless crosses into repeating
+surges and breathers after 20 minutes and has no automatic win timer.
+Endless scales enemy health and damage progressively with a stated upper
+bound; position, movement and rolls still use the shared combat engine.
+
+Endurance formats use a stage-specific limit of 45–125 live enemies and
+count suppressed spawns instead of indefinitely growing the active set.
+This cap and timing curve are deliberate alternate rules, not performance
+or latency claims. Classic has not adopted them. The browser shows the
+active stage and upcoming selection; changing it starts a new run only
+when requested. This preview has no autosave, cross-app profile storage,
+or mod-manager integration.
+
+### Save or resume an offline run
+
+The browser can download and validate a versioned **run tape** before loading
+it. A tape stores the seed, format, 60 Hz input spans and upgrade choices.
+It does not contain executable state or auto-write a file. Consecutive
+identical inputs are compressed as one span. Verification replays those
+inputs into a fresh engine, checks the exact resulting state digest, and
+shows measured progress on long tapes. Cancel or reject the import without
+replacing the current run. After successful loading, continue from Pause
+or finish the pending upgrade choice.
+
+Tapes are bounded to eight simulated hours, 450,000 spans and 8 MiB. An
+Endless run can continue beyond the portable limits but can no longer be
+exported. Digests check consistency, not authorship or multiplayer
+legality. Browser hashing uses Web Crypto; no network connection is needed.
+
+### Roaming Expedition
+
+Select **Roaming Expedition · 20 min** in the standalone Arena. The Crystalback Geode Worm carries a moving mineable crystal node; the Lockbox Loot Goblin flees your approach. Your ordinary weapons damage these targets. Follow the canvas marker or the text direction, then step into the dropped cache to collect XP and crystal or gold. An escaped target or expired cache pays nothing. The resource balance is local to this run and included in its verified portable tape; it is not a shop, a base economy, or cross-game progression.
+
+The opt-in encounter lane derives its choices from the run seed and simulated clock. It does not consume an extra random draw on existing Classic, Marathon, or Endless. Existing tapes are unchanged. Encounter and resource visuals are original Canvas drawings; the offline build does not fetch assets.
+
+### Rift Expedition
+
+**Rift Expedition · 20 min** includes the Roaming Expedition and discoverable portals. Follow a portal marker to choose whether to enter. Seeded side runs last 10, 20, or 30 minutes; you can decline or leave early. The parent run is suspended, including its clock, enemies, player, and random stream. A side run has its own clock, starting kit, health and random stream. Clearing it banks a one-time run-local reward; loss or early departure pays nothing. Your tape can resume a side run and preserves the suspended parent without changing older tape meanings. No store, account, native installation, or network access.

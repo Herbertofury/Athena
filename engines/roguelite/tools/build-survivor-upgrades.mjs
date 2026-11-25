@@ -11,7 +11,8 @@ const src=exact(original,pin),core=exact(helpers,helperPin);
 const piece=(s,pattern)=>{const m=s.match(pattern);assert.ok(m,'Expected exact former boundary');return m[0];};
 const weapon=piece(src,/  const WEAPONS = \{[\s\S]+?\n  \};/);
 const upgrades=piece(src,/  const UPGRADES = \[[\s\S]+?\n  \];/);
-const draft=piece(src,/      \/\/ Pick 3 random upgrades\n[\s\S]+?(?=\n      levelUpPaused = true)/).replaceAll('Math.random()', 'random()');
+const draft=piece(src,/      \/\/ Pick 3 random upgrades\n[\s\S]+?(?=\n      levelUpPaused = true)/).replaceAll('Math.random()', 'random()')
+ .replace('pool.sort(() => random() - 0.5)','shuffle ? shuffle(pool) : pool.sort(() => random() - 0.5)');
 const pick=piece(core,/  const pick  = \(arr\) => arr\[Math\.floor\(Math\.random\(\) \* arr\.length\)\];/).replace('Math.random()','random()');
 const apply=piece(src,/                if \(choice\.weapon\) \{[\s\S]+?\n                \}(?=\n                levelUpChoices = null)/);
 const result=`// SPDX-License-Identifier: GPL-3.0-or-later
@@ -20,7 +21,7 @@ const result=`// SPDX-License-Identifier: GPL-3.0-or-later
 ${weapon}
 ${upgrades}
 
-export function generateLegacyUpgradeOffers(player,random) {
+export function generateLegacyUpgradeOffers(player,random,shuffle) {
 ${pick}
     let levelUpChoices;
 ${draft}
