@@ -342,7 +342,12 @@ c.execute('UPDATE experiment_runs SET output=? WHERE experiment_id=?',(raw,int(s
   const snapshotResponse=await fetch(origin+'/api/migration/readiness');const snapshotText=await snapshotResponse.text();
   assert.equal(snapshotResponse.headers.get('x-athena-snapshot-sha256'),createHash('sha256').update(snapshotText).digest('hex'));
   assert.equal(JSON.parse(snapshotText).retirement_certified,false);
-  assert.equal(await page.locator('#projects a[href^="https://github.com/Herbertofury/Athena/blob/"]').count(),7);
+  assert.equal(await page.locator('#projects a[href^="https://github.com/Herbertofury/Athena/blob/"]').count(),9);
+  const foundryReadiness=page.locator('#projects article').filter({has:page.getByRole('heading',{name:'Feature Foundry',exact:true})});
+  assert.match(await foundryReadiness.textContent(),/Recorded evidence · Original v24 release custody/);
+  assert.match(await foundryReadiness.textContent(),/Still open · Non-Git records and owner data/);
+  assert.match(await foundryReadiness.textContent(),/Still open · Native and rights acceptance/);
+  assert.equal(await foundryReadiness.locator('a[href*="/64954a16f8af349c27a2652649882d4ec0e3450a/"]').count(),2);
   assert.equal(await page.locator('#projects a[href="/#continuity"]').count(),1);
   await page.screenshot({path:path.join(out,'migration-readiness.png'),fullPage:true});
   await page.setViewportSize({width:390,height:844});
