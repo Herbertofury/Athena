@@ -775,6 +775,56 @@ c.execute('UPDATE experiment_runs SET output=? WHERE experiment_id=?',(raw,int(s
    assert.equal(report.externalRequests.length,external);
   }finally{await play.close();}
  });
+ if(portableUnified)await check('Exact portable Athena plays Warden Duel and interchanges a verified replay with Node',async()=>{
+  const play=await context.newPage(), scratch=fs.mkdtempSync(path.join(temporary,'warden-tapes-'));
+  const seen=report.externalRequests.length, errors=[];
+  play.on('pageerror',e=>errors.push(String(e)));
+  play.on('console',m=>{if(m.type()==='error')errors.push(m.text());});
+  try{
+   const {buildReplay}=await import('../engines/card-game/build-replay.mjs');
+   const driver=path.join(scratch,'driver');
+   await buildReplay(driver);
+   const common=async()=>JSON.stringify(await play.evaluate(()=>[localStorage.length,sessionStorage.length]));
+   await play.goto(origin+'/play');
+   const before=await common();
+   await play.getByRole('link',{name:'Warden Duel',exact:true}).click();
+   assert.match(await play.locator('#status').textContent(),/Select your starting cards/);
+   await play.locator('#keep-cards button').first().press('Enter');
+   await play.locator('#keep-cards button').nth(2).press('Enter');
+   await play.getByRole('button',{name:'Begin with selected cards',exact:true}).press('Enter');
+   await play.locator('#hand button:not([disabled])').first().click();
+   await play.locator('#field button:not([disabled])').first().click();
+   const prior=await play.locator('#their-hp').textContent();
+   await play.getByRole('button',{name:'Attack opposing hero',exact:true}).click();
+   assert.notEqual(await play.locator('#their-hp').textContent(),prior);
+   await play.getByRole('button',{name:'End turn',exact:true}).click();
+   assert.equal(await play.locator('#turn').textContent(),'2');
+   await play.getByText('New match or portable replay',{exact:true}).click();
+   const download=play.waitForEvent('download');
+   await play.getByRole('button',{name:'Download replay tape',exact:true}).click();
+   const tape=path.join(scratch,'browser-tape.json');
+   await (await download).saveAs(tape);
+   const exact=JSON.parse(execFileSync(process.execPath,[path.join(driver,'tape-cli.mjs'),'verify',tape],{encoding:'utf8',timeout:10000}));
+   assert.equal(exact.verified,true);assert.equal(exact.phase,'playing');
+   assert.ok(exact.commands.some(x=>x.type==='attack-hero'));
+   const payload=fs.readFileSync(tape);
+   await play.getByRole('button',{name:'Start a fresh match',exact:true}).click();
+   assert.equal(await play.locator('#turn').textContent(),'0');
+   const input=play.getByLabel('Replay file');
+   await input.setInputFiles({name:'edited.json',mimeType:'application/json',buffer:Buffer.from(payload.toString('utf8').replace('"seed":42','"seed":3'))});
+   await play.getByRole('button',{name:'Verify and resume',exact:true}).click();
+   await play.locator('#tape-status').filter({hasText:'Not loaded.'}).waitFor();
+   assert.equal(await play.locator('#turn').textContent(),'0');
+   await input.setInputFiles({name:'saved.json',mimeType:'application/json',buffer:payload});
+   await play.getByRole('button',{name:'Verify and resume',exact:true}).click();
+   await play.locator('#tape-status').filter({hasText:'Verified and loaded the tape.'}).waitFor();
+   assert.equal(await play.locator('#turn').textContent(),'2');
+   assert.equal(await common(),before);
+   assert.equal(report.externalRequests.length,seen);
+   assert.deepEqual(errors,[]);
+   assert.equal(await play.locator('iframe').count(),0);
+  }finally{await play.close();fs.rmSync(scratch,{recursive:true,force:true});}
+ });
  await check('Continuity refresh reveals a second tab revision without losing the selected file',async()=>{
   const other=await context.newPage();
   const selectFile=(tab,name,contents)=>tab.locator('[data-artifact-file]').setInputFiles({name,mimeType:'application/octet-stream',buffer:Buffer.from(contents)});

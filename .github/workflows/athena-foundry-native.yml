@@ -47,6 +47,10 @@ jobs:
           node engines/roguelite/tools/build-survivor-combat.mjs --check
           node engines/mascot-open-world/tools/build-city-traversal.mjs --check
           node --test engines/roguelite/tests/*.test.mjs engines/mascot-open-world/tests/*.test.mjs
+      - name: Rebuild pinned Warden Duel native assets and verify card rules and tapes
+        run: |
+          node engines/card-game/build-native-rules.mjs --check
+          node --test engines/card-game/tests/*.test.mjs
       - name: Native store formatting
         run: cargo fmt --manifest-path crates/athena-foundry-store/Cargo.toml -- --check
       - name: Native store tests
