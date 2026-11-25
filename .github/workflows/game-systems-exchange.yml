@@ -90,6 +90,8 @@ jobs:
         run: node --test engines/roguelite/tests/rift-director.test.mjs engines/roguelite/tests/rift-session.test.mjs engines/roguelite/tests/rift-expedition.test.mjs
       - name: Keep every Arena visual identical without cloning replay state each frame
         run: node --test engines/roguelite/tests/arena-frame-view.test.mjs
+      - name: Build camp upgrades using real earned expedition loot and exact tape replay
+        run: node --test engines/roguelite/tests/camp-workshop.test.mjs
       - name: Play the generated offline arena in Chromium
         run: node engines/roguelite/tests/arena-browser.proof.mjs
       - name: Retain the exact tested offline HTML

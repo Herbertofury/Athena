@@ -162,3 +162,7 @@ The opt-in encounter lane derives its choices from the run seed and simulated cl
 ### Rendering and replay boundaries
 
 The Canvas loop reads a copied frame projection, including every visible entity, projectile, damage number, cache and route marker. It does not clone the complete gameplay state or walk projectile hit sets merely to draw. Full snapshots, tape verification, save/resume, and rules remain unchanged. Tests compare the two views across all eight recipes, including portal choice and active side run, and verify that changing a frame record cannot alter gameplay.
+
+### Camp Expedition
+
+Select **Camp Expedition · 20 min** to give earned resources a use. Mine a geode, chase a goblin, or clear a rift, then follow the campfire marker. A health totem spends 12 crystal and grants 15 maximum health. A weapon rack spends 24 gold and increases weapon damage by 10%. Neither upgrade applies without your choice. The workshop, resources, upgrades, and already-paid choices are part of the selected run tape. This is an in-run progression prototype; it does not implement account, shared or permanent home progression.

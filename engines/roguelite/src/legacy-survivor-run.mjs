@@ -97,5 +97,13 @@ export function createLegacySurvivorRun({random,format='classic',seed,sideMinute
    ...(!classic?{arenaFormat:{id:recipe.id,seconds:recipe.seconds,missedSpawns,...endurancePressure(recipe,gameTime)}}:{}),
   };
  }
- return Object.freeze({step,choose,snapshot,frameView,location:()=>({gameTime,player:{x:player.x,y:player.y}})});
+ function applyCampPerk(perk){
+  if(run.gameOver||offers)throw Error('Cannot build between decisions or after the run');
+  switch(perk){
+   case 'health': player.maxHp+=15; player.hp=Math.min(player.hp+15,player.maxHp);break;
+   case 'damage': player.dmgMult*=1.1;break;
+   default: throw Error('Unknown camp perk');
+  }
+ }
+ return Object.freeze({step,choose,snapshot,frameView,applyCampPerk,balance:()=>roaming?.balance()??{crystal:0,gold:0},location:()=>({gameTime,player:{x:player.x,y:player.y}})});
 }

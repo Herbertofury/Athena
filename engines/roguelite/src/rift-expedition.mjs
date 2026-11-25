@@ -1,11 +1,12 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
+import {createCampWorkshop} from './camp-workshop.mjs';
 import {createRiftDirector} from './rift-director.mjs';
 import {createRiftSession} from './rift-session.mjs';
 import {createLegacySurvivorRun} from './legacy-survivor-run.mjs';
 
-export function createRiftExpedition({seed,random}) {
+export function createRiftExpedition({seed,random,withCamp=false}) {
  const main=createLegacySurvivorRun({format:'roaming-expedition-20',seed,random});
- const director=createRiftDirector(seed);
+ const director=createRiftDirector(seed),camp=withCamp?createCampWorkshop():null;
  const travel=createRiftSession({main,createSide:({minutes,seed})=>{
   let cursor=seed>>>0;
   const side=createLegacySurvivorRun({sideMinutes:minutes,random:()=>{
@@ -13,9 +14,13 @@ export function createRiftExpedition({seed,random}) {
   }});
   return {...side,entropyCursor:()=>cursor};
  }});
- let decision=false, inRift=false;
+ const wallet=()=>{
+  const loot=main.balance(), earned=travel.bank();
+  return {crystal:loot.crystal+earned.crystal,gold:loot.gold+earned.gold};
+ };
+ let decision=false, campPrompt=false, inRift=false;
  function step(input) {
-  if(decision)return {status:'choice',audio:[]};
+  if(decision||campPrompt)return {status:'choice',audio:[]};
   const result=travel.step(input);
   if(inRift){
    if(result.rift)inRift=false;
@@ -28,9 +33,18 @@ export function createRiftExpedition({seed,random}) {
    decision=true;
    return {...result,status:'choice'};
   }
+  if(camp?.step({clock:gameTime,player,choicePending:result.status==='choice'})){
+   campPrompt=true;
+   return {...result,status:'choice'};
+  }
   return result;
  }
  function choose(id){
+  if(campPrompt){
+   const choice=camp.choose(id,wallet(),main.applyCampPerk);
+   campPrompt=false;
+   return {choice:id,camp:choice,audio:[]};
+  }
   if(decision){
    if(id!=='rift-enter'&&id!=='rift-stay')throw Error('Invalid rift decision');
    const offered=director.choose(id==='rift-enter');
@@ -47,7 +61,7 @@ export function createRiftExpedition({seed,random}) {
  return Object.freeze({step,choose,riftActive:()=>inRift,captureSuspended:travel.captureSuspended,snapshot:()=>project(false),frameView:()=>project(true)});
  function project(frame){
   const view=frame?travel.frameView():travel.snapshot(), portal=director.snapshot();
-  return {...view,portal,...(decision?{offers:[
+  return {...view,portal,...(camp?{camp:camp.snapshot(wallet())}:{}),...(campPrompt?{offers:camp.choices(wallet())}:decision?{offers:[
    {id:'rift-enter',icon:'◈',name:'Enter '+portal.marker.minutes+'-minute rift',kind:'rift'},
    {id:'rift-stay',icon:'↶',name:'Stay in the main Expedition',kind:'rift'},
   ]}:{})};
