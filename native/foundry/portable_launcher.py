@@ -254,12 +254,40 @@ def fork_checkpoint(root,data,source,destination,quiescent=False):
     expected=[{'':receipt['stores'][name]['sha256']} for name in names]
     return checkpoint_stores(root,data,source/names[0],source/names[1],destination,True,expected,parent_digest)
 
+def portable_data_paths(root,directory):
+    root=pathlib.Path(root).absolute()
+    directory=external_path(directory)
+    if directory==root or root in directory.parents or not directory.is_dir():
+        raise ValueError('Choose an existing data folder outside the package')
+    if any(link_or_reparse(p) for p in (directory,*directory.parents)):
+        raise ValueError('Portable data folder and its parents must not be linked')
+    native,journal=(directory/name for name in ('foundry.sqlite3','engineering.sqlite3'))
+    for store in (native,journal):
+        for suffix in ('','-wal','-shm','-journal'):
+            candidate=pathlib.Path(str(store)+suffix)
+            if os.path.lexists(candidate):
+                metadata=candidate.lstat()
+                if not stat.S_ISREG(metadata.st_mode) or metadata.st_nlink!=1 or link_or_reparse(candidate):
+                    raise ValueError('Portable data files and sidecars must be ordinary unlinked files')
+    return native,journal
+
 def main():
     sys.dont_write_bytecode=True
-    p=argparse.ArgumentParser(description=__doc__);p.add_argument('--database');p.add_argument('--journal');p.add_argument('--checkpoint-directory');p.add_argument('--fork-checkpoint');p.add_argument('--working-directory');p.add_argument('--create-database');p.add_argument('--backup-database');p.add_argument('--upgrade-copy');p.add_argument('--backup-destination');p.add_argument('--source-quiescent',action='store_true');p.add_argument('--verify-only',action='store_true');a=p.parse_args()
+    p=argparse.ArgumentParser(description=__doc__);p.add_argument('--database');p.add_argument('--journal');p.add_argument('--portable-data-dir',help='open foundry.sqlite3 and engineering.sqlite3 in one existing external folder');p.add_argument('--init-portable-data',help='explicitly initialize a new paired profile in one existing external folder');p.add_argument('--checkpoint-directory');p.add_argument('--fork-checkpoint');p.add_argument('--working-directory');p.add_argument('--create-database');p.add_argument('--backup-database');p.add_argument('--upgrade-copy');p.add_argument('--backup-destination');p.add_argument('--source-quiescent',action='store_true');p.add_argument('--verify-only',action='store_true');a=p.parse_args()
     root=pathlib.Path(__file__).resolve().parent
     try:
         data=verify(root)
+        if a.portable_data_dir or a.init_portable_data:
+            if not data.get('engine') or (a.portable_data_dir and a.init_portable_data) or any((
+                a.database,a.journal,a.create_database,a.checkpoint_directory,a.fork_checkpoint,
+                a.working_directory,a.backup_database,a.upgrade_copy,a.backup_destination,a.source_quiescent,a.verify_only)):
+                raise ValueError('Choose one portable data-folder operation on a unified package')
+            native,journal=portable_data_paths(root,a.portable_data_dir or a.init_portable_data)
+            if a.init_portable_data:
+                destination_clear(journal)
+                a.create_database=native
+            else:
+                a.database,a.journal=native,journal
         if sum((bool(a.database),bool(a.create_database),bool(a.backup_database),bool(a.upgrade_copy),bool(a.fork_checkpoint),a.verify_only))!=1:raise ValueError('Choose one operation')
         if bool(a.backup_database or a.upgrade_copy)!=bool(a.backup_destination) or (a.source_quiescent and not (a.backup_database or a.upgrade_copy or a.checkpoint_directory or a.fork_checkpoint)):raise ValueError('Backup arguments required together')
         if bool(a.fork_checkpoint)!=bool(a.working_directory):raise ValueError('Fork requires a new working directory')
