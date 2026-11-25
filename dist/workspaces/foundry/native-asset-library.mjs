@@ -2,8 +2,8 @@
 export function attachNativeAssetLibrary({host,signal,onAdd}){
  const doc=host.ownerDocument;
  let disposed=false,generation=0,current=null,buttons=[];
- host.innerHTML='<h2>Current theme object catalog</h2><p>Add an independent instance at the world center, including after the room is empty. Current theme only; no asset downloads, autoplay or cross-theme imports. Adding explicitly adopts existing instance format v6 if needed.</p><label>Search current theme objects <input type="search" maxlength="200" data-asset-library-search placeholder="Name, shape or role"></label><p data-asset-library-summary aria-live="polite"></p><div data-asset-library-list></div><p role="status" data-asset-library-status></p>';
- const list=host.querySelector('[data-asset-library-list]'),summary=host.querySelector('[data-asset-library-summary]'),status=host.querySelector('[data-asset-library-status]'),search=host.querySelector('[data-asset-library-search]');
+ host.innerHTML='<h2>Current theme object catalog</h2><p>Add an independent instance at the world center, including after the room is empty. Current theme only; no asset downloads, autoplay or cross-theme imports. Adding explicitly adopts existing instance format v6 if needed.</p><label>Search current theme objects <input type="search" maxlength="200" data-asset-library-search placeholder="Name, shape, role, material, tags or affordances"></label><label>Material <select data-asset-library-material><option value="">All materials</option></select></label><p>Material and affordance labels come from Feature Foundry. They describe the original objects, not available native effects.</p><p data-asset-library-summary aria-live="polite"></p><div data-asset-library-list></div><p role="status" data-asset-library-status></p>';
+ const list=host.querySelector('[data-asset-library-list]'),summary=host.querySelector('[data-asset-library-summary]'),status=host.querySelector('[data-asset-library-status]'),search=host.querySelector('[data-asset-library-search]'),material=host.querySelector('[data-asset-library-material]');
  function syncSummary(){
   const {name,count,objects}=current;
   const label=String(name)+' · '+count+'/100 instances · '+buttons.length+'/'+objects.length+' catalog objects';
@@ -13,8 +13,9 @@ export function attachNativeAssetLibrary({host,signal,onAdd}){
   if(disposed||!current)return;
   const {key,objects,count}=current,token=++generation,terms=search.value.trim().toLowerCase().split(/\s+/).filter(Boolean);
   const matches=objects.filter(o=>{
-   const text=[o.name,o.shape,o.role].map(String).join(' ').toLowerCase();
-   return terms.every(term=>text.includes(term));
+   const facts=o.sourceLabels;
+   const text=[o.name,o.shape,o.role,facts?.material,...(facts?.tags||[]),...(facts?.affordances||[])].join(' ').toLowerCase();
+   return (!material.value||material.value===facts?.material)&&terms.every(term=>text.includes(term));
   });
   list.replaceChildren();
   buttons=[];
@@ -33,6 +34,12 @@ export function attachNativeAssetLibrary({host,signal,onAdd}){
    });
    buttons.push(button);
    row.append(label,button);
+   if(o.sourceLabels){
+    const source=doc.createElement('small');source.className='catalog-source-labels';
+    const {material,tags,affordances}=o.sourceLabels;
+    source.textContent='Material: '+material+' · Tags: '+tags.join(', ')+' · Source affordances: '+affordances.join(', ');
+    row.append(source);
+   }
    list.append(row);
   }
   if(!buttons.length){
@@ -51,7 +58,20 @@ export function attachNativeAssetLibrary({host,signal,onAdd}){
   if(prior?.key===key&&prior.objects===objects){
    if((prior.count>=100)!==(count>=100))for(const button of buttons)button.disabled=count>=100;
    syncSummary();
-  }else render();
+  }else{
+   if(prior?.objects!==objects){
+    const kept=material.value;
+    const options=[...new Set(objects.map(o=>o.sourceLabels?.material).filter(Boolean))].sort();
+    while(material.children.length>1)material.lastChild.remove();
+    material.firstElementChild.toggleAttribute('selected',!options.includes(kept));
+    for(const value of options){
+     const option=doc.createElement('option');option.value=value;option.textContent=value;
+     if(value===kept)option.setAttribute('selected','');
+     material.append(option);
+    }
+   }
+   render();
+  }
   const text=count>=100?'Instance limit reached. Remove an instance before adding.':'Choose an object to add; existing room content is retained.';
   if(status.textContent!==text)status.textContent=text;
  }
@@ -61,11 +81,11 @@ export function attachNativeAssetLibrary({host,signal,onAdd}){
   generation++;
   current=null;
   buttons=[];
-  search.removeEventListener('input',render);
+  search.removeEventListener('input',render);material.removeEventListener('change',render);
   signal?.removeEventListener('abort',dispose);
   host.replaceChildren();
  }
- search.addEventListener('input',render);
+ search.addEventListener('input',render);material.addEventListener('change',render);
  signal?.addEventListener('abort',dispose,{once:true});
  if(signal?.aborted)dispose();
  return{update,dispose};
