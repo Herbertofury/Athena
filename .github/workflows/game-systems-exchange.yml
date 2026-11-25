@@ -68,5 +68,7 @@ jobs:
         run: node --test engines/roguelite/tests/spawn-director.test.mjs
       - name: Verify original gem pickup and level gates against GameSync
         run: node engines/roguelite/tools/build-survivor-pickups.mjs --check && node --test engines/roguelite/tests/pickup-formulas.test.mjs
+      - name: Replay original movement dash and contact against GameSync
+        run: node engines/roguelite/tools/build-survivor-movement.mjs --check && node --test engines/roguelite/tests/movement-formulas.test.mjs && node engines/roguelite/examples/demo-encounter-lane.mjs
       - name: Run the offline spawn host demo
         run: node engines/roguelite/examples/demo-spawn-lane.mjs 42 300
