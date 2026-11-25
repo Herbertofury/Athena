@@ -1,6 +1,6 @@
 # Athena Engine Foundry
 
-Athena is the canonical host for reusable game engines across the owner's repositories.
+Athena is the canonical host for reusable game engines across the owner's repositories. The initial intake contains 41 exact GameSync source files, pinned in four manifests and protected by `scripts/verify_engine_intake.py`. Track extraction and consumer acceptance in [Athena issue #365](https://github.com/Herbertofury/Athena/issues/365).
 
 - [Architecture and promotion rules](../docs/ENGINE-FOUNDRY.md)
 - [Machine-readable engine catalog](catalog.json)
@@ -11,9 +11,9 @@ Athena is the canonical host for reusable game engines across the owner's reposi
 
 | Package | Purpose | Current state |
 |---|---|---|
-| [Card Game](card-game/README.md) | Collectible card battler, deckbuilder, AI, collection and progression | GameSync's complete 23-module source baseline is being captured; refactor/qualification pending |
-| [Roguelite](roguelite/README.md) | Survivor, arena, action, platformer and card-roguelite run systems | GameSync Survivors plus JetSetCraft and Modhunter challengers; extraction pending |
-| [Mascot Open World](mascot-open-world/README.md) | Free-roam mascot city/world, missions, vehicles, interiors and replaceable 3D renderer | GameSync Midnight Mascot Syndicate baseline; host-neutral split pending |
+| [Card Game](card-game/README.md) | Collectible card battler, deckbuilder, AI, collection and progression | 23-module GameSync source snapshot captured; deterministic extraction/qualification pending |
+| [Roguelite](roguelite/README.md) | Survivor, arena, action, platformer and card-roguelite run systems | GameSync Survivors snapshot captured; JetSetCraft and Modhunter challengers; extraction pending |
+| [Mascot Open World](mascot-open-world/README.md) | Free-roam mascot city/world, missions, vehicles, interiors and replaceable 3D renderer | 16-file GameSync Midnight Mascot Syndicate/Dev Room snapshot captured; host-neutral split pending |
 | [Shared Browser Game Runtime](shared-game-runtime/README.md) | Reusable canvas/input/particles runtime for browser game adapters | GameSync baseline; lifecycle and deterministic-host work pending |
 
 ## Source-intake policy
