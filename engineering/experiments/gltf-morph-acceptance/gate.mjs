@@ -19,10 +19,14 @@ function sameSource(expected,observed){
  return expected.sourceSha256===observed.sourceSha256&&expected.nodeIndex===observed.nodeIndex&&expected.meshIndex===observed.meshIndex;
 }
 
+export function validMorphContract(contract){
+ return contract?.schema===1&&['editable-animated','static'].includes(contract.lane)&&
+  digest(contract.sourceSha256)&&index(contract.nodeIndex)&&index(contract.meshIndex)&&
+  (contract.lane==='static'||(names(contract.targets,1)&&positive(contract.minAbsPositionDelta)&&positive(contract.minWeightChange)));
+}
 export function checkMorphEvidence(contract,evidence){
- if(contract?.schema!==1||!['editable-animated','static'].includes(contract.lane)||!digest(contract.sourceSha256)||!index(contract.nodeIndex)||!index(contract.meshIndex))return uncertain('invalid_contract');
+ if(!validMorphContract(contract))return uncertain('invalid_contract');
  const editable=contract.lane==='editable-animated';
- if(editable&&(!names(contract.targets,1)||!positive(contract.minAbsPositionDelta)||!positive(contract.minWeightChange)))return uncertain('invalid_contract');
  if(evidence?.schema!==1||evidence.sampleFormat!==FORMAT)return uncertain('unsupported_sample_format');
  if(!sameSource(contract,evidence))return rejected('source_or_node_mismatch');
  if(!bounded(evidence.primitives,1,MAX_PRIMITIVES)||!bounded(evidence.weightTracks,0,MAX_TRACKS)||!names(evidence.targetNames,0))return uncertain('invalid_projection_or_structure_budget');
@@ -80,21 +84,24 @@ export function checkMorphEvidence(contract,evidence){
  return decision('matched',editable?'matched_named_animated_controls':'intentional_static_controls_absent',{targetCount,primitiveCount,attachedWeightTracks});
 }
 
-function readJson(file){
+export function readBoundedFile(file,limit){
  if(!fs.lstatSync(file).isFile())throw Error('regular file required');
  const fd=fs.openSync(file,fs.constants.O_RDONLY|(fs.constants.O_NONBLOCK||0)|(fs.constants.O_NOFOLLOW||0));
  try{
   const info=fs.fstatSync(fd);
-  if(!info.isFile()||info.size<1||info.size>MAX_INPUT_BYTES)throw Error('size budget');
-  const buffer=Buffer.allocUnsafe(MAX_INPUT_BYTES+1);
+  if(!info.isFile()||info.size<1||info.size>limit)throw Error('size budget');
+  const buffer=Buffer.allocUnsafe(info.size+1);
   let size=0;
   while(size<buffer.length){
    const read=fs.readSync(fd,buffer,size,buffer.length-size,null);
    if(!read)break;size+=read;
   }
-  if(size>MAX_INPUT_BYTES)throw Error('size budget');
-  return JSON.parse(new TextDecoder('utf-8',{fatal:true}).decode(buffer.subarray(0,size)));
+  if(size!==info.size)throw Error('file size changed');
+  return buffer.subarray(0,size);
  }finally{fs.closeSync(fd);}
+}
+export function readJson(file){
+ return JSON.parse(new TextDecoder('utf-8',{fatal:true}).decode(readBoundedFile(file,MAX_INPUT_BYTES)));
 }
 if(process.argv[1]&&fileURLToPath(import.meta.url)===path.resolve(process.argv[1])){
  let result;
