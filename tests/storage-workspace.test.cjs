@@ -175,3 +175,39 @@ test('Windows compare is independent; rejected or abandoned second reads never c
  find('windows-clear-comparison').onclick();done(JSON.stringify(windowsReport));await pending;
  assert.equal(scope.disabled,true);assert.equal(diff.children.length,0);assert.equal(s.writes.length,0);
 });
+test('Windows comparison receipts reproduce exact signed numbers but cannot claim a verified folder',async()=>{
+ const {parseWindowsDirectoryReport,buildWindowsComparisonReceipt,verifyWindowsComparisonReceipt}=await import('../dist/workspaces/storage/model.mjs');
+ const normalize=o=>parseWindowsDirectoryReport(JSON.stringify(o));
+ const a=normalize(windowsReport),b=normalize({...windowsReport,logical_pathname_bytes:10241});
+ assert.throws(()=>buildWindowsComparisonReceipt(a,b,false),/confirm/i);
+ const receipt=buildWindowsComparisonReceipt(a,b,true);
+ assert.equal(receipt.difference.logical_pathname_bytes,1);
+ assert.deepEqual(verifyWindowsComparisonReceipt(JSON.stringify(receipt)),receipt);
+ for(const bad of [
+  {...receipt,pathname:'LOCAL'}, {...receipt,point_in_time_snapshot:true},
+  {...receipt,difference:{...receipt.difference,logical_pathname_bytes:2}},
+  {...receipt,second:{...receipt.second,partial:true,stopped_batch_limit:true}},
+  {...receipt,reference:{...receipt.reference,filename:'NEVER-DISPLAY'}},
+  {...receipt,assertion:'same-folder verified'}
+ ])assert.throws(()=>verifyWindowsComparisonReceipt(JSON.stringify(bad)));
+});
+test('checking a receipt does not confirm a live report pair or restore anything',async()=>{
+ const {parseWindowsDirectoryReport,buildWindowsComparisonReceipt}=await import('../dist/workspaces/storage/model.mjs');
+ const a=parseWindowsDirectoryReport(JSON.stringify(windowsReport));
+ const data=buildWindowsComparisonReceipt(a,{...a,logical_pathname_bytes:a.logical_pathname_bytes-1},true);
+ const s=await app(),root=s.root(),one=id=>root.querySelector('#'+id);
+ const picker=one('windows-verify-receipt');picker.files=[contents(data)];await picker.onchange();
+ assert.match(one('windows-receipt-status').textContent,/recompute exactly/);
+ assert.match(one('windows-receipt-differences').textContent,/Logical pathname bytes: -1/);
+ assert.equal(one('windows-same-scope').disabled,true);
+ assert.equal(one('windows-export-comparison').disabled,true);
+ picker.files=[contents({...data,reference:{...a,path:'PRIVATE-DO-NOT-ECHO'}})];await picker.onchange();
+ assert.match(one('windows-receipt-status').textContent,/Receipt refused/);
+ assert.equal(one('windows-receipt-differences').children.length,0);
+ let complete;picker.files=[{size:400,text:()=>new Promise(r=>complete=r)}];
+ const pending=picker.onchange();
+ one('windows-clear-receipt').onclick();complete(JSON.stringify(data));await pending;
+ assert.match(one('windows-receipt-status').textContent,/cleared/);
+ assert.equal(one('windows-receipt-differences').children.length,0);
+ assert.equal(s.writes.length,0);
+});
