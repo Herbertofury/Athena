@@ -23,7 +23,8 @@ try{
   const tab=await shared.newPage();
   tab.on('pageerror',error=>errors.push(error.message));
   await tab.goto(origin+'/#'+route);
-  await tab.getByRole('heading',{name:route==='projects'?'Project browser':'Project continuity',exact:true}).last().waitFor();
+  const label={projects:'Project browser',continuity:'Project continuity',software:'Software discovery'}[route];
+  await tab.getByRole('heading',{name:label,exact:true}).last().waitFor();
   return tab;
  };
  const addNote=async(tab,label)=>{
@@ -44,11 +45,20 @@ try{
   assert.equal(workspaces.continuity.entries.length,c);
  };
  const saveStatus='Saved in this browser. Export a backup.';
- const projectTab=await open('projects'),notesTab=await open('continuity');
+ const projectTab=await open('projects'),notesTab=await open('continuity'),preferenceTab=await open('software');
+ await preferenceTab.waitForFunction(()=>document.querySelector('.workspace-status')?.textContent.includes('workspace loaded'));
  await addProject(projectTab,'Preserve newer Projects');
  await addNote(notesTab,'Save from older Continuity');
  await notesTab.getByText(saveStatus,{exact:true}).waitFor();
  await count(notesTab,1,1);
+ // This Software tab mounted before either new project's write. Its own search
+ // filter must not bring the old workspace envelope back into browser storage.
+ const beforePreference=JSON.parse(await bytes(notesTab));
+ await preferenceTab.locator('#search').fill('archive');
+ await preferenceTab.waitForFunction(()=>JSON.parse(localStorage.getItem('athena-workspaces-v1'))?.workspaces.software?.filters?.q==='archive');
+ const afterPreference=JSON.parse(await bytes(notesTab));
+ assert.deepEqual(afterPreference.workspaces.projects,beforePreference.workspaces.projects);
+ assert.deepEqual(afterPreference.workspaces.continuity,beforePreference.workspaces.continuity);
  await projectTab.reload();
  await projectTab.getByRole('button',{name:'Open Preserve newer Projects',exact:true}).waitFor();
  await addNote(notesTab,'Continuity inverse order');

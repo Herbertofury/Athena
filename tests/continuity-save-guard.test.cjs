@@ -11,7 +11,7 @@ function shared(initial){
   if(fault!=='unconfirmed')raw=value;
  }};
  return {read:()=>raw,writes:()=>writes,setRaw:value=>{raw=value;},fault:kind=>{fault=kind;},tab(initial){
-  const host={workspaceStore:structuredClone(initial),localStorage:storage,toast(){}};
+  const host={workspaceStore:structuredClone(initial),localStorage:storage,workspaceDrafts:new Map(),toast(){}};
   vm.runInNewContext(saveHelpers,host);
   return {host,projects:(next,expected)=>host.saveReviewedProjectBackup(next,JSON.stringify(expected),true),
    continuity:(next,expected)=>host.saveReviewedContinuity?host.saveReviewedContinuity(next,JSON.stringify(expected)??''):host.saveWorkspace('continuity',next)};
@@ -82,4 +82,42 @@ test('ordinary Continuity edit keeps raw legacy comparison base and a failed dra
   root.querySelector('#entries').onclick({target:root.querySelector('[data-action="pin"]')});
   assert.equal(calls[2].options.reviewedContinuityWrite,JSON.stringify(calls[1].data));
  }finally{URL.createObjectURL=create;URL.revokeObjectURL=revoke;view.unmount();}
+});
+
+test('a preference write from an older tab preserves newer Projects, Continuity and unknown envelope fields',()=>{
+ const start=snapshot({software:{filters:{q:'old'}}},{unknown:{rev:1}}), db=shared(start);
+ const tab=db.tab(start), owner=db.tab(start), note=continuity('new');
+ assert.equal(owner.continuity(note,undefined),true);
+ const latest=JSON.parse(db.read());
+ latest.unknown.rev=2;
+ latest.workspaces.projects={schema:1,entries:[{id:'new'}]};
+ db.setRaw(JSON.stringify(latest));
+ const software={filters:{q:'zip'},selected:[]};
+ assert.equal(tab.host.saveWorkspace('software',software),true);
+ assert.deepEqual(JSON.parse(db.read()),{...latest,workspaces:{...latest.workspaces,software}});
+ assert.deepEqual(JSON.parse(JSON.stringify(tab.host.workspaceStore)),JSON.parse(db.read()));
+});
+
+test('generic writes leave malformed, refused or unconfirmed storage and the cached snapshot intact',()=>{
+ const original=snapshot({software:{filters:{q:'original'}}}), db=shared(original), tab=db.tab(original);
+ const bytes=db.read(), value={filters:{q:'candidate'}};
+ for(const malformed of ['{not-json','{"schema":2,"workspaces":{}}','{"schema":1,"workspaces":[]}']){
+  db.setRaw(malformed);
+  assert.equal(tab.host.saveWorkspace('software',value),false);
+  assert.equal(db.read(),malformed);
+  assert.equal(db.writes(),0);
+  assert.deepEqual(tab.host.workspaceStore,original);
+ }
+ db.setRaw(bytes);
+ for(const failure of ['quota','unconfirmed']){
+  db.fault(failure);
+  assert.equal(tab.host.saveWorkspace('software',value),false);
+  assert.equal(db.read(),bytes);
+  assert.deepEqual(tab.host.workspaceStore,original);
+  assert.equal(JSON.stringify(tab.host.workspaceDrafts.get('software')),JSON.stringify(value));
+ }
+ db.fault('');
+ assert.equal(tab.host.saveWorkspace('software',value),true);
+ assert.deepEqual(JSON.parse(db.read()).workspaces.software,value);
+ assert.equal(tab.host.workspaceDrafts.has('software'),false);
 });
