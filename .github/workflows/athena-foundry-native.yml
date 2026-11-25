@@ -116,6 +116,7 @@ jobs:
       - name: Current-theme catalog spawning and recovery in Chromium
         env:
           ATHENA_BROWSER_OUTPUT: browser-results/foundry-asset-library
+          ATHENA_BROWSER_ROOT: candidate-extracted/runtime
         run: node scripts/test_foundry_asset_library_browser.cjs
       - name: Actor grab offset and drag-grid regressions in Chromium
         env:
