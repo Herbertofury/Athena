@@ -110,6 +110,21 @@ Optional test: after your first start and shutdown, create a new checkpoint:
       python -B app/launch.py --fork-checkpoint checkpoint --working-directory working --source-quiescent
    Do not use existing destinations. Keep checkpoint and working copies private.
 
+Optional Feature Foundry v24 rehearsal (disposable source only):
+   Quit Feature Foundry. In a private folder with no active writers, prepare a
+   new standalone review copy, even if the closed database has a WAL header:
+      python -B app/launch.py --prepare-legacy legacy.sqlite3 --legacy-destination reviewed.sqlite3 --source-quiescent
+   Read report counts and retain the original and reviewed copy. WAL recovery
+   with WAL frames requires a Python SQLite runtime at least 3.54.0.
+   If the counts are acceptable, replace REVIEWED_SHA256 below with the full
+   output_sha256 from preparation. Use an empty, separate rehearsal data folder:
+      python -B app/launch.py --import-reviewed-legacy reviewed.sqlite3 --reviewed-sha256 REVIEWED_SHA256 --legacy-destination rehearsal/foundry.sqlite3
+      python -B app/launch.py --portable-data-dir rehearsal
+   This maps supported room soundtrack assignments and seeds Athena's reviewed
+   catalog. It does NOT migrate custom catalogs, arbitrary history, artist data,
+   or user/browser files. It is not a reason to delete the original app or data.
+   An existing profile or SQLite sidecar is never an acceptable destination.
+
 This is an evaluation only. It does not certify actual removable or network
 drives, an existing profile, all codecs, any complete source migration, or
 retirement of source repositories. Preserve all original repositories and backups.
