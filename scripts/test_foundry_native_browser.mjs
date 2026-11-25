@@ -691,6 +691,45 @@ c.execute('UPDATE experiment_runs SET output=? WHERE experiment_id=?',(raw,int(s
   assert.equal((await fetch(endpoint,{method:'POST',headers:{Origin:origin,'x-atlas-request':'local-ui'}})).status,405);
   assert.equal(report.externalRequests.length,external);
  });
+ if(unified)await check('Optional native artist concept plates compare colorways and weather without requests or storage writes',async()=>{
+  const modulePath='/migration/foundry-artists/concept.mjs';
+  const requested=[],outbound=report.externalRequests.length;
+  const track=req=>{if(new URL(req.url()).pathname===modulePath)requested.push(req.url());};
+  page.on('request',track);
+  try{
+   await page.goto(origin+'/migration/foundry-artists');
+   await page.locator('#status').filter({hasText:'Showing 5 of 5 artists.'}).waitFor();
+   assert.equal(requested.length,0);
+   const baseline=await page.evaluate(()=>JSON.stringify({local:{...localStorage},session:{...sessionStorage}}));
+   const open=page.getByRole('button',{name:'Preview Frawgy worlds',exact:true});
+   await open.focus();await page.keyboard.press('Enter');
+   const preview=page.locator('#concept');
+   await preview.getByRole('status').filter({hasText:'Verdant Conservatory · Clear study'}).waitFor();
+   assert.equal(await page.locator('#concept-title').evaluate(e=>e===document.activeElement),true);
+   assert.equal(requested.length,1);
+   const frame=selector=>page.locator(selector+' canvas').evaluate(e=>e.toDataURL());
+   const clear=await frame('#primary');
+   assert.ok(clear.length>2048);
+   await preview.getByLabel('Weather study').selectOption('weather.frawgy.spore-shower');
+   const weather=await frame('#primary');
+   assert.notEqual(weather,clear);
+   await preview.getByLabel('Compare both variants').check();
+   await preview.getByRole('heading',{name:'Lilypad Nocturne',exact:true}).waitFor();
+   assert.notEqual(await frame('#alternate'),weather);
+   assert.equal(await preview.locator('.swatches span').count(),10);
+   await preview.getByLabel('Weather study').selectOption('');
+   assert.equal(await frame('#primary'),clear);
+   await preview.getByRole('button',{name:'Close preview',exact:true}).click();
+   assert.equal(await open.evaluate(e=>e===document.activeElement),true);
+   await page.getByRole('button',{name:'Preview Dreamrelicc worlds',exact:false}).click();
+   await preview.getByRole('status').filter({hasText:'Cathedral Orbit · Clear study'}).waitFor();
+   assert.notEqual(await frame('#primary'),clear);
+   assert.equal(requested.length,1,'Optional module loaded once in this page');
+   assert.equal(await page.evaluate(()=>JSON.stringify({local:{...localStorage},session:{...sessionStorage}})),baseline);
+   assert.equal(report.externalRequests.length,outbound);
+   assert.equal(await preview.locator('img,iframe,audio,video').count(),0);
+  }finally{page.off('request',track);}
+ });
  await check('Continuity refresh reveals a second tab revision without losing the selected file',async()=>{
   const other=await context.newPage();
   const selectFile=(tab,name,contents)=>tab.locator('[data-artifact-file]').setInputFiles({name,mimeType:'application/octet-stream',buffer:Buffer.from(contents)});
