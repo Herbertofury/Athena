@@ -654,7 +654,17 @@ c.execute('UPDATE experiment_runs SET output=? WHERE experiment_id=?',(raw,int(s
  assert.deepEqual(report.errors,[]);
  await page.screenshot({path:path.join(out,'native-profile.png'),fullPage:true});
  report.passed=true;
-} catch(error){report.passed=false;report.failure=String(error.stack||error);if(page)report.mediaFailure=await page.locator('video').evaluateAll(xs=>xs.map(v=>({readyState:v.readyState,paused:v.paused,ended:v.ended,time:v.currentTime,duration:v.duration,error:v.error?.message||null,playingEvent:v.dataset.nativeTestPlaying||null}))).catch(()=>[]);if(page)await page.screenshot({path:path.join(out,'failure.png'),fullPage:true}).catch(()=>{});process.exitCode=1;}
+} catch(error){report.passed=false;report.failure=String(error.stack||error);if(page)report.mediaFailure=await page.locator('video').evaluateAll(xs=>xs.map(v=>({readyState:v.readyState,paused:v.paused,ended:v.ended,time:v.currentTime,duration:v.duration,error:v.error?.message||null,playingEvent:v.dataset.nativeTestPlaying||null}))).catch(()=>[]);if(page)report.foundryStartup=await page.evaluate(()=>{
+ const scene=document.querySelector('.foundry-scene');
+ const style=[...document.querySelectorAll('link[rel="stylesheet"]')].find(e=>e.href.endsWith('/workspaces/foundry/style.css'));
+ const completed=performance.getEntriesByType('resource').filter(resource=>{const u=new URL(resource.name);return u.origin===location.origin&&u.pathname.startsWith('/workspaces/foundry/');}).slice(0,32).map(resource=>({name:new URL(resource.name).pathname.split('/').pop(),durationMs:Math.round(resource.duration),status:resource.responseStatus||null}));
+ return {readyState:document.readyState,
+  workspace:document.querySelector('main')?.dataset.workspace||null,
+  sceneHeight:scene?.getBoundingClientRect().height??null,
+  stylesheetApplied:Boolean(style?.sheet),
+  mountedSections:[...document.querySelectorAll('[data-foundry-module]')].slice(0,18).map(el=>({name:el.dataset.foundryModule,populated:el.childElementCount>0})),
+  completed};
+}).catch(()=>null);if(page)await page.screenshot({path:path.join(out,'failure.png'),fullPage:true}).catch(()=>{});process.exitCode=1;}
 finally {
  await browser?.close();
  await stopBridge().catch(error=>{report.passed=false;report.errors.push(String(error));process.exitCode=1;});

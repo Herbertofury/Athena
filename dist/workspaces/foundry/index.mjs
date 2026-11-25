@@ -13,6 +13,54 @@ export function authoredObjectRoute(object){
  if(labels.some(x=>x.includes('music')||x.includes('note')))return 'soundtrack';
  return 'ecology';
 }
+// Fixed workspace-local modules. Fetch/evaluate in at most four one-shot lanes;
+// constructors below still attach in their existing deterministic order.
+const optionalModules={
+ environment:'./native-environment.mjs',
+ cinema:'./cinematic.mjs',
+ canvasView:'./native-canvas-view.mjs',
+ objectKeys:'./native-object-keys.mjs',
+ sessionHistory:'./native-session-history.mjs',
+ historyKeys:'./native-history-keys.mjs',
+ backup:'./native-backup.mjs',
+ soundtrack:'./native-soundtrack.mjs',
+ legacyImport:'./native-import.mjs',
+ localImage:'./native-local-image.mjs',
+ localVideo:'./native-local-video.mjs',
+ assetLibrary:'./native-asset-library.mjs',
+ gizmo:'./native-transform-gizmo.mjs',
+ layers:'./native-layers.mjs',
+ tones:'./native-tones.mjs',
+ semanticRoom:'./native-semantic-room.mjs',
+ weather:'./native-weather.mjs',
+ ecology:'./native-ecology.mjs',
+};
+function loadOptionalModules(enabled,signal){
+ const names=Object.keys(optionalModules).filter(enabled),ready=new Map();
+ let next=0,running=0,cancel;
+ const canceled=new Promise(resolve=>{cancel=()=>resolve({loaded:null});});
+ if(signal.aborted)cancel();
+ else if(names.length)signal.addEventListener('abort',cancel,{once:true});
+ for(const name of names){
+  let done;
+  const promise=new Promise(resolve=>{done=resolve;});
+  ready.set(name,{promise,done});
+ }
+ function feed(){
+  while(running<4&&next<names.length&&!signal.aborted){
+   const name=names[next++];running++;
+   import(optionalModules[name]).then(
+    loaded=>ready.get(name).done({loaded}),
+    ()=>ready.get(name).done({loaded:null})
+   ).finally(()=>{
+    running--;feed();
+    if(running===0&&next===names.length)signal.removeEventListener('abort',cancel);
+   });
+  }
+ }
+ feed();
+ return name=>Promise.race([ready.get(name).promise,canceled]);
+}
 // Native Athena authoring module. Deliberately excludes artist provenance and account sessions.
 export async function mount(context){
  let nativeSoundtrack,nativeEcology,nativeEnvironment,nativeLocalVideo,nativeLocalImage,nativeLayers,nativeGizmo,nativeSessionHistory,nativeAssetLibrary;
@@ -219,13 +267,15 @@ export async function mount(context){
  one('[data-export-workspace]').addEventListener('click',backup);workspaceInput.addEventListener('change',restore);
  exportButton.addEventListener('click',download);importInput.addEventListener('change',upload);draw();
  const boundary=one('.foundry-boundary');boundary.textContent+=context.nativeStore?' A native storage capability is supplied; enabled sections report connection and schema status.':' Native storage is not connected; browser authoring and JSON backups remain available.';
- async function attach(name,path,exportName,options={}){
+ const readOptional=loadOptionalModules(enabled,signal);
+ async function attach(name,exportName,options={}){
   if(disposed||signal.aborted)return;
   if(!enabled(name)){moduleStates[name]='disabled';return;}
   const host=doc.createElement('section');host.dataset.foundryModule=name;if(name==='cinema')host.className='foundry-cinema';root.append(host);
   const controller=new AbortController();const entry={host,controller,component:null};modules[name]=entry;
   try{
-   const loaded=await import(path);if(disposed||signal.aborted)return;
+   const {loaded}=await readOptional(name);if(disposed||signal.aborted)return;
+   if(!loaded)throw Error('Optional module unavailable.');
    entry.component=loaded[exportName]({host,signal:controller.signal,...options});
    if(disposed||signal.aborted){try{entry.component?.dispose();moduleStates[name]='disposed';}catch{report(name,'cleanup failed');}finally{controller.abort();host.remove();}return;}
    moduleStates[name]='attached';return entry.component;
@@ -242,25 +292,25 @@ export async function mount(context){
   try{if(objectUrl)URL.revokeObjectURL(objectUrl);}finally{root.remove();css.remove();signal.removeEventListener('abort',unmount);}
  }
  signal.addEventListener('abort',unmount,{once:true});
- nativeEnvironment=await attach('environment','./native-environment.mjs','attachEnvironment',{scene,getTargets:()=>themeView().objects,resolveTarget:id=>{const b=actor(id);if(!b||b.parentElement===unavailableLayer||(b.parentElement===stickerLayer&&view.inspectorDock==='hidden'))return null;return b;},validate:value=>model.environment(value,value.target===undefined?4:10),apply:value=>{if(disposed||signal.aborted)return;const next=model.upgradeEnvironment(current,value);checkpoint();importGeneration++;current=next;draw();save();}});try{nativeEnvironment?.update(current.environment);}catch{report('environment','render failed; authoring remains available');}
- await attach('cinema','./cinematic.mjs','attachCinematic');
- await attach('canvasView','./native-canvas-view.mjs','attachCanvasView',{workspace:root});
- await attach('objectKeys','./native-object-keys.mjs','attachObjectKeys',{workspace:root});
- nativeSessionHistory=await attach('sessionHistory','./native-session-history.mjs','attachSessionHistory',{getHistory:()=>history.list({active:current}),onJump:(id,epoch)=>{if(!disposed&&!signal.aborted)rollback('jump',id,epoch);}});
- await attach('historyKeys','./native-history-keys.mjs','attachHistoryKeys',{workspace:root});
- await attach('backup','./native-backup.mjs','attachNativeBackup',{nativeStore:context.nativeStore,model,snapshot,getRevision:()=>importGeneration,replace:value=>{if(disposed||signal.aborted)return;checkpoint();importGeneration++;drag=null;envelopeVersion=value.version;layouts=value.layouts;current=value.active;view=value.view;savedLayouts=value.savedLayouts;draw();save();}});
- nativeSoundtrack=await attach('soundtrack','./native-soundtrack.mjs','attachNativeSoundtrack',{nativeStore:context.nativeStore});
+ nativeEnvironment=await attach('environment','attachEnvironment',{scene,getTargets:()=>themeView().objects,resolveTarget:id=>{const b=actor(id);if(!b||b.parentElement===unavailableLayer||(b.parentElement===stickerLayer&&view.inspectorDock==='hidden'))return null;return b;},validate:value=>model.environment(value,value.target===undefined?4:10),apply:value=>{if(disposed||signal.aborted)return;const next=model.upgradeEnvironment(current,value);checkpoint();importGeneration++;current=next;draw();save();}});try{nativeEnvironment?.update(current.environment);}catch{report('environment','render failed; authoring remains available');}
+ await attach('cinema','attachCinematic');
+ await attach('canvasView','attachCanvasView',{workspace:root});
+ await attach('objectKeys','attachObjectKeys',{workspace:root});
+ nativeSessionHistory=await attach('sessionHistory','attachSessionHistory',{getHistory:()=>history.list({active:current}),onJump:(id,epoch)=>{if(!disposed&&!signal.aborted)rollback('jump',id,epoch);}});
+ await attach('historyKeys','attachHistoryKeys',{workspace:root});
+ await attach('backup','attachNativeBackup',{nativeStore:context.nativeStore,model,snapshot,getRevision:()=>importGeneration,replace:value=>{if(disposed||signal.aborted)return;checkpoint();importGeneration++;drag=null;envelopeVersion=value.version;layouts=value.layouts;current=value.active;view=value.view;savedLayouts=value.savedLayouts;draw();save();}});
+ nativeSoundtrack=await attach('soundtrack','attachNativeSoundtrack',{nativeStore:context.nativeStore});
  try{nativeSoundtrack?.update(current.themeId,current.roomId);}catch{report('soundtrack','update failed; layout authoring remains available');}
- await attach('legacyImport','./native-import.mjs','attachNativeImport',{nativeStore:context.nativeStore});
- nativeLocalImage=await attach('localImage','./native-local-image.mjs','attachLocalImage',{getRoom:()=>({key:JSON.stringify([current.themeId,current.roomId]),label:current.roomId}),resolveRoom:key=>key===JSON.stringify([current.themeId,current.roomId])?scene:null});
- nativeLocalVideo=await attach('localVideo','./native-local-video.mjs','attachNativeLocalVideo',{getSelectedTarget:()=>{const o=themeView().objects.find(o=>o.id===selectedObject);return o?{key:JSON.stringify([current.themeId,current.roomId,o.id]),label:o.name}:null;},resolveTarget:key=>{const [themeId,roomId,id]=JSON.parse(key);if(themeId!==current.themeId||roomId!==current.roomId)return null;const node=actor(id);return !node||node.parentElement===unavailableLayer||(node.parentElement===stickerLayer&&view.inspectorDock==='hidden')?null:node;}});
- nativeAssetLibrary=await attach('assetLibrary','./native-asset-library.mjs','attachNativeAssetLibrary',{onAdd:addCatalogObject});syncAssetLibrary();
- nativeGizmo=await attach('gizmo','./native-transform-gizmo.mjs','attachNativeTransformGizmo',{getSelected:gizmoSelected,commit:commitGizmo});syncGizmo();
- nativeLayers=await attach('layers','./native-layers.mjs','attachNativeLayers',{onSelect:id=>{if(disposed||signal.aborted||!themeView().objects.some(o=>o.id===id))return;selectedObject=id;syncInspector();},onVisible:(id,value)=>changeLayer(id,'visible',value),onPin:(id,value)=>changeLayer(id,'pinned',value)});syncLayers();
- await attach('tones','./native-tones.mjs','attachNativeTones');
- await attach('semanticRoom','./native-semantic-room.mjs','attachSemanticRoom');
- await attach('weather','./native-weather.mjs','attachNativeWeather');
- nativeEcology=await attach('ecology','./native-ecology.mjs','attachNativeEcology',{themes});syncEcology();if(!disposed&&!signal.aborted)syncInspector();
+ await attach('legacyImport','attachNativeImport',{nativeStore:context.nativeStore});
+ nativeLocalImage=await attach('localImage','attachLocalImage',{getRoom:()=>({key:JSON.stringify([current.themeId,current.roomId]),label:current.roomId}),resolveRoom:key=>key===JSON.stringify([current.themeId,current.roomId])?scene:null});
+ nativeLocalVideo=await attach('localVideo','attachNativeLocalVideo',{getSelectedTarget:()=>{const o=themeView().objects.find(o=>o.id===selectedObject);return o?{key:JSON.stringify([current.themeId,current.roomId,o.id]),label:o.name}:null;},resolveTarget:key=>{const [themeId,roomId,id]=JSON.parse(key);if(themeId!==current.themeId||roomId!==current.roomId)return null;const node=actor(id);return !node||node.parentElement===unavailableLayer||(node.parentElement===stickerLayer&&view.inspectorDock==='hidden')?null:node;}});
+ nativeAssetLibrary=await attach('assetLibrary','attachNativeAssetLibrary',{onAdd:addCatalogObject});syncAssetLibrary();
+ nativeGizmo=await attach('gizmo','attachNativeTransformGizmo',{getSelected:gizmoSelected,commit:commitGizmo});syncGizmo();
+ nativeLayers=await attach('layers','attachNativeLayers',{onSelect:id=>{if(disposed||signal.aborted||!themeView().objects.some(o=>o.id===id))return;selectedObject=id;syncInspector();},onVisible:(id,value)=>changeLayer(id,'visible',value),onPin:(id,value)=>changeLayer(id,'pinned',value)});syncLayers();
+ await attach('tones','attachNativeTones');
+ await attach('semanticRoom','attachSemanticRoom');
+ await attach('weather','attachNativeWeather');
+ nativeEcology=await attach('ecology','attachNativeEcology',{themes});syncEcology();if(!disposed&&!signal.aborted)syncInspector();
  if(signal.aborted)unmount();
  return {unmount,getModuleStates:()=>({...moduleStates}),exportState:snapshot,setSearch(q){if(disposed||signal.aborted)return;const next=String(q||'');if(next===query)return;query=next;drag=null;draw();},setTheme(t){if(disposed||signal.aborted)return;root.dataset.theme=t==='light'?'light':'dark';}};
 }

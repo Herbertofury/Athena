@@ -72,3 +72,10 @@ The motion lab retains rotation, signed scale, skew and the authored origin.
 It measures the transformed footprint rather than the untransformed card
 when clamping the motion copy. A copy larger than the preview stage can
 still be clipped; this never rescales or changes the saved object.
+
+At workspace startup, enabled optional modules load in at most four one-shot
+lanes alongside the room shell. They still attach in fixed order. Leaving the
+workspace prevents new queued imports and late attachments; browser imports
+already in flight may finish without changing the closed room. Optional
+module failures still leave ordinary authoring usable. No background
+polling or eager loading from other Athena routes is added.
