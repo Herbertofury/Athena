@@ -25,3 +25,22 @@ The exact 16-file source baseline (world simulation, 3D renderer and Dev Room to
 ## Promotion gate
 
 Prove world traversal, collisions, roofs/interiors, vehicles, NPC pathing, mission lifecycle, saves/migrations, cleanup, camera modes, low/high entity counts and performance in actual compatible hosts. A renderer demo is not proof of a complete open world.
+
+## Portable city topology and indoor visit prototype
+
+From the repository with Node.js 24, build to a new folder:
+```sh
+node engines/mascot-open-world/build-topology.mjs /path/to/new-city
+cd /path/to/new-city
+node explore.mjs map
+node explore.mjs route 0 29
+node explore.mjs tour hideout
+```
+
+This preserves the source-pinned 30-node, 49-connection city graph, five
+districts, ten buildings, two safehouses, and four authored entrances and
+interior exit zones. It verifies shortest road routes, exposes overlap and
+nearby authored entries, and rehearses entry/exit with the exact outdoor
+return position. The resulting standard ESM bundle is offline and portable.
+It is not a game renderer, physical traversal or collision/nav mesh, save
+import, vehicle, NPC or combat simulation, or evidence of consumer cutover.
