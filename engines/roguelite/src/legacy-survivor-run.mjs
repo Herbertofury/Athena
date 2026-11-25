@@ -86,5 +86,16 @@ export function createLegacySurvivorRun({random,format='classic',seed,sideMinute
    ...(roamingView?{roaming:roamingView}:{}),
    ...(!classic?{arenaFormat:{id:recipe.id,seconds:recipe.seconds,missedSpawns,...endurancePressure(recipe,gameTime)}}:{})};
  }
- return Object.freeze({step,choose,snapshot,location:()=>({gameTime,player:{x:player.x,y:player.y}})});
+ function frameView(){
+  const {x,y,hp,maxHp,level,xp,xpToNext,dashTimer,weapons}=player;
+  return {gameTime,offers,
+   player:{x,y,hp,maxHp,level,xp,xpToNext,dashTimer,weapons:weapons.map(({name})=>({name}))},
+   run:{...run},
+   enemies:enemies.map(({x,y,size,hp,maxHp,color,hitFlash})=>({x,y,size,hp,maxHp,color,hitFlash})),
+   gems:gems.map(({x,y,size})=>({x,y,size})),...combat.frameView(),
+   ...(roaming?{roaming:roaming.snapshot()}:{}),
+   ...(!classic?{arenaFormat:{id:recipe.id,seconds:recipe.seconds,missedSpawns,...endurancePressure(recipe,gameTime)}}:{}),
+  };
+ }
+ return Object.freeze({step,choose,snapshot,frameView,location:()=>({gameTime,player:{x:player.x,y:player.y}})});
 }

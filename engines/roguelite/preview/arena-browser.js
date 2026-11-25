@@ -31,7 +31,7 @@ function showChoices(offers){
   button.addEventListener('click',()=>{
    if(mode!=='choice'||lastOffer!==offers)return;
    if(loading){transfer++;controls(false);reportTape('Verification cancelled because you chose an upgrade.');}
-   host.choose(id);snapshot=host.snapshot();choices.replaceChildren();choicePanel.hidden=true;lastOffer=null;
+   host.choose(id);snapshot=host.frameView();choices.replaceChildren();choicePanel.hidden=true;lastOffer=null;
    transition(snapshot.run.gameOver?'finished':'running',snapshot.run.gameOver?'Run finished.':kind==='rift'?(snapshot.rift.active?'Rift entered. Your main run is paused.':'Stayed in the main expedition.'):'Upgrade equipped: '+name);
    board.focus();draw();
   });
@@ -170,14 +170,14 @@ function frame(now){
   const result=tick.status;
   if(tick.rift)setText(status,tick.rift.result==='won'?'Rift cleared. Main expedition resumed.':'Rift lost. Main expedition resumed.');
   if(result!=='running'){
-   snapshot=host.snapshot();
+   snapshot=host.frameView();
    if(result==='choice'){
     transition('choice',snapshot.portal?.awaitingDecision?'Time is paused. Choose whether to enter the rift.':'Level '+snapshot.player.level+'. Choose an upgrade.');
     showChoices(snapshot.offers);
    }else transition('finished',snapshot.run.won?(snapshot.roaming?'Expedition complete.':snapshot.arenaFormat?'Marathon complete.':'You survived five minutes.'):'Run finished. Try another seed or play again.');
   }
  }
- if(mode==='running')snapshot=host.snapshot();
+ if(mode==='running')snapshot=host.frameView();
  draw();if(mode==='running'&&!raf)raf=requestAnimationFrame(frame);
 }
 function togglePause(){
@@ -193,7 +193,7 @@ start.addEventListener('click',()=>{
  transfer++;
  if(loading)controls(false);
  host=createRecordedArena({seed:Number(seed.value),format:formatField.value});
- clearKeys();lastOffer=null;choicePanel.hidden=true;choices.replaceChildren();prior=0;leftover=0;snapshot=host.snapshot();
+ clearKeys();lastOffer=null;choicePanel.hidden=true;choices.replaceChildren();prior=0;leftover=0;snapshot=host.frameView();
  transition('running','Run started.');setText(start,'Restart run');board.focus();draw();
 });
 const readTape=get('read-tape'), verifyTapeButton=get('verify-tape'), cancelTape=get('cancel-tape');
@@ -227,7 +227,7 @@ verifyTapeButton.addEventListener('click',async()=>{
   const candidate=await decodeArenaTape(raw,{digest:sha,yieldTask:handOff,
    cancelled:()=>id!==transfer,onProgress:(n,total)=>{if(id===transfer)reportTape(`Verifying ${n.toLocaleString()} / ${total.toLocaleString()} input frames…`);}});
   if(id!==transfer)return;
-  host=candidate;clearKeys();lastOffer=null;choicePanel.hidden=true;choices.replaceChildren();snapshot=host.snapshot();
+  host=candidate;clearKeys();lastOffer=null;choicePanel.hidden=true;choices.replaceChildren();snapshot=host.frameView();
   const h=host.capture().header;
   seed.value=String(h.seed);formatField.value=h.format;
   if(host.phase()==='choice'){transition('choice',snapshot.portal?.awaitingDecision?'Select your pending rift decision.':'Select your pending upgrade.');showChoices(snapshot.offers);}
@@ -240,7 +240,7 @@ verifyTapeButton.addEventListener('click',async()=>{
 leaveRift.addEventListener('click',()=>{
  if(!host||!snapshot?.rift?.active)return;
  if(loading){transfer++;controls(false);reportTape('Verification cancelled because you left the rift.');}
- host.choose('rift-abandon');snapshot=host.snapshot();
+ host.choose('rift-abandon');snapshot=host.frameView();
  choices.replaceChildren();choicePanel.hidden=true;lastOffer=null;
  const paused=mode==='paused';
  transition(paused?'paused':'running','Rift left. Main expedition restored.');

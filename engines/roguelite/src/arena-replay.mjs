@@ -62,7 +62,7 @@ export function createRecordedArena({seed,format='classic'}={}){
  }
  return Object.freeze({
   step:({keys}={})=>advance(readMask(keys)),advance,choose,capture,
-  snapshot:host.snapshot,phase:()=>phase,canSave:()=>!truncated,
+  snapshot:host.snapshot,frameView:host.frameView,phase:()=>phase,canSave:()=>!truncated,
  });
 }
 
