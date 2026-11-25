@@ -150,3 +150,46 @@ test('generated Media mounts manual mod cue review lazily without mixing it into
   assert.equal(root.childNodes.length,0);
  }finally{controller?.unmount();env.restore();}
 });
+
+test('native Frontier source ledger opens on demand with all exact reviewed observations',async()=>{
+ const env=setup();let controller;
+ try{
+  controller=await(await component('research')).mount({container:env.container});
+  const root=env.container.shadowRoot,panel=root.getElementById('frontier-observations');
+  const catalogCount=root.getElementById('result-count').textContent;
+  const rows=()=>[...panel.querySelectorAll('[data-source-observation]')];
+  assert.equal(rows().length,0);
+  assert.equal(env.calls.length,1);
+  panel.open=true;
+  panel.dispatchEvent(new env.window.Event('toggle'));
+  for(let i=0;i<50&&!rows().length;i++) await new Promise(resolve=>setTimeout(resolve,1));
+  const groups={web:12,desktop:11,retrieval:11,performance:10,releases:20};
+  const original=Object.entries(groups).flatMap(([group,count])=>{
+   const data=JSON.parse(fs.readFileSync(path.resolve(__dirname,'../engineering/data/sources.d/frontier-'+group+'-20261124.json')));
+   assert.equal(data.length,count);return data;
+  });
+  assert.equal(rows().length,64);
+  for(const [i,node] of rows().entries()) {
+   const row=original[i], anchor=node.querySelector('a');
+   assert.equal(node.dataset.sourceObservation,row.id);
+   assert.equal(anchor.getAttribute('href'),row.url);
+   assert.equal(anchor.getAttribute('rel'),'noopener noreferrer');
+   assert.equal(anchor.textContent,row.title);
+   assert.ok(node.textContent.includes(row.observed_version));
+   assert.ok(node.textContent.includes(row.note));
+   assert.ok(node.textContent.includes('Reviewed '));
+   assert.equal(node.querySelector('time').getAttribute('datetime'),row.checked_at);
+  }
+  const query=panel.querySelector('input'), batch=panel.querySelector('select');
+  batch.value='releases';batch.dispatchEvent(new env.window.Event('change'));assert.equal(rows().length,20);
+  query.value='VulkanMod';query.dispatchEvent(new env.window.Event('input'));
+  assert.deepEqual(rows().map(x=>x.dataset.sourceObservation),['FNTRLS002']);
+  query.value='xyzzy-has-no-source';query.dispatchEvent(new env.window.Event('input'));
+  assert.match(panel.querySelector('[role=status]').textContent,/^0 of 64/);
+  assert.equal(root.getElementById('result-count').textContent,catalogCount);
+  assert.deepEqual(controller.exportState().shortlist,[]);
+  panel.open=false;panel.dispatchEvent(new env.window.Event('toggle'));
+  panel.open=true;panel.dispatchEvent(new env.window.Event('toggle'));
+  assert.deepEqual(env.calls.map(String),['catalog.json','frontier-observations.json'].map(x=>pathToFileURL(path.join(base,'research',x)).href));
+ }finally{controller?.unmount();env.restore();}
+});

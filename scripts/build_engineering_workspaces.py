@@ -94,6 +94,18 @@ def scoped_css(path,kind):
         for selectors,declarations in light_rules:
             scoped=','.join(':host([data-theme="light"]) '+part for part in selectors.split(','))
             s+=scoped+'{'+declarations+'}\n'
+    if kind=='research':
+        s += (
+            '\n#frontier-observations summary{cursor:pointer;font-weight:750}'
+            '#frontier-observations input,#frontier-observations select{width:100%;min-width:0;padding:.55rem;'
+            'border:1px solid var(--line);border-radius:.4rem;background:var(--white);color:var(--ink)}'
+            '.frontier-filters{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,15rem),1fr));'
+            'gap:.75rem;max-width:49rem}'
+            '.frontier-observation-list{display:grid;gap:.7rem;margin:1rem 0 0;padding-left:1.5rem}'
+            '.frontier-observation-list li{padding:.6rem .75rem;border:1px solid var(--line);border-radius:.4rem;overflow-wrap:anywhere}'
+            '.frontier-observation-list h4,.frontier-observation-list p{margin:0 0 .3rem}'
+            '.frontier-observation-list small{color:var(--muted)}\n'
+        )
     return s
 
 
@@ -155,6 +167,83 @@ function renderReferenceGuides(query) {
 }
 '''
 
+FRONTIER_BATCHES = {
+    'web': 'Web acquisition and downloading',
+    'desktop': 'Desktop and graphics',
+    'retrieval': 'Retrieval and data',
+    'performance': 'Native performance and game systems',
+    'releases': 'Release and compiler signals',
+}
+
+
+def frontier_observations():
+    """Package only the five explicitly reviewed Athena source batches."""
+    from urllib.parse import urlparse
+
+    entries = []
+    seen = set()
+    for ident, label in FRONTIER_BATCHES.items():
+        path = ROOT / 'engineering/data/sources.d' / f'frontier-{ident}-20261124.json'
+        rows = json.loads(path.read_text(encoding='utf-8'))
+        for row in rows:
+            url = urlparse(row['url'])
+            if row['id'] in seen or url.scheme != 'https' or not url.hostname or url.username:
+                raise ValueError('Repeated or invalid frontier source: ' + row['id'])
+            seen.add(row['id'])
+            entries.append({'batch': ident, **row})
+    return {'batches': FRONTIER_BATCHES, 'entries': entries}
+
+
+RESEARCH_FRONTIER = r'''const frontier = element('details', {id: 'frontier-observations', class: 'layer-guide'},
+  element('summary', {}, 'Frontier source observations'),
+  element('p', {}, 'Dated upstream evidence, separate from evaluated candidates. Not a benchmark, recommendation, or current-version check.'),
+  element('p', {role: 'status', 'aria-live': 'polite'}));
+const frontierStatus = frontier.querySelector('[role="status"]');
+$('catalog').querySelector('.search-row').after(frontier);
+let frontierLoading = false, frontierReady = false;
+frontier.addEventListener('toggle', async () => {
+  if (!frontier.open || frontierLoading || frontierReady || disposed) return;
+  frontierLoading = true;
+  frontierStatus.textContent = 'Opening the bundled source ledger…';
+  try {
+    const result = await fetch(new URL('./frontier-observations.json', import.meta.url), {signal: lifetime.signal});
+    if (!result.ok) throw new Error('Bundled observations unavailable');
+    const {batches, entries} = await result.json();
+    if (disposed) return;
+    const query = element('input', {type: 'search', maxlength: 300, placeholder: 'For example, VulkanMod or compiler'});
+    const batch = element('select', {}, element('option', {value: ''}, 'All batches'),
+      Object.entries(batches).map(([id, label]) => element('option', {value: id}, label)));
+    const list = element('ol', {class: 'frontier-observation-list'});
+    const indexed = entries.map(row => [row, referenceTokens(Object.values(row).join(' '))]);
+    const paint = () => {
+      const terms = referenceTokens(query.value);
+      const matches = indexed.filter(([row, index]) =>
+        (!batch.value || row.batch === batch.value) && terms.every(term => index.some(token => token.includes(term))));
+      frontierStatus.textContent = matches.length + ' of ' + entries.length + ' source observations';
+      list.replaceChildren(...matches.map(([row]) => element('li', {'data-source-observation': row.id},
+        element('h4', {}, link(row.title, row.url)),
+        element('p', {}, row.observed_version),
+        element('p', {}, row.note),
+        element('small', {}, row.id + ' · ' + batches[row.batch] + ' · ' + row.evidence.replaceAll('_', ' ') +
+          ' · Reviewed ', element('time', {datetime: row.checked_at}, dateLabel(row.checked_at)),
+          ' · Recheck after ' + row.review_after_days + ' days'))));
+    };
+    query.addEventListener('input', paint);
+    batch.addEventListener('change', paint);
+    frontier.append(element('p', {class: 'frontier-filters'}, element('label', {}, 'Search observations ', query),
+      element('label', {}, 'Source batch ', batch)), list);
+    paint();
+    frontierReady = true;
+  } catch {
+    if (!disposed) frontierStatus.textContent = 'Could not open the bundled ledger. Close and reopen to retry.';
+  } finally {
+    frontierLoading = false;
+  }
+});
+'''
+
+
+
 def build():
     outputs={};origins=[]
     def emit(path,data,source=None):
@@ -167,7 +256,7 @@ def build():
     imports=src[:split].replace('./__CORE__','./explorer-core.mjs');code=src[split:]
     code=replace(code,'document.getElementById(id)','root.getElementById(id)')
     repo_marker="const REPO = 'https://github.com/Herbertofury/Athena';"
-    code=replace(code,repo_marker,repo_marker+'\n'+RESEARCH_SOURCE_GUIDES.rstrip())
+    code=replace(code,repo_marker,repo_marker+'\n'+RESEARCH_SOURCE_GUIDES.rstrip()+'\n'+RESEARCH_FRONTIER.rstrip())
     ref_query_marker="  if ($('search').value !== state.q) $('search').value = state.q;"
     code=replace(code,ref_query_marker,ref_query_marker+'\n  renderReferenceGuides(state.q);')
     code=replace(code,"let state = parseState(location.search);","let state = parseState(route.includes('?')?route.slice(route.indexOf('?')+1):typeof initialState==='string'?initialState:initialState?.query||'');\nif(search!==undefined)state.q=String(search).slice(0,300);")
@@ -203,6 +292,8 @@ def build():
     copy(Path('research/explorer-core.mjs'),r/'explorer-core.mjs')
     manifest=json.loads((r/'build-manifest.json').read_text());catalog=next(p for p in manifest['files'] if re.fullmatch(r'docs/explorer/catalog\.[a-f0-9]+\.json',p))
     copy(Path('research/catalog.json'),ROOT/'engineering'/catalog)
+    emit(Path('research/frontier-observations.json'),
+         json.dumps(frontier_observations(), ensure_ascii=False, separators=(',', ':'))+'\n')
     # Media reuses official players, complete receipts and the existing codec/player state machines.
     m=SOURCE/'media-lab';src=(m/'media.js').read_text();split=src.index('const $=');imports="import {mountGalleryComparison} from './gallery-comparison.mjs';\n"+src[:split];code=src[split:]
     code=replace(code,'render(dataset);',"render(dataset);cleanups.push(mountGalleryComparison({container:root.querySelector('main'),cards:dataset.cards,signal:lifetime.signal}).dispose);")
