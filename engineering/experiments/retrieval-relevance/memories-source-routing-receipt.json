@@ -1,0 +1,51 @@
+{
+  "schema": "athena-source-route-receipt-v1",
+  "fixture_sha256": "bfd18cdac07d246f2f0d53a41e09217682b3e3358ab18d2130351de104f95e4b",
+  "candidate": "Memories shared offline matcher",
+  "source_commit": "219a82d312803a5b4bfdb2556e9418665fd5c15f",
+  "cases": [
+    {
+      "id": "exact-alias",
+      "mode": "exact",
+      "rows": [
+        {
+          "id": "core-unidentified-bluekiwidog-post-2125587147482869811",
+          "title": "Yvette",
+          "source": "https://x.com/BluekiwiDog/status/2125587147482869811"
+        }
+      ]
+    },
+    {
+      "id": "exact-neighbor-absent",
+      "mode": "exact",
+      "rows": []
+    },
+    {
+      "id": "exact-photo-marker",
+      "mode": "exact",
+      "rows": [
+        {
+          "id": "core-unidentified-koqona-selection-20261125",
+          "title": "Koko’s pointed-ear look",
+          "source": "https://x.com/koqona/status/2125658710080946675"
+        }
+      ]
+    },
+    {
+      "id": "exact-second-neighbor-absent",
+      "mode": "exact",
+      "rows": []
+    },
+    {
+      "id": "descriptive-identity-safe",
+      "mode": "text",
+      "rows": [
+        {
+          "id": "core-unidentified-koqona-selection-20261125",
+          "title": "Koko’s pointed-ear look",
+          "source": "https://x.com/koqona/status/2125658710080946675"
+        }
+      ]
+    }
+  ]
+}
