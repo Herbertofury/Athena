@@ -34,7 +34,7 @@ export function createRiftSession({main,createSide}={}) {
   return {status:'running',audio:reply.audio,rift};
  }
  return Object.freeze({
-  enter,step,choose:id=>(active?.side??main).choose(id),
+  enter,step,bank:()=>({...earned}),choose:id=>(active?.side??main).choose(id),
   abandon:()=>active?finish('abandoned'):null,
   captureSuspended:()=>active?{main:structuredClone(active.frozen),sideEntropy:active.side.entropyCursor?.()??null}:null,
   snapshot:()=>project(false), frameView:()=>project(true),

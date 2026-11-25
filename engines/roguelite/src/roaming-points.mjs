@@ -64,7 +64,7 @@ export function createRoamingPoints(seed) {
     }
     return found;
   }
-  return Object.freeze({advance,resolve,collect,target:()=>live?.node??null,snapshot:()=>({
+  return Object.freeze({advance,resolve,collect,balance:()=>({...balance}),target:()=>live?.node??null,snapshot:()=>({
     live:live?{...live.node,anchorX:live.anchorX,anchorY:live.anchorY,remaining:Math.max(0,live.until-elapsed)}:null,
     caches:caches.map(c=>({...c})),balance:{...balance}
   })});
