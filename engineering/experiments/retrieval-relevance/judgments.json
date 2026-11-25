@@ -1,0 +1,182 @@
+{
+  "schema": "athena-retrieval-judgments-v1",
+  "documents": [
+    {
+      "id": "fsmp-4-1-stub",
+      "text": "Faster HDT-SMP v4.1.1 legacy MCM installer can retain the same-named ESP stub when the old plugin is active or inactive. Source rules do not verify saves."
+    },
+    {
+      "id": "fsmp-4-0-no-copy",
+      "text": "Faster HDT-SMP v4.0.0 and v4.0.1 installer source lists no old MCM ESP copy rule. These revision identities remain distinct from v4.1.1."
+    },
+    {
+      "id": "fsmp-simd-choice",
+      "text": "Faster HDT-SMP installation selects one CPU option: No AVX, AVX, AVX2 or AVX512. No performance rank or hardware support was measured."
+    },
+    {
+      "id": "windows-logical",
+      "text": "Windows directory observation logical pathname bytes counts each observed filename. Two hardlink names can refer to the same unique file."
+    },
+    {
+      "id": "windows-allocation",
+      "text": "Windows observed identified allocation counts stable native file identity once. It is not reclaimable or free space."
+    },
+    {
+      "id": "windows-partial",
+      "text": "Windows comparison withholds numeric differences for partial reports, including entry caps and missing stable IDs."
+    },
+    {
+      "id": "rift-tape",
+      "text": "In Survivor Arena Rift Expedition, the main world and clock pause during an independent side run. An exported tape can restore inside the rift and return to the same main time."
+    },
+    {
+      "id": "camp-tape",
+      "text": "Camp Expedition run tape keeps earned crystal and purchased health totem rank and spent resources. There is no shared or account-wide wallet."
+    },
+    {
+      "id": "nexus-exact-asset",
+      "text": "A Nexus file ID identifies an exact archive independently of the Nexus project ID. Do not substitute the latest archive when checking an existing file."
+    },
+    {
+      "id": "modrinth-exact-version",
+      "text": "Modrinth version dependency edges identify a concrete version or a project, which are scoped differently; release names are not file or version identifiers."
+    },
+    {
+      "id": "embgemma-precision",
+      "text": "EmbeddingGemma 2 precision prefers bfloat16 where supported or float32. Publisher documentation says float16 is incompatible."
+    },
+    {
+      "id": "embgemma-dimensions",
+      "text": "EmbeddingGemma 2 supports 128 256 512 and 768 dimensions. Queries and document embeddings must agree, with normalization after truncation."
+    },
+    {
+      "id": "embgemma-multimedia",
+      "text": "EmbeddingGemma 2 selectively loads vision and audio encoders. Text, image, audio and video search can share its embedding space."
+    },
+    {
+      "id": "qwen-vl-multimedia",
+      "text": "Qwen3-VL-Embedding-2B supports text, images and video. The model card does not establish standalone audio embeddings."
+    }
+  ],
+  "queries": [
+    {
+      "id": "exact-version",
+      "group": "identity",
+      "text": "Faster HDT SMP v4.1.1 keep old MCM stub",
+      "relevance": {
+        "fsmp-4-1-stub": 3
+      },
+      "required_top1": "fsmp-4-1-stub"
+    },
+    {
+      "id": "old-version",
+      "group": "identity",
+      "text": "Faster HDT SMP v4.0.1 no MCM copy rule",
+      "relevance": {
+        "fsmp-4-0-no-copy": 3
+      },
+      "required_top1": "fsmp-4-0-no-copy"
+    },
+    {
+      "id": "exact-provider",
+      "group": "identity",
+      "text": "nexus-exact-asset",
+      "relevance": {
+        "nexus-exact-asset": 3
+      },
+      "required_top1": "nexus-exact-asset"
+    },
+    {
+      "id": "scoped-version-edge",
+      "group": "identity",
+      "text": "Modrinth version dependencies not project scope",
+      "relevance": {
+        "modrinth-exact-version": 3
+      }
+    },
+    {
+      "id": "hardlink-name",
+      "group": "filesystem",
+      "text": "hardlink two filename aliases counted in logical pathname bytes",
+      "relevance": {
+        "windows-logical": 3,
+        "windows-allocation": 1
+      }
+    },
+    {
+      "id": "physical-file",
+      "group": "filesystem",
+      "text": "deduplicate observed allocated blocks stable file identity",
+      "relevance": {
+        "windows-allocation": 3,
+        "windows-logical": 1
+      }
+    },
+    {
+      "id": "partial-no-result",
+      "group": "filesystem",
+      "text": "Windows report partial entry cap cannot compare numeric deltas",
+      "relevance": {
+        "windows-partial": 3
+      }
+    },
+    {
+      "id": "pause-in-rift",
+      "group": "game",
+      "text": "return to the suspended main clock from an active side rift after reload",
+      "relevance": {
+        "rift-tape": 3
+      }
+    },
+    {
+      "id": "spent-in-camp",
+      "group": "game",
+      "text": "recover crystal paid for totem in Camp Expedition",
+      "relevance": {
+        "camp-tape": 3
+      }
+    },
+    {
+      "id": "no-fp16",
+      "group": "model",
+      "text": "EmbeddingGemma 2 float16 incompatible bfloat16 precision",
+      "relevance": {
+        "embgemma-precision": 3
+      },
+      "required_top1": "embgemma-precision"
+    },
+    {
+      "id": "mrl",
+      "group": "model",
+      "text": "queries and documents same 256 dimension normalize truncation",
+      "relevance": {
+        "embgemma-dimensions": 3
+      }
+    },
+    {
+      "id": "audio-qualified",
+      "group": "model",
+      "text": "embedding model explicitly documents audio search in shared space",
+      "relevance": {
+        "embgemma-multimedia": 3
+      }
+    },
+    {
+      "id": "camp-ja",
+      "group": "cross-lingual",
+      "text": "キャンプでクリスタルを使って体力トーテムを建てた記録は保存される？",
+      "relevance": {
+        "camp-tape": 3
+      }
+    },
+    {
+      "id": "allocation-es",
+      "group": "cross-lingual",
+      "text": "¿Se cuentan los bloques asignados una sola vez para archivos enlazados?",
+      "relevance": {
+        "windows-allocation": 3,
+        "windows-logical": 1
+      }
+    }
+  ]
+}
