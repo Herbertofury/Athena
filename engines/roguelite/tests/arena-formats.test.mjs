@@ -4,7 +4,7 @@ import assert from 'node:assert/strict';
 import {ARENA_FORMATS,arenaFormat,endurancePressure} from '../src/arena-formats.mjs';
 import {createLegacySurvivorRun} from '../src/legacy-survivor-run.mjs';
 test('legacy remains five minutes and alternate formats define exact bounded durations',()=>{
- assert.deepEqual(ARENA_FORMATS.map(p=>p.seconds),[300,1200,1800,3600,7200,null,1200,1200]);
+ assert.deepEqual(ARENA_FORMATS.map(p=>p.seconds),[300,1200,1800,3600,7200,null,1200,1200,1200]);
  assert.equal(arenaFormat('roaming-expedition-20').roaming,true);
  const classic=createLegacySurvivorRun({random:()=>.4});
  assert.equal(classic.snapshot().arenaFormat,undefined);

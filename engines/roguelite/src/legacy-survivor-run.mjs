@@ -86,5 +86,24 @@ export function createLegacySurvivorRun({random,format='classic',seed,sideMinute
    ...(roamingView?{roaming:roamingView}:{}),
    ...(!classic?{arenaFormat:{id:recipe.id,seconds:recipe.seconds,missedSpawns,...endurancePressure(recipe,gameTime)}}:{})};
  }
- return Object.freeze({step,choose,snapshot,location:()=>({gameTime,player:{x:player.x,y:player.y}})});
+ function frameView(){
+  const {x,y,hp,maxHp,level,xp,xpToNext,dashTimer,weapons}=player;
+  return {gameTime,offers,
+   player:{x,y,hp,maxHp,level,xp,xpToNext,dashTimer,weapons:weapons.map(({name})=>({name}))},
+   run:{...run},
+   enemies:enemies.map(({x,y,size,hp,maxHp,color,hitFlash})=>({x,y,size,hp,maxHp,color,hitFlash})),
+   gems:gems.map(({x,y,size})=>({x,y,size})),...combat.frameView(),
+   ...(roaming?{roaming:roaming.snapshot()}:{}),
+   ...(!classic?{arenaFormat:{id:recipe.id,seconds:recipe.seconds,missedSpawns,...endurancePressure(recipe,gameTime)}}:{}),
+  };
+ }
+ function applyCampPerk(perk){
+  if(run.gameOver||offers)throw Error('Cannot build between decisions or after the run');
+  switch(perk){
+   case 'health': player.maxHp+=15; player.hp=Math.min(player.hp+15,player.maxHp);break;
+   case 'damage': player.dmgMult*=1.1;break;
+   default: throw Error('Unknown camp perk');
+  }
+ }
+ return Object.freeze({step,choose,snapshot,frameView,applyCampPerk,balance:()=>roaming?.balance()??{crystal:0,gold:0},location:()=>({gameTime,player:{x:player.x,y:player.y}})});
 }

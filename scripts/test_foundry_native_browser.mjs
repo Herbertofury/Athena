@@ -777,7 +777,7 @@ c.execute('UPDATE experiment_runs SET output=? WHERE experiment_id=?',(raw,int(s
    assert.equal(report.externalRequests.length,external);
   }finally{await play.close();}
  });
- if(portableUnified)await check('Exact portable Athena discovers a rift and resumes both worlds from a browser-local tape',async()=>{
+ if(portableUnified)await check('Exact portable Athena resumes a side rift and verifies a funded camp upgrade through browser-local tapes',async()=>{
   // The preceding animation proof installs a paused context-wide fake clock.
   // Replay cooperatively yields to real timers and should be tested independently.
   const replayContext=await browser.newContext({viewport:{width:1440,height:1000}});
@@ -790,6 +790,7 @@ c.execute('UPDATE experiment_runs SET output=? WHERE experiment_id=?',(raw,int(s
   play.on('console',m=>{if(m.type()==='error')errors.push(m.text());});
   try{
    const {reachRift}=await import('../engines/roguelite/tests/rift-fixture.mjs');
+   const {reachCamp}=await import('../engines/roguelite/tests/camp-fixture.mjs');
    const {encodeArenaTape,decodeArenaTape}=await import('../engines/roguelite/src/arena-replay.mjs');
    const digest=s=>createHash('sha256').update(s).digest('hex');
    const staged=reachRift(), snapshot=staged.snapshot();
@@ -827,6 +828,25 @@ c.execute('UPDATE experiment_runs SET output=? WHERE experiment_id=?',(raw,int(s
    await play.getByRole('button',{name:'Leave rift (forfeit reward)',exact:true}).click();
    assert.equal(await play.locator('#time').textContent(),parentTime);
    assert.match(await play.locator('#rift-event').textContent(),/Main expedition resumed/);
+   const camp=reachCamp(),buildStart=camp.snapshot();
+   await load('review-funded-camp.json',Buffer.from(await encodeArenaTape(camp,digest)));
+   await play.getByRole('heading',{name:'Choose a camp upgrade'}).waitFor();
+   assert.match(await play.locator('#camp-wallet').textContent(),/Crystal 12/);
+   await play.getByRole('button',{name:/Build a health totem/}).press('Enter');
+   assert.match(await play.locator('#camp-ranks').textContent(),/Health totems 1/);
+   assert.match(await play.locator('#camp-wallet').textContent(),/Crystal 0/);
+   assert.ok((await play.locator('#hp').textContent()).endsWith('/ '+String(buildStart.player.maxHp+15)));
+   const campDownload=play.waitForEvent('download');
+   await play.getByRole('button',{name:'Download run tape',exact:true}).click();
+   const campTape=path.join(scratch,'native-camp-tape.json');await (await campDownload).saveAs(campTape);
+   const campBytes=fs.readFileSync(campTape);
+   const checkedCamp=await decodeArenaTape(campBytes.toString(),{digest});
+   assert.equal(checkedCamp.snapshot().camp.ranks.health,1);
+   assert.equal(checkedCamp.snapshot().camp.spent.crystal,12);
+   await play.reload();
+   await play.getByText('Save or resume an offline run',{exact:true}).click();
+   await load('restore-built-camp.json',campBytes);
+   assert.match(await play.locator('#camp-ranks').textContent(),/Health totems 1/);
    assert.equal(await storage(),before);
    assert.deepEqual(errors,[]);
    assert.deepEqual(actions,[]);
