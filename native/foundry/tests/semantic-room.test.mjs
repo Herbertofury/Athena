@@ -11,8 +11,55 @@ test('control characters reject; unknown bounded source mode is read-only metada
 test('export allocation and cleanup errors never claim successful replacement or release',async()=>{const s=setup({createURL:()=>{throw Error('allocation failed')}});await s.load(fixture);assert.match(s.one('[data-semantic-status]').textContent,/Rejected/);assert.equal(s.one('[data-semantic-export]').hasAttribute('href'),false);s.api.dispose();let count=0;const t=setup({revokeURL:()=>{count++;throw Error('cleanup failed')}});await t.load(fixture);await t.load({...fixture,sourceName:'replacement'});assert.match(t.one('[data-semantic-status]').textContent,/unverified/);assert.match(t.one('[data-semantic-summary]').textContent,/Synthetic/);t.one('[data-semantic-close]').click();assert.match(t.one('[data-semantic-status]').textContent,/cleanup failed/);assert.equal(t.one('[data-semantic-export]').hasAttribute('href'),false);t.api.dispose();assert.ok(count>=2);});
 
 test('typed metadata patch history preserves unknown classifications, exact IDs and every unrelated field',()=>{const v=structuredClone(fixture);v.objects.push({...v.objects[0],id:'second'});const original=structuredClone(v),e=createSemanticEdits(v),row=e.value.objects[1];e.apply(e.plan('second',{role:row.role,physics:row.physics,visible:false,locked:true}));assert.deepEqual(e.value.objects[0],original.objects[0]);assert.equal(e.value.objects[1].role,'Seat');assert.equal(e.value.objects[1].physics,'Unverified');const expected=structuredClone(original);expected.objects[1].visible=false;expected.objects[1].locked=true;assert.deepEqual(e.value,expected);assert.equal(e.plan('second',{role:row.role,physics:row.physics,visible:false,locked:true}),null);e.undo();assert.deepEqual(e.value,original);e.redo();assert.deepEqual(e.value,expected);assert.throws(()=>e.plan('second',{role:'invented',physics:'Unverified',visible:true,locked:false}));assert.throws(()=>e.plan('missing',{}));for(let i=0;i<100;i++)e.apply(e.plan('second',{role:'Decoration',physics:'No collision',visible:i%2===0,locked:false}));assert.ok(e.retainedEdits<=50);assert.ok(e.retainedBytes<=256*1024);assert.deepEqual(v,original);});
-test('editing exports derivative only; original BOM bytes remain exact and retired export URLs release',async()=>{const s=setup(),v=structuredClone(fixture);v.objects.push({...v.objects[0],id:'second'});const raw='\ufeff '+JSON.stringify(v,null,3)+'\n';await s.load(raw);s.one('[data-semantic-select]').value='second';s.one('[data-semantic-select]').dispatchEvent(new s.window.Event('change'));assert.equal(s.one('[data-semantic-role]').value,'Seat');s.one('[data-semantic-visible]').checked=false;s.one('[data-semantic-locked]').checked=true;s.one('[data-semantic-apply]').click();s.one('[data-semantic-prepare]').click();const edited=JSON.parse(await s.blobs[1].text());assert.equal(edited.objects[1].visible,false);assert.equal(edited.objects[1].locked,true);assert.deepEqual(edited.objects[0],v.objects[0]);assert.equal(edited.objects[1].physics,'Unverified');assert.deepEqual(new Uint8Array(await s.blobs[0].arrayBuffer()),bytes(raw));s.one('[data-semantic-undo]').click();assert.deepEqual(s.revoked,['blob:fixture-2']);assert.equal(s.one('[data-semantic-edited]').hasAttribute('href'),false);s.one('[data-semantic-apply]').click();assert.equal(s.one('[data-semantic-redo]').disabled,false);s.one('[data-semantic-redo]').click();s.one('[data-semantic-prepare]').click();s.one('[data-semantic-close]').click();assert.deepEqual(new Set(s.revoked),new Set(['blob:fixture-1','blob:fixture-2','blob:fixture-3']));s.api.dispose();});
-test('edits fence pending replacement, invalid replacement retains edits, and new file clears history',async()=>{const s=setup();await s.load(fixture);let finish;const input=s.one('[data-semantic-file]');Object.defineProperty(input,'files',{configurable:true,value:[{size:100,arrayBuffer:()=>new Promise(r=>finish=r)}]});input.dispatchEvent(new s.window.Event('change'));s.one('[data-semantic-visible]').checked=false;s.one('[data-semantic-apply]').click();finish(bytes({...fixture,sourceName:'stale'}).buffer);await tick();assert.match(s.one('[data-semantic-summary]').textContent,/Synthetic/);assert.equal(s.one('[data-semantic-visible]').checked,false);await s.load({...fixture,future:true});assert.equal(s.one('[data-semantic-visible]').checked,false);await s.load({...fixture,sourceName:'new'});assert.equal(s.one('[data-semantic-undo]').disabled,true);assert.equal(s.one('[data-semantic-visible]').checked,true);s.api.dispose();});
+test('editing exports derivative only; original BOM bytes remain exact and retired export URLs release',async()=>{const s=setup(),v=structuredClone(fixture);v.objects.push({...v.objects[0],id:'second'});const raw='\ufeff '+JSON.stringify(v,null,3)+'\n';await s.load(raw);s.one('[data-semantic-select]').value='second';s.one('[data-semantic-select]').dispatchEvent(new s.window.Event('change'));assert.equal(s.one('[data-semantic-role]').value,'Seat');s.one('[data-semantic-visible]').checked=false;s.one('[data-semantic-locked]').checked=true;s.one('[data-semantic-apply]').click();s.one('[data-semantic-prepare]').click();const edited=JSON.parse(await s.blobs[1].text());assert.equal(edited.objects[1].visible,false);assert.equal(edited.objects[1].locked,true);assert.deepEqual(edited.objects[0],v.objects[0]);assert.equal(edited.objects[1].physics,'Unverified');assert.deepEqual(new Uint8Array(await s.blobs[0].arrayBuffer()),bytes(raw));s.one('[data-semantic-undo]').click();assert.deepEqual(s.revoked,['blob:fixture-2']);assert.equal(s.one('[data-semantic-edited]').hasAttribute('href'),false);s.one('[data-semantic-apply]').click();assert.equal(s.one('[data-semantic-redo]').disabled,false);s.one('[data-semantic-redo]').click();s.one('[data-semantic-prepare]').click();s.one('[data-semantic-close]').click();s.one('[data-semantic-discard]').click();assert.deepEqual(new Set(s.revoked),new Set(['blob:fixture-1','blob:fixture-2','blob:fixture-3']));s.api.dispose();});
+test('edits fence pending replacement, invalid replacement retains edits, and new file clears history',async()=>{const s=setup();await s.load(fixture);let finish;const input=s.one('[data-semantic-file]');Object.defineProperty(input,'files',{configurable:true,value:[{size:100,arrayBuffer:()=>new Promise(r=>finish=r)}]});input.dispatchEvent(new s.window.Event('change'));s.one('[data-semantic-visible]').checked=false;s.one('[data-semantic-apply]').click();finish(bytes({...fixture,sourceName:'stale'}).buffer);await tick();assert.match(s.one('[data-semantic-summary]').textContent,/Synthetic/);assert.equal(s.one('[data-semantic-visible]').checked,false);await s.load({...fixture,future:true});assert.equal(s.one('[data-semantic-visible]').checked,false);await s.load({...fixture,sourceName:'new'});s.one('[data-semantic-discard]').click();assert.equal(s.one('[data-semantic-undo]').disabled,true);assert.equal(s.one('[data-semantic-visible]').checked,true);s.api.dispose();});
 test('failed edited URL allocation preserves metadata and independent original export',async()=>{let calls=0;const s=setup({createURL:()=>{if(++calls>1)throw Error('synthetic allocation');return 'blob:original';}});await s.load(fixture);s.one('[data-semantic-role]').value='Decoration';s.one('[data-semantic-apply]').click();s.one('[data-semantic-prepare]').click();assert.equal(s.one('[data-semantic-role]').value,'Decoration');assert.equal(s.one('[data-semantic-export]').getAttribute('href'),'blob:original');assert.equal(s.one('[data-semantic-edited]').hasAttribute('href'),false);s.api.dispose();});
 
 test('reordered identical typed fields are no-op and preserve Redo',()=>{const e=createSemanticEdits(fixture);e.apply(e.plan('sample',{locked:true,visible:false,physics:'Unverified',role:'Seat'}));e.undo();assert.equal(e.canRedo,true);assert.equal(e.plan('sample',{locked:false,visible:true,physics:'Unverified',role:'Seat'}),null);assert.equal(e.canRedo,true);const patch=e.plan('sample',{locked:true,visible:false,physics:'Unverified',role:'Seat'});patch.before={locked:false,visible:true,physics:'Unverified',role:'Seat'};assert.equal(e.apply(patch),true);assert.equal(e.value.objects[0].visible,false);});
+
+test('a valid replacement cannot silently discard applied metadata or its export',async()=>{
+ const s=setup();await s.load(fixture);
+ s.one('[data-semantic-role]').value='Decoration';s.one('[data-semantic-apply]').click();s.one('[data-semantic-prepare]').click();
+ const replacement={...fixture,sourceName:'replacement'};
+ await s.load(replacement);
+ assert.match(s.one('[data-semantic-summary]').textContent,/Synthetic/);
+ assert.equal(s.one('[data-semantic-edited]').getAttribute('href'),'blob:fixture-2');
+ assert.equal(s.one('[data-semantic-discard-panel]').hidden,false);
+ assert.equal(s.blobs.length,2);
+ s.one('[data-semantic-keep]').click();assert.equal(s.one('[data-semantic-discard-panel]').hidden,true);
+ assert.equal(s.one('[data-semantic-role]').value,'Decoration');assert.deepEqual(s.revoked,[]);
+ await s.load(replacement);s.one('[data-semantic-discard]').click();
+ assert.match(s.one('[data-semantic-summary]').textContent,/replacement/);
+ assert.equal(s.one('[data-semantic-undo]').disabled,true);
+ assert.deepEqual(s.revoked,['blob:fixture-2','blob:fixture-1']);s.api.dispose();
+});
+
+test('closing protects unapplied input and preserves a redo-only session until explicitly discarded',async()=>{
+ const s=setup();await s.load(fixture);
+ s.one('[data-semantic-role]').value='Decoration';s.one('[data-semantic-close]').click();
+ assert.equal(s.one('[data-semantic-discard-panel]').hidden,false);
+ assert.equal(s.one('[data-semantic-role]').value,'Decoration');
+ s.one('[data-semantic-keep]').click();
+ s.one('[data-semantic-apply]').click();s.one('[data-semantic-undo]').click();
+ s.one('[data-semantic-close]').click();
+ assert.equal(s.one('[data-semantic-redo]').disabled,false);assert.deepEqual(s.revoked,[]);
+ s.one('[data-semantic-discard]').click();
+ assert.equal(s.one('[data-semantic-export]').hasAttribute('href'),false);
+ assert.deepEqual(s.revoked,['blob:fixture-1']);s.api.dispose();
+});
+
+test('a superseding rejected file cancels stale approval and a successful edit cancels pending replacement',async()=>{
+ const s=setup();await s.load(fixture);
+ s.one('[data-semantic-role]').value='Decoration';await s.load({...fixture,sourceName:'staged'});
+ assert.equal(s.one('[data-semantic-discard-panel]').hidden,false);
+ await s.load({...fixture,future:true});
+ s.one('[data-semantic-discard]').click();
+ assert.equal(s.one('[data-semantic-discard-panel]').hidden,true);
+ assert.match(s.one('[data-semantic-summary]').textContent,/Synthetic/);
+ await s.load({...fixture,sourceName:'staged again'});s.one('[data-semantic-apply]').click();
+ assert.equal(s.one('[data-semantic-discard-panel]').hidden,true);
+ s.one('[data-semantic-discard]').click();
+ assert.match(s.one('[data-semantic-summary]').textContent,/Synthetic/);
+ assert.equal(s.one('[data-semantic-role]').value,'Decoration');assert.deepEqual(s.revoked,[]);
+ s.controller.abort();assert.deepEqual(s.revoked,['blob:fixture-1']);
+});
