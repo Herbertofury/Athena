@@ -139,3 +139,19 @@ until rights and sensitive-data review; default stdout reports counts/hash only.
 Git LFS content, submodule repositories, working changes, reflogs, unreachable
 objects, remote freshness, wiki, release assets and consumer dependencies remain
 separate gates. This improves history recovery, **not deletion readiness**.
+
+## Verify a historical Agent-Foundry Skill release without installing it
+
+Use the original release ZIP and its individual JSON receipt, a local restored
+Agent-Foundry Git repository, and the exact commit and ZIP SHA-256 from
+independent release evidence:
+
+    python guidance/tools/skill_release_audit.py --archive RELEASE.zip --receipt RELEASE-RECEIPT.json --source-repo RESTORED-GIT --source-commit COMMIT --zip-sha256 SHA256
+
+The audit hashes the unchanged ZIP, checks the receipt and exact Git files,
+and reports counts of added, missing or changed members. It reads the selected
+files only and does not extract or execute Skills. A genuine historical ZIP
+can still differ from its source; a green result proves byte equality with the
+selected Git objects, not a signature, runtime trust or permission to install.
+Exit 1 means the bytes do not match source; exit 2 means input validation
+refused the audit. This does not replace the explicit review before adoption.
