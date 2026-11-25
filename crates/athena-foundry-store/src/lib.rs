@@ -451,7 +451,7 @@ pub struct LegacyReport {
     pub skipped_metadata_rows: i64,
     pub skipped_assignment_metadata_rows: usize,
 }
-fn legacy_snapshot(path: &Path) -> Result<(LegacyReport, Vec<metadata::NativeSoundtrack>)> {
+fn open_standalone_legacy(path: &Path) -> Result<Connection> {
     // A quiescent standalone SQLite backup is required; never ignore uncheckpointed WAL.
     for suffix in ["-wal", "-shm", "-journal"] {
         let mut side = path.as_os_str().to_os_string();
@@ -477,6 +477,7 @@ fn legacy_snapshot(path: &Path) -> Result<(LegacyReport, Vec<metadata::NativeSou
     }
     let db = Connection::open_with_flags(path, OpenFlags::SQLITE_OPEN_READ_ONLY)?;
     db.execute_batch("PRAGMA query_only=ON; PRAGMA trusted_schema=OFF; BEGIN;")?;
+    require_ordinary_table(&db, "metadata")?;
     let version: String = db.query_row(
         "SELECT value FROM metadata WHERE key='schema_version'",
         [],
@@ -489,16 +490,30 @@ fn legacy_snapshot(path: &Path) -> Result<(LegacyReport, Vec<metadata::NativeSou
     if integrity != "ok" {
         return Err("Legacy integrity check failed".into());
     }
-    // Verify actual source tables, not views or a guessed user_version convention.
-    for table in ["metadata", "theme_packages", "rooms", "room_soundtracks"] {
-        let kind: String = db.query_row(
-            "SELECT type FROM sqlite_master WHERE name=?1",
+    Ok(db)
+}
+
+fn require_ordinary_table(db: &Connection, table: &str) -> Result<()> {
+    let definition: Option<String> = db
+        .query_row(
+            "SELECT sql FROM sqlite_master WHERE type='table' AND name=?1",
             [table],
             |r| r.get(0),
-        )?;
-        if kind != "table" {
-            return Err("Legacy source requires ordinary tables".into());
-        }
+        )
+        .optional()?;
+    if !definition.is_some_and(|sql| {
+        sql.get(..13)
+            .is_some_and(|prefix| prefix.eq_ignore_ascii_case("CREATE TABLE "))
+    }) {
+        return Err("Legacy source requires ordinary tables".into());
+    }
+    Ok(())
+}
+
+fn legacy_snapshot(path: &Path) -> Result<(LegacyReport, Vec<metadata::NativeSoundtrack>)> {
+    let db = open_standalone_legacy(path)?;
+    for table in ["theme_packages", "rooms", "room_soundtracks"] {
+        require_ordinary_table(&db, table)?;
     }
     let c = catalog(CATALOG)?;
     let themes: HashSet<_> = c.themes.iter().map(|t| t.id.as_str()).collect();
@@ -629,6 +644,8 @@ fn legacy_snapshot(path: &Path) -> Result<(LegacyReport, Vec<metadata::NativeSou
         .count();
     Ok((report, assignments))
 }
+pub mod legacy_history;
+
 pub fn inspect_legacy(path: &Path) -> Result<LegacyReport> {
     Ok(legacy_snapshot(path)?.0)
 }

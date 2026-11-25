@@ -44,7 +44,7 @@ jobs:
         run: cargo build --locked --manifest-path engineering/apps/atlas-lab/Cargo.toml
       - name: Build and extract unsigned candidate from exact current binaries
         run: python scripts/package_candidate.py --binary crates/athena-foundry-store/target/debug/athena-foundry-store${{ runner.os == 'Windows' && '.exe' || '' }} --engine engineering/apps/atlas-lab/target/debug/atlas-lab${{ runner.os == 'Windows' && '.exe' || '' }} --platform ${{ runner.os == 'Windows' && 'windows' || 'linux' }} --output candidate-artifact --extract-to candidate-extracted
-      - name: Portable Feature Foundry v24 review and import acceptance
+      - name: Portable Feature Foundry v24 review, import and history archive
         run: python native/foundry/tests/portable_legacy_acceptance.py candidate-extracted
       - name: Unified dual-store HTTP acceptance
         env:

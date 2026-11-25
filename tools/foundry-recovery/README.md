@@ -130,3 +130,21 @@ The four-file bundle retains exact selected scrapbook UTF-8 bytes, not unrelated
 [Read-only Scrapbook reconciliation](scrapbook/RECONCILIATION.md) verifies a reviewed bundle against a standalone native snapshot and reports exact, missing and different mapped placements without opening the original database in SQLite. This is semantic migration evidence, not visual acceptance or retirement clearance.
 
 [Scrapbook merge planning](scrapbook/MERGE-PLAN.md) can prepare a new private candidate that preserves unrelated native layouts and refuses conflicting IDs/stacking. It never applies the candidate or overwrites the original database.
+
+### Preserve original v24 events without replaying them
+
+Use the reviewed standalone copy created by the same portable launcher. Pass
+its exact SHA-256 and a **new** output filename in a private data folder:
+
+```sh
+python launch.py --archive-reviewed-legacy-history 'reviewed-v24.sqlite3' --reviewed-sha256 EXACT_SHA256 --legacy-destination 'original-v24-history.json'
+```
+
+The launcher prints a count and digests, not event contents. The separate
+local JSON stores the original event IDs, labels, timestamps, exact UTF-8 JSON
+payload text and a digest of each payload. It is **private plaintext**, not a
+shareable diagnostic or a restore point. Athena does not execute old event
+payloads, promote them to active revisions, or alter the reviewed source. The
+operation refuses existing output, stale sidecars, invalid payloads, more than
+5,000 events, or events over 256 KiB / aggregate input over 6 MiB; it never
+publishes a partial archive. Keep the reviewed original for all other data.
