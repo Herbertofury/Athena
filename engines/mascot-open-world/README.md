@@ -44,3 +44,17 @@ nearby authored entries, and rehearses entry/exit with the exact outdoor
 return position. The resulting standard ESM bundle is offline and portable.
 It is not a game renderer, physical traversal or collision/nav mesh, save
 import, vehicle, NPC or combat simulation, or evidence of consumer cutover.
+
+### Single-file Midnight Atlas
+
+Generate the visual prototype and open it directly:
+```sh
+node engines/mascot-open-world/build-atlas.mjs Midnight-Atlas.html
+```
+
+The finished HTML works without Node, a server, or network access. It
+includes the exact same route and doorway logic as the CLI. Choose start/end
+nodes by keyboard or pointer, zoom the city, inspect a coordinate, and
+compare the authored indoor spawn and return points. The floor plan shows
+the original room geometry as a rehearsal, not a collision simulation.
+The view stores no data and does not start an animation loop.

@@ -57,3 +57,15 @@ jobs:
           package-manager-cache: false
       - name: Build, relocate and replay actual pinned GameSync card rules
         run: node --test engines/card-game/tests/replay.test.mjs engines/roguelite/tests/fixed-step.test.mjs engines/mascot-open-world/tests/topology.test.mjs
+      - name: Install the locked browser test tooling
+        run: npm ci --ignore-scripts
+      - name: Install Chromium for offline atlas verification
+        run: npx playwright install chromium
+      - name: Real Chromium atlas routing, interiors and mobile file preview
+        env:
+          ATHENA_CITY_ATLAS_EVIDENCE: atlas-${{ runner.os }}
+        run: node --test engines/mascot-open-world/tests/atlas-file-browser.mjs
+      - uses: actions/upload-artifact@v4
+        with:
+          name: mascot-atlas-visual-proof-${{ runner.os }}
+          path: atlas-${{ runner.os }}/evidence/
