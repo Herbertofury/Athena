@@ -1,0 +1,134 @@
+[
+  {
+    "id": "SCRP25001",
+    "title": "firecrawl/firecrawl acquisition role and integration review",
+    "url": "https://github.com/firecrawl/firecrawl/blob/main/apps/local/README.md",
+    "observed_version": "Source blob a5374b1003efa753bc526fae3231c5a0b23801b4",
+    "topic": "frontier-web-acquisition",
+    "note": "Scrape, crawl, map and extraction platform; optional Rust Firecrawl Local executable. Evaluate the native Local adapter for Athena/document acquisition and compatible Rust workers, retaining the host's durable queue, exact identities, complete results and provenance.",
+    "checked_at": "2026-11-25",
+    "review_after_days": 14,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "SCRP25002",
+    "title": "unclecode/crawl4ai acquisition role and integration review",
+    "url": "https://github.com/unclecode/crawl4ai",
+    "observed_version": "Official documentation inspected 2026-11-25; not a tested package pin",
+    "topic": "frontier-web-acquisition",
+    "note": "Async Python web extraction and browser orchestration. Candidate Athena extraction worker using deterministic schemas, pooled browser resources and complete recorded responses. Preserve original HTML alongside parsed results.",
+    "checked_at": "2026-11-25",
+    "review_after_days": 14,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "SCRP25003",
+    "title": "browser-use/browser-use acquisition role and integration review",
+    "url": "https://github.com/browser-use/browser-use",
+    "observed_version": "Official documentation inspected 2026-11-25; not a tested package pin",
+    "topic": "frontier-web-acquisition",
+    "note": "Agent-driven interactive browser workflows. Optional final escalation for extraction requiring actual interactions. Turn repeatable routes into deterministic adapters once understood.",
+    "checked_at": "2026-11-25",
+    "review_after_days": 14,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "SCRP25004",
+    "title": "apify/crawlee acquisition role and integration review",
+    "url": "https://crawlee.dev/js/api/playwright-crawler/class/AdaptivePlaywrightCrawler",
+    "observed_version": "Official documentation inspected 2026-11-25; not a tested package pin",
+    "topic": "frontier-web-acquisition",
+    "note": "TypeScript crawler orchestration across HTTP and browser transports. Reuse queue/transport/parser separation and resource-aware scheduling in compatible Node/TypeScript workers. Keep all discovered work queued while controlling simultaneous work.",
+    "checked_at": "2026-11-25",
+    "review_after_days": 14,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "SCRP25005",
+    "title": "scrapy/scrapy acquisition role and integration review",
+    "url": "https://github.com/scrapy/scrapy/blob/master/scrapy/extensions/throttle.py",
+    "observed_version": "Source blob 44876ebcc1742bd50d8f7ccf3e4fc482b698b9f7",
+    "topic": "frontier-web-acquisition",
+    "note": "Python request scheduling, middleware, extraction and resumable crawls. Transfer per-origin fairness, retry classification, durable request state and error-aware delay behavior to host acquisition layers without introducing an unnecessary replacement framework.",
+    "checked_at": "2026-11-25",
+    "review_after_days": 14,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "SCRP25006",
+    "title": "microsoft/markitdown acquisition role and integration review",
+    "url": "https://github.com/microsoft/markitdown/blob/main/packages/markitdown/src/markitdown/_markitdown.py",
+    "observed_version": "Source blob 53ba8b1afd0225f40a12038a73512f3a8b52d56d",
+    "topic": "frontier-web-acquisition",
+    "note": "Document-to-Markdown conversion after acquisition. Use Athena's validated fetch path once, preserve original bytes and metadata, then dispatch conversion by content type. Supply seekable spooled streams for large inputs.",
+    "checked_at": "2026-11-25",
+    "review_after_days": 14,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "SCRP25007",
+    "title": "D4Vinci/Scrapling acquisition role and integration review",
+    "url": "https://github.com/D4Vinci/Scrapling",
+    "observed_version": "Official documentation inspected 2026-11-25; not a tested package pin",
+    "topic": "frontier-web-acquisition",
+    "note": "HTTP/browser sessions, parser and crawling framework. Candidate parsing/adapter layer for changing markup, with fixture replay and validation of recovered fields. Reuse already fetched responses.",
+    "checked_at": "2026-11-25",
+    "review_after_days": 14,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "SCRP25008",
+    "title": "Genymobile/scrcpy acquisition role and integration review",
+    "url": "https://github.com/Genymobile/scrcpy",
+    "observed_version": "Official documentation inspected 2026-11-25; not a tested package pin",
+    "topic": "frontier-web-acquisition",
+    "note": "Android screen mirroring and input control. Keep separate for an explicitly requested Android-only extraction workflow. Do not add it to ordinary web acquisition dependencies.",
+    "checked_at": "2026-11-25",
+    "review_after_days": 14,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "SCRP25009",
+    "title": "alirezamika/autoscraper acquisition role and integration review",
+    "url": "https://github.com/alirezamika/autoscraper/blob/master/autoscraper/auto_scraper.py",
+    "observed_version": "Source blob 73f90a662473cb75566d534743f3e3550b11b8f6",
+    "topic": "frontier-web-acquisition",
+    "note": "Example-driven learned DOM extraction rules. Use as adapter-authoring assistance with pre-fetched HTML and multiple recorded page variants. Keep the host's network/cancellation/error policies.",
+    "checked_at": "2026-11-25",
+    "review_after_days": 14,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "SCRP25010",
+    "title": "lwthiker/curl-impersonate acquisition role and integration review",
+    "url": "https://github.com/lexiforest/curl_cffi",
+    "observed_version": "Official documentation inspected 2026-11-25; not a tested package pin",
+    "topic": "frontier-web-acquisition",
+    "note": "Browser-compatible TLS/HTTP handshakes through modified curl/libcurl. Keep transport compatibility optional behind the host acquisition contract. Compare maintained descendants such as lexiforest/curl_cffi before selecting a package.",
+    "checked_at": "2026-11-25",
+    "review_after_days": 14,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "SCRP25011",
+    "title": "GitHub Search API pagination and retrieval window",
+    "url": "https://docs.github.com/en/rest/search/search",
+    "observed_version": "REST documentation inspected 2026-11-25",
+    "topic": "frontier-web-acquisition",
+    "note": "Retrieve every available page and expose incomplete_results and the provider 1000-result window; do not claim unreturned entries are absent.",
+    "checked_at": "2026-11-25",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "SCRP25012",
+    "title": "curl_cffi maintained transport challenger",
+    "url": "https://github.com/lexiforest/curl_cffi",
+    "observed_version": "GitHub release v0.17.0 observed 2026-11-25; not installed",
+    "topic": "frontier-web-acquisition",
+    "note": "Compare maintained browser-compatible HTTP transport without conflating TLS behavior with JavaScript rendering.",
+    "checked_at": "2026-11-25",
+    "review_after_days": 14,
+    "evidence": "primary_documented"
+  }
+]

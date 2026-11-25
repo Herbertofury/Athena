@@ -1,0 +1,316 @@
+{
+  "schemaVersion": 1,
+  "reviewDate": "2026-11-25",
+  "requestedPost": "https://x.com/Lucy_love_AI/status/2125396894784561159",
+  "coverage": {
+    "expectedRepositories": 10,
+    "resolvedRepositories": 10,
+    "primaryRepositoriesInspected": 10,
+    "unresolvedRepositoryIdentities": 0,
+    "originalPostDirectlyRead": false,
+    "provenance": "Direct X access returned HTTP 403. Initial indexed attributed copies agreed on all ten names. During final review, the live teapawt mirror displayed the complete attributed post, and its individual status page matched the exact requested status ID2125396894784561159 and all ten GitHub links: https://teapawt.org/Lucy_love_AI/status/2125396894784561159. Technical claims were checked against primary project sources.",
+    "postEvidence": [
+      {
+        "url": "https://teapawt.org/openagentxi/with_replies"
+      },
+      {
+        "url": "https://aiproducthub.cn/status/79553.html"
+      },
+      {
+        "url": "https://teapawt.org/Lucy_love_AI/status/2125396894784561159",
+        "observed": "Live attributed mirror of the exact status ID with all ten links, read during final review."
+      }
+    ],
+    "mirroredPostDirectlyRead": true
+  },
+  "repositories": [
+    {
+      "repository": "firecrawl/firecrawl",
+      "url": "https://github.com/firecrawl/firecrawl",
+      "role": "Scrape, crawl, map and extraction platform; optional Rust Firecrawl Local executable.",
+      "verifiedCapabilities": [
+        "Local scrape/crawl/map and Firecrawl v2 localhost API",
+        "Static HTTP with optional Chrome rendering",
+        "Local PDF and Office parsing",
+        "Shared native HTML cleaning code"
+      ],
+      "adoption": "Evaluate the native Local adapter for Athena/document acquisition and compatible Rust workers, retaining the host's durable queue, exact identities, complete results and provenance.",
+      "limits": [
+        "Local jobs live in memory and expire one hour after starting",
+        "Default local crawl limit is 100; do not mistake this for exhaustive completion",
+        "Local skips JSON and summary formats with warnings and ignores browser actions",
+        "Blocked local single-page requests may fall back to cloud; FIRECRAWL_CLOUD=off explicitly disables cloud handoff",
+        "No benchmark here establishes performance in our hosts"
+      ],
+      "sources": [
+        {
+          "url": "https://github.com/firecrawl/firecrawl"
+        },
+        {
+          "url": "https://github.com/firecrawl/firecrawl/blob/main/apps/local/README.md",
+          "blobSha": "a5374b1003efa753bc526fae3231c5a0b23801b4"
+        }
+      ]
+    },
+    {
+      "repository": "unclecode/crawl4ai",
+      "url": "https://github.com/unclecode/crawl4ai",
+      "role": "Async Python web extraction and browser orchestration.",
+      "verifiedCapabilities": [
+        "CSS, XPath and regex extraction without an LLM",
+        "Markdown with headings, links, tables and citation references",
+        "Reusable sessions and browser pooling",
+        "Cached responses and memory-adaptive arun_many dispatcher",
+        "BFS, DFS, best-first traversal and resume state",
+        "Media, srcset, iframe and metadata extraction"
+      ],
+      "adoption": "Candidate Athena extraction worker using deterministic schemas, pooled browser resources and complete recorded responses. Preserve original HTML alongside parsed results.",
+      "limits": [
+        "AdaptiveCrawler may stop when it judges a query answered; this is unsuitable as the completion condition for exhaustive catalogs",
+        "Hosted cloud and local library have different setup and cost models",
+        "Current source describes v0.9.6 dated 2026-11-20; do not assume older APIs",
+        "Do not adopt source performance claims as measured host results"
+      ],
+      "sources": [
+        {
+          "url": "https://github.com/unclecode/crawl4ai"
+        },
+        {
+          "url": "https://github.com/unclecode/crawl4ai"
+        }
+      ]
+    },
+    {
+      "repository": "browser-use/browser-use",
+      "url": "https://github.com/browser-use/browser-use",
+      "role": "Agent-driven interactive browser workflows.",
+      "verifiedCapabilities": [
+        "Current 1.0.8 architecture runs Python against raw CDP in a persistent REPL using Pydantic AI",
+        "Supports explicit local browser selection",
+        "Agent output can be used to discover repeatable extraction steps"
+      ],
+      "adoption": "Optional final escalation for extraction requiring actual interactions. Turn repeatable routes into deterministic adapters once understood.",
+      "limits": [
+        "Current browser and model defaults are cloud-backed",
+        "Version pinning is needed because the 1.x interface differs materially from older examples",
+        "Agent planning is not the default low-latency path for metadata, RSS or simple HTTP catalogs",
+        "No feedback or telemetry message was sent during this review"
+      ],
+      "sources": [
+        {
+          "url": "https://github.com/browser-use/browser-use"
+        }
+      ]
+    },
+    {
+      "repository": "apify/crawlee",
+      "url": "https://github.com/apify/crawlee",
+      "role": "TypeScript crawler orchestration across HTTP and browser transports.",
+      "verifiedCapabilities": [
+        "Persistent request queues",
+        "Configurable retries, session lifecycle and storage",
+        "AutoscaledPool considers CPU, memory and event-loop pressure",
+        "Experimental AdaptivePlaywrightCrawler can switch to HTTP-only extraction"
+      ],
+      "adoption": "Reuse queue/transport/parser separation and resource-aware scheduling in compatible Node/TypeScript workers. Keep all discovered work queued while controlling simultaneous work.",
+      "limits": [
+        "AdaptivePlaywrightCrawler is explicitly experimental and constrains its handler interface",
+        "Concurrency limits must not become catalog/result limits",
+        "Old guessed source path packages/core/src/autoscaling/autoscaled_pool.ts returned 404; authoritative API documentation was used instead"
+      ],
+      "sources": [
+        {
+          "url": "https://github.com/apify/crawlee"
+        },
+        {
+          "url": "https://crawlee.dev/js/api/core/class/AutoscaledPool"
+        },
+        {
+          "url": "https://crawlee.dev/js/api/playwright-crawler/class/AdaptivePlaywrightCrawler"
+        }
+      ]
+    },
+    {
+      "repository": "scrapy/scrapy",
+      "url": "https://github.com/scrapy/scrapy",
+      "role": "Python request scheduling, middleware, extraction and resumable crawls.",
+      "verifiedCapabilities": [
+        "JOBDIR persists queued/seen requests and spider state",
+        "Per-slot AutoThrottle derives target delay from observed latency and target concurrency",
+        "Throttle decreases are smoothed and increases are immediate",
+        "Fast non-200 responses cannot reduce throttle delay"
+      ],
+      "adoption": "Transfer per-origin fairness, retry classification, durable request state and error-aware delay behavior to host acquisition layers without introducing an unnecessary replacement framework.",
+      "limits": [
+        "A JOBDIR is owned by one run and must not be shared between spiders/jobs",
+        "Documented resume uses clean shutdown",
+        "JavaScript rendering remains a separate transport concern"
+      ],
+      "sources": [
+        {
+          "url": "https://docs.scrapy.org/en/latest/topics/autothrottle.html"
+        },
+        {
+          "url": "https://docs.scrapy.org/en/latest/topics/jobs.html"
+        },
+        {
+          "url": "https://github.com/scrapy/scrapy/blob/master/scrapy/extensions/throttle.py",
+          "blobSha": "44876ebcc1742bd50d8f7ccf3e4fc482b698b9f7"
+        }
+      ]
+    },
+    {
+      "repository": "microsoft/markitdown",
+      "url": "https://github.com/microsoft/markitdown",
+      "role": "Document-to-Markdown conversion after acquisition.",
+      "verifiedCapabilities": [
+        "HTML, PDF, Office, text formats and other converters",
+        "Optional per-format dependency groups and plugins",
+        "Injected requests_session support",
+        "convert_stream accepts already fetched content"
+      ],
+      "adoption": "Use Athena's validated fetch path once, preserve original bytes and metadata, then dispatch conversion by content type. Supply seekable spooled streams for large inputs.",
+      "limits": [
+        "convert_response collects the body in BytesIO",
+        "convert_stream buffers an entire nonseekable stream",
+        "Markdown is not a high-fidelity source-artifact replacement",
+        "Image captioning and speech transcription can depend on hosted services",
+        "It is not crawl orchestration"
+      ],
+      "sources": [
+        {
+          "url": "https://github.com/microsoft/markitdown"
+        },
+        {
+          "url": "https://github.com/microsoft/markitdown"
+        },
+        {
+          "url": "https://github.com/microsoft/markitdown/blob/main/packages/markitdown/src/markitdown/_markitdown.py",
+          "blobSha": "53ba8b1afd0225f40a12038a73512f3a8b52d56d"
+        }
+      ]
+    },
+    {
+      "repository": "D4Vinci/Scrapling",
+      "url": "https://github.com/D4Vinci/Scrapling",
+      "role": "HTTP/browser sessions, parser and crawling framework.",
+      "verifiedCapabilities": [
+        "Async fetchers and persistent sessions",
+        "CSS/XPath and similarity-based element relocation",
+        "Streaming spider output and pause/resume",
+        "Per-domain throttling with Retry-After",
+        "Recorded-response development replay",
+        "Existing-response parser integration with Scrapy"
+      ],
+      "adoption": "Candidate parsing/adapter layer for changing markup, with fixture replay and validation of recovered fields. Reuse already fetched responses.",
+      "limits": [
+        "A similarity match is not proof of field identity or correctness",
+        "Preserve required fields, pagination and type checks before accepting selector recovery",
+        "Upstream universal access/bypass marketing was not verified and is not an acceptance claim"
+      ],
+      "sources": [
+        {
+          "url": "https://github.com/D4Vinci/Scrapling"
+        }
+      ]
+    },
+    {
+      "repository": "Genymobile/scrcpy",
+      "url": "https://github.com/Genymobile/scrcpy",
+      "role": "Android screen mirroring and input control.",
+      "verifiedCapabilities": [
+        "USB/TCP-IP device screen/control",
+        "Audio forwarding and recording",
+        "Virtual display and physical input simulation"
+      ],
+      "adoption": "Keep separate for an explicitly requested Android-only extraction workflow. Do not add it to ordinary web acquisition dependencies.",
+      "limits": [
+        "Not a web crawler, HTML parser or structured extraction engine",
+        "Requires an Android device and applicable device permissions"
+      ],
+      "sources": [
+        {
+          "url": "https://github.com/Genymobile/scrcpy"
+        }
+      ]
+    },
+    {
+      "repository": "alirezamika/autoscraper",
+      "url": "https://github.com/alirezamika/autoscraper",
+      "role": "Example-driven learned DOM extraction rules.",
+      "verifiedCapabilities": [
+        "Build reusable rules from requested sample values",
+        "Supply existing HTML instead of fetching",
+        "Save/load learned rules as JSON",
+        "Exact/similar result modes"
+      ],
+      "adoption": "Use as adapter-authoring assistance with pre-fetched HTML and multiple recorded page variants. Keep the host's network/cancellation/error policies.",
+      "limits": [
+        "Source _fetch_html uses direct requests.get with no default timeout/status check",
+        "request_args.pop('headers') mutates the caller's dictionary",
+        "Learned rules rely on class/style attributes and structural/positional traversal",
+        "No-maintenance claims are not justified"
+      ],
+      "sources": [
+        {
+          "url": "https://github.com/alirezamika/autoscraper"
+        },
+        {
+          "url": "https://github.com/alirezamika/autoscraper/blob/master/autoscraper/auto_scraper.py",
+          "blobSha": "73f90a662473cb75566d534743f3e3550b11b8f6"
+        }
+      ]
+    },
+    {
+      "repository": "lwthiker/curl-impersonate",
+      "url": "https://github.com/lwthiker/curl-impersonate",
+      "role": "Browser-compatible TLS/HTTP handshakes through modified curl/libcurl.",
+      "verifiedCapabilities": [
+        "Browser TLS extension and cipher configuration",
+        "HTTP/2 handshake configuration",
+        "CLI and libcurl integration"
+      ],
+      "adoption": "Keep transport compatibility optional behind the host acquisition contract. Compare maintained descendants such as lexiforest/curl_cffi before selecting a package.",
+      "limits": [
+        "Inspected original profile table includes Chrome 116/Firefox 117 and older profiles",
+        "Does not execute application JavaScript",
+        "Handshake emulation is not every browser behavior and does not guarantee access"
+      ],
+      "sources": [
+        {
+          "url": "https://github.com/lwthiker/curl-impersonate"
+        },
+        {
+          "url": "https://github.com/lexiforest/curl_cffi"
+        }
+      ]
+    }
+  ],
+  "implementationGuidance": {
+    "proposedAcquisitionOrder": [
+      "Existing structured API or RSS",
+      "Pooled ordinary HTTP",
+      "Evidence-selected compatible HTTP adapter",
+      "Pooled headless browser",
+      "Explicitly selected interactive agent"
+    ],
+    "resultContract": [
+      "requested and final URL",
+      "HTTP status/content type/retrieval time",
+      "transport and retry history",
+      "raw content or durable reference",
+      "versioned extraction and provenance",
+      "explicit incomplete/error state"
+    ],
+    "zeroLossChecks": [
+      "Control simultaneous work, not result quantity",
+      "Distinguish terminal pagination from configured limits",
+      "Coalesce only identical request identity and preserve independent consumers",
+      "Never let fast errors increase request rate",
+      "Use deterministic field validation and replay fixtures",
+      "Fetch once and parse existing complete content",
+      "Keep source files and rich original metadata alongside Markdown"
+    ],
+    "evidenceBoundary": "All adoption recommendations are engineering judgments informed by source inspection. No upstream marketing performance number is presented as a benchmark in Athena or its consumer repositories. Individual consumer changes require their own equivalent-work runtime tests."
+  }
+}

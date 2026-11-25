@@ -1,0 +1,187 @@
+{
+  "repository": "Herbertofury/Gamesync",
+  "scope": "Only materialized web acquisition request helper sources and their complete portable contract tests. This is not a whole-repository, production bundle or native Opera release assessment.",
+  "remote_baseline": "c1d9cc2239ead31d20244e4353e6dd705ec36cda",
+  "local_checkpoint": "601403dc15d6a97b0085f90d777fc6f0efd457d5",
+  "source_hashes": {
+    "scope": "Materialized request helper sources only; not the full private repository. Tests execute real local HTTP in isolated Node contexts. No removal, port or bridge activation applied.",
+    "sha256": {
+      "app/shared/request-dedup.js": "8ca24a4e04cdbdbf0a8be07c293fe8c53bfa57922c0c31be051d993b21c5935f",
+      "app/shared/request-dedup-module.js": "79bce17705ac17ef24e2a2649a628c864b40da91b89f09f289bd72a197e508fd"
+    },
+    "workload": {
+      "path": "app/test/bounty/request-dedup-regression.test.mjs",
+      "original_sha256": "f4d3283bba2ab4e49684eb8d212d6379ff4ae38f753f620aeac017d8d936755d",
+      "instrumented_sha256": "9ac8892ba8456cc6e30d96d5b755d1c287a9094d1eccd41e6f4c59463c19f81b",
+      "change": "VM filename attribution metadata only in isolated assessment copy. Production helper bytes unchanged."
+    }
+  },
+  "tool_binary_sha256": {
+    "shrink-anything": "a9f4607fc8c3f001e6877bc13b71ebc3ef07a557e1bafc7c63a5d7a48f4e3a55",
+    "fast-anything": "e09da95820aa80cea7c29e46a5b77a4b454e45326195d650f3f997bf09cc9276",
+    "rust-anything": "d23895d41e1b70202170ebea3733e63cd2f1a3f650f1ccc15c9b61232474ed8b"
+  },
+  "tools": {
+    "shrink-anything": "0.1.1",
+    "fast-anything": "0.8.8",
+    "rust-anything": "4.1.0"
+  },
+  "commands_executed": [
+    {
+      "name": "shrink-doctor",
+      "command": [
+        "/workspace/scratch/e253ed1a6b67/tooling/bin/shrink-anything",
+        "-C",
+        "/workspace/scratch/e253ed1a6b67/tooling/assessments/Gamesync",
+        "doctor"
+      ],
+      "exitCode": 0,
+      "elapsed_seconds": 0.0036055570000144144
+    },
+    {
+      "name": "shrink-scan",
+      "command": [
+        "/workspace/scratch/e253ed1a6b67/tooling/bin/shrink-anything",
+        "-C",
+        "/workspace/scratch/e253ed1a6b67/tooling/assessments/Gamesync/assessment-source",
+        "scan",
+        "--json",
+        "--lib"
+      ],
+      "exitCode": 0,
+      "elapsed_seconds": 0.04560087200002272
+    },
+    {
+      "name": "fast-doctor",
+      "command": [
+        "/workspace/scratch/e253ed1a6b67/tooling/bin/fast-anything",
+        "-C",
+        "/workspace/scratch/e253ed1a6b67/tooling/assessments/Gamesync",
+        "doctor"
+      ],
+      "exitCode": 0,
+      "elapsed_seconds": 0.057704960000023675
+    },
+    {
+      "name": "fast-scan",
+      "command": [
+        "/workspace/scratch/e253ed1a6b67/tooling/bin/fast-anything",
+        "-C",
+        "/workspace/scratch/e253ed1a6b67/tooling/assessments/Gamesync",
+        "scan",
+        "--",
+        "node",
+        "--test",
+        "--test-isolation=none",
+        "app/test/bounty/provider-request-dedup.test.js",
+        "app/test/bounty/request-dedup-regression.test.mjs"
+      ],
+      "exitCode": 0,
+      "elapsed_seconds": 0.5069831480000175
+    },
+    {
+      "name": "rust-analyze",
+      "command": [
+        "/workspace/scratch/e253ed1a6b67/tooling/bin/rust-anything",
+        "analyze",
+        "/workspace/scratch/e253ed1a6b67/tooling/assessments/Gamesync/assessment-source",
+        "--lang",
+        "ts",
+        "--json"
+      ],
+      "exitCode": 0,
+      "elapsed_seconds": 0.003617749999989428
+    },
+    {
+      "name": "rust-profile",
+      "command": [
+        "/workspace/scratch/e253ed1a6b67/tooling/bin/rust-anything",
+        "profile",
+        "/workspace/scratch/e253ed1a6b67/tooling/assessments/Gamesync",
+        "--lang",
+        "ts",
+        "--json",
+        "--",
+        "node",
+        "--test",
+        "--test-isolation=none",
+        "app/test/bounty/provider-request-dedup.test.js",
+        "app/test/bounty/request-dedup-regression.test.mjs"
+      ],
+      "exitCode": 0,
+      "elapsed_seconds": 0.7568125880000025
+    },
+    {
+      "name": "fast-scan-attributed",
+      "command": [
+        "/workspace/scratch/e253ed1a6b67/tooling/bin/fast-anything",
+        "-C",
+        "/workspace/scratch/e253ed1a6b67/tooling/assessments/Gamesync",
+        "scan",
+        "--",
+        "node",
+        "--test",
+        "--test-isolation=none",
+        "app/test/bounty/provider-request-dedup.test.js",
+        "app/test/bounty/request-dedup-regression.test.mjs"
+      ],
+      "exitCode": 0,
+      "elapsed_seconds": 0.5448045269999966,
+      "reason": "Add VM filename metadata for accurate helper source attribution; original profile preserved."
+    },
+    {
+      "name": "rust-profile-attributed",
+      "command": [
+        "/workspace/scratch/e253ed1a6b67/tooling/bin/rust-anything",
+        "profile",
+        "/workspace/scratch/e253ed1a6b67/tooling/assessments/Gamesync",
+        "--lang",
+        "ts",
+        "--json",
+        "--",
+        "node",
+        "--test",
+        "--test-isolation=none",
+        "app/test/bounty/provider-request-dedup.test.js",
+        "app/test/bounty/request-dedup-regression.test.mjs"
+      ],
+      "exitCode": 0,
+      "elapsed_seconds": 0.5505233230001068,
+      "reason": "Add VM filename metadata for accurate helper source attribution; original profile preserved."
+    }
+  ],
+  "dispositions": [
+    {
+      "tool": "shrink-anything",
+      "assessment": "completed",
+      "decision": "No removal or cut applied. File candidates come from an intentionally narrow source scope with external/classic/ESM host consumers; source inspection has already confirmed the classic HTML loader. Duplicate source variants retain distinct public/loading and host-runtime contracts."
+    },
+    {
+      "tool": "fast-anything",
+      "assessment": "completed",
+      "decision": "No supported portable hotspot of material size found in this exercised workload. Fetch is asynchronous browser I/O; class methods and closure-owned lifecycle are not eligible pure top-level units. Preserve native Web API behavior, request ownership and cancellation semantics."
+    },
+    {
+      "tool": "rust-anything",
+      "assessment": "completed",
+      "decision": "Analyzer/profiler suggestions remain candidates, not proven ports. The suggested exported fetch wrapper carries browser-native Headers, Response/ReadableStream, URL, AbortSignal and Promise identities; plain-data bridge assumptions are not met. I/O lifecycle/ownership fixes remove measured duplicate requests directly. No bridge installation, rewrite, activation or unsupported performance claim."
+    }
+  ],
+  "verification": {
+    "portable_contract_tests": 12,
+    "all_tests_passed_under_profilers": true,
+    "production_sources_changed_by_assessments": false,
+    "isolated_runner_metadata_change": "Added VM filename attribution only; original and instrumented runner hashes and original profiles retained."
+  },
+  "open_native_acceptance": "Windows production extension build, isolated Opera flows/DevTools and deployment remain unverified in the current Linux environment.",
+  "post_challenge_verification": {
+    "tests_passed": 16,
+    "finding": "Mutating URL, Headers or RequestInit before the deferred fetch changed the actual request behind an unchanged key.",
+    "repair": "Transport now consumes the exact copied key inputs. Native Request objects, signals, complex bodies, inherited and non-enumerable dictionary fields retain their intended semantics.",
+    "scope_note": "Equivalent-work benchmark still measures expired-owner overlap. It is not an app-wide latency or CPU claim."
+  },
+  "post_challenge_source_sha256": {
+    "app/shared/request-dedup.js": "01cf40d35f208dd7f8045c4b783691422ad0734877424bdfad5ed06391be7ed1"
+  },
+  "post_challenge_profile_scope": "Earlier profiler outputs and original source hashes are retained. Final immutable-input change was covered by new regression tests, strict TypeScript validation, and repeated equivalent-work benchmark; the earlier profile is not relabeled as a profile of these changed bytes."
+}

@@ -67,3 +67,5 @@ The engineering source is preserved under `engineering/`, with native wiki pages
 ## Game engines
 
 - [Athena Engine Foundry](Engineering-Engine-Foundry)
+
+- [Web acquisition research and reliability](Engineering-Web-Acquisition)

@@ -1,0 +1,385 @@
+{
+  "priorCommit": "b78bdc5a86ce5174012790bf92f8f403753288b3",
+  "beforeEntries": 283,
+  "beforePlans": 38,
+  "restoredSources": [
+    {
+      "path": "engineering/data/sources.d/frontier-ai-sweep-20261124.json",
+      "count": 133,
+      "sha256": "7f3d19ac767f13d25d0bd1f6b2c1659ea5859e672651807f8ec83628f5f98b4c"
+    },
+    {
+      "path": "engineering/data/sources.d/frontier-devops-sweep-20261124.json",
+      "count": 152,
+      "sha256": "f5cae0b97e2dc04a097744736e90f12dce4cdd061b0aebc38e47c2eaa8ee8601"
+    },
+    {
+      "path": "engineering/data/sources.d/frontier-native-sweep-20261124.json",
+      "count": 80,
+      "sha256": "a8da0378aa81e8e8451a0376d61679fc176bff62278129cd4b87802a9cd12cef"
+    },
+    {
+      "path": "engineering/data/sources.d/frontier-web-sweep-20261124.json",
+      "count": 104,
+      "sha256": "7fd9e818ce2419e7666fe733ce569ae99e6c2c72abbc7ffac3e83aa23d381118"
+    }
+  ],
+  "restoredEntries": [
+    "microsoft-agent-framework",
+    "google-adk",
+    "strands-agents",
+    "agno",
+    "haystack",
+    "arize-phoenix",
+    "opik",
+    "evalscope",
+    "outlines",
+    "xgrammar",
+    "lmdeploy",
+    "mistral-rs",
+    "ragflow",
+    "txtai",
+    "mem0",
+    "letta",
+    "graphiti",
+    "cognee",
+    "memos",
+    "marker",
+    "surya",
+    "paddleocr",
+    "olmocr",
+    "chandra",
+    "hindsight",
+    "liteparse",
+    "floem",
+    "accesskit",
+    "taffy",
+    "fyrox",
+    "rapier",
+    "lance-format",
+    "icechunk",
+    "wasmer",
+    "cargo-pgo",
+    "divan",
+    "gungraun",
+    "tokio-console",
+    "highway-simd",
+    "halide",
+    "pyrefly",
+    "tsdown",
+    "rstest",
+    "moon",
+    "proto",
+    "devenv",
+    "pants",
+    "turborepo",
+    "nx",
+    "hatchet",
+    "inngest",
+    "windmill",
+    "schemathesis",
+    "testcontainers-node",
+    "mock-service-worker",
+    "toxiproxy",
+    "opentelemetry-collector",
+    "signoz",
+    "clickstack",
+    "victoriametrics",
+    "vector-observability",
+    "grype",
+    "goreleaser",
+    "changesets",
+    "release-please",
+    "scrapling",
+    "browser-use",
+    "stagehand",
+    "lightpanda",
+    "steel-browser",
+    "browserless",
+    "browsertrix-crawler",
+    "archiveweb-page",
+    "replayweb-page",
+    "pywb",
+    "archivebox",
+    "singlefile",
+    "monolith",
+    "auto-archiver",
+    "trafilatura",
+    "selectolax",
+    "searxng",
+    "jina-reader",
+    "spider-rs",
+    "firecrawl",
+    "crawl4ai",
+    "crawlee",
+    "scrapy",
+    "ghost-downloader",
+    "changedetection-io",
+    "gallery-dl",
+    "tubearchivist",
+    "immich",
+    "exa",
+    "tavily",
+    "parallel-web",
+    "brave-search-api",
+    "llamaindex",
+    "guidance",
+    "instructor",
+    "fastembed",
+    "memeval",
+    "deepagents",
+    "mastra",
+    "simplemem"
+  ],
+  "reconciledEntries": [
+    "dspy",
+    "langgraph",
+    "pydantic-ai",
+    "smolagents",
+    "inspect-ai",
+    "ragas",
+    "mlx-lm",
+    "sglang",
+    "tensorrt-llm",
+    "apache-datafusion",
+    "vortex",
+    "dagger",
+    "oxc",
+    "rolldown",
+    "rspack",
+    "bevy",
+    "egui",
+    "slint",
+    "wgpu",
+    "dbos",
+    "restate",
+    "temporal",
+    "lightrag",
+    "osv-scanner",
+    "sigstore-cosign",
+    "syft",
+    "trivy",
+    "redb",
+    "biome",
+    "fast-check",
+    "hypothesis",
+    "ty",
+    "wasmtime",
+    "mold",
+    "wild-linker",
+    "slang-shaders",
+    "flecs",
+    "jolt-physics",
+    "mimalloc",
+    "fjall",
+    "turso-database"
+  ],
+  "restoredPlans": [
+    "planned-frontier-typed-agent-recovery-20261124",
+    "planned-frontier-structured-output-semantics-20261124",
+    "planned-frontier-agent-evaluation-tracing-20261124",
+    "planned-frontier-serving-hardware-cohorts-20261124",
+    "planned-frontier-retrieval-source-recall-20261124",
+    "planned-frontier-temporal-agent-memory-20261124",
+    "planned-frontier-document-meaning-preservation-20261124",
+    "planned-frontier-prompt-optimization-holdout-20261124",
+    "planned-frontier-accessible-native-interface-20261124",
+    "planned-frontier-graphics-physics-contracts-20261124",
+    "planned-frontier-storage-release-migrations-20261124",
+    "planned-frontier-columnar-array-evidence-20261124",
+    "planned-frontier-wasm-host-rights-20261124",
+    "planned-frontier-native-build-current-toolchains-20261124",
+    "planned-frontier-native-measurement-compute-20261124",
+    "planned-frontier-python-diagnostic-parity-20261124",
+    "planned-frontier-web-toolchain-contract-20261124",
+    "planned-frontier-task-environment-reproducibility-20261124",
+    "planned-frontier-durable-effect-contracts-20261124",
+    "planned-frontier-api-property-fault-evidence-20261124",
+    "planned-frontier-telemetry-loss-and-correlation-20261124",
+    "planned-frontier-supply-chain-evidence-boundaries-20261124",
+    "planned-frontier-release-intent-artifact-proof-20261124",
+    "planned-frontier-complete-crawl-recovery-20261124",
+    "planned-frontier-browser-task-final-state-20261124",
+    "planned-frontier-archive-capture-replay-20261124",
+    "planned-frontier-extraction-versus-original-20261124",
+    "planned-frontier-search-provider-source-coverage-20261124",
+    "planned-frontier-media-provenance-library-20261124",
+    "planned-frontier-transfer-change-integrity-20261124"
+  ],
+  "newEntries": [
+    "markitdown",
+    "scrcpy",
+    "autoscraper",
+    "curl-impersonate"
+  ],
+  "reviewedRepositories": [
+    {
+      "repository": "firecrawl/firecrawl",
+      "candidate_id": "firecrawl",
+      "source_id": "SCRP25001"
+    },
+    {
+      "repository": "unclecode/crawl4ai",
+      "candidate_id": "crawl4ai",
+      "source_id": "SCRP25002"
+    },
+    {
+      "repository": "browser-use/browser-use",
+      "candidate_id": "browser-use",
+      "source_id": "SCRP25003"
+    },
+    {
+      "repository": "apify/crawlee",
+      "candidate_id": "crawlee",
+      "source_id": "SCRP25004"
+    },
+    {
+      "repository": "scrapy/scrapy",
+      "candidate_id": "scrapy",
+      "source_id": "SCRP25005"
+    },
+    {
+      "repository": "microsoft/markitdown",
+      "candidate_id": "markitdown",
+      "source_id": "SCRP25006"
+    },
+    {
+      "repository": "D4Vinci/Scrapling",
+      "candidate_id": "scrapling",
+      "source_id": "SCRP25007"
+    },
+    {
+      "repository": "Genymobile/scrcpy",
+      "candidate_id": "scrcpy",
+      "source_id": "SCRP25008"
+    },
+    {
+      "repository": "alirezamika/autoscraper",
+      "candidate_id": "autoscraper",
+      "source_id": "SCRP25009"
+    },
+    {
+      "repository": "lwthiker/curl-impersonate",
+      "candidate_id": "curl-impersonate",
+      "source_id": "SCRP25010"
+    }
+  ],
+  "afterEntries": 392,
+  "afterPlans": 69,
+  "sourceFiles": 45,
+  "baselineSourcesSha256": "89cee005a8335d260c43a646863e30c1d9e8667bc81ed1a885ba2b6f94cbdd01",
+  "addedPlanId": "planned-web-acquisition-role-and-recovery-20261125",
+  "restoredLayerMemberships": [
+    {
+      "id": "langgraph",
+      "layers": [
+        "durable-jobs"
+      ]
+    },
+    {
+      "id": "pydantic-ai",
+      "layers": [
+        "durable-jobs"
+      ]
+    },
+    {
+      "id": "smolagents",
+      "layers": [
+        "durable-jobs"
+      ]
+    },
+    {
+      "id": "inspect-ai",
+      "layers": [
+        "testing-observability"
+      ]
+    },
+    {
+      "id": "ragas",
+      "layers": [
+        "testing-observability"
+      ]
+    },
+    {
+      "id": "mlx-lm",
+      "layers": [
+        "runtime-foundation"
+      ]
+    },
+    {
+      "id": "sglang",
+      "layers": [
+        "runtime-foundation"
+      ]
+    },
+    {
+      "id": "tensorrt-llm",
+      "layers": [
+        "runtime-foundation"
+      ]
+    },
+    {
+      "id": "apache-datafusion",
+      "layers": [
+        "local-data-search"
+      ]
+    },
+    {
+      "id": "vortex",
+      "layers": [
+        "local-data-search"
+      ]
+    },
+    {
+      "id": "oxc",
+      "layers": [
+        "testing-observability"
+      ]
+    },
+    {
+      "id": "slint",
+      "layers": [
+        "collection-ui"
+      ]
+    },
+    {
+      "id": "wgpu",
+      "layers": [
+        "build-toolchain"
+      ]
+    },
+    {
+      "id": "dbos",
+      "layers": [
+        "api-services"
+      ]
+    },
+    {
+      "id": "restate",
+      "layers": [
+        "api-services"
+      ]
+    },
+    {
+      "id": "temporal",
+      "layers": [
+        "api-services"
+      ]
+    },
+    {
+      "id": "biome",
+      "layers": [
+        "build-toolchain"
+      ]
+    },
+    {
+      "id": "ty",
+      "layers": [
+        "build-toolchain"
+      ]
+    }
+  ],
+  "allPriorSourceObservationsUnchanged": true,
+  "sourceRegisterEntries": 2796,
+  "explorerSourceIds": 1005
+}

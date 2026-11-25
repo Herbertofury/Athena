@@ -1,0 +1,3083 @@
+{
+  "observed_at": "2026-11-25T19:48:45.008Z",
+  "scope": "Read-only hosted CI inspection; no reruns, settings, billing changes, deployment or merge.",
+  "repositories": [
+    {
+      "repository": "Herbertofury/Enderloom",
+      "head": "ab16cf64e87d5aca772c81bf5c210ab42560ad63",
+      "pr": 97,
+      "runs": [
+        {
+          "id": 45688254024,
+          "name": "Enderloom Northpoint CI",
+          "status": "in_progress",
+          "conclusion": null,
+          "run_number": 593,
+          "jobs_url": "https://api.github.com/repos/Herbertofury/Enderloom/actions/runs/45688254024/jobs",
+          "logs_url": "https://api.github.com/repos/Herbertofury/Enderloom/actions/runs/45688254024/logs",
+          "workflow_id": 364449804,
+          "jobs": [
+            {
+              "id": 139466511059,
+              "name": "fabric-ui-access-widener-conversion",
+              "status": "completed",
+              "conclusion": "success",
+              "run_id": 45688254024,
+              "logs_url": null,
+              "steps": [
+                {
+                  "name": "Set up job",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 1
+                },
+                {
+                  "name": "Run actions/checkout@v4",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 2
+                },
+                {
+                  "name": "Run actions/setup-python@v5",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 3
+                },
+                {
+                  "name": "Run actions/setup-java@v5",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 4
+                },
+                {
+                  "name": "Fetch frozen LibrarianTradeFinder 26.1.2 source",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 5
+                },
+                {
+                  "name": "Cache LibrarianTradeFinder 26.3 conversion Gradle state",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 6
+                },
+                {
+                  "name": "Real Fabric UI and access-widener 26.3 conversion",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 7
+                },
+                {
+                  "name": "Post Cache LibrarianTradeFinder 26.3 conversion Gradle state",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 11
+                },
+                {
+                  "name": "Post Run actions/setup-java@v5",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 12
+                },
+                {
+                  "name": "Post Run actions/setup-python@v5",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 13
+                },
+                {
+                  "name": "Post Run actions/checkout@v4",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 14
+                },
+                {
+                  "name": "Complete job",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 15
+                }
+              ]
+            },
+            {
+              "id": 139466511601,
+              "name": "fabric-aoba-production-conversion",
+              "status": "completed",
+              "conclusion": "success",
+              "run_id": 45688254024,
+              "logs_url": null,
+              "steps": [
+                {
+                  "name": "Set up job",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 1
+                },
+                {
+                  "name": "Run actions/checkout@v4",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 2
+                },
+                {
+                  "name": "Run actions/setup-python@v5",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 3
+                },
+                {
+                  "name": "Run actions/setup-java@v5",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 4
+                },
+                {
+                  "name": "Fetch frozen Aoba 26.2 source",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 5
+                },
+                {
+                  "name": "Cache Aoba 26.3 conversion Gradle state",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 6
+                },
+                {
+                  "name": "Real Aoba 26.2 to 26.3 production conversion",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 7
+                },
+                {
+                  "name": "Post Cache Aoba 26.3 conversion Gradle state",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 11
+                },
+                {
+                  "name": "Post Run actions/setup-java@v5",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 12
+                },
+                {
+                  "name": "Post Run actions/setup-python@v5",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 13
+                },
+                {
+                  "name": "Post Run actions/checkout@v4",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 14
+                },
+                {
+                  "name": "Complete job",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 15
+                }
+              ]
+            },
+            {
+              "id": 139466511670,
+              "name": "fabric-conversion",
+              "status": "completed",
+              "conclusion": "success",
+              "run_id": 45688254024,
+              "logs_url": null,
+              "steps": [
+                {
+                  "name": "Set up job",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 1
+                },
+                {
+                  "name": "Run actions/checkout@v4",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 2
+                },
+                {
+                  "name": "Run actions/setup-python@v5",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 3
+                },
+                {
+                  "name": "Run actions/setup-java@v5",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 4
+                },
+                {
+                  "name": "Fetch official Fabric 1.21 example mod",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 5
+                },
+                {
+                  "name": "Cache Fabric 26.3 conversion Gradle state",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 6
+                },
+                {
+                  "name": "Official Fabric 1.21 to 26.3 production conversion",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 7
+                },
+                {
+                  "name": "Post Cache Fabric 26.3 conversion Gradle state",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 11
+                },
+                {
+                  "name": "Post Run actions/setup-java@v5",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 12
+                },
+                {
+                  "name": "Post Run actions/setup-python@v5",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 13
+                },
+                {
+                  "name": "Post Run actions/checkout@v4",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 14
+                },
+                {
+                  "name": "Complete job",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 15
+                }
+              ]
+            },
+            {
+              "id": 139466511672,
+              "name": "port-engine-qa",
+              "status": "completed",
+              "conclusion": "success",
+              "run_id": 45688254024,
+              "logs_url": null,
+              "steps": [
+                {
+                  "name": "Set up job",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 1
+                },
+                {
+                  "name": "Run actions/checkout@v4",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 2
+                },
+                {
+                  "name": "Run actions/setup-python@v5",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 3
+                },
+                {
+                  "name": "Run actions/setup-java@v5",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 4
+                },
+                {
+                  "name": "Northpoint full 26.3 conversion engine QA",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 5
+                },
+                {
+                  "name": "Source materializer compatibility QA",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 6
+                },
+                {
+                  "name": "Northpoint 26.3 target materialization QA",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 7
+                },
+                {
+                  "name": "Package exact tested source",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 8
+                },
+                {
+                  "name": "Retain exact tested source",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 9
+                },
+                {
+                  "name": "Post Run actions/setup-java@v5",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 16
+                },
+                {
+                  "name": "Post Run actions/setup-python@v5",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 17
+                },
+                {
+                  "name": "Post Run actions/checkout@v4",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 18
+                },
+                {
+                  "name": "Complete job",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 19
+                }
+              ]
+            },
+            {
+              "id": 139466511677,
+              "name": "neoforge-conversion",
+              "status": "completed",
+              "conclusion": "success",
+              "run_id": 45688254024,
+              "logs_url": null,
+              "steps": [
+                {
+                  "name": "Set up job",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 1
+                },
+                {
+                  "name": "Run actions/checkout@v4",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 2
+                },
+                {
+                  "name": "Run actions/setup-python@v5",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 3
+                },
+                {
+                  "name": "Run actions/setup-java@v5",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 4
+                },
+                {
+                  "name": "Source materializer compatibility QA",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 5
+                },
+                {
+                  "name": "Northpoint 26.3 target materialization QA",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 6
+                },
+                {
+                  "name": "Fetch official NeoForge 1.21.1 MDK mod",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 7
+                },
+                {
+                  "name": "Cache NeoForge Gradle state",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 8
+                },
+                {
+                  "name": "Official NeoForge 1.21.1 to 26.3 production conversion",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 9
+                },
+                {
+                  "name": "Post Cache NeoForge Gradle state",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 15
+                },
+                {
+                  "name": "Post Run actions/setup-java@v5",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 16
+                },
+                {
+                  "name": "Post Run actions/setup-python@v5",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 17
+                },
+                {
+                  "name": "Post Run actions/checkout@v4",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 18
+                },
+                {
+                  "name": "Complete job",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 19
+                }
+              ]
+            },
+            {
+              "id": 139466511705,
+              "name": "northpoint",
+              "status": "in_progress",
+              "conclusion": null,
+              "run_id": 45688254024,
+              "logs_url": null,
+              "steps": [
+                {
+                  "name": "Set up job",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 1
+                },
+                {
+                  "name": "Run actions/checkout@v4",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 2
+                },
+                {
+                  "name": "Run actions/setup-node@v4",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 3
+                },
+                {
+                  "name": "Run actions/setup-python@v5",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 4
+                },
+                {
+                  "name": "Run actions/setup-java@v5",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 5
+                },
+                {
+                  "name": "Run dtolnay/rust-toolchain@stable",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 6
+                },
+                {
+                  "name": "Browse request lifecycle regressions",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 7
+                },
+                {
+                  "name": "Install Linux native build dependencies",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 8
+                },
+                {
+                  "name": "Install shell dependencies",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 9
+                },
+                {
+                  "name": "Install launcher dependencies",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 10
+                },
+                {
+                  "name": "Build launcher frontend",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 11
+                },
+                {
+                  "name": "Build native launcher service",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 12
+                },
+                {
+                  "name": "Browse provider identity regression",
+                  "status": "in_progress",
+                  "conclusion": null,
+                  "number": 13
+                },
+                {
+                  "name": "Browse provider pane static QA",
+                  "status": "pending",
+                  "conclusion": null,
+                  "number": 14
+                },
+                {
+                  "name": "Configure Electron sandbox helper for CI",
+                  "status": "pending",
+                  "conclusion": null,
+                  "number": 15
+                },
+                {
+                  "name": "Browse provider pane Electron runtime QA",
+                  "status": "pending",
+                  "conclusion": null,
+                  "number": 16
+                },
+                {
+                  "name": "Northpoint compose config QA",
+                  "status": "pending",
+                  "conclusion": null,
+                  "number": 17
+                },
+                {
+                  "name": "Northpoint source intake QA",
+                  "status": "pending",
+                  "conclusion": null,
+                  "number": 18
+                },
+                {
+                  "name": "Northpoint runtime proof promotion QA",
+                  "status": "pending",
+                  "conclusion": null,
+                  "number": 19
+                },
+                {
+                  "name": "Northpoint service QA",
+                  "status": "pending",
+                  "conclusion": null,
+                  "number": 20
+                },
+                {
+                  "name": "Northpoint production bridge QA",
+                  "status": "pending",
+                  "conclusion": null,
+                  "number": 21
+                },
+                {
+                  "name": "Northpoint runtime-proof bridge QA",
+                  "status": "pending",
+                  "conclusion": null,
+                  "number": 22
+                },
+                {
+                  "name": "Northpoint native runtime verifier QA",
+                  "status": "pending",
+                  "conclusion": null,
+                  "number": 23
+                },
+                {
+                  "name": "Fetch official Fabric example mod",
+                  "status": "pending",
+                  "conclusion": null,
+                  "number": 24
+                },
+                {
+                  "name": "Official Fabric example mod production smoke",
+                  "status": "pending",
+                  "conclusion": null,
+                  "number": 25
+                },
+                {
+                  "name": "Official Fabric 1.21 to 26.3 production conversion",
+                  "status": "pending",
+                  "conclusion": null,
+                  "number": 26
+                },
+                {
+                  "name": "Provision Gradle for simple source conversion",
+                  "status": "pending",
+                  "conclusion": null,
+                  "number": 27
+                },
+                {
+                  "name": "Simple 1.20.1 source conversion build smoke",
+                  "status": "pending",
+                  "conclusion": null,
+                  "number": 28
+                },
+                {
+                  "name": "Fetch official Fabric 26.3 example mod",
+                  "status": "pending",
+                  "conclusion": null,
+                  "number": 29
+                },
+                {
+                  "name": "Official Fabric 26.3 production smoke",
+                  "status": "pending",
+                  "conclusion": null,
+                  "number": 30
+                },
+                {
+                  "name": "Fetch official NeoForge 26.3 MDK mod",
+                  "status": "pending",
+                  "conclusion": null,
+                  "number": 31
+                },
+                {
+                  "name": "Official NeoForge 26.3 production smoke",
+                  "status": "pending",
+                  "conclusion": null,
+                  "number": 32
+                },
+                {
+                  "name": "Post Run actions/setup-java@v5",
+                  "status": "pending",
+                  "conclusion": null,
+                  "number": 61
+                },
+                {
+                  "name": "Post Run actions/setup-python@v5",
+                  "status": "pending",
+                  "conclusion": null,
+                  "number": 62
+                },
+                {
+                  "name": "Post Run actions/setup-node@v4",
+                  "status": "pending",
+                  "conclusion": null,
+                  "number": 63
+                },
+                {
+                  "name": "Post Run actions/checkout@v4",
+                  "status": "pending",
+                  "conclusion": null,
+                  "number": 64
+                }
+              ]
+            },
+            {
+              "id": 139466511797,
+              "name": "fabric-keyevent-materialization",
+              "status": "completed",
+              "conclusion": "success",
+              "run_id": 45688254024,
+              "logs_url": null,
+              "steps": [
+                {
+                  "name": "Set up job",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 1
+                },
+                {
+                  "name": "Run actions/checkout@v4",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 2
+                },
+                {
+                  "name": "Run actions/setup-python@v5",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 3
+                },
+                {
+                  "name": "Run actions/setup-java@v5",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 4
+                },
+                {
+                  "name": "Fetch frozen Aoba 26.2 source",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 5
+                },
+                {
+                  "name": "Materialize frozen Aoba source to 26.3",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 6
+                },
+                {
+                  "name": "Post Run actions/setup-java@v5",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 10
+                },
+                {
+                  "name": "Post Run actions/setup-python@v5",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 11
+                },
+                {
+                  "name": "Post Run actions/checkout@v4",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 12
+                },
+                {
+                  "name": "Complete job",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 13
+                }
+              ]
+            },
+            {
+              "id": 139466511805,
+              "name": "fabric-dependency-conversion",
+              "status": "completed",
+              "conclusion": "success",
+              "run_id": 45688254024,
+              "logs_url": null,
+              "steps": [
+                {
+                  "name": "Set up job",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 1
+                },
+                {
+                  "name": "Run actions/checkout@v4",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 2
+                },
+                {
+                  "name": "Run actions/setup-python@v5",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 3
+                },
+                {
+                  "name": "Run actions/setup-java@v5",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 4
+                },
+                {
+                  "name": "Fetch real Fabric dependency-bearing mod",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 5
+                },
+                {
+                  "name": "Cache Fabric dependency graduation Gradle state",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 6
+                },
+                {
+                  "name": "Real Fabric dependency-preservation 26.3 conversion",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 7
+                },
+                {
+                  "name": "Post Cache Fabric dependency graduation Gradle state",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 11
+                },
+                {
+                  "name": "Post Run actions/setup-java@v5",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 12
+                },
+                {
+                  "name": "Post Run actions/setup-python@v5",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 13
+                },
+                {
+                  "name": "Post Run actions/checkout@v4",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 14
+                },
+                {
+                  "name": "Complete job",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 15
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 45688253933,
+          "name": "Catalog source refresh regression",
+          "status": "completed",
+          "conclusion": "success",
+          "run_number": 20,
+          "jobs_url": "https://api.github.com/repos/Herbertofury/Enderloom/actions/runs/45688253933/jobs",
+          "logs_url": "https://api.github.com/repos/Herbertofury/Enderloom/actions/runs/45688253933/logs",
+          "workflow_id": 415992857,
+          "jobs": [
+            {
+              "id": 139466508177,
+              "name": "sources (windows-latest)",
+              "status": "completed",
+              "conclusion": "success",
+              "run_id": 45688253933,
+              "logs_url": null,
+              "steps": [
+                {
+                  "name": "Set up job",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 1
+                },
+                {
+                  "name": "Run actions/checkout@v4",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 2
+                },
+                {
+                  "name": "Run actions/setup-node@v4",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 3
+                },
+                {
+                  "name": "Run npm ci --ignore-scripts",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 4
+                },
+                {
+                  "name": "Run node scripts/catalog-qa.js",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 5
+                },
+                {
+                  "name": "Run node scripts/catalog-refresh-lifecycle-qa.js",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 6
+                },
+                {
+                  "name": "Post Run actions/setup-node@v4",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 11
+                },
+                {
+                  "name": "Post Run actions/checkout@v4",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 12
+                },
+                {
+                  "name": "Complete job",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 13
+                }
+              ]
+            },
+            {
+              "id": 139466508665,
+              "name": "sources (ubuntu-latest)",
+              "status": "completed",
+              "conclusion": "success",
+              "run_id": 45688253933,
+              "logs_url": null,
+              "steps": [
+                {
+                  "name": "Set up job",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 1
+                },
+                {
+                  "name": "Run actions/checkout@v4",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 2
+                },
+                {
+                  "name": "Run actions/setup-node@v4",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 3
+                },
+                {
+                  "name": "Run npm ci --ignore-scripts",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 4
+                },
+                {
+                  "name": "Run node scripts/catalog-qa.js",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 5
+                },
+                {
+                  "name": "Run node scripts/catalog-refresh-lifecycle-qa.js",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 6
+                },
+                {
+                  "name": "Post Run actions/setup-node@v4",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 11
+                },
+                {
+                  "name": "Post Run actions/checkout@v4",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 12
+                },
+                {
+                  "name": "Complete job",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 13
+                }
+              ]
+            },
+            {
+              "id": 139466508679,
+              "name": "sources (macos-latest)",
+              "status": "completed",
+              "conclusion": "success",
+              "run_id": 45688253933,
+              "logs_url": null,
+              "steps": [
+                {
+                  "name": "Set up job",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 1
+                },
+                {
+                  "name": "Run actions/checkout@v4",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 2
+                },
+                {
+                  "name": "Run actions/setup-node@v4",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 3
+                },
+                {
+                  "name": "Run npm ci --ignore-scripts",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 4
+                },
+                {
+                  "name": "Run node scripts/catalog-qa.js",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 5
+                },
+                {
+                  "name": "Run node scripts/catalog-refresh-lifecycle-qa.js",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 6
+                },
+                {
+                  "name": "Post Run actions/setup-node@v4",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 11
+                },
+                {
+                  "name": "Post Run actions/checkout@v4",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 12
+                },
+                {
+                  "name": "Complete job",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 13
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 45688254038,
+          "name": "Dev Kit Stonecutter Multiversion",
+          "status": "in_progress",
+          "conclusion": null,
+          "run_number": 179,
+          "jobs_url": "https://api.github.com/repos/Herbertofury/Enderloom/actions/runs/45688254038/jobs",
+          "logs_url": "https://api.github.com/repos/Herbertofury/Enderloom/actions/runs/45688254038/logs",
+          "workflow_id": 366268193,
+          "jobs": [
+            {
+              "id": 139466509285,
+              "name": "real-stonecutter (ubuntu-latest)",
+              "status": "completed",
+              "conclusion": "success",
+              "run_id": 45688254038,
+              "logs_url": null,
+              "steps": [
+                {
+                  "name": "Set up job",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 1
+                },
+                {
+                  "name": "Run actions/checkout@v4",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 2
+                },
+                {
+                  "name": "Run actions/setup-java@v5",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 3
+                },
+                {
+                  "name": "Run actions/setup-python@v5",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 4
+                },
+                {
+                  "name": "Run gradle/actions/setup-gradle@v4",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 5
+                },
+                {
+                  "name": "Exact descriptor remapping and real JVM overload regressions",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 6
+                },
+                {
+                  "name": "Actual Stonecutter, shared changes, native JVM matrix and target extension",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 7
+                },
+                {
+                  "name": "Preserve exact outputs and all failure evidence",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 8
+                },
+                {
+                  "name": "Post Run gradle/actions/setup-gradle@v4",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 13
+                },
+                {
+                  "name": "Post Run actions/setup-python@v5",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 14
+                },
+                {
+                  "name": "Post Run actions/setup-java@v5",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 15
+                },
+                {
+                  "name": "Post Run actions/checkout@v4",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 16
+                },
+                {
+                  "name": "Complete job",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 17
+                }
+              ]
+            },
+            {
+              "id": 139466509775,
+              "name": "real-stonecutter (windows-latest)",
+              "status": "completed",
+              "conclusion": "success",
+              "run_id": 45688254038,
+              "logs_url": null,
+              "steps": [
+                {
+                  "name": "Set up job",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 1
+                },
+                {
+                  "name": "Run actions/checkout@v4",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 2
+                },
+                {
+                  "name": "Run actions/setup-java@v5",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 3
+                },
+                {
+                  "name": "Run actions/setup-python@v5",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 4
+                },
+                {
+                  "name": "Run gradle/actions/setup-gradle@v4",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 5
+                },
+                {
+                  "name": "Exact descriptor remapping and real JVM overload regressions",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 6
+                },
+                {
+                  "name": "Actual Stonecutter, shared changes, native JVM matrix and target extension",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 7
+                },
+                {
+                  "name": "Preserve exact outputs and all failure evidence",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 8
+                },
+                {
+                  "name": "Post Run gradle/actions/setup-gradle@v4",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 13
+                },
+                {
+                  "name": "Post Run actions/setup-python@v5",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 14
+                },
+                {
+                  "name": "Post Run actions/setup-java@v5",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 15
+                },
+                {
+                  "name": "Post Run actions/checkout@v4",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 16
+                },
+                {
+                  "name": "Complete job",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 17
+                }
+              ]
+            },
+            {
+              "id": 139466509788,
+              "name": "aoba-multiversion",
+              "status": "in_progress",
+              "conclusion": null,
+              "run_id": 45688254038,
+              "logs_url": null,
+              "steps": [
+                {
+                  "name": "Set up job",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 1
+                },
+                {
+                  "name": "Run actions/checkout@v4",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 2
+                },
+                {
+                  "name": "Run actions/setup-java@v5",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 3
+                },
+                {
+                  "name": "Run actions/setup-python@v5",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 4
+                },
+                {
+                  "name": "Run gradle/actions/setup-gradle@v4",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 5
+                },
+                {
+                  "name": "Run actions/cache/restore@v4",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 6
+                },
+                {
+                  "name": "Native graphics prerequisites",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 7
+                },
+                {
+                  "name": "Normal conversion must export the reusable original and target source",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 8
+                },
+                {
+                  "name": "Build both real Minecraft targets from Stonecutter-processed shared sources",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 9
+                },
+                {
+                  "name": "Reuse intact build then prove generated 26.3 JAR in native Minecraft and restart",
+                  "status": "in_progress",
+                  "conclusion": null,
+                  "number": 10
+                },
+                {
+                  "name": "Preserve actual source, builds, dependencies, native screenshots and logs",
+                  "status": "pending",
+                  "conclusion": null,
+                  "number": 11
+                },
+                {
+                  "name": "Post Run gradle/actions/setup-gradle@v4",
+                  "status": "pending",
+                  "conclusion": null,
+                  "number": 19
+                },
+                {
+                  "name": "Post Run actions/setup-python@v5",
+                  "status": "pending",
+                  "conclusion": null,
+                  "number": 20
+                },
+                {
+                  "name": "Post Run actions/setup-java@v5",
+                  "status": "pending",
+                  "conclusion": null,
+                  "number": 21
+                },
+                {
+                  "name": "Post Run actions/checkout@v4",
+                  "status": "pending",
+                  "conclusion": null,
+                  "number": 22
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 45688254027,
+          "name": "Catalog provider domain regression",
+          "status": "completed",
+          "conclusion": "success",
+          "run_number": 10,
+          "jobs_url": "https://api.github.com/repos/Herbertofury/Enderloom/actions/runs/45688254027/jobs",
+          "logs_url": "https://api.github.com/repos/Herbertofury/Enderloom/actions/runs/45688254027/logs",
+          "workflow_id": 415723578,
+          "jobs": [
+            {
+              "id": 139466509102,
+              "name": "provider-domains (macos-latest, 22)",
+              "status": "completed",
+              "conclusion": "success",
+              "run_id": 45688254027,
+              "logs_url": null,
+              "steps": [
+                {
+                  "name": "Set up job",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 1
+                },
+                {
+                  "name": "Run actions/checkout@v4",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 2
+                },
+                {
+                  "name": "Run actions/setup-node@v4",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 3
+                },
+                {
+                  "name": "Run node scripts/catalog-provider-domain-qa.js",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 4
+                },
+                {
+                  "name": "Run node --test --test-timeout=10000 scripts/public-http-lifecycle-qa.js scripts/parser-pool-lifecycle-qa.js",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 5
+                },
+                {
+                  "name": "Post Run actions/setup-node@v4",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 9
+                },
+                {
+                  "name": "Post Run actions/checkout@v4",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 10
+                },
+                {
+                  "name": "Complete job",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 11
+                }
+              ]
+            },
+            {
+              "id": 139466509484,
+              "name": "provider-domains (ubuntu-latest, 24)",
+              "status": "completed",
+              "conclusion": "success",
+              "run_id": 45688254027,
+              "logs_url": null,
+              "steps": [
+                {
+                  "name": "Set up job",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 1
+                },
+                {
+                  "name": "Run actions/checkout@v4",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 2
+                },
+                {
+                  "name": "Run actions/setup-node@v4",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 3
+                },
+                {
+                  "name": "Run node scripts/catalog-provider-domain-qa.js",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 4
+                },
+                {
+                  "name": "Run node --test --test-timeout=10000 scripts/public-http-lifecycle-qa.js scripts/parser-pool-lifecycle-qa.js",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 5
+                },
+                {
+                  "name": "Post Run actions/setup-node@v4",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 9
+                },
+                {
+                  "name": "Post Run actions/checkout@v4",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 10
+                },
+                {
+                  "name": "Complete job",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 11
+                }
+              ]
+            },
+            {
+              "id": 139466509492,
+              "name": "provider-domains (ubuntu-latest, 22)",
+              "status": "completed",
+              "conclusion": "success",
+              "run_id": 45688254027,
+              "logs_url": null,
+              "steps": [
+                {
+                  "name": "Set up job",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 1
+                },
+                {
+                  "name": "Run actions/checkout@v4",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 2
+                },
+                {
+                  "name": "Run actions/setup-node@v4",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 3
+                },
+                {
+                  "name": "Run node scripts/catalog-provider-domain-qa.js",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 4
+                },
+                {
+                  "name": "Run node --test --test-timeout=10000 scripts/public-http-lifecycle-qa.js scripts/parser-pool-lifecycle-qa.js",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 5
+                },
+                {
+                  "name": "Post Run actions/setup-node@v4",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 9
+                },
+                {
+                  "name": "Post Run actions/checkout@v4",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 10
+                },
+                {
+                  "name": "Complete job",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 11
+                }
+              ]
+            },
+            {
+              "id": 139466509517,
+              "name": "provider-domains (windows-latest, 22)",
+              "status": "completed",
+              "conclusion": "success",
+              "run_id": 45688254027,
+              "logs_url": null,
+              "steps": [
+                {
+                  "name": "Set up job",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 1
+                },
+                {
+                  "name": "Run actions/checkout@v4",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 2
+                },
+                {
+                  "name": "Run actions/setup-node@v4",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 3
+                },
+                {
+                  "name": "Run node scripts/catalog-provider-domain-qa.js",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 4
+                },
+                {
+                  "name": "Run node --test --test-timeout=10000 scripts/public-http-lifecycle-qa.js scripts/parser-pool-lifecycle-qa.js",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 5
+                },
+                {
+                  "name": "Post Run actions/setup-node@v4",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 9
+                },
+                {
+                  "name": "Post Run actions/checkout@v4",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 10
+                },
+                {
+                  "name": "Complete job",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 11
+                }
+              ]
+            },
+            {
+              "id": 139466509656,
+              "name": "provider-domains (windows-latest, 24)",
+              "status": "completed",
+              "conclusion": "success",
+              "run_id": 45688254027,
+              "logs_url": null,
+              "steps": [
+                {
+                  "name": "Set up job",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 1
+                },
+                {
+                  "name": "Run actions/checkout@v4",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 2
+                },
+                {
+                  "name": "Run actions/setup-node@v4",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 3
+                },
+                {
+                  "name": "Run node scripts/catalog-provider-domain-qa.js",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 4
+                },
+                {
+                  "name": "Run node --test --test-timeout=10000 scripts/public-http-lifecycle-qa.js scripts/parser-pool-lifecycle-qa.js",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 5
+                },
+                {
+                  "name": "Post Run actions/setup-node@v4",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 9
+                },
+                {
+                  "name": "Post Run actions/checkout@v4",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 10
+                },
+                {
+                  "name": "Complete job",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 11
+                }
+              ]
+            },
+            {
+              "id": 139466509740,
+              "name": "provider-domains (macos-latest, 24)",
+              "status": "completed",
+              "conclusion": "success",
+              "run_id": 45688254027,
+              "logs_url": null,
+              "steps": [
+                {
+                  "name": "Set up job",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 1
+                },
+                {
+                  "name": "Run actions/checkout@v4",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 2
+                },
+                {
+                  "name": "Run actions/setup-node@v4",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 3
+                },
+                {
+                  "name": "Run node scripts/catalog-provider-domain-qa.js",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 4
+                },
+                {
+                  "name": "Run node --test --test-timeout=10000 scripts/public-http-lifecycle-qa.js scripts/parser-pool-lifecycle-qa.js",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 5
+                },
+                {
+                  "name": "Post Run actions/setup-node@v4",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 9
+                },
+                {
+                  "name": "Post Run actions/checkout@v4",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 10
+                },
+                {
+                  "name": "Complete job",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 11
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 45688253962,
+          "name": "Catalog export regression",
+          "status": "completed",
+          "conclusion": "success",
+          "run_number": 9,
+          "jobs_url": "https://api.github.com/repos/Herbertofury/Enderloom/actions/runs/45688253962/jobs",
+          "logs_url": "https://api.github.com/repos/Herbertofury/Enderloom/actions/runs/45688253962/logs",
+          "workflow_id": 415641435,
+          "jobs": [
+            {
+              "id": 139466509524,
+              "name": "export (windows-latest)",
+              "status": "completed",
+              "conclusion": "success",
+              "run_id": 45688253962,
+              "logs_url": null,
+              "steps": [
+                {
+                  "name": "Set up job",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 1
+                },
+                {
+                  "name": "Run actions/checkout@v4",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 2
+                },
+                {
+                  "name": "Run actions/setup-node@v4",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 3
+                },
+                {
+                  "name": "Run npm ci --ignore-scripts",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 4
+                },
+                {
+                  "name": "Run node scripts/catalog-export-qa.js",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 5
+                },
+                {
+                  "name": "Post Run actions/setup-node@v4",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 9
+                },
+                {
+                  "name": "Post Run actions/checkout@v4",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 10
+                },
+                {
+                  "name": "Complete job",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 11
+                }
+              ]
+            },
+            {
+              "id": 139466510094,
+              "name": "export (macos-latest)",
+              "status": "completed",
+              "conclusion": "success",
+              "run_id": 45688253962,
+              "logs_url": null,
+              "steps": [
+                {
+                  "name": "Set up job",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 1
+                },
+                {
+                  "name": "Run actions/checkout@v4",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 2
+                },
+                {
+                  "name": "Run actions/setup-node@v4",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 3
+                },
+                {
+                  "name": "Run npm ci --ignore-scripts",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 4
+                },
+                {
+                  "name": "Run node scripts/catalog-export-qa.js",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 5
+                },
+                {
+                  "name": "Post Run actions/setup-node@v4",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 9
+                },
+                {
+                  "name": "Post Run actions/checkout@v4",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 10
+                },
+                {
+                  "name": "Complete job",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 11
+                }
+              ]
+            },
+            {
+              "id": 139466510135,
+              "name": "export (ubuntu-latest)",
+              "status": "completed",
+              "conclusion": "success",
+              "run_id": 45688253962,
+              "logs_url": null,
+              "steps": [
+                {
+                  "name": "Set up job",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 1
+                },
+                {
+                  "name": "Run actions/checkout@v4",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 2
+                },
+                {
+                  "name": "Run actions/setup-node@v4",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 3
+                },
+                {
+                  "name": "Run npm ci --ignore-scripts",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 4
+                },
+                {
+                  "name": "Run node scripts/catalog-export-qa.js",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 5
+                },
+                {
+                  "name": "Post Run actions/setup-node@v4",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 9
+                },
+                {
+                  "name": "Post Run actions/checkout@v4",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 10
+                },
+                {
+                  "name": "Complete job",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 11
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 45688253810,
+          "name": "Minecraft Dev Kit Workbench",
+          "status": "completed",
+          "conclusion": "success",
+          "run_number": 419,
+          "jobs_url": "https://api.github.com/repos/Herbertofury/Enderloom/actions/runs/45688253810/jobs",
+          "logs_url": "https://api.github.com/repos/Herbertofury/Enderloom/actions/runs/45688253810/logs",
+          "workflow_id": 365429438,
+          "jobs": [
+            {
+              "id": 139466508529,
+              "name": "public-conversion (aoba, Cocolots/Aoba-Client, c698b09d4f4e76db4b1dee0a0d6b2051324b9ce0, 26.2)",
+              "status": "completed",
+              "conclusion": "success",
+              "run_id": 45688253810,
+              "logs_url": null,
+              "steps": [
+                {
+                  "name": "Set up job",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 1
+                },
+                {
+                  "name": "Run actions/checkout@v4",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 2
+                },
+                {
+                  "name": "Run actions/setup-python@v5",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 3
+                },
+                {
+                  "name": "Run actions/setup-java@v5",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 4
+                },
+                {
+                  "name": "Fetch exact previously graduated source",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 5
+                },
+                {
+                  "name": "Reuse verified Gradle downloads",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 6
+                },
+                {
+                  "name": "Convert and preserve the actual JAR and full proof",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 7
+                },
+                {
+                  "name": "Retain actual conversion outputs even when a later gate fails",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 8
+                },
+                {
+                  "name": "Post Reuse verified Gradle downloads",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 13
+                },
+                {
+                  "name": "Post Run actions/setup-java@v5",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 14
+                },
+                {
+                  "name": "Post Run actions/setup-python@v5",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 15
+                },
+                {
+                  "name": "Post Run actions/checkout@v4",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 16
+                },
+                {
+                  "name": "Complete job",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 17
+                }
+              ]
+            },
+            {
+              "id": 139466508923,
+              "name": "workbench (windows-latest)",
+              "status": "completed",
+              "conclusion": "success",
+              "run_id": 45688253810,
+              "logs_url": null,
+              "steps": [
+                {
+                  "name": "Set up job",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 1
+                },
+                {
+                  "name": "Run actions/checkout@v4",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 2
+                },
+                {
+                  "name": "Run actions/setup-python@v5",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 3
+                },
+                {
+                  "name": "Run actions/setup-java@v5",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 4
+                },
+                {
+                  "name": "Process lifecycle and workspace protection",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 5
+                },
+                {
+                  "name": "Real compiler, JVM, recovery and package workflow",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 6
+                },
+                {
+                  "name": "Runner cache and invalidation regressions",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 7
+                },
+                {
+                  "name": "Runtime proof must match candidate hash",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 8
+                },
+                {
+                  "name": "Variant Foundry discovers static and runtime-only custom biomes",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 9
+                },
+                {
+                  "name": "Variant Foundry synthesizes evidence-bound BiomeDNA",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 10
+                },
+                {
+                  "name": "Variant Foundry creates deterministic lock-aware plans",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 11
+                },
+                {
+                  "name": "Variant Foundry compiles immutable ModelBundles",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 12
+                },
+                {
+                  "name": "Variant Foundry compiles Minecraft pixel textures",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 13
+                },
+                {
+                  "name": "Variant Foundry validates the headless Blockbench MCP adapter",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 14
+                },
+                {
+                  "name": "Variant Foundry compiles additive lock-aware Blockbench authoring recipes",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 15
+                },
+                {
+                  "name": "Variant Foundry compiles runtime physics persistence and performance contracts",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 16
+                },
+                {
+                  "name": "Variant Foundry generated Java motion remains bounded",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 17
+                },
+                {
+                  "name": "Variant Foundry executes recipes durably through Blockbench MCP",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 18
+                },
+                {
+                  "name": "Variant Foundry durable pipeline packages authored models and visual evidence",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 19
+                },
+                {
+                  "name": "Variant Foundry resumes and invalidates durable pipeline stages correctly",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 20
+                },
+                {
+                  "name": "Variant Foundry provider scheduler fails over and reuses hash-valid jobs",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 21
+                },
+                {
+                  "name": "Variant Foundry Clay and MyMeshy adapters preserve exact-output contracts",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 22
+                },
+                {
+                  "name": "Variant Foundry rejects malformed or externally-linked GLB provider assets",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 23
+                },
+                {
+                  "name": "Northpoint CI keeps modern Gradle runtime for maintained Fabric branch",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 24
+                },
+                {
+                  "name": "Retain workflow proof and candidate packages",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 25
+                },
+                {
+                  "name": "Post Run actions/setup-java@v5",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 48
+                },
+                {
+                  "name": "Post Run actions/setup-python@v5",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 49
+                },
+                {
+                  "name": "Post Run actions/checkout@v4",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 50
+                },
+                {
+                  "name": "Complete job",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 51
+                }
+              ]
+            },
+            {
+              "id": 139466508978,
+              "name": "public-conversion (librariantradefinder, itzwrld/LibrarianTradeFinder-26.2, 285757d72aab0db76a5c9...",
+              "status": "completed",
+              "conclusion": "success",
+              "run_id": 45688253810,
+              "logs_url": null,
+              "steps": [
+                {
+                  "name": "Set up job",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 1
+                },
+                {
+                  "name": "Run actions/checkout@v4",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 2
+                },
+                {
+                  "name": "Run actions/setup-python@v5",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 3
+                },
+                {
+                  "name": "Run actions/setup-java@v5",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 4
+                },
+                {
+                  "name": "Fetch exact previously graduated source",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 5
+                },
+                {
+                  "name": "Reuse verified Gradle downloads",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 6
+                },
+                {
+                  "name": "Convert and preserve the actual JAR and full proof",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 7
+                },
+                {
+                  "name": "Retain actual conversion outputs even when a later gate fails",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 8
+                },
+                {
+                  "name": "Post Reuse verified Gradle downloads",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 13
+                },
+                {
+                  "name": "Post Run actions/setup-java@v5",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 14
+                },
+                {
+                  "name": "Post Run actions/setup-python@v5",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 15
+                },
+                {
+                  "name": "Post Run actions/checkout@v4",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 16
+                },
+                {
+                  "name": "Complete job",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 17
+                }
+              ]
+            },
+            {
+              "id": 139466509121,
+              "name": "workbench (ubuntu-latest)",
+              "status": "completed",
+              "conclusion": "success",
+              "run_id": 45688253810,
+              "logs_url": null,
+              "steps": [
+                {
+                  "name": "Set up job",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 1
+                },
+                {
+                  "name": "Run actions/checkout@v4",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 2
+                },
+                {
+                  "name": "Run actions/setup-python@v5",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 3
+                },
+                {
+                  "name": "Run actions/setup-java@v5",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 4
+                },
+                {
+                  "name": "Process lifecycle and workspace protection",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 5
+                },
+                {
+                  "name": "Real compiler, JVM, recovery and package workflow",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 6
+                },
+                {
+                  "name": "Runner cache and invalidation regressions",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 7
+                },
+                {
+                  "name": "Runtime proof must match candidate hash",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 8
+                },
+                {
+                  "name": "Variant Foundry discovers static and runtime-only custom biomes",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 9
+                },
+                {
+                  "name": "Variant Foundry synthesizes evidence-bound BiomeDNA",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 10
+                },
+                {
+                  "name": "Variant Foundry creates deterministic lock-aware plans",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 11
+                },
+                {
+                  "name": "Variant Foundry compiles immutable ModelBundles",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 12
+                },
+                {
+                  "name": "Variant Foundry compiles Minecraft pixel textures",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 13
+                },
+                {
+                  "name": "Variant Foundry validates the headless Blockbench MCP adapter",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 14
+                },
+                {
+                  "name": "Variant Foundry compiles additive lock-aware Blockbench authoring recipes",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 15
+                },
+                {
+                  "name": "Variant Foundry compiles runtime physics persistence and performance contracts",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 16
+                },
+                {
+                  "name": "Variant Foundry generated Java motion remains bounded",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 17
+                },
+                {
+                  "name": "Variant Foundry executes recipes durably through Blockbench MCP",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 18
+                },
+                {
+                  "name": "Variant Foundry durable pipeline packages authored models and visual evidence",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 19
+                },
+                {
+                  "name": "Variant Foundry resumes and invalidates durable pipeline stages correctly",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 20
+                },
+                {
+                  "name": "Variant Foundry provider scheduler fails over and reuses hash-valid jobs",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 21
+                },
+                {
+                  "name": "Variant Foundry Clay and MyMeshy adapters preserve exact-output contracts",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 22
+                },
+                {
+                  "name": "Variant Foundry rejects malformed or externally-linked GLB provider assets",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 23
+                },
+                {
+                  "name": "Northpoint CI keeps modern Gradle runtime for maintained Fabric branch",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 24
+                },
+                {
+                  "name": "Retain workflow proof and candidate packages",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 25
+                },
+                {
+                  "name": "Post Run actions/setup-java@v5",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 48
+                },
+                {
+                  "name": "Post Run actions/setup-python@v5",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 49
+                },
+                {
+                  "name": "Post Run actions/checkout@v4",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 50
+                },
+                {
+                  "name": "Complete job",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 51
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "repository": "Herbertofury/Gamesync",
+      "head": "02fa1f21dc5da473023df41d430ad69e608c190b",
+      "pr": 7,
+      "runs": [
+        {
+          "id": 45688568381,
+          "name": "Provider request deduplication fixtures",
+          "status": "completed",
+          "conclusion": "failure",
+          "run_number": 5,
+          "jobs_url": "https://api.github.com/repos/Herbertofury/Gamesync/actions/runs/45688568381/jobs",
+          "logs_url": "https://api.github.com/repos/Herbertofury/Gamesync/actions/runs/45688568381/logs",
+          "workflow_id": 429626240,
+          "jobs": [
+            {
+              "id": 139467612424,
+              "name": "fixture",
+              "status": "completed",
+              "conclusion": "failure",
+              "run_id": 45688568381,
+              "logs_url": null,
+              "steps": null
+            }
+          ]
+        },
+        {
+          "id": 45688567847,
+          "name": "Secret scan",
+          "status": "completed",
+          "conclusion": "failure",
+          "run_number": 294,
+          "jobs_url": "https://api.github.com/repos/Herbertofury/Gamesync/actions/runs/45688567847/jobs",
+          "logs_url": "https://api.github.com/repos/Herbertofury/Gamesync/actions/runs/45688567847/logs",
+          "workflow_id": 334759324,
+          "jobs": [
+            {
+              "id": 139467610108,
+              "name": "Gitleaks",
+              "status": "completed",
+              "conclusion": "failure",
+              "run_id": 45688567847,
+              "logs_url": null,
+              "steps": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "repository": "Herbertofury/GameSync-Next",
+      "head": "6f8b483617f6c44ac8a474388d74a6ccef361e9d",
+      "pr": 56,
+      "runs": [
+        {
+          "id": 45688581492,
+          "name": "Secret scan",
+          "status": "completed",
+          "conclusion": "failure",
+          "run_number": 1264,
+          "jobs_url": "https://api.github.com/repos/Herbertofury/GameSync-Next/actions/runs/45688581492/jobs",
+          "logs_url": "https://api.github.com/repos/Herbertofury/GameSync-Next/actions/runs/45688581492/logs",
+          "workflow_id": 334759968,
+          "jobs": [
+            {
+              "id": 139467654748,
+              "name": "Gitleaks",
+              "status": "completed",
+              "conclusion": "failure",
+              "run_id": 45688581492,
+              "logs_url": null,
+              "steps": null
+            }
+          ]
+        },
+        {
+          "id": 45688581373,
+          "name": "Request deduplication contracts and source snapshot",
+          "status": "completed",
+          "conclusion": "failure",
+          "run_number": 2,
+          "jobs_url": "https://api.github.com/repos/Herbertofury/GameSync-Next/actions/runs/45688581373/jobs",
+          "logs_url": "https://api.github.com/repos/Herbertofury/GameSync-Next/actions/runs/45688581373/logs",
+          "workflow_id": 430771974,
+          "jobs": [
+            {
+              "id": 139467654441,
+              "name": "contracts",
+              "status": "completed",
+              "conclusion": "failure",
+              "run_id": 45688581373,
+              "logs_url": null,
+              "steps": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "repository": "Herbertofury/Modhunter",
+      "head": "e553f389fdea95fc69a5ea6b4c63e93fca0993a1",
+      "pr": 75,
+      "runs": [
+        {
+          "id": 45688584656,
+          "name": "Rust desktop and MO2 readiness",
+          "status": "in_progress",
+          "conclusion": null,
+          "run_number": 292,
+          "jobs_url": "https://api.github.com/repos/Herbertofury/Modhunter/actions/runs/45688584656/jobs",
+          "logs_url": "https://api.github.com/repos/Herbertofury/Modhunter/actions/runs/45688584656/logs",
+          "workflow_id": 415729445,
+          "jobs": [
+            {
+              "id": 139467666298,
+              "name": "mo2",
+              "status": "in_progress",
+              "conclusion": null,
+              "run_id": 45688584656,
+              "logs_url": null,
+              "steps": [
+                {
+                  "name": "Set up job",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 1
+                },
+                {
+                  "name": "Run actions/checkout@v4",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 2
+                },
+                {
+                  "name": "Run dtolnay/rust-toolchain@master",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 3
+                },
+                {
+                  "name": "Run Swatinem/rust-cache@v2",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 4
+                },
+                {
+                  "name": "Install the Qt SDK matching MO2 2.5.2",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 5
+                },
+                {
+                  "name": "Build and test the narrow native Qt bridge",
+                  "status": "in_progress",
+                  "conclusion": null,
+                  "number": 6
+                },
+                {
+                  "name": "Prepare the production dashboard and pinned archive tools",
+                  "status": "pending",
+                  "conclusion": null,
+                  "number": 7
+                },
+                {
+                  "name": "Build the real Rust connection client",
+                  "status": "pending",
+                  "conclusion": null,
+                  "number": 8
+                },
+                {
+                  "name": "Exercise the production plugin inside real MO2 2.5.2",
+                  "status": "pending",
+                  "conclusion": null,
+                  "number": 9
+                },
+                {
+                  "name": "Preserve native MO2 receipts and screenshot",
+                  "status": "pending",
+                  "conclusion": null,
+                  "number": 10
+                },
+                {
+                  "name": "Post Install the Qt SDK matching MO2 2.5.2",
+                  "status": "pending",
+                  "conclusion": null,
+                  "number": 18
+                },
+                {
+                  "name": "Post Run Swatinem/rust-cache@v2",
+                  "status": "pending",
+                  "conclusion": null,
+                  "number": 19
+                },
+                {
+                  "name": "Post Run actions/checkout@v4",
+                  "status": "pending",
+                  "conclusion": null,
+                  "number": 20
+                }
+              ]
+            },
+            {
+              "id": 139467667023,
+              "name": "visual",
+              "status": "in_progress",
+              "conclusion": null,
+              "run_id": 45688584656,
+              "logs_url": null,
+              "steps": [
+                {
+                  "name": "Set up job",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 1
+                },
+                {
+                  "name": "Run actions/checkout@v4",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 2
+                },
+                {
+                  "name": "Run actions/setup-node@v4",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 3
+                },
+                {
+                  "name": "Compare the actual release UI against v0.12.0",
+                  "status": "in_progress",
+                  "conclusion": null,
+                  "number": 4
+                },
+                {
+                  "name": "Preserve before/after screenshots and complete-library measurements",
+                  "status": "pending",
+                  "conclusion": null,
+                  "number": 5
+                },
+                {
+                  "name": "Post Run actions/setup-node@v4",
+                  "status": "pending",
+                  "conclusion": null,
+                  "number": 9
+                },
+                {
+                  "name": "Post Run actions/checkout@v4",
+                  "status": "pending",
+                  "conclusion": null,
+                  "number": 10
+                }
+              ]
+            },
+            {
+              "id": 139467667128,
+              "name": "contracts",
+              "status": "in_progress",
+              "conclusion": null,
+              "run_id": 45688584656,
+              "logs_url": null,
+              "steps": [
+                {
+                  "name": "Set up job",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 1
+                },
+                {
+                  "name": "Run actions/checkout@v4",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 2
+                },
+                {
+                  "name": "Run dtolnay/rust-toolchain@master",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 3
+                },
+                {
+                  "name": "Run Swatinem/rust-cache@v2",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 4
+                },
+                {
+                  "name": "Run actions/setup-node@v4",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 5
+                },
+                {
+                  "name": "Verify Rust, MO2 lifecycle, and existing features",
+                  "status": "in_progress",
+                  "conclusion": null,
+                  "number": 6
+                },
+                {
+                  "name": "Exercise actual dashboard in Chromium",
+                  "status": "pending",
+                  "conclusion": null,
+                  "number": 7
+                },
+                {
+                  "name": "Upload browser proof",
+                  "status": "pending",
+                  "conclusion": null,
+                  "number": 8
+                },
+                {
+                  "name": "Post Run actions/setup-node@v4",
+                  "status": "pending",
+                  "conclusion": null,
+                  "number": 14
+                },
+                {
+                  "name": "Post Run Swatinem/rust-cache@v2",
+                  "status": "pending",
+                  "conclusion": null,
+                  "number": 15
+                },
+                {
+                  "name": "Post Run actions/checkout@v4",
+                  "status": "pending",
+                  "conclusion": null,
+                  "number": 16
+                }
+              ]
+            },
+            {
+              "id": 139467667146,
+              "name": "windows",
+              "status": "in_progress",
+              "conclusion": null,
+              "run_id": 45688584656,
+              "logs_url": null,
+              "steps": [
+                {
+                  "name": "Set up job",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 1
+                },
+                {
+                  "name": "Run actions/checkout@v4",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 2
+                },
+                {
+                  "name": "Run dtolnay/rust-toolchain@master",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 3
+                },
+                {
+                  "name": "Run Swatinem/rust-cache@v2",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 4
+                },
+                {
+                  "name": "Run actions/setup-node@v4",
+                  "status": "completed",
+                  "conclusion": "success",
+                  "number": 5
+                },
+                {
+                  "name": "Prepare all existing dashboard and game assets",
+                  "status": "in_progress",
+                  "conclusion": null,
+                  "number": 6
+                },
+                {
+                  "name": "Install the Qt SDK matching MO2 2.5.2",
+                  "status": "pending",
+                  "conclusion": null,
+                  "number": 7
+                },
+                {
+                  "name": "Build and test the narrow native Qt bridge",
+                  "status": "pending",
+                  "conclusion": null,
+                  "number": 8
+                },
+                {
+                  "name": "Install Qt 6.11.1 for the forward-runtime acceptance check",
+                  "status": "pending",
+                  "conclusion": null,
+                  "number": 9
+                },
+                {
+                  "name": "Verify the packaged baseline helper on actual Qt 6.11.1",
+                  "status": "pending",
+                  "conclusion": null,
+                  "number": 10
+                },
+                {
+                  "name": "Verify non-destructive Windows PowerShell readiness checks",
+                  "status": "pending",
+                  "conclusion": null,
+                  "number": 11
+                },
+                {
+                  "name": "Verify plugin installation and progress-preserving upgrades",
+                  "status": "pending",
+                  "conclusion": null,
+                  "number": 12
+                },
+                {
+                  "name": "Test native Windows code",
+                  "status": "pending",
+                  "conclusion": null,
+                  "number": 13
+                },
+                {
+                  "name": "Build Rust executable and Windows installer",
+                  "status": "pending",
+                  "conclusion": null,
+                  "number": 14
+                },
+                {
+                  "name": "Build portable Rust diagnostic CLI",
+                  "status": "pending",
+                  "conclusion": null,
+                  "number": 15
+                },
+                {
+                  "name": "Verify the exact release CLI and packaged archive helper",
+                  "status": "pending",
+                  "conclusion": null,
+                  "number": 16
+                },
+                {
+                  "name": "Launch actual Windows WebView2 and import a fixture profile",
+                  "status": "pending",
+                  "conclusion": null,
+                  "number": 17
+                },
+                {
+                  "name": "Verify Watchtower sessions and page observations in actual WebView2",
+                  "status": "pending",
+                  "conclusion": null,
+                  "number": 18
+                },
+                {
+                  "name": "Exercise the compiled desktop connected to actual MO2",
+                  "status": "pending",
+                  "conclusion": null,
+                  "number": 19
+                },
+                {
+                  "name": "Install, launch and uninstall the exact Windows installer",
+                  "status": "pending",
+                  "conclusion": null,
+                  "number": 20
+                },
+                {
+                  "name": "Measure the complete library in actual Windows WebView2",
+                  "status": "pending",
+                  "conclusion": null,
+                  "number": 21
+                },
+                {
+                  "name": "Package tested Windows app, MO2 plugin, and diagnostics",
+                  "status": "pending",
+                  "conclusion": null,
+                  "number": 22
+                },
+                {
+                  "name": "Preserve native executable, installer and evidence",
+                  "status": "pending",
+                  "conclusion": null,
+                  "number": 23
+                },
+                {
+                  "name": "Post Run actions/setup-node@v4",
+                  "status": "pending",
+                  "conclusion": null,
+                  "number": 44
+                },
+                {
+                  "name": "Post Run Swatinem/rust-cache@v2",
+                  "status": "pending",
+                  "conclusion": null,
+                  "number": 45
+                },
+                {
+                  "name": "Post Run actions/checkout@v4",
+                  "status": "pending",
+                  "conclusion": null,
+                  "number": 46
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "billing_blocker": {
+    "evidence_source": "GitHub Actions rendered run summary annotations in the cloud browser; signed-in session already available. Connector check-run outputs omitted text and annotation endpoint not supported, so browser fallback used.",
+    "annotation": "The job was not started because recent account payments have failed or your spending limit needs to be increased. Please check the 'Billing & plans' section in your settings",
+    "runs": [
+      {
+        "repo": "Herbertofury/Gamesync",
+        "run_id": 45687399214,
+        "job_id": 139463515434,
+        "head": "0a0eb79b210d4ac18cc3470b7ece066ca1d2f021",
+        "url": "https://github.com/Herbertofury/Gamesync/actions/runs/45687399214"
+      },
+      {
+        "repo": "Herbertofury/GameSync-Next",
+        "run_id": 45687414218,
+        "job_id": 139463570228,
+        "head": "495f5f102992aba637a25e9b745ac8f1b2624b6a",
+        "url": "https://github.com/Herbertofury/GameSync-Next/actions/runs/45687414218"
+      },
+      {
+        "repo": "Herbertofury/Gamesync",
+        "run_id": 45688568381,
+        "job_id": 139467612424,
+        "head": "02fa1f21dc5da473023df41d430ad69e608c190b",
+        "url": "https://github.com/Herbertofury/Gamesync/actions/runs/45688568381"
+      },
+      {
+        "repo": "Herbertofury/GameSync-Next",
+        "run_id": 45688581373,
+        "job_id": 139467654441,
+        "head": "6f8b483617f6c44ac8a474388d74a6ccef361e9d",
+        "url": "https://github.com/Herbertofury/GameSync-Next/actions/runs/45688581373"
+      }
+    ],
+    "final_job_api_details": [
+      {
+        "total_count": 1,
+        "jobs": [
+          {
+            "id": 139467612424,
+            "run_id": 45688568381,
+            "workflow_name": "Provider request deduplication fixtures",
+            "head_branch": "scraping-reliability-2026-11-25",
+            "run_url": "https://api.github.com/repos/Herbertofury/Gamesync/actions/runs/45688568381",
+            "run_attempt": 1,
+            "node_id": "CR_kwDOT41Gfc8AAAAgeOrhCA",
+            "head_sha": "02fa1f21dc5da473023df41d430ad69e608c190b",
+            "url": "https://api.github.com/repos/Herbertofury/Gamesync/actions/jobs/139467612424",
+            "html_url": "https://github.com/Herbertofury/Gamesync/actions/runs/45688568381/job/139467612424",
+            "status": "completed",
+            "conclusion": "failure",
+            "created_at": "2026-11-25T19:46:57Z",
+            "started_at": "2026-11-25T19:46:57Z",
+            "completed_at": "2026-11-25T19:47:00Z",
+            "name": "fixture",
+            "steps": [],
+            "check_run_url": "https://api.github.com/repos/Herbertofury/Gamesync/check-runs/139467612424",
+            "labels": [
+              "ubuntu-latest"
+            ],
+            "runner_id": 0,
+            "runner_name": "",
+            "runner_group_id": 0,
+            "runner_group_name": ""
+          }
+        ]
+      },
+      {
+        "total_count": 1,
+        "jobs": [
+          {
+            "id": 139467654441,
+            "run_id": 45688581373,
+            "workflow_name": "Request deduplication contracts and source snapshot",
+            "head_branch": "scraping-reliability-2026-11-25",
+            "run_url": "https://api.github.com/repos/Herbertofury/GameSync-Next/actions/runs/45688581373",
+            "run_attempt": 1,
+            "node_id": "CR_kwDOT44d288AAAAgeOuFKQ",
+            "head_sha": "6f8b483617f6c44ac8a474388d74a6ccef361e9d",
+            "url": "https://api.github.com/repos/Herbertofury/GameSync-Next/actions/jobs/139467654441",
+            "html_url": "https://github.com/Herbertofury/GameSync-Next/actions/runs/45688581373/job/139467654441",
+            "status": "completed",
+            "conclusion": "failure",
+            "created_at": "2026-11-25T19:47:01Z",
+            "started_at": "2026-11-25T19:47:01Z",
+            "completed_at": "2026-11-25T19:47:03Z",
+            "name": "contracts",
+            "steps": [],
+            "check_run_url": "https://api.github.com/repos/Herbertofury/GameSync-Next/check-runs/139467654441",
+            "labels": [
+              "ubuntu-latest"
+            ],
+            "runner_id": 0,
+            "runner_name": "",
+            "runner_group_id": 0,
+            "runner_group_name": ""
+          }
+        ]
+      }
+    ],
+    "interpretation": "These contract jobs never reached runner allocation (runner_id0,steps[]), so no hosted contract test execution or source archive occurred. The evidence does not establish which of the two billing alternatives applies. No code/test failure is established."
+  },
+  "enderloom_source_artifact": {
+    "artifacts": [
+      {
+        "id": 15057062931,
+        "name": "devkit-source-45688254024",
+        "size_in_bytes": 31038896,
+        "url": "https://api.github.com/repos/Herbertofury/Enderloom/actions/artifacts/15057062931",
+        "archive_download_url": "https://api.github.com/repos/Herbertofury/Enderloom/actions/artifacts/15057062931/zip",
+        "expired": false,
+        "created_at": "2026-11-25T19:45:25Z",
+        "expires_at": "2026-12-25T19:45:22Z",
+        "updated_at": "2026-11-25T19:45:25Z",
+        "digest": "sha256:ef25743ed2e3cd43ccfdcec92371a0ce588717c615e170feb97120cd578eb1c1",
+        "workflow_run": {
+          "id": 45688254024,
+          "repository_id": 1349945561,
+          "head_repository_id": 1349945561,
+          "head_branch": "scraping-reliability-2026-11-25",
+          "head_sha": "ab16cf64e87d5aca772c81bf5c210ab42560ad63"
+        }
+      }
+    ]
+  },
+  "pending_lease": [
+    {
+      "repo": "Herbertofury/Enderloom",
+      "run_id": 45688254024,
+      "job_id": 139466511705,
+      "step": "Browse provider identity regression",
+      "note": "Changed browse lifecycle step and native launcher build have passed; broader job active."
+    },
+    {
+      "repo": "Herbertofury/Enderloom",
+      "run_id": 45688254038,
+      "job_id": 139466509788,
+      "step": "Reuse intact build then prove generated 26.3 JAR in native Minecraft and restart",
+      "note": "Both real-stonecutter OS jobs now passed."
+    },
+    {
+      "repo": "Herbertofury/Modhunter",
+      "run_id": 45688584656,
+      "job_ids": [
+        139467666298,
+        139467667023,
+        139467667128,
+        139467667146
+      ],
+      "note": "All four jobs active; no failed step observed."
+    }
+  ],
+  "findings": [
+    "Enderloom provider-domain regressions passed all6 Node22/24 Linux/macOS/Windows jobs.",
+    "Enderloom source-refresh regressions passed all3 OS jobs.",
+    "Enderloom changed browse lifecycle step passed in Northpoint.",
+    "No changed-path CI failure observed for Enderloom or Modhunter in this bounded inspection.",
+    "Private GameSync CI blocked by account payment/spending gate; public Enderloom/Modhunter workflows executing."
+  ]
+}
+

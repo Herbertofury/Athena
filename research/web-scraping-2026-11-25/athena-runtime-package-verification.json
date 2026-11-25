@@ -1,0 +1,35 @@
+{
+  "profile": "public-preview",
+  "allowlisted_source_files": 134,
+  "manifest_recorded_files": 136,
+  "total_artifact_files": 137,
+  "runtime_manifest_sha256": "d05438d07e551108f873d35ec96d2bcf0cf8e5ef36b8034d60eea9de9bcd7a8d",
+  "catalog_entries": 392,
+  "catalog_sha256": "1a6357e2056952462cf6a39120dbd661fd7c13a56e7dc67aa11af64e40cda3a5",
+  "all_allowlisted_source_bytes_preserved": true,
+  "all_archive_bytes_preserved": true,
+  "complete_profile_blocker": "Pre-existing missing workspaces/foundry/index.js",
+  "archive": "/workspace/scratch/e253ed1a6b67/athena-web-scraping-runtime-20261125.zip",
+  "archive_bytes": 5362875,
+  "archive_sha256": "675c0317f2d82cfda7748e1c7fa915855921c32dc12a62d4e1e2c70d437dead3",
+  "test_plans": 69,
+  "layers": 20,
+  "tracks": 152,
+  "categories": 18,
+  "unchanged_runtime_files": 132,
+  "changed_runtime_files": [
+    "workspaces/engineering/manifest.json",
+    "workspaces/engineering/research/catalog.json"
+  ],
+  "allowlist_inventory_and_policy_unchanged": true,
+  "package_guardrail_tests_passed": 14,
+  "workspace_contracts_passed_against_dist": 13,
+  "workspace_contracts_passed_against_packaged_artifact": 13,
+  "changed_repository_paths": [
+    "config/runtime-public-preview.json",
+    "dist/workspaces/engineering/manifest.json",
+    "dist/workspaces/engineering/research/catalog.json",
+    "tests/engineering_workspaces.test.cjs"
+  ],
+  "verification_scope": "Exact packaged file/ZIP integrity and DOM workspace contracts; no whole-app, browser visual, native, or owner-device certification."
+}

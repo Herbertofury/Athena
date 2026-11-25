@@ -1,0 +1,198 @@
+{
+  "runtime": "v24.22.3",
+  "platform": "linux",
+  "baseline": "scraping-baseline-exact",
+  "fixture_items": 512,
+  "fixture_body_bytes": 67777,
+  "iterations": 10,
+  "interpretation": "Controlled local HTTP expired-owner overlap; network requests/bytes are the target. Timings include deliberate 10ms expiry wait, do not represent UI or production provider speed.",
+  "variants": [
+    {
+      "name": "legacy extension page",
+      "path": "app/shared/request-dedup.js",
+      "summary": {
+        "baseline": {
+          "total_requests": 30,
+          "total_wire_body_bytes": 2033310,
+          "total_delivered_items": 15360,
+          "elapsed_ms": {
+            "p50": 16.174936000000002,
+            "p95": 36.18838899999999,
+            "p99": 36.18838899999999
+          }
+        },
+        "candidate": {
+          "total_requests": 20,
+          "total_wire_body_bytes": 1355540,
+          "total_delivered_items": 15360,
+          "elapsed_ms": {
+            "p50": 13.511825999999985,
+            "p95": 19.128460999999987,
+            "p99": 19.128460999999987
+          }
+        }
+      },
+      "measurements": {
+        "baseline": [
+          {
+            "requests": 3,
+            "wire_body_bytes": 203331,
+            "delivered_bodies": 3,
+            "delivered_items": 1536,
+            "elapsed_ms": 36.18838899999999
+          },
+          {
+            "requests": 3,
+            "wire_body_bytes": 203331,
+            "delivered_bodies": 3,
+            "delivered_items": 1536,
+            "elapsed_ms": 17.88513999999998
+          },
+          {
+            "requests": 3,
+            "wire_body_bytes": 203331,
+            "delivered_bodies": 3,
+            "delivered_items": 1536,
+            "elapsed_ms": 14.135595999999993
+          },
+          {
+            "requests": 3,
+            "wire_body_bytes": 203331,
+            "delivered_bodies": 3,
+            "delivered_items": 1536,
+            "elapsed_ms": 17.81995200000003
+          },
+          {
+            "requests": 3,
+            "wire_body_bytes": 203331,
+            "delivered_bodies": 3,
+            "delivered_items": 1536,
+            "elapsed_ms": 19.66988600000002
+          },
+          {
+            "requests": 3,
+            "wire_body_bytes": 203331,
+            "delivered_bodies": 3,
+            "delivered_items": 1536,
+            "elapsed_ms": 16.44981899999999
+          },
+          {
+            "requests": 3,
+            "wire_body_bytes": 203331,
+            "delivered_bodies": 3,
+            "delivered_items": 1536,
+            "elapsed_ms": 16.174936000000002
+          },
+          {
+            "requests": 3,
+            "wire_body_bytes": 203331,
+            "delivered_bodies": 3,
+            "delivered_items": 1536,
+            "elapsed_ms": 12.633985999999993
+          },
+          {
+            "requests": 3,
+            "wire_body_bytes": 203331,
+            "delivered_bodies": 3,
+            "delivered_items": 1536,
+            "elapsed_ms": 11.943786999999986
+          },
+          {
+            "requests": 3,
+            "wire_body_bytes": 203331,
+            "delivered_bodies": 3,
+            "delivered_items": 1536,
+            "elapsed_ms": 11.983537000000013
+          }
+        ],
+        "candidate": [
+          {
+            "requests": 2,
+            "wire_body_bytes": 135554,
+            "delivered_bodies": 3,
+            "delivered_items": 1536,
+            "elapsed_ms": 19.128460999999987
+          },
+          {
+            "requests": 2,
+            "wire_body_bytes": 135554,
+            "delivered_bodies": 3,
+            "delivered_items": 1536,
+            "elapsed_ms": 14.709289999999982
+          },
+          {
+            "requests": 2,
+            "wire_body_bytes": 135554,
+            "delivered_bodies": 3,
+            "delivered_items": 1536,
+            "elapsed_ms": 14.280754000000002
+          },
+          {
+            "requests": 2,
+            "wire_body_bytes": 135554,
+            "delivered_bodies": 3,
+            "delivered_items": 1536,
+            "elapsed_ms": 16.70577499999999
+          },
+          {
+            "requests": 2,
+            "wire_body_bytes": 135554,
+            "delivered_bodies": 3,
+            "delivered_items": 1536,
+            "elapsed_ms": 14.841567999999995
+          },
+          {
+            "requests": 2,
+            "wire_body_bytes": 135554,
+            "delivered_bodies": 3,
+            "delivered_items": 1536,
+            "elapsed_ms": 12.604612000000031
+          },
+          {
+            "requests": 2,
+            "wire_body_bytes": 135554,
+            "delivered_bodies": 3,
+            "delivered_items": 1536,
+            "elapsed_ms": 13.511825999999985
+          },
+          {
+            "requests": 2,
+            "wire_body_bytes": 135554,
+            "delivered_bodies": 3,
+            "delivered_items": 1536,
+            "elapsed_ms": 12.350729999999999
+          },
+          {
+            "requests": 2,
+            "wire_body_bytes": 135554,
+            "delivered_bodies": 3,
+            "delivered_items": 1536,
+            "elapsed_ms": 12.558578000000011
+          },
+          {
+            "requests": 2,
+            "wire_body_bytes": 135554,
+            "delivered_bodies": 3,
+            "delivered_items": 1536,
+            "elapsed_ms": 12.812765000000013
+          }
+        ]
+      }
+    }
+  ],
+  "baseline_commit": "c1d9cc2239ead31d20244e4353e6dd705ec36cda",
+  "baseline_source_blobs": {
+    "app/shared/request-dedup.js": "21e34d95a050b5f07160fe496083d8de46aca180",
+    "app/shared/request-dedup-module.js": "4e290ffc4c833d90c2e4ead7d7e35287bb364ef0"
+  },
+  "baseline_materialization": "Authenticated upstream file bytes; all baseline source blob SHAs matched GitHub. Local baseline is a targeted source snapshot, not a complete repository.",
+  "candidate_source_sha256": {
+    "app/shared/request-dedup.js": "01cf40d35f208dd7f8045c4b783691422ad0734877424bdfad5ed06391be7ed1"
+  },
+  "challenge_verification": {
+    "tests_passed": 16,
+    "finding": "Mutating URL, Headers or RequestInit before the deferred fetch changed the actual request behind an unchanged key.",
+    "repair": "Transport now consumes the exact copied key inputs. Native Request objects, signals, complex bodies, inherited and non-enumerable dictionary fields retain their intended semantics.",
+    "scope_note": "Equivalent-work benchmark still measures expired-owner overlap. It is not an app-wide latency or CPU claim."
+  }
+}

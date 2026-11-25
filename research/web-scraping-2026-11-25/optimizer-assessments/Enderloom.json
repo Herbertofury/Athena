@@ -1,0 +1,100 @@
+{
+  "schema": 1,
+  "date": "2026-11-25",
+  "scope": "Enderloom provider HTTP lifecycle workload; source inventory is scoped to src and omits external callers and script tests.",
+  "sourceCommit": "fbe0b6d5594a07d334ca289261dc6136dfe60941",
+  "commands": [
+    {
+      "name": "shrink-doctor",
+      "command": [
+        "/workspace/scratch/e253ed1a6b67/tooling/bin/shrink-anything",
+        "-C",
+        "/workspace/scratch/e253ed1a6b67/tooling/assessments/Enderloom",
+        "doctor"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "shrink-scan",
+      "command": [
+        "/workspace/scratch/e253ed1a6b67/tooling/bin/shrink-anything",
+        "-C",
+        "/workspace/scratch/e253ed1a6b67/tooling/assessments/Enderloom/src",
+        "scan",
+        "--json",
+        "--lib"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "fast-doctor",
+      "command": [
+        "/workspace/scratch/e253ed1a6b67/tooling/bin/fast-anything",
+        "-C",
+        "/workspace/scratch/e253ed1a6b67/tooling/assessments/Enderloom",
+        "doctor"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "fast-scan",
+      "command": [
+        "/workspace/scratch/e253ed1a6b67/tooling/bin/fast-anything",
+        "-C",
+        "/workspace/scratch/e253ed1a6b67/tooling/assessments/Enderloom",
+        "scan",
+        "--",
+        "node",
+        "scripts/public-http-lifecycle-qa.js"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "rust-analyze",
+      "command": [
+        "/workspace/scratch/e253ed1a6b67/tooling/bin/rust-anything",
+        "analyze",
+        "/workspace/scratch/e253ed1a6b67/tooling/assessments/Enderloom/src",
+        "--lang",
+        "ts",
+        "--json"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "rust-profile",
+      "command": [
+        "/workspace/scratch/e253ed1a6b67/tooling/bin/rust-anything",
+        "profile",
+        "/workspace/scratch/e253ed1a6b67/tooling/assessments/Enderloom",
+        "--lang",
+        "ts",
+        "--json",
+        "--",
+        "node",
+        "scripts/public-http-lifecycle-qa.js"
+      ],
+      "exitCode": 0
+    }
+  ],
+  "tools": [
+    {
+      "name": "shrink-anything",
+      "binarySha256": "a9f4607fc8c3f001e6877bc13b71ebc3ef07a557e1bafc7c63a5d7a48f4e3a55"
+    },
+    {
+      "name": "fast-anything",
+      "binarySha256": "e09da95820aa80cea7c29e46a5b77a4b454e45326195d650f3f997bf09cc9276"
+    },
+    {
+      "name": "rust-anything",
+      "binarySha256": "d23895d41e1b70202170ebea3733e63cd2f1a3f650f1ccc15c9b61232474ed8b"
+    }
+  ],
+  "decision": {
+    "shrink": "No deletions promoted. The src-only inventory cannot prove whole-app/renderer/provider public entrypoints unused.",
+    "fast": "Profile found no eligible CPU work large enough to justify a language boundary. Network async lifecycle is retained.",
+    "rust": "27 source units analyzed; profile attributed ~1.84% to repository code, primarily async transport. Source readiness labels are not performance or parity evidence. No port promoted."
+  },
+  "measuredOptimization": "Progressive snapshot copy reduction measured by project benchmark, with identical complete output; independent of tool suggestions."
+}

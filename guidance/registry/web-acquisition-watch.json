@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "reviewedOn": "2026-11-24",
+  "reviewedOn": "2026-11-25",
   "status": "Source-backed candidates, not benchmark winners. Tags observed in official GitHub releases/latest responses; check independent package channels before adoption.",
   "watch": [
     {
@@ -146,6 +146,90 @@
         "url": "https://github.com/renovatebot/renovate/releases/tag/44.261.1"
       },
       "notes": "Dependency discovery and reviewed upgrade grouping."
+    },
+    {
+      "id": "browser-use",
+      "repository": "browser-use/browser-use",
+      "category": "interactive-browser",
+      "source": "https://github.com/browser-use/browser-use",
+      "initialRelease": {
+        "tag": "1.0.8",
+        "date": "2026-11-22",
+        "url": "https://github.com/browser-use/browser-use/releases/tag/1.0.8"
+      },
+      "notes": "Optional final escalation for extraction requiring actual interactions. Turn repeatable routes into deterministic adapters once understood. Limits: Current browser and model defaults are cloud-backed; Version pinning is needed because the 1.x interface differs materially from older examples; Agent planning is not the default low-latency path for metadata, RSS or simple HTTP catalogs; No feedback or telemetry message was sent during this review"
+    },
+    {
+      "id": "markitdown",
+      "repository": "microsoft/markitdown",
+      "category": "document-conversion",
+      "source": "https://github.com/microsoft/markitdown",
+      "initialRelease": {
+        "tag": "v0.1.9",
+        "date": "2026-10-21",
+        "url": "https://github.com/microsoft/markitdown/releases/tag/v0.1.9"
+      },
+      "notes": "Use Athena's validated fetch path once, preserve original bytes and metadata, then dispatch conversion by content type. Supply seekable spooled streams for large inputs. Limits: convert_response collects the body in BytesIO; convert_stream buffers an entire nonseekable stream; Markdown is not a high-fidelity source-artifact replacement; Image captioning and speech transcription can depend on hosted services; It is not crawl orchestration"
+    },
+    {
+      "id": "scrapling",
+      "repository": "D4Vinci/Scrapling",
+      "category": "crawl-extract",
+      "source": "https://github.com/D4Vinci/Scrapling",
+      "initialRelease": {
+        "tag": "v0.5.1",
+        "date": "2026-11-04",
+        "url": "https://github.com/D4Vinci/Scrapling/releases/tag/v0.5.1"
+      },
+      "notes": "Candidate parsing/adapter layer for changing markup, with fixture replay and validation of recovered fields. Reuse already fetched responses. Limits: A similarity match is not proof of field identity or correctness; Preserve required fields, pagination and type checks before accepting selector recovery; Upstream universal access/bypass marketing was not verified and is not an acceptance claim"
+    },
+    {
+      "id": "scrcpy",
+      "repository": "Genymobile/scrcpy",
+      "category": "mobile-device-control",
+      "source": "https://github.com/Genymobile/scrcpy",
+      "initialRelease": {
+        "tag": "v5.0.1",
+        "date": "2026-10-08",
+        "url": "https://github.com/Genymobile/scrcpy/releases/tag/v5.0.1"
+      },
+      "notes": "Keep separate for an explicitly requested Android-only extraction workflow. Do not add it to ordinary web acquisition dependencies. Limits: Not a web crawler, HTML parser or structured extraction engine; Requires an Android device and applicable device permissions"
+    },
+    {
+      "id": "autoscraper",
+      "repository": "alirezamika/autoscraper",
+      "category": "selector-learning",
+      "source": "https://github.com/alirezamika/autoscraper",
+      "initialRelease": {
+        "tag": "v1.1.14",
+        "date": "2022-07-17",
+        "url": "https://github.com/alirezamika/autoscraper/releases/tag/v1.1.14"
+      },
+      "notes": "Use as adapter-authoring assistance with pre-fetched HTML and multiple recorded page variants. Keep the host's network/cancellation/error policies. Limits: Source _fetch_html uses direct requests.get with no default timeout/status check; request_args.pop('headers') mutates the caller's dictionary; Learned rules rely on class/style attributes and structural/positional traversal; No-maintenance claims are not justified"
+    },
+    {
+      "id": "curl-impersonate",
+      "repository": "lwthiker/curl-impersonate",
+      "category": "http-compatibility",
+      "source": "https://github.com/lwthiker/curl-impersonate",
+      "initialRelease": {
+        "tag": "v0.6.1",
+        "date": "2024-03-02",
+        "url": "https://github.com/lwthiker/curl-impersonate/releases/tag/v0.6.1"
+      },
+      "notes": "Keep transport compatibility optional behind the host acquisition contract. Compare maintained descendants such as lexiforest/curl_cffi before selecting a package. Limits: Inspected original profile table includes Chrome 116/Firefox 117 and older profiles; Does not execute application JavaScript; Handshake emulation is not every browser behavior and does not guarantee access"
+    },
+    {
+      "id": "curl-cffi",
+      "repository": "lexiforest/curl_cffi",
+      "category": "http-compatibility",
+      "source": "https://github.com/lexiforest/curl_cffi",
+      "initialRelease": {
+        "tag": "v0.17.0",
+        "date": "2026-10-26",
+        "url": "https://github.com/lexiforest/curl_cffi/releases/tag/v0.17.0"
+      },
+      "notes": "Maintained curl-impersonate descendant candidate with Python bindings and current browser profiles; compare exact browser behavior and complete outputs before adoption. Not JavaScript execution."
     }
   ]
 }

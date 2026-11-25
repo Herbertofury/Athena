@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "reviewed_at": "2026-10-31",
-  "description": "Preregistered comparison proposals with controls, full-output gates, resource metrics and protocols. Every record remains planned; execution metadata and results must be supplied by a separate validated evidence cohort.",
+  "reviewed_at": "2026-11-25",
+  "description": "Preregistered comparison proposals with controls, full-output gates, resource metrics and protocols. Every record remains planned; execution metadata and results must be supplied by a separate validated evidence cohort. The November 25 reconciliation restores 30 prior dated proposals and adds a role-separated web-acquisition comparison; every proposal remains planned.",
   "plans": [
     {
       "id": "planned-local-catalog-v1",
@@ -1393,6 +1393,1394 @@
         "Pin the production runtime and all test wrappers, including Shuttle 0.9.9 fixes when selected.",
         "Exercise cancelled notifications, caught panics, timeout/finish races, duplicate messages, restart and shutdown.",
         "Record seeds and bounds before runs, retain raw failures, then remeasure the optimized implementation only after correctness gates pass."
+      ]
+    },
+    {
+      "id": "planned-frontier-typed-agent-recovery-20261124",
+      "title": "Typed agents with interruption and effect recovery",
+      "priority": 2,
+      "status": "planned",
+      "decision": "Which agent architecture completes the same evidence-producing workflow and recovers without duplicating external effects?",
+      "layer_ids": [
+        "ai-tools",
+        "durable-jobs"
+      ],
+      "candidate_ids": [
+        "pydantic-ai",
+        "microsoft-agent-framework",
+        "google-adk",
+        "strands-agents",
+        "agno",
+        "langgraph",
+        "smolagents",
+        "deepagents",
+        "mastra"
+      ],
+      "controls": [
+        "Current deterministic research pipeline and a single-agent baseline using the same model, tools, task inputs and allowed effects.",
+        "Pin exact candidate releases or source commits, dependencies, configuration and corpus hashes. Separate default-branch documentation from capabilities verified in the selected package.",
+        "Use the same complete task contract and declared hardware/resource envelope for each eligible configuration. Distinct component roles or deployment models belong in separate cohorts."
+      ],
+      "gates": [
+        "Every record validates against the same schema and resolves to retained source evidence.",
+        "Interruptions, retries and restored checkpoints cannot silently skip review or duplicate an acknowledged effect.",
+        "Retain all required records, assets, outputs, diagnostics and interactions. Content dropping, truncation, virtualization, culling or weakened correctness cannot qualify as an improvement.",
+        "A failed, unsupported, cancelled or partial run remains in the evidence. Apply correctness and resource gates before comparing speed or cost."
+      ],
+      "metrics": [
+        "evidence-correct completion rate",
+        "false completion rate",
+        "duplicate or missing effects",
+        "resume-to-completion latency",
+        "total model/tool cost",
+        "checkpoint storage"
+      ],
+      "protocol": [
+        "Before execution, publish the complete workload, output oracle, supported hosts, exact failure model and numeric CPU/memory/storage/latency budgets. Record source and package identities from each candidate's dated evidence.",
+        "Use a fixed research corpus with normal pages, contradictory updates, tool timeouts, malformed responses, user interrupts and an idempotent mock write endpoint. Interrupt before and after each durable boundary, restart from persisted state and compare the complete effect ledger.",
+        "Test model-written code only in an independently enforced capability boundary. Planning, subagents, filesystem abstractions and typed outputs are not themselves containment or exactly-once execution.",
+        "Run declared cold and warm conditions separately. Retain at least five independent samples per eligible configuration in randomized order, including failures; record OS, hardware, power mode, thread counts, network/cache policy and external service versions.",
+        "Retain complete raw outputs, validation diffs, resource traces, logs, configuration and corpus hashes. An evaluation plan is not an executed result, compatibility certification or universal ranking."
+      ]
+    },
+    {
+      "id": "planned-frontier-structured-output-semantics-20261124",
+      "title": "Constrained decoding and typed validation",
+      "priority": 2,
+      "status": "planned",
+      "decision": "When does constrained generation improve complete semantic extraction after schema validation and retry costs are included?",
+      "layer_ids": [
+        "ai-tools",
+        "testing-observability"
+      ],
+      "candidate_ids": [
+        "outlines",
+        "xgrammar",
+        "guidance",
+        "instructor",
+        "pydantic-ai"
+      ],
+      "controls": [
+        "The same model and prompts with ordinary generation plus explicit post-validation and a fixed retry policy.",
+        "Pin exact candidate releases or source commits, dependencies, configuration and corpus hashes. Separate default-branch documentation from capabilities verified in the selected package.",
+        "Use the same complete task contract and declared hardware/resource envelope for each eligible configuration. Distinct component roles or deployment models belong in separate cohorts."
+      ],
+      "gates": [
+        "Required fields, values, source references and semantic constraints match the labeled oracle.",
+        "Unsupported grammar/schema features must be reported; silently simplifying the schema is ineligible.",
+        "Retain all required records, assets, outputs, diagnostics and interactions. Content dropping, truncation, virtualization, culling or weakened correctness cannot qualify as an improvement.",
+        "A failed, unsupported, cancelled or partial run remains in the evidence. Apply correctness and resource gates before comparing speed or cost."
+      ],
+      "metrics": [
+        "schema validity",
+        "semantic field accuracy",
+        "unsupported-schema count",
+        "retries per accepted record",
+        "time to accepted output",
+        "token and compilation cost"
+      ],
+      "protocol": [
+        "Before execution, publish the complete workload, output oracle, supported hosts, exact failure model and numeric CPU/memory/storage/latency budgets. Record source and package identities from each candidate's dated evidence.",
+        "Build labeled cases covering unions, nested lists, optional fields, Unicode, escaped text, numeric boundaries and cross-field requirements. Compare grammar construction, first-use generation and repeated extraction separately.",
+        "Keep decoder constraints and post-generation validation as separate variables. A syntactically valid object can still contain incorrect evidence or invented values.",
+        "Run declared cold and warm conditions separately. Retain at least five independent samples per eligible configuration in randomized order, including failures; record OS, hardware, power mode, thread counts, network/cache policy and external service versions.",
+        "Retain complete raw outputs, validation diffs, resource traces, logs, configuration and corpus hashes. An evaluation plan is not an executed result, compatibility certification or universal ranking."
+      ]
+    },
+    {
+      "id": "planned-frontier-agent-evaluation-tracing-20261124",
+      "title": "Evaluation and tracing with retained failures",
+      "priority": 2,
+      "status": "planned",
+      "decision": "Which evaluation and trace stack detects known agent failures without making model-graded scores the only acceptance oracle?",
+      "layer_ids": [
+        "ai-tools",
+        "testing-observability"
+      ],
+      "candidate_ids": [
+        "arize-phoenix",
+        "opik",
+        "inspect-ai",
+        "evalscope",
+        "ragas",
+        "memeval"
+      ],
+      "controls": [
+        "Frozen human-labeled task outcomes and deterministic validators, with tracing disabled for the overhead control.",
+        "Pin exact candidate releases or source commits, dependencies, configuration and corpus hashes. Separate default-branch documentation from capabilities verified in the selected package.",
+        "Use the same complete task contract and declared hardware/resource envelope for each eligible configuration. Distinct component roles or deployment models belong in separate cohorts."
+      ],
+      "gates": [
+        "Known invalid citations, missed steps and unsafe effects must not be scored as successful.",
+        "All failures, retries, grader prompts and trace-to-source references remain available for audit.",
+        "Retain all required records, assets, outputs, diagnostics and interactions. Content dropping, truncation, virtualization, culling or weakened correctness cannot qualify as an improvement.",
+        "A failed, unsupported, cancelled or partial run remains in the evidence. Apply correctness and resource gates before comparing speed or cost."
+      ],
+      "metrics": [
+        "false pass and false fail rates",
+        "agreement with adjudicated labels",
+        "grader run variance",
+        "trace completeness",
+        "observer overhead",
+        "evaluation cost"
+      ],
+      "protocol": [
+        "Before execution, publish the complete workload, output oracle, supported hosts, exact failure model and numeric CPU/memory/storage/latency budgets. Record source and package identities from each candidate's dated evidence.",
+        "Replay frozen normal and adversarial task traces, including incomplete final states and stale evidence. Repeat model grading with pinned prompts and seeds where supported, then adjudicate disagreements independently.",
+        "Separate evaluation harnesses, tracing backends and memory-specific benchmarks into compatible cohorts. Do not compare their output scores as though they share a calibrated scale.",
+        "Run declared cold and warm conditions separately. Retain at least five independent samples per eligible configuration in randomized order, including failures; record OS, hardware, power mode, thread counts, network/cache policy and external service versions.",
+        "Retain complete raw outputs, validation diffs, resource traces, logs, configuration and corpus hashes. An evaluation plan is not an executed result, compatibility certification or universal ranking."
+      ]
+    },
+    {
+      "id": "planned-frontier-serving-hardware-cohorts-20261124",
+      "title": "Inference servers on matched hardware and quality",
+      "priority": 2,
+      "status": "planned",
+      "decision": "Which serving runtime meets latency and complete-request requirements at fixed model quality on each supported hardware class?",
+      "layer_ids": [
+        "ai-tools",
+        "runtime-foundation"
+      ],
+      "candidate_ids": [
+        "sglang",
+        "lmdeploy",
+        "mlx-lm",
+        "mistral-rs",
+        "tensorrt-llm"
+      ],
+      "controls": [
+        "The current inference runtime with identical model weights, tokenizer, precision, decoding parameters and request corpus.",
+        "Pin exact candidate releases or source commits, dependencies, configuration and corpus hashes. Separate default-branch documentation from capabilities verified in the selected package.",
+        "Use the same complete task contract and declared hardware/resource envelope for each eligible configuration. Distinct component roles or deployment models belong in separate cohorts."
+      ],
+      "gates": [
+        "Quality and output checks must pass at the declared tolerance; changing quantization creates a separate cohort.",
+        "All queued, cancelled, long-context and malformed requests produce explicit outcomes without hidden request shedding.",
+        "Retain all required records, assets, outputs, diagnostics and interactions. Content dropping, truncation, virtualization, culling or weakened correctness cannot qualify as an improvement.",
+        "A failed, unsupported, cancelled or partial run remains in the evidence. Apply correctness and resource gates before comparing speed or cost."
+      ],
+      "metrics": [
+        "time to first token",
+        "p50/p95/p99 inter-token latency",
+        "complete-request throughput",
+        "peak host/device memory",
+        "cold loading time",
+        "request failure rate"
+      ],
+      "protocol": [
+        "Before execution, publish the complete workload, output oracle, supported hosts, exact failure model and numeric CPU/memory/storage/latency budgets. Record source and package identities from each candidate's dated evidence.",
+        "Replay fixed short, long, mixed and interrupted request traces. Run Apple Silicon, NVIDIA and other supported backends as separate hardware cohorts, including startup, cache pressure, concurrency bursts and idle recovery.",
+        "Account for runtime-specific model support, kernel compilation and device requirements before admission. A vendor throughput result does not establish local quality or throughput.",
+        "Run declared cold and warm conditions separately. Retain at least five independent samples per eligible configuration in randomized order, including failures; record OS, hardware, power mode, thread counts, network/cache policy and external service versions.",
+        "Retain complete raw outputs, validation diffs, resource traces, logs, configuration and corpus hashes. An evaluation plan is not an executed result, compatibility certification or universal ranking."
+      ]
+    },
+    {
+      "id": "planned-frontier-retrieval-source-recall-20261124",
+      "title": "Retrieval architecture with stable source attribution",
+      "priority": 2,
+      "status": "planned",
+      "decision": "When do pipeline, embedded, graph or managed retrieval designs improve source-grounded answers after ingestion and updates are counted?",
+      "layer_ids": [
+        "local-data-search",
+        "ai-tools",
+        "analytics"
+      ],
+      "candidate_ids": [
+        "haystack",
+        "llamaindex",
+        "lightrag",
+        "ragflow",
+        "txtai",
+        "fastembed"
+      ],
+      "controls": [
+        "Current lexical/vector retrieval over a frozen labeled corpus with identical source documents, chunk contract and embedding model where applicable.",
+        "Pin exact candidate releases or source commits, dependencies, configuration and corpus hashes. Separate default-branch documentation from capabilities verified in the selected package.",
+        "Use the same complete task contract and declared hardware/resource envelope for each eligible configuration. Distinct component roles or deployment models belong in separate cohorts."
+      ],
+      "gates": [
+        "Answer citations resolve to the retained source version and support the associated claim.",
+        "Deletes, conflicting revisions and access scopes propagate correctly through indexes and caches.",
+        "Retain all required records, assets, outputs, diagnostics and interactions. Content dropping, truncation, virtualization, culling or weakened correctness cannot qualify as an improvement.",
+        "A failed, unsupported, cancelled or partial run remains in the evidence. Apply correctness and resource gates before comparing speed or cost."
+      ],
+      "metrics": [
+        "primary-source recall",
+        "citation correctness",
+        "answer accuracy",
+        "index build/update cost",
+        "query latency",
+        "peak memory and storage"
+      ],
+      "protocol": [
+        "Before execution, publish the complete workload, output oracle, supported hosts, exact failure model and numeric CPU/memory/storage/latency budgets. Record source and package identities from each candidate's dated evidence.",
+        "Use labeled exact-match, paraphrase, cross-document, contradictory-date and no-answer queries. Measure complete ingestion, incremental updates, deletion, restart and index recovery before query performance.",
+        "Compare engines at a fixed chunk/embedding contract first; evaluate changed retrieval architecture as a separately declared experiment. Embedding generation and graph construction belong inside total cost.",
+        "Run declared cold and warm conditions separately. Retain at least five independent samples per eligible configuration in randomized order, including failures; record OS, hardware, power mode, thread counts, network/cache policy and external service versions.",
+        "Retain complete raw outputs, validation diffs, resource traces, logs, configuration and corpus hashes. An evaluation plan is not an executed result, compatibility certification or universal ranking."
+      ]
+    },
+    {
+      "id": "planned-frontier-temporal-agent-memory-20261124",
+      "title": "Agent memory with conflicts, deletion and provenance",
+      "priority": 2,
+      "status": "planned",
+      "decision": "Which memory design recalls changing project decisions without losing original evidence, temporal order or user isolation?",
+      "layer_ids": [
+        "ai-tools",
+        "local-data-search",
+        "durable-jobs"
+      ],
+      "candidate_ids": [
+        "mem0",
+        "letta",
+        "graphiti",
+        "cognee",
+        "memos",
+        "hindsight",
+        "simplemem",
+        "memeval"
+      ],
+      "controls": [
+        "An append-only source log with deterministic retrieval and an explicit current-decision index.",
+        "Pin exact candidate releases or source commits, dependencies, configuration and corpus hashes. Separate default-branch documentation from capabilities verified in the selected package.",
+        "Use the same complete task contract and declared hardware/resource envelope for each eligible configuration. Distinct component roles or deployment models belong in separate cohorts."
+      ],
+      "gates": [
+        "Original records and source identifiers remain recoverable; derived memory never replaces the original evidence.",
+        "Corrections, revoked facts, user isolation and deletion requests pass explicit state checks.",
+        "Retain all required records, assets, outputs, diagnostics and interactions. Content dropping, truncation, virtualization, culling or weakened correctness cannot qualify as an improvement.",
+        "A failed, unsupported, cancelled or partial run remains in the evidence. Apply correctness and resource gates before comparing speed or cost."
+      ],
+      "metrics": [
+        "time-sensitive answer accuracy",
+        "source attribution precision",
+        "conflicting-fact error rate",
+        "deletion propagation",
+        "update/retrieval latency",
+        "storage and model cost"
+      ],
+      "protocol": [
+        "Before execution, publish the complete workload, output oracle, supported hosts, exact failure model and numeric CPU/memory/storage/latency budgets. Record source and package identities from each candidate's dated evidence.",
+        "Create a versioned event corpus containing corrected decisions, renamed tools, stale facts, similar users and delayed events. Query before and after each update, restart the memory backend and compare against a frozen temporal oracle.",
+        "Separate agent-integrated memory from external memory services. Use MemEval as a measurement harness where compatible; do not count compressed memory alone as complete retention.",
+        "Run declared cold and warm conditions separately. Retain at least five independent samples per eligible configuration in randomized order, including failures; record OS, hardware, power mode, thread counts, network/cache policy and external service versions.",
+        "Retain complete raw outputs, validation diffs, resource traces, logs, configuration and corpus hashes. An evaluation plan is not an executed result, compatibility certification or universal ranking."
+      ]
+    },
+    {
+      "id": "planned-frontier-document-meaning-preservation-20261124",
+      "title": "Document parsing with text, layout and provenance",
+      "priority": 2,
+      "status": "planned",
+      "decision": "Which parser or OCR route preserves required document meaning and source locations with the lowest complete-document cost?",
+      "layer_ids": [
+        "file-processing",
+        "ai-tools",
+        "local-data-search"
+      ],
+      "candidate_ids": [
+        "marker",
+        "surya",
+        "paddleocr",
+        "olmocr",
+        "chandra",
+        "liteparse"
+      ],
+      "controls": [
+        "Current text extraction and OCR pipeline against a manually checked document corpus with original files retained.",
+        "Pin exact candidate releases or source commits, dependencies, configuration and corpus hashes. Separate default-branch documentation from capabilities verified in the selected package.",
+        "Use the same complete task contract and declared hardware/resource envelope for each eligible configuration. Distinct component roles or deployment models belong in separate cohorts."
+      ],
+      "gates": [
+        "Every required page, table, formula, caption and reading-order relationship remains represented or explicitly reported as unsupported.",
+        "Extracted claims retain page/region attribution; generated descriptions are distinguishable from source text.",
+        "Retain all required records, assets, outputs, diagnostics and interactions. Content dropping, truncation, virtualization, culling or weakened correctness cannot qualify as an improvement.",
+        "A failed, unsupported, cancelled or partial run remains in the evidence. Apply correctness and resource gates before comparing speed or cost."
+      ],
+      "metrics": [
+        "character/word error rate",
+        "reading-order accuracy",
+        "table cell and formula fidelity",
+        "page attribution accuracy",
+        "complete-document latency",
+        "device memory and model cost"
+      ],
+      "protocol": [
+        "Before execution, publish the complete workload, output oracle, supported hosts, exact failure model and numeric CPU/memory/storage/latency budgets. Record source and package identities from each candidate's dated evidence.",
+        "Use born-digital, scanned, multilingual, rotated, multi-column and malformed PDFs with tables, formulas and embedded images. Compare full outputs, page counts and failure reports before time; include encrypted or corrupt-input outcomes.",
+        "Separate parser-only, OCR and model-assisted routes and review code/model-weight terms independently. A Markdown-shaped response is not evidence that document meaning was preserved.",
+        "Run declared cold and warm conditions separately. Retain at least five independent samples per eligible configuration in randomized order, including failures; record OS, hardware, power mode, thread counts, network/cache policy and external service versions.",
+        "Retain complete raw outputs, validation diffs, resource traces, logs, configuration and corpus hashes. An evaluation plan is not an executed result, compatibility certification or universal ranking."
+      ]
+    },
+    {
+      "id": "planned-frontier-prompt-optimization-holdout-20261124",
+      "title": "Prompt optimization with protected held-out behavior",
+      "priority": 2,
+      "status": "planned",
+      "decision": "Does optimization improve held-out research accuracy after optimization cost, regressions and model changes are included?",
+      "layer_ids": [
+        "ai-tools",
+        "testing-observability"
+      ],
+      "candidate_ids": [
+        "dspy",
+        "pydantic-ai",
+        "agno"
+      ],
+      "controls": [
+        "A frozen hand-authored prompt/workflow using the same model, tools, validators and allowed budget.",
+        "Pin exact candidate releases or source commits, dependencies, configuration and corpus hashes. Separate default-branch documentation from capabilities verified in the selected package.",
+        "Use the same complete task contract and declared hardware/resource envelope for each eligible configuration. Distinct component roles or deployment models belong in separate cohorts."
+      ],
+      "gates": [
+        "No evaluation or held-out answers enter optimization data.",
+        "Optimized tasks retain the complete schema, citation checks and all required workflow steps.",
+        "Retain all required records, assets, outputs, diagnostics and interactions. Content dropping, truncation, virtualization, culling or weakened correctness cannot qualify as an improvement.",
+        "A failed, unsupported, cancelled or partial run remains in the evidence. Apply correctness and resource gates before comparing speed or cost."
+      ],
+      "metrics": [
+        "held-out evidence accuracy",
+        "worst-case task regressions",
+        "optimization cost",
+        "inference cost",
+        "run variance",
+        "transfer to a newer model snapshot"
+      ],
+      "protocol": [
+        "Before execution, publish the complete workload, output oracle, supported hosts, exact failure model and numeric CPU/memory/storage/latency budgets. Record source and package identities from each candidate's dated evidence.",
+        "Split repositories and task families before any tuning. Optimize on training tasks, select on validation tasks and evaluate once on held-out tasks; include no-answer and conflicting-source cases.",
+        "Treat a model upgrade as a new evaluation condition. Retain failed optimization trials and report amortization over the declared deployment volume.",
+        "Run declared cold and warm conditions separately. Retain at least five independent samples per eligible configuration in randomized order, including failures; record OS, hardware, power mode, thread counts, network/cache policy and external service versions.",
+        "Retain complete raw outputs, validation diffs, resource traces, logs, configuration and corpus hashes. An evaluation plan is not an executed result, compatibility certification or universal ranking."
+      ]
+    },
+    {
+      "id": "planned-frontier-accessible-native-interface-20261124",
+      "title": "Complete native UI and accessibility across hosts",
+      "priority": 2,
+      "status": "planned",
+      "decision": "Which native UI composition preserves the complete catalog experience, accessibility and visual contract on required hosts?",
+      "layer_ids": [
+        "desktop-host",
+        "collection-ui",
+        "testing-observability"
+      ],
+      "candidate_ids": [
+        "slint",
+        "floem",
+        "egui",
+        "accesskit",
+        "taffy"
+      ],
+      "controls": [
+        "The current complete Athena screen and interaction suite, with every record and control retained.",
+        "Pin exact candidate releases or source commits, dependencies, configuration and corpus hashes. Separate default-branch documentation from capabilities verified in the selected package.",
+        "Use the same complete task contract and declared hardware/resource envelope for each eligible configuration. Distinct component roles or deployment models belong in separate cohorts."
+      ],
+      "gates": [
+        "Keyboard navigation, screen-reader names/roles/states, focus, IME, text selection and all actions match the acceptance contract.",
+        "All records and visual elements remain available; rendering fewer records cannot qualify as an improvement.",
+        "Retain all required records, assets, outputs, diagnostics and interactions. Content dropping, truncation, virtualization, culling or weakened correctness cannot qualify as an improvement.",
+        "A failed, unsupported, cancelled or partial run remains in the evidence. Apply correctness and resource gates before comparing speed or cost."
+      ],
+      "metrics": [
+        "input-to-visible p95/p99 latency",
+        "accessibility failures",
+        "first-use latency",
+        "idle CPU",
+        "peak memory",
+        "visual diff and layout errors"
+      ],
+      "protocol": [
+        "Before execution, publish the complete workload, output oracle, supported hosts, exact failure model and numeric CPU/memory/storage/latency budgets. Record source and package identities from each candidate's dated evidence.",
+        "Replay identical complete screens at multiple window sizes and DPI settings. Include long labels, bidirectional text, dense content, updates during navigation, theme changes and accessibility-tree inspections on each supported host.",
+        "Compare UI frameworks as hosts and AccessKit/Taffy as distinct accessibility/layout components. Pin bindings and package versions separately; do not infer all adapter maturity from a repository release tag.",
+        "Run declared cold and warm conditions separately. Retain at least five independent samples per eligible configuration in randomized order, including failures; record OS, hardware, power mode, thread counts, network/cache policy and external service versions.",
+        "Retain complete raw outputs, validation diffs, resource traces, logs, configuration and corpus hashes. An evaluation plan is not an executed result, compatibility certification or universal ranking."
+      ]
+    },
+    {
+      "id": "planned-frontier-graphics-physics-contracts-20261124",
+      "title": "Graphics, game architecture and physics release qualification",
+      "priority": 2,
+      "status": "planned",
+      "decision": "Which rendering and simulation components preserve complete scene behavior across the exact compiler/backend combinations required?",
+      "layer_ids": [
+        "game-rendering",
+        "build-toolchain",
+        "testing-observability"
+      ],
+      "candidate_ids": [
+        "wgpu",
+        "slang-shaders",
+        "bevy",
+        "fyrox",
+        "flecs",
+        "jolt-physics",
+        "rapier"
+      ],
+      "controls": [
+        "The current renderer, scene representation and physics implementation with the same assets, world state, timesteps and required visible output.",
+        "Pin exact candidate releases or source commits, dependencies, configuration and corpus hashes. Separate default-branch documentation from capabilities verified in the selected package.",
+        "Use the same complete task contract and declared hardware/resource envelope for each eligible configuration. Distinct component roles or deployment models belong in separate cohorts."
+      ],
+      "gates": [
+        "Required pixels, geometry, scene behavior and physics events meet declared visual/numeric tolerances.",
+        "No objects, content, simulation work or rendering requirements are removed to improve measurements.",
+        "Retain all required records, assets, outputs, diagnostics and interactions. Content dropping, truncation, virtualization, culling or weakened correctness cannot qualify as an improvement.",
+        "A failed, unsupported, cancelled or partial run remains in the evidence. Apply correctness and resource gates before comparing speed or cost."
+      ],
+      "metrics": [
+        "p95/p99 frame and simulation times",
+        "replay divergence",
+        "shader compile and load time",
+        "GPU/CPU memory",
+        "backend/compiler failures",
+        "editor and asset round-trip correctness"
+      ],
+      "protocol": [
+        "Before execution, publish the complete workload, output oracle, supported hosts, exact failure model and numeric CPU/memory/storage/latency budgets. Record source and package identities from each candidate's dated evidence.",
+        "Use complete scenes with dynamic creation/removal, contacts, constraints, hierarchy updates and hot reload. Compare engine/ECS architecture, rendering APIs/shader tooling and physics engines in separate cohorts; replay identical input/state streams.",
+        "Include device loss and invalid-resource recovery for wgpu, shader backend parity for Slang and exact MSVC floating-point flags for Jolt. A compiler fix or major release is not a local speed result.",
+        "Run declared cold and warm conditions separately. Retain at least five independent samples per eligible configuration in randomized order, including failures; record OS, hardware, power mode, thread counts, network/cache policy and external service versions.",
+        "Retain complete raw outputs, validation diffs, resource traces, logs, configuration and corpus hashes. An evaluation plan is not an executed result, compatibility certification or universal ranking."
+      ]
+    },
+    {
+      "id": "planned-frontier-storage-release-migrations-20261124",
+      "title": "Embedded-store upgrades with encoding and recovery proof",
+      "priority": 2,
+      "status": "planned",
+      "decision": "Can current embedded-store releases improve a real metadata workload without changing acknowledged durability, value encodings or migration behavior?",
+      "layer_ids": [
+        "local-data-search",
+        "durable-jobs"
+      ],
+      "candidate_ids": [
+        "redb",
+        "fjall",
+        "turso-database"
+      ],
+      "controls": [
+        "The deployed store revision, schema, transaction boundaries and acknowledged-write durability contract.",
+        "Pin exact candidate releases or source commits, dependencies, configuration and corpus hashes. Separate default-branch documentation from capabilities verified in the selected package.",
+        "Use the same complete task contract and declared hardware/resource envelope for each eligible configuration. Distinct component roles or deployment models belong in separate cohorts."
+      ],
+      "gates": [
+        "All committed records and indexes survive the declared failure model without acknowledged-write loss.",
+        "Forward/rollback migrations preserve values, constraints and query behavior; unsupported SQL or encodings disqualify a drop-in claim.",
+        "Retain all required records, assets, outputs, diagnostics and interactions. Content dropping, truncation, virtualization, culling or weakened correctness cannot qualify as an improvement.",
+        "A failed, unsupported, cancelled or partial run remains in the evidence. Apply correctness and resource gates before comparing speed or cost."
+      ],
+      "metrics": [
+        "durable commit latency",
+        "p99 reads under writes",
+        "write/storage amplification",
+        "restart recovery time",
+        "migration time",
+        "value/index mismatches"
+      ],
+      "protocol": [
+        "Before execution, publish the complete workload, output oracle, supported hosts, exact failure model and numeric CPU/memory/storage/latency budgets. Record source and package identities from each candidate's dated evidence.",
+        "Build copies of the complete catalog and replay imports, concurrent readers/writers, updates, deletes, long readers, disk-full and interrupted journal writes. Reopen after each injected failure and compare every committed value/index.",
+        "Explicitly test redb 5 typed-value encoding changes and its legacy migration route. Keep Fjall compaction/durability settings visible and evaluate Turso SQLite compatibility against exact application queries.",
+        "Run declared cold and warm conditions separately. Retain at least five independent samples per eligible configuration in randomized order, including failures; record OS, hardware, power mode, thread counts, network/cache policy and external service versions.",
+        "Retain complete raw outputs, validation diffs, resource traces, logs, configuration and corpus hashes. An evaluation plan is not an executed result, compatibility certification or universal ranking."
+      ]
+    },
+    {
+      "id": "planned-frontier-columnar-array-evidence-20261124",
+      "title": "Columnar and scientific data with format-version boundaries",
+      "priority": 2,
+      "status": "planned",
+      "decision": "Which data format and query stack preserves exact evidence, schema evolution and concurrent publication while reducing complete analysis cost?",
+      "layer_ids": [
+        "analytics",
+        "local-data-search",
+        "file-processing"
+      ],
+      "candidate_ids": [
+        "vortex",
+        "apache-datafusion",
+        "lance-format",
+        "icechunk"
+      ],
+      "controls": [
+        "Current dataset format and query implementation with identical values, projections, schemas and committed dataset versions.",
+        "Pin exact candidate releases or source commits, dependencies, configuration and corpus hashes. Separate default-branch documentation from capabilities verified in the selected package.",
+        "Use the same complete task contract and declared hardware/resource envelope for each eligible configuration. Distinct component roles or deployment models belong in separate cohorts."
+      ],
+      "gates": [
+        "All query/array values and null/order/number semantics match the oracle.",
+        "Readers never observe partially published data; older retained snapshots remain readable under the declared compatibility policy.",
+        "Retain all required records, assets, outputs, diagnostics and interactions. Content dropping, truncation, virtualization, culling or weakened correctness cannot qualify as an improvement.",
+        "A failed, unsupported, cancelled or partial run remains in the evidence. Apply correctness and resource gates before comparing speed or cost."
+      ],
+      "metrics": [
+        "cold/warm query and array read time",
+        "bytes read/written",
+        "peak memory and spill",
+        "schema migration correctness",
+        "snapshot/transaction latency",
+        "API versus format compatibility failures"
+      ],
+      "protocol": [
+        "Before execution, publish the complete workload, output oracle, supported hosts, exact failure model and numeric CPU/memory/storage/latency budgets. Record source and package identities from each candidate's dated evidence.",
+        "Use complete columnar and multidimensional datasets with nulls, nested values, selective and full scans, concurrent updates and interrupted publication. Compare query engines at a fixed format, then compare formats under a fixed workload.",
+        "Record library/API versions separately from stable on-disk format versions. Pin Lance storage version instead of an unstable next alias and qualify Vortex encodings and Icechunk transaction/format boundaries.",
+        "Run declared cold and warm conditions separately. Retain at least five independent samples per eligible configuration in randomized order, including failures; record OS, hardware, power mode, thread counts, network/cache policy and external service versions.",
+        "Retain complete raw outputs, validation diffs, resource traces, logs, configuration and corpus hashes. An evaluation plan is not an executed result, compatibility certification or universal ranking."
+      ]
+    },
+    {
+      "id": "planned-frontier-wasm-host-rights-20261124",
+      "title": "Portable helpers with explicit host rights and cancellation",
+      "priority": 2,
+      "status": "planned",
+      "decision": "Which WebAssembly runtime executes the full helper contract with verifiable host capabilities and bounded cancellation?",
+      "layer_ids": [
+        "portable-features",
+        "plugin-isolation"
+      ],
+      "candidate_ids": [
+        "wasmtime",
+        "wasmer"
+      ],
+      "controls": [
+        "Native execution of the same transformation plus the current isolated helper implementation.",
+        "Pin exact candidate releases or source commits, dependencies, configuration and corpus hashes. Separate default-branch documentation from capabilities verified in the selected package.",
+        "Use the same complete task contract and declared hardware/resource envelope for each eligible configuration. Distinct component roles or deployment models belong in separate cohorts."
+      ],
+      "gates": [
+        "Outputs, errors and diagnostics match the complete native contract.",
+        "Disallowed file/network/host imports fail, and cancellation plus cleanup meet the declared limits without leaking partial state.",
+        "Retain all required records, assets, outputs, diagnostics and interactions. Content dropping, truncation, virtualization, culling or weakened correctness cannot qualify as an improvement.",
+        "A failed, unsupported, cancelled or partial run remains in the evidence. Apply correctness and resource gates before comparing speed or cost."
+      ],
+      "metrics": [
+        "cold initialization/compilation",
+        "complete helper latency",
+        "host-call overhead",
+        "peak memory",
+        "cancellation latency",
+        "capability escape and compatibility failures"
+      ],
+      "protocol": [
+        "Before execution, publish the complete workload, output oracle, supported hosts, exact failure model and numeric CPU/memory/storage/latency budgets. Record source and package identities from each candidate's dated evidence.",
+        "Package one complete transformation with Unicode, large inputs, malformed data, callbacks and resource exhaustion fixtures. Run in each required host with an explicit allowlist of imports and compare complete output/effect logs.",
+        "Pin WASI/component/proposal support and SDK versions separately. Runtime execution does not establish a safe permission model; host imports define the actual authority boundary.",
+        "Run declared cold and warm conditions separately. Retain at least five independent samples per eligible configuration in randomized order, including failures; record OS, hardware, power mode, thread counts, network/cache policy and external service versions.",
+        "Retain complete raw outputs, validation diffs, resource traces, logs, configuration and corpus hashes. An evaluation plan is not an executed result, compatibility certification or universal ranking."
+      ]
+    },
+    {
+      "id": "planned-frontier-native-build-current-toolchains-20261124",
+      "title": "Current native linkers and profile-guided builds",
+      "priority": 2,
+      "status": "planned",
+      "decision": "Which linker or profile-guided build change improves full application delivery on supported targets without ABI, diagnostics or runtime regressions?",
+      "layer_ids": [
+        "build-toolchain",
+        "testing-observability"
+      ],
+      "candidate_ids": [
+        "wild-linker",
+        "mold",
+        "cargo-pgo"
+      ],
+      "controls": [
+        "The project's existing compiler/linker flags and reproducible release build on the same target.",
+        "Pin exact candidate releases or source commits, dependencies, configuration and corpus hashes. Separate default-branch documentation from capabilities verified in the selected package.",
+        "Use the same complete task contract and declared hardware/resource envelope for each eligible configuration. Distinct component roles or deployment models belong in separate cohorts."
+      ],
+      "gates": [
+        "All symbols, debugging, exceptions, TLS, shared-library and startup behavior remain compatible.",
+        "Held-out application behavior and output remain correct; training workload gains alone are insufficient.",
+        "Retain all required records, assets, outputs, diagnostics and interactions. Content dropping, truncation, virtualization, culling or weakened correctness cannot qualify as an improvement.",
+        "A failed, unsupported, cancelled or partial run remains in the evidence. Apply correctness and resource gates before comparing speed or cost."
+      ],
+      "metrics": [
+        "full clean build time",
+        "edit-to-debuggable-build time",
+        "peak linker memory",
+        "binary size",
+        "held-out application latency",
+        "profile generation and maintenance cost"
+      ],
+      "protocol": [
+        "Before execution, publish the complete workload, output oracle, supported hosts, exact failure model and numeric CPU/memory/storage/latency budgets. Record source and package identities from each candidate's dated evidence.",
+        "Build unchanged, single-file-edited and dependency-edited revisions; execute the full runtime smoke contract after linking. Compare linkers independently, then evaluate PGO on fixed training and held-out journeys.",
+        "Wild incremental linking is not implemented; do not claim an incremental-link win. Separate Linux ELF, experimental Mach-O and WebAssembly targets, and match cargo-pgo/LLVM/BOLT tooling exactly.",
+        "Run declared cold and warm conditions separately. Retain at least five independent samples per eligible configuration in randomized order, including failures; record OS, hardware, power mode, thread counts, network/cache policy and external service versions.",
+        "Retain complete raw outputs, validation diffs, resource traces, logs, configuration and corpus hashes. An evaluation plan is not an executed result, compatibility certification or universal ranking."
+      ]
+    },
+    {
+      "id": "planned-frontier-native-measurement-compute-20261124",
+      "title": "Measurement calibration and complete compute pipelines",
+      "priority": 2,
+      "status": "planned",
+      "decision": "Which measurement, allocator or compute change explains and improves a real bottleneck while preserving all work and numeric behavior?",
+      "layer_ids": [
+        "testing-observability",
+        "file-processing",
+        "runtime-foundation"
+      ],
+      "candidate_ids": [
+        "divan",
+        "gungraun",
+        "tokio-console",
+        "mimalloc",
+        "highway-simd",
+        "halide"
+      ],
+      "controls": [
+        "Uninstrumented complete application timing plus a fixed reference kernel and the current allocator.",
+        "Pin exact candidate releases or source commits, dependencies, configuration and corpus hashes. Separate default-branch documentation from capabilities verified in the selected package.",
+        "Use the same complete task contract and declared hardware/resource envelope for each eligible configuration. Distinct component roles or deployment models belong in separate cohorts."
+      ],
+      "gates": [
+        "Numeric outputs meet a declared bitwise/tolerance oracle and all required data is processed.",
+        "Observer overhead is measured separately; instruction/cycle models cannot be presented as observed wall-clock latency.",
+        "Retain all required records, assets, outputs, diagnostics and interactions. Content dropping, truncation, virtualization, culling or weakened correctness cannot qualify as an improvement.",
+        "A failed, unsupported, cancelled or partial run remains in the evidence. Apply correctness and resource gates before comparing speed or cost."
+      ],
+      "metrics": [
+        "end-to-end latency distribution",
+        "instruction/counter variance",
+        "observer overhead",
+        "peak/retained memory",
+        "async task stalls",
+        "CPU dispatch and compilation cost"
+      ],
+      "protocol": [
+        "Before execution, publish the complete workload, output oracle, supported hosts, exact failure model and numeric CPU/memory/storage/latency budgets. Record source and package identities from each candidate's dated evidence.",
+        "Calibrate timers and instrumentation on known CPU, allocation and async-stall fixtures. Compare measurement tools as observers, then test allocator/SIMD/Halide changes one variable at a time in the full file or image pipeline.",
+        "Gungraun native Windows support is absent; keep its supported hosts explicit. Preserve tokio-console subscriber/package identities and compare mimalloc release lines without conflating their version numbers.",
+        "Run declared cold and warm conditions separately. Retain at least five independent samples per eligible configuration in randomized order, including failures; record OS, hardware, power mode, thread counts, network/cache policy and external service versions.",
+        "Retain complete raw outputs, validation diffs, resource traces, logs, configuration and corpus hashes. An evaluation plan is not an executed result, compatibility certification or universal ranking."
+      ]
+    },
+    {
+      "id": "planned-frontier-python-diagnostic-parity-20261124",
+      "title": "Python type-checker diagnostic and edit-loop parity",
+      "priority": 2,
+      "status": "planned",
+      "decision": "Do current type checkers preserve required diagnostics and language support while improving full-workspace feedback?",
+      "layer_ids": [
+        "testing-observability",
+        "build-toolchain"
+      ],
+      "candidate_ids": [
+        "ty",
+        "pyrefly"
+      ],
+      "controls": [
+        "Current type checker, accepted diagnostics, Python versions, stubs and editor workflow.",
+        "Pin exact candidate releases or source commits, dependencies, configuration and corpus hashes. Separate default-branch documentation from capabilities verified in the selected package.",
+        "Use the same complete task contract and declared hardware/resource envelope for each eligible configuration. Distinct component roles or deployment models belong in separate cohorts."
+      ],
+      "gates": [
+        "All mandatory positive/negative typing fixtures retain correct results.",
+        "Configuration migration cannot silently exclude modules, checks or supported Python targets.",
+        "Retain all required records, assets, outputs, diagnostics and interactions. Content dropping, truncation, virtualization, culling or weakened correctness cannot qualify as an improvement.",
+        "A failed, unsupported, cancelled or partial run remains in the evidence. Apply correctness and resource gates before comparing speed or cost."
+      ],
+      "metrics": [
+        "required diagnostic recall",
+        "false positives",
+        "clean/incremental check latency",
+        "peak memory",
+        "editor diagnostic stability",
+        "migration effort"
+      ],
+      "protocol": [
+        "Before execution, publish the complete workload, output oracle, supported hosts, exact failure model and numeric CPU/memory/storage/latency budgets. Record source and package identities from each candidate's dated evidence.",
+        "Run a frozen repository corpus with generics, protocols, overloads, imports, stubs and intentional errors. Replay edits that change both local and dependent types and compare exact diagnostic locations/categories.",
+        "Pin Python and checker versions. Preserve Pyrefly repository aliases, and treat claimed speed independently from language-feature and IDE compatibility.",
+        "Run declared cold and warm conditions separately. Retain at least five independent samples per eligible configuration in randomized order, including failures; record OS, hardware, power mode, thread counts, network/cache policy and external service versions.",
+        "Retain complete raw outputs, validation diffs, resource traces, logs, configuration and corpus hashes. An evaluation plan is not an executed result, compatibility certification or universal ranking."
+      ]
+    },
+    {
+      "id": "planned-frontier-web-toolchain-contract-20261124",
+      "title": "Web lint, format, bundle and test contracts",
+      "priority": 2,
+      "status": "planned",
+      "decision": "Which current web-toolchain components improve the complete edit/build loop without losing rule coverage, module behavior or test detection?",
+      "layer_ids": [
+        "build-toolchain",
+        "testing-observability"
+      ],
+      "candidate_ids": [
+        "biome",
+        "oxc",
+        "rolldown",
+        "tsdown",
+        "rspack",
+        "rstest"
+      ],
+      "controls": [
+        "Current lint rules, formatter, bundler and test runner with the same workspace, lockfile and output contract.",
+        "Pin exact candidate releases or source commits, dependencies, configuration and corpus hashes. Separate default-branch documentation from capabilities verified in the selected package.",
+        "Use the same complete task contract and declared hardware/resource envelope for each eligible configuration. Distinct component roles or deployment models belong in separate cohorts."
+      ],
+      "gates": [
+        "Mandatory lint diagnostics and safe fixes remain, format output is idempotent and runtime exports/module behavior are unchanged.",
+        "Source maps and all required tests remain correct; excluding unsupported files/tests is ineligible.",
+        "Retain all required records, assets, outputs, diagnostics and interactions. Content dropping, truncation, virtualization, culling or weakened correctness cannot qualify as an improvement.",
+        "A failed, unsupported, cancelled or partial run remains in the evidence. Apply correctness and resource gates before comparing speed or cost."
+      ],
+      "metrics": [
+        "diagnostic/rule parity",
+        "unsafe fix count",
+        "format idempotence",
+        "cold build and edit latency",
+        "source-map accuracy",
+        "complete-test detection and latency"
+      ],
+      "protocol": [
+        "Before execution, publish the complete workload, output oracle, supported hosts, exact failure model and numeric CPU/memory/storage/latency budgets. Record source and package identities from each candidate's dated evidence.",
+        "Use real packages plus ESM/CJS interop, dynamic imports, CSS/assets, sourcemaps, declaration files and failing tests. Compare lint/format, bundling and runner changes separately before composing a stack.",
+        "Keep Oxc, Oxlint and Oxfmt component versions distinct; tsdown and its bundler are separate layers. Record plugin/configuration gaps explicitly.",
+        "Run declared cold and warm conditions separately. Retain at least five independent samples per eligible configuration in randomized order, including failures; record OS, hardware, power mode, thread counts, network/cache policy and external service versions.",
+        "Retain complete raw outputs, validation diffs, resource traces, logs, configuration and corpus hashes. An evaluation plan is not an executed result, compatibility certification or universal ranking."
+      ]
+    },
+    {
+      "id": "planned-frontier-task-environment-reproducibility-20261124",
+      "title": "Task graphs and environments with cache invalidation",
+      "priority": 2,
+      "status": "planned",
+      "decision": "Which orchestration and environment tools reproduce the complete build graph and improve repeat work without stale-cache success?",
+      "layer_ids": [
+        "build-toolchain",
+        "testing-observability"
+      ],
+      "candidate_ids": [
+        "moon",
+        "proto",
+        "dagger",
+        "devenv",
+        "pants",
+        "turborepo",
+        "nx"
+      ],
+      "controls": [
+        "Current build scripts and pinned developer/CI environment, including uncached clean builds.",
+        "Pin exact candidate releases or source commits, dependencies, configuration and corpus hashes. Separate default-branch documentation from capabilities verified in the selected package.",
+        "Use the same complete task contract and declared hardware/resource envelope for each eligible configuration. Distinct component roles or deployment models belong in separate cohorts."
+      ],
+      "gates": [
+        "Outputs and diagnostics match clean execution for every required task.",
+        "Changes to code, environment, toolchain, dependencies and undeclared inputs invalidate the correct cache entries.",
+        "Retain all required records, assets, outputs, diagnostics and interactions. Content dropping, truncation, virtualization, culling or weakened correctness cannot qualify as an improvement.",
+        "A failed, unsupported, cancelled or partial run remains in the evidence. Apply correctness and resource gates before comparing speed or cost."
+      ],
+      "metrics": [
+        "clean/warm completion time",
+        "cache false-hit rate",
+        "rebuild scope correctness",
+        "setup time",
+        "artifact reproducibility",
+        "operator and maintenance effort"
+      ],
+      "protocol": [
+        "Before execution, publish the complete workload, output oracle, supported hosts, exact failure model and numeric CPU/memory/storage/latency budgets. Record source and package identities from each candidate's dated evidence.",
+        "Replay a fixed monorepo edit series covering source, configuration, generated inputs, dependency updates and environment drift. Execute clean and cache-restored runs on required developer and CI hosts.",
+        "Toolchain provisioning, task scheduling and containerized pipelines solve distinct problems; compare them in compatible cohorts before combining them. Retain cache provenance and all task failures.",
+        "Run declared cold and warm conditions separately. Retain at least five independent samples per eligible configuration in randomized order, including failures; record OS, hardware, power mode, thread counts, network/cache policy and external service versions.",
+        "Retain complete raw outputs, validation diffs, resource traces, logs, configuration and corpus hashes. An evaluation plan is not an executed result, compatibility certification or universal ranking."
+      ]
+    },
+    {
+      "id": "planned-frontier-durable-effect-contracts-20261124",
+      "title": "Durable workflows under retries and version changes",
+      "priority": 2,
+      "status": "planned",
+      "decision": "Which durable-execution stack meets the actual side-effect, replay and deployment contract with acceptable recovery cost?",
+      "layer_ids": [
+        "durable-jobs",
+        "api-services"
+      ],
+      "candidate_ids": [
+        "temporal",
+        "restate",
+        "dbos",
+        "hatchet",
+        "inngest",
+        "windmill"
+      ],
+      "controls": [
+        "Current job queue plus an explicit durable effect ledger and idempotency keys.",
+        "Pin exact candidate releases or source commits, dependencies, configuration and corpus hashes. Separate default-branch documentation from capabilities verified in the selected package.",
+        "Use the same complete task contract and declared hardware/resource envelope for each eligible configuration. Distinct component roles or deployment models belong in separate cohorts."
+      ],
+      "gates": [
+        "Every acknowledged operation has the declared durable outcome after worker/server failures.",
+        "Retries, cancellation, delayed events and deployment upgrades cannot duplicate non-idempotent effects or silently lose jobs.",
+        "Retain all required records, assets, outputs, diagnostics and interactions. Content dropping, truncation, virtualization, culling or weakened correctness cannot qualify as an improvement.",
+        "A failed, unsupported, cancelled or partial run remains in the evidence. Apply correctness and resource gates before comparing speed or cost."
+      ],
+      "metrics": [
+        "effect duplication/loss",
+        "restart-to-recovery time",
+        "queue/retry tail latency",
+        "history/storage growth",
+        "upgrade compatibility",
+        "operational cost"
+      ],
+      "protocol": [
+        "Before execution, publish the complete workload, output oracle, supported hosts, exact failure model and numeric CPU/memory/storage/latency budgets. Record source and package identities from each candidate's dated evidence.",
+        "Run long and short jobs with timers, fan-out, external writes, transient/permanent failures and worker crashes at every boundary. Upgrade code while old histories remain and compare effect logs after replay.",
+        "Separate database transactions, workflow durability and external side effects. Record each deployment edition, license and service dependency instead of treating all durability claims as identical.",
+        "Run declared cold and warm conditions separately. Retain at least five independent samples per eligible configuration in randomized order, including failures; record OS, hardware, power mode, thread counts, network/cache policy and external service versions.",
+        "Retain complete raw outputs, validation diffs, resource traces, logs, configuration and corpus hashes. An evaluation plan is not an executed result, compatibility certification or universal ranking."
+      ]
+    },
+    {
+      "id": "planned-frontier-api-property-fault-evidence-20261124",
+      "title": "API, property and dependency-fault testing",
+      "priority": 2,
+      "status": "planned",
+      "decision": "Which testing components expose real invariant and recovery failures beyond the existing example suite?",
+      "layer_ids": [
+        "testing-observability",
+        "api-services"
+      ],
+      "candidate_ids": [
+        "schemathesis",
+        "hypothesis",
+        "fast-check",
+        "testcontainers-node",
+        "mock-service-worker",
+        "toxiproxy"
+      ],
+      "controls": [
+        "Current example tests and independently planted known faults in a disposable test service.",
+        "Pin exact candidate releases or source commits, dependencies, configuration and corpus hashes. Separate default-branch documentation from capabilities verified in the selected package.",
+        "Use the same complete task contract and declared hardware/resource envelope for each eligible configuration. Distinct component roles or deployment models belong in separate cohorts."
+      ],
+      "gates": [
+        "Every planted in-scope fault has a retained reproducible witness; false positives are adjudicated.",
+        "Mocks and fault injection cannot replace required real-service contract tests.",
+        "Retain all required records, assets, outputs, diagnostics and interactions. Content dropping, truncation, virtualization, culling or weakened correctness cannot qualify as an improvement.",
+        "A failed, unsupported, cancelled or partial run remains in the evidence. Apply correctness and resource gates before comparing speed or cost."
+      ],
+      "metrics": [
+        "known-fault detection",
+        "minimal reproduction quality",
+        "false positives",
+        "flakiness",
+        "complete-suite cost",
+        "failure diagnosis time"
+      ],
+      "protocol": [
+        "Before execution, publish the complete workload, output oracle, supported hosts, exact failure model and numeric CPU/memory/storage/latency budgets. Record source and package identities from each candidate's dated evidence.",
+        "Generate schema-bound requests and state-machine sequences, then inject slow links, disconnects, retries, malformed payloads and dependency restarts. Compare mock, container and real dependency behavior on identical contracts.",
+        "Keep generator, mock server, container harness and network proxy roles distinct. Retain seeds, shrink traces, schemas, dependency images and raw failure outputs.",
+        "Run declared cold and warm conditions separately. Retain at least five independent samples per eligible configuration in randomized order, including failures; record OS, hardware, power mode, thread counts, network/cache policy and external service versions.",
+        "Retain complete raw outputs, validation diffs, resource traces, logs, configuration and corpus hashes. An evaluation plan is not an executed result, compatibility certification or universal ranking."
+      ]
+    },
+    {
+      "id": "planned-frontier-telemetry-loss-and-correlation-20261124",
+      "title": "Telemetry pipelines with loss and correlation accounting",
+      "priority": 2,
+      "status": "planned",
+      "decision": "Which collection and investigation stack preserves required telemetry under load and makes failures diagnosable at acceptable cost?",
+      "layer_ids": [
+        "testing-observability",
+        "api-services"
+      ],
+      "candidate_ids": [
+        "opentelemetry-collector",
+        "signoz",
+        "clickstack",
+        "victoriametrics",
+        "vector-observability"
+      ],
+      "controls": [
+        "Current telemetry pipeline plus a sequence-numbered synthetic event/trace generator and tracing-disabled overhead control.",
+        "Pin exact candidate releases or source commits, dependencies, configuration and corpus hashes. Separate default-branch documentation from capabilities verified in the selected package.",
+        "Use the same complete task contract and declared hardware/resource envelope for each eligible configuration. Distinct component roles or deployment models belong in separate cohorts."
+      ],
+      "gates": [
+        "All required events and trace relationships survive ingestion, retries and backend restarts, with explicit loss accounting.",
+        "No silent sampling, field dropping or retention reduction may qualify as a performance win.",
+        "Retain all required records, assets, outputs, diagnostics and interactions. Content dropping, truncation, virtualization, culling or weakened correctness cannot qualify as an improvement.",
+        "A failed, unsupported, cancelled or partial run remains in the evidence. Apply correctness and resource gates before comparing speed or cost."
+      ],
+      "metrics": [
+        "missing/duplicate events",
+        "trace correlation correctness",
+        "ingest and query p99 latency",
+        "backpressure recovery",
+        "CPU/memory/storage cost",
+        "diagnostic task completion"
+      ],
+      "protocol": [
+        "Before execution, publish the complete workload, output oracle, supported hosts, exact failure model and numeric CPU/memory/storage/latency budgets. Record source and package identities from each candidate's dated evidence.",
+        "Emit known logs, metrics and distributed traces through normal load, bursts, collector restart, backend outage and schema change. Reconcile input/output ledgers and run fixed investigation queries after recovery.",
+        "Compare collectors/routers separately from storage and UI backends. Retain ClickStack/HyperDX aliases and distinguish Vector observability from the historical Element/Vector chat identity.",
+        "Run declared cold and warm conditions separately. Retain at least five independent samples per eligible configuration in randomized order, including failures; record OS, hardware, power mode, thread counts, network/cache policy and external service versions.",
+        "Retain complete raw outputs, validation diffs, resource traces, logs, configuration and corpus hashes. An evaluation plan is not an executed result, compatibility certification or universal ranking."
+      ]
+    },
+    {
+      "id": "planned-frontier-supply-chain-evidence-boundaries-20261124",
+      "title": "Artifact inventory, vulnerability and origin verification",
+      "priority": 2,
+      "status": "planned",
+      "decision": "Which tools provide complete inventory, actionable findings and verifiable origin for the exact shipped artifact?",
+      "layer_ids": [
+        "secure-updates",
+        "build-toolchain",
+        "testing-observability"
+      ],
+      "candidate_ids": [
+        "syft",
+        "grype",
+        "sigstore-cosign",
+        "osv-scanner",
+        "trivy"
+      ],
+      "controls": [
+        "The exact release artifact and manually checked dependency/identity fixtures, with current verification policy.",
+        "Pin exact candidate releases or source commits, dependencies, configuration and corpus hashes. Separate default-branch documentation from capabilities verified in the selected package.",
+        "Use the same complete task contract and declared hardware/resource envelope for each eligible configuration. Distinct component roles or deployment models belong in separate cohorts."
+      ],
+      "gates": [
+        "Inventory and signatures bind to the final artifact digest, not an earlier workspace approximation.",
+        "Known dependencies, tampering and invalid identities produce the expected result; database freshness and unresolved findings remain visible.",
+        "Retain all required records, assets, outputs, diagnostics and interactions. Content dropping, truncation, virtualization, culling or weakened correctness cannot qualify as an improvement.",
+        "A failed, unsupported, cancelled or partial run remains in the evidence. Apply correctness and resource gates before comparing speed or cost."
+      ],
+      "metrics": [
+        "inventory recall",
+        "known-vulnerability detection",
+        "false positives",
+        "signature/policy decision correctness",
+        "offline/stale-data behavior",
+        "artifact-to-evidence latency"
+      ],
+      "protocol": [
+        "Before execution, publish the complete workload, output oracle, supported hosts, exact failure model and numeric CPU/memory/storage/latency budgets. Record source and package identities from each candidate's dated evidence.",
+        "Use source, binary and container artifacts with transitive and vendored dependencies, deliberate tampering and known signature identities. Scan with pinned advisory snapshots, then test stale/offline operation and altered attestations.",
+        "Keep SBOM generation, vulnerability lookup and signature verification as separate contracts. A successful scan or valid signature is not a general safety certification.",
+        "Run declared cold and warm conditions separately. Retain at least five independent samples per eligible configuration in randomized order, including failures; record OS, hardware, power mode, thread counts, network/cache policy and external service versions.",
+        "Retain complete raw outputs, validation diffs, resource traces, logs, configuration and corpus hashes. An evaluation plan is not an executed result, compatibility certification or universal ranking."
+      ]
+    },
+    {
+      "id": "planned-frontier-release-intent-artifact-proof-20261124",
+      "title": "Release automation with reviewable artifacts",
+      "priority": 2,
+      "status": "planned",
+      "decision": "Which release tooling preserves version intent, changelog accuracy and artifact provenance through a repeatable publish preparation?",
+      "layer_ids": [
+        "secure-updates",
+        "build-toolchain"
+      ],
+      "candidate_ids": [
+        "goreleaser",
+        "changesets",
+        "release-please"
+      ],
+      "controls": [
+        "Current release process, conventional-change rules and reproducible artifact build for a fixed repository snapshot.",
+        "Pin exact candidate releases or source commits, dependencies, configuration and corpus hashes. Separate default-branch documentation from capabilities verified in the selected package.",
+        "Use the same complete task contract and declared hardware/resource envelope for each eligible configuration. Distinct component roles or deployment models belong in separate cohorts."
+      ],
+      "gates": [
+        "Release versions and notes match reviewed changes, and every prepared artifact has the correct source/digest relationship.",
+        "Dry runs cannot publish, message others or modify protected history; actual publication remains a separate authorized action.",
+        "Retain all required records, assets, outputs, diagnostics and interactions. Content dropping, truncation, virtualization, culling or weakened correctness cannot qualify as an improvement.",
+        "A failed, unsupported, cancelled or partial run remains in the evidence. Apply correctness and resource gates before comparing speed or cost."
+      ],
+      "metrics": [
+        "version/changelog correctness",
+        "artifact reproducibility",
+        "provenance completeness",
+        "dry-run repeatability",
+        "rollback preparedness",
+        "operator effort"
+      ],
+      "protocol": [
+        "Before execution, publish the complete workload, output oracle, supported hosts, exact failure model and numeric CPU/memory/storage/latency budgets. Record source and package identities from each candidate's dated evidence.",
+        "Prepare releases for patch/minor/major changes, multi-package dependencies, reverted changes, partial failures and reruns. Compare staged manifests and artifacts without publishing any package or tag.",
+        "Compare Go artifact construction separately from changeset/version orchestration. Preserve repository state, exact credentials scope and final review points in any later execution.",
+        "Run declared cold and warm conditions separately. Retain at least five independent samples per eligible configuration in randomized order, including failures; record OS, hardware, power mode, thread counts, network/cache policy and external service versions.",
+        "Retain complete raw outputs, validation diffs, resource traces, logs, configuration and corpus hashes. An evaluation plan is not an executed result, compatibility certification or universal ranking."
+      ]
+    },
+    {
+      "id": "planned-frontier-complete-crawl-recovery-20261124",
+      "title": "Complete crawl recovery across HTTP and rendered paths",
+      "priority": 2,
+      "status": "planned",
+      "decision": "Which crawler completes the same authorized source collection with accurate identities, retries and restart behavior?",
+      "layer_ids": [
+        "network-sync",
+        "file-processing",
+        "local-data-search"
+      ],
+      "candidate_ids": [
+        "scrapling",
+        "spider-rs",
+        "firecrawl",
+        "crawl4ai",
+        "crawlee",
+        "scrapy"
+      ],
+      "controls": [
+        "A fixed fixture website with an authoritative URL/record/resource manifest and the current acquisition pipeline.",
+        "Pin exact candidate releases or source commits, dependencies, configuration and corpus hashes. Separate default-branch documentation from capabilities verified in the selected package.",
+        "Use the same complete task contract and declared hardware/resource envelope for each eligible configuration. Distinct component roles or deployment models belong in separate cohorts."
+      ],
+      "gates": [
+        "Every required URL/record is captured or has an explicit retained failure state; duplicates and redirects preserve identity.",
+        "HTTP-only and rendered paths must satisfy the same required data contract before timing can be compared.",
+        "Retain all required records, assets, outputs, diagnostics and interactions. Content dropping, truncation, virtualization, culling or weakened correctness cannot qualify as an improvement.",
+        "A failed, unsupported, cancelled or partial run remains in the evidence. Apply correctness and resource gates before comparing speed or cost."
+      ],
+      "metrics": [
+        "record/resource recall",
+        "duplicate and missing identities",
+        "resume/cancellation correctness",
+        "cold browser overhead",
+        "complete-crawl time",
+        "storage/network cost"
+      ],
+      "protocol": [
+        "Before execution, publish the complete workload, output oracle, supported hosts, exact failure model and numeric CPU/memory/storage/latency budgets. Record source and package identities from each candidate's dated evidence.",
+        "Serve pagination, JS-generated content, redirects, duplicate URLs, malformed pages, retryable failures and changing records. Interrupt mid-crawl, resume from persisted state and reconcile the complete output manifest.",
+        "Pin local/cloud channels and exact packages. Inspect Scrapling adaptive-selector false matches, Crawl4AI attribution terms and each browser dependency separately; provider completion signals do not prove complete capture.",
+        "Run declared cold and warm conditions separately. Retain at least five independent samples per eligible configuration in randomized order, including failures; record OS, hardware, power mode, thread counts, network/cache policy and external service versions.",
+        "Retain complete raw outputs, validation diffs, resource traces, logs, configuration and corpus hashes. An evaluation plan is not an executed result, compatibility certification or universal ranking."
+      ]
+    },
+    {
+      "id": "planned-frontier-browser-task-final-state-20261124",
+      "title": "Browser agents and services with verified final states",
+      "priority": 2,
+      "status": "planned",
+      "decision": "When should a fixed script, semantic browser SDK or open-ended agent drive the same browser task?",
+      "layer_ids": [
+        "ai-tools",
+        "api-services",
+        "network-sync"
+      ],
+      "candidate_ids": [
+        "browser-use",
+        "stagehand",
+        "lightpanda",
+        "steel-browser",
+        "browserless"
+      ],
+      "controls": [
+        "Deterministic browser scripts over isolated fixtures with a server-side final-state oracle.",
+        "Pin exact candidate releases or source commits, dependencies, configuration and corpus hashes. Separate default-branch documentation from capabilities verified in the selected package.",
+        "Use the same complete task contract and declared hardware/resource envelope for each eligible configuration. Distinct component roles or deployment models belong in separate cohorts."
+      ],
+      "gates": [
+        "Final state, captured content and permitted effects match the oracle rather than a model's self-reported success.",
+        "All required JavaScript, visual or extension behavior must be supported; nonvisual parity is a separate contract.",
+        "Retain all required records, assets, outputs, diagnostics and interactions. Content dropping, truncation, virtualization, culling or weakened correctness cannot qualify as an improvement.",
+        "A failed, unsupported, cancelled or partial run remains in the evidence. Apply correctness and resource gates before comparing speed or cost."
+      ],
+      "metrics": [
+        "verified completion rate",
+        "false completion rate",
+        "action/model/browser cost",
+        "cold start",
+        "session isolation failures",
+        "recovery latency"
+      ],
+      "protocol": [
+        "Before execution, publish the complete workload, output oracle, supported hosts, exact failure model and numeric CPU/memory/storage/latency budgets. Record source and package identities from each candidate's dated evidence.",
+        "Run fixed tasks covering forms, navigation, downloads, authentication fixtures, delayed responses and forced disconnects. Compare agent/SDK behavior separately from browser-service and engine substitutions.",
+        "Do not mix Stagehand 3.7.4 and main/v4 APIs. Browser Use cloud is a distinct default configuration, Steel Commands API is experimental, Browserless has SSPL/commercial boundaries and Lightpanda has no native Windows binary.",
+        "Run declared cold and warm conditions separately. Retain at least five independent samples per eligible configuration in randomized order, including failures; record OS, hardware, power mode, thread counts, network/cache policy and external service versions.",
+        "Retain complete raw outputs, validation diffs, resource traces, logs, configuration and corpus hashes. An evaluation plan is not an executed result, compatibility certification or universal ranking."
+      ]
+    },
+    {
+      "id": "planned-frontier-archive-capture-replay-20261124",
+      "title": "Capture and replay with original-resource accounting",
+      "priority": 2,
+      "status": "planned",
+      "decision": "Which archival workflow preserves the required browsing session and its provenance in a portable, inspectable form?",
+      "layer_ids": [
+        "file-processing",
+        "network-sync",
+        "local-data-search"
+      ],
+      "candidate_ids": [
+        "browsertrix-crawler",
+        "archiveweb-page",
+        "archivebox",
+        "singlefile",
+        "monolith",
+        "auto-archiver",
+        "replayweb-page",
+        "pywb"
+      ],
+      "controls": [
+        "The authoritative fixture resource manifest, saved original responses and a recorded interaction transcript.",
+        "Pin exact candidate releases or source commits, dependencies, configuration and corpus hashes. Separate default-branch documentation from capabilities verified in the selected package.",
+        "Use the same complete task contract and declared hardware/resource envelope for each eligible configuration. Distinct component roles or deployment models belong in separate cohorts."
+      ],
+      "gates": [
+        "Required text, links, media, dynamic interactions and creator/source metadata remain represented or explicitly marked missing.",
+        "Capture completeness and replay correctness pass separate gates; a saved file alone cannot establish either.",
+        "Retain all required records, assets, outputs, diagnostics and interactions. Content dropping, truncation, virtualization, culling or weakened correctness cannot qualify as an improvement.",
+        "A failed, unsupported, cancelled or partial run remains in the evidence. Apply correctness and resource gates before comparing speed or cost."
+      ],
+      "metrics": [
+        "required-resource recall",
+        "replay interaction success",
+        "source/time/hash provenance",
+        "capture and reopen time",
+        "storage amplification",
+        "missing-resource visibility"
+      ],
+      "protocol": [
+        "Before execution, publish the complete workload, output oracle, supported hosts, exact failure model and numeric CPU/memory/storage/latency budgets. Record source and package identities from each candidate's dated evidence.",
+        "Capture static, interactive, multi-page and media fixtures, then replay offline with network access disabled. Compare single-page snapshots, session archives and managed collections as distinct outputs and inspect every required interaction/resource.",
+        "Retain original captures alongside derived text. Monolith is 0BSD in the reviewed source; ArchiveBox current source is MIT while extractors keep their terms. Viewer correctness does not establish crawler coverage.",
+        "Run declared cold and warm conditions separately. Retain at least five independent samples per eligible configuration in randomized order, including failures; record OS, hardware, power mode, thread counts, network/cache policy and external service versions.",
+        "Retain complete raw outputs, validation diffs, resource traces, logs, configuration and corpus hashes. An evaluation plan is not an executed result, compatibility certification or universal ranking."
+      ]
+    },
+    {
+      "id": "planned-frontier-extraction-versus-original-20261124",
+      "title": "Text extraction with retained originals and source spans",
+      "priority": 2,
+      "status": "planned",
+      "decision": "Which extraction component preserves the required research text and metadata without confusing selected content with a complete source capture?",
+      "layer_ids": [
+        "file-processing",
+        "local-data-search",
+        "ai-tools"
+      ],
+      "candidate_ids": [
+        "trafilatura",
+        "selectolax",
+        "jina-reader"
+      ],
+      "controls": [
+        "Stored complete HTML/documents and a hand-labeled set of required passages, tables, code and metadata.",
+        "Pin exact candidate releases or source commits, dependencies, configuration and corpus hashes. Separate default-branch documentation from capabilities verified in the selected package.",
+        "Use the same complete task contract and declared hardware/resource envelope for each eligible configuration. Distinct component roles or deployment models belong in separate cohorts."
+      ],
+      "gates": [
+        "Every required passage and source location is preserved, or an explicit unsupported/missing result is retained.",
+        "Extracted summaries and generated captions remain distinct from the original source.",
+        "Retain all required records, assets, outputs, diagnostics and interactions. Content dropping, truncation, virtualization, culling or weakened correctness cannot qualify as an improvement.",
+        "A failed, unsupported, cancelled or partial run remains in the evidence. Apply correctness and resource gates before comparing speed or cost."
+      ],
+      "metrics": [
+        "passage/metadata recall",
+        "table/code fidelity",
+        "source-span precision",
+        "malformed-input robustness",
+        "complete-input latency",
+        "hosted/local cost"
+      ],
+      "protocol": [
+        "Before execution, publish the complete workload, output oracle, supported hosts, exact failure model and numeric CPU/memory/storage/latency budgets. Record source and package identities from each candidate's dated evidence.",
+        "Replay stored articles, reference pages, forum-like pages, multilingual text, code blocks and malformed HTML. Compare extraction output against the full original without allowing article heuristics to drop required non-article material.",
+        "Selectolax is a parser, not a fetch scheduler or JavaScript browser. Separate Jina hosted/OSS behavior and licensed assets; do not overwrite original evidence with cleaned text.",
+        "Run declared cold and warm conditions separately. Retain at least five independent samples per eligible configuration in randomized order, including failures; record OS, hardware, power mode, thread counts, network/cache policy and external service versions.",
+        "Retain complete raw outputs, validation diffs, resource traces, logs, configuration and corpus hashes. An evaluation plan is not an executed result, compatibility certification or universal ranking."
+      ]
+    },
+    {
+      "id": "planned-frontier-search-provider-source-coverage-20261124",
+      "title": "Search providers with dated primary-source recall",
+      "priority": 2,
+      "status": "planned",
+      "decision": "Which discovery/extraction adapter adds verified primary-source coverage on the same dated research tasks?",
+      "layer_ids": [
+        "local-data-search",
+        "api-services",
+        "ai-tools"
+      ],
+      "candidate_ids": [
+        "searxng",
+        "exa",
+        "tavily",
+        "parallel-web",
+        "brave-search-api"
+      ],
+      "controls": [
+        "A frozen dated gold-query set, independently curated relevant primary sources and the current search adapter.",
+        "Pin exact candidate releases or source commits, dependencies, configuration and corpus hashes. Separate default-branch documentation from capabilities verified in the selected package.",
+        "Use the same complete task contract and declared hardware/resource envelope for each eligible configuration. Distinct component roles or deployment models belong in separate cohorts."
+      ],
+      "gates": [
+        "Citations resolve to retained source content supporting the claim, with dates and redirects preserved.",
+        "Excerpts, generated answers and full-content responses are labeled distinctly; partial responses cannot stand in for complete provenance.",
+        "Retain all required records, assets, outputs, diagnostics and interactions. Content dropping, truncation, virtualization, culling or weakened correctness cannot qualify as an improvement.",
+        "A failed, unsupported, cancelled or partial run remains in the evidence. Apply correctness and resource gates before comparing speed or cost."
+      ],
+      "metrics": [
+        "primary-source recall/precision",
+        "citation correctness",
+        "stale/missed results",
+        "query-to-retained-evidence latency",
+        "complete-query cost",
+        "provider failure coverage"
+      ],
+      "protocol": [
+        "Before execution, publish the complete workload, output oracle, supported hosts, exact failure model and numeric CPU/memory/storage/latency budgets. Record source and package identities from each candidate's dated evidence.",
+        "Run exact-release, obscure-project, contradictory-version, recent-event and no-answer queries. Preserve raw result and extraction payloads, follow source identity and compare discovery versus known-URL extraction separately.",
+        "Pin current Parallel v1 payloads, separate Exa Search from asynchronous Websets and Tavily answers from raw content. SearXNG depends on external engines; hosted trials require explicit service authorization and budget.",
+        "Run declared cold and warm conditions separately. Retain at least five independent samples per eligible configuration in randomized order, including failures; record OS, hardware, power mode, thread counts, network/cache policy and external service versions.",
+        "Retain complete raw outputs, validation diffs, resource traces, logs, configuration and corpus hashes. An evaluation plan is not an executed result, compatibility certification or universal ranking."
+      ]
+    },
+    {
+      "id": "planned-frontier-media-provenance-library-20261124",
+      "title": "Media archives with creator metadata and restore proof",
+      "priority": 2,
+      "status": "planned",
+      "decision": "Which acquisition and library components retain authorized media, source attribution and reliable playback through backup and restore?",
+      "layer_ids": [
+        "file-processing",
+        "local-data-search",
+        "network-sync"
+      ],
+      "candidate_ids": [
+        "gallery-dl",
+        "tubearchivist",
+        "immich"
+      ],
+      "controls": [
+        "An authorized media fixture collection with canonical file hashes, creator/source metadata and a verified backup.",
+        "Pin exact candidate releases or source commits, dependencies, configuration and corpus hashes. Separate default-branch documentation from capabilities verified in the selected package.",
+        "Use the same complete task contract and declared hardware/resource envelope for each eligible configuration. Distinct component roles or deployment models belong in separate cohorts."
+      ],
+      "gates": [
+        "Every original file and required attribution field survives import, deduplication, export and restore.",
+        "Transcodes/previews do not replace originals, and codec or source-adapter failures remain explicit.",
+        "Retain all required records, assets, outputs, diagnostics and interactions. Content dropping, truncation, virtualization, culling or weakened correctness cannot qualify as an improvement.",
+        "A failed, unsupported, cancelled or partial run remains in the evidence. Apply correctness and resource gates before comparing speed or cost."
+      ],
+      "metrics": [
+        "file/hash parity",
+        "metadata retention",
+        "search/playback success",
+        "backup/restore time",
+        "storage amplification",
+        "complete-import latency"
+      ],
+      "protocol": [
+        "Before execution, publish the complete workload, output oracle, supported hosts, exact failure model and numeric CPU/memory/storage/latency budgets. Record source and package identities from each candidate's dated evidence.",
+        "Import images, videos, sidecars, duplicate names, revised metadata and interrupted downloads; test search and playback, then restore the library into an empty environment and compare every original and metadata record.",
+        "Compare downloader and library-manager roles separately. Adapter availability is not exhaustive site coverage, and a running media library is not a backup.",
+        "Run declared cold and warm conditions separately. Retain at least five independent samples per eligible configuration in randomized order, including failures; record OS, hardware, power mode, thread counts, network/cache policy and external service versions.",
+        "Retain complete raw outputs, validation diffs, resource traces, logs, configuration and corpus hashes. An evaluation plan is not an executed result, compatibility certification or universal ranking."
+      ]
+    },
+    {
+      "id": "planned-frontier-transfer-change-integrity-20261124",
+      "title": "Downloads and change monitoring with complete state",
+      "priority": 2,
+      "status": "planned",
+      "decision": "Can current transfer and monitoring tools preserve file identity and report all required changes through interruptions and source revisions?",
+      "layer_ids": [
+        "network-sync",
+        "file-processing",
+        "durable-jobs"
+      ],
+      "candidate_ids": [
+        "ghost-downloader",
+        "changedetection-io"
+      ],
+      "controls": [
+        "The existing downloader and a deterministic source-change ledger over authorized fixture endpoints.",
+        "Pin exact candidate releases or source commits, dependencies, configuration and corpus hashes. Separate default-branch documentation from capabilities verified in the selected package.",
+        "Use the same complete task contract and declared hardware/resource envelope for each eligible configuration. Distinct component roles or deployment models belong in separate cohorts."
+      ],
+      "gates": [
+        "Files pass full hashes and are atomically published only after completion; changed URLs or validators cannot reuse incompatible partial bytes.",
+        "Monitoring distinguishes meaningful change, inaccessible sources and unchanged content without duplicate or missing notification intents.",
+        "Retain all required records, assets, outputs, diagnostics and interactions. Content dropping, truncation, virtualization, culling or weakened correctness cannot qualify as an improvement.",
+        "A failed, unsupported, cancelled or partial run remains in the evidence. Apply correctness and resource gates before comparing speed or cost."
+      ],
+      "metrics": [
+        "complete-file integrity",
+        "resume correctness",
+        "disk-full/cancellation recovery",
+        "change recall/noise",
+        "complete-transfer time",
+        "duplicate notification intents"
+      ],
+      "protocol": [
+        "Before execution, publish the complete workload, output oracle, supported hosts, exact failure model and numeric CPU/memory/storage/latency budgets. Record source and package identities from each candidate's dated evidence.",
+        "Serve fixed and changing files with range requests, redirects, connection resets, validator changes and disk-full conditions. In a separate monitoring cohort, replay dated content changes and inspect a local notification sink without sending external messages.",
+        "Ghost Downloader CLI/RPC protocol support and remote-sync semantics require separate qualification. Monitoring schedules and live notifications require separate authorization; this plan activates none.",
+        "Run declared cold and warm conditions separately. Retain at least five independent samples per eligible configuration in randomized order, including failures; record OS, hardware, power mode, thread counts, network/cache policy and external service versions.",
+        "Retain complete raw outputs, validation diffs, resource traces, logs, configuration and corpus hashes. An evaluation plan is not an executed result, compatibility certification or universal ranking."
+      ]
+    },
+    {
+      "id": "planned-web-acquisition-role-and-recovery-20261125",
+      "title": "Role-specific acquisition, completeness and recovery",
+      "priority": 1,
+      "status": "planned",
+      "decision": "Which compatible upstream components improve each existing acquisition stage while preserving every required result and its provenance?",
+      "layer_ids": [
+        "network-sync",
+        "file-processing",
+        "ai-tools",
+        "desktop-host"
+      ],
+      "candidate_ids": [
+        "firecrawl",
+        "crawl4ai",
+        "browser-use",
+        "crawlee",
+        "scrapy",
+        "markitdown",
+        "scrapling",
+        "scrcpy",
+        "autoscraper",
+        "curl-impersonate"
+      ],
+      "controls": [
+        "Each owning application exact current transport, queue and parser revision remains its control.",
+        "Compare equal functional roles and complete inputs; crawler orchestration, HTTP handshakes, document conversion, browser interaction and Android capture are separate cohorts.",
+        "Retain original bytes and existing last-good observations; use isolated sessions without changing the owner browser or device."
+      ],
+      "gates": [
+        "Reconcile all discovered, accepted, rejected and unresolved items and terminal pagination; provider defaults are never an exhaustive completion proof.",
+        "Verify request identities, header/session isolation, response-body independence, forced refresh ownership, cancellation, crashes and resumable queue state.",
+        "Keep per-origin fairness and Retry-After behavior without reducing result counts.",
+        "Document conversion must retain source artifacts and required tables, links, metadata and warnings.",
+        "Treat browser-use as optional interaction escalation and scrcpy as an independently authorized Android-only workflow; neither is a default web dependency."
+      ],
+      "metrics": [
+        "complete output hashes and required-field recall",
+        "physical requests and transferred bytes",
+        "cold and warm full-completion latency and p95 tails",
+        "CPU, peak memory and event-loop responsiveness",
+        "recovery completeness and duplicate durable writes",
+        "setup, platform and maintenance burden"
+      ],
+      "protocol": [
+        "Pin exact upstream and host revisions and record source freshness separately from historical observations.",
+        "Partition the ten candidates by functional role before any ranking; evaluate compatible adapters only.",
+        "Replay the same complete static, dynamic, paginated, malformed, changing-page, document and failure corpus with explicit expected outputs.",
+        "Run request/session/refresh and worker-lifecycle adversarial cases before timed comparisons.",
+        "Run repeated interleaved complete workloads and retain failed samples and resource totals; reject content loss, hidden cloud escalation and unverified timing claims.",
+        "Exercise the actual supported host and final artifact before accepting a component in that application."
       ]
     }
   ]
