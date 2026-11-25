@@ -464,25 +464,29 @@ c.execute('UPDATE experiment_runs SET output=? WHERE experiment_id=?',(raw,int(s
   assert.deepEqual(readinessWrites,[]);page.off('request',observeReadiness);
   assert.equal((await fetch(origin+'/api/migration/readiness',{method:'POST',headers:{Origin:origin,'x-atlas-request':'local-ui'}})).status,405);
   await page.goto(origin+'/migration?source=constellation');
-  const archiveOrigin=origin+'/migration/constellation';
   const archiveAPI=origin+'/api/migration/constellation/review';
-  const passiveShell=new Set([archiveOrigin,archiveOrigin+'/app.js',origin+'/learning/style.css',origin+'/favicon.ico']);
-  const archiveRequests=[];
-  const trackArchive=request=>{
-    if(request.method()!=='GET'||!passiveShell.has(request.url()))archiveRequests.push(request);
-  };
-  page.on('request',trackArchive);
   await page.getByRole('link',{name:'Review an original Constellation export'}).click();
   await page.waitForLoadState('load');
-  await page.locator('#review').isDisabled().then(disabled=>assert.equal(disabled,true));
+  assert.equal(await page.locator('#review').isDisabled(),true);
+  // Other startup/worker GETs must not be mistaken for the act of submitting a file.
+  // The capture below still inspects all new URLs, origins, methods and body presence.
+  const archiveRequests=[];
+  const trackArchive=request=>archiveRequests.push({method:request.method(),url:request.url(),body:request.postDataBuffer()});
+  page.on('request',trackArchive);
+  const summarizeArchiveRequests=()=>archiveRequests.map(r=>({method:r.method,url:r.url,hasBody:r.body!==null}));
+  const verifyNoArchiveDisclosure=()=>assert.ok(archiveRequests.every(r=>new URL(r.url).origin===origin&&!r.url.includes('fixture-private-marker-never-render')),JSON.stringify(summarizeArchiveRequests()));
+  const reviewTraffic=()=>archiveRequests.filter(r=>!['GET','HEAD'].includes(r.method)||r.url.startsWith(archiveAPI)||r.body!==null);
   const exportBody=Object.fromEntries('providers projects chats turns turnRevisions outputSnapshots files knowledgeItems knowledgeSources projectContinuity events checkpoints syncReceipts catalogRuns'.split(' ').map(key=>[key,[]]));
   Object.assign(exportBody,{schema:'project-constellation',schemaVersion:7,summary:{events:12001,checkpoints:0},events:Array.from({length:12000},()=>({})),meta:{token:'fixture-private-marker-never-render'}});
   const exportBytes=Buffer.from(JSON.stringify(exportBody));
   await page.locator('#source').setInputFiles({name:'fixture.json',mimeType:'application/json',buffer:exportBytes});
-  assert.equal(archiveRequests.length,0);
+  verifyNoArchiveDisclosure();
+  assert.deepEqual(reviewTraffic(),[],JSON.stringify(summarizeArchiveRequests()));
   await page.getByRole('button',{name:'Run local review'}).click();
   await page.getByText('Review complete. Nothing was imported or changed.',{exact:true}).waitFor();
-  assert.deepEqual(archiveRequests.map(r=>[r.method(),r.url()]),[['POST',archiveAPI]]);
+  verifyNoArchiveDisclosure();
+  assert.deepEqual(reviewTraffic().map(r=>[r.method,r.url]),[['POST',archiveAPI]],JSON.stringify(summarizeArchiveRequests()));
+  if(reviewTraffic()[0].body!==null)assert.deepEqual(reviewTraffic()[0].body,exportBytes);
   assert.match(await page.locator('#digest').textContent(),new RegExp(createHash('sha256').update(exportBytes).digest('hex')));
   assert.match(await page.locator('#collections').textContent(),/Source reported [\d,]+ · 1 omitted/);
   assert.equal((await page.locator('main').textContent()).includes('fixture-private-marker-never-render'),false);
