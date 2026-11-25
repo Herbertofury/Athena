@@ -797,7 +797,7 @@ c.execute('UPDATE experiment_runs SET output=? WHERE experiment_id=?',(raw,int(s
    assert.equal(report.externalRequests.length,external);
   }finally{await play.close();}
  });
- if(portableUnified)await check('Exact portable Athena plays the Frontier series: faction routes, Ashglass vault, ferry remedy and Endless relay',async()=>{
+ if(portableUnified)await check('Exact portable Athena plays Frontier and restores both legacy and isolated visual-entropy tapes',async()=>{
   // The preceding animation proof installs a paused context-wide fake clock.
   // Replay cooperatively yields to real timers and should be tested independently.
   const replayContext=await browser.newContext({viewport:{width:1440,height:1000}});
@@ -811,7 +811,7 @@ c.execute('UPDATE experiment_runs SET output=? WHERE experiment_id=?',(raw,int(s
   try{
    const {reachRift}=await import('../engines/roguelite/tests/rift-fixture.mjs');
    const {reachCamp}=await import('../engines/roguelite/tests/camp-fixture.mjs');
-   const {encodeArenaTape,decodeArenaTape}=await import('../engines/roguelite/src/arena-replay.mjs');
+   const {encodeArenaTape,decodeArenaTape,ARENA_PARTITIONED_REPLAY_RULES}=await import('../engines/roguelite/src/arena-replay.mjs');
    const digest=s=>createHash('sha256').update(s).digest('hex');
    const staged=reachRift(), snapshot=staged.snapshot();
    const storage=()=>play.evaluate(()=>JSON.stringify({local:{...localStorage},session:{...sessionStorage}}));
@@ -847,6 +847,20 @@ c.execute('UPDATE experiment_runs SET output=? WHERE experiment_id=?',(raw,int(s
    await load('portable-active-rift.json',bytes);
    await play.getByRole('button',{name:'Leave rift (forfeit reward)',exact:true}).click();
    assert.equal(await play.locator('#time').textContent(),parentTime);
+   assert.match(await play.locator('#rift-event').textContent(),/Main expedition resumed/);
+   const separate=reachRift(ARENA_PARTITIONED_REPLAY_RULES);
+   separate.choose('rift-enter');
+   for(let i=0;i<120;i++)separate.advance(1);
+   await load('isolated-visual-rift.json',Buffer.from(await encodeArenaTape(separate,digest)));
+   assert.match(await play.locator('#rift-event').textContent(),/Inside a [0-9]+-minute rift/);
+   const visualDownload=play.waitForEvent('download');
+   await play.getByRole('button',{name:'Download run tape',exact:true}).click();
+   const visualPath=path.join(scratch,'native-isolated-visual-rift.json');
+   await (await visualDownload).saveAs(visualPath);
+   const visual=await decodeArenaTape(fs.readFileSync(visualPath,'utf8'),{digest});
+   assert.equal(visual.capture().header.rules,ARENA_PARTITIONED_REPLAY_RULES);
+   assert(Number.isInteger(JSON.parse(visual.capture().final).suspended.sideVisualEntropy));
+   await play.getByRole('button',{name:'Leave rift (forfeit reward)',exact:true}).click();
    assert.match(await play.locator('#rift-event').textContent(),/Main expedition resumed/);
    const camp=reachCamp(),buildStart=camp.snapshot();
    await load('review-funded-camp.json',Buffer.from(await encodeArenaTape(camp,digest)));

@@ -36,7 +36,8 @@ export function createRiftSession({main,createSide}={}) {
  return Object.freeze({
   enter,step,bank:()=>({...earned}),choose:id=>(active?.side??main).choose(id),
   abandon:()=>active?finish('abandoned'):null,
-  captureSuspended:()=>active?{main:structuredClone(active.frozen),sideEntropy:active.side.entropyCursor?.()??null}:null,
+  captureSuspended:()=>active?{main:structuredClone(active.frozen),sideEntropy:active.side.entropyCursor?.()??null,
+   ...(active.side.visualEntropyCursor?{sideVisualEntropy:active.side.visualEntropyCursor()}:{})}:null,
   snapshot:()=>project(false), frameView:()=>project(true),
  });
  function project(frame){

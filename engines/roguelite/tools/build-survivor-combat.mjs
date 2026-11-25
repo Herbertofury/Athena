@@ -23,21 +23,29 @@ const constants=piece(core,/  const rand  =[\s\S]+?(?=\n  const DEG)/);
 const hsl=piece(core,/  const hsl = [^\n]+/);
 const system=piece(core,/  function createParticleSystem\(maxParticles = 500\) \{[\s\S]+?\n  \}/);
 assert.ok(constants.includes('const pick')&&constants.includes('const randInt'));
+const gameplayConstants=piece(constants,/  const pick[^\n]+/);
+const particleSetup=system.split('      render(ctx) {')[0].replace(/\brandInt\b/g,'visualInt').replace(/\brand\b/g,'visualRange');
+const flashRoll='if (Math.random() < dt * 5)';
+assert.equal(combat.split(flashRoll).length,2,'Pinned hit-flash roll boundary');
+const combatWithVisualRoll=combat.replace(flashRoll,'if (visualRandom() < dt * 5)');
 const generated=`// SPDX-License-Identifier: GPL-3.0-or-later
 // Generated pinned GameSync Survivor combat and shared particle formulas.
 // Game SHA-256 ${gamePin}; core SHA-256 ${corePin}.
-// A single caller-owned random stream is used, including particle emissions.
+// The legacy default shares entropy; new hosts can pass isolated visual entropy.
 ${weapons}
 export function createLegacyPlayer() {
 ${initial}
     return player;
 }
 
-export function createLegacyCombat(random) {
+export function createLegacyCombat(random,visualRandom=random) {
   const Math=Object.create(globalThis.Math,{random:{value:random}});
-${constants}
+${gameplayConstants}
+const TAU=Math.PI*2;
+  const visualRange=(lo,hi)=>visualRandom()*(hi-lo)+lo;
+  const visualInt=(lo,hi)=>Math.floor(visualRange(lo,hi+1));
 ${hsl}
-${system.split('      render(ctx) {')[0]}      get count() { return pool.length; }
+${particleSetup}      get count() { return pool.length; }
     };
   }
   const particles=createParticleSystem(600), projectiles=[], damageNumbers=[];
@@ -46,7 +54,7 @@ ${system.split('      render(ctx) {')[0]}      get count() { return pool.length;
 ${dmg}
 ${firing}
     fireWeapons(dt);
-${combat}
+${combatWithVisualRoll}
   }
   return {
     step,

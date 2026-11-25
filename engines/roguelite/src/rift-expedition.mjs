@@ -6,17 +6,18 @@ import {createSpatialRegion} from './spatial-region.mjs';
 import {createCampWorkshop} from './camp-workshop.mjs';
 import {createRiftDirector} from './rift-director.mjs';
 import {createRiftSession} from './rift-session.mjs';
-import {createLegacySurvivorRun} from './legacy-survivor-run.mjs';
+import {createLegacySurvivorRun,createVisualEntropy} from './legacy-survivor-run.mjs';
 
-export function createRiftExpedition({seed,random,withCamp=false,withCavern=false,withEscort=false,withRelay=false,regionFormat}) {
- const main=createLegacySurvivorRun({format:regionFormat??'roaming-expedition-20',seed,random});
+export function createRiftExpedition({seed,random,visualRandom,withCamp=false,withCavern=false,withEscort=false,withRelay=false,regionFormat}) {
+ const main=createLegacySurvivorRun({format:regionFormat??'roaming-expedition-20',seed,random,visualRandom});
  const director=createRiftDirector(seed),camp=withCamp?createCampWorkshop():null;
  const travel=createRiftSession({main,createSide:({minutes,seed})=>{
   let cursor=seed>>>0;
-  const side=createLegacySurvivorRun({sideMinutes:minutes,random:()=>{
+  const visuals=visualRandom===undefined?null:createVisualEntropy(seed,0x52494654);
+  const side=createLegacySurvivorRun({sideMinutes:minutes,visualRandom:visuals?.next,random:()=>{
    cursor=(Math.imul(cursor,1664525)+1013904223)>>>0;return cursor/4294967296;
   }});
-  return {...side,entropyCursor:()=>cursor};
+  return {...side,entropyCursor:()=>cursor,...(visuals?{visualEntropyCursor:visuals.state}:{})};
  }});
  const wallet=()=>{
   const loot=main.balance(), earned=travel.bank();

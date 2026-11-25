@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 import {createRecordedArena} from '../src/arena-replay.mjs';
-export function reachRift() {
- const h=createRecordedArena({format:'rift-expedition-20',seed:1});
+export function reachRift(rules) {
+ const h=createRecordedArena({format:'rift-expedition-20',seed:1,rules});
  let snapshot;
  for(let n=0;n<60*140;n++){
   if(!snapshot||n%6===0)snapshot=h.snapshot();

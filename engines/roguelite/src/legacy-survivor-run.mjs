@@ -11,19 +11,34 @@ import {createRoamingPoints} from './roaming-points.mjs';
 export const LEGACY_SURVIVOR_RUN_CONTRACT='athena.roguelite.gamesync-live.v1';
 const SURVIVE_TIME=300;
 
-export function createLegacySurvivorRun({random,format='classic',seed,sideMinutes}={}) {
+// Cosmetic-only reproducible stream. Distinct from the legacy gameplay LCG.
+export function createVisualEntropy(seed,domain=0){
+ if(![seed,domain].every(value=>Number.isInteger(value)&&value>=0&&value<=0xffffffff))throw RangeError('Invalid visual stream seed');
+ let cursor=(seed^domain^0x9e3779b9)>>>0;
+ return Object.freeze({state:()=>cursor,next:()=>{
+  cursor=(cursor+0x6d2b79f5)>>>0;
+  let n=Math.imul(cursor^(cursor>>>15),cursor|1);
+  n^=n+Math.imul(n^(n>>>7),n|61);
+  return ((n^(n>>>14))>>>0)/4294967296;
+ }});
+}
+
+export function createLegacySurvivorRun({random,visualRandom,format='classic',seed,sideMinutes}={}) {
  const recipe=sideMinutes===undefined?arenaFormat(format):arcSideFormat(sideMinutes),classic=recipe.id==='classic';
- if(typeof random!=='function')throw new TypeError('Explicit entropy source required');
- const rng=()=>{
-  const n=random();
-  if(!Number.isFinite(n)||n<0||n>=1)throw new RangeError('Entropy must be in [0,1)');
-  return n;
+ const checked=(source)=>{
+  if(typeof source!=='function')throw new TypeError('Explicit entropy source required');
+  return ()=>{
+   const n=source();
+   if(!Number.isFinite(n)||n<0||n>=1)throw new RangeError('Entropy must be in [0,1)');
+   return n;
+  };
  };
+ const rng=checked(random),visualRng=visualRandom===undefined||visualRandom===random?rng:checked(visualRandom);
  const roaming=recipe.roaming?createRoamingPoints(seed):null;
  const player=createLegacyPlayer();
  const run={kills:0,gameOver:false,won:false};
  const enemies=[],gems=[];
- const combat=createLegacyCombat(rng),upgrades=createLegacyUpgradeDirector({random:rng,portable:!!roaming||sideMinutes!==undefined});
+ const combat=createLegacyCombat(rng,visualRng),upgrades=createLegacyUpgradeDirector({random:rng,portable:!!roaming||sideMinutes!==undefined});
  let gameTime=0,spawnTimer=0,offers=null,missedSpawns=0;
  const dispatch=(events)=>events.filter(cue=>{
   if(cue.type!=='particles')return true;
