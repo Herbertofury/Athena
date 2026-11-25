@@ -63,3 +63,39 @@ test('coverage is distinct from intentional exclusions and remains visible durin
  assert.equal(root.querySelector('#error').textContent,'');
  await s.go('#home');assert.equal(root.children.length,0);assert.equal(s.writes.length,0);
 });
+
+test('category deltas pair exact names and do not turn absent buckets into zero',async()=>{
+ const {parseStorageReport,compareObservations}=await import('../dist/workspaces/storage/model.mjs');
+ const later=structuredClone(record);
+ later.observedAt='2026-11-22T00:00:00Z';
+ later.categories[0].allocatedBytes+=4096;later.categories[1].logicalBytes+=128;
+ later.categories.push({name:'Other entries',allocatedBytes:4096,logicalBytes:100,files:1});
+ later.totals.allocatedBytes+=8192;later.totals.logicalBytes+=228;later.totals.files++;later.totals.physicalFiles++;
+ const before=parseStorageReport(JSON.stringify(record)),after=parseStorageReport(JSON.stringify(later));
+ assert.equal(compareObservations(before,after,false).categoryChanges,undefined);
+ const compared=compareObservations(before,after,true);
+ assert.deepEqual(compared.categoryChanges.find(r=>r.name==='Media').changes,{allocatedBytes:4096,logicalBytes:0,files:0});
+ assert.deepEqual(compared.categoryChanges.find(r=>r.name==='Other entries'),{name:'Other entries',presence:'later-only',changes:null});
+ assert.equal(compareObservations(before,{...after,partial:true},true).categoryChanges,undefined);
+});
+test('workspace filters category comparisons without saving or treating earlier and later as interchangeable',async()=>{
+ const s=await app(),root=s.root(),later=structuredClone(record);
+ later.observedAt='2026-11-22T00:00:00Z';later.categories[1].allocatedBytes+=8192;later.totals.allocatedBytes+=8192;
+ await load(root,contents(record));const second=root.querySelector('#comparison-file');
+ second.files=[contents(later)];await second.onchange();
+ const panel=root.querySelector('#compare-categories');
+ assert.equal(panel.hidden,true);
+ const yes=root.querySelector('#compare-same');yes.checked=true;yes.onchange();
+ assert.equal(panel.hidden,false);
+ assert.match(root.querySelector('#compare-category-rows').textContent,/Source\+8 KiB allocated/);
+ const sort=root.querySelector('#compare-sort');
+ Object.defineProperty(sort,'value',{configurable:true,value:'allocatedBytes'});
+ sort.onchange({target:sort});
+ assert.equal(panel.querySelector('li strong').textContent,'Source');
+ const search=s.document.querySelector('#search');search.value='shared';
+ search.dispatchEvent(new s.window.Event('input'));await tick();await tick();
+ assert.equal(panel.querySelectorAll('li').length,1);assert.equal(panel.querySelector('li strong').textContent,'Shared across categories');
+ second.files=[contents(record)];await second.onchange();
+ assert.equal(panel.hidden,true);assert.equal(yes.checked,false);
+ assert.ok(s.writes.every(([,v])=>!String(v).includes('Shared across categories')));
+});
