@@ -746,12 +746,14 @@ c.execute('UPDATE experiment_runs SET output=? WHERE experiment_id=?',(raw,int(s
    await play.getByRole('link',{name:'Survivor Arena',exact:true}).click();
    const arena=play.locator('#arena');
    await play.getByRole('button',{name:'Start run',exact:true}).click();
+   await play.locator('#status').filter({hasText:'Run started.'}).waitFor();
+   assert.equal(await arena.evaluate(e=>e===document.activeElement),true);
    const pixels=()=>arena.evaluate(e=>e.toDataURL());
    const original=await pixels();assert.ok(original.length>100);
    await play.keyboard.down('ArrowRight');
    await play.clock.runFor(260);
    await play.keyboard.up('ArrowRight');
-   assert.notEqual(await pixels(),original);
+   assert.ok(await pixels()!==original,'starting and moving the Arena must repaint its actual canvas');
    await play.clock.runFor(55000);
    const offer=play.locator('#choices button').first();
    await offer.waitFor();
@@ -774,6 +776,63 @@ c.execute('UPDATE experiment_runs SET output=? WHERE experiment_id=?',(raw,int(s
    assert.equal(await storage(),before);
    assert.equal(report.externalRequests.length,external);
   }finally{await play.close();}
+ });
+ if(portableUnified)await check('Exact portable Athena discovers a rift and resumes both worlds from a browser-local tape',async()=>{
+  // The preceding animation proof installs a paused context-wide fake clock.
+  // Replay cooperatively yields to real timers and should be tested independently.
+  const replayContext=await browser.newContext({viewport:{width:1440,height:1000}});
+  await replayContext.route('**/*',route=>{if(new URL(route.request().url()).origin===origin)return route.continue();report.externalRequests.push(route.request().url());return route.abort();});
+  const play=await replayContext.newPage();
+  const scratch=fs.mkdtempSync(path.join(temporary,'arena-rift-tapes-'));
+  const external=report.externalRequests.length, actions=[], errors=[];
+  play.on('request',r=>{if(r.method()!=='GET')actions.push(r.method()+':'+new URL(r.url()).pathname);});
+  play.on('pageerror',e=>errors.push(String(e)));
+  play.on('console',m=>{if(m.type()==='error')errors.push(m.text());});
+  try{
+   const {reachRift}=await import('../engines/roguelite/tests/rift-fixture.mjs');
+   const {encodeArenaTape,decodeArenaTape}=await import('../engines/roguelite/src/arena-replay.mjs');
+   const digest=s=>createHash('sha256').update(s).digest('hex');
+   const staged=reachRift(), snapshot=staged.snapshot();
+   const storage=()=>play.evaluate(()=>JSON.stringify({local:{...localStorage},session:{...sessionStorage}}));
+   await play.goto(origin+'/play');
+   const before=await storage();
+   await play.getByRole('link',{name:'Survivor Arena',exact:true}).click();
+   await play.getByText('Save or resume an offline run',{exact:true}).click();
+   const input=play.getByLabel('Run tape',{exact:true});
+   const notice=play.locator('#tape-status');
+   const load=async(name,buffer)=>{
+    await play.locator('#read-tape:not([disabled])').waitFor();
+    await input.setInputFiles({name,mimeType:'application/json',buffer});
+    await play.getByRole('button',{name:'Verify and load',exact:true}).click();
+    try{await notice.filter({hasText:/Verified and loaded|Not loaded/}).waitFor();}
+    catch(err){throw Error(name+': '+await notice.textContent(),{cause:err});}
+    assert.match(await notice.textContent(),/Verified and loaded/);
+   };
+   await load('portal.json',Buffer.from(await encodeArenaTape(staged,digest)));
+   await play.getByRole('heading',{name:'Choose a rift route'}).waitFor();
+   const parentTime=await play.locator('#time').textContent();
+   await play.getByRole('button',{name:new RegExp('Enter '+snapshot.portal.marker.minutes+'-minute rift')}).click();
+   assert.match(await play.locator('#rift-event').textContent(),/Inside a [0-9]+-minute rift/);
+   await play.getByRole('button',{name:'Pause',exact:true}).click();
+   const downloaded=play.waitForEvent('download');
+   await play.getByRole('button',{name:'Download run tape',exact:true}).click();
+   const tape=path.join(scratch,'native-arena-tape.json');await (await downloaded).saveAs(tape);
+   const bytes=fs.readFileSync(tape);
+   const decoded=await decodeArenaTape(bytes.toString(),{digest});
+   assert.equal(decoded.snapshot().rift.active.minutes,snapshot.portal.marker.minutes);
+   assert.equal(decoded.snapshot().rift.mainTime,snapshot.gameTime);
+   await play.reload();
+   await play.getByText('Save or resume an offline run',{exact:true}).click();
+   await load('portable-active-rift.json',bytes);
+   await play.getByRole('button',{name:'Leave rift (forfeit reward)',exact:true}).click();
+   assert.equal(await play.locator('#time').textContent(),parentTime);
+   assert.match(await play.locator('#rift-event').textContent(),/Main expedition resumed/);
+   assert.equal(await storage(),before);
+   assert.deepEqual(errors,[]);
+   assert.deepEqual(actions,[]);
+   assert.equal(report.externalRequests.length,external);
+   assert.equal(await play.locator('iframe,video,audio').count(),0);
+  }finally{await replayContext.close();}
  });
  if(portableUnified)await check('Exact portable Athena plays Warden Duel and interchanges a verified replay with Node',async()=>{
   const play=await context.newPage(), scratch=fs.mkdtempSync(path.join(temporary,'warden-tapes-'));
