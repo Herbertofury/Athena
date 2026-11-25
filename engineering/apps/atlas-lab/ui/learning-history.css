@@ -10,3 +10,21 @@
 
 #controls[hidden],#projects [hidden],#evidence-download[hidden]{display:none}
 #filters[hidden],#targets [hidden],#reader[hidden]{display:none}
+
+/* Decorative only. Exact job state remains visible and announced separately. */
+.learning-status-row{display:flex;align-items:center;gap:.6rem;min-height:48px}
+.learning-status-row p{margin:0}
+#learning-activity{inline-size:48px;block-size:48px;flex:none;overflow:hidden}
+#learning-activity:not([data-strip="ready"])::before{
+ content:"";display:block;inline-size:.7rem;block-size:.7rem;margin:1.15rem auto;
+ border:2px solid #f8cd92;border-radius:50%;
+}
+#learning-activity canvas{display:none}
+#learning-activity[data-strip="ready"] canvas{
+ display:block;inline-size:384px;block-size:48px;max-inline-size:none;transform:translateX(-336px);
+}
+@media (prefers-reduced-motion:no-preference){
+ #learning-activity[data-strip="ready"]:not([hidden]) canvas{animation:learning-feeding 1.05s steps(8,end) infinite}
+}
+@keyframes learning-feeding{from{transform:translateX(0)}to{transform:translateX(-384px)}}
+#learning-art-options{margin-block:.4rem .8rem}

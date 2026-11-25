@@ -197,6 +197,16 @@ pub fn router(path: PathBuf) -> Router {
                     .into_response()
             }),
         )
+        .route(
+            "/learning/activity.mjs",
+            get(|| async {
+                (
+                    [(header::CONTENT_TYPE, "text/javascript")],
+                    include_str!("../ui/learning-activity.mjs"),
+                )
+                    .into_response()
+            }),
+        )
         .route("/api/learning/jobs/{id}", get(job))
         .route("/api/learning/history", get(list))
         .route("/api/learning/history/{id}", get(record))

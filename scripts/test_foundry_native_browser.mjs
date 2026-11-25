@@ -7,6 +7,7 @@ import os from 'node:os';
 import net from 'node:net';
 import path from 'node:path';
 import {createHash} from 'node:crypto';
+import {deflateSync} from 'node:zlib';
 import {spawn, execFileSync} from 'node:child_process';
 import {chromium} from 'playwright';
 import {repoRoot, binaryPath, pythonCommand} from '../native/foundry/tests/paths.mjs';
@@ -636,6 +637,73 @@ c.execute('UPDATE experiment_runs SET output=? WHERE experiment_id=?',(raw,int(s
   assert.equal(await page.locator('#run-experiment').isDisabled(),true);assert.equal(statusSubmissions,1);
   await page.unroute('**/api/jobs');await page.unroute('**/api/learning/jobs/*');
 
+ });
+ if(unified)await check('Learning feeding artwork keeps local pixels and follows the exact running job',async()=>{
+  const w=768,h=96,stride=w*4+1;
+  const rgba=Buffer.alloc(h*stride);
+  for(let y=0;y<h;y++)for(let x=0;x<w;x++){
+   const p=y*stride+1+x*4;
+   rgba[p]=32+Math.floor(x/96)*24;rgba[p+1]=38;rgba[p+2]=92;rgba[p+3]=255;
+  }
+  const crc32=b=>{let c=0xffffffff;for(const v of b){
+   c^=v;for(let bit=0;bit<8;bit++)c=(c>>>1)^((c&1)?0xedb88320:0);
+  }return (c^0xffffffff)>>>0;};
+  const chunk=(kind,value)=>{
+   const typed=Buffer.concat([Buffer.from(kind),value]),out=Buffer.alloc(typed.length+8);
+   out.writeUInt32BE(value.length,0);typed.copy(out,4);out.writeUInt32BE(crc32(typed),out.length-4);return out;
+  };
+  const ihdr=Buffer.alloc(13);ihdr.writeUInt32BE(w,0);ihdr.writeUInt32BE(h,4);ihdr[8]=8;ihdr[9]=6;
+  const png=Buffer.concat([Buffer.from('89504e470d0a1a0a','hex'),chunk('IHDR',ihdr),chunk('IDAT',deflateSync(rgba)),chunk('IEND',Buffer.alloc(0))]);
+  await page.goto(origin+'/learning');
+  const run=page.locator('#run-experiment'),activity=page.locator('#learning-activity'),canvas=activity.locator('canvas');
+  const art=page.locator('#learning-art'),status=page.locator('#learning-art-status'),stop=page.locator('#stop-watching');
+  await page.getByText('Optional local feeding artwork',{exact:true}).click();
+  const out=report.externalRequests.length;
+  let calls=0,jobState='queued',reply=null,seen=null,hold=false;
+  const paths=[];
+  const track=r=>{if(r.method()!=='GET')paths.push(new URL(r.url()).pathname);};
+  page.on('request',track);
+  const response=(route,id,state)=>route.fulfill({status:200,contentType:'application/json',
+    body:JSON.stringify({id,state,experiment_id:null,history_retained:false})});
+  await page.route('**/api/jobs',route=>{calls++;return route.fulfill({status:200,contentType:'application/json',body:'{"id":991}'});});
+  await page.route('**/api/learning/jobs/991',async route=>{
+   if(hold){seen?.();await new Promise(resolve=>reply=resolve);}
+   await response(route,'991',jobState).catch(()=>{}); // Cancellation may abort the held GET.
+  });
+  try{
+   assert.equal(await activity.isHidden(),true);
+   await art.setInputFiles({name:'not-art.png',mimeType:'image/png',buffer:Buffer.from('not a PNG')});
+   await status.filter({hasText:'Choose a transparent 768 × 96 PNG'}).waitFor();
+   await art.setInputFiles({name:'synthetic-transparent-strip.png',mimeType:'image/png',buffer:png});
+   await status.filter({hasText:'PNG checked for this tab'}).waitFor();
+   assert.equal(await activity.isHidden(),true);assert.equal(await activity.getAttribute('data-strip'),null);
+   assert.deepEqual(paths,[]);
+   await run.click();
+   await page.locator('#run-status').filter({hasText:'Job 991: queued.'}).waitFor();
+   assert.equal(await activity.isHidden(),true);jobState='running';
+   await activity.waitFor();await canvas.waitFor();
+   assert.equal(await activity.getAttribute('data-strip'),'ready');
+   assert.deepEqual(await canvas.evaluate(el=>Array.from(el.getContext('2d').getImageData(700,32,1,1).data)),[200,38,92,255]);
+   assert.equal(await canvas.evaluate(el=>getComputedStyle(el).animationName),'learning-feeding');
+   await page.emulateMedia({reducedMotion:'reduce'});
+   assert.equal(await canvas.evaluate(el=>getComputedStyle(el).animationName),'none');
+   assert.equal(await canvas.evaluate(el=>getComputedStyle(el).transform),'matrix(1, 0, 0, 1, -336, 0)');
+   jobState='failed';
+   await page.locator('#run-status').filter({hasText:'Job 991: failed.'}).waitFor();
+   assert.equal(await activity.isHidden(),true);assert.equal(await stop.isHidden(),true);
+   jobState='running';hold=true;
+   const observed=new Promise(resolve=>seen=resolve);
+   await run.click();await observed;
+   await stop.click();assert.equal(await run.isDisabled(),true);
+   reply?.();reply=null;
+   assert.match(await page.locator('#run-status').textContent(),/does not cancel it/);
+   assert.equal(await activity.isHidden(),true);assert.equal(calls,2);
+   assert.deepEqual(paths,['/api/jobs','/api/jobs']);
+   assert.equal(report.externalRequests.length,out);
+  }finally{
+   reply?.();page.off('request',track);await page.unroute('**/api/jobs');await page.unroute('**/api/learning/jobs/991');
+   await page.emulateMedia({reducedMotion:null});
+  }
  });
  if(unified)await check('Engineering-Atlas offline run ledger exports exact filtered rows beyond the visible page with both snapshot sources',async()=>{
   const endpoint=origin+'/api/migration/atlas-runs',before=report.externalRequests.length;
