@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>GameSync Dev Room Lab</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: #0f0f1a;
+      color: #e0e0e0;
+      font-family: 'Segoe UI', Consolas, monospace;
+      overflow: hidden;
+    }
+    #toolbar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: #1a1a2e; border-bottom: 1px solid #333;
+      display: flex; align-items: center; gap: 8px; padding: 6px 12px;
+      font-size: 13px;
+    }
+    #toolbar select, #toolbar button {
+      background: #16213e; color: #e0e0e0; border: 1px solid #444;
+      padding: 4px 10px; border-radius: 4px; font-size: 13px; cursor: pointer;
+    }
+    #toolbar button:hover { background: #0f3460; }
+    #toolbar .sep { width: 1px; height: 20px; background: #444; }
+    #toolbar label { color: #8ab4f8; font-size: 12px; }
+    #toolbar input[type=range] { width: 80px; }
+    #canvasWrap {
+      position: fixed; top: 38px; left: 0; right: 260px; bottom: 0;
+    }
+    #gameCanvas { width: 100%; height: 100%; display: block; background: #0a0a14; }
+    #sidebar {
+      position: fixed; top: 38px; right: 0; bottom: 0; width: 260px;
+      background: #12122a; border-left: 1px solid #333; overflow-y: auto;
+      padding: 10px; font-size: 12px;
+    }
+    #sidebar h3 { color: #e94560; margin: 8px 0 4px; font-size: 13px; }
+    #sidebar pre {
+      background: #0a0a14; padding: 6px; border-radius: 4px;
+      white-space: pre-wrap; font-size: 11px; color: #aaa; max-height: 200px;
+      overflow-y: auto; margin-bottom: 6px;
+    }
+    #sidebar .stat { color: #64ffda; }
+    #sidebar .warn { color: #ffc107; }
+    #log { white-space: pre-wrap; color: #888; font-size: 11px; max-height: 160px; overflow-y: auto; }
+  </style>
+</head>
+<body>
+  <div id="toolbar">
+    <strong style="color:#e94560">Dev Room Lab</strong>
+    <div class="sep"></div>
+    <label>Preset:</label>
+    <select id="presetSelect">
+      <option value="OPENWORLD" selected>Open World</option>
+      <option value="PLATFORMER">Platformer</option>
+      <option value="BRAWLER">Brawler</option>
+      <option value="RACING">Racing</option>
+      <option value="SURVIVORS">Survivors</option>
+      <option value="SPORTS">Sports</option>
+    </select>
+    <div class="sep"></div>
+    <label>Gravity:</label>
+    <input id="gravSlider" type="range" min="0" max="2000" value="900" step="50">
+    <span id="gravVal" style="width:40px; display:inline-block">900</span>
+    <div class="sep"></div>
+    <label>Speed:</label>
+    <input id="speedSlider" type="range" min="50" max="500" value="180" step="10">
+    <span id="speedVal" style="width:40px; display:inline-block">180</span>
+    <div class="sep"></div>
+    <button id="btnReset">Reset</button>
+    <button id="btnSpawn">Spawn NPC</button>
+    <button id="btnWeather">Cycle Weather</button>
+  </div>
+
+  <div id="canvasWrap"><canvas id="gameCanvas"></canvas></div>
+
+  <div id="sidebar">
+    <h3>State</h3>
+    <pre id="stateBox">Loading…</pre>
+    <h3>Physics</h3>
+    <pre id="physicsBox">—</pre>
+    <h3>Camera</h3>
+    <pre id="cameraBox">—</pre>
+    <h3>Weather</h3>
+    <pre id="weatherBox">—</pre>
+    <h3>AI Agents</h3>
+    <pre id="aiBox">—</pre>
+    <h3>Missions</h3>
+    <pre id="missionBox">—</pre>
+    <h3>Log</h3>
+    <div id="log"></div>
+  </div>
+
+  <!-- Dev Room modules -->
+  <script src="index.js"></script>
+  <script src="physics.js"></script>
+  <script src="movement.js"></script>
+  <script src="camera.js"></script>
+  <script src="combat.js"></script>
+  <script src="ai.js"></script>
+  <script src="animation-bridge.js"></script>
+  <script src="world.js"></script>
+  <script src="weather.js"></script>
+  <script src="vehicle.js"></script>
+  <script src="dialog.js"></script>
+  <script src="mission.js"></script>
+  <script src="presets.js"></script>
+
+  <script>
+  (function () {
+    "use strict";
+    const DR = window.__gsDevRoom;
+    if (!DR) { document.getElementById("stateBox").textContent = "ERROR: DevRoom not loaded"; return; }
+
+    /* ── Canvas setup ─────────────────────────────────────── */
+    const canvas = document.getElementById("gameCanvas");
+    const ctx = canvas.getContext("2d");
+    function resizeCanvas() {
+      const wrap = document.getElementById("canvasWrap");
+      canvas.width = wrap.clientWidth;
+      canvas.height = wrap.clientHeight;
+    }
+    window.addEventListener("resize", resizeCanvas);
+    resizeCanvas();
+
+    /* ── Systems ───────────────────────────────────────────── */
+    let systems, preset;
+    let player, npcs, vehicles;
+    const keys = {};
+    const COLORS = {
+      player: "#64ffda",
+      npc: "#ff6b6b",
+      building: "#333355",
+      road: "#222244",
+      ground: "#0f0f1a",
+      sky: "#1a1a2e",
+    };
+
+    function log(msg) {
+      const el = document.getElementById("log");
+      const line = `[${(performance.now()/1000).toFixed(1)}] ${msg}\n`;
+      el.textContent = line + el.textContent.slice(0, 2000);
+    }
+
+    /* ── Init ──────────────────────────────────────────────── */
+    function init(presetName) {
+      preset = DR.Presets[presetName] || DR.Presets.OPENWORLD;
+      systems = DR.Presets.instantiate(preset);
+      log(`Loaded preset: ${presetName}`);
+
+      /* Player */
+      player = {
+        x: (preset.worldWidth || 3200) / 2,
+        y: (preset.worldHeight || 2200) / 2,
+        vx: 0, vy: 0, w: 16, h: 24,
+        hp: preset.maxHp || 100,
+        grounded: false,
+        state: "idle",
+        facing: 1,
+        mode: "ground",
+        stamina: preset.staminaMax || 100,
+      };
+
+      /* NPCs */
+      npcs = [];
+      for (let i = 0; i < 5; i++) spawnNPC();
+
+      /* Vehicles */
+      vehicles = [];
+      if (systems.vehicle) {
+        for (let i = 0; i < 3; i++) {
+          vehicles.push(systems.vehicle.createVehicle(
+            "coupe",
+            200 + Math.random() * (preset.worldWidth - 400),
+            200 + Math.random() * (preset.worldHeight - 400),
+          ));
+        }
+      }
+
+      /* World buildings */
+      if (systems.world) {
+        systems.world.addBuilding({ id: "b1", x: 400, y: 300, w: 120, h: 80, label: "Shop" });
+        systems.world.addBuilding({ id: "b2", x: 800, y: 600, w: 160, h: 100, label: "Garage" });
+        systems.world.addBuilding({ id: "b3", x: 1200, y: 200, w: 100, h: 100, label: "Safehouse" });
+      }
+
+      /* Demo mission */
+      if (systems.mission) {
+        systems.mission.define({
+          id: "demo_patrol",
+          title: "Patrol Route",
+          description: "Visit all waypoints.",
+          phases: [{
+            message: "Head to the Shop",
+            objectives: [{ id: "go_shop", type: "reach", description: "Shop", target: { x: 460, y: 340 } }],
+          }, {
+            message: "Now visit the Garage",
+            objectives: [{ id: "go_garage", type: "reach", description: "Garage", target: { x: 880, y: 650 } }],
+          }, {
+            message: "Return to Safehouse",
+            objectives: [{ id: "go_safe", type: "reach", description: "Safehouse", target: { x: 1250, y: 250 } }],
+          }],
+          rewards: { cash: 500, xp: 100 },
+          onComplete: () => log("Mission complete! +$500 +100xp"),
+        });
+        systems.mission.refreshAvailability();
+        /* Unlock since no prerequisites */
+        const m = systems.mission.get("demo_patrol");
+        if (m) m.status = DR.Mission.STATUS.AVAILABLE;
+        systems.mission.start("demo_patrol");
+      }
+
+      /* Camera snap */
+      if (systems.camera) systems.camera.snapTo(player.x, player.y);
+
+      /* Weather start */
+      if (systems.weather) systems.weather.setCondition("clear");
+    }
+
+    /* ── Spawn NPC ────────────────────────────────────────── */
+    function spawnNPC() {
+      const px = 100 + Math.random() * ((preset?.worldWidth || 3200) - 200);
+      const py = 100 + Math.random() * ((preset?.worldHeight || 2200) - 200);
+      const npc = {
+        x: px, y: py, vx: 0, vy: 0, w: 14, h: 22,
+        hp: 50, grounded: false, state: "idle",
+        facing: Math.random() > 0.5 ? 1 : -1,
+        mode: "ground",
+        stamina: 100,
+        patrol: {
+          points: [
+            { x: px - 80, y: py },
+            { x: px + 80, y: py },
+            { x: px, y: py - 60 },
+            { x: px, y: py + 60 },
+          ],
+          idx: 0,
+        },
+        ai: systems.ai ? systems.ai.init({ x: px, y: py, hp: 50 }) : null,
+      };
+      npcs.push(npc);
+      log(`NPC spawned at (${px|0}, ${py|0})`);
+      return npc;
+    }
+
+    /* ── Input ─────────────────────────────────────────────── */
+    window.addEventListener("keydown", e => { keys[e.key.toLowerCase()] = true; });
+    window.addEventListener("keyup", e => { keys[e.key.toLowerCase()] = false; });
+
+    /* ── Toolbar bindings ────────────────────────────────── */
+    document.getElementById("presetSelect").addEventListener("change", e => {
+      init(e.target.value);
+      document.getElementById("gravSlider").value = preset.gravity || 900;
+      document.getElementById("gravVal").textContent = preset.gravity || 900;
+      document.getElementById("speedSlider").value = preset.walkSpeed || 180;
+      document.getElementById("speedVal").textContent = preset.walkSpeed || 180;
+    });
+    document.getElementById("gravSlider").addEventListener("input", e => {
+      if (systems.physics) systems.physics.config.gravity = +e.target.value;
+      document.getElementById("gravVal").textContent = e.target.value;
+    });
+    document.getElementById("speedSlider").addEventListener("input", e => {
+      if (systems.movement) systems.movement.config.walkSpeed = +e.target.value;
+      document.getElementById("speedVal").textContent = e.target.value;
+    });
+    document.getElementById("btnReset").addEventListener("click", () => {
+      init(document.getElementById("presetSelect").value);
+    });
+    document.getElementById("btnSpawn").addEventListener("click", () => spawnNPC());
+
+    let weatherIdx = 0;
+    const weatherCycle = ["clear", "cloudy", "rain", "storm", "fog", "snow"];
+    document.getElementById("btnWeather").addEventListener("click", () => {
+      weatherIdx = (weatherIdx + 1) % weatherCycle.length;
+      if (systems.weather) {
+        systems.weather.setCondition(weatherCycle[weatherIdx]);
+        log(`Weather → ${weatherCycle[weatherIdx]}`);
+      }
+    });
+
+    /* ── Game loop ─────────────────────────────────────────── */
+    let lastTime = 0;
+    function frame(t) {
+      const dt = Math.min((t - lastTime) / 1000, 0.05);
+      lastTime = t;
+
+      update(dt);
+      render();
+      requestAnimationFrame(frame);
+    }
+
+    function update(dt) {
+      if (!systems) return;
+      const phys = systems.physics;
+      const mov = systems.movement;
+      const cam = systems.camera;
+      const weath = systems.weather;
+
+      /* Player input */
+      const input = { left: 0, right: 0, up: 0, down: 0, sprint: false, jump: false };
+      if (keys["a"] || keys["arrowleft"]) input.left = 1;
+      if (keys["d"] || keys["arrowright"]) input.right = 1;
+      if (keys["w"] || keys["arrowup"]) input.up = 1;
+      if (keys["s"] || keys["arrowdown"]) input.down = 1;
+      if (keys["shift"]) input.sprint = true;
+      if (keys[" "]) input.jump = true;
+
+      /* Movement */
+      if (mov) {
+        mov.readInput(player, input);
+        mov.update(player, dt);
+      } else {
+        /* Fallback simple movement */
+        const spd = 180;
+        player.vx = (input.right - input.left) * spd;
+        player.vy = (input.down - input.up) * spd;
+      }
+
+      /* Physics */
+      if (phys) {
+        if (preset.gravity > 0) {
+          phys.applyGravity(player, dt);
+        }
+        phys.applyFriction(player, dt);
+        phys.applyVelocity(player, dt);
+        phys.resolveFloor(player, (preset.worldHeight || 2200) - 40);
+      } else {
+        player.x += player.vx * dt;
+        player.y += player.vy * dt;
+      }
+
+      /* Clamp to world */
+      const ww = preset.worldWidth || 3200;
+      const wh = preset.worldHeight || 2200;
+      player.x = Math.max(0, Math.min(ww, player.x));
+      player.y = Math.max(0, Math.min(wh, player.y));
+
+      /* Infer state for animation bridge */
+      player.state = (Math.abs(player.vx) > 10 || Math.abs(player.vy) > 10) ? "run" : "idle";
+      if (player.vx < -1) player.facing = -1;
+      else if (player.vx > 1) player.facing = 1;
+
+      /* NPC AI */
+      for (const npc of npcs) {
+        if (npc.ai && systems.ai) {
+          const aiCtx = {
+            entity: { x: npc.x, y: npc.y, hp: npc.hp },
+            target: { x: player.x, y: player.y },
+            dt,
+          };
+          systems.ai.update(npc.ai, aiCtx);
+
+          /* Simple patrol movement from AI state */
+          if (npc.ai.state === "patrol" || npc.ai.state === "wander") {
+            const pt = npc.patrol.points[npc.patrol.idx];
+            const dx = pt.x - npc.x, dy = pt.y - npc.y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            if (dist < 10) {
+              npc.patrol.idx = (npc.patrol.idx + 1) % npc.patrol.points.length;
+            } else {
+              npc.vx = (dx / dist) * 80;
+              npc.vy = (dy / dist) * 80;
+            }
+          } else if (npc.ai.state === "chase") {
+            const dx = player.x - npc.x, dy = player.y - npc.y;
+            const dist = Math.sqrt(dx * dx + dy * dy) || 1;
+            npc.vx = (dx / dist) * 120;
+            npc.vy = (dy / dist) * 120;
+          } else {
+            npc.vx *= 0.9; npc.vy *= 0.9;
+          }
+        }
+        npc.x += npc.vx * dt;
+        npc.y += npc.vy * dt;
+        npc.x = Math.max(0, Math.min(ww, npc.x));
+        npc.y = Math.max(0, Math.min(wh, npc.y));
+      }
+
+      /* Mission progress */
+      if (systems.mission) {
+        systems.mission.checkReachObjectives("demo_patrol", player.x, player.y);
+      }
+
+      /* Camera */
+      if (cam) cam.follow(player.x, player.y, dt);
+
+      /* Weather */
+      if (weath) weath.update(dt);
+
+      /* Sidebar updates */
+      updateSidebar(dt);
+    }
+
+    /* ── Render ─────────────────────────────────────────────── */
+    function render() {
+      if (!systems) return;
+      const cam = systems.camera;
+      const weath = systems.weather;
+
+      /* Sky */
+      ctx.fillStyle = weath ? weath.getSkyColor() : COLORS.sky;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      ctx.save();
+      if (cam) cam.applyTransform(ctx);
+
+      /* Grid */
+      const ww = preset.worldWidth || 3200;
+      const wh = preset.worldHeight || 2200;
+      ctx.strokeStyle = "rgba(255,255,255,0.03)";
+      ctx.lineWidth = 1;
+      for (let gx = 0; gx < ww; gx += 100) {
+        ctx.beginPath(); ctx.moveTo(gx, 0); ctx.lineTo(gx, wh); ctx.stroke();
+      }
+      for (let gy = 0; gy < wh; gy += 100) {
+        ctx.beginPath(); ctx.moveTo(0, gy); ctx.lineTo(ww, gy); ctx.stroke();
+      }
+
+      /* World boundary */
+      ctx.strokeStyle = "#e94560";
+      ctx.lineWidth = 2;
+      ctx.strokeRect(0, 0, ww, wh);
+
+      /* Ground line (if gravity-based) */
+      if ((preset.gravity || 0) > 0) {
+        ctx.fillStyle = "#1a2a1a";
+        ctx.fillRect(0, wh - 40, ww, 40);
+      }
+
+      /* Buildings */
+      if (systems.world) {
+        const buildings = systems.world.getAll ? systems.world.getAll() : [];
+        /* manual draw from world internals */
+      }
+      /* Hardcoded demo buildings */
+      ctx.fillStyle = COLORS.building;
+      ctx.fillRect(400, 300, 120, 80);
+      ctx.fillRect(800, 600, 160, 100);
+      ctx.fillRect(1200, 200, 100, 100);
+      ctx.fillStyle = "#aaa";
+      ctx.font = "10px monospace";
+      ctx.fillText("Shop", 440, 345);
+      ctx.fillText("Garage", 855, 655);
+      ctx.fillText("Safehouse", 1215, 255);
+
+      /* Vehicles */
+      for (const v of vehicles) {
+        ctx.save();
+        ctx.translate(v.x, v.y);
+        ctx.rotate(v.angle || 0);
+        ctx.fillStyle = "#4a4a7a";
+        ctx.fillRect(-v.w / 2, -v.h / 2, v.w, v.h);
+        ctx.restore();
+      }
+
+      /* NPCs */
+      for (const npc of npcs) {
+        ctx.fillStyle = COLORS.npc;
+        ctx.fillRect(npc.x - npc.w / 2, npc.y - npc.h, npc.w, npc.h);
+        /* HP bar */
+        const hpPct = npc.hp / 50;
+        ctx.fillStyle = "#111";
+        ctx.fillRect(npc.x - 10, npc.y - npc.h - 6, 20, 3);
+        ctx.fillStyle = hpPct > 0.5 ? "#4caf50" : "#ff5722";
+        ctx.fillRect(npc.x - 10, npc.y - npc.h - 6, 20 * hpPct, 3);
+        /* State label */
+        if (npc.ai) {
+          ctx.fillStyle = "#888";
+          ctx.font = "8px monospace";
+          ctx.fillText(npc.ai.state, npc.x - 12, npc.y - npc.h - 9);
+        }
+      }
+
+      /* Waypoint markers */
+      if (systems.mission) {
+        const wps = systems.mission.getWaypoints();
+        const pulse = 0.5 + 0.5 * Math.sin(performance.now() / 1000 * 2.6);
+        for (const wp of wps) {
+          ctx.beginPath();
+          ctx.arc(wp.x, wp.y, 12 + pulse * 6, 0, Math.PI * 2);
+          ctx.strokeStyle = wp.color;
+          ctx.lineWidth = 2;
+          ctx.globalAlpha = 0.4 + pulse * 0.4;
+          ctx.stroke();
+          ctx.globalAlpha = 1;
+          ctx.fillStyle = wp.color;
+          ctx.font = "9px monospace";
+          ctx.fillText(wp.label, wp.x - 15, wp.y - 20);
+        }
+      }
+
+      /* Player */
+      ctx.fillStyle = COLORS.player;
+      ctx.fillRect(player.x - player.w / 2, player.y - player.h, player.w, player.h);
+      /* Direction indicator */
+      ctx.fillStyle = "#fff";
+      const eyeX = player.x + player.facing * 4;
+      ctx.fillRect(eyeX - 1, player.y - player.h + 4, 3, 3);
+
+      ctx.restore();
+
+      /* Weather overlay */
+      if (weath) {
+        weath.applyAmbientTint(ctx, canvas.width, canvas.height);
+        weath.renderRain(ctx, canvas.width, canvas.height);
+        weath.renderFog(ctx, canvas.width, canvas.height);
+      }
+
+      /* HUD */
+      ctx.fillStyle = "rgba(0,0,0,0.5)";
+      ctx.fillRect(8, canvas.height - 36, 160, 28);
+      ctx.fillStyle = "#e0e0e0";
+      ctx.font = "11px monospace";
+      ctx.fillText(`HP: ${player.hp}  Pos: (${player.x|0}, ${player.y|0})`, 14, canvas.height - 18);
+
+      /* Mission HUD */
+      if (systems.mission) {
+        const msg = systems.mission.getMessage("demo_patrol");
+        if (msg) {
+          ctx.fillStyle = "rgba(233,69,96,0.8)";
+          ctx.fillRect(canvas.width / 2 - 120, 46, 240, 22);
+          ctx.fillStyle = "#fff";
+          ctx.font = "12px monospace";
+          ctx.textAlign = "center";
+          ctx.fillText(msg, canvas.width / 2, 62);
+          ctx.textAlign = "left";
+        }
+      }
+    }
+
+    /* ── Sidebar ────────────────────────────────────────────── */
+    let sidebarTick = 0;
+    function updateSidebar(dt) {
+      sidebarTick += dt;
+      if (sidebarTick < 0.15) return; // throttle
+      sidebarTick = 0;
+
+      document.getElementById("stateBox").textContent =
+        `player: ${player.state} facing:${player.facing}\n` +
+        `pos: (${player.x|0}, ${player.y|0})\n` +
+        `vel: (${player.vx|0}, ${player.vy|0})\n` +
+        `grounded: ${player.grounded}  mode: ${player.mode}\n` +
+        `stamina: ${(player.stamina|0)}`;
+
+      if (systems.physics) {
+        const pc = systems.physics.config;
+        document.getElementById("physicsBox").textContent =
+          `gravity: ${pc.gravity}\n` +
+          `friction: ${pc.friction}\n` +
+          `jumpVel: ${pc.jumpVelocity}\n` +
+          `maxFall: ${pc.maxFallSpeed}`;
+      }
+
+      if (systems.camera) {
+        const vr = systems.camera.getViewRect();
+        document.getElementById("cameraBox").textContent =
+          `x: ${vr.x|0}  y: ${vr.y|0}\n` +
+          `w: ${vr.w|0}  h: ${vr.h|0}\n` +
+          `zoom: ${systems.camera.zoom?.toFixed(2) || "1.00"}`;
+      }
+
+      if (systems.weather) {
+        document.getElementById("weatherBox").textContent =
+          `condition: ${systems.weather.condition || "clear"}\n` +
+          `time: ${systems.weather.timeOfDay?.toFixed(1) || "12.0"}h\n` +
+          `wind: ${systems.weather.wind?.toFixed(1) || "0"}`;
+      }
+
+      document.getElementById("aiBox").textContent = npcs.map((n, i) =>
+        `#${i}: ${n.ai?.state || "idle"} (${n.x|0},${n.y|0})`
+      ).join("\n");
+
+      if (systems.mission) {
+        const active = systems.mission.getActive();
+        document.getElementById("missionBox").textContent = active.map(m => {
+          const phase = m.phases[m.currentPhase];
+          const objs = phase ? phase.objectives.map(o =>
+            `  ${o.completed ? "✓" : "○"} ${o.description} (${o.progress}/${o.count})`
+          ).join("\n") : "  (done)";
+          return `${m.title} [phase ${m.currentPhase + 1}/${m.phases.length}]\n${objs}`;
+        }).join("\n") || "(none)";
+      }
+    }
+
+    /* ── Start ─────────────────────────────────────────────── */
+    init("OPENWORLD");
+    requestAnimationFrame(frame);
+  })();
+  </script>
+</body>
+</html>
