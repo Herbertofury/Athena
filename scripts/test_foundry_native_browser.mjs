@@ -776,7 +776,11 @@ c.execute('UPDATE experiment_runs SET output=? WHERE experiment_id=?',(raw,int(s
   }finally{await play.close();}
  });
  if(portableUnified)await check('Exact portable Athena discovers a rift and resumes both worlds from a browser-local tape',async()=>{
-  const play=await context.newPage();
+  // The preceding animation proof installs a paused context-wide fake clock.
+  // Replay cooperatively yields to real timers and should be tested independently.
+  const replayContext=await browser.newContext({viewport:{width:1440,height:1000}});
+  await replayContext.route('**/*',route=>{if(new URL(route.request().url()).origin===origin)return route.continue();report.externalRequests.push(route.request().url());return route.abort();});
+  const play=await replayContext.newPage();
   const scratch=fs.mkdtempSync(path.join(temporary,'arena-rift-tapes-'));
   const external=report.externalRequests.length, actions=[], errors=[];
   play.on('request',r=>{if(r.method()!=='GET')actions.push(r.method()+':'+new URL(r.url()).pathname);});
@@ -797,7 +801,8 @@ c.execute('UPDATE experiment_runs SET output=? WHERE experiment_id=?',(raw,int(s
    const load=async(name,buffer)=>{
     await input.setInputFiles({name,mimeType:'application/json',buffer});
     await play.getByRole('button',{name:'Verify and load',exact:true}).click();
-    await notice.filter({hasText:/Verified and loaded|Not loaded/}).waitFor();
+    try{await notice.filter({hasText:/Verified and loaded|Not loaded/}).waitFor();}
+    catch(err){throw Error(name+': '+await notice.textContent(),{cause:err});}
     assert.match(await notice.textContent(),/Verified and loaded/);
    };
    await load('portal.json',Buffer.from(await encodeArenaTape(staged,digest)));
@@ -813,7 +818,8 @@ c.execute('UPDATE experiment_runs SET output=? WHERE experiment_id=?',(raw,int(s
    const decoded=await decodeArenaTape(bytes.toString(),{digest});
    assert.equal(decoded.snapshot().rift.active.minutes,snapshot.portal.marker.minutes);
    assert.equal(decoded.snapshot().rift.mainTime,snapshot.gameTime);
-   await play.getByRole('button',{name:'Restart run',exact:true}).click();
+   await play.reload();
+   await play.getByText('Save or resume an offline run',{exact:true}).click();
    await load('portable-active-rift.json',bytes);
    await play.getByRole('button',{name:'Leave rift (forfeit reward)',exact:true}).click();
    assert.equal(await play.locator('#time').textContent(),parentTime);
@@ -823,7 +829,7 @@ c.execute('UPDATE experiment_runs SET output=? WHERE experiment_id=?',(raw,int(s
    assert.deepEqual(actions,[]);
    assert.equal(report.externalRequests.length,external);
    assert.equal(await play.locator('iframe,video,audio').count(),0);
-  }finally{await play.close();}
+  }finally{await replayContext.close();}
  });
  if(portableUnified)await check('Exact portable Athena plays Warden Duel and interchanges a verified replay with Node',async()=>{
   const play=await context.newPage(), scratch=fs.mkdtempSync(path.join(temporary,'warden-tapes-'));
