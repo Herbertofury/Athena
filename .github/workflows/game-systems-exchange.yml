@@ -100,5 +100,19 @@ jobs:
           path: Athena-Midnight-City-Walk.html
           if-no-files-found: error
           retention-days: 14
+      - name: Validate portable card-game tapes and real match resume
+        run: node --test engines/card-game/tests/*.test.mjs
+      - name: Recreate a full winning card-game tape
+        run: |
+          node engines/card-game/build-replay.mjs card-game-proof
+          node card-game-proof/tape-cli.mjs demo Warden-Duel-Sample.json
+          node card-game-proof/tape-cli.mjs verify Warden-Duel-Sample.json
+      - name: Retain the actual playable card tape
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: warden-duel-tape-${{ matrix.os }}
+          path: Warden-Duel-Sample.json
+          if-no-files-found: error
+          retention-days: 14
       - name: Run the offline spawn host demo
         run: node engines/roguelite/examples/demo-spawn-lane.mjs 42 300
