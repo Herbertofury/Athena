@@ -155,7 +155,7 @@ def backup_database(root,data,source,destination,quiescent=False,upgrade=False):
         'sha256':final_sha,'source_unchanged_at_checks':receipt['source_unchanged_at_checks'],
         'source_wal_present':receipt['source_wal_present'],'sqlite_runtime':receipt['sqlite_runtime'],'restored':False}
 
-def legacy_copy(root,data,source,destination,quiescent=False,expected=None):
+def legacy_copy(root,data,source,destination,quiescent=False,expected=None,history=False):
     """Close, copy and review Feature Foundry v24; import only a reviewed snapshot."""
     source,destination=map(external_path,(source,destination))
     for item in (source,destination.parent):
@@ -197,6 +197,23 @@ def legacy_copy(root,data,source,destination,quiescent=False,expected=None):
             if len(raw)>64*1024*1024 or hashlib.sha256(raw).hexdigest()!=expected:
                 raise ValueError('Snapshot differs from the reviewed SHA-256')
             staged.write_bytes(raw)
+            if history:
+                archive=cli('archive-legacy-history',staged)
+                if checksum(staged)!=expected or archive.get('format')!='feature-foundry-v24-history':
+                    raise ValueError('History archive does not match reviewed source')
+                archive['reviewed_source_sha256']=expected
+                payload=(json.dumps(archive,ensure_ascii=False,separators=(',',':'))+'\n').encode('utf-8')
+                output=pathlib.Path(temp)/'history.json'
+                handle=os.open(output,os.O_WRONLY|os.O_CREAT|os.O_EXCL|getattr(os,'O_BINARY',0),0o600)
+                with os.fdopen(handle,'wb') as stream:
+                    stream.write(payload);stream.flush();os.fsync(stream.fileno())
+                if checksum(output)!=hashlib.sha256(payload).hexdigest():
+                    raise ValueError('History archive did not verify on readback')
+                destination_clear(destination)
+                publish_new(output,destination)
+                return {'archived_history':True,'events':len(archive['events']),
+                        'reviewed_source_sha256':expected,'output_sha256':hashlib.sha256(payload).hexdigest(),
+                        'imported_new_athena_profile':False}
             report=cli('inspect-legacy',staged)
             imported=pathlib.Path(temp)/'imported.sqlite3'
             if cli('import-legacy',staged,imported)!=report or checksum(staged)!=expected:
@@ -345,23 +362,25 @@ def main():
     p=argparse.ArgumentParser(description=__doc__);p.add_argument('--database');p.add_argument('--journal');p.add_argument('--portable-data-dir',help='open foundry.sqlite3 and engineering.sqlite3 in one existing external folder');p.add_argument('--init-portable-data',help='explicitly initialize a new paired profile in one existing external folder');p.add_argument('--checkpoint-directory');p.add_argument('--fork-checkpoint');p.add_argument('--working-directory');p.add_argument('--create-database');p.add_argument('--backup-database');p.add_argument('--upgrade-copy');p.add_argument('--backup-destination');p.add_argument('--source-quiescent',action='store_true');p.add_argument('--verify-only',action='store_true')
     p.add_argument('--prepare-legacy',help='snapshot closed Feature Foundry v24 and print count-only review')
     p.add_argument('--import-reviewed-legacy',help='import supported data from the exact reviewed snapshot')
-    p.add_argument('--legacy-destination',help='new file for the snapshot or imported Athena profile')
+    p.add_argument('--archive-reviewed-legacy-history',help='save exact historical events to a separate new local JSON archive')
+    p.add_argument('--legacy-destination',help='new file for the snapshot imported Athena profile, or history archive')
     p.add_argument('--reviewed-sha256',help='exact snapshot SHA-256 printed during preparation')
     a=p.parse_args()
     root=pathlib.Path(__file__).resolve().parent
     try:
         data=verify(root)
-        if a.prepare_legacy or a.import_reviewed_legacy:
-            if (bool(a.prepare_legacy)==bool(a.import_reviewed_legacy) or not a.legacy_destination or
-                bool(a.prepare_legacy)!=a.source_quiescent or bool(a.import_reviewed_legacy)!=bool(a.reviewed_sha256) or
+        legacy_ops=(a.prepare_legacy,a.import_reviewed_legacy,a.archive_reviewed_legacy_history)
+        if any(legacy_ops):
+            if (sum(map(bool,legacy_ops))!=1 or not a.legacy_destination or
+                bool(a.prepare_legacy)!=a.source_quiescent or bool(a.import_reviewed_legacy or a.archive_reviewed_legacy_history)!=bool(a.reviewed_sha256) or
                 any((a.database,a.journal,a.portable_data_dir,a.init_portable_data,a.checkpoint_directory,
                      a.fork_checkpoint,a.working_directory,a.create_database,a.backup_database,a.upgrade_copy,
                      a.backup_destination,a.verify_only))):
                 raise ValueError('Specify one legacy operation with matching review arguments')
             if (sys.platform=='win32')!=(data['platform']=='windows') or sys.platform not in ('win32','linux'):
                 raise ValueError('Platform mismatch')
-            print(json.dumps(legacy_copy(root,data,a.prepare_legacy or a.import_reviewed_legacy,
-                a.legacy_destination,a.source_quiescent,a.reviewed_sha256)))
+            print(json.dumps(legacy_copy(root,data,next(filter(None,legacy_ops)),
+                a.legacy_destination,a.source_quiescent,a.reviewed_sha256,bool(a.archive_reviewed_legacy_history))))
             return
         if a.legacy_destination or a.reviewed_sha256:
             raise ValueError('Legacy options require an explicit operation')

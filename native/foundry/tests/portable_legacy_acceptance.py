@@ -23,9 +23,13 @@ def main(package):
         source, snapshot, destination = (root / name for name in
                                         ('closed v24.sqlite3', 'reviewed copy.sqlite3', 'new foundry.sqlite3'))
         create(source)
+        original_payload = ' { "emoji" : "雨 🌟", "nested": [1, true] }  '
+        original_type = 'room checkpoint ū'
+
         with closing(sqlite3.connect(source)) as db, db:
             assert db.execute('PRAGMA journal_mode=WAL').fetchone()[0] == 'wal'
             db.execute("UPDATE room_soundtracks SET label='Synthetïc 雨'")
+            db.execute('UPDATE history SET event_type=?, payload_json=?', (original_type, original_payload))
         before = sha(source)
         assert source.read_bytes()[18:20] == b'\2\2'
         assert not pathlib.Path(str(source) + '-wal').exists()
@@ -49,6 +53,33 @@ def main(package):
         assert sha(snapshot) == expected and snapshot.read_bytes()[18:20] == b'\1\1'
         run(*prepare, '--source-quiescent', success=False)
 
+        archive = root / 'original events.json'
+        archive_args = ('--archive-reviewed-legacy-history', snapshot, '--legacy-destination', archive,
+                        '--reviewed-sha256')
+        run(*archive_args, '0' * 64, success=False)
+        assert not archive.exists()
+        archive_receipt = run(*archive_args, expected)
+        assert archive_receipt == {'archived_history': True, 'events': 1,
+                                   'reviewed_source_sha256': expected, 'output_sha256': sha(archive),
+                                   'imported_new_athena_profile': False}
+        event_archive = json.loads(archive.read_text(encoding='utf-8'))
+        assert event_archive['reviewed_source_sha256'] == expected
+        assert event_archive['events'] == [{'id': 1, 'created_at': 1, 'event_type': original_type,
+                                           'payload_json': original_payload, 'payload_sha256':
+                                           hashlib.sha256(original_payload.encode('utf-8')).hexdigest()}]
+        run(*archive_args, expected, success=False)
+        assert sha(archive) == archive_receipt['output_sha256']
+        malformed = root / 'malformed history.sqlite3'
+        create(malformed)  # existing fixture contains deliberately invalid untrusted history JSON
+        no_partial = root / 'must-not-exist.json'
+        run('--archive-reviewed-legacy-history', malformed, '--legacy-destination', no_partial,
+            '--reviewed-sha256', sha(malformed), success=False)
+        assert not no_partial.exists()
+        with closing(sqlite3.connect(malformed)) as db, db:
+            db.execute('UPDATE history SET payload_json=?', ('"'+'x'*(256*1024)+'"',))
+        run('--archive-reviewed-legacy-history', malformed, '--legacy-destination', no_partial,
+            '--reviewed-sha256', sha(malformed), success=False)
+        assert not no_partial.exists()
         imported = ('--import-reviewed-legacy', snapshot, '--legacy-destination', destination, '--reviewed-sha256')
         run(*imported, '0' * 64, success=False)
         alias = pathlib.Path(str(snapshot) + '-wal')
@@ -67,6 +98,7 @@ def main(package):
         assert status['schema'] == 15 and status['integrity'] == 'ok' and status['soundtracks'] == 1
         with closing(sqlite3.connect(destination.as_uri() + '?mode=ro', uri=True)) as db:
             record = db.execute('SELECT provider,url,label,status,source_id,updated_at FROM soundtracks').fetchall()
+            assert db.execute('SELECT count(*) FROM workspace_revisions').fetchone() == (0,)
             assert record == [('apple', 'https://music.apple.com/us/search?term=Calm',
                                'Synthetïc 雨', 'USER_SEARCH_ROUTE', 'route-1', 123456789)]
         run(*imported, expected, success=False)
@@ -74,7 +106,7 @@ def main(package):
         assert sha(source) == before and sha(snapshot) == expected
         assert not pathlib.Path(str(source) + '-wal').exists()
         assert not list(root.glob('.athena-legacy-*'))
-        print('Closed v24 WAL-header backup, review pin, exact soundtrack fields and all refusal cases passed.')
+        print('Closed v24 WAL-header backup, review pin, exact soundtrack fields, exact UTF-8 history archive and all refusal cases passed.')
 
 
 if __name__ == '__main__':

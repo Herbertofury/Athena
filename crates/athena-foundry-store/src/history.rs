@@ -122,7 +122,7 @@ impl Store {
     }
 }
 
-fn digest_hex(text: &str) -> String {
+pub(crate) fn digest_hex(text: &str) -> String {
     Sha256::digest(text.as_bytes())
         .iter()
         .map(|b| format!("{b:02x}"))
