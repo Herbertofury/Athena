@@ -89,5 +89,16 @@ jobs:
           path: Athena-Survivor-Arena.html
           if-no-files-found: error
           retention-days: 14
+      - name: Reproduce and replay pinned city collision and interior transitions
+        run: node engines/mascot-open-world/tools/build-city-traversal.mjs --check && node --test engines/mascot-open-world/tests/city-traversal.test.mjs
+      - name: Walk the generated offline city in Chromium
+        run: node engines/mascot-open-world/tools/build-city-preview.mjs && node engines/mascot-open-world/tests/city-browser.proof.mjs
+      - name: Retain the exact tested city HTML
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: midnight-city-walk-${{ matrix.os }}
+          path: Athena-Midnight-City-Walk.html
+          if-no-files-found: error
+          retention-days: 14
       - name: Run the offline spawn host demo
         run: node engines/roguelite/examples/demo-spawn-lane.mjs 42 300
