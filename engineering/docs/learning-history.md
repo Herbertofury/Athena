@@ -58,3 +58,7 @@ button. They do not prove exactly-once execution across a process crash: existin
 lease recovery may rerun a job if the engine stops between journal commit and job
 completion. The maximum polling duration can approach nine minutes when reads
 reach their deadlines; it is not a 60-second wall-clock deadline.
+
+### Recovered Engineering-Atlas evidence
+
+From Migration readiness, open **Browse recovered Engineering-Atlas evidence**. Search by experiment, indexed filename, or Git identifier, and filter for targets with offline notes. The native engine embeds the reviewed evidence manifest (19 historical targets) and exactly 20 corresponding Markdown notes for offline reading. The browser verifies the manifest SHA-256 and the exact Git blob identity before showing any selected note as inert text. Pinned original GitHub links are available separately and require network access. No historical scripts or executable files are served or run. The page is not an import, migration-parity claim, recommendation, or retirement approval.

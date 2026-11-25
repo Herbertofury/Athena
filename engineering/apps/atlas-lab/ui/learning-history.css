@@ -9,3 +9,4 @@
 .history-controls{display:grid;gap:.35rem;margin:.1rem 0 1rem}.history-controls input,.history-controls select{min-width:0;box-sizing:border-box;width:100%;font:inherit;color:inherit;background:#191d2b;border:1px solid #65607e;border-radius:8px;padding:.45rem .65rem}.history-controls p{font-size:.85rem;color:#c2bdd6;margin:.2rem 0}.history-controls :focus-visible{outline:2px solid #c4afff;outline-offset:3px}#records button[aria-current="true"]{text-decoration:underline;text-underline-offset:.25em}
 
 #controls[hidden],#projects [hidden],#evidence-download[hidden]{display:none}
+#filters[hidden],#targets [hidden],#reader[hidden]{display:none}
