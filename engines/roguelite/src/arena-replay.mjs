@@ -50,7 +50,12 @@ export function createRecordedArena({seed,format='classic'}={}){
  function capture(){
   if(truncated)throw Error('This run is beyond the portable replay limit. You can keep playing.');
   return {header:{schema:ARENA_TAPE_SCHEMA,rules:ARENA_REPLAY_RULES,seed,format,ticks,inputs:structuredClone(input)},
-   final:JSON.stringify({phase,cursor,world:host.snapshot()})};
+   // Expedition introduces long-running movement with trig. Normalize sub-pixel
+   // float noise for cross-runtime verification, not engine inputs or world state.
+   // Existing formats keep their exact byte-for-byte tape state digests.
+   final:JSON.stringify({phase,cursor,world:host.snapshot()},format==='roaming-expedition-20'
+    ?(_key,value)=>typeof value==='number'&&!Number.isInteger(value)?Number(value.toFixed(6)):value
+    :undefined)};
  }
  return Object.freeze({
   step:({keys}={})=>advance(readMask(keys)),advance,choose,capture,

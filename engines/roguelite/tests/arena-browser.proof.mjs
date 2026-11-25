@@ -96,7 +96,9 @@ try{
   const tape=await encodeArenaTape(fixture,hash);
   await file.setInputFiles({name,mimeType:'application/json',buffer:Buffer.from(tape)});
   await page.getByRole('button',{name:'Verify and load'}).click();
-  await page.locator('#tape-status').filter({hasText:'Verified and loaded'}).waitFor();
+  const notice=page.locator('#tape-status');
+  await notice.filter({hasText:/Verified and loaded|Not loaded/}).waitFor();
+  assert.match(await notice.textContent(),/Verified and loaded/,name+' verification');
   assert.equal(await profile.inputValue(),'roaming-expedition-20');
   assert.equal(await page.locator('#expedition-readout').isVisible(),true);
  };
