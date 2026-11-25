@@ -2,7 +2,7 @@
 
 **Athena is the canonical host for reusable game-engine source, package contracts, versioning, tests, benchmarks, documentation and consumer compatibility.** It is not one mega-engine and does not force every project into the same game, renderer, balance, world or runtime. The Foundry owns reusable engine families; each app owns its game identity and host integration.
 
-**Game Systems Exchange:** [shared capability registry](../guidance/registry/shared-capabilities.json) · [coordination issue #364](https://github.com/Herbertofury/Athena/issues/364) · [portfolio milestone M5](PORTFOLIO-ALIGNMENT.md#m5--athena-engine-foundry).
+**Game Systems Exchange:** [shared capability registry](../guidance/registry/shared-capabilities.json) · [general coordination issue #364](https://github.com/Herbertofury/Athena/issues/364). **Engine Foundry execution:** [M5 issue #365](https://github.com/Herbertofury/Athena/issues/365) · [portfolio milestone M5](PORTFOLIO-ALIGNMENT.md#m5--athena-engine-foundry).
 
 ## 1. The three flagship engines
 
