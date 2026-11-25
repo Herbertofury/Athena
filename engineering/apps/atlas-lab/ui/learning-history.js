@@ -1,5 +1,6 @@
 'use strict';
 import {submitJob} from './job-submit.mjs';
+import {learningActivity,readLocalArtwork} from './activity.mjs';
 const records=document.querySelector('#records'), status=document.querySelector('#status'), detail=document.querySelector('#detail'), more=document.querySelector('#more');
 let next=null, loading=false, selection=0, listEpoch=0, current=null, pinned=null, marked=null;
 const search=document.querySelector('#history-search'),sort=document.querySelector('#history-sort'),historyResults=document.querySelector('#history-results');
@@ -7,7 +8,7 @@ const loaded=new Map(),collator=new Intl.Collator('en',{sensitivity:'base',numer
 const recordId=value=>typeof value==='string'&&value===value.trim()&&/^[1-9][0-9]{0,18}$/.test(value)&&BigInt(value)<=9223372036854775807n;
 const pinButton=document.querySelector('#pin-comparison'), clearButton=document.querySelector('#clear-comparison'), comparisonStatus=document.querySelector('#comparison-status');
 function element(tag,text){const node=document.createElement(tag);node.textContent=text;return node;}
-async function json(url){const response=await fetch(url,{cache:'no-store',credentials:'same-origin',redirect:'error',signal:AbortSignal.timeout(8000)});if(!response.ok)throw new Error(`Request failed (${response.status}). Your records were not changed.`);return response.json();}
+async function json(url,stop){const timeout=AbortSignal.timeout(8000),signal=stop?AbortSignal.any([stop,timeout]):timeout;const response=await fetch(url,{cache:'no-store',credentials:'same-origin',redirect:'error',signal});if(!response.ok)throw new Error(`Request failed (${response.status}). Your records were not changed.`);return response.json();}
 function display(text){return text===null?'Not retained, unsupported, or over the display budget.':text;}
 function checkedRecord(data,expected){
  if(!recordId(data?.id)||data.id!==expected)throw new Error('Saved record identity does not match the requested experiment.');
@@ -89,25 +90,90 @@ async function load(){
 search.addEventListener('input',updateLoadedHistory);sort.addEventListener('change',updateLoadedHistory);
 more.addEventListener('click',load);load();if(recordId(location.hash.slice(1)))show(location.hash.slice(1));
 
-const runButton=document.querySelector('#run-experiment'), runStatus=document.querySelector('#run-status');
+const runButton=document.querySelector('#run-experiment'),runStatus=document.querySelector('#run-status');
+const stopButton=document.querySelector('#stop-watching');
+const indicator=document.querySelector('#learning-activity');
+const feeding=learningActivity({indicator,canvas:indicator.querySelector('canvas'),doc:document});
+const artInput=document.querySelector('#learning-art'),clearArt=document.querySelector('#clear-learning-art'),artStatus=document.querySelector('#learning-art-status');
+let artEpoch=0;
+artInput.addEventListener('change',async()=>{
+ const file=artInput.files?.[0];
+ if(!file)return;
+ const epoch=++artEpoch;
+ artInput.value='';artStatus.textContent='Checking PNG geometry locally…';
+ try{
+  const png=await readLocalArtwork(file);
+  if(epoch!==artEpoch)return;
+  feeding.setArtwork(png);clearArt.disabled=false;
+  artStatus.textContent='PNG checked for this tab. It is decoded only during a confirmed running experiment.';
+ }catch(error){if(epoch===artEpoch)artStatus.textContent=error.message+' Any previous artwork stays selected.';}
+});
+clearArt.addEventListener('click',clearArtwork);
+function clearArtwork(){
+ artEpoch++;feeding.setArtwork(null);
+ clearArt.disabled=true;artInput.value='';artStatus.textContent='No custom artwork selected.';
+}
+let watch=null,scope=0;
+function endWatch(item){
+ if(watch!==item)return false;
+ watch=null;item.motion.stop();item.abort.abort();
+ if(document.activeElement===stopButton){runStatus.tabIndex=-1;runStatus.focus();}
+ stopButton.hidden=true;
+ return true;
+}
+stopButton.addEventListener('click',()=>{
+ const current=watch;
+ if(current&&endWatch(current))runStatus.textContent=`Stopped watching job ${current.id}. This does not cancel it. Check Engineering Overview before starting another.`;
+});
+window.addEventListener('pagehide',()=>{
+ scope++;clearArtwork();
+ if(watch){
+  const {id}=watch;endWatch(watch);
+  runStatus.textContent=`Stopped watching job ${id} when this page closed. Check Engineering Overview for its status.`;
+ }
+});
+function waitWhileWatching(signal){
+ return new Promise(resolve=>{
+  if(signal.aborted){resolve();return;}
+  const stop=()=>{clearTimeout(timer);resolve();};
+  const timer=setTimeout(()=>{signal.removeEventListener('abort',stop);resolve();},1000);
+  signal.addEventListener('abort',stop,{once:true});
+ });
+}
 runButton.addEventListener('click',async()=>{
  if(runButton.disabled)return;
+ const epoch=++scope;
  runButton.disabled=true;runStatus.textContent='Submitting one bounded experiment…';
  let receipt;
  try{receipt=await submitJob('DedupExperiment');}
- catch(error){runStatus.textContent=error.message+' Reload only after checking Engineering Overview; this button stays disabled to avoid an uncertain repeat.';return;}
+ catch(error){if(epoch===scope)runStatus.textContent=error.message+' Reload only after checking Engineering Overview; this button stays disabled to avoid an uncertain repeat.';return;}
+ if(epoch!==scope)return;
+ const current=watch={id:receipt.id,abort:new AbortController(),motion:feeding.begin(receipt.id)};
+ stopButton.hidden=false;
  runStatus.textContent=`Job ${receipt.id} queued. Waiting for its retained evidence…`;
  try{
   for(let observation=0;observation<60;observation++){
-   const state=await json(`/api/learning/jobs/${receipt.id}`);
-   runStatus.textContent=`Job ${receipt.id}: ${state.state}.`;
-   if(['succeeded','failed'].includes(state.state)){
-    if(state.experiment_id){runStatus.textContent+= ' Complete experiment history is retained. Execution is not promotion.';listEpoch++;loading=false;loaded.clear();records.replaceChildren();next=null;await load();await show(state.experiment_id);}
-    else runStatus.textContent+=' Complete history was not confirmed; inspect Engineering Overview for retained job evidence.';
-    runButton.disabled=false;return;
+   if(watch!==current)return;
+   const state=await json(`/api/learning/jobs/${receipt.id}`,current.abort.signal);
+   if(watch!==current)return;
+   const phase=current.motion.observe(state);
+   if(phase==='uncertain'||phase==='stale')throw Error('Received a mismatched or invalid job status.');
+   const message=`Job ${receipt.id}: ${phase}.`;
+   if(['succeeded','failed','cancelled','canceled'].includes(phase)){
+    endWatch(current);
+    runStatus.textContent=message;
+    if(state.history_retained&&recordId(state.experiment_id)){
+     runStatus.textContent+=' Complete experiment history is retained. Execution is not promotion.';
+     listEpoch++;loading=false;loaded.clear();records.replaceChildren();next=null;await load();if(epoch===scope)await show(state.experiment_id);
+    }else runStatus.textContent+=' Complete history was not confirmed; inspect Engineering Overview for retained job evidence.';
+    if(epoch===scope)runButton.disabled=false;
+    return;
    }
-   await new Promise(resolve=>setTimeout(resolve,1000));
+   if(runStatus.textContent!==message)runStatus.textContent=message;
+   await waitWhileWatching(current.abort.signal);
   }
-  runStatus.textContent=`Job ${receipt.id} is not confirmed finished. Check Engineering Overview; this page stopped polling, not the job.`;
- }catch(error){runStatus.textContent=`Job ${receipt.id} was accepted, but status is unconfirmed. ${error.message} Check Engineering Overview before another submission.`;}
+  if(endWatch(current))runStatus.textContent=`Job ${receipt.id} is not confirmed finished. Check Engineering Overview; this page stopped polling, not the job.`;
+ }catch(error){
+  if(endWatch(current))runStatus.textContent=`Job ${receipt.id} was accepted, but status is unconfirmed. ${error.message} Check Engineering Overview before another submission.`;
+ }
 });
