@@ -94,6 +94,8 @@ jobs:
         run: node --test engines/roguelite/tests/camp-workshop.test.mjs
       - name: Prove distinct same-seed routes, true 30-minute endpoint and exact frontier replay
         run: node --test engines/roguelite/tests/spatial-region.test.mjs
+      - name: Walk actual Ashglass paths and restore the earned vault state across a true 60-minute parent
+        run: node --test engines/roguelite/tests/ashglass-cavern.test.mjs
       - name: Play the generated offline arena in Chromium
         run: node engines/roguelite/tests/arena-browser.proof.mjs
       - name: Retain the exact tested offline HTML
