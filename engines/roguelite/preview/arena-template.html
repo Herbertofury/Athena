@@ -44,7 +44,7 @@ kbd{color:var(--gold);font-weight:700}.help{font-size:.88rem}.panel{margin-top:.
 <button id="start" class="primary">Start run</button><button id="pause" disabled>Pause</button>
 <label for="run-format">Format for next run<select id="run-format">
 <option value="classic">Classic · 5 min</option><option value="marathon-20">Marathon · 20 min</option><option value="marathon-30">Marathon · 30 min</option>
-<option value="marathon-60">Marathon · 60 min</option><option value="marathon-120">Marathon · 120 min</option><option value="endless">Endless</option><option value="roaming-expedition-20">Roaming Expedition · 20 min</option><option value="rift-expedition-20">Rift Expedition · 20 min</option><option value="camp-expedition-20">Camp Expedition · 20 min</option><option value="frontier-expedition-30">Frontier Expedition · 30 min</option>
+<option value="marathon-60">Marathon · 60 min</option><option value="marathon-120">Marathon · 120 min</option><option value="endless">Endless</option><option value="roaming-expedition-20">Roaming Expedition · 20 min</option><option value="rift-expedition-20">Rift Expedition · 20 min</option><option value="camp-expedition-20">Camp Expedition · 20 min</option><option value="frontier-expedition-30">Frontier Expedition · 30 min</option><option value="frontier-expedition-60">Ashglass Frontier · 60 min</option>
 </select></label>
 <p id="pressure" aria-label="Run stage">Classic source rules</p>
 <label for="seed">Run seed<input id="seed" type="number" min="0" max="4294967295" value="42" step="1"></label>
@@ -65,6 +65,9 @@ kbd{color:var(--gold);font-weight:700}.help{font-size:.88rem}.panel{margin-top:.
 </section>
 <section id="frontier-readout" class="panel" aria-label="Frontier discoveries" hidden>
 <strong id="frontier-event" aria-live="polite"></strong><p id="frontier-details"></p>
+</section>
+<section id="cavern-readout" class="panel" aria-label="Ashglass Cavern" hidden>
+<strong id="cavern-event" aria-live="polite"></strong><p id="cavern-details"></p>
 </section>
 <details id="run-tapes"><summary>Save or resume an offline run</summary>
 <div class="controls"><button type="button" id="write-tape" disabled>Download run tape</button>

@@ -1,11 +1,12 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
+import {createAshglassCavern} from './ashglass-cavern.mjs';
 import {createSpatialRegion} from './spatial-region.mjs';
 import {createCampWorkshop} from './camp-workshop.mjs';
 import {createRiftDirector} from './rift-director.mjs';
 import {createRiftSession} from './rift-session.mjs';
 import {createLegacySurvivorRun} from './legacy-survivor-run.mjs';
 
-export function createRiftExpedition({seed,random,withCamp=false,regionFormat}) {
+export function createRiftExpedition({seed,random,withCamp=false,withCavern=false,regionFormat}) {
  const main=createLegacySurvivorRun({format:regionFormat??'roaming-expedition-20',seed,random});
  const director=createRiftDirector(seed),camp=withCamp?createCampWorkshop():null;
  const travel=createRiftSession({main,createSide:({minutes,seed})=>{
@@ -17,9 +18,10 @@ export function createRiftExpedition({seed,random,withCamp=false,regionFormat}) 
  }});
  const wallet=()=>{
   const loot=main.balance(), earned=travel.bank();
-  return {crystal:loot.crystal+earned.crystal+regionBank,gold:loot.gold+earned.gold};
+  return {crystal:loot.crystal+earned.crystal+regionBank,gold:loot.gold+earned.gold+cavernGold};
  };
- let decision=false, campPrompt=false, regionPrompt=false, inRift=false, regionBank=0;
+ let decision=false, campPrompt=false, regionPrompt=false, inRift=false, regionBank=0, cavernGold=0;
+ const cavern=withCavern?createAshglassCavern(seed):null;
  const region=regionFormat?createSpatialRegion(seed):null;
  function step(input) {
   if(decision||campPrompt||regionPrompt)return {status:'choice',audio:[]};
@@ -43,6 +45,11 @@ export function createRiftExpedition({seed,random,withCamp=false,regionFormat}) 
    const regional=region.advance({player,dt:input.dt,choicePending:result.status==='choice'});
    if(regional.crystal){regionBank+=regional.crystal;return {...result,region:{amount:regional.crystal}};}
    if(regional.prompt){regionPrompt=true;return {...result,status:'choice'};}
+  }
+  if(cavern){
+   const clue=cavern.visit(player);
+   if(clue?.gold)cavernGold+=clue.gold;
+   if(clue)return {...result,cavern:clue};
   }
   return result;
  }
@@ -73,6 +80,7 @@ export function createRiftExpedition({seed,random,withCamp=false,regionFormat}) 
  function project(frame){
   const view=frame?travel.frameView():travel.snapshot(), portal=director.snapshot();
   return {...view,portal,...(camp?{camp:camp.snapshot(wallet())}:{}),...(region?{region:{...region.snapshot(),bankedCrystal:regionBank}}:{}),
+   ...(cavern?{cavern:{...cavern.snapshot(),bankedGold:cavernGold}}:{}),
    ...(regionPrompt?{offers:[
     {id:'region-intervene',name:'Help the Amber Surveyors',icon:'◇',kind:'region'},
     {id:'region-detour',name:'Leave the factions to it',icon:'↶',kind:'region'},

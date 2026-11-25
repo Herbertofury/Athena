@@ -180,3 +180,7 @@ wallet. Walking away can lose the fight and provides nothing. Rifts and camps
 retain their previously tested local behavior, and the tape preserves the
 existing phase, reward, and suspended worlds. No more than the two authored
 regions are claimed here, and the older recipes retain their previous tape data.
+
+### Ashglass Frontier
+
+Choose **Ashglass Frontier · 60 min**. Fights, roaming resources, Rifts and Camp remain; a distant basalt entrance adds a route-dependent cavern, not another enemy wave. Follow three cairns in their displayed order, then walk onto the opened vault pedestal. A wrong alignment resets the sequence without consuming anything. Colored mirrors have text labels and the clue shows the active objective. The 34 gold is earned once, in this run's Camp wallet, and can pay for a weapon rack. The entrance appears only as you approach its seeded region. Optional discovery; no world timer gate, persistence outside the user-exported run tape, or new media assets.

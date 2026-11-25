@@ -9,6 +9,8 @@ const direction=(dx,dy)=>(Math.abs(dy)>28?(dy<0?'north':'south'):'')+(Math.abs(d
 const clockLabel=time=>{const t=Math.floor(Math.max(0,time));return Math.floor(t/60)+':'+String(t%60).padStart(2,'0');};
 const campPanel=get('camp-readout'),campEvent=get('camp-event'),campWallet=get('camp-wallet'),campRanks=get('camp-ranks');
 const frontierPanel=get('frontier-readout'),frontierEvent=get('frontier-event'),frontierDetails=get('frontier-details');
+const cavernPanel=get('cavern-readout'),cavernEvent=get('cavern-event'),cavernDetails=get('cavern-details');
+const mirrorNames=Object.freeze(['Amber','Blue','Pearl']),mirrorColors=Object.freeze(['#ffc27f','#75d9ff','#dbb7ff']);
 const movementKeys=new Set(['KeyA','KeyD','KeyW','KeyS','ArrowLeft','ArrowRight','ArrowUp','ArrowDown','ShiftLeft','ShiftRight']);
 const keys={};
 const stepSeconds=1/60;
@@ -88,6 +90,17 @@ function showFrameStats(){
   const description=paid?'Skirmish Basin cache collected.':cache?'Skirmish resolved. Collect the cache.':state==='resolved'?(amber<=0?'The Amber Surveyors fell. Nothing was earned.':'The unclaimed skirmish cache expired.'):state==='detoured'?'You left the factions to it.':state==='decision'||state==='intervening'||near?'Amber and Violet factions fighting at Skirmish Basin.':seenSurvey?'Survey Outcrop discovered. No faction battle here.':'Explore in a direction to discover a region.';
   setText(frontierEvent,description);
   setText(frontierDetails,(near&&state!=='detoured'&&state!=='resolved'?'Amber strength '+Math.ceil(amber)+' · Violet strength '+Math.ceil(violet)+' · ':'')+'Frontier crystal banked '+frontier.bankedCrystal);
+ }
+ const cave=snapshot.cavern;
+ const close=cave&&(player.x-cave.mouth.x)**2+(player.y-cave.mouth.y)**2<=380**2;
+ cavernPanel.hidden=!cave||Boolean(route?.active)||(!cave.entered&&!close);
+ if(!cavernPanel.hidden){
+  const {entered,mouth,mirrors,pedestal,order,aligned,vaultOpen,taken,bankedGold,wrongTurns}=cave;
+  const target=taken?null:vaultOpen?pedestal:entered?mirrors[order[aligned]]:mouth;
+  const label=taken?'Ashglass gold recovered.':vaultOpen?'The vault is open. Walk to the gold pedestal.':entered?'Ashglass Cavern · '+aligned+' / 3 mirrors aligned':'Ashglass Cairns nearby. Follow the basalt arch.';
+  setText(cavernEvent,label);
+  setText(cavernDetails,taken?'Gold banked: '+bankedGold:(entered?'Cairns: '+order.map(i=>mirrorNames[i]).join(' → ')+' · ':'')+
+   (target?'Next: '+direction(target.x-player.x,target.y-player.y):'')+(wrongTurns?' · Realignments '+wrongTurns:''));
  }
  setText(hud.arsenal,'Equipped: '+player.weapons.map(w=>w.name).join(' · '));
 }
@@ -188,6 +201,30 @@ function drawFrontier(region,player,ox,oy){
   ctx.font='bold 13px system-ui';ctx.textAlign='center';ctx.fillStyle='#f6dfe6';ctx.fillText('Skirmish Basin',x,y-70);
  }
 }
+function drawCavern(cave,p,ox,oy){
+ if(!cave||(p.x-cave.mouth.x)**2+(p.y-cave.mouth.y)**2>440**2)return;
+ const x=cave.mouth.x+ox,y=cave.mouth.y+oy;
+ const dir=Math.sign(cave.pedestal.x-cave.mouth.x);
+ // A distinctive basalt gallery and a sequence of three surface cairns.
+ ctx.save();ctx.translate(x,y);ctx.scale(dir,1);
+ ctx.fillStyle='#212c3e';ctx.beginPath();ctx.moveTo(-88,-23);ctx.lineTo(-26,-69);ctx.lineTo(117,-108);
+ ctx.lineTo(258,-44);ctx.lineTo(272,27);ctx.lineTo(117,102);ctx.lineTo(-62,57);ctx.closePath();ctx.fill();
+ ctx.strokeStyle='#4b6181';ctx.lineWidth=2;ctx.stroke();
+ circle(8,0,36,'#425a77');circle(9,0,25,'#141725');
+ for(const [j,index] of cave.order.entries())circle(-36+j*15,-32,5,mirrorColors[index]);
+ ctx.restore();
+ ctx.textAlign='center';ctx.font='bold 13px system-ui';ctx.fillStyle='#bce1f6';ctx.fillText('Ashglass Cavern',x,y+51);
+ if(!cave.entered)return;
+ for(const [i,m] of cave.mirrors.entries()){
+  const mx=m.x+ox,my=m.y+oy,done=cave.order.indexOf(i)<cave.aligned;
+  ctx.save();ctx.translate(mx,my);ctx.rotate(Math.PI/4);ctx.fillStyle='#142235';ctx.fillRect(-14,-14,28,28);
+  ctx.lineWidth=done?4:2;ctx.strokeStyle=mirrorColors[i];ctx.strokeRect(-13,-13,26,26);
+  ctx.fillStyle=mirrorColors[i];ctx.fillRect(-5,-9,10,18);ctx.restore();
+  ctx.fillStyle=mirrorColors[i];ctx.fillText(mirrorNames[i],mx,my-23);
+ }
+ const px=cave.pedestal.x+ox,py=cave.pedestal.y+oy;
+ circle(px,py,23,'#2e3349');circle(px,py,15,cave.vaultOpen&&!cave.taken?'#ffd66d':'#566075');
+}
 function draw(){
  const W=board.width,H=board.height,p=snapshot?.player??{x:0,y:0}, ox=W/2-p.x, oy=H/2-p.y;
  ctx.fillStyle='#0b0d15';ctx.fillRect(0,0,W,H);
@@ -196,6 +233,7 @@ function draw(){
  for(let y=((oy%40)+40)%40;y<H;y+=40){ctx.moveTo(0,y);ctx.lineTo(W,y);}
  ctx.stroke();
  drawFrontier(snapshot?.rift?.active?null:snapshot?.region,p,ox,oy);
+ if(!snapshot?.rift?.active)drawCavern(snapshot?.cavern,p,ox,oy);
  for(const gem of snapshot?.gems??[]){
   ctx.fillStyle='#6ee7b7';ctx.beginPath();const x=gem.x+ox,y=gem.y+oy,r=Math.min(10,gem.size);
   ctx.moveTo(x,y-r);ctx.lineTo(x+r,y);ctx.lineTo(x,y+r);ctx.lineTo(x-r,y);ctx.closePath();ctx.fill();
