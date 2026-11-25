@@ -227,3 +227,14 @@ unknown, not verified zero. The report also counts revisions that explicitly
 name a different chat than their parent turn. No chat, filename, link or
 revision text is printed, rendered or stored. These counts are consistency
 checks against the selected file, not source completeness or restore proof.
+
+### Verify a journal backup without a browser
+
+From the extracted unified package, run
+`atlas-lab verify-continuity-artifact-backup PATH_TO_BACKUP.athart`
+(`atlas-lab.exe` on Windows). The command prints the verified archive digest
+and aggregate revision/byte counts, never file names or file contents. It checks
+the manifest hash, the canonical record format and every original file body in
+64 KiB chunks. It does not start a server, execute a file, create a database,
+restore any data or modify the archive. Use the browser journal to restore.
+The receipt confirms byte consistency, not authorship or authenticity.

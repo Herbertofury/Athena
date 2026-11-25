@@ -27,6 +27,16 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         println!("{}", serde_json::to_string_pretty(&observation)?);
         return Ok(());
     }
+    if command.as_deref() == Some(std::ffi::OsStr::new("verify-continuity-artifact-backup")) {
+        const USAGE: &str = "Usage: atlas-lab verify-continuity-artifact-backup ARCHIVE.athart";
+        let file = input.next().ok_or(USAGE)?;
+        if input.next().is_some() {
+            return Err(USAGE.into());
+        }
+        let receipt = atlas_lab::continuity_archive::verify_file(Path::new(&file))?;
+        println!("{}", serde_json::to_string_pretty(&receipt)?);
+        return Ok(());
+    }
     // Other commands retain their existing Unicode argument contract. Refuse
     // non-Unicode input without Rust's argument-decoding panic reflecting it.
     let args: Vec<String> = [program, command]
@@ -206,7 +216,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     }
     if args.len() != 3 || args[1] != "dedup-lab" {
         eprintln!(
-            "Usage: atlas-lab review-constellation-v7 EXISTING_EXPORT.json\n       atlas-lab show-experiment EXISTING.sqlite POSITIVE_ID\n       atlas-lab serve-athena OUTPUT.sqlite VERIFIED_PACKAGE_DIRECTORY\n       atlas-lab review-upstream OUTPUT.sqlite rustsec|hls|serde-json\n       atlas-lab collect-modrinth-versions OUTPUT.sqlite CANONICAL_VERSION_ID...\n       atlas-lab serve OUTPUT.sqlite\n       atlas-lab serve-candidate OUTPUT.sqlite (isolated validated-raw overview)\n       atlas-lab windows-directory-observation LOCAL_DIRECTORY [MAX_ENTRIES]\n       atlas-lab storage-lab NEW_DIRECTORY\n       atlas-lab collect-modrinth-batch OUTPUT.sqlite CANONICAL_ID...\n       atlas-lab modrinth-project ID_OR_SLUG\n       atlas-lab collect-modrinth ID_OR_SLUG OUTPUT.sqlite\n       atlas-lab collect-modrinth-raw ID_OR_SLUG OUTPUT.sqlite (complete received public JSON)\n       atlas-lab dedup-lab OUTPUT.sqlite\nRuns a built-in generated-workload experiment only. No downloads or deployment."
+            "Usage: atlas-lab review-constellation-v7 EXISTING_EXPORT.json\n       atlas-lab verify-continuity-artifact-backup ARCHIVE.athart\n       atlas-lab show-experiment EXISTING.sqlite POSITIVE_ID\n       atlas-lab serve-athena OUTPUT.sqlite VERIFIED_PACKAGE_DIRECTORY\n       atlas-lab review-upstream OUTPUT.sqlite rustsec|hls|serde-json\n       atlas-lab collect-modrinth-versions OUTPUT.sqlite CANONICAL_VERSION_ID...\n       atlas-lab serve OUTPUT.sqlite\n       atlas-lab serve-candidate OUTPUT.sqlite (isolated validated-raw overview)\n       atlas-lab windows-directory-observation LOCAL_DIRECTORY [MAX_ENTRIES]\n       atlas-lab storage-lab NEW_DIRECTORY\n       atlas-lab collect-modrinth-batch OUTPUT.sqlite CANONICAL_ID...\n       atlas-lab modrinth-project ID_OR_SLUG\n       atlas-lab collect-modrinth ID_OR_SLUG OUTPUT.sqlite\n       atlas-lab collect-modrinth-raw ID_OR_SLUG OUTPUT.sqlite (complete received public JSON)\n       atlas-lab dedup-lab OUTPUT.sqlite\nRuns a built-in generated-workload experiment only. No downloads or deployment."
         );
         std::process::exit(2);
     }
