@@ -3,6 +3,7 @@
 Athena is the canonical host for reusable game engines across the owner's repositories. The initial intake contains 41 exact GameSync source files, pinned in four manifests and protected by `scripts/verify_engine_intake.py`. Track extraction and consumer acceptance in [Athena issue #365](https://github.com/Herbertofury/Athena/issues/365).
 
 - [Architecture and promotion rules](../docs/ENGINE-FOUNDRY.md)
+- [Implementation issue #365](https://github.com/Herbertofury/Athena/issues/365)
 - [Machine-readable engine catalog](catalog.json)
 - [Game Systems Exchange and shared capabilities](../docs/GAME-SYSTEMS-EXCHANGE.md)
 - [Cross-project milestone M5](../docs/PORTFOLIO-ALIGNMENT.md#m5--athena-engine-foundry)
