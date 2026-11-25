@@ -23,7 +23,7 @@ export function createLegacySurvivorRun({random,format='classic',seed}={}) {
  const player=createLegacyPlayer();
  const run={kills:0,gameOver:false,won:false};
  const enemies=[],gems=[];
- const combat=createLegacyCombat(rng),upgrades=createLegacyUpgradeDirector({random:rng});
+ const combat=createLegacyCombat(rng),upgrades=createLegacyUpgradeDirector({random:rng,portable:!!roaming});
  let gameTime=0,spawnTimer=0,offers=null,missedSpawns=0;
  const dispatch=(events)=>events.filter(cue=>{
   if(cue.type!=='particles')return true;
