@@ -6,4 +6,4 @@ GameSync's `game-core.js` supplies the canvas/input/drawing/collision/particle r
 
 The future adapter should expose an explicit host API, fixed-step scheduler, injected input/RNG, bounded particle/asset resources, resize/visibility handling, cancellation and deterministic teardown. No `window.__gsMascotGameCore` global should leak into the canonical package API.
 
-Source snapshot: `upstream/gamesync/game-core.js`. Consumers must pin a package version locally; no runtime fetch from Athena.
+The exact GameSync source snapshot is now stored at `upstream/gamesync/game-core.js` and pinned by [SOURCE-MANIFEST.json](SOURCE-MANIFEST.json). Consumers must pin a package version locally; no runtime fetch from Athena.
