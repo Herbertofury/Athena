@@ -1,8 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {execFileSync} from 'node:child_process';
+import {execFileSync,spawnSync} from 'node:child_process';
 import {fileURLToPath} from 'node:url';
-import {mkdtempSync,mkdirSync,openSync,closeSync,linkSync,rmSync,symlinkSync,truncateSync,writeFileSync} from 'node:fs';
+import {mkdtempSync,mkdirSync,openSync,closeSync,linkSync,renameSync,rmSync,symlinkSync,truncateSync,writeFileSync} from 'node:fs';
 import {readFile} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import {join} from 'node:path';
@@ -41,5 +41,40 @@ test('actual Linux measurement loads in the Observatory with separate path and a
     assert.match(document.getElementById('mode-description').textContent,/unreadable 1/);assert.equal(document.querySelectorAll('#categories img').length,0);
     document.getElementById('reset').onclick();assert.match(document.getElementById('source').textContent,/DEMO/);
     assert.equal(document.querySelectorAll('.category').length,5);delete globalThis.document;
+  }finally{rmSync(parent,{recursive:true,force:true});}
+});
+
+test('Linux completeness gating keeps standard reports after a portable folder move',{skip:process.platform!=='linux'},async()=>{
+  const parent=mkdtempSync(join(tmpdir(),'athena-storage-completeness-'));
+  try{
+    const original=join(parent,'original'), moved=join(parent,'moved portable Ω');
+    mkdirSync(original);writeFileSync(join(original,'value'),'owned fixture');
+    symlinkSync(join(original,'value'),join(original,'excluded-pointer'));
+    renameSync(original,moved);
+    const script=fileURLToPath(new URL('./measure.py',import.meta.url));
+    const run=(directory,options=[])=>{
+      const result=spawnSync('python3',['-B',script,directory,...options],{encoding:'utf8',timeout:7000});
+      assert.ifError(result.error);
+      return result;
+    };
+    const finished=run(moved,['--require-complete']);
+    assert.equal(finished.status,0,finished.stderr);
+    const native=await import('../../dist/workspaces/storage/model.mjs');
+    const complete=native.parseStorageReport(finished.stdout);
+    assert.equal(complete.partial,false);
+    assert.equal(complete.skipped.links,1);
+    const deep=join(moved,...Array.from({length:26},(_,i)=>'dir'+i));
+    mkdirSync(deep,{recursive:true});writeFileSync(join(deep,'past-scan-bound'),'not covered');
+    const ordinary=run(moved), gated=run(moved,['--require-complete']);
+    assert.equal(ordinary.status,0,ordinary.stderr);
+    assert.equal(gated.status,3,gated.stderr);
+    const partial=native.parseStorageReport(gated.stdout);
+    assert.equal(partial.partial,true);assert.equal(partial.stops.depthLimit,1);
+    assert.equal(native.compareObservations(complete,partial,true).eligible,false);
+    for(const key of ['schema','partial','totals','stops','skipped','categories'])
+      assert.deepEqual(JSON.parse(ordinary.stdout)[key],JSON.parse(gated.stdout)[key]);
+    assert.ok(!gated.stdout.includes(parent));
+    const missing=run(original,['--require-complete']);
+    assert.equal(missing.status,2);assert.equal(missing.stdout,'');
   }finally{rmSync(parent,{recursive:true,force:true});}
 });

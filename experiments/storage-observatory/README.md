@@ -21,6 +21,14 @@ python3 -B experiments/storage-observatory/measure.py /absolute/selected/root \
 python3 -m http.server 8000 --bind 127.0.0.1
 ```
 
+For scripts that need to distinguish an incomplete observation without parsing
+JSON, add `--require-complete`. Exit **0** means no report stop or missed
+entry was recorded (intentional exclusions still apply). Exit **3** means the
+observation was partial; stdout still contains the ordinary JSON for offline
+review and not for a delta. Exit **2** means the command was refused and
+produces no report. Without the flag, a successfully emitted partial report
+still exits **0**; inspect the existing `partial` field.
+
 The observed value is `st_blocks × 512` once per file (device and inode). The
 logical value counts every in-scope regular-file pathname. Hardlinks seen in
 separate categories are charged physically to a separate Shared row; neither
