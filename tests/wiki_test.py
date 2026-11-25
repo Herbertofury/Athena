@@ -37,6 +37,14 @@ class CatalogNavigationTests(unittest.TestCase):
     generated={str(p.relative_to(target)):p.read_bytes() for folder in ['docs','wiki','dist'] for p in (target/folder).rglob('*') if p.is_file()}
     if attempt: self.assertEqual(generated,previous)
     previous=generated
+   # The clean builder must not mutate these pages if a checkout supplies them.
+   preserved={}
+   for page in ['Engineering-Home.md','Engineering-Navigation.md']:
+    path=target/'wiki'/page
+    preserved[path]=b'# Maintained content\n'
+    path.write_bytes(preserved[path])
+   subprocess.run([sys.executable,str(target/'scripts/build_catalog.py')],check=True,capture_output=True)
+   for path,content in preserved.items(): self.assertEqual(path.read_bytes(),content)
 class DocumentationLinkTests(unittest.TestCase):
  def test_url_path_fragment_and_query(self):
   import sys
