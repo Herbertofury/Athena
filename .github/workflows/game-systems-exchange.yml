@@ -56,4 +56,4 @@ jobs:
           node-version: '24'
           package-manager-cache: false
       - name: Build, relocate and replay actual pinned GameSync card rules
-        run: node --test engines/card-game/tests/replay.test.mjs engines/roguelite/tests/fixed-step.test.mjs
+        run: node --test engines/card-game/tests/replay.test.mjs engines/roguelite/tests/fixed-step.test.mjs engines/mascot-open-world/tests/topology.test.mjs
