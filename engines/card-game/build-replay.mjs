@@ -61,7 +61,7 @@ export async function buildReplay(destination) {
     ['engine.mjs',intro+engine], ['match-state.mjs',intro+match],
     ['card-terms.mjs',intro+extractConst(cards,'CARD_TYPES')+extractConst(cards,'KEYWORDS')],
     ['replay-entropy.mjs',entropy], ['LICENSE',license],
-    ...await Promise.all(['portable-tape.mjs','replay-fixture.mjs','tape-cli.mjs'].map(async name=>[name,await readFile(resolve(here,'src',name))]))
+    ...await Promise.all(['portable-tape.mjs','warden-match.mjs','replay-fixture.mjs','tape-cli.mjs'].map(async name=>[name,await readFile(resolve(here,'src',name))]))
   ]);
   await mkdir(destination,{mode:0o700});
   for (const [name,data] of content) await writeFile(resolve(destination,name),data,{flag:'wx'});

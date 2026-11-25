@@ -71,3 +71,18 @@ and continues at the next action; a finished tape stays finished. The bounded
 format refuses noncanonical JSON, incompatible rules, illegal actions and
 changed digests. Digests detect mismatched playback, not authorship or
 multiplayer cheating. No arbitrary card-set validation is claimed.
+
+### Browser practice board
+
+Build and open `Athena-Warden-Duel.html` directly from disk:
+
+```sh
+node engines/card-game/build-browser.mjs
+```
+
+The single offline page has keyboard/mouse mulligan, selectable legal combat
+targets, turn and mana indicators, and the authored practice deck. The browser
+and Node front ends share the exact state machine and tape format. Download a
+tape explicitly, or load a saved local tape and verify it before resuming.
+No page state is retained automatically. Browser tape hashing uses Web Crypto;
+if unavailable, the standalone Node verifier remains compatible.

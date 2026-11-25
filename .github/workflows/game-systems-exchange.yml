@@ -114,5 +114,16 @@ jobs:
           path: Warden-Duel-Sample.json
           if-no-files-found: error
           retention-days: 14
+      - name: Play the offline Warden Duel and interchange Node and browser tapes
+        run: |
+          node engines/card-game/build-browser.mjs
+          node engines/card-game/tests/warden-browser.proof.mjs
+      - name: Retain the exact tested Warden Duel page
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: warden-duel-page-${{ matrix.os }}
+          path: Athena-Warden-Duel.html
+          if-no-files-found: error
+          retention-days: 14
       - name: Run the offline spawn host demo
         run: node engines/roguelite/examples/demo-spawn-lane.mjs 42 300
