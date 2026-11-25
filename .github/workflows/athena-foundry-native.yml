@@ -88,9 +88,9 @@ jobs:
         env:
           ATHENA_UNIFIED_ENGINE: ${{ github.workspace }}/engineering/apps/atlas-lab/target/debug/atlas-lab${{ runner.os == 'Windows' && '.exe' || '' }}
           ATHENA_TEST_PORTABLE_PACKAGE: ${{ github.workspace }}/candidate-extracted
-        run: |
-          node scripts/test_foundry_native_browser.mjs
-          python -B candidate-extracted/launch.py --verify-only
+        run: node scripts/test_foundry_native_browser.mjs
+      - name: Reverify extracted archive after browser acceptance
+        run: python -B candidate-extracted/launch.py --verify-only
       - name: Bounded authoring and oversized recovery in Chromium
         run: |
           node scripts/test_foundry_capacity_browser.mjs

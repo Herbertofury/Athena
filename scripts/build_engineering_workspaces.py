@@ -174,6 +174,10 @@ def build():
     initial_query="if(search!==undefined)state.q=String(search).slice(0,300);"
     code=replace(code,initial_query,initial_query+'\nrenderReferenceGuides(state.q);')
     code=replace(code,"history.replaceState(null, '', location.pathname + (query ? '?' + query : '') + location.hash);","navigate?.('#research?'+(query||'q='),{replace:true});")
+    # Adapt standalone comparison links to real shell routes. Leave their
+    # default activation and browser history to the browser/Athena shell.
+    code=replace(code,"href: '?' + encodeState({...parseState(''), plan: plan.id}) + '#catalog'",
+        "href: '#research?' + encodeState({...parseState(''), plan: plan.id})")
     code=replace(code,"window.addEventListener('popstate', () => { state = parseState(location.search); render(); });",'// The Athena shell owns history and route changes.')
     code=replace(code,"fetch($('app').dataset.catalog)","fetch(new URL('./catalog.json',import.meta.url),{signal:lifetime.signal})")
     code=replace(code,'let catalog;','let catalog,loaded=false;')
@@ -194,7 +198,7 @@ def build():
     emit(Path('research/style.css'),css,r/'explorer.css')
     pre+='  root.innerHTML='+json.dumps(html)+';const sheet=document.createElement("link");sheet.rel="stylesheet";sheet.href=new URL("./style.css",import.meta.url).href;root.prepend(sheet);setTheme(theme);\n'
     pre+='  function shareURL(){const url=new URL(globalThis.location.href);url.hash="research?"+(encodeState(state)||"q=");return url.href;}\n'
-    pre+='  root.addEventListener("click",e=>{const a=e.target.closest?.("a[href]");if(!a)return;const href=a.getAttribute("href");if(href.startsWith("?")){e.preventDefault();state=parseState(href.split("#")[0]);render();}else if(href.startsWith("#")){e.preventDefault();root.getElementById(href.slice(1))?.scrollIntoView?.({block:"start"});}});\n'
+    pre+='  root.addEventListener("click",e=>{if(e.defaultPrevented||e.button!==0||e.ctrlKey||e.metaKey||e.shiftKey||e.altKey)return;const href=e.target.closest?.("a[href]")?.getAttribute("href");if(href!=="#catalog"&&href!=="#methodology")return;const target=root.getElementById(href.slice(1));if(target){e.preventDefault();target.scrollIntoView?.({block:"start"});}});\n'
     post='''
   return {unmount,setTheme,ready:loaded,setRoute(value){if(disposed||!catalog)return;const next=parseState(value.includes('?')?value.slice(value.indexOf('?')+1):'');if(encodeState(next)!==encodeState(state)){state=next;render();}},setSearch(q){if(disposed||!catalog)return;setState({q:String(q??'').slice(0,300)});},exportState(){return {query:encodeState(state),shortlist:[...shortlist],loaded};}};
 }

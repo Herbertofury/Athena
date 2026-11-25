@@ -1,5 +1,10 @@
 import {repoRoot,runtimeRoot,binaryPath,testTemp} from './paths.mjs';
-import test from 'node:test';import assert from 'node:assert/strict';import {createRequire} from 'node:module';import {attachNativeLocalVideo} from '../../../dist/workspaces/foundry/native-local-video.mjs';
+import test from 'node:test';import assert from 'node:assert/strict';import {createRequire} from 'node:module';import {pathToFileURL} from 'node:url';
+import {resolve} from 'node:path';
+const modulePath=process.env.ATHENA_VIDEO_LOOP_TEST_PACKAGE
+ ?pathToFileURL(resolve(process.env.ATHENA_VIDEO_LOOP_TEST_PACKAGE,'workspaces/foundry/native-local-video.mjs'))
+ :new URL('../../../dist/workspaces/foundry/native-local-video.mjs',import.meta.url);
+const {attachNativeLocalVideo}=await import(modulePath);
 const require=createRequire(new URL('../../../package.json',import.meta.url)),{parseHTML}=require('linkedom'),tick=()=>new Promise(r=>setImmediate(r));
 function setup(options={}){const {document,window}=parseHTML('<html><body><section></section></body></html>'),host=document.querySelector('section'),created=[],revoked=[],videos=[];const controller=new AbortController();const adapter=attachNativeLocalVideo({...options,host,signal:controller.signal,createURL:f=>{created.push(f);return 'blob:synthetic-'+created.length},revokeURL:u=>revoked.push(u),createVideo:()=>{const video=document.createElement('video'),handlers=new Map();video.playCalls=0;video.pauseCalls=0;video.loadCalls=0;video.addEventListener=(t,f)=>handlers.set(t,f);video.removeEventListener=(t,f)=>{if(handlers.get(t)===f)handlers.delete(t)};video.observe=(t,trusted=true)=>handlers.get(t)?.({isTrusted:trusted});video.play=()=>{video.playCalls++;return video.promise||Promise.resolve()};video.pause=()=>{video.pauseCalls++;if(video.pauseError)throw Error('fixture pause failure')};video.load=()=>{video.loadCalls++};videos.push(video);options.configureVideo?.(video,videos.length);return video}});const one=q=>host.querySelector(q);return {host,window,adapter,controller,created,revoked,videos,one,choose(name='synthetic.webm',type='video/webm',size=10){const input=one('[data-local-video-file]');Object.defineProperty(input,'files',{configurable:true,value:[{name,type,size}]});input.dispatchEvent(new window.Event('change'))}}}
 test('local selection never autoplays; stages require observed native events not play promise',async()=>{const s=setup();s.choose('<img src=x>');const v=s.videos[0];assert.equal(v.autoplay,false);assert.equal(v.playCalls,0);assert.equal(s.adapter.getState().state,'selected');assert.equal(s.host.querySelector('img'),null);assert.equal(s.one('[data-local-video-name]').textContent,'<img src=x>');v.observe('playing',false);assert.equal(s.adapter.getState().state,'selected');v.observe('loadedmetadata');assert.equal(s.adapter.getState().state,'metadata-ready');v.observe('canplay');assert.equal(s.adapter.getState().state,'canplay');s.one('[data-local-video-play]').click();await tick();assert.equal(s.adapter.getState().state,'play-requested');v.observe('playing');assert.equal(s.adapter.getState().state,'playing');v.observe('waiting');assert.equal(s.adapter.getState().state,'buffering');s.adapter.dispose();assert.deepEqual(s.revoked,['blob:synthetic-1']);assert.equal(s.host.children.length,0)});
@@ -14,3 +19,78 @@ test('missing target pauses pending play and late rejection cannot clear unavail
 
 test('failed replacement setup preserves playing routed last-good video and releases candidate only',()=>{for(const failure of ['src','load']){let node;const s=setup({getSelectedTarget:()=>({key:'stable',label:'stable object'}),resolveTarget:()=>node,configureVideo(video,index){if(index!==2)return;if(failure==='src')Object.defineProperty(video,'src',{set(){throw Error('fixture source failure')}});else video.load=()=>{throw Error('fixture load failure')};}});node=s.host.ownerDocument.createElement('button');s.host.ownerDocument.body.append(node);s.choose('good.webm');const first=s.videos[0];first.observe('canplay');first.observe('playing');s.one('[data-local-video-route]').click();const beforeRoute=s.one('[data-local-video-route-status]').textContent;s.choose('broken.webm');assert.equal(s.adapter.getState().state,'playing');assert.equal(node.querySelector('video'),first);assert.equal(s.one('[data-local-video-name]').textContent,'good.webm');assert.equal(s.one('[data-local-video-route-status]').textContent,beforeRoute);assert.equal(first.pauseCalls,0);assert.equal(first.src,'blob:synthetic-1');assert.deepEqual(s.revoked,['blob:synthetic-2']);assert.match(s.one('[data-local-video-status]').textContent,/Previous video retained/);s.videos[1].observe('playing');assert.equal(s.adapter.getState().state,'playing');s.choose('recovered.webm');assert.equal(s.adapter.getState().state,'selected');assert.equal(s.one('[data-local-video-view] video'),s.videos[2]);assert.deepEqual(s.revoked,['blob:synthetic-2','blob:synthetic-1']);s.adapter.dispose();assert.deepEqual(s.revoked,['blob:synthetic-2','blob:synthetic-1','blob:synthetic-3']);}});
 test('failed first setup remains empty and cleans candidate without enabling playback',()=>{const s=setup({configureVideo(video){video.load=()=>{throw Error('fixture load failure')};}});s.choose();assert.equal(s.adapter.getState().state,'empty');assert.equal(s.one('[data-local-video-view]').children.length,0);assert.equal(s.one('[data-local-video-play]').disabled,true);assert.deepEqual(s.revoked,['blob:synthetic-1']);s.adapter.dispose();assert.equal(s.revoked.length,1);});
+
+function setLoop(s,on){
+ const loop=s.one('[data-local-video-loop]');
+ assert.ok(loop,'native local video offers an explicit repeat control');
+ loop.checked=on;loop.dispatchEvent(new s.window.Event('change',{bubbles:true}));
+ return loop;
+}
+
+test('opt-in repeat can be switched without requesting playback or creating another source',async()=>{
+ const s=setup(),loop=s.one('[data-local-video-loop]');
+ assert.ok(loop);assert.equal(loop.disabled,true);assert.equal(loop.checked,false);
+ s.choose();
+ const video=s.videos[0];
+ assert.equal(loop.disabled,false);
+ assert.equal(video.loop,false);
+ assert.equal(video.autoplay,false);
+ video.observe('canplay');
+ setLoop(s,true);
+ assert.equal(video.loop,true);
+ assert.equal(video.playCalls,0);
+ assert.equal(video.loadCalls,1);
+ s.one('[data-local-video-play]').click();await tick();video.observe('playing');
+ assert.equal(s.adapter.getState().state,'playing');
+ setLoop(s,false);
+ assert.equal(video.loop,false);
+ assert.equal(video.playCalls,1);
+ assert.equal(video.pauseCalls,0);
+ video.observe('ended');
+ assert.equal(s.adapter.getState().state,'ended');
+ video.observe('error');assert.equal(s.adapter.getState().state,'failed');
+ assert.equal(loop.disabled,true);setLoop(s,true);assert.equal(video.loop,false);
+ assert.equal(s.created.length,1);
+ s.adapter.dispose();
+});
+
+test('repeat remains tied to one routed player and survives an invalid selection without retargeting',()=>{
+ let actor,visible=true;
+ const s=setup({getSelectedTarget:()=>({key:'stable',label:'Screen'}),resolveTarget:key=>visible&&key==='stable'?actor:null});
+ actor=s.host.ownerDocument.createElement('button');s.host.ownerDocument.body.append(actor);
+ s.choose('screen.webm');const video=s.videos[0];setLoop(s,true);
+ s.one('[data-local-video-route]').click();assert.equal(actor.querySelector('video'),video);
+ s.choose('not-a-video','text/plain');assert.equal(s.one('[data-local-video-loop]').checked,true);
+ assert.equal(video.loop,true);assert.equal(actor.querySelector('video'),video);
+ visible=false;s.adapter.detach();s.adapter.update();
+ assert.equal(s.one('[data-local-video-view] video'),video);assert.ok(video.pauseCalls>0);
+ assert.equal(video.loop,true);assert.equal(video.playCalls,0);
+ visible=true;s.adapter.update();
+ assert.equal(actor.querySelector('video'),video);assert.equal(video.playCalls,0);
+ s.one('[data-local-video-preview]').click();
+ assert.equal(s.one('[data-local-video-view] video'),video);assert.equal(video.loop,true);
+ assert.equal(s.host.ownerDocument.querySelectorAll('video').length,1);
+ assert.deepEqual(s.revoked,[]);
+ s.controller.abort();
+ assert.equal(video.loop,false);assert.deepEqual(s.revoked,['blob:synthetic-1']);
+ assert.equal(s.host.ownerDocument.querySelectorAll('video').length,0);
+});
+
+test('successful replacement clears repeat; a failed replacement preserves the current video and repeat',()=>{
+ const s=setup({configureVideo(video,index){if(index===2)video.load=()=>{throw Error('fixture preparation failure')};}});
+ s.choose('first.webm');const first=s.videos[0];setLoop(s,true);
+ s.choose('broken.webm');
+ assert.equal(s.one('[data-local-video-view] video'),first);
+ assert.equal(first.loop,true);assert.equal(s.one('[data-local-video-loop]').checked,true);
+ assert.deepEqual(s.revoked,['blob:synthetic-2']);
+ s.choose('second.webm');const second=s.videos[2];
+ assert.equal(first.loop,false);assert.deepEqual(s.revoked,['blob:synthetic-2','blob:synthetic-1']);
+ assert.equal(s.one('[data-local-video-loop]').checked,false);assert.equal(second.loop,false);assert.equal(second.playCalls,0);
+ const loop=setLoop(s,true);
+ s.one('[data-local-video-close]').click();
+ assert.equal(second.loop,false);assert.equal(loop.disabled,true);assert.equal(loop.checked,false);
+ assert.equal(s.adapter.getState().state,'empty');
+ s.adapter.dispose();
+ loop.checked=true;loop.dispatchEvent(new s.window.Event('change'));
+ assert.equal(second.loop,false);assert.equal(s.revoked.length,3);
+});

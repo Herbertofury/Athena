@@ -155,3 +155,88 @@ test('Editing the archive ID or generation cancels a pending read and an idle ty
   assert.equal(q('saved-archive-text').textContent,old);
  }finally{c?.unmount();e.restore();}
 });
+
+test('A successful Lab project archive job reopens the exact receipt bytes without provider or latest reads',async()=>{
+ const id='AANobbMI',generation='9007199254740993';
+ const original='{"id":"AANobbMI","extra":18446744073709551617,"name":"<not-markup>"}';
+ const sha=text=>require('node:crypto').createHash('sha256').update(text).digest('hex');
+ const receipt={schema_version:1,status:'complete_received_response',canonical_id:id,generation,payload_bytes:Buffer.byteLength(original),payload_sha256:sha(original)};
+ let returned=original;
+ const e=setup(undefined,url=>{
+  if(url==='/api/project-archive/'+id+'/'+generation)return new Response(returned,{headers:{
+   'content-type':'application/json','x-atlas-archive-kind':'project','x-atlas-canonical-id':id,
+   'x-atlas-generation':generation,'x-atlas-payload-sha256':sha(returned),
+  }});
+ });let c;
+ const makeJob=(number,result,state='succeeded',job={CollectModrinthRaw:{project:id}})=>({
+  id:number,id_text:String(number),state,attempt:1,job,result:{project_archive:result},
+ });
+ try{
+  e.setOverview({jobs:[makeJob(7,receipt),makeJob(8,{...receipt,generation:Number(generation)}),
+   makeJob(9,{...receipt,payload_sha256:'not a digest'}),makeJob(10,receipt,'failed'),
+   makeJob(11,receipt,'succeeded','DedupExperiment')],counts:{succeeded:4,failed:1},worker_status:'running'});
+  c=await(await import(moduleURL)).mount({container:e.container});
+  const root=e.container.shadowRoot,q=id=>root.getElementById(id),dialog=q('saved-archive-dialog');
+  dialog.showModal=function(){this.open=true;};dialog.close=function(){this.open=false;};
+  assert.deepEqual(e.requests.map(r=>r.url),['/api/runtime','/api/overview']);
+  const actions=[...root.querySelectorAll('[data-project-archive-review]')];
+  assert.equal(actions.length,1,'only an exact successful project archive receipt should offer review');
+  const action=actions[0];assert.match(action.textContent,/Review saved project AANobbMI.*9007199254740993/);
+  action.click();await waitFor(()=>dialog.open);assert.equal(q('overview').hidden,false);
+  assert.equal(q('saved-archive-text').textContent,original);
+  assert.equal(q('saved-archive-text').children.length,0,'untrusted JSON remains inert text');
+  q('close-saved-archive').click();
+  returned='{"very":"different"}';
+  action.click();await waitFor(()=>!action.disabled);
+  assert.equal(dialog.open,false);
+  assert.match(action.parentElement.querySelector('[role=status]').textContent,/does not match the recorded receipt hash/);
+  assert.equal(q('saved-archive-text').textContent,original);
+  assert.equal(q('show-last-archive').disabled,false);
+  assert.deepEqual(e.requests.filter(r=>r.url.includes('-archive/')).map(r=>r.url),Array(2).fill('/api/project-archive/'+id+'/'+generation));
+  assert.ok(e.requests.every(r=>!r.options.method||r.options.method==='GET'));
+ }finally{c?.unmount();e.restore();}
+});
+
+test('Leaving Overview cancels a pending receipt and a refreshed job uses its newly recorded identity',async()=>{
+ const id='AANobbMI',initial='{"first":true}',later='{"next":true}';
+ const sha=text=>require('node:crypto').createHash('sha256').update(text).digest('hex');
+ const payload=(generation,value)=>new Response(value,{headers:{
+  'content-type':'application/json','x-atlas-archive-kind':'project','x-atlas-canonical-id':id,
+  'x-atlas-generation':generation,'x-atlas-payload-sha256':sha(value),
+ }});
+ let finish,signal;
+ const e=setup(undefined,(url,options)=>{
+  if(url==='/api/project-archive/'+id+'/7'){signal=options.signal;return new Promise(resolve=>finish=()=>resolve(payload('7',initial)));}
+  if(url==='/api/project-archive/'+id+'/8')return payload('8',later);
+ });
+ const data=(generation,value,bytes=Buffer.byteLength(value))=>({jobs:[{
+  id:7,id_text:'7',state:'succeeded',attempt:1,job:{CollectModrinthRaw:{project:id}},
+  result:{project_archive:{schema_version:1,status:'complete_received_response',canonical_id:id,generation,
+   payload_bytes:bytes,payload_sha256:sha(value)}},
+ }],counts:{succeeded:1},worker_status:'running'});
+ let c;
+ try{
+  e.setOverview(data('7',initial));c=await(await import(moduleURL)).mount({container:e.container});
+  const root=e.container.shadowRoot,q=id=>root.getElementById(id),dialog=q('saved-archive-dialog');
+  const action=()=>root.querySelector('[data-project-archive-review]');
+  dialog.showModal=function(){this.open=true;};dialog.close=function(){this.open=false;};
+  const first=action();assert.ok(first,'a saved receipt action should be visible');
+  first.click();await waitFor(()=>!!finish);c.setRoute('#lab?panel=collectors');
+  assert.equal(signal.aborted,true);
+  assert.match(first.parentElement.querySelector('[role=status]').textContent,/cancelled/);
+  finish();await tick();await tick();
+  assert.ok(!dialog.open);assert.equal(q('show-last-archive').disabled,true);
+  c.setRoute('#lab?panel=overview');
+  e.setOverview(data('8',later,Buffer.byteLength(later)+1));
+  e.document.dispatchEvent(new e.window.Event('visibilitychange'));
+  await waitFor(()=>action()!==first);
+  const second=action();assert.match(second.textContent,/generation 8$/);second.click();
+  await waitFor(()=>!second.disabled);assert.ok(!dialog.open);
+  assert.match(second.parentElement.querySelector('[role=status]').textContent,/recorded receipt byte count/);
+  assert.equal(q('show-last-archive').disabled,true);
+  e.setOverview(data('8',later));e.document.dispatchEvent(new e.window.Event('visibilitychange'));
+  await waitFor(()=>action()!==second);action().click();await waitFor(()=>dialog.open);
+  assert.equal(q('saved-archive-text').textContent,later);
+  assert.deepEqual(e.requests.filter(r=>r.url.includes('-archive/')).map(r=>r.url),['7','8','8'].map(g=>'/api/project-archive/'+id+'/'+g));
+ }finally{c?.unmount();e.restore();}
+});

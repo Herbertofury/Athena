@@ -87,6 +87,7 @@ export async function mount(context){
    const b=doc.createElement('button');b.type='button';b.className='foundry-object';b.dataset.id=o.id;b.dataset.shape=o.shape;const form=doc.createElement('span');form.className='foundry-object-form';form.setAttribute('aria-hidden','true');const label=doc.createElement('span');label.className='foundry-object-label';label.textContent=o.name;b.append(form,label);b.title=`${o.shape} · ${o.role}`;b.setAttribute('aria-label',`${o.name}; arrow keys move; P toggles pin`);position(b,pos(o.id,i));surface(pos(o.id,i)).append(b);
    const li=doc.createElement('li');li.textContent=`${o.name} · ${o.shape} · ${o.role}`;list.append(li);
   });try{nativeEnvironment?.update(current.environment);}catch{report('environment','render failed; authoring remains available');}syncInspector();try{nativeLocalImage?.update();}catch{report('localImage','surface update failed');}try{nativeLocalVideo?.update();}catch{report('localVideo','routing update failed');}text(`${visible} of ${t.objects.length} objects visible in ${t.rooms.find(r=>r.id===current.roomId).name}.`);
+  try{modules.themeAtlas?.component.syncActive();}catch{report('themeAtlas','active marker unavailable; authoring remains available');}
  }
  function switchRoom(themeId,roomId){checkpoint();importGeneration++;layouts[current.roomId]=model.validate(current);current=layouts[roomId]?model.validate(layouts[roomId]):{...model.initial(themeId),roomId};draw();save();}
  const onTheme=()=>{const t=themes.find(t=>t.id===themeSelect.value);switchRoom(t.id,t.rooms[0].id);};const onRoom=()=>switchRoom(current.themeId,roomSelect.value);const onTime=()=>{checkpoint();importGeneration++;current.time=timeSelect.value;scene.dataset.time=current.time;save();};
@@ -97,7 +98,7 @@ export async function mount(context){
  const up=e=>{if(!drag||(e&&e.pointerId!==drag.pointer))return;const owned=drag;if(e?.type==='pointerup'&&owned.recorded&&one('[data-drag-grid]').checked&&!e.altKey){const p=current.placements[owned.id];if(p&&p.scope!=='sticker'){const snapped=snapDragPosition(p,owned.button.parentElement.getBoundingClientRect());if(snapped&&(snapped.x!==p.x||snapped.y!==p.y))update(owned.id,snapped);}}drag=null;try{if(owned.button.hasPointerCapture?.(owned.pointer))owned.button.releasePointerCapture(owned.pointer);}catch{/* Ownership is cancelled even if browser release fails. */}};
  const blur=()=>up();doc.defaultView?.addEventListener('blur',blur);
  const key=e=>{const b=e.target.closest?.('[data-id]');if(!b||!root.contains(b)||!b.classList.contains('foundry-object'))return;const t=themeView(),p=pos(b.dataset.id,t.objects.findIndex(o=>o.id===b.dataset.id));if(e.key.toLowerCase()==='p'){e.preventDefault();update(b.dataset.id,{pinned:!p.pinned});return;}const delta={ArrowLeft:[-.02,0],ArrowRight:[.02,0],ArrowUp:[0,-.02],ArrowDown:[0,.02]}[e.key];if(!delta)return;e.preventDefault();if(p.pinned){text('Object is pinned. Press P to unpin.');return;}update(b.dataset.id,{x:Math.min(.94,Math.max(.06,p.x+delta[0])),y:Math.min(.94,Math.max(.06,p.y+delta[1]))});};
- const selectObject=e=>{const b=e.target.closest?.('[data-id]');if(b&&root.contains(b)&&b.classList.contains('foundry-object')){selectedObject=b.dataset.id;syncInspector();}};
+ const selectObject=e=>{const b=e.target.closest?.('[data-id]');if(b&&root.contains(b)&&b.classList.contains('foundry-object')&&(e.type!=='focusin'||selectedObject!==b.dataset.id)){selectedObject=b.dataset.id;syncInspector();}};
  root.addEventListener('focusin',selectObject);root.addEventListener('click',selectObject);
  one('[data-inspect-object]').addEventListener('change',()=>{selectedObject=one('[data-inspect-object]').value;syncInspector();});
  one('[data-inspect-pin]').addEventListener('change',()=>{drag=null;update(selectedObject,{pinned:one('[data-inspect-pin]').checked});});
@@ -217,6 +218,99 @@ export async function mount(context){
  await attach('semanticRoom','./native-semantic-room.mjs','attachSemanticRoom');
  await attach('weather','./native-weather.mjs','attachNativeWeather');
  nativeEcology=await attach('ecology','./native-ecology.mjs','attachNativeEcology',{themes});syncEcology();
+ // A pre-Atlas profile that disables every original module promised core-only
+ // authoring. An explicit Atlas opt-in overrides that legacy profile only.
+ const legacyCoreOnly=Object.values(moduleStates).every(state=>state==='disabled');
+ if(!disposed&&!signal.aborted&&enabled('themeAtlas')&&(!legacyCoreOnly||context.foundryModules?.themeAtlas===true)){
+  const host=doc.createElement('section'),controller=new AbortController();
+  host.dataset.foundryModule='themeAtlas';root.append(host);
+  try{modules.themeAtlas={host,controller,component:attachThemeAtlas({host,themes,signal:controller.signal,active:()=>current})};moduleStates.themeAtlas='attached';}
+  catch{controller.abort();host.remove();report('themeAtlas','catalog preview unavailable; authoring remains available');}
+ }
  if(signal.aborted)unmount();
  return {unmount,getModuleStates:()=>({...moduleStates}),exportState:snapshot,setSearch(q){if(disposed||signal.aborted)return;const next=String(q||'');if(next===query)return;query=next;drag=null;draw();},setTheme(t){if(disposed||signal.aborted)return;root.dataset.theme=t==='light'?'light':'dark';}};
+}
+
+// Original MIT ThemeDirector.ts separates inspecting a catalog result from
+// activating a scene. This uses reviewed Athena metadata only, not artist assets.
+function attachThemeAtlas({host,themes,signal,active}){
+ const doc=host.ownerDocument,view=doc.createElement('details');
+ view.dataset.foundryThemeAtlas='';
+ view.innerHTML=`<summary>Browse all themes and rooms</summary>
+  <p>Preview built-in themes, rooms and objects without changing the workspace. To enter a theme, use the existing Foundry scene chooser.</p>
+  <p data-theme-atlas-active></p>
+  <label>Search built-in themes, rooms and objects<input data-theme-atlas-search type="search" maxlength="200" autocomplete="off"></label>
+  <p data-theme-atlas-results-state role="status"></p>
+  <ul data-theme-atlas-results></ul>
+  <section data-theme-atlas-inspect aria-label="Inspected theme" hidden></section>`;
+ host.append(view);
+ const q=s=>view.querySelector(s),search=q('[data-theme-atlas-search]'),results=q('[data-theme-atlas-results]'),
+  status=q('[data-theme-atlas-results-state]'),inspector=q('[data-theme-atlas-inspect]'),current=q('[data-theme-atlas-active]');
+ const rows=new Map(themes.map(theme=>[theme.id,theme]));
+ const normalize=s=>String(s).normalize('NFKC').toLowerCase();
+ let index=null,selected=null,filtered=null,themeKey=null,roomKey=null,disposed=false;
+ function text(tag,value){const n=doc.createElement(tag);if(value!==undefined)n.textContent=value;return n;}
+ function button(label){const b=text('button',label);b.type='button';b.setAttribute('aria-pressed','false');return b;}
+ function syncActive(){
+  if(disposed||!view.open)return;
+  const {themeId,roomId}=active();
+  if(themeId===themeKey&&roomId===roomKey)return;
+  themeKey=themeId;roomKey=roomId;
+  const theme=rows.get(themeId),room=theme?.rooms.find(item=>item.id===roomId);
+  current.textContent=theme&&room?`Active workspace: ${theme.name} (${themeId}) · ${room.name} (${roomId})`:'Active workspace is not recorded in this catalog.';
+ }
+ function inspect(theme,source){
+  if(disposed||!view.open||!results.contains(source))return;
+  selected=theme.id;
+  for(const item of results.querySelectorAll('[data-theme-atlas-id]'))item.setAttribute('aria-pressed',String(item.dataset.themeAtlasId===selected));
+  const title=text('h3',theme.name);title.tabIndex=-1;
+  const notice=text('p',`Built-in Athena catalog · ${theme.id}. Author and external availability are not recorded. This theme was not activated by inspection.`);
+  const rooms=text('ul'),review=text('p','Choose a catalog room to inspect its exact identity.');
+  review.dataset.themeAtlasRoomPreview='';review.setAttribute('role','status');
+  for(const room of theme.rooms){
+   const row=text('li'),action=button(`Inspect room: ${room.name} · ${room.id}`);action.dataset.themeAtlasRoomId=room.id;
+   action.addEventListener('click',()=>{
+    if(disposed||!view.open||selected!==theme.id||!inspector.contains(action))return;
+    for(const b of rooms.querySelectorAll('button'))b.setAttribute('aria-pressed',String(b===action));
+    review.textContent=`Catalog room: ${room.name} (${room.id}) · ${theme.name}. No scene change.`;
+   });
+   row.append(action);rooms.append(row);
+  }
+  const objects=text('details');
+  objects.append(text('summary',`Theme catalog objects, not room placements (${theme.objects.length})`));
+  const entries=text('ul');
+  for(const asset of theme.objects)entries.append(text('li',`${asset.name} · ${asset.shape} · ${asset.role} · ${asset.id}`));
+  objects.append(entries);
+  inspector.replaceChildren(title,notice,text('h4','Rooms in this theme'),rooms,review,objects);
+  inspector.hidden=false;title.focus();
+ }
+ function render(){
+  if(disposed||!view.open)return;
+  // Build the small approved catalog index once. Changing the active scene
+  // does not rebuild it, nor rerender any unchanged search.
+  index??=themes.map(theme=>[theme,normalize([theme.name,theme.id,...theme.rooms.flatMap(r=>[r.name,r.id]),
+   ...theme.objects.flatMap(o=>[o.name,o.shape,o.role,o.id])].join(' '))]);
+  const query=normalize(search.value.slice(0,200)).trim().replace(/\s+/g,' ');
+  if(filtered===query)return;
+  filtered=query;const terms=query.split(' ').filter(Boolean),out=[];
+  for(const [theme,searchable] of index){
+   if(!terms.every(term=>searchable.includes(term)))continue;
+   const row=text('li'),preview=button(`Inspect theme: ${theme.name} · ${theme.id}`);
+   preview.dataset.themeAtlasId=theme.id;preview.setAttribute('aria-pressed',String(selected===theme.id));
+   preview.addEventListener('click',()=>inspect(theme,preview));
+   row.append(preview,text('small',`${theme.rooms.length} rooms · ${theme.objects.length} catalog objects`));out.push(row);
+  }
+  results.replaceChildren(...out);
+  status.textContent=(out.length?`${out.length} of ${index.length} built-in themes`:'No matching built-in themes')+
+   (selected?'. Current inspection stays open until another theme is chosen.':'.');
+ }
+ const toggle=()=>{if(view.open){syncActive();render();}};
+ function dispose(){
+  if(disposed)return;
+  disposed=true;search.removeEventListener('input',render);view.removeEventListener('toggle',toggle);
+  signal.removeEventListener('abort',dispose);view.remove();index=null;
+ }
+ search.addEventListener('input',render);view.addEventListener('toggle',toggle);
+ signal.addEventListener('abort',dispose,{once:true});if(signal.aborted)dispose();
+ return {syncActive,dispose};
 }

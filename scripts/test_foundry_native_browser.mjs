@@ -82,6 +82,80 @@ c.execute('UPDATE experiment_runs SET output=? WHERE experiment_id=?',(raw,int(s
  page.on('requestfailed',request=>report.networkFailures.push({path:new URL(request.url()).pathname,error:request.failure()?.errorText}));
  page.on('response',response=>{if(response.status()>=400)report.httpFailures.push({path:new URL(response.url()).pathname,status:response.status()})});
  page.setDefaultTimeout(15000);
+ if(unified)await check('Packaged Home opens read-only native Learning History through a verified link',async()=>{
+  const beforeExternal=report.externalRequests.length;
+  const unsafe=[];
+  const observe=request=>{
+   const url=new URL(request.url());
+   if(url.origin===origin&&!['GET','HEAD'].includes(request.method()))unsafe.push(url.pathname);
+  };
+  page.on('request',observe);
+  try{
+   const [runtime]=await Promise.all([
+    page.waitForResponse(response=>response.url()===origin+'/api/runtime'&&response.request().method()==='GET'),
+    page.goto(origin+'/#home')
+   ]);
+   assert.equal(runtime.status(),200);
+   const nav=page.getByRole('navigation',{name:'Main navigation',exact:true});
+   const history=nav.getByRole('link',{name:'Learning History',exact:true});
+   await history.waitFor();
+   assert.equal(await history.count(),1);
+   assert.equal(await history.getAttribute('href'),'/learning');
+   await Promise.all([page.waitForURL(origin+'/learning'),history.click()]);
+   await page.locator('#records li').first().waitFor();
+   assert.equal(await page.locator('iframe').count(),0);
+   assert.deepEqual(unsafe,[]);
+   assert.equal(report.externalRequests.length,beforeExternal);
+  }finally{page.off('request',observe);}
+ });
+ if(suppliedPackage)await check('Extracted native Projects reviews a saved comparison receipt without altering saved rows',async()=>{
+  const {checkNativeProjectComparison}=await import('./test_native_project_comparison.mjs');
+  await checkNativeProjectComparison({browser,origin,temporary});
+ });
+ if(suppliedPackage)await check('Extracted native Research opens a registered plan by link and browser history',async()=>{
+  const {checkNativeResearchPlan}=await import('./test_native_research_plan.mjs');
+  await checkNativeResearchPlan({browser,origin});
+ });
+ if(suppliedPackage)await check('Extracted native Foundry owns fullscreen only on explicit in-workspace input',async()=>{
+  const {checkNativeFoundryFullscreen}=await import('./test_native_foundry_fullscreen.mjs');
+  report.foundryFullscreen=await checkNativeFoundryFullscreen({browser,origin});
+ });
+ if(suppliedPackage)await check('Extracted native Foundry repeats one chosen video and naturally ends when repeat is off',async()=>{
+  const {checkNativeFoundryVideoLoop}=await import('./test_native_foundry_video_loop.mjs');
+  await checkNativeFoundryVideoLoop({browser,origin});
+ });
+ if(suppliedPackage)await check('Extracted native Diagnostics cancels, exports partial evidence and restarts',async()=>{
+  const {checkNativeDiagnosticsCancellation}=await import('./test_native_diagnostics_cancel.mjs');
+  await checkNativeDiagnosticsCancellation({browser,origin});
+ });
+ if(suppliedPackage)await check('Extracted native Receiver reopens the exact downloaded comparison without changing last-good',async()=>{
+  const {checkNativeReceiverFileReview}=await import('./test_native_receiver_file_review.mjs');
+  await checkNativeReceiverFileReview({browser,origin});
+ });
+ if(suppliedPackage)await check('Extracted native Projects opens only an exact linked saved revision without changing drafts',async()=>{
+  const {checkNativeProjectRevisionLink}=await import('./test_native_project_revision_link.mjs');
+  await checkNativeProjectRevisionLink({browser,origin});
+ });
+ if(suppliedPackage)await check('Extracted native Continuity verifies a moved exact artifact copy without opening a journal',async()=>{
+  const {checkNativeContinuityArtifactCopy}=await import('./test_native_continuity_artifact_copy.mjs');
+  await checkNativeContinuityArtifactCopy({browser,origin});
+ });
+ if(suppliedPackage)await check('Extracted native Continuity reviews a moved backup without substituting live notes',async()=>{
+  const {checkNativeContinuityBackupReader}=await import('./test_native_continuity_backup_reader.mjs');
+  await checkNativeContinuityBackupReader({browser,origin});
+ });
+ if(suppliedPackage)await check('Extracted native Theme Atlas discovers inactive scenes offline without editing or saving',async()=>{
+  const {checkNativeFoundryThemeAtlas}=await import('./test_native_foundry_theme_atlas.mjs');
+  await checkNativeFoundryThemeAtlas({browser,origin});
+ });
+ if(suppliedPackage)await check('Extracted native Foundry exact actor context aids keyboard and pointer without editing',async()=>{
+  const {checkNativeFoundryActorContext}=await import('./test_native_foundry_actor_context.mjs');
+  await checkNativeFoundryActorContext({browser,origin});
+ });
+ if(suppliedPackage)await check('Extracted native Lab pairs a renamed original archive with its separate provenance receipt',async()=>{
+  const {checkNativeLabArchiveProvenance}=await import('./test_native_lab_archive_provenance.mjs');
+  await checkNativeLabArchiveProvenance({browser,origin});
+ });
  if(unified)await check('Real Lab and native Foundry share one verified origin without iframe',async()=>{
   await page.goto(origin+'/#lab');await page.locator('#connection').filter({hasText:'Connected'}).waitFor();
   assert.equal(await page.locator('iframe').count(),0);
@@ -130,8 +204,33 @@ c.execute('UPDATE experiment_runs SET output=? WHERE experiment_id=?',(raw,int(s
   await page.locator('[data-origin-apply]').click();
   assert.equal(await page.locator('[data-inspect-origin]').inputValue(),'tr','origin input immediately after Apply');
   assert.equal(await page.locator('[data-inspect-rotation]').inputValue(),'45','rotation retained after origin upgrade');
-  await page.locator('[data-native-save]').click();
-  await page.locator('[data-native-status]').filter({hasText:'saved to native SQLite'}).waitFor();
+  const saveStatus=page.locator('[data-native-status]').filter({hasText:'saved to native SQLite'});
+  if(suppliedPackage){
+   const action=page.locator('.foundry-workspace [data-inspect-transform]');
+   await action.focus();
+   assert.equal(await action.evaluate(node=>node.getRootNode().activeElement===node),true);
+   await page.evaluate(()=>{
+    const observe=event=>{
+     if(event.key.toLowerCase()!=='s'||!event.ctrlKey)return;
+     document.removeEventListener('keydown',observe,true);
+     // Read the same event after dispatch; capture occurs before Foundry.
+     window.nativeSaveShortcutEvent=event;
+    };
+    document.addEventListener('keydown',observe,true);
+   });
+   const writes=[],downloads=[];
+   const observe=request=>{if(request.method()==='POST'&&new URL(request.url()).pathname==='/__native/backup')writes.push(request.url());};
+   const downloaded=download=>downloads.push(download.suggestedFilename());
+   page.on('request',observe);page.on('download',downloaded);
+   try{
+    await page.keyboard.press('Control+s');
+    await saveStatus.waitFor();
+    assert.equal(await page.evaluate(()=>window.nativeSaveShortcutEvent?.isTrusted&&window.nativeSaveShortcutEvent.defaultPrevented),true);
+    assert.deepEqual(writes,[origin+'/__native/backup']);
+    assert.deepEqual(downloads,[]);
+   }finally{page.off('request',observe);page.off('download',downloaded);}
+  }else await page.locator('[data-native-save]').click();
+  await saveStatus.waitFor();
   const stored=JSON.parse(cli('load-backup'));
   assert.equal(stored.version,9);assert.equal(stored.active.time,'night');
   assert.ok(Object.values(stored.active.placements).some(p=>p.rotation===45 && p.transformOrigin==='tr'),JSON.stringify(stored.active.placements));

@@ -68,3 +68,34 @@ export function createBrowseIndex(snapshot){
  }};
 }
 export function browse(value,options){return createBrowseIndex(validate(value)).find(options);}
+
+// Browser-local locator identities. No project ID, names, text, or source URL
+// is placed in the route. Fingerprints identify saved content, not access rights.
+export function canonicalProjectValue(value){
+ return JSON.stringify(value,(_key,item)=>item&&typeof item==='object'&&!Array.isArray(item)
+  ?Object.fromEntries(Object.keys(item).sort().map(key=>[key,item[key]])):item);
+}
+async function projectFingerprint(value){
+ const raw=new TextEncoder().encode(canonicalProjectValue(value));
+ const bytes=await globalThis.crypto.subtle.digest('SHA-256',raw);
+ return [...new Uint8Array(bytes)].map(x=>x.toString(16).padStart(2,'0')).join('');
+}
+export function savedProjectKey(id){return projectFingerprint(['athena-saved-project-v1',id]);}
+export function savedRevisionKey(id,ordinal,revision){return projectFingerprint(['athena-saved-project-revision-v1',id,ordinal,revision]);}
+export function parseSavedRevisionRoute(route){
+ if(typeof route!=='string'||!route.startsWith('#projects?'))return null;
+ if(route.length>4096)throw Error('Invalid local revision link.');
+ const keys=['saved-revision','project-key','revision-key'];
+ const params=new URLSearchParams(route.slice('#projects?'.length));
+ if(!keys.some(key=>params.has(key)))return null;
+ if(keys.some(key=>params.getAll(key).length!==1))throw Error('Invalid local revision link.');
+ const [number,projectKey,revisionKey]=keys.map(key=>params.get(key));
+ const ordinal=Number(number);
+ if(!/^[1-9]\d*$/.test(number)||!Number.isSafeInteger(ordinal)||
+  !/^[a-f0-9]{64}$/.test(projectKey)||!/^[a-f0-9]{64}$/.test(revisionKey))
+  throw Error('Invalid local revision link.');
+ return {ordinal,projectKey,revisionKey};
+}
+export function savedRevisionHref(ordinal,projectKey,revisionKey){
+ return '#projects?'+new URLSearchParams([['saved-revision',String(ordinal)],['project-key',projectKey],['revision-key',revisionKey]]);
+}

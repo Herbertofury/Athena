@@ -42,9 +42,21 @@
 /* Bound authored compositing to each Foundry surface; never blend into app controls. */
 .foundry-scene,.foundry-scope-layer{isolation:isolate}
 
+.foundry-workspace:fullscreen{overflow:auto;background:var(--bg,#11101c);padding:clamp(12px,2.4vw,32px)}
+
 /* Explicit session-only canvas presentation; never hide Athena's outer shell. */
 .foundry-canvas-controls{display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin:0 0 16px}.foundry-canvas-controls button{font:inherit;color:inherit;background:transparent;border:1px solid currentColor;border-radius:8px;padding:10px;cursor:pointer}.foundry-canvas-controls button:focus-visible{outline:3px solid #9e8cff;outline-offset:3px}.foundry-canvas-controls span{max-width:65ch;font-size:.875rem}
 .foundry-workspace[data-foundry-canvas-only=true]>:not(.foundry-canvas-controls):not(.foundry-grid):not(.foundry-status){display:none!important}
 .foundry-workspace[data-foundry-canvas-only=true]>.foundry-grid{display:block!important}
 .foundry-workspace[data-foundry-canvas-only=true]>.foundry-grid>aside{display:none!important}
 .foundry-workspace[data-foundry-canvas-only=true]>.foundry-grid>.foundry-scene{height:min(70vh,800px);min-height:300px}
+
+[data-foundry-module=themeAtlas] summary{cursor:pointer;font-weight:700}
+[data-theme-atlas-results]{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(15rem,100%),1fr));gap:.5rem;list-style:none;padding:0}
+[data-theme-atlas-results] li{display:grid;gap:.2rem;align-content:start}
+[data-theme-atlas-results] button,[data-theme-atlas-room-id]{text-align:left;overflow-wrap:anywhere}
+[data-theme-atlas-results] small{padding-inline:.35rem}
+[data-theme-atlas-inspect]{overflow-wrap:anywhere}
+[data-foundry-actor-context]{position:fixed;z-index:100;display:grid;gap:5px;max-width:calc(100vw - 16px);padding:8px;background:var(--bg,#111226);border:1px solid #a49bde;border-radius:9px;box-shadow:0 8px 24px #0008}
+[data-foundry-actor-context] button{text-align:start}
+[data-foundry-actor-context] button:focus-visible{outline:2px solid #c7bbff;outline-offset:2px}

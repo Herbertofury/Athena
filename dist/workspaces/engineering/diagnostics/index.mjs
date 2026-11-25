@@ -23,16 +23,42 @@ export async function mount({container,search='',theme='dark',signal}={}){
  function unmount(){if(disposed)return;disposed=true;cancelRun();for(const observer of observers)observer.disconnect();observers.clear();for(const f of cleanups.splice(0))f();for(const id of timers)globalThis.clearTimeout(id);timers.clear();for(const id of frames)globalThis.cancelAnimationFrame(id);frames.clear();for(const url of urls)URL.revokeObjectURL(url);urls.clear();root.querySelector('dialog[open]')?.close();root.replaceChildren();signal?.removeEventListener('abort',unmount);}
  signal?.addEventListener('abort',unmount,{once:true});
  if(signal?.aborted){unmount();return {unmount,setTheme,setSearch(){},ready:false};}
- root.innerHTML="<p id=\"search-status\" role=\"status\"></p><h2>Complete event evidence, less repeated work</h2><p>Isolated candidates: one text node per event and bounded text segments. Real retained media events or explicitly repeated stress replay. No provider requests, account data or autoplay. This measures the event-log component, not full card paint, INP or peak memory.</p><p id=\"identity\">Loading\u2026</p><label>Workload<select id=\"repeat\"><option value=\"1\">Original public event sequence</option><option value=\"8\">8\u00d7 generated replay</option><option value=\"32\">32\u00d7 generated replay</option></select></label><button id=\"run\" disabled>Run 7 comparison rounds</button><button id=\"export\" disabled>Export comparison</button><p id=\"status\" role=\"status\">Loading local fixture\u2026</p><pre id=\"workload\" tabindex=\"0\" aria-label=\"Complete event log\"></pre><pre id=\"results\" aria-label=\"Measurement results\"></pre><h2>Interrupted insertion recovery</h2><p>Generated DOM faults, not a real provider outage. Original and repaired algorithms retain separate results.</p><button id=\"recover\">Run DOM recovery checks</button><button id=\"export-recovery\" disabled>Export recovery evidence</button><pre id=\"recovery-results\" aria-label=\"DOM recovery results\"></pre><h2>Native preview timeout and retry</h2><p>Generated stalled-decode fixture using a local data image. No provider requests. Tests actual DOM source removal and native image decode on explicit test retry, not socket cancellation.</p><button id=\"preview-run\">Run generated timeout check</button><div id=\"image\"></div><pre id=\"preview-output\">Not run.</pre>";
+ root.innerHTML="<p id=\"search-status\" role=\"status\"></p><h2>Complete event evidence, less repeated work</h2><p>Isolated candidates: one text node per event and bounded text segments. Real retained media events or explicitly repeated stress replay. No provider requests, account data or autoplay. This measures the event-log component, not full card paint, INP or peak memory.</p><p id=\"identity\">Loading\u2026</p><label>Workload<select id=\"repeat\"><option value=\"1\">Original public event sequence</option><option value=\"8\">8\u00d7 generated replay</option><option value=\"32\">32\u00d7 generated replay</option></select></label><button id=\"run\" disabled>Run 7 comparison rounds</button><button id=\"cancel-comparison\" type=\"button\" aria-controls=\"status results\" disabled>Cancel comparison</button><button id=\"export\" disabled>Export comparison</button><p id=\"status\" role=\"status\">Loading local fixture\u2026</p><pre id=\"workload\" tabindex=\"0\" aria-label=\"Complete event log\"></pre><pre id=\"results\" aria-label=\"Measurement results\"></pre><h2>Interrupted insertion recovery</h2><p>Generated DOM faults, not a real provider outage. Original and repaired algorithms retain separate results.</p><button id=\"recover\">Run DOM recovery checks</button><button id=\"export-recovery\" disabled>Export recovery evidence</button><pre id=\"recovery-results\" aria-label=\"DOM recovery results\"></pre><h2>Native preview timeout and retry</h2><p>Generated stalled-decode fixture using a local data image. No provider requests. Tests actual DOM source removal and native image decode on explicit test retry, not socket cancellation.</p><button id=\"preview-run\">Run generated timeout check</button><div id=\"image\"></div><pre id=\"preview-output\">Not run.</pre>";
  const style=document.createElement('link');style.rel='stylesheet';style.href=new URL('./style.css',import.meta.url).href;root.prepend(style);setTheme(theme);
 const lifetime=new AbortController();let previewBusy=false,activeImage=null;cancelRun=()=>{lifetime.abort();activeImage?.removeAttribute('src');};
-const $=id=>root.getElementById(id),frame=()=>new Promise(resolve=>requestAnimationFrame(resolve));
+const $=id=>root.getElementById(id);
+let activeComparison=null;
+function comparisonFrame(run){
+ return new Promise((resolve,reject)=>{
+  const {signal}=run;
+  const stale=()=>signal.aborted||disposed||activeComparison!==run;
+  const reason=()=>signal.reason||Error('Comparison is no longer active.');
+  if(stale()){reject(reason());return;}
+  let settled=false;
+  const finish=(error,time)=>{
+   if(settled)return;
+   settled=true;signal.removeEventListener('abort',abort);
+   if(error)reject(error);else resolve(time);
+  };
+  const id=requestAnimationFrame(time=>finish(stale()?reason():null,time));
+  const abort=()=>{cancelAnimationFrame(id);finish(reason());};
+  signal.addEventListener('abort',abort,{once:true});
+ });
+}
+function interruptComparison(outcome,message){
+ if(!activeComparison||activeComparison.signal.aborted)return;
+ receipt.outcome=outcome;receipt.complete=false;receipt.error=message;receipt.finished_at=new Date().toISOString();
+ activeComparison.abort(Error(message));
+}
+$('cancel-comparison').addEventListener('click',()=>{
+ if(!disposed)interruptComparison('cancelled','Comparison cancelled. Completed samples retained; no winner declared.');
+});
 const harness='atlas-event-log-render-v3-recovery';$('identity').textContent='Loaded harness: '+harness;
 let source,busy=false,receipt=retained.receipt,hidden=false;
 const visibility=()=>{if(busy&&document.hidden)hidden=true;};document.addEventListener('visibilitychange',visibility);cleanups.push(()=>document.removeEventListener('visibilitychange',visibility));
 const heap=()=>Number.isFinite(performance.memory?.usedJSHeapSize)?performance.memory.usedJSHeapSize:null;
 $('run').addEventListener('click',async()=>{
- if(disposed||busy||previewBusy)return;busy=true;hidden=false;$('run').disabled=true;$('recover').disabled=true;$('repeat').disabled=true;$('export').disabled=true;
+ if(disposed||busy||previewBusy||$('run').disabled)return;busy=true;hidden=false;const run=new AbortController();activeComparison=run;$('cancel-comparison').disabled=false;$('run').disabled=true;$('recover').disabled=true;$('repeat').disabled=true;$('export').disabled=true;
  const repeat=Number($('repeat').value),records=Array.from({length:repeat},()=>source.events).flat(),expected=JSON.stringify(records,null,2);
  receipt={harness,source_module:new URL(import.meta.url).pathname,started_at:new Date().toISOString(),environment:{user_agent:navigator.userAgent,viewport:[innerWidth,innerHeight],device_pixel_ratio:devicePixelRatio,visibility:document.visibilityState},scope:repeat===1?'original retained public event sequence':'generated stress replay of retained public events',repeat,event_count:records.length,complete_json_bytes:new TextEncoder().encode(expected).length,complete:false,samples:[],limitations:['Event-log component only; not full card/media loading or target-project acceptance','Double-rAF is a scheduling proxy, not physical paint','Heap snapshots when exposed are not peak memory and can be coarse or GC-dependent','Same immutable records and full visible JSON; no truncation, sampling or omitted events','One browser/environment; no general best-method ranking']};
  try{
@@ -40,19 +66,27 @@ $('run').addEventListener('click',async()=>{
   const orders=[['full_history','append','blocked'],['blocked','append','full_history'],['append','full_history','blocked'],['blocked','full_history','append'],['full_history','blocked','append'],['append','blocked','full_history']];
   for(let round=0;round<7;round++)for(const strategy of orders[round%orders.length]){
    if(disposed||document.hidden||hidden)throw Error('Visibility changed; incomplete evidence retained');
-   $('status').textContent=`Round ${round+1}/7: ${strategy}`;$('workload').textContent='';$('workload').scrollTop=0;$('workload').scrollIntoView({block:'center',behavior:'instant'});await frame();await frame();const bounds=$('workload').getBoundingClientRect();if(bounds.top<0||bounds.bottom>innerHeight)throw Error('Keep the entire workload viewport visible');
+   $('status').textContent=`Round ${round+1}/7: ${strategy}`;$('workload').textContent='';$('workload').scrollTop=0;$('workload').scrollIntoView({block:'center',behavior:'instant'});await comparisonFrame(run);await comparisonFrame(run);const bounds=$('workload').getBoundingClientRect();if(bounds.top<0||bounds.bottom>innerHeight)throw Error('Keep the entire workload viewport visible');
    const beforeHeap=heap(),start=performance.now();let logTextCodeUnitsWritten=0;
    if(strategy==='full_history') {const history=[];for(const record of records){history.push(record);const text=JSON.stringify(history,null,2);logTextCodeUnitsWritten+=text.length;$('workload').textContent=text;}}
    else {const view=(strategy==='blocked'?createBlockedEventLogView:createEventLogView)($('workload'));for(const record of records)view.append(record);logTextCodeUnitsWritten=expected.length+1;}
-   const synchronousEnd=performance.now();await frame();await frame();const frameEnd=performance.now(),afterHeap=heap();
+   const synchronousEnd=performance.now();await comparisonFrame(run);await comparisonFrame(run);const frameEnd=performance.now(),afterHeap=heap();
    const actual=$('workload').textContent;if(actual!==expected)throw Error('Complete event output mismatch');
-   const gaps=[];for(let i=1;i<=8;i++){const begin=performance.now();$('workload').scrollTop=($('workload').scrollHeight-$('workload').clientHeight)*i/8;await frame();gaps.push(performance.now()-begin);}
+   const gaps=[];for(let i=1;i<=8;i++){const begin=performance.now();$('workload').scrollTop=($('workload').scrollHeight-$('workload').clientHeight)*i/8;await comparisonFrame(run);gaps.push(performance.now()-begin);}
    if(disposed||document.hidden||hidden)throw Error('Visibility changed; incomplete evidence retained');
    receipt.samples.push({round,strategy,synchronous_render_ms:synchronousEnd-start,frame_ready_proxy_ms:frameEnd-start,scroll_frame_wait_ms:gaps,heap_before:beforeHeap,heap_after:afterHeap,log_text_code_units_written:logTextCodeUnitsWritten,dom_text_nodes:$('workload').childNodes.length,complete_output_equal:true});
   }
   receipt.complete=true;receipt.frame_cadence_unreliable=receipt.samples.some(s=>s.scroll_frame_wait_ms.filter(x=>x>=200).length>=4);$('status').textContent='All 21 complete-output comparisons passed.'+(receipt.frame_cadence_unreliable?' Frame cadence was slow; no interaction-latency acceptance.':'')+' Export raw evidence; no automatic promotion.';
  }catch(error){if(disposed)return;receipt.error=String(error.message);$('status').textContent=receipt.error;}
- finally{if(disposed)return;receipt.finished_at=new Date().toISOString();$('results').textContent=JSON.stringify(receipt,null,2);$('export').disabled=false;$('repeat').disabled=false;$('run').disabled=false;$('recover').disabled=false;busy=false;}
+
+ finally{
+  if(disposed||activeComparison!==run)return;
+  activeComparison=null;
+  if(receipt.outcome==='cancelled')$('workload').replaceChildren();
+  const restoreFocus=root.activeElement===$('cancel-comparison');
+  $('cancel-comparison').disabled=true;
+  receipt.finished_at||=new Date().toISOString();
+$('results').textContent=JSON.stringify(receipt,null,2);$('export').disabled=false;$('repeat').disabled=false;$('run').disabled=false;$('recover').disabled=false;busy=false;if(restoreFocus)$('run').focus({preventScroll:true});}
 });
 $('export').addEventListener('click',()=>{if(!receipt)return;const url=createObjectURL(new Blob([JSON.stringify(receipt,null,2)],{type:'application/json'}));const a=document.createElement('a');a.href=url;a.download='atlas-event-log-render.json';a.click();setTimeout(()=>revokeObjectURL(url),1000);});
 try{const response=await fetch(new URL('./event-log-fixture.json',import.meta.url),{signal:lifetime.signal});if(!response.ok)throw Error('Fixture unavailable');source=await response.json();if(disposed)return {unmount,setTheme,setSearch,ready:false};if(!Array.isArray(source.events)||!source.events.length||source.events.length>64)throw Error('Invalid fixture');$('run').disabled=false;$('status').textContent=`Ready: ${source.events.length} original events. Keep the workload visible.`;}catch(error){if(!disposed)$('status').textContent=error.message;}
@@ -93,8 +127,8 @@ root.getElementById('preview-run').addEventListener('click',async event=>{
 });
 function setSearch(q){if(!disposed)$('search-status').textContent=String(q||'')?'Diagnostics: event-log rendering, DOM recovery and preview timeout. Search does not filter evidence.':'Native media diagnostics. Explicit actions only; generated tests are not live-provider acceptance.';}
 setSearch(search);
-if(receipt){$('results').textContent=JSON.stringify(receipt,null,2);$('export').disabled=false;$('status').textContent='Previous diagnostic receipt retained; new runs are explicit.';}
+if(receipt){$('results').textContent=JSON.stringify(receipt,null,2);$('export').disabled=false;$('status').textContent=receipt.outcome?receipt.error:'Previous diagnostic receipt retained; new runs are explicit.';}
 if(recoveryReceipt){$('recovery-results').textContent=JSON.stringify(recoveryReceipt,null,2);$('export-recovery').disabled=false;}
-cancelRun=()=>{lifetime.abort();activeImage?.removeAttribute('src');if(busy&&receipt){receipt.complete=false;receipt.error='Navigation interrupted comparison; no winner declared.';}retained={receipt,recovery:recoveryReceipt};};
+cancelRun=()=>{lifetime.abort();activeImage?.removeAttribute('src');interruptComparison('interrupted','Navigation interrupted comparison; no winner declared.');retained={receipt,recovery:recoveryReceipt};};
 return {unmount,setTheme,setSearch,ready:!!source,exportState(){return {available:true};}};
 }
