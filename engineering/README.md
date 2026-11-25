@@ -38,6 +38,7 @@ A practical, evolving research library for desktop apps, web services, Minecraft
 | Index archives and detect changes correctly | [Archives and change tracking](docs/archive-and-change-tracking.md) |
 | Build responsive desktop applications | [Desktop architecture](docs/desktop.md) |
 | Build a web service and account integration | [Web and security](docs/web-security.md) |
+| Build user-controlled Windows process inspection and endpoint protection | [Windows endpoint security](docs/windows-endpoint-security.md) |
 | Build or extend a mod | [Mod development](docs/mods.md) |
 | Build models, animation and game assets | [Game and asset pipelines](docs/game-assets.md) |
 | Prove correctness and ship the tested build | [Testing and release](docs/testing-release.md) |

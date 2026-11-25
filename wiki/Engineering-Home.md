@@ -17,6 +17,10 @@ A research home for building apps, mods, programs and game tooling. **Reviewed f
 
 [Frontier engineering intelligence](https://github.com/Herbertofury/Athena/wiki/Engineering-Frontier-Research-2026-11-24) — 64 additional indexed primary-source observations, current compiler and release signals, and targeted experiments. No new runtime performance claim.
 
+## Windows endpoint security research
+
+[User-controlled Windows endpoint security](https://github.com/Herbertofury/Athena/wiki/Engineering-Windows-Endpoint-Security) adds source-reviewed process/memory inspection boundaries, actual component stop contracts, WESP eligibility, update-format distinctions and eight proposed acceptance experiments. No runtime or detection-superiority claim.
+
 ## Choose your route
 
 | Area | Start here | What you get |

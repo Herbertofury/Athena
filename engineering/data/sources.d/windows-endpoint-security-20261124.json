@@ -1,0 +1,222 @@
+[
+  {
+    "id": "WEP001",
+    "title": "Microsoft WESP requirements, signing and enrollment",
+    "url": "https://learn.microsoft.com/en-us/windows/win32/wesp/wesp-requirements",
+    "observed_version": "Documentation updated 2026-11-17; initial Windows 11 October 2026 release envelope",
+    "topic": "windows-endpoint-security",
+    "note": "Production access depends on eligible OS, MVI, signing and delivered Code Integrity policy; test enrollment is separate.",
+    "checked_at": "2026-11-24",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "WEP002",
+    "title": "Microsoft WESP general availability and driver quality",
+    "url": "https://techcommunity.microsoft.com/blog/Windows-ITPro-blog/whats-next-windows-endpoint-security-platform-and-driver-quality/4572663",
+    "observed_version": "Microsoft announcement 2026-11-17",
+    "topic": "windows-endpoint-security",
+    "note": "User-mode file/process/registry/Object Manager observation and enforcement are documented; no target-specific performance proof.",
+    "checked_at": "2026-11-24",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "WEP003",
+    "title": "Microsoft windows-drivers-rs maturity and supported configurations",
+    "url": "https://github.com/microsoft/windows-drivers-rs/blob/main/README.md",
+    "observed_version": "README blob 2365652f0ff007cdcd75353c3957b1fe2d7c7e06",
+    "topic": "windows-endpoint-security",
+    "note": "Current README says early development and not recommended for production. Driver build/signing/testing remains separate from Rust user-mode bindings.",
+    "checked_at": "2026-11-24",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "WEP004",
+    "title": "Microsoft About Event Tracing",
+    "url": "https://learn.microsoft.com/en-us/windows/win32/etw/about-event-tracing",
+    "observed_version": "Current Microsoft Learn API documentation checked 2026-11-24",
+    "topic": "windows-endpoint-security",
+    "note": "Controllers, providers and consumers; dynamic sessions, real-time or file delivery. Collection is not complete historical visibility.",
+    "checked_at": "2026-11-24",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "WEP005",
+    "title": "Microsoft ControlTraceW lifecycle and result states",
+    "url": "https://learn.microsoft.com/en-us/windows/win32/api/evntrace/nf-evntrace-controltracew",
+    "observed_version": "Microsoft Learn API documentation updated 2024-06-11",
+    "topic": "windows-endpoint-security",
+    "note": "Stop/query/flush semantics and permissions; stop-pending and failures require actual state reconciliation.",
+    "checked_at": "2026-11-24",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "WEP006",
+    "title": "Microsoft Windows Security Center registration guidance",
+    "url": "https://learn.microsoft.com/en-us/windows-hardware/customize/desktop/unattend/security-malware-windows-defender-disableantispyware",
+    "observed_version": "Microsoft Learn guidance updated 2024-03-29",
+    "topic": "windows-endpoint-security",
+    "note": "ISV registration is routed to MVI-provided WSC APIs; status observation is not product registration.",
+    "checked_at": "2026-11-24",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "WEP007",
+    "title": "Microsoft Antimalware Scan Interface",
+    "url": "https://learn.microsoft.com/en-us/windows/win32/amsi/antimalware-scan-interface-portal",
+    "observed_version": "Microsoft Learn overview updated 2025-07-10",
+    "topic": "windows-endpoint-security",
+    "note": "Distinguishes application requests from antimalware provider integration and notes provider signing behavior.",
+    "checked_at": "2026-11-24",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "WEP008",
+    "title": "Microsoft security intelligence updates",
+    "url": "https://www.microsoft.com/en-us/wdsi/defenderupdates",
+    "observed_version": "Product/engine/platform-specific update documentation; live version numbers are intentionally not pinned as dependencies",
+    "topic": "windows-endpoint-security",
+    "note": "Public update downloads do not establish a portable database or interoperability with another engine.",
+    "checked_at": "2026-11-24",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "WEP009",
+    "title": "Bitdefender offline threat-definition updates",
+    "url": "https://www.bitdefender.com/consumer/support/answer/10690/",
+    "observed_version": "Current vendor instructions for weekly.exe checked 2026-11-24",
+    "topic": "windows-endpoint-security",
+    "note": "Describes applying updates to Bitdefender; no generic independent-engine database interface is documented by this page.",
+    "checked_at": "2026-11-24",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "WEP010",
+    "title": "PE-sieve single-process memory inspection",
+    "url": "https://github.com/hasherezade/pe-sieve/blob/7517ed395b2cc26cff8069f2b819417aaf8d5d11/README.md",
+    "observed_version": "Source commit 7517ed395b2cc26cff8069f2b819417aaf8d5d11",
+    "topic": "windows-endpoint-security",
+    "note": "EXE/DLL engine for injected images, hooks and patches. Detection and original-actor attribution are separate evidence claims.",
+    "checked_at": "2026-11-24",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "WEP011",
+    "title": "HollowsHunter process orchestration",
+    "url": "https://github.com/hasherezade/hollows_hunter/blob/cd694375bbc810e9b0faa93530568953118278ce/README.md",
+    "observed_version": "Source commit cd694375bbc810e9b0faa93530568953118278ce",
+    "topic": "windows-endpoint-security",
+    "note": "Multi-process PE-sieve front-end with explicit loop and ETW options; candidate for mode/lifecycle comparison.",
+    "checked_at": "2026-11-24",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "WEP012",
+    "title": "Fibratus behavior rules, memory scanning and capture",
+    "url": "https://github.com/rabbitstack/fibratus/blob/0d2cb65b379673542da6ff35992f81fa603fe5a1/README.md",
+    "observed_version": "Source commit 0d2cb65b379673542da6ff35992f81fa603fe5a1; release v3.1.1 reviewed separately",
+    "topic": "windows-endpoint-security",
+    "note": "Architecture reference for event correlation and replay; not an independently benchmarked integration.",
+    "checked_at": "2026-11-24",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "WEP013",
+    "title": "Rustinel platform capability and protection boundaries",
+    "url": "https://github.com/Karib0u/rustinel/blob/901f2e6ab966089b621470bd28499ffb0572e8db/README.md",
+    "observed_version": "Source commit 901f2e6ab966089b621470bd28499ffb0572e8db; v1.11.0",
+    "topic": "windows-endpoint-security",
+    "note": "Native sensor/rule architecture; README explicitly excludes pre-execution blocking, anti-tamper and a management console.",
+    "checked_at": "2026-11-24",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "WEP014",
+    "title": "YARA-X rule engine and compatibility references",
+    "url": "https://github.com/VirusTotal/yara-x/blob/ea1d215af89760325a9e08713ad1a1fc05a9a439/README.md",
+    "observed_version": "Source commit ea1d215af89760325a9e08713ad1a1fc05a9a439; current release v1.24.0 observed",
+    "topic": "windows-endpoint-security",
+    "note": "Rust pattern engine candidate. Upstream production use is not proof of performance or full rule equivalence in a different host.",
+    "checked_at": "2026-11-24",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "WEP015",
+    "title": "PRX-SD documented platform coverage",
+    "url": "https://github.com/openprx/prx-sd/blob/df613b75e8460831708c54475a9e93bf618a7400/README.md",
+    "observed_version": "Source commit df613b75e8460831708c54475a9e93bf618a7400; stable release v0.2.3",
+    "topic": "windows-endpoint-security",
+    "note": "Windows directory watching and planned minifilter are distinct from Linux pre-execution, process-memory, rootkit and eBPF features.",
+    "checked_at": "2026-11-24",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "WEP016",
+    "title": "Sentinella v0.1.13 limits and lifecycle lessons",
+    "url": "https://github.com/LeewayOpenSoftware/Sentinella/releases/tag/v0.1.13",
+    "observed_version": "Release v0.1.13 published 2026-08-03 UTC",
+    "topic": "windows-endpoint-security",
+    "note": "Release notes separate unit checks from unexercised live NRPT, kernel ETW and unmeasured heuristic efficacy.",
+    "checked_at": "2026-11-24",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "WEP017",
+    "title": "Sentinella v0.1.12 cache and timeout corrections",
+    "url": "https://github.com/LeewayOpenSoftware/Sentinella/releases/tag/v0.1.12",
+    "observed_version": "Release v0.1.12",
+    "topic": "windows-endpoint-security",
+    "note": "Documented timeout-as-clean and prefix-fingerprint defects motivate regression fixtures; no reproduction in another project is claimed.",
+    "checked_at": "2026-11-24",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "WEP018",
+    "title": "Appwrite Defender ClamAV-format support and omissions",
+    "url": "https://github.com/appwrite/defender/blob/5ce7189f2b197b60f1b55696b032fae1ed8ba85e/README.md",
+    "observed_version": "Source commit 5ce7189f2b197b60f1b55696b032fae1ed8ba85e",
+    "topic": "windows-endpoint-security",
+    "note": "Rust HTTP ClamAV database parser, not Microsoft Defender. Bytecode and YARA are not executed; peak reload memory requires separate measurement.",
+    "checked_at": "2026-11-24",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "WEP019",
+    "title": "Microsoft CreateToolhelp32Snapshot API limitations",
+    "url": "https://learn.microsoft.com/en-us/windows/win32/api/tlhelp32/nf-tlhelp32-createtoolhelp32snapshot",
+    "observed_version": "Current Microsoft Learn API reference checked 2026-11-24",
+    "topic": "windows-endpoint-security",
+    "note": "Process/module snapshots have access, changing-process and cross-bitness constraints. Surface incomplete coverage and revalidate identity.",
+    "checked_at": "2026-11-24",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  },
+  {
+    "id": "WEP020",
+    "title": "AMTSO use and misuse of antimalware test files",
+    "url": "https://www.amtso.org/wp-content/uploads/2018/05/AMTSO-Use-and-Misuse-of-Test-Files-in-Anti-Malware-Testing-FINAL.pdf",
+    "observed_version": "AMTSO 2016 document; hosted PDF under 2018/05 path",
+    "topic": "windows-endpoint-security",
+    "note": "Installation/test-path checks using EICAR are different from comparative detection effectiveness. Summary only; no copied test file or malware content.",
+    "checked_at": "2026-11-24",
+    "review_after_days": 30,
+    "evidence": "primary_documented"
+  }
+]
