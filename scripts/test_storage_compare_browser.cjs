@@ -19,7 +19,7 @@ const server=http.createServer((req,res)=>{
  try{
   const origin='http://127.0.0.1:'+server.address().port;
   browser=await chromium.launch({headless:true,executablePath:process.env.CHROMIUM_PATH||undefined});
-  const page=await browser.newPage({viewport:{width:390,height:844},reducedMotion:'reduce'});
+  const page=await browser.newPage({viewport:{width:390,height:844},reducedMotion:'reduce',locale:'en-US'});
   const external=[];await page.route('**/*',r=>r.request().url().startsWith(origin+'/')?r.continue():(external.push(r.request().url()),r.abort()));
   await page.goto(origin+'/#storage');await page.getByRole('heading',{name:'Compare two local observations'}).waitFor();
   const choose=(query,value)=>page.locator(query).setInputFiles({name:'report.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(value))});
@@ -46,7 +46,7 @@ const server=http.createServer((req,res)=>{
   await choose('#windows-observation-file',win);
   await windowsView.getByText('Partial observation: entry limit reached.').waitFor();
   await windowsView.getByText('8 KiB (8,192 bytes)',{exact:true}).waitFor();
-  assert.match(await windowsView.textContent(),/not an estimate of reclaimable space/i);
+  assert.match(await windowsView.textContent(),/not a point-in-time snapshot or an estimate of reclaimable space/i);
   assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
   assert.equal(await panel.isVisible(),false);
   await windowsView.screenshot({path:'browser-results/storage-windows-observation.png'});
