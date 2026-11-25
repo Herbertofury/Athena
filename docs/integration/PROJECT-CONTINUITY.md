@@ -185,3 +185,33 @@ rebuilds when notes or its selected project change, not on every keystroke.
 No search index persists to disk, and searching does not save, hide, truncate
 or transmit any note. The scope is the same local snapshot, not remote or
 full-scale SQLite search.
+
+### Move an entire artifact journal to another profile
+
+In **Continuity → Open local artifact journal**, choose **Export complete artifact
+journal**. Athena checks one consistent snapshot and downloads a single
+`athena-artifact-journal.athart` file. In the destination profile, open the
+journal, choose that file and press **Restore missing revisions**. No network
+or background task is used. Notes still need their separate JSON export.
+
+The backup preserves artifact IDs, revision sequences, filenames, MIME labels,
+timestamps and original file bytes. Restoring an older or identical backup
+keeps newer committed revisions. A backup with a different entry at an already
+retained sequence is refused in full. A successful restore adds all missing
+rows and their deduplicated bytes together; malformed input, bad digests,
+admission limits and failed writes leave prior records unchanged. It never
+opens, renders or executes a stored document. Backups are unencrypted.
+
+Format 1 starts with the eight bytes `ATHART01`, a four-byte big-endian manifest
+length, then the manifest's 32-byte SHA-256 and canonical UTF-8 JSON. Original
+file bodies follow once each, ordered by lowercase SHA-256, with sizes derived
+from the revision records. The reader verifies both the manifest and each body,
+rejects unexpected metadata rather than dropping it, and enforces the existing
+journal limits (100 revisions, 8 MiB per file, 64 MiB of distinct bytes).
+Digests do not authenticate the author. Export/restore are bounded but handle
+up to 64 MiB of file bytes in memory and may be subject to browser quotas.
+This is a local Athena journal backup, not an import of the Constellation
+extension's original storage.
+
+The existing SQLite backup preserves a different native data store. It cannot
+serve as a substitute for this browser-local artifact archive.

@@ -1,10 +1,8 @@
 // Local opaque artifact revision journal. No network, previews or execution.
-export const LIMITS = Object.freeze({fileBytes:8*1024*1024,totalBytes:64*1024*1024,revisions:100});
+import {LIMITS,idPattern,hashPattern,hashBytes,validMetadata,validateJournal,sameRevision,bytesEqual,encodeBundle,decodeBundle} from './artifact-bundle.mjs';
+export {LIMITS,hashBytes,MAX_BUNDLE} from './artifact-bundle.mjs';
 const request = value => new Promise((resolve,reject)=>{value.onsuccess=()=>resolve(value.result);value.onerror=()=>reject(Error('Local artifact storage request failed'));});
 const done = tx => new Promise((resolve,reject)=>{tx.oncomplete=resolve;tx.onabort=tx.onerror=()=>reject(Error('Local artifact transaction failed; no revision committed'));});
-const idPattern=/^[a-f0-9-]{36}$/;
-const hashPattern=/^[a-f0-9]{64}$/;
-export async function hashBytes(bytes){if(!(bytes instanceof Uint8Array))throw Error('Artifact bytes required');return Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',bytes)),n=>n.toString(16).padStart(2,'0')).join('');}
 export async function openArtifactStore({indexedDB=globalThis.indexedDB,name='athena-private-artifacts-v1'}={}){
  if(!indexedDB)throw Error('Local artifact storage unavailable');
  const opening=indexedDB.open(name,1);
@@ -14,9 +12,8 @@ export async function openArtifactStore({indexedDB=globalThis.indexedDB,name='at
  async function list(){const {tx,completion}=transaction('readonly');const artifacts=await request(tx.objectStore('artifacts').getAll()),revisions=await request(tx.objectStore('revisions').getAll());await completion;return {artifacts,revisions};}
  async function append({artifactId=null,filename,mime='',bytes,at=Date.now()}){
   if(!(bytes instanceof Uint8Array)||!bytes.length||bytes.length>LIMITS.fileBytes)throw Error('Choose a nonempty file up to 8 MiB');
-  if(typeof filename!=='string'||!filename.trim()||filename.length>255||/[\x00-\x1f\x7f]/.test(filename))throw Error('Invalid file name');
-  if(typeof mime!=='string'||mime.length>100||/[\x00-\x1f\x7f]/.test(mime)||!Number.isSafeInteger(at)||at<0)throw Error('Invalid artifact metadata');
-  if(artifactId!==null&&!idPattern.test(artifactId))throw Error('Invalid artifact identity');
+  if(!validMetadata(filename,mime,at))throw Error('Invalid artifact metadata');
+  if(artifactId!==null&&(typeof artifactId!=='string'||!idPattern.test(artifactId)))throw Error('Invalid artifact identity');
   const copy=bytes.slice(),hash=await hashBytes(copy),id=artifactId||crypto.randomUUID();
   const {tx,completion}=transaction('readwrite');
   try{
@@ -51,5 +48,57 @@ export async function openArtifactStore({indexedDB=globalThis.indexedDB,name='at
   if(!blob||!(blob.bytes instanceof Uint8Array)||blob.bytes.length!==revision.size||await hashBytes(blob.bytes)!==revision.hash)throw Error('Stored artifact failed integrity verification; no download produced');
   return {revision,bytes:blob.bytes};
  }
- return {list,append,read,close(){closed=true;db.close();}};
+ async function backup(signal){
+  signal?.throwIfAborted();
+  const {tx,completion}=transaction('readonly');
+  const artifacts=await request(tx.objectStore('artifacts').getAll(null,LIMITS.revisions+1));
+  const revisions=await request(tx.objectStore('revisions').getAll(null,LIMITS.revisions+1));
+  const {hashSizes}=validateJournal(artifacts,revisions),blobs=new Map(),store=tx.objectStore('blobs');
+  if(await request(store.count())!==hashSizes.size)throw Error('Stored journal blob inventory is inconsistent');
+  for(const [hash,size] of hashSizes){
+   signal?.throwIfAborted();
+   const blob=await request(store.get(hash));
+   if(!blob||blob.size!==size||!(blob.bytes instanceof Uint8Array)||blob.bytes.length!==size)throw Error('Stored journal blob invalid');
+   blobs.set(hash,blob.bytes);
+  }
+  await completion;return encodeBundle({artifacts,revisions,blobs},signal);
+ }
+ async function restore(bundle,signal){
+  const incoming=await decodeBundle(bundle,signal);
+  signal?.throwIfAborted();
+  const {tx,completion}=transaction('readwrite');
+  const abort=()=>{try{tx.abort();}catch{}};
+  signal?.addEventListener('abort',abort,{once:true});
+  try{
+   const artifacts=tx.objectStore('artifacts'),revisions=tx.objectStore('revisions'),blobs=tx.objectStore('blobs');
+   const oldArtifacts=await request(artifacts.getAll(null,LIMITS.revisions+1)),oldRevisions=await request(revisions.getAll(null,LIMITS.revisions+1));
+   const old=validateJournal(oldArtifacts,oldRevisions);
+   if(await request(blobs.count())!==old.hashSizes.size)throw Error('Stored journal blob inventory is inconsistent');
+   const combined=new Map(oldArtifacts.map(row=>[row.id,row])),newRows=[],added=[];
+   for(const row of incoming.revisions){
+    const existing=old.groups.get(row.artifactId)?.rows.get(row.sequence);
+    if(existing){if(!sameRevision(existing,row))throw Error('Backup conflicts with a retained revision');}
+    else newRows.push(row);
+   }
+   for(const row of incoming.artifacts){
+    if((combined.get(row.id)?.latest??0)<row.latest){combined.set(row.id,row);added.push(row);}
+   }
+   const all=validateJournal([...combined.values()],[...oldRevisions,...newRows]);
+   const newBlobs=[];
+   for(const [hash,size] of all.hashSizes){
+    const imported=incoming.blobs.get(hash);
+    if(!old.hashSizes.has(hash)){newBlobs.push({hash,size,bytes:imported});continue;}
+    const existing=await request(blobs.get(hash));
+    if(!existing||existing.size!==size||!(existing.bytes instanceof Uint8Array)||existing.bytes.length!==size
+     ||(imported&&!bytesEqual(existing.bytes,imported)))throw Error('Backup conflicts with stored journal bytes');
+   }
+   signal?.throwIfAborted();
+   for(const row of newBlobs)blobs.add(row);
+   for(const row of newRows)revisions.add(row);
+   for(const row of added)artifacts.put(row);
+   await completion;return {added:newRows.length,identical:incoming.revisions.length-newRows.length};
+  }catch(error){abort();await completion.catch(()=>{});throw error;}
+  finally{signal?.removeEventListener('abort',abort);}
+ }
+ return {list,append,read,backup,restore,close(){closed=true;db.close();}};
 }

@@ -616,6 +616,53 @@ c.execute('UPDATE experiment_runs SET output=? WHERE experiment_id=?',(raw,int(s
    assert.equal(await page.locator('[data-artifact-history] p').count(),2);
   }finally{await other.close();}
  });
+ await check('Continuity whole artifact backup restores exact history in a fresh browser profile',async()=>{
+  const imported=await browser.newContext({acceptDownloads:true});
+  await imported.route('**/*',route=>{if(new URL(route.request().url()).origin===origin)return route.continue();report.externalRequests.push(route.request().url());return route.abort();});
+  const restored=await imported.newPage();restored.setDefaultTimeout(15000);restored.on('pageerror',error=>report.errors.push(String(error)));
+  const select=(page,bytes)=>page.locator('[data-artifact-restore-file]').setInputFiles({name:'journal.athart',mimeType:'application/octet-stream',buffer:bytes});
+  const exportBundle=async page=>{
+   const [file]=await Promise.all([page.waitForEvent('download'),page.locator('[data-artifact-backup]').click()]);
+   assert.equal(file.suggestedFilename(),'athena-artifact-journal.athart');return fs.readFileSync(await file.path());
+  };
+  const rows=page=>page.locator('[data-artifact-history] p');
+  try{
+   const original=await exportBundle(page);
+   await restored.goto(origin+'/#continuity');
+   await restored.locator('[data-artifacts-open]').click();
+   await restored.locator('[data-artifact-status]').filter({hasText:'Local journal opened'}).waitFor();
+   assert.equal(await rows(restored).count(),0);
+   const damaged=Buffer.from(original);damaged[damaged.length-1]^=255;
+   await select(restored,damaged);
+   await restored.locator('[data-artifact-restore]').click();
+   await restored.getByText(/Restore refused: backup integrity/).waitFor();
+   assert.equal(await rows(restored).count(),0);
+   await select(restored,original);
+   await restored.locator('[data-artifact-restore]').click();
+   await restored.getByText('Restored 2 missing revisions; 0 identical revisions already present.').waitFor();
+   assert.equal(await rows(restored).count(),2);
+   assert.equal(await restored.locator('[data-artifact-target] option').nth(1).getAttribute('value'),await page.locator('[data-artifact-target] option').nth(1).getAttribute('value'));
+   assert.deepEqual(await exportBundle(restored),original);
+   await restored.reload();await restored.locator('[data-artifacts-open]').click();await rows(restored).nth(1).waitFor();
+   const [revision]=await Promise.all([restored.waitForEvent('download'),restored.getByRole('button',{name:'Download exact revision',exact:true}).first().click()]);
+   assert.equal(revision.suggestedFilename(),'fixture-original.bin');assert.equal(fs.readFileSync(await revision.path(),'utf8'),'original bytes');
+   await select(restored,original);
+   await restored.locator('[data-artifact-restore]').click();
+   await restored.getByText('Restored 0 missing revisions; 2 identical revisions already present.').waitFor();
+   assert.equal(await rows(restored).count(),2);
+   const target=restored.locator('[data-artifact-target]');
+   await target.selectOption(await target.locator('option').nth(1).getAttribute('value'));
+   await restored.locator('[data-artifact-file]').setInputFiles({name:'diverged.bin',mimeType:'application/octet-stream',buffer:Buffer.from('different extension')});
+   await restored.locator('[data-artifact-save]').click();await rows(restored).nth(2).waitFor();
+   const conflict=await exportBundle(restored);
+   await page.locator('[data-artifact-file]').setInputFiles({name:'unrelated-name.bin',mimeType:'application/octet-stream',buffer:Buffer.from('other independently appended bytes')});
+   await page.locator('[data-artifact-save]').click();await rows(page).nth(2).waitFor();
+   await select(page,conflict);await page.locator('[data-artifact-restore]').click();
+   await page.getByText('Backup conflicts with retained history. No revision changed.').waitFor();
+   assert.equal(await rows(page).count(),3);
+   assert.match(await rows(page).nth(2).textContent(),/unrelated-name/);
+  }finally{await imported.close();}
+ });
  await check('Explicit stopped-profile backup preserves native workspace and soundtrack library',async()=>{
   await stopBridge();
   const before=fs.readFileSync(db),backup=path.join(temporary,'native-backup.sqlite');
