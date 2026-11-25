@@ -81,5 +81,21 @@ assert.equal(await page.evaluate(()=>JSON.stringify(localStorage)),beforeTransfo
 await previewStage.screenshot({path:path.join(out,'transformed-ecology-preview.png')});
 await page.locator('[data-ecology-close]').click();
 report.checks.push('Authoring and paused motion copy match mirror, scale, skew, rotation and anchor in computed CSS');
+const scaleLink=page.getByRole('checkbox',{name:/Link scale magnitudes/});
+const scaleX=page.locator('[data-inspect-scale-x]'),scaleY=page.locator('[data-inspect-scale-y]');
+const beforeScale=await page.evaluate(()=>JSON.stringify(localStorage));
+await scaleLink.check();assert.equal(await scaleX.inputValue(),'-0.7');assert.equal(await scaleY.inputValue(),'0.75');
+await scaleY.fill('1.25');assert.equal(await scaleX.inputValue(),'-1.25');
+assert.equal(await page.evaluate(()=>JSON.stringify(localStorage)),beforeScale);
+await page.locator('[data-inspect-transform]').click();
+assert.equal(await scaleX.inputValue(),'-1.25');assert.equal(await scaleY.inputValue(),'1.25');
+await page.locator('[data-undo]').click();
+assert.equal(await scaleX.inputValue(),'-0.7');assert.equal(await scaleY.inputValue(),'0.75');
+await page.locator('[data-redo]').click();
+assert.equal(await scaleX.inputValue(),'-1.25');assert.equal(await scaleY.inputValue(),'1.25');
+await scaleLink.uncheck();await scaleX.fill('-2');
+assert.equal(await scaleY.inputValue(),'1.25');
+report.checks.push('Link magnitudes keeps the opposite mirror sign and a draft-only toggle; one Undo/Redo restores the exact pair');
+
 await page.locator('[data-asset-library-summary]').scrollIntoViewIfNeeded();await page.screenshot({path:path.join(out,'asset-library.png')});assert.deepEqual(report.errors,[]);assert.deepEqual(report.outsideRequests,[]);
 })().catch(e=>{report.failure=e.stack;process.exitCode=1}).finally(async()=>{await browser?.close();await new Promise(r=>server?server.close(r):r());fs.writeFileSync(path.join(out,'report.json'),JSON.stringify(report,null,2));console.log(report);});
