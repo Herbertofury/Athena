@@ -162,7 +162,7 @@ Consumers pin exact local package versions and keep host-specific UI, assets, sa
 write(R/'wiki/Engineering-Engine-Foundry.md', engine_foundry)
 for name, target in [('wiki/Home.md','Engineering-Engine-Foundry'),('wiki/_Sidebar.md','Engineering-Engine-Foundry'),('wiki/Engineering-Home.md','Engineering-Engine-Foundry'),('wiki/Engineering-Navigation.md','Engineering-Engine-Foundry')]:
  destination = R / name
- link = '\n- [Athena Engine Foundry](' + target + ')\\n'
+ link = '\n- [Athena Engine Foundry](' + target + ')\n'
  existing = destination.read_text()
  if 'Athena Engine Foundry](' not in existing:
   destination.write_text(existing + link)
