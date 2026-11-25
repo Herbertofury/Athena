@@ -9,6 +9,14 @@
 <p id="review-status" role="status">Choose a file; nothing is sent on selection.</p></section>
 <section id="results" class="runner" hidden aria-labelledby="receipt"><h2 id="receipt">What this export contains</h2><p id="digest"></p><ul id="references"></ul>
 <label for="filter">Show collections</label> <select id="filter"><option value="all">All collections</option><option value="needs">Missing or uncertain</option></select>
-<p id="coverage" role="status"></p><div id="collections" class="comparison-grid"></div></section>
+<p id="coverage" role="status"></p><div id="collections" class="comparison-grid"></div>
+<details><summary>Keep or compare a redacted review</summary>
+<p>The receipt contains only collection and reference counts. Add the current export's fingerprint only if you need to identify those exact backup bytes later. A receipt checksum detects edits, but does not prove authorship or import safety.</p>
+<label><input id="include-fingerprint" type="checkbox"> Include the export fingerprint</label>
+<button id="save-receipt" type="button">Download redacted receipt</button>
+<label for="saved-receipt">Saved redacted receipt JSON</label><input type="file" id="saved-receipt" accept=".json,application/json">
+<button id="compare-receipt" type="button" disabled>Compare saved counts</button>
+<p id="receipt-status" role="status"></p><ul id="receipt-differences"></ul>
+</details></section>
 <footer>No import · No file edits · No external requests</footer></main>
 <script type="module" src="/migration/constellation/app.js"></script></body></html>
