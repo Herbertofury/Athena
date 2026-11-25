@@ -10,3 +10,33 @@ test('dispose during integrity read never creates a download URL',async()=>{cons
 test('corrupt note state does not disable the separate artifact recovery journal',async()=>{const {document}=parseHTML('<section></section>');global.document=document;const {mount}=await import('../dist/workspaces/continuity/index.mjs');const host=document.querySelector('section');const instance=mount({container:host,state:{schema:99,entries:[]},setState(){throw Error('must not save');}});assert.equal(host.shadowRoot.querySelector('[data-artifacts-open]').disabled,false);assert.equal(host.shadowRoot.querySelector('form button[type=submit]').disabled,true);instance.unmount();});
 test('disabled IndexedDB refuses explicitly and leaves retry available',async()=>{const {openArtifactStore}=await import('../dist/shared/artifact-store.mjs');await assert.rejects(openArtifactStore({indexedDB:null}));const x=await setup(()=>openArtifactStore({indexedDB:null}));await x.q('[data-artifacts-open]').onclick();assert.match(x.q('[data-artifact-status]').textContent,/unavailable; no file retained/);assert.equal(x.q('[data-artifacts-open]').disabled,false);assert.equal(x.q('[data-artifacts-controls]').hidden,true);x.control.dispose();});
 test('release invalidates an unfinished integrity read without deleting stored records',async()=>{const id='00000000-0000-4000-8000-000000000001',revision={artifactId:id,sequence:1,filename:'fixture.bin',size:1,hash:'a'.repeat(64)},gate=deferred();const x=await setup(async()=>({list:async()=>({artifacts:[{id,latest:1}],revisions:[revision]}),read:()=>gate.promise,close(){}}));let created=0;const create=URL.createObjectURL;URL.createObjectURL=()=>{created++;return'blob:x';};try{await x.q('[data-artifacts-open]').onclick();const task=x.q('[data-artifact-history] button').onclick();x.q('[data-artifact-release]').onclick();gate.resolve({revision,bytes:new Uint8Array([1])});await task;assert.equal(created,0);assert.match(x.q('[data-artifact-history]').textContent,/fixture.bin/);x.control.dispose();}finally{URL.createObjectURL=create;}});
+test('manual refresh reveals another connection’s committed revision without replacing file or target',async()=>{
+ const id='00000000-0000-4000-8000-000000000001';
+ const revision={artifactId:id,sequence:1,filename:'fixture.bin',size:1,hash:'a'.repeat(64)};
+ let rows=[revision],reads=0,writes=0,fail=false;
+ const x=await setup(async()=>({list:async()=>{reads++;if(fail)throw Error('temporary list failure');return {artifacts:[{id}],revisions:rows};},append:async()=>{writes++;},close(){}}));
+ await x.q('[data-artifacts-open]').onclick();
+ const list=x.q('[data-artifact-history]'),target=x.q('[data-artifact-target]'),input=x.q('[data-artifact-file]'),refresh=x.q('[data-artifact-refresh]');
+ assert.match(list.textContent,/Revision 1/);
+ target.value=id;const file={name:'not-retained.bin',size:1};input.files=[file];
+ rows=[revision,{...revision,sequence:2,filename:'other-connection.bin'}];
+ assert.equal(reads,1);assert.doesNotMatch(list.textContent,/Revision 2/);
+ fail=true;await refresh.onclick();
+ assert.match(list.textContent,/Revision 1/);assert.match(x.q('[data-artifact-status]').textContent,/Previous revision list kept/);
+ assert.equal(refresh.disabled,false);
+ fail=false;await refresh.onclick();
+ assert.match(list.textContent,/Revision 2.*other-connection/);
+ assert.equal(target.value,id);assert.equal(input.files[0],file);
+ assert.equal(writes,0);assert.equal(reads,3);x.control.dispose();
+});
+
+test('a stale download error cannot replace the explicit released status',async()=>{
+ const id='00000000-0000-4000-8000-000000000001',revision={artifactId:id,sequence:1,filename:'fixture.bin',size:1,hash:'a'.repeat(64)};
+ let reject;
+ const x=await setup(async()=>({list:async()=>({artifacts:[{id}],revisions:[revision]}),read:()=>new Promise((_,fn)=>{reject=fn}),close(){}}));
+ await x.q('[data-artifacts-open]').onclick();
+ const pending=x.q('[data-artifact-history] button').onclick();
+ x.q('[data-artifact-release]').onclick();reject(Error('late underlying read failure'));await pending;
+ assert.match(x.q('[data-artifact-status]').textContent,/Prepared download links released/);
+ x.control.dispose();
+});

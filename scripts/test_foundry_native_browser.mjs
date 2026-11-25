@@ -432,6 +432,34 @@ c.execute('UPDATE experiment_runs SET output=? WHERE experiment_id=?',(raw,int(s
   await page.unroute('**/api/jobs');await page.unroute('**/api/learning/jobs/*');
 
  });
+ await check('Continuity refresh reveals a second tab revision without losing the selected file',async()=>{
+  const other=await context.newPage();
+  const selectFile=(tab,name,contents)=>tab.locator('[data-artifact-file]').setInputFiles({name,mimeType:'application/octet-stream',buffer:Buffer.from(contents)});
+  const openJournal=async tab=>{
+   await tab.goto(origin+'/#continuity');
+   await tab.locator('[data-artifacts-open]').click();
+   await tab.locator('[data-artifact-status]').filter({hasText:'Local journal opened'}).waitFor();
+  };
+  try{
+   await openJournal(page);
+   await selectFile(page,'fixture-original.bin','original bytes');
+   await page.locator('[data-artifact-save]').click();
+   await page.locator('[data-artifact-history] p').filter({hasText:'Revision 1:'}).waitFor();
+   const id=await page.locator('[data-artifact-target] option').nth(1).getAttribute('value');
+   assert.ok(id);
+   await page.locator('[data-artifact-target]').selectOption(id);await selectFile(page,'not-retained.bin','selected only');
+   await openJournal(other);
+   await other.locator('[data-artifact-target]').selectOption(id);await selectFile(other,'other-tab.bin','another revision');
+   await other.locator('[data-artifact-save]').click();
+   await other.locator('[data-artifact-history] p').filter({hasText:'Revision 2:'}).waitFor();
+   assert.equal(await page.locator('[data-artifact-history] p').filter({hasText:'Revision 2:'}).count(),0);
+   await page.locator('[data-artifact-refresh]').click();
+   await page.locator('[data-artifact-history] p').filter({hasText:'Revision 2: other-tab.bin'}).waitFor();
+   assert.equal(await page.locator('[data-artifact-target]').inputValue(),id);
+   assert.equal(await page.locator('[data-artifact-file]').evaluate(input=>input.files[0].name),'not-retained.bin');
+   assert.equal(await page.locator('[data-artifact-history] p').count(),2);
+  }finally{await other.close();}
+ });
  await check('Explicit stopped-profile backup preserves native workspace and soundtrack library',async()=>{
   await stopBridge();
   const before=fs.readFileSync(db),backup=path.join(temporary,'native-backup.sqlite');
