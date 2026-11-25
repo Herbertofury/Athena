@@ -18,6 +18,32 @@ The complete 23-module source snapshot is now stored at `upstream/gamesync/` and
 
 The current source rules engine contains 17 `Math.random` occurrences; the state layer uses browser `localStorage`. These must be replaced/separated before it can meet Athena's deterministic, host-neutral card-state contract. The current code is a baseline, not a verified performance or quality winner. Keep GameSync's game/mod-derived card content as one adapter, not a universal content requirement.
 
+## Headless replay prototype
+
+Build and replay actual retained GameSync turn/combat rules without a browser:
+
+```sh
+node engines/card-game/build-replay.mjs /path/to/new-replay-bundle
+node --test engines/card-game/tests/replay.test.mjs
+```
+
+The generator verifies SHA-1 Git blob IDs for the three fixed upstream files,
+refuses altered inputs and existing outputs, and emits normal ESM files.
+The resulting folder (including its GPL notice) can be moved and imported
+without Athena, network, storage or build time dependencies. It requires a
+host-supplied card lookup, hero lookup and deterministic hero power resolver.
+`createReplayEntropy(uint32Seed, logicalTimeBase)` pins Mulberry32/clock v1.
+A fresh engine plus the same ordered inputs reproduces the initial shuffle,
+mulligan, summon IDs, turns, hero power, discovery, and event timestamps.
+Discovery uses a full Fisher–Yates shuffle rather than the original random
+sort; the selection count and uniqueness are kept, not previous RNG samples.
+
+This is an experimental replay slice, not a new production engine release,
+arbitrary-action validator, snapshot/mid-turn restore, external package API,
+or evidence that either GameSync host has cut over. It does not extract the
+library/persistence/AI/presentation layers or verify all effects. The host
+continues to own its content, storage, and authorization.
+
 ## Provenance
 
 See [SOURCE-MANIFEST.json](SOURCE-MANIFEST.json) and the immutable source snapshot under `upstream/gamesync/`. Do not edit the snapshot; refactor into `src/` and preserve behavior through parity fixtures.

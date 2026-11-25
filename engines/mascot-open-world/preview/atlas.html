@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; connect-src 'none'; base-uri 'none'; form-action 'none'">
+<title>Midnight Atlas | Athena Engine Foundry</title>
+<style>/*__ATLAS_STYLE__*/</style></head>
+<body>
+ <header class="mast"><span class="insignia" aria-hidden="true">✦</span><div><p class="overline">Athena Engine Foundry / 03</p><h1>Midnight Atlas</h1></div><p class="offline"><i></i> Off the grid</p></header>
+ <main>
+  <section class="intro" aria-labelledby="intro-title"><div><p class="overline">Mascot City · Original GameSync streets</p><h2 id="intro-title">A city worth getting lost in.</h2><p>Plot the shortest route, inspect a block, or step through an original doorway.</p></div><div class="tally" aria-label="City inventory"><span><b>05</b> districts</span><span><b>49</b> roads</span><span><b>04</b> interiors</span></div></section>
+  <div class="layout">
+   <section class="sheet map-sheet" aria-labelledby="map-title"><div class="sheet-title"><div><p class="overline">World survey / 01</p><h3 id="map-title">Street network</h3></div><div class="zoom"><button id="zoom-in" type="button" aria-label="Zoom in">+</button><button id="zoom-out" type="button" aria-label="Zoom out">−</button><button id="zoom-reset" type="button">Reset</button></div></div>
+    <div class="canvas"><svg id="city-map" viewBox="0 0 3200 2200" role="group" aria-label="Interactive top-down city map. Select a road node to set the next route endpoint."></svg></div>
+    <div class="map-foot"><span><i class="route-key"></i> Active route</span><span><i class="door-key"></i> Authored doorway</span><span class="muted">Select a road node or use the controls.</span></div>
+   </section>
+   <aside aria-label="City controls">
+    <section class="sheet control"><p class="overline">Street navigation</p><h3>Plot a route</h3><div class="grid"><label>From<select id="from"></select></label><label>To<select id="to"></select></label></div><button class="primary" id="route">Plot shortest route</button><p class="live" id="route-status" role="status"></p><p class="fine" id="route-detail"></p></section>
+    <section class="sheet control"><p class="overline">Field notes</p><h3>Inspect a point</h3><div class="grid"><label>X coordinate<input id="x" type="number" min="0" max="3200" value="290"></label><label>Y coordinate<input id="y" type="number" min="0" max="2200" value="1942"></label></div><button id="inspect">Inspect coordinates</button><p class="fine" id="point-status" role="status"></p></section>
+    <section class="sheet control"><p class="overline">Doorway rehearsal</p><h3>Step inside</h3><label>Authored interior<select id="door"></select></label><div class="grid"><button id="enter" class="primary">Enter</button><button id="exit" disabled>Return outside</button></div><p class="fine" id="door-status" role="status"></p><svg id="floorplan" role="img" aria-label="Selected interior floor plan" hidden></svg></section>
+   </aside>
+  </div>
+ </main>
+ <footer>Portable visual prototype • Original map data, no network or saved profile. Route lengths are map units. No physics or 3D renderer.</footer>
+ <script type="module">/*__ATLAS_CODE__*/</script>
+</body></html>

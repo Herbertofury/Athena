@@ -32,7 +32,11 @@ permissions:
   contents: read
 jobs:
   validate:
-    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
@@ -47,3 +51,21 @@ jobs:
         run: python scripts/verify_engine_intake.py
       - name: Test engine intake and registry contracts
         run: python -m unittest discover -s tests -p 'test_*game_systems*.py' -v && python -m unittest discover -s tests -p test_engine_intake.py -v
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: '24'
+          package-manager-cache: false
+      - name: Build, relocate and replay actual pinned GameSync card rules
+        run: node --test engines/card-game/tests/replay.test.mjs engines/roguelite/tests/fixed-step.test.mjs engines/mascot-open-world/tests/topology.test.mjs
+      - name: Install the locked browser test tooling
+        run: npm ci --ignore-scripts
+      - name: Install Chromium for offline atlas verification
+        run: npx playwright install chromium
+      - name: Real Chromium atlas routing, interiors and mobile file preview
+        env:
+          ATHENA_CITY_ATLAS_EVIDENCE: atlas-${{ runner.os }}
+        run: node --test engines/mascot-open-world/tests/atlas-file-browser.mjs
+      - uses: actions/upload-artifact@v4
+        with:
+          name: mascot-atlas-visual-proof-${{ runner.os }}
+          path: atlas-${{ runner.os }}/evidence/
